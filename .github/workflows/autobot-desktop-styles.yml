@@ -55,12 +55,13 @@ jobs:
             const css=process.env.PROPOSED_HEADER_CSS;
             let offerPath;
             for(const width of [320,360,375,390,430,1440]){
-              const page=await browser.newPage({viewport:{width,height:900}});
-              let staff=false;
+              let guestGeometry;
+              for(const kind of ['guest','staff','offer']){
+              const page=await browser.newPage({viewport:{width,height:900},serviceWorkers:'block'});
+              const staff=kind==='staff';
               await page.route('**/api/auth/me',route=>route.fulfill({json:{user:staff?{role:'owner',id:'layout-fixture',displayName:'Staff'}:null}}));
               await page.route('**/api/account/auth',route=>route.fulfill({json:{account:null}}));
-              for(const kind of ['guest','staff','offer']){
-                staff=kind!=='guest';
+
                 const path=kind==='offer'?offerPath:'/';
                 assert.ok(path,'offer link on home');
                 await page.goto(origin+path,{waitUntil:'domcontentloaded'});
@@ -92,18 +93,18 @@ jobs:
                 });
                 console.log(JSON.stringify({width,kind,...m}));
                 assert.equal(m.weight,'900');
-                if(kind==='offer'){assert.ok(m.back);continue}
-                if(width>=768){assert.equal(m.size,'20px');continue}
+                if(kind==='offer'){assert.ok(m.back);await page.close();continue}
+                if(width>=768){assert.equal(m.size,'20px');await page.close();continue}
                 assert.equal(m.titleLines,1,'wordmark wraps');
                 assert.equal(m.subtitleLines,1,'subtitle wraps');
                 assert.ok(m.sub.y>m.title.y && m.sub.bottom>m.title.bottom,'subtitle below name');
                 assert.ok(Math.max(m.title.right,m.sub.right)<=m.actions,'logo overlaps actions at '+width);
                 const geometry=[m.title.x,m.title.right,m.title.y-m.mark[1],m.sub.x,m.sub.right,m.sub.y-m.mark[1],m.mark[0],m.mark[2],m.mark[3],m.size,m.subSize];
-                if(!staff)page.guestGeometry=geometry;
-                else assert.deepEqual(geometry,page.guestGeometry,'guest and staff logo geometry');
+                if(!staff)guestGeometry=geometry;
+                else assert.deepEqual(geometry,guestGeometry,'guest and staff logo geometry');
                 if(width===360)await header.screenshot({path:'mobile-header-'+kind+'.png'});
+                await page.close();
               }
-              await page.close();
             }
             assert.deepEqual(results,[true,true],'public desktop AutoBot geometry');
           }finally{await browser.close()}
