@@ -17,7 +17,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -eu
-          sha=27e67c9dadc51f8df69fbbc01d7dd0a2509caf17
+          sha=6a720ec3aa4823ef2808848018bc5b877fb520ad
           run=$(gh api "repos/$GITHUB_REPOSITORY/actions/workflows/encar-paid-intake-check.yml/runs?head_sha=$sha&per_page=1" --jq '.workflow_runs[0]')
           url=$(jq -er .html_url <<< "$run")
           conclusion=$(jq -r .conclusion <<< "$run")
