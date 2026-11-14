@@ -52,14 +52,27 @@ jobs:
               results.push(box.width===84 && box.height===88 && label.y>=mascot.y+mascot.height-0.5 && publicHeader.height===chat.height && Math.abs(chat.y-publicHeader.y)<1);
               await page.close();
             }
-            for(const width of [390,1440]){
+            for(const width of [320,360,390,430,1440]){
               const page=await browser.newPage({viewport:{width,height:900}});
-              await page.goto(origin,{waitUntil:'domcontentloaded'});
-              const header=page.locator('.ac-public-header a[href="/"] > div:last-child > div:first-child').filter({hasText:'АвтоЦена'}).first();
-              const footer=page.locator('footer a[href="/"]').filter({hasText:'АвтоЦена'}).first();
-              const metrics=el=>[...el.querySelectorAll('span')].map(span=>[getComputedStyle(span).fontSize,getComputedStyle(span).fontWeight]);
-              const top=await header.evaluate(metrics),bottom=await footer.evaluate(metrics);
-              console.log({width,top,bottom});assert.equal(top.length,2);assert.deepEqual(top,bottom);
+              await page.route('**/api/auth/me',route=>route.fulfill({json:{user:{role:'owner',id:'layout-fixture',displayName:'Staff'}}}));
+              for(const route of ['/','/cars']){
+                await page.goto(origin+route,{waitUntil:'domcontentloaded'});
+                await page.locator('.ac-staff-account').first().waitFor({timeout:12000});
+                const measure=await page.locator('.ac-public-header').evaluate(h=>{
+                  const brand=h.querySelector('a[href="/"] > div:last-child');
+                  const title=brand.firstElementChild,sub=brand.lastElementChild;
+                  const rect=el=>{const r=document.createRange();r.selectNodeContents(el);return r.getBoundingClientRect()};
+                  const first=rect(title.firstElementChild),last=rect(title.lastElementChild),caption=rect(sub);
+                  const tools=h.firstElementChild.lastElementChild.getBoundingClientRect();
+                  return {font:getComputedStyle(title.firstElementChild).fontSize, oneLine:first.top===last.top,captionHeight:caption.height,
+                    right:Math.max(first.right,last.right,caption.right),tools:tools.left,captionText:sub.textContent};
+                });
+                console.log({width,route,...measure});
+                assert.ok(measure.right<=measure.tools+0.5,'tools overlap wordmark');
+                if(width<768){assert.ok(parseFloat(measure.font)<=17);if(route==='/'){assert.ok(measure.oneLine);assert.ok(measure.captionHeight>0 && measure.captionHeight<=16);}}
+                else assert.equal(measure.font,'20px');
+                if(width===360)await page.screenshot({path:'mobile-header-'+(route==='/'?'home':'catalog')+'.png'});
+              }
               await page.close();
             }
             assert.deepEqual(results,[true,true],'public desktop AutoBot geometry');
@@ -92,10 +105,14 @@ jobs:
           source,target=map(pathlib.Path,sys.argv[1:])
           s=source.read_text()
           anchor='  location / {\n'
-          assert s.count(anchor)==1 and 'sub_filter' not in s and 'autobot-desktop-v1' not in s
+          assert s.count(anchor)==1 and s.count('autobot-desktop-v1')==1
           css='.ac-public-header a[href="/"]>div:last-child>div:first-child:has(>span.text-red-500),.ac-public-header a[href="/"]>div:last-child>div:first-child:has(>span.text-red-500)>span{font-size:1.25rem!important;font-weight:900!important}@media(min-width:900px){.ab-fab{display:flex;flex-direction:column;align-items:center;justify-content:center;width:84px;height:88px;padding:6px;gap:2px;box-sizing:border-box}.ab-fab .ab-mascot{width:52px;height:52px}.ab-fab-label{line-height:18px;text-align:center}.ab-panel .ta-header{height:65px;min-height:65px;max-height:65px;flex:0 0 65px;padding:7px 14px;box-sizing:border-box}}'
+          old_css=css
+          css+="@media(max-width:767px){ html body .ac-public-header a[href=\"/\"]{gap:4px!important} html body .ac-public-header a[href=\"/\"]>svg{width:28px!important;height:28px!important} html body .ac-public-header a[href=\"/\"]>div:last-child>div:first-child:has(>span.text-red-500), html body .ac-public-header a[href=\"/\"]>div:last-child>div:first-child:has(>span.text-red-500)>span{font-size:clamp(14px,4vw,17px)!important;font-weight:900!important} html body .ac-home-page .ac-public-header a[href=\"/\"]>div:last-child>div:last-child{white-space:nowrap!important;font-size:10px!important} } @media(max-width:399px){ html body .ac-public-header>div{padding-inline:6px!important;gap:4px!important} html body .ac-public-header>div>div,html body .ac-public-header .ac-staff-tools{gap:3px!important} html body .ac-public-header .ac-icon-button,html body .ac-public-header .ac-favorite-nav,html body .ac-public-header .ac-staff-account,html body .ac-public-header .ac-staff-tools button,html body .ac-public-header button[aria-label=\"Назад\"]{width:32px!important;min-width:32px!important;padding-inline:0!important} }"
           directives = ["    proxy_set_header Accept-Encoding \"\";", "    sub_filter_once on;", f"""    sub_filter '</head>' '<style id="autobot-desktop-v1">{css}</style></head>';"""]
-          target.write_text(s.replace(anchor,anchor+"\n".join(directives)+"\n"))
+          old_tag=f'<style id="autobot-desktop-v1">{old_css}</style>'
+          assert s.count(old_tag)==1
+          target.write_text(s.replace(old_tag,f'<style id="autobot-desktop-v1">{css}</style>'))
           PY
           cat > "$dir/rollback" <<'ROLLBACK'
           #!/bin/bash
@@ -126,4 +143,6 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: desktop-autobot-public
-          path: autobot-*.png
+          path: |
+            autobot-*.png
+            mobile-header-*.png
