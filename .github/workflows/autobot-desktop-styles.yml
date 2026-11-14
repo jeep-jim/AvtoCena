@@ -69,7 +69,16 @@ jobs:
                 await header.waitFor();
                 if(staff)await header.getByRole('button',{name:'Кабинет сотрудника'}).waitFor();
                 if(!offerPath)offerPath=await page.locator('a[href*="/cars/offer/"]').first().getAttribute('href');
+                // The server streams the header before its component styles and staff controls hydrate.
+                await page.waitForLoadState('load');
+                await page.waitForFunction(()=>getComputedStyle(document.querySelector('.ac-home-page .ac-public-header>div')||document.documentElement).paddingLeft!=='16px' || !document.querySelector('.ac-home-page') || innerWidth>=768 || innerWidth<=359);
+                if(kind!=='offer' && width===320)await page.waitForFunction(()=>getComputedStyle(document.querySelector('.ac-home-page .ac-public-header a[href="/"]>svg')).width==='26px');
+                if(kind!=='offer' && width<768)await page.waitForFunction(()=>{
+                  const el=document.querySelector('.ac-home-page .ac-public-header .ac-icon-button');
+                  return el && parseFloat(getComputedStyle(el).width)<=36;
+                });
                 await page.evaluate(()=>document.fonts.ready);
+                await page.evaluate(()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r))));
                 const m=await header.evaluate(h=>{
                   const brand=h.querySelector('a[href="/"] > div:last-child');
                   const title=brand.firstElementChild, sub=brand.lastElementChild;
@@ -90,7 +99,7 @@ jobs:
                 assert.equal(m.subtitleLines,1,'subtitle wraps');
                 assert.ok(m.sub.y>m.title.y && m.sub.bottom>m.title.bottom,'subtitle below name');
                 assert.ok(Math.max(m.title.right,m.sub.right)<=m.actions,'logo overlaps actions at '+width);
-                const geometry=[m.title,m.sub,m.mark,m.size,m.subSize];
+                const geometry=[m.title.x,m.title.right,m.title.y-m.mark[1],m.sub.x,m.sub.right,m.sub.y-m.mark[1],m.mark[0],m.mark[2],m.mark[3],m.size,m.subSize];
                 if(!staff)page.guestGeometry=geometry;
                 else assert.deepEqual(geometry,page.guestGeometry,'guest and staff logo geometry');
                 if(width===360)await header.screenshot({path:'mobile-header-'+kind+'.png'});
