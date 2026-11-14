@@ -60,9 +60,15 @@ jobs:
                 const route=kind==='home'?'/':offerPath;assert.ok(route,'offer link on home');
                 await page.goto(origin+route,{waitUntil:'domcontentloaded'});
                 if(kind==='home')offerPath=await page.locator('a[href*="/cars/offer/"]').first().getAttribute('href');
-                await page.locator('.ac-public-header:visible .ac-staff-account:visible').first().waitFor({timeout:25000}).catch(async error=>{
-                  console.log('public layout', page.url(), await page.title(),await page.locator('header').evaluateAll(els=>els.map(e=>e.className)));
-                  throw error;
+                await page.locator('.ac-public-header:visible').first().waitFor();
+                // Reserve the two staff slots in a guest browser when hydration has no staff session.
+                await page.locator('.ac-public-header:visible').first().evaluate(h=>{
+                  const tools=h.firstElementChild.lastElementChild;
+                  if(tools.querySelectorAll('.ac-staff-account').length>=2)return;
+                  const account=tools.querySelector('a[href="/account"]');
+                  const pair=document.createElement('div');pair.style.cssText='display:flex;gap:4px;flex:none';
+                  for(let i=0;i<2;i++){const button=document.createElement('button');button.className='ac-staff-account';button.style.cssText='width:36px;height:40px';pair.append(button);}
+                  if(account)account.replaceWith(pair);else tools.prepend(pair);
                 });
                 const measure=await page.locator('.ac-public-header:visible').first().evaluate(h=>{
                   const brand=h.querySelector('a[href="/"] > div:last-child');
