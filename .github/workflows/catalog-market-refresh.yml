@@ -5,6 +5,9 @@ on:
       market:
         required: true
         type: string
+      prepared_encar_run:
+        type: string
+        required: false
 permissions:
   contents: read
   actions: read
@@ -33,7 +36,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
+          ref: ${{ inputs.prepared_encar_run && github.sha || github.event.workflow_run.head_sha || github.sha }}
           fetch-depth: 2
       - uses: actions/setup-node@v4
         with: {node-version: 24, cache: npm}
@@ -43,6 +46,7 @@ jobs:
       - id: policy
         env:
           EVENT_NAME: ${{ github.event_name }}
+          PREPARED_ENCAR_RUN: ${{ inputs.prepared_encar_run }}
           TARGET_MARKET: ${{ inputs.market }}
         run: |
           node --import tsx --input-type=module <<'JS'
@@ -55,11 +59,13 @@ jobs:
           const policy = JSON.parse(fs.readFileSync('data/catalog/refresh-policy-v1.json','utf8'));
           // AJ System is served on demand and does not produce this worker's intake.
           const paused = Boolean(policy.pausedMarkets?.[market]) || !collectionMarketEnabled(controls,market) || !collectionWorkflowEnabled(controls,market);
-          const run = !paused && (['push','workflow_dispatch'].includes(process.env.EVENT_NAME) || (process.env.EVENT_NAME === 'schedule' && (market === 'china' || catalogRefreshDue())));
+          const preparedEncar = process.env.PREPARED_ENCAR_RUN || '';
+          if (preparedEncar && (market !== 'korea' || !/^\d+$/.test(preparedEncar) || !controls.sources.encar_feed?.enabled)) throw Error('invalid_prepared_encar_source');
+          const run = !paused && (preparedEncar || ['push','workflow_dispatch'].includes(process.env.EVENT_NAME) || (process.env.EVENT_NAME === 'schedule' && (market === 'china' || catalogRefreshDue())));
           if (paused) console.log(`Market refresh paused: ${market}: ${policy.pausedMarkets?.[market] || 'no_enabled_background_source'}`);
           const marker = process.env.EVENT_NAME === 'push' ? JSON.parse(fs.readFileSync(`.github/market-runs/${market}-refresh.json`,'utf8')) : {};
           if (!['china','korea','uae','georgia','europe'].includes(market)) throw Error('invalid_market');
-          const reuse = marker.reuseRunId || '';
+          const reuse = preparedEncar || marker.reuseRunId || '';
           const autohomeReuse = marker.autohomeReuseRunId || '';
           if (autohomeReuse && (market !== 'china' || String(autohomeReuse) !== '37907216966' || reuse)) throw Error('invalid_autohome_reuse');
           fs.appendFileSync(process.env.GITHUB_OUTPUT,`autohome_reuse_run_id=${autohomeReuse}\n`);
@@ -75,7 +81,7 @@ jobs:
           fs.appendFileSync(process.env.GITHUB_OUTPUT,`publish_markets=${publish.join(' ')}\n`);
           if (!Array.isArray(collect) || collect.some(market => !allowed.includes(market)) || new Set(collect).size !== collect.length) throw Error('invalid_refresh_markets');
           fs.appendFileSync(process.env.GITHUB_OUTPUT,`collect_markets=${JSON.stringify(collect)}\n`);
-          fs.appendFileSync(process.env.GITHUB_OUTPUT,`run=${run}\n`);
+          fs.appendFileSync(process.env.GITHUB_OUTPUT,`run=${Boolean(run)}\n`);
           fs.appendFileSync(process.env.GITHUB_OUTPUT,`reuse_run_id=${reuse}\n`);
           JS
   collect:
@@ -115,7 +121,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
+          ref: ${{ inputs.prepared_encar_run && github.sha || github.event.workflow_run.head_sha || github.sha }}
       - uses: actions/setup-node@v4
         with:
           node-version: 24
@@ -217,7 +223,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
+          ref: ${{ inputs.prepared_encar_run && github.sha || github.event.workflow_run.head_sha || github.sha }}
       - uses: actions/setup-node@v4
         with:
           node-version: 24
@@ -267,6 +273,18 @@ jobs:
           AUTO_API_CHE168_KEY: ${{ secrets.AUTO_API_CHE168_KEY }}
           CHE168_RECOVERY_ARTIFACT_RUN_ID: ${{ needs.plan.outputs.reuse_run_id }}
         run: node --import tsx scripts/catalog-auto-api-che168-recover.mjs
+      - name: Verify prepared paid Encar inventory and current CRM switch
+        if: inputs.prepared_encar_run != ''
+        run: |
+          node --import tsx --input-type=module <<'JS'
+          import fs from 'node:fs';
+          import assert from 'node:assert/strict';
+          import {assertCollectionEnabled} from './apps/web/lib/catalog/collection-controls.ts';
+          await assertCollectionEnabled('encar_feed');
+          const r=JSON.parse(fs.readFileSync('catalog-intake-input/catalog-intake-korea/report.json'));
+          assert.ok(r.completed && r.market==='korea' && r.provider==='auto_api_encar');
+          assert.ok(r.sources.length===1 && r.sources[0].sourceId==='encar_direct' && r.sources[0].uniqueOffers>0);
+          JS
       - run: node --import tsx scripts/catalog-intake-to-publication.mjs
       - name: Check bucket reserve without deleting objects
         run: node scripts/run-transient-retry.mjs node --import tsx scripts/catalog-storage-preflight.mjs
