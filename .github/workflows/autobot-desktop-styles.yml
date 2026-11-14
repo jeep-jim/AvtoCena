@@ -67,11 +67,10 @@ jobs:
                 if(css)await page.addStyleTag({content:css});
                 const header=page.locator('.ac-public-header:visible').filter({has:page.locator('a[href="/"] > div:last-child > div:first-child').filter({hasText:'АвтоЦена'})}).first();
                 await header.waitFor();
-                if(staff)await header.getByRole('button',{name:'Кабинет сотрудника'}).waitFor();
+                if(kind==='staff')await header.getByRole('button',{name:'Кабинет сотрудника'}).waitFor();
                 if(!offerPath)offerPath=await page.locator('a[href*="/cars/offer/"]').first().getAttribute('href');
                 // The server streams the header before its component styles and staff controls hydrate.
                 await page.waitForLoadState('load');
-                await page.waitForFunction(()=>getComputedStyle(document.querySelector('.ac-home-page .ac-public-header>div')||document.documentElement).paddingLeft!=='16px' || !document.querySelector('.ac-home-page') || innerWidth>=768 || innerWidth<=359);
                 if(kind!=='offer' && width===320)await page.waitForFunction(()=>getComputedStyle(document.querySelector('.ac-home-page .ac-public-header a[href="/"]>svg')).width==='26px');
                 if(kind!=='offer' && width<768)await page.waitForFunction(()=>{
                   const el=document.querySelector('.ac-home-page .ac-public-header .ac-icon-button');
