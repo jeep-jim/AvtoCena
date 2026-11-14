@@ -1,0 +1,53 @@
+name: Measure live AutoBot and catalog navigation
+on:
+  push:
+    paths: ['.github/workflows/live-autobot-navigation.yml']
+  workflow_dispatch:
+permissions: {}
+jobs:
+  measure:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - run: npm install --no-save playwright@1.55.0 && npx playwright install --with-deps chromium
+      - name: Measure public pages and desktop geometry
+        run: |
+          node --input-type=module <<'JS'
+          import { chromium } from 'playwright';
+          const base='https://avtocena.com';
+          const browser=await chromium.launch();
+          try {
+            for(const colorScheme of ['light','dark']){
+              const page=await browser.newPage({colorScheme,viewport:{width:1440,height:900}});
+              page.setDefaultTimeout(15000);
+              await page.goto(base,{waitUntil:'domcontentloaded'});
+              const button=page.locator('.ab-fab');
+              await button.waitFor();
+              console.log(colorScheme,'launcher',await button.boundingBox());
+              await button.click();
+              console.log(colorScheme,'heading',await page.locator('.ab-panel .ta-header').boundingBox());
+              await page.close();
+            }
+          } catch(e){console.log('Geometry measurement incomplete',String(e))}
+          try {
+            for (const market of ['china','korea','japan']){
+              const page=await browser.newPage();
+              try {
+                await page.goto(base+'/cars',{waitUntil:'domcontentloaded',timeout:30000});
+                for(const [type,selector] of [['market','a[href*="market='+market+'"]'],['offer','a[href*="/cars/offer/"]']]){
+                  const link=page.locator(selector+':visible').first();
+                  await link.waitFor({timeout:10000});
+                  const href=await link.evaluate(a=>a.href);
+                  const target=new URL(href);
+                  if(target.origin!==base)throw Error('Unexpected target');
+                  const start=Date.now();
+                  await Promise.all([page.waitForURL(href,{waitUntil:'commit',timeout:30000}),link.click()]);
+                  const urlMs=Date.now()-start;
+                  await page.locator(type==='market'?'a[href*="/cars/offer/"]:visible':'main h1:visible').first().waitFor({timeout:30000});
+                  console.log(JSON.stringify({market,type,path:target.pathname,urlMs,visibleMs:Date.now()-start}));
+                }
+              }catch(e){console.log(market,String(e))}finally{await page.close()}
+            }
+          }finally{await browser.close()}
+          JS
