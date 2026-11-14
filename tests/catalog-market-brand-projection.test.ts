@@ -54,11 +54,15 @@ test('six country searches prepare each brand row once, not six times',async()=>
  const source=readFileSync(new URL('../apps/web/lib/catalog/storage.ts',import.meta.url),'utf8');
  const start=source.indexOf('async function currentProjectionRows('),end=source.indexOf('/** Small publication summary',start);
  const implementation=source.slice(start,end).replace('params: CatalogSearchParams = {}','params = {}');
+ const {transform}=await import('esbuild');
+ const identitySource=source.slice(source.indexOf('function projectionIdentityMatches('),source.indexOf('export function catalogSearchProjectionMatches('));
+ const identityJs=(await transform(identitySource,{loader:'ts'})).code;
+ const identity=new Function('restoreSourceModelName','cleanFacet','catalogMakeFilterValues',identityJs+';return projectionIdentityMatches;')((row:any)=>row,(value:any)=>String(value||'').trim(),()=>['Audi']);
  const markets=['china','korea','japan','uae','europe','georgia'];
  const input=markets.flatMap(market=>Array.from({length:5},(_,i)=>({id:market+i,market,make:'Audi'})));
  let prepared=0;
- const read=new Function('catalogMakeFilterValues','readManifest','readCurrentBrandProjection','prepareCatalogProjectionRows',implementation+';return currentProjectionRows;')(
-  ()=>['Audi'],async()=>({generationId:'test'}),async()=>({generationId:'test',items:input}), (rows:any[])=>{prepared+=rows.length;return rows;});
+ const read=new Function('catalogMakeFilterValues','readManifest','readCurrentBrandProjection','prepareCatalogProjectionRows','projectionModelKeys','projectionIdentityMatches',implementation+';return currentProjectionRows;')(
+  ()=>['Audi'],async()=>({generationId:'test'}),async()=>({generationId:'test',items:input}), (rows:any[])=>{prepared+=rows.length;return rows;}, async()=>null, identity);
  const results=await Promise.all(markets.map(market=>read({make:'Audi',market,budgetTo:3000000})));
  assert.equal(prepared,input.length);assert.equal(new Set(results.flatMap(r=>r.rows.map((row:any)=>row.id))).size,input.length);
  results.forEach((r,i)=>assert.deepEqual(r.rows,input.filter(row=>row.market===markets[i])));
