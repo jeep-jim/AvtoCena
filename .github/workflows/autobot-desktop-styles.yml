@@ -62,28 +62,32 @@ jobs:
                 if(kind==='home'&&!offerPath)offerPath=await page.locator('a[href*="/cars/offer/"]').first().getAttribute('href');
                 const liveHeader=page.locator('.ac-public-header:visible').filter({has:page.locator('a[href="/"] > div:last-child > div:first-child').filter({hasText:'АвтоЦена'})}).first();
                 await liveHeader.waitFor();
-                // Reserve the two staff slots in a guest browser when hydration has no staff session.
-                await liveHeader.evaluate(h=>{
-                  const tools=h.firstElementChild.lastElementChild;
-                  if(tools.querySelectorAll('.ac-staff-account').length>=2)return;
-                  const account=tools.querySelector('a[href="/account"]');
-                  const pair=document.createElement('div');pair.style.cssText='display:flex;gap:4px;flex:none';
-                  for(let i=0;i<2;i++){const button=document.createElement('button');button.className='ac-staff-account';button.style.cssText='width:36px;height:40px';pair.append(button);}
-                  if(account)account.replaceWith(pair);else tools.prepend(pair);
-                });
+                await page.evaluate(()=>document.fonts.ready);
                 const measure=await liveHeader.evaluate(h=>{
+                  const overlay=document.querySelector('style#autobot-desktop-v1');
+                  if(!overlay)throw Error('missing updated stylesheet');
                   const brand=h.querySelector('a[href="/"] > div:last-child');
-                  const title=brand.firstElementChild,sub=brand.lastElementChild;
-                  const rect=el=>{const r=document.createRange();r.selectNodeContents(el);return r.getBoundingClientRect()};
-                  const first=rect(title.firstElementChild),last=rect(title.lastElementChild),caption=rect(sub);
-                  const tools=h.firstElementChild.lastElementChild.getBoundingClientRect();
-                  return {font:getComputedStyle(title.firstElementChild).fontSize, oneLine:first.top===last.top,captionHeight:caption.height,
-                    right:Math.max(first.right,last.right,caption.right),tools:tools.left,captionText:sub.textContent};
+                  const title=brand.firstElementChild;
+                  function actual(){
+                    const metric=el=>{
+                      if(!el)return null;
+                      const s=getComputedStyle(el);
+                      return [s.fontSize,s.lineHeight,s.padding,s.gap,s.height,s.width,s.display,s.whiteSpace];
+                    };
+                    return {titleSize:getComputedStyle(title.firstElementChild).fontSize,
+                      icon:metric(brand.parentElement.firstElementChild),back:metric(h.querySelector('button[aria-label="Назад"]')),
+                      subtitle:metric(brand.lastElementChild),outerGap:getComputedStyle(h.firstElementChild).gap};
+                  }
+                  const applied=actual(), weight=getComputedStyle(title.firstElementChild).fontWeight;
+                  overlay.disabled=true;
+                  const baseline=actual();
+                  overlay.disabled=false;
+                  return {applied,baseline,weight};
                 });
-                console.log({width,route,...measure});
-                assert.ok(measure.right<=measure.tools+0.5,'tools overlap wordmark');
-                if(width<768){assert.ok(parseFloat(measure.font)<=17);if(route==='/'){assert.ok(measure.oneLine);assert.ok(measure.captionHeight>0 && measure.captionHeight<=16);}}
-                else assert.equal(measure.font,'20px');
+                console.log(JSON.stringify({width,route,...measure}));
+                assert.equal(measure.weight,'900');
+                if(width<768)assert.deepEqual(measure.applied,measure.baseline);
+                else assert.equal(measure.applied.titleSize,'20px');
                 if(width===360)await page.screenshot({path:'mobile-header-'+(route==='/'?'home':'catalog')+'.png'});
               }
               await page.close();
@@ -124,6 +128,11 @@ jobs:
           css+="@media(max-width:767px){ html body .ac-public-header a[href=\"/\"]{gap:4px!important} html body .ac-public-header a[href=\"/\"]>svg{width:28px!important;height:28px!important} html body .ac-public-header a[href=\"/\"]>div:last-child>div:first-child:has(>span.text-red-500), html body .ac-public-header a[href=\"/\"]>div:last-child>div:first-child:has(>span.text-red-500)>span{font-size:clamp(14px,4vw,17px)!important;font-weight:900!important} html body .ac-home-page .ac-public-header a[href=\"/\"]>div:last-child>div:last-child{white-space:nowrap!important;font-size:10px!important} } @media(max-width:399px){ html body .ac-public-header>div{padding-inline:6px!important;gap:4px!important} html body .ac-public-header>div>div,html body .ac-public-header .ac-staff-tools{gap:3px!important} html body .ac-public-header .ac-icon-button,html body .ac-public-header .ac-favorite-nav,html body .ac-public-header .ac-staff-account,html body .ac-public-header .ac-staff-tools button,html body .ac-public-header button[aria-label=\"Назад\"]{width:32px!important;min-width:32px!important;padding-inline:0!important} }"
           css+="@media(max-width:767px){html body .ac-public-header.ac-public-header:not(:has(button[aria-label=\"Назад\"])) a[href=\"/\"]>div:last-child>div:first-child:has(>span.text-red-500){display:flex!important;flex-flow:row nowrap!important;line-height:1!important;white-space:nowrap!important}html body .ac-public-header.ac-public-header:not(:has(button[aria-label=\"Назад\"])) a[href=\"/\"]>div:last-child>div:last-child{display:block!important;white-space:nowrap!important;line-height:1.1!important;font-size:10px!important}}"
           css+="@media(max-width:359px){html body .ac-public-header.ac-public-header a[href=\"/\"]>div:last-child>div:first-child:has(>span.text-red-500),html body .ac-public-header.ac-public-header a[href=\"/\"]>div:last-child>div:first-child:has(>span.text-red-500)>span{font-size:13px!important}html body .ac-public-header.ac-public-header a[href=\"/\"]>svg{width:24px!important;height:24px!important}html body .ac-public-header.ac-public-header>div>div:last-child{gap:2px!important}}"
+          old_css=css
+          original_desktop=old_css.split('@media(min-width:900px)',1)
+          assert len(original_desktop)==2
+          desktop_bot=original_desktop[1].split('@media(max-width:767px)',1)[0]
+          css=".ac-public-header a[href=\"/\"]>div:last-child>div:first-child:has(>span.text-red-500)>span{font-weight:900!important}"+'@media(min-width:768px){'+original_desktop[0]+'}@media(min-width:900px)'+desktop_bot
           directives = ["    proxy_set_header Accept-Encoding \"\";", "    sub_filter_once on;", f"""    sub_filter '</head>' '<style id="autobot-desktop-v1">{css}</style></head>';"""]
           old_tag=f'<style id="autobot-desktop-v1">{old_css}</style>'
           assert s.count(old_tag)==1
