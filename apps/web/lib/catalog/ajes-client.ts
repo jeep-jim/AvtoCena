@@ -5,6 +5,12 @@ import {isIP} from 'node:net';
 import {gunzipSync} from 'node:zlib';
 import {DetailReadCache} from './detail-read-cache';
 import {ajesQuery,ajesLot,type AjesTable,type AjesQuery} from './ajes-query';
+import {heavyVehicleSqlExclusion} from './heavy-vehicle-families';
+
+// Compact only the fixed admission predicate on the wire. Preserve the exact
+// logical query/cache identity, visitor address, limits and all other filters.
+const expandedTruckPredicate=heavyVehicleSqlExclusion();
+const compactTruckPredicate=heavyVehicleSqlExclusion(false,false,true);
 
 export class AjesUnavailable extends Error {constructor(public reason:string){super(`ajes_${reason}`);}}
 // Release supplier admission before consulting historical
@@ -124,7 +130,8 @@ export function createAjesClient(deps:Dependencies) {
         const currentSchema=query.kind==='count'||query.kind==='models'||query.kind==='makes'||query.kind==='colors'||saved?.schemaVersion===2&&(query.table!=='korea'||query.kind!=='detail'||saved?.fullInformation===true);
         if(usable&&currentSchema&&!saved.stale&&!saved.partial&&age<30*60*1000)return query.kind==='list'?remember({...saved,stale:false}):{...saved,stale:false};
         const url=new URL(await deps.endpoint?.(clientIp)||'http://87.242.72.57/api/');
-        url.search=new URLSearchParams({ip:clientIp,json:'',code:password,sql:query.sql,...(query.table==='korea'&&query.kind==='detail'?{ajax:''}:{})}).toString();
+        const requestSql=query.sql.replace(expandedTruckPredicate,compactTruckPredicate);
+        url.search=new URLSearchParams({ip:clientIp,json:'',code:password,sql:requestSql,...(query.table==='korea'&&query.kind==='detail'?{ajax:''}:{})}).toString();
         let requestStarted=false,httpStatus:number|null=null,providerCode:string|null=null;
         const startedAt=new Date().toISOString();
         const controller=new AbortController();

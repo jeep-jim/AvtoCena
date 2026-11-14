@@ -11,7 +11,7 @@ import {publicOffer} from '@/lib/catalog/storage';
 import {CatalogCard} from './CatalogCard';
 import {CatalogMarketFlag} from './CatalogMarketFlag';
 
-function railQuery(market:'japan'|'china'|'korea',params:Record<string,string|string[]|undefined>){return {...params,market,page:'1',pageSize:market==='japan'?'12':'6'};}
+function railQuery(market:'japan'|'china'|'korea',params:Record<string,string|string[]|undefined>){return {...params,market,page:'1',pageSize:'24'};}
 export function readAjesRailCount(market:'japan'|'china'|'korea',params:Record<string,string|string[]|undefined>){return readAjesCountSummary(JSON.stringify(railQuery(market,params))).catch(()=>null);}
 async function RailCount({market,params}:{market:'japan'|'china'|'korea';params:Record<string,string|string[]|undefined>}){
  const count=await readAjesRailCount(market,params);
@@ -26,7 +26,7 @@ export async function readAjesRailData(market:'japan'|'china'|'korea',params:Rec
   // must not take both supplier slots before the visible lists can run.
   // RailCount and the overview total already read counts after these rows.
   const page=await readAjesCatalogPage(railQuery(market,params),undefined,{includeCount:false});
-  return {disabled:false,items:page.items.slice(0,6),count:page.countSummary,unavailable:false,unsupported:false,partial:Boolean(page.partial),stale:Boolean(page.stale),filteredByPage:page.filteredByPage,hasMore:page.hasMore};
+  return {disabled:false,items:page.items.slice(0,market==='japan'?5:10),count:page.countSummary,unavailable:false,unsupported:false,partial:Boolean(page.partial),stale:Boolean(page.stale),filteredByPage:page.filteredByPage,hasMore:page.hasMore};
  }catch(error){return {disabled:false,items:[],count:null,unavailable:true,unsupported:error instanceof AjesFilterUnavailable,partial:false,stale:false,filteredByPage:false,hasMore:false};}
 }
 type RailData=ReturnType<typeof readAjesRailData>;

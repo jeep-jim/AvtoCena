@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createAjesClient} from '../apps/web/lib/catalog/ajes-client';
+import {heavyVehicleSqlExclusion} from '../apps/web/lib/catalog/heavy-vehicle-families';
 import {ajesQuery} from '../apps/web/lib/catalog/ajes-query';
 import {ajesFailureSlot,saveAjesRequestFailure,type AjesRequestDiagnostic} from '../apps/web/lib/catalog/ajes-request-diagnostic';
 
@@ -40,7 +41,8 @@ test('real Korea pagination keeps page offsets and visitor address; records exac
  for(const page of [1,2]){const result=await client.read({table:'korea',page},'203.0.113.21');assert.equal(result.page,page);assert.equal(result.items.length,24);}
  await assert.rejects(client.read({table:'korea',page:3},'203.0.113.21'),/visitor_restricted/);
  assert.equal(requests.length,3);
- requests.forEach((url,i)=>{assert.equal(url.searchParams.get('ip'),'203.0.113.21');assert.equal(url.searchParams.get('sql'),ajesQuery({table:'korea',page:i+1}).sql);assert.match(url.searchParams.get('sql')!,new RegExp(`limit ${i*24},24$`));});
+ requests.forEach((url,i)=>{assert.equal(url.searchParams.get('ip'),'203.0.113.21');assert.equal(url.searchParams.get('sql'),ajesQuery({table:'korea',page:i+1}).sql.replace(heavyVehicleSqlExclusion(),heavyVehicleSqlExclusion(false,false,true)));assert.match(url.searchParams.get('sql')!,new RegExp(`limit ${i*24},24$`));});
+ assert.equal(records[0].sql,ajesQuery({table:'korea',page:3}).sql,'diagnostics retain the full logical query');
  assert.equal(records.length,1);assert.equal(records[0].page,3);assert.equal(records[0].providerCode,'bot7');assert.equal(records[0].httpStatus,200);assert.equal(records[0].clientIp,'203.0.113.21');assert.equal(records[0].endpoint,'http://78.46.90.228/api/');assert.equal(JSON.stringify(records).includes('private-key-123'),false);
  await assert.rejects(client.read({table:'korea',page:4},'203.0.113.21'),/visitor_restricted/);
  assert.equal(requests.length,3,'no retry or alternate route after refusal');assert.equal(records.length,1,'cooldown preserves actual page-three evidence');

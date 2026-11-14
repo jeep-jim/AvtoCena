@@ -20,7 +20,12 @@ try{
  if(u.pathname==='/app.js')return route.fulfill({contentType:'text/javascript',body:fs.readFileSync(out+'/app.js','utf8')});
  if(u.pathname==='/app.css')return route.fulfill({contentType:'text/css',body:fs.readFileSync(out+'/app.css','utf8')});
  return route.fulfill({contentType:'text/html',body:'<!doctype html><link rel="stylesheet" href="/app.css"><div id="root"></div><script src="/app.js"></script>'});});
- const page=await context.newPage();await page.goto('https://autobot.test/cars');await page.getByRole('button',{name:'Открыть АвтоБота',exact:true}).click();
+ const page=await context.newPage();await page.goto('https://autobot.test/cars');
+ await page.locator('.ab-fab').waitFor();
+ const launcher=await page.locator('.ab-fab').evaluate(el=>{const box=el.getBoundingClientRect(),mascot=el.querySelector('.ab-mascot').getBoundingClientRect(),label=el.querySelector('.ab-fab-label').getBoundingClientRect();return {width:box.width,height:box.height,labelBelow:label.top>=mascot.bottom,centered:Math.abs((label.left+label.right)-(mascot.left+mascot.right))<2};});
+ assert.equal(launcher.width,84);assert.equal(launcher.height,88);assert.ok(launcher.labelBelow&&launcher.centered,'desktop label is below the robot');
+ await page.getByRole('button',{name:'Открыть АвтоБота',exact:true}).click();
+ const heading=await page.locator('.ab-panel .ta-header').boundingBox();assert.ok(Math.abs(heading.y)<2&&Math.abs(heading.height-64)<1,'desktop chat header aligns with the 64px public header');
  await page.getByLabel('Сообщение АвтоБоту').fill('Мой город Омск');await page.getByRole('button',{name:'Отправить вопрос'}).click();await page.getByText('Город — Омск.',{exact:true}).waitFor();assert.equal(await page.getByRole('link',{name:'Лишний источник'}).count(),0);
  await page.getByLabel('Сообщение АвтоБоту').fill('Сколько стоит');await page.reload();await page.getByText('Город — Омск.',{exact:true}).waitFor();assert.equal(await page.getByLabel('Сообщение АвтоБоту').inputValue(),'Сколько стоит');
  await page.getByRole('button',{name:'Отправить вопрос'}).click();await page.getByRole('button',{name:'Отправить вопрос'}).waitFor();assert.ok(sent.history.some(m=>m.text==='Мой город Омск'));
