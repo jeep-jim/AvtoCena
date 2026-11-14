@@ -103,7 +103,7 @@ jobs:
           cp verify-autobot.mjs "$RUNNER_TEMP/autobot/"
       - name: Preview the same header with signed-out and staff controls before installation
         env:
-          PROPOSED_HEADER_CSS: '@media(max-width:767px){.ac-home-page .ac-public-header a[href="/"]>div:last-child>div:last-child{white-space:nowrap}}@media(max-width:399px){.ac-home-page .ac-public-header>div>div:last-child:has(.ac-staff-tools),.ac-home-page .ac-public-header .ac-staff-tools{column-gap:2px!important}}'
+          PROPOSED_HEADER_CSS: '@media(max-width:767px){.ac-home-page .ac-public-header a[href="/"]>div:last-child>div:last-child{white-space:nowrap}}@media(max-width:399px){.ac-home-page .ac-public-header>div>div:last-child:has(.ac-staff-tools),.ac-home-page .ac-public-header .ac-staff-tools{column-gap:2px!important}}@media(max-width:359px){.ac-home-page .ac-public-header>div{padding-inline:10px!important}.ac-home-page .ac-public-header>div>div:last-child,.ac-home-page .ac-public-header .ac-staff-tools{column-gap:2px!important}.ac-home-page .ac-public-header>div>div:last-child :is(.ac-icon-button,.ac-favorite-nav,.ac-staff-account),.ac-home-page .ac-public-header a[href="/account"]{width:30px!important;min-width:30px!important}}@media(min-width:360px) and (max-width:399px){.ac-home-page .ac-public-header>div>div:last-child:has(.ac-staff-tools) :is(.ac-icon-button,.ac-favorite-nav,.ac-staff-account){width:36px!important;min-width:36px!important}}'
         run: node "$RUNNER_TEMP/autobot/verify-autobot.mjs"
       - name: Apply only the style overlay and verify the public page
         env:
@@ -143,7 +143,7 @@ jobs:
           desktop_bot=original_desktop[1].split('@media(max-width:767px)',1)[0]
           css=".ac-public-header a[href=\"/\"]>div:last-child>div:first-child:has(>span.text-red-500)>span{font-weight:900!important}"+'@media(min-width:768px){'+original_desktop[0]+'}@media(min-width:900px)'+desktop_bot
           old_css=css
-          css+="@media(max-width:767px){.ac-home-page .ac-public-header a[href=\"/\"]>div:last-child>div:last-child{white-space:nowrap}}@media(max-width:399px){.ac-home-page .ac-public-header>div>div:last-child:has(.ac-staff-tools),.ac-home-page .ac-public-header .ac-staff-tools{column-gap:2px!important}}"
+          css+="@media(max-width:767px){.ac-home-page .ac-public-header a[href=\"/\"]>div:last-child>div:last-child{white-space:nowrap}}@media(max-width:399px){.ac-home-page .ac-public-header>div>div:last-child:has(.ac-staff-tools),.ac-home-page .ac-public-header .ac-staff-tools{column-gap:2px!important}}@media(max-width:359px){.ac-home-page .ac-public-header>div{padding-inline:10px!important}.ac-home-page .ac-public-header>div>div:last-child,.ac-home-page .ac-public-header .ac-staff-tools{column-gap:2px!important}.ac-home-page .ac-public-header>div>div:last-child :is(.ac-icon-button,.ac-favorite-nav,.ac-staff-account),.ac-home-page .ac-public-header a[href=\"/account\"]{width:30px!important;min-width:30px!important}}@media(min-width:360px) and (max-width:399px){.ac-home-page .ac-public-header>div>div:last-child:has(.ac-staff-tools) :is(.ac-icon-button,.ac-favorite-nav,.ac-staff-account){width:36px!important;min-width:36px!important}}"
           directives = ["    proxy_set_header Accept-Encoding \"\";", "    sub_filter_once on;", f"""    sub_filter '</head>' '<style id="autobot-desktop-v1">{css}</style></head>';"""]
           old_tag=f'<style id="autobot-desktop-v1">{old_css}</style>'
           assert s.count(old_tag)==1
