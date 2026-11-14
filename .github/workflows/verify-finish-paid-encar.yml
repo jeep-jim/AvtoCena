@@ -1,0 +1,90 @@
+name: Verify and finish paid Encar migration
+on:
+  workflow_dispatch:
+  workflow_run:
+    workflows: ['Publish completed paid Encar intake', 'Release paid Encar Korea']
+    types: [completed]
+permissions:
+  contents: read
+concurrency:
+  group: verify-paid-encar-cutover
+  cancel-in-progress: false
+jobs:
+  verify:
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'workflow_dispatch' || (github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'main'))
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    environment: regcloud-staging
+    env:
+      JSON_STORAGE_DRIVER: object
+      YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+      YC_OBJECT_STORAGE_REGION: us-east-1
+      YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+      YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+      YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+      YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - run: npm ci
+      - name: Read the current published Korea generation and CRM revision
+        id: current
+        run: |
+          node --import tsx --input-type=module <<'JS'
+          import fs from 'node:fs';
+          import {getJsonStorage} from './apps/web/lib/data.ts';
+          import {readCollectionControls} from './apps/web/lib/catalog/collection-controls.ts';
+          const manifest=await getJsonStorage().readJson('catalog/manifest.json',null);
+          const controls=await readCollectionControls();
+          if(!controls.markets.korea.enabled || !controls.sources.encar_feed.enabled ||
+            manifest?.markets?.korea?.provider!=='auto_api_encar' || !(manifest.markets.korea.count>0))throw Error('Paid Korea is not ready for public verification');
+          fs.appendFileSync(process.env.GITHUB_OUTPUT,'generation='+manifest.generationId+'\nrevision='+controls.revision+'\n');
+          JS
+      - name: Install isolated public browser check
+        run: |
+          npm install --prefix "$RUNNER_TEMP/encar" --no-save playwright@1.55.0
+          "$RUNNER_TEMP/encar/node_modules/.bin/playwright" install --with-deps chromium
+          cp scripts/catalog-verify-paid-encar-public.mjs "$RUNNER_TEMP/encar/"
+      - name: Verify live search, gallery identity, visible prices and three different detail pages
+        run: node "$RUNNER_TEMP/encar/catalog-verify-paid-encar-public.mjs" | tee paid-encar-before.json
+        shell: bash
+      - name: Retire only AJ System Korea after public verification
+        env:
+          VERIFIED_GENERATION: ${{ steps.current.outputs.generation }}
+          VERIFIED_REVISION: ${{ steps.current.outputs.revision }}
+        run: |
+          node --import tsx --input-type=module <<'JS'
+          import fs from 'node:fs';
+          import assert from 'node:assert/strict';
+          import {getJsonStorage} from './apps/web/lib/data.ts';
+          import {readCollectionControls,saveCollectionSwitch} from './apps/web/lib/catalog/collection-controls.ts';
+          const evidence=JSON.parse(fs.readFileSync('paid-encar-before.json','utf8'));
+          const storage=getJsonStorage();
+          const controls=await readCollectionControls(storage);
+          const manifest=await storage.readJson('catalog/manifest.json',null);
+          assert.equal(manifest?.generationId, process.env.VERIFIED_GENERATION);
+          assert.equal(evidence.generation,manifest.generationId);
+          assert.equal(manifest.markets.korea.provider,'auto_api_encar');
+          assert.equal(new Set(evidence.offers.map(o=>o.id)).size,3);
+          assert.equal(controls.revision,Number(process.env.VERIFIED_REVISION));
+          assert.ok(controls.markets.korea.enabled && controls.sources.encar_feed.enabled);
+          if(controls.sources.ajes_korea_feed.enabled)await saveCollectionSwitch({scope:'source',id:'ajes_korea_feed',enabled:false,revision:controls.revision},'Переход на проверенный Auto API Encar',storage);
+          const after=await readCollectionControls(storage);
+          assert.equal(after.sources.ajes_korea_feed.enabled,false);
+          assert.equal(after.sources.encar_feed.enabled,true);
+          console.log(JSON.stringify({korea:true,encar:true,ajesKorea:false,revision:after.revision}));
+          JS
+      - name: Reopen the live paid inventory after the CRM cache expires
+        run: |
+          sleep 6
+          node "$RUNNER_TEMP/encar/catalog-verify-paid-encar-public.mjs" | tee paid-encar-after.json
+        shell: bash
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: public-encar-verification
+          path: paid-encar-*.json
