@@ -210,12 +210,13 @@ const ALLOWED_IMAGE_HOSTS = [
 ];
 export { CATALOG_CHUNK_SIZE };
 export type OfferLocation = { market: CatalogMarket; chunk: string };
-export type CatalogManifest = { version: 2; generationId: string; updatedAt: string; markets: Record<string, { count: number; chunks: string[]; updatedAt: string }> };
+export type CatalogManifest = { version: 2; generationId: string; updatedAt: string; markets: Record<string, { count: number; chunks: string[]; updatedAt: string; provider?: "auto_api_encar" }> };
 type JapanAuctionArchiveManifest = { version: 1; updatedAt: string; retentionDays: 30; activeSlot: "a" | "b"; count: number; chunks: string[]; contentHash: string };
 export type CatalogFacets = { generationId: string; makes: string[]; models: Array<{ make: string; model: string; aliases?: string[]; popularityDecile?: number }>; markets: string[]; bodyTypes: string[]; fuels: string[]; transmissions: string[]; drives: string[] };
 export type CatalogBrandSummaryModel = { model: string; count: number; marketCounts: Record<string, number> };
 export type CatalogBrandSummary = { generationId: string; brands: Record<string, { make: string; count: number; marketCounts: Record<string, number>; models: CatalogBrandSummaryModel[] }> };
 export type CatalogSearchProjection = {
+  paidEncar?: true;
   chassisCode?:string; engineCode?:string; generation?:string;
   fuelPowertrainEvidence?:VehicleOffer["fuelPowertrainEvidence"];
   encyclopediaCalculation?:VehicleOffer["encyclopediaCalculation"];
@@ -235,7 +236,7 @@ export type CatalogSearchProjection = {
   sourcePrice?: number | null; sourceCurrency?: string | null; priceMode?: string; previousTotalRub?: number | null; priceDeltaRub?: number | null; priceChangedAt?: string;
   calculationStatus?: string; calculationSnapshot?: VehicleOffer["calculationSnapshot"]; publicVisibleRub?: number; publicSpecificationVerified?: boolean; cardImageUrl?: string; seriesId?: string; sourceGroup?: string; cardProjectionVersion?: 1 | 2 | 3;
 };
-export function publicOffer(offer: VehicleOffer): PublicVehicleOffer { offer=applyCatalogEditorial(offer); const safe = safePublicPricing(offer); const { operational, vin, frameNumber, sourceId, ...dto } = safe as any; return { ...dto, japanPowerEstimate:compactJapanPowerEstimate(safe), japanPowerSearchHint:japanPowerSearchHint(safe), fuelPowertrainEvidence:compactFuelPowertrainEvidence(safe), chassisCode: /^[A-Za-z0-9][A-Za-z0-9-]{0,19}$/.test(String(operational?.chassisCode || dto.chassisCode || "").trim()) ? String(operational?.chassisCode || dto.chassisCode).trim() : undefined, bodyType:catalogBodyType(offer), catalogEntryKind:isChinaModelSpecification(offer)?"model_variant":undefined, cardImageUrl: dto.cardImageUrl ? protectedPhotoUrl(dto.cardImageUrl, offer.market) : undefined, japanExportRestriction: assessJapanExportRestriction(offer), images: offer.images.map((img) => ({ id: img.id, role: img.role, url: protectedPhotoUrl(img.url, offer.market), width: img.width, height: img.height, size: img.size, mimeType: img.mimeType })) } as any; }
+export function publicOffer(offer: VehicleOffer): PublicVehicleOffer { offer=applyCatalogEditorial(offer); const safe = safePublicPricing(offer); const { operational, vin, frameNumber, sourceId, ...dto } = safe as any; return { ...dto, ...(offer.market === "korea" && offer.sourceId === "encar_direct" && operational?.provider === "auto_api_encar" ? {paidEncar:true} : {}), japanPowerEstimate:compactJapanPowerEstimate(safe), japanPowerSearchHint:japanPowerSearchHint(safe), fuelPowertrainEvidence:compactFuelPowertrainEvidence(safe), chassisCode: /^[A-Za-z0-9][A-Za-z0-9-]{0,19}$/.test(String(operational?.chassisCode || dto.chassisCode || "").trim()) ? String(operational?.chassisCode || dto.chassisCode).trim() : undefined, bodyType:catalogBodyType(offer), catalogEntryKind:isChinaModelSpecification(offer)?"model_variant":undefined, cardImageUrl: dto.cardImageUrl ? protectedPhotoUrl(dto.cardImageUrl, offer.market) : undefined, japanExportRestriction: assessJapanExportRestriction(offer), images: offer.images.map((img) => ({ id: img.id, role: img.role, url: protectedPhotoUrl(img.url, offer.market), width: img.width, height: img.height, size: img.size, mimeType: img.mimeType })) } as any; }
 export function compactPublicStorageOffer(offer: VehicleOffer): VehicleOffer {
   // Source adapters may retain complete HTML/JSON responses in operational.raw
   // for diagnostics. Public generations are immutable and were duplicating that
@@ -435,6 +436,10 @@ async function readManifest(): Promise<CatalogManifest> {
   manifestCache = { expiresAt: now + MANIFEST_CACHE_MS, promise };
   return promise;
 }
+export async function hasPublishedPaidEncar() {
+  const korea = (await readManifest()).markets?.korea;
+  return korea?.provider === "auto_api_encar" && korea.count > 0;
+}
 export async function catalogGenerationId() { return (await readManifest()).generationId; }
 async function readIndex<T>(generationId: string, path: string, fallback: T) { return readDataJson<T>(generationPath(generationId, `indexes/${path}`), fallback); }
 async function writeJsonAtomic(path: string, value: unknown, ifNoneMatch = true) { const storage = getJsonStorage(); try { await storage.writeJson(path, value, ifNoneMatch ? { ifNoneMatch: "*" } : undefined); } catch (e) { if (e instanceof StorageConflictError && ifNoneMatch) return; throw e; } }
@@ -483,6 +488,7 @@ export function searchProjectionFromOffer(offer: VehicleOffer): CatalogSearchPro
     },
     publicVisibleRub: visibleRub || undefined, publicSpecificationVerified: visibleRub > 0 && !catalogRequiredSpecificationRejectionReason(offer), cardImageUrl: rankedCatalogImageUrls(offer)[0] || undefined,
     seriesId: String(raw?.listing?.seriesId || raw?.seriesId || (offer as any)?.seriesId || "") || undefined,
+    ...(offer.market === "korea" && offer.sourceId === "encar_direct" && offer.operational?.provider === "auto_api_encar" ? {paidEncar:true as const} : {}),
     sourceGroup: String(offer.sourceId || "") || undefined, cardProjectionVersion: 3,
   };
 }
@@ -1725,6 +1731,10 @@ export async function persistCatalogOffers(nextOffers: VehicleOffer[], options: 
       if (chunks.length % 50 === 0) progress("market_chunk_progress", {market, written: Math.min(i + CATALOG_CHUNK_SIZE, offers.length), total: offers.length});
     }
     markets[market] = { count: offers.length, chunks, updatedAt: Object.prototype.hasOwnProperty.call(preservedPublicOffersByMarket, market) ? (baselineManifest?.markets?.[market]?.updatedAt || now) : now };
+    if (market === "korea" && offers.length && offers.every(offer =>
+      offer.sourceId === "encar_direct" && offer.operational?.provider === "auto_api_encar")) {
+      markets[market].provider = "auto_api_encar";
+    }
     progress("market_chunks_written", { market, count: offers.length, chunks: chunks.length });
   }
   await rebuildIndexes(generationId, publishedOffers, byId, imagesById);
