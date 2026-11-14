@@ -42,6 +42,7 @@ jobs:
           try{
             for(const colorScheme of ['light','dark']){
               const page=await browser.newPage({colorScheme,viewport:{width:1440,height:900}});
+              await page.addInitScript(theme=>localStorage.setItem('avtocena_theme',theme),colorScheme);
               await page.goto(origin,{waitUntil:'domcontentloaded'});
               const launcher=page.locator('.ab-fab');
               await launcher.waitFor();
@@ -50,10 +51,12 @@ jobs:
               const mascot=await launcher.locator('.ab-mascot').boundingBox();
               const label=await launcher.locator('.ab-fab-label').boundingBox();
               assert.ok(label.y>=mascot.y+mascot.height-0.5);
+              assert.equal(await page.locator('html').getAttribute('data-theme'),colorScheme);
               const publicHeader=await page.locator('header:visible').first().boundingBox();
               await launcher.click();
               const chat=await page.locator('.ab-panel .ta-header').boundingBox();
-              assert.ok(Math.abs(publicHeader.height-chat.height)<1);
+              assert.equal(publicHeader.height,64);
+              assert.equal(chat.height,64);
               assert.ok(Math.abs(chat.y-publicHeader.y)<1);
               console.log({colorScheme,box,mascot,label,publicHeader,chat});
               await page.screenshot({path:'autobot-'+colorScheme+'.png'});
