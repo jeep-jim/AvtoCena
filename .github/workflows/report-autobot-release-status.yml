@@ -1,0 +1,25 @@
+name: Record AutoBot release run
+on:
+  push:
+    paths: ['.github/workflows/report-autobot-release-status.yml']
+  workflow_run:
+    workflows: ['Release desktop AutoBot interface']
+    types: [requested, completed]
+permissions:
+  actions: read
+  statuses: write
+jobs:
+  report:
+    if: github.repository == 'jeep-jim/AvtoCena'
+    runs-on: ubuntu-latest
+    steps:
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -eu
+          sha=7a18777cce72fef0dd8282d39eccdd0f74c2c9f6
+          run=$(gh api "repos/$GITHUB_REPOSITORY/actions/workflows/release-desktop-autobot.yml/runs?head_sha=$sha&per_page=1" --jq '.workflow_runs[0]')
+          url=$(jq -er .html_url <<< "$run")
+          conclusion=$(jq -r .conclusion <<< "$run")
+          case "$conclusion" in success) state=success;; null) state=pending;; *) state=failure;; esac
+          gh api -X POST "repos/$GITHUB_REPOSITORY/statuses/$sha" -f context='AutoBot production release' -f state="$state" -f target_url="$url"
