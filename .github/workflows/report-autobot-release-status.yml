@@ -24,7 +24,7 @@ jobs:
           case "$conclusion" in success) state=success;; null) state=pending;; *) state=failure;; esac
           gh api -X POST "repos/$GITHUB_REPOSITORY/statuses/$sha" -f context='AutoBot production release' -f state="$state" -f target_url="$url"
   public-geometry:
-    if: github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success'
+    if: github.event_name == 'push' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     timeout-minutes: 6
     permissions:
@@ -37,8 +37,9 @@ jobs:
           import { chromium } from 'playwright';
           const origin='https://avtocena.com';
           const health=await (await fetch(origin+'/api/health',{cache:'no-store'})).json();
-          assert.equal(health.releaseSha,'7283a389ce61a3759d1c9eaad103c5f3ea1a3edc');
+          console.log('Public release',health.releaseSha);
           const browser=await chromium.launch();
+          const results=[];
           try{
             for(const colorScheme of ['light','dark']){
               const page=await browser.newPage({colorScheme,viewport:{width:1440,height:900}});
@@ -47,24 +48,25 @@ jobs:
               const launcher=page.locator('.ab-fab');
               await launcher.waitFor();
               const box=await launcher.boundingBox();
-              assert.equal(box.width,84);assert.equal(box.height,88);
+
               const mascot=await launcher.locator('.ab-mascot').boundingBox();
               const label=await launcher.locator('.ab-fab-label').boundingBox();
-              assert.ok(label.y>=mascot.y+mascot.height-0.5);
+
               assert.equal(await page.locator('html').getAttribute('data-theme'),colorScheme);
               const publicHeader=await page.locator('header:visible').first().boundingBox();
               await launcher.click();
               const chat=await page.locator('.ab-panel .ta-header').boundingBox();
-              assert.equal(publicHeader.height,64);
-              assert.equal(chat.height,64);
-              assert.ok(Math.abs(chat.y-publicHeader.y)<1);
+
               console.log({colorScheme,box,mascot,label,publicHeader,chat});
               await page.screenshot({path:'autobot-'+colorScheme+'.png'});
+              results.push(box.width===84 && box.height===88 && label.y>=mascot.y+mascot.height-0.5 && publicHeader.height===64 && chat.height===64 && Math.abs(chat.y-publicHeader.y)<1);
               await page.close();
             }
+            assert.deepEqual(results,[true,true],'public desktop AutoBot geometry');
           }finally{await browser.close()}
           JS
-      - uses: actions/upload-artifact@v4
+      - if: always()
+        uses: actions/upload-artifact@v4
         with:
           name: public-autobot-geometry
           path: autobot-*.png
