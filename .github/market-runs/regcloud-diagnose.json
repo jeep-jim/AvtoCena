@@ -1,4 +1,5 @@
 {
   "failedRelease": "d84d25556f6ca0adb3ed3b84587db31f8791a836",
-  "note": "Read retained process evidence for run 43706892769 before resuming the prepared image."
+  "probeHome": true,
+  "note": "Measure the 305-second homepage refresh on the stopped candidate from run 43706892769 attempt 2. Keep production serving the retained release."
 }
