@@ -940,15 +940,50 @@ export async function filterCatalogProjectionRows(rows:CatalogSearchProjection[]
  return selected;
 }
 function projectionFreshness(row: CatalogSearchProjection) { return Date.parse(String(row.auctionDate || row.sourcePublishedAt || row.firstSeenAt || row.updatedAt || "")) || 0; }
-export function catalogSearchProjectionSort(rows: CatalogSearchProjection[], sort = "updatedAt", city?: string) {
+function catalogProjectionComparator(sort = "updatedAt", city?: string) {
   const displayOrder=catalogDisplayOrderComparator();
   const dates=new WeakMap<CatalogSearchProjection,number>();
   const freshness=(row:CatalogSearchProjection)=>{let value=dates.get(row);if(value===undefined){value=projectionFreshness(row);dates.set(row,value);}return value;};
   const priceKeys=new WeakMap<CatalogSearchProjection,number>();
   const price = (row: CatalogSearchProjection, missing: number) => { if(priceKeys.has(row))return priceKeys.get(row)!||missing; const priced=city ? priceCardForCity(row,city).offer : row; const rub=calculatedCatalogPrice(priced); const value=!hasModificationSelection(row) && rub>0 ? rub : 0;priceKeys.set(row,value);return value||missing; };
   const terms=parseCatalogSort(sort)||[];
-  return rows.sort((a,b)=>terms.length?compareCatalogTerms(a,b,terms,row=>price(row,0))||a.id.localeCompare(b.id):displayOrder(a,b)||Number(price(b,0)>0)-Number(price(a,0)>0)||freshness(b)-freshness(a)||String(b.updatedAt||'').localeCompare(String(a.updatedAt||'')));
+  return (a:CatalogSearchProjection,b:CatalogSearchProjection)=>terms.length?compareCatalogTerms(a,b,terms,row=>price(row,0))||a.id.localeCompare(b.id):displayOrder(a,b)||Number(price(b,0)>0)-Number(price(a,0)>0)||freshness(b)-freshness(a)||String(b.updatedAt||'').localeCompare(String(a.updatedAt||''));
 
+}
+export function catalogSearchProjectionSort(rows: CatalogSearchProjection[], sort = "updatedAt", city?: string) {
+  return rows.sort(catalogProjectionComparator(sort, city));
+}
+/** Stable bounded runs let health, I/O and other visitors progress during large sorts. */
+async function sortCatalogRowsCooperatively(rows: CatalogSearchProjection[], compare: (a:CatalogSearchProjection,b:CatalogSearchProjection)=>number) {
+  const runSize=1024;
+  if(rows.length<=runSize)return rows.sort(compare);
+  let started=performance.now();
+  const yieldIfNeeded=async()=>{if(performance.now()-started>=8){await new Promise<void>(resolve=>setImmediate(resolve));started=performance.now();}};
+  let source:CatalogSearchProjection[]=new Array(rows.length),target:CatalogSearchProjection[]=new Array(rows.length);
+  for(let offset=0;offset<rows.length;offset+=runSize){
+    const run=rows.slice(offset,offset+runSize).sort(compare);
+    for(let i=0;i<run.length;i++)source[offset+i]=run[i];
+    await yieldIfNeeded();
+  }
+  for(let width=runSize;width<rows.length;width*=2){
+    for(let offset=0;offset<rows.length;offset+=2*width){
+      const middle=Math.min(offset+width,rows.length),end=Math.min(offset+2*width,rows.length);
+      let left=offset,right=middle;
+      for(let out=offset;out<end;out++){
+        target[out]=left<middle&&(right>=end||compare(source[left],source[right])<=0)?source[left++]:source[right++];
+        if((out&255)===255)await yieldIfNeeded();
+      }
+    }
+    [source,target]=[target,source];
+  }
+  for(let offset=0;offset<rows.length;offset+=256){
+    for(let i=offset;i<Math.min(offset+256,rows.length);i++)rows[i]=source[i];
+    await yieldIfNeeded();
+  }
+  return rows;
+}
+export function catalogSearchProjectionSortAsync(rows:CatalogSearchProjection[],sort="updatedAt",city?:string){
+  return sortCatalogRowsCooperatively(rows,catalogProjectionComparator(sort,city));
 }
 export function catalogSearchProjectionBalanceSources(rows: CatalogSearchProjection[]) {
   const groups = new Map<string, CatalogSearchProjection[]>();
@@ -968,12 +1003,12 @@ export function catalogSearchProjectionBalanceSources(rows: CatalogSearchProject
   rows.push(...unknown);
   return rows;
 }
-function sortCatalogSearchRows(rows: CatalogSearchProjection[], params: CatalogSearchParams) {
+async function sortCatalogSearchRows(rows: CatalogSearchProjection[], params: CatalogSearchParams) {
   const sort = params.sort || "updatedAt";
-  catalogSearchProjectionSort(rows, sort, params.city);
+  await catalogSearchProjectionSortAsync(rows, sort, params.city);
   if (sort === "updatedAt") {
     if(params.market && params.market !== "any") catalogSearchProjectionBalanceSources(rows);
-    rows.sort(catalogDisplayOrderComparator());
+    await sortCatalogRowsCooperatively(rows,catalogDisplayOrderComparator());
   }
 }
 async function projectionModelKeys(params: CatalogSearchParams) {
@@ -1316,7 +1351,7 @@ function canUseMarketLanding(params: CatalogSearchParams) {
 export async function buildCatalogMarketLanding(generationId: string, market: string, items: CatalogSearchProjection[], options: {now?:Date} = {}): Promise<MarketLanding> {
   const now=options.now||new Date();
   const rows = options.now ? prepareCatalogProjectionRowsForDate(items,now) : prepareCatalogProjectionRows(items);
-  sortCatalogSearchRows(rows, {market: market as CatalogMarket, sort: "updatedAt"});
+  await sortCatalogSearchRows(rows, {market: market as CatalogMarket, sort: "updatedAt"});
   return {version: 1, policyDate:new Date(now.getTime()+7*3600000).toISOString().slice(0,10), generationId, market, duplicatePolicy: REVIEWED_DUPLICATE_POLICY, sourceTotal: items.length, total: rows.length,
     items: rows.slice(0, MARKET_LANDING_LIMIT), facets: await facetsFromProjection(generationId, rows, {}, false)};
 }
@@ -2504,7 +2539,7 @@ async function searchBudgetIndex(params:CatalogSearchParams,internalPageLimit:nu
     calculationSnapshot:{deliveryPricingBasis:basis}} as OrderedBudgetRow;
    positions.set(row,position);return row;
   });
-  sortCatalogSearchRows(rows,params);
+  await sortCatalogSearchRows(rows,params);
   return Uint32Array.from(rows,row=>positions.get(row)!);
  };
  const order=params.budgetFrom||params.budgetTo?await buildOrder():await compactSortOrders.get({generation:selected.generationId,index:selected.indexKey,revision:editorialRevision(),day:new Date(Date.now()+7*3600000).toISOString().slice(0,10),city:params.city||'',mode:`default:${params.market||'any'}:${useDisplayKeys}`,pricing:null},selected.rows,buildOrder);
@@ -2737,7 +2772,7 @@ async function searchOffersWithoutBudgetIndexForTestsEditorial(params:CatalogSea
     const prepared=await currentSearchPrices(rows,generationId);
     const modelKeys=await projectionModelKeys(params);
     const matching=prepared.filter(row=>catalogSearchProjectionMatches(row,params,modelKeys));
-    sortCatalogSearchRows(matching,params);
+    await sortCatalogSearchRows(matching,params);
     const page=Math.max(1,Number(params.page||1));
     const pageSize=Math.min(Math.max(1,Math.min(384,internalPageLimit)),Math.max(1,Number(params.pageSize||24)));
     return {generationId,total:matching.length,page,pageSize,items:matching.slice((page-1)*pageSize,page*pageSize).map(publicOfferFromProjection),usedIndexShards:catalogMakeFilterValues(params.make).map(currentBrandProjectionPath)};
@@ -2774,8 +2809,8 @@ async function searchOffersStored(params: CatalogSearchParams, internalPageLimit
     if (parts.every(({ projection }) => projection.generationId === manifest.generationId)) {
       const modelKeys = await projectionModelKeys(params);
       const rows = await filterCatalogProjectionRows(parts.flatMap(({ projection }) => projection.items || []),params,modelKeys);
-      if (needsProjection) sortCatalogSearchRows(rows, params);
-      else sortCatalogSearchRows(rows,params);
+      if (needsProjection) await sortCatalogSearchRows(rows, params);
+      else await sortCatalogSearchRows(rows,params);
       const total = rows.length;
       const pageRows = rows.slice((page - 1) * pageSize, page * pageSize);
       if (pageRows.every(projectionCanRenderCard)) return {
@@ -2794,8 +2829,8 @@ async function searchOffersStored(params: CatalogSearchParams, internalPageLimit
   if (current.generationId === manifest.generationId) {
     const modelKeys = await projectionModelKeys(params);
     const rows = await filterCatalogProjectionRows(current.items || [],params,modelKeys);
-    if (needsProjection) sortCatalogSearchRows(rows, params);
-    else sortCatalogSearchRows(rows,params);
+    if (needsProjection) await sortCatalogSearchRows(rows, params);
+    else await sortCatalogSearchRows(rows,params);
     const total = rows.length;
     const pageRows = rows.slice((page - 1) * pageSize, page * pageSize);
     if (pageRows.every(projectionCanRenderCard)) {
@@ -2825,7 +2860,7 @@ async function searchOffersStored(params: CatalogSearchParams, internalPageLimit
       .filter(projectionCanRenderCard)
       .filter((row) => catalogSearchProjectionMatches(row, params, modelKeys));
     if (needsProjection) {
-      sortCatalogSearchRows(rows, params);
+      await sortCatalogSearchRows(rows, params);
     } else {
       rows.sort((a, b) => {
         const af = Date.parse(String(a.sourcePublishedAt || a.firstSeenAt || a.updatedAt || "")) || 0;
@@ -2860,7 +2895,7 @@ async function searchOffersStored(params: CatalogSearchParams, internalPageLimit
     const modelKeys = await projectionModelKeys(params);
     const projectionRows = (await readProjectionRows(manifest, params))
       .filter((row) => allowed.has(row.id) && catalogSearchProjectionMatches(row, params, modelKeys));
-    sortCatalogSearchRows(projectionRows, params);
+    await sortCatalogSearchRows(projectionRows, params);
     total = projectionRows.length;
     pageIds = projectionRows.slice((page - 1) * pageSize, page * pageSize).map((row) => row.id);
     const markets = params.market && params.market !== "any" ? [String(params.market)] : MARKETS;
