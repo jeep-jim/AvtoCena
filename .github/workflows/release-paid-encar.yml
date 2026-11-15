@@ -18,10 +18,10 @@ concurrency:
   cancel-in-progress: false
 jobs:
   release:
-    if: github.ref == 'refs/heads/main' && ((github.event_name == 'push' && github.event.head_commit.message == 'Use Ubuntu 24.04 for paid Encar browser acceptance') || github.event_name == 'workflow_dispatch' || (github.event.workflow_run.id == 43600759493 && github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_repository.full_name == github.repository))
+    if: github.ref == 'refs/heads/main' && ((github.event_name == 'push' && github.event.head_commit.message == 'Prepare shared price caches before testing the paid Encar release') || github.event_name == 'workflow_dispatch' || (github.event.workflow_run.id == 43600759493 && github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_repository.full_name == github.repository))
     environment: regcloud-staging
     runs-on: ubuntu-24.04
-    timeout-minutes: 165
+    timeout-minutes: 260
     steps:
       - uses: actions/checkout@v4
         with:
@@ -317,8 +317,7 @@ jobs:
         run: |
           export GITHUB_SHA="$RELEASE_SOURCE_SHA"
           node --import tsx --input-type=module <<'WAIT'
-          // Market-scoped derivatives do not change publication aliases or need its lease.
-          if(process.env.RELEASE_PREPARATION_MARKETS){console.log('Scoped preparation uses generation fences');process.exit(0);}
+          // The shared price cache must be prepared against a stable catalog generation.
           const data=await import('./apps/web/lib/data.ts');
           const getJsonStorage=data.getJsonStorage||data.default?.getJsonStorage;
           if(typeof getJsonStorage!=='function')throw Error('storage_module_unavailable');
@@ -338,6 +337,7 @@ jobs:
           # Offline authoritative parity reads full market projections; keep a bounded
           # two-minute storage deadline here, without changing visitor request budgets.
           YC_OBJECT_STORAGE_REQUEST_TIMEOUT_MS=120000 npx tsx scripts/regcloud-prepare-prices.mjs
+          YC_OBJECT_STORAGE_REQUEST_TIMEOUT_MS=120000 node --import tsx scripts/catalog-budget-shared-warmup.mjs
           if test -z "$RELEASE_PREPARATION_MARKETS"; then
             npx tsx scripts/prepare-catalog-colors.mjs
           fi
