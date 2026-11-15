@@ -1,0 +1,42 @@
+name: Coordinate paid Korea acceptance with saved China intake
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/coordinate-paid-korea-release.yml]
+permissions:
+  contents: read
+  actions: write
+jobs:
+  coordinate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    steps:
+      - name: Defer only the exact overlapping publisher with its verified saved intake
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python3 - <<'PY'
+          import json,subprocess,time
+          repo='jeep-jim/AvtoCena'; china=43753103164; korea=43754659891
+          def api(path):return json.loads(subprocess.check_output(['gh','api','repos/'+repo+'/'+path]))
+          current=api('actions/runs/'+str(china))
+          assert current['path']=='.github/workflows/catalog-refresh-china.yml' and current['head_sha']=='f1a926e4de5df6502f764150115b8bf9e2a43dd3'
+          if current['status']=='completed':
+           print(json.dumps({'chinaAlreadyTerminal':True,'conclusion':current['conclusion']}));raise SystemExit(0)
+          k=api('actions/runs/'+str(korea))
+          assert k['status']=='in_progress' and k['path']=='.github/workflows/release-paid-encar.yml','Korea not in progress'
+          kj=api('actions/runs/'+str(korea)+'/jobs')['jobs']
+          assert any(s['name']=='Deploy with rollback and resource measurements' and s['status']=='in_progress' for j in kj for s in j['steps']),'Korea not in acceptance'
+          artifacts=api('actions/runs/'+str(china)+'/artifacts')['artifacts']
+          assert any(a['id']==14178273080 and a['name']=='catalog-intake-china' and a['digest']=='sha256:62f2ca35af55a75130d661d9a7cc267f282d6132af1c143aeb28b39b6ca974e6' and not a['expired'] for a in artifacts),'saved China intake unavailable'
+          jobs=api('actions/runs/'+str(china)+'/jobs')['jobs']
+          assert any(j['name']=='refresh / collect (china)' and j['conclusion']=='success' for j in jobs),'China collection not preserved'
+          assert any(j['name']=='refresh / publish (china)' and j['status']=='in_progress' for j in jobs),'China publisher not active'
+          subprocess.check_call(['gh','api','--method','POST','repos/'+repo+'/actions/runs/'+str(china)+'/cancel'])
+          for i in range(20):
+           value=api('actions/runs/'+str(china))
+           if value['status']=='completed':
+            print(json.dumps({'chinaRun':china,'conclusion':value['conclusion'],'savedIntake':14178273080,'resumeRequiredAfterKorea':True}));break
+           time.sleep(3)
+          else:raise RuntimeError('cancellation_pending_check_status')
+          PY
