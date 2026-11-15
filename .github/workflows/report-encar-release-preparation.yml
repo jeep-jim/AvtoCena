@@ -1,0 +1,59 @@
+name: Report exact Encar release preparation
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/report-encar-release-preparation.yml]
+permissions:
+  contents: read
+jobs:
+  report:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    environment: regcloud-staging
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          ref: 9f89a2f9ca601a4cb5595a832ab2b8a04fb09938
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci --ignore-scripts --no-audit
+      - name: Count verified preparation checkpoints without writing storage
+        env:
+          JSON_STORAGE_DRIVER: object
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_REGION: us-east-1
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+        run: |
+          node --import tsx --input-type=module <<'JS'
+          import assert from 'node:assert/strict';
+          import {createHash} from 'node:crypto';
+          import {getJsonStorage} from './apps/web/lib/data.ts';
+          import {MANIFEST} from './apps/web/lib/encyclopedia/records.ts';
+          import {isEncyclopediaCar} from './apps/web/lib/encyclopedia/scope.ts';
+          import {calculationVersion} from './scripts/catalog-calculation-version.mjs';
+          const storage=getJsonStorage(),manifest=await storage.readJson(MANIFEST,null);
+          const rows=manifest.models.filter(isEncyclopediaCar),context={sourceVersion:calculationVersion(),coverageYear:new Date().getFullYear()};
+          const batches=Array.from({length:Math.ceil(rows.length/50)},(_,i)=>rows.slice(i*50,i*50+50));
+          let cursor=0,ready=0,modelsReady=0;
+          await Promise.all(Array.from({length:4},async()=>{
+            for(;;){
+              const i=cursor++;if(i>=batches.length)return;
+              const identity=batches[i].map(row=>[row.id,row.revision,row.key]);
+              const fingerprint=createHash('sha256').update(JSON.stringify({context,identity})).digest('hex');
+              const saved=await storage.readJson('knowledge/encyclopedia/preparation-v1/'+fingerprint+'.json',null);
+              if(saved){
+                assert.equal(saved.version,1);assert.equal(saved.fingerprint,fingerprint);
+                assert.equal(saved.items.length,batches[i].length);
+                assert.equal(createHash('sha256').update(JSON.stringify(saved.items)).digest('hex'),saved.digest);
+                ready++;modelsReady+=batches[i].length;
+              }
+            }
+          }));
+          console.log(JSON.stringify({release:'9f89a2f9ca601a4cb5595a832ab2b8a04fb09938',calculationVersion:context.sourceVersion,models:rows.length,modelsReady,batches:batches.length,ready,readOnly:true}));
+          JS
