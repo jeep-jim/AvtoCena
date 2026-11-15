@@ -31,29 +31,13 @@ jobs:
           YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
         run: |
           node --import tsx --input-type=module <<'JS'
-          import assert from 'node:assert/strict';
-          import {createHash} from 'node:crypto';
           import {getJsonStorage} from './apps/web/lib/data.ts';
-          import {MANIFEST} from './apps/web/lib/encyclopedia/records.ts';
-          import {isEncyclopediaCar} from './apps/web/lib/encyclopedia/scope.ts';
           import {calculationVersion} from './scripts/catalog-calculation-version.mjs';
-          const storage=getJsonStorage(),manifest=await storage.readJson(MANIFEST,null);
-          const rows=manifest.models.filter(isEncyclopediaCar),context={sourceVersion:calculationVersion(),coverageYear:new Date().getFullYear()};
-          const batches=Array.from({length:Math.ceil(rows.length/50)},(_,i)=>rows.slice(i*50,i*50+50));
-          let cursor=0,ready=0,modelsReady=0;
-          await Promise.all(Array.from({length:4},async()=>{
-            for(;;){
-              const i=cursor++;if(i>=batches.length)return;
-              const identity=batches[i].map(row=>[row.id,row.revision,row.key]);
-              const fingerprint=createHash('sha256').update(JSON.stringify({context,identity})).digest('hex');
-              const saved=await storage.readJson('knowledge/encyclopedia/preparation-v1/'+fingerprint+'.json',null);
-              if(saved){
-                assert.equal(saved.version,1);assert.equal(saved.fingerprint,fingerprint);
-                assert.equal(saved.items.length,batches[i].length);
-                assert.equal(createHash('sha256').update(JSON.stringify(saved.items)).digest('hex'),saved.digest);
-                ready++;modelsReady+=batches[i].length;
-              }
-            }
-          }));
-          console.log(JSON.stringify({release:'9f89a2f9ca601a4cb5595a832ab2b8a04fb09938',calculationVersion:context.sourceVersion,models:rows.length,modelsReady,batches:batches.length,ready,readOnly:true}));
+          const storage=getJsonStorage(),manifest=await storage.readJson('catalog/manifest.json',null);
+          const version=calculationVersion(),root='catalog/generations/'+manifest.generationId+'/indexes/';
+          for(const scope of ['budget-markets-v7/'+version+'/','runtime-budget-prices-v3/','runtime-sort-prices-v3/']){
+            const rows=await storage.listObjects(root+scope);
+            const recent=rows.slice().sort((a,b)=>String(b.lastModified||'').localeCompare(String(a.lastModified||''))).slice(0,8);
+            console.log(JSON.stringify({readOnly:true,scope,objects:rows.length,recent:recent.map(r=>({path:r.key.slice(root.length),modified:r.lastModified,bytes:r.size}))}));
+          }
           JS
