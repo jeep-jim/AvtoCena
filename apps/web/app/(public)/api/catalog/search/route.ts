@@ -1,3 +1,4 @@
+import {getEffectiveMarketsWithDefaults} from '@/lib/effective-market-settings';
 import {selectedCatalogMarkets,marketSelectionUrl} from "@/lib/catalog/market-selection";
 import {readGreenCorner,readGreenCornerPage} from '@/lib/catalog/green-corner';
 import {GET as greenSearch} from "@/app/api/catalog/green/route";
@@ -88,6 +89,9 @@ export async function GET(request: Request) {
     }
     return NextResponse.json({ok: true, ...result, items: []}, {headers: {"Cache-Control": "public, max-age=30, s-maxage=30", "Server-Timing": `catalog-count;dur=${(performance.now()-started).toFixed(1)}`}});
   }
+  // Overlap the independent settings read with catalog I/O. Pricing below still
+  // validates current settings and owns failures; empty results need no pricing.
+  const pricingPreparation = getEffectiveMarketsWithDefaults().catch(() => undefined);
   const [result, facets, rateExtras] = await Promise.all([
     searchOffers(query),
     p.get("includeFacets") === "1" ? readCatalogFacets(query) : Promise.resolve(undefined),
@@ -102,6 +106,7 @@ export async function GET(request: Request) {
   const crossMarket=!query.market;
   const [liveChina,liveKorea]=crossMarket ? await Promise.all([usesAjesMarket('china'),usesAjesMarket('korea')]) : [false,false];
   const candidates=crossMarket?result.items.filter(offer=>(!liveKorea||offer.market!=='korea')&&(!liveChina||offer.market!=='china')):result.items;
+  if(candidates.length)await pricingPreparation;
   const items = await applyActiveBusinessPricingBatch(candidates);
   const pricingMs = performance.now() - started - readMs;
   return NextResponse.json({ ok: true, ...result, ...(crossMarket?{total:null,partial:true,countIncomplete:true}:{}), items, ...extras }, { headers: { "Cache-Control": "public, max-age=30, s-maxage=30", "Server-Timing": `catalog-read;dur=${readMs.toFixed(1)}, catalog-pricing;dur=${pricingMs.toFixed(1)}` } });
