@@ -11,14 +11,14 @@ permissions:
   contents: read
   actions: read
 env:
-  RELEASE_SOURCE_SHA: b5ad05ee8ad042e4ff7b911a1990fbcd8b703b30
+  RELEASE_SOURCE_SHA: f9cce4a86f3659b266000e194458f545254728ea
   RELEASE_PREPARATION_MARKETS: korea
 concurrency:
   group: regcloud-production-release
   cancel-in-progress: false
 jobs:
   release:
-    if: github.ref == 'refs/heads/main' && ((github.event_name == 'push' && github.event.head_commit.message == 'Correlate Korea release latency with serving resource usage') || github.event_name == 'workflow_dispatch' || (github.event.workflow_run.id == 43600759493 && github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_repository.full_name == github.repository))
+    if: github.ref == 'refs/heads/main' && ((github.event_name == 'push' && github.event.head_commit.message == 'Release Encar with independent public login reads') || github.event_name == 'workflow_dispatch' || (github.event.workflow_run.id == 43600759493 && github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_repository.full_name == github.repository))
     environment: regcloud-staging
     runs-on: ubuntu-24.04
     timeout-minutes: 260
@@ -26,7 +26,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
-          ref: b5ad05ee8ad042e4ff7b911a1990fbcd8b703b30
+          ref: f9cce4a86f3659b266000e194458f545254728ea
       - name: Verify exact Korea candidate, publication and source checks
         env:
           GH_TOKEN: ${{ github.token }}
@@ -35,7 +35,7 @@ jobs:
           python3 - <<'SOURCE_GUARD'
           import json,subprocess,urllib.request
           repo='jeep-jim/AvtoCena'
-          sha='b5ad05ee8ad042e4ff7b911a1990fbcd8b703b30'
+          sha='f9cce4a86f3659b266000e194458f545254728ea'
           def api(path):
            return json.loads(subprocess.check_output(['gh','api',f'repos/{repo}/{path}']))
           p=api('pulls/1773')
@@ -70,14 +70,14 @@ jobs:
           import assert from 'node:assert/strict';
           import fs from 'node:fs';
           import {execFileSync} from 'node:child_process';
-          const m={base:'a182cd21b21ecf612b63613d263e5bdd817ea4c0',allowedPaths:["apps/web/app/(public)/page.tsx","apps/web/app/(public)/api/catalog/search/route.ts","apps/web/app/(public)/cars/offer/[id]/page.tsx","apps/web/app/api/catalog/recommendations/data.ts","apps/web/lib/catalog/ajes-catalog.ts","apps/web/lib/catalog/ajes-market-selection.ts","apps/web/lib/catalog/collection-controls-schema.ts","apps/web/lib/catalog/collection-controls.ts","apps/web/lib/catalog/related-offer-selection.ts","apps/web/lib/catalog/storage.ts","tests/browser/catalog-load-more.mjs","tests/browser/catalog-navigation-recovery.mjs","tests/catalog-market-brand-projection.test.ts","tests/china-source-switch.test.ts"]};
+          const m={base:'a182cd21b21ecf612b63613d263e5bdd817ea4c0',allowedPaths:["apps/web/app/(public)/login/page.tsx","apps/web/app/(public)/page.tsx","apps/web/app/(public)/api/catalog/search/route.ts","apps/web/app/(public)/cars/offer/[id]/page.tsx","apps/web/app/api/catalog/recommendations/data.ts","apps/web/lib/catalog/ajes-catalog.ts","apps/web/lib/catalog/ajes-market-selection.ts","apps/web/lib/catalog/collection-controls-schema.ts","apps/web/lib/catalog/collection-controls.ts","apps/web/lib/catalog/related-offer-selection.ts","apps/web/lib/catalog/storage.ts","tests/browser/catalog-load-more.mjs","tests/browser/catalog-navigation-recovery.mjs","tests/catalog-market-brand-projection.test.ts","tests/china-source-switch.test.ts"]};
           m.appPaths=m.allowedPaths.filter(p=>p.startsWith('apps/'));
           assert.equal(m.base,'a182cd21b21ecf612b63613d263e5bdd817ea4c0');
           assert.equal(execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),process.env.RELEASE_SOURCE_SHA);
           const paths=execFileSync('git',['diff','--name-only',m.base,'HEAD'],{encoding:'utf8'}).trim().split('\n').filter(Boolean);
           assert.deepEqual(paths.sort(),m.allowedPaths.slice().sort());
           assert.deepEqual(paths.filter(p=>p.startsWith('apps/')).sort(),m.appPaths.slice().sort());
-          assert.equal(m.appPaths.length,10);
+          assert.equal(m.appPaths.length,11);
           assert.ok(!m.appPaths.some(p=>p.includes('/blog/')));
           console.log(JSON.stringify({source:process.env.RELEASE_SOURCE_SHA,applicationFiles:m.appPaths,changed:paths.length}));
           VERIFY
@@ -313,7 +313,7 @@ jobs:
           YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
           YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
           NODE_OPTIONS: --max-old-space-size=6144
-          AVTOCENA_RELEASE_SHA: b5ad05ee8ad042e4ff7b911a1990fbcd8b703b30
+          AVTOCENA_RELEASE_SHA: f9cce4a86f3659b266000e194458f545254728ea
         run: |
           export GITHUB_SHA="$RELEASE_SOURCE_SHA"
           node --import tsx --input-type=module <<'WAIT'
@@ -415,7 +415,7 @@ jobs:
           python3 - <<'SOURCE_GUARD'
           import json,subprocess,urllib.request
           repo='jeep-jim/AvtoCena'
-          sha='b5ad05ee8ad042e4ff7b911a1990fbcd8b703b30'
+          sha='f9cce4a86f3659b266000e194458f545254728ea'
           def api(path):
            return json.loads(subprocess.check_output(['gh','api',f'repos/{repo}/{path}']))
           p=api('pulls/1773')
