@@ -9,17 +9,19 @@ let sequence=0;const pending=new Map();
 ws.onmessage=e=>{const m=JSON.parse(e.data);const p=pending.get(m.id);if(p){pending.delete(m.id);clearTimeout(p.timer);m.error?p.reject(Error(m.error.message)):p.resolve(m.result);}};
 function call(method,params={}){return new Promise((resolve,reject)=>{const id=++sequence;const timer=setTimeout(()=>{pending.delete(id);reject(Error('inspector_timeout:'+method));},12000);pending.set(id,{resolve,reject,timer});ws.send(JSON.stringify({id,method,params}));});}
 function startNetworkSample(){
+ const previousHomeTiming=process.env.CATALOG_HOME_PHASE_TIMING,previousStorageTiming=process.env.CATALOG_STORAGE_TIMING;
+ process.env.CATALOG_HOME_PHASE_TIMING='1';process.env.CATALOG_STORAGE_TIMING='1';
  const dc=process.getBuiltinModule('node:diagnostics_channel'),started=performance.now(),active=new Map(),rows=[];
  const bindings=[];
  const on=(name,fn)=>{const channel=dc.channel(name);const safe=value=>{try{fn(value);}catch{}};channel.subscribe(safe);bindings.push([channel,safe]);};
  const category=request=>{const path=String(request.path||'').split('?')[0];
-  for(const [needle,label] of [['exchange-rates','rates'],['markets/','market-settings'],['collection','source-controls'],['feature','features'],['green-corner','stock'],['overview','overview'],['catalog/','catalog'],['business','business'],['dealer','dealer']])if(path.includes(needle))return label;
+  for(const [needle,label] of [['editorial-home','home-prepared'],['manifest.json','manifest'],['projection/','projection'],['budget-markets','budget-index'],['runtime-budget','budget-prices'],['runtime-sort','sort-prices'],['exchange-rates','rates'],['markets/','market-settings'],['collection','source-controls'],['feature','features'],['green-corner','stock'],['overview','overview'],['catalog/','catalog'],['business','business'],['dealer','dealer']])if(path.includes(needle))return label;
   return 'other';};
  on('undici:request:create',({request})=>{if(rows.length+active.size<200)active.set(request,{kind:category(request),method:['GET','HEAD','POST','PUT'].includes(request.method)?request.method:'other',atMs:Math.round(performance.now()-started),start:performance.now()});});
  on('undici:request:headers',({request,response})=>{const row=active.get(request);if(row)row.status=response.statusCode;});
  const finish=(request,error=false,incomplete=false)=>{const row=active.get(request);if(!row)return;active.delete(request);const {start,...safe}=row;rows.push({...safe,ms:Math.round(performance.now()-start),error,incomplete});};
  on('undici:request:trailers',({request})=>finish(request));on('undici:request:error',({request})=>finish(request,true));
- globalThis.__avtocenaPerfNetworkStop=()=>{for(const [channel,fn] of bindings)channel.unsubscribe(fn);for(const [request]of active)finish(request,false,true);delete globalThis.__avtocenaPerfNetworkStop;return rows;};
+ globalThis.__avtocenaPerfNetworkStop=()=>{if(previousHomeTiming===undefined)delete process.env.CATALOG_HOME_PHASE_TIMING;else process.env.CATALOG_HOME_PHASE_TIMING=previousHomeTiming;if(previousStorageTiming===undefined)delete process.env.CATALOG_STORAGE_TIMING;else process.env.CATALOG_STORAGE_TIMING=previousStorageTiming;for(const [channel,fn] of bindings)channel.unsubscribe(fn);for(const [request]of active)finish(request,false,true);delete globalThis.__avtocenaPerfNetworkStop;return rows;};
  return true;
 }
 try{
@@ -34,7 +36,8 @@ try{
  const sources=new Map();
  const describe=id=>{const n=byId.get(id);if(!n)return null;const f=n.callFrame;let code='';if(f.url.startsWith('file:///app/apps/web/.next/server/')){try{let lines=sources.get(f.url);if(!lines){lines=fs.readFileSync(new URL(f.url),'utf8').split('\n');sources.set(f.url,lines);}code=lines[f.lineNumber]?.slice(Math.max(0,f.columnNumber-80),f.columnNumber+1800)||'';}catch{}}return {fn:f.functionName,url:f.url,line:f.lineNumber,column:f.columnNumber,code};};
  const net=await call('Runtime.evaluate',{expression:'globalThis.__avtocenaPerfNetworkStop?.()||[]',returnByValue:true});
- console.log('CPU_SAMPLE',JSON.stringify({network:net.result?.value||[],samples:profile.samples?.length,top:[...samples].sort((a,b)=>b[1]-a[1]).slice(0,20).map(([id,count])=>({count,stack:[id,parents.get(id),parents.get(parents.get(id))].filter(Boolean).map(describe)}))}));
+ const metrics=await call('Runtime.evaluate',{expression:'({memory:process.memoryUsage(),heapLimit:process.getBuiltinModule("node:v8").getHeapStatistics().heap_size_limit})',returnByValue:true});
+ console.log('CPU_SAMPLE',JSON.stringify({runtime:metrics.result?.value,network:net.result?.value||[],samples:profile.samples?.length,top:[...samples].sort((a,b)=>b[1]-a[1]).slice(0,20).map(([id,count])=>({count,stack:[id,parents.get(id),parents.get(parents.get(id))].filter(Boolean).map(describe)}))}));
  await call('Profiler.disable');
  }
 }finally{
