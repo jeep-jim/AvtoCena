@@ -29,7 +29,9 @@ jobs:
           disk=shutil.disk_usage('/')
           mem={line.split(':')[0]:int(line.split()[1])*1024 for line in pathlib.Path('/proc/meminfo').read_text().splitlines()}
           production=json.loads(subprocess.check_output(['docker','inspect','avtocena-production']))[0]
-          transport=pathlib.Path('/opt/avtocena/staging/incoming/43740421224-1/avtocena-image.tar.gz')
-          image=subprocess.run(['docker','image','inspect','--format','{{.Id}}','avtocena-regcloud:9f89a2f9ca601a4cb5595a832ab2b8a04fb09938'],capture_output=True,text=True)
-          print(json.dumps({'transportBytes':transport.stat().st_size if transport.exists() else None,'candidateImageLoaded':image.returncode==0,'readOnly':True,'diskAvailableBytes':disk.free,'diskRequiredBytes':8*1024**3,'diskReady':disk.free>8*1024**3,'memoryAvailableBytes':mem['MemAvailable'],'release':production['Config']['Labels'].get('org.opencontainers.image.revision'),'running':production['State']['Running'],'oomKilled':production['State']['OOMKilled']}))
+          transport=pathlib.Path('/opt/avtocena/staging/incoming/43754659891-1/avtocena-image.tar.gz')
+          image=subprocess.run(['docker','image','inspect','--format','{{.Id}}','avtocena-regcloud:d0dcda944ab9d3acc1cba60660842aa4de3223c7'],capture_output=True,text=True)
+          from collections import Counter
+          names=Counter(subprocess.check_output(['ps','-eo','comm='],text=True).splitlines())
+          print(json.dumps({'transferProcesses':{k:names[k] for k in ['scp','sftp-server','gzip','pigz','docker','dockerd','tar'] if names[k]},'transportBytes':transport.stat().st_size if transport.exists() else None,'candidateImageLoaded':image.returncode==0,'readOnly':True,'diskAvailableBytes':disk.free,'diskRequiredBytes':8*1024**3,'diskReady':disk.free>8*1024**3,'memoryAvailableBytes':mem['MemAvailable'],'release':production['Config']['Labels'].get('org.opencontainers.image.revision'),'running':production['State']['Running'],'oomKilled':production['State']['OOMKilled']}))
           PY
