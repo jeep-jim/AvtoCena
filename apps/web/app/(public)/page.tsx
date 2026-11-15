@@ -48,9 +48,6 @@ export async function generateMetadata({ searchParams }: { searchParams?: Promis
   };
 }
 
-function HomeJapanRail({timing}:{timing:ReturnType<typeof createHomePhaseTiming>}){
- return <AjesRail prepared={timing.measure("japanRail",()=>readAjesRailData("japan"))}/>;
-}
 async function DealerGallery({dealer}:{dealer:ReturnType<typeof readShowcase>}){
  const value=await dealer;
  return <BuyerGallery images={value?.buyersEnabled?value.buyerPhotos.map(p=>p.url):[]}/>;
@@ -70,6 +67,8 @@ export default async function HomePage({ searchParams }: { searchParams?: Promis
   const city = fromQuery || fromCookie;
   const specials = dealer.then(value => timing.measure("dealerRail", () => homeSpecialRail(city, value)))
     .catch(error => { console.error("home_specials_failed", error); return null; });
+  // The rail is independent of pricing. Start its existing read while the other homepage data is loading.
+  const japanRail = timing.measure("japanRail", () => readAjesRailData("japan"));
   const catalogData = timing.measure("snapshot",()=>readHomeCatalogSnapshot(10)).then(value=>{timing.setGeneration(value.generationId);return timing.measure("counts",()=>withAjesCount(value));}).catch((error) => {
       console.error("home_initial_catalog_failed", error);
       return { items: [], marketCounts: {}, total: 0, countIncomplete:true, marketCountInfo:{} };
@@ -91,7 +90,7 @@ export default async function HomePage({ searchParams }: { searchParams?: Promis
     <DealerCitySync/>
     <div className={styles.scope}>
       <HomePageClient
-        japanAuctions={<Suspense fallback={null}><HomeJapanRail timing={timing}/></Suspense>}
+        japanAuctions={<Suspense fallback={null}><AjesRail prepared={japanRail}/></Suspense>}
         dealerGallerySlot={<Suspense fallback={<div className="min-h-[160px]" aria-busy="true"/>}><DealerGallery dealer={dealer}/></Suspense>}
         specialRailSlot={<Suspense fallback={null}><DealerSpecials prepared={specials}/></Suspense>}
         initialGreen={{items:greenItems,total:green?.items.length || 0}}
