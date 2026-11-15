@@ -21,6 +21,7 @@ jobs:
           cache: npm
       - run: npm ci --ignore-scripts --no-audit
       - name: Count verified preparation checkpoints without writing storage
+        # Read-only progress checkpoint 2026-11-15T23:19Z
         env:
           JSON_STORAGE_DRIVER: object
           YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
