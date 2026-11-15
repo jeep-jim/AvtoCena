@@ -56,6 +56,8 @@ import { hasModificationSelection, limitModificationInventory } from "./modifica
 import { prepareModificationRecovery } from "./modification-recovery";
 import { catalogOfferWithinRetention } from "./refresh-policy";
 import crypto from "node:crypto";
+import {readFile} from "node:fs/promises";
+import {basename, join} from "node:path";
 import sharp from "sharp";
 import { getJsonStorage, readDataJson, StorageConflictError, jsonReadByteLength, type JsonReadResult } from "../data";
 import { publishAiProductFeed } from "../ai-discovery";
@@ -611,7 +613,28 @@ const CURRENT_PROJECTION_CACHE_MS = 5 * 60_000;
 const currentProjectionCache = new Map<string, { generationId: string; expiresAt: number; value?: { generationId: string; items: CatalogSearchProjection[] }; meta?: JsonReadResult<{ generationId: string; items: CatalogSearchProjection[] }>; promise: Promise<{ generationId: string; items: CatalogSearchProjection[] }> }>();
 // A single Volkswagen projection is 66 MB; a 32 MB budget never retained it.
 // Keys include the verified generation, so immutable brand rows can outlive a minute.
-const currentBrandProjectionCache = new DetailReadCache<{ generationId: string; items: CatalogSearchProjection[] }>({sizeOf:jsonReadByteLength,
+// Only the private serving image has prepared brand files. Each path includes
+// the publication generation, so later daily feeds fall through to storage.
+const preparedBrandBytes = new WeakMap<object, number>();
+async function readPreparedBrandProjection(generationId: string, key: string) {
+  const root = process.env.AVTOCENA_PREPARED_BRANDS_DIR;
+  if (!root || !/^[A-Za-z0-9_-]+$/.test(generationId)) return null;
+  let bytes: Buffer;
+  try {
+    bytes = await readFile(join(root, generationId, basename(key)));
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException).code === "ENOENT") return null;
+    throw error;
+  }
+  const projection = JSON.parse(bytes.toString("utf8")) as { generationId: string; items: CatalogSearchProjection[] };
+  if (projection.generationId !== generationId || !Array.isArray(projection.items)) {
+    throw new Error("prepared_brand_projection_invalid");
+  }
+  preparedBrandBytes.set(projection, bytes.length);
+  return projection;
+}
+
+const currentBrandProjectionCache = new DetailReadCache<{ generationId: string; items: CatalogSearchProjection[] }>({sizeOf:value => preparedBrandBytes.get(value) ?? jsonReadByteLength(value),
   maxEntries: 64, maxBytes: 384 * 1024 * 1024, ttlMs: 3600_000, concurrency: 2,
 });
 const unavailableReadCache=new UnavailableReadCache();
@@ -757,6 +780,8 @@ async function readCurrentBrandProjection(make: string, generationId: string) {
   }
   const key = currentBrandProjectionPath(make);
   return currentBrandProjectionCache.get(`${generationId}:${key}`, async () => {
+    const prepared = await readPreparedBrandProjection(generationId, key);
+    if (prepared) return prepared;
     // Read the manifest-pinned object first. A staged public alias may already
     // belong to a future, unpublished generation and can be tens of MB large.
     const stored = await readDataJson<{generationId:string;items:CatalogSearchProjection[]}>(generationBrandProjectionPath(generationId,make), {generationId:"",items:[]});
