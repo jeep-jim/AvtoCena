@@ -65,7 +65,7 @@ export default async function HomePage({ searchParams }: { searchParams?: Promis
   const fromCookie = decodeCity(cookieStore.get("avtocena_city")?.value || "");
   const dealer=timing.measure("dealer",()=>readShowcase("dealer_topavto")).catch(error=>{console.error("home_dealer_failed",error);return null;});
   const city = fromQuery || fromCookie;
-  const specials = dealer.then(value => timing.measure("dealerRail", () => homeSpecialRail(city, value)))
+  const specials = timing.measure("dealerRail", () => homeSpecialRail(city, dealer))
     .catch(error => { console.error("home_specials_failed", error); return null; });
   // The rail is independent of pricing. Start its existing read while the other homepage data is loading.
   const japanRail = timing.measure("japanRail", () => readAjesRailData("japan"));
