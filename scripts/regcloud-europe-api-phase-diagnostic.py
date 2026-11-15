@@ -57,12 +57,12 @@ try:
   else:raise TimeoutError('clone_not_ready')
   html='/cars?market=europe&make=BMW&page=2'
   api='/api/catalog/search?market=europe&make=BMW&page=2'
-  for path in [html,api,api]:
-   print(json.dumps({'initial':request(base,path)}),flush=True)
+  for request_path in [html,api,api]:
+   print(json.dumps({'initial':request(base,request_path)}),flush=True)
   for number in range(3):
    time.sleep(35)
    # Preserve the real gate order: HTML is measured before the same API.
-   results=[request(base,path) for path in ['/cars?market=korea','/','/cars','/cars?market=china&make=Volkswagen&page=2',html,'/cars?sort=totalRub',api]]
+   results=[request(base,request_path) for request_path in ['/cars?market=korea','/','/cars','/cars?market=china&make=Volkswagen&page=2',html,'/cars?sort=totalRub',api]]
    print(json.dumps({'trial':number+1,'afterSeconds':35,'responses':results}),flush=True)
   remove_owned(name);names.remove(name);os.unlink(path);files.remove(path)
  print(json.dumps({'isolatedApiPhaseProfileComplete':True}),flush=True)
