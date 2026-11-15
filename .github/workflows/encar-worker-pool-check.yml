@@ -1,4 +1,4 @@
-name: Check isolated Encar worker-pool latency
+name: Check isolated Encar worker-pool latency with original metrics
 on:
   push:
     branches: [main]
