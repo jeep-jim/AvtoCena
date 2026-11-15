@@ -63,7 +63,7 @@ jobs:
           systemctl reload nginx
           python3 - <<'MEASURE'
           import urllib.request,time,json
-          for path in ['/cars?sort=totalRub','/api/catalog/search?market=china&powerTo=160&pageSize=24','/cars/offer/kia-k5-iii-2-0-prestige-2023--c92ac81215cbc82107b7e6fb']:
+          for path in ['/','/cars?sort=totalRub','/api/catalog/search?market=china&powerTo=160&pageSize=24','/cars/offer/kia-k5-iii-2-0-prestige-2023--c92ac81215cbc82107b7e6fb']:
               start=time.monotonic()
               try:
                   with urllib.request.urlopen('https://avtocena.com'+path,timeout=45) as r:body=r.read();status=r.status
