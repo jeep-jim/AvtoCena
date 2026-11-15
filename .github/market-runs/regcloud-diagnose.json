@@ -1,4 +1,5 @@
 {
   "failedRelease": "3109d4fec023920317af145a6df9c540457649e4",
-  "note": "Inspect bounded error summaries of failed Encar release 43718450187 without starting candidate or changing production."
+  "probeGate": true,
+  "note": "Profile the exact rejected Encar candidate on its isolated loopback port; preserve production and restore stopped state."
 }
