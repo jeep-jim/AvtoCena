@@ -1,0 +1,31 @@
+name: Check isolated Encar worker-pool latency
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/encar-worker-pool-check.yml]
+permissions:
+  contents: read
+jobs:
+  compare:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    environment: regcloud-staging
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Compare original and reserved I/O pools on disposable exact-image clones
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+        run: |
+          set -euo pipefail
+          umask 077
+          key_file=$(mktemp)
+          trap 'rm -f "$key_file"' EXIT
+          printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
+          unset SSH_PRIVATE_KEY
+          ssh_opts=(-i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o ServerAliveInterval=15 -o ServerAliveCountMax=6 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts")
+          directory=/opt/avtocena/releases/d0dcda944ab9d3acc1cba60660842aa4de3223c7
+          scp "${ssh_opts[@]}" scripts/regcloud-worker-pool-diagnostic.py "root@151.248.113.177:$directory/worker-pool-diagnostic.py"
+          scp "${ssh_opts[@]}" scripts/regcloud-pool-stress.mjs "root@151.248.113.177:$directory/pool-stress.mjs"
+          ssh "${ssh_opts[@]}" root@151.248.113.177 "python3 '$directory/worker-pool-diagnostic.py' 'd0dcda944ab9d3acc1cba60660842aa4de3223c7'"
