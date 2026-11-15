@@ -10,7 +10,8 @@ info=json.loads(subprocess.check_output(['docker','inspect',name]))[0]
 if info['Config']['Image']!='avtocena-regcloud:'+release:raise ValueError('wrong_image')
 state=info['State']
 if state['Running']:raise ValueError('candidate_must_be_stopped')
-if len(sys.argv)>2 and sys.argv[2] in ['--probe','--probe-ttl','--probe-catalog','--probe-gate','--probe-long','--probe-home']:
+if len(sys.argv)>2 and sys.argv[2] in ['--probe','--probe-ttl','--probe-catalog','--probe-gate','--probe-long','--probe-home','--probe-home-gate']:
+ home_gate=sys.argv[2]=='--probe-home-gate'
  home_probe=sys.argv[2]=='--probe-home'
  gate_probe=sys.argv[2]=='--probe-gate'
  long_probe=sys.argv[2]=='--probe-long'
@@ -30,7 +31,7 @@ if len(sys.argv)>2 and sys.argv[2] in ['--probe','--probe-ttl','--probe-catalog'
   with urllib.request.urlopen('http://127.0.0.1:'+port+'/api/health',timeout=15) as response:value=json.load(response)
   if not value.get('ok') or not re.fullmatch('[a-f0-9]{40}',value.get('releaseSha','')):raise ValueError('production_health_invalid')
   return value['releaseSha']
- if home_probe or long_probe:production_before=production_health()
+ if home_probe or home_gate or long_probe:production_before=production_health()
  config_before=pathlib.Path('/etc/nginx/conf.d/avtocena-prepare.conf').read_bytes()
  resource_changed=False
  try:
@@ -52,15 +53,20 @@ if len(sys.argv)>2 and sys.argv[2] in ['--probe','--probe-ttl','--probe-catalog'
    routes=['/api/health','/','/login','/autocalc','/cars','/cars?market=china&make=Volkswagen&page=2','/cars?market=china&city=%D0%9D%D0%BE%D0%B2%D0%BE%D0%BA%D1%83%D0%B7%D0%BD%D0%B5%D1%86%D0%BA','/cars?market=europe&make=BMW&page=2','/cars?sort=totalRub','/api/catalog/search?market=europe&make=BMW&page=2','/cars/autocatalog']
    paths=['/','/cars','/','/cars?sort=totalRub','/cars?market=china','/cars?market=china']+routes+routes[:5]+['/cars']
    if long_probe:paths=['/','/cars','/','/cars?sort=totalRub']+routes+routes+routes+routes
+  if home_gate:
+   routes=['/api/health','/api/leads','/login','/autocalc','/cars/autocatalog','/cars/autocatalog?make=Changan','/cars?market=korea','/','/cars','/cars?market=china&make=Volkswagen&page=2','/cars?market=china&city=%D0%9D%D0%BE%D0%B2%D0%BE%D0%BA%D1%83%D0%B7%D0%BD%D0%B5%D1%86%D0%BA','/cars?market=europe&make=BMW&page=2','/cars?sort=totalRub','/api/catalog/search?market=europe&make=BMW&page=2','/api/catalog/search?market=china&marketPage=1&page=9','/cars/china/BMW/3?powerTo=160&sort=totalRub','/cars/china/BMW/3%20SERIES?powerTo=160&sort=totalRub','/api/catalog/search?market=china&budgetTo=1500000&pageSize=6']
+   paths=routes+routes+routes+routes[:8]
   if home_probe:paths=['/']*4
   profile=None
   for number,path in enumerate(paths):
+   if home_gate and number in [2*len(routes),3*len(routes)]:time.sleep(35 if number==2*len(routes) else 305)
+   if home_gate and time.monotonic()>=deadline:raise TimeoutError('diagnostic_deadline')
    if home_probe and number in [2,3]:time.sleep(35 if number==2 else 305)
    if home_probe and time.monotonic()>=deadline:raise TimeoutError('diagnostic_deadline')
    if long_probe and number in [4+2*len(routes),4+3*len(routes)]:time.sleep(35 if number==4+2*len(routes) else 305)
    if long_probe and time.monotonic()>=deadline:raise TimeoutError('diagnostic_deadline')
    if ttl_probe and number==2:time.sleep(35)
-   if (home_probe and number==3) or (ttl_probe and number>=2) or (gate_probe and number==len(paths)-6) or (long_probe and number==4+3*len(routes)+8):
+   if (home_gate and number==len(paths)-1) or (home_probe and number==3) or (ttl_probe and number>=2) or (gate_probe and number==len(paths)-6) or (long_probe and number==4+3*len(routes)+8):
     subprocess.run(['docker','exec',name,'/bin/sh','-c','kill -USR1 1'],check=True,capture_output=True)
     time.sleep(1)
     profile=subprocess.Popen(['docker','exec','-i',name,'node','--input-type=module'],stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True)
@@ -68,7 +74,7 @@ if len(sys.argv)>2 and sys.argv[2] in ['--probe','--probe-ttl','--probe-catalog'
     time.sleep(1)
    start=time.monotonic()
    try:
-    with urllib.request.urlopen(base+path,timeout=min(90,max(1,deadline-time.monotonic())) if (long_probe or home_probe) else 90) as response:body=response.read(20*1024*1024+1);status=response.status;timing=response.headers.get('Server-Timing')
+    with urllib.request.urlopen(base+path,timeout=min(90,max(1,deadline-time.monotonic())) if (long_probe or home_probe or home_gate) else 90) as response:body=response.read(20*1024*1024+1);status=response.status;timing=response.headers.get('Server-Timing')
     print(json.dumps({'phase':(['cold','warm','after35','after305'][number] if home_probe else None),'checkedAt':time.strftime('%Y-%m-%dT%H:%M:%SZ',time.gmtime()),'candidateProbe':path,'seconds':round(time.monotonic()-start,3),'status':status,'serverTiming':timing,'bytes':len(body),'complete':b'</html>' in body,'streamError':b'$RX(' in body}),flush=True)
    except Exception as error:print(json.dumps({'candidateProbe':path,'seconds':round(time.monotonic()-start,3),'errorType':type(error).__name__}),flush=True)
    if profile and ((not gate_probe and not long_probe) or number==len(paths)-1 or (long_probe and number==4+3*len(routes)+8)):
@@ -79,7 +85,7 @@ if len(sys.argv)>2 and sys.argv[2] in ['--probe','--probe-ttl','--probe-catalog'
     except subprocess.TimeoutExpired:
      profile.kill();profile.communicate();print(json.dumps({'candidateProfileError':'timeout'}),flush=True)
     profile=None
-   if home_probe or ttl_probe or ((gate_probe or long_probe) and number==len(paths)-1):
+   if home_probe or home_gate or ttl_probe or ((gate_probe or long_probe) and number==len(paths)-1):
     stats=subprocess.check_output(['docker','stats','--no-stream','--format','{{.MemUsage}} / CPU {{.CPUPerc}}',name],text=True).strip()
     print(json.dumps({'candidateResources':stats,'after':path}),flush=True)
  finally:
@@ -87,7 +93,7 @@ if len(sys.argv)>2 and sys.argv[2] in ['--probe','--probe-ttl','--probe-catalog'
   if resource_changed:
    subprocess.run(['docker','update','--cpus',str(info['HostConfig']['NanoCpus']/1_000_000_000),'--memory',str(info['HostConfig']['Memory']),name],check=True,capture_output=True)
   if pathlib.Path('/etc/nginx/conf.d/avtocena-prepare.conf').read_bytes()!=config_before:raise ValueError('nginx_config_changed')
-  if home_probe or long_probe:
+  if home_probe or home_gate or long_probe:
    production_after=production_health()
    print(json.dumps({'productionBefore':production_before,'productionAfter':production_after,'unchanged':production_before==production_after}),flush=True)
    if production_before!=production_after:raise ValueError('production_release_changed')
@@ -111,3 +117,11 @@ for line in text.splitlines():
   if isinstance(value.get(field),(float,int)):row[field]=value[field]
  rows.append(row)
 print(json.dumps({'catalogTimings':rows[-40:]},ensure_ascii=False))
+
+phases=[]
+for line in text.splitlines():
+ if not line.startswith('home_phase '):continue
+ try:value=json.loads(line[len('home_phase '):])
+ except ValueError:continue
+ phases.append({k:value[k] for k in ['trace','phase','ms','ok','policyDate','completedPolicyDate','generation'] if k in value})
+print(json.dumps({'homePhases':phases[-100:]}))
