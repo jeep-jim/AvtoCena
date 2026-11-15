@@ -11,14 +11,14 @@ permissions:
   contents: read
   actions: read
 env:
-  RELEASE_SOURCE_SHA: 37a6833a5ab82a97730321de84914c7cac077470
+  RELEASE_SOURCE_SHA: b5ad05ee8ad042e4ff7b911a1990fbcd8b703b30
   RELEASE_PREPARATION_MARKETS: korea
 concurrency:
   group: regcloud-production-release
   cancel-in-progress: false
 jobs:
   release:
-    if: github.ref == 'refs/heads/main' && ((github.event_name == 'push' && github.event.head_commit.message == 'Release Encar with concurrent homepage reads') || github.event_name == 'workflow_dispatch' || (github.event.workflow_run.id == 43600759493 && github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_repository.full_name == github.repository))
+    if: github.ref == 'refs/heads/main' && ((github.event_name == 'push' && github.event.head_commit.message == 'Release verified Encar successor with original snapshot fallback') || github.event_name == 'workflow_dispatch' || (github.event.workflow_run.id == 43600759493 && github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_repository.full_name == github.repository))
     environment: regcloud-staging
     runs-on: ubuntu-24.04
     timeout-minutes: 260
@@ -26,7 +26,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
-          ref: 37a6833a5ab82a97730321de84914c7cac077470
+          ref: b5ad05ee8ad042e4ff7b911a1990fbcd8b703b30
       - name: Verify exact Korea candidate, publication and source checks
         env:
           GH_TOKEN: ${{ github.token }}
@@ -35,7 +35,7 @@ jobs:
           python3 - <<'SOURCE_GUARD'
           import json,subprocess,urllib.request
           repo='jeep-jim/AvtoCena'
-          sha='37a6833a5ab82a97730321de84914c7cac077470'
+          sha='b5ad05ee8ad042e4ff7b911a1990fbcd8b703b30'
           def api(path):
            return json.loads(subprocess.check_output(['gh','api',f'repos/{repo}/{path}']))
           p=api('pulls/1773')
@@ -313,7 +313,7 @@ jobs:
           YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
           YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
           NODE_OPTIONS: --max-old-space-size=6144
-          AVTOCENA_RELEASE_SHA: 37a6833a5ab82a97730321de84914c7cac077470
+          AVTOCENA_RELEASE_SHA: b5ad05ee8ad042e4ff7b911a1990fbcd8b703b30
         run: |
           export GITHUB_SHA="$RELEASE_SOURCE_SHA"
           node --import tsx --input-type=module <<'WAIT'
@@ -415,7 +415,7 @@ jobs:
           python3 - <<'SOURCE_GUARD'
           import json,subprocess,urllib.request
           repo='jeep-jim/AvtoCena'
-          sha='37a6833a5ab82a97730321de84914c7cac077470'
+          sha='b5ad05ee8ad042e4ff7b911a1990fbcd8b703b30'
           def api(path):
            return json.loads(subprocess.check_output(['gh','api',f'repos/{repo}/{path}']))
           p=api('pulls/1773')
