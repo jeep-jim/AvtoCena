@@ -1,5 +1,3 @@
 {
-  "failedRelease": "d0dcda944ab9d3acc1cba60660842aa4de3223c7",
-  "probeHomeGate": true,
-  "note": "Replay original route order at original container limits, profile final homepage after 35/305 seconds with numeric phase/heap/network counters. No Nginx switch; restore stopped state and inspector."
+  "note": "Observe live route timings and counts for 45 seconds with no IPs/cookies/query strings. Isolated d0 workload home .780s did not reproduce serving 4.005s; inspect concurrent public routes. Restore original Nginx config."
 }
