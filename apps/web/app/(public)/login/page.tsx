@@ -24,10 +24,16 @@ export default async function LoginPage({ searchParams }: { searchParams?: Promi
   const params = (await searchParams) ?? {};
   const nextPath = firstParam(params.next) || "/account";
   const errorCode = firstParam(params.error) || "";
-  const features = await readPublicFeatures();
-  const stored = await readShowcase(PILOT_DEALER_ID);
-  const dealer = stored?.profileEnabled ? await withDealerRate(await availableShowcase(stored)) : null;
-  const topDealer = dealer?.profileEnabled ? {profile:publicDealerProfile(dealer),items:publicRail(dealer),verified:(await findDealer(PILOT_DEALER_ID))?.status==='verified'} : undefined;
+  // Appearance and the dealer preview have independent reads. Await both complete
+  // results, with the same access checks and calculated offers as before.
+  const [features, topDealer] = await Promise.all([
+    readPublicFeatures(),
+    (async () => {
+      const stored = await readShowcase(PILOT_DEALER_ID);
+      const dealer = stored?.profileEnabled ? await withDealerRate(await availableShowcase(stored)) : null;
+      return dealer?.profileEnabled ? {profile:publicDealerProfile(dealer),items:publicRail(dealer),verified:(await findDealer(PILOT_DEALER_ID))?.status==='verified'} : undefined;
+    })(),
+  ]);
 
   return (
     <main className="ac-login-page ac-page-copy min-h-screen text-white">
