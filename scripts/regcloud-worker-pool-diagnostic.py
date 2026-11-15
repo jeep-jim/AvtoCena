@@ -6,7 +6,10 @@ if not re.fullmatch('[a-f0-9]{40}',release):raise ValueError('release_scope')
 original='avtocena-release-'+release[:12]
 info=json.loads(subprocess.check_output(['docker','inspect',original]))[0]
 if info['State']['Running'] or info['Config']['Labels'].get('org.opencontainers.image.revision')!=release:raise ValueError('stopped_exact_candidate_required')
-if info.get('Mounts'):raise ValueError('unexpected_external_mounts')
+mount_args=[]
+for mount in info.get('Mounts',[]):
+ if mount.get('Type')!='bind' or mount.get('Source')!='/opt/avtocena/metrics' or mount.get('Destination')!='/run/avtocena-metrics' or mount.get('RW') is not False:raise ValueError('unexpected_external_mounts')
+ mount_args+=['--mount','type=bind,src=/opt/avtocena/metrics,dst=/run/avtocena-metrics,readonly']
 lock=open('/run/lock/avtocena-runtime-change.lock','w');fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
 config=pathlib.Path('/etc/nginx/conf.d/avtocena-prepare.conf').read_bytes()
 def health():
@@ -38,7 +41,7 @@ try:
    for key,value in env.items():
     if '\n' in value or '\r' in value:raise ValueError('multiline_env_not_supported')
     f.write(key+'='+value+'\n')
-  subprocess.run(['docker','run','-d','--name',name,'--label','avtocena.diagnostic.owner='+owner,'--env-file',path,'--memory',str(info['HostConfig']['Memory']),'--cpus',str(info['HostConfig']['NanoCpus']/1e9),'--pids-limit','512','--log-opt','max-size=5m','-p','127.0.0.1::3000',info['Image'],'node','--inspect=127.0.0.1:9229','apps/web/server.js'],check=True,capture_output=True)
+  subprocess.run(['docker','run','-d','--name',name,'--label','avtocena.diagnostic.owner='+owner,'--env-file',path,'--memory',str(info['HostConfig']['Memory']),'--cpus',str(info['HostConfig']['NanoCpus']/1e9),'--pids-limit','512','--log-opt','max-size=5m','-p','127.0.0.1::3000',*mount_args,info['Image'],'node','--inspect=127.0.0.1:9229','apps/web/server.js'],check=True,capture_output=True)
   port=subprocess.check_output(['docker','inspect','--format','{{(index (index .NetworkSettings.Ports "3000/tcp") 0).HostPort}}',name],text=True).strip();base='http://127.0.0.1:'+port
   for _ in range(30):
    try:
