@@ -18,7 +18,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   release:
-    if: github.ref == 'refs/heads/main' && ((github.event_name == 'push' && github.event.head_commit.message == 'Release verified Encar successor with original snapshot fallback') || github.event_name == 'workflow_dispatch' || (github.event.workflow_run.id == 43600759493 && github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_repository.full_name == github.repository))
+    if: github.ref == 'refs/heads/main' && ((github.event_name == 'push' && github.event.head_commit.message == 'Correlate Korea release latency with serving resource usage') || github.event_name == 'workflow_dispatch' || (github.event.workflow_run.id == 43600759493 && github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_repository.full_name == github.repository))
     environment: regcloud-staging
     runs-on: ubuntu-24.04
     timeout-minutes: 260
@@ -472,7 +472,38 @@ jobs:
           ssh "${ssh_opts[@]}" root@151.248.113.177 "install -d -m 700 '$remote_dir'"
           scp "${ssh_opts[@]}" scripts/regcloud-deploy-production.sh scripts/regcloud-performance-gate.py scripts/regcloud-resource-sampler.py scripts/regcloud-browser-verdict.py "root@151.248.113.177:$remote_dir/"
           scp "${ssh_opts[@]}" docs/operations/2026-11-11-accepted-speed-baseline.json "root@151.248.113.177:$remote_dir/accepted-speed-baseline.json"
-          bash scripts/regcloud-deploy-with-browser.sh "$key_file" "$GITHUB_SHA" "$(node scripts/catalog-calculation-version.mjs)" "$RELEASE_PREPARATION_MARKETS"
+          # Correlate slow requests with CPU pressure and memory on this candidate.
+          # Only cgroup counters are recorded. No requests, headers or process arguments.
+          ssh "${ssh_opts[@]}" root@151.248.113.177 "python3 - '$GITHUB_SHA'" <<'SAMPLE' > "$RUNNER_TEMP/encar-resource-samples.log" &
+          import datetime, json, pathlib, re, subprocess, sys, time
+          sha = sys.argv[1]
+          assert re.fullmatch('[0-9a-f]{40}', sha)
+          name = 'avtocena-release-' + sha[:12]
+          for _ in range(900):
+              try:
+                  pid = int(subprocess.check_output(['docker','inspect','-f','{{.State.Pid}}',name], stderr=subprocess.DEVNULL))
+                  if pid:
+                      groups = pathlib.Path(f'/proc/{pid}/cgroup').read_text().splitlines()
+                      path = next(line[3:] for line in groups if line.startswith('0::'))
+                      group = pathlib.Path('/sys/fs/cgroup') / path.lstrip('/')
+                      fields = dict(line.split() for line in (group/'cpu.stat').read_text().splitlines())
+                      print(json.dumps({'utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),
+                            'cpuUsec':int(fields['usage_usec']), 'throttledUsec':int(fields['throttled_usec']),
+                            'memoryBytes':int((group/'memory.current').read_text())}), flush=True)
+              except (subprocess.CalledProcessError, OSError, ValueError, KeyError, StopIteration):
+                  pass
+              time.sleep(3)
+          SAMPLE
+          sampler_pid=$!
+          deploy_status=0
+          bash scripts/regcloud-deploy-with-browser.sh "$key_file" "$GITHUB_SHA" "$(node scripts/catalog-calculation-version.mjs)" "$RELEASE_PREPARATION_MARKETS" || deploy_status=$?
+          kill "$sampler_pid" 2>/dev/null || true
+          wait "$sampler_pid" 2>/dev/null || true
+          if [ "$deploy_status" != 0 ]; then
+            echo "Candidate resource readings before rollback"
+            tail -65 "$RUNNER_TEMP/encar-resource-samples.log"
+          fi
+          exit "$deploy_status"
       - name: Persist verified private evidence for deploy_acceptance
         if: always()
         timeout-minutes: 4
