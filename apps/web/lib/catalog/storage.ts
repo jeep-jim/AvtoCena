@@ -2349,7 +2349,7 @@ async function readBudgetSelection(params:CatalogSearchParams){
   const transmissionMatches=compileFilterSelection(params.transmission);
   const driveMatches=compileFilterSelection(params.drive);
   const marketKey=params.market&&params.market!=='any'?cleanFacet(params.market).toLocaleLowerCase('ru-RU'):null;
-  let candidates=await filterBudgetRows(sourceRows,editedRow,row=>
+  const loadCandidates=()=>filterBudgetRows(sourceRows,editedRow,row=>
    (!wantedMakes || wantedMakes.has(cleanFacet(row[5].make).toLocaleLowerCase('ru-RU'))) &&
    ((!params.make && !params.model) || catalogSearchProjectionMatches({...row[5],market:row[0]} as CatalogSearchProjection,{make:params.make,model:params.model},compactModelKeys)) &&
    eligible.has(row[5].id) && (!params.color || matchesCatalogColor({...row[5],market:row[0]},params.color)) &&
@@ -2360,6 +2360,14 @@ async function readBudgetSelection(params:CatalogSearchParams){
    && driveMatches(row[5].drive) &&
    (!params.yearFrom || Number(row[5].year||0)>=params.yearFrom) && (!params.yearTo || Number(row[5].year||0)<=params.yearTo)
    && (index.filterVersion!==1 || ((!params.mileageFrom || projectionNumber(row[5].mileageKm,0)>=params.mileageFrom) && (!params.mileageTo || projectionNumber(row[5].mileageKm,Infinity)<=params.mileageTo))));
+  // Make-only membership is immutable within this selector/editorial/day fence.
+  // Retain its row identity across request-cache expiry so exact position hashes
+  // and ordering are shared by HTML and API. Prices and richer filters keep
+  // their existing authoritative path and freshness windows.
+  const stableBrandQuery=defaultBrandQuery && !params.model && metadataFields.every(key=>key==='make'||!(params as any)[key]);
+  let candidates=await (stableBrandQuery
+   ? stableBudgetSelections.get(index,eligibilityContext,JSON.stringify(['brand',marketKey,[...(wantedMakes||[])].sort()]),loadCandidates)
+   : loadCandidates());
   if(hasBudget && index.version===3){
    const ids=new Set(candidates.map(row=>row[5].id));
    const markets=[...new Set(candidates.map(row=>row[0]))];

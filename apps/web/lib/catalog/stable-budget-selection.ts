@@ -10,7 +10,7 @@ export class StableBudgetSelectionCache {
   let entry=this.entries.get(index);
   if(!entry||entry.context!==context){entry={context,scopes:new Map()};this.entries.set(index,entry);}
   const found=entry.scopes.get(market);if(found)return found;
-  // Only country scopes are admitted by the caller. Also bound this helper so
+  // Country and make-only metadata scopes are admitted by the caller. Bound it so
   // a future caller cannot accumulate arbitrary query combinations per index.
   if(entry.scopes.size>=8)entry.scopes.delete(entry.scopes.keys().next().value!);
   const value=load();entry.scopes.set(market,value);
