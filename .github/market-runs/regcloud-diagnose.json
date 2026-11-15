@@ -1,5 +1,5 @@
 {
-  "failedRelease": "3109d4fec023920317af145a6df9c540457649e4",
-  "probeGate": true,
-  "note": "Profile the exact rejected Encar candidate on its isolated loopback port; preserve production and restore stopped state."
+  "failedRelease": "d1e98873b4c7b6db1add61bc21a0eac3269121c8",
+  "probeHome": true,
+  "note": "Profile the rejected homepage on its isolated loopback port at cold, warm, 35s and 305s. Preserve production and restore stopped state."
 }
