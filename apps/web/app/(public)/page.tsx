@@ -70,13 +70,10 @@ export default async function HomePage({ searchParams }: { searchParams?: Promis
   const city = fromQuery || fromCookie;
   const specials = dealer.then(value => timing.measure("dealerRail", () => homeSpecialRail(city, value)))
     .catch(error => { console.error("home_specials_failed", error); return null; });
-  const catalogData = timing.measure("snapshot", () => readHomeCatalogSnapshot(10)).then(value => {
-    timing.setGeneration(value.generationId);
-    return timing.measure("counts", () => withAjesCount(value));
-  }).catch(error => {
-    console.error("home_initial_catalog_failed", error);
-    return { items: [], marketCounts: {}, total: 0, countIncomplete: true, marketCountInfo: {} };
-  });
+  const catalogData = timing.measure("snapshot",()=>readHomeCatalogSnapshot(10)).then(value=>{timing.setGeneration(value.generationId);return timing.measure("counts",()=>withAjesCount(value));}).catch((error) => {
+      console.error("home_initial_catalog_failed", error);
+      return { items: [], marketCounts: {}, total: 0, countIncomplete:true, marketCountInfo:{} };
+    });
   const greenData = timing.measure("green", () => readGreenCorner()).catch(() => null);
   const [catalog, green, pricedItems, greenItems] = await Promise.all([
     catalogData,
@@ -98,7 +95,7 @@ export default async function HomePage({ searchParams }: { searchParams?: Promis
         dealerGallerySlot={<Suspense fallback={<div className="min-h-[160px]" aria-busy="true"/>}><DealerGallery dealer={dealer}/></Suspense>}
         specialRailSlot={<Suspense fallback={null}><DealerSpecials prepared={specials}/></Suspense>}
         initialGreen={{items:greenItems,total:green?.items.length || 0}}
-        initialCity={city}
+        initialCity={fromQuery || fromCookie}
         initialOffers={pricedItems}
         initialMarketCounts={catalog.marketCounts}
         initialCount={catalog.total + (green?.items.length || 0)}
