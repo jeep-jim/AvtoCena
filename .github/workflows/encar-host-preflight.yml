@@ -1,0 +1,33 @@
+name: Check Encar host capacity without changing runtime
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/encar-host-preflight.yml]
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    environment: regcloud-staging
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Read disk, memory and installed release only
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+        run: |
+          set -euo pipefail
+          umask 077
+          key_file=$(mktemp)
+          trap 'rm -f "$key_file"' EXIT
+          printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
+          unset SSH_PRIVATE_KEY
+          ssh -i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts" root@151.248.113.177 'python3 -' <<'PY'
+          import json,subprocess,shutil,pathlib
+          disk=shutil.disk_usage('/')
+          mem={line.split(':')[0]:int(line.split()[1])*1024 for line in pathlib.Path('/proc/meminfo').read_text().splitlines()}
+          production=json.loads(subprocess.check_output(['docker','inspect','avtocena-production']))[0]
+          print(json.dumps({'readOnly':True,'diskAvailableBytes':disk.free,'diskRequiredBytes':8*1024**3,'diskReady':disk.free>8*1024**3,'memoryAvailableBytes':mem['MemAvailable'],'release':production['Config']['Labels'].get('org.opencontainers.image.revision'),'running':production['State']['Running'],'oomKilled':production['State']['OOMKilled']}))
+          PY
