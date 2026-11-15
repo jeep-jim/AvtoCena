@@ -18,10 +18,15 @@ concurrency:
   cancel-in-progress: false
 jobs:
   release:
-    if: github.ref == 'refs/heads/main' && ((github.event_name == 'push' && github.event.head_commit.message == 'Release Encar with prepared homepage and complete reconciliation coverage') || github.event_name == 'workflow_dispatch' || (github.event.workflow_run.id == 43600759493 && github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_repository.full_name == github.repository))
+    if: github.ref == 'refs/heads/main' && ((github.event_name == 'push' && github.event.head_commit.message == 'Release paid Encar with reserved I/O workers and verified cached image') || github.event_name == 'workflow_dispatch' || (github.event.workflow_run.id == 43600759493 && github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_repository.full_name == github.repository))
     environment: regcloud-staging
     runs-on: ubuntu-24.04
     timeout-minutes: 260
+    permissions:
+      contents: read
+      actions: write
+    outputs:
+      deferred_china_job: ${{ steps.defer_china.outputs.job_id }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -85,6 +90,12 @@ jobs:
           git fetch --depth=1 origin 26d640eacbaf9139bb9c53df1dfcccb90c70ffbb
           git restore --source=26d640eacbaf9139bb9c53df1dfcccb90c70ffbb -- .github/workflows/ci.yml .github/workflows/encyclopedia-activate-prepared.yml .github/workflows/encyclopedia-release.yml .github/workflows/owner-accept-prepared-873.yml .github/workflows/owner-resume-prepared-release.yml .github/workflows/regcloud-activate-release.yml .github/workflows/regcloud-activate.yml .github/workflows/regcloud-deploy.yml .github/workflows/regcloud-memory.yml .github/workflows/regcloud-overview.yml .github/workflows/regcloud-resume-japan.yml .github/workflows/regcloud-resume-korea-release.yml docs/operations/2026-11-11-accepted-browser-speed-baseline.json docs/operations/2026-11-11-accepted-speed-baseline.json docs/operations/2026-11-11-accepted-speed-browser-restored.json docs/operations/2026-11-11-budget-browser-idle.json docs/operations/2026-11-13-trucks-grid-release-manifest.json scripts/catalog-refresh-generation-pages.mjs scripts/lib/accepted-browser-speed.mjs scripts/lib/catalog-refresh-generation-pages.mjs scripts/regcloud-browser-verdict.py scripts/regcloud-deploy-production.sh scripts/regcloud-deploy-with-browser.sh scripts/regcloud-performance-gate.py scripts/regcloud-release-retention.py scripts/verify-frozen-speed-baselines.mjs tests/accepted-browser-speed.test.mjs tests/ajes-page-failure-evidence.test.ts tests/ajes-request-size.test.ts tests/browser/owner-filter-speed-live.mjs tests/catalog-refresh-generation-pages.test.mjs tests/catalog-truck-aliases.test.ts tests/green-corner-rail-visible.test.ts tests/regcloud-browser-handoff.test.py tests/regcloud-browser-verdict.test.py tests/regcloud-performance-gate.test.py tests/regcloud-release-retention.test.py tests/release-speed-guard-contract.test.mjs
           git restore --source="$RELEASE_SOURCE_SHA" -- scripts/catalog-refresh-generation-pages.mjs scripts/lib/catalog-refresh-generation-pages.mjs tests/catalog-refresh-generation-pages.test.mjs
+          python3 - <<'POOL_ENV'
+          from pathlib import Path
+          p=Path('scripts/regcloud-deploy-production.sh');value=p.read_text()
+          assert value.count('overrides={')==1 and 'UV_THREADPOOL_SIZE' not in value
+          p.write_text(value.replace('overrides={',"overrides={'UV_THREADPOOL_SIZE':'16','VIPS_CONCURRENCY':'1',",1))
+          POOL_ENV
       - uses: actions/setup-node@v4
         with:
           node-version: 24.22.1
@@ -92,6 +103,58 @@ jobs:
       - run: |
           export GITHUB_SHA="$RELEASE_SOURCE_SHA"
           npm ci
+      - name: Verify frozen release mechanics and catalog changes
+        run: |
+          test "$(node scripts/catalog-calculation-version.mjs)" = 6f74ce86dc1521cde8bff465b2a30e76180bab21ec645fe056f2ac341ef9b43f
+          set -euo pipefail
+          node scripts/verify-frozen-speed-baselines.mjs
+          node --test tests/release-speed-guard-contract.test.mjs
+          node --test tests/accepted-browser-speed.test.mjs tests/catalog-refresh-generation-pages.test.mjs
+          python3 tests/regcloud-performance-gate.test.py
+          python3 tests/regcloud-browser-verdict.test.py
+          python3 tests/regcloud-browser-handoff.test.py
+          python3 tests/regcloud-release-retention.test.py
+          npm audit --omit=dev --audit-level=high
+          npm run typecheck
+          node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/catalog-cooperative-sort.test.ts tests/catalog-search-cost.test.ts tests/catalog-filter-search.test.ts tests/catalog-market-brand-projection.test.ts tests/catalog-search-pricing-overlap.test.ts tests/catalog-market-page-boundary.test.ts tests/catalog-editorial-home.test.ts tests/dealer-showcase-overlap.test.ts tests/home-specials-pilot-overlap.test.ts tests/home-initial-catalog.test.ts tests/home-phase-timing.test.ts tests/home-editorial-empty.test.ts
+          node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/page-currency-converter.test.ts tests/catalog-budget-combined.test.ts tests/catalog-page-request.test.ts
+      - name: Defer only the already-collected overlapping China publisher
+        id: defer_china
+        timeout-minutes: 5
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python3 - <<'DEFER'
+          import json,subprocess,time,os
+          repo='jeep-jim/AvtoCena';run=43753103164
+          def api(path):return json.loads(subprocess.check_output(['gh','api','repos/'+repo+'/'+path]))
+          current=api('actions/runs/'+str(run))
+          assert current['path']=='.github/workflows/catalog-refresh-china.yml' and current['head_sha']=='f1a926e4de5df6502f764150115b8bf9e2a43dd3'
+          if current['status']=='completed':
+           print('Existing China publication already terminal; no deferral');raise SystemExit(0)
+          artifacts=api('actions/runs/'+str(run)+'/artifacts')['artifacts']
+          assert any(a['id']==14178273080 and a['digest']=='sha256:62f2ca35af55a75130d661d9a7cc267f282d6132af1c143aeb28b39b6ca974e6' and not a['expired'] for a in artifacts),'saved intake proof missing'
+          jobs=api('actions/runs/'+str(run)+'/jobs')['jobs']
+          assert any(j['name']=='refresh / collect (china)' and j['conclusion']=='success' for j in jobs),'collection not preserved'
+          publisher=next(j for j in jobs if j['name']=='refresh / publish (china)')
+          if publisher['status']=='completed':
+           print('China publisher already terminal; no deferral');raise SystemExit(0)
+          with open(os.environ['GITHUB_OUTPUT'],'a') as out:out.write('job_id='+str(publisher['id'])+'\n')
+          def cancel(endpoint):
+           result=subprocess.run(['gh','api','--method','POST','repos/'+repo+'/actions/runs/'+str(run)+'/'+endpoint],capture_output=True,text=True)
+           if result.returncode and api('actions/runs/'+str(run))['status']!='completed':raise RuntimeError('exact_publisher_cancellation_rejected')
+          cancel('cancel')
+          for _ in range(3):
+           if api('actions/runs/'+str(run))['status']=='completed':break
+           time.sleep(3)
+          if api('actions/runs/'+str(run))['status']!='completed':cancel('force-cancel')
+          for _ in range(20):
+           state=api('actions/runs/'+str(run))
+           if state['status']=='completed':
+            print(json.dumps({'deferredChinaJob':publisher['id'],'conclusion':state['conclusion'],'savedIntake':14178273080}));break
+           time.sleep(2)
+          else:raise RuntimeError('exact_publisher_stop_pending')
+          DEFER
       - name: Check published generation and CRM before installing the candidate
         env:
           JSON_STORAGE_DRIVER: object
@@ -127,20 +190,6 @@ jobs:
         run: |
           export GITHUB_SHA="$RELEASE_SOURCE_SHA"
           node --import tsx scripts/encyclopedia/wait-astra-apply.mjs
-      - name: Verify frozen release mechanics and catalog changes
-        run: |
-          set -euo pipefail
-          node scripts/verify-frozen-speed-baselines.mjs
-          node --test tests/release-speed-guard-contract.test.mjs
-          node --test tests/accepted-browser-speed.test.mjs tests/catalog-refresh-generation-pages.test.mjs
-          python3 tests/regcloud-performance-gate.test.py
-          python3 tests/regcloud-browser-verdict.test.py
-          python3 tests/regcloud-browser-handoff.test.py
-          python3 tests/regcloud-release-retention.test.py
-          npm audit --omit=dev --audit-level=high
-          npm run typecheck
-          node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/catalog-cooperative-sort.test.ts tests/catalog-search-cost.test.ts tests/catalog-filter-search.test.ts tests/catalog-market-brand-projection.test.ts tests/catalog-search-pricing-overlap.test.ts tests/catalog-market-page-boundary.test.ts tests/catalog-editorial-home.test.ts tests/dealer-showcase-overlap.test.ts tests/home-specials-pilot-overlap.test.ts tests/home-initial-catalog.test.ts tests/home-phase-timing.test.ts tests/home-editorial-empty.test.ts
-          node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/page-currency-converter.test.ts tests/catalog-budget-combined.test.ts tests/catalog-page-request.test.ts
       - name: Install private release evidence preservation
         run: |
           cat > "$RUNNER_TEMP/preserve-release-evidence.mjs" <<'DURABLE_RELEASE_EVIDENCE'
@@ -284,7 +333,61 @@ jobs:
           await fs.writeFile(path.join(root, filename), bytes);
           console.log(JSON.stringify({generation, rows:projection.items.length, bytes:bytes.length}));
           JS
+      - name: Reuse only the exact previously built image with matching private index and brand bytes
+        timeout-minutes: 5
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+        run: |
+          set -euo pipefail
+          export GITHUB_SHA="$RELEASE_SOURCE_SHA"
+          git restore --source="$RELEASE_SOURCE_SHA" --staged --worktree -- apps packages Dockerfile package.json package-lock.json
+          git diff --exit-code HEAD -- apps packages Dockerfile package.json package-lock.json
+          test "$(node scripts/catalog-calculation-version.mjs)" = 6f74ce86dc1521cde8bff465b2a30e76180bab21ec645fe056f2ac341ef9b43f
+          python3 - <<'PRIOR_IMAGE'
+          import json,subprocess
+          def api(path):return json.loads(subprocess.check_output(['gh','api','repos/jeep-jim/AvtoCena/'+path]))
+          run=api('actions/runs/43754659891')
+          assert run['head_sha']=='b913075fcd4dc7f793383ad883af4bb4684cea03' and run['status']=='completed' and run['conclusion']=='failure'
+          jobs=api('actions/runs/43754659891/jobs')['jobs']
+          steps=next(j for j in jobs if j['name']=='release')['steps']
+          for name in ['Verify isolated application source and exact allowed changes','Verify frozen release mechanics and catalog changes','Prepare private encyclopedia index for this release','Prepare the generation-pinned brand index that timed out on the server','Build existing application without production credentials','Install container runtime and load image (no application start)','Prepare exact price indexes before activating the release']:
+           assert any(step['name']==name and step['conclusion']=='success' for step in steps),name
+          PRIOR_IMAGE
+          index_digest=$(node -e "console.log(JSON.parse(require('fs').readFileSync('data/knowledge/encyclopedia/calculation-v1.json')).digest)")
+          brand_file="$RUNNER_TEMP/encar-private-layer/brands/$PAID_GENERATION/volkswagen-aa59343f9ebb354f.json"
+          brand_digest=$(sha256sum "$brand_file" | cut -d' ' -f1)
+          [[ "$index_digest" =~ ^[a-f0-9]{64}$ && "$brand_digest" =~ ^[a-f0-9]{64}$ && "$PAID_GENERATION" =~ ^[A-Za-z0-9_-]+$ ]]
+          key_file=$(mktemp)
+          trap 'rm -f "$key_file"' EXIT
+          printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
+          unset SSH_PRIVATE_KEY
+          ssh_opts=(-i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o ServerAliveInterval=30 -o ServerAliveCountMax=6 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts")
+          state=$(ssh "${ssh_opts[@]}" root@151.248.113.177 "bash -s -- '$RELEASE_SOURCE_SHA' '$PAID_GENERATION' '$index_digest' '$brand_digest'" <<'REUSE_IMAGE'
+          set -euo pipefail
+          release=$1; generation=$2; expected_index=$3; expected_brand=$4
+          image="avtocena-regcloud:$release"
+          if ! docker image inspect "$image" >/dev/null 2>&1; then echo MISSING; exit 0; fi
+          if test "$(docker image inspect --format '{{.Id}}' "$image")" != sha256:5d4d507918cc3be333f8c33ce73a4f0325213e43d15d459c3696c687e93cd422; then echo MISSING; exit 0; fi
+          test "$(docker image inspect --format '{{ index .Config.Labels "org.opencontainers.image.revision" }}' "$image")" = "$release"
+          if ! proof=$(docker run --rm --network none --read-only --memory 1g --cpus 1 --pids-limit 64 --entrypoint node "$image" -e 'const fs=require("fs"),crypto=require("crypto");(async()=>{const fd=fs.openSync("/app/data/knowledge/encyclopedia/calculation-v1.json","r"),head=Buffer.alloc(1024),n=fs.readSync(fd,head,0,1024,0);fs.closeSync(fd);const digest=head.subarray(0,n).toString("utf8").match(/"digest":"([a-f0-9]{64})"/)?.[1]||null;const file="/opt/avtocena/prepared-brands/"+process.argv[1]+"/volkswagen-aa59343f9ebb354f.json";let brand=null;if(fs.existsSync(file)){const hash=crypto.createHash("sha256");for await(const part of fs.createReadStream(file))hash.update(part);brand=hash.digest("hex");}console.log(JSON.stringify({digest,brand}));})().catch(()=>process.exit(1));' "$generation" 2>/dev/null); then echo MISSING; exit 0; fi
+          python3 - "$proof" "$expected_index" "$expected_brand" <<'CHECK_IMAGE_BYTES'
+          import json,sys,re
+          value=json.loads(sys.argv[1])
+          assert all(re.fullmatch('[a-f0-9]{64}',part) for part in sys.argv[2:])
+          print('READY' if value.get('digest')==sys.argv[2] and value.get('brand')==sys.argv[3] else 'MISSING')
+          CHECK_IMAGE_BYTES
+          REUSE_IMAGE
+          )
+          if test "$state" = READY; then
+            echo 'EXACT_IMAGE_READY=1' >> "$GITHUB_ENV"
+            echo "Reusing immutable image sha256:5d4d507918cc3be333f8c33ce73a4f0325213e43d15d459c3696c687e93cd422 with exact current brand bytes and encyclopedia digest"
+          else
+            test "$state" = MISSING
+            echo 'Verified prepared image unavailable for current inputs; building normally'
+          fi
       - name: Build existing application without production credentials
+        if: env.EXACT_IMAGE_READY != '1'
         env:
           NEXT_TELEMETRY_DISABLED: '1'
         run: |
@@ -309,6 +412,7 @@ jobs:
           cd "$RUNNER_TEMP"
           sha256sum avtocena-image.tar.gz > avtocena-image.tar.gz.sha256
       - name: Install container runtime and load image (no application start)
+        if: env.EXACT_IMAGE_READY != '1'
         shell: bash
         env:
           SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
@@ -620,3 +724,30 @@ jobs:
     needs: release
     uses: ./.github/workflows/verify-finish-paid-encar.yml
     secrets: inherit
+  resume-existing-china:
+    needs: [release, verify-and-retire]
+    if: ${{ always() && needs.release.outputs.deferred_china_job != '' }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      actions: write
+    steps:
+      - name: Resume only the cancelled publisher using its existing saved intake
+        env:
+          GH_TOKEN: ${{ github.token }}
+          DEFERRED_JOB: ${{ needs.release.outputs.deferred_china_job }}
+        run: |
+          python3 - <<'RESUME'
+          import os,json,subprocess,re,time
+          repo='jeep-jim/AvtoCena';job=os.environ['DEFERRED_JOB'];assert re.fullmatch('[0-9]+',job)
+          def api(path):return json.loads(subprocess.check_output(['gh','api','repos/'+repo+'/'+path]))
+          value=api('actions/jobs/'+job)
+          assert value['run_id']==43753103164 and value['name']=='refresh / publish (china)'
+          if value['status']=='completed' and value['conclusion']=='cancelled':
+           artifact=api('actions/runs/43753103164/artifacts')['artifacts']
+           assert any(a['id']==14178273080 and a['digest']=='sha256:62f2ca35af55a75130d661d9a7cc267f282d6132af1c143aeb28b39b6ca974e6' and not a['expired'] for a in artifact)
+           subprocess.check_call(['gh','api','--method','POST','repos/'+repo+'/actions/jobs/'+job+'/rerun'])
+           print(json.dumps({'resumedExistingChinaPublisher':job,'savedIntake':14178273080,'recollection':False}))
+          else:print(json.dumps({'ordinaryPublisherAlreadyContinuesOrFinished':True,'status':value['status'],'conclusion':value['conclusion']}))
+          RESUME
