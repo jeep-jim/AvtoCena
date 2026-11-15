@@ -32,12 +32,12 @@ jobs:
         run: |
           node --import tsx --input-type=module <<'JS'
           import {getJsonStorage} from './apps/web/lib/data.ts';
-          import {calculationVersion} from './scripts/catalog-calculation-version.mjs';
-          const storage=getJsonStorage(),manifest=await storage.readJson('catalog/manifest.json',null);
-          const version=calculationVersion(),root='catalog/generations/'+manifest.generationId+'/indexes/';
-          for(const scope of ['budget-markets-v7/'+version+'/','runtime-budget-prices-v3/','runtime-sort-prices-v3/']){
-            const rows=await storage.listObjects(root+scope);
-            const recent=rows.slice().sort((a,b)=>String(b.lastModified||'').localeCompare(String(a.lastModified||''))).slice(0,8);
-            console.log(JSON.stringify({readOnly:true,scope,objects:rows.length,recent:recent.map(r=>({path:r.key.slice(root.length),modified:r.lastModified,bytes:r.size}))}));
+          const storage=getJsonStorage();
+          const [manifest,lock]=await Promise.all([storage.readJson('catalog/manifest.json',null),storage.readJson('catalog/import-lock.json',null)]);
+          console.log(JSON.stringify({readOnly:true,generation:manifest?.generationId,publicationActive:Date.parse(lock?.lockedUntil||'')>Date.now(),operationType:lock?.operationType,startedAt:lock?.startedAt,heartbeatAt:lock?.heartbeatAt,lockedUntil:lock?.lockedUntil}));
+          for(const scope of ['catalog/runtime-budget-prices-v3/','catalog/runtime-sort-prices-v3/','catalog/generations/'+manifest.generationId+'/indexes/budget-markets-v3/']){
+            const rows=await storage.listObjects(scope);
+            const recent=rows.slice().sort((a,b)=>String(b.lastModified||'').localeCompare(String(a.lastModified||''))).slice(0,3);
+            console.log(JSON.stringify({readOnly:true,scope,objects:rows.length,recent:recent.map(r=>({path:r.key,modified:r.lastModified,bytes:r.size}))}));
           }
           JS
