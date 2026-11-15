@@ -1,5 +1,4 @@
 {
-  "failedRelease": "d84d25556f6ca0adb3ed3b84587db31f8791a836",
-  "probeHome": true,
-  "note": "Measure the 305-second homepage refresh on the stopped candidate from run 43706892769 attempt 2. Keep production serving the retained release."
+  "failedRelease": "3109d4fec023920317af145a6df9c540457649e4",
+  "note": "Inspect bounded error summaries of failed Encar release 43718450187 without starting candidate or changing production."
 }
