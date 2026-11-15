@@ -32,7 +32,9 @@ jobs:
           jobs=api('actions/runs/'+str(china)+'/jobs')['jobs']
           assert any(j['name']=='refresh / collect (china)' and j['conclusion']=='success' for j in jobs),'China collection not preserved'
           assert any(j['name']=='refresh / publish (china)' and j['status']=='in_progress' for j in jobs),'China publisher not active'
-          subprocess.check_call(['gh','api','--method','POST','repos/'+repo+'/actions/runs/'+str(china)+'/cancel'])
+          previous=api('actions/runs/43762243675')
+          assert previous['head_sha']=='ecd6bef20248f38e19609d1b9de9110523c3c020' and previous['conclusion']=='failure','normal cancellation evidence missing'
+          subprocess.check_call(['gh','api','--method','POST','repos/'+repo+'/actions/runs/'+str(china)+'/force-cancel'])
           for i in range(20):
            value=api('actions/runs/'+str(china))
            if value['status']=='completed':
