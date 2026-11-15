@@ -27,10 +27,18 @@ export const findDealer = requestCache(async (id: string) => {
   return rows.find(d => d.id === id) || null;
 });
 export const readShowcase = requestCache(async (id: string) => {
-  const dealer = await findDealer(id);
+  if (!validDealerId(id)) return null;
+  const missing = Symbol("missing_showcase");
+  const dealerPromise = findDealer(id);
+  const storedPromise = readDataJson<DealerShowcase | typeof missing>(`dealers/showcases/${id}.json`, missing);
+  // A failed/absent directory row still denies the profile. Consume an unused
+  // speculative read rejection; valid profiles await and propagate that error.
+  void storedPromise.catch(() => undefined);
+  const dealer = await dealerPromise;
   if (!dealer) return null;
   const base=defaultShowcase(id,dealer.name);
-  const stored=await readDataJson<DealerShowcase>(`dealers/showcases/${id}.json`,base);
+  const saved=await storedPromise;
+  const stored=saved===missing?base:saved;
   const pricing={...base.pricing,...stored.pricing};
   if(id===PILOT_DEALER_ID&&stored.pricing.distancePricing===undefined){
     pricing.originCity='Бишкек';pricing.distancePricing=true;

@@ -10,23 +10,54 @@ import {getCurrentUser} from '@/lib/auth';
 import {CreateModel} from '@/components/encyclopedia/CreateModel';
 import {LocalDirectory} from '@/components/encyclopedia/LocalDirectory';
 import {packDirectory} from '@/lib/encyclopedia/directory-wire';
-import {canEditEncyclopedia,readEncyclopedia} from '@/lib/encyclopedia/records';
+import {canEditEncyclopedia,MANIFEST} from '@/lib/encyclopedia/records';
 import {canonicalDirectoryModels} from '@/lib/encyclopedia/query';
 import {counted,fuelFilterKey} from '@/lib/encyclopedia/schema';
+import {getJsonStorage, type JsonStorage} from '@/lib/data';
+import {isEncyclopediaCar} from '@/lib/encyclopedia/scope';
+import type {EncyclopediaManifest} from '@/lib/encyclopedia/schema';
 import './encyclopedia.css';
 export const dynamic='force-dynamic';
 export const metadata:Metadata={title:'Энциклопедия автомобилей — модели и характеристики | АвтоЦена',description:'Постоянная энциклопедия АвтоЦена: марки, модели, модификации по годам, двигатели, привод и 30-минутная мощность. Таблица характеристик по годам.',alternates:{canonical:'/cars/autocatalog'},robots:{index:true,follow:true}};
-export default async function EncyclopediaPage({searchParams}:{searchParams:Promise<Record<string,string|string[]|undefined>>}){
- const [user,manifest]=await Promise.all([getCurrentUser(),readEncyclopedia()]);
- const raw=await searchParams,p=Object.fromEntries(Object.entries(raw).map(([k,v])=>[k,Array.isArray(v)?v[0]:v]));if(p.make){const make=catalogBrandPresentation(p.make).name;if(make!==p.make){const canonical=new URLSearchParams();for(const [key,value] of Object.entries(p))if(value!==undefined)canonical.set(key,key==='make'?make:value);redirect(`/cars/autocatalog?${canonical}`);}}const models=canonicalDirectoryModels((manifest?.models||[]).filter(m=>m.directorySnapshot||m.manualCreated));
- models.sort((a,b)=>`${a.make} ${a.model}`.localeCompare(`${b.make} ${b.model}`,'ru',{numeric:true}));
+const modelOrder = new Intl.Collator('ru', {numeric: true});
+
+function buildDirectory(manifest: EncyclopediaManifest | null) {
+ const models=canonicalDirectoryModels((manifest?.models||[]).filter(m=>isEncyclopediaCar(m)&&(m.directorySnapshot||m.manualCreated)));
+ models.sort((a,b)=>modelOrder.compare(`${a.make} ${a.model}`, `${b.make} ${b.model}`));
  const data=packDirectory(models.map(m=>({id:m.id,make:m.make,model:m.model,photo:protectedPhotoUrl(m.photo,m.photoMarket||''),years:m.years,fuels:m.fuels,needs30:m.needs30,hasUnknownYear:m.hasUnknownYear,directorySnapshot:m.directorySnapshot,manualCreated:m.manualCreated,compact:m.compact})));
  const makes=[...new Set(models.map(m=>m.make))].sort((a,b)=>a.localeCompare(b,'ru')),years=[...new Set(models.flatMap(m=>m.years))].sort((a,b)=>b-a),fuels=[...new Set(models.flatMap(m=>m.fuels.map(fuelFilterKey)))].sort();
+
+ return {data, makes, years, fuels, count: models.length, captured: Boolean(manifest?.directoryCapturedAt)};
+}
+
+type Directory = ReturnType<typeof buildDirectory>;
+let previous: {etag: string; directory: Directory} | undefined;
+let pending: Promise<Directory> | undefined;
+
+async function loadDirectory() {
+ const storage: JsonStorage = getJsonStorage();
+ if (previous && storage.readObjectMetadata) {
+   const metadata = await storage.readObjectMetadata(MANIFEST);
+   if (metadata.found && metadata.etag === previous.etag) return previous.directory;
+ }
+ const result = await storage.readJsonWithMeta<EncyclopediaManifest | null>(MANIFEST, null);
+ const directory = buildDirectory(result.value);
+ previous = result.found && result.etag ? {etag: result.etag, directory} : undefined;
+ return directory;
+}
+
+function readEncyclopediaDirectory() {
+ pending ??= loadDirectory().finally(() => { pending = undefined; });
+ return pending;
+}
+export default async function EncyclopediaPage({searchParams}:{searchParams:Promise<Record<string,string|string[]|undefined>>}){
+ const [user,{data,makes,years,fuels,count,captured}]=await Promise.all([getCurrentUser(),readEncyclopediaDirectory()]);
+ const raw=await searchParams,p=Object.fromEntries(Object.entries(raw).map(([k,v])=>[k,Array.isArray(v)?v[0]:v]));if(p.make){const make=catalogBrandPresentation(p.make).name;if(make!==p.make){const canonical=new URLSearchParams();for(const [key,value] of Object.entries(p))if(value!==undefined)canonical.set(key,key==='make'?make:value);redirect(`/cars/autocatalog?${canonical}`);}}
  return <main className="ac-ency-page ac-page-copy"><EditorialHeader backHref="/cars" backLabel="В каталог"/><div className="ac-ency-container">
   <CatalogBreadcrumbs items={[{label:'Главная',href:'/'},{label:'Каталог автомобилей',href:'/cars'},{label:'Энциклопедия',href:'/cars/autocatalog'},...(p.make?[{label:p.make,href:`/cars/autocatalog?make=${encodeURIComponent(p.make)}`}]:[])]}/>
-  <header className="ac-ency-intro"><div><h1>Энциклопедия автомобилей</h1><div className="ac-ency-count"><span className="ac-pulse-dot ac-pulse-dot--status"><span/></span>{counted(models.length,'model')} · {counted(makes.length,'make')}</div></div></header>
+  <header className="ac-ency-intro"><div><h1>Энциклопедия автомобилей</h1><div className="ac-ency-count"><span className="ac-pulse-dot ac-pulse-dot--status"><span/></span>{counted(count,'model')} · {counted(makes.length,'make')}</div></div></header>
   <div className="ac-knowledge-toolbar">{canEditEncyclopedia(user)&&<CreateModel/>}<Suspense><DirectoryAlphabet makes={makes}/></Suspense></div>
   <div className="ac-ency-filter-dock"><Suspense><DirectoryFilters makes={makes} years={years} fuels={fuels}/></Suspense></div>
-  <section className="ac-ency-results">{!manifest?.directoryCapturedAt?<p role="status">Список моделей ещё готовится. Сохранённые характеристики доступны по прежним ссылкам.</p>:<Suspense><LocalDirectory data={data} canEdit={canEditEncyclopedia(user)}/></Suspense>}</section>
+  <section className="ac-ency-results">{!captured?<p role="status">Список моделей ещё готовится. Сохранённые характеристики доступны по прежним ссылкам.</p>:<Suspense><LocalDirectory data={data} canEdit={canEditEncyclopedia(user)}/></Suspense>}</section>
  </div></main>;
 }

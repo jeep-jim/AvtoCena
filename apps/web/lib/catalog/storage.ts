@@ -1,3 +1,4 @@
+import {readEditorialHome,resetEditorialHomeCache} from './editorial-home';
 import {budgetSelectionFilterKey} from './budget-selection-key';
 import {homeSnapshotMarketIsEmpty} from "./home-editorial-empty";
 import {createHomePhaseTiming} from "./home-phase-timing";
@@ -56,6 +57,8 @@ import { hasModificationSelection, limitModificationInventory } from "./modifica
 import { prepareModificationRecovery } from "./modification-recovery";
 import { catalogOfferWithinRetention } from "./refresh-policy";
 import crypto from "node:crypto";
+import {readFile} from "node:fs/promises";
+import {basename, join} from "node:path";
 import sharp from "sharp";
 import { getJsonStorage, readDataJson, StorageConflictError, jsonReadByteLength, type JsonReadResult } from "../data";
 import { publishAiProductFeed } from "../ai-discovery";
@@ -206,12 +209,13 @@ const ALLOWED_IMAGE_HOSTS = [
 ];
 export { CATALOG_CHUNK_SIZE };
 export type OfferLocation = { market: CatalogMarket; chunk: string };
-export type CatalogManifest = { version: 2; generationId: string; updatedAt: string; markets: Record<string, { count: number; chunks: string[]; updatedAt: string }> };
+export type CatalogManifest = { version: 2; generationId: string; updatedAt: string; markets: Record<string, { count: number; chunks: string[]; updatedAt: string; provider?: "auto_api_encar" }> };
 type JapanAuctionArchiveManifest = { version: 1; updatedAt: string; retentionDays: 30; activeSlot: "a" | "b"; count: number; chunks: string[]; contentHash: string };
 export type CatalogFacets = { generationId: string; makes: string[]; models: Array<{ make: string; model: string; aliases?: string[]; popularityDecile?: number }>; markets: string[]; bodyTypes: string[]; fuels: string[]; transmissions: string[]; drives: string[] };
 export type CatalogBrandSummaryModel = { model: string; count: number; marketCounts: Record<string, number> };
 export type CatalogBrandSummary = { generationId: string; brands: Record<string, { make: string; count: number; marketCounts: Record<string, number>; models: CatalogBrandSummaryModel[] }> };
 export type CatalogSearchProjection = {
+  paidEncar?: true;
   chassisCode?:string; engineCode?:string; generation?:string;
   fuelPowertrainEvidence?:VehicleOffer["fuelPowertrainEvidence"];
   encyclopediaCalculation?:VehicleOffer["encyclopediaCalculation"];
@@ -231,7 +235,7 @@ export type CatalogSearchProjection = {
   sourcePrice?: number | null; sourceCurrency?: string | null; priceMode?: string; previousTotalRub?: number | null; priceDeltaRub?: number | null; priceChangedAt?: string;
   calculationStatus?: string; calculationSnapshot?: VehicleOffer["calculationSnapshot"]; publicVisibleRub?: number; publicSpecificationVerified?: boolean; cardImageUrl?: string; seriesId?: string; sourceGroup?: string; cardProjectionVersion?: 1 | 2 | 3;
 };
-export function publicOffer(offer: VehicleOffer): PublicVehicleOffer { offer=applyCatalogEditorial(offer); const safe = safePublicPricing(offer); const { operational, vin, frameNumber, sourceId, ...dto } = safe as any; return { ...dto, japanPowerEstimate:compactJapanPowerEstimate(safe), fuelPowertrainEvidence:compactFuelPowertrainEvidence(safe), chassisCode: /^[A-Za-z0-9][A-Za-z0-9-]{0,19}$/.test(String(operational?.chassisCode || dto.chassisCode || "").trim()) ? String(operational?.chassisCode || dto.chassisCode).trim() : undefined, bodyType:catalogBodyType(offer), catalogEntryKind:isChinaModelSpecification(offer)?"model_variant":undefined, cardImageUrl: dto.cardImageUrl ? protectedPhotoUrl(dto.cardImageUrl, offer.market) : undefined, japanExportRestriction: assessJapanExportRestriction(offer), images: offer.images.map((img) => ({ id: img.id, role: img.role, url: protectedPhotoUrl(img.url, offer.market), width: img.width, height: img.height, size: img.size, mimeType: img.mimeType })) } as any; }
+export function publicOffer(offer: VehicleOffer): PublicVehicleOffer { offer=applyCatalogEditorial(offer); const safe = safePublicPricing(offer); const { operational, vin, frameNumber, sourceId, ...dto } = safe as any; return { ...dto, ...(offer.market === "korea" && offer.sourceId === "encar_direct" && operational?.provider === "auto_api_encar" ? {paidEncar:true} : {}), japanPowerEstimate:compactJapanPowerEstimate(safe), fuelPowertrainEvidence:compactFuelPowertrainEvidence(safe), chassisCode: /^[A-Za-z0-9][A-Za-z0-9-]{0,19}$/.test(String(operational?.chassisCode || dto.chassisCode || "").trim()) ? String(operational?.chassisCode || dto.chassisCode).trim() : undefined, bodyType:catalogBodyType(offer), catalogEntryKind:isChinaModelSpecification(offer)?"model_variant":undefined, cardImageUrl: dto.cardImageUrl ? protectedPhotoUrl(dto.cardImageUrl, offer.market) : undefined, japanExportRestriction: assessJapanExportRestriction(offer), images: offer.images.map((img) => ({ id: img.id, role: img.role, url: protectedPhotoUrl(img.url, offer.market), width: img.width, height: img.height, size: img.size, mimeType: img.mimeType })) } as any; }
 export function compactPublicStorageOffer(offer: VehicleOffer): VehicleOffer {
   // Source adapters may retain complete HTML/JSON responses in operational.raw
   // for diagnostics. Public generations are immutable and were duplicating that
@@ -431,6 +435,10 @@ async function readManifest(): Promise<CatalogManifest> {
   manifestCache = { expiresAt: now + MANIFEST_CACHE_MS, promise };
   return promise;
 }
+export async function hasPublishedPaidEncar() {
+  const korea = (await readManifest()).markets?.korea;
+  return korea?.provider === "auto_api_encar" && korea.count > 0;
+}
 export async function catalogGenerationId() { return (await readManifest()).generationId; }
 async function readIndex<T>(generationId: string, path: string, fallback: T) { return readDataJson<T>(generationPath(generationId, `indexes/${path}`), fallback); }
 async function writeJsonAtomic(path: string, value: unknown, ifNoneMatch = true) { const storage = getJsonStorage(); try { await storage.writeJson(path, value, ifNoneMatch ? { ifNoneMatch: "*" } : undefined); } catch (e) { if (e instanceof StorageConflictError && ifNoneMatch) return; throw e; } }
@@ -479,6 +487,7 @@ export function searchProjectionFromOffer(offer: VehicleOffer): CatalogSearchPro
     },
     publicVisibleRub: visibleRub || undefined, publicSpecificationVerified: visibleRub > 0 && !catalogRequiredSpecificationRejectionReason(offer), cardImageUrl: rankedCatalogImageUrls(offer)[0] || undefined,
     seriesId: String(raw?.listing?.seriesId || raw?.seriesId || (offer as any)?.seriesId || "") || undefined,
+    ...(offer.market === "korea" && offer.sourceId === "encar_direct" && offer.operational?.provider === "auto_api_encar" ? {paidEncar:true as const} : {}),
     sourceGroup: String(offer.sourceId || "") || undefined, cardProjectionVersion: 3,
   };
 }
@@ -605,7 +614,28 @@ const CURRENT_PROJECTION_CACHE_MS = 5 * 60_000;
 const currentProjectionCache = new Map<string, { generationId: string; expiresAt: number; value?: { generationId: string; items: CatalogSearchProjection[] }; meta?: JsonReadResult<{ generationId: string; items: CatalogSearchProjection[] }>; promise: Promise<{ generationId: string; items: CatalogSearchProjection[] }> }>();
 // A single Volkswagen projection is 66 MB; a 32 MB budget never retained it.
 // Keys include the verified generation, so immutable brand rows can outlive a minute.
-const currentBrandProjectionCache = new DetailReadCache<{ generationId: string; items: CatalogSearchProjection[] }>({sizeOf:jsonReadByteLength,
+// Only the private serving image has prepared brand files. Each path includes
+// the publication generation, so later daily feeds fall through to storage.
+const preparedBrandBytes = new WeakMap<object, number>();
+async function readPreparedBrandProjection(generationId: string, key: string) {
+  const root = process.env.AVTOCENA_PREPARED_BRANDS_DIR;
+  if (!root || !/^[A-Za-z0-9_-]+$/.test(generationId)) return null;
+  let bytes: Buffer;
+  try {
+    bytes = await readFile(join(root, generationId, basename(key)));
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException).code === "ENOENT") return null;
+    throw error;
+  }
+  const projection = JSON.parse(bytes.toString("utf8")) as { generationId: string; items: CatalogSearchProjection[] };
+  if (projection.generationId !== generationId || !Array.isArray(projection.items)) {
+    throw new Error("prepared_brand_projection_invalid");
+  }
+  preparedBrandBytes.set(projection, bytes.length);
+  return projection;
+}
+
+const currentBrandProjectionCache = new DetailReadCache<{ generationId: string; items: CatalogSearchProjection[] }>({sizeOf:value => preparedBrandBytes.get(value) ?? jsonReadByteLength(value),
   maxEntries: 64, maxBytes: 384 * 1024 * 1024, ttlMs: 3600_000, concurrency: 2,
 });
 const unavailableReadCache=new UnavailableReadCache();
@@ -625,6 +655,7 @@ let offerLocationIndexCache: Promise<{ generationId?: string; byId: Record<strin
 const offerChunkCache = new Map<string, Promise<VehicleOffer[]>>();
 const OFFER_CHUNK_CACHE_MAX = Math.max(1, Math.min(24, Number(process.env.CATALOG_OFFER_CHUNK_CACHE_MAX || 8)));
 export function resetCatalogReadCachesForTests() {
+  resetEditorialHomeCache();
   resetBudgetSourceIndexes();
   unavailableReadCache.clear();
   previousLocationCache.clear();
@@ -751,6 +782,8 @@ async function readCurrentBrandProjection(make: string, generationId: string) {
   }
   const key = currentBrandProjectionPath(make);
   return currentBrandProjectionCache.get(`${generationId}:${key}`, async () => {
+    const prepared = await readPreparedBrandProjection(generationId, key);
+    if (prepared) return prepared;
     // Read the manifest-pinned object first. A staged public alias may already
     // belong to a future, unpublished generation and can be tens of MB large.
     const stored = await readDataJson<{generationId:string;items:CatalogSearchProjection[]}>(generationBrandProjectionPath(generationId,make), {generationId:"",items:[]});
@@ -909,15 +942,50 @@ export async function filterCatalogProjectionRows(rows:CatalogSearchProjection[]
  return selected;
 }
 function projectionFreshness(row: CatalogSearchProjection) { return Date.parse(String(row.auctionDate || row.sourcePublishedAt || row.firstSeenAt || row.updatedAt || "")) || 0; }
-export function catalogSearchProjectionSort(rows: CatalogSearchProjection[], sort = "updatedAt", city?: string) {
+function catalogProjectionComparator(sort = "updatedAt", city?: string) {
   const displayOrder=catalogDisplayOrderComparator();
   const dates=new WeakMap<CatalogSearchProjection,number>();
   const freshness=(row:CatalogSearchProjection)=>{let value=dates.get(row);if(value===undefined){value=projectionFreshness(row);dates.set(row,value);}return value;};
   const priceKeys=new WeakMap<CatalogSearchProjection,number>();
   const price = (row: CatalogSearchProjection, missing: number) => { if(priceKeys.has(row))return priceKeys.get(row)!||missing; const priced=city ? priceCardForCity(row,city).offer : row; const rub=calculatedCatalogPrice(priced); const value=!hasModificationSelection(row) && rub>0 ? rub : 0;priceKeys.set(row,value);return value||missing; };
   const terms=parseCatalogSort(sort)||[];
-  return rows.sort((a,b)=>terms.length?compareCatalogTerms(a,b,terms,row=>price(row,0))||a.id.localeCompare(b.id):displayOrder(a,b)||Number(price(b,0)>0)-Number(price(a,0)>0)||freshness(b)-freshness(a)||String(b.updatedAt||'').localeCompare(String(a.updatedAt||'')));
+  return (a:CatalogSearchProjection,b:CatalogSearchProjection)=>terms.length?compareCatalogTerms(a,b,terms,row=>price(row,0))||a.id.localeCompare(b.id):displayOrder(a,b)||Number(price(b,0)>0)-Number(price(a,0)>0)||freshness(b)-freshness(a)||String(b.updatedAt||'').localeCompare(String(a.updatedAt||''));
 
+}
+export function catalogSearchProjectionSort(rows: CatalogSearchProjection[], sort = "updatedAt", city?: string) {
+  return rows.sort(catalogProjectionComparator(sort, city));
+}
+/** Stable bounded runs let health, I/O and other visitors progress during large sorts. */
+async function sortCatalogRowsCooperatively(rows: CatalogSearchProjection[], compare: (a:CatalogSearchProjection,b:CatalogSearchProjection)=>number) {
+  const runSize=1024;
+  if(rows.length<=runSize)return rows.sort(compare);
+  let started=performance.now();
+  const yieldIfNeeded=async()=>{if(performance.now()-started>=8){await new Promise<void>(resolve=>setImmediate(resolve));started=performance.now();}};
+  let source:CatalogSearchProjection[]=new Array(rows.length),target:CatalogSearchProjection[]=new Array(rows.length);
+  for(let offset=0;offset<rows.length;offset+=runSize){
+    const run=rows.slice(offset,offset+runSize).sort(compare);
+    for(let i=0;i<run.length;i++)source[offset+i]=run[i];
+    await yieldIfNeeded();
+  }
+  for(let width=runSize;width<rows.length;width*=2){
+    for(let offset=0;offset<rows.length;offset+=2*width){
+      const middle=Math.min(offset+width,rows.length),end=Math.min(offset+2*width,rows.length);
+      let left=offset,right=middle;
+      for(let out=offset;out<end;out++){
+        target[out]=left<middle&&(right>=end||compare(source[left],source[right])<=0)?source[left++]:source[right++];
+        if((out&255)===255)await yieldIfNeeded();
+      }
+    }
+    [source,target]=[target,source];
+  }
+  for(let offset=0;offset<rows.length;offset+=256){
+    for(let i=offset;i<Math.min(offset+256,rows.length);i++)rows[i]=source[i];
+    await yieldIfNeeded();
+  }
+  return rows;
+}
+export function catalogSearchProjectionSortAsync(rows:CatalogSearchProjection[],sort="updatedAt",city?:string){
+  return sortCatalogRowsCooperatively(rows,catalogProjectionComparator(sort,city));
 }
 export function catalogSearchProjectionBalanceSources(rows: CatalogSearchProjection[]) {
   const groups = new Map<string, CatalogSearchProjection[]>();
@@ -937,12 +1005,12 @@ export function catalogSearchProjectionBalanceSources(rows: CatalogSearchProject
   rows.push(...unknown);
   return rows;
 }
-function sortCatalogSearchRows(rows: CatalogSearchProjection[], params: CatalogSearchParams) {
+async function sortCatalogSearchRows(rows: CatalogSearchProjection[], params: CatalogSearchParams) {
   const sort = params.sort || "updatedAt";
-  catalogSearchProjectionSort(rows, sort, params.city);
+  await catalogSearchProjectionSortAsync(rows, sort, params.city);
   if (sort === "updatedAt") {
     if(params.market && params.market !== "any") catalogSearchProjectionBalanceSources(rows);
-    rows.sort(catalogDisplayOrderComparator());
+    await sortCatalogRowsCooperatively(rows,catalogDisplayOrderComparator());
   }
 }
 async function projectionModelKeys(params: CatalogSearchParams) {
@@ -1285,7 +1353,7 @@ function canUseMarketLanding(params: CatalogSearchParams) {
 export async function buildCatalogMarketLanding(generationId: string, market: string, items: CatalogSearchProjection[], options: {now?:Date} = {}): Promise<MarketLanding> {
   const now=options.now||new Date();
   const rows = options.now ? prepareCatalogProjectionRowsForDate(items,now) : prepareCatalogProjectionRows(items);
-  sortCatalogSearchRows(rows, {market: market as CatalogMarket, sort: "updatedAt"});
+  await sortCatalogSearchRows(rows, {market: market as CatalogMarket, sort: "updatedAt"});
   return {version: 1, policyDate:new Date(now.getTime()+7*3600000).toISOString().slice(0,10), generationId, market, duplicatePolicy: REVIEWED_DUPLICATE_POLICY, sourceTotal: items.length, total: rows.length,
     items: rows.slice(0, MARKET_LANDING_LIMIT), facets: await facetsFromProjection(generationId, rows, {}, false)};
 }
@@ -1707,6 +1775,10 @@ export async function persistCatalogOffers(nextOffers: VehicleOffer[], options: 
       if (chunks.length % 50 === 0) progress("market_chunk_progress", {market, written: Math.min(i + CATALOG_CHUNK_SIZE, offers.length), total: offers.length});
     }
     markets[market] = { count: offers.length, chunks, updatedAt: Object.prototype.hasOwnProperty.call(preservedPublicOffersByMarket, market) ? (baselineManifest?.markets?.[market]?.updatedAt || now) : now };
+    if (market === "korea" && offers.length && offers.every(offer =>
+      offer.sourceId === "encar_direct" && offer.operational?.provider === "auto_api_encar")) {
+      markets[market].provider = "auto_api_encar";
+    }
     progress("market_chunks_written", { market, count: offers.length, chunks: chunks.length });
   }
   await rebuildIndexes(generationId, publishedOffers, byId, imagesById);
@@ -2277,7 +2349,7 @@ async function readBudgetSelection(params:CatalogSearchParams){
   const transmissionMatches=compileFilterSelection(params.transmission);
   const driveMatches=compileFilterSelection(params.drive);
   const marketKey=params.market&&params.market!=='any'?cleanFacet(params.market).toLocaleLowerCase('ru-RU'):null;
-  let candidates=await filterBudgetRows(sourceRows,editedRow,row=>
+  const loadCandidates=()=>filterBudgetRows(sourceRows,editedRow,row=>
    (!wantedMakes || wantedMakes.has(cleanFacet(row[5].make).toLocaleLowerCase('ru-RU'))) &&
    ((!params.make && !params.model) || catalogSearchProjectionMatches({...row[5],market:row[0]} as CatalogSearchProjection,{make:params.make,model:params.model},compactModelKeys)) &&
    eligible.has(row[5].id) && (!params.color || matchesCatalogColor({...row[5],market:row[0]},params.color)) &&
@@ -2288,6 +2360,14 @@ async function readBudgetSelection(params:CatalogSearchParams){
    && driveMatches(row[5].drive) &&
    (!params.yearFrom || Number(row[5].year||0)>=params.yearFrom) && (!params.yearTo || Number(row[5].year||0)<=params.yearTo)
    && (index.filterVersion!==1 || ((!params.mileageFrom || projectionNumber(row[5].mileageKm,0)>=params.mileageFrom) && (!params.mileageTo || projectionNumber(row[5].mileageKm,Infinity)<=params.mileageTo))));
+  // Make-only membership is immutable within this selector/editorial/day fence.
+  // Retain its row identity across request-cache expiry so exact position hashes
+  // and ordering are shared by HTML and API. Prices and richer filters keep
+  // their existing authoritative path and freshness windows.
+  const stableBrandQuery=defaultBrandQuery && !params.model && metadataFields.every(key=>key==='make'||!(params as any)[key]);
+  let candidates=await (stableBrandQuery
+   ? stableBudgetSelections.get(index,eligibilityContext,JSON.stringify(['brand',marketKey,[...(wantedMakes||[])].sort()]),loadCandidates)
+   : loadCandidates());
   if(hasBudget && index.version===3){
    const ids=new Set(candidates.map(row=>row[5].id));
    const markets=[...new Set(candidates.map(row=>row[0]))];
@@ -2469,7 +2549,7 @@ async function searchBudgetIndex(params:CatalogSearchParams,internalPageLimit:nu
     calculationSnapshot:{deliveryPricingBasis:basis}} as OrderedBudgetRow;
    positions.set(row,position);return row;
   });
-  sortCatalogSearchRows(rows,params);
+  await sortCatalogSearchRows(rows,params);
   return Uint32Array.from(rows,row=>positions.get(row)!);
  };
  const order=params.budgetFrom||params.budgetTo?await buildOrder():await compactSortOrders.get({generation:selected.generationId,index:selected.indexKey,revision:editorialRevision(),day:new Date(Date.now()+7*3600000).toISOString().slice(0,10),city:params.city||'',mode:`default:${params.market||'any'}:${useDisplayKeys}`,pricing:null},selected.rows,buildOrder);
@@ -2702,7 +2782,7 @@ async function searchOffersWithoutBudgetIndexForTestsEditorial(params:CatalogSea
     const prepared=await currentSearchPrices(rows,generationId);
     const modelKeys=await projectionModelKeys(params);
     const matching=prepared.filter(row=>catalogSearchProjectionMatches(row,params,modelKeys));
-    sortCatalogSearchRows(matching,params);
+    await sortCatalogSearchRows(matching,params);
     const page=Math.max(1,Number(params.page||1));
     const pageSize=Math.min(Math.max(1,Math.min(384,internalPageLimit)),Math.max(1,Number(params.pageSize||24)));
     return {generationId,total:matching.length,page,pageSize,items:matching.slice((page-1)*pageSize,page*pageSize).map(publicOfferFromProjection),usedIndexShards:catalogMakeFilterValues(params.make).map(currentBrandProjectionPath)};
@@ -2739,8 +2819,8 @@ async function searchOffersStored(params: CatalogSearchParams, internalPageLimit
     if (parts.every(({ projection }) => projection.generationId === manifest.generationId)) {
       const modelKeys = await projectionModelKeys(params);
       const rows = await filterCatalogProjectionRows(parts.flatMap(({ projection }) => projection.items || []),params,modelKeys);
-      if (needsProjection) sortCatalogSearchRows(rows, params);
-      else sortCatalogSearchRows(rows,params);
+      if (needsProjection) await sortCatalogSearchRows(rows, params);
+      else await sortCatalogSearchRows(rows,params);
       const total = rows.length;
       const pageRows = rows.slice((page - 1) * pageSize, page * pageSize);
       if (pageRows.every(projectionCanRenderCard)) return {
@@ -2759,8 +2839,8 @@ async function searchOffersStored(params: CatalogSearchParams, internalPageLimit
   if (current.generationId === manifest.generationId) {
     const modelKeys = await projectionModelKeys(params);
     const rows = await filterCatalogProjectionRows(current.items || [],params,modelKeys);
-    if (needsProjection) sortCatalogSearchRows(rows, params);
-    else sortCatalogSearchRows(rows,params);
+    if (needsProjection) await sortCatalogSearchRows(rows, params);
+    else await sortCatalogSearchRows(rows,params);
     const total = rows.length;
     const pageRows = rows.slice((page - 1) * pageSize, page * pageSize);
     if (pageRows.every(projectionCanRenderCard)) {
@@ -2790,7 +2870,7 @@ async function searchOffersStored(params: CatalogSearchParams, internalPageLimit
       .filter(projectionCanRenderCard)
       .filter((row) => catalogSearchProjectionMatches(row, params, modelKeys));
     if (needsProjection) {
-      sortCatalogSearchRows(rows, params);
+      await sortCatalogSearchRows(rows, params);
     } else {
       rows.sort((a, b) => {
         const af = Date.parse(String(a.sourcePublishedAt || a.firstSeenAt || a.updatedAt || "")) || 0;
@@ -2825,7 +2905,7 @@ async function searchOffersStored(params: CatalogSearchParams, internalPageLimit
     const modelKeys = await projectionModelKeys(params);
     const projectionRows = (await readProjectionRows(manifest, params))
       .filter((row) => allowed.has(row.id) && catalogSearchProjectionMatches(row, params, modelKeys));
-    sortCatalogSearchRows(projectionRows, params);
+    await sortCatalogSearchRows(projectionRows, params);
     total = projectionRows.length;
     pageIds = projectionRows.slice((page - 1) * pageSize, page * pageSize).map((row) => row.id);
     const markets = params.market && params.market !== "any" ? [String(params.market)] : MARKETS;
@@ -2873,6 +2953,7 @@ export async function buildCatalogOverviewFromProjections(generationId: string, 
 
 async function readHomeCatalogSnapshotOriginal(perMarket: number, timing: ReturnType<typeof createHomePhaseTiming>) {
   const manifest = await timing.measure("snapshotManifest",()=>readManifest());
+  const sourceCounts=Object.fromEntries(MARKETS.map(market=>[market,manifest.markets?.[market]?.count]));
   timing.setGeneration(manifest.generationId);
   const limit = Math.min(12, Math.max(1, Number(perMarket || 6)));
   const overview = await timing.measure("snapshotOverview",()=>readCatalogOverview(manifest.generationId)).catch(() => null);
@@ -2883,7 +2964,7 @@ async function readHomeCatalogSnapshotOriginal(perMarket: number, timing: Return
     return catalogOverviewMarketComplete(summary, count, limit);
   })) {
     const marketCounts = Object.fromEntries(MARKETS.map(market => [market, overview.markets[market].total]));
-    return {generationId: manifest.generationId, marketCounts,
+    return {generationId: manifest.generationId, sourceCounts, marketCounts,
       total: Object.values(marketCounts).reduce((sum, count) => sum + count, 0),
       items: MARKETS.flatMap(market => overview.markets[market].items.slice(0, limit)).sort(compareCatalogDisplayOrder)};
   }
@@ -2909,6 +2990,7 @@ async function readHomeCatalogSnapshotOriginal(perMarket: number, timing: Return
       });
       return {
         generationId: manifest.generationId,
+        sourceCounts,
         items:items.sort(compareCatalogDisplayOrder),
         marketCounts,
         total: Object.values(marketCounts).reduce((sum, count) => sum + count, 0),
@@ -2981,6 +3063,7 @@ async function readHomeCatalogSnapshotOriginal(perMarket: number, timing: Return
 
   return {
     generationId: manifest.generationId,
+    sourceCounts,
     items,
     marketCounts,
     total: Object.values(marketCounts).reduce((sum, count) => sum + count, 0),
@@ -3123,7 +3206,7 @@ async function readEditorialBrandSummary(){
 export async function readHomeCatalogSnapshot(perMarket=6){
  const timing=createHomePhaseTiming();
  return timing.measure("snapshotContext",()=>withCatalogEditorial(()=>timing.measure("snapshotBody",async()=>{
- const snapshot=await timing.measure("snapshotPrepared",()=>readHomeCatalogSnapshotOriginal(perMarket,timing));
+ const {sourceCounts,...snapshot}=await timing.measure("snapshotPrepared",()=>readHomeCatalogSnapshotOriginal(perMarket,timing));
  const marketCounts={...snapshot.marketCounts};
  let items=snapshot.items.map(item=>applyCatalogEditorial(item));
  const markets=MARKETS.slice(0,0);
@@ -3132,8 +3215,11 @@ export async function readHomeCatalogSnapshot(perMarket=6){
   if(homeSnapshotMarketIsEmpty(snapshot,market))continue;
   markets.push(market);
  }
+ const prepared=markets.length?await timing.measure('snapshotEditorialPrepared',()=>readEditorialHome(snapshot.generationId,sourceCounts,markets)):{};
+ const limit=Math.min(12,Math.max(1,perMarket));
  const refreshed=await mapWithConcurrency(markets,2,async market=>({market,
-  result:await timing.measure(`snapshotEditorial:${market}`,()=>searchOffers({market,pageSize:Math.min(12,Math.max(1,perMarket)),sort:'updatedAt'}))}));
+  result:prepared[market]?{total:prepared[market].total,items:prepared[market].items.slice(0,limit)}
+   :await timing.measure(`snapshotEditorial:${market}`,()=>searchOffers({market,pageSize:limit,sort:'updatedAt'}))}));
  for(const {market,result} of refreshed){
   marketCounts[market]=result.total;
   items=[...items.filter(item=>item.market!==market),...result.items];

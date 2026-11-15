@@ -4,7 +4,7 @@ import {normalizeCitySearch} from '../location/cities';
 import {PILOT_DEALER_ID} from './showcase-model';
 import {availableShowcase} from './program-store';
 import {withDealerRate} from './exchange-rate';
-import { readShowcase } from "./showcase-store";
+import { readDealers, readShowcase } from "./showcase-store";
 import {
   calculateSpecial,
   offerAvailability, offerAvailabilityLabel, offerSectionEnabled, offerSectionHeading, offerSectionSubtitle,
@@ -84,13 +84,15 @@ export function selectCityShowcases(showcases:DealerShowcase[],city:string){
  const key=normalizeCitySearch(city);
  return showcases.filter(s=>!key||(onlyPilot&&s.dealerId===PILOT_DEALER_ID)||s.offices.some(o=>normalizeCitySearch(o.city)===key));
 }
-export async function homeSpecialRail(city:string,pilot:DealerShowcase|null){
- const rows=await readDataJson<{id:string;status?:string}[]>('dealers/dealers.json',[]);
- const others=await Promise.all(rows.filter(d=>d.id!==PILOT_DEALER_ID&&d.status==='verified').map(async d=>{
+export async function homeSpecialRail(city:string,pilot:DealerShowcase|null|Promise<DealerShowcase|null>){
+ // Share the request-scoped directory with readShowcase. Other verified dealers
+ // need not wait for the independent pilot profile before starting their reads.
+ const othersPromise=readDealers().then(rows=>Promise.all(rows.filter(d=>d.id!==PILOT_DEALER_ID&&d.status==='verified').map(async d=>{
   const stored=await readShowcase(d.id);if(!stored)return null;
   const s=await availableShowcase(stored);return s.profileEnabled?s:null;
- }));
- const showcases=[...(pilot?[pilot]:[]),...others.filter((s):s is DealerShowcase=>!!s)];
+ })));
+ const [resolvedPilot,others]=await Promise.all([pilot,othersPromise]);
+ const showcases=[...(resolvedPilot?[resolvedPilot]:[]),...others.filter((s):s is DealerShowcase=>!!s)];
  const selected=selectCityShowcases(showcases,city);
  const priced=await Promise.all(selected.map(s=>((s.specialsEnabled||s.marketHomeEnabled)?withDealerRate(s):Promise.resolve(s))));
  return {heading:priced.length===1?priced[0].specialHeading:'Предложения дилеров',items:priced.flatMap(s=>publicRail(s,city,"home"))};
