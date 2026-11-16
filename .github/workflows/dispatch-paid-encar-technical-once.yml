@@ -11,11 +11,11 @@ concurrency:
   cancel-in-progress: false
 jobs:
   dispatch:
-    if: github.ref == 'refs/heads/main' && github.event.head_commit.message == 'Wait then review saved Korea technical correction d61464a5 on main'
+    if: github.ref == 'refs/heads/main' && github.event.head_commit.message == 'Review updated saved Korea correction 7052907f after lease'
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     env:
-      REPAIR_SOURCE: d61464a512f1d833a5af49d8a3e3b2ea754e231e
+      REPAIR_SOURCE: 7052907fb11d58ff919be11a43747d43df01b41e
       REPAIR_RELEASE: 83ff17075e9188dcf227c8752dc064248d5f42e0
       REPAIR_CALCULATOR: 4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90
     steps:
@@ -25,7 +25,7 @@ jobs:
           script: |
             const assert = require('node:assert/strict');
             const source = process.env.REPAIR_SOURCE,controller = context.sha,ref = 'main';
-            assert.equal(source,'d61464a512f1d833a5af49d8a3e3b2ea754e231e');
+            assert.equal(source,'7052907fb11d58ff919be11a43747d43df01b41e');
             assert.equal(context.ref,'refs/heads/main');assert.match(controller,/^[a-f0-9]{40}$/);
             const branch = (await github.rest.repos.getBranch({...context.repo,branch:ref})).data;
             assert.equal(branch.commit.sha,controller,'reviewed_main_controller_changed');
@@ -37,6 +37,37 @@ jobs:
               assert.ok(run && run.status === 'completed' && run.conclusion === 'success','source_check_not_passed:'+name);
             }
             const workflow = 'repair-paid-encar-technical.yml';
+            // Supersede only our exact read-only lease waiter. It has not
+            // entered plan/review/apply; no China or general workflow is touched.
+            const retired = 43866071844,retiredSha = '46a50cf408291d17ac939eb7b28b5d9bb120e615';
+            const prior = (await github.rest.actions.getWorkflowRun({...context.repo,run_id:retired})).data;
+            assert.equal(prior.id,retired);assert.equal(prior.head_sha,retiredSha);
+            assert.equal(prior.run_attempt,1);assert.equal(prior.head_branch,'main');
+            assert.equal(prior.event,'workflow_dispatch');assert.equal(prior.path,'.github/workflows/'+workflow);
+            const priorJobs = (await github.rest.actions.listJobsForWorkflowRun({...context.repo,run_id:retired,per_page:100})).data;
+            assert.equal(priorJobs.total_count,1);assert.equal(priorJobs.jobs.length,1);
+            const oldJob = priorJobs.jobs[0];assert.equal(oldJob.id,133294841553);assert.equal(oldJob.run_id,retired);
+            const oldSteps = new Map(oldJob.steps.map(step=>[step.name,step]));
+            const oldApply = oldSteps.get('Apply the exact reviewed receipt with the same controller');
+            assert.ok(oldApply && (oldApply.status==='pending' || oldApply.conclusion==='skipped'),'retired_repair_apply_may_have_started');
+            if (prior.status !== 'completed') {
+              assert.equal(oldSteps.get('Wait read-only for the existing catalog publication')?.status,'in_progress','retired_repair_not_waiting');
+              assert.equal(oldSteps.get('Complete read-only plan through the unchanged source helper')?.status,'pending','retired_plan_may_have_started');
+              await github.rest.actions.cancelWorkflowRun({...context.repo,run_id:retired});
+              let terminal = false;
+              for (let i=0;i<20;i++) {
+                const current = (await github.rest.actions.getWorkflowRun({...context.repo,run_id:retired})).data;
+                assert.equal(current.head_sha,retiredSha);assert.equal(current.run_attempt,1);
+                if (current.status==='completed') {
+                  assert.equal(current.conclusion,'cancelled');terminal=true;break;
+                }
+                await new Promise(resolve=>setTimeout(resolve,2000));
+              }
+              assert.ok(terminal,'retired_waiter_not_terminal');
+            } else {
+              assert.ok(['cancelled','failure','timed_out'].includes(prior.conclusion),'retired_repair_unexpected_outcome');
+            }
+            assert.equal((await github.rest.repos.getBranch({...context.repo,branch:ref})).data.commit.sha,controller,'reviewed_main_controller_changed');
             const active = (await github.rest.actions.listWorkflowRuns({
               ...context.repo,workflow_id:workflow,per_page:100
             })).data.workflow_runs.filter(run => run.status !== 'completed');

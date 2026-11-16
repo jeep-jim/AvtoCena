@@ -32,7 +32,7 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 330
     env:
-      PAID_REPAIR_SOURCE_SHA: d61464a512f1d833a5af49d8a3e3b2ea754e231e
+      PAID_REPAIR_SOURCE_SHA: 7052907fb11d58ff919be11a43747d43df01b41e
       PAID_REPAIR_CONTROLLER_SHA: ${{ inputs.controller_sha }}
       PAID_REPAIR_EXPECTED_RELEASE: ${{ inputs.expected_release }}
       PAID_REPAIR_EXPECTED_CALCULATOR: ${{ inputs.expected_calculator }}
@@ -53,7 +53,7 @@ jobs:
           import assert from 'node:assert/strict';
           assert.equal(process.env.GITHUB_REF,'refs/heads/main');
           assert.equal(process.env.GITHUB_EVENT_NAME,'workflow_dispatch');
-          assert.equal(process.env.PAID_REPAIR_SOURCE_SHA,'d61464a512f1d833a5af49d8a3e3b2ea754e231e');
+          assert.equal(process.env.PAID_REPAIR_SOURCE_SHA,'7052907fb11d58ff919be11a43747d43df01b41e');
           assert.equal(process.env.PAID_REPAIR_CONTROLLER_SHA,process.env.GITHUB_SHA);
           assert.match(process.env.PAID_REPAIR_EXPECTED_RELEASE,/^[a-f0-9]{40}$/);
           assert.match(process.env.PAID_REPAIR_EXPECTED_CALCULATOR,/^[a-f0-9]{64}$/);
@@ -69,7 +69,7 @@ jobs:
           import {execFileSync} from 'node:child_process';
           import {fileURLToPath, pathToFileURL} from 'node:url';
 
-          export const SOURCE = 'd61464a512f1d833a5af49d8a3e3b2ea754e231e';
+          export const SOURCE = '7052907fb11d58ff919be11a43747d43df01b41e';
           export const WORKFLOW = '.github/workflows/repair-paid-encar-technical.yml';
           export const REPOSITORY = 'jeep-jim/AvtoCena';
           export const REVIEW_MS = 20 * 60_000;
