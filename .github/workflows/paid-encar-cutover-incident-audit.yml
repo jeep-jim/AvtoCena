@@ -58,4 +58,21 @@ jobs:
           for name in [x.split()[0] for x in ps.splitlines() if '9cb571fc' in x][:2]:
               logs=cmd('docker','logs','--since','2026-11-16T03:30:00Z','--until','2026-11-16T03:32:30Z',name)
               print('CANDIDATE_LOG_COUNTS',name,json.dumps({'lines':len(logs.splitlines()),'error':len(re.findall(r'\b(error|fatal|exception)\b',logs,re.I)),'memory':len(re.findall(r'heap out of memory|allocation failed',logs,re.I)),'ajes_failure':len(re.findall(r'AJES_PUBLIC_FAILURE',logs))}))
+          print('PROXY_CONFIG',json.dumps({'access_log_off':bool(re.search(r'access_log\\s+off',cmd('nginx','-T'))),'proxy_timeout_count':len(re.findall(r'proxy_read_timeout',cmd('nginx','-T')))}))
+          for p in [pathlib.Path('/var/log/nginx/error.log'),pathlib.Path('/var/log/nginx/error.log.1')]:
+              if not p.exists():continue
+              for x in p.read_text(errors='replace').splitlines():
+                  if '2026/11/16 03:31' in x and ('upstream timed out' in x or 'connect() failed' in x or 'no live upstreams' in x):
+                      m=re.search(r'request: "([^"]+)"',x)
+                      print('ERROR_DETAIL',json.dumps({'type':'upstream_timeout' if 'upstream timed out' in x else 'connect_failed' if 'connect() failed' in x else 'no_upstream','time':x[:19],'request':m.group(1)[:160] if m else None}))
+          for name in [x.split()[0] for x in ps.splitlines() if '9cb571fc' in x][:1]:
+              logs=cmd('docker','logs','--timestamps','--since','2026-11-16T03:29:00Z','--until','2026-11-16T03:32:30Z',name)
+              failures=collections.Counter()
+              per_minute=collections.Counter()
+              for x in logs.splitlines():
+                  m=re.search(r'AJES_PUBLIC_FAILURE\\s+(\\w+)',x)
+                  if m:
+                      failures[m.group(1) if m.group(1) in {'visitor_restricted','client_ip_missing','request_failed','request_timeout','connect_timeout','invalid_response'} else 'other']+=1
+                      per_minute[x[:16]]+=1
+              print('AJ_FALLBACK',json.dumps({'reasons':dict(failures),'minutes':dict(per_minute),'totalLogLines':len(logs.splitlines())}))
           PY
