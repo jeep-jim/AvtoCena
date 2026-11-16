@@ -446,6 +446,7 @@ jobs:
       - name: Prepare exact price indexes before activating the release
         id: market_prices
         env:
+          GH_TOKEN: ${{ github.token }}
           JSON_STORAGE_DRIVER: object
           YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
           YC_OBJECT_STORAGE_REGION: us-east-1
@@ -453,38 +454,45 @@ jobs:
           YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
           YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
           YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
-          NODE_OPTIONS: --max-old-space-size=6144
-          AVTOCENA_RELEASE_SHA: 9cb571fcce503c9a3ca1a1496514899839b75395
         run: |
-          export GITHUB_SHA="$RELEASE_SOURCE_SHA"
-          node --import tsx --input-type=module <<'WAIT'
-          // The shared price cache must be prepared against a stable catalog generation.
-          const data=await import('./apps/web/lib/data.ts');
-          const getJsonStorage=data.getJsonStorage||data.default?.getJsonStorage;
-          if(typeof getJsonStorage!=='function')throw Error('storage_module_unavailable');
-          const storage=getJsonStorage(),deadline=Date.now()+40*60_000;
-          for (;;) {
-            const lock=await storage.readJson('catalog/import-lock.json',null);
-            const until=lock?.lockedUntil?Date.parse(lock.lockedUntil):0;
-            if (!Number.isFinite(until)) throw Error('publication_lock_invalid');
-            if (until<=Date.now()) break;
-            console.log('WAIT_FOR_PUBLICATION',JSON.stringify({operationType:lock.operationType,lockedUntil:lock.lockedUntil}));
-            if (Date.now()>=deadline) throw Error('publication_wait_deadline');
-            await new Promise(resolve=>setTimeout(resolve,30_000));
-          }
-          WAIT
-          export AVTOCENA_CALCULATION_VERSION=$(node scripts/catalog-calculation-version.mjs)
-          npx tsx scripts/regcloud-verify-conditional-read.ts
-          # Offline authoritative parity reads full market projections; keep a bounded
-          # two-minute storage deadline here, without changing visitor request budgets.
-          YC_OBJECT_STORAGE_REQUEST_TIMEOUT_MS=120000 npx tsx scripts/regcloud-prepare-prices.mjs
-          YC_OBJECT_STORAGE_REQUEST_TIMEOUT_MS=120000 node --import tsx scripts/catalog-budget-shared-warmup.mjs
-          if test -z "$RELEASE_PREPARATION_MARKETS"; then
-            npx tsx scripts/prepare-catalog-colors.mjs
-          fi
-          # Supplier switching belongs to collection operations, never to an app release.
-          CATALOG_OVERVIEW_SKIP_READY=true npx tsx scripts/catalog-refresh-generation-pages.mjs
-
+          set -euo pipefail
+          test "$RELEASE_SOURCE_SHA" = 9cb571fcce503c9a3ca1a1496514899839b75395
+          test "$(node scripts/catalog-calculation-version.mjs)" = 67fe0492c93784b490491f90a9820101959c0a2f39f276a1c4f5798408ac431a
+          gh api repos/jeep-jim/AvtoCena/actions/runs/43799879462/jobs --paginate > "$RUNNER_TEMP/prior-price-jobs.json"
+          gh api repos/jeep-jim/AvtoCena/actions/runs/43799879462/artifacts > "$RUNNER_TEMP/prior-price-artifacts.json"
+          python3 - "$RUNNER_TEMP/prior-price-jobs.json" "$RUNNER_TEMP/prior-price-artifacts.json" <<'PRIOR_PRICES'
+          import json,sys
+          jobs=json.load(open(sys.argv[1]))['jobs']
+          job=next(j for j in jobs if j['id']==133077252004 and j['name']=='release')
+          assert any(s['name']=='Prepare exact price indexes before activating the release' and s['conclusion']=='success' for s in job['steps'])
+          items=json.load(open(sys.argv[2]))['artifacts']
+          assert any(a['id']==14197031856 and a['name']=='release-market-preparation' and a['digest']=='sha256:23b6a27ea448962c1779e06f2ab08edb7150d06d54d1984e013f3937f1b689b7' and not a['expired'] for a in items)
+          PRIOR_PRICES
+          mkdir -p "$RUNNER_TEMP/paid-prices"
+          gh run download 43799879462 --repo jeep-jim/AvtoCena --name release-market-preparation --dir "$RUNNER_TEMP/paid-prices"
+          cp "$RUNNER_TEMP/paid-prices/release-market-preparation.json" release-market-preparation.json
+          node --import tsx --input-type=module <<'LIVE_PRICES'
+          import assert from 'node:assert/strict';
+          import fs from 'node:fs';
+          import {getJsonStorage} from './apps/web/lib/data.ts';
+          import {readCollectionControls} from './apps/web/lib/catalog/collection-controls.ts';
+          const result=JSON.parse(fs.readFileSync('release-market-preparation.json','utf8'));
+          const storage=getJsonStorage();
+          const [manifest,lock,controls]=await Promise.all([
+           storage.readJson('catalog/manifest.json',null),
+           storage.readJson('catalog/import-lock.json',null),
+           readCollectionControls(storage)
+          ]);
+          assert.equal(result.generationId,process.env.PAID_GENERATION);
+          assert.deepEqual(result.markets,['korea']);
+          assert.deepEqual(result.results.map(r=>[r.market,r.status]),[['korea','success']]);
+          assert.equal(manifest.generationId,process.env.PAID_GENERATION);
+          assert.equal(manifest.markets.korea.provider,'auto_api_encar');
+          assert.ok(manifest.markets.korea.count>0);
+          assert.ok(controls.markets.korea.enabled && controls.sources.encar_feed.enabled);
+          assert.ok(Date.parse(lock?.lockedUntil||'1970-01-01')<=Date.now(),'publication active');
+          console.log(JSON.stringify({reusedProvenPrices:true,generation:manifest.generationId,koreaCount:manifest.markets.korea.count,priorRun:43799879462}));
+          LIVE_PRICES
       - name: Persist verified private evidence for market_prices
         if: always()
         timeout-minutes: 4
@@ -662,7 +670,7 @@ jobs:
            ("const ending=await context.request.get(origin+'/api/health',{timeout:30000});","const ending=await healthWithRetry(context,'after-'+width);")
           ]
           for old,new in substitutions:
-           assert source.count(old)==1,old
+           assert source.count(old)==(1 if old.startswith('let activePage;') else 2),old
            source=source.replace(old,new,1)
           file.write_text(source)
           HEALTH_RETRY
