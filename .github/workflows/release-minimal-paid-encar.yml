@@ -991,3 +991,5 @@ jobs:
           else:print(json.dumps({'ordinaryPublisherAlreadyContinuesOrFinished':True,'status':value['status'],'conclusion':value['conclusion']}))
           RESUME
 
+
+# Activation binds the verified 83ff170 candidate and persisted selector/price readbacks.
