@@ -1,0 +1,134 @@
+name: Japan Allion single response shape
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: [.github/workflows/japan-single-response-shape.yml]
+permissions:
+  contents: read
+jobs:
+  inspect:
+    if: github.run_attempt == 1
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    environment: regcloud-staging
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          ref: 83ff17075e9188dcf227c8752dc064248d5f42e0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - run: npm ci --ignore-scripts --no-audit
+      - name: Bundle the exact source with a bounded shape-only wrapper
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = 83ff17075e9188dcf227c8752dc064248d5f42e0
+          cat > /tmp/japan-single-response-shape.ts <<'PROBE_SOURCE'
+          import {createHash} from 'node:crypto';
+          import {gunzipSync} from 'node:zlib';
+          import {getJsonStorage} from './apps/web/lib/data';
+          import {createAjesClient,AjesUnavailable} from './apps/web/lib/catalog/ajes-client';
+          import {ajesPassword} from './apps/web/lib/catalog/ajes-settings';
+          import {ajesEndpoint} from './apps/web/lib/catalog/ajes-routing';
+          import {ajesQuery} from './apps/web/lib/catalog/ajes-query';
+          import {assertCollectionEnabled,clearCollectionControlsCache} from './apps/web/lib/catalog/collection-controls';
+          import {reserveAjesRequest} from './apps/web/lib/catalog/ajes-quota';
+          
+          const MAX_BYTES=2*1024*1024;
+          const exactInput={table:'stats',make:'Toyota',model:'Allion',page:1,pageSize:24} as const;
+          function textFlags(text:unknown,secret:string|undefined){
+            const value=typeof text==='string'?text:'';
+            return {present:typeof text==='string',shortBotOrBan:value.length<=512&&/^\s*(?:bot|ban)\d*(?:\s|$)/i.test(value),limitOrQuota:/\b(?:quota|limit(?:ed)?|too many requests|rate.?limit)\b/i.test(value),sqlSyntax:/sql\s*syntax|syntax\s*error|SQLSTATE|you have an error in your sql|mysql(?:i)?[ _]?(?:error|query)/i.test(value),accessRefusal:/\b(?:forbidden|banned|blocked|access denied|unauthorized)\b/i.test(value),credentialEcho:!!secret&&value.includes(secret),credentialError:/\b(?:invalid|wrong|expired|missing)\s+(?:api\s*)?(?:key|code|password|token)|\b(?:authentication|authorization)\s+(?:error|failed)/i.test(value)};
+          }
+          function jsonShape(text:string,secret:string|undefined){
+            let value:any;let parsedRaw=false,parsedAfterBom=false;
+            try{value=JSON.parse(text);parsedRaw=true;}catch{if(text.charCodeAt(0)===0xfeff)try{value=JSON.parse(text.slice(1));parsedAfterBom=true;}catch{}}
+            const parsed=parsedRaw||parsedAfterBom;
+            const root=parsed?(Array.isArray(value)?'array':value===null?'null':typeof value):'unparsed';
+            const object=root==='object'?value:null,keys=object?Object.keys(object):[],numericKeys=keys.filter(key=>/^(?:0|[1-9]\d*)$/.test(key));
+            const indices=numericKeys.map(Number).sort((a,b)=>a-b),numericValues=numericKeys.map(key=>object[key]);
+            const first=numericKeys.length?object[String(indices[0])]:null;
+            const has=(obj:any,key:string)=>!!obj&&typeof obj==='object'&&Object.prototype.hasOwnProperty.call(obj,key);
+            return {parsedRaw,parsedAfterBom,root,arrayLength:Array.isArray(value)?value.length:null,badRowCount:Array.isArray(value)?value.filter(row=>!row||typeof row!=='object'||Array.isArray(row)).length:null,keyCount:object?keys.length:null,numericKeyCount:object?numericKeys.length:null,allNumericKeys:!!object&&keys.length>0&&numericKeys.length===keys.length,contiguousFromZero:indices.length>0&&indices.every((n,i)=>Number.isSafeInteger(n)&&n===i),contiguousFromOne:indices.length>0&&indices.every((n,i)=>Number.isSafeInteger(n)&&n===i+1),numericRowValuesObjects:numericValues.length>0&&numericValues.every(row=>!!row&&typeof row==='object'&&!Array.isArray(row)),numericValueArrayCount:numericValues.filter(Array.isArray).length,firstNumericValueFieldFlags:{ID:has(first,'ID'),MARKA_NAME:has(first,'MARKA_NAME'),MODEL_NAME:has(first,'MODEL_NAME')},hasError:has(object,'error'),hasMessage:has(object,'message'),hasData:has(object,'data'),hasResult:has(object,'result'),dataIsArray:Array.isArray(object?.data),resultIsArray:Array.isArray(object?.result),rootStringFlags:textFlags(typeof value==='string'?value:undefined,secret),errorFlags:textFlags(object?.error,secret),messageFlags:textFlags(object?.message,secret)};
+          }
+          function bodyShape(body:Buffer,headers:Headers,secret:string|undefined){
+            const type=headers.get('content-type')?.split(';',1)[0].trim().toLowerCase()||'absent';
+            const encoding=headers.get('content-encoding')?.trim().toLowerCase()||'absent';
+            const length=headers.get('content-length');
+            const gzip=body[0]===31&&body[1]===139;
+            let decoded:Buffer|null=body,gzipDecode:'not_needed'|'success'|'failed'='not_needed',gzipError:string|null=null;
+            if(gzip){try{decoded=gunzipSync(body,{maxOutputLength:MAX_BYTES});gzipDecode='success';}catch(error:any){decoded=null;gzipDecode='failed';gzipError=['Z_DATA_ERROR','Z_BUF_ERROR','ERR_BUFFER_TOO_LARGE'].includes(error?.code)?error.code:'other';}}
+            const text=decoded?.toString('utf8')||'';
+            return {contentType:['application/json','text/json','text/plain','text/html','application/octet-stream','application/gzip','absent'].includes(type)?type:'other',contentEncoding:['gzip','deflate','br','identity','absent'].includes(encoding)?encoding:'other',encodedContentLength:length&&/^\d+$/.test(length)&&Number.isSafeInteger(Number(length))?Number(length):null,encodedBytesMeasured:null,fetchBodyBytes:body.length,decodedBytes:decoded?.length??null,gzipMagic:gzip,gzipCompressionMethod:gzip&&body.length>2?body[2]:null,gzipReservedFlags:gzip&&body.length>3?body[3]&224:null,nonstandardGzipHeader:gzip&&body.length>3&&(body[2]!==8||(body[3]&224)!==0),gzipDecode,gzipError,zlibHeader:body[0]===120&&[1,94,156,218].includes(body[1]),utf8Bom:decoded?.[0]===239&&decoded?.[1]===187&&decoded?.[2]===191,htmlLike:/^\s*(?:<!doctype\s+html|<html\b)/i.test(text),bodyFlags:textFlags(text,secret),json:decoded?jsonShape(text,secret):null};
+          }
+          
+          async function main(){
+            const ip=process.env.AJES_DIAG_IP;
+            if(ip!=='151.248.113.177'||process.env.JSON_STORAGE_DRIVER!=='object')throw Error('diagnostic_identity_guard');
+            const storage=getJsonStorage(),quotaKey='catalog/operations/ajes-quota-stats.json';
+            const originalWrite=storage.writeJson.bind(storage);let quotaWrites=0;
+            storage.writeJson=async(key,value,condition)=>{if(key!==quotaKey||!condition||++quotaWrites>8)throw Error('diagnostic_storage_write_guard');return originalWrite(key,value,condition);};
+            for(const method of ['deleteJson','putBinary','deleteBinary','deleteObjects','deletePrefix','listObjects','listBucketObjects','listObjectVersions','listMultipartUploads'])(storage as any)[method]=()=>{throw Error('diagnostic_storage_mutation_guard');};
+            const realFetch=globalThis.fetch;
+            const prefix='/'+process.env.YC_OBJECT_STORAGE_BUCKET+'/'+String(process.env.YC_OBJECT_STORAGE_PREFIX||'').replace(/^\/+|\/+$/g,'')+'/';
+            const readPaths=new Set(['integrations/ajes/config.json','catalog/operations/collection-controls-v1.json',quotaKey].map(key=>prefix+key));
+            let objectRequests=0;
+            globalThis.fetch=async(input,init={})=>{
+              const url=new URL(input instanceof Request?input.url:String(input)),method=String(init.method??(input instanceof Request?input.method:'GET')).toUpperCase();
+              if(url.origin!=='https://s3.regru.cloud'||!readPaths.has(url.pathname)||url.search||++objectRequests>40||(!['GET','HEAD'].includes(method)&&!(method==='PUT'&&url.pathname===prefix+quotaKey)))throw Error('diagnostic_storage_network_guard');
+              return realFetch(input,{...init,redirect:'error'});
+            };
+            const query=ajesQuery(exactInput),endpoint=ajesEndpoint(ip);
+            if(query.table!=='stats'||query.kind!=='list'||query.page!==1||query.pageSize!==24||new URL(endpoint).origin!=='http://87.242.72.57')throw Error('diagnostic_query_guard');
+            let supplierRequests=0,password:string|undefined,shapePrinted=false;
+            const fetcher:typeof fetch=async(input,init={})=>{
+              const url=new URL(input instanceof Request?input.url:String(input));
+              if(supplierRequests!==0||url.origin+url.pathname!==endpoint||url.searchParams.get('ip')!==ip||url.searchParams.get('sql')!==query.sql||String(init.method??'GET').toUpperCase()!=='GET'||init.redirect!=='error')throw Error('diagnostic_single_request_guard');
+              clearCollectionControlsCache();await assertCollectionEnabled('ajes_japan_feed');
+              supplierRequests++;
+              const started=Date.now(),response=await realFetch(input,init),clone=response.clone();
+              let body:Buffer|null=null,readState='complete';
+              try{
+                const reader=clone.body?.getReader();if(!reader)throw Error('missing_body');
+                const chunks:Uint8Array[]=[];let bytes=0;
+                while(true){const chunk=await reader.read();if(chunk.done)break;bytes+=chunk.value.length;if(bytes>MAX_BYTES){readState='limit_exceeded';void reader.cancel();void response.body?.cancel();break;}chunks.push(chunk.value);}
+                if(readState==='complete')body=Buffer.concat(chunks);
+              }catch{readState='read_failed';}
+              console.log('JAPAN_SINGLE_RESPONSE_SHAPE',JSON.stringify({observedAt:new Date().toISOString(),httpStatus:response.status,elapsedMs:Date.now()-started,readState,querySha256:createHash('sha256').update(query.sql).digest('hex'),table:'stats',kind:'list',page:1,pageSize:24,shape:body?bodyShape(body,response.headers,password):null}));
+              shapePrinted=true;
+              if(readState==='limit_exceeded')throw new AjesUnavailable('response_too_large');
+              return response;
+            };
+            const client=createAjesClient({password:async()=>{password=await ajesPassword();return password;},endpoint:ajesEndpoint,assertEnabled:async table=>{if(table!=='stats')throw Error('diagnostic_table_guard');clearCollectionControlsCache();await assertCollectionEnabled('ajes_japan_feed');},reserve:async(table,kind)=>{if(table!=='stats'||kind!=='list')throw Error('diagnostic_quota_guard');await reserveAjesRequest(storage,table);},fetcher});
+            try{
+              const result=await client.read(exactInput,ip);
+              console.log('JAPAN_SINGLE_CLIENT_RESULT',JSON.stringify({ok:true,items:result.items.length,received:result.received,rejected:result.rejected,stale:result.stale===true}));
+            }catch(error:any){
+              const reason=typeof error?.reason==='string'&&/^(?:visitor_restricted|request_failed|request_timeout|connect_timeout|invalid_response|empty_response|response_too_large|identity_mismatch|query_too_large|quota_invalid|quota_busy|quota_exhausted|not_configured|http_[1-5]\d\d)$/.test(error.reason)?error.reason:error?.name==='CollectionDisabledError'?'source_disabled':'local_failure';
+              console.log('JAPAN_SINGLE_CLIENT_RESULT',JSON.stringify({ok:false,reason}));
+            }
+            console.log('JAPAN_SINGLE_PROBE_COMPLETE',JSON.stringify({supplierRequests,objectRequests,quotaWrites,shapePrinted,cacheReaders:0,cacheWriters:0}));
+            if(supplierRequests!==1||!shapePrinted)process.exitCode=1;
+          }
+          main().catch(()=>{console.log('JAPAN_SINGLE_PROBE_ABORTED');process.exitCode=1;});
+          PROBE_SOURCE
+          node --input-type=module <<'BUILD'
+          import fs from 'node:fs';
+          import {build} from 'esbuild';
+          await build({stdin:{contents:fs.readFileSync('/tmp/japan-single-response-shape.ts','utf8'),resolveDir:process.cwd(),sourcefile:'japan-single-response-shape.ts',loader:'ts'},outfile:'/tmp/japan-single-response-shape.cjs',bundle:true,platform:'node',format:'cjs',external:['geoip-country'],plugins:[{name:'server-only',setup(b){b.onResolve({filter:/^server-only$/},()=>({path:'empty',namespace:'empty'}));b.onLoad({filter:/.*/,namespace:'empty'},()=>({contents:''}));}}]});
+          BUILD
+          node --check /tmp/japan-single-response-shape.cjs
+      - name: Make one accounted Allion request from the genuine serving host
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+        run: |
+          set -euo pipefail
+          umask 077
+          key_file=$(mktemp)
+          trap 'rm -f "$key_file"' EXIT
+          printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
+          unset SSH_PRIVATE_KEY
+          chmod 600 "$key_file"
+          timeout 130s ssh -i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts" root@151.248.113.177 'set -eu; release=$(docker inspect --format "{{ index .Config.Labels \"org.opencontainers.image.revision\" }}" avtocena-production); test "$release" = 83ff17075e9188dcf227c8752dc064248d5f42e0; server_ip=$(curl -4 -fsS --max-time 15 https://api.ipify.org); test "$server_ip" = 151.248.113.177; printf "JAPAN_DIAGNOSTIC_IDENTITY verified\n"; timeout 105s docker exec -i -e AJES_DIAG_IP="$server_ip" avtocena-production node' < /tmp/japan-single-response-shape.cjs
