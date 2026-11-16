@@ -166,3 +166,44 @@ test('legacy adapter contract remains separate from the paid v3 mapper', () => {
   assert.ok(legacy); assert.equal(legacy.sourcePrice, 12000000);
   assert.equal(legacy.engineCc, 1998); assert.equal(legacy.powerHp, 150); assert.equal(legacy.drive, 'fwd');
 });
+
+test('coarse hybrid fuel permits an explicit series or plug-in identity without hiding fuel contradictions', async () => {
+  await withOfflinePublication(async () => {
+    const note = {mark: 'Nissan', model: 'Note', configuration: 'e-POWER', engine_type: 'Гибрид',
+      displacement_cc: 1198, power: 136, power_ice_hp: 82, power_electro_kw: 100};
+    for (const [patch, expectedKind] of [[note, 'series_hybrid'],
+      [{...note, mark: 'Kia', model: 'Niro', configuration: 'PHEV'}, 'other_hybrid']] as const) {
+      const source = mapped(patch);
+      assert.equal(source.powertrainKind, expectedKind);
+      assert.equal(source.operational.semanticEvidence.fuel.status, 'exact');
+      assert.equal(source.operational.semanticEvidence.powertrainKind.status, 'exact');
+      if (expectedKind === 'series_hybrid')
+        assert.equal(source.operational.semanticEvidence.powertrainKind.source, 'auto_api_encar:v3:engine_type+identity_name');
+      const normalized = normalizeVehicleOfferSpecs(source);
+      assert.equal(classifySpecificationEvidence(normalized, 'fuelPowertrain').state, 'exact');
+      const prepared = await prepareSellerInventory(normalized);
+      assert.ok(prepared);
+      for (const row of [source, normalized, prepared, publicOffer(compactPublicStorageOffer(prepared)),
+        searchProjectionFromOffer(compactPublicStorageOffer(prepared))]) {
+        assert.equal(row.fuel, 'hybrid'); assert.equal(row.powertrainKind, expectedKind);
+        assert.equal(row.engineCc, 1198); assert.equal(row.powerHp, 136);
+        assert.equal(row.power30MinKw, undefined); assert.equal(row.utilizationPowerKw, undefined);
+      }
+      assert.equal(prepared.icePowerKw, Math.round(82 / 1.35962 * 100) / 100);
+      assert.equal(prepared.operational?.sourcePower.iceHp.value, 82);
+      assert.equal(prepared.motorPeakKw, 100);
+      assert.equal(prepared.totalRub, null);
+    }
+    for (const patch of [{...note, engine_type: 'Бензин'}, {...note, engine_type: 'Электро'},
+      {...note, engine_type: 'Parallel hybrid'}, {...note, model: 'EV6', configuration: 'BEV', engine_type: 'Гибрид'}]) {
+      const source = mapped(patch);
+      assert.equal(source.operational.semanticEvidence.fuel.status, 'conflict');
+      assert.equal(classifySpecificationEvidence(normalizeVehicleOfferSpecs(source), 'fuelPowertrain').state, 'conflict');
+      const prepared = await prepareSellerInventory(normalizeVehicleOfferSpecs(source));
+      if (prepared) {
+        assert.equal(classifySpecificationEvidence(prepared, 'fuelPowertrain').state, 'conflict');
+        assert.equal(prepared.fuel, undefined); assert.equal(prepared.totalRub, null);
+      }
+    }
+  });
+});

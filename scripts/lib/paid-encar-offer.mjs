@@ -33,7 +33,7 @@ export function normalizePaidEncarOffer(data, {id, observedAt, adapter}) {
   const fields = canonicalizeSemanticSourceFields({fuel: fuelLabel,
     transmission: text(data.transmission_type), bodyType: text(data.body_type),
     drive: ambiguousDrive ? undefined : driveLabel});
-  const fuelKind = namedElectrifiedPowertrainKind({fuel: fuelLabel})
+  const sourceFuelKind = namedElectrifiedPowertrainKind({fuel: fuelLabel})
     || (fields.fuel === 'electric' ? 'electric' : fields.fuel === 'hybrid' ? 'other_hybrid' : fields.fuel ? 'combustion' : 'unknown');
   const offer = adapter.normalizeOffer({Id: id, Manufacturer: data.mark, Model: data.model, FormYear: year.value,
     Price: data.price, Badge: data.configuration, BadgeDetail: data.complectation, Mileage: data.km_age,
@@ -43,7 +43,14 @@ export function normalizePaidEncarOffer(data, {id, observedAt, adapter}) {
 
   // Preserve source fields, not a value guessed from the model/trim by the
   // legacy normalizer. Contradictory electrified identities remain blocked.
-  const namedKind = namedElectrifiedPowertrainKind(offer);
+  // `hybrid` is a coarse source fuel label, not proof of a parallel layout.
+  // Resolve a more specific, explicitly named layout without using the fuel
+  // field itself as circular name evidence. An explicitly parallel source
+  // description still conflicts with a series name.
+  const namedKind = namedElectrifiedPowertrainKind({...offer, fuel: undefined, engineType: undefined});
+  const compatibleSeriesName = sourceFuelKind === 'other_hybrid' && namedKind === 'series_hybrid'
+    && !/parallel[ -]?hybrid|power[ -]?split|mixed[ -]?hybrid|параллельн\w*\s+гибрид/i.test(fuelLabel);
+  const fuelKind = compatibleSeriesName ? namedKind : sourceFuelKind;
   const fuelConflict = fields.fuel && namedKind && namedKind !== fuelKind;
   const fuelAmbiguous = fuelKind === 'combustion' && motorKw.status === 'exact';
   const fuelResult = {status: fuelConflict ? 'conflict' : fuelAmbiguous ? 'ambiguous'
@@ -82,7 +89,7 @@ export function normalizePaidEncarOffer(data, {id, observedAt, adapter}) {
     semanticEvidence: {
       year: evidence('year', {status: 'exact', value: offer.year}),
       fuel: evidence('engine_type', fuelResult),
-      powertrainKind: evidence('engine_type', {...fuelResult, value: fuelKind}),
+      powertrainKind: evidence(compatibleSeriesName ? 'engine_type+identity_name' : 'engine_type', {...fuelResult, value: fuelKind}),
       engineCc: evidence('displacement_cc', {...cc,
         ...(cc.status === 'missing' && present(data.displacement) ? {reason: 'litres_do_not_prove_exact_cc'} : {})}, 'cm3'),
       powerHp: evidence('power', powerResult, 'hp'),
