@@ -22,6 +22,17 @@ export function calculationCacheVersion(){
  const version=process.env.AVTOCENA_CALCULATION_VERSION;
  return version && /^[a-f0-9]{64}$/.test(version) ? version : process.env.AVTOCENA_RELEASE_SHA||'budget-replay-20261009-v1';
 }
+function calculationRateInputs(rates:Awaited<ReturnType<typeof catalogRateFingerprintInputs>>){
+ return rates.map(row=>{
+  const [currency,rate,fresh]=row;
+  if(!rate || typeof rate!=='object')return row;
+  // A live CBR response and the same saved CBR quote have identical calculation
+  // authority. History describes the rate widget, not the current conversion.
+  // Keep quote/date/nominal/freshness and non-CBR authority differences intact.
+  const {previousEffectiveRate:_previous,previousRateDate:_previousDate,rateDelta:_delta,...quote}=rate;
+  return [currency,{...quote,rateSource:quote.rateSource==='cbr_live'?'cbr':quote.rateSource},fresh];
+ });
+}
 // Japan has independently mutable delivered-preview inputs. Keep its existing
 // exact path until those authorities have a separate versioned contract.
 export async function budgetPricingFingerprint(market:string):Promise<string|null> {
@@ -30,10 +41,11 @@ export async function budgetPricingFingerprint(market:string):Promise<string|nul
   catalogRateFingerprintInputs(),getEffectiveMarketVersion(market),
   market==='china'?chinaCnyPriceFingerprint():null,readCatalogEditorial(),
  ]);
- return hash({schema:1,release:calculationCacheVersion(),encyclopedia:readCalculationIndex()?.digest||null,market,
-  utcDay:new Date().toISOString().slice(0,10),rates,configured,
+ const calculationConfig=configured?.logisticsRateSource==='cbr_live'?{...configured,logisticsRateSource:'cbr'}:configured;
+ return hash({schema:2,release:calculationCacheVersion(),encyclopedia:readCalculationIndex()?.digest||null,market,
+  utcDay:new Date().toISOString().slice(0,10),rates:calculationRateInputs(rates),configured:calculationConfig,
   editorialPrices:Object.values(editorial.entries).filter(entry=>entry.market===market&&entry.sellerPrice).map(entry=>[entry.id,entry.sellerPrice]),
-  resolved:resolveCatalogMarketConfig(market as CatalogMarket,configured),anchors});
+  resolved:resolveCatalogMarketConfig(market as CatalogMarket,calculationConfig),anchors});
 }
 
 type Price=[id:string,total:number,basis:BudgetCountRow[2],seller:boolean,deposit:number|null];
