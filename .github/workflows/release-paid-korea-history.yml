@@ -166,8 +166,14 @@ jobs:
         python3 tests/regcloud-browser-verdict.test.py
         python3 tests/regcloud-browser-handoff.test.py
         python3 tests/regcloud-release-retention.test.py
-        npm run typecheck
+        npm --workspace=@avtocena/web exec tsc -- --noEmit --tsBuildInfoFile "$RUNNER_TEMP/history-web-typecheck.tsbuildinfo"
+        npm --workspace=@avtocena/engine exec tsc -- --noEmit
         node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/catalog-market-brand-projection.test.ts tests/china-source-switch.test.ts
+        if ! git diff --quiet HEAD -- apps packages data scripts/catalog-calculation-version.mjs; then
+          printf '%s\n' 'candidate_worktree_changed_before_publisher_defer'
+          git diff --name-only HEAD -- apps packages data scripts/catalog-calculation-version.mjs
+          exit 1
+        fi
     - name: Install private release evidence preservation
       run: |
         cat > "$RUNNER_TEMP/preserve-release-evidence.mjs" <<'DURABLE_RELEASE_EVIDENCE'
@@ -479,6 +485,22 @@ jobs:
         const hash = value => createHash('sha256').update(JSON.stringify(value)).digest('hex');
         const bindingKey = release => `knowledge/encyclopedia/calculation-releases/${release}.json`;
         const same = (actual, expected, guard) => assert.ok(actual.found && actual.etag === expected.etag && hash(actual.value) === hash(expected.value), guard);
+        const operations = new Set(['arguments', 'candidate_identity', 'candidate_worktree', 'calculator', 'environment',
+          'private_evidence', 'storage_import', 'calculation_import', 'prior_receipt', 'persisted_index_reuse',
+          'local_hydration', 'receipt_write', 'workflow_environment']);
+        let operation = 'arguments';
+        const safeChangedPath = value => typeof value === 'string' && value.length <= 240
+          && /^(?:apps|packages|data|scripts)\/[A-Za-z0-9_./()[\]-]+$/.test(value) && !value.split('/').includes('..');
+
+        /** Failure context only: no subprocess diff, stderr, private object, URL or exception body. */
+        export function reuseFailureDiagnostics(error, phase) {
+          const rawCode = error?.code || error?.name || 'Error';
+          return {stage: 'installed_private_index_reuse_failed', operation: operations.has(phase) ? phase : 'unknown',
+            code: typeof rawCode === 'string' && /^[A-Za-z0-9_]{1,64}$/.test(rawCode) ? rawCode : 'Error',
+            exitStatus: Number.isSafeInteger(error?.status) ? error.status : undefined,
+            changedPaths: Array.isArray(error?.reuseChangedPaths) ? error.reuseChangedPaths.filter(safeChangedPath).slice(0, 20) : undefined,
+            guard: error instanceof assert.AssertionError ? String(error.message).split('\n')[0] : undefined};
+        }
 
         /** No recalculation, collection, selector preparation or mutable production writes. */
         export async function reuseInstalledPrivateIndex({storage, candidate, computedCalculator, proof,
@@ -582,15 +604,26 @@ jobs:
           const verifyOnly = process.argv.includes('--verify-only');
           const root = process.cwd(), candidate = process.env.RELEASE_SOURCE_SHA || '';
           const git = args => execFileSync('git', args, {encoding: 'utf8', maxBuffer: 32 * 1024 * 1024}).trim();
+          operation = 'candidate_identity';
           assert.match(candidate, /^[a-f0-9]{40}$/, 'controller_pinned_candidate_required');
           assert.equal(git(['rev-parse', 'HEAD']), candidate, 'candidate_head_changed');
-          git(['diff', '--exit-code', 'HEAD', '--', 'apps', 'packages', 'data', 'scripts/catalog-calculation-version.mjs']);
+          operation = 'candidate_worktree';
+          try {
+            git(['diff', '--exit-code', 'HEAD', '--', 'apps', 'packages', 'data', 'scripts/catalog-calculation-version.mjs']);
+          } catch (error) {
+            try { error.reuseChangedPaths = git(['diff', '--name-only', '-z', 'HEAD', '--', 'apps', 'packages', 'data', 'scripts/catalog-calculation-version.mjs']).split('\0').filter(Boolean); }
+            catch { /* The original source guard error remains authoritative. */ }
+            throw error;
+          }
+          operation = 'calculator';
           const computedCalculator = execFileSync(process.execPath, ['scripts/catalog-calculation-version.mjs'], {encoding: 'utf8'}).trim();
           assert.equal(computedCalculator, CALCULATOR, 'calculation_closure_changed_prepare_separately');
+          operation = 'environment';
           assert.ok(!process.env.AVTOCENA_CALCULATION_VERSION || process.env.AVTOCENA_CALCULATION_VERSION === computedCalculator, 'calculator_environment_changed');
           assert.ok(!process.env.AVTOCENA_RELEASE_SHA || process.env.AVTOCENA_RELEASE_SHA === candidate, 'release_environment_changed');
           process.env.AVTOCENA_CALCULATION_VERSION = computedCalculator;
           process.env.AVTOCENA_RELEASE_SHA = candidate;
+          operation = 'private_evidence';
           const coverage = JSON.parse(await fs.readFile('reports/encyclopedia-coverage.json', 'utf8'));
           const astra = JSON.parse(await fs.readFile('reports/astra-release-verification.json', 'utf8'));
           assert.equal(coverage.indexDigest, astra.indexDigest, 'private_evidence_index_disagrees');
@@ -598,24 +631,32 @@ jobs:
           const proof = {retainedSource: RETAINED_SOURCE, calculationVersion: computedCalculator,
             indexDigest: astra.indexDigest, manifestDigest: astra.manifestDigest, verified: astra.verified};
           const load = relative => import(pathToFileURL(path.join(root, relative)).href);
+          operation = 'storage_import';
           const data = await load('apps/web/lib/data.ts');
+          operation = 'calculation_import';
           const calculation = await load('apps/web/lib/encyclopedia/calculation-index.ts');
+          operation = 'prior_receipt';
           const previous = verifyOnly ? JSON.parse(await fs.readFile('private-index-reuse-before.json', 'utf8')) : null;
           if (previous) {
             assert.equal(previous.releaseSha, candidate, 'prior_reuse_candidate_changed');
             assert.equal(previous.passed, true, 'prior_reuse_failed');
           }
+          operation = 'persisted_index_reuse';
           const report = await reuseInstalledPrivateIndex({storage: data.getJsonStorage(), candidate,
             computedCalculator, proof, checksum: calculation.checksum, verifyOnly,
             expectedSnapshot: previous?.snapshot, hydrate: async index => {
+              operation = 'local_hydration';
               const target = path.join(data.getDataRoot(), calculation.CALCULATION_INDEX_PATH);
               await fs.mkdir(path.dirname(target), {recursive: true});
               await fs.writeFile(target, JSON.stringify(index), {mode: 0o600});
               assert.equal(calculation.readCalculationIndex()?.digest, index.digest, 'candidate_local_index_readback');
+              operation = 'persisted_index_reuse';
             }});
+          operation = 'receipt_write';
           const filename = process.env.PRIVATE_INDEX_REUSE_REPORT || (verifyOnly ? 'private-index-reuse-after.json' : 'private-index-reuse-before.json');
           await fs.writeFile(filename, JSON.stringify(report, null, 2) + '\n', {mode: 0o600});
           if (process.env.GITHUB_ENV && !verifyOnly) {
+            operation = 'workflow_environment';
             await fs.appendFile(process.env.GITHUB_ENV, `PAID_EXPECTED_ENCYCLOPEDIA_DIGEST=${report.encyclopediaDigest}\nPAID_GENERATION=${report.generationId}\nAVTOCENA_RELEASE_SHA=${candidate}\nAVTOCENA_CALCULATION_VERSION=${computedCalculator}\nPAID_EXPECTED_SOURCE_SHA=${candidate}\n`);
           }
           console.log(JSON.stringify({stage: 'installed_private_index_reused', ...report}));
@@ -623,13 +664,12 @@ jobs:
 
         if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
           main().catch(error => {
-            console.error(JSON.stringify({stage: 'installed_private_index_reuse_failed', code: error?.code || error?.name || 'Error',
-              guard: error instanceof assert.AssertionError ? String(error.message).split('\n')[0] : undefined}));
+            console.error(JSON.stringify(reuseFailureDiagnostics(error, operation)));
             process.exitCode = 1;
           });
         }
         PRIVATE_REUSE_HELPER
-        printf '%s  %s\n' a44d99c54337fb5577bd41e0cb3ceed7f04391f11ea7d347c96fb9147eab4826 "$RUNNER_TEMP/reuse-installed-release-data.mjs" | sha256sum --check
+        printf '%s  %s\n' f2161045c2f1d8dd3067ee56afe2167329613a1efb2451c2ac5a90b61fc2b9bb "$RUNNER_TEMP/reuse-installed-release-data.mjs" | sha256sum --check
         cat > "$RUNNER_TEMP/verify-paid-korea-recommendations.mjs" <<'PAID_RECOMMENDATIONS_HELPER'
         import assert from 'node:assert/strict';
         import fs from 'node:fs';
@@ -782,8 +822,8 @@ jobs:
         import time
 
         RUN = 43753103164
-        ATTEMPT = 9
-        JOB = 133140943205
+        ATTEMPT = 10
+        JOB = 133186832419
         SOURCE = 'f1a926e4de5df6502f764150115b8bf9e2a43dd3'
         ARTIFACT = 14178273080
         ARTIFACT_SHA256 = '62f2ca35af55a75130d661d9a7cc267f282d6132af1c143aeb28b39b6ca974e6'
@@ -896,7 +936,7 @@ jobs:
         if __name__ == '__main__':
             main()
         EXACT_CHINA_PUBLISHER_HELPER
-        printf '%s  %s\n' b45f394d1c705ed8a99327a50632ac1a8a4f05e4024444ff5ae5f7d98e8bb5df "$RUNNER_TEMP/defer-existing-china.py" | sha256sum --check
+        printf '%s  %s\n' df33da47f3456e47c8764e668a695e62165a66dd786777b86484e69b4620e7f4 "$RUNNER_TEMP/defer-existing-china.py" | sha256sum --check
         cat > "$RUNNER_TEMP/wait-publication-lease.mjs" <<'READONLY_PUBLICATION_LEASE_HELPER'
         import assert from 'node:assert/strict';
         import path from 'node:path';
@@ -1673,8 +1713,8 @@ jobs:
         import time
 
         RUN = 43753103164
-        ATTEMPT = 9
-        JOB = 133140943205
+        ATTEMPT = 10
+        JOB = 133186832419
         SOURCE = 'f1a926e4de5df6502f764150115b8bf9e2a43dd3'
         ARTIFACT = 14178273080
         ARTIFACT_SHA256 = '62f2ca35af55a75130d661d9a7cc267f282d6132af1c143aeb28b39b6ca974e6'
@@ -1787,7 +1827,7 @@ jobs:
         if __name__ == '__main__':
             main()
         EXACT_CHINA_PUBLISHER_HELPER
-        printf '%s  %s\n' b45f394d1c705ed8a99327a50632ac1a8a4f05e4024444ff5ae5f7d98e8bb5df "$RUNNER_TEMP/defer-existing-china.py" | sha256sum --check
+        printf '%s  %s\n' df33da47f3456e47c8764e668a695e62165a66dd786777b86484e69b4620e7f4 "$RUNNER_TEMP/defer-existing-china.py" | sha256sum --check
         python3 "$RUNNER_TEMP/defer-existing-china.py" resume | tee china-publisher-resume.json
     - uses: actions/upload-artifact@v4
       if: always()
