@@ -1,4 +1,4 @@
 {
-  "requestedAt": "2026-11-15 03:17:07 UTC",
-  "reason": "Restore image-loading headroom for the Encar release with the standard protected application release retention policy."
+  "requestedAt": "2026-11-16T03:33:47.931Z",
+  "reason": "Owner requested disk diagnosis and headroom during paid Korea cutover. Apply existing protected release retention after failed browser acceptance; preserve current production, accepted image and recent candidate."
 }
