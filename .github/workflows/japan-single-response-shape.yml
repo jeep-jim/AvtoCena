@@ -40,7 +40,24 @@ jobs:
           const exactInput={table:'stats',make:'Toyota',model:'Allion',page:1,pageSize:24} as const;
           function textFlags(text:unknown,secret:string|undefined){
             const value=typeof text==='string'?text:'';
-            return {present:typeof text==='string',shortBotOrBan:value.length<=512&&/^\s*(?:bot|ban)\d*(?:\s|$)/i.test(value),limitOrQuota:/\b(?:quota|limit(?:ed)?|too many requests|rate.?limit)\b/i.test(value),sqlSyntax:/sql\s*syntax|syntax\s*error|SQLSTATE|you have an error in your sql|mysql(?:i)?[ _]?(?:error|query)/i.test(value),accessRefusal:/\b(?:forbidden|banned|blocked|access denied|unauthorized)\b/i.test(value),credentialEcho:!!secret&&value.includes(secret),credentialError:/\b(?:invalid|wrong|expired|missing)\s+(?:api\s*)?(?:key|code|password|token)|\b(?:authentication|authorization)\s+(?:error|failed)/i.test(value)};
+            return {present:typeof text==='string',shortBotOrBan:value.length<=512&&/^\s*(?:bot|ban)\d*(?:\s|$)/i.test(value),limitOrQuota:/\b(?:quota|limit(?:ed)?|too many requests|rate.?limit)\b/i.test(value),sqlSyntax:/sql\s*syntax|syntax\s*error|SQLSTATE|you have an error in your sql|mysql(?:i)?[ _]?(?:error|query)/i.test(value),accessRefusal:/\b(?:forbidden|banned|blocked|access denied|unauthorized)\b/i.test(value),credentialEcho:!!secret&&value.includes(secret),credentialError:/\b(?:invalid|wrong|expired|missing)\s+(?:api\s*)?(?:key|code|password|token)|\b(?:authentication|authorization)\s+(?:error|failed)/i.test(value),unknownColumn:/unknown\s+column|no such column/i.test(value),tableDoesNotExist:/table\b[\s\S]{0,96}does(?:n't| not)\s+exist|no such table/i.test(value),unsupportedQuery:/unsupported\s+(?:sql|query|statement)|(?:sql|query|statement)\s+(?:is\s+)?not\s+supported/i.test(value)};
+          }
+          function safeSupplierError(value:unknown,secret:string|undefined){
+            if(typeof value!=='string')return null;
+            let text=value;
+            if(secret){
+              const base64=Buffer.from(secret,'utf8').toString('base64');
+              const variants=[secret,encodeURIComponent(secret),new URLSearchParams({v:secret}).toString().slice(2),base64,base64.replace(/=+$/,'')];
+              for(const token of new Set(variants.filter(Boolean)))text=text.split(token).join('[credential]');
+            }
+            text=text.replace(/\bhttps?:\/\/[^\s<>"']+/gi,'[url]')
+              .replace(/[A-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[A-Z0-9.-]+\.[A-Z]{2,}/gi,'[email]')
+              .replace(/\b(?:\d{1,3}\.){3}\d{1,3}\b/g,'[ip]')
+              .replace(/\b(?:[a-f0-9]{0,4}:){2,7}[a-f0-9]{0,4}\b/gi,'[ip]')
+              .replace(/[A-Za-z0-9_+\/-]{20,}={0,2}/g,'[token]')
+              .replace(/[\p{Cc}\p{Cf}]/gu,' ')
+              .replace(/\s+/g,' ').trim();
+            return text.slice(0,256);
           }
           function jsonShape(text:string,secret:string|undefined){
             let value:any;let parsedRaw=false,parsedAfterBom=false;
@@ -51,7 +68,7 @@ jobs:
             const indices=numericKeys.map(Number).sort((a,b)=>a-b),numericValues=numericKeys.map(key=>object[key]);
             const first=numericKeys.length?object[String(indices[0])]:null;
             const has=(obj:any,key:string)=>!!obj&&typeof obj==='object'&&Object.prototype.hasOwnProperty.call(obj,key);
-            return {parsedRaw,parsedAfterBom,root,arrayLength:Array.isArray(value)?value.length:null,badRowCount:Array.isArray(value)?value.filter(row=>!row||typeof row!=='object'||Array.isArray(row)).length:null,keyCount:object?keys.length:null,numericKeyCount:object?numericKeys.length:null,allNumericKeys:!!object&&keys.length>0&&numericKeys.length===keys.length,contiguousFromZero:indices.length>0&&indices.every((n,i)=>Number.isSafeInteger(n)&&n===i),contiguousFromOne:indices.length>0&&indices.every((n,i)=>Number.isSafeInteger(n)&&n===i+1),numericRowValuesObjects:numericValues.length>0&&numericValues.every(row=>!!row&&typeof row==='object'&&!Array.isArray(row)),numericValueArrayCount:numericValues.filter(Array.isArray).length,firstNumericValueFieldFlags:{ID:has(first,'ID'),MARKA_NAME:has(first,'MARKA_NAME'),MODEL_NAME:has(first,'MODEL_NAME')},hasError:has(object,'error'),hasMessage:has(object,'message'),hasData:has(object,'data'),hasResult:has(object,'result'),dataIsArray:Array.isArray(object?.data),resultIsArray:Array.isArray(object?.result),rootStringFlags:textFlags(typeof value==='string'?value:undefined,secret),errorFlags:textFlags(object?.error,secret),messageFlags:textFlags(object?.message,secret)};
+            return {parsedRaw,parsedAfterBom,root,arrayLength:Array.isArray(value)?value.length:null,badRowCount:Array.isArray(value)?value.filter(row=>!row||typeof row!=='object'||Array.isArray(row)).length:null,keyCount:object?keys.length:null,numericKeyCount:object?numericKeys.length:null,allNumericKeys:!!object&&keys.length>0&&numericKeys.length===keys.length,contiguousFromZero:indices.length>0&&indices.every((n,i)=>Number.isSafeInteger(n)&&n===i),contiguousFromOne:indices.length>0&&indices.every((n,i)=>Number.isSafeInteger(n)&&n===i+1),numericRowValuesObjects:numericValues.length>0&&numericValues.every(row=>!!row&&typeof row==='object'&&!Array.isArray(row)),numericValueArrayCount:numericValues.filter(Array.isArray).length,firstNumericValueFieldFlags:{ID:has(first,'ID'),MARKA_NAME:has(first,'MARKA_NAME'),MODEL_NAME:has(first,'MODEL_NAME')},hasError:has(object,'error'),hasMessage:has(object,'message'),hasData:has(object,'data'),hasResult:has(object,'result'),dataIsArray:Array.isArray(object?.data),resultIsArray:Array.isArray(object?.result),rootStringFlags:textFlags(typeof value==='string'?value:undefined,secret),errorFlags:textFlags(object?.error,secret),messageFlags:textFlags(object?.message,secret),safeSupplierError:safeSupplierError(object?.error,secret)};
           }
           function bodyShape(body:Buffer,headers:Headers,secret:string|undefined){
             const type=headers.get('content-type')?.split(';',1)[0].trim().toLowerCase()||'absent';
