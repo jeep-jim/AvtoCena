@@ -1,0 +1,53 @@
+name: Audit paid Korea candidate stall
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/paid-encar-memory-incident-audit.yml]
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    environment: regcloud-staging
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Read candidate exit and sanitized stall logs
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+        run: |
+          set -euo pipefail
+          umask 077
+          key_file=$(mktemp)
+          trap 'rm -f "$key_file"' EXIT
+          printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
+          unset SSH_PRIVATE_KEY
+          ssh -i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts" root@151.248.113.177 'python3 -' <<'PY'
+          import subprocess,json,re,collections,pathlib
+          def run(*args):
+              p=subprocess.run(args,capture_output=True,text=True,timeout=50)
+              return p.stdout+p.stderr
+          name='avtocena-release-9cb571fcce50'
+          raw=run('docker','inspect',name)
+          if raw.startswith('['):
+              v=json.loads(raw)[0];print('CANDIDATE_STATE',json.dumps({'status':v['State']['Status'],'exit':v['State']['ExitCode'],'oomKilled':v['State']['OOMKilled'],'memoryLimit':v['HostConfig']['Memory'],'memorySwap':v['HostConfig']['MemorySwap'],'cpuQuota':v['HostConfig']['CpuQuota'],'startedAt':v['State']['StartedAt'],'finishedAt':v['State']['FinishedAt']}))
+          print('HOST_MEMORY',run('free','-b').splitlines()[:3])
+          print('ROOT_FREE_BYTES',run('df','-B1','/').splitlines()[-1].split()[3])
+          logs=run('docker','logs','--timestamps','--since','2026-11-16T05:07:00Z','--until','2026-11-16T05:10:10Z',name)
+          lines=logs.splitlines()
+          kinds=collections.Counter()
+          for line in lines:
+              for label,pattern in [('oom',r'out of memory|allocation failed'),('app_error',r'\b(error|exception|fatal)\b'),('ajes_failure',r'AJES_PUBLIC_FAILURE')]:
+                  if re.search(pattern,line,re.I):kinds[label]+=1
+          print('CANDIDATE_LOG_COUNTS',json.dumps({'lines':len(lines),'types':dict(kinds)}))
+          for p in [pathlib.Path('/var/log/nginx/error.log'),pathlib.Path('/var/log/nginx/error.log.1')]:
+              if not p.exists():continue
+              for line in p.read_text(errors='replace').splitlines():
+                  if '2026/11/16 05:0' in line and ('upstream timed out' in line or 'connect() failed' in line):
+                      m=re.search(r'request: "([^"]+)"',line)
+                      route=m.group(1).split('?')[0][:120] if m else None
+                      print('PROXY_ERROR',json.dumps({'minute':line[:16],'kind':'timeout' if 'upstream timed out' in line else 'connect','route':route}))
+          print('OOM_JOURNAL_MATCHES',len(re.findall(r'oom-kill|out of memory|Killed process',run('journalctl','-k','--since','2026-11-16 05:00:00','--until','2026-11-16 05:12:00','--no-pager'),re.I)))
+          PY
