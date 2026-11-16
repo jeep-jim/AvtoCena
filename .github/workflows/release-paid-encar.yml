@@ -643,21 +643,21 @@ jobs:
           source=file.read_text()
           substitutions=[
            ("let activePage;\n", """let activePage;
-async function healthWithRetry(context,phase){
- for(let attempt=1;attempt<=2;attempt++){
-  const start=Date.now();
-  try{
-   const response=await context.request.get(origin+'/api/health',{timeout:30000});
-   (report.healthChecks??=[]).push({phase,attempt,status:response.status(),seconds:(Date.now()-start)/1000});
-   return response;
-  }catch(error){
-   (report.healthChecks??=[]).push({phase,attempt,error:error.name,seconds:(Date.now()-start)/1000});
-   if(attempt===2)throw error;
-   await new Promise(resolve=>setTimeout(resolve,1500));
-  }
- }
-}
-"""),
+          async function healthWithRetry(context,phase){
+           for(let attempt=1;attempt<=2;attempt++){
+            const start=Date.now();
+            try{
+             const response=await context.request.get(origin+'/api/health',{timeout:30000});
+             (report.healthChecks??=[]).push({phase,attempt,status:response.status(),seconds:(Date.now()-start)/1000});
+             return response;
+            }catch(error){
+             (report.healthChecks??=[]).push({phase,attempt,error:error.name,seconds:(Date.now()-start)/1000});
+             if(attempt===2)throw error;
+             await new Promise(resolve=>setTimeout(resolve,1500));
+            }
+           }
+          }
+          """),
            ("const health=await context.request.get(origin+'/api/health',{timeout:30000});","const health=await healthWithRetry(context,'before-'+width);"),
            ("const ending=await context.request.get(origin+'/api/health',{timeout:30000});","const ending=await healthWithRetry(context,'after-'+width);")
           ]
