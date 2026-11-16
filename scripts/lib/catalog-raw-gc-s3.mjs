@@ -167,7 +167,12 @@ export function parseRawGcS3List(text,{prefix,maxKeys,cursor=null}) {
   const flag=scalar(root,'IsTruncated');assert.ok(['true','false'].includes(flag),'raw_gc_s3_list_truncated');
   const echoed=scalar(root,'ContinuationToken',false);if(echoed!==undefined)assert.equal(echoed,cursor,'raw_gc_s3_list_cursor');
   const objects=root.children.filter(row=>row.name==='Contents').map(node=>{
-    fields(node,['Key','ETag','Size','LastModified','StorageClass','Owner','ChecksumAlgorithm','ChecksumType'],'Contents');
+    fields(node,['Key','ETag','Size','LastModified','StorageClass','Owner','ChecksumAlgorithm','ChecksumType','Type'],'Contents');
+    // Ceph documents Type as Normal or Appendable. Accept only the former;
+    // absence remains valid for standard S3. This is not a writer/GC proof.
+    // https://docs.ceph.com/en/reef/radosgw/s3/bucketops/#object-response-entities
+    const objectType=scalar(node,'Type',false);
+    assert.ok(objectType===undefined||objectType==='Normal','raw_gc_s3_list_object_type');
     const full=decodeListed(scalar(node,'Key'),encoding==='url');
     assert.ok(full.startsWith(RAW_GC_TARGET.prefix+prefix),'raw_gc_s3_list_key_prefix');
     const key=full.slice(RAW_GC_TARGET.prefix.length);rawKey(key);
