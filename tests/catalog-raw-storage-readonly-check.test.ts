@@ -95,19 +95,35 @@ test('receipt failures preserve only bounded already-read metadata and never cla
   });
   assert.equal(calls.length,4);
 });
-test('native CLI writes its safe failure artifact and exits nonzero without further requests',()=>{
+test('failure artifacts do not trust schema-shaped properties on arbitrary errors',async()=>{
+  const {io}=fixture();
+  io.listPage=async()=>{throw Object.assign(Error('raw_gc_s3_xml_unknown_field'),{schemaDiagnostic:{parent:'private-value'}});};
+  await assert.rejects(()=>verifyRawStorageReadOnly({io}),(error:any)=>{
+    assert.equal(error.report.reason,'raw_gc_s3_xml_unknown_field');assert.equal(error.report.schemaDiagnostic,undefined);
+    assert.ok(!JSON.stringify(error.report).includes('private-value'));return true;
+  });
+});
+for(const phase of ['receipt','list-schema'])test('native CLI writes its safe '+phase+' failure artifact and exits without further requests',()=>{
   const directory=fs.mkdtempSync(path.join(os.tmpdir(),'raw-storage-check-'));
   try {
     const preload=path.join(directory,'mock-fetch.mjs'),output=path.join(directory,'report.json');
     fs.writeFileSync(preload,`import assert from 'node:assert/strict';
 const target=${JSON.stringify(RAW_GC_TARGET)};
+const phase=${JSON.stringify(phase)};
 globalThis.fetch=async (url,options)=>{
-  assert.equal(options.method,'GET');assert.equal(url.origin,target.endpoint);assert.equal(url.search,'');
+  assert.equal(options.method,'GET');assert.equal(url.origin,target.endpoint);
+  if(url.searchParams.get('list-type')==='2') {
+    assert.equal(phase,'list-schema');assert.equal(url.pathname,'/'+target.bucket);
+    assert.equal(url.searchParams.get('prefix'),target.prefix+${JSON.stringify(RAW_READONLY_CHECK_ROOT+'/')});
+    assert.equal(url.searchParams.get('max-keys'),'2');
+    return new Response('<ListBucketResult><VendorExtension>do-not-log-xml-body-token-key</VendorExtension></ListBucketResult>');
+  }
+  assert.equal(url.search,'');
   const prefix='/'+target.bucket+'/'+target.prefix;assert.ok(url.pathname.startsWith(prefix));
   const key=url.pathname.slice(prefix.length);let value;
   if(key==='catalog/raw-feed-coordination/v1/policy.json'||key==='catalog/raw-feed-coordination/v1/state.json')return new Response('',{status:404});
   if(key==='catalog/import-lock.json')value={operationType:'catalog_v3_publish_china',lockedUntil:'2099-01-01T00:00:00Z',privateOwner:'do-not-log-owner'};
-  else if(key===${JSON.stringify(RAW_READONLY_CHECK_ROOT+'/complete.json')})value={...${JSON.stringify(legacyReceipt)},privateRaw:'do-not-log-receipt'};
+  else if(key===${JSON.stringify(RAW_READONLY_CHECK_ROOT+'/complete.json')})value={...${JSON.stringify(legacyReceipt)},...(phase==='receipt'?{privateRaw:'do-not-log-receipt'}:{})};
   else throw Error('unexpected fixture request');
   const body=JSON.stringify(value);return new Response(body,{headers:{etag:'"fixture"','content-length':String(Buffer.byteLength(body))}});
 };
@@ -121,8 +137,12 @@ globalThis.fetch=async (url,options)=>{
         GITHUB_RUN_ID:'43890601103',GITHUB_RUN_ATTEMPT:'2'}});
     assert.equal(result.error,undefined);assert.equal(result.status,1);
     const artifact=fs.readFileSync(output,'utf8'),report=JSON.parse(artifact);
-    assert.equal(report.reason,'raw_storage_check_saved_receipt_changed');assert.equal(report.controls.unchanged,null);
-    assert.equal(report.transport.requests,4);assert.equal(report.storageWrites,0);assert.equal(report.executionEnabled,false);
+    assert.equal(report.reason,phase==='receipt'?'raw_storage_check_saved_receipt_changed':'raw_gc_s3_xml_unknown_field');
+    assert.equal(report.controls.unchanged,null);
+    assert.equal(report.transport.requests,phase==='receipt'?4:5);assert.equal(report.transport.head,0);
+    assert.equal(report.storageWrites,0);assert.equal(report.executionEnabled,false);
+    if(phase==='list-schema')assert.deepEqual(report.schemaDiagnostic,{parent:'ListBucketResult',unknownNames:['VendorExtension'],unknownFieldCount:1,omittedNameCount:0});
+    else assert.equal(report.schemaDiagnostic,undefined);
     assert.deepEqual(JSON.parse(result.stdout),report);assert.equal(result.stderr,'');
     for(const privateText of ['do-not-log','fixture-access','privateRaw','privateOwner'])assert.ok(!(artifact+result.stdout+result.stderr).includes(privateText));
     assert.ok(artifact.length<8192);

@@ -128,21 +128,46 @@ function scalar(node,name,required=true) {
   assert.ok(values.length<=1&&(!required||values.length===1)&&(!values.length||!values[0].children.length),'raw_gc_s3_xml_field');
   return values[0]?.text;
 }
-function fields(node,names) {assert.ok(node.children.every(row=>names.includes(row.name)),'raw_gc_s3_xml_unknown_field');}
+const schemaDiagnostics=new WeakMap();
+// Only parser-created errors can expose this bounded schema metadata. XML text,
+// object keys, values and continuation tokens never enter the diagnostic.
+export function rawGcS3SchemaDiagnostic(error) {
+  const value=error&&typeof error==='object'?schemaDiagnostics.get(error):undefined;
+  return value?{...value,unknownNames:[...value.unknownNames]}:null;
+}
+function fields(node,names,parent) {
+  const unknown=node.children.filter(row=>!names.includes(row.name));
+  if(!unknown.length)return;
+  const error=new Error('raw_gc_s3_xml_unknown_field');
+  if(parent==='ListBucketResult'||parent==='Contents') {
+    const allNames=[...new Set(unknown.map(row=>row.name))];
+    const unknownNames=allNames.filter(name=>/^[A-Za-z][A-Za-z0-9]{0,63}$/.test(name)).slice(0,8);
+    schemaDiagnostics.set(error,{parent,unknownNames,unknownFieldCount:unknown.length,
+      omittedNameCount:allNames.length-unknownNames.length});
+  }
+  throw error;
+}
 function decodeListed(value,encoded) {try{return encoded?decodeURIComponent(value):value;}catch{fail('list_encoding');}}
 
 export function parseRawGcS3List(text,{prefix,maxKeys,cursor=null}) {
   assert.ok(typeof text==='string'&&Buffer.byteLength(text)<=MAX_XML,'raw_gc_s3_xml_size');
   const root=xmlTree(text);assert.equal(root.name,'ListBucketResult','raw_gc_s3_list_root');
-  fields(root,['Name','Prefix','MaxKeys','KeyCount','IsTruncated','Contents','ContinuationToken','NextContinuationToken','EncodingType']);
+  fields(root,['Name','Prefix','MaxKeys','KeyCount','IsTruncated','Contents','ContinuationToken','NextContinuationToken','EncodingType','Delimiter','StartAfter'],'ListBucketResult');
   assert.equal(scalar(root,'Name'),RAW_GC_TARGET.bucket,'raw_gc_s3_list_bucket');
   const encoding=scalar(root,'EncodingType',false);assert.ok(encoding===undefined||encoding==='url','raw_gc_s3_list_encoding');
+  // AWS ListObjectsV2 documents both response fields. Our request sends neither
+  // parameter, so only absent/empty echoes are compatible with a complete list.
+  // https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListObjectsV2.html
+  for(const name of ['Delimiter','StartAfter']) {
+    const value=scalar(root,name,false);
+    assert.ok(value===undefined||value==='','raw_gc_s3_list_unrequested_parameter');
+  }
   assert.equal(decodeListed(scalar(root,'Prefix'),encoding==='url'),RAW_GC_TARGET.prefix+prefix,'raw_gc_s3_list_prefix');
   assert.equal(size(scalar(root,'MaxKeys')),maxKeys,'raw_gc_s3_list_max_keys');
   const flag=scalar(root,'IsTruncated');assert.ok(['true','false'].includes(flag),'raw_gc_s3_list_truncated');
   const echoed=scalar(root,'ContinuationToken',false);if(echoed!==undefined)assert.equal(echoed,cursor,'raw_gc_s3_list_cursor');
   const objects=root.children.filter(row=>row.name==='Contents').map(node=>{
-    fields(node,['Key','ETag','Size','LastModified','StorageClass','Owner','ChecksumAlgorithm','ChecksumType']);
+    fields(node,['Key','ETag','Size','LastModified','StorageClass','Owner','ChecksumAlgorithm','ChecksumType'],'Contents');
     const full=decodeListed(scalar(node,'Key'),encoding==='url');
     assert.ok(full.startsWith(RAW_GC_TARGET.prefix+prefix),'raw_gc_s3_list_key_prefix');
     const key=full.slice(RAW_GC_TARGET.prefix.length);rawKey(key);

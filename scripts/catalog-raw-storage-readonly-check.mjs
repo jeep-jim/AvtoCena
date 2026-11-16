@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import {pathToFileURL} from 'node:url';
-import {createReadOnlyRawGcS3Transport} from './lib/catalog-raw-gc-s3.mjs';
+import {createReadOnlyRawGcS3Transport,rawGcS3SchemaDiagnostic} from './lib/catalog-raw-gc-s3.mjs';
 import {RAW_GC_TARGET,RAW_GC_POLICY_KEY} from './lib/catalog-raw-gc.mjs';
 import {RAW_COORDINATION_KEY} from './lib/catalog-raw-coordination.mjs';
 import {rawDigest} from './lib/catalog-raw-provenance.mjs';
@@ -19,6 +19,7 @@ const same=(a,b)=>rawDigest(a)===rawDigest(b);
 const safeTime=value=>typeof value==='string'&&Number.isFinite(Date.parse(value))?new Date(value).toISOString():null;
 const safeReason=error=>/^raw_(?:storage_check|gc_s3)_[a-z0-9_]+$/.test(String(error?.message||''))?error.message:'raw_storage_check_failed';
 function failedReport(error,evidence={},io) {
+  const schemaDiagnostic=rawGcS3SchemaDiagnostic(error);
   let transport=null;
   try {
     const stats=io?.stats();
@@ -27,7 +28,8 @@ function failedReport(error,evidence={},io) {
   } catch {}
   return {version:1,status:'failed',reason:safeReason(error),checkedAt:new Date().toISOString(),
     target:RAW_GC_TARGET,root:RAW_READONLY_CHECK_ROOT,scope:'bounded_transport_acceptance_only',
-    completeInventory:false,...evidence,transport,executionEnabled:false,storageWrites:0,deleteRequests:0};
+    completeInventory:false,...evidence,...(schemaDiagnostic?{schemaDiagnostic}:{}),transport,
+    executionEnabled:false,storageWrites:0,deleteRequests:0};
 }
 class RawStorageCheckFailure extends Error {
   constructor(error,evidence,io) {super(safeReason(error));this.report=failedReport(error,evidence,io);}
