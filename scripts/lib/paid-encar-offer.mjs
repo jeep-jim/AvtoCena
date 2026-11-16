@@ -1,5 +1,6 @@
 import {canonicalizeSemanticSourceFields, namedElectrifiedPowertrainKind} from '../../apps/web/lib/catalog/powertrain-safety.ts';
 import {catalogPowerSanity} from '../../apps/web/lib/catalog/power-sanity.ts';
+import {normalizeVehicleOfferSpecs} from '../../apps/web/lib/catalog/spec-normalization.ts';
 
 // Auto API Encar v3 field reference, checked 2026-11-16:
 // https://auto-api.com/encar (Specifications). The legacy example later on that
@@ -15,6 +16,35 @@ function metric(raw, minimum, maximum, integer = false) {
     ? {status: 'exact', value} : {status: 'ambiguous', reason: 'invalid_source_number'};
 }
 const evidence = (field, result, unit) => ({source: source(field), ...result, ...(unit ? {unit} : {})});
+function hasSemanticAlternatives(label, field) {
+  const parts = label.split(/[/|;]|\bor\b|(?:^|\s)(?:или|либо)(?:\s|$)/i).map(part => part.trim()).filter(Boolean);
+  const values = parts.map(part => canonicalizeSemanticSourceFields({[field]: part})[field]);
+  const choices = new Set(values.filter(Boolean));
+  const explicitChoice = /\bor\b|(?:^|\s)(?:или|либо)(?:\s|$)/i.test(label);
+  if (explicitChoice && parts.length > 1 && values.some(value => !value)) return true;
+  if (choices.size < 2) return false;
+  // A slash can join a hybrid's two energy sources or a bi-fuel system.
+  // Preserve the existing canonical treatment of those combinations; an
+  // explicit "or" is still an alternative, and petrol/diesel remains unclear.
+  if (field === 'fuel' && !explicitChoice && choices.size === 2 &&
+      ((choices.has('electric') && ['petrol', 'diesel', 'lpg'].some(value => choices.has(value))) ||
+       (choices.has('petrol') && choices.has('lpg')))) return false;
+  return true;
+}
+
+function assertNoUndocumentedThirtyMinutePower(offer) {
+  // The publisher normalizes again. Probe that actual path without replacing
+  // the source-bound offer with any values inferred from its trim/raw text.
+  // This v3 schema supplies no certified 30-minute measurement at all.
+  const repeated = normalizeVehicleOfferSpecs(offer);
+  const values = [repeated.power30MinKw,
+    ...(Array.isArray(repeated.power30MinKwByMotor) ? repeated.power30MinKwByMotor : [])];
+  if (values.some(value => typeof value === 'number' && Number.isFinite(value) && value > 0)) {
+    // Throw, rather than skip this car: the restorer cannot complete the
+    // intake report, and publication must keep the currently active catalog.
+    throw Error('paid_encar_v3_undocumented_30_min_power');
+  }
+}
 
 /** Pure mapping of one already identity-verified, paid v3 snapshot row.
  * No provider calls, model-spec guesses or changes to legacy Encar adapters.
@@ -28,12 +58,14 @@ export function normalizePaidEncarOffer(data, {id, observedAt, adapter}) {
   const iceHp = metric(data.power_ice_hp, 20, 2500);
   const motorKw = metric(data.power_electro_kw, 0.1, 2500);
   const driveLabel = text(data.drive_type);
-  const ambiguousDrive = /\b(?:2wd|4x2)\b|передний\s*(?:или|\/)\s*задний/i.test(driveLabel);
+  const ambiguousDrive = /\b(?:2wd|4x2)\b|передний\s*(?:или|\/)\s*задний/i.test(driveLabel)
+    || hasSemanticAlternatives(driveLabel, 'drive');
   const fuelLabel = text(data.engine_type).replace(/электричество/ig, 'electricity');
-  const fields = canonicalizeSemanticSourceFields({fuel: fuelLabel,
+  const alternativeFuel = hasSemanticAlternatives(fuelLabel, 'fuel');
+  const fields = canonicalizeSemanticSourceFields({fuel: alternativeFuel ? undefined : fuelLabel,
     transmission: text(data.transmission_type), bodyType: text(data.body_type),
     drive: ambiguousDrive ? undefined : driveLabel});
-  const sourceFuelKind = namedElectrifiedPowertrainKind({fuel: fuelLabel})
+  const sourceFuelKind = alternativeFuel ? 'unknown' : namedElectrifiedPowertrainKind({fuel: fuelLabel})
     || (fields.fuel === 'electric' ? 'electric' : fields.fuel === 'hybrid' ? 'other_hybrid' : fields.fuel ? 'combustion' : 'unknown');
   const offer = adapter.normalizeOffer({Id: id, Manufacturer: data.mark, Model: data.model, FormYear: year.value,
     Price: data.price, Badge: data.configuration, BadgeDetail: data.complectation, Mileage: data.km_age,
@@ -49,13 +81,14 @@ export function normalizePaidEncarOffer(data, {id, observedAt, adapter}) {
   // description still conflicts with a series name.
   const namedKind = namedElectrifiedPowertrainKind({...offer, fuel: undefined, engineType: undefined});
   const compatibleSeriesName = sourceFuelKind === 'other_hybrid' && namedKind === 'series_hybrid'
-    && !/parallel[ -]?hybrid|power[ -]?split|mixed[ -]?hybrid|параллельн\w*\s+гибрид/i.test(fuelLabel);
+    && !/parallel[ -]?hybrid|power[ -]?split|mixed[ -]?hybrid|параллельн[а-яё]*\s+гибрид/i.test(fuelLabel);
   const fuelKind = compatibleSeriesName ? namedKind : sourceFuelKind;
   const fuelConflict = fields.fuel && namedKind && namedKind !== fuelKind;
   const fuelAmbiguous = fuelKind === 'combustion' && motorKw.status === 'exact';
-  const fuelResult = {status: fuelConflict ? 'conflict' : fuelAmbiguous ? 'ambiguous'
+  const fuelResult = {status: alternativeFuel ? 'ambiguous' : fuelConflict ? 'conflict' : fuelAmbiguous ? 'ambiguous'
     : fields.fuel ? 'exact' : present(data.engine_type) ? 'ambiguous' : 'missing', value: fields.fuel,
-    ...(fuelConflict ? {reason: 'fuel_identity_conflict'} : fuelAmbiguous ? {reason: 'electric_power_with_combustion_label'} : {})};
+    ...(alternativeFuel ? {reason: 'alternative_source_fuels', rawValue: text(data.engine_type).slice(0, 160)}
+      : fuelConflict ? {reason: 'fuel_identity_conflict'} : fuelAmbiguous ? {reason: 'electric_power_with_combustion_label'} : {})};
   Object.assign(offer, fields, {fuel: fields.fuel, powertrainKind: fuelKind,
     engineCc: cc.value, powerHp: hp.value, powerKw: kw(hp.value),
     powerDataConfidence: hp.status === 'exact' ? 'source_exact' : undefined,
@@ -97,5 +130,6 @@ export function normalizePaidEncarOffer(data, {id, observedAt, adapter}) {
         ...(ambiguousDrive ? {reason: 'driven_axle_unspecified'} : {})}),
       certifiedPower: evidence('certified_30min_power', {status: 'missing'}, 'kW'),
     }});
+  assertNoUndocumentedThirtyMinutePower(offer);
   return offer;
 }
