@@ -26595,3 +26595,14 @@ AGENTS.md explicitly prohibits increasing gate thresholds without NEW explicit o
 - Для draft technical repair отдельно проверяется уже объединённая с текущей карточкой запись: сохранённый старый trim не должен повторно превратиться в неподтверждённую30min мощность; подтверждённые manual/encyclopedia значения сохраняются. Snapshot43570782014/1 имеет10270 страниц, поэтому новый IO должен учитывать этот подтверждённый объём. Проверка draft не является утверждением о найденной ошибке в реальных объявлениях.
 - Публикация этого адресного выпуска: https://github.com/jeep-jim/AvtoCena/commit/c50aab5dfbd689e2c0788d4a7dc1f02a2e8a9d28
 
+
+
+### 2026-11-16 — Финальная проверка старых UAE card references без записи в хранилище
+- Задача: объяснить блокировку подготовки нового выпуска по UAE и не обходить проверку полноты.
+- Проверка https://github.com/jeep-jim/AvtoCena/actions/runs/43862668734 (job 133283204390), controller a47d459c7b61e0447a4c37d458de4178649e5aa0, закончила чтение 2026-11-16T12:02:42.076Z. Итоговый отчёт verified=true/finalFencesVerified=true, все наблюдавшиеся revisions и manifest неизменны.
+- Поколение gen_1794665184205_cfd76b47: immutable/public UAE projections содержат 25 666 уникальных ID; base selector — 25 663. В проверенных 103 блоках (все 101 UAE-referenced blocks 1382–1482 плюс соседние 1381/1483) найдено 25 663 UAE ID; все base references корректны.
+- Три ID 291f2b7703a3b68aa76253cd, 8ca9a91f7d9653e1fe307d00, f8b2705e947357c174ba4b55 есть в обеих projections, но не найдены в проверенной области cards. universalAbsenceProven=false: глобальное отсутствие вне этой области не утверждается. Дописывать выдуманные block references или убирать проверку покрытия нельзя.
+- Candidate v7 отсутствует. Job имеет ожидаемый exit 2 из-за incomplete/unavailable candidate, а не ошибки чтения: 263 GET/HEAD, 219 380 954 bytes, readFailures=0, storageWrites=0. Полный обезличенный отчёт: docs/operations/2026-11-16-uae-card-coverage.json.
+- Рабочее приложение по health осталось 83ff17075e9188dcf227c8752dc064248d5f42e0. Этот адресный выпуск сохраняет доказательства проверки и не устанавливает приложение, не перепубликует каталог и не меняет источники/расписания.
+- Публикация этого адресного выпуска: https://github.com/jeep-jim/AvtoCena/commit/1d501795be7e076ac8c989fdb1891dcd37cd7954
+
