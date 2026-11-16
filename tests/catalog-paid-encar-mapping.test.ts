@@ -134,6 +134,61 @@ test('2WD stays unassigned without excluding the listing; explicit driven axles 
   }
 });
 
+test('alternative source fuels stay unresolved through actual seller publication', async () => {
+  await withOfflinePublication(async () => {
+    for (const engine_type of ['Бензин / Дизель', 'Petrol or diesel', 'Бензин или Дизель',
+      'Бензин либо Дизель', 'Бензин или Электричество', 'Бензин или неизвестно']) {
+      const offer = mapped({engine_type});
+      assert.equal(offer.fuel, undefined); assert.equal(offer.powertrainKind, 'unknown');
+      assert.equal(offer.operational.semanticEvidence.fuel.status, 'ambiguous');
+      assert.equal(offer.operational.semanticEvidence.fuel.reason, 'alternative_source_fuels');
+      assert.equal(offer.operational.semanticEvidence.fuel.rawValue, engine_type);
+      assert.equal(classifySpecificationEvidence(offer, 'fuelPowertrain').state, 'ambiguous');
+      const prepared = await prepareSellerInventory(normalizeVehicleOfferSpecs(offer));
+      assert.ok(prepared, 'unknown fuel alone must not silently remove the listing');
+      assert.equal(prepared.fuel, undefined); assert.equal(prepared.powertrainKind, 'unknown');
+      assert.equal(prepared.totalRub, null); assert.equal(prepared.catalogPricingMode, 'seller');
+    }
+    assert.equal(mapped({engine_type: 'Бензин / Gasoline'}).fuel, 'petrol', 'two names for the same fuel are not alternatives');
+    for (const engine_type of ['Бензин + Электричество', 'Бензин / Электричество', 'Gasoline/Electricity']) {
+      assert.equal(mapped({engine_type, model: 'Niro', configuration: 'Hybrid'}).fuel, 'hybrid');
+    }
+    assert.equal(mapped({engine_type: 'Gasoline/LPG'}).fuel, 'lpg');
+  });
+});
+
+test('alternative driven axles never acquire exact single-axis evidence or exclude the listing', async () => {
+  await withOfflinePublication(async () => {
+    for (const drive_type of ['FWD / RWD', 'FWD or AWD', 'AWD | FWD', 'Передний привод или задний привод', 'FWD or unknown']) {
+      const offer = mapped({drive_type});
+      assert.equal(offer.drive, undefined);
+      assert.equal(offer.operational.semanticEvidence.drive.status, 'missing');
+      assert.equal(offer.operational.sourceDriveEvidence.status, 'ambiguous');
+      assert.equal(offer.operational.sourceDriveEvidence.rawValue, drive_type);
+      const prepared = await prepareSellerInventory(normalizeVehicleOfferSpecs(offer));
+      assert.ok(prepared);
+      assert.equal(publicOffer(compactPublicStorageOffer(prepared)).drive, undefined);
+    }
+    assert.equal(mapped({drive_type: 'AWD / 4WD'}).drive, 'awd', 'equivalent source labels remain usable');
+  });
+});
+
+test('paid v3 fails the entire mapping when a later normalization invents undocumented 30-minute power', () => {
+  for (const patch of [
+    {configuration: 'Hybrid 30 min 50 kW'},
+    {complectation: '30-minute power 50 kW'},
+    {configuration: 'Гибрид 30 минут 50 кВт'},
+    {configuration: {power30MinKw: 50}},
+  ]) {
+    const row = data({engine_type: 'Гибрид', model: 'Niro', configuration: 'Hybrid',
+      displacement_cc: 1580, power: 141, power_ice_hp: 105, power_electro_kw: 32, ...patch});
+    const unchanged = structuredClone(row);
+    assert.throws(() => normalizePaidEncarOffer(row, {id: row.inner_id, observedAt, adapter}),
+      /^Error: paid_encar_v3_undocumented_30_min_power$/);
+    assert.deepEqual(row, unchanged, 'source trim and raw fields must not be rewritten to evade the guard');
+  }
+});
+
 test('hybrid total hp and electric peak kW never become ICE or certified utilization power', async () => {
   await withOfflinePublication(async () => {
     const hybrid = mapped({engine_type: 'Бензин + Электричество', power: 227, power_ice_hp: 180, power_electro_kw: 44.2,
@@ -194,8 +249,20 @@ test('coarse hybrid fuel permits an explicit series or plug-in identity without 
       assert.equal(prepared.motorPeakKw, 100);
       assert.equal(prepared.totalRub, null);
     }
+    const alternative = mapped({...note, engine_type: 'Гибрид или Электро'});
+    assert.equal(alternative.fuel, undefined);
+    assert.equal(alternative.powertrainKind, 'unknown', 'a named layout cannot resolve an explicit source alternative');
+    assert.equal(alternative.operational.semanticEvidence.powertrainKind.source, 'auto_api_encar:v3:engine_type');
+    assert.equal(classifySpecificationEvidence(normalizeVehicleOfferSpecs(alternative), 'fuelPowertrain').state, 'ambiguous');
+    const unresolved = await prepareSellerInventory(normalizeVehicleOfferSpecs(alternative));
+    assert.ok(unresolved);
+    assert.equal(unresolved.fuel, undefined); assert.equal(unresolved.totalRub, null);
+    assert.throws(() => mapped({...note, configuration: 'e-POWER 30 min 50 kW'}),
+      /^Error: paid_encar_v3_undocumented_30_min_power$/,
+      'a compatible named hybrid still cannot supply uncertified 30-minute power');
     for (const patch of [{...note, engine_type: 'Бензин'}, {...note, engine_type: 'Электро'},
-      {...note, engine_type: 'Parallel hybrid'}, {...note, model: 'EV6', configuration: 'BEV', engine_type: 'Гибрид'}]) {
+      {...note, engine_type: 'Parallel hybrid'}, {...note, engine_type: 'Параллельный гибрид'},
+      {...note, model: 'EV6', configuration: 'BEV', engine_type: 'Гибрид'}]) {
       const source = mapped(patch);
       assert.equal(source.operational.semanticEvidence.fuel.status, 'conflict');
       assert.equal(classifySpecificationEvidence(normalizeVehicleOfferSpecs(source), 'fuelPowertrain').state, 'conflict');

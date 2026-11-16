@@ -4,6 +4,7 @@ import {createHash} from 'node:crypto';
 import {readFileSync} from 'node:fs';
 import path from 'node:path';
 import {normalizePaidEncarOffer} from '../scripts/lib/paid-encar-offer.mjs';
+import {EncarDirectAdapter} from '../apps/web/lib/catalog/adapters.ts';
 import {paidEncarRequest, paidEncarRefreshDecision, collectPaidEncarSnapshot,
   assertPaidEncarSnapshotReceipt, paidEncarSnapshotScope, paidEncarSavedPageVerifier,
   PAID_ENCAR_PAUSE_MARGIN_MS} from '../scripts/catalog-paid-encar-intake.mjs';
@@ -67,7 +68,7 @@ const restorer = new AsyncRestorer('fs', 'path', 'getJsonStorage', 'EncarDirectA
   'paidEncarSavedPageVerifier', 'openRawFeedPin','rawProducerOwner','readRawRootHandoff',
   'normalizePaidEncarOffer', 'process', 'console', restorerBody);
 
-async function restoreFixture(f) {
+async function restoreFixture(f, actualAdapter = false) {
   const env={ENCAR_SNAPSHOT_RUN:identity.runId,ENCAR_SNAPSHOT_ATTEMPT:identity.attempt,GITHUB_SHA:identity.headSha,
     GITHUB_RUN_ID:identity.runId,GITHUB_RUN_ATTEMPT:String(f.restoreAttempt=(f.restoreAttempt||0)+1)};
   const fs = {mkdir: async () => {}, readdir: async () => [], writeFile: async (_file, text) => {
@@ -75,7 +76,10 @@ async function restoreFixture(f) {
   }};
   class Adapter {
     sourceId = 'encar_feed_fixture';
-    normalizeOffer(input) {f.events.push({kind: 'normalize', id: input.Id}); return {id: input.Id, operational: {}};}
+    normalizeOffer(input) {
+      f.events.push({kind: 'normalize', id: input.Id});
+      return actualAdapter ? new EncarDirectAdapter().normalizeOffer(input) : {id: input.Id, operational: {}};
+    }
   }
   return restorer(fs, path, () => f.storage, Adapter, () => false,
     () => async row => {f.events.push({kind: 'observation', row});},
@@ -340,6 +344,39 @@ test('the actual restorer verifies each new saved page before normalization and 
   assert.ok(report > f.events.findIndex(e => e.kind === 'prepare-reports'));
   assert.equal(f.events[report].report.completed, true);
   assert.equal(f.events[report].report.snapshotAttempt, identity.attempt);
+});
+
+test('unsafe v3 text stops actual restoration before report preparation or a completed intake can reach publication', async () => {
+  const f = fixture();
+  const source = {mark: 'Kia', model: 'Niro', year: 2024, price: 12000000, currency: 'KRW',
+    advertisement_type: 'Продажа', sales_status: 'Доступно', engine_type: 'Гибрид',
+    displacement_cc: 1580, power: 141, power_ice_hp: 105, power_electro_kw: 32,
+    configuration: 'Hybrid'};
+  const rows = ['54000001', '54000002'].map(id => ({inner_id: id, data: {...source, inner_id: id}}));
+  rows[1].data.configuration = 'Hybrid 30 min 50 kW';
+  await collectPaidEncarSnapshot(options(f, {request: async () => page(1, rows, null)}));
+  const saved = structuredClone([...f.values]);
+  f.events.length = 0;
+  await assert.rejects(restoreFixture(f, true), /^Error: paid_encar_v3_undocumented_30_min_power$/);
+  assert.equal(f.events.filter(event => event.kind === 'observation').length, 1,
+    'only the preceding safe row may enter an incomplete local staging shard');
+  assert.equal(f.events.some(event => ['prepare-reports', 'intake-report', 'api'].includes(event.kind)), false,
+    'no completion report, report preparation or extra provider request after refusal');
+  const pinKey = `${RAW_PIN_PREFIX}encar-restore-${identity.runId}-${f.restoreAttempt}.json`;
+  const writes = f.events.filter(event => event.kind === 'write');
+  assert.ok(writes.length > 0, 'the restore operation must retain its raw-source protection pin');
+  assert.ok(writes.every(event => event.key === pinKey),
+    'only the owned protection pin may be written; source, reports and catalog remain immutable');
+  assert.deepEqual(writes[0].condition, {ifNoneMatch: '*'});
+  const pin = f.values.get(pinKey);
+  assert.equal(pin.state, 'loading', 'a rejected intake cannot ready or close its protection pin');
+  assert.deepEqual(pin.owner, {runId: identity.runId, attempt: String(f.restoreAttempt), revision: identity.headSha});
+  assert.deepEqual(pin.references, [
+    {kind: 'encar-snapshot', root: prefix()},
+    {kind: 'encar-reports', root: `catalog/paid-encar-reports/v1/${Date.parse(completedAt)}`},
+  ]);
+  assert.deepEqual([...f.values].filter(([key]) => key !== pinKey), saved,
+    'the verified source snapshot and all other stored values remain unchanged');
 });
 
 test('completed retries still reject a changed early raw page in the actual restore pass without HTTP', async () => {
