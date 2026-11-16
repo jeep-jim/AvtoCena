@@ -33,6 +33,7 @@ jobs:
           def safe_route(value):
               url=urlsplit(value);path=url.path
               if path.startswith('/cars/offer/'):path='/cars/offer/:id'
+              elif re.fullmatch(r'/cars/brand/[a-z0-9-]+(?:/model/[a-z0-9-]+)?',path) and len(path)<180:pass
               elif path.startswith('/cars/'):path='/cars/:category'
               elif path not in {'/','/cars','/api/health','/api/catalog/search','/api/catalog/models','/api/catalog/saved-previews','/login','/autocalc'}:path='/other'
               query=parse_qs(url.query)
@@ -67,6 +68,13 @@ jobs:
                   target=[x for x in lines if '2026/11/16 05:0' in x]
                   kinds=collections.Counter('upstream_timeout' if 'upstream timed out' in x else 'connect_failed' if 'connect() failed' in x else 'other' for x in target)
                   print('PROXY_ERRORS',json.dumps({'total':len(target),'types':dict(kinds)}))
+                  request_rows=[]
+                  for x in target:
+                      m=re.search(r'request: "(?:GET|HEAD) ([^ ]+) HTTP/[^\"]+"',x)
+                      if m:request_rows.append((x[:16],safe_route(m.group(1))))
+                  print('PROXY_WARNING_ROUTES',json.dumps([{'route':path,'count':n} for path,n in collections.Counter(row[1] for row in request_rows).most_common(30)]))
+                  print('PROXY_WARNING_MINUTES',json.dumps(dict(collections.Counter(row[0] for row in request_rows))))
+
           ps=cmd('docker','ps','-a','--format','{{.Names}} {{.Status}} {{.Image}}')
           print('CANDIDATE_CONTAINERS',[x[:200] for x in ps.splitlines() if '9cb571fc' in x][:8])
           for name in [x.split()[0] for x in ps.splitlines() if '9cb571fc' in x][:2]:
@@ -115,6 +123,9 @@ jobs:
                   value=re.sub(r'[A-Za-z0-9_/+=-]{64,}','[LONG_VALUE]',value)
                   messages[value[:220]]+=1
               print('ERROR_MESSAGES',json.dumps(messages.most_common(12)))
+              queue_times=[x[:30].split(' ',1)[0] for x in logs.splitlines() if 'Error: detail_cache_queue_' in x]
+              print('QUEUE_TIMES',json.dumps({'first':queue_times[:5],'last':queue_times[-5:],'byMinute':dict(collections.Counter(x[:16] for x in queue_times))}))
+
 
 
           PY
