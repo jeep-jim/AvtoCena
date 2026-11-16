@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import {readOwnedJsonBounded} from '../../apps/web/lib/catalog/owned-bounded-json.mjs';
 import {randomBytes} from 'node:crypto';
 import {rawDigest, RAW_PREFIXES, rawGenerationKey} from './catalog-raw-provenance.mjs';
 import {RAW_COORDINATION_KEY, assertRawCoordination, coordinatedRawReferences, mutateRawCoordination,
@@ -71,14 +72,14 @@ export async function openRawProducerSession({storage, operationId, owner, refer
   };
   // Register the promise before its first await. An unawaited caller therefore
   // cannot make seal() overlook a PUT that is already scheduled locally.
-  function io(method, args, write) {
+  function io(method, args, write, perform) {
     assert.ok(accepting, 'raw_coord_session_closed');
     assert.ok(!write || !readOnly, 'raw_coord_read_session_write_forbidden');
     const permission = enqueueControl(async () => {
       const state = await readState(storage, policy);
       (write ? assertRawWritePermit : assertRawReadPermit)(state, capability, args[0]);
     });
-    const operation = permission.then(() => storage[method](...args));
+    const operation = permission.then(() => perform ? perform() : storage[method](...args));
     pending.add(operation);
     operation.then(() => pending.delete(operation), error => {
       pending.delete(operation);
@@ -90,6 +91,10 @@ export async function openRawProducerSession({storage, operationId, owner, refer
   }
   const scoped = new Proxy(storage, {get(target, property) {
     if (['deleteObject', 'deleteObjects', 'deleteJson', 'deleteBinary', 'deletePrefix'].includes(property)) return () => {throw Error('raw_coord_session_delete_forbidden');};
+    if (property === 'readJsonBounded') return (key, maxBytes, {deadline} = {}) => {
+      const read = () => readOwnedJsonBounded({storage, key, maxBytes, deadline});
+      return isRawKey(key) ? io('readJsonBounded', [key], false, read) : read();
+    };
     const value = target[property];
     if (typeof value !== 'function') return value;
     if (property === 'writeJson' || property === 'putBinary') return (...args) => io(property, args, true);

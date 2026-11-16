@@ -5,7 +5,7 @@ import {RAW_COORDINATION_KEY, RAW_COORDINATION_LIMITS, RAW_COORDINATED_POINTERS,
   mutateRawCoordination} from './catalog-raw-coordination.mjs';
 import {planRawFeedRetention, rawInventoryGroupForObject, completeRawInventoryGroup} from './catalog-raw-retention-plan.mjs';
 import {RAW_INTERNAL_MANIFEST_KEY,RAW_INTERNAL_COORDINATION_ID,rawInternalProvenanceKey,
-  rawInternalPointerDescriptor} from '../../apps/web/lib/catalog/raw-internal-provenance.mjs';
+  verifiedRawInternalPointerDescriptor} from '../../apps/web/lib/catalog/raw-internal-provenance.mjs';
 
 export const RAW_GC_TARGET = Object.freeze({endpoint:'https://s3.regru.cloud',bucket:'avtocena-staging-8120751',
   prefix:'migration-staging/full-20261011/'});
@@ -38,14 +38,15 @@ function budget(config,now) {
   return {limits:limits(config),startedAt:now(),now,pages:0,objects:0,inventoryBytes:0,jsonBytes:0,heads:0,writes:0,deletes:0};
 }
 function time(b) {const elapsed=b.now()-b.startedAt;assert.ok(Number.isFinite(elapsed) && elapsed>=0 && elapsed<=b.limits.workMs,'raw_gc_time_budget');}
-async function read(io,key,maxBytes,b) {
+async function read(io,key,maxBytes,b,deadline=b.startedAt+b.limits.workMs) {
   assertIo(io);time(b);
-  const meta = await io.readJson({target:RAW_GC_TARGET,key,maxBytes,deadline:b.startedAt+b.limits.workMs});
+  assert.ok(Number.isFinite(deadline) && deadline<=b.startedAt+b.limits.workMs,'raw_gc_read_deadline');
+  const meta = await io.readJson({target:RAW_GC_TARGET,key,maxBytes,deadline});
   assert.ok(meta && typeof meta.found === 'boolean','raw_gc_read_result');
   if (meta.found) {
     assert.ok(typeof meta.etag === 'string' && meta.etag.length > 0 && meta.etag.length <= 256,'raw_gc_etag_required');
-    const bytes = Buffer.byteLength(JSON.stringify(meta.value));b.jsonBytes += bytes;
-    assert.ok(bytes <= maxBytes && b.jsonBytes <= b.limits.jsonBytes,'raw_gc_json_budget');
+    const bytes = meta.bytes ?? Buffer.byteLength(JSON.stringify(meta.value));b.jsonBytes += bytes;
+    assert.ok(integer(bytes) && bytes <= maxBytes && b.jsonBytes <= b.limits.jsonBytes,'raw_gc_json_budget');
   } else assert.equal(meta.value,null,'raw_gc_absent_value');
   return meta;
 }
@@ -84,7 +85,16 @@ export async function readRawGcAuthority({io,expected,budget:work,now = Date.now
     if(id===RAW_INTERNAL_COORDINATION_ID) {
       try {
         const proof=value.found?await read(io,rawInternalProvenanceKey(value.value?.generationId),4*1024**2,b):{value:null};
-        const actual=rawInternalPointerDescriptor(value.value,proof.value);
+        // Reuse the production verifier, including archived input witnesses,
+        // materialization parts and actual internal chunks. A well-shaped
+        // header alone cannot make a nonempty internal source complete.
+        const storage={driver:'object',async readJsonBounded(key,maxBytes,{deadline}) {
+          assert.ok(deadline<=b.startedAt+b.limits.workMs,'raw_gc_proof_deadline');
+          const meta=await read(io,key,maxBytes,b,deadline);
+          return {...meta,bytes:meta.found?(meta.bytes??Buffer.byteLength(JSON.stringify(meta.value))):0};
+        }};
+        const actual=await verifiedRawInternalPointerDescriptor({storage,manifest:value.value,provenance:proof.value,
+          deadline:Math.min(b.startedAt+b.limits.workMs,Date.now()+300000)});
         if(!actual.complete || !same(actual,stored.current)) return unknown('internal_catalog_unproven');
       } catch {return unknown('internal_catalog_unproven');}
     }
@@ -146,7 +156,9 @@ export async function inventoryRawGcRoots({io,roots,authority,config,now = Date.
   roots.forEach(rootScope);const groups = [];
   try {
     for (const root of roots) {
-      const kind = rootScope(root),listed = await listing(io,root,b);
+      const kind = rootScope(root);
+      if(kind==='encar-reports') return {...unknown('vm_report_reader_unfenced'),groups};
+      const listed = await listing(io,root,b);
       if (!listed.objects.length) return {...unknown('root_empty_or_missing'),groups};
       const receiptKey = root+'/'+receiptLeaf(kind),receipt = await read(io,receiptKey,4*1024**2,b);
       const receiptObject = listed.objects.find(row=>row.key===receiptKey);
@@ -334,6 +346,12 @@ function settledDelete(result,rows) {
  * evidence through the existing coordinator before it can be resumed. */
 export async function executeRawGcPlan({io,evidence,arm,resumeTicket,config,now=Date.now,environment=process.env}) {
   assertIo(io,true);const b=budget(config,now),planned=evidencePlan(evidence,b),identity=armedIdentity(arm,evidence,environment);
+  // The installed report endpoint has no durable read claim. A file's age
+  // cannot bound an in-flight reader after its final catalogue reference was
+  // removed. Refuse even an old otherwise-valid plan before any claim/PUT.
+  if(planned.plan.groups.some(group=>group.kind==='encar-reports')) return {mode:'execute',status:'protected_unknown',
+    reason:'vm_report_reader_unfenced',ticket:resumeTicket||null,evidenceSha256:evidence.sha256,planSha256:planned.sha256,
+    acknowledgedObjects:0,acknowledgedInventoryBytes:0,storageWrites:0,deleteRequests:0};
   let authority=await readRawGcAuthority({io,expected:evidence.authority,budget:b}),state=authority.state,ticket=resumeTicket;
   const result=(status,reason)=>({mode:'execute',status,...(reason?{reason}:{}),ticket:ticket||null,
     evidenceSha256:evidence.sha256,planSha256:planned.sha256,

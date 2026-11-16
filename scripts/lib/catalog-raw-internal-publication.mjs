@@ -1,7 +1,10 @@
+import {verifyIndependentInternalContribution} from './catalog-source-contribution-authority.mjs';
 import assert from 'node:assert/strict';
 import {randomBytes} from 'node:crypto';
 import {RAW_INTERNAL_MANIFEST_KEY, RAW_INTERNAL_COORDINATION_ID, rawInternalProvenanceKey,
   buildRawInternalProvenance, rawInternalPointerDescriptor} from '../../apps/web/lib/catalog/raw-internal-provenance.mjs';
+import {readSourceContributionDescriptor, sourceContributionReference,
+  verifySourceContribution} from '../../apps/web/lib/catalog/source-contribution-reader.mjs';
 import {readRawCoordinationPolicy, assertRawCoordinationPolicy, assertRawCoordinationTicket,
   assertRawInternalReservation, assertRawInternalCompletion} from '../../apps/web/lib/catalog/raw-coordination-gate.mjs';
 import {RAW_COORDINATION_KEY, assertRawCoordination, mutateRawCoordination} from './catalog-raw-coordination.mjs';
@@ -59,7 +62,10 @@ export async function reconcileRawInternalPublication({storage, binding, manifes
 /** Called after immutable internal chunks have completed, before their actual
  * manifest CAS. Unknown retained row lineage stays unknown; known dependency
  * roots are conservatively retained from the old internal reserve and intake. */
-export async function prepareRawInternalPublication({storage, manifest, baseManifest, intake, operationId, owner}) {
+export async function prepareRawInternalPublication({storage, manifest, baseManifest, intake, operationId, owner, contributionReferences = [], contributionCapabilities = []}) {
+  assert.ok(Array.isArray(contributionReferences) && contributionReferences.length===0,'source_contribution_internal_authority');
+  assert.ok(Array.isArray(contributionCapabilities) && contributionCapabilities.length<=100,'raw_internal_contribution_limit');
+  const ownedCapabilities=[...contributionCapabilities];
   const policy = await readRawCoordinationPolicy(storage);
   const baseProof = await priorProof(storage, baseManifest);
   const base = rawInternalPointerDescriptor(baseManifest, baseProof);
@@ -69,7 +75,24 @@ export async function prepareRawInternalPublication({storage, manifest, baseMani
   const intakeRefs = intake && (intake.completed === true || intake.durableIntakeArchive) ? intakeRawReferences(intake).references : [];
   const count = Object.values(manifest.sources).reduce((sum, source) => sum + Number(source.count), 0);
   const references = count === 0 ? [] : rawReferences([...base.references, ...intakeRefs, ...handoffs.flatMap(row => row.references)]);
-  const provenance = buildRawInternalProvenance({manifest, references});
+  const verifiedCapabilities=[];
+  for(const capability of ownedCapabilities)verifiedCapabilities.push(await verifyIndependentInternalContribution({
+    contributions:capability,manifest,intake}));
+  const selected = new Map(), contributions = [], contributionUnavailable = [];
+  for (const previous of baseProof?.version === 2 ? baseProof.contributions : []) {
+    const source = manifest.sources[previous.sourceId];
+    if (source?.count > 0 && rawDigest(source) === previous.sourceSha256) selected.set(previous.sourceId, previous);
+  }
+  for (const value of verifiedCapabilities) {
+    const reference=sourceContributionReference(value.reference);selected.set(reference.sourceId,reference);
+  }
+  for (const reference of selected.values()) {
+    try {contributions.push(await (policy ? readSourceContributionDescriptor : verifySourceContribution)({storage, ...reference, internalManifest: manifest}));}
+    catch {contributionUnavailable.push(reference.sourceId);}
+  }
+  // This stage reads only immutable control headers. The shared runtime checks
+  // actual input witnesses/chunks after this pending pointer protects all refs.
+  const provenance = buildRawInternalProvenance({manifest, references, contributions});
   const candidate = rawInternalPointerDescriptor(manifest, provenance);
   await immutable(storage, rawInternalProvenanceKey(manifest.generationId), provenance);
   let binding = null;
@@ -85,11 +108,12 @@ export async function prepareRawInternalPublication({storage, manifest, baseMani
     await immutable(storage, sessionKey(manifest), {version: 1, binding, base, candidate});
   }
   const verify = async () => {
+    for(const capability of ownedCapabilities)await verifyIndependentInternalContribution({contributions:capability,manifest,intake});
     assert.ok(same(await storage.readJson(rawInternalProvenanceKey(manifest.generationId), null), provenance), 'raw_internal_immutable_changed');
     if (binding) assert.ok(same(await storage.readJson(sessionKey(manifest), null), {version: 1, binding, base, candidate}), 'raw_coord_internal_session_changed');
-    await assertRawInternalReservation({storage, policy, ticket: binding?.ticket, manifest, baseManifest});
+    await assertRawInternalReservation({storage, policy, ticket: binding?.ticket, manifest, baseManifest, verifyInputs: false});
   };
-  return {manifest, provenance, binding, ticket: binding?.ticket, verifyBeforeCommit: verify,
+  return {manifest, provenance, binding, contributionUnavailable, ticket: binding?.ticket, verifyBeforeCommit: verify,
     async afterCommit() {
       if (!binding) {await assertRawCoordinationPolicy(storage, null); return;}
       const state = await readState(storage, policy), pointer = state.pointers.find(row => row.id === RAW_INTERNAL_COORDINATION_ID);

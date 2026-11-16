@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {RAW_INTERNAL_MANIFEST_KEY, RAW_INTERNAL_COORDINATION_ID, rawInternalProvenanceKey,
-  rawInternalPointerDescriptor} from './raw-internal-provenance.mjs';
+  rawInternalPointerDescriptor, verifiedRawInternalPointerDescriptor} from './raw-internal-provenance.mjs';
 
 export const RAW_COORDINATION_POLICY_KEY = 'catalog/raw-feed-coordination/v1/policy.json';
 const STATE_KEY = 'catalog/raw-feed-coordination/v1/state.json';
@@ -67,14 +67,15 @@ export async function assertRawPublicationReservation({storage, policy, ticket, 
     state.roots.some(root => root.root === ref.root && root.kind === ref.kind && root.state === 'live')), 'raw_coord_publication_root_changed');
 }
 
-async function internalDescriptor(storage, manifest) {
+async function internalDescriptor(storage, manifest, verifyInputs = false) {
   const proof = manifest === null ? null : await storage.readJson(rawInternalProvenanceKey(manifest.generationId), null);
-  return rawInternalPointerDescriptor(manifest, proof);
+  return verifyInputs ? verifiedRawInternalPointerDescriptor({storage, manifest, provenance: proof})
+    : rawInternalPointerDescriptor(manifest, proof);
 }
 
 /** The internal reserve is an input to the next refresh, so its CAS has its
  * own reservation before the later public-generation reservation exists. */
-export async function assertRawInternalReservation({storage, policy, ticket, manifest, baseManifest}) {
+export async function assertRawInternalReservation({storage, policy, ticket, manifest, baseManifest, verifyInputs = true}) {
   await assertRawCoordinationPolicy(storage, policy);
   if (!policy) return;
   const capability = assertRawCoordinationTicket(ticket);
@@ -85,12 +86,18 @@ export async function assertRawInternalReservation({storage, policy, ticket, man
   assert.equal(digest(assertRawCoordinationTicket({...pending, registryId: state.registryId})), digest(capability), 'raw_coord_ownership_changed');
   const actual = await storage.readJson(RAW_INTERNAL_MANIFEST_KEY, null);
   assert.ok(digest(actual) === digest(baseManifest) && pending.base?.sha256 === digest(actual), 'raw_coord_internal_base_changed');
-  const base = await internalDescriptor(storage, actual), candidate = await internalDescriptor(storage, manifest);
+  const base = await internalDescriptor(storage, actual), candidate = await internalDescriptor(storage, manifest, verifyInputs);
   assert.equal(digest(base), digest(pending.base), 'raw_coord_internal_base_provenance_changed');
   assert.equal(digest(candidate), digest(pending.candidate), 'raw_coord_internal_provenance_changed');
   assert.ok(candidate.provenanceSha256 !== null, 'raw_coord_internal_provenance_missing');
   assert.ok([...base.references, ...candidate.references].every(ref => state.roots?.some(root =>
     root.root === ref.root && root.kind === ref.kind && root.state === 'live')), 'raw_coord_internal_root_changed');
+  if (!candidate.complete) assert.ok(base.references.every(ref => candidate.references.some(next => next.kind === ref.kind
+    && next.root === ref.root && (!ref.sha256 || next.sha256 === ref.sha256))), 'raw_coord_internal_unknown_refs_dropped');
+  await assertRawCoordinationPolicy(storage, policy);
+  const final = await storage.readJson(STATE_KEY, null), current = final?.pointers?.find(row => row.id === RAW_INTERNAL_COORDINATION_ID)?.pending;
+  assert.ok(current && digest(assertRawCoordinationTicket({...current, registryId: final.registryId})) === digest(capability)
+    && digest(current.candidate) === digest(candidate), 'raw_coord_internal_reservation_changed');
 }
 
 export async function assertRawInternalCompletion({storage, policy, ticket, manifest}) {

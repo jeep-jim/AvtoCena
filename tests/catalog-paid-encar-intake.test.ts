@@ -9,6 +9,7 @@ import {paidEncarRequest, paidEncarRefreshDecision, collectPaidEncarSnapshot,
   assertPaidEncarSnapshotReceipt, paidEncarSnapshotScope, paidEncarSavedPageVerifier,
   PAID_ENCAR_PAUSE_MARGIN_MS} from '../scripts/catalog-paid-encar-intake.mjs';
 import {openRawFeedPin,rawProducerOwner,readRawRootHandoff,RAW_PIN_PREFIX} from '../scripts/lib/catalog-raw-provenance.mjs';
+import {createIndependentPaidInput,paidInputRowsProof} from '../scripts/lib/catalog-paid-encar-contributions.mjs';
 
 const identity = {runId: '43812759975', attempt: '1', headSha: '1bb70becbf556359697ebc93cd1e8efa2a8120ed'};
 const completedAt = '2026-11-16T17:05:00.000Z';
@@ -66,7 +67,7 @@ const AsyncRestorer = Object.getPrototypeOf(async function () {}).constructor;
 const restorer = new AsyncRestorer('fs', 'path', 'getJsonStorage', 'EncarDirectAdapter',
   'isEncarNonCashContract', 'observationShardWriter', 'preparePaidEncarReports',
   'paidEncarSavedPageVerifier', 'openRawFeedPin','rawProducerOwner','readRawRootHandoff',
-  'normalizePaidEncarOffer', 'process', 'console', restorerBody);
+  'normalizePaidEncarOffer', 'createIndependentPaidInput', 'paidContributionWorkerSource', 'process', 'console', restorerBody);
 
 async function restoreFixture(f, actualAdapter = false) {
   const env={ENCAR_SNAPSHOT_RUN:identity.runId,ENCAR_SNAPSHOT_ATTEMPT:identity.attempt,GITHUB_SHA:identity.headSha,
@@ -75,7 +76,7 @@ async function restoreFixture(f, actualAdapter = false) {
     f.events.push({kind: 'intake-report', report: JSON.parse(text)});
   }};
   class Adapter {
-    sourceId = 'encar_feed_fixture';
+    sourceId = actualAdapter ? 'encar_direct' : 'encar_feed_fixture';
     normalizeOffer(input) {
       f.events.push({kind: 'normalize', id: input.Id});
       return actualAdapter ? new EncarDirectAdapter().normalizeOffer(input) : {id: input.Id, operational: {}};
@@ -85,7 +86,7 @@ async function restoreFixture(f, actualAdapter = false) {
     () => async row => {f.events.push({kind: 'observation', row});},
     async () => {f.events.push({kind: 'prepare-reports'});return {rawStoragePins:[]};},
     (snapshot, context) => paidEncarSavedPageVerifier(snapshot, {...context, now: Date.parse(completedAt)}),
-    openRawFeedPin,()=>rawProducerOwner(env),readRawRootHandoff,normalizePaidEncarOffer,{env},
+    openRawFeedPin,()=>rawProducerOwner(env),readRawRootHandoff,normalizePaidEncarOffer,createIndependentPaidInput,()=>identity.headSha,{env},
     {log() {}});
 }
 
@@ -99,6 +100,26 @@ async function restorableSnapshot() {
   f.events.length = 0;
   return f;
 }
+
+test('actual saved restorer emits an independent witness only after its actual normalized observations', async () => {
+  const f = fixture();
+  await collectPaidEncarSnapshot(options(f, {request: async () => page(1, [{inner_id:'42799484', data:{
+    inner_id:'42799484', mark:'Kia', model:'Morning', configuration:'GT Line', year:2024,
+    engine_type:'Бензин', displacement_cc:998, power:76, power_ice_hp:76, price:12000000, currency:'KRW',
+    transmission_type:'Автомат', advertisement_type:'Продажа', sales_status:'Доступно',
+    photos:['https://ci.encar.com/42799484_1.jpg'],
+  }}], null)}));
+  f.events.length = 0;
+  await restoreFixture(f, true);
+  const report = f.events.find(event => event.kind === 'intake-report').report;
+  const offers = f.events.filter(event => event.kind === 'observation').map(event => event.row.offer);
+  assert.equal(report.paidInputWitness.kind, 'independent_paid_encar_snapshot_v1');
+  assert.deepEqual(report.paidInputWitness.normalized, paidInputRowsProof(offers));
+  assert.equal(report.paidInputWitness.producer.sourceSha, identity.headSha);
+  assert.equal(offers[0].engineCc,998); assert.equal(offers[0].powerHp,76);
+  assert.ok(f.events.findIndex(event => event.kind === 'observation') < f.events.findIndex(event => event.kind === 'intake-report'));
+  assert.ok(!f.events.some(event => event.kind === 'api'));
+});
 
 test('paid scheduler preserves the existing November 16/19 three-day calendar', () => {
   for (const [day, due] of [[16, true], [17, false], [18, false], [19, true]]) {

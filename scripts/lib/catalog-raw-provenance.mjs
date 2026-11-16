@@ -49,6 +49,22 @@ export function rawReferences(values) {
   return [...roots.values()].sort((a, b) => a.root.localeCompare(b.root));
 }
 
+/** A versioned contribution is retained outside ordinary generation cleanup.
+ * This validates its immutable address, not the producer's row lineage. */
+export function rawContributionReferences(values) {
+  bounded(values, 4096, 'raw_contribution_reference_limit');
+  const references = new Map();
+  for (const value of values) {
+    assert.ok(object(value) && typeof value.key === 'string' && SHA.test(value.sha256 || '')
+      && /^catalog\/raw-feed-coordination\/v1\/contributions\/gen_\d+_[a-z0-9-]+\/[a-zA-Z0-9_-]{1,100}\/manifest\.json$/.test(value.key),
+    'raw_contribution_reference_scope');
+    const previous = references.get(value.key);
+    assert.ok(!previous || previous.sha256 === value.sha256, 'raw_contribution_reference_conflict');
+    references.set(value.key, {key: value.key, sha256: value.sha256});
+  }
+  return [...references.values()].sort((a, b) => a.key.localeCompare(b.key));
+}
+
 /** A durable intake receipt proves a saved input dataset, never supplier
  * inventory completeness or that every retained public row came from it. */
 export function assertDurableIntakeArchive(value, market = value?.market) {
@@ -255,7 +271,8 @@ export function buildRawGenerationProvenance({manifest, marketSources = {}, paid
     }
     markets[market] = {count, complete: count === 0 || source?.complete === true,
       producers: evidence.flatMap(row => row.producers), unknownSources: source?.unknownSources || (count ? ['historic_provenance_missing'] : []),
-      references: rawReferences([...(source?.references || []), ...evidence.flatMap(row => row.references), ...(market === 'korea' ? reports.references : [])])};
+      references: rawReferences([...(source?.references || []), ...evidence.flatMap(row => row.references), ...(market === 'korea' ? reports.references : [])]),
+      ...(source?.contributionReferences?.length ? {contributionReferences: rawContributionReferences(source.contributionReferences)} : {})};
   }
   const value = {version: schemaVersion, scope: schemaVersion === 1 ? 'che168_and_paid_encar_raw_v1' : 'nonjp_raw_v2', ...identity, markets,
     complete: Object.values(markets).every(row => row.complete), paidReportCoverage: reports};

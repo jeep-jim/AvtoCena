@@ -3,11 +3,12 @@
 ## Status
 
 This package adds a transport-independent executor around the existing single-key
-CAS contract. It contains no S3 client, credentials, live bootstrap, workflow,
-schedule, command-line entry point, root-proof producer or writer-coverage
-attestation. `runRawGc()` defaults to the read-only plan operation. The local
-tests use an in-memory transport; their success is not evidence of live writer
-coverage or deletion.
+CAS contract, a bounded native S3 transport and a read-only command-line entry
+point. It contains no credentials, live bootstrap, workflow, schedule, root-proof
+producer or writer-coverage attestation. `runRawGc()` defaults to the read-only
+plan operation. The CLI exposes only `plan` and `inventory`. Local tests use
+memory and mocked HTTP responses; their success is not evidence of live writer
+coverage, REG compatibility acceptance or deletion.
 
 **Activation is blocked.** The internal maintenance catalogue at
 `catalog/internal/manifest.json` can supply rows to the next refresh. Public
@@ -52,9 +53,13 @@ coverage hash. The executor does not refresh an old proof to a new context.
 
 ## Bounded transport port
 
-No production adapter is included. The existing storage `listObjects` collects
-an entire prefix and the aggregate `deleteObjects` interface does not expose the
-required per-key terminal result. Neither is silently treated as a bounded port.
+`scripts/lib/catalog-raw-gc-s3.mjs` implements the bounded port with native
+`node:crypto` SigV4 and `fetch`. The repository has no AWS SDK dependency or
+exported pure signing helper. Its actual storage implementation is the private
+signer in `apps/web/lib/data.ts`; the new port preserves its credential names and
+REG conditional PUT convention without changing that file. Existing
+`listObjects` collects an entire prefix and aggregate `deleteObjects` does not
+expose the required per-key terminal result. Neither is called by this port.
 
 Every request carries the exact target:
 
@@ -64,9 +69,12 @@ Every request carries the exact target:
 | bucket | `avtocena-staging-8120751` |
 | prefix | `migration-staging/full-20261011/` |
 
-The adapter must honor request deadlines, byte caps before JSON parsing, exact
-relative keys and the supplied object count. It must neither fall back to another
-bucket/prefix nor perform hidden retries of destructive requests.
+The adapter enforces request deadlines through header and body reads, byte caps
+before JSON parsing, exact relative keys and the supplied object count. It adds
+the pinned physical prefix exactly once and strips it only after validating each
+returned key. It has no endpoint fallback or implicit HTTP retry. XML is parsed
+with bounded nodes/depth; malformed/duplicate fields, external entities, prefix
+escapes and incomplete continuation metadata fail closed.
 
 | Method | Input and result contract |
 | --- | --- |
@@ -150,8 +158,10 @@ Defaults are two roots, 20,000 inventory objects, 10 GiB of inventory bytes,
 Configured limits cannot exceed the existing 10-group/250,000-object/100-GiB
 contract; pages are capped at 1,000, JSON at 256 MiB and work at 600 seconds.
 DELETE requests contain at most 1,000 exact objects. HEAD concurrency is four.
-Deadline enforcement is part of the future transport contract; JavaScript does
-not race an in-flight mutation against a local timer and call it drained.
+The transport additionally defaults to 5,000 HTTP attempts and 64 MiB of total
+response bytes; an XML page/result is capped at 2 MiB. A deadline abort rejects
+the call, cancels the response reader and schedules no retry. It never labels an
+in-flight mutation drained: an unknown POST outcome remains an active GC attempt.
 
 Results report `acknowledgedObjects` and `acknowledgedInventoryBytes`. Those are
 the sizes from the approved inventory, not measured physical reclaimed bytes.
@@ -171,7 +181,7 @@ node --import tsx --import ./tests/helpers/offline-fetch.mjs --test \
   tests/catalog-raw-internal-provenance.test.ts tests/catalog-raw-provenance.test.ts
 ```
 
-On the prerequisite contract plus this module, 77 tests passed: 26 new executor
+On the prerequisite contract plus the executor, 77 tests passed: 26 executor
 scenarios, 27 coordinator scenarios, three internal provenance scenarios and 21
 existing provenance/retention scenarios. The tests cover both CAS conflict
 orders, immutable-plan conflicts, explicit arming, metadata changes, partial
@@ -179,3 +189,86 @@ acknowledgements, an unresolved DELETE, exact same-owner resume, 1,002 objects
 across two bounded calls, changed authority, unexpected post-delete objects, and
 internal-only lineage. These are local memory-transport tests, not conditional
 S3 DELETE or production readiness evidence.
+
+The transport and CLI add 21 HTTP-mock scenarios, bringing the combined total to
+98 passing tests. Four signature vectors match the
+[published AWS SigV4 examples](https://docs.aws.amazon.com/AmazonS3/latest/developerguide/sig-v4-header-based-auth.html).
+They also cover XML/URI/query encoding, strong ETags, LIST/HEAD timestamps and
+sizes, body/aggregate caps, header/body deadline cancellation, per-key partial
+responses, REG conditional PUT, unresolved destructive responses and read-only
+CLI artifacts. HTTP shape checks follow the primary
+[ListObjectsV2](https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListObjectsV2.html)
+and [DeleteObjects](https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObjects.html)
+contracts; no real object-store call was used to verify them.
+
+## Read-only CLI and adapter entry points
+
+The CLI requires existing pinned `YC_OBJECT_STORAGE_ENDPOINT`,
+`YC_OBJECT_STORAGE_BUCKET`, `YC_OBJECT_STORAGE_PREFIX`, region `us-east-1`, and
+the existing `YC_OBJECT_STORAGE_ACCESS_KEY_ID` / `YC_OBJECT_STORAGE_SECRET_ACCESS_KEY`
+environment variables. It never logs credential values or remote error bodies.
+It writes one new local JSON artifact with exclusive creation and mode 0600,
+then prints a small summary. The output directory must already exist.
+
+```sh
+# Without full retention inputs this only reports authority/readiness blockers.
+node scripts/catalog-raw-gc-plan.mjs --output /absolute/path/readiness.json
+
+# roots.json: {"version":1,"roots":["<exact permitted raw root>"]}
+node scripts/catalog-raw-gc-plan.mjs --mode inventory \
+  --roots-file /absolute/path/roots.json --output /absolute/path/inventory.json
+
+# A separately verified full inventory is required; a root scan cannot supply it.
+node scripts/catalog-raw-gc-plan.mjs \
+  --retention-input /absolute/path/complete-retention-input.json \
+  --output /absolute/path/plan.json
+```
+
+`--work-ms` defaults to 120000 and cannot exceed 600000. Inventory accepts up to
+10 explicit roots while retaining the existing total object/page/byte caps. Even
+a complete selected-root scan reports `eligibleForDeletion:false`. No CLI option
+accepts an arm, executes a plan, bootstraps state or asserts coverage.
+
+`createReadOnlyRawGcS3Transport` exposes only `readJson`, `listPage`, `headObject`,
+the fixed target and safe numeric request statistics. Supplying an execution
+object to that factory is rejected. Future code-level integration uses
+`executeRawGcWithS3`, which delegates to the original exact-arm/owner/CAS
+executor. Its mutation port is private to that wrapper. The CLI never calls it.
+PUT is conditional only; REG's existing bare `If-Match` wire representation is
+signed exactly. Multi-delete requests use verbose results and Content-MD5, never
+assume conditional DELETE support, and accept a terminal result only when every
+requested key has exactly one known success/error entry. Actual absence remains
+verified by the executor's subsequent HEADs.
+
+## Combined contribution verification and retained report reader
+
+The GC authority path now uses `verifiedRawInternalPointerDescriptor`, which
+reads the versioned source witness, bounded archived report, materialization
+parts and every actual internal source chunk. The same verifier is used by the
+source publication/runtime gate. The transport permits only the approved
+non-Japan source IDs and exact contribution/internal chunk shapes; all reads
+share the execution deadline and JSON byte budget. Unknown or changed lineage
+still returns `internal_catalog_unproven`. This is code, not a live bootstrap or
+proof that legacy writers have finished.
+
+Every `encar-reports` group is explicitly retained with
+`protected_unknown:vm_report_reader_unfenced`. The existing VM report reader
+does not hold a durable read claim. File creation age cannot bound an in-flight
+request after its last current/previous reference disappears. Pure retention
+reports that protection per group, bounded inventory refuses those roots, and
+execution rejects even a previously captured armed report plan before any
+claim, audit PUT or DELETE. Other groups still require every existing authority,
+provenance and whole-group guard.
+
+The HTTP adapter requests `Accept-Encoding: identity` and rejects every
+nonidentity `Content-Encoding`, including responses without Content-Length.
+Streamed and declared byte limits therefore cover the same representation;
+report gzip-base64 contents retain their separate decoded limit. A declared
+Content-Length must also match the completed body.
+
+Read-only REG acceptance remains required. In particular, LIST timestamps can
+include fractional seconds while HTTP HEAD Last-Modified commonly has only
+whole seconds. The existing exact comparison is deliberately unchanged and
+fails closed until actual LIST/HEAD evidence is reviewed. No live deletion,
+coverage assertion, policy change or producer request has been performed for
+this integration.

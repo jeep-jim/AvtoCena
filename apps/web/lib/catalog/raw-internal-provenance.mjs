@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
+import {sourceContributionReference, verifySourceContribution} from './source-contribution-reader.mjs';
 
 export const RAW_INTERNAL_MANIFEST_KEY = 'catalog/internal/manifest.json';
 export const RAW_INTERNAL_COORDINATION_ID = 'internal_catalog';
@@ -54,18 +55,58 @@ function references(values) {
 /** A manifest/chunk list is not row lineage. Until the retained fields and
  * internal-only rows have an independently verified materialization proof,
  * every nonempty internal catalog stays unknown even with known raw roots. */
-export function buildRawInternalProvenance({manifest, references: values = []}) {
+export function buildRawInternalProvenance({manifest, references: values = [], contributions}) {
   const identity = sources(manifest), refs = references(values);
   assert.ok(identity.count > 0 || refs.length === 0, 'raw_internal_empty_references');
+  if (contributions !== undefined) {
+    assert.ok(Array.isArray(contributions) && contributions.length <= 100, 'raw_internal_contribution_limit');
+    const seen = new Set(), proofs = contributions.map(value => {
+      const reference = sourceContributionReference(value), source = manifest.sources[reference.sourceId];
+      assert.ok(value.sourceId === reference.sourceId && !seen.has(value.sourceId) && source?.count > 0
+        && value.count === source.count && value.sourceSha256 === digest(source), 'raw_internal_contribution_source');
+      seen.add(value.sourceId);
+      return {sourceId: value.sourceId, key: reference.key, sha256: reference.sha256,
+        sourceSha256: value.sourceSha256, count: value.count, references: references(value.references)};
+    }).sort((a, b) => a.sourceId.localeCompare(b.sourceId));
+    const unknownSources = identity.sourceIds.filter(id => !seen.has(id));
+    const complete = unknownSources.length === 0;
+    return {version: 2, generationId: manifest.generationId, manifestSha256: digest(manifest), count: identity.count,
+      complete, references: references([...(complete ? [] : refs), ...proofs.flatMap(row => row.references)]),
+      unknownSources, reason: complete ? null : 'internal_row_lineage_unproven', contributions: proofs};
+  }
   return {version: 1, generationId: manifest.generationId, manifestSha256: digest(manifest),
     count: identity.count, complete: identity.count === 0, references: refs,
     unknownSources: identity.sourceIds, reason: identity.count ? 'internal_row_lineage_unproven' : null};
 }
 
 export function assertRawInternalProvenance(value, manifest) {
-  const expected = buildRawInternalProvenance({manifest, references: value?.references});
+  assert.ok(value?.version === 1 || value?.version === 2, 'raw_internal_provenance_version');
+  const expected = buildRawInternalProvenance({manifest, references: value?.references,
+    ...(value.version === 2 ? {contributions: value.contributions} : {})});
   assert.equal(digest(value), digest(expected), 'raw_internal_provenance_changed');
   return expected;
+}
+
+/** Completeness for a nonempty reserve comes only from exact persisted input
+ * witnesses and actual chunks. GC/bootstrap callers must use this async check
+ * before accepting a complete nonempty descriptor. */
+export async function verifyRawInternalProvenance({storage, manifest, provenance, deadline = Date.now() + 300000}) {
+  const value = assertRawInternalProvenance(provenance, manifest);
+  if (value.version === 1) return value;
+  const contributions = [];
+  for (const proof of value.contributions) {
+    const verified = await verifySourceContribution({storage, key: proof.key, sha256: proof.sha256,
+      internalManifest: manifest, deadline});
+    contributions.push(verified);
+  }
+  const actual = buildRawInternalProvenance({manifest, references: value.references, contributions});
+  assert.equal(digest(actual), digest(value), 'raw_internal_contribution_changed');
+  return actual;
+}
+
+export async function verifiedRawInternalPointerDescriptor({storage, manifest, provenance = null, deadline}) {
+  if (manifest !== null && provenance !== null) await verifyRawInternalProvenance({storage, manifest, provenance, deadline});
+  return rawInternalPointerDescriptor(manifest, provenance);
 }
 
 /** Actual manifest + immutable provenance, never a caller-supplied complete
