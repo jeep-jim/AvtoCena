@@ -4,7 +4,8 @@ import fs from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
-import {CONTRACT,fenceStorage,fenceNetwork,readKeyPolicy,inspectUaeCoverage,idsOf,planUaeCardScan,inspectUaeCardReferences} from '../.github/diagnostics/uae-budget-coverage.mjs';
+import {CONTRACT,fenceStorage,fenceNetwork,readKeyPolicy,inspectUaeCoverage,idsOf,planUaeCardScan,inspectUaeCardReferences,
+ OBSERVED_ROOT_CATEGORIES,assertObservedRootRevision,preliminaryCardObservations} from '../.github/diagnostics/uae-budget-coverage.mjs';
 import {getJsonStorage} from '../apps/web/lib/data';
 import * as catalog from '../apps/web/lib/catalog/storage';
 import * as publication from '../apps/web/lib/catalog/budget-selector-publication';
@@ -254,4 +255,29 @@ test('dynamic card GET allowlist and card byte caps remain enforced below the st
  await assert.rejects(network.fetch('https://s3.regru.cloud/fixture/prefix/'+fixture.key(12)),/http_target_forbidden/);
  await assert.rejects(network.fetch(url,{method:'PUT'}),/http_method_forbidden/);
  assert.equal(calls,1);
+});
+
+test('every observed root fails with its fixed category while neither ETags nor arbitrary labels enter the error',()=>{
+ const before={found:true,etag:'private-first-etag'},after={found:true,etag:'private-second-etag'};
+ for(const category of OBSERVED_ROOT_CATEGORIES){
+  assert.doesNotThrow(()=>assertObservedRootRevision(category,before,before));
+  assert.throws(()=>assertObservedRootRevision(category,before,after),{message:'coverage_observed_object_changed_'+category});
+  assert.throws(()=>assertObservedRootRevision(category,before,{found:false}),{message:'coverage_observed_object_changed_'+category});
+  assert.throws(()=>assertObservedRootRevision(category,{found:false},before),{message:'coverage_observed_object_changed_'+category});
+ }
+ assert.throws(()=>assertObservedRootRevision('private-details@example.test',before,after),{message:'coverage_observed_root_category_invalid'});
+});
+
+test('preliminary card evidence survives a later lease rejection and remains explicitly unverified',async()=>{
+ const fixture=cardFixture(),cardReferences=await fixture.run(),records:any[]=[];
+ records.push(preliminaryCardObservations({source:'e8462585e8998eaae5a003831a38d79263ca5649',
+  calculationVersion:CONTRACT.sources.e8462585e8998eaae5a003831a38d79263ca5649,
+  result:{market:'uae',manifestRows:fixture.manifest.markets.uae.count,cardReferences,secret:'do-not-copy-extra-inputs'}}));
+ assert.throws(()=>assertObservedRootRevision('lease',{found:true,etag:'before'},{found:true,etag:'after'}),
+  {message:'coverage_observed_object_changed_lease'});
+ assert.equal(records.length,1);assert.equal(records[0].stage,'preliminary_card_observations');
+ assert.equal(records[0].verified,false);assert.equal(records[0].finalFencesVerified,false);assert.equal(records[0].releaseAccepted,false);
+ assert.ok(records[0].observations.cardReferences.targets.every(target=>target.foundInCheckedBlocks));
+ const serialized=JSON.stringify(records[0]);
+ for(const privateText of ['private-person','private-fixture.invalid','never-print-this-private-field','do-not-copy-extra-inputs'])assert.ok(!serialized.includes(privateText));
 });

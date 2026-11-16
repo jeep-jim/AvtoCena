@@ -30,6 +30,24 @@ const cardKey=block=>`catalog/generations/${CONTRACT.generation}/indexes/budget-
 const canonical=value=>Array.isArray(value)?value.map(canonical):value&&typeof value==='object'
  ?Object.fromEntries(Object.keys(value).sort().map(key=>[key,canonical(value[key])])):value;
 const rowHash=value=>hash(canonical(value));
+export const OBSERVED_ROOT_CATEGORIES=Object.freeze(['lease','editorial','private_binding','private_index',
+ 'immutable_projection','public_projection','base_selector_ready','candidate_selector_ready','previous_candidate_selector_ready']);
+
+/** Only a fixed category can enter an error; never include an object key, ETag,
+ * contents or caller-supplied text in the failure record. Every mismatch fails. */
+export function assertObservedRootRevision(category,before,after){
+ assert(OBSERVED_ROOT_CATEGORIES.includes(category),'observed_root_category_invalid');
+ assert(before.found===after.found&&before.etag===after.etag,'observed_object_changed_'+category);
+}
+
+/** This is provisional read evidence, never a stable-context or release verdict.
+ * It is emitted before the root/manifest/day/health/source checks can reject it. */
+export function preliminaryCardObservations({source,calculationVersion,result}){
+ return {version:3,stage:'preliminary_card_observations',diagnosticOnly:true,verified:false,finalFencesVerified:false,
+  releaseAccepted:false,readOnly:true,storageWrites:0,source,calculationVersion,
+  installedSource:CONTRACT.liveRelease,generationId:CONTRACT.generation,encyclopediaDigest:CONTRACT.encyclopedia,
+  observations:{market:result.market,manifestRows:result.manifestRows,cardReferences:result.cardReferences}};
+}
 
 export function readKeyPolicy(selectorDirectories,cardKeys=new Set()){
  const prefix=`catalog/generations/${CONTRACT.generation}/indexes/`;
@@ -323,13 +341,16 @@ export async function main(root){
  assert(manifest.found&&manifest.etag&&manifest.value?.generationId===CONTRACT.generation,'generation_changed');
  assert(Number.isSafeInteger(manifest.value.markets?.uae?.count)&&manifest.value.markets.uae.count>0
   &&manifest.value.markets.uae.count<=CONTRACT.limits.rows,'uae_partition_invalid');
- const roots=['catalog/import-lock.json','catalog-editorial/current.json',
-  `knowledge/encyclopedia/calculation-releases/${CONTRACT.liveRelease}.json`,
-  `knowledge/encyclopedia/calculation-indexes/${CONTRACT.encyclopedia}.json`,
-  `catalog/generations/${CONTRACT.generation}/indexes/projection/uae.json`,'catalog/public/projection/uae.json',
-  ...Object.values(directories).map(directory=>`catalog/generations/${CONTRACT.generation}/indexes/${directory}/ready.json`)];
- const initial=new Map();for(const key of roots){const value=await storage.readObjectMetadata(key);
-  assert(!value.found||Boolean(value.etag),'object_revision_missing');initial.set(key,value);}
+ const prefix=`catalog/generations/${CONTRACT.generation}/indexes/`;
+ const roots=[['lease','catalog/import-lock.json'],['editorial','catalog-editorial/current.json'],
+  ['private_binding',`knowledge/encyclopedia/calculation-releases/${CONTRACT.liveRelease}.json`],
+  ['private_index',`knowledge/encyclopedia/calculation-indexes/${CONTRACT.encyclopedia}.json`],
+  ['immutable_projection',prefix+'projection/uae.json'],['public_projection','catalog/public/projection/uae.json'],
+  ['base_selector_ready',prefix+directories.base+'/ready.json'],['candidate_selector_ready',prefix+directories.candidate+'/ready.json'],
+  ...(directories.previousCandidate?[['previous_candidate_selector_ready',prefix+directories.previousCandidate+'/ready.json']]:[])];
+ const initial=new Map();for(const [category,key] of roots){const value=await storage.readObjectMetadata(key);
+  assert(OBSERVED_ROOT_CATEGORIES.includes(category),'observed_root_category_invalid');
+  assert(!value.found||Boolean(value.etag),'object_revision_missing_'+category);initial.set(category,{key,...value});}
  const binding=await storage.readJson(`knowledge/encyclopedia/calculation-releases/${CONTRACT.liveRelease}.json`,null);
  assert(binding?.release===CONTRACT.liveRelease&&binding.digest===CONTRACT.encyclopedia
   &&binding.key===`knowledge/encyclopedia/calculation-indexes/${CONTRACT.encyclopedia}.json`,'private_binding_mismatch');
@@ -343,14 +364,16 @@ export async function main(root){
  const day=new Date().toISOString().slice(0,10),policyDay=new Date(Date.now()+7*3600000).toISOString().slice(0,10);
  const result=await inspectUaeCoverage({storage,runtime:modules,selectorDirectories:directories,manifest:manifest.value,
   cardScan:{authorize(keys){for(const key of keys)cardKeys.add(key);}}});
- for(const [key,before] of initial){const after=await storage.readObjectMetadata(key);
-  assert(before.found===after.found&&before.etag===after.etag,'observed_object_changed');}
+ console.log(JSON.stringify(preliminaryCardObservations({source,calculationVersion:calculation,result})));
+ for(const [category,before] of initial){const after=await storage.readObjectMetadata(before.key);
+  assertObservedRootRevision(category,before,after);}
  const after=await storage.readJsonWithMeta('catalog/manifest.json',null);
  assert(after.found&&after.etag===manifest.etag&&hash(after.value)===hash(manifest.value),'manifest_changed');
  assert(day===new Date().toISOString().slice(0,10)&&policyDay===new Date(Date.now()+7*3600000).toISOString().slice(0,10),'policy_day_changed');
  await health();assert(git('rev-parse','HEAD')===source&&!git('status','--porcelain','--untracked-files=no'),'source_changed');
  assert(storageReads.readFailures===0&&storageReads.blockedOperations===0,'read_incomplete');
- const report={version:2,diagnosticOnly:true,checkedAt:new Date().toISOString(),source,calculationVersion:calculation,
+ const report={version:3,stage:'final',diagnosticOnly:true,verified:true,finalFencesVerified:true,
+  checkedAt:new Date().toISOString(),source,calculationVersion:calculation,
   installedSource:CONTRACT.liveRelease,generationId:CONTRACT.generation,encyclopediaDigest:CONTRACT.encyclopedia,
   manifestProof:{before:{etagSha256:shaText(manifest.etag),sha256:hash(manifest.value)},
    after:{etagSha256:shaText(after.etag),sha256:hash(after.value)}},
@@ -361,5 +384,6 @@ export async function main(root){
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)){
  main(process.argv[2]||process.cwd()).then(report=>{if(report.observedCandidateCoverage!=='complete')process.exitCode=2;})
   .catch(error=>{const code=/^coverage_[a-z_]+$/.test(error?.message||'')?error.message:'coverage_read_failed';
-   console.log(JSON.stringify({version:1,diagnosticOnly:true,releaseAccepted:false,readOnly:true,error:code}));process.exitCode=1;});
+   console.log(JSON.stringify({version:3,stage:'failed',diagnosticOnly:true,verified:false,finalFencesVerified:false,
+    releaseAccepted:false,readOnly:true,error:code}));process.exitCode=1;});
 }

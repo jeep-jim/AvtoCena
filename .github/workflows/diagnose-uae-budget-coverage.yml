@@ -21,7 +21,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   diagnose:
-    if: github.event_name == 'workflow_dispatch' || github.event.head_commit.message == 'Diagnose exact UAE card references'
+    if: github.event_name == 'workflow_dispatch' || github.event.head_commit.message == 'Diagnose exact UAE card revision drift'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     environment: regcloud-staging
@@ -63,11 +63,11 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p reports
-          node --import ./runtime/node_modules/tsx/dist/loader.mjs controller/.github/diagnostics/uae-budget-coverage.mjs runtime | tee reports/uae-budget-coverage.json
+          node --import ./runtime/node_modules/tsx/dist/loader.mjs controller/.github/diagnostics/uae-budget-coverage.mjs runtime | tee reports/uae-budget-coverage.jsonl
       - name: Preserve sanitized diagnostic only
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: uae-budget-coverage-diagnostic
-          path: reports/uae-budget-coverage.json
+          path: reports/uae-budget-coverage.jsonl
           if-no-files-found: warn
