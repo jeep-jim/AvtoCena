@@ -46,8 +46,9 @@ test('a missing accepted capture fails closed',()=>fixture(directory=>{
 
 // This is the reviewed ordinary-activation inventory, not a blanket ban on
 // diagnostic container starts or the owner's exact retained-image rescues.
-const active=new Set(['regcloud-deploy.yml','owner-navigation-release.yml']);
+const active=new Set(['regcloud-deploy.yml','owner-navigation-release.yml','release-paid-korea-history.yml']);
 const retired=new Set([
+ 'release-minimal-paid-encar.yml','release-paid-encar.yml','release-desktop-autobot.yml',
  'encyclopedia-activate-prepared.yml','encyclopedia-release.yml','owner-resume-prepared-release.yml',
  'regcloud-activate-release.yml','regcloud-resume-japan.yml','regcloud-resume-korea-release.yml',
  'owner-accept-prepared-873.yml','regcloud-activate.yml','regcloud-memory.yml',
@@ -133,3 +134,4 @@ test('CI explicitly executes the release contract that npm test does not include
  assert.match(source,/^\s+node --test tests\/release-speed-guard-contract\.test\.mjs\s*$/m);
  assert.match(source,/^\s+node scripts\/verify-frozen-speed-baselines\.mjs\s*$/m);
 });
+

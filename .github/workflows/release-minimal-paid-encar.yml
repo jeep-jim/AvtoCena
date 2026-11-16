@@ -14,7 +14,9 @@ concurrency:
   cancel-in-progress: false
 jobs:
   release:
-    if: github.ref == 'refs/heads/main' && github.event.head_commit.message == 'Release minimal paid Encar on retained baseline'
+    # Installed83 deployment43812759975 and final continuation43821853604 are terminal.
+    # Keep the exact historical source83 advisory body for audit; this controller is retired.
+    if: ${{ false }}
     environment: regcloud-staging
     runs-on: ubuntu-24.04
     timeout-minutes: 260
@@ -960,12 +962,13 @@ jobs:
           path: paid-encar-acceptance.json
           if-no-files-found: ignore
   verify-and-retire:
+    if: ${{ false }}
     needs: release
     uses: ./.github/workflows/verify-finish-paid-encar.yml
     secrets: inherit
   resume-existing-china:
     needs: [release, verify-and-retire]
-    if: ${{ always() && needs.release.outputs.deferred_china_job != '' }}
+    if: ${{ false }}
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     permissions:
@@ -993,3 +996,4 @@ jobs:
 
 
 # Activation binds the verified 83ff170 candidate and persisted selector/price readbacks.
+

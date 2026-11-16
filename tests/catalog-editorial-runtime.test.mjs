@@ -118,6 +118,7 @@ test('only the explicit pre-helper sources may skip the helper without an accept
   'a182cd21b21ecf612b63613d263e5bdd817ea4c0',
   '794654a00aa4990b284858f1f01c07ed3f020df4',
   '83ff17075e9188dcf227c8752dc064248d5f42e0',
+  'e4f2781ed52f12f53430118bea51ef150608ccfe',
  ]);
  assert.equal(Object.isFrozen(KNOWN_PRE_EDITORIAL_RELEASES),true);
  for(const release of KNOWN_PRE_EDITORIAL_RELEASES)assert.equal(await installedEditorialSupported(f.root,release),false);
@@ -127,7 +128,7 @@ test('only the explicit pre-helper sources may skip the helper without an accept
 test('minimal paid Encar source may omit the helper while unknown sources still require it',async t=>{
  const f=await fixture(t,{helper:false}),release='83ff17075e9188dcf227c8752dc064248d5f42e0';
  assert.equal(await installedEditorialSupported(f.root,release),false);
- for(const unknown of [sha,'83ff17075e9188dcf227c8752dc064248d5f42e1']){
+ for(const unknown of [sha,'83ff17075e9188dcf227c8752dc064248d5f42e1','e4f2781ed52f12f53430118bea51ef150608ccff']){
   await assert.rejects(installedEditorialSupported(f.root,unknown),/editorial_runtime_helper_missing/);
  }
  await fs.writeFile(path.join(f.root,'apps/web/lib/catalog/editorial-home.ts'),'export const prepareEditorialHome=()=>{};\n');

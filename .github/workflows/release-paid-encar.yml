@@ -18,7 +18,9 @@ concurrency:
   cancel-in-progress: false
 jobs:
   release:
-    if: github.ref == 'refs/heads/main' && ((github.event_name == 'push' && github.event.head_commit.message == 'Owner-authorized paid Encar cutover with measured speed advisory') || github.event_name == 'workflow_dispatch' || (github.event.workflow_run.id == 43600759493 && github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_repository.full_name == github.repository))
+    # Obsolete9cb cutover43805789766 is a terminal failure; rollback was verified.
+    # Preserve source and failure evidence; never retry this rejected source unchanged.
+    if: ${{ false }}
     environment: regcloud-staging
     runs-on: ubuntu-24.04
     timeout-minutes: 260
@@ -823,12 +825,13 @@ jobs:
           path: paid-encar-acceptance.json
           if-no-files-found: ignore
   verify-and-retire:
+    if: ${{ false }}
     needs: release
     uses: ./.github/workflows/verify-finish-paid-encar.yml
     secrets: inherit
   resume-existing-china:
     needs: [release, verify-and-retire]
-    if: ${{ always() && needs.release.outputs.deferred_china_job != '' }}
+    if: ${{ false }}
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     permissions:

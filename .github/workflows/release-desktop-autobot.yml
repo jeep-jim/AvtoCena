@@ -1,4 +1,10 @@
 name: Release desktop AutoBot interface
+'on':
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/release-desktop-autobot.yml
 permissions:
   contents: read
   actions: read
@@ -9,7 +15,9 @@ concurrency:
   cancel-in-progress: false
 jobs:
   wait-for-astra:
-    if: github.ref == 'refs/heads/main'
+    # Exact installer43571172611 failed browser speed and rolled back on2026-11-14.
+    # Its source guard requires retaineda182; retain PR1772/CSS separately.
+    if: ${{ false }}
     runs-on: ubuntu-latest
     timeout-minutes: 60
     environment: regcloud-staging
@@ -98,7 +106,9 @@ jobs:
           node --import tsx scripts/encyclopedia/wait-astra-apply.mjs
   prepare:
     needs: wait-for-astra
-    if: github.ref == 'refs/heads/main'
+    # Exact installer43571172611 failed browser speed and rolled back on2026-11-14.
+    # Its source guard requires retaineda182; retain PR1772/CSS separately.
+    if: ${{ false }}
     runs-on: ubuntu-latest
     # Measured 57m build/index + 34m price/page preparation exceeded the old whole-job budget.
     # Visitor deadlines and frozen acceptance ceilings are unchanged.
@@ -628,9 +638,3 @@ jobs:
         run: |
           export GITHUB_SHA="$RELEASE_SOURCE_SHA"
           npx tsx scripts/crm-gpt-release-report.ts
-'on':
-  push:
-    branches:
-      - main
-    paths:
-      - .github/workflows/release-desktop-autobot.yml
