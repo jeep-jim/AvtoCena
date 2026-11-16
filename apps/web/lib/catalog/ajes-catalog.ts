@@ -1,3 +1,4 @@
+import {usesAjesMarket} from './ajes-market-selection';
 import {sortCatalogRows} from './market-page';
 import {japanPreviewParameters} from './japan-preview-parameters';
 import {readFilteredAjesPage} from './ajes-filtered-page';
@@ -117,6 +118,7 @@ export async function withAjesCount<T extends {total:number;marketCounts?:Record
  const markets=['japan','china','korea'].filter(m=>!params.market||params.market===m);
  const updates=await Promise.all(markets.map(async market=>{
   if(market!=='japan'&&(!value.marketCounts||!Object.prototype.hasOwnProperty.call(value.marketCounts,market)))return null;
+  if(market==='korea' && !await usesAjesMarket('korea'))return null;
   try{await assertCollectionEnabled(`ajes_${market}_feed`);}catch{return market==='korea'?{market,count:null,page:null}:null;}
   const query={...params,market};
   const [count,page]=await Promise.all([
