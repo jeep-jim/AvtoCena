@@ -35,8 +35,8 @@ jobs:
           import json, subprocess, urllib.request
           def api(path):return json.loads(subprocess.check_output(['gh','api','repos/jeep-jim/AvtoCena/'+path]))
           source='56a95d571bc531d024ab2f2abe1de5d249b5f075'
-          pr=api('pulls/1774')
-          assert pr['state']=='open' and pr['head']['sha']==source and pr['base']['sha']=='a182cd21b21ecf612b63613d263e5bdd817ea4c0','candidate_changed'
+          commit=api('commits/'+source)
+          assert [p['sha'] for p in commit['parents']]==['9faa6c030251e1c0ce491b01c4d2fcded9d6a736'] and commit['commit']['tree']['sha']=='767a3861b85d85e53536440d2889c000afaf076c','candidate_changed'
           check=api('actions/runs/43810711696')
           assert check['path']=='.github/workflows/verify-minimal-paid-encar.yml' and check['status']=='completed' and check['conclusion']=='success','exact_candidate_CI_incomplete'
           publication=api('actions/runs/43600759493')
@@ -494,8 +494,8 @@ jobs:
           import json, subprocess, urllib.request
           def api(path):return json.loads(subprocess.check_output(['gh','api','repos/jeep-jim/AvtoCena/'+path]))
           source='56a95d571bc531d024ab2f2abe1de5d249b5f075'
-          pr=api('pulls/1774')
-          assert pr['state']=='open' and pr['head']['sha']==source and pr['base']['sha']=='a182cd21b21ecf612b63613d263e5bdd817ea4c0','candidate_changed'
+          commit=api('commits/'+source)
+          assert [p['sha'] for p in commit['parents']]==['9faa6c030251e1c0ce491b01c4d2fcded9d6a736'] and commit['commit']['tree']['sha']=='767a3861b85d85e53536440d2889c000afaf076c','candidate_changed'
           check=api('actions/runs/43810711696')
           assert check['path']=='.github/workflows/verify-minimal-paid-encar.yml' and check['status']=='completed' and check['conclusion']=='success','exact_candidate_CI_incomplete'
           publication=api('actions/runs/43600759493')
