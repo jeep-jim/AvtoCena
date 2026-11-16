@@ -39,7 +39,7 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 330
     env:
-      PAID_REPAIR_SOURCE_SHA: UNASSIGNED
+      PAID_REPAIR_SOURCE_SHA: d61464a512f1d833a5af49d8a3e3b2ea754e231e
       PAID_REPAIR_CONTROLLER_SHA: ${{ inputs.controller_sha }}
       PAID_REPAIR_EXPECTED_RELEASE: ${{ inputs.expected_release }}
       PAID_REPAIR_EXPECTED_CALCULATOR: ${{ inputs.expected_calculator }}
