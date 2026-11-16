@@ -31,7 +31,7 @@ jobs:
           docker exec avtocena-production node -e 'const e=process.env; console.log("STORAGE_ROUTING", JSON.stringify({driver:e.JSON_STORAGE_DRIVER,regObjectEndpoint:e.YC_OBJECT_STORAGE_ENDPOINT==="https://s3.regru.cloud",bucketConfigured:!!e.YC_OBJECT_STORAGE_BUCKET,prefixConfigured:!!e.YC_OBJECT_STORAGE_PREFIX}));'
           lsblk -b -o NAME,SIZE,TYPE,FSTYPE,MOUNTPOINT
           du -x -B1 -d1 /var /opt /tmp /root 2>/dev/null | sort -n
-          docker system df
+          docker system df || echo 'Docker usage summary unavailable due to missing snapshot; continuing read-only inventory'
           docker ps -a --size --format '{{.Names}} | {{.Image}} | {{.Status}} | {{.Size}}'
           docker image ls --format '{{.Repository}}:{{.Tag}} | {{.ID}} | {{.Size}} | {{.CreatedAt}}'
           journalctl --disk-usage
