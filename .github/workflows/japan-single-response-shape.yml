@@ -8,7 +8,8 @@ permissions:
   contents: read
 jobs:
   inspect:
-    if: github.run_attempt == 1
+    # Access denial confirmed on 16 November; do not probe again until restored.
+    if: ${{ false }}
     runs-on: ubuntu-24.04
     timeout-minutes: 8
     environment: regcloud-staging
@@ -44,7 +45,8 @@ jobs:
           }
           function safeSupplierError(value:unknown,secret:string|undefined){
             if(typeof value!=='string')return null;
-            let text=value;
+            let text=value.replace(/<(?:b|strong|code)\b[^>]*>[\s\S]{0,512}?<\/(?:b|strong|code)>/gi,'[credential]');
+            text=text.replace(/\bcode\s*(?::|=)?\s+[^\s<>{}]{3,128}/gi,'code [credential]');
             if(secret){
               const base64=Buffer.from(secret,'utf8').toString('base64');
               const variants=[secret,encodeURIComponent(secret),new URLSearchParams({v:secret}).toString().slice(2),base64,base64.replace(/=+$/,'')];

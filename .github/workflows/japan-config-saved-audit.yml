@@ -1,0 +1,130 @@
+name: Japan saved configuration chronology audit
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: [.github/workflows/japan-config-saved-audit.yml]
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    environment: regcloud-staging
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          ref: 83ff17075e9188dcf227c8752dc064248d5f42e0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - run: npm ci --ignore-scripts --no-audit
+      - name: Bundle four fixed saved-object reads without supplier code
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = 83ff17075e9188dcf227c8752dc064248d5f42e0
+          cat > /tmp/japan-config-saved-audit.ts <<'AUDIT_SOURCE'
+          import crypto from 'node:crypto';
+          import {getJsonStorage} from './apps/web/lib/data';
+          
+          const fitQueries=[{pageSize:3,hash:'e0bd8b94212616020a9995f6ddf34426199ccb38452b0aa81156cef502252b8f',key:'catalog/partner-cache/ajes/queries/20.json'},{pageSize:24,hash:'a7126c27cc59e01ba9e4fa5a7761871b74014e0f35d22b8645110fa74dea5158',key:'catalog/partner-cache/ajes/queries/39.json'}];
+          const stamp=(value:unknown)=>typeof value==='string'&&Number.isFinite(Date.parse(value))?new Date(value).toISOString():null;
+          const integer=(value:unknown)=>typeof value==='number'&&Number.isSafeInteger(value)&&value>=0?value:null;
+          async function main(){
+            if(process.env.JSON_STORAGE_DRIVER!=='object')throw Error('object_storage_required');
+            const configKey='integrations/ajes/config.json',controlsKey='catalog/operations/collection-controls-v1.json';
+            const keys=[configKey,controlsKey,...fitQueries.map(row=>row.key)];
+            const prefix='/'+process.env.YC_OBJECT_STORAGE_BUCKET+'/'+String(process.env.YC_OBJECT_STORAGE_PREFIX||'').replace(/^\/+|\/+$/g,'')+'/';
+            const paths=new Set(keys.map(key=>prefix+key)),lastModified=new Map<string,string|null>();
+            const realFetch=globalThis.fetch;let requests=0;
+            globalThis.fetch=async(input,init={})=>{
+              const url=new URL(input instanceof Request?input.url:String(input)),method=String(init.method??(input instanceof Request?input.method:'GET')).toUpperCase();
+              if(url.origin!=='https://s3.regru.cloud'||!paths.has(url.pathname)||url.search||!['GET','HEAD'].includes(method)||++requests>16)throw Error('fixed_saved_read_guard');
+              const response=await realFetch(input,{...init,redirect:'error'});
+              lastModified.set(url.pathname,stamp(response.headers.get('last-modified')));
+              return response;
+            };
+            const storage=getJsonStorage();
+            for(const method of ['writeJson','deleteJson','putBinary','deleteBinary','deleteObjects','deletePrefix','listObjects','listBucketObjects','listObjectVersions','listMultipartUploads'])(storage as any)[method]=()=>{throw Error('read_only_guard');};
+            const config:any=await storage.readJson(configKey,null);
+            const envPassword=process.env.AJES_API_PASSWORD;
+            let comparison:'not_needed'|'equal'|'different'|'decryption_failed'='not_needed';
+            const encryptedShape=typeof config?.encryptedPassword==='string'&&/^[A-Za-z0-9+/=]+\.[A-Za-z0-9+/=]+\.[A-Za-z0-9+/=]+$/.test(config.encryptedPassword);
+            if(config&&envPassword){
+              try{
+                const secret=process.env.AUTH_SECRET||process.env.NEXTAUTH_SECRET;if(!secret||!encryptedShape)throw Error('unavailable');
+                const [iv,tag,body]=config.encryptedPassword.split('.').map((value:string)=>Buffer.from(value,'base64'));
+                const key=crypto.createHash('sha256').update('ajes:'+secret).digest(),decipher=crypto.createDecipheriv('aes-256-gcm',key,iv);
+                decipher.setAuthTag(tag);const saved=Buffer.concat([decipher.update(body),decipher.final()]),environment=Buffer.from(envPassword,'utf8');
+                comparison=saved.length===environment.length&&crypto.timingSafeEqual(saved,environment)?'equal':'different';saved.fill(0);environment.fill(0);key.fill(0);
+              }catch{comparison='decryption_failed';}
+            }
+            console.log('JAPAN_SAVED_CONFIGURATION_METADATA',JSON.stringify({savedPresent:!!config,updatedAt:stamp(config?.updatedAt),objectLastModified:lastModified.get(prefix+configKey)??null,encryptedShapeValid:encryptedShape,environmentCredentialPresent:!!envPassword,effectiveCredentialSource:config?'saved':envPassword?'environment':'missing',savedEnvironmentComparison:comparison}));
+            const controls:any=await storage.readJson(controlsKey,null);
+            const flag=(scope:string,id:string)=>{const row=controls?.[scope]?.[id];return {present:!!row,enabled:typeof row?.enabled==='boolean'?row.enabled:null,enabledAt:stamp(row?.enabledAt),disabledAt:stamp(row?.disabledAt)};};
+            const ids=new Set(['japan','korea','ajes_japan_feed','ajes_korea_feed','encar_feed']);
+            const history=Array.isArray(controls?.history)?controls.history.filter((row:any)=>ids.has(row?.id)&&['market','source'].includes(row?.scope)).slice(0,12).map((row:any)=>({scope:row.scope,id:row.id,enabled:typeof row.enabled==='boolean'?row.enabled:null,revision:integer(row.revision),at:stamp(row.at)})):[];
+            console.log('JAPAN_COLLECTION_CONFIGURATION',JSON.stringify({present:!!controls,revision:integer(controls?.revision),updatedAt:stamp(controls?.updatedAt),objectLastModified:lastModified.get(prefix+controlsKey)??null,japanMarket:flag('markets','japan'),japanSource:flag('sources','ajes_japan_feed'),koreaMarket:flag('markets','korea'),oldKoreaSource:flag('sources','ajes_korea_feed'),paidKoreaSource:flag('sources','encar_feed'),relevantHistory:history}));
+            for(const query of fitQueries){
+              const slot:any=await storage.readJson(query.key,null);
+              const entries=[slot,...(Array.isArray(slot?.previous)?slot.previous.slice(0,3):[])];
+              const value=entries.find(entry=>entry?.hash===query.hash)?.value;
+              const at=stamp(value?.observedAt);
+              console.log('JAPAN_EXACT_FIT_SAVED_PAGE',JSON.stringify({page:1,pageSize:query.pageSize,exactQueryFound:!!value,slotPresent:!!slot,slotLastModified:lastModified.get(prefix+query.key)??null,observedAt:at,ageSeconds:at?Math.max(0,Math.floor((Date.now()-Date.parse(at))/1000)):null,items:Array.isArray(value?.items)?value.items.length:null,received:integer(value?.received),stale:value?.stale===true,partial:value?.partial===true,schemaVersion:integer(value?.schemaVersion)}));
+            }
+            console.log('JAPAN_CONFIG_AUDIT_COMPLETE',JSON.stringify({fixedObjects:keys.length,requests,supplierRequests:0,writes:0,objectListingRequests:0}));
+          }
+          main().catch(()=>{console.log('JAPAN_CONFIG_AUDIT_FAILED');process.exitCode=1;});
+          AUDIT_SOURCE
+          node --input-type=module <<'BUILD'
+          import fs from 'node:fs';
+          import {build} from 'esbuild';
+          await build({stdin:{contents:fs.readFileSync('/tmp/japan-config-saved-audit.ts','utf8'),resolveDir:process.cwd(),sourcefile:'japan-config-saved-audit.ts',loader:'ts'},outfile:'/tmp/japan-config-saved-audit.cjs',bundle:true,platform:'node',format:'cjs'});
+          BUILD
+          node --check /tmp/japan-config-saved-audit.cjs
+      - name: Compare only credential-presence and equality across retained releases
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+        run: |
+          set -euo pipefail
+          umask 077
+          key_file=$(mktemp)
+          trap 'rm -f "$key_file"' EXIT
+          printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
+          unset SSH_PRIVATE_KEY
+          chmod 600 "$key_file"
+          timeout 80s ssh -i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts" root@151.248.113.177 'python3 -' <<'COMPARE'
+          import subprocess,json,re,datetime
+          def docker(*args):
+              result=subprocess.run(['docker',*args],capture_output=True,text=True,timeout=15)
+              if result.returncode:raise RuntimeError('docker_read_failed')
+              return result.stdout
+          live=json.loads(docker('inspect','avtocena-production'))[0]
+          revision=live.get('Config',{}).get('Labels',{}).get('org.opencontainers.image.revision')
+          assert revision=='83ff17075e9188dcf227c8752dc064248d5f42e0','live_release_changed'
+          def environment(value):return dict(row.split('=',1) for row in value.get('Config',{}).get('Env',[]) if '=' in row)
+          current=environment(live)
+          rows=docker('ps','-a','--format','{{.Names}} {{.Label "org.opencontainers.image.revision"}}').splitlines()
+          targets=[]
+          for row in rows:
+              pieces=row.split(None,1)
+              if len(pieces)==2 and pieces[1]=='a182cd21b21ecf612b63613d263e5bdd817ea4c0' and re.fullmatch(r'[A-Za-z0-9_.-]+',pieces[0]):targets.append(pieces[0])
+          comparisons=[]
+          for target in targets[:3]:
+              previous=environment(json.loads(docker('inspect',target))[0])
+              comparisons.append({'baselineCredentialPresent':bool(previous.get('AJES_API_PASSWORD')),'liveCredentialPresent':bool(current.get('AJES_API_PASSWORD')),'environmentCredentialEqual':previous.get('AJES_API_PASSWORD')==current.get('AJES_API_PASSWORD'),'encryptionSecretPresentBoth':bool(previous.get('AUTH_SECRET') or previous.get('NEXTAUTH_SECRET')) and bool(current.get('AUTH_SECRET') or current.get('NEXTAUTH_SECRET')),'encryptionSecretEqual':(previous.get('AUTH_SECRET') or previous.get('NEXTAUTH_SECRET'))==(current.get('AUTH_SECRET') or current.get('NEXTAUTH_SECRET'))})
+          print('JAPAN_RETAINED_ENVIRONMENT_COMPARISON',json.dumps({'observedAt':datetime.datetime.now(datetime.timezone.utc).isoformat(),'liveRelease':revision,'baselineRelease':'a182cd21b21ecf612b63613d263e5bdd817ea4c0','baselineContainersFound':len(targets),'compared':len(comparisons),'comparisons':comparisons}))
+          COMPARE
+      - name: Read saved configuration and exact cached Fit observations only
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+        run: |
+          set -euo pipefail
+          umask 077
+          key_file=$(mktemp)
+          trap 'rm -f "$key_file"' EXIT
+          printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
+          unset SSH_PRIVATE_KEY
+          chmod 600 "$key_file"
+          timeout 90s ssh -i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts" root@151.248.113.177 'set -eu; release=$(docker inspect --format "{{ index .Config.Labels \"org.opencontainers.image.revision\" }}" avtocena-production); test "$release" = 83ff17075e9188dcf227c8752dc064248d5f42e0; timeout 60s docker exec -i -e AVTOCENA_INTERACTIVE_READ_BUDGET_MS=5000 avtocena-production node' < /tmp/japan-config-saved-audit.cjs
