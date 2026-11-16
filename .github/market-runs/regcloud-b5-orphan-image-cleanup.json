@@ -1,0 +1,8 @@
+{
+  "apply": true,
+  "expectedPlanSha256": "8a00492edf9748e7f696d1fcfb8ff8abfc0f394f2ab40e388392daefe223b653",
+  "inventoryRunId": 43828596253,
+  "inventorySource": "adc2a474366a13532df94c808d733aed23576eda",
+  "requestedAt": "2026-11-16T08:14:55.586324+00:00",
+  "reason": "Remove only the two reviewed unreferenced old b5 image IDs; preserve all containers and every other image, stop at actual10GiB or2 images."
+}
