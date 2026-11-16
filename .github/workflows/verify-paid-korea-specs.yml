@@ -1,0 +1,38 @@
+name: Verify supplier-confirmed Korea specifications
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/verify-paid-korea-specs.yml
+permissions:
+  contents: read
+concurrency:
+  group: verify-paid-korea-specs
+  cancel-in-progress: false
+jobs:
+  compare:
+    if: github.event_name == 'workflow_dispatch' || github.event.head_commit.message == 'Verify supplier-confirmed Korea specifications'
+    runs-on: ubuntu-24.04
+    environment: regcloud-staging
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci --ignore-scripts --no-audit
+      - name: Compare the two supplied IDs without changing stored data
+        env:
+          ACCOUNT_KEY: ${{ secrets.AUTO_API_DUBICARS_KEY || secrets.AUTO_API_CHE168_KEY }}
+          JSON_STORAGE_DRIVER: object
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_REGION: us-east-1
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+        run: node --import tsx scripts/verify-paid-encar-specs.mjs
