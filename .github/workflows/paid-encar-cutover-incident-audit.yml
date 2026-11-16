@@ -29,48 +29,62 @@ jobs:
           def cmd(*args):
               p=subprocess.run(args,capture_output=True,text=True,timeout=35)
               return p.stdout+p.stderr
+          from urllib.parse import urlsplit,parse_qs
+          def safe_route(value):
+              url=urlsplit(value);path=url.path
+              if path.startswith('/cars/offer/'):path='/cars/offer/:id'
+              elif path.startswith('/cars/'):path='/cars/:category'
+              elif path not in {'/','/cars','/api/health','/api/catalog/search','/api/catalog/saved-previews','/login','/autocalc'}:path='/other'
+              query=parse_qs(url.query)
+              allowed={}
+              for key in ['market','sort','page','pageSize','budget','budgetTo','powerTo','countOnly','marketPage']:
+                  value=query.get(key,[''])[0]
+                  if re.fullmatch('[A-Za-z0-9_-]{1,32}',value):allowed[key]=value
+              return path+(' '+json.dumps(allowed,sort_keys=True) if allowed else '')
           print('PRODUCTION',cmd('docker','inspect','--format','{{.Config.Image}} {{.State.Status}}','avtocena-production').strip()[:180])
           print('ROOT_FS',cmd('df','-B1','/').splitlines()[-1].split()[1:5])
+          print('DOCKER_DISK',cmd('docker','system','df','--format','{{json .}}'))
           print('NGINX_LOG_FILES',[(str(p),p.stat().st_size) for p in pathlib.Path('/var/log/nginx').glob('*') if p.is_file()][:20])
           for name in ['access.log','error.log']:
               p=pathlib.Path('/var/log/nginx')/name
               if not p.exists():continue
-              lines=p.read_text(errors='replace').splitlines()[-50000:]
+              lines=cmd('tail','-n','50000',str(p)).splitlines()
               if name=='access.log':
-                  target=[x for x in lines if '16/Nov/2026:03:3' in x or '16/Nov/2026:03:2' in x]
-                  counts=collections.Counter()
+                  target=[x for x in lines if '16/Nov/2026:05:0' in x]
+                  counts=collections.Counter();routes=collections.Counter()
                   health=collections.Counter()
                   korea=collections.Counter()
                   for x in target:
                       m=re.search(r'"(?:GET|HEAD|POST) ([^ ]+) HTTP/[^"]+" (\d{3})',x)
                       if not m:continue
-                      path,status=m.groups(); counts[status]+=1
+                      path,status=m.groups(); counts[status]+=1;routes[(safe_route(path),status)]+=1
                       if path.startswith('/api/health'):health[status]+=1
                       if path.startswith('/api/catalog/search?market=korea') or path.startswith('/cars?market=korea'):korea[status]+=1
                   print('PROXY_WINDOW',json.dumps({'total':len(target),'statuses':dict(counts),'health':dict(health),'korea':dict(korea)}))
+                  print('PUBLIC_ROUTE_COUNTS',json.dumps([{'route':route,'status':status,'count':count} for (route,status),count in routes.most_common(30)]))
                   print('PROXY_LAST',json.dumps({'lastLineTime':re.search(r'\[([^\]]+)\]',target[-1]).group(1) if target and re.search(r'\[([^\]]+)\]',target[-1]) else None}))
               else:
-                  target=[x for x in lines if '2026/11/16 03:3' in x or '2026/11/16 03:2' in x]
+                  target=[x for x in lines if '2026/11/16 05:0' in x]
                   kinds=collections.Counter('upstream_timeout' if 'upstream timed out' in x else 'connect_failed' if 'connect() failed' in x else 'other' for x in target)
                   print('PROXY_ERRORS',json.dumps({'total':len(target),'types':dict(kinds)}))
           ps=cmd('docker','ps','-a','--format','{{.Names}} {{.Status}} {{.Image}}')
           print('CANDIDATE_CONTAINERS',[x[:200] for x in ps.splitlines() if '9cb571fc' in x][:8])
           for name in [x.split()[0] for x in ps.splitlines() if '9cb571fc' in x][:2]:
-              logs=cmd('docker','logs','--since','2026-11-16T03:30:00Z','--until','2026-11-16T03:32:30Z',name)
+              logs=cmd('docker','logs','--since','2026-11-16T05:02:00Z','--until','2026-11-16T05:10:00Z',name)
               print('CANDIDATE_LOG_COUNTS',name,json.dumps({'lines':len(logs.splitlines()),'error':len(re.findall(r'\b(error|fatal|exception)\b',logs,re.I)),'memory':len(re.findall(r'heap out of memory|allocation failed',logs,re.I)),'ajes_failure':len(re.findall(r'AJES_PUBLIC_FAILURE',logs))}))
-          print('PROXY_CONFIG',json.dumps({'access_log_off':bool(re.search(r'access_log\\s+off',cmd('nginx','-T'))),'proxy_timeout_count':len(re.findall(r'proxy_read_timeout',cmd('nginx','-T')))}))
+          print('PROXY_CONFIG',json.dumps({'access_log_off':bool(re.search(r'access_log\s+off',cmd('nginx','-T'))),'proxy_timeout_count':len(re.findall(r'proxy_read_timeout',cmd('nginx','-T')))}))
           for p in [pathlib.Path('/var/log/nginx/error.log'),pathlib.Path('/var/log/nginx/error.log.1')]:
               if not p.exists():continue
-              for x in p.read_text(errors='replace').splitlines():
-                  if '2026/11/16 03:31' in x and ('upstream timed out' in x or 'connect() failed' in x or 'no live upstreams' in x):
+              for x in cmd('tail','-n','50000',str(p)).splitlines():
+                  if '2026/11/16 05:0' in x and ('upstream timed out' in x or 'connect() failed' in x or 'no live upstreams' in x):
                       m=re.search(r'request: "([^"]+)"',x)
-                      print('ERROR_DETAIL',json.dumps({'type':'upstream_timeout' if 'upstream timed out' in x else 'connect_failed' if 'connect() failed' in x else 'no_upstream','time':x[:19],'request':m.group(1)[:160] if m else None}))
+                      print('ERROR_DETAIL',json.dumps({'type':'upstream_timeout' if 'upstream timed out' in x else 'connect_failed' if 'connect() failed' in x else 'no_upstream','time':x[:19],'request':safe_route(m.group(1).split(' ',2)[1]) if m and len(m.group(1).split(' ',2))>1 else None}))
           for name in [x.split()[0] for x in ps.splitlines() if '9cb571fc' in x][:1]:
-              logs=cmd('docker','logs','--timestamps','--since','2026-11-16T03:29:00Z','--until','2026-11-16T03:32:30Z',name)
+              logs=cmd('docker','logs','--timestamps','--since','2026-11-16T05:02:00Z','--until','2026-11-16T05:10:00Z',name)
               failures=collections.Counter()
               per_minute=collections.Counter()
               for x in logs.splitlines():
-                  m=re.search(r'AJES_PUBLIC_FAILURE\\s+(\\w+)',x)
+                  m=re.search(r'AJES_PUBLIC_FAILURE\s+(\w+)',x)
                   if m:
                       failures[m.group(1) if m.group(1) in {'visitor_restricted','client_ip_missing','request_failed','request_timeout','connect_timeout','invalid_response'} else 'other']+=1
                       per_minute[x[:16]]+=1
