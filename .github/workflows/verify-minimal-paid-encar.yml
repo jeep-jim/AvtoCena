@@ -1,0 +1,49 @@
+name: Verify minimal paid Korea candidate
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/verify-minimal-paid-encar.yml]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          ref: 9faa6c030251e1c0ce491b01c4d2fcded9d6a736
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - name: Verify exact retained baseline and seven-file scope
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = 9faa6c030251e1c0ce491b01c4d2fcded9d6a736
+          test "$(git rev-parse HEAD^)" = a182cd21b21ecf612b63613d263e5bdd817ea4c0
+          test "$(git rev-parse HEAD^{tree})" = 7e215140d195af91766a6f2b1ac59aef4d4c4b8f
+          git diff --check HEAD^ HEAD
+          python3 - <<'SCOPE'
+          import subprocess
+          paths=subprocess.check_output(['git','diff','--name-only','HEAD^','HEAD'],text=True).splitlines()
+          expected={
+           'apps/web/app/(public)/api/catalog/search/route.ts',
+           'apps/web/app/(public)/cars/offer/[id]/page.tsx',
+           'apps/web/lib/catalog/ajes-catalog.ts',
+           'apps/web/lib/catalog/ajes-market-selection.ts',
+           'apps/web/lib/catalog/collection-controls-schema.ts',
+           'apps/web/lib/catalog/collection-controls.ts',
+           'apps/web/lib/catalog/storage.ts'
+          }
+          assert set(paths)==expected,paths
+          print('EXACT_PAID_SCOPE',len(paths))
+          SCOPE
+      - run: npm ci --ignore-scripts --no-audit
+      - run: npm run typecheck
+      - run: npm test
+      - name: Build the exact production candidate
+        env:
+          NEXT_TELEMETRY_DISABLED: '1'
+        run: npm run build
