@@ -7,6 +7,8 @@ import {DatabaseSync} from 'node:sqlite';
 import {createHash} from 'node:crypto';
 import {gzipSync} from 'node:zlib';
 import {execFileSync} from 'node:child_process';
+import {pathToFileURL} from 'node:url';
+import {che168CleanWorkerCheckout} from './helpers/che168-clean-worker.mjs';
 import {normalizeAutoApiChe168} from '../apps/web/lib/catalog/auto-api-che168';
 import {collectAutoApiChe168} from '../scripts/lib/auto-api-che168-client.mjs';
 import {snapshotBinding} from '../scripts/lib/che168-snapshot.mjs';
@@ -16,8 +18,7 @@ import {openRawFeedPin, rawDigest} from '../scripts/lib/catalog-raw-provenance.m
 import {observationShardWriter} from '../scripts/lib/catalog-intake-checkpoint.mjs';
 import {archiveIntakeDirectory, verifyIntakeArchive} from '../scripts/lib/nonjp-intake-archive.mjs';
 import {verifyChe168ReplicaInput, assertChe168ReplicaInputWitness, CHE168_REPLICA_WITNESS_SOURCE as SOURCE,
-  CHE168_REPLICA_WITNESS_KIND, CHE168_REPLICA_WORKER_CLOSURE, che168ReplicaWorkerSource,
-  prepareChe168ReplicaInputWitness} from '../scripts/lib/che168-replica-witness.mjs';
+  CHE168_REPLICA_WITNESS_KIND, CHE168_REPLICA_WORKER_CLOSURE, che168ReplicaWorkerSource} from '../scripts/lib/che168-replica-witness.mjs';
 
 const hash = (value: any) => rawDigest(value), sha = (bytes: Buffer | string) => createHash('sha256').update(bytes).digest('hex');
 const at = '2026-11-16T12:00:00.000Z', oldAt = '2026-10-09T08:09:40.000Z';
@@ -348,12 +349,18 @@ test('worker source guard requires tracked clean code and never substitutes the 
   const source = git('rev-parse', 'HEAD').trim(); assert.equal(che168ReplicaWorkerSource(root), source);
   await fs.appendFile(path.join(root, CHE168_REPLICA_WORKER_CLOSURE[0]), 'dirty\n'); assert.equal(che168ReplicaWorkerSource(root), null);
   git('checkout', '--', CHE168_REPLICA_WORKER_CLOSURE[0]);
+  const bytecode = path.join(root, 'scripts/__pycache__/regcloud-browser-verdict.cpython-314.pyc');
+  await fs.mkdir(path.dirname(bytecode), {recursive: true}); await fs.writeFile(bytecode, 'CI bytecode fixture');
+  assert.equal(che168ReplicaWorkerSource(root), null, 'Untracked CI bytecode must still invalidate a real producer');
+  await fs.unlink(bytecode); assert.equal(che168ReplicaWorkerSource(root), source);
   await fs.writeFile(path.join(root, 'scripts/untracked.mjs'), 'fixture'); assert.equal(che168ReplicaWorkerSource(root), null);
   await fs.unlink(path.join(root, 'scripts/untracked.mjs')); assert.equal(che168ReplicaWorkerSource(root), source);
   git('rm', '--cached', CHE168_REPLICA_WORKER_CLOSURE[1]); assert.equal(che168ReplicaWorkerSource(root), null);
 });
 
 test('future-main-only and mismatched-source paths keep completed data and all ancestral refs unchanged', async t => {
+  const worker = await che168CleanWorkerCheckout(t);
+  const {prepareChe168ReplicaInputWitness} = await import(pathToFileURL(path.join(worker.root, 'scripts/lib/che168-replica-witness.mjs')).href);
   const f = await fixture(t), environment = {GITHUB_REPOSITORY: 'jeep-jim/AvtoCena', GITHUB_REF: 'refs/heads/main',
     GITHUB_SHA: owner.revision, GITHUB_RUN_ID: owner.runId, GITHUB_RUN_ATTEMPT: owner.attempt};
   const before = await fs.readFile(path.join(f.directory, 'report.json'), 'utf8'), args = {...f.optionsOf(), owner, environment};
