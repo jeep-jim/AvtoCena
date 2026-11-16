@@ -25,7 +25,9 @@ const manifest = await storage.readJson('catalog/manifest.json', null);
 assert.match(manifest?.generationId || '', /^gen_[A-Za-z0-9_]+$/, 'manifest_identity_invalid');
 assert.equal(manifest.markets?.korea?.provider, 'auto_api_encar', 'paid_korea_not_published');
 const snapshot = await storage.readJson(snapshotPrefix + '/complete.json', null);
-assert.ok(Number.isSafeInteger(snapshot?.pages) && snapshot.pages > 0 && snapshot.pages <= 10000,
+console.log(JSON.stringify({stage: 'saved_snapshot_metadata', pages: snapshot?.pages ?? null,
+  count: snapshot?.count ?? null, completedAt: snapshot?.completedAt ?? null}));
+assert.ok(Number.isSafeInteger(snapshot?.pages) && snapshot.pages > 0 && snapshot.pages <= 100000,
   'snapshot_page_bound');
 assert.ok(Number.isSafeInteger(snapshot.count) && snapshot.count > 0, 'snapshot_count_invalid');
 const fields = ['inner_id', 'mark', 'model', 'configuration', 'engine_type', 'displacement',

@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - .github/workflows/verify-paid-korea-specs.yml
+      - scripts/verify-paid-encar-specs.mjs
 permissions:
   contents: read
 concurrency:
