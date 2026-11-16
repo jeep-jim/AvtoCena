@@ -1,9 +1,10 @@
 {
-  "operation": "all-market-continuations-20261007-0822",
+  "operation": "owner-owned-feed-georgia-20261116",
+  "requestedAt": "2026-11-16T13:49:24Z",
   "market": "georgia",
   "publishMarkets": [
     "georgia"
   ],
-  "resetCursors": false,
-  "reason": "Owner requested independent full traversals. Resume safe published cursors, retain source observations and publish each slice. No price/power admission caps. Never cancel an active market."
+  "resetCursors": true,
+  "reason": "Owner requested full non-Japan feed storage in our REG bucket, verified archive/readback and prepublication calculations. Respect current source switches, source evidence, manual specifications, source image URLs and existing publication guards. No Japan calls and no restart of the active China publisher."
 }
