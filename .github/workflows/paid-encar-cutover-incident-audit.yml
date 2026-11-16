@@ -37,7 +37,7 @@ jobs:
               elif path not in {'/','/cars','/api/health','/api/catalog/search','/api/catalog/models','/api/catalog/saved-previews','/login','/autocalc'}:path='/other'
               query=parse_qs(url.query)
               allowed={}
-              for key in ['market','make','brand','model','sort','page','pageSize','budget','budgetTo','powerTo','countOnly','marketPage']:
+              for key in ['market','make','brand','model','sort','page','pageSize','budget','budgetTo','powerTo','countOnly','marketPage','scope','q','limit']:
                   value=query.get(key,[''])[0]
                   if re.fullmatch('[A-Za-z0-9_ .-]{1,40}',value):allowed[key]=value
               return path+(' '+json.dumps(allowed,sort_keys=True) if allowed else '')
@@ -103,7 +103,18 @@ jobs:
                   'range':'RangeError',
               }.items()}
               digests=collections.Counter(re.findall(r"digest:\s*['\"]([A-Za-z0-9_-]{1,80})",logs))
-              frames=collections.Counter(re.findall(r'(?:/app/apps/web/|/app/node_modules/)[A-Za-z0-9_/.()@%+\[\]-]+:\d+:\d+',logs))
+              frames=collections.Counter(re.findall(r'(?:(?:/app/apps/web/)?\.next/|(?:/app/)?node_modules/)[A-Za-z0-9_/.()@%+\[\]-]+:\d+:\d+',logs))
               print('ERROR_SHAPES',json.dumps({'classes':known,'digests':dict(digests),'frames':frames.most_common(15)}))
+              messages=collections.Counter()
+              for line in logs.splitlines():
+                  m=re.search(r'(?:Error:|Exception:)\s*(.{1,500})',line)
+                  if not m:continue
+                  value=re.sub(r'https?://\S+','[URL]',m.group(1))
+                  value=re.sub(r'\b(?:\d{1,3}\.){3}\d{1,3}\b','[IP]',value)
+                  value=re.sub(r'(?i)(token|secret|password|authorization|cookie|signature|credential)[=: ]+[^ ,;]+',r'\1=[REDACTED]',value)
+                  value=re.sub(r'[A-Za-z0-9_/+=-]{64,}','[LONG_VALUE]',value)
+                  messages[value[:220]]+=1
+              print('ERROR_MESSAGES',json.dumps(messages.most_common(12)))
+
 
           PY
