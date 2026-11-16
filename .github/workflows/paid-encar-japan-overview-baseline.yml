@@ -1,0 +1,33 @@
+name: Measure retained Japan overview card counts
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/paid-encar-japan-overview-baseline.yml]
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - name: Inspect real public card counts without changes
+        run: |
+          set -euo pipefail
+          npm install --prefix "$RUNNER_TEMP/probe" --no-package-lock --ignore-scripts playwright@1.55.0
+          "$RUNNER_TEMP/probe/node_modules/.bin/playwright" install chromium
+          PLAYWRIGHT_MODULE="$RUNNER_TEMP/probe/node_modules/playwright/index.mjs" node --input-type=module <<'JS'
+          const {chromium}=await import(process.env.PLAYWRIGHT_MODULE);
+          const browser=await chromium.launch();
+          try{
+            const page=await browser.newPage();
+            const health=await (await page.request.get('https://avtocena.com/api/health',{timeout:30000})).json();
+            if(health.releaseSha!=='a182cd21b21ecf612b63613d263e5bdd817ea4c0')throw Error('retained_release_changed');
+            for(const route of ['/','/cars','/cars?market=japan']){
+              await page.goto('https://avtocena.com'+route,{waitUntil:'domcontentloaded',timeout:90000});
+              const scope=route==='/cars?market=japan'?page:page.locator('section[aria-label="Япония"]');
+              const cards=scope.locator('article.ac-catalog-card,article.ac-catalog-list-row');
+              await cards.first().waitFor({state:'visible',timeout:60000});
+              console.log(JSON.stringify({release:health.releaseSha,route,japanCards:await cards.count(),greenCornerCards:route==='/cars?market=japan'?null:await page.locator('section[aria-label="Зелёный угол"] article.ac-catalog-card').count()}));
+            }
+          }finally{await browser.close();}
+          JS
