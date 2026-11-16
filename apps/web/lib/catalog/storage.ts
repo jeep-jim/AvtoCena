@@ -22,10 +22,12 @@ import {filterBudgetRows} from "./budget-selection-filter";
 import {BudgetEligibilityCache} from "./budget-eligibility-cache";
 import {specificationSelectorDirectory,type CompressedBudgetDirectory} from './budget-selector-codec';
 import {enrichBudgetSpecifications} from './budget-specification-index';
+import {budgetCardPath,budgetCardGroups,assertBudgetSupplementCardContext,assertBudgetSupplementCard,budgetReplayPath,assertBudgetSupplementReplay,type BudgetCardGroup} from './budget-card-reference';
+import {buildBudgetSpecificationSource,assertBudgetSupplementObject,type BudgetSpecificationSource} from './budget-source-supplements';
 import {splitPackedBudgetSelectors,verifiedPackedBudgetSelector,type PackedBudgetDirectory,type PackedBudgetSelector} from './budget-selector-codec';
 import {matchingEditorial,withCatalogEditorial,resetCatalogEditorialCache,editorialRevision,editorialEntries,editorialHasHidden,editorialHidden,applyCatalogEditorial,applyCatalogEditorialSpecifications} from "./editorial";
 import {splitBudgetMarketIndex,validBudgetMarketIndex,type BudgetMarketDirectory} from './budget-market-index';
-import {budgetPricingFingerprint,sharedBudgetPrices,readPreparedBudgetPrices,resetSharedBudgetPriceCache,calculationCacheVersion} from './shared-budget-prices';
+import {budgetPricingFingerprint,sharedBudgetPrices,readPreparedBudgetPrices,readPreparedBudgetSelection,prepareBudgetSelection,verifyPreparedBudgetSelection,resetSharedBudgetPriceCache,calculationCacheVersion} from './shared-budget-prices';
 import {catalogInventoryAgeDecision,catalogInventoryDate,catalogVehicleExcluded,catalogGrossVehicleWeightKg} from './inventory-admission';
 import {compareCatalogDisplayOrder,catalogDisplayOrderComparator} from './display-order';
 import {currentDepositCosts} from "./deposit-cost-projection";
@@ -506,7 +508,7 @@ function projectionCanRenderCardAt(row: CatalogSearchProjection, now: Date) {
 // than rerunning the full specification audit for every consumer of a page.
 let preparedProjectionRows = new WeakMap<CatalogSearchProjection, CatalogSearchProjection | null>();
 let projectionAdmissionCache=new WeakMap<CatalogSearchProjection,{day:string;eligible:boolean}>();
-export function prepareCatalogProjectionRows(rows: CatalogSearchProjection[]) {
+function prepareProjectionRows(rows: CatalogSearchProjection[], includeEditorial:boolean) {
   const visible: CatalogSearchProjection[] = [];
   const now=new Date(),day=new Date(now.getTime()+7*3600000).toISOString().slice(0,10);
   for (const input of rows) {
@@ -520,10 +522,19 @@ export function prepareCatalogProjectionRows(rows: CatalogSearchProjection[]) {
     if(row){
       let admission=projectionAdmissionCache.get(row);
       if(!admission||admission.day!==day){admission={day,eligible:catalogInventoryAgeDecision(row,now).eligible&&!catalogVehicleExcluded(row)};projectionAdmissionCache.set(row,admission);}
-      if(admission.eligible&&!editorialHidden(row))visible.push(applyCatalogEditorialSpecifications(row));
+      if(admission.eligible&&(!includeEditorial||!editorialHidden(row)))visible.push(includeEditorial?applyCatalogEditorialSpecifications(row):row);
     }
   }
   return visible;
+}
+export function prepareCatalogProjectionRows(rows: CatalogSearchProjection[]) {
+  return prepareProjectionRows(rows,true);
+}
+/** Immutable source coverage must not depend on a caller's editorial ALS.
+ * Keep temporarily hidden rows and original specifications available for
+ * later unhide/edits; request filters and pricing apply their current overlay. */
+export function prepareBudgetSpecificationSourceRows(rows: CatalogSearchProjection[]) {
+  return prepareProjectionRows(rows,false);
 }
 /** Release workers may prepare exact future policy days without changing the
  * process clock or poisoning the current-day weak caches. */
@@ -2102,6 +2113,11 @@ export async function getOfferWithoutEditorial(id: string) {
 }
 const BUDGET_CARD_BLOCK_SIZE=256;
 const budgetCardCache=new DetailReadCache<{generationId:string;items:CatalogSearchProjection[]}>({sizeOf:jsonReadByteLength, maxEntries:512,maxBytes:128*1024*1024,ttlMs:3600_000,concurrency:6});
+async function readBudgetCardGroup(generationId:string,group:BudgetCardGroup){
+ assertBudgetSupplementCardContext(group);
+ const part=await budgetCardCache.get(`${generationId}:${group.path}`,()=>readIndex(generationId,group.path,{generationId:'',items:[] as CatalogSearchProjection[]}));
+ assertBudgetSupplementCard(group,part,generationId);return part;
+}
 async function writeBudgetSearchIndex(generationId:string,rows:CatalogSearchProjection[]){
  // Card blocks retain the existing pricing replay inputs; the small selector never carries photos or ledgers.
  const ordered=[...rows];
@@ -2134,7 +2150,7 @@ async function currentSearchPrices(rows:CatalogSearchProjection[],generationId:s
  const result:CatalogSearchProjection[]=[];
  for(let start=0;start<rows.length;start+=128){
   const prepared=rows.slice(start,start+128);
-  const priced=await applyActiveBusinessPriceBatch(prepared as any[],{readOnly:true}) as CatalogSearchProjection[];
+  const priced=await applyActiveBusinessPriceBatch(prepared as any[],{readOnly:true},configurations) as CatalogSearchProjection[];
   // Use only retained projection inputs here: no per-listing detail or supplier scan.
   // The same preview must exist before ordering, not only after a page is selected.
   const delivered=await attachSellerDeliveredPreviews(priced as any[],configurations,{projectionOnly:true}) as CatalogSearchProjection[];
@@ -2144,7 +2160,7 @@ async function currentSearchPrices(rows:CatalogSearchProjection[],generationId:s
 }
 async function currentBudgetBlock(generationId:string,version:1|2|3,block:number){
  return liveBudgetBlockCache.get(`${generationId}:v${version}:${block}:${editorialRevision()}`,async()=>{
-  const part=await budgetCardCache.get(`${generationId}:v${version}:${block}`,()=>readIndex(generationId,`budget-cards-v${version}/${block}.json`,{generationId:"",items:[] as CatalogSearchProjection[]}));
+  const part=await readBudgetCardGroup(generationId,{path:`budget-cards-v${version}/${block}.json`,block,rows:[],supplement:false});
   if(part.generationId!==generationId)return null;
   const priced=await currentSearchPrices(prepareCatalogProjectionRows(part.items),generationId);
   return buildBudgetCountIndex(generationId,priced,new Map(priced.map(row=>[row.id,block])));
@@ -2164,7 +2180,9 @@ async function currentBudgetReplay(index:BudgetCountIndex,market:string,displayP
    const seen=new Set<string>();
    // Discard each input chunk after replay. Only compact prices survive in cache.
    const parts=await mapWithConcurrency(paths,3,async path=>{
-    const chunk=await readIndex<BudgetReplayChunk|null>(index.generationId,path,null);
+    const resolved=budgetReplayPath(path,market);
+    const chunk=await readIndex<BudgetReplayChunk|null>(index.generationId,resolved,null);
+    assertBudgetSupplementReplay(resolved,chunk,index.generationId,market);
     if(!chunk || chunk.generationId!==index.generationId || chunk.market!==market || !Array.isArray(chunk.entries) || chunk.entries.length>500)throw Error('catalog_budget_replay_invalid');
     const input=chunk.entries.map(([id,replay])=>{const row=originals.get(id);if(!row||seen.has(id))throw Error('catalog_budget_replay_identity');seen.add(id);return budgetReplayOffer([...row.slice(0,7),replay] as any);});
     const priced=await currentSearchPrices(input,index.generationId);
@@ -2188,11 +2206,12 @@ async function currentBudgetReplay(index:BudgetCountIndex,market:string,displayP
    const ids=new Set(missing.map(row=>row[5].id));
    const blockById=new Map(missing.map(row=>[row[5].id,row[5].block]));
    const recoveredIds=new Set<string>();
-   const blocks=[...new Set(missing.map(row=>row[5].block))];
-   const recovered=await mapWithConcurrency(blocks,2,async block=>{
-    const part=await budgetCardCache.get(`${index.generationId}:v${index.version}:${block}`,()=>readIndex(index.generationId,`budget-cards-v${index.version}/${block}.json`,{generationId:"",items:[] as CatalogSearchProjection[]}));
+   const groups=budgetCardGroups(missing,index.version);
+   const recovered=await mapWithConcurrency(groups,2,async group=>{
+    const part=await readBudgetCardGroup(index.generationId,group);
     if(part.generationId!==index.generationId)throw Error('catalog_display_price_block_missing');
-    const candidates=part.items.filter(row=>ids.has(row.id));for(const row of candidates)recoveredIds.add(row.id);
+    const wanted=new Set(group.rows.map(row=>row[5].id));
+    const candidates=part.items.filter(row=>wanted.has(row.id));for(const row of candidates)recoveredIds.add(row.id);
     const priced=await currentSearchPrices(prepareCatalogProjectionRows(candidates),index.generationId);
     return buildBudgetCountIndex(index.generationId,displayRows(priced),blockById).rows;
    });
@@ -2234,12 +2253,17 @@ async function readBudgetSelection(params:CatalogSearchParams){
  const metadataQuery=(compactDefaultQuery || hasBudget || Boolean(params.sort && params.sort!=="updatedAt") || metadataFields.some(key=>Boolean((params as any)[key]))) && Object.entries(params).every(([key,value])=>value===undefined || value==='' || [...metadataFields,'market','city','budgetFrom','budgetTo','sort','page','pageSize'].includes(key));
  const defaultBrandQuery=Boolean((params.make || params.model) && (!params.sort || params.sort==="updatedAt"));
  const defaultDisplayQuery=defaultBrandQuery||compactDefaultQuery;
- if(defaultBrandQuery && hasBudget)return null;
  if(!hasBudget && !metadataQuery)return null;
  const manifest=await readManifest();
- const key=JSON.stringify([defaultDisplayQuery?"default-display":"general",editorialRevision(),new Date(Date.now()+7*3600000).toISOString().slice(0,10),manifest.generationId,budgetSelectionFilterKey(params)]);
+ const preparedFingerprint=hasBudget&&params.market&&params.market!=='any'?await budgetPricingFingerprint(params.market):null;
+ const key=JSON.stringify([defaultDisplayQuery?"default-display":"general",editorialRevision(),new Date(Date.now()+7*3600000).toISOString().slice(0,10),manifest.generationId,budgetSelectionFilterKey(params),preparedFingerprint]);
  return filteredBudgetSelectionCache.get(key,async()=>{
-  const index=await readBudgetCountIndex(manifest.generationId,params.market).catch(()=>null);
+  // A verified budget selector already contains every current priced row and
+  // the same filter metadata. Do not download all unpriced inventory first.
+  const prepared=preparedFingerprint&&params.market?await readPreparedBudgetSelection(manifest.generationId,params.market,preparedFingerprint):null;
+  if(prepared&&await budgetPricingFingerprint(params.market!)!==preparedFingerprint)return null;
+  if(defaultBrandQuery && hasBudget && !prepared)return null;
+  const index=prepared??await readBudgetCountIndex(manifest.generationId,params.market).catch(()=>null);
   if(!index || index.inventoryPolicyVersion!==1 || ![1,2,3].includes(index.version)||index.generationId!==manifest.generationId || (!hasBudget && !Array.isArray(index.otherRows)))return null;
   // Older selectors cannot distinguish seller-only display prices in default
   // ranking. Keep their authoritative fallback until enriched selectors exist.
@@ -2249,8 +2273,8 @@ async function readBudgetSelection(params:CatalogSearchParams){
   const quotes=(hasBudget||params.engineFrom||params.engineTo)&&(!params.market||params.market==="any"||params.market==="japan")&&index.rows.some(row=>row[3])?await japanSearchQuotes(manifest.generationId):{};
   // Narrow on compact year/mileage metadata before reading card blocks.
   // Older indexes keep the exact card matcher until the derived index is rebuilt.
-  const costs=hasBudget?await currentDepositCosts():{};
-  const pricedIndex=hasBudget?{...index,rows:index.rows.map(row=>{
+  const costs=hasBudget&&!prepared?await currentDepositCosts():{};
+  const pricedIndex=hasBudget&&!prepared?{...index,rows:index.rows.map(row=>{
    if(index.pricingChunks?.[row[0]] || row[7] || row[4] || !(row[1]>0))return row;
    const deposit=costs[row[0]]||0;
    return [row[0],row[1]+deposit-(row[6]||0),row[2],row[3],row[4],row[5],deposit,row[7]] as typeof row;
@@ -2298,7 +2322,9 @@ async function readBudgetSelection(params:CatalogSearchParams){
    && driveMatches(row[5].drive) &&
    (!params.yearFrom || Number(row[5].year||0)>=params.yearFrom) && (!params.yearTo || Number(row[5].year||0)<=params.yearTo)
    && (index.filterVersion!==1 || ((!params.mileageFrom || projectionNumber(row[5].mileageKm,0)>=params.mileageFrom) && (!params.mileageTo || projectionNumber(row[5].mileageKm,Infinity)<=params.mileageTo))));
-  if(hasBudget && index.version===3){
+  if(hasBudget && prepared){
+   candidates=matchingBudgetIndex({...index,rows:candidates},params,quotes);
+  } else if(hasBudget && index.version===3){
    const ids=new Set(candidates.map(row=>row[5].id));
    const markets=[...new Set(candidates.map(row=>row[0]))];
    const parts=await mapWithConcurrency(markets,2,market=>currentBudgetReplay(pricedIndex,market));
@@ -2314,7 +2340,7 @@ async function readBudgetSelection(params:CatalogSearchParams){
 
   if(hasBudget)candidates=candidates.map(editedRow);
   // A newly edited seller price invalidates its stored ranking inputs.
-  if(defaultBrandQuery && candidates.some(row=>matchingEditorial({id:row[5].id,market:row[0]})?.sellerPrice))return null;
+  if(defaultBrandQuery && !prepared && candidates.some(row=>matchingEditorial({id:row[5].id,market:row[0]})?.sellerPrice))return null;
   const specificationQuery=Boolean(params.engineFrom||params.engineTo||params.powerFrom||params.powerTo);
   if(index.specificationFilterVersion===1 && specificationQuery){
    candidates=candidates.filter(row=>{
@@ -2326,23 +2352,25 @@ async function readBudgetSelection(params:CatalogSearchParams){
     return !(params.powerFrom||params.powerTo)||Boolean(hp&&(!params.powerFrom||hp>=params.powerFrom)&&(!params.powerTo||hp<=params.powerTo+0.01));
    });
   }
-  if(metadataQuery && (!specificationQuery||index.specificationFilterVersion===1) && (index.filterVersion===1 || !(params.mileageFrom || params.mileageTo)))return {generationId:manifest.generationId,cardVersion,indexKey:compactSortOrders.indexKey(index),rows:candidates};
+  const preparedPrices=prepared&&params.market&&preparedFingerprint?{market:params.market,fingerprint:preparedFingerprint}:undefined;
+  if(metadataQuery && (!specificationQuery||index.specificationFilterVersion===1) && (index.filterVersion===1 || !(params.mileageFrom || params.mileageTo)))return {generationId:manifest.generationId,cardVersion,indexKey:compactSortOrders.indexKey(index),rows:candidates,preparedPrices};
   const ids=new Set(candidates.map(row=>row[5].id));
-  const blocks=[...new Set(candidates.map(row=>row[5].block))];
+  const groups=budgetCardGroups(candidates,cardVersion);
   const modelKeys=await projectionModelKeys(params);
   const matched=new Set<string>(),seen=new Set<string>();let incomplete=false;
   // Bound decoded memory even when a visitor combines budget, mileage and year.
   // Never materialize the all-market projection for this query.
-  await mapWithConcurrency(blocks,2,async block=>{
-   const part=await budgetCardCache.get(`${manifest.generationId}:v${cardVersion}:${block}`,()=>readIndex(manifest.generationId,`budget-cards-v${cardVersion}/${block}.json`,{generationId:"",items:[] as CatalogSearchProjection[]}));
+  await mapWithConcurrency(groups,2,async group=>{
+   const part=await readBudgetCardGroup(manifest.generationId,group);
    if(part.generationId!==manifest.generationId){incomplete=true;return;}
-   const selected=part.items.filter(row=>ids.has(row.id));
+   const wanted=new Set(group.rows.map(row=>row[5].id));
+   const selected=part.items.filter(row=>wanted.has(row.id));
    for(const row of selected)seen.add(row.id);
    const prepared=hasBudget?await currentSearchPrices(prepareCatalogProjectionRows(selected),manifest.generationId):await attachJapanSearchValues(prepareCatalogProjectionRows(selected),manifest.generationId);
    for(const row of prepared)if(catalogSearchProjectionMatches(row,params,modelKeys))matched.add(row.id);
   });
   if(incomplete || seen.size!==ids.size)return null;
-  return {generationId:manifest.generationId,cardVersion,indexKey:compactSortOrders.indexKey(index),rows:candidates.filter(row=>matched.has(row[5].id))};
+  return {generationId:manifest.generationId,cardVersion,indexKey:compactSortOrders.indexKey(index),rows:candidates.filter(row=>matched.has(row[5].id)),preparedPrices};
  });
 }
 // Selection rows already expire after 30s and are keyed by generation/day/filters.
@@ -2351,7 +2379,7 @@ async function readBudgetSelection(params:CatalogSearchParams){
 type OrderedBudgetRow=CatalogSearchProjection & {block:number};
 // Sort compact identities, not full card payloads. A direction toggle shares the
 // same price pass. Weak ownership cannot outlive the existing bounded selection cache.
-type CompactSelection={generationId:string;cardVersion:1|2|3;indexKey:number;rows:BudgetCountIndex['rows']};
+type CompactSelection={generationId:string;cardVersion:1|2|3;indexKey:number;rows:BudgetCountIndex['rows'];preparedPrices?:{market:string;fingerprint:string}};
 const compactSortOrders=new BudgetSortOrderCache();
 let compactSortCache=new WeakMap<BudgetCountIndex['rows'],{context:string;prices?:Promise<Float64Array|null>;sellerPrices?:Float64Array;orders:Map<string,Uint32Array>}>();
 async function searchSortedBudgetSelection(selected:CompactSelection,params:CatalogSearchParams,internalPageLimit:number){
@@ -2379,13 +2407,23 @@ async function searchSortedBudgetSelection(selected:CompactSelection,params:Cata
    if(!state.prices)state.prices=(async()=>{
     const values=new Float64Array(selected.rows.length);values.fill(NaN);
     const sellerValues=new Float64Array(selected.rows.length);sellerValues.fill(NaN);state!.sellerPrices=sellerValues;
+    if(selected.preparedPrices&&markets.every((market,i)=>market===selected.preparedPrices!.market&&fingerprints[i]===selected.preparedPrices!.fingerprint)){
+     for(let position=0;position<selected.rows.length;position++){
+      const [market,totalRub,basis,,seller]=selected.rows[position];
+      const offer={market,totalRub,catalogPricingMode:seller?'seller' as const:undefined,calculationSnapshot:{deliveryPricingBasis:basis}};
+      const priced=params.city?priceCardForCity(offer,params.city).offer:offer;
+      const rub=calculatedCatalogPrice(priced);
+      if(rub>0)values[position]=rub;else if(seller&&totalRub>0)sellerValues[position]=totalRub;
+     }
+     return values;
+    }
     // V3 already has bounded price-only replay and a validated shared snapshot.
     // Sorting must not fetch every full card (including images and ledgers).
     // A narrow model search must not wait for every vehicle in its country to
     // be repriced after a rate/day change. The existing exact card replay below
     // is cheaper when both the matching rows and their source blocks are small.
     const narrowModel = Boolean(params.make || params.model) && selected.rows.length <= 4096
-      && new Set(selected.rows.map(row=>row[5].block)).size <= 32;
+      && new Set(selected.rows.map(row=>budgetCardPath(row,selected.cardVersion))).size <= 32;
     const index=selected.cardVersion===3?await readBudgetCountIndex(selected.generationId,params.market):null;
     if(index?.version===3 && index.generationId===selected.generationId){
      const markets=[...new Set(selected.rows.map(row=>row[0]))];
@@ -2414,11 +2452,12 @@ async function searchSortedBudgetSelection(selected:CompactSelection,params:Cata
      }
     }
     const positions=new Map(selected.rows.map((row,index)=>[row[5].id,index]));
-    const blocks=[...new Set(selected.rows.map(row=>row[5].block))];let incomplete=false;let seen=0;
-    await mapWithConcurrency(blocks,2,async block=>{
-     const part=await budgetCardCache.get(`${selected.generationId}:v${selected.cardVersion}:${block}`,()=>readIndex(selected.generationId,`budget-cards-v${selected.cardVersion}/${block}.json`,{generationId:"",items:[] as CatalogSearchProjection[]}));
+    const groups=budgetCardGroups(selected.rows,selected.cardVersion);let incomplete=false;let seen=0;
+    await mapWithConcurrency(groups,2,async group=>{
+     const part=await readBudgetCardGroup(selected.generationId,group);
      if(part.generationId!==selected.generationId){incomplete=true;return;}
-     const candidates=part.items.filter(row=>positions.has(row.id));seen+=candidates.length;
+     const wanted=new Set(group.rows.map(row=>row[5].id));
+     const candidates=part.items.filter(row=>wanted.has(row.id));seen+=candidates.length;
      const priced=await currentSearchPrices(prepareCatalogProjectionRows(candidates),selected.generationId);
      for(const row of priced){
       const position=positions.get(row.id)!;
@@ -2453,14 +2492,14 @@ async function searchSortedBudgetSelection(selected:CompactSelection,params:Cata
  if(!order)return null;
  const page=Math.max(1,Number(params.page||1));
  const pageSize=Math.min(Math.max(1,Math.min(384,internalPageLimit)),Math.max(1,Number(params.pageSize||24)));
- const visible=Array.from(order.slice((page-1)*pageSize,page*pageSize),position=>selected.rows[position][5]);
- const blocks=[...new Set(visible.map(row=>row.block))];
- const parts=await mapWithConcurrency(blocks,6,block=>budgetCardCache.get(`${selected.generationId}:v${selected.cardVersion}:${block}`,()=>readIndex(selected.generationId,`budget-cards-v${selected.cardVersion}/${block}.json`,{generationId:"",items:[] as CatalogSearchProjection[]})));
+ const visible=Array.from(order.slice((page-1)*pageSize,page*pageSize),position=>selected.rows[position]);
+ const groups=budgetCardGroups(visible,selected.cardVersion);
+ const parts=await mapWithConcurrency(groups,6,group=>readBudgetCardGroup(selected.generationId,group));
  if(parts.some(part=>part.generationId!==selected.generationId))return null;
  const byId=new Map(parts.flatMap(part=>part.items).map(row=>[row.id,row]));
- if(visible.some(row=>!byId.has(row.id)))return null;
- const cards=await currentSearchPrices(visible.map(row=>byId.get(row.id)!),selected.generationId);
- return {generationId:selected.generationId,total:selected.rows.length,page,pageSize,items:cards.map(publicOfferFromProjection),usedIndexShards:blocks.map(block=>`budget-cards-v${selected.cardVersion}/${block}.json`)};
+ if(visible.some(row=>!byId.has(row[5].id)))return null;
+ const cards=await currentSearchPrices(visible.map(row=>byId.get(row[5].id)!),selected.generationId);
+ return {generationId:selected.generationId,total:selected.rows.length,page,pageSize,items:cards.map(publicOfferFromProjection),usedIndexShards:groups.map(group=>group.path)};
 }
 async function searchBudgetIndex(params:CatalogSearchParams,internalPageLimit:number){
  const selected=await readBudgetSelection(params);if(!selected)return null;
@@ -2486,15 +2525,15 @@ async function searchBudgetIndex(params:CatalogSearchParams,internalPageLimit:nu
  if(!order)return null;
  const page=Math.max(1,Number(params.page||1));
  const pageSize=Math.min(Math.max(1,Math.min(384,internalPageLimit)),Math.max(1,Number(params.pageSize||24)));
- const visible=Array.from(order.slice((page-1)*pageSize,page*pageSize),position=>selected.rows[position][5]);
- const blocks=[...new Set(visible.map(row=>row.block))];
- const parts=await mapWithConcurrency(blocks,6,block=>budgetCardCache.get(`${selected.generationId}:v${selected.cardVersion}:${block}`,()=>readIndex(selected.generationId,`budget-cards-v${selected.cardVersion}/${block}.json`,{generationId:"",items:[] as CatalogSearchProjection[]})));
+ const visible=Array.from(order.slice((page-1)*pageSize,page*pageSize),position=>selected.rows[position]);
+ const groups=budgetCardGroups(visible,selected.cardVersion);
+ const parts=await mapWithConcurrency(groups,6,group=>readBudgetCardGroup(selected.generationId,group));
  if(parts.some(part=>part.generationId!==selected.generationId))return null;
  const byId=new Map(parts.flatMap(part=>part.items).map(row=>[row.id,row]));
- if(visible.some(row=>!byId.has(row.id)))return null;
- const visibleCards=visible.map(row=>byId.get(row.id)!);
+ if(visible.some(row=>!byId.has(row[5].id)))return null;
+ const visibleCards=visible.map(row=>byId.get(row[5].id)!);
  const cards=params.budgetFrom || params.budgetTo ? await currentSearchPrices(prepareCatalogProjectionRows(visibleCards),selected.generationId) : visibleCards;
- return {generationId:selected.generationId,total:selected.rows.length,page,pageSize,items:cards.map(publicOfferFromProjection),usedIndexShards:blocks.map(block=>`budget-cards-v${selected.cardVersion}/${block}.json`)};
+ return {generationId:selected.generationId,total:selected.rows.length,page,pageSize,items:cards.map(publicOfferFromProjection),usedIndexShards:groups.map(group=>group.path)};
 }
 const budgetIndexCache=new DetailReadCache<BudgetCountIndex|null>({maxEntries:14,maxBytes:256*1024*1024,ttlMs:3600_000,concurrency:2,sizeOf:value=>jsonReadByteLength(value)??budgetIndexBytes(value)});
 const budgetMarketDirectoryCache=new DetailReadCache<BudgetMarketDirectory|null>({maxEntries:1,maxBytes:8192,ttlMs:300_000,concurrency:1});
@@ -2608,6 +2647,87 @@ async function mergeSpecificationReadiness(manifest:CatalogManifest,directory:Co
  }
  throw Error('budget_specification_readiness_conflict');
 }
+/** Read-only preflight shared by the release contract and the background writer.
+ * Never derives a new card identity from an absent generic block number. */
+export async function readBudgetSpecificationSource(manifest:CatalogManifest,market:CatalogMarket){
+ if(market==='japan'||!MARKETS.includes(market))throw Error('budget_supplement_market_invalid');
+ const generationId=manifest.generationId;
+ const directory=await readIndex<CompressedBudgetDirectory|null>(generationId,'budget-markets-v3/ready.json',null);
+ const index=directory?.generationId===generationId
+  ?await readCompressedSelector(directory,market,name=>readIndex(generationId,`budget-markets-v3/${name}.json`,null)):null;
+ if(!index||index.version!==3||index.generationId!==generationId)throw Error('budget_supplement_base_missing');
+ const projection=await readIndex<{generationId:string;items:CatalogSearchProjection[]}|null>(generationId,`projection/${market}.json`,null);
+ if(!projection)throw Error('budget_supplement_projection_missing');
+ return buildBudgetSpecificationSource({index,projection,market,expectedRows:manifest.markets[market].count,
+  prepareRows:prepareBudgetSpecificationSourceRows,calculationVersion:calculationCacheVersion(),encyclopediaDigest:readCalculationIndex()?.digest||null});
+}
+function assertBudgetSourceContext(source:BudgetSpecificationSource){
+ if(source.descriptor.calculationVersion!==calculationCacheVersion()
+  ||source.descriptor.encyclopediaDigest!==(readCalculationIndex()?.digest||null))throw Error('budget_supplement_context_changed');
+}
+async function persistBudgetSourceSupplements(source:BudgetSpecificationSource){
+ assertBudgetSourceContext(source);
+ const storage=getJsonStorage();
+ await mapWithConcurrency(source.objects,4,async object=>{
+  const expected=source.descriptor.objects.find(row=>row.path===object.path)!;
+  assertBudgetSupplementObject(expected,object.value);
+  const key=generationPath(source.descriptor.generationId,`indexes/${object.path}`);
+  const current=await storage.readJson(key,null);
+  if(current!==null){assertBudgetSupplementObject(expected,current);return;}
+  try{await storage.writeJson(key,object.value,{ifNoneMatch:'*'});}
+  catch(error){if(!(error instanceof StorageConflictError))throw error;}
+  assertBudgetSupplementObject(expected,await storage.readJson(key,null));
+ });
+ assertBudgetSourceContext(source);
+}
+/** Fresh exact object readback. No cache, calculation fallback or write can
+ * substitute for a durable card/replay object at its planned immutable path. */
+export async function verifyBudgetSpecificationSource(manifest:CatalogManifest,market:CatalogMarket){
+ const source=await readBudgetSpecificationSource(manifest,market),storage=getJsonStorage();
+ await mapWithConcurrency(source.descriptor.objects,4,async object=>{
+  const value=await storage.readJson(generationPath(manifest.generationId,`indexes/${object.path}`),null);
+  assertBudgetSupplementObject(object,value);
+ });
+ assertBudgetSourceContext(source);return source.descriptor;
+}
+/** Fresh readback of every card reference, including the retained generic
+ * blocks. Selector/numeric completeness alone cannot prove a card still exists.
+ * No cache, repricing, source mutation or derived write participates here. */
+export async function verifyBudgetSpecificationCards(manifest:CatalogManifest,market:CatalogMarket,index:BudgetCountIndex){
+ const expectedCount=manifest.markets?.[market]?.count;
+ if(market==='japan'||!MARKETS.includes(market)||index?.version!==3||index.generationId!==manifest.generationId||!Number.isSafeInteger(expectedCount)||expectedCount<=0)throw Error('budget_card_readiness_context');
+ const rows=[...index.rows,...(index.otherRows||[])],wanted=new Map(rows.map(row=>[row[5].id,budgetCardPath(row,3)]));
+ if(index.sourceRows!==rows.length||rows.length<=0||rows.length>expectedCount||wanted.size!==rows.length
+  ||rows.some(row=>row[0]!==market||typeof row[5].id!=='string'||!row[5].id))throw Error('budget_card_readiness_source');
+ const groups=budgetCardGroups(rows,3),storage=getJsonStorage();
+ const hash=(value:unknown)=>crypto.createHash('sha256').update(JSON.stringify(value)).digest('hex');
+ const calculation=calculationCacheVersion(),encyclopedia=readCalculationIndex()?.digest||null;
+ const blocks=await mapWithConcurrency(groups,4,async group=>{
+  assertBudgetSupplementCardContext(group);
+  // Direct storage access deliberately bypasses both raw and live card caches.
+  const part=await storage.readJson<{generationId:string;items:CatalogSearchProjection[]}|null>(generationPath(manifest.generationId,`indexes/${group.path}`),null);
+  if(!part||part.generationId!==manifest.generationId||!Array.isArray(part.items)||part.items.length<1||part.items.length>BUDGET_CARD_BLOCK_SIZE)throw Error('budget_card_readiness_missing');
+  const json=JSON.stringify(part);
+  if(Buffer.byteLength(json)>64*1024*1024)throw Error('budget_card_readiness_bytes');
+  assertBudgetSupplementCard(group,part,manifest.generationId);
+  const seen=new Set<string>(),covered=new Set<string>(),expected=new Set(group.rows.map(row=>row[5].id));
+  for(const row of part.items){
+   if(!row||typeof row.id!=='string'||!row.id||!MARKETS.includes(row.market as CatalogMarket)||seen.has(row.id))throw Error('budget_card_readiness_identity');
+   seen.add(row.id);
+   const path=wanted.get(row.id);
+   if(path!==undefined&&(path!==group.path||row.market!==market))throw Error('budget_card_readiness_mapping');
+   if(expected.has(row.id))covered.add(row.id);
+  }
+  if(covered.size!==expected.size)throw Error('budget_card_readiness_incomplete');
+  return {path:group.path,payloadSha256:crypto.createHash('sha256').update(json).digest('hex'),
+   payloadRows:part.items.length,coveredRows:covered.size,coveredIdsSha256:hash([...covered].sort())};
+ });
+ if(calculationCacheVersion()!==calculation||(readCalculationIndex()?.digest||null)!==encyclopedia)throw Error('budget_card_readiness_context_changed');
+ blocks.sort((a,b)=>a.path.localeCompare(b.path));
+ const body={version:1 as const,verified:true as const,generationId:manifest.generationId,market,sourceRows:rows.length,
+  sourceIds:hash(rows.map(row=>row[5].id)),blocks};
+ return {...body,checksum:hash(body)};
+}
 /** Backfill compact specifications without changing inventory or older selectors. */
 export async function backfillBudgetSpecificationSelectors(markets?:CatalogMarket[]){
  const manifest=await readManifest();
@@ -2615,16 +2735,21 @@ export async function backfillBudgetSpecificationSelectors(markets?:CatalogMarke
  const directory:CompressedBudgetDirectory={version:4,generationId:manifest.generationId,markets:{},encyclopediaDigest:readCalculationIndex()?.digest||null};
  for(const market of markets?preparationMarkets(markets):MARKETS){
   if(manifest.markets?.[market]?.count===0)continue;
+  const supplemental=market==='japan'?null:await readBudgetSpecificationSource(manifest,market);
+  if(supplemental)await persistBudgetSourceSupplements(supplemental);
   const existing=old?.version===4&&await readCompressedSelector(old,market,name=>readIndex(manifest.generationId,specificationSelectorPath(name),null));
-  if(old?.encyclopediaDigest===directory.encyclopediaDigest && existing?.specificationFilterVersion===1 && existing.bodyFilterVersion===1 && existing.displayOrderVersion===1){directory.markets[market]=old!.markets[market];continue;}
-  const source=await readBudgetCountIndex(manifest.generationId,market);
+  const references=(index:BudgetCountIndex)=>JSON.stringify([...index.rows,...(index.otherRows||[])].map(row=>[row[5].id,row[5].block,row[5].cardPath||null]));
+  const sameSource=!supplemental||existing&&references(existing)===references(supplemental.index)
+   && JSON.stringify(existing.pricingChunks||null)===JSON.stringify(supplemental.index.pricingChunks||null);
+  if(sameSource&&old?.encyclopediaDigest===directory.encyclopediaDigest && existing?.specificationFilterVersion===1 && existing.bodyFilterVersion===1 && existing.displayOrderVersion===1){directory.markets[market]=old!.markets[market];continue;}
+  const source=supplemental?.index||await readBudgetCountIndex(manifest.generationId,market);
   if(!source||source.generationId!==manifest.generationId||source.version!==3)throw Error('budget_specification_source_missing');
   const hasMarketRows=[...source.rows,...(source.otherRows||[])].some(row=>row[0]===market);
   if(!hasMarketRows){
    if(Number(manifest.markets?.[market]?.count||0)>0)throw Error('budget_specification_nonempty_market_missing');
    continue; // Empty markets have no partition; never synthesize inventory.
   }
-  const rich=await enrichBudgetSpecifications(source,block=>readIndex(manifest.generationId,`budget-cards-v${source.version}/${block}.json`,{generationId:'',items:[] as CatalogSearchProjection[]}));
+  const rich=await enrichBudgetSpecifications(source,(block,path)=>readIndex(manifest.generationId,path||`budget-cards-v${source.version}/${block}.json`,{generationId:'',items:[] as CatalogSearchProjection[]}));
   const part=splitBudgetMarketIndex(rich).parts.get(market);
   if(!part)throw Error('budget_specification_partition_missing');
   directory.markets[market]=await publishSelectorMarket(part,market,
@@ -2646,9 +2771,27 @@ export async function warmBudgetPriceCaches(markets?:CatalogMarket[]){
   if(!index || index.version!==3 || index.generationId!==manifest.generationId)continue;
   const start=performance.now(),rows=await currentBudgetReplay(index,market);
   await currentBudgetReplay(index,market,true);
-  results.push({market,rows:rows.length,ms:Math.round(performance.now()-start)});
+  const fingerprint=await budgetPricingFingerprint(market);
+  if(!fingerprint)throw Error('catalog_prepared_selection_context_missing');
+  const preparedSelection=await prepareBudgetSelection(index,market,fingerprint,rows);
+  results.push({market,rows:rows.length,ms:Math.round(performance.now()-start),preparedSelection});
  }
  return {generationId:manifest.generationId,results};
+}
+/** Verify prepared reads against the exact staged/current manifest in a fresh
+ * process. An overlay may select a staged immutable generation before its CAS. */
+export async function verifyPreparedBudgetPriceCaches(markets?:CatalogMarket[]){
+ const manifest=await readManifest(),results=[];
+ for(const market of (markets?preparationMarkets(markets):MARKETS).filter(market=>market!=='japan')){
+  if(manifest.markets?.[market]?.count===0)continue;
+  const index=await readBudgetCountIndex(manifest.generationId,market);
+  const fingerprint=await budgetPricingFingerprint(market);
+  if(!index||index.version!==3||index.generationId!==manifest.generationId||!fingerprint)throw Error('catalog_prepared_selection_source_missing');
+  results.push(await verifyPreparedBudgetSelection(index,market,fingerprint));
+ }
+ const after=await getJsonStorage().readJson<CatalogManifest>('catalog/manifest.json',{} as CatalogManifest);
+ if(after.generationId!==manifest.generationId)throw Error('catalog_budget_generation_changed');
+ return {generationId:manifest.generationId,verified:true as const,results};
 }
 /** Derived immutable index only; generation data and current aliases are untouched. */
 export async function backfillCatalogBudgetCountIndex(){
