@@ -26606,3 +26606,15 @@ AGENTS.md explicitly prohibits increasing gate thresholds without NEW explicit o
 - Рабочее приложение по health осталось 83ff17075e9188dcf227c8752dc064248d5f42e0. Этот адресный выпуск сохраняет доказательства проверки и не устанавливает приложение, не перепубликует каталог и не меняет источники/расписания.
 - Публикация этого адресного выпуска: https://github.com/jeep-jim/AvtoCena/commit/1d501795be7e076ac8c989fdb1891dcd37cd7954
 
+
+
+### 2026-11-16 — Защита технического восстановления платной Кореи и сохранности остальных рынков
+- По двум примерам поставщика нужные значения уже присутствовали в сохранённом снимке 43570782014/1: Morning 42799484 — 998 см³/76 л.с.; Seltos 42760061 — 1598 см³/193 л.с. Это подтверждено read-only проверкой https://github.com/jeep-jim/AvtoCena/actions/runs/43852979549. API credential из переписки в репозиторий не переносился.
+- PR https://github.com/jeep-jim/AvtoCena/pull/1782 завершён: merge a54912da071a5df17e56c7e66b3b731afc5baf83, exact tested source 7052907fb11d58ff919be11a43747d43df01b41e, tree bd306670ea6a9e0e0bec8a0716a2f48e11cd5e77.
+- План повторно выполняет настоящий normalizeVehicleOfferSpecs для каждой строки и останавливается при новой неподтверждённой 30-минутной мощности из trim/raw. Уже сохранённые явные значения и ручные сведения сохраняются.
+- Только technical-repair путь читает остальные рынки из receipt-bound manifest: проверяются все public chunks, count, уникальность/рынок ID, точное равенство с immutable projection и неизменность authority после чтения. Explicit borrowed chunks и чтение частей projection поддерживаются; обычный publisher не менялся.
+- Локально: 43/43 профильных проверок итоговой интеграции и 83/83 расширенных Dubicars/repair проверок. CI https://github.com/jeep-jim/AvtoCena/actions/runs/43864804718 — SUCCESS; Verify Dubicars https://github.com/jeep-jim/AvtoCena/actions/runs/43864804785 — SUCCESS.
+- Код и действующий запуск различаются: controller46a50cf408291d17ac939eb7b28b5d9bb120e615 и active plan/review run43866071844 ещё закреплены на d61464a512f1d833a5af49d8a3e3b2ea754e231e. Merge1782 не подключает новые guards к этому уже запущенному workflow. Для использования705 нужен отдельно проверенный repin и новый plan; нельзя объявлять старый plan проверкой нового source.
+- Этот адресный выпуск сохраняет запись о коде и проверках. Приложение и каталог им не активировались; реальные корейские карточки ещё требуют завершённой подготовки, проверки результата и согласованной публикации.
+- Публикация этого адресного выпуска: https://github.com/jeep-jim/AvtoCena/commit/b880a3aa5bd806d946da39d2ebfd8e4fe451a4b0
+
