@@ -4,7 +4,7 @@ import fs from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
-import {signRawGcS3Request,parseRawGcS3List,parseRawGcS3Delete,createReadOnlyRawGcS3Transport,executeRawGcWithS3} from '../scripts/lib/catalog-raw-gc-s3.mjs';
+import {signRawGcS3Request,parseRawGcS3List,parseRawGcS3Delete,createReadOnlyRawGcS3Transport,executeRawGcWithS3,rawGcS3SchemaDiagnostic} from '../scripts/lib/catalog-raw-gc-s3.mjs';
 import {RAW_GC_TARGET,RAW_GC_POLICY_KEY,prepareRawGcPlan,readRawGcAuthority} from '../scripts/lib/catalog-raw-gc.mjs';
 import {RAW_PREFIXES,rawDigest,rawGenerationKey,buildRawGenerationProvenance} from '../scripts/lib/catalog-raw-provenance.mjs';
 import {RAW_COORDINATION_KEY,RAW_COORDINATED_POINTERS,RAW_COORDINATED_WRITERS,createRawCoordination,rawPointerDescriptor,
@@ -102,6 +102,42 @@ test('malformed XML, entities, duplicated scalars, wrong prefixes and truncated 
   }
   assert.throws(()=>parseRawGcS3List(xmlList([metadata(),metadata()]),{prefix,maxKeys:10}),/list_count/);
   assert.throws(()=>parseRawGcS3List(xmlList([metadata('catalog/paid-encar-reports/v1/1/history/aa.json')]),{prefix,maxKeys:10}),/list_key_prefix/);
+});
+test('documented Delimiter and StartAfter response fields accept only absent or empty singleton scalars',()=>{
+  const good=xmlList([metadata()]),parse=xml=>parseRawGcS3List(xml,{prefix,maxKeys:10});
+  const insert=value=>good.replace('</ListBucketResult>',value+'</ListBucketResult>');
+  for(const value of ['', '<Delimiter/><StartAfter/>','<Delimiter></Delimiter><StartAfter></StartAfter>']) {
+    assert.deepEqual(parse(insert(value)),parse(good));
+  }
+  for(const name of ['Delimiter','StartAfter']) {
+    for(const value of ['/', 'skip-key', '%2F', ' '])assert.throws(()=>parse(insert('<'+name+'>'+value+'</'+name+'>')),/list_unrequested_parameter/);
+    assert.throws(()=>parse(insert('<'+name+'/><'+name+'/>')),/xml_field/);
+    assert.throws(()=>parse(insert('<'+name+'><Prefix/></'+name+'>')),/xml_field/);
+  }
+  for(const value of ['<CommonPrefixes/>','<CommonPrefixes><Prefix>private-group/</Prefix></CommonPrefixes>']) {
+    assert.throws(()=>parse(insert(value)),/xml_unknown_field/);
+  }
+  assert.throws(()=>parse(good.replace('</Contents>','<RestoreStatus/></Contents>')),/xml_unknown_field/);
+});
+test('unknown LIST fields remain errors with only bounded trusted parent and tag-name diagnostics',()=>{
+  const good=xmlList([metadata()]),parse=xml=>parseRawGcS3List(xml,{prefix,maxKeys:10});
+  for(const [parent,closing] of [['ListBucketResult','</ListBucketResult>'],['Contents','</Contents>']]) {
+    assert.throws(()=>parse(good.replace(closing,'<VendorExtension>private-value-token-key</VendorExtension>'+closing)),error=>{
+      assert.equal(error.message,'raw_gc_s3_xml_unknown_field');
+      const diagnostic=rawGcS3SchemaDiagnostic(error);
+      assert.deepEqual(diagnostic,{parent,unknownNames:['VendorExtension'],unknownFieldCount:1,omittedNameCount:0});
+      assert.ok(!JSON.stringify(diagnostic).includes('private-value'));
+      diagnostic.unknownNames.push('mutated');assert.deepEqual(rawGcS3SchemaDiagnostic(error).unknownNames,['VendorExtension']);
+      return true;
+    });
+  }
+  const names=[...Array.from({length:10},(_,index)=>'Extension'+index),'X'.repeat(65)];
+  assert.throws(()=>parse(good.replace('</ListBucketResult>',names.map(name=>'<'+name+'>private-value</'+name+'>').join('')+'</ListBucketResult>')),error=>{
+    const diagnostic=rawGcS3SchemaDiagnostic(error);
+    assert.equal(diagnostic.unknownNames.length,8);assert.equal(diagnostic.unknownFieldCount,11);assert.equal(diagnostic.omittedNameCount,3);
+    assert.ok(diagnostic.unknownNames.every(name=>name.length<=64));assert.ok(JSON.stringify(diagnostic).length<1024);return true;
+  });
+  assert.equal(rawGcS3SchemaDiagnostic(Object.assign(Error('raw_gc_s3_xml_unknown_field'),{schemaDiagnostic:{private:'do-not-copy'}})),null);
 });
 test('LIST pagination cannot scan a whole bucket, another market namespace, or exceed a page cap',async()=>{
   let calls=0;const io=transport(async()=>{calls++;return new Response('');});
