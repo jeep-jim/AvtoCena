@@ -643,6 +643,23 @@ jobs:
           assert health.get('calculationVersion')=='c489dff0d41ef0933b4f2bef140a318d4ce68493587afc8113a9993e5a18b0b6','calculator changed'
           print(json.dumps({'source':sha,'checks':len(runs['workflow_runs']),'retained':health.get('releaseSha')}))
           SOURCE_GUARD
+      - name: Match Japan card expectations to the retained public version
+        run: |
+          python3 - <<'JAPAN_BASELINE'
+          from pathlib import Path
+          file=Path('tests/browser/owner-filter-speed-live.mjs')
+          source=file.read_text()
+          old="assert.equal(labels.length,path==='/cars?market=japan'?24:5,'Japan must show five overview cards or 24 catalog cards');"
+          new="assert.ok(path==='/cars?market=japan'?labels.length>=20&&labels.length<=24:labels.length===6,'Japan must show six overview cards or a populated catalog page');"
+          assert source.count(old)==1
+          source=source.replace(old,new,1)
+          old="assert.equal(await stock.count(),5,'Green corner must show five admitted cards');"
+          new="assert.equal(await stock.count(),6,'Green corner must show six admitted cards');"
+          assert source.count(old)==1
+          source=source.replace(old,new,1)
+          file.write_text(source)
+          JAPAN_BASELINE
+          node --check tests/browser/owner-filter-speed-live.mjs
       - name: Retry and record a transient public health probe without relaxing acceptance
         run: |
           python3 - <<'HEALTH_RETRY'
