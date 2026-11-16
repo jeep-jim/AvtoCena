@@ -4,6 +4,7 @@ import {useEffect, useId, useRef, useState} from 'react';
 import {KoreaInspectionBody} from './KoreaInspectionBody';
 import {ChevronDown, ExternalLink} from 'lucide-react';
 import {validKoreaReportLink, type KoreaReportLink, type KoreaSourceReportKind} from '../../lib/catalog/korea-report-types';
+import PaidKoreaReportPanel from './PaidKoreaReportPanel';
 
 function ReportSection({offerId,lot,kind,title}:{offerId:string;lot:string;kind:KoreaSourceReportKind;title:string}) {
  const [open,setOpen] = useState(false), [started,setStarted] = useState(false);
@@ -54,6 +55,7 @@ function ReportSection({offerId,lot,kind,title}:{offerId:string;lot:string;kind:
  </section>;
 }
 export default function KoreaReportPanel({offerId,lot,active}:{offerId:string;lot:string;active:boolean}) {
+ if(/^[a-f0-9]{24}$/.test(offerId))return <PaidKoreaReportPanel offerId={offerId} lot={lot} active={active}/>;
  return <section aria-label="История и состояние" className="min-w-0 rounded-2xl border border-[var(--ac-border)] p-4 text-[var(--ac-text)] sm:p-5" data-korea-report-panel data-active={active}>
   <h2 className="text-lg font-bold">История и состояние</h2>
   <p className="mt-2 text-sm leading-6 text-[var(--ac-muted)]">Выберите отчёт. Состояние автомобиля и доступные отметки осмотра — на русском, прямо здесь.</p>
