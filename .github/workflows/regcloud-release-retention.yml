@@ -1,13 +1,22 @@
 name: Regcloud — clean retained application releases
 on:
   workflow_dispatch:
+  workflow_run:
+    workflows: ['Release paid Korea insurance history']
+    types: [completed]
+    branches: [main]
   push:
     branches: [main]
     paths: ['.github/market-runs/regcloud-release-retention.json']
 permissions:
   contents: read
+  actions: read
+concurrency:
+  group: regcloud-release-retention
+  cancel-in-progress: false
 jobs:
   inspect:
+    if: github.event_name != 'workflow_run' || (github.event.workflow_run.head_branch == 'main' && github.event.workflow_run.head_repository.full_name == github.repository)
     runs-on: ubuntu-latest
     timeout-minutes: 6
     environment: regcloud-staging
@@ -17,7 +26,39 @@ jobs:
           persist-credentials: false
       - name: Verify image retention safeguards
         run: python3 tests/regcloud-release-retention.test.py
+      - name: Defer retention while another release or owned diagnostic is active
+        id: release_gate
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json,os,pathlib,urllib.request
+          repo=os.environ['GITHUB_REPOSITORY']
+          assert repo=='jeep-jim/AvtoCena'
+          blocked=[]
+          exact={'.github/workflows/diagnose-paid-korea-home-phases.yml',
+                 '.github/workflows/regcloud-deploy.yml',
+                 '.github/workflows/regcloud-staging-prepare.yml',
+                 '.github/workflows/regcloud-memory.yml',
+                 '.github/workflows/regcloud-owner-rollback.yml',
+                 '.github/workflows/regcloud-owner-approved-rollback.yml',
+                 '.github/workflows/regcloud-reviewed-vm-cleanup.yml'}
+          for page in range(1,11):
+              request=urllib.request.Request('https://api.github.com/repos/'+repo+'/actions/runs?status=in_progress&per_page=100&page='+str(page),headers={'Authorization':'Bearer '+os.environ['GITHUB_TOKEN'],'Accept':'application/vnd.github+json','User-Agent':'AvtoCena-Retention-Release-Guard'})
+              with urllib.request.urlopen(request,timeout=20) as response:rows=json.load(response)['workflow_runs']
+              for row in rows:
+                  path=row['path']
+                  if path.startswith('.github/workflows/release-') or path.startswith('.github/workflows/regcloud-activate') or path in exact:
+                      blocked.append(row['id'])
+              if len(rows)<100:break
+          else:raise RuntimeError('active_run_inventory_incomplete')
+          ready=not blocked
+          with open(os.environ['GITHUB_OUTPUT'],'a') as output:output.write('ready='+str(ready).lower()+'\n')
+          print(json.dumps({'retentionDeferred':not ready,'activeReleaseOrDiagnosticRuns':blocked}))
+          PY
       - name: Remove only obsolete stopped application releases
+        if: steps.release_gate.outputs.ready == 'true'
         env:
           SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
         run: |
