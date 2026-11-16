@@ -11,52 +11,39 @@ concurrency:
   cancel-in-progress: false
 jobs:
   dispatch:
-    if: github.ref == 'refs/heads/main' && github.event.head_commit.message == 'Plan saved Korea technical correction d61464a5 enabled'
+    if: github.ref == 'refs/heads/main' && github.event.head_commit.message == 'Plan and review saved Korea technical correction d61464a5 on main'
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     env:
-      REPAIR_ACTION: plan
       REPAIR_SOURCE: d61464a512f1d833a5af49d8a3e3b2ea754e231e
-      REPAIR_CONTROLLER: SELF
-      REPAIR_REF: work/paid-korea-technical-controller-20261116-v2
       REPAIR_RELEASE: 83ff17075e9188dcf227c8752dc064248d5f42e0
       REPAIR_CALCULATOR: 4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90
-      REPAIR_APPROVED_PLAN: ''
     steps:
-      - name: Verify the fixed source and controller before dispatch
+      - name: Verify fixed source CI and exact main controller before dispatch
         uses: actions/github-script@v7
         with:
           script: |
             const assert = require('node:assert/strict');
-            const action = process.env.REPAIR_ACTION;
-            const source = process.env.REPAIR_SOURCE;
-            const controller = process.env.REPAIR_CONTROLLER === 'SELF' ? context.sha : process.env.REPAIR_CONTROLLER;
-            const ref = process.env.REPAIR_REF;
-            assert.ok(['plan','apply'].includes(action));
-            assert.match(source, /^[a-f0-9]{40}$/);
-            assert.match(controller, /^[a-f0-9]{40}$/);
-            assert.equal(ref, 'work/paid-korea-technical-controller-20261116-v2');
-            const branch = (await github.rest.repos.getBranch({...context.repo, branch:ref})).data;
-            assert.equal(branch.commit.sha, controller, 'reviewed_controller_branch_changed');
+            const source = process.env.REPAIR_SOURCE,controller = context.sha,ref = 'main';
+            assert.equal(source,'d61464a512f1d833a5af49d8a3e3b2ea754e231e');
+            assert.equal(context.ref,'refs/heads/main');assert.match(controller,/^[a-f0-9]{40}$/);
+            const branch = (await github.rest.repos.getBranch({...context.repo,branch:ref})).data;
+            assert.equal(branch.commit.sha,controller,'reviewed_main_controller_changed');
             const checks = (await github.rest.actions.listWorkflowRunsForRepo({
-              ...context.repo, head_sha:source, event:'pull_request', per_page:100
+              ...context.repo,head_sha:source,event:'pull_request',per_page:100
             })).data.workflow_runs;
             for (const name of ['CI','Verify Dubicars paid feed']) {
-              const run = checks.filter(row => row.head_sha === source && row.name === name)
-                .sort((a,b) => b.id - a.id)[0];
-              assert.ok(run && run.status === 'completed' && run.conclusion === 'success', 'source_check_not_passed:' + name);
+              const run = checks.filter(row => row.head_sha === source && row.name === name).sort((a,b) => b.id-a.id)[0];
+              assert.ok(run && run.status === 'completed' && run.conclusion === 'success','source_check_not_passed:'+name);
             }
             const workflow = 'repair-paid-encar-technical.yml';
             const active = (await github.rest.actions.listWorkflowRuns({
-              ...context.repo, workflow_id:workflow, per_page:100
+              ...context.repo,workflow_id:workflow,per_page:100
             })).data.workflow_runs.filter(run => run.status !== 'completed');
-            assert.equal(active.length, 0, 'technical_repair_already_active');
-            const approved = process.env.REPAIR_APPROVED_PLAN;
-            if (action === 'apply') assert.match(approved, /^[a-f0-9]{64}$/);
-            else assert.equal(approved, '');
+            assert.equal(active.length,0,'technical_repair_already_active');
             await github.rest.actions.createWorkflowDispatch({
-              ...context.repo, workflow_id:workflow, ref,
-              inputs:{action, controller_sha:controller, expected_release:process.env.REPAIR_RELEASE,
-                expected_calculator:process.env.REPAIR_CALCULATOR, approved_plan_sha256:approved}
+              ...context.repo,workflow_id:workflow,ref,inputs:{controller_sha:controller,
+                expected_release:process.env.REPAIR_RELEASE,expected_calculator:process.env.REPAIR_CALCULATOR,
+                review_for_apply:'true'}
             });
-            core.info(JSON.stringify({dispatched:true, action, source, controller, ref}));
+            core.info(JSON.stringify({dispatched:true,mode:'plan_then_exact_review',source,controller,ref,review_for_apply:true}));

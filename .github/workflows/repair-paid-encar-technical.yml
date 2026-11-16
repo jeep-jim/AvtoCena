@@ -2,13 +2,8 @@ name: Repair saved paid Korea technical fields
 on:
   workflow_dispatch:
     inputs:
-      action:
-        type: choice
-        options: [plan, apply]
-        default: plan
-        required: true
       controller_sha:
-        description: Reviewed exact controller revision
+        description: Reviewed exact main controller revision
         type: string
         required: true
       expected_release:
@@ -19,20 +14,20 @@ on:
         description: Exact currently accepted health calculation version
         type: string
         required: true
-      approved_plan_sha256:
-        description: Successful same-day plan receipt (required for apply)
-        type: string
-        required: false
+      review_for_apply:
+        description: After a successful read-only plan, wait for its exact main review receipt and apply in this same run
+        type: boolean
+        default: false
+        required: true
 permissions:
   contents: read
   actions: read
 concurrency:
-  group: ${{ inputs.action == 'apply' && 'production-release' || 'paid-korea-technical-plan' }}
+  group: ${{ inputs.review_for_apply && 'regcloud-production-release' || 'paid-korea-technical-plan' }}
   cancel-in-progress: false
 jobs:
   repair:
-    # Exact reviewed source; plan and receipt-bound apply use this same controller.
-    if: ${{ github.event_name == 'workflow_dispatch' && (inputs.action == 'plan' || inputs.action == 'apply') }}
+    if: ${{ github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' }}
     environment: regcloud-staging
     runs-on: ubuntu-24.04
     timeout-minutes: 330
@@ -41,7 +36,6 @@ jobs:
       PAID_REPAIR_CONTROLLER_SHA: ${{ inputs.controller_sha }}
       PAID_REPAIR_EXPECTED_RELEASE: ${{ inputs.expected_release }}
       PAID_REPAIR_EXPECTED_CALCULATOR: ${{ inputs.expected_calculator }}
-      PAID_REPAIR_APPROVED_SHA256: ${{ inputs.approved_plan_sha256 }}
       JSON_STORAGE_DRIVER: object
       YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
       YC_OBJECT_STORAGE_REGION: us-east-1
@@ -51,18 +45,252 @@ jobs:
       YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
       NODE_OPTIONS: --max-old-space-size=12288
     steps:
-      - name: Require reviewed controller and source identities
+      - name: Require exact protected-main controller and source
         env:
-          ACTION: ${{ inputs.action }}
+          REVIEW_FOR_APPLY: ${{ inputs.review_for_apply }}
         run: |
           node --input-type=module <<'GUARD'
           import assert from 'node:assert/strict';
-          assert.match(process.env.PAID_REPAIR_SOURCE_SHA,/^[a-f0-9]{40}$/);
+          assert.equal(process.env.GITHUB_REF,'refs/heads/main');
+          assert.equal(process.env.GITHUB_EVENT_NAME,'workflow_dispatch');
+          assert.equal(process.env.PAID_REPAIR_SOURCE_SHA,'d61464a512f1d833a5af49d8a3e3b2ea754e231e');
           assert.equal(process.env.PAID_REPAIR_CONTROLLER_SHA,process.env.GITHUB_SHA);
           assert.match(process.env.PAID_REPAIR_EXPECTED_RELEASE,/^[a-f0-9]{40}$/);
           assert.match(process.env.PAID_REPAIR_EXPECTED_CALCULATOR,/^[a-f0-9]{64}$/);
-          if(process.env.ACTION==='apply')assert.match(process.env.PAID_REPAIR_APPROVED_SHA256,/^[a-f0-9]{64}$/);
+          assert.ok(['true','false'].includes(process.env.REVIEW_FOR_APPLY));
           GUARD
+      - name: Materialize reviewed controller-only receipt gate
+        run: |
+          cat > "$RUNNER_TEMP/paid-encar-review-gate.mjs" <<'REVIEW_GATE'
+          import assert from 'node:assert/strict';
+          import fs from 'node:fs/promises';
+          import path from 'node:path';
+          import {createHash, randomBytes} from 'node:crypto';
+          import {execFileSync} from 'node:child_process';
+          import {fileURLToPath, pathToFileURL} from 'node:url';
+
+          export const SOURCE = 'd61464a512f1d833a5af49d8a3e3b2ea754e231e';
+          export const WORKFLOW = '.github/workflows/repair-paid-encar-technical.yml';
+          export const REPOSITORY = 'jeep-jim/AvtoCena';
+          export const REVIEW_MS = 20 * 60_000;
+          const SHA = /^[a-f0-9]{40}$/, HASH = /^[a-f0-9]{64}$/, ID = /^[1-9][0-9]{0,20}$/;
+          const stable = value => Array.isArray(value) ? value.map(stable) : value && typeof value === 'object'
+            ? Object.fromEntries(Object.keys(value).sort().map(key => [key, stable(value[key])])) : value;
+          export const digest = value => createHash('sha256').update(JSON.stringify(stable(value))).digest('hex');
+          const equal = (a, b, reason) => assert.equal(digest(a), digest(b), reason);
+          const days = now => ({utcDay:new Date(now).toISOString().slice(0,10), policyDay:new Date(now + 7*3600000).toISOString().slice(0,10)});
+          const proofFields = ['idsSha256','rowsSha256','invariantsSha256','commercialSha256','freshnessSha256','mediaSha256','manualSha256','derivedQuotesSha256'];
+          function proof(value) {
+            assert.ok(Number.isSafeInteger(value?.count) && value.count > 0, 'review_proof_count');
+            for (const key of proofFields) assert.match(value[key] || '', HASH, 'review_proof_digest');
+            return Object.fromEntries(['count',...proofFields].map(key => [key,value[key]]));
+          }
+          function safeExamples(values) {
+            assert.ok(Array.isArray(values) && values.length <= 2, 'review_examples_bound');
+            const technical = input => Object.fromEntries(['fuel','powertrainKind','engineCc','powerHp','drive','power30MinKw'].map(key => {
+              const value = input?.[key] ?? null;
+              assert.ok(value === null || typeof value === 'number' && Number.isFinite(value)
+                || typeof value === 'string' && /^[A-Za-z0-9_ .-]{1,80}$/.test(value), 'review_example_value');
+              return [key,value];
+            }));
+            return values.map(value => {
+              assert.ok(['42799484','42760061'].includes(value.sourceOfferId) && /^[a-f0-9]{24}$/.test(value.id)
+                && /^[a-z_]{1,80}$/.test(value.outcome), 'review_example_identity');
+              return {id:value.id,sourceOfferId:value.sourceOfferId,outcome:value.outcome,
+                ...Object.fromEntries(['before','savedSource','input','after'].filter(key => Object.hasOwn(value,key)).map(key => [key,technical(value[key])]))};
+            });
+          }
+          function safeCounts(values) {
+            assert.ok(values && typeof values === 'object' && !Array.isArray(values) && Object.keys(values).length <= 50, 'review_counts_bound');
+            for (const [key,value] of Object.entries(values)) assert.ok(/^[A-Za-z0-9_ -]{1,100}$/.test(key)
+              && Number.isSafeInteger(value) && value >= 0, 'review_count_invalid');
+            return {...values};
+          }
+          export function runIdentity(env = process.env) {
+            assert.equal(env.GITHUB_REPOSITORY, REPOSITORY, 'review_repository');
+            assert.equal(env.GITHUB_REF, 'refs/heads/main', 'review_main_required');
+            assert.equal(env.GITHUB_EVENT_NAME, 'workflow_dispatch', 'review_dispatch_required');
+            assert.match(env.GITHUB_SHA || '', SHA, 'review_controller');
+            assert.equal(env.PAID_REPAIR_CONTROLLER_SHA, env.GITHUB_SHA, 'review_controller_changed');
+            assert.equal(env.PAID_REPAIR_SOURCE_SHA, SOURCE, 'review_source_changed');
+            assert.match(env.GITHUB_RUN_ID || '', ID, 'review_run');
+            assert.match(env.GITHUB_RUN_ATTEMPT || '', ID, 'review_attempt');
+            assert.match(env.PAID_REPAIR_EXPECTED_RELEASE || '', SHA, 'review_release');
+            assert.match(env.PAID_REPAIR_EXPECTED_CALCULATOR || '', HASH, 'review_calculator');
+            return {repository:REPOSITORY,workflow:WORKFLOW,runId:env.GITHUB_RUN_ID,attempt:env.GITHUB_RUN_ATTEMPT,
+              controllerSha:env.GITHUB_SHA,sourceSha:SOURCE,
+              liveIdentity:{release:env.PAID_REPAIR_EXPECTED_RELEASE,calculationVersion:env.PAID_REPAIR_EXPECTED_CALCULATOR}};
+          }
+          export function createReviewEvidence({receipt,summary,publication,identity,now = Date.now(),nonce = randomBytes(32).toString('hex')}) {
+            const core = receipt?.core;
+            assert.ok(core?.version === 1 && core.mode === 'paid_encar_saved_technical_repair'
+              && receipt.sha256 === digest(core) && Array.isArray(core.records) && core.records.length === core.before?.count,
+            'review_receipt_invalid');
+            equal({sourceSha:core.sourceSha,controllerSha:core.controllerSha,liveIdentity:core.liveIdentity},
+              {sourceSha:identity.sourceSha,controllerSha:identity.controllerSha,liveIdentity:identity.liveIdentity}, 'review_receipt_identity');
+            equal({utcDay:core.utcDay,policyDay:core.policyDay},days(now),'review_day_changed');
+            assert.ok(/^gen_[0-9]+_[a-z0-9-]+$/.test(core.generationId) && core.manifest?.found === true
+              && typeof core.manifest.etag === 'string' && core.manifest.etag.length > 0 && core.manifest.etag.length <= 256
+              && HASH.test(core.manifest.sha256), 'review_manifest');
+            equal(core.sourceProof?.identity,{runId:'43570782014',attempt:'1',producerSha:'6a720ec3aa4823ef2808848018bc5b877fb520ad'},'review_saved_source_identity');
+            assert.equal(summary?.action,'plan','review_plan_action');
+            for (const [key,value] of Object.entries({receiptSha256:receipt.sha256,sourceSha:identity.sourceSha,controllerSha:identity.controllerSha,
+              liveIdentity:identity.liveIdentity,baseGenerationId:core.generationId,currentRows:core.before.count,
+              sourceCalls:0,cursorCommit:false,published:false})) equal(summary[key],value,'review_summary_'+key);
+            assert.ok(publication?.market === 'korea' && publication.dryRun === true && publication.published === false
+              && publication.previousManifestPreserved === true && publication.technicalRepair?.verified === true
+              && publication.technicalRepair.receiptSha256 === receipt.sha256 && publication.freshOfferAudit?.summary?.complete === true
+              && publication.freshOfferAudit.summary.unexplained === 0 && publication.freshOfferAudit.summary.missingIdObservations === 0,
+            'review_plan_incomplete');
+            const before = proof(core.before), after = proof(publication.technicalRepair.after);
+            assert.equal(publication.canonical,before.count,'review_canonical_count');
+            for (const key of ['count','idsSha256','invariantsSha256','commercialSha256','freshnessSha256','mediaSha256','manualSha256']) {
+              assert.equal(before[key],after[key],'review_changed_'+key);
+            }
+            assert.match(nonce,HASH,'review_nonce');
+            const body = {version:1,purpose:'paid_korea_saved_technical_apply',...identity,baseGenerationId:core.generationId,
+              manifest:{found:true,etag:core.manifest.etag,sha256:core.manifest.sha256},receiptSha256:receipt.sha256,
+              ...days(now),planCompletedAt:new Date(now).toISOString(),nonce,
+              approvalPath:`docs/operations/paid-korea-technical-approvals/${identity.runId}-${identity.attempt}.json`};
+            const request = {...body,requestSha256:digest(body)};
+            const safe = {request,currentRows:before.count,before,after,outcomes:safeCounts(core.outcomes),
+              sourceIdentity:core.sourceProof.identity,snapshotRows:core.sourceProof.rows,snapshotPages:core.sourceProof.pages,
+              matched:core.sourceProof.matched,observedAt:core.sourceProof.observedAt,
+              examples:safeExamples(publication.technicalRepair.examples),sourceCalls:0,cursorCommit:false,published:false,
+              dryRun:true,verified:true};
+            assert.ok(Buffer.byteLength(JSON.stringify(safe)) <= 256*1024,'review_evidence_bound');
+            return {request,safe};
+          }
+          export function validateRequest(request,identity,now = Date.now()) {
+            const {requestSha256,...body} = request;
+            assert.equal(requestSha256,digest(body),'review_request_changed');
+            for (const [key,value] of Object.entries(identity)) equal(request[key],value,'review_request_identity_'+key);
+            equal({utcDay:request.utcDay,policyDay:request.policyDay},days(now),'review_day_changed');
+            assert.equal(request.approvalPath,`docs/operations/paid-korea-technical-approvals/${identity.runId}-${identity.attempt}.json`,'review_approval_path');
+            const completed = Date.parse(request.planCompletedAt);
+            assert.ok(Number.isFinite(completed) && completed <= now && now - completed <= REVIEW_MS, 'review_window_expired');
+            return request;
+          }
+          export function approvalTemplate(request,artifact) {
+            return {version:1,decision:'approve_apply',request,artifact,approvedAt:'REPLACE_WITH_CURRENT_UTC_ISO_TIMESTAMP'};
+          }
+          export function assertApproval(approval,request,artifact,now = Date.now()) {
+            assert.deepEqual(Object.keys(approval).sort(),['approvedAt','artifact','decision','request','version'].sort(),'review_approval_shape');
+            assert.equal(approval.version,1,'review_approval_version');assert.equal(approval.decision,'approve_apply','review_not_approved');
+            equal(approval.request,request,'review_approval_request_changed');equal(approval.artifact,artifact,'review_approval_artifact_changed');
+            const approved = Date.parse(approval.approvedAt);
+            assert.ok(Number.isFinite(approved) && approved >= Date.parse(request.planCompletedAt) && approved <= now,'review_approval_time');
+            equal({utcDay:request.utcDay,policyDay:request.policyDay},days(now),'review_day_changed');
+            assert.ok(now - Date.parse(request.planCompletedAt) <= REVIEW_MS,'review_window_expired');
+            return request.receiptSha256;
+          }
+          export function assertRunAndArtifact(run,value,request,artifact) {
+            assert.ok(String(run?.id) === request.runId && String(run.run_attempt) === request.attempt
+              && run.head_sha === request.controllerSha && run.head_branch === 'main' && run.event === 'workflow_dispatch'
+              && run.path === WORKFLOW && run.status === 'in_progress', 'review_run_changed');
+            assert.ok(String(value?.id) === artifact.id && value.name === artifact.name && value.expired === false
+              && value.size_in_bytes > 0 && value.digest === 'sha256:'+artifact.sha256
+              && String(value.workflow_run?.id) === request.runId && value.workflow_run.head_sha === request.controllerSha
+              && value.workflow_run.head_branch === 'main', 'review_artifact_changed');
+          }
+          export async function readApprovalFromMain({get,request,artifact,now = Date.now}) {
+            const base = `/repos/${REPOSITORY}`;
+            const head = await get(base+'/git/ref/heads/main');
+            assert.match(head?.object?.sha || '',SHA,'review_main_identity');
+            const commit = head.object.sha;
+            if (commit !== request.controllerSha) {
+              const compare = await get(base+`/compare/${request.controllerSha}...${commit}`);
+              assert.ok(compare.status === 'ahead' && compare.merge_base_commit?.sha === request.controllerSha,'review_main_ancestry');
+            }
+            const value = await get(base+`/contents/${request.approvalPath}?ref=${commit}`,{missing:true});
+            if (value === null) return null;
+            assert.ok(value.type === 'file' && value.path === request.approvalPath && value.encoding === 'base64'
+              && SHA.test(value.sha || '') && Number.isSafeInteger(value.size) && value.size > 0 && value.size <= 32768
+              && typeof value.content === 'string' && value.content.length <= 65536,'review_approval_file_invalid');
+            const raw = Buffer.from(value.content.replace(/\s/g,''),'base64');
+            assert.ok(raw.length === value.size && raw.toString('base64') === value.content.replace(/\s/g,''),'review_approval_encoding');
+            const blob = createHash('sha1').update(`blob ${raw.length}\0`).update(raw).digest('hex');
+            assert.equal(value.sha,blob,'review_approval_blob_changed');
+            const approvedSha256 = assertApproval(JSON.parse(raw.toString('utf8')),request,artifact,typeof now === 'function' ? now() : now);
+            const after = await get(base+'/git/ref/heads/main');
+            if (after?.object?.sha !== commit) return null;
+            return {approvedSha256,commit,blob};
+          }
+          async function jsonFile(file,max = 128*1024*1024) {
+            assert.ok((await fs.stat(file)).size <= max,'review_file_bound');return JSON.parse(await fs.readFile(file,'utf8'));
+          }
+          async function githubGet(endpoint,{missing = false} = {}) {
+            let response;
+            try { response = await fetch('https://api.github.com'+endpoint,{redirect:'error',signal:AbortSignal.timeout(15000),
+              headers:{authorization:'Bearer '+process.env.GITHUB_TOKEN,accept:'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28'}}); }
+            catch { throw Object.assign(Error('review_github_transport'),{transient:true}); }
+            if (missing && response.status === 404) return null;
+            if (!response.ok) throw Object.assign(Error('review_github_http_'+response.status),{transient:[429,502,503,504].includes(response.status)});
+            assert.ok(Number(response.headers.get('content-length') || 0) <= 2*1024*1024,'review_github_response_bound');
+            const text = await response.text();assert.ok(Buffer.byteLength(text) <= 2*1024*1024,'review_github_response_bound');
+            return JSON.parse(text);
+          }
+          export async function waitForApproval({request,artifact,get = githubGet,identity = runIdentity(),now = Date.now,
+            pause = ms => new Promise(resolve => setTimeout(resolve,ms))}) {
+            validateRequest(request,identity,now());
+            const base = `/repos/${REPOSITORY}`;
+            assertRunAndArtifact(await get(base+`/actions/runs/${request.runId}/attempts/${request.attempt}`),
+              await get(base+`/actions/artifacts/${artifact.id}`),request,artifact);
+            let failures = 0;
+            while (true) {
+              validateRequest(request,identity,now());
+              try {
+                const accepted = await readApprovalFromMain({get,request,artifact,now});failures = 0;
+                if (accepted) {
+                  validateRequest(request,identity,now());
+                  assertRunAndArtifact(await get(base+`/actions/runs/${request.runId}/attempts/${request.attempt}`),
+                    await get(base+`/actions/artifacts/${artifact.id}`),request,artifact);
+                  validateRequest(request,identity,now());
+                  return accepted;
+                }
+              } catch (error) { if (!error.transient || ++failures > 4) throw error; }
+              await pause(Math.min(15000,Math.max(1,REVIEW_MS - (now() - Date.parse(request.planCompletedAt)))));
+            }
+          }
+          async function main([mode,first,second,third]) {
+            if (mode === 'empty') {await fs.mkdir(first,{recursive:true});assert.equal((await fs.readdir(first)).length,0,'review_output_not_empty');return;}
+            const identity = runIdentity();
+            if (mode === 'prepare') {
+              assert.equal(execFileSync('git',['rev-parse','HEAD'],{cwd:first,encoding:'utf8'}).trim(),SOURCE,'review_source_checkout');
+              const receipt = await jsonFile(path.join(second,'receipt.json'));
+              const {assertPaidRepairReceipt} = await import(pathToFileURL(path.join(first,'scripts/lib/paid-encar-technical-repair.mjs')).href);
+              assertPaidRepairReceipt(receipt);
+              const evidence = createReviewEvidence({receipt,summary:await jsonFile(path.join(second,'summary.json'),1024*1024),
+                publication:await jsonFile(path.join(second,'publication.json')),identity});
+              await fs.mkdir(third,{recursive:true});assert.equal((await fs.readdir(third)).length,0,'review_evidence_not_empty');
+              await fs.writeFile(path.join(third,'review-request.json'),JSON.stringify(evidence.request,null,2));
+              await fs.writeFile(path.join(third,'plan-summary.json'),JSON.stringify(evidence.safe,null,2));
+              console.log(JSON.stringify({planComplete:true,requestSha256:evidence.request.requestSha256,receiptSha256:receipt.sha256,
+                approvalPath:evidence.request.approvalPath}));return;
+            }
+            assert.equal(mode,'wait','review_mode');
+            assert.ok(process.env.GITHUB_TOKEN,'review_token_missing');
+            const request = await jsonFile(path.join(first,'review-request.json'),32768);
+            const artifact = {id:process.env.REVIEW_ARTIFACT_ID,name:`paid-encar-technical-plan-${identity.runId}-${identity.attempt}`,
+              sha256:process.env.REVIEW_ARTIFACT_SHA256};
+            assert.match(artifact.id || '',ID,'review_artifact_id');assert.match(artifact.sha256 || '',HASH,'review_artifact_digest');
+            const template = approvalTemplate(request,artifact);
+            await fs.writeFile(path.join(first,'approval-template.json'),JSON.stringify(template,null,2));
+            console.log('REVIEW_APPROVAL_TEMPLATE '+JSON.stringify(template));
+            if (process.env.GITHUB_STEP_SUMMARY) await fs.appendFile(process.env.GITHUB_STEP_SUMMARY,
+              `## Awaiting exact plan review\n\nCommit this completed JSON at \`${request.approvalPath}\` on main within 20 minutes of plan completion.\n\n\`\`\`json\n${JSON.stringify(template,null,2)}\n\`\`\`\n`);
+            const accepted = await waitForApproval({request,artifact,identity});
+            await fs.writeFile(path.join(first,'accepted-approval.json'),JSON.stringify({...accepted,requestSha256:request.requestSha256,artifact},null,2));
+            await fs.appendFile(process.env.GITHUB_OUTPUT,`approved_plan_sha256=${accepted.approvedSha256}\napproval_commit=${accepted.commit}\n`);
+            console.log(JSON.stringify({reviewAccepted:true,...accepted}));
+          }
+          if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+            main(process.argv.slice(2)).catch(error => {
+              const reason = String(error?.message || '').split('\n')[0];
+              console.error(/^(?:review|paid_repair)_[a-z0-9_:.-]{1,160}$/.test(reason) ? reason : 'review_failed');process.exitCode = 1;
+            });
+          }
+          REVIEW_GATE
       - uses: actions/checkout@v4
         with:
           ref: ${{ env.PAID_REPAIR_SOURCE_SHA }}
@@ -81,38 +309,76 @@ jobs:
           script: |
             const fs = require('fs');
             const run = (await github.rest.actions.getWorkflowRunAttempt({
-              ...context.repo, run_id:43570782014, attempt_number:1})).data;
+              ...context.repo,run_id:43570782014,attempt_number:1})).data;
             if (String(run.id)!=='43570782014' || run.head_sha!=='6a720ec3aa4823ef2808848018bc5b877fb520ad'
                 || Number(run.run_attempt)!==1 || run.status!=='completed') throw new Error('saved producer identity changed');
             fs.writeFileSync(process.env.RUNNER_TEMP+'/paid-repair-producer.json',JSON.stringify({
               id:run.id,run_attempt:run.run_attempt,head_sha:run.head_sha,status:run.status,conclusion:run.conclusion}));
+      - name: Complete read-only plan through the unchanged source helper
+        id: plan
+        working-directory: repair-source
+        env:
+          PAID_REPAIR_APPROVED_SHA256: ''
+        run: |
+          node "$RUNNER_TEMP/paid-encar-review-gate.mjs" empty "$RUNNER_TEMP/paid-encar-technical-plan"
+          node --import tsx scripts/catalog-repair-paid-encar-technical.mjs plan \
+            "$RUNNER_TEMP/paid-encar-technical-plan" "$RUNNER_TEMP/paid-repair-producer.json"
+      - name: Validate complete plan and collect safe review evidence
+        run: |
+          node "$RUNNER_TEMP/paid-encar-review-gate.mjs" prepare \
+            "$GITHUB_WORKSPACE/repair-source" "$RUNNER_TEMP/paid-encar-technical-plan" "$RUNNER_TEMP/paid-encar-review"
+      - name: Publish the completed safe plan before any review wait
+        id: plan_artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: paid-encar-technical-plan-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            ${{ runner.temp }}/paid-encar-review/review-request.json
+            ${{ runner.temp }}/paid-encar-review/plan-summary.json
+          if-no-files-found: error
+          retention-days: 7
       - uses: actions/checkout@v4
-        if: inputs.action == 'apply'
+        if: inputs.review_for_apply
         with:
           ref: ${{ inputs.expected_release }}
           path: serving-runtime
           persist-credentials: false
       - name: Install exact serving runtime dependencies
-        if: inputs.action == 'apply'
+        if: inputs.review_for_apply
         working-directory: serving-runtime
         run: npm ci
-      - name: Plan or apply through ordinary publication and staged price readiness
+      - name: Wait for exact main review receipt after completed plan artifact
+        id: review
+        if: inputs.review_for_apply
+        timeout-minutes: 22
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          REVIEW_ARTIFACT_ID: ${{ steps.plan_artifact.outputs.artifact-id }}
+          REVIEW_ARTIFACT_SHA256: ${{ steps.plan_artifact.outputs.artifact-digest }}
+        run: node "$RUNNER_TEMP/paid-encar-review-gate.mjs" wait "$RUNNER_TEMP/paid-encar-review"
+      - name: Apply the exact reviewed receipt with the same controller
+        id: apply
+        if: ${{ inputs.review_for_apply && steps.review.outcome == 'success' }}
         working-directory: repair-source
         env:
-          ACTION: ${{ inputs.action }}
+          PAID_REPAIR_APPROVED_SHA256: ${{ steps.review.outputs.approved_plan_sha256 }}
           CATALOG_BUDGET_RUNTIME_ROOT: ${{ github.workspace }}/serving-runtime
           CATALOG_BUDGET_RUNTIME_RELEASE: ${{ inputs.expected_release }}
         run: |
-          node --import tsx scripts/catalog-repair-paid-encar-technical.mjs "$ACTION" \
-            "$RUNNER_TEMP/paid-encar-technical-repair" "$RUNNER_TEMP/paid-repair-producer.json"
-      - name: Keep bounded review evidence
+          node "$RUNNER_TEMP/paid-encar-review-gate.mjs" empty "$RUNNER_TEMP/paid-encar-technical-apply"
+          node --import tsx scripts/catalog-repair-paid-encar-technical.mjs apply \
+            "$RUNNER_TEMP/paid-encar-technical-apply" "$RUNNER_TEMP/paid-repair-producer.json"
+      - name: Keep bounded review acceptance and operation evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: paid-encar-technical-repair-${{ github.run_id }}-${{ github.run_attempt }}
+          name: paid-encar-technical-result-${{ github.run_id }}-${{ github.run_attempt }}
           path: |
-            ${{ runner.temp }}/paid-encar-technical-repair/summary.json
-            ${{ runner.temp }}/paid-encar-technical-repair/publication.json
+            ${{ runner.temp }}/paid-encar-review/accepted-approval.json
+            ${{ runner.temp }}/paid-encar-review/approval-template.json
+            ${{ runner.temp }}/paid-encar-technical-plan/summary.json
+            ${{ runner.temp }}/paid-encar-technical-apply/summary.json
+            ${{ runner.temp }}/paid-encar-technical-apply/publication.json
             repair-source/catalog-staged-budget-report.json
           if-no-files-found: warn
           retention-days: 7
