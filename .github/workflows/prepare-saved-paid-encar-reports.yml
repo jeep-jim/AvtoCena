@@ -1,0 +1,48 @@
+name: Prepare saved paid Encar insurance reports
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/prepare-saved-paid-encar-reports.yml']
+permissions:
+  contents: read
+concurrency:
+  group: saved-paid-encar-report-preparation
+  cancel-in-progress: false
+jobs:
+  prepare:
+    if: github.event.head_commit.message == 'Prepare saved paid Encar insurance reports'
+    environment: regcloud-staging
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    env:
+      JSON_STORAGE_DRIVER: object
+      YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+      YC_OBJECT_STORAGE_REGION: us-east-1
+      YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+      YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+      YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+      YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+      YC_OBJECT_STORAGE_REQUEST_TIMEOUT_MS: '60000'
+      ENCAR_SNAPSHOT_RUN: '43570782014'
+      ENCAR_SNAPSHOT_ATTEMPT: '1'
+      PAID_REPORT_CURRENT_KOREA_COUNT: '69386'
+      NODE_OPTIONS: --max-old-space-size=6144
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Verify immutable saved-report preparation behavior
+        run: node --test tests/paid-encar-report-preparation.test.mjs
+      - name: Prepare history and inspection from the already saved snapshot
+        run: node --import tsx scripts/catalog-prepare-paid-encar-reports.mjs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: paid-encar-report-preparation
+          path: paid-encar-report-preparation.json
+          if-no-files-found: error
+          retention-days: 14
