@@ -7,11 +7,14 @@ on:
       - 'scripts/lib/auto-api-che168-client.mjs'
       - 'scripts/lib/catalog-intake-checkpoint.mjs'
       - 'scripts/catalog-publish-market.mjs'
+      - 'scripts/catalog-staged-budget-child.mjs'
+      - 'scripts/lib/catalog-staged-budget.mjs'
       - 'scripts/lib/paid-encar-repair-io.mjs'
       - 'scripts/lib/paid-encar-technical-repair.mjs'
       - 'tests/catalog-auto-api-dubicars.test.ts'
       - 'tests/catalog-paid-encar-technical-repair.test.ts'
       - 'tests/catalog-paid-encar-repair-replay-guard.test.ts'
+      - 'tests/catalog-staged-budget.test.ts'
       - '.github/workflows/catalog-market-refresh.yml'
       - '.github/workflows/verify-dubicars-feed.yml'
 permissions:
@@ -24,5 +27,5 @@ jobs:
       - uses: actions/setup-node@v4
         with: {node-version: 24, cache: npm}
       - run: npm ci
-      - run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/catalog-auto-api-dubicars.test.ts tests/catalog-auto-api-che168.test.ts tests/catalog-collection-controls.test.ts tests/catalog-public-safety.test.ts tests/catalog-public-truth-seo.test.ts tests/catalog-paid-encar-technical-repair.test.ts tests/catalog-paid-encar-repair-replay-guard.test.ts
+      - run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/catalog-auto-api-dubicars.test.ts tests/catalog-auto-api-che168.test.ts tests/catalog-collection-controls.test.ts tests/catalog-public-safety.test.ts tests/catalog-public-truth-seo.test.ts tests/catalog-paid-encar-technical-repair.test.ts tests/catalog-paid-encar-repair-replay-guard.test.ts tests/catalog-staged-budget.test.ts
       - run: npm run typecheck
