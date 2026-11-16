@@ -2,7 +2,7 @@ name: Regcloud — clean retained application releases
 on:
   workflow_dispatch:
   workflow_run:
-    workflows: ['Release paid Korea insurance history']
+    workflows: ['Release paid Korea insurance history', 'Release prepared feed delivery and Korea history']
     types: [completed]
     branches: [main]
   push:
