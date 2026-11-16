@@ -1,4 +1,4 @@
-name: Stop exact uninstalled release for accepted-speed recovery
+name: Stop superseded minimal Korea release before activation
 on:
   push:
     branches: [main]
@@ -17,10 +17,10 @@ jobs:
         run: |
           python3 - <<'PY'
           import json,subprocess
-          route='repos/jeep-jim/AvtoCena/actions/runs/43020597940'
+          route='repos/jeep-jim/AvtoCena/actions/runs/43812303734'
           run=json.loads(subprocess.check_output(['gh','api',route]))
-          assert run['head_sha']=='2b5fc017a39ced52eafd4e4bade2c921254c4946'
-          assert run['path']=='.github/workflows/regcloud-deploy.yml'
+          assert run['head_sha']=='76eed6350e1e56c49581218b17580642ca1b56d0'
+          assert run['path']=='.github/workflows/release-minimal-paid-encar.yml'
           jobs=json.loads(subprocess.check_output(['gh','api',route+'/jobs']))['jobs']
           deploy=[s for j in jobs for s in j.get('steps',[]) if s['name']=='Deploy with rollback and resource measurements']
           assert not any(s['status'] in ['in_progress','completed'] for s in deploy), 'release_already_reached_activation_do_not_interrupt'

@@ -7,7 +7,7 @@ permissions:
   contents: read
   actions: read
 env:
-  RELEASE_SOURCE_SHA: 56a95d571bc531d024ab2f2abe1de5d249b5f075
+  RELEASE_SOURCE_SHA: 83ff17075e9188dcf227c8752dc064248d5f42e0
   RELEASE_PREPARATION_MARKETS: korea
 concurrency:
   group: regcloud-production-release
@@ -21,30 +21,48 @@ jobs:
     permissions:
       contents: read
       actions: write
+    outputs:
+      deferred_china_job: ${{ steps.defer_china.outputs.job_id }}
     steps:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
-          ref: 56a95d571bc531d024ab2f2abe1de5d249b5f075
+          ref: 83ff17075e9188dcf227c8752dc064248d5f42e0
       - name: Verify exact Korea candidate, publication and source checks
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
           python3 - <<'SOURCE_GUARD'
-          import json, subprocess, urllib.request
-          def api(path):return json.loads(subprocess.check_output(['gh','api','repos/jeep-jim/AvtoCena/'+path]))
-          source='56a95d571bc531d024ab2f2abe1de5d249b5f075'
-          commit=api('commits/'+source)
-          assert [p['sha'] for p in commit['parents']]==['9faa6c030251e1c0ce491b01c4d2fcded9d6a736'] and commit['commit']['tree']['sha']=='767a3861b85d85e53536440d2889c000afaf076c','candidate_changed'
-          check=api('actions/runs/43810784342')
-          assert check['path']=='.github/workflows/verify-minimal-paid-encar.yml' and check['status']=='completed' and check['conclusion']=='success','exact_candidate_CI_incomplete'
+          import json,subprocess,urllib.request,time
+          repo='jeep-jim/AvtoCena'
+          sha='83ff17075e9188dcf227c8752dc064248d5f42e0'
+          def api(path):
+           return json.loads(subprocess.check_output(['gh','api',f'repos/{repo}/{path}']))
+          commit=api('commits/'+sha)
+          assert [p['sha'] for p in commit['parents']]==['56a95d571bc531d024ab2f2abe1de5d249b5f075'] and commit['commit']['tree']['sha']=='bb3673c22ccc3a70d6711c53678c9aa5e6238eda','candidate_changed'
+          p=api('pulls/1774')
+          assert p['state']=='open' and p['head']['sha']==sha and p['base']['sha']=='a182cd21b21ecf612b63613d263e5bdd817ea4c0','candidate_changed'
+          required={'CI','Verify site controls and chat','Verify green corner budget','Verify catalog load more','Verify Dubicars paid feed'}
+          deadline=time.monotonic()+1200
+          while True:
+           current=api('pulls/1774')
+           assert current['state']=='open' and current['head']['sha']==sha and current['base']['sha']=='a182cd21b21ecf612b63613d263e5bdd817ea4c0','candidate_changed_while_awaiting_checks'
+           runs=api(f'actions/runs?head_sha={sha}&per_page=100')
+           assert 0<runs['total_count']<=100,'source_check_inventory_invalid'
+           for r in runs['workflow_runs']:
+            assert r['head_sha']==sha,'source_check_identity_changed'
+            assert r['status']!='completed' or r['conclusion']=='success',f"source check failed: {r['id']} {r['name']}"
+           if required<={r['name'] for r in runs['workflow_runs']} and all(r['status']=='completed' and r['conclusion']=='success' for r in runs['workflow_runs']):break
+           assert time.monotonic()<deadline,'source_checks_wait_deadline'
+           print('WAIT_EXACT_SOURCE_CHECKS',sha,flush=True)
+           time.sleep(20)
           publication=api('actions/runs/43600759493')
           assert publication['conclusion']=='success' and publication['path']=='.github/workflows/publish-prepared-encar.yml','paid_publication_missing'
           with urllib.request.urlopen('https://avtocena.com/api/health',timeout=45) as response:health=json.load(response)
           assert health.get('releaseSha')=='a182cd21b21ecf612b63613d263e5bdd817ea4c0','retained_release_changed'
-          assert health.get('calculationVersion')=='c489dff0d41ef0933b4f2bef140a318d4ce68493587afc8113a9993e5a18b0b6','calculator_changed'
-          print(json.dumps({'source':source,'ci':check['id'],'retained':health['releaseSha']}))
+          assert health.get('calculationVersion')=='c489dff0d41ef0933b4f2bef140a318d4ce68493587afc8113a9993e5a18b0b6','retained_calculator_changed'
+          print(json.dumps({'source':sha,'checks':len(runs['workflow_runs']),'retained':health['releaseSha']}))
           SOURCE_GUARD
       - name: Verify isolated application source and exact allowed changes
         run: |
@@ -54,7 +72,7 @@ jobs:
           import assert from 'node:assert/strict';
           import fs from 'node:fs';
           import {execFileSync} from 'node:child_process';
-          const m={base:'a182cd21b21ecf612b63613d263e5bdd817ea4c0',allowedPaths:["apps/web/app/(public)/api/catalog/search/route.ts", "apps/web/app/(public)/cars/offer/[id]/page.tsx", "apps/web/lib/catalog/ajes-catalog.ts", "apps/web/lib/catalog/ajes-market-selection.ts", "apps/web/lib/catalog/collection-controls-schema.ts", "apps/web/lib/catalog/collection-controls.ts", "apps/web/lib/catalog/storage.ts", "tests/catalog-market-brand-projection.test.ts", "tests/china-source-switch.test.ts"]};
+          const m={base:'a182cd21b21ecf612b63613d263e5bdd817ea4c0',allowedPaths:["apps/web/app/(public)/api/catalog/search/route.ts", "apps/web/app/(public)/cars/offer/[id]/page.tsx", "apps/web/lib/catalog/ajes-catalog.ts", "apps/web/lib/catalog/ajes-market-selection.ts", "apps/web/lib/catalog/collection-controls-schema.ts", "apps/web/lib/catalog/collection-controls.ts", "apps/web/lib/catalog/storage.ts", "tests/browser/catalog-load-more.mjs", "tests/browser/catalog-navigation-recovery.mjs", "tests/catalog-market-brand-projection.test.ts", "tests/china-source-switch.test.ts"]};
           m.appPaths=m.allowedPaths.filter(p=>p.startsWith('apps/'));
           assert.equal(m.base,'a182cd21b21ecf612b63613d263e5bdd817ea4c0');
           assert.equal(execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),process.env.RELEASE_SOURCE_SHA);
@@ -94,6 +112,43 @@ jobs:
           python3 tests/regcloud-release-retention.test.py
           npm run typecheck
           node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/catalog-market-brand-projection.test.ts tests/china-source-switch.test.ts
+      - name: Defer only the already-collected overlapping China publisher
+        id: defer_china
+        timeout-minutes: 5
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python3 - <<'DEFER'
+          import json,subprocess,time,os
+          repo='jeep-jim/AvtoCena';run=43753103164
+          def api(path):return json.loads(subprocess.check_output(['gh','api','repos/'+repo+'/'+path]))
+          current=api('actions/runs/'+str(run))
+          assert current['path']=='.github/workflows/catalog-refresh-china.yml' and current['head_sha']=='f1a926e4de5df6502f764150115b8bf9e2a43dd3'
+          if current['status']=='completed':
+           print('Existing China publication already terminal; no deferral');raise SystemExit(0)
+          artifacts=api('actions/runs/'+str(run)+'/artifacts')['artifacts']
+          assert any(a['id']==14178273080 and a['digest']=='sha256:62f2ca35af55a75130d661d9a7cc267f282d6132af1c143aeb28b39b6ca974e6' and not a['expired'] for a in artifacts),'saved intake proof missing'
+          jobs=api('actions/runs/'+str(run)+'/jobs')['jobs']
+          assert any(j['name']=='refresh / collect (china)' and j['conclusion']=='success' for j in jobs),'collection not preserved'
+          publisher=next(j for j in jobs if j['name']=='refresh / publish (china)')
+          if publisher['status']=='completed':
+           print('China publisher already terminal; no deferral');raise SystemExit(0)
+          with open(os.environ['GITHUB_OUTPUT'],'a') as out:out.write('job_id='+str(publisher['id'])+'\n')
+          def cancel(endpoint):
+           result=subprocess.run(['gh','api','--method','POST','repos/'+repo+'/actions/runs/'+str(run)+'/'+endpoint],capture_output=True,text=True)
+           if result.returncode and api('actions/runs/'+str(run))['status']!='completed':raise RuntimeError('exact_publisher_cancellation_rejected')
+          cancel('cancel')
+          for _ in range(3):
+           if api('actions/runs/'+str(run))['status']=='completed':break
+           time.sleep(3)
+          if api('actions/runs/'+str(run))['status']!='completed':cancel('force-cancel')
+          for _ in range(20):
+           state=api('actions/runs/'+str(run))
+           if state['status']=='completed':
+            print(json.dumps({'deferredChinaJob':publisher['id'],'conclusion':state['conclusion'],'savedIntake':14178273080}));break
+           time.sleep(2)
+          else:raise RuntimeError('exact_publisher_stop_pending')
+          DEFER
       - name: Check published generation and CRM before installing the candidate
         env:
           JSON_STORAGE_DRIVER: object
@@ -172,7 +227,7 @@ jobs:
             assert.equal(report.browserPassed,true,'browser_functional_failed');
             assert.ok(report.speedGuard && Array.isArray(report.speedGuard.checks),'browser_speed_measurement_missing');
             assert.ok(report.speedGuard.requestChecks.every(row=>row.passed),'browser_request_regression');
-            assert.ok(report.speedGuard.passed || (release==='56a95d571bc531d024ab2f2abe1de5d249b5f075' && report.speedDeferred===true),'browser_speed_deferral_invalid');
+            assert.ok(report.speedGuard.passed || (release==='83ff17075e9188dcf227c8752dc064248d5f42e0' && report.speedDeferred===true),'browser_speed_deferral_invalid');
            }
            const envelope={schemaVersion:1,releaseSha:release,calculationVersion,runId,runAttempt:attempt,name,reportSha256:digest(raw),reportText:raw.toString('utf8')};
            const key=`operations/release-evidence/${release}/${runId}-${attempt}/${name}.json`;
@@ -215,6 +270,24 @@ jobs:
           node --import tsx scripts/encyclopedia/assert-release-batches.mjs
           node --import tsx scripts/encyclopedia/assert-release-astra.mjs
           node --import tsx scripts/encyclopedia/audit-calculation-index.mjs
+          node --import tsx --input-type=module <<'VERIFY_PRIVATE_DIGEST'
+          import assert from 'node:assert/strict';
+          import fs from 'node:fs';
+          import {readCalculationIndex,checksum} from './apps/web/lib/encyclopedia/calculation-index.ts';
+          import {getJsonStorage} from './apps/web/lib/data.ts';
+          const index=readCalculationIndex();
+          assert.match(index?.digest||'',/^[a-f0-9]{64}$/);
+          assert.equal(checksum(index.models),index.digest);
+          const storage=getJsonStorage();
+          const key=`knowledge/encyclopedia/calculation-indexes/${index.digest}.json`;
+          const binding=await storage.readJson(`knowledge/encyclopedia/calculation-releases/${process.env.RELEASE_SOURCE_SHA}.json`,null);
+          assert.equal(binding?.release,process.env.RELEASE_SOURCE_SHA);
+          assert.equal(binding?.digest,index.digest);assert.equal(binding?.key,key);
+          const saved=await storage.readJson(key,null);
+          assert.equal(saved?.digest,index.digest);assert.equal(checksum(saved.models),index.digest);
+          fs.appendFileSync(process.env.GITHUB_ENV,`PAID_EXPECTED_ENCYCLOPEDIA_DIGEST=${index.digest}\n`);
+          console.log(JSON.stringify({stage:'release_private_index_verified',release:process.env.RELEASE_SOURCE_SHA,digest:index.digest}));
+          VERIFY_PRIVATE_DIGEST
       - name: Persist verified private evidence for private_index
         if: always()
         timeout-minutes: 4
@@ -242,38 +315,6 @@ jobs:
             reports/encyclopedia-coverage.json
             reports/astra-release-verification.json
           if-no-files-found: ignore
-      - name: Prepare the generation-pinned brand index that timed out on the server
-        env:
-          JSON_STORAGE_DRIVER: object
-          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
-          YC_OBJECT_STORAGE_REGION: us-east-1
-          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
-          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
-          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
-          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
-          YC_OBJECT_STORAGE_REQUEST_TIMEOUT_MS: '180000'
-          NODE_OPTIONS: --max-old-space-size=6144
-        run: |
-          node --import tsx --input-type=module <<'JS'
-          import assert from 'node:assert/strict';
-          import fs from 'node:fs/promises';
-          import path from 'node:path';
-          import { getJsonStorage } from './apps/web/lib/data.ts';
-          const storage = getJsonStorage();
-          const generation = process.env.PAID_GENERATION;
-          assert.match(generation, /^[A-Za-z0-9_-]+$/);
-          const filename = 'volkswagen-aa59343f9ebb354f.json';
-          const key = 'catalog/generations/' + generation + '/indexes/projection-brand/' + filename;
-          const projection = await storage.readJson(key, null);
-          assert.equal(projection?.generationId, generation);
-          assert.ok(Array.isArray(projection.items) && projection.items.length > 0);
-          assert.ok(projection.items.every(row => String(row.make).trim().toLowerCase() === 'volkswagen'));
-          const root = path.join(process.env.RUNNER_TEMP, 'encar-private-layer', 'brands', generation);
-          await fs.mkdir(root, { recursive: true });
-          const bytes = Buffer.from(JSON.stringify(projection));
-          await fs.writeFile(path.join(root, filename), bytes);
-          console.log(JSON.stringify({generation, rows:projection.items.length, bytes:bytes.length}));
-          JS
       - name: Build existing application without production credentials
         if: env.EXACT_IMAGE_READY != '1'
         env:
@@ -286,16 +327,6 @@ jobs:
           git restore --source="$RELEASE_SOURCE_SHA" --staged --worktree -- apps packages Dockerfile package.json package-lock.json
           git diff --exit-code HEAD -- apps packages Dockerfile package.json package-lock.json
           docker build --label "org.opencontainers.image.revision=$GITHUB_SHA" -t "avtocena-regcloud:$GITHUB_SHA" .
-          # Keep the feed-derived index outside the traced application and public assets.
-          layer="$RUNNER_TEMP/encar-private-layer"
-          docker tag "avtocena-regcloud:$GITHUB_SHA" "avtocena-base:$GITHUB_SHA"
-          docker build --build-arg "RELEASE=$GITHUB_SHA" -t "avtocena-regcloud:$GITHUB_SHA" -f - "$layer" <<'DOCKER'
-          ARG RELEASE
-          FROM avtocena-base:${RELEASE}
-          COPY brands/ /opt/avtocena/prepared-brands/
-          ENV AVTOCENA_PREPARED_BRANDS_DIR=/opt/avtocena/prepared-brands
-          DOCKER
-          docker run --rm --entrypoint sh "avtocena-regcloud:$GITHUB_SHA" -ec 'test -s "$AVTOCENA_PREPARED_BRANDS_DIR/$1/volkswagen-aa59343f9ebb354f.json"' sh "$PAID_GENERATION"
           docker save "avtocena-regcloud:$GITHUB_SHA" | gzip -1 > "$RUNNER_TEMP/avtocena-image.tar.gz"
           cd "$RUNNER_TEMP"
           sha256sum avtocena-image.tar.gz > avtocena-image.tar.gz.sha256
@@ -338,6 +369,224 @@ jobs:
           rm -- avtocena-image.tar.gz avtocena-image.tar.gz.sha256
           echo 'Image loaded and verified'
           REMOTE
+      - name: Install exact controller-only selector readiness verifier
+        run: |
+          set -euo pipefail
+          cat > "$RUNNER_TEMP/prepare-paid-selector-readiness.mjs" <<'PAID_SELECTOR_HELPER'
+          import assert from 'node:assert/strict';
+          import {createHash} from 'node:crypto';
+          import {execFileSync} from 'node:child_process';
+          import fs from 'node:fs/promises';
+          import path from 'node:path';
+          import {fileURLToPath, pathToFileURL} from 'node:url';
+          
+          export const CALCULATOR = '4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90';
+          const LOCAL_MARKETS = ['china', 'korea', 'uae', 'europe', 'georgia'];
+          const digest = value => createHash('sha256').update(JSON.stringify(value)).digest('hex');
+          function partitionIdentities(index, market) {
+            const hash = createHash('sha256'), ids = new Set();
+            for (const [kind, rows] of [['rows', index.rows], ['otherRows', index.otherRows || []]]) {
+              hash.update(kind + '\0');
+              for (const row of rows) {
+                assert.equal(row[0], market, `selector_identity_market:${market}`);
+                const id = row[5]?.id;
+                assert.ok(typeof id === 'string' && id && !ids.has(id), `selector_identity_invalid:${market}`);
+                ids.add(id); hash.update(JSON.stringify(id) + '\0');
+              }
+            }
+            return hash.digest('hex');
+          }
+          
+          /** Controller-only task. Use candidate implementations; never copy app logic. */
+          export async function ensurePaidSelectorReadiness({storage, backfill, readCompressedSelector,
+            selectorDirectory, indexDigest, expectedSource, verifyOnly = false, verifyPrices = false,
+            budgetPricingFingerprint, readPreparedBudgetPrices, progress = () => {}}) {
+            assert.match(expectedSource, /^[a-f0-9]{40}$/, 'expected_source_required');
+            if (verifyPrices) {
+              assert.equal(verifyOnly, true, 'price_readback_requires_verify_only');
+              assert.equal(typeof budgetPricingFingerprint, 'function', 'candidate_price_fingerprint_required');
+              assert.equal(typeof readPreparedBudgetPrices, 'function', 'candidate_prepared_price_reader_required');
+            }
+            assert.equal(storage.driver, 'object', 'object_storage_required');
+            assert.match(indexDigest, /^[a-f0-9]{64}$/, 'private_index_digest_required');
+            assert.match(selectorDirectory, /^budget-markets-v7\/[a-f0-9]{64}$/, 'exact_v7_directory_required');
+            const readMeta = key => storage.readJsonWithMeta(key, null);
+            const manifestKey = 'catalog/manifest.json';
+            const controlsKey = 'catalog/operations/collection-controls-v1.json';
+            const beforeManifest = await readMeta(manifestKey);
+            const beforeControls = await readMeta(controlsKey);
+            assert.ok(beforeManifest.found && beforeManifest.etag, 'manifest_readback_required');
+            assert.ok(beforeControls.found && beforeControls.etag, 'controls_readback_required');
+            const manifest = beforeManifest.value;
+            assert.match(manifest?.generationId || '', /^[A-Za-z0-9_-]+$/, 'generation_required');
+            assert.equal(manifest.markets?.korea?.provider, 'auto_api_encar', 'paid_korea_provider_required');
+            assert.ok(manifest.markets.korea.count > 0, 'paid_korea_inventory_required');
+            const entries = Object.entries(manifest.markets || {});
+            assert.ok(entries.length && entries.every(([, value]) => Number.isSafeInteger(value?.count) && value.count >= 0), 'manifest_market_counts_invalid');
+            const required = entries.filter(([, value]) => value.count > 0).map(([market]) => market).sort();
+            assert.ok(required.every(market => LOCAL_MARKETS.includes(market)), 'nonempty_nonlocal_partition_requires_separate_preparation');
+            const prefix = `catalog/generations/${manifest.generationId}/indexes/${selectorDirectory}/`;
+            const readyPath = `${prefix}ready.json`;
+            const sourcePrefix = `catalog/generations/${manifest.generationId}/indexes/budget-markets-v3/`;
+            const sourceReadyPath = `${sourcePrefix}ready.json`;
+            const sourceReady = await readMeta(sourceReadyPath);
+            assert.ok(sourceReady.found && sourceReady.etag, 'persisted_source_readiness_missing');
+            assert.ok([3, 4].includes(sourceReady.value?.version), 'persisted_source_readiness_version');
+            assert.equal(sourceReady.value?.generationId, manifest.generationId, 'persisted_source_readiness_generation');
+            assert.deepEqual(Object.keys(sourceReady.value.markets || {}).sort(), required, 'persisted_source_readiness_incomplete');
+            const manifestDigest = digest(manifest), controlsDigest = digest(beforeControls.value);
+            async function fence() {
+              const [currentManifest, currentControls] = await Promise.all([readMeta(manifestKey), readMeta(controlsKey)]);
+              assert.ok(currentManifest.found && currentManifest.etag === beforeManifest.etag && digest(currentManifest.value) === manifestDigest, 'manifest_changed_during_preparation');
+              assert.ok(currentControls.found && currentControls.etag === beforeControls.etag && digest(currentControls.value) === controlsDigest, 'collection_controls_changed_during_preparation');
+            }
+            const originalWrite = storage.writeJson;
+            const writes = [];
+            storage.writeJson = async (key, value, condition) => {
+              assert.equal(verifyOnly, false, 'verification_must_not_write');
+              assert.ok(typeof key === 'string' && key.startsWith(prefix), 'write_outside_exact_v7_generation');
+              const relative = key.slice(prefix.length);
+              if (relative === 'ready.json') {
+                assert.ok(condition?.ifMatch || condition?.ifNoneMatch === '*', 'readiness_requires_conditional_write');
+                assert.equal(value?.version, 4, 'readiness_version');
+                assert.equal(value?.generationId, manifest.generationId, 'readiness_generation');
+                assert.equal(value?.encyclopediaDigest, indexDigest, 'readiness_private_index');
+              } else {
+                assert.match(relative, /^parts\/(china|korea|uae|europe|georgia)\/[a-f0-9]{64}\.json$/, 'selector_part_scope');
+                assert.equal(condition?.ifNoneMatch, '*', 'selector_parts_must_be_immutable');
+              }
+              await fence();
+              const result = await originalWrite.call(storage, key, value, condition);
+              writes.push(relative === 'ready.json' ? 'ready' : relative.split('/')[1]);
+              return result;
+            };
+            try {
+              const prior = await readMeta(readyPath);
+              progress({stage: 'selector_readiness_before', generationId: manifest.generationId, requiredMarkets: required,
+                persistedMarkets: Object.keys(prior.value?.markets || {}).sort(), verifyOnly});
+              if (!verifyOnly) {
+                // Explicit scope selects mergeSpecificationReadiness's ETag CAS path.
+                // Unscoped backfill uses create-only readiness and can leave a prior
+                // Korea-only directory unchanged even after all other parts are built.
+                for (const market of required) {
+                  await fence();
+                  await backfill([market]);
+                  progress({stage: 'selector_partition_prepared', market});
+                }
+              }
+              // Read persisted bytes directly, not the returned directory or a module cache.
+              const saved = await readMeta(readyPath);
+              assert.ok(saved.found && saved.etag, 'persisted_readiness_missing');
+              assert.equal(saved.value?.version, 4, 'persisted_readiness_version');
+              assert.equal(saved.value?.generationId, manifest.generationId, 'persisted_readiness_generation');
+              assert.equal(saved.value?.encyclopediaDigest, indexDigest, 'persisted_readiness_private_index');
+              assert.deepEqual(Object.keys(saved.value.markets || {}).sort(), required, 'persisted_readiness_incomplete');
+              const partitions = [];
+              for (const market of required) {
+                const part = await readCompressedSelector(saved.value, market, name => {
+                  assert.match(name, new RegExp(`^parts/${market}/[a-f0-9]{64}$`), 'read_outside_partition');
+                  return storage.readJson(`${prefix}${name}.json`, null);
+                });
+                assert.ok(part, `persisted_selector_invalid:${market}`);
+                assert.equal(part.version, 3, `selector_index_version:${market}`);
+                assert.equal(part.generationId, manifest.generationId, `selector_generation:${market}`);
+                for (const field of ['specificationFilterVersion', 'bodyFilterVersion', 'displayOrderVersion']) {
+                  assert.equal(part[field], 1, `selector_${field}:${market}`);
+                }
+                assert.equal(part.rows.length + (part.otherRows?.length || 0), part.sourceRows, `selector_complete_count:${market}`);
+                const sourcePart = await readCompressedSelector(sourceReady.value, market, name => {
+                  assert.match(name, new RegExp(`^(?:${market}|parts/${market}/[a-f0-9]{64})$`), 'read_outside_source_partition');
+                  return storage.readJson(`${sourcePrefix}${name}.json`, null);
+                });
+                assert.ok(sourcePart && sourcePart.version === 3 && sourcePart.generationId === manifest.generationId, `persisted_source_selector_invalid:${market}`);
+                assert.ok(sourcePart.sourceRows > 0 && sourcePart.sourceRows === sourcePart.rows.length + (sourcePart.otherRows?.length || 0), `source_selector_complete_count:${market}`);
+                assert.equal(part.sourceRows, sourcePart.sourceRows, `selector_source_count:${market}`);
+                assert.equal(part.rows.length, sourcePart.rows.length, `selector_source_rows:${market}`);
+                assert.equal(part.otherRows?.length || 0, sourcePart.otherRows?.length || 0, `selector_source_other_rows:${market}`);
+                const identities = partitionIdentities(part, market);
+                assert.equal(identities, partitionIdentities(sourcePart, market), `selector_source_identities:${market}`);
+                let prices;
+                if (verifyPrices) {
+                  const fingerprint = await budgetPricingFingerprint(market);
+                  assert.match(fingerprint || '', /^[a-f0-9]{64}$/, `price_fingerprint_missing:${market}`);
+                  // This mode is a fresh-process readback after warmup. The candidate's
+                  // prepared reader validates storage identity/checksum and never replays.
+                  // An empty validated array is a valid zero-priced-row snapshot; null is
+                  // a missing/invalid snapshot and must fail without triggering recovery.
+                  const budget = await readPreparedBudgetPrices(part, market, fingerprint, false);
+                  assert.ok(Array.isArray(budget), `persisted_budget_prices_missing:${market}`);
+                  const sorted = await readPreparedBudgetPrices(part, market, fingerprint, true);
+                  assert.ok(Array.isArray(sorted), `persisted_sort_prices_missing:${market}`);
+                  assert.equal(await budgetPricingFingerprint(market), fingerprint, `price_context_changed:${market}`);
+                  prices = {fingerprint, budgetRows: budget.length, sortRows: sorted.length};
+                }
+                partitions.push({market, sourceRows: part.sourceRows, rows: part.rows.length,
+                  otherRows: part.otherRows?.length || 0, manifestCount: manifest.markets[market].count,
+                  identitySha256: identities, chunks: saved.value.markets[market].chunks.length, ...(prices ? {prices} : {})});
+              }
+              const finalReadiness = await readMeta(readyPath);
+              assert.ok(finalReadiness.found && finalReadiness.etag === saved.etag && digest(finalReadiness.value) === digest(saved.value), 'readiness_changed_during_validation');
+              const finalSourceReadiness = await readMeta(sourceReadyPath);
+              assert.ok(finalSourceReadiness.found && finalSourceReadiness.etag === sourceReady.etag && digest(finalSourceReadiness.value) === digest(sourceReady.value), 'source_readiness_changed_during_preparation');
+              await fence();
+              const report = {schemaVersion: 1, releaseSha: expectedSource, calculationVersion: CALCULATOR,
+                generationId: manifest.generationId, encyclopediaDigest: indexDigest, selectorDirectory,
+                requiredMarkets: required, partitions, readySha256: digest(saved.value), manifestSha256: manifestDigest,
+                sourceReadySha256: digest(sourceReady.value),
+                controlsUnchanged: true, manifestUnchanged: true, verifyOnly, pricesVerified: verifyPrices,
+                writes: writes.length, passed: true};
+              progress({stage: 'persisted_selector_readiness_verified', ...report});
+              return report;
+            } finally {
+              storage.writeJson = originalWrite;
+            }
+          }
+          
+          async function main() {
+            assert.ok(process.argv.slice(2).every(value => ['--verify-only', '--verify-prices'].includes(value)), 'unsupported_arguments');
+            const verifyOnly = process.argv.includes('--verify-only'), verifyPrices = process.argv.includes('--verify-prices');
+            assert.ok(!verifyPrices || verifyOnly, 'price_readback_requires_verify_only');
+            const root = path.resolve(process.env.PAID_CANDIDATE_ROOT || process.cwd());
+            const expectedSource = process.env.PAID_EXPECTED_SOURCE_SHA || '';
+            assert.match(expectedSource, /^[a-f0-9]{40}$/, 'controller_pinned_source_required');
+            const git = args => execFileSync('git', args, {cwd: root, encoding: 'utf8'}).trim();
+            assert.equal(git(['rev-parse', 'HEAD']), expectedSource, 'candidate_head_changed');
+            git(['diff', '--exit-code', 'HEAD', '--', 'apps', 'packages', 'scripts/catalog-calculation-version.mjs']);
+            assert.equal(execFileSync(process.execPath, ['scripts/catalog-calculation-version.mjs'], {cwd: root, encoding: 'utf8'}).trim(), CALCULATOR, 'candidate_calculator_changed');
+            assert.ok(!process.env.AVTOCENA_RELEASE_SHA || process.env.AVTOCENA_RELEASE_SHA === expectedSource, 'release_environment_changed');
+            assert.ok(!process.env.AVTOCENA_CALCULATION_VERSION || process.env.AVTOCENA_CALCULATION_VERSION === CALCULATOR, 'calculator_environment_changed');
+            process.env.AVTOCENA_RELEASE_SHA = expectedSource;
+            process.env.AVTOCENA_CALCULATION_VERSION = CALCULATOR;
+            const expectedDigest = process.env.PAID_EXPECTED_ENCYCLOPEDIA_DIGEST || '';
+            assert.match(expectedDigest, /^[a-f0-9]{64}$/, 'expected_private_index_digest_required');
+            const load = filename => import(pathToFileURL(path.join(root, filename)).href);
+            const [data, catalog, publication, codec, calculation, prices] = await Promise.all([
+              load('apps/web/lib/data.ts'), load('apps/web/lib/catalog/storage.ts'),
+              load('apps/web/lib/catalog/budget-selector-publication.ts'), load('apps/web/lib/catalog/budget-selector-codec.ts'),
+              load('apps/web/lib/encyclopedia/calculation-index.ts'),
+              load('apps/web/lib/catalog/shared-budget-prices.ts'),
+            ]);
+            const index = calculation.readCalculationIndex();
+            assert.equal(index?.digest, expectedDigest, 'candidate_private_index_changed');
+            const report = await ensurePaidSelectorReadiness({storage: data.getJsonStorage(),
+              backfill: catalog.backfillBudgetSpecificationSelectors, readCompressedSelector: publication.readCompressedSelector,
+              selectorDirectory: codec.specificationSelectorDirectory(index.digest, CALCULATOR), indexDigest: index.digest, expectedSource,
+              verifyOnly, verifyPrices, budgetPricingFingerprint: prices.budgetPricingFingerprint,
+              readPreparedBudgetPrices: prices.readPreparedBudgetPrices, progress: value => console.log(JSON.stringify(value))});
+            const output = process.env.PAID_SELECTOR_READINESS_REPORT;
+            if (output) await fs.writeFile(output, JSON.stringify(report, null, 2) + '\n', {mode: 0o600});
+          }
+          
+          if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+            main().catch(error => {
+              // Do not emit private storage URLs, credentials, or exception body text.
+              console.error(JSON.stringify({stage: 'selector_readiness_failed', code: error?.code || error?.name || 'Error',
+                guard: error instanceof assert.AssertionError ? String(error.message).split('\n')[0] : undefined}));
+              process.exitCode = 1;
+            });
+          }
+          PAID_SELECTOR_HELPER
+          printf '%s  %s\n' 05665ac11572e4ba0c188af7365737d1eae922c31a0937212ab03a3cc49b6ab4 "$RUNNER_TEMP/prepare-paid-selector-readiness.mjs" | sha256sum --check
       - name: Prepare exact price indexes before activating the release
         id: market_prices
         env:
@@ -354,10 +603,16 @@ jobs:
           set -euo pipefail
           export GITHUB_SHA="$RELEASE_SOURCE_SHA"
           export AVTOCENA_CALCULATION_VERSION="$(node scripts/catalog-calculation-version.mjs)"
+          export AVTOCENA_RELEASE_SHA="$RELEASE_SOURCE_SHA"
           npx tsx scripts/archive-runtime-reference-sources.mjs
           npx tsx scripts/regcloud-verify-conditional-read.ts
           npx tsx scripts/regcloud-prepare-prices.mjs
+          export PAID_EXPECTED_SOURCE_SHA="$RELEASE_SOURCE_SHA"
+          PAID_SELECTOR_READINESS_REPORT=paid-selector-readiness-before.json node --import tsx "$RUNNER_TEMP/prepare-paid-selector-readiness.mjs"
+          node --import tsx scripts/catalog-budget-shared-warmup.mjs
+          PAID_SELECTOR_READINESS_REPORT=paid-selector-readiness-after.json node --import tsx "$RUNNER_TEMP/prepare-paid-selector-readiness.mjs" --verify-only --verify-prices
           CATALOG_OVERVIEW_SKIP_READY=true npx tsx scripts/catalog-refresh-generation-pages.mjs
+          env -u RELEASE_PREPARATION_MARKETS CATALOG_OVERVIEW_SKIP_READY=true npx tsx scripts/catalog-refresh-generation-pages.mjs
           node --import tsx --input-type=module <<'VERIFY_PRICES'
           import assert from 'node:assert/strict';
           import fs from 'node:fs';
@@ -392,7 +647,11 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: release-market-preparation
-          path: release-market-preparation.json
+          path: |
+            release-market-preparation.json
+            catalog-budget-shared-report.json
+            paid-selector-readiness-before.json
+            paid-selector-readiness-after.json
           if-no-files-found: ignore
       - name: Prepare required browser acceptance runtime
         run: |
@@ -413,7 +672,7 @@ jobs:
       - name: Apply the owner's one-time measured speed deferral to this exact release
         run: |
           set -euo pipefail
-          test "$RELEASE_SOURCE_SHA" = 56a95d571bc531d024ab2f2abe1de5d249b5f075
+          test "$RELEASE_SOURCE_SHA" = 83ff17075e9188dcf227c8752dc064248d5f42e0
           python3 - <<'SPEED_ADVISORY'
           from pathlib import Path
           def change(filename,old,new):
@@ -435,12 +694,12 @@ jobs:
            "  assert.ok(report.speedGuard.requestChecks.every(r=>r.passed),'accepted_browser_request_regression');\n  if(marker.enforceSpeed) assert.ok(report.speedGuard.passed,'accepted_browser_speed_regression');\n  report.speedDeferred=marker.ownerAuthorizedSpeedAdvisory===true && !report.speedGuard.passed;")
           change('scripts/regcloud-deploy-with-browser.sh',
            "passed=sys.argv[3]=='0' and r.get('release')==sys.argv[1] and r.get('passed') is True and functional and speed",
-           "deferred=r.get('speedDeferred') is True and sys.argv[1]=='56a95d571bc531d024ab2f2abe1de5d249b5f075' and isinstance(r.get('speedGuard',{}).get('checks'),list) and isinstance(r.get('speedGuard',{}).get('requestChecks'),list) and all(x.get('passed') is True for x in r['speedGuard']['requestChecks'])\npassed=sys.argv[3]=='0' and r.get('release')==sys.argv[1] and r.get('passed') is True and functional and (speed or deferred)")
+           "deferred=r.get('speedDeferred') is True and sys.argv[1]=='83ff17075e9188dcf227c8752dc064248d5f42e0' and isinstance(r.get('speedGuard',{}).get('checks'),list) and isinstance(r.get('speedGuard',{}).get('requestChecks'),list) and all(x.get('passed') is True for x in r['speedGuard']['requestChecks'])\npassed=sys.argv[3]=='0' and r.get('release')==sys.argv[1] and r.get('passed') is True and functional and (speed or deferred)")
           change('scripts/regcloud-deploy-with-browser.sh',
            "'speedPassed':speed,'reportSha256'", "'speedPassed':speed,'speedDeferred':deferred,'reportSha256'")
           change('scripts/regcloud-browser-verdict.py',
            "if value.get('passed') is not True or value.get('functionalPassed') is not True or value.get('speedPassed') is not True:",
-           "speed_ok=value.get('speedPassed') is True or (release=='56a95d571bc531d024ab2f2abe1de5d249b5f075' and value.get('speedDeferred') is True and value.get('speedPassed') is False)\n if value.get('passed') is not True or value.get('functionalPassed') is not True or not speed_ok:")
+           "speed_ok=value.get('speedPassed') is True or (release=='83ff17075e9188dcf227c8752dc064248d5f42e0' and value.get('speedDeferred') is True and value.get('speedPassed') is False)\n if value.get('passed') is not True or value.get('functionalPassed') is not True or not speed_ok:")
           SPEED_ADVISORY
           bash -n scripts/regcloud-deploy-production.sh
           bash -n scripts/regcloud-deploy-with-browser.sh
@@ -451,7 +710,7 @@ jobs:
           import importlib.util
           spec=importlib.util.spec_from_file_location('verdict','scripts/regcloud-browser-verdict.py')
           module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
-          sha='56a95d571bc531d024ab2f2abe1de5d249b5f075';nonce='a'*32
+          sha='83ff17075e9188dcf227c8752dc064248d5f42e0';nonce='a'*32
           good=dict(schemaVersion=1,release=sha,nonce=nonce,passed=True,functionalPassed=True,speedPassed=False,speedDeferred=True,reportSha256='b'*64)
           module.validate_verdict(good,sha,nonce)
           for changed in [dict(good,functionalPassed=False),dict(good,speedDeferred=False),dict(good,reportSha256=''),dict(good,nonce='c'*32)]:
@@ -491,19 +750,35 @@ jobs:
         run: |
           set -euo pipefail
           python3 - <<'SOURCE_GUARD'
-          import json, subprocess, urllib.request
-          def api(path):return json.loads(subprocess.check_output(['gh','api','repos/jeep-jim/AvtoCena/'+path]))
-          source='56a95d571bc531d024ab2f2abe1de5d249b5f075'
-          commit=api('commits/'+source)
-          assert [p['sha'] for p in commit['parents']]==['9faa6c030251e1c0ce491b01c4d2fcded9d6a736'] and commit['commit']['tree']['sha']=='767a3861b85d85e53536440d2889c000afaf076c','candidate_changed'
-          check=api('actions/runs/43810784342')
-          assert check['path']=='.github/workflows/verify-minimal-paid-encar.yml' and check['status']=='completed' and check['conclusion']=='success','exact_candidate_CI_incomplete'
+          import json,subprocess,urllib.request,time
+          repo='jeep-jim/AvtoCena'
+          sha='83ff17075e9188dcf227c8752dc064248d5f42e0'
+          def api(path):
+           return json.loads(subprocess.check_output(['gh','api',f'repos/{repo}/{path}']))
+          commit=api('commits/'+sha)
+          assert [p['sha'] for p in commit['parents']]==['56a95d571bc531d024ab2f2abe1de5d249b5f075'] and commit['commit']['tree']['sha']=='bb3673c22ccc3a70d6711c53678c9aa5e6238eda','candidate_changed'
+          p=api('pulls/1774')
+          assert p['state']=='open' and p['head']['sha']==sha and p['base']['sha']=='a182cd21b21ecf612b63613d263e5bdd817ea4c0','candidate_changed'
+          required={'CI','Verify site controls and chat','Verify green corner budget','Verify catalog load more','Verify Dubicars paid feed'}
+          deadline=time.monotonic()+1200
+          while True:
+           current=api('pulls/1774')
+           assert current['state']=='open' and current['head']['sha']==sha and current['base']['sha']=='a182cd21b21ecf612b63613d263e5bdd817ea4c0','candidate_changed_while_awaiting_checks'
+           runs=api(f'actions/runs?head_sha={sha}&per_page=100')
+           assert 0<runs['total_count']<=100,'source_check_inventory_invalid'
+           for r in runs['workflow_runs']:
+            assert r['head_sha']==sha,'source_check_identity_changed'
+            assert r['status']!='completed' or r['conclusion']=='success',f"source check failed: {r['id']} {r['name']}"
+           if required<={r['name'] for r in runs['workflow_runs']} and all(r['status']=='completed' and r['conclusion']=='success' for r in runs['workflow_runs']):break
+           assert time.monotonic()<deadline,'source_checks_wait_deadline'
+           print('WAIT_EXACT_SOURCE_CHECKS',sha,flush=True)
+           time.sleep(20)
           publication=api('actions/runs/43600759493')
           assert publication['conclusion']=='success' and publication['path']=='.github/workflows/publish-prepared-encar.yml','paid_publication_missing'
           with urllib.request.urlopen('https://avtocena.com/api/health',timeout=45) as response:health=json.load(response)
           assert health.get('releaseSha')=='a182cd21b21ecf612b63613d263e5bdd817ea4c0','retained_release_changed'
-          assert health.get('calculationVersion')=='c489dff0d41ef0933b4f2bef140a318d4ce68493587afc8113a9993e5a18b0b6','calculator_changed'
-          print(json.dumps({'source':source,'ci':check['id'],'retained':health['releaseSha']}))
+          assert health.get('calculationVersion')=='c489dff0d41ef0933b4f2bef140a318d4ce68493587afc8113a9993e5a18b0b6','retained_calculator_changed'
+          print(json.dumps({'source':sha,'checks':len(runs['workflow_runs']),'retained':health['releaseSha']}))
           SOURCE_GUARD
       - name: Match Japan card expectations to the retained public version
         run: |
@@ -688,3 +963,31 @@ jobs:
     needs: release
     uses: ./.github/workflows/verify-finish-paid-encar.yml
     secrets: inherit
+  resume-existing-china:
+    needs: [release, verify-and-retire]
+    if: ${{ always() && needs.release.outputs.deferred_china_job != '' }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      actions: write
+    steps:
+      - name: Resume only the cancelled publisher using its existing saved intake
+        env:
+          GH_TOKEN: ${{ github.token }}
+          DEFERRED_JOB: ${{ needs.release.outputs.deferred_china_job }}
+        run: |
+          python3 - <<'RESUME'
+          import os,json,subprocess,re,time
+          repo='jeep-jim/AvtoCena';job=os.environ['DEFERRED_JOB'];assert re.fullmatch('[0-9]+',job)
+          def api(path):return json.loads(subprocess.check_output(['gh','api','repos/'+repo+'/'+path]))
+          value=api('actions/jobs/'+job)
+          assert value['run_id']==43753103164 and value['name']=='refresh / publish (china)'
+          if value['status']=='completed' and value['conclusion']=='cancelled':
+           artifact=api('actions/runs/43753103164/artifacts')['artifacts']
+           assert any(a['id']==14178273080 and a['digest']=='sha256:62f2ca35af55a75130d661d9a7cc267f282d6132af1c143aeb28b39b6ca974e6' and not a['expired'] for a in artifact)
+           subprocess.check_call(['gh','api','--method','POST','repos/'+repo+'/actions/jobs/'+job+'/rerun'])
+           print(json.dumps({'resumedExistingChinaPublisher':job,'savedIntake':14178273080,'recollection':False}))
+          else:print(json.dumps({'ordinaryPublisherAlreadyContinuesOrFinished':True,'status':value['status'],'conclusion':value['conclusion']}))
+          RESUME
+
