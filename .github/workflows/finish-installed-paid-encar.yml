@@ -1,0 +1,182 @@
+name: Finish installed minimal paid Encar Korea
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: [.github/workflows/finish-installed-paid-encar.yml]
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: regcloud-production-release
+  cancel-in-progress: false
+env:
+  RELEASE_SOURCE_SHA: 83ff17075e9188dcf227c8752dc064248d5f42e0
+  RELEASE_SOURCE_TREE: bb3673c22ccc3a70d6711c53678c9aa5e6238eda
+  RELEASE_CALCULATION_VERSION: 4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90
+  DEPLOY_CONTROLLER_SHA: 3b74fb19958d41273a453a4b6c280c4f13139348
+  DEPLOY_RUN_ID: '43812759975'
+  DEPLOY_JOB_ID: '133117883937'
+  PRIVATE_EVIDENCE_ARTIFACT_ID: '14202215028'
+  PRIVATE_EVIDENCE_ZIP_SHA256: 0003bdfd1617f69c8884092ae32bf5013b30b8b109142ee9b50f8ac16222a388
+jobs:
+  verify-public:
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'workflow_dispatch' || github.event.head_commit.message == 'Finish installed paid Encar after public verification')
+    environment: regcloud-staging
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: 83ff17075e9188dcf227c8752dc064248d5f42e0
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24.22.1
+          cache: npm
+      - name: Verify exact deployed source and prior successful deployment gates
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$RELEASE_SOURCE_SHA"
+          test "$(git rev-parse 'HEAD^{tree}')" = "$RELEASE_SOURCE_TREE"
+          test "$(node scripts/catalog-calculation-version.mjs)" = "$RELEASE_CALCULATION_VERSION"
+          python3 - <<'VERIFY_DEPLOYMENT'
+          import hashlib,io,json,os,subprocess,urllib.request,zipfile
+          from pathlib import Path
+          repository='jeep-jim/AvtoCena'
+          assert os.environ['GITHUB_REPOSITORY']==repository
+          def api(path):
+            return json.loads(subprocess.check_output(['gh','api','repos/'+repository+'/'+path],timeout=60))
+          run_id=int(os.environ['DEPLOY_RUN_ID']);job_id=int(os.environ['DEPLOY_JOB_ID'])
+          run=api('actions/runs/'+str(run_id))
+          assert run['head_sha']==os.environ['DEPLOY_CONTROLLER_SHA'],'deployment_controller_changed'
+          assert run['path']=='.github/workflows/release-minimal-paid-encar.yml','deployment_workflow_changed'
+          assert run['status']=='completed' and run['conclusion']=='failure' and run['run_attempt']==1,'deployment_result_changed'
+          job=api('actions/jobs/'+str(job_id))
+          assert job['run_id']==run_id and job['head_sha']==os.environ['DEPLOY_CONTROLLER_SHA'],'deployment_job_changed'
+          assert job['name']=='release' and job['status']=='completed' and job['conclusion']=='failure','deployment_job_not_complete'
+          steps={step['number']:step for step in job['steps']}
+          required={
+            12:'Prepare private encyclopedia index for this release',
+            18:'Prepare exact price indexes before activating the release',
+            28:'Deploy with rollback and resource measurements',
+            29:'Persist verified private evidence for deploy_acceptance',
+            30:'Preserve required browser acceptance evidence',
+          }
+          for number,name in required.items():
+            step=steps[number]
+            assert step['name']==name and step['status']=='completed' and step['conclusion']=='success',('required_deployment_gate_failed',number)
+          failed=[step for step in job['steps'] if step['conclusion']=='failure']
+          assert len(failed)==1 and failed[0]['number']==31 and failed[0]['name']=='Verify published encyclopedia fields against this exact release','unexpected_deployment_failure'
+          artifact_id=int(os.environ['PRIVATE_EVIDENCE_ARTIFACT_ID'])
+          artifact=api('actions/artifacts/'+str(artifact_id))
+          expected_digest=os.environ['PRIVATE_EVIDENCE_ZIP_SHA256']
+          assert artifact['name']=='encyclopedia-coverage' and not artifact['expired'],'private_evidence_unavailable'
+          assert artifact['digest']=='sha256:'+expected_digest,'private_evidence_digest_changed'
+          assert artifact['workflow_run']['id']==run_id and artifact['workflow_run']['head_sha']==os.environ['DEPLOY_CONTROLLER_SHA'],'private_evidence_run_changed'
+          assert 0<artifact['size_in_bytes']<=8*1024*1024,'private_evidence_size_invalid'
+          archive=Path(os.environ['RUNNER_TEMP'])/'deployed-private-evidence.zip'
+          with archive.open('wb') as output:
+            subprocess.run(['gh','api','repos/'+repository+'/actions/artifacts/'+str(artifact_id)+'/zip'],stdout=output,check=True,timeout=90)
+          raw=archive.read_bytes()
+          assert len(raw)==artifact['size_in_bytes'] and hashlib.sha256(raw).hexdigest()==expected_digest,'private_evidence_download_changed'
+          reports=Path('reports');reports.mkdir(exist_ok=True)
+          expected_files={'encyclopedia-coverage.json','astra-release-verification.json'}
+          with zipfile.ZipFile(io.BytesIO(raw)) as bundle:
+            assert len(bundle.namelist())==2 and set(bundle.namelist())==expected_files,'private_evidence_file_set_changed'
+            for name in expected_files:
+              assert 0<bundle.getinfo(name).file_size<=64*1024*1024,'private_evidence_report_size_invalid'
+              value=bundle.read(name);json.loads(value)
+              (reports/name).write_bytes(value)
+          coverage=json.loads((reports/'encyclopedia-coverage.json').read_text())
+          astra=json.loads((reports/'astra-release-verification.json').read_text())
+          marker=json.loads(Path('.github/market-runs/regcloud-deploy.json').read_text())
+          assert astra['verified'] is True and astra['indexDigest']==coverage['indexDigest'] and astra['manifestDigest']==coverage['manifestDigest'],'private_evidence_identity_mismatch'
+          assert astra['indexDigest']=='bf2c72cb7a260ef093c0a43c2b0dad9c4c9094a4d6dc3811dd0d7f7626b0d72b','deployed_private_index_changed'
+          assert astra['manifestDigest']=='8654f53db18b4cdb0a1a29960f030231618190b3c17b49a93630f2a2ccfa0b01','deployed_private_manifest_changed'
+          assert len(marker['publicResearchBatches'])==43 and len(marker['requiredAstraPlanDigests'])==3,'source_verification_scope_changed'
+          assert sorted(plan['planDigest'] for plan in astra['plans'])==sorted(marker['requiredAstraPlanDigests']),'astra_plan_evidence_changed'
+          assert all(isinstance(plan['annualChanges'],list) for plan in astra['plans']) and sum(len(plan['annualChanges']) for plan in astra['plans'])>0,'astra_verification_empty'
+          request=urllib.request.Request('https://avtocena.com/api/health',headers={'Cache-Control':'no-cache'})
+          with urllib.request.urlopen(request,timeout=45) as response:
+            assert response.status==200;health=json.load(response)
+          assert health.get('releaseSha')==os.environ['RELEASE_SOURCE_SHA'],'installed_release_changed'
+          assert health.get('calculationVersion')==os.environ['RELEASE_CALCULATION_VERSION'],'installed_calculator_changed'
+          receipt={'releaseSha':os.environ['RELEASE_SOURCE_SHA'],'sourceTree':os.environ['RELEASE_SOURCE_TREE'],
+            'calculationVersion':os.environ['RELEASE_CALCULATION_VERSION'],'deploymentController':os.environ['DEPLOY_CONTROLLER_SHA'],
+            'deploymentRun':run_id,'deploymentJob':job_id,'artifactId':artifact_id,'artifactZipSha256':expected_digest,
+            'indexDigest':astra['indexDigest'],'manifestDigest':astra['manifestDigest'],
+            'successfulDeploymentSteps':list(required),'publicResearchBatches':len(marker['publicResearchBatches']),
+            'astraPlanDigests':marker['requiredAstraPlanDigests'],'beforeHealthVerified':True}
+          (reports/'installed-encar-verification-binding.json').write_text(json.dumps(receipt,indent=2)+'\n')
+          print(json.dumps(receipt))
+          VERIFY_DEPLOYMENT
+      - run: npm ci
+      - name: Verify public encyclopedia with the unchanged deployed-source verifier
+        env:
+          EXPECTED_RELEASE: 83ff17075e9188dcf227c8752dc064248d5f42e0
+          AVTOCENA_RELEASE_SHA: 83ff17075e9188dcf227c8752dc064248d5f42e0
+          AVTOCENA_CALCULATION_VERSION: 4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90
+          ENCYCLOPEDIA_PUBLIC_COMPACT_VERIFY: '1'
+          JSON_STORAGE_DRIVER: object
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_REGION: us-east-1
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+        run: |
+          set -euo pipefail
+          git diff --exit-code HEAD -- apps packages scripts .github/market-runs/regcloud-deploy.json docs/encyclopedia/batches
+          node --import tsx scripts/encyclopedia/verify-public-release.mjs
+      - name: Recheck exact installed source after public verification
+        run: |
+          set -euo pipefail
+          git diff --exit-code HEAD -- apps packages scripts .github/market-runs/regcloud-deploy.json docs/encyclopedia/batches
+          python3 - <<'VERIFY_COMPLETE'
+          import json,os,urllib.request
+          from pathlib import Path
+          report=json.loads(Path('reports/encyclopedia-public-release.json').read_text())
+          assert report['release']==os.environ['RELEASE_SOURCE_SHA'] and report['verified'] is True,'public_verification_failed'
+          assert report['groups']>0 and report['variants']>0 and report['fields']>0,'public_verification_empty'
+          request=urllib.request.Request('https://avtocena.com/api/health',headers={'Cache-Control':'no-cache'})
+          with urllib.request.urlopen(request,timeout=45) as response:
+            assert response.status==200;health=json.load(response)
+          assert health.get('releaseSha')==os.environ['RELEASE_SOURCE_SHA'],'installed_release_changed_after_verification'
+          assert health.get('calculationVersion')==os.environ['RELEASE_CALCULATION_VERSION'],'installed_calculator_changed_after_verification'
+          receipt_path=Path('reports/installed-encar-verification-binding.json')
+          receipt=json.loads(receipt_path.read_text());receipt['afterHealthVerified']=True;receipt['publicVerification']=report
+          receipt_path.write_text(json.dumps(receipt,indent=2)+'\n')
+          print(json.dumps({'release':report['release'],'publicVerified':True,'groups':report['groups'],'variants':report['variants'],'fields':report['fields'],'afterHealthVerified':True}))
+          VERIFY_COMPLETE
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: installed-paid-encar-public-verification
+          path: |
+            reports/installed-encar-verification-binding.json
+            reports/encyclopedia-public-release.json
+          if-no-files-found: error
+  verify-and-retire:
+    needs: verify-public
+    uses: ./.github/workflows/verify-finish-paid-encar.yml
+    secrets: inherit
+  verify-final-source:
+    needs: verify-and-retire
+    runs-on: ubuntu-24.04
+    timeout-minutes: 2
+    steps:
+      - name: Confirm the exact installed source after paid cards and CRM retirement
+        run: |
+          python3 - <<'VERIFY_FINAL_SOURCE'
+          import datetime,json,os,urllib.request
+          request=urllib.request.Request('https://avtocena.com/api/health',headers={'Cache-Control':'no-cache'})
+          with urllib.request.urlopen(request,timeout=45) as response:
+            assert response.status==200;health=json.load(response)
+          assert health.get('releaseSha')==os.environ['RELEASE_SOURCE_SHA'],'installed_release_changed_after_retirement'
+          assert health.get('calculationVersion')==os.environ['RELEASE_CALCULATION_VERSION'],'installed_calculator_changed_after_retirement'
+          print(json.dumps({'phase':'after_paid_cards_and_retirement','checkedAt':datetime.datetime.now(datetime.timezone.utc).isoformat(),
+            'releaseSha':health['releaseSha'],'calculationVersion':health['calculationVersion'],'verified':True}))
+          VERIFY_FINAL_SOURCE
