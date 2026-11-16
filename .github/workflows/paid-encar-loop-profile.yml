@@ -1,0 +1,59 @@
+name: Profile paid Encar isolated event loop
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/paid-encar-loop-profile.yml]
+  workflow_dispatch:
+    inputs:
+      scenario:
+        description: One bounded pair of public requests
+        type: choice
+        options: [incident, sort-korea, power160]
+        default: incident
+      models_query:
+        description: Observed public models query without question mark (incident only)
+        type: string
+        default: ''
+permissions:
+  contents: read
+concurrency:
+  group: paid-encar-isolated-loop-profile
+  cancel-in-progress: false
+jobs:
+  profile:
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'workflow_dispatch' || github.event.head_commit.message == 'Profile exact paid Encar image with observed public requests')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 7
+    environment: regcloud-staging
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Profile exact stopped image on owned loopback clone
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+          SCENARIO: ${{ inputs.scenario || 'incident' }}
+          MODELS_QUERY: ${{ inputs.models_query || 'scope=makes&limit=500' }}
+        run: |
+          set -euo pipefail
+          umask 077
+          key_file=$(mktemp)
+          remote_dir=''
+          printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
+          unset SSH_PRIVATE_KEY
+          ssh_opts=(-i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o ServerAliveInterval=10 -o ServerAliveCountMax=6 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts")
+          cleanup() {
+            if [[ "$remote_dir" =~ ^/opt/avtocena/diag-loop-[A-Za-z0-9]+$ ]]; then
+              ssh "${ssh_opts[@]}" root@151.248.113.177 "rm -f -- '$remote_dir/regcloud-paid-encar-loop-diagnostic.py' '$remote_dir/regcloud-loop-cpu-sample.mjs'; rmdir -- '$remote_dir'" >/dev/null 2>&1 || true
+            fi
+            rm -f "$key_file"
+          }
+          trap cleanup EXIT
+          case "$SCENARIO" in incident|sort-korea|power160) ;; *) exit 1;; esac
+          query_encoded=$(python3 -c 'import os,base64; print(base64.b64encode(os.environ["MODELS_QUERY"].encode()).decode())')
+          remote_dir=$(ssh "${ssh_opts[@]}" root@151.248.113.177 'umask 077; mktemp -d /opt/avtocena/diag-loop-XXXXXXXXXX')
+          [[ "$remote_dir" =~ ^/opt/avtocena/diag-loop-[A-Za-z0-9]+$ ]]
+          scp "${ssh_opts[@]}" scripts/regcloud-paid-encar-loop-diagnostic.py scripts/regcloud-loop-cpu-sample.mjs "root@151.248.113.177:$remote_dir/"
+          # The helper itself rejects a held runtime lock and has a 240s total
+          # deadline, including owned cleanup and unchanged-production proof.
+          ssh "${ssh_opts[@]}" root@151.248.113.177 "python3 '$remote_dir/regcloud-paid-encar-loop-diagnostic.py' --scenario '$SCENARIO' --models-query-base64 '$query_encoded'"
