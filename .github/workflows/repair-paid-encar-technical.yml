@@ -31,10 +31,8 @@ concurrency:
   cancel-in-progress: false
 jobs:
   repair:
-    # Review scaffold only. Root must pin SOURCE_SHA after CI and explicitly
-    # enable this manual job in one reviewed controller revision. Plan and its
-    # later receipt-bound manual apply must use that SAME revision. No schedule.
-    if: ${{ false }}
+    # Exact reviewed source; plan and receipt-bound apply use this same controller.
+    if: ${{ github.event_name == 'workflow_dispatch' && (inputs.action == 'plan' || inputs.action == 'apply') }}
     environment: regcloud-staging
     runs-on: ubuntu-24.04
     timeout-minutes: 330
