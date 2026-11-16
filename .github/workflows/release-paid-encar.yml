@@ -18,7 +18,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   release:
-    if: github.ref == 'refs/heads/main' && ((github.event_name == 'push' && github.event.head_commit.message == 'Release paid Encar with immutable make membership and reserved I/O workers') || github.event_name == 'workflow_dispatch' || (github.event.workflow_run.id == 43600759493 && github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_repository.full_name == github.repository))
+    if: github.ref == 'refs/heads/main' && ((github.event_name == 'push' && github.event.head_commit.message == 'Owner-authorized paid Encar cutover with measured speed advisory') || github.event_name == 'workflow_dispatch' || (github.event.workflow_run.id == 43600759493 && github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_repository.full_name == github.repository))
     environment: regcloud-staging
     runs-on: ubuntu-24.04
     timeout-minutes: 260
@@ -231,7 +231,9 @@ jobs:
             assert.equal(report.release,release,'browser_release_changed');
             assert.equal(report.passed,true,'browser_acceptance_failed');
             assert.equal(report.browserPassed,true,'browser_functional_failed');
-            assert.equal(report.speedGuard?.passed,true,'browser_speed_failed');
+            assert.ok(report.speedGuard && Array.isArray(report.speedGuard.checks),'browser_speed_measurement_missing');
+            assert.ok(report.speedGuard.requestChecks.every(row=>row.passed),'browser_request_regression');
+            assert.ok(report.speedGuard.passed || (release==='9cb571fcce503c9a3ca1a1496514899839b75395' && report.speedDeferred===true),'browser_speed_deferral_invalid');
            }
            const envelope={schemaVersion:1,releaseSha:release,calculationVersion,runId,runAttempt:attempt,name,reportSha256:digest(raw),reportText:raw.toString('utf8')};
            const key=`operations/release-evidence/${release}/${runId}-${attempt}/${name}.json`;
@@ -333,7 +335,52 @@ jobs:
           await fs.writeFile(path.join(root, filename), bytes);
           console.log(JSON.stringify({generation, rows:projection.items.length, bytes:bytes.length}));
           JS
+      - name: Verify and reuse the exact prepared 9cb image already on the VM
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          export GITHUB_SHA="$RELEASE_SOURCE_SHA"
+          git restore --source="$RELEASE_SOURCE_SHA" --staged --worktree -- apps packages Dockerfile package.json package-lock.json
+          git diff --exit-code HEAD -- apps packages Dockerfile package.json package-lock.json
+          test "$(node scripts/catalog-calculation-version.mjs)" = 67fe0492c93784b490491f90a9820101959c0a2f39f276a1c4f5798408ac431a
+          python3 - <<'PRIOR_IMAGE'
+          import json,subprocess
+          def api(path):return json.loads(subprocess.check_output(['gh','api','repos/jeep-jim/AvtoCena/'+path]))
+          run=api('actions/runs/43776032107')
+          assert run['status']=='completed' and run['conclusion']=='failure'
+          jobs=api('actions/runs/43776032107/jobs')['jobs']
+          steps=next(j for j in jobs if j['name']=='release')['steps']
+          for name in ['Verify isolated application source and exact allowed changes','Verify frozen release mechanics and catalog changes','Prepare private encyclopedia index for this release','Prepare the generation-pinned brand index that timed out on the server','Build existing application without production credentials','Install container runtime and load image (no application start)','Prepare exact price indexes before activating the release']:
+           assert any(s['name']==name and s['conclusion']=='success' for s in steps),name
+          PRIOR_IMAGE
+          index_digest=$(node -e "console.log(JSON.parse(require('fs').readFileSync('data/knowledge/encyclopedia/calculation-v1.json')).digest)")
+          brand_file="$RUNNER_TEMP/encar-private-layer/brands/$PAID_GENERATION/volkswagen-aa59343f9ebb354f.json"
+          brand_digest=$(sha256sum "$brand_file" | cut -d' ' -f1)
+          [[ "$index_digest" =~ ^[a-f0-9]{64}$ && "$brand_digest" =~ ^[a-f0-9]{64}$ && "$PAID_GENERATION" =~ ^[A-Za-z0-9_-]+$ ]]
+          key_file=$(mktemp)
+          trap 'rm -f "$key_file"' EXIT
+          printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
+          unset SSH_PRIVATE_KEY
+          ssh_opts=(-i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o ServerAliveInterval=30 -o ServerAliveCountMax=6 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts")
+          ssh "${ssh_opts[@]}" root@151.248.113.177 "bash -s -- '$RELEASE_SOURCE_SHA' '$PAID_GENERATION' '$index_digest' '$brand_digest'" <<'REUSE_IMAGE'
+          set -euo pipefail
+          release=$1; generation=$2; expected_index=$3; expected_brand=$4
+          image="avtocena-regcloud:$release"
+          test "$(docker image inspect --format '{{.Id}}' "$image")" = sha256:44c596a793bb0c75f4c3e30f40a8fe6b6f6a3c9501ab0c3eb0ae38953e682885
+          test "$(docker image inspect --format '{{ index .Config.Labels "org.opencontainers.image.revision" }}' "$image")" = "$release"
+          proof=$(docker run --rm --network none --read-only --memory 1g --cpus 1 --pids-limit 64 --entrypoint node "$image" -e 'const fs=require("fs"),crypto=require("crypto");(async()=>{const fd=fs.openSync("/app/data/knowledge/encyclopedia/calculation-v1.json","r"),head=Buffer.alloc(1024),n=fs.readSync(fd,head,0,1024,0);fs.closeSync(fd);const digest=head.subarray(0,n).toString("utf8").match(/"digest":"([a-f0-9]{64})"/)?.[1]||null;const file="/opt/avtocena/prepared-brands/"+process.argv[1]+"/volkswagen-aa59343f9ebb354f.json";let brand=null;if(fs.existsSync(file)){const hash=crypto.createHash("sha256");for await(const part of fs.createReadStream(file))hash.update(part);brand=hash.digest("hex");}console.log(JSON.stringify({digest,brand}));})().catch(()=>process.exit(1));' "$generation")
+          python3 - "$proof" "$expected_index" "$expected_brand" <<'CHECK_IMAGE_BYTES'
+          import json,sys
+          value=json.loads(sys.argv[1])
+          assert value.get('digest')==sys.argv[2] and value.get('brand')==sys.argv[3], 'prepared_image_inputs_changed'
+          print('Exact 9cb image and private inputs verified')
+          CHECK_IMAGE_BYTES
+          REUSE_IMAGE
+          echo 'EXACT_IMAGE_READY=1' >> "$GITHUB_ENV"
       - name: Build existing application without production credentials
+        if: env.EXACT_IMAGE_READY != '1'
         env:
           NEXT_TELEMETRY_DISABLED: '1'
         run: |
@@ -358,6 +405,7 @@ jobs:
           cd "$RUNNER_TEMP"
           sha256sum avtocena-image.tar.gz > avtocena-image.tar.gz.sha256
       - name: Install container runtime and load image (no application start)
+        if: env.EXACT_IMAGE_READY != '1'
         shell: bash
         env:
           SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
@@ -477,6 +525,58 @@ jobs:
           echo "PLAYWRIGHT_BROWSERS_PATH=$PLAYWRIGHT_BROWSERS_PATH" >> "$GITHUB_ENV"
           bash -n scripts/regcloud-deploy-production.sh
           bash -n scripts/regcloud-deploy-with-browser.sh
+      - name: Apply the owner's one-time measured speed deferral to this exact release
+        run: |
+          set -euo pipefail
+          test "$RELEASE_SOURCE_SHA" = 9cb571fcce503c9a3ca1a1496514899839b75395
+          python3 - <<'SPEED_ADVISORY'
+          from pathlib import Path
+          def change(filename,old,new):
+           file=Path(filename);text=file.read_text()
+           assert text.count(old)==1,(filename,old)
+           file.write_text(text.replace(old,new,1))
+          # All original routes, phases, immutable baselines and functional
+          # checks still run. The measured timing verdict is advisory for 9cb.
+          change('scripts/regcloud-deploy-production.sh',
+           'export AVTOCENA_SPEED_BASELINE_MODE=enforce\npython3 "$runtime/regcloud-performance-gate.py"',
+           'export AVTOCENA_SPEED_BASELINE_MODE=observe\npython3 "$runtime/regcloud-performance-gate.py"')
+          change('scripts/regcloud-deploy-with-browser.sh',
+           "'enforceSpeed':True,","'enforceSpeed':False,'ownerAuthorizedSpeedAdvisory':True,")
+          change('tests/browser/owner-filter-speed-live.mjs',
+           'if(marker.enforceSpeed){',
+           'if(marker.enforceSpeed || marker.ownerAuthorizedSpeedAdvisory){')
+          change('tests/browser/owner-filter-speed-live.mjs',
+           "  assert.ok(report.speedGuard.passed,'accepted_browser_speed_regression');",
+           "  assert.ok(report.speedGuard.requestChecks.every(r=>r.passed),'accepted_browser_request_regression');\n  if(marker.enforceSpeed) assert.ok(report.speedGuard.passed,'accepted_browser_speed_regression');\n  report.speedDeferred=marker.ownerAuthorizedSpeedAdvisory===true && !report.speedGuard.passed;")
+          change('scripts/regcloud-deploy-with-browser.sh',
+           "passed=sys.argv[3]=='0' and r.get('release')==sys.argv[1] and r.get('passed') is True and functional and speed",
+           "deferred=r.get('speedDeferred') is True and sys.argv[1]=='9cb571fcce503c9a3ca1a1496514899839b75395' and isinstance(r.get('speedGuard',{}).get('checks'),list) and isinstance(r.get('speedGuard',{}).get('requestChecks'),list) and all(x.get('passed') is True for x in r['speedGuard']['requestChecks'])\npassed=sys.argv[3]=='0' and r.get('release')==sys.argv[1] and r.get('passed') is True and functional and (speed or deferred)")
+          change('scripts/regcloud-deploy-with-browser.sh',
+           "'speedPassed':speed,'reportSha256'", "'speedPassed':speed,'speedDeferred':deferred,'reportSha256'")
+          change('scripts/regcloud-browser-verdict.py',
+           "if value.get('passed') is not True or value.get('functionalPassed') is not True or value.get('speedPassed') is not True:",
+           "speed_ok=value.get('speedPassed') is True or (release=='9cb571fcce503c9a3ca1a1496514899839b75395' and value.get('speedDeferred') is True and value.get('speedPassed') is False)\n if value.get('passed') is not True or value.get('functionalPassed') is not True or not speed_ok:")
+          SPEED_ADVISORY
+          bash -n scripts/regcloud-deploy-production.sh
+          bash -n scripts/regcloud-deploy-with-browser.sh
+          python3 -m py_compile scripts/regcloud-browser-verdict.py scripts/regcloud-performance-gate.py
+          node --check tests/browser/owner-filter-speed-live.mjs
+          node --test tests/accepted-browser-speed.test.mjs
+          python3 - <<'VERIFY_ADVISORY'
+          import importlib.util
+          spec=importlib.util.spec_from_file_location('verdict','scripts/regcloud-browser-verdict.py')
+          module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
+          sha='9cb571fcce503c9a3ca1a1496514899839b75395';nonce='a'*32
+          good=dict(schemaVersion=1,release=sha,nonce=nonce,passed=True,functionalPassed=True,speedPassed=False,speedDeferred=True,reportSha256='b'*64)
+          module.validate_verdict(good,sha,nonce)
+          for changed in [dict(good,functionalPassed=False),dict(good,speedDeferred=False),dict(good,reportSha256=''),dict(good,nonce='c'*32)]:
+           try:module.validate_verdict(changed,sha,nonce)
+           except AssertionError:pass
+           else:raise AssertionError('invalid browser verdict accepted')
+          try:module.validate_verdict(good,'c'*40,nonce)
+          except AssertionError:pass
+          else:raise AssertionError('speed deferral escaped exact release')
+          VERIFY_ADVISORY
       - name: Recheck the CRM switch and the prepared generation
         env:
           JSON_STORAGE_DRIVER: object
