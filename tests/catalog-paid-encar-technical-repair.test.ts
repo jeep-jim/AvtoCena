@@ -6,7 +6,11 @@ import {PAID_ENCAR_REPAIR_SNAPSHOT, PAID_ENCAR_REPAIR_PROTECTED_KEYS, paidRepair
   paidRepairRowsProof, mergePaidEncarTechnicalCorrection, buildPaidEncarTechnicalRepair,
   assertPaidRepairPublicationRows} from '../scripts/lib/paid-encar-technical-repair.mjs';
 import {loadPaidRepairPlan, createPaidRepairPublicationGuard, assertPaidRepairLeaseFree,
-  assertPaidRepairSavedSnapshot, installPaidRepairNetworkFence} from '../scripts/lib/paid-encar-repair-io.mjs';
+  assertPaidRepairSavedSnapshot, installPaidRepairNetworkFence, readPaidRepairPreservedMarket} from '../scripts/lib/paid-encar-repair-io.mjs';
+import {hashRows} from '../scripts/lib/catalog-row-hash.mjs';
+import {hasAllowedCatalogSourceProvenance, isCatalogYearAllowed} from '../apps/web/lib/catalog/offer-quality';
+import {isAllDubicarsOffer} from '../apps/web/lib/catalog/dubicars-owner-policy';
+import {writeCatalogProjectionBatches} from '../apps/web/lib/catalog-projection-parts';
 import {EncarDirectAdapter} from '../apps/web/lib/catalog/adapters';
 import {LocalJsonStorage} from '../apps/web/lib/data';
 import {resetCatalogRateCache} from '../apps/web/lib/catalog/rates';
@@ -56,6 +60,7 @@ function memory(values: Record<string, any>) {
   const map = new Map(Object.entries(values));
   return {map,driver:'object',async readJson(key: string, fallback: any) {return structuredClone(map.has(key) ? map.get(key) : fallback);},
     async readJsonWithMeta(key: string, fallback: any) {return meta(await this.readJson(key,fallback));},
+    async getBinary(key:string) {return {data:Buffer.from(JSON.stringify(map.get(key) ?? null))};},
     async writeJson() {throw Error('unexpected_write');}};
 }
 
@@ -172,12 +177,12 @@ test('actual seller preparation keeps both repaired examples and the preservatio
       power:136,power_ice_hp:82,power_electro_kw:100});
     const retained=current(hybrid);retained.trim='e-POWER maximum 30-minute power 60 kW';
     const f=fixture([retained]);f.sourceById.set(retained.id,source(hybrid));
-    const result=buildPaidEncarTechnicalRepair(f);
-    assert.equal(result.offers[0].power30MinKw,undefined);
-    const prepared=await prepareSellerInventory(normalizeVehicleOfferSpecs(result.offers[0]));
+    const merged=mergePaidEncarTechnicalCorrection(retained,f.sourceById.get(retained.id),{observedAt,editorial:f.editorial});
+    assert.equal(merged.offer.power30MinKw,undefined);
+    const prepared=await prepareSellerInventory(normalizeVehicleOfferSpecs(merged.offer));
     assert.ok(prepared);
     assert.equal(prepared.power30MinKw,60,'fixture reaches the actual retained-trim inference');
-    assert.throws(()=>assertPaidRepairPublicationRows(result.receipt,[compactPublicStorageOffer(prepared)],f.editorial),/source_field_changed:power30MinKw/);
+    assert.throws(()=>buildPaidEncarTechnicalRepair(f),/paid_repair_undocumented_30_min_power/);
   } finally {read.mock.restore();write.mock.restore();mock.timers.reset();resetCatalogRateCache();
     if(previous===undefined)delete process.env.CATALOG_LIVE_RATE_DISABLED;else process.env.CATALOG_LIVE_RATE_DISABLED=previous;}
 });
@@ -284,4 +289,115 @@ test('manual repair remains disabled, has no supplier credential/collector/curso
   assert.match(publisher,/technicalRepairGuard\?\.assertRows\(publishedOffers/);
   assert.match(publisher,/beforeManifestCommit\(\)\s*\{\s*await technicalRepairGuard\?\.verifyAuthority/);
   assert.match(publisher,/prepareStagedCatalogBudget/);assert.match(publisher,/technicalRepairGuard\.verifyPublished/);
+});
+
+// The three IDs reproduce the audited coverage gap; all vehicle data are synthetic.
+const missingUaeIds = ['291f2b7703a3b68aa76253cd','8ca9a91f7d9653e1fe307d00','f8b2705e947357c174ba4b55'];
+function preservedFixture(count = 4) {
+  const f = fixture();
+  const rows = Array.from({length:count}, (_,i) => ({id:missingUaeIds[i] || `uae-fixture-${i}`,
+    market:'uae',sourceId:'dubicars_uae_exact',sourceOfferId:String(100000+i),make:'Toyota',model:'Prado',year:2024,
+    status:'active',sourcePrice:80000+i,sourceCurrency:'AED',totalRub:2500000+i,sellerPriceRub:2500000+i,
+    firstSeenAt:observedAt,updatedAt:observedAt,images:[{id:`photo-${i}`,url:`https://example.test/${i}.jpg`}],
+    editorialSpecifications:{drive:'rwd'},savedCalculationPreview:{manualScenario:true,totalRub:3000000+i},
+    operational:{sourceUrl:`https://www.dubicars.com/2024-toyota-prado-${100000+i}.html`,manualNotes:{text:'keep'},lastSeenAt:observedAt}}));
+  const chunks = Array.from({length:Math.ceil(count/500)}, (_,i) => `chunk-${String(i+1).padStart(4,'0')}`);
+  f.manifestMeta = meta({...f.manifestMeta.value,markets:{...f.manifestMeta.value.markets,uae:{count,chunks}}});
+  const result = buildPaidEncarTechnicalRepair(f);
+  const projectionKey = `catalog/generations/${generationId}/indexes/projection/uae.json`;
+  const storage = memory({'catalog/manifest.json':f.manifestMeta.value,
+    ...Object.fromEntries(Object.entries(f.protectedObjects).map(([key,value]:any)=>[key,value.value])),
+    [snapshotRoot+'/complete.json']:f.snapshot,
+    ...Object.fromEntries(chunks.map((chunk,i) => [`catalog/generations/${generationId}/offers/uae/${chunk}.json`,rows.slice(i*500,(i+1)*500)])),
+    [projectionKey]:{generationId,items:rows.map(({id,market})=>({id,market}))}});
+  return {...f,...result,storage,rows,projectionKey,chunks};
+}
+const publisherSource = fs.readFileSync(new URL('../scripts/catalog-publish-market.mjs',import.meta.url),'utf8');
+const preservedStart = publisherSource.indexOf('async function loadPreservedMarkets() {');
+const preservedEnd = publisherSource.indexOf('\nconst canonicalTargetPreview =',preservedStart);
+assert.ok(preservedStart >= 0 && preservedEnd > preservedStart);
+const AsyncFunction = Object.getPrototypeOf(async function(){}).constructor;
+const runPreservedLoader = new AsyncFunction('technicalRepairGuard','readMarketOffers','hasAllowedCatalogSourceProvenance',
+  'isCatalogYearAllowed','isAllDubicarsOffer','hashRows', `
+  const PUBLIC_CATALOG_MARKETS = ['korea','uae'], market = 'korea';
+  const preservedByMarket = {}, preservedPublicHashByMarket = {}, preservedPublicRowsByMarket = {};
+  const expectedPublishedByMarket = {}, expectedPublishedHashByMarket = {}, purgedForbiddenPublicByMarket = {};
+  ${publisherSource.slice(preservedStart,preservedEnd)}
+  await loadPreservedMarkets();
+  return {preservedByMarket,preservedPublicHashByMarket,preservedPublicRowsByMarket};`);
+async function loadPreservedForTest(f, legacy = async () => {throw Error('legacy_reader_forbidden');}, repair = true) {
+  const guard = repair ? await createPaidRepairPublicationGuard({storage:f.storage,receipt:f.receipt,
+    expectedSha256:f.receipt.sha256,readIdentity:async()=>liveIdentity,now:()=>now}) : null;
+  return runPreservedLoader(guard,legacy,hasAllowedCatalogSourceProvenance,isCatalogYearAllowed,isAllDubicarsOffer,hashRows);
+}
+
+test('actual repair preservation reads all 25666 UAE IDs and keeps prices, dates, photos and manual values byte-stable', async () => {
+  const f = preservedFixture(25666), before = hashRows(f.rows), snapshot = structuredClone(f.rows);
+  const directory = await writeCatalogProjectionBatches({...f.storage,
+    async writeJson(key:string,value:any) {f.storage.map.set(key,structuredClone(value));}} as any,
+  f.projectionKey,generationId,[f.storage.map.get(f.projectionKey).items]);
+  const read = f.storage.readJson.bind(f.storage);let active = 0, peak = 0, parts = 0;
+  f.storage.readJson = async(key,fallback) => {
+    assert.notEqual(key,f.projectionKey,'maintenance must not expand the whole projection root');
+    if (!key.includes('/projection-parts/')) return read(key,fallback);
+    active++;peak=Math.max(peak,active);parts++;
+    try {return await read(key,fallback);} finally {active--;}
+  };
+  const loaded = await loadPreservedForTest(f);
+  assert.equal(loaded.preservedByMarket.uae,25666);
+  assert.equal(loaded.preservedPublicHashByMarket.uae,before);
+  assert.deepEqual(loaded.preservedPublicRowsByMarket.uae,snapshot);
+  for (const id of missingUaeIds) assert.ok(loaded.preservedPublicRowsByMarket.uae.some(row=>row.id===id));
+  assert.equal(hashRows(f.rows),before,'read validation must not normalize or mutate preserved records');
+  assert.equal(parts,directory.parts.length);assert.equal(peak,1,'only one verified projection part is retained at a time');
+});
+
+test('actual repair preservation stops missing chunks, incomplete or replaced IDs and generation drift before persistence', async () => {
+  const chunkKey = `catalog/generations/${generationId}/offers/uae/chunk-0001.json`;
+  const cases = [
+    ['missing chunk',(f:any)=>f.storage.map.delete(chunkKey),/preserved_chunk_missing/],
+    ['truncated chunk',(f:any)=>f.storage.map.get(chunkKey).pop(),/preserved_coverage_incomplete/],
+    ['duplicate ID',(f:any)=>f.storage.map.get(chunkKey)[1].id=f.rows[0].id,/preserved_duplicate_id/],
+    ['invalid ID',(f:any)=>f.storage.map.get(chunkKey)[1].id=' '+f.rows[1].id,/preserved_identity_invalid/],
+    ['foreign market',(f:any)=>f.storage.map.get(chunkKey)[1].market='china',/preserved_identity_invalid/],
+    ['replacement ID',(f:any)=>f.storage.map.get(chunkKey)[1].id='replacement-id',/preserved_projection_ids_changed/],
+    ['projection absent',(f:any)=>f.storage.map.delete(f.projectionKey),/catalog_projection_missing/],
+    ['projection count',(f:any)=>f.storage.map.get(f.projectionKey).items.pop(),/preserved_coverage_incomplete/],
+    ['projection generation',(f:any)=>f.storage.map.get(f.projectionKey).generationId='gen_1_other',/preserved_projection_generation/],
+  ] as const;
+  for (const [label,mutate,error] of cases) {
+    const f = preservedFixture(); mutate(f); let reachedPersistence = false;
+    await assert.rejects(async()=>{await loadPreservedForTest(f);reachedPersistence=true;},error,label);
+    assert.equal(reachedPersistence,false,label);
+    assert.equal(f.storage.map.get('catalog/manifest.json').generationId,generationId,label);
+  }
+  const f = preservedFixture(), read = f.storage.readJson.bind(f.storage);
+  f.storage.readJson = async(key,fallback) => {
+    const value = await read(key,fallback);
+    if (key === chunkKey) f.storage.map.set('catalog/manifest.json',{...f.manifestMeta.value,generationId:'gen_1_other'});
+    return value;
+  };
+  await assert.rejects(loadPreservedForTest(f),/paid_repair_manifest_changed/);
+  const liveBranch = publisherSource.slice(publisherSource.indexOf('await acquirePublishLock();'));
+  assert.ok(liveBranch.indexOf('await technicalRepairGuard?.verifyAuthority') < liveBranch.indexOf('await loadPreservedMarkets();'));
+  assert.ok(liveBranch.indexOf('await loadPreservedMarkets();') < liveBranch.indexOf('manifest = await persistCatalogOffers('));
+});
+
+test('repair respects explicit borrowed chunks, validates bounded partitions, and ordinary preservation keeps its existing reader', async () => {
+  const f = preservedFixture(), manifest = structuredClone(f.manifestMeta.value);
+  const key = `catalog/generations/${generationId}/offers/uae/chunk-0001.json`;
+  const borrowed = 'catalog/generations/gen_1_previous/offers/uae/chunk-0001.json';
+  f.storage.map.set(borrowed,structuredClone(f.rows)); manifest.markets.uae.chunks=[borrowed];
+  assert.deepEqual(await readPaidRepairPreservedMarket(f.storage,manifest,'uae'),f.rows);
+  for (const entry of [{count:4,chunks:[key,key]}, {count:4,chunks:[]}, {count:0,chunks:[key]},
+    {count:4.5,chunks:[key]}, {count:-1,chunks:[]}, {count:500001,chunks:[key]}, {count:4,chunks:['catalog/manifest.json']}]) {
+    await assert.rejects(readPaidRepairPreservedMarket(f.storage,{...manifest,markets:{uae:entry}},'uae'),/paid_repair_/);
+  }
+  assert.deepEqual(await readPaidRepairPreservedMarket(f.storage,{...manifest,markets:{uae:{count:0,chunks:[]}}},'uae'),[]);
+  assert.deepEqual(await readPaidRepairPreservedMarket(f.storage,{...manifest,markets:{}},'uae'),[]);
+  await assert.rejects(readPaidRepairPreservedMarket(f.storage,manifest,'uae/../../korea'),/preserved_market_invalid/);
+  let reads = 0;
+  const loaded = await loadPreservedForTest(f,async market=>{assert.equal(market,'uae');reads++;return f.rows;},false);
+  assert.equal(reads,1);assert.deepEqual(loaded.preservedPublicRowsByMarket.uae,f.rows);
+  assert.equal(loaded.preservedPublicHashByMarket.uae,hashRows(f.rows));
 });
