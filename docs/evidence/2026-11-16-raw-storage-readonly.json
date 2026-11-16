@@ -1,0 +1,306 @@
+{
+  "version": 1,
+  "scope": "bounded_metadata_only_not_complete_inventory",
+  "applicationDeploymentPerformed": false,
+  "rawGcActivationPerformed": false,
+  "sourceReferences": [
+    {
+      "pr": 1788,
+      "merge": "c7674b9f4f16fffdd8f8fab689d440ea95701de8",
+      "ciRun": 43893556562,
+      "testsPassed": 3363
+    },
+    {
+      "pr": 1789,
+      "merge": "00ec523ee1a03349743e2e3bacd317d1af106420",
+      "ciRun": 43898654996,
+      "testsPassed": 3367
+    },
+    {
+      "pr": 1790,
+      "merge": "d76ae8fdee208d67381a04ea505c8f57e494ff13",
+      "ciRun": 43901272027,
+      "testsPassed": 3369
+    }
+  ],
+  "finalVerdict": "blocked",
+  "finalReason": "head_list_metadata_mismatch",
+  "notes": [
+    "Reports are copied from bounded read-only Actions output; they contain metadata, not raw provider payloads.",
+    "All four final LIST/HEAD pairs match ETag and size; observed timestamps differ in precision.",
+    "Fractional LIST timestamps were retained. No rounding or change to the comparison/execution guards was applied.",
+    "Absent policy/registry, incomplete inventory and unfinished writer/dependency coverage do not authorize raw deletion."
+  ],
+  "reports": [
+    {
+      "version": 1,
+      "status": "failed",
+      "reason": "raw_gc_s3_xml_unknown_field",
+      "checkedAt": "2026-11-16T15:22:16.140Z",
+      "target": {
+        "endpoint": "https://s3.regru.cloud",
+        "bucket": "avtocena-staging-8120751",
+        "prefix": "migration-staging/full-20261011/"
+      },
+      "root": "catalog/intake-staging/encar/43570782014/1",
+      "scope": "bounded_transport_acceptance_only",
+      "completeInventory": false,
+      "controls": {
+        "policy": {
+          "found": false
+        },
+        "registry": {
+          "found": false
+        },
+        "unchanged": null
+      },
+      "publicationLease": {
+        "found": true,
+        "etag": "\"32a93f26a5bdcd85fe2ec9e4155af512\"",
+        "sha256": "d7ad937081b3a0e3686550c111c7e16257e7f6412cbddd2a77ff8133f789ae48",
+        "checkedAt": "2026-11-16T15:22:15.283Z",
+        "activeAtRead": true,
+        "operationType": "catalog_v3_publish_china",
+        "operationId": "catalog_v3_publish_china_997b443a-bf8f-46d0-ad0d-8bc7ad3ccbf6",
+        "lockedUntil": "2026-11-16T15:48:56.177Z",
+        "startedAt": "2026-11-16T11:38:44.591Z",
+        "heartbeatAt": "2026-11-16T15:18:56.177Z"
+      },
+      "receipt": {
+        "key": "catalog/intake-staging/encar/43570782014/1/complete.json",
+        "found": true,
+        "etag": "\"ca6c606d7e8c2a671a1ae99fd4d628a7\"",
+        "sha256": "0fdb319051d5e7fb2648dfe00d3f9f2ad694be409fc64b7016064990371a630f",
+        "fields": {
+          "pages": "number",
+          "count": "number",
+          "completedAt": "string",
+          "version": "absent",
+          "provider": "absent",
+          "runId": "absent",
+          "attempt": "absent"
+        },
+        "unexpectedFieldCount": 0,
+        "pages": 10270,
+        "count": 205385,
+        "completedAt": "2026-11-14T12:55:40.904Z"
+      },
+      "transport": {
+        "requests": 5,
+        "get": 4,
+        "list": 1,
+        "head": 0,
+        "put": 0,
+        "post": 0,
+        "responseBytes": 1440
+      },
+      "executionEnabled": false,
+      "storageWrites": 0,
+      "deleteRequests": 0,
+      "sourceSha": "c7674b9f4f16fffdd8f8fab689d440ea95701de8",
+      "runId": "43895497703",
+      "attempt": "1"
+    },
+    {
+      "version": 1,
+      "status": "failed",
+      "reason": "raw_gc_s3_xml_unknown_field",
+      "checkedAt": "2026-11-16T15:48:20.668Z",
+      "target": {
+        "endpoint": "https://s3.regru.cloud",
+        "bucket": "avtocena-staging-8120751",
+        "prefix": "migration-staging/full-20261011/"
+      },
+      "root": "catalog/intake-staging/encar/43570782014/1",
+      "scope": "bounded_transport_acceptance_only",
+      "completeInventory": false,
+      "controls": {
+        "policy": {
+          "found": false
+        },
+        "registry": {
+          "found": false
+        },
+        "unchanged": null
+      },
+      "publicationLease": {
+        "found": true,
+        "etag": "\"074c066fc0cf0d6af417162de8ad19cc\"",
+        "sha256": "3c9072b404046b9740265e9145bb7a0413f3807cc3a89151473222e83ae36401",
+        "checkedAt": "2026-11-16T15:48:19.518Z",
+        "activeAtRead": true,
+        "operationType": "catalog_v3_publish_china",
+        "operationId": "catalog_v3_publish_china_997b443a-bf8f-46d0-ad0d-8bc7ad3ccbf6",
+        "lockedUntil": "2026-11-16T16:13:57.606Z",
+        "startedAt": "2026-11-16T11:38:44.591Z",
+        "heartbeatAt": "2026-11-16T15:43:57.606Z"
+      },
+      "receipt": {
+        "key": "catalog/intake-staging/encar/43570782014/1/complete.json",
+        "found": true,
+        "etag": "\"ca6c606d7e8c2a671a1ae99fd4d628a7\"",
+        "sha256": "0fdb319051d5e7fb2648dfe00d3f9f2ad694be409fc64b7016064990371a630f",
+        "fields": {
+          "pages": "number",
+          "count": "number",
+          "completedAt": "string",
+          "version": "absent",
+          "provider": "absent",
+          "runId": "absent",
+          "attempt": "absent"
+        },
+        "unexpectedFieldCount": 0,
+        "pages": 10270,
+        "count": 205385,
+        "completedAt": "2026-11-14T12:55:40.904Z"
+      },
+      "schemaDiagnostic": {
+        "parent": "Contents",
+        "unknownNames": [
+          "Type"
+        ],
+        "unknownFieldCount": 1,
+        "omittedNameCount": 0
+      },
+      "transport": {
+        "requests": 5,
+        "get": 4,
+        "list": 1,
+        "head": 0,
+        "put": 0,
+        "post": 0,
+        "responseBytes": 1440
+      },
+      "executionEnabled": false,
+      "storageWrites": 0,
+      "deleteRequests": 0,
+      "sourceSha": "00ec523ee1a03349743e2e3bacd317d1af106420",
+      "runId": "43900268300",
+      "attempt": "1"
+    },
+    {
+      "version": 1,
+      "status": "blocked",
+      "reason": "head_list_metadata_mismatch",
+      "checkedAt": "2026-11-16T16:06:41.596Z",
+      "elapsedMs": 8447,
+      "target": {
+        "endpoint": "https://s3.regru.cloud",
+        "bucket": "avtocena-staging-8120751",
+        "prefix": "migration-staging/full-20261011/"
+      },
+      "root": "catalog/intake-staging/encar/43570782014/1",
+      "scope": "bounded_transport_acceptance_only",
+      "completeInventory": false,
+      "controls": {
+        "policy": {
+          "found": false
+        },
+        "registry": {
+          "found": false
+        },
+        "unchanged": true
+      },
+      "publicationLease": {
+        "found": true,
+        "etag": "\"f4bc7268d77f8f3d57cfc685ac4433c0\"",
+        "sha256": "2f335b2f80d07fc84dcde6de9d9f51b407337bac40d59b1a49ab0be2f34a2c0a",
+        "checkedAt": "2026-11-16T16:06:35.483Z",
+        "activeAtRead": true,
+        "operationType": "catalog_v3_publish_china",
+        "operationId": "catalog_v3_publish_china_997b443a-bf8f-46d0-ad0d-8bc7ad3ccbf6",
+        "lockedUntil": "2026-11-16T16:33:57.090Z",
+        "startedAt": "2026-11-16T11:38:44.591Z",
+        "heartbeatAt": "2026-11-16T16:03:57.090Z"
+      },
+      "receipt": {
+        "key": "catalog/intake-staging/encar/43570782014/1/complete.json",
+        "etag": "\"ca6c606d7e8c2a671a1ae99fd4d628a7\"",
+        "sha256": "0fdb319051d5e7fb2648dfe00d3f9f2ad694be409fc64b7016064990371a630f",
+        "pages": 10270,
+        "count": 205385,
+        "completedAt": "2026-11-14T12:55:40.904Z",
+        "format": "legacy_pages_count_completedAt"
+      },
+      "objects": [
+        {
+          "key": "catalog/intake-staging/encar/43570782014/1/complete.json",
+          "list": {
+            "etag": "\"ca6c606d7e8c2a671a1ae99fd4d628a7\"",
+            "size": 71,
+            "lastModified": "2026-11-14T12:55:41.380Z"
+          },
+          "head": {
+            "etag": "\"ca6c606d7e8c2a671a1ae99fd4d628a7\"",
+            "size": 71,
+            "lastModified": "2026-11-14T12:55:41.000Z"
+          },
+          "matches": false
+        },
+        {
+          "key": "catalog/intake-staging/encar/43570782014/1/pages/1.json",
+          "list": {
+            "etag": "\"0b0fc62b211e6f451cbb6ea9edf5f079\"",
+            "size": 383876,
+            "lastModified": "2026-11-14T07:22:56.211Z"
+          },
+          "head": {
+            "etag": "\"0b0fc62b211e6f451cbb6ea9edf5f079\"",
+            "size": 383876,
+            "lastModified": "2026-11-14T07:22:56.000Z"
+          },
+          "matches": false
+        },
+        {
+          "key": "catalog/intake-staging/encar/43570782014/1/pages/10.json",
+          "list": {
+            "etag": "\"31496521435571d5a5b1f18457dc7828\"",
+            "size": 417483,
+            "lastModified": "2026-11-14T07:23:10.829Z"
+          },
+          "head": {
+            "etag": "\"31496521435571d5a5b1f18457dc7828\"",
+            "size": 417483,
+            "lastModified": "2026-11-14T07:23:10.000Z"
+          },
+          "matches": false
+        },
+        {
+          "key": "catalog/intake-staging/encar/43570782014/1/pages/100.json",
+          "list": {
+            "etag": "\"ac828ee329a3627591e0b4b11edf0bdd\"",
+            "size": 407881,
+            "lastModified": "2026-11-14T07:25:44.607Z"
+          },
+          "head": {
+            "etag": "\"ac828ee329a3627591e0b4b11edf0bdd\"",
+            "size": 407881,
+            "lastModified": "2026-11-14T07:25:44.000Z"
+          },
+          "matches": false
+        }
+      ],
+      "transport": {
+        "requests": 12,
+        "get": 6,
+        "list": 2,
+        "head": 4,
+        "put": 0,
+        "post": 0,
+        "responseBytes": 2702
+      },
+      "executionEnabled": false,
+      "storageWrites": 0,
+      "deleteRequests": 0,
+      "sourceSha": "d76ae8fdee208d67381a04ea505c8f57e494ff13",
+      "runId": "43903729901",
+      "attempt": "1"
+    }
+  ],
+  "finalArtifact": {
+    "id": 14242786173,
+    "runId": 43903729901,
+    "sha256": "851403949dac8dc212f337956945b67012a21a04f1d98a0b333621f6bf137870"
+  }
+}
+
