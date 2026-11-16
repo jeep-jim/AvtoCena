@@ -1,0 +1,113 @@
+name: Japan model filter saved failure audit
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: [.github/workflows/japan-model-failure-saved-audit.yml]
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    environment: regcloud-staging
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          ref: 83ff17075e9188dcf227c8752dc064248d5f42e0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - run: npm ci --ignore-scripts --no-audit
+      - name: Read only fixed private Japan failure records
+        env:
+          JSON_STORAGE_DRIVER: object
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_REGION: us-east-1
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+          AVTOCENA_INTERACTIVE_READ_BUDGET_MS: 5000
+        run: |
+          set -euo pipefail
+          timeout 120s node --import tsx --input-type=module <<'READ_SAVED'
+          import {createHash} from 'node:crypto';
+          const records=[];
+          for(const table of ['stats','main']) {
+            records.push({table,slot:'last',key:`integrations/ajes/catalog-failure-${table}.json`});
+            for(const slot of ['list-1','count','models','makes'])records.push({table,slot,key:`integrations/ajes/catalog-failure-pages/${table}-${slot}.json`});
+          }
+          const aggregates=['count','models','makes'].map(kind=>({kind,key:`catalog/partner-cache/ajes/evidence/${kind}-last.json`}));
+          const allowedPaths=new Set([...records,...aggregates].map(row=>'/'+process.env.YC_OBJECT_STORAGE_BUCKET+'/'+process.env.YC_OBJECT_STORAGE_PREFIX+row.key));
+          const originalFetch=globalThis.fetch;
+          let readRequests=0;
+          globalThis.fetch=(input,init={})=>{
+            const url=new URL(input instanceof Request?input.url:String(input));
+            const method=String(init.method??(input instanceof Request?input.method:'GET')).toUpperCase();
+            if(url.origin!=='https://s3.regru.cloud'||!allowedPaths.has(url.pathname)||url.search||!['GET','HEAD'].includes(method)||++readRequests>30)throw Error('audit_network_guard');
+            return originalFetch(input,{...init,redirect:'error'});
+          };
+          const {getJsonStorage}=await import('./apps/web/lib/data.ts');
+          const storage=getJsonStorage();
+          for(const name of ['writeJson','deleteJson','putBinary','deleteBinary','deleteObjects','deletePrefix','listObjects','listBucketObjects','listObjectVersions','listMultipartUploads'])storage[name]=()=>{throw Error('audit_read_only_guard');};
+          const stamp=value=>typeof value==='string'&&Number.isFinite(Date.parse(value))?new Date(value).toISOString():null;
+          const number=value=>typeof value==='number'&&Number.isSafeInteger(value)&&value>=0?value:null;
+          const kinds=new Set(['list','detail','count','models','makes','colors']);
+          const allowedOutcome=/^(visitor_restricted|request_failed|request_timeout|connect_timeout|invalid_response|empty_response|response_too_large|identity_mismatch|query_too_large|quota_exhausted|quota_busy|local_busy|http_[1-5]\d\d)$/;
+          let readErrors=0;
+          for(const row of records){
+            try{
+              const value=await storage.readJson(row.key,null);
+              if(!value){console.log('JAPAN_SAVED_FAILURE',JSON.stringify({table:row.table,slot:row.slot,present:false}));continue;}
+              const sql=typeof value.sql==='string'&&Buffer.byteLength(value.sql)<=64000?value.sql:'';
+              console.log('JAPAN_SAVED_FAILURE',JSON.stringify({table:row.table,slot:row.slot,present:true,kind:kinds.has(value.kind)?value.kind:null,page:number(value.page),pageSize:number(value.pageSize),startedAt:stamp(value.startedAt),finishedAt:stamp(value.finishedAt),httpStatus:number(value.httpStatus),providerCode:typeof value.providerCode==='string'&&/^(bot|ban)\d{0,12}$/.test(value.providerCode)?value.providerCode:null,outcome:allowedOutcome.test(value.outcome)?value.outcome:'other',queryBytes:Buffer.byteLength(sql),querySha256:sql?createHash('sha256').update(sql).digest('hex'):null,allionToken:/\ballion\b/i.test(sql),toyotaToken:/\btoyota\b/i.test(sql),fitToken:/\bfit\b/i.test(sql),usesRegexp:/\bregexp\b/i.test(sql),usesLike:/\blike\b/i.test(sql)}));
+            }catch{readErrors++;console.log('JAPAN_SAVED_READ_ERROR',JSON.stringify({table:row.table,slot:row.slot}));}
+          }
+          for(const row of aggregates){
+            try{
+              const value=await storage.readJson(row.key,null);
+              console.log('JAPAN_SAVED_AGGREGATE_SHAPE',JSON.stringify({kind:row.kind,present:!!value,observedAt:stamp(value?.observedAt),array:typeof value?.array==='boolean'?value.array:null,length:number(value?.length),knownFields:Array.isArray(value?.fields)?value.fields.filter(key=>typeof key==='string'&&/^(marka_name|model_name|color|total|count(?:\(\*\))?|tag[012])$/i.test(key)).slice(0,12):[]}));
+            }catch{readErrors++;console.log('JAPAN_SAVED_AGGREGATE_READ_ERROR',JSON.stringify({kind:row.kind}));}
+          }
+          console.log('JAPAN_SAVED_AUDIT_COMPLETE',JSON.stringify({failureRecords:records.length,aggregateRecords:aggregates.length,readRequests,readErrors,supplierRequests:0,writes:0}));
+          if(readErrors)process.exitCode=1;
+          READ_SAVED
+      - name: Read sanitized active-container failure counts and stack locations
+        if: always()
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+        run: |
+          set -euo pipefail
+          umask 077
+          key_file=$(mktemp)
+          trap 'rm -f "$key_file"' EXIT
+          printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
+          unset SSH_PRIVATE_KEY
+          chmod 600 "$key_file"
+          timeout 100s ssh -i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts" root@151.248.113.177 'python3 -' <<'READ_LOGS'
+          import subprocess,re,json,collections,datetime
+          identity=subprocess.run(['docker','inspect','--format','{{ index .Config.Labels "org.opencontainers.image.revision" }} {{.State.Status}}','avtocena-production'],capture_output=True,text=True,timeout=15)
+          match=re.fullmatch(r'([a-f0-9]{40}) (running|exited|created|restarting|paused)\s*',identity.stdout)
+          print('ACTIVE_RELEASE',json.dumps({'release':match.group(1) if match else None,'state':match.group(2) if match else None,'inspectExit':identity.returncode,'observedAt':datetime.datetime.now(datetime.timezone.utc).isoformat()}))
+          result=subprocess.run(['docker','logs','--timestamps','--since','20m','--tail','8000','avtocena-production'],capture_output=True,text=True,timeout=40)
+          lines=(result.stdout+'\n'+result.stderr).splitlines()
+          allowed={'visitor_restricted','client_ip_missing','not_configured','invalid_response','request_failed','request_timeout','connect_timeout','response_too_large','empty_response','identity_mismatch','operation_failed','quota_exhausted','quota_busy','local_busy','query_too_large'}
+          reasons=collections.Counter();by_minute=collections.Counter();frames=collections.Counter();events=[]
+          for index,line in enumerate(lines):
+            failure=re.search(r'AJES_PUBLIC_FAILURE\s+([a-z_]+)',line)
+            if failure:
+              reason=failure.group(1) if failure.group(1) in allowed else 'other';reasons[reason]+=1
+              stamp=re.match(r'(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2})(?:\.\d+)?Z',line)
+              at=stamp.group(1)+'Z' if stamp else None
+              if at:by_minute[(at[:16],reason)]+=1
+              if len(events)<30:events.append({'at':at,'reason':reason})
+            if re.search(r'AJES_PUBLIC_FAILURE|catalog_page_unavailable|read_deadline|TypeError|ReferenceError',line):
+              for following in lines[index+1:index+7]:
+                frame=re.search(r'\bat ([A-Za-z0-9_.$<>]+) \((/app/[A-Za-z0-9_./%()\[\]-]+\.js:\d+:\d+)\)',following)
+                if frame:frames[(frame.group(1),frame.group(2))]+=1
+          markers={label:sum(bool(re.search(pattern,line)) for line in lines) for label,pattern in [('read_deadline',r'read_deadline'),('queue_timeout',r'queue_timeout'),('catalog_page_unavailable',r'catalog_page_unavailable'),('type_error',r'\bTypeError\b'),('reference_error',r'\bReferenceError\b'),('oom',r'heap out of memory|allocation failed')]}
+          print('JAPAN_CONTAINER_LOG_SUMMARY',json.dumps({'exit':result.returncode,'windowMinutes':20,'lineLimit':8000,'linesRead':len(lines),'failureReasons':dict(reasons),'markers':markers,'events':events,'perMinute':[{'minute':minute,'reason':reason,'count':count} for (minute,reason),count in by_minute.most_common(30)],'adjacentStackLocations':[{'function':function,'location':location,'count':count} for (function,location),count in frames.most_common(24)]}))
+          if result.returncode:raise SystemExit(1)
+          READ_LOGS
