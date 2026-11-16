@@ -46,7 +46,7 @@ test('a missing accepted capture fails closed',()=>fixture(directory=>{
 
 // This is the reviewed ordinary-activation inventory, not a blanket ban on
 // diagnostic container starts or the owner's exact retained-image rescues.
-const active=new Set(['regcloud-deploy.yml','owner-navigation-release.yml','release-paid-korea-history.yml']);
+const active=new Set(['regcloud-deploy.yml','owner-navigation-release.yml','release-paid-korea-history.yml','release-prepared-feed-delivery.yml']);
 const retired=new Set([
  'release-minimal-paid-encar.yml','release-paid-encar.yml','release-desktop-autobot.yml',
  'encyclopedia-activate-prepared.yml','encyclopedia-release.yml','owner-resume-prepared-release.yml',

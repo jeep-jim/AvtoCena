@@ -53,13 +53,14 @@ jobs:
     - name: Install exact successor source guard
       run: |
         set -euo pipefail
-        cat > "$RUNNER_TEMP/verify-history-candidate.py" <<'FASTPATH_HELPER_C6172764FEA7A7DC'
+        cat > "$RUNNER_TEMP/verify-history-candidate.py" <<'FASTPATH_HELPER_E585AECECF487EFB'
         import hashlib
         import json
         import os
         import re
         import subprocess
         import time
+        import urllib.error
         import urllib.request
 
         RETAINED = '83ff17075e9188dcf227c8752dc064248d5f42e0'
@@ -79,6 +80,39 @@ jobs:
                     'Verify dealer banner and Yandex map', 'Verify per-car services and edit links',
                     'Verify dealer workspace', 'Verify Dubicars paid feed',
                     'Verify offer sharing', 'Verify dealer selection sharing'}
+
+
+        def read_retained_health(opener=urllib.request.urlopen, pause=time.sleep, clock=time.monotonic, report=print):
+            """Retry only bounded transport failures before preparation, never bad identity/data.
+
+            This is the source preflight, not the unchanged timed server/browser gate.
+            Each request retains its original 45-second timeout and 32-KiB body bound.
+            """
+            for attempt in range(1, 4):
+                start = clock()
+                request = urllib.request.Request('https://avtocena.com/api/health', headers={'Cache-Control': 'no-cache'})
+                try:
+                    with opener(request, timeout=45) as response:
+                        assert response.status == 200, 'retained_health_http'
+                        raw = response.read(32769)
+                        assert len(raw) <= 32768, 'retained_health_size'
+                        value = json.loads(raw)
+                    report(json.dumps({'stage': 'retained_health_preflight', 'attempt': attempt,
+                                       'http': 200, 'seconds': round(clock() - start, 3)}), flush=True)
+                    return value
+                except (TimeoutError, ConnectionResetError, ConnectionAbortedError, urllib.error.URLError) as error:
+                    if isinstance(error, urllib.error.HTTPError):
+                        retryable = error.code in (502, 503, 504)
+                    elif isinstance(error, urllib.error.URLError):
+                        retryable = isinstance(error.reason, (TimeoutError, ConnectionResetError, ConnectionAbortedError))
+                    else:
+                        retryable = True
+                    report(json.dumps({'stage': 'retained_health_preflight', 'attempt': attempt,
+                                       'error': type(error).__name__, 'seconds': round(clock() - start, 3),
+                                       'willRetry': retryable and attempt < 3}), flush=True)
+                    if not retryable or attempt == 3:
+                        raise
+                    pause(attempt * 2)
 
 
         def validate_spec(spec):
@@ -170,20 +204,13 @@ jobs:
                 print(json.dumps(compatibility)); return
             def api(path):
                 return json.loads(subprocess.check_output(['gh', 'api', 'repos/jeep-jim/AvtoCena/' + path], timeout=60))
-            def health():
-                request = urllib.request.Request('https://avtocena.com/api/health', headers={'Cache-Control': 'no-cache'})
-                with urllib.request.urlopen(request, timeout=45) as response:
-                    assert response.status == 200, 'retained_health_http'
-                    raw = response.read(32769)
-                    assert len(raw) <= 32768, 'retained_health_size'
-                    return json.loads(raw)
-            print(json.dumps({**verify_candidate(spec, api, health), 'encyclopediaCompatibility': compatibility}))
+            print(json.dumps({**verify_candidate(spec, api, read_retained_health), 'encyclopediaCompatibility': compatibility}))
 
 
         if __name__ == '__main__':
             main()
-        FASTPATH_HELPER_C6172764FEA7A7DC
-        printf '%s  %s\n' c6172764fea7a7dc1557978b479ac8714a51a9b637a3f047c8905d261247bcf2 "$RUNNER_TEMP/verify-history-candidate.py" | sha256sum --check
+        FASTPATH_HELPER_E585AECECF487EFB
+        printf '%s  %s\n' e585aececf487efb19ef74d374241a8742d0af25818b57b8da4c2a036c173fcf "$RUNNER_TEMP/verify-history-candidate.py" | sha256sum --check
     - name: Verify reviewed successor, retained 83 and every source check
       env:
         GH_TOKEN: ${{ github.token }}
