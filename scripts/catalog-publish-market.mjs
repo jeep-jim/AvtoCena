@@ -5,6 +5,7 @@ import {isCompletedChe168Delta,isCompletedDubicarsDelta} from './lib/auto-api-ch
 import {assertPaidKoreaPublicationSource} from './lib/paid-korea-publication-guard.mjs';
 import {prepareStagedCatalogBudget} from './lib/catalog-staged-budget.mjs';
 import {prepareRawPublication} from './lib/catalog-raw-publication.mjs';
+import {createPaidRepairPublicationGuard} from './lib/paid-encar-repair-io.mjs';
 // Maintenance publication reads large source payloads; avoid a burst of twelve simultaneous S3 downloads.
 process.env.CATALOG_READ_CONCURRENCY ||= "4";
 import { unavailableOfferRecord } from "../apps/web/lib/catalog/offer-availability.ts";
@@ -359,6 +360,15 @@ if (paidEncarReport) {
     throw Error("incomplete_paid_encar_publication_input");
   }
 }
+const technicalRepairReceipt = paidEncarReport?.technicalRepair;
+if (process.env.PAID_REPAIR_APPROVED_SHA256 && !technicalRepairReceipt) throw Error('paid_repair_receipt_missing');
+const technicalRepairGuard = technicalRepairReceipt ? await createPaidRepairPublicationGuard({
+  storage:getJsonStorage(), receipt:technicalRepairReceipt, expectedSha256:process.env.PAID_REPAIR_APPROVED_SHA256,
+}) : null;
+if (technicalRepairGuard) {
+  if (!sellerInventory || allowPublicCollapse || process.env.CATALOG_REBALANCE_EXISTING === '1') throw Error('paid_repair_publication_policy_invalid');
+  technicalRepairGuard.assertInput(generation.offers);
+}
 async function assertCurrentKoreaPublicationSource() {
   await assertPaidKoreaPublicationSource({
     market,
@@ -409,6 +419,7 @@ function rejectFreshOffer(id, reason) {
   if (freshOfferMetaById.has(key)) freshOfferRejectionReasonById.set(key, String(reason || "unknown"));
 }
 let currentMarketRows = await readMarketOffers(market);
+technicalRepairGuard?.assertCurrent(currentMarketRows);
 const preparedTargetSnapshot = snapshotCatalogRows(currentMarketRows);
 const reserveRows = sellerInventory ? await readMarketMaintenanceOffers(market, {excludeIds: new Set(currentMarketRows.map(row => row.id)), withinRetention:true}) : [];
 logPublicationMemory("target_reserve_loaded");
@@ -577,6 +588,7 @@ async function loadPreservedMarkets() {
     // generation, while keeping every still-approved row byte-stable. Structural
     // corruption inside the approved set remains a hard stop.
     const forbidden = rows.filter((offer) => !hasAllowedCatalogSourceProvenance(offer));
+    if (technicalRepairGuard && forbidden.length) throw Error('paid_repair_other_market_would_change');
     const preservedRows = rows.filter((offer) => hasAllowedCatalogSourceProvenance(offer));
     const invalid = preservedRows.filter((offer) => !offer?.id || !offer?.make || !offer?.model
       || String(offer?.market || "") !== otherMarket
@@ -593,6 +605,7 @@ async function loadPreservedMarkets() {
 }
 
 const canonicalTargetPreview = await previewCanonicalPublicCatalogOffers(selectedMarketOffers, retainedTargetPublicRows, currentPublicIds, retainedPowerMixMinimumByMarket);
+const technicalRepairPreflight = technicalRepairGuard?.assertRows(canonicalTargetPreview.offers);
 const nextIds = new Set(canonicalTargetPreview.offers.map(offer => offer.id));
 for (const [field, reason] of [
   ["qualityRejected", "canonical:qualityRejected"],
@@ -655,6 +668,8 @@ const freshOfferAudit = {
 const publicationPolicy = { allowSellerTransition: true, auditedRemovals };
 
 const preflight = { market, published:false, dryRun, previousManifestPreserved:true,
+  ...(technicalRepairPreflight ? {technicalRepair:{receiptSha256:technicalRepairReceipt.sha256, verified:true,
+    after:technicalRepairPreflight, examples:technicalRepairGuard.examples(canonicalTargetPreview.offers)}} : {}),
   sourceShare: canonicalTargetPreview.sourceShare.report,
   powerMix: canonicalTargetPreview.powerMix.report,
   auditedRemovals: currentRetainedRows.filter(offer=>!nextIds.has(offer.id)).map(offer=>({id:offer.id,reason:auditedRemovals.get(offer.id)||"unexplained"})),
@@ -685,6 +700,7 @@ if (!freshOfferAudit.summary.complete) {
 }
 if (dryRun) {
   await loadPreservedMarkets();
+  await technicalRepairGuard?.verifyAuthority();
   process.exit(0);
 }
 if (sellerInventory) assertNoDeliveredPriceRegression(currentRetainedRows, canonicalTargetPreview.offers, publicationPolicy);
@@ -748,6 +764,7 @@ const regressionBlocked = expectedPublishedByMarket[market] <= 0
 let manifest = null;
 let publicationError = "";
 let rawPublication = null, rawPinRelease = null;
+let technicalRepairReadback = null;
 let nextPublicCount = 0;
 let publishedSourceCounts = {};
 
@@ -769,6 +786,7 @@ if (regressionBlocked) {
     // target market and storage after acquiring the lease; no stale snapshot is
     // allowed to reach persistence.
     await acquirePublishLock();
+    await technicalRepairGuard?.verifyAuthority({operationId:publishOperationId});
     await assertCurrentKoreaPublicationSource();
     if (process.env.JSON_STORAGE_DRIVER === "object") await import("./catalog-storage-preflight.mjs");
     expectedBaseGenerationId = await catalogGenerationId();
@@ -787,10 +805,15 @@ if (regressionBlocked) {
           const verifyBudget = await prepareStagedCatalogBudget({storage:getJsonStorage(), manifest:candidate,
             expectedBaseGenerationId, operationId:publishOperationId});
           await rawPublication.verify();
-          return async () => { await rawPublication.verify(); await verifyBudget(); };
+          await technicalRepairGuard?.verifyAuthority({operationId:publishOperationId});
+          return async () => {
+            await rawPublication.verify(); await verifyBudget();
+            await technicalRepairGuard?.verifyAuthority({operationId:publishOperationId});
+          };
         },
       } : {}),
       async beforeManifestCommit() {
+        await technicalRepairGuard?.verifyAuthority({operationId:publishOperationId});
         await assertCurrentKoreaPublicationSource();
         if (paidEncarReport) {
           const { assertCollectionEnabled } = await import("../apps/web/lib/catalog/collection-controls.ts");
@@ -813,6 +836,7 @@ if (regressionBlocked) {
       ...(retainedTargetPublicRows.length ? { appendPublicOffersByMarket: { [market]: retainedTargetPublicRows } } : {}),
       preservePublicOffersByMarket: preservedPublicRowsByMarket,
       beforePersistValidate(publicOffers) {
+        technicalRepairGuard?.assertRows(publicOffers.filter(offer => offer.market === market));
         if (sellerInventory) assertNoDeliveredPriceRegression(canonicalTargetPreview.offers, publicOffers.filter(offer => offer.market === market), {allowSellerTransition:true});
         const failures = [];
         for (const otherMarket of PUBLIC_CATALOG_MARKETS) {
@@ -826,6 +850,7 @@ if (regressionBlocked) {
         if (failures.length) throw new Error(`catalog_prewrite_preservation_gate_failed:${failures.join("|")}`);
       },
       beforePublishValidate(publishedOffers) {
+        technicalRepairGuard?.assertRows(publishedOffers.filter(offer => offer.market === market));
         if (sellerInventory) assertNoDeliveredPriceRegression(canonicalTargetPreview.offers, publishedOffers.filter(offer => offer.market === market), {allowSellerTransition:true});
         const failures = [];
         for (const currentMarket of PUBLIC_CATALOG_MARKETS) {
@@ -851,6 +876,7 @@ if (regressionBlocked) {
         if (failures.length) throw new Error(`catalog_public_regression_guard:${failures.join("|")}`);
       },
     });
+    if (technicalRepairGuard) technicalRepairReadback = await technicalRepairGuard.verifyPublished(manifest.generationId, publishOperationId);
     if (rawPublication) rawPinRelease = await rawPublication.releasePins();
   } catch (error) {
     publicationError = String(error?.message || error);
@@ -879,6 +905,7 @@ const report = {
   publishedAt: new Date().toISOString(),
   published: Boolean(manifest),
   publicationError,
+  ...(technicalRepairReceipt ? {technicalRepair:technicalRepairReadback || {receiptSha256:technicalRepairReceipt.sha256, verified:false}} : {}),
   rawPinRelease,
   generationId: manifest?.generationId || null,
   previousManifestPreserved: !manifest,
@@ -977,7 +1004,7 @@ console.log(JSON.stringify(report, (key, value) => {
   if (key === "freshOfferAudit" && value?.summary) return value.summary;
   return value;
 }, 2));
-if (!report.published) process.exitCode = 1;
+if (!report.published || technicalRepairReceipt && !technicalRepairReadback?.verified) process.exitCode = 1;
 } finally {
   await releasePublishLock();
 }

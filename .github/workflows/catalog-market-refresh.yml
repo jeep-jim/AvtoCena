@@ -194,6 +194,12 @@ jobs:
       - name: Sync all Dubicars through the paid API
         if: steps.sources.outputs.dubicars_feed == 'true'
         run: node --import tsx scripts/catalog-auto-api-dubicars-intake.mjs
+      - name: Preserve non-Japan collection in our private object storage
+        if: always() && matrix.market != 'japan'
+        run: |
+          if [ -f "catalog-intake-${{ matrix.market }}/report.json" ]; then
+            node --import tsx scripts/catalog-archive-intake.mjs archive '${{ matrix.market }}' 'catalog-intake-${{ matrix.market }}'
+          fi
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -372,6 +378,9 @@ jobs:
           assert.ok(r.completed && r.market==='korea' && r.provider==='auto_api_encar');
           assert.ok(r.sources.length===1 && r.sources[0].sourceId==='encar_direct' && r.sources[0].uniqueOffers>0);
           JS
+      - name: Restore verified non-Japan input from our own storage
+        if: matrix.market != 'japan'
+        run: node --import tsx scripts/catalog-archive-intake.mjs restore-for-publication '${{ matrix.market }}' 'catalog-intake-input/catalog-intake-${{ matrix.market }}'
       - run: node --import tsx scripts/catalog-intake-to-publication.mjs
       - name: Check bucket reserve without deleting objects
         run: node scripts/run-transient-retry.mjs node --import tsx scripts/catalog-storage-preflight.mjs

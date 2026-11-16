@@ -1,6 +1,8 @@
 import assert from 'node:assert/strict';
-import {RAW_PREFIXES, rawRootKind, rawReferences, rawDigest, assertRawGenerationProvenance, assertRawPin} from './catalog-raw-provenance.mjs';
+import {RAW_PREFIXES, rawRootKind, rawReferences, rawDigest, assertRawGenerationProvenance,
+  rawGenerationProvenanceHasCompleteCoverage, assertRawPin} from './catalog-raw-provenance.mjs';
 import {snapshotBinding} from './che168-snapshot.mjs';
+import {validateIntakeArchive} from './nonjp-intake-archive.mjs';
 
 const SHA = /^[a-f0-9]{64}$/;
 const UUID = /^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/;
@@ -11,7 +13,7 @@ function groupForObject(key) {
   assert.ok(typeof key === 'string' && !/[\\\x00-\x20]/.test(key), 'raw_inventory_key');
   for (const [kind, prefix] of Object.entries(RAW_PREFIXES)) {
     if (!key.startsWith(prefix)) continue;
-    const parts = key.slice(prefix.length).split('/'), segments = kind === 'encar-snapshot' ? 2 : 1;
+    const parts = key.slice(prefix.length).split('/'), segments = kind === 'nonjp-intake' ? 3 : kind === 'encar-snapshot' ? 2 : 1;
     const root = prefix + parts.slice(0, segments).join('/'), leaf = parts.slice(segments).join('/');
     assert.equal(rawRootKind(root), kind, 'raw_inventory_root');
     const allowed = {
@@ -20,6 +22,7 @@ function groupForObject(key) {
       'che168-journal': /^(?:head\.json|[a-f0-9-]{36}\.json)$/,
       'encar-snapshot': /^(?:start\.json|complete\.json|(?:pages|page-receipts)\/[1-9]\d*\.json)$/,
       'encar-reports': /^(?:complete\.json|(?:history|inspection)\/[a-f0-9]{2,3}\.json)$/,
+      'nonjp-intake': /^(?:complete\.json|files\/(?:report\.json|[a-z0-9_-]+-[0-9]{6}\.jsonl)\/[0-9]+-[a-f0-9]{64}\.json)$/i,
     }[kind];
     assert.ok(allowed.test(leaf), 'raw_inventory_unknown_member');
     return {kind, root, leaf};
@@ -77,6 +80,9 @@ function completeGroup(group, terminalRoots) {
       if (prefixes.reduce((sum, prefix) => sum + table[prefix].count, 0) !== value.rowCount) return false;
       expected.push(...prefixes.map(prefix => kind + '/' + prefix + '.json')); prior = prefixes;
     }
+  } else if (group.kind === 'nonjp-intake') {
+    try { validateIntakeArchive(value, group.root, rawDigest(value)); } catch { return false; }
+    expected = ['complete.json', ...value.files.flatMap(file => file.parts.map(part => part.key.slice(group.root.length + 1)))];
   }
   return expected?.length === keys.size && expected.every(key => keys.has(key));
 }
@@ -95,7 +101,8 @@ export function planRawFeedRetention({inventory, pinInventory, cursorInventory, 
     && integer(maxBytes) && maxBytes > 0 && maxBytes <= 100 * 1024 ** 3, 'raw_retention_budget');
   assert.ok(Array.isArray(inventory.objects) && inventory.objects.length <= 500000
     && Array.isArray(pinInventory.pins) && pinInventory.pins.length <= 10000, 'raw_inventory_limit');
-  if (producerProtocolComplete !== true || currentProvenance?.complete !== true || previousProvenance?.complete !== true) {
+  if (producerProtocolComplete !== true || !rawGenerationProvenanceHasCompleteCoverage(currentProvenance, currentManifest)
+    || !rawGenerationProvenanceHasCompleteCoverage(previousProvenance, previousManifest)) {
     return {selected: [], summary: {version: 1, mode: 'plan', status: 'protected_unknown', at: new Date(now).toISOString(),
       reason: producerProtocolComplete !== true ? 'raw_producer_protocol_incomplete' : 'raw_generation_provenance_missing_or_unknown',
       currentGeneration: currentManifest?.generationId || null, previousGeneration: previousManifest?.generationId || null,

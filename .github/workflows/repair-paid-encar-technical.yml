@@ -1,0 +1,120 @@
+name: Repair saved paid Korea technical fields
+on:
+  workflow_dispatch:
+    inputs:
+      action:
+        type: choice
+        options: [plan, apply]
+        default: plan
+        required: true
+      controller_sha:
+        description: Reviewed exact controller revision
+        type: string
+        required: true
+      expected_release:
+        description: Exact currently accepted health release SHA
+        type: string
+        required: true
+      expected_calculator:
+        description: Exact currently accepted health calculation version
+        type: string
+        required: true
+      approved_plan_sha256:
+        description: Successful same-day plan receipt (required for apply)
+        type: string
+        required: false
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: ${{ inputs.action == 'apply' && 'production-release' || 'paid-korea-technical-plan' }}
+  cancel-in-progress: false
+jobs:
+  repair:
+    # Review scaffold only. Root must pin SOURCE_SHA after CI and explicitly
+    # enable this manual job in one reviewed controller revision. Plan and its
+    # later receipt-bound manual apply must use that SAME revision. No schedule.
+    if: ${{ false }}
+    environment: regcloud-staging
+    runs-on: ubuntu-24.04
+    timeout-minutes: 330
+    env:
+      PAID_REPAIR_SOURCE_SHA: UNASSIGNED
+      PAID_REPAIR_CONTROLLER_SHA: ${{ inputs.controller_sha }}
+      PAID_REPAIR_EXPECTED_RELEASE: ${{ inputs.expected_release }}
+      PAID_REPAIR_EXPECTED_CALCULATOR: ${{ inputs.expected_calculator }}
+      PAID_REPAIR_APPROVED_SHA256: ${{ inputs.approved_plan_sha256 }}
+      JSON_STORAGE_DRIVER: object
+      YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+      YC_OBJECT_STORAGE_REGION: us-east-1
+      YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+      YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+      YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+      YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+      NODE_OPTIONS: --max-old-space-size=12288
+    steps:
+      - name: Require reviewed controller and source identities
+        env:
+          ACTION: ${{ inputs.action }}
+        run: |
+          node --input-type=module <<'GUARD'
+          import assert from 'node:assert/strict';
+          assert.match(process.env.PAID_REPAIR_SOURCE_SHA,/^[a-f0-9]{40}$/);
+          assert.equal(process.env.PAID_REPAIR_CONTROLLER_SHA,process.env.GITHUB_SHA);
+          assert.match(process.env.PAID_REPAIR_EXPECTED_RELEASE,/^[a-f0-9]{40}$/);
+          assert.match(process.env.PAID_REPAIR_EXPECTED_CALCULATOR,/^[a-f0-9]{64}$/);
+          if(process.env.ACTION==='apply')assert.match(process.env.PAID_REPAIR_APPROVED_SHA256,/^[a-f0-9]{64}$/);
+          GUARD
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ env.PAID_REPAIR_SOURCE_SHA }}
+          path: repair-source
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: repair-source/package-lock.json
+      - run: npm ci
+        working-directory: repair-source
+      - name: Read exact historical producer identity
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const run = (await github.rest.actions.getWorkflowRunAttempt({
+              ...context.repo, run_id:43570782014, attempt_number:1})).data;
+            if (String(run.id)!=='43570782014' || run.head_sha!=='6a720ec3aa4823ef2808848018bc5b877fb520ad'
+                || Number(run.run_attempt)!==1 || run.status!=='completed') throw new Error('saved producer identity changed');
+            fs.writeFileSync(process.env.RUNNER_TEMP+'/paid-repair-producer.json',JSON.stringify({
+              id:run.id,run_attempt:run.run_attempt,head_sha:run.head_sha,status:run.status,conclusion:run.conclusion}));
+      - uses: actions/checkout@v4
+        if: inputs.action == 'apply'
+        with:
+          ref: ${{ inputs.expected_release }}
+          path: serving-runtime
+          persist-credentials: false
+      - name: Install exact serving runtime dependencies
+        if: inputs.action == 'apply'
+        working-directory: serving-runtime
+        run: npm ci
+      - name: Plan or apply through ordinary publication and staged price readiness
+        working-directory: repair-source
+        env:
+          ACTION: ${{ inputs.action }}
+          CATALOG_BUDGET_RUNTIME_ROOT: ${{ github.workspace }}/serving-runtime
+          CATALOG_BUDGET_RUNTIME_RELEASE: ${{ inputs.expected_release }}
+        run: |
+          node --import tsx scripts/catalog-repair-paid-encar-technical.mjs "$ACTION" \
+            "$RUNNER_TEMP/paid-encar-technical-repair" "$RUNNER_TEMP/paid-repair-producer.json"
+      - name: Keep bounded review evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: paid-encar-technical-repair-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            ${{ runner.temp }}/paid-encar-technical-repair/summary.json
+            ${{ runner.temp }}/paid-encar-technical-repair/publication.json
+            repair-source/catalog-staged-budget-report.json
+          if-no-files-found: warn
+          retention-days: 7

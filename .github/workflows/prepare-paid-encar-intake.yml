@@ -36,6 +36,7 @@ jobs:
           ENCAR_SNAPSHOT_ATTEMPT: ${{ inputs.attempt || github.event.workflow_run.run_attempt }}
         run: |
           node --import tsx scripts/catalog-restore-encar-snapshot.mjs
+          node --import tsx scripts/catalog-archive-intake.mjs archive korea catalog-intake-korea
           node --import tsx --input-type=module <<'JS'
           import {readCollectionControls,saveCollectionSwitch} from './apps/web/lib/catalog/collection-controls.ts';
           const controls=await readCollectionControls();
