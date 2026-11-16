@@ -4,6 +4,7 @@ import {PAID_ENCAR_REPAIR_SNAPSHOT, PAID_ENCAR_REPAIR_PROTECTED_KEYS, paidRepair
   paidRepairObjectRevision, paidRepairRowsProof, buildPaidEncarTechnicalRepair,
   assertPaidRepairReceipt, assertPaidRepairPublicationRows, paidRepairExampleFields} from './paid-encar-technical-repair.mjs';
 import {readLiveBudgetIdentity} from './catalog-staged-budget.mjs';
+import {readCatalogProjectionBatches} from '../../apps/web/lib/catalog-projection-parts.ts';
 
 const snapshotRoot = `catalog/intake-staging/encar/${PAID_ENCAR_REPAIR_SNAPSHOT.runId}/${PAID_ENCAR_REPAIR_SNAPSHOT.attempt}`;
 const same = (a, b) => paidRepairDigest(a) === paidRepairDigest(b);
@@ -27,6 +28,55 @@ export async function readPaidRepairCurrent(storage, manifest) {
     assert.ok(rows.length <= market.count, 'paid_repair_current_coverage_invalid');
   }
   assert.equal(rows.length, market.count, 'paid_repair_current_coverage_incomplete');
+  return rows;
+}
+
+function preservedIds(rows, market, count) {
+  assert.ok(Array.isArray(rows) && rows.length === count, 'paid_repair_preserved_coverage_incomplete');
+  const ids = new Set();
+  for (const row of rows) {
+    assert.ok(typeof row?.id === 'string' && row.id && row.id === row.id.trim() && row.market === market,
+      'paid_repair_preserved_identity_invalid');
+    assert.ok(!ids.has(row.id), 'paid_repair_preserved_duplicate_id'); ids.add(row.id);
+  }
+  return ids;
+}
+
+/** Read the receipt-bound public partition, never a cached manifest or a budget
+ * selector. Full projection identity catches equal-count replacement subsets. */
+export async function readPaidRepairPreservedMarket(storage, manifest, market) {
+  assert.ok(['china','japan','uae','europe','georgia'].includes(market), 'paid_repair_preserved_market_invalid');
+  assert.ok(manifest?.version === 2 && /^gen_\d+_[a-z0-9-]+$/.test(manifest.generationId), 'paid_repair_preserved_manifest_invalid');
+  const entry = manifest.markets?.[market];
+  // Ordinary generation manifests omit markets with no published offers.
+  if (entry === undefined) return [];
+  assert.ok(Number.isSafeInteger(entry?.count) && entry.count >= 0 && entry.count <= 500000
+    && Array.isArray(entry.chunks) && entry.chunks.length <= 10000
+    && (entry.count === 0 ? entry.chunks.length === 0 : entry.chunks.length > 0), 'paid_repair_preserved_manifest_invalid');
+  const rows = [], paths = new Set();
+  for (const chunk of entry.chunks) {
+    const key = paidRepairChunkPath(manifest, market, chunk);
+    assert.ok(!paths.has(key), 'paid_repair_preserved_duplicate_chunk'); paths.add(key);
+    const part = await storage.readJson(key, null);
+    assert.ok(Array.isArray(part) && part.length > 0 && part.length <= 5000, 'paid_repair_preserved_chunk_missing');
+    rows.push(...part);
+    assert.ok(rows.length <= entry.count, 'paid_repair_preserved_coverage_invalid');
+  }
+  const ids = preservedIds(rows, market, entry.count);
+  if (entry.count) {
+    let projectionCount = 0;
+    // The maintenance iterator holds one verified projection part, not another
+    // complete market beside the public offers already needed by the publisher.
+    for await (const part of readCatalogProjectionBatches(storage,
+      `catalog/generations/${manifest.generationId}/indexes/projection/${market}.json`)) {
+      assert.equal(part.generationId, manifest.generationId, 'paid_repair_preserved_projection_generation');
+      for (const row of part.items) {
+        assert.ok(row?.market === market && ids.delete(row.id), 'paid_repair_preserved_projection_ids_changed');
+        projectionCount++;
+      }
+    }
+    assert.ok(projectionCount === entry.count && ids.size === 0, 'paid_repair_preserved_coverage_incomplete');
+  }
   return rows;
 }
 export function assertPaidRepairProducer(value) {
@@ -164,12 +214,17 @@ export async function createPaidRepairPublicationGuard({storage, receipt, expect
     }
     return actual.value;
   }
-  await verifyAuthority();
+  const baselineManifest = structuredClone(await verifyAuthority());
   const examples = rows => (core.examples || []).map(example => ({...example,
     after:paidRepairExampleFields(rows.find(row => row.id === example.id))}));
   return {
     verifyAuthority,
     examples,
+    async readPreservedMarket(market) {
+      const rows = await readPaidRepairPreservedMarket(storage, baselineManifest, market);
+      await verifyAuthority();
+      return rows;
+    },
     assertInput(rows) {return assertPaidRepairPublicationRows(receipt, rows, editorial, {input:true});},
     assertCurrent(rows) {assert.equal(paidRepairRowsProof(rows, editorial).rowsSha256, core.before.rowsSha256, 'paid_repair_current_rows_changed');},
     assertRows(rows) {return assertPaidRepairPublicationRows(receipt, rows, editorial);},

@@ -580,7 +580,8 @@ async function loadPreservedMarkets() {
   for (const otherMarket of PUBLIC_CATALOG_MARKETS) {
     if (otherMarket === market) continue;
     let rows = [];
-    try { rows = await readMarketOffers(otherMarket); } catch (error) {
+    try { rows = technicalRepairGuard ? await technicalRepairGuard.readPreservedMarket(otherMarket)
+      : await readMarketOffers(otherMarket); } catch (error) {
       throw new Error(`catalog_preserved_public_read_failed:${otherMarket}:${String(error?.message || error)}`);
     }
     // Exact preservation applies only to owner-approved provenance. Rows from a

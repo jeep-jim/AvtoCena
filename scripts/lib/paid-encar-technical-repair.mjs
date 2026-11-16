@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
+import {normalizeVehicleOfferSpecs} from '../../apps/web/lib/catalog/spec-normalization.ts';
 
 export const PAID_ENCAR_REPAIR_SNAPSHOT = Object.freeze({runId: '43570782014', attempt: '1',
   producerSha: '6a720ec3aa4823ef2808848018bc5b877fb520ad'});
@@ -23,6 +24,18 @@ const protectedTechnicalFields = [...coreFields, 'drive'];
 export function paidRepairExampleFields(row) {
   return Object.fromEntries(['fuel','powertrainKind','engineCc','powerHp','drive','power30MinKw']
     .map(field => [field, row?.[field] ?? null]));
+}
+
+const thirtyMinuteFields = ['power30MinKw', 'power30MinKwByMotor'];
+
+function assertThirtyMinuteReplay(current, candidate) {
+  // Only explicitly stored values may survive replay. Normalizing just those
+  // fields permits the existing scalar -> [scalar] and per-motor sum shape,
+  // without legitimizing any value inferred from current trim/raw text.
+  const expected = normalizeVehicleOfferSpecs(pick(current, thirtyMinuteFields));
+  const replay = normalizeVehicleOfferSpecs(candidate);
+  assert.ok(same(pick(replay, thirtyMinuteFields), pick(expected, thirtyMinuteFields)),
+    'paid_repair_undocumented_30_min_power');
 }
 
 export function paidRepairObjectRevision(meta) {
@@ -188,6 +201,7 @@ export function buildPaidEncarTechnicalRepair({currentRows, sourceById, sourcePr
   const before = paidRepairRowsProof(currentRows, editorial), offers = [], records = [], examples = [];
   for (const row of [...currentRows].sort((a, b) => a.id.localeCompare(b.id))) {
     const result = mergePaidEncarTechnicalCorrection(row, sourceById.get(row.id), {observedAt: sourceProof.observedAt, editorial});
+    assertThirtyMinuteReplay(paidRepairEffectiveCurrent(row, editorial), result.offer);
     offers.push(result.offer);
     records.push({id: row.id, sourceOfferId: row.sourceOfferId, outcome: result.outcome, changedFields: result.changedFields,
       invariantSha256: paidRepairDigest(paidRepairInvariant(row, editorial)), expectedSourceFields: result.expectedSourceFields,
