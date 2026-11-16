@@ -43,6 +43,7 @@ export async function collectPreparedBudgetReadiness({mode, root, context, repor
   const supplements = typeof catalog.readBudgetSpecificationSource === 'function';
   if (supplements !== (typeof catalog.verifyBudgetSpecificationSource === 'function')
       || supplements && typeof catalog.prepareBudgetSpecificationSourceRows !== 'function') throw Error('staged_budget_supplement_api_incomplete');
+  if (supplements && typeof catalog.verifyBudgetSpecificationCards !== 'function') throw Error('staged_budget_card_readiness_api_required');
   const fingerprints = async () => Object.fromEntries(await Promise.all(markets.map(async market =>
     [market, await pricing.budgetPricingFingerprint(market)])));
   const before = await fingerprints(), utcDay = new Date().toISOString().slice(0, 10);
@@ -87,6 +88,16 @@ export async function collectPreparedBudgetReadiness({mode, root, context, repor
         throw Error('staged_budget_source_supplement_mapping_changed:' + market);
       }
       record.sourceSupplement = descriptor;
+      const cards = await catalog.verifyBudgetSpecificationCards(context.manifest, market, index);
+      const {checksum, ...body} = cards || {};
+      if (cards?.version !== 1 || cards.verified !== true || cards.generationId !== context.manifest.generationId || cards.market !== market
+          || cards.sourceRows !== source.length || cards.sourceIds !== record.sourceIds || !Array.isArray(cards.blocks) || !cards.blocks.length
+          || cards.blocks.reduce((count, block) => count + block.coveredRows, 0) !== source.length || checksum !== stagedBudgetDigest(body)) {
+        throw Error('staged_budget_card_readiness_invalid:' + market);
+      }
+      // Included in the existing report.markets / candidate receipt comparison:
+      // same IDs with changed card content cannot pass the later verify phase.
+      record.cardReadiness = cards;
     }
     for (const [kind, display] of [['budget', false], ['sort', true]]) {
       const prices = await pricing.readPreparedBudgetPrices(index, market, before[market], display);
