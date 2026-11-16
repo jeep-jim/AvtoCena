@@ -1,0 +1,280 @@
+name: Clean exact isolated Korea home clone
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/cleanup-exact-korea-home-clone.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: paid-korea-isolated-home-phases
+  cancel-in-progress: false
+jobs:
+  cleanup:
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'workflow_dispatch' || github.event.head_commit.message == 'Clean exact isolated Korea home clone')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    environment: regcloud-staging
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: e4f2781ed52f12f53430118bea51ef150608ccfe
+          persist-credentials: false
+      - name: Install exact-ID bounded cleanup helper
+        run: |
+          set -euo pipefail
+          umask 077
+          test "$(git rev-parse HEAD)" = e4f2781ed52f12f53430118bea51ef150608ccfe
+          printf '%s\n' 'fd37f98aab3eeb16f131fcd4033adbb56f7e9616208c2f1ab5ef7a446caa4e4c  docs/operations/regcloud-staging-known-hosts' | sha256sum -c -
+          cat > "$RUNNER_TEMP/cleanup-exact-home-clone.py" <<'PY_EXACT_CLEANUP'
+          #!/usr/bin/env python3
+          """One exact-ID cleanup; no diagnostic replay or public/catalog request."""
+          import fcntl
+          import hashlib
+          import json
+          import pathlib
+          import re
+          import signal
+          import subprocess
+          import sys
+          import time
+          
+          TARGET = '5111a35a9dfbc417377cfcf5c98cd68d45fc604be802424f196c74bd5927260c'
+          ORIGINAL = 'c63cde7396b895212ed6fe4abbee686caceea9952705758366cae235786de393'
+          IMAGE = 'sha256:93ed4336bd73431ab98e261c078dd3d62d5e5a802940eefa2e055eb7fad55aac'
+          SOURCE = 'e4f2781ed52f12f53430118bea51ef150608ccfe'
+          RETAINED = '83ff17075e9188dcf227c8752dc064248d5f42e0'
+          CALCULATOR = '4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90'
+          NGINX = pathlib.Path('/etc/nginx/conf.d/avtocena-prepare.conf')
+          NGINX_SHA = 'adc488cdf1087022310aff6251941d2fd9cf5ee79ccd992425ef3fea9ecbd8c8'
+          DEADLINE = None
+          OPERATION = 'initialization'
+          
+          
+          class GuardError(Exception):
+              def __init__(self, code, operation=None, exit_status=None, stderr_class=None):
+                  self.code, self.operation = code, operation or OPERATION
+                  self.exit_status, self.stderr_class = exit_status, stderr_class
+          
+          
+          def require(value, code):
+              if not value:
+                  raise GuardError(code)
+          
+          
+          def emit(event, **fields):
+              try:
+                  print(json.dumps({'schemaVersion': 1, 'event': event, **fields}), flush=True)
+              except (BrokenPipeError, OSError):
+                  pass
+          
+          
+          def error_fields(error):
+              if isinstance(error, GuardError):
+                  return {key: value for key, value in {'code': error.code, 'operation': error.operation, 'exitStatus': error.exit_status, 'stderrClass': error.stderr_class}.items() if value is not None}
+              return {'code': 'unexpected_error', 'operation': OPERATION, 'errorClass': type(error).__name__}
+          
+          
+          def stderr_class(raw):
+              text = raw.lower()
+              for needles, name in [(['no such object', 'no such container'], 'missing_object'),
+                                    (['removal of container', 'removal is already in progress'], 'removal_in_progress'),
+                                    (['cannot connect to the docker daemon'], 'daemon_unavailable'),
+                                    (['permission denied'], 'permission_denied')]:
+                  if any(needle in text for needle in needles):
+                      return name
+              return 'other_command_error'
+          
+          
+          def command(operation, args, timeout=8):
+              global OPERATION
+              OPERATION = operation
+              remaining = timeout if DEADLINE is None else min(timeout, DEADLINE - time.monotonic())
+              require(remaining > 0, 'total_deadline')
+              try:
+                  result = subprocess.run(args, capture_output=True, text=True, timeout=remaining)
+              except subprocess.TimeoutExpired:
+                  raise GuardError('command_deadline', operation) from None
+              if result.returncode:
+                  raise GuardError('command_failed', operation, result.returncode, stderr_class(result.stderr))
+              return result.stdout
+          
+          
+          def inventory():
+              rows = command('container_inventory', ['docker', 'ps', '-aq', '--no-trunc']).splitlines()
+              require(len(rows) <= 1000 and len(rows) == len(set(rows)) and all(re.fullmatch('[a-f0-9]{64}', row) for row in rows), 'container_inventory_invalid')
+              return set(rows)
+          
+          
+          def inspect(identity):
+              rows = json.loads(command('inspect_identity', ['docker', 'inspect', identity]))
+              require(isinstance(rows, list) and len(rows) == 1, 'inspect_not_unique')
+              if re.fullmatch('[a-f0-9]{64}', identity):
+                  require(rows[0]['Id'] == identity, 'inspect_id_changed')
+              return rows[0]
+          
+          
+          def state_snapshot(info):
+              return {key: info.get(key) for key in ['Id', 'Name', 'Image', 'Config', 'HostConfig', 'Mounts', 'RestartCount', 'State']}
+          
+          
+          def loopback_port(info, required=True):
+              bindings = info['HostConfig']['PortBindings']
+              require(set(bindings) == {'3000/tcp'} and len(bindings['3000/tcp']) == 1 and bindings['3000/tcp'][0]['HostIp'] == '127.0.0.1', 'loopback_binding_required')
+              ports = info['NetworkSettings']['Ports'].get('3000/tcp')
+              if not required and not info['State']['Running'] and ports is None:
+                  return None
+              require(isinstance(ports, list) and len(ports) == 1 and ports[0]['HostIp'] == '127.0.0.1', 'actual_loopback_required')
+              port = int(ports[0]['HostPort'])
+              require(1024 <= port <= 65535, 'port_range')
+              return port
+          
+          
+          def production():
+              info = inspect('avtocena-production')
+              require(info['Name'] == '/avtocena-production' and info['State']['Running'], 'production_running_required')
+              require(info['Config'].get('Labels', {}).get('org.opencontainers.image.revision') == RETAINED, 'production_revision_changed')
+              port = loopback_port(info)
+              raw = command('retained_health', ['curl', '--silent', '--show-error', '--max-time', '12', '--connect-timeout', '3', '--max-filesize', '65536', '--write-out', '\n%{http_code}', 'http://127.0.0.1:' + str(port) + '/api/health'], timeout=14)
+              body, status = raw.rsplit('\n', 1)
+              require(status == '200' and len(body.encode()) <= 65536, 'retained_health_http')
+              health = json.loads(body)
+              require(health.get('ok') is True and health.get('releaseSha') == RETAINED and health.get('calculationVersion') == CALCULATOR, 'retained_health_identity')
+              return state_snapshot(info), port, {'status': 200, 'ok': True, 'releaseSha': RETAINED, 'calculationVersion': CALCULATOR}
+          
+          
+          def original():
+              info = inspect(ORIGINAL)
+              require(info['Name'] == '/avtocena-release-' + SOURCE[:12] and info['Image'] == IMAGE and not info['State']['Running'], 'original_stopped_identity_changed')
+              require(info['Config'].get('Labels', {}).get('org.opencontainers.image.revision') == SOURCE, 'original_source_changed')
+              return state_snapshot(info)
+          
+          
+          def validate_target(info, production_port):
+              require(info['Id'] == TARGET and info['Image'] == IMAGE and info['Config']['Image'] == IMAGE, 'target_exact_image_or_id')
+              labels = info['Config'].get('Labels', {})
+              owner = labels.get('avtocena.diagnostic.owner', '')
+              require(re.fullmatch('[a-f0-9]{32}', owner) and info['Name'] == '/avtocena-diag-home-' + owner[:12], 'target_owner_or_name')
+              require(labels.get('avtocena.role') == 'diagnostic' and labels.get('avtocena.diagnostic.source') == SOURCE and labels.get('org.opencontainers.image.revision') == SOURCE, 'target_source_or_role')
+              host = info['HostConfig']
+              require(host['Memory'] == 8 * 1024 ** 3 and host['NanoCpus'] == 2_000_000_000 and host['PidsLimit'] == 512 and not host['Privileged'] and host['RestartPolicy']['Name'] == 'no', 'target_resource_or_restart_guard')
+              mounts = info.get('Mounts', [])
+              require(len(mounts) == 1, 'target_mount_count')
+              mount = mounts[0]
+              require(mount.get('Type') == 'bind' and mount.get('Source') == '/opt/avtocena/metrics' and mount.get('Destination') == '/run/avtocena-metrics' and mount.get('RW') is False, 'target_readonly_metrics_mount')
+              port = loopback_port(info, required=False)
+              require(port is None or port != production_port and ('127.0.0.1:' + str(port)).encode() not in NGINX.read_bytes(), 'target_must_not_be_public_upstream')
+              return {'id': TARGET, 'name': info['Name'][1:], 'owner': owner, 'image': IMAGE, 'source': SOURCE, 'running': info['State']['Running'], 'cpuLimit': 2, 'memoryLimitBytes': host['Memory'], 'pidsLimit': 512, 'loopbackOnly': True}
+          
+          
+          def cleanup_target(production_port):
+              existed = TARGET in inventory()
+              removal_error = None
+              if existed:
+                  verified = validate_target(inspect(TARGET), production_port)
+                  emit('exact_clone_validated', **verified)
+                  try:
+                      command('remove_exact_clone', ['docker', 'rm', '-f', TARGET], timeout=25)
+                  except GuardError as error:
+                      removal_error = error_fields(error)
+                      emit('removal_command_status', **removal_error)
+              # Inventory with successful exit is the absence proof. Never infer absence
+              # from localized/case-varying Docker inspect stderr or a failed daemon call.
+              absent = TARGET not in inventory()
+              # A daemon can report removal in progress. Poll read-only for at most five
+              # seconds; never issue a second removal or broaden the target.
+              for _ in range(10):
+                  if absent:
+                      break
+                  time.sleep(0.5)
+                  absent = TARGET not in inventory()
+              emit('exact_clone_absence', cloneId=TARGET, wasPresent=existed, absent=absent, mutationAttempted=existed, removalCommandIssue=removal_error)
+              require(absent, 'exact_clone_still_present')
+              return {'wasPresent': existed, 'removed': existed, 'alreadyAbsent': not existed, 'absenceVerified': True}
+          
+          
+          def run():
+              global DEADLINE, OPERATION
+              started = time.monotonic()
+              DEADLINE = started + 120
+              def interrupted(_signum, _frame):
+                  raise GuardError('cleanup_deadline_or_signal')
+              for sig in [signal.SIGALRM, signal.SIGTERM, signal.SIGHUP, signal.SIGINT]:
+                  signal.signal(sig, interrupted)
+              signal.setitimer(signal.ITIMER_REAL, 85)
+              locks, failures = [], []
+              before = original_before = None
+              result = None
+              emit('cleanup_scope', cloneId=TARGET, originalId=ORIGINAL, image=IMAGE, source=SOURCE, retained=RETAINED, nginxSha256=NGINX_SHA, deadlineSeconds=120)
+              try:
+                  for name in ['avtocena-runtime-change', 'avtocena-staging-prepare']:
+                      OPERATION = 'acquire_runtime_locks'
+                      lock = open('/run/lock/' + name + '.lock', 'a'); locks.append(lock)
+                      try:
+                          fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+                      except BlockingIOError:
+                          raise GuardError('runtime_or_staging_lock_busy') from None
+                  OPERATION = 'nginx_before'
+                  require(hashlib.sha256(NGINX.read_bytes()).hexdigest() == NGINX_SHA, 'nginx_hash_changed_before')
+                  before, port, health = production()
+                  original_before = original()
+                  emit('retained_before', health=health, originalStopped=True, nginxSha256=NGINX_SHA)
+                  result = cleanup_target(port)
+              except Exception as error:
+                  failures.append(error_fields(error)); emit('cleanup_operation_failed', **failures[-1])
+              finally:
+                  signal.setitimer(signal.ITIMER_REAL, max(0.001, DEADLINE - time.monotonic()))
+                  for sig in [signal.SIGTERM, signal.SIGHUP, signal.SIGINT]:
+                      signal.signal(sig, signal.SIG_IGN)
+                  if before is not None:
+                      try:
+                          after, _port, health = production()
+                          original_after = original() if original_before is not None else None
+                          OPERATION = 'retained_after_proof'
+                          nginx_ok = hashlib.sha256(NGINX.read_bytes()).hexdigest() == NGINX_SHA
+                          original_ok = original_before is not None and original_before == original_after
+                          emit('retained_after', health=health, productionContainerUnchanged=before == after, originalStoppedContainerUnchanged=original_ok, nginxUnchanged=nginx_ok)
+                          require(before == after and nginx_ok and original_ok, 'retained_context_changed')
+                      except Exception as error:
+                          failures.append(error_fields(error)); emit('cleanup_proof_failed', **failures[-1])
+                  for lock in reversed(locks):
+                      lock.close()
+                  emit('cleanup_complete', passed=result is not None and not failures, result=result, failures=failures, elapsedSeconds=round(time.monotonic() - started, 3))
+                  signal.setitimer(signal.ITIMER_REAL, 0)
+              return 0 if result is not None and not failures else 1
+          
+          
+          if __name__ == '__main__':
+              try:
+                  raise SystemExit(run())
+              except Exception as error:
+                  emit('cleanup_failed', **error_fields(error))
+                  raise SystemExit(1) from None
+          PY_EXACT_CLEANUP
+          printf '%s  %s\n' bf6385f157a412ae3b04d2b187dc7d06413358cbf779daeab93bd49017255d42 "$RUNNER_TEMP/cleanup-exact-home-clone.py" | sha256sum -c -
+      - name: Prove absence or remove only the exact owned diagnostic ID
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+        run: |
+          set -euo pipefail
+          umask 077
+          key_file=$(mktemp)
+          trap 'rm -f -- "$key_file"' EXIT
+          printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
+          unset SSH_PRIVATE_KEY
+          ssh_opts=(-i "$key_file" -o BatchMode=yes -o ConnectTimeout=10 -o ServerAliveInterval=10 -o ServerAliveCountMax=3 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts")
+          printf '{"schemaVersion":1,"event":"controller_context","controllerSha":"%s","workflowRunId":"%s","helperSha256":"bf6385f157a412ae3b04d2b187dc7d06413358cbf779daeab93bd49017255d42"}\n' "$GITHUB_SHA" "$GITHUB_RUN_ID" > "$RUNNER_TEMP/exact-home-clone-cleanup.jsonl"
+          set +e
+          timeout 155s ssh -T "${ssh_opts[@]}" root@151.248.113.177 'timeout --signal=TERM --kill-after=15s 130s python3 -B -' < "$RUNNER_TEMP/cleanup-exact-home-clone.py" 2> "$RUNNER_TEMP/exact-home-cleanup-transport-private.err" | tee -a "$RUNNER_TEMP/exact-home-clone-cleanup.jsonl"
+          result=${PIPESTATUS[0]}
+          set -e
+          printf '{"schemaVersion":1,"event":"controller_exit","exitCode":%d}\n' "$result" | tee -a "$RUNNER_TEMP/exact-home-clone-cleanup.jsonl"
+          exit "$result"
+      - name: Preserve exact-ID cleanup and retained-source proof
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: exact-korea-home-clone-cleanup
+          path: ${{ runner.temp }}/exact-home-clone-cleanup.jsonl
+          if-no-files-found: error
+          retention-days: 14
