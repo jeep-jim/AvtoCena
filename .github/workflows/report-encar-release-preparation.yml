@@ -37,7 +37,7 @@ jobs:
           const {calculationVersion}=await import('./scripts/catalog-calculation-version.mjs');
           console.log(JSON.stringify({source:'9cb571fcce503c9a3ca1a1496514899839b75395',calculationVersion:calculationVersion(),readOnly:true}));
           const [manifest,lock]=await Promise.all([storage.readJson('catalog/manifest.json',null),storage.readJson('catalog/import-lock.json',null)]);
-          console.log(JSON.stringify({readOnly:true,generation:manifest?.generationId,publicationActive:Date.parse(lock?.lockedUntil||'')>Date.now(),operationType:lock?.operationType,startedAt:lock?.startedAt,heartbeatAt:lock?.heartbeatAt,lockedUntil:lock?.lockedUntil}));
+          console.log(JSON.stringify({readOnly:true,paidKorea:manifest?.markets?.korea?.provider==='auto_api_encar'&&manifest?.markets?.korea?.count>0,koreaProvider:manifest?.markets?.korea?.provider,koreaCount:manifest?.markets?.korea?.count,generation:manifest?.generationId,publicationActive:Date.parse(lock?.lockedUntil||'')>Date.now(),operationType:lock?.operationType,startedAt:lock?.startedAt,heartbeatAt:lock?.heartbeatAt,lockedUntil:lock?.lockedUntil}));
           for(const scope of ['catalog/generations/'+manifest.generationId+'/indexes/editorial-home-v1/','catalog/runtime-budget-prices-v3/','catalog/runtime-sort-prices-v3/','catalog/generations/'+manifest.generationId+'/indexes/budget-markets-v3/']){
             const rows=await storage.listObjects(scope);
             const recent=rows.slice().sort((a,b)=>String(b.lastModified||'').localeCompare(String(a.lastModified||''))).slice(0,3);
