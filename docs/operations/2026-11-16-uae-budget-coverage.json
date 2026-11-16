@@ -1,0 +1,554 @@
+{
+  "evidence": {
+    "runId": 43857074876,
+    "jobId": 133263979331,
+    "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/43857074876"
+  },
+  "version": 1,
+  "diagnosticOnly": true,
+  "checkedAt": "2026-11-16T11:23:21.480Z",
+  "source": "e8462585e8998eaae5a003831a38d79263ca5649",
+  "calculationVersion": "2a0a3eecd966a1c6a5ffed3760740983803ff172fcf023fc30aefbc102a6e4f2",
+  "installedSource": "83ff17075e9188dcf227c8752dc064248d5f42e0",
+  "generationId": "gen_1794665184205_cfd76b47",
+  "encyclopediaDigest": "bf2c72cb7a260ef093c0a43c2b0dad9c4c9094a4d6dc3811dd0d7f7626b0d72b",
+  "readOnly": true,
+  "storageWrites": 0,
+  "privateIndexRestoredLocally": true,
+  "limits": {
+    "rows": 100000,
+    "samples": 10,
+    "requests": 400,
+    "objectBytes": 536870912,
+    "totalBytes": 1073741824,
+    "milliseconds": 480000
+  },
+  "network": {
+    "requests": 55,
+    "bytes": 186921445,
+    "methods": {
+      "GET": 39,
+      "HEAD": 16
+    }
+  },
+  "storageReads": {
+    "readFailures": 0,
+    "blockedOperations": 0
+  },
+  "market": "uae",
+  "manifestRows": 25666,
+  "selectors": {
+    "base": {
+      "status": "valid",
+      "sourceRows": 25663,
+      "pricedRows": 0,
+      "otherRows": 25663,
+      "schemaReady": true,
+      "ids": {
+        "count": 25663,
+        "idsSha256": "ad78733cb5504b26aa4810f651dbf443556bcfd8bc7a3b46eba414a8c760c364",
+        "samples": [
+          {
+            "id": "0002b8cef9103aa205dd9c37"
+          },
+          {
+            "id": "0009002e410e7658a98a2f9f"
+          },
+          {
+            "id": "000a2bb27121c8dffe5e799e"
+          },
+          {
+            "id": "00148155d7dc2f1aaeb55f92"
+          },
+          {
+            "id": "0015fecd5d7ffd01307c1dfd"
+          },
+          {
+            "id": "00179acdd0cd35abb6c10565"
+          },
+          {
+            "id": "0018ae81605c50d175de2ce5"
+          },
+          {
+            "id": "00193224fb06c3a77e485f9e"
+          },
+          {
+            "id": "001adea99eb7cacd8687b6b3"
+          },
+          {
+            "id": "001ca05472f9b6b02d5314e1"
+          }
+        ]
+      },
+      "duplicates": {
+        "count": 0,
+        "idsSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "samples": []
+      },
+      "invalidIds": 0,
+      "foreignMarkets": 0,
+      "missingGateEligible": {
+        "count": 3,
+        "idsSha256": "0363e6b452a133621004bc20df70fa6123897f11b348c3fe28d7bf9652fb5e7c",
+        "samples": [
+          {
+            "id": "291f2b7703a3b68aa76253cd"
+          },
+          {
+            "id": "8ca9a91f7d9653e1fe307d00"
+          },
+          {
+            "id": "f8b2705e947357c174ba4b55"
+          }
+        ]
+      },
+      "missingOrdinaryPublicEligible": {
+        "count": 3,
+        "idsSha256": "0363e6b452a133621004bc20df70fa6123897f11b348c3fe28d7bf9652fb5e7c",
+        "samples": [
+          {
+            "id": "291f2b7703a3b68aa76253cd"
+          },
+          {
+            "id": "8ca9a91f7d9653e1fe307d00"
+          },
+          {
+            "id": "f8b2705e947357c174ba4b55"
+          }
+        ]
+      },
+      "notInImmutableProjection": {
+        "count": 0,
+        "idsSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "samples": []
+      }
+    },
+    "candidate": {
+      "status": "absent"
+    }
+  },
+  "projections": {
+    "immutable": {
+      "status": "read",
+      "generationId": "gen_1794665184205_cfd76b47",
+      "rows": 25666,
+      "ids": {
+        "count": 25666,
+        "idsSha256": "67f756529b05d45f1872b09d8c8acb77e38b3b677030b69a5113bd9ea1b0c594",
+        "samples": [
+          {
+            "id": "0002b8cef9103aa205dd9c37"
+          },
+          {
+            "id": "0009002e410e7658a98a2f9f"
+          },
+          {
+            "id": "000a2bb27121c8dffe5e799e"
+          },
+          {
+            "id": "00148155d7dc2f1aaeb55f92"
+          },
+          {
+            "id": "0015fecd5d7ffd01307c1dfd"
+          },
+          {
+            "id": "00179acdd0cd35abb6c10565"
+          },
+          {
+            "id": "0018ae81605c50d175de2ce5"
+          },
+          {
+            "id": "00193224fb06c3a77e485f9e"
+          },
+          {
+            "id": "001adea99eb7cacd8687b6b3"
+          },
+          {
+            "id": "001ca05472f9b6b02d5314e1"
+          }
+        ]
+      },
+      "duplicates": {
+        "count": 0,
+        "idsSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "samples": []
+      },
+      "invalidIds": 0,
+      "foreignMarkets": 0,
+      "gateEligible": {
+        "count": 25666,
+        "idsSha256": "67f756529b05d45f1872b09d8c8acb77e38b3b677030b69a5113bd9ea1b0c594",
+        "samples": [
+          {
+            "id": "0002b8cef9103aa205dd9c37"
+          },
+          {
+            "id": "0009002e410e7658a98a2f9f"
+          },
+          {
+            "id": "000a2bb27121c8dffe5e799e"
+          },
+          {
+            "id": "00148155d7dc2f1aaeb55f92"
+          },
+          {
+            "id": "0015fecd5d7ffd01307c1dfd"
+          },
+          {
+            "id": "00179acdd0cd35abb6c10565"
+          },
+          {
+            "id": "0018ae81605c50d175de2ce5"
+          },
+          {
+            "id": "00193224fb06c3a77e485f9e"
+          },
+          {
+            "id": "001adea99eb7cacd8687b6b3"
+          },
+          {
+            "id": "001ca05472f9b6b02d5314e1"
+          }
+        ]
+      },
+      "gateEligibleDuplicates": {
+        "count": 0,
+        "idsSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "samples": []
+      },
+      "ordinaryPublicEligible": {
+        "count": 25662,
+        "idsSha256": "83d1eaad70fbc708c3c4797f3d6b74611195f2c18ac086efe0ddb9c1ce623933",
+        "samples": [
+          {
+            "id": "0002b8cef9103aa205dd9c37"
+          },
+          {
+            "id": "0009002e410e7658a98a2f9f"
+          },
+          {
+            "id": "000a2bb27121c8dffe5e799e"
+          },
+          {
+            "id": "00148155d7dc2f1aaeb55f92"
+          },
+          {
+            "id": "0015fecd5d7ffd01307c1dfd"
+          },
+          {
+            "id": "00179acdd0cd35abb6c10565"
+          },
+          {
+            "id": "0018ae81605c50d175de2ce5"
+          },
+          {
+            "id": "00193224fb06c3a77e485f9e"
+          },
+          {
+            "id": "001adea99eb7cacd8687b6b3"
+          },
+          {
+            "id": "001ca05472f9b6b02d5314e1"
+          }
+        ]
+      }
+    },
+    "public": {
+      "status": "read",
+      "generationId": "gen_1794665184205_cfd76b47",
+      "rows": 25666,
+      "ids": {
+        "count": 25666,
+        "idsSha256": "67f756529b05d45f1872b09d8c8acb77e38b3b677030b69a5113bd9ea1b0c594",
+        "samples": [
+          {
+            "id": "0002b8cef9103aa205dd9c37"
+          },
+          {
+            "id": "0009002e410e7658a98a2f9f"
+          },
+          {
+            "id": "000a2bb27121c8dffe5e799e"
+          },
+          {
+            "id": "00148155d7dc2f1aaeb55f92"
+          },
+          {
+            "id": "0015fecd5d7ffd01307c1dfd"
+          },
+          {
+            "id": "00179acdd0cd35abb6c10565"
+          },
+          {
+            "id": "0018ae81605c50d175de2ce5"
+          },
+          {
+            "id": "00193224fb06c3a77e485f9e"
+          },
+          {
+            "id": "001adea99eb7cacd8687b6b3"
+          },
+          {
+            "id": "001ca05472f9b6b02d5314e1"
+          }
+        ]
+      },
+      "duplicates": {
+        "count": 0,
+        "idsSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "samples": []
+      },
+      "invalidIds": 0,
+      "foreignMarkets": 0,
+      "gateEligible": {
+        "count": 25666,
+        "idsSha256": "67f756529b05d45f1872b09d8c8acb77e38b3b677030b69a5113bd9ea1b0c594",
+        "samples": [
+          {
+            "id": "0002b8cef9103aa205dd9c37"
+          },
+          {
+            "id": "0009002e410e7658a98a2f9f"
+          },
+          {
+            "id": "000a2bb27121c8dffe5e799e"
+          },
+          {
+            "id": "00148155d7dc2f1aaeb55f92"
+          },
+          {
+            "id": "0015fecd5d7ffd01307c1dfd"
+          },
+          {
+            "id": "00179acdd0cd35abb6c10565"
+          },
+          {
+            "id": "0018ae81605c50d175de2ce5"
+          },
+          {
+            "id": "00193224fb06c3a77e485f9e"
+          },
+          {
+            "id": "001adea99eb7cacd8687b6b3"
+          },
+          {
+            "id": "001ca05472f9b6b02d5314e1"
+          }
+        ]
+      },
+      "gateEligibleDuplicates": {
+        "count": 0,
+        "idsSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "samples": []
+      },
+      "ordinaryPublicEligible": {
+        "count": 25662,
+        "idsSha256": "83d1eaad70fbc708c3c4797f3d6b74611195f2c18ac086efe0ddb9c1ce623933",
+        "samples": [
+          {
+            "id": "0002b8cef9103aa205dd9c37"
+          },
+          {
+            "id": "0009002e410e7658a98a2f9f"
+          },
+          {
+            "id": "000a2bb27121c8dffe5e799e"
+          },
+          {
+            "id": "00148155d7dc2f1aaeb55f92"
+          },
+          {
+            "id": "0015fecd5d7ffd01307c1dfd"
+          },
+          {
+            "id": "00179acdd0cd35abb6c10565"
+          },
+          {
+            "id": "0018ae81605c50d175de2ce5"
+          },
+          {
+            "id": "00193224fb06c3a77e485f9e"
+          },
+          {
+            "id": "001adea99eb7cacd8687b6b3"
+          },
+          {
+            "id": "001ca05472f9b6b02d5314e1"
+          }
+        ]
+      }
+    }
+  },
+  "publicDifference": {
+    "onlyImmutable": {
+      "count": 0,
+      "idsSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "samples": []
+    },
+    "onlyPublic": {
+      "count": 0,
+      "idsSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "samples": []
+    }
+  },
+  "missingSamples": [
+    {
+      "id": "291f2b7703a3b68aa76253cd",
+      "inSelector": {
+        "base": false,
+        "candidate": null
+      },
+      "sourceCategory": "dubicars",
+      "hasPhoto": true,
+      "hasSourcePrice": true,
+      "officialRate": true,
+      "rateBoundToPrice": true,
+      "raw": {
+        "positiveTotal": false,
+        "positiveSellerPrice": true,
+        "needsData": true,
+        "sellerMode": true,
+        "hasPower": false,
+        "hasDisplacement": false,
+        "encyclopediaEvidence": false,
+        "renderable": true
+      },
+      "afterManual": {
+        "positiveTotal": false,
+        "positiveSellerPrice": true,
+        "needsData": true,
+        "sellerMode": true,
+        "hasPower": false,
+        "hasDisplacement": false,
+        "encyclopediaEvidence": false,
+        "renderable": true
+      },
+      "afterEncyclopedia": {
+        "positiveTotal": false,
+        "positiveSellerPrice": true,
+        "needsData": true,
+        "sellerMode": true,
+        "hasPower": false,
+        "hasDisplacement": false,
+        "encyclopediaEvidence": false,
+        "renderable": true
+      },
+      "afterSafety": {
+        "positiveTotal": false,
+        "positiveSellerPrice": true,
+        "needsData": true,
+        "sellerMode": true,
+        "hasPower": false,
+        "hasDisplacement": false,
+        "encyclopediaEvidence": false,
+        "renderable": true
+      }
+    },
+    {
+      "id": "f8b2705e947357c174ba4b55",
+      "inSelector": {
+        "base": false,
+        "candidate": null
+      },
+      "sourceCategory": "dubicars",
+      "hasPhoto": true,
+      "hasSourcePrice": true,
+      "officialRate": true,
+      "rateBoundToPrice": true,
+      "raw": {
+        "positiveTotal": false,
+        "positiveSellerPrice": true,
+        "needsData": true,
+        "sellerMode": true,
+        "hasPower": false,
+        "hasDisplacement": false,
+        "encyclopediaEvidence": false,
+        "renderable": true
+      },
+      "afterManual": {
+        "positiveTotal": false,
+        "positiveSellerPrice": true,
+        "needsData": true,
+        "sellerMode": true,
+        "hasPower": false,
+        "hasDisplacement": false,
+        "encyclopediaEvidence": false,
+        "renderable": true
+      },
+      "afterEncyclopedia": {
+        "positiveTotal": false,
+        "positiveSellerPrice": true,
+        "needsData": true,
+        "sellerMode": true,
+        "hasPower": false,
+        "hasDisplacement": false,
+        "encyclopediaEvidence": false,
+        "renderable": true
+      },
+      "afterSafety": {
+        "positiveTotal": false,
+        "positiveSellerPrice": true,
+        "needsData": true,
+        "sellerMode": true,
+        "hasPower": false,
+        "hasDisplacement": false,
+        "encyclopediaEvidence": false,
+        "renderable": true
+      }
+    },
+    {
+      "id": "8ca9a91f7d9653e1fe307d00",
+      "inSelector": {
+        "base": false,
+        "candidate": null
+      },
+      "sourceCategory": "dubicars",
+      "hasPhoto": true,
+      "hasSourcePrice": true,
+      "officialRate": true,
+      "rateBoundToPrice": true,
+      "raw": {
+        "positiveTotal": false,
+        "positiveSellerPrice": true,
+        "needsData": true,
+        "sellerMode": true,
+        "hasPower": false,
+        "hasDisplacement": false,
+        "encyclopediaEvidence": false,
+        "renderable": true
+      },
+      "afterManual": {
+        "positiveTotal": false,
+        "positiveSellerPrice": true,
+        "needsData": true,
+        "sellerMode": true,
+        "hasPower": false,
+        "hasDisplacement": false,
+        "encyclopediaEvidence": false,
+        "renderable": true
+      },
+      "afterEncyclopedia": {
+        "positiveTotal": false,
+        "positiveSellerPrice": true,
+        "needsData": true,
+        "sellerMode": true,
+        "hasPower": false,
+        "hasDisplacement": false,
+        "encyclopediaEvidence": false,
+        "renderable": true
+      },
+      "afterSafety": {
+        "positiveTotal": false,
+        "positiveSellerPrice": true,
+        "needsData": true,
+        "sellerMode": true,
+        "hasPower": false,
+        "hasDisplacement": false,
+        "encyclopediaEvidence": false,
+        "renderable": true
+      }
+    }
+  ],
+  "observedCandidateCoverage": "incomplete_or_unavailable",
+  "releaseAccepted": false
+}
