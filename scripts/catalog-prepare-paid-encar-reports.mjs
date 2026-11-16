@@ -3,6 +3,7 @@ import {createHash} from 'node:crypto';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
+import {openRawFeedPin,rawProducerOwner,readRawRootHandoff,writeRawRootHandoff} from './lib/catalog-raw-provenance.mjs';
 
 export const REPORT_MAX_BYTES = 4 * 1024 * 1024;
 export const REPORT_MAX_ROWS = 2048;
@@ -100,6 +101,15 @@ export async function mapBounded(values, concurrency, callback) {
 export async function publishReportBuckets({storage, complete, buckets, assertEnabled, assertSnapshotUnchanged}) {
   const root = `catalog/paid-encar-reports/v1/${complete.observedAtMs}/`;
   await assertEnabled();
+  const previous=await storage.readJson(root+'complete.json',null);
+  if(previous!==null){
+    assert.equal(digest(previous),digest(complete),'paid_report_complete_changed');
+    await mapBounded(buckets,4,async bucket=>{
+      await assertEnabled();
+      assert.equal(digest(await storage.readJson(root+bucket.key,null)),digest(bucket.body),'paid_report_completed_bucket_missing_or_changed');
+    });
+    await assertSnapshotUnchanged();await assertEnabled();return root;
+  }
   await mapBounded(buckets, 4, async bucket => {
     await assertEnabled();
     await createAndVerify(storage, root + bucket.key, bucket.body);
@@ -158,6 +168,10 @@ export async function preparePaidEncarReports() {
   const snapshot = await storage.readJson(prefix + '/complete.json', null);
   const identity = reportSnapshotIdentity(snapshot, run, attempt);
   const snapshotDigest = digest(snapshot);
+  const owner=rawProducerOwner(),reportRoot=`catalog/paid-encar-reports/v1/${identity.observedAtMs}`;
+  const rawPin=await openRawFeedPin({storage,owner,operationId:`encar-reports-${owner.runId}-${owner.attempt}`,
+    references:[{kind:'encar-snapshot',root:prefix},{kind:'encar-reports',root:reportRoot}]});
+  if(await storage.readJson(reportRoot+'/complete.json',null)===null)await rawPin.add([]);
   const assertEnabled = async () => assert.ok(collectionEnabled(await readCollectionControls(storage), 'encar_feed'),
     'paid_report_disabled_by_owner');
   const assertSnapshotUnchanged = async () => assert.equal(digest(await storage.readJson(prefix + '/complete.json', null)),
@@ -203,16 +217,21 @@ export async function preparePaidEncarReports() {
     console.log(JSON.stringify({stage: 'paid_report_current_coverage', ...coverage}));
   }
   const root = await publishReportBuckets({storage, ...prepared, assertEnabled, assertSnapshotUnchanged});
+  const rawHandoff=await rawPin.handoff();
+  const existingHandoff=await readRawRootHandoff(storage,reportRoot,prepared.complete);
+  if(!existingHandoff)await writeRawRootHandoff(storage,reportRoot,prepared.complete,rawHandoff);
   if (koreaBefore) assert.equal(digest((await storage.readJson('catalog/manifest.json', null))?.markets?.korea), digest(koreaBefore),
     'paid_report_current_korea_changed_after_preparation');
   const report = {version: 1, completed: true, completedAt: new Date().toISOString(), ...identity, root,
     snapshotDigest, total, duplicates, rowCount: records.size, bucketCount: prepared.buckets.length,
     bucketPrefixLength: prepared.complete.bucketPrefixLength, completeDigest: digest(prepared.complete),
     maximumBucketBytes: Math.max(...prepared.buckets.map(row => row.bytes)), coverage,
-    supplierRequests: 0, catalogManifestWrites: 0, offerWrites: 0, priceWrites: 0};
+    supplierRequests: 0, catalogManifestWrites: 0, offerWrites: 0, priceWrites: 0,
+    rawStoragePins:[rawHandoff,...(existingHandoff&&existingHandoff.operationId!==rawHandoff.operationId?[existingHandoff]:[])]};
   const reportFile = process.env.PAID_REPORT_OUTPUT || 'paid-encar-report-preparation.json';
   await fs.writeFile(reportFile, JSON.stringify(report, null, 2));
   console.log(JSON.stringify(report));
+  return report;
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) preparePaidEncarReports().catch(error => {

@@ -15,6 +15,7 @@ import {consumeChe168Csv} from './lib/che168-csv-stream.mjs';
 import {saveChe168Replica,restoreChe168Replica} from './lib/che168-replica.mjs';
 import {openChe168ReplayJournal} from './lib/che168-replay-journal.mjs';
 import {observationShardWriter} from './lib/catalog-intake-checkpoint.mjs';
+import {openRawFeedPin,rawProducerOwner,readRawRootHandoff} from './lib/catalog-raw-provenance.mjs';
 
 await assertCollectionEnabled('che168_feed');
 const directory=process.env.AUTO_API_INTAKE_DIR||'catalog-intake-china';
@@ -43,6 +44,16 @@ const temp=await fs.mkdtemp(path.join(os.tmpdir(),'che168-replica-')),filename=p
 let db,source={sourceId,provider:'auto_api_che168',snapshotBinding:binding,snapshotStartedAt:config.modifiedAt,yearFrom,
   syncMode:'snapshot',mode:'snapshot',pages:resume?0:1,observations:0,rejectedIdentity:0,stopReason:'collecting'};
 const report={version:1,provider:'auto_api_che168',market:'china',productionWrites:false,startedAt:new Date().toISOString(),completed:false,sources:[source,...(prior?.sources||[])],confirmedWithdrawals:[]};
+const initialCursor=resume?previous.cursor:config.initialCursor;
+const journalBinding=createHash('sha256').update(JSON.stringify({binding,initialCursor,base:resume?previous.replica:null,replayVersion:2})).digest('hex');
+const artifactRunId=BigInt(`0x${journalBinding.slice(0,14)}`).toString();
+const owner=rawProducerOwner(),snapshotRoot=`catalog/provider-snapshots/che168/${binding}`;
+source.workingJournal={key:`catalog/intake-working/che168-v1/${artifactRunId}`,binding:journalBinding};
+if(resume)source.baseReplica={key:previous.replica.key,sha256:previous.replica.sha256};
+const rawPin=await openRawFeedPin({storage,owner,operationId:`che168-intake-${owner.runId}-${owner.attempt}`,
+  references:[{kind:'che168-snapshot',root:snapshotRoot},{kind:'che168-journal',root:source.workingJournal.key},
+    ...(resume?[{kind:'che168-replica',root:previous.replica.key,sha256:previous.replica.sha256}]:[])]});
+await rawPin.add([]); // Refuse to resume collection after its handoff was frozen.
 const withdrawals=new Map(),quarantine=new Map();
 async function checkpoint(){await fs.writeFile(path.join(directory,'report.tmp'),JSON.stringify(report));await fs.rename(path.join(directory,'report.tmp'),path.join(directory,'report.json'));}
 await checkpoint();
@@ -92,11 +103,8 @@ try {
     }});
     db.exec('COMMIT');
   }
-  const initialCursor=resume?previous.cursor:config.initialCursor;
-  const journalBinding=createHash('sha256').update(JSON.stringify({binding,initialCursor,base:resume?previous.replica:null,replayVersion:2})).digest('hex');
   // Stable private working journal across runner failures, separate from the
   // committed publication cursor and the old legacy recovery artifact.
-  const artifactRunId=BigInt(`0x${journalBinding.slice(0,14)}`).toString();
   const journal=await openChe168ReplayJournal({storage,artifactRunId,binding:journalBinding,initialCursor,apply});
   let pageEvents=[],pending=[],pendingBytes=0,lastCursor=journal.cursor,totalChanges=journal.changes,lastSave=Date.now();
   const previousChanges=journal.changes;
@@ -148,10 +156,14 @@ try {
     source.observations++;
   }
   db.close();db=null;
-  const replica=await saveChe168Replica({storage,filename,binding,cursor:completed.cursor});
+  const replica=await saveChe168Replica({storage,filename,binding,cursor:completed.cursor,
+    beforeWrite:root=>rawPin.add([{kind:'che168-replica',root}])});
   Object.assign(source,{cursor:completed.cursor,initialCursor,changes:totalChanges,uniqueOffers:count,replica,
     completeInventory:true,quarantined:quarantine.size,stopReason:'source_finished'});
   report.confirmedWithdrawals=[...withdrawals.values(),...(prior?.confirmedWithdrawals||[])];
+  const archiveReceipt=await storage.readJson(snapshotRoot+'/manifest.json',null);
+  const archiveHandoff=archiveReceipt?await readRawRootHandoff(storage,snapshotRoot,archiveReceipt):null;
+  report.rawStoragePins=[await rawPin.handoff(),...(archiveHandoff?[archiveHandoff]:[])];
   Object.assign(report,{completed:true,completedAt:completed.completedAt});await checkpoint();
   console.log(JSON.stringify({completed:true,mode:resume?'local_replica_and_changes':'csv_and_changes',offers:count,changes:totalChanges,cursor:completed.cursor,replicaSaved:true}));
 }catch(error){

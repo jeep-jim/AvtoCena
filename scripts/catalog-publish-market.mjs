@@ -4,6 +4,7 @@ import {startPublicationHeartbeat} from './lib/publication-heartbeat.mjs';
 import {isCompletedChe168Delta,isCompletedDubicarsDelta} from './lib/auto-api-che168-client.mjs';
 import {assertPaidKoreaPublicationSource} from './lib/paid-korea-publication-guard.mjs';
 import {prepareStagedCatalogBudget} from './lib/catalog-staged-budget.mjs';
+import {prepareRawPublication} from './lib/catalog-raw-publication.mjs';
 // Maintenance publication reads large source payloads; avoid a burst of twelve simultaneous S3 downloads.
 process.env.CATALOG_READ_CONCURRENCY ||= "4";
 import { unavailableOfferRecord } from "../apps/web/lib/catalog/offer-availability.ts";
@@ -746,6 +747,7 @@ const regressionBlocked = expectedPublishedByMarket[market] <= 0
   || (catastrophicPublicCollapse && !allowPublicCollapse);
 let manifest = null;
 let publicationError = "";
+let rawPublication = null, rawPinRelease = null;
 let nextPublicCount = 0;
 let publishedSourceCounts = {};
 
@@ -779,8 +781,14 @@ if (regressionBlocked) {
       productionRefreshMarket: market,
       expectedBaseGenerationId,
       ...(market !== 'japan' && getJsonStorage().driver === 'object' ? {
-        beforePreparedGeneration: candidate => prepareStagedCatalogBudget({storage:getJsonStorage(), manifest:candidate,
-          expectedBaseGenerationId, operationId:publishOperationId}),
+        beforePreparedGeneration: async candidate => {
+          rawPublication = await prepareRawPublication({storage:getJsonStorage(), manifest:candidate,
+            expectedBaseGenerationId, market, intake:generation.payloads.find(payload => payload.report?.market === market)?.report});
+          const verifyBudget = await prepareStagedCatalogBudget({storage:getJsonStorage(), manifest:candidate,
+            expectedBaseGenerationId, operationId:publishOperationId});
+          await rawPublication.verify();
+          return async () => { await rawPublication.verify(); await verifyBudget(); };
+        },
       } : {}),
       async beforeManifestCommit() {
         await assertCurrentKoreaPublicationSource();
@@ -843,6 +851,7 @@ if (regressionBlocked) {
         if (failures.length) throw new Error(`catalog_public_regression_guard:${failures.join("|")}`);
       },
     });
+    if (rawPublication) rawPinRelease = await rawPublication.releasePins();
   } catch (error) {
     publicationError = String(error?.message || error);
     console.error(error?.stack || publicationError);
@@ -870,6 +879,7 @@ const report = {
   publishedAt: new Date().toISOString(),
   published: Boolean(manifest),
   publicationError,
+  rawPinRelease,
   generationId: manifest?.generationId || null,
   previousManifestPreserved: !manifest,
   retentionMs,

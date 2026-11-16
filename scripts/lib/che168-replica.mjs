@@ -6,9 +6,10 @@ const sha=b=>createHash('sha256').update(b).digest('hex');
 const prefix='catalog/provider-replicas/che168/';
 /** Working inventory is immutable until its descriptor is committed together
  * with the successful publication cursor. No public database writes here. */
-export async function saveChe168Replica({storage,filename,binding,cursor}) {
+export async function saveChe168Replica({storage,filename,binding,cursor,beforeWrite=async()=>{}}) {
   const key=`${prefix}${randomUUID()}`,file=await fs.open(filename,'r'),parts=[];
   try {
+    await beforeWrite(key);
     let offset=0;
     while(true) {
       const buffer=Buffer.alloc(CHUNK),{bytesRead}=await file.read(buffer,0,CHUNK,offset);

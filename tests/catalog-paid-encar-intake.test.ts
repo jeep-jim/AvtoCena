@@ -3,9 +3,11 @@ import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {readFileSync} from 'node:fs';
 import path from 'node:path';
+import {normalizePaidEncarOffer} from '../scripts/lib/paid-encar-offer.mjs';
 import {paidEncarRequest, paidEncarRefreshDecision, collectPaidEncarSnapshot,
   assertPaidEncarSnapshotReceipt, paidEncarSnapshotScope, paidEncarSavedPageVerifier,
   PAID_ENCAR_PAUSE_MARGIN_MS} from '../scripts/catalog-paid-encar-intake.mjs';
+import {openRawFeedPin,rawProducerOwner,readRawRootHandoff,RAW_PIN_PREFIX} from '../scripts/lib/catalog-raw-provenance.mjs';
 
 const identity = {runId: '43812759975', attempt: '1', headSha: '1bb70becbf556359697ebc93cd1e8efa2a8120ed'};
 const completedAt = '2026-11-16T17:05:00.000Z';
@@ -26,8 +28,18 @@ function fixture() {
       events.push({kind: 'list', directory});
       return [...values.keys()].filter(key => key.startsWith(directory)).map(key => ({key}));
     },
+    async readJsonWithMeta(key, fallback) {
+      const value=await this.readJson(key,fallback);
+      return values.has(key)?{found:true,value,etag:createHash('sha256').update(JSON.stringify(value)).digest('hex')}:{found:false,value};
+    },
     async writeJson(key, value, condition) {
       events.push({kind: 'write', key, condition});
+      if(key.startsWith(RAW_PIN_PREFIX)){
+        const previous=values.get(key),etag=previous&&createHash('sha256').update(JSON.stringify(previous)).digest('hex');
+        if(condition?.ifNoneMatch==='*'&&previous||condition?.ifMatch&&condition.ifMatch!==etag){const error=Error('conflict');error.name='StorageConflictError';throw error;}
+        assert.ok(condition?.ifNoneMatch==='*'||condition?.ifMatch);
+        values.set(key,structuredClone(value));return;
+      }
       assert.deepEqual(condition, {ifNoneMatch: '*'}, 'saved intake must always use create-only writes');
       if (values.has(key)) throw Error('fixture_create_conflict');
       values.set(key, structuredClone(value));
@@ -52,9 +64,12 @@ const restorerBody = readFileSync(new URL('../scripts/catalog-restore-encar-snap
 const AsyncRestorer = Object.getPrototypeOf(async function () {}).constructor;
 const restorer = new AsyncRestorer('fs', 'path', 'getJsonStorage', 'EncarDirectAdapter',
   'isEncarNonCashContract', 'observationShardWriter', 'preparePaidEncarReports',
-  'paidEncarSavedPageVerifier', 'process', 'console', restorerBody);
+  'paidEncarSavedPageVerifier', 'openRawFeedPin','rawProducerOwner','readRawRootHandoff',
+  'normalizePaidEncarOffer', 'process', 'console', restorerBody);
 
 async function restoreFixture(f) {
+  const env={ENCAR_SNAPSHOT_RUN:identity.runId,ENCAR_SNAPSHOT_ATTEMPT:identity.attempt,GITHUB_SHA:identity.headSha,
+    GITHUB_RUN_ID:identity.runId,GITHUB_RUN_ATTEMPT:String(f.restoreAttempt=(f.restoreAttempt||0)+1)};
   const fs = {mkdir: async () => {}, readdir: async () => [], writeFile: async (_file, text) => {
     f.events.push({kind: 'intake-report', report: JSON.parse(text)});
   }};
@@ -64,9 +79,9 @@ async function restoreFixture(f) {
   }
   return restorer(fs, path, () => f.storage, Adapter, () => false,
     () => async row => {f.events.push({kind: 'observation', row});},
-    async () => {f.events.push({kind: 'prepare-reports'});},
+    async () => {f.events.push({kind: 'prepare-reports'});return {rawStoragePins:[]};},
     (snapshot, context) => paidEncarSavedPageVerifier(snapshot, {...context, now: Date.parse(completedAt)}),
-    {env: {ENCAR_SNAPSHOT_RUN: identity.runId, ENCAR_SNAPSHOT_ATTEMPT: identity.attempt, GITHUB_SHA: identity.headSha}},
+    openRawFeedPin,()=>rawProducerOwner(env),readRawRootHandoff,normalizePaidEncarOffer,{env},
     {log() {}});
 }
 
@@ -74,7 +89,7 @@ async function restorableSnapshot() {
   const f = fixture();
   await collectPaidEncarSnapshot(options(f, {request: async (_endpoint, params) => {
     const row = offer(String(1000 + params.page));
-    Object.assign(row.data, {advertisement_type: 'Продажа', sales_status: 'Доступно', currency: 'KRW'});
+    Object.assign(row.data, {advertisement_type: 'Продажа', sales_status: 'Доступно', currency: 'KRW', year: 2024});
     return page(params.page, [row], params.page === 1 ? 2 : null);
   }}));
   f.events.length = 0;
