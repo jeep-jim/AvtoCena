@@ -21,6 +21,13 @@ EXPECTED_CALCULATOR = '4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd1
 FAILED_RELEASE = '9cb571fcce503c9a3ca1a1496514899839b75395'
 ACCEPTED_IMAGE = 'sha256:e36c969dc5a21a1654d738a2fe76c4657cd75ad48ffeff4c87845f67035c6f6f'
 FAILED_TAG = 'avtocena-regcloud:' + FAILED_RELEASE
+# Read-only follow-up to the two stopped b5 containers already removed by the
+# existing guarded retention. These IDs are NEVER added to an apply plan here.
+ORPHAN_REVIEW_RELEASE = 'b5ad05ee8ad042e4ff7b911a1990fbcd8b703b30'
+ORPHAN_REVIEW_IDS = (
+    'sha256:fc248eb393edfec3a5b37376b5fe51ea335fb8078ebe522df606b3777da9fb04',
+    'sha256:2fa2c913567930cfc0b0e716b27cde6e76a34ca530f42fa383c7ee4870beb1f8',
+)
 TARGET_FREE_BYTES = 10 * 1024 ** 3
 MAX_GROUPS = 2
 NAME = re.compile(r'^avtocena-release-9cb571fcce50(?:-failed-\d+)?$')
@@ -92,6 +99,34 @@ def container_fingerprint(container):
 
 def image_fingerprint(image):
     return digest({key: image.get(key) for key in ['Id', 'Created', 'Config', 'RepoTags', 'RepoDigests', 'RootFS', 'Parent']})
+
+
+def named_orphan_image_inventory(containers, images):
+    """Only sanitized metadata for the two exact requested image IDs; no writes."""
+    def row(identifier):
+        image = images.get(identifier)
+        refs = [c for c in containers if c.get('Image') == identifier]
+        labels = image.get('Config', {}).get('Labels') or {} if image else {}
+        revision = labels.get(REVISION)
+        return {'imageId': identifier, 'present': image is not None,
+                'revision': revision if isinstance(revision, str) and re.fullmatch(r'[a-f0-9]{40}', revision) else None,
+                'expectedRevisionMatched': revision == ORPHAN_REVIEW_RELEASE,
+                'created': image.get('Created') if image else None,
+                'sizeBytes': image.get('Size') if image else None,
+                'repoTags': image.get('RepoTags') or [] if image else [],
+                'repoDigests': image.get('RepoDigests') or [] if image else [],
+                'imageFingerprint': image_fingerprint(image) if image else None,
+                'referenceCount': len(refs),
+                'references': [{'id': c['Id'], 'name': name_of(c), 'state': c.get('State', {}).get('Status'),
+                                'running': c.get('State', {}).get('Running'),
+                                'revision': (c.get('Config', {}).get('Labels') or {}).get(REVISION)}
+                               for c in refs]}
+    others = sorted(identifier for identifier, image in images.items()
+                    if identifier not in ORPHAN_REVIEW_IDS
+                    and (image.get('Config', {}).get('Labels') or {}).get(REVISION) == ORPHAN_REVIEW_RELEASE)
+    return {'readOnly': True, 'sourceRevision': ORPHAN_REVIEW_RELEASE,
+            'requestedImages': [row(identifier) for identifier in ORPHAN_REVIEW_IDS],
+            'otherImagesOfSameRevisionRetained': [row(identifier) for identifier in others]}
 
 
 def production_view(containers, images):
@@ -291,6 +326,7 @@ class HostBackend:
         result = make_plan(containers, images, self.free_bytes())
         result['allContainerFingerprints'] = {c['Id']: container_fingerprint(c) for c in containers}
         result['allImageIds'] = ids
+        result['namedOrphanImageInventory'] = named_orphan_image_inventory(containers, images)
         return result
 
     def verify_production(self, expected):
