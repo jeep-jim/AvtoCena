@@ -1,0 +1,30 @@
+name: Diagnose external browser health path for paid Korea
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/paid-encar-browser-network-check.yml]
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - name: Compare bounded public health requests from this runner
+        run: |
+          set -euo pipefail
+          curl --silent --show-error --max-time 30 --output /tmp/health.json --write-out 'CURL status=%{http_code} seconds=%{time_total}\n' https://avtocena.com/api/health || true
+          if test -s /tmp/health.json; then python3 -c 'import json;v=json.load(open("/tmp/health.json"));print("CURL_RELEASE",v.get("releaseSha"))'; fi
+          npm install --prefix "$RUNNER_TEMP/probe" --no-package-lock --ignore-scripts playwright@1.55.0
+          PLAYWRIGHT_MODULE="$RUNNER_TEMP/probe/node_modules/playwright/index.mjs" node --input-type=module <<'JS'
+          const {request}=await import(process.env.PLAYWRIGHT_MODULE);
+          for(let i=0;i<3;i++){
+            const started=Date.now(),context=await request.newContext();
+            try{
+              const r=await context.get('https://avtocena.com/api/health',{timeout:30000});
+              const v=await r.json().catch(()=>({}));
+              console.log(JSON.stringify({probe:i+1,status:r.status(),seconds:(Date.now()-started)/1000,release:v.releaseSha??null}));
+            }catch(e){console.log(JSON.stringify({probe:i+1,seconds:(Date.now()-started)/1000,error:e.name}));}
+            finally{await context.dispose();}
+          }
+          JS
