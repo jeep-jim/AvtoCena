@@ -229,6 +229,30 @@ test('real runtime requires prepared reader; capable candidate verifies all five
     const count=writes.length,verified=await invoke('verify');assert.equal(verified.derivedWrites,0);assert.equal(writes.length,count);
     assertCandidateBudgetReceipt(prepared,verified.core,prepared.receiptSha256);
     if(supplementReader){
+      for(const market of PREPARED_MARKETS){
+        const proof=verified.core.markets[market].cardReadiness;
+        assert.equal(proof.verified,true);assert.equal(proof.sourceRows,verified.core.markets[market].sourceRows);
+        assert.equal(proof.blocks.reduce((n:number,block:any)=>n+block.coveredRows,0),proof.sourceRows);
+        assert.ok(proof.blocks.some((block:any)=>block.path==='budget-cards-v3/0.json'));
+      }
+      const legacyKey=prefix+'budget-cards-v3/0.json',legacy=values.get(legacyKey)!;
+      values.delete(legacyKey);await assert.rejects(invoke('verify'),/budget_card_readiness_missing/);values.set(legacyKey,legacy);
+      for(const mutate of [
+        (part:any)=>{part.items.push(part.items[0]);},
+        (part:any)=>{part.items[0].market='korea';},
+        (part:any)=>{part.items=part.items.filter((row:any)=>row.id!=='korea-car');},
+      ]){
+        const damaged=JSON.parse(legacy.toString());mutate(damaged);put(legacyKey,damaged);
+        await assert.rejects(invoke('verify'),/budget_card_readiness_(?:identity|mapping|incomplete)/);values.set(legacyKey,legacy);
+      }
+      const changedLegacy=JSON.parse(legacy.toString());changedLegacy.items[0].cardImageUrl='https://example.test/changed-with-same-id.jpg';
+      put(legacyKey,changedLegacy);
+      const changedCards=await invoke('verify');
+      assert.throws(()=>assertCandidateBudgetReceipt(prepared,changedCards.core,prepared.receiptSha256),/receipt_changed/,
+        'same IDs do not authorize changed payloads after the prepare receipt');
+      values.set(legacyKey,legacy);
+      assertCandidateBudgetReceipt(prepared,(await invoke('verify')).core,prepared.receiptSha256);
+      assert.equal(writes.length,count,'all full-card verify passes are read-only');
       for(const object of [...prepared.core.markets.uae.sourceSupplement.objects,...prepared.core.markets.korea.sourceSupplement.objects]){
         const objectKey=prefix+object.path,savedObject=values.get(objectKey)!;
         values.delete(objectKey);await assert.rejects(invoke('verify'),/supplement_object/);values.set(objectKey,savedObject);

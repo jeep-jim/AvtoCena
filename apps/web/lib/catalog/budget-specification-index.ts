@@ -6,7 +6,7 @@ import type {CatalogSearchProjection} from './storage';
 import {catalogDisplayPrice} from './display-order';
 import {calculatedCatalogPrice} from './calculated-price';
 import {safePublicPricing} from './safe-public-pricing';
-import {budgetCardGroups,assertBudgetSupplementCard,type BudgetCardPart} from './budget-card-reference';
+import {budgetCardGroups,assertBudgetSupplementCardContext,assertBudgetSupplementCard,type BudgetCardPart} from './budget-card-reference';
 
 /** Same admitted public specifications as card matching; never fabricate power or displacement. */
 export function budgetSpecifications(input:CatalogSearchProjection){
@@ -21,7 +21,9 @@ export async function enrichBudgetSpecifications(index:BudgetCountIndex,read:(bl
  const groups=budgetCardGroups(rows,index.version);let cursor=0;
  await Promise.all(Array.from({length:Math.min(6,groups.length)},async()=>{
   while(cursor<groups.length){
-   const group=groups[cursor++],block=group.block,part=await read(block,group.path);
+   const group=groups[cursor++],block=group.block;
+   assertBudgetSupplementCardContext(group);
+   const part=await read(block,group.path);
    if(part.generationId!==index.generationId)throw Error('budget_specification_generation');
    assertBudgetSupplementCard(group,part,index.generationId);
    const ids=new Set(group.rows.map(row=>row[5].id));

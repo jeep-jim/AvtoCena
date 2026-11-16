@@ -1,14 +1,16 @@
-import test from 'node:test';
+import test,{mock} from 'node:test';
+import fs from 'node:fs';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {buildBudgetCountIndex,splitBudgetReplayIndex,type BudgetCountIndex} from '../apps/web/lib/catalog/budget-count-index';
 import {buildBudgetSpecificationSource,assertBudgetSupplementObject} from '../apps/web/lib/catalog/budget-source-supplements';
-import {budgetCardGroups,assertBudgetSupplementCard} from '../apps/web/lib/catalog/budget-card-reference';
+import {budgetCardGroups,assertBudgetSupplementCard,assertBudgetSupplementCardContext,budgetReplayPath,assertBudgetSupplementReplay} from '../apps/web/lib/catalog/budget-card-reference';
 import {enrichBudgetSpecifications} from '../apps/web/lib/catalog/budget-specification-index';
 import {compressBudgetSelector,packBudgetSelector,specificationSelectorDirectory} from '../apps/web/lib/catalog/budget-selector-codec';
-import {readCompressedSelector} from '../apps/web/lib/catalog/budget-selector-publication';
+import {readCompressedSelector,publishSelectorMarket} from '../apps/web/lib/catalog/budget-selector-publication';
 import {getJsonStorage} from '../apps/web/lib/data';
-import {readCalculationIndex} from '../apps/web/lib/encyclopedia/calculation-index';
+import {readCalculationIndex,resetCalculationIndexForTests,checksum} from '../apps/web/lib/encyclopedia/calculation-index';
+import {calculationCacheVersion} from '../apps/web/lib/catalog/shared-budget-prices';
 import {readBudgetSpecificationSource,verifyBudgetSpecificationSource,backfillBudgetSpecificationSelectors,
  searchOffers,countCatalogOffers,readCatalogFacets,resetCatalogReadCachesForTests,warmBudgetPriceCaches,
  prepareCatalogProjectionRows,prepareBudgetSpecificationSourceRows} from '../apps/web/lib/catalog/storage';
@@ -37,7 +39,7 @@ function pureFixture(priced=false){
  const raw=buildBudgetCountIndex(generationId,rows.slice(0,1),new Map([['kept',0]]),3);
  const split=priced?splitBudgetReplayIndex(raw):{index:raw,chunks:[]};
  return {rows,index:split.index,chunks:split.chunks,input:{index:split.index,projection:{generationId,items:rows},
-  market:rows[0].market,expectedRows:rows.length,prepareRows:(items:any[])=>items,calculationVersion,encyclopediaDigest:null}};
+  market:rows[0].market,expectedRows:rows.length,prepareRows:(items:any[])=>items,calculationVersion:calculationCacheVersion(),encyclopediaDigest:readCalculationIndex()?.digest||null}};
 }
 
 test('missing three IDs receive real immutable card objects, with old order and mappings unchanged',()=>{
@@ -220,5 +222,74 @@ test('source union is independent of editorial ALS while requests honor hide, sp
   assert.equal(restored.total,4);assert.deepEqual(restored.items.map(row=>row.id).sort(),['kept',...missingIds].sort());
   assert.equal(f.writes.length,writes,'unhide needs no source rebuild or visitor write');
   assert.equal(f.reads.some(path=>path.includes('/projection/')),false,'unhide reads the existing candidate cards');
+ }finally{f.cleanup();}
+});
+
+test('content-valid supplemental cards from another calculator or private authority are rejected before reads and on reuse',async()=>{
+ const f=runtimeFixture();let changed:any;
+ try{
+  const plan=await readBudgetSpecificationSource(f.manifest,'uae');
+  const group=budgetCardGroups([...plan.index.rows,...plan.index.otherRows!],3).find(group=>group.supplement)!;
+  const payload=plan.objects.find(object=>object.path===group.path)!.value;
+  assertBudgetSupplementCard(group,payload,generationId);
+  process.env.AVTOCENA_CALCULATION_VERSION='b'.repeat(64);
+  assert.throws(()=>budgetCardGroups(group.rows,3),/supplement_context/);
+  assert.throws(()=>assertBudgetSupplementCardContext(group),/supplement_context/);
+  assert.throws(()=>assertBudgetSupplementCard(group,payload,generationId),/supplement_context/,'valid cached payload cannot bypass the changed calculator');
+  let reads=0;
+  await assert.rejects(enrichBudgetSpecifications(plan.index,async()=>{reads++;return payload;}),/supplement_context/);assert.equal(reads,0);
+  process.env.AVTOCENA_CALCULATION_VERSION=calculationVersion;
+  const read=fs.readFileSync,models={'fixture:changed-private':[]};
+  changed=mock.method(fs,'readFileSync',function(path:any,...args:any[]){
+   return String(path).endsWith('/knowledge/encyclopedia/calculation-v1.json')?JSON.stringify({version:1,models,digest:checksum(models)}):(read as any)(path,...args);
+  });
+  resetCalculationIndexForTests();
+  assert.throws(()=>budgetCardGroups(group.rows,3),/supplement_context/);
+  assert.throws(()=>assertBudgetSupplementCard(group,payload,generationId),/supplement_context/,'payload digest alone is not private calculation authority');
+  assert.equal(budgetCardGroups([plan.index.otherRows![0]],3)[0].path,'budget-cards-v3/0.json','legacy card interpretation is unchanged');
+  assert.equal(budgetReplayPath('budget-prices-v3/japan/0.json','japan'),'budget-prices-v3/japan/0.json');
+ }finally{changed?.mock.restore();resetCalculationIndexForTests();f.cleanup();}
+});
+
+test('real visitor selection rejects a valid card at a foreign context path before fetching it',async()=>{
+ const f=runtimeFixture();
+ try{
+  await backfillBudgetSpecificationSelectors(['uae']);
+  const prefix=f.prefix+specificationSelectorDirectory(readCalculationIndex()?.digest||null,calculationVersion)+'/';
+  const ready=f.stored.get(prefix+'ready.json');
+  const index=(await readCompressedSelector(ready,'uae',async name=>f.stored.get(prefix+name+'.json')))!;
+  const old=budgetCardGroups([...index.rows,...index.otherRows!],3).find(group=>group.supplement)!;
+  const foreign=old.path.replace(planContext(old.path),'f'.repeat(64));
+  f.stored.set(f.prefix+foreign,structuredClone(f.stored.get(f.prefix+old.path)));
+  for(const row of [...index.rows,...index.otherRows!])if(row[5].cardPath)row[5].cardPath=foreign;
+  ready.markets.uae=await publishSelectorMarket(index,'uae',async name=>f.stored.get(prefix+name+'.json'),async(name,value)=>{f.stored.set(prefix+name+'.json',value);});
+  f.stored.set(prefix+'ready.json',ready);f.reset();
+  await assert.rejects(searchOffers({market:'uae',make:'Toyota',pageSize:10}),/supplement_context/);
+  assert.ok(!f.reads.some(path=>path.includes('/cards/')),'scope failure is detected before any supplemental card GET');
+  assert.ok(!f.reads.some(path=>path.includes('/projection/')),'failure cannot fall through to a source scan');
+ }finally{f.cleanup();}
+});
+
+function planContext(path:string){return path.split('/')[1];}
+test('supplemental replay validates current context before GET and immutable payload hash after GET',async()=>{
+ const f=runtimeFixture(true);
+ try{
+  await backfillBudgetSpecificationSelectors(['korea']);
+  const plan=await readBudgetSpecificationSource(f.manifest,'korea'),replay=plan.objects.find(object=>object.path.includes('/replay/'))!;
+  assert.equal(budgetReplayPath(replay.path,'korea'),replay.path);assertBudgetSupplementReplay(replay.path,replay.value,generationId,'korea');
+  assert.throws(()=>budgetReplayPath(replay.path,'uae'),/supplement_scope/);
+  assert.throws(()=>assertBudgetSupplementReplay(replay.path,{...replay.value,entries:[]},generationId,'korea'),/supplement_invalid/);
+  const prefix=f.prefix+specificationSelectorDirectory(readCalculationIndex()?.digest||null,calculationVersion)+'/';
+  const ready=f.stored.get(prefix+'ready.json'),index=(await readCompressedSelector(ready,'korea',async name=>f.stored.get(prefix+name+'.json')))!;
+  const foreign=replay.path.replace(planContext(replay.path),'f'.repeat(64));f.stored.set(f.prefix+foreign,structuredClone(replay.value));
+  index.pricingChunks!.korea=index.pricingChunks!.korea.map(path=>path===replay.path?foreign:path);
+  ready.markets.korea=await publishSelectorMarket(index,'korea',async name=>f.stored.get(prefix+name+'.json'),async(name,value)=>{f.stored.set(prefix+name+'.json',value);});
+  f.stored.set(prefix+'ready.json',ready);f.reset();
+  await assert.rejects(warmBudgetPriceCaches(['korea']),/supplement_context/);
+  assert.ok(!f.reads.includes(f.prefix+foreign),'wrong-context replay is rejected before reading its body');
+  index.pricingChunks!.korea=index.pricingChunks!.korea.map(path=>path===foreign?replay.path:path);
+  ready.markets.korea=await publishSelectorMarket(index,'korea',async name=>f.stored.get(prefix+name+'.json'),async(name,value)=>{f.stored.set(prefix+name+'.json',value);});
+  f.stored.set(prefix+'ready.json',ready);f.stored.set(f.prefix+replay.path,{...replay.value,entries:[]});f.reset();
+  await assert.rejects(warmBudgetPriceCaches(['korea']),/supplement_invalid/);
  }finally{f.cleanup();}
 });

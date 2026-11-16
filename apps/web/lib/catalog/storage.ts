@@ -22,7 +22,7 @@ import {filterBudgetRows} from "./budget-selection-filter";
 import {BudgetEligibilityCache} from "./budget-eligibility-cache";
 import {specificationSelectorDirectory,type CompressedBudgetDirectory} from './budget-selector-codec';
 import {enrichBudgetSpecifications} from './budget-specification-index';
-import {budgetCardPath,budgetCardGroups,assertBudgetSupplementCard,type BudgetCardGroup} from './budget-card-reference';
+import {budgetCardPath,budgetCardGroups,assertBudgetSupplementCardContext,assertBudgetSupplementCard,budgetReplayPath,assertBudgetSupplementReplay,type BudgetCardGroup} from './budget-card-reference';
 import {buildBudgetSpecificationSource,assertBudgetSupplementObject,type BudgetSpecificationSource} from './budget-source-supplements';
 import {splitPackedBudgetSelectors,verifiedPackedBudgetSelector,type PackedBudgetDirectory,type PackedBudgetSelector} from './budget-selector-codec';
 import {matchingEditorial,withCatalogEditorial,resetCatalogEditorialCache,editorialRevision,editorialEntries,editorialHasHidden,editorialHidden,applyCatalogEditorial,applyCatalogEditorialSpecifications} from "./editorial";
@@ -2114,6 +2114,7 @@ export async function getOfferWithoutEditorial(id: string) {
 const BUDGET_CARD_BLOCK_SIZE=256;
 const budgetCardCache=new DetailReadCache<{generationId:string;items:CatalogSearchProjection[]}>({sizeOf:jsonReadByteLength, maxEntries:512,maxBytes:128*1024*1024,ttlMs:3600_000,concurrency:6});
 async function readBudgetCardGroup(generationId:string,group:BudgetCardGroup){
+ assertBudgetSupplementCardContext(group);
  const part=await budgetCardCache.get(`${generationId}:${group.path}`,()=>readIndex(generationId,group.path,{generationId:'',items:[] as CatalogSearchProjection[]}));
  assertBudgetSupplementCard(group,part,generationId);return part;
 }
@@ -2179,7 +2180,9 @@ async function currentBudgetReplay(index:BudgetCountIndex,market:string,displayP
    const seen=new Set<string>();
    // Discard each input chunk after replay. Only compact prices survive in cache.
    const parts=await mapWithConcurrency(paths,3,async path=>{
-    const chunk=await readIndex<BudgetReplayChunk|null>(index.generationId,path,null);
+    const resolved=budgetReplayPath(path,market);
+    const chunk=await readIndex<BudgetReplayChunk|null>(index.generationId,resolved,null);
+    assertBudgetSupplementReplay(resolved,chunk,index.generationId,market);
     if(!chunk || chunk.generationId!==index.generationId || chunk.market!==market || !Array.isArray(chunk.entries) || chunk.entries.length>500)throw Error('catalog_budget_replay_invalid');
     const input=chunk.entries.map(([id,replay])=>{const row=originals.get(id);if(!row||seen.has(id))throw Error('catalog_budget_replay_identity');seen.add(id);return budgetReplayOffer([...row.slice(0,7),replay] as any);});
     const priced=await currentSearchPrices(input,index.generationId);
@@ -2686,6 +2689,44 @@ export async function verifyBudgetSpecificationSource(manifest:CatalogManifest,m
   assertBudgetSupplementObject(object,value);
  });
  assertBudgetSourceContext(source);return source.descriptor;
+}
+/** Fresh readback of every card reference, including the retained generic
+ * blocks. Selector/numeric completeness alone cannot prove a card still exists.
+ * No cache, repricing, source mutation or derived write participates here. */
+export async function verifyBudgetSpecificationCards(manifest:CatalogManifest,market:CatalogMarket,index:BudgetCountIndex){
+ const expectedCount=manifest.markets?.[market]?.count;
+ if(market==='japan'||!MARKETS.includes(market)||index?.version!==3||index.generationId!==manifest.generationId||!Number.isSafeInteger(expectedCount)||expectedCount<=0)throw Error('budget_card_readiness_context');
+ const rows=[...index.rows,...(index.otherRows||[])],wanted=new Map(rows.map(row=>[row[5].id,budgetCardPath(row,3)]));
+ if(index.sourceRows!==rows.length||rows.length<=0||rows.length>expectedCount||wanted.size!==rows.length
+  ||rows.some(row=>row[0]!==market||typeof row[5].id!=='string'||!row[5].id))throw Error('budget_card_readiness_source');
+ const groups=budgetCardGroups(rows,3),storage=getJsonStorage();
+ const hash=(value:unknown)=>crypto.createHash('sha256').update(JSON.stringify(value)).digest('hex');
+ const calculation=calculationCacheVersion(),encyclopedia=readCalculationIndex()?.digest||null;
+ const blocks=await mapWithConcurrency(groups,4,async group=>{
+  assertBudgetSupplementCardContext(group);
+  // Direct storage access deliberately bypasses both raw and live card caches.
+  const part=await storage.readJson<{generationId:string;items:CatalogSearchProjection[]}|null>(generationPath(manifest.generationId,`indexes/${group.path}`),null);
+  if(!part||part.generationId!==manifest.generationId||!Array.isArray(part.items)||part.items.length<1||part.items.length>BUDGET_CARD_BLOCK_SIZE)throw Error('budget_card_readiness_missing');
+  const json=JSON.stringify(part);
+  if(Buffer.byteLength(json)>64*1024*1024)throw Error('budget_card_readiness_bytes');
+  assertBudgetSupplementCard(group,part,manifest.generationId);
+  const seen=new Set<string>(),covered=new Set<string>(),expected=new Set(group.rows.map(row=>row[5].id));
+  for(const row of part.items){
+   if(!row||typeof row.id!=='string'||!row.id||!MARKETS.includes(row.market as CatalogMarket)||seen.has(row.id))throw Error('budget_card_readiness_identity');
+   seen.add(row.id);
+   const path=wanted.get(row.id);
+   if(path!==undefined&&(path!==group.path||row.market!==market))throw Error('budget_card_readiness_mapping');
+   if(expected.has(row.id))covered.add(row.id);
+  }
+  if(covered.size!==expected.size)throw Error('budget_card_readiness_incomplete');
+  return {path:group.path,payloadSha256:crypto.createHash('sha256').update(json).digest('hex'),
+   payloadRows:part.items.length,coveredRows:covered.size,coveredIdsSha256:hash([...covered].sort())};
+ });
+ if(calculationCacheVersion()!==calculation||(readCalculationIndex()?.digest||null)!==encyclopedia)throw Error('budget_card_readiness_context_changed');
+ blocks.sort((a,b)=>a.path.localeCompare(b.path));
+ const body={version:1 as const,verified:true as const,generationId:manifest.generationId,market,sourceRows:rows.length,
+  sourceIds:hash(rows.map(row=>row[5].id)),blocks};
+ return {...body,checksum:hash(body)};
 }
 /** Backfill compact specifications without changing inventory or older selectors. */
 export async function backfillBudgetSpecificationSelectors(markets?:CatalogMarket[]){
