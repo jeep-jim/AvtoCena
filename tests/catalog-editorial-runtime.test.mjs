@@ -119,6 +119,7 @@ test('only the explicit pre-helper sources may skip the helper without an accept
   '794654a00aa4990b284858f1f01c07ed3f020df4',
   '83ff17075e9188dcf227c8752dc064248d5f42e0',
   'e4f2781ed52f12f53430118bea51ef150608ccfe',
+  '7f9165125edc773221da8e17a5ed39f3592db31c',
  ]);
  assert.equal(Object.isFrozen(KNOWN_PRE_EDITORIAL_RELEASES),true);
  for(const release of KNOWN_PRE_EDITORIAL_RELEASES)assert.equal(await installedEditorialSupported(f.root,release),false);
@@ -128,12 +129,20 @@ test('only the explicit pre-helper sources may skip the helper without an accept
 test('minimal paid Encar source may omit the helper while unknown sources still require it',async t=>{
  const f=await fixture(t,{helper:false}),release='83ff17075e9188dcf227c8752dc064248d5f42e0';
  assert.equal(await installedEditorialSupported(f.root,release),false);
- for(const unknown of [sha,'83ff17075e9188dcf227c8752dc064248d5f42e1','e4f2781ed52f12f53430118bea51ef150608ccff']){
+ for(const unknown of [sha,'83ff17075e9188dcf227c8752dc064248d5f42e1','e4f2781ed52f12f53430118bea51ef150608ccff','7f9165125edc773221da8e17a5ed39f3592db31d']){
   await assert.rejects(installedEditorialSupported(f.root,unknown),/editorial_runtime_helper_missing/);
  }
  await fs.writeFile(path.join(f.root,'apps/web/lib/catalog/editorial-home.ts'),'export const prepareEditorialHome=()=>{};\n');
  for(const installed of [release,sha])assert.equal(await installedEditorialSupported(f.root,installed),true);
  assert.deepEqual(f.events,[]);assert.deepEqual(f.writes,[]);
+});
+
+test('known homepage scheduling source cannot skip exact installed checkout validation',async t=>{
+ const f=await fixture(t,{helper:false});
+ const expected={...f.expected,release:'7f9165125edc773221da8e17a5ed39f3592db31c'};
+ assert.equal(await installedEditorialSupported(f.root,expected.release),false);
+ await assert.rejects(prepareInstalledEditorial({root:f.root,expected,readHealth:async()=>({...expected})}),/editorial_runtime_checkout_mismatch/);
+ assert.deepEqual(f.events,[]);assert.deepEqual(f.writes,[]);await f.assertClean();
 });
 
 test('health changing after preparation prevents a readiness success',async t=>{
