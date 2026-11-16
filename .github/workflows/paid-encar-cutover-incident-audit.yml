@@ -1,0 +1,61 @@
+name: Audit paid Korea cutover health timeout
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/paid-encar-cutover-incident-audit.yml]
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    environment: regcloud-staging
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Read bounded proxy and container evidence
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+        run: |
+          set -euo pipefail
+          umask 077
+          key_file=$(mktemp)
+          trap 'rm -f "$key_file"' EXIT
+          printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
+          unset SSH_PRIVATE_KEY
+          ssh -i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts" root@151.248.113.177 'python3 -' <<'PY'
+          import subprocess,re,json,collections,pathlib,datetime
+          def cmd(*args):
+              p=subprocess.run(args,capture_output=True,text=True,timeout=35)
+              return p.stdout+p.stderr
+          print('PRODUCTION',cmd('docker','inspect','--format','{{.Config.Image}} {{.State.Status}}','avtocena-production').strip()[:180])
+          print('ROOT_FS',cmd('df','-B1','/').splitlines()[-1].split()[1:5])
+          print('NGINX_LOG_FILES',[(str(p),p.stat().st_size) for p in pathlib.Path('/var/log/nginx').glob('*') if p.is_file()][:20])
+          for name in ['access.log','error.log']:
+              p=pathlib.Path('/var/log/nginx')/name
+              if not p.exists():continue
+              lines=p.read_text(errors='replace').splitlines()[-50000:]
+              if name=='access.log':
+                  target=[x for x in lines if '16/Nov/2026:03:3' in x or '16/Nov/2026:03:2' in x]
+                  counts=collections.Counter()
+                  health=collections.Counter()
+                  korea=collections.Counter()
+                  for x in target:
+                      m=re.search(r'"(?:GET|HEAD|POST) ([^ ]+) HTTP/[^"]+" (\d{3})',x)
+                      if not m:continue
+                      path,status=m.groups(); counts[status]+=1
+                      if path.startswith('/api/health'):health[status]+=1
+                      if path.startswith('/api/catalog/search?market=korea') or path.startswith('/cars?market=korea'):korea[status]+=1
+                  print('PROXY_WINDOW',json.dumps({'total':len(target),'statuses':dict(counts),'health':dict(health),'korea':dict(korea)}))
+                  print('PROXY_LAST',json.dumps({'lastLineTime':re.search(r'\[([^\]]+)\]',target[-1]).group(1) if target and re.search(r'\[([^\]]+)\]',target[-1]) else None}))
+              else:
+                  target=[x for x in lines if '2026/11/16 03:3' in x or '2026/11/16 03:2' in x]
+                  kinds=collections.Counter('upstream_timeout' if 'upstream timed out' in x else 'connect_failed' if 'connect() failed' in x else 'other' for x in target)
+                  print('PROXY_ERRORS',json.dumps({'total':len(target),'types':dict(kinds)}))
+          ps=cmd('docker','ps','-a','--format','{{.Names}} {{.Status}} {{.Image}}')
+          print('CANDIDATE_CONTAINERS',[x[:200] for x in ps.splitlines() if '9cb571fc' in x][:8])
+          for name in [x.split()[0] for x in ps.splitlines() if '9cb571fc' in x][:2]:
+              logs=cmd('docker','logs','--since','2026-11-16T03:30:00Z','--until','2026-11-16T03:32:30Z',name)
+              print('CANDIDATE_LOG_COUNTS',name,json.dumps({'lines':len(logs.splitlines()),'error':len(re.findall(r'\b(error|fatal|exception)\b',logs,re.I)),'memory':len(re.findall(r'heap out of memory|allocation failed',logs,re.I)),'ajes_failure':len(re.findall(r'AJES_PUBLIC_FAILURE',logs))}))
+          PY
