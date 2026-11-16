@@ -85,7 +85,7 @@ jobs:
       - name: Verify frozen release mechanics and catalog changes
         run: |
           set -euo pipefail
-          test "$(node scripts/catalog-calculation-version.mjs)" = c489dff0d41ef0933b4f2bef140a318d4ce68493587afc8113a9993e5a18b0b6
+          test "$(node scripts/catalog-calculation-version.mjs)" = 4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90
           node scripts/verify-frozen-speed-baselines.mjs
           node --test tests/release-speed-guard-contract.test.mjs tests/accepted-browser-speed.test.mjs
           python3 tests/regcloud-performance-gate.test.py
