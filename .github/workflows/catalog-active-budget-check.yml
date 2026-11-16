@@ -1,0 +1,89 @@
+name: Catalog — verify active generation prices
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        type: choice
+        options: [live, candidate-isolated]
+        default: live
+        required: true
+      expected_live_release:
+        description: Exact installed release SHA that must remain unchanged
+        type: string
+        required: true
+      expected_generation:
+        description: Exact active catalog generation that must remain unchanged
+        type: string
+        required: true
+      candidate_release:
+        description: Candidate SHA; required only for candidate-isolated
+        type: string
+      candidate_calculation_version:
+        description: Exact candidate calculator digest; never a replacement for live health
+        type: string
+      candidate_encyclopedia_digest:
+        description: Exact existing private immutable encyclopedia digest for the candidate
+        type: string
+permissions:
+  contents: read
+concurrency:
+  group: regcloud-budget-shared-warmup
+  cancel-in-progress: false
+jobs:
+  verify:
+    if: github.event_name == 'workflow_dispatch'
+    environment: regcloud-staging
+    runs-on: ubuntu-latest
+    timeout-minutes: 150
+    env:
+      JSON_STORAGE_DRIVER: object
+      YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+      YC_OBJECT_STORAGE_REGION: us-east-1
+      YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+      YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+      YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+      YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+      NODE_OPTIONS: --max-old-space-size=6144
+      CATALOG_ACTIVE_BUDGET_MODE: ${{ inputs.mode }}
+      CATALOG_EXPECTED_LIVE_RELEASE: ${{ inputs.expected_live_release }}
+      CATALOG_EXPECTED_GENERATION: ${{ inputs.expected_generation }}
+      CATALOG_CANDIDATE_RELEASE: ${{ inputs.candidate_release }}
+      CATALOG_CANDIDATE_CALCULATION_VERSION: ${{ inputs.candidate_calculation_version }}
+      CATALOG_CANDIDATE_ENCYCLOPEDIA_DIGEST: ${{ inputs.candidate_encyclopedia_digest }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: automation
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Validate exact mode and source bindings without supplier access
+        id: source
+        run: |
+          node --input-type=module <<'JS'
+          import fs from 'node:fs/promises';
+          import {activeBudgetInputs} from './automation/scripts/catalog-active-budget-check.mjs';
+          const value=activeBudgetInputs();
+          await fs.appendFile(process.env.GITHUB_OUTPUT,`release=${value.release}\n`);
+          console.log(JSON.stringify({mode:value.mode,release:value.release,expectedGeneration:value.expectedGeneration}));
+          JS
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ steps.source.outputs.release }}
+          path: runtime
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: runtime/package-lock.json
+      - run: npm ci
+        working-directory: runtime
+      - name: Prepare and independently reread every retained non-Japan market
+        working-directory: runtime
+        run: node --import tsx ../automation/scripts/catalog-active-budget-check.mjs .
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: catalog-active-budget-readiness
+          path: runtime/catalog-active-budget-report.json
+          retention-days: 7

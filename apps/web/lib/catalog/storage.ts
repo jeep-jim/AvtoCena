@@ -1580,6 +1580,9 @@ export type PersistCatalogOptions = {
   beforePersistValidate?: (publicOffers: VehicleOffer[]) => void | Promise<void>;
   beforePublishValidate?: (publishedOffers: VehicleOffer[]) => void | Promise<void>;
   beforeManifestCommit?: () => void | Promise<void>;
+  // Prepare the exact serving calculator against immutable candidate indexes
+  // before replacing current aliases. Revalidate its context before each CAS.
+  beforePreparedGeneration?: (manifest: CatalogManifest) => Promise<() => Promise<void>>;
   expectedBaseGenerationId?: string;
   // Recovery writers may preserve already-published markets byte-for-byte while
   // rebuilding only their target market. Those rows are trusted only because
@@ -1767,7 +1770,14 @@ export async function persistCatalogOffers(nextOffers: VehicleOffer[], options: 
     const current = await storage.readJson<CatalogManifest>('catalog/manifest.json', {generationId: 'empty'} as CatalogManifest);
     if (current.generationId !== expectedBaseGenerationId) throw Error('catalog_publish_base_changed');
   };
-  const currentReadModels = await writeCurrentCatalogReadModels(generationId, publishedOffers, true, undefined, assertPublicationBase);
+  let verifyPreparedGeneration: (() => Promise<void>) | undefined;
+  const currentReadModels = await writeCurrentCatalogReadModels(generationId, publishedOffers, true, undefined, assertPublicationBase,
+    options.beforePreparedGeneration ? async () => {
+      await assertPublicationBase();
+      verifyPreparedGeneration = await options.beforePreparedGeneration!(manifest);
+      if (typeof verifyPreparedGeneration !== 'function') throw Error('catalog_prepared_generation_verifier_required');
+      await assertPublicationBase();
+    } : undefined);
   progress("current_read_models_written");
   await assertCurrentCatalogReadModelsReady(generationId, publishedOffers);
   assertCatalogPageWindowCurrent(currentReadModels.pageWindow);
@@ -1776,6 +1786,7 @@ export async function persistCatalogOffers(nextOffers: VehicleOffer[], options: 
     {...publicationCheckpoint,stage:"read_models_verified",updatedAt:new Date().toISOString()}, false);
   for (let attempt = 0; attempt < 5; attempt++) {
     await options.beforeManifestCommit?.();
+    await verifyPreparedGeneration?.();
     const current = await storage.readJsonWithMeta<CatalogManifest>("catalog/manifest.json", { ...manifest, generationId: "empty" });
     if (current.value.generationId !== expectedBaseGenerationId) throw new Error("catalog_publish_base_changed");
     assertCatalogPageWindowCurrent(currentReadModels.pageWindow);
@@ -1911,7 +1922,7 @@ type PreparedCurrentReadModels = {
   writeDetails: () => Promise<number>;
 };
 async function writeCurrentCatalogReadModels(generationId: string, storedOffers: VehicleOffer[], alreadyCanonical = false, prepared?: PreparedCurrentReadModels,
-  assertPageContext?: () => Promise<void>) {
+  assertPageContext?: () => Promise<void>, beforeMutableAliases?: () => Promise<void>) {
   if (!assertPageContext) throw Error('catalog_page_window_context_required');
   const reportStage=(stage:string)=>{if(process.env.CATALOG_PUBLICATION_PROGRESS === "1")
     console.log(JSON.stringify({stage:"current_read_models_"+stage,generationId,at:new Date().toISOString(),rss:process.memoryUsage().rss}));};
@@ -1968,6 +1979,7 @@ async function writeCurrentCatalogReadModels(generationId: string, storedOffers:
   reportStage("projections_built");
   await writeGenerationDirectoryIndexes(generationId,allProjectionItems);
   reportStage("directory_written");
+  await beforeMutableAliases?.();
   await writeJsonAtomic(CURRENT_FACETS_PATH, facets, false);
   await writeJsonAtomic(currentProjectionPath(CURRENT_ALL_MARKETS_PROJECTION), { generationId, items: allProjectionItems }, false);
   reportStage("all_projection_written");
