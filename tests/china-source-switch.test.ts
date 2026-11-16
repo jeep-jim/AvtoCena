@@ -10,7 +10,7 @@ async function fixture(entry:string,enabled:boolean){
    if(a.path.endsWith('collection-controls'))return {path:'controls',namespace:'fixture'};
    if(entry.endsWith('ajes-catalog.ts')&&a.importer.endsWith('ajes-catalog.ts')&&!a.path.endsWith('ajes-market-selection'))return {path:'empty',namespace:'fixture'};
   });
-  b.onLoad({filter:/.*/,namespace:'fixture'},a=>({contents:a.path==='controls'?`export async function assertCollectionEnabled(){if(!${enabled})throw Error('collection_disabled_by_owner');}`:`exports.cache=x=>x;exports.DetailReadCache=class {};`,loader:'js'}));
+  b.onLoad({filter:/.*/,namespace:'fixture'},a=>({contents:a.path==='controls'?`export class CollectionDisabledError extends Error {} export async function assertCollectionEnabled(){if(!${enabled})throw Error('collection_disabled_by_owner');}`:`exports.cache=x=>x;exports.DetailReadCache=class {};`,loader:'js'}));
  }}]});
  const m={exports:{} as any};new Function('require','module','exports',output.outputFiles[0].text)(require,m,m.exports);return m.exports;
 }
