@@ -14,7 +14,7 @@ function hasSchedule(source: string) {
 }
 
 function writesCatalogMarkets(source: string) {
-  return /catalog-market-refresh\.yml|catalog-v3-market-10k-reusable\.yml|catalog-publish-(?:market|source-scale|fresh)\.mjs|catalog-rebuild-source-shard\.mjs/.test(source);
+  return /catalog-market-refresh\.yml|catalog-paid-encar-refresh\.yml|catalog-v3-market-10k-reusable\.yml|catalog-publish-(?:market|source-scale|fresh)\.mjs|catalog-rebuild-source-shard\.mjs/.test(source);
 }
 
 test("each scheduled market owns its queue and shares guarded publication through the worker", () => {
@@ -26,7 +26,16 @@ test("each scheduled market owns its queue and shares guarded publication throug
   const source=text(name);
   const group=source.match(/group: (catalog-refresh-\w+)/)?.[1];assert.ok(group);groups.add(group!);
   assert.match(source,/cancel-in-progress: false/);
-  assert.match(source,/uses: \.\/\.github\/workflows\/catalog-market-refresh\.yml/);
+  if(name==='catalog-refresh-korea.yml'){
+   assert.match(source,/uses: \.\/\.github\/workflows\/catalog-paid-encar-refresh\.yml/);
+   const paid=text('catalog-paid-encar-refresh.yml');
+   assert.equal(hasSchedule(paid),false);
+   assert.match(paid,/publish:\s*\n\s+needs: prepare/);
+   assert.match(paid,/uses: \.\/\.github\/workflows\/catalog-market-refresh\.yml/);
+   assert.match(paid,/market: korea/);
+   assert.match(paid,/prepared_encar_self: true/);
+   assert.match(paid,/assertPaidEncarReportBinding\(binding/);
+  }else assert.match(source,/uses: \.\/\.github\/workflows\/catalog-market-refresh\.yml/);
  }
  assert.equal(groups.size,5);
  const worker=text('catalog-market-refresh.yml');

@@ -3,6 +3,7 @@ import {catalogInventoryLimit,catalogMarketInventoryLimit} from "./lib/catalog-i
 import {startPublicationHeartbeat} from './lib/publication-heartbeat.mjs';
 import {isCompletedChe168Delta,isCompletedDubicarsDelta} from './lib/auto-api-che168-client.mjs';
 import {assertPaidKoreaPublicationSource} from './lib/paid-korea-publication-guard.mjs';
+import {prepareStagedCatalogBudget} from './lib/catalog-staged-budget.mjs';
 // Maintenance publication reads large source payloads; avoid a burst of twelve simultaneous S3 downloads.
 process.env.CATALOG_READ_CONCURRENCY ||= "4";
 import { unavailableOfferRecord } from "../apps/web/lib/catalog/offer-availability.ts";
@@ -323,6 +324,10 @@ async function auditCandidate(sourceOffer) {
 }
 
 const dryRun = process.env.CATALOG_PUBLICATION_DRY_RUN === "1";
+if (!dryRun && market !== 'japan' && getJsonStorage().driver === 'object'
+    && (!process.env.CATALOG_BUDGET_RUNTIME_ROOT || !/^[a-f0-9]{40}$/.test(process.env.CATALOG_BUDGET_RUNTIME_RELEASE || ''))) {
+  throw Error('staged_budget_runtime_required');
+}
 function logPublicationMemory(stage) {
   const { rss, heapUsed, external } = process.memoryUsage();
   console.log(JSON.stringify({ market, stage, memoryBytes: { rss, heapUsed, external } }));
@@ -773,6 +778,10 @@ if (regressionBlocked) {
     manifest = await persistCatalogOffers(allOffers, {
       productionRefreshMarket: market,
       expectedBaseGenerationId,
+      ...(market !== 'japan' && getJsonStorage().driver === 'object' ? {
+        beforePreparedGeneration: candidate => prepareStagedCatalogBudget({storage:getJsonStorage(), manifest:candidate,
+          expectedBaseGenerationId, operationId:publishOperationId}),
+      } : {}),
       async beforeManifestCommit() {
         await assertCurrentKoreaPublicationSource();
         if (paidEncarReport) {
