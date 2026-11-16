@@ -167,6 +167,7 @@ export async function loadPaidRepairPlan({storage, normalize, verifyPages, isNon
     const root = `catalog/paid-encar-reports/v1/${time}`;
     if (!reportRoots.has(root)) {
       assert.ok(reportRoots.size < 1024, 'paid_repair_report_root_limit');
+      await onSourceRoot({kind:'encar-reports', root});
       const report = await storage.readJson(root + '/complete.json', null);
       assert.ok(report?.version === 1 && report.provider === 'auto_api_encar' && report.observedAtMs === time
         && Date.parse(report.observedAt) === time && /^\d+$/.test(report.sourceRunId)

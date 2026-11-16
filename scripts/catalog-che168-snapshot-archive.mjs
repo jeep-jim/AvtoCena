@@ -3,6 +3,8 @@ import fs from 'node:fs/promises';
 import {getJsonStorage} from '../apps/web/lib/data.ts';
 import {archiveChe168Snapshot,snapshotBinding} from './lib/che168-snapshot.mjs';
 import {openRawFeedPin,rawProducerOwner,readRawRootHandoff,writeRawRootHandoff} from './lib/catalog-raw-provenance.mjs';
+import {withRawReadProtection} from './lib/catalog-raw-session.mjs';
+import {commitChe168RawConfig} from './lib/che168-raw-config.mjs';
 await assertCollectionEnabled('che168_feed');
 const config=JSON.parse(await fs.readFile(process.env.CHE168_SNAPSHOT_CONFIG||'data/catalog/che168-snapshot-v1.json','utf8'));
 const storage=getJsonStorage();
@@ -13,8 +15,11 @@ const pin=existing?null:await openRawFeedPin({storage,owner,operationId:`che168-
   references:[{kind:'che168-snapshot',root}]});
 if(!prior)await pin.add([]);
 let last=0;
-const receipt=await archiveChe168Snapshot({config,storage,fetchImpl:async (...args)=>{await assertCollectionEnabled('che168_feed');return fetch(...args);},password:process.env.AUTO_API_CHE168_KEY,onProgress:progress=>{
+const archive=async scopedStorage=>{
+await commitChe168RawConfig({storage,config,owner});
+return archiveChe168Snapshot({config,storage:scopedStorage,fetchImpl:async (...args)=>{await assertCollectionEnabled('che168_feed');return fetch(...args);},password:process.env.AUTO_API_CHE168_KEY,onProgress:progress=>{
   if(Date.now()-last>30000||progress.archivedParts===progress.totalParts){console.log(JSON.stringify(progress));last=Date.now();}
-}});
+}});};
+const receipt=existing?await withRawReadProtection({storage,owner,references:[{kind:'che168-snapshot',root}],read:archive}):await archive(pin.storage);
 if(pin)await writeRawRootHandoff(storage,root,receipt,await pin.handoff());
 console.log(JSON.stringify({snapshotArchived:true,bytes:config.bytes,initialCursor:config.initialCursor}));

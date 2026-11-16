@@ -5,6 +5,7 @@ import {isCompletedChe168Delta,isCompletedDubicarsDelta} from './lib/auto-api-ch
 import {assertPaidKoreaPublicationSource} from './lib/paid-korea-publication-guard.mjs';
 import {prepareStagedCatalogBudget} from './lib/catalog-staged-budget.mjs';
 import {prepareRawPublication} from './lib/catalog-raw-publication.mjs';
+import {prepareRawInternalPublication} from './lib/catalog-raw-internal-publication.mjs';
 import {createPaidRepairPublicationGuard} from './lib/paid-encar-repair-io.mjs';
 // Maintenance publication reads large source payloads; avoid a burst of twelve simultaneous S3 downloads.
 process.env.CATALOG_READ_CONCURRENCY ||= "4";
@@ -764,7 +765,7 @@ const regressionBlocked = expectedPublishedByMarket[market] <= 0
   || (catastrophicPublicCollapse && !allowPublicCollapse);
 let manifest = null;
 let publicationError = "";
-let rawPublication = null, rawPinRelease = null;
+let rawPublication = null, rawPinRelease = null, rawInternalPublication = null;
 let technicalRepairReadback = null;
 let nextPublicCount = 0;
 let publishedSourceCounts = {};
@@ -800,9 +801,17 @@ if (regressionBlocked) {
       productionRefreshMarket: market,
       expectedBaseGenerationId,
       ...(market !== 'japan' && getJsonStorage().driver === 'object' ? {
+        rawCoordinationTicket: () => rawPublication?.binding?.ticket,
+        beforePreparedInternalManifest: async ({manifest: candidate, baseManifest}) => {
+          rawInternalPublication = await prepareRawInternalPublication({storage:getJsonStorage(), manifest:candidate,
+            baseManifest, operationId:publishOperationId,
+            intake:generation.payloads.find(payload => payload.report?.market === market)?.report});
+          return rawInternalPublication;
+        },
         beforePreparedGeneration: async candidate => {
           rawPublication = await prepareRawPublication({storage:getJsonStorage(), manifest:candidate,
-            expectedBaseGenerationId, market, intake:generation.payloads.find(payload => payload.report?.market === market)?.report});
+            expectedBaseGenerationId, market, operationId:publishOperationId,
+            intake:generation.payloads.find(payload => payload.report?.market === market)?.report});
           const verifyBudget = await prepareStagedCatalogBudget({storage:getJsonStorage(), manifest:candidate,
             expectedBaseGenerationId, operationId:publishOperationId});
           await rawPublication.verify();
@@ -878,7 +887,7 @@ if (regressionBlocked) {
       },
     });
     if (technicalRepairGuard) technicalRepairReadback = await technicalRepairGuard.verifyPublished(manifest.generationId, publishOperationId);
-    if (rawPublication) rawPinRelease = await rawPublication.releasePins();
+    if (rawPublication) rawPinRelease = await rawPublication.afterCommit();
   } catch (error) {
     publicationError = String(error?.message || error);
     console.error(error?.stack || publicationError);
@@ -908,6 +917,7 @@ const report = {
   publicationError,
   ...(technicalRepairReceipt ? {technicalRepair:technicalRepairReadback || {receiptSha256:technicalRepairReceipt.sha256, verified:false}} : {}),
   rawPinRelease,
+  rawCoordination: rawPublication?.binding || null,
   generationId: manifest?.generationId || null,
   previousManifestPreserved: !manifest,
   retentionMs,

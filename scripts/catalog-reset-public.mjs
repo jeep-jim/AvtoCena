@@ -1,4 +1,5 @@
 import crypto from "node:crypto";
+import {assertLegacyRawWriterDisabled} from '../apps/web/lib/catalog/raw-coordination-gate.mjs';
 
 const { getJsonStorage, StorageConflictError } = await import("../apps/web/lib/data.ts");
 const { PUBLIC_CATALOG_MARKETS } = await import("../apps/web/lib/catalog/runtime-config.ts");
@@ -8,6 +9,7 @@ if (process.env.CATALOG_RESET_CONFIRM !== "RESET_PUBLIC_CATALOG") {
 }
 
 const storage = getJsonStorage();
+await assertLegacyRawWriterDisabled(storage);
 let deletedObjects = 0;
 if (storage.deletePrefix) {
   deletedObjects = await storage.deletePrefix("catalog");

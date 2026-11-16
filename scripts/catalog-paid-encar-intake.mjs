@@ -271,9 +271,13 @@ async function main() {
   if(!saved)await pin.add([]);
   const request = paidEncarRequest({apiKey: process.env.ACCOUNT_KEY, assertEnabled,
     requestDelayMs: 200, deadline});
-  const receipt = await collectPaidEncarSnapshot({storage, request, assertEnabled, ...scope, deadline,
+  const collect = scopedStorage => collectPaidEncarSnapshot({storage:scopedStorage, request, assertEnabled, ...scope, deadline,
     allowPartial: process.env.ENCAR_ALLOW_PARTIAL === 'true',
     progress: value => console.log(JSON.stringify(value))});
+  const {withRawReadProtection} = await import('./lib/catalog-raw-session.mjs');
+  const receipt = existing ? await withRawReadProtection({storage,
+    owner:{runId:scope.runId,attempt:scope.attempt,revision:scope.headSha},
+    references:[{kind:'encar-snapshot',root}],read:collect}) : await collect(pin.storage);
   if(receipt.completed!==false){
     const handoff=existing||await writeRawRootHandoff(storage,root,receipt,await pin.handoff());
     receipt.rawStoragePins=[handoff];

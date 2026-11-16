@@ -13,11 +13,12 @@ const run = process.env.ENCAR_SNAPSHOT_RUN;
 const attempt = process.env.ENCAR_SNAPSHOT_ATTEMPT;
 if (!/^\d+$/.test(run || '') || !/^\d+$/.test(attempt || '')) throw Error('Invalid snapshot identity');
 const prefix = 'catalog/intake-staging/encar/' + run + '/' + attempt;
-const storage = getJsonStorage();
+let storage = getJsonStorage();
 const owner=rawProducerOwner();
 const rawPin=await openRawFeedPin({storage,owner,operationId:`encar-restore-${owner.runId}-${owner.attempt}`,
   references:[{kind:'encar-snapshot',root:prefix}]});
 await rawPin.add([]);
+storage=rawPin.storage;
 const snapshot = await storage.readJson(prefix + '/complete.json', null);
 if (!Number.isSafeInteger(snapshot?.pages) || snapshot.pages < 1 ||
     !Number.isSafeInteger(snapshot.count) || snapshot.count < 1 ||

@@ -159,7 +159,7 @@ export async function preparePaidEncarReports() {
   const {getJsonStorage} = await import('../apps/web/lib/data.ts');
   const {readCollectionControls} = await import('../apps/web/lib/catalog/collection-controls.ts');
   const {collectionEnabled} = await import('../apps/web/lib/catalog/collection-controls-schema.ts');
-  const storage = getJsonStorage();
+  let storage = getJsonStorage();
   assert.equal(storage.driver, 'object', 'paid_report_requires_object_storage');
   const run = process.env.ENCAR_SNAPSHOT_RUN, attempt = process.env.ENCAR_SNAPSHOT_ATTEMPT;
   assert.match(String(run || ''), /^\d+$/);
@@ -171,6 +171,7 @@ export async function preparePaidEncarReports() {
   const owner=rawProducerOwner(),reportRoot=`catalog/paid-encar-reports/v1/${identity.observedAtMs}`;
   const rawPin=await openRawFeedPin({storage,owner,operationId:`encar-reports-${owner.runId}-${owner.attempt}`,
     references:[{kind:'encar-snapshot',root:prefix},{kind:'encar-reports',root:reportRoot}]});
+  storage=rawPin.storage;
   if(await storage.readJson(reportRoot+'/complete.json',null)===null)await rawPin.add([]);
   const assertEnabled = async () => assert.ok(collectionEnabled(await readCollectionControls(storage), 'encar_feed'),
     'paid_report_disabled_by_owner');

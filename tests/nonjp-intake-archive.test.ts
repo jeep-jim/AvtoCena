@@ -1,4 +1,5 @@
 import test from 'node:test';
+import {rawInternalPointerDescriptor} from '../apps/web/lib/catalog/raw-internal-provenance.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -14,6 +15,8 @@ import {collectSourcePage, intakeState} from '../scripts/lib/catalog-source-inta
 import {publishedIntakeCheckpoint} from '../scripts/lib/catalog-intake-checkpoint.mjs';
 import {prepareRawPublication} from '../scripts/lib/catalog-raw-publication.mjs';
 import {planRawFeedRetention} from '../scripts/lib/catalog-raw-retention-plan.mjs';
+import {RAW_COORDINATION_KEY,createRawCoordination,rawCatalogDescriptor,rawPointerDescriptor,RAW_COORDINATED_POINTERS} from '../scripts/lib/catalog-raw-coordination.mjs';
+import {RAW_COORDINATION_POLICY_KEY} from '../apps/web/lib/catalog/raw-coordination-gate.mjs';
 
 const owner={runId:'123456',attempt:'1',revision:'a'.repeat(40)};
 function storageFixture() {
@@ -37,6 +40,49 @@ async function directory(market='uae',partial=false) {
   await fs.writeFile(path.join(input,'source-000001.jsonl'),data);
   return {root,input,data};
 }
+
+async function requiredFixture() {
+  const f=storageFixture(),registryId='f'.repeat(32);
+  await f.storage.writeJson(RAW_COORDINATION_KEY,createRawCoordination({registryId,current:rawCatalogDescriptor(null),
+    previous:rawCatalogDescriptor(null),pointers:RAW_COORDINATED_POINTERS.map(id=>({id,current:id==='internal_catalog'
+      ? rawInternalPointerDescriptor(null) : rawPointerDescriptor(null,[],{complete:true})}))}),{ifNoneMatch:'*'});
+  await f.storage.writeJson(RAW_COORDINATION_POLICY_KEY,{version:1,mode:'required',protocolVersion:1,registryId},{ifNoneMatch:'*'});
+  return f;
+}
+
+test('required archive records real queued writes, seals its grant, and restores through a separately drained read claim',async()=>{
+  const f=await requiredFixture(),d=await directory();
+  try {
+    const receipt=await archiveIntakeDirectory({storage:f.storage,directory:d.input,market:'uae',owner});
+    const registry=f.objects.get(RAW_COORDINATION_KEY);
+    assert.equal(registry.claims.length,1);
+    assert.equal(registry.claims[0].phase,'ready');
+    assert.equal(registry.claims[0].revision,receipt.handoff.coordination.ticket.revision);
+    assert.equal(registry.claims[0].references[0].sha256,receipt.manifestSha256);
+    const before=f.writes.filter(key=>key.startsWith(receipt.root+'/')).length;
+    await verifyIntakeArchive({storage:f.storage,receipt,directory:path.join(d.root,'restored'),readerOwner:owner});
+    assert.equal(f.writes.filter(key=>key.startsWith(receipt.root+'/')).length,before);
+    assert.equal(f.objects.get(RAW_COORDINATION_KEY).claims.length,1,'the temporary read claim closes, the producer handoff stays protected');
+    assert.equal(await fs.readFile(path.join(d.root,'restored','source-000001.jsonl'),'utf8'),d.data);
+  } finally {await fs.rm(d.root,{recursive:true,force:true});}
+});
+
+test('archive resumes only exact sealed coordinator state after pin-ready persistence fails',async()=>{
+  const f=await requiredFixture(),d=await directory(),write=f.storage.writeJson;
+  f.storage.writeJson=async(key,value,condition)=>{
+    if(key.startsWith('catalog/raw-feed-pins/')&&value.state==='ready')throw Error('pin_ready_write_failed');
+    return write(key,value,condition);
+  };
+  try {
+    await assert.rejects(archiveIntakeDirectory({storage:f.storage,directory:d.input,market:'uae',owner}),/pin_ready_write_failed/);
+    const root=intakeArchiveRoot('uae',owner),rawWrites=f.writes.filter(key=>key.startsWith(root+'/')).length;
+    assert.equal(f.objects.get(RAW_COORDINATION_KEY).claims[0].phase,'ready');
+    f.storage.writeJson=write;
+    const receipt=await archiveIntakeDirectory({storage:f.storage,directory:d.input,market:'uae',owner});
+    assert.equal(f.writes.filter(key=>key.startsWith(root+'/')).length,rawWrites,'no raw byte is rewritten during sealed recovery');
+    assert.equal(f.objects.get(receipt.handoff.key).state,'ready');
+  } finally {await fs.rm(d.root,{recursive:true,force:true});}
+});
 
 test('each non-Japan intake is verified in own storage and restored byte-for-byte without source calls',async()=>{
   for(const market of ['china','korea','uae','europe','georgia']) {

@@ -16,11 +16,13 @@ import {saveChe168Replica,restoreChe168Replica} from './lib/che168-replica.mjs';
 import {openChe168ReplayJournal} from './lib/che168-replay-journal.mjs';
 import {observationShardWriter} from './lib/catalog-intake-checkpoint.mjs';
 import {openRawFeedPin,rawProducerOwner,readRawRootHandoff} from './lib/catalog-raw-provenance.mjs';
+import {commitChe168RawConfig} from './lib/che168-raw-config.mjs';
 
 await assertCollectionEnabled('che168_feed');
 const directory=process.env.AUTO_API_INTAKE_DIR||'catalog-intake-china';
 const config=JSON.parse(await fs.readFile(process.env.CHE168_SNAPSHOT_CONFIG||'data/catalog/che168-snapshot-v1.json','utf8'));
-const binding=snapshotBinding(config),storage=getJsonStorage();
+const binding=snapshotBinding(config);
+let storage=getJsonStorage();
 if(storage.driver!=='object')throw Error('auto_api_durable_storage_required');
 const yearFrom=CHINA_MIN_MODEL_YEAR;
 const saved=await storage.readJson('catalog/intake-cursors/v1/china.json',null);
@@ -54,6 +56,8 @@ const rawPin=await openRawFeedPin({storage,owner,operationId:`che168-intake-${ow
   references:[{kind:'che168-snapshot',root:snapshotRoot},{kind:'che168-journal',root:source.workingJournal.key},
     ...(resume?[{kind:'che168-replica',root:previous.replica.key,sha256:previous.replica.sha256}]:[])]});
 await rawPin.add([]); // Refuse to resume collection after its handoff was frozen.
+await commitChe168RawConfig({storage,config,owner});
+storage=rawPin.storage;
 const withdrawals=new Map(),quarantine=new Map();
 async function checkpoint(){await fs.writeFile(path.join(directory,'report.tmp'),JSON.stringify(report));await fs.rename(path.join(directory,'report.tmp'),path.join(directory,'report.json'));}
 await checkpoint();

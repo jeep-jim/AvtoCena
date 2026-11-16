@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
+import {assertRawCoordinationTicket} from '../../apps/web/lib/catalog/raw-coordination-gate.mjs';
 
 const SHA = /^[a-f0-9]{64}$/;
 const GENERATION = /^gen_\d+_[a-z0-9-]+$/;
@@ -61,7 +62,8 @@ export function assertDurableIntakeArchive(value, market = value?.market) {
   const handoff = value.handoff;
   return {version: 1, market, owner, root, manifestSha256: value.manifestSha256, reportDigest: value.reportDigest,
     handoff: {version: 1, key: handoff.key, operationId: handoff.operationId, owner,
-      readyAt: handoff.readyAt, references: rawReferences(handoff.references), referencesSha256: handoff.referencesSha256}};
+      readyAt: handoff.readyAt, references: rawReferences(handoff.references), referencesSha256: handoff.referencesSha256,
+      ...(handoff.coordination ? {coordination: pinCoordination(handoff.coordination, handoff)} : {})}};
 }
 
 /** Preserve only source identities, never provider URLs, credentials or raw errors. */
@@ -112,6 +114,14 @@ export function intakeRawReferences(intake) {
   assert.ok((intake?.completed === true || archive) && validTime(intake.completedAt), 'raw_intake_incomplete');
   bounded(intake.sources, 100, 'raw_intake_sources');
   const references = [], producers = [], unknownSources = [];
+  const dependencies = intake.rawArchiveDependencies || [];
+  bounded(dependencies, 64, 'raw_intake_dependency_limit');
+  for (const value of dependencies) {
+    const archive = assertDurableIntakeArchive(value, intake.market);
+    const evidence = producerEvidence({sourceId: 'archive_' + intake.market + '_' + rawDigest(archive.root).slice(0, 16),
+      provider: 'owned_intake_archive', archive}, intake.market);
+    references.push(...evidence.references); producers.push(...evidence.producers);
+  }
   if (archive) {
     const evidence = producerEvidence({sourceId: 'archive_' + intake.market, provider: 'owned_intake_archive', archive}, intake.market);
     references.push(...evidence.references); producers.push(...evidence.producers);
@@ -287,8 +297,20 @@ function pinIdentity(operationId, owner) {
   return {operationId, owner: {runId: owner.runId, attempt: owner.attempt, revision: owner.revision}};
 }
 
+function pinCoordination(binding, pin) {
+  assert.ok(binding?.version === 1 && binding.policy?.version === 1
+    && SHA.test(binding.policy.policySha256), 'raw_pin_coordination');
+  const ticket = assertRawCoordinationTicket(binding.ticket);
+  assert.ok(ticket.registryId === binding.policy.registryId && ticket.operationId === pin.operationId
+    && ticket.owner.runId === pin.owner.runId && ticket.owner.attempt === pin.owner.attempt
+    && ticket.owner.sourceSha === pin.owner.revision, 'raw_pin_coordination_owner');
+  return {version: 1, policy: {version: 1, registryId: binding.policy.registryId,
+    policySha256: binding.policy.policySha256}, ticket};
+}
+
 export function assertRawPin(pin) {
   pinIdentity(pin?.operationId, pin?.owner);
+  if (pin.coordination) pinCoordination(pin.coordination, pin);
   assert.ok(pin.version === 1 && ['loading', 'ready', 'published', 'abandoned'].includes(pin.state)
     && validTime(pin.createdAt) && validTime(pin.updatedAt) && Date.parse(pin.updatedAt) >= Date.parse(pin.createdAt), 'raw_pin_invalid');
   rawReferences(pin.references);
@@ -309,11 +331,13 @@ function handoffDescriptor(pin) {
   assertRawPin(pin);
   assert.ok(['ready', 'published'].includes(pin.state) && pin.readyAt, 'raw_pin_not_ready');
   return {version: 1, key: RAW_PIN_PREFIX + pin.operationId + '.json', operationId: pin.operationId,
-    owner: pin.owner, readyAt: pin.readyAt, references: rawReferences(pin.references), referencesSha256: rawDigest(rawReferences(pin.references))};
+    owner: pin.owner, readyAt: pin.readyAt, references: rawReferences(pin.references), referencesSha256: rawDigest(rawReferences(pin.references)),
+    ...(pin.coordination ? {coordination: pinCoordination(pin.coordination, pin)} : {})};
 }
 
 export function assertRawHandoff(handoff) {
   pinIdentity(handoff?.operationId, handoff?.owner);
+  if (handoff.coordination) pinCoordination(handoff.coordination, handoff);
   assert.ok(handoff.version === 1 && handoff.key === RAW_PIN_PREFIX + handoff.operationId + '.json'
     && validTime(handoff.readyAt) && rawDigest(rawReferences(handoff.references)) === handoff.referencesSha256, 'raw_handoff_invalid');
   return handoff;
@@ -351,21 +375,25 @@ export async function releaseRawHandoff({storage, handoff, manifest, clock = Dat
   assert.ok(handoff.references.every(row => roots.has(row.root) && (!row.sha256 || roots.get(row.root).sha256 === row.sha256)), 'raw_handoff_generation_refs_missing');
   const meta = await storage.readJsonWithMeta(handoff.key, null);
   assert.ok(meta.found && meta.etag && rawDigest(handoffDescriptor(meta.value)) === rawDigest(handoff), 'raw_handoff_ownership_changed');
-  if (meta.value.state === 'published') return;
-  const at = new Date(clock()).toISOString();
-  assert.ok(Date.parse(at) >= Date.parse(meta.value.updatedAt), 'raw_handoff_clock_regressed');
-  await storage.writeJson(handoff.key, {...meta.value, state: 'published', generationId: manifest.generationId,
-    updatedAt: at, terminalAt: at}, {ifMatch: meta.etag});
+  const {verifyRawProducerRelease, releaseRawProducerSession} = await import('./catalog-raw-session.mjs');
+  await verifyRawProducerRelease({storage, binding: handoff.coordination || null, manifest, pin: meta.value});
+  if (meta.value.state !== 'published') {
+    const at = new Date(clock()).toISOString();
+    assert.ok(Date.parse(at) >= Date.parse(meta.value.updatedAt), 'raw_handoff_clock_regressed');
+    await storage.writeJson(handoff.key, {...meta.value, state: 'published', generationId: manifest.generationId,
+      updatedAt: at, terminalAt: at}, {ifMatch: meta.etag});
+  }
   const saved = await storage.readJson(handoff.key, null);
-  assert.ok(saved?.state === 'published' && saved.generationId === manifest.generationId
+  assert.ok(saved?.state === 'published'
     && rawDigest(handoffDescriptor(saved)) === rawDigest(handoff), 'raw_handoff_release_readback');
+  await releaseRawProducerSession({storage, binding: handoff.coordination || null, terminalPin: saved, generationId: manifest.generationId});
 }
 
 /** Producer-owned pin, separate from the publication lease; age never releases it. */
-export async function openRawFeedPin({storage, operationId, owner, references, clock = Date.now}) {
+export async function openRawFeedPin({storage, operationId, owner, references, clock = Date.now, readOnly = false}) {
   assert.equal(storage.driver, 'object', 'raw_pin_requires_object_storage');
   const identity = pinIdentity(operationId, owner), key = RAW_PIN_PREFIX + operationId + '.json';
-  let meta = await storage.readJsonWithMeta(key, null), sequence = Promise.resolve();
+  let meta = await storage.readJsonWithMeta(key, null), sequence = Promise.resolve(), handoffRequested = false;
   async function save(value) {
     await storage.writeJson(key, assertRawPin(value), meta.found ? {ifMatch: meta.etag} : {ifNoneMatch: '*'});
     const next = await storage.readJsonWithMeta(key, null);
@@ -377,9 +405,16 @@ export async function openRawFeedPin({storage, operationId, owner, references, c
     assertRawPin(meta.value);
     assert.ok(meta.etag && rawDigest(meta.value.owner) === rawDigest(identity.owner)
       && meta.value.operationId === operationId && ['loading', 'ready'].includes(meta.value.state), 'raw_pin_not_owned');
-  } else {
+  }
+  const {openRawProducerSession} = await import('./catalog-raw-session.mjs');
+  const session = await openRawProducerSession({storage, operationId, owner,
+    references: meta.found ? meta.value.references : roots,
+    binding: meta.value?.coordination || null, existingPin: meta.found, readOnly});
+  if (!meta.found) {
     const at = new Date(clock()).toISOString();
-    await save({version: 1, ...identity, state: 'loading', createdAt: at, updatedAt: at, references: roots});
+    await save({version: 1, ...identity, state: 'loading', createdAt: at, updatedAt: at, references: roots,
+      ...(readOnly ? {mode: 'read_only'} : {}),
+      ...(session.required ? {coordination: session.binding()} : {})});
   }
   const change = update => (sequence = sequence.then(async () => {
     assert.equal(meta.value.state, 'loading', 'raw_pin_already_terminal');
@@ -389,19 +424,42 @@ export async function openRawFeedPin({storage, operationId, owner, references, c
     await save(await update(meta.value, at));
     return meta.value;
   }));
-  const add = values => change((current, at) => ({...current, updatedAt: at,
-    references: rawReferences([...current.references, ...values])}));
+  const add = values => {
+    if (handoffRequested) return Promise.reject(Error('raw_pin_already_terminal'));
+    return change(async (current, at) => {
+    const next = rawReferences([...current.references, ...values]);
+    await session.extend(values);
+    return {...current, updatedAt: at, references: next,
+      ...(session.required ? {coordination: session.binding()} : {})};
+    });
+  };
   // An interrupted producer may resume only its own pin; references only grow.
   if (rawDigest(rawReferences([...meta.value.references, ...roots])) !== rawDigest(meta.value.references)) await add(roots);
   return {
-    key, add,
+    key, add, storage: session.storage, coordinated: session.required,
     handoff: async () => {
+      assert.ok(!readOnly, 'raw_pin_read_only_handoff');
       if (meta.value.state === 'ready') return handoffDescriptor(meta.value);
+      handoffRequested = true;
+      await sequence;
+      const coordination = await session.seal();
       const saved = await change((current, at) => ({...current, state: 'ready', updatedAt: at,
-        readyAt: at, releasePolicy: 'published_generation_references'}));
+        readyAt: at, releasePolicy: 'published_generation_references', ...(coordination ? {coordination} : {})}));
       return handoffDescriptor(saved);
     },
+    finishRead: async () => {
+      assert.ok(readOnly && session.required, 'raw_pin_not_coordinated_reader');
+      handoffRequested = true;
+      await sequence;
+      const coordination = await session.seal(), at = new Date(clock()).toISOString();
+      assert.ok(meta.value.mode === 'read_only', 'raw_pin_reader_mode_changed');
+      await change(current => ({...current, state: 'abandoned', reason: 'read_complete',
+        updatedAt: at, terminalAt: at, coordination}));
+      const {releaseRawReadSession} = await import('./catalog-raw-session.mjs');
+      await releaseRawReadSession({storage, binding: coordination, terminalPin: meta.value});
+    },
     published: generationId => change(async (current, at) => {
+      assert.ok(!session.required, 'raw_coord_use_frozen_handoff');
       const manifest = await storage.readJson('catalog/manifest.json', null);
       assert.equal(manifest?.generationId, generationId, 'raw_pin_generation_not_published');
       const provenance = await storage.readJson(rawGenerationKey(generationId), null);
@@ -410,6 +468,9 @@ export async function openRawFeedPin({storage, operationId, owner, references, c
         && (!row.sha256 || protectedRoots.get(row.root).sha256 === row.sha256)), 'raw_pin_generation_refs_missing');
       return {...current, state: 'published', updatedAt: at, terminalAt: at, generationId};
     }),
-    abandoned: reason => change((current, at) => ({...current, state: 'abandoned', updatedAt: at, terminalAt: at, reason})),
+    abandoned: reason => change((current, at) => {
+      assert.ok(!session.required, 'raw_coord_abandon_requires_terminal_evidence');
+      return {...current, state: 'abandoned', updatedAt: at, terminalAt: at, reason};
+    }),
   };
 }

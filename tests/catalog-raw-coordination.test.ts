@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import {rawDigest, buildRawGenerationProvenance} from '../scripts/lib/catalog-raw-provenance.mjs';
+import {buildRawInternalProvenance, rawInternalPointerDescriptor} from '../apps/web/lib/catalog/raw-internal-provenance.mjs';
 import {RAW_COORDINATION_KEY, RAW_COORDINATION_LIMITS, RAW_COORDINATED_WRITERS, RAW_COORDINATED_POINTERS, coordinatedRawRootKind,
   coordinatedRawReferences, rawCatalogDescriptor, createRawCoordination, assertRawCoordination,
   rawPointerDescriptor, rawCoordinationCapacity, rawGcPlan, transitionRawCoordination, assertRawWritePermit,
@@ -15,7 +16,8 @@ const ref = n => ({kind: 'che168-replica', root: root(n)});
 const manifest = n => ({version: 2, generationId: `gen_${1000 + n}_abcdef${n}`, markets: {}});
 const generation = (n, references = []) => ({generationId: manifest(n).generationId, manifestSha256: rawDigest(manifest(n)),
   provenanceSha256: sha(n + 100), complete: true, references});
-const emptyPointers = () => RAW_COORDINATED_POINTERS.map(id => ({id, current: rawPointerDescriptor(null, [], {complete: true})}));
+const emptyPointers = () => RAW_COORDINATED_POINTERS.map(id => ({id, current: id === 'internal_catalog'
+  ? rawInternalPointerDescriptor(null) : rawPointerDescriptor(null, [], {complete: true})}));
 const initial = () => createRawCoordination({registryId: token(999), current: generation(1), previous: generation(0), pointers: emptyPointers()});
 const step = (state, command) => transitionRawCoordination(state, {...command, expectedRevision: state.revision});
 const coverage = state => ({version: 1, complete: true, registryId: state.registryId, atRevision: state.revision,
@@ -92,6 +94,25 @@ test('coverage demands all guarded writer paths and actual terminal evidence for
   const report = structuredClone(valid);
   report.legacyJobs = [{...owner, status: 'completed', terminalEvidenceSha256: sha(18)}];
   assert.equal(step(state, {type: 'verify_coverage', report}).state.coverage.status, 'verified');
+});
+
+test('the internal input pointer is mandatory and nonempty row lineage remains unknown even with an immutable proof', () => {
+  const state = initial();
+  const obsolete = structuredClone(state); obsolete.pointers = obsolete.pointers.filter(row => row.id !== 'internal_catalog');
+  assert.throws(() => assertRawCoordination(obsolete), /pointer_inventory/);
+  const value = {generationId: 'gen_2000_internal', sources: {encar_direct: {count: 1,
+    chunks: ['catalog/internal/offers/encar_direct/gen_2000_internal-chunk-0001.json']}}};
+  const proof = buildRawInternalProvenance({manifest: value, references: [ref(10)]});
+  const candidate = rawInternalPointerDescriptor(value, proof);
+  assert.equal(candidate.complete, false);
+  assert.throws(() => rawInternalPointerDescriptor(value, {...proof, complete: true}), /provenance_changed/);
+  const pointer = state.pointers.find(row => row.id === 'internal_catalog');
+  let next = step(state, {type: 'reserve_pointer', id: pointer.id, ...source(620),
+    pointerRevision: pointer.revision, base: pointer.current, candidate});
+  next = step(next.state, {type: 'commit_pointer', id: pointer.id, ticket: next.result, observedValue: value});
+  next = step(next.state, {type: 'verify_coverage', report: coverage(next.state)});
+  assert.throws(() => prove(next.state, 11), /pointer_unknown/);
+  assert.deepEqual(next.state.pointers.find(row => row.id === pointer.id).current.references, [ref(10)]);
 });
 
 test('producer claim wins against an inventory prepared before its write, even when it later releases', () => {

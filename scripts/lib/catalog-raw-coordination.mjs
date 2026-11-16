@@ -1,14 +1,16 @@
 import assert from 'node:assert/strict';
 import {rawDigest, rawRootKind, assertRawGenerationProvenance} from './catalog-raw-provenance.mjs';
+import {RAW_INTERNAL_COORDINATION_ID} from '../../apps/web/lib/catalog/raw-internal-provenance.mjs';
 
 export const RAW_COORDINATION_KEY = 'catalog/raw-feed-coordination/v1/state.json';
 export const RAW_COORDINATION_LIMITS = Object.freeze({roots: 10000, claims: 256, references: 4096,
   bytes: 4 * 1024 * 1024, groups: 10, objects: 250000, inventoryBytes: 100 * 1024 ** 3, batch: 1000});
 export const RAW_COORDINATED_WRITERS = Object.freeze(['che168_archive', 'che168_bulk', 'che168_recovery',
   'encar_intake', 'encar_reports', 'encar_restore', 'nonjp_intake', 'nonjp_restore',
-  'catalog_persist', 'catalog_activate_verified', 'catalog_stitch_verified', 'catalog_restore_preinventory', 'catalog_commit_intake_cursor']);
+  'catalog_persist', 'catalog_activate_verified', 'catalog_stitch_verified', 'catalog_restore_preinventory', 'catalog_commit_intake_cursor',
+  'catalog_reset_public', 'catalog_import_sample_reset']);
 export const RAW_COORDINATED_POINTERS = Object.freeze(['intake_cursor:china', 'intake_cursor:korea', 'intake_cursor:uae',
-  'intake_cursor:europe', 'intake_cursor:georgia', 'che168_snapshot_config']);
+  'intake_cursor:europe', 'intake_cursor:georgia', 'che168_snapshot_config', RAW_INTERNAL_COORDINATION_ID]);
 const SHA = /^[a-f0-9]{64}$/, SOURCE_SHA = /^[a-f0-9]{40}$/;
 const ID = /^[a-zA-Z0-9_-]{1,150}$/, TOKEN = /^[a-f0-9]{32,64}$/;
 const GENERATION = /^gen_\d+_[a-z0-9-]+$/;
@@ -69,10 +71,17 @@ export function rawPointerDescriptor(value, references, {complete = false} = {})
   return pointerDescriptor({sha256: rawDigest(value), references, complete});
 }
 
-function pointerDescriptor(value) {
+function pointerDescriptor(value, id) {
   digest(value?.sha256, 'raw_coord_pointer_sha');
   assert.equal(typeof value.complete, 'boolean', 'raw_coord_pointer_complete');
-  return {sha256: value.sha256, complete: value.complete, references: coordinatedRawReferences(value.references)};
+  const clean = {sha256: value.sha256, complete: value.complete, references: coordinatedRawReferences(value.references)};
+  if (id === RAW_INTERNAL_COORDINATION_ID) {
+    assert.ok(Object.hasOwn(value, 'provenanceSha256'), 'raw_coord_internal_provenance_missing');
+    if (value.provenanceSha256 !== null) digest(value.provenanceSha256, 'raw_coord_internal_provenance_sha');
+    if (value.complete && value.sha256 !== rawDigest(null)) assert.ok(value.provenanceSha256 !== null, 'raw_coord_internal_complete_without_provenance');
+    clean.provenanceSha256 = value.provenanceSha256;
+  } else assert.equal(value.provenanceSha256, undefined, 'raw_coord_pointer_provenance_scope');
+  return clean;
 }
 
 /** The caller reads the actual manifest/provenance. Unknown legacy is explicit. */
@@ -178,11 +187,17 @@ export function assertRawCoordination(state) {
   list(state.pointers, RAW_COORDINATED_POINTERS.length, 'raw_coord_pointer_limit');
   assert.deepEqual(state.pointers.map(row => row.id).sort(), [...RAW_COORDINATED_POINTERS].sort(), 'raw_coord_pointer_inventory');
   for (const pointer of state.pointers) {
-    revision(pointer.revision, state.revision); pointerDescriptor(pointer.current);
+    revision(pointer.revision, state.revision); pointerDescriptor(pointer.current, pointer.id);
+    if (pointer.lastCommit) {
+      identity(pointer.lastCommit);
+      revision(pointer.lastCommit.grantRevision, pointer.lastCommit.revision);
+      revision(pointer.lastCommit.revision, pointer.lastCommit.committedRevision);
+      revision(pointer.lastCommit.committedRevision, pointer.revision);
+    }
     if (pointer.pending) {
       const pending = pointer.pending;
       identity(pending); revision(pending.grantRevision, pending.revision); revision(pending.revision, state.revision);
-      pointerDescriptor(pending.candidate);
+      pointerDescriptor(pending.candidate, pointer.id);
       assert.ok(same(pending.base, pointer.current), 'raw_coord_pointer_pending_base');
     }
   }
@@ -231,7 +246,8 @@ export function createRawCoordination({registryId, current, previous, pointers =
     coverage: {status: 'unknown', revision: 1, reason: 'writer_inventory_not_verified', proofSha256: null},
     roots: [], claims: [], catalog: {revision: 1, current: descriptor(current), previous: descriptor(previous), pending: null},
     pointers: RAW_COORDINATED_POINTERS.map(id => ({id, revision: 1, pending: null,
-      current: pointerDescriptor(pointers.find(row => row.id === id)?.current || {sha256: rawDigest(null), complete: false, references: []})})), gc: null};
+      current: pointerDescriptor(pointers.find(row => row.id === id)?.current || {sha256: rawDigest(null), complete: false, references: [],
+        ...(id === RAW_INTERNAL_COORDINATION_ID ? {provenanceSha256: null} : {})}, id)})), gc: null};
   for (const ref of [...allCatalogReferences(state), ...allPointerReferences(state)]) touch(state, ref);
   return assertRawCoordination(state);
 }
@@ -384,8 +400,8 @@ export function transitionRawCoordination(before, command) {
       assert.ok(pointer, 'raw_coord_pointer_scope');
       assert.equal(pointer.pending, null, 'raw_coord_pointer_pending');
       assert.equal(command.pointerRevision, pointer.revision, 'raw_coord_pointer_changed');
-      assert.ok(same(pointerDescriptor(command.base), pointer.current), 'raw_coord_pointer_base_changed');
-      const candidate = pointerDescriptor(command.candidate);
+      assert.ok(same(pointerDescriptor(command.base, command.id), pointer.current), 'raw_coord_pointer_base_changed');
+      const candidate = pointerDescriptor(command.candidate, command.id);
       for (const ref of candidate.references) touch(state, ref);
       pointer.pending = {...identity(command), grantRevision: state.revision, revision: state.revision, base: pointer.current, candidate};
       pointer.revision = state.revision; result = ticket(state, pointer.pending); break;
@@ -395,6 +411,8 @@ export function transitionRawCoordination(before, command) {
       const pending = owned(state, pointer?.pending, command.ticket);
       assert.equal(rawDigest(command.observedValue), pending.candidate.sha256, 'raw_coord_pointer_not_committed');
       for (const ref of [...pointer.current.references, ...pending.candidate.references]) touch(state, ref);
+      pointer.lastCommit = {...identity(pending), grantRevision: pending.grantRevision, revision: pending.revision,
+        committedRevision: state.revision};
       pointer.current = pending.candidate; pointer.pending = null; pointer.revision = state.revision;
       result = {id: pointer.id, revision: pointer.revision}; break;
     }
@@ -517,6 +535,31 @@ export function assertRawWritePermit(state, supplied, key) {
     const leaf = key.slice(row.root.length + 1);
     return /^[a-zA-Z0-9_./-]{1,512}$/.test(leaf) && !leaf.split('/').some(part => !part || part === '.' || part === '..');
   }), 'raw_coord_write_outside_claim');
+  return true;
+}
+
+/** Read-only ownership inspection for session/handoff recovery. It never
+ * creates a fresh grant or adopts an operation merely by its friendly name. */
+export function rawClaimForTicket(state, supplied) {
+  assertRawCoordination(state);
+  return owned(state, state.claims.find(row => row.token === supplied?.token), supplied);
+}
+
+export function rawReadyClaimForRecovery(state, supplied, references) {
+  assertRawCoordination(state);
+  const row = state.claims.find(value => value.token === supplied?.token);
+  assert.ok(row && supplied.registryId === state.registryId
+    && same(identity(row), identity(supplied)) && row.grantRevision === supplied.grantRevision
+    && row.phase === 'ready' && row.revision >= supplied.revision
+    && same(row.references, coordinatedRawReferences(references)), 'raw_coord_ready_recovery_changed');
+  return ticket(state, row);
+}
+
+export function assertRawReadPermit(state, supplied, key) {
+  const row = rawClaimForTicket(state, supplied);
+  assert.ok(row.references.some(ref => typeof key === 'string' && key.startsWith(ref.root + '/')
+    && /^[a-zA-Z0-9_./-]{1,512}$/.test(key.slice(ref.root.length + 1))
+    && !key.slice(ref.root.length + 1).split('/').some(part => !part || part === '.' || part === '..')), 'raw_coord_read_outside_claim');
   return true;
 }
 

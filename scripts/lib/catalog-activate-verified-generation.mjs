@@ -1,7 +1,9 @@
 import crypto from 'node:crypto';
+import {assertLegacyRawWriterDisabled} from '../../apps/web/lib/catalog/raw-coordination-gate.mjs';
 const canonical=v=>Array.isArray(v)?v.map(canonical):v&&typeof v==='object'?Object.fromEntries(Object.keys(v).sort().map(k=>[k,canonical(v[k])])):v;
 const same=(a,b)=>JSON.stringify(canonical(a))===JSON.stringify(canonical(b));
 export async function activateVerifiedGeneration(storage,proof,scope,now=()=>Date.now()){
+ await assertLegacyRawWriterDisabled(storage);
  const {generationId,expectedBaseGenerationId,expectedCounts,readModelsWrittenAt}=scope;
  const cutoff=Date.parse(readModelsWrittenAt),verifiedAt=Date.parse(proof?.verifiedAt);
  if(!/^gen_\d+_[a-z0-9]+$/.test(generationId)||generationId===expectedBaseGenerationId||!Number.isFinite(cutoff)||!Number.isFinite(verifiedAt)||verifiedAt<cutoff||verifiedAt>now()||now()-verifiedAt>30*60000||proof?.generationId!==generationId||proof?.expectedBaseGenerationId!==expectedBaseGenerationId||proof?.published!==false||proof?.validatedRunId!==scope.validatedRunId||!same(proof.counts,expectedCounts)||proof.manifest?.generationId!==generationId||proof.manifest?.version!==2)throw Error('recovery_proof_invalid');
@@ -25,6 +27,7 @@ export async function activateVerifiedGeneration(storage,proof,scope,now=()=>Dat
   const keys=new Set(used.map(o=>o.key));if(expectedKeys.some(k=>!keys.has(k)))throw Error('recovery_alias_missing');
   for(const key of ['catalog/public/facets.json','catalog/public/brand-summary.json'])if((await storage.readJson(key,null))?.generationId!==generationId)throw Error('recovery_alias_generation');
   const currentLock=await storage.readJson(lockPath,null);if(currentLock?.operationId!==operationId||Date.parse(currentLock.lockedUntil)<=now())throw Error('recovery_lock_lost');
+  await assertLegacyRawWriterDisabled(storage);
   await storage.writeJson('catalog/previous-manifest.json',base.value);
   await storage.writeJson('catalog/manifest.json',proof.manifest,{ifMatch:base.etag});
   return {...proof,published:true,publishedAt:new Date(now()).toISOString(),intakeCursorUnchanged:true};

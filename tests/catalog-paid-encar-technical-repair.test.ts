@@ -196,8 +196,13 @@ test('saved loader reads only current intersection, verifies source totals and l
     [snapshotRoot+'/complete.json']:snapshot,[snapshotRoot+'/pages/1.json']:saved,
     [reportRoot+'/complete.json']:{version:1,provider:'auto_api_encar',observedAt,observedAtMs:Date.parse(observedAt),sourceRunId:'43570782014',sourceRunAttempt:'1'}});
   const producer={id:'43570782014',run_attempt:1,head_sha:PAID_ENCAR_REPAIR_SNAPSHOT.producerSha,status:'completed',conclusion:'success'};
+  const claimed=new Set(),readBeforeClaim=storage.readJson.bind(storage);
+  storage.readJson=async(key,fallback)=>{
+    if(key.startsWith(reportRoot+'/'))assert.ok(claimed.has(reportRoot),'report root must be claimed before its first object read');
+    return readBeforeClaim(key,fallback);
+  };
   const options={storage,producer,liveIdentity,sourceSha,controllerSha,now,verifyPages:()=>null,isNonCash:()=>false,
-    normalize:(d:any)=>source(d)};
+    normalize:(d:any)=>source(d),onSourceRoot:async ref=>{claimed.add(ref.root);}};
   const result=await loadPaidRepairPlan(options);
   assert.equal(result.offers.length,1);assert.equal(result.receipt.core.sourceProof.rows,2);assert.equal(result.receipt.core.sourceProof.matched,1);
   assert.equal(result.offers[0].updatedAt,observedAt);
