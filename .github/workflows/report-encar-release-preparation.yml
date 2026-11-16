@@ -34,6 +34,9 @@ jobs:
           node --import tsx --input-type=module <<'JS'
           import {getJsonStorage} from './apps/web/lib/data.ts';
           const storage=getJsonStorage();
+          const {readCollectionControls}=await import('./apps/web/lib/catalog/collection-controls.ts');
+          const controls=await readCollectionControls(storage);
+          console.log(JSON.stringify({readOnly:true,koreaEnabled:controls.markets.korea.enabled,encarEnabled:controls.sources.encar_feed.enabled,oldKoreaEnabled:controls.sources.ajes_korea_feed.enabled,revision:controls.revision}));
           const {calculationVersion}=await import('./scripts/catalog-calculation-version.mjs');
           console.log(JSON.stringify({source:'9cb571fcce503c9a3ca1a1496514899839b75395',calculationVersion:calculationVersion(),readOnly:true}));
           const [manifest,lock]=await Promise.all([storage.readJson('catalog/manifest.json',null),storage.readJson('catalog/import-lock.json',null)]);
