@@ -2708,3 +2708,5 @@ jobs:
         == 'workflow_dispatch' && inputs.phase == 'activate')) && 'activate' || 'prepare-only' }}
       ACTIVATE_CANDIDATE: ${{ (github.event_name == 'push' && github.event.head_commit.message == 'Release reviewed prepared feed delivery f45efaf2') || (github.event_name
         == 'workflow_dispatch' && inputs.phase == 'activate') }}
+
+# Reviewed prepare-only operation: 2026-11-16, exact candidate f45efaf2, source and controller CI passed.
