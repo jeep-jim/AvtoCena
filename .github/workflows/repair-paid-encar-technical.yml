@@ -291,6 +291,46 @@ jobs:
             });
           }
           REVIEW_GATE
+          cat > "$RUNNER_TEMP/wait-publication-lease.mjs" <<'LEASE_WAIT'
+          import assert from 'node:assert/strict';
+          import path from 'node:path';
+          import {fileURLToPath, pathToFileURL} from 'node:url';
+
+          export async function waitPublicationLease({read, now = () => Date.now(), pause = ms => new Promise(resolve => setTimeout(resolve, ms)),
+            timeoutMs = 35 * 60_000, progress = () => {}}) {
+            const deadline = now() + timeoutMs;
+            while (true) {
+              assert.ok(now() < deadline, 'publication_lease_wait_deadline');
+              const stored = await read();
+              assert.ok(now() < deadline, 'publication_lease_wait_deadline');
+              assert.equal(typeof stored?.found, 'boolean', 'publication_lease_read_invalid');
+              if (!stored.found) return {passed: true, lockExpired: true, writes: 0};
+              const lock = stored.value;
+              assert.ok(lock && typeof lock === 'object' && typeof lock.lockedUntil === 'string', 'publication_lease_invalid');
+              if (lock.lockedUntil === '') return {passed: true, lockExpired: true, writes: 0};
+              const until = Date.parse(lock.lockedUntil);
+              assert.ok(Number.isFinite(until), 'publication_lease_invalid');
+              if (until <= now()) return {passed: true, lockExpired: true, writes: 0};
+              const remaining = deadline - now();
+              assert.ok(remaining > 0, 'publication_lease_wait_deadline');
+              progress({stage: 'waiting_publication_lease_readonly', secondsRemaining: Math.ceil((until - now()) / 1000), writes: 0});
+              await pause(Math.min(15_000, remaining));
+            }
+          }
+
+          async function main() {
+            const {getJsonStorage} = await import(pathToFileURL(path.resolve('apps/web/lib/data.ts')).href);
+            const storage = getJsonStorage(); assert.equal(storage.driver, 'object');
+            storage.writeJson = async () => { throw Error('publication_lease_wait_must_not_write'); };
+            const result = await waitPublicationLease({read: () => storage.readJsonWithMeta('catalog/import-lock.json', null),
+              progress: value => console.log(JSON.stringify(value))});
+            console.log(JSON.stringify({stage: 'publication_lease_clear', ...result}));
+          }
+          if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+            main().catch(error => { console.error(JSON.stringify({stage: 'publication_lease_wait_failed',
+              guard: error instanceof assert.AssertionError ? String(error.message).split('\n')[0] : error?.name || 'Error'})); process.exitCode = 1; });
+          }
+          LEASE_WAIT
       - uses: actions/checkout@v4
         with:
           ref: ${{ env.PAID_REPAIR_SOURCE_SHA }}
@@ -314,6 +354,11 @@ jobs:
                 || Number(run.run_attempt)!==1 || run.status!=='completed') throw new Error('saved producer identity changed');
             fs.writeFileSync(process.env.RUNNER_TEMP+'/paid-repair-producer.json',JSON.stringify({
               id:run.id,run_attempt:run.run_attempt,head_sha:run.head_sha,status:run.status,conclusion:run.conclusion}));
+      - name: Wait read-only for the existing catalog publication
+        id: lease_wait
+        timeout-minutes: 36
+        working-directory: repair-source
+        run: node --import tsx "$RUNNER_TEMP/wait-publication-lease.mjs"
       - name: Complete read-only plan through the unchanged source helper
         id: plan
         working-directory: repair-source

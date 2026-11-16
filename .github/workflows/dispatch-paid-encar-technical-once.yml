@@ -11,7 +11,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   dispatch:
-    if: github.ref == 'refs/heads/main' && github.event.head_commit.message == 'Plan and review saved Korea technical correction d61464a5 on main'
+    if: github.ref == 'refs/heads/main' && github.event.head_commit.message == 'Wait then review saved Korea technical correction d61464a5 on main'
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     env:
