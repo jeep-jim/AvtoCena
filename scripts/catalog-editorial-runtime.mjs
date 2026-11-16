@@ -10,6 +10,7 @@ export const EDITORIAL_HEALTH_URL='https://avtocena.com/api/health';
 export const KNOWN_PRE_EDITORIAL_RELEASES=Object.freeze([
  'a182cd21b21ecf612b63613d263e5bdd817ea4c0',
  '794654a00aa4990b284858f1f01c07ed3f020df4',
+ '83ff17075e9188dcf227c8752dc064248d5f42e0',
 ]);
 const HELPER='apps/web/lib/catalog/editorial-home.ts';
 const PRIVATE_INDEX='data/knowledge/encyclopedia/calculation-v1.json';

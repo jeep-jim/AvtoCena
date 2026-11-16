@@ -112,15 +112,27 @@ for(const damaged of ['binding','models','version'])test(`immutable private rest
  await assert.rejects(f.run(),/live_encyclopedia_(binding_missing|index_invalid)/);assert.equal(f.writes.length,0);await f.assertClean();
 });
 
-test('only the two explicit pre-helper sources may skip the helper without an acceptance claim',async t=>{
+test('only the explicit pre-helper sources may skip the helper without an acceptance claim',async t=>{
  const f=await fixture(t,{helper:false});
  assert.deepEqual(KNOWN_PRE_EDITORIAL_RELEASES,[
   'a182cd21b21ecf612b63613d263e5bdd817ea4c0',
   '794654a00aa4990b284858f1f01c07ed3f020df4',
+  '83ff17075e9188dcf227c8752dc064248d5f42e0',
  ]);
  assert.equal(Object.isFrozen(KNOWN_PRE_EDITORIAL_RELEASES),true);
  for(const release of KNOWN_PRE_EDITORIAL_RELEASES)assert.equal(await installedEditorialSupported(f.root,release),false);
  await assert.rejects(f.run(),/editorial_runtime_helper_missing/);assert.equal(f.writes.length,0);
+});
+
+test('minimal paid Encar source may omit the helper while unknown sources still require it',async t=>{
+ const f=await fixture(t,{helper:false}),release='83ff17075e9188dcf227c8752dc064248d5f42e0';
+ assert.equal(await installedEditorialSupported(f.root,release),false);
+ for(const unknown of [sha,'83ff17075e9188dcf227c8752dc064248d5f42e1']){
+  await assert.rejects(installedEditorialSupported(f.root,unknown),/editorial_runtime_helper_missing/);
+ }
+ await fs.writeFile(path.join(f.root,'apps/web/lib/catalog/editorial-home.ts'),'export const prepareEditorialHome=()=>{};\n');
+ for(const installed of [release,sha])assert.equal(await installedEditorialSupported(f.root,installed),true);
+ assert.deepEqual(f.events,[]);assert.deepEqual(f.writes,[]);
 });
 
 test('health changing after preparation prevents a readiness success',async t=>{

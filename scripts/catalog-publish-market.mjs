@@ -2,6 +2,7 @@ import {isAllDubicarsOffer,isUnpricedDubicarsOffer} from '../apps/web/lib/catalo
 import {catalogInventoryLimit,catalogMarketInventoryLimit} from "./lib/catalog-inventory-limit.mjs";
 import {startPublicationHeartbeat} from './lib/publication-heartbeat.mjs';
 import {isCompletedChe168Delta,isCompletedDubicarsDelta} from './lib/auto-api-che168-client.mjs';
+import {assertPaidKoreaPublicationSource} from './lib/paid-korea-publication-guard.mjs';
 // Maintenance publication reads large source payloads; avoid a burst of twelve simultaneous S3 downloads.
 process.env.CATALOG_READ_CONCURRENCY ||= "4";
 import { unavailableOfferRecord } from "../apps/web/lib/catalog/offer-availability.ts";
@@ -18,7 +19,7 @@ import { catalogPublicCountGuard } from "./lib/catalog-public-count-guard.mjs";
 import { hashRows, snapshotCatalogRows, assertCatalogRowsUnchanged } from "./lib/catalog-row-hash.mjs";
 import { isCommercialInventoryOffer as isCommercial } from "./lib/catalog-vehicle-scope.mjs";
 
-const { mutateDataJson } = await import("../apps/web/lib/data.ts");
+const { getJsonStorage, mutateDataJson } = await import("../apps/web/lib/data.ts");
 const { calculateOfferWithRussiaCustoms } = await import("../apps/web/lib/catalog/customs-pricing.ts");
 const { minimumPublicationImages, hasAllowedCatalogSourceProvenance, isCrediblePublicOffer, isCatalogYearAllowed } = await import("../apps/web/lib/catalog/offer-quality.ts");
 const { compareCatalogPublicPriority, japanAuctionSoldIdentityVerified } = await import("../apps/web/lib/catalog/public-priority.ts");
@@ -351,6 +352,17 @@ if (paidEncarReport) {
         row.operational?.provider !== "auto_api_encar")) {
     throw Error("incomplete_paid_encar_publication_input");
   }
+}
+async function assertCurrentKoreaPublicationSource() {
+  await assertPaidKoreaPublicationSource({
+    market,
+    paidEncarInput: !!paidEncarReport,
+    readManifest: () => getJsonStorage().readJson("catalog/manifest.json", null),
+    readControls: async () => {
+      const { readCollectionControls } = await import("../apps/web/lib/catalog/collection-controls.ts");
+      return readCollectionControls(getJsonStorage());
+    },
+  });
 }
 const sourceRefreshStates = catalogSourceRefreshStates(generation.payloads);
 const completeChe168Inventory = generation.payloads.some(payload => {
@@ -750,6 +762,7 @@ if (regressionBlocked) {
     // target market and storage after acquiring the lease; no stale snapshot is
     // allowed to reach persistence.
     await acquirePublishLock();
+    await assertCurrentKoreaPublicationSource();
     if (process.env.JSON_STORAGE_DRIVER === "object") await import("./catalog-storage-preflight.mjs");
     expectedBaseGenerationId = await catalogGenerationId();
     const latestTargetRows = await readMarketOffers(market);
@@ -761,6 +774,7 @@ if (regressionBlocked) {
       productionRefreshMarket: market,
       expectedBaseGenerationId,
       async beforeManifestCommit() {
+        await assertCurrentKoreaPublicationSource();
         if (paidEncarReport) {
           const { assertCollectionEnabled } = await import("../apps/web/lib/catalog/collection-controls.ts");
           await assertCollectionEnabled("encar_feed");
