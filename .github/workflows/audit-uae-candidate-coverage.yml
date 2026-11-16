@@ -1,0 +1,72 @@
+name: Audit UAE candidate selector coverage
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/audit-uae-candidate-coverage.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: uae-candidate-coverage-read-only-audit
+  cancel-in-progress: false
+jobs:
+  audit:
+    if: >-
+      github.ref == 'refs/heads/main' &&
+      (github.event_name == 'workflow_dispatch' ||
+       contains(github.event.head_commit.message, 'Audit UAE coverage e8462585'))
+    runs-on: ubuntu-24.04
+    environment: regcloud-staging
+    timeout-minutes: 25
+    steps:
+      - name: Check out audit source only
+        uses: actions/checkout@v4
+        with:
+          path: control
+          persist-credentials: false
+          sparse-checkout: |
+            scripts/audit-uae-candidate-coverage.mjs
+            tests/audit-uae-candidate-coverage.test.mjs
+          sparse-checkout-cone-mode: false
+      - name: Check out exact candidate without merging main
+        uses: actions/checkout@v4
+        with:
+          ref: e8462585e8998eaae5a003831a38d79263ca5649
+          path: runtime
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Install exact runtime dependencies without build or lifecycle scripts
+        working-directory: runtime
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Verify the diagnostic offline
+        working-directory: runtime
+        run: |
+          set -euo pipefail
+          node --check ../control/scripts/audit-uae-candidate-coverage.mjs
+          node --test ../control/tests/audit-uae-candidate-coverage.test.mjs
+      - name: Read current UAE projection selectors and referenced card IDs
+        working-directory: runtime
+        env:
+          NODE_OPTIONS: --max-old-space-size=6144
+          JSON_STORAGE_DRIVER: object
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_REGION: us-east-1
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+          YC_OBJECT_STORAGE_MAX_ATTEMPTS: '3'
+          UAE_COVERAGE_REPORT: ${{ runner.temp }}/uae-coverage-artifact/uae-candidate-coverage.json
+        run: |
+          set -euo pipefail
+          node --import tsx ../control/scripts/audit-uae-candidate-coverage.mjs "$PWD"
+      - name: Save only sanitized diagnosis
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: uae-candidate-coverage-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/uae-coverage-artifact/uae-candidate-coverage.json
+          if-no-files-found: error
+          retention-days: 7
