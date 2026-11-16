@@ -26642,3 +26642,13 @@ AGENTS.md explicitly prohibits increasing gate thresholds without NEW explicit o
 - Осталось: получить свободную publication lease, подготовить и прочитать exact candidate snapshots, выполнить неизменную server/browser/SHA/nonce/rollback приёмку приложения, затем новый repair plan на фактически установленном release/calculator с проверенным tooling source. Текущий plan83ff/705 не заменяет это доказательство. Новый полный card readback остаётся внутри прежнего90-секундного after-activation wrapper; production duration ещё не измерена, лимит не ослаблен.
 - Публикация этого адресного выпуска: https://github.com/jeep-jim/AvtoCena/commit/90f2e928169f4f1919cc81732d04c175e0cce08e
 
+
+
+### 2026-11-16 — Staged tooling принят; exact f45 готовится без активации
+- PR1785 принят merge4f18c4454daa0cb4516f94ee36721d4e563373b9. Source50e3546d5ef64186dafd7a4ae06baad38f45ff79 прошёл CI43871797858 и Verify Dubicars43871797917. Staged helper-пара побайтно равна f45 и включает cardReadiness; repair guards705 сохранены.
+- Korea run43868009686/job133301474946 завершился13:11:35UTC на publication_lease_wait_deadline; plan/review/apply не начались. В последнем наблюдении13:11:29UTC secondsRemaining1704, writes0. Нейтральный workflow43871706779 завершился SKIPPED.
+- После terminal предыдущих запусков запущена одна новая подготовка: https://github.com/jeep-jim/AvtoCena/actions/runs/43873810298, job133321530272, controller3521065c79c02fe7dc7e840c0d277223d1622d5e, exact sourcef45efaf2b172af41d14987fb642e8e6b6df78cdd. Prepare marker задаёт prepare-only, ACTIVATE_CANDIDATE=false; приложение не переключается.
+- К13:16:54UTC прошли exact source/13CI/retained83 identity, frozen mechanics, private/history receipts и disk floor. Выполняется штатное bounded read-only ожидание lease до candidate writes, максимум35 минут. Истечение ожидания не разрешает запись. Always-evidence может сохранять служебные receipts/artifacts, поэтому всему workflow не приписывается отсутствие любых записей.
+- После подготовки необходимы прежняя application acceptance и новый Korea repair plan на фактически установленной версии с source50e. Старый план83/705 не подтверждает готовность новой пары. Исправленные характеристики на сайте ещё не подтверждены.
+- Публикация этого адресного выпуска: https://github.com/jeep-jim/AvtoCena/commit/041870d340561ae02bc22faec5ac4154035acf89
+
