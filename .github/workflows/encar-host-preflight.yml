@@ -14,7 +14,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
-      - name: Read disk, memory and installed release only
+      - name: Verify retained production after rejected 9cb gate
         env:
           SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
         run: |
@@ -25,13 +25,20 @@ jobs:
           printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
           unset SSH_PRIVATE_KEY
           ssh -i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts" root@151.248.113.177 'python3 -' <<'PY'
-          import json,subprocess,shutil,pathlib
+          import json,subprocess,shutil,pathlib,urllib.request
+          from datetime import datetime,timezone
           disk=shutil.disk_usage('/')
           mem={line.split(':')[0]:int(line.split()[1])*1024 for line in pathlib.Path('/proc/meminfo').read_text().splitlines()}
           production=json.loads(subprocess.check_output(['docker','inspect','avtocena-production']))[0]
-          transport=pathlib.Path('/opt/avtocena/staging/incoming/43754659891-1/avtocena-image.tar.gz')
-          image=subprocess.run(['docker','image','inspect','--format','{{.Id}}','avtocena-regcloud:d0dcda944ab9d3acc1cba60660842aa4de3223c7'],capture_output=True,text=True)
+          transport=pathlib.Path('/opt/avtocena/staging/incoming/43776032107-1/avtocena-image.tar.gz')
+          image=subprocess.run(['docker','image','inspect','--format','{{.Id}}','avtocena-regcloud:9cb571fcce503c9a3ca1a1496514899839b75395'],capture_output=True,text=True)
           from collections import Counter
           names=Counter(subprocess.check_output(['ps','-eo','comm='],text=True).splitlines())
           print(json.dumps({'transferProcesses':{k:names[k] for k in ['scp','sftp-server','gzip','pigz','docker','dockerd','tar'] if names[k]},'transportBytes':transport.stat().st_size if transport.exists() else None,'candidateImageLoaded':image.returncode==0,'readOnly':True,'diskAvailableBytes':disk.free,'diskRequiredBytes':8*1024**3,'diskReady':disk.free>8*1024**3,'memoryAvailableBytes':mem['MemAvailable'],'release':production['Config']['Labels'].get('org.opencontainers.image.revision'),'running':production['State']['Running'],'oomKilled':production['State']['OOMKilled']}))
+          with urllib.request.urlopen(urllib.request.Request('https://avtocena.com/api/health',headers={'Cache-Control':'no-cache'}),timeout=20) as response:health=json.load(response)
+          rejected=json.loads(subprocess.check_output(['docker','inspect','avtocena-release-9cb571fcce50']))[0]
+          assert production['State']['Running'] and production['Config']['Labels'].get('org.opencontainers.image.revision')=='a182cd21b21ecf612b63613d263e5bdd817ea4c0'
+          assert not rejected['State']['Running']
+          assert health.get('releaseSha')=='a182cd21b21ecf612b63613d263e5bdd817ea4c0' and health.get('calculationVersion')=='c489dff0d41ef0933b4f2bef140a318d4ce68493587afc8113a9993e5a18b0b6'
+          print(json.dumps({'readOnly':True,'checkedAt':datetime.now(timezone.utc).isoformat(),'publicHealth':health,'rejectedCandidateStopped':True}))
           PY
