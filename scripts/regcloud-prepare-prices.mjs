@@ -11,7 +11,8 @@ const lock=markets?null:await storage.readJson('catalog/import-lock.json',null);
 if(!manifest?.generationId || lock && Date.parse(lock.lockedUntil)>Date.now())throw Error('publication_not_ready');
 const write=storage.writeJson.bind(storage);
 storage.writeJson=async(path,value,condition)=>{
- if(!/^catalog\/(?:generations\/[^/]+\/indexes\/budget-markets-v(?:(?:[12345]|[67]\/[a-f0-9]{64})\/(?:ready|china|korea|japan|europe|uae|georgia)|(?:3|7\/[a-f0-9]{64})\/parts\/(?:china|korea|japan|europe|uae|georgia)\/[a-f0-9]{64})\.json|runtime-(?:budget|sort)-prices-v(?:[12]\/(?:china|korea|europe|uae|georgia)|3\/(?:china|korea|europe|uae|georgia)\/[a-f0-9]{64})\.json)$/.test(path))throw Error('unexpected_derived_write');
+ const preparedSelection=/^catalog\/runtime-budget-selections-v1\/(china|korea|europe|uae|georgia)\/[a-f0-9]{64}\/(?:ready|parts\/\1\/[a-f0-9]{64})\.json$(?![\s\S])/.test(path);
+ if(!preparedSelection&&!/^catalog\/(?:generations\/[^/]+\/indexes\/budget-markets-v(?:(?:[12345]|[67]\/[a-f0-9]{64})\/(?:ready|china|korea|japan|europe|uae|georgia)|(?:3|7\/[a-f0-9]{64})\/parts\/(?:china|korea|japan|europe|uae|georgia)\/[a-f0-9]{64})\.json|runtime-(?:budget|sort)-prices-v(?:[12]\/(?:china|korea|europe|uae|georgia)|3\/(?:china|korea|europe|uae|georgia)\/[a-f0-9]{64})\.json)$/.test(path))throw Error('unexpected_derived_write');
  const current=await storage.readJson('catalog/manifest.json',null);
  if(current?.generationId!==manifest.generationId)throw Error('publication_changed');
  return write(path,value,condition);

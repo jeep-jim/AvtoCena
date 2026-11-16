@@ -25,7 +25,7 @@ import {enrichBudgetSpecifications} from './budget-specification-index';
 import {splitPackedBudgetSelectors,verifiedPackedBudgetSelector,type PackedBudgetDirectory,type PackedBudgetSelector} from './budget-selector-codec';
 import {matchingEditorial,withCatalogEditorial,resetCatalogEditorialCache,editorialRevision,editorialEntries,editorialHasHidden,editorialHidden,applyCatalogEditorial,applyCatalogEditorialSpecifications} from "./editorial";
 import {splitBudgetMarketIndex,validBudgetMarketIndex,type BudgetMarketDirectory} from './budget-market-index';
-import {budgetPricingFingerprint,sharedBudgetPrices,readPreparedBudgetPrices,resetSharedBudgetPriceCache,calculationCacheVersion} from './shared-budget-prices';
+import {budgetPricingFingerprint,sharedBudgetPrices,readPreparedBudgetPrices,readPreparedBudgetSelection,prepareBudgetSelection,verifyPreparedBudgetSelection,resetSharedBudgetPriceCache,calculationCacheVersion} from './shared-budget-prices';
 import {catalogInventoryAgeDecision,catalogInventoryDate,catalogVehicleExcluded,catalogGrossVehicleWeightKg} from './inventory-admission';
 import {compareCatalogDisplayOrder,catalogDisplayOrderComparator} from './display-order';
 import {currentDepositCosts} from "./deposit-cost-projection";
@@ -2134,7 +2134,7 @@ async function currentSearchPrices(rows:CatalogSearchProjection[],generationId:s
  const result:CatalogSearchProjection[]=[];
  for(let start=0;start<rows.length;start+=128){
   const prepared=rows.slice(start,start+128);
-  const priced=await applyActiveBusinessPriceBatch(prepared as any[],{readOnly:true}) as CatalogSearchProjection[];
+  const priced=await applyActiveBusinessPriceBatch(prepared as any[],{readOnly:true},configurations) as CatalogSearchProjection[];
   // Use only retained projection inputs here: no per-listing detail or supplier scan.
   // The same preview must exist before ordering, not only after a page is selected.
   const delivered=await attachSellerDeliveredPreviews(priced as any[],configurations,{projectionOnly:true}) as CatalogSearchProjection[];
@@ -2234,12 +2234,17 @@ async function readBudgetSelection(params:CatalogSearchParams){
  const metadataQuery=(compactDefaultQuery || hasBudget || Boolean(params.sort && params.sort!=="updatedAt") || metadataFields.some(key=>Boolean((params as any)[key]))) && Object.entries(params).every(([key,value])=>value===undefined || value==='' || [...metadataFields,'market','city','budgetFrom','budgetTo','sort','page','pageSize'].includes(key));
  const defaultBrandQuery=Boolean((params.make || params.model) && (!params.sort || params.sort==="updatedAt"));
  const defaultDisplayQuery=defaultBrandQuery||compactDefaultQuery;
- if(defaultBrandQuery && hasBudget)return null;
  if(!hasBudget && !metadataQuery)return null;
  const manifest=await readManifest();
- const key=JSON.stringify([defaultDisplayQuery?"default-display":"general",editorialRevision(),new Date(Date.now()+7*3600000).toISOString().slice(0,10),manifest.generationId,budgetSelectionFilterKey(params)]);
+ const preparedFingerprint=hasBudget&&params.market&&params.market!=='any'?await budgetPricingFingerprint(params.market):null;
+ const key=JSON.stringify([defaultDisplayQuery?"default-display":"general",editorialRevision(),new Date(Date.now()+7*3600000).toISOString().slice(0,10),manifest.generationId,budgetSelectionFilterKey(params),preparedFingerprint]);
  return filteredBudgetSelectionCache.get(key,async()=>{
-  const index=await readBudgetCountIndex(manifest.generationId,params.market).catch(()=>null);
+  // A verified budget selector already contains every current priced row and
+  // the same filter metadata. Do not download all unpriced inventory first.
+  const prepared=preparedFingerprint&&params.market?await readPreparedBudgetSelection(manifest.generationId,params.market,preparedFingerprint):null;
+  if(prepared&&await budgetPricingFingerprint(params.market!)!==preparedFingerprint)return null;
+  if(defaultBrandQuery && hasBudget && !prepared)return null;
+  const index=prepared??await readBudgetCountIndex(manifest.generationId,params.market).catch(()=>null);
   if(!index || index.inventoryPolicyVersion!==1 || ![1,2,3].includes(index.version)||index.generationId!==manifest.generationId || (!hasBudget && !Array.isArray(index.otherRows)))return null;
   // Older selectors cannot distinguish seller-only display prices in default
   // ranking. Keep their authoritative fallback until enriched selectors exist.
@@ -2249,8 +2254,8 @@ async function readBudgetSelection(params:CatalogSearchParams){
   const quotes=(hasBudget||params.engineFrom||params.engineTo)&&(!params.market||params.market==="any"||params.market==="japan")&&index.rows.some(row=>row[3])?await japanSearchQuotes(manifest.generationId):{};
   // Narrow on compact year/mileage metadata before reading card blocks.
   // Older indexes keep the exact card matcher until the derived index is rebuilt.
-  const costs=hasBudget?await currentDepositCosts():{};
-  const pricedIndex=hasBudget?{...index,rows:index.rows.map(row=>{
+  const costs=hasBudget&&!prepared?await currentDepositCosts():{};
+  const pricedIndex=hasBudget&&!prepared?{...index,rows:index.rows.map(row=>{
    if(index.pricingChunks?.[row[0]] || row[7] || row[4] || !(row[1]>0))return row;
    const deposit=costs[row[0]]||0;
    return [row[0],row[1]+deposit-(row[6]||0),row[2],row[3],row[4],row[5],deposit,row[7]] as typeof row;
@@ -2298,7 +2303,9 @@ async function readBudgetSelection(params:CatalogSearchParams){
    && driveMatches(row[5].drive) &&
    (!params.yearFrom || Number(row[5].year||0)>=params.yearFrom) && (!params.yearTo || Number(row[5].year||0)<=params.yearTo)
    && (index.filterVersion!==1 || ((!params.mileageFrom || projectionNumber(row[5].mileageKm,0)>=params.mileageFrom) && (!params.mileageTo || projectionNumber(row[5].mileageKm,Infinity)<=params.mileageTo))));
-  if(hasBudget && index.version===3){
+  if(hasBudget && prepared){
+   candidates=matchingBudgetIndex({...index,rows:candidates},params,quotes);
+  } else if(hasBudget && index.version===3){
    const ids=new Set(candidates.map(row=>row[5].id));
    const markets=[...new Set(candidates.map(row=>row[0]))];
    const parts=await mapWithConcurrency(markets,2,market=>currentBudgetReplay(pricedIndex,market));
@@ -2314,7 +2321,7 @@ async function readBudgetSelection(params:CatalogSearchParams){
 
   if(hasBudget)candidates=candidates.map(editedRow);
   // A newly edited seller price invalidates its stored ranking inputs.
-  if(defaultBrandQuery && candidates.some(row=>matchingEditorial({id:row[5].id,market:row[0]})?.sellerPrice))return null;
+  if(defaultBrandQuery && !prepared && candidates.some(row=>matchingEditorial({id:row[5].id,market:row[0]})?.sellerPrice))return null;
   const specificationQuery=Boolean(params.engineFrom||params.engineTo||params.powerFrom||params.powerTo);
   if(index.specificationFilterVersion===1 && specificationQuery){
    candidates=candidates.filter(row=>{
@@ -2326,7 +2333,8 @@ async function readBudgetSelection(params:CatalogSearchParams){
     return !(params.powerFrom||params.powerTo)||Boolean(hp&&(!params.powerFrom||hp>=params.powerFrom)&&(!params.powerTo||hp<=params.powerTo+0.01));
    });
   }
-  if(metadataQuery && (!specificationQuery||index.specificationFilterVersion===1) && (index.filterVersion===1 || !(params.mileageFrom || params.mileageTo)))return {generationId:manifest.generationId,cardVersion,indexKey:compactSortOrders.indexKey(index),rows:candidates};
+  const preparedPrices=prepared&&params.market&&preparedFingerprint?{market:params.market,fingerprint:preparedFingerprint}:undefined;
+  if(metadataQuery && (!specificationQuery||index.specificationFilterVersion===1) && (index.filterVersion===1 || !(params.mileageFrom || params.mileageTo)))return {generationId:manifest.generationId,cardVersion,indexKey:compactSortOrders.indexKey(index),rows:candidates,preparedPrices};
   const ids=new Set(candidates.map(row=>row[5].id));
   const blocks=[...new Set(candidates.map(row=>row[5].block))];
   const modelKeys=await projectionModelKeys(params);
@@ -2342,7 +2350,7 @@ async function readBudgetSelection(params:CatalogSearchParams){
    for(const row of prepared)if(catalogSearchProjectionMatches(row,params,modelKeys))matched.add(row.id);
   });
   if(incomplete || seen.size!==ids.size)return null;
-  return {generationId:manifest.generationId,cardVersion,indexKey:compactSortOrders.indexKey(index),rows:candidates.filter(row=>matched.has(row[5].id))};
+  return {generationId:manifest.generationId,cardVersion,indexKey:compactSortOrders.indexKey(index),rows:candidates.filter(row=>matched.has(row[5].id)),preparedPrices};
  });
 }
 // Selection rows already expire after 30s and are keyed by generation/day/filters.
@@ -2351,7 +2359,7 @@ async function readBudgetSelection(params:CatalogSearchParams){
 type OrderedBudgetRow=CatalogSearchProjection & {block:number};
 // Sort compact identities, not full card payloads. A direction toggle shares the
 // same price pass. Weak ownership cannot outlive the existing bounded selection cache.
-type CompactSelection={generationId:string;cardVersion:1|2|3;indexKey:number;rows:BudgetCountIndex['rows']};
+type CompactSelection={generationId:string;cardVersion:1|2|3;indexKey:number;rows:BudgetCountIndex['rows'];preparedPrices?:{market:string;fingerprint:string}};
 const compactSortOrders=new BudgetSortOrderCache();
 let compactSortCache=new WeakMap<BudgetCountIndex['rows'],{context:string;prices?:Promise<Float64Array|null>;sellerPrices?:Float64Array;orders:Map<string,Uint32Array>}>();
 async function searchSortedBudgetSelection(selected:CompactSelection,params:CatalogSearchParams,internalPageLimit:number){
@@ -2379,6 +2387,16 @@ async function searchSortedBudgetSelection(selected:CompactSelection,params:Cata
    if(!state.prices)state.prices=(async()=>{
     const values=new Float64Array(selected.rows.length);values.fill(NaN);
     const sellerValues=new Float64Array(selected.rows.length);sellerValues.fill(NaN);state!.sellerPrices=sellerValues;
+    if(selected.preparedPrices&&markets.every((market,i)=>market===selected.preparedPrices!.market&&fingerprints[i]===selected.preparedPrices!.fingerprint)){
+     for(let position=0;position<selected.rows.length;position++){
+      const [market,totalRub,basis,,seller]=selected.rows[position];
+      const offer={market,totalRub,catalogPricingMode:seller?'seller' as const:undefined,calculationSnapshot:{deliveryPricingBasis:basis}};
+      const priced=params.city?priceCardForCity(offer,params.city).offer:offer;
+      const rub=calculatedCatalogPrice(priced);
+      if(rub>0)values[position]=rub;else if(seller&&totalRub>0)sellerValues[position]=totalRub;
+     }
+     return values;
+    }
     // V3 already has bounded price-only replay and a validated shared snapshot.
     // Sorting must not fetch every full card (including images and ledgers).
     // A narrow model search must not wait for every vehicle in its country to
@@ -2646,9 +2664,27 @@ export async function warmBudgetPriceCaches(markets?:CatalogMarket[]){
   if(!index || index.version!==3 || index.generationId!==manifest.generationId)continue;
   const start=performance.now(),rows=await currentBudgetReplay(index,market);
   await currentBudgetReplay(index,market,true);
-  results.push({market,rows:rows.length,ms:Math.round(performance.now()-start)});
+  const fingerprint=await budgetPricingFingerprint(market);
+  if(!fingerprint)throw Error('catalog_prepared_selection_context_missing');
+  const preparedSelection=await prepareBudgetSelection(index,market,fingerprint,rows);
+  results.push({market,rows:rows.length,ms:Math.round(performance.now()-start),preparedSelection});
  }
  return {generationId:manifest.generationId,results};
+}
+/** Verify prepared reads against the exact staged/current manifest in a fresh
+ * process. An overlay may select a staged immutable generation before its CAS. */
+export async function verifyPreparedBudgetPriceCaches(markets?:CatalogMarket[]){
+ const manifest=await readManifest(),results=[];
+ for(const market of (markets?preparationMarkets(markets):MARKETS).filter(market=>market!=='japan')){
+  if(manifest.markets?.[market]?.count===0)continue;
+  const index=await readBudgetCountIndex(manifest.generationId,market);
+  const fingerprint=await budgetPricingFingerprint(market);
+  if(!index||index.version!==3||index.generationId!==manifest.generationId||!fingerprint)throw Error('catalog_prepared_selection_source_missing');
+  results.push(await verifyPreparedBudgetSelection(index,market,fingerprint));
+ }
+ const after=await getJsonStorage().readJson<CatalogManifest>('catalog/manifest.json',{} as CatalogManifest);
+ if(after.generationId!==manifest.generationId)throw Error('catalog_budget_generation_changed');
+ return {generationId:manifest.generationId,verified:true as const,results};
 }
 /** Derived immutable index only; generation data and current aliases are untouched. */
 export async function backfillCatalogBudgetCountIndex(){
