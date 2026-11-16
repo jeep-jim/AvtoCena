@@ -8,11 +8,13 @@ export const CONTRACT=Object.freeze({
  liveRelease:'83ff17075e9188dcf227c8752dc064248d5f42e0',
  liveCalculation:'4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90',
  encyclopedia:'bf2c72cb7a260ef093c0a43c2b0dad9c4c9094a4d6dc3811dd0d7f7626b0d72b',
+ cardTargets:['291f2b7703a3b68aa76253cd','8ca9a91f7d9653e1fe307d00','f8b2705e947357c174ba4b55'],
  sources:{
   e8462585e8998eaae5a003831a38d79263ca5649:'2a0a3eecd966a1c6a5ffed3760740983803ff172fcf023fc30aefbc102a6e4f2',
   '6d12acbae48cb5b754da0648f350426fee0448bd':'9d1d02df1b33bdaa72a646df9158d7f56e0903598d2ce1b8250efba319264dcf',
  },
- limits:{rows:100000,samples:10,requests:400,objectBytes:512*1024*1024,totalBytes:1024*1024*1024,milliseconds:8*60*1000},
+ limits:{rows:100000,samples:10,requests:400,objectBytes:512*1024*1024,totalBytes:1024*1024*1024,milliseconds:8*60*1000,
+  cardBlocks:128,cardRows:256,cardObjectBytes:8*1024*1024,cardTotalBytes:256*1024*1024},
 });
 const hash=value=>createHash('sha256').update(JSON.stringify(value)).digest('hex');
 const shaText=value=>createHash('sha256').update(value).digest('hex');
@@ -23,8 +25,13 @@ const sampleId=id=>/^(?:[a-f0-9]{24,64}|dubicars_uae_exact[:_-][a-zA-Z0-9_-]{1,6
 const sorted=values=>[...values].sort();
 const summary=values=>({count:values.size,idsSha256:hash(sorted(values)),samples:sorted(values).slice(0,CONTRACT.limits.samples).map(sampleId)});
 const minus=(left,right)=>new Set([...left].filter(id=>!right.has(id)));
+const setProof=values=>({count:values.size,idsSha256:hash(sorted(values))});
+const cardKey=block=>`catalog/generations/${CONTRACT.generation}/indexes/budget-cards-v3/${block}.json`;
+const canonical=value=>Array.isArray(value)?value.map(canonical):value&&typeof value==='object'
+ ?Object.fromEntries(Object.keys(value).sort().map(key=>[key,canonical(value[key])])):value;
+const rowHash=value=>hash(canonical(value));
 
-export function readKeyPolicy(selectorDirectories){
+export function readKeyPolicy(selectorDirectories,cardKeys=new Set()){
  const prefix=`catalog/generations/${CONTRACT.generation}/indexes/`;
  const projections=[prefix+'projection/uae.json','catalog/public/projection/uae.json'];
  const exact=new Set(['catalog/manifest.json','catalog/import-lock.json','catalog-editorial/current.json',
@@ -33,7 +40,7 @@ export function readKeyPolicy(selectorDirectories){
  const projectionPrefixes=projections.map(key=>prefix+'projection-parts/'+shaText(key)+'/');
  return key=>{
   if(typeof key!=='string'||key.includes('..')||key.includes('\\'))return false;
-  if(exact.has(key))return true;
+  if(exact.has(key)||cardKeys.has(key))return true;
   if(projectionPrefixes.some(part=>key.startsWith(part)&&/^\d+-[a-f0-9]{64}\.json$/.test(key.slice(part.length))))return true;
   return selectorDirectories.some(directory=>{
    const part=prefix+directory+'/';
@@ -64,12 +71,14 @@ export function fenceNetwork(env,allowed,fetchImpl=fetch,limits=CONTRACT.limits)
  const endpoint=new URL(env.YC_OBJECT_STORAGE_ENDPOINT||'https://s3.regru.cloud');
  const base='/'+[env.YC_OBJECT_STORAGE_BUCKET,String(env.YC_OBJECT_STORAGE_PREFIX||'').replace(/^\/+|\/+$/g,'')].filter(Boolean).join('/')+'/';
  assert(endpoint.origin==='https://s3.regru.cloud'&&Boolean(env.YC_OBJECT_STORAGE_BUCKET),'storage_endpoint_invalid');
- const started=Date.now(),stats={requests:0,bytes:0,methods:{GET:0,HEAD:0}};
+ const started=Date.now(),stats={requests:0,bytes:0,cardBytes:0,methods:{GET:0,HEAD:0}};
  const guarded=async(input,options={})=>{
   const url=new URL(typeof input==='string'||input instanceof URL?input:input.url);
   const method=String(options.method||input?.method||'GET').toUpperCase();
   assert(['GET','HEAD'].includes(method),'http_method_forbidden');
   const key=decodeURIComponent(url.pathname).slice(base.length);
+  const isCard=key.startsWith(`catalog/generations/${CONTRACT.generation}/indexes/budget-cards-v3/`);
+  const objectLimit=isCard?Math.min(limits.objectBytes,limits.cardObjectBytes):limits.objectBytes;
   const storage=url.origin===endpoint.origin&&!url.search&&decodeURIComponent(url.pathname).startsWith(base)&&allowed(key);
   const health=url.origin==='https://avtocena.com'&&url.pathname==='/api/health'&&!url.search&&method==='GET';
   assert(storage||health,'http_target_forbidden');
@@ -78,12 +87,12 @@ export function fenceNetwork(env,allowed,fetchImpl=fetch,limits=CONTRACT.limits)
   const response=await fetchImpl(input,{...options,redirect:'error',signal:AbortSignal.any([
    ...(options.signal?[options.signal]:[]),AbortSignal.timeout(Math.min(30000,limits.milliseconds-(Date.now()-started))),
   ])});
-  assert(Number(response.headers.get('content-length')||0)<=limits.objectBytes,'object_bound_exceeded');
+  assert(Number(response.headers.get('content-length')||0)<=objectLimit,'object_bound_exceeded');
   if(!response.body)return response;
   let bytes=0;
   const body=response.body.pipeThrough(new TransformStream({transform(chunk,controller){
-   bytes+=chunk.byteLength;stats.bytes+=chunk.byteLength;
-   assert(bytes<=limits.objectBytes&&stats.bytes<=limits.totalBytes,'byte_bound_exceeded');controller.enqueue(chunk);
+   bytes+=chunk.byteLength;stats.bytes+=chunk.byteLength;if(isCard)stats.cardBytes+=chunk.byteLength;
+   assert(bytes<=objectLimit&&stats.bytes<=limits.totalBytes&&stats.cardBytes<=limits.cardTotalBytes,'byte_bound_exceeded');controller.enqueue(chunk);
   }}));
   return new Response(body,{status:response.status,statusText:response.statusText,headers:response.headers});
  };
@@ -113,9 +122,109 @@ export function describeMissing(row,runtime,memberships){
   raw:fields(row),afterManual:fields(manual),afterEncyclopedia:fields(enriched),afterSafety:fields(safe)};
 }
 
+/** Authorize exact keys only after validating every saved UAE ID and numeric block.
+ * The writer sorts by market, then slices into 256-row blocks. A partially filled
+ * first block permits one extra referenced block; add at most its two neighbours. */
+export function planUaeCardScan(index,manifest){
+ const count=manifest?.markets?.uae?.count,limit=CONTRACT.limits;
+ assert(manifest?.generationId===CONTRACT.generation&&Number.isSafeInteger(count)&&count>0&&count<=limit.rows,'card_manifest_invalid');
+ assert(index?.generationId===manifest.generationId&&index.version===3&&Array.isArray(index.rows)
+  &&Array.isArray(index.otherRows),'card_selector_invalid');
+ const rows=[...index.rows,...index.otherRows],byId=new Map(),byBlock=new Map();
+ assert(rows.length>0&&rows.length===index.sourceRows&&rows.length<=count,'card_selector_count_invalid');
+ for(const row of rows){
+  const metadata=row?.[5],id=metadata?.id,block=metadata?.block;
+  assert(row?.[0]==='uae'&&typeof id==='string'&&id&&id===id.trim()&&!byId.has(id),'card_selector_identity_invalid');
+  assert(Number.isSafeInteger(block)&&block>=0&&block<Number.MAX_SAFE_INTEGER,'card_selector_block_invalid');
+  byId.set(id,block);if(!byBlock.has(block))byBlock.set(block,new Set());byBlock.get(block).add(id);
+  assert(byBlock.get(block).size<=limit.cardRows,'card_selector_block_overfull');
+ }
+ const referenced=[...byBlock.keys()].sort((a,b)=>a-b),min=referenced[0],max=referenced.at(-1);
+ const span=max-min+1,maxBlocks=Math.min(limit.cardBlocks,Math.ceil(count/limit.cardRows)+3);
+ assert(span<=Math.ceil(count/limit.cardRows)+1,'card_selector_span_invalid');
+ const neighbours=[...(min>0?[min-1]:[]),max+1],blocks=[...referenced,...neighbours].sort((a,b)=>a-b);
+ assert(blocks.length<=maxBlocks,'card_block_bound_exceeded');
+ return {byId,byBlock,referenced,neighbours,blocks,min,max,maxBlocks,unreadInteriorBlocks:span-referenced.length};
+}
+
+/** Read-only scoped search. Absence applies only to these checked blocks; this
+ * does not infer a historical cause, rewrite v3, build v7, or accept a release. */
+export async function inspectUaeCardReferences({storage,runtime,index,manifest,immutable,targets,authorize}){
+ const plan=planUaeCardScan(index,manifest);authorize(plan.blocks.map(cardKey));
+ const snapshots=new Map(),blocks=[],seen=new Set(),duplicates=new Set(),uaeIds=new Set(),eligibleIds=new Set(),mapped=new Set();
+ const observations=new Map(CONTRACT.cardTargets.map(id=>[id,[]]));
+ const occurrences=new Map(CONTRACT.cardTargets.map(id=>[id,0]));
+ let missingReferenced=0,invalidBlocks=0,invalidRows=0,misplaced=0;
+ for(let offset=0;offset<plan.blocks.length;offset+=4){
+  const group=plan.blocks.slice(offset,offset+4);
+  const reads=await Promise.allSettled(group.map(block=>storage.readJsonWithMeta(cardKey(block),null)));
+  for(let item=0;item<group.length;item++){
+  if(reads[item].status==='rejected')throw reads[item].reason;
+  const block=group[item],key=cardKey(block),meta=reads[item].value,referenced=plan.byBlock.has(block);
+  assert(!meta.found||Boolean(meta.etag),'card_revision_missing');snapshots.set(key,{found:meta.found,etag:meta.etag});
+  const entry={block,referenced,found:meta.found,etagSha256:meta.etag?shaText(meta.etag):null};blocks.push(entry);
+  if(!meta.found){if(referenced)missingReferenced++;continue;}
+  const part=meta.value;entry.generationMatches=part?.generationId===manifest.generationId;
+  entry.sha256=hash(part);entry.valid=entry.generationMatches&&Array.isArray(part?.items)&&part.items.length<=CONTRACT.limits.cardRows;
+  if(!entry.valid){invalidBlocks++;continue;}
+  const ids=idsOf(part.items),actual=new Set(part.items.filter(row=>row?.market==='uae'&&typeof row.id==='string').map(row=>row.id));
+  invalidRows+=ids.invalid;entry.rows=part.items.length;entry.uaeRows=actual.size;entry.foreignRows=part.items.filter(row=>row?.market!=='uae').length;
+  entry.ids=setProof(ids.ids);entry.uaeIds=setProof(actual);entry.duplicateIds=ids.duplicates.size;entry.invalidIds=ids.invalid;
+  const expected=plan.byBlock.get(block)||new Set();
+  entry.selectorIds=setProof(expected);entry.missingMappedIds=setProof(minus(expected,actual));
+  entry.uaeIdsOutsideBlockMapping=setProof(minus(actual,expected));
+  for(const id of ids.ids){if(seen.has(id))duplicates.add(id);seen.add(id);}for(const id of ids.duplicates)duplicates.add(id);
+  const prepared=runtime.catalog.prepareCatalogProjectionRows(part.items.filter(row=>row?.market==='uae'));
+  const preparedMap=new Map(prepared.map(row=>[row.id,row]));for(const row of prepared)eligibleIds.add(row.id);
+  for(const id of actual){uaeIds.add(id);if(plan.byId.get(id)===block)mapped.add(id);else if(plan.byId.has(id))misplaced++;}
+  for(const row of part.items){
+   if(!observations.has(row?.id))continue;
+   occurrences.set(row.id,occurrences.get(row.id)+1);
+   if(observations.get(row.id).length>=CONTRACT.limits.samples)continue;
+   const retained=targets.get(row.id),preparedRow=preparedMap.get(row.id),retainedPrepared=retained?.prepared;
+   observations.get(row.id).push({block,market:row.market==='uae'?'uae':'other',rowSha256:rowHash(row),
+    immutableRowSha256:retained?rowHash(retained.raw):null,preparedRowSha256:preparedRow?rowHash(preparedRow):null,
+    immutablePreparedRowSha256:retainedPrepared?rowHash(retainedPrepared):null,
+    rawMatchesImmutable:retained?rowHash(row)===rowHash(retained.raw):null,
+    preparedMatchesImmutable:retainedPrepared&&preparedRow?rowHash(preparedRow)===rowHash(retainedPrepared):null,
+    gateEligible:Boolean(preparedRow),...describeMissing(row,runtime,{base:new Set(plan.byId.keys())})});
+  }
+  }
+ }
+ const revisions=[...snapshots];
+ for(let offset=0;offset<revisions.length;offset+=4){const group=revisions.slice(offset,offset+4);
+  const reads=await Promise.allSettled(group.map(([key])=>storage.readObjectMetadata(key)));
+  for(let item=0;item<group.length;item++){
+   if(reads[item].status==='rejected')throw reads[item].reason;
+   const before=group[item][1],after=reads[item].value;
+   assert(before.found===after.found&&before.etag===after.etag,'card_object_changed');
+  }
+ }
+ const complete=missingReferenced===0&&invalidBlocks===0&&invalidRows===0&&duplicates.size===0&&plan.unreadInteriorBlocks===0;
+ const sourceIds=new Set(plan.byId.keys());
+ const immutableIdentityValid=immutable.rows===manifest.markets.uae.count&&immutable.invalidIds===0&&immutable.foreignMarkets===0
+  &&immutable.duplicates?.size===0&&immutable.gateEligibleDuplicates?.size===0;
+ return {scope:'verified_uae_referenced_blocks_and_two_boundary_neighbours',universalAbsenceProven:false,
+  minimumReferencedBlock:plan.min,maximumReferencedBlock:plan.max,referencedBlocks:plan.referenced.length,
+  boundaryBlocks:plan.neighbours.length,readBlocks:blocks.length,blockLimit:plan.maxBlocks,
+  unreadInteriorBlocks:plan.unreadInteriorBlocks,missingReferencedBlocks:missingReferenced,invalidBlocks,invalidRows,
+  duplicateIds:setProof(duplicates),misplacedBaseIdOccurrences:misplaced,checkedScopeComplete:complete,etagsUnchanged:true,
+  allBaseIdsMapped:complete&&mapped.size===sourceIds.size,missingBaseMappings:setProof(minus(sourceIds,mapped)),
+  scannedUaeIds:setProof(uaeIds),uaeIdsOutsideBase:setProof(minus(uaeIds,sourceIds)),
+  immutableEligibleMissingCards:setProof(minus(immutable.gateEligible,uaeIds)),
+  immutableEligibleMissingEligibleCards:setProof(minus(immutable.gateEligible,eligibleIds)),
+  cardIdsOutsideImmutable:setProof(minus(uaeIds,immutable.ids)),
+  immutableIdentityValid,allImmutableEligibleIdsMapped:complete&&immutableIdentityValid&&misplaced===0
+   &&minus(immutable.gateEligible,eligibleIds).size===0&&minus(immutable.gateEligible,uaeIds).size===0,
+  targets:CONTRACT.cardTargets.map(id=>{const found=observations.get(id),count=occurrences.get(id);return {id,inImmutableProjection:targets.has(id),
+   inBaseSelector:plan.byId.has(id),foundInCheckedBlocks:count>0,occurrences:count,omittedMatches:count-found.length,
+   status:count?'found_in_checked_blocks':complete?'not_found_in_checked_blocks':'unknown_incomplete_scope',matches:found};}),blocks};
+}
+
 /** Real reader + real eligibility function. Does not warm, backfill, reprice or search. */
-export async function inspectUaeCoverage({storage,runtime,selectorDirectories,manifest}){
+export async function inspectUaeCoverage({storage,runtime,selectorDirectories,manifest,cardScan}){
  const prefix=`catalog/generations/${manifest.generationId}/indexes/`,selectors={},memberships={};
+ let baseIndex;const cardTargets=new Map();
  for(const [label,directory] of Object.entries(selectorDirectories)){
   const meta=await storage.readJsonWithMeta(prefix+directory+'/ready.json',null);
   if(!meta.found){selectors[label]={status:'absent'};memberships[label]=null;continue;}
@@ -131,6 +240,7 @@ export async function inspectUaeCoverage({storage,runtime,selectorDirectories,ma
   const rows=[...index.rows,...(index.otherRows||[])];assert(rows.length<=CONTRACT.limits.rows,'row_bound_exceeded');
   const keys=idsOf(rows.map(row=>row[5]));
   const schemaReady=index.version===3&&index.specificationFilterVersion===1&&index.bodyFilterVersion===1&&index.displayOrderVersion===1;
+  if(label==='base')baseIndex=index;
   memberships[label]=label==='base'||schemaReady?keys.ids:null;
   selectors[label]={status:label==='base'||schemaReady?'valid':'wrong_specification_schema',
    sourceRows:index.sourceRows,pricedRows:index.rows.length,otherRows:index.otherRows?.length||0,schemaReady,
@@ -152,8 +262,10 @@ export async function inspectUaeCoverage({storage,runtime,selectorDirectories,ma
     for(const row of rows){
      if(typeof row?.id!=='string'||!row.id||row.id!==row.id.trim()){invalidIds++;continue;}
      if(ids.has(row.id))duplicates.add(row.id);ids.add(row.id);if(row.market!=='uae')foreignMarkets++;
+     if(label==='immutable'&&CONTRACT.cardTargets.includes(row.id))cardTargets.set(row.id,{raw:row});
     }
     for(const row of gate){if(eligible.has(row.id))eligibleDuplicates.add(row.id);eligible.add(row.id);
+     if(label==='immutable'&&cardTargets.has(row.id))cardTargets.get(row.id).prepared=row;
      if(label==='immutable'&&samples.length<CONTRACT.limits.samples&&Object.values(memberships).some(set=>set&&!set.has(row.id))){
       const raw=rows.find(item=>item.id===row.id);samples.push(describeMissing(raw,runtime,memberships));
      }
@@ -176,6 +288,8 @@ export async function inspectUaeCoverage({storage,runtime,selectorDirectories,ma
  const publicDifference=projections.public?.status==='read'?{
   onlyImmutable:summary(minus(immutable.ids,projections.public.ids)),onlyPublic:summary(minus(projections.public.ids,immutable.ids)),
  }:null;
+ const cardReferences=cardScan?await inspectUaeCardReferences({storage,runtime,index:baseIndex,manifest,immutable,
+  targets:cardTargets,authorize:cardScan.authorize}):undefined;
  for(const value of Object.values(projections))for(const key of ['ids','duplicates','gateEligible','gateEligibleDuplicates','ordinaryPublicEligible']){
   if(value[key] instanceof Set)value[key]=summary(value[key]);
  }
@@ -183,7 +297,7 @@ export async function inspectUaeCoverage({storage,runtime,selectorDirectories,ma
  const complete=candidate?.status==='valid'&&candidate.schemaReady&&candidate.missingGateEligible.count===0&&candidate.notInImmutableProjection.count===0
   &&candidate.duplicates.count===0&&candidate.invalidIds===0&&candidate.foreignMarkets===0
   &&immutable.duplicates.count===0&&immutable.gateEligibleDuplicates.count===0&&immutable.invalidIds===0&&immutable.foreignMarkets===0;
- return {market:'uae',manifestRows:manifest.markets.uae.count,selectors,projections,publicDifference,missingSamples:samples,
+ return {market:'uae',manifestRows:manifest.markets.uae.count,selectors,projections,publicDifference,missingSamples:samples,cardReferences,
   observedCandidateCoverage:complete?'complete':'incomplete_or_unavailable',releaseAccepted:false};
 }
 
@@ -199,7 +313,7 @@ export async function main(root){
  process.env.AVTOCENA_RELEASE_SHA=source;process.env.AVTOCENA_CALCULATION_VERSION=calculation;
  const directories={base:'budget-markets-v3',candidate:`budget-markets-v7/${hash([CONTRACT.encyclopedia,calculation])}`};
  if(source!=='e8462585e8998eaae5a003831a38d79263ca5649')directories.previousCandidate=`budget-markets-v7/${hash([CONTRACT.encyclopedia,CONTRACT.sources.e8462585e8998eaae5a003831a38d79263ca5649])}`;
- const allowed=readKeyPolicy(Object.values(directories)),network=fenceNetwork(process.env,allowed);
+ const cardKeys=new Set(),allowed=readKeyPolicy(Object.values(directories),cardKeys),network=fenceNetwork(process.env,allowed);
  globalThis.fetch=network.fetch;
  const {getJsonStorage}=await runtime('apps/web/lib/data.ts'),storage=getJsonStorage(),storageReads=fenceStorage(storage,allowed);
  const health=async()=>{const response=await fetch('https://avtocena.com/api/health');assert(response.ok,'health_unavailable');
@@ -211,6 +325,7 @@ export async function main(root){
   &&manifest.value.markets.uae.count<=CONTRACT.limits.rows,'uae_partition_invalid');
  const roots=['catalog/import-lock.json','catalog-editorial/current.json',
   `knowledge/encyclopedia/calculation-releases/${CONTRACT.liveRelease}.json`,
+  `knowledge/encyclopedia/calculation-indexes/${CONTRACT.encyclopedia}.json`,
   `catalog/generations/${CONTRACT.generation}/indexes/projection/uae.json`,'catalog/public/projection/uae.json',
   ...Object.values(directories).map(directory=>`catalog/generations/${CONTRACT.generation}/indexes/${directory}/ready.json`)];
  const initial=new Map();for(const key of roots){const value=await storage.readObjectMetadata(key);
@@ -226,7 +341,8 @@ export async function main(root){
   encyclopedia:'encyclopedia/calculation-index.ts',evidence:'encyclopedia/calculation-evidence.ts',safety:'catalog/safe-public-pricing.ts'}))modules[name]=await runtime('apps/web/lib/'+file);
  assert(modules.encyclopedia.readCalculationIndex()?.digest===CONTRACT.encyclopedia,'runtime_private_index_mismatch');
  const day=new Date().toISOString().slice(0,10),policyDay=new Date(Date.now()+7*3600000).toISOString().slice(0,10);
- const result=await inspectUaeCoverage({storage,runtime:modules,selectorDirectories:directories,manifest:manifest.value});
+ const result=await inspectUaeCoverage({storage,runtime:modules,selectorDirectories:directories,manifest:manifest.value,
+  cardScan:{authorize(keys){for(const key of keys)cardKeys.add(key);}}});
  for(const [key,before] of initial){const after=await storage.readObjectMetadata(key);
   assert(before.found===after.found&&before.etag===after.etag,'observed_object_changed');}
  const after=await storage.readJsonWithMeta('catalog/manifest.json',null);
@@ -234,8 +350,11 @@ export async function main(root){
  assert(day===new Date().toISOString().slice(0,10)&&policyDay===new Date(Date.now()+7*3600000).toISOString().slice(0,10),'policy_day_changed');
  await health();assert(git('rev-parse','HEAD')===source&&!git('status','--porcelain','--untracked-files=no'),'source_changed');
  assert(storageReads.readFailures===0&&storageReads.blockedOperations===0,'read_incomplete');
- const report={version:1,diagnosticOnly:true,checkedAt:new Date().toISOString(),source,calculationVersion:calculation,
+ const report={version:2,diagnosticOnly:true,checkedAt:new Date().toISOString(),source,calculationVersion:calculation,
   installedSource:CONTRACT.liveRelease,generationId:CONTRACT.generation,encyclopediaDigest:CONTRACT.encyclopedia,
+  manifestProof:{before:{etagSha256:shaText(manifest.etag),sha256:hash(manifest.value)},
+   after:{etagSha256:shaText(after.etag),sha256:hash(after.value)}},
+  observedObjectRevisionsUnchanged:true,
   readOnly:true,storageWrites:0,privateIndexRestoredLocally:true,limits:CONTRACT.limits,network:network.stats,storageReads,...result};
  console.log(JSON.stringify(report));return report;
 }
