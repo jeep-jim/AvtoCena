@@ -20,24 +20,21 @@ permissions:
   contents: read
   actions: read
 env:
-  RELEASE_SOURCE_SHA: e8462585e8998eaae5a003831a38d79263ca5649
+  RELEASE_SOURCE_SHA: f45efaf2b172af41d14987fb642e8e6b6df78cdd
   RELEASE_PREPARATION_MARKETS: korea
-  HISTORY_RELEASE_MANIFEST: '{"schemaVersion":1,"source":"e8462585e8998eaae5a003831a38d79263ca5649","tree":"c9919c21927ba5f303524569a4df99ca0174a710","pr":1776,"retainedSource":"83ff17075e9188dcf227c8752dc064248d5f42e0","retainedCalculationVersion":"4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90","insuranceSource":"7f9165125edc773221da8e17a5ed39f3592db31c","calculationVersion":"2a0a3eecd966a1c6a5ffed3760740983803ff172fcf023fc30aefbc102a6e4f2","encyclopediaCompatibilityDigest":"1664d4485387a9fa8d6f3135516824ba69032290fd10e0737a12b92a6b146cde","requiredChecks":["CI","QR
-    and gallery browser QA","Verify Dubicars paid feed","Verify Korea report disclosure","Verify city picker","Verify dealer banner and Yandex map","Verify dealer
-    selection sharing","Verify dealer workspace","Verify green corner budget","Verify offer sharing","Verify owner UI polish","Verify per-car services and edit links","Verify
-    site controls and chat"],"allowedPaths":[".github/workflows/verify-korea-reports.yml","apps/web/app/(public)/cars/offer/[id]/history-identity.ts","apps/web/app/(public)/cars/offer/[id]/page.tsx","apps/web/app/(public)/page.tsx","apps/web/app/api/catalog/korea-report/paid-report-reader.ts","apps/web/app/api/catalog/korea-report/route.ts","apps/web/app/api/catalog/recommendations/data.ts","apps/web/components/catalog/KoreaReportPanel.tsx","apps/web/components/catalog/PaidKoreaReportPanel.tsx","apps/web/components/catalog/paid-korea-report-contract.ts","apps/web/lib/catalog/shared-budget-prices.ts","apps/web/lib/catalog/storage.ts","apps/web/lib/dealers/exchange-rate.ts","apps/web/lib/dealers/program-store.ts","scripts/catalog-budget-shared-warmup.mjs","scripts/regcloud-prepare-prices.mjs","tests/browser/paid-korea-report-fixture.tsx","tests/browser/paid-korea-report-live.mjs","tests/browser/paid-korea-report.mjs","tests/catalog-budget-runtime.test.ts","tests/catalog-prepared-budget-selection.test.ts","tests/catalog-price-preparation-write-guard.test.ts","tests/dealer-platform-membership-read.test.ts","tests/fixtures/paid-korea-report.json","tests/home-independent-reads.test.ts","tests/home-parallel-specials.test.ts","tests/paid-korea-report-contract.test.ts","tests/paid-korea-report-live.test.ts","tests/paid-korea-report-reader.test.ts","tests/paid-korea-report-recommendations.test.ts","tests/paid-korea-report-render.test.ts"],"supplementPaths":["apps/web/lib/catalog/shared-budget-prices.ts","apps/web/lib/catalog/storage.ts","apps/web/lib/dealers/exchange-rate.ts","apps/web/lib/dealers/program-store.ts","scripts/catalog-budget-shared-warmup.mjs","scripts/regcloud-prepare-prices.mjs","tests/catalog-budget-runtime.test.ts","tests/catalog-prepared-budget-selection.test.ts","tests/catalog-price-preparation-write-guard.test.ts","tests/dealer-platform-membership-read.test.ts","tests/home-parallel-specials.test.ts"]}'
+  HISTORY_RELEASE_MANIFEST: '{"schemaVersion":1,"source":"f45efaf2b172af41d14987fb642e8e6b6df78cdd","tree":"a9c655fe4cc8210a82a5ef7eec97bc61540201ca","pr":1783,"retainedSource":"83ff17075e9188dcf227c8752dc064248d5f42e0","retainedCalculationVersion":"4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90","insuranceSource":"7f9165125edc773221da8e17a5ed39f3592db31c","calculationVersion":"d17b2291290d0bbcb3478d1b3da68ecdd2296bfdb401d7200d76f92435f57a93","encyclopediaCompatibilityDigest":"1664d4485387a9fa8d6f3135516824ba69032290fd10e0737a12b92a6b146cde","requiredChecks":["CI","QR and gallery browser QA","Verify Dubicars paid feed","Verify Korea report disclosure","Verify city picker","Verify dealer banner and Yandex map","Verify dealer selection sharing","Verify dealer workspace","Verify green corner budget","Verify offer sharing","Verify owner UI polish","Verify per-car services and edit links","Verify site controls and chat"],"allowedPaths":[".github/workflows/verify-korea-reports.yml","apps/web/app/(public)/cars/offer/[id]/history-identity.ts","apps/web/app/(public)/cars/offer/[id]/page.tsx","apps/web/app/(public)/page.tsx","apps/web/app/api/catalog/korea-report/paid-report-reader.ts","apps/web/app/api/catalog/korea-report/route.ts","apps/web/app/api/catalog/recommendations/data.ts","apps/web/components/catalog/KoreaReportPanel.tsx","apps/web/components/catalog/PaidKoreaReportPanel.tsx","apps/web/components/catalog/paid-korea-report-contract.ts","apps/web/lib/catalog/budget-card-reference.ts","apps/web/lib/catalog/budget-count-index.ts","apps/web/lib/catalog/budget-source-supplements.ts","apps/web/lib/catalog/budget-specification-index.ts","apps/web/lib/catalog/shared-budget-prices.ts","apps/web/lib/catalog/storage.ts","apps/web/lib/dealers/exchange-rate.ts","apps/web/lib/dealers/program-store.ts","scripts/catalog-active-budget-check.mjs","scripts/catalog-budget-shared-warmup.mjs","scripts/catalog-candidate-budget-prepare.mjs","scripts/catalog-staged-budget-child.mjs","scripts/lib/catalog-candidate-budget.mjs","scripts/lib/catalog-staged-budget.mjs","scripts/regcloud-prepare-prices.mjs","tests/browser/paid-korea-report-fixture.tsx","tests/browser/paid-korea-report-live.mjs","tests/browser/paid-korea-report.mjs","tests/catalog-active-budget-check.test.ts","tests/catalog-budget-runtime.test.ts","tests/catalog-budget-source-supplement-tooling.test.ts","tests/catalog-budget-source-supplements.test.ts","tests/catalog-budget-specifications.test.ts","tests/catalog-candidate-budget-prepare.test.ts","tests/catalog-pickup-markets.test.ts","tests/catalog-prepared-budget-selection.test.ts","tests/catalog-price-preparation-write-guard.test.ts","tests/catalog-rate-fingerprint.test.ts","tests/dealer-platform-membership-read.test.ts","tests/fixtures/catalog-rate-fingerprint-worker.mjs","tests/fixtures/paid-korea-report.json","tests/home-independent-reads.test.ts","tests/home-parallel-specials.test.ts","tests/paid-korea-report-contract.test.ts","tests/paid-korea-report-live.test.ts","tests/paid-korea-report-reader.test.ts","tests/paid-korea-report-recommendations.test.ts","tests/paid-korea-report-render.test.ts"],"supplementPaths":["apps/web/lib/catalog/budget-card-reference.ts","apps/web/lib/catalog/budget-count-index.ts","apps/web/lib/catalog/budget-source-supplements.ts","apps/web/lib/catalog/budget-specification-index.ts","apps/web/lib/catalog/shared-budget-prices.ts","apps/web/lib/catalog/storage.ts","apps/web/lib/dealers/exchange-rate.ts","apps/web/lib/dealers/program-store.ts","scripts/catalog-active-budget-check.mjs","scripts/catalog-budget-shared-warmup.mjs","scripts/catalog-candidate-budget-prepare.mjs","scripts/catalog-staged-budget-child.mjs","scripts/lib/catalog-candidate-budget.mjs","scripts/lib/catalog-staged-budget.mjs","scripts/regcloud-prepare-prices.mjs","tests/catalog-active-budget-check.test.ts","tests/catalog-budget-runtime.test.ts","tests/catalog-budget-source-supplement-tooling.test.ts","tests/catalog-budget-source-supplements.test.ts","tests/catalog-budget-specifications.test.ts","tests/catalog-candidate-budget-prepare.test.ts","tests/catalog-pickup-markets.test.ts","tests/catalog-prepared-budget-selection.test.ts","tests/catalog-price-preparation-write-guard.test.ts","tests/catalog-rate-fingerprint.test.ts","tests/dealer-platform-membership-read.test.ts","tests/fixtures/catalog-rate-fingerprint-worker.mjs","tests/home-parallel-specials.test.ts"]}'
   HISTORY_BACKFILL_RUN_ID: '43823438297'
   HISTORY_BACKFILL_SOURCE_SHA: 49328a36d8943372a684b067346220fd0719a58b
   HISTORY_BACKFILL_ARTIFACT_ID: '14206780690'
   HISTORY_BACKFILL_ZIP_SHA256: b584e16a2c18a36701c4fccc17f4aa05efc4541ccf4d2ffd3283af02c709c79a
-  CANDIDATE_CALCULATION_VERSION: 2a0a3eecd966a1c6a5ffed3760740983803ff172fcf023fc30aefbc102a6e4f2
+  CANDIDATE_CALCULATION_VERSION: d17b2291290d0bbcb3478d1b3da68ecdd2296bfdb401d7200d76f92435f57a93
 concurrency:
   group: regcloud-production-release
   cancel-in-progress: false
 jobs:
   release:
     if: github.ref == 'refs/heads/main' && (github.event_name == 'workflow_dispatch' || github.event.head_commit.message == 'Release reviewed prepared feed delivery
-      e8462585' || github.event.head_commit.message == 'Prepare reviewed feed delivery e8462585')
+      f45efaf2' || github.event.head_commit.message == 'Prepare reviewed feed delivery f45efaf2')
     environment: regcloud-staging
     runs-on: ubuntu-24.04
     timeout-minutes: 120
@@ -48,12 +45,12 @@ jobs:
     - uses: actions/checkout@v4
       with:
         persist-credentials: false
-        ref: e8462585e8998eaae5a003831a38d79263ca5649
+        ref: f45efaf2b172af41d14987fb642e8e6b6df78cdd
         fetch-depth: 32
     - name: Install exact successor source guard
       run: |
         set -euo pipefail
-        cat > "$RUNNER_TEMP/verify-history-candidate.py" <<'FASTPATH_HELPER_E585AECECF487EFB'
+        cat > "$RUNNER_TEMP/verify-history-candidate.py" <<'FASTPATH_HELPER_75C56E9BEB12F4C3'
         import hashlib
         import json
         import os
@@ -71,9 +68,22 @@ jobs:
             'packages', 'data', 'package.json', 'package-lock.json', 'tsconfig.json',
             'apps/web/package.json', 'apps/web/tsconfig.json')
         FASTPATH_RUNTIME_PATHS = {
-            'apps/web/lib/catalog/shared-budget-prices.ts', 'apps/web/lib/catalog/storage.ts',
-            'apps/web/lib/dealers/exchange-rate.ts', 'apps/web/lib/dealers/program-store.ts',
-            'scripts/catalog-budget-shared-warmup.mjs', 'scripts/regcloud-prepare-prices.mjs'}
+            'apps/web/lib/catalog/budget-card-reference.ts',
+            'apps/web/lib/catalog/budget-count-index.ts',
+            'apps/web/lib/catalog/budget-source-supplements.ts',
+            'apps/web/lib/catalog/budget-specification-index.ts',
+            'apps/web/lib/catalog/shared-budget-prices.ts',
+            'apps/web/lib/catalog/storage.ts',
+            'apps/web/lib/dealers/exchange-rate.ts',
+            'apps/web/lib/dealers/program-store.ts',
+            'scripts/catalog-active-budget-check.mjs',
+            'scripts/catalog-budget-shared-warmup.mjs',
+            'scripts/catalog-candidate-budget-prepare.mjs',
+            'scripts/catalog-staged-budget-child.mjs',
+            'scripts/lib/catalog-candidate-budget.mjs',
+            'scripts/lib/catalog-staged-budget.mjs',
+            'scripts/regcloud-prepare-prices.mjs',
+        }
         REQUIRED = {'CI', 'Verify site controls and chat', 'Verify green corner budget',
                     'Verify Korea report disclosure', 'Verify city picker',
                     'QR and gallery browser QA', 'Verify owner UI polish',
@@ -209,8 +219,8 @@ jobs:
 
         if __name__ == '__main__':
             main()
-        FASTPATH_HELPER_E585AECECF487EFB
-        printf '%s  %s\n' e585aececf487efb19ef74d374241a8742d0af25818b57b8da4c2a036c173fcf "$RUNNER_TEMP/verify-history-candidate.py" | sha256sum --check
+        FASTPATH_HELPER_75C56E9BEB12F4C3
+        printf '%s  %s\n' 75c56e9beb12f4c3adafe65312c012a4d1f8841fa4a7ef27dff2a779126cc53a "$RUNNER_TEMP/verify-history-candidate.py" | sha256sum --check
     - name: Verify reviewed successor, retained 83 and every source check
       env:
         GH_TOKEN: ${{ github.token }}
@@ -913,7 +923,7 @@ jobs:
         FASTPATH_HELPER_A056781BF5CAF016
         printf '%s  %s\n' a056781bf5caf01625fd576cba33b37b3486f5fd4c1a106ba43dc14571b295c2 "$RUNNER_TEMP/wait-publication-lease.mjs" | sha256sum --check
         mkdir -p "$RUNNER_TEMP/candidate-tools/scripts"
-        cat > "$RUNNER_TEMP/candidate-tools/scripts/catalog-active-budget-check.mjs" <<'FASTPATH_HELPER_CCD777825B52BAFC'
+        cat > "$RUNNER_TEMP/candidate-tools/scripts/catalog-active-budget-check.mjs" <<'FASTPATH_HELPER_1631CEFFF98B74FD'
         import fs from 'node:fs/promises';
         import path from 'node:path';
         import os from 'node:os';
@@ -921,7 +931,7 @@ jobs:
         import {promisify} from 'node:util';
         import {fileURLToPath, pathToFileURL} from 'node:url';
         import {PREPARED_MARKETS, budgetManifestMarkets, readLiveBudgetIdentity, assertBudgetReadinessReport,
-          stagedBudgetDigest, stagedBudgetWriteAllowed} from './lib/catalog-staged-budget.mjs';
+          stagedBudgetDigest, stagedBudgetWriteAllowed, assertStagedBudgetSupplementWrite} from './lib/catalog-staged-budget.mjs';
         import {restoreReleaseEncyclopedia} from './encyclopedia/restore-calculation-index.mjs';
         import {collectPreparedBudgetReadiness, installStagedBudgetNetworkFence} from './catalog-staged-budget-child.mjs';
 
@@ -1013,6 +1023,7 @@ jobs:
           storage.readJson=async(key,fallback)=>(await storage.readJsonWithMeta(key,fallback)).value;
           storage.writeJson=async(key,value,condition)=>{
             if(phase!=='prepare'||!stagedBudgetWriteAllowed(key,context))throw Error('active_budget_write_forbidden');
+            assertStagedBudgetSupplementWrite(key,value,condition,context);
             await checkState();
             if(context.mode==='live')return write(key,value,condition);
             const previous=await localMeta(key);
@@ -1103,8 +1114,9 @@ jobs:
           const task=process.argv[2]==='--child'?child(...process.argv.slice(3)):runActiveBudgetCheck(path.resolve(process.argv[2]||'.'));
           task.catch(error=>{console.error(error?.message||'active_budget_check_failed');process.exitCode=1;});
         }
-        FASTPATH_HELPER_CCD777825B52BAFC
-        printf '%s  %s\n' ccd777825b52bafc5f352be6e6bb2f9c9ef165d96f9fae5c2d3ff010a5e1624a "$RUNNER_TEMP/candidate-tools/scripts/catalog-active-budget-check.mjs" | sha256sum --check
+        FASTPATH_HELPER_1631CEFFF98B74FD
+        printf '%s  %s\n' 1631cefff98b74fd0d953579e4bb347fe56846e0b178c10f5894b7eb93a1f675 "$RUNNER_TEMP/candidate-tools/scripts/catalog-active-budget-check.mjs" | sha256sum --check
+        cmp "scripts/catalog-active-budget-check.mjs" "$RUNNER_TEMP/candidate-tools/scripts/catalog-active-budget-check.mjs"
         mkdir -p "$RUNNER_TEMP/candidate-tools/scripts"
         cat > "$RUNNER_TEMP/candidate-tools/scripts/catalog-candidate-budget-prepare.mjs" <<'FASTPATH_HELPER_94E59709BA513334'
         import fs from 'node:fs/promises';
@@ -1291,13 +1303,14 @@ jobs:
         }
         FASTPATH_HELPER_94E59709BA513334
         printf '%s  %s\n' 94e59709ba513334de6e3a5d1cf20fc6e7ae776091191b7f55d8fc4591827b33 "$RUNNER_TEMP/candidate-tools/scripts/catalog-candidate-budget-prepare.mjs" | sha256sum --check
+        cmp "scripts/catalog-candidate-budget-prepare.mjs" "$RUNNER_TEMP/candidate-tools/scripts/catalog-candidate-budget-prepare.mjs"
         mkdir -p "$RUNNER_TEMP/candidate-tools/scripts"
-        cat > "$RUNNER_TEMP/candidate-tools/scripts/catalog-staged-budget-child.mjs" <<'FASTPATH_HELPER_1518B7A718672338'
+        cat > "$RUNNER_TEMP/candidate-tools/scripts/catalog-staged-budget-child.mjs" <<'FASTPATH_HELPER_51620761BFCE6AA4'
         import fs from 'node:fs/promises';
         import path from 'node:path';
         import {pathToFileURL, fileURLToPath} from 'node:url';
         import {PREPARED_MARKETS, budgetManifestMarkets, assertStagedBudgetContext, assertBudgetReadinessReport, installStagedBudgetStorage,
-          stagedBudgetDigest, verifyBudgetSourceCoverage} from './lib/catalog-staged-budget.mjs';
+          stagedBudgetDigest, verifyBudgetSourceCoverage, assertBudgetSourceSupplement} from './lib/catalog-staged-budget.mjs';
 
         export function installStagedBudgetNetworkFence(endpoint, fetchImpl = globalThis.fetch, allowStorageWrites = true) {
           const storageOrigin = new URL(endpoint).origin;
@@ -1314,7 +1327,7 @@ jobs:
         export async function runStagedBudgetChild({mode, root, context, reportPath}) {
           assertStagedBudgetContext(context);
           const runtime = relative => import(pathToFileURL(path.join(root, relative)).href);
-          installStagedBudgetNetworkFence(process.env.YC_OBJECT_STORAGE_ENDPOINT);
+          installStagedBudgetNetworkFence(process.env.YC_OBJECT_STORAGE_ENDPOINT, globalThis.fetch, mode === 'prepare');
           const {getJsonStorage} = await runtime('apps/web/lib/data.ts');
           const storage = getJsonStorage();
           if (storage.driver !== 'object') throw Error('object_storage_required');
@@ -1335,6 +1348,10 @@ jobs:
           ]);
           if ((encyclopedia.readCalculationIndex()?.digest || null) !== context.encyclopediaDigest
               || pricing.calculationCacheVersion() !== context.calculationVersion) throw Error('staged_budget_runtime_context_mismatch');
+          const supplements = typeof catalog.readBudgetSpecificationSource === 'function';
+          if (supplements !== (typeof catalog.verifyBudgetSpecificationSource === 'function')
+              || supplements && typeof catalog.prepareBudgetSpecificationSourceRows !== 'function') throw Error('staged_budget_supplement_api_incomplete');
+          if (supplements && typeof catalog.verifyBudgetSpecificationCards !== 'function') throw Error('staged_budget_card_readiness_api_required');
           const fingerprints = async () => Object.fromEntries(await Promise.all(markets.map(async market =>
             [market, await pricing.budgetPricingFingerprint(market)])));
           const before = await fingerprints(), utcDay = new Date().toISOString().slice(0, 10);
@@ -1370,7 +1387,26 @@ jobs:
               selectorChecksum:stagedBudgetDigest(index)};
             const projection = await storage.readJson(`catalog/generations/${context.manifest.generationId}/indexes/projection/${market}.json`, null);
             record.coverage = verifyBudgetSourceCoverage({manifest:context.manifest, market, projection, source,
-              prepareRows:rows => catalog.prepareCatalogProjectionRows(rows)});
+              prepareRows:supplements ? catalog.prepareBudgetSpecificationSourceRows : catalog.prepareCatalogProjectionRows});
+            if (supplements) {
+              const descriptor = await catalog.verifyBudgetSpecificationSource(context.manifest, market);
+              assertBudgetSourceSupplement(descriptor, context, market, record);
+              if (descriptor.sourceCardsSha256 !== stagedBudgetDigest(source.map(row => [row[5].id,row[5].block,row[5].cardPath ?? null]))
+                  || descriptor.pricingChunksSha256 !== stagedBudgetDigest(index.pricingChunks ?? null)) {
+                throw Error('staged_budget_source_supplement_mapping_changed:' + market);
+              }
+              record.sourceSupplement = descriptor;
+              const cards = await catalog.verifyBudgetSpecificationCards(context.manifest, market, index);
+              const {checksum, ...body} = cards || {};
+              if (cards?.version !== 1 || cards.verified !== true || cards.generationId !== context.manifest.generationId || cards.market !== market
+                  || cards.sourceRows !== source.length || cards.sourceIds !== record.sourceIds || !Array.isArray(cards.blocks) || !cards.blocks.length
+                  || cards.blocks.reduce((count, block) => count + block.coveredRows, 0) !== source.length || checksum !== stagedBudgetDigest(body)) {
+                throw Error('staged_budget_card_readiness_invalid:' + market);
+              }
+              // Included in the existing report.markets / candidate receipt comparison:
+              // same IDs with changed card content cannot pass the later verify phase.
+              record.cardReadiness = cards;
+            }
             for (const [kind, display] of [['budget', false], ['sort', true]]) {
               const prices = await pricing.readPreparedBudgetPrices(index, market, before[market], display);
               if (!prices) throw Error('staged_budget_price_snapshot_missing:' + market + ':' + kind);
@@ -1393,7 +1429,9 @@ jobs:
             }
           }
           if (utcDay !== new Date().toISOString().slice(0, 10) || policyDay !== new Date(Date.now() + 7 * 3600000).toISOString().slice(0, 10)
-              || stagedBudgetDigest(before) !== stagedBudgetDigest(await fingerprints())) {
+              || stagedBudgetDigest(before) !== stagedBudgetDigest(await fingerprints())
+              || (encyclopedia.readCalculationIndex()?.digest || null) !== context.encyclopediaDigest
+              || pricing.calculationCacheVersion() !== context.calculationVersion) {
             throw Error('staged_budget_prepared_context_changed');
           }
           assertBudgetReadinessReport(report, context);
@@ -1409,8 +1447,9 @@ jobs:
             runStagedBudgetChild({mode, root:path.resolve(root), context:JSON.parse(value), reportPath}))
             .catch(error => { console.error(error?.message || 'staged_budget_child_failed'); process.exitCode = 1; });
         }
-        FASTPATH_HELPER_1518B7A718672338
-        printf '%s  %s\n' 1518b7a718672338fa6613293209061ce1525612eb93b2868044b4ac53c6bbc2 "$RUNNER_TEMP/candidate-tools/scripts/catalog-staged-budget-child.mjs" | sha256sum --check
+        FASTPATH_HELPER_51620761BFCE6AA4
+        printf '%s  %s\n' 51620761bfce6aa435258f8c635da9efaafa2384e7e1a5ab179b30fa6a597ca2 "$RUNNER_TEMP/candidate-tools/scripts/catalog-staged-budget-child.mjs" | sha256sum --check
+        cmp "scripts/catalog-staged-budget-child.mjs" "$RUNNER_TEMP/candidate-tools/scripts/catalog-staged-budget-child.mjs"
         mkdir -p "$RUNNER_TEMP/candidate-tools/scripts/encyclopedia"
         cat > "$RUNNER_TEMP/candidate-tools/scripts/encyclopedia/restore-calculation-index.mjs" <<'FASTPATH_HELPER_F7FB040D3E07D3CF'
         import fs from 'node:fs/promises';
@@ -1430,12 +1469,13 @@ jobs:
         FASTPATH_HELPER_F7FB040D3E07D3CF
         printf '%s  %s\n' f7fb040d3e07d3cf7429d1fa63553c9e08a2b1abb7ef780f2c31eef6daa0dcf1 "$RUNNER_TEMP/candidate-tools/scripts/encyclopedia/restore-calculation-index.mjs" | sha256sum --check
         mkdir -p "$RUNNER_TEMP/candidate-tools/scripts/lib"
-        cat > "$RUNNER_TEMP/candidate-tools/scripts/lib/catalog-candidate-budget.mjs" <<'FASTPATH_HELPER_7C785283A82CD8B1'
+        cat > "$RUNNER_TEMP/candidate-tools/scripts/lib/catalog-candidate-budget.mjs" <<'FASTPATH_HELPER_228E7C7D4CD71717'
         import path from 'node:path';
         import {pathToFileURL} from 'node:url';
         import {gunzipSync} from 'node:zlib';
         import {PREPARED_MARKETS, budgetManifestMarkets, stagedBudgetDigest as hash, verifyBudgetSourceCoverage,
-          assertBudgetReadinessReport} from './catalog-staged-budget.mjs';
+          assertBudgetReadinessReport, assertBudgetSourceSupplement, assertBudgetSourceSupplementPlan,
+          assertBudgetSourceSupplementObject} from './catalog-staged-budget.mjs';
 
         const HEX=/^[a-f0-9]{64}$/, SHA=/^[a-f0-9]{40}$/, MAX_PART_BYTES=4*1024*1024, MAX_PRICE_BYTES=64*1024*1024;
         export const candidateControlsKey='catalog/operations/collection-controls-v1.json';
@@ -1463,17 +1503,21 @@ jobs:
             if(!HEX.test(input?.fingerprint||'')||!HEX.test(input?.sourceIds||'')||!Number.isSafeInteger(input?.sourceRows)||input.sourceRows<=0
                 ||input.sourceRows>context.manifest.markets[market].count||input.coverage?.projectionRows!==context.manifest.markets[market].count
                 ||input.coverage?.selectorRows!==input.sourceRows)throw Error('candidate_budget_source_contract_invalid');
+            if(input.sourceSupplement!==undefined)assertBudgetSourceSupplement(input.sourceSupplement,context,market,input);
             const key=hash([context.manifest.generationId,market,input.fingerprint]);
             contract.markets[market]={...input,selectionKey:key,selectionPrefix:`catalog/runtime-budget-selections-v1/${market}/${key}/`,
               budgetPath:`catalog/runtime-budget-prices-v3/${market}/${hash([context.manifest.generationId,market,input.fingerprint,input.sourceIds])}.json`,
               sortPath:`catalog/runtime-sort-prices-v3/${market}/${hash([context.manifest.generationId,market,input.fingerprint,input.sourceIds,'display-price-v2'])}.json`};
           }
+          const supplemented=markets.filter(market=>inputs[market].sourceSupplement!==undefined).length;
+          if(supplemented!==0&&supplemented!==markets.length)throw Error('candidate_budget_source_contract_incomplete');
           return contract;
         }
 
         export function assertCandidateBudgetContract(contract,context) {
           const inputs=Object.fromEntries(Object.entries(contract?.markets||{}).map(([market,row])=>[market,
-            {fingerprint:row.fingerprint,sourceIds:row.sourceIds,sourceRows:row.sourceRows,coverage:row.coverage}]));
+            {fingerprint:row.fingerprint,sourceIds:row.sourceIds,sourceRows:row.sourceRows,coverage:row.coverage,
+              ...(row.sourceSupplement!==undefined?{sourceSupplement:row.sourceSupplement}:{})}]));
           if(hash(contract)!==hash(candidateBudgetContract(context,inputs)))throw Error('candidate_budget_contract_invalid');
         }
 
@@ -1483,6 +1527,9 @@ jobs:
             runtime('apps/web/lib/catalog/shared-budget-prices.ts'),runtime('apps/web/lib/catalog/budget-selector-publication.ts'),
             runtime('apps/web/lib/encyclopedia/calculation-index.ts')]);
           if(typeof catalog.verifyPreparedBudgetPriceCaches!=='function')throw Error('candidate_budget_prepared_reader_required');
+          const supplements=typeof catalog.readBudgetSpecificationSource==='function';
+          if(supplements!==(typeof catalog.verifyBudgetSpecificationSource==='function')
+              ||supplements&&typeof catalog.prepareBudgetSpecificationSourceRows!=='function')throw Error('candidate_budget_supplement_api_incomplete');
           if(pricing.calculationCacheVersion()!==context.calculationVersion||encyclopedia.readCalculationIndex()?.digest!==context.encyclopediaDigest) {
             throw Error('candidate_budget_runtime_context_mismatch');
           }
@@ -1490,14 +1537,23 @@ jobs:
           const directory=await storage.readJson(prefix+'ready.json',null),inputs={};
           if(directory?.generationId!==context.manifest.generationId)throw Error('candidate_budget_base_selector_missing');
           for(const market of budgetManifestMarkets(context.manifest)){
-            const index=await publication.readCompressedSelector(directory,market,name=>storage.readJson(prefix+name+'.json',null));
-            if(!index||index.version!==3||index.generationId!==context.manifest.generationId)throw Error('candidate_budget_base_selector_incomplete');
+            const baseline=await publication.readCompressedSelector(directory,market,name=>storage.readJson(prefix+name+'.json',null));
+            if(!baseline||baseline.version!==3||baseline.generationId!==context.manifest.generationId
+                ||baseline.sourceRows!==baseline.rows.length+(baseline.otherRows?.length||0))throw Error('candidate_budget_base_selector_incomplete');
+            const plan=supplements?await catalog.readBudgetSpecificationSource(context.manifest,market):null;
+            if(supplements&&!plan)throw Error('candidate_budget_source_contract_incomplete');
+            const index=plan?.index||baseline;
             const source=[...index.rows,...(index.otherRows||[])];
             if(index.sourceRows!==source.length||source.some(row=>row[0]!==market))throw Error('candidate_budget_base_selector_incomplete');
             const fingerprint=await pricing.budgetPricingFingerprint(market);
             const projection=await storage.readJson(`catalog/generations/${context.manifest.generationId}/indexes/projection/${market}.json`,null);
-            const coverage=verifyBudgetSourceCoverage({manifest:context.manifest,market,projection,source,prepareRows:catalog.prepareCatalogProjectionRows});
+            const coverage=verifyBudgetSourceCoverage({manifest:context.manifest,market,projection,source,
+              prepareRows:supplements?catalog.prepareBudgetSpecificationSourceRows:catalog.prepareCatalogProjectionRows});
             inputs[market]={fingerprint,sourceIds:hash(source.map(row=>row[5].id)),sourceRows:source.length,coverage};
+            if(plan)inputs[market].sourceSupplement=assertBudgetSourceSupplementPlan(plan,context,market,baseline,coverage);
+          }
+          if(pricing.calculationCacheVersion()!==context.calculationVersion||encyclopedia.readCalculationIndex()?.digest!==context.encyclopediaDigest) {
+            throw Error('candidate_budget_runtime_context_mismatch');
           }
           return candidateBudgetContract(context,inputs);
         }
@@ -1519,6 +1575,14 @@ jobs:
             if(!match||value.encoding!=='gzip-base64'||typeof value.payload!=='string'||hash(value)!==match[1])return false;
             small();return true;
           };
+          for(const expected of Object.values(contract.markets)){
+            const descriptor=expected.sourceSupplement;
+            const object=descriptor?.objects.find(row=>key===`catalog/generations/${contract.generationId}/indexes/${row.path}`);
+            if(object){
+              try{assertBudgetSourceSupplementObject(descriptor,object,value);}catch{return fail();}
+              return 'source-supplement';
+            }
+          }
           if(key.startsWith(contract.specificationPrefix)){
             const suffix=key.slice(contract.specificationPrefix.length);
             if(suffix==='ready.json'){
@@ -1559,6 +1623,7 @@ jobs:
             throw Error('candidate_budget_japan_partition_changed');
           }
           if(current.found&&hash(current.value)===hash(value))return;
+          if(kind==='source-supplement'&&current.found)throw Error('candidate_budget_immutable_source_conflict');
           if(current.found&&!current.etag)throw Error('candidate_budget_etag_required');
           if(condition?.ifNoneMatch==='*'&&current.found||condition?.ifMatch&&condition.ifMatch!==current.etag)throw new ConflictError();
           return write(key,value,current.found?{ifMatch:current.etag}:{ifNoneMatch:'*'});
@@ -1573,7 +1638,8 @@ jobs:
           for(const [market,expected]of Object.entries(contract.markets)){
             const actual=report.markets[market];
             if(actual?.fingerprint!==expected.fingerprint||actual.sourceIds!==expected.sourceIds||actual.sourceRows!==expected.sourceRows
-                ||hash(actual.coverage)!==hash(expected.coverage))throw Error('candidate_budget_readback_contract_changed');
+                ||hash(actual.coverage)!==hash(expected.coverage)
+                ||hash(actual.sourceSupplement??null)!==hash(expected.sourceSupplement??null))throw Error('candidate_budget_readback_contract_changed');
           }
           return {version:1,release:context.release,calculationVersion:context.calculationVersion,encyclopediaDigest:context.encyclopediaDigest,
             baselineLiveIdentity:context.baselineLiveIdentity,generationId:context.manifest.generationId,
@@ -1585,10 +1651,11 @@ jobs:
           if(!HEX.test(expectedDigest||'')||expected?.receiptSha256!==expectedDigest||hash(expected.core)!==expectedDigest
               ||hash(actual)!==expectedDigest)throw Error('candidate_budget_receipt_changed');
         }
-        FASTPATH_HELPER_7C785283A82CD8B1
-        printf '%s  %s\n' 7c785283a82cd8b1793d75f134c79b38d4b6176f1fa1a27704f3734e3cb18f0d "$RUNNER_TEMP/candidate-tools/scripts/lib/catalog-candidate-budget.mjs" | sha256sum --check
+        FASTPATH_HELPER_228E7C7D4CD71717
+        printf '%s  %s\n' 228e7c7d4cd71717ba4ada1b769ba6de02bcd1bd1d0272278c7e1ef87e4277e9 "$RUNNER_TEMP/candidate-tools/scripts/lib/catalog-candidate-budget.mjs" | sha256sum --check
+        cmp "scripts/lib/catalog-candidate-budget.mjs" "$RUNNER_TEMP/candidate-tools/scripts/lib/catalog-candidate-budget.mjs"
         mkdir -p "$RUNNER_TEMP/candidate-tools/scripts/lib"
-        cat > "$RUNNER_TEMP/candidate-tools/scripts/lib/catalog-staged-budget.mjs" <<'FASTPATH_HELPER_B9A7665B684BB67A'
+        cat > "$RUNNER_TEMP/candidate-tools/scripts/lib/catalog-staged-budget.mjs" <<'FASTPATH_HELPER_F1086CF8DFC09B11'
         import fs from 'node:fs/promises';
         import path from 'node:path';
         import os from 'node:os';
@@ -1602,6 +1669,117 @@ jobs:
         export const stagedBudgetDigest = value => createHash('sha256').update(JSON.stringify(value)).digest('hex');
         const SHA = /^[a-f0-9]{40}$/, CALCULATOR = /^[a-f0-9]{64}$/;
         const GENERATION = /^gen_\d+_[a-z0-9]+$/;
+        const SUPPLEMENT_LIMITS = {rows:10000, objects:200, objectBytes:4*1024*1024, totalBytes:64*1024*1024};
+
+        export function budgetSourceSupplementPrefix(context) {
+          if (!CALCULATOR.test(context.calculationVersion || '')
+              || context.encyclopediaDigest !== null && !CALCULATOR.test(context.encyclopediaDigest || '')) return null;
+          return `budget-source-supplements-v1/${stagedBudgetDigest([context.encyclopediaDigest, context.calculationVersion])}/`;
+        }
+
+        export function assertBudgetSourceSupplement(descriptor, context, market, record) {
+          const fail = () => { throw Error('staged_budget_source_supplement_invalid:' + market); };
+          if (!descriptor || typeof descriptor !== 'object') return fail();
+          const {checksum, ...body} = descriptor, prefix = budgetSourceSupplementPrefix(context);
+          if (!prefix || !PREPARED_MARKETS.includes(market) || descriptor.version !== 1 || descriptor.market !== market
+              || descriptor.generationId !== context.manifest.generationId || descriptor.calculationVersion !== context.calculationVersion
+              || descriptor.encyclopediaDigest !== context.encyclopediaDigest || descriptor.contextSha256 !== prefix.split('/')[1]
+              || checksum !== stagedBudgetDigest(body) || !Number.isSafeInteger(descriptor.baselineSourceRows) || descriptor.baselineSourceRows < 0
+              || !Number.isSafeInteger(descriptor.sourceRows) || descriptor.sourceRows < descriptor.baselineSourceRows
+              || descriptor.sourceRows > context.manifest.markets[market]?.count
+              || ['baselineSourceIds','sourceIds','sourceCardsSha256','pricingChunksSha256','projectionIdsSha256','eligibleIdsSha256']
+                .some(key => !CALCULATOR.test(descriptor[key] || ''))
+              || !Array.isArray(descriptor.missingIds) || descriptor.missingIds.length > SUPPLEMENT_LIMITS.rows
+              || descriptor.missingIds.length !== descriptor.sourceRows - descriptor.baselineSourceRows
+              || descriptor.missingIds.some(id => typeof id !== 'string' || !/^[A-Za-z0-9_-]{1,150}$/.test(id))
+              || new Set(descriptor.missingIds).size !== descriptor.missingIds.length
+              || stagedBudgetDigest(descriptor.missingIds) !== stagedBudgetDigest(descriptor.missingIds.slice().sort((a,b) => a.localeCompare(b)))
+              || !Array.isArray(descriptor.objects) || descriptor.objects.length > SUPPLEMENT_LIMITS.objects) return fail();
+          if (record && (descriptor.sourceRows !== record.sourceRows || descriptor.sourceIds !== record.sourceIds
+              || descriptor.projectionIdsSha256 !== record.coverage?.projectionIds
+              || descriptor.eligibleIdsSha256 !== record.coverage?.eligibleIds)) return fail();
+          let bytes = 0, cards = 0, replay = 0;
+          const paths = new Set();
+          for (const object of descriptor.objects) {
+            const kind = object?.kind;
+            if (!['card','replay'].includes(kind) || !CALCULATOR.test(object.sha256 || '') || !CALCULATOR.test(object.idsSha256 || '')
+                || object.path !== `${prefix}${kind === 'card' ? 'cards' : 'replay'}/${market}/${object.sha256}.json`
+                || paths.has(object.path) || !Number.isSafeInteger(object.bytes) || object.bytes <= 0 || object.bytes > SUPPLEMENT_LIMITS.objectBytes
+                || !Number.isSafeInteger(object.rows) || object.rows <= 0 || object.rows > descriptor.missingIds.length
+                || object.rows > (kind === 'card' ? 256 : 500)) return fail();
+            paths.add(object.path); bytes += object.bytes;
+            if (kind === 'card') cards += object.rows; else replay += object.rows;
+          }
+          if (bytes > SUPPLEMENT_LIMITS.totalBytes || cards !== descriptor.missingIds.length || replay > cards) return fail();
+          return descriptor;
+        }
+
+        export function assertBudgetSourceSupplementObject(descriptor, object, value) {
+          const fail = () => { throw Error('staged_budget_source_supplement_object_invalid'); };
+          if (!value || typeof value !== 'object' || stagedBudgetDigest(value) !== object.sha256
+              || Buffer.byteLength(JSON.stringify(value)) !== object.bytes || object.bytes > SUPPLEMENT_LIMITS.objectBytes
+              || value.generationId !== descriptor.generationId || value.market !== descriptor.market) return fail();
+          const card = object.kind === 'card', rows = card ? value.items : value.entries;
+          if (!Array.isArray(rows) || rows.length !== object.rows || rows.length > (card ? 256 : 500) || card && (!Number.isSafeInteger(value.block) || value.block < 0)
+              || JSON.stringify(Object.keys(value).sort()) !== JSON.stringify((card ? ['generationId','market','block','items'] : ['generationId','market','entries']).sort())) return fail();
+          const ids = rows.map(row => card ? row?.id : row?.[0]), missing = new Set(descriptor.missingIds);
+          if (new Set(ids).size !== ids.length || ids.some(id => !missing.has(id)) || stagedBudgetDigest(ids) !== object.idsSha256
+              || rows.some(row => card ? row.market !== descriptor.market : !Array.isArray(row) || row.length !== 2 || !row[1] || typeof row[1] !== 'object')) return fail();
+          return ids;
+        }
+
+        export function assertStagedBudgetSupplementWrite(key, value, condition, context) {
+          if (!key.includes('/indexes/budget-source-supplements-v1/')) return;
+          const prefix = `catalog/generations/${context.manifest.generationId}/indexes/${budgetSourceSupplementPrefix(context)}`;
+          const match = key.startsWith(prefix) && key.slice(prefix.length).match(/^(cards|replay)\/(china|korea|uae|europe|georgia)\/([a-f0-9]{64})\.json$(?![\s\S])/);
+          const rows = match?.[1] === 'cards' ? value?.items : value?.entries;
+          if (!match || condition?.ifNoneMatch !== '*' || !Array.isArray(rows) || rows.length === 0 || rows.length > (match[1] === 'cards' ? 256 : 500)) {
+            throw Error('staged_budget_write_forbidden');
+          }
+          const ids = rows.map(row => match[1] === 'cards' ? row?.id : row?.[0]);
+          if (ids.some(id => typeof id !== 'string' || !/^[A-Za-z0-9_-]{1,150}$/.test(id))) throw Error('staged_budget_write_forbidden');
+          assertBudgetSourceSupplementObject({generationId:context.manifest.generationId, market:match[2], missingIds:ids},
+            {kind:match[1] === 'cards' ? 'card' : 'replay', sha256:match[3], bytes:Buffer.byteLength(JSON.stringify(value)), rows:ids.length, idsSha256:stagedBudgetDigest(ids)}, value);
+        }
+
+        /** Read-only planning verifies both the unchanged v3 baseline and its bounded
+         * candidate additions before any object can enter the writer allowlist. */
+        export function assertBudgetSourceSupplementPlan(plan, context, market, baseline, coverage) {
+          const index = plan?.index, source = [...(index?.rows || []), ...(index?.otherRows || [])];
+          const before = [...(baseline?.rows || []), ...(baseline?.otherRows || [])];
+          const record = {sourceRows:source.length, sourceIds:stagedBudgetDigest(source.map(row => row[5]?.id)), coverage};
+          const descriptor = assertBudgetSourceSupplement(plan?.descriptor, context, market, record);
+          if (index?.version !== 3 || index.generationId !== context.manifest.generationId || index.sourceRows !== source.length
+              || descriptor.baselineSourceRows !== before.length || descriptor.baselineSourceIds !== stagedBudgetDigest(before.map(row => row[5]?.id))
+              || descriptor.sourceCardsSha256 !== stagedBudgetDigest(source.map(row => [row[5]?.id,row[5]?.block,row[5]?.cardPath ?? null]))
+              || descriptor.pricingChunksSha256 !== stagedBudgetDigest(index.pricingChunks ?? null)
+              || !Array.isArray(plan.objects) || plan.objects.length !== descriptor.objects.length) throw Error('staged_budget_source_supplement_plan_invalid');
+          const rows = new Map(source.map(row => [row[5]?.id,row])), oldIds = new Set(before.map(row => row[5]?.id));
+          if (rows.size !== source.length || baseline.rows.some((row,position) => row[5]?.id !== index.rows[position]?.[5]?.id)
+              || (baseline.otherRows || []).some((row,position) => row[5]?.id !== index.otherRows?.[position]?.[5]?.id)
+              || before.some(row => !rows.has(row[5]?.id) || stagedBudgetDigest(row) !== stagedBudgetDigest(rows.get(row[5]?.id)))
+              || stagedBudgetDigest(source.filter(row => !oldIds.has(row[5]?.id)).map(row => row[5]?.id).sort((a,b) => a.localeCompare(b)))
+                !== stagedBudgetDigest(descriptor.missingIds)) throw Error('staged_budget_source_supplement_baseline_changed');
+          const planned = new Map(plan.objects.map(object => [object.path,object.value])), cards = [], replays = [];
+          const expectedChunks = {...(baseline.pricingChunks || {})}, replayPaths = descriptor.objects.filter(object => object.kind === 'replay').map(object => object.path);
+          if (replayPaths.length) {
+            if (!Array.isArray(expectedChunks[market])) throw Error('staged_budget_source_supplement_baseline_changed');
+            expectedChunks[market] = [...expectedChunks[market], ...replayPaths];
+          }
+          if (stagedBudgetDigest(index.pricingChunks ?? {}) !== stagedBudgetDigest(expectedChunks)) throw Error('staged_budget_source_supplement_baseline_changed');
+          if (planned.size !== plan.objects.length) throw Error('staged_budget_source_supplement_plan_invalid');
+          for (const object of descriptor.objects) {
+            const value = planned.get(object.path), ids = assertBudgetSourceSupplementObject(descriptor, object, value);
+            if (object.kind === 'card' && ids.some(id => rows.get(id)?.[5]?.cardPath !== object.path || rows.get(id)?.[5]?.block !== value.block)) {
+              throw Error('staged_budget_source_supplement_plan_invalid');
+            }
+            (object.kind === 'card' ? cards : replays).push(...ids);
+          }
+          if (new Set(replays).size !== replays.length || stagedBudgetDigest(cards.sort((a,b) => a.localeCompare(b))) !== stagedBudgetDigest(descriptor.missingIds)) {
+            throw Error('staged_budget_source_supplement_plan_invalid');
+          }
+          return descriptor;
+        }
 
         export function budgetManifestMarkets(manifest) {
           const entries = Object.entries(manifest?.markets || {});
@@ -1657,6 +1835,10 @@ jobs:
           const markets = PREPARED_MARKETS.join('|');
           if (key.startsWith(prefix)) {
             const relative = key.slice(prefix.length);
+            const supplement = budgetSourceSupplementPrefix(context);
+            if (supplement && relative.startsWith(supplement)) {
+              return new RegExp(`^(?:cards|replay)/(?:${markets})/[a-f0-9]{64}\\.json$(?![\\s\\S])`).test(relative.slice(supplement.length));
+            }
             return new RegExp(`^budget-markets-v(?:[12345]|[67]/[a-f0-9]{64})/(?:ready|${markets})\\.json$`).test(relative)
               || new RegExp(`^budget-markets-v(?:3|7/[a-f0-9]{64})/parts/(?:${markets})/[a-f0-9]{64}\\.json$`).test(relative);
           }
@@ -1682,6 +1864,7 @@ jobs:
           storage.readJson = async (key, fallback) => (await storage.readJsonWithMeta(key, fallback)).value;
           storage.writeJson = async (key, value, condition) => {
             if (mode !== 'prepare' || !stagedBudgetWriteAllowed(key, context)) throw Error('staged_budget_write_forbidden');
+            assertStagedBudgetSupplementWrite(key, value, condition, context);
             return write(key, value, condition);
           };
           for (const name of ['putBinary', 'deleteJson', 'deleteBinary', 'deleteObjects', 'deletePrefix', 'abortMultipartUpload']) {
@@ -1699,6 +1882,7 @@ jobs:
           if (report?.version !== 1 || report.verified !== true || report.release !== context.release
               || report.calculationVersion !== context.calculationVersion || report.generationId !== context.manifest.generationId
               || report.manifestDigest !== stagedBudgetDigest(context.manifest)
+              || report.encyclopediaDigest !== context.encyclopediaDigest
               || JSON.stringify(Object.keys(report.markets || {}).sort()) !== JSON.stringify(markets.slice().sort())
               || !/^\d{4}-\d{2}-\d{2}$/.test(report.utcDay || '') || !/^\d{4}-\d{2}-\d{2}$/.test(report.policyDay || '')) throw Error('staged_budget_report_invalid');
           for (const market of markets) {
@@ -1712,11 +1896,14 @@ jobs:
                 || !CALCULATOR.test(coverage?.projectionIds || '') || !CALCULATOR.test(coverage?.eligibleIds || '')) {
               throw Error('staged_budget_source_coverage_missing:' + market);
             }
+            if (row.sourceSupplement !== undefined) assertBudgetSourceSupplement(row.sourceSupplement, context, market, row);
             for (const kind of ['budget', 'sort']) {
               if (!Number.isSafeInteger(row[kind]?.rows) || row[kind].rows < 0 || row[kind].rows > row.sourceRows
                   || !CALCULATOR.test(row[kind]?.checksum || '')) throw Error('staged_budget_price_incomplete:' + market);
             }
           }
+          const supplementCount = markets.filter(market => report.markets[market].sourceSupplement !== undefined).length;
+          if (supplementCount !== 0 && supplementCount !== markets.length) throw Error('staged_budget_source_supplement_incomplete');
           if (expected && (report.utcDay !== expected.utcDay || report.policyDay !== expected.policyDay || report.encyclopediaDigest !== expected.encyclopediaDigest
               || stagedBudgetDigest(report.markets) !== stagedBudgetDigest(expected.markets)
               || stagedBudgetDigest(report.preparedSelections ?? null) !== stagedBudgetDigest(expected.preparedSelections ?? null))) {
@@ -1790,8 +1977,9 @@ jobs:
             throw error;
           }
         }
-        FASTPATH_HELPER_B9A7665B684BB67A
-        printf '%s  %s\n' b9a7665b684bb67a50cd86cd3de0aed4cb18a01bfcd1eb49c42a1a8ad0b2df9e "$RUNNER_TEMP/candidate-tools/scripts/lib/catalog-staged-budget.mjs" | sha256sum --check
+        FASTPATH_HELPER_F1086CF8DFC09B11
+        printf '%s  %s\n' f1086cf8dfc09b113e4cb15ef7223548378ac3cc61b4a8443374578be416d063 "$RUNNER_TEMP/candidate-tools/scripts/lib/catalog-staged-budget.mjs" | sha256sum --check
+        cmp "scripts/lib/catalog-staged-budget.mjs" "$RUNNER_TEMP/candidate-tools/scripts/lib/catalog-staged-budget.mjs"
     - name: Restore exact accepted 83 private evidence without rebuilding it
       env:
         GH_TOKEN: ${{ github.token }}
@@ -2516,7 +2704,7 @@ jobs:
           source-verification-before.jsonl
           source-verification-after.jsonl
     env:
-      RELEASE_PHASE: ${{ ((github.event_name == 'push' && github.event.head_commit.message == 'Release reviewed prepared feed delivery e8462585') || (github.event_name
+      RELEASE_PHASE: ${{ ((github.event_name == 'push' && github.event.head_commit.message == 'Release reviewed prepared feed delivery f45efaf2') || (github.event_name
         == 'workflow_dispatch' && inputs.phase == 'activate')) && 'activate' || 'prepare-only' }}
-      ACTIVATE_CANDIDATE: ${{ (github.event_name == 'push' && github.event.head_commit.message == 'Release reviewed prepared feed delivery e8462585') || (github.event_name
+      ACTIVATE_CANDIDATE: ${{ (github.event_name == 'push' && github.event.head_commit.message == 'Release reviewed prepared feed delivery f45efaf2') || (github.event_name
         == 'workflow_dispatch' && inputs.phase == 'activate') }}
