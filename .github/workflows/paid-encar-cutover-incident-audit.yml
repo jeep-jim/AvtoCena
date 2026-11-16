@@ -34,12 +34,12 @@ jobs:
               url=urlsplit(value);path=url.path
               if path.startswith('/cars/offer/'):path='/cars/offer/:id'
               elif path.startswith('/cars/'):path='/cars/:category'
-              elif path not in {'/','/cars','/api/health','/api/catalog/search','/api/catalog/saved-previews','/login','/autocalc'}:path='/other'
+              elif path not in {'/','/cars','/api/health','/api/catalog/search','/api/catalog/models','/api/catalog/saved-previews','/login','/autocalc'}:path='/other'
               query=parse_qs(url.query)
               allowed={}
-              for key in ['market','sort','page','pageSize','budget','budgetTo','powerTo','countOnly','marketPage']:
+              for key in ['market','make','brand','model','sort','page','pageSize','budget','budgetTo','powerTo','countOnly','marketPage']:
                   value=query.get(key,[''])[0]
-                  if re.fullmatch('[A-Za-z0-9_-]{1,32}',value):allowed[key]=value
+                  if re.fullmatch('[A-Za-z0-9_ .-]{1,40}',value):allowed[key]=value
               return path+(' '+json.dumps(allowed,sort_keys=True) if allowed else '')
           print('PRODUCTION',cmd('docker','inspect','--format','{{.Config.Image}} {{.State.Status}}','avtocena-production').strip()[:180])
           print('ROOT_FS',cmd('df','-B1','/').splitlines()[-1].split()[1:5])
@@ -89,4 +89,21 @@ jobs:
                       failures[m.group(1) if m.group(1) in {'visitor_restricted','client_ip_missing','request_failed','request_timeout','connect_timeout','invalid_response'} else 'other']+=1
                       per_minute[x[:16]]+=1
               print('AJ_FALLBACK',json.dumps({'reasons':dict(failures),'minutes':dict(per_minute),'totalLogLines':len(logs.splitlines())}))
+              known={key:len(re.findall(pattern,logs,re.I)) for key,pattern in {
+                  'nextRedirect':'NEXT_REDIRECT',
+                  'undefinedProperty':'Cannot read properties of (?:undefined|null)',
+                  'stackOverflow':'Maximum call stack size exceeded',
+                  'invalidArray':'Invalid array length',
+                  'serverActionMissing':'Failed to find Server Action',
+                  'renderLoop':'Too many re-renders|Maximum update depth exceeded',
+                  'dynamicServer':'Dynamic server usage',
+                  'syntax':'SyntaxError',
+                  'reference':'ReferenceError',
+                  'type':'TypeError',
+                  'range':'RangeError',
+              }.items()}
+              digests=collections.Counter(re.findall(r"digest:\s*['\"]([A-Za-z0-9_-]{1,80})",logs))
+              frames=collections.Counter(re.findall(r'(?:/app/apps/web/|/app/node_modules/)[A-Za-z0-9_/.()@%+\[\]-]+:\d+:\d+',logs))
+              print('ERROR_SHAPES',json.dumps({'classes':known,'digests':dict(digests),'frames':frames.most_common(15)}))
+
           PY
