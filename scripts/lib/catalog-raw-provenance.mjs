@@ -10,6 +10,7 @@ export const RAW_PREFIXES = Object.freeze({
   'che168-journal': 'catalog/intake-working/che168-v1/',
   'encar-snapshot': 'catalog/intake-staging/encar/',
   'encar-reports': 'catalog/paid-encar-reports/v1/',
+  'nonjp-intake': 'catalog/nonjp-intake/v1/',
 });
 const ROOTS = {
   'che168-snapshot': /^[a-f0-9]{64}$/,
@@ -17,8 +18,10 @@ const ROOTS = {
   'che168-journal': /^\d{1,20}$/,
   'encar-snapshot': /^\d{1,20}\/[1-9]\d{0,5}$/,
   'encar-reports': /^[1-9]\d{0,15}$/,
+  'nonjp-intake': /^(?:china|korea|uae|europe|georgia)\/\d{1,20}\/[1-9]\d{0,5}$/,
 };
 export const RAW_PIN_PREFIX = 'catalog/raw-feed-pins/v1/';
+export const RAW_TRACKED_MARKETS = Object.freeze(['china', 'korea', 'uae', 'europe', 'georgia']);
 const RAW_HANDOFF_PREFIX = 'catalog/raw-feed-handoffs/v1/';
 export const rawDigest = value => createHash('sha256').update(JSON.stringify(value)).digest('hex');
 const object = value => value !== null && typeof value === 'object' && !Array.isArray(value);
@@ -43,6 +46,22 @@ export function rawReferences(values) {
     roots.set(row.root, previous?.sha256 ? previous : clean);
   }
   return [...roots.values()].sort((a, b) => a.root.localeCompare(b.root));
+}
+
+/** A durable intake receipt proves a saved input dataset, never supplier
+ * inventory completeness or that every retained public row came from it. */
+export function assertDurableIntakeArchive(value, market = value?.market) {
+  assert.ok(value?.version === 1 && value.market === market && ['china', 'korea', 'uae', 'europe', 'georgia'].includes(market), 'raw_intake_archive_market');
+  const owner = pinIdentity('intake-archive', value.owner).owner;
+  const root = RAW_PREFIXES['nonjp-intake'] + market + '/' + value.owner.runId + '/' + value.owner.attempt;
+  assert.ok(value.root === root && SHA.test(value.manifestSha256) && SHA.test(value.reportDigest), 'raw_intake_archive_identity');
+  assertRawHandoff(value.handoff);
+  assert.ok(rawDigest(value.owner) === rawDigest(value.handoff.owner)
+    && value.handoff.references.some(row => row.kind === 'nonjp-intake' && row.root === root && row.sha256 === value.manifestSha256), 'raw_intake_archive_handoff');
+  const handoff = value.handoff;
+  return {version: 1, market, owner, root, manifestSha256: value.manifestSha256, reportDigest: value.reportDigest,
+    handoff: {version: 1, key: handoff.key, operationId: handoff.operationId, owner,
+      readyAt: handoff.readyAt, references: rawReferences(handoff.references), referencesSha256: handoff.referencesSha256}};
 }
 
 /** Preserve only source identities, never provider URLs, credentials or raw errors. */
@@ -80,17 +99,26 @@ function producerEvidence(row, market, context = row) {
       references.push({kind: 'encar-snapshot', root});
       producers.push({sourceId: row.sourceId, provider: row.provider,
         snapshotRun: String(context.snapshotRun), snapshotAttempt: String(context.snapshotAttempt), completedAt: context.completedAt});
+    } else if (row.provider === 'owned_intake_archive') {
+      const archive = assertDurableIntakeArchive(row.archive, market);
+      references.push({kind: 'nonjp-intake', root: archive.root, sha256: archive.manifestSha256});
+      producers.push({sourceId: row.sourceId, provider: row.provider, archive});
     } else throw Error('raw_producer_unknown');
     return {producers, references, unknownSources};
 }
 
 export function intakeRawReferences(intake) {
-  assert.ok(intake?.completed === true && validTime(intake.completedAt), 'raw_intake_incomplete');
+  const archive = intake?.durableIntakeArchive ? assertDurableIntakeArchive(intake.durableIntakeArchive, intake.market) : null;
+  assert.ok((intake?.completed === true || archive) && validTime(intake.completedAt), 'raw_intake_incomplete');
   bounded(intake.sources, 100, 'raw_intake_sources');
   const references = [], producers = [], unknownSources = [];
+  if (archive) {
+    const evidence = producerEvidence({sourceId: 'archive_' + intake.market, provider: 'owned_intake_archive', archive}, intake.market);
+    references.push(...evidence.references); producers.push(...evidence.producers);
+  }
   for (const row of intake.sources) {
     assert.match(row?.sourceId || '', /^[a-z0-9_-]{1,100}$/i, 'raw_source_identity');
-    if (!['auto_api_che168', 'auto_api_encar'].includes(row.provider)) { unknownSources.push(row.sourceId); continue; }
+    if (!['auto_api_che168', 'auto_api_encar'].includes(row.provider)) { if (!archive) unknownSources.push(row.sourceId); continue; }
     if (row.provider === 'auto_api_che168' && row.snapshotBinding === undefined && row.replica === undefined) {
       unknownSources.push(row.sourceId + ':legacy'); continue;
     }
@@ -200,14 +228,15 @@ function paidReportProof(manifest, proof) {
 }
 
 /** Unknown historic source provenance stays explicit and blocks raw cleanup. */
-export function buildRawGenerationProvenance({manifest, marketSources = {}, paidReports}) {
+export function buildRawGenerationProvenance({manifest, marketSources = {}, paidReports, schemaVersion = 2}) {
+  assert.ok([1, 2].includes(schemaVersion), 'raw_provenance_version');
   const identity = manifestIdentity(manifest), markets = {};
   const reports = paidReportProof(manifest, paidReports);
-  for (const market of ['china', 'korea']) {
+  for (const market of schemaVersion === 1 ? ['china', 'korea'] : RAW_TRACKED_MARKETS) {
     const count = manifest.markets[market]?.count || 0, source = marketSources[market];
     let evidence = [];
     if (source) {
-      bounded(source.producers, 100, 'raw_producer_limit');
+      bounded(source.producers, schemaVersion === 1 ? 100 : 2048, 'raw_producer_limit');
       bounded(source.unknownSources, 100, 'raw_unknown_source_limit');
       assert.ok(source.unknownSources.every(value => typeof value === 'string' && /^[a-z0-9_:-]{1,150}$/i.test(value)), 'raw_unknown_source_identity');
       if (source.complete === true && count > 0) assert.ok(source.producers.length > 0 && source.unknownSources.length === 0, 'raw_source_completeness');
@@ -218,18 +247,23 @@ export function buildRawGenerationProvenance({manifest, marketSources = {}, paid
       producers: evidence.flatMap(row => row.producers), unknownSources: source?.unknownSources || (count ? ['historic_provenance_missing'] : []),
       references: rawReferences([...(source?.references || []), ...evidence.flatMap(row => row.references), ...(market === 'korea' ? reports.references : [])])};
   }
-  const value = {version: 1, scope: 'che168_and_paid_encar_raw_v1', ...identity, markets,
+  const value = {version: schemaVersion, scope: schemaVersion === 1 ? 'che168_and_paid_encar_raw_v1' : 'nonjp_raw_v2', ...identity, markets,
     complete: Object.values(markets).every(row => row.complete), paidReportCoverage: reports};
   assert.ok(Buffer.byteLength(JSON.stringify(value)) <= 2 * 1024 * 1024, 'raw_provenance_bytes');
   return value;
 }
 
+export function rawGenerationProvenanceHasCompleteCoverage(value, manifest) {
+  return value?.complete === true && RAW_TRACKED_MARKETS.every(market => !(manifest.markets[market]?.count > 0)
+    || value.markets?.[market]?.complete === true);
+}
+
 export function assertRawGenerationProvenance(value, manifest, {requireComplete = true} = {}) {
   const identity = manifestIdentity(manifest);
-  assert.ok(value?.version === 1 && value.scope === 'che168_and_paid_encar_raw_v1'
+  assert.ok((value?.version === 1 && value.scope === 'che168_and_paid_encar_raw_v1' || value?.version === 2 && value.scope === 'nonjp_raw_v2')
     && value.generationId === identity.generationId && value.manifestSha256 === identity.manifestSha256
-    && typeof value.complete === 'boolean' && (!requireComplete || value.complete === true), 'raw_generation_provenance_missing_or_unknown');
-  const rebuilt = buildRawGenerationProvenance({manifest, marketSources: value.markets, paidReports: value.paidReportCoverage});
+    && typeof value.complete === 'boolean' && (!requireComplete || rawGenerationProvenanceHasCompleteCoverage(value, manifest)), 'raw_generation_provenance_missing_or_unknown');
+  const rebuilt = buildRawGenerationProvenance({manifest, marketSources: value.markets, paidReports: value.paidReportCoverage, schemaVersion: value.version});
   assert.equal(rawDigest(value), rawDigest(rebuilt), 'raw_generation_provenance_inconsistent');
   return rawReferences(Object.values(value.markets).flatMap(row => row.references));
 }

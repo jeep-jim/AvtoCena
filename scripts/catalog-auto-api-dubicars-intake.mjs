@@ -6,19 +6,21 @@ import {stableOfferId} from '../apps/web/lib/catalog/storage.ts';
 import {normalizeAutoApiDubicars,AUTO_API_DUBICARS_SOURCE as sourceId} from '../apps/web/lib/catalog/auto-api-dubicars.ts';
 import {autoApiChe168Client,collectAutoApiChe168} from './lib/auto-api-che168-client.mjs';
 import {observationShardWriter} from './lib/catalog-intake-checkpoint.mjs';
+import {assertDubicarsPriorIntake, captureDubicarsResponses} from './lib/nonjp-intake-capture.mjs';
 await assertCollectionEnabled('dubicars_feed');
 const directory=process.env.AUTO_API_INTAKE_DIR||'catalog-intake-uae';
 await fs.mkdir(directory,{recursive:true});
 const files=await fs.readdir(directory);
 let prior;
 if(files.length){
- if(files.some(name=>name!=='report.json'&&!/^(?:dubizzle_uae_open|carswitch_uae_open)-[0-9]+\.jsonl$/.test(name)))throw Error('auto_api_intake_output_not_empty');
  prior=JSON.parse(await fs.readFile(path.join(directory,'report.json'),'utf8'));
- if(prior.market!=='uae'||!Array.isArray(prior.sources)||prior.sources.some(row=>!['dubizzle_uae_open','carswitch_uae_open'].includes(row.sourceId)))throw Error('auto_api_invalid_prior_intake');
+ assertDubicarsPriorIntake(files,prior);
 }
 const write=observationShardWriter(directory,sourceId),seen=new Set(),withdrawn=new Map();
 const deadline=Date.now()+Math.min(300*60000,Number(process.env.CATALOG_INTAKE_TIME_MS||210*60000));
-const request=autoApiChe168Client({platform:'dubicars',apiKey:process.env.AUTO_API_DUBICARS_KEY,deadline,requestDelayMs:200,fetchImpl:async(...args)=>{await assertCollectionEnabled('dubicars_feed');return fetch(...args);}});
+const upstream=autoApiChe168Client({platform:'dubicars',apiKey:process.env.AUTO_API_DUBICARS_KEY,deadline,requestDelayMs:200,fetchImpl:async(...args)=>{await assertCollectionEnabled('dubicars_feed');return fetch(...args);}});
+const writeRaw=observationShardWriter(directory,'raw-'+sourceId);
+const request=captureDubicarsResponses(upstream,writeRaw);
 const saved=await getJsonStorage().readJson('catalog/intake-cursors/v1/uae.json',null);
 const previous=saved?.sources?.find(row=>row.sourceId===sourceId&&row.provider==='auto_api_dubicars');
 const age=Date.now()-Date.parse(previous?.snapshotStartedAt);

@@ -41,6 +41,9 @@ if (process.env.CATALOG_INTAKE_RESUME === '1') {
   for(const state of states) if(state.source) restoreIntakeCursor(state,saved);
 }
 const writers=new Map(states.map(state=>[state.sourceId,observationShardWriter(directory,state.sourceId)]));
+// Keep the source's parsed page before normalization and admission. Japan stays
+// on its separate source path and has no non-Japan archive output.
+const rawWriters=new Map(market==='japan'?[]:states.map(state=>[state.sourceId,observationShardWriter(directory,'raw-'+state.sourceId)]));
 const startedAt=new Date().toISOString();
 const deadline=Date.now()+Math.min((market==='korea'?300:210)*60000,Math.max(60000,Number(process.env.CATALOG_INTAKE_TIME_MS || 40*60000)));
 const maxRowsPerSource=Math.min(100000,Math.max(1,Number(process.env.CATALOG_INTAKE_MAX_ROWS_PER_SOURCE || 100000)));
@@ -68,6 +71,8 @@ await collectSourceStates(states,state=>({market,deadline,maxRows:maxRowsPerSour
       hasDiskRoom:async()=>{const disk=await fs.statfs(directory);return disk.bavail*disk.bsize>=2*1024**3;},
       translationReport:groups=>untranslatedSpecificationFields(groups),
       specificationReport:offer=>Object.fromEntries(['year','engineCc','powerHp','fuelPowertrain','certifiedPower'].map(field=>[field,classifySpecificationEvidence(offer,field).state])),
+      archivePage:market==='japan'?undefined:async(page,cursor)=>rawWriters.get(state.sourceId)({version:1,kind:'source_page',
+        sourceId:state.sourceId,observedAt:new Date().toISOString(),cursor,nextCursor:page.nextCursor??null,items:page.items||[]}),
       writeObservation:writers.get(state.sourceId)}));
 for(const state of states) if(!state.done) {state.done=true;state.stopReason='time_budget';}
 report.completedAt=new Date().toISOString();

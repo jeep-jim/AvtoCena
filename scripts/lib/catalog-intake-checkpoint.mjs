@@ -1,7 +1,7 @@
 import {sourceTransportFailure} from './source-transport-failure.mjs';
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import {assertRawHandoff} from './catalog-raw-provenance.mjs';
+import {assertRawHandoff, assertDurableIntakeArchive} from './catalog-raw-provenance.mjs';
 
 // At most 500 observation revisions (normally 250 cars) per raw shard.
 export function observationShardWriter(directory, sourceId) {
@@ -35,6 +35,7 @@ export function restoreIntakeCursor(state, saved, now = Date.now()) {
 }
 
 export function publishedIntakeCheckpoint(intake, publication) {
+  if (intake?.mode === 'saved_snapshot_technical_repair' || intake?.sources?.some(row => row.syncMode === 'technical_repair')) throw Error('technical_repair_must_not_advance_cursor');
   if (!publication?.published || !publication.generationId || publication.market !== intake?.market) {
     throw Error('intake_cursor_requires_successful_publication');
   }
@@ -47,12 +48,14 @@ export function publishedIntakeCheckpoint(intake, publication) {
   const pins=intake.rawStoragePins||[];
   if(!Array.isArray(pins)||pins.length>64)throw Error('raw_intake_pin_limit');
   pins.forEach(assertRawHandoff);
+  const archive = intake.durableIntakeArchive ? assertDurableIntakeArchive(intake.durableIntakeArchive, intake.market) : null;
   if(intake.provider==='auto_api_encar' && (intake.completed!==true || !/^\d{1,20}$/.test(intake.snapshotRun||'')
     || !/^[1-9]\d{0,5}$/.test(intake.snapshotAttempt||'') || intake.sources.some(row=>row.provider!=='auto_api_encar')))
     throw Error('raw_encar_cursor_identity');
   return { version: 1, market: intake.market, updatedAt: intake.completedAt,
     generationId: publication.generationId,
     ...(pins.length?{rawStoragePins:pins}:{}),
+    ...(archive?{durableIntakeArchive:archive}:{}),
     ...(intake.provider==='auto_api_encar'?{provider:intake.provider,snapshotRun:intake.snapshotRun,snapshotAttempt:intake.snapshotAttempt}:{}),
     sources: intake.sources.map(row => ({ sourceId: row.sourceId,
       ...(row.provider==='auto_api_encar'?{provider:row.provider,snapshotRun:intake.snapshotRun,snapshotAttempt:intake.snapshotAttempt}:{}),
