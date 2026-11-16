@@ -1,7 +1,10 @@
 {
-  "operation": "korea-transport-and-gallery-20261007",
+  "operation": "owner-owned-feed-korea-20261116",
+  "requestedAt": "2026-11-16T14:56:11.000Z",
   "market": "korea",
-  "publishMarkets": ["korea"],
-  "resetCursors": false,
-  "reason": "Queue after active Korea run without cancellation. Accept one exact vehicle photo, retry terminated transport bodies, preserve published retryable cursors; no price/power admission caps."
+  "publishMarkets": [
+    "korea"
+  ],
+  "resetCursors": true,
+  "reason": "Owner requested a fresh complete paid Encar snapshot in own REG storage, verified readback and preparation before publication. Use corrected supplier displacement_cc / displacement units, power and drive evidence; preserve manual specifications, owner source switches and existing schedules. Japan is excluded; the active China run is unchanged. Raw deletion remains disabled until independent replacement and writer coverage are verified."
 }
