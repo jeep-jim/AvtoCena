@@ -29,10 +29,21 @@ jobs:
           node --import tsx --input-type=module <<'JS'
           import {getJsonStorage} from './apps/web/lib/data.ts';
           const storage=getJsonStorage();
+          storage.writeJson=async()=>{throw Error('read_only_schema_audit_write_forbidden');};
           for(const page of [1,1000,2000]){
             const rows=await storage.readJson('catalog/intake-staging/encar/43570782014/1/pages/'+page+'.json',null);
             if(!rows?.length)throw Error('Saved page unavailable: '+page);
             for(const {inner_id,data:d} of rows.slice(0,3)){
+              const history=d.history;
+              const pick=(value,keys)=>Object.fromEntries(keys.filter(key=>Object.hasOwn(value||{},key)).map(key=>[key,value[key]]));
+              const known=['report_date','first_registration_date','owner_changes','plate_changes','rental_history','commercial_history','government_history','own_damage_count','own_damage_cost_won','other_damage_count','other_damage_cost_won','total_loss_count','flood_total_loss_count','flood_partial_loss_count','theft_count'];
+              const claims=Array.isArray(history?.accidents)?history.accidents:null;
+              console.log(JSON.stringify({insuranceAudit:true,page,innerId:String(inner_id),innerIdentityMatches:String(inner_id)===String(d.inner_id),make:d.mark,model:d.model,year:d.year,
+                dataKeys:Object.keys(d),historyPresent:Object.hasOwn(d,'history'),historyType:history===null?'null':Array.isArray(history)?'array':typeof history,
+                historyKeys:history&&typeof history==='object'?Object.keys(history):[],history:pick(history,known),
+                accidentCount:claims?.length??null,accidentSamples:claims?.slice(0,2).map(row=>pick(row,['date','damage_to','paid_by','insurance_benefit_won','parts_won','labor_won','painting_won']))??null,
+                inspectionType:d.inspection===null?'null':typeof d.inspection,inspectionKeys:d.inspection&&typeof d.inspection==='object'?Object.keys(d.inspection):[],
+                diagnosisType:d.diagnosis===null?'null':typeof d.diagnosis,diagnosisKeys:d.diagnosis&&typeof d.diagnosis==='object'?Object.keys(d.diagnosis):[]}));
               const photos=d.photos;
               const first=Array.isArray(photos)?photos[0]:null;
               console.log(JSON.stringify({inner_id,make:d.mark,model:d.model,url:d.url,price:d.price,currency:d.currency,year:d.year,ad:d.advertisement_type,status:d.sales_status,photosType:typeof photos,photo:Array.isArray(photos)?(typeof first==='string'?first.split('?')[0].slice(0,150):Object.keys(first||{})):null,photosPrefix:typeof photos==='string'?photos.slice(0,120):null,cc:d.displacement_cc,power:d.power_ice_hp,leaseType:typeof d.lease}));
