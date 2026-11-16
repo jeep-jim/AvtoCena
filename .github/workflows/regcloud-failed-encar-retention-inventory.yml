@@ -1,0 +1,40 @@
+name: Regcloud — inspect superseded failed Encar images
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/regcloud-failed-encar-retention-inventory.json']
+permissions:
+  contents: read
+concurrency:
+  group: regcloud-failed-encar-retention
+  cancel-in-progress: false
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    environment: regcloud-staging
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Check inventory script syntax
+        run: python3 -m py_compile scripts/regcloud-failed-encar-retention.py
+      - name: Inventory exact stopped 9cb containers and image references without removal
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+        run: |
+          set -euo pipefail
+          umask 077
+          key_file=$(mktemp)
+          trap 'rm -f "$key_file"' EXIT
+          printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
+          unset SSH_PRIVATE_KEY
+          # Fixed read-only invocation: no marker or input can enable --apply.
+          ssh -i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts" root@151.248.113.177 'python3 -' < scripts/regcloud-failed-encar-retention.py | tee failed-encar-retention-inventory.jsonl
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: failed-encar-retention-inventory
+          path: failed-encar-retention-inventory.jsonl
+          retention-days: 14
