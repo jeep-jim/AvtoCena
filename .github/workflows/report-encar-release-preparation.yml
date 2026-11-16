@@ -14,14 +14,14 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
-          ref: 9cb571fcce503c9a3ca1a1496514899839b75395
+          ref: 83ff17075e9188dcf227c8752dc064248d5f42e0
       - uses: actions/setup-node@v4
         with:
           node-version: 24
           cache: npm
       - run: npm ci --ignore-scripts --no-audit
       - name: Count verified preparation checkpoints without writing storage
-        # Read-only exact-price progress checkpoint 2026-11-16 during owner-authorized cutover retry
+        # Read-only exact minimal Korea price preparation checkpoint 2026-11-16
         env:
           JSON_STORAGE_DRIVER: object
           YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
@@ -34,14 +34,20 @@ jobs:
           node --import tsx --input-type=module <<'JS'
           import {getJsonStorage} from './apps/web/lib/data.ts';
           const storage=getJsonStorage();
+          storage.writeJson=async()=>{throw Error('read_only_report_write_forbidden');};
           const {readCollectionControls}=await import('./apps/web/lib/catalog/collection-controls.ts');
           const controls=await readCollectionControls(storage);
           console.log(JSON.stringify({readOnly:true,koreaEnabled:controls.markets.korea.enabled,encarEnabled:controls.sources.encar_feed.enabled,oldKoreaEnabled:controls.sources.ajes_korea_feed.enabled,revision:controls.revision}));
           const {calculationVersion}=await import('./scripts/catalog-calculation-version.mjs');
-          console.log(JSON.stringify({source:'9cb571fcce503c9a3ca1a1496514899839b75395',calculationVersion:calculationVersion(),readOnly:true}));
+          console.log(JSON.stringify({source:'83ff17075e9188dcf227c8752dc064248d5f42e0',calculationVersion:calculationVersion(),readOnly:true}));
           const [manifest,lock]=await Promise.all([storage.readJson('catalog/manifest.json',null),storage.readJson('catalog/import-lock.json',null)]);
           console.log(JSON.stringify({readOnly:true,paidKorea:manifest?.markets?.korea?.provider==='auto_api_encar'&&manifest?.markets?.korea?.count>0,koreaProvider:manifest?.markets?.korea?.provider,koreaCount:manifest?.markets?.korea?.count,generation:manifest?.generationId,publicationActive:Date.parse(lock?.lockedUntil||'')>Date.now(),operationType:lock?.operationType,startedAt:lock?.startedAt,heartbeatAt:lock?.heartbeatAt,lockedUntil:lock?.lockedUntil}));
-          for(const scope of ['catalog/generations/'+manifest.generationId+'/indexes/editorial-home-v1/','catalog/runtime-budget-prices-v3/','catalog/runtime-sort-prices-v3/','catalog/generations/'+manifest.generationId+'/indexes/budget-markets-v3/']){
+          const {specificationSelectorDirectory}=await import('./apps/web/lib/catalog/budget-selector-codec.ts');
+          const selectorDirectory=specificationSelectorDirectory('bf2c72cb7a260ef093c0a43c2b0dad9c4c9094a4d6dc3811dd0d7f7626b0d72b','4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90');
+          const selectorPrefix='catalog/generations/'+manifest.generationId+'/indexes/'+selectorDirectory+'/';
+          const ready=await storage.readJson(selectorPrefix+'ready.json',null);
+          console.log(JSON.stringify({readOnly:true,selectorDirectory,readyFound:!!ready,readyVersion:ready?.version,readyGeneration:ready?.generationId,readyMarkets:Object.entries(ready?.markets||{}).map(([market,value])=>({market,chunks:value.chunks?.length,rows:value.rows,sourceRows:value.sourceRows}))}));
+          for(const scope of [selectorPrefix,'catalog/runtime-budget-prices-v3/','catalog/runtime-sort-prices-v3/','catalog/generations/'+manifest.generationId+'/indexes/budget-markets-v3/']){
             const rows=await storage.listObjects(scope);
             const recent=rows.slice().sort((a,b)=>String(b.lastModified||'').localeCompare(String(a.lastModified||''))).slice(0,3);
             console.log(JSON.stringify({readOnly:true,scope,objects:rows.length,recent:recent.map(r=>({path:r.key,modified:r.lastModified,bytes:r.size}))}));
