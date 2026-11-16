@@ -1,5 +1,6 @@
 import fs from 'node:fs/promises';
 import crypto from 'node:crypto';
+import {assertLegacyRawWriterDisabled} from '../apps/web/lib/catalog/raw-coordination-gate.mjs';
 import { getJsonStorage, mutateDataJson } from '../apps/web/lib/data.ts';
 import { offerPath, publishCurrentCatalogReadModels, resetCatalogReadCachesForTests } from '../apps/web/lib/catalog/storage.ts';
 import { catalogOfferVisibleRub } from '../apps/web/lib/catalog/public-priority.ts';
@@ -10,6 +11,7 @@ const source = 'gen_1788837138509_81964d51';
 const broken = 'gen_1788878529625_fa906094';
 const counts = {korea:1220, china:1070, japan:10190, uae:1694, europe:5259, georgia:23};
 const storage = getJsonStorage();
+await assertLegacyRawWriterDisabled(storage);
 const operationId = `restore_preinventory_${crypto.randomUUID()}`;
 const lockPath = 'catalog/import-lock.json';
 const report = {source, expectedCurrent:broken, restored:false, markets:{}};
@@ -52,6 +54,7 @@ try {
   await storage.writeJson(backup,{manifest:current.value,report},{ifNoneMatch:'*'});
   // Immutable generation indexes are complete before CAS. Readers reject stale
   // current projections by generation ID and use these immutable indexes.
+  await assertLegacyRawWriterDisabled(storage);
   await storage.writeJson('catalog/manifest.json',{...current.value,generationId:source,
     updatedAt:new Date().toISOString(),markets},{ifMatch:current.etag});
   report.restored = true;

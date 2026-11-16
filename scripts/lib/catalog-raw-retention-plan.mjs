@@ -87,6 +87,10 @@ function completeGroup(group, terminalRoots) {
   return expected?.length === keys.size && expected.every(key => keys.has(key));
 }
 
+// The bounded executor reuses this exact member/receipt protocol. These pure
+// exports neither establish writer coverage nor authorize a storage mutation.
+export {groupForObject as rawInventoryGroupForObject, completeGroup as completeRawInventoryGroup};
+
 /** Pure plan only. No object-store writes or delete API are exposed here.
  * The future inventory runner must establish full producer pin coverage first.
  * An expired loading pin remains live until its producer closes it explicitly.

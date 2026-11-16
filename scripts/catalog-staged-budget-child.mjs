@@ -2,7 +2,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import {pathToFileURL, fileURLToPath} from 'node:url';
 import {PREPARED_MARKETS, budgetManifestMarkets, assertStagedBudgetContext, assertBudgetReadinessReport, installStagedBudgetStorage,
-  stagedBudgetDigest, verifyBudgetSourceCoverage} from './lib/catalog-staged-budget.mjs';
+  stagedBudgetDigest, verifyBudgetSourceCoverage, assertBudgetSourceSupplement} from './lib/catalog-staged-budget.mjs';
 
 export function installStagedBudgetNetworkFence(endpoint, fetchImpl = globalThis.fetch, allowStorageWrites = true) {
   const storageOrigin = new URL(endpoint).origin;
@@ -19,7 +19,7 @@ export function installStagedBudgetNetworkFence(endpoint, fetchImpl = globalThis
 export async function runStagedBudgetChild({mode, root, context, reportPath}) {
   assertStagedBudgetContext(context);
   const runtime = relative => import(pathToFileURL(path.join(root, relative)).href);
-  installStagedBudgetNetworkFence(process.env.YC_OBJECT_STORAGE_ENDPOINT);
+  installStagedBudgetNetworkFence(process.env.YC_OBJECT_STORAGE_ENDPOINT, globalThis.fetch, mode === 'prepare');
   const {getJsonStorage} = await runtime('apps/web/lib/data.ts');
   const storage = getJsonStorage();
   if (storage.driver !== 'object') throw Error('object_storage_required');
@@ -40,6 +40,9 @@ export async function collectPreparedBudgetReadiness({mode, root, context, repor
   ]);
   if ((encyclopedia.readCalculationIndex()?.digest || null) !== context.encyclopediaDigest
       || pricing.calculationCacheVersion() !== context.calculationVersion) throw Error('staged_budget_runtime_context_mismatch');
+  const supplements = typeof catalog.readBudgetSpecificationSource === 'function';
+  if (supplements !== (typeof catalog.verifyBudgetSpecificationSource === 'function')
+      || supplements && typeof catalog.prepareBudgetSpecificationSourceRows !== 'function') throw Error('staged_budget_supplement_api_incomplete');
   const fingerprints = async () => Object.fromEntries(await Promise.all(markets.map(async market =>
     [market, await pricing.budgetPricingFingerprint(market)])));
   const before = await fingerprints(), utcDay = new Date().toISOString().slice(0, 10);
@@ -75,7 +78,16 @@ export async function collectPreparedBudgetReadiness({mode, root, context, repor
       selectorChecksum:stagedBudgetDigest(index)};
     const projection = await storage.readJson(`catalog/generations/${context.manifest.generationId}/indexes/projection/${market}.json`, null);
     record.coverage = verifyBudgetSourceCoverage({manifest:context.manifest, market, projection, source,
-      prepareRows:rows => catalog.prepareCatalogProjectionRows(rows)});
+      prepareRows:supplements ? catalog.prepareBudgetSpecificationSourceRows : catalog.prepareCatalogProjectionRows});
+    if (supplements) {
+      const descriptor = await catalog.verifyBudgetSpecificationSource(context.manifest, market);
+      assertBudgetSourceSupplement(descriptor, context, market, record);
+      if (descriptor.sourceCardsSha256 !== stagedBudgetDigest(source.map(row => [row[5].id,row[5].block,row[5].cardPath ?? null]))
+          || descriptor.pricingChunksSha256 !== stagedBudgetDigest(index.pricingChunks ?? null)) {
+        throw Error('staged_budget_source_supplement_mapping_changed:' + market);
+      }
+      record.sourceSupplement = descriptor;
+    }
     for (const [kind, display] of [['budget', false], ['sort', true]]) {
       const prices = await pricing.readPreparedBudgetPrices(index, market, before[market], display);
       if (!prices) throw Error('staged_budget_price_snapshot_missing:' + market + ':' + kind);
@@ -98,7 +110,9 @@ export async function collectPreparedBudgetReadiness({mode, root, context, repor
     }
   }
   if (utcDay !== new Date().toISOString().slice(0, 10) || policyDay !== new Date(Date.now() + 7 * 3600000).toISOString().slice(0, 10)
-      || stagedBudgetDigest(before) !== stagedBudgetDigest(await fingerprints())) {
+      || stagedBudgetDigest(before) !== stagedBudgetDigest(await fingerprints())
+      || (encyclopedia.readCalculationIndex()?.digest || null) !== context.encyclopediaDigest
+      || pricing.calculationCacheVersion() !== context.calculationVersion) {
     throw Error('staged_budget_prepared_context_changed');
   }
   assertBudgetReadinessReport(report, context);

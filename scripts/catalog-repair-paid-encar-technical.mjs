@@ -52,7 +52,7 @@ export async function runPaidTechnicalRepair({action, output, producerFile}) {
     await pin.add([]);
   }
   const adapter = new EncarDirectAdapter();
-  const result = await loadPaidRepairPlan({storage, sourceSha, controllerSha, liveIdentity,
+  const result = await loadPaidRepairPlan({storage:pin?.storage || storage, sourceSha, controllerSha, liveIdentity,
     producer:JSON.parse(await fs.readFile(producerFile,'utf8')), verifyPages:paidEncarSavedPageVerifier, isNonCash:isEncarNonCashContract,
     normalize:(data, context) => normalizePaidEncarOffer(data, {...context, adapter}),
     onSourceRoot:async reference => {if (pin) await pin.add([reference]);},

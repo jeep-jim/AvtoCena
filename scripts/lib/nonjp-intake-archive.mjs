@@ -94,7 +94,7 @@ function decodePart(value, expected) {
 
 /** Small immutable identity check used again before publication; full parts were
  * already verified by restore. This does not label provider coverage complete. */
-export async function readIntakeArchiveManifest({storage, receipt}) {
+async function readIntakeArchiveManifestScoped({storage, receipt}) {
   assert.equal(storage.driver, 'object', 'intake_archive_requires_object_storage');
   assertDurableIntakeArchive(receipt);
   const root = intakeArchiveRoot(receipt.market, receipt.owner);
@@ -106,13 +106,37 @@ export async function readIntakeArchiveManifest({storage, receipt}) {
   const pin=assertRawPin(await storage.readJson(receipt.handoff.key,null));
   assert.ok(['ready','published'].includes(pin.state) && pin.readyAt === receipt.handoff.readyAt
     && pin.operationId === receipt.handoff.operationId && rawDigest(pin.owner) === rawDigest(receipt.handoff.owner)
-    && rawDigest(pin.references) === receipt.handoff.referencesSha256,'intake_archive_pin_changed');
+    && rawDigest(pin.references) === receipt.handoff.referencesSha256
+    && rawDigest(pin.coordination || null) === rawDigest(receipt.handoff.coordination || null),'intake_archive_pin_changed');
+  return manifest;
+}
+
+export async function readIntakeArchiveManifest({storage, receipt, readerOwner}) {
+  assertDurableIntakeArchive(receipt);
+  const {withRawReadProtection} = await import('./catalog-raw-session.mjs');
+  return withRawReadProtection({storage, owner: readerOwner,
+    references: [{kind: 'nonjp-intake', root: receipt.root, sha256: receipt.manifestSha256}],
+    read: scoped => readIntakeArchiveManifestScoped({storage: scoped, receipt})});
+}
+
+export async function assertLocalIntakeArchive({storage, directory, receipt, readerOwner}) {
+  const manifest = await readIntakeArchiveManifest({storage, receipt, readerOwner});
+  const files = await localInventory(directory);
+  assert.equal(rawDigest(manifest.files.map(({parts, ...file}) => file)), rawDigest(files), 'intake_archive_source_changed');
   return manifest;
 }
 
 /** Saved observations are restored byte-for-byte; this never contacts a supplier. */
-export async function verifyIntakeArchive({storage, receipt, directory}) {
-  const manifest = await readIntakeArchiveManifest({storage, receipt});
+export async function verifyIntakeArchive({storage, receipt, directory, readerOwner}) {
+  assertDurableIntakeArchive(receipt);
+  const {withRawReadProtection} = await import('./catalog-raw-session.mjs');
+  return withRawReadProtection({storage, owner: readerOwner,
+    references: [{kind: 'nonjp-intake', root: receipt.root, sha256: receipt.manifestSha256}],
+    read: scoped => verifyIntakeArchiveScoped({storage: scoped, receipt, directory})});
+}
+
+async function verifyIntakeArchiveScoped({storage, receipt, directory}) {
+  const manifest = await readIntakeArchiveManifestScoped({storage, receipt});
   const root = receipt.root;
   if (directory) {
     await fs.mkdir(directory, {recursive: true});
@@ -163,7 +187,8 @@ function receiptFromReadyPin({market, owner, root, manifest, pin}) {
   assert.ok(['ready', 'published'].includes(pin.state) && pin.operationId === operationId
     && rawDigest(pin.owner) === rawDigest(owner), 'intake_archive_pin_changed');
   const references = rawReferences(pin.references), handoff = {version: 1, key: RAW_PIN_PREFIX + operationId + '.json',
-    operationId, owner: pin.owner, readyAt: pin.readyAt, references, referencesSha256: rawDigest(references)};
+    operationId, owner: pin.owner, readyAt: pin.readyAt, references, referencesSha256: rawDigest(references),
+    ...(pin.coordination ? {coordination: pin.coordination} : {})};
   return assertDurableIntakeArchive({version: 1, market, owner, root, manifestSha256: rawDigest(manifest),
     reportDigest: manifest.reportDigest, handoff});
 }
@@ -180,7 +205,7 @@ export async function archiveIntakeDirectory({storage, directory, market, owner 
   catch (error) { if (error?.code !== 'ENOENT') throw error; }
   if (saved) {
     assert.equal(saved.market, market, 'intake_archive_receipt_market');
-    const manifest = await verifyIntakeArchive({storage, receipt:saved});
+    const manifest = await verifyIntakeArchive({storage, receipt:saved, readerOwner: owner});
     assert.equal(rawDigest(manifest.files.map(({parts,...file})=>file)),rawDigest(files),'intake_archive_source_changed');
     return saved;
   }
@@ -192,10 +217,18 @@ export async function archiveIntakeDirectory({storage, directory, market, owner 
   if (completed !== null) {
     validateIntakeArchive(completed, root, rawDigest(completed));
     assert.equal(rawDigest(completed.files.map(({parts, ...file}) => file)), rawDigest(files), 'intake_archive_source_changed');
-    const savedPin = await storage.readJson(RAW_PIN_PREFIX + operationId + '.json', null);
+    let savedPin = await storage.readJson(RAW_PIN_PREFIX + operationId + '.json', null);
+    if (savedPin?.state === 'loading' && savedPin.coordination) {
+      // A completed raw object is not sufficient to adopt a writing process.
+      // openRawFeedPin only permits exact recovery if its coordinator grant
+      // was already sealed after all PUTs settled.
+      const recovering = await openRawFeedPin({storage, owner, operationId, references: savedPin.references});
+      await recovering.handoff();
+      savedPin = await storage.readJson(recovering.key, null);
+    }
     if (['ready', 'published'].includes(savedPin?.state)) {
       const receipt = receiptFromReadyPin({market, owner, root, manifest: completed, pin: savedPin});
-      await verifyIntakeArchive({storage, receipt});
+      await verifyIntakeArchive({storage, receipt, readerOwner: owner});
       await writeLocalReceipt(receiptPath, receipt);
       return receipt;
     }
@@ -204,6 +237,7 @@ export async function archiveIntakeDirectory({storage, directory, market, owner 
   const pin = await openRawFeedPin({storage, owner, operationId,
     references:[{kind:'nonjp-intake',root}]});
   await pin.add([]);
+  const writingStorage = pin.storage;
   const storedFiles=[];
   for (const file of files) {
     const bytes = await fs.readFile(path.join(directory,file.name));
@@ -212,7 +246,7 @@ export async function archiveIntakeDirectory({storage, directory, market, owner 
     for (let offset=0;offset<bytes.length;offset+=PART_BYTES) {
       const part=bytes.subarray(offset,offset+PART_BYTES), sha256=digest(part);
       const key=`${root}/files/${file.name}/${parts.length}-${sha256}.json`;
-      await immutableJson(storage,key,{version:1,encoding:'gzip-base64',bytes:part.length,sha256,
+      await immutableJson(writingStorage,key,{version:1,encoding:'gzip-base64',bytes:part.length,sha256,
         payload:gzipSync(part,{level:6}).toString('base64')});
       parts.push({key,bytes:part.length,sha256});
     }
@@ -225,10 +259,10 @@ export async function archiveIntakeDirectory({storage, directory, market, owner 
     collection:{complete:report.completed===true,qualityStatus:typeof report.qualityStatus==='string'?report.qualityStatus:null}};
   const manifestSha256=rawDigest(manifest);
   validateIntakeArchive(manifest,root,manifestSha256);
-  await immutableJson(storage,root+'/complete.json',manifest);
+  await immutableJson(writingStorage,root+'/complete.json',manifest);
   await pin.add([{kind:'nonjp-intake',root,sha256:manifestSha256}]);
   const receipt={version:1,market,owner,root,manifestSha256,reportDigest:manifest.reportDigest,handoff:await pin.handoff()};
-  await verifyIntakeArchive({storage,receipt});
+  await verifyIntakeArchive({storage,receipt,readerOwner:owner});
   await writeLocalReceipt(receiptPath,receipt);
   return receipt;
 }

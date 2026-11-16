@@ -380,7 +380,7 @@ jobs:
           JS
       - name: Restore verified non-Japan input from our own storage
         if: matrix.market != 'japan'
-        run: node --import tsx scripts/catalog-archive-intake.mjs restore-for-publication '${{ matrix.market }}' 'catalog-intake-input/catalog-intake-${{ matrix.market }}'
+        run: node --import tsx scripts/catalog-archive-intake.mjs restore-for-publication '${{ matrix.market }}' "${CATALOG_INTAKE_INPUT_DIR}/catalog-intake-${{ matrix.market }}"
       - run: node --import tsx scripts/catalog-intake-to-publication.mjs
       - name: Check bucket reserve without deleting objects
         run: node scripts/run-transient-retry.mjs node --import tsx scripts/catalog-storage-preflight.mjs

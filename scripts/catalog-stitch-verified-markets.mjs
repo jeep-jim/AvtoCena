@@ -1,4 +1,5 @@
 import crypto from "node:crypto";
+import {assertLegacyRawWriterDisabled} from '../apps/web/lib/catalog/raw-coordination-gate.mjs';
 
 const { getJsonStorage } = await import("../apps/web/lib/data.ts");
 const { rebuildIndexes, offerPath, chunkName } = await import("../apps/web/lib/catalog/storage.ts");
@@ -17,6 +18,7 @@ if (!sourceGeneration || !markets.length) throw new Error("catalog_stitch_inputs
 if (markets.some((market) => !PUBLIC_CATALOG_MARKETS.includes(market))) throw new Error(`catalog_stitch_market_invalid:${markets.join(",")}`);
 
 const storage = getJsonStorage();
+await assertLegacyRawWriterDisabled(storage);
 const currentMeta = await storage.readJsonWithMeta("catalog/manifest.json", { version: 2, generationId: "", updatedAt: "", markets: {} });
 if (!currentMeta.found || !currentMeta.etag || !currentMeta.value?.generationId) throw new Error("catalog_stitch_current_manifest_missing");
 const current = currentMeta.value;
@@ -88,6 +90,7 @@ for (const market of PUBLIC_CATALOG_MARKETS) {
 
 await rebuildIndexes(generationId, allOffers, byId, imagesById);
 const manifest = { version: 2, generationId, updatedAt, markets: manifestMarkets };
+await assertLegacyRawWriterDisabled(storage);
 await storage.writeJson("catalog/manifest.json", manifest, { ifMatch: currentMeta.etag });
 
 const afterCounts = Object.fromEntries(PUBLIC_CATALOG_MARKETS.map((market) => [market, Number(manifestMarkets[market]?.count || 0)]));

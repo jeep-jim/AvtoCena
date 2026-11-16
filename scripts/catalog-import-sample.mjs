@@ -15,6 +15,9 @@ const { catalogImportSources, importCatalog } = await import("../apps/web/lib/ca
 const { REQUIRED_CATALOG_SOURCES } = await import("../apps/web/lib/catalog/required-catalog-sources.ts");
 const { mutateSourcePolicy } = await import("../apps/web/lib/catalog/policy.ts");
 const { refreshLiveExchangeRates } = await import("../apps/web/lib/catalog/live-rates.ts");
+const { getJsonStorage } = await import("../apps/web/lib/data.ts");
+const { assertLegacyRawWriterDisabled } = await import("../apps/web/lib/catalog/raw-coordination-gate.mjs");
+await assertLegacyRawWriterDisabled(getJsonStorage());
 
 const preferred = Object.values(REQUIRED_CATALOG_SOURCES).flat().map((source) => source.sourceId);
 const configured = String(process.env.CATALOG_IMPORT_SOURCES || "").split(",").map((value) => value.trim()).filter(Boolean);

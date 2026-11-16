@@ -102,6 +102,7 @@ test('real child prepares and rereads exact stored snapshots; missing or corrupt
     cardImageUrl:'https://example.test/car.jpg',fuel:'petrol',powertrainKind:'combustion',bodyType:'sedan',engineCc:1598,
     powerHp:123,publicVisibleRub:1500000,publicSpecificationVerified:true,totalRub:1500000,sourcePrice:15000000,sourceCurrency:'KRW',
   }]});
+  put(selectorPrefix+'budget-cards-v3/0.json',{generationId,items:JSON.parse(values.get(selectorPrefix+'projection/korea.json')!.toString()).items});
   const server=http.createServer(async(req,res)=>{
     const key=decodeURIComponent((req.url||'').replace(/^\/test\//,''));
     if(req.method==='GET'){

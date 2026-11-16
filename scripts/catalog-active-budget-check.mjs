@@ -5,7 +5,7 @@ import {execFile, execFileSync} from 'node:child_process';
 import {promisify} from 'node:util';
 import {fileURLToPath, pathToFileURL} from 'node:url';
 import {PREPARED_MARKETS, budgetManifestMarkets, readLiveBudgetIdentity, assertBudgetReadinessReport,
-  stagedBudgetDigest, stagedBudgetWriteAllowed} from './lib/catalog-staged-budget.mjs';
+  stagedBudgetDigest, stagedBudgetWriteAllowed, assertStagedBudgetSupplementWrite} from './lib/catalog-staged-budget.mjs';
 import {restoreReleaseEncyclopedia} from './encyclopedia/restore-calculation-index.mjs';
 import {collectPreparedBudgetReadiness, installStagedBudgetNetworkFence} from './catalog-staged-budget-child.mjs';
 
@@ -37,7 +37,7 @@ function assertFreeLease(meta, now=Date.now()) {
 }
 
 export function assertActiveBudgetState(context, manifest, lock, now=Date.now()) {
-  if(!['live','candidate-isolated'].includes(context?.mode)||!SHA.test(context.release||'')||!DIGEST.test(context.calculationVersion||'')
+  if(!['live','candidate-isolated','candidate-prepare'].includes(context?.mode)||!SHA.test(context.release||'')||!DIGEST.test(context.calculationVersion||'')
       ||!SHA.test(context.liveIdentity?.release||'')||!DIGEST.test(context.liveIdentity?.calculationVersion||''))throw Error('active_budget_context_invalid');
   budgetManifestMarkets(context.manifest);
   if(!manifest.found||manifest.etag!==context.manifestEtag||manifest.value?.generationId!==context.manifest.generationId
@@ -97,6 +97,7 @@ export function installActiveBudgetStorage(storage, context, phase, isolatedDire
   storage.readJson=async(key,fallback)=>(await storage.readJsonWithMeta(key,fallback)).value;
   storage.writeJson=async(key,value,condition)=>{
     if(phase!=='prepare'||!stagedBudgetWriteAllowed(key,context))throw Error('active_budget_write_forbidden');
+    assertStagedBudgetSupplementWrite(key,value,condition,context);
     await checkState();
     if(context.mode==='live')return write(key,value,condition);
     const previous=await localMeta(key);

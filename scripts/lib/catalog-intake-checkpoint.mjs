@@ -49,6 +49,9 @@ export function publishedIntakeCheckpoint(intake, publication) {
   if(!Array.isArray(pins)||pins.length>64)throw Error('raw_intake_pin_limit');
   pins.forEach(assertRawHandoff);
   const archive = intake.durableIntakeArchive ? assertDurableIntakeArchive(intake.durableIntakeArchive, intake.market) : null;
+  const archiveDependencies = intake.rawArchiveDependencies || [];
+  if(!Array.isArray(archiveDependencies)||archiveDependencies.length>64)throw Error('raw_intake_dependency_limit');
+  const dependencies = archiveDependencies.map(row=>assertDurableIntakeArchive(row,intake.market));
   if(intake.provider==='auto_api_encar' && (intake.completed!==true || !/^\d{1,20}$/.test(intake.snapshotRun||'')
     || !/^[1-9]\d{0,5}$/.test(intake.snapshotAttempt||'') || intake.sources.some(row=>row.provider!=='auto_api_encar')))
     throw Error('raw_encar_cursor_identity');
@@ -56,6 +59,7 @@ export function publishedIntakeCheckpoint(intake, publication) {
     generationId: publication.generationId,
     ...(pins.length?{rawStoragePins:pins}:{}),
     ...(archive?{durableIntakeArchive:archive}:{}),
+    ...(dependencies.length?{rawArchiveDependencies:dependencies}:{}),
     ...(intake.provider==='auto_api_encar'?{provider:intake.provider,snapshotRun:intake.snapshotRun,snapshotAttempt:intake.snapshotAttempt}:{}),
     sources: intake.sources.map(row => ({ sourceId: row.sourceId,
       ...(row.provider==='auto_api_encar'?{provider:row.provider,snapshotRun:intake.snapshotRun,snapshotAttempt:intake.snapshotAttempt}:{}),

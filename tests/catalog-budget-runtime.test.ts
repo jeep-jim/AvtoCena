@@ -11,20 +11,23 @@ test('preparation requires the source calculator fingerprint to match the runnin
  }
  await assert.rejects(verifyLiveCalculationVersion(version,async()=>new Response('',{status:503})),/health_http_503/);
 });
-test('preparation permits derived selector versions but cannot write inventory or publication state',()=>{
+test('preparation permits derived selector versions but cannot write inventory or publication state',async()=>{
  const source=fs.readFileSync(new URL('../scripts/catalog-budget-shared-warmup.mjs',import.meta.url),'utf8');
- const pattern=source.match(/if\(!(.+)\.test\(path\)\)throw Error\('unexpected_write:'/);
- assert.ok(pattern);
- const allows=new Function('path',`return ${pattern[1]}.test(path)`);
- for(const version of [1,2,3,4,5])for(const market of ['ready','china','korea','japan','europe','uae','georgia'])assert.equal(allows(`catalog/generations/test/indexes/budget-markets-v${version}/${market}.json`),true);
- for(const market of ['ready','china','korea','japan','europe','uae','georgia'])assert.equal(allows(`catalog/generations/test/indexes/budget-markets-v6/${'a'.repeat(64)}/${market}.json`),true);
- assert.equal(allows('catalog/generations/test/indexes/budget-markets-v6/arbitrary/china.json'),false);
+ const body=source.match(/storage\.writeJson=async\(path,value,condition\)=>\{([\s\S]*?)\n\};/)?.[1];
+ assert.ok(body);
+ const guard=new Function('writes',`return async(path,value,condition)=>{${body}}`)(async()=>true);
+ const allows=async(path:string)=>{
+  try{return await guard(path,{});}catch(error){assert.match(String(error),/unexpected_write:/);return false;}
+ };
+ for(const version of [1,2,3,4,5])for(const market of ['ready','china','korea','japan','europe','uae','georgia'])assert.equal(await allows(`catalog/generations/test/indexes/budget-markets-v${version}/${market}.json`),true);
+ for(const market of ['ready','china','korea','japan','europe','uae','georgia'])assert.equal(await allows(`catalog/generations/test/indexes/budget-markets-v6/${'a'.repeat(64)}/${market}.json`),true);
+ assert.equal(await allows('catalog/generations/test/indexes/budget-markets-v6/arbitrary/china.json'),false);
  for(const root of ['3',`7/${'a'.repeat(64)}`]){
-  assert.equal(allows(`catalog/generations/test/indexes/budget-markets-v${root}/parts/china/${'b'.repeat(64)}.json`),true);
-  for(const suffix of ['../secret','ready','china','x'.repeat(64)])assert.equal(allows(`catalog/generations/test/indexes/budget-markets-v${root}/parts/china/${suffix}.json`),false);
+  assert.equal(await allows(`catalog/generations/test/indexes/budget-markets-v${root}/parts/china/${'b'.repeat(64)}.json`),true);
+  for(const suffix of ['../secret','ready','china','x'.repeat(64)])assert.equal(await allows(`catalog/generations/test/indexes/budget-markets-v${root}/parts/china/${suffix}.json`),false);
  }
- for(const version of [1,2])for(const kind of ['budget','sort'])for(const market of ['china','korea','europe','uae','georgia'])assert.equal(allows(`catalog/runtime-${kind}-prices-v${version}/${market}.json`),true);
- for(const path of ['catalog/manifest.json','catalog/operations/collection-controls-v1.json','catalog/generations/test/offers/china.json','catalog/generations/test/indexes/budget-markets-v6/china.json'])assert.equal(allows(path),false);
+ for(const version of [1,2])for(const kind of ['budget','sort'])for(const market of ['china','korea','europe','uae','georgia'])assert.equal(await allows(`catalog/runtime-${kind}-prices-v${version}/${market}.json`),true);
+ for(const path of ['catalog/manifest.json','catalog/operations/collection-controls-v1.json','catalog/generations/test/offers/china.json','catalog/generations/test/indexes/budget-markets-v6/china.json'])assert.equal(await allows(path),false);
 });
 test('runtime warmup uses only a healthy exact production release, not a docs or feed commit',async()=>{
   let requested='';
