@@ -1,6 +1,7 @@
 import {sourceTransportFailure} from './source-transport-failure.mjs';
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import {assertRawHandoff} from './catalog-raw-provenance.mjs';
 
 // At most 500 observation revisions (normally 250 cars) per raw shard.
 export function observationShardWriter(directory, sourceId) {
@@ -43,11 +44,21 @@ export function publishedIntakeCheckpoint(intake, publication) {
   if(intake.sources.some(row=>row.snapshotBinding && (!/^[a-f0-9]{64}$/.test(row.snapshotBinding)
     ||row.completeInventory!==true||row.replica?.binding!==row.snapshotBinding||row.replica?.cursor!==row.cursor
     ||!/^catalog\/provider-replicas\/che168\/[a-f0-9-]{36}$/.test(row.replica?.key)||!/^[a-f0-9]{64}$/.test(row.replica?.sha256))))throw Error('auto_api_replica_cursor_not_committable');
+  const pins=intake.rawStoragePins||[];
+  if(!Array.isArray(pins)||pins.length>64)throw Error('raw_intake_pin_limit');
+  pins.forEach(assertRawHandoff);
+  if(intake.provider==='auto_api_encar' && (intake.completed!==true || !/^\d{1,20}$/.test(intake.snapshotRun||'')
+    || !/^[1-9]\d{0,5}$/.test(intake.snapshotAttempt||'') || intake.sources.some(row=>row.provider!=='auto_api_encar')))
+    throw Error('raw_encar_cursor_identity');
   return { version: 1, market: intake.market, updatedAt: intake.completedAt,
     generationId: publication.generationId,
+    ...(pins.length?{rawStoragePins:pins}:{}),
+    ...(intake.provider==='auto_api_encar'?{provider:intake.provider,snapshotRun:intake.snapshotRun,snapshotAttempt:intake.snapshotAttempt}:{}),
     sources: intake.sources.map(row => ({ sourceId: row.sourceId,
+      ...(row.provider==='auto_api_encar'?{provider:row.provider,snapshotRun:intake.snapshotRun,snapshotAttempt:intake.snapshotAttempt}:{}),
       ...(['auto_api_che168','auto_api_dubicars'].includes(row.provider)?{provider:row.provider,snapshotStartedAt:row.snapshotStartedAt,yearFrom:row.yearFrom,
-        ...(row.snapshotBinding?{snapshotBinding:row.snapshotBinding,replica:row.replica}:{} )}:{}),
+        ...(row.snapshotBinding?{snapshotBinding:row.snapshotBinding,replica:row.replica,
+          ...(row.workingJournal?{workingJournal:row.workingJournal}:{}),...(row.baseReplica?{baseReplica:row.baseReplica}:{})}:{} )}:{}),
       cursor: row.cursor ?? null, stopReason: row.stopReason,
       retryableTransportFailure: row.stopReason === "list_failed" && !!row.errors?.length && row.errors.every(error=>error.stage === "list" && sourceTransportFailure(error.message)) })) };
 }

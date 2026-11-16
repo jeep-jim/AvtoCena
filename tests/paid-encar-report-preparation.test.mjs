@@ -69,6 +69,14 @@ test('an existing immutable conflict is never overwritten or accepted', async ()
   await assert.rejects(createAndVerify(storage, 'report', {history: {own_damage_count: 1}}), /readback_mismatch/);
   assert.equal(storage.writes.length, 0);
 });
+test('a completed report is read-only on retry and a missing bucket is not silently recreated', async () => {
+  const prepared = prepare([raw()]), storage = storageFixture();
+  const options = {storage, ...prepared, assertEnabled: async () => {}, assertSnapshotUnchanged: async () => {}};
+  const root = await publishReportBuckets(options), writes = storage.writes.length;
+  storage.saved.delete(root + prepared.buckets[0].key);
+  await assert.rejects(publishReportBuckets(options), /completed_bucket_missing_or_changed/);
+  assert.equal(storage.writes.length, writes);
+});
 test('changed source before final receipt prevents activation', async () => {
   const prepared = prepare([raw()]); const storage = storageFixture();
   await assert.rejects(publishReportBuckets({storage, ...prepared, assertEnabled: async () => {},

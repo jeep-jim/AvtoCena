@@ -3,6 +3,7 @@ import {createHash} from 'node:crypto';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
+import {openRawFeedPin,readRawRootHandoff,writeRawRootHandoff} from './lib/catalog-raw-provenance.mjs';
 import {autoApiChe168Client, autoApiPage} from './lib/auto-api-che168-client.mjs';
 import {catalogRefreshDue} from './lib/catalog-refresh-schedule.mjs';
 
@@ -262,11 +263,21 @@ async function main() {
     snapshotRun: process.env.ENCAR_SNAPSHOT_RUN || process.env.GITHUB_RUN_ID,
     snapshotAttempt: process.env.ENCAR_SNAPSHOT_ATTEMPT || process.env.GITHUB_RUN_ATTEMPT, headSha: process.env.GITHUB_SHA});
   const deadline = Date.now() + budget;
+  const root=`catalog/intake-staging/encar/${scope.runId}/${scope.attempt}`;
+  const saved=await storage.readJson(root+'/complete.json',null);
+  const existing=saved?await readRawRootHandoff(storage,root,saved):null;
+  const pin=existing?null:await openRawFeedPin({storage,operationId:`encar-source-${scope.runId}-${scope.attempt}`,
+    owner:{runId:scope.runId,attempt:scope.attempt,revision:scope.headSha},references:[{kind:'encar-snapshot',root}]});
+  if(!saved)await pin.add([]);
   const request = paidEncarRequest({apiKey: process.env.ACCOUNT_KEY, assertEnabled,
     requestDelayMs: 200, deadline});
   const receipt = await collectPaidEncarSnapshot({storage, request, assertEnabled, ...scope, deadline,
     allowPartial: process.env.ENCAR_ALLOW_PARTIAL === 'true',
     progress: value => console.log(JSON.stringify(value))});
+  if(receipt.completed!==false){
+    const handoff=existing||await writeRawRootHandoff(storage,root,receipt,await pin.handoff());
+    receipt.rawStoragePins=[handoff];
+  }
   await fs.writeFile('paid-encar-snapshot-receipt.json', JSON.stringify(receipt, null, 2) + '\n');
   if (process.env.GITHUB_OUTPUT) await fs.appendFile(process.env.GITHUB_OUTPUT,
     `snapshot_run=${receipt.runId}\nsnapshot_attempt=${receipt.attempt}\nsnapshot_complete=${receipt.completed !== false}\n`);
