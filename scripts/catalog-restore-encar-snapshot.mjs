@@ -4,6 +4,8 @@ import { getJsonStorage } from '../apps/web/lib/data.ts';
 import { EncarDirectAdapter } from '../apps/web/lib/catalog/adapters.ts';
 import { isEncarNonCashContract } from '../apps/web/lib/catalog/encar-sale-contract.ts';
 import { observationShardWriter } from './lib/catalog-intake-checkpoint.mjs';
+import { preparePaidEncarReports } from './catalog-prepare-paid-encar-reports.mjs';
+import { paidEncarSavedPageVerifier } from './catalog-paid-encar-intake.mjs';
 
 const run = process.env.ENCAR_SNAPSHOT_RUN;
 const attempt = process.env.ENCAR_SNAPSHOT_ATTEMPT;
@@ -14,6 +16,8 @@ const snapshot = await storage.readJson(prefix + '/complete.json', null);
 if (!Number.isSafeInteger(snapshot?.pages) || snapshot.pages < 1 ||
     !Number.isSafeInteger(snapshot.count) || snapshot.count < 1 ||
     !Number.isFinite(Date.parse(snapshot.completedAt))) throw Error('Missing complete Encar snapshot');
+const pageVerifier = paidEncarSavedPageVerifier(snapshot,
+  {runId: run, attempt, headSha: process.env.GITHUB_SHA});
 const output = path.resolve(process.env.CATALOG_INTAKE_DIR || 'catalog-intake-korea');
 await fs.mkdir(output, {recursive:true});
 if ((await fs.readdir(output)).length) throw Error('Intake directory must be empty');
@@ -26,6 +30,10 @@ let observations = 0;
 for (let page = 1; page <= snapshot.pages; page++) {
   const rows = await storage.readJson(prefix + '/pages/' + page + '.json', null);
   if (!Array.isArray(rows) || (!rows.length && page !== snapshot.pages)) throw Error('Missing saved Encar page ' + page);
+  if (pageVerifier) {
+    const receipt = await storage.readJson(prefix + '/page-receipts/' + page + '.json', null);
+    pageVerifier.verify(page, rows, receipt);
+  }
   for (const row of rows) {
     count++;
     const d = row.data;
@@ -56,10 +64,14 @@ for (let page = 1; page <= snapshot.pages; page++) {
     observations++;
   }
 }
+pageVerifier?.finish();
 if (count !== snapshot.count || observations + excluded !== count || !seen.size) throw Error('Encar snapshot totals mismatch');
 const report = {version:1,market:'korea',provider:'auto_api_encar',completed:true,completedAt:snapshot.completedAt,
   snapshotRun:run,snapshotAttempt:attempt,requiredSourceIds:[adapter.sourceId],confirmedWithdrawals:[],
   sources:[{sourceId:adapter.sourceId,provider:'auto_api_encar',observations,uniqueOffers:seen.size,
     stopReason:'source_finished',syncMode:'snapshot',pages:snapshot.pages,excluded}]};
+// A completed paid intake must include verified reports for the same source
+// observation before any publication route can receive its completion report.
+await preparePaidEncarReports();
 await fs.writeFile(path.join(output,'report.json'),JSON.stringify(report));
 console.log(JSON.stringify({count,excluded,observations,uniqueOffers:seen.size}));

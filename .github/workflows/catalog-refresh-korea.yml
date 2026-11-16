@@ -15,7 +15,5 @@ concurrency:
   cancel-in-progress: false
 jobs:
   refresh:
-    uses: ./.github/workflows/catalog-market-refresh.yml
-    with:
-      market: korea
+    uses: ./.github/workflows/catalog-paid-encar-refresh.yml
     secrets: inherit

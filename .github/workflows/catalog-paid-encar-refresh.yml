@@ -1,0 +1,192 @@
+name: Catalog paid Encar market worker
+on:
+  workflow_call:
+permissions:
+  contents: read
+  actions: read
+env:
+  JSON_STORAGE_DRIVER: object
+  YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+  YC_OBJECT_STORAGE_REGION: us-east-1
+  YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+  YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+  YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+  YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+jobs:
+  plan:
+    if: github.ref == 'refs/heads/main'
+    environment: regcloud-staging
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    outputs:
+      run: ${{ steps.policy.outputs.run }}
+      snapshot_run: ${{ steps.policy.outputs.snapshot_run }}
+      snapshot_attempt: ${{ steps.policy.outputs.snapshot_attempt }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Preserve the existing Korea cadence and owner switches
+        id: policy
+        run: |
+          node --import tsx --input-type=module <<'PAID_PLAN'
+          import fs from 'node:fs';
+          import {paidEncarRefreshDecision} from './scripts/catalog-paid-encar-intake.mjs';
+          import {readCollectionControls} from './apps/web/lib/catalog/collection-controls.ts';
+          const controls=await readCollectionControls();
+          const policy=JSON.parse(fs.readFileSync('data/catalog/refresh-policy-v1.json','utf8'));
+          const marker=process.env.GITHUB_EVENT_NAME==='push'
+            ? JSON.parse(fs.readFileSync('.github/market-runs/korea-refresh.json','utf8')) : {};
+          const result=paidEncarRefreshDecision({eventName:process.env.GITHUB_EVENT_NAME,controls,policy,marker});
+          // A failed downstream job keeps this scope; re-running the whole plan
+          // creates a fresh attempt without overwriting the previous snapshot.
+          fs.appendFileSync(process.env.GITHUB_OUTPUT,
+            `run=${result.run}\nsnapshot_run=${process.env.GITHUB_RUN_ID}\nsnapshot_attempt=${process.env.GITHUB_RUN_ATTEMPT}\n`);
+          console.log(JSON.stringify({...result,market:'korea',source:'encar_feed',controlsRevision:controls.revision}));
+          PAID_PLAN
+  collect_initial:
+    needs: plan
+    if: needs.plan.outputs.run == 'true'
+    environment: regcloud-staging
+    runs-on: ubuntu-24.04
+    timeout-minutes: 330
+    outputs:
+      snapshot_run: ${{ steps.snapshot.outputs.snapshot_run }}
+      snapshot_attempt: ${{ steps.snapshot.outputs.snapshot_attempt }}
+      snapshot_complete: ${{ steps.snapshot.outputs.snapshot_complete }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Collect the first bounded part of this paid Encar snapshot
+        id: snapshot
+        env:
+          ACCOUNT_KEY: ${{ secrets.AUTO_API_DUBICARS_KEY || secrets.AUTO_API_CHE168_KEY }}
+          ENCAR_SNAPSHOT_RUN: ${{ needs.plan.outputs.snapshot_run }}
+          ENCAR_SNAPSHOT_ATTEMPT: ${{ needs.plan.outputs.snapshot_attempt }}
+          ENCAR_ALLOW_PARTIAL: 'true'
+          CATALOG_INTAKE_TIME_MS: '18000000'
+          YC_OBJECT_STORAGE_REQUEST_TIMEOUT_MS: '120000'
+          NODE_OPTIONS: --max-old-space-size=6144
+        run: node --import tsx scripts/catalog-paid-encar-intake.mjs
+  collect:
+    needs: [plan, collect_initial]
+    if: needs.plan.outputs.run == 'true' && needs.collect_initial.result == 'success'
+    environment: regcloud-staging
+    runs-on: ubuntu-24.04
+    timeout-minutes: 330
+    outputs:
+      snapshot_run: ${{ steps.snapshot.outputs.snapshot_run }}
+      snapshot_attempt: ${{ steps.snapshot.outputs.snapshot_attempt }}
+      snapshot_complete: ${{ steps.snapshot.outputs.snapshot_complete }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Continue saved pages and require the provider's real end before preparation
+        id: snapshot
+        env:
+          ACCOUNT_KEY: ${{ secrets.AUTO_API_DUBICARS_KEY || secrets.AUTO_API_CHE168_KEY }}
+          ENCAR_SNAPSHOT_RUN: ${{ needs.plan.outputs.snapshot_run }}
+          ENCAR_SNAPSHOT_ATTEMPT: ${{ needs.plan.outputs.snapshot_attempt }}
+          ENCAR_ALLOW_PARTIAL: 'false'
+          CATALOG_INTAKE_TIME_MS: '18000000'
+          YC_OBJECT_STORAGE_REQUEST_TIMEOUT_MS: '120000'
+          NODE_OPTIONS: --max-old-space-size=6144
+        run: node --import tsx scripts/catalog-paid-encar-intake.mjs
+  prepare:
+    needs: collect
+    if: needs.collect.result == 'success' && needs.collect.outputs.snapshot_complete == 'true'
+    environment: regcloud-staging
+    runs-on: ubuntu-24.04
+    timeout-minutes: 300
+    outputs:
+      prepared_run: ${{ steps.receipt.outputs.prepared_run }}
+      snapshot_attempt: ${{ steps.receipt.outputs.snapshot_attempt }}
+      artifact_id: ${{ steps.intake.outputs.artifact-id }}
+      artifact_digest: ${{ steps.intake.outputs.artifact-digest }}
+      prepared: ${{ steps.receipt.outputs.prepared }}
+    env:
+      ENCAR_SNAPSHOT_RUN: ${{ needs.collect.outputs.snapshot_run }}
+      ENCAR_SNAPSHOT_ATTEMPT: ${{ needs.collect.outputs.snapshot_attempt }}
+      NODE_OPTIONS: --max-old-space-size=6144
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Verify this completed snapshot and current CRM before restoration
+        run: |
+          node --import tsx --input-type=module <<'PAID_SNAPSHOT'
+          import assert from 'node:assert/strict';
+          import {assertPaidEncarSnapshotReceipt} from './scripts/catalog-paid-encar-intake.mjs';
+          import {getJsonStorage} from './apps/web/lib/data.ts';
+          import {readCollectionControls} from './apps/web/lib/catalog/collection-controls.ts';
+          import {collectionEnabled} from './apps/web/lib/catalog/collection-controls-schema.ts';
+          assert.equal(process.env.ENCAR_SNAPSHOT_RUN,process.env.GITHUB_RUN_ID);
+          const storage=getJsonStorage();
+          assert.ok(collectionEnabled(await readCollectionControls(storage),'encar_feed'),'paid_encar_refresh_disabled_by_owner');
+          const prefix=`catalog/intake-staging/encar/${process.env.ENCAR_SNAPSHOT_RUN}/${process.env.ENCAR_SNAPSHOT_ATTEMPT}`;
+          assertPaidEncarSnapshotReceipt(await storage.readJson(prefix+'/complete.json',null),
+            {runId:process.env.ENCAR_SNAPSHOT_RUN,attempt:process.env.ENCAR_SNAPSHOT_ATTEMPT,headSha:process.env.GITHUB_SHA});
+          PAID_SNAPSHOT
+      - name: Restore paid listings and prepare their saved history and inspection
+        run: node --import tsx scripts/catalog-restore-encar-snapshot.mjs
+      - uses: actions/upload-artifact@v4
+        id: intake
+        with:
+          name: catalog-intake-korea-${{ needs.collect.outputs.snapshot_run }}-${{ needs.collect.outputs.snapshot_attempt }}
+          path: catalog-intake-korea/
+          if-no-files-found: error
+          overwrite: true
+          retention-days: 3
+      - name: Bind the prepared artifact to the successful producer attempt
+        id: receipt
+        env:
+          PREPARED_ARTIFACT_ID: ${{ steps.intake.outputs.artifact-id }}
+          PREPARED_ARTIFACT_DIGEST: ${{ steps.intake.outputs.artifact-digest }}
+        run: |
+          node --input-type=module <<'PAID_ARTIFACT_RECEIPT'
+          import fs from 'node:fs';
+          import {validatePaidEncarArtifactBinding,assertPaidEncarReportBinding} from './scripts/lib/paid-encar-artifact-binding.mjs';
+          const binding=validatePaidEncarArtifactBinding({runId:process.env.GITHUB_RUN_ID,
+            currentAttempt:process.env.GITHUB_RUN_ATTEMPT,snapshotAttempt:process.env.ENCAR_SNAPSHOT_ATTEMPT,
+            artifactId:process.env.PREPARED_ARTIFACT_ID,artifactDigest:process.env.PREPARED_ARTIFACT_DIGEST,
+            repositoryId:process.env.GITHUB_REPOSITORY_ID,headSha:process.env.GITHUB_SHA},
+            {preparedRunId:process.env.ENCAR_SNAPSHOT_RUN});
+          assertPaidEncarReportBinding(binding,JSON.parse(fs.readFileSync('catalog-intake-korea/report.json','utf8')));
+          fs.appendFileSync(process.env.GITHUB_OUTPUT,
+            `prepared_run=${binding.runId}\nsnapshot_attempt=${binding.snapshotAttempt}\nprepared=true\n`);
+          console.log(JSON.stringify({stage:'paid_encar_artifact_bound',...binding}));
+          PAID_ARTIFACT_RECEIPT
+  publish:
+    needs: prepare
+    if: needs.prepare.result == 'success' && needs.prepare.outputs.prepared == 'true'
+    uses: ./.github/workflows/catalog-market-refresh.yml
+    with:
+      market: korea
+      prepared_encar_run: ${{ needs.prepare.outputs.prepared_run }}
+      prepared_encar_self: true
+      prepared_encar_attempt: ${{ needs.prepare.outputs.snapshot_attempt }}
+      prepared_encar_artifact_id: ${{ needs.prepare.outputs.artifact_id }}
+      prepared_encar_artifact_digest: ${{ needs.prepare.outputs.artifact_digest }}
+    secrets: inherit

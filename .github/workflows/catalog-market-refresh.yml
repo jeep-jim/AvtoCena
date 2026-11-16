@@ -8,6 +8,19 @@ on:
       prepared_encar_run:
         type: string
         required: false
+      prepared_encar_self:
+        type: boolean
+        required: false
+        default: false
+      prepared_encar_attempt:
+        type: string
+        required: false
+      prepared_encar_artifact_id:
+        type: string
+        required: false
+      prepared_encar_artifact_digest:
+        type: string
+        required: false
 permissions:
   contents: read
   actions: read
@@ -47,11 +60,16 @@ jobs:
         env:
           EVENT_NAME: ${{ github.event_name }}
           PREPARED_ENCAR_RUN: ${{ inputs.prepared_encar_run }}
+          PREPARED_ENCAR_SELF: ${{ inputs.prepared_encar_self }}
+          PREPARED_ENCAR_ATTEMPT: ${{ inputs.prepared_encar_attempt }}
+          PREPARED_ENCAR_ARTIFACT_ID: ${{ inputs.prepared_encar_artifact_id }}
+          PREPARED_ENCAR_ARTIFACT_DIGEST: ${{ inputs.prepared_encar_artifact_digest }}
           TARGET_MARKET: ${{ inputs.market }}
         run: |
           node --import tsx --input-type=module <<'JS'
           import fs from 'node:fs';
           import { catalogRefreshDue } from './scripts/lib/catalog-refresh-schedule.mjs';
+          import {validatePaidEncarArtifactBinding} from './scripts/lib/paid-encar-artifact-binding.mjs';
           const {readCollectionControls}=await import('./apps/web/lib/catalog/collection-controls.ts');
           const {collectionMarketEnabled,collectionWorkflowEnabled}=await import('./apps/web/lib/catalog/collection-controls-schema.ts');
           const controls=await readCollectionControls();
@@ -61,9 +79,16 @@ jobs:
           const paused = Boolean(policy.pausedMarkets?.[market]) || !collectionMarketEnabled(controls,market) || !collectionWorkflowEnabled(controls,market);
           const preparedEncar = process.env.PREPARED_ENCAR_RUN || '';
           if (preparedEncar && (market !== 'korea' || !/^\d+$/.test(preparedEncar) || !controls.sources.encar_feed?.enabled)) throw Error('invalid_prepared_encar_source');
+          const sameRunEncar = process.env.PREPARED_ENCAR_SELF === 'true';
+          if (sameRunEncar) validatePaidEncarArtifactBinding({runId:process.env.GITHUB_RUN_ID,
+            currentAttempt:process.env.GITHUB_RUN_ATTEMPT,snapshotAttempt:process.env.PREPARED_ENCAR_ATTEMPT,
+            artifactId:process.env.PREPARED_ENCAR_ARTIFACT_ID,artifactDigest:process.env.PREPARED_ENCAR_ARTIFACT_DIGEST,
+            repositoryId:process.env.GITHUB_REPOSITORY_ID,headSha:process.env.GITHUB_SHA},{preparedRunId:preparedEncar});
+          else if (process.env.PREPARED_ENCAR_ATTEMPT || process.env.PREPARED_ENCAR_ARTIFACT_ID || process.env.PREPARED_ENCAR_ARTIFACT_DIGEST) throw Error('unexpected_prepared_encar_binding');
           const run = !paused && (preparedEncar || ['push','workflow_dispatch'].includes(process.env.EVENT_NAME) || (process.env.EVENT_NAME === 'schedule' && (market === 'china' || catalogRefreshDue())));
           if (paused) console.log(`Market refresh paused: ${market}: ${policy.pausedMarkets?.[market] || 'no_enabled_background_source'}`);
           const marker = process.env.EVENT_NAME === 'push' ? JSON.parse(fs.readFileSync(`.github/market-runs/${market}-refresh.json`,'utf8')) : {};
+          if (preparedEncar && marker.refreshMarkets?.length) throw Error('prepared_encar_collection_overlay_forbidden');
           if (!['china','korea','uae','georgia','europe'].includes(market)) throw Error('invalid_market');
           const reuse = preparedEncar || marker.reuseRunId || '';
           const autohomeReuse = marker.autohomeReuseRunId || '';
@@ -250,12 +275,66 @@ jobs:
           node -e 'console.log(JSON.stringify({heapLimitMiB:Math.round(require("node:v8").getHeapStatistics().heap_size_limit/1048576),availableMiB:Math.round(require("node:os").freemem()/1048576)}))'
       - name: Restore collected observations without repeating source requests
         uses: actions/download-artifact@v4
-        if: needs.plan.outputs.reuse_run_id != ''
+        if: needs.plan.outputs.reuse_run_id != '' && !inputs.prepared_encar_self
         with:
           pattern: catalog-intake-${{ matrix.market }}
           path: catalog-intake-input
           run-id: ${{ needs.plan.outputs.reuse_run_id }}
           github-token: ${{ github.token }}
+      - name: Verify the exact completed artifact from this run and producer attempt
+        if: inputs.prepared_encar_self
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PREPARED_ENCAR_RUN: ${{ inputs.prepared_encar_run }}
+          PREPARED_ENCAR_ATTEMPT: ${{ inputs.prepared_encar_attempt }}
+          PREPARED_ENCAR_ARTIFACT_ID: ${{ inputs.prepared_encar_artifact_id }}
+          PREPARED_ENCAR_ARTIFACT_DIGEST: ${{ inputs.prepared_encar_artifact_digest }}
+        run: |
+          node --input-type=module <<'PAID_SELF_ARTIFACT'
+          import fs from 'node:fs';
+          import path from 'node:path';
+          import {execFileSync} from 'node:child_process';
+          import {validatePaidEncarArtifactBinding,assertPaidEncarArtifactBinding} from './scripts/lib/paid-encar-artifact-binding.mjs';
+          const binding=validatePaidEncarArtifactBinding({runId:process.env.GITHUB_RUN_ID,
+            currentAttempt:process.env.GITHUB_RUN_ATTEMPT,snapshotAttempt:process.env.PREPARED_ENCAR_ATTEMPT,
+            artifactId:process.env.PREPARED_ENCAR_ARTIFACT_ID,artifactDigest:process.env.PREPARED_ENCAR_ARTIFACT_DIGEST,
+            repositoryId:process.env.GITHUB_REPOSITORY_ID,headSha:process.env.GITHUB_SHA},
+            {preparedRunId:process.env.PREPARED_ENCAR_RUN});
+          const artifact=JSON.parse(execFileSync('gh',['api',`repos/${process.env.GITHUB_REPOSITORY}/actions/artifacts/${binding.artifactId}`],{encoding:'utf8'}));
+          assertPaidEncarArtifactBinding(binding,artifact);
+          fs.writeFileSync(path.join(process.env.RUNNER_TEMP,'paid-encar-artifact-binding.json'),JSON.stringify(binding));
+          console.log(JSON.stringify({stage:'same_run_paid_artifact_verified',...binding}));
+          PAID_SELF_ARTIFACT
+      - name: Verify archive bytes before extracting the same-run paid artifact
+        if: inputs.prepared_encar_self
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PREPARED_ENCAR_ARTIFACT_ID: ${{ inputs.prepared_encar_artifact_id }}
+        run: |
+          set -euo pipefail
+          archive="$RUNNER_TEMP/paid-encar-intake.zip"
+          trap 'rm -f -- "$archive"' EXIT
+          gh api "repos/$GITHUB_REPOSITORY/actions/artifacts/$PREPARED_ENCAR_ARTIFACT_ID/zip" > "$archive"
+          node --input-type=module <<'PAID_ARCHIVE_DIGEST'
+          import fs from 'node:fs';
+          import path from 'node:path';
+          import {assertPaidEncarArchiveDigest} from './scripts/lib/paid-encar-artifact-binding.mjs';
+          const binding=JSON.parse(fs.readFileSync(path.join(process.env.RUNNER_TEMP,'paid-encar-artifact-binding.json'),'utf8'));
+          await assertPaidEncarArchiveDigest(binding,fs.createReadStream(path.join(process.env.RUNNER_TEMP,'paid-encar-intake.zip')));
+          console.log(JSON.stringify({stage:'paid_encar_archive_digest_verified',artifactId:binding.artifactId}));
+          PAID_ARCHIVE_DIGEST
+          python3 - <<'PAID_ARCHIVE_EXTRACT'
+          import os, pathlib, stat, zipfile
+          destination=pathlib.Path('catalog-intake-input/catalog-intake-korea')
+          destination.mkdir(parents=True,exist_ok=True)
+          if any(destination.iterdir()): raise RuntimeError('paid_encar_intake_directory_not_empty')
+          with zipfile.ZipFile(pathlib.Path(os.environ['RUNNER_TEMP'])/'paid-encar-intake.zip') as archive:
+              for info in archive.infolist():
+                  member=pathlib.PurePosixPath(info.filename)
+                  if member.is_absolute() or '..' in member.parts or '\\' in info.filename or stat.S_ISLNK(info.external_attr >> 16):
+                      raise RuntimeError('paid_encar_artifact_path_invalid')
+              archive.extractall(destination)
+          PAID_ARCHIVE_EXTRACT
       - name: Overlay explicitly refreshed markets
         uses: actions/download-artifact@v4
         if: contains(fromJSON(needs.plan.outputs.collect_markets), matrix.market)
@@ -275,13 +354,21 @@ jobs:
         run: node --import tsx scripts/catalog-auto-api-che168-recover.mjs
       - name: Verify prepared paid Encar inventory and current CRM switch
         if: inputs.prepared_encar_run != ''
+        env:
+          PREPARED_ENCAR_SELF: ${{ inputs.prepared_encar_self }}
         run: |
           node --import tsx --input-type=module <<'JS'
           import fs from 'node:fs';
           import assert from 'node:assert/strict';
+          import path from 'node:path';
+          import {assertPaidEncarReportBinding} from './scripts/lib/paid-encar-artifact-binding.mjs';
           import {assertCollectionEnabled} from './apps/web/lib/catalog/collection-controls.ts';
           await assertCollectionEnabled('encar_feed');
           const r=JSON.parse(fs.readFileSync('catalog-intake-input/catalog-intake-korea/report.json'));
+          if (process.env.PREPARED_ENCAR_SELF === 'true') {
+            const binding=JSON.parse(fs.readFileSync(path.join(process.env.RUNNER_TEMP,'paid-encar-artifact-binding.json'),'utf8'));
+            assertPaidEncarReportBinding(binding,r);
+          }
           assert.ok(r.completed && r.market==='korea' && r.provider==='auto_api_encar');
           assert.ok(r.sources.length===1 && r.sources[0].sourceId==='encar_direct' && r.sources[0].uniqueOffers>0);
           JS

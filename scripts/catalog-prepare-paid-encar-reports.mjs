@@ -145,7 +145,7 @@ export function verifyCurrentReportCoverage(offers, records, identity, expectedC
   return {currentCount: offers.length, covered: ids.size, historyPresent, historyMissing, inspectionPresent, diagnosisPresent, samples};
 }
 
-async function main() {
+export async function preparePaidEncarReports() {
   const {getJsonStorage} = await import('../apps/web/lib/data.ts');
   const {readCollectionControls} = await import('../apps/web/lib/catalog/collection-controls.ts');
   const {collectionEnabled} = await import('../apps/web/lib/catalog/collection-controls-schema.ts');
@@ -215,6 +215,6 @@ async function main() {
   console.log(JSON.stringify(report));
 }
 
-if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) main().catch(error => {
+if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) preparePaidEncarReports().catch(error => {
   console.error(error.message); process.exitCode = 1;
 });
