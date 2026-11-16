@@ -1,0 +1,108 @@
+name: Record Japan model access incident
+'on':
+  push:
+    branches:
+    - main
+    paths:
+    - .github/workflows/record-japan-model-incident.yml
+permissions:
+  contents: write
+concurrency:
+  group: record-japan-model-access-incident-20261116
+  cancel-in-progress: false
+jobs:
+  record:
+    if: github.ref == 'refs/heads/main' && github.repository == 'jeep-jim/AvtoCena'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 1
+        persist-credentials: true
+    - name: Append verified Japan access facts once without changing application files
+      run: |
+        set -euo pipefail
+        python3 - <<'RECORD_JAPAN_INCIDENT'
+        """Append this incident once. Preserve roadmap bytes and retry only a concurrent main update."""
+        import datetime
+        import json
+        import os
+        from pathlib import Path
+        import subprocess
+
+        MARKER = '<!-- incident:japan-model-access-20261116:43829352519 -->'
+        CHECKPOINT = '''
+        ## 16.11.2026 — Япония: отказ доступа поставщика при поиске модели, приложение не переустанавливалось
+
+        <!-- incident:japan-model-access-20261116:43829352519 -->
+
+        - Владелец сообщил, что выбор модели ломает весь японский фильтр; на скриншоте `/cars/japan/Toyota/Allion` показана ошибка загрузки. Независимая публичная проверка воспроизвела для Allion HTTP 503 / `japan_search_unavailable` / `invalid_response`; Toyota без модели и Honda Fit в отдельных проверках вернули машины. Поэтому утверждение о проверенном отказе абсолютно всех моделей не делается. Повторная health-проверка в 15:21 Красноярск (UTC+7) подтвердила рабочий источник приложения — `83ff17075e9188dcf227c8752dc064248d5f42e0`, расчётная версия `4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90`.
+        - Сначала прочитана сохранённая диагностика без запросов к поставщику: [43828051899](https://github.com/jeep-jim/AvtoCena/actions/runs/43828051899). Ограниченная проверка формы ответа: [43828771535](https://github.com/jeep-jim/AvtoCena/actions/runs/43828771535). Решающий единичный запрос [43829352519](https://github.com/jeep-jim/AvtoCena/actions/runs/43829352519) в 15:12 UTC+7 подтвердил JSON-ошибку поставщика `code [скрыт] have no access`. В эту запись не включены настоящий код, его префикс, полный ответ или содержащая его ссылка. Это подтверждение отказа доступа; истечение подписки, неоплата и конкретная причина отказа не установлены.
+        - После подтверждения отказа новые диагностические запросы к поставщику прекращены. Диагностический job отключён через `if: false`; последующий запуск [43830286022](https://github.com/jeep-jim/AvtoCena/actions/runs/43830286022) имеет статус SKIPPED. Другие endpoints, таблицы или подмена адреса посетителя для обхода отказа не применялись.
+        - Проверка конфигурации [43830286062](https://github.com/jeep-jim/AvtoCena/actions/runs/43830286062), job `133173717422`, SUCCESS в 15:20 UTC+7: четыре фиксированных чтения, ноль записей, ноль обращений к поставщику. Сохранённая конфигурация AJES имеет `updatedAt` и S3 `LastModified` от 15.10.2026 14:44:56 UTC (21:44:56 UTC+7). В окружении действующего `83ff` и сохранённого `a182` отдельного AJES-пароля нет; ключ шифрования совпадает. Эти факты не доказывают действительность доступа у поставщика.
+        - CRM revision 15: рынок Японии и `ajes_japan_feed` включены; японский источник включён с 15.10.2026 14:44:20 UTC (21:44:20 UTC+7), изменения этого состояния сегодня не обнаружены. Рынок Кореи и `encar_feed` включены; `ajes_korea_feed` выключен 16.11.2026 в 07:02:47 UTC (14:02:47 UTC+7). Проверка точных сохранённых ключей успешного ответа Fit 3/24 их не нашла; объяснять успех Fit сохранённым кешем по этим данным нельзя.
+        - Сравнение опубликованного минимального подключения новой Кореи `83ff` с базой `a182` содержит семь файлов приложения и четыре теста. Японский клиент, его настройки/runtime и японские ветви маршрутизации этим подключением не изменены. Гипотезы о размере SQL и формате пустого ответа не объявлены причиной инцидента: фактически получен отказ доступа. Для этого инцидента код приложения не исправлялся и не публиковался; откат не выполнялся, новая Корея остаётся на `83ff`. Локальный черновик отдельного выпуска Японии оставлен неактивным и не прошёл полную проверку; не запускать его как готовое исправление.
+        - Следующее необходимое действие: восстановить у поставщика доступ действующего японского источника, сохранив его реальные реквизиты и ограничения. После подтверждения доступа проверить Allion, Corolla и Fit через реальные фильтры, правильность машин, сохранение города/параметров и отсутствие ошибочной либо устаревшей выдачи. До этой проверки Японию исправленной не объявлять. При необходимости замены реквизитов выполнить отдельное точное изменение только японского доступа; не менять источник Кореи, не повторять его установку и не включать сбор или новые расписания.
+        '''.strip() + '\n'
+
+
+        def append_checkpoint(path, checkpoint=CHECKPOINT):
+            path = Path(path)
+            assert path.name == 'roadmap.md', 'roadmap_only'
+            before = path.read_bytes()
+            marker = MARKER.encode('utf-8')
+            block = checkpoint.encode('utf-8')
+            assert block.count(marker) == 1, 'checkpoint_marker_invalid'
+            assert b'__REPLACE_' not in block, 'unreviewed_placeholder'
+            if marker in before:
+                assert before.count(marker) == 1 and block in before, 'existing_checkpoint_requires_review'
+                return False
+            after = before + b'\n\n' + block
+            assert after.startswith(before) and after.count(marker) == 1, 'history_preservation_failed'
+            path.write_bytes(after)
+            assert path.read_bytes() == after and path.read_bytes().startswith(before), 'roadmap_readback_failed'
+            return True
+
+
+        def git(args, root, check=True):
+            result = subprocess.run(['git', *args], cwd=root, text=True, capture_output=True, timeout=60)
+            if check and result.returncode:
+                raise RuntimeError('git_operation_failed:' + args[0])
+            return result
+
+
+        def record(root):
+            root = Path(root)
+            for attempt in range(1, 4):
+                git(['fetch', '--no-tags', '--depth=1', 'origin', 'main'], root)
+                base = git(['rev-parse', 'FETCH_HEAD'], root).stdout.strip()
+                git(['checkout', '--detach', base], root)
+                assert not git(['status', '--porcelain'], root).stdout.strip(), 'checkout_not_clean'
+                if not append_checkpoint(root / 'roadmap.md'):
+                    print(json.dumps({'status': 'already_recorded', 'attempt': attempt, 'base': base, 'writes': 0}))
+                    return
+                assert git(['diff', '--name-only'], root).stdout.splitlines() == ['roadmap.md'], 'unexpected_worktree_changes'
+                assert not git(['diff', '--cached', '--name-only'], root).stdout.strip(), 'unexpected_staged_changes'
+                git(['add', '--', 'roadmap.md'], root)
+                assert git(['diff', '--cached', '--name-only'], root).stdout.splitlines() == ['roadmap.md'], 'unexpected_staged_paths'
+                git(['-c', 'user.name=github-actions[bot]', '-c', 'user.email=41898282+github-actions[bot]@users.noreply.github.com',
+                     'commit', '-m', 'docs: record verified Japan supplier access denial'], root)
+                commit = git(['rev-parse', 'HEAD'], root).stdout.strip()
+                assert git(['diff', '--name-only', base, commit], root).stdout.splitlines() == ['roadmap.md'], 'commit_scope_changed'
+                pushed = git(['push', 'origin', 'HEAD:refs/heads/main'], root, check=False)
+                if pushed.returncode == 0:
+                    print(json.dumps({'status': 'recorded', 'attempt': attempt, 'commit': commit, 'paths': ['roadmap.md']}))
+                    return
+                remote = git(['ls-remote', '--exit-code', 'origin', 'refs/heads/main'], root).stdout.split()[0]
+                assert remote != base, 'push_rejected_without_concurrent_main_change'
+                assert attempt < 3, 'bounded_append_retry_exhausted'
+                print(json.dumps({'status': 'retry_after_concurrent_main_change', 'attempt': attempt}))
+            raise AssertionError('unreachable')
+
+
+        if __name__ == '__main__':
+            assert os.environ['GITHUB_REPOSITORY'] == 'jeep-jim/AvtoCena', 'wrong_repository'
+            assert os.environ['GITHUB_REF'] == 'refs/heads/main', 'main_required'
+            record(Path.cwd())
+        RECORD_JAPAN_INCIDENT
