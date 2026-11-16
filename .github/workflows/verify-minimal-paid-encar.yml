@@ -13,22 +13,22 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
-          fetch-depth: 3
-          ref: 56a95d571bc531d024ab2f2abe1de5d249b5f075
+          fetch-depth: 4
+          ref: 83ff17075e9188dcf227c8752dc064248d5f42e0
       - uses: actions/setup-node@v4
         with:
           node-version: 24
           cache: npm
-      - name: Verify exact retained baseline and nine-file scope
+      - name: Verify exact retained baseline and eleven-file scope
         run: |
           set -euo pipefail
-          test "$(git rev-parse HEAD)" = 56a95d571bc531d024ab2f2abe1de5d249b5f075
-          test "$(git rev-parse HEAD^^)" = a182cd21b21ecf612b63613d263e5bdd817ea4c0
-          test "$(git rev-parse HEAD^{tree})" = 767a3861b85d85e53536440d2889c000afaf076c
-          git diff --check HEAD^^ HEAD
+          test "$(git rev-parse HEAD)" = 83ff17075e9188dcf227c8752dc064248d5f42e0
+          test "$(git rev-parse HEAD^^^)" = a182cd21b21ecf612b63613d263e5bdd817ea4c0
+          test "$(git rev-parse HEAD^{tree})" = bb3673c22ccc3a70d6711c53678c9aa5e6238eda
+          git diff --check HEAD^^^ HEAD
           python3 - <<'SCOPE'
           import subprocess
-          paths=subprocess.check_output(['git','diff','--name-only','HEAD^^','HEAD'],text=True).splitlines()
+          paths=subprocess.check_output(['git','diff','--name-only','HEAD^^^','HEAD'],text=True).splitlines()
           expected={
            'apps/web/app/(public)/api/catalog/search/route.ts',
            'apps/web/app/(public)/cars/offer/[id]/page.tsx',
@@ -38,7 +38,9 @@ jobs:
            'apps/web/lib/catalog/collection-controls.ts',
            'apps/web/lib/catalog/storage.ts',
            'tests/catalog-market-brand-projection.test.ts',
-           'tests/china-source-switch.test.ts'
+           'tests/china-source-switch.test.ts',
+           'tests/browser/catalog-load-more.mjs',
+           'tests/browser/catalog-navigation-recovery.mjs'
           }
           assert set(paths)==expected,paths
           print('EXACT_PAID_SCOPE',len(paths))
