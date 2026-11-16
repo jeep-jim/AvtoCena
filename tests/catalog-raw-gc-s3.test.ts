@@ -139,6 +139,31 @@ test('unknown LIST fields remain errors with only bounded trusted parent and tag
   });
   assert.equal(rawGcS3SchemaDiagnostic(Object.assign(Error('raw_gc_s3_xml_unknown_field'),{schemaDiagnostic:{private:'do-not-copy'}})),null);
 });
+test('optional object Type accepts only an exact singleton Normal scalar without changing inventory metadata',()=>{
+  const good=xmlList([metadata()]),parse=xml=>parseRawGcS3List(xml,{prefix,maxKeys:10});
+  const insert=value=>good.replace('</Contents>',value+'</Contents>');
+  assert.deepEqual(parse(insert('<Type>Normal</Type>')),parse(good));
+  assert.equal(Object.hasOwn(parse(insert('<Type>Normal</Type>')).objects[0],'type'),false);
+  for(const value of ['Appendable','',' ',' Normal','Normal ','Normal\n','normal','NORMAL','Multipart','Symlink','Unknown']) {
+    assert.throws(()=>parse(insert('<Type>'+value+'</Type>')),/raw_gc_s3_list_object_type/);
+  }
+  assert.throws(()=>parse(insert('<Type/>')),/raw_gc_s3_list_object_type/);
+  for(const value of ['<Type>Normal</Type><Type>Normal</Type>','<Type>Normal</Type><Type>Appendable</Type>','<Type><Normal/></Type>']) {
+    assert.throws(()=>parse(insert(value)),/raw_gc_s3_xml_field/);
+  }
+  assert.throws(()=>parse(good.replace('</ListBucketResult>','<Type>Normal</Type></ListBucketResult>')),/raw_gc_s3_xml_unknown_field/);
+});
+test('one nonordinary Type rejects the whole fetched page without dropping the object or retrying',async()=>{
+  const good=xmlList([metadata(),metadata(root+'/1.gz')],{maxKeys:2});
+  let calls=0;
+  const io=transport(async(_url,options)=>{
+    calls++;assert.equal(options.method,'GET');
+    let index=0;
+    return new Response(good.replaceAll('</Contents>',()=>'<Type>'+(index++?'Appendable':'Normal')+'</Type></Contents>'));
+  });
+  await assert.rejects(io.listPage({target,prefix,maxKeys:2,deadline:until()}),/raw_gc_s3_list_object_type/);
+  assert.equal(calls,1);assert.equal(io.stats().head,0);assert.equal(io.stats().put,0);assert.equal(io.stats().post,0);
+});
 test('LIST pagination cannot scan a whole bucket, another market namespace, or exceed a page cap',async()=>{
   let calls=0;const io=transport(async()=>{calls++;return new Response('');});
   for(const value of [{prefix:''},{prefix:target.prefix},{prefix:'catalog/nonjp-intake/v1/japan/1/1/'},{maxKeys:1001},{cursor:''}]){

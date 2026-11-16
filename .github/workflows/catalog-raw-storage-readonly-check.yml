@@ -24,7 +24,7 @@ jobs:
           node-version: 24
       - name: Validate the bounded read-only probe
         run: node --check scripts/catalog-raw-storage-readonly-check.mjs
-      - name: Verify the pinned receipt, strict LIST schema and current publication lease
+      - name: Verify pinned raw objects with strict normal-object metadata
         env:
           YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
           YC_OBJECT_STORAGE_REGION: us-east-1
