@@ -37,7 +37,7 @@ jobs:
           source='56a95d571bc531d024ab2f2abe1de5d249b5f075'
           commit=api('commits/'+source)
           assert [p['sha'] for p in commit['parents']]==['9faa6c030251e1c0ce491b01c4d2fcded9d6a736'] and commit['commit']['tree']['sha']=='767a3861b85d85e53536440d2889c000afaf076c','candidate_changed'
-          check=api('actions/runs/43810711696')
+          check=api('actions/runs/43810784342')
           assert check['path']=='.github/workflows/verify-minimal-paid-encar.yml' and check['status']=='completed' and check['conclusion']=='success','exact_candidate_CI_incomplete'
           publication=api('actions/runs/43600759493')
           assert publication['conclusion']=='success' and publication['path']=='.github/workflows/publish-prepared-encar.yml','paid_publication_missing'
@@ -496,7 +496,7 @@ jobs:
           source='56a95d571bc531d024ab2f2abe1de5d249b5f075'
           commit=api('commits/'+source)
           assert [p['sha'] for p in commit['parents']]==['9faa6c030251e1c0ce491b01c4d2fcded9d6a736'] and commit['commit']['tree']['sha']=='767a3861b85d85e53536440d2889c000afaf076c','candidate_changed'
-          check=api('actions/runs/43810711696')
+          check=api('actions/runs/43810784342')
           assert check['path']=='.github/workflows/verify-minimal-paid-encar.yml' and check['status']=='completed' and check['conclusion']=='success','exact_candidate_CI_incomplete'
           publication=api('actions/runs/43600759493')
           assert publication['conclusion']=='success' and publication['path']=='.github/workflows/publish-prepared-encar.yml','paid_publication_missing'
