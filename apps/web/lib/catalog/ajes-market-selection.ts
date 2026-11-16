@@ -6,6 +6,10 @@ export async function usesAjesMarket(market:unknown,source?:unknown){
  if(market==='china'){
   try{await assertCollectionEnabled('ajes_china_feed');return true;}catch{return false;}
  }
- // Korea has one purchased Encar feed, including legacy bookmarks.
- return market==='korea';
+ if(market!=='korea')return false;
+ // Until the actual manifest identifies a fully paid snapshot, keep serving AJ.
+ try { await assertCollectionEnabled('encar_feed'); }
+ catch { return true; }
+ const {hasPublishedPaidEncar}=await import('./storage');
+ return !await hasPublishedPaidEncar();
 }

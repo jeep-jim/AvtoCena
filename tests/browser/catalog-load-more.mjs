@@ -27,7 +27,7 @@ try{
   await page.goto('http://127.0.0.1:'+server.address().port);
   await page.getByText('Показано 24 из 60').waitFor();
   const pages=page.getByRole('navigation',{name:'Страницы каталога'});
-  assert.equal(await pages.getByRole('link',{name:'Страница 2',exact:true}).getAttribute('href'),'/cars?market=japan&page=2');
+  assert.equal(await pages.getByRole('link',{name:'Страница 2',exact:true}).getAttribute('href'),'/cars/japan?page=2');
   assert.equal(await pages.locator('[aria-current=page]').innerText(),'1');
   await page.getByRole('button',{name:'Показать ещё'}).click();
   const loading=page.getByRole('button',{name:'Загружаем варианты'});
