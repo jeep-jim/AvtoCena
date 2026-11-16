@@ -1,0 +1,428 @@
+{
+  "schemaVersion": 1,
+  "inventoryRunId": 43842173449,
+  "inventoryJobId": 133213291918,
+  "inventorySource": "c3df53d33094c7f7dc97922966a1e4107632fddc",
+  "inventoryFinishedAt": "2026-11-16T09:43:35.386775+00:00",
+  "expiresAt": "2026-11-16T12:00:00Z",
+  "production": {
+    "id": "21d2c808c25bad327a6d8ac13891d878aeb67fadce52350dcc6f1433e3f6ca78",
+    "image": "sha256:4a055ba772496c7de89594acbbc1c1bc02ac2d2b20050cfad7f637d1f5646dfd",
+    "release": "83ff17075e9188dcf227c8752dc064248d5f42e0",
+    "calculator": "4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90",
+    "port": 3001,
+    "fingerprint": "37e51b21348f40e128f31597a93260f9bc224852ea02b61b2099fe69b0db3daf"
+  },
+  "protectedReleases": [
+    "83ff17075e9188dcf227c8752dc064248d5f42e0",
+    "a182cd21b21ecf612b63613d263e5bdd817ea4c0",
+    "17a686182574097b5ade22b37ef8b485e2b53844",
+    "463fd22559a2f9c5acd60f8f5e4b269689215c84",
+    "e4f2781ed52f12f53430118bea51ef150608ccfe"
+  ],
+  "containers": [
+    {
+      "id": "540557802d1a0d7f75c598e8815cb2364cd94a457379eba61638a46d03586af8",
+      "name": "/avtocena-before-memory-20261012",
+      "imageId": "sha256:73181d873ae5ea890f3d98e15a323614a7d3f442a97c1eb757974c2aafc8fc8d",
+      "revision": "dd63dc40f51ee97d33c12a86654ad60d3714053f",
+      "role": "production",
+      "fingerprint": "2efac9727e5e792d9eb4c405afc5cde29fdf38f71a5b737eb9d597db66058ba9",
+      "created": "2026-10-11T15:14:36.732257918Z",
+      "finishedAt": "2026-10-12T00:52:12.124603727Z",
+      "writableBytes": 236040192
+    },
+    {
+      "id": "9485e49a381bf1474dd3f5793b417d3047eff206f75c67ceb4a36dd946f2cf16",
+      "name": "/avtocena-release-6689e9c4bfd7",
+      "imageId": "sha256:c99d9700593caeacf2bdbf062b801c37072c761bf9b204b3c0eb8cfb6f8cd497",
+      "revision": "6689e9c4bfd77a512a8eb84f0d960cb36f6c3b8e",
+      "role": "production",
+      "fingerprint": "6b9a9f9cbde16b45b6eaf2f10da80a86b184e48ca0db60f918f68bedd56cbebb",
+      "created": "2026-11-15T09:32:49.521547886Z",
+      "finishedAt": "2026-11-15T09:40:18.748710267Z",
+      "writableBytes": 3338240
+    },
+    {
+      "id": "f9c0cbfd090ae61f946c2064ca8ccfff053a97f8d51fadb1fdd83581938f3b50",
+      "name": "/avtocena-release-b5ad05ee8ad0",
+      "imageId": "sha256:c714b84a5b3f5f533726a364aa63836cea9f5335238503f94f89847a74e36b0c",
+      "revision": "b5ad05ee8ad042e4ff7b911a1990fbcd8b703b30",
+      "role": "production",
+      "fingerprint": "cf2c87cfee43d63db65664efdd4809a087d0f8e43ef73a6dee08b3ede4a2cdeb",
+      "created": "2026-11-15T07:35:33.651479709Z",
+      "finishedAt": "2026-11-15T07:48:27.527163026Z",
+      "writableBytes": 6119424
+    },
+    {
+      "id": "6c0f7b7215e187f3fd7f232ef77548873927c384a875a0066ea75f71591a8175",
+      "name": "/avtocena-release-f9cce4a86f36",
+      "imageId": "sha256:d909519d647357acae8f5347ed696e503031e706b564a5b808b27d75738d3e89",
+      "revision": "f9cce4a86f3659b266000e194458f545254728ea",
+      "role": "production",
+      "fingerprint": "5e241ebb243e24697ddbe3b6dd141fc460afdf31077d6ac480d58aafaa3ac794",
+      "created": "2026-11-15T08:38:28.93521329Z",
+      "finishedAt": "2026-11-15T08:46:31.592156125Z",
+      "writableBytes": 3555328
+    },
+    {
+      "id": "764b0b9681c5f38e0d66e6fd8dd794651ff7ec9085513c70026aa647da4e75be",
+      "name": "/avtocena-rollback-preserved-463fd22559a2-42848177344",
+      "imageId": "sha256:7193fc9569a5ff95760a93a005f2ba8a84adb64874c6812f29de8a3f069bf6b6",
+      "revision": "a5f9a645835ae636ab99dd1a7b1073ba24d851b4",
+      "role": "production",
+      "fingerprint": "36e82ce0a994a509d73c555dc2b67eee08f7e425afae2e0df2824a22a8c124ea",
+      "created": "2026-11-07T11:50:04.282227884Z",
+      "finishedAt": "2026-11-08T02:41:44.379174634Z",
+      "writableBytes": 2195316736
+    },
+    {
+      "id": "66008b8b31ba8e570041c3088864de413cd614fd6b37973c23585869a0f29f07",
+      "name": "/avtocena-runtime-20261012-failed-1791766165",
+      "imageId": "sha256:73181d873ae5ea890f3d98e15a323614a7d3f442a97c1eb757974c2aafc8fc8d",
+      "revision": "dd63dc40f51ee97d33c12a86654ad60d3714053f",
+      "role": "production",
+      "fingerprint": "3630be624c306a4ef9ead73d59e847cfa4c521e4d8e879cacafa2481bb770c94",
+      "created": "2026-10-12T00:45:54.2294762Z",
+      "finishedAt": "2026-10-12T00:46:51.998676431Z",
+      "writableBytes": 1957888
+    },
+    {
+      "id": "9c51d5d7d7a668104a14400a81be06aa758991a9ca2299a2c640ddec54e4a64d",
+      "name": "/avtocena-runtime-20261012-failed-1791766297",
+      "imageId": "sha256:73181d873ae5ea890f3d98e15a323614a7d3f442a97c1eb757974c2aafc8fc8d",
+      "revision": "dd63dc40f51ee97d33c12a86654ad60d3714053f",
+      "role": "production",
+      "fingerprint": "6cbeb778e5ab8b58f5d20f321fc7bdeed9e5513a64e6eb450ab0eb1179e58172",
+      "created": "2026-10-12T00:49:25.73460109Z",
+      "finishedAt": "2026-10-12T00:50:00.840332992Z",
+      "writableBytes": 2117632
+    },
+    {
+      "id": "c3fe3f09e7065897c82fcd232f4551aaae525d977928b7a75214209b4973dfbc",
+      "name": "/avtocena-speed-rejected-3048-43020674047",
+      "imageId": "sha256:e084bb738abaf12042cd220bb48f699a6e101316d0b223a5725d74436fb62c85",
+      "revision": "3048aede91dbfa4287e038075700e1434ba53e85",
+      "role": "production",
+      "fingerprint": "f871aec8024deffb2ce7b0ee428dfb18a61c3c4c1b8d3944d1833d0f1b7d5f49",
+      "created": "2026-11-11T12:00:07.427893115Z",
+      "finishedAt": "2026-11-11T12:32:02.252686456Z",
+      "writableBytes": 113311744
+    },
+    {
+      "id": "f17db977935e2e918fd19474feaee3e0d02d420989c9ae6689d592b994d12020",
+      "name": "/avtocena-staging",
+      "imageId": "sha256:73181d873ae5ea890f3d98e15a323614a7d3f442a97c1eb757974c2aafc8fc8d",
+      "revision": "dd63dc40f51ee97d33c12a86654ad60d3714053f",
+      "role": "isolated-staging",
+      "fingerprint": "4ffd9478c0346a76dc262bf6f14271c33f8b1f943b41cee8d8e6c59b07267302",
+      "created": "2026-10-11T14:14:14.288182482Z",
+      "finishedAt": "2026-10-11T15:14:36.575417981Z",
+      "writableBytes": 2019328
+    }
+  ],
+  "images": [
+    {
+      "id": "sha256:73181d873ae5ea890f3d98e15a323614a7d3f442a97c1eb757974c2aafc8fc8d",
+      "revision": "dd63dc40f51ee97d33c12a86654ad60d3714053f",
+      "created": "2026-10-11T14:12:40.182702305Z",
+      "fingerprint": "cfdcae73f3cd3395ad7f2476b3089803db91d669c734fe871dbfea851c6e4e3b",
+      "repoTags": [
+        "avtocena-regcloud:dd63dc40f51ee97d33c12a86654ad60d3714053f"
+      ],
+      "repoDigests": [
+        "avtocena-regcloud@sha256:73181d873ae5ea890f3d98e15a323614a7d3f442a97c1eb757974c2aafc8fc8d"
+      ],
+      "parent": null,
+      "referenceIds": [
+        "540557802d1a0d7f75c598e8815cb2364cd94a457379eba61638a46d03586af8",
+        "66008b8b31ba8e570041c3088864de413cd614fd6b37973c23585869a0f29f07",
+        "9c51d5d7d7a668104a14400a81be06aa758991a9ca2299a2c640ddec54e4a64d",
+        "f17db977935e2e918fd19474feaee3e0d02d420989c9ae6689d592b994d12020"
+      ]
+    },
+    {
+      "id": "sha256:8ce3e4fe56f6bbce6d002890120de4111e6bb3a45bd8b427f0b7b645c9baf00d",
+      "revision": "5a9f9c2c3ac3abff0cc9edb226cd83ad951f0f79",
+      "created": "2026-10-19T05:49:39.624095079Z",
+      "fingerprint": "ba1078c03c0b405899c625201d5ca31421dea6904069dffbd1fa42b7aec0f0fb",
+      "repoTags": [],
+      "repoDigests": [],
+      "parent": null,
+      "referenceIds": []
+    },
+    {
+      "id": "sha256:86994ffb4ff55c1788bd18f3f3e426106db8ccc6352ddf17e80ff1fba4a98c34",
+      "revision": "24689523a2660fc0b2f8a89021d9efdfaf7be297",
+      "created": "2026-10-21T01:35:31.374934532Z",
+      "fingerprint": "cc6f16891e537d08796cb6d1fc4e81ef49c5e94efb318b61ccaebe910c2c1a54",
+      "repoTags": [],
+      "repoDigests": [],
+      "parent": null,
+      "referenceIds": []
+    },
+    {
+      "id": "sha256:9f87837741443a519693fa084acdd1ee088e5ed039e2898f6f0bd7f877972372",
+      "revision": "da7f1807f1429400eb0e2539bd0e2243b60a785f",
+      "created": "2026-10-30T02:50:23.294443493Z",
+      "fingerprint": "d25672bfc8337dee26eb26f8f477fd01ce31e52185427536e56df35ed32a1298",
+      "repoTags": [],
+      "repoDigests": [],
+      "parent": null,
+      "referenceIds": []
+    },
+    {
+      "id": "sha256:7193fc9569a5ff95760a93a005f2ba8a84adb64874c6812f29de8a3f069bf6b6",
+      "revision": "a5f9a645835ae636ab99dd1a7b1073ba24d851b4",
+      "created": "2026-11-07T11:30:11.701925238Z",
+      "fingerprint": "0c30a2d26f5350957873a41cd6eea6aa479d347978ab6a196729696b0d0ab420",
+      "repoTags": [
+        "avtocena-regcloud:a5f9a645835ae636ab99dd1a7b1073ba24d851b4"
+      ],
+      "repoDigests": [
+        "avtocena-regcloud@sha256:7193fc9569a5ff95760a93a005f2ba8a84adb64874c6812f29de8a3f069bf6b6"
+      ],
+      "parent": null,
+      "referenceIds": [
+        "764b0b9681c5f38e0d66e6fd8dd794651ff7ec9085513c70026aa647da4e75be"
+      ]
+    },
+    {
+      "id": "sha256:e084bb738abaf12042cd220bb48f699a6e101316d0b223a5725d74436fb62c85",
+      "revision": "3048aede91dbfa4287e038075700e1434ba53e85",
+      "created": "2026-11-11T11:00:16.539546937Z",
+      "fingerprint": "2d52df240e49d77272140ea1682735e78cdf519eff7cf0e2f03cd48a9364f6c1",
+      "repoTags": [
+        "avtocena-regcloud:3048aede91dbfa4287e038075700e1434ba53e85"
+      ],
+      "repoDigests": [
+        "avtocena-regcloud@sha256:e084bb738abaf12042cd220bb48f699a6e101316d0b223a5725d74436fb62c85"
+      ],
+      "parent": null,
+      "referenceIds": [
+        "c3fe3f09e7065897c82fcd232f4551aaae525d977928b7a75214209b4973dfbc"
+      ]
+    },
+    {
+      "id": "sha256:8351b6ab2ef73dab1ba4c75a3f8fe77f208fcc8aa4a5115caa7ffe2f35bd9378",
+      "revision": "8731103c0102886064c6a0a19a14182502e6e3be",
+      "created": "2026-11-11T16:28:28.258662626Z",
+      "fingerprint": "273b5952c6e041a11b18771d722e64e232a1259a6491e632552321a4073166c1",
+      "repoTags": [],
+      "repoDigests": [],
+      "parent": null,
+      "referenceIds": []
+    },
+    {
+      "id": "sha256:bdf4d5a3c207945453f4b2c4ad828b5aea858672de0c9052d47e29bf2197edae",
+      "revision": "794654a00aa4990b284858f1f01c07ed3f020df4",
+      "created": "2026-11-11T20:07:08.462387593Z",
+      "fingerprint": "a75b830abc38337d5b819e1292885e07ef3c9a1f24881f623a542926f2b0d563",
+      "repoTags": [],
+      "repoDigests": [],
+      "parent": null,
+      "referenceIds": []
+    },
+    {
+      "id": "sha256:db9db9d8630343b722a1b9625cc9b18058a6d6f3c4d9b9a239001a3c6e40bc49",
+      "revision": "57b8223e0a1648a9092cf0a31151c27ccfb5e4dd",
+      "created": "2026-11-12T14:53:27.541955628Z",
+      "fingerprint": "c0d9116fe62913417a72aa5fb9536e7775d2b26c717a220b85588fe49954d6bd",
+      "repoTags": [],
+      "repoDigests": [],
+      "parent": null,
+      "referenceIds": []
+    },
+    {
+      "id": "sha256:04a0e4ab49162be012780d304269430fcd7004e9a2feeda56fcabc3b32ffe7b0",
+      "revision": "52f7375262926f76d719f37945a9c0668d11fe06",
+      "created": "2026-11-13T10:43:09.574570275Z",
+      "fingerprint": "73ca649885a5a247a4ad3e96dd40f085385d6cae6ec882821af374f229f19144",
+      "repoTags": [],
+      "repoDigests": [],
+      "parent": null,
+      "referenceIds": []
+    },
+    {
+      "id": "sha256:98b16b1fbbc9457bfbcefde6ebcd7234b6a76c6b0a69c8d70548eff48e6305f9",
+      "revision": "7283a389ce61a3759d1c9eaad103c5f3ea1a3edc",
+      "created": "2026-11-14T06:50:29.034077574Z",
+      "fingerprint": "2f0b10093a786a8e05b1e2dd29520a7c38b5636f02f5d6eb16aea1d666794ef3",
+      "repoTags": [],
+      "repoDigests": [],
+      "parent": null,
+      "referenceIds": []
+    },
+    {
+      "id": "sha256:a60befae2ca422040c025c02f3298f9eb5f17ef1acef112b4d4bfe001b7d41d6",
+      "revision": "c99f089bc4269104787308198d5968132aa710ac",
+      "created": "2026-11-14T18:50:51.434605942Z",
+      "fingerprint": "41808e6952c82ae40a3908bd3f6b24e27cce606562eb23ee0d88a89801d1b2a5",
+      "repoTags": [],
+      "repoDigests": [],
+      "parent": null,
+      "referenceIds": []
+    },
+    {
+      "id": "sha256:aeb5bea53d97721fb6d7283765863eaf8893836f8ccfaaa4aa2abbe6d7705718",
+      "revision": "c99f089bc4269104787308198d5968132aa710ac",
+      "created": "2026-11-14T19:55:18.281594079Z",
+      "fingerprint": "915d1109f036fff210fcea5195eb9b59950826e61c6dff2117f0d2369800d73e",
+      "repoTags": [],
+      "repoDigests": [],
+      "parent": null,
+      "referenceIds": []
+    },
+    {
+      "id": "sha256:798366590b9882ef063e1a18b78f65dcee92428914a1027c6361d55e5b1d3bd9",
+      "revision": "c99f089bc4269104787308198d5968132aa710ac",
+      "created": "2026-11-14T20:51:48.186008466Z",
+      "fingerprint": "33d6b895f777c94c240ff62cadf8008b9a284b0054e27e7906ecbbfa9c695c0e",
+      "repoTags": [],
+      "repoDigests": [],
+      "parent": null,
+      "referenceIds": []
+    },
+    {
+      "id": "sha256:bc2ed2b27a1a3448678af0a8340d837e8757785f78a6a49f037853b38f522981",
+      "revision": "c99f089bc4269104787308198d5968132aa710ac",
+      "created": "2026-11-15T01:37:19.979679262Z",
+      "fingerprint": "1b9469df6f94c01abd51e4b146c37bd6c0b2c9a55909164a2b522de0f2e8ba9a",
+      "repoTags": [],
+      "repoDigests": [],
+      "parent": null,
+      "referenceIds": []
+    },
+    {
+      "id": "sha256:acb612b3d2a99e9ec7e5d0b0d6b28af43c0d1872b3623afdb9b6674b27f4a9e6",
+      "revision": "c99f089bc4269104787308198d5968132aa710ac",
+      "created": "2026-11-15T02:00:25.473450501Z",
+      "fingerprint": "051f15725994fc850d1e5becc11d527d9f10c96ade457370bcb26b981ade35a5",
+      "repoTags": [],
+      "repoDigests": [],
+      "parent": null,
+      "referenceIds": []
+    },
+    {
+      "id": "sha256:fc248eb393edfec3a5b37376b5fe51ea335fb8078ebe522df606b3777da9fb04",
+      "revision": "b5ad05ee8ad042e4ff7b911a1990fbcd8b703b30",
+      "created": "2026-11-15T06:30:16.438664751Z",
+      "fingerprint": "d4fc714a0ee10b8eaf2b0514a914cbc44039b20ee9bfa54ba4cfc04afcaf345e",
+      "repoTags": [],
+      "repoDigests": [],
+      "parent": null,
+      "referenceIds": []
+    },
+    {
+      "id": "sha256:c714b84a5b3f5f533726a364aa63836cea9f5335238503f94f89847a74e36b0c",
+      "revision": "b5ad05ee8ad042e4ff7b911a1990fbcd8b703b30",
+      "created": "2026-11-15T07:20:47.118679832Z",
+      "fingerprint": "afb123af3f929ff3b0c09a40df518ffd332ba4a8893c53d6b30b081d5563bfd4",
+      "repoTags": [
+        "avtocena-regcloud:b5ad05ee8ad042e4ff7b911a1990fbcd8b703b30"
+      ],
+      "repoDigests": [
+        "avtocena-regcloud@sha256:c714b84a5b3f5f533726a364aa63836cea9f5335238503f94f89847a74e36b0c"
+      ],
+      "parent": null,
+      "referenceIds": [
+        "f9c0cbfd090ae61f946c2064ca8ccfff053a97f8d51fadb1fdd83581938f3b50"
+      ]
+    },
+    {
+      "id": "sha256:d909519d647357acae8f5347ed696e503031e706b564a5b808b27d75738d3e89",
+      "revision": "f9cce4a86f3659b266000e194458f545254728ea",
+      "created": "2026-11-15T08:14:12.249291131Z",
+      "fingerprint": "af5a41cbb02fd76efc283da67d0f93f4acb958b0d3e006b1f6f2093b9b1adf70",
+      "repoTags": [
+        "avtocena-regcloud:f9cce4a86f3659b266000e194458f545254728ea"
+      ],
+      "repoDigests": [
+        "avtocena-regcloud@sha256:d909519d647357acae8f5347ed696e503031e706b564a5b808b27d75738d3e89"
+      ],
+      "parent": null,
+      "referenceIds": [
+        "6c0f7b7215e187f3fd7f232ef77548873927c384a875a0066ea75f71591a8175"
+      ]
+    },
+    {
+      "id": "sha256:c99d9700593caeacf2bdbf062b801c37072c761bf9b204b3c0eb8cfb6f8cd497",
+      "revision": "6689e9c4bfd77a512a8eb84f0d960cb36f6c3b8e",
+      "created": "2026-11-15T09:12:42.918711914Z",
+      "fingerprint": "69e89bcec8cc2639b28ee120d358332e97f063b68a6773b987511c30ac342296",
+      "repoTags": [
+        "avtocena-regcloud:6689e9c4bfd77a512a8eb84f0d960cb36f6c3b8e"
+      ],
+      "repoDigests": [
+        "avtocena-regcloud@sha256:c99d9700593caeacf2bdbf062b801c37072c761bf9b204b3c0eb8cfb6f8cd497"
+      ],
+      "parent": null,
+      "referenceIds": [
+        "9485e49a381bf1474dd3f5793b417d3047eff206f75c67ceb4a36dd946f2cf16"
+      ]
+    }
+  ],
+  "allContainerFingerprints": {
+    "f664adabeed0686ab2feb491fc73495b54420f86c857acc987ec9fed8d2ec01f": "4618e92920a9beb8028d72f33dd7c8ed462300b246401e0aee3e467c8fc7e596",
+    "9bba3f06c0684c7eaba7b15e73fa19b9e71cefd538f08e264792e70a280bc430": "e575df43734df7bccaa2c71311127ad236f533852b033925d15184c688cc809e",
+    "c083829568964b058e1a90ea517ceb10df44f6a937a98ee6700d7b5b5976afcf": "5f629d904fcb025261567f71333d3bc7071cf18402dd7cfba15722bb498e66ab",
+    "540557802d1a0d7f75c598e8815cb2364cd94a457379eba61638a46d03586af8": "2efac9727e5e792d9eb4c405afc5cde29fdf38f71a5b737eb9d597db66058ba9",
+    "21d2c808c25bad327a6d8ac13891d878aeb67fadce52350dcc6f1433e3f6ca78": "37e51b21348f40e128f31597a93260f9bc224852ea02b61b2099fe69b0db3daf",
+    "6c4287f78e8db46bdf80706b1e712b2ccbc2e3040d48e69090c2efe775e2b089": "8fd5a05bae9097a898bda8e68c074cd452ae7b5b9211c19de6b435e492e818f1",
+    "9485e49a381bf1474dd3f5793b417d3047eff206f75c67ceb4a36dd946f2cf16": "6b9a9f9cbde16b45b6eaf2f10da80a86b184e48ca0db60f918f68bedd56cbebb",
+    "9168e3bf01e5b09866541718ab8522ee2dffc0eeecd36c51c55877a862b32871": "211f4b1f80401dad3c0dc4ba7c1a27b1a2e3a132448a25b13a8c8042a4bb36df",
+    "a61bd91a853158ed9a03eac482045b456c6d28edf3328dabdc5adb1be6aafb39": "8fbd27de2788a8869af78356f579e1b3a8062a940deb0181b341972754c24120",
+    "a126460e026d73b06150c23a78c871a472563ce874d44cf22bc743872d9cde3f": "0f4a672d5357b47a84a9e7d915bbbf71366023f524ae076aa950a312c26dc107",
+    "b79f7989f96290a854dd3b1f28f3187a3b761b3db26ade989085b32aee7f1201": "955337ac8df9884f8de4dd08d3ae36b18506978cd05e82a89c63f05057ae1241",
+    "fa3903352b8d626484ff402211a422fdbc582267fb36bd0859940d5e7ad51f7e": "b4dcb9fa044f902408ac0deb8cf7e6ddcaaff447dfeedd51d009d0ce219e2fed",
+    "c07ed22f77e9467958ef3a95b456731e8dbf36a3264710105675a95d8f3579df": "bc5447e71f97ef5ea857d14fa456ddfc4d8f5f430c80ebb4c4baadbc6b32e553",
+    "f9c0cbfd090ae61f946c2064ca8ccfff053a97f8d51fadb1fdd83581938f3b50": "cf2c87cfee43d63db65664efdd4809a087d0f8e43ef73a6dee08b3ede4a2cdeb",
+    "ab2dd33e8b7330b91c3f56558c4a545504f8e21b6fabc8fcdca3ae1df73ef1cd": "bc6aea46fea76f621a554e97aff5d2068e1c3dccc962e5d3d7346c8a44b7ec0e",
+    "9c22e96f0cba041c5a64fd6d5f54bbd4b8d0537edb985e3f4b096ef814fcb7a1": "4de2abc10cbb6d25baabafb7b09446903cfac3b21c3a7545fc05c5056c8a48f5",
+    "a78792122f0c6a338e6c4688562a77737a304d3d45efcf7173ff3811aa48857b": "d447bf5a84e9f1dc7d193e8309ea079780dacd6bdcb0e9d10cdac7157573c8e0",
+    "6f06ce2f951632d251c8382205650c6ec3ee2dafa4af07b4adc19ac20e8efa4e": "db4a1a9481e2931766f320b305e877423ae88c8f296de47d53fe44ce65ebeaa2",
+    "d3f6c9af9a5cd549dfee9c49c408a5201197cefed84541319d1cfcbcf11cb14c": "d5aa062d9efe4768d4bf91c0df10a367bbfa31ace37418ae202d8614b44a3499",
+    "c63cde7396b895212ed6fe4abbee686caceea9952705758366cae235786de393": "c6bdf403816628e89124da12e2981e20878d248829f7a74697c7625623c6bed2",
+    "6c0f7b7215e187f3fd7f232ef77548873927c384a875a0066ea75f71591a8175": "5e241ebb243e24697ddbe3b6dd141fc460afdf31077d6ac480d58aafaa3ac794",
+    "764b0b9681c5f38e0d66e6fd8dd794651ff7ec9085513c70026aa647da4e75be": "36e82ce0a994a509d73c555dc2b67eee08f7e425afae2e0df2824a22a8c124ea",
+    "66008b8b31ba8e570041c3088864de413cd614fd6b37973c23585869a0f29f07": "3630be624c306a4ef9ead73d59e847cfa4c521e4d8e879cacafa2481bb770c94",
+    "9c51d5d7d7a668104a14400a81be06aa758991a9ca2299a2c640ddec54e4a64d": "6cbeb778e5ab8b58f5d20f321fc7bdeed9e5513a64e6eb450ab0eb1179e58172",
+    "c3fe3f09e7065897c82fcd232f4551aaae525d977928b7a75214209b4973dfbc": "f871aec8024deffb2ce7b0ee428dfb18a61c3c4c1b8d3944d1833d0f1b7d5f49",
+    "f17db977935e2e918fd19474feaee3e0d02d420989c9ae6689d592b994d12020": "4ffd9478c0346a76dc262bf6f14271c33f8b1f943b41cee8d8e6c59b07267302"
+  },
+  "allImageFingerprints": {
+    "sha256:04a0e4ab49162be012780d304269430fcd7004e9a2feeda56fcabc3b32ffe7b0": "73ca649885a5a247a4ad3e96dd40f085385d6cae6ec882821af374f229f19144",
+    "sha256:08c7cdc29babb0d9e9c905e067d7ce5a23fdf0314809305be1691c4f6c343a12": "b427a250a675b1cc67a1af8990a18099f2cf4dfd67c5b4b7b1af3ce5f19f76c8",
+    "sha256:181c6706069a9138414bd0aba2015839ba30feec0b43cf0e7e9889a5ae2f2ab1": "8fc831cc44ffe445a38f9de26ac3b2202d5e41b67764c652e6f5554e64871c1c",
+    "sha256:1ed16164c0aa87d0c2e48d14ea1aa5570b7e004f123d48244974546217b29f81": "8b8e023b47ddc7d57135c8063ed6634f46a57106dc44ab4118558a50ef0393df",
+    "sha256:20e8b137401228d6ec664f046094aa32306a28400dd39237765e2651e97c342e": "d4d4738640587cb491c4c332fa0a954441b05c4b6f94c92482f1b77d40d22f74",
+    "sha256:2110809abc3a3bad1589f62e8c79122f26ca61cda79b33c265fd4872040db98f": "517d988ef4486032a8b511afe1d3fdac87b6b8a3bccdd72cf6a5edfe9b5cf31e",
+    "sha256:44c596a793bb0c75f4c3e30f40a8fe6b6f6a3c9501ab0c3eb0ae38953e682885": "183a3cf60965d6fdf74917641eab620966005a90fb42bf0f3382df8d28a2c50e",
+    "sha256:4a055ba772496c7de89594acbbc1c1bc02ac2d2b20050cfad7f637d1f5646dfd": "80e0c14f4bed83ff9f688bf4f856e50158ef02fd858fdb1d61d12406c3648186",
+    "sha256:4fdc9d4e565896d7eca668b3c64499e31cb28463ddf4401507e7e8668eb476f4": "48e4658b41099a37b4bb92c9c3c0a5a941df3fcba8331a8af786862753443c2d",
+    "sha256:5d4d507918cc3be333f8c33ce73a4f0325213e43d15d459c3696c687e93cd422": "088961a72763f375c6089e406e64c27175d3bada8f82b2f253ea833b1d2fe2f1",
+    "sha256:7193fc9569a5ff95760a93a005f2ba8a84adb64874c6812f29de8a3f069bf6b6": "0c30a2d26f5350957873a41cd6eea6aa479d347978ab6a196729696b0d0ab420",
+    "sha256:73181d873ae5ea890f3d98e15a323614a7d3f442a97c1eb757974c2aafc8fc8d": "cfdcae73f3cd3395ad7f2476b3089803db91d669c734fe871dbfea851c6e4e3b",
+    "sha256:798366590b9882ef063e1a18b78f65dcee92428914a1027c6361d55e5b1d3bd9": "33d6b895f777c94c240ff62cadf8008b9a284b0054e27e7906ecbbfa9c695c0e",
+    "sha256:8351b6ab2ef73dab1ba4c75a3f8fe77f208fcc8aa4a5115caa7ffe2f35bd9378": "273b5952c6e041a11b18771d722e64e232a1259a6491e632552321a4073166c1",
+    "sha256:86994ffb4ff55c1788bd18f3f3e426106db8ccc6352ddf17e80ff1fba4a98c34": "cc6f16891e537d08796cb6d1fc4e81ef49c5e94efb318b61ccaebe910c2c1a54",
+    "sha256:8ce3e4fe56f6bbce6d002890120de4111e6bb3a45bd8b427f0b7b645c9baf00d": "ba1078c03c0b405899c625201d5ca31421dea6904069dffbd1fa42b7aec0f0fb",
+    "sha256:93ed4336bd73431ab98e261c078dd3d62d5e5a802940eefa2e055eb7fad55aac": "f9c673d2d2c5917a7fd63660c5069733d0671d848fce2d4ec39e78649edf157f",
+    "sha256:98b16b1fbbc9457bfbcefde6ebcd7234b6a76c6b0a69c8d70548eff48e6305f9": "2f0b10093a786a8e05b1e2dd29520a7c38b5636f02f5d6eb16aea1d666794ef3",
+    "sha256:9f87837741443a519693fa084acdd1ee088e5ed039e2898f6f0bd7f877972372": "d25672bfc8337dee26eb26f8f477fd01ce31e52185427536e56df35ed32a1298",
+    "sha256:a60befae2ca422040c025c02f3298f9eb5f17ef1acef112b4d4bfe001b7d41d6": "41808e6952c82ae40a3908bd3f6b24e27cce606562eb23ee0d88a89801d1b2a5",
+    "sha256:acb612b3d2a99e9ec7e5d0b0d6b28af43c0d1872b3623afdb9b6674b27f4a9e6": "051f15725994fc850d1e5becc11d527d9f10c96ade457370bcb26b981ade35a5",
+    "sha256:aeb5bea53d97721fb6d7283765863eaf8893836f8ccfaaa4aa2abbe6d7705718": "915d1109f036fff210fcea5195eb9b59950826e61c6dff2117f0d2369800d73e",
+    "sha256:bc2ed2b27a1a3448678af0a8340d837e8757785f78a6a49f037853b38f522981": "1b9469df6f94c01abd51e4b146c37bd6c0b2c9a55909164a2b522de0f2e8ba9a",
+    "sha256:bdf4d5a3c207945453f4b2c4ad828b5aea858672de0c9052d47e29bf2197edae": "a75b830abc38337d5b819e1292885e07ef3c9a1f24881f623a542926f2b0d563",
+    "sha256:c04fbe5c188d56e10ece7860509ab622b46d732b01e7a86dcec9c3db966f3bc8": "c46c841916c12baddeb02f2559cbe437c15e058d095839fc00e286dd4d87066b",
+    "sha256:c714b84a5b3f5f533726a364aa63836cea9f5335238503f94f89847a74e36b0c": "afb123af3f929ff3b0c09a40df518ffd332ba4a8893c53d6b30b081d5563bfd4",
+    "sha256:c99d9700593caeacf2bdbf062b801c37072c761bf9b204b3c0eb8cfb6f8cd497": "69e89bcec8cc2639b28ee120d358332e97f063b68a6773b987511c30ac342296",
+    "sha256:ccfe8f9fb7382dc1ae2bd711f52723e657bab65a4b49a6f9604ff952438aa444": "f125b24307a21082ff883528247a4580f3b874835fc9286226702f94e3c888b9",
+    "sha256:d909519d647357acae8f5347ed696e503031e706b564a5b808b27d75738d3e89": "af5a41cbb02fd76efc283da67d0f93f4acb958b0d3e006b1f6f2093b9b1adf70",
+    "sha256:db9db9d8630343b722a1b9625cc9b18058a6d6f3c4d9b9a239001a3c6e40bc49": "c0d9116fe62913417a72aa5fb9536e7775d2b26c717a220b85588fe49954d6bd",
+    "sha256:e084bb738abaf12042cd220bb48f699a6e101316d0b223a5725d74436fb62c85": "2d52df240e49d77272140ea1682735e78cdf519eff7cf0e2f03cd48a9364f6c1",
+    "sha256:e36c969dc5a21a1654d738a2fe76c4657cd75ad48ffeff4c87845f67035c6f6f": "1daa981f1f3061e3c27b5fa24ce79c60e56ed99a0f8ff2758f281819fa83cd4a",
+    "sha256:fc248eb393edfec3a5b37376b5fe51ea335fb8078ebe522df606b3777da9fb04": "d4fc714a0ee10b8eaf2b0514a914cbc44039b20ee9bfa54ba4cfc04afcaf345e"
+  }
+}
