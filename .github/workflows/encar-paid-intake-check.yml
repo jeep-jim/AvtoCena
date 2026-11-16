@@ -1,7 +1,5 @@
 name: Verify paid Encar inventory
 on:
-  push:
-    paths: ['.github/workflows/encar-paid-intake-check.yml']
   workflow_dispatch:
 permissions:
   contents: read
@@ -10,14 +8,27 @@ jobs:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     environment: regcloud-staging
+    env:
+      JSON_STORAGE_DRIVER: object
+      YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+      YC_OBJECT_STORAGE_REGION: us-east-1
+      YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+      YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+      YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+      YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
     steps:
       - uses: actions/checkout@v4
+      - run: npm ci
       - name: Verify inventory and inspect field names
         env:
           ACCOUNT_KEY: ${{ secrets.AUTO_API_DUBICARS_KEY || secrets.AUTO_API_CHE168_KEY }}
         run: |
-          node --input-type=module <<'JS'
+          node --import tsx --input-type=module <<'JS'
           import {autoApiChe168Client} from './scripts/lib/auto-api-che168-client.mjs';
+          import {getJsonStorage} from './apps/web/lib/data.ts';
+          import {assertLegacyRawWriterDisabled} from './apps/web/lib/catalog/raw-coordination-gate.mjs';
+          try {await assertLegacyRawWriterDisabled(getJsonStorage());}
+          catch {throw Error('legacy_encar_collection_blocked_use_catalog_refresh_korea');}
           const request=autoApiChe168Client({platform:'encar',apiKey:process.env.ACCOUNT_KEY});
           const page=await request('offers',{page:1});
           const rows=[page,page.data,page.offers,page.result,page.data?.offers].find(Array.isArray);
@@ -27,30 +38,31 @@ jobs:
       - name: Collect purchased Encar snapshot
         env:
           ACCOUNT_KEY: ${{ secrets.AUTO_API_DUBICARS_KEY || secrets.AUTO_API_CHE168_KEY }}
-          JSON_STORAGE_DRIVER: object
-          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
-          YC_OBJECT_STORAGE_REGION: us-east-1
-          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
-          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
-          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
-          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
         run: |
-          npm ci
           node --import tsx --input-type=module <<'JS'
           import {autoApiChe168Client,autoApiPage} from './scripts/lib/auto-api-che168-client.mjs';
           import {getJsonStorage} from './apps/web/lib/data.ts';
-          const request=autoApiChe168Client({platform:'encar',apiKey:process.env.ACCOUNT_KEY,requestDelayMs:200});
+          import {assertLegacyRawWriterDisabled} from './apps/web/lib/catalog/raw-coordination-gate.mjs';
           const storage=getJsonStorage();
+          async function requireLegacyStorage() {
+            try {await assertLegacyRawWriterDisabled(storage);}
+            catch {throw Error('legacy_encar_collection_blocked_use_catalog_refresh_korea');}
+          }
+          await requireLegacyStorage();
+          const request=autoApiChe168Client({platform:'encar',apiKey:process.env.ACCOUNT_KEY,requestDelayMs:200});
           const prefix='catalog/intake-staging/encar/'+process.env.GITHUB_RUN_ID+'/'+process.env.GITHUB_RUN_ATTEMPT;
           let page=1,count=0,pages=0;
           while(page!==null){
+            await requireLegacyStorage();
             const {items,next}=autoApiPage(await request('offers',{page}),page);
             if(items.some(row=>!row.inner_id||!row.data))throw Error('Invalid offer');
+            await requireLegacyStorage();
             await storage.writeJson(prefix+'/pages/'+page+'.json',items);
             count+=items.length;pages++;page=next;
             if(pages%100===0)console.log({pages,count});
           }
           if(!count)throw Error('Empty inventory');
+          await requireLegacyStorage();
           await storage.writeJson(prefix+'/complete.json',{pages,count,completedAt:new Date().toISOString()});
           console.log({pages,count});
           JS

@@ -13,6 +13,7 @@ import {autoApiChe168Client,collectAutoApiChe168} from './lib/auto-api-che168-cl
 import {snapshotBinding,readChe168Snapshot} from './lib/che168-snapshot.mjs';
 import {consumeChe168Csv} from './lib/che168-csv-stream.mjs';
 import {saveChe168Replica,restoreChe168Replica} from './lib/che168-replica.mjs';
+import {prepareChe168ReplicaInputWitness} from './lib/che168-replica-witness.mjs';
 import {openChe168ReplayJournal} from './lib/che168-replay-journal.mjs';
 import {observationShardWriter} from './lib/catalog-intake-checkpoint.mjs';
 import {openRawFeedPin,rawProducerOwner,readRawRootHandoff} from './lib/catalog-raw-provenance.mjs';
@@ -169,6 +170,11 @@ try {
   const archiveHandoff=archiveReceipt?await readRawRootHandoff(storage,snapshotRoot,archiveReceipt):null;
   report.rawStoragePins=[await rawPin.handoff(),...(archiveHandoff?[archiveHandoff]:[])];
   Object.assign(report,{completed:true,completedAt:completed.completedAt});await checkpoint();
+  // The current replica and full emitted rows already exist; prove their
+  // independent materialization before the ordinary immutable intake archive.
+  // Unavailable proof preserves the feed and its existing ancestral refs.
+  Object.assign(report,await prepareChe168ReplicaInputWitness({storage,directory:path.resolve(directory),config,owner}));
+  await checkpoint();
   console.log(JSON.stringify({completed:true,mode:resume?'local_replica_and_changes':'csv_and_changes',offers:count,changes:totalChanges,cursor:completed.cursor,replicaSaved:true}));
 }catch(error){
   report.failure=/^auto_api_[a-z0-9_]+$/.test(error?.message)?error.message:'auto_api_bulk_collection_failed';await checkpoint();throw Error(report.failure);

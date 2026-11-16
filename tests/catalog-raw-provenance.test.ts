@@ -308,6 +308,27 @@ test('expired loading pins and still-current cursor replicas remain protected', 
   fixture.cursorInventory.references = [{kind: 'che168-replica', root: replicaRoot(5), sha256: rawDigest(replicaReceipt(5))}];
   assert.deepEqual(planRawFeedRetention(fixture).summary.selectedGroups, [replicaRoot(4), replicaRoot(3)]);
 });
+test('every Encar report remains protected after unreference regardless of age or terminal producer state', () => {
+  const fixture=retentionFixture(),reportRoots=[];
+  for(let index=0;index<4;index++) {
+    const at=now-(100+index)*day,root=RAW_PREFIXES['encar-reports']+at;reportRoots.push(root);
+    fixture.inventory.receipts[root]={version:1,provider:'auto_api_encar',observedAtMs:at,observedAt:new Date(at).toISOString(),
+      bucketPrefixLength:2,sourceRunId:'43800000001',sourceRunAttempt:'2',rowCount:1,
+      history:{aa:{count:1,sha256:sha(1)}},inspection:{aa:{count:1,sha256:sha(2)}}};
+    for(const leaf of ['complete.json','history/aa.json','inspection/aa.json'])fixture.inventory.objects.push({key:root+'/'+leaf,size:100,
+      lastModified:new Date(at).toISOString()});
+  }
+  const pin=oldPin(replicaRoot(6),'abandoned');pin.references=[{kind:'encar-reports',root:reportRoots[3]}];
+  fixture.pinInventory.pins=[pin];
+  const planned=planRawFeedRetention(fixture);
+  for(const root of reportRoots) {
+    assert.ok(planned.summary.protectedRoots.includes(root));
+    assert.ok(!planned.summary.selectedGroups.includes(root));
+    assert.ok(planned.summary.readerProtected.some(row=>row.root===root&&row.status==='protected_unknown'
+      &&row.reason==='vm_report_reader_unfenced'));
+  }
+  assert.deepEqual(planned.summary.selectedGroups,[replicaRoot(6),replicaRoot(5)]);
+});
 
 test('missing provenance, incomplete listing or unknown producer coverage cannot make a deletion plan', () => {
   for (const mode of ['protocol', 'inventory', 'pins', 'cursors', 'provenance', 'missing_root', 'changed_receipt']) {

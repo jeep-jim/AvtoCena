@@ -2,6 +2,8 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import {DatabaseSync} from 'node:sqlite';
 import {readCheckpointJsonl} from './read-checkpoint-jsonl.mjs';
+import {verifiedPaidInputReport} from './catalog-paid-encar-contributions.mjs';
+import {verifiedChe168InputReport} from './catalog-che168-contributions.mjs';
 
 // Revisions and deduplication live on disk, not in a full-market JS Map.
 export async function convertMarketOnDisk({market,directory,files,out,report}) {
@@ -21,6 +23,11 @@ export async function convertMarketOnDisk({market,directory,files,out,report}) {
       }
     }
     db.exec('COMMIT');
+    if (report?.paidInputWitness || report?.sourceInputWitness) {
+      function* uniqueRows() {for (const row of db.prepare('SELECT payload FROM offers ORDER BY seq').iterate()) yield JSON.parse(String(row.payload));}
+      if(report.paidInputWitness)report=verifiedPaidInputReport(report,uniqueRows());
+      if(report.sourceInputWitness)report=verifiedChe168InputReport(report,uniqueRows());
+    }
     let batch=[],bytes=0,part=0;
     async function flush() {
       const name=`catalog-rebuild-${market}-${String(++part).padStart(4,'0')}.json`;

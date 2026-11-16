@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import {RAW_PREFIXES,rawDigest,rawGenerationKey,buildRawGenerationProvenance} from '../scripts/lib/catalog-raw-provenance.mjs';
 import {RAW_COORDINATION_KEY,RAW_COORDINATED_WRITERS,RAW_COORDINATED_POINTERS,rawCatalogDescriptor,
-  rawPointerDescriptor,createRawCoordination,transitionRawCoordination} from '../scripts/lib/catalog-raw-coordination.mjs';
+  rawPointerDescriptor,rawGcPlan,createRawCoordination,transitionRawCoordination} from '../scripts/lib/catalog-raw-coordination.mjs';
 import {RAW_GC_TARGET,RAW_GC_POLICY_KEY,readRawGcAuthority,inventoryRawGcRoots,prepareRawGcPlan,
   executeRawGcPlan,runRawGc} from '../scripts/lib/catalog-raw-gc.mjs';
 import {RAW_INTERNAL_MANIFEST_KEY,RAW_INTERNAL_COORDINATION_ID,rawInternalProvenanceKey,
@@ -157,6 +157,28 @@ test('default runner is read-only and retains the two newest complete groups',as
   assert.deepEqual(result.evidence.plan.groups.map(row=>row.root),[root(1)]);
   assert.equal(result.selectedObjects,3);assert.equal(result.storageWrites,0);assert.equal(result.deleteRequests,0);
   assert.equal(writes(value.io).length,0);assert.equal(deletes(value.io).length,0);
+});
+test('report groups remain protected without even listing while the VM reader has no durable claim',async()=>{
+  const value=fixture(),reportRoot='catalog/paid-encar-reports/v1/1000000000000';
+  const result=await inventoryRawGcRoots({...value,roots:[reportRoot]});
+  assert.equal(result.status,'protected_unknown');assert.equal(result.reason,'vm_report_reader_unfenced');
+  assert.equal(value.io.calls.length,0);
+});
+test('an old armed report deletion plan is refused before authority reads, claims, or audit writes',async()=>{
+  const value=await ready(),reportRoot='catalog/paid-encar-reports/v1/1000000000000';
+  const old=value.evidence.inventory[0],leaves=['complete.json','history/aa.json','inspection/aa.json'];
+  const objects=old.objects.map((row,index)=>({...row,key:reportRoot+'/'+leaves[index]}));
+  const group={...old,kind:'encar-reports',root:reportRoot,receiptKey:reportRoot+'/complete.json',objects,
+    receiptEtag:objects[0].etag,inventorySha256:rawDigest(rowsOnly(objects))};
+  const planned=rawGcPlan([{...value.evidence.plan.groups[0],kind:group.kind,root:group.root,objects:rowsOnly(objects)}]);
+  const {sha256,...body}=value.evidence;
+  const changed={...body,plan:planned.plan,planSha256:planned.sha256,planKey:planned.key,inventory:[group]};
+  value.evidence={...changed,sha256:rawDigest(changed)};
+  value.arm={...value.arm,evidenceSha256:value.evidence.sha256,planSha256:planned.sha256};
+  value.io.calls=[];
+  const result=await executeRawGcPlan(value);
+  assert.equal(result.status,'protected_unknown');assert.equal(result.reason,'vm_report_reader_unfenced');
+  assert.equal(result.storageWrites,0);assert.equal(result.deleteRequests,0);assert.equal(value.io.calls.length,0);
 });
 test('bounded root inventory cannot substitute for a complete retention inventory',async()=>{
   const value=fixture();delete value.retentionInputs;

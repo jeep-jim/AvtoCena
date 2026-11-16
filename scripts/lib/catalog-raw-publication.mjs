@@ -1,9 +1,10 @@
 import assert from 'node:assert/strict';
 import {rawDigest, rawGenerationKey, intakeRawReferences, assertRawGenerationProvenance,
   RAW_TRACKED_MARKETS, rawReferences, collectPaidReportReferences, stageRawGenerationProvenance,
-  assertRawHandoff, releaseRawHandoff} from './catalog-raw-provenance.mjs';
+  assertRawHandoff, releaseRawHandoff, rawContributionReferences} from './catalog-raw-provenance.mjs';
 import {readIntakeArchiveManifest} from './nonjp-intake-archive.mjs';
 import {reserveRawPublication, verifyRawPublicationSession, reconcileRawPublication, recordRawPublicationWritesSettled} from './catalog-raw-session.mjs';
+import {verifyIndependentPublicContribution} from './catalog-source-contribution-authority.mjs';
 
 export const rawPublicationSessionKey = generationId => {
   rawGenerationKey(generationId);
@@ -63,11 +64,14 @@ function retainSourceDependencies(previous, next) {
   return {complete: previous.complete === true && next.complete === true,
     producers: [...new Map([...previous.producers, ...next.producers].map(row => [rawDigest(row), row])).values()],
     references: rawReferences([...previous.references, ...next.references]),
-    unknownSources: [...new Set([...previous.unknownSources, ...next.unknownSources])]};
+    unknownSources: [...new Set([...previous.unknownSources, ...next.unknownSources])],
+    ...((previous.contributionReferences?.length || next.contributionReferences?.length)
+      ? {contributionReferences: rawContributionReferences([...(previous.contributionReferences || []), ...(next.contributionReferences || [])])} : {})};
 }
 
 /** Called by the existing publisher while its import lease is held, before aliases. */
-export async function prepareRawPublication({storage, manifest, expectedBaseGenerationId, market, intake, clock = Date.now, owner, operationId}) {
+export async function prepareRawPublication({storage, manifest, expectedBaseGenerationId, market, intake, contributions = null,
+  clock = Date.now, owner, operationId}) {
   const baseline = await storage.readJson('catalog/manifest.json', null);
   assert.equal(baseline?.generationId || 'empty', expectedBaseGenerationId, 'raw_publication_base_changed');
   const prior = expectedBaseGenerationId === 'empty' ? null : await storage.readJson(rawGenerationKey(expectedBaseGenerationId), null);
@@ -78,15 +82,23 @@ export async function prepareRawPublication({storage, manifest, expectedBaseGene
   }
   // The normal publisher merges fresh and retained fields/rows. A new archive
   // alone cannot erase the origin of borrowed data or make historic unknowns
-  // complete. A future proven replacement/compaction may retire dependencies.
+  // complete. Only an independently verified full public+internal replacement
+  // may retire this target market's old contribution roots.
   if (baseline?.markets?.[market]?.count > 0 && !marketSources[market]) marketSources[market] = {
     complete: false, producers: [], references: [], unknownSources: ['historic_provenance_missing'],
   };
   if (RAW_TRACKED_MARKETS.includes(market) && intake) {
     assert.equal(intake.market, market, 'raw_publication_intake_market');
     if (intake.durableIntakeArchive) await readIntakeArchiveManifest({storage, receipt: intake.durableIntakeArchive});
-    if (intake.completed === true || intake.durableIntakeArchive) marketSources[market] = retainSourceDependencies(
-      baseline?.markets?.[market]?.count > 0 ? marketSources[market] : null, intakeRawReferences(intake));
+    if (intake.completed === true || intake.durableIntakeArchive) {
+      const next = intakeRawReferences(intake);
+      if (contributions) {
+        const verified = await verifyIndependentPublicContribution({contributions, manifest, intake, market});
+        marketSources[market] = {...next, references: rawReferences([...next.references, ...verified.proof.references]),
+          contributionReferences: [verified.reference]};
+      } else marketSources[market] = retainSourceDependencies(
+        baseline?.markets?.[market]?.count > 0 ? marketSources[market] : null, next);
+    }
   }
   const handoffs = intake?.rawStoragePins || [];
   assert.ok(Array.isArray(handoffs) && handoffs.length <= 64, 'raw_publication_pin_limit');
@@ -113,6 +125,7 @@ export async function prepareRawPublication({storage, manifest, expectedBaseGene
     async verify() {
       assert.equal(rawDigest(await storage.readJson('catalog/manifest.json', null)), rawDigest(baseline), 'raw_publication_base_changed');
       await verifyProvenance();
+      if (contributions) await verifyIndependentPublicContribution({contributions, manifest, intake, market});
       if (intake?.durableIntakeArchive) await readIntakeArchiveManifest({storage, receipt: intake.durableIntakeArchive});
       await verifyRawPublicationSession({storage, binding, manifest, expectedBaseGenerationId});
       if (receipt) assert.equal(rawDigest(await storage.readJson(rawPublicationSessionKey(manifest.generationId), null)), rawDigest(receipt), 'raw_publication_session_changed');

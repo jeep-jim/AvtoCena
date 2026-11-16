@@ -1,0 +1,42 @@
+name: Verify saved raw storage without writes
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/catalog-raw-storage-readonly-check.yml']
+permissions:
+  contents: read
+concurrency:
+  group: catalog-raw-storage-readonly-check
+  cancel-in-progress: false
+jobs:
+  verify:
+    if: github.ref == 'refs/heads/main'
+    environment: regcloud-staging
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Validate the bounded read-only probe
+        run: node --check scripts/catalog-raw-storage-readonly-check.mjs
+      - name: Compare saved metadata and read the current publication lease
+        env:
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_REGION: us-east-1
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+        run: node scripts/catalog-raw-storage-readonly-check.mjs --output "$RUNNER_TEMP/raw-storage-readonly-check.json"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: raw-storage-readonly-check-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/raw-storage-readonly-check.json
+          if-no-files-found: warn
+          retention-days: 30

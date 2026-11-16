@@ -12,6 +12,7 @@ import {consumeChe168Csv} from '../scripts/lib/che168-csv-stream.mjs';
 import {collectAutoApiChe168} from '../scripts/lib/auto-api-che168-client.mjs';
 import {publishedIntakeCheckpoint} from '../scripts/lib/catalog-intake-checkpoint.mjs';
 import {normalizeAutoApiChe168} from '../apps/web/lib/catalog/auto-api-che168';
+import {che168CleanWorkerCheckout} from './helpers/che168-clean-worker.mjs';
 
 class Store {
  data=new Map<string,any>(); binary=new Map<string,Buffer>(); failManifest=false;
@@ -86,7 +87,8 @@ test('inline added data followed by price delta and removal needs no per-car req
  assert.deepEqual(requests,['changes','changes']);assert.deepEqual(events,['added','price','removed']);assert.deepEqual(progress,[23]);assert.equal(report.cursor,23);
 });
 
-test('real intake excludes over 1000 invalid rows, publishes valid rows and resumes only committed replica',async()=>{
+test('real intake excludes over 1000 invalid rows, publishes valid rows and resumes only committed replica',async(t)=>{
+ const worker=await che168CleanWorkerCheckout(t),workerSource=worker.sourceSha;
  const root=await fs.mkdtemp(path.join(os.tmpdir(),'che168-bulk-integration-')),storage=new Store();
  const invalid=Array.from({length:1101},(_,i)=>csv(i%2?'0':'2022').split('\r\n').slice(1).join('\r\n')
   .replaceAll('42',String(10000+i)).replace(i%2?'__unchanged__':'Corolla | Cross\nUnicode 北京',''));
@@ -109,7 +111,7 @@ test('real intake excludes over 1000 invalid rows, publishes valid rows and resu
  await fs.writeFile(hook,`const realFetch=globalThis.fetch;globalThis.fetch=async(input,options)=>{const u=new URL(String(input));if(u.hostname!=='api1.auto-api.com')return realFetch(input,options);if(!u.pathname.endsWith('/changes'))throw Error('unexpected_per_car_request');const cursor=Number(u.searchParams.get('change_id')),at=${JSON.stringify(at)};const event=(id,inner_id,change_type,data)=>({id,inner_id,change_type,created_at:at,data});const full=id=>({inner_id:id,url:'https://www.che168.com/dealer/1/'+id+'.html',mark:'Toyota',model:'Corolla',year:2022,price:90000});const second=process.env.SECOND==='1';const result=!second&&cursor===20?[event(20,'43','added',full('43')),event(21,'42','changed',{new_price:123}),event(22,'43','removed')]:second&&cursor===23?[event(23,'42','changed',{new_price:456}),event(24,'44','added',full('44'))]:[];return Response.json({result,meta:{cur_change_id:cursor,next_change_id:second?25:23}});};`);
  async function run(second=false){
   const directory=path.join(root,second?'second':'first');
-  const child=spawn(process.execPath,['--import','tsx','--import',hook,'scripts/catalog-auto-api-che168-bulk-intake.mjs'],{env:{...process.env,JSON_STORAGE_DRIVER:'object',YC_OBJECT_STORAGE_ENDPOINT:endpoint,YC_OBJECT_STORAGE_BUCKET:'bucket',YC_OBJECT_STORAGE_ACCESS_KEY_ID:'fixture',YC_OBJECT_STORAGE_SECRET_ACCESS_KEY:'fixture',YC_OBJECT_STORAGE_PREFIX:'',AUTO_API_CHE168_KEY:'fixture',CHE168_SNAPSHOT_CONFIG:configPath,AUTO_API_INTAKE_DIR:directory,SECOND:second?'1':'0',GITHUB_RUN_ID:'43800000001',GITHUB_RUN_ATTEMPT:second?'2':'1',GITHUB_SHA:'a'.repeat(40)},stdio:['ignore','pipe','pipe']});
+  const child=spawn(process.execPath,['--import','tsx','--import',hook,'scripts/catalog-auto-api-che168-bulk-intake.mjs'],{cwd:worker.root,env:{...process.env,JSON_STORAGE_DRIVER:'object',YC_OBJECT_STORAGE_ENDPOINT:endpoint,YC_OBJECT_STORAGE_BUCKET:'bucket',YC_OBJECT_STORAGE_ACCESS_KEY_ID:'fixture',YC_OBJECT_STORAGE_SECRET_ACCESS_KEY:'fixture',YC_OBJECT_STORAGE_PREFIX:'',AUTO_API_CHE168_KEY:'fixture',CHE168_SNAPSHOT_CONFIG:configPath,AUTO_API_INTAKE_DIR:directory,SECOND:second?'1':'0',GITHUB_RUN_ID:'43800000001',GITHUB_RUN_ATTEMPT:second?'2':'1',GITHUB_SHA:workerSource,GITHUB_REF:'refs/heads/main',GITHUB_REPOSITORY:'jeep-jim/AvtoCena'},stdio:['ignore','pipe','pipe']});
   let output='';child.stdout.on('data',b=>output+=b);child.stderr.on('data',b=>output+=b);
   assert.equal(await new Promise(resolve=>child.on('close',resolve)),0,output);
   const report=JSON.parse(await fs.readFile(path.join(directory,'report.json'),'utf8')),offers=[];
@@ -119,6 +121,10 @@ test('real intake excludes over 1000 invalid rows, publishes valid rows and resu
  try{
   const first=await run();assert.equal(first.report.completed,true);assert.equal(first.report.sources[0].quarantined,1101);assert.deepEqual(first.report.sources[0].quarantineReasons,{missing_model:551,invalid_year:550});assert.equal(first.offers.length,1);assert.equal(first.offers[0].sourcePrice,123);assert.equal(first.offers[0].sourceOfferId,'42');assert.equal(first.offers[0].year,2014);assert.equal(first.report.sources[0].yearFrom,2014);
   assert.equal(first.report.rawStoragePins[0].owner.runId,'43800000001');
+  assert.equal(first.report.sourceInputWitness?.kind,'independent_che168_replica_v1',JSON.stringify(first.report.sourceInputWitnessUnavailable));
+  assert.equal(first.report.sourceInputWitness.producer.sourceSha,workerSource);
+  assert.equal(first.report.sourceInputWitness.normalized.rows,first.offers.length);
+  assert.equal(first.report.sourceInputWitness.replicaReadback.completion.terminalResponseArchived,false);
   assert.ok(first.report.rawStoragePins[0].references.some(row=>row.root===first.report.sources[0].replica.key));
   assert.ok(first.report.sources[0].workingJournal.key.startsWith('catalog/intake-working/che168-v1/'));
   assert.equal(first.offers[0].operational.che168ActiveVerification.cursor,23);
@@ -129,5 +135,9 @@ test('real intake excludes over 1000 invalid rows, publishes valid rows and resu
   const second=await run(true);assert.equal(second.report.sources[0].pages,0);assert.equal(second.offers.length,2);
   assert.equal(second.report.sources[0].baseReplica.key,first.report.sources[0].replica.key);
   assert.equal(second.offers.find(o=>o.sourceOfferId==='42').sourcePrice,456);assert.equal(second.report.sources[0].cursor,25);
+  assert.equal(second.report.sourceInputWitness?.kind,'independent_che168_replica_v1',JSON.stringify(second.report.sourceInputWitnessUnavailable));
+  assert.equal(second.report.sourceInputWitness.snapshot.root,second.report.sources[0].replica.key);
+  const pairs=second.offers.map(offer=>[offer.id,createHash('sha256').update(JSON.stringify(offer)).digest('hex')]).sort(([a],[b])=>a<b?-1:a>b?1:0);
+  assert.equal(second.report.sourceInputWitness.normalized.rowsSha256,createHash('sha256').update(JSON.stringify(pairs)).digest('hex'));
  }finally{await new Promise<void>(resolve=>server.close(()=>resolve()));await fs.rm(root,{recursive:true,force:true});}
 });

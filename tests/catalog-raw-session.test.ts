@@ -158,6 +158,21 @@ test('seal waits for an unawaited PUT and denies new PUTs before waiting', async
   assert.equal(binding.ticket.token, session.binding().ticket.token);
 });
 
+test('bounded raw reads use the same ownership queue and drain fence without exposing a detached signed URL', async () => {
+  const {storage} = fixture(), entered = deferred(), allow = deferred();
+  storage.createBinaryDownloadUrl = async () => 'must_not_escape';
+  storage.readJsonBounded = async () => {entered.resolve(); await allow.promise; return {found: true, value: {}, bytes: 2};};
+  const session = await openRawProducerSession({storage, owner, operationId: 'bounded-reader', references: [ref], readOnly: true});
+  assert.throws(() => session.storage.createBinaryDownloadUrl(root + '/complete.json'), /detached_download_forbidden/);
+  const read = session.storage.readJsonBounded(root + '/complete.json', 100, {deadline: Date.now() + 10000});
+  await entered.promise; let sealed = false;
+  const closing = session.seal().then(() => {sealed = true;});
+  await Promise.resolve(); assert.equal(sealed, false);
+  assert.throws(() => session.storage.readJsonBounded(root + '/complete.json', 100), /session_closed/);
+  allow.resolve(); assert.deepEqual(await read, {found: true, value: {}, bytes: 2}); await closing;
+  assert.equal(storage.values.get(RAW_COORDINATION_KEY).claims[0].phase, 'ready');
+});
+
 test('failed or out-of-root writes never create a ready claim and no delete capability is exposed', async () => {
   const {storage} = fixture();
   const session = await openRawProducerSession({storage, owner, operationId: 'bad-writer', references: [ref]});

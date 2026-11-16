@@ -199,7 +199,8 @@ test("standard one-market publisher expires stale target rows, reapplies quality
   assert.match(standardMarketPublisher, /assertCatalogRowsUnchanged\(preparedTargetSnapshot, latestTargetRows, market\)/);
   assert.ok(standardMarketPublisher.indexOf("const preparedTargetSnapshot = snapshotCatalogRows(currentMarketRows)") < standardMarketPublisher.indexOf("currentMarketRows = []"));
   assert.match(standardMarketPublisher, /currentRetainedRows = currentRetainedRows\.map\(\(offer\) => freshIds\.has\(offer\.id\)[\s\S]*compactPublicStorageOffer\(offer\)/);
-  assert.match(standardMarketPublisher, /return \{offer:compactPublicStorageOffer\(prepared\),reason:"ok"\}/);
+  assert.match(standardMarketPublisher, /const compact = compactPublicStorageOffer\(prepared\)/);
+  assert.match(standardMarketPublisher, /return \{offer:compact,reason:"ok"\}/);
   assert.match(standardMarketPublisher, /finally \{[\s\S]*releasePublishLock\(\)/);
   assert.match(standardMarketPublisher, /CATALOG_PUBLISH_LOCK_HEARTBEAT_MS/);
   assert.match(standardMarketPublisher, /setInterval\([\s\S]*heartbeatAt/);

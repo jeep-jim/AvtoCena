@@ -1,3 +1,4 @@
+import {imageKey,uniqueImages,mergeOfferVersions} from './lib/catalog-offer-merge.mjs';
 import {isAllDubicarsOffer,isUnpricedDubicarsOffer} from '../apps/web/lib/catalog/dubicars-owner-policy.ts';
 import {catalogInventoryLimit,catalogMarketInventoryLimit} from "./lib/catalog-inventory-limit.mjs";
 import {startPublicationHeartbeat} from './lib/publication-heartbeat.mjs';
@@ -7,6 +8,10 @@ import {prepareStagedCatalogBudget} from './lib/catalog-staged-budget.mjs';
 import {prepareRawPublication} from './lib/catalog-raw-publication.mjs';
 import {prepareRawInternalPublication} from './lib/catalog-raw-internal-publication.mjs';
 import {createPaidRepairPublicationGuard} from './lib/paid-encar-repair-io.mjs';
+import {createPaidPublicationContributions,preparePaidInternalContribution,preparePaidPublicContribution,paidContributionWorkerSource} from './lib/catalog-paid-encar-contributions.mjs';
+import {createChe168PublicationContributions,prepareChe168InternalContribution,prepareChe168PublicContribution,
+  che168ContributionWorkerSource} from './lib/catalog-che168-contributions.mjs';
+import {calculationVersion} from './catalog-calculation-version.mjs';
 // Maintenance publication reads large source payloads; avoid a burst of twelve simultaneous S3 downloads.
 process.env.CATALOG_READ_CONCURRENCY ||= "4";
 import { unavailableOfferRecord } from "../apps/web/lib/catalog/offer-availability.ts";
@@ -14,6 +19,8 @@ const sellerInventory = process.env.CATALOG_SELLER_INVENTORY === "1";
 const { prepareSellerInventory } = await import("../apps/web/lib/catalog/prepare-seller-inventory.ts");
 const { sourceInventoryInScope } = await import('../apps/web/lib/catalog/source-inventory-scope.ts');
 const { requiredCatalogSourceIds } = await import('../apps/web/lib/catalog/required-catalog-sources.ts');
+const { allowedCatalogSourceIds } = await import('../apps/web/lib/catalog/required-catalog-sources.ts');
+const { readCatalogProjectionBatches } = await import('../apps/web/lib/catalog-projection-parts.ts');
 const { isSellerPricedOffer } = await import("../apps/web/lib/catalog/seller-price-contract.ts");
 const { assertNoDeliveredPriceRegression } = await import("../apps/web/lib/catalog/publication-price-preservation.ts");
 import fs from "node:fs/promises";
@@ -159,23 +166,6 @@ async function releasePublishLock() {
   publishLockHeld = false;
 }
 
-function imageKey(image) {
-  return String(image?.checksum || image?.id || image?.objectKey || image?.url || "");
-}
-
-function uniqueImages(images) {
-  const seen = new Set();
-  const result = [];
-  for (const image of Array.isArray(images) ? images : []) {
-    const key = imageKey(image);
-    if (!key || seen.has(key)) continue;
-    seen.add(key);
-    result.push(image);
-    if (result.length >= 30) break;
-  }
-  return result;
-}
-
 function freshness(offer) {
   return catalogOfferFreshness(offer);
 }
@@ -184,39 +174,6 @@ function qualityOrder(left, right) {
   return compareCatalogPublicPriority(left, right)
     || freshness(right) - freshness(left)
     || String(left?.id || "").localeCompare(String(right?.id || ""));
-}
-
-function overlayDefined(base, overlay) {
-  const result = { ...(base || {}) };
-  for (const [key, value] of Object.entries(overlay || {})) {
-    if (value === undefined || value === null || value === "") continue;
-    result[key] = value;
-  }
-  return result;
-}
-
-function mergeOfferVersions(primary, retained) {
-  if (!retained) return { ...primary, images: uniqueImages(primary?.images) };
-  const merged = overlayDefined(retained, primary);
-  const primaryRaw = typeof primary?.operational?.raw === "object" && primary.operational.raw ? primary.operational.raw : {};
-  const retainedRaw = typeof retained?.operational?.raw === "object" && retained.operational.raw ? retained.operational.raw : {};
-  const firstSeen = [primary?.firstSeenAt, retained?.firstSeenAt]
-    .filter(Boolean)
-    .sort((left, right) => Date.parse(String(left)) - Date.parse(String(right)))[0];
-  const updatedAt = [primary?.updatedAt, retained?.updatedAt]
-    .filter(Boolean)
-    .sort((left, right) => Date.parse(String(right)) - Date.parse(String(left)))[0];
-  return {
-    ...merged,
-    firstSeenAt: firstSeen || primary?.firstSeenAt || retained?.firstSeenAt,
-    updatedAt: updatedAt || primary?.updatedAt || retained?.updatedAt,
-    images: uniqueImages([...(primary?.images || []), ...(retained?.images || [])]),
-    calculationSnapshot: overlayDefined(retained?.calculationSnapshot, primary?.calculationSnapshot),
-    operational: {
-      ...overlayDefined(retained?.operational, primary?.operational),
-      raw: overlayDefined(retainedRaw, primaryRaw),
-    },
-  };
 }
 
 function hasExactCalculation(offer) {
@@ -278,6 +235,7 @@ async function runWithConcurrency(items, concurrency, worker) {
 }
 
 let retainedPublishedIds = new Set();
+let paidContributions = null, che168Contributions = null;
 async function auditCandidate(sourceOffer) {
   try {
     if (!sourceInventoryInScope(sourceOffer)) return {offer:null,reason:'source_inventory_scope'};
@@ -298,7 +256,10 @@ async function auditCandidate(sourceOffer) {
       // marketplace response is not used by canonical selection or public
       // persistence. Releasing it here prevents a large market from retaining
       // one deep-cloned source payload for every audited candidate.
-      return {offer:compactPublicStorageOffer(prepared),reason:"ok"};
+      const compact = compactPublicStorageOffer(prepared);
+      paidContributions?.recordAudited(sourceOffer, compact);
+      che168Contributions?.recordAudited(sourceOffer, compact);
+      return {offer:compact,reason:"ok"};
     }
     const descriptionReason = catalogDescriptionRejectionReason(offer);
     if (descriptionReason) return { offer: null, reason: descriptionReason };
@@ -366,10 +327,21 @@ if (process.env.PAID_REPAIR_APPROVED_SHA256 && !technicalRepairReceipt) throw Er
 const technicalRepairGuard = technicalRepairReceipt ? await createPaidRepairPublicationGuard({
   storage:getJsonStorage(), receipt:technicalRepairReceipt, expectedSha256:process.env.PAID_REPAIR_APPROVED_SHA256,
 }) : null;
+const che168ContributionReport=market==='china'
+  ?generation.payloads.find(payload=>payload.report?.sourceInputWitness?.kind==='independent_che168_replica_v1')?.report:null;
+che168Contributions=che168ContributionReport?createChe168PublicationContributions({
+  intake:che168ContributionReport,freshOffers:generation.offers,sellerInventory,
+  compactPublic:compactPublicStorageOffer,sourceSha:che168ContributionWorkerSource(),calculationVersion:calculationVersion(),
+}):null;
 if (technicalRepairGuard) {
   if (!sellerInventory || allowPublicCollapse || process.env.CATALOG_REBALANCE_EXISTING === '1') throw Error('paid_repair_publication_policy_invalid');
   technicalRepairGuard.assertInput(generation.offers);
 }
+paidContributions = paidEncarReport?.paidInputWitness ? createPaidPublicationContributions({
+  intake: paidEncarReport, freshOffers: generation.offers, sellerInventory,
+  compactPublic: compactPublicStorageOffer, sourceSha: paidContributionWorkerSource(),
+  calculationVersion: calculationVersion(),
+}) : null;
 async function assertCurrentKoreaPublicationSource() {
   await assertPaidKoreaPublicationSource({
     market,
@@ -469,7 +441,11 @@ currentRetainedRows = currentRetainedRows.map((offer) => freshIds.has(offer.id)
 
 const candidatesById = new Map();
 for (const offer of currentRetainedRows.sort((left, right) => freshness(left) - freshness(right))) {
-  candidatesById.set(offer.id, mergeOfferVersions(preserveCatalogOfferObservation(offer), candidatesById.get(offer.id)));
+  const primary = preserveCatalogOfferObservation(offer), retained = candidatesById.get(offer.id);
+  const merged = mergeOfferVersions(primary, retained);
+  paidContributions?.observeMerge(primary, retained, merged);
+  che168Contributions?.observeMerge(primary, retained, merged, {phase:'retained'});
+  candidatesById.set(offer.id, merged);
 }
 for (const offer of generation.offers.sort((left, right) => freshness(left) - freshness(right))) {
   if (!offer?.id) continue;
@@ -477,7 +453,10 @@ for (const offer of generation.offers.sort((left, right) => freshness(left) - fr
     rejectFreshOffer(offer.id, "source:withdrawn");
     continue;
   }
-  candidatesById.set(offer.id, mergeOfferVersions(offer, candidatesById.get(offer.id)));
+  const retained = candidatesById.get(offer.id), merged = mergeOfferVersions(offer, retained);
+  paidContributions?.observeMerge(offer, retained, merged);
+  che168Contributions?.observeMerge(offer, retained, merged);
+  candidatesById.set(offer.id, merged);
 }
 
 currentRetainedRows = currentRetainedRows.map(compactPublicStorageOffer);
@@ -562,6 +541,8 @@ for (const offer of v2Selection.selected.slice(0, maximumPerMarket)) {
   selectedMarketOffersById.set(String(offer.id), offer);
 }
 const selectedMarketOffers = [...selectedMarketOffersById.values()].slice(0, maximumPerMarket);
+paidContributions?.captureSelected(selectedMarketOffers);
+che168Contributions?.captureSelected(selectedMarketOffers);
 for (const offer of selected) if (!selectedMarketOffersById.has(String(offer.id))) {
   rejectFreshOffer(offer.id, "selection:v2_policy");
   auditedRemovals.set(offer.id, "selection:v2_policy");
@@ -766,6 +747,8 @@ const regressionBlocked = expectedPublishedByMarket[market] <= 0
 let manifest = null;
 let publicationError = "";
 let rawPublication = null, rawPinRelease = null, rawInternalPublication = null;
+let paidInternalContribution = null, paidPublicContribution = null;
+let che168InternalContribution = null, che168PublicContribution = null;
 let technicalRepairReadback = null;
 let nextPublicCount = 0;
 let publishedSourceCounts = {};
@@ -802,15 +785,26 @@ if (regressionBlocked) {
       expectedBaseGenerationId,
       ...(market !== 'japan' && getJsonStorage().driver === 'object' ? {
         rawCoordinationTicket: () => rawPublication?.binding?.ticket,
-        beforePreparedInternalManifest: async ({manifest: candidate, baseManifest}) => {
-          rawInternalPublication = await prepareRawInternalPublication({storage:getJsonStorage(), manifest:candidate,
-            baseManifest, operationId:publishOperationId,
-            intake:generation.payloads.find(payload => payload.report?.market === market)?.report});
+        beforePreparedInternalManifest: async ({manifest: internalManifest, baseManifest}) => {
+          const storage = getJsonStorage();
+          paidInternalContribution = await preparePaidInternalContribution({storage, manifest: internalManifest,
+            contributions: paidContributions, reusableKoreaSourceIds: allowedCatalogSourceIds('korea')});
+          che168InternalContribution = await prepareChe168InternalContribution({storage, manifest: internalManifest,
+            contributions: che168Contributions,reusableSourceIds:allowedCatalogSourceIds('china')});
+          rawInternalPublication = await prepareRawInternalPublication({storage, manifest: internalManifest, baseManifest,
+            intake: generation.payloads.find(payload => payload.report?.market === market)?.report,
+            operationId: publishOperationId,
+            contributionCapabilities: [paidInternalContribution,che168InternalContribution].filter(Boolean)});
           return rawInternalPublication;
         },
         beforePreparedGeneration: async candidate => {
+          paidPublicContribution = await preparePaidPublicContribution({storage: getJsonStorage(), manifest: candidate,
+            contributions: paidContributions, internal: paidInternalContribution, readProjectionBatches: readCatalogProjectionBatches});
+          che168PublicContribution = await prepareChe168PublicContribution({storage:getJsonStorage(),manifest:candidate,
+            contributions:che168Contributions,internal:che168InternalContribution,readProjectionBatches:readCatalogProjectionBatches});
           rawPublication = await prepareRawPublication({storage:getJsonStorage(), manifest:candidate,
             expectedBaseGenerationId, market, operationId:publishOperationId,
+            contributions: paidPublicContribution || che168PublicContribution,
             intake:generation.payloads.find(payload => payload.report?.market === market)?.report});
           const verifyBudget = await prepareStagedCatalogBudget({storage:getJsonStorage(), manifest:candidate,
             expectedBaseGenerationId, operationId:publishOperationId});
@@ -858,6 +852,8 @@ if (regressionBlocked) {
           if (hashRows(rows) !== expectedHash) failures.push(`${otherMarket}:hash`);
         }
         if (failures.length) throw new Error(`catalog_prewrite_preservation_gate_failed:${failures.join("|")}`);
+        paidContributions?.captureNormalized(publicOffers.filter(offer => offer.market === market));
+        che168Contributions?.captureNormalized(publicOffers.filter(offer => offer.market === market));
       },
       beforePublishValidate(publishedOffers) {
         technicalRepairGuard?.assertRows(publishedOffers.filter(offer => offer.market === market));
@@ -884,6 +880,8 @@ if (regressionBlocked) {
         nextPublicCount = publishedOffers.filter((offer) => String(offer?.market || "") === market).length;
         publishedSourceCounts = countSources(publishedOffers.filter(offer => offer.market === market));
         if (failures.length) throw new Error(`catalog_public_regression_guard:${failures.join("|")}`);
+        paidContributions?.captureFinal(publishedOffers.filter(offer => offer.market === market));
+        che168Contributions?.captureFinal(publishedOffers.filter(offer => offer.market === market));
       },
     });
     if (technicalRepairGuard) technicalRepairReadback = await technicalRepairGuard.verifyPublished(manifest.generationId, publishOperationId);

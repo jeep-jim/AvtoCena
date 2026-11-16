@@ -8,6 +8,7 @@ import { preparePaidEncarReports } from './catalog-prepare-paid-encar-reports.mj
 import { paidEncarSavedPageVerifier } from './catalog-paid-encar-intake.mjs';
 import {openRawFeedPin,rawProducerOwner,readRawRootHandoff} from './lib/catalog-raw-provenance.mjs';
 import { normalizePaidEncarOffer } from './lib/paid-encar-offer.mjs';
+import {createIndependentPaidInput,paidContributionWorkerSource} from './lib/catalog-paid-encar-contributions.mjs';
 
 const run = process.env.ENCAR_SNAPSHOT_RUN;
 const attempt = process.env.ENCAR_SNAPSHOT_ATTEMPT;
@@ -31,12 +32,13 @@ await fs.mkdir(output, {recursive:true});
 if ((await fs.readdir(output)).length) throw Error('Intake directory must be empty');
 const adapter = new EncarDirectAdapter();
 const write = observationShardWriter(output, adapter.sourceId);
+const independentInput = createIndependentPaidInput({storage, run, attempt, snapshot, owner, sourceSha: paidContributionWorkerSource()});
 const seen = new Set();
 let count = 0;
 let excluded = 0;
 let observations = 0;
 for (let page = 1; page <= snapshot.pages; page++) {
-  const rows = await storage.readJson(prefix + '/pages/' + page + '.json', null);
+  const rows = await independentInput.readPage(page);
   if (!Array.isArray(rows) || (!rows.length && page !== snapshot.pages)) throw Error('Missing saved Encar page ' + page);
   if (pageVerifier) {
     const receipt = await storage.readJson(prefix + '/page-receipts/' + page + '.json', null);
@@ -64,6 +66,7 @@ for (let page = 1; page <= snapshot.pages; page++) {
     Object.assign(offer.operational, {provider:'auto_api_encar', exactDetail:true,
       detailIdentityVerified:true, exactPhotos:offer.images.length>0, photoIdentityVerified:offer.images.length>0,
       galleryImageCount:offer.images.length});
+    independentInput.recordOffer(row, offer);
     await write({stage:'detail', observedAt:snapshot.completedAt, offer});
     seen.add(offer.id);
     observations++;
@@ -71,8 +74,10 @@ for (let page = 1; page <= snapshot.pages; page++) {
 }
 pageVerifier?.finish();
 if (count !== snapshot.count || observations + excluded !== count || !seen.size) throw Error('Encar snapshot totals mismatch');
+const paidInputWitness = await independentInput.finish({observations, excluded});
 const report = {version:1,market:'korea',provider:'auto_api_encar',completed:true,completedAt:snapshot.completedAt,
   snapshotRun:run,snapshotAttempt:attempt,requiredSourceIds:[adapter.sourceId],confirmedWithdrawals:[],
+  ...(paidInputWitness ? {paidInputWitness} : {}),
   sources:[{sourceId:adapter.sourceId,provider:'auto_api_encar',observations,uniqueOffers:seen.size,
     stopReason:'source_finished',syncMode:'snapshot',pages:snapshot.pages,excluded}]};
 // A completed paid intake must include verified reports for the same source

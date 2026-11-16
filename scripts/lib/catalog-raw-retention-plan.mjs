@@ -138,8 +138,16 @@ export function planRawFeedRetention({inventory, pinInventory, cursorInventory, 
     assert.ok(group?.objects.length, 'raw_protected_group_missing');
     if (ref.sha256) assert.equal(rawDigest(group.receipt), ref.sha256, 'raw_protected_receipt_changed');
   }
-  const closed = [], unprovenRoots = [];
+  const closed = [], unprovenRoots = [], readerProtected = [];
   for (const group of groups.values()) {
+    // Current/previous catalogue references do not cover a request still
+    // reading an older report after two cutovers. Until the installed reader
+    // participates in coordination, preserve every report root regardless of
+    // receipt age, terminal producer pins or a caller's coverage flag.
+    if(group.kind==='encar-reports') {
+      protectedRoots.add(group.root);
+      readerProtected.push({root:group.root,kind:group.kind,status:'protected_unknown',reason:'vm_report_reader_unfenced'});
+    }
     group.objects.sort((a, b) => a.key.localeCompare(b.key));
     group.bytes = bytes(group.objects);
     const timestamps = group.objects.map(row => Date.parse(row.lastModified || ''));
@@ -167,6 +175,7 @@ export function planRawFeedRetention({inventory, pinInventory, cursorInventory, 
     objects: [...inventory.objects].sort((a, b) => a.key.localeCompare(b.key)), receipts: inventory.receipts});
   return {selected, summary: {version: 1, mode: 'plan', status: 'ready', at: new Date(now).toISOString(),
     maxGroups, maxObjects, maxBytes, graceMs, protectedRoots: [...protectedRoots].sort(), unprovenRoots: unprovenRoots.sort(),
+    readerProtected:readerProtected.sort((a,b)=>a.root.localeCompare(b.root)),
     candidateGroups: candidates.length, candidateObjects: candidates.reduce((sum, group) => sum + group.objects.length, 0),
     selectedGroups: selectedGroups.map(group => group.root), selectedObjects: objectCount, selectedBytes,
     fenceDigest, selectionDigest: rawDigest(selected)}};
