@@ -1,0 +1,73 @@
+name: Diagnose saved UAE budget coverage (read only)
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/diagnostics/uae-budget-coverage.mjs
+      - .github/workflows/diagnose-uae-budget-coverage.yml
+  workflow_dispatch:
+    inputs:
+      source:
+        description: Exact reviewed runtime to inspect; never deploys or prepares
+        type: choice
+        options:
+          - e8462585e8998eaae5a003831a38d79263ca5649
+          - 6d12acbae48cb5b754da0648f350426fee0448bd
+        default: e8462585e8998eaae5a003831a38d79263ca5649
+permissions:
+  contents: read
+concurrency:
+  group: uae-budget-coverage-diagnostic
+  cancel-in-progress: false
+jobs:
+  diagnose:
+    if: github.event_name == 'workflow_dispatch' || github.event.head_commit.message == 'Diagnose exact UAE saved coverage'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment: regcloud-staging
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: controller
+          persist-credentials: false
+      - name: Validate pinned source before checkout
+        env:
+          SOURCE: ${{ inputs.source || 'e8462585e8998eaae5a003831a38d79263ca5649' }}
+        run: |
+          case "$SOURCE" in
+            e8462585e8998eaae5a003831a38d79263ca5649|6d12acbae48cb5b754da0648f350426fee0448bd) ;;
+            *) exit 1 ;;
+          esac
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.source || 'e8462585e8998eaae5a003831a38d79263ca5649' }}
+          path: runtime
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: runtime/package-lock.json
+      - run: npm ci
+        working-directory: runtime
+      - name: Read exact saved coverage without repairing or accepting the release
+        env:
+          JSON_STORAGE_DRIVER: object
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_REGION: us-east-1
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+          NODE_OPTIONS: --max-old-space-size=6144
+        run: |
+          set -euo pipefail
+          mkdir -p reports
+          node --import ./runtime/node_modules/tsx/dist/loader.mjs controller/.github/diagnostics/uae-budget-coverage.mjs runtime | tee reports/uae-budget-coverage.json
+      - name: Preserve sanitized diagnostic only
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: uae-budget-coverage-diagnostic
+          path: reports/uae-budget-coverage.json
+          if-no-files-found: warn
