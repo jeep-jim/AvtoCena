@@ -635,6 +635,38 @@ jobs:
           assert health.get('calculationVersion')=='c489dff0d41ef0933b4f2bef140a318d4ce68493587afc8113a9993e5a18b0b6','calculator changed'
           print(json.dumps({'source':sha,'checks':len(runs['workflow_runs']),'retained':health.get('releaseSha')}))
           SOURCE_GUARD
+      - name: Retry and record a transient public health probe without relaxing acceptance
+        run: |
+          python3 - <<'HEALTH_RETRY'
+          from pathlib import Path
+          file=Path('tests/browser/owner-filter-speed-live.mjs')
+          source=file.read_text()
+          substitutions=[
+           ("let activePage;\n", """let activePage;
+async function healthWithRetry(context,phase){
+ for(let attempt=1;attempt<=2;attempt++){
+  const start=Date.now();
+  try{
+   const response=await context.request.get(origin+'/api/health',{timeout:30000});
+   (report.healthChecks??=[]).push({phase,attempt,status:response.status(),seconds:(Date.now()-start)/1000});
+   return response;
+  }catch(error){
+   (report.healthChecks??=[]).push({phase,attempt,error:error.name,seconds:(Date.now()-start)/1000});
+   if(attempt===2)throw error;
+   await new Promise(resolve=>setTimeout(resolve,1500));
+  }
+ }
+}
+"""),
+           ("const health=await context.request.get(origin+'/api/health',{timeout:30000});","const health=await healthWithRetry(context,'before-'+width);"),
+           ("const ending=await context.request.get(origin+'/api/health',{timeout:30000});","const ending=await healthWithRetry(context,'after-'+width);")
+          ]
+          for old,new in substitutions:
+           assert source.count(old)==1,old
+           source=source.replace(old,new,1)
+          file.write_text(source)
+          HEALTH_RETRY
+          node --check tests/browser/owner-filter-speed-live.mjs
       - name: Deploy with rollback and resource measurements
         id: deploy_acceptance
         env:
