@@ -1,0 +1,102 @@
+name: Inspect bounded China retained row shapes once
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/china-retained-shapes-once-20261117.yml']
+permissions:
+  contents: read
+concurrency:
+  group: china-retained-shapes-once-readonly-v2
+  cancel-in-progress: false
+jobs:
+  inspect:
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'workflow_dispatch' || github.event.head_commit.message == 'Inspect bounded China retained row shapes once')
+    environment: regcloud-staging
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: bb6317bffd1f7b1832681ac78378fe6c3e39e3b5
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Materialize reviewed bounded reader
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = bb6317bffd1f7b1832681ac78378fe6c3e39e3b5
+          cat > "$RUNNER_TEMP/china-retained-shapes-once.mjs" <<'READER'
+          import {createHash,createHmac} from 'node:crypto';
+          import {performance} from 'node:perf_hooks';
+          import {writeFile} from 'node:fs/promises';
+          import {pathToFileURL} from 'node:url';
+          const ENDPOINT='https://s3.regru.cloud',BUCKET='avtocena-staging-8120751',PREFIX='migration-staging/full-20261011/';
+          export const MANIFESTS=['catalog/manifest.json','catalog/internal/manifest.json'];
+          export const EXPECTED={"public":{"manifest":{"kind":"public","sha256":"4c34c20d9784b571414390cab450ceeeaee60b00c168476100419ec5c05cb038","etagDigest":"426ac1af32eb10b21d3beb5e2d167c81b09e3c6bc35946f2eb5706818d045142","generationDigest":"8f913acaf00ba03ae567c172407fb4ce95e1b3b01507e2203d8ac530d81e784e","bytes":10387},"chunk":{"kind":"public","keyDigest":"f7a607b05e94273d8cecb99c9ae5139207779dd46ccd6c21996b4b032446b279","etagDigest":"ef9b5ecb33335be3574b0c96851fa2e14e0a47629043ad06f1683c56ba400223","declaredBytes":10708796,"skipped":true,"reason":"overcap","headMs":154.79092600000013}},"internal":{"manifest":{"kind":"internal","sha256":"0aa3524abf2aa0563811a7980ebe9eded7566a1d2ab36b057557dfb7caba6585","etagDigest":"0ffa653fc1a39ebd51149c2487e46168769f7b8cef2d9aa7fe15eb75663e413d","generationDigest":"cf26f636ff9b231553b93ad50190ddc64d5a880f7151fd56720309c445aa47b7","bytes":77687},"chunk":{"kind":"internal","keyDigest":"3f8d947e87c1e178081989c5cc9bee9c9525d1010776f8166e7440dd91248b92","etagDigest":"55aa906b930723f9ad9d00cc468feffc76c602fdd858c59089f18eb5d4bdb016","declaredBytes":10619611,"skipped":true,"reason":"overcap","headMs":667.9008960000001}}};
+          const SOURCES=['autohome_used_china_open','autohome_new_china_open'];
+          const GEN='gen_\\d{1,20}_[a-z0-9-]{1,80}',gen=v=>typeof v==='string'&&new RegExp('^'+GEN+'$').test(v);
+          const sha=x=>createHash('sha256').update(x).digest('hex'),hmac=(k,s)=>createHmac('sha256',k).update(s).digest();
+          const fail=x=>{throw Error('probe_'+x);};
+          // Canonical SigV4 from reviewed stage2 signer; method and If-Match are signed.
+          export function sign(key,method,credentials,allowed,etag,date=new Date()){
+           if(!allowed.has(key)||!['GET','HEAD'].includes(method))fail('request_denied');
+           if(!credentials.accessKeyId||!credentials.secretAccessKey)fail('credentials_missing');
+           const pathname='/'+BUCKET+'/'+PREFIX+key,stamp=date.toISOString().replace(/[:-]|\.\d{3}/g,''),day=stamp.slice(0,8),scope=`${day}/us-east-1/s3/aws4_request`;
+           const headers={host:'s3.regru.cloud','x-amz-content-sha256':sha(''),'x-amz-date':stamp};if(etag)headers['if-match']=etag;
+           const names=Object.keys(headers).sort(),canonical=names.map(k=>`${k}:${headers[k]}\n`).join('');
+           const request=[method,pathname,'',canonical,names.join(';'),sha('')].join('\n');
+           const signing=hmac(hmac(hmac(hmac('AWS4'+credentials.secretAccessKey,day),'us-east-1'),'s3'),'aws4_request');
+           headers.authorization=`AWS4-HMAC-SHA256 Credential=${credentials.accessKeyId}/${scope}, SignedHeaders=${names.join(';')}, Signature=${createHmac('sha256',signing).update(`AWS4-HMAC-SHA256\n${stamp}\n${scope}\n${sha(request)}`).digest('hex')}`;
+           return {url:ENDPOINT+pathname,options:{method,headers,redirect:'error'}};
+          }
+          export function descriptors(pub,internal){
+           if(pub?.version!==2||!gen(pub.generationId)||!gen(internal?.generationId))fail('manifest_schema');
+           const p=pub.markets?.china?.chunks;if(!Array.isArray(p))fail('china_missing');
+           const publicKeys=p.map(k=>{if(typeof k!=='string')fail('descriptor');const v=k.startsWith('catalog/')?k:`catalog/generations/${pub.generationId}/offers/china/${k}.json`;if(!new RegExp('^catalog/generations/'+GEN+'/offers/china/chunk-\\d{4,10}\\.json$').test(v))fail('descriptor');return v;});
+           const internalKeys=[];
+           for(const source of SOURCES){const d=internal.sources?.[source];if(!d)continue;if(!Array.isArray(d.chunks))fail('descriptor');for(const k of d.chunks){if(typeof k!=='string'||!new RegExp('^catalog/internal/offers/'+source+'/'+GEN+'-chunk-\\d{4,10}\\.json$').test(k))fail('descriptor');internalKeys.push(k);}}
+           return {public: [...new Set(publicKeys)].slice(0,1),internal:[...new Set(internalKeys)].slice(0,1),publicDescriptorCount:publicKeys.length,internalDescriptorCount:internalKeys.length};
+          }
+          export function aggregate(rows){
+           if(!Array.isArray(rows)||rows.some(r=>!r||typeof r!=='object'||Array.isArray(r)))fail('chunk_schema');
+           // Fixed names only; never emit untrusted property names, values or IDs.
+           const fields=['operational','raw','rawData','providerRaw','sourcePayload','description','images','photos','modificationSelection','technical','specs','price','calculation','sourceUrl','sourceSpecifications','calculationSnapshot','sourcePrice','operational.sourceSpecifications'];
+           const fieldBytes=Object.fromEntries(fields.map(k=>[k,0]));let totalSerializedBytes=0,withModificationSelection=0,maxRowBytes=0;
+           for(const row of rows){const n=Buffer.byteLength(JSON.stringify(row));totalSerializedBytes+=n;maxRowBytes=Math.max(maxRowBytes,n);if(row.modificationSelection)withModificationSelection++;for(const k of fields){const value=k==='operational.sourceSpecifications'?row.operational?.sourceSpecifications:row[k];if(value!==undefined)fieldBytes[k]+=Buffer.byteLength(JSON.stringify(value));}}
+           return {rows:rows.length,totalSerializedBytes,maxRowBytes,withModificationSelection,fieldBytes};
+          }
+          export async function inspect({credentials,fetchImpl=fetch,timeoutMs=10000}={}){
+           const allowed=new Set(MANIFESTS);let requests=0,totalBytes=0;
+           async function request(key,method='GET',cap=2*1024*1024,expected){
+            const began=performance.now();if(++requests>20)fail('request_cap');const signed=sign(key,method,credentials,allowed,expected),controller=new AbortController(),timer=setTimeout(()=>controller.abort(),timeoutMs);
+            try{const r=await fetchImpl(signed.url,{...signed.options,signal:controller.signal});if(r.status!==200){await r.body?.cancel();fail('http_status');}
+             const etag=r.headers.get('etag');if(!/^"?[a-fA-F0-9-]{1,128}"?$/.test(etag||'')||expected&&etag!==expected)fail('etag');
+             const rawLength=r.headers.get('content-length');if(!/^\d+$/.test(rawLength||''))fail('length');const declared=Number(rawLength);if(!Number.isSafeInteger(declared))fail('object_cap');if(declared>cap){if(method==='HEAD'){await r.body?.cancel();return {etag,bytes:declared,overCap:true,elapsedMs:performance.now()-began};}fail('object_cap');}
+             if(method==='HEAD'){await r.body?.cancel();return {etag,bytes:declared,elapsedMs:performance.now()-began};}
+             if(totalBytes+declared>32*1024*1024)fail('total_cap');const reader=r.body.getReader(),parts=[];let n=0;
+             try{while(true){const x=await reader.read();if(x.done)break;n+=x.value.length;totalBytes+=x.value.length;if(n>cap||totalBytes>32*1024*1024)fail('body_cap');parts.push(x.value);}}finally{await reader.cancel().catch(()=>{});reader.releaseLock();}
+             if(n!==declared)fail('length_mismatch');const body=Buffer.concat(parts,n),readMs=performance.now()-began,parseStart=performance.now(),preParseMemory=process.memoryUsage(),value=JSON.parse(body.toString('utf8')),parseMs=performance.now()-parseStart;return {etag,bytes:n,sha256:sha(body),value,readMs,parseMs,preParseMemory,postParseMemory:process.memoryUsage()};
+            }finally{clearTimeout(timer);controller.abort();}
+           }
+           const before=[];for(const key of MANIFESTS)before.push(await request(key));for(let i=0;i<2;i++){const pin=EXPECTED[i?'internal':'public'].manifest,b=before[i];if(b.sha256!==pin.sha256||sha(b.etag)!==pin.etagDigest||sha(b.value?.generationId||'')!==pin.generationDigest)fail('baseline_pin');}const d=descriptors(before[0].value,before[1].value),samples=[];if(d.public.length!==1||d.internal.length!==1)fail('shape_descriptor_missing');
+           for(const kind of ['public','internal'])for(const key of d[kind]){if(sha(key)!==EXPECTED[kind].chunk.keyDigest)fail('shape_key_pin');allowed.add(key);const head=await request(key,'HEAD',12*1024*1024);const expectedBytes=kind==='public'?10708796:10619611;if(sha(head.etag)!==EXPECTED[kind].chunk.etagDigest)fail('shape_etag_pin');if(head.overCap||head.bytes!==expectedBytes)fail('shape_size_mismatch');const body=await request(key,'GET',12*1024*1024,head.etag);if(body.bytes!==head.bytes)fail('head_length_changed');const aggregateStart=performance.now(),stats=aggregate(body.value),aggregateMs=performance.now()-aggregateStart;samples.push({kind,keyDigest:sha(key),etagDigest:sha(body.etag),sha256:body.sha256,bytes:body.bytes,headMs:head.elapsedMs,getReadMs:body.readMs,parseMs:body.parseMs,aggregateMs,preParseMemory:body.preParseMemory,postParseMemory:body.postParseMemory,...stats});}
+           const after=[];for(const key of MANIFESTS)after.push(await request(key));
+           const stable=before.every((x,i)=>x.sha256===after[i].sha256&&x.etag===after[i].etag&&x.value.generationId===after[i].value.generationId);
+           if(!stable)fail('manifest_changed');
+           return {manifestStableObserved:true,manifests:before.map((x,i)=>({kind:i?'internal':'public',sha256:x.sha256,etagDigest:sha(x.etag),generationDigest:sha(x.value.generationId),bytes:x.bytes})),descriptorCounts:{public:d.publicDescriptorCount,internal:d.internalDescriptorCount},internalChinaDescriptorsPresent:d.internalDescriptorCount>0,fieldBytesOverlap:true,samples,requests,totalBytes,storageWrites:0,listRequests:0,supplierRequests:0,freshMembershipDetermined:false,fullRetainedInventory:false,atomicSnapshotProven:false};
+          }
+          if(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href){let report;try{report=await inspect({credentials:{accessKeyId:process.env.YC_OBJECT_STORAGE_ACCESS_KEY_ID,secretAccessKey:process.env.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY}});}catch(e){const safe=new Set(['probe_baseline_pin','probe_shape_size_mismatch','probe_shape_etag_pin','probe_shape_key_pin','probe_shape_descriptor_missing','probe_manifest_changed','probe_body_cap','probe_total_cap','probe_etag','probe_http_status','probe_length_mismatch']);report={error:safe.has(e?.message)?e.message:'probe_failed_closed',storageWrites:0,freshMembershipDetermined:false};process.exitCode=1;}await writeFile('retained-shapes-once-report.json',JSON.stringify(report,null,2));}
+          READER
+      - name: Read only selected bounded chunks
+        env:
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+        run: timeout --signal=TERM --kill-after=5s 180s node --max-old-space-size=512 "$RUNNER_TEMP/china-retained-shapes-once.mjs"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: china-retained-shapes-once-aggregate
+          path: retained-shapes-once-report.json
+          if-no-files-found: warn
