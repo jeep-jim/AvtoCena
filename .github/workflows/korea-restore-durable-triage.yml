@@ -1,0 +1,96 @@
+name: Read fixed Korea restore durable boundaries
+'on':
+  workflow_dispatch: {}
+  push:
+    branches:
+    - main
+    paths:
+    - .github/workflows/korea-restore-durable-triage.yml
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: korea-restore-durable-triage
+  cancel-in-progress: false
+jobs:
+  triage:
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'workflow_dispatch' || github.event.head_commit.message == 'Read durable boundaries after
+      Korea restore 44056968938')
+    runs-on: ubuntu-24.04
+    environment: regcloud-staging
+    timeout-minutes: 6
+    steps:
+    - uses: actions/setup-node@v4
+      with:
+        node-version: 24.22.1
+    - name: Verify terminal restore and successful original collection
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const assert=require('assert/strict'); const {owner,repo}=context.repo;
+          const {data:r}=await github.rest.actions.getWorkflowRun({owner,repo,run_id:44056968938});
+          assert.equal(r.head_sha,'32fe1c71a4d102c677a1f67686f2190d4102f086');assert.equal(r.run_attempt,1);assert.equal(r.status,'completed');assert.equal(r.conclusion,'failure');assert.equal(r.path,'.github/workflows/prepare-saved-encar-reconciliation-only.yml');assert.equal(r.head_repository.full_name,`${owner}/${repo}`);
+          const {data:j}=await github.rest.actions.getJobForWorkflowRun({owner,repo,job_id:133948715566});assert.equal(j.run_id,44056968938);assert.equal(j.head_sha,r.head_sha);assert.ok(['failure','timed_out'].includes(j.conclusion));assert.ok(j.steps.some(s=>s.name==='Restore saved source, archive and verify prepare-only checkpoint'&&['failure','timed_out'].includes(s.conclusion)));
+          const {data:s}=await github.rest.actions.getWorkflowRun({owner,repo,run_id:43989797288});assert.equal(s.head_sha,'e51f589f892babdcd6c1251e1ebb06c6d7c91e6d');assert.equal(s.run_attempt,1);assert.equal(s.status,'completed');assert.equal(s.head_repository.full_name,`${owner}/${repo}`);
+          const jobs=await github.paginate('GET /repos/{owner}/{repo}/actions/runs/{run_id}/attempts/{attempt_number}/jobs',{owner,repo,run_id:43989797288,attempt_number:1,per_page:100});for(const id of[133727443324,133845674226])assert.equal(jobs.find(j=>j.id===id)?.conclusion,'success');
+    - name: Materialize exact reviewed code and offline tests before secrets
+      run: |
+        set -euo pipefail
+        mkdir -p "$RUNNER_TEMP/restore-triage/scripts" "$RUNNER_TEMP/restore-triage/tests"
+        cat > "$RUNNER_TEMP/restore-triage/scripts/triage-sign-read.mjs" <<'FILE_da8f107453658b85'
+        import{createHash,createHmac}from'node:crypto';const fail=c=>{throw Error(c);},sha=x=>createHash('sha256').update(x).digest('hex'),hmac=(k,v)=>createHmac('sha256',k).update(v).digest();
+        export function signRead(url,method,env,extra={},now=new Date()){
+         if(!['GET','HEAD'].includes(method)||url.protocol!=='https:'||url.search||url.username||url.password)fail('range_sign_inputs');
+         const namesExtra=Object.keys(extra);if(namesExtra.some(k=>!['range','if-match'].includes(k)))fail('range_sign_headers');
+         if(!env.YC_OBJECT_STORAGE_ACCESS_KEY_ID||!env.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY||!env.YC_OBJECT_STORAGE_REGION)fail('range_sign_credentials');
+         const stamp=now.toISOString().replace(/[:-]|\.\d{3}/g,''),day=stamp.slice(0,8),scope=`${day}/${env.YC_OBJECT_STORAGE_REGION}/s3/aws4_request`,payload=sha('');
+         const headers={host:url.host,'x-amz-date':stamp,'x-amz-content-sha256':payload,...extra},names=Object.keys(headers).sort();
+         const canonical=[method,url.pathname,'',names.map(k=>`${k}:${headers[k]}\n`).join(''),names.join(';'),payload].join('\n');
+         const key=hmac(hmac(hmac(hmac('AWS4'+env.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY,day),env.YC_OBJECT_STORAGE_REGION),'s3'),'aws4_request');
+         const signature=createHmac('sha256',key).update(`AWS4-HMAC-SHA256\n${stamp}\n${scope}\n${sha(canonical)}`).digest('hex');
+         headers.authorization=`AWS4-HMAC-SHA256 Credential=${env.YC_OBJECT_STORAGE_ACCESS_KEY_ID}/${scope}, SignedHeaders=${names.join(';')}, Signature=${signature}`;return headers;
+        }
+        FILE_da8f107453658b85
+        printf '%s  %s\n' da8f107453658b851e678c6fe7d9a75c7c38290cc7e5741d1b3a3c2d292678fd "$RUNNER_TEMP/restore-triage/scripts/triage-sign-read.mjs" | sha256sum --check
+        cat > "$RUNNER_TEMP/restore-triage/scripts/korea-restore-triage.mjs" <<'FILE_0b11a441db963084'
+        import fs from'node:fs/promises';import{createHash}from'node:crypto';import assert from'node:assert/strict';import{pathToFileURL}from'node:url';import http from'node:http';import https from'node:https';import{syncBuiltinESMExports}from'node:module';import{signRead}from'./triage-sign-read.mjs';
+        const sha=x=>createHash('sha256').update(x).digest('hex'),digest=x=>sha(JSON.stringify(x));
+        export const SOURCE='32fe1c71a4d102c677a1f67686f2190d4102f086',SNAPSHOT='c34e0546b1214a3829b7b6317f87c2ff3be05ff8bc9cd7c0ec5db0e212b7ac43';
+        const snap='catalog/intake-staging/encar/43989797288/1/complete.json';const timestamp=Date.parse('2026-11-17T06:25:05.548Z');
+        export const KEYS=Object.freeze({snapshot:snap,controls:'catalog/operations/collection-controls-v1.json',archive:'catalog/nonjp-intake/v1/korea/44056968938/1/complete.json',archivePin:'catalog/raw-feed-pins/v1/nonjp-intake-korea-44056968938-1.json',restorePin:'catalog/raw-feed-pins/v1/encar-restore-44056968938-1.json',reportsPin:'catalog/raw-feed-pins/v1/encar-reports-44056968938-1.json',reports:`catalog/paid-encar-reports/v1/${timestamp}/complete.json`});
+        export function allowed(url,method){const u=new URL(url),prefix='/avtocena-staging-8120751/migration-staging/full-20261011/';return ['GET','HEAD'].includes(method)&&u.origin==='https://s3.regru.cloud'&&!u.username&&!u.password&&!u.search&&!u.hash&&u.pathname.startsWith(prefix)&&Object.values(KEYS).includes(u.pathname.slice(prefix.length));}
+        export function summary(name,value){const out={jsonSha256:digest(value)};if(name==='snapshot'){assert.equal(out.jsonSha256,SNAPSHOT,'triage_snapshot_pin');return {...out,snapshotPinned:true,pages:value.pages,count:value.count};}if(name==='controls')return {...out,koreaEnabled:value?.markets?.korea?.enabled===true,encarEnabled:value?.sources?.encar_feed?.enabled===true};if(name.endsWith('Pin'))return {...out,state:['loading','ready','published','retired','failed'].includes(value?.state)?value.state:'other',expectedOwner:value?.owner?.runId==='44056968938'&&String(value?.owner?.attempt)==='1'&&value?.owner?.revision===SOURCE,ownerSha256:digest(value?.owner??null),referenceCount:Array.isArray(value?.references)?value.references.length:null,referencesSha256:digest(value?.references??null),coordinationPresent:Boolean(value?.coordination),coordinationSha256:digest(value?.coordination??null)};return {...out,expectedOwner:name==='archive'?value?.owner?.runId==='44056968938'&&String(value?.owner?.attempt)==='1'&&value?.owner?.revision===SOURCE:null,fileCount:Array.isArray(value?.files)?value.files.length:null,totalBytes:Number.isSafeInteger(value?.totalBytes)?value.totalBytes:null,rowCount:Number.isSafeInteger(value?.rowCount)?value.rowCount:null,reportDigest:/^[a-f0-9]{64}$/.test(value?.reportDigest||'')?value.reportDigest:null,historyBuckets:value?.history&&typeof value.history==='object'?Object.keys(value.history).length:null,inspectionBuckets:value?.inspection&&typeof value.inspection==='object'?Object.keys(value.inspection).length:null};}
+        export async function triage({fetchImpl,env,deadlineMs=110000}){assert.ok(deadlineMs>0&&deadlineMs<=110000);const started=Date.now(),controller=new AbortController(),timer=setTimeout(()=>controller.abort(),deadlineMs);let requests=0;const rows=[];
+        async function read(name){const key=KEYS[name],url=new URL('https://s3.regru.cloud/avtocena-staging-8120751/migration-staging/full-20261011/'+key);assert.ok(allowed(url,'GET'));assert.ok(++requests<=7);const r=await fetchImpl(url,{method:'GET',headers:signRead(url,'GET',env),redirect:'error',signal:controller.signal});const row={name,status:r.status};if(r.status===404){await r.body?.cancel();rows.push(row);if(name==='snapshot')throw Error('triage_snapshot_missing');return;}assert.equal(r.status,200,'triage_http_status');assert.ok(!r.headers.get('content-encoding')||r.headers.get('content-encoding')==='identity','triage_encoding');const cap=4*1024**2;let size=0;const chunks=[];try{const reader=r.body.getReader();for(;;){const{done,value}=await reader.read();if(done)break;size+=value.length;if(size>cap){await reader.cancel();throw Error('triage_body_bound');}chunks.push(value);}}catch(e){await r.body?.cancel().catch(()=>{});throw e;}const raw=Buffer.concat(chunks);rows.push({...row,bytes:size,bodySha256:sha(raw),etagSha256:r.headers.get('etag')?sha(r.headers.get('etag')):null,...summary(name,JSON.parse(raw.toString('utf8')))});}
+        try{await read('snapshot');const names=Object.keys(KEYS).filter(x=>x!=='snapshot');let i=0;const done=await Promise.allSettled(Array.from({length:4},async()=>{while(i<names.length){const n=names[i++];await read(n);}}));const failed=done.find(x=>x.status==='rejected');if(failed)throw failed.reason;return {version:1,failedRun:44056968938,attempt:1,source:SOURCE,snapshotSha256:SNAPSHOT,rows:rows.sort((a,b)=>a.name.localeCompare(b.name)),requests,elapsedMs:Date.now()-started,publicationAcceptance:false,archiveVerified:false,supplierRequests:0,writes:0};}finally{clearTimeout(timer);controller.abort();}}
+        if(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href){let forbidden=0;const native=globalThis.fetch.bind(globalThis),deny=()=>{forbidden++;throw Error('triage_forbidden');};globalThis.fetch=(input,options={})=>{const u=typeof input==='string'||input instanceof URL?input:input.url,m=String(options.method||input?.method||'GET').toUpperCase();if(!allowed(u,m)||options.redirect!=='error')return deny();return native(input,options);};for(const mod of[http,https])for(const k of['request','get'])mod[k]=deny;syncBuiltinESMExports();try{const report=await triage({fetchImpl:globalThis.fetch,env:process.env});assert.equal(forbidden,0);await fs.writeFile('korea-restore-durable-triage.json',JSON.stringify(report,null,2));console.log(JSON.stringify(report));}catch{console.error(JSON.stringify({stage:'restore_durable_triage_failed',accepted:false,forbidden}));process.exitCode=1;}}
+        FILE_0b11a441db963084
+        printf '%s  %s\n' 0b11a441db96308489e5c020a9eac5c407f72d5b5d719fcd339fe8123b122e94 "$RUNNER_TEMP/restore-triage/scripts/korea-restore-triage.mjs" | sha256sum --check
+        cat > "$RUNNER_TEMP/restore-triage/tests/triage.test.mjs" <<'FILE_147fdc12f0814bc1'
+        import test from'node:test';import assert from'node:assert/strict';import{allowed,summary,triage,KEYS}from'../scripts/korea-restore-triage.mjs';
+        const base='https://s3.regru.cloud/avtocena-staging-8120751/migration-staging/full-20261011/';const snapshot={version:1,market:'korea',provider:'auto_api_encar',runId:'43989797288',attempt:'1',producerSha:'e51f589f892babdcd6c1251e1ebb06c6d7c91e6d',pages:10198,count:203948,completedAt:'2026-11-17T06:25:05.548Z'};const env={YC_OBJECT_STORAGE_ACCESS_KEY_ID:'TEST',YC_OBJECT_STORAGE_SECRET_ACCESS_KEY:'SECRET',YC_OBJECT_STORAGE_REGION:'us-east-1'};
+        test('only7 exactkeys GETHEAD no write supplier query credentials fragment',()=>{for(const k of Object.values(KEYS))assert.ok(allowed(base+k,'GET'));for(const [u,m]of[[base+KEYS.snapshot,'PUT'],[base+'other','GET'],[base+KEYS.snapshot+'?x=1','GET'],[base+KEYS.snapshot+'#x','GET'],['https://supplier.test','GET'],[base.replace('https://','https://user:pass@')+KEYS.snapshot,'GET']])assert.equal(allowed(u,m),false);});
+        test('complete bounded7read report no arbitrarystrings and missing roots visible',async()=>{let calls=0;const r=await triage({env,fetchImpl:async(u,o)=>{calls++;assert.equal(o.redirect,'error');return u.pathname.endsWith(KEYS.snapshot)?Response.json(snapshot):new Response(null,{status:404});}});assert.equal(calls,7);assert.equal(r.rows.filter(x=>x.status===404).length,6);assert.equal(r.archiveVerified,false);assert.equal(r.publicationAcceptance,false);});
+        test('snapshot drift fails before derivedreads',async()=>{let calls=0;await assert.rejects(triage({env,fetchImpl:async()=>{calls++;return Response.json({...snapshot,count:1});}}),/snapshot_pin/);assert.equal(calls,1);});
+        test('PII unknownstates and custommetadata never exported',()=>{const s=summary('archivePin',{state:'PRIVATE NAME',owner:{revision:'SECRET'},references:[{secret:'VIN'}],coordination:{token:'PRIVATE'},secret:'PHONE'});assert.equal(s.state,'other');assert.equal(s.expectedOwner,false);assert.ok(!/PRIVATE|SECRET|VIN|PHONE/.test(JSON.stringify(s)));});
+        test('bodycap failsclosed',async()=>{await assert.rejects(triage({env,fetchImpl:async()=>new Response('x'.repeat(4*1024**2+1))}),/body_bound/);});
+        test('deadline cancels hanging fetch',async()=>{await assert.rejects(triage({env,deadlineMs:20,fetchImpl:async(u,o)=>new Promise((_,reject)=>o.signal.addEventListener('abort',()=>reject(Error('aborted'))))}),/aborted/);});
+        FILE_147fdc12f0814bc1
+        printf '%s  %s\n' 147fdc12f0814bc15aa300ec01ea6f959910d3eb25089b9f373844711fb6ab48 "$RUNNER_TEMP/restore-triage/tests/triage.test.mjs" | sha256sum --check
+        node --test "$RUNNER_TEMP/restore-triage/tests/triage.test.mjs"
+    - name: Read only seven fixed metadata objects within two minutes
+      timeout-minutes: 3
+      env:
+        YC_OBJECT_STORAGE_REGION: us-east-1
+        YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+        YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+        NODE_OPTIONS: --max-old-space-size=256
+      run: |
+        set -euo pipefail
+        timeout --signal=TERM --kill-after=5s 115s node "$RUNNER_TEMP/restore-triage/scripts/korea-restore-triage.mjs"
+    - uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: korea-restore-durable-triage-44056968938
+        path: korea-restore-durable-triage.json
+        retention-days: 14
