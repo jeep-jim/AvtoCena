@@ -21,11 +21,11 @@ jobs:
       - name: Append only to the unchanged roadmap
         run: |
           set -euo pipefail
-          test "$(git hash-object roadmap.md)" = 526ab33ffe45f3817c6e14511f13d9199db55ff3
+          test "$(git hash-object roadmap.md)" = 06d3bfa3fdbd736cf0b3d49cfc3046d9c113e450
           python3 - <<'PY'
           from pathlib import Path
           p=Path('roadmap.md');old=p.read_bytes()
-          entry=Path('docs/operations/recovery-status-20261117-1525.md').read_bytes()
+          entry=Path('docs/operations/recovery-status-20261117-1605.md').read_bytes()
           p.write_bytes(old+entry)
           assert p.read_bytes().startswith(old)
           PY
@@ -33,5 +33,5 @@ jobs:
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add -- roadmap.md
           test "$(git diff --cached --name-only)" = roadmap.md
-          git commit -m 'Record verified preparation timeout and bounded China Korea recovery progress'
+          git commit -m 'Record verified China recovery launch and daily publisher safeguards'
           git push origin HEAD:main
