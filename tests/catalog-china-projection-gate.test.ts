@@ -11,5 +11,10 @@ test('publisher verifies scoped reader before intake and again at commit',()=>{
  const check="await assertScopedProjectionReaderReady()";
  assert.ok(code.indexOf(check)>0 && code.indexOf(check)<code.indexOf('const generation = await readGenerationFiles()'));
  const commit=code.slice(code.indexOf('async beforeManifestCommit() {'));
- assert.ok(commit.indexOf(check)>=0 && commit.indexOf(check)<commit.indexOf('await technicalRepairGuard'));
+ // Preserve the established technical-authority first check. Scoped reader
+ // compatibility is also mandatory within the same pre-commit callback, before
+ // the remaining authority checks and before the caller can perform its CAS.
+ assert.ok(commit.indexOf('await technicalRepairGuard')>=0);
+ assert.ok(commit.indexOf(check)>commit.indexOf('await technicalRepairGuard'));
+ assert.ok(commit.indexOf(check)<commit.indexOf('await assertCurrentKoreaPublicationSource'));
 });

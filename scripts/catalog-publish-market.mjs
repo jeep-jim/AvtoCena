@@ -821,9 +821,9 @@ if (regressionBlocked) {
         },
       } : {}),
       async beforeManifestCommit() {
+        await technicalRepairGuard?.verifyAuthority({operationId:publishOperationId});
         // Recheck after long staging: fail closed if serving compatibility changed.
         if (process.env.CATALOG_CHUNKED_PROJECTIONS_WRITE === '1') await assertScopedProjectionReaderReady();
-        await technicalRepairGuard?.verifyAuthority({operationId:publishOperationId});
         await assertCurrentKoreaPublicationSource();
         if (paidEncarReport) {
           const { assertCollectionEnabled } = await import("../apps/web/lib/catalog/collection-controls.ts");
