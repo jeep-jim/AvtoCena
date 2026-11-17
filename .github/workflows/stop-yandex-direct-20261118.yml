@@ -1,0 +1,37 @@
+name: Stop owner-retired Yandex Direct feed runs
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/stop-yandex-direct-20261118.yml']
+permissions:
+  contents: read
+  actions: write
+concurrency:
+  group: stop-owner-retired-yandex-direct-20261118
+  cancel-in-progress: false
+jobs:
+  stop:
+    if: github.ref == 'refs/heads/main' && github.event.head_commit.message == 'Remove owner-retired Yandex Direct automation and stop exact runs'
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Verify and cancel only the two retired advertising runs
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          for id in 44201857408 44201644747; do
+            timeout 20s gh api "repos/jeep-jim/AvtoCena/actions/runs/$id" > run.json
+            python - "$id" <<'PY'
+          import json,sys
+          x=json.load(open('run.json'))
+          assert x['id']==int(sys.argv[1]) and x['event']=='workflow_run'
+          assert x['path']=='.github/workflows/yandex-direct-feed.yml'
+          assert x['head_sha']=='2e45ad74305b0799445fc74ab2dfb35bc23bb5a3'
+          assert x['run_attempt']==1
+          PY
+            status=$(python -c "import json;print(json.load(open('run.json'))['status'])")
+            if [ "$status" != completed ]; then
+              timeout 20s gh api -X POST "repos/jeep-jim/AvtoCena/actions/runs/$id/cancel"
+            fi
+          done
