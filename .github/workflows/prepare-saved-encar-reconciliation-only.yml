@@ -1,0 +1,98 @@
+name: Prepare saved Encar reconciliation only
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/prepare-saved-encar-reconciliation-only.yml']
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: catalog-refresh-korea
+  cancel-in-progress: false
+jobs:
+  prepare-only:
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'workflow_dispatch' || github.event.head_commit.message == 'Prepare saved Encar reconciliation 43989797288')
+    runs-on: ubuntu-24.04
+    environment: regcloud-staging
+    timeout-minutes: 330
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - name: Bind exact source and successful original collection, never recollect
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs=require('fs');
+            const assert=require('assert/strict');
+            const {owner,repo}=context.repo;
+            assert.equal(context.ref,'refs/heads/main');
+            const original=await github.rest.actions.getWorkflowRun({owner,repo,run_id:43989797288});
+            const run=original.data;
+            assert.equal(run.head_sha,'e51f589f892babdcd6c1251e1ebb06c6d7c91e6d');
+            assert.equal(run.head_branch,'main');assert.equal(run.head_repository.full_name,`${owner}/${repo}`);
+            assert.equal(run.status,'completed');assert.equal(run.run_attempt,1);
+            const jobs=await github.paginate('GET /repos/{owner}/{repo}/actions/runs/{run_id}/attempts/{attempt_number}/jobs',
+              {owner,repo,run_id:43989797288,attempt_number:1,per_page:100});
+            const expected=[
+              [133727443324,'refresh / collect_initial','Collect the first bounded part of this paid Encar snapshot'],
+              [133845674226,'refresh / collect',"Continue saved pages and require the provider's real end before preparation"]
+            ];
+            for(const [id,name,step] of expected){const j=jobs.find(x=>x.id===id);assert.ok(j);assert.equal(j.name,name);assert.equal(j.conclusion,'success');assert.ok(j.steps.some(s=>s.name===step&&s.conclusion==='success'));}
+            const main=await github.rest.repos.getCommit({owner,repo,ref:'main'});assert.equal(main.data.sha,context.sha,'main moved before prepare-only started');
+            const authority={version:1,prepareSourceSha:context.sha,originalRun:run.id,originalAttempt:1,originalProducerSha:run.head_sha,
+              collectionJobs:expected.map(([id,name])=>({id,name,conclusion:'success'})),snapshotSha256:'c34e0546b1214a3829b7b6317f87c2ff3be05ff8bc9cd7c0ec5db0e212b7ac43',
+              supplierRequests:0,publishAllowed:false,checkedAt:new Date().toISOString()};
+            fs.mkdirSync('saved-encar-checkpoint',{recursive:true});fs.writeFileSync('saved-encar-checkpoint/github-authority.json',JSON.stringify(authority,null,2));
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24.22.1'
+          cache: npm
+      - run: npm ci
+      - name: Explicit resolver, report and raw-retention regressions before storage credentials
+        run: |
+          node --import tsx --test tests/paid-encar-saved-revisions.test.mjs tests/paid-encar-report-preparation.test.mjs tests/catalog-paid-encar-contributions.test.ts
+          node --test tests/saved-encar-prepare-only-guard.test.mjs
+      - name: Full regression suite before any derived preparation writes
+        timeout-minutes: 30
+        run: npm test
+      - name: Restore saved source, archive and verify prepare-only checkpoint
+        timeout-minutes: 285
+        env:
+          JSON_STORAGE_DRIVER: object
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_REGION: us-east-1
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+          YC_OBJECT_STORAGE_REQUEST_TIMEOUT_MS: '60000'
+          NODE_OPTIONS: --max-old-space-size=6144
+          ENCAR_PREPARE_ONLY_GUARD: '1'
+          ENCAR_SNAPSHOT_RUN: '43989797288'
+          ENCAR_SNAPSHOT_ATTEMPT: '1'
+          ENCAR_RECONCILE_SAVED_REVISIONS: '1'
+          ENCAR_SNAPSHOT_PRODUCER_SHA: e51f589f892babdcd6c1251e1ebb06c6d7c91e6d
+          ENCAR_SNAPSHOT_SHA256: c34e0546b1214a3829b7b6317f87c2ff3be05ff8bc9cd7c0ec5db0e212b7ac43
+          CATALOG_INTAKE_DIR: catalog-intake-korea
+          ENCAR_QUARANTINE_OUTPUT: saved-encar-checkpoint/paid-encar-revision-quarantine.json
+          PAID_REPORT_OUTPUT: saved-encar-checkpoint/paid-encar-report-preparation.json
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          git diff --exit-code HEAD --
+          node --import tsx --import ./scripts/saved-encar-prepare-only-guard.mjs scripts/saved-encar-prepare-checkpoint.mjs before
+          node --import tsx --import ./scripts/saved-encar-prepare-only-guard.mjs scripts/catalog-restore-encar-snapshot.mjs
+          node --import tsx --import ./scripts/saved-encar-prepare-only-guard.mjs scripts/catalog-archive-intake.mjs archive korea catalog-intake-korea
+          node --import tsx --import ./scripts/saved-encar-prepare-only-guard.mjs scripts/saved-encar-prepare-checkpoint.mjs after
+      - name: Preserve checkpoint only; full intake is in verified own storage
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: saved-encar-reconciled-checkpoint-43989797288-${{ github.run_id }}-${{ github.run_attempt }}
+          path: saved-encar-checkpoint/
+          if-no-files-found: error
+          retention-days: 14

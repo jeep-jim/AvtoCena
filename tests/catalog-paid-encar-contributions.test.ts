@@ -121,7 +121,7 @@ test('independent saved-page input binds actual raw bytes, order and full normal
 
 test('worker source identity uses actual clean tracked checkout rather than workflow owner identity', async () => {
   const directory = await fs.mkdtemp(path.join(os.tmpdir(), 'paid-source-'));
-  const files = ['scripts/lib/catalog-paid-encar-contributions.mjs', 'scripts/lib/paid-encar-offer.mjs',
+  const files = ['scripts/lib/catalog-paid-encar-contributions.mjs', 'scripts/lib/paid-encar-offer.mjs', 'scripts/lib/paid-encar-saved-revisions.mjs',
     'scripts/lib/catalog-source-contributions.mjs', 'scripts/lib/catalog-source-contribution-authority.mjs',
     'scripts/catalog-restore-encar-snapshot.mjs', 'scripts/catalog-publish-market.mjs', 'apps/web/lib/catalog/adapters.ts'];
   const git = args => execFileSync('git', args, {cwd: directory, encoding: 'utf8', stdio: ['ignore','pipe','pipe']});
@@ -522,4 +522,24 @@ test('persisted verified source contributions carry forward only with the same i
     intake:null,operationId:'changed_internal_unknown'});
   assert.equal(unknown.provenance.complete,false);
   assert.ok(unknown.provenance.references.some(row=>row.root===root));
+});
+
+test('quarantine manifest survives immutable intake archive and no-proof publication retains raw snapshot',async()=>{
+ const f=await fixture(),old=historicBaseline(f),directory=await fs.mkdtemp(path.join(os.tmpdir(),'paid-quarantine-'));
+ const restored=await fs.mkdtemp(path.join(os.tmpdir(),'paid-quarantine-restore-'));
+ try{
+  const {paidInputWitness,durableIntakeArchive,rawStoragePins,...base}=f.intake;
+  const manifest={version:1,root,snapshotSha256:rawDigest(f.snapshot),entries:[{sourceOfferId:'99999999',reason:'encar_revision_provider_tie',versions:[{page:1,row:1,rawSha256:'a'.repeat(64)},{page:2,row:1,rawSha256:'b'.repeat(64)}]}]};
+  const report={...base,savedRevisionQuarantine:manifest,savedRevisionSelection:{quarantinedIds:1,quarantinedRows:2,quarantineSha256:rawDigest(manifest)},rawRetirementBlocked:'saved_revision_quarantine'};
+  await fs.writeFile(path.join(directory,'report.json'),JSON.stringify(report));
+  await fs.writeFile(path.join(directory,'encar_direct-000001.jsonl'),f.rows.map(offer=>JSON.stringify({offer})).join('\n')+'\n');
+  const archiveOwner={...owner,attempt:'2'},receipt=await archiveIntakeDirectory({storage:f.storage,directory,market:'korea',owner:archiveOwner});
+  const {verifyIntakeArchive}=await import('../scripts/lib/nonjp-intake-archive.mjs');
+  await verifyIntakeArchive({storage:f.storage,receipt,directory:restored,readerOwner:archiveOwner});
+  const back=JSON.parse(await fs.readFile(path.join(restored,'report.json'),'utf8'));assert.deepEqual(back.savedRevisionQuarantine,manifest);assert.equal(back.paidInputWitness,undefined);
+  const intake=attachIntakeArchiveReceipt(report,receipt);
+  const publication=await prepareRawPublication({storage:f.storage,manifest:f.manifest,expectedBaseGenerationId:old.baseline.generationId,market:'korea',intake});
+  await publication.verify();const saved=await f.storage.readJson(rawGenerationKey(generationId),null);
+  assert.equal(saved.markets.korea.complete,false);assert.ok(saved.markets.korea.references.some(r=>r.root===root));assert.ok(saved.markets.korea.references.some(r=>r.root===old.oldRoot));
+ }finally{await fs.rm(directory,{recursive:true,force:true});await fs.rm(restored,{recursive:true,force:true});}
 });

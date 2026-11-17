@@ -23,7 +23,7 @@ export function paidContributionWorkerSource(root = fileURLToPath(new URL('../..
   try {
     execFileSync('git', ['ls-files', '--error-unmatch', 'scripts/lib/catalog-paid-encar-contributions.mjs',
       'scripts/lib/catalog-source-contributions.mjs', 'scripts/lib/catalog-source-contribution-authority.mjs',
-      'scripts/lib/paid-encar-offer.mjs', 'scripts/catalog-restore-encar-snapshot.mjs',
+      'scripts/lib/paid-encar-offer.mjs', 'scripts/lib/paid-encar-saved-revisions.mjs', 'scripts/catalog-restore-encar-snapshot.mjs',
       'scripts/catalog-publish-market.mjs', 'apps/web/lib/catalog/adapters.ts'], options);
     execFileSync('git', ['diff', '--quiet', 'HEAD', '--'], options);
     const sourceSha = execFileSync('git', ['rev-parse', '--verify', 'HEAD'], options).trim();

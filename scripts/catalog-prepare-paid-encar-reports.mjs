@@ -164,7 +164,7 @@ export function verifyCurrentReportCoverage(offers, records, identity, expectedC
   return {currentCount: offers.length, covered: ids.size, historyPresent, historyMissing, inspectionPresent, diagnosisPresent, samples};
 }
 
-export async function preparePaidEncarReports() {
+export async function preparePaidEncarReports({selection=null} = {}) {
   const {getJsonStorage} = await import('../apps/web/lib/data.ts');
   const {readCollectionControls} = await import('../apps/web/lib/catalog/collection-controls.ts');
   const {collectionEnabled} = await import('../apps/web/lib/catalog/collection-controls-schema.ts');
@@ -177,6 +177,7 @@ export async function preparePaidEncarReports() {
   const snapshot = await storage.readJson(prefix + '/complete.json', null);
   const identity = reportSnapshotIdentity(snapshot, run, attempt);
   const snapshotDigest = digest(snapshot);
+  selection?.assertSnapshot(snapshot);
   const owner=rawProducerOwner(),reportRoot=`catalog/paid-encar-reports/v1/${identity.observedAtMs}`;
   const rawPin=await openRawFeedPin({storage,owner,operationId:`encar-reports-${owner.runId}-${owner.attempt}`,
     references:[{kind:'encar-snapshot',root:prefix},{kind:'encar-reports',root:reportRoot}]});
@@ -188,25 +189,28 @@ export async function preparePaidEncarReports() {
     snapshotDigest, 'paid_report_source_snapshot_changed');
   await assertEnabled();
   const records = new Map();
-  let total = 0, duplicates = 0, pagesRead = 0;
+  let total = 0, duplicates = 0, quarantined = 0, pagesRead = 0;
   console.log(JSON.stringify({stage: 'saved_report_start', sourceRunId: String(run),
     sourceRunAttempt: String(attempt), pages: snapshot.pages}));
   await mapBounded(Array.from({length: snapshot.pages}, (_, i) => i + 1), 4, async page => {
     await assertEnabled();
     const rows = await storage.readJson(`${prefix}/pages/${page}.json`, null);
     assert.ok(Array.isArray(rows) && (rows.length > 0 || page === snapshot.pages), 'paid_report_missing_page:' + page);
+    selection?.assertPage(page,rows);
     for (const [index, row] of rows.entries()) {
       total++;
+      if(selection){const decision=selection.classify(page,index+1,row);if(decision==='quarantined'){quarantined++;continue;}if(decision==='superseded'){duplicates++;continue;}}
       if (!addReportRow(records, row, {page, row: index + 1})) duplicates++;
     }
     pagesRead++;
     if (pagesRead % 250 === 0) console.log(JSON.stringify({stage: 'saved_report_pages', pagesRead, total, unique: records.size}));
   });
   assert.equal(total, snapshot.count, 'paid_report_snapshot_count_mismatch');
-  assert.equal(total - duplicates, records.size);
+  assert.equal(total - duplicates - quarantined, records.size);
+  if(selection){assert.equal(records.size,selection.summary.publishableIds);assert.equal(quarantined,selection.summary.quarantinedRows);assert.equal(duplicates,selection.summary.supersededRows);}
   await assertSnapshotUnchanged();
   const prepared = buildReportBuckets(records, identity);
-  console.log(JSON.stringify({stage: 'paid_report_buckets_prepared', ...identity, total, duplicates,
+  console.log(JSON.stringify({stage: 'paid_report_buckets_prepared', ...identity, total, duplicates, quarantined,
     rowCount: records.size, bucketCount: prepared.buckets.length, bucketPrefixLength: prepared.complete.bucketPrefixLength,
     maximumBucketBytes: Math.max(...prepared.buckets.map(row => row.bytes))}));
   let coverage = null, koreaBefore = null;
@@ -238,7 +242,7 @@ export async function preparePaidEncarReports() {
   if (koreaBefore) assert.equal(digest((await storage.readJson('catalog/manifest.json', null))?.markets?.korea), digest(koreaBefore),
     'paid_report_current_korea_changed_after_preparation');
   const report = {version: 1, completed: true, completedAt: new Date().toISOString(), ...identity, root,
-    snapshotDigest, total, duplicates, rowCount: records.size, bucketCount: prepared.buckets.length,
+    snapshotDigest,...(selection?{savedRevisionSelection:selection.summary}:{}), total, duplicates, quarantined, rowCount: records.size, bucketCount: prepared.buckets.length,
     bucketPrefixLength: prepared.complete.bucketPrefixLength, completeDigest: digest(prepared.complete),
     maximumBucketBytes: Math.max(...prepared.buckets.map(row => row.bytes)), coverage,
     supplierRequests: 0, catalogManifestWrites: 0, offerWrites: 0, priceWrites: 0,
