@@ -6,6 +6,7 @@ import {readFileSync} from 'node:fs';
 const source=readFileSync(new URL('../apps/web/app/(public)/login/page.tsx',import.meta.url),'utf8');
 const block=source.slice(source.indexOf('  const featuresPromise ='),source.indexOf('\n  return ('));
 assert.ok(block.includes('const stored = storedResult.value;'));
+assert.ok(block.includes('if (storedResult.ok === false)'));
 const AsyncFunction=Object.getPrototypeOf(async function(){}).constructor;
 const names=['readPublicFeatures','readShowcase','PILOT_DEALER_ID','availableShowcase','withDealerRate','publicDealerProfile','publicRail','findDealer'];
 const runBlock=b=>new AsyncFunction(...names,b.replaceAll(' as const','')+'\nreturn {features,stored,dealer,topDealer};');
