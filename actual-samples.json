@@ -1,0 +1,245 @@
+{
+  "version": 1,
+  "kind": "bounded_actual_saved_fullprice_sample_manifest",
+  "sourceRun": "44077945953",
+  "sourceSha": "695f96d9918e30badd479e2033a906d126cd8f3e",
+  "sourceReportByteSha256": "914049e511d026af5aeb6519273da0f8ceeebcbddb8f591dc3cd716c8c5bd4a9",
+  "snapshotRoot": "catalog/intake-staging/encar/43989797288/1",
+  "snapshotSha256": "c34e0546b1214a3829b7b6317f87c2ff3be05ff8bc9cd7c0ec5db0e212b7ac43",
+  "snapshotProducerSha": "e51f589f892babdcd6c1251e1ebb06c6d7c91e6d",
+  "treePins": {
+    "producer": "9b0f76fa330bb86ecc85ca78e87b01363837ca6d",
+    "app": "e2683ae8711e0ac421ef9557c2b154db6166edf9",
+    "beforeApp": "c7e00f72292573dde4c892a2038a65e65d5b7066",
+    "beforeProducer": "03d8d3d8c47f33a41fc3da99b443737ec99812ce"
+  },
+  "samplePages": [
+    1,
+    2,
+    329,
+    658,
+    684,
+    987,
+    1316,
+    1330,
+    1645,
+    1974,
+    2303,
+    2632,
+    2961,
+    3007,
+    3290,
+    3619,
+    3948,
+    4277,
+    4606,
+    4935,
+    5263,
+    5592,
+    5921,
+    6250,
+    6579,
+    6908,
+    7237,
+    7566,
+    7895,
+    8224,
+    8553,
+    8882,
+    9211,
+    9540,
+    9869,
+    10123,
+    10198
+  ],
+  "selectionResolutionPerformed": false,
+  "publicationAcceptance": false,
+  "samplingMeaning": "10_reported_monetary_changes_2_unchanged_older_ice_controls_4_diagnostic_variety_not_population_price_acceptance",
+  "entries": [
+    {
+      "coordinate": {
+        "page": 329,
+        "row": 9
+      },
+      "rawSha256": "c70fa033ccbe3af8499385d4562112781ea13fe997985354e9ffed35990592e6",
+      "identitySha256": "c60035069c9b7b57c3c7023e8146eeb1a785ca01a7fea64b310acbc245b06c34",
+      "tags": [
+        "monetary_delta"
+      ]
+    },
+    {
+      "coordinate": {
+        "page": 329,
+        "row": 12
+      },
+      "rawSha256": "5ace2325a6ed85265d58de8355bb5fc49e39a82d5ffb812dc5e7d4fd995cd4e9",
+      "identitySha256": "d2e1ba1163dee72924761f80b95d0a981e06960936e1d921dce4fbbec5aed6b2",
+      "tags": [
+        "monetary_delta",
+        "reported_age_band_change"
+      ]
+    },
+    {
+      "coordinate": {
+        "page": 329,
+        "row": 17
+      },
+      "rawSha256": "f3e0c48441d937136c344eba71d136fe0d91f764e6ac896086476ac01b1f3251",
+      "identitySha256": "2b60a4821b7021e00ab159fa3200d50122c14b18c94abcf82361f0935f9fa603",
+      "tags": [
+        "monetary_delta",
+        "reported_age_band_change"
+      ]
+    },
+    {
+      "coordinate": {
+        "page": 2632,
+        "row": 18
+      },
+      "rawSha256": "12d545b421c8616cdedf287c35ae524c3a489a0b8ae35daf13b17b12a5c95a86",
+      "identitySha256": "98ae87225639ec9b6dbb6d7f02ea2411fab72d441580c68ca107c7b791785712",
+      "tags": [
+        "monetary_delta",
+        "reported_age_band_change"
+      ]
+    },
+    {
+      "coordinate": {
+        "page": 2961,
+        "row": 8
+      },
+      "rawSha256": "ec0b63d61ec6db387ee0e3ecdfe903985d7f73a2d9cc26ccc3669b0ada06e023",
+      "identitySha256": "090c3c37d91143663ee43118ca2f5678bc71bc40cc199ac33a23c7bd2e3b7943",
+      "tags": [
+        "monetary_delta",
+        "reported_age_band_change"
+      ]
+    },
+    {
+      "coordinate": {
+        "page": 2961,
+        "row": 10
+      },
+      "rawSha256": "e0c5562a279384bb48dac8ce390f45d85e9fe70344f36db14ae997f50cbe6dce",
+      "identitySha256": "bf5f4c8dcfe18a6bd1b3547a4415c38ebc80e55ee22a7ca35abd5bc0087269da",
+      "tags": [
+        "monetary_delta"
+      ]
+    },
+    {
+      "coordinate": {
+        "page": 3290,
+        "row": 4
+      },
+      "rawSha256": "fcbd3e838dacd1ffe2f714e042e9d8cdb8413eff6994a2dce6f139a4fc257c1a",
+      "identitySha256": "32630b9ea0b4cd172b0699b54acc02c858c0bbaf32981ea8b3ce9cb9db7bf23d",
+      "tags": [
+        "monetary_delta",
+        "reported_age_band_change"
+      ]
+    },
+    {
+      "coordinate": {
+        "page": 4277,
+        "row": 14
+      },
+      "rawSha256": "21811bd0a46dceb8c7c3c68e947842ef38e82b1d81a492522150de09a373d13b",
+      "identitySha256": "81872062dcd2b28eaf6ac6ec82976b4aa879765fdeb28103bee77bb6fbdd75e8",
+      "tags": [
+        "monetary_delta",
+        "reported_age_band_change"
+      ]
+    },
+    {
+      "coordinate": {
+        "page": 4935,
+        "row": 10
+      },
+      "rawSha256": "877c09ad2fbb5a15c66225f023b9fc1eb89ba8ad35170ce3499c696c52ee41cb",
+      "identitySha256": "5e57f2a1928f2326e59e38d6d851238cce2bee88fd4d833b0c85daa5d9c562ac",
+      "tags": [
+        "monetary_delta",
+        "reported_age_band_change"
+      ]
+    },
+    {
+      "coordinate": {
+        "page": 4935,
+        "row": 18
+      },
+      "rawSha256": "05dab8624989a5a8f7f28d36178438a6772e72cbfb64eeae530423a4c0d1689f",
+      "identitySha256": "68bdab155523290e0e7959a4adfd1ee8d9d2970ea58bee5e2d28b327d20b6814",
+      "tags": [
+        "monetary_delta",
+        "reported_age_band_change"
+      ]
+    },
+    {
+      "coordinate": {
+        "page": 1,
+        "row": 1
+      },
+      "rawSha256": "20e712dcf0e88fb7196a00597879b7fae08e5f2c24c02d23d21b69675a70b367",
+      "identitySha256": "c2bd92af29b102ae6f266f491190f8210a869fa2c5e2a30d3013739ed676fc77",
+      "tags": [
+        "unchanged_older_ice_control"
+      ]
+    },
+    {
+      "coordinate": {
+        "page": 1,
+        "row": 4
+      },
+      "rawSha256": "d112ec86817fb6d3604c715a8c73ece8bde6879853621f188dffcb9049ec7b2d",
+      "identitySha256": "61cf1721990ace6e5d4583f3370055f464f5938f0d112a8dfed90412e067f482",
+      "tags": [
+        "unchanged_older_ice_control"
+      ]
+    },
+    {
+      "coordinate": {
+        "page": 2632,
+        "row": 4
+      },
+      "rawSha256": "01f2cb26ad8d277508a354bcc3ac238b4ebe5ecf016a2ee08f311943514283bb",
+      "identitySha256": "9fa16bbda34d3077bb20ea70623dfbb8f8acc01e7b7da2185e2a08c138a611ff",
+      "tags": [
+        "conflict_hold"
+      ]
+    },
+    {
+      "coordinate": {
+        "page": 684,
+        "row": 11
+      },
+      "rawSha256": "a849b85548daae4ce1e318d0931996e9abd3aa67ecb5a0ef107af961a4e83df0",
+      "identitySha256": "068978dbe20905d19fa775c9da1befddd6e5e256a9226fef4f6ca360e9e63fa5",
+      "tags": [
+        "age_band_only",
+        "reported_age_band_change"
+      ]
+    },
+    {
+      "coordinate": {
+        "page": 1,
+        "row": 17
+      },
+      "rawSha256": "1e47a7048f19dee3b3dbe605259b76642ca48c4bfe387a497567e9658c3297d7",
+      "identitySha256": "ed75e1f491221449563af680d1e895aec93064265909eb27b37b6936f556b4f0",
+      "tags": [
+        "hybrid_hold"
+      ]
+    },
+    {
+      "coordinate": {
+        "page": 684,
+        "row": 10
+      },
+      "rawSha256": "ea2195261b66ee06a6aba417d78edc326387ae22b450b53ec0f55ecb1b0612d0",
+      "identitySha256": "f816a505de90ea3d5b0e4a6089783eadc93caaf9257db4058777afab09cebd1b",
+      "tags": [
+        "electric_hold"
+      ]
+    }
+  ]
+}

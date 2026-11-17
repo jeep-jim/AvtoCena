@@ -1,0 +1,5 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {assertFullpriceAcceptance} from '../scripts/lib/full-price/acceptance.mjs';
+const rows=()=>[1,4].flatMap(row=>['before','after'].flatMap(producer=>['before','after'].map(app=>({coordinate:{page:1,row},producer,app,result:{status:'complete',priceChecksPassed:true,fullPriceAccepted:true,totalRub:1000000}}))));
+test('unchanged controls accepted while explicit holds remain blocked',()=>assert.doesNotThrow(()=>assertFullpriceAcceptance([...rows(),{coordinate:{page:2632,row:4},result:{status:'blocked',fullPriceAccepted:false,priceChecksPassed:false,totalRub:null}}])));
+test('arithmetic failure in any otherwise-ready row fails',()=>{const r=rows();r.push({coordinate:{page:2,row:1},result:{status:'complete',priceChecksPassed:false}});assert.throws(()=>assertFullpriceAcceptance(r),/complete_arithmetic/);});
+test('old controls missing/repeated cell/held/changed total all fail',()=>{for(const mutate of [r=>r.pop(),r=>r[0].app='after',r=>r[0].result.fullPriceAccepted=false,r=>r[0].result.totalRub++]){const r=rows();mutate(r);assert.throws(()=>assertFullpriceAcceptance(r));}});

@@ -1,0 +1,93 @@
+name: Audit actual saved Korea automatic full prices
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/korea-fullprice-audit.yml']
+permissions: {contents: read, actions: read}
+concurrency: {group: owner-saved-korea-readonly-audit, cancel-in-progress: false}
+jobs:
+  audit:
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'workflow_dispatch' || github.event.head_commit.message == 'Audit saved Korea full prices four cells e2683ae8')
+    runs-on: ubuntu-24.04
+    environment: regcloud-staging
+    timeout-minutes: 55
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: '${{ github.sha }}', persist-credentials: false}
+      - uses: actions/setup-node@v4
+        with: {node-version: '24.22.1', cache: npm}
+      - uses: actions/checkout@v4
+        with: {ref: e2683ae8711e0ac421ef9557c2b154db6166edf9, path: audit-app, persist-credentials: false}
+      - uses: actions/checkout@v4
+        with: {ref: c7e00f72292573dde4c892a2038a65e65d5b7066, path: audit-before-app, persist-credentials: false}
+      - uses: actions/checkout@v4
+        with: {ref: 03d8d3d8c47f33a41fc3da99b443737ec99812ce, path: audit-before-producer, persist-credentials: false}
+      - uses: actions/checkout@v4
+        with: {ref: 9b0f76fa330bb86ecc85ca78e87b01363837ca6d, path: audit-producer, persist-credentials: false}
+      - name: Install each pinned tree without copying runtime modules
+        run: |
+          npm ci
+          npm ci --prefix audit-producer
+          npm ci --prefix audit-app
+          npm ci --prefix audit-before-app
+          npm ci --prefix audit-before-producer
+      - uses: actions/download-artifact@v4
+        with:
+          name: korea-postfix-actual-path-audit
+          run-id: 44077945953
+          github-token: ${{ github.token }}
+          path: evidence
+      - name: Offline full-price lifecycle, selection and read fence tests
+        env:
+          POSTFIX_ACTUAL_REPORT: ${{ github.workspace }}/evidence/korea-postfix-audit.json
+        run: node --test tests/actual-fullprice-samples.test.mjs tests/actual-fullprice-loader.test.mjs tests/automatic-price-probe.test.mjs tests/price-lifecycle.test.mjs tests/fullprice-network-guard.test.mjs tests/korea-fullprice-source.test.mjs tests/fullprice-acceptance.test.mjs
+      - name: Actual runtime offline snapshot and negative fixtures on both app roots
+        run: |
+          for root in "$GITHUB_WORKSPACE/audit-before-app" "$GITHUB_WORKSPACE/audit-app"; do
+            AUDIT_FIXTURE_APP_ROOT="$root" node --import tsx tests/fullprice-runtime-fixture.mjs
+            for fault in remote unknown write local; do
+              AUDIT_FIXTURE_APP_ROOT="$root" FAULT="$fault" node --import tsx tests/fullprice-runtime-fixture.mjs
+            done
+          done
+      - name: Verify five untouched source trees before credentials
+        env:
+          AUDIT_APP_ROOT: ${{ github.workspace }}/audit-app
+          AUDIT_PRODUCER_ROOT: ${{ github.workspace }}/audit-producer
+          AUDIT_BEFORE_APP_ROOT: ${{ github.workspace }}/audit-before-app
+          AUDIT_BEFORE_PRODUCER_ROOT: ${{ github.workspace }}/audit-before-producer
+        run: node scripts/korea-postfix-source-guard.mjs
+      - name: Verify original saved collection authority before credentials
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const assert=require('assert/strict'); const {owner,repo}=context.repo;
+            const {data:r}=await github.rest.actions.getWorkflowRun({owner,repo,run_id:43989797288});
+            assert.equal(r.head_sha,'e51f589f892babdcd6c1251e1ebb06c6d7c91e6d');assert.equal(r.run_attempt,1);assert.equal(r.status,'completed');assert.equal(r.head_repository.full_name,`${owner}/${repo}`);
+            const jobs=await github.paginate('GET /repos/{owner}/{repo}/actions/runs/{run_id}/attempts/{attempt_number}/jobs',{owner,repo,run_id:43989797288,attempt_number:1,per_page:100});
+            for(const id of [133727443324,133845674226])assert.equal(jobs.find(j=>j.id===id)?.conclusion,'success');
+      - name: Read selected saved rows and compare four automatic catalog price paths
+        timeout-minutes: 22
+        env:
+          AUDIT_APP_ROOT: ${{ github.workspace }}/audit-app
+          AUDIT_PRODUCER_ROOT: ${{ github.workspace }}/audit-producer
+          AUDIT_BEFORE_APP_ROOT: ${{ github.workspace }}/audit-before-app
+          AUDIT_BEFORE_PRODUCER_ROOT: ${{ github.workspace }}/audit-before-producer
+          POSTFIX_ACTUAL_REPORT: ${{ github.workspace }}/evidence/korea-postfix-audit.json
+          NODE_OPTIONS: --max-old-space-size=4096
+          JSON_STORAGE_DRIVER: object
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_REGION: us-east-1
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+          YC_OBJECT_STORAGE_REQUEST_TIMEOUT_MS: '60000'
+          AVTOCENA_INTERACTIVE_READ_BUDGET_MS: '60000'
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+        run: node --import tsx scripts/korea-fullprice-audit.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: korea-fullprice-actual-audit
+          path: korea-fullprice-audit.json
+          retention-days: 7
