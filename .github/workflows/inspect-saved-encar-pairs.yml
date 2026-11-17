@@ -10,7 +10,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   inspect:
-    if: github.event.head_commit.message == 'Inspect saved Encar conflict pairs 43989797288'
+    if: github.event.head_commit.message == 'Inspect saved Encar revision authority 43989797288'
     runs-on: ubuntu-24.04
     timeout-minutes: 12
     environment: regcloud-staging
@@ -23,7 +23,7 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
-      - run: node --test tests/encar-conflict-pairs.test.mjs
+      - run: node --test tests/encar-conflict-pairs.test.mjs tests/encar-authority.test.mjs
       - name: Inspect exact saved Korea conflict pairs only
         timeout-minutes: 8
         env:

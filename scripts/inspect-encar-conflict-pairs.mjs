@@ -35,6 +35,18 @@ export function differences(a,b){
  walk(a,b,[],'',0);return out;
 }
 const fields=raw=>Object.fromEntries(['history','inspection','diagnosis'].map(k=>[k,raw.data[k]??null]));
+export function authorityEvidence(a,b,snapshot){
+ const present=v=>v!==null&&v!==undefined&&v!=='';
+ const field=(x,k)=>({present:present(x[k]),type:kind(x[k])});
+ const identityFields=['inner_id','vin','url','mark','model','generation','generation_code','configuration','complectation','year','model_year','first_registration_date','displacement_cc','engine_type','transmission_type','body_type','drive_type'];
+ const identity=Object.fromEntries(identityFields.map(k=>[k,{previous:field(a.data,k),incoming:field(b.data,k),equal:hash(a.data[k]??null)===hash(b.data[k]??null)}]));
+ const timestamp=v=>typeof v==='string'&&/^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(?:\.\d+)?Z$/.test(v)&&Number.isFinite(Date.parse(v))?Date.parse(v):null;
+ const dates={};for(const k of ['created_at','offer_created','first_advertised_at']){const x=timestamp(a.data[k]),y=timestamp(b.data[k]);dates[k]={previousValid:x!==null,incomingValid:y!==null,order:x!==null&&y!==null?Math.sign(y-x):null,bothBeforeSnapshot:x!==null&&y!==null&&Math.max(x,y)<=Date.parse(snapshot.completedAt)};}
+ const reportDates={};for(const [block,key] of [['history','report_date'],['inspection','issue_date'],['diagnosis','date']]){const x=a.data[block]?.[key],y=b.data[block]?.[key],valid=v=>typeof v==='string'&&/^\d{4}-\d\d-\d\d$/.test(v)&&Number.isFinite(Date.parse(v));reportDates[block]={previousBlockType:kind(a.data[block]??null),incomingBlockType:kind(b.data[block]??null),previousDateValid:valid(x),incomingDateValid:valid(y),order:valid(x)&&valid(y)?Math.sign(Date.parse(y)-Date.parse(x)):null};}
+ const ids={bothPositiveIntegers:[a.id,b.id].every(x=>Number.isSafeInteger(x)&&x>0),incomingGreater:Number.isSafeInteger(a.id)&&Number.isSafeInteger(b.id)?b.id>a.id:null,envelopeMatchesData:a.id===a.data.id&&b.id===b.data.id};
+ const envelope={ids,createdAtMatchesData:a.created_at===a.data.created_at&&b.created_at===b.data.created_at,bothFullAdded:a.change_type==='added'&&b.change_type==='added',sameEnvelopeKeys:hash(Object.keys(a).sort())===hash(Object.keys(b).sort())};
+ return {identity,dates,reportDates,envelope,sameSaleAdmission:['advertisement_type','sales_status','is_duplicate','duplicate_of','lease'].every(k=>hash(a.data[k]??null)===hash(b.data[k]??null)),samePriceAndCurrency:hash([a.data.price,a.data.currency])===hash([b.data.price,b.data.currency]),notAnAuthorityDecision:true};
+}
 export async function inspectPairs({storage,plan}){
  assert.equal(plan.root,'catalog/intake-staging/encar/43989797288/1');assert.equal(plan.conflicts.length,21);
  const root=plan.root,snapshot=await storage.readJson(root+'/complete.json',null);assert.equal(hash(snapshot),plan.snapshotSha256);
@@ -54,7 +66,7 @@ export async function inspectPairs({storage,plan}){
  const reports=[];
  for(const c of plan.conflicts){
   const raw=[];for(const p of [c.previous,c.incoming]){const rows=await page(p.page),r=rows[p.row-1];assert.ok(r);assert.equal(String(r.inner_id),c.id);assert.equal(String(r.data?.inner_id),c.id);assert.equal(hash(fields(r)),p.digest);raw.push(r);}
-  const [a,b]=raw;reports.push({id:c.id,coordinates:{previous:[c.previous.page,c.previous.row],incoming:[c.incoming.page,c.incoming.row]},reportDifferences:differences(fields(a),fields(b)),envelopeDifferences:differences(Object.fromEntries(Object.entries(a).filter(([k])=>k!=='data')),Object.fromEntries(Object.entries(b).filter(([k])=>k!=='data'))),nonReportDataDifferences:differences(Object.fromEntries(Object.entries(a.data).filter(([k])=>!['history','inspection','diagnosis'].includes(k))),Object.fromEntries(Object.entries(b.data).filter(([k])=>!['history','inspection','diagnosis'].includes(k))))});
+  const [a,b]=raw;reports.push({id:c.id,authorityEvidence:authorityEvidence(a,b,snapshot),coordinates:{previous:[c.previous.page,c.previous.row],incoming:[c.incoming.page,c.incoming.row]},reportDifferences:differences(fields(a),fields(b)),envelopeDifferences:differences(Object.fromEntries(Object.entries(a).filter(([k])=>k!=='data')),Object.fromEntries(Object.entries(b).filter(([k])=>k!=='data'))),nonReportDataDifferences:differences(Object.fromEntries(Object.entries(a.data).filter(([k])=>!['history','inspection','diagnosis'].includes(k))),Object.fromEntries(Object.entries(b.data).filter(([k])=>!['history','inspection','diagnosis'].includes(k))))});
  }
  assert.equal(hash(await storage.readJson(root+'/complete.json',null)),plan.snapshotSha256);
  return {version:1,snapshotSha256:plan.snapshotSha256,conflicts:reports,selectedPages:pages.size,receiptsRead:receipts.size,checks:{rawPageHashes:true,adjacentReceiptLinks:true,fullSnapshotReceiptChain:false,fullInventoryRescan:false,idsAndExpectedReportHashes:true,snapshotUnchanged:true},resolutionSelected:false};
