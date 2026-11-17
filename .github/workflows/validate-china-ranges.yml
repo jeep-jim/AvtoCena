@@ -1,0 +1,54 @@
+name: Validate exact China immutable ranged read
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: [.github/workflows/validate-china-ranges.yml]
+permissions:
+  contents: read
+concurrency:
+  group: avtocena-exact-china-range-validation
+  cancel-in-progress: false
+jobs:
+  validate:
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'workflow_dispatch' || github.event.head_commit.message == 'Validate immutable China ranged read c7e00f72')
+    runs-on: ubuntu-24.04
+    environment: regcloud-staging
+    timeout-minutes: 20
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        path: controller
+        persist-credentials: false
+    - uses: actions/checkout@v4
+      with:
+        ref: c7e00f72292573dde4c892a2038a65e65d5b7066
+        path: candidate
+        persist-credentials: false
+    - uses: actions/setup-node@v4
+      with:
+        node-version: '24.22.1'
+    - name: Validate guarded range downloader and clean source import before credentials
+      run: |
+        node --test controller/tests/range-download.test.mjs
+        node --input-type=module -e "const m=await import('./candidate/scripts/catalog-candidate-budget-prepare.mjs');if(typeof m.installCandidateBudgetNetworkFence!=='function')throw Error('source_fence_missing');"
+    - name: Read only one pinned China object with bounded ranged requests
+      timeout-minutes: 16
+      env:
+        CANDIDATE_ROOT: ${{ github.workspace }}/candidate
+        RANGE_VALIDATION_REPORT: ${{ github.workspace }}/china-range-validation.json
+        JSON_STORAGE_DRIVER: object
+        YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+        YC_OBJECT_STORAGE_REGION: us-east-1
+        YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+        YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+        YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+        YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+        NODE_OPTIONS: --max-old-space-size=2048
+      run: node controller/scripts/validate-china-ranges.mjs
+    - uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: exact-china-range-validation
+        path: china-range-validation.json
+        if-no-files-found: error
