@@ -52,6 +52,9 @@ export async function collectSourcePage(state, options) {
   state.consecutiveListFailures=0;
   state.stopReason='running';
   if (page.health?.blocked) { state.done = true; state.stopReason = 'blocked'; state.health = page.health; await checkpoint(); return; }
+  // Archiving is awaited before normalization, filtering or cursor movement.
+  // A failed local archive cannot silently turn into a complete source page.
+  if(options.archivePage)await options.archivePage(page,state.cursor);
   state.cursors.add(cursorKey); state.pages++; state.listingRows += page.items?.length || 0;
   state.health = page.health; state.diagnostics = page.diagnostics;
   state.upstreamListingRows = (state.upstreamListingRows || 0) + Number(page.diagnostics?.listingRows ?? page.items?.length ?? 0);

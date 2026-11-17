@@ -1,0 +1,34 @@
+{
+  "base": "83ff17075e9188dcf227c8752dc064248d5f42e0",
+  "operationalSource": "696e0e71fd85b168b0725cb6bbf798db274e0b3d",
+  "selectedHunks": [
+    "@@ -1,3 +1,5 @@",
+    "@@ -1431,13 +1444,22 @@ async function readCatalogFacetsUncached(input: CatalogSearchParams = {}): Promi",
+    "@@ -1487,11 +1509,21 @@ export async function persistInternalCatalog(",
+    "@@ -1522,7 +1554,8 @@ async function persistJapanAuctionHistory(storage: ReturnType<typeof getJsonStor",
+    "@@ -1562,6 +1595,12 @@ export type PersistCatalogOptions = {",
+    "@@ -1599,6 +1638,12 @@ export async function persistCatalogOffers(nextOffers: VehicleOffer[], options:",
+    "@@ -1683,7 +1728,8 @@ export async function persistCatalogOffers(nextOffers: VehicleOffer[], options:",
+    "@@ -1692,8 +1738,9 @@ export async function persistCatalogOffers(nextOffers: VehicleOffer[], options:",
+    "@@ -1744,18 +1791,41 @@ export async function persistCatalogOffers(nextOffers: VehicleOffer[], options:",
+    "@@ -1884,7 +1954,7 @@ type PreparedCurrentReadModels = {",
+    "@@ -1940,6 +2010,7 @@ async function writeCurrentCatalogReadModels(generationId: string, storedOffers:"
+  ],
+  "operationalModules": [
+    "raw-coordination-gate.mjs",
+    "publication-commit-barrier.mjs",
+    "raw-internal-provenance.mjs",
+    "source-contribution-reader.mjs",
+    "owned-bounded-json.mjs"
+  ],
+  "baseStorageSha256": "f6427fad0e06564c48c18bb525796661838d3837703e6974cc7ee38971701e3a",
+  "operationalModuleSha256": {
+    "raw-coordination-gate.mjs": "fc4ee4c488603dd6c5c54a8a9b97afffed54da32c597272244e7081de6dee80e",
+    "publication-commit-barrier.mjs": "76840561864de3a65449158e6536c712bde95c3f2b43c2ac3a8b76760635fa4c",
+    "raw-internal-provenance.mjs": "a6489abdbf91160c7639053043a78a38a994bc5d0a428fc1b332e029e23a8a4d",
+    "source-contribution-reader.mjs": "1fa26970657320fe048449ad9d95303c75481b878d21ef96c548058cdbffde9b",
+    "owned-bounded-json.mjs": "8b1413a65ff2b1e3811f3bbe1c654523769b5530ce726e738fa62967f29a9752"
+  },
+  "servingLibraryTrees": "040000 tree 5280cf16624899b753490acb8cc891a0e64459db\tapps/web/lib\n040000 tree 27c4506d1cc40958613297190319987d0fbe9df2\tpackages",
+  "selectedDiffSha256": "84ffc00c3d6a95b115086f75875afe5abe26ac9d4b1539881daacb9516dd267f"
+}
