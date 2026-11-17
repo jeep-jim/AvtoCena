@@ -1,0 +1,72 @@
+name: Audit actual China automatic full price control
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/china-fullprice-audit.yml']
+permissions: {contents: read, actions: read}
+concurrency: {group: owner-saved-korea-readonly-audit, cancel-in-progress: false}
+jobs:
+  audit:
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'workflow_dispatch' || github.event.head_commit.message == 'Audit actual China full price control e2683ae8')
+    runs-on: ubuntu-24.04
+    environment: regcloud-staging
+    timeout-minutes: 55
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: '${{ github.sha }}', persist-credentials: false}
+      - uses: actions/setup-node@v4
+        with: {node-version: '24.22.1', cache: npm}
+      - uses: actions/checkout@v4
+        with: {ref: e2683ae8711e0ac421ef9557c2b154db6166edf9, path: audit-app, persist-credentials: false}
+      - uses: actions/checkout@v4
+        with: {ref: c7e00f72292573dde4c892a2038a65e65d5b7066, path: audit-before-app, persist-credentials: false}
+      - name: Install each pinned tree without copying runtime modules
+        run: |
+          npm ci
+          npm ci --prefix audit-app
+          npm ci --prefix audit-before-app
+      - name: Offline China actual-control scope and collector lifecycle tests
+        run: node --test tests/china-actual-control.test.mjs tests/china-network-guard.test.mjs tests/china-fullprice-source.test.mjs tests/price-lifecycle.test.mjs tests/automatic-price-probe.test.mjs
+      - name: Actual runtime offline snapshot and negative fixtures on both app roots
+        run: |
+          for root in "$GITHUB_WORKSPACE/audit-before-app" "$GITHUB_WORKSPACE/audit-app"; do
+            AUDIT_FIXTURE_APP_ROOT="$root" node --import tsx tests/fullprice-runtime-fixture.mjs
+            for fault in remote unknown write local; do
+              AUDIT_FIXTURE_APP_ROOT="$root" FAULT="$fault" node --import tsx tests/fullprice-runtime-fixture.mjs
+            done
+          done
+      - name: Verify three untouched source trees before credentials
+        env:
+          AUDIT_APP_ROOT: ${{ github.workspace }}/audit-app
+          AUDIT_BEFORE_APP_ROOT: ${{ github.workspace }}/audit-before-app
+        run: node scripts/china-fullprice-source-guard.mjs
+      - name: Require reviewed Korea audit outcome before real China reads
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const assert=require('assert/strict');const {owner,repo}=context.repo;
+            const {data:r}=await github.rest.actions.getWorkflowRun({owner,repo,run_id:44083655303});
+            assert.equal(r.head_sha,'6f8836942945c4ac7eb0e346fb0c94fdd3fe8b0d');assert.equal(r.status,'completed');assert.equal(r.conclusion,'success');assert.equal(r.head_repository.full_name,`${owner}/${repo}`);
+      - name: Read pinned China manifest and one chunk and compare actual automatic prices
+        timeout-minutes: 22
+        env:
+          AUDIT_APP_ROOT: ${{ github.workspace }}/audit-app
+          AUDIT_BEFORE_APP_ROOT: ${{ github.workspace }}/audit-before-app
+          NODE_OPTIONS: --max-old-space-size=4096
+          JSON_STORAGE_DRIVER: object
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_REGION: us-east-1
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+          YC_OBJECT_STORAGE_REQUEST_TIMEOUT_MS: '60000'
+          AVTOCENA_INTERACTIVE_READ_BUDGET_MS: '60000'
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+        run: node --import tsx scripts/china-fullprice-audit.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: china-fullprice-actual-control
+          path: china-fullprice-audit.json
+          retention-days: 7
