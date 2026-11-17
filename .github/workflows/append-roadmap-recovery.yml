@@ -10,7 +10,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   append:
-    if: github.event.head_commit.message == 'Append verified timeout and guarded publication checkpoint'
+    if: github.event.head_commit.message == 'Append verified cache serialization and successor checks'
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     steps:
@@ -21,11 +21,11 @@ jobs:
       - name: Append only to the unchanged roadmap
         run: |
           set -euo pipefail
-          test "$(git hash-object roadmap.md)" = f1a7c78a65b1aee9831cde6df22599591c33c1f7
+          test "$(git hash-object roadmap.md)" = bcf0fcad499cf1b7fc59760b2390d70c5a74009f
           python3 - <<'PY'
           from pathlib import Path
           p=Path('roadmap.md');old=p.read_bytes()
-          entry=Path('docs/operations/guarded-publication-checkpoint-20261117.md').read_bytes()
+          entry=Path('docs/operations/cache-serialization-checkpoint-20261117.md').read_bytes()
           p.write_bytes(old+entry)
           assert p.read_bytes().startswith(old)
           PY
@@ -33,5 +33,5 @@ jobs:
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add -- roadmap.md
           test "$(git diff --cached --name-only)" = roadmap.md
-          git commit -m 'Record exact preparation timeout and guarded publication tests'
+          git commit -m 'Record verified cache serialization and exact successor CI'
           git push origin HEAD:main

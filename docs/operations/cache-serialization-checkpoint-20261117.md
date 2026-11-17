@@ -1,0 +1,13 @@
+
+
+## 2026-11-17 13:37 UTC — Изолирована сериализация кеша; все13 checks successor прошли
+
+Read-only bounded probe44092213730 (source a3bb4d112a8cb609845830aefab611e7858050d0) завершился по штатному watchdog590+5s, exit124. Это диагностический предел, не попытка публикации. Artifact14331979309, ZIP SHA256 d33965b2f3b0040ce29557f344d373a1916b1ff077870a3dae8c5b59c1cdbfdf, сохранил8 per-process progress snapshots и свежие preflight evidence. Source/health/lock/snapshot/binding checks выполнены read-only, запись/активация запрещены.
+
+Новая доказанная причина задержки: persistentCache.read удерживает общую directory lock вокруг remote HEAD/GET, последующего HEAD и проверки байтов. В trace4 запроса cache_read начались на562975–562976ms, но закончились через1356/2635/3999/5357ms; сетевые операции разных небольших Korea generation objects не перекрывались. Хеширование40–42KB занимало0–1ms. Процесс работал, не зависал; это доказанный bottleneck, но пока не доказательство единственной причины прежнего60min timeout. Исправляется bounded concurrency с короткой index-critical section, per-key ownership, общими byte/object reservations и ограничением памяти. Все SHA/ETag/source/generation/verification/seal/fence проверки остаются. Новая большая подготовка пока не запущена.
+
+Первая загрузка standalone workflow44091673580 была отклонена GitHub до job: YAML525893bytes превысил500KB. Упаковка static-errors.json заменена на deterministic gzip/base64 с обязательной проверкой прежнего SHA; новый YAML276692bytes, все helpers побайтно сохранены. 9workflow+8Node tests и независимый review PASS. Это не был повтор фактического чтения.
+
+PR1793/source696e0e71fd85b168b0725cb6bbf798db274e0b3d: все13 обязательных checks теперь success, основнойCI44091039368. Единственный первоначально упавший dealer-selection browser job исследован отдельно:141 browser/CSS input byte-identical e268, changed storage отсутствует в fixture bundle. Изолированный diagnostic44093215057 (artifact14332846436, ZIP149e2f63a847870986a249fc7b25ff3d4c059bcabf696a28a2d2b69595d5ce4a) восстановил900px после закрытия кнопкой и Back; все92 assertions/waits сохранены. Затем один повтор именно исходного job безinstrumentation,134075045903 в44091039422, success. Это gate passed on retry, НЕ заявка на исправленныйUIbug: причина первоначального1265px не установлена. UI/runtime/таймауты не менялись.
+
+На13:37 сохранённая Корея44056968938 продолжает восстановление; повторного платного сбора и установки нет. Реальные два Kia ещё требуют оконченного restore/derived overlay и точных locators. Исправленный companion прошёл34 tests и independent review; combined overlay+companion84/84PASS. Эти synthetic tests не подменяют фактическую приёмку поставщика.
