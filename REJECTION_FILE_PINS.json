@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "trigger": "Audit all saved Korea validation rejections e2683ae8 v1",
+  "baseline": "94b0ccafd98e3f9b15fe462fab89e49a454910f7",
+  "files": {
+    ".github/workflows/korea-rejections-audit.yml": "5ffac6268fd4f15b95e82c8cdd87b19e02c5b0a3010c694b210233fb03b07971",
+    "scripts/korea-postfix-audit.mjs": "e24727a86af0a29a75ee4a23aa6a83e9e9b75bbb2ba8737bce950b9a5c782ebe",
+    "scripts/korea-postfix-source-guard.mjs": "6b823f7e7c738a961e56ce605032287500ff4fc94de9290781623a7f487846a4",
+    "scripts/korea-rejections-file-guard.mjs": "85b1e15e5f6d8b4e27902c1eccb50d94dbe64220e0c208a5bc5297ca2379122e",
+    "scripts/lib/korea-calc-path-audit.mjs": "05fbe4a28bc0f09896fa03a080f46ae0080c5369e21d8a7f1b2bfdd136362181",
+    "scripts/lib/korea-saved-path-audit.mjs": "e6d0ff3bc19cabb37317e45824759487c68ef90df0462050c5d4e5e3ddda07d2",
+    "scripts/lib/validation-rejection-diagnostic.mjs": "b60d2aff8973d0acd5ab9bdee7096d457c2205c994cd2b685761416c14d0700a",
+    "scripts/safe-prepare-errors.mjs": "76fc61dc69cb95f6128cbf21338a4daee254c0363b7b35945fecf1b40aadc41f",
+    "static-errors.json": "4d3b9d7fef02528a0a32c7d38e7b10f5cd07c2323fe8f7f6b518723baa1329a9",
+    "tests/korea-saved-path-audit.test.mjs": "f8331ccb9503e935f63898eeb10bac871f67968ecd478f11ea21a58e2a3202e4",
+    "tests/korea-calc-path-audit.test.mjs": "06d220a569ad8b143cd7b3b89b55596ba1e1ae0a6715d88eec070435c1c5b752",
+    "tests/korea-manufacture-producer.test.ts": "3c835b228a608e46ea8be66ebea3e97258e592a05771f6341111a8ddd9236f20",
+    "tests/korea-postfix-source-guard.test.mjs": "cb864e5732dc51d77b59d6c67d6d0d4b47c1059a5acb8bc600cb2ef693545a14",
+    "tests/korea-rejections-diagnostic.test.mjs": "af07f4b81ea3d3eee08ddf28ff3b2bd946bd6c9f5703f86c27b83e4a24795eaf"
+  }
+}

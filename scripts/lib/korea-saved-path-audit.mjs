@@ -28,7 +28,7 @@ export function retainSample(samples,sample,limit=64){
 export async function auditSavedPages({storage,inspectRow,admit,controlsEnabled,snapshotSha=SNAPSHOT_SHA,pages=SAMPLE_PAGES}){
  const snapshot=await storage.readJson(ROOT+'/complete.json',null);assert.equal(hash(snapshot),snapshotSha);assert.equal(snapshot.producerSha,PRODUCER);assert.equal(snapshot.runId,'43989797288');assert.equal(snapshot.attempt,'1');assert.equal(snapshot.count,203948);assert.equal(snapshot.pages,10198);
  const before=await storage.readJson(CONTROLS,null);assert.ok(controlsEnabled(before));const authority={market:before.markets.korea,source:before.sources.encar_feed};
- const receipts=new Map(),samples=[],issues={},beforeIssues={},strata={},sampleCounts={},targetProofs=Object.fromEntries(TARGET_IDS.map(id=>[hash(id),[]]));let examined=0,admitted=0;
+ const rejectedRecords=[],rejectionCounts={},receipts=new Map(),samples=[],issues={},beforeIssues={},strata={},sampleCounts={},targetProofs=Object.fromEntries(TARGET_IDS.map(id=>[hash(id),[]]));let examined=0,admitted=0;
  async function receipt(page){if(!receipts.has(page)){const r=await storage.readJson(ROOT+'/page-receipts/'+page+'.json',null);assert.ok(r);for(const k of ['version','market','provider','runId','attempt','producerSha'])assert.equal(r[k],snapshot[k]);assert.equal(r.page,page);assert.equal(r.next,page<snapshot.pages?page+1:null);receipts.set(page,r);}return receipts.get(page);}
  for(const page of pages){
   const control=await storage.readJson(CONTROLS,null);assert.ok(controlsEnabled(control));assert.deepEqual({market:control.markets.korea,source:control.sources.encar_feed},authority);
@@ -40,7 +40,9 @@ export async function auditSavedPages({storage,inspectRow,admit,controlsEnabled,
    const admission=admit(raw.data);if(TARGET_IDS.includes(String(raw.inner_id))){const list=targetProofs[hash(String(raw.inner_id))];assert.ok(list.length<8);list.push({coordinate:{page,row:index+1},rawSha256:hash(raw),admitted:Boolean(admission),raw:technicalRaw(raw.data)});}
    if(!admission){strata.excluded=(strata.excluded||0)+1;continue;}admitted++;
    const result=await inspectRow(raw.data,{id:String(raw.inner_id),observedAt:snapshot.completedAt});
-   assert.ok(result&&Array.isArray(result.issues)&&typeof result.stratum==='string');strata[result.stratum]=(strata[result.stratum]||0)+1;
+   assert.ok(result&&Array.isArray(result.issues)&&typeof result.stratum==='string');
+   if(result.technical?.validation==='rejected'){const diagnostic=result.technical.rejectionDiagnostic;assert.ok(diagnostic&&typeof diagnostic.validationCode==='string','audit_rejection_diagnostic_missing');assert.ok(rejectedRecords.length<740,'audit_rejection_bound');rejectedRecords.push({coordinate:{page,row:index+1},rawSha256:hash(raw),identitySha256:hash(String(raw.inner_id)),stratum:result.stratum,...diagnostic,sourceEvidence:result.technical.sourceEvidence});const key=result.stratum+':'+diagnostic.validationCode;rejectionCounts[key]=(rejectionCounts[key]||0)+1;}
+strata[result.stratum]=(strata[result.stratum]||0)+1;
    for(const code of result.technical?.beforeIssues||[])beforeIssues[code]=(beforeIssues[code]||0)+1;
    result.issues=[...new Set([...result.issues,...dateLossIssues(result)])];
    const tags=[result.stratum,...result.issues.map(code=>'issue:'+code)];for(const code of result.issues)issues[code]=(issues[code]||0)+1;
@@ -48,5 +50,6 @@ export async function auditSavedPages({storage,inspectRow,admit,controlsEnabled,
   }
  }
  const after=await storage.readJson(CONTROLS,null);assert.ok(controlsEnabled(after));assert.deepEqual({market:after.markets.korea,source:after.sources.encar_feed},authority);assert.equal(hash(await storage.readJson(ROOT+'/complete.json',null)),snapshotSha);
- return {version:1,scope:'bounded_saved_source_normalization_diagnostic',snapshotSha256:snapshotSha,pages:pages.length,examined,admitted,strata,issues,beforeIssues,samples,checks:{pageHashes:true,adjacentReceiptLinks:true,fullReceiptChain:false,controlsUnchanged:true,snapshotUnchanged:true},targetProofs,targetSearchComplete:false,missingTargetHashes:Object.entries(targetProofs).filter(([,v])=>v.length===0).map(([k])=>k),missingStrata:['combustion','electric','other_hybrid','series_hybrid'].filter(k=>!strata[k]),publicationAcceptance:false,selectionResolutionPerformed:false,storageWrites:0,supplierRequests:0};
+ assert.equal(rejectedRecords.length,issues.CARD_DRAFT_VALIDATION_REJECTED||0,'audit_rejection_count_mismatch');
+ return {rejectedRecords,rejectionCounts,version:1,scope:'bounded_saved_source_normalization_diagnostic',snapshotSha256:snapshotSha,pages:pages.length,examined,admitted,strata,issues,beforeIssues,samples,checks:{pageHashes:true,adjacentReceiptLinks:true,fullReceiptChain:false,controlsUnchanged:true,snapshotUnchanged:true},targetProofs,targetSearchComplete:false,missingTargetHashes:Object.entries(targetProofs).filter(([,v])=>v.length===0).map(([k])=>k),missingStrata:['combustion','electric','other_hybrid','series_hybrid'].filter(k=>!strata[k]),publicationAcceptance:false,selectionResolutionPerformed:false,storageWrites:0,supplierRequests:0};
 }
