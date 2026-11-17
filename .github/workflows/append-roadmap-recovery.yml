@@ -10,7 +10,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   append:
-    if: github.event.head_commit.message == 'Append verified AvtoCena recovery checkpoint'
+    if: github.event.head_commit.message == 'Append executing recovery checkpoint'
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     steps:
@@ -21,11 +21,11 @@ jobs:
       - name: Append only to the unchanged roadmap
         run: |
           set -euo pipefail
-          test "$(git hash-object roadmap.md)" = 835d51f3765e98797438fcb8187e3465d371cad3
+          test "$(git hash-object roadmap.md)" = 13929808f932ed6baa39e2996b185d9838c122c5
           python3 - <<'PY'
           from pathlib import Path
           p=Path('roadmap.md');old=p.read_bytes()
-          entry=Path('docs/operations/recovery-checkpoint-20261117.md').read_bytes()
+          entry=Path('docs/operations/recovery-execution-20261117.md').read_bytes()
           p.write_bytes(old+entry)
           assert p.read_bytes().startswith(old)
           PY
@@ -33,5 +33,5 @@ jobs:
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add -- roadmap.md
           test "$(git diff --cached --name-only)" = roadmap.md
-          git commit -m 'Record verified rollback and isolated Korea recovery work'
+          git commit -m 'Record tested candidates and running isolated preparations'
           git push origin HEAD:main
