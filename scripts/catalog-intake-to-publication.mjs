@@ -3,6 +3,7 @@ import {readCheckpointJsonl} from './lib/read-checkpoint-jsonl.mjs';
 import path from 'node:path';
 import {convertMarketOnDisk} from './lib/catalog-disk-conversion.mjs';
 import {joinJapanInventory} from '../apps/web/lib/catalog/japan-inventory-join.ts';
+import {attachIntakeArchiveReceipt, INTAKE_ARCHIVE_RECEIPT} from './lib/nonjp-intake-archive.mjs';
 const root=process.env.CATALOG_INTAKE_INPUT_DIR || 'catalog-intake-input';
 const out=process.env.CATALOG_REBUILD_INPUT_DIR || 'catalog-intake-publish';
 await fs.mkdir(out,{recursive:true});
@@ -10,7 +11,10 @@ for(const market of ['korea','china','uae','europe','georgia','japan']) {
  const directory=path.join(root,`catalog-intake-${market}`);
  let files=[];try{files=await fs.readdir(directory);}catch{continue;}
  let report;try{report=JSON.parse(await fs.readFile(path.join(directory,"report.json"),"utf8"));}catch{}
- if (['auto_api_che168','auto_api_dubicars'].includes(report?.provider) && report.completed !== true) throw Error('auto_api_incomplete_snapshot_not_publishable');
+ if(market!=='japan' && files.includes(INTAKE_ARCHIVE_RECEIPT)) {
+  report=attachIntakeArchiveReceipt(report,JSON.parse(await fs.readFile(path.join(directory,INTAKE_ARCHIVE_RECEIPT),'utf8')));
+ }
+ if (['auto_api_che168','auto_api_dubicars','auto_api_encar'].includes(report?.provider) && report.completed !== true) throw Error('auto_api_incomplete_snapshot_not_publishable');
  if(market!=='japan') {
   console.log(JSON.stringify(await convertMarketOnDisk({market,directory,files,out,report})));
   continue;

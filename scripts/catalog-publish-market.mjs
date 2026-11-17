@@ -1,7 +1,21 @@
+import {assertDerivedPricingRuntime as assertPublisherPricingRuntime} from './lib/korea-derived-runtime-parity.mjs';
+import {assertScopedProjectionReaderReady} from './lib/catalog-projection-reader-readiness.mjs';
+import {createDerivedPublicationContributions,prepareDerivedInternalContribution,prepareDerivedPublicContribution,verifyDerivedContribution,assertDerivedRawRetention} from './lib/korea-derived-contributions.mjs';
+import {createDerivedDatePublicationGuard} from './lib/korea-derived-publication-io.mjs';
+import {imageKey,uniqueImages,mergeOfferVersions} from './lib/catalog-offer-merge.mjs';
 import {isAllDubicarsOffer,isUnpricedDubicarsOffer} from '../apps/web/lib/catalog/dubicars-owner-policy.ts';
 import {catalogInventoryLimit,catalogMarketInventoryLimit} from "./lib/catalog-inventory-limit.mjs";
 import {startPublicationHeartbeat} from './lib/publication-heartbeat.mjs';
 import {isCompletedChe168Delta,isCompletedDubicarsDelta} from './lib/auto-api-che168-client.mjs';
+import {assertPaidKoreaPublicationSource} from './lib/paid-korea-publication-guard.mjs';
+import {prepareStagedCatalogBudget} from './lib/catalog-staged-budget.mjs';
+import {prepareRawPublication} from './lib/catalog-raw-publication.mjs';
+import {prepareRawInternalPublication} from './lib/catalog-raw-internal-publication.mjs';
+import {createPaidRepairPublicationGuard} from './lib/paid-encar-repair-io.mjs';
+import {createPaidPublicationContributions,preparePaidInternalContribution,preparePaidPublicContribution,paidContributionWorkerSource} from './lib/catalog-paid-encar-contributions.mjs';
+import {createChe168PublicationContributions,prepareChe168InternalContribution,prepareChe168PublicContribution,
+  che168ContributionWorkerSource} from './lib/catalog-che168-contributions.mjs';
+import {calculationVersion} from './catalog-calculation-version.mjs';
 // Maintenance publication reads large source payloads; avoid a burst of twelve simultaneous S3 downloads.
 process.env.CATALOG_READ_CONCURRENCY ||= "4";
 import { unavailableOfferRecord } from "../apps/web/lib/catalog/offer-availability.ts";
@@ -9,6 +23,8 @@ const sellerInventory = process.env.CATALOG_SELLER_INVENTORY === "1";
 const { prepareSellerInventory } = await import("../apps/web/lib/catalog/prepare-seller-inventory.ts");
 const { sourceInventoryInScope } = await import('../apps/web/lib/catalog/source-inventory-scope.ts');
 const { requiredCatalogSourceIds } = await import('../apps/web/lib/catalog/required-catalog-sources.ts');
+const { allowedCatalogSourceIds } = await import('../apps/web/lib/catalog/required-catalog-sources.ts');
+const { readCatalogProjectionBatches } = await import('../apps/web/lib/catalog-projection-parts.ts');
 const { isSellerPricedOffer } = await import("../apps/web/lib/catalog/seller-price-contract.ts");
 const { assertNoDeliveredPriceRegression } = await import("../apps/web/lib/catalog/publication-price-preservation.ts");
 import fs from "node:fs/promises";
@@ -18,7 +34,7 @@ import { catalogPublicCountGuard } from "./lib/catalog-public-count-guard.mjs";
 import { hashRows, snapshotCatalogRows, assertCatalogRowsUnchanged } from "./lib/catalog-row-hash.mjs";
 import { isCommercialInventoryOffer as isCommercial } from "./lib/catalog-vehicle-scope.mjs";
 
-const { mutateDataJson } = await import("../apps/web/lib/data.ts");
+const { getJsonStorage, mutateDataJson } = await import("../apps/web/lib/data.ts");
 const { calculateOfferWithRussiaCustoms } = await import("../apps/web/lib/catalog/customs-pricing.ts");
 const { minimumPublicationImages, hasAllowedCatalogSourceProvenance, isCrediblePublicOffer, isCatalogYearAllowed } = await import("../apps/web/lib/catalog/offer-quality.ts");
 const { compareCatalogPublicPriority, japanAuctionSoldIdentityVerified } = await import("../apps/web/lib/catalog/public-priority.ts");
@@ -27,8 +43,9 @@ const { normalizeVehicleOfferSpecs } = await import("../apps/web/lib/catalog/spe
 const { catalogDescriptionRejectionReason } = await import("../apps/web/lib/catalog/description-completeness.ts");
 const { catalogRetentionDecision, catalogSourceRefreshStates, catalogConfirmedWithdrawalIndex, catalogOfferWithdrawnByReport } = await import("../apps/web/lib/catalog/source-retention.ts");
 const { catalogOfferFreshness, catalogOfferWithinRetention, catalogOfferRetentionExpired, catalogMarketRetentionMs, preserveCatalogOfferObservation } = await import("../apps/web/lib/catalog/refresh-policy.ts");
-const { catalogGenerationId, compactPublicStorageOffer, persistCatalogOffers, previewCanonicalPublicCatalogOffers, readMarketMaintenanceOffers, readMarketOffers } = await import("../apps/web/lib/catalog/storage.ts");
+const { CATALOG_PUBLICATION_TRANSACTION_VERSION, catalogGenerationId, compactPublicStorageOffer, persistCatalogOffers, previewCanonicalPublicCatalogOffers, readMarketMaintenanceOffers, readMarketOffers } = await import("../apps/web/lib/catalog/storage.ts");
 const { PUBLIC_CATALOG_MARKETS } = await import("../apps/web/lib/catalog/runtime-config.ts");
+if (CATALOG_PUBLICATION_TRANSACTION_VERSION !== 2) throw Error("catalog_publication_transaction_runtime_required");
 
 const inputDir = process.env.CATALOG_REBUILD_INPUT_DIR || "catalog-v2-input";
 const reportFile = process.env.CATALOG_REBUILD_PUBLISH_REPORT || "catalog-v2-market-publish-report.json";
@@ -37,6 +54,8 @@ const configuredMarkets = String(process.env.CATALOG_REBUILD_MARKETS || "")
   .map((value) => value.trim())
   .filter(Boolean);
 const market = configuredMarkets[0] || "";
+const requiredAbsentOfferIds = String(process.env.CATALOG_REQUIRED_ABSENT_OFFER_IDS || '').split(',').filter(Boolean);
+if (requiredAbsentOfferIds.some(id => !/^[a-f0-9]{24}$/.test(id)) || (requiredAbsentOfferIds.length && market !== 'china')) throw Error('catalog_required_absent_ids_invalid');
 const targetPerSource = catalogInventoryLimit(process.env.CATALOG_REBUILD_TARGET_PER_SOURCE);
 const targetPerMarket = catalogMarketInventoryLimit(market, Math.max(1, Number(process.env.CATALOG_PUBLISH_TARGET_PER_MARKET || 100_000)));
 const maximumPerMarket = catalogMarketInventoryLimit(market, Math.max(targetPerMarket, catalogInventoryLimit(process.env.CATALOG_PUBLISH_MAX_PER_MARKET)));
@@ -154,23 +173,6 @@ async function releasePublishLock() {
   publishLockHeld = false;
 }
 
-function imageKey(image) {
-  return String(image?.checksum || image?.id || image?.objectKey || image?.url || "");
-}
-
-function uniqueImages(images) {
-  const seen = new Set();
-  const result = [];
-  for (const image of Array.isArray(images) ? images : []) {
-    const key = imageKey(image);
-    if (!key || seen.has(key)) continue;
-    seen.add(key);
-    result.push(image);
-    if (result.length >= 30) break;
-  }
-  return result;
-}
-
 function freshness(offer) {
   return catalogOfferFreshness(offer);
 }
@@ -179,39 +181,6 @@ function qualityOrder(left, right) {
   return compareCatalogPublicPriority(left, right)
     || freshness(right) - freshness(left)
     || String(left?.id || "").localeCompare(String(right?.id || ""));
-}
-
-function overlayDefined(base, overlay) {
-  const result = { ...(base || {}) };
-  for (const [key, value] of Object.entries(overlay || {})) {
-    if (value === undefined || value === null || value === "") continue;
-    result[key] = value;
-  }
-  return result;
-}
-
-function mergeOfferVersions(primary, retained) {
-  if (!retained) return { ...primary, images: uniqueImages(primary?.images) };
-  const merged = overlayDefined(retained, primary);
-  const primaryRaw = typeof primary?.operational?.raw === "object" && primary.operational.raw ? primary.operational.raw : {};
-  const retainedRaw = typeof retained?.operational?.raw === "object" && retained.operational.raw ? retained.operational.raw : {};
-  const firstSeen = [primary?.firstSeenAt, retained?.firstSeenAt]
-    .filter(Boolean)
-    .sort((left, right) => Date.parse(String(left)) - Date.parse(String(right)))[0];
-  const updatedAt = [primary?.updatedAt, retained?.updatedAt]
-    .filter(Boolean)
-    .sort((left, right) => Date.parse(String(right)) - Date.parse(String(left)))[0];
-  return {
-    ...merged,
-    firstSeenAt: firstSeen || primary?.firstSeenAt || retained?.firstSeenAt,
-    updatedAt: updatedAt || primary?.updatedAt || retained?.updatedAt,
-    images: uniqueImages([...(primary?.images || []), ...(retained?.images || [])]),
-    calculationSnapshot: overlayDefined(retained?.calculationSnapshot, primary?.calculationSnapshot),
-    operational: {
-      ...overlayDefined(retained?.operational, primary?.operational),
-      raw: overlayDefined(retainedRaw, primaryRaw),
-    },
-  };
 }
 
 function hasExactCalculation(offer) {
@@ -273,6 +242,7 @@ async function runWithConcurrency(items, concurrency, worker) {
 }
 
 let retainedPublishedIds = new Set();
+let paidContributions = null, che168Contributions = null, derivedContributions = null, derivedInternalContribution = null, derivedPublicContribution = null;
 async function auditCandidate(sourceOffer) {
   try {
     if (!sourceInventoryInScope(sourceOffer)) return {offer:null,reason:'source_inventory_scope'};
@@ -293,7 +263,11 @@ async function auditCandidate(sourceOffer) {
       // marketplace response is not used by canonical selection or public
       // persistence. Releasing it here prevents a large market from retaining
       // one deep-cloned source payload for every audited candidate.
-      return {offer:compactPublicStorageOffer(prepared),reason:"ok"};
+      const compact = compactPublicStorageOffer(prepared);
+      paidContributions?.recordAudited(sourceOffer, compact);
+      derivedContributions?.recordAudited(sourceOffer, compact);
+      che168Contributions?.recordAudited(sourceOffer, compact);
+      return {offer:compact,reason:"ok"};
     }
     const descriptionReason = catalogDescriptionRejectionReason(offer);
     if (descriptionReason) return { offer: null, reason: descriptionReason };
@@ -315,13 +289,34 @@ async function auditCandidate(sourceOffer) {
         publicPriority: priority,
       },
     };
-    return { offer: compactPublicStorageOffer(offer), reason: "ok" };
+    const compact = compactPublicStorageOffer(offer);
+    derivedContributions?.recordAudited(sourceOffer, compact);
+    return { offer: compact, reason: "ok" };
   } catch (error) {
     return { offer: null, reason: `exception:${String(error?.message || error)}` };
   }
 }
 
 const dryRun = process.env.CATALOG_PUBLICATION_DRY_RUN === "1";
+if (!dryRun && process.env.CATALOG_CHUNKED_PROJECTIONS_WRITE === '1') await assertScopedProjectionReaderReady();
+if (!dryRun && market !== 'japan' && getJsonStorage().driver === 'object'
+    && (!process.env.CATALOG_BUDGET_RUNTIME_ROOT || !/^[a-f0-9]{40}$/.test(process.env.CATALOG_BUDGET_RUNTIME_RELEASE || ''))) {
+  throw Error('staged_budget_runtime_required');
+}
+// Publisher normalization and the child calculator must use identical libraries.
+if (!dryRun && market !== 'japan' && getJsonStorage().driver === 'object') {
+  assertPublisherPricingRuntime({publisherRoot:process.cwd(),runtimeRoot:process.env.CATALOG_BUDGET_RUNTIME_ROOT,
+    expectedRelease:process.env.CATALOG_BUDGET_RUNTIME_RELEASE});
+}
+async function assertRequestedRecoveryBaseline() {
+  const generation = process.env.CATALOG_EXPECTED_BASE_GENERATION_ID, digest = process.env.CATALOG_EXPECTED_BASE_MANIFEST_SHA256;
+  if (!generation && !digest) return;
+  if (!generation || !/^[a-f0-9]{64}$/.test(digest || '')) throw Error('catalog_recovery_baseline_arguments');
+  const current = await getJsonStorage().readJson('catalog/manifest.json', null);
+  if (current?.generationId !== generation || crypto.createHash('sha256').update(JSON.stringify(current)).digest('hex') !== digest)
+    throw Error('catalog_recovery_baseline_changed');
+}
+await assertRequestedRecoveryBaseline();
 function logPublicationMemory(stage) {
   const { rss, heapUsed, external } = process.memoryUsage();
   console.log(JSON.stringify({ market, stage, memoryBytes: { rss, heapUsed, external } }));
@@ -337,6 +332,60 @@ if (sellerInventory && !generation.offers.length && !generation.payloads.some(pa
   await fs.writeFile(reportFile, JSON.stringify({market, published:false, previousManifestPreserved:true,
     skipped:true, reason:"no_fresh_source_offers", generationErrors:generation.errors},null,2));
   throw new Error(`catalog_no_fresh_source_offers:${market}`);
+}
+const paidEncarReport = market === "korea"
+  ? generation.payloads.find(payload => payload.report?.provider === "auto_api_encar")?.report
+  : undefined;
+if (paidEncarReport) {
+  const source = paidEncarReport.sources?.[0];
+  if (!paidEncarReport.completed || paidEncarReport.market !== "korea" || !paidEncarReport.snapshotRun ||
+      paidEncarReport.sources?.length !== 1 || source?.stopReason !== "source_finished" ||
+      source.sourceId !== "encar_direct" || !source.uniqueOffers ||
+      generation.errors.length || source.uniqueOffers !== generation.offers.length ||
+      generation.offers.some(row => row.market !== "korea" || row.sourceId !== "encar_direct" ||
+        row.operational?.provider !== "auto_api_encar")) {
+    throw Error("incomplete_paid_encar_publication_input");
+  }
+}
+if(process.env.PAID_DATE_OVERLAY_EXPECTED_FILE && !paidEncarReport?.savedDateOverlay)throw Error('derived_lineage_missing');
+const derivedDateGuard=paidEncarReport?.savedDateOverlay ? await createDerivedDatePublicationGuard({
+ storage:getJsonStorage(),intakeDirectory:process.env.PAID_DATE_OVERLAY_INTAKE_DIR,
+ incomingReport:paidEncarReport,incomingOffers:generation.offers,
+ expectedFile:process.env.PAID_DATE_OVERLAY_EXPECTED_FILE,expectedFileSha256:process.env.PAID_DATE_OVERLAY_EXPECTED_SHA256,
+ preparationFile:process.env.PAID_DATE_OVERLAY_PREPARATION_FILE,
+ runtimeRoot:process.env.CATALOG_BUDGET_RUNTIME_ROOT,expectedRuntimeRelease:process.env.CATALOG_BUDGET_RUNTIME_RELEASE,
+ onProgress:value=>console.log(JSON.stringify(value))}) : null;
+const technicalRepairReceipt = paidEncarReport?.technicalRepair;
+if (process.env.PAID_REPAIR_APPROVED_SHA256 && !technicalRepairReceipt) throw Error('paid_repair_receipt_missing');
+const technicalRepairGuard = technicalRepairReceipt ? await createPaidRepairPublicationGuard({
+  storage:getJsonStorage(), receipt:technicalRepairReceipt, expectedSha256:process.env.PAID_REPAIR_APPROVED_SHA256,
+}) : null;
+const che168ContributionReport=market==='china'
+  ?generation.payloads.find(payload=>payload.report?.sourceInputWitness?.kind==='independent_che168_replica_v1')?.report:null;
+che168Contributions=che168ContributionReport?createChe168PublicationContributions({
+  intake:che168ContributionReport,freshOffers:generation.offers,sellerInventory,
+  compactPublic:compactPublicStorageOffer,sourceSha:che168ContributionWorkerSource(),calculationVersion:calculationVersion(),
+}):null;
+if (technicalRepairGuard) {
+  if (!sellerInventory || allowPublicCollapse || process.env.CATALOG_REBALANCE_EXISTING === '1') throw Error('paid_repair_publication_policy_invalid');
+  technicalRepairGuard.assertInput(generation.offers);
+}
+paidContributions = paidEncarReport?.paidInputWitness ? createPaidPublicationContributions({
+  intake: paidEncarReport, freshOffers: generation.offers, sellerInventory,
+  compactPublic: compactPublicStorageOffer, sourceSha: paidContributionWorkerSource(),
+  calculationVersion: calculationVersion(),
+}) : null;
+derivedContributions = derivedDateGuard ? await createDerivedPublicationContributions({guard:derivedDateGuard,operationId:publishOperationId,intake:paidEncarReport,compactPublic:compactPublicStorageOffer}) : null;
+async function assertCurrentKoreaPublicationSource() {
+  await assertPaidKoreaPublicationSource({
+    market,
+    paidEncarInput: !!paidEncarReport,
+    readManifest: () => getJsonStorage().readJson("catalog/manifest.json", null),
+    readControls: async () => {
+      const { readCollectionControls } = await import("../apps/web/lib/catalog/collection-controls.ts");
+      return readCollectionControls(getJsonStorage());
+    },
+  });
 }
 const sourceRefreshStates = catalogSourceRefreshStates(generation.payloads);
 const completeChe168Inventory = generation.payloads.some(payload => {
@@ -377,6 +426,7 @@ function rejectFreshOffer(id, reason) {
   if (freshOfferMetaById.has(key)) freshOfferRejectionReasonById.set(key, String(reason || "unknown"));
 }
 let currentMarketRows = await readMarketOffers(market);
+technicalRepairGuard?.assertCurrent(currentMarketRows);
 const preparedTargetSnapshot = snapshotCatalogRows(currentMarketRows);
 const reserveRows = sellerInventory ? await readMarketMaintenanceOffers(market, {excludeIds: new Set(currentMarketRows.map(row => row.id)), withinRetention:true}) : [];
 logPublicationMemory("target_reserve_loaded");
@@ -386,6 +436,9 @@ const retentionDecisions = new Map();
 let currentRetainedRows = [...existingInventory.values()].filter((row) => {
   // The verified local replica is a complete active set, including explicit
   // removals and quarantine. Do not resurrect an older retained revision.
+  // The purchased Korea snapshot owns its prices and gallery even when an
+  // older parser observed the same Encar ID. Never merge those revisions.
+  if (paidEncarReport) return false;
   if (completeChe168Inventory && row.sourceId==='autohome_used_china_open' && !freshOfferMetaById.has(String(row.id))) return false;
   if (row?.status !== "active" || catalogOfferWithdrawnByReport(row, confirmedWithdrawals)) return false;
   const decision = catalogRetentionDecision({
@@ -422,7 +475,12 @@ currentRetainedRows = currentRetainedRows.map((offer) => freshIds.has(offer.id)
 
 const candidatesById = new Map();
 for (const offer of currentRetainedRows.sort((left, right) => freshness(left) - freshness(right))) {
-  candidatesById.set(offer.id, mergeOfferVersions(preserveCatalogOfferObservation(offer), candidatesById.get(offer.id)));
+  const primary = preserveCatalogOfferObservation(offer), retained = candidatesById.get(offer.id);
+  const merged = mergeOfferVersions(primary, retained);
+  paidContributions?.observeMerge(primary, retained, merged);
+      derivedContributions?.observeMerge(primary, retained, merged);
+  che168Contributions?.observeMerge(primary, retained, merged, {phase:'retained'});
+  candidatesById.set(offer.id, merged);
 }
 for (const offer of generation.offers.sort((left, right) => freshness(left) - freshness(right))) {
   if (!offer?.id) continue;
@@ -430,7 +488,11 @@ for (const offer of generation.offers.sort((left, right) => freshness(left) - fr
     rejectFreshOffer(offer.id, "source:withdrawn");
     continue;
   }
-  candidatesById.set(offer.id, mergeOfferVersions(offer, candidatesById.get(offer.id)));
+  const retained = candidatesById.get(offer.id), merged = mergeOfferVersions(offer, retained);
+  paidContributions?.observeMerge(offer, retained, merged);
+      derivedContributions?.observeMerge(offer, retained, merged);
+  che168Contributions?.observeMerge(offer, retained, merged);
+  candidatesById.set(offer.id, merged);
 }
 
 currentRetainedRows = currentRetainedRows.map(compactPublicStorageOffer);
@@ -515,6 +577,9 @@ for (const offer of v2Selection.selected.slice(0, maximumPerMarket)) {
   selectedMarketOffersById.set(String(offer.id), offer);
 }
 const selectedMarketOffers = [...selectedMarketOffersById.values()].slice(0, maximumPerMarket);
+paidContributions?.captureSelected(selectedMarketOffers);
+      derivedContributions?.captureSelected(selectedMarketOffers);
+che168Contributions?.captureSelected(selectedMarketOffers);
 for (const offer of selected) if (!selectedMarketOffersById.has(String(offer.id))) {
   rejectFreshOffer(offer.id, "selection:v2_policy");
   auditedRemovals.set(offer.id, "selection:v2_policy");
@@ -534,7 +599,8 @@ async function loadPreservedMarkets() {
   for (const otherMarket of PUBLIC_CATALOG_MARKETS) {
     if (otherMarket === market) continue;
     let rows = [];
-    try { rows = await readMarketOffers(otherMarket); } catch (error) {
+    try { rows = technicalRepairGuard ? await technicalRepairGuard.readPreservedMarket(otherMarket)
+      : await readMarketOffers(otherMarket); } catch (error) {
       throw new Error(`catalog_preserved_public_read_failed:${otherMarket}:${String(error?.message || error)}`);
     }
     // Exact preservation applies only to owner-approved provenance. Rows from a
@@ -542,6 +608,7 @@ async function loadPreservedMarkets() {
     // generation, while keeping every still-approved row byte-stable. Structural
     // corruption inside the approved set remains a hard stop.
     const forbidden = rows.filter((offer) => !hasAllowedCatalogSourceProvenance(offer));
+    if (technicalRepairGuard && forbidden.length) throw Error('paid_repair_other_market_would_change');
     const preservedRows = rows.filter((offer) => hasAllowedCatalogSourceProvenance(offer));
     const invalid = preservedRows.filter((offer) => !offer?.id || !offer?.make || !offer?.model
       || String(offer?.market || "") !== otherMarket
@@ -558,6 +625,7 @@ async function loadPreservedMarkets() {
 }
 
 const canonicalTargetPreview = await previewCanonicalPublicCatalogOffers(selectedMarketOffers, retainedTargetPublicRows, currentPublicIds, retainedPowerMixMinimumByMarket);
+const technicalRepairPreflight = technicalRepairGuard?.assertRows(canonicalTargetPreview.offers);
 const nextIds = new Set(canonicalTargetPreview.offers.map(offer => offer.id));
 for (const [field, reason] of [
   ["qualityRejected", "canonical:qualityRejected"],
@@ -620,6 +688,8 @@ const freshOfferAudit = {
 const publicationPolicy = { allowSellerTransition: true, auditedRemovals };
 
 const preflight = { market, published:false, dryRun, previousManifestPreserved:true,
+  ...(technicalRepairPreflight ? {technicalRepair:{receiptSha256:technicalRepairReceipt.sha256, verified:true,
+    after:technicalRepairPreflight, examples:technicalRepairGuard.examples(canonicalTargetPreview.offers)}} : {}),
   sourceShare: canonicalTargetPreview.sourceShare.report,
   powerMix: canonicalTargetPreview.powerMix.report,
   auditedRemovals: currentRetainedRows.filter(offer=>!nextIds.has(offer.id)).map(offer=>({id:offer.id,reason:auditedRemovals.get(offer.id)||"unexplained"})),
@@ -650,6 +720,7 @@ if (!freshOfferAudit.summary.complete) {
 }
 if (dryRun) {
   await loadPreservedMarkets();
+  await technicalRepairGuard?.verifyAuthority();
   process.exit(0);
 }
 if (sellerInventory) assertNoDeliveredPriceRegression(currentRetainedRows, canonicalTargetPreview.offers, publicationPolicy);
@@ -712,6 +783,10 @@ const regressionBlocked = expectedPublishedByMarket[market] <= 0
   || (catastrophicPublicCollapse && !allowPublicCollapse);
 let manifest = null;
 let publicationError = "";
+let rawPublication = null, rawPinRelease = null, rawInternalPublication = null;
+let paidInternalContribution = null, paidPublicContribution = null;
+let che168InternalContribution = null, che168PublicContribution = null;
+let technicalRepairReadback = null;
 let nextPublicCount = 0;
 let publishedSourceCounts = {};
 
@@ -733,6 +808,10 @@ if (regressionBlocked) {
     // target market and storage after acquiring the lease; no stale snapshot is
     // allowed to reach persistence.
     await acquirePublishLock();
+    await assertRequestedRecoveryBaseline();
+    await technicalRepairGuard?.verifyAuthority({operationId:publishOperationId});
+          await derivedDateGuard?.verifyAuthority({operationId:publishOperationId});
+    await assertCurrentKoreaPublicationSource();
     if (process.env.JSON_STORAGE_DRIVER === "object") await import("./catalog-storage-preflight.mjs");
     expectedBaseGenerationId = await catalogGenerationId();
     const latestTargetRows = await readMarketOffers(market);
@@ -743,7 +822,74 @@ if (regressionBlocked) {
     manifest = await persistCatalogOffers(allOffers, {
       productionRefreshMarket: market,
       expectedBaseGenerationId,
+      ...(market !== 'japan' && getJsonStorage().driver === 'object' ? {
+        publicationTransactionVersion: 2,
+        requirePreparedWorkingSet: Boolean(derivedDateGuard),
+        beforePreparedReadiness: async candidate => {
+          const verify = await prepareStagedCatalogBudget({storage:getJsonStorage(), manifest:candidate,
+            expectedBaseGenerationId, operationId:publishOperationId, requireWorkingSet:Boolean(paidEncarReport?.savedRevisionSelection)});
+          if (derivedDateGuard && verify.workingSetVerified !== true) throw Error('derived_working_set_gate_required');
+          return {verify, workingSetVerified: verify.workingSetVerified === true};
+        },
+        rawCoordinationTicket: () => rawPublication?.binding?.ticket,
+        beforePreparedInternalManifest: async ({manifest: internalManifest, baseManifest}) => {
+          const storage = getJsonStorage();
+          paidInternalContribution = await preparePaidInternalContribution({storage, manifest: internalManifest,
+            contributions: paidContributions, reusableKoreaSourceIds: allowedCatalogSourceIds('korea')});
+          if (derivedDateGuard) derivedInternalContribution = await prepareDerivedInternalContribution({storage,manifest:internalManifest,tracker:derivedContributions});
+          che168InternalContribution = await prepareChe168InternalContribution({storage, manifest: internalManifest,
+            contributions: che168Contributions,reusableSourceIds:allowedCatalogSourceIds('china')});
+          rawInternalPublication = await prepareRawInternalPublication({storage, manifest: internalManifest, baseManifest,
+            intake: generation.payloads.find(payload => payload.report?.market === market)?.report,
+            operationId: publishOperationId,
+            contributionCapabilities: [paidInternalContribution,che168InternalContribution].filter(Boolean)});
+          if (derivedDateGuard) {
+            const verifyRaw = rawInternalPublication.verifyBeforeCommit.bind(rawInternalPublication);
+            rawInternalPublication.verifyBeforeCommit = async () => {
+              await verifyDerivedContribution({capability:derivedInternalContribution,manifest:internalManifest,stage:'internal'});
+              await verifyRaw();
+              await assertDerivedRawRetention({storage,capability:derivedInternalContribution,manifest:internalManifest,stage:'internal'});
+            };
+          }
+          return rawInternalPublication;
+        },
+        beforePreparedGeneration: async candidate => {
+          paidPublicContribution = await preparePaidPublicContribution({storage: getJsonStorage(), manifest: candidate,
+            contributions: paidContributions, internal: paidInternalContribution, readProjectionBatches: readCatalogProjectionBatches});
+          if (derivedDateGuard) derivedPublicContribution = await prepareDerivedPublicContribution({storage:getJsonStorage(),manifest:candidate,tracker:derivedContributions,internal:derivedInternalContribution,readProjectionBatches:readCatalogProjectionBatches});
+          che168PublicContribution = await prepareChe168PublicContribution({storage:getJsonStorage(),manifest:candidate,
+            contributions:che168Contributions,internal:che168InternalContribution,readProjectionBatches:readCatalogProjectionBatches});
+          rawPublication = await prepareRawPublication({storage:getJsonStorage(), manifest:candidate,
+            expectedBaseGenerationId, market, operationId:publishOperationId,
+            contributions: paidPublicContribution || che168PublicContribution,
+            intake:generation.payloads.find(payload => payload.report?.market === market)?.report});
+          if (derivedDateGuard) {
+            const verifyRaw = rawPublication.verify.bind(rawPublication);
+            rawPublication.verify = async () => {
+              await verifyDerivedContribution({capability:derivedPublicContribution,manifest:candidate,stage:'public'});
+              await verifyRaw();
+              await assertDerivedRawRetention({storage:getJsonStorage(),capability:derivedPublicContribution,manifest:candidate,stage:'public'});
+            };
+          }
+          await rawPublication.verify();
+          await technicalRepairGuard?.verifyAuthority({operationId:publishOperationId});
+          await derivedDateGuard?.verifyAuthority({operationId:publishOperationId});
+          return async () => {
+            await rawPublication.verify();
+            await technicalRepairGuard?.verifyAuthority({operationId:publishOperationId});
+          await derivedDateGuard?.verifyAuthority({operationId:publishOperationId});
+          };
+        },
+      } : {}),
       async beforeManifestCommit() {
+        await technicalRepairGuard?.verifyAuthority({operationId:publishOperationId});
+        if (process.env.CATALOG_CHUNKED_PROJECTIONS_WRITE === '1') await assertScopedProjectionReaderReady();
+          await derivedDateGuard?.verifyAuthority({operationId:publishOperationId});
+        await assertCurrentKoreaPublicationSource();
+        if (paidEncarReport) {
+          const { assertCollectionEnabled } = await import("../apps/web/lib/catalog/collection-controls.ts");
+          await assertCollectionEnabled("encar_feed");
+        }
         independentHeartbeat?.assertHealthy();
         await publishLockHeartbeatPromise;
         await mutateDataJson(publishLockPath, { lockedUntil: "" }, (current) => {
@@ -761,6 +907,7 @@ if (regressionBlocked) {
       ...(retainedTargetPublicRows.length ? { appendPublicOffersByMarket: { [market]: retainedTargetPublicRows } } : {}),
       preservePublicOffersByMarket: preservedPublicRowsByMarket,
       beforePersistValidate(publicOffers) {
+        technicalRepairGuard?.assertRows(publicOffers.filter(offer => offer.market === market));
         if (sellerInventory) assertNoDeliveredPriceRegression(canonicalTargetPreview.offers, publicOffers.filter(offer => offer.market === market), {allowSellerTransition:true});
         const failures = [];
         for (const otherMarket of PUBLIC_CATALOG_MARKETS) {
@@ -772,8 +919,13 @@ if (regressionBlocked) {
           if (hashRows(rows) !== expectedHash) failures.push(`${otherMarket}:hash`);
         }
         if (failures.length) throw new Error(`catalog_prewrite_preservation_gate_failed:${failures.join("|")}`);
+        paidContributions?.captureNormalized(publicOffers.filter(offer => offer.market === market));
+      derivedContributions?.captureNormalized(publicOffers.filter(offer => offer.market === market));
+        che168Contributions?.captureNormalized(publicOffers.filter(offer => offer.market === market));
       },
       beforePublishValidate(publishedOffers) {
+        if (publishedOffers.some(offer => requiredAbsentOfferIds.includes(offer.id))) throw Error('catalog_confirmed_withdrawal_still_published');
+        technicalRepairGuard?.assertRows(publishedOffers.filter(offer => offer.market === market));
         if (sellerInventory) assertNoDeliveredPriceRegression(canonicalTargetPreview.offers, publishedOffers.filter(offer => offer.market === market), {allowSellerTransition:true});
         const failures = [];
         for (const currentMarket of PUBLIC_CATALOG_MARKETS) {
@@ -797,8 +949,13 @@ if (regressionBlocked) {
         nextPublicCount = publishedOffers.filter((offer) => String(offer?.market || "") === market).length;
         publishedSourceCounts = countSources(publishedOffers.filter(offer => offer.market === market));
         if (failures.length) throw new Error(`catalog_public_regression_guard:${failures.join("|")}`);
+        paidContributions?.captureFinal(publishedOffers.filter(offer => offer.market === market));
+      derivedContributions?.captureFinal(publishedOffers.filter(offer => offer.market === market));
+        che168Contributions?.captureFinal(publishedOffers.filter(offer => offer.market === market));
       },
     });
+    if (technicalRepairGuard) technicalRepairReadback = await technicalRepairGuard.verifyPublished(manifest.generationId, publishOperationId);
+    if (rawPublication) rawPinRelease = await rawPublication.afterCommit();
   } catch (error) {
     publicationError = String(error?.message || error);
     console.error(error?.stack || publicationError);
@@ -826,6 +983,9 @@ const report = {
   publishedAt: new Date().toISOString(),
   published: Boolean(manifest),
   publicationError,
+  ...(technicalRepairReceipt ? {technicalRepair:technicalRepairReadback || {receiptSha256:technicalRepairReceipt.sha256, verified:false}} : {}),
+  rawPinRelease,
+  rawCoordination: rawPublication?.binding || null,
   generationId: manifest?.generationId || null,
   previousManifestPreserved: !manifest,
   retentionMs,
@@ -923,7 +1083,7 @@ console.log(JSON.stringify(report, (key, value) => {
   if (key === "freshOfferAudit" && value?.summary) return value.summary;
   return value;
 }, 2));
-if (!report.published) process.exitCode = 1;
+if (!report.published || technicalRepairReceipt && !technicalRepairReadback?.verified) process.exitCode = 1;
 } finally {
   await releasePublishLock();
 }
