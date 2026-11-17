@@ -1,5 +1,18 @@
+/** Narrow source-bound exception: v3 manufacture year is not the model year. */
+function paidEncarManufacture(offer:any):string {
+ const e=offer?.operational?.semanticEvidence?.productionDate;
+ if (offer?.market!=="korea" || offer?.sourceId!=="encar_direct" || offer?.operational?.provider!=="auto_api_encar"
+   || offer?.operational?.detailIdentityVerified!==true || offer?.operational?.fieldIdentityVerified!==true
+   || e?.status!=="exact" || e?.source!=="auto_api_encar:v3:year_month:production") return "";
+ const value=String(e.value||"");
+ if (!/^(?:19|20)\d{2}-(?:0[1-9]|1[0-2])$/.test(value)
+   || offer.productionDate!==value || offer.productionYear!==Number(value.slice(0,4))
+   || !Number.isFinite(Date.parse(e.observedAt)) || Date.parse(value+'-01T00:00:00Z')>Date.parse(e.observedAt)) return "";
+ return value;
+}
 /** Only explicitly identified manufacturing data. Legacy productionDate may hold registration. */
 export function confirmedProductionValue(offer:any) {
+ const paid=paidEncarManufacture(offer); if (paid) return paid;
  const evidence=offer?.operational?.semanticEvidence?.productionDate;
  const raw=offer?.operational?.raw;
  const candidate=evidence?.status==="exact" && evidence?.source && /manufactur|production|produced|出厂/i.test(String(evidence.source))
@@ -13,7 +26,7 @@ export function confirmedProductionValue(offer:any) {
 }
 export function confirmedProductionMonth(offer:any):string {
  const match=confirmedProductionValue(offer).match(/^((?:19|20)\d{2})[-/.](0?[1-9]|1[0-2])(?:[-/.]\d{1,2})?$/);
- return match && Number(match[1])===Number(offer.year)?String(Number(match[2])):"";
+ return match && (Number(match[1])===Number(offer.year)||Boolean(paidEncarManufacture(offer)))?String(Number(match[2])):"";
 }
 
 export function confirmedProductionDay(offer: Parameters<typeof confirmedProductionMonth>[0]): string {
@@ -25,5 +38,5 @@ export function confirmedProductionDay(offer: Parameters<typeof confirmedProduct
 /** K Car's model year and registration month do not prove production age. */
 export function automaticProductionYear(offer:any): number | undefined {
  if (offer?.sourceId === "kcar_korea_open" && !confirmedProductionValue(offer)) return undefined;
- return offer?.year;
+ return paidEncarManufacture(offer) ? Number(paidEncarManufacture(offer).slice(0,4)) : offer?.year;
 }
