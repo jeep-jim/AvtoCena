@@ -3,8 +3,8 @@ const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 /** Fixed origin, no redirects, and no upstream bodies/URLs in errors or logs. */
 export function autoApiChe168Client({apiKey, fetchImpl = fetch, sleep = delay, deadline = Infinity, requestDelayMs = 0, platform = "che168"}) {
-  if (!['che168','dubicars'].includes(platform)) throw Error('auto_api_invalid_platform');
-  const base = BASE.replace('/che168/', `/${platform}/`);
+  if (!['che168','dubicars','encar'].includes(platform)) throw Error('auto_api_invalid_platform');
+  const base = platform === 'encar' ? 'https://api1.auto-api.com/api/v3/encar/' : BASE.replace('/che168/', `/${platform}/`);
   apiKey = typeof apiKey === 'string' ? apiKey.trim() : '';
   if (!apiKey || /\s/.test(apiKey)) throw Error('auto_api_key_missing_or_invalid');
   if (!Number.isSafeInteger(requestDelayMs) || requestDelayMs < 0 || requestDelayMs > 60000) throw Error('auto_api_invalid_request_delay');

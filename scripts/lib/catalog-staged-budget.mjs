@@ -1,4 +1,5 @@
 import fs from 'node:fs/promises';
+import {prepareCandidateWorkingSet} from './candidate-working-set-coordinator.mjs';
 import path from 'node:path';
 import os from 'node:os';
 import {createHash} from 'node:crypto';
@@ -274,7 +275,7 @@ export function verifyBudgetSourceCoverage({manifest, market, projection, source
 
 const childPath = fileURLToPath(new URL('../catalog-staged-budget-child.mjs', import.meta.url));
 const run = promisify(execFile);
-export async function prepareStagedCatalogBudget({storage, manifest, expectedBaseGenerationId, operationId,
+export async function prepareStagedCatalogBudget({storage, manifest, expectedBaseGenerationId, operationId, requireWorkingSet = false,
   runtimeRoot = process.env.CATALOG_BUDGET_RUNTIME_ROOT, release = process.env.CATALOG_BUDGET_RUNTIME_RELEASE}) {
   if (storage.driver !== 'object' || !runtimeRoot || !SHA.test(release || '')) throw Error('staged_budget_runtime_required');
   const root = path.resolve(runtimeRoot);
@@ -309,11 +310,15 @@ export async function prepareStagedCatalogBudget({storage, manifest, expectedBas
     const verified = await invoke('verify');
     assertStagedBudgetReport(verified, context, prepared);
     await fs.writeFile('catalog-staged-budget-report.json', JSON.stringify(verified, null, 2));
+    const verifyWorkingSet = requireWorkingSet ? await prepareCandidateWorkingSet({storage, root, context, prepared:verified}) : null;
     // Retain only bounded context/receipts. The child releases all market arrays.
-    return async () => {
+    const verifyBoundBudget=async () => {
       const current = await invoke('verify');
       assertStagedBudgetReport(current, context, prepared);
+      await verifyWorkingSet?.();
     };
+    Object.defineProperty(verifyBoundBudget,'workingSetVerified',{value:Boolean(verifyWorkingSet),enumerable:true});
+    return verifyBoundBudget;
   } catch (error) {
     await fs.rm(directory, {recursive:true, force:true});
     throw error;
