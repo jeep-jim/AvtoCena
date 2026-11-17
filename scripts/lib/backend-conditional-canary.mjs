@@ -19,13 +19,13 @@ export async function runCanary({fetchImpl,env,deadline=Date.now()+60000,now=Dat
   const response=await fetchImpl(URL_FIXED,{method,headers:signConditional(method,new URL(URL_FIXED),env,conditions),signal,redirect:'error'});
   const etag=response.headers.get('etag'),length=response.headers.get('content-length'),encoding=response.headers.get('content-encoding'),version=response.headers.get('x-amz-version-id');let bytes=0;
   if(encoding!==null&&encoding!=='identity')throw Error('canary_encoding');
-  if(response.body){const reader=response.body.getReader();const abort=()=>{void reader.cancel().catch(()=>{});};signal.addEventListener('abort',abort,{once:true});try{while(true){const part=await reader.read();if(signal.aborted)throw Error('canary_deadline');if(part.done)break;bytes+=part.value.byteLength;if(bytes>65536){void reader.cancel().catch(()=>{});throw Error('canary_body_limit');}}}finally{signal.removeEventListener('abort',abort);}}
+  if(response.body){const reader=response.body.getReader();const abort=()=>{void reader.cancel().catch(()=>{});};signal.addEventListener('abort',abort,{once:true});try{while(true){const part=await reader.read();if(signal.aborted)throw Error('canary_deadline');if(part.done)break;bytes+=part.value.byteLength;if(bytes>131072){void reader.cancel().catch(()=>{});throw Error('canary_body_limit');}}}finally{signal.removeEventListener('abort',abort);}}
   events.push({stage:label,status:response.status,size:bytes,contentLength:/^\d{1,8}$/.test(length||'')?Number(length):null,etagHash:etag?sha(etag):null,versionPresent:version!==null,versionHash:version===null?null:sha(version)});
   if(response.status!==expected)throw Error('canary_status_mismatch');
   return {etag,length,bytes,version};
  };
  const initial=await call('initial_head','HEAD',{},200);
- if(!/^"[^"\\\x00-\x20\x7f]{1,250}"$/.test(initial.etag||'')||!/^\d+$/.test(initial.length||'')||Number(initial.length)>65536||Number(initial.length)<1)throw Error('canary_initial_metadata');
+ if(!/^"[^"\\\x00-\x20\x7f]{1,250}"$/.test(initial.etag||'')||!/^\d+$/.test(initial.length||'')||Number(initial.length)>131072||Number(initial.length)<1)throw Error('canary_initial_metadata');
  const E=initial.etag,wrong='"'+sha('deliberately-wrong:'+E)+'"';if(wrong===E)throw Error('canary_wrong_etag_collision');
  const get=await call('get_if_match','GET',{'if-match':E},200);if(get.version!==initial.version||get.etag!==E||get.bytes!==Number(initial.length)||Number(get.length)!==get.bytes)throw Error('canary_full_body_mismatch');
  const matched=await call('head_if_match','HEAD',{'if-match':E},200);if(matched.etag!==E||matched.length!==initial.length)throw Error('canary_match_metadata');

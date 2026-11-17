@@ -8,7 +8,7 @@ permissions: {contents: read}
 concurrency: {group: owner-candidate-partial-read-diagnostic, cancel-in-progress: false}
 jobs:
   canary:
-    if: github.ref == 'refs/heads/main' && (github.event_name == 'workflow_dispatch' || github.event.head_commit.message == 'Validate REG conditional reads c7e00f72')
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'workflow_dispatch' || github.event.head_commit.message == 'Validate REG conditional reads 128KiB c7e00f72')
     runs-on: ubuntu-24.04
     environment: regcloud-staging
     timeout-minutes: 5
