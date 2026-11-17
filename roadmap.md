@@ -26736,3 +26736,16 @@ AGENTS.md explicitly prohibits increasing gate thresholds without NEW explicit o
 
 - Публикация этого адресного выпуска: https://github.com/jeep-jim/AvtoCena/commit/ac5a1771be5cc9d5356572cb0a40f7682b5db1f7
 
+
+
+### 2026-11-17 — Проверенные REG замеры и продолжающаяся подготовка f45
+
+- PR1791 слит exact062be после CI44027515112 SUCCESS (full tests/typecheck/build); локально3371/3371 tests PASS. Mergeac5a1771. Это диагностический recovery, не установка ускорения.
+- Read-only raw44028825020 и REG live44028825051 SUCCESS на6bd8ce5a. В06:07:32 Georgia publication lease истекла штатно; принудительного снятия не было. Raw metadata сохранены; only HTTP-second-compatible comparison, storageWrites=0/deleteRequests=0, это не полный inventory и не разрешение GC.
+- На действующем83ff local nginx: главная1.336с, cars0.278с, login0.329с; Korea sort asc0.982с/desc1.946с, China sort5.266с на первом запросе; быстрый повтор0.023–0.126с. CPU5.62%, memory3.448/10GiB,0 OOM/restarts. Это bounded диагностика, не frozen cold/expired/browser acceptance и не гарантия1–2с.
+- После освобождения lease и завершения диагностики запущен один prepare-only rerun43873810298 attempt2/job133856479851 с прежним exactf45. В06:34 ещё шаг17 inactive price/filter preparation; live83ff не переключён. Новая активация не запущена. Не обходить source/manifest/lease/frozen server/browser nonce/rollback guards.
+- Существующий Korea43989797288 собирает наe51 уже с mapper1778 и продолжает сохранённые страницы после9455/189100 строк; новый платный collect не запускался. Диагностика1791 не подменяет исходник этого run. Старый snapshot repair1782 нельзя слепо применять после нового publish.
+- Отдельный draftPR1792/source57fae2d35eabef341fd60728000253de935ff39b поверх immutablef45: pin fingerprint до warmup passes и generation/context проверки перед readiness.2files+42/-3,6 race tests,2940/2940 full tests,typecheck/build PASS локально,independent review без блокеров. Remote CI ожидается. PR1783/controller/production не менялись.
+- Остаются: завершить и независимо проверить inactive preparation, принять exact release только прежними gates; lifecycle day/FX/settings без visitor full-market fallback; bulk photo mirror с квотами и разрешениями; безопасная раздельная retention для generations/raw/photos. Скорость и Корея на сайте пока не объявляются окончательно исправленными.
+- Публикация этого адресного выпуска: https://github.com/jeep-jim/AvtoCena/commit/91783a38bbb7e6e62050fb955fe0c8330dc595e9
+
