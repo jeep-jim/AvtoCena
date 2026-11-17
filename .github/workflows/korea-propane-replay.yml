@@ -1,0 +1,112 @@
+name: Replay actual saved propane32 on pinned e268
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/korea-propane-replay.yml']
+permissions: {contents: read, actions: read}
+concurrency: {group: owner-saved-korea-readonly-audit, cancel-in-progress: false}
+jobs:
+  replay:
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'workflow_dispatch' || github.event.head_commit.message == 'Replay actual propane32 producer62dd e268 v1')
+    runs-on: ubuntu-24.04
+    environment: regcloud-staging
+    timeout-minutes: 55
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: '${{ github.sha }}', persist-credentials: false}
+      - uses: actions/setup-node@v4
+        with: {node-version: '24.22.1', cache: npm}
+      - uses: actions/checkout@v4
+        with: {ref: e2683ae8711e0ac421ef9557c2b154db6166edf9, path: app-before, persist-credentials: false}
+      - uses: actions/checkout@v4
+        with: {ref: e2683ae8711e0ac421ef9557c2b154db6166edf9, path: app-after, persist-credentials: false}
+      - uses: actions/checkout@v4
+        with: {ref: e2683ae8711e0ac421ef9557c2b154db6166edf9, path: raw-app, persist-credentials: false}
+      - uses: actions/checkout@v4
+        with: {ref: 9b0f76fa330bb86ecc85ca78e87b01363837ca6d, path: producer-before, persist-credentials: false}
+      - uses: actions/checkout@v4
+        with: {ref: 62dd048cfc492572e204191e7b5ed4bc5c4b478a, path: producer-after, persist-credentials: false}
+      - name: Verify candidate producer CI before any storage credentials
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const assert=require('assert/strict'); const {owner,repo}=context.repo;
+            const {data}=await github.rest.actions.listWorkflowRuns({owner,repo,workflow_id:'korea-producer-contract.yml',head_sha:'62dd048cfc492572e204191e7b5ed4bc5c4b478a',status:'success',per_page:100});
+            assert(data.workflow_runs.some(r=>r.head_sha==='62dd048cfc492572e204191e7b5ed4bc5c4b478a'&&r.conclusion==='success'),'candidate producer CI success required');
+      - name: Install worker and exact app lockfiles
+        run: |
+          npm ci
+          npm ci --prefix app-before
+          npm ci --prefix app-after
+          npm ci --prefix raw-app
+      - name: Offline bounded contract, network and pricing lifecycle tests
+        run: node --import tsx --test tests/propane-replay.test.mjs tests/fullprice-network-guard.test.mjs tests/price-lifecycle.test.mjs tests/automatic-price-probe.test.mjs
+      - name: Verify original saved collection authority before credentials
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const assert=require('assert/strict'); const {owner,repo}=context.repo;
+            const {data:r}=await github.rest.actions.getWorkflowRun({owner,repo,run_id:43989797288});
+            assert.equal(r.head_sha,'e51f589f892babdcd6c1251e1ebb06c6d7c91e6d');assert.equal(r.run_attempt,1);assert.equal(r.status,'completed');assert.equal(r.head_repository.full_name,`${owner}/${repo}`);
+            const jobs=await github.paginate('GET /repos/{owner}/{repo}/actions/runs/{run_id}/attempts/{attempt_number}/jobs',{owner,repo,run_id:43989797288,attempt_number:1,per_page:100});
+            for(const id of [133727443324,133845674226])assert.equal(jobs.find(j=>j.id===id)?.conclusion,'success');
+      - name: Verify worker file pins and all exact roots
+        env:
+          APP_BEFORE_ROOT: ${{ github.workspace }}/app-before
+          APP_AFTER_ROOT: ${{ github.workspace }}/app-after
+          RAW_RUNTIME_ROOT: ${{ github.workspace }}/raw-app
+          PRODUCER_BEFORE_ROOT: ${{ github.workspace }}/producer-before
+          PRODUCER_AFTER_ROOT: ${{ github.workspace }}/producer-after
+        run: node scripts/propane-replay-source-guard.mjs
+      - name: Real pinned runtime offline positive and four fault fixtures
+        run: |
+          for root in "$GITHUB_WORKSPACE/app-before" "$GITHUB_WORKSPACE/app-after"; do
+            AUDIT_FIXTURE_APP_ROOT="$root" node --import tsx tests/fullprice-runtime-fixture.mjs
+            for fault in remote unknown write local; do
+              AUDIT_FIXTURE_APP_ROOT="$root" FAULT="$fault" node --import tsx tests/fullprice-runtime-fixture.mjs
+            done
+          done
+      - name: Offline exact staging topology card path smoke
+        env:
+          APP_BEFORE_ROOT: ${{ github.workspace }}/app-before
+          APP_AFTER_ROOT: ${{ github.workspace }}/app-after
+          RAW_RUNTIME_ROOT: ${{ github.workspace }}/raw-app
+          PRODUCER_BEFORE_ROOT: ${{ github.workspace }}/producer-before
+          PRODUCER_AFTER_ROOT: ${{ github.workspace }}/producer-after
+        run: node --import tsx tests/propane-staging-smoke.mjs
+      - id: replay
+        name: Read only affected32 and capture real pricing context
+        timeout-minutes: 22
+        env:
+          APP_BEFORE_ROOT: ${{ github.workspace }}/app-before
+          APP_AFTER_ROOT: ${{ github.workspace }}/app-after
+          RAW_RUNTIME_ROOT: ${{ github.workspace }}/raw-app
+          PRODUCER_BEFORE_ROOT: ${{ github.workspace }}/producer-before
+          PRODUCER_AFTER_ROOT: ${{ github.workspace }}/producer-after
+          NODE_OPTIONS: --max-old-space-size=4096
+          JSON_STORAGE_DRIVER: object
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_REGION: us-east-1
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+          YC_OBJECT_STORAGE_REQUEST_TIMEOUT_MS: '60000'
+          AVTOCENA_INTERACTIVE_READ_BUDGET_MS: '60000'
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+        run: node --import tsx scripts/korea-propane-replay.mjs
+      - name: Preserve safe interrupted-step outcome
+        if: always()
+        env:
+          REPLAY_OUTCOME: ${{ steps.replay.outcome }}
+        run: |
+          node --input-type=module -e 'import fs from "node:fs";if(!fs.existsSync("korea-propane-replay.json")&&!fs.existsSync("korea-propane-replay-failure.json")){const outcome=["success","failure","cancelled","skipped"].includes(process.env.REPLAY_OUTCOME)?process.env.REPLAY_OUTCOME:"not_started";fs.writeFileSync("korea-propane-replay-failure.json",JSON.stringify({passed:false,stage:"timeout_or_step_incomplete",outcome,sourceSha:process.env.GITHUB_SHA,publicationAcceptance:false}));}'
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: korea-propane32-actual-replay
+          path: |
+            korea-propane-replay.json
+            korea-propane-replay-failure.json
+            korea-propane-progress.json
+          retention-days: 7
