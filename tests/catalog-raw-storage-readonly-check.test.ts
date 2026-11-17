@@ -4,15 +4,15 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import {spawnSync} from 'node:child_process';
-import {verifyRawStorageReadOnly,RAW_READONLY_CHECK_ROOT} from '../scripts/catalog-raw-storage-readonly-check.mjs';
+import {verifyRawStorageReadOnly,RAW_READONLY_CHECK_ROOT,compareReadOnlyObjectMetadata} from '../scripts/catalog-raw-storage-readonly-check.mjs';
 import {RAW_GC_TARGET} from '../scripts/lib/catalog-raw-gc.mjs';
 
 // Exact three-field output of producer 6a720ec, verified by audit 43852979549.
 const legacyReceipt={pages:10270,count:205385,completedAt:'2026-11-14T12:55:40.904Z'};
-function fixture({mismatch=false,changed=false,writePort=false,receipt=legacyReceipt as any,receiptFound=true}={}) {
+function fixture({mismatch=false,listFraction=false,changed=false,writePort=false,receipt=legacyReceipt as any,receiptFound=true}={}) {
   const calls:any[]=[];let controlReads=0;
   const rows=['complete.json','page-receipts/1.json','page-receipts/10.json','page-receipts/100.json']
-    .map((leaf,index)=>({key:RAW_READONLY_CHECK_ROOT+'/'+leaf,etag:'"etag'+index+'"',size:100+index,lastModified:'2026-11-14T12:55:40.000Z'}));
+    .map((leaf,index)=>({key:RAW_READONLY_CHECK_ROOT+'/'+leaf,etag:'"etag'+index+'"',size:100+index,lastModified:listFraction?'2026-11-14T12:55:40.123Z':'2026-11-14T12:55:40.000Z'}));
   const io:any={target:RAW_GC_TARGET,
     async readJson({key}:any) {
       calls.push({method:'GET',key});
@@ -31,7 +31,7 @@ function fixture({mismatch=false,changed=false,writePort=false,receipt=legacyRec
     async headObject({key}:any) {
       calls.push({method:'HEAD',key});
       const row=rows.find(row=>row.key===key)!;
-      return {found:true,...row,...(mismatch?{lastModified:'2026-11-14T12:55:40.123Z'}:{})};
+      return {found:true,...row,...(mismatch?{lastModified:'2026-11-14T12:55:40.123Z'}:listFraction?{lastModified:'2026-11-14T12:55:40.000Z'}:{})};
     },
     stats(){return {requests:calls.length,get:calls.filter(row=>row.method==='GET').length,
       list:calls.filter(row=>row.method==='LIST').length,head:calls.filter(row=>row.method==='HEAD').length,put:0,post:0,responseBytes:1000};},
@@ -57,6 +57,29 @@ test('precision mismatch is preserved in the report and never silently accepted'
   const result=await verifyRawStorageReadOnly({io:fixture({mismatch:true}).io});
   assert.equal(result.status,'blocked');assert.equal(result.reason,'head_list_metadata_mismatch');
   assert.notEqual(result.objects[0].head.lastModified,result.objects[0].list.lastModified);
+});
+test('HTTP whole-second HEAD is explicitly compatible without rewriting LIST or granting deletion',async()=>{
+  const {io,calls}=fixture({listFraction:true}),result=await verifyRawStorageReadOnly({io});
+  assert.equal(result.status,'verified');assert.equal(result.exactMetadataMatch,false);
+  for(const row of result.objects){
+    assert.equal(row.exactMatch,false);assert.equal(row.timestampComparison,'http_second_precision');
+    assert.equal(row.list.lastModified,'2026-11-14T12:55:40.123Z');
+    assert.equal(row.head.lastModified,'2026-11-14T12:55:40.000Z');
+  }
+  assert.equal(result.executionEnabled,false);assert.equal(result.completeInventory,false);
+  assert.equal(result.storageWrites,0);assert.equal(result.deleteRequests,0);assert.equal(calls.length,12);
+});
+test('precision compatibility never masks size, ETag, second, fractional-HEAD or malformed changes',()=>{
+  const list={etag:'"one"',size:100,lastModified:'2026-11-14T12:55:40.123Z'};
+  const head={...list,lastModified:'2026-11-14T12:55:40.000Z'};
+  for(const changed of [{...head,etag:'"two"'},{...head,size:101},
+    {...head,lastModified:'2026-11-14T12:55:39.000Z'},
+    {...head,lastModified:'2026-11-14T12:55:41.000Z'},
+    {...head,lastModified:'2026-11-14T12:55:40.124Z'},
+    {...head,lastModified:'invalid'}])assert.equal(compareReadOnlyObjectMetadata(list,changed).matches,false);
+  assert.equal(compareReadOnlyObjectMetadata({...list,lastModified:'invalid'},head).matches,false);
+  assert.equal(compareReadOnlyObjectMetadata({...list,etag:''},{...head,etag:''}).matches,false);
+  assert.equal(compareReadOnlyObjectMetadata(list,list).exactMatch,true);
 });
 test('changed coordination authority and mutation-capable ports fail closed',async()=>{
   await assert.rejects(()=>verifyRawStorageReadOnly({io:fixture({changed:true}).io}),(error:any)=>{

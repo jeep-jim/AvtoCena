@@ -10,6 +10,10 @@ export const REPORT_MAX_ROWS = 2048;
 const digest = value => createHash('sha256').update(JSON.stringify(value)).digest('hex');
 export const reportOfferId = id => createHash('sha256').update('encar_direct:' + id).digest('hex').slice(0, 24);
 const plainObject = value => value !== null && typeof value === 'object' && !Array.isArray(value);
+// Diagnostic coordinates never become part of an immutable report or its digest.
+const reportLocations = new WeakMap();
+const reportLocation = value => value && Number.isSafeInteger(value.page) && value.page > 0
+  && Number.isSafeInteger(value.row) && value.row > 0 ? {page: value.page, row: value.row} : null;
 const block = value => {
   if (value == null) return null;
   assert.ok(plainObject(value), 'paid_report_invalid_block');
@@ -29,7 +33,7 @@ export function reportSnapshotIdentity(snapshot, run, attempt) {
     sourceRunId: String(run), sourceRunAttempt: String(attempt)};
 }
 
-export function addReportRow(rows, raw) {
+export function addReportRow(rows, raw, location = null) {
   const id = String(raw?.inner_id || '');
   assert.match(id, /^\d{6,10}$/, 'paid_report_invalid_listing_id');
   assert.equal(String(raw?.data?.inner_id), id, 'paid_report_listing_identity_mismatch');
@@ -37,10 +41,15 @@ export function addReportRow(rows, raw) {
     history: block(raw.data.history), inspection: block(raw.data.inspection), diagnosis: block(raw.data.diagnosis)};
   const previous = rows.get(record.offerId);
   if (previous) {
-    assert.equal(digest(previous), digest(record), 'paid_report_conflicting_duplicate');
+    // Fail closed as before, but identify the two saved rows to inspect without
+    // logging insurance/inspection payloads or choosing a winner by read order.
+    assert.equal(digest(previous), digest(record), 'paid_report_conflicting_duplicate:' + JSON.stringify({
+      sourceOfferId: id, previous: reportLocations.get(previous) || null, incoming: reportLocation(location)}));
     return false;
   }
   rows.set(record.offerId, record);
+  const coordinates = reportLocation(location);
+  if (coordinates) reportLocations.set(record, coordinates);
   return true;
 }
 
@@ -180,11 +189,16 @@ export async function preparePaidEncarReports() {
   await assertEnabled();
   const records = new Map();
   let total = 0, duplicates = 0, pagesRead = 0;
+  console.log(JSON.stringify({stage: 'saved_report_start', sourceRunId: String(run),
+    sourceRunAttempt: String(attempt), pages: snapshot.pages}));
   await mapBounded(Array.from({length: snapshot.pages}, (_, i) => i + 1), 4, async page => {
     await assertEnabled();
     const rows = await storage.readJson(`${prefix}/pages/${page}.json`, null);
     assert.ok(Array.isArray(rows) && (rows.length > 0 || page === snapshot.pages), 'paid_report_missing_page:' + page);
-    for (const row of rows) { total++; if (!addReportRow(records, row)) duplicates++; }
+    for (const [index, row] of rows.entries()) {
+      total++;
+      if (!addReportRow(records, row, {page, row: index + 1})) duplicates++;
+    }
     pagesRead++;
     if (pagesRead % 250 === 0) console.log(JSON.stringify({stage: 'saved_report_pages', pagesRead, total, unique: records.size}));
   });

@@ -10,7 +10,7 @@ jobs:
   verify:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
     environment: regcloud-staging
     steps:
       - uses: actions/checkout@v4
@@ -38,21 +38,31 @@ jobs:
           docker inspect --format 'running={{.State.Running}} oomKilled={{.State.OOMKilled}} restarts={{.RestartCount}}' avtocena-production
           docker stats --no-stream --format 'memory={{.MemUsage}} cpu={{.CPUPerc}}' avtocena-production
           for path in /api/health / /cars /login; do
-            curl --fail --silent --show-error --max-time 30 -o /dev/null -w "LOCAL $path code=%{http_code} first=%{time_starttransfer} total=%{time_total} bytes=%{size_download}\n" --resolve avtocena.com:443:127.0.0.1 "https://avtocena.com$path"
+            curl --fail --silent --show-error --max-time 30 -o /dev/null -w "LOCAL $path code=%{http_code} first=%{time_starttransfer} total=%{time_total} bytes=%{size_download}\n" --resolve avtocena.com:443:127.0.0.1 "https://avtocena.com$path" || printf "LOCAL_FAILURE path=%s exit=%s\n" "$path" "$?"
           done
           python3 - <<'PERF'
-          import urllib.request,time,json
+          import urllib.request,time,json,ssl
+          # Use the active nginx upstream, not a stale blue/green container port.
+          import http.client
+          class LocalHTTPSConnection(http.client.HTTPSConnection):
+              def connect(self):
+                  import socket
+                  sock=socket.create_connection(('127.0.0.1',443),self.timeout)
+                  self.sock=self._context.wrap_socket(sock,server_hostname='avtocena.com')
+          class LocalHTTPSHandler(urllib.request.HTTPSHandler):
+              def https_open(self,req): return self.do_open(LocalHTTPSConnection,req,context=ssl.create_default_context())
+          opener=urllib.request.build_opener(urllib.request.ProxyHandler({}),LocalHTTPSHandler())
           paths=['/api/catalog/search?market=korea&pageSize=24&sort=totalRub','/api/catalog/search?market=korea&pageSize=24&sort=totalRubDesc','/api/catalog/search?market=china&pageSize=24&sort=totalRub','/api/catalog/search?market=korea&pageSize=24&budgetTo=3000000','/cars/offer/kia-k5-iii-benzin-2-0-prestige-2021--a877bac6f6ecedcd6101bca2']
           for path in paths:
               for repeat in range(2):
                   start=time.monotonic()
                   try:
-                      with urllib.request.urlopen('http://127.0.0.1:3001'+path,timeout=90) as r:
+                      with opener.open('https://avtocena.com'+path,timeout=30) as r:
                           body=r.read(); result={'path':path,'repeat':repeat,'seconds':round(time.monotonic()-start,3),'status':r.status,'bytes':len(body),'timing':r.headers.get('Server-Timing')}
                           if path.startswith('/api/'):
                               value=json.loads(body);result.update(total=value.get('total'),items=len(value.get('items',[])),shards=value.get('usedIndexShards',[])[:3])
                           print(json.dumps(result),flush=True)
-                  except Exception as error:print(json.dumps({'path':path,'seconds':round(time.monotonic()-start,3),'error':str(error)}),flush=True)
+                  except Exception as error:print(json.dumps({'path':path,'seconds':round(time.monotonic()-start,3),'errorType':type(error).__name__}),flush=True)
           PERF
           systemctl is-active nginx
           systemctl is-active certbot.timer

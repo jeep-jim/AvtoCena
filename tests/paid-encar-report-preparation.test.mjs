@@ -41,6 +41,33 @@ test('identical duplicates are harmless but conflicting report history is reject
   assert.equal(addReportRow(rows, raw()), false);
   assert.throws(() => addReportRow(rows, raw('42196907', {own_damage_count: 2})), /conflicting_duplicate/);
 });
+test('duplicate diagnostics identify saved rows without leaking reports or changing receipts', () => {
+  const rows = new Map(), original = raw('42196907', {private_detail: 'DO_NOT_LOG', own_damage_count: 0});
+  addReportRow(rows, original, {page: 12, row: 3});
+  const before = buildReportBuckets(rows, identity);
+  assert.equal(addReportRow(rows, structuredClone(original), {page: 18, row: 2}), false);
+  assert.throws(() => addReportRow(rows, raw('42196907', {private_detail: 'DO_NOT_LOG', own_damage_count: 1}),
+    {page: 20, row: 4}), error => {
+    assert.match(error.message, /paid_report_conflicting_duplicate/);
+    assert.match(error.message, /"sourceOfferId":"42196907"/);
+    assert.match(error.message, /"previous":\{"page":12,"row":3\}/);
+    assert.match(error.message, /"incoming":\{"page":20,"row":4\}/);
+    assert.doesNotMatch(error.message, /DO_NOT_LOG|private_detail|own_damage_count/);
+    return true;
+  });
+  assert.deepEqual(buildReportBuckets(rows, identity), before);
+  assert.deepEqual(before, buildReportBuckets(prepare([original]).rows, identity));
+});
+test('diagnostics do not serialize arbitrary source metadata', () => {
+  const rows = new Map();
+  addReportRow(rows, raw(), {page: 1, row: 1, url: 'SECRET_URL'});
+  assert.throws(() => addReportRow(rows, raw('42196907', {own_damage_count: 1}),
+    {page: 'SECRET_PAGE', row: 2}), error => {
+    assert.match(error.message, /"incoming":null/);
+    assert.doesNotMatch(error.message, /SECRET/);
+    return true;
+  });
+});
 test('premeasured oversized buckets split once; individually oversized reports stop preparation', () => {
   const rows = new Map(); for (let id = 10000000; id < 10000200; id++) addReportRow(rows, raw(String(id)));
   const prepared = buildReportBuckets(rows, identity, {maxRows: 3});
