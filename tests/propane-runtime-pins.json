@@ -1,0 +1,20 @@
+{
+  "appCommit": "e2683ae8711e0ac421ef9557c2b154db6166edf9",
+  "baselineProducerCommit": "9b0f76fa330bb86ecc85ca78e87b01363837ca6d",
+  "baselineNormalizerSha256": "6543f36aaada29e3fd58c1301b87b274c1945af9a5ab74eff617e7e15f5ccd8f",
+  "candidateNormalizerSha256": "d8c017dfa2e3ebc4a20fdc4339895f578541e498fa21f9e35597e9b03450558a",
+  "files": {
+    "apps/web/lib/catalog/adapters.ts": "3f221bb1b5a4619b64b8025237c3b87c934bef099b7619e0d3b980a0ec979419",
+    "apps/web/lib/catalog/storage.ts": "fea6f265d4ce0c64afc4bf6e8c299764895b1d0c2968c12b015871b4fae34df1",
+    "apps/web/lib/catalog/encar-sale-contract.ts": "4002353e4e51f7c74c1c2b6d06d2d659fd9ef511783a7de64e7f83bd2129eb60",
+    "apps/web/lib/catalog/spec-normalization.ts": "0662cbbf729d4a3aadcfadd75f60c49237f3ec48bf6614972b059f8e2a8b2cf6",
+    "apps/web/lib/catalog/power-sanity.ts": "0034166a857c8d7cc86548542bfbf816b6bfb6a169d58bd1f6b6f067ba539691",
+    "apps/web/lib/catalog/powertrain-safety.ts": "01331c25adf1bd008563bf6f78f196c3988da828d1d16c0c09f9d50ad57aef98",
+    "apps/web/lib/catalog/offer-parameter-draft.ts": "e2120c1e78dea4a9e57e3b8f65a54a42992356b7a26177fbbb6debea8edb7cf2",
+    "apps/web/lib/catalog/customer-parameters.ts": "d1b4fc2ff786d32d819200006d0e59a376dbbb4a5e41775f3e02411e28facb38",
+    "apps/web/lib/catalog/production-month.ts": "bd749c07b0a76450a2e7acbecbcb8c9d34d615e1393da39db9cee007eeba162f",
+    "packages/engine/src/calculation/russiaCustomsV2.ts": "dbda5a2b229140b04d612ed4cbe821ee804b961537298b5b3999a18118f0fb0b",
+    "packages/engine/src/calculation/russiaCustoms.ts": "87146e1e1e62a5051927c88e9bdc86546074707c0d58f7fc250b2bbbbb03d3cd",
+    "packages/engine/src/calculation/calculateAvtocena.ts": "0ca9e736efd4fac29b5e03b9ec2e93e9c4001abad03c319dba9c217c48df58de"
+  }
+}

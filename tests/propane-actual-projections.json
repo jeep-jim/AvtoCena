@@ -1,0 +1,1543 @@
+{
+  "meaning": "Actual hash-bound fuel and power projections ONLY; remaining fixture fields synthetic. Not full raw replay or publication acceptance.",
+  "reportSha256": "c76b7c95834f5406b2a69e5df3f407d95b4970ed8b81ac503daefd3fcf98cb74",
+  "run": "44101208116",
+  "rows": [
+    {
+      "coordinate": {
+        "page": 1,
+        "row": 3
+      },
+      "rawSha256": "7819dc280cf2ad70d622b386ab0f018920924419dfd98dadfdd7e2d65a1c996e",
+      "identitySha256": "2c91aef8a261d8a20113e44dec4b6596bbfef91aa583bfdcaaca6b2c623db5e8",
+      "stratum": "unknown",
+      "validationCode": "fuel_required",
+      "sourceFuel": {
+        "recognizedTokens": [],
+        "separatorClass": "unlisted",
+        "token": "unlisted",
+        "sha256": "7201839b5349db31a2741e30f8a0e5bfd907fc6a25666d08044973459f3f652b",
+        "length": 6
+      },
+      "draftPresence": {
+        "year": "numeric",
+        "powerHp": "numeric",
+        "powerKw": "numeric",
+        "productionMonth": "numeric",
+        "productionDay": "missing",
+        "transportToBorderRub": "missing",
+        "grossVehicleWeightKg": "missing",
+        "engineCc": "numeric",
+        "power30MinKw": "missing",
+        "icePowerKw": "numeric"
+      },
+      "sourcePower": {
+        "totalHp": 140,
+        "iceHp": 140,
+        "electricPeakKw": null,
+        "totalStatus": "numeric",
+        "iceStatus": "numeric",
+        "electricPeakStatus": "missing"
+      },
+      "supplierCertified30MinNotEstablishedByThisDiagnostic": true,
+      "sourceEvidence": {
+        "powerStatus": "exact",
+        "powerReason": null,
+        "powerSanityReason": null,
+        "fuelStatus": "ambiguous",
+        "fuelReason": null,
+        "sourceFuel": null,
+        "sourcePowertrain": "unknown",
+        "namedPowertrain": null
+      }
+    },
+    {
+      "coordinate": {
+        "page": 1,
+        "row": 19
+      },
+      "rawSha256": "e98648dbac1fc67d8e8e373466ccfa9ca963ca7e6cc2f7867851499eb08d1de3",
+      "identitySha256": "9a11bfdcf5f0932bd6cb035ab36be0fec9825ae3d4024cbc59325868a525c204",
+      "stratum": "unknown",
+      "validationCode": "fuel_required",
+      "sourceFuel": {
+        "recognizedTokens": [],
+        "separatorClass": "unlisted",
+        "token": "unlisted",
+        "sha256": "7201839b5349db31a2741e30f8a0e5bfd907fc6a25666d08044973459f3f652b",
+        "length": 6
+      },
+      "draftPresence": {
+        "year": "numeric",
+        "powerHp": "numeric",
+        "powerKw": "numeric",
+        "productionMonth": "numeric",
+        "productionDay": "missing",
+        "transportToBorderRub": "missing",
+        "grossVehicleWeightKg": "missing",
+        "engineCc": "numeric",
+        "power30MinKw": "missing",
+        "icePowerKw": "numeric"
+      },
+      "sourcePower": {
+        "totalHp": 159,
+        "iceHp": 159,
+        "electricPeakKw": null,
+        "totalStatus": "numeric",
+        "iceStatus": "numeric",
+        "electricPeakStatus": "missing"
+      },
+      "supplierCertified30MinNotEstablishedByThisDiagnostic": true,
+      "sourceEvidence": {
+        "powerStatus": "exact",
+        "powerReason": null,
+        "powerSanityReason": null,
+        "fuelStatus": "ambiguous",
+        "fuelReason": null,
+        "sourceFuel": null,
+        "sourcePowertrain": "unknown",
+        "namedPowertrain": null
+      }
+    },
+    {
+      "coordinate": {
+        "page": 2,
+        "row": 3
+      },
+      "rawSha256": "0cff137a186f1e6e90debb6c529fea9e40c73c3f5cbef05d122d2da667311036",
+      "identitySha256": "86d08b2888eca52938691f135b0318021f724351bf460290334dc9fecfe27381",
+      "stratum": "unknown",
+      "validationCode": "fuel_required",
+      "sourceFuel": {
+        "recognizedTokens": [],
+        "separatorClass": "unlisted",
+        "token": "unlisted",
+        "sha256": "7201839b5349db31a2741e30f8a0e5bfd907fc6a25666d08044973459f3f652b",
+        "length": 6
+      },
+      "draftPresence": {
+        "year": "numeric",
+        "powerHp": "numeric",
+        "powerKw": "numeric",
+        "productionMonth": "numeric",
+        "productionDay": "missing",
+        "transportToBorderRub": "missing",
+        "grossVehicleWeightKg": "missing",
+        "engineCc": "numeric",
+        "power30MinKw": "missing",
+        "icePowerKw": "numeric"
+      },
+      "sourcePower": {
+        "totalHp": 140,
+        "iceHp": 140,
+        "electricPeakKw": null,
+        "totalStatus": "numeric",
+        "iceStatus": "numeric",
+        "electricPeakStatus": "missing"
+      },
+      "supplierCertified30MinNotEstablishedByThisDiagnostic": true,
+      "sourceEvidence": {
+        "powerStatus": "exact",
+        "powerReason": null,
+        "powerSanityReason": null,
+        "fuelStatus": "ambiguous",
+        "fuelReason": null,
+        "sourceFuel": null,
+        "sourcePowertrain": "unknown",
+        "namedPowertrain": null
+      }
+    },
+    {
+      "coordinate": {
+        "page": 658,
+        "row": 2
+      },
+      "rawSha256": "1b24396dd75b5e745e649055f9871e1ce5f9f216574f29a3cafe8209964da8f3",
+      "identitySha256": "a6e84a0f103febf9a0ee5615b23efe078bf9ada7d13ca4f137169dc9f6ca24d0",
+      "stratum": "unknown",
+      "validationCode": "fuel_required",
+      "sourceFuel": {
+        "recognizedTokens": [],
+        "separatorClass": "unlisted",
+        "token": "unlisted",
+        "sha256": "7201839b5349db31a2741e30f8a0e5bfd907fc6a25666d08044973459f3f652b",
+        "length": 6
+      },
+      "draftPresence": {
+        "year": "numeric",
+        "powerHp": "numeric",
+        "powerKw": "numeric",
+        "productionMonth": "numeric",
+        "productionDay": "missing",
+        "transportToBorderRub": "missing",
+        "grossVehicleWeightKg": "missing",
+        "engineCc": "numeric",
+        "power30MinKw": "missing",
+        "icePowerKw": "numeric"
+      },
+      "sourcePower": {
+        "totalHp": 157,
+        "iceHp": 157,
+        "electricPeakKw": null,
+        "totalStatus": "numeric",
+        "iceStatus": "numeric",
+        "electricPeakStatus": "missing"
+      },
+      "supplierCertified30MinNotEstablishedByThisDiagnostic": true,
+      "sourceEvidence": {
+        "powerStatus": "exact",
+        "powerReason": null,
+        "powerSanityReason": null,
+        "fuelStatus": "ambiguous",
+        "fuelReason": null,
+        "sourceFuel": null,
+        "sourcePowertrain": "unknown",
+        "namedPowertrain": null
+      }
+    },
+    {
+      "coordinate": {
+        "page": 658,
+        "row": 6
+      },
+      "rawSha256": "831c8f0021c98017f99ef8b44a0352356e94da589b514f5636ef96ca449050f8",
+      "identitySha256": "a1237b5851f59d71d4e1995d89742388afafc06d0c9dd4ce87b88879286040b8",
+      "stratum": "unknown",
+      "validationCode": "fuel_required",
+      "sourceFuel": {
+        "recognizedTokens": [],
+        "separatorClass": "unlisted",
+        "token": "unlisted",
+        "sha256": "7201839b5349db31a2741e30f8a0e5bfd907fc6a25666d08044973459f3f652b",
+        "length": 6
+      },
+      "draftPresence": {
+        "year": "numeric",
+        "powerHp": "numeric",
+        "powerKw": "numeric",
+        "productionMonth": "numeric",
+        "productionDay": "missing",
+        "transportToBorderRub": "missing",
+        "grossVehicleWeightKg": "missing",
+        "engineCc": "numeric",
+        "power30MinKw": "missing",
+        "icePowerKw": "numeric"
+      },
+      "sourcePower": {
+        "totalHp": 43,
+        "iceHp": 43,
+        "electricPeakKw": null,
+        "totalStatus": "numeric",
+        "iceStatus": "numeric",
+        "electricPeakStatus": "missing"
+      },
+      "supplierCertified30MinNotEstablishedByThisDiagnostic": true,
+      "sourceEvidence": {
+        "powerStatus": "exact",
+        "powerReason": null,
+        "powerSanityReason": null,
+        "fuelStatus": "ambiguous",
+        "fuelReason": null,
+        "sourceFuel": null,
+        "sourcePowertrain": "unknown",
+        "namedPowertrain": null
+      }
+    },
+    {
+      "coordinate": {
+        "page": 1974,
+        "row": 11
+      },
+      "rawSha256": "1745cb97e6a7194cae1801d9461f4f52df9d22de4bba8d4d7fe44cac29443732",
+      "identitySha256": "e1d84d4e751699646c4114048dc56c37fc407af299a7203d90640b8944862bda",
+      "stratum": "unknown",
+      "validationCode": "fuel_required",
+      "sourceFuel": {
+        "recognizedTokens": [],
+        "separatorClass": "unlisted",
+        "token": "unlisted",
+        "sha256": "7201839b5349db31a2741e30f8a0e5bfd907fc6a25666d08044973459f3f652b",
+        "length": 6
+      },
+      "draftPresence": {
+        "year": "numeric",
+        "powerHp": "numeric",
+        "powerKw": "numeric",
+        "productionMonth": "numeric",
+        "productionDay": "missing",
+        "transportToBorderRub": "missing",
+        "grossVehicleWeightKg": "missing",
+        "engineCc": "numeric",
+        "power30MinKw": "missing",
+        "icePowerKw": "numeric"
+      },
+      "sourcePower": {
+        "totalHp": 240,
+        "iceHp": 240,
+        "electricPeakKw": null,
+        "totalStatus": "numeric",
+        "iceStatus": "numeric",
+        "electricPeakStatus": "missing"
+      },
+      "supplierCertified30MinNotEstablishedByThisDiagnostic": true,
+      "sourceEvidence": {
+        "powerStatus": "exact",
+        "powerReason": null,
+        "powerSanityReason": null,
+        "fuelStatus": "ambiguous",
+        "fuelReason": null,
+        "sourceFuel": null,
+        "sourcePowertrain": "unknown",
+        "namedPowertrain": null
+      }
+    },
+    {
+      "coordinate": {
+        "page": 2632,
+        "row": 19
+      },
+      "rawSha256": "7cff368b02291e944d1aca3a2a951cfeefc31a2f034476ddb9c325267950e193",
+      "identitySha256": "063df572f5000bd60080d1bd2ae929912c111679a15954fb40eec2f8872f2b89",
+      "stratum": "unknown",
+      "validationCode": "fuel_required",
+      "sourceFuel": {
+        "recognizedTokens": [],
+        "separatorClass": "unlisted",
+        "token": "unlisted",
+        "sha256": "7201839b5349db31a2741e30f8a0e5bfd907fc6a25666d08044973459f3f652b",
+        "length": 6
+      },
+      "draftPresence": {
+        "year": "numeric",
+        "powerHp": "numeric",
+        "powerKw": "numeric",
+        "productionMonth": "numeric",
+        "productionDay": "missing",
+        "transportToBorderRub": "missing",
+        "grossVehicleWeightKg": "missing",
+        "engineCc": "numeric",
+        "power30MinKw": "missing",
+        "icePowerKw": "numeric"
+      },
+      "sourcePower": {
+        "totalHp": 235,
+        "iceHp": 235,
+        "electricPeakKw": null,
+        "totalStatus": "numeric",
+        "iceStatus": "numeric",
+        "electricPeakStatus": "missing"
+      },
+      "supplierCertified30MinNotEstablishedByThisDiagnostic": true,
+      "sourceEvidence": {
+        "powerStatus": "exact",
+        "powerReason": null,
+        "powerSanityReason": null,
+        "fuelStatus": "ambiguous",
+        "fuelReason": null,
+        "sourceFuel": null,
+        "sourcePowertrain": "unknown",
+        "namedPowertrain": null
+      }
+    },
+    {
+      "coordinate": {
+        "page": 4606,
+        "row": 2
+      },
+      "rawSha256": "8dcc7244220e779792f904d7a0e83ee0e9fc63d9dc05c153ec5651e55fa2c8c1",
+      "identitySha256": "0c81248ad100dcb945463a9c2a77c067c43cb453415687bc3db34a65cbc8c430",
+      "stratum": "unknown",
+      "validationCode": "fuel_required",
+      "sourceFuel": {
+        "recognizedTokens": [],
+        "separatorClass": "unlisted",
+        "token": "unlisted",
+        "sha256": "7201839b5349db31a2741e30f8a0e5bfd907fc6a25666d08044973459f3f652b",
+        "length": 6
+      },
+      "draftPresence": {
+        "year": "numeric",
+        "powerHp": "numeric",
+        "powerKw": "numeric",
+        "productionMonth": "numeric",
+        "productionDay": "missing",
+        "transportToBorderRub": "missing",
+        "grossVehicleWeightKg": "missing",
+        "engineCc": "numeric",
+        "power30MinKw": "missing",
+        "icePowerKw": "numeric"
+      },
+      "sourcePower": {
+        "totalHp": 140,
+        "iceHp": 140,
+        "electricPeakKw": null,
+        "totalStatus": "numeric",
+        "iceStatus": "numeric",
+        "electricPeakStatus": "missing"
+      },
+      "supplierCertified30MinNotEstablishedByThisDiagnostic": true,
+      "sourceEvidence": {
+        "powerStatus": "exact",
+        "powerReason": null,
+        "powerSanityReason": null,
+        "fuelStatus": "ambiguous",
+        "fuelReason": null,
+        "sourceFuel": null,
+        "sourcePowertrain": "unknown",
+        "namedPowertrain": null
+      }
+    },
+    {
+      "coordinate": {
+        "page": 4606,
+        "row": 16
+      },
+      "rawSha256": "e2adab8af06f5b587e2aea1923f3e2c6f60cd12532f1f6ee78f1b5cd17c7c2e5",
+      "identitySha256": "4f5c388d31a4d0f24b8bbeca5021222a82c11bf91ff51d1fe99dda11f5c83cad",
+      "stratum": "unknown",
+      "validationCode": "fuel_required",
+      "sourceFuel": {
+        "recognizedTokens": [],
+        "separatorClass": "unlisted",
+        "token": "unlisted",
+        "sha256": "7201839b5349db31a2741e30f8a0e5bfd907fc6a25666d08044973459f3f652b",
+        "length": 6
+      },
+      "draftPresence": {
+        "year": "numeric",
+        "powerHp": "numeric",
+        "powerKw": "numeric",
+        "productionMonth": "numeric",
+        "productionDay": "missing",
+        "transportToBorderRub": "missing",
+        "grossVehicleWeightKg": "missing",
+        "engineCc": "numeric",
+        "power30MinKw": "missing",
+        "icePowerKw": "numeric"
+      },
+      "sourcePower": {
+        "totalHp": 140,
+        "iceHp": 140,
+        "electricPeakKw": null,
+        "totalStatus": "numeric",
+        "iceStatus": "numeric",
+        "electricPeakStatus": "missing"
+      },
+      "supplierCertified30MinNotEstablishedByThisDiagnostic": true,
+      "sourceEvidence": {
+        "powerStatus": "exact",
+        "powerReason": null,
+        "powerSanityReason": null,
+        "fuelStatus": "ambiguous",
+        "fuelReason": null,
+        "sourceFuel": null,
+        "sourcePowertrain": "unknown",
+        "namedPowertrain": null
+      }
+    },
+    {
+      "coordinate": {
+        "page": 5921,
+        "row": 3
+      },
+      "rawSha256": "0367a6283fb341c5add312179c3e58cef8ad383edf42f57b78498ef349b041f0",
+      "identitySha256": "9ca755987ec6e000c16e359a8f039f40d9222e23156b576234b87ca6d4ee8b0f",
+      "stratum": "unknown",
+      "validationCode": "fuel_required",
+      "sourceFuel": {
+        "recognizedTokens": [],
+        "separatorClass": "unlisted",
+        "token": "unlisted",
+        "sha256": "7201839b5349db31a2741e30f8a0e5bfd907fc6a25666d08044973459f3f652b",
+        "length": 6
+      },
+      "draftPresence": {
+        "year": "numeric",
+        "powerHp": "numeric",
+        "powerKw": "numeric",
+        "productionMonth": "numeric",
+        "productionDay": "missing",
+        "transportToBorderRub": "missing",
+        "grossVehicleWeightKg": "missing",
+        "engineCc": "numeric",
+        "power30MinKw": "missing",
+        "icePowerKw": "numeric"
+      },
+      "sourcePower": {
+        "totalHp": 151,
+        "iceHp": 151,
+        "electricPeakKw": null,
+        "totalStatus": "numeric",
+        "iceStatus": "numeric",
+        "electricPeakStatus": "missing"
+      },
+      "supplierCertified30MinNotEstablishedByThisDiagnostic": true,
+      "sourceEvidence": {
+        "powerStatus": "exact",
+        "powerReason": null,
+        "powerSanityReason": null,
+        "fuelStatus": "ambiguous",
+        "fuelReason": null,
+        "sourceFuel": null,
+        "sourcePowertrain": "unknown",
+        "namedPowertrain": null
+      }
+    },
+    {
+      "coordinate": {
+        "page": 5921,
+        "row": 10
+      },
+      "rawSha256": "d871a72e1c7e6a1367fffcafe5ecd50710bc5cd6b28396e5bab517928512c3c9",
+      "identitySha256": "34a2b6acf29fb2df15d9893ffcb8cf5ee14f292fbe54e69bf9921cf29eb35e3b",
+      "stratum": "unknown",
+      "validationCode": "fuel_required",
+      "sourceFuel": {
+        "recognizedTokens": [],
+        "separatorClass": "unlisted",
+        "token": "unlisted",
+        "sha256": "7201839b5349db31a2741e30f8a0e5bfd907fc6a25666d08044973459f3f652b",
+        "length": 6
+      },
+      "draftPresence": {
+        "year": "numeric",
+        "powerHp": "numeric",
+        "powerKw": "numeric",
+        "productionMonth": "numeric",
+        "productionDay": "missing",
+        "transportToBorderRub": "missing",
+        "grossVehicleWeightKg": "missing",
+        "engineCc": "numeric",
+        "power30MinKw": "missing",
+        "icePowerKw": "numeric"
+      },
+      "sourcePower": {
+        "totalHp": 235,
+        "iceHp": 235,
+        "electricPeakKw": null,
+        "totalStatus": "numeric",
+        "iceStatus": "numeric",
+        "electricPeakStatus": "missing"
+      },
+      "supplierCertified30MinNotEstablishedByThisDiagnostic": true,
+      "sourceEvidence": {
+        "powerStatus": "exact",
+        "powerReason": null,
+        "powerSanityReason": null,
+        "fuelStatus": "ambiguous",
+        "fuelReason": null,
+        "sourceFuel": null,
+        "sourcePowertrain": "unknown",
+        "namedPowertrain": null
+      }
+    },
+    {
+      "coordinate": {
+        "page": 6250,
+        "row": 7
+      },
+      "rawSha256": "521ed31eb17afa6eac9666551e62f253e58e524970b1aa78c1ad2fd00cd573dd",
+      "identitySha256": "dda5685c514571db77f2a24ce99cf3b83670db8f935ea02e4dcb16fe71afed85",
+      "stratum": "unknown",
+      "validationCode": "fuel_required",
+      "sourceFuel": {
+        "recognizedTokens": [],
+        "separatorClass": "unlisted",
+        "token": "unlisted",
+        "sha256": "7201839b5349db31a2741e30f8a0e5bfd907fc6a25666d08044973459f3f652b",
+        "length": 6
+      },
+      "draftPresence": {
+        "year": "numeric",
+        "powerHp": "numeric",
+        "powerKw": "numeric",
+        "productionMonth": "numeric",
+        "productionDay": "missing",
+        "transportToBorderRub": "missing",
+        "grossVehicleWeightKg": "missing",
+        "engineCc": "numeric",
+        "power30MinKw": "missing",
+        "icePowerKw": "numeric"
+      },
+      "sourcePower": {
+        "totalHp": 140,
+        "iceHp": 140,
+        "electricPeakKw": null,
+        "totalStatus": "numeric",
+        "iceStatus": "numeric",
+        "electricPeakStatus": "missing"
+      },
+      "supplierCertified30MinNotEstablishedByThisDiagnostic": true,
+      "sourceEvidence": {
+        "powerStatus": "exact",
+        "powerReason": null,
+        "powerSanityReason": null,
+        "fuelStatus": "ambiguous",
+        "fuelReason": null,
+        "sourceFuel": null,
+        "sourcePowertrain": "unknown",
+        "namedPowertrain": null
+      }
+    },
+    {
+      "coordinate": {
+        "page": 6250,
+        "row": 8
+      },
+      "rawSha256": "f6cd92c2b7be099ee2ba6a4247d91a82f30fde652700b5ca9efee4ed66c2ca03",
+      "identitySha256": "0ffe07b6fb60c19f99e5b0ddeca05f8bac0953b0af800319f12bfc6081080c65",
+      "stratum": "unknown",
+      "validationCode": "fuel_required",
+      "sourceFuel": {
+        "recognizedTokens": [],
+        "separatorClass": "unlisted",
+        "token": "unlisted",
+        "sha256": "7201839b5349db31a2741e30f8a0e5bfd907fc6a25666d08044973459f3f652b",
+        "length": 6
+      },
+      "draftPresence": {
+        "year": "numeric",
+        "powerHp": "numeric",
+        "powerKw": "numeric",
+        "productionMonth": "numeric",
+        "productionDay": "missing",
+        "transportToBorderRub": "missing",
+        "grossVehicleWeightKg": "missing",
+        "engineCc": "numeric",
+        "power30MinKw": "missing",
+        "icePowerKw": "numeric"
+      },
+      "sourcePower": {
+        "totalHp": 235,
+        "iceHp": 235,
+        "electricPeakKw": null,
+        "totalStatus": "numeric",
+        "iceStatus": "numeric",
+        "electricPeakStatus": "missing"
+      },
+      "supplierCertified30MinNotEstablishedByThisDiagnostic": true,
+      "sourceEvidence": {
+        "powerStatus": "exact",
+        "powerReason": null,
+        "powerSanityReason": null,
+        "fuelStatus": "ambiguous",
+        "fuelReason": null,
+        "sourceFuel": null,
+        "sourcePowertrain": "unknown",
+        "namedPowertrain": null
+      }
+    },
+    {
+      "coordinate": {
+        "page": 6250,
+        "row": 18
+      },
+      "rawSha256": "c25f1f081f1baea9a948e217f0436f29f0ac55444a4f5547cfbbf7a2e1476eb3",
+      "identitySha256": "ba3f120bd4057c1282173815e0f0ae1d98941a895ace553e2adb6afa21275bc5",
+      "stratum": "unknown",
+      "validationCode": "fuel_required",
+      "sourceFuel": {
+        "recognizedTokens": [],
+        "separatorClass": "unlisted",
+        "token": "unlisted",
+        "sha256": "7201839b5349db31a2741e30f8a0e5bfd907fc6a25666d08044973459f3f652b",
+        "length": 6
+      },
+      "draftPresence": {
+        "year": "numeric",
+        "powerHp": "numeric",
+        "powerKw": "numeric",
+        "productionMonth": "numeric",
+        "productionDay": "missing",
+        "transportToBorderRub": "missing",
+        "grossVehicleWeightKg": "missing",
+        "engineCc": "numeric",
+        "power30MinKw": "missing",
+        "icePowerKw": "numeric"
+      },
+      "sourcePower": {
+        "totalHp": 157,
+        "iceHp": 157,
+        "electricPeakKw": null,
+        "totalStatus": "numeric",
+        "iceStatus": "numeric",
+        "electricPeakStatus": "missing"
+      },
+      "supplierCertified30MinNotEstablishedByThisDiagnostic": true,
+      "sourceEvidence": {
+        "powerStatus": "exact",
+        "powerReason": null,
+        "powerSanityReason": null,
+        "fuelStatus": "ambiguous",
+        "fuelReason": null,
+        "sourceFuel": null,
+        "sourcePowertrain": "unknown",
+        "namedPowertrain": null
+      }
+    },
+    {
+      "coordinate": {
+        "page": 6250,
+        "row": 20
+      },
+      "rawSha256": "0b9d33426808538f43676f45c1cd0ee117d58c4d3745f5b0d96fe1d9a5321b22",
+      "identitySha256": "6bcadcda1c2286e7e4ce2e30b3442cf51bbb9cd14b3e9131904b9cb7418d7fda",
+      "stratum": "unknown",
+      "validationCode": "fuel_required",
+      "sourceFuel": {
+        "recognizedTokens": [],
+        "separatorClass": "unlisted",
+        "token": "unlisted",
+        "sha256": "7201839b5349db31a2741e30f8a0e5bfd907fc6a25666d08044973459f3f652b",
+        "length": 6
+      },
+      "draftPresence": {
+        "year": "numeric",
+        "powerHp": "numeric",
+        "powerKw": "numeric",
+        "productionMonth": "numeric",
+        "productionDay": "missing",
+        "transportToBorderRub": "missing",
+        "grossVehicleWeightKg": "missing",
+        "engineCc": "numeric",
+        "power30MinKw": "missing",
+        "icePowerKw": "numeric"
+      },
+      "sourcePower": {
+        "totalHp": 41,
+        "iceHp": 41,
+        "electricPeakKw": null,
+        "totalStatus": "numeric",
+        "iceStatus": "numeric",
+        "electricPeakStatus": "missing"
+      },
+      "supplierCertified30MinNotEstablishedByThisDiagnostic": true,
+      "sourceEvidence": {
+        "powerStatus": "exact",
+        "powerReason": null,
+        "powerSanityReason": null,
+        "fuelStatus": "ambiguous",
+        "fuelReason": null,
+        "sourceFuel": null,
+        "sourcePowertrain": "unknown",
+        "namedPowertrain": null
+      }
+    },
+    {
+      "coordinate": {
+        "page": 6579,
+        "row": 3
+      },
+      "rawSha256": "6e90845925c5dd8dbc5682e222824f773c95c6cf08eeef4c27b6965503d71b00",
+      "identitySha256": "5bdbb0874561212406a40297c7bf3ef4c5fec8a6f8a2686bb529b2f8c169325b",
+      "stratum": "unknown",
+      "validationCode": "fuel_required",
+      "sourceFuel": {
+        "recognizedTokens": [],
+        "separatorClass": "unlisted",
+        "token": "unlisted",
+        "sha256": "7201839b5349db31a2741e30f8a0e5bfd907fc6a25666d08044973459f3f652b",
+        "length": 6
+      },
+      "draftPresence": {
+        "year": "numeric",
+        "powerHp": "numeric",
+        "powerKw": "numeric",
+        "productionMonth": "numeric",
+        "productionDay": "missing",
+        "transportToBorderRub": "missing",
+        "grossVehicleWeightKg": "missing",
+        "engineCc": "numeric",
+        "power30MinKw": "missing",
+        "icePowerKw": "numeric"
+      },
+      "sourcePower": {
+        "totalHp": 151,
+        "iceHp": 151,
+        "electricPeakKw": null,
+        "totalStatus": "numeric",
+        "iceStatus": "numeric",
+        "electricPeakStatus": "missing"
+      },
+      "supplierCertified30MinNotEstablishedByThisDiagnostic": true,
+      "sourceEvidence": {
+        "powerStatus": "exact",
+        "powerReason": null,
+        "powerSanityReason": null,
+        "fuelStatus": "ambiguous",
+        "fuelReason": null,
+        "sourceFuel": null,
+        "sourcePowertrain": "unknown",
+        "namedPowertrain": null
+      }
+    },
+    {
+      "coordinate": {
+        "page": 6908,
+        "row": 19
+      },
+      "rawSha256": "c431a753f2d19ca9f8adae4fbb0bb88031813128c45b9095ff5b724c56cbaa6f",
+      "identitySha256": "eb5be1bffb76c25af5f68c482165983171f6eabc1a1b483f4e6aee15b88521a3",
+      "stratum": "unknown",
+      "validationCode": "fuel_required",
+      "sourceFuel": {
+        "recognizedTokens": [],
+        "separatorClass": "unlisted",
+        "token": "unlisted",
+        "sha256": "7201839b5349db31a2741e30f8a0e5bfd907fc6a25666d08044973459f3f652b",
+        "length": 6
+      },
+      "draftPresence": {
+        "year": "numeric",
+        "powerHp": "numeric",
+        "powerKw": "numeric",
+        "productionMonth": "numeric",
+        "productionDay": "missing",
+        "transportToBorderRub": "missing",
+        "grossVehicleWeightKg": "missing",
+        "engineCc": "numeric",
+        "power30MinKw": "missing",
+        "icePowerKw": "numeric"
+      },
+      "sourcePower": {
+        "totalHp": 41,
+        "iceHp": 41,
+        "electricPeakKw": null,
+        "totalStatus": "numeric",
+        "iceStatus": "numeric",
+        "electricPeakStatus": "missing"
+      },
+      "supplierCertified30MinNotEstablishedByThisDiagnostic": true,
+      "sourceEvidence": {
+        "powerStatus": "exact",
+        "powerReason": null,
+        "powerSanityReason": null,
+        "fuelStatus": "ambiguous",
+        "fuelReason": null,
+        "sourceFuel": null,
+        "sourcePowertrain": "unknown",
+        "namedPowertrain": null
+      }
+    },
+    {
+      "coordinate": {
+        "page": 7237,
+        "row": 11
+      },
+      "rawSha256": "91ab67c21094f9d78eb9aa8ddc5abfcdbfd686d12e6e323766abb0f2249ab4a2",
+      "identitySha256": "c5585fed459da3dd9212fd2b46707fa02be3ec059f2bc0da02b8bd1494403cf0",
+      "stratum": "unknown",
+      "validationCode": "fuel_required",
+      "sourceFuel": {
+        "recognizedTokens": [],
+        "separatorClass": "unlisted",
+        "token": "unlisted",
+        "sha256": "7201839b5349db31a2741e30f8a0e5bfd907fc6a25666d08044973459f3f652b",
+        "length": 6
+      },
+      "draftPresence": {
+        "year": "numeric",
+        "powerHp": "numeric",
+        "powerKw": "numeric",
+        "productionMonth": "numeric",
+        "productionDay": "missing",
+        "transportToBorderRub": "missing",
+        "grossVehicleWeightKg": "missing",
+        "engineCc": "numeric",
+        "power30MinKw": "missing",
+        "icePowerKw": "numeric"
+      },
+      "sourcePower": {
+        "totalHp": 240,
+        "iceHp": 240,
+        "electricPeakKw": null,
+        "totalStatus": "numeric",
+        "iceStatus": "numeric",
+        "electricPeakStatus": "missing"
+      },
+      "supplierCertified30MinNotEstablishedByThisDiagnostic": true,
+      "sourceEvidence": {
+        "powerStatus": "exact",
+        "powerReason": null,
+        "powerSanityReason": null,
+        "fuelStatus": "ambiguous",
+        "fuelReason": null,
+        "sourceFuel": null,
+        "sourcePowertrain": "unknown",
+        "namedPowertrain": null
+      }
+    },
+    {
+      "coordinate": {
+        "page": 7566,
+        "row": 1
+      },
+      "rawSha256": "f2e7381802625e44b6ed234d0c786ca0d6942ef2699aa73c93bf49cfb3a47cc9",
+      "identitySha256": "6a449212f447a5df1fc3b7defa7428b5d7db31f6bb3f1dbeb2ea72e26f168e4f",
+      "stratum": "unknown",
+      "validationCode": "fuel_required",
+      "sourceFuel": {
+        "recognizedTokens": [],
+        "separatorClass": "unlisted",
+        "token": "unlisted",
+        "sha256": "7201839b5349db31a2741e30f8a0e5bfd907fc6a25666d08044973459f3f652b",
+        "length": 6
+      },
+      "draftPresence": {
+        "year": "numeric",
+        "powerHp": "numeric",
+        "powerKw": "numeric",
+        "productionMonth": "numeric",
+        "productionDay": "missing",
+        "transportToBorderRub": "missing",
+        "grossVehicleWeightKg": "missing",
+        "engineCc": "numeric",
+        "power30MinKw": "missing",
+        "icePowerKw": "numeric"
+      },
+      "sourcePower": {
+        "totalHp": 140,
+        "iceHp": 140,
+        "electricPeakKw": null,
+        "totalStatus": "numeric",
+        "iceStatus": "numeric",
+        "electricPeakStatus": "missing"
+      },
+      "supplierCertified30MinNotEstablishedByThisDiagnostic": true,
+      "sourceEvidence": {
+        "powerStatus": "exact",
+        "powerReason": null,
+        "powerSanityReason": null,
+        "fuelStatus": "ambiguous",
+        "fuelReason": null,
+        "sourceFuel": null,
+        "sourcePowertrain": "unknown",
+        "namedPowertrain": null
+      }
+    },
+    {
+      "coordinate": {
+        "page": 7566,
+        "row": 9
+      },
+      "rawSha256": "87ea81d9de42115dbf5eb55ffde1b0fd0dcedf5c1d34278db9633c000861c467",
+      "identitySha256": "fd291117713612e42141007394dffaeb84636d0498da055aea93eddc07cc0829",
+      "stratum": "unknown",
+      "validationCode": "fuel_required",
+      "sourceFuel": {
+        "recognizedTokens": [],
+        "separatorClass": "unlisted",
+        "token": "unlisted",
+        "sha256": "7201839b5349db31a2741e30f8a0e5bfd907fc6a25666d08044973459f3f652b",
+        "length": 6
+      },
+      "draftPresence": {
+        "year": "numeric",
+        "powerHp": "numeric",
+        "powerKw": "numeric",
+        "productionMonth": "numeric",
+        "productionDay": "missing",
+        "transportToBorderRub": "missing",
+        "grossVehicleWeightKg": "missing",
+        "engineCc": "numeric",
+        "power30MinKw": "missing",
+        "icePowerKw": "numeric"
+      },
+      "sourcePower": {
+        "totalHp": 140,
+        "iceHp": 140,
+        "electricPeakKw": null,
+        "totalStatus": "numeric",
+        "iceStatus": "numeric",
+        "electricPeakStatus": "missing"
+      },
+      "supplierCertified30MinNotEstablishedByThisDiagnostic": true,
+      "sourceEvidence": {
+        "powerStatus": "exact",
+        "powerReason": null,
+        "powerSanityReason": null,
+        "fuelStatus": "ambiguous",
+        "fuelReason": null,
+        "sourceFuel": null,
+        "sourcePowertrain": "unknown",
+        "namedPowertrain": null
+      }
+    },
+    {
+      "coordinate": {
+        "page": 7566,
+        "row": 12
+      },
+      "rawSha256": "90b193cc5f688e94027b774b584644e2b965c5059138e6d387f27da7f3af7d55",
+      "identitySha256": "8781e45b24c1f655bddc1b1fbb54129f6474b64dda5cb43142d29dc5160f8a7f",
+      "stratum": "unknown",
+      "validationCode": "fuel_required",
+      "sourceFuel": {
+        "recognizedTokens": [],
+        "separatorClass": "unlisted",
+        "token": "unlisted",
+        "sha256": "7201839b5349db31a2741e30f8a0e5bfd907fc6a25666d08044973459f3f652b",
+        "length": 6
+      },
+      "draftPresence": {
+        "year": "numeric",
+        "powerHp": "numeric",
+        "powerKw": "numeric",
+        "productionMonth": "numeric",
+        "productionDay": "missing",
+        "transportToBorderRub": "missing",
+        "grossVehicleWeightKg": "missing",
+        "engineCc": "numeric",
+        "power30MinKw": "missing",
+        "icePowerKw": "numeric"
+      },
+      "sourcePower": {
+        "totalHp": 74,
+        "iceHp": 74,
+        "electricPeakKw": null,
+        "totalStatus": "numeric",
+        "iceStatus": "numeric",
+        "electricPeakStatus": "missing"
+      },
+      "supplierCertified30MinNotEstablishedByThisDiagnostic": true,
+      "sourceEvidence": {
+        "powerStatus": "exact",
+        "powerReason": null,
+        "powerSanityReason": null,
+        "fuelStatus": "ambiguous",
+        "fuelReason": null,
+        "sourceFuel": null,
+        "sourcePowertrain": "unknown",
+        "namedPowertrain": null
+      }
+    },
+    {
+      "coordinate": {
+        "page": 7566,
+        "row": 20
+      },
+      "rawSha256": "ed5c6c12915588a7e55d9462aa7894764759ad1dbf2f5331715f63e9d05e4f1e",
+      "identitySha256": "a13467ff6ba991084f046b50f3b6d5829a376bc782d8b7efdec1ad170afe69d0",
+      "stratum": "unknown",
+      "validationCode": "fuel_required",
+      "sourceFuel": {
+        "recognizedTokens": [],
+        "separatorClass": "unlisted",
+        "token": "unlisted",
+        "sha256": "7201839b5349db31a2741e30f8a0e5bfd907fc6a25666d08044973459f3f652b",
+        "length": 6
+      },
+      "draftPresence": {
+        "year": "numeric",
+        "powerHp": "numeric",
+        "powerKw": "numeric",
+        "productionMonth": "numeric",
+        "productionDay": "missing",
+        "transportToBorderRub": "missing",
+        "grossVehicleWeightKg": "missing",
+        "engineCc": "numeric",
+        "power30MinKw": "missing",
+        "icePowerKw": "numeric"
+      },
+      "sourcePower": {
+        "totalHp": 151,
+        "iceHp": 151,
+        "electricPeakKw": null,
+        "totalStatus": "numeric",
+        "iceStatus": "numeric",
+        "electricPeakStatus": "missing"
+      },
+      "supplierCertified30MinNotEstablishedByThisDiagnostic": true,
+      "sourceEvidence": {
+        "powerStatus": "exact",
+        "powerReason": null,
+        "powerSanityReason": null,
+        "fuelStatus": "ambiguous",
+        "fuelReason": null,
+        "sourceFuel": null,
+        "sourcePowertrain": "unknown",
+        "namedPowertrain": null
+      }
+    },
+    {
+      "coordinate": {
+        "page": 8224,
+        "row": 4
+      },
+      "rawSha256": "4dd6bed3bf89d27ed247ac89c80192b8ebce370a9fe8daa455f21840588ece3a",
+      "identitySha256": "2c1dc0b15fa39a7f7e551be1c3afd00787c541b5ac4e8ba224449ed95a5e6c81",
+      "stratum": "unknown",
+      "validationCode": "fuel_required",
+      "sourceFuel": {
+        "recognizedTokens": [],
+        "separatorClass": "unlisted",
+        "token": "unlisted",
+        "sha256": "7201839b5349db31a2741e30f8a0e5bfd907fc6a25666d08044973459f3f652b",
+        "length": 6
+      },
+      "draftPresence": {
+        "year": "numeric",
+        "powerHp": "numeric",
+        "powerKw": "numeric",
+        "productionMonth": "numeric",
+        "productionDay": "missing",
+        "transportToBorderRub": "missing",
+        "grossVehicleWeightKg": "missing",
+        "engineCc": "numeric",
+        "power30MinKw": "missing",
+        "icePowerKw": "numeric"
+      },
+      "sourcePower": {
+        "totalHp": 151,
+        "iceHp": 151,
+        "electricPeakKw": null,
+        "totalStatus": "numeric",
+        "iceStatus": "numeric",
+        "electricPeakStatus": "missing"
+      },
+      "supplierCertified30MinNotEstablishedByThisDiagnostic": true,
+      "sourceEvidence": {
+        "powerStatus": "exact",
+        "powerReason": null,
+        "powerSanityReason": null,
+        "fuelStatus": "ambiguous",
+        "fuelReason": null,
+        "sourceFuel": null,
+        "sourcePowertrain": "unknown",
+        "namedPowertrain": null
+      }
+    },
+    {
+      "coordinate": {
+        "page": 8224,
+        "row": 5
+      },
+      "rawSha256": "83c76016a821308c3f2c775afc667d8ac80b0dff23db8917645c35a1503f8fa0",
+      "identitySha256": "d2231db1b734d2c94d3556bdf0b5c2b2449d59fc33abcdf209550282d31fa6d5",
+      "stratum": "unknown",
+      "validationCode": "fuel_required",
+      "sourceFuel": {
+        "recognizedTokens": [],
+        "separatorClass": "unlisted",
+        "token": "unlisted",
+        "sha256": "7201839b5349db31a2741e30f8a0e5bfd907fc6a25666d08044973459f3f652b",
+        "length": 6
+      },
+      "draftPresence": {
+        "year": "numeric",
+        "powerHp": "numeric",
+        "powerKw": "numeric",
+        "productionMonth": "numeric",
+        "productionDay": "missing",
+        "transportToBorderRub": "missing",
+        "grossVehicleWeightKg": "missing",
+        "engineCc": "numeric",
+        "power30MinKw": "missing",
+        "icePowerKw": "numeric"
+      },
+      "sourcePower": {
+        "totalHp": 146,
+        "iceHp": 146,
+        "electricPeakKw": null,
+        "totalStatus": "numeric",
+        "iceStatus": "numeric",
+        "electricPeakStatus": "missing"
+      },
+      "supplierCertified30MinNotEstablishedByThisDiagnostic": true,
+      "sourceEvidence": {
+        "powerStatus": "exact",
+        "powerReason": null,
+        "powerSanityReason": null,
+        "fuelStatus": "ambiguous",
+        "fuelReason": null,
+        "sourceFuel": null,
+        "sourcePowertrain": "unknown",
+        "namedPowertrain": null
+      }
+    },
+    {
+      "coordinate": {
+        "page": 8224,
+        "row": 6
+      },
+      "rawSha256": "a14dc13c2eac432fcd4e7c915e170477ba5e01944f4cdc8e4171775185ca2e41",
+      "identitySha256": "4781055431a7828c6ea40c8fc47bca964bfbbd352aebd49537c49e4b2fb2963a",
+      "stratum": "unknown",
+      "validationCode": "fuel_required",
+      "sourceFuel": {
+        "recognizedTokens": [],
+        "separatorClass": "unlisted",
+        "token": "unlisted",
+        "sha256": "7201839b5349db31a2741e30f8a0e5bfd907fc6a25666d08044973459f3f652b",
+        "length": 6
+      },
+      "draftPresence": {
+        "year": "numeric",
+        "powerHp": "numeric",
+        "powerKw": "numeric",
+        "productionMonth": "numeric",
+        "productionDay": "missing",
+        "transportToBorderRub": "missing",
+        "grossVehicleWeightKg": "missing",
+        "engineCc": "numeric",
+        "power30MinKw": "missing",
+        "icePowerKw": "numeric"
+      },
+      "sourcePower": {
+        "totalHp": 146,
+        "iceHp": 146,
+        "electricPeakKw": null,
+        "totalStatus": "numeric",
+        "iceStatus": "numeric",
+        "electricPeakStatus": "missing"
+      },
+      "supplierCertified30MinNotEstablishedByThisDiagnostic": true,
+      "sourceEvidence": {
+        "powerStatus": "exact",
+        "powerReason": null,
+        "powerSanityReason": null,
+        "fuelStatus": "ambiguous",
+        "fuelReason": null,
+        "sourceFuel": null,
+        "sourcePowertrain": "unknown",
+        "namedPowertrain": null
+      }
+    },
+    {
+      "coordinate": {
+        "page": 8224,
+        "row": 16
+      },
+      "rawSha256": "2076b36f81cecb6af434cf726b494dcdb56a6979ae98f04ece5bb9eacca2abf1",
+      "identitySha256": "a348821ec45def8c38ca21a973ef0c8ffe807dfd2f32d928a5735137e48d260e",
+      "stratum": "unknown",
+      "validationCode": "fuel_required",
+      "sourceFuel": {
+        "recognizedTokens": [],
+        "separatorClass": "unlisted",
+        "token": "unlisted",
+        "sha256": "7201839b5349db31a2741e30f8a0e5bfd907fc6a25666d08044973459f3f652b",
+        "length": 6
+      },
+      "draftPresence": {
+        "year": "numeric",
+        "powerHp": "numeric",
+        "powerKw": "numeric",
+        "productionMonth": "numeric",
+        "productionDay": "missing",
+        "transportToBorderRub": "missing",
+        "grossVehicleWeightKg": "missing",
+        "engineCc": "numeric",
+        "power30MinKw": "missing",
+        "icePowerKw": "numeric"
+      },
+      "sourcePower": {
+        "totalHp": 140,
+        "iceHp": 140,
+        "electricPeakKw": null,
+        "totalStatus": "numeric",
+        "iceStatus": "numeric",
+        "electricPeakStatus": "missing"
+      },
+      "supplierCertified30MinNotEstablishedByThisDiagnostic": true,
+      "sourceEvidence": {
+        "powerStatus": "exact",
+        "powerReason": null,
+        "powerSanityReason": null,
+        "fuelStatus": "ambiguous",
+        "fuelReason": null,
+        "sourceFuel": null,
+        "sourcePowertrain": "unknown",
+        "namedPowertrain": null
+      }
+    },
+    {
+      "coordinate": {
+        "page": 9211,
+        "row": 1
+      },
+      "rawSha256": "192ff000fa35a74258f14e28d48a51c34cd98fdeab1018c58635672bf7f79f27",
+      "identitySha256": "a92330ebe8af4eb2780731038e686bb0501f628a380353b5d8c0521dfb9664bf",
+      "stratum": "unknown",
+      "validationCode": "fuel_required",
+      "sourceFuel": {
+        "recognizedTokens": [],
+        "separatorClass": "unlisted",
+        "token": "unlisted",
+        "sha256": "7201839b5349db31a2741e30f8a0e5bfd907fc6a25666d08044973459f3f652b",
+        "length": 6
+      },
+      "draftPresence": {
+        "year": "numeric",
+        "powerHp": "numeric",
+        "powerKw": "numeric",
+        "productionMonth": "numeric",
+        "productionDay": "missing",
+        "transportToBorderRub": "missing",
+        "grossVehicleWeightKg": "missing",
+        "engineCc": "numeric",
+        "power30MinKw": "missing",
+        "icePowerKw": "numeric"
+      },
+      "sourcePower": {
+        "totalHp": 146,
+        "iceHp": 146,
+        "electricPeakKw": null,
+        "totalStatus": "numeric",
+        "iceStatus": "numeric",
+        "electricPeakStatus": "missing"
+      },
+      "supplierCertified30MinNotEstablishedByThisDiagnostic": true,
+      "sourceEvidence": {
+        "powerStatus": "exact",
+        "powerReason": null,
+        "powerSanityReason": null,
+        "fuelStatus": "ambiguous",
+        "fuelReason": null,
+        "sourceFuel": null,
+        "sourcePowertrain": "unknown",
+        "namedPowertrain": null
+      }
+    },
+    {
+      "coordinate": {
+        "page": 9211,
+        "row": 9
+      },
+      "rawSha256": "2f35191b2f553688bd6ab2be995c4fc4d01e58b7afb2d1d80541dc457c440615",
+      "identitySha256": "236166c8af5ae519be92e73be85257eadb3fa462bce4df87f9d26d2ff657c37e",
+      "stratum": "unknown",
+      "validationCode": "fuel_required",
+      "sourceFuel": {
+        "recognizedTokens": [],
+        "separatorClass": "unlisted",
+        "token": "unlisted",
+        "sha256": "7201839b5349db31a2741e30f8a0e5bfd907fc6a25666d08044973459f3f652b",
+        "length": 6
+      },
+      "draftPresence": {
+        "year": "numeric",
+        "powerHp": "numeric",
+        "powerKw": "numeric",
+        "productionMonth": "numeric",
+        "productionDay": "missing",
+        "transportToBorderRub": "missing",
+        "grossVehicleWeightKg": "missing",
+        "engineCc": "numeric",
+        "power30MinKw": "missing",
+        "icePowerKw": "numeric"
+      },
+      "sourcePower": {
+        "totalHp": 235,
+        "iceHp": 235,
+        "electricPeakKw": null,
+        "totalStatus": "numeric",
+        "iceStatus": "numeric",
+        "electricPeakStatus": "missing"
+      },
+      "supplierCertified30MinNotEstablishedByThisDiagnostic": true,
+      "sourceEvidence": {
+        "powerStatus": "exact",
+        "powerReason": null,
+        "powerSanityReason": null,
+        "fuelStatus": "ambiguous",
+        "fuelReason": null,
+        "sourceFuel": null,
+        "sourcePowertrain": "unknown",
+        "namedPowertrain": null
+      }
+    },
+    {
+      "coordinate": {
+        "page": 9540,
+        "row": 8
+      },
+      "rawSha256": "0d795c190506df08f481bed933050497c8d840dcc005e6cc09f07b82b6005d29",
+      "identitySha256": "2f46b3c1c1e6f9e050a4eec385c59467e98c53fb3c5b971e272add464281c303",
+      "stratum": "unknown",
+      "validationCode": "fuel_required",
+      "sourceFuel": {
+        "recognizedTokens": [],
+        "separatorClass": "unlisted",
+        "token": "unlisted",
+        "sha256": "7201839b5349db31a2741e30f8a0e5bfd907fc6a25666d08044973459f3f652b",
+        "length": 6
+      },
+      "draftPresence": {
+        "year": "numeric",
+        "powerHp": "numeric",
+        "powerKw": "numeric",
+        "productionMonth": "numeric",
+        "productionDay": "missing",
+        "transportToBorderRub": "missing",
+        "grossVehicleWeightKg": "missing",
+        "engineCc": "numeric",
+        "power30MinKw": "missing",
+        "icePowerKw": "numeric"
+      },
+      "sourcePower": {
+        "totalHp": 151,
+        "iceHp": 151,
+        "electricPeakKw": null,
+        "totalStatus": "numeric",
+        "iceStatus": "numeric",
+        "electricPeakStatus": "missing"
+      },
+      "supplierCertified30MinNotEstablishedByThisDiagnostic": true,
+      "sourceEvidence": {
+        "powerStatus": "exact",
+        "powerReason": null,
+        "powerSanityReason": null,
+        "fuelStatus": "ambiguous",
+        "fuelReason": null,
+        "sourceFuel": null,
+        "sourcePowertrain": "unknown",
+        "namedPowertrain": null
+      }
+    },
+    {
+      "coordinate": {
+        "page": 9869,
+        "row": 2
+      },
+      "rawSha256": "5f0d2e8b1fd52c16a1993889c3b4a531bdc340402c9c3719541f2e34fe149dc7",
+      "identitySha256": "c22923cc81ed7462f0b7f5970dbb016a9dad103c48037849b53775cf4eeee885",
+      "stratum": "unknown",
+      "validationCode": "fuel_required",
+      "sourceFuel": {
+        "recognizedTokens": [],
+        "separatorClass": "unlisted",
+        "token": "unlisted",
+        "sha256": "7201839b5349db31a2741e30f8a0e5bfd907fc6a25666d08044973459f3f652b",
+        "length": 6
+      },
+      "draftPresence": {
+        "year": "numeric",
+        "powerHp": "numeric",
+        "powerKw": "numeric",
+        "productionMonth": "numeric",
+        "productionDay": "missing",
+        "transportToBorderRub": "missing",
+        "grossVehicleWeightKg": "missing",
+        "engineCc": "numeric",
+        "power30MinKw": "missing",
+        "icePowerKw": "numeric"
+      },
+      "sourcePower": {
+        "totalHp": 235,
+        "iceHp": 235,
+        "electricPeakKw": null,
+        "totalStatus": "numeric",
+        "iceStatus": "numeric",
+        "electricPeakStatus": "missing"
+      },
+      "supplierCertified30MinNotEstablishedByThisDiagnostic": true,
+      "sourceEvidence": {
+        "powerStatus": "exact",
+        "powerReason": null,
+        "powerSanityReason": null,
+        "fuelStatus": "ambiguous",
+        "fuelReason": null,
+        "sourceFuel": null,
+        "sourcePowertrain": "unknown",
+        "namedPowertrain": null
+      }
+    },
+    {
+      "coordinate": {
+        "page": 10123,
+        "row": 9
+      },
+      "rawSha256": "44b07d194d3d415d788a3b25762c9aaa32ba21d6c25b7b9e7ccbae12df936442",
+      "identitySha256": "6b78a624ac69c06e07ee218ee29734f5b27c7ee2987d5db8218143a869dad3fc",
+      "stratum": "unknown",
+      "validationCode": "fuel_required",
+      "sourceFuel": {
+        "recognizedTokens": [],
+        "separatorClass": "unlisted",
+        "token": "unlisted",
+        "sha256": "7201839b5349db31a2741e30f8a0e5bfd907fc6a25666d08044973459f3f652b",
+        "length": 6
+      },
+      "draftPresence": {
+        "year": "numeric",
+        "powerHp": "numeric",
+        "powerKw": "numeric",
+        "productionMonth": "numeric",
+        "productionDay": "missing",
+        "transportToBorderRub": "missing",
+        "grossVehicleWeightKg": "missing",
+        "engineCc": "numeric",
+        "power30MinKw": "missing",
+        "icePowerKw": "numeric"
+      },
+      "sourcePower": {
+        "totalHp": 157,
+        "iceHp": 157,
+        "electricPeakKw": null,
+        "totalStatus": "numeric",
+        "iceStatus": "numeric",
+        "electricPeakStatus": "missing"
+      },
+      "supplierCertified30MinNotEstablishedByThisDiagnostic": true,
+      "sourceEvidence": {
+        "powerStatus": "exact",
+        "powerReason": null,
+        "powerSanityReason": null,
+        "fuelStatus": "ambiguous",
+        "fuelReason": null,
+        "sourceFuel": null,
+        "sourcePowertrain": "unknown",
+        "namedPowertrain": null
+      }
+    },
+    {
+      "coordinate": {
+        "page": 10198,
+        "row": 8
+      },
+      "rawSha256": "5a55457e63f472a929b63ee28c694b8e6c8bcce63b4d77424312ec3d1d1b9a06",
+      "identitySha256": "225f9b46926ea2d5b9fdb5ed5fff024f5d4e654a9510f38aeff6c02a3f8de929",
+      "stratum": "unknown",
+      "validationCode": "fuel_required",
+      "sourceFuel": {
+        "recognizedTokens": [],
+        "separatorClass": "unlisted",
+        "token": "unlisted",
+        "sha256": "7201839b5349db31a2741e30f8a0e5bfd907fc6a25666d08044973459f3f652b",
+        "length": 6
+      },
+      "draftPresence": {
+        "year": "numeric",
+        "powerHp": "numeric",
+        "powerKw": "numeric",
+        "productionMonth": "numeric",
+        "productionDay": "missing",
+        "transportToBorderRub": "missing",
+        "grossVehicleWeightKg": "missing",
+        "engineCc": "numeric",
+        "power30MinKw": "missing",
+        "icePowerKw": "numeric"
+      },
+      "sourcePower": {
+        "totalHp": 146,
+        "iceHp": 146,
+        "electricPeakKw": null,
+        "totalStatus": "numeric",
+        "iceStatus": "numeric",
+        "electricPeakStatus": "missing"
+      },
+      "supplierCertified30MinNotEstablishedByThisDiagnostic": true,
+      "sourceEvidence": {
+        "powerStatus": "exact",
+        "powerReason": null,
+        "powerSanityReason": null,
+        "fuelStatus": "ambiguous",
+        "fuelReason": null,
+        "sourceFuel": null,
+        "sourcePowertrain": "unknown",
+        "namedPowertrain": null
+      }
+    }
+  ]
+}

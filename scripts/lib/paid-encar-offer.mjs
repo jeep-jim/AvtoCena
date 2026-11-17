@@ -67,7 +67,12 @@ export function normalizePaidEncarOffer(data, {id, observedAt, adapter}) {
   const driveLabel = text(data.drive_type);
   const ambiguousDrive = /\b(?:2wd|4x2)\b|передний\s*(?:или|\/)\s*задний/i.test(driveLabel)
     || hasSemanticAlternatives(driveLabel, 'drive');
-  const fuelLabel = text(data.engine_type).replace(/электричество/ig, 'electricity');
+  // Exact supplier enum witnessed in saved v3 rows (audit 44101208116).
+  // Normalize only this enum; retain engine_type provenance and every existing
+  // fuel/identity/power conflict guard. Never substitute an unknown fuel.
+  const sourceFuelLabel = text(data.engine_type);
+  const fuelLabel = sourceFuelLabel === 'Пропан' ? 'lpg'
+    : sourceFuelLabel.replace(/электричество/ig, 'electricity');
   const alternativeFuel = hasSemanticAlternatives(fuelLabel, 'fuel');
   const fields = canonicalizeSemanticSourceFields({fuel: alternativeFuel ? undefined : fuelLabel,
     transmission: text(data.transmission_type), bodyType: text(data.body_type),
