@@ -1,0 +1,134 @@
+name: Inspect terminal China aliases and archive readonly
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/china-terminal-aliases-44121174584.yml']
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: china-terminal-aliases-readonly-44121174584
+  cancel-in-progress: false
+jobs:
+  reconcile:
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && github.event.head_commit.message == 'Inspect terminal China aliases and archive 44121174584 metadata only'))
+    environment: regcloud-staging
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Confirm exact producer is terminal before storage reads
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          timeout --kill-after=5s 30s gh api repos/jeep-jim/AvtoCena/actions/runs/44121174584 > terminal-before.json
+          python - <<'PY_TERMINAL'
+          import json
+          x=json.load(open('terminal-before.json'))
+          assert x['id']==44121174584 and x['status']=='completed'
+          assert x['head_sha']=='decae6952138acd146785da548bcb4a7d15a52a9'
+          assert x['run_attempt']==1
+          PY_TERMINAL
+      - name: Prepare exact bounded read-only reader
+        run: |
+          cat > "$RUNNER_TEMP/china-stage2.mjs" <<'READER'
+          import {createHash,createHmac} from 'node:crypto';
+          import {writeFile} from 'node:fs/promises';
+          import {pathToFileURL} from 'node:url';
+          const ENDPOINT='https://s3.regru.cloud',BUCKET='avtocena-staging-8120751',PREFIX='migration-staging/full-20261011/';
+          export const ROOT='catalog/nonjp-intake/v1/china/44121174584/1';
+          export const PIN='catalog/raw-feed-pins/v1/nonjp-intake-china-44121174584-1.json';
+          export const ALIASES=Object.freeze(['catalog/public/facets.json','catalog/public/brand-summary.json','catalog/public/projection/all.json','catalog/public/projection/china.json','catalog/public/overview.json','catalog/public/feeds/openai-products.json']);
+          export const KEYS=Object.freeze(['catalog/manifest.json','catalog/import-lock.json',...ALIASES,ROOT+'/complete.json',PIN]);
+          const sha=s=>createHash('sha256').update(s).digest('hex'),hmac=(key,s)=>createHmac('sha256',key).update(s).digest();
+          export function signedGet(key,credentials,date=new Date(),allowed=KEYS){
+           if(!allowed.includes(key))throw Error('probe_key_denied');
+           if(!credentials.accessKeyId||!credentials.secretAccessKey)throw Error('probe_credentials_missing');
+           const pathname='/'+BUCKET+'/'+PREFIX+key,url=ENDPOINT+pathname;
+           const stamp=date.toISOString().replace(/[:-]|\.\d{3}/g,''),day=stamp.slice(0,8),scope=`${day}/us-east-1/s3/aws4_request`;
+           const headers={host:'s3.regru.cloud','x-amz-content-sha256':sha(''),'x-amz-date':stamp};
+           const names=Object.keys(headers).sort(),canonical=names.map(k=>`${k}:${headers[k]}\n`).join('');
+           const request=['GET',pathname,'',canonical,names.join(';'),sha('')].join('\n');
+           const signing=hmac(hmac(hmac(hmac('AWS4'+credentials.secretAccessKey,day),'us-east-1'),'s3'),'aws4_request');
+           const signature=createHmac('sha256',signing).update(`AWS4-HMAC-SHA256\n${stamp}\n${scope}\n${sha(request)}`).digest('hex');
+           headers.authorization=`AWS4-HMAC-SHA256 Credential=${credentials.accessKeyId}/${scope}, SignedHeaders=${names.join(';')}, Signature=${signature}`;
+           return {url,options:{method:'GET',headers,redirect:'error'}};
+          }
+          const generation=v=>typeof v==='string'&&/^gen_\d{1,20}_[a-z0-9-]{1,80}$/.test(v)?v:null;
+          const time=v=>typeof v==='string'&&/^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(?:\.\d{1,3})?Z$/.test(v)?v:null;
+          const hex=v=>typeof v==='string'&&/^[a-f0-9]{64}$/.test(v)?v:null;
+          const digest=v=>sha(JSON.stringify(v));
+          export function selected(value,key){
+           const out={generationId:generation(value?.generationId),updatedAt:time(value?.updatedAt),builtAt:time(value?.builtAt)};
+           if(key===ROOT+'/complete.json'||key===PIN){
+            const owner=value?.owner;out.owner=owner?{runId:/^\d{1,20}$/.test(String(owner.runId))?String(owner.runId):null,attempt:/^[1-9]\d{0,5}$/.test(String(owner.attempt))?String(owner.attempt):null,revision:typeof owner.revision==='string'&&/^[a-f0-9]{40}$/.test(owner.revision)?owner.revision:null}:null;
+            out.ownerDigest=owner?digest(owner):null;out.state=['loading','ready','published','aborted'].includes(value?.state)?value.state:null;out.readyAt=time(value?.readyAt);out.reportDigest=hex(value?.reportDigest);out.collectionComplete=value?.collection?.complete===true;out.operationId=value?.operationId==='nonjp-intake-china-44121174584-1'?value.operationId:null;out.filesCount=Array.isArray(value?.files)?value.files.length:null;out.totalBytes=Number.isSafeInteger(value?.totalBytes)&&value.totalBytes>=0?value.totalBytes:null;
+           }
+           if(key.endsWith('publication-checkpoint.json')){out.stage=['generation_indexes_ready','read_models_verified'].includes(value?.stage)?value.stage:null;out.expectedBaseGenerationId=generation(value?.expectedBaseGenerationId);out.producerRevision=typeof value?.producerRevision==='string'&&/^[a-f0-9]{40}$/.test(value.producerRevision)?value.producerRevision:null;}
+           if(key===PIN&&value?.references!==undefined)out.referencesDigest=digest(value.references);
+           if(key.endsWith('/raw-provenance-v1.json')){out.complete=value?.complete===true;out.markets={};for(const market of ['china','korea','uae','europe','georgia']){const row=value?.markets?.[market];if(row)out.markets[market]={complete:row.complete===true,count:Number.isSafeInteger(row.count)&&row.count>=0?row.count:null,unknownSourceCount:Array.isArray(row.unknownSources)?row.unknownSources.length:null,referencesCount:Array.isArray(row.references)?row.references.length:null,referencesDigest:row.references?digest(row.references):null,contributionReferencesDigest:row.contributionReferences?digest(row.contributionReferences):null,knownArchiveReferenced:Array.isArray(row.references)&&row.references.some(ref=>ref?.kind==='nonjp-intake'&&ref.root===ROOT)};}}
+           return out;
+          }
+          export async function read(key,{credentials,fetchImpl=fetch,allowed=KEYS,timeoutMs=10000}={}){
+           const request=signedGet(key,credentials,new Date(),allowed),controller=new AbortController(),timer=setTimeout(()=>controller.abort(),timeoutMs),limit=key==='catalog/import-lock.json'?16384:2*1024*1024;
+           try{
+            const r=await fetchImpl(request.url,{...request.options,signal:controller.signal});
+            if(r.status===404){await r.body?.cancel();return {record:{key,found:false},value:null};}
+            if(r.status!==200){await r.body?.cancel();throw Error('probe_http_'+r.status);}
+            const etag=/^"?[a-fA-F0-9-]{1,128}"?$/.test(r.headers.get('etag')||'')?r.headers.get('etag'):null,declared=Number(r.headers.get('content-length'));
+            if(Number.isFinite(declared)&&declared>limit){await r.body?.cancel();return {record:{key,found:true,bodyRead:false,overCap:true,declaredBytes:declared,etag,sha256:null},value:null};}
+            const reader=r.body.getReader(),chunks=[];let bytes=0;
+            try{while(true){const {done,value}=await reader.read();if(done)break;bytes+=value.length;if(bytes>limit)return {record:{key,found:true,bodyRead:false,overCap:true,etag,sha256:null},value:null};chunks.push(value);}}
+            finally{await reader.cancel().catch(()=>{});reader.releaseLock();}
+            const body=Buffer.concat(chunks,bytes),value=JSON.parse(body.toString('utf8'));
+            return {record:{key,found:true,bodyRead:true,bytes,etag,sha256:sha(body),jsonDigest:digest(value),metadata:selected(value,key)},value};
+           }finally{clearTimeout(timer);controller.abort();}
+          }
+          export function archiveEvidence(complete,pin){
+           const c=complete?.value,p=pin?.value;
+           const digestMatches=!!c&&Array.isArray(p?.references)&&p.references.some(r=>r?.kind==='nonjp-intake'&&r.root===ROOT&&r.sha256===digest(c));
+           const ownerMatches=!!c?.owner&&!!p?.owner&&digest(c.owner)===digest(p.owner)&&String(p.owner.runId)==='44121174584'&&String(p.owner.attempt)==='1'&&typeof p.owner.revision==='string'&&/^[a-f0-9]{40}$/.test(p.owner.revision)&&p.operationId==='nonjp-intake-china-44121174584-1';
+           return {completeFound:!!c,pinFound:!!p,readyOrPublished:['ready','published'].includes(p?.state),ownerMatches,manifestReferenceMatches:digestMatches,metadataConsistent:!!c&&c.version===1&&c.kind==='nonjp-intake'&&c.market==='china'&&ownerMatches&&digestMatches&&['ready','published'].includes(p?.state),archivePartsVerified:false,receiptValidated:false};
+          }
+          export async function inspect({credentials,fetchImpl=fetch,terminalEvidence}={}){
+           if(terminalEvidence?.id!==44121174584||terminalEvidence?.run_attempt!==1||terminalEvidence?.status!=='completed'||terminalEvidence?.head_sha!=='decae6952138acd146785da548bcb4a7d15a52a9')throw Error('probe_terminal_required');
+           const allowed=[...KEYS],records=[],values=new Map(),observed=new Set();let requests=0;
+           const counted=(...args)=>{if(++requests>20)throw Error('probe_request_limit');return fetchImpl(...args);};
+           const get=async key=>{const r=await read(key,{credentials,fetchImpl:counted,allowed});records.push(r.record);values.set(key,r);return r;};
+           for(const key of KEYS){const r=await get(key);const gen=generation(r.value?.generationId);if(gen)observed.add(gen);}
+           if(observed.size>4)throw Error('probe_generation_limit');
+           for(const gen of observed){for(const leaf of ['publication-checkpoint.json','raw-provenance-v1.json']){const key=`catalog/generations/${gen}/${leaf}`;allowed.push(key);await get(key);}}
+           const initialPublic=records[0],initialLock=records[1];
+           const finalPublic=(await get('catalog/manifest.json')).record,finalLock=(await get('catalog/import-lock.json')).record;
+           const same=(a,b)=>(a.found===false&&b.found===false)||(a.found===true&&b.found===true&&a.bodyRead===true&&b.bodyRead===true&&typeof a.sha256==='string'&&a.sha256===b.sha256&&a.etag===b.etag);
+           return {records,observedGenerations:[...observed],publicUnchangedObserved:same(initialPublic,finalPublic),lockUnchangedObserved:same(initialLock,finalLock),archive:archiveEvidence(values.get(ROOT+'/complete.json'),values.get(PIN)),requests,storageWrites:0,listRequests:0,supplierRequests:0,projectionPartsDecoded:false,atomicSnapshotProven:false,orphanGenerationWithoutBacklinkExcluded:false,fullAncestryVerified:false,activationVerified:false};
+          }
+          if(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href){try{const {readFile}=await import('node:fs/promises');const report=await inspect({credentials:{accessKeyId:process.env.YC_OBJECT_STORAGE_ACCESS_KEY_ID,secretAccessKey:process.env.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY},terminalEvidence:JSON.parse(await readFile(process.argv[2],'utf8'))});await writeFile('china-stage2.json',JSON.stringify(report,null,2));console.log(JSON.stringify(report));}catch(e){const error=/^probe_(http_\d{3}|terminal_required|generation_limit|request_limit|key_denied|credentials_missing)$/.test(e?.message||'')?e.message:'probe_read_failed';console.error(JSON.stringify({error,storageWrites:0}));process.exitCode=1;}}
+          READER
+      - name: Inspect fixed aliases and observed generation metadata
+        env:
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+        run: timeout --signal=TERM --kill-after=5s 230s node "$RUNNER_TEMP/china-stage2.mjs" terminal-before.json
+      - name: Confirm producer identity and attempt did not change
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          timeout --kill-after=5s 30s gh api repos/jeep-jim/AvtoCena/actions/runs/44121174584 > terminal-after.json
+          python - <<'PY_TERMINAL'
+          import json
+          a=json.load(open('terminal-before.json')); b=json.load(open('terminal-after.json'))
+          assert all(a[k]==b[k] for k in ['id','head_sha','run_attempt','status','conclusion'])
+          assert b['status']=='completed'
+          PY_TERMINAL
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: china-terminal-alias-archive-metadata-44121174584
+          path: china-stage2.json
+          if-no-files-found: warn
