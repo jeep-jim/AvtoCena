@@ -15,5 +15,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   refresh:
+    # Incident 43989797288: hold scheduled paid collection until saved Korea recovery, durable spool and guards are verified.
+    if: github.event_name != 'schedule'
     uses: ./.github/workflows/catalog-paid-encar-refresh.yml
     secrets: inherit
