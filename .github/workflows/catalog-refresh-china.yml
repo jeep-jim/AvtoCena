@@ -15,6 +15,8 @@ concurrency:
   cancel-in-progress: false
 jobs:
   refresh:
+    # Incident 44121174584: hold scheduled collection until publisher and reconciliation are verified.
+    if: github.event_name != 'schedule'
     uses: ./.github/workflows/catalog-market-refresh.yml
     with:
       market: china
