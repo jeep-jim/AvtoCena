@@ -16,6 +16,21 @@ export const RAW_READONLY_CHECK_ROOT='catalog/intake-staging/encar/43570782014/1
 const LEGACY_RECEIPT={pages:10270,count:205385,completedAt:'2026-11-14T12:55:40.904Z'};
 const fingerprint=meta=>({found:meta.found,...(meta.found?{etag:meta.etag,sha256:rawDigest(meta.value)}:{})});
 const same=(a,b)=>rawDigest(a)===rawDigest(b);
+// This is transport compatibility evidence only, never a deletion identity.
+// HTTP Last-Modified has whole-second resolution; S3 LIST may retain fractions.
+// Preserve both observations rather than rewriting the inventory timestamp.
+export function compareReadOnlyObjectMetadata(list,head) {
+  const listMs=Date.parse(list?.lastModified),headMs=Date.parse(head?.lastModified);
+  const valid=typeof list?.lastModified==='string'&&typeof head?.lastModified==='string'
+    &&Number.isFinite(listMs)&&Number.isFinite(headMs)&&listMs>0&&headMs>0;
+  const identityFieldsMatch=typeof list?.etag==='string'&&list.etag.length>0&&head?.etag===list.etag
+    &&Number.isSafeInteger(list?.size)&&list.size>=0&&head?.size===list.size;
+  const exactMatch=Boolean(valid&&identityFieldsMatch&&head.lastModified===list.lastModified);
+  const httpSecondCompatible=Boolean(valid&&identityFieldsMatch&&headMs%1000===0
+    &&listMs>headMs&&listMs<headMs+1000);
+  return {exactMatch,matches:exactMatch||httpSecondCompatible,
+    timestampComparison:exactMatch?'exact':httpSecondCompatible?'http_second_precision':'mismatch'};
+}
 const safeTime=value=>typeof value==='string'&&Number.isFinite(Date.parse(value))?new Date(value).toISOString():null;
 const safeReason=error=>/^raw_(?:storage_check|gc_s3)_[a-z0-9_]+$/.test(String(error?.message||''))?error.message:'raw_storage_check_failed';
 function failedReport(error,evidence={},io) {
@@ -76,7 +91,7 @@ async function verifyRawStorageReadOnlyChecked({io,now=Date.now,workMs=120000,ev
   'raw_storage_check_saved_receipt_changed');
   const objects=[],tokens=new Set();let cursor=null;
   // Two small pages exercise continuation token handling without claiming a
-  // complete inventory. HEAD/LIST equality remains exact, including precision.
+  // complete inventory. Keep exact equality separate from HTTP precision compatibility.
   for(let pageIndex=0;pageIndex<2;pageIndex++) {
     const page=await io.listPage({target:RAW_GC_TARGET,prefix:RAW_READONLY_CHECK_ROOT+'/',cursor,maxKeys:2,deadline});
     assert.ok(page.prefix===RAW_READONLY_CHECK_ROOT+'/'&&page.objects.length>0&&page.objects.length<=2,'raw_storage_check_list');
@@ -86,7 +101,7 @@ async function verifyRawStorageReadOnlyChecked({io,now=Date.now,workMs=120000,ev
       assert.ok(head.found,'raw_storage_check_head_missing');
       objects.push({key:row.key,list:{etag:row.etag,size:row.size,lastModified:row.lastModified},
         head:{etag:head.etag,size:head.size,lastModified:head.lastModified},
-        matches:head.etag===row.etag&&head.size===row.size&&head.lastModified===row.lastModified});
+        ...compareReadOnlyObjectMetadata(row,head)});
     }
     if(!page.truncated)break;
     assert.ok(typeof page.nextCursor==='string'&&page.nextCursor&&!tokens.has(page.nextCursor)&&page.nextCursor!==cursor,'raw_storage_check_cursor');
@@ -108,7 +123,7 @@ async function verifyRawStorageReadOnlyChecked({io,now=Date.now,workMs=120000,ev
     controls:{policy:before[0],registry:before[1],unchanged:true},publicationLease,
     receipt:{key:receiptKey,etag:receipt.etag,sha256:rawDigest(value),pages:value.pages,count:value.count,
       completedAt:value.completedAt,format:'legacy_pages_count_completedAt'},
-    objects,transport,executionEnabled:false,storageWrites:0,deleteRequests:0};
+    objects,transport,exactMetadataMatch:objects.every(row=>row.exactMatch),executionEnabled:false,storageWrites:0,deleteRequests:0};
 }
 
 async function main() {
