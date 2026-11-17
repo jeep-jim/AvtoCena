@@ -10,10 +10,25 @@ export function allowedAuditPaths(){const keys=new Set([ROOT+'/complete.json',CO
 const num=(v,min,max)=>typeof v==='number'&&Number.isFinite(v)&&v>=min&&v<=max?v:null;
 const month=v=>typeof v==='string'&&/^\d{4}-(?:0[1-9]|1[0-2])$/.test(v)?v:null;
 export function technicalRaw(data){return {year:num(data.year,1900,2100),modelYear:num(data.model_year,1900,2100),productionMonth:month(data.year_month),registrationMonth:month(data.first_registration),engineCc:num(data.displacement_cc,0,10000),powerHp:num(data.power,0,2500),iceHp:num(data.power_ice_hp,0,2500),motorPeakKw:num(data.power_electro_kw,0,2500),price:num(data.price,0,1e12),currency:['KRW','CNY','USD','EUR'].includes(data.currency)?data.currency:'unknown',powerFieldsPresent:{total:data.power!=null,ice:data.power_ice_hp!=null,motor:data.power_electro_kw!=null}};}
+export function dateLossIssues(result){
+ const baseline=result?.technical?.before?.engine||result?.technical?.engine, scenario=result?.technical?.before?{engine:result.technical.engine}:result?.technical?.supplierManufactureScenario;
+ if(baseline?.status!=='ready'||scenario?.engine?.status!=='ready')return [];
+ const monetary=['customsClearanceFeeRub','importDutyRub','exciseRub','vatRub','utilizationFeeRub','knownCustomsRub','totalCustomsRub'];
+ const issues=[];
+ if(monetary.some(k=>Number.isFinite(baseline[k])&&Number.isFinite(scenario.engine[k])&&baseline[k]!==scenario.engine[k]))issues.push('DATE_LOSS_CHANGES_CUSTOMS');
+ const band=v=>v<=36?0:v<=60?1:2;
+ if(Number.isFinite(baseline.ageMonths)&&Number.isFinite(scenario.engine.ageMonths)&&band(baseline.ageMonths)!==band(scenario.engine.ageMonths))issues.push('DATE_LOSS_CHANGES_AGE_BAND');
+ return issues;
+}
+export function samplePriority(sample){return sample.issues.includes('DATE_LOSS_CHANGES_CUSTOMS')?4:sample.issues.includes('DATE_LOSS_CHANGES_AGE_BAND')?3:sample.issues.includes('SOURCE_ICE_POWER_PRESENT_NORMALIZED_ABSENT')?2:sample.issues.includes('CARD_DRAFT_VALIDATION_REJECTED')?1:0;}
+export function retainSample(samples,sample,limit=64){
+ samples.push(sample);samples.sort((a,b)=>samplePriority(b)-samplePriority(a)||a.coordinate.page-b.coordinate.page||a.coordinate.row-b.coordinate.row);
+ if(samples.length>limit)samples.length=limit;
+}
 export async function auditSavedPages({storage,inspectRow,admit,controlsEnabled,snapshotSha=SNAPSHOT_SHA,pages=SAMPLE_PAGES}){
  const snapshot=await storage.readJson(ROOT+'/complete.json',null);assert.equal(hash(snapshot),snapshotSha);assert.equal(snapshot.producerSha,PRODUCER);assert.equal(snapshot.runId,'43989797288');assert.equal(snapshot.attempt,'1');assert.equal(snapshot.count,203948);assert.equal(snapshot.pages,10198);
  const before=await storage.readJson(CONTROLS,null);assert.ok(controlsEnabled(before));const authority={market:before.markets.korea,source:before.sources.encar_feed};
- const receipts=new Map(),samples=[],issues={},strata={},sampleCounts={},targetProofs=Object.fromEntries(TARGET_IDS.map(id=>[hash(id),[]]));let examined=0,admitted=0;
+ const receipts=new Map(),samples=[],issues={},beforeIssues={},strata={},sampleCounts={},targetProofs=Object.fromEntries(TARGET_IDS.map(id=>[hash(id),[]]));let examined=0,admitted=0;
  async function receipt(page){if(!receipts.has(page)){const r=await storage.readJson(ROOT+'/page-receipts/'+page+'.json',null);assert.ok(r);for(const k of ['version','market','provider','runId','attempt','producerSha'])assert.equal(r[k],snapshot[k]);assert.equal(r.page,page);assert.equal(r.next,page<snapshot.pages?page+1:null);receipts.set(page,r);}return receipts.get(page);}
  for(const page of pages){
   const control=await storage.readJson(CONTROLS,null);assert.ok(controlsEnabled(control));assert.deepEqual({market:control.markets.korea,source:control.sources.encar_feed},authority);
@@ -26,10 +41,12 @@ export async function auditSavedPages({storage,inspectRow,admit,controlsEnabled,
    if(!admission){strata.excluded=(strata.excluded||0)+1;continue;}admitted++;
    const result=await inspectRow(raw.data,{id:String(raw.inner_id),observedAt:snapshot.completedAt});
    assert.ok(result&&Array.isArray(result.issues)&&typeof result.stratum==='string');strata[result.stratum]=(strata[result.stratum]||0)+1;
+   for(const code of result.technical?.beforeIssues||[])beforeIssues[code]=(beforeIssues[code]||0)+1;
+   result.issues=[...new Set([...result.issues,...dateLossIssues(result)])];
    const tags=[result.stratum,...result.issues.map(code=>'issue:'+code)];for(const code of result.issues)issues[code]=(issues[code]||0)+1;
-   if(tags.some(tag=>(sampleCounts[tag]||0)<3)&&samples.length<64){for(const tag of tags)sampleCounts[tag]=(sampleCounts[tag]||0)+1;samples.push({coordinate:{page,row:index+1},identitySha256:hash(String(raw.inner_id)),rawSha256:hash(raw),raw:technicalRaw(raw.data),...result});}
+   if(tags.some(tag=>(sampleCounts[tag]||0)<(tag.startsWith('issue:DATE_LOSS_CHANGES_')?12:3))){for(const tag of tags)sampleCounts[tag]=(sampleCounts[tag]||0)+1;retainSample(samples,{coordinate:{page,row:index+1},identitySha256:hash(String(raw.inner_id)),rawSha256:hash(raw),raw:technicalRaw(raw.data),...result});}
   }
  }
  const after=await storage.readJson(CONTROLS,null);assert.ok(controlsEnabled(after));assert.deepEqual({market:after.markets.korea,source:after.sources.encar_feed},authority);assert.equal(hash(await storage.readJson(ROOT+'/complete.json',null)),snapshotSha);
- return {version:1,scope:'bounded_saved_source_normalization_diagnostic',snapshotSha256:snapshotSha,pages:pages.length,examined,admitted,strata,issues,samples,checks:{pageHashes:true,adjacentReceiptLinks:true,fullReceiptChain:false,controlsUnchanged:true,snapshotUnchanged:true},targetProofs,targetSearchComplete:false,missingTargetHashes:Object.entries(targetProofs).filter(([,v])=>v.length===0).map(([k])=>k),missingStrata:['combustion','electric','other_hybrid','series_hybrid'].filter(k=>!strata[k]),publicationAcceptance:false,selectionResolutionPerformed:false,storageWrites:0,supplierRequests:0};
+ return {version:1,scope:'bounded_saved_source_normalization_diagnostic',snapshotSha256:snapshotSha,pages:pages.length,examined,admitted,strata,issues,beforeIssues,samples,checks:{pageHashes:true,adjacentReceiptLinks:true,fullReceiptChain:false,controlsUnchanged:true,snapshotUnchanged:true},targetProofs,targetSearchComplete:false,missingTargetHashes:Object.entries(targetProofs).filter(([,v])=>v.length===0).map(([k])=>k),missingStrata:['combustion','electric','other_hybrid','series_hybrid'].filter(k=>!strata[k]),publicationAcceptance:false,selectionResolutionPerformed:false,storageWrites:0,supplierRequests:0};
 }
