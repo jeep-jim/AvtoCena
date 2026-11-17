@@ -273,18 +273,84 @@ jobs:
     - name: Install private release evidence preservation
       run: |
         set -euo pipefail
-        cat > "$RUNNER_TEMP/candidate-preparation.mjs" <<'FASTPATH_HELPER_49F2E743001D806A'
+        cat > "$RUNNER_TEMP/candidate-preparation-diagnostics.mjs" <<'FASTPATH_HELPER_6C34C249ED3629BF'
+        import childProcess from 'node:child_process';
+        import {promisify} from 'node:util';
+        import {syncBuiltinESMExports} from 'node:module';
+        import {getHeapStatistics} from 'node:v8';
+        
+        const marker='CANDIDATE_PREPARATION_DIAGNOSTIC ';
+        const codes=new Set(['ENOBUFS','ERR_CHILD_PROCESS_STDIO_MAXBUFFER','ETIMEDOUT','ENOENT','ENOMEM','EAGAIN','ABORT_ERR']);
+        const signals=new Set(['SIGKILL','SIGTERM','SIGABRT','SIGSEGV','SIGBUS','SIGINT']);
+        const guards=/^(?:candidate_budget|staged_budget|active_budget|catalog_budget|object_storage)_[a-z0-9_]{1,110}$/;
+        const bytes=v=>Buffer.isBuffer(v)?v.length:typeof v==='string'?Buffer.byteLength(v):0;
+        const bounded=v=>Number.isSafeInteger(v)&&v>=0&&v<=Number.MAX_SAFE_INTEGER?v:null;
+        export function safeDiagnostic(value){
+         if(!value||value.schemaVersion!==1)return null;
+         return {schemaVersion:1,phase:['prepare','verify','other'].includes(value.phase)?value.phase:'other',
+          code:codes.has(value.code)?value.code:null,maxBufferExceeded:['ENOBUFS','ERR_CHILD_PROCESS_STDIO_MAXBUFFER'].includes(value.code),exitCode:Number.isSafeInteger(value.exitCode)&&value.exitCode>=0&&value.exitCode<=255?value.exitCode:null,
+          signal:signals.has(value.signal)?value.signal:null,killed:value.killed===true,
+          elapsedMs:bounded(value.elapsedMs),stdoutBytes:bounded(value.stdoutBytes),stderrBytes:bounded(value.stderrBytes),
+          heapOutOfMemoryMarker:value.heapOutOfMemoryMarker===true,
+          guards:Array.isArray(value.guards)?value.guards.filter(x=>typeof x==='string'&&guards.test(x)).slice(0,8):[],
+          heapUsed:bounded(value.heapUsed),rss:bounded(value.rss),heapSizeLimit:bounded(value.heapSizeLimit)};
+        }
+        export function readDiagnostics(stderr){
+         const records=[];
+         for(const line of String(stderr||'').split('\n')){
+          if(!line.startsWith(marker))continue;
+          try{const value=safeDiagnostic(JSON.parse(line.slice(marker.length)));if(value)records.push(value);}catch{}
+         }
+         return records.slice(-8);
+        }
+        function report(error,args,start){
+         try{
+          const argv=Array.isArray(args[1])?args[1]:[],position=argv.indexOf('--child');
+          const phase=position<0?'other':argv[position+1];
+          const stderr=String(error?.stderr||''),text=String(error?.message||'')+'\n'+stderr;
+          const guardCodes=[...new Set(text.split('\n').map(line=>line.trim().replace(/^Error: /,'').split(':')[0]).filter(line=>guards.test(line)))];
+          const memory=process.memoryUsage();
+          const safe=safeDiagnostic({schemaVersion:1,phase,code:error?.code,exitCode:typeof error?.code==='number'?error.code:null,
+           signal:error?.signal,killed:error?.killed,elapsedMs:Math.round(performance.now()-start),stdoutBytes:bytes(error?.stdout),stderrBytes:bytes(error?.stderr),
+           heapOutOfMemoryMarker:text.includes('JavaScript heap out of memory')||text.includes('Reached heap limit'),guards:guardCodes,
+           heapUsed:memory.heapUsed,rss:memory.rss,heapSizeLimit:getHeapStatistics().heap_size_limit});
+          process.stderr.write(marker+JSON.stringify(safe)+'\n');
+         }catch{ /* Diagnostics must never replace the original subprocess failure. */ }
+        }
+        if(process.env.CATALOG_PREPARATION_DIAGNOSTIC==='1'){
+         const original=childProcess.execFile;
+         const custom=original[promisify.custom];
+         function observed(...args){
+          const start=performance.now(),last=args.length-1;
+          if(typeof args[last]==='function'){
+           const callback=args[last];args[last]=function(error,stdout,stderr){if(error)report(error,args,start);return Reflect.apply(callback,this,[error,stdout,stderr]);};
+          }
+          return Reflect.apply(original,this,args);
+         }
+         // Preserve execFile's custom Promise result and .child property unchanged.
+         Object.defineProperty(observed,promisify.custom,{value:function(...args){
+          const start=performance.now(),promise=Reflect.apply(custom,original,args);
+          void promise.catch(error=>report(error,args,start));
+          return promise;
+         }});
+         childProcess.execFile=observed;
+         syncBuiltinESMExports();
+        }
+        FASTPATH_HELPER_6C34C249ED3629BF
+        printf '%s  %s\n' 6c34c249ed3629bfdaba0849a341dfaf3cfe81c6185a7a87b8566aac1a02982a "$RUNNER_TEMP/candidate-preparation-diagnostics.mjs" | sha256sum --check
+        cat > "$RUNNER_TEMP/candidate-preparation.mjs" <<'FASTPATH_HELPER_73EBD7CF564FE1B0'
         import assert from 'node:assert/strict';
+        import {readDiagnostics,safeDiagnostic} from './candidate-preparation-diagnostics.mjs';
         import {createHash} from 'node:crypto';
         import {execFileSync} from 'node:child_process';
         import fs from 'node:fs';
         import path from 'node:path';
         import {fileURLToPath} from 'node:url';
-
+        
         const hash = value => createHash('sha256').update(JSON.stringify(value)).digest('hex');
         const MARKETS = ['china', 'europe', 'georgia', 'korea', 'uae'];
         const HEX = /^[a-f0-9]{64}$/;
-
+        
         /** Validate the exact durable candidate context; preparation is never installation. */
         export function validateCandidatePreparationReport(report, {spec, reuse, action, healthPhase, prepared, now = Date.now()}) {
           assert.equal(report?.version, 1, 'candidate_preparation_report_version');
@@ -374,7 +440,7 @@ jobs:
           }
           return {receiptSha256: report.receiptSha256, core};
         }
-
+        
         export async function runCandidatePreparation(action, healthPhase) {
           assert.ok(['prepare', 'verify'].includes(action), 'candidate_preparation_argument');
           assert.ok(['before-activation', 'after-activation'].includes(healthPhase), 'candidate_preparation_phase');
@@ -398,14 +464,22 @@ jobs:
             delete env.CATALOG_CANDIDATE_PREPARED_REPORT;
             delete env.CATALOG_CANDIDATE_PREPARED_RECEIPT;
           }
+          const childStarted = performance.now();
+          const diagnosticEnv = {...env, CATALOG_PREPARATION_DIAGNOSTIC:'1',
+            NODE_OPTIONS:(env.NODE_OPTIONS || '') + ' --import=' + path.join(process.env.RUNNER_TEMP,'candidate-preparation-diagnostics.mjs')};
           try {
-            execFileSync(process.execPath, ['--import', 'tsx', tooling, root], {cwd: root, env,
+            execFileSync(process.execPath, ['--import', 'tsx', tooling, root], {cwd: root, env:diagnosticEnv,
               stdio: ['ignore', 'pipe', 'pipe'], maxBuffer: 2 * 1024 * 1024,
               timeout: healthPhase === 'after-activation' ? 90000 : 60 * 60 * 1000});
           } catch (error) {
             const guard = String(error?.stderr || '').trim().split('\n').find(line =>
               /^(?:candidate_budget|staged_budget|active_budget)_[a-z0-9_:]{1,160}$/.test(line));
             if (guard) error.safeGuard = guard;
+            error.safeDiagnostics = {outer:safeDiagnostic({schemaVersion:1,phase:action,
+              code:error.code,exitCode:error.status,signal:error.signal,killed:error.killed,
+              elapsedMs:Math.round(performance.now()-childStarted),
+              stdoutBytes:Buffer.byteLength(error.stdout||''),stderrBytes:Buffer.byteLength(error.stderr||''),
+              guards:guard?[guard]:[]}),children:readDiagnostics(error.stderr)};
             throw error;
           }
           const report = JSON.parse(fs.readFileSync(output, 'utf8'));
@@ -415,17 +489,18 @@ jobs:
             candidatePrepared: true, installed: false, liveReady: false, derivedWrites: report.derivedWrites}));
           return report;
         }
-
+        
         if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
           assert.equal(process.argv.length, 4, 'candidate_preparation_arguments');
           runCandidatePreparation(process.argv[2], process.argv[3]).catch(error => {
             console.error(JSON.stringify({stage: 'candidate_preparation_failed',
-              error: error.safeGuard || (error instanceof assert.AssertionError ? String(error.message).split('\n')[0] : error?.name || 'Error')}));
+              error: error.safeGuard || (error instanceof assert.AssertionError ? String(error.message).split('\n')[0] : error?.name || 'Error'),
+              diagnostics:error.safeDiagnostics || null}));
             process.exitCode = 1;
           });
         }
-        FASTPATH_HELPER_49F2E743001D806A
-        printf '%s  %s\n' 49f2e743001d806a7acdd3948d64b14b7003fe57d6472ec570e4b16845d7045f "$RUNNER_TEMP/candidate-preparation.mjs" | sha256sum --check
+        FASTPATH_HELPER_73EBD7CF564FE1B0
+        printf '%s  %s\n' 73ebd7cf564fe1b047bb9742c79fdcb21932514eb8691fc56548c6739c8b500a "$RUNNER_TEMP/candidate-preparation.mjs" | sha256sum --check
         cat > "$RUNNER_TEMP/preserve-release-evidence.mjs" <<'FASTPATH_HELPER_E7BD85B70A980C79'
         import assert from 'node:assert/strict';
         import fs from 'node:fs';
@@ -2712,4 +2787,5 @@ jobs:
 # Prepare-only proposal: exact candidate c7e00f72; requires all fresh source checks and new candidate-bound evidence.
 
 # Prior f45 preparation/activation evidence cannot authorize this new source; activation remains a separate operation.
+
 
