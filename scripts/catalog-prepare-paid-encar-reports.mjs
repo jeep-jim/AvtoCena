@@ -1,3 +1,4 @@
+import {replayRestoreStorage,finishRestoreReplay} from './lib/encar-spool-restore.mjs';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import fs from 'node:fs/promises';
@@ -164,11 +165,12 @@ export function verifyCurrentReportCoverage(offers, records, identity, expectedC
   return {currentCount: offers.length, covered: ids.size, historyPresent, historyMissing, inspectionPresent, diagnosisPresent, samples};
 }
 
-export async function preparePaidEncarReports({selection=null} = {}) {
+export async function preparePaidEncarReports({selection=null,restoreSpool=null} = {}) {
   const {getJsonStorage} = await import('../apps/web/lib/data.ts');
   const {readCollectionControls} = await import('../apps/web/lib/catalog/collection-controls.ts');
   const {collectionEnabled} = await import('../apps/web/lib/catalog/collection-controls-schema.ts');
-  let storage = getJsonStorage();
+  const controlStorage = getJsonStorage();
+  let storage = controlStorage;
   assert.equal(storage.driver, 'object', 'paid_report_requires_object_storage');
   const run = process.env.ENCAR_SNAPSHOT_RUN, attempt = process.env.ENCAR_SNAPSHOT_ATTEMPT;
   assert.match(String(run || ''), /^\d+$/);
@@ -182,6 +184,7 @@ export async function preparePaidEncarReports({selection=null} = {}) {
   const rawPin=await openRawFeedPin({storage,owner,operationId:`encar-reports-${owner.runId}-${owner.attempt}`,
     references:[{kind:'encar-snapshot',root:prefix},{kind:'encar-reports',root:reportRoot}]});
   storage=rawPin.storage;
+  if(restoreSpool)storage=replayRestoreStorage(restoreSpool,storage);
   if(await storage.readJson(reportRoot+'/complete.json',null)===null)await rawPin.add([]);
   const assertEnabled = async () => assert.ok(collectionEnabled(await readCollectionControls(storage), 'encar_feed'),
     'paid_report_disabled_by_owner');
@@ -209,6 +212,7 @@ export async function preparePaidEncarReports({selection=null} = {}) {
   assert.equal(total - duplicates - quarantined, records.size);
   if(selection){assert.equal(records.size,selection.summary.publishableIds);assert.equal(quarantined,selection.summary.quarantinedRows);assert.equal(duplicates,selection.summary.supersededRows);}
   await assertSnapshotUnchanged();
+  if(restoreSpool)await finishRestoreReplay(restoreSpool);
   const prepared = buildReportBuckets(records, identity);
   console.log(JSON.stringify({stage: 'paid_report_buckets_prepared', ...identity, total, duplicates, quarantined,
     rowCount: records.size, bucketCount: prepared.buckets.length, bucketPrefixLength: prepared.complete.bucketPrefixLength,
@@ -237,8 +241,8 @@ export async function preparePaidEncarReports({selection=null} = {}) {
   }
   const root = await publishReportBuckets({storage, ...prepared, assertEnabled, assertSnapshotUnchanged});
   const rawHandoff=await rawPin.handoff();
-  const existingHandoff=await readRawRootHandoff(storage,reportRoot,prepared.complete);
-  if(!existingHandoff)await writeRawRootHandoff(storage,reportRoot,prepared.complete,rawHandoff);
+  const existingHandoff=await readRawRootHandoff(controlStorage,reportRoot,prepared.complete);
+  if(!existingHandoff)await writeRawRootHandoff(controlStorage,reportRoot,prepared.complete,rawHandoff);
   if (koreaBefore) assert.equal(digest((await storage.readJson('catalog/manifest.json', null))?.markets?.korea), digest(koreaBefore),
     'paid_report_current_korea_changed_after_preparation');
   const report = {version: 1, completed: true, completedAt: new Date().toISOString(), ...identity, root,

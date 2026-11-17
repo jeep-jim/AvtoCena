@@ -1,4 +1,6 @@
 import fs from 'node:fs/promises';
+import {prepareRestoreSpool,replayRestoreStorage,finishRestoreReplay,closeRestoreSpool} from './lib/encar-spool-restore.mjs';
+import {spoolProgressWriter} from './lib/spool-progress.mjs';
 import assert from 'node:assert/strict';
 import {buildSavedEncarSelection,rawHash} from './lib/paid-encar-saved-revisions.mjs';
 import path from 'node:path';
@@ -16,7 +18,9 @@ const run = process.env.ENCAR_SNAPSHOT_RUN;
 const attempt = process.env.ENCAR_SNAPSHOT_ATTEMPT;
 if (!/^\d+$/.test(run || '') || !/^\d+$/.test(attempt || '')) throw Error('Invalid snapshot identity');
 const prefix = 'catalog/intake-staging/encar/' + run + '/' + attempt;
-let storage = getJsonStorage();
+const baseStorage = getJsonStorage();
+let storage = baseStorage;
+let restoreSpool=null,spoolBounds=null;
 const owner=rawProducerOwner();
 const rawPin=await openRawFeedPin({storage,owner,operationId:`encar-restore-${owner.runId}-${owner.attempt}`,
   references:[{kind:'encar-snapshot',root:prefix}]});
@@ -37,6 +41,16 @@ if(reconcileSavedRevisions){
   assert.equal(rawHash(snapshot),process.env.ENCAR_SNAPSHOT_SHA256,'encar_revision_snapshot_pin');
   snapshotContext.headSha=process.env.ENCAR_SNAPSHOT_PRODUCER_SHA;
 }
+if(process.env.ENCAR_DURABLE_RAW_SPOOL==='1'){
+ assert.ok(reconcileSavedRevisions,'spool_reconciliation_required');
+ assert.equal(process.env.ENCAR_SPOOL_PRODUCER_BASE,'62dd048cfc492572e204191e7b5ed4bc5c4b478a','spool_producer_binding');
+ const binding={root:prefix,run,attempt,producerSha:snapshotContext.headSha,snapshotSha:process.env.ENCAR_SNAPSHOT_SHA256,pages:snapshot.pages,count:snapshot.count};
+ const recoveryRoot='catalog/recovery-raw-spool/v1/'+rawHash(binding);
+ const {installSpoolStorageBounds}=await import('./lib/install-spool-storage-bounds.mjs');
+ spoolBounds=await installSpoolStorageBounds({storage:baseStorage,rawRoot:prefix,recoveryRoot,pages:snapshot.pages});
+ restoreSpool=await prepareRestoreSpool({storage:spoolBounds.storage,snapshot,binding,owner,directory:path.resolve(process.env.ENCAR_SPOOL_LOCAL_DIR||'.cache/encar-spool-'+owner.runId+'-'+owner.attempt),onProgress:spoolProgressWriter(path.resolve(process.env.ENCAR_SPOOL_PROGRESS||'saved-encar-checkpoint/spool-progress.json'),rawHash(binding))});
+ storage=replayRestoreStorage(restoreSpool,storage);
+}
 const pageVerifier=paidEncarSavedPageVerifier(snapshot,snapshotContext);
 let selection=null;
 if(reconcileSavedRevisions){
@@ -46,6 +60,7 @@ if(reconcileSavedRevisions){
   selection=await buildSavedEncarSelection({storage,root:prefix,snapshot,
     pageVerifier:paidEncarSavedPageVerifier(snapshot,snapshotContext),assertEnabled,
     onProgress:p=>console.log(JSON.stringify({stage:'saved_encar_revision_prepass',...p}))});
+  if(restoreSpool)await finishRestoreReplay(restoreSpool);
   console.log(JSON.stringify({stage:'saved_encar_revision_selected',...selection.summary}));
 }
 const output = path.resolve(process.env.CATALOG_INTAKE_DIR || 'catalog-intake-korea');
@@ -100,6 +115,7 @@ for (let page = 1; page <= snapshot.pages; page++) {
   if(selection&&page%250===0)console.log(JSON.stringify({stage:'saved_encar_restore_progress',pagesRead:page,totalPages:snapshot.pages,count,observations,excluded,superseded,quarantined}));
 }
 pageVerifier?.finish();
+if(restoreSpool)await finishRestoreReplay(restoreSpool);
 if (count !== snapshot.count || observations + excluded + superseded + quarantined !== count || !seen.size) throw Error('Encar snapshot totals mismatch');
 selection?.assertSnapshot(await storage.readJson(prefix+'/complete.json',null));
 if(selection){assert.equal(superseded,selection.summary.supersededRows,'encar_revision_superseded_count');assert.equal(quarantined,selection.summary.quarantinedRows,'encar_revision_quarantine_count');}
@@ -116,8 +132,9 @@ const report = {version:1,market:'korea',provider:'auto_api_encar',completed:tru
     stopReason:'source_finished',syncMode:'snapshot',pages:snapshot.pages,excluded,...(selection?{superseded,quarantined}: {})}]};
 // A completed paid intake must include verified reports for the same source
 // observation before any publication route can receive its completion report.
-const reportPreparation=await preparePaidEncarReports({selection});
+const reportPreparation=await preparePaidEncarReports({selection,restoreSpool});
 const sourceHandoff=await readRawRootHandoff(storage,prefix,snapshot);
 report.rawStoragePins=[await rawPin.handoff(),...(sourceHandoff?[sourceHandoff]:[]),...reportPreparation.rawStoragePins];
+if(restoreSpool){await closeRestoreSpool(restoreSpool);await spoolBounds.close();}
 await fs.writeFile(path.join(output,'report.json'),JSON.stringify(report));
 console.log(JSON.stringify({count,excluded,superseded,quarantined,observations,uniqueOffers:seen.size}));

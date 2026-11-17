@@ -8,6 +8,8 @@ function ownedKey(key) {
   assert.ok(typeof key === 'string' && key.length <= 700 && /^catalog\/[a-zA-Z0-9_./-]+$/.test(key)
     && !key.split('/').some(part => !part || part === '.' || part === '..'), 'owned_json_key');
   const allowed = [
+    /^catalog\/intake-staging\/encar\/\d{1,20}\/[1-9]\d{0,5}\/(?:pages|page-receipts)\/[1-9]\d*\.json$/,
+    /^catalog\/recovery-raw-spool\/v1\/[a-f0-9]{64}\/(?:complete\.json|chunks\/[1-9]\d*\/(?:data|commit)\.json)$/,
     /^catalog\/raw-feed-coordination\/v1\/contributions\/gen_\d+_[a-z0-9-]+\/[a-zA-Z0-9_-]+\/(?:internal\.json|manifest\.json|rows\/\d{4}\.json)$/,
     /^catalog\/generations\/gen_\d+_[a-z0-9-]+\/offers\/(?:china|korea|uae|europe|georgia)\/[a-zA-Z0-9_-]+\.json$/,
     /^catalog\/internal\/offers\/[a-zA-Z0-9_-]+\/[a-zA-Z0-9_-]+\.json$/,
