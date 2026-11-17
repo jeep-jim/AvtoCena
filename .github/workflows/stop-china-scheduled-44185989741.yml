@@ -1,0 +1,35 @@
+name: Stop superseded scheduled China incident run
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/stop-china-scheduled-44185989741.yml']
+permissions:
+  contents: read
+  actions: write
+concurrency:
+  group: stop-china-scheduled-44185989741
+  cancel-in-progress: false
+jobs:
+  stop:
+    if: github.ref == 'refs/heads/main' && github.event.head_commit.message == 'Stop superseded scheduled China run 44185989741'
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Verify exact obsolete scheduled run and request cancellation
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          timeout 20s gh api repos/jeep-jim/AvtoCena/actions/runs/44185989741 > run.json
+          python - <<'PY'
+          import json
+          x=json.load(open('run.json'))
+          assert x['id']==44185989741 and x['event']=='schedule'
+          assert x['path']=='.github/workflows/catalog-refresh-china.yml'
+          assert x['head_sha']=='c189678fd8d7365c90dd114f16d7108a6a7458cf'
+          assert x['run_attempt']==1
+          PY
+          status=$(python -c "import json;print(json.load(open('run.json'))['status'])")
+          if [ "$status" != completed ]; then
+            timeout 20s gh api -X POST repos/jeep-jim/AvtoCena/actions/runs/44185989741/cancel
+          fi
