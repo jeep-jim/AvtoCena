@@ -1,0 +1,175 @@
+diff --git a/apps/web/lib/catalog/storage.ts b/apps/web/lib/catalog/storage.ts
+index 1ac6b9b..6990ff8 100644
+--- a/apps/web/lib/catalog/storage.ts
++++ b/apps/web/lib/catalog/storage.ts
+@@ -1,3 +1,5 @@
++import {readRawCoordinationPolicy, assertRawPublicationReservation, assertRawInternalReservation, assertRawInternalCompletion} from './raw-coordination-gate.mjs';
++import {createPublicationCommitBarrier} from './publication-commit-barrier.mjs';
+ import {budgetSelectionFilterKey} from './budget-selection-key';
+ import {homeSnapshotMarketIsEmpty} from "./home-editorial-empty";
+ import {createHomePhaseTiming} from "./home-phase-timing";
+@@ -1431,13 +1444,22 @@ async function readCatalogFacetsUncached(input: CatalogSearchParams = {}): Promi
+   return facetsFromProjection(generationId, rows, params, hasFilters);
+ }
+ 
++export const CATALOG_PUBLICATION_TRANSACTION_VERSION = 2;
++
++type PreparedInternalManifest = {ticket?: unknown; verifyBeforeCommit: () => Promise<void>; afterCommit: () => Promise<void>};
++type PrepareInternalManifest = (value: {manifest: any; baseManifest: any}) => Promise<PreparedInternalManifest>;
++type DeferredCommit = (commit: () => Promise<void>) => void;
++
+ export async function persistInternalCatalog(
+   storage: ReturnType<typeof getJsonStorage>,
+   generationId: string,
+   offers: VehicleOffer[],
+   preserved?: AsyncIterable<VehicleOffer[]>,
+   replaceSourceIds: ReadonlySet<string> = new Set(),
++  options: {beforePreparedInternalManifest?: PrepareInternalManifest; deferCommit?: DeferredCommit} = {},
+ ) {
++  const rawCoordinationPolicy = await readRawCoordinationPolicy(storage);
++  if (rawCoordinationPolicy && !options.beforePreparedInternalManifest) throw Error('raw_coord_internal_reservation_required');
+   const now = new Date().toISOString();
+   const currentManifest = await storage.readJsonWithMeta<any>(INTERNAL_MANIFEST_PATH, { generationId: "", sources: {} });
+   // Source chunks are immutable. A one-market refresh can therefore keep the
+@@ -1487,11 +1509,21 @@ export async function persistInternalCatalog(
+   for (const sourceId of bySource.keys()) await flush(sourceId);
+   // Never rebase a stale reserve on a newer writer's ETag. A conflict requires
+   // a fresh read and rebuild under the publication lock, not an overwrite.
+-  await storage.writeJson(INTERNAL_MANIFEST_PATH, { generationId, updatedAt: now, sources },
+-    currentManifest.found && currentManifest.etag ? { ifMatch: currentManifest.etag } : { ifNoneMatch: "*" });
++  const manifest = {generationId, updatedAt: now, sources}, baseManifest = currentManifest.found ? currentManifest.value : null;
++  const prepared = await options.beforePreparedInternalManifest?.({manifest, baseManifest});
++  if (rawCoordinationPolicy && (!prepared || typeof prepared.verifyBeforeCommit !== 'function' || typeof prepared.afterCommit !== 'function')) throw Error('raw_coord_internal_reservation_required');
++  const commit = async () => {
++    await prepared?.verifyBeforeCommit();
++    await assertRawInternalReservation({storage, policy: rawCoordinationPolicy, ticket: prepared?.ticket, manifest, baseManifest});
++    await storage.writeJson(INTERNAL_MANIFEST_PATH, manifest,
++      currentManifest.found && currentManifest.etag ? {ifMatch: currentManifest.etag} : {ifNoneMatch: '*'});
++    await prepared?.afterCommit();
++    await assertRawInternalCompletion({storage, policy: rawCoordinationPolicy, ticket: prepared?.ticket, manifest});
++  };
++  if (options.deferCommit) options.deferCommit(commit); else await commit();
+ }
+ 
+-async function persistJapanAuctionHistory(storage: ReturnType<typeof getJsonStorage>, offers: VehicleOffer[]) {
++async function persistJapanAuctionHistory(storage: ReturnType<typeof getJsonStorage>, offers: VehicleOffer[], deferCommit?: DeferredCommit) {
+   // The Japan publisher applies the 30-day source-date cutoff before this write.
+   // Storage owns the separate bounded representation and records that retention
+   // contract without re-filtering an untouched market during another market's
+@@ -1522,7 +1554,8 @@ async function persistJapanAuctionHistory(storage: ReturnType<typeof getJsonStor
+     chunks,
+     contentHash,
+   };
+-  await storage.writeJson(JAPAN_ARCHIVE_MANIFEST_PATH, manifest, current.found && current.etag ? { ifMatch: current.etag } : { ifNoneMatch: "*" });
++  const commit = () => storage.writeJson(JAPAN_ARCHIVE_MANIFEST_PATH, manifest, current.found && current.etag ? { ifMatch: current.etag } : { ifNoneMatch: "*" });
++  if (deferCommit) deferCommit(commit); else await commit();
+   return manifest;
+ }
+ export function isPublicOffer(o: VehicleOffer) {
+@@ -1562,6 +1595,12 @@ export type PersistCatalogOptions = {
+   beforePersistValidate?: (publicOffers: VehicleOffer[]) => void | Promise<void>;
+   beforePublishValidate?: (publishedOffers: VehicleOffer[]) => void | Promise<void>;
+   beforeManifestCommit?: () => void | Promise<void>;
++  publicationTransactionVersion?: 2;
++  beforePreparedReadiness?: (manifest: CatalogManifest) => Promise<{verify: () => Promise<void>; workingSetVerified: boolean}>;
++  requirePreparedWorkingSet?: boolean;
++  beforePreparedGeneration?: (manifest: CatalogManifest) => Promise<() => Promise<void>>;
++  beforePreparedInternalManifest?: PrepareInternalManifest;
++  rawCoordinationTicket?: () => unknown;
+   expectedBaseGenerationId?: string;
+   // Recovery writers may preserve already-published markets byte-for-byte while
+   // rebuilding only their target market. Those rows are trusted only because
+@@ -1599,6 +1638,12 @@ export async function persistCatalogOffers(nextOffers: VehicleOffer[], options:
+     throw new Error("catalog_production_writes_paused");
+   }
+   const storage = getJsonStorage();
++  const rawCoordinationPolicy = await readRawCoordinationPolicy(storage);
++  if (options.publicationTransactionVersion !== undefined && options.publicationTransactionVersion !== 2) throw Error('catalog_publication_transaction_version');
++  const transactional = options.publicationTransactionVersion === 2 || Boolean(rawCoordinationPolicy);
++  // Explicit opt-in is mandatory once selected; an existing required raw policy cannot be bypassed.
++  if (transactional && (typeof options.beforePreparedReadiness !== 'function' || typeof options.beforePreparedGeneration !== 'function'
++    || typeof options.beforePreparedInternalManifest !== 'function' || typeof options.rawCoordinationTicket !== 'function')) throw Error('catalog_prepared_callbacks_required');
+   const baselineManifest = await readManifest();
+   const expectedBaseGenerationId = options.expectedBaseGenerationId ?? baselineManifest.generationId;
+   if (baselineManifest.generationId !== expectedBaseGenerationId) throw new Error("catalog_publish_base_changed");
+@@ -1683,7 +1728,8 @@ export async function persistCatalogOffers(nextOffers: VehicleOffer[], options:
+   progress("persist_validations_passed", { publicCount: publishedOffers.length });
+   const generationId = `gen_${Date.now()}_${crypto.randomUUID().slice(0, 8)}`;
+   const now = new Date().toISOString();
+-  const japanArchive = await persistJapanAuctionHistory(storage, publicOffers.filter((offer) => offer.market === "japan"));
++  const barrier = createPublicationCommitBarrier();
++  const japanArchive = await persistJapanAuctionHistory(storage, publicOffers.filter((offer) => offer.market === "japan"), transactional ? commit => barrier.defer('japan_archive', commit) : undefined);
+   progress("japan_archive_written", { count: japanArchive.count });
+   const sourceAllowedInternalOffers = nextOffers.filter(hasAllowedCatalogSourceProvenance);
+   await persistInternalCatalog(
+@@ -1692,8 +1738,9 @@ export async function persistCatalogOffers(nextOffers: VehicleOffer[], options:
+     sourceAllowedInternalOffers,
+     options.preservedInternalOffers,
+     options.replaceInternalSourceIds,
++    {beforePreparedInternalManifest: options.beforePreparedInternalManifest, deferCommit: transactional ? commit => barrier.defer('internal', commit) : undefined},
+   );
+-  progress("internal_manifest_written");
++  progress("internal_manifest_prepared");
+   const byMarket = new Map<string, VehicleOffer[]>();
+   for (const offer of publishedOffers) {
+     const rows = byMarket.get(offer.market) || [];
+@@ -1744,18 +1791,41 @@ export async function persistCatalogOffers(nextOffers: VehicleOffer[], options:
+   await writeJsonAtomic(generationPath(generationId, "publication-checkpoint.json"),
+     {...publicationCheckpoint,stage:"generation_indexes_ready",updatedAt:new Date().toISOString()}, false);
+   progress("current_read_models_start");
+-  await writeCurrentCatalogReadModels(generationId, publishedOffers, true);
++  const verifyAuthority = async () => {
++    await options.beforeManifestCommit?.();
++    if ((await storage.readJson<CatalogManifest>('catalog/manifest.json', {generationId: 'empty'} as CatalogManifest)).generationId !== expectedBaseGenerationId) throw Error('catalog_publish_base_changed');
++  };
++  let verifyContribution: (() => Promise<void>) | undefined;
++  const verifyReservation = async () => {
++    await verifyContribution?.();
++    await assertRawPublicationReservation({storage, policy: rawCoordinationPolicy, ticket: options.rawCoordinationTicket?.(), manifest, expectedBaseGenerationId});
++  };
++  await writeCurrentCatalogReadModels(generationId, publishedOffers, true, undefined, transactional ? async () => {
++    const readiness = await options.beforePreparedReadiness?.(manifest);
++    if (typeof readiness?.verify !== 'function') throw Error('catalog_prepared_readiness_verifier_required');
++    if (options.requirePreparedWorkingSet && readiness?.workingSetVerified !== true) throw Error('catalog_prepared_working_set_required');
++    await barrier.ready(async () => {await readiness?.verify(); await verifyAuthority();});
++    await barrier.commitDeferred();
++    // Public contribution requires the committed internal pointer. Never
++    // weaken its live comparison or interpret a missing capability as proof.
++    verifyContribution = await options.beforePreparedGeneration?.(manifest);
++    if (typeof verifyContribution !== 'function') throw Error('catalog_prepared_generation_verifier_required');
++    await verifyReservation();
++    await barrier.verify();
++  } : undefined);
+   progress("current_read_models_written");
+   await assertCurrentCatalogReadModelsReady(generationId, publishedOffers);
+   progress("all_read_models_verified");
+   await writeJsonAtomic(generationPath(generationId, "publication-checkpoint.json"),
+     {...publicationCheckpoint,stage:"read_models_verified",updatedAt:new Date().toISOString()}, false);
+   for (let attempt = 0; attempt < 5; attempt++) {
++    if (transactional) {await barrier.verify(); await verifyReservation();}
+     await options.beforeManifestCommit?.();
+     const current = await storage.readJsonWithMeta<CatalogManifest>("catalog/manifest.json", { ...manifest, generationId: "empty" });
+     if (current.value.generationId !== expectedBaseGenerationId) throw new Error("catalog_publish_base_changed");
+     try {
+       if (current.found && current.value?.generationId && current.value.generationId !== generationId) await storage.writeJson("catalog/previous-manifest.json", current.value);
++      if (transactional) {await barrier.verify(); await verifyReservation();}
+       await storage.writeJson("catalog/manifest.json", manifest, current.found && current.etag ? { ifMatch: current.etag } : { ifNoneMatch: "*" });
+       resetCatalogReadCachesForTests();
+       return manifest;
+@@ -1884,7 +1954,7 @@ type PreparedCurrentReadModels = {
+   japanInputs: ReturnType<typeof buildJapanPreviewInputIndex>;
+   writeDetails: () => Promise<number>;
+ };
+-async function writeCurrentCatalogReadModels(generationId: string, storedOffers: VehicleOffer[], alreadyCanonical = false, prepared?: PreparedCurrentReadModels) {
++async function writeCurrentCatalogReadModels(generationId: string, storedOffers: VehicleOffer[], alreadyCanonical = false, prepared?: PreparedCurrentReadModels, beforeMutableAliases?: () => Promise<void>) {
+   const reportStage=(stage:string)=>{if(process.env.CATALOG_PUBLICATION_PROGRESS === "1")
+     console.log(JSON.stringify({stage:"current_read_models_"+stage,generationId,at:new Date().toISOString(),rss:process.memoryUsage().rss}));};
+   reportStage("begin");
+@@ -1940,6 +2010,7 @@ async function writeCurrentCatalogReadModels(generationId: string, storedOffers:
+   reportStage("projections_built");
+   await writeGenerationDirectoryIndexes(generationId,allProjectionItems);
+   reportStage("directory_written");
++  await beforeMutableAliases?.();
+   await writeJsonAtomic(CURRENT_FACETS_PATH, facets, false);
+   await writeJsonAtomic(currentProjectionPath(CURRENT_ALL_MARKETS_PROJECTION), { generationId, items: allProjectionItems }, false);
+   reportStage("all_projection_written");
