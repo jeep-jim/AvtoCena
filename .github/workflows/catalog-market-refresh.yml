@@ -223,6 +223,7 @@ jobs:
       matrix:
         market: ${{ fromJSON(needs.plan.outputs.publish_matrix) }}
     env:
+      CHINA_APPROVED_PUBLISHER_SHA: ${{ matrix.market == 'china' && 'bb6317bffd1f7b1832681ac78378fe6c3e39e3b5' || '' }}
       JSON_STORAGE_DRIVER: object
       YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
       YC_OBJECT_STORAGE_REGION: us-east-1
@@ -254,12 +255,60 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ inputs.prepared_encar_run && github.sha || github.event.workflow_run.head_sha || github.sha }}
+          ref: ${{ matrix.market == 'china' && 'bb6317bffd1f7b1832681ac78378fe6c3e39e3b5' || (inputs.prepared_encar_run && github.sha || github.event.workflow_run.head_sha || github.sha) }}
       - uses: actions/setup-node@v4
         with:
           node-version: 24
           cache: npm
       - run: npm ci
+      - name: Verify frozen China publisher and actual serving compatibility before writes
+        id: china_publisher_source
+        if: matrix.market == 'china'
+        run: node --import tsx scripts/verify-china-publisher-source.mjs
+      - name: Record daily scheduler state without requesting collection
+        if: matrix.market == 'china'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api repos/jeep-jim/AvtoCena/actions/workflows/363942888 > china-daily-workflow-state.json
+          gh api 'repos/jeep-jim/AvtoCena/actions/workflows/363942888/runs?event=schedule&per_page=20' > china-daily-scheduled-runs.json
+          WORKFLOW_PATH=$(python -c "import json;print(json.load(open('china-daily-workflow-state.json'))['path'])")
+          test -n "$WORKFLOW_PATH"
+          gh api "repos/jeep-jim/AvtoCena/contents/$WORKFLOW_PATH?ref=main" > china-daily-controller-source.json
+      - name: Prepare guarded China cursor handoff
+        if: matrix.market == 'china'
+        run: |
+          cat > "$RUNNER_TEMP/china-guarded-cursor.mjs" <<'CURSOR_CODE'
+          import assert from 'node:assert/strict';
+          export async function guardedCursor({storage,mutate,generationId,operationId,commit,now=Date.now}) {
+           const key='catalog/import-lock.json',cursor='catalog/intake-cursors/v1/china.json',ttl=30*60*1000;
+           let owned=false;
+           try {
+            await mutate(key,{lockedUntil:''},current=>{assert.ok(!(Date.parse(current?.lockedUntil||'')>now()),'cursor_import_lock_busy');return {operationId,operationType:'china_saved_cursor',lockedUntil:new Date(now()+ttl).toISOString()};});owned=true;
+            const before=await storage.readJsonWithMeta(cursor,null);
+            assert.ok(!before.found || (typeof before.etag==='string'&&before.etag.length>0),'cursor_existing_etag_required');
+            async function verify(){const lock=await storage.readJson(key,null);assert.equal(lock?.operationId,operationId,'cursor_import_lock_lost');assert.ok(Date.parse(lock.lockedUntil)>now()+600000,'cursor_lease_too_short');assert.equal((await storage.readJson('catalog/manifest.json',null))?.generationId,generationId,'cursor_generation_changed');}
+            await verify();
+            const guarded=new Proxy(storage,{get(target,property){if(property==='writeJson')return async(path,value,options)=>{assert.equal(path,cursor,'cursor_unexpected_write');assert.ok(Buffer.byteLength(JSON.stringify(value))<=1048576,'cursor_body_limit');await verify();return target.writeJson(path,value,before.found?{ifMatch:before.etag}:{ifNoneMatch:'*'});};const value=target[property];return typeof value==='function'?value.bind(target):value;}});
+            return await commit(guarded);
+           } finally {if(owned)await mutate(key,{lockedUntil:''},current=>current?.operationId===operationId?{...current,lockedUntil:'',finishedAt:new Date(now()).toISOString()}:current);}
+          }
+          if(process.argv[1]===new URL(import.meta.url).pathname){
+           assert.equal(process.env.YC_OBJECT_STORAGE_REQUEST_TIMEOUT_MS,'30000');assert.equal(process.env.YC_OBJECT_STORAGE_MAX_ATTEMPTS,'3');
+           const fs=await import('node:fs/promises'),{pathToFileURL}=await import('node:url'),path=await import('node:path');
+           const load=p=>import(pathToFileURL(path.resolve(p)).href);
+           const {getJsonStorage,mutateDataJson}=await load('apps/web/lib/data.ts');
+           const {publishedIntakeCheckpoint}=await load('scripts/lib/catalog-intake-checkpoint.mjs');
+           const {attachIntakeArchiveReceipt,INTAKE_ARCHIVE_RECEIPT}=await load('scripts/lib/nonjp-intake-archive.mjs');
+           const {commitCoordinatedIntakeCursor}=await load('scripts/lib/catalog-raw-cursor.mjs');
+           assert.equal(process.env.CATALOG_REBUILD_MARKETS,'china');
+           const root=path.join(process.env.CATALOG_INTAKE_INPUT_DIR||'catalog-intake-input','catalog-intake-china');
+           const intake=attachIntakeArchiveReceipt(JSON.parse(await fs.readFile(path.join(root,'report.json'),'utf8')),JSON.parse(await fs.readFile(path.join(root,INTAKE_ARCHIVE_RECEIPT),'utf8')));
+           const publication=JSON.parse(await fs.readFile(process.env.CATALOG_REBUILD_PUBLISH_REPORT,'utf8')),checkpoint=publishedIntakeCheckpoint(intake,publication);
+           const outcome=await guardedCursor({storage:getJsonStorage(),mutate:mutateDataJson,generationId:checkpoint.generationId,operationId:`china-cursor-${process.env.GITHUB_RUN_ID}-${process.env.GITHUB_RUN_ATTEMPT}`,commit:storage=>commitCoordinatedIntakeCursor({storage,intake,publication,checkpoint})});
+           console.log(JSON.stringify({market:'china',generationId:checkpoint.generationId,...outcome}));
+          }
+          CURSOR_CODE
       - name: Reserve additional memory for China publication
         if: matrix.market == 'china'
         shell: bash
@@ -415,6 +464,7 @@ jobs:
           # Reader deployed and health-verified in f4d7d22 (23 October 2026).
           # Keep the common projection below V8's single-string size limit.
           CATALOG_CHUNKED_ALL_PROJECTION_WRITE: "1"
+          CATALOG_CHUNKED_PROJECTIONS_WRITE: ${{ matrix.market == 'china' && '1' || '0' }}
           # Full publication index is much larger than request-time shards.
           YC_OBJECT_STORAGE_REQUEST_TIMEOUT_MS: "300000"
           CATALOG_PUBLISH_MARKETS: ${{ matrix.market }}
@@ -426,14 +476,18 @@ jobs:
             export CATALOG_REBUILD_MARKETS="$market"
             export CATALOG_REBUILD_PUBLISH_REPORT="catalog-weekly-$market-publish-report.json"
             if node scripts/run-transient-retry.mjs node --import tsx scripts/catalog-publish-market.mjs; then
-              node --import tsx scripts/catalog-commit-intake-cursor.mjs || failures=$((failures + 1))
+              if [ "${{ matrix.market }}" = china ]; then
+                env YC_OBJECT_STORAGE_REQUEST_TIMEOUT_MS=30000 YC_OBJECT_STORAGE_MAX_ATTEMPTS=3 timeout --signal=TERM --kill-after=10s 600s node --import tsx "$RUNNER_TEMP/china-guarded-cursor.mjs" || failures=$((failures + 1))
+              else
+                node --import tsx scripts/catalog-commit-intake-cursor.mjs || failures=$((failures + 1))
+              fi
             else
               failures=$((failures + 1))
             fi
           done
           test "$failures" -eq 0
       - name: Record collection and publication outcome even after failure
-        if: always()
+        if: always() && (matrix.market != 'china' || steps.china_publisher_source.conclusion == 'success')
         env:
           CATALOG_REBUILD_MARKETS: ${{ matrix.market }}
           CATALOG_REBUILD_PUBLISH_REPORT: catalog-weekly-${{ matrix.market }}-publish-report.json
@@ -453,5 +507,7 @@ jobs:
             catalog-storage-preflight.json
             catalog-visible-calculation-coverage.json
             catalog-staged-budget-report.json
+            china-source-preflight.json
+            china-daily-*.json
           overwrite: true
           retention-days: 14

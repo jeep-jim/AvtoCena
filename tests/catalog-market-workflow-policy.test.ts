@@ -68,3 +68,34 @@ test('prepared paid Korea cannot overlay parser collection through an old push m
  await assert.rejects(plan('korea',['encar_feed'],'push',true,true,sameRun,{refreshMarkets:['korea']}),/prepared_encar_collection_overlay_forbidden/);
  await assert.rejects(plan('korea',['encar_feed'],'push',true,true,{PREPARED_ENCAR_RUN:'400'},{refreshMarkets:['korea']}),/prepared_encar_collection_overlay_forbidden/);
 });
+
+test('daily China uses the reviewed frozen publisher without changing other market checkout selection',()=>{
+ const pin='bb6317bffd1f7b1832681ac78378fe6c3e39e3b5';
+ const before=workflow.slice(0,workflow.indexOf('  publish:\n')),publish=workflow.slice(workflow.indexOf('  publish:\n'));
+ assert.ok(!before.includes('CHINA_APPROVED_PUBLISHER_SHA')&&!before.includes(pin));
+ assert.ok(publish.includes(`ref: \${{ matrix.market == 'china' && '${pin}' || (inputs.prepared_encar_run && github.sha || github.event.workflow_run.head_sha || github.sha) }}`));
+ assert.ok(publish.includes(`CHINA_APPROVED_PUBLISHER_SHA: \${{ matrix.market == 'china' && '${pin}' || '' }}`));
+ assert.ok(publish.includes(`CATALOG_CHUNKED_PROJECTIONS_WRITE: \${{ matrix.market == 'china' && '1' || '0' }}`));
+ assert.ok(publish.includes('CATALOG_CHUNKED_ALL_PROJECTION_WRITE: "1"'));
+});
+
+test('daily China serving mismatch fails before recovery, archive, cursor or even outcome storage writes',()=>{
+ const publish=workflow.slice(workflow.indexOf('  publish:\n'));
+ const gate=publish.indexOf('run: node --import tsx scripts/verify-china-publisher-source.mjs');
+ assert.ok(gate>publish.indexOf('- run: npm ci'));
+ for(const later of ['scripts/catalog-auto-api-che168-recover.mjs','scripts/catalog-archive-intake.mjs restore-for-publication','scripts/catalog-publish-market.mjs','scripts/catalog-commit-intake-cursor.mjs']) assert.ok(publish.indexOf(later)>gate);
+ assert.match(publish,/id: china_publisher_source\n        if: matrix.market == 'china'/);
+ assert.ok(publish.includes("if: always() && (matrix.market != 'china' || steps.china_publisher_source.conclusion == 'success')"));
+ assert.ok(publish.includes('run: node scripts/catalog-budget-runtime.mjs --resolve'));
+ assert.ok(publish.includes('ref: ${{ steps.budget_runtime.outputs.release }}'));
+ assert.ok(publish.includes('CATALOG_BUDGET_RUNTIME_ROOT: ${{ github.workspace }}/.catalog-serving-runtime'));
+});
+
+test('China daily cursor uses the same lease and conditional write wrapper while other markets retain their CLI',()=>{
+ const p=workflow.slice(workflow.indexOf('  publish:\n'));
+ assert.ok(p.includes('cursor_existing_etag_required'));
+ assert.ok(p.includes("const key='catalog/import-lock.json'"));
+ assert.ok(p.includes("before.found?{ifMatch:before.etag}:{ifNoneMatch:'*'}"));
+ assert.ok(p.includes('node --import tsx "$RUNNER_TEMP/china-guarded-cursor.mjs"'));
+ assert.ok(p.includes('node --import tsx scripts/catalog-commit-intake-cursor.mjs'));
+});
