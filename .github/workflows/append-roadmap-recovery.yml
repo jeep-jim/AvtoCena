@@ -10,7 +10,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   append:
-    if: github.event.head_commit.message == 'Append verified Korea path audit and transport failure'
+    if: github.event.head_commit.message == 'Append verified ranged-read and Korea date checkpoint'
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     steps:
@@ -21,11 +21,11 @@ jobs:
       - name: Append only to the unchanged roadmap
         run: |
           set -euo pipefail
-          test "$(git hash-object roadmap.md)" = 309740e57f5559781c57e61e8701ef7cc1df6408
+          test "$(git hash-object roadmap.md)" = 62adea5572a1f463c5cefc6d4529df252c9f28ad
           python3 - <<'PY'
           from pathlib import Path
           p=Path('roadmap.md');old=p.read_bytes()
-          entry=Path('docs/operations/korea-path-audit-20261117.md').read_bytes()
+          entry=Path('docs/operations/range-date-checkpoint-20261117.md').read_bytes()
           p.write_bytes(old+entry)
           assert p.read_bytes().startswith(old)
           PY
@@ -33,5 +33,5 @@ jobs:
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add -- roadmap.md
           test "$(git diff --cached --name-only)" = roadmap.md
-          git commit -m 'Record real Korea path losses and bounded transport diagnosis'
+          git commit -m 'Record verified China range transport and Korea date source fixes'
           git push origin HEAD:main
