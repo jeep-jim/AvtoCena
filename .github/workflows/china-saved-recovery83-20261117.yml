@@ -1,0 +1,204 @@
+# Reviewed incident controller; no supplier calls. Manual reruns remain guarded.
+name: Recover verified saved China without supplier requests
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/china-saved-recovery83-20261117.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: regcloud-production-release
+  cancel-in-progress: false
+jobs:
+  recover:
+    if: >-
+      github.ref == 'refs/heads/main' && (github.event_name == 'workflow_dispatch' || github.event.head_commit.message == 'ops(china): recover saved 43977412840 on verified live83')
+    environment: regcloud-staging
+    runs-on: ubuntu-latest
+    timeout-minutes: 330
+    env:
+      CHINA_APPROVED_PUBLISHER_SHA: bb6317bffd1f7b1832681ac78378fe6c3e39e3b5
+      JSON_STORAGE_DRIVER: object
+      YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+      YC_OBJECT_STORAGE_REGION: us-east-1
+      YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+      YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+      YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+      YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+      CATALOG_INTAKE_INPUT_DIR: catalog-intake-input
+      CATALOG_REBUILD_INPUT_DIR: catalog-intake-publish
+      CATALOG_REBUILD_MARKETS: china
+      CATALOG_REBUILD_PUBLISH_REPORT: catalog-china-recovery-publication.json
+      CATALOG_SELLER_INVENTORY: '1'
+      CATALOG_IMAGE_STORAGE_MODE: source_urls_only
+      CATALOG_IMAGE_CDN_URL: ${{ secrets.CATALOG_IMAGE_CDN_URL }}
+      CATALOG_REBUILD_TARGET_PER_SOURCE: '0'
+      CATALOG_PUBLISH_TARGET_PER_MARKET: '10000'
+      CATALOG_PUBLISH_MAX_PER_MARKET: '0'
+      CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: '1'
+      CATALOG_PRIORITY_MAX_TOTAL_RUB: '15000000'
+      CATALOG_V2_PRIORITY_TARGET: '8000'
+      CATALOG_PUBLISH_PREPARE_CONCURRENCY: '2'
+      CATALOG_READ_CONCURRENCY: '2'
+      CATALOG_INDEX_WRITE_CONCURRENCY: '8'
+      CATALOG_CHUNKED_ALL_PROJECTION_WRITE: '1'
+      CATALOG_CHUNKED_PROJECTIONS_WRITE: '1'
+      YC_OBJECT_STORAGE_REQUEST_TIMEOUT_MS: '300000'
+      CATALOG_REQUIRED_ABSENT_OFFER_IDS: fafbed19e69d8199ae29ccad,8df2c8f6e0022cbbfa8e25a6,d24fa615fb67ae4957a421ba
+      CATALOG_EXPECTED_BASE_GENERATION_ID: gen_1794878284419_a611dfcf
+      CATALOG_EXPECTED_BASE_MANIFEST_SHA256: 4c34c20d9784b571414390cab450ceeeaee60b00c168476100419ec5c05cb038
+      NODE_OPTIONS: --max-old-space-size=24576
+      # Deliberately NO AUTO_API_* secrets, collector, recovery API, or cleanup.
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: bb6317bffd1f7b1832681ac78378fe6c3e39e3b5
+      - uses: actions/setup-node@v4
+        with: {node-version: 24, cache: npm}
+      - run: npm ci
+      - name: Reserve disposable worker memory
+        run: |
+          set -euo pipefail
+          test "$(df --output=avail /mnt | tail -1 | tr -d ' ')" -gt 27262976
+          sudo fallocate -l 24G /mnt/catalog-publication.swap
+          sudo chmod 600 /mnt/catalog-publication.swap
+          sudo mkswap /mnt/catalog-publication.swap
+          sudo swapon /mnt/catalog-publication.swap
+      - name: Verify CI and exclude other active catalog writers before any storage write
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          gh api repos/jeep-jim/AvtoCena/actions/runs/44117389058 > china-publisher-ci.json
+          gh api --paginate --slurp 'repos/jeep-jim/AvtoCena/actions/runs?status=in_progress&per_page=100' > china-active-runs.json
+          python - <<'PYCODE'
+          import json,os
+          ci=json.load(open('china-publisher-ci.json'))
+          assert ci['head_sha']=='bb6317bffd1f7b1832681ac78378fe6c3e39e3b5' and ci['status']=='completed' and ci['conclusion']=='success'
+          runs=[r for page in json.load(open('china-active-runs.json')) for r in page['workflow_runs']]
+          # Conservative fail-closed exclusion of deployment/catalog workflows.
+          conflicts=[r for r in runs if str(r['id'])!=os.environ['GITHUB_RUN_ID'] and any(x in (r.get('name','')+' '+r.get('path','')).lower() for x in ('regcloud','deploy','catalog','publication','restore','recovery'))]
+          assert not conflicts, 'competing writers:'+str([(r['id'],r['name']) for r in conflicts])
+          PYCODE
+      - name: Create bounded phase evidence runner
+        run: |
+          mkdir -p china-phase-evidence
+          cat > "$RUNNER_TEMP/china-phase.py" <<'PYCODE'
+          import subprocess,sys,time,pathlib,json
+          phase=sys.argv[1];root=pathlib.Path('china-phase-evidence');log=root/(phase+'.log');meta=root/(phase+'.json');start=time.time()
+          meta.write_text(json.dumps(dict(phase=phase,startedAt=start,status='running')))
+          child=subprocess.Popen(sys.argv[2:],stdout=subprocess.PIPE,stderr=subprocess.STDOUT);tail=b''
+          while True:
+            chunk=child.stdout.read1(65536)
+            if not chunk:break
+            sys.stdout.buffer.write(chunk);sys.stdout.buffer.flush();tail=(tail+chunk)[-1048576:];log.write_bytes(tail)
+          code=child.wait();meta.write_text(json.dumps(dict(phase=phase,startedAt=start,finishedAt=time.time(),status='completed',exitCode=code)));sys.exit(code)
+          PYCODE
+      - name: Prepare guarded cursor handoff
+        run: |
+          cat > "$RUNNER_TEMP/china-guarded-cursor.mjs" <<'CURSOR_CODE'
+          import assert from 'node:assert/strict';
+          export async function guardedCursor({storage,mutate,generationId,operationId,commit,now=Date.now}) {
+           const key='catalog/import-lock.json',cursor='catalog/intake-cursors/v1/china.json',ttl=30*60*1000;
+           let owned=false;
+           try {
+            await mutate(key,{lockedUntil:''},current=>{assert.ok(!(Date.parse(current?.lockedUntil||'')>now()),'cursor_import_lock_busy');return {operationId,operationType:'china_saved_cursor',lockedUntil:new Date(now()+ttl).toISOString()};});owned=true;
+            const before=await storage.readJsonWithMeta(cursor,null);
+            assert.ok(!before.found || (typeof before.etag==='string'&&before.etag.length>0),'cursor_existing_etag_required');
+            async function verify(){const lock=await storage.readJson(key,null);assert.equal(lock?.operationId,operationId,'cursor_import_lock_lost');assert.ok(Date.parse(lock.lockedUntil)>now()+600000,'cursor_lease_too_short');assert.equal((await storage.readJson('catalog/manifest.json',null))?.generationId,generationId,'cursor_generation_changed');}
+            await verify();
+            const guarded=new Proxy(storage,{get(target,property){if(property==='writeJson')return async(path,value,options)=>{assert.equal(path,cursor,'cursor_unexpected_write');assert.ok(Buffer.byteLength(JSON.stringify(value))<=1048576,'cursor_body_limit');await verify();return target.writeJson(path,value,before.found?{ifMatch:before.etag}:{ifNoneMatch:'*'});};const value=target[property];return typeof value==='function'?value.bind(target):value;}});
+            return await commit(guarded);
+           } finally {if(owned)await mutate(key,{lockedUntil:''},current=>current?.operationId===operationId?{...current,lockedUntil:'',finishedAt:new Date(now()).toISOString()}:current);}
+          }
+          if(process.argv[1]===new URL(import.meta.url).pathname){
+           assert.equal(process.env.YC_OBJECT_STORAGE_REQUEST_TIMEOUT_MS,'30000');assert.equal(process.env.YC_OBJECT_STORAGE_MAX_ATTEMPTS,'3');
+           const fs=await import('node:fs/promises'),{pathToFileURL}=await import('node:url'),path=await import('node:path');
+           const load=p=>import(pathToFileURL(path.resolve(p)).href);
+           const {getJsonStorage,mutateDataJson}=await load('apps/web/lib/data.ts');
+           const {publishedIntakeCheckpoint}=await load('scripts/lib/catalog-intake-checkpoint.mjs');
+           const {attachIntakeArchiveReceipt,INTAKE_ARCHIVE_RECEIPT}=await load('scripts/lib/nonjp-intake-archive.mjs');
+           const {commitCoordinatedIntakeCursor}=await load('scripts/lib/catalog-raw-cursor.mjs');
+           assert.equal(process.env.CATALOG_REBUILD_MARKETS,'china');
+           const root=path.join(process.env.CATALOG_INTAKE_INPUT_DIR||'catalog-intake-input','catalog-intake-china');
+           const intake=attachIntakeArchiveReceipt(JSON.parse(await fs.readFile(path.join(root,'report.json'),'utf8')),JSON.parse(await fs.readFile(path.join(root,INTAKE_ARCHIVE_RECEIPT),'utf8')));
+           const publication=JSON.parse(await fs.readFile(process.env.CATALOG_REBUILD_PUBLISH_REPORT,'utf8')),checkpoint=publishedIntakeCheckpoint(intake,publication);
+           const outcome=await guardedCursor({storage:getJsonStorage(),mutate:mutateDataJson,generationId:checkpoint.generationId,operationId:`china-cursor-${process.env.GITHUB_RUN_ID}-${process.env.GITHUB_RUN_ATTEMPT}`,commit:storage=>commitCoordinatedIntakeCursor({storage,intake,publication,checkpoint})});
+           console.log(JSON.stringify({market:'china',generationId:checkpoint.generationId,...outcome}));
+          }
+          CURSOR_CODE
+      - name: Verify frozen source and serving identity before archive writes
+        run: |
+          node --import tsx scripts/verify-china-publisher-source.mjs
+      - uses: actions/checkout@v4
+        with:
+          ref: 83ff17075e9188dcf227c8752dc064248d5f42e0
+          path: .catalog-serving-runtime
+      - run: npm ci
+        working-directory: .catalog-serving-runtime
+      - name: Bind exact serving calculator
+        run: |
+          echo "CATALOG_BUDGET_RUNTIME_ROOT=$GITHUB_WORKSPACE/.catalog-serving-runtime" >> "$GITHUB_ENV"
+          echo "CATALOG_BUDGET_RUNTIME_RELEASE=83ff17075e9188dcf227c8752dc064248d5f42e0" >> "$GITHUB_ENV"
+      - name: Record daily scheduler metadata without triggering collection
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api repos/jeep-jim/AvtoCena/actions/workflows/363942888 > china-daily-workflow-state.json
+          gh api 'repos/jeep-jim/AvtoCena/actions/workflows/363942888/runs?event=schedule&per_page=20' > china-daily-scheduled-runs.json
+          WORKFLOW_PATH=$(python -c "import json;print(json.load(open('china-daily-workflow-state.json'))['path'])")
+          test -n "$WORKFLOW_PATH"
+          gh api "repos/jeep-jim/AvtoCena/contents/$WORKFLOW_PATH?ref=main" > china-daily-controller-source.json
+      - name: Download and verify exact saved artifact, reject path escapes
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api repos/jeep-jim/AvtoCena/actions/artifacts/14283314696 > "$RUNNER_TEMP/china-artifact.json"
+          python - <<'PY'
+          import json
+          m=json.load(open(__import__('os').environ['RUNNER_TEMP']+'/china-artifact.json'))
+          assert m['id']==14283314696 and m['workflow_run']['id']==43977412840 and not m['expired']
+          assert m['digest']=='sha256:605ebd83e04da61c0138fe73f2cc85cfae82f4fe6dc368a872d3df358d5a6163'
+          PY
+          gh api repos/jeep-jim/AvtoCena/actions/artifacts/14283314696/zip > "$RUNNER_TEMP/china.zip"
+          echo "605ebd83e04da61c0138fe73f2cc85cfae82f4fe6dc368a872d3df358d5a6163  $RUNNER_TEMP/china.zip" | sha256sum -c -
+          python - <<'PY'
+          import zipfile,pathlib,os,re
+          out=pathlib.Path('catalog-intake-input/catalog-intake-china');out.mkdir(parents=True,exist_ok=False)
+          with zipfile.ZipFile(os.environ['RUNNER_TEMP']+'/china.zip') as z:
+            assert len(z.infolist())==579
+            assert len(set(z.namelist()))==579
+            for i in z.infolist():
+              assert i.filename=='report.json' or re.fullmatch(r'autohome_used_china_open-[0-9]{6}\.jsonl',i.filename)
+              assert not i.is_dir() and (i.external_attr>>16)&0o170000 != 0o120000
+              assert 0<i.file_size<=(128 if i.filename=='report.json' else 32)*1024**2
+            z.extractall(out)
+          PY
+      - name: Prove source freshness and temporal withdrawal semantics
+        run: node scripts/verify-saved-china-recovery-input.mjs
+      - name: Archive and restore exact saved bytes with raw protection
+        run: python "$RUNNER_TEMP/china-phase.py" archive node --import tsx scripts/catalog-archive-intake.mjs restore-for-publication china catalog-intake-input/catalog-intake-china
+      - name: Convert verified observations
+        run: python "$RUNNER_TEMP/china-phase.py" convert node --import tsx scripts/catalog-intake-to-publication.mjs
+      - name: Publish with transactional readiness and exact runtime guards
+        run: python "$RUNNER_TEMP/china-phase.py" publish node --import tsx scripts/catalog-publish-market.mjs
+      - name: Commit source cursor only for this verified published generation
+        run: python "$RUNNER_TEMP/china-phase.py" cursor env YC_OBJECT_STORAGE_REQUEST_TIMEOUT_MS=30000 YC_OBJECT_STORAGE_MAX_ATTEMPTS=3 timeout --signal=TERM --kill-after=10s 600s node --import tsx "$RUNNER_TEMP/china-guarded-cursor.mjs"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: saved-china-recovery-evidence
+          path: |
+            catalog-china-recovery-publication.json
+            china-source-preflight.json
+            china-input-proof.json
+            catalog-staged-budget-report.json
+            china-phase-evidence/
+            china-publisher-ci.json
+            china-active-runs.json
+            china-daily-workflow-state.json
+            china-daily-scheduled-runs.json
+            china-daily-controller-source.json
+          retention-days: 14
