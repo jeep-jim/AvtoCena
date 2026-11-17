@@ -1,0 +1,51 @@
+name: Probe fixed projection reads only
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+permissions: {contents: read}
+concurrency: {group: owner-candidate-partial-read-diagnostic, cancel-in-progress: false}
+jobs:
+  probe:
+    if: github.event_name == 'workflow_dispatch' || github.event.head_commit.message == 'Probe fixed candidate projection c7e00f72'
+    runs-on: ubuntu-24.04
+    environment: regcloud-staging
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with: {persist-credentials: false}
+      - uses: actions/setup-node@v4
+        with: {node-version: '24.22.1'}
+      - name: Test probe offline before credentials
+        run: node --test tests/projection-readonly-probe.test.mjs tests/safe-prepare-errors.test.mjs
+      - uses: actions/checkout@v4
+        with:
+          ref: c7e00f72292573dde4c892a2038a65e65d5b7066
+          path: exact-source
+          persist-credentials: false
+      - name: Copy only probe files into exact source
+        run: |
+          cp scripts/projection-readonly-probe.mjs scripts/safe-prepare-errors.mjs exact-source/scripts/
+          cp static-errors.json exact-source/
+          cp scripts/lib/projection-readonly-probe.mjs exact-source/scripts/lib/
+      - run: npm ci
+        working-directory: exact-source
+      - name: HEAD ready, China and Korea, one GET China, shared 120 second deadline
+        timeout-minutes: 3
+        working-directory: exact-source
+        env:
+          NODE_OPTIONS: --max-old-space-size=1024
+          JSON_STORAGE_DRIVER: object
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_REGION: us-east-1
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+        run: node --import tsx scripts/projection-readonly-probe.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: fixed-projection-read-probe
+          path: exact-source/projection-readonly-probe.json
+          retention-days: 7
