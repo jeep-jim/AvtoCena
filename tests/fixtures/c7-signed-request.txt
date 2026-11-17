@@ -1,0 +1,56 @@
+  private async signedRequest(method: string, url: URL, body?: string | Buffer, extraHeaders: Record<string, string> = {}, query = "") {
+    const cfg = objectConfig();
+    // REG S3 returns quoted ETags but requires bare If-Match values on PUT.
+    // Keep the condition and sign its actual wire representation; never retry
+    // a rejected conditional write as an unconditional write.
+    if (method === "PUT" && new URL(cfg.endpoint).hostname === "s3.regru.cloud" &&
+        extraHeaders["if-match"]?.startsWith('"') && extraHeaders["if-match"].endsWith('"')) {
+      extraHeaders = { ...extraHeaders, "if-match": extraHeaders["if-match"].slice(1, -1) };
+    }
+    const payloadHash = sha256(body ?? "");
+    const readBudget=Number(process.env.AVTOCENA_INTERACTIVE_READ_BUDGET_MS||0);
+    const boundedRead=(method==='GET'||method==='HEAD')&&Number.isFinite(readBudget)&&readBudget>0;
+    const deadline=boundedRead?Date.now()+readBudget:Infinity;
+    const attempts = boundedRead?2:Math.max(3, Number(process.env.YC_OBJECT_STORAGE_MAX_ATTEMPTS || 6));
+    const timeoutMs = objectStorageRequestTimeoutMs(Buffer.byteLength(body ?? ""));
+    let lastError: unknown;
+    for (let attempt = 0; attempt < attempts; attempt++) {
+      if(Date.now()>=deadline){lastError=new Error('object_storage_read_deadline');break;}
+      const amzDate = new Date().toISOString().replace(/[:-]|\.\d{3}/g, "");
+      const date = amzDate.slice(0, 8);
+      const headers: Record<string, string> = { host: url.host, "x-amz-content-sha256": payloadHash, "x-amz-date": amzDate, ...extraHeaders };
+      if (body !== undefined && !Object.keys(headers).some((header) => header.toLowerCase() === "content-type")) headers["content-type"] = "application/json; charset=utf-8";
+      const signedHeaders = Object.keys(headers).map((header) => header.toLowerCase()).sort().join(";");
+      const canonicalHeaders = Object.keys(headers).sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase())).map((header) => `${header.toLowerCase()}:${headers[header].trim()}\n`).join("");
+      const canonicalRequest = [method, url.pathname, query, canonicalHeaders, signedHeaders, payloadHash].join("\n");
+      const scope = `${date}/${cfg.region}/s3/aws4_request`;
+      const stringToSign = ["AWS4-HMAC-SHA256", amzDate, scope, sha256(canonicalRequest)].join("\n");
+      const signingKey = hmac(hmac(hmac(hmac(`AWS4${cfg.secretAccessKey}`, date), cfg.region), "s3"), "aws4_request");
+      headers.authorization = `AWS4-HMAC-SHA256 Credential=${cfg.accessKeyId}/${scope}, SignedHeaders=${signedHeaders}, Signature=${crypto.createHmac("sha256", signingKey).update(stringToSign).digest("hex")}`;
+      const controller = new AbortController();
+      const headerTimeout = setTimeout(() => controller.abort(), Math.min(timeoutMs,deadline-Date.now()));
+      let response: Response;
+      try {
+        response = await fetch(url, { method, headers, body: body as any, signal: controller.signal });
+        clearTimeout(headerTimeout);
+        if (response.body && method !== "HEAD") {
+          const responseBytes = await readObjectStorageResponseBody(response, Math.min(timeoutMs,Math.max(1,deadline-Date.now())), controller);
+          objectStorageResponseBodies.set(response, responseBytes);
+        }
+      }
+      catch (error) { lastError = error; if (attempt + 1 >= attempts) break; await sleep(Math.max(0,Math.min(5_000, 250 * 2 ** attempt,deadline-Date.now()))); continue; }
+      finally { clearTimeout(headerTimeout); }
+      if (response.ok || response.status === 304 || response.status === 404 || response.status === 412 || response.status === 409) return response;
+      if (!TRANSIENT_STATUS.has(response.status)) {
+      const responseText = objectStorageResponseText(response);
+      const code = responseText.match(/<Code>([^<]+)<\/Code>/)?.[1] || "unknown";
+      const message = responseText.match(/<Message>([^<]+)<\/Message>/)?.[1] || "";
+      throw new Error(`object_storage_${method}_${response.status}:${code}:${message}`.replace(/[\r\n]+/g, " ").slice(0, 500));
+    }
+      lastError = new Error(`object_storage_${method}_${response.status}`);
+      if (response.body) await response.body.cancel().catch(() => undefined);
+      if (attempt + 1 < attempts) await sleep(Math.max(0,Math.min(5_000, 250 * 2 ** attempt,deadline-Date.now())));
+    }
+    const detail = lastError instanceof Error ? lastError.message : String(lastError || "unknown");
+    throw new Error(`object_storage_${method}_unreachable:${detail}`);
+  }

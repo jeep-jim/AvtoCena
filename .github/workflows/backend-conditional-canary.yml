@@ -1,0 +1,47 @@
+name: Validate REG immutable conditional reads
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/backend-conditional-canary.yml']
+permissions: {contents: read}
+concurrency: {group: owner-candidate-partial-read-diagnostic, cancel-in-progress: false}
+jobs:
+  canary:
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'workflow_dispatch' || github.event.head_commit.message == 'Validate REG conditional reads c7e00f72')
+    runs-on: ubuntu-24.04
+    environment: regcloud-staging
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with: {persist-credentials: false}
+      - uses: actions/setup-node@v4
+        with: {node-version: '24.22.1'}
+      - name: Offline protocol and exact source signing parity
+        run: node --test tests/backend-conditional-canary.test.mjs tests/backend-conditional-signing.test.mjs
+      - uses: actions/checkout@v4
+        with:
+          ref: c7e00f72292573dde4c892a2038a65e65d5b7066
+          path: exact-source
+          persist-credentials: false
+      - name: Copy canary without changing runtime
+        run: |
+          cp scripts/backend-conditional-canary.mjs exact-source/scripts/
+          cp scripts/lib/backend-conditional-canary.mjs exact-source/scripts/lib/
+      - name: Eight fixed signed reads, 60 second shared deadline
+        timeout-minutes: 2
+        working-directory: exact-source
+        env:
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_REGION: us-east-1
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+        run: node scripts/backend-conditional-canary.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: backend-conditional-canary
+          path: exact-source/backend-conditional-canary.json
+          retention-days: 7
