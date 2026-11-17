@@ -70,3 +70,5 @@ jobs:
           name: china-fullprice-actual-control
           path: china-fullprice-audit.json
           retention-days: 7
+
+# Bound one source catalog chunk to its exact runtime capacity500; byte cap16MiB unchanged.

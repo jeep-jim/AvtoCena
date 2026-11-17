@@ -7,6 +7,7 @@ const cwd=process.cwd(),out=path.resolve('china-fullprice-audit.json'),originalF
 let guard,snapshot,finalizeAttempted=false,failure,report,stage='preflight';
 try{
  verifyChinaRoots(process.env);assert.equal(process.env.JSON_STORAGE_DRIVER,'object');assert.equal(process.env.YC_OBJECT_STORAGE_ENDPOINT,'https://s3.regru.cloud');assert.equal(process.env.YC_OBJECT_STORAGE_BUCKET,'avtocena-staging-8120751');assert.equal(process.env.YC_OBJECT_STORAGE_PREFIX,'migration-staging/full-20261011/');assert.notEqual(process.env.CATALOG_LIVE_RATE_DISABLED,'true');
+ for(const root of [process.env.AUDIT_BEFORE_APP_ROOT,process.env.AUDIT_APP_ROOT])assert.equal((await load(root,'apps/web/lib/catalog/runtime-config.ts')).CATALOG_CHUNK_SIZE,500,'china_control_source_chunk_capacity_changed');
  const knowledgeRelease='83ff17075e9188dcf227c8752dc064248d5f42e0',knowledgeDigest='bf2c72cb7a260ef093c0a43c2b0dad9c4c9094a4d6dc3811dd0d7f7626b0d72b';
  guard=installChinaFullpriceNetworkGuard({generationId:CHINA_GENERATION,manifestSha256:CHINA_MANIFEST_SHA,knowledgeRelease,knowledgeDigest});globalThis.fetch=guard.fetch;
  for(const k of ['log','warn','error','info','debug'])console[k]=()=>{};
