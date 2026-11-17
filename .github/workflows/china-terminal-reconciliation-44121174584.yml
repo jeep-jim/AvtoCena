@@ -1,0 +1,128 @@
+name: Reconcile terminal China publication metadata readonly
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/china-terminal-reconciliation-44121174584.yml']
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: china-terminal-reconciliation-readonly-44121174584
+  cancel-in-progress: false
+jobs:
+  reconcile:
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && github.event.head_commit.message == 'Reconcile terminal China publication 44121174584 metadata only'))
+    environment: regcloud-staging
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Confirm exact producer is terminal before storage reads
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          timeout --kill-after=5s 30s gh api repos/jeep-jim/AvtoCena/actions/runs/44121174584 > terminal-before.json
+          python - <<'PY_TERMINAL'
+          import json
+          x=json.load(open('terminal-before.json'))
+          assert x['id']==44121174584 and x['status']=='completed'
+          assert x['head_sha']=='decae6952138acd146785da548bcb4a7d15a52a9'
+          assert x['run_attempt']==1
+          PY_TERMINAL
+      - name: Prepare exact bounded read-only reader
+        run: |
+          cat > "$RUNNER_TEMP/china-reconcile.mjs" <<'READER'
+          import {createHash,createHmac} from 'node:crypto';
+          import {writeFile} from 'node:fs/promises';
+          import {pathToFileURL} from 'node:url';
+          const ENDPOINT='https://s3.regru.cloud',BUCKET='avtocena-staging-8120751',PREFIX='migration-staging/full-20261011/';
+          export const KEYS=Object.freeze(['catalog/import-lock.json','catalog/manifest.json','catalog/previous-manifest.json','catalog/internal/manifest.json','catalog/japan-auction-history/manifest.json','catalog/raw-feed-coordination/v1/policy.json','catalog/raw-feed-coordination/v1/state.json','catalog/raw-feed-config/v1/che168-snapshot.json',...['china','korea','uae','europe','georgia'].map(m=>'catalog/intake-cursors/v1/'+m+'.json')]);
+          const sha=s=>createHash('sha256').update(s).digest('hex'),hmac=(key,s)=>createHmac('sha256',key).update(s).digest();
+          export function signedGet(key,credentials,date=new Date()){
+           if(!KEYS.includes(key))throw Error('probe_key_denied');
+           if(!credentials.accessKeyId||!credentials.secretAccessKey)throw Error('probe_credentials_missing');
+           const pathname='/'+BUCKET+'/'+PREFIX+key,url=ENDPOINT+pathname;
+           const stamp=date.toISOString().replace(/[:-]|\.\d{3}/g,''),day=stamp.slice(0,8),scope=`${day}/us-east-1/s3/aws4_request`;
+           const headers={host:'s3.regru.cloud','x-amz-content-sha256':sha(''),'x-amz-date':stamp};
+           const names=Object.keys(headers).sort(),canonical=names.map(k=>`${k}:${headers[k]}\n`).join('');
+           const request=['GET',pathname,'',canonical,names.join(';'),sha('')].join('\n');
+           const signing=hmac(hmac(hmac(hmac('AWS4'+credentials.secretAccessKey,day),'us-east-1'),'s3'),'aws4_request');
+           const signature=createHmac('sha256',signing).update(`AWS4-HMAC-SHA256\n${stamp}\n${scope}\n${sha(request)}`).digest('hex');
+           headers.authorization=`AWS4-HMAC-SHA256 Credential=${credentials.accessKeyId}/${scope}, SignedHeaders=${names.join(';')}, Signature=${signature}`;
+           return {url,options:{method:'GET',headers,redirect:'error'}};
+          }
+          const token=v=>typeof v==='string'&&v.length<=180&&/^[a-zA-Z0-9_:.+\-TZ]*$/.test(v)?v:null;
+          const etag=v=>typeof v==='string'&&/^"?[a-fA-F0-9-]{1,128}"?$/.test(v)?v:null;
+          export function metadata(value){
+           const out={};for(const key of ['generationId','expectedBaseGenerationId','producerRevision','operationId','operationType','startedAt','updatedAt','heartbeatAt','lockedUntil','publishedAt','completedAt','stage','phase','schemaVersion'])if(value?.[key]!=null)out[key]=typeof value[key]==='number'&&Number.isSafeInteger(value[key])?value[key]:token(value[key]);
+           if(value?.activeSlot!=null)out.activeSlot=['a','b'].includes(value.activeSlot)?value.activeSlot:null;
+           if(value?.contentHash!=null)out.contentHash=typeof value.contentHash==='string'&&/^[a-f0-9]{64}$/.test(value.contentHash)?value.contentHash:null;
+           for(const key of ['count','version','retentionDays'])if(value?.[key]!=null)out[key]=Number.isSafeInteger(value[key])&&value[key]>=0?value[key]:null;
+           for(const key of ['sources','chunks'])if(value?.[key]&&typeof value[key]==='object')out[key+'Descriptor']={sha256:sha(JSON.stringify(value[key])),entries:Object.keys(value[key]).length};
+           // No arbitrary nested values, raw observations, paths, owners or URL fields leave this reader.
+           return out;
+          }
+          export async function read(key,{credentials,fetchImpl=fetch,timeoutMs=10000}={}){
+           const request=signedGet(key,credentials),controller=new AbortController(),timer=setTimeout(()=>controller.abort(),timeoutMs);
+           try{
+            const response=await fetchImpl(request.url,{...request.options,signal:controller.signal});
+            if(response.status===404){await response.body?.cancel();return {key,found:false};}
+            if(response.status!==200){await response.body?.cancel();throw Error('probe_http_'+response.status);}
+            const limit=key===KEYS[0]?16384:1048576;
+            if(Number(response.headers.get('content-length')||0)>limit){await response.body?.cancel();throw Error('probe_body_limit');}
+            const reader=response.body.getReader();let bytes=0;const chunks=[];
+            try{while(true){const {done,value}=await reader.read();if(done)break;bytes+=value.length;if(bytes>limit)throw Error('probe_body_limit');chunks.push(value);}}
+            finally{await reader.cancel().catch(()=>{});reader.releaseLock();}
+            const body=Buffer.concat(chunks,bytes),value=JSON.parse(body.toString('utf8'));
+            return {key,found:true,bytes,sha256:sha(body),etag:etag(response.headers.get('etag')),metadata:metadata(value)};
+           }finally{clearTimeout(timer);controller.abort();}
+          }
+          export async function reconcile({credentials,fetchImpl=fetch,terminalEvidence}={}){
+           if(terminalEvidence?.id!==44121174584||terminalEvidence?.run_attempt!==1||terminalEvidence?.status!=='completed'||terminalEvidence?.head_sha!=='decae6952138acd146785da548bcb4a7d15a52a9'||!['success','failure','cancelled','timed_out','action_required','neutral','skipped','stale'].includes(terminalEvidence.conclusion))throw Error('probe_terminal_required');
+           let requests=0;const counted=(...args)=>{if(++requests>KEYS.length*2+2)throw Error('probe_request_limit');return fetchImpl(...args);};
+           const snapshots=[];
+           for(let pass=0;pass<2;pass++){
+            const startedAt=new Date().toISOString();const rows=[];for(const key of KEYS)rows.push(await read(key,{credentials,fetchImpl:counted}));
+            snapshots.push({startedAt,finishedAt:new Date().toISOString(),rows});
+           }
+           const finalFence=[];for(const key of ['catalog/manifest.json','catalog/import-lock.json'])finalFence.push(await read(key,{credentials,fetchImpl:counted}));
+           const changedKeys=KEYS.filter((key,i)=>{const a=snapshots[0].rows[i],b=snapshots[1].rows[i];return a.found!==b.found||a.sha256!==b.sha256||a.etag!==b.etag;});
+           for(const row of finalFence){const prior=snapshots[1].rows.find(r=>r.key===row.key);if(prior.found!==row.found||prior.sha256!==row.sha256||prior.etag!==row.etag)if(!changedKeys.includes(row.key))changedKeys.push(row.key);}
+           return {finalFence,producerRun:44121174584,terminalConclusion:terminalEvidence.conclusion,snapshots,changedKeys,unchangedObserved:changedKeys.length===0,atomicSnapshotProven:false,activationVerified:false,aliasesVerified:false,rawAncestryVerified:false,cursorSemanticsVerified:false,requests,storageWrites:0,listRequests:0,supplierRequests:0};
+          }
+          if(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href){
+           try{
+            const {readFile}=await import('node:fs/promises');
+            const terminalEvidence=JSON.parse(await readFile(process.argv[2],'utf8'));
+            const report=await reconcile({credentials:{accessKeyId:process.env.YC_OBJECT_STORAGE_ACCESS_KEY_ID,secretAccessKey:process.env.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY},terminalEvidence});
+            await writeFile('china-reconciliation.json',JSON.stringify(report,null,2));console.log(JSON.stringify(report));
+           }catch(error){const code=/^probe_(body_limit|request_limit|key_denied|credentials_missing|terminal_required|http_\d{3})$/.test(error?.message||'')?error.message:'probe_read_failed';console.error(JSON.stringify({error:code,storageWrites:0}));process.exitCode=1;}
+          }
+          READER
+      - name: Snapshot pointers twice and fence public manifest and lock
+        env:
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
+        run: timeout --signal=TERM --kill-after=5s 310s node "$RUNNER_TEMP/china-reconcile.mjs" terminal-before.json
+      - name: Confirm producer identity and attempt did not change
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          timeout --kill-after=5s 30s gh api repos/jeep-jim/AvtoCena/actions/runs/44121174584 > terminal-after.json
+          python - <<'PY_TERMINAL'
+          import json
+          a=json.load(open('terminal-before.json')); b=json.load(open('terminal-after.json'))
+          assert all(a[k]==b[k] for k in ['id','head_sha','run_attempt','status','conclusion'])
+          assert b['status']=='completed'
+          PY_TERMINAL
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: china-terminal-pointer-metadata-44121174584
+          path: china-reconciliation.json
+          if-no-files-found: warn
