@@ -53,6 +53,13 @@ export function normalizePaidEncarOffer(data, {id, observedAt, adapter}) {
   if (!/^\d+$/.test(String(id)) || String(data?.inner_id) !== String(id)) throw Error('Encar identity mismatch');
   const year = metric(data.year, 1900, new Date(observedAt).getUTCFullYear() + 1, true);
   if (year.status !== 'exact') return null;
+  // v3 year_month is manufacture month; year remains supplier model year.
+  const manufactureMonth = text(data.year_month);
+  const manufactureValid = /^(?:19|20)\d{2}-(?:0[1-9]|1[0-2])$/.test(manufactureMonth)
+    && Number.isFinite(Date.parse(observedAt))
+    && Date.parse(manufactureMonth + '-01T00:00:00Z') <= Date.parse(observedAt);
+  const production = manufactureValid ? {status:'exact', value:manufactureMonth}
+    : {status:present(data.year_month)?'ambiguous':'missing'};
   const cc = metric(data.displacement_cc, 300, 10000, true);
   const hp = metric(data.power, 20, 2500);
   const iceHp = metric(data.power_ice_hp, 20, 2500);
@@ -73,6 +80,8 @@ export function normalizePaidEncarOffer(data, {id, observedAt, adapter}) {
     Category: fields.bodyType, Displacement: cc.value, Power: hp.value, Color: data.color, UpdatedDate: observedAt});
   if (!offer) return null;
 
+  offer.productionDate = manufactureValid ? manufactureMonth : undefined;
+  offer.productionYear = manufactureValid ? Number(manufactureMonth.slice(0,4)) : undefined;
   // Preserve source fields, not a value guessed from the model/trim by the
   // legacy normalizer. Contradictory electrified identities remain blocked.
   // `hybrid` is a coarse source fuel label, not proof of a parallel layout.
@@ -120,6 +129,7 @@ export function normalizePaidEncarOffer(data, {id, observedAt, adapter}) {
     sourceDriveEvidence: {source: source('drive_type'), status: ambiguousDrive ? 'ambiguous' : fields.drive ? 'exact' : 'missing',
       ...(driveLabel ? {rawValue: driveLabel.slice(0, 80)} : {})},
     semanticEvidence: {
+      productionDate: {...production, source: 'auto_api_encar:v3:year_month:production', observedAt},
       year: evidence('year', {status: 'exact', value: offer.year}),
       fuel: evidence('engine_type', fuelResult),
       powertrainKind: evidence(compatibleSeriesName ? 'engine_type+identity_name' : 'engine_type', {...fuelResult, value: fuelKind}),
