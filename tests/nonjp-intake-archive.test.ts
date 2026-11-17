@@ -348,3 +348,35 @@ test('whole-group planner recognises bounded generic archives and keeps missing-
     const blocked=planRawFeedRetention(missing);assert.equal(blocked.selected.length,0);assert.ok(blocked.summary.unprovenRoots.includes(receipts[0].root));
   } finally {await fs.rm(d.root,{recursive:true,force:true});}
 });
+
+test('large China withdrawal report uses bounded parts and round trips without widening observation limits', async t => {
+  const f=storageFixture(),d=await directory('china'); t.after(()=>fs.rm(d.root,{recursive:true,force:true}));
+  const report={version:1,market:'china',completed:true,sources:[],confirmedWithdrawals:'x'.repeat(40*1024*1024)};
+  const bytes=Buffer.from(JSON.stringify(report)); await fs.writeFile(path.join(d.input,'report.json'),bytes);
+  const receipt=await archiveIntakeDirectory({storage:f.storage,directory:d.input,market:'china',owner});
+  const manifest=f.objects.get(receipt.root+'/complete.json'),entry=manifest.files.find(row=>row.name==='report.json');
+  assert.equal(entry.bytes,bytes.length); assert.ok(entry.parts.length>16); assert.ok(entry.parts.every(part=>part.bytes<=2*1024*1024));
+  await verifyIntakeArchive({storage:f.storage,receipt,directory:path.join(d.root,'restored'),readerOwner:owner});
+  assert.deepEqual(await fs.readFile(path.join(d.root,'restored','report.json')),bytes);
+});
+
+test('oversized reports and observation shards fail closed with actionable sizes before storage writes', async t => {
+  for(const [name,limit] of [['report.json',128*1024*1024],['source-000001.jsonl',32*1024*1024]] as const){
+    const f=storageFixture(),d=await directory('china'); t.after(()=>fs.rm(d.root,{recursive:true,force:true}));
+    await fs.truncate(path.join(d.input,name),limit+1);
+    await assert.rejects(()=>archiveIntakeDirectory({storage:f.storage,directory:d.input,market:'china',owner}),new RegExp(`intake_archive_local_size:name=${name}:actual=${limit+1}:maximum=${limit}`));
+    assert.equal(f.writes.length,0);
+  }
+});
+
+test('saved China incident report archives and restores byte-for-byte when supplied', {skip:!process.env.CHINA_INCIDENT_REPORT}, async t=>{
+  const f=storageFixture(),d=await directory('china'); t.after(()=>fs.rm(d.root,{recursive:true,force:true}));
+  const bytes=await fs.readFile(process.env.CHINA_INCIDENT_REPORT!); assert.ok(bytes.length>32*1024*1024);
+  await fs.writeFile(path.join(d.input,'report.json'),bytes);
+  const receipt=await archiveIntakeDirectory({storage:f.storage,directory:d.input,market:'china',owner});
+  await verifyIntakeArchive({storage:f.storage,receipt,directory:path.join(d.root,'restored'),readerOwner:owner});
+  assert.deepEqual(await fs.readFile(path.join(d.root,'restored','report.json')),bytes);
+  const part=f.objects.get(receipt.root+'/complete.json').files.find(row=>row.name==='report.json').parts[0];
+  f.objects.get(part.key).sha256='0'.repeat(64);
+  await assert.rejects(()=>verifyIntakeArchive({storage:f.storage,receipt,readerOwner:owner}),/intake_archive_part_wire/);
+});
