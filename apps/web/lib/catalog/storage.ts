@@ -2769,11 +2769,21 @@ export async function warmBudgetPriceCaches(markets?:CatalogMarket[]){
  for(const market of (markets?preparationMarkets(markets):MARKETS).filter(market=>market!=='japan')){
   const index=await readBudgetCountIndex(manifest.generationId,market);
   if(!index || index.version!==3 || index.generationId!==manifest.generationId)continue;
-  const start=performance.now(),rows=await currentBudgetReplay(index,market);
-  await currentBudgetReplay(index,market,true);
   const fingerprint=await budgetPricingFingerprint(market);
   if(!fingerprint)throw Error('catalog_prepared_selection_context_missing');
-  const preparedSelection=await prepareBudgetSelection(index,market,fingerprint,rows);
+  const assertContext=async()=>{
+   if(await budgetPricingFingerprint(market)!==fingerprint)throw Error('catalog_budget_context_changed');
+   const current=await getJsonStorage().readJson<CatalogManifest>('catalog/manifest.json',{} as CatalogManifest);
+   if(current.generationId!==manifest.generationId)throw Error('catalog_budget_generation_changed');
+  };
+  const start=performance.now();
+  await assertContext();
+  const rows=await currentBudgetReplay(index,market);
+  await assertContext();
+  await currentBudgetReplay(index,market,true);
+  await assertContext();
+  const preparedSelection=await prepareBudgetSelection(index,market,fingerprint,rows,async()=>{await assertContext();return fingerprint;});
+  await assertContext();
   results.push({market,rows:rows.length,ms:Math.round(performance.now()-start),preparedSelection});
  }
  return {generationId:manifest.generationId,results};

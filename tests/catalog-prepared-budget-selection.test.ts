@@ -184,3 +184,32 @@ test('a large priced market retains all identities in independently bounded prep
   assert.deepEqual(read!.rows.map(row=>row[5].id),f.index.rows.map(row=>row[5].id));
  }finally{f.cleanup();}
 });
+
+for(const change of ['fingerprint','generation'] as const)for(const phase of ['budget','sort','selection'] as const)test(`actual warmup rejects ${change} change after ${phase} persistence without ready receipt`,async()=>{
+ const f=fixture();
+ try{
+  f.reset();
+  const prefix=`catalog/generations/${f.generationId}/indexes/${specificationSelectorDirectory(readCalculationIndex()?.digest||null,calculationCacheVersion())}`;
+  const entry=await publishSelectorMarket(f.index,'korea',async name=>f.stored.get(`${prefix}/${name}.json`),async(name,value)=>{f.stored.set(`${prefix}/${name}.json`,value);});
+  f.stored.set(`${prefix}/ready.json`,{version:4,generationId:f.generationId,encyclopediaDigest:readCalculationIndex()?.digest||null,markets:{korea:entry}});
+  const originalFingerprint=await budgetPricingFingerprint('korea');
+  const write=f.storage.writeJson;let changed=false;const written:string[]=[];
+  f.storage.writeJson=async(key,value,condition)=>{
+   await write(key,value,condition);written.push(key);
+   const trigger=phase==='budget'?key.includes('/runtime-budget-prices-v3/')
+    :phase==='sort'?key.includes('/runtime-sort-prices-v3/')
+    :key.includes('/runtime-budget-selections-v1/')&&key.includes('/parts/');
+   if(trigger&&!changed){
+    changed=true;
+    if(change==='fingerprint')f.setEditorial({revision:'price-change',entries:{'priced-0':{id:'priced-0',market:'korea',status:'visible',sellerPrice:{amount:2_000_000,currency:'RUB'}}}});
+    else f.stored.set('catalog/manifest.json',{generationId:'replacement-generation',markets:{korea:{count:f.index.sourceRows}}});
+    f.reset();
+   }
+  };
+  await assert.rejects(warmBudgetPriceCaches(['korea']),change==='fingerprint'?/catalog_budget_context_changed/:/catalog_budget_generation_changed/);
+  assert.equal(changed,true,'race must execute inside the actual runtime preparation');
+  if(change==='fingerprint')assert.notEqual(await budgetPricingFingerprint('korea'),originalFingerprint);
+  assert.equal(written.some(key=>key.includes('/runtime-budget-selections-v1/')&&key.endsWith('/ready.json')),false);
+  if(phase==='budget')assert.equal(written.some(key=>key.includes('/runtime-sort-prices-v3/')),false,'stop before the next price pass');
+ }finally{f.cleanup();}
+});
