@@ -23,7 +23,7 @@ export const CHE168_REPLICA_WORKER_CLOSURE = Object.freeze([
 ]);
 export const CHE168_REPLICA_WITNESS_LIMITS = Object.freeze({parts: 1024, replicaBytes: 16 * 1024 ** 3,
   rows: 500000, payloadBytes: 1024 ** 2, shardBytes: 32 * 1024 ** 2, shards: 2000,
-  observationBytes: 8 * 1024 ** 3, reportBytes: 4 * 1024 ** 2, workMs: 300000});
+  observationBytes: 8 * 1024 ** 3, reportBytes: 128 * 1024 ** 2, workMs: 300000});
 const CHUNK = 16 * 1024 ** 2, SHA = /^[a-f0-9]{64}$/, COMMIT = /^[a-f0-9]{40}$/;
 const UUID = '[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}';
 const ROOT = new RegExp('^catalog/provider-replicas/che168/' + UUID + '$');

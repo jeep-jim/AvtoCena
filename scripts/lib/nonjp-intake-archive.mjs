@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
+import {constants} from 'node:fs';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
 import {gzipSync, gunzipSync} from 'node:zlib';
@@ -10,6 +11,9 @@ import {catalogStorageBudget} from './catalog-storage-budget.mjs';
 export const NONJP_INTAKE_MARKETS = Object.freeze(['china', 'korea', 'uae', 'europe', 'georgia']);
 export const INTAKE_ARCHIVE_RECEIPT = 'own-storage-receipt.json';
 const PART_BYTES = 2 * 1024 * 1024, MAX_FILE_BYTES = 32 * 1024 * 1024;
+// Reports carry the complete withdrawal ledger; observations remain tightly bounded.
+const MAX_REPORT_BYTES = 128 * 1024 * 1024;
+const fileLimit = name => name === 'report.json' ? MAX_REPORT_BYTES : MAX_FILE_BYTES;
 const MAX_FILES = 20000, MAX_TOTAL_BYTES = 128 * 1024 ** 3, HEX = /^[a-f0-9]{64}$/;
 const MAX_MANIFEST_BYTES = 2 * 1024 * 1024;
 const digest = bytes => createHash('sha256').update(bytes).digest('hex');
@@ -33,7 +37,7 @@ export function validateIntakeArchive(manifest, expectedRoot, expectedDigest) {
   const names = new Set(); let total = 0;
   for (const file of manifest.files) {
     assert.ok(fileName(file?.name) && !names.has(file.name) && HEX.test(file.sha256 || '')
-      && Number.isSafeInteger(file.bytes) && file.bytes >= 0 && file.bytes <= MAX_FILE_BYTES
+      && Number.isSafeInteger(file.bytes) && file.bytes >= 0 && file.bytes <= fileLimit(file.name)
       && Array.isArray(file.parts) && file.parts.length === Math.ceil(file.bytes / PART_BYTES), 'intake_archive_file');
     names.add(file.name); total += file.bytes;
     for (const [index, part] of file.parts.entries()) {
@@ -63,6 +67,34 @@ async function assertArchiveReserve(storage, files) {
   assert.ok(budget.ok, 'intake_archive_storage_reserve_insufficient');
 }
 
+async function scanLocalFile(target, name, consume) {
+  const handle = await fs.open(target, constants.O_RDONLY | constants.O_NOFOLLOW);
+  try {
+    const before = await handle.stat(), maximum = fileLimit(name);
+    assert.ok(before.isFile() && before.size <= maximum,
+      `intake_archive_local_size:name=${name}:actual=${before.size}:maximum=${maximum}`);
+    const hash = createHash('sha256'); let total = 0, index = 0;
+    for (;;) {
+      const buffer = Buffer.alloc(Math.min(PART_BYTES, Math.max(1, before.size - total)));
+      let length = 0;
+      while (length < buffer.length) {
+        const read = await handle.read(buffer, length, buffer.length - length, null);
+        if (!read.bytesRead) break;
+        length += read.bytesRead;
+      }
+      if (!length) break;
+      const part = buffer.subarray(0, length); total += length;
+      assert.ok(total <= maximum && total <= before.size, 'intake_archive_source_changed');
+      hash.update(part);
+      if (consume) await consume(part, index++);
+    }
+    const after = await handle.stat();
+    assert.ok(total === before.size && after.size === before.size && after.mtimeMs === before.mtimeMs
+      && after.ctimeMs === before.ctimeMs, 'intake_archive_source_changed');
+    return {name, bytes: total, sha256: hash.digest('hex')};
+  } finally {await handle.close();}
+}
+
 async function localInventory(directory) {
   const entries = await fs.readdir(directory, {withFileTypes: true});
   assert.ok(entries.length > 0 && entries.length <= MAX_FILES + 1, 'intake_archive_file_count');
@@ -70,11 +102,7 @@ async function localInventory(directory) {
   for (const entry of entries.sort((a,b) => a.name.localeCompare(b.name))) {
     if (entry.name === INTAKE_ARCHIVE_RECEIPT) { assert.ok(entry.isFile(), 'intake_archive_receipt_type'); continue; }
     assert.ok(entry.isFile() && fileName(entry.name), 'intake_archive_local_path');
-    const target = path.join(directory, entry.name), stat = await fs.lstat(target);
-    assert.ok(stat.isFile() && stat.size <= MAX_FILE_BYTES, 'intake_archive_local_size');
-    const bytes = await fs.readFile(target);
-    assert.equal(bytes.length, stat.size, 'intake_archive_source_changed');
-    files.push({name: entry.name, bytes: bytes.length, sha256: digest(bytes)});
+    files.push(await scanLocalFile(path.join(directory, entry.name), entry.name));
   }
   assert.ok(files.some(row => row.name === 'report.json') && files.reduce((sum,row) => sum + row.bytes,0) <= MAX_TOTAL_BYTES,
     'intake_archive_local_inventory');
@@ -197,7 +225,14 @@ function receiptFromReadyPin({market, owner, root, manifest, pin}) {
  * observations. A complete ARCHIVE never claims a complete supplier inventory. */
 export async function archiveIntakeDirectory({storage, directory, market, owner = rawProducerOwner()}) {
   assert.equal(storage.driver, 'object', 'intake_archive_requires_object_storage');
-  const files = await localInventory(directory), report = JSON.parse(await fs.readFile(path.join(directory,'report.json'),'utf8'));
+  const files = await localInventory(directory);
+  // Parsing is explicitly bounded, and must match the inventory bytes even if
+  // a producer changes the report between inventory and parsing.
+  const reportParts = [];
+  const reportFile = await scanLocalFile(path.join(directory,'report.json'), 'report.json', part => {reportParts.push(part);});
+  assert.equal(rawDigest(reportFile), rawDigest(files.find(file => file.name === 'report.json')), 'intake_archive_source_changed');
+  const report = JSON.parse(Buffer.concat(reportParts, reportFile.bytes).toString('utf8'));
+  reportParts.length = 0;
   assert.equal(report.market, market, 'intake_archive_report_market');
   const receiptPath = path.join(directory, INTAKE_ARCHIVE_RECEIPT);
   let saved;
@@ -240,16 +275,14 @@ export async function archiveIntakeDirectory({storage, directory, market, owner 
   const writingStorage = pin.storage;
   const storedFiles=[];
   for (const file of files) {
-    const bytes = await fs.readFile(path.join(directory,file.name));
-    assert.ok(bytes.length === file.bytes && digest(bytes) === file.sha256,'intake_archive_source_changed');
     const parts=[];
-    for (let offset=0;offset<bytes.length;offset+=PART_BYTES) {
-      const part=bytes.subarray(offset,offset+PART_BYTES), sha256=digest(part);
-      const key=`${root}/files/${file.name}/${parts.length}-${sha256}.json`;
+    const actual = await scanLocalFile(path.join(directory,file.name), file.name, async (part, index) => {
+      const sha256=digest(part), key=`${root}/files/${file.name}/${index}-${sha256}.json`;
       await immutableJson(writingStorage,key,{version:1,encoding:'gzip-base64',bytes:part.length,sha256,
         payload:gzipSync(part,{level:6}).toString('base64')});
       parts.push({key,bytes:part.length,sha256});
-    }
+    });
+    assert.equal(rawDigest(actual), rawDigest(file), 'intake_archive_source_changed');
     storedFiles.push({...file,parts});
   }
   assert.equal(rawDigest(await localInventory(directory)),rawDigest(files),'intake_archive_source_changed');

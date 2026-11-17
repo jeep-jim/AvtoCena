@@ -1,3 +1,4 @@
+import {assertScopedProjectionReaderReady} from './lib/catalog-projection-reader-readiness.mjs';
 import {imageKey,uniqueImages,mergeOfferVersions} from './lib/catalog-offer-merge.mjs';
 import {isAllDubicarsOffer,isUnpricedDubicarsOffer} from '../apps/web/lib/catalog/dubicars-owner-policy.ts';
 import {catalogInventoryLimit,catalogMarketInventoryLimit} from "./lib/catalog-inventory-limit.mjs";
@@ -288,6 +289,9 @@ async function auditCandidate(sourceOffer) {
 }
 
 const dryRun = process.env.CATALOG_PUBLICATION_DRY_RUN === "1";
+// Scoped China projections must only be written for an installed compatible reader.
+if (!dryRun && process.env.CATALOG_CHUNKED_PROJECTIONS_WRITE === '1') await assertScopedProjectionReaderReady();
+
 if (!dryRun && market !== 'japan' && getJsonStorage().driver === 'object'
     && (!process.env.CATALOG_BUDGET_RUNTIME_ROOT || !/^[a-f0-9]{40}$/.test(process.env.CATALOG_BUDGET_RUNTIME_RELEASE || ''))) {
   throw Error('staged_budget_runtime_required');
@@ -818,6 +822,8 @@ if (regressionBlocked) {
       } : {}),
       async beforeManifestCommit() {
         await technicalRepairGuard?.verifyAuthority({operationId:publishOperationId});
+        // Recheck after long staging: fail closed if serving compatibility changed.
+        if (process.env.CATALOG_CHUNKED_PROJECTIONS_WRITE === '1') await assertScopedProjectionReaderReady();
         await assertCurrentKoreaPublicationSource();
         if (paidEncarReport) {
           const { assertCollectionEnabled } = await import("../apps/web/lib/catalog/collection-controls.ts");

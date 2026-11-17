@@ -371,3 +371,14 @@ test('future-main-only and mismatched-source paths keep completed data and all a
   assert.equal(await fs.readFile(path.join(f.directory, 'report.json'), 'utf8'), before);
   assert.equal(f.storage.reads.length, 0); assert.equal(f.storage.writes.length, 0);
 });
+
+test('large bounded withdrawal ledger no longer blocks independent replica witness', async t => {
+  const f=await fixture(t);
+  f.report.confirmedWithdrawals=Array.from({length:232277},(_,index)=>({id:String(index).padStart(24,'0'),sourceId:SOURCE,sourceOfferId:String(index),market:'china',status:'removed',observedAt:at}));
+  await f.writeReport();
+  const size=(await fs.stat(path.join(f.directory,'report.json'))).size; assert.ok(size>32*1024*1024);
+  const witness=await verifyChe168ReplicaInput(f.optionsOf()); assertChe168ReplicaInputWitness(witness);
+  await assert.rejects(()=>verifyChe168ReplicaInput({...f.optionsOf(),limits:{reportBytes:4*1024*1024}}),/local_file_size/);
+  await fs.truncate(path.join(f.directory,'report.json'),128*1024*1024+1);
+  await assert.rejects(()=>verifyChe168ReplicaInput(f.optionsOf()),/local_file_size/);
+});
