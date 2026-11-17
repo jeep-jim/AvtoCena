@@ -254,18 +254,29 @@ jobs:
         printf '%s  %s\n' ad68136cd44c5ca29a17e7ead5ae0d643c9a1e504d828a855f942b9575b26c74 "$RUNNER_TEMP/preparation-progress.mjs" | sha256sum --check
         mkdir -p "$(dirname "$RUNNER_TEMP/diagnostic-probe.mjs")"
         cat > "$RUNNER_TEMP/diagnostic-probe.mjs" <<'PIN_b0e87091b109dd197def'
-        // Diagnostic only. Requires existing, freshly reverified preflight evidence;
-        // this entrypoint NEVER runs binding creation, deployment, or acceptance steps.
-        import assert from 'node:assert/strict';
+        // Diagnostic only: no preparation acceptance, binding creation or activation.
+        import assert from 'node:assert/strict';import fs from 'node:fs';import path from 'node:path';import {randomUUID}from'node:crypto';
+        import {safeDiagnostic}from'./candidate-preparation-diagnostics.mjs';
+        import {explain,sanitizeExplanation}from'./scripts/safe-prepare-errors.mjs';
+        function preserveFailure(error){
+         const value={schemaVersion:1,stage:'diagnostic_probe_finished_no_acceptance',accepted:false,
+          outer:safeDiagnostic(error?.safeDiagnostics?.outer),
+          children:Array.isArray(error?.safeDiagnostics?.children)?error.safeDiagnostics.children.slice(-8).map(safeDiagnostic).filter(Boolean):[],
+          fallback:sanitizeExplanation(explain(error))};
+         const raw=Buffer.from(JSON.stringify(value));assert.ok(raw.length<=65536,'diagnostic_probe_failure_bound');
+         const directory=process.env.CATALOG_PREPARATION_PROGRESS_DIR||path.resolve('candidate-preparation-progress');
+         assert.ok(path.isAbsolute(directory)&&path.resolve(directory)===directory&&directory!=='/','diagnostic_probe_failure_directory');fs.mkdirSync(directory,{recursive:true,mode:0o700});const stat=fs.lstatSync(directory);assert.ok(stat.isDirectory()&&!stat.isSymbolicLink(),'diagnostic_probe_failure_directory');
+         const temp=path.join(directory,`failure-${randomUUID()}.tmp`),target=path.join(directory,'diagnostic-probe-failure.json');const fd=fs.openSync(temp,fs.constants.O_WRONLY|fs.constants.O_CREAT|fs.constants.O_EXCL|fs.constants.O_NOFOLLOW,0o600);
+         try{fs.writeFileSync(fd,raw);fs.fsyncSync(fd);}finally{fs.closeSync(fd);}fs.renameSync(temp,target);
+        }
         assert.notEqual(process.env.ACTIVATE_CANDIDATE,'true','diagnostic_probe_activation_forbidden');
         assert.equal(process.argv.length,2,'diagnostic_probe_arguments');
-        process.env.CATALOG_PREPARATION_DIAGNOSTIC_PROBE='1';
-        process.env.ACTIVATE_CANDIDATE='false';
+        process.env.CATALOG_PREPARATION_DIAGNOSTIC_PROBE='1';process.env.ACTIVATE_CANDIDATE='false';
         const {runCandidatePreparation}=await import('./candidate-preparation.mjs');
         try{await runCandidatePreparation('prepare','before-activation');throw Error('diagnostic_probe_no_acceptance');}
-        catch{process.stderr.write('diagnostic_probe_finished_no_acceptance\n');process.exitCode=1;}
+        catch(error){try{preserveFailure(error);}catch{process.stderr.write('diagnostic_probe_failure_save_failed\n');}process.stderr.write('diagnostic_probe_finished_no_acceptance\n');process.exitCode=1;}
         PIN_b0e87091b109dd197def
-        printf '%s  %s\n' b0e87091b109dd197def2e4e1abf673b7993bcf9c20a9ff1af566a6289d9561d "$RUNNER_TEMP/diagnostic-probe.mjs" | sha256sum --check
+        printf '%s  %s\n' 302433bde16b83c349a53e19ddb07ca682e547a11286521cd234b16ef8d6be51 "$RUNNER_TEMP/diagnostic-probe.mjs" | sha256sum --check
         mkdir -p "$(dirname "$RUNNER_TEMP/persistent-cache.mjs")"
         cat > "$RUNNER_TEMP/persistent-cache.mjs" <<'PIN_688367ac5408c8d30542'
         import {progress,traceCache,registerProgressCounters} from './preparation-progress.mjs';
