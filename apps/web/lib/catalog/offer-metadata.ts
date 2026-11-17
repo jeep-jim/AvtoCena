@@ -5,7 +5,6 @@ import {encodeShareDraft,decodeShareDraft} from './offer-share';
 import type {Metadata} from 'next';
 import {readOfferDetailForPage} from './offer-page-data';
 import {getSavedOfferCalculation} from './saved-offer-calculation';
-import {directOfferScenario} from './yandex-direct-scenario';
 import {resolveOfferDisplay} from './offer-display-data';
 import {offerPath,offerRouteId} from './offer-url';
 import {offerShareTitle,offerShareUrl} from './offer-share';
@@ -35,7 +34,7 @@ export async function generateOfferMetadata({params,searchParams}:{params:Promis
  if(!stored)return {title:'Автомобиль — АвтоЦена',robots:{index:false,follow:true}};
  const power=Number(q.powerHp||0);const safePower=Number.isFinite(power)&&power>=20&&power<=2500?Math.round(power):0;
  const [display,saved,client]=await Promise.all([resolveOfferDisplay(stored,safePower,q.modificationId||''),getSavedOfferCalculation(stored),q.calculation?getSavedOfferCalculation(stored,q.calculation):Promise.resolve(null)]);
- const direct=client || (q.direct==='novokuznetsk'?await directOfferScenario(stored):null);
+ const direct=client;
  const explicit=q.estimate?await sharedOfferScenario(stored,q.estimate):null;
  const automatic=!direct&&!saved&&display.sellerPricing&&!display.selectionRequired ? await sharedOfferScenario(stored,encodeShareDraft(offerParameterDraft(display.offer,display.raw))) : null;
  const scenario=explicit||direct||saved||automatic;

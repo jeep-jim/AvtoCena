@@ -30,7 +30,6 @@ test('metadata uses displayed calculation, archived client version and proxy ima
   'offer-page-data':`export const getOfferDetailRecord=async()=>globalThis.__shareTest.offer;export const readOfferDetailForPage=async()=>({offer:globalThis.__shareTest.offer,unavailable:false});`,
   'offer-display-data':`export const resolveOfferDisplay=async(offer,power,modification)=>{globalThis.__shareTest.queryCalls.push([power,modification]);return {offer,raw:offer,pricedOffer:offer,visibleRub:globalThis.__shareTest.visible,sellerPricing:!!globalThis.__shareTest.seller,selectionRequired:false}};`,
   'saved-offer-calculation':`export const getSavedOfferCalculation=async(offer,version)=>version==='11111111-1111-1111-1111-111111111111'?globalThis.__shareTest.client:null;`,
-  'yandex-direct-scenario':`export const directOfferScenario=async()=>null;`,
   'image-quality':`export const rankedCatalogImageUrls=()=>['https://source.example/car.jpg'];`,
   'photo-proxy-policy':`export const protectedPhotoUrl=()=>'/api/catalog/photo/test?url=car';`,
   'ai-discovery':`export const absoluteAvtocenaUrl=url=>new URL(url,'https://avtocena.com').toString();`,
@@ -42,6 +41,7 @@ test('metadata uses displayed calculation, archived client version and proxy ima
  try{
   let result=await m.exports.generateOfferMetadata({params:Promise.resolve({id:'car'})});assert.match(result.title,/1 668 942 ₽/);assert.equal(result.openGraph.title,result.title);assert.match(result.openGraph.images[0].url,/https:\/\/avtocena.com\/api\/catalog\/photo\//);
   assert.doesNotMatch(result.description,/₽|Chevrolet/);
+  const retiredDirect=await m.exports.generateOfferMetadata({params:Promise.resolve({id:'car'}),searchParams:Promise.resolve({direct:'novokuznetsk'})});assert.equal(retiredDirect.title,result.title);
   const shared=await m.exports.generateOfferMetadata({params:Promise.resolve({id:'car'}),searchParams:Promise.resolve({share:'3'})});
   assert.equal(shared.openGraph.title,'Chevrolet Trax Turbo 1.2 — 2024, 1,2 л');assert.doesNotMatch(shared.openGraph.description,/₽/);assert.equal(shared.openGraph.images.length,1);
   assert.equal(shared.twitter.card,'summary_large_image');
