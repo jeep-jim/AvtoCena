@@ -10,7 +10,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   append:
-    if: github.event.head_commit.message == 'Append preparation stop and diagnostic continuation'
+    if: github.event.head_commit.message == 'Append verified projection timeout diagnosis'
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     steps:
@@ -21,11 +21,11 @@ jobs:
       - name: Append only to the unchanged roadmap
         run: |
           set -euo pipefail
-          test "$(git hash-object roadmap.md)" = 7e11c9f02e88773b627235dfe5f42be92e685014
+          test "$(git hash-object roadmap.md)" = 0ba824bc924841c3c186b652728c0dad487f4316
           python3 - <<'PY'
           from pathlib import Path
           p=Path('roadmap.md');old=p.read_bytes()
-          entry=Path('docs/operations/recovery-preparation-stop-20261117.md').read_bytes()
+          entry=Path('docs/operations/projection-timeout-diagnosis-20261117.md').read_bytes()
           p.write_bytes(old+entry)
           assert p.read_bytes().startswith(old)
           PY
@@ -33,5 +33,5 @@ jobs:
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add -- roadmap.md
           test "$(git diff --cached --name-only)" = roadmap.md
-          git commit -m 'Record preparation stop and diagnostic continuation'
+          git commit -m 'Record reproduced projection timeout without full retry'
           git push origin HEAD:main
