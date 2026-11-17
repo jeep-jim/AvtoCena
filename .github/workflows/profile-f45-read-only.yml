@@ -11,9 +11,9 @@ concurrency:
   cancel-in-progress: false
 jobs:
   profile:
-    if: github.event_name == 'workflow_dispatch' || github.event.head_commit.message == 'Profile f45 saved reads without publication'
+    if: github.event_name == 'workflow_dispatch' || github.event.head_commit.message == 'Profile f45 saved read working set without publication'
     runs-on: ubuntu-latest
-    timeout-minutes: 18
+    timeout-minutes: 20
     environment: regcloud-staging
     steps:
       - uses: actions/checkout@v4
@@ -47,11 +47,11 @@ jobs:
           YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
           YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
         run: node --import tsx scripts/profile-f45-read-only.mjs --compare
-      - name: Measure fixed prepared China selection twice without recalculation
+      - name: Measure all five fixed prepared selections twice without recalculation
         if: ${{ !cancelled() }}
-        timeout-minutes: 3
+        timeout-minutes: 5
         env:
-          NODE_OPTIONS: --max-old-space-size=5120
+          NODE_OPTIONS: --max-old-space-size=6144
           JSON_STORAGE_DRIVER: object
           YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
           YC_OBJECT_STORAGE_REGION: us-east-1
@@ -59,4 +59,4 @@ jobs:
           YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
           YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
           YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
-        run: node --import tsx scripts/profile-f45-read-only.mjs --china
+        run: node --import tsx scripts/profile-f45-read-only.mjs --all-markets
