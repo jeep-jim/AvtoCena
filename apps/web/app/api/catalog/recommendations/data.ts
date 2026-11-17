@@ -2,6 +2,7 @@ import 'server-only';
 import {getOfferDetailRecord} from '@/lib/catalog/offer-page-data';
 import {getUnavailableOffer,publicOffer,searchOffers} from '@/lib/catalog/storage';
 import {readAjesPublic} from '@/lib/catalog/ajes-public';
+import {usesAjesMarket} from '@/lib/catalog/ajes-market-selection';
 import {readAjesCount} from '@/lib/catalog/ajes-catalog';
 import {readRelatedModelFamily} from '@/lib/catalog/related-model-family';
 import {selectRelatedOfferGroups,isRenderableRelatedOffer} from '@/lib/catalog/related-offer-selection';
@@ -37,7 +38,9 @@ export async function loadRelatedRecommendations({id,markets}:{id:string;markets
   const empty=()=>({items:[],total:0 as number|null});
   const safeSearch=async(params:Parameters<typeof searchOffers>[0])=>{
     try {
-      return params.market==='japan'||params.market==='korea'||(/^ajes-(?:korea|china)-/.test(current.id)&&params.market===current.market)
+      const ajes=params.market==='korea'?await usesAjesMarket('korea')
+        :params.market==='japan'||(/^ajes-(?:korea|china)-/.test(current.id)&&params.market===current.market);
+      return ajes
         ? await readAjesPublic({table:params.market==='korea'?'korea':params.market==='china'?'china':'stats',make:params.make,model:params.model?(/^ajes-(?:stats|korea|china)-/.test(current.id)?String(current.model):params.model):undefined,pageSize:24}).then(result=>({items:result.items,total:null}))
         : await searchOffers(params,48,'related');
     } catch {partial=true;return {items:[],total:null};}

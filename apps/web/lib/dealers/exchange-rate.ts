@@ -55,11 +55,18 @@ export async function getDealerRate(force=false){
  return state;
 }
 export async function withDealerRate(s:DealerShowcase,refresh=false){
- if(!refresh)s=await withMarketQuotes(s);
- if(s.pricing.rateMode==='manual'||(refresh&&s.offers.length>0&&s.offers.every(o=>o.availability==='stock')))return s;
- // Public pages read the saved quote immediately. Refresh happens in the editor
- // and scheduled job, so a slow provider cannot delay a visitor's page.
- const {quote}=refresh?await getDealerRate():await readDataJson<State>(key,empty);
+ let quote:DealerRate|null;
+ if(!refresh){
+  if(s.pricing.rateMode==='manual')return withMarketQuotes(s);
+  // Market quotes use offer parameters and city, independently of this saved
+  // dealer rate. Keep every full quote and read the same saved rate concurrently.
+  const [priced,state]=await Promise.all([withMarketQuotes(s),readDataJson<State>(key,empty)]);
+  s=priced;quote=state.quote;
+ }else{
+  if(s.pricing.rateMode==='manual'||(s.offers.length>0&&s.offers.every(o=>o.availability==='stock')))return s;
+  // Only explicit editor/scheduled refresh may contact the rate provider.
+  quote=(await getDealerRate()).quote;
+ }
  if(!quote)return s;
  return {...s,pricing:{...s.pricing,usdRub:quote.value,rateAt:quote.quoteAt,rateSource:quote.source}};
 }

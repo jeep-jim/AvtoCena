@@ -31,12 +31,17 @@ test('backfilled specifications preserve identities, unknowns and exact engine/c
 
 test('specification backfill accepts empty markets but rejects a missing populated market',async()=>{
  const {getJsonStorage,StorageConflictError}=await import('../apps/web/lib/data');
+ const {compressedBudgetSelectors,splitPackedBudgetSelectors}=await import('../apps/web/lib/catalog/budget-selector-codec');
  const {backfillBudgetSpecificationSelectors,resetCatalogReadCachesForTests}=await import('../apps/web/lib/catalog/storage');
  const generationId='empty-market-specs';
  const offers:any[]=[{id:'china-one',market:'china',make:'Haval',model:'M6',engineCc:1497,totalRub:2000000}];
  const source=buildBudgetCountIndex(generationId,offers,new Map([['china-one',0]]),3);
- const manifest:any={generationId,markets:{china:{count:1},japan:{count:0}}};
+ const manifest:any={generationId,markets:Object.fromEntries(['china','korea','uae','europe','georgia','japan'].map(m=>[m,{count:m==='china'?1:0}]))};
  const values=new Map<string,any>([['catalog/manifest.json',manifest],[`catalog/generations/${generationId}/indexes/budget-count-v3.json`,source],[`catalog/generations/${generationId}/indexes/budget-cards-v3/0.json`,{generationId,items:offers}]]);
+ const packed=compressedBudgetSelectors(splitPackedBudgetSelectors(source)),root=`catalog/generations/${generationId}/indexes/`;
+ values.set(root+'budget-markets-v3/ready.json',packed.directory);
+ values.set(root+'projection/china.json',{generationId,items:offers});
+ for(const [market,part] of packed.parts)values.set(root+`budget-markets-v3/${market}.json`,part);
  const storage=getJsonStorage(),read=storage.readJson,meta=storage.readJsonWithMeta,write=storage.writeJson;
  const previousVersion=process.env.AVTOCENA_CALCULATION_VERSION;
  process.env.AVTOCENA_CALCULATION_VERSION='a'.repeat(64);
@@ -98,7 +103,10 @@ test('prepared populated partitions do not read the whole catalog for explicitly
  const packed=compressedBudgetSelectors(splitPackedBudgetSelectors(index));
  const root=`catalog/generations/${generationId}/indexes/`;
  const values=new Map<string,any>([['catalog/manifest.json',{generationId,markets:{...Object.fromEntries(markets.map(m=>[m,{count:1}])),japan:{count:0}}}],[root+'budget-markets-v3/ready.json',packed.directory],[root+'budget-cards-v3/0.json',{generationId,items:offers}]]);
- for(const [market,part] of packed.parts)values.set(root+`budget-markets-v3/${market}.json`,part);
+ for(const [market,part] of packed.parts){
+  values.set(root+`budget-markets-v3/${market}.json`,part);
+  values.set(root+`projection/${market}.json`,{generationId,items:offers.filter(row=>row.market===market)});
+ }
  const storage=getJsonStorage(),read=storage.readJson,meta=storage.readJsonWithMeta,write=storage.writeJson;
  let fullReads=0;
  const load=(key:string,fallback:any)=>{if(/budget-count-v[123]\.json$/.test(key)){fullReads++;throw Error('unexpected_whole_catalog');}return values.has(key)?values.get(key):fallback;};
@@ -120,7 +128,10 @@ test('Korea preparation never reads failed China partitions and merges readiness
  const packed=compressedBudgetSelectors(splitPackedBudgetSelectors(index));
  const manifest={generationId,markets:{korea:{count:1},china:{count:1}}};
  const values=new Map<string,any>([['catalog/manifest.json',manifest],[root+'budget-markets-v3/ready.json',packed.directory],[root+'budget-cards-v3/0.json',{generationId,items:[offers[0]]}]]);
- for(const [market,part] of packed.parts)values.set(root+`budget-markets-v3/${market}.json`,part);
+ for(const [market,part] of packed.parts){
+  values.set(root+`budget-markets-v3/${market}.json`,part);
+  values.set(root+`projection/${market}.json`,{generationId,items:offers.filter(row=>row.market===market)});
+ }
  const storage=getJsonStorage(),read=storage.readJson,meta=storage.readJsonWithMeta,write=storage.writeJson;
  const oldVersion=process.env.AVTOCENA_CALCULATION_VERSION;process.env.AVTOCENA_CALCULATION_VERSION='e'.repeat(64);
  const readyPath=root+specificationSelectorDirectory(readCalculationIndex()?.digest||null,'e'.repeat(64))+'/ready.json';
