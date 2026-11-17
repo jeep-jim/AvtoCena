@@ -12,6 +12,7 @@ import {resolveCatalogMarketConfig} from './estimated-market-config';
 import type {CatalogMarket} from './types';
 import type {BudgetCountIndex, BudgetCountRow} from './budget-count-index';
 import {DetailReadCache} from './detail-read-cache';
+import {budgetIndexBytes} from './budget-row-size';
 import {publishSelectorMarket,readCompressedSelector,MAX_PUBLISHED_SELECTOR_BYTES} from './budget-selector-publication';
 import type {CompressedBudgetDirectory} from './budget-selector-codec';
 
@@ -155,7 +156,10 @@ type PreparedSelectionReceipt={
  index:Omit<BudgetCountIndex,'rows'|'otherRows'|'pricingChunks'>;
  directory:CompressedBudgetDirectory;checksum:string;
 };
-const preparedSelectionCache=new DetailReadCache<BudgetCountIndex>({maxEntries:10,maxBytes:64*1024*1024,ttlMs:86400_000,concurrency:2});
+// Measured five-market working set is 132,832,926 serialized bytes. Bound
+// the combined cache to 192 MiB, with headroom for growth and no full-index JSON string.
+// Serialized bytes are not heap bytes; keep serving-process memory checks.
+const preparedSelectionCache=new DetailReadCache<BudgetCountIndex>({maxEntries:10,maxBytes:192*1024*1024,ttlMs:86400_000,concurrency:2,sizeOf:budgetIndexBytes});
 const preparedSelectionKey=(generationId:string,market:string,fingerprint:string)=>hash([generationId,market,fingerprint]);
 const preparedSelectionPrefix=(market:string,key:string)=>`catalog/runtime-budget-selections-v1/${market}/${key}`;
 const priceTuples=(rows:BudgetCountRow[])=>rows.map(row=>[row[5].id,row[1],row[2],row[4],row[6]??null]);
