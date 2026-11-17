@@ -1,0 +1,38 @@
+name: Inspect exact saved Korea conflict pairs
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/inspect-saved-encar-pairs.yml']
+permissions:
+  contents: read
+concurrency:
+  group: saved-encar-conflict-readonly-audit
+  cancel-in-progress: false
+jobs:
+  inspect:
+    if: github.event.head_commit.message == 'Inspect saved Encar conflict pairs 43989797288'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    environment: regcloud-staging
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: node --test tests/encar-conflict-pairs.test.mjs
+      - name: Inspect exact saved Korea conflict pairs only
+        timeout-minutes: 8
+        env:
+          JSON_STORAGE_DRIVER: object
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_REGION: us-east-1
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+        run: node --import tsx scripts/run-encar-conflict-pairs.mjs
+      
