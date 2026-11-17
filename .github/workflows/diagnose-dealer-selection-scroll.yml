@@ -1,0 +1,92 @@
+name: Diagnostic exact dealer selection scroll
+'on':
+  workflow_dispatch: {}
+  push:
+    branches:
+    - main
+    paths:
+    - .github/workflows/diagnose-dealer-selection-scroll.yml
+permissions:
+  contents: read
+concurrency:
+  group: dealer-selection-scroll-diagnostic
+  cancel-in-progress: false
+jobs:
+  diagnostic:
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'workflow_dispatch' || github.event.head_commit.message == 'Diagnose unchanged
+      dealer selection scroll restoration')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        ref: 696e0e71fd85b168b0725cb6bbf798db274e0b3d
+        persist-credentials: false
+    - uses: actions/setup-node@v4
+      with:
+        node-version: 24.22.2
+        cache: npm
+    - name: Pin exact fixture and add observation only
+      run: "set -euo pipefail\ntest \"$(git rev-parse HEAD)\" = 696e0e71fd85b168b0725cb6bbf798db274e0b3d\ntest \"$(git rev-parse HEAD^{tree})\"\
+        \ = b7f181824ec240dbed38f7798ade2b6f72a7ed78\nprintf '%s  %s\\n' 2178d5069e3b376c5ce0994781e82b434f113631f929c0e17bf597f14db11b5d tests/browser/dealer-selection.mjs\
+        \ | sha256sum --check\ncat > \"$RUNNER_TEMP/scroll-trace.patch\" <<'TRACE_PATCH'\n--- a/tests/browser/dealer-selection.mjs\n+++ b/tests/browser/dealer-selection.mjs\n\
+        @@ -56,6 +56,13 @@\n try{for(const width of [390,1440]){\n  const page=await browser.newPage({viewport:{width,height:900},isMobile:width===390,hasTouch:width===390});const\
+        \ errors=[];page.on('pageerror',e=>{errors.push(e.message);console.error('PAGE ERROR',e.stack)});page.on('console',msg=>{if(msg.type()==='error')console.error(msg.text())});\n\
+        \  try{\n+ await page.addInitScript(()=>{\n+  const trace=[];window.selectionTrace=trace;window.selectionExpectedScroll=null;\n+  const\
+        \ record=(event,args=null)=>{try{trace.push({event,ms:Math.round(performance.now()),y:scrollY,expected:window.selectionExpectedScroll,height:document.documentElement.scrollHeight,bodyPosition:document.body.style.position.slice(0,32),bodyTop:document.body.style.top.slice(0,32),active:document.activeElement?.tagName?.slice(0,32),overlay:Boolean(history.state?.acOverlayStep),args});if(trace.length>300)trace.shift();}catch{}};\n\
+        +  window.selectionRecord=record;\n+  const original=window.scrollTo;window.scrollTo=function(...args){record('scrollTo',{top:typeof (typeof\
+        \ args[0]==='object'?args[0].top:args[1])==='number'&&Number.isFinite(typeof args[0]==='object'?args[0].top:args[1])?Math.max(-1e7,Math.min(1e7,typeof\
+        \ args[0]==='object'?args[0].top:args[1])):null,behavior:['instant','auto','smooth'].includes(args[0]?.behavior)?args[0].behavior:null,stack:new\
+        \ Error().stack?.split('\\n').slice(1,5).map(x=>x.slice(0,400)).join('\\n')});return Reflect.apply(original,this,args);};\n+  for(const\
+        \ event of ['scroll','focusin','focusout','popstate'])window.addEventListener(event,()=>record(event),{passive:true});\n+ });\n  await\
+        \ page.addInitScript(()=>{window.calls=[];document.cookie='avtocena_city='+encodeURIComponent('\u041C\u043E\u0441\u043A\u0432\u0430')+';path=/';Object.defineProperty(navigator,'share',{value:async\
+        \ v=>window.calls.push(v)});Object.defineProperty(navigator,'clipboard',{value:{writeText:async v=>window.calls.push(v)}});});\n  await\
+        \ page.goto(origin+'/test/dealer?make=Audi&budget=2500000&city=\u041D\u043E\u0432\u043E\u043A\u0443\u0437\u043D\u0435\u0446\u043A&selection=1#catalog');\n\
+        \  const send=page.getByRole('button',{name:'\u041F\u043E\u0434\u0435\u043B\u0438\u0442\u044C\u0441\u044F \u043F\u043E\u0434\u0431\u043E\
+        \u0440\u043A\u043E\u0439',exact:true});await page.waitForTimeout(200);assert.equal(await send.count(),0,'filters must not activate selection');await\
+        \ page.evaluate(()=>window.dispatchEvent(new CustomEvent('avtocena:dealer-selection-open',{detail:{dealerId:'external'}})));await send.waitFor();await\
+        \ page.locator('[data-city]').filter({hasText:'\u041D\u043E\u0432\u043E\u043A\u0443\u0437\u043D\u0435\u0446\u043A'}).waitFor();\n@@ -101,10\
+        \ +108,11 @@\n  await page.evaluate(()=>window.calls.pop());\n  const target=new URL(shares.at(-1).path,origin);assert.equal(target.hash,'#catalog');assert.equal(target.searchParams.get('city'),'\u041D\
+        \u043E\u0432\u043E\u043A\u0443\u0437\u043D\u0435\u0446\u043A');assert.equal(target.searchParams.get('budget'),'2500000');\n  if(width===390){for(const\
+        \ method of ['button','back']){\n-  const beforeClose=await page.evaluate(()=>{window.scrollTo({top:900,behavior:'instant'});return window.scrollY;});assert.ok(beforeClose>500);await\
+        \ openFilters(page,width);await page.getByRole('dialog',{name:'\u0424\u0438\u043B\u044C\u0442\u0440\u044B \u043A\u0430\u0442\u0430\u043B\
+        \u043E\u0433\u0430'}).waitFor();\n+  const beforeClose=await page.evaluate(()=>{window.scrollTo({top:900,behavior:'instant'});window.selectionExpectedScroll=window.scrollY;window.selectionRecord('before-open');return\
+        \ window.scrollY;});assert.ok(beforeClose>500);await openFilters(page,width);await page.getByRole('dialog',{name:'\u0424\u0438\u043B\u044C\
+        \u0442\u0440\u044B \u043A\u0430\u0442\u0430\u043B\u043E\u0433\u0430'}).waitFor();\n   await page.waitForFunction(()=>Boolean(history.state?.acOverlayStep));\n\
+        +  await page.evaluate(method=>window.selectionRecord('before-close-'+method),method);\n   if(method==='button')await page.locator('button[data-ac-mobile-close=\"\
+        1\"]').click();else await page.goBack();\n-  await page.getByRole('dialog',{name:'\u0424\u0438\u043B\u044C\u0442\u0440\u044B \u043A\u0430\
+        \u0442\u0430\u043B\u043E\u0433\u0430'}).waitFor({state:'hidden'});await page.waitForFunction(y=>Math.abs(scrollY-y)<3,beforeClose);console.log(`close\
+        \ ${method}: restored ${beforeClose}px`);\n+  await page.getByRole('dialog',{name:'\u0424\u0438\u043B\u044C\u0442\u0440\u044B \u043A\u0430\
+        \u0442\u0430\u043B\u043E\u0433\u0430'}).waitFor({state:'hidden'});await page.waitForFunction(y=>Math.abs(scrollY-y)<3,beforeClose);console.log(`close\
+        \ ${method}: restored ${beforeClose}px`);fs.writeFileSync(`${out}/trace-close-${method}.json`,JSON.stringify(await page.evaluate(()=>window.selectionTrace),null,2));\n\
+        \  }}\n  await page.evaluate(()=>window.scrollTo({top:900,behavior:\"instant\"}));await openFilters(page,width);\n  const filterForm=width===390?page.getByRole('dialog',{name:'\u0424\
+        \u0438\u043B\u044C\u0442\u0440\u044B \u043A\u0430\u0442\u0430\u043B\u043E\u0433\u0430'}):page.locator('.ac-catalog-filter-panel');\n@@\
+        \ -217,5 +225,5 @@\n   await page.screenshot({path:`${out}/canonical-selection.png`});\n  }\n  await page.goto(origin+'/test/dealer?visitor=1&make=Audi&city=\u041D\
+        \u043E\u0432\u043E\u043A\u0443\u0437\u043D\u0435\u0446\u043A&selection=1#catalog');await page.locator('#catalog').waitFor();assert.equal(await\
+        \ send.count(),0);assert.equal(await page.locator('[data-city]').textContent(),'\u041D\u043E\u0432\u043E\u043A\u0443\u0437\u043D\u0435\
+        \u0446\u043A');assert.ok((await page.evaluate(()=>document.cookie)).includes(encodeURIComponent('\u041C\u043E\u0441\u043A\u0432\u0430\
+        ')));assert.deepEqual(errors,[]);console.log(`${width}: share, filters, city, anchor, dismissal, stale request and visitor visibility\
+        \ OK`);\n- }catch(error){await page.screenshot({path:`${out}/failure-${width}.png`,fullPage:true});console.error(await page.evaluate(()=>({scrollY,scrollHeight:document.documentElement.scrollHeight,viewport:innerHeight,body:document.body.style.cssText,restoration:history.scrollRestoration,catalogTop:document.getElementById('catalog')?.getBoundingClientRect().top,margin:getComputedStyle(document.getElementById('catalog')).scrollMarginTop,scrollMode:getComputedStyle(document.documentElement).scrollBehavior})));console.error((await\
+        \ page.locator('body').innerText()).slice(-3000));throw error;}finally{await page.close();}\n+ }catch(error){fs.writeFileSync(`${out}/trace-${width}.json`,JSON.stringify(await\
+        \ page.evaluate(()=>window.selectionTrace),null,2));await page.screenshot({path:`${out}/failure-${width}.png`,fullPage:true});console.error(await\
+        \ page.evaluate(()=>({scrollY,scrollHeight:document.documentElement.scrollHeight,viewport:innerHeight,body:document.body.style.cssText,restoration:history.scrollRestoration,catalogTop:document.getElementById('catalog')?.getBoundingClientRect().top,margin:getComputedStyle(document.getElementById('catalog')).scrollMarginTop,scrollMode:getComputedStyle(document.documentElement).scrollBehavior})));console.error((await\
+        \ page.locator('body').innerText()).slice(-3000));throw error;}finally{await page.close();}\n }}finally{await browser.close();server.close();}\n\
+        TRACE_PATCH\ngit apply --check \"$RUNNER_TEMP/scroll-trace.patch\"\ngit apply \"$RUNNER_TEMP/scroll-trace.patch\"\nprintf '%s  %s\\n'\
+        \ 995d400aac872d34842bb4e30c909609e8ed08181c13230f5ff923cd196363be tests/browser/dealer-selection.mjs | sha256sum --check\ntest \"$(git\
+        \ diff --name-only)\" = tests/browser/dealer-selection.mjs\n"
+    - run: |-
+        npm ci
+        npm install --prefix "$RUNNER_TEMP/share-browser" --no-package-lock --ignore-scripts playwright@1.55.0
+    - name: Run original assertion and timeout once with scroll trace
+      timeout-minutes: 3
+      env:
+        PLAYWRIGHT_MODULE: ${{ runner.temp }}/share-browser/node_modules/playwright/index.mjs
+      run: CHROME_BIN=$(command -v google-chrome) node tests/browser/dealer-selection.mjs
+    - uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: dealer-selection-scroll-trace
+        if-no-files-found: warn
+        path: |-
+          artifacts/dealer-selection/*.png
+          artifacts/dealer-selection/trace-*.json
