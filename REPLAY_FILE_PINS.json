@@ -1,6 +1,6 @@
 {
-  ".github/workflows/korea-propane-replay.yml": "ea408b55a5f6deb6e8c6f93128acc70b3a381e48b45641514fdce9ca0ae72991",
-  "README-PACKAGE.md": "bd6b310033907effb385cf56b626dea0884ffca1e1909e82182d1e81d41bec80",
+  ".github/workflows/korea-propane-replay.yml": "fedcdf73d16d21b6cfd55266f288a9c5ff7261dca88b1b5bfd7e1150e21bac74",
+  "UPLOAD_FILES.json": "2c75471c941a0c2a192420279c2ab48c1da483e0f033f1fe3baa2faa325be4ba",
   "affected32-manifest.json": "1d9771e7012b34a8487d43bf229de0cb996128182417fca1ed4150b7be5bc238",
   "propane-source-pins.json": "1c6c6c786a8f5ff043a33f169f8fb66848c693f866ecac110ab5e0f197194558",
   "scripts/korea-propane-replay.mjs": "a5f6345c7a424952a88e75dfae00a8f35d59460808a2da81dae4cc29a3b37e2d",
@@ -21,5 +21,6 @@
   "tests/fullprice-runtime-fixture.mjs": "f536abdde91c631b6a638544046c65c9b2b5fda5b646a5d3862b8ec27ce88dfc",
   "tests/price-lifecycle.test.mjs": "47a34232874c121b5c75580d7f9395b364b0d995db58fed7dbc1c656d2a7f46b",
   "tests/propane-replay.test.mjs": "59ab81f63156f7bc4cccba8f238d8b814d493c56b3e6f3b1033057efff5dc74e",
-  "tests/propane-staging-smoke.mjs": "35bb834889fad7992dc9f60c84c902bf985c572a71d5160d32a6e513e64178bd"
+  "tests/propane-staging-smoke.mjs": "35bb834889fad7992dc9f60c84c902bf985c572a71d5160d32a6e513e64178bd",
+  "tests/propane-upload-closure.test.mjs": "cb011200d889718fae5fa9aa37191fcb50e84bb002e31fc2e0cf9cf473a9d2d2"
 }

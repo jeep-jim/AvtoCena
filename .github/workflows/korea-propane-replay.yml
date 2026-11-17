@@ -8,7 +8,7 @@ permissions: {contents: read, actions: read}
 concurrency: {group: owner-saved-korea-readonly-audit, cancel-in-progress: false}
 jobs:
   replay:
-    if: github.ref == 'refs/heads/main' && (github.event_name == 'workflow_dispatch' || github.event.head_commit.message == 'Replay actual propane32 producer62dd e268 v1')
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'workflow_dispatch' || github.event.head_commit.message == 'Replay actual propane32 producer62dd e268 v2')
     runs-on: ubuntu-24.04
     environment: regcloud-staging
     timeout-minutes: 55
@@ -41,7 +41,7 @@ jobs:
           npm ci --prefix app-after
           npm ci --prefix raw-app
       - name: Offline bounded contract, network and pricing lifecycle tests
-        run: node --import tsx --test tests/propane-replay.test.mjs tests/fullprice-network-guard.test.mjs tests/price-lifecycle.test.mjs tests/automatic-price-probe.test.mjs
+        run: node --import tsx --test tests/propane-upload-closure.test.mjs tests/propane-replay.test.mjs tests/fullprice-network-guard.test.mjs tests/price-lifecycle.test.mjs tests/automatic-price-probe.test.mjs
       - name: Verify original saved collection authority before credentials
         uses: actions/github-script@v7
         with:
