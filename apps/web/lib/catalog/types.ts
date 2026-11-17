@@ -54,6 +54,8 @@ export type VehicleOffer = {
   trim?: string;
   year: number;
   productionDate?: string;
+  /** Independently attested manufacturing year; year retains model year. */
+  productionYear?: number;
   inventorySourceDate?: string;
   mileageKm?: number;
   engineCc?: number;

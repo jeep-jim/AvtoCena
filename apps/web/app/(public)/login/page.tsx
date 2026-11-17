@@ -24,8 +24,17 @@ export default async function LoginPage({ searchParams }: { searchParams?: Promi
   const params = (await searchParams) ?? {};
   const nextPath = firstParam(params.next) || "/account";
   const errorCode = firstParam(params.error) || "";
-  const features = await readPublicFeatures();
-  const stored = await readShowcase(PILOT_DEALER_ID);
+  const featuresPromise = readPublicFeatures();
+  // Start independent reads together, preserving feature-error precedence.
+  // Handle showcase rejection even if the feature read fails first.
+  const storedResultPromise = readShowcase(PILOT_DEALER_ID).then(
+    value => ({ok: true as const, value}),
+    error => ({ok: false as const, error}),
+  );
+  const features = await featuresPromise;
+  const storedResult = await storedResultPromise;
+  if (storedResult.ok === false) throw storedResult.error;
+  const stored = storedResult.value;
   const dealer = stored?.profileEnabled ? await withDealerRate(await availableShowcase(stored)) : null;
   const topDealer = dealer?.profileEnabled ? {profile:publicDealerProfile(dealer),items:publicRail(dealer),verified:(await findDealer(PILOT_DEALER_ID))?.status==='verified'} : undefined;
 

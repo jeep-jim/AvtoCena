@@ -59,6 +59,7 @@ test('existing compact indexes are upgraded for counts, facets and pages includi
   [`catalog/generations/${generationId}/indexes/budget-count-v3.json`,source],
   [`catalog/generations/${generationId}/indexes/budget-cards-v3/0.json`,{generationId,items:rows}],
  ]);
+ for(const row of rows)values.set(`catalog/generations/${generationId}/indexes/projection/${row.market}.json`,{generationId,items:[row]});
  const old=compressedBudgetSelectors(splitPackedBudgetSelectors(source));
  for(const [market,part] of old.parts)values.set(`catalog/generations/${generationId}/indexes/budget-markets-v4/${market}.json`,part);
  values.set(`catalog/generations/${generationId}/indexes/budget-markets-v4/ready.json`,old.directory);
