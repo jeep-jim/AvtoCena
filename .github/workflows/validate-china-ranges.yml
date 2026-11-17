@@ -52,3 +52,5 @@ jobs:
         name: exact-china-range-validation
         path: china-range-validation.json
         if-no-files-found: error
+
+# Validate repository-relative test imports before any storage reads.
