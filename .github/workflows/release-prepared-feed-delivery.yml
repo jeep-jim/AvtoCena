@@ -2710,3 +2710,5 @@ jobs:
         == 'workflow_dispatch' && inputs.phase == 'activate') }}
 
 # Reviewed prepare-only operation: 2026-11-16, exact candidate f45efaf2, source and controller CI passed.
+
+# Activation after verified prepare-only run43873810298 attempt2, evidence14308290994; exact source and all acceptance gates unchanged.
