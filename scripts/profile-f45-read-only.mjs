@@ -6,26 +6,36 @@ import http from 'node:http';
 import https from 'node:https';
 import {syncBuiltinESMExports} from 'node:module';
 import {getHeapStatistics} from 'node:v8';
+import {AsyncLocalStorage} from 'node:async_hooks';
 
 const SHA='f45efaf2b172af41d14987fb642e8e6b6df78cdd';
 const PREFIX='/avtocena-staging-8120751/migration-staging/full-20261011/';
 const mutations=['writeJson','deleteJson','putBinary','deleteBinary','deleteObjects','deletePrefix'];
 let forbidden=0,currentStage='startup';
 const guardEvents=[];
+const stagesContext=new AsyncLocalStorage();
+const activeStage=()=>stagesContext.getStore()||currentStage;
+let publicCbrReads=0;
 const memory=()=>({...process.memoryUsage(),heapSizeLimit:getHeapStatistics().heap_size_limit});
 function errorInfo(error){
  const name=['Error','AssertionError','TypeError','RangeError','SyntaxError'].includes(error?.name)?error.name:'OtherError';
  const code=['ERR_MODULE_NOT_FOUND','MODULE_NOT_FOUND','ERR_ASSERTION','ERR_INVALID_ARG_TYPE','ERR_UNKNOWN_FILE_EXTENSION'].includes(error?.code)?error.code:'OTHER';
  const prefix=String(error?.message||'').split(':')[0];
  const messageCode=/^(?:diagnostic_|catalog_|object_storage_)[a-z0-9_]{1,70}$/.test(prefix)?prefix:'REDACTED';
- return {stage:currentStage,name,code,messageCode,forbiddenAttempts:forbidden,guardEvents:guardEvents.slice(0,20),memory:memory()};
+ return {stage:activeStage(),name,code,messageCode,forbiddenAttempts:forbidden,publicCbrReads,guardEvents:guardEvents.slice(0,20),memory:memory()};
 }
-const deny=(reason='unspecified')=>{forbidden++;if(guardEvents.length<20)guardEvents.push({stage:currentStage,reason});throw Error('diagnostic_operation_forbidden');};
+const deny=(reason='unspecified')=>{forbidden++;if(guardEvents.length<20)guardEvents.push({stage:activeStage(),reason});throw Error('diagnostic_operation_forbidden');};
 function guardedFetch(original){return (input,init)=>{
  const method=String(init?.method||(input instanceof Request?input.method:'GET')).toUpperCase();
  const url=new URL(input instanceof Request?input.url:String(input));
  if(!['GET','HEAD'].includes(method))return deny('non_read_method');
- if(url.origin!=='https://s3.regru.cloud')return deny(/(?:profinance|cbr)\.ru$/.test(url.hostname)?'external_rate_provider':'external_host');
+ if(url.href==='https://www.cbr.ru/scripts/XML_daily.asp'&&method==='GET'){
+  const headers=new Headers(init?.headers||(input instanceof Request?input.headers:undefined));
+  if(['authorization','proxy-authorization','cookie'].some(name=>headers.has(name)))return deny('cbr_credentials');
+  publicCbrReads++;
+  return original(input,{...init,redirect:'error',credentials:'omit'});
+ }
+ if(url.origin!=='https://s3.regru.cloud')return deny(url.hostname==='www.cbr.ru'?'cbr_endpoint_not_allowed':/(?:^|\.)profinance\.ru$/.test(url.hostname)?'profinance_not_allowed':'external_host');
  if(!decodeURIComponent(url.pathname).startsWith(PREFIX))return deny('outside_storage_prefix');
  if(url.search||url.username||url.password)return deny('query_or_userinfo');
  return original(input,{...init,redirect:'error'});
@@ -46,8 +56,14 @@ async function selfTest(){
  assert.throws(()=>fake(new Request(u,{method:'POST'})));
  for(const bad of ['https://jq.profinance.ru/html/htmlquotes/site.jsp','https://s3.regru.cloud/other/key',u+'?delete','http://s3.regru.cloud'+PREFIX+'x'])assert.throws(()=>fake(bad));
  assert.equal(calls,2);
+ const cbr='https://www.cbr.ru/scripts/XML_daily.asp';
+ assert.equal(await fake(cbr,{method:'GET',redirect:'follow'}),'ok');
+ for(const method of ['HEAD','POST','PUT'])assert.throws(()=>fake(cbr,{method}));
+ for(const bad of [cbr+'?date_req=17/11/2026',cbr+'#x','https://user:pass@www.cbr.ru/scripts/XML_daily.asp','https://www.cbr.ru/other','http://www.cbr.ru/scripts/XML_daily.asp'])assert.throws(()=>fake(bad));
+ for(const name of ['authorization','cookie','proxy-authorization'])assert.throws(()=>fake(cbr,{headers:{[name]:'SECRET'}}));
+ assert.equal(calls,3);
  const s={};lockStorage(s);for(const name of mutations)await assert.rejects(s[name]());
- const redacted=JSON.stringify(errorInfo(Object.assign(new Error('SECRET query token'),{code:'SECRET'})));assert.ok(!redacted.includes('SECRET'));assert.ok(guardEvents.some(x=>x.reason==='external_rate_provider'));
+ const redacted=JSON.stringify(errorInfo(Object.assign(new Error('SECRET query token'),{code:'SECRET'})));assert.ok(!redacted.includes('SECRET'));assert.ok(guardEvents.some(x=>x.reason==='profinance_not_allowed'));
  assert.throws(ensureClean);console.log('READ_ONLY_GUARD_SELF_TEST passed: method, host, prefix, query, redirect policy, all storage mutations, swallowed attempt detection');
 }
 async function setup(){
@@ -85,7 +101,7 @@ async function login(mode){
  for(const [phase,wait] of [['initial',0],['warm',0],['after35s',35000],['afterAdditional65s',65000]]){
   if(wait)await new Promise(r=>setTimeout(r,wait));
   reads.length=0;const stages={};const start=performance.now();
-  const measure=async(name,fn)=>{currentStage='login:'+name;const t=performance.now();try{return await fn();}catch(error){console.error('DIAGNOSTIC_ERROR',JSON.stringify({...errorInfo(error),stage:'login:'+name}));throw error;}finally{stages[name]=+(performance.now()-t).toFixed(2);}};
+  const measure=(name,fn)=>stagesContext.run('login:'+name,async()=>{const t=performance.now();try{return await fn();}catch(error){console.error('DIAGNOSTIC_ERROR',JSON.stringify(errorInfo(error)));throw error;}finally{stages[name]=+(performance.now()-t).toFixed(2);}});
   let features,stored;
   if(mode==='sequential'){
    features=await measure('features',()=>readPublicFeatures());stored=await measure('showcase',()=>readShowcase(PILOT_DEALER_ID));
@@ -98,7 +114,7 @@ async function login(mode){
   const dealer=stored?.profileEnabled?await measure('quotesAndSavedRate',async()=>withDealerRate(await measure('available',()=>availableShowcase(stored)))):null;
   const topDealer=dealer?.profileEnabled?{profile:publicDealerProfile(dealer),items:publicRail(dealer),verified:(await measure('verification',()=>findDealer(PILOT_DEALER_ID)))?.status==='verified'}:undefined;
   ensureClean();
-  const report={memory:memory(),mode,phase,totalMs:+(performance.now()-start).toFixed(2),elapsedMs:+(performance.now()-began).toFixed(2),stages,readCount:reads.length,reads:[...reads],offers:topDealer?.items.length||0,featureVersion:features.version,quoteErrors:dealer?.offers.filter(o=>o.availability==='market'&&o.marketQuote?.error).length||0,outputDigest:createHash('sha256').update(JSON.stringify({features,topDealer},function(key,value){return key==='marketQuote'&&value?Object.fromEntries(Object.entries(value).filter(([field])=>field!=='at')):value;})).digest('hex')};
+  const report={memory:memory(),publicCbrReads,mode,phase,totalMs:+(performance.now()-start).toFixed(2),elapsedMs:+(performance.now()-began).toFixed(2),stages,readCount:reads.length,reads:[...reads],offers:topDealer?.items.length||0,featureVersion:features.version,quoteErrors:dealer?.offers.filter(o=>o.availability==='market'&&o.marketQuote?.error).length||0,outputDigest:createHash('sha256').update(JSON.stringify({features,topDealer},function(key,value){return key==='marketQuote'&&value?Object.fromEntries(Object.entries(value).filter(([field])=>field!=='at')):value;})).digest('hex')};
   reports.push(report);console.log('LOGIN_READ_PROFILE',JSON.stringify(report));
  }
  console.log('WORKER_REPORT',JSON.stringify(reports));
