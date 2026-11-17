@@ -91,3 +91,5 @@ jobs:
           name: korea-fullprice-actual-audit
           path: korea-fullprice-audit.json
           retention-days: 7
+
+# Each offline fixture owns its data directory even with shared RUNNER_TEMP.
