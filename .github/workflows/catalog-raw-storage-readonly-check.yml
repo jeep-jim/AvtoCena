@@ -1,3 +1,4 @@
+# One-time fresh transport and publication-lease observation after reviewed precision fix (2026-11-17).
 name: Verify saved raw storage without writes
 on:
   workflow_dispatch:
