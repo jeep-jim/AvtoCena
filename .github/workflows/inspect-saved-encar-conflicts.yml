@@ -1,0 +1,59 @@
+name: Inspect saved paid Encar report conflicts
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/inspect-saved-encar-conflicts.yml']
+permissions:
+  contents: read
+concurrency:
+  group: saved-encar-conflict-readonly-audit
+  cancel-in-progress: false
+jobs:
+  inspect:
+    if: github.event.head_commit.message == 'Inspect saved Encar conflicts 43989797288'
+    environment: regcloud-staging
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Verify read-only diagnostic behavior
+        run: node --test tests/paid-encar-conflict-audit.test.mjs
+      - name: Inspect saved snapshot only, without supplier requests or storage writes
+        env:
+          JSON_STORAGE_DRIVER: object
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_REGION: us-east-1
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+          YC_OBJECT_STORAGE_REQUEST_TIMEOUT_MS: '60000'
+          NODE_OPTIONS: --max-old-space-size=6144
+        run: |
+          node --import tsx --input-type=module <<'JS'
+          import fs from 'node:fs/promises';
+          import assert from 'node:assert/strict';
+          import {getJsonStorage} from './apps/web/lib/data.ts';
+          import {auditSavedSnapshot} from './scripts/catalog-paid-encar-conflict-audit.mjs';
+          const source=getJsonStorage();assert.equal(source.driver,'object');
+          // Only a read method is passed. The audit cannot write, list, delete,
+          // change a manifest or contact the supplier; report contains no payloads.
+          const storage=Object.freeze({readJson:source.readJson.bind(source)});
+          const report=await auditSavedSnapshot({storage,root:'catalog/intake-staging/encar/43989797288/1',concurrency:4,
+            onProgress:x=>console.log(JSON.stringify({stage:'readonly_conflict_progress',...x}))});
+          await fs.writeFile('paid-encar-conflicts.json',JSON.stringify(report,null,2));
+          console.log(JSON.stringify(report));
+          JS
+      - uses: actions/upload-artifact@v4
+        with:
+          name: saved-encar-conflicts-43989797288
+          path: paid-encar-conflicts.json
+          if-no-files-found: error
+          retention-days: 7
