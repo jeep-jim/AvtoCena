@@ -41,7 +41,8 @@ async function readState(storage, policy) {
 /** The claim is durable; the queue is process-local. A writing claim is never
  * automatically resumed by another process, even with the same Actions owner.
  * A ready claim can be recovered only for read-only handoff completion. */
-export async function openRawProducerSession({storage, operationId, owner, references, binding = null, existingPin = false, readOnly = false}) {
+export async function openRawProducerSession({storage, operationId, owner, references, binding = null, existingPin = false, readOnly = false, readConcurrency = 1}) {
+  assert.ok(readConcurrency === 1 || readConcurrency === 4 && readOnly, 'raw_coord_read_concurrency');
   const policy = await readRawCoordinationPolicy(storage);
   if (!policy) {
     assert.equal(binding, null, 'raw_coord_required_session_disabled');
@@ -63,7 +64,14 @@ export async function openRawProducerSession({storage, operationId, owner, refer
   }
   let accepting = !ready, control = Promise.resolve(), sealPromise = null;
   const pending = new Set();
-  let ioFailure = null;
+  let ioFailure = null, readPermissionFailure = null, activeReads = 0;
+  const readWaiters = [];
+  async function readSlot(action) {
+    if (activeReads >= readConcurrency) await new Promise(resolve => readWaiters.push(resolve));
+    else activeReads++;
+    try {return await action();}
+    finally {const next = readWaiters.shift();if(next)next();else activeReads--;}
+  }
   const currentBinding = () => ({version: 1, policy: {...policy}, ticket: frozenCopy(capability)});
   const enqueueControl = action => {
     const result = control.then(action);
@@ -75,11 +83,23 @@ export async function openRawProducerSession({storage, operationId, owner, refer
   function io(method, args, write, perform) {
     assert.ok(accepting, 'raw_coord_session_closed');
     assert.ok(!write || !readOnly, 'raw_coord_read_session_write_forbidden');
-    const permission = enqueueControl(async () => {
+    // Opt-in read-only mode: preserve EACH live authority check; parallelize
+    // independent checks, not their results. Capture the prior mutation barrier.
+    const priorControl = control;
+    const check = async () => {
       const state = await readState(storage, policy);
       (write ? assertRawWritePermit : assertRawReadPermit)(state, capability, args[0]);
-    });
-    const operation = permission.then(() => perform ? perform() : storage[method](...args));
+    };
+    const execute = () => perform ? perform() : storage[method](...args);
+    const operation = readConcurrency === 4 && !write
+      ? readSlot(async () => {
+          await priorControl;
+          if (readPermissionFailure) throw readPermissionFailure;
+          try {await check();} catch(error) {readPermissionFailure ||= error;throw error;}
+          if (readPermissionFailure) throw readPermissionFailure;
+          return execute();
+        })
+      : enqueueControl(check).then(execute);
     pending.add(operation);
     operation.then(() => pending.delete(operation), error => {
       pending.delete(operation);
@@ -111,7 +131,10 @@ export async function openRawProducerSession({storage, operationId, owner, refer
     extend(references) {
       assert.ok(accepting, 'raw_coord_session_closed');
       const added = coordinatedRawReferences(references);
+      const earlierReads = readConcurrency === 4 ? [...pending] : [];
       return enqueueControl(async () => {
+        await Promise.allSettled(earlierReads);
+        if (readPermissionFailure) throw readPermissionFailure;
         await readState(storage, policy);
         capability = (await mutateRawCoordination({storage, command: {type: 'extend', ticket: capability, references: added}})).result;
         return currentBinding();
@@ -125,7 +148,7 @@ export async function openRawProducerSession({storage, operationId, owner, refer
         let controlFailure = null;
         try {await control;} catch (error) {controlFailure = error;}
         await Promise.allSettled([...pending]);
-        if (controlFailure || ioFailure && !readOnly) throw Error('raw_coord_session_io_failed', {cause: controlFailure || ioFailure});
+        if (controlFailure || readPermissionFailure || ioFailure && !readOnly) throw Error('raw_coord_session_io_failed', {cause: controlFailure || readPermissionFailure || ioFailure});
         await readState(storage, policy);
         capability = (await mutateRawCoordination({storage, command: {type: 'seal', ticket: capability, allWritesDrained: true}})).result;
         ready = true;

@@ -10,6 +10,7 @@ export const RAW_PREFIXES = Object.freeze({
   'che168-replica': 'catalog/provider-replicas/che168/',
   'che168-journal': 'catalog/intake-working/che168-v1/',
   'encar-snapshot': 'catalog/intake-staging/encar/',
+  'encar-recovery-spool': 'catalog/recovery-raw-spool/v1/',
   'encar-reports': 'catalog/paid-encar-reports/v1/',
   'nonjp-intake': 'catalog/nonjp-intake/v1/',
 });
@@ -18,6 +19,7 @@ const ROOTS = {
   'che168-replica': new RegExp('^' + UUID + '$'),
   'che168-journal': /^\d{1,20}$/,
   'encar-snapshot': /^\d{1,20}\/[1-9]\d{0,5}$/,
+  'encar-recovery-spool': /^[a-f0-9]{64}$/,
   'encar-reports': /^[1-9]\d{0,15}$/,
   'nonjp-intake': /^(?:china|korea|uae|europe|georgia)\/\d{1,20}\/[1-9]\d{0,5}$/,
 };
@@ -407,7 +409,7 @@ export async function releaseRawHandoff({storage, handoff, manifest, clock = Dat
 }
 
 /** Producer-owned pin, separate from the publication lease; age never releases it. */
-export async function openRawFeedPin({storage, operationId, owner, references, clock = Date.now, readOnly = false}) {
+export async function openRawFeedPin({storage, operationId, owner, references, clock = Date.now, readOnly = false, readConcurrency = 1}) {
   assert.equal(storage.driver, 'object', 'raw_pin_requires_object_storage');
   const identity = pinIdentity(operationId, owner), key = RAW_PIN_PREFIX + operationId + '.json';
   let meta = await storage.readJsonWithMeta(key, null), sequence = Promise.resolve(), handoffRequested = false;
@@ -426,7 +428,7 @@ export async function openRawFeedPin({storage, operationId, owner, references, c
   const {openRawProducerSession} = await import('./catalog-raw-session.mjs');
   const session = await openRawProducerSession({storage, operationId, owner,
     references: meta.found ? meta.value.references : roots,
-    binding: meta.value?.coordination || null, existingPin: meta.found, readOnly});
+    binding: meta.value?.coordination || null, existingPin: meta.found, readOnly, readConcurrency});
   if (!meta.found) {
     const at = new Date(clock()).toISOString();
     await save({version: 1, ...identity, state: 'loading', createdAt: at, updatedAt: at, references: roots,

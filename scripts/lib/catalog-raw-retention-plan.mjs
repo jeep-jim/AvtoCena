@@ -21,6 +21,7 @@ function groupForObject(key) {
       'che168-replica': /^(?:manifest\.json|\d+\.gz)$/,
       'che168-journal': /^(?:head\.json|[a-f0-9-]{36}\.json)$/,
       'encar-snapshot': /^(?:start\.json|complete\.json|(?:pages|page-receipts)\/[1-9]\d*\.json)$/,
+      'encar-recovery-spool': /^(?:complete\.json|chunks\/[1-9]\d*\/(?:data|commit)\.json)$/,
       'encar-reports': /^(?:complete\.json|(?:history|inspection)\/[a-f0-9]{2,3}\.json)$/,
       'nonjp-intake': /^(?:complete\.json|files\/(?:report\.json|[a-z0-9_-]+-[0-9]{6}\.jsonl)\/[0-9]+-[a-f0-9]{64}\.json)$/i,
     }[kind];
@@ -34,6 +35,8 @@ function groupForObject(key) {
 function completeGroup(group, terminalRoots) {
   const value = group.receipt, keys = new Set(group.objects.map(row => row.leaf));
   if (!value || typeof value !== 'object' || Array.isArray(value)) return false;
+  // Recovery transport is never a retirement witness; keep every spool protected.
+  if(group.kind==='encar-recovery-spool')return false;
   let expected;
   if (group.kind === 'che168-snapshot') {
     try { if (snapshotBinding(value.config) !== value.binding) return false; } catch { return false; }
