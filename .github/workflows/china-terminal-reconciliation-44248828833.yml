@@ -1,0 +1,191 @@
+name: Reconcile terminal China metadata readonly
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/china-terminal-reconciliation-44248828833.yml']
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: china-terminal-reconciliation-readonly-44248828833
+  cancel-in-progress: false
+jobs:
+  reconcile:
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && github.event.head_commit.message == 'Reconcile terminal China 44248828833 metadata only'))
+    environment: regcloud-staging
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Confirm exact producer is terminal before storage reads
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          timeout --kill-after=5s 30s gh api repos/jeep-jim/AvtoCena/actions/runs/44248828833 > terminal-before.json
+          python - <<'PY_TERMINAL'
+          import json
+          x=json.load(open('terminal-before.json'))
+          assert x['id']==44248828833 and x['status']=='completed'
+          assert x['head_sha']=='7ccfc78b04d92f3b40bf8324bee563ffe10fa2f0'
+          assert x['run_attempt']==1 and x['event']=='push' and x['conclusion'] in ['success','failure','cancelled','timed_out']
+          PY_TERMINAL
+      - name: Read exact completed jobs and bounded producer evidence
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          timeout --kill-after=5s 30s gh api 'repos/jeep-jim/AvtoCena/actions/runs/44248828833/attempts/1/jobs?per_page=100' > jobs-before.json
+          timeout --kill-after=5s 30s gh api 'repos/jeep-jim/AvtoCena/actions/runs/44248828833/artifacts?per_page=100' > artifacts.json
+          cat > "$RUNNER_TEMP/artifact-metadata.py" <<'PY_ARTIFACT'
+          import json,hashlib,zipfile,sys,pathlib,stat
+          RUN=44248828833;HEAD='7ccfc78b04d92f3b40bf8324bee563ffe10fa2f0'
+          def select():
+           r=json.load(open('terminal-before.json'));j=json.load(open('jobs-before.json'));a=json.load(open('artifacts.json'))
+           assert r['id']==RUN and r['head_sha']==HEAD and r['run_attempt']==1 and r['event']=='push' and r['status']=='completed' and r['conclusion'] in ['success','failure','cancelled','timed_out']
+           assert 0<j['total_count']<=100 and len(j['jobs'])==j['total_count'] and all(x['status']=='completed' and x['run_id']==RUN and x['head_sha']==HEAD and x['run_attempt']==1 for x in j['jobs'])
+           assert a['total_count']<=100 and len(a['artifacts'])==a['total_count']
+           found=[x for x in a['artifacts'] if x['name']==f'bounded-china-evidence-{RUN}-1' and not x['expired']]
+           assert len(found)<=1
+           if not found:
+            json.dump({'artifactAvailable':False,'terminalConclusion':r['conclusion'],'publicationOutcomeProven':False},open('producer-metadata.json','w'));return
+           x=found[0];assert x['workflow_run']['id']==RUN and x['workflow_run']['head_sha']==HEAD and 0<x['size_in_bytes']<=32*1024**2
+           assert isinstance(x['digest'],str) and len(x['digest'])==71 and x['digest'].startswith('sha256:');int(x['digest'][7:],16)
+           assert isinstance(x['id'],int) and x['id']>0
+           json.dump({'id':x['id'],'sha256':x['digest'][7:],'size':x['size_in_bytes']},open('selected-artifact.json','w'));print(x['id'])
+          def parse():
+           x=json.load(open('selected-artifact.json'));b=pathlib.Path('producer.zip').read_bytes();assert len(b)==x['size'] and hashlib.sha256(b).hexdigest()==x['sha256']
+           out={'artifactAvailable':True,'artifactSha256':x['sha256'],'artifactId':x['id'],'metadata':{},'publicationOutcomeProven':False}
+           with zipfile.ZipFile('producer.zip') as z:
+            infos=z.infolist();assert len(infos)<=256;names=[i.filename for i in infos];assert len(names)==len(set(names));assert sum(i.file_size for i in infos)<=64*1024**2
+            for i in infos:assert not i.filename.startswith('/') and all(p not in ['','..','.'] for p in i.filename.rstrip('/').split('/')) and '\\' not in i.filename and not stat.S_ISLNK(i.external_attr>>16) and not i.flag_bits&1
+            for name in ['work/terminal.json','evidence/controller-resource.json','work/cleanup.json','evidence/terminal.failure.json','work/capture-inventory.json','work/preparation-step.json','work/prepared/canonical-admission.json']:
+             if name not in names:continue
+             assert z.getinfo(name).file_size<=65536
+             raw=z.read(name);v=json.loads(raw);safe={}
+             for k in ['ok','mode','generationId','publicManifestSha256','internalManifestSha256','pinPublished','siteAcceptancePending','cursorNotAdvanced','cleanupFailed','reconciliationRequired','publicationStarted','phase','code','signal','remainingRssBytes','configSha256','planSha256','step','version']:
+              if k in v and (v[k] is None or isinstance(v[k],(bool,int)) or isinstance(v[k],str) and len(v[k])<=180 and all(c.isalnum() or c in '_:-.' for c in v[k])):safe[k]=v[k]
+             if name=='work/prepared/canonical-admission.json':
+              for k in ['targetRows','protectedRows','actualRows','conservativeUpperRows','executionMaxRows']:
+               if type(v.get(k)) is int and 0<=v[k]<=9007199254740991:safe[k]=v[k]
+              if type(v.get('canonicalStarted')) is bool:safe['canonicalStarted']=v['canonicalStarted']
+             if name=='work/capture-inventory.json':
+              for k in ['rows','uniqueIds','uniqueChinaIds','uniqueProtectedIds','totalDuplicateOccurrences','withinPartitionDuplicateOccurrences','crossPartitionDuplicateOccurrences','serializedRowBytes','maxSerializedRowBytes','accountedIdUtf8Bytes','imageOccurrences','imageOwnerUtf8BytesUpper','imageOwnerUtf16PayloadBytesUpper']:
+               if type(v.get(k)) is int and 0<=v[k]<=9007199254740991:safe[k]=v[k]
+             if isinstance(v.get('numeric'),dict):safe['numeric']={k:v['numeric'][k] for k in ['passed','allChinaRowsChecked'] if isinstance(v['numeric'].get(k),bool)}
+             out['metadata'][name]={'sha256':hashlib.sha256(raw).hexdigest(),'bytes':len(raw),'fields':safe}
+           json.dump(out,open('producer-metadata.json','w'))
+          if __name__=='__main__':
+           try:select() if sys.argv[1]=='select' else parse()
+           except Exception:print('bounded_producer_metadata_refused',file=sys.stderr);sys.exit(1)
+          PY_ARTIFACT
+          artifact_id=$(python "$RUNNER_TEMP/artifact-metadata.py" select)
+          if [ -n "$artifact_id" ]; then
+            timeout --kill-after=5s 60s gh api "repos/jeep-jim/AvtoCena/actions/artifacts/${artifact_id}/zip" | head -c 33554433 > producer.zip
+            python "$RUNNER_TEMP/artifact-metadata.py" parse
+          fi
+      - name: Prepare exact bounded read-only reader
+        run: |
+          cat > "$RUNNER_TEMP/china-reconcile.mjs" <<'READER'
+          import {createHash,createHmac} from 'node:crypto';
+          import {writeFile} from 'node:fs/promises';
+          import {pathToFileURL} from 'node:url';
+          const ENDPOINT='https://s3.regru.cloud',BUCKET='avtocena-staging-8120751',PREFIX='migration-staging/full-20261011/';
+          export const RELEASE='83ff17075e9188dcf227c8752dc064248d5f42e0';
+          export const KEYS=Object.freeze(['catalog/import-lock.json','catalog/manifest.json','catalog/internal/manifest.json','catalog/raw-feed-coordination/v1/policy.json','catalog/raw-feed-coordination/v1/state.json','catalog/raw-feed-pins/v1/nonjp-intake-china-44121174584-1.json','catalog/public/facets.json','catalog/public/brand-summary.json','catalog/public/overview.json','catalog/public/sitemap-projection.json',...['all','china','korea','uae','europe','georgia','japan'].map(m=>'catalog/public/projection/'+m+'.json')]);
+          const sha=s=>createHash('sha256').update(s).digest('hex'),hmac=(key,s)=>createHmac('sha256',key).update(s).digest();
+          export function signedGet(key,credentials,date=new Date()){
+           if(!(KEYS.includes(key)||/^catalog\/generations\/gen_\d+_[a-z0-9]+\/indexes\/budget-markets-v3\/ready\.json$/.test(key)))throw Error('probe_key_denied');
+           if(!credentials.accessKeyId||!credentials.secretAccessKey)throw Error('probe_credentials_missing');
+           const pathname='/'+BUCKET+'/'+PREFIX+key,url=ENDPOINT+pathname;
+           const stamp=date.toISOString().replace(/[:-]|\.\d{3}/g,''),day=stamp.slice(0,8),scope=`${day}/us-east-1/s3/aws4_request`;
+           const headers={host:'s3.regru.cloud','x-amz-content-sha256':sha(''),'x-amz-date':stamp};
+           const names=Object.keys(headers).sort(),canonical=names.map(k=>`${k}:${headers[k]}\n`).join('');
+           const request=['GET',pathname,'',canonical,names.join(';'),sha('')].join('\n');
+           const signing=hmac(hmac(hmac(hmac('AWS4'+credentials.secretAccessKey,day),'us-east-1'),'s3'),'aws4_request');
+           const signature=createHmac('sha256',signing).update(`AWS4-HMAC-SHA256\n${stamp}\n${scope}\n${sha(request)}`).digest('hex');
+           headers.authorization=`AWS4-HMAC-SHA256 Credential=${credentials.accessKeyId}/${scope}, SignedHeaders=${names.join(';')}, Signature=${signature}`;
+           return {url,options:{method:'GET',headers,redirect:'error'}};
+          }
+          const token=v=>typeof v==='string'&&v.length<=180&&/^[a-zA-Z0-9_:.+\-TZ]*$/.test(v)?v:null;
+          const etag=v=>typeof v==='string'&&/^"?[a-fA-F0-9-]{1,128}"?$/.test(v)?v:null;
+          export function metadata(value){
+           const out={};for(const key of ['generationId','expectedBaseGenerationId','producerRevision','operationId','operationType','startedAt','updatedAt','heartbeatAt','lockedUntil','publishedAt','completedAt','stage','phase','schemaVersion','builtAt','encyclopediaDigest','calculationVersion','format'])if(value?.[key]!=null)out[key]=typeof value[key]==='number'&&Number.isSafeInteger(value[key])?value[key]:token(value[key]);
+           if(value?.activeSlot!=null)out.activeSlot=['a','b'].includes(value.activeSlot)?value.activeSlot:null;
+           if(value?.contentHash!=null)out.contentHash=typeof value.contentHash==='string'&&/^[a-f0-9]{64}$/.test(value.contentHash)?value.contentHash:null;
+           for(const key of ['count','version','retentionDays'])if(value?.[key]!=null)out[key]=Number.isSafeInteger(value[key])&&value[key]>=0?value[key]:null;
+           for(const key of ['sources','chunks'])if(value?.[key]&&typeof value[key]==='object')out[key+'Descriptor']={sha256:sha(JSON.stringify(value[key])),entries:Object.keys(value[key]).length};
+           if(value?.state!=null)out.state=['loading','ready','published','aborted'].includes(value.state)?value.state:null;
+           if(value?.owner){const o=value.owner;out.owner={runId:/^\d{1,20}$/.test(String(o.runId))?String(o.runId):null,attempt:/^[1-9]\d{0,5}$/.test(String(o.attempt))?String(o.attempt):null,revision:typeof o.revision==='string'&&/^[a-f0-9]{40}$/.test(o.revision)?o.revision:null};out.ownerDigest=sha(JSON.stringify(o));}
+           if(value?.references)out.referencesDigest=sha(JSON.stringify(value.references));
+           // No arbitrary nested values, raw observations, paths, owners or URL fields leave this reader.
+           for(const k of ['markets','shards','parts'])if(value?.[k]&&typeof value[k]==='object')out[k+'Descriptor']={sha256:sha(JSON.stringify(value[k])),entries:Object.keys(value[k]).length};
+           if(value?.markets)out.marketDescriptors=Object.fromEntries(['china','korea','uae','europe','georgia','japan'].filter(k=>value.markets[k]).map(k=>{const v=value.markets[k],m={sha256:sha(JSON.stringify(v))};for(const n of ['count','rows','otherRows'])if(Number.isSafeInteger(v[n])&&v[n]>=0)m[n]=v[n];if(/^[a-f0-9]{64}$/.test(v.checksum||''))m.checksum=v.checksum;return[k,m];}));
+           return out;
+          }
+          export async function read(key,{credentials,fetchImpl=fetch,timeoutMs=10000}={}){
+           const request=signedGet(key,credentials),controller=new AbortController(),timer=setTimeout(()=>controller.abort(),timeoutMs);
+           try{
+            const response=await fetchImpl(request.url,{...request.options,signal:controller.signal});
+            if(response.status===404){await response.body?.cancel();return {key,found:false};}
+            if(response.status!==200){await response.body?.cancel();throw Error('probe_http_'+response.status);}
+            const limit=key===KEYS[0]?16384:2097152;
+            if(Number(response.headers.get('content-length')||0)>limit){await response.body?.cancel();return {key,found:true,bodyCapped:true,metadataVerified:false};}
+            const reader=response.body.getReader();let bytes=0;const chunks=[];
+            try{while(true){const {done,value}=await reader.read();if(done)break;bytes+=value.length;if(bytes>limit)return {key,found:true,bodyCapped:true,metadataVerified:false};chunks.push(value);}}
+            finally{await reader.cancel().catch(()=>{});reader.releaseLock();}
+            const body=Buffer.concat(chunks,bytes),value=JSON.parse(body.toString('utf8'));
+            return {key,found:true,bytes,sha256:sha(body),etag:etag(response.headers.get('etag')),metadata:metadata(value)};
+           }finally{clearTimeout(timer);controller.abort();}
+          }
+          export async function reconcile({credentials,fetchImpl=fetch,terminalEvidence}={}){
+           if(terminalEvidence?.id!==44248828833||terminalEvidence?.run_attempt!==1||terminalEvidence?.event!=='push'||terminalEvidence?.status!=='completed'||terminalEvidence?.head_sha!=='7ccfc78b04d92f3b40bf8324bee563ffe10fa2f0'||!['success','failure','cancelled','timed_out','action_required','neutral','skipped','stale'].includes(terminalEvidence.conclusion))throw Error('probe_terminal_required');
+           let requests=0;const counted=(...args)=>{if(++requests>KEYS.length*2+4)throw Error('probe_request_limit');return fetchImpl(...args);};
+           const snapshots=[];
+           for(let pass=0;pass<2;pass++){
+            const startedAt=new Date().toISOString();const rows=[];for(const key of KEYS)rows.push(await read(key,{credentials,fetchImpl:counted}));
+            snapshots.push({startedAt,finishedAt:new Date().toISOString(),rows});
+           }
+           const readiness=[];const generations=[...new Set(snapshots.flatMap(s=>s.rows.filter(r=>r.key==='catalog/manifest.json').map(r=>r.metadata?.generationId)).filter(g=>/^gen_\d+_[a-z0-9]+$/.test(g)))];for(const g of generations)readiness.push(await read('catalog/generations/'+g+'/indexes/budget-markets-v3/ready.json',{credentials,fetchImpl:counted}));
+           const finalFence=[];for(const key of ['catalog/manifest.json','catalog/import-lock.json'])finalFence.push(await read(key,{credentials,fetchImpl:counted}));
+           const changedKeys=KEYS.filter((key,i)=>{const a=snapshots[0].rows[i],b=snapshots[1].rows[i];return a.found!==b.found||a.sha256!==b.sha256||a.etag!==b.etag;});
+           for(const row of finalFence){const prior=snapshots[1].rows.find(r=>r.key===row.key);if(prior.found!==row.found||prior.sha256!==row.sha256||prior.etag!==row.etag)if(!changedKeys.includes(row.key))changedKeys.push(row.key);}
+           return {readiness,finalFence,producerRun:44248828833,terminalConclusion:terminalEvidence.conclusion,snapshots,changedKeys,unchangedObserved:changedKeys.length===0&&![...snapshots.flatMap(s=>s.rows),...readiness,...finalFence].some(r=>r.bodyCapped),metadataComplete:![...snapshots.flatMap(s=>s.rows),...readiness,...finalFence].some(r=>r.bodyCapped),priceCacheContentsVerified:false,specificationV7Inspected:false,allOtherMarketsVerified:false,detailAndBrandAliasCoverageComplete:false,atomicSnapshotProven:false,activationVerified:false,aliasesVerified:false,rawAncestryVerified:false,cursorSemanticsVerified:false,requests,storageWrites:0,listRequests:0,supplierRequests:0};
+          }
+          if(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href){
+           try{
+            const {readFile}=await import('node:fs/promises');
+            const terminalEvidence=JSON.parse(await readFile(process.argv[2],'utf8'));
+            const report=await reconcile({credentials:{accessKeyId:process.env.YC_OBJECT_STORAGE_ACCESS_KEY_ID,secretAccessKey:process.env.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY},terminalEvidence});
+            await writeFile('china-reconciliation.json',JSON.stringify(report,null,2));console.log(JSON.stringify(report));
+           }catch(error){const code=/^probe_(body_limit|request_limit|key_denied|credentials_missing|terminal_required|http_\d{3})$/.test(error?.message||'')?error.message:'probe_read_failed';console.error(JSON.stringify({error:code,storageWrites:0}));process.exitCode=1;}
+          }
+          READER
+      - name: Snapshot pointers twice and fence public manifest and lock
+        env:
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+        run: timeout --signal=TERM --kill-after=5s 420s node "$RUNNER_TEMP/china-reconcile.mjs" terminal-before.json
+      - name: Confirm producer identity and attempt did not change
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          timeout --kill-after=5s 30s gh api repos/jeep-jim/AvtoCena/actions/runs/44248828833 > terminal-after.json
+          python - <<'PY_TERMINAL'
+          import json
+          a=json.load(open('terminal-before.json')); b=json.load(open('terminal-after.json'))
+          assert all(a[k]==b[k] for k in ['id','head_sha','run_attempt','event','status','conclusion'])
+          assert b['status']=='completed'
+          PY_TERMINAL
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: china-terminal-pointer-metadata-44248828833
+          path: |
+            china-reconciliation.json
+            producer-metadata.json
+          if-no-files-found: warn
