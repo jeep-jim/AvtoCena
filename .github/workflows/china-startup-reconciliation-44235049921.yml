@@ -1,0 +1,158 @@
+name: Reconcile failed China startup metadata readonly
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/china-startup-reconciliation-44235049921.yml']
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: china-startup-reconciliation-readonly-44235049921
+  cancel-in-progress: false
+jobs:
+  reconcile:
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && github.event.head_commit.message == 'Reconcile failed China startup 44235049921 metadata only'))
+    environment: regcloud-staging
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Confirm exact producer is terminal before storage reads
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          timeout --kill-after=5s 30s gh api repos/jeep-jim/AvtoCena/actions/runs/44235049921 > terminal-before.json
+          python - <<'PY_TERMINAL'
+          import json
+          x=json.load(open('terminal-before.json'))
+          assert x['id']==44235049921 and x['status']=='completed'
+          assert x['head_sha']=='7589ec336e5c8c9bda1f7ea6e9fc45883e32b775'
+          assert x['run_attempt']==1 and x['event']=='push' and x['conclusion']=='failure'
+          PY_TERMINAL
+      - name: Prepare exact bounded read-only reader
+        run: |
+          cat > "$RUNNER_TEMP/china-reconcile.mjs" <<'READER'
+          import {createHash,createHmac} from 'node:crypto';
+          import {writeFile} from 'node:fs/promises';
+          import {pathToFileURL} from 'node:url';
+          const ENDPOINT='https://s3.regru.cloud',BUCKET='avtocena-staging-8120751',PREFIX='migration-staging/full-20261011/';
+          export const RELEASE='83ff17075e9188dcf227c8752dc064248d5f42e0';
+          export const BINDING='knowledge/encyclopedia/calculation-releases/'+RELEASE+'.json';
+          export const KEYS=Object.freeze(['catalog/import-lock.json','catalog/manifest.json','catalog/internal/manifest.json','catalog/raw-feed-coordination/v1/policy.json','catalog/raw-feed-coordination/v1/state.json','catalog/raw-feed-pins/v1/nonjp-intake-china-44121174584-1.json']);
+          const sha=s=>createHash('sha256').update(s).digest('hex'),hmac=(key,s)=>createHmac('sha256',key).update(s).digest();
+          export function signedGet(key,credentials,date=new Date()){
+           if(![...KEYS,BINDING].includes(key))throw Error('probe_key_denied');
+           if(!credentials.accessKeyId||!credentials.secretAccessKey)throw Error('probe_credentials_missing');
+           const pathname='/'+BUCKET+'/'+PREFIX+key,url=ENDPOINT+pathname;
+           const stamp=date.toISOString().replace(/[:-]|\.\d{3}/g,''),day=stamp.slice(0,8),scope=`${day}/us-east-1/s3/aws4_request`;
+           const headers={host:'s3.regru.cloud','x-amz-content-sha256':sha(''),'x-amz-date':stamp};
+           const names=Object.keys(headers).sort(),canonical=names.map(k=>`${k}:${headers[k]}\n`).join('');
+           const request=['GET',pathname,'',canonical,names.join(';'),sha('')].join('\n');
+           const signing=hmac(hmac(hmac(hmac('AWS4'+credentials.secretAccessKey,day),'us-east-1'),'s3'),'aws4_request');
+           const signature=createHmac('sha256',signing).update(`AWS4-HMAC-SHA256\n${stamp}\n${scope}\n${sha(request)}`).digest('hex');
+           headers.authorization=`AWS4-HMAC-SHA256 Credential=${credentials.accessKeyId}/${scope}, SignedHeaders=${names.join(';')}, Signature=${signature}`;
+           return {url,options:{method:'GET',headers,redirect:'error'}};
+          }
+          export function signedHead(key,credentials,date=new Date()){
+           if(!/^knowledge\/encyclopedia\/calculation-indexes\/[a-f0-9]{64}\.json$/.test(key))throw Error('probe_key_denied');
+           if(!credentials.accessKeyId||!credentials.secretAccessKey)throw Error('probe_credentials_missing');
+           const pathname='/'+BUCKET+'/'+PREFIX+key,url=ENDPOINT+pathname;
+           const stamp=date.toISOString().replace(/[:-]|\.\d{3}/g,''),day=stamp.slice(0,8),scope=`${day}/us-east-1/s3/aws4_request`;
+           const headers={host:'s3.regru.cloud','x-amz-content-sha256':sha(''),'x-amz-date':stamp};
+           const names=Object.keys(headers).sort(),canonical=names.map(k=>`${k}:${headers[k]}\n`).join('');
+           const request=['HEAD',pathname,'',canonical,names.join(';'),sha('')].join('\n');
+           const signing=hmac(hmac(hmac(hmac('AWS4'+credentials.secretAccessKey,day),'us-east-1'),'s3'),'aws4_request');
+           const signature=createHmac('sha256',signing).update(`AWS4-HMAC-SHA256\n${stamp}\n${scope}\n${sha(request)}`).digest('hex');
+           headers.authorization=`AWS4-HMAC-SHA256 Credential=${credentials.accessKeyId}/${scope}, SignedHeaders=${names.join(';')}, Signature=${signature}`;
+           return {url,options:{method:'HEAD',headers,redirect:'error'}};
+          }
+          const token=v=>typeof v==='string'&&v.length<=180&&/^[a-zA-Z0-9_:.+\-TZ]*$/.test(v)?v:null;
+          const etag=v=>typeof v==='string'&&/^"?[a-fA-F0-9-]{1,128}"?$/.test(v)?v:null;
+          export function metadata(value){
+           const out={};for(const key of ['generationId','expectedBaseGenerationId','producerRevision','operationId','operationType','startedAt','updatedAt','heartbeatAt','lockedUntil','publishedAt','completedAt','stage','phase','schemaVersion'])if(value?.[key]!=null)out[key]=typeof value[key]==='number'&&Number.isSafeInteger(value[key])?value[key]:token(value[key]);
+           if(value?.activeSlot!=null)out.activeSlot=['a','b'].includes(value.activeSlot)?value.activeSlot:null;
+           if(value?.contentHash!=null)out.contentHash=typeof value.contentHash==='string'&&/^[a-f0-9]{64}$/.test(value.contentHash)?value.contentHash:null;
+           for(const key of ['count','version','retentionDays'])if(value?.[key]!=null)out[key]=Number.isSafeInteger(value[key])&&value[key]>=0?value[key]:null;
+           for(const key of ['sources','chunks'])if(value?.[key]&&typeof value[key]==='object')out[key+'Descriptor']={sha256:sha(JSON.stringify(value[key])),entries:Object.keys(value[key]).length};
+           if(value?.state!=null)out.state=['loading','ready','published','aborted'].includes(value.state)?value.state:null;
+           if(value?.owner){const o=value.owner;out.owner={runId:/^\d{1,20}$/.test(String(o.runId))?String(o.runId):null,attempt:/^[1-9]\d{0,5}$/.test(String(o.attempt))?String(o.attempt):null,revision:typeof o.revision==='string'&&/^[a-f0-9]{40}$/.test(o.revision)?o.revision:null};out.ownerDigest=sha(JSON.stringify(o));}
+           if(value?.references)out.referencesDigest=sha(JSON.stringify(value.references));
+           // No arbitrary nested values, raw observations, paths, owners or URL fields leave this reader.
+           return out;
+          }
+          export async function read(key,{credentials,fetchImpl=fetch,timeoutMs=10000}={}){
+           const request=signedGet(key,credentials),controller=new AbortController(),timer=setTimeout(()=>controller.abort(),timeoutMs);
+           try{
+            const response=await fetchImpl(request.url,{...request.options,signal:controller.signal});
+            if(response.status===404){await response.body?.cancel();return {key,found:false};}
+            if(response.status!==200){await response.body?.cancel();throw Error('probe_http_'+response.status);}
+            const limit=key===KEYS[0]?16384:1048576;
+            if(Number(response.headers.get('content-length')||0)>limit){await response.body?.cancel();throw Error('probe_body_limit');}
+            const reader=response.body.getReader();let bytes=0;const chunks=[];
+            try{while(true){const {done,value}=await reader.read();if(done)break;bytes+=value.length;if(bytes>limit)throw Error('probe_body_limit');chunks.push(value);}}
+            finally{await reader.cancel().catch(()=>{});reader.releaseLock();}
+            const body=Buffer.concat(chunks,bytes),value=JSON.parse(body.toString('utf8'));
+            if(key===BINDING&&(value?.release!==RELEASE||!/^knowledge\/encyclopedia\/calculation-indexes\/[a-f0-9]{64}\.json$/.test(value.key||'')||!/^[a-f0-9]{64}$/.test(value.digest||'')))throw Error('probe_binding_invalid');
+            return {key,found:true,bytes,sha256:sha(body),etag:etag(response.headers.get('etag')),metadata:key===BINDING?{release:value.release,key:value.key,digest:value.digest}:metadata(value)};
+           }finally{clearTimeout(timer);controller.abort();}
+          }
+          export async function headBoundIndex(binding,{credentials,fetchImpl=fetch,timeoutMs=10000}={}){
+           if(!binding?.found||binding.metadata?.release!==RELEASE)throw Error('probe_binding_missing');
+           const key=binding.metadata.key,request=signedHead(key,credentials),controller=new AbortController(),timer=setTimeout(()=>controller.abort(),timeoutMs);
+           try{const r=await fetchImpl(request.url,{...request.options,signal:controller.signal});await r.body?.cancel();if(r.status!==200)throw Error('probe_http_'+r.status);
+           const raw=r.headers.get('content-length');if(!/^(0|[1-9][0-9]{0,15})$/.test(raw||'')||!Number.isSafeInteger(Number(raw)))throw Error('probe_head_size_missing');
+           const bytes=Number(raw);return {key,bytes,etag:etag(r.headers.get('etag')),method:'HEAD',indexBodyRead:false,exceeds64MiB:bytes>64*1024**2,exceeds256MiB:bytes>256*1024**2,indexContentVerified:false};
+           }finally{clearTimeout(timer);controller.abort();}}
+          export async function reconcile({credentials,fetchImpl=fetch,terminalEvidence}={}){
+           if(terminalEvidence?.id!==44235049921||terminalEvidence?.run_attempt!==1||terminalEvidence?.event!=='push'||terminalEvidence?.conclusion!=='failure'||terminalEvidence?.status!=='completed'||terminalEvidence?.head_sha!=='7589ec336e5c8c9bda1f7ea6e9fc45883e32b775'||!['success','failure','cancelled','timed_out','action_required','neutral','skipped','stale'].includes(terminalEvidence.conclusion))throw Error('probe_terminal_required');
+           let requests=0;const counted=(...args)=>{if(++requests>KEYS.length*2+5)throw Error('probe_request_limit');return fetchImpl(...args);};
+           const snapshots=[];
+           for(let pass=0;pass<2;pass++){
+            const startedAt=new Date().toISOString();const rows=[];for(const key of KEYS)rows.push(await read(key,{credentials,fetchImpl:counted}));
+            snapshots.push({startedAt,finishedAt:new Date().toISOString(),rows});
+           }
+           const firstBinding=await read(BINDING,{credentials,fetchImpl:counted});
+           const indexHead=await headBoundIndex(firstBinding,{credentials,fetchImpl:counted});
+           const lastBinding=await read(BINDING,{credentials,fetchImpl:counted});
+           const bindingUnchangedObserved=firstBinding.sha256===lastBinding.sha256&&firstBinding.etag===lastBinding.etag;
+           const finalFence=[];for(const key of ['catalog/manifest.json','catalog/import-lock.json'])finalFence.push(await read(key,{credentials,fetchImpl:counted}));
+           const changedKeys=KEYS.filter((key,i)=>{const a=snapshots[0].rows[i],b=snapshots[1].rows[i];return a.found!==b.found||a.sha256!==b.sha256||a.etag!==b.etag;});
+           for(const row of finalFence){const prior=snapshots[1].rows.find(r=>r.key===row.key);if(prior.found!==row.found||prior.sha256!==row.sha256||prior.etag!==row.etag)if(!changedKeys.includes(row.key))changedKeys.push(row.key);}
+           return {indexHead,firstBinding,lastBinding,bindingUnchangedObserved,finalFence,producerRun:44235049921,terminalConclusion:terminalEvidence.conclusion,snapshots,changedKeys,unchangedObserved:changedKeys.length===0,atomicSnapshotProven:false,activationVerified:false,aliasesVerified:false,rawAncestryVerified:false,cursorSemanticsVerified:false,requests,storageWrites:0,listRequests:0,supplierRequests:0};
+          }
+          if(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href){
+           try{
+            const {readFile}=await import('node:fs/promises');
+            const terminalEvidence=JSON.parse(await readFile(process.argv[2],'utf8'));
+            const report=await reconcile({credentials:{accessKeyId:process.env.YC_OBJECT_STORAGE_ACCESS_KEY_ID,secretAccessKey:process.env.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY},terminalEvidence});
+            await writeFile('china-reconciliation.json',JSON.stringify(report,null,2));console.log(JSON.stringify(report));
+           }catch(error){const code=/^probe_(body_limit|request_limit|key_denied|credentials_missing|terminal_required|http_\d{3})$/.test(error?.message||'')?error.message:'probe_read_failed';console.error(JSON.stringify({error:code,storageWrites:0}));process.exitCode=1;}
+          }
+          READER
+      - name: Snapshot pointers twice and fence public manifest and lock
+        env:
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+        run: timeout --signal=TERM --kill-after=5s 200s node "$RUNNER_TEMP/china-reconcile.mjs" terminal-before.json
+      - name: Confirm producer identity and attempt did not change
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          timeout --kill-after=5s 30s gh api repos/jeep-jim/AvtoCena/actions/runs/44235049921 > terminal-after.json
+          python - <<'PY_TERMINAL'
+          import json
+          a=json.load(open('terminal-before.json')); b=json.load(open('terminal-after.json'))
+          assert all(a[k]==b[k] for k in ['id','head_sha','run_attempt','event','status','conclusion'])
+          assert b['status']=='completed'
+          PY_TERMINAL
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: china-terminal-pointer-metadata-44235049921
+          path: china-reconciliation.json
+          if-no-files-found: warn
