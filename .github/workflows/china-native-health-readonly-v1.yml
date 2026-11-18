@@ -1,0 +1,33 @@
+name: Inspect exact native health connectivity readonly
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/china-native-health-readonly-v1.yml']
+permissions:
+  contents: read
+concurrency:
+  group: china-native-health-readonly-v1
+  cancel-in-progress: false
+jobs:
+  inspect:
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && github.event.head_commit.message == 'Inspect exact China native health connectivity'))
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Read only fixed public health with native timeout
+        run: |
+          set -euo pipefail
+          printf '%s' 'aW1wb3J0IHt3cml0ZUZpbGV9IGZyb20gJ25vZGU6ZnMvcHJvbWlzZXMnO2ltcG9ydCB7cGF0aFRvRmlsZVVSTH0gZnJvbSAnbm9kZTp1cmwnOwovLyBFeGFjdGx5IHRoZSBuYXRpdmUgcmVhZExpdmVCdWRnZXRJZGVudGl0eSBVUkwsIGhlYWRlcnMgYW5kMjBzIGRlYWRsaW5lLgpleHBvcnQgYXN5bmMgZnVuY3Rpb24gcHJvYmVIZWFsdGgoe2ZldGNoSW1wbD1nbG9iYWxUaGlzLmZldGNoLHRpbWVvdXRNcz0yMDAwMH09e30pewogaWYoIU51bWJlci5pc1NhZmVJbnRlZ2VyKHRpbWVvdXRNcyl8fHRpbWVvdXRNczwxfHx0aW1lb3V0TXM+MjAwMDApdGhyb3cgRXJyb3IoJ2hlYWx0aF9wcm9iZV90aW1lb3V0X3Njb3BlJyk7CiBjb25zdCBzaWduYWw9QWJvcnRTaWduYWwudGltZW91dCh0aW1lb3V0TXMpO2xldCByZWFkZXIsc3RhdHVzPW51bGw7CiB0cnl7Y29uc3QgcmVzcG9uc2U9YXdhaXQgZmV0Y2hJbXBsKCdodHRwczovL2F2dG9jZW5hLmNvbS9hcGkvaGVhbHRoJyx7aGVhZGVyczp7YWNjZXB0OidhcHBsaWNhdGlvbi9qc29uJywnY2FjaGUtY29udHJvbCc6J25vLWNhY2hlJ30scmVkaXJlY3Q6J2Vycm9yJyxzaWduYWx9KTtzdGF0dXM9TnVtYmVyLmlzSW50ZWdlcihyZXNwb25zZS5zdGF0dXMpJiZyZXNwb25zZS5zdGF0dXM+PTEwMCYmcmVzcG9uc2Uuc3RhdHVzPD01OTk/cmVzcG9uc2Uuc3RhdHVzOm51bGw7aWYoIXJlc3BvbnNlLm9rfHwhcmVzcG9uc2UuYm9keSl7YXdhaXQgcmVzcG9uc2UuYm9keT8uY2FuY2VsKCk7cmV0dXJue3ZlcnNpb246MSxvazpmYWxzZSxyZXN1bHQ6J2h0dHBfZXJyb3InLGh0dHBTdGF0dXM6c3RhdHVzfTt9CiBjb25zdCBsZW5ndGg9cmVzcG9uc2UuaGVhZGVycy5nZXQoJ2NvbnRlbnQtbGVuZ3RoJyk7aWYobGVuZ3RoIT09bnVsbCYmKCEvXlxkKyQvLnRlc3QobGVuZ3RoKXx8TnVtYmVyKGxlbmd0aCk+NjU1MzYpKXthd2FpdCByZXNwb25zZS5ib2R5LmNhbmNlbCgpO3JldHVybnt2ZXJzaW9uOjEsb2s6ZmFsc2UscmVzdWx0Oidib2R5X2NhcCcsaHR0cFN0YXR1czpzdGF0dXN9O30KIHJlYWRlcj1yZXNwb25zZS5ib2R5LmdldFJlYWRlcigpO2NvbnN0IGNodW5rcz1bXTtsZXQgYnl0ZXM9MDtmb3IoOzspe2NvbnN0IHI9YXdhaXQgcmVhZGVyLnJlYWQoKTtpZihyLmRvbmUpYnJlYWs7Ynl0ZXMrPXIudmFsdWUuYnl0ZUxlbmd0aDtpZihieXRlcz42NTUzNilyZXR1cm57dmVyc2lvbjoxLG9rOmZhbHNlLHJlc3VsdDonYm9keV9jYXAnLGh0dHBTdGF0dXM6c3RhdHVzfTtjaHVua3MucHVzaChyLnZhbHVlKTt9bGV0IHZhbHVlO3RyeXt2YWx1ZT1KU09OLnBhcnNlKEJ1ZmZlci5jb25jYXQoY2h1bmtzLGJ5dGVzKSk7fWNhdGNoe3JldHVybnt2ZXJzaW9uOjEsb2s6ZmFsc2UscmVzdWx0OidpbnZhbGlkX2pzb24nLGh0dHBTdGF0dXM6c3RhdHVzfTt9CiBpZih2YWx1ZT8ub2shPT10cnVlfHwhL15bYS1mMC05XXs0MH0kLy50ZXN0KHZhbHVlLnJlbGVhc2VTaGF8fCcnKXx8IS9eW2EtZjAtOV17NjR9JC8udGVzdCh2YWx1ZS5jYWxjdWxhdGlvblZlcnNpb258fCcnKSlyZXR1cm57dmVyc2lvbjoxLG9rOmZhbHNlLHJlc3VsdDonaWRlbnRpdHlfaW52YWxpZCcsaHR0cFN0YXR1czpzdGF0dXN9OwogcmV0dXJue3ZlcnNpb246MSxvazp0cnVlLHJlc3VsdDondmVyaWZpZWRfaWRlbnRpdHknLGh0dHBTdGF0dXM6c3RhdHVzLHJlbGVhc2VTaGE6dmFsdWUucmVsZWFzZVNoYSxjYWxjdWxhdGlvblZlcnNpb246dmFsdWUuY2FsY3VsYXRpb25WZXJzaW9ufTsKIH1jYXRjaHtyZXR1cm57dmVyc2lvbjoxLG9rOmZhbHNlLHJlc3VsdDpzaWduYWwuYWJvcnRlZD8ndGltZW91dCc6J3RyYW5zcG9ydF9lcnJvcicsaHR0cFN0YXR1czpzdGF0dXN9O31maW5hbGx5e2lmKHJlYWRlcil7YXdhaXQgcmVhZGVyLmNhbmNlbCgpLmNhdGNoKCgpPT57fSk7cmVhZGVyLnJlbGVhc2VMb2NrKCk7fX0KfQppZihwcm9jZXNzLmFyZ3ZbMV0mJmltcG9ydC5tZXRhLnVybD09PXBhdGhUb0ZpbGVVUkwocHJvY2Vzcy5hcmd2WzFdKS5ocmVmKXtjb25zdCByZXBvcnQ9YXdhaXQgcHJvYmVIZWFsdGgoKTthd2FpdCB3cml0ZUZpbGUoJ2hlYWx0aC1wcm9iZS5qc29uJyxKU09OLnN0cmluZ2lmeShyZXBvcnQpLHtmbGFnOid3eCd9KTtjb25zb2xlLmxvZyhKU09OLnN0cmluZ2lmeShyZXBvcnQpKTtpZighcmVwb3J0Lm9rKXByb2Nlc3MuZXhpdENvZGU9Mjt9Cg==' | base64 --decode > "$RUNNER_TEMP/health-probe.mjs"
+          echo 'ded060d55658c29a92c6a70a9a0ea375da045ebce5c061793d166762fe0a35fa  '"$RUNNER_TEMP/health-probe.mjs" | sha256sum --check --strict
+          timeout --signal=TERM --kill-after=5s 30s node "$RUNNER_TEMP/health-probe.mjs"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: china-native-health-readonly-v1
+          path: health-probe.json
+          if-no-files-found: warn
+          retention-days: 7
