@@ -1,0 +1,87 @@
+name: China startup exact input sizes readonly
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: china-startup-input-head-readonly
+  cancel-in-progress: false
+jobs:
+  reconcile:
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'workflow_dispatch' || github.event.head_commit.message == 'Read exact China startup input sizes 20261118')
+    environment: regcloud-staging
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+    - uses: actions/setup-node@v4
+      with:
+        node-version: 24
+    - name: Confirm exact producer is terminal before storage reads
+      env:
+        GH_TOKEN: ${{ github.token }}
+      run: 'set -euo pipefail
+
+        timeout --kill-after=5s 30s gh api repos/jeep-jim/AvtoCena/actions/runs/44235049921 > terminal-before.json
+
+        python - <<''PY_TERMINAL''
+
+        import json
+
+        x=json.load(open(''terminal-before.json''))
+
+        assert x[''id'']==44235049921 and x[''status'']==''completed''
+
+        assert x[''head_sha'']==''7589ec336e5c8c9bda1f7ea6e9fc45883e32b775''
+
+        assert x[''run_attempt'']==1 and x[''event'']==''push'' and x[''conclusion'']==''failure''
+
+        PY_TERMINAL
+
+        '
+    - name: Prepare exact bounded read-only reader
+      run: "cat > \"$RUNNER_TEMP/china-reconcile.mjs\" <<'READER'\nimport {createHash,createHmac} from 'node:crypto';\nimport {writeFile} from 'node:fs/promises';\nimport {pathToFileURL} from 'node:url';\nconst ENDPOINT='https://s3.regru.cloud',BUCKET='avtocena-staging-8120751',PREFIX='migration-staging/full-20261011/';\nexport const RELEASE='83ff17075e9188dcf227c8752dc064248d5f42e0';\nexport const BINDING='knowledge/encyclopedia/calculation-releases/'+RELEASE+'.json';\nexport const KEYS=Object.freeze(['catalog/import-lock.json','catalog/manifest.json','catalog/internal/manifest.json','catalog/raw-feed-coordination/v1/policy.json','catalog/raw-feed-coordination/v1/state.json','catalog/raw-feed-pins/v1/nonjp-intake-china-44121174584-1.json']);\nconst sha=s=>createHash('sha256').update(s).digest('hex'),hmac=(key,s)=>createHmac('sha256',key).update(s).digest();\nexport function signedGet(key,credentials,date=new Date()){\n if(![...KEYS,BINDING].includes(key))throw Error('probe_key_denied');\n\
+        \ if(!credentials.accessKeyId||!credentials.secretAccessKey)throw Error('probe_credentials_missing');\n const pathname='/'+BUCKET+'/'+PREFIX+key,url=ENDPOINT+pathname;\n const stamp=date.toISOString().replace(/[:-]|\\.\\d{3}/g,''),day=stamp.slice(0,8),scope=`${day}/us-east-1/s3/aws4_request`;\n const headers={host:'s3.regru.cloud','x-amz-content-sha256':sha(''),'x-amz-date':stamp};\n const names=Object.keys(headers).sort(),canonical=names.map(k=>`${k}:${headers[k]}\\n`).join('');\n const request=['GET',pathname,'',canonical,names.join(';'),sha('')].join('\\n');\n const signing=hmac(hmac(hmac(hmac('AWS4'+credentials.secretAccessKey,day),'us-east-1'),'s3'),'aws4_request');\n const signature=createHmac('sha256',signing).update(`AWS4-HMAC-SHA256\\n${stamp}\\n${scope}\\n${sha(request)}`).digest('hex');\n headers.authorization=`AWS4-HMAC-SHA256 Credential=${credentials.accessKeyId}/${scope}, SignedHeaders=${names.join(';')}, Signature=${signature}`;\n return {url,options:{method:'GET',headers,redirect:'error'}};\n\
+        }\nexport function signedHead(key,credentials,date=new Date()){\n if(![\"fees/exchange-rates.json\", \"markets/markets.json\", \"catalog-editorial/current.json\", \"catalog/china-cny-prices/current.json\", \"knowledge/encyclopedia/calculation-indexes/bf2c72cb7a260ef093c0a43c2b0dad9c4c9094a4d6dc3811dd0d7f7626b0d72b.json\"].includes(key))throw Error('probe_key_denied');\n if(!credentials.accessKeyId||!credentials.secretAccessKey)throw Error('probe_credentials_missing');\n const pathname='/'+BUCKET+'/'+PREFIX+key,url=ENDPOINT+pathname;\n const stamp=date.toISOString().replace(/[:-]|\\.\\d{3}/g,''),day=stamp.slice(0,8),scope=`${day}/us-east-1/s3/aws4_request`;\n const headers={host:'s3.regru.cloud','x-amz-content-sha256':sha(''),'x-amz-date':stamp};\n const names=Object.keys(headers).sort(),canonical=names.map(k=>`${k}:${headers[k]}\\n`).join('');\n const request=['HEAD',pathname,'',canonical,names.join(';'),sha('')].join('\\n');\n const signing=hmac(hmac(hmac(hmac('AWS4'+credentials.secretAccessKey,day),'us-east-1'),'s3'),'aws4_request');\n\
+        \ const signature=createHmac('sha256',signing).update(`AWS4-HMAC-SHA256\\n${stamp}\\n${scope}\\n${sha(request)}`).digest('hex');\n headers.authorization=`AWS4-HMAC-SHA256 Credential=${credentials.accessKeyId}/${scope}, SignedHeaders=${names.join(';')}, Signature=${signature}`;\n return {url,options:{method:'HEAD',headers,redirect:'error'}};\n}\nconst token=v=>typeof v==='string'&&v.length<=180&&/^[a-zA-Z0-9_:.+\\-TZ]*$/.test(v)?v:null;\nconst etag=v=>typeof v==='string'&&/^\"?[a-fA-F0-9-]{1,128}\"?$/.test(v)?v:null;\nexport function metadata(value){\n const out={};for(const key of ['generationId','expectedBaseGenerationId','producerRevision','operationId','operationType','startedAt','updatedAt','heartbeatAt','lockedUntil','publishedAt','completedAt','stage','phase','schemaVersion'])if(value?.[key]!=null)out[key]=typeof value[key]==='number'&&Number.isSafeInteger(value[key])?value[key]:token(value[key]);\n if(value?.activeSlot!=null)out.activeSlot=['a','b'].includes(value.activeSlot)?value.activeSlot:null;\n\
+        \ if(value?.contentHash!=null)out.contentHash=typeof value.contentHash==='string'&&/^[a-f0-9]{64}$/.test(value.contentHash)?value.contentHash:null;\n for(const key of ['count','version','retentionDays'])if(value?.[key]!=null)out[key]=Number.isSafeInteger(value[key])&&value[key]>=0?value[key]:null;\n for(const key of ['sources','chunks'])if(value?.[key]&&typeof value[key]==='object')out[key+'Descriptor']={sha256:sha(JSON.stringify(value[key])),entries:Object.keys(value[key]).length};\n if(value?.state!=null)out.state=['loading','ready','published','aborted'].includes(value.state)?value.state:null;\n if(value?.owner){const o=value.owner;out.owner={runId:/^\\d{1,20}$/.test(String(o.runId))?String(o.runId):null,attempt:/^[1-9]\\d{0,5}$/.test(String(o.attempt))?String(o.attempt):null,revision:typeof o.revision==='string'&&/^[a-f0-9]{40}$/.test(o.revision)?o.revision:null};out.ownerDigest=sha(JSON.stringify(o));}\n if(value?.references)out.referencesDigest=sha(JSON.stringify(value.references));\n\
+        \ // No arbitrary nested values, raw observations, paths, owners or URL fields leave this reader.\n return out;\n}\nexport async function read(key,{credentials,fetchImpl=fetch,timeoutMs=10000}={}){\n const request=signedGet(key,credentials),controller=new AbortController(),timer=setTimeout(()=>controller.abort(),timeoutMs);\n try{\n  const response=await fetchImpl(request.url,{...request.options,signal:controller.signal});\n  if(response.status===404){await response.body?.cancel();return {key,found:false};}\n  if(response.status!==200){await response.body?.cancel();throw Error('probe_http_'+response.status);}\n  const limit=key===KEYS[0]?16384:1048576;\n  if(Number(response.headers.get('content-length')||0)>limit){await response.body?.cancel();throw Error('probe_body_limit');}\n  const reader=response.body.getReader();let bytes=0;const chunks=[];\n  try{while(true){const {done,value}=await reader.read();if(done)break;bytes+=value.length;if(bytes>limit)throw Error('probe_body_limit');chunks.push(value);}}\n\
+        \  finally{await reader.cancel().catch(()=>{});reader.releaseLock();}\n  const body=Buffer.concat(chunks,bytes),value=JSON.parse(body.toString('utf8'));\n  if(key===BINDING&&(value?.release!==RELEASE||!/^knowledge\\/encyclopedia\\/calculation-indexes\\/[a-f0-9]{64}\\.json$/.test(value.key||'')||!/^[a-f0-9]{64}$/.test(value.digest||'')))throw Error('probe_binding_invalid');\n  return {key,found:true,bytes,sha256:sha(body),etag:etag(response.headers.get('etag')),metadata:key===BINDING?{release:value.release,key:value.key,digest:value.digest}:metadata(value)};\n }finally{clearTimeout(timer);controller.abort();}\n}\nexport async function reconcile({credentials,fetchImpl=fetch,terminalEvidence}={}){\n if(terminalEvidence?.id!==44235049921||terminalEvidence.status!=='completed'||terminalEvidence.head_sha!=='7589ec336e5c8c9bda1f7ea6e9fc45883e32b775'||terminalEvidence.run_attempt!==1)throw Error('probe_terminal_required');\n const rows=[];\n for(const key of ['fees/exchange-rates.json',\
+        \ 'markets/markets.json', 'catalog-editorial/current.json', 'catalog/china-cny-prices/current.json', 'knowledge/encyclopedia/calculation-indexes/bf2c72cb7a260ef093c0a43c2b0dad9c4c9094a4d6dc3811dd0d7f7626b0d72b.json']){\n  const request=signedHead(key,credentials),signal=AbortSignal.timeout(10000);const response=await fetchImpl(request.url,{...request.options,signal});await response.body?.cancel();\n  if(response.status!==200&&response.status!==404)throw Error('probe_http_'+response.status);\n  const raw=response.headers.get('content-length');const bytes=response.status===404?null:(/^(0|[1-9][0-9]{0,15})$/.test(raw||'')&&Number.isSafeInteger(Number(raw))?Number(raw):null);\n  if(response.status===200&&bytes===null)throw Error('probe_head_size_missing');\n  rows.push({key,found:response.status===200,bytes,etag:etag(response.headers.get('etag')),contentEncoding:['gzip','br','deflate','identity'].includes(response.headers.get('content-encoding'))?response.headers.get('content-encoding'):(response.headers.get('content-encoding')?'other':null)});\n\
+        \ }\n return {observedAt:new Date().toISOString(),rows,requests:5,storageWrites:0,indexBodyRead:false,bodyReads:0,scope:'HEAD exact startup inputs only; not content verification'};\n}\nif(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href){\n try{\n  const {readFile}=await import('node:fs/promises');\n  const terminalEvidence=JSON.parse(await readFile(process.argv[2],'utf8'));\n  const report=await reconcile({credentials:{accessKeyId:process.env.YC_OBJECT_STORAGE_ACCESS_KEY_ID,secretAccessKey:process.env.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY},terminalEvidence});\n  await writeFile('china-reconciliation.json',JSON.stringify(report,null,2));console.log(JSON.stringify(report));\n }catch(error){const code=/^probe_(body_limit|request_limit|key_denied|credentials_missing|terminal_required|http_\\d{3})$/.test(error?.message||'')?error.message:'probe_read_failed';console.error(JSON.stringify({error:code,storageWrites:0}));process.exitCode=1;}\n}\nREADER\n"
+    - name: Snapshot pointers twice and fence public manifest and lock
+      env:
+        YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+        YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+      run: timeout --signal=TERM --kill-after=5s 200s node "$RUNNER_TEMP/china-reconcile.mjs" terminal-before.json
+    - name: Confirm producer identity and attempt did not change
+      env:
+        GH_TOKEN: ${{ github.token }}
+      run: 'set -euo pipefail
+
+        timeout --kill-after=5s 30s gh api repos/jeep-jim/AvtoCena/actions/runs/44235049921 > terminal-after.json
+
+        python - <<''PY_TERMINAL''
+
+        import json
+
+        a=json.load(open(''terminal-before.json'')); b=json.load(open(''terminal-after.json''))
+
+        assert all(a[k]==b[k] for k in [''id'',''head_sha'',''run_attempt'',''event'',''status'',''conclusion''])
+
+        assert b[''status'']==''completed''
+
+        PY_TERMINAL
+
+        '
+    - uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: china-startup-input-sizes-${{ github.run_id }}
+        path: china-reconciliation.json
+        if-no-files-found: warn
+'on':
+  workflow_dispatch: null
+  push:
+    branches:
+    - main
+    paths:
+    - .github/workflows/china-startup-input-head-readonly.yml
