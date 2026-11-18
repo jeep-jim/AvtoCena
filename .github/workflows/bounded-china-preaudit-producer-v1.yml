@@ -6,13 +6,13 @@ concurrency:
   group: regcloud-production-release
   cancel-in-progress: false
 env:
-  OPERATIONAL_PACKAGE_BLOB: 2818d65b2e2fed7fc1109137c8c25b03192b4cec
-  OPERATIONAL_MANIFEST_SHA256: 0b875965a85cf2ad4bad8f7618a7b815cea81ec7e463f946608a8afaf7b21175
+  OPERATIONAL_PACKAGE_BLOB: f0b05eb549ec8a5eb2d868700247d7195b322de4
+  OPERATIONAL_MANIFEST_SHA256: 79b2f3ade3c23719ea04baadf61fdafb1c225c6d5385aaee57fda8e8d9906b85
   CONTROLLER_PACKAGE_BLOB: 40450471f5ee851311fd5a00a85c18ae684be11a
-  CI_TEST_PACKAGE_BLOB: ddd23c57c5cf92e6852e078eff48a79b554e0e4e
+  CI_TEST_PACKAGE_BLOB: f5378fd63733f4f3ace3abb63d6733d8652177b1
 jobs:
   ci:
-    if: github.ref == 'refs/heads/main' && github.event.head_commit.message == 'Prepare China checkpoint without publication'
+    if: github.ref == 'refs/heads/main' && github.event.head_commit.message == 'Prepare China checkpoint with native diagnostic paths'
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
@@ -53,7 +53,7 @@ jobs:
       run: "set -euo pipefail\npython - <<'PY'\nimport base64,hashlib,json,os,pathlib,subprocess\nroot=pathlib.Path(os.environ['RUNNER_TEMP'])/'china-job'\nmanifest_bytes=(root/'package'/'SOURCE_MANIFEST.json').read_bytes()\nassert hashlib.sha256(manifest_bytes).hexdigest()==os.environ['OPERATIONAL_MANIFEST_SHA256']\nmanifest=json.loads(manifest_bytes);assert manifest['dynamicSitesReviewed'] is True\nfor directory,entries in [(root/'package'/'operational',manifest['operational']['files']),*( (pathlib.Path(os.environ['GITHUB_WORKSPACE'])/k,manifest['native'][k]['files']) for k in ['publisher','runtime'])]:\n    for e in entries:\n        b=(directory/e['path']).read_bytes();assert len(b)==e['bytes'] and hashlib.sha256(b).hexdigest()==e['sha256']\nenvelope=json.load(open(pathlib.Path(os.environ['RUNNER_TEMP'])/'tests-blob.json'))\nbundle=json.loads(base64.b64decode(envelope['content']))\nassert bundle['kind']=='selected-portable-ci-tests-not-whole-publication'\ninventory={e['path'] for e in bundle['files']}\ntests=bundle['tests'];assert tests and len(tests)==len(set(tests))\nassert all(t in inventory and t.endswith('.test.mjs') and not t.startswith('-') for t in tests)\nfor e in bundle['files']:\n    source=root/'tests'/e['path'];target=root/'package'/'operational'/e['path']\n    assert not target.exists();target.parent.mkdir(parents=True,exist_ok=True)\n    with target.open('xb') as f:f.write(source.read_bytes())\nsubprocess.run(['node','--test','--test-concurrency=1',*tests],cwd=root/'package'/'operational',check=True)\nPY\n"
   recover:
     needs: ci
-    if: github.ref == 'refs/heads/main' && github.event.head_commit.message == 'Prepare China checkpoint without publication'
+    if: github.ref == 'refs/heads/main' && github.event.head_commit.message == 'Prepare China checkpoint with native diagnostic paths'
     environment: regcloud-staging
     runs-on: ubuntu-latest
     timeout-minutes: 360
