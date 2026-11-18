@@ -1,0 +1,32 @@
+name: Inspect China orphan candidate readonly
+permissions:
+  contents: read
+concurrency:
+  group: china-orphan-candidate-readonly-44121174584
+  cancel-in-progress: false
+jobs:
+  inspect:
+    if: github.ref == 'refs/heads/main' && github.event.head_commit.message == 'Inspect bounded orphan China candidates only'
+    environment: regcloud-staging
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+    - name: Read bounded candidate metadata only
+      env:
+        REGCLOUD_S3_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+        REGCLOUD_S3_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+      run: "cat > \"$RUNNER_TEMP/probe.py\" <<'PY_PROBE'\nimport os,json,time,datetime,hashlib,hmac,urllib.request,urllib.parse,xml.etree.ElementTree as ET,re\nENDPOINT='https://s3.regru.cloud';BUCKET='avtocena-staging-8120751';BASE='migration-staging/full-20261011/'\nLOW=1794940318000;HIGH=1794951170000\nPREFIXES=['catalog/generations/gen_179494','catalog/generations/gen_179495']\nclass Probe:\n def __init__(self):self.requests=0;self.deadline=time.monotonic()+180\n def get(self,key='',query=None,cap=1048576):\n  self.requests+=1\n  if self.requests>22 or time.monotonic()>self.deadline:raise ValueError('request_budget')\n  if query is not None:\n   if key or query.get('prefix') not in [BASE+p for p in PREFIXES] or query!={'list-type':'2','prefix':query['prefix'],'delimiter':'/','max-keys':'100'}:raise ValueError('list_scope')\n  elif not re.fullmatch(r'catalog/generations/gen_\\d{13}_[a-z0-9]{8}/(publication-checkpoint.json|indexes/budget-markets-v3/ready.json)',key):raise ValueError('get_scope')\n  path='/'+BUCKET+('/'+BASE+key if key else '')\n  qs=urllib.parse.urlencode(sorted((query or {}).items()),quote_via=urllib.parse.quote)\n  stamp=datetime.datetime.now(datetime.timezone.utc).strftime('%Y%m%dT%H%M%SZ');day=stamp[:8];scope=day+'/us-east-1/s3/aws4_request'\n  sha=lambda b:hashlib.sha256(b).hexdigest(); hm=lambda k,b:hmac.new(k,b.encode(),hashlib.sha256).digest()\n  headers={'host':'s3.regru.cloud','x-amz-content-sha256':sha(b''),'x-amz-date':stamp};names=';'.join(sorted(headers));canonical=''.join(k+':'+headers[k]+'\\n' for k in sorted(headers))\n  req='\\n'.join(['GET',path,qs,canonical,names,sha(b'')]);signing=hm(hm(hm(hm(('AWS4'+os.environ['REGCLOUD_S3_SECRET_ACCESS_KEY']).encode(),day),'us-east-1'),'s3'),'aws4_request')\n  signature=hmac.new(signing,('AWS4-HMAC-SHA256\\n'+stamp+'\\n'+scope+'\\n'+sha(req.encode())).encode(),hashlib.sha256).hexdigest()\n  headers['Authorization']='AWS4-HMAC-SHA256 Credential='+os.environ['REGCLOUD_S3_ACCESS_KEY_ID']+'/'+scope+', SignedHeaders='+names+', Signature='+signature\n  class NoRedirect(urllib.request.HTTPRedirectHandler):\n   def redirect_request(self,*args,**kwargs):raise ValueError('redirect_denied')\n  try:\n   with urllib.request.build_opener(NoRedirect).open(urllib.request.Request(ENDPOINT+path+('?'+qs if qs else ''),headers=headers,method='GET'),timeout=min(15,max(1,self.deadline-time.monotonic()))) as r:\n    b=r.read(cap+1)\n    if len(b)>cap:raise ValueError('body_cap')\n    return b\n  except urllib.error.HTTPError as e:\n   if e.code==404 and query is None:return None\n   raise ValueError('http_'+str(e.code)) from None\n def run(self):\n  candidates=[];lists=[]\n  for p in PREFIXES:\n   b=self.get(query={'list-type':'2','prefix':BASE+p,'delimiter':'/','max-keys':'100'})\n   x=ET.fromstring(b);ns={'s':'http://s3.amazonaws.com/doc/2006-03-01/'}\n   if x.findtext('s:IsTruncated',namespaces=ns)!='false':raise ValueError('list_truncated')\n   if x.findall('s:Contents',ns):raise ValueError('unexpected_contents')\n   paths=[n.text for n in x.findall('s:CommonPrefixes/s:Prefix',ns)]\n   if len(paths)>100:raise ValueError('prefix_cap')\n   for path in paths:\n    if not isinstance(path,str) or not path.startswith(BASE+p):raise ValueError('prefix_scope')\n    g=path[len(BASE+'catalog/generations/'):].rstrip('/')\n    m=re.fullmatch(r'gen_(\\d{13})_[a-z0-9]{8}',g)\n    if not m:raise ValueError('generation_shape')\n    if LOW<=int(m.group(1))<=HIGH:candidates.append(g)\n   lists.append({'prefix':p,'prefixCount':len(paths),'truncated':False})\n  candidates=sorted(set(candidates))\n  if len(candidates)>10:raise ValueError('candidate_cap')\n  rows=[]\n  for g in candidates:\n   row={'generationId':g}\n   for name in ['publication-checkpoint.json','indexes/budget-markets-v3/ready.json']:\n    b=self.get('catalog/generations/'+g+'/'+name);summary={'found':b is not None}\n    if b is not None:\n     v=json.loads(b);summary.update({'bytes':len(b),'sha256':hashlib.sha256(b).hexdigest()})\n     for k in ['generationId','expectedBaseGenerationId','producerRevision','stage','updatedAt','builtAt','calculationVersion']:\n      val=v.get(k)\n      if isinstance(val,str) and re.fullmatch(r'[a-zA-Z0-9_.:+-]{1,180}',val):summary[k]=val\n     if v.get('generationId')!=g:raise ValueError('candidate_identity')\n     markets=v.get('manifest',{}).get('markets',{})\n     summary['marketCounts']={k:m['count'] for k,m in markets.items() if k in ['china','korea','japan','uae','europe','georgia'] and isinstance(m,dict) and type(m.get('count')) is int}\n    row[name]=summary\n   rows.append(row)\n  return {'window':[LOW,HIGH],'lists':lists,'candidates':rows,'requests':self.requests,'storageWrites':0,'supplierRequests':0,'leaseOperations':0,'activationVerified':False,'completenessVerified':False}\nif __name__=='__main__':\n try:result=Probe().run()\n except Exception as e:\n  code=str(e) if isinstance(e,ValueError) and re.fullmatch(r'[a-z_0-9]{1,60}',str(e)) else 'probe_failed'\n  print(json.dumps({'error':code,'storageWrites':0}));raise SystemExit(1)\n with open('candidate-probe.json','w') as f:json.dump(result,f,indent=2)\n print(json.dumps(result))\nPY_PROBE\ntimeout --kill-after=5s 200s python \"$RUNNER_TEMP/probe.py\"\n"
+    - name: Upload metadata evidence
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: china-orphan-candidate-readonly-${{ github.run_id }}
+        path: candidate-probe.json
+        if-no-files-found: warn
+        retention-days: 7
+'on':
+  push:
+    branches:
+    - main
+    paths:
+    - .github/workflows/china-orphan-candidate-readonly-44121174584.yml
