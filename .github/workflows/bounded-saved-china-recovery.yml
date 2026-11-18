@@ -12,13 +12,13 @@ concurrency:
   group: regcloud-production-release
   cancel-in-progress: false
 env:
-  OPERATIONAL_PACKAGE_BLOB: 7d4651638d2f7be745aab35043d1c2e844705863
-  OPERATIONAL_MANIFEST_SHA256: 9819273db111780bf73d172b6425c4a8a01ce486e3231afe21a3ea97c158aa66
+  OPERATIONAL_PACKAGE_BLOB: 5eb3d5f1e616824e6e8f64f72f72c6948a903672
+  OPERATIONAL_MANIFEST_SHA256: 60c7a30647e3ff7bff192d52d8b5804b6ec82e898de2c913a7543d6add2f8b39
   CONTROLLER_PACKAGE_BLOB: 3dfa5fbfe562ede35c8b182b832fa9baf0c48873
-  CI_TEST_PACKAGE_BLOB: 60cdde7b17010c7d67c61f0f00464c33a1e86dfe
+  CI_TEST_PACKAGE_BLOB: 7edbad0f6bad7d691e14e02fac36fad8255de203
 jobs:
   ci:
-    if: github.ref == 'refs/heads/main' && (github.event_name == 'workflow_dispatch' || github.event.head_commit.message == 'Run bounded saved China recovery 20261118-v5')
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'workflow_dispatch' || github.event.head_commit.message == 'Run bounded saved China recovery 20261118-v6')
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
@@ -273,6 +273,7 @@ jobs:
             ${{ runner.temp }}/china-job/work/resource-admission.json
             ${{ runner.temp }}/china-job/work/capture-inventory.json
             ${{ runner.temp }}/china-job/work/preparation-step.json
+            ${{ runner.temp }}/china-job/work/prepared/canonical-admission.json
             ${{ runner.temp }}/china-job/source-extraction.json
           if-no-files-found: ignore
           retention-days: 14
