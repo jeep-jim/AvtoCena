@@ -18,7 +18,7 @@ env:
   CI_TEST_PACKAGE_BLOB: d39eb0ad0407649e1f7871ec14b4ce416a0e73a1
 jobs:
   ci:
-    if: github.ref == 'refs/heads/main' && (github.event_name == 'workflow_dispatch' || github.event.head_commit.message == 'Run bounded saved China recovery 20261118-v1')
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'workflow_dispatch' || github.event.head_commit.message == 'Run bounded saved China recovery 20261118-v2')
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
@@ -94,6 +94,9 @@ jobs:
         run: |
           set -euo pipefail
           test "$(node --version)" = v24.22.1
+          npm install --prefix "$RUNNER_TEMP/pinned-npm" --ignore-scripts --no-audit --no-fund npm@11.9.0
+          export PATH="$RUNNER_TEMP/pinned-npm/node_modules/.bin:$PATH"
+          echo "$RUNNER_TEMP/pinned-npm/node_modules/.bin" >> "$GITHUB_PATH"
           test "$(npm --version)" = 11.9.0
           (cd publisher && npm ci)
       - name: Run separately pinned portable regression suite
@@ -197,6 +200,9 @@ jobs:
         run: |
           set -euo pipefail
           test "$(node --version)" = v24.22.1
+          npm install --prefix "$RUNNER_TEMP/pinned-npm" --ignore-scripts --no-audit --no-fund npm@11.9.0
+          export PATH="$RUNNER_TEMP/pinned-npm/node_modules/.bin:$PATH"
+          echo "$RUNNER_TEMP/pinned-npm/node_modules/.bin" >> "$GITHUB_PATH"
           test "$(npm --version)" = 11.9.0
           (cd publisher && npm ci)
           (cd runtime && npm ci)
