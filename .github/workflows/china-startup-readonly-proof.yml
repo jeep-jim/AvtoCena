@@ -1,0 +1,91 @@
+name: Exact China startup readonly proof
+'on':
+  workflow_dispatch: null
+  push:
+    branches:
+    - main
+    paths:
+    - .github/workflows/china-startup-readonly-proof.yml
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: china-startup-readonly-proof
+  cancel-in-progress: false
+env:
+  OPERATIONAL_PACKAGE_BLOB: b65060643f37ed12dd610a6fc863c7397eff0bea
+  OPERATIONAL_MANIFEST_SHA256: 6411ac3d0b2ac036ba0e3ec123fe008b3f7b84ffac77efdfc8ac38e356396701
+  DIAGNOSTIC_PACKAGE_BLOB: 045360bb5ce0f87f5345fe5b1051436df25c33e8
+jobs:
+  proof:
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'workflow_dispatch' || github.event.head_commit.message == 'Diagnose exact China startup readonly 20261118-v1')
+    environment: regcloud-staging
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        ref: bb6317bffd1f7b1832681ac78378fe6c3e39e3b5
+        path: publisher
+        persist-credentials: false
+    - uses: actions/checkout@v4
+      with:
+        ref: 83ff17075e9188dcf227c8752dc064248d5f42e0
+        path: runtime
+        persist-credentials: false
+    - uses: actions/setup-node@v4
+      with:
+        node-version: 24.22.1
+    - name: Materialize exact hash-bound code without storage credentials
+      env:
+        GH_TOKEN: ${{ github.token }}
+      run: "set -euo pipefail\n[[ \"$OPERATIONAL_PACKAGE_BLOB\" =~ ^[a-f0-9]{40}$ ]]\n[[ \"$DIAGNOSTIC_PACKAGE_BLOB\" =~ ^[a-f0-9]{40}$ ]]\n[[ \"$OPERATIONAL_MANIFEST_SHA256\" =~ ^[a-f0-9]{64}$ ]]\nmkdir -m700 \"$RUNNER_TEMP/china-job\"\ncat > \"$RUNNER_TEMP/unpack-frozen.py\" <<'PY'\n#!/usr/bin/env python3\n\"\"\"Decode an exact Git blob containing reviewed source only. No archive authority.\"\"\"\nimport base64,hashlib,json,os,pathlib,re,sys\n\ndef unpack(response,expected_blob,destination):\n    if not re.fullmatch('[a-f0-9]{40}',expected_blob): raise ValueError('blob_pin')\n    response=pathlib.Path(response);destination=pathlib.Path(destination)\n    if not response.is_file() or response.stat().st_size>24*1024**2 or not destination.is_absolute() or destination.exists() or destination.parent.resolve()!=destination.parent: raise ValueError('bundle_layout')\n    envelope=json.loads(response.read_bytes())\n    if envelope.get('encoding')!='base64' or envelope.get('sha')!=expected_blob:\
+        \ raise ValueError('blob_binding')\n    content=base64.b64decode(''.join(envelope['content'].split()),validate=True)\n    if len(content)>16*1024**2 or hashlib.sha1(b'blob '+str(len(content)).encode()+b'\\0'+content).hexdigest()!=expected_blob: raise ValueError('blob_hash')\n    bundle=json.loads(content);entries=bundle.get('files');seen=set();total=0;prepared=[]\n    if bundle.get('version')!=1 or not isinstance(entries,list) or not 1<=len(entries)<=10000: raise ValueError('bundle_schema')\n    for e in entries:\n        name=e['path'];parts=name.split('/')\n        if not re.fullmatch(r'[A-Za-z0-9_.\\-/]+',name) or any(p in ('','.','..','.git','.env','node_modules','raw','data') for p in parts) or name in seen or not name.endswith(('.mjs','.cjs','.js','.ts','.json','.py','.md')): raise ValueError('bundle_path')\n        data=e['contents'].encode('utf-8');total+=len(data)\n        if len(data)>8*1024**2 or total>16*1024**2 or hashlib.sha256(data).hexdigest()!=e['sha256']: raise\
+        \ ValueError('bundle_file_binding')\n        prepared.append((parts,data));seen.add(name)\n    destination.mkdir(mode=0o700)\n    # Only immutable hash-pinned controller-authored names enter this fresh private root.\n    for parts,data in prepared:\n        out=destination.joinpath(*parts);out.parent.mkdir(mode=0o700,parents=True,exist_ok=True)\n        fd=os.open(out,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o400)\n        try:\n            view=memoryview(data)\n            while view:\n                n=os.write(fd,view)\n                if n<=0: raise ValueError('bundle_short_write')\n                view=view[n:]\n        finally: os.close(fd)\n    return {'files':len(entries),'bytes':total,'gitBlob':expected_blob}\nif __name__=='__main__':\n    try: print(json.dumps(unpack(*sys.argv[1:]),separators=(',',':')))\n    except Exception:\n        print('{\"ok\":false,\"code\":\"frozen_bundle_unpack_failed\"}',file=sys.stderr);sys.exit(1)\nPY\ngh api repos/jeep-jim/AvtoCena/git/blobs/$OPERATIONAL_PACKAGE_BLOB\
+        \ > \"$RUNNER_TEMP/source-blob.json\"\ngh api repos/jeep-jim/AvtoCena/git/blobs/$DIAGNOSTIC_PACKAGE_BLOB > \"$RUNNER_TEMP/diagnostic-blob.json\"\npython \"$RUNNER_TEMP/unpack-frozen.py\" \"$RUNNER_TEMP/source-blob.json\" \"$OPERATIONAL_PACKAGE_BLOB\" \"$RUNNER_TEMP/china-job/package\"\npython \"$RUNNER_TEMP/unpack-frozen.py\" \"$RUNNER_TEMP/diagnostic-blob.json\" \"$DIAGNOSTIC_PACKAGE_BLOB\" \"$RUNNER_TEMP/china-job/diagnostic\"\n"
+    - name: Install exact locked native toolchains without storage credentials
+      run: 'set -euo pipefail
+
+        test "$(node --version)" = v24.22.1
+
+        npm install --prefix "$RUNNER_TEMP/pinned-npm" --ignore-scripts --no-audit --no-fund npm@11.9.0
+
+        export PATH="$RUNNER_TEMP/pinned-npm/node_modules/.bin:$PATH"
+
+        echo "$RUNNER_TEMP/pinned-npm/node_modules/.bin" >> "$GITHUB_PATH"
+
+        test "$(npm --version)" = 11.9.0
+
+        (cd publisher && npm ci)
+
+        (cd runtime && npm ci)
+
+        '
+    - name: Verify original package and bind readonly diagnostic overlay
+      run: "set -euo pipefail\npython - <<'PY_BIND'\nimport hashlib,json,os,pathlib,shutil,base64\nroot=pathlib.Path(os.environ['RUNNER_TEMP'])/'china-job';package=root/'package';diag=root/'diagnostic'\nb=(package/'SOURCE_MANIFEST.json').read_bytes();assert hashlib.sha256(b).hexdigest()==os.environ['OPERATIONAL_MANIFEST_SHA256'];m=json.loads(b)\nfor directory,entries in [(package/'operational',m['operational']['files']),*((pathlib.Path(os.environ['GITHUB_WORKSPACE'])/k,m['native'][k]['files']) for k in ['publisher','runtime'])]:\n for e in entries:\n  b=(directory/e['path']).read_bytes();assert len(b)==e['bytes'] and hashlib.sha256(b).hexdigest()==e['sha256']\nenvelope=json.load(open(pathlib.Path(os.environ['RUNNER_TEMP'])/'diagnostic-blob.json'));raw=base64.b64decode(envelope['content']);assert hashlib.sha1(b'blob '+str(len(raw)).encode()+b'\\0'+raw).hexdigest()==os.environ['DIAGNOSTIC_PACKAGE_BLOB'];expected={e['path']:e for e in json.loads(raw)['files']}\n# Diagnostic overlay is independently\
+        \ pinned; this is NOT the original publication closure.\nfiles=['production/runner.mjs','downstream/transaction/production-session.mjs','production/pricing-data-binding/fingerprint-child.mjs','production/startup-proof.mjs','production/startup-readonly.mjs']\nfor name in files:\n src=diag/'operational'/name;target=package/'operational'/name;target.parent.mkdir(parents=True,exist_ok=True);assert target.parent.resolve()==target.parent and not target.is_symlink();target.unlink(missing_ok=True);shutil.copyfile(src,target);target.chmod(0o400);assert hashlib.sha256(target.read_bytes()).hexdigest()==expected['operational/'+name]['sha256']\nPY_BIND\nnode --input-type=module - <<'JS_CONFIG'\nimport fs from 'node:fs/promises';import path from 'node:path';import {pathToFileURL} from 'node:url';import {createHash} from 'node:crypto';\nconst root=path.join(process.env.RUNNER_TEMP,'china-job'),receiptFile=path.join(root,'diagnostic/archive-receipt.json');\nconst {buildStartupProofConfig}=await\
+        \ import(pathToFileURL(path.join(root,'package/operational/production/startup-proof.mjs')));\nconst receiptSha256=createHash('sha256').update(await fs.readFile(receiptFile)).digest('hex');\nconst c=buildStartupProofConfig({publisherRoot:path.join(process.env.GITHUB_WORKSPACE,'publisher'),runtimeRoot:path.join(process.env.GITHUB_WORKSPACE,'runtime'),receiptFile,receiptSha256});\nconst body=JSON.stringify(c);await fs.writeFile(path.join(root,'startup-config.json'),body,{flag:'wx',mode:0o400});\nawait fs.appendFile(process.env.GITHUB_ENV,'STARTUP_CONFIG_SHA256='+createHash('sha256').update(body).digest('hex')+'\\n');\nJS_CONFIG\n"
+    - name: Run exact startup proof with remote writes denied
+      env:
+        JSON_STORAGE_DRIVER: object
+        YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+        YC_OBJECT_STORAGE_REGION: us-east-1
+        YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+        YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+        YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+        YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+        NODE_OPTIONS: --max-old-space-size=2560
+      run: 'set -euo pipefail
+
+        ulimit -c 0
+
+        timeout --signal=TERM --kill-after=10s 600s node --import "$GITHUB_WORKSPACE/publisher/node_modules/tsx/dist/loader.mjs" "$RUNNER_TEMP/china-job/package/operational/production/startup-proof.mjs" "$RUNNER_TEMP/china-job/startup-config.json" "$RUNNER_TEMP/china-job/startup-evidence" "$STARTUP_CONFIG_SHA256"
+
+        '
+    - uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: china-startup-readonly-proof-${{ github.run_id }}
+        path: ${{ runner.temp }}/china-job/startup-evidence/*.json
+        if-no-files-found: warn
+        retention-days: 14
