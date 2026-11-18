@@ -17,7 +17,7 @@ env:
   CI_TEST_PACKAGE_BLOB: d39eb0ad0407649e1f7871ec14b4ce416a0e73a1
 jobs:
   proof:
-    if: github.ref == 'refs/heads/main' && (github.event_name == 'workflow_dispatch' || github.event.head_commit.message == 'Probe bounded China runner resources 20261118-v1')
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'workflow_dispatch' || github.event.head_commit.message == 'Probe bounded China runner resources 20261118-v2')
     runs-on: ubuntu-latest
     environment: regcloud-staging
     timeout-minutes: 30
@@ -109,6 +109,10 @@ jobs:
           const {readRunnerResources}=await import(pathToFileURL(file));const resource=await readRunnerResources({workspace:process.env.GITHUB_WORKSPACE,temp:process.env.RUNNER_TEMP});
           const GiB=1024**3,requiredMemory=8*GiB,sourceBytes=285025402+2748251915,requiredDiskAfterSource=37*GiB,memory=Math.min(resource.memory.availableBytes??0,resource.memory.cgroupMemoryStatus==='unlimited'?Number.MAX_SAFE_INTEGER:resource.memory.cgroupMemoryAvailable??0),disk=Math.min(...Object.values(resource.filesystems).map(x=>x.availableBytes));
           const proof={...resource,installedToolchain:{node:process.version,npm:'11.9.0'},archiveNotDownloaded:true,storageCredentialsPresent:false,catalogWrites:0,supplierCalls:0,requiredMemoryBytes:requiredMemory,availableMemoryForAdmission:memory,requiredDiskBeforeSourceBytes:requiredDiskAfterSource+sourceBytes,availableDiskBytes:disk,memoryAdmitted:memory>=requiredMemory,diskAdmitted:disk>=requiredDiskAfterSource+sourceBytes,executionAuthorized:false};
+          const read=async p=>{try{const b=await fs.readFile(p);if(b.length>1048576)throw Error('metadata_cap');return b.toString('utf8');}catch(e){return {error:['ENOENT','EACCES'].includes(e.code)?e.code:'metadata_unavailable'};}};
+          const membership=await read('/proc/self/cgroup'),mounts=await read('/proc/self/mountinfo'),controllers=await read('/proc/cgroups');const paths=new Set(['/sys/fs/cgroup/memory.max','/sys/fs/cgroup/memory.current','/sys/fs/cgroup/cgroup.controllers','/sys/fs/cgroup/cgroup.type','/sys/fs/cgroup/memory/memory.limit_in_bytes','/sys/fs/cgroup/memory/memory.usage_in_bytes']);
+          if(typeof membership==='string')for(const line of membership.trim().split('\n')){const parts=line.split(':');const group=parts[2];if(!group?.startsWith('/')||group.split('/').includes('..'))continue;const v2=parts[0]==='0'&&parts[1]==='',v1=parts[1]?.split(',').includes('memory');if(!v2&&!v1)continue;const base=v2?'/sys/fs/cgroup':'/sys/fs/cgroup/memory';let current=path.join(base,group);for(let depth=0;depth<32;depth++){for(const f of v2?['memory.max','memory.current','cgroup.controllers']:['memory.limit_in_bytes','memory.usage_in_bytes','memory.use_hierarchy'])paths.add(path.join(current,f));if(current===base)break;current=path.dirname(current);if(!current.startsWith(base))break;}}
+          const cgroupEvidence={membership,mounts:typeof mounts==='string'?mounts.split('\n').filter(l=>/ - cgroup2? /.test(l)):mounts,controllers:typeof controllers==='string'?controllers.split('\n').filter(l=>l.startsWith('#')||l.startsWith('memory')):controllers,files:{}};for(const p of paths)cgroupEvidence.files[p]=await read(p);proof.cgroupEvidence=cgroupEvidence;
           await fs.writeFile(path.join(root,'environment-proof.json'),JSON.stringify(proof,null,2),{flag:'wx',mode:0o600});console.log(JSON.stringify(proof));
           JS
       - name: Retain read-only environment evidence
