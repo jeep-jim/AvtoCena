@@ -12,13 +12,13 @@ concurrency:
   group: regcloud-production-release
   cancel-in-progress: false
 env:
-  OPERATIONAL_PACKAGE_BLOB: c00429a2010b1d90ed3f47f133943f4e0cb3c4e4
-  OPERATIONAL_MANIFEST_SHA256: a224095f5a51c05af7c9ded78440acc17ecc7ff3521bd8bd1fbcfe369bbdfa42
-  CONTROLLER_PACKAGE_BLOB: 9044d6b46a07e88bc0e74d8d859cc87c101dcfaf
-  CI_TEST_PACKAGE_BLOB: d39eb0ad0407649e1f7871ec14b4ce416a0e73a1
+  OPERATIONAL_PACKAGE_BLOB: b65060643f37ed12dd610a6fc863c7397eff0bea
+  OPERATIONAL_MANIFEST_SHA256: 6411ac3d0b2ac036ba0e3ec123fe008b3f7b84ffac77efdfc8ac38e356396701
+  CONTROLLER_PACKAGE_BLOB: 3dfa5fbfe562ede35c8b182b832fa9baf0c48873
+  CI_TEST_PACKAGE_BLOB: add940a4ccff30d09b23c6dc82d4347d1f63f831
 jobs:
   ci:
-    if: github.ref == 'refs/heads/main' && (github.event_name == 'workflow_dispatch' || github.event.head_commit.message == 'Run bounded saved China recovery 20261118-v2')
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'workflow_dispatch' || github.event.head_commit.message == 'Run bounded saved China recovery 20261118-v3')
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
@@ -230,6 +230,17 @@ jobs:
           with (root/'request.json').open('x') as f:json.dump(request,f)
           PY
           node "$RUNNER_TEMP/china-job/controller/materialize-job.mjs" "$RUNNER_TEMP/china-job/request.json" > "$RUNNER_TEMP/china-job/materialized.json"
+          node "$RUNNER_TEMP/china-job/package/operational/production/runner-resources.mjs" "$GITHUB_WORKSPACE" "$RUNNER_TEMP" "$RUNNER_TEMP/china-job/evidence/startup-resources.json"
+          cat "$RUNNER_TEMP/china-job/evidence/startup-resources.json"
+          python - <<'PYRES'
+          import json,os,pathlib
+          root=pathlib.Path(os.environ['RUNNER_TEMP'])/'china-job';c=json.load(open(root/'config.json'));r=json.load(open(root/'evidence'/'startup-resources.json'))
+          m=r['memory'];status=m['cgroupMemoryStatus'];assert status in ('finite','unlimited'),'startup_cgroup_unverified'
+          available=min(m['availableBytes'],m['cgroupMemoryAvailable'] if status=='finite' else m['availableBytes'])
+          assert available>=c['minMemoryBytes'],'startup_memory_refused'
+          assert min(f['availableBytes'] for f in r['filesystems'].values())>=c['minFreeDiskBytes'],'startup_disk_refused'
+          print('startup_resources_verified_no_storage_access')
+          PYRES
       - name: Same-process bounded prepare, native checks and guarded cutover
         env:
           JSON_STORAGE_DRIVER: object
