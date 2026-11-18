@@ -1,0 +1,113 @@
+name: Inspect failed China producer checkpoint metadata only
+'on':
+  workflow_dispatch: {}
+  push:
+    branches:
+    - main
+    paths:
+    - .github/workflows/china-failed-producer-inspection-44289631211.yml
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: china-failed-producer-inspection-44289631211
+  cancel-in-progress: false
+jobs:
+  inspect:
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'workflow_dispatch' || github.event.head_commit.message ==
+      'Inspect failed China producer 44289631211 metadata only')
+    runs-on: ubuntu-latest
+    environment: regcloud-staging
+    timeout-minutes: 5
+    steps:
+    - name: Verify exact failed producer before storage reads
+      env:
+        GH_TOKEN: ${{ github.token }}
+      run: 'set -euo pipefail
+
+        gh api --hostname github.com repos/jeep-jim/AvtoCena/actions/runs/44289631211 > "$RUNNER_TEMP/producer-identity.json"
+
+        python - <<''CHECK''
+
+        import json,os
+
+        r=json.load(open(os.environ[''RUNNER_TEMP'']+''/producer-identity.json''))
+
+        assert r[''id'']==44289631211 and r[''run_attempt'']==1 and r[''head_sha'']==''bc02ad4c5772660c75b08cc84ab019f628e8ead2''
+
+        assert r[''repository''][''full_name'']==''jeep-jim/AvtoCena'' and r[''status'']==''completed'' and r[''conclusion'']==''failure''
+
+        assert r[''path'']==''.github/workflows/bounded-china-preaudit-producer-v1.yml''
+
+        CHECK
+
+        '
+    - uses: actions/setup-node@v4
+      with:
+        node-version: 24.22.1
+    - name: Read bounded metadata without parts or writes
+      env:
+        YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+        YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+      run: "set -euo pipefail\nmkdir -m700 \"$RUNNER_TEMP/checkpoint-inspector\"\ncat > \"$RUNNER_TEMP/checkpoint-inspector/transport.mjs\"\
+        \ <<'FIXEDMODULE'\nimport {createHash,createHmac} from 'node:crypto';\nexport const RUN_PREFIX='catalog/operational-checkpoints/v1/china/44289631211/1/';\n\
+        const STORAGE_PREFIX='migration-staging/full-20261011/',BUCKET='avtocena-staging-8120751',ORIGIN='https://s3.regru.cloud';\n\
+        const sha=b=>createHash('sha256').update(b).digest('hex'),mac=(k,v)=>createHmac('sha256',k).update(v).digest(),enc=v=>encodeURIComponent(v).replace(/[!'()*]/g,c=>'%'+c.charCodeAt(0).toString(16).toUpperCase());\n\
+        // Same reviewed GET SigV4 algorithm; canonical sorted encoded query added for ListObjectsV2.\nexport function signRead({key='',list=false,credentials,date=new\
+        \ Date()}){\n if(!credentials?.accessKeyId||!credentials.secretAccessKey)throw Error('inspector_credentials');\n if(list?key!=='':!['catalog/manifest.json','catalog/internal/manifest.json'].includes(key)&&!new\
+        \ RegExp('^'+RUN_PREFIX+'[a-f0-9]{64}/manifest\\\\.json$').test(key))throw Error('inspector_scope');\n const pathname='/'+BUCKET+(list?'':'/'+STORAGE_PREFIX+key),query=list?Object.entries({'list-type':'2',delimiter:'/',prefix:STORAGE_PREFIX+RUN_PREFIX,'max-keys':'100'}).map(([k,v])=>[enc(k),enc(v)]).sort(([a],[b])=>a.localeCompare(b)).map(([k,v])=>k+'='+v).join('&'):'';\n\
+        \ const time=date.toISOString().replace(/[:-]|\\.\\d{3}/g,''),day=time.slice(0,8),scope=day+'/us-east-1/s3/aws4_request',headers={host:'s3.regru.cloud','x-amz-content-sha256':sha(''),'x-amz-date':time},names=Object.keys(headers).sort();\n\
+        \ const request=['GET',pathname,query,names.map(k=>`${k}:${headers[k]}\\n`).join(''),names.join(';'),sha('')].join('\\\
+        n'),signing=mac(mac(mac(mac('AWS4'+credentials.secretAccessKey,day),'us-east-1'),'s3'),'aws4_request');headers.authorization=`AWS4-HMAC-SHA256\
+        \ Credential=${credentials.accessKeyId}/${scope}, SignedHeaders=${names.join(';')}, Signature=${createHmac('sha256',signing).update(['AWS4-HMAC-SHA256',time,scope,sha(request)].join('\\\
+        n')).digest('hex')}`;\n return {url:ORIGIN+pathname+(query?'?'+query:''),options:{method:'GET',headers,redirect:'error'}};\n\
+        }\nexport function createTransport({credentials,fetchImpl=globalThis.fetch,now=()=>new Date()}){\n let listed=false,reads=0;const\
+        \ allowed=new Set(['catalog/manifest.json','catalog/internal/manifest.json']),seen=new Set(),started=Date.now();\n\
+        \ async function get(key,list,maxBytes){if(Date.now()-started>=120000)throw Error('inspector_deadline');const abort=new\
+        \ AbortController(),timer=setTimeout(()=>abort.abort(),Math.min(10000,120000-(Date.now()-started)));let reader;try{const\
+        \ s=signRead({key,list,credentials,date:now()}),r=await fetchImpl(s.url,{...s.options,signal:abort.signal});if(![200,403,404].includes(r.status))throw\
+        \ Error('inspector_http_status');if(r.headers.get('content-encoding'))throw Error('inspector_encoding');const size=r.headers.get('content-length');if(size!==null&&(!/^\\\
+        d+$/.test(size)||Number(size)>maxBytes))throw Error('inspector_body_cap');const chunks=[];let n=0;if(r.body){reader=r.body.getReader();for(;;){const{done,value}=await\
+        \ reader.read();if(done)break;n+=value.length;if(n>maxBytes)throw Error('inspector_body_cap');chunks.push(Buffer.from(value));}}if(size!==null&&n!==Number(size))throw\
+        \ Error('inspector_short_body');return{status:r.status,body:Buffer.concat(chunks,n)};}catch(e){throw Error(abort.signal.aborted?'inspector_timeout':/^inspector_[a-z_]+$/.test(e?.message||'')?e.message:'inspector_transport');}finally{abort.abort();clearTimeout(timer);await\
+        \ reader?.cancel().catch(()=>{});reader?.releaseLock();}}\n return Object.freeze({listingPrefix:STORAGE_PREFIX+RUN_PREFIX,async\
+        \ list(prefix,{delimiter,maxKeys}={}){if(listed||prefix!==RUN_PREFIX||delimiter!=='/'||maxKeys!==100)throw Error('inspector_list_scope');listed=true;const\
+        \ result=await get('',true,65536);if(result.status===200){const xml=result.body.toString('utf8');if(/<!DOCTYPE|<!ENTITY/.test(xml))throw\
+        \ Error('inspector_list_xml');const found=[...xml.matchAll(/<CommonPrefixes>\\s*<Prefix>([^<]+)<\\/Prefix>\\s*<\\\
+        /CommonPrefixes>/g)].map(m=>m[1]);if(found.length>6)throw Error('inspector_manifest_limit');for(const p of found){if(!p.startsWith(STORAGE_PREFIX+RUN_PREFIX)||!new\
+        \ RegExp('^'+STORAGE_PREFIX+RUN_PREFIX+'[a-f0-9]{64}/$').test(p))throw Error('inspector_list_prefix');allowed.add(p.slice(STORAGE_PREFIX.length)+'manifest.json');}}return\
+        \ result;},async read(key,maxBytes){if(!allowed.has(key)||seen.has(key)||reads>=8||!Number.isSafeInteger(maxBytes)||maxBytes<1||maxBytes>4*1024**2)throw\
+        \ Error('inspector_read_scope');seen.add(key);reads++;return get(key,false,maxBytes);}});\n}\n\nFIXEDMODULE\ncat >\
+        \ \"$RUNNER_TEMP/checkpoint-inspector/inspect.mjs\" <<'FIXEDMODULE'\nimport {createHash} from 'node:crypto';\nexport\
+        \ const PREFIX='catalog/operational-checkpoints/v1/china/44289631211/1/';\nconst sha=b=>createHash('sha256').update(b).digest('hex'),hex=x=>typeof\
+        \ x==='string'&&/^[a-f0-9]{64}$/.test(x),names=['ordered','public','retained','fresh','metadata','overall'];\nfunction\
+        \ fail(code){throw Error('inspection_'+code);}\nexport function parseListing(body,prefix){if(!Buffer.isBuffer(body)||body.length>65536)fail('list_cap');const\
+        \ s=body.toString('utf8');if(/<!|&|<Contents>|<NextContinuationToken>/.test(s)||!/^\\s*(?:<\\?xml[^?]*\\?>\\s*)?<ListBucketResult(?:\\\
+        s[^>]*)?>[\\s\\S]*<\\/ListBucketResult>\\s*$/.test(s))fail('list_shape');if((s.match(/<IsTruncated>false<\\/IsTruncated>/g)||[]).length!==1)fail('list_truncated');const\
+        \ groups=[...s.matchAll(/<CommonPrefixes>\\s*<Prefix>([^<]+)<\\/Prefix>\\s*<\\/CommonPrefixes>/g)].map(m=>m[1]);if(groups.length>6||new\
+        \ Set(groups).size!==groups.length||(s.match(/<CommonPrefixes>/g)||[]).length!==groups.length)fail('list_inventory');for(const\
+        \ k of groups)if(!k.startsWith(prefix)||! /^[a-f0-9]{64}\\/$/.test(k.slice(prefix.length)))fail('list_scope');return\
+        \ groups;}\nexport function summarizeManifest(body,root){if(!Buffer.isBuffer(body)||body.length>4194304)fail('manifest_cap');let\
+        \ x;try{x=JSON.parse(body);}catch{fail('manifest_json');}const b=x.binding;if(x.version!==1||x.scope!=='private-data-checkpoint-not-authority'||!b||Object.keys(b).sort().join()!==['owner','run','source','semanticClosure','section'].sort().join()||b.owner!=='jeep-jim/AvtoCena/44289631211/1'||b.run!=='44289631211'||!hex(b.source)||b.semanticClosure!=='5de00251483c429b52706920d8d69c1606a4c5600d1432375e7b4123c5e8b81e'||!names.includes(b.section))fail('manifest_binding');const\
+        \ ordered=Object.fromEntries(['owner','run','section','semanticClosure','source'].map(k=>[k,b[k]]));if(sha(JSON.stringify(ordered))!==root)fail('manifest_root');if(!Array.isArray(x.parts)||x.parts.length>8192||!Number.isSafeInteger(x.bytes)||x.bytes<0||!Number.isSafeInteger(x.count)||x.count<0)fail('manifest_inventory');let\
+        \ bytes=0,count=0;for(const [i,p] of x.parts.entries()){if(p.index!==i||!Number.isSafeInteger(p.bytes)||p.bytes<1||p.bytes>4194304||!Number.isSafeInteger(p.count)||p.count<0||!hex(p.sha256))fail('manifest_part');bytes+=p.bytes;count+=p.count;}if(bytes!==x.bytes||count!==x.count)fail('manifest_totals');return{section:b.section,manifestSha256:sha(body),bytes:x.bytes,count:x.count,parts:x.parts.length,sourceBindingSha256:b.source,contentVerified:false};}\n\
+        function pointer(body){if(!Buffer.isBuffer(body)||body.length>4194304)fail('pointer_cap');let x;try{x=JSON.parse(body);}catch{fail('pointer_json');}const\
+        \ counts={};for(const group of ['markets','sources'])for(const name of ['china','korea','uae','europe','georgia','japan','autohome_new_china_open','autohome_used_china_open']){const\
+        \ d=x[group]?.[name];if(d&&Number.isSafeInteger(d.count)&&d.count>=0)counts[group+':'+name]=d.count;}return{counts,sha256:sha(body),generationId:typeof\
+        \ x.generationId==='string'&&/^[a-zA-Z0-9_-]{1,150}$/.test(x.generationId)?x.generationId:null,bytes:body.length};}\n\
+        export async function inspect(transport){const report={version:1,runId:'44289631211',attempt:1,readOnly:true,publicationAuthority:false,checkpointReady:false,contentVerified:false,sections:[],pointers:[]};const\
+        \ list=await transport.list(PREFIX,{delimiter:'/',maxKeys:100});if(list.status!==200)fail('list_status');const listingPrefix=transport.listingPrefix||PREFIX,roots=parseListing(list.body,listingPrefix);for(const\
+        \ full of roots){const relative=full.slice(listingPrefix.length,-1),r=await transport.read(PREFIX+relative+'/manifest.json',4194304);if(r.status===404){report.sections.push({root:relative,status:404});continue;}if(r.status!==200)fail('manifest_status');report.sections.push({root:relative,status:200,...summarizeManifest(r.body,relative)});}const\
+        \ seen=report.sections.filter(x=>x.status===200).map(x=>x.section);if(new Set(seen).size!==seen.length)fail('duplicate_section');for(const\
+        \ [kind,key,expected] of [['public','catalog/manifest.json','4c34c20d9784b571414390cab450ceeeaee60b00c168476100419ec5c05cb038'],['internal','catalog/internal/manifest.json','0aa3524abf2aa0563811a7980ebe9eded7566a1d2ab36b057557dfb7caba6585']]){const\
+        \ r=await transport.read(key,4194304);if(r.status!==200)fail('pointer_status');const summary=pointer(r.body);report.pointers.push({kind,...summary,matchesProducerBaseline:summary.sha256===expected});}return\
+        \ report;}\n\nFIXEDMODULE\ncat > \"$RUNNER_TEMP/checkpoint-inspector/entry.mjs\" <<'FIXEDMODULE'\nimport {createTransport}\
+        \ from './transport.mjs';\nimport {inspect} from './inspect.mjs';\ntry {const report=await inspect(createTransport({credentials:{accessKeyId:process.env.YC_OBJECT_STORAGE_ACCESS_KEY_ID,secretAccessKey:process.env.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY}}));console.log(JSON.stringify(report));}catch(e){console.log(JSON.stringify({ok:false,readOnly:true,publicationAuthority:false,checkpointReady:false,code:/^(?:inspector|inspection)_[a-z_]+$/.test(e?.message||'')?e.message:'inspection_failure'}));process.exitCode=1;}\n\
+        \nFIXEDMODULE\ntimeout --signal=TERM --kill-after=5s 120s node \"$RUNNER_TEMP/checkpoint-inspector/entry.mjs\" > \"\
+        $RUNNER_TEMP/checkpoint-inspector/report.json\"\ncat \"$RUNNER_TEMP/checkpoint-inspector/report.json\"\n"
+    - uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: failed-producer-metadata-44289631211
+        path: ${{ runner.temp }}/checkpoint-inspector/report.json
+        if-no-files-found: ignore
