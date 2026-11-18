@@ -15,10 +15,10 @@ concurrency:
 env:
   OPERATIONAL_PACKAGE_BLOB: b65060643f37ed12dd610a6fc863c7397eff0bea
   OPERATIONAL_MANIFEST_SHA256: 6411ac3d0b2ac036ba0e3ec123fe008b3f7b84ffac77efdfc8ac38e356396701
-  DIAGNOSTIC_PACKAGE_BLOB: 045360bb5ce0f87f5345fe5b1051436df25c33e8
+  DIAGNOSTIC_PACKAGE_BLOB: 18aa3b98c60cc7b86ffee7c83f4088f9f9285492
 jobs:
   proof:
-    if: github.ref == 'refs/heads/main' && (github.event_name == 'workflow_dispatch' || github.event.head_commit.message == 'Diagnose exact China startup readonly 20261118-v1')
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'workflow_dispatch' || github.event.head_commit.message == 'Diagnose exact China startup readonly 20261118-v2')
     environment: regcloud-staging
     runs-on: ubuntu-latest
     timeout-minutes: 15
