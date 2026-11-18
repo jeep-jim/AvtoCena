@@ -1,0 +1,57 @@
+name: Stop owner-cancelled China run 44312749516
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/stop-china-44312749516.yml]
+permissions:
+  contents: read
+  actions: write
+concurrency:
+  group: stop-china-44312749516
+  cancel-in-progress: false
+jobs:
+  stop:
+    if: github.ref == 'refs/heads/main' && github.event.head_commit.message == 'Stop owner-cancelled China run 44312749516'
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - name: Cancel only the exact owner-cancelled run
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          gh api repos/jeep-jim/AvtoCena/actions/runs/44312749516 > "$RUNNER_TEMP/exact-run.json"
+          python - <<'PY'
+          import json,os
+          x=json.load(open(os.environ['RUNNER_TEMP']+'/exact-run.json'))
+          assert x['id']==44312749516 and x['run_attempt']==1
+          assert x['head_sha']=='d342e9908d95b590cef53e2c1b019466cad3798b'
+          assert x['repository']['full_name']=='jeep-jim/AvtoCena'
+          assert x['path']=='.github/workflows/bounded-china-fresh-commit-v1.yml'
+          print('Verified exact owner-cancelled run')
+          PY
+          status=$(gh api repos/jeep-jim/AvtoCena/actions/runs/44312749516 --jq .status)
+          if [ "$status" != completed ]; then
+            gh api -X POST repos/jeep-jim/AvtoCena/actions/runs/44312749516/cancel
+            echo "Cancellation requested for exact run 44312749516"
+          fi
+          for i in 1 2 3 4 5 6; do
+            status=$(gh api repos/jeep-jim/AvtoCena/actions/runs/44312749516 --jq .status)
+            if [ "$status" = completed ]; then
+              gh api repos/jeep-jim/AvtoCena/actions/runs/44312749516 --jq '{id,status,conclusion}'
+              exit 0
+            fi
+            sleep 5
+          done
+          gh api -X POST repos/jeep-jim/AvtoCena/actions/runs/44312749516/force-cancel
+          echo "Force cancellation requested for exact run 44312749516"
+          for i in 1 2 3 4 5 6; do
+            status=$(gh api repos/jeep-jim/AvtoCena/actions/runs/44312749516 --jq .status)
+            if [ "$status" = completed ]; then
+              gh api repos/jeep-jim/AvtoCena/actions/runs/44312749516 --jq '{id,status,conclusion}'
+              exit 0
+            fi
+            sleep 5
+          done
+          echo "Cancellation remains pending"
+          exit 1
