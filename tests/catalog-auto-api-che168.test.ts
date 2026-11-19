@@ -321,3 +321,13 @@ test('paid China 2014 survives final public publication without invented specifi
  assert.equal(isPublicOffer({...row,status:'removed'}),false);
  assert.equal(isPublicOffer({...row,images:[]}),false);
 });
+
+
+test('ordinary isolated China recovery stops on the first quota response',async()=>{
+ let calls=0;
+ const request=autoApiChe168Client({apiKey:'unused-test-key',retryRateLimit:false,sleep:async()=>{throw Error('unexpected retry');},fetchImpl:async()=>{
+  calls++;return new Response('unlogged-body',{status:429,headers:{'Retry-After':'90'}});
+ }});
+ await assert.rejects(request('changes',{change_id:42}),/^Error: auto_api_http_429$/);
+ assert.equal(calls,1);
+});

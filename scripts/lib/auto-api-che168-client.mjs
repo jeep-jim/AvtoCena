@@ -2,12 +2,13 @@ const BASE = 'https://api1.auto-api.com/api/v2/che168/';
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 /** Fixed origin, no redirects, and no upstream bodies/URLs in errors or logs. */
-export function autoApiChe168Client({apiKey, fetchImpl = fetch, sleep = delay, deadline = Infinity, requestDelayMs = 0, platform = "che168"}) {
+export function autoApiChe168Client({apiKey, fetchImpl = fetch, sleep = delay, deadline = Infinity, requestDelayMs = 0, retryRateLimit = true, platform = "che168"}) {
   if (!['che168','dubicars','encar'].includes(platform)) throw Error('auto_api_invalid_platform');
   const base = platform === 'encar' ? 'https://api1.auto-api.com/api/v3/encar/' : BASE.replace('/che168/', `/${platform}/`);
   apiKey = typeof apiKey === 'string' ? apiKey.trim() : '';
   if (!apiKey || /\s/.test(apiKey)) throw Error('auto_api_key_missing_or_invalid');
   if (!Number.isSafeInteger(requestDelayMs) || requestDelayMs < 0 || requestDelayMs > 60000) throw Error('auto_api_invalid_request_delay');
+  if (typeof retryRateLimit !== 'boolean') throw Error('auto_api_invalid_rate_limit_policy');
   const pause = async ms => {
     if (Date.now() + ms >= deadline) throw Error('auto_api_time_budget');
     if (ms > 0) await sleep(ms);
@@ -38,7 +39,7 @@ export function autoApiChe168Client({apiKey, fetchImpl = fetch, sleep = delay, d
         }
       }
       // A refusal is final. Do not retry with alternate identities or routes.
-      if ((response.status === 429 || response.status >= 500) && attempt < 3) {
+      if (((response.status === 429 && retryRateLimit) || response.status >= 500) && attempt < 3) {
         const header = response.headers.get('retry-after');
         const seconds = header && /^\d+(?:\.\d+)?$/.test(header) ? Number(header) : NaN;
         const retryAfter = Number.isFinite(seconds) ? seconds * 1000 : header ? Date.parse(header) - Date.now() : 0;

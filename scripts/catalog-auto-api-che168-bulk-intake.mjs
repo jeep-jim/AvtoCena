@@ -31,6 +31,7 @@ const previous=saved?.sources?.find(row=>row.sourceId===sourceId);
 // A legacy cursor is not aligned to the supplier's new file. Bootstrap once;
 // later runs only restore the replica associated with a published cursor.
 const resume=previous?.snapshotBinding===binding && previous.yearFrom===yearFrom;
+if(process.env.AUTO_API_CHE168_REQUIRE_REPLICA==='1'&&!resume)throw Error('auto_api_saved_replica_required');
 if(resume && (saved.version!==1||saved.market!=='china'||!saved.generationId||previous.provider!=='auto_api_che168'
   ||!Number.isSafeInteger(previous.cursor)||previous.cursor<config.initialCursor||!previous.replica
   ||!Number.isFinite(Date.parse(saved.updatedAt))||Date.parse(saved.updatedAt)>Date.now()
@@ -117,7 +118,7 @@ try {
     if(lastCursor!==journal.cursor){await journal.commit({cursor:lastCursor,changes:totalChanges,events:pending});pending=[];pendingBytes=0;lastSave=Date.now();}
   };
   const request=async (...args)=>{await assertCollectionEnabled('che168_feed');return rawRequest(...args);};
-  const rawRequest=autoApiChe168Client({apiKey:process.env.AUTO_API_CHE168_KEY,deadline:Date.now()+Math.min(240*60000,Number(process.env.CATALOG_INTAKE_TIME_MS||210*60000)),requestDelayMs:200});
+  const rawRequest=autoApiChe168Client({apiKey:process.env.AUTO_API_CHE168_KEY,deadline:Date.now()+Math.min(240*60000,Number(process.env.CATALOG_INTAKE_TIME_MS||210*60000)),requestDelayMs:200,retryRateLimit:process.env.AUTO_API_CHE168_STOP_ON_QUOTA!=='1'});
   let completed;
   try{
     completed=await collectAutoApiChe168({request,yearFrom,resume:{cursor:journal.cursor,snapshotStartedAt:config.modifiedAt},useChangeData:true,
