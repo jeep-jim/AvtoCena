@@ -50,7 +50,7 @@ export async function inspectChinaFreshInput({ io, candidates, now = Date.now } 
     validateIntakeArchive(manifest,root,rawDigest(manifest));
     const file = manifest.files.find(f=>f.name === 'report.json');
     // The small report alone is enough to classify apparent freshness. Do not read inventory shards.
-    if (file.bytes > 64 * MiB) { archives.push({runId, attempt, status:'report_too_large_for_probe'}); continue; }
+    if (file.bytes > 128 * MiB) { archives.push({runId, attempt, status:'report_too_large_for_probe'}); continue; }
     const parts = [];
     for (const part of file.parts) {
       const data = await read(part.key, 4 * MiB);
@@ -70,7 +70,13 @@ export async function inspectChinaFreshInput({ io, candidates, now = Date.now } 
     const freshness = ageCheck(report.completedAt,started);
     const complete = manifest.collection.complete && report.completed === true && paid?.completeInventory === true &&
       paid.stopReason === 'source_finished' && Number.isSafeInteger(paid.uniqueOffers) && paid.uniqueOffers > 0;
-    archives.push({runId,attempt,status:complete && freshness.within48h ? 'candidate_for_full_verification' : 'not_a_fresh_complete_candidate',
+    const witness=report.sourceInputWitness?(
+      report.sourceInputWitness.kind==='independent_che168_replica_v1'?'present_independent_replica':'present_other'
+    ):report.sourceInputWitnessUnavailable==='che168_replica_witness_local_file_size'?'expected_large_report_limit':report.sourceInputWitnessUnavailable==='che168_replica_witness_worker_source_unverified'
+      ?'expected_isolated_archive_module_overlay':'unverified_absence';
+    const rows=report.sources?.reduce((n,r)=>n+Number(r.observations||0),0);
+    archives.push({runId,attempt,witness,rows:Number.isSafeInteger(rows)?rows:null,reportFileSha256:file.sha256,reportDigest:manifest.reportDigest,
+      archiveManifestSha256:rawDigest(manifest),status:complete && freshness.within48h ? 'candidate_for_full_verification' : 'not_a_fresh_complete_candidate',
       apparentCollectionComplete:complete,freshness,offers:Number.isSafeInteger(paid?.uniqueOffers) ? paid.uniqueOffers : null});
     } catch (err) {
       const code = String(err?.message || '').split('\n')[0];
@@ -89,7 +95,7 @@ export async function inspectChinaFreshInput({ io, candidates, now = Date.now } 
 
 if(process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   try {
-    const io = createReadOnlyRawGcS3Transport({limits:{requests:72,responseBytes:96 * MiB}});
+    const io = createReadOnlyRawGcS3Transport({limits:{requests:80,responseBytes:128 * MiB}});
     console.log(JSON.stringify(await inspectChinaFreshInput({io,candidates:process.argv.slice(2)})));
   } catch (error) {
     const label = String(error?.message||'').split('\n')[0];
