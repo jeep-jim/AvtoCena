@@ -29,7 +29,7 @@ function fixture({hours=2,complete=true,corrupt=false,omit=false}= {}) {
   const replies=new Map([['catalog/manifest.json',{markets:{china:{count:9950,updatedAt:'2026-10-22'}}}],
     ['catalog/intake-cursors/v1/china.json',{updatedAt:'2026-10-22',sources:[{provider:'auto_api_che168',
       cursor:8,snapshotBinding:sha,replica:{key:replicaRoot,sha256:digest(replicaBody),cursor:8,binding:sha}}]}],
-    [replicaRoot+'/manifest.json',replicaBody]]);
+    [replicaRoot+'/manifest.json',replicaBody],['catalog/import-lock.json',null]]);
   if(!omit) {
     replies.set(root+'/complete.json',manifest);
     replies.set(partKey,{version:1,encoding:'gzip-base64',sha256:hash,bytes:body.length,
@@ -50,7 +50,7 @@ function fixture({hours=2,complete=true,corrupt=false,omit=false}= {}) {
 test('fresh bounded metadata probe only issues same-origin GET and emits aggregate candidate, not publication proof',async()=>{
   const {io,seen}=fixture();
   const output=await inspectChinaFreshInput({io,candidates:[candidate],now:()=>now});
-  assert.equal(seen.length,5);
+  assert.equal(seen.length,6);
   assert.equal(output.archives[0].status,'candidate_for_full_verification');
   assert.equal(output.activeChina.count,9950);
   assert.equal(output.publishedCursor.hasMatchingReplicaMetadata,true);
@@ -65,12 +65,12 @@ test('expired, future and partial report are not fresh complete candidates',asyn
     assert.equal(output.archives[0].status,'not_a_fresh_complete_candidate');
   }
 });
-test('missing marker is not proof no snapshots exist; corrupt report aborts',async()=>{
+test('missing marker is not proof no snapshots exist; corrupt report is isolated',async()=>{
   const {io}=fixture({omit:true});
   const output=await inspectChinaFreshInput({io,candidates:[candidate],now:()=>now});
   assert.equal(output.archives[0].status,'missing_complete_manifest');
   assert.equal(output.coverage,'not_a_complete_storage_inventory');
-  await assert.rejects(inspectChinaFreshInput({io:fixture({corrupt:true}).io,candidates:[candidate],now:()=>now}),/china_ro_report_part_hash/);
+  assert.equal((await inspectChinaFreshInput({io:fixture({corrupt:true}).io,candidates:[candidate],now:()=>now})).archives[0].code,'china_ro_report_part_hash');
 });
 test('invalid or repeated run scope is refused before any request',async()=>{
   for(const candidates of [[candidate,candidate],['../../x:1'],['44404227672:0']]){

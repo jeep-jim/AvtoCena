@@ -5,7 +5,7 @@ import { gunzipSync } from 'node:zlib';
 import { RAW_GC_TARGET } from './lib/catalog-raw-gc.mjs';
 import { createReadOnlyRawGcS3Transport } from './lib/catalog-raw-gc-s3.mjs';
 import { rawDigest } from './lib/catalog-raw-provenance.mjs';
-import { validateIntakeArchive } from './lib/nonjp-intake-archive.mjs';
+import { validateIntakeArchive } from './lib/nonjp-intake-archive-probe.mjs';
 
 const MiB = 1024 ** 2;
 const sha = b => createHash('sha256').update(b).digest('hex');
@@ -24,9 +24,10 @@ export async function inspectChinaFreshInput({ io, candidates, now = Date.now } 
   assert.ok(Array.isArray(candidates) && candidates.length > 0 && candidates.length <= 6 &&
     new Set(candidates).size === candidates.length && candidates.every(x => typeof x === 'string' && identity.test(x)), 'china_ro_candidates');
   const read = async (key, maxBytes = 2 * MiB) => (await io.readJson({ target: RAW_GC_TARGET, key, maxBytes, deadline })).value;
-  const [active, cursor] = await Promise.all([
+  const [active, cursor, lock] = await Promise.all([
     read('catalog/manifest.json'),
     read('catalog/intake-cursors/v1/china.json'),
+    read('catalog/import-lock.json', 256 * 1024),
   ]);
   const activeChina = active?.markets?.china;
   const source = cursor?.sources?.find(s => s?.provider === sourceProvider);
@@ -42,13 +43,14 @@ export async function inspectChinaFreshInput({ io, candidates, now = Date.now } 
   for (const candidate of candidates) {
     const [,runId, attempt] = identity.exec(candidate);
     const root = `catalog/nonjp-intake/v1/china/${runId}/${attempt}`;
+    try {
     const manifest = await read(root + '/complete.json');
     if (!manifest) { archives.push({runId, attempt, status:'missing_complete_manifest'}); continue; }
     // Matching a self-digest only confirms the archive shape, never authority.
     validateIntakeArchive(manifest,root,rawDigest(manifest));
     const file = manifest.files.find(f=>f.name === 'report.json');
     // The small report alone is enough to classify apparent freshness. Do not read inventory shards.
-    if (file.bytes > 4 * MiB) { archives.push({runId, attempt, status:'report_too_large_for_probe'}); continue; }
+    if (file.bytes > 64 * MiB) { archives.push({runId, attempt, status:'report_too_large_for_probe'}); continue; }
     const parts = [];
     for (const part of file.parts) {
       const data = await read(part.key, 4 * MiB);
@@ -70,19 +72,24 @@ export async function inspectChinaFreshInput({ io, candidates, now = Date.now } 
       paid.stopReason === 'source_finished' && Number.isSafeInteger(paid.uniqueOffers) && paid.uniqueOffers > 0;
     archives.push({runId,attempt,status:complete && freshness.within48h ? 'candidate_for_full_verification' : 'not_a_fresh_complete_candidate',
       apparentCollectionComplete:complete,freshness,offers:Number.isSafeInteger(paid?.uniqueOffers) ? paid.uniqueOffers : null});
+    } catch (err) {
+      const code = String(err?.message || '').split('\n')[0];
+      archives.push({runId,attempt,status:'candidate_probe_failed',code:/^(china_ro_|raw_gc_s3_|intake_archive_)[a-z0-9_]+$/.test(code)?code:'china_ro_candidate_failed'});
+    }
   }
   const {get, list, head, put, post, requests, responseBytes} = io.stats();
   assert.ok(now() < deadline && put === 0 && post === 0 && get === requests && list === 0 && head === 0, 'china_ro_scope');
   return { scope:'selected_china_producer_metadata_only', coverage:'not_a_complete_storage_inventory',
     publishAuthorized:false, identityAndHandoffVerified:false, storageWrites:0, supplierRequests:0, checkedAt:new Date(started).toISOString(),
     activeChina:{count:Number.isSafeInteger(activeChina?.count) ? activeChina.count : null,updatedAt:ageCheck(activeChina?.updatedAt,started).at},
+    importLockPresent: Boolean(lock),
     publishedCursor:{updatedAt:ageCheck(cursor?.updatedAt,started).at,hasMatchingReplicaMetadata:publishedReplicaMetadataMatch},
     archives,transport:{get,responseBytes} };
 }
 
 if(process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   try {
-    const io = createReadOnlyRawGcS3Transport({limits:{requests:24,responseBytes:24 * MiB}});
+    const io = createReadOnlyRawGcS3Transport({limits:{requests:72,responseBytes:96 * MiB}});
     console.log(JSON.stringify(await inspectChinaFreshInput({io,candidates:process.argv.slice(2)})));
   } catch (error) {
     const label = String(error?.message||'').split('\n')[0];
