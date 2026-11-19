@@ -8,9 +8,9 @@ concurrency:
 env:
   OPERATIONAL_PACKAGE_BLOB: 90244a76115674672d58454c1fff5291d2bd1eef
   OPERATIONAL_MANIFEST_SHA256: d98289d7fb2345bdbcbab54e9c4fcf958c885b68d660d65cc7aa3cee626c971f
-  CONTROLLER_PACKAGE_BLOB: 738d61f4609bf5bcc356479ecd63363244605d5c
+  CONTROLLER_PACKAGE_BLOB: 70b7da6073783d9f663e44fb2e0f23a243d77471
   CI_TEST_PACKAGE_BLOB: f67efc8179e73a63551c10227b876f08e62b60d5
-  WATCHDOG_TEST_PACKAGE_BLOB: c2c18785af29b2dfb9374e95c960b4fb15a419ea
+  WATCHDOG_TEST_PACKAGE_BLOB: d7c040ab916b34ebf7f3d1d17cc3d3ea2e5e9ced
   CHINA_COLLECTOR_REVISION: 038574d914de2436cd10871629b1b0a8fe83a92c
   CHINA_COLLECTOR_RUN: '44457059256'
   CHINA_COLLECTOR_ATTEMPT: '1'
@@ -26,8 +26,8 @@ env:
   CHINA_EXPECTED_BASE_INTERNAL_SHA256: 0aa3524abf2aa0563811a7980ebe9eded7566a1d2ab36b057557dfb7caba6585
 jobs:
   ci:
-    if: github.ref == 'refs/heads/main' && github.event.head_commit.message == 'Seal verified
-      fresh China preaudit checkpoint'
+    if: github.ref == 'refs/heads/main' && github.event.head_commit.message == 'Seal new policy day China
+      checkpoint from saved input'
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
@@ -61,55 +61,49 @@ jobs:
     - name: Materialize exact hash-bound code without storage credentials
       env:
         GH_TOKEN: ${{ github.token }}
-      run: "set -euo pipefail\n[[ \"$OPERATIONAL_PACKAGE_BLOB\" =~ ^[a-f0-9]{40}$ ]]\n[[ \"\
-        $CONTROLLER_PACKAGE_BLOB\" =~ ^[a-f0-9]{40}$ ]]\n[[ \"$CI_TEST_PACKAGE_BLOB\" =~ ^[a-f0-9]{40}$\
-        \ ]]\n[[ \"$OPERATIONAL_MANIFEST_SHA256\" =~ ^[a-f0-9]{64}$ ]]\nmkdir -m700 \"$RUNNER_TEMP/china-job\"\
-        \ncat > \"$RUNNER_TEMP/unpack-frozen.py\" <<'PY'\n#!/usr/bin/env python3\n\"\"\"Decode\
-        \ an exact Git blob containing reviewed source only. No archive authority.\"\"\"\nimport\
-        \ base64,hashlib,json,os,pathlib,re,sys\n\ndef unpack(response,expected_blob,destination):\n\
-        \    if not re.fullmatch('[a-f0-9]{40}',expected_blob): raise ValueError('blob_pin')\n\
-        \    response=pathlib.Path(response);destination=pathlib.Path(destination)\n    if not\
-        \ response.is_file() or response.stat().st_size>24*1024**2 or not destination.is_absolute()\
-        \ or destination.exists() or destination.parent.resolve()!=destination.parent: raise\
-        \ ValueError('bundle_layout')\n    envelope=json.loads(response.read_bytes())\n    if\
-        \ envelope.get('encoding')!='base64' or envelope.get('sha')!=expected_blob: raise ValueError('blob_binding')\n\
-        \    content=base64.b64decode(''.join(envelope['content'].split()),validate=True)\n\
-        \    if len(content)>16*1024**2 or hashlib.sha1(b'blob '+str(len(content)).encode()+b'\\\
-        0'+content).hexdigest()!=expected_blob: raise ValueError('blob_hash')\n    bundle=json.loads(content);entries=bundle.get('files');seen=set();total=0;prepared=[]\n\
-        \    if bundle.get('version')!=1 or not isinstance(entries,list) or not 1<=len(entries)<=10000:\
-        \ raise ValueError('bundle_schema')\n    for e in entries:\n        name=e['path'];parts=name.split('/')\n\
+      run: "set -euo pipefail\n[[ \"$OPERATIONAL_PACKAGE_BLOB\" =~ ^[a-f0-9]{40}$ ]]\n[[ \"$CONTROLLER_PACKAGE_BLOB\"\
+        \ =~ ^[a-f0-9]{40}$ ]]\n[[ \"$CI_TEST_PACKAGE_BLOB\" =~ ^[a-f0-9]{40}$ ]]\n[[ \"$OPERATIONAL_MANIFEST_SHA256\"\
+        \ =~ ^[a-f0-9]{64}$ ]]\nmkdir -m700 \"$RUNNER_TEMP/china-job\"\ncat > \"$RUNNER_TEMP/unpack-frozen.py\"\
+        \ <<'PY'\n#!/usr/bin/env python3\n\"\"\"Decode an exact Git blob containing reviewed source only.\
+        \ No archive authority.\"\"\"\nimport base64,hashlib,json,os,pathlib,re,sys\n\ndef unpack(response,expected_blob,destination):\n\
+        \    if not re.fullmatch('[a-f0-9]{40}',expected_blob): raise ValueError('blob_pin')\n    response=pathlib.Path(response);destination=pathlib.Path(destination)\n\
+        \    if not response.is_file() or response.stat().st_size>24*1024**2 or not destination.is_absolute()\
+        \ or destination.exists() or destination.parent.resolve()!=destination.parent: raise ValueError('bundle_layout')\n\
+        \    envelope=json.loads(response.read_bytes())\n    if envelope.get('encoding')!='base64' or envelope.get('sha')!=expected_blob:\
+        \ raise ValueError('blob_binding')\n    content=base64.b64decode(''.join(envelope['content'].split()),validate=True)\n\
+        \    if len(content)>16*1024**2 or hashlib.sha1(b'blob '+str(len(content)).encode()+b'\\0'+content).hexdigest()!=expected_blob:\
+        \ raise ValueError('blob_hash')\n    bundle=json.loads(content);entries=bundle.get('files');seen=set();total=0;prepared=[]\n\
+        \    if bundle.get('version')!=1 or not isinstance(entries,list) or not 1<=len(entries)<=10000: raise\
+        \ ValueError('bundle_schema')\n    for e in entries:\n        name=e['path'];parts=name.split('/')\n\
         \        if not re.fullmatch(r'[A-Za-z0-9_.\\-/]+',name) or any(p in ('','.','..','.git','.env','node_modules','raw','data')\
         \ for p in parts) or name in seen or not name.endswith(('.mjs','.cjs','.js','.ts','.json','.py','.md')):\
-        \ raise ValueError('bundle_path')\n        data=e['contents'].encode('utf-8');total+=len(data)\n\
-        \        if len(data)>8*1024**2 or total>16*1024**2 or hashlib.sha256(data).hexdigest()!=e['sha256']:\
+        \ raise ValueError('bundle_path')\n        data=e['contents'].encode('utf-8');total+=len(data)\n \
+        \       if len(data)>8*1024**2 or total>16*1024**2 or hashlib.sha256(data).hexdigest()!=e['sha256']:\
         \ raise ValueError('bundle_file_binding')\n        prepared.append((parts,data));seen.add(name)\n\
-        \    destination.mkdir(mode=0o700)\n    # Only immutable hash-pinned controller-authored\
-        \ names enter this fresh private root.\n    for parts,data in prepared:\n        out=destination.joinpath(*parts);out.parent.mkdir(mode=0o700,parents=True,exist_ok=True)\n\
-        \        fd=os.open(out,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o400)\n    \
-        \    try:\n            view=memoryview(data)\n            while view:\n            \
-        \    n=os.write(fd,view)\n                if n<=0: raise ValueError('bundle_short_write')\n\
-        \                view=view[n:]\n        finally: os.close(fd)\n    return {'files':len(entries),'bytes':total,'gitBlob':expected_blob}\n\
+        \    destination.mkdir(mode=0o700)\n    # Only immutable hash-pinned controller-authored names enter\
+        \ this fresh private root.\n    for parts,data in prepared:\n        out=destination.joinpath(*parts);out.parent.mkdir(mode=0o700,parents=True,exist_ok=True)\n\
+        \        fd=os.open(out,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o400)\n        try:\n    \
+        \        view=memoryview(data)\n            while view:\n                n=os.write(fd,view)\n   \
+        \             if n<=0: raise ValueError('bundle_short_write')\n                view=view[n:]\n   \
+        \     finally: os.close(fd)\n    return {'files':len(entries),'bytes':total,'gitBlob':expected_blob}\n\
         if __name__=='__main__':\n    try: print(json.dumps(unpack(*sys.argv[1:]),separators=(',',':')))\n\
-        \    except Exception:\n        print('{\"ok\":false,\"code\":\"frozen_bundle_unpack_failed\"\
-        }',file=sys.stderr);sys.exit(1)\nPY\ngh api \"repos/jeep-jim/AvtoCena/git/blobs/$OPERATIONAL_PACKAGE_BLOB\"\
-        \ > \"$RUNNER_TEMP/package-blob.json\"\npython \"$RUNNER_TEMP/unpack-frozen.py\" \"\
-        $RUNNER_TEMP/package-blob.json\" \"$OPERATIONAL_PACKAGE_BLOB\" \"$RUNNER_TEMP/china-job/package\"\
-        \ngh api \"repos/jeep-jim/AvtoCena/git/blobs/$CONTROLLER_PACKAGE_BLOB\" > \"$RUNNER_TEMP/controller-blob.json\"\
-        \npython \"$RUNNER_TEMP/unpack-frozen.py\" \"$RUNNER_TEMP/controller-blob.json\" \"\
-        $CONTROLLER_PACKAGE_BLOB\" \"$RUNNER_TEMP/china-job/controller\"\ngh api \"repos/jeep-jim/AvtoCena/git/blobs/$CI_TEST_PACKAGE_BLOB\"\
+        \    except Exception:\n        print('{\"ok\":false,\"code\":\"frozen_bundle_unpack_failed\"}',file=sys.stderr);sys.exit(1)\n\
+        PY\ngh api \"repos/jeep-jim/AvtoCena/git/blobs/$OPERATIONAL_PACKAGE_BLOB\" > \"$RUNNER_TEMP/package-blob.json\"\
+        \npython \"$RUNNER_TEMP/unpack-frozen.py\" \"$RUNNER_TEMP/package-blob.json\" \"$OPERATIONAL_PACKAGE_BLOB\"\
+        \ \"$RUNNER_TEMP/china-job/package\"\ngh api \"repos/jeep-jim/AvtoCena/git/blobs/$CONTROLLER_PACKAGE_BLOB\"\
+        \ > \"$RUNNER_TEMP/controller-blob.json\"\npython \"$RUNNER_TEMP/unpack-frozen.py\" \"$RUNNER_TEMP/controller-blob.json\"\
+        \ \"$CONTROLLER_PACKAGE_BLOB\" \"$RUNNER_TEMP/china-job/controller\"\ngh api \"repos/jeep-jim/AvtoCena/git/blobs/$CI_TEST_PACKAGE_BLOB\"\
         \ > \"$RUNNER_TEMP/tests-blob.json\"\npython \"$RUNNER_TEMP/unpack-frozen.py\" \"$RUNNER_TEMP/tests-blob.json\"\
-        \ \"$CI_TEST_PACKAGE_BLOB\" \"$RUNNER_TEMP/china-job/tests\"\n[[ \"$WATCHDOG_TEST_PACKAGE_BLOB\"\
-        \ =~ ^[a-f0-9]{40}$ ]]\ngh api \"repos/jeep-jim/AvtoCena/git/blobs/$WATCHDOG_TEST_PACKAGE_BLOB\"\
-        \ > \"$RUNNER_TEMP/watchdog-tests-blob.json\"\npython \"$RUNNER_TEMP/unpack-frozen.py\"\
-        \ \"$RUNNER_TEMP/watchdog-tests-blob.json\" \"$WATCHDOG_TEST_PACKAGE_BLOB\" \"$RUNNER_TEMP/china-job/watchdog-tests\"\
-        \n"
+        \ \"$CI_TEST_PACKAGE_BLOB\" \"$RUNNER_TEMP/china-job/tests\"\n[[ \"$WATCHDOG_TEST_PACKAGE_BLOB\" =~\
+        \ ^[a-f0-9]{40}$ ]]\ngh api \"repos/jeep-jim/AvtoCena/git/blobs/$WATCHDOG_TEST_PACKAGE_BLOB\" > \"\
+        $RUNNER_TEMP/watchdog-tests-blob.json\"\npython \"$RUNNER_TEMP/unpack-frozen.py\" \"$RUNNER_TEMP/watchdog-tests-blob.json\"\
+        \ \"$WATCHDOG_TEST_PACKAGE_BLOB\" \"$RUNNER_TEMP/china-job/watchdog-tests\"\n"
     - name: Install exact locked test toolchain
       run: 'set -euo pipefail
 
         test "$(node --version)" = v24.22.1
 
-        npm install --prefix "$RUNNER_TEMP/pinned-npm" --ignore-scripts --no-audit --no-fund
-        npm@11.9.0
+        npm install --prefix "$RUNNER_TEMP/pinned-npm" --ignore-scripts --no-audit --no-fund npm@11.9.0
 
         export PATH="$RUNNER_TEMP/pinned-npm/node_modules/.bin:$PATH"
 
@@ -121,41 +115,56 @@ jobs:
 
         '
     - name: Run separately pinned portable regression suite
-      run: "set -euo pipefail\npython - <<'PY'\nimport base64,hashlib,json,os,pathlib,subprocess\n\
-        root=pathlib.Path(os.environ['RUNNER_TEMP'])/'china-job'\nmanifest_bytes=(root/'package'/'SOURCE_MANIFEST.json').read_bytes()\n\
-        assert hashlib.sha256(manifest_bytes).hexdigest()==os.environ['OPERATIONAL_MANIFEST_SHA256']\n\
-        manifest=json.loads(manifest_bytes);assert manifest['dynamicSitesReviewed'] is True\n\
-        for directory,entries in [(root/'package'/'operational',manifest['operational']['files']),*(\
-        \ (pathlib.Path(os.environ['GITHUB_WORKSPACE'])/k,manifest['native'][k]['files']) for\
-        \ k in ['publisher','runtime'])]:\n    for e in entries:\n        b=(directory/e['path']).read_bytes();assert\
+      run: "set -euo pipefail\npython - <<'PY'\nimport base64,hashlib,json,os,pathlib,subprocess\nroot=pathlib.Path(os.environ['RUNNER_TEMP'])/'china-job'\n\
+        manifest_bytes=(root/'package'/'SOURCE_MANIFEST.json').read_bytes()\nassert hashlib.sha256(manifest_bytes).hexdigest()==os.environ['OPERATIONAL_MANIFEST_SHA256']\n\
+        manifest=json.loads(manifest_bytes);assert manifest['dynamicSitesReviewed'] is True\nfor directory,entries\
+        \ in [(root/'package'/'operational',manifest['operational']['files']),*( (pathlib.Path(os.environ['GITHUB_WORKSPACE'])/k,manifest['native'][k]['files'])\
+        \ for k in ['publisher','runtime'])]:\n    for e in entries:\n        b=(directory/e['path']).read_bytes();assert\
         \ len(b)==e['bytes'] and hashlib.sha256(b).hexdigest()==e['sha256']\nenvelope=json.load(open(pathlib.Path(os.environ['RUNNER_TEMP'])/'tests-blob.json'))\n\
         bundle=json.loads(base64.b64decode(envelope['content']))\nassert bundle['kind']=='selected-portable-ci-tests-not-whole-publication'\n\
-        inventory={e['path'] for e in bundle['files']}\ntests=bundle['tests'];assert tests and\
-        \ len(tests)==len(set(tests))\nassert all(t in inventory and t.endswith('.test.mjs')\
-        \ and not t.startswith('-') for t in tests)\nfor e in bundle['files']:\n    source=root/'tests'/e['path'];target=root/'package'/'operational'/e['path']\n\
-        \    assert not target.exists();target.parent.mkdir(parents=True,exist_ok=True)\n  \
-        \  with target.open('xb') as f:f.write(source.read_bytes())\nsubprocess.run(['node','--test','--test-concurrency=1',*tests],cwd=root/'package'/'operational',check=True)\n\
+        inventory={e['path'] for e in bundle['files']}\ntests=bundle['tests'];assert tests and len(tests)==len(set(tests))\n\
+        assert all(t in inventory and t.endswith('.test.mjs') and not t.startswith('-') for t in tests)\n\
+        for e in bundle['files']:\n    source=root/'tests'/e['path'];target=root/'package'/'operational'/e['path']\n\
+        \    assert not target.exists();target.parent.mkdir(parents=True,exist_ok=True)\n    with target.open('xb')\
+        \ as f:f.write(source.read_bytes())\nsubprocess.run(['node','--test','--test-concurrency=1',*tests],cwd=root/'package'/'operational',check=True)\n\
         PY\n"
     - name: Exercise exact controller watchdog and prepare-only cut
-      run: "set -euo pipefail\npython - <<'PYCI'\nimport base64,json,os,pathlib,subprocess\n\
-        root=pathlib.Path(os.environ['RUNNER_TEMP'])/'china-job'\ne=json.load(open(pathlib.Path(os.environ['RUNNER_TEMP'])/'watchdog-tests-blob.json'));bundle=json.loads(base64.b64decode(e['content']))\n\
-        assert bundle['kind']=='actual-controller-watchdog-regression-tests'\nallowed={'test.mjs','watchdog.test.mjs','rss-race.test.mjs','independent-rss-review.test.mjs','watchdog.before.mjs'}\n\
+      run: "set -euo pipefail\npython - <<'PYCI'\nimport base64,json,os,pathlib,subprocess\nroot=pathlib.Path(os.environ['RUNNER_TEMP'])/'china-job'\n\
+        e=json.load(open(pathlib.Path(os.environ['RUNNER_TEMP'])/'watchdog-tests-blob.json'));bundle=json.loads(base64.b64decode(e['content']))\n\
+        assert bundle['kind']=='actual-controller-watchdog-regression-tests'\nallowed={'test.mjs','watchdog.test.mjs','rss-race.test.mjs','independent-rss-review.test.mjs','watchdog.before.mjs','watchdog-teardown.test.mjs'}\n\
         assert {x['path'] for x in bundle['files']}==allowed\nassert set(bundle['tests'])==allowed-{'watchdog.before.mjs'}\n\
-        for f in bundle['files']:\n    dest=root/'controller'/f['path'];assert not dest.exists()\n\
-        \    with dest.open('xb') as out:out.write((root/'watchdog-tests'/f['path']).read_bytes())\n\
-        s=(root/'controller'/'materialize-job.mjs').read_text()\nassert \"mode:'prepare',entry\"\
-        \ in s and \"authorizeCommit\" not in s and \"stopAfterPreauditCheckpoint:true\" in\
-        \ s and \"checkpointLauncherFile:wrapper\" in s\nassert all(k not in s for k in ['stopAfterResourceAdmission','resumePreauditCheckpoint','checkpointMetadataFile'])\n\
+        for f in bundle['files']:\n    dest=root/'controller'/f['path'];assert not dest.exists()\n    with\
+        \ dest.open('xb') as out:out.write((root/'watchdog-tests'/f['path']).read_bytes())\ns=(root/'controller'/'materialize-job.mjs').read_text()\n\
+        assert \"mode:'prepare',entry\" in s and \"authorizeCommit\" not in s and \"stopAfterPreauditCheckpoint:true\"\
+        \ in s and \"checkpointLauncherFile:wrapper\" in s\nassert all(k not in s for k in ['stopAfterResourceAdmission','resumePreauditCheckpoint','checkpointMetadataFile'])\n\
         subprocess.run(['node','--test','--test-concurrency=1',*bundle['tests']],cwd=root/'controller',check=True)\n\
         PYCI\n"
   recover:
     needs: ci
-    if: github.ref == 'refs/heads/main' && github.event.head_commit.message == 'Seal verified
-      fresh China preaudit checkpoint'
+    if: github.ref == 'refs/heads/main' && github.event.head_commit.message == 'Seal new policy day China
+      checkpoint from saved input'
     environment: regcloud-staging
     runs-on: ubuntu-latest
     timeout-minutes: 360
     steps:
+    - name: Bind to new UTC+7 policy day before any archive storage access
+      run: 'set -euo pipefail
+
+        python - <<''PYDAY''
+
+        from datetime import datetime, timezone, timedelta
+
+        now=datetime.now(timezone.utc)
+
+        assert now>=datetime(2026,11,19,17,tzinfo=timezone.utc),''prior_policy_day_still_active''
+
+        assert (now+timedelta(hours=7)).date().isoformat()==''2026-11-20'',''new_policy_day_mismatch''
+
+        assert now<datetime(2026,11,21,5,2,36,435000,tzinfo=timezone.utc),''source_expired''
+
+        PYDAY
+
+        '
     - name: Refuse pending fresh-commit code pins
       run: 'set -euo pipefail
 
@@ -186,49 +195,44 @@ jobs:
     - name: Materialize exact hash-bound code without storage credentials
       env:
         GH_TOKEN: ${{ github.token }}
-      run: "set -euo pipefail\n[[ \"$OPERATIONAL_PACKAGE_BLOB\" =~ ^[a-f0-9]{40}$ ]]\n[[ \"\
-        $CONTROLLER_PACKAGE_BLOB\" =~ ^[a-f0-9]{40}$ ]]\n[[ \"$CI_TEST_PACKAGE_BLOB\" =~ ^[a-f0-9]{40}$\
-        \ ]]\n[[ \"$OPERATIONAL_MANIFEST_SHA256\" =~ ^[a-f0-9]{64}$ ]]\nmkdir -m700 \"$RUNNER_TEMP/china-job\"\
-        \ncat > \"$RUNNER_TEMP/unpack-frozen.py\" <<'PY'\n#!/usr/bin/env python3\n\"\"\"Decode\
-        \ an exact Git blob containing reviewed source only. No archive authority.\"\"\"\nimport\
-        \ base64,hashlib,json,os,pathlib,re,sys\n\ndef unpack(response,expected_blob,destination):\n\
-        \    if not re.fullmatch('[a-f0-9]{40}',expected_blob): raise ValueError('blob_pin')\n\
-        \    response=pathlib.Path(response);destination=pathlib.Path(destination)\n    if not\
-        \ response.is_file() or response.stat().st_size>24*1024**2 or not destination.is_absolute()\
-        \ or destination.exists() or destination.parent.resolve()!=destination.parent: raise\
-        \ ValueError('bundle_layout')\n    envelope=json.loads(response.read_bytes())\n    if\
-        \ envelope.get('encoding')!='base64' or envelope.get('sha')!=expected_blob: raise ValueError('blob_binding')\n\
-        \    content=base64.b64decode(''.join(envelope['content'].split()),validate=True)\n\
-        \    if len(content)>16*1024**2 or hashlib.sha1(b'blob '+str(len(content)).encode()+b'\\\
-        0'+content).hexdigest()!=expected_blob: raise ValueError('blob_hash')\n    bundle=json.loads(content);entries=bundle.get('files');seen=set();total=0;prepared=[]\n\
-        \    if bundle.get('version')!=1 or not isinstance(entries,list) or not 1<=len(entries)<=10000:\
-        \ raise ValueError('bundle_schema')\n    for e in entries:\n        name=e['path'];parts=name.split('/')\n\
+      run: "set -euo pipefail\n[[ \"$OPERATIONAL_PACKAGE_BLOB\" =~ ^[a-f0-9]{40}$ ]]\n[[ \"$CONTROLLER_PACKAGE_BLOB\"\
+        \ =~ ^[a-f0-9]{40}$ ]]\n[[ \"$CI_TEST_PACKAGE_BLOB\" =~ ^[a-f0-9]{40}$ ]]\n[[ \"$OPERATIONAL_MANIFEST_SHA256\"\
+        \ =~ ^[a-f0-9]{64}$ ]]\nmkdir -m700 \"$RUNNER_TEMP/china-job\"\ncat > \"$RUNNER_TEMP/unpack-frozen.py\"\
+        \ <<'PY'\n#!/usr/bin/env python3\n\"\"\"Decode an exact Git blob containing reviewed source only.\
+        \ No archive authority.\"\"\"\nimport base64,hashlib,json,os,pathlib,re,sys\n\ndef unpack(response,expected_blob,destination):\n\
+        \    if not re.fullmatch('[a-f0-9]{40}',expected_blob): raise ValueError('blob_pin')\n    response=pathlib.Path(response);destination=pathlib.Path(destination)\n\
+        \    if not response.is_file() or response.stat().st_size>24*1024**2 or not destination.is_absolute()\
+        \ or destination.exists() or destination.parent.resolve()!=destination.parent: raise ValueError('bundle_layout')\n\
+        \    envelope=json.loads(response.read_bytes())\n    if envelope.get('encoding')!='base64' or envelope.get('sha')!=expected_blob:\
+        \ raise ValueError('blob_binding')\n    content=base64.b64decode(''.join(envelope['content'].split()),validate=True)\n\
+        \    if len(content)>16*1024**2 or hashlib.sha1(b'blob '+str(len(content)).encode()+b'\\0'+content).hexdigest()!=expected_blob:\
+        \ raise ValueError('blob_hash')\n    bundle=json.loads(content);entries=bundle.get('files');seen=set();total=0;prepared=[]\n\
+        \    if bundle.get('version')!=1 or not isinstance(entries,list) or not 1<=len(entries)<=10000: raise\
+        \ ValueError('bundle_schema')\n    for e in entries:\n        name=e['path'];parts=name.split('/')\n\
         \        if not re.fullmatch(r'[A-Za-z0-9_.\\-/]+',name) or any(p in ('','.','..','.git','.env','node_modules','raw','data')\
         \ for p in parts) or name in seen or not name.endswith(('.mjs','.cjs','.js','.ts','.json','.py','.md')):\
-        \ raise ValueError('bundle_path')\n        data=e['contents'].encode('utf-8');total+=len(data)\n\
-        \        if len(data)>8*1024**2 or total>16*1024**2 or hashlib.sha256(data).hexdigest()!=e['sha256']:\
+        \ raise ValueError('bundle_path')\n        data=e['contents'].encode('utf-8');total+=len(data)\n \
+        \       if len(data)>8*1024**2 or total>16*1024**2 or hashlib.sha256(data).hexdigest()!=e['sha256']:\
         \ raise ValueError('bundle_file_binding')\n        prepared.append((parts,data));seen.add(name)\n\
-        \    destination.mkdir(mode=0o700)\n    # Only immutable hash-pinned controller-authored\
-        \ names enter this fresh private root.\n    for parts,data in prepared:\n        out=destination.joinpath(*parts);out.parent.mkdir(mode=0o700,parents=True,exist_ok=True)\n\
-        \        fd=os.open(out,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o400)\n    \
-        \    try:\n            view=memoryview(data)\n            while view:\n            \
-        \    n=os.write(fd,view)\n                if n<=0: raise ValueError('bundle_short_write')\n\
-        \                view=view[n:]\n        finally: os.close(fd)\n    return {'files':len(entries),'bytes':total,'gitBlob':expected_blob}\n\
+        \    destination.mkdir(mode=0o700)\n    # Only immutable hash-pinned controller-authored names enter\
+        \ this fresh private root.\n    for parts,data in prepared:\n        out=destination.joinpath(*parts);out.parent.mkdir(mode=0o700,parents=True,exist_ok=True)\n\
+        \        fd=os.open(out,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o400)\n        try:\n    \
+        \        view=memoryview(data)\n            while view:\n                n=os.write(fd,view)\n   \
+        \             if n<=0: raise ValueError('bundle_short_write')\n                view=view[n:]\n   \
+        \     finally: os.close(fd)\n    return {'files':len(entries),'bytes':total,'gitBlob':expected_blob}\n\
         if __name__=='__main__':\n    try: print(json.dumps(unpack(*sys.argv[1:]),separators=(',',':')))\n\
-        \    except Exception:\n        print('{\"ok\":false,\"code\":\"frozen_bundle_unpack_failed\"\
-        }',file=sys.stderr);sys.exit(1)\nPY\ngh api \"repos/jeep-jim/AvtoCena/git/blobs/$OPERATIONAL_PACKAGE_BLOB\"\
-        \ > \"$RUNNER_TEMP/package-blob.json\"\npython \"$RUNNER_TEMP/unpack-frozen.py\" \"\
-        $RUNNER_TEMP/package-blob.json\" \"$OPERATIONAL_PACKAGE_BLOB\" \"$RUNNER_TEMP/china-job/package\"\
-        \ngh api \"repos/jeep-jim/AvtoCena/git/blobs/$CONTROLLER_PACKAGE_BLOB\" > \"$RUNNER_TEMP/controller-blob.json\"\
-        \npython \"$RUNNER_TEMP/unpack-frozen.py\" \"$RUNNER_TEMP/controller-blob.json\" \"\
-        $CONTROLLER_PACKAGE_BLOB\" \"$RUNNER_TEMP/china-job/controller\"\n"
+        \    except Exception:\n        print('{\"ok\":false,\"code\":\"frozen_bundle_unpack_failed\"}',file=sys.stderr);sys.exit(1)\n\
+        PY\ngh api \"repos/jeep-jim/AvtoCena/git/blobs/$OPERATIONAL_PACKAGE_BLOB\" > \"$RUNNER_TEMP/package-blob.json\"\
+        \npython \"$RUNNER_TEMP/unpack-frozen.py\" \"$RUNNER_TEMP/package-blob.json\" \"$OPERATIONAL_PACKAGE_BLOB\"\
+        \ \"$RUNNER_TEMP/china-job/package\"\ngh api \"repos/jeep-jim/AvtoCena/git/blobs/$CONTROLLER_PACKAGE_BLOB\"\
+        \ > \"$RUNNER_TEMP/controller-blob.json\"\npython \"$RUNNER_TEMP/unpack-frozen.py\" \"$RUNNER_TEMP/controller-blob.json\"\
+        \ \"$CONTROLLER_PACKAGE_BLOB\" \"$RUNNER_TEMP/china-job/controller\"\n"
     - name: Install exact locked native toolchains without storage credentials
       run: 'set -euo pipefail
 
         test "$(node --version)" = v24.22.1
 
-        npm install --prefix "$RUNNER_TEMP/pinned-npm" --ignore-scripts --no-audit --no-fund
-        npm@11.9.0
+        npm install --prefix "$RUNNER_TEMP/pinned-npm" --ignore-scripts --no-audit --no-fund npm@11.9.0
 
         export PATH="$RUNNER_TEMP/pinned-npm/node_modules/.bin:$PATH"
 
@@ -273,6 +277,41 @@ jobs:
         python controller/verify-producer.py
 
         '
+    - name: Read only five exact current production guards before archive open
+      env:
+        YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+        YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+      run: "set -euo pipefail\ncat > \"$RUNNER_TEMP/china-new-day-go.mjs\" <<'JS'\nimport {createHash,createHmac}\
+        \ from 'node:crypto';\nconst keys=new Set(['catalog/manifest.json','catalog/internal/manifest.json','catalog/import-lock.json','catalog/intake-cursors/v1/china.json','catalog/operations/collection-controls-v1.json']);\n\
+        const sha=b=>createHash('sha256').update(b).digest('hex'),hmac=(k,s)=>createHmac('sha256',k).update(s).digest();\n\
+        const fixed={\n public:'4c34c20d9784b571414390cab450ceeeaee60b00c168476100419ec5c05cb038',\n internal:'0aa3524abf2aa0563811a7980ebe9eded7566a1d2ab36b057557dfb7caba6585',\n\
+        \ publicGen:'gen_1794878284419_a611dfcf', internalGen:'gen_1794888961200_1ea2a688'\n};\nconst require=(condition,code)=>{if(!condition)throw\
+        \ Error(code);};\nexport async function readChinaGoKey(key,env=process.env){\n require(keys.has(key),'newday_scope');const\
+        \ access=env.YC_OBJECT_STORAGE_ACCESS_KEY_ID,secret=env.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY;\n require(access&&secret,'newday_credentials');\n\
+        \ const pathname='/avtocena-staging-8120751/migration-staging/full-20261011/'+key,host='s3.regru.cloud';\n\
+        \ const t=new Date().toISOString().replace(/[:-]|\\.\\d{3}/g,''),day=t.slice(0,8),scope=day+'/us-east-1/s3/aws4_request';\n\
+        \ const headers={host,'x-amz-content-sha256':sha(''),'x-amz-date':t},names=Object.keys(headers).sort();\n\
+        \ const request=['GET',pathname,'',names.map(k=>k+':'+headers[k]+'\\n').join(''),names.join(';'),sha('')].join('\\\
+        n');\n const signing=hmac(hmac(hmac(hmac('AWS4'+secret,day),'us-east-1'),'s3'),'aws4_request');\n\
+        \ headers.authorization='AWS4-HMAC-SHA256 Credential='+access+'/'+scope+', SignedHeaders='+names.join(';')+',\
+        \ Signature='+createHmac('sha256',signing).update(['AWS4-HMAC-SHA256',t,scope,sha(request)].join('\\\
+        n')).digest('hex');\n const r=await fetch('https://'+host+pathname,{method:'GET',headers,redirect:'error',signal:AbortSignal.timeout(15000)});\n\
+        \ if(key==='catalog/import-lock.json'&&r.status===404){await r.body?.cancel();return null;}\n require(r.status===200&&!r.headers.get('content-encoding')&&Number(r.headers.get('content-length')||0)<=1024**2,'newday_http');\n\
+        \ let n=0,parts=[];for await(const part of r.body){n+=part.length;require(n<=1024**2,'newday_size');parts.push(part);}\n\
+        \ const b=Buffer.concat(parts,n);return{digest:sha(b),etag:r.headers.get('etag'),value:JSON.parse(b)};\n\
+        }\nexport function validateNewChinaScope({pub,internal,lease,cursor,controls},now=Date.now()){\n require(pub?.digest===fixed.public&&pub.value?.generationId===fixed.publicGen&&pub.etag==='\"\
+        de7be92050ed3919e2422e86b7fda737\"'&&\n  internal?.digest===fixed.internal&&internal.value?.generationId===fixed.internalGen&&internal.etag==='\"\
+        dc38c32d0c3937415c811028f5e1684e\"','newday_baseline');\n const until=lease?.value?.lockedUntil;\n\
+        \ require(lease===null||until===''||typeof until==='string'&&Date.parse(until)<=now,'newday_lease');\n\
+        \ const sources=cursor?.value?.sources?.filter(x=>x.provider==='auto_api_che168')??[];\n require(cursor?.etag&&cursor.value.version===1&&cursor.value.market==='china'&&sources.length===1&&sources[0].cursor===12360638&&\n\
+        \  typeof sources[0].snapshotBinding==='string'&&/^[0-9a-f]{64}$/.test(sources[0].snapshotBinding)&&sources[0].replica,'newday_cursor');\n\
+        \ const c=controls?.value;\n require(c?.version===1&&c.markets?.china?.enabled===true&&c.sources?.che168_feed?.enabled===true&&c.sources?.ajes_china_feed?.enabled===false,'newday_controls');\n\
+        \ return {baselineMatched:true,leaseNotActive:true,chinaCursor:12360638,ownerChinaAndChe168Enabled:true,ownerAjesDisabled:true};\n\
+        }\nif(process.argv.includes('--verify')){\n try{\n  const [pub,internal,lease,cursor,controls]=await\
+        \ Promise.all([...keys].map(k=>readChinaGoKey(k)));\n  console.log(JSON.stringify({stage:'private_new_policy_input_admission',at:new\
+        \ Date().toISOString(),...validateNewChinaScope({pub,internal,lease,cursor,controls}),storageGets:5,storageWrites:0,supplierRequests:0}));\n\
+        \ }catch(e){console.error(/^newday_[a-z_]+$/.test(e?.message||'')?e.message:'newday_admission_failed');process.exitCode=1;}\n\
+        }\n\nJS\nnode \"$RUNNER_TEMP/china-new-day-go.mjs\" --verify\n"
     - name: Restore exact fresh complete archive before publication admission
       working-directory: publisher
       env:
@@ -315,8 +354,7 @@ jobs:
 
         m=r[''memory''];status=m[''cgroupMemoryStatus''];assert status in (''finite'',''unlimited''),''startup_cgroup_unverified''
 
-        available=min(m[''availableBytes''],m[''cgroupMemoryAvailable''] if status==''finite''
-        else m[''availableBytes''])
+        available=min(m[''availableBytes''],m[''cgroupMemoryAvailable''] if status==''finite'' else m[''availableBytes''])
 
         assert available>=c[''minMemoryBytes''],''startup_memory_refused''
 
