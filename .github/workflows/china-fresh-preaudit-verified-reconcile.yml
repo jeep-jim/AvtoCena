@@ -1,0 +1,237 @@
+name: Verify sealed fresh China preaudit private checkpoint
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: china-fresh-preaudit-verified-reconcile
+  cancel-in-progress: false
+jobs:
+  reconcile:
+    if: github.ref == 'refs/heads/main' && github.event.head_commit.message == 'Verify sealed fresh China preaudit
+      private checkpoint'
+    environment: regcloud-staging
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+    - uses: actions/setup-node@v4
+      with:
+        node-version: 24
+    - name: Confirm exact producer identity before storage reads
+      env:
+        GH_TOKEN: ${{ github.token }}
+      run: 'set -euo pipefail
+
+        timeout --kill-after=5s 30s gh api repos/jeep-jim/AvtoCena/actions/runs/44488997167 > terminal-before.json
+
+        python - <<''PY_TERMINAL''
+
+        import json
+
+        x=json.load(open(''terminal-before.json''))
+
+        assert x[''id'']==44488997167 and x[''status''] ==''completed'' and x[''conclusion'']==''success''
+
+        assert x[''head_sha'']==''cefeb42a3bf048d8ab85ef9c7cf897e7cbb9922e''
+
+        assert x[''run_attempt'']==1 and x[''event'']==''push''
+
+        PY_TERMINAL
+
+        '
+    - name: Prepare exact bounded read-only reader
+      run: "cat > \"$RUNNER_TEMP/china-reconcile.mjs\" <<'READER'\nimport {createHash,createHmac} from 'node:crypto';\n\
+        import {writeFile} from 'node:fs/promises';\nimport {pathToFileURL} from 'node:url';\nconst ENDPOINT='https://s3.regru.cloud',BUCKET='avtocena-staging-8120751',PREFIX='migration-staging/full-20261011/';\n\
+        export const RELEASE='83ff17075e9188dcf227c8752dc064248d5f42e0';\nexport const KEYS=Object.freeze(['catalog/import-lock.json','catalog/manifest.json','catalog/internal/manifest.json','catalog/intake-cursors/v1/china.json']);\n\
+        const sha=s=>createHash('sha256').update(s).digest('hex'),hmac=(key,s)=>createHmac('sha256',key).update(s).digest();\n\
+        export function signedGet(key,credentials,date=new Date()){\n if(!KEYS.includes(key))throw Error('probe_key_denied');\n\
+        \ if(!credentials.accessKeyId||!credentials.secretAccessKey)throw Error('probe_credentials_missing');\n const\
+        \ pathname='/'+BUCKET+'/'+PREFIX+key,url=ENDPOINT+pathname;\n const stamp=date.toISOString().replace(/[:-]|\\\
+        .\\d{3}/g,''),day=stamp.slice(0,8),scope=`${day}/us-east-1/s3/aws4_request`;\n const headers={host:'s3.regru.cloud','x-amz-content-sha256':sha(''),'x-amz-date':stamp};\n\
+        \ const names=Object.keys(headers).sort(),canonical=names.map(k=>`${k}:${headers[k]}\\n`).join('');\n const\
+        \ request=['GET',pathname,'',canonical,names.join(';'),sha('')].join('\\n');\n const signing=hmac(hmac(hmac(hmac('AWS4'+credentials.secretAccessKey,day),'us-east-1'),'s3'),'aws4_request');\n\
+        \ const signature=createHmac('sha256',signing).update(`AWS4-HMAC-SHA256\\n${stamp}\\n${scope}\\n${sha(request)}`).digest('hex');\n\
+        \ headers.authorization=`AWS4-HMAC-SHA256 Credential=${credentials.accessKeyId}/${scope}, SignedHeaders=${names.join(';')},\
+        \ Signature=${signature}`;\n return {url,options:{method:'GET',headers,redirect:'error'}};\n}\nconst token=v=>typeof\
+        \ v==='string'&&v.length<=180&&/^[a-zA-Z0-9_:.+\\-TZ]*$/.test(v)?v:null;\nconst etag=v=>typeof v==='string'&&/^\"\
+        ?[a-fA-F0-9-]{1,128}\"?$/.test(v)?v:null;\nexport function metadata(value){\n const out={};for(const key of\
+        \ ['generationId','expectedBaseGenerationId','producerRevision','operationId','operationType','startedAt','updatedAt','heartbeatAt','lockedUntil','publishedAt','completedAt','stage','phase','schemaVersion'])if(value?.[key]!=null)out[key]=typeof\
+        \ value[key]==='number'&&Number.isSafeInteger(value[key])?value[key]:token(value[key]);\n if(Array.isArray(value?.sources)){const\
+        \ sources=value.sources.filter(s=>s?.provider==='auto_api_che168');const c=sources[0]?.cursor;out.che168Matches=sources.length;out.che168Cursor=((typeof\
+        \ c==='number'&&Number.isSafeInteger(c)&&c>0)||(typeof c==='string'&&/^\\d{1,16}$/.test(c)))?String(c):null;}\n\
+        \ if(value?.markets?.china){out.chinaCount=value.markets.china.count;out.chinaUpdatedAt=token(value.markets.china.updatedAt);}\n\
+        \ if(value?.activeSlot!=null)out.activeSlot=['a','b'].includes(value.activeSlot)?value.activeSlot:null;\n\
+        \ if(value?.contentHash!=null)out.contentHash=typeof value.contentHash==='string'&&/^[a-f0-9]{64}$/.test(value.contentHash)?value.contentHash:null;\n\
+        \ for(const key of ['count','version','retentionDays'])if(value?.[key]!=null)out[key]=Number.isSafeInteger(value[key])&&value[key]>=0?value[key]:null;\n\
+        \ for(const key of ['sources','chunks'])if(value?.[key]&&typeof value[key]==='object')out[key+'Descriptor']={sha256:sha(JSON.stringify(value[key])),entries:Object.keys(value[key]).length};\n\
+        \ if(value?.state!=null)out.state=['loading','ready','published','aborted'].includes(value.state)?value.state:null;\n\
+        \ if(value?.owner){const o=value.owner;out.owner={runId:/^\\d{1,20}$/.test(String(o.runId))?String(o.runId):null,attempt:/^[1-9]\\\
+        d{0,5}$/.test(String(o.attempt))?String(o.attempt):null,revision:typeof o.revision==='string'&&/^[a-f0-9]{40}$/.test(o.revision)?o.revision:null};out.ownerDigest=sha(JSON.stringify(o));}\n\
+        \ if(value?.references)out.referencesDigest=sha(JSON.stringify(value.references));\n // No arbitrary nested\
+        \ values, raw observations, paths, owners or URL fields leave this reader.\n return out;\n}\nexport async\
+        \ function read(key,{credentials,fetchImpl=fetch,timeoutMs=10000}={}){\n const request=signedGet(key,credentials),controller=new\
+        \ AbortController(),timer=setTimeout(()=>controller.abort(),timeoutMs);\n try{\n  const response=await fetchImpl(request.url,{...request.options,signal:controller.signal});\n\
+        \  if(response.status===404){await response.body?.cancel();return {key,found:false};}\n  if(response.status!==200){await\
+        \ response.body?.cancel();throw Error('probe_http_'+response.status);}\n  const limit=key===KEYS[0]?16384:1048576;\n\
+        \  if(Number(response.headers.get('content-length')||0)>limit){await response.body?.cancel();throw Error('probe_body_limit');}\n\
+        \  const reader=response.body.getReader();let bytes=0;const chunks=[];\n  try{while(true){const {done,value}=await\
+        \ reader.read();if(done)break;bytes+=value.length;if(bytes>limit)throw Error('probe_body_limit');chunks.push(value);}}\n\
+        \  finally{await reader.cancel().catch(()=>{});reader.releaseLock();}\n  const body=Buffer.concat(chunks,bytes),value=JSON.parse(body.toString('utf8'));\n\
+        \  return {key,found:true,bytes,sha256:sha(body),etag:etag(response.headers.get('etag')),metadata:metadata(value)};\n\
+        \ }finally{clearTimeout(timer);controller.abort();}\n}\nexport async function reconcile({credentials,fetchImpl=fetch,terminalEvidence,sleep=ms=>new\
+        \ Promise(r=>setTimeout(r,ms))}={}){\n if(terminalEvidence?.id!==44488997167||terminalEvidence?.run_attempt!==1||terminalEvidence?.event!=='push'||terminalEvidence?.head_sha!=='cefeb42a3bf048d8ab85ef9c7cf897e7cbb9922e'||(terminalEvidence.status!=='completed'||terminalEvidence.conclusion!=='success'))throw\
+        \ Error('probe_producer_required');\n let requests=0;const counted=(...args)=>{if(++requests>8)throw Error('probe_request_limit');return\
+        \ fetchImpl(...args);};\n const snapshots=[];\n for(let pass=0;pass<2;pass++){if(pass===1)await sleep(2500);const\
+        \ startedAt=new Date().toISOString(),rows=[];for(const key of KEYS)rows.push(await read(key,{credentials,fetchImpl:counted}));snapshots.push({startedAt,finishedAt:new\
+        \ Date().toISOString(),rows});}\n const changedKeys=KEYS.filter((k,i)=>{const a=snapshots[0].rows[i],b=snapshots[1].rows[i];return\
+        \ a.found!==b.found||a.sha256!==b.sha256||a.etag!==b.etag;});\n return {producerRun:44488997167,producerStatusObserved:terminalEvidence.status,snapshots,changedKeys,requests,\n\
+        \    baselineMatches:snapshots.every(s=>s.rows[1].sha256==='4c34c20d9784b571414390cab450ceeeaee60b00c168476100419ec5c05cb038'&&s.rows[2].sha256==='0aa3524abf2aa0563811a7980ebe9eded7566a1d2ab36b057557dfb7caba6585'),\n\
+        \    lockClear:snapshots.every(s=>{const v=s.rows[0];if(!v.found)return true;const until=v.metadata.lockedUntil;const\
+        \ deadline=Date.parse(until);return until===''||(typeof until==='string'&&Number.isFinite(deadline)&&deadline<=Date.parse(s.startedAt));}),\n\
+        \    cursorUnadvanced:snapshots.every(s=>{const v=s.rows[3].metadata;return v?.che168Matches===1&&/^\\d{1,16}$/.test(v.che168Cursor??'')&&Number(v.che168Cursor)<13123821&&Date.parse(v.updatedAt)<Date.parse('2026-11-19T05:41:32Z');}),storageWrites:0,listRequests:0,supplierRequests:0,publicationAccepted:false,progressOrEtaProven:false,missingLeaseDoesNotProveFailure:true};\n\
+        }\nif(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href){\n try{\n  const {readFile}=await\
+        \ import('node:fs/promises');\n  const terminalEvidence=JSON.parse(await readFile(process.argv[2],'utf8'));\n\
+        \  const report=await reconcile({credentials:{accessKeyId:process.env.YC_OBJECT_STORAGE_ACCESS_KEY_ID,secretAccessKey:process.env.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY},terminalEvidence});\n\
+        \  await writeFile('china-reconciliation.json',JSON.stringify(report,null,2));console.log(JSON.stringify(report));if(!report.baselineMatches||!report.lockClear||!report.cursorUnadvanced||report.changedKeys.length)process.exitCode=1;\n\
+        \ }catch(error){const code=/^probe_(body_limit|request_limit|key_denied|credentials_missing|terminal_required|http_\\\
+        d{3})$/.test(error?.message||'')?error.message:'probe_read_failed';console.error(JSON.stringify({error:code,storageWrites:0}));process.exitCode=1;}\n\
+        }\nREADER\n"
+    - name: Observe lock and manifest twice with twenty second interval
+      env: &id001
+        YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+        YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+      run: timeout --signal=TERM --kill-after=5s 90s node "$RUNNER_TEMP/china-reconcile.mjs" terminal-before.json
+    - name: Confirm producer identity and attempt did not change
+      env:
+        GH_TOKEN: ${{ github.token }}
+      run: 'set -euo pipefail
+
+        timeout --kill-after=5s 30s gh api repos/jeep-jim/AvtoCena/actions/runs/44488997167 > terminal-after.json
+
+        python - <<''PY_TERMINAL''
+
+        import json
+
+        a=json.load(open(''terminal-before.json'')); b=json.load(open(''terminal-after.json''))
+
+        assert all(a[k]==b[k] for k in [''id'',''head_sha'',''run_attempt'',''event''])
+
+        assert b[''status''] ==''completed'' and b[''conclusion'']==''success''
+
+        PY_TERMINAL
+
+        '
+    - name: Independently verify exact manifest, section counts and owner-only ACL
+      env: *id001
+      run: "set -euo pipefail\ncat > \"$RUNNER_TEMP/verify-preaudit-acl.py\" <<'ACL'\nimport json,sys,xml.etree.ElementTree\
+        \ as E\nBUCKET='avtocena-staging-8120751';PREFIX='migration-staging/full-20261011/catalog/operational-checkpoints/v1/china/'\n\
+        def xml(body):\n if '<!DOCTYPE' in body.upper() or '<!ENTITY' in body.upper():raise ValueError()\n r=E.fromstring(body)\n\
+        \ for e in r.iter():e.tag=e.tag.split('}')[-1]\n return r\ndef acl(status,body):\n out={'httpStatus':status,'classification':'unknown','ownerOnly':False,'noPublicGrants':False}\n\
+        \ if status!=200:return out\n r=xml(body);assert r.tag=='AccessControlPolicy';owner=r.find('Owner/ID');assert\
+        \ owner is not None and owner.text\n grants=r.findall('AccessControlList/Grant');assert grants and len(grants)<=128\n\
+        \ own=True;public=False\n for g in grants:\n  gr=g.find('Grantee');p=g.findtext('Permission');assert gr is\
+        \ not None and p in ['FULL_CONTROL','READ','WRITE','READ_ACP','WRITE_ACP']\n  typ=next((v for k,v in gr.attrib.items()\
+        \ if k.split('}')[-1]=='type'),None)\n  if typ=='CanonicalUser':assert gr.findtext('ID');own=own and gr.findtext('ID')==owner.text\n\
+        \  elif typ=='Group':\n   uri=gr.findtext('URI');assert uri in ['http://acs.amazonaws.com/groups/global/AllUsers','http://acs.amazonaws.com/groups/global/AuthenticatedUsers','http://acs.amazonaws.com/groups/s3/LogDelivery'];own=False;public=public\
+        \ or uri.endswith('/AllUsers') or uri.endswith('/AuthenticatedUsers')\n  else:raise ValueError()\n return\
+        \ {**out,'classification':'owner_only' if own else 'public_grants' if public else 'non_owner_grants','ownerOnly':own,'noPublicGrants':not\
+        \ public}\ndef intersects(resource):\n if resource=='*':return True\n base='arn:aws:s3:::'+BUCKET+'/'\n if\
+        \ not isinstance(resource,str) or '${' in resource or '?' in resource:raise ValueError()\n if not resource.startswith(base):\n\
+        \  if '*' in resource:raise ValueError()\n  return False\n key=resource[len(base):]\n if '*' not in key:return\
+        \ key.startswith(PREFIX)\n if key.count('*')!=1 or not key.endswith('*'):raise ValueError()\n p=key[:-1];return\
+        \ PREFIX.startswith(p) or p.startswith(PREFIX)\ndef policy(status,body):\n out={'httpStatus':status,'classification':'unknown','wildcardGetObjectCoversPrefix':None}\n\
+        \ if status==404:\n  r=xml(body)\n  if r.tag=='Error' and r.findtext('Code')=='NoSuchBucketPolicy':return\
+        \ {**out,'classification':'absent','wildcardGetObjectCoversPrefix':False}\n  return out\n if status!=200:return\
+        \ out\n def unique(pairs):\n  d={}\n  for k,v in pairs:\n   if k in d:raise ValueError()\n   d[k]=v\n  return\
+        \ d\n d=json.loads(body,object_pairs_hook=unique);assert set(d)<=set(['Version','Id','Statement']);ss=d.get('Statement');ss=ss\
+        \ if isinstance(ss,list) else [ss];assert len(ss)<=128 and all(isinstance(s,dict) for s in ss)\n covers=False\n\
+        \ for s in ss:\n  assert set(s)<=set(['Sid','Effect','Principal','Action','Resource','Condition']) and s.get('Effect')\
+        \ in ['Allow','Deny']\n  # Do not reason about deny/condition precedence or unsupported policy forms.\n  if\
+        \ s.get('Condition'):raise ValueError()\n  principal=s.get('Principal');wild=principal=='*' or isinstance(principal,dict)\
+        \ and any(v=='*' or isinstance(v,list) and '*' in v for v in principal.values())\n  if not(principal=='*'\
+        \ or isinstance(principal,dict)):raise ValueError()\n  if isinstance(principal,dict):\n   assert set(principal)<=set(['AWS','Service','CanonicalUser','Federated'])\n\
+        \   for value in principal.values():\n    vals=value if isinstance(value,list) else [value]\n    assert vals\
+        \ and all(isinstance(v,str) and ('*'not in v or v=='*') for v in vals)\n  actions=s.get('Action');actions=actions\
+        \ if isinstance(actions,list) else [actions];assert all(isinstance(a,str) for a in actions)\n  get=any(a.lower()\
+        \ in ['*','s3:*','s3:get*','s3:getobject'] for a in actions)\n  if any('*'in a and a.lower() not in ['*','s3:*','s3:get*']\
+        \ for a in actions):raise ValueError()\n  resources=s.get('Resource');resources=resources if isinstance(resources,list)\
+        \ else [resources];match=any(intersects(r) for r in resources)\n  if s['Effect']=='Allow' and wild and get\
+        \ and match:covers=True\n return {**out,'classification':'wildcard_read_covers_prefix' if covers else 'no_wildcard_read_in_supported_policy','wildcardGetObjectCoversPrefix':covers}\n\
+        def classify(kind,status,body):\n try:return acl(status,body) if kind=='acl' else policy(status,body)\n except\
+        \ Exception:return {'httpStatus':status,'classification':'unknown','ownerOnly':False,'noPublicGrants':False}\
+        \ if kind=='acl' else {'httpStatus':status,'classification':'unknown','wildcardGetObjectCoversPrefix':None}\n\
+        if __name__=='__main__':\n try:\n  b=sys.stdin.buffer.read(131073);assert len(b)<=131072;x=json.loads(b);assert\
+        \ x['kind']in ['acl','policy'] and len(x['body'].encode())<=65536;print(json.dumps(classify(**x)))\n except\
+        \ Exception:print('{\"classification\":\"unknown\"}')\n\nACL\ncat > \"$RUNNER_TEMP/verify-preaudit-manifests.mjs\"\
+        \ <<'JS'\nimport {createHash,createHmac} from 'node:crypto';\nimport {spawnSync} from 'node:child_process';\n\
+        const term={\"version\":1,\"ok\":true,\"mode\":\"prepare\",\"checkpointSealed\":true,\"publicationStarted\"\
+        :false,\"publicationAuthorized\":false,\"checkpoint\":{\"version\":1,\"checkpointSealed\":true,\"publicationStarted\"\
+        :false,\"publicationAuthorized\":false,\"cut\":\"preaudit-after-quality-sort\",\"checkpoint\":{\"manifestSha256\"\
+        :\"f8d8bc44654d055839a4e9bad45702f4e08e55c41b5d10c993bb98f6aa3c8aa4\",\"bytes\":10431153906,\"rows\":946153,\"\
+        streaming\":true,\"sections\":[{\"name\":\"ordered\",\"bytes\":3871953545,\"rows\":290044},{\"name\":\"public\"\
+        ,\"bytes\":4379682847,\"rows\":244471},{\"name\":\"retained\",\"bytes\":2070123147,\"rows\":121594},{\"name\"\
+        :\"fresh\",\"bytes\":31034708,\"rows\":290044},{\"name\":\"metadata\",\"bytes\":78359659,\"rows\":0}]},\"\
+        binding\":{\"source\":{\"receiptDigest\":\"174893f63c5870628a3df1ab3a5241fe49847f01fa579a84d80a369383c3c49a\"\
+        ,\"reportFileSha256\":\"894bb1eb1b37042de7ce611e19d8e33bfd58c01546d2a812f2c87f96cd906caf\",\"archiveManifestSha256\"\
+        :\"b8a2a25dc27390845dd5a423efa323c9472a338b1b97f413ba96aefa7f3b65ca\",\"identities\":{\"publisher\":\"bb6317bffd1f7b1832681ac78378fe6c3e39e3b5\"\
+        ,\"runtime\":\"83ff17075e9188dcf227c8752dc064248d5f42e0\",\"controller\":\"decae6952138acd146785da548bcb4a7d15a52a9\"\
+        }},\"convertedInventorySha256\":\"380c915d768705095946bc255e6b5048bff53568a8438401ac6a3ba940f6e160\",\"captureInventorySha256\"\
+        :\"0752d6aecf71c4f0524fd30263a5b9b3fcbffbd218891100a88986991cdec8ec\",\"baseline\":{\"public\":{\"etag\":\"\
+        \\\"de7be92050ed3919e2422e86b7fda737\\\"\",\"sha256\":\"4c34c20d9784b571414390cab450ceeeaee60b00c168476100419ec5c05cb038\"\
+        },\"internal\":{\"etag\":\"\\\"dc38c32d0c3937415c811028f5e1684e\\\"\",\"sha256\":\"0aa3524abf2aa0563811a7980ebe9eded7566a1d2ab36b057557dfb7caba6585\"\
+        }},\"pricing\":{\"encyclopediaDigest\":\"bf2c72cb7a260ef093c0a43c2b0dad9c4c9094a4d6dc3811dd0d7f7626b0d72b\"\
+        ,\"indexFileSha\":\"66cc4ce64e0469daad2991251f88887dcd3a07cc26510ca1b58696bcea348a3c\",\"contextSha\":\"3ec65a2b4d38b4c06a4b206086f032db16ba5f4c661abd36ff6d89b3fed9dc40\"\
+        },\"preCutSemanticClosureSha256\":\"b1d0f24f6d00314d92c70fbee7483c349354af60e6d132999777c0b357e35600\",\"\
+        reportSnapshotSha256\":\"754c142da04c085d9abbfeed0aa2aaf16a014f656cf98c3721bccfd5853afd50\"},\"streamBinding\"\
+        :{\"owner\":\"jeep-jim/AvtoCena/44488997167/1\",\"run\":\"44488997167\",\"source\":\"a3e5abcfeb3c692c8516658edc113d72d02e7fb72981ab3cdf42f844c359abfd\"\
+        ,\"semanticClosure\":\"b1d0f24f6d00314d92c70fbee7483c349354af60e6d132999777c0b357e35600\"},\"limits\":{\"\
+        maxBytes\":25769803776,\"maxRows\":2000000},\"temporal\":{\"version\":1,\"kind\":\"native-precut-threshold-coverage-v1\"\
+        ,\"coverage\":\"all-sealed-retained-rows-v1\",\"observedAt\":\"2026-11-19T10:01:07.337Z\",\"sourceCompletedAt\"\
+        :\"2026-11-19T05:02:36.435Z\",\"utcDay\":\"2026-11-19\",\"policyDay\":\"2026-11-19\",\"retentionMs\":1209600000,\"\
+        retainedRows\":121594,\"retainedThresholdSequenceSha256\":\"5582d1d5b9f72d028315871db2b5fbfd774eee8708b169bcd04f49aa366d8402\"\
+        ,\"earliestRetainedExpiry\":\"2026-11-29T20:04:44.128Z\",\"sourceExpires\":\"2026-11-21T05:02:36.435Z\",\"\
+        endOfPolicyDay\":\"2026-11-19T17:00:00.000Z\",\"earliestValidUntil\":\"2026-11-19T17:00:00.000Z\",\"preCutThresholdProofSha256\"\
+        :\"8b915dac683c8e4e2cc2e770967dacd676761e7bc446b82daeded8e9636281e6\"}}},cut=term.checkpoint,ss=cut.streamBinding;\n\
+        const expected={ordered:[3871953545,290044],public:[4379682847,244471],retained:[2070123147,121594],fresh:[31034708,290044],metadata:[78359659,0]};\n\
+        const sha=b=>createHash('sha256').update(b).digest('hex'),hmac=(k,b)=>createHmac('sha256',k).update(b).digest(),json=x=>JSON.stringify(x),require=(v,e)=>{if(!v)throw\
+        \ Error(e);};\nconst prefix='/avtocena-staging-8120751/migration-staging/full-20261011/catalog/operational-checkpoints/v1/china/44488997167/1/';\n\
+        const bound=section=>Object.fromEntries(Object.entries({...ss,section}).sort((a,b)=>a[0]<b[0]?-1:a[0]>b[0]?1:0));\n\
+        const hex=v=>typeof v==='string'&&/^[0-9a-f]{64}$/.test(v);\nasync function read(relative,query='',limit=4*1024**2){\n\
+        \ require(/^[0-9a-f]{64}\\/(?:manifest\\.json|parts\\/0\\.bin)$/.test(relative)&&['','acl='].includes(query),'manifest_access');\n\
+        \ const pathname=prefix+relative,url=new URL('https://s3.regru.cloud'+pathname+(query?'?'+query:''));\n const\
+        \ time=new Date().toISOString().replace(/[:-]|\\.\\d{3}/g,''),day=time.slice(0,8),scope=day+'/us-east-1/s3/aws4_request';\n\
+        \ const headers={host:url.host,'x-amz-content-sha256':sha(''),'x-amz-date':time},names=Object.keys(headers).sort();\n\
+        \ const req=['GET',pathname,query,names.map(k=>k+':'+headers[k]+'\\n').join(''),names.join(';'),sha('')].join('\\\
+        n');\n const secret=process.env.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY,key=process.env.YC_OBJECT_STORAGE_ACCESS_KEY_ID;\n\
+        \ require(secret&&key,'manifest_credentials');\n const sign=hmac(hmac(hmac(hmac('AWS4'+secret,day),'us-east-1'),'s3'),'aws4_request');\n\
+        \ headers.authorization='AWS4-HMAC-SHA256 Credential='+key+'/'+scope+', SignedHeaders='+names.join(';')+',\
+        \ Signature='+createHmac('sha256',sign).update(['AWS4-HMAC-SHA256',time,scope,sha(req)].join('\\n')).digest('hex');\n\
+        \ const r=await fetch(url,{method:'GET',headers,redirect:'error',signal:AbortSignal.timeout(15000)});\n require(r.status===200&&!r.headers.get('content-encoding')&&Number(r.headers.get('content-length')||0)<=limit,'manifest_http');\n\
+        \ let n=0;const chunks=[];for await(const b of r.body){n+=b.length;require(n<=limit,'manifest_bytes');chunks.push(b);}\n\
+        \ return Buffer.concat(chunks,n);\n}\nasync function acl(key) {\n const body=await read(key,'acl=',65536);\n\
+        \ const r=spawnSync('python',['-c','import importlib.util,sys; s=importlib.util.spec_from_file_location(\"\
+        a\", sys.argv[1]);m=importlib.util.module_from_spec(s);s.loader.exec_module(m);r=m.acl(200,sys.stdin.read());assert\
+        \ r[\"ownerOnly\"] and r[\"noPublicGrants\"]',process.env.RUNNER_TEMP+'/verify-preaudit-acl.py'],{input:body,encoding:'utf8',timeout:10000});\n\
+        \ require(r.status===0,'manifest_acl');\n}\nasync function manifest(section,pin){\n const binding=bound(section),base=sha(json(binding)),key=base+'/manifest.json';\n\
+        \ const [raw]=await Promise.all([read(key),acl(key)]);require(sha(raw)===pin,'manifest_digest');\n const m=JSON.parse(raw);require(m.version===1&&m.scope==='private-data-checkpoint-not-authority'&&json(m.binding)===json(binding)&&Array.isArray(m.parts)&&m.parts.length<8192,'manifest_frame');\n\
+        \ let bytes=0;for(const [i,p]of m.parts.entries()){require(p.index===i&&Number.isSafeInteger(p.bytes)&&p.bytes>0&&p.bytes<=4*1024**2&&hex(p.sha256),'manifest_index');bytes+=p.bytes;}\n\
+        \ require(bytes===m.bytes,'manifest_size');return{base,meta:m};\n}\ntry{\n require(Date.parse(cut.temporal.earliestValidUntil)>Date.now(),'manifest_expired');\n\
+        \ const {base,meta}=await manifest('overall',cut.checkpoint.manifestSha256);require(meta.parts.length===1&&meta.bytes<=16384,'manifest_overall_count');\n\
+        \ const key=base+'/parts/0.bin';const [body]=await Promise.all([read(key,'',16384),acl(key)]);require(body.length===meta.bytes&&sha(body)===meta.parts[0].sha256,'manifest_overall_body');\n\
+        \ const overall=JSON.parse(body);\n require(overall.version===4&&overall.scope==='preaudit-stream-data-not-authority'&&json(overall.binding)===json(cut.binding)&&overall.totalRows===946153&&overall.totalBytes===10431153906&&overall.sections.length===5,'manifest_content');\n\
+        \ const summaries=[];\n for(const [i,s]of overall.sections.entries()){\n   require(s.name===Object.keys(expected)[i]&&hex(s.manifestSha256)&&json(expected[s.name])===json([s.bytes,s.rows]),'manifest_section');\n\
+        \   const {meta}=await manifest(s.name,s.manifestSha256);require(meta.bytes===s.bytes,'manifest_section_bytes');summaries.push({name:s.name,bytes:s.bytes,rows:s.rows,parts:meta.parts.length});\n\
+        \ }\n console.log(json({checkpointVerified:true,sealSha256:cut.checkpoint.manifestSha256,privateAclConfirmed:true,ownerOnlyManifests:6,ownerOnlyOverallBody:true,totalBytes:overall.totalBytes,totalRows:overall.totalRows,summaries,storageWrites:0,supplierRequests:0}));\n\
+        }catch(error){console.error(/^manifest_[a-z_]+$/.test(error?.message||'')?error.message:'manifest_private_verification_failed');process.exitCode=1;}\n\
+        JS\nnode \"$RUNNER_TEMP/verify-preaudit-manifests.mjs\"\n"
+    - uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: china-failed-44466752280-reconcile-readonly
+        path: china-reconciliation.json
+        if-no-files-found: warn
+'on':
+  push:
+    branches:
+    - main
+    paths:
+    - .github/workflows/china-fresh-preaudit-verified-reconcile.yml
