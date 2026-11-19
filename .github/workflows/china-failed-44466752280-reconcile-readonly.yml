@@ -1,0 +1,134 @@
+name: Reconcile China after failed preparation without writes
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: china-failed-44466752280-reconcile-readonly
+  cancel-in-progress: false
+jobs:
+  reconcile:
+    if: github.ref == 'refs/heads/main' && github.event.head_commit.message == 'Reconcile failed China 44466752280
+      without writes'
+    environment: regcloud-staging
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+    - uses: actions/setup-node@v4
+      with:
+        node-version: 24
+    - name: Confirm exact producer identity before storage reads
+      env:
+        GH_TOKEN: ${{ github.token }}
+      run: 'set -euo pipefail
+
+        timeout --kill-after=5s 30s gh api repos/jeep-jim/AvtoCena/actions/runs/44466752280 > terminal-before.json
+
+        python - <<''PY_TERMINAL''
+
+        import json
+
+        x=json.load(open(''terminal-before.json''))
+
+        assert x[''id'']==44466752280 and x[''status''] ==''completed'' and x[''conclusion'']==''failure''
+
+        assert x[''head_sha'']==''3ae8e9530169f3219097f30004e9d96f38e0f3b0''
+
+        assert x[''run_attempt'']==1 and x[''event'']==''push''
+
+        PY_TERMINAL
+
+        '
+    - name: Prepare exact bounded read-only reader
+      run: "cat > \"$RUNNER_TEMP/china-reconcile.mjs\" <<'READER'\nimport {createHash,createHmac} from 'node:crypto';\n\
+        import {writeFile} from 'node:fs/promises';\nimport {pathToFileURL} from 'node:url';\nconst ENDPOINT='https://s3.regru.cloud',BUCKET='avtocena-staging-8120751',PREFIX='migration-staging/full-20261011/';\n\
+        export const RELEASE='83ff17075e9188dcf227c8752dc064248d5f42e0';\nexport const KEYS=Object.freeze(['catalog/import-lock.json','catalog/manifest.json','catalog/internal/manifest.json','catalog/intake-cursors/v1/china.json']);\n\
+        const sha=s=>createHash('sha256').update(s).digest('hex'),hmac=(key,s)=>createHmac('sha256',key).update(s).digest();\n\
+        export function signedGet(key,credentials,date=new Date()){\n if(!KEYS.includes(key))throw Error('probe_key_denied');\n\
+        \ if(!credentials.accessKeyId||!credentials.secretAccessKey)throw Error('probe_credentials_missing');\n\
+        \ const pathname='/'+BUCKET+'/'+PREFIX+key,url=ENDPOINT+pathname;\n const stamp=date.toISOString().replace(/[:-]|\\\
+        .\\d{3}/g,''),day=stamp.slice(0,8),scope=`${day}/us-east-1/s3/aws4_request`;\n const headers={host:'s3.regru.cloud','x-amz-content-sha256':sha(''),'x-amz-date':stamp};\n\
+        \ const names=Object.keys(headers).sort(),canonical=names.map(k=>`${k}:${headers[k]}\\n`).join('');\n const\
+        \ request=['GET',pathname,'',canonical,names.join(';'),sha('')].join('\\n');\n const signing=hmac(hmac(hmac(hmac('AWS4'+credentials.secretAccessKey,day),'us-east-1'),'s3'),'aws4_request');\n\
+        \ const signature=createHmac('sha256',signing).update(`AWS4-HMAC-SHA256\\n${stamp}\\n${scope}\\n${sha(request)}`).digest('hex');\n\
+        \ headers.authorization=`AWS4-HMAC-SHA256 Credential=${credentials.accessKeyId}/${scope}, SignedHeaders=${names.join(';')},\
+        \ Signature=${signature}`;\n return {url,options:{method:'GET',headers,redirect:'error'}};\n}\nconst token=v=>typeof\
+        \ v==='string'&&v.length<=180&&/^[a-zA-Z0-9_:.+\\-TZ]*$/.test(v)?v:null;\nconst etag=v=>typeof v==='string'&&/^\"\
+        ?[a-fA-F0-9-]{1,128}\"?$/.test(v)?v:null;\nexport function metadata(value){\n const out={};for(const key\
+        \ of ['generationId','expectedBaseGenerationId','producerRevision','operationId','operationType','startedAt','updatedAt','heartbeatAt','lockedUntil','publishedAt','completedAt','stage','phase','schemaVersion'])if(value?.[key]!=null)out[key]=typeof\
+        \ value[key]==='number'&&Number.isSafeInteger(value[key])?value[key]:token(value[key]);\n if(Array.isArray(value?.sources)){const\
+        \ sources=value.sources.filter(s=>s?.provider==='auto_api_che168');const c=sources[0]?.cursor;out.che168Matches=sources.length;out.che168Cursor=((typeof\
+        \ c==='number'&&Number.isSafeInteger(c)&&c>0)||(typeof c==='string'&&/^\\d{1,16}$/.test(c)))?String(c):null;}\n\
+        \ if(value?.markets?.china){out.chinaCount=value.markets.china.count;out.chinaUpdatedAt=token(value.markets.china.updatedAt);}\n\
+        \ if(value?.activeSlot!=null)out.activeSlot=['a','b'].includes(value.activeSlot)?value.activeSlot:null;\n\
+        \ if(value?.contentHash!=null)out.contentHash=typeof value.contentHash==='string'&&/^[a-f0-9]{64}$/.test(value.contentHash)?value.contentHash:null;\n\
+        \ for(const key of ['count','version','retentionDays'])if(value?.[key]!=null)out[key]=Number.isSafeInteger(value[key])&&value[key]>=0?value[key]:null;\n\
+        \ for(const key of ['sources','chunks'])if(value?.[key]&&typeof value[key]==='object')out[key+'Descriptor']={sha256:sha(JSON.stringify(value[key])),entries:Object.keys(value[key]).length};\n\
+        \ if(value?.state!=null)out.state=['loading','ready','published','aborted'].includes(value.state)?value.state:null;\n\
+        \ if(value?.owner){const o=value.owner;out.owner={runId:/^\\d{1,20}$/.test(String(o.runId))?String(o.runId):null,attempt:/^[1-9]\\\
+        d{0,5}$/.test(String(o.attempt))?String(o.attempt):null,revision:typeof o.revision==='string'&&/^[a-f0-9]{40}$/.test(o.revision)?o.revision:null};out.ownerDigest=sha(JSON.stringify(o));}\n\
+        \ if(value?.references)out.referencesDigest=sha(JSON.stringify(value.references));\n // No arbitrary nested\
+        \ values, raw observations, paths, owners or URL fields leave this reader.\n return out;\n}\nexport async\
+        \ function read(key,{credentials,fetchImpl=fetch,timeoutMs=10000}={}){\n const request=signedGet(key,credentials),controller=new\
+        \ AbortController(),timer=setTimeout(()=>controller.abort(),timeoutMs);\n try{\n  const response=await fetchImpl(request.url,{...request.options,signal:controller.signal});\n\
+        \  if(response.status===404){await response.body?.cancel();return {key,found:false};}\n  if(response.status!==200){await\
+        \ response.body?.cancel();throw Error('probe_http_'+response.status);}\n  const limit=key===KEYS[0]?16384:1048576;\n\
+        \  if(Number(response.headers.get('content-length')||0)>limit){await response.body?.cancel();throw Error('probe_body_limit');}\n\
+        \  const reader=response.body.getReader();let bytes=0;const chunks=[];\n  try{while(true){const {done,value}=await\
+        \ reader.read();if(done)break;bytes+=value.length;if(bytes>limit)throw Error('probe_body_limit');chunks.push(value);}}\n\
+        \  finally{await reader.cancel().catch(()=>{});reader.releaseLock();}\n  const body=Buffer.concat(chunks,bytes),value=JSON.parse(body.toString('utf8'));\n\
+        \  return {key,found:true,bytes,sha256:sha(body),etag:etag(response.headers.get('etag')),metadata:metadata(value)};\n\
+        \ }finally{clearTimeout(timer);controller.abort();}\n}\nexport async function reconcile({credentials,fetchImpl=fetch,terminalEvidence,sleep=ms=>new\
+        \ Promise(r=>setTimeout(r,ms))}={}){\n if(terminalEvidence?.id!==44466752280||terminalEvidence?.run_attempt!==1||terminalEvidence?.event!=='push'||terminalEvidence?.head_sha!=='3ae8e9530169f3219097f30004e9d96f38e0f3b0'||(terminalEvidence.status!=='completed'||terminalEvidence.conclusion!=='failure'))throw\
+        \ Error('probe_producer_required');\n let requests=0;const counted=(...args)=>{if(++requests>8)throw Error('probe_request_limit');return\
+        \ fetchImpl(...args);};\n const snapshots=[];\n for(let pass=0;pass<2;pass++){if(pass===1)await sleep(2500);const\
+        \ startedAt=new Date().toISOString(),rows=[];for(const key of KEYS)rows.push(await read(key,{credentials,fetchImpl:counted}));snapshots.push({startedAt,finishedAt:new\
+        \ Date().toISOString(),rows});}\n const changedKeys=KEYS.filter((k,i)=>{const a=snapshots[0].rows[i],b=snapshots[1].rows[i];return\
+        \ a.found!==b.found||a.sha256!==b.sha256||a.etag!==b.etag;});\n return {producerRun:44466752280,producerStatusObserved:terminalEvidence.status,snapshots,changedKeys,requests,\n\
+        \    baselineMatches:snapshots.every(s=>s.rows[1].sha256==='4c34c20d9784b571414390cab450ceeeaee60b00c168476100419ec5c05cb038'&&s.rows[2].sha256==='0aa3524abf2aa0563811a7980ebe9eded7566a1d2ab36b057557dfb7caba6585'),\n\
+        \    lockClear:snapshots.every(s=>{const v=s.rows[0];if(!v.found)return true;const until=v.metadata.lockedUntil;const\
+        \ deadline=Date.parse(until);return until===''||(typeof until==='string'&&Number.isFinite(deadline)&&deadline<=Date.parse(s.startedAt));}),\n\
+        \    cursorUnadvanced:snapshots.every(s=>{const v=s.rows[3].metadata;return v?.che168Matches===1&&/^\\d{1,16}$/.test(v.che168Cursor??'')&&Number(v.che168Cursor)<13123821&&Date.parse(v.updatedAt)<Date.parse('2026-11-19T05:41:32Z');}),storageWrites:0,listRequests:0,supplierRequests:0,publicationAccepted:false,progressOrEtaProven:false,missingLeaseDoesNotProveFailure:true};\n\
+        }\nif(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href){\n try{\n  const {readFile}=await\
+        \ import('node:fs/promises');\n  const terminalEvidence=JSON.parse(await readFile(process.argv[2],'utf8'));\n\
+        \  const report=await reconcile({credentials:{accessKeyId:process.env.YC_OBJECT_STORAGE_ACCESS_KEY_ID,secretAccessKey:process.env.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY},terminalEvidence});\n\
+        \  await writeFile('china-reconciliation.json',JSON.stringify(report,null,2));console.log(JSON.stringify(report));if(!report.baselineMatches||!report.lockClear||!report.cursorUnadvanced||report.changedKeys.length)process.exitCode=1;\n\
+        \ }catch(error){const code=/^probe_(body_limit|request_limit|key_denied|credentials_missing|terminal_required|http_\\\
+        d{3})$/.test(error?.message||'')?error.message:'probe_read_failed';console.error(JSON.stringify({error:code,storageWrites:0}));process.exitCode=1;}\n\
+        }\nREADER\n"
+    - name: Observe lock and manifest twice with twenty second interval
+      env:
+        YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+        YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+      run: timeout --signal=TERM --kill-after=5s 90s node "$RUNNER_TEMP/china-reconcile.mjs" terminal-before.json
+    - name: Confirm producer identity and attempt did not change
+      env:
+        GH_TOKEN: ${{ github.token }}
+      run: 'set -euo pipefail
+
+        timeout --kill-after=5s 30s gh api repos/jeep-jim/AvtoCena/actions/runs/44466752280 > terminal-after.json
+
+        python - <<''PY_TERMINAL''
+
+        import json
+
+        a=json.load(open(''terminal-before.json'')); b=json.load(open(''terminal-after.json''))
+
+        assert all(a[k]==b[k] for k in [''id'',''head_sha'',''run_attempt'',''event''])
+
+        assert b[''status''] ==''completed'' and b[''conclusion'']==''failure''
+
+        PY_TERMINAL
+
+        '
+    - uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: china-failed-44466752280-reconcile-readonly
+        path: china-reconciliation.json
+        if-no-files-found: warn
+'on':
+  push:
+    branches:
+    - main
+    paths:
+    - .github/workflows/china-failed-44466752280-reconcile-readonly.yml
