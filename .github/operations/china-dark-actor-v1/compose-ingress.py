@@ -22,7 +22,9 @@ def main():
  dark=json.loads(read(root,'dark.json'));normal=json.loads(read(root,'ordinary.json'));host=json.loads(read(root,'host.json'));control=json.loads(read(root,'control.json'))
  need(dark.get('status')=='china_dark_control_verified' and dark.get('publicIngressChanged') is False and
   control.get('status')=='exact_dark_control' and control.get('storageWrites')==0 and
-  control.get('controlSha256')==dark.get('controlSha256') and control.get('revision')==(3 if p.get('retryRollbackControlSha256') else 1) and
+  control.get('controlSha256')==dark.get('controlSha256') and control.get('revision')=={None:1,
+   'b008d226ef7a56629c71dae09fcad5114509285b3a76b5cb2c9825f5fd1bc23c':3,
+   '1266889e6794c21963c9b31c8368093bfded3742a135c5ce69cc8bfc91e238ae':5}.get(p.get('retryRollbackControlSha256'),0) and
   normal.get('kind')=='normal-china-runtime-readback' and normal.get('readySha256')==control.get('readySha256')==p['target']['readySha256'])
  candidate=p['candidate'];old=p['incumbent'];clock=int(time.time()*1000)
  lifecycle=min(p['validUntil'],clock+180000);need(lifecycle>=clock+60000)
@@ -34,6 +36,11 @@ def main():
   'expiresAt':lifecycle,'githubRunId':root.name,'controlNode':node,'controlReaderFile':'china-dark-control-switch.mjs','darkPlanFile':'plan.json',
   'control':{'checksum':control['controlSha256'],**{k:control[k] for k in ('etag','revision','generationId','readySha256')}},
   'dark':dark,'ordinary':normal,**p['query'],'authorizesIngress':True,'authorizesDataWrite':False}
+ if 'persistedCandidateProof' in p:
+  scope=p['persistedCandidateProof']
+  need(p.get('retryRollbackControlSha256')=='1266889e6794c21963c9b31c8368093bfded3742a135c5ce69cc8bfc91e238ae' and
+   isinstance(scope,dict) and set(scope)=={'priorRunId','expectSha256'} and scope['priorRunId']=='44724452099' and scope['expectSha256']=='a3a8a51449b1c2357bb2b43d7eaeaf426de5d5561a9076b2514bde049d1fd658')
+  out['persistedCandidateProof']=scope
  data=json.dumps(out,separators=(',',':')).encode()
  fd=os.open(root/'ingress-plan.json',os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o600)
  with os.fdopen(fd,'wb') as f:f.write(data)

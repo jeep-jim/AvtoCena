@@ -31,6 +31,8 @@ RELEASE_ROOT=Path('/opt/avtocena/releases')/APP
 CONFIG=Path('/etc/nginx/conf.d/avtocena-prepare.conf')
 LOCK='/run/lock/avtocena-runtime-change.lock'
 MAX_CONFIG=1024*1024
+PERSISTED_PRIOR_RUN='44724452099'
+PERSISTED_EXPECT_SHA='a3a8a51449b1c2357bb2b43d7eaeaf426de5d5561a9076b2514bde049d1fd658'
 SHA=r'[a-f0-9]{64}'
 ID=r'[a-f0-9]{24}'
 GEN=r'gen_\d{13}_[a-z0-9]{1,64}'
@@ -40,6 +42,15 @@ def digest(data):return hashlib.sha256(data).hexdigest()
 def need(ok,code):
     if not ok:raise Refused(code)
 class Refused(Exception):pass
+class HealthReleaseRefused(Refused):
+    def __init__(self,evidence):
+        super().__init__('https_release')
+        self.evidence=evidence
+        self.logged=False
+    def log(self):
+        if not self.logged:
+            self.logged=True
+            print(json.dumps({'status':'china_ingress_health_mismatch',**self.evidence}),file=sys.stderr,flush=True)
 
 def positive(value,upper=10**9):return type(value) is int and 0<value<=upper
 def match(value,regex):return isinstance(value,str) and bool(re.fullmatch(regex,value))
@@ -80,6 +91,11 @@ def plan_valid(p,now):
          positive(o.get('checkedAt'),10**14) and 0<=now-o['checkedAt']<=180000 and match(o.get('cardId'),ID) and
          positive(o.get('listRub')) and o.get('listRub')==o.get('detailRub') and positive(o.get('filteredCount')),'ordinary_receipt')
     exact_card_uri(o,c['generationId'])
+    if 'persistedCandidateProof' in p:
+        proof=p['persistedCandidateProof']
+        need(isinstance(proof,dict) and set(proof)=={'priorRunId','expectSha256'} and
+             proof['priorRunId']==PERSISTED_PRIOR_RUN and proof['expectSha256']==PERSISTED_EXPECT_SHA and
+             c['revision']==5,'persisted_candidate_authority')
     need(title(p.get('make')) and title(p.get('model')),'model_scope')
     return p
 
@@ -128,30 +144,33 @@ def run(p,io):
         need(io.control()==p['control'],'signed_control_changed')
     verify();fresh()
     initial_proc,initial_policy=restart_identity(io.inspect(CANDIDATE),p)
-    need(initial_policy=='no','candidate_not_dark_policy')
+    persisted=p.get('persistedCandidateProof')
+    need(initial_policy==('unless-stopped' if persisted else 'no'),'persisted_candidate_policy_changed' if persisted else 'candidate_not_dark_policy')
     before=io.read_config()
     need(digest(before)==p['nginxBeforeSha256'],'nginx_preimage')
     after=changed_config(before);next_sha=digest(after)
-    io.gateway(OLD)
+    if persisted:io.prove_persisted_policy(persisted,p['nginxBeforeSha256'],next_sha,initial_proc)
+    io.gateway(OLD,'preflight')
     io.china('alternate',p)
     baseline=io.neighbors('old')
     need(baseline==io.neighbors('alternate'),'protected_before')
     verify();fresh();need(digest(io.read_config())==p['nginxBeforeSha256'],'nginx_raced')
-    need(restart_identity(io.inspect(CANDIDATE),p)==(initial_proc,'no'),'candidate_dark_raced')
-    io.backup(before,next_sha,initial_proc)
+    need(restart_identity(io.inspect(CANDIDATE),p)==(initial_proc,initial_policy),'candidate_dark_raced')
+    io.backup(before,next_sha,initial_proc,initial_policy)
     policy_attempted=False
     gateway_attempted=False
     try:
         # This is a scoped Docker metadata update on the candidate's immutable
         # ID only. It must not start/stop/restart any container.
-        policy_attempted=True
-        io.update_policy(p['candidateContainerId'],'unless-stopped')
+        if initial_policy=='no':
+            policy_attempted=True
+            io.update_policy(p['candidateContainerId'],'unless-stopped')
         need(restart_identity(io.inspect(CANDIDATE),p)==(initial_proc,'unless-stopped'),'candidate_policy_readback')
         verify();fresh()
         need(digest(io.read_config())==p['nginxBeforeSha256'],'nginx_raced')
         gateway_attempted=True
         io.replace(after,p['nginxBeforeSha256'])
-        io.test();io.reload();io.gateway(APP)
+        io.test();io.reload();io.gateway(APP,'candidate_reload')
         io.china('public',p)
         need(baseline==io.neighbors('public'),'protected_after')
         verify();fresh()
@@ -164,14 +183,15 @@ def run(p,io):
                 'candidateRestartPolicy':'unless-stopped','candidateProcessUnchanged':True,'publicationDataWrites':0}
         io.record_success(proof)
         return proof
-    except BaseException:
+    except BaseException as first:
+        if isinstance(first,HealthReleaseRefused):first.log()
         with io.rollback_mode():
             current=digest(io.read_config())
             need(current in (p['nginxBeforeSha256'],next_sha),'rollback_foreign_nginx')
             if current==next_sha:io.replace(before,next_sha)
             if gateway_attempted or current==next_sha:io.test();io.reload()
             verify_container(io.inspect('avtocena-production'),p,False)
-            io.gateway(OLD)
+            io.gateway(OLD,'rollback_reload')
             need(digest(io.read_config())==p['nginxBeforeSha256'],'rollback_nginx_hash')
             io.record_rollback({'status':'old_ingress_restored','runtimeRelease':OLD,
                                 'nginxSha256':p['nginxBeforeSha256'],'doNotAssumeChinaControlRestored':True,
@@ -238,12 +258,62 @@ def response_json(target,path,max_bytes=1024*1024):
     code,_,raw=http_get(target,path,max_bytes)
     return code,json.loads(raw)
 
-def host_health(target,release):
-    status,v=response_json(target,'/api/health',8192)
-    need(status==200 and v.get('ok') is True and v.get('releaseSha')==release and v.get('calculationVersion')==CALC,'https_release')
+def release_role(sha):
+    return 'candidate' if sha==APP else 'incumbent' if sha==OLD else 'other' if isinstance(sha,str) else 'missing'
+
+def health_sample(target,release,phase,attempt,max_seconds,cache_bust=False):
+    expected=release_role(release)
+    evidence={'phase':phase,'endpoint':target,'expectedRelease':expected,'observedRelease':'missing',
+              'calculationNamespace':'missing','httpStatus':None,'attempt':attempt,'category':'transport'}
+    # Fresh connections already avoid Nginx keep-alive. After HUP a unique
+    # query also prevents an external cached answer satisfying the readiness gate.
+    path='/api/health'
+    if cache_bust:path+='?avtocenaReleaseProbe='+str(time.monotonic_ns())
+    try:
+        code,_,body=http_get(target,path,8192,max_seconds)
+        evidence['httpStatus']=code if type(code) is int and 100<=code<=599 else None
+        if code!=200:
+            evidence['category']='http_status'
+            return evidence
+        v=json.loads(body)
+        if not isinstance(v,dict) or v.get('ok') is not True or v.get('service')!='avtocena-web':
+            evidence['category']='health_json'
+            return evidence
+        evidence['observedRelease']=release_role(v.get('releaseSha'))
+        calc=v.get('calculationVersion')
+        evidence['calculationNamespace']='expected' if calc==CALC else 'other' if isinstance(calc,str) else 'missing'
+        evidence['category']='match' if evidence['observedRelease']==expected and calc==CALC else 'release_or_namespace'
+    except TimeoutError:
+        evidence['category']='timeout'
+    except ssl.SSLError:
+        evidence['category']='tls'
+    except (UnicodeError,ValueError):
+        evidence['category']='health_json'
+    except (OSError,http.client.HTTPException):
+        pass
+    return evidence
+
+def host_health(target,release,phase,settle=False,now=time.monotonic,sleep=time.sleep):
+    # The existing deploy actor allows Nginx HUP to settle. Preserve strict
+    # release and calculator identity; allow only the known previous release
+    # or a bounded transient gateway status while a fresh worker starts.
+    end=now()+8.0 if settle else None
+    for attempt in range(1,6 if settle else 2):
+        timeout=min(2.0,max(0.1,end-now())) if settle else 9
+        e=health_sample(target,release,phase,attempt,timeout,cache_bust=settle)
+        if e['category']=='match':
+            if not settle:return
+            # Passing a cache-busting readiness URL is insufficient: the
+            # exact normal health URL must also report the same release.
+            e=health_sample(target,release,phase,attempt,min(2.0,max(0.1,end-now())))
+            if e['category']=='match':return
+        pending=(e['category']=='release_or_namespace' and e['calculationNamespace']=='expected' and
+                 e['observedRelease'] in ('candidate','incumbent')) or e['httpStatus'] in (502,503,504) or e['category']=='timeout'
+        if not settle or not pending or attempt==5 or now()>=end:raise HealthReleaseRefused(e)
+        sleep(min(0.4,max(0,end-now())))
 
 def host_china(target,p):
-    host_health(target,APP)
+    host_health(target,APP,target+'_china')
     o=p['ordinary']; gen=p['control']['generationId']
     query=urlencode({'market':'china','make':p['make'],'model':p['model'],'sort':'totalRub','pageSize':1,'preparedCut':gen})
     path='/api/catalog/search?'+query
@@ -319,17 +389,31 @@ class Host:
         return {'checksum':v.get('controlSha256'),'etag':v.get('etag'),'revision':v.get('revision'),
                 'generationId':v.get('generationId'),'readySha256':v.get('readySha256')}
     def read_config(self):return read_regular(CONFIG,MAX_CONFIG)[0]
-    def gateway(self,release):
-        host_health('gateway',release)
-        host_health('public',release)
+    def gateway(self,release,phase):
+        settle=phase in ('candidate_reload','rollback_reload')
+        host_health('gateway',release,phase,settle=settle)
+        host_health('public',release,phase,settle=settle)
     china=staticmethod(host_china)
     neighbors=staticmethod(neighbor_canaries)
-    def backup(self,before,expected_after,candidate_process):
+    def prove_persisted_policy(self,proof,before_sha,after_sha,process):
+        # Root-only retained receipt from the exact failed transaction. Never
+        # infer this from Docker policy or reconstruct from today's image alone.
+        folder=RELEASE_ROOT/'china-switch-runs'/PERSISTED_PRIOR_RUN/'ingress-rollback'
+        file=folder/'expect.json'
+        need(folder.resolve()==folder and file.resolve()==file,'persisted_candidate_path')
+        body,st=read_regular(file,8192)
+        need(st.st_uid==0 and st.st_nlink==1 and not st.st_mode&0o077 and
+             digest(body)==proof['expectSha256'],'persisted_candidate_receipt')
+        need(json.loads(body)=={'before':before_sha,'candidate':after_sha,
+             'oldContainerId':self.plan['oldContainerId'],'candidateContainerId':self.plan['candidateContainerId'],
+             'candidateProcess':list(process),'candidateRestartBefore':'no','candidateRestartAfter':'unless-stopped'},
+             'persisted_candidate_process_or_baseline')
+    def backup(self,before,expected_after,candidate_process,initial_policy):
         self.rollback.mkdir(mode=0o700,exist_ok=False)
         write_x(self.rollback/'nginx-before.conf',before)
         write_x(self.rollback/'expect.json',json.dumps({'before':digest(before),'candidate':expected_after,'oldContainerId':self.plan['oldContainerId'],
             'candidateContainerId':self.plan['candidateContainerId'],'candidateProcess':candidate_process,
-            'candidateRestartBefore':'no','candidateRestartAfter':'unless-stopped'}).encode())
+            'candidateRestartBefore':initial_policy,'candidateRestartAfter':'unless-stopped'}).encode())
         fsync_dir(self.run_dir)
     def replace(self,data,expected_before):
         before,original=read_regular(CONFIG,MAX_CONFIG)
@@ -371,5 +455,6 @@ if __name__=='__main__':
             print(json.dumps(proof),flush=True)
         finally:os.close(fd)
     except BaseException as e:
+        if isinstance(e,HealthReleaseRefused):e.log()
         print(json.dumps({'status':'china_ingress_not_verified','reason':str(e) if isinstance(e,Refused) else type(e).__name__}),file=sys.stderr,flush=True)
         raise SystemExit(2)

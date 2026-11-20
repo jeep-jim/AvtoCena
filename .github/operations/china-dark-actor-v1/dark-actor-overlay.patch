@@ -15,7 +15,7 @@ diff --git a/apps/web/lib/catalog/china-regcloud-cut-switch.ts b/apps/web/lib/ca
   storage:ChinaConfiguredStorageScope;expectedBaseSha256:string;expectedPublicControlSha256:string|null;
   target:ChinaPointerTarget;bootstrapPrevious?:ChinaPointerTarget;expectedRuntimeProbeSha256:string;validUntil:number;
 + darkActivation?:'isolated-runtime-before-ingress';
-+ retryRolledBackFirstCut?:true;
++ retryRolledBackFirstCutRevision?:2|4;
  };
  /** Called by an independently authenticated owner-run service only. No admin
   * endpoint or default permission. This is the sole mutable key; candidate
@@ -34,7 +34,7 @@ diff --git a/apps/web/lib/catalog/china-regcloud-cut-switch.ts b/apps/web/lib/ca
      p.version!==1||p.market!=='china'||p.kind!=='china-own-public-cut-cas-v1'||!['activate','rollback'].includes(p.action)||
 +    (p.darkActivation!==undefined&&(p.darkActivation!=='isolated-runtime-before-ingress'||p.action!=='activate'||
 +      typeof input.assertSameDarkRuntimeLease!=='function'))||
-+    (p.retryRolledBackFirstCut!==undefined&&(p.retryRolledBackFirstCut!==true||!p.darkActivation||
++    (p.retryRolledBackFirstCutRevision!==undefined&&(![2,4].includes(p.retryRolledBackFirstCutRevision)||!p.darkActivation||
 +      p.action!=='activate'||p.bootstrapPrevious!==undefined||p.expectedPublicControlSha256===null))||
      !validChinaPointerTarget(p.target)||!SHA.test(p.expectedBaseSha256)||!SHA.test(p.expectedRuntimeProbeSha256)||
      !(p.expectedPublicControlSha256===null||SHA.test(p.expectedPublicControlSha256))||
@@ -52,7 +52,7 @@ diff --git a/apps/web/lib/catalog/china-regcloud-cut-switch.ts b/apps/web/lib/ca
      chinaObjectDigest(before?.state.active??null)!==p.expectedBaseSha256)return fail('base_changed');
 + // A first-cut rollback can only retry the exact object already retained
 + // as previous. This does not grant a general rebase or create/delete path.
-+ if(p.retryRolledBackFirstCut&&(!before||before.state.revision!==2||
++ if(p.retryRolledBackFirstCutRevision&&(!before||before.state.revision!==p.retryRolledBackFirstCutRevision||
 +    !chinaLegacyRollback(before.state.active)||!before.state.previous||
 +    chinaObjectDigest(before.state.previous)!==chinaObjectDigest(p.target)))return fail('not_exact_rolled_back_first_cut');
   if(p.action==='rollback'&&(!before?.state.previous||chinaObjectDigest(before.state.previous)!==chinaObjectDigest(p.target)||p.bootstrapPrevious))
@@ -63,7 +63,7 @@ diff --git a/apps/web/lib/catalog/china-regcloud-cut-switch.ts b/apps/web/lib/ca
   };
   const [target,backup]=await Promise.all([verify(p.target),verify(previous)]);
 - if(p.action==='activate'&&target.stage?.durable.expectedChinaPublicBaseSha256!==p.expectedBaseSha256)return fail('candidate_base');
-+ if(p.action==='activate'&&target.stage?.durable.expectedChinaPublicBaseSha256!==(p.retryRolledBackFirstCut?chinaObjectDigest(null):p.expectedBaseSha256))return fail('candidate_base');
++ if(p.action==='activate'&&target.stage?.durable.expectedChinaPublicBaseSha256!==(p.retryRolledBackFirstCutRevision?chinaObjectDigest(null):p.expectedBaseSha256))return fail('candidate_base');
   const proof=await input.verifyNormalRuntimeReadback(p.target);
   const selected=p.target;
   const matching=chinaLegacyRollback(selected)?proof?.kind==='normal-china-legacy-readback'&&proof.legacyManifestSha256===selected.manifestSha256&&proof.readySha256===undefined:
@@ -76,7 +76,7 @@ diff --git a/scripts/catalog-china-own-control-switch.ts b/scripts/catalog-china
 new file mode 100644
 --- /dev/null
 +++ b/scripts/catalog-china-own-control-switch.ts
-@@ -0,0 +1,235 @@
+@@ -0,0 +1,237 @@
 +/** Owner-run China-only compare-and-swap; never changes Nginx, containers, or cursors. */
 +import {createHash} from 'node:crypto';
 +import {ObjectJsonStorage} from '../apps/web/lib/data';
@@ -123,7 +123,7 @@ new file mode 100644
 +  p.candidate.release!==p.incumbent.release&&p.candidate.imageSha256!==p.incumbent.imageSha256&&
 +  p.incumbent.name==='avtocena-production'&&p.candidate.name==='avtocena-china-candidate-'+p.candidate.release.slice(0,12)&&
 +  validQuery(p.query)&&validQuery(p.legacyQuery)&&
-+  (p.retryRollbackControlSha256===undefined||p.retryRollbackControlSha256===rolledBackFirstControlSha(p)),'plan_scope');
++  (p.retryRollbackControlSha256===undefined||retryRevision(p)!==undefined),'plan_scope');
 + const deepFreeze=(x:any):any=>{if(!x||typeof x!=='object')return x;Object.values(x).forEach(deepFreeze);return Object.freeze(x);};
 + return deepFreeze(p);
 +}
@@ -170,11 +170,13 @@ new file mode 100644
 + onFailureBeforeRollback?:(reason:string)=>void;
 + onPhase?:(phase:'scope_and_owner'|'host_lease'|'own_baseline'|'legacy_manifest'|'candidate_ready'|'legacy_http'|'private_candidate'|'control_cas'|'prepared_http'|'final_readback')=>void;
 +};
-+function rolledBackFirstControlSha(p:Readonly<ChinaDarkSwitchPlan>){
-+ return chinaObjectDigest({version:1,market:'china',revision:2,active:p.previous,previous:p.target});
++function retryRevision(p:Readonly<ChinaDarkSwitchPlan>):2|4|undefined{
++ if(!p.retryRollbackControlSha256)return;
++ return ([2,4] as const).find(revision=>p.retryRollbackControlSha256===
++   chinaObjectDigest({version:1,market:'china',revision,active:p.previous,previous:p.target}));
 +}
 +export function expectedDarkControlSha256(p:Readonly<ChinaDarkSwitchPlan>){
-+ return chinaObjectDigest({version:1,market:'china',revision:p.retryRollbackControlSha256?3:1,active:p.target,previous:p.previous});
++ return chinaObjectDigest({version:1,market:'china',revision:(retryRevision(p)??0)+1,active:p.target,previous:p.previous});
 +}
 +function safeOriginalFailure(error:unknown){
 + const e=error as Error|undefined;
@@ -224,7 +226,7 @@ new file mode 100644
 + const expectedOwn=async()=>{
 +  const own=await readChinaPublicState(storage);
 +  if(p.retryRollbackControlSha256){
-+   need(own?.checksum===p.retryRollbackControlSha256&&own.state.revision===2&&
++   need(own?.checksum===p.retryRollbackControlSha256&&own.state.revision===retryRevision(p)&&
 +    chinaObjectDigest(own.state.active)===chinaObjectDigest(p.previous)&&
 +    chinaObjectDigest(own.state.previous)===chinaObjectDigest(p.target),'rolled_back_baseline_changed');
 +   return own;
@@ -266,7 +268,7 @@ new file mode 100644
 + const permit:ChinaOwnSwitchPermit={version:1,kind:'china-own-public-cut-cas-v1',market:'china',action:'activate',storage:boundStorage,
 +  expectedBaseSha256:p.retryRollbackControlSha256?chinaObjectDigest(p.previous):p.expectedBaseSha256,
 +  expectedPublicControlSha256:p.retryRollbackControlSha256??null,target:p.target,
-+  ...(p.retryRollbackControlSha256?{retryRolledBackFirstCut:true}:{bootstrapPrevious:p.previous}),
++  ...(p.retryRollbackControlSha256?{retryRolledBackFirstCutRevision:retryRevision(p)!}:{bootstrapPrevious:p.previous}),
 +  expectedRuntimeProbeSha256:chinaObjectDigest(privateProof),validUntil:p.validUntil,darkActivation:'isolated-runtime-before-ingress'};
 + const permitSha=chinaObjectDigest(permit);
 + const exactNew=expectedDarkControlSha256(p);
