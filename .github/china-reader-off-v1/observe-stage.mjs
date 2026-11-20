@@ -1,6 +1,8 @@
 import {createHash,createHmac} from 'node:crypto';
 const host='s3.regru.cloud',base='/avtocena-staging-8120751';
 const prefix='migration-staging/full-20261011/catalog/private-market-stage-v1/china/full-fresh-44705142814-1/';
+const root=base+'/'+prefix,gen=/^gen_\d{13}_china44705142814$/,hex=/^[a-f0-9]{64}$/;
+const scope=new Set();
 const access=process.env.REG_ACCESS,secret=process.env.REG_SECRET;
 delete process.env.REG_ACCESS;delete process.env.REG_SECRET;
 const sha=x=>createHash('sha256').update(x).digest('hex');
@@ -8,7 +10,7 @@ const h=(k,x)=>createHmac('sha256',k).update(x).digest();
 const esc=v=>encodeURIComponent(v).replace(/[!'()*]/g,c=>'%'+c.charCodeAt().toString(16).toUpperCase());
 const report=x=>console.log(JSON.stringify({...x,storageWrites:0,publicationAuthorized:false}));
 async function fetchSigned(method,uri,pairs=[]){
- if(!access||!secret||!(uri===base&&method==='GET'||uri===base+'/'+prefix+'READY.json'&&method==='HEAD'))throw Error('scope');
+ if(!access||!secret||!(uri===base&&method==='GET'||uri===root+'READY.json'&&method==='HEAD'||method==='GET'&&scope.has(uri)))throw Error('scope');
  const time=new Date().toISOString().replace(/[:-]|\.\d{3}/g,''),date=time.slice(0,8);
  const sig=date+'/us-east-1/s3/aws4_request',payload=sha('');
  const params=pairs.sort(([a],[b])=>a<b?-1:a>b?1:0).map(([key,v])=>esc(key)+'='+esc(v)).join('&');
@@ -31,6 +33,8 @@ try{
  else{
   const xml=await readBounded(r), n=Array.from(xml.matchAll(/<Contents>([\s\S]*?)<\/Contents>/g),x=>x[1]);
   if(n.length>1000||n.some(x=>!x.includes('<Key>'+prefix)))throw Error('prefix_check');
+  const binding=n.map(x=>x.match(/<Key>([^<]+)<\/Key>/)?.[1]).find(x=>x&&/\/generations\/gen_\d{13}_china44705142814\/binding[.]json$/.test(x));
+  if(binding)scope.add('/avtocena-staging-8120751/'+binding);
   const time=n.map(x=>x.match(/<LastModified>([0-9T:.+Z-]+)<\/LastModified>/)?.[1]).filter(Boolean).sort();
   report({kind:'native_private_stage_list',http:r.status,objects:n.length,truncated:xml.includes('<IsTruncated>true</IsTruncated>'),earliest:time[0]??null,latest:time.at(-1)??null});
  }
@@ -39,3 +43,17 @@ try{
  const r=await fetchSigned('HEAD',base+'/'+prefix+'READY.json');const len=r.headers.get('content-length');
  report({kind:'native_private_stage_ready',http:r.status,bytes:r.status===200&&/^\d+$/.test(len??'')?Number(len):null});
 }catch{report({kind:'native_private_stage_ready',transportError:true});}
+
+try{
+ const file=[...scope][0];
+ if(!file)throw Error('binding_missing');
+ const b=await fetchSigned('GET',file),d=JSON.parse(await readBounded(b));
+ if(b.status!==200||d.version!==1||d.market!=='china'||!gen.test(d.generationId)||!hex.test(d.manifestSha256)||
+    !file.endsWith('/'+d.generationId+'/binding.json'))throw Error('binding_invalid');
+ const target=file.replace('binding.json','ready-'+d.manifestSha256+'.json');scope.add(target);
+ const i=await fetchSigned('GET',target),raw=await readBounded(i),m=JSON.parse(raw);
+ if(i.status!==200||sha(raw)!==d.manifestSha256||m.version!==1||m.market!=='china'||!m.preparedChina||m.generationId!==d.generationId||
+    !Number.isSafeInteger(m.admitted?.count)||m.admitted.count<1||m.admitted.count>290044)throw Error('manifest_shape');
+ report({kind:'private_stage_draft_size',candidateRows:m.admitted.count,manifestSha256:d.manifestSha256,
+  generationId:m.generationId,draftNotAReadinessProof:true});
+}catch{report({kind:'private_stage_draft_size',verified:false});}
