@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "operation": "europe_public_reverse_membership_get_only_v1",
+  "parent": "12c568007652a5c9e03bca318aef7feaead83c13",
+  "stageProofRun": 44765774453,
+  "generation": "gen_1794878284419_a611dfcf",
+  "readers": {
+    "native-catalog-projection-parts-22867.ts": "639467183320cee484129ae36253d48d7b29db862670e747564ac3ef5d380391",
+    "public-reverse-membership.mjs": "c7301ffe1545b73de608ea1b7ef383276fe04059c23266fee199df084b5171b4",
+    "signed-read-projection.mjs": "aeab94b160d52cc1ff31f7f54a21512d16989c49776122bf0afb789d388cf39a"
+  }
+}
