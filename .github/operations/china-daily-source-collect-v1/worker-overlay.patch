@@ -466,7 +466,7 @@ new file mode 100644
 index 00000000..1cdc7963
 --- /dev/null
 +++ b/scripts/catalog-china-daily-collect-core.mts
-@@ -0,0 +1,131 @@
+@@ -0,0 +1,134 @@
 +/** In-process source-only core. No executable entry, environment grant, global
 + * publish/legacy cursor fallback, or operator marker. Host must inject the
 + * independently authenticated producer scope. */
@@ -531,8 +531,11 @@ index 00000000..1cdc7963
 +  const [policy,state]=await Promise.all([policyKey,stateKey].map(key=>ports.storage.readJsonWithMeta(key,null)));
 +  if(policy.found!==false||state.found!==false)throw Error('china_daily_collect:shared_raw_registry_enabled');
 +  let newReplica:string|undefined,lister=0;
-+  const storage=new Proxy(ports.storage,{get(target,prop,receiver){
-+    const value=Reflect.get(target,prop,receiver);
++  const storage=new Proxy(Object.create(null) as Ports['storage'],{
++    set:()=>false,defineProperty:()=>false,deleteProperty:()=>false,
++    get(_shell,prop){
++    // A guard returns a new method; it cannot proxy a frozen own method directly.
++    const target=ports.storage,value=Reflect.get(target,prop,target);
 +    if(typeof value!=='function')return value;
 +    if(prop==='writeJson'||prop==='putBinary')return async(key:string,...args:unknown[])=>{
 +      if(!expectedPins.has(key)&&!journalKey(key)&&!archiveKey(key)&&(!newReplica||rawRoot(key)!==newReplica))
@@ -738,8 +741,8 @@ index 00000000..4510a54e
 +const need=(v:unknown,c:string)=>{if(!v)throw Error('china_daily_authority:'+c);};
 +const REPO='jeep-jim/AvtoCena',REPO_ID='1289722938';
 +export const CHINA_DAILY_SOURCE_WORKFLOW='.github/workflows/china-independent-daily-source-collect-v1.yml';
-+export const CHINA_DAILY_SOURCE_MARKER='.github/market-runs/china-independent-daily-source-collect-v3.sha256';
-+export const CHINA_DAILY_SOURCE_TITLE='Collect one independent China delta with guarded recovery without publication';
++export const CHINA_DAILY_SOURCE_MARKER='.github/market-runs/china-independent-daily-source-collect-v4.sha256';
++export const CHINA_DAILY_SOURCE_TITLE='Collect one independent China delta with frozen-port fix without publication';
 +const API='https://api.github.com/repos/'+REPO+'/actions/runs';
 +// Existing source collectors, not unrelated publication, UI or neighbor jobs.
 +const SOURCE_WORKFLOWS=new Set([CHINA_DAILY_SOURCE_WORKFLOW,'.github/workflows/collect-china-ordinary-20261119.yml',
