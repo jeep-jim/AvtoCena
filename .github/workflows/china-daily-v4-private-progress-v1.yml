@@ -1,13 +1,13 @@
-name: Read exact China V4 private progress without changes
+name: Read exact China V4 terminal metadata without changes
 on:
   push:
     branches: [main]
-    paths: [.github/market-runs/china-daily-v4-private-progress-v1.sha256]
+    paths: [.github/market-runs/china-daily-v4-terminal-progress-v1.sha256]
 permissions:
   contents: read
 jobs:
   read:
-    if: github.repository == 'jeep-jim/AvtoCena' && github.repository_id == '1289722938' && github.run_attempt == '1' && github.event.head_commit.message == 'Read exact China V4 private progress without changes'
+    if: github.repository == 'jeep-jim/AvtoCena' && github.repository_id == '1289722938' && github.run_attempt == '1' && github.event.head_commit.message == 'Read exact China V4 terminal metadata without changes'
     environment: regcloud-staging
     runs-on: ubuntu-latest
     timeout-minutes: 8
@@ -40,14 +40,14 @@ jobs:
           parent = subprocess.check_output(['git', 'rev-parse', 'HEAD^'], text=True).strip()
           assert event.get('before') == parent
           PY2
-          test "$(git rev-parse HEAD^^)" = 5c07494113eed2a440a31ba6d2681eb12dc1528d
+          test "$(git rev-parse HEAD^^)" = 05dfa7ebe93b15a39821657c456b96e5648b006d
           test "$(git show -s --format=%P HEAD^ | wc -w)" = 1
-          cmp -s <(git diff-tree --no-commit-id -r --name-status --no-renames -z HEAD^^ HEAD^) <(printf 'A\0%s\0A\0%s\0' .github/operations/china-daily-v4-private-progress-v1/progress.mts .github/workflows/china-daily-v4-private-progress-v1.yml)
+          cmp -s <(git diff-tree --no-commit-id -r --name-status --no-renames -z HEAD^^ HEAD^) <(printf 'M\0%s\0' .github/workflows/china-daily-v4-private-progress-v1.yml)
           test "$(git -C actor rev-parse HEAD)" = 22867cbcfaee27b2e8917b6bf880e44827f67b60
           pin=19dc161f4103ade8af4bee1a32475943cedfd4e3fd8033fce03c927e97bcb50a
           test "$(git show -s --format=%P HEAD | wc -w)" = 1
-          cmp -s <(git diff-tree --no-commit-id -r --name-status --no-renames -z HEAD^ HEAD) <(printf 'A\0%s\0' .github/market-runs/china-daily-v4-private-progress-v1.sha256)
-          cmp -s .github/market-runs/china-daily-v4-private-progress-v1.sha256 <(printf '%s\n' "$pin")
+          cmp -s <(git diff-tree --no-commit-id -r --name-status --no-renames -z HEAD^ HEAD) <(printf 'A\0%s\0' .github/market-runs/china-daily-v4-terminal-progress-v1.sha256)
+          cmp -s .github/market-runs/china-daily-v4-terminal-progress-v1.sha256 <(printf '%s\n' "$pin")
           printf '%s  %s\n' "$pin" .github/operations/china-daily-v4-private-progress-v1/progress.mts | sha256sum -c --status
           cp .github/operations/china-daily-v4-private-progress-v1/progress.mts actor/progress-entry.mts
           cd actor && npm ci --ignore-scripts --no-audit --no-fund
