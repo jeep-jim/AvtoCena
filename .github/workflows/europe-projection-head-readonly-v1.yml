@@ -1,0 +1,72 @@
+name: Diagnose one pinned Europe projection root by signed HEAD only
+'on':
+  push:
+    branches: [main]
+    paths: [.github/market-runs/europe-projection-head-readonly-v1.json]
+permissions:
+  contents: read
+concurrency:
+  group: europe-projection-head-readonly-v1
+  cancel-in-progress: false
+jobs:
+  diagnose:
+    if: >-
+      github.repository == 'jeep-jim/AvtoCena' &&
+      github.repository_id == '1289722938' &&
+      github.ref == 'refs/heads/main' &&
+      github.run_attempt == '1' &&
+      !github.event.deleted &&
+      github.event.head_commit.message == 'Diagnose exact Europe projection root headers read-only'
+    environment: regcloud-staging
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 2
+          persist-credentials: false
+      - name: Verify exact marker-only commit and unchanged pinned reader
+        env:
+          EVENT_BEFORE: ${{ github.event.before }}
+          EVENT_SHA: ${{ github.sha }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import hashlib,json,os,pathlib,re,subprocess
+          reader='scripts/europe-projection-head-readonly-v1.mjs'
+          workflow='.github/workflows/europe-projection-head-readonly-v1.yml'
+          marker='.github/market-runs/europe-projection-head-readonly-v1.json'
+          digest='16b84b8950934facaf1c1b15cff1e282fde6d8ce03b47ac9e09a29e9f0a53b85'
+          def git(*args): return subprocess.check_output(['git',*args])
+          def pairs(items):
+              obj={}
+              for key,value in items:
+                  assert key not in obj
+                  obj[key]=value
+              return obj
+          parent=os.environ['EVENT_BEFORE']; head=os.environ['EVENT_SHA']
+          assert re.fullmatch(r'[a-f0-9]{40}',parent) and re.fullmatch(r'[a-f0-9]{40}',head)
+          assert git('rev-parse','HEAD').decode().strip()==head
+          assert git('rev-list','--parents','-n','1','HEAD').decode().split()==[head,parent]
+          assert git('diff','--name-only',parent,head).decode().splitlines()==[marker]
+          for target in (reader,workflow):
+              assert git('show',parent+':'+target)==pathlib.Path(target).read_bytes()
+          assert hashlib.sha256(pathlib.Path(reader).read_bytes()).hexdigest()==digest
+          assert pathlib.Path(marker).stat().st_size<=8192
+          assert json.loads(pathlib.Path(marker).read_bytes(),object_pairs_hook=pairs)=={
+             'version':1,'operation':'europe_projection_head_only_v1','parent':parent,
+             'priorFailedProbe':44767307086,'generation':'gen_1794878284419_a611dfcf','readerSha256':digest
+          }
+          PY
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 24
+      - name: Three exact control GETs and one exact projection HEAD
+        env:
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          node scripts/europe-projection-head-readonly-v1.mjs
