@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "operation": "europe_exact_inline_membership_get_only_v1",
+  "parent": "a757a88d0e36c9e329a32098d24fadad40bf4719",
+  "headEvidenceRun": 44768118600,
+  "generation": "gen_1794878284419_a611dfcf",
+  "exactWireBytes": 96505936,
+  "readers": {
+    "inline-stream.mjs": "2432c1ea33454b8f0854a4bd5b6b5ef89f57b26f581603734270e72b7cede807",
+    "signed-inline-probe.mjs": "07cf6879ca88792e9b285bd9002ee48e4f87d05ec77153591a955245477332ba"
+  }
+}
