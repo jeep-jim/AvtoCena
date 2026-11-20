@@ -4,6 +4,7 @@ import crypto from "node:crypto";
 import {gzipSync} from "node:zlib";
 import {setImmediate as yieldToEventLoop} from "node:timers/promises";
 import {readCatalogProjectionParts, writeCatalogProjectionParts} from "./catalog-projection-parts";
+import {CHINA_BUCKET_GUARD_LIMIT,CHINA_PRIVATE_STAGE_PREFIX,chinaNonGrantingBucketPolicy,chinaOwnerOnlyAcl} from './catalog/china-private-stage-privacy';
 
 export const DEFAULT_MAX_RECORDS_PER_CHUNK = 500;
 const TRANSIENT_STATUS = new Set([408, 425, 429, 500, 502, 503, 504]);
@@ -301,10 +302,54 @@ export class ObjectJsonStorage implements JsonStorage {
   async deleteJson(relativePath: string) { await this.request("DELETE", relativePath); }
   async putBinary(relativePath: string, data: Buffer, contentType: string, condition?: JsonWriteCondition) { const headers: Record<string,string> = { "content-type": contentType }; if (condition?.ifMatch) headers["if-match"] = condition.ifMatch; if (condition?.ifNoneMatch) headers["if-none-match"] = condition.ifNoneMatch; const res = await this.request("PUT", relativePath, data, headers); if (res.status === 409 || res.status === 412) throw new StorageConflictError(); if (!res.ok) throw new Error(`object_storage_binary_write_${res.status}`); return { objectKey: normalizeStorageKey(relativePath), mimeType: contentType, size: data.length, checksum: sha256(data) }; }
   async getBinary(relativePath: string) { const res = await this.request("GET", relativePath); if (!res.ok) throw new Error(`object_storage_binary_read_${res.status}`); const data = objectStorageResponseBody(res); return { data, mimeType: res.headers.get("content-type") || undefined, size: data.length, checksum: sha256(data) }; }
+  private requireChinaPrivateStageScope(relativePath?:string){
+    const cfg=objectConfig();
+    if(cfg.endpoint!=='https://s3.regru.cloud'||(relativePath!==undefined&&
+       (!relativePath.startsWith(CHINA_PRIVATE_STAGE_PREFIX)||relativePath!==normalizeStorageKey(relativePath)||
+        !relativePath.slice(CHINA_PRIVATE_STAGE_PREFIX.length).split('/').every(segment=>/^[a-zA-Z0-9_.-]+$/.test(segment)&&segment!=='.'&&segment!=='..'))))
+      throw Error('china_private_stage_privacy:scope');
+    return cfg;
+  }
+  /** Signed, bounded read-only privacy probe for the authorized stage bucket. */
+  async readChinaPrivateStageBucketPrivacy(){
+    const cfg=this.requireChinaPrivateStageScope();
+    const request=async(kind:'acl'|'policy')=>{
+      const query=canonicalQuery({[kind]:''}),url=new URL(`${cfg.endpoint}/${cfg.bucket}`);
+      url.search=query;
+      try{return await this.signedRequest('GET',url,undefined,{},query,CHINA_BUCKET_GUARD_LIMIT);}
+      catch(error){
+        const detail=error instanceof Error?error.message:'';
+        const status=detail.match(/^object_storage_GET_(\d{3}):/)?.[1];
+        throw Error('china_private_stage_privacy:bucket_'+kind+'_unverified'+(status?':'+status:''));
+      }
+    };
+    const acl=await request('acl');
+    if(acl.status!==200)throw Error('china_private_stage_privacy:bucket_acl_unverified:'+acl.status);
+    const owner=chinaOwnerOnlyAcl(objectStorageResponseText(acl));
+    const policy=await request('policy');
+    return {owner,policySha256:chinaNonGrantingBucketPolicy(policy.status,objectStorageResponseText(policy))};
+  }
+  /** Verify the exact new or resumed object retained no grants except its expected owner. */
+  async assertChinaPrivateStageObjectOwner(relativePath:string,owner:string){
+    const cfg=this.requireChinaPrivateStageScope(relativePath);
+    const query=canonicalQuery({acl:''}),url=new URL(`${cfg.endpoint}/${cfg.bucket}/${encodeKey(this.key(relativePath))}`);
+    url.search=query;
+    let acl:Response;
+    try{acl=await this.signedRequest('GET',url,undefined,{},query,CHINA_BUCKET_GUARD_LIMIT);}
+    catch(error){
+      const detail=error instanceof Error?error.message:'';
+      const status=detail.match(/^object_storage_GET_(\d{3}):/)?.[1];
+      throw Error('china_private_stage_privacy:object_acl_unverified'+(status?':'+status:''));
+    }
+    if(acl.status!==200||chinaOwnerOnlyAcl(objectStorageResponseText(acl))!==owner)
+      throw Error('china_private_stage_privacy:object_owner_unverified');
+  }
   /** Exact create-only upload for private staging; fail closed on redirects. */
   async createPrivateStageObject(relativePath:string,data:Buffer){
+    this.requireChinaPrivateStageScope(relativePath);
     if(!data.length||data.length>4*1024*1024)throw Error('object_storage_stage_write_limit');
-    const res=await this.request('PUT',relativePath,data,{'content-type':'application/json','if-none-match':'*'},64*1024);
+    // Assert privacy on creation itself, not only after uploading licensed bytes.
+    const res=await this.request('PUT',relativePath,data,{'content-type':'application/json','if-none-match':'*','x-amz-acl':'private'},64*1024);
     if(res.status===409||res.status===412)throw new StorageConflictError();
     if(!res.ok)throw Error(`object_storage_binary_write_${res.status}`);
     return {size:data.length,checksum:sha256(data)};

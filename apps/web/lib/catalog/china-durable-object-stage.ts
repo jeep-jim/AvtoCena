@@ -4,9 +4,10 @@ import {assertStageChinaFiles,type StageChinaFiles} from './china-stage-runtime-
 import {openIndependentChinaStage,type IndependentMarketPaper} from './independent-market-activation-fixture';
 import {verifyIndependentChinaPreparedArtifacts} from './independent-china-prepared-fixture';
 
+import {CHINA_PRIVATE_STAGE_PREFIX as REMOTE_ROOT} from './china-private-stage-privacy';
+
 export const CHINA_REGCLOUD_STAGE_ORIGIN='https://s3.regru.cloud';
 const LOCAL_ROOT='catalog/market-activation-fixture-v1/china/';
-const REMOTE_ROOT='catalog/private-market-stage-v1/china/';
 const SHA=/^[a-f0-9]{64}$/,GEN=/^gen_\d{13}_[a-z0-9]{1,64}$/,RUN=/^[a-z0-9][a-z0-9-]{4,63}$/;
 const MAX_OBJECT=4*1024*1024,MAX_FILES=100_000,MAX_BYTES=96*1024**3;
 const json=(x:unknown)=>Buffer.from(JSON.stringify(x));
@@ -37,9 +38,10 @@ function artifactRelative(relative:string){
  * The deployed worker must provide its already-approved narrow authority
  * callback; this module never creates/changes a credential or permission. */
 export async function transferChinaPrivateStage({
- storage,files,permit,expectedPermitSha256,assertApprovedRunner,
+ storage,files,permit,expectedPermitSha256,expectedBucketPrivacy,assertApprovedRunner,
 }:{
  storage:ObjectJsonStorage;files:StageChinaFiles;permit:ChinaDurableStagePermit;expectedPermitSha256:string;
+ expectedBucketPrivacy?:Readonly<{owner:string;policySha256:string}>;
  assertApprovedRunner:(frozen:Readonly<ChinaDurableStagePermit>,sha256:string)=>Promise<void>;
 }){
  assertStageChinaFiles(files);
@@ -69,6 +71,14 @@ export async function transferChinaPrivateStage({
    return fail('storage_scope_or_expiry');
  };
  await auth();
+ const privacy=await storage.readChinaPrivateStageBucketPrivacy();
+ if(expectedBucketPrivacy&&(privacy.owner!==expectedBucketPrivacy.owner||
+    privacy.policySha256!==expectedBucketPrivacy.policySha256))return fail('bucket_privacy_changed_since_preflight');
+ const assertSamePrivacy=async()=>{
+  await auth();
+  const now=await storage.readChinaPrivateStageBucketPrivacy();
+  if(now.owner!==privacy.owner||now.policySha256!==privacy.policySha256)return fail('bucket_privacy_changed');
+ };
  const active=await openIndependentChinaStage(files).openChinaPrepared();
  const uploaded=new Set<string>();
  const running=createHash('sha256').update('china-regcloud-private-stage-ordered-objects-v1\n');
@@ -80,6 +90,7 @@ export async function transferChinaPrivateStage({
   try{await storage.createPrivateStageObject(key,body);}
   catch(error){if(!(error instanceof StorageConflictError))throw error;resumedObjects++;}
   await auth();
+  await storage.assertChinaPrivateStageObjectOwner(key,privacy.owner);
   const found=await storage.getBinaryBounded(key,body.length);
   if(found.checksum!==sha||!found.data.equals(body))return fail('immutable_conflict');
   return sha;
@@ -133,6 +144,7 @@ export async function transferChinaPrivateStage({
   publicationAuthorized:false,cursorAdvanceAuthorized:false};
  await active.assertCurrent();
  // Never published/current/control outside this private run. READY written last.
+ await assertSamePrivacy();
  const readySha256=await immutable('READY.json',json(result));
  return {ready:result,readySha256,resumedObjects};
 }

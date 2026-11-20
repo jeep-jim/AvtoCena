@@ -7,7 +7,7 @@ import {buildBudgetCountIndex,matchingBudgetIndex,type BudgetCountIndex} from '.
 import {applyActiveBusinessPriceBatch} from './live-business-pricing';
 import {budgetPricingFingerprint,calculationCacheVersion} from './shared-budget-prices';
 import {withCatalogFxBatch,type CatalogFxBatch} from './rates';
-import {fxTariffHorizon} from './fx-tariff-horizon';
+import {fxTariffHorizon,certifiedFxTariffHorizon} from './fx-tariff-horizon';
 import {projectionCanRenderCard,searchProjectionFromOffer,type CatalogManifest} from './storage';
 import {hasModificationSelection} from './modification-contract';
 import type {CatalogMarket,CatalogSearchParams,VehicleOffer} from './types';
@@ -27,10 +27,10 @@ type Binding={
  sourceInputSha256:string;sourceIdsSha256:string;calculationVersion:string;pricingFingerprint:string;fxReceiptSha256:string;
  pricingAsOf:string;policyDay:string;rows:number;freshSourceValidUntil?:number;
 };
-export type PreparedPriceCardDescriptor=Binding & {bytes:number;contentSha256:string;projectionSha256:string;tariffValidUntil:number};
+export type PreparedPriceCardDescriptor=Binding & {bytes:number;contentSha256:string;projectionSha256:string;tariffValidUntil:number;legalValidUntil?:number};
 type Ledger=Record<string,unknown> & {breakdown:Array<{id:string;amountRub:number}>;customs:{status:string;utilizationPowerKw?:number}};
 type Detail={id:string;totalRub:number;calculationStatus:VehicleOffer['calculationStatus'];ledger:Ledger};
-type Block={binding:Binding;tariffValidUntil:number;projectionSha256:string;index:BudgetCountIndex;details:Detail[]};
+type Block={binding:Binding;tariffValidUntil:number;legalValidUntil?:number;projectionSha256:string;index:BudgetCountIndex;details:Detail[]};
 const ledgerKeys=[
  'breakdown','paymentPlan','marketConfig','configVersion','effectiveFrom','currencyRate','eurRate','sourcePriceRub',
  'customs','customsInput','customsValue','customsCompleteness','priceIncludesAllCustoms','priceIncludesUtilizationFee',
@@ -87,12 +87,15 @@ export async function preparePriceCardBlock({manifest,market,sourceChunk,part,of
   // Do not carry replay inputs in the readback index: it is a result only.
   index.rows=index.rows.map(row=>row.slice(0,7) as typeof row);
   const tariffValidUntil=Math.min(freshSourceValidUntil??Infinity,...prepared.map(row=>fxTariffHorizon(row,asOf)));
+  const legal=freshSourceValidUntil===undefined?null:prepared.map(row=>certifiedFxTariffHorizon(row,asOf));
+  const legalValidUntil=legal?.every(v=>v!==null)?Math.min(...legal as number[]):undefined;
+  const legalProof=legalValidUntil===undefined?{}:{legalValidUntil};
   if(Date.now()>=tariffValidUntil||binding.freshSourceValidUntil===undefined&&policyDay(Date.now())!==binding.policyDay)return fail('tariff_or_inventory_horizon');
   if(await budgetPricingFingerprint(market)!==pricingFingerprint||calculationCacheVersion()!==calculationVersion)return fail('price_context');
   const projectionBytes=jsonBytes(projection), projectionSha256=hashBytes(projectionBytes);
-  const bytes=jsonBytes({binding,tariffValidUntil,projectionSha256,index,details});
+  const bytes=jsonBytes({binding,tariffValidUntil,...legalProof,projectionSha256,index,details});
   if(bytes.length>MAX_BYTES||projectionBytes.length>MAX_BYTES)return fail('artifact_size');
-  const descriptor:PreparedPriceCardDescriptor={...binding,bytes:bytes.length,contentSha256:hashBytes(bytes),projectionSha256,tariffValidUntil};
+  const descriptor:PreparedPriceCardDescriptor={...binding,bytes:bytes.length,contentSha256:hashBytes(bytes),projectionSha256,tariffValidUntil,...legalProof};
   verifyPriceCardBlock(bytes,descriptor);
   return {bytes,descriptor,path:preparedPriceCardBlockPath(descriptor),projection,projectionSha256};
  });
@@ -146,16 +149,17 @@ function assertLedger(detail:Detail,binding:Binding){
 /** Authenticate exact immutable bytes against an independently allowed descriptor. */
 export function verifyPriceCardBlock(bytes:Buffer,ref:PreparedPriceCardDescriptor):Block {
  preparedPriceCardBlockPath(ref);
- const {contentSha256,projectionSha256,bytes:expectedBytes,tariffValidUntil,...binding}=ref;
+ const {contentSha256,projectionSha256,bytes:expectedBytes,tariffValidUntil,legalValidUntil,...binding}=ref;
  if(!Buffer.isBuffer(bytes)||bytes.length!==expectedBytes||bytes.length>MAX_BYTES||hashBytes(bytes)!==contentSha256||
     ref.version!==1||!Number.isSafeInteger(ref.rows)||ref.rows<1||ref.rows>MAX_ROWS||
     !Number.isFinite(Date.parse(ref.pricingAsOf))||ref.policyDay!==policyDay(Date.parse(ref.pricingAsOf))||
     (ref.freshSourceValidUntil!==undefined&&(ref.market!=='china'||!Number.isSafeInteger(ref.freshSourceValidUntil)||ref.freshSourceValidUntil> Date.parse(ref.pricingAsOf)+48*3600000||tariffValidUntil>ref.freshSourceValidUntil))||
+    legalValidUntil!==undefined&&(ref.freshSourceValidUntil===undefined||!Number.isSafeInteger(legalValidUntil)||legalValidUntil<tariffValidUntil)||
     !Number.isSafeInteger(tariffValidUntil)||tariffValidUntil<=Date.parse(ref.pricingAsOf)||
     ![ref.sourceInputSha256,ref.sourceIdsSha256,ref.marketInventoryDigest,ref.calculationVersion,
       ref.pricingFingerprint,ref.fxReceiptSha256,projectionSha256].every(value=>sha.test(value)))return fail('artifact_identity');
  const block=JSON.parse(bytes.toString('utf8')) as Block;
- if(preparedPriceCardDigest(block.binding)!==preparedPriceCardDigest(binding)||block.tariffValidUntil!==tariffValidUntil||block.projectionSha256!==projectionSha256||
+ if(preparedPriceCardDigest(block.binding)!==preparedPriceCardDigest(binding)||block.tariffValidUntil!==tariffValidUntil||block.legalValidUntil!==legalValidUntil||block.projectionSha256!==projectionSha256||
     !Array.isArray(block.details)||block.details.length!==ref.rows||block.index.version!==3||block.index.otherRows?.length||
     block.index.generationId!==ref.generationId||block.index.sourceRows!==ref.rows||block.index.rows.length!==ref.rows)return fail('scope_coverage');
  const ids=block.details.map(row=>row.id);

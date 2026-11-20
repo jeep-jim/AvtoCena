@@ -116,7 +116,8 @@ export async function finalizeChinaShadowStage({disk,storage,publication,lease,s
     return fail('runtime_binding');
   const runtime={version:1,kind:'china-isolated-runtime-ready',archiveSha256,generationId:activated.generationId,
    manifestSha256:activated.manifestSha256,activeControlSha256:digest(control.data),pricingReceiptSha256:fxReceiptSha256,
-   admittedRows:count,validUntil:Math.min(active.cut.source.validUntil,active.cut.pricing.validUntil)};
+   admittedRows:count,validUntil:Math.min(active.cut.source.validUntil,active.cut.pricing.validUntil),
+   ...(active.cut.pricing.legalValidUntil===undefined?{}:{legalValidUntil:active.cut.pricing.legalValidUntil})};
   const seal=Buffer.from(JSON.stringify(runtime));
   await active.assertCurrent();assertPrivate();
   await fs.writeFile(path.join(disk.root,'runtime-ready.json'),seal,{mode:0o600,flag:'wx'});

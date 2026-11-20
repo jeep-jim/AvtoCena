@@ -725,21 +725,35 @@ test('real writer pre-immutable coverage, private seal and mock CAS retain exact
    const ready=await openStageChinaFiles({allowedParent:directory,root:shadow,readySha256:stagedDisk.runtimeReadySha256,
     archiveSha256:manifest.sha256,expectedGenerationId:ig,expectedFxSha256:fx.receiptSha256,expectedAdmittedRows:9,sourceValidUntil:capture.validUntil});
    const stageEnv=Object.fromEntries(s3Keys.map(name=>[name,process.env[name]]));
-   const localFetch=globalThis.fetch;const remote=new Map<string,Buffer>(),requestsDurable:{key:string;method:string}[]=[];
+   const localFetch=globalThis.fetch;const remote=new Map<string,Buffer>(),requestsDurable:{key:string;method:string;query:string}[]=[];
    const rootRemote='catalog/private-market-stage-v1/china/';
    let baselineRef:ChinaPublicRef|undefined;
    try{
     Object.assign(process.env,{YC_OBJECT_STORAGE_ENDPOINT:CHINA_REGCLOUD_STAGE_ORIGIN,YC_OBJECT_STORAGE_BUCKET:'fixture-owned-stage',
      YC_OBJECT_STORAGE_PREFIX:'fixture/active',YC_OBJECT_STORAGE_REGION:'ru-central1',
      YC_OBJECT_STORAGE_ACCESS_KEY_ID:'fixture-stage',YC_OBJECT_STORAGE_SECRET_ACCESS_KEY:'fixture-stage-secret'});
-    let overflowKey='';
+    let overflowKey='',wrongOwnerKey='',bucketPolicyStatus=404,bucketAclStatus=200,policyDrift=false,policyReads=0;
+    const absentPolicy='<Error><Code>NoSuchBucketPolicy</Code><Message>No such policy</Message></Error>';
+    const acl=(owner:string)=>`<?xml version="1.0" encoding="UTF-8"?><AccessControlPolicy xmlns="http://s3.amazonaws.com/doc/2006-03-01/"><Owner><ID>${owner}</ID></Owner><AccessControlList><Grant><Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CanonicalUser"><ID>${owner}</ID></Grantee><Permission>FULL_CONTROL</Permission></Grant></AccessControlList></AccessControlPolicy>`;
     globalThis.fetch=async(u,init)=>{
      const target=new URL(String(u)),headers=new Headers(init?.headers),method=init?.method??'GET';
-     assert.equal(target.origin,CHINA_REGCLOUD_STAGE_ORIGIN);assert.equal(target.search,'');assert.equal(init?.redirect,'error');
+     assert.equal(target.origin,CHINA_REGCLOUD_STAGE_ORIGIN);assert.equal(init?.redirect,'error');
      assert.match(headers.get('authorization')||'',/^AWS4-HMAC-SHA256 Credential=fixture-stage\//);
+     if(target.pathname==='/fixture-owned-stage'){
+      assert.equal(method,'GET');assert.match(target.search,/^\?(acl|policy)=$/);
+      requestsDurable.push({key:'',method,query:target.search});
+      if(target.search==='?acl=')return new Response(acl('fixture-owner'),{status:bucketAclStatus});
+      policyReads++;
+      return bucketPolicyStatus===200?new Response(JSON.stringify({Version:'2012-10-17',Statement:{Effect:'Allow',Principal:'*',Action:'s3:GetObject',Resource:'*'}})):
+       policyDrift&&policyReads>1?new Response(JSON.stringify({Version:'2012-10-17',Statement:{Effect:'Deny',Principal:'*',Action:'s3:GetObject',Resource:'*'}})):
+       new Response(absentPolicy,{status:bucketPolicyStatus});
+     }
      const key=decodeURIComponent(target.pathname.split('/fixture-owned-stage/fixture/active/')[1]??'');
-     assert.ok(key.startsWith(rootRemote),key);requestsDurable.push({key,method});
+     assert.ok(key.startsWith(rootRemote),key);requestsDurable.push({key,method,query:target.search});
      if(method==='PUT'){
+      assert.equal(target.search,'');
+      assert.equal(headers.get('x-amz-acl'),'private');
+      assert.match(headers.get('authorization')||'',/SignedHeaders=[^,]+x-amz-acl/);
       assert.equal(headers.get('if-none-match'),'*');
       assert.match(headers.get('authorization')||'',/SignedHeaders=[^,]+if-none-match/);
       assert.equal(headers.has('if-match'),false);
@@ -749,6 +763,8 @@ test('real writer pre-immutable coverage, private seal and mock CAS retain exact
      assert.equal(method,'GET');
      const body=remote.get(key);
      if(!body)return new Response(null,{status:404});
+     if(target.search==='?acl=')return new Response(acl(wrongOwnerKey===key?'fixture-other-owner':'fixture-owner'));
+     assert.equal(target.search,'');
      return new Response(new Uint8Array(overflowKey===key?Buffer.concat([body,Buffer.from('x')]):body));
     };
     const permit:ChinaDurableStagePermit={version:1,kind:'china-own-regcloud-private-stage-v1',market:'china',runId:'qualifier-one',
@@ -765,7 +781,18 @@ test('real writer pre-immutable coverage, private seal and mock CAS retain exact
     grant=false;await assert.rejects(upload(),/fixture_no_durable_grant/);assert.equal(requestsDurable.length,0);grant=true;
     await assert.rejects(upload({...permit,storage:{...permit.storage,bucket:'wrong-bucket'}}),/storage_scope/);
     assert.equal(requestsDurable.length,0);
+    bucketAclStatus=403;await assert.rejects(upload(),/bucket_acl_unverified:403/);bucketAclStatus=200;
+    bucketPolicyStatus=403;await assert.rejects(upload(),/bucket_policy_unverified:403/);
+    bucketPolicyStatus=200;await assert.rejects(upload(),/bucket_policy_grant_not_supported/);bucketPolicyStatus=404;
+    assert.equal(requestsDurable.filter(x=>x.method==='PUT').length,0);
+    policyDrift=true;policyReads=0;
+    await assert.rejects(upload({...permit,runId:'qualifier-drift'}),/bucket_privacy_changed/);
+    assert.equal(remote.has(rootRemote+'qualifier-drift/READY.json'),false);policyDrift=false;
+    const beginProof=requestsDurable.length;
     const uploaded=await upload(),run=uploaded.ready.stageRoot;
+    const proofTranscript=requestsDurable.slice(beginProof);
+    assert.deepEqual(proofTranscript.slice(0,2).map(x=>[x.method,x.query]),[['GET','?acl='],['GET','?policy=']]);
+    assert.equal(proofTranscript.filter(x=>x.method==='PUT').length,proofTranscript.filter(x=>x.key&&x.query==='?acl=').length);
     baselineRef={runId:uploaded.ready.runId,generationId:uploaded.ready.generationId,readySha256:uploaded.readySha256};
     assert.equal(uploaded.ready.publicationAuthorized,false);assert.equal(uploaded.ready.cursorAdvanceAuthorized,false);
     assert.deepEqual([uploaded.ready.artifacts.nativeParts,uploaded.ready.artifacts.projectionParts,uploaded.ready.artifacts.priceBlocks],[3,3,3]);
@@ -774,6 +801,9 @@ test('real writer pre-immutable coverage, private seal and mock CAS retain exact
     const size=remote.size,resumed=await upload();assert.equal(remote.size,size);assert.equal(resumed.readySha256,uploaded.readySha256);
     assert.equal(resumed.resumedObjects,uploaded.ready.artifacts.count+1);
     const key=run+'objects/catalog/market-activation-fixture-v1/china/generations/'+ig+'/binding.json';
+    wrongOwnerKey=key;
+    await assert.rejects(upload(),/object_owner_unverified/);
+    wrongOwnerKey='';
     const corrupted=remote.get(key)!;remote.set(key,Buffer.alloc(corrupted.length,0x72));
     const brokenRun={...permit,runId:'qualifier-two'};
     const brokenKey=key.replace('qualifier-one','qualifier-two');
@@ -783,9 +813,9 @@ test('real writer pre-immutable coverage, private seal and mock CAS retain exact
     remote.set(key,corrupted);overflowKey=key;
     const start=requestsDurable.length;
     await assert.rejects(upload(),/object_storage_response_limit/);
-    assert.equal(requestsDurable.slice(start).filter(x=>x.method==='GET'&&x.key===key).length,1);
+    assert.equal(requestsDurable.slice(start).filter(x=>x.method==='GET'&&x.key===key&&x.query==='').length,1);
     overflowKey='';
-    assert.ok(requestsDurable.every(x=>['GET','PUT'].includes(x.method)&&x.key.startsWith(rootRemote)));
+    assert.ok(requestsDurable.every(x=>['GET','PUT'].includes(x.method)&&(x.key.startsWith(rootRemote)||(!x.key&&x.method==='GET'))));
    }finally{
     globalThis.fetch=localFetch;
     for(const [key,value]of Object.entries(stageEnv))if(value===undefined)delete process.env[key];else process.env[key]=value;
@@ -824,7 +854,8 @@ test('real writer pre-immutable coverage, private seal and mock CAS retain exact
    const bigSpec=await putArchive('shadow-package.json',{
     version:1,market:'china',stage:'canonical-admitted-v1',generationId:'gen_'+(asOf+700)+'_nativefilesystem',count:bigRows.length,
     chunks:bigChunks,plan:bigPlan,runtimeFiles:[bigRuntime],evidence:{archive:bigEvidence,oracle:bigOracle},
-    archiveReceiptSha256:bigEvidence.sha256,legacyOracleSha256:bigOracle.sha256,withdrawn:[withdrawn],
+    archiveReceiptSha256:bigEvidence.sha256,legacyOracleSha256:bigOracle.sha256,withdrawn:[],
+    conversion:{mode:'complete-fresh-replacement',replacementProofSha256:'c'.repeat(64),previousServingGeneration:'rollback-only'},
     modelScope:{make:'Mercedes-Benz',model:'C-Class'},withStreamingSearch:true,
     source:{observedAt:capture.observedAt,validUntil:capture.validUntil,cursor:capture.cursor,receiptSha256:input.capture.expectedReceiptSha256},
     fx,pricingFingerprint,calculationVersion:'a'.repeat(64),expectedAdmittedIdsSha256:preparedCoverageIdsDigest(bigRows.map(row=>row.id)),blockRows:50,
@@ -844,8 +875,7 @@ test('real writer pre-immutable coverage, private seal and mock CAS retain exact
    assert.equal(filesystem.caseResults.card.rub,filesystem.caseResults.items[0].rub);
    assert.equal(filesystem.io.nativeParts,1);assert.equal(filesystem.io.priceBlocks,1);
    assert.ok(filesystem.io.projections<60&&filesystem.io.projections>2);
-   const removedNative=await probeFiles('--id',withdrawn.id);
-   assert.deepEqual(removedNative.caseResults.card,{id:withdrawn.id,state:'removed'});
+   // The unmodified small legacy fixture above still tests explicit withdrawals.
    await assert.rejects(bigCommand('probe-fs','--allowed-stage-parent',bigArchive,'--expect-ready',bigPrepare.runtimeReadySha256),
     (error:any)=>error.stderr.includes('allowlist'));
    await assert.rejects(bigCommand('probe-fs','--allowed-stage-parent',directory,'--expect-ready','0'.repeat(64)),
@@ -1046,9 +1076,17 @@ test('real writer pre-immutable coverage, private seal and mock CAS retain exact
       assert.equal(url.origin,CHINA_REGCLOUD_STAGE_ORIGIN);
       assert.equal(init?.redirect,'error');
       assert.match(h.get('authorization')||'',/^AWS4-HMAC-SHA256 Credential=fixture-stage\//);
+      const acl='<AccessControlPolicy xmlns="http://s3.amazonaws.com/doc/2006-03-01/"><Owner><ID>fixture-owner</ID></Owner><AccessControlList><Grant><Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CanonicalUser"><ID>fixture-owner</ID></Grantee><Permission>FULL_CONTROL</Permission></Grant></AccessControlList></AccessControlPolicy>';
+      if(url.pathname==='/fixture-owned-stage'){
+       assert.equal(method,'GET');
+       if(url.search==='?acl=')return new Response(acl);
+       assert.equal(url.search,'?policy=');
+       return new Response('<Error><Code>NoSuchBucketPolicy</Code></Error>',{status:404});
+      }
       const key=decodeURIComponent(url.pathname.split('/fixture-owned-stage/fixture/active/')[1]??'');
       assert.ok(key===CHINA_PUBLIC_CONTROL||key==='catalog/manifest.json'||key.startsWith(rootRemote),key);calls.push({key,method});
       const data=remote.get(key),etag=data?createHash('sha256').update(data).digest('hex'):null;
+      if(method==='GET'&&url.search==='?acl=')return data?new Response(acl):new Response(null,{status:404});
       if(method==='GET')return data?new Response(new Uint8Array(data),{headers:{etag:'"'+etag+'"'}}):new Response(null,{status:404});
       assert.equal(method,'PUT');assert.ok(allowWrites);
       if(key===CHINA_PUBLIC_CONTROL){
@@ -1057,6 +1095,7 @@ test('real writer pre-immutable coverage, private seal and mock CAS retain exact
        else assert.equal(h.get('if-none-match'),'*');
       }else{
        assert.equal(h.get('if-none-match'),'*');
+       assert.equal(h.get('x-amz-acl'),'private');
        if(data)return new Response(null,{status:412});
       }
       remote.set(key,Buffer.from(init!.body as Buffer));return new Response(null,{status:200});
@@ -1118,6 +1157,23 @@ test('real writer pre-immutable coverage, private seal and mock CAS retain exact
      const actual=await readOfferDetailForPage(body.items[0].id,true,{market:'china',city:'Омск',preparedCut:nextRef.generationId});
      assert.equal(actual.offer?.totalRub,body.items[0].totalRub);
      assert.equal((await request(query+'&preparedCut='+knownBase.generationId)).status,409);
+     const originalTime=Date.now(),legalUntil=phase.ready.legalValidUntil!;
+     assert.ok(legalUntil>phase.ready.validUntil,'fresh fixture has independently derived legal horizon');
+     try{
+      t.mock.timers.setTime(phase.ready.validUntil+1);
+      await assert.rejects(openChinaStageObjectFiles(liveStorage,nextRef,async()=>{}),/ready_scope|stage_authority/);
+      const stillActive=await request(query);
+      assert.equal(stillActive.status,200);
+      const afterIngestExpiry=await stillActive.json();
+      assert.equal(afterIngestExpiry.generationId,nextRef.generationId);
+      assert.deepEqual(afterIngestExpiry.items.map((x:any)=>[x.id,x.totalRub]),body.items.map((x:any)=>[x.id,x.totalRub]));
+      const expiredIngestDetail=await readOfferDetailForPage(body.items[0].id,true,{market:'china',city:'Омск',preparedCut:nextRef.generationId});
+      assert.equal(expiredIngestDetail.offer?.totalRub,body.items[0].totalRub);
+
+      t.mock.timers.setTime(legalUntil);
+      assert.equal((await request(query)).status,503,'expires at actual certified tariff event');
+     }finally{t.mock.timers.setTime(originalTime);}
+
      allowWrites=true;
      const restored=await commit(permitFor('rollback',changed.state,knownBase,priorProbe),priorProbe);
      assert.deepEqual(restored.state.active,knownBase);assert.deepEqual(restored.state.previous,nextRef);

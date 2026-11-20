@@ -13,7 +13,7 @@ const parse=<T>(body:Buffer)=>JSON.parse(new TextDecoder('utf-8',{fatal:true}).d
 const minted=new WeakSet<StageChinaFiles>();
 export type ChinaRuntimeReady={
  version:1;kind:'china-isolated-runtime-ready';archiveSha256:string;generationId:string;
- manifestSha256:string;activeControlSha256:string;pricingReceiptSha256:string;admittedRows:number;validUntil:number;
+ manifestSha256:string;activeControlSha256:string;pricingReceiptSha256:string;admittedRows:number;validUntil:number;legalValidUntil?:number;
 };
 type Metrics={reads:number;bytes:number;maxBytes:number;controls:number;projections:number;nativeParts:number;priceBlocks:number};
 export type StageChinaFiles=Readonly<{
@@ -64,7 +64,8 @@ export async function openStageChinaFiles(input:{
     !GEN.test(ready.generationId)||ready.generationId!==input.expectedGenerationId||ready.pricingReceiptSha256!==input.expectedFxSha256||
     !SHA.test(ready.manifestSha256)||!SHA.test(ready.activeControlSha256)||!SHA.test(ready.pricingReceiptSha256)||
     !Number.isSafeInteger(ready.admittedRows)||ready.admittedRows<1||ready.admittedRows!==input.expectedAdmittedRows||
-    !Number.isSafeInteger(ready.validUntil)||ready.validUntil>input.sourceValidUntil||Date.now()>=ready.validUntil)return fail('readiness_scope');
+    !Number.isSafeInteger(ready.validUntil)||ready.validUntil>input.sourceValidUntil||Date.now()>=ready.validUntil||
+    (ready.legalValidUntil!==undefined&&(!Number.isSafeInteger(ready.legalValidUntil)||ready.legalValidUntil<ready.validUntil)))return fail('readiness_scope');
  const data=async(key:string)=>{
   assertStageChinaFiles(handle);
   // No relative caller-controlled filename, foreign market or shared alias.

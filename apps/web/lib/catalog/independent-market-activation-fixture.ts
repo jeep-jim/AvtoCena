@@ -25,7 +25,7 @@ type State={version:1;market:IndependentMarket;revision:number;active:Ref|null;p
 export type IndependentCut={
  version:1;market:IndependentMarket;generationId:string;expectedBaseSha256:string;previousCursorSha256:string;
  source:{complete:true;receiptSha256:string;observedAt:number;validUntil:number;cursor:Cursor};
- pricing:{receiptSha256:string;inputFingerprint:string;calculationVersion:string;pricedAt:number;validUntil:number};
+ pricing:{receiptSha256:string;inputFingerprint:string;calculationVersion:string;pricedAt:number;validUntil:number;legalValidUntil?:number};
  admitted:{count:number;orderedIdsSha256:string};
  papers:Record<Role,string>;
  preparedChina?:true;
@@ -43,13 +43,15 @@ const validRef=(v:Ref)=>!!v&&GEN.test(v.generationId)&&validSha(v.manifestSha256
 const base=(ref:Ref|null)=>fingerprint(ref);
 const same=(a:unknown,b:unknown)=>fingerprint(a)===fingerprint(b);
 
-function assertCut(cut:IndependentCut,market:IndependentMarket,g:string,now:number){
+function assertCut(cut:IndependentCut,market:IndependentMarket,g:string,now:number,acceptedLegalUntil?:number){
  const {source,pricing,admitted,papers}=cut||{};
  if(cut?.version!==1||cut.market!==market||(cut.preparedChina!==undefined&&(market!=='china'||cut.preparedChina!==true))||!GEN.test(g)||cut.generationId!==g||!validSha(cut.expectedBaseSha256)||
     !validSha(cut.previousCursorSha256)||source?.complete!==true||!validSha(source.receiptSha256)||
-    !clockInt(source.observedAt)||!clockInt(source.validUntil)||source.observedAt>now||source.validUntil<=now||!validCursor(source.cursor)||
+    !clockInt(source.observedAt)||!clockInt(source.validUntil)||source.observedAt>now||(acceptedLegalUntil===undefined&&source.validUntil<=now)||!validCursor(source.cursor)||
     !pricing||!validSha(pricing.receiptSha256)||!validSha(pricing.inputFingerprint)||!validSha(pricing.calculationVersion)||
-    !clockInt(pricing.pricedAt)||!clockInt(pricing.validUntil)||pricing.pricedAt>now||pricing.validUntil<=now||
+    !clockInt(pricing.pricedAt)||!clockInt(pricing.validUntil)||pricing.pricedAt>now||(acceptedLegalUntil===undefined&&pricing.validUntil<=now)||
+    (pricing.legalValidUntil!==undefined&&(market!=='china'||cut.preparedChina!==true||!clockInt(pricing.legalValidUntil)||pricing.legalValidUntil<pricing.validUntil))||
+    (acceptedLegalUntil!==undefined&&(pricing.legalValidUntil!==acceptedLegalUntil||acceptedLegalUntil<=now))||
     !admitted||!clockInt(admitted.count)||!validSha(admitted.orderedIdsSha256)||!papers||
     Object.keys(papers).length!==ROLES.length||ROLES.some(role=>!validSha(papers[role])))return fail('cut_not_ready');
 }
@@ -80,7 +82,7 @@ export function openIndependentMarketFixture(storage:ObjectJsonStorage,market:In
 /** Writer authority remains mock-only; the native stage adapter only receives
  * the read side of the same decoder and fences. */
 function openIndependentMarketBackend<T extends ObjectJsonStorage|StageChinaFiles|ChinaStageObjectFiles>(storage:T,market:IndependentMarket,
- assertBackend:()=>void,authorizePhase:(phase:Phase)=>Promise<void>){
+ assertBackend:()=>void,authorizePhase:(phase:Phase)=>Promise<void>,acceptedLegalUntil?:number){
  const authorize=async(phase:Phase)=>{assertBackend();await authorizePhase(phase);assertBackend();};
  const writable=()=>{if(!(storage instanceof ObjectJsonStorage))return fail('readonly_backend');return storage;};
  const root=`catalog/market-activation-fixture-v1/${market}/`,controlKey=root+'control.json';
@@ -139,12 +141,12 @@ function openIndependentMarketBackend<T extends ObjectJsonStorage|StageChinaFile
  };
  const generationBinding=(ref:{generationId:string;manifestSha256:string})=>
   bytes({version:1,market,generationId:ref.generationId,manifestSha256:ref.manifestSha256});
- const readCut=async(ref:{generationId:string;manifestSha256:string})=>{
+ const readCut=async(ref:{generationId:string;manifestSha256:string},activeRead=false)=>{
   if(!GEN.test(ref.generationId)||!validSha(ref.manifestSha256))return fail('cut_reference');
   await get(path(ref.generationId,'binding.json'),hash(generationBinding(ref)),MAX_ROOT);
   const body=await get(path(ref.generationId,`ready-${ref.manifestSha256}.json`),ref.manifestSha256,MAX_ROOT);
   const cut=JSON.parse(body.toString('utf8')) as IndependentCut;
-  assertCut(cut,market,ref.generationId,Date.now());
+  assertCut(cut,market,ref.generationId,Date.now(),activeRead?acceptedLegalUntil:undefined);
   return cut;
  };
  const readPaper=async(cut:IndependentCut,role:Role)=>{
@@ -272,27 +274,27 @@ function openIndependentMarketBackend<T extends ObjectJsonStorage|StageChinaFile
   const {value:{active}}=await readState();
   if(!active)return {status:'unpublished' as const,market};
   // No writer lease checks. Read the selected market's active immutable paper.
-  const cut=await readCut(active);
+  const cut=await readCut(active,true);
   if(!same(cut.source.cursor,active.cursor))return fail('active_cursor');
   const paper=await readPaper(cut,role);
   const {value:v}=await readState();
-  if(base(v.active)!==base(active)||Date.now()>=Math.min(cut.source.validUntil,cut.pricing.validUntil))return fail('read_changed');
+  if(base(v.active)!==base(active)||Date.now()>=(acceptedLegalUntil??Math.min(cut.source.validUntil,cut.pricing.validUntil)))return fail('read_changed');
   return {status:'ready' as const,market,generationId:active.generationId,manifestSha256:active.manifestSha256,role,payload:paper.payload};
  };
  const openChinaPrepared=async()=>{
   if(market!=='china')return fail('china_scope');
   const {value:{active}}=await readState();
   if(!active)return null;
-  const cut=await readCut(active);
+  const cut=await readCut(active,true);
   if(!cut.preparedChina)return null;
   if(!same(cut.source.cursor,active.cursor))return fail('active_cursor');
   const inventory=await readPaper(cut,'inventory'),prices=await readPaper(cut,'prices');
   const assertCurrent=async():Promise<void>=>{
    const {value:v}=await readState();
-   if(base(v.active)!==base(active)||Date.now()>=Math.min(cut.source.validUntil,cut.pricing.validUntil))return fail('read_changed');
+   if(base(v.active)!==base(active)||Date.now()>=(acceptedLegalUntil??Math.min(cut.source.validUntil,cut.pricing.validUntil)))return fail('read_changed');
   };
   await assertCurrent();
-  return {cut,inventory,prices,assertCurrent,read:(key:string,sha?:string)=>readChinaPrepared(cut.generationId,key,sha)};
+  return {cut,inventory,prices,assertCurrent,acceptedLegalUntil,read:(key:string,sha?:string)=>readChinaPrepared(cut.generationId,key,sha)};
  };
  return {market,observe,acquire,prepare,activate,rollback,release,read,chinaPreparation,openChinaPrepared};
 }
@@ -305,14 +307,14 @@ export function openIndependentChinaRegcloud(files:ChinaStageObjectFiles){
 }
 function openIndependentChinaRuntimeRead(files:StageChinaFiles|ChinaStageObjectFiles,assertOwned:()=>void,assertPointer:()=>Promise<void>){
  assertOwned();
- const readSide=openIndependentMarketBackend(files,'china',assertOwned,async()=>fail('readonly_backend'));
+ const readSide=openIndependentMarketBackend(files,'china',assertOwned,async()=>fail('readonly_backend'),('acceptedLegalUntil' in files?files.acceptedLegalUntil:undefined));
  return Object.freeze({
   market:'china' as const,observe:readSide.observe,
   async openChinaPrepared(){
    const scoped=await readSide.openChinaPrepared(),ready=files.ready;
    if(!scoped||scoped.cut.generationId!==ready.generationId||fingerprint(scoped.cut)!==ready.manifestSha256||
       scoped.cut.admitted.count!==ready.admittedRows||scoped.cut.pricing.receiptSha256!==ready.pricingReceiptSha256||
-      Math.min(scoped.cut.source.validUntil,scoped.cut.pricing.validUntil)!==ready.validUntil)
+      Math.min(scoped.cut.source.validUntil,scoped.cut.pricing.validUntil)!==ready.validUntil||ready.legalValidUntil!==scoped.cut.pricing.legalValidUntil)
     return fail('stage_readiness_binding');
    const search=await readSide.read('search');
    const marker=(scoped.prices.payload as {manifest?:{markets?:{china?:{preparedChinaPriceReadV1?:{directorySha256?:string}}}}})

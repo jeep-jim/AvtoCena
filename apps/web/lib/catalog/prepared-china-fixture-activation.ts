@@ -19,7 +19,7 @@ const hash=(data:Buffer)=>createHash('sha256').update(data).digest('hex');
 const json=(value:unknown)=>Buffer.from(JSON.stringify(value));
 const parse=<T>(value:Buffer)=>JSON.parse(value.toString('utf8')) as T;
 const {isArray}=Array;
-type Directory={version:1;generationId:string;marketDigest:string;validUntil:number;rows:number;chunkSha256:string[];idRoots?:Array<string|null>;modelView?:PreparedChinaModelViewRef;fixedCityViews?:ChinaFixedCityRefs;deliveryTariffVersion?:string;streamingSelector?:true;navigationFacets?:CatalogFacets};
+type Directory={version:1;generationId:string;marketDigest:string;validUntil:number;legalValidUntil?:number;rows:number;chunkSha256:string[];idRoots?:Array<string|null>;modelView?:PreparedChinaModelViewRef;fixedCityViews?:ChinaFixedCityRefs;deliveryTariffVersion?:string;streamingSelector?:true;navigationFacets?:CatalogFacets};
 type Chunk={version:1;generationId:string;chunk:string;parts:PreparedPriceCardDescriptor[];selectors?:ChinaSelectorPart[]};
 type Projection={generationId:string;items:CatalogSearchProjection[]};
 const location=(g:string)=>`catalog/generations/${g}/indexes/prepared-china-read-v1/`;
@@ -129,6 +129,7 @@ export async function stagePreparedChinaArtifacts(input:{
  try{
   const chunkSha256:string[]=[];
   const navigation=input.withStreamingSearch?createChinaSelectorFacets(candidate.generationId,chinaSelectorNavigationQuery):undefined;
+  let minimumLegalValidUntil=Infinity;
   let chunkName='',rows:VehicleOffer[]=[],parts:PreparedPriceCardDescriptor[]=[],selectors:ChinaSelectorPart[]=[],offset=0,expectedRows=0;
   const flush=async()=>{
    if(!parts.length||offset!==expectedRows)return fail('chunk_coverage');
@@ -164,16 +165,18 @@ export async function stagePreparedChinaArtifacts(input:{
     if(modelView&&model?.matches(row))modelView.add({...locations[i],rub:preparedChinaModelIndexedPrice(row)});
     cityViews?.add(row,locations[i]);
    }
+   minimumLegalValidUntil=Math.min(minimumLegalValidUntil,d.legalValidUntil??-Infinity);
    parts.push(d);offset+=d.rows;
   });
   await flush();
   if(chunkSha256.length!==china.chunks.length)return fail('directory_coverage');
   const validUntil=Math.min(a.expiresAt,seal.report.validUntil);
+  const acceptedLegalHorizon=a.freshSourceValidUntil!==undefined&&Number.isSafeInteger(minimumLegalValidUntil)?minimumLegalValidUntil:undefined;
   const locators=createPreparedChinaIdShardWriter(candidate.generationId,(key,contents)=>put(key,contents,validUntil));
   await spool.publishShards(locators.write,true);
   const idRoots=locators.finish(seal.report.admittedRows);
   const directory:Directory={version:1,generationId:candidate.generationId,marketDigest:a.candidateMarketDigest,
-   rows:seal.report.admittedRows,validUntil,chunkSha256,idRoots,deliveryTariffVersion:DELIVERY_TARIFF_VERSION,
+   rows:seal.report.admittedRows,validUntil,...(acceptedLegalHorizon===undefined?{}:{legalValidUntil:acceptedLegalHorizon}),chunkSha256,idRoots,deliveryTariffVersion:DELIVERY_TARIFF_VERSION,
    ...(navigation?{streamingSelector:true as const,navigationFacets:navigation.finish()}:{}),
    ...(modelView?{modelView:await modelView.publish((key,contents)=>put(key,contents,validUntil))}:{}),
    ...(cityViews?{fixedCityViews:await cityViews.publish((key,contents)=>put(key,contents,validUntil))}:{})};
@@ -181,7 +184,7 @@ export async function stagePreparedChinaArtifacts(input:{
   await put(directoryPath(candidate.generationId,directorySha256),body,directory.validUntil);
   const marked=structuredClone(candidate);
   marked.markets.china.preparedChinaPriceReadV1={directorySha256};
-  return {marked,validUntil,report:seal.report};
+  return {marked,validUntil,legalValidUntil:acceptedLegalHorizon,report:seal.report};
  }finally{await spool.close();}
 }
 
@@ -198,18 +201,21 @@ export async function openActivePreparedChinaFixture(storage:JsonStorage){
 
 /** The caller authenticates this manifest against one market's authority. */
 export async function openPreparedChinaSnapshot(m:CatalogPreparedChinaManifest,
- readObject:(key:string,sha?:string)=>Promise<Buffer>,assertBinding:()=>Promise<void>){
+ readObject:(key:string,sha?:string)=>Promise<Buffer>,assertBinding:()=>Promise<void>,acceptedLegalUntil?:number){
  const c=m?.markets?.china,marker=c?.preparedChinaPriceReadV1;
  if(!c||m.version!==2||!GEN.test(m.generationId)||
     !marker||!SHA.test(marker.directorySha256)||!isArray(c.chunks)||c.chunks.length>MAX_CHUNKS)return fail('reader_scope');
  const dir=parse<Directory>(await readObject(directoryPath(m.generationId,marker.directorySha256),marker.directorySha256));
+ const servingUntil=acceptedLegalUntil??dir.validUntil;
+ if(acceptedLegalUntil!==undefined&&(!Number.isSafeInteger(acceptedLegalUntil)||dir.legalValidUntil!==acceptedLegalUntil||
+    acceptedLegalUntil<dir.validUntil))return fail('accepted_legal_binding');
  if(dir.version!==1||dir.generationId!==m.generationId||dir.marketDigest!==inventoryDigest(m)||dir.rows!==c.count||
-    !Number.isSafeInteger(dir.validUntil)||Date.now()>=dir.validUntil||!isArray(dir.chunkSha256)||
+    !Number.isSafeInteger(dir.validUntil)||Date.now()>=servingUntil||!isArray(dir.chunkSha256)||
     dir.chunkSha256.length!==c.chunks.length||(dir.streamingSelector===true?dir.navigationFacets?.generationId!==m.generationId:dir.streamingSelector!==undefined||dir.navigationFacets!==undefined)||c.chunks.some((chunk,i)=>!CHUNK.test(chunk)||!SHA.test(dir.chunkSha256[i])))
   return fail('directory_scope');
  const assertCurrent=async()=>{
   await assertBinding();
-  if(Date.now()>=dir.validUntil)return fail('active_changed');
+  if(Date.now()>=servingUntil)return fail('active_changed');
  };
  const readChunk=async(chunk:string)=>{
   const at=c.chunks.indexOf(chunk);
@@ -223,7 +229,8 @@ export async function openPreparedChinaSnapshot(m:CatalogPreparedChinaManifest,
    const d=meta.parts[part];
    if(!Number.isSafeInteger(part)||part<0||part>=CATALOG_CHUNK_SIZE||!d||d.market!=='china'||
       d.generationId!==m.generationId||d.sourceChunk!==chunk||d.part!==part||d.marketInventoryDigest!==dir.marketDigest||
-      !SHA.test(d.projectionSha256)||Date.now()>=d.tariffValidUntil)return fail('part_scope');
+      !SHA.test(d.projectionSha256)||(acceptedLegalUntil!==undefined&&(!Number.isSafeInteger(d.legalValidUntil)||d.legalValidUntil!<acceptedLegalUntil))||
+      Date.now()>=(acceptedLegalUntil??d.tariffValidUntil))return fail('part_scope');
    const projection=parse<Projection>(await readObject(projectionPath(d),d.projectionSha256));
    if(projection.generationId!==m.generationId||!isArray(projection.items)||projection.items.length!==d.rows||
       projection.items.some(row=>row.market!=='china'||!Number.isSafeInteger(row.totalRub)||!(row.totalRub!>0))||
@@ -265,7 +272,7 @@ export async function openPreparedChinaSnapshot(m:CatalogPreparedChinaManifest,
   const ref=fixedChinaCityViewRef(dir.fixedCityViews,scope);
   return ref?selectPreparedChinaModelPage(m.generationId,ref,input,(key,checksum)=>readObject(key,checksum)):null;
  };
- return {generationId:m.generationId,chunks:[...c.chunks],rows:c.count,validUntil:dir.validUntil,idRoots:dir.idRoots,
+ return {generationId:m.generationId,chunks:[...c.chunks],rows:c.count,validUntil:dir.validUntil,legalValidUntil:acceptedLegalUntil,idRoots:dir.idRoots,
   modelView:dir.modelView,fixedCityViews:dir.fixedCityViews,deliveryTariffVersion:dir.deliveryTariffVersion,
   directorySha256:marker.directorySha256,streamingSelector:dir.streamingSelector,navigationFacets:dir.navigationFacets,readChunk,assertCurrent,locate,modelPage,cityPage};
 }

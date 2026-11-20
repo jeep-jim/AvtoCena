@@ -70,15 +70,19 @@ const minted=new WeakSet<ChinaStageObjectFiles>();
 export type ChinaStageObjectFiles=Readonly<{
  ready:Readonly<ChinaRuntimeReady>;
  readySha256:string;
+ acceptedLegalUntil?:number;
  durable:Readonly<DurableReady>;
  getBinary(key:string):Promise<{data:Buffer;size:number;checksum:string}>;
  readJsonWithMeta<T>(key:string,fallback:T):Promise<JsonReadResult<T>>;
  assertPointer():Promise<void>;
 }>;
 export function assertChinaStageObjectFiles(handle:ChinaStageObjectFiles){
- if(!minted.has(handle)||Date.now()>=handle.durable.validUntil||Date.now()>=handle.ready.validUntil)return fail('stage_authority');
+ if(!minted.has(handle)||Date.now()>=(handle.acceptedLegalUntil??Math.min(handle.durable.validUntil,handle.ready.validUntil)))return fail('stage_authority');
 }
 export async function openChinaStageObjectFiles(storage:ObjectJsonStorage,reference:ChinaPublicRef,assertPointer:()=>Promise<void>){
+ return openChinaStageObject(storage,reference,assertPointer,false);
+}
+async function openChinaStageObject(storage:ObjectJsonStorage,reference:ChinaPublicRef,assertPointer:()=>Promise<void>,acceptedRead:boolean){
  const ref=Object.freeze({...reference});
  if(!(storage instanceof ObjectJsonStorage)||!validChinaPublicRef(ref)||typeof assertPointer!=='function')return fail('scope');
  const configKey=chinaObjectDigest(readConfiguredRegcloudScope()),credentialKey=credentials(),root=STAGED+ref.runId+'/';
@@ -100,14 +104,17 @@ export async function openChinaStageObjectFiles(storage:ObjectJsonStorage,refere
     ![durable.archiveSha256,durable.runtimeReadySha256,durable.permitSha256,durable.manifestSha256,durable.pricingReceiptSha256,
      durable.activeControlSha256,durable.expectedChinaPublicBaseSha256,durable.artifacts?.orderedSha256].every(x=>SHA.test(x??''))||
     !clock(durable.admittedRows)||!clock(durable.artifacts.count)||!clock(durable.artifacts.bytes)||!clock(durable.validUntil)||
-    Date.now()>=durable.validUntil)return fail('ready_scope');
+    (!acceptedRead&&Date.now()>=durable.validUntil))return fail('ready_scope');
  const stageRuntime=await read('runtime-ready.json',8192);
  if(stageRuntime.checksum!==durable.runtimeReadySha256)return fail('runtime_ready_sha');
  const ready=parse<ChinaRuntimeReady>(stageRuntime.data);
  if(ready?.version!==1||ready.kind!=='china-isolated-runtime-ready'||ready.archiveSha256!==durable.archiveSha256||
     ready.generationId!==durable.generationId||ready.manifestSha256!==durable.manifestSha256||ready.activeControlSha256!==durable.activeControlSha256||
     ready.pricingReceiptSha256!==durable.pricingReceiptSha256||ready.admittedRows!==durable.admittedRows||
-    !clock(ready.validUntil)||ready.validUntil<durable.validUntil)return fail('runtime_ready_scope');
+    !clock(ready.validUntil)||ready.validUntil<durable.validUntil||
+    (ready.legalValidUntil!==undefined&&(!clock(ready.legalValidUntil)||ready.legalValidUntil<ready.validUntil)))return fail('runtime_ready_scope');
+ const acceptedLegalUntil=acceptedRead?ready.legalValidUntil:undefined;
+ if(Date.now()>=(acceptedLegalUntil??Math.min(durable.validUntil,ready.validUntil)))return fail('stage_authority');
  const data=async(key:string)=>{
   assertChinaStageObjectFiles(handle);
   if(key!==LOCAL_CONTROL&&!key.startsWith(LOCAL+'generations/'+ref.generationId+'/'))return fail('key_scope');
@@ -115,7 +122,7 @@ export async function openChinaStageObjectFiles(storage:ObjectJsonStorage,refere
   if(key===LOCAL_CONTROL&&result.checksum!==ready.activeControlSha256)return fail('stage_control_sha');
   assertChinaStageObjectFiles(handle);return result;
  };
- const handle:ChinaStageObjectFiles=Object.freeze({ready:Object.freeze(ready),readySha256:ref.readySha256,durable:Object.freeze(durable),
+ const handle:ChinaStageObjectFiles=Object.freeze({ready:Object.freeze(ready),readySha256:ref.readySha256,...(acceptedLegalUntil===undefined?{}:{acceptedLegalUntil}),durable:Object.freeze(durable),
   getBinary:data,
   async readJsonWithMeta<T>(key:string,_fallback:T):Promise<JsonReadResult<T>>{
    if(key!==LOCAL_CONTROL)return fail('control_scope');
@@ -142,5 +149,5 @@ export async function openConfiguredChinaRegcloudFiles(){
   await guard();await assertChinaLegacyRollback(storage,own.state.active);await guard();
   return null; // explicit authenticated rollback, never a failed new-cut read.
  }
- return openChinaStageObjectFiles(storage,own.state.active,guard);
+ return openChinaStageObject(storage,own.state.active,guard,true);
 }

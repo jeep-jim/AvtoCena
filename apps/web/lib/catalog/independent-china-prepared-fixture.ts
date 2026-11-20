@@ -125,7 +125,7 @@ export async function openIndependentChinaPrepared(publication:Pick<IndependentF
  const active=await publication.openChinaPrepared();
  if(!active)return null;
  const withdrawn=withdrawnLookup(active.cut,active.inventory);
- const snapshot=await openPreparedChinaSnapshot(nativeManifest(active.cut,active.prices),active.read,active.assertCurrent);
+ const snapshot=await openPreparedChinaSnapshot(nativeManifest(active.cut,active.prices),active.read,active.assertCurrent,active.acceptedLegalUntil);
  if(snapshot.validUntil!==active.cut.pricing.validUntil)return fail('validity');
  return {snapshot,withdrawn,orderedAdmittedIdsSha256:active.cut.admitted.orderedIdsSha256};
 }
@@ -233,7 +233,8 @@ export async function prepareIndependentChinaCanonicalChunks(input:{
  const cut:IndependentCut={version:1,market:'china',generationId,expectedBaseSha256:io.baseSha256,previousCursorSha256,preparedChina:true,
   source:{complete:true,receiptSha256:sourceReceiptSha256,observedAt:source.observedAt,validUntil:source.validUntil,cursor:source.cursor},
   pricing:{receiptSha256:pricingReceiptSha256,inputFingerprint:input.pricingFingerprint,calculationVersion:input.calculationVersion,
-   pricedAt:Date.parse(fx.receipt.pricingAsOf),validUntil:built.validUntil},
+   pricedAt:Date.parse(fx.receipt.pricingAsOf),validUntil:built.validUntil,
+   ...(built.legalValidUntil===undefined?{}:{legalValidUntil:built.legalValidUntil})},
   admitted:{count,orderedIdsSha256},
   papers:{inventory:digest(paper('inventory')),prices:digest(paper('prices')),search:digest(paper('search'))}};
  withdrawnLookup(cut,paper('inventory'));
