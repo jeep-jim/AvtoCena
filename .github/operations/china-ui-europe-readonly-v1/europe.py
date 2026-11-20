@@ -1,4 +1,4 @@
-import hashlib,http.client,json,os,re,socket,ssl,stat,subprocess
+import hashlib,http.client,json,os,re,socket,ssl,stat,subprocess,time
 APP='85296f6b8797aaa93227b69da7e9e9e928e8f9b5'
 OLD='83ff17075e9188dcf227c8752dc064248d5f42e0'
 CALC='4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90'
@@ -186,6 +186,9 @@ if __name__=='__main__':
     try:
         need(len(sys.argv)==3,'argument_scope')
         diagnose(*sys.argv[1:])
-    except Exception:
-        print('{"status":"europe_comparison_unverified"}')
+    except Exception as e:
+        reason=str(e)
+        allowed={'argument_scope','input_pins','dark_receipt_id','runtime_moved','health_role','dark_identity',
+                 'dark_env_inheritance','gateway_changed','held_container_changed','incumbent_mounts','incumbent_mount_scope','http_status'}
+        print(json.dumps({'status':'europe_comparison_unverified','phase':reason if reason in allowed else type(e).__name__}))
         sys.exit(1)
