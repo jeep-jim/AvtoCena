@@ -1,0 +1,66 @@
+name: Read exact China V4 private progress without changes
+on:
+  push:
+    branches: [main]
+    paths: [.github/market-runs/china-daily-v4-private-progress-v1.sha256]
+permissions:
+  contents: read
+jobs:
+  read:
+    if: github.repository == 'jeep-jim/AvtoCena' && github.repository_id == '1289722938' && github.run_attempt == '1' && github.event.head_commit.message == 'Read exact China V4 private progress without changes'
+    environment: regcloud-staging
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 3
+          persist-credentials: false
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: 22867cbcfaee27b2e8917b6bf880e44827f67b60
+          path: actor
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 24.22.1
+      - name: Check exact authorized source and install locked dependencies before credentials
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          python3 - <<'PY2'
+          import json, os, subprocess
+          with open(os.environ['GITHUB_EVENT_PATH']) as f:
+              event = json.load(f)
+          commits = event.get('commits') or []
+          head = event.get('head_commit') or {}
+          assert event.get('ref') == 'refs/heads/main' and event.get('forced') is False and event.get('deleted') is False
+          assert len(commits) == 1 and head.get('id') == commits[0].get('id') == os.environ['GITHUB_SHA']
+          parent = subprocess.check_output(['git', 'rev-parse', 'HEAD^'], text=True).strip()
+          assert event.get('before') == parent
+          PY2
+          test "$(git rev-parse HEAD^^)" = 5c07494113eed2a440a31ba6d2681eb12dc1528d
+          test "$(git show -s --format=%P HEAD^ | wc -w)" = 1
+          cmp -s <(git diff-tree --no-commit-id -r --name-status --no-renames -z HEAD^^ HEAD^) <(printf 'A\0%s\0A\0%s\0' .github/operations/china-daily-v4-private-progress-v1/progress.mts .github/workflows/china-daily-v4-private-progress-v1.yml)
+          test "$(git -C actor rev-parse HEAD)" = 22867cbcfaee27b2e8917b6bf880e44827f67b60
+          pin=19dc161f4103ade8af4bee1a32475943cedfd4e3fd8033fce03c927e97bcb50a
+          test "$(git show -s --format=%P HEAD | wc -w)" = 1
+          cmp -s <(git diff-tree --no-commit-id -r --name-status --no-renames -z HEAD^ HEAD) <(printf 'A\0%s\0' .github/market-runs/china-daily-v4-private-progress-v1.sha256)
+          cmp -s .github/market-runs/china-daily-v4-private-progress-v1.sha256 <(printf '%s\n' "$pin")
+          printf '%s  %s\n' "$pin" .github/operations/china-daily-v4-private-progress-v1/progress.mts | sha256sum -c --status
+          cp .github/operations/china-daily-v4-private-progress-v1/progress.mts actor/progress-entry.mts
+          cd actor && npm ci --ignore-scripts --no-audit --no-fund
+      - name: Read exact V4 collector metadata and unchanged rev5
+        working-directory: actor
+        env:
+          AVTOCENA_CHINA_REGCLOUD_RUNTIME: '1'
+          JSON_STORAGE_DRIVER: object
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_REGION: us-east-1
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+          YC_OBJECT_STORAGE_REQUEST_TIMEOUT_MS: '8000'
+        run: timeout 75s node --import tsx progress-entry.mts --read-exact-v4
