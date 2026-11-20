@@ -1,0 +1,50 @@
+name: Inspect only China editorial categories before private preparation
+'on':
+  push:
+    branches:
+    - main
+    paths:
+    - .github/workflows/china-editorial-scope-readonly-20261120.yml
+permissions:
+  contents: read
+jobs:
+  read:
+    if: github.repository == 'jeep-jim/AvtoCena' && github.repository_id == '1289722938' && github.ref ==
+      'refs/heads/main' && github.run_attempt == '1' && github.event.before == '17cb54c3fe77f16490ffda6f59a0e1d2063d6a46'
+      && github.event.head_commit.message == 'Inspect only China editorial categories before private preparation'
+    environment: regcloud-staging
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+    - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+      with:
+        node-version: 24.22.1
+    - name: Read twice and emit only redacted counts and digest
+      env:
+        YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+        YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+      run: "set -euo pipefail\numask 077\ncat > \"$RUNNER_TEMP/editorial-private-probe.mjs\" <<'READER'\n\
+        import {createHash,createHmac} from 'node:crypto';\nconst h='s3.regru.cloud',b='avtocena-staging-8120751',p='migration-staging/full-20261011';\n\
+        const key='catalog/independent-market-public-v1/china/control.json',oldSha='4c34c20d9784b571414390cab450ceeeaee60b00c168476100419ec5c05cb038';\n\
+        const access=process.env.YC_OBJECT_STORAGE_ACCESS_KEY_ID,secret=process.env.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY;\n\
+        const hash=x=>createHash('sha256').update(x).digest('hex'),mac=(k,s)=>createHmac('sha256',k).update(s).digest();\n\
+        async function get(k,query,cap){\n if(!access||!secret)throw Error('credentials');\n const pathname='/'+b+(k?'/'+p+'/'+k:'');\n\
+        \ const t=new Date().toISOString().replace(/[:-]|\\.\\d{3}/g,''),day=t.slice(0,8),scope=day+'/us-east-1/s3/aws4_request';\n\
+        \ const a={host:h,'x-amz-content-sha256':hash(''),'x-amz-date':t};const n=Object.keys(a).sort().join(';');\n\
+        \ const req=['GET',pathname,query,Object.keys(a).sort().map(k=>k+':'+a[k]+'\\n').join(''),n,hash('')].join('\\\
+        n');\n const signing=mac(mac(mac(mac('AWS4'+secret,day),'us-east-1'),'s3'),'aws4_request');\n a.authorization='AWS4-HMAC-SHA256\
+        \ Credential='+access+'/'+scope+', SignedHeaders='+n+', Signature='+mac(signing,['AWS4-HMAC-SHA256',t,scope,hash(req)].join('\\\
+        n')).toString('hex');\n const x=await fetch('https://'+h+pathname+(query?'?'+query:''),{headers:a,method:'GET',redirect:'error',signal:AbortSignal.timeout(15000)});\n\
+        \ let bytes=0,arr=[];for await(const v of x.body??[]){bytes+=v.length;if(bytes>cap)throw Error('response_bound');arr.push(v)}\n\
+        \ return {status:x.status,body:Buffer.concat(arr),etag:x.headers.get('etag')};\n}\n\nconst k='catalog-editorial/current.json';\n\
+        const bool=Boolean;\ntry{\n const a=await get(k,'',8*1024*1024);\n if(a.status!==200)throw Error('editorial_http_'+a.status);\n\
+        \ const v=JSON.parse(a.body.toString('utf8'));\n if(!v?.entries||typeof v.entries!=='object'||Array.isArray(v.entries))\
+        \ throw Error('editorial_index_shape');\n const rows=Object.values(v.entries),chin=rows.filter(x=>x?.market==='china'),valid=rows.filter(x=>x&&typeof\
+        \ x.market==='string');\n const g={};\n for(const r of chin){\n  const status=['visible','hidden','archived'].includes(r.status)?r.status:'unsupported';\n\
+        \  const kind=['autohome_used_china_open','autohome_new_china_open'].includes(r.sourceId)?'paidChe168':'other';\n\
+        \  const id=[status,kind,bool(r.sellerPrice)?'sellerPrice':'noSellerPrice',bool(Object.keys(r.specifications??{}).length)?'specs':'noSpecs',bool(r.photos?.length||r.title)?'display':'noDisplay'].join('/');\n\
+        \  g[id]=(g[id]??0)+1;\n }\n const z=await get(k,'',8*1024*1024),same=z.status===200&&a.etag===z.etag&&hash(a.body)===hash(z.body);\n\
+        \ console.log(JSON.stringify({kind:'china_editorial_counts',readRequests:2,storageWrites:0,stable:same,observedSha256:hash(a.body),total:rows.length,invalid:rows.length-valid.length,china:chin.length,classes:g}));\n\
+        \ if(!same)process.exitCode=2;\n}catch(e){console.log(JSON.stringify({kind:'china_editorial_counts',error:/^editorial_http_[0-9]{3}$|^editorial_index_shape$/.test(e?.message)?e.message:'readonly_refused',storageWrites:0}));process.exitCode=1}\n\
+        READER\ntest \"$(sha256sum \"$RUNNER_TEMP/editorial-private-probe.mjs\" | cut -d ' ' -f 1)\" = 2aedee5ea58eafbde099ca12ad8b30ce253f59c1fcd647e6acc53a26e7bcf8de\n\
+        node \"$RUNNER_TEMP/editorial-private-probe.mjs\"\n"
