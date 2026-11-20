@@ -1,0 +1,55 @@
+name: Inspect exact China stage permission and independent control without writes
+'on':
+  push:
+    branches:
+    - main
+    paths:
+    - .github/workflows/china-owned-stage-preflight-20261120.yml
+permissions:
+  contents: read
+jobs:
+  read:
+    if: github.repository == 'jeep-jim/AvtoCena' && github.repository_id == '1289722938' && github.ref ==
+      'refs/heads/main' && github.run_attempt == '1' && github.event.before == '69a2497ffcc069fb78b00986267f89b9c9a13e67'
+      && github.event.head_commit.message == 'Inspect exact China stage permission and independent control
+      without writes'
+    environment: regcloud-staging
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+    - uses: actions/setup-node@v4
+      with:
+        node-version: 24.22.1
+    - name: Read exact five scoped metadata objects only
+      env:
+        YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+        YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+      run: "set -euo pipefail\numask 077\ncat > \"$RUNNER_TEMP/china-owned-stage-preflight.mjs\" <<'READER'\n\
+        import {createHash,createHmac} from 'node:crypto';\nconst h='s3.regru.cloud',b='avtocena-staging-8120751',p='migration-staging/full-20261011';\n\
+        const key='catalog/independent-market-public-v1/china/control.json',oldSha='4c34c20d9784b571414390cab450ceeeaee60b00c168476100419ec5c05cb038';\n\
+        const access=process.env.YC_OBJECT_STORAGE_ACCESS_KEY_ID,secret=process.env.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY;\n\
+        const hash=x=>createHash('sha256').update(x).digest('hex'),mac=(k,s)=>createHmac('sha256',k).update(s).digest();\n\
+        async function get(k,query,cap){\n if(!access||!secret)throw Error('credentials');\n const pathname='/'+b+(k?'/'+p+'/'+k:'');\n\
+        \ const t=new Date().toISOString().replace(/[:-]|\\.\\d{3}/g,''),day=t.slice(0,8),scope=day+'/us-east-1/s3/aws4_request';\n\
+        \ const a={host:h,'x-amz-content-sha256':hash(''),'x-amz-date':t};const n=Object.keys(a).sort().join(';');\n\
+        \ const req=['GET',pathname,query,Object.keys(a).sort().map(k=>k+':'+a[k]+'\\n').join(''),n,hash('')].join('\\\
+        n');\n const signing=mac(mac(mac(mac('AWS4'+secret,day),'us-east-1'),'s3'),'aws4_request');\n a.authorization='AWS4-HMAC-SHA256\
+        \ Credential='+access+'/'+scope+', SignedHeaders='+n+', Signature='+mac(signing,['AWS4-HMAC-SHA256',t,scope,hash(req)].join('\\\
+        n')).toString('hex');\n const x=await fetch('https://'+h+pathname+(query?'?'+query:''),{headers:a,method:'GET',redirect:'error',signal:AbortSignal.timeout(15000)});\n\
+        \ let bytes=0,arr=[];for await(const v of x.body??[]){bytes+=v.length;if(bytes>cap)throw Error('response_bound');arr.push(v)}\n\
+        \ return {status:x.status,body:Buffer.concat(arr),etag:x.headers.get('etag')};\n}\nfunction acl(t){\n\
+        \ const obj=t.replace(/<\\?xml[^?]{1,160}\\?>/,'').trim();\n const owner=obj.match(/<Owner>\\s*<ID>([^<\
+        \ ]{1,256})<\\/ID>(?:\\s*<DisplayName>[^<]{0,256}<\\/DisplayName>)?\\s*<\\/Owner>/)?.[1];\n const\
+        \ grants=[...obj.matchAll(/<Grant>\\s*<Grantee[^>]*>\\s*<ID>([^< ]{1,256})<\\/ID>(?:\\s*<DisplayName>[^<]{0,256}<\\\
+        /DisplayName>)?\\s*<\\/Grantee>\\s*<Permission>([^<]{1,48})<\\/Permission>\\s*<\\/Grant>/g)];\n return\
+        \ !!owner&&grants.length===1&&grants[0][1]===owner&&grants[0][2]==='FULL_CONTROL'&&(obj.match(/<Grant>/g)||[]).length===1&&!/AllUsers|AuthenticatedUsers|<URI>|WRITE_ACP/.test(obj);\n\
+        }\ntry{\n const a=await get(key,'',64*1024),g=await get('catalog/manifest.json','',1024*1024),ap=await\
+        \ get('','acl=',256*1024),pp=await get('','policy=',128*1024),z=await get(key,'',64*1024);\n const\
+        \ aAbsent=a.status===404&&z.status===404&&a.etag===z.etag;\n const r={kind:'china_owned_stage_preflight',actualReadRequests:5,storageWrites:0,chinaOwnControlHttp:a.status,chinaOwnControlStable:a.status===z.status&&a.etag===z.etag&&(aAbsent||hash(a.body)===hash(z.body)),\n\
+        \  ownControlAbsent:aAbsent,ownBaseDigest:aAbsent?hash('null'):null,legacyPublicHttp:g.status,legacyPublicMatchesPinned:g.status===200&&hash(g.body)===oldSha,\n\
+        \  aclHttp:ap.status,ownerOnlyAcl:ap.status===200&&acl(ap.body.toString('utf8')),policyHttp:pp.status,\n\
+        \  noBucketPolicy:pp.status===404&&/<Code>NoSuchBucketPolicy<\\/Code>/.test(pp.body.toString('utf8'))};\n\
+        \ console.log(JSON.stringify(r));if(!r.chinaOwnControlStable||!r.ownControlAbsent||!r.legacyPublicMatchesPinned||!r.ownerOnlyAcl||!r.noBucketPolicy)process.exitCode=2;\n\
+        }catch(e){console.log(JSON.stringify({kind:'china_owned_stage_preflight',error:['credentials','response_bound'].includes(e?.message)?e.message:'transport_refused',storageWrites:0}));process.exitCode=1}\n\
+        READER\ntest \"$(sha256sum \"$RUNNER_TEMP/china-owned-stage-preflight.mjs\" | cut -d' ' -f1)\" = 2ae468ea18ee324ac98a3156f4d2a1d8f5b584f491e82423dbccb5876572387d\n\
+        node \"$RUNNER_TEMP/china-owned-stage-preflight.mjs\"\n"
