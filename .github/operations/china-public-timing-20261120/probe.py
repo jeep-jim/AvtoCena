@@ -2,7 +2,7 @@
 import html, json, pathlib, re, subprocess, tempfile, urllib.parse
 
 HOST = 'https://avtocena.com'
-APP = '85296f6b8797aaa93227b69da7e9e9e928e8f9b5'
+APP = '22867cbcfaee27b2e8917b6bf880e44827f67b60'
 CALC = '4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90'
 GEN = 'gen_1795166586455_china44710087159'
 Q = {'market':'china','make':'BMW','model':'X3','sort':'totalRub','pageSize':'1'}
