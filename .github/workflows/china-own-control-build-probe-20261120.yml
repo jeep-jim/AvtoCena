@@ -1,0 +1,64 @@
+# Review-only draft. Do not arm until the actual private READY has been accepted,
+# the exact operator code directory is pinned and rollout authority is recorded.
+name: Verify China operator bundles without credentials
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/china-own-control-build-probe-20261120.yml]
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: avtocena-own-china-operator-build-probe-v1
+  cancel-in-progress: false
+jobs:
+  switch:
+    name: Verify China operator bundles without credentials
+    if: github.repository == 'jeep-jim/AvtoCena' && github.repository_id == '1289722938' && github.ref == 'refs/heads/main' && github.run_attempt == '1' && github.event.head_commit.message == 'Verify China operator bundles without credentials'
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 24.22.1
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: f4dc98aaab916b29419d173994d66562aa5901f1
+          path: writer
+          persist-credentials: false
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: 85296f6b8797aaa93227b69da7e9e9e928e8f9b5
+          path: reader
+          persist-credentials: false
+      - name: Build only reviewed operator sources, without service credentials
+        shell: bash
+        run: |
+          set -euo pipefail
+          umask 077
+          root="$GITHUB_WORKSPACE"
+          ops="$root/.github/operations/china-dark-actor-v1"
+          test "$(sha256sum "$ops/APPROVED_CODE.sha256" | cut -d ' ' -f 1)" = ff6ec62fbb5b93759d92d26f10413e04f1358108b41d05514001ea3b97e8e72a
+          (cd "$ops"; sha256sum --strict --check --status APPROVED_CODE.sha256)
+          [[ "$(git -C writer rev-parse HEAD)" == f4dc98aaab916b29419d173994d66562aa5901f1 ]]
+          [[ "$(git -C reader rev-parse HEAD)" == 85296f6b8797aaa93227b69da7e9e9e928e8f9b5 ]]
+          git -C writer apply --check "$ops/dark-actor-overlay.patch"
+          git -C writer apply "$ops/dark-actor-overlay.patch"
+          (cd writer; npm ci --ignore-scripts --no-audit --no-fund)
+          (cd reader; npm ci --ignore-scripts --no-audit --no-fund)
+          stage="$(mktemp -d "$RUNNER_TEMP/china-operator-build.XXXXXXXX")"
+          node "$ops/build-control-bundle.mjs" "$root/writer" "$root/writer" "$stage/china-dark-control-switch.mjs" > "$stage/actor-build.json"
+          node "$ops/build-private-preview.mjs" "$root/reader" "$stage/preview.cjs" > "$stage/preview-build.json"
+          python3 - "$stage" <<'PY'
+          import hashlib,json,pathlib,sys
+          p=pathlib.Path(sys.argv[1]);a=json.loads((p/'actor-build.json').read_text());r=json.loads((p/'preview-build.json').read_text())
+          assert a['base']=='f4dc98aaab916b29419d173994d66562aa5901f1' and a['externalModules']=='node-builtins-only'
+          assert r['appSha']=='85296f6b8797aaa93227b69da7e9e9e928e8f9b5'
+          assert hashlib.sha256((p/'china-dark-control-switch.mjs').read_bytes()).hexdigest()==a['sha256']
+          assert hashlib.sha256((p/'preview.cjs').read_bytes()).hexdigest()==r['bundleSha256']
+          print(json.dumps({'operatorSourcesVerified':True,'actorProjectInputs':a['projectInputs'],'previewProjectInputs':r['inputFiles']}))
+          PY
+          printf 'CHINA_OPERATOR_BUILD=%s\n' "$stage" >> "$GITHUB_ENV"
