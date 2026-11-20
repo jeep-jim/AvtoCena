@@ -1,3 +1,4 @@
+import {chinaAggregateCacheKey,legacyAggregateMarketAllowed,omitLegacyChinaAggregate,readChinaAggregateAuthority,withChinaAggregateAuthority} from './china-public-aggregate';
 import {budgetSelectionFilterKey} from './budget-selection-key';
 import {homeSnapshotMarketIsEmpty} from "./home-editorial-empty";
 import {createHomePhaseTiming} from "./home-phase-timing";
@@ -851,6 +852,7 @@ function projectionUtilizationPowerHp(row: Pick<CatalogSearchProjection,'utiliza
 /** Restore explicit source identity before rejecting other models. Mechanical
  * enrichment and priced copies are needed only for matching identities. */
 function projectionIdentityMatches(row: Pick<CatalogSearchProjection,'market'|'make'|'model'>, params: CatalogSearchParams, modelKeys: Set<string> | null = null) {
+  if(!legacyAggregateMarketAllowed(row.market))return false;
   row = restoreSourceModelName(row);
   const lower = (value: unknown) => cleanFacet(value).toLocaleLowerCase('ru-RU');
   if (params.market && params.market !== 'any' && lower(row.market) !== lower(params.market)) return false;
@@ -979,7 +981,7 @@ async function projectionModelKeys(params: CatalogSearchParams) {
   return new Set(candidates.map((item) => `${lower(item.make)}:${lower(item.model)}`));
 }
 async function readProjectionRows(manifest: CatalogManifest, params: CatalogSearchParams) {
-  const markets = params.market && params.market !== "any" ? [String(params.market)] : MARKETS;
+  const markets = params.market && params.market !== "any" ? [String(params.market)] : MARKETS.filter(legacyAggregateMarketAllowed);
   // The projection cache already permits one large read at a time. Submit the
   // next market only after that read finishes; otherwise a single bulk snapshot
   // fills the interactive queue and expires its own siblings during slow I/O.
@@ -1025,7 +1027,7 @@ async function currentProjectionRows(params: CatalogSearchParams = {}) {
 /** Small publication summary for directory counts; no full catalog download on a landing page. */
 async function readCatalogDirectoryCountRowsEditorial() {
   const [manifest,summary]=await Promise.all([readManifest(),readEditorialBrandSummary()]);
-  if(summary.generationId===manifest.generationId) return Object.values(summary.brands).flatMap(brand=>brand.models.map(model=>({make:brand.make,model:model.model,count:model.count})));
+  if(summary.generationId===manifest.generationId) return Object.values(summary.brands).flatMap(brand=>brand.models.map(model=>({make:brand.make,model:model.model,count:model.count-(omitLegacyChinaAggregate()?Number(model.marketCounts.china||0):0)})).filter(row=>row.count>0));
   return (await currentProjectionRows({})).rows.map(row=>({make:row.make,model:row.model,count:1}));
 }
 
@@ -1086,8 +1088,12 @@ async function readCurrentPublicCatalogProjectionEditorial() {
 
 async function readPublicCatalogMarketCountsEditorial() {
   const manifest = await readManifest();
+  const chinaAuthority=omitLegacyChinaAggregate()?await readChinaAggregateAuthority().then(x=>x==="legacy"?"unavailable":x):"legacy";
+  let chinaCount:number|null=null;
+  if(chinaAuthority==='own')chinaCount=await (await import('./prepared-china-http-fixture')).readPreparedChinaHomeCards(0).then(x=>x?.total??null).catch(()=>null);
   const counts = await mapWithConcurrency(MARKETS, 2, async market => {
     if(market === "japan")return [market,0] as const;
+    if(market==="china"&&chinaAuthority!=="legacy")return [market,chinaCount??0] as const;
     if (!Number(manifest.markets?.[market]?.count || 0)) return [market, 0] as const;
     // Counts must not download every full market projection. Prepared landings
     // already validate generation, completeness and today's inventory policy.
@@ -1104,6 +1110,7 @@ async function readPublicCatalogMarketCountsEditorial() {
     generationId: manifest.generationId,
     updatedAt: manifest.updatedAt,
     markets,
+    ...(chinaAuthority!=="legacy"&&chinaCount===null?{countIncomplete:true}:{}),
     total: Object.values(markets).reduce((sum, count) => sum + count, 0),
   };
 }
@@ -1120,11 +1127,11 @@ async function readCatalogBrandCountsEditorial(params: CatalogSearchParams = {})
       const market = filters.market && filters.market !== "any" ? filters.market : undefined;
       // Old summaries still count reviewed aliases. Only the affected make
       // needs its small brand projection; all other counts stay summary-only.
-      const affected = (!market || market === "china") && Object.values(summary.brands).some(brand=>brand.make==="Roewe" && brand.marketCounts.china>0);
+      const affected = !omitLegacyChinaAggregate() && (!market || market === "china") && Object.values(summary.brands).some(brand=>brand.make==="Roewe" && brand.marketCounts.china>0);
       const reviewed = affected ? (await readCurrentBrandProjection("Roewe",manifest.generationId)).items.filter(isReviewedSourceDuplicate) : [];
       const brands = Object.values(summary.brands).map(brand => ({
-        make: brand.make, count: (market ? Number(brand.marketCounts[market] || 0) : brand.count) - reviewed.filter(row=>row.make===brand.make).length,
-        models: brand.models.filter(model => !market || Number(model.marketCounts[market] || 0) > 0).length,
+        make: brand.make, count: (market ? Number(brand.marketCounts[market] || 0) : brand.count-(omitLegacyChinaAggregate()?Number(brand.marketCounts.china||0):0)) - reviewed.filter(row=>row.make===brand.make).length,
+        models: brand.models.filter(model => market ? Number(model.marketCounts[market] || 0) > 0 : model.count-(omitLegacyChinaAggregate()?Number(model.marketCounts.china||0):0)>0).length,
       })).filter(brand => brand.count > 0);
       return {generationId: manifest.generationId, counts: Object.fromEntries(brands.map(brand => [brand.make, brand.count])), modelCounts: Object.fromEntries(brands.map(brand => [brand.make, brand.models]))};
     }
@@ -1171,7 +1178,12 @@ async function readCatalogBrandCountsEditorial(params: CatalogSearchParams = {})
 async function readCatalogBrandModelCountsEditorial(make: string) {
   const filters: CatalogSearchParams = { make };
   const [manifest, summary] = await Promise.all([readManifest(), readEditorialBrandSummary()]);
-  if (summary.generationId === manifest.generationId) return {generationId: manifest.generationId, models: summary.brands[catalogBrandReadModelKey(make)]?.models || []};
+  if (summary.generationId === manifest.generationId) {
+    const models=summary.brands[catalogBrandReadModelKey(make)]?.models||[];
+    return {generationId:manifest.generationId,models:omitLegacyChinaAggregate()?models.map(m=>{
+      const {china,...marketCounts}=m.marketCounts;return {...m,count:m.count-(china||0),marketCounts};
+    }).filter(m=>m.count>0):models};
+  }
   let { generationId, rows } = await currentProjectionRows(filters);
   if (filters.budgetFrom || filters.budgetTo || filters.engineFrom || filters.engineTo || filters.hasPrice) {
     rows=await currentSearchPrices(rows,generationId);
@@ -1386,7 +1398,7 @@ export async function backfillCatalogMarketLandings(options: {refreshDateSensiti
   return {generationId: manifest.generationId, results};
 }
 function withEditorialFacetOptions(facets:CatalogFacets,market?:string):CatalogFacets {
- const entries=editorialEntries().filter(entry=>entry.status==='visible'&&(!market||market==='any'||entry.market===market));
+ const entries=editorialEntries().filter(entry=>entry.status==='visible'&&legacyAggregateMarketAllowed(entry.market)&&(!market||market==='any'||entry.market===market));
  const values=(field:'bodyType'|'drive'|'transmission',existing:string[])=>uniqueText([...existing,...entries.map(entry=>entry.specifications?.[field])]).sort();
  return {...facets,bodyTypes:values('bodyType',facets.bodyTypes),drives:values('drive',facets.drives),transmissions:values('transmission',facets.transmissions)};
 }
@@ -1396,7 +1408,7 @@ async function readCatalogFacetsEditorial(input: CatalogSearchParams = {}): Prom
   const manifest=await readManifest();
   const {sort:_sort,page:_page,pageSize:_size,...filters}=input;
   const params=filters.budgetFrom||filters.budgetTo||filters.hasPrice?filters:{...filters,city:undefined};
-  const key=JSON.stringify([editorialRevision(),new Date(Date.now()+7*3600000).toISOString().slice(0,10),manifest.generationId,Object.entries(params).filter(([,v])=>v!==undefined&&v!=='').sort(([a],[b])=>a.localeCompare(b))]);
+  const key=JSON.stringify([...chinaAggregateCacheKey(),editorialRevision(),new Date(Date.now()+7*3600000).toISOString().slice(0,10),manifest.generationId,Object.entries(params).filter(([,v])=>v!==undefined&&v!=='').sort(([a],[b])=>a.localeCompare(b))]);
   return filteredFacetCache.get(key,()=>readCatalogFacetsUncached(params));
 }
 async function readCatalogFacetsUncached(input: CatalogSearchParams = {}): Promise<CatalogFacets> {
@@ -1434,7 +1446,7 @@ async function readCatalogFacetsUncached(input: CatalogSearchParams = {}): Promi
     || params.mileageFrom || params.mileageTo || params.engineFrom || params.engineTo
     || params.powerFrom || params.powerTo || params.fuel || params.bodyType
     || params.transmission || params.drive || params.auctionGrade || params.auctionDateFrom || params.auctionDateTo);
-  if (!hasFilters && !editorialHasHidden() && (!params.market || params.market === "any")) {
+  if (!hasFilters && !omitLegacyChinaAggregate() && !editorialHasHidden() && (!params.market || params.market === "any")) {
     const [manifest, facets] = await Promise.all([readManifest(), readCurrentFacets()]);
     if (facets.generationId === manifest.generationId) return withEditorialFacetOptions(facets);
     const stored = await readIndex<CatalogFacets | null>(manifest.generationId, "facets.json", null);
@@ -2250,7 +2262,7 @@ async function readBudgetSelection(params:CatalogSearchParams){
  if(defaultBrandQuery && hasBudget)return null;
  if(!hasBudget && !metadataQuery)return null;
  const manifest=await readManifest();
- const key=JSON.stringify([defaultDisplayQuery?"default-display":"general",editorialRevision(),new Date(Date.now()+7*3600000).toISOString().slice(0,10),manifest.generationId,budgetSelectionFilterKey(params)]);
+ const key=JSON.stringify([...chinaAggregateCacheKey(),defaultDisplayQuery?"default-display":"general",editorialRevision(),new Date(Date.now()+7*3600000).toISOString().slice(0,10),manifest.generationId,budgetSelectionFilterKey(params)]);
  return filteredBudgetSelectionCache.get(key,async()=>{
   const index=await readBudgetCountIndex(manifest.generationId,params.market).catch(()=>null);
   if(!index || index.inventoryPolicyVersion!==1 || ![1,2,3].includes(index.version)||index.generationId!==manifest.generationId || (!hasBudget && !Array.isArray(index.otherRows)))return null;
@@ -2274,10 +2286,10 @@ async function readBudgetSelection(params:CatalogSearchParams){
   const sourceRows=await budgetSourceRows(index,wantedMakes,make=>cleanFacet(make).toLocaleLowerCase('ru-RU'));
   const same=(a:unknown,b:unknown)=>cleanFacet(a).toLocaleLowerCase('ru-RU')===cleanFacet(b).toLocaleLowerCase('ru-RU');
   const editedRow=(row:BudgetCountIndex['rows'][number])=>{const metadata=applyCatalogEditorialSpecifications(row[5]);if(metadata===row[5])return row;const edited:typeof row=[...row];edited[5]=metadata;return edited;};
-  const eligibilityContext=JSON.stringify([editorialRevision(),new Date(Date.now()+7*3600000).toISOString().slice(0,10)]);
+  const eligibilityContext=JSON.stringify([...chinaAggregateCacheKey(),editorialRevision(),new Date(Date.now()+7*3600000).toISOString().slice(0,10)]);
   const eligible=await budgetEligibility.get(index,eligibilityContext,original=>{
    const row=editedRow(original);
-   return !editorialHidden({id:row[5].id,market:row[0]}) && catalogInventoryAgeDecision({...row[5],market:row[0]}).eligible && !catalogVehicleExcluded(row[5]);
+   return legacyAggregateMarketAllowed(row[0]) && !editorialHidden({id:row[5].id,market:row[0]}) && catalogInventoryAgeDecision({...row[5],market:row[0]}).eligible && !catalogVehicleExcluded(row[5]);
   });
   // No price/specification filter participates in this membership. Its only
   // authorities are the immutable index, current policy day and editorial
@@ -2681,7 +2693,7 @@ async function countCatalogOffersEditorial(params: CatalogSearchParams) {
   const {page: _page, pageSize: _pageSize, sort: _sort, city, ...filters} = params;
   const query = {...filters, city: filters.budgetFrom || filters.budgetTo || filters.hasPrice ? city : undefined};
   const manifest = await readManifest();
-  const key = JSON.stringify([editorialRevision(),manifest.generationId, Object.entries(query).filter(([,v])=>v!==undefined).sort(([a],[b])=>a.localeCompare(b))]);
+  const key = JSON.stringify([...chinaAggregateCacheKey(),editorialRevision(),manifest.generationId, Object.entries(query).filter(([,v])=>v!==undefined).sort(([a],[b])=>a.localeCompare(b))]);
   return catalogCountCache.get(key, async () => {
     const hasPredicates = Object.entries(filters).some(([name,value]) => name !== "market" && value !== undefined && value !== "");
     if (!hasPredicates) {
@@ -2709,7 +2721,7 @@ async function searchOffersEditorial(params: CatalogSearchParams, internalPageLi
   // Both select identical rows. Share that work without changing any caller's
   // filters, current-day/editorial fence, or bounded cache lifetime.
   const cacheParams={...params,page:params.page||1,pageSize:params.pageSize||24,sort:params.sort||'updatedAt'};
-  const key=JSON.stringify([editorialRevision(),new Date(Date.now()+7*3600000).toISOString().slice(0,10),manifest.generationId,internalPageLimit,Object.entries(cacheParams).filter(([,v])=>v!==undefined&&v!=='').sort(([a],[b])=>a.localeCompare(b))]);
+  const key=JSON.stringify([...chinaAggregateCacheKey(),editorialRevision(),new Date(Date.now()+7*3600000).toISOString().slice(0,10),manifest.generationId,internalPageLimit,Object.entries(cacheParams).filter(([,v])=>v!==undefined&&v!=='').sort(([a],[b])=>a.localeCompare(b))]);
   return filteredSearchCache.get(key,()=>searchOffersUncached(params,internalPageLimit),key,admissionGroup);
 }
 async function searchOffersUncached(params: CatalogSearchParams, internalPageLimit = 48) {
@@ -2800,7 +2812,7 @@ async function searchOffersStored(params: CatalogSearchParams, internalPageLimit
   // market shard + multiple range shards + offers-by-id + ordering and then the
   // same projection again. The Promise cache above also lets facets + results in
   // the same server render share one immutable generation read.
-  const directMarkets = params.market && params.market !== "any" ? [String(params.market)] : MARKETS;
+  const directMarkets = params.market && params.market !== "any" ? [String(params.market)] : MARKETS.filter(legacyAggregateMarketAllowed);
   const directProjectionParts = await mapWithConcurrency(directMarkets, Math.min(7, directMarkets.length || 1), async (market) => ({
     market, projection: await readSearchProjection(manifest.generationId, market),
   }));
@@ -2839,7 +2851,7 @@ async function searchOffersStored(params: CatalogSearchParams, internalPageLimit
   const used: string[] = [];
   const byId = await readIndex<{ byId: Record<string, OfferLocation> }>(manifest.generationId, "offers-by-id.json", { byId: {} });
   const order = await readIndex<{ ids: string[] }>(manifest.generationId, "order-updatedAt.json", { ids: Object.keys(byId.byId) });
-  const idList = (ids ? order.ids.filter((id) => ids.has(id)) : order.ids).filter(id=>!editorialHidden({id,market:byId.byId[id]?.market}));
+  const idList = (ids ? order.ids.filter((id) => ids.has(id)) : order.ids).filter(id=>(!omitLegacyChinaAggregate()||!!byId.byId[id]&&legacyAggregateMarketAllowed(byId.byId[id].market))&&!editorialHidden({id,market:byId.byId[id]?.market}));
   let total = idList.length;
   let pageIds = idList.slice((page - 1) * pageSize, page * pageSize);
 
@@ -2851,7 +2863,7 @@ async function searchOffersStored(params: CatalogSearchParams, internalPageLimit
     sortCatalogSearchRows(projectionRows, params);
     total = projectionRows.length;
     pageIds = projectionRows.slice((page - 1) * pageSize, page * pageSize).map((row) => row.id);
-    const markets = params.market && params.market !== "any" ? [String(params.market)] : MARKETS;
+    const markets = params.market && params.market !== "any" ? [String(params.market)] : MARKETS.filter(legacyAggregateMarketAllowed);
     used.push(...markets.map((market) => `catalog/generations/${manifest.generationId}/indexes/projection/${cleanShard(market)}.json`));
   }
 
@@ -3160,23 +3172,23 @@ export async function projectPreparedChinaFixtureSearch(rows:CatalogSearchProjec
  return {total:matches.length,page,pageSize,items,usedIndexShards:[]};
 }
 
-export async function searchOffers(params: CatalogSearchParams, internalPageLimit = 48, admissionGroup?: 'related'){return withCatalogEditorial(()=>withCatalogColorFilter(params,()=>searchOffersEditorial(params,internalPageLimit,admissionGroup)));}
+export async function searchOffers(params: CatalogSearchParams, internalPageLimit = 48, admissionGroup?: 'related'){return withChinaAggregateAuthority(params.market,()=>withCatalogEditorial(()=>withCatalogColorFilter(params,()=>searchOffersEditorial(params,internalPageLimit,admissionGroup))));}
 
 export async function searchOffersWithoutBudgetIndexForTests(params:CatalogSearchParams,internalPageLimit=48){return withCatalogEditorial(()=>searchOffersWithoutBudgetIndexForTestsEditorial(params,internalPageLimit));}
 
-export async function countCatalogOffers(params: CatalogSearchParams){return withCatalogEditorial(()=>withCatalogColorFilter(params,()=>countCatalogOffersEditorial(params)));}
+export async function countCatalogOffers(params: CatalogSearchParams){return withChinaAggregateAuthority(params.market,()=>withCatalogEditorial(()=>withCatalogColorFilter(params,()=>countCatalogOffersEditorial(params))));}
 
-export async function readCatalogFacets(params: CatalogSearchParams = {}){return withCatalogEditorial(()=>withCatalogColorFilter(params,()=>readCatalogFacetsEditorial(params)));}
+export async function readCatalogFacets(params: CatalogSearchParams = {}){return withChinaAggregateAuthority(params.market,()=>withCatalogEditorial(()=>withCatalogColorFilter(params,()=>readCatalogFacetsEditorial(params))));}
 
-export async function readCatalogBrandCounts(params: CatalogSearchParams = {}){return withCatalogEditorial(()=>withCatalogColorFilter(params,()=>readCatalogBrandCountsEditorial(params)));}
+export async function readCatalogBrandCounts(params: CatalogSearchParams = {}){return withChinaAggregateAuthority(params.market,()=>withCatalogEditorial(()=>withCatalogColorFilter(params,()=>readCatalogBrandCountsEditorial(params))));}
 
-export async function readCatalogBrandModelCounts(make: string){return withCatalogEditorial(()=>readCatalogBrandModelCountsEditorial(make));}
+export async function readCatalogBrandModelCounts(make: string){return withChinaAggregateAuthority(undefined,()=>withCatalogEditorial(()=>readCatalogBrandModelCountsEditorial(make)));}
 
-export async function readCatalogDirectoryCountRows(){return withCatalogEditorial(()=>readCatalogDirectoryCountRowsEditorial());}
+export async function readCatalogDirectoryCountRows(){return withChinaAggregateAuthority(undefined,()=>withCatalogEditorial(()=>readCatalogDirectoryCountRowsEditorial()));}
 
-export async function readCurrentPublicCatalogProjection(){return withCatalogEditorial(()=>readCurrentPublicCatalogProjectionEditorial());}
+export async function readCurrentPublicCatalogProjection(){return withChinaAggregateAuthority(undefined,()=>withCatalogEditorial(()=>readCurrentPublicCatalogProjectionEditorial()));}
 
-export async function readPublicCatalogMarketCounts(){return withCatalogEditorial(()=>readPublicCatalogMarketCountsEditorial());}
+export async function readPublicCatalogMarketCounts(){return withChinaAggregateAuthority(undefined,()=>withCatalogEditorial(()=>readPublicCatalogMarketCountsEditorial()));}
 
 const editorialSummaryCache=new DetailReadCache<CatalogBrandSummary>({maxEntries:4,maxBytes:8*1024*1024,ttlMs:30_000,concurrency:2});
 async function readEditorialBrandSummary(){
@@ -3198,13 +3210,13 @@ async function readEditorialBrandSummary(){
 
 export async function readHomeCatalogSnapshot(perMarket=6){
  const timing=createHomePhaseTiming();
- return timing.measure("snapshotContext",()=>withCatalogEditorial(()=>timing.measure("snapshotBody",async()=>{
+ return timing.measure("snapshotContext",()=>withChinaAggregateAuthority(undefined,()=>withCatalogEditorial(()=>timing.measure("snapshotBody",async()=>{
  const snapshot=await timing.measure("snapshotPrepared",()=>readHomeCatalogSnapshotOriginal(perMarket,timing));
  const marketCounts={...snapshot.marketCounts};
- let items=snapshot.items.map(item=>applyCatalogEditorial(item));
+ let items=snapshot.items.filter(item=>legacyAggregateMarketAllowed(item.market)).map(item=>applyCatalogEditorial(item));
  const markets=MARKETS.slice(0,0);
  for(const market of MARKETS){
-  if(!editorialHasHidden(market))continue;
+  if(!legacyAggregateMarketAllowed(market)||!editorialHasHidden(market))continue;
   if(homeSnapshotMarketIsEmpty(snapshot,market))continue;
   markets.push(market);
  }
@@ -3214,7 +3226,15 @@ export async function readHomeCatalogSnapshot(perMarket=6){
   marketCounts[market]=result.total;
   items=[...items.filter(item=>item.market!==market),...result.items];
  }
- return {...snapshot,items:items.sort(compareCatalogDisplayOrder),marketCounts,total:Object.values(marketCounts).reduce((a,b)=>a+b,0)};
-} )));}
+ let independentChina=false,countIncomplete=false;
+ if(omitLegacyChinaAggregate()){
+  independentChina=true;
+  const fresh=await timing.measure("snapshotEditorial:china",()=>import('./prepared-china-http-fixture').then(m=>m.readPreparedChinaHomeCards(Math.min(12,Math.max(1,perMarket))))).catch(()=>null);
+  marketCounts.china=fresh?.total??0;
+  countIncomplete=!fresh;
+  if(fresh)items.push(...fresh.items);
+ }
+ return {...snapshot,items:items.sort(compareCatalogDisplayOrder),marketCounts,total:Object.values(marketCounts).reduce((a,b)=>a+b,0),...(independentChina?{independentChina:true,countIncomplete}:{})};
+} ))));}
 
 export async function getOffer(id:string){return withCatalogEditorial(async()=>{const offer=await getOfferWithoutEditorial(id);return offer&&!editorialHidden(offer)?applyCatalogEditorial(offer):null;});}

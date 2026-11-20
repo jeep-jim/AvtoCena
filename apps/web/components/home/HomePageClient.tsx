@@ -258,15 +258,17 @@ export default function HomePageClient({ japanAuctions, dealerGallerySlot, speci
         // A current-read-model shard can briefly lag the immutable public manifest
         // during publication. Never replace a visible market with an empty/partial
         // browser refresh: keep its last known cards until the new shard is ready.
+        const independentChina=catalogPayload?.independentChina===true;
         setItems((previousItems) => marketIds.flatMap((marketId) => {
           const nextMarketItems = incomingItems.filter((item) => item.market === marketId);
+          if(marketId==='china'&&independentChina)return nextMarketItems.filter(item=>item.raw?.preparedChinaSelection?.generationId);
           const previousMarketItems = previousItems.filter((item) => item.market === marketId);
           return nextMarketItems.length ? nextMarketItems : previousMarketItems;
         }));
         setMarketCounts((previousCounts) => Object.fromEntries(marketIds.map((marketId) => {
           const incomingCount = Math.max(0, Number(incomingCounts[marketId] || 0));
           const previousCount = Math.max(0, Number(previousCounts[marketId] || 0));
-          return [marketId, incomingCount > 0 ? incomingCount : previousCount];
+          return [marketId, marketId==='china'&&independentChina?incomingCount:incomingCount>0?incomingCount:previousCount];
         })));
         setCatalogTotal((previousCount) => {
           const incomingTotal = Math.max(0, Number(catalogPayload?.total || 0));

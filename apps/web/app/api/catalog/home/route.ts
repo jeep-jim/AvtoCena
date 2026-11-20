@@ -13,7 +13,7 @@ export async function GET() {
     const result = await readHomeCatalogSnapshot(10);
     let rows = [...(result.items || [])] as any[];
     const missingMarkets = Object.entries(result.marketCounts || {})
-      .filter(([market, count]) => Number(count || 0) > 0 && !rows.some((row) => String(row?.market || "") === market))
+      .filter(([market, count]) => (market!=="china"||!result.independentChina) && Number(count || 0) > 0 && !rows.some((row) => String(row?.market || "") === market))
       .map(([market]) => market);
     if (missingMarkets.length) {
       const recovered = await Promise.all(missingMarkets.map(async (market) => {
@@ -35,7 +35,13 @@ export async function GET() {
     }
     const readMs = performance.now() - started;
     const [combined,green] = await Promise.all([withAjesCount({...result,items:rows}),readGreenCorner().catch(()=>null)]);
-    const items = await applyActiveBusinessPricingBatch(combined.items);
+    let items;
+    if(!result.independentChina)items=await applyActiveBusinessPricingBatch(combined.items);
+    else{
+      const priced=await applyActiveBusinessPricingBatch(combined.items.filter(item=>!item.preparedChinaSelection));
+      const byId=new Map(priced.map(item=>[item.id,item]));
+      items=combined.items.map(item=>item.preparedChinaSelection?item:byId.get(item.id)??item);
+    }
     const pricingMs = performance.now() - started - readMs;
     return NextResponse.json({ ...combined, total:combined.total+(green?.items.length||0),countIncomplete:combined.countIncomplete||!green, items }, {
       headers: { "Cache-Control": "no-store, max-age=0", "Server-Timing": `catalog-read;dur=${readMs.toFixed(1)}, catalog-pricing;dur=${pricingMs.toFixed(1)}` },

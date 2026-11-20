@@ -1,3 +1,6 @@
+import {omitLegacyChinaAggregate,withChinaAggregateAuthority} from '@/lib/catalog/china-public-aggregate';
+import {readMixedMarketCounts} from '@/lib/catalog/mixed-market-count';
+import {chinaRegcloudRuntimeConfigured} from '@/lib/catalog/china-regcloud-object-reader';
 import {selectedCatalogMarkets,marketSelectionUrl} from "@/lib/catalog/market-selection";
 import {readGreenCorner,readGreenCornerPage} from '@/lib/catalog/green-corner';
 import {GET as greenSearch} from "@/app/api/catalog/green/route";
@@ -30,10 +33,18 @@ export async function GET(request: Request) {
   const p = u.searchParams;
   const markets=selectedCatalogMarkets(p.get('market'));
   if(markets.length>1&&p.get('countOnly')==='1'){
-    const responses=await Promise.all(markets.map(m=>GET(new Request(marketSelectionUrl(u,m),request))));
-    const failed=responses.find(r=>!r.ok);if(failed)return failed;
-    const parts=await Promise.all(responses.map(r=>r.json()));
-    return NextResponse.json({ok:true,total:parts.reduce((sum,p)=>sum+(Number(p.total)||0),0),countIncomplete:parts.some(p=>p.countIncomplete||p.total==null),items:[]},{headers:{'Cache-Control':'private, max-age=15'}});
+    // Preserve the incumbent behavior and cache for all other traffic. A new
+    // failure policy is needed only when an independent China is selected.
+    if(!chinaRegcloudRuntimeConfigured()||!markets.includes('china')){
+      const responses=await Promise.all(markets.map(m=>GET(new Request(marketSelectionUrl(u,m),request))));
+      const failed=responses.find(r=>!r.ok);if(failed)return failed;
+      const parts=await Promise.all(responses.map(r=>r.json()));
+      return NextResponse.json({ok:true,total:parts.reduce((sum,p)=>sum+(Number(p.total)||0),0),countIncomplete:parts.some(p=>p.countIncomplete||p.total==null),items:[]},{headers:{'Cache-Control':'private, max-age=15'}});
+    }
+    const counts=await readMixedMarketCounts(markets,(market,signal)=>GET(new Request(marketSelectionUrl(u,market),{
+      method:'GET',headers:request.headers,signal,
+    })),{signal:request.signal});
+    return NextResponse.json({ok:true,...counts,items:[]},{headers:{'Cache-Control':counts.countIncomplete?'no-store':'private, max-age=15'}});
   }
   if(p.get('stock')==='green'&&(!p.get('market')||p.get('market')==='japan'))return greenSearch(request);
   const chinaPrepared=p.get('market')==='china'&&hasPreparedChinaHttpFixture();
@@ -124,13 +135,16 @@ export async function GET(request: Request) {
     return NextResponse.json({ok:true,...result}, {headers:{"Cache-Control":"public, max-age=30, s-maxage=30", "Server-Timing":`catalog-page;dur=${(performance.now()-started).toFixed(1)}`}});
   }
   if (p.get("countOnly") === "1") {
-    let result = await withAjesCount(await countCatalogOffers(query),query);
+    return withChinaAggregateAuthority(query.market,async()=>{
+    const local=await countCatalogOffers(query);
+    let result=await withAjesCount(omitLegacyChinaAggregate()?{...local,independentChina:true,countIncomplete:true}:local,query);
     if(!query.market){
       const green=await readGreenCorner().catch(()=>null);
       const greenTotal=green?(await readGreenCornerPage(green.items,{...Object.fromEntries(p),page:"1"})).total:0;
-      result={...result,total:result.total+greenTotal,countIncomplete:result.countIncomplete||!green};
+      result={...result,total:result.total+greenTotal,countIncomplete:result.countIncomplete||!green||chinaRegcloudRuntimeConfigured()};
     }
-    return NextResponse.json({ok: true, ...result, items: []}, {headers: {"Cache-Control": "public, max-age=30, s-maxage=30", "Server-Timing": `catalog-count;dur=${(performance.now()-started).toFixed(1)}`}});
+    return NextResponse.json({ok: true, ...result, items: []}, {headers: {"Cache-Control": !query.market&&chinaRegcloudRuntimeConfigured()?"no-store":"public, max-age=30, s-maxage=30", "Server-Timing": `catalog-count;dur=${(performance.now()-started).toFixed(1)}`}});
+    });
   }
   const [result, facets, rateExtras] = await Promise.all([
     searchOffers(query),
@@ -148,5 +162,5 @@ export async function GET(request: Request) {
   const candidates=crossMarket?result.items.filter(offer=>(!liveKorea||offer.market!=='korea')&&(!liveChina||offer.market!=='china')):result.items;
   const items = await applyActiveBusinessPricingBatch(candidates);
   const pricingMs = performance.now() - started - readMs;
-  return NextResponse.json({ ok: true, ...result, ...(crossMarket?{total:null,partial:true,countIncomplete:true}:{}), items, ...extras }, { headers: { "Cache-Control": "public, max-age=30, s-maxage=30", "Server-Timing": `catalog-read;dur=${readMs.toFixed(1)}, catalog-pricing;dur=${pricingMs.toFixed(1)}` } });
+  return NextResponse.json({ ok: true, ...result, ...(crossMarket?{total:null,partial:true,countIncomplete:true}:{}), items, ...extras }, { headers: { "Cache-Control": crossMarket&&chinaRegcloudRuntimeConfigured()?"no-store":"public, max-age=30, s-maxage=30", "Server-Timing": `catalog-read;dur=${readMs.toFixed(1)}, catalog-pricing;dur=${pricingMs.toFixed(1)}` } });
 }

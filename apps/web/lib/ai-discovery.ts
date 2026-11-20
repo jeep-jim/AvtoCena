@@ -1,3 +1,4 @@
+import {legacyAggregateMarketAllowed,withChinaAggregateAuthority} from './catalog/china-public-aggregate';
 import {readCatalogEditorial,editorialHidden,applyCatalogEditorial} from "./catalog/editorial";
 import {offerPath, type OfferUrlData} from "./catalog/offer-url";
 import { gzipSync } from "node:zlib";
@@ -51,10 +52,8 @@ export async function readAiCatalogProjection(): Promise<AiCatalogProjection> {
 }
 
 export async function readAiCatalogManifest(): Promise<AiCatalogManifest> {
-  return readDataJson<AiCatalogManifest>("catalog/manifest.json", {
-    generationId: "",
-    markets: {},
-  });
+  const manifest=await readDataJson<AiCatalogManifest>("catalog/manifest.json", {generationId:"",markets:{}});
+  return withChinaAggregateAuthority(undefined,async()=>({...manifest,markets:Object.fromEntries(Object.entries(manifest.markets??{}).filter(([market])=>legacyAggregateMarketAllowed(market)))}));
 }
 
 export type AiSitemapProjection = { generationId: string; items: Array<Pick<CatalogSearchProjection, 'id' | 'market' | 'updatedAt' | 'cardImageUrl' | 'make' | 'model' | 'trim' | 'year'>> };
@@ -81,7 +80,7 @@ export async function readAiSitemapProjection(storage?: JsonStorage): Promise<Ai
   });
   if(!projection)return null;
   const editorial=await readCatalogEditorial();
-  return {...projection,items:projection.items.filter(item=>!editorialHidden(item,editorial)).map(item=>applyCatalogEditorial(item,editorial))};
+  return withChinaAggregateAuthority(undefined,async()=>({...projection,items:projection.items.filter(item=>legacyAggregateMarketAllowed(item.market)&&!editorialHidden(item,editorial)).map(item=>applyCatalogEditorial(item,editorial))}));
 }
 
 export function buildAiSitemapProjection(projection: AiCatalogProjection): AiSitemapProjection {

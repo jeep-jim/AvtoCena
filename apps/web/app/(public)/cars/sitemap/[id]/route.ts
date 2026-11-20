@@ -1,3 +1,4 @@
+import {chinaRegcloudRuntimeConfigured} from '@/lib/catalog/china-regcloud-object-reader';
 import {readGreenCorner} from "@/lib/catalog/green-corner";
 import { absoluteAvtocenaUrl, catalogOfferUrl, readAiSitemapProjection } from "@/lib/ai-discovery";
 
@@ -63,7 +64,7 @@ export async function GET(_request: Request, { params }: { params: Promise<{ id:
     status: 200,
     headers: {
       "content-type": "application/xml; charset=utf-8",
-      "cache-control": "public, max-age=300, s-maxage=300, stale-while-revalidate=3600",
+      "cache-control": chinaRegcloudRuntimeConfigured()?"no-store":"public, max-age=300, s-maxage=300, stale-while-revalidate=3600",
       "x-avtocena-catalog-generation": projection.generationId || "unknown",
       "x-avtocena-sitemap-id": String(id),
       "x-avtocena-sitemap-url-count": String(rows.length),

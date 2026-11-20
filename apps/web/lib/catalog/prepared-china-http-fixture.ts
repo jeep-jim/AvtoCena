@@ -334,3 +334,31 @@ export async function readPreparedChinaFixtureOffer(id:string,city?:string,clien
   return {offer,withdrawn:!offer?s.withdrawn?.get(id):undefined,assertCurrent:s.assertCurrent};
  }catch{throw new PreparedChinaFixtureUnavailable();}
 }
+
+/** Fast homepage bridge: independent count and a small admitted prefix, not
+ * an aggregate-sort claim. At most four exact prepared offer blocks. */
+export async function readPreparedChinaHomeCards(rawLimit:number,options?:{city?:string;navigation?:true}){
+ if(!preparedChinaNormalRegcloudEnabled())return null;
+ const s=await open();if(!s)return null;
+ const limit=Math.max(0,Math.min(12,Math.floor(rawLimit)||0));
+ const city=options?.city?preparedChinaDeliveryQuote(options.city).city:undefined;
+ if(city&&s.snapshot.deliveryTariffVersion!==DELIVERY_TARIFF_VERSION)throw new PreparedChinaFixtureUnavailable();
+ const items:ReturnType<typeof preparedChinaModelPublicItem>[]=[];
+ let reads=0;const id=new Set<string>();
+ for(const chunk of limit?s.snapshot.chunks:[]){
+  if(items.length>=limit||reads>=4)break;
+  const meta=await s.snapshot.readChunk(chunk);
+  for(let i=0;i<meta.partCount&&items.length<limit&&reads<4;i++){
+   const part=await meta.load(i);reads++;
+   for(const row of part.projection.items){
+    if(items.length>=limit)break;
+    if(row.market!=='china'||id.has(row.id))throw new PreparedChinaFixtureUnavailable();
+    id.add(row.id);
+    const adjusted=city?projectPreparedChinaDelivery(row,city):row;
+    items.push(attachChinaSelection(preparedChinaModelPublicItem(adjusted,adjusted.totalRub||0),s.snapshot.generationId,city));
+   }
+  }
+ }
+ await s.assertCurrent();
+ return {generationId:s.snapshot.generationId,total:s.snapshot.rows,items,facets:options?.navigation?s.snapshot.navigationFacets:undefined};
+}

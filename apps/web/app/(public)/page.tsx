@@ -78,7 +78,13 @@ export default async function HomePage({ searchParams }: { searchParams?: Promis
   ]);
   const [greenItems, pricedItems] = await Promise.all([
     timing.measure("greenPricing",()=>applyActiveBusinessPricingBatch((green?.items || []).slice(0,10).map(publicGreenOffer))),
-    timing.measure("catalogPricing",()=>applyActiveBusinessPricingBatch(catalog.items)).catch((error) => {
+    timing.measure("catalogPricing",async()=>{
+      const allowed=catalog.items.filter(item=>!(item as {preparedChinaSelection?:unknown}).preparedChinaSelection);
+      if(allowed.length===catalog.items.length)return applyActiveBusinessPricingBatch(catalog.items);
+      const repriced=await applyActiveBusinessPricingBatch(allowed);
+      const byId=new Map(repriced.map(item=>[item.id,item]));
+      return catalog.items.map(item=>(item as {preparedChinaSelection?:unknown}).preparedChinaSelection?item:byId.get(item.id)??item);
+    }).catch((error) => {
       console.error("home_initial_pricing_failed", error);
       // Preserve the last audited quote if settings storage is temporarily down.
       return catalog.items;

@@ -1,3 +1,4 @@
+import {chinaRegcloudRuntimeConfigured} from '@/lib/catalog/china-regcloud-object-reader';
 import { aiCatalogManifestCount, readAiCatalogManifest } from "@/lib/ai-discovery";
 
 export const dynamic = "force-dynamic";
@@ -38,7 +39,7 @@ export async function GET() {
     status: 200,
     headers: {
       "content-type": "application/xml; charset=utf-8",
-      "cache-control": "public, max-age=300, s-maxage=300, stale-while-revalidate=3600",
+      "cache-control": chinaRegcloudRuntimeConfigured()?"no-store":"public, max-age=300, s-maxage=300, stale-while-revalidate=3600",
       "x-avtocena-catalog-count": String(total),
       "x-avtocena-sitemap-count": String(count),
     },

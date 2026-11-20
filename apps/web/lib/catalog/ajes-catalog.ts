@@ -112,10 +112,10 @@ export async function readAjesCatalogPage(params:Record<string,unknown>,measure?
  return {...first,...page,page:query.page||1,filteredByPage:filter.active,total:exact,countSummary,items:(query.sort&&query.sort!=="updatedAt"?sortCatalogRows(page.items,query.sort,String(params.city||"")):page.items).map((v:any)=>publicOffer(v)),generationId:first!.observedAt};
 }
 /** Add once to totals built from the separate local inventory. A failure is not zero inventory. */
-export async function withAjesCount<T extends {total:number;marketCounts?:Record<string,number>}>(value:T,params:Record<string,unknown>={}):Promise<T & {countIncomplete?:boolean;marketCountInfo:Record<string,AjesCountSummary|null>}>{
+export async function withAjesCount<T extends {total:number;marketCounts?:Record<string,number>;independentChina?:boolean}>(value:T,params:Record<string,unknown>={}):Promise<T & {countIncomplete?:boolean;marketCountInfo:Record<string,AjesCountSummary|null>}>{
  let result:T & {countIncomplete?:boolean;marketCountInfo:Record<string,AjesCountSummary|null>}={...value,marketCountInfo:{}};
  const hasRows=Array.isArray((value as any).items);
- const markets=['japan','china','korea'].filter(m=>!params.market||params.market===m);
+ const markets=['japan','china','korea'].filter(m=>(m!=='china'||!value.independentChina)&&(!params.market||params.market===m));
  const updates=await Promise.all(markets.map(async market=>{
   if(market!=='japan'&&(!value.marketCounts||!Object.prototype.hasOwnProperty.call(value.marketCounts,market)))return null;
   if(market==='korea' && !await usesAjesMarket('korea'))return null;
