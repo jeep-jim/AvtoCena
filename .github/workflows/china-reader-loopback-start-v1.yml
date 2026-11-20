@@ -1,0 +1,40 @@
+name: Start exact China candidate on loopback only
+on:
+  push:
+    branches: [main]
+    paths: [.github/market-runs/china-reader-loopback-start-v1.json]
+permissions:
+  contents: read
+concurrency:
+  group: avtocena-china-reader-loopback-start-v1
+  cancel-in-progress: false
+jobs:
+  dark-boot:
+    if: github.repository == 'jeep-jim/AvtoCena' && github.repository_id == '1289722938' && github.ref == 'refs/heads/main' && github.run_attempt == '1' && github.event.head_commit.message == 'Start protected China reader on private loopback'
+    environment: regcloud-staging
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: Verify loaded image permit, then start only that loopback service
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          umask 077
+          python3 - <<'PY'
+          import json,pathlib
+          f=pathlib.Path('.github/market-runs/china-reader-loopback-start-v1.json')
+          assert f.stat().st_size<1024
+          assert json.loads(f.read_bytes())=={'version':1,'image':'0bfe542a991a69aaa4f416726a221e4e845986cc15c98a414e24ea7cff462984','release':'85296f6b8797aaa93227b69da7e9e9e928e8f9b5','verifiedLoadRun':44707412587,'noPublicIngress':True,'noCatalogWrite':True}
+          PY
+          bash -n .github/china-reader-off-v1/start-loopback.sh
+          sandbox=$(mktemp -d)
+          trap 'rm -rf -- "$sandbox"' EXIT
+          printf '%s\n' "$SSH_PRIVATE_KEY" > "$sandbox/key"
+          unset SSH_PRIVATE_KEY
+          test -s "$sandbox/key"
+          timeout 180s ssh -i "$sandbox/key" -o BatchMode=yes -o ConnectTimeout=15 -o ServerAliveInterval=20 -o ServerAliveCountMax=3 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts" root@151.248.113.177 '/usr/bin/bash -s' < .github/china-reader-off-v1/start-loopback.sh
