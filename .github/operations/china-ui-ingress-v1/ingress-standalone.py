@@ -243,7 +243,7 @@ def cut(io, pivot):
     baseline=io.protected('incumbent')
     io.health('candidate','candidate')
     io.grid('candidate')
-    require(io.protected('candidate')==baseline,'protected_dark_parity')
+    io.protected_match(baseline,io.protected('candidate'),'dark')
     io.backup_exclusive(before,after)
     io.identities()
     require(io.read_config()==before,'foreign_pre_switch')
@@ -256,7 +256,7 @@ def cut(io, pivot):
         io.health('public','candidate')
         io.grid('gateway')
         io.grid('public')
-        require(io.protected('public')==baseline,'protected_public_parity')
+        io.protected_match(baseline,io.protected('public'),'public')
         io.identities()
         require(io.read_config()==after,'foreign_post_switch')
         io.record_success()
@@ -328,15 +328,39 @@ def sample(where):
          'bmw_detail_price')
     return v['total'],rid,price
 def protected(where):
+    need(where in ('incumbent','candidate','public'),'protected_endpoint')
     def one(m):
         p='/api/catalog/search?'+urllib.parse.urlencode({'market':m,'pageSize':2,'sort':'updatedAt'})
-        v=json.loads(raw_ok(where,p,256*1024))
-        rows=v.get('items')
-        need(v.get('ok') is True and not v.get('partial') and type(v.get('total')) is int and v['total']>0 and
-             isinstance(rows,list) and 0<len(rows)<=2 and all(r.get('market')==m and isinstance(r.get('id'),str) and
-             type(r.get('totalRub')) is int and r['totalRub']>0 for r in rows),'protected_parity_sample')
-        return (m,v['total'],tuple((r['id'],r['totalRub'],r.get('calculationStatus')) for r in rows))
+        try:
+            try: http,_,body=request(where,p,256*1024)
+            except TimeoutError:return (m,'unavailable','bounded_timeout')
+            v=json.loads(body)
+            if http==503 and v.get('ok') is False:
+                reason=v.get('reason') or v.get('error')
+                need(isinstance(reason,str) and re.fullmatch(r'[a-z0-9_:-]{1,80}',reason),'typed_unavailable')
+                # Reason is retained for exact parity; never emitted to logs.
+                return (m,'unavailable','typed_503',reason)
+            rows=v.get('items')
+            need(http==200 and v.get('ok') is True and not v.get('partial') and type(v.get('total')) is int and v['total']>0 and
+                 isinstance(rows,list) and 0<len(rows)<=2 and all(isinstance(r,dict) and r.get('market')==m and
+                 isinstance(r.get('id'),str) and bool(r['id']) and
+                 ('totalRub' not in r or r['totalRub'] is None or type(r['totalRub']) is int and r['totalRub']>0) and
+                 ('calculationStatus' not in r or r['calculationStatus'] is None or isinstance(r['calculationStatus'],str)) for r in rows),
+                 'protected_sample_shape')
+            # Missing, null and an actual RUB amount are three distinct states.
+            return (m,'exact',v['total'],tuple((r['id'],'totalRub' in r,r.get('totalRub'),
+                                                'calculationStatus' in r,r.get('calculationStatus')) for r in rows))
+        except Exception as exc:
+            raise RuntimeError('protected_'+where+'_'+m+'_invalid') from exc
     with concurrent.futures.ThreadPoolExecutor(max_workers=2) as ex:return tuple(ex.map(one,NEIGHBORS))
+def protected_match(baseline,observed,stage):
+    need(stage in ('dark','public'),'protected_stage')
+    for a,b in zip(baseline,observed,strict=True):
+        if a!=b:
+            need(a[0] in NEIGHBORS,'protected_market_enum')
+            raise RuntimeError('protected_'+stage+'_'+a[0]+'_changed')
+    # Only enum and degraded-category facts; never IDs, amount, raw body or reason.
+    print(json.dumps({'status':'protected_'+stage+'_compared','unavailableMarkets':[a[0] for a in baseline if a[1]=='unavailable']}),flush=True)
 def fsync_dir(path):
     fd=os.open(path,os.O_RDONLY|os.O_DIRECTORY|os.O_NOFOLLOW)
     try:os.fsync(fd)
@@ -409,6 +433,7 @@ class IO:
             self.comparison=got
         else:need(got==self.comparison,'bmw_public_parity')
     def protected(self,where):return protected(where)
+    def protected_match(self,baseline,observed,stage):protected_match(baseline,observed,stage)
     def backup_exclusive(self,before,after):
         parent=self.rollback_dir.parent
         need(parent.resolve()==parent and parent.is_dir() and os.stat(parent).st_uid==0,'receipt_parent')
