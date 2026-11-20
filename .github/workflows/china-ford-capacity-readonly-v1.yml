@@ -1,0 +1,35 @@
+name: Check Ford hold slot capacity without changes
+on:
+  push:
+    branches: [main]
+    paths: [.github/market-runs/china-ford-capacity-readonly-v1.sha256]
+permissions:
+  contents: read
+jobs:
+  read:
+    if: github.repository == 'jeep-jim/AvtoCena' && github.repository_id == '1289722938' && github.ref == 'refs/heads/main' && github.run_attempt == '1' && github.event.head_commit.message == 'Check exact Ford hold deployment capacity without changes'
+    environment: regcloud-staging
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 2
+          persist-credentials: false
+      - name: Verify exact single-added trigger and preflight bytes
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          test "$(git show -s --format=%P HEAD | wc -w)" = 1
+          readonly marker=.github/market-runs/china-ford-capacity-readonly-v1.sha256
+          readonly op=.github/operations/china-ford-capacity-readonly-v1
+          readonly actor=cc6a8d7d6e223a9dca2511ad4d800ebc8abf65868a6597f20a2caf251c8a2e90 wrapper=1ef77826bf3f4de357862f34fe77d6ba0050661cf59280dad33eb6573dc2be48
+          cmp -s <(git diff-tree --no-commit-id -r --name-status --no-renames -z HEAD^ HEAD) <(printf 'A\0%s\0' "$marker")
+          cmp -s "$marker" <(printf '%s\n' "$actor")
+          printf '%s  %s\n' "$actor" "$op/preflight.py" "$wrapper" "$op/read-via-ssh.sh" | sha256sum --check --status
+      - name: Read existing three runtime roles and unused loopback 3003
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+        shell: bash
+        run: bash .github/operations/china-ford-capacity-readonly-v1/read-via-ssh.sh
