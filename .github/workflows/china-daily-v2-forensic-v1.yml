@@ -1,13 +1,13 @@
-name: Audit exact failed China daily archive metadata without changes
+name: Read exact China v2 archive metadata without changes
 on:
   push:
     branches: [main]
-    paths: [.github/market-runs/china-offer-witness-v2.sha256]
+    paths: [.github/market-runs/china-daily-v2-forensic-v2.sha256]
 permissions:
   contents: read
 jobs:
   read:
-    if: github.repository == 'jeep-jim/AvtoCena' && github.repository_id == '1289722938' && github.run_attempt == '1' && github.event.head_commit.message == 'Audit exact failed China daily archive metadata without changes'
+    if: github.repository == 'jeep-jim/AvtoCena' && github.repository_id == '1289722938' && github.run_attempt == '1' && github.event.head_commit.message == 'Read exact China v2 archive metadata without changes'
     environment: regcloud-staging
     runs-on: ubuntu-latest
     timeout-minutes: 8
@@ -15,9 +15,8 @@ jobs:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
           ref: ${{ github.sha }}
-          fetch-depth: 2
+          fetch-depth: 3
           persist-credentials: false
-          fetch-depth: 2
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
           ref: 22867cbcfaee27b2e8917b6bf880e44827f67b60
@@ -31,24 +30,24 @@ jobs:
           set -euo pipefail
           test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
           python3 - <<'PY2'
-          import json, os
+          import json, os, subprocess
           with open(os.environ['GITHUB_EVENT_PATH']) as f:
-              ref = json.load(f)
-          head = ref.get('head_commit') or {}
-          changes = ref.get('commits') or []
-          assert ref.get('ref') == 'refs/heads/main' and not ref.get('forced') and not ref.get('deleted')
-          assert len(changes) == 1 and head.get('id') == changes[0].get('id') == os.environ['GITHUB_SHA']
-          import subprocess
+              event = json.load(f)
+          commits = event.get('commits') or []
+          head = event.get('head_commit') or {}
+          assert event.get('ref') == 'refs/heads/main' and event.get('forced') is False and event.get('deleted') is False
+          assert len(commits) == 1 and head.get('id') == commits[0].get('id') == os.environ['GITHUB_SHA']
           parent = subprocess.check_output(['git', 'rev-parse', 'HEAD^'], text=True).strip()
-          assert ref.get('before') == parent, 'unexpected push parent'
-          diff = subprocess.check_output(['git','diff-tree','--no-commit-id','--name-status','-r','HEAD'],text=True).splitlines()
-          assert diff == ['A\t.github/market-runs/china-offer-witness-v2.sha256'], 'not the single exact added marker'
+          assert event.get('before') == parent
           PY2
+          test "$(git rev-parse HEAD^^)" = 7394f054de7ac2ad783d1345af2e027adf8a7334
+          test "$(git show -s --format=%P HEAD^ | wc -w)" = 1
+          cmp -s <(git diff-tree --no-commit-id -r --name-status --no-renames -z HEAD^^ HEAD^) <(printf 'M\0%s\0' .github/workflows/china-daily-v2-forensic-v1.yml)
           test "$(git -C actor rev-parse HEAD)" = 22867cbcfaee27b2e8917b6bf880e44827f67b60
           pin=3a4b3f2ed860af84352b087ed66c639cc25dc7a4f85757a42bfcba0b0e4a48bc
           test "$(git show -s --format=%P HEAD | wc -w)" = 1
-          cmp -s <(git diff-tree --no-commit-id -r --name-status --no-renames -z HEAD^ HEAD) <(printf 'A\0%s\0' .github/market-runs/china-daily-v2-forensic-v1.sha256)
-          cmp -s .github/market-runs/china-offer-witness-v2.sha256 <(printf '%s\n' "$pin")
+          cmp -s <(git diff-tree --no-commit-id -r --name-status --no-renames -z HEAD^ HEAD) <(printf 'A\0%s\0' .github/market-runs/china-daily-v2-forensic-v2.sha256)
+          cmp -s .github/market-runs/china-daily-v2-forensic-v2.sha256 <(printf '%s\n' "$pin")
           printf '%s  %s\n' "$pin" .github/operations/china-daily-v2-forensic-v1/forensic.mts | sha256sum -c --status
           cp .github/operations/china-daily-v2-forensic-v1/forensic.mts actor/forensic-entry.mts
           cd actor && npm ci --ignore-scripts --no-audit --no-fund
