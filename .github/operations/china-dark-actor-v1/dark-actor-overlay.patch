@@ -1,23 +1,25 @@
 diff --git a/apps/web/lib/catalog/china-regcloud-cut-switch.ts b/apps/web/lib/catalog/china-regcloud-cut-switch.ts
 --- a/apps/web/lib/catalog/china-regcloud-cut-switch.ts
 +++ b/apps/web/lib/catalog/china-regcloud-cut-switch.ts
-@@ -6,13 +6,14 @@
+@@ -6,13 +6,15 @@
  const SHA=/^[a-f0-9]{64}$/;
  const fail=(code:string):never=>{throw Error('china_regcloud_switch:'+code);};
  export type VerifiedChinaRuntimeProbe={
 - version:1;kind:'normal-china-runtime-readback'|'normal-china-legacy-readback';readySha256?:string;legacyManifestSha256?:string;generationId:string;
+- buildSha256:string;checkedAt:number;cardId:string;listRub:number;detailRub:number;filteredCount:number;
 + version:1;kind:'normal-china-runtime-readback'|'normal-china-legacy-readback'|'private-china-candidate-readback';readySha256?:string;legacyManifestSha256?:string;generationId:string;
-  buildSha256:string;checkedAt:number;cardId:string;listRub:number;detailRub:number;filteredCount:number;
++ buildSha256:string;checkedAt:number;cardId:string;listRub:number;detailRub:number;filteredCount:number;canonicalCardUri?:string;
  };
  export type ChinaOwnSwitchPermit={
   version:1;market:'china';kind:'china-own-public-cut-cas-v1';action:'activate'|'rollback';
   storage:ChinaConfiguredStorageScope;expectedBaseSha256:string;expectedPublicControlSha256:string|null;
   target:ChinaPointerTarget;bootstrapPrevious?:ChinaPointerTarget;expectedRuntimeProbeSha256:string;validUntil:number;
 + darkActivation?:'isolated-runtime-before-ingress';
++ retryRolledBackFirstCut?:true;
  };
  /** Called by an independently authenticated owner-run service only. No admin
   * endpoint or default permission. This is the sole mutable key; candidate
-@@ -21,12 +22,17 @@
+@@ -21,12 +23,19 @@
   storage:ObjectJsonStorage;permit:ChinaOwnSwitchPermit;expectedPermitSha256:string;
   assertApprovedRunner:(permit:Readonly<ChinaOwnSwitchPermit>,sha256:string)=>Promise<void>;
   verifyNormalRuntimeReadback:(target:ChinaPointerTarget)=>Promise<VerifiedChinaRuntimeProbe>;
@@ -32,10 +34,12 @@ diff --git a/apps/web/lib/catalog/china-regcloud-cut-switch.ts b/apps/web/lib/ca
      p.version!==1||p.market!=='china'||p.kind!=='china-own-public-cut-cas-v1'||!['activate','rollback'].includes(p.action)||
 +    (p.darkActivation!==undefined&&(p.darkActivation!=='isolated-runtime-before-ingress'||p.action!=='activate'||
 +      typeof input.assertSameDarkRuntimeLease!=='function'))||
++    (p.retryRolledBackFirstCut!==undefined&&(p.retryRolledBackFirstCut!==true||!p.darkActivation||
++      p.action!=='activate'||p.bootstrapPrevious!==undefined||p.expectedPublicControlSha256===null))||
      !validChinaPointerTarget(p.target)||!SHA.test(p.expectedBaseSha256)||!SHA.test(p.expectedRuntimeProbeSha256)||
      !(p.expectedPublicControlSha256===null||SHA.test(p.expectedPublicControlSha256))||
      !Number.isSafeInteger(p.validUntil)||Date.now()>=p.validUntil||typeof input.assertApprovedRunner!=='function'||
-@@ -39,7 +45,8 @@
+@@ -39,11 +48,17 @@
       Object.entries(p.storage).some(([k,v])=>readConfiguredRegcloudScope()[k as keyof ChinaConfiguredStorageScope]!==v)||
       key!==credentialKey())return fail('scope_or_expiry');
   };
@@ -45,7 +49,21 @@ diff --git a/apps/web/lib/catalog/china-regcloud-cut-switch.ts b/apps/web/lib/ca
   await auth();
   const before=await readChinaPublicState(storage);
   if((before?.checksum??null)!==p.expectedPublicControlSha256||
-@@ -69,7 +76,7 @@
+     chinaObjectDigest(before?.state.active??null)!==p.expectedBaseSha256)return fail('base_changed');
++ // A first-cut rollback can only retry the exact object already retained
++ // as previous. This does not grant a general rebase or create/delete path.
++ if(p.retryRolledBackFirstCut&&(!before||before.state.revision!==2||
++    !chinaLegacyRollback(before.state.active)||!before.state.previous||
++    chinaObjectDigest(before.state.previous)!==chinaObjectDigest(p.target)))return fail('not_exact_rolled_back_first_cut');
+  if(p.action==='rollback'&&(!before?.state.previous||chinaObjectDigest(before.state.previous)!==chinaObjectDigest(p.target)||p.bootstrapPrevious))
+   return fail('rollback_target');
+  if(p.action==='activate'&&(chinaLegacyRollback(p.target)||p.target.generationId===before?.state.active.generationId||
+@@ -65,11 +80,11 @@
+   return {stage,assertPointer:stage.assertPointer};
+  };
+  const [target,backup]=await Promise.all([verify(p.target),verify(previous)]);
+- if(p.action==='activate'&&target.stage?.durable.expectedChinaPublicBaseSha256!==p.expectedBaseSha256)return fail('candidate_base');
++ if(p.action==='activate'&&target.stage?.durable.expectedChinaPublicBaseSha256!==(p.retryRolledBackFirstCut?chinaObjectDigest(null):p.expectedBaseSha256))return fail('candidate_base');
   const proof=await input.verifyNormalRuntimeReadback(p.target);
   const selected=p.target;
   const matching=chinaLegacyRollback(selected)?proof?.kind==='normal-china-legacy-readback'&&proof.legacyManifestSha256===selected.manifestSha256&&proof.readySha256===undefined:
@@ -58,7 +76,7 @@ diff --git a/scripts/catalog-china-own-control-switch.ts b/scripts/catalog-china
 new file mode 100644
 --- /dev/null
 +++ b/scripts/catalog-china-own-control-switch.ts
-@@ -0,0 +1,205 @@
+@@ -0,0 +1,235 @@
 +/** Owner-run China-only compare-and-swap; never changes Nginx, containers, or cursors. */
 +import {createHash} from 'node:crypto';
 +import {ObjectJsonStorage} from '../apps/web/lib/data';
@@ -85,6 +103,7 @@ new file mode 100644
 + target:ChinaPublicRef;previous:ChinaLegacyRollback;expectedArchiveSha256:string;expectedManifestSha256:string;expectedPricingReceiptSha256:string;
 + expectedAdmittedRows:number;expectedBaseSha256:string;validUntil:number;rollbackUntil:number;previewBundleSha256:string;previewGrantSha256:string;
 + candidate:Instance;incumbent:Instance;query:Query;legacyQuery:Query;
++ retryRollbackControlSha256?:string;
 + writeExactly:'china-independent-control-only'|'no-publication';noIngressChange:true;cursorAdvanceAuthorized:false;
 +};
 +const validQuery=(q:Query)=>q&&Object.keys(q).length===2&&[q.make,q.model].every(x=>typeof x==='string'&&x.length>0&&x.length<=64&&!/[\u0000-\u001f\u007f]/.test(x));
@@ -103,7 +122,8 @@ new file mode 100644
 +  validInstance(p.candidate)&&validInstance(p.incumbent)&&p.candidate.port!==p.incumbent.port&&
 +  p.candidate.release!==p.incumbent.release&&p.candidate.imageSha256!==p.incumbent.imageSha256&&
 +  p.incumbent.name==='avtocena-production'&&p.candidate.name==='avtocena-china-candidate-'+p.candidate.release.slice(0,12)&&
-+  validQuery(p.query)&&validQuery(p.legacyQuery),'plan_scope');
++  validQuery(p.query)&&validQuery(p.legacyQuery)&&
++  (p.retryRollbackControlSha256===undefined||p.retryRollbackControlSha256===rolledBackFirstControlSha(p)),'plan_scope');
 + const deepFreeze=(x:any):any=>{if(!x||typeof x!=='object')return x;Object.values(x).forEach(deepFreeze);return Object.freeze(x);};
 + return deepFreeze(p);
 +}
@@ -147,10 +167,21 @@ new file mode 100644
 + privateCandidate:()=>Promise<VerifiedChinaRuntimeProbe>;normalCandidate:(privateProof:VerifiedChinaRuntimeProbe)=>Promise<VerifiedChinaRuntimeProbe>;
 + normalLegacy:()=>Promise<VerifiedChinaRuntimeProbe>;
 + storeOrdinaryProof?:(proof:VerifiedChinaRuntimeProbe)=>Promise<void>;
++ onFailureBeforeRollback?:(reason:string)=>void;
 + onPhase?:(phase:'scope_and_owner'|'host_lease'|'own_baseline'|'legacy_manifest'|'candidate_ready'|'legacy_http'|'private_candidate'|'control_cas'|'prepared_http'|'final_readback')=>void;
 +};
++function rolledBackFirstControlSha(p:Readonly<ChinaDarkSwitchPlan>){
++ return chinaObjectDigest({version:1,market:'china',revision:2,active:p.previous,previous:p.target});
++}
 +export function expectedDarkControlSha256(p:Readonly<ChinaDarkSwitchPlan>){
-+ return chinaObjectDigest({version:1,market:'china',revision:1,active:p.target,previous:p.previous});
++ return chinaObjectDigest({version:1,market:'china',revision:p.retryRollbackControlSha256?3:1,active:p.target,previous:p.previous});
++}
++function safeOriginalFailure(error:unknown){
++ const e=error as Error|undefined;
++ const message=typeof e?.message==='string'?e.message:'';
++ const typed=message.match(/^china_dark_switch:(ordinary_loopback_(?:build|list|count|pinned_card_link|pinned_card_redirect|card|response_limit|json|http_[1-5]\d{2})|probe_evidence|private_normal_parity|written_pointer_identity|postcheck_pointer_changed)$/);
++ return typed?.[1]??(e?.name==='TimeoutError'||e?.name==='AbortError'?'request_timeout':
++  e?.message==='fetch failed'?'fetch_failed':'unclassified_post_cas_failure');
 +}
 +/** Ingress failure fallback: callable only after incumbent ingress and the
 + * same actor/job lease are proved again, within its pre-approved rollback window. */
@@ -190,26 +221,40 @@ new file mode 100644
 +  await services.assertDarkLease();
 + };
 + phase('scope_and_owner');await checkpoint(false,true);
-+ phase('own_baseline');need(await readChinaPublicState(storage)===null,'initial_control_not_absent');
++ const expectedOwn=async()=>{
++  const own=await readChinaPublicState(storage);
++  if(p.retryRollbackControlSha256){
++   need(own?.checksum===p.retryRollbackControlSha256&&own.state.revision===2&&
++    chinaObjectDigest(own.state.active)===chinaObjectDigest(p.previous)&&
++    chinaObjectDigest(own.state.previous)===chinaObjectDigest(p.target),'rolled_back_baseline_changed');
++   return own;
++  }
++  need(own===null,'initial_control_not_absent');return null;
++ };
++ phase('own_baseline');const before=await expectedOwn();
++ const assertOwnBase=async()=>{
++  const current=await expectedOwn();
++  need((current?.etag??null)===(before?.etag??null),'initial_control_etag_changed');
++ };
 + phase('legacy_manifest');await assertChinaLegacyRollback(storage,p.previous);
 + phase('candidate_ready');const stage=await openChinaStageObjectFiles(storage,p.target,async()=>{
 +  await services.assertDarkLease();
-+  need(await readChinaPublicState(storage)===null,'initial_control_changed');
++  await assertOwnBase();
 + });
 + need(stage.durable.archiveSha256===p.expectedArchiveSha256&&stage.durable.manifestSha256===p.expectedManifestSha256&&stage.durable.pricingReceiptSha256===p.expectedPricingReceiptSha256&&
 +   stage.durable.admittedRows===p.expectedAdmittedRows&&stage.durable.expectedChinaPublicBaseSha256===p.expectedBaseSha256,'ready_identity');
 + phase('legacy_http');const legacy=await services.normalLegacy();requireProbe(legacy,p,'normal-china-legacy-readback');
 + phase('private_candidate');const privateProof=await services.privateCandidate();requireProbe(privateProof,p,'private-china-candidate-readback');
-+ return {privateProof,checkpoint};
++ await assertOwnBase();return {privateProof,checkpoint,assertOwnBase};
 +}
 +/** Same pre-CAS probes as the writer, but this path cannot construct a permit,
 + * enter the switch/rollback code or produce an ingress receipt. */
 +export async function verifyChinaDarkControlOnly(raw:Buffer,expectedPlanSha:string,services:PreflightServices){
 + const p=parseChinaDarkSwitchPlan(raw,expectedPlanSha);
 + need(p.writeExactly==='no-publication','verify_only_authority');
-+ const {checkpoint}=await preflight(p,services);
++ const {checkpoint,assertOwnBase}=await preflight(p,services);
 + services.onPhase?.('final_readback');await checkpoint();
-+ need(await readChinaPublicState(services.storage)===null,'initial_control_changed');
++ await assertOwnBase();
 + return {status:'china_prepublication_verified' as const,generationId:p.target.generationId,storageWrites:0,publicIngressChanged:false,cursorAdvanced:false};
 +}
 +/** Internal reviewed host actor. The shell supplies real lease/image/ingress
@@ -217,18 +262,20 @@ new file mode 100644
 +export async function runChinaDarkControlSwitch(raw:Buffer,expectedPlanSha:string,services:Services){
 + const p=parseChinaDarkSwitchPlan(raw,expectedPlanSha),{storage}=services;
 + need(p.writeExactly==='china-independent-control-only','activation_authority');
-+ const {privateProof,checkpoint}=await preflight(p,services);
++ const {privateProof,checkpoint,assertOwnBase}=await preflight(p,services);
 + const permit:ChinaOwnSwitchPermit={version:1,kind:'china-own-public-cut-cas-v1',market:'china',action:'activate',storage:boundStorage,
-+  expectedBaseSha256:p.expectedBaseSha256,expectedPublicControlSha256:null,target:p.target,bootstrapPrevious:p.previous,
++  expectedBaseSha256:p.retryRollbackControlSha256?chinaObjectDigest(p.previous):p.expectedBaseSha256,
++  expectedPublicControlSha256:p.retryRollbackControlSha256??null,target:p.target,
++  ...(p.retryRollbackControlSha256?{retryRolledBackFirstCut:true}:{bootstrapPrevious:p.previous}),
 +  expectedRuntimeProbeSha256:chinaObjectDigest(privateProof),validUntil:p.validUntil,darkActivation:'isolated-runtime-before-ingress'};
 + const permitSha=chinaObjectDigest(permit);
 + const exactNew=expectedDarkControlSha256(p);
 + let attempted=false;
 + try{
-+  services.onPhase?.('control_cas');await checkpoint();
++  services.onPhase?.('control_cas');await checkpoint();await assertOwnBase();
 +  attempted=true;
 +  const write=await switchChinaRegcloudCut({storage,permit,expectedPermitSha256:permitSha,
-+   async assertApprovedRunner(_p,actual){need(actual===permitSha,'activate_permit');await checkpoint();},
++   async assertApprovedRunner(_p,actual){need(actual===permitSha,'activate_permit');await checkpoint();await assertOwnBase();},
 +   assertSameDarkRuntimeLease:services.assertDarkLease,
 +   async verifyNormalRuntimeReadback(){requireProbe(privateProof,p,'private-china-candidate-readback');return privateProof;}});
 +  need(write.controlSha256===exactNew,'written_pointer_identity');
@@ -242,11 +289,12 @@ new file mode 100644
 +   runtimeRelease:p.candidate.release,publicIngressChanged:false,cursorAdvanced:false};
 + }catch(error){
 +  if(!attempted)throw error;
++  services.onFailureBeforeRollback?.(safeOriginalFailure(error));
 +  let observed;
 +  try{observed=await readChinaPublicState(storage);}catch{return failChinaDarkSwitch('pointer_outcome_unknown_do_not_repeat');}
-+  if(!observed)throw error;
++  if((observed?.checksum??null)===(p.retryRollbackControlSha256??null))throw error;
 +  // Never overwrite a racing or unidentifiable control, even for rollback.
-+  if(observed.checksum!==exactNew)return failChinaDarkSwitch('pointer_changed_do_not_repeat');
++  if(observed?.checksum!==exactNew)return failChinaDarkSwitch('pointer_changed_do_not_repeat');
 +  try{
 +   await checkpoint(true);
 +   // Refresh actual still-serving legacy proof; it is not the candidate
@@ -268,7 +316,7 @@ diff --git a/scripts/catalog-china-own-control-switch-host.mts b/scripts/catalog
 new file mode 100644
 --- /dev/null
 +++ b/scripts/catalog-china-own-control-switch-host.mts
-@@ -0,0 +1,255 @@
+@@ -0,0 +1,278 @@
 +/** Existing RegCloud operator host, not a public route. Run with the existing
 + * flock held by this process (flock --exclusive --nonblock --no-fork ...). */
 +import fs from 'node:fs/promises';
@@ -279,6 +327,7 @@ new file mode 100644
 +import {pathToFileURL} from 'node:url';
 +import {ObjectJsonStorage} from '../apps/web/lib/data';
 +import {canonicalCatalogHref} from '../apps/web/lib/catalog/catalog-routes';
++import {offerCardPath} from '../apps/web/lib/catalog/offer-url';
 +import {chinaObjectDigest,readConfiguredRegcloudScope,readChinaPublicState,chinaLegacyRollback} from '../apps/web/lib/catalog/china-regcloud-object-reader';
 +import {createChinaSwitchJobAuthenticator,failChinaDarkSwitch,parseChinaDarkSwitchPlan,expectedDarkControlSha256,runChinaDarkControlSwitch,runChinaDarkControlRollback,verifyChinaDarkControlOnly,type ChinaDarkSwitchPlan} from './catalog-china-own-control-switch';
 +import type {VerifiedChinaRuntimeProbe} from '../apps/web/lib/catalog/china-regcloud-cut-switch';
@@ -324,12 +373,20 @@ new file mode 100644
 +  return !!m&&ancestors.has(Number(m[1]))&&BigInt('0x'+m[2])===major&&BigInt('0x'+m[3])===minor&&BigInt(m[4])===f.ino;
 + }),'host_runtime_lease_not_held');
 +}
-+async function readResponse(url:URL,max:number,html:boolean,timeout=15000){
++async function readResponse(url:URL,max:number,html:boolean,timeout=15000,allowedCardRedirect?:(u:URL)=>boolean,onCardResolved?:(u:URL)=>void){
 + const r=await fetch(url,{method:'GET',redirect:'manual',headers:{accept:html?'text/html':'application/json','cache-control':'no-cache'},signal:AbortSignal.timeout(timeout)});
++ if(allowedCardRedirect&&(r.status===307||r.status===308)){
++  const location=r.headers.get('location');
++  await r.body?.cancel();
++  let move;try{move=location&&new URL(location,url);}catch{return failChinaDarkSwitch('ordinary_loopback_pinned_card_redirect');}
++  if(!move||move.href===url.href||!allowedCardRedirect(move))return failChinaDarkSwitch('ordinary_loopback_pinned_card_redirect');
++  return readResponse(move,max,html,timeout,undefined,onCardResolved); // exactly one same-cut canonical redirect
++ }
 + if(r.status!==200||!r.body){await r.body?.cancel();return failChinaDarkSwitch('ordinary_loopback_http_'+r.status);}
 + const chunks:Uint8Array[]=[];let n=0;
 + for await(const c of r.body){n+=c.length;if(n>max)return failChinaDarkSwitch('ordinary_loopback_response_limit');chunks.push(c);}
 + const raw=new TextDecoder('utf-8',{fatal:true}).decode(Buffer.concat(chunks,n));
++ onCardResolved?.(url);
 + return html?raw:tryJson(raw,'ordinary_loopback_json');
 +}
 +function healthMatches(health:any,app:ChinaDarkSwitchPlan['candidate']){
@@ -340,36 +397,48 @@ new file mode 100644
 + const origin='http://127.0.0.1:'+app.port;
 + const get=(pathname:string,max:number,html=false)=>readResponse(new URL(pathname,origin),max,html);
 + need(healthMatches(await get('/api/health',64*1024),app),'ordinary_loopback_build');
-+ const filter=new URLSearchParams({market:'china',...q,sort:'totalRub',page:'1',marketPage:'1',pageSize:'1'});
++ const filter=new URLSearchParams({market:'china',...q,sort:'totalRub',page:'1',pageSize:'1',...(legacy?{marketPage:'1'}:{})});
 + const countFilter=new URLSearchParams(filter);
 + if(!legacy){filter.set('preparedCut',target.generationId);countFilter.set('preparedCut',target.generationId);}
 + const list=await get('/api/catalog/search?'+filter,512*1024),row=list?.items?.[0];
 + need(list?.ok===true&&row?.market==='china'&&ID.test(row.id??'')&&positive(row.totalRub)&&
-+  (legacy||list.generationId===target.generationId&&row.preparedChinaSelection?.generationId===target.generationId)&&
++  (legacy||list.generationId===target.generationId&&list.items.length===1&&row.preparedChinaSelection?.generationId===target.generationId)&&
 +  (!expect||row.id===expect.cardId&&row.totalRub===expect.listRub),'ordinary_loopback_list');
 + countFilter.set('countOnly','1');
 + const count=await get('/api/catalog/search?'+countFilter,128*1024);
 + need(count?.ok===true&&count.countIncomplete!==true&&positive(count.total)&&count.total===list.total&&
-+  (legacy||count.generationId===target.generationId)&&(!expect||count.total===expect.filteredCount),'ordinary_loopback_count');
-+ // A production middleware 308 would otherwise turn this exact BMW/X3
-+ // query into a fetch failure before the candidate can even be probed.
-+ const htmlPage=await get(canonicalCatalogHref('/cars/china?'+filter),5*1024*1024,true);
++  (legacy||count.generationId===target.generationId&&Array.isArray(count.items)&&count.items.length===0)&&(!expect||count.total===expect.filteredCount),'ordinary_loopback_count');
 + const prefix='/cars/offer/'+encodeURIComponent(row.id);
-+ const direct=[...String(htmlPage).matchAll(/href="([^"]+)"/g)].map(m=>m[1].replace(/&amp;/g,'&'))
-+  .find(href=>{
++ let card,canonicalCardUri:string|undefined;
++ if(legacy){
++  // Preserve the already verified legacy HTML-list link contract.
++  const htmlPage=await get(canonicalCatalogHref('/cars/china?'+filter),5*1024*1024,true);
++  const direct=[...String(htmlPage).matchAll(/href="([^"]+)"/g)].map(m=>m[1].replace(/&amp;/g,'&')).find(href=>{
 +   if(!href.startsWith(prefix+'/')&&!href.startsWith(prefix+'?'))return false;
 +   const link=new URL(href,origin);
-+   return link.origin===origin&&!link.username&&!link.password&&!link.hash&&
-+    (legacy?!link.searchParams.has('preparedCut')&&(!link.searchParams.has('market')||link.searchParams.get('market')==='china'):
-+     link.searchParams.get('market')==='china'&&link.searchParams.get('preparedCut')===target.generationId);
++   return link.origin===origin&&!link.username&&!link.password&&!link.hash&&!link.searchParams.has('preparedCut')&&
++    (!link.searchParams.has('market')||link.searchParams.get('market')==='china');
 +  });
-+ need(direct,'ordinary_loopback_pinned_card_link');
-+ const card=await get(direct!,5*1024*1024,true),main=String(card).match(/<main\b[^>]*\bdata-offer-id="[^"]+"[^>]*>/)?.[0];
++  need(direct,'ordinary_loopback_pinned_card_link');card=await get(direct!,5*1024*1024,true);
++ }else{
++  // Filtered SSR list uses the unrelated full compatibility selector. Verify
++  // the normal indexed API row via its exact production card-link helper,
++  // then the real compiled SSR card, explicitly bound to this active cut.
++  const accepts=(link:URL)=>link.origin===origin&&!link.username&&!link.password&&!link.hash&&
++   link.pathname.startsWith(prefix+'/')&&/^[a-z0-9-]{1,160}$/.test(link.pathname.slice(prefix.length+1))&&
++   [...link.searchParams].length===2&&link.searchParams.get('market')==='china'&&link.searchParams.get('preparedCut')===target.generationId;
++  const link=new URL(offerCardPath(row),origin);
++  need(accepts(link),'ordinary_loopback_pinned_card_link');
++  card=await readResponse(link,5*1024*1024,true,15000,accepts,resolved=>{canonicalCardUri=resolved.pathname+resolved.search;});
++  need(canonicalCardUri,'ordinary_loopback_pinned_card_link');
++ }
++ const main=String(card).match(/<main\b[^>]*\bdata-offer-id="[^"]+"[^>]*>/)?.[0];
 + const cardId=main?.match(/\bdata-offer-id="([^"]+)"/)?.[1],amount=Number(main?.match(/\bdata-offer-price-rub="(\d+)"/)?.[1]);
 + need(cardId===row.id&&amount===row.totalRub,'ordinary_loopback_card');
 + return {version:1 as const,kind:legacy?'normal-china-legacy-readback' as const:'normal-china-runtime-readback' as const,
 +  ...(legacy?{legacyManifestSha256:p.previous.manifestSha256}:{readySha256:p.target.readySha256}),
-+  generationId:target.generationId,buildSha256:app.imageSha256,checkedAt:Date.now(),cardId:row.id,listRub:row.totalRub,detailRub:amount,filteredCount:count.total};
++  generationId:target.generationId,buildSha256:app.imageSha256,checkedAt:Date.now(),cardId:row.id,listRub:row.totalRub,detailRub:amount,filteredCount:count.total,
++  ...(canonicalCardUri?{canonicalCardUri}:{})};
 +}
 +const PREVIEW_PHASES=new Set(['boot','grant','runtime','ready','index','search','detail','readback']);
 +const PREVIEW_REASONS=new Set([
@@ -503,7 +572,9 @@ new file mode 100644
 +   const reportPhase=(name:string)=>{phase=name;};
 +   const result=values['verify-only']?await verifyChinaDarkControlOnly(raw,pin,{...services,onPhase:reportPhase}):
 +    values['rollback-control']?await runChinaDarkControlRollback(raw,pin,values['expect-control-sha']!,services):
-+    await runChinaDarkControlSwitch(raw,pin,{...services,onPhase:reportPhase,async storeOrdinaryProof(proof){
++    await runChinaDarkControlSwitch(raw,pin,{...services,onPhase:reportPhase,onFailureBeforeRollback(reason){
++     console.error(JSON.stringify({status:'china_switch_failed_before_reconciliation',phase,originalReason:reason,publicIngressChanged:false,cursorAdvanced:false}));
++    },async storeOrdinaryProof(proof){
 +     await fs.writeFile(path.join(evidenceHome,'ordinary.json'),JSON.stringify(proof),{flag:'wx',mode:0o600});
 +     await fs.writeFile(path.join(evidenceHome,'host.json'),JSON.stringify(services.hostLeaseSnapshot()),{flag:'wx',mode:0o600});
 +    }});

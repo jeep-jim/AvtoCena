@@ -46,6 +46,16 @@ def match(value,regex):return isinstance(value,str) and bool(re.fullmatch(regex,
 def title(value):
     return isinstance(value,str) and value==value.strip() and 0<len(value)<=80 and value.isprintable() and ',' not in value and '|' not in value
 
+def exact_card_uri(o,gen):
+    prefix='/cars/offer/'+o['cardId']
+    route=o.get('canonicalCardUri')
+    need(isinstance(route,str) and 1<=len(route)<=1024 and route.startswith(prefix+'/'),'live_card_uri')
+    parsed=urlsplit(route)
+    need(not parsed.scheme and not parsed.netloc and not parsed.fragment and
+         match(parsed.path,re.escape(prefix)+r'/[a-z0-9-]{1,160}') and
+         sorted(parse_qsl(parsed.query,keep_blank_values=True))==[('market','china'),('preparedCut',gen)],'live_card_uri')
+    return route
+
 def plan_valid(p,now):
     need(p.get('version')==1 and p.get('kind')=='china-final-ingress-v1' and
          [p.get(k) for k in ('appSha','previousSha','protectedCalc','candidateImage','oldImage','oldPort','candidatePort')]==
@@ -69,6 +79,7 @@ def plan_valid(p,now):
          o.get('generationId')==c['generationId'] and o.get('buildSha256')==NEW_IMAGE.removeprefix('sha256:') and
          positive(o.get('checkedAt'),10**14) and 0<=now-o['checkedAt']<=180000 and match(o.get('cardId'),ID) and
          positive(o.get('listRub')) and o.get('listRub')==o.get('detailRub') and positive(o.get('filteredCount')),'ordinary_receipt')
+    exact_card_uri(o,c['generationId'])
     need(title(p.get('make')) and title(p.get('model')),'model_scope')
     return p
 
@@ -246,7 +257,7 @@ def host_china(target,p):
             need(row.get('market')=='china' and row.get('id')==o['cardId'] and row.get('totalRub')==o['listRub'] and
                  row.get('preparedChinaSelection',{}).get('generationId')==gen,'live_list_card')
     prefix='/cars/offer/'+o['cardId']
-    route=prefix+'?'+urlencode({'market':'china','preparedCut':gen})
+    route=exact_card_uri(o,gen)
     status,loc,html=http_get(target,route,4*1024*1024)
     if status in (307,308):
         url=urlsplit(urljoin('https://'+HOST+route,loc or ''))

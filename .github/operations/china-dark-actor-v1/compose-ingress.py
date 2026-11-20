@@ -22,7 +22,7 @@ def main():
  dark=json.loads(read(root,'dark.json'));normal=json.loads(read(root,'ordinary.json'));host=json.loads(read(root,'host.json'));control=json.loads(read(root,'control.json'))
  need(dark.get('status')=='china_dark_control_verified' and dark.get('publicIngressChanged') is False and
   control.get('status')=='exact_dark_control' and control.get('storageWrites')==0 and
-  control.get('controlSha256')==dark.get('controlSha256') and control.get('revision')==1 and
+  control.get('controlSha256')==dark.get('controlSha256') and control.get('revision')==(3 if p.get('retryRollbackControlSha256') else 1) and
   normal.get('kind')=='normal-china-runtime-readback' and normal.get('readySha256')==control.get('readySha256')==p['target']['readySha256'])
  candidate=p['candidate'];old=p['incumbent'];clock=int(time.time()*1000)
  lifecycle=min(p['validUntil'],clock+180000);need(lifecycle>=clock+60000)

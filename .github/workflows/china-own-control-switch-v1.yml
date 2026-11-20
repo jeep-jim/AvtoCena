@@ -42,7 +42,7 @@ jobs:
           umask 077
           root="$GITHUB_WORKSPACE"
           ops="$root/.github/operations/china-dark-actor-v1"
-          test "$(sha256sum "$ops/APPROVED_CODE.sha256" | cut -d ' ' -f 1)" = 285806b3e9355ce397cdbbc8d66f5b141682cf42715c351e3689da03ea8ae66d
+          test "$(sha256sum "$ops/APPROVED_CODE.sha256" | cut -d ' ' -f 1)" = 49f6ad78fbe37ad67fef017a9fd645856590dbf4fe6a9f562cdc41ffe6d9369f
           (cd "$ops"; sha256sum --strict --check --status APPROVED_CODE.sha256)
           [[ "$(git -C writer rev-parse HEAD)" == f4dc98aaab916b29419d173994d66562aa5901f1 ]]
           [[ "$(git -C reader rev-parse HEAD)" == 85296f6b8797aaa93227b69da7e9e9e928e8f9b5 ]]
@@ -88,7 +88,7 @@ jobs:
           mode=activate
           if [[ "$CHINA_VERIFY_ONLY" == true ]]; then mode=verify-only; fi
           test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
-          test "$(sha256sum "$ops/APPROVED_CODE.sha256" | cut -d ' ' -f 1)" = 285806b3e9355ce397cdbbc8d66f5b141682cf42715c351e3689da03ea8ae66d
+          test "$(sha256sum "$ops/APPROVED_CODE.sha256" | cut -d ' ' -f 1)" = 49f6ad78fbe37ad67fef017a9fd645856590dbf4fe6a9f562cdc41ffe6d9369f
           (cd "$ops"; sha256sum --strict --check --status APPROVED_CODE.sha256)
           scratch="$(mktemp -d "$RUNNER_TEMP/china-dark-switch.XXXXXXXX")"
           trap 'rm -rf -- "$scratch"' EXIT
@@ -106,7 +106,12 @@ jobs:
           raw=(ops/'approved-switch.json').read_bytes()
           assert re.fullmatch(r'[a-f0-9]{64}\n',marker) and hashlib.sha256(raw).hexdigest()==marker.strip()
           assert 0<len(raw)<=32*1024
-          s=json.loads(raw);assert set(s)=={'version','ownerScopeSha256','target','previous','archiveSha256','manifestSha256','pricingReceiptSha256','admittedRows','query','legacyQuery','validBefore','authorizesIngress','ownerIngressApprovalSha256'}
+          s=json.loads(raw)
+          required={'version','ownerScopeSha256','target','previous','archiveSha256','manifestSha256','pricingReceiptSha256','admittedRows','query','legacyQuery','validBefore','authorizesIngress','ownerIngressApprovalSha256'}
+          assert required<=set(s)<=required|{'retryRollbackControlSha256'}
+          retry=s.get('retryRollbackControlSha256')
+          if 'retryRollbackControlSha256' in s:
+           assert retry=='b008d226ef7a56629c71dae09fcad5114509285b3a76b5cb2c9825f5fd1bc23c'
           assert s['version']==1 and s['target']['runId'].startswith('full-fresh-') and re.fullmatch(r'[a-f0-9]{64}',s['ownerScopeSha256'])
           assert all(re.fullmatch(r'[a-f0-9]{64}',s[k]) for k in ('archiveSha256','manifestSha256','pricingReceiptSha256'))
           assert 0<s['admittedRows']<=290044 and s['previous']=={'kind':'legacy-unmodified','generationId':'gen_1794878284419_a611dfcf','manifestSha256':'4c34c20d9784b571414390cab450ceeeaee60b00c168476100419ec5c05cb038'}
@@ -140,6 +145,7 @@ jobs:
            'candidate':{'release':new,'calculationVersion':calc,'imageSha256':new_image,'name':'avtocena-china-candidate-'+new[:12],'port':3000},
            'incumbent':{'release':old,'calculationVersion':calc,'imageSha256':old_image,'name':'avtocena-production','port':3001},
            'query':s['query'],'legacyQuery':s['legacyQuery'],'writeExactly':'no-publication' if verify else 'china-independent-control-only','noIngressChange':True,'cursorAdvanceAuthorized':False}
+          if retry is not None:p['retryRollbackControlSha256']=retry
           write('plan.json',p)
           PY
           unset GITHUB_TOKEN
