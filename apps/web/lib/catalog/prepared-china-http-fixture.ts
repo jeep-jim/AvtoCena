@@ -23,6 +23,9 @@ type Fixture={storage:ObjectJsonStorage;fetchMock:typeof fetch;origin:string;buc
 type Stage={files:StageChinaFiles;indexedModelOnly:true;independentChina:IndependentRead};
 type Regcloud={regcloud:ChinaStageObjectFiles;indexedModelOnly:true;independentChina:IndependentRead};
 const scope=new AsyncLocalStorage<Readonly<Fixture|Stage|Regcloud>>();
+export class PreparedChinaCutChanged extends Error {
+ constructor(){super('prepared_china_cut_changed');}
+}
 export class PreparedChinaFixtureUnavailable extends Error {
  constructor(){super('prepared_china_unavailable');}
 }
@@ -218,12 +221,13 @@ function compatibilityRows(s:OpenFixture){
 /** Bounded correctness fixture, not a full-feed performance path. Search
  * reuses same-cut projections and the existing exact filters/order/paging. */
 export async function readPreparedChinaCompatibility(params:CatalogSearchParams,options:{
- countOnly:boolean;includeFacets:boolean;marketPage:boolean;unsupported:boolean;navigationFacets?:true;
+ countOnly:boolean;includeFacets:boolean;marketPage:boolean;unsupported:boolean;navigationFacets?:true;expectedGeneration?:string|null;
 }){
  if(!hasIndependentChinaHttpFixture()||params.market!=='china')return null;
  try{
   const s=await open();
-  if(!s)return null; // the only permission to use the original route
+  if(!s){if(options.expectedGeneration)throw new PreparedChinaCutChanged();return null;} // authenticated legacy rollback only
+  if(options.expectedGeneration&&options.expectedGeneration!==s.snapshot.generationId)throw new PreparedChinaCutChanged();
   if(options.unsupported)throw new PreparedChinaFixtureUnavailable();
   const {city}=params;
   const deliveryCity=city?preparedChinaDeliveryQuote(city).city:undefined;
@@ -233,12 +237,30 @@ export async function readPreparedChinaCompatibility(params:CatalogSearchParams,
   const page=params.page??1,pageSize=options.marketPage?MARKET_PAGE_SIZE:Math.min(48,params.pageSize??24),start=(page-1)*pageSize;
   if(!Number.isSafeInteger(page)||page<1||!Number.isSafeInteger(pageSize)||pageSize<1||!Number.isSafeInteger(start+pageSize))
    throw new PreparedChinaFixtureUnavailable();
-  const isDefaultMarketPage=options.marketPage&&(!params.sort||params.sort==='updatedAt')&&
+  const isUnsortedUnfiltered=(!params.sort||params.sort==='updatedAt')&&
    Object.entries(params).every(([k,v])=>['market','city','page','pageSize','sort'].includes(k)||!v);
+  const isDefaultMarketPage=options.marketPage&&isUnsortedUnfiltered;
+  const generationId=s.snapshot.generationId;
+  const makePublic=(row:CatalogSearchProjection)=>{
+   const adjusted=city?projectPreparedChinaDelivery(row,city):row;
+   return attachChinaSelection(preparedChinaModelPublicItem(adjusted,adjusted.totalRub||0),generationId,deliveryCity);
+  };
+  // "Без сортировки": use the entire sealed order across all page links.
+  // Explicit filters/sort still use the existing exact selection path below.
+  if(isDefaultMarketPage||isUnsortedUnfiltered&&options.countOnly){
+   const window=await s.snapshot.canonicalWindow(start,pageSize,options.countOnly&&!options.marketPage);
+   if(window){
+    if(window.items.some(row=>!projectionCanRenderCard(row)))throw new PreparedChinaFixtureUnavailable();
+    const items=window.items.map(makePublic);
+    const facets=options.navigationFacets?s.snapshot.navigationFacets:undefined;
+    await s.assertCurrent();
+    if(options.countOnly&&!options.marketPage)return {generationId,total:window.total,items:[],marketCountInfo:{}};
+    return {generationId,total:window.total,page,pageSize,items,usedIndexShards:[],...(facets?{facets}:{})};
+   }
+  }
   // Base projection is used by the existing count/filter oracle. Existing
   // city predicate applies its delta once. Adjust returned DTOs only.
   const query=isDefaultMarketPage?{...params,city:undefined}:params;
-  const generationId=s.snapshot.generationId;
   const width=pageSize*MARKET_DIVERSITY_WINDOW_PAGES,offset=Math.floor(start/width)*width;
   const limit=options.countOnly&&!options.marketPage?0:isDefaultMarketPage?offset+width:start+pageSize;
   const facetQuery=options.navigationFacets?{market:'china',hasPrice:'yes'}:options.includeFacets&&!options.marketPage&&!options.countOnly?params:undefined;
@@ -272,10 +294,6 @@ export async function readPreparedChinaCompatibility(params:CatalogSearchParams,
   if(options.countOnly&&!options.marketPage){
    await s.assertCurrent();return {generationId,total,items:[],marketCountInfo:{}};
   }
-  const makePublic=(row:CatalogSearchProjection)=>{
-   const adjusted=city?projectPreparedChinaDelivery(row,city):row;
-   return attachChinaSelection(preparedChinaModelPublicItem(adjusted,adjusted.totalRub||0),generationId,deliveryCity);
-  };
   let items;
   if(isDefaultMarketPage){
    const window=balanceBusinessRows(matched.slice(offset,offset+width).map(row=>preparedChinaModelPublicItem(row,row.totalRub||0)));
@@ -288,7 +306,7 @@ export async function readPreparedChinaCompatibility(params:CatalogSearchParams,
   }
   await s.assertCurrent();
   return {generationId,total,page,pageSize,items,usedIndexShards:[],...(facets?{facets}:{})};
- }catch{throw new PreparedChinaFixtureUnavailable();}
+ }catch(error){if(error instanceof PreparedChinaCutChanged)throw error;throw new PreparedChinaFixtureUnavailable();}
 }
 
 /** Deliberately knows only the prepared generation. The existing public

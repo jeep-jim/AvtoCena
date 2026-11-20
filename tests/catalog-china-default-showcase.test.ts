@@ -1,16 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {chinaExactListHref,isChinaDefaultShowcaseQuery} from '../apps/web/lib/catalog/china-default-showcase';
 import {readMixedMarketCounts} from '../apps/web/lib/catalog/mixed-market-count';
-test('only initial default China receives a labeled showcase; exact link preserves city and explicit page',()=>{
- assert.ok(isChinaDefaultShowcaseQuery({market:'china'}));
- assert.ok(isChinaDefaultShowcaseQuery({market:'china',city:'Новокузнецк'}));
- for(const control of [{page:'1'},{sort:'updatedAt'},{model:'X3'},{powerTo:'160'},{hasPrice:'yes'},{unexpected:'1'},{city:['Омск']}])
-  assert.ok(!isChinaDefaultShowcaseQuery({market:'china',...control}));
- assert.ok(!isChinaDefaultShowcaseQuery({market:'korea'}));
- const url=new URL(chinaExactListHref('Новокузнецк'),'https://avtocena.com');
- assert.equal(url.pathname,'/cars/china');assert.equal(url.searchParams.get('page'),'1');assert.equal(url.searchParams.get('city'),'Новокузнецк');
-});
 test('count batch preserves other markets on 503, exception, indefinite timeout and estimate',async()=>{
  let signal:AbortSignal|undefined;
  const result=await readMixedMarketCounts(['china','korea','europe','uae','japan','georgia'],async(m,s)=>{

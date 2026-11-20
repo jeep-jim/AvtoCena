@@ -17,7 +17,7 @@ import { NextResponse } from "next/server";
 import { loadPublicRateExtras } from "@/lib/catalog/public-rates";
 import { countCatalogOffers, readCatalogFacets, searchOffers, projectPreparedChinaFixtureSearch } from "@/lib/catalog/storage";
 
-import {hasPreparedChinaHttpFixture,preparedChinaIndexedModelOnly,readPreparedChinaFixtureList,readPreparedChinaIndexedModel,readPreparedChinaIndexedCity,readPreparedChinaCompatibility,hasIndependentChinaHttpFixture} from "@/lib/catalog/prepared-china-http-fixture";
+import {hasPreparedChinaHttpFixture,preparedChinaIndexedModelOnly,readPreparedChinaFixtureList,readPreparedChinaIndexedModel,readPreparedChinaIndexedCity,readPreparedChinaCompatibility,hasIndependentChinaHttpFixture,PreparedChinaCutChanged} from "@/lib/catalog/prepared-china-http-fixture";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -108,7 +108,7 @@ export async function GET(request: Request) {
           if(marketPage&&(!Number.isSafeInteger(requestedPage)||requestedPage<1||!Number.isSafeInteger(requestedPage*24)))
             return NextResponse.json({ok:false},{status:400});
           const cut=await readPreparedChinaCompatibility(query,{countOnly,marketPage,includeFacets:p.get('includeFacets')==='1',
-            unsupported:Boolean(p.get('source')||p.get('stock')||p.get('includeRates')==='1')});
+            unsupported:Boolean(p.get('source')||p.get('stock')||p.get('includeRates')==='1'),expectedGeneration:pinned});
           if(cut)return current(cut)?NextResponse.json({ok:true,...cut},{headers:{'Cache-Control':'no-store'}}):stale();
           if(pinned)return stale();
         }
@@ -120,7 +120,7 @@ export async function GET(request: Request) {
           return NextResponse.json({ok:true,generationId:prepared.generationId,...result},{headers:{'Cache-Control':'no-store'}});
         }
       }
-    }catch{return NextResponse.json({ok:false,reason:'prepared_china_unavailable'},{status:503,headers:{'Cache-Control':'no-store'}});}
+    }catch(error){const stale=error instanceof PreparedChinaCutChanged;return NextResponse.json({ok:false,reason:stale?'prepared_china_cut_changed':'prepared_china_unavailable'},{status:stale?409:503,headers:{'Cache-Control':'no-store'}});}
   }
   if(chinaPrepared){
     const a=await existingAjesResponse();
