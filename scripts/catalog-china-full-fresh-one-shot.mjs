@@ -90,7 +90,16 @@ export async function runChinaFullFreshOneShot(argv=process.argv.slice(2),env=pr
  const scratch=await directory(options.scratch),bundle=await directory(options['guard-bundle']),
   nativeRoot=await directory(options['native-root']);
  const exec=promisify(execFile);
- if(plan.authorizedHeadSha===undefined){
+ if(plan.expectedAppHeadSha!==undefined){
+  // Main owns the GitHub job, not the prepared app checkout. The split
+  // composer authenticates both real roots; never impersonate the main SHA.
+  const appParent='d22f92d14bce98ec8ce2db41ba07b5b05afd23f6';
+  requireValue(/^[a-f0-9]{40}$/.test(plan.expectedAppHeadSha)&&plan.expectedAppHeadSha!==env.GITHUB_SHA&&
+   plan.authorizedHeadSha===env.GITHUB_SHA&&SHA.test(plan.composedFromPolicySha256??''),'split_app_authority');
+  const git=async ref=>(await exec('git',['rev-parse',ref],{cwd:root,maxBuffer:4096})).stdout.trim();
+  requireValue(await git('HEAD')===plan.expectedAppHeadSha,'checked_out_app_head');
+  requireValue(await git('HEAD^')===appParent,'checked_out_app_parent');
+ }else if(plan.authorizedHeadSha===undefined){
   const head=(await exec('git',['rev-parse','HEAD'],{cwd:root,maxBuffer:4096})).stdout.trim();
   requireValue(head===env.GITHUB_SHA,'checked_out_head');
   await exec('git',['merge-base','--is-ancestor',plan.runtimeAuthorityBaseSha,head],{cwd:root,maxBuffer:4096});
