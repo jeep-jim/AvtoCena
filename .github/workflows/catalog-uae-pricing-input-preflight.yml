@@ -1,0 +1,48 @@
+name: UAE pricing input availability preflight
+on:
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/uae-pricing-input-preflight-20261120.sha256']
+permissions:
+  contents: read
+concurrency:
+  group: uae-pricing-input-preflight
+  cancel-in-progress: false
+jobs:
+  probe:
+    if: github.repository_id == '1289722938' && github.ref == 'refs/heads/main' && github.run_attempt == 1 && github.event.head_commit.message == 'Observe UAE pricing input availability without writes'
+    runs-on: ubuntu-24.04
+    environment: regcloud-staging
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with: {persist-credentials: false, fetch-depth: 2}
+      - name: Admit only the exact single-file marker and sealed proof sources
+        env:
+          EXPECTED_BEFORE: ${{ github.event.before }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          [[ "$EXPECTED_BEFORE" =~ ^[0-9a-f]{40}$ ]]
+          test "$(git rev-list --parents -n1 HEAD)" = "$GITHUB_SHA $EXPECTED_BEFORE"
+          test "$(git show -s --format=%B HEAD)" = 'Observe UAE pricing input availability without writes'
+          test "$(git diff --no-renames --name-status "$EXPECTED_BEFORE" "$GITHUB_SHA" --)" = "$(printf 'A\t%s' '.github/market-runs/uae-pricing-input-preflight-20261120.sha256')"
+          printf '%s  %s\n' '47341ef8c74d9e2aaef6537115b7779fb37f5a33bdbdf0a062bcb7f3c15cf510' '.github/market-runs/uae-pricing-input-preflight-20261120.sha256' | sha256sum -c -
+          sha256sum -c '.github/market-runs/uae-pricing-input-preflight-20261120.sha256'
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with: {node-version: 24, cache: npm}
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Verify the fixed UAE evidence contracts offline
+        run: node --test .github/operations/uae-pricing-preflight/projection.test.mjs
+      - name: Observe three allowlisted input snapshots only
+        env:
+          JSON_STORAGE_DRIVER: object
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_REGION: us-east-1
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+          YC_OBJECT_STORAGE_REQUEST_TIMEOUT_MS: '6500'
+          YC_OBJECT_STORAGE_MAX_ATTEMPTS: '1'
+        run: node --import tsx .github/operations/uae-pricing-preflight/hosted.mjs
