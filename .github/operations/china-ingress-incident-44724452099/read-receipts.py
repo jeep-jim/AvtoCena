@@ -139,5 +139,49 @@ def collect(path=ROOT, owner=0):
             "rollbackMatchesBackup": bool(e and r and r["nginxSha256"] == e["before"]),
             "candidatePolicyWasAttempted": r["candidateRestartPolicyRollbackPending"] if r else None}
 
+def current_after_incident():
+    import hashlib
+    import subprocess
+    cfg=Path('/etc/nginx/conf.d/avtocena-prepare.conf')
+    candidate='avtocena-china-candidate-85296f6b8797'
+    result={"kind":"current_china_ingress_incident_state_v1","hostWrites":0}
+    try:
+        fd=read_dir(ROOT,0)
+        try:
+            a,e=read_marker(fd,"expect.json",0)
+            with os.fdopen(os.open("expect.json",FFLAGS,dir_fd=fd),'rb') as expf:
+                est=os.fstat(expf.fileno())
+                eraw=expf.read(CAP+1)
+                if not private(est,0,False) or len(eraw)!=est.st_size or len(eraw)>CAP or json.loads(eraw)!=e:
+                    raise ValueError
+                result["historicalExpectSha256"]=hashlib.sha256(eraw).hexdigest()
+        finally:
+            os.close(fd)
+        if a!="observed" or not expectation(e): raise ValueError
+        with os.fdopen(os.open(cfg,FFLAGS),'rb') as f:
+            st=os.fstat(f.fileno())
+            if st.st_uid!=0 or not stat.S_ISREG(st.st_mode) or not 0<st.st_size<=1024*1024: raise ValueError
+            raw=f.read(1024*1024+1)
+            if len(raw)!=st.st_size: raise ValueError
+        k=hashlib.sha256(raw).hexdigest()
+        result["nginxCurrent"]="exact_old" if k==e['before'] else "exact_candidate" if k==e['candidate'] else "other"
+        raw=subprocess.check_output(['/usr/bin/docker','inspect','--format','{{json .Id}} {{json .Image}} {{json .State.StartedAt}} {{json .State.Pid}} {{json .RestartCount}} {{json .HostConfig.RestartPolicy.Name}} {{json .State.Running}}',candidate],timeout=8)
+        if len(raw)>1024: raise ValueError
+        d=json.loads('['+','.join(raw.decode().split())+']')
+        if len(d)!=7: raise ValueError
+        cid,img,start,pid,restarts,policy,running=d
+        result["candidateSameIdentity"]=cid==e["candidateContainerId"] and img=="sha256:0bfe542a991a69aaa4f416726a221e4e845986cc15c98a414e24ea7cff462984" and [start,pid,restarts]==e["candidateProcess"] and running is True
+        result["candidateRestartPolicy"]=policy if policy in ("no","unless-stopped") else "other"
+        for mode,resolve in (("loopbackTls",["--resolve","avtocena.com:443:127.0.0.1"]),("publicTls",[])):
+            try:
+                c=subprocess.check_output(['/usr/bin/curl','--fail','--silent','--noproxy','*','--max-time','5','--max-filesize','8192',*resolve,'https://avtocena.com/api/health'],timeout=7)
+                h=json.loads(c)
+                r=h.get('releaseSha')
+                result[mode]='old' if r==OLD else 'candidate' if r==APP else 'other'
+            except (ValueError,OSError,subprocess.SubprocessError): result[mode]='unavailable'
+    except (ValueError,OSError,subprocess.SubprocessError):
+        result["safeStatus"]="not_verified"
+    return result
+
 if __name__ == "__main__":
-    print(json.dumps(collect(), separators=(",", ":"), sort_keys=True))
+    print(json.dumps(current_after_incident(),separators=(",",":")))

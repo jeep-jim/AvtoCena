@@ -1,6 +1,6 @@
 # Exact single historical readback; imports are inert until the incident marker
 # is changed under the exact reviewed main push below.
-name: Observe historical China ingress receipts
+name: Observe exact China gateway and policy
 on:
   push:
     branches: [main]
@@ -9,7 +9,7 @@ permissions:
   contents: read
 jobs:
   read:
-    if: github.repository == 'jeep-jim/AvtoCena' && github.repository_id == '1289722938' && github.ref == 'refs/heads/main' && github.run_attempt == '1' && github.event.head_commit.message == 'Observe historical China ingress receipts without changes'
+    if: github.repository == 'jeep-jim/AvtoCena' && github.repository_id == '1289722938' && github.ref == 'refs/heads/main' && github.run_attempt == '1' && github.event.head_commit.message == 'Observe exact China gateway and policy without changes'
     environment: regcloud-staging
     runs-on: ubuntu-latest
     timeout-minutes: 3
@@ -25,7 +25,7 @@ jobs:
           test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
           readonly ops=.github/operations/china-ingress-incident-44724452099
           readonly marker=.github/market-runs/china-ingress-observe-44724452099.sha256
-          readonly observer=3b60263d305fbda7e4885ebf31af67b92651de29099aabbcfc703e151ff458ed
+          readonly observer=c4ebfb7125e31c7cf9c89ae7cf41be4e3c4a9308e0e5cd99a8b6ecc9a70888e2
           readonly wrapper=e7279e84b32e36c78094a347b6b50021670a42f23d86a9101e93f99e191fe704
           cmp -s "$marker" <(printf '%s\n' "$observer")
           printf '%s  %s\n' "$observer" "$ops/read-receipts.py" "$wrapper" "$ops/read-via-ssh.sh" | sha256sum --check --status
