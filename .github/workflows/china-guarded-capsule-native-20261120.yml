@@ -1,0 +1,308 @@
+name: Restore exact China archive for isolated native validation only
+'on':
+  push:
+    branches:
+    - main
+    paths:
+    - .github/workflows/china-guarded-capsule-native-20261120.yml
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: china-guarded-capsule-native-20261120
+  cancel-in-progress: false
+jobs:
+  inspect:
+    if: github.repository == 'jeep-jim/AvtoCena' && github.repository_id == '1289722938' && github.ref ==
+      'refs/heads/main' && github.run_attempt == '1' && github.event.before == 'cc9eb73d208790e926b85500c133ce97ca6342b5'
+      && github.event.head_commit.message == 'Restore exact China archive for isolated native validation only'
+    environment: regcloud-staging
+    runs-on: ubuntu-latest
+    timeout-minutes: 190
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        ref: bb6317bffd1f7b1832681ac78378fe6c3e39e3b5
+        path: publisher
+        persist-credentials: false
+        sparse-checkout: 'scripts/lib
+
+          scripts/publisher-runtime83
+
+          apps/web/lib
+
+          packages/engine/src
+
+          '
+    - uses: actions/setup-node@v4
+      with:
+        node-version: 24.22.1
+    - name: Observe actual runner resources, do not qualify full restore
+      run: 'set -euo pipefail
+
+        python - <<''PY''
+
+        import os,json
+
+        from pathlib import Path
+
+        p=Path(os.environ[''RUNNER_TEMP''])
+
+        v=os.statvfs(p)
+
+        cg=Path(''/sys/fs/cgroup/memory.max'')
+
+        m=cg.read_text().strip() if cg.is_file() else None
+
+        free=v.f_bavail*v.f_frsize
+
+        print(json.dumps({''observedRunnerTempFreeBytes'':free,''start48GiBRequirementMet'':free>=48*(1024**3),''observedPhysicalMemoryBytes'':os.sysconf(''SC_PHYS_PAGES'')*os.sysconf(''SC_PAGE_SIZE''),''visibleCgroupMemoryMaxBytes'':int(m)
+        if m and m.isdigit() else None,''runnerTempDedicatedMountObserved'':os.path.ismount(p),''hardJobDiskQuotaProven'':False,''hardOwnedProcessCgroupProven'':False,''fullRestoreQualified'':False}))
+
+        PY
+
+        '
+    - name: Authenticate exact small receipt against completed collector
+      env:
+        CHINA_COLLECTOR_RUN: '44457059256'
+        CHINA_COLLECTOR_ATTEMPT: '1'
+        CHINA_COLLECTOR_REVISION: 038574d914de2436cd10871629b1b0a8fe83a92c
+        CHINA_RECEIPT_ARTIFACT: '14500964905'
+        CHINA_RECEIPT_ZIP_SHA256: c0802faab0b9ecc39e6d44b53d66f76c19cac485258f5ed2c80e5c2b59ac8097
+        CHINA_EXPECTED_ARCHIVE_SHA256: b8a2a25dc27390845dd5a423efa323c9472a338b1b97f413ba96aefa7f3b65ca
+        CHINA_EXPECTED_REPORT_DIGEST: 894bb1eb1b37042de7ce611e19d8e33bfd58c01546d2a812f2c87f96cd906caf
+        GH_TOKEN: ${{ github.token }}
+      run: "set -euo pipefail\numask 077\ntest \"$(git -C publisher rev-parse HEAD)\" = bb6317bffd1f7b1832681ac78378fe6c3e39e3b5\n\
+        mkdir -m 0700 \"$RUNNER_TEMP/china-job\"\ncd \"$RUNNER_TEMP/china-job\"\ngh api repos/jeep-jim/AvtoCena/actions/runs/44457059256\
+        \ > producer-run.json\ngh api repos/jeep-jim/AvtoCena/actions/artifacts/14500964905 > producer-artifact.json\n\
+        gh api repos/jeep-jim/AvtoCena/actions/artifacts/14500964905/zip > producer-receipt.zip\npython -\
+        \ <<'VERIFY'\n#!/usr/bin/env python3\n\"\"\"Bind the small durable receipt to a terminal existing\
+        \ collect-only Actions job.\"\"\"\nimport hashlib,json,os,pathlib,re,stat,sys,zipfile\nroot=pathlib.Path(os.environ['RUNNER_TEMP'])/'china-job'\n\
+        run=json.loads((root/'producer-run.json').read_text())\nmeta=json.loads((root/'producer-artifact.json').read_text())\n\
+        def require(ok):\n if not ok: raise SystemExit('fresh_china_producer_binding_refused')\nvid=os.environ['CHINA_COLLECTOR_REVISION'];rid=int(os.environ['CHINA_COLLECTOR_RUN']);att=int(os.environ['CHINA_COLLECTOR_ATTEMPT'])\n\
+        aid=int(os.environ['CHINA_RECEIPT_ARTIFACT']);expected_zip=os.environ['CHINA_RECEIPT_ZIP_SHA256']\n\
+        require(re.fullmatch('[a-f0-9]{40}',vid) and re.fullmatch('[a-f0-9]{64}',expected_zip))\nrequire(run.get('id')==rid\
+        \ and run.get('run_attempt')==att and run.get('head_sha')==vid and run.get('head_branch')=='main'\n\
+        \ and run.get('status')=='completed' and run.get('conclusion')=='success' and run.get('event')=='push'\n\
+        \ and run.get('path')=='.github/workflows/collect-china-ordinary-20261119.yml'\n and run.get('repository',{}).get('full_name')=='jeep-jim/AvtoCena')\n\
+        repo_id=run['repository']['id'];require(repo_id==1289722938);w=meta.get('workflow_run',{})\narchive=root/'producer-receipt.zip'\n\
+        require(meta.get('id')==aid and meta.get('expired') is False and meta.get('digest')=='sha256:'+expected_zip\n\
+        \        and meta.get('name')==f'china-collection-receipt-{rid}-{att}'\n        and w.get('id')==rid\
+        \ and w.get('head_sha')==vid and w.get('head_branch')=='main'\n        and w.get('repository_id')==repo_id\
+        \ and w.get('head_repository_id')==repo_id\n        and 0<meta.get('size_in_bytes',0)<=32768\n   \
+        \     and archive.stat().st_size==meta['size_in_bytes'] and hashlib.sha256(archive.read_bytes()).hexdigest()==expected_zip)\n\
+        with zipfile.ZipFile(archive) as z:\n infos=z.infolist()\n require(len(infos)==1 and infos[0].filename=='own-storage-receipt.json'\
+        \ and not infos[0].is_dir()\n         and 0<infos[0].file_size<=32768 and stat.S_IFMT(infos[0].external_attr>>16)\
+        \ in (0,stat.S_IFREG))\n data=z.read(infos[0])\nreceipt=json.loads(data);rootkey=f'catalog/nonjp-intake/v1/china/{rid}/{att}'\n\
+        require(receipt.get('version')==1 and receipt.get('market')=='china' and receipt.get('root')==rootkey\n\
+        \        and receipt.get('owner')=={'runId':str(rid),'attempt':str(att),'revision':vid}\n        and\
+        \ receipt.get('manifestSha256')==os.environ['CHINA_EXPECTED_ARCHIVE_SHA256']\n        and receipt.get('reportDigest')==os.environ['CHINA_EXPECTED_REPORT_DIGEST'])\n\
+        with (root/'producer-receipt.json').open('xb') as f: f.write(data)\nprint('exact_terminal_collect_only_receipt_verified')\n\
+        VERIFY\ntest \"$(sha256sum producer-receipt.json | cut -d' ' -f1)\" = 174893f63c5870628a3df1ab3a5241fe49847f01fa579a84d80a369383c3c49a\n"
+    - name: Restore only verified China archive and qualify native local input under hard bounds
+      env:
+        YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+        YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+      run: "set -euo pipefail\numask 077\nroot=\"$RUNNER_TEMP/china-job\"\ncd \"$root\"\nmkdir -m 0700 archive-code\n\
+        mkdir -pm 0700 candidate-final/producer/operational/upstream/flow/input\ncat > 'archive-code/guarded-capsule-runner.mjs'\
+        \ <<'PAYLOAD_EOF'\n/** One-shot manifest-pinned archive restore and native local input admission.\
+        \ No writes to storage. */\nimport fs from 'node:fs/promises';import path from 'node:path';import\
+        \ {createHash,createHmac} from 'node:crypto';import {pathToFileURL} from 'node:url';\nimport {actual,prepare}\
+        \ from './prepare-native-archive.mjs';import {restoreViaBoundedReads} from './bounded-archive-restore.mjs';\n\
+        const G=1024**3,M=1024**2,ownedMax=24*G,memMax=6*G,pinPath='catalog/raw-feed-pins/v1/nonjp-intake-china-44457059256-1.json',manifestPath=actual.archiveRoot+'/complete.json';\n\
+        const policy='catalog/raw-feed-coordination/v1/policy.json',state='catalog/raw-feed-coordination/v1/state.json';\n\
+        const shape=Object.freeze({files:582,parts:1758,decoded:2760633543,partWire:386094361});\nconst sourceExpiry=Date.parse(actual.completedAt)+48*3600000;\n\
+        const hash=b=>createHash('sha256').update(b).digest('hex'),hmac=(k,s)=>createHmac('sha256',k).update(s).digest(),digest=v=>hash(JSON.stringify(v));\n\
+        const need=(b,s)=>{if(!b)throw Error('guarded_capsule_'+s);};\nexport function scopeGet({access,secret,manifestParts,currentTime=Date.now,fetchImpl=globalThis.fetch,known=shape}){\n\
+        \ need(typeof access==='string'&&/^[a-zA-Z0-9_+=./-]{1,256}$/.test(access)&&typeof secret==='string'&&secret.length>0&&secret.length<=1024&&!/[\\\
+        r\\n\\x00]/.test(secret),'credentials');\n const controls=new Set([pinPath,manifestPath,policy,state]),tally={uniqueArchivePartCount:0,partWireBytes:0},seen=new\
+        \ Set();\n const host='s3.regru.cloud',base='/avtocena-staging-8120751/migration-staging/full-20261011/';\n\
+        \ return Object.freeze({tally,async get(key,limit){\n  const p=manifestParts.has(key),control=controls.has(key),now=currentTime();\n\
+        \  need((p!==control)&&!seen.has(key)&&/^[a-zA-Z0-9_./-]{1,700}$/.test(key)&&key.split('/').every(x=>x&&x!=='.'&&x!=='..')&&Number.isSafeInteger(limit)&&limit>0&&limit<=8*M&&now>=Date.parse(actual.completedAt)&&now<sourceExpiry,'request_scope');\n\
+        \  if(p){seen.add(key);need(++tally.uniqueArchivePartCount<=known.parts,'part_count');}\n  const pathname=base+key,dateTime=new\
+        \ Date(now).toISOString().replace(/[:-]|\\.\\d{3}/g,''),day=dateTime.slice(0,8),scope=day+'/us-east-1/s3/aws4_request';\n\
+        \  const headers={host,'x-amz-content-sha256':hash(''),'x-amz-date':dateTime},names=Object.keys(headers).sort();\n\
+        \  const req=['GET',pathname,'',names.map(k=>k+':'+headers[k]+'\\n').join(''),names.join(';'),hash('')].join('\\\
+        n'),sign=hmac(hmac(hmac(hmac('AWS4'+secret,day),'us-east-1'),'s3'),'aws4_request');\n  headers.authorization='AWS4-HMAC-SHA256\
+        \ Credential='+access+'/'+scope+', SignedHeaders='+names.join(';')+', Signature='+createHmac('sha256',sign).update(['AWS4-HMAC-SHA256',dateTime,scope,hash(req)].join('\\\
+        n')).digest('hex');\n  const result=await fetchImpl('https://'+host+pathname,{method:'GET',headers,redirect:'error',signal:AbortSignal.timeout(Math.min(30000,Math.max(1,sourceExpiry-now)))});\n\
+        \  if(result.status===404){await result.body?.cancel();return{status:404};}\n  const n=Number(result.headers.get('content-length'));\n\
+        \  if(result.status!==200||!Number.isSafeInteger(n)||n<=0||n>limit||result.headers.get('content-encoding')){await\
+        \ result.body?.cancel();throw Error('guarded_capsule_response');}\n  if(p){tally.partWireBytes+=n;need(tally.partWireBytes<=known.partWire,'wire_cap');}\n\
+        \  const b=Buffer.alloc(n);let read=0;\n  for await(const chunk of result.body){need(read+chunk.length<=n,'body_cap');b.set(chunk,read);read+=chunk.length;}\n\
+        \  need(read===n&&currentTime()<sourceExpiry,'body_size_or_expired');\n  return {status:200,body:b};\n\
+        \ }});\n}\nasync function assertSandbox(scratch,minimumFree=2*G){\n const group=(await fs.readFile('/proc/self/cgroup','utf8')).match(/^0::(\\\
+        /system\\.slice\\/china-capsule-[0-9]+-[0-9]+\\.service)$/m);\n need(group,'cgroup_identity');const\
+        \ root='/sys/fs/cgroup'+group[1];\n const [memory,swap,mounts,p]=await Promise.all(['/memory.max','/memory.swap.max'].map(x=>fs.readFile(root+x,'utf8')).concat(fs.readFile('/proc/self/mountinfo','utf8'),fs.statfs(scratch,{bigint:true})));\n\
+        \ need(memory.trim()===String(memMax)&&swap.trim()==='0','cgroup_hard_limits');\n need(path.isAbsolute(scratch)&&await\
+        \ fs.realpath(scratch)===scratch&&mounts.split('\\n').some(l=>{const f=l.split(' ');return f[4]===scratch&&l.includes('\
+        \ - ext4 /dev/loop')&&/\\brw\\b/.test(f[5])&&f[5].split(',').includes('nodev')&&f[5].split(',').includes('nosuid')&&f[5].split(',').includes('noexec');}),'scratch_hard_mount');\n\
+        \ need(p.blocks*p.bsize>0n&&p.blocks*p.bsize<=BigInt(ownedMax)&&p.bavail*p.bsize>=BigInt(minimumFree),'scratch_hard_size');\n\
+        }\nasync function main(){\n need(process.argv.length===6,'args');\n const [nativeRoot,receiptFile,secretFile,scratch]=process.argv.slice(2);\n\
+        \ await assertSandbox(scratch,18*G);\n const secretStat=await fs.lstat(secretFile);need(secretStat.isFile()&&secretStat.nlink===1&&secretStat.size<=4096&&(secretStat.mode&0o077)===0,'secret_file_scope');\n\
+        \ const {access,secret}=JSON.parse(await fs.readFile(secretFile,'utf8'));\n const receiptBytes=await\
+        \ fs.readFile(receiptFile),receipt=JSON.parse(receiptBytes);need(receiptBytes.length===884&&hash(receiptBytes)===actual.receiptSha256,'receipt');\n\
+        \ const load=f=>import(pathToFileURL(path.join(nativeRoot,f)));\n const native=await load('scripts/lib/nonjp-intake-archive.mjs');\n\
+        \ const allowed=new Set(),forStorage=scopeGet({access,secret,manifestParts:allowed}),nativeFetch=globalThis.fetch;\n\
+        \ globalThis.fetch=async()=>{throw Error('guarded_capsule_unexpected_fetch');};\n let acceptedManifest=false;\n\
+        \ const scope=async()=>{need(Date.now()<sourceExpiry,'source_expired');await assertSandbox(scratch);};\n\
+        \ const readOnlyGet=async(key,cap)=>{\n  const x=await forStorage.get(key,cap);\n  if(key===manifestPath&&x.status===200&&!acceptedManifest){\n\
+        \   const m=native.validateIntakeArchive(JSON.parse(x.body),actual.archiveRoot,actual.archiveSha256);\n\
+        \   need(m.files.length===shape.files&&m.totalBytes===shape.decoded&&m.files.reduce((n,x)=>n+x.parts.length,0)===shape.parts,'live_census');\n\
+        \   for(const f of m.files)for(const p of f.parts)allowed.add(p.key);\n   acceptedManifest=true;console.log(JSON.stringify({stage:'verified_archive_manifest',files:shape.files,parts:shape.parts,restoredBytes:shape.decoded}));\n\
+        \  }\n  if(allowed.has(key)&&x.status===200&&(forStorage.tally.uniqueArchivePartCount%100===0||forStorage.tally.uniqueArchivePartCount===shape.parts))\n\
+        \   console.log(JSON.stringify({stage:'archive_part_download',parts:forStorage.tally.uniqueArchivePartCount,totalParts:shape.parts,wireBytes:forStorage.tally.partWireBytes}));\n\
+        \  return x;\n };\n const capsule=path.join(scratch,'capsule');\n const restored=await restoreViaBoundedReads({native,receipt,expected:actual,readOnlyGet,localCapsule:capsule,assertReadScope:scope});\n\
+        \ need(restored.partCount===shape.parts&&restored.archiveBytes===shape.decoded&&forStorage.tally.partWireBytes===shape.partWire,'full_archive_census');\n\
+        \ console.log(JSON.stringify({stage:'archive_bytes_verified',parts:shape.parts,totalBytes:shape.decoded}));\n\
+        \ const outputDirectory=path.join(scratch,'input-converted');\n const result=await prepare({nativeRoot,receiptPath:receiptFile,archiveManifestPath:path.join(capsule,'complete.json'),rawPinPath:path.join(capsule,'pin.json'),\n\
+        \   restoredDirectory:restored.directory,outputDirectory,minimumFree:18*G,minimumMemoryCap:memMax,progress:msg=>console.log(JSON.stringify(msg))});\n\
+        \ await scope();\n const raw=await fs.readFile(path.join(outputDirectory,'LOCAL_ADMISSION.json'));\n\
+        \ console.log(JSON.stringify({stage:'native_sqlite_conversion_admitted',sourceRows:result.sourceRows,shards:result.shards.length,convertedBytes:result.outputBytes,\n\
+        \   admissionSha256:hash(raw),orderedShardInventorySha256:result.shardsSha256,archiveManifestSha256:result.archiveManifestSha256,\n\
+        \   hardCgroupBytes:memMax,hardScratchCeilingBytes:ownedMax,storageWrites:0,rawUploaded:false,providerRequests:0,publicationAuthorized:false,cursorAdvanceAuthorized:false}));\n\
+        \ globalThis.fetch=nativeFetch;\n}\nif(process.argv[1]&&import.meta.url===pathToFileURL(path.resolve(process.argv[1])).href)\n\
+        \ try{await main();}catch(e){console.error(JSON.stringify({stage:'guarded_capsule_stopped',reason:/^(guarded_capsule_|china_archive_restore_|china_local_archive_)[a-z0-9_]+$/.test(e?.message||'')?e.message:'guard_or_native_refused',publicationAuthorized:false}));process.exitCode=1;}\n\
+        PAYLOAD_EOF\ntest \"$(sha256sum 'archive-code/guarded-capsule-runner.mjs' | cut -d' ' -f1)\" = 2235fef7671e69a4ad72d5024ad17b0602b9a25f7f9cbfac6b00c1efdff64ae0\n\
+        cat > 'archive-code/bounded-archive-restore.mjs' <<'PAYLOAD_EOF'\n/** Plug only a reviewed signed\
+        \ GET function into this native restore wrapper.\n * It cannot create native read-protection pins:\
+        \ policy and state must genuinely be absent,\n * and the object adapter provides no mutation, HEAD,\
+        \ LIST, or broad API. */\nimport fs from 'node:fs/promises';\nimport path from 'node:path';\nimport\
+        \ {createHash} from 'node:crypto';\nconst policy='catalog/raw-feed-coordination/v1/policy.json',state='catalog/raw-feed-coordination/v1/state.json';\n\
+        const MiB=1024**2,GiB=1024**3,hex=/^[a-f0-9]{64}$/;\nconst digest=v=>createHash('sha256').update(JSON.stringify(v)).digest('hex');\n\
+        const need=(v,k)=>{if(!v)throw Error('china_archive_restore_'+k);};\nexport async function restoreViaBoundedReads({native,receipt,expected,readOnlyGet,localCapsule,assertReadScope,now=Date.now}){\n\
+        \ const source=Date.parse(expected.completedAt);\n const time=()=>need(now()>=source&&now()<source+48*3600000,'source_expired');\n\
+        \ need(typeof readOnlyGet==='function'&&typeof assertReadScope==='function'&&typeof native?.verifyIntakeArchive==='function'&&typeof\
+        \ native?.validateIntakeArchive==='function'&&typeof expected?.archiveRoot==='string'&&receipt?.market==='china','scope');\n\
+        \ need(expected.archiveRoot===receipt.root&&hex.test(expected.archiveSha256||'')&&receipt.manifestSha256===expected.archiveSha256&&receipt.reportDigest===expected.reportSha256&&\n\
+        \  digest(receipt.owner)===digest(expected.collector),'receipt');\n const manifestKey=receipt.root+'/complete.json',pinKey=receipt.handoff?.key;\n\
+        \ need(pinKey==='catalog/raw-feed-pins/v1/nonjp-intake-china-'+expected.collector.runId+'-'+expected.collector.attempt+'.json','pin_scope');\n\
+        \ const keys=new Map([[manifestKey,2*MiB],[pinKey,2*MiB],[policy,256*1024],[state,8*MiB]]);\n let\
+        \ gets=0,wireBytes=0;const hits=new Set();\n async function readJson(key){\n  time();const maximumBytes=keys.get(key);need(maximumBytes&&++gets<=7400,'read_allowlist');\n\
+        \  const r=await readOnlyGet(key,maximumBytes);\n  need(r?.status===200||r?.status===404,'read_status');\n\
+        \  if(r.status===404){need((key===policy||key===state)&&!r.body,'missing_exact_archive');return null;}\n\
+        \  if(key===policy||key===state)throw Error('china_archive_restore_coordination_present_stop');\n\
+        \  need(Buffer.isBuffer(r.body)&&r.body.length>0&&r.body.length<=maximumBytes,'read_cap');wireBytes+=r.body.length;need(wireBytes<=22*GiB,'wire_budget');\n\
+        \  if(![manifestKey,pinKey].includes(key)){need(!hits.has(key),'duplicate_part');hits.add(key);}\n\
+        \  const value=JSON.parse(new TextDecoder('utf-8',{fatal:true}).decode(r.body));time();return value;\n\
+        \ }\n await assertReadScope();await Promise.all([readJson(policy),readJson(state)]);\n const manifest=await\
+        \ readJson(manifestKey);\n native.validateIntakeArchive(manifest,receipt.root,expected.archiveSha256);\n\
+        \ need(manifest.collection.complete===true&&manifest.market==='china'&&manifest.files.length<=1200&&manifest.totalBytes<=12*GiB,'archive_caps');\n\
+        \ const partCount=manifest.files.reduce((n,x)=>n+x.parts.length,0);need(partCount>0&&partCount<=7350,'parts_cap');\n\
+        \ for(const f of manifest.files)for(const part of f.parts){need(!keys.has(part.key),'duplicate_key');keys.set(part.key,5*MiB);}\n\
+        \ const pin=await readJson(pinKey);\n time();const base=path.dirname(localCapsule);need(path.isAbsolute(localCapsule)&&path.normalize(localCapsule)===localCapsule&&await\
+        \ fs.realpath(base)===base,'output_scope');\n await fs.mkdir(localCapsule,{recursive:false,mode:0o700});\n\
+        \ await fs.writeFile(path.join(localCapsule,'complete.json'),JSON.stringify(manifest),{flag:'wx',mode:0o600});\n\
+        \ await fs.writeFile(path.join(localCapsule,'pin.json'),JSON.stringify(pin),{flag:'wx',mode:0o600});\n\
+        \ const directory=path.join(localCapsule,'restored');\n const archive=await native.verifyIntakeArchive({storage:Object.freeze({driver:'object',readJson}),receipt,directory});\n\
+        \ need(digest(archive)===expected.archiveSha256&&hits.size===partCount,'native_readback');\n await\
+        \ assertReadScope();await Promise.all([readJson(policy),readJson(state)]);time();\n return {directory,gets,partCount,archiveBytes:archive.totalBytes,wireBytes,storageWrites:0,supplierRequests:0,publicationAuthorized:false};\n\
+        }\nPAYLOAD_EOF\ntest \"$(sha256sum 'archive-code/bounded-archive-restore.mjs' | cut -d' ' -f1)\" =\
+        \ 17b6707ac0b2cadad8f05047c7c3e447633597eb0603ca8d0ff7fff483904fda\ncat > 'archive-code/prepare-native-archive.mjs'\
+        \ <<'PAYLOAD_EOF'\n/** Offline China source admission using the existing pinned native archive validator\
+        \ + converter.\n * No production storage client, provider request, publication or cursor code. */\n\
+        import fs from 'node:fs/promises';\nimport {createReadStream,constants as flags} from 'node:fs';\n\
+        import path from 'node:path';\nimport {pathToFileURL} from 'node:url';\nimport {createHash} from 'node:crypto';\n\
+        import assert from 'node:assert/strict';\nimport {execFileSync} from 'node:child_process';\nconst\
+        \ MiB=1024**2, GiB=1024**3, hex=/^[a-f0-9]{64}$/;\nconst hash=v=>createHash('sha256').update(v).digest('hex');\n\
+        const digest=v=>hash(JSON.stringify(v));\nexport const actual=Object.freeze({market:'china',collector:{runId:'44457059256',attempt:'1',revision:'038574d914de2436cd10871629b1b0a8fe83a92c'},archiveSha256:'b8a2a25dc27390845dd5a423efa323c9472a338b1b97f413ba96aefa7f3b65ca',reportSha256:'894bb1eb1b37042de7ce611e19d8e33bfd58c01546d2a812f2c87f96cd906caf',receiptSha256:'174893f63c5870628a3df1ab3a5241fe49847f01fa579a84d80a369383c3c49a',completedAt:'2026-11-19T05:02:36.435Z',rows:290044,archiveRoot:'catalog/nonjp-intake/v1/china/44457059256/1'});\n\
+        const fail=k=>{throw Error('china_local_archive_'+k);};\nconst need=(b,k)=>{if(!b)fail(k);};\nconst\
+        \ maxTotal=12*GiB, outputCap=16*GiB;\nasync function raw(file,cap){const h=await fs.open(file,flags.O_RDONLY|flags.O_NOFOLLOW);try{const\
+        \ s=await h.stat();need(s.isFile()&&s.nlink===1&&s.size>0&&s.size<=cap,'small_file');const b=await\
+        \ h.readFile();need(b.length===s.size&&(await h.stat()).size===s.size,'metadata_moved');return b;}finally{await\
+        \ h.close();}}\nasync function json(file,cap){const b=await raw(file,cap);return {value:JSON.parse(new\
+        \ TextDecoder('utf-8',{fatal:true}).decode(b)),sha256:hash(b)};}\nasync function streamFile(file,bytes,expected){\n\
+        \ const st=await fs.lstat(file);need(st.isFile()&&st.nlink===1&&st.size===bytes&&bytes<=128*MiB,'archive_file_size');let\
+        \ count=0;\n const d=createHash('sha256'),h=await fs.open(file,flags.O_RDONLY|flags.O_NOFOLLOW);\n\
+        \ try{for await(const chunk of h.createReadStream({autoClose:false,highWaterMark:1024*1024})){count+=chunk.length;need(count<=bytes,'archive_file_growth');d.update(chunk);}\n\
+        \ const sha256=d.digest('hex');need(count===bytes&&(await h.stat()).size===bytes&&(!expected||sha256===expected),'archive_file_checksum');return{bytes,sha256};}finally{await\
+        \ h.close();}\n}\nasync function dir(file){need(path.isAbsolute(file)&&await fs.realpath(file)===file&&(await\
+        \ fs.lstat(file)).isDirectory(),'directory_scope');return file;}\nfunction freshness(anchor,now){const\
+        \ at=Date.parse(anchor.completedAt),t=now();need(Number.isSafeInteger(at)&&Number.isSafeInteger(t)&&t>=at&&t<at+48*3600000,'source_expired');return\
+        \ new Date(at+48*3600000).toISOString();}\nasync function verifyFiles(directory,manifest,beat,expectedReceipt){\n\
+        \ const local=(await fs.readdir(directory)).sort();if(local.includes('own-storage-receipt.json'))need((await\
+        \ json(path.join(directory,'own-storage-receipt.json'),64*1024)).sha256===expectedReceipt,'restored_receipt');const\
+        \ names=local.filter(x=>x!=='own-storage-receipt.json'),expected=manifest.files.map(x=>x.name).sort();\n\
+        \ need(JSON.stringify(names)===JSON.stringify(expected),'archive_inventory');\n for(const item of\
+        \ manifest.files){await streamFile(path.join(directory,item.name),item.bytes,item.sha256);await beat();}\n\
+        }\nexport async function prepare({nativeRoot,receiptPath,archiveManifestPath,rawPinPath,restoredDirectory,outputDirectory,anchor=actual,now=Date.now,minimumFree=48*GiB,minimumMemoryCap=6*GiB,progress=()=>{}}){\n\
+        \ need(anchor.market==='china'&&[anchor.archiveSha256,anchor.reportSha256,anchor.receiptSha256].every(x=>hex.test(x||'')),'anchors');\n\
+        \ const revision=execFileSync('git',['-C',nativeRoot,'rev-parse','HEAD'],{encoding:'utf8'}).trim();\n\
+        \ need(revision==='bb6317bffd1f7b1832681ac78378fe6c3e39e3b5','native_revision');\n const sourcePins=JSON.parse(await\
+        \ fs.readFile(new URL('../candidate-final/producer/operational/upstream/flow/input/SOURCE_PINS.json',import.meta.url),'utf8'));\n\
+        \ for(const [file,want] of Object.entries(sourcePins.files))need(await fs.realpath(path.join(nativeRoot,file))===path.join(nativeRoot,file)&&hash(await\
+        \ fs.readFile(path.join(nativeRoot,file)))===want,'native_module_pin');\n need(!execFileSync('git',['-C',nativeRoot,'diff','--name-only','HEAD','--','scripts/lib','scripts/publisher-runtime83','apps/web/lib'],{encoding:'utf8'}).trim(),'native_worktree_changed');\n\
+        \ const boot=(p)=>import(pathToFileURL(path.join(nativeRoot,p)).href);\n const native=await boot('scripts/lib/nonjp-intake-archive.mjs'),\
+        \ provenance=await boot('scripts/lib/catalog-raw-provenance.mjs'), converter=await boot('scripts/lib/catalog-disk-conversion.mjs');\n\
+        \ const parent=await dir(path.dirname(outputDirectory)),input=await dir(restoredDirectory);\n need(input!==parent&&!outputDirectory.startsWith(input+'/')&&path.isAbsolute(outputDirectory)&&path.normalize(outputDirectory)===outputDirectory,'output_scope');\n\
+        \ const check=async()=>{freshness(anchor,now);const v=await fs.statfs(parent,{bigint:true});need(v.bavail*v.bsize>=BigInt(Math.min(minimumFree,2*GiB)),'scratch_exhausted');need(process.memoryUsage().rss<=minimumMemoryCap,'rss_ceiling');};\n\
+        \ if(minimumFree){const v=await fs.statfs(parent,{bigint:true});need(v.bavail*v.bsize>=BigInt(minimumFree),'scratch_admission');}\n\
+        \ await check();\n const [{value:receipt,sha256:receiptSha}, {value:pin}, {value:manifestValue}]=await\
+        \ Promise.all([json(receiptPath,64*1024),json(rawPinPath,2*MiB),json(archiveManifestPath,2*MiB)]);\n\
+        \ need(receiptSha===anchor.receiptSha256,'receipt_bytes');\n provenance.assertDurableIntakeArchive(receipt);provenance.assertRawPin(pin);\n\
+        \ need(receipt.market==='china'&&digest(receipt.owner)===digest(anchor.collector)&&receipt.root===anchor.archiveRoot&&receipt.manifestSha256===anchor.archiveSha256&&receipt.reportDigest===anchor.reportSha256,'archive_receipt_pins');\n\
+        \ const manifest=native.validateIntakeArchive(manifestValue,anchor.archiveRoot,anchor.archiveSha256);\n\
+        \ need(manifest.market==='china'&&manifest.collection.complete===true&&manifest.totalBytes<=maxTotal&&manifest.files.length<=1200&&digest(manifest.owner)===digest(receipt.owner)&&manifest.reportDigest===anchor.reportSha256,'complete_collection');\n\
+        \ need(['ready','published'].includes(pin.state)&&pin.readyAt===receipt.handoff.readyAt&&pin.operationId===receipt.handoff.operationId&&digest(pin.owner)===digest(receipt.handoff.owner)&&digest(pin.references)===receipt.handoff.referencesSha256&&digest(pin.coordination??null)===digest(receipt.handoff.coordination??null),'archive_pin_identity');\n\
+        \ await verifyFiles(input,manifest,check,anchor.receiptSha256);\n const {value:report,sha256:reportSha}=await\
+        \ json(path.join(input,'report.json'),32*MiB);\n need(reportSha===anchor.reportSha256&&report.provider==='auto_api_che168'&&report.completed===true&&report.completedAt===anchor.completedAt,'report_authority');\n\
+        \ if(anchor===actual){const paid=report.sources?.filter(x=>x.provider==='auto_api_che168')??[];\n\
+        \  need(report.market==='china'&&paid.length===1&&paid[0].completeInventory===true&&paid[0].stopReason==='source_finished'&&paid[0].replica&&\n\
+        \   report.sources.reduce((n,x)=>n+Number(x.observations??0),0)===anchor.rows&&!report.sourceInputWitness&&\n\
+        \   report.sourceInputWitnessUnavailable==='che168_replica_witness_worker_source_unverified','report_coverage');}\n\
+        \ const attached=native.attachIntakeArchiveReceipt(report,receipt);\n await fs.mkdir(outputDirectory,{recursive:false,mode:0o700});progress({stage:'authenticated_local_archive',files:manifest.files.length,archiveBytes:manifest.totalBytes});\n\
+        \ // Native disk converter owns its SQLite working data. Wrapper external watchdog\n // must additionally\
+        \ cap process tree/writes; native converter is not a process controller.\n const converted=await converter.convertMarketOnDisk({market:'china',directory:input,files:manifest.files.map(x=>x.name),out:outputDirectory,report:attached});\n\
+        \ need(converted.uniqueObservations===anchor.rows&&converted.market==='china'&&converted.shards>0&&converted.shards<=1200,'converted_census');\n\
+        \ await verifyFiles(input,manifest,check,anchor.receiptSha256);\n const shards=[];let outputBytes=0;\n\
+        \ for(const f of (await fs.readdir(outputDirectory)).sort()){\n  need(/^catalog-rebuild-china-[0-9]+\\\
+        .json$/.test(f),'converted_scope');const file=path.join(outputDirectory,f),st=await fs.lstat(file);\n\
+        \  const row=await streamFile(file,st.size);shards.push({file:f,...row});outputBytes+=row.bytes;need(outputBytes<=outputCap,'converted_disk_cap');await\
+        \ check();\n }\n need(shards.length===converted.shards,'converted_shard_count');\n const stage={version:1,kind:'china-local-confirmed-input-only',sourceCompletedAt:anchor.completedAt,sourceExpiresAt:freshness(anchor,now),sourceRows:converted.uniqueObservations,archiveManifestSha256:anchor.archiveSha256,receiptSha256:anchor.receiptSha256,reportSha256:anchor.reportSha256,shards,shardsSha256:digest(shards),outputBytes,inventoryV2SealIssued:false,priced:false,providerRequests:0,publicationAuthorized:false,cursorAdvanceAuthorized:false};\n\
+        \ await fs.writeFile(path.join(outputDirectory,'LOCAL_ADMISSION.json'),JSON.stringify(stage),{flag:'wx',mode:0o600});\n\
+        \ return stage;\n}\n\nif(process.argv[1]&&import.meta.url===pathToFileURL(path.resolve(process.argv[1])).href){\n\
+        \ try{\n  need(process.argv.length===8,'usage_native_receipt_manifest_pin_restored_out');\n  const\
+        \ [nativeRoot,receiptPath,archiveManifestPath,rawPinPath,restoredDirectory,outputDirectory]=process.argv.slice(2);\n\
+        \  globalThis.fetch=async()=>fail('network_denied');\n  const a=await prepare({nativeRoot,receiptPath,archiveManifestPath,rawPinPath,restoredDirectory,outputDirectory,\n\
+        \   progress:event=>console.log(JSON.stringify(event))});\n  console.log(JSON.stringify({stage:'converted_input_only',sourceRows:a.sourceRows,sourceExpiresAt:a.sourceExpiresAt,shards:a.shards.length,outputBytes:a.outputBytes,shardsSha256:a.shardsSha256,inventoryV2SealIssued:false,publicationAuthorized:false}));\n\
+        \ }catch(e){console.error(JSON.stringify({stage:'archive_admission_failed',error:/^china_local_archive_[a-z0-9_]+$/.test(e?.message||'')?e.message:'native_validation_failed',publicationAuthorized:false}));process.exitCode=1;}\n\
+        }\nPAYLOAD_EOF\ntest \"$(sha256sum 'archive-code/prepare-native-archive.mjs' | cut -d' ' -f1)\" =\
+        \ 1096910dfae684048b1264c805fe0ecb8b51ba4655e52fdc723e63e210b5e84e\ncat > 'candidate-final/producer/operational/upstream/flow/input/SOURCE_PINS.json'\
+        \ <<'PAYLOAD_EOF'\n{\n  \"files\": {\n    \"scripts/lib/catalog-disk-conversion.mjs\": \"724fb0e853d4f004b53552f8671906b1cb2a07b88fc30028159018eaaa35294f\"\
+        ,\n    \"scripts/lib/catalog-raw-coordination.mjs\": \"503bd7a1d0df5cb7ae43826d90e3a807d95d62293fc181fc5ef6efdb6fa40b3d\"\
+        ,\n    \"scripts/lib/catalog-raw-provenance.mjs\": \"5027a27aa7cb949564aba8e586e7c27c84288e08e68677663c6a1ae2d14215e3\"\
+        ,\n    \"scripts/lib/catalog-raw-session.mjs\": \"e88e75972503f505bb8d094383a2d7e620400fa1e351f9faf37dd29f5faebb39\"\
+        ,\n    \"scripts/lib/catalog-storage-budget.mjs\": \"a44667705087da38a4668ded46eb0f34476516b0719eee26496e56d45c1cdca2\"\
+        ,\n    \"scripts/lib/nonjp-intake-archive.mjs\": \"459c98611117227fa68ae336f1f65c7de939ef4bdb4d8f8e2f132ace171d4247\"\
+        ,\n    \"scripts/lib/read-checkpoint-jsonl.mjs\": \"20d1bbcb1ffb8effc5bcafb744c91fb98bde173f11fdd1522fdfa9db31bf6bcf\"\
+        ,\n    \"scripts/publisher-runtime83/owned-bounded-json.mjs\": \"8b1413a65ff2b1e3811f3bbe1c654523769b5530ce726e738fa62967f29a9752\"\
+        ,\n    \"scripts/publisher-runtime83/raw-coordination-gate.mjs\": \"fc4ee4c488603dd6c5c54a8a9b97afffed54da32c597272244e7081de6dee80e\"\
+        ,\n    \"scripts/publisher-runtime83/raw-internal-provenance.mjs\": \"a6489abdbf91160c7639053043a78a38a994bc5d0a428fc1b332e029e23a8a4d\"\
+        ,\n    \"scripts/publisher-runtime83/source-contribution-reader.mjs\": \"1fa26970657320fe048449ad9d95303c75481b878d21ef96c548058cdbffde9b\"\
+        ,\n    \"apps/web/lib/catalog/runtime-config.ts\": \"300e6ad216e6879eb6815dca986373233e9e78b1ee0c7d1f6531b174bf821752\"\
+        \n  },\n  \"unresolved\": [],\n  \"externalPackagesPinned\": false\n}\nPAYLOAD_EOF\ntest \"$(sha256sum\
+        \ 'candidate-final/producer/operational/upstream/flow/input/SOURCE_PINS.json' | cut -d' ' -f1)\" =\
+        \ 3d0dcc69269e175625166c799532a3a59259c28b7cdcef88886743d367980b06\n\n[[ \"$GITHUB_RUN_ID\" =~ ^[0-9]+$\
+        \ && \"$GITHUB_RUN_ATTEMPT\" = 1 ]]\nunit=\"china-capsule-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}\"\
+        \nimage=\"$root/owned-scratch.ext4\"\nmnt=\"$root/private-scratch\"\ncred=\"$root/private-storage.json\"\
+        \nnode_bin=\"$(command -v node)\"\n[[ \"$node_bin\" = /* && \"$(node --version)\" = v24.22.1 ]]\n\
+        sudo -n true\ncommand -v systemd-run >/dev/null\ncommand -v mkfs.ext4 >/dev/null\ntest \"$(stat -f\
+        \ -c '%T' /sys/fs/cgroup)\" = cgroup2fs\ntest ! -e \"$image\" && test ! -e \"$cred\" && test ! -e\
+        \ \"$mnt\"\nmkdir -m 0700 \"$mnt\"\ncleanup() {\n  status=$?\n  sudo -n systemctl stop \"$unit.service\"\
+        \ >/dev/null 2>&1 || true\n  if mountpoint -q \"$mnt\"; then\n    sudo -n umount \"$mnt\" || { echo\
+        \ 'isolated_scratch_cleanup_unverified'; return 1; }\n  fi\n  rm -f -- \"$cred\" \"$image\"\n  return\
+        \ \"$status\"\n}\ntrap cleanup EXIT\nseconds=\"$(python - <<'PYLIMIT'\nimport os,time\nfrom datetime\
+        \ import datetime\nf=os.statvfs(os.environ['RUNNER_TEMP'])\nassert f.f_bavail*f.f_frsize>=48*1024**3,'actual_job_starting_free_space'\n\
+        expires=datetime.fromisoformat('2026-11-21T05:02:36.435+00:00').timestamp()\nremaining=int(expires-time.time())\n\
+        assert remaining>0,'actual_source_expired'\nprint(min(10800,remaining))\nPYLIMIT\n)\"\ntruncate -s\
+        \ $((24*1024*1024*1024)) \"$image\"\nmkfs.ext4 -q -F -m 0 -E nodiscard,lazy_itable_init=1,lazy_journal_init=1\
+        \ \"$image\"\nsudo -n mount -t ext4 -o loop,nodev,nosuid,noexec \"$image\" \"$mnt\"\nsudo -n chown\
+        \ \"$(id -u):$(id -g)\" \"$mnt\"\nchmod 0700 \"$mnt\"\npython - \"$cred\" <<'PYCRED'\nimport json,os,sys\n\
+        with open(sys.argv[1],'x') as f:\n json.dump({'access':os.environ['YC_OBJECT_STORAGE_ACCESS_KEY_ID'],'secret':os.environ['YC_OBJECT_STORAGE_SECRET_ACCESS_KEY']},f)\n\
+        PYCRED\nunset YC_OBJECT_STORAGE_ACCESS_KEY_ID YC_OBJECT_STORAGE_SECRET_ACCESS_KEY\nsudo -n systemd-run\
+        \ --unit=\"$unit\" --wait --collect --pipe --quiet --uid=\"$(id -u)\" --gid=\"$(id -g)\" \\\n  --working-directory=\"\
+        $root\" --setenv=\"TMPDIR=$mnt\" --setenv=\"HOME=$mnt\" \\\n  --property=MemoryMax=6442450944 --property=MemorySwapMax=0\
+        \ --property=OOMPolicy=stop \\\n  --property=\"RuntimeMaxSec=$seconds\" --property=TimeoutStopSec=30\
+        \ --property=KillMode=control-group \\\n  --property=ProtectSystem=strict --property=\"ReadWritePaths=$mnt\"\
+        \ --property=NoNewPrivileges=yes \\\n  \"$node_bin\" --max-old-space-size=4096 \"$root/archive-code/guarded-capsule-runner.mjs\"\
+        \ \\\n  \"$GITHUB_WORKSPACE/publisher\" \"$root/producer-receipt.json\" \"$cred\" \"$mnt\"\n"
