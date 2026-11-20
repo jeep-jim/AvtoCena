@@ -1,0 +1,51 @@
+name: Observe exact private China stage without changes
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/china-private-stage-observe-20261120.yml]
+permissions:
+  contents: read
+jobs:
+  observe:
+    if: github.repository == 'jeep-jim/AvtoCena' && github.repository_id == '1289722938' && github.ref == 'refs/heads/main' && github.run_attempt == '1' && github.event.head_commit.message == 'Observe exact private China stage without changes'
+    environment: regcloud-staging
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - name: List only the exact current private staging prefix and aggregate locally
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: us-east-1
+          AWS_MAX_ATTEMPTS: '1'
+          AWS_EC2_METADATA_DISABLED: 'true'
+          AWS_PAGER: ''
+        shell: bash
+        run: |
+          set -euo pipefail
+          umask 077
+          d=$(mktemp -d)
+          trap 'rm -rf -- "$d"' EXIT
+          bucket=avtocena-staging-8120751
+          prefix=migration-staging/full-20261011/catalog/private-market-stage-v1/china/full-fresh-44705142814-1/
+          args=(--endpoint-url https://s3.regru.cloud --region us-east-1 --cli-connect-timeout 4 --cli-read-timeout 12 --no-cli-pager)
+          if timeout 45s aws "${args[@]}" s3api list-objects-v2 --bucket "$bucket" --prefix "$prefix" --max-items 3000 --output json > "$d/census.json" 2> "$d/aws-error"; then
+            CHINA_PREFIX="$prefix" python3 - "$d/census.json" <<'PY'
+          import json,os,re,sys
+          d=json.load(open(sys.argv[1])); p=os.environ['CHINA_PREFIX']; rows=d.get('Contents') or []
+          assert len(rows)<=3000 and all(row['Key'].startswith(p) and 0<=row['Size']<=20*1024**3 for row in rows)
+          times=[row.get('LastModified','') for row in rows];assert all(re.fullmatch(r'[0-9T:.+Z-]{16,45}',v) for v in times)
+          print(json.dumps({'kind':'private_china_stage_observation','sampleObjects':len(rows),'sampleBytes':sum(row['Size'] for row in rows),'truncated':bool(d.get('NextToken')),'earliest':min(times,default=None),'latest':max(times,default=None),'readyInSample':any(row['Key']==p+'READY.json' for row in rows),'storageWrites':0,'publicationAuthorized':False}))
+          PY
+          else
+            echo '{"kind":"private_china_stage_observation","censusUnavailable":true,"storageWrites":0,"publicationAuthorized":false}'
+          fi
+          if timeout 18s aws "${args[@]}" s3api head-object --bucket "$bucket" --key "${prefix}READY.json" --output json > "$d/ready.json" 2> "$d/head-error"; then
+            python3 - "$d/ready.json" <<'PY'
+          import json,sys
+          d=json.load(open(sys.argv[1]));size=d.get('ContentLength');assert isinstance(size,int) and 0<size<=32*1024
+          print(json.dumps({'kind':'private_china_stage_ready_head','exists':True,'bytes':size,'storageWrites':0}))
+          PY
+          else
+            echo '{"kind":"private_china_stage_ready_head","verified":false,"storageWrites":0}'
+          fi
