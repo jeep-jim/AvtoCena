@@ -1,0 +1,365 @@
+diff --git a/apps/web/lib/data.ts b/apps/web/lib/data.ts
+--- a/apps/web/lib/data.ts
++++ b/apps/web/lib/data.ts
+@@ -362,6 +362,15 @@
+     const data=objectStorageResponseBody(res);
+     return {data,size:data.length,checksum:sha256(data)};
+   }
++  /** Daily China only: immutable native Che168 gzip parts need the native
++   * 16 MiB chunk size plus bounded compression overhead, never arbitrary keys. */
++  async getChinaReplicaPartBounded(relativePath:string,maximumBytes:number){
++    if(!/^catalog\/provider-replicas\/che168\/[a-f0-9]{8}(?:-[a-f0-9]{4}){3}-[a-f0-9]{12}\/(?:0|[1-9]\d{0,3})\.gz$/.test(relativePath)||
++      !Number.isSafeInteger(maximumBytes)||maximumBytes<1||maximumBytes>17*1024*1024)throw Error('china_replica_read_scope');
++    const res=await this.request("GET",relativePath,undefined,{},maximumBytes);
++    if(!res.ok)throw Error(`object_storage_binary_read_${res.status}`);
++    return objectStorageResponseBody(res);
++  }
+   /** Bounded authenticated metadata read for a single market control. */
+   async readScopedControl(relativePath:string){
+     const res=await this.request('GET',relativePath,undefined,{},32*1024);
+diff --git a/apps/web/lib/catalog/china-regcloud-object-reader.ts b/apps/web/lib/catalog/china-regcloud-object-reader.ts
+--- a/apps/web/lib/catalog/china-regcloud-object-reader.ts
++++ b/apps/web/lib/catalog/china-regcloud-object-reader.ts
+@@ -18,6 +18,7 @@
+ type DurableReady={version:1;kind:'china-private-durable-stage-ready-v1';runId:string;market:'china';stageRoot:string;generationId:string;
+  archiveSha256:string;runtimeReadySha256:string;permitSha256:string;manifestSha256:string;pricingReceiptSha256:string;
+  activeControlSha256:string;expectedChinaPublicBaseSha256:string;admittedRows:number;validUntil:number;
++ sourceCursor:{stream:string;sequence:number;anchorSha256:string};dailySourceCheckpointSha256?:string;
+  artifacts:{count:number;bytes:number;orderedSha256:string};publicationAuthorized:false;cursorAdvanceAuthorized:false};
+ export type ChinaConfiguredStorageScope={endpoint:string;bucket:string;prefix:string;region:string};
+ export function readConfiguredRegcloudScope():ChinaConfiguredStorageScope{
+@@ -71,9 +72,11 @@
+  ready:Readonly<ChinaRuntimeReady>;
+  readySha256:string;
+  acceptedLegalUntil?:number;
++ acceptedRefSha256?:string;
+  durable:Readonly<DurableReady>;
+  getBinary(key:string):Promise<{data:Buffer;size:number;checksum:string}>;
+  readJsonWithMeta<T>(key:string,fallback:T):Promise<JsonReadResult<T>>;
++ readDailySourceCheckpoint():Promise<Buffer|null>;
+  assertPointer():Promise<void>;
+ }>;
+ export function assertChinaStageObjectFiles(handle:ChinaStageObjectFiles){
+@@ -104,6 +107,7 @@
+     ![durable.archiveSha256,durable.runtimeReadySha256,durable.permitSha256,durable.manifestSha256,durable.pricingReceiptSha256,
+      durable.activeControlSha256,durable.expectedChinaPublicBaseSha256,durable.artifacts?.orderedSha256].every(x=>SHA.test(x??''))||
+     !clock(durable.admittedRows)||!clock(durable.artifacts.count)||!clock(durable.artifacts.bytes)||!clock(durable.validUntil)||
++    (durable.dailySourceCheckpointSha256!==undefined&&!SHA.test(durable.dailySourceCheckpointSha256))||
+     (!acceptedRead&&Date.now()>=durable.validUntil))return fail('ready_scope');
+  const stageRuntime=await read('runtime-ready.json',8192);
+  if(stageRuntime.checksum!==durable.runtimeReadySha256)return fail('runtime_ready_sha');
+@@ -122,8 +126,16 @@
+   if(key===LOCAL_CONTROL&&result.checksum!==ready.activeControlSha256)return fail('stage_control_sha');
+   assertChinaStageObjectFiles(handle);return result;
+  };
+- const handle:ChinaStageObjectFiles=Object.freeze({ready:Object.freeze(ready),readySha256:ref.readySha256,...(acceptedLegalUntil===undefined?{}:{acceptedLegalUntil}),durable:Object.freeze(durable),
++ const handle:ChinaStageObjectFiles=Object.freeze({ready:Object.freeze(ready),readySha256:ref.readySha256,...(acceptedLegalUntil===undefined?{}:{acceptedLegalUntil}),
++  ...(acceptedRead?{acceptedRefSha256:chinaObjectDigest(ref)}:{}),durable:Object.freeze(durable),
+   getBinary:data,
++  async readDailySourceCheckpoint(){
++   await handle.assertPointer();
++   if(!durable.dailySourceCheckpointSha256)return null;
++   const object=await read('daily-source-'+durable.dailySourceCheckpointSha256+'.json',16*1024);
++   if(object.checksum!==durable.dailySourceCheckpointSha256)return fail('daily_source_sha');
++   await handle.assertPointer();return object.data;
++  },
+   async readJsonWithMeta<T>(key:string,_fallback:T):Promise<JsonReadResult<T>>{
+    if(key!==LOCAL_CONTROL)return fail('control_scope');
+    const body=await data(key);
+@@ -134,6 +146,22 @@
+  minted.add(handle);await handle.assertPointer();
+  return handle;
+ }
++/** Open only a pointer's accepted active/previous reference, never an
++ * arbitrary expired private draft. Both the initial witness and every
++ * subsequent read are fenced to the same opaque ETag and checksum. */
++export async function openAcceptedChinaRegcloudFiles(storage:ObjectJsonStorage,
++ expected:{checksum:string;etag:string},role:'active'|'previous'){
++ const checksum=expected.checksum,etag=expected.etag;
++ const current=async()=>{
++  const own=await readChinaPublicState(storage);
++  if(!own||own.checksum!==checksum||own.etag!==etag)return fail('active_cut_changed');
++  return own;
++ };
++ const own=await current();
++ const ref=own.state[role];
++ if(!ref||chinaLegacyRollback(ref))return fail('accepted_ref');
++ return openChinaStageObject(storage,ref,async()=>{await current();},true);
++}
+ export async function openConfiguredChinaRegcloudFiles(){
+  if(!chinaRegcloudRuntimeConfigured())return fail('disabled');
+  const scopeKey=chinaObjectDigest(readConfiguredRegcloudScope()),credentialKey=credentials();
+diff --git a/apps/web/lib/catalog/china-daily-source-checkpoint.ts b/apps/web/lib/catalog/china-daily-source-checkpoint.ts
+new file mode 100644
+--- /dev/null
++++ b/apps/web/lib/catalog/china-daily-source-checkpoint.ts
+@@ -0,0 +1,127 @@
++import {createHash} from 'node:crypto';
++import {gunzipSync} from 'node:zlib';
++import {ObjectJsonStorage} from '../data';
++import {assertDurableIntakeArchive} from '../../../../scripts/lib/catalog-raw-provenance.mjs';
++import {chinaObjectDigest,openAcceptedChinaRegcloudFiles,type ChinaStageObjectFiles} from './china-regcloud-object-reader';
++import {openIndependentChinaRegcloud,type IndependentCut} from './independent-market-activation-fixture';
++
++const SHA=/^[a-f0-9]{64}$/, ROOT=/^catalog\/nonjp-intake\/v1\/china\/[1-9]\d{0,19}\/[1-9]\d{0,5}$/;
++const REPLICA=/^catalog\/provider-replicas\/che168\/[a-f0-9]{8}(?:-[a-f0-9]{4}){3}-[a-f0-9]{12}$/;
++const MiB=1024**2, PART=2*MiB, REPLICA_PART=16*MiB, MAX_REPORT=128*MiB, MAX_RECEIPT=16*1024;
++const fail=(reason:string):never=>{throw Error('china_daily_source:'+reason);};
++const sha=(b:Buffer)=>createHash('sha256').update(b).digest('hex');
++const parse=(bytes:Buffer)=>JSON.parse(new TextDecoder('utf-8',{fatal:true}).decode(bytes));
++const int=(n:unknown):n is number=>Number.isSafeInteger(n)&&Number(n)>0;
++type Source=IndependentCut['source'];
++type Anchor={root:string;manifestSha256:string;reportSha256:string;receiptSha256:string};
++type Replica={key:string;binding:string;cursor:number;sha256:string};
++export type ChinaDailySourceCheckpoint={
++ version:1;kind:'china-daily-source-checkpoint-v1';market:'china';archive:Anchor;replica:Replica;
++ observedAt:number;sourceRows:number;
++};
++export type ChinaDailyBase={checksum:string;etag:string};
++
++function anchorFromReceipt(b:Buffer,source:Source,archiveSha256:string):Anchor{
++ if(!Buffer.isBuffer(b)||b.length<1||b.length>MAX_RECEIPT||sha(b)!==source.receiptSha256)return fail('receipt_sha');
++ const raw=parse(b);
++ let receipt;try{receipt=assertDurableIntakeArchive(raw,'china');}catch{return fail('archive_receipt');}
++ if(receipt.manifestSha256!==archiveSha256||!ROOT.test(receipt.root))return fail('archive_receipt');
++ return {root:receipt.root,manifestSha256:receipt.manifestSha256,reportSha256:receipt.reportDigest,receiptSha256:source.receiptSha256};
++}
++async function openArchiveSource(storage:ObjectJsonStorage,anchor:Anchor,source:Source,archiveSha256:string,guard:()=>Promise<void>,verifyReplicaParts:boolean,expectedSnapshotBinding?:string){
++ if(!anchor||!ROOT.test(anchor.root)||![anchor.manifestSha256,anchor.receiptSha256,anchor.reportSha256].every(x=>SHA.test(x??''))||
++    anchor.manifestSha256!==archiveSha256||anchor.receiptSha256!==source.receiptSha256||source.cursor.stream!=='che168')return fail('archive_scope');
++ const read=async(key:string,max:number)=>{await guard();const r=await storage.getBinaryBounded(key,max);await guard();return r.data;};
++ const manifest=parse(await read(anchor.root+'/complete.json',2*MiB));
++ if(chinaObjectDigest(manifest)!==archiveSha256||manifest?.version!==1||manifest.kind!=='nonjp-intake'||manifest.market!=='china'||
++    manifest.collection?.complete!==true||manifest.reportDigest!==anchor.reportSha256||!Array.isArray(manifest.files)||manifest.files.length>20_000||
++    anchor.root!=='catalog/nonjp-intake/v1/china/'+manifest.owner?.runId+'/'+manifest.owner?.attempt)return fail('archive_manifest');
++ const entries=manifest.files.filter((f:{name?:string}|null)=>f?.name==='report.json');
++ const f=entries[0];
++ if(entries.length!==1||!int(f.bytes)||f.bytes>MAX_REPORT||f.sha256!==anchor.reportSha256||!Array.isArray(f.parts)||
++    f.parts.length!==Math.ceil(f.bytes/PART))return fail('archive_report_manifest');
++ const bytes=Buffer.alloc(f.bytes),hash=createHash('sha256');
++ for(const [i,part] of f.parts.entries()){
++  const size=Math.min(PART,f.bytes-i*PART);
++  if(!SHA.test(part?.sha256??'')||part.bytes!==size||part.key!==anchor.root+'/files/report.json/'+i+'-'+part.sha256+'.json')
++   return fail('report_shard_scope');
++  const wire=parse(await read(part.key,4*MiB));
++  if(wire?.version!==1||wire.encoding!=='gzip-base64'||wire.sha256!==part.sha256||wire.bytes!==size||
++     typeof wire.payload!=='string'||wire.payload.length>4*MiB)return fail('report_shard_wire');
++  const encoded=Buffer.from(wire.payload,'base64');
++  if(encoded.toString('base64')!==wire.payload)return fail('report_shard_wire');
++  let raw;try{raw=gunzipSync(encoded,{maxOutputLength:size});}catch{return fail('report_shard_integrity');}
++  if(raw.length!==size||sha(raw)!==part.sha256)return fail('report_shard_integrity');
++  raw.copy(bytes,i*PART);hash.update(raw);
++ }
++ if(hash.digest('hex')!==anchor.reportSha256)return fail('report_sha');
++ const report=parse(bytes),matches=Array.isArray(report?.sources)?report.sources.filter((x:{provider?:string}|null)=>x?.provider==='auto_api_che168'):[];
++ const next=matches[0],replica=next?.replica;
++ if(report?.version!==1||report.market!=='china'||report.provider!=='auto_api_che168'||report.completed!==true||report.failure||
++    Date.parse(report.completedAt)!==source.observedAt||matches.length!==1||next.sourceId!=='autohome_used_china_open'||
++    next.completeInventory!==true||next.stopReason!=='source_finished'||next.rejectedIdentity!==0||
++    !int(next.uniqueOffers)||next.uniqueOffers!==next.observations||!int(next.initialCursor)||next.initialCursor>next.cursor||
++    next.cursor!==source.cursor.sequence||!REPLICA.test(replica?.key??'')||replica.sha256!==source.cursor.anchorSha256||
++    replica.cursor!==next.cursor||!SHA.test(replica.binding??'')||replica.binding!==next.snapshotBinding)return fail('report_source');
++ if(expectedSnapshotBinding!==undefined&&replica.binding!==expectedSnapshotBinding)return fail('snapshot_binding');
++ const replicaManifest=parse(await read(replica.key+'/manifest.json',2*MiB));
++ if(chinaObjectDigest(replicaManifest)!==replica.sha256||replicaManifest?.version!==1||
++    replicaManifest.binding!==replica.binding||replicaManifest.cursor!==replica.cursor||!int(replicaManifest.bytes)||
++    !Array.isArray(replicaManifest.parts)||replicaManifest.parts.length!==Math.ceil(replicaManifest.bytes/REPLICA_PART)||
++    replicaManifest.parts.length>1024)return fail('replica_manifest');
++ for(const [i,part] of replicaManifest.parts.entries()){
++  const size=Math.min(REPLICA_PART,replicaManifest.bytes-i*REPLICA_PART);
++  if(part?.bytes!==size||!SHA.test(part.sha256??''))return fail('replica_manifest');
++  if(!verifyReplicaParts)continue;
++  await guard();
++  const gzip=await storage.getChinaReplicaPartBounded(replica.key+'/'+i+'.gz',Math.min(17*MiB,size+65_536));
++  let raw;try{raw=gunzipSync(gzip,{maxOutputLength:size});}catch{return fail('replica_shard_integrity');}
++  if(raw.length!==size||sha(raw)!==part.sha256)return fail('replica_shard_integrity');
++ }
++ await guard();
++ const descriptor:Replica={key:replica.key,binding:replica.binding,cursor:replica.cursor,sha256:replica.sha256};
++ const checkpoint:ChinaDailySourceCheckpoint={version:1,kind:'china-daily-source-checkpoint-v1',market:'china',archive:anchor,
++  replica:descriptor,observedAt:source.observedAt,sourceRows:next.uniqueOffers};
++ return {checkpoint,initialCursor:next.initialCursor as number,baseReplica:next.baseReplica as {key?:string;sha256?:string}|undefined};
++}
++
++function activeGuard(stage:ChinaStageObjectFiles,cut:{assertCurrent:()=>Promise<void>}){
++ return async()=>{await cut.assertCurrent();await stage.assertPointer();};
++}
++/** Existing v1 first-cut READY needs no rewrite. An optional bootstrap
++ * receipt must be byte-exact to its own cut, not to a legacy cursor. */
++export async function openChinaDailyAcceptedSource(storage:ObjectJsonStorage,expected:ChinaDailyBase,bootstrapReceipt?:Buffer,expectedSnapshotBinding?:string){
++ return openAcceptedSource(storage,expected,bootstrapReceipt,true,expectedSnapshotBinding);
++}
++async function openAcceptedSource(storage:ObjectJsonStorage,expected:ChinaDailyBase,bootstrapReceipt:Buffer|undefined,verifyReplicaParts:boolean,expectedSnapshotBinding?:string){
++ const stage=await openAcceptedChinaRegcloudFiles(storage,expected,'active');
++ const opened=await openIndependentChinaRegcloud(stage).openChinaPrepared(),source=opened.cut.source,guard=activeGuard(stage,opened);
++ const [stored,archiveSha256]=[await stage.readDailySourceCheckpoint(),stage.ready.archiveSha256];
++ if(stored&&bootstrapReceipt)return fail('bootstrap_not_permitted');
++ const decoded=stored?parse(stored) as ChinaDailySourceCheckpoint:null;
++ if(!decoded&&!bootstrapReceipt)return fail('bootstrap_receipt_required');
++ const anchor=decoded?decoded.archive:anchorFromReceipt(bootstrapReceipt!,source,archiveSha256);
++ const result=await openArchiveSource(storage,anchor,source,archiveSha256,guard,verifyReplicaParts,expectedSnapshotBinding);
++ if(decoded&&chinaObjectDigest(result.checkpoint)!==sha(stored!))return fail('checkpoint_binding');
++ await guard();
++ return {checkpoint:result.checkpoint,assertCurrent:guard};
++}
++
++export async function bindChinaDailyStageSource(input:{
++ storage:ObjectJsonStorage;base:ChinaDailyBase;expectedBaseSha256:string;
++ candidate:Source;archiveSha256:string;receipt:Buffer;bootstrapReceipt?:Buffer;
++}){
++ const current=await openAcceptedSource(input.storage,input.base,input.bootstrapReceipt,false);
++ // The opaque state witness fixes the exact cursor/pointer revision while
++ // expectedBaseSha256 must also match the active reference of that witness.
++ const stage=await openAcceptedChinaRegcloudFiles(input.storage,input.base,'active');
++ if(stage.acceptedRefSha256!==input.expectedBaseSha256)return fail('base_ref');
++ const anchor=anchorFromReceipt(input.receipt,input.candidate,input.archiveSha256);
++ const next=await openArchiveSource(input.storage,anchor,input.candidate,input.archiveSha256,current.assertCurrent,true);
++ const prev=current.checkpoint.replica,replica=next.checkpoint.replica;
++ if(next.initialCursor!==prev.cursor||next.baseReplica?.key!==prev.key||next.baseReplica.sha256!==prev.sha256||
++    replica.binding!==prev.binding||replica.cursor<prev.cursor||
++    (replica.cursor===prev.cursor&&(replica.key!==prev.key||replica.sha256!==prev.sha256)))return fail('replica_ancestry');
++ await current.assertCurrent();
++ return {bytes:Buffer.from(JSON.stringify(next.checkpoint)),assertCurrent:current.assertCurrent};
++}
+diff --git a/scripts/lib/che168-bulk-resume.mjs b/scripts/lib/che168-bulk-resume.mjs
+new file mode 100644
+--- /dev/null
++++ b/scripts/lib/che168-bulk-resume.mjs
+@@ -0,0 +1,19 @@
++import {createHash} from 'node:crypto';
++import {snapshotBinding} from './che168-snapshot.mjs';
++
++/** Exact native Che168 start state. This function does no IO and has no
++ * permission to collect, save a cursor, choose a global publisher or retry. */
++export function resolveChe168BulkResume({config,saved,sourceId,yearFrom,required=false,now=Date.now()}){
++ const binding=snapshotBinding(config);
++ const previous=saved?.sources?.find(row=>row.sourceId===sourceId);
++ const resume=previous?.snapshotBinding===binding && previous.yearFrom===yearFrom;
++ if(required&&!resume)throw Error('auto_api_saved_replica_required');
++ if(resume&&(saved.version!==1||saved.market!=='china'||!saved.generationId||previous.provider!=='auto_api_che168'
++  ||!Number.isSafeInteger(previous.cursor)||previous.cursor<config.initialCursor||!previous.replica
++  ||!Number.isFinite(Date.parse(saved.updatedAt))||Date.parse(saved.updatedAt)>now
++  ||previous.stopReason!=='source_finished'))throw Error('auto_api_invalid_saved_replica_cursor');
++ const initialCursor=resume?previous.cursor:config.initialCursor;
++ const journalBinding=createHash('sha256').update(JSON.stringify({binding,initialCursor,base:resume?previous.replica:null,replayVersion:2})).digest('hex');
++ const artifactRunId=BigInt('0x'+journalBinding.slice(0,14)).toString();
++ return {binding,previous,resume,initialCursor,journalBinding,artifactRunId};
++}
+diff --git a/scripts/catalog-china-daily-dry.mts b/scripts/catalog-china-daily-dry.mts
+new file mode 100644
+--- /dev/null
++++ b/scripts/catalog-china-daily-dry.mts
+@@ -0,0 +1,113 @@
++/** Dry owner review only. No supplier client, collector executable, pricing,
++ * scheduling, cursor writer or activation is imported or callable here. */
++import {createHash} from 'node:crypto';
++import fs from 'node:fs/promises';
++import path from 'node:path';
++import {pathToFileURL} from 'node:url';
++import {parseArgs} from 'node:util';
++import {ObjectJsonStorage} from '../apps/web/lib/data';
++import {CHINA_MIN_MODEL_YEAR} from '../apps/web/lib/catalog/china-year-policy';
++import {AUTO_API_CHE168_SOURCE as sourceId} from '../apps/web/lib/catalog/auto-api-che168';
++import {openChinaDailyAcceptedSource} from '../apps/web/lib/catalog/china-daily-source-checkpoint';
++import {CHINA_PUBLIC_CONTROL,openAcceptedChinaRegcloudFiles,readChinaPublicState,readConfiguredRegcloudScope,
++ chinaLegacyRollback,validChinaPublicRef,chinaObjectDigest,type ChinaPublicRef} from '../apps/web/lib/catalog/china-regcloud-object-reader';
++import {resolveChe168BulkResume} from './lib/che168-bulk-resume.mjs';
++import {snapshotBinding} from './lib/che168-snapshot.mjs';
++
++const SHA=/^[a-f0-9]{64}$/,ROOT=/^catalog\/nonjp-intake\/v1\/china\/[1-9]\d{0,19}\/[1-9]\d{0,5}$/;
++const STORAGE=Object.freeze({endpoint:'https://s3.regru.cloud',bucket:'avtocena-staging-8120751',region:'us-east-1',prefix:'migration-staging/full-20261011'});
++const cfg=(x:unknown)=>Object.entries(STORAGE).every(([k,v])=>(x as Record<string,unknown>)?.[k]===v);
++const fail=(label:string):never=>{throw Error('china_daily_dry:'+label);};
++const sha=(b:Buffer)=>createHash('sha256').update(b).digest('hex');
++const json=(b:Buffer)=>JSON.parse(new TextDecoder('utf-8',{fatal:true}).decode(b));
++const storedPrefix='catalog/private-market-stage-v1/china/';
++const REP=/^catalog\/provider-replicas\/che168\/[a-f0-9]{8}(?:-[a-f0-9]{4}){3}-[a-f0-9]{12}\/(?:manifest\.json|(?:0|[1-9]\d{0,3})\.gz)$/;
++
++type Approved={
++ version:1;kind:'china-independent-daily-dry-v1';market:'china';
++ controlSha256:string;revision:number;target:ChinaPublicRef;archiveRoot:string;archiveSha256:string;
++ snapshotConfigSha256:string;bootstrapReceiptSha256?:string;
++};
++function parseApproved(raw:Buffer,expected:string):Approved{
++ if(!Buffer.isBuffer(raw)||raw.length===0||raw.length>16*1024||!SHA.test(expected)||sha(raw)!==expected)return fail('plan_sha');
++ const a=json(raw);
++ const names=['version','kind','market','controlSha256','revision','target','archiveRoot','archiveSha256','snapshotConfigSha256'];
++ if(a?.version!==1||a.kind!=='china-independent-daily-dry-v1'||a.market!=='china'||!validChinaPublicRef(a.target)||
++  Object.keys(a.target).length!==3||!Number.isSafeInteger(a.revision)||a.revision<1||!ROOT.test(a.archiveRoot??'')||
++  ![a.controlSha256,a.archiveSha256,a.snapshotConfigSha256].every(x=>SHA.test(x??''))||
++  (a.bootstrapReceiptSha256!==undefined&&!SHA.test(a.bootstrapReceiptSha256))||
++  Object.keys(a).some(k=>!names.includes(k)&&k!=='bootstrapReceiptSha256'))return fail('plan_scope');
++ return a;
++}
++export async function inspectChinaDailyDry(input:{plan:Buffer;expectedPlanSha256:string;snapshotConfig:Buffer;bootstrapReceipt?:Buffer}){
++ const p=parseApproved(input.plan,input.expectedPlanSha256);
++ if(!cfg(readConfiguredRegcloudScope()))return fail('storage_scope');
++ if(!Buffer.isBuffer(input.snapshotConfig)||input.snapshotConfig.length>128*1024||sha(input.snapshotConfig)!==p.snapshotConfigSha256||
++    p.bootstrapReceiptSha256!==(input.bootstrapReceipt?sha(input.bootstrapReceipt):undefined))return fail('local_input_pin');
++ const config=json(input.snapshotConfig),expectedSnapshotBinding=snapshotBinding(config);
++ const original=globalThis.fetch,begin=Date.now();
++ const bound='/'+STORAGE.bucket+'/'+STORAGE.prefix+'/',cutPrefix=storedPrefix+p.target.runId+'/';
++ let gets=0;const seen=new Set<string>();
++ const allow=(key:string)=>key===CHINA_PUBLIC_CONTROL||REP.test(key)||
++  key===p.archiveRoot+'/complete.json'||(key.startsWith(p.archiveRoot+'/files/report.json/')&&/^\d+-[a-f0-9]{64}\.json$/.test(key.slice(p.archiveRoot.length+19)))||
++  (key.startsWith(cutPrefix)&&key.split('/').every(x=>/^[a-zA-Z0-9_.-]+$/.test(x)&&x!=='.'&&x!=='..'));
++ globalThis.fetch=async(raw,init)=>{
++  if(!(typeof raw==='string'||raw instanceof URL)||init?.method!=='GET'||init?.redirect!=='error')return fail('no_network_write');
++  const u=new URL(raw);
++  if(u.origin!==STORAGE.endpoint||u.search||u.hash||u.username||u.password||!u.pathname.startsWith(bound))return fail('no_supplier_or_foreign_read');
++  const key=decodeURIComponent(u.pathname.slice(bound.length));
++  if(!allow(key)||++gets>12_000||Date.now()-begin>=600_000)return fail('read_scope_or_budget');
++  seen.add(key);
++  return original(raw,init);
++ };
++ try{
++  const storage=new ObjectJsonStorage(),before=await readChinaPublicState(storage);
++  if(!before||before.checksum!==p.controlSha256||before.state.revision!==p.revision||chinaLegacyRollback(before.state.active)||
++    chinaObjectDigest(before.state.active)!==chinaObjectDigest(p.target))return fail('accepted_pointer');
++  const stage=await openAcceptedChinaRegcloudFiles(storage,before,'active');
++  if(stage.ready.archiveSha256!==p.archiveSha256)return fail('archive_pin');
++  const accepted=await openChinaDailyAcceptedSource(storage,before,input.bootstrapReceipt,expectedSnapshotBinding);
++  const a=accepted.checkpoint;
++  if(a.archive.root!==p.archiveRoot||a.archive.manifestSha256!==p.archiveSha256)return fail('archive_pin');
++  // No data is written into the legacy cursor. This in-memory adapter is the
++  // exact input the existing native bulk collector would use, not authority.
++  const saved={version:1,market:'china',generationId:p.target.generationId,updatedAt:new Date(a.observedAt).toISOString(),
++   sources:[{sourceId,provider:'auto_api_che168',snapshotBinding:a.replica.binding,yearFrom:CHINA_MIN_MODEL_YEAR,
++    cursor:a.replica.cursor,replica:a.replica,stopReason:'source_finished'}]};
++  const native=resolveChe168BulkResume({config,saved,sourceId,yearFrom:CHINA_MIN_MODEL_YEAR,required:true});
++  if(!native.resume||native.initialCursor!==a.replica.cursor||native.binding!==a.replica.binding)return fail('native_continuity');
++  await accepted.assertCurrent();
++  const now=Date.now();
++  return {version:1,kind:'china-independent-daily-dry-evidence-v1',market:'china',generationId:p.target.generationId,revision:p.revision,
++   controlSha256:p.controlSha256,sourceObservedAt:new Date(a.observedAt).toISOString(),sourceRows:a.sourceRows,
++   currentStageDraftExpired:now>=stage.ready.validUntil,currentStageDraftValidUntil:stage.ready.validUntil,acceptedLegalUntil:stage.acceptedLegalUntil??stage.ready.validUntil,legalHorizonProven:stage.acceptedLegalUntil!==undefined,
++   nativeResume:{mode:'local_replica_and_changes',initialCursor:native.initialCursor,replicaSha256:a.replica.sha256,
++    snapshotBinding:native.binding,journalBinding:native.journalBinding,artifactRunId:native.artifactRunId},
++   nextArchiveMustBeFresh:true,scheduleHeld:true,scheduledUtc:'14:00',signedStorageGets:gets,distinctObjects:seen.size,
++   supplierRequests:0,storageWrites:0,publicationAuthorized:false,cursorAdvanceAuthorized:false};
++ }finally{globalThis.fetch=original;}
++}
++async function local(file:string,max:number){
++ const resolved=path.resolve(file);
++ if(await fs.realpath(resolved)!==resolved)return fail('local_file');
++ const handle=await fs.open(resolved,'r');try{
++  const st=await handle.stat();
++  if(!st.isFile()||st.size<1||st.size>max)return fail('local_file');
++  const b=await handle.readFile();if(b.length!==st.size)return fail('local_file');return b;
++ }finally{await handle.close();}
++}
++if(process.argv[1]&&import.meta.url===pathToFileURL(path.resolve(process.argv[1])).href){
++ try{
++  const {values:v}=parseArgs({options:{plan:{type:'string'},'expect-plan-sha':{type:'string'},'snapshot-config':{type:'string'},'bootstrap-receipt':{type:'string'}}});
++  if(!v.plan||!v['expect-plan-sha']||!v['snapshot-config'])throw Error('china_daily_dry:args');
++  const detail=await inspectChinaDailyDry({plan:await local(v.plan,16*1024),expectedPlanSha256:v['expect-plan-sha'],
++   snapshotConfig:await local(v['snapshot-config'],128*1024),bootstrapReceipt:v['bootstrap-receipt']?await local(v['bootstrap-receipt'],16*1024):undefined});
++  console.log(JSON.stringify(detail));
++ }catch(e){
++  const msg=e instanceof Error?e.message:'';
++  console.error(JSON.stringify({status:'held',reason:/^(?:china_daily_dry|china_daily_source|china_own_regcloud):[a-z0-9_]+$/.test(msg)?msg:
++   /^auto_api_(?:saved_replica_required|invalid_saved_replica_cursor|invalid_snapshot_config)$/.test(msg)?msg:'source_validation_unverified',
++   scheduleHeld:true,supplierRequests:0,storageWrites:0,publicationAuthorized:false,cursorAdvanceAuthorized:false}));
++  process.exitCode=1;
++ }
++}

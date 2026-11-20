@@ -1,0 +1,100 @@
+# Inert until the exact review marker and title are explicitly committed.
+# Never enable the held 14:00Z source/publish scheduler from this workflow.
+name: Verify the independent China daily source without writes
+on:
+  push:
+    branches: [main]
+    paths: [.github/market-runs/china-independent-daily-source-preflight-v1.sha256]
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: china-independent-daily-source-preflight-v1
+  cancel-in-progress: false
+jobs:
+  verify:
+    name: Verify the independent China daily source without writes
+    if: github.repository == 'jeep-jim/AvtoCena' && github.repository_id == '1289722938' && github.ref == 'refs/heads/main' && github.run_attempt == '1' && github.event.head_commit.message == 'Verify the independent China daily source without writes'
+    runs-on: ubuntu-24.04
+    environment: regcloud-staging
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 24.22.1
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: f4dc98aaab916b29419d173994d66562aa5901f1
+          path: daily-read-actor
+          persist-credentials: false
+      - name: Check exact detached source and install locked dependencies without service secrets
+        shell: bash
+        run: |
+          set -euo pipefail
+          umask 077
+          readonly ops=.github/operations/china-daily-dry-v1
+          readonly plan=3b59460ceca450b10d5565fd31da6d1da10c993498a7419085327bb2594524d3
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          test "$(git -C daily-read-actor rev-parse HEAD)" = f4dc98aaab916b29419d173994d66562aa5901f1
+          test "$(sha256sum "$ops/APPROVED_CODE.sha256" | cut -d ' ' -f 1)" = 6cfddd47561314a7318aa2193407511fb2e93db0dbc11f48dfb845f9efe1c367
+          (cd "$ops"; sha256sum --strict --check --status APPROVED_CODE.sha256)
+          printf '%s\n' "$plan" | cmp -s - .github/market-runs/china-independent-daily-source-preflight-v1.sha256
+          test "$(sha256sum "$ops/approved-first-rev5.json" | cut -d ' ' -f 1)" = "$plan"
+          test "$(sha256sum daily-read-actor/package-lock.json | cut -d ' ' -f 1)" = c0fa7c95f31d67a4025aec11095f7889842b32dfb1a6eb12fc64f3d89e9936eb
+          test "$(sha256sum daily-read-actor/data/catalog/che168-snapshot-v1.json | cut -d ' ' -f 1)" = 25abfa4b8f1b053b12a1fcd86f01dc42de65eb8cb74f3863abf1a49115dfdb27
+          git -C daily-read-actor apply --check "$GITHUB_WORKSPACE/$ops/readonly-actor-overlay.patch"
+          git -C daily-read-actor apply --index "$GITHUB_WORKSPACE/$ops/readonly-actor-overlay.patch"
+          (cd daily-read-actor; npm ci --ignore-scripts --no-audit --no-fund)
+          git -C daily-read-actor diff --exit-code
+          test "$(git -C daily-read-actor write-tree)" = 67680b8ef5277e2825b23a1493e2469f0ced9b58
+      - name: Authenticate the original terminal collector receipt, no RegCloud access
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          umask 077
+          scratch="$(mktemp -d "$RUNNER_TEMP/china-independent-daily-preflight.XXXXXXXX")"
+          trap 'rm -rf -- "$scratch"' ERR
+          readonly api=repos/jeep-jim/AvtoCena/actions
+          (ulimit -f 128; timeout 40s gh api "$api/runs/44457059256" > "$scratch/run.json" 2>/dev/null)
+          (ulimit -f 64; timeout 40s gh api "$api/artifacts/14500964905" > "$scratch/artifact.json" 2>/dev/null)
+          (ulimit -f 32; timeout 40s gh api "$api/artifacts/14500964905/zip" > "$scratch/receipt.zip" 2>/dev/null)
+          unset GH_TOKEN
+          python3 .github/operations/china-daily-dry-v1/verify-original-receipt.py "$scratch"
+          printf 'CHINA_DAILY_DRY_PRIVATE_TEMP=%s\n' "$scratch" >> "$GITHUB_ENV"
+      - name: Read the exact accepted own control and archive through the existing protected RegCloud signer
+        shell: bash
+        env:
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011
+          YC_OBJECT_STORAGE_REGION: us-east-1
+          JSON_STORAGE_DRIVER: object
+          YC_OBJECT_STORAGE_MAX_ATTEMPTS: '3'
+          YC_OBJECT_STORAGE_REQUEST_TIMEOUT_MS: '35000'
+          NODE_OPTIONS: ''
+        run: |
+          set -euo pipefail
+          umask 077
+          scratch="$CHINA_DAILY_DRY_PRIVATE_TEMP"
+          [[ "$scratch" == "$RUNNER_TEMP"/china-independent-daily-preflight.* ]]
+          trap 'rm -rf -- "$scratch"' EXIT
+          readonly ops="$GITHUB_WORKSPACE/.github/operations/china-daily-dry-v1"
+          test "$(sha256sum "$ops/APPROVED_CODE.sha256" | cut -d ' ' -f 1)" = 6cfddd47561314a7318aa2193407511fb2e93db0dbc11f48dfb845f9efe1c367
+          (cd "$ops"; sha256sum --strict --check --status APPROVED_CODE.sha256)
+          git -C daily-read-actor diff --exit-code
+          test "$(git -C daily-read-actor write-tree)" = 67680b8ef5277e2825b23a1493e2469f0ced9b58
+          rc=0
+          (cd daily-read-actor; ulimit -f 32
+           timeout --signal=TERM --kill-after=5s 610s node --import tsx scripts/catalog-china-daily-dry.mts \
+            --plan "$ops/approved-first-rev5.json" --expect-plan-sha 3b59460ceca450b10d5565fd31da6d1da10c993498a7419085327bb2594524d3 \
+            --snapshot-config data/catalog/che168-snapshot-v1.json --bootstrap-receipt "$scratch/original-receipt.json") \
+             > "$scratch/actor.stdout" 2> "$scratch/actor.stderr" || rc=$?
+          unset YC_OBJECT_STORAGE_ACCESS_KEY_ID YC_OBJECT_STORAGE_SECRET_ACCESS_KEY
+          python3 "$ops/filter-dry-evidence.py" "$scratch" "$rc"
