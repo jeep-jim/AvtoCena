@@ -1,0 +1,163 @@
+name: Inspect exact saved China archive availability without restoring
+'on':
+  push:
+    branches:
+    - main
+    paths:
+    - .github/workflows/china-capsule-head-preflight-20261120.yml
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: china-capsule-head-preflight-20261120
+  cancel-in-progress: false
+jobs:
+  inspect:
+    if: github.repository == 'jeep-jim/AvtoCena' && github.repository_id == '1289722938' && github.ref ==
+      'refs/heads/main' && github.run_attempt == '1' && github.event.before == '14a811b486418537c86cd86566746f48aba758dc'
+      && github.event.head_commit.message == 'Inspect exact saved China archive availability without restoring'
+    environment: regcloud-staging
+    runs-on: ubuntu-latest
+    timeout-minutes: 13
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        ref: bb6317bffd1f7b1832681ac78378fe6c3e39e3b5
+        path: publisher
+        persist-credentials: false
+        sparse-checkout: 'scripts/lib
+
+          scripts/publisher-runtime83
+
+          apps/web/lib
+
+          packages/engine/src
+
+          '
+    - uses: actions/setup-node@v4
+      with:
+        node-version: 24.22.1
+    - name: Observe actual runner resources, do not qualify full restore
+      run: 'set -euo pipefail
+
+        python - <<''PY''
+
+        import os,json
+
+        from pathlib import Path
+
+        p=Path(os.environ[''RUNNER_TEMP''])
+
+        v=os.statvfs(p)
+
+        cg=Path(''/sys/fs/cgroup/memory.max'')
+
+        m=cg.read_text().strip() if cg.is_file() else None
+
+        free=v.f_bavail*v.f_frsize
+
+        print(json.dumps({''observedRunnerTempFreeBytes'':free,''start48GiBRequirementMet'':free>=48*(1024**3),''observedPhysicalMemoryBytes'':os.sysconf(''SC_PHYS_PAGES'')*os.sysconf(''SC_PAGE_SIZE''),''visibleCgroupMemoryMaxBytes'':int(m)
+        if m and m.isdigit() else None,''runnerTempDedicatedMountObserved'':os.path.ismount(p),''hardJobDiskQuotaProven'':False,''hardOwnedProcessCgroupProven'':False,''fullRestoreQualified'':False}))
+
+        PY
+
+        '
+    - name: Authenticate exact small receipt against completed collector
+      env:
+        CHINA_COLLECTOR_RUN: '44457059256'
+        CHINA_COLLECTOR_ATTEMPT: '1'
+        CHINA_COLLECTOR_REVISION: 038574d914de2436cd10871629b1b0a8fe83a92c
+        CHINA_RECEIPT_ARTIFACT: '14500964905'
+        CHINA_RECEIPT_ZIP_SHA256: c0802faab0b9ecc39e6d44b53d66f76c19cac485258f5ed2c80e5c2b59ac8097
+        CHINA_EXPECTED_ARCHIVE_SHA256: b8a2a25dc27390845dd5a423efa323c9472a338b1b97f413ba96aefa7f3b65ca
+        CHINA_EXPECTED_REPORT_DIGEST: 894bb1eb1b37042de7ce611e19d8e33bfd58c01546d2a812f2c87f96cd906caf
+        GH_TOKEN: ${{ github.token }}
+      run: "set -euo pipefail\numask 077\ntest \"$(git -C publisher rev-parse HEAD)\" = bb6317bffd1f7b1832681ac78378fe6c3e39e3b5\n\
+        mkdir -m 0700 \"$RUNNER_TEMP/china-job\"\ncd \"$RUNNER_TEMP/china-job\"\ngh api repos/jeep-jim/AvtoCena/actions/runs/44457059256\
+        \ > producer-run.json\ngh api repos/jeep-jim/AvtoCena/actions/artifacts/14500964905 > producer-artifact.json\n\
+        gh api repos/jeep-jim/AvtoCena/actions/artifacts/14500964905/zip > producer-receipt.zip\npython -\
+        \ <<'VERIFY'\n#!/usr/bin/env python3\n\"\"\"Bind the small durable receipt to a terminal existing\
+        \ collect-only Actions job.\"\"\"\nimport hashlib,json,os,pathlib,re,stat,sys,zipfile\nroot=pathlib.Path(os.environ['RUNNER_TEMP'])/'china-job'\n\
+        run=json.loads((root/'producer-run.json').read_text())\nmeta=json.loads((root/'producer-artifact.json').read_text())\n\
+        def require(ok):\n if not ok: raise SystemExit('fresh_china_producer_binding_refused')\nvid=os.environ['CHINA_COLLECTOR_REVISION'];rid=int(os.environ['CHINA_COLLECTOR_RUN']);att=int(os.environ['CHINA_COLLECTOR_ATTEMPT'])\n\
+        aid=int(os.environ['CHINA_RECEIPT_ARTIFACT']);expected_zip=os.environ['CHINA_RECEIPT_ZIP_SHA256']\n\
+        require(re.fullmatch('[a-f0-9]{40}',vid) and re.fullmatch('[a-f0-9]{64}',expected_zip))\nrequire(run.get('id')==rid\
+        \ and run.get('run_attempt')==att and run.get('head_sha')==vid and run.get('head_branch')=='main'\n\
+        \ and run.get('status')=='completed' and run.get('conclusion')=='success' and run.get('event')=='push'\n\
+        \ and run.get('path')=='.github/workflows/collect-china-ordinary-20261119.yml'\n and run.get('repository',{}).get('full_name')=='jeep-jim/AvtoCena')\n\
+        repo_id=run['repository']['id'];require(repo_id==1289722938);w=meta.get('workflow_run',{})\narchive=root/'producer-receipt.zip'\n\
+        require(meta.get('id')==aid and meta.get('expired') is False and meta.get('digest')=='sha256:'+expected_zip\n\
+        \        and meta.get('name')==f'china-collection-receipt-{rid}-{att}'\n        and w.get('id')==rid\
+        \ and w.get('head_sha')==vid and w.get('head_branch')=='main'\n        and w.get('repository_id')==repo_id\
+        \ and w.get('head_repository_id')==repo_id\n        and 0<meta.get('size_in_bytes',0)<=32768\n   \
+        \     and archive.stat().st_size==meta['size_in_bytes'] and hashlib.sha256(archive.read_bytes()).hexdigest()==expected_zip)\n\
+        with zipfile.ZipFile(archive) as z:\n infos=z.infolist()\n require(len(infos)==1 and infos[0].filename=='own-storage-receipt.json'\
+        \ and not infos[0].is_dir()\n         and 0<infos[0].file_size<=32768 and stat.S_IFMT(infos[0].external_attr>>16)\
+        \ in (0,stat.S_IFREG))\n data=z.read(infos[0])\nreceipt=json.loads(data);rootkey=f'catalog/nonjp-intake/v1/china/{rid}/{att}'\n\
+        require(receipt.get('version')==1 and receipt.get('market')=='china' and receipt.get('root')==rootkey\n\
+        \        and receipt.get('owner')=={'runId':str(rid),'attempt':str(att),'revision':vid}\n        and\
+        \ receipt.get('manifestSha256')==os.environ['CHINA_EXPECTED_ARCHIVE_SHA256']\n        and receipt.get('reportDigest')==os.environ['CHINA_EXPECTED_REPORT_DIGEST'])\n\
+        with (root/'producer-receipt.json').open('xb') as f: f.write(data)\nprint('exact_terminal_collect_only_receipt_verified')\n\
+        VERIFY\ntest \"$(sha256sum producer-receipt.json | cut -d' ' -f1)\" = 174893f63c5870628a3df1ab3a5241fe49847f01fa579a84d80a369383c3c49a\n"
+    - name: Read exact archive and ready pin metadata; HEAD each enumerated part only
+      env:
+        YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+        YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+      run: "set -euo pipefail\numask 077\ncd \"$RUNNER_TEMP/china-job\"\ncat > probe.mjs <<'JS'\n/** Actual\
+        \ pinned China capsule preflight; no archive part body may be read. */\nimport {createHash,createHmac}\
+        \ from 'node:crypto';\nimport fs from 'node:fs/promises';\nimport path from 'node:path';\nimport {pathToFileURL}\
+        \ from 'node:url';\nconst endpoint='https://s3.regru.cloud',host='s3.regru.cloud',bucket='avtocena-staging-8120751',prefix='migration-staging/full-20261011/';\n\
+        const policy='catalog/raw-feed-coordination/v1/policy.json',state='catalog/raw-feed-coordination/v1/state.json',GiB=1024**3,MiB=1024**2;\n\
+        const sha=b=>createHash('sha256').update(b).digest('hex'),digest=v=>sha(JSON.stringify(v)),hmac=(k,b)=>createHmac('sha256',k).update(b).digest();\n\
+        const need=(ok,s)=>{if(!ok)throw Error('capsule_'+s);};\nconst actual={owner:{runId:'44457059256',attempt:'1',revision:'038574d914de2436cd10871629b1b0a8fe83a92c'},root:'catalog/nonjp-intake/v1/china/44457059256/1',\n\
+        \ archive:'b8a2a25dc27390845dd5a423efa323c9472a338b1b97f413ba96aefa7f3b65ca',report:'894bb1eb1b37042de7ce611e19d8e33bfd58c01546d2a812f2c87f96cd906caf',\n\
+        \ receipt:'174893f63c5870628a3df1ab3a5241fe49847f01fa579a84d80a369383c3c49a',sourceAt:'2026-11-19T05:02:36.435Z'};\n\
+        function transport({env,fetchImpl,authorize,now}){\n const access=env.YC_OBJECT_STORAGE_ACCESS_KEY_ID,secret=env.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY;\n\
+        \ need(typeof access==='string'&&/^[a-zA-Z0-9_+=./-]{1,256}$/.test(access)&&typeof secret==='string'&&secret.length>0&&secret.length<=1024&&!/[\\\
+        r\\n\\x00]/.test(secret),'credentials');\n return async(key,method,cap)=>{\n  need(authorize(key,method)&&/^[a-zA-Z0-9_./-]{1,700}$/.test(key)&&key.split('/').every(x=>x&&x!=='.'&&x!=='..'),'url_scope');\n\
+        \  const pathname='/'+bucket+'/'+prefix+key,t=new Date(now()).toISOString().replace(/[:-]|\\.\\d{3}/g,''),day=t.slice(0,8),scope=day+'/us-east-1/s3/aws4_request';\n\
+        \  const h={host,'x-amz-content-sha256':sha(''),'x-amz-date':t},names=Object.keys(h).sort();\n  const\
+        \ req=[method,pathname,'',names.map(k=>k+':'+h[k]+'\\n').join(''),names.join(';'),sha('')].join('\\\
+        n');\n  const sign=hmac(hmac(hmac(hmac('AWS4'+secret,day),'us-east-1'),'s3'),'aws4_request');\n  h.authorization='AWS4-HMAC-SHA256\
+        \ Credential='+access+'/'+scope+', SignedHeaders='+names.join(';')+', Signature='+createHmac('sha256',sign).update(['AWS4-HMAC-SHA256',t,scope,sha(req)].join('\\\
+        n')).digest('hex');\n  const r=await fetchImpl(endpoint+pathname,{method,headers:h,redirect:'error',signal:AbortSignal.timeout(20000)});\n\
+        \  if(r.status===404){await r.body?.cancel();return {status:404};}\n  const n=r.headers.get('content-length'),etag=r.headers.get('etag');\n\
+        \  if(r.status!==200||!/^\\d+$/.test(n||'')||Number(n)<=0||Number(n)>cap||!/^\"[^\"\\r\\n]{1,128}\"\
+        $/.test(etag||'')||r.headers.get('content-encoding')){await r.body?.cancel();throw Error('capsule_response');}\n\
+        \  if(method==='HEAD'){await r.body?.cancel();return {status:200,bytes:Number(n),etag};}\n  let count=0,parts=[];for\
+        \ await(const b of r.body){count+=b.length;need(count<=Number(n),'truncated_or_oversized');parts.push(b);}\n\
+        \  need(count===Number(n),'truncated_or_oversized');const body=Buffer.concat(parts,count);\n  return\
+        \ {status:200,bytes:count,etag,body};\n };\n}\nexport async function preflightCapsule({native,provenance,receiptBody,env=process.env,fetchImpl=fetch,now=Date.now,expected=actual}){\n\
+        \ need(Buffer.isBuffer(receiptBody)&&receiptBody.length>0&&receiptBody.length<=32768&&sha(receiptBody)===expected.receipt,'receipt_sha');\n\
+        \ const receipt=JSON.parse(receiptBody),complete=expected.root+'/complete.json',pinKey='catalog/raw-feed-pins/v1/nonjp-intake-china-'+expected.owner.runId+'-'+expected.owner.attempt+'.json';\n\
+        \ provenance.assertDurableIntakeArchive(receipt,'china');\n need(receipt.root===expected.root&&receipt.manifestSha256===expected.archive&&receipt.reportDigest===expected.report&&digest(receipt.owner)===digest(expected.owner)&&receipt.handoff.key===pinKey,'receipt_scope');\n\
+        \ const cutoff=Date.parse(expected.sourceAt)+48*3600000,start=now(),deadline=Math.min(start+10*60000,cutoff);\n\
+        \ const time=()=>need(now()>=start&&now()<deadline,'source_or_probe_deadline');\n const reads=new\
+        \ Set([complete,pinKey,policy,state]),parts=new Set();\n const send=transport({env,fetchImpl,now,authorize:(key,method)=>method==='GET'&&reads.has(key)||method==='HEAD'&&parts.has(key)});\n\
+        \ let readCount=0,headCount=0;\n const get=async(k,cap)=>{time();readCount++;const a=await send(k,'GET',cap);time();return\
+        \ a;};\n const caps=[2*MiB,2*MiB];\n const policyGuard=async()=>{const absent=await Promise.all([get(policy,256*1024),get(state,8*MiB)]);need(absent.every(x=>x.status===404),'coordination_not_explicitly_absent');};\n\
+        \ await policyGuard();const first=await Promise.all([get(complete,caps[0]),get(pinKey,caps[1])]);need(first.every(x=>x.status===200),'archive_anchors_missing');\n\
+        \ const decode=x=>JSON.parse(new TextDecoder('utf-8',{fatal:true}).decode(x.body));\n const manifest=native.validateIntakeArchive(decode(first[0]),expected.root,expected.archive),pin=provenance.assertRawPin(decode(first[1]));\n\
+        \ need(manifest.market==='china'&&digest(manifest.owner)===digest(expected.owner)&&manifest.reportDigest===expected.report&&manifest.collection.complete===true&&manifest.files.length<=1200&&manifest.totalBytes<=12*GiB&&\n\
+        \   manifest.files.find(x=>x.name==='report.json')?.sha256===expected.report,'manifest_scope');\n\
+        \ need(['ready','published'].includes(pin.state)&&pin.readyAt===receipt.handoff.readyAt&&pin.operationId===receipt.handoff.operationId&&digest(pin.owner)===digest(receipt.handoff.owner)&&digest(pin.references)===receipt.handoff.referencesSha256&&\n\
+        \   digest(pin.coordination??null)===digest(receipt.handoff.coordination??null),'ready_pin');\n for(const\
+        \ f of manifest.files)for(const p of f.parts){need(!parts.has(p.key),'duplicate_part');parts.add(p.key);}\n\
+        \ need(parts.size>0&&parts.size<=7350,'parts_cap');\n const keys=[...parts];let i=0,wireBytes=0,maxPartWireBytes=0,missingParts=0,invalidParts=0,error=false;\n\
+        \ const workers=Array.from({length:12},async()=>{while(i<keys.length&&!error){const k=keys[i++];try{time();headCount++;const\
+        \ x=await send(k,'HEAD',5*MiB);time();\n  if(x.status===404){missingParts++;continue;}wireBytes+=x.bytes;maxPartWireBytes=Math.max(maxPartWireBytes,x.bytes);\n\
+        \  if(wireBytes>22*GiB){error=true;throw Error('capsule_wire_cap');}\n }catch(e){if(/^capsule_(?:source_or_probe_deadline|wire_cap)$/.test(e.message)){error=true;throw\
+        \ e;}invalidParts++;}}});\n const results=await Promise.allSettled(workers);const failed=results.find(r=>r.status==='rejected');if(failed)throw\
+        \ failed.reason;\n const last=await Promise.all([get(complete,caps[0]),get(pinKey,caps[1])]);await\
+        \ policyGuard();\n need(last.every((x,j)=>x.status===200&&x.etag===first[j].etag&&sha(x.body)===sha(first[j].body)),'archive_anchors_moved');\n\
+        \ time();const allPartsHeadReadable=headCount===parts.size&&missingParts===0&&invalidParts===0;\n\
+        \ return {version:1,kind:'exact_china_capsule_head_preflight',archiveManifestSha256:expected.archive,files:manifest.files.length,rawDecodedBytes:manifest.totalBytes,parts:parts.size,\n\
+        \   allPartsHeadReadable,missingParts,invalidParts,wireBytesObservedByHead:wireBytes,maxPartWireBytes,sourceExpiresAt:new\
+        \ Date(cutoff).toISOString(),\n   policyAndStateBoth404Twice:true,readCount,headCount,storageWrites:0,sourcePartBodyGets:0,supplierRequests:0,restorePerformed:false,publicationAuthorized:false};\n\
+        }\nif(process.argv[1]&&import.meta.url===pathToFileURL(path.resolve(process.argv[1])).href){\n try{\n\
+        \  const [base,receiptPath]=process.argv.slice(2);need(process.argv.length===4,'cli');\n  const load=f=>import(pathToFileURL(path.join(base,f)));\n\
+        \  const native=await load('scripts/lib/nonjp-intake-archive.mjs'),provenance=await load('scripts/lib/catalog-raw-provenance.mjs');\n\
+        \  const report=await preflightCapsule({native,provenance,receiptBody:await fs.readFile(receiptPath)});\n\
+        \  console.log(JSON.stringify(report));if(!report.allPartsHeadReadable)process.exitCode=2;\n }catch(e){console.error(JSON.stringify({kind:'exact_china_capsule_head_preflight',reason:/^capsule_[a-z_]+$/.test(e?.message||'')?e.message:'native_or_transport_validation_failed',storageWrites:0,sourcePartBodyGets:0,supplierRequests:0,publicationAuthorized:false}));process.exitCode=1;}\n\
+        }\nJS\ntest \"$(sha256sum probe.mjs | cut -d' ' -f1)\" = 71ef814a591624bbc61c8681c7b1053112eecf911f2c9683a2c4423d2b5ecb5a\n\
+        node --max-old-space-size=256 probe.mjs \"$GITHUB_WORKSPACE/publisher\" producer-receipt.json\n"
