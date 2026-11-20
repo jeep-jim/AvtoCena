@@ -268,7 +268,7 @@ diff --git a/scripts/catalog-china-own-control-switch-host.mts b/scripts/catalog
 new file mode 100644
 --- /dev/null
 +++ b/scripts/catalog-china-own-control-switch-host.mts
-@@ -0,0 +1,254 @@
+@@ -0,0 +1,255 @@
 +/** Existing RegCloud operator host, not a public route. Run with the existing
 + * flock held by this process (flock --exclusive --nonblock --no-fork ...). */
 +import fs from 'node:fs/promises';
@@ -376,6 +376,7 @@ new file mode 100644
 + 'grant_bytes','grant_scope','grant_selector','grant_storage','grant_fields','grant_path','grant_file','grant_changed','runtime_env','storage_mismatch',
 + 'net_type','net_scope','net_object_scope','net_bound','net_body_bound','ready_binding','indexed_count','list_count_parity','card_price','card_price_parity',
 + 'exact_reader_refused','boot_failed','react_cache_unavailable','sharp_alpine_runtime','request_timeout','storage_transport',
++ 'preview_forbidden_next_headers','preview_forbidden_next_cache','preview_forbidden_next_server','preview_forbidden_image','preview_forbidden_geoip',
 + 'module_react','module_next_compiled_react','module_next_cache','module_next_headers','module_next_server','module_sharp','module_geoip_country','module_untraced',
 + 'fs_eacces','fs_eperm','fs_enoent','fs_enotdir','fs_eloop',
 + 'storage_scope','storage_changed','storage_ready_sha','storage_ready_scope','storage_runtime_ready_sha','storage_runtime_ready_scope',

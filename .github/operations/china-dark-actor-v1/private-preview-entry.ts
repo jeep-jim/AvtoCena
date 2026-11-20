@@ -1,12 +1,12 @@
 /** Isolated, exact-source proof before public control CAS. Not an HTTP server. */
 import {createHash} from 'node:crypto';
+import {assertQuarantineUntouched} from 'china-preview-scope-guard';
 import {constants} from 'node:fs';
 import {open} from 'node:fs/promises';
 import {ObjectJsonStorage} from './apps/web/lib/data';
 import {openChinaStageObjectFiles,readConfiguredRegcloudScope,validChinaPublicRef,
   type ChinaConfiguredStorageScope,type ChinaPublicRef} from './apps/web/lib/catalog/china-regcloud-object-reader';
 import {readPreparedChinaFixtureOffer,readPreparedChinaIndexedModel,withPreparedChinaRegcloudPreview} from './apps/web/lib/catalog/prepared-china-http-fixture';
-import {GET} from './apps/web/app/(public)/api/catalog/search/route';
 
 const SHA=/^[a-f0-9]{64}$/;
 const BUILD='85296f6b8797aaa93227b69da7e9e9e928e8f9b5',LEGACY='4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90';
@@ -19,6 +19,7 @@ function safePreviewFailure(e:unknown){
  const err=e as NodeJS.ErrnoException|undefined,reason=err?.message??'';
  if(e instanceof Refuse)return reason; // Refuse labels are literal and host allowlisted.
  if(err?.code&&EARLY.includes(err.code))return 'fs_'+err.code.toLowerCase();
+ if(/^preview_forbidden_(?:next_headers|next_cache|next_server|image|geoip)$/.test(reason))return reason;
  if(err?.name==='TimeoutError'||err?.name==='AbortError')return 'request_timeout';
  if(/^china_own_regcloud:[a-z0-9_]+$/.test(reason))return 'storage_'+reason.slice('china_own_regcloud:'.length);
  const http=reason.match(/^object_storage_(?:binary_read|control_read|GET)_(\d{3})(?::[^\r\n]*)?$/);
@@ -107,30 +108,26 @@ export async function runPrivateChinaPreview(file:string,expected:string,onPhase
    files.durable.pricingReceiptSha256===g.pricingReceiptSha256&&files.durable.admittedRows===g.admittedRows,'ready_binding');
   return await withPreparedChinaRegcloudPreview(files,async()=>{
    const generationId=g.stage.generationId;
-   const query={market:'china',make:g.make,model:g.model,sort:'totalRub',pageSize:1};
-   // Confirm the exact indexed shape first. The route may never fall back to a
-   // full-market scan under a malformed make or a missing model index.
-   onPhase('index');const fast=await readPreparedChinaIndexedModel(query,true);
-   check(fast?.generationId===generationId&&validCount(fast.total)&&fast.total<=g.admittedRows&&
-    (g.expectedModelCount===undefined||g.expectedModelCount===fast.total),'indexed_count');
-   onPhase('search');const url=new URL('http://127.0.0.1/api/catalog/search');
-   url.search=new URLSearchParams({...query,pageSize:'1',preparedCut:generationId}).toString();
-   const list=await GET(new Request(url));
-   url.searchParams.set('countOnly','1');const countResponse=await GET(new Request(url));
-   const [body,tally]=await Promise.all([list.json(),countResponse.json()]);
-   check(list.ok&&countResponse.ok&&body?.ok===true&&tally?.ok===true&&body.generationId===generationId&&
-    tally.generationId===generationId&&body.total===fast!.total&&tally.total===body.total&&tally.items?.length===0&&
-    body.items?.length===1,'list_count_parity');
-   const row=body.items[0];
+   const query={market:'china',make:g.make,model:g.model,sort:'totalRub' as const,pageSize:1};
+   // These are the exact immutable selectors used by the installed web
+   // app. No Next Request/Response/auth/global-market fallback is needed
+   // for this private proof; compiled HTTP is separately checked after CAS.
+   onPhase('index');const tally=await readPreparedChinaIndexedModel(query,true);
+   check(tally?.generationId===generationId&&validCount(tally.total)&&tally.total<=g.admittedRows&&
+    (g.expectedModelCount===undefined||g.expectedModelCount===tally.total),'indexed_count');
+   onPhase('search');const body=await readPreparedChinaIndexedModel(query,false);
+   check(body?.generationId===generationId&&body.total===tally!.total&&tally!.items.length===0&&
+    body.items.length===1,'list_count_parity');
+   const row=body!.items[0];
    check(row.market==='china'&&row.preparedChinaSelection?.generationId===generationId&&
     /^[a-f0-9]{24}$/.test(row.id)&&Number.isSafeInteger(row.totalRub)&&row.totalRub>0,'card_price');
    onPhase('detail');const detail=await readPreparedChinaFixtureOffer(row.id,undefined,generationId);
    check(detail?.offer?.id===row.id&&detail.offer.totalRub===row.totalRub,'card_price_parity');
-   onPhase('readback');await assertGrant();await files.assertPointer();
+   onPhase('readback');await assertGrant();await files.assertPointer();assertQuarantineUntouched();
    return {version:1,kind:'private-china-candidate-readback',readySha256:g.stage.readySha256,generationId,
-    buildSha256:g.imageSha256,checkedAt:Date.now(),cardId:row.id,listRub:row.totalRub,detailRub:detail!.offer!.totalRub,filteredCount:body.total};
+    buildSha256:g.imageSha256,checkedAt:Date.now(),cardId:row.id,listRub:row.totalRub,detailRub:detail!.offer!.totalRub,filteredCount:body!.total};
   });
- }finally{globalThis.fetch=fetch0;}
+ }catch(e){assertQuarantineUntouched();throw e;}finally{globalThis.fetch=fetch0;}
 }
 
 if(process.argv[1]&&require.main===module){

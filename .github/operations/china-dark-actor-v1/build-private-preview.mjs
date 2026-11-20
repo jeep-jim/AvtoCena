@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import {createRequire} from 'node:module';
+import {createRequire,isBuiltin} from 'node:module';
 import {execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import fs from 'node:fs/promises';
@@ -34,6 +34,19 @@ assert.equal(require('react/package.json').version,lock.packages['node_modules/r
 const reactFallback=await fs.readFile(require.resolve('next/dist/compiled/react/cjs/react.production.js'));
 assert.equal(h(reactFallback),REACT_CACHE_FALLBACK_SHA,'exact locked Next production React provider');
 const entry=await fs.readFile(new URL('./private-preview-entry.ts',import.meta.url),'utf8');
+// Only the exact readers run here. Transitive modules contain Next request,
+// mutable cache, image or GEO branches; never call them or return surrogate
+// data just to make a standalone proof work.
+const guardImport="import {deny} from 'china-preview-scope-guard';";
+const quarantine={
+ 'china-preview-scope-guard':`let wrong;export function deny(scope){wrong??=scope;assertQuarantineUntouched()}
+ export function assertQuarantineUntouched(){if(wrong)throw Error('preview_forbidden_'+wrong)}`,
+ 'next/headers':guardImport+`const no=()=>deny('next_headers');export const headers=no,cookies=no,draftMode=no;`,
+ 'next/cache':guardImport+`const no=()=>deny('next_cache');export const unstable_cache=()=>no,revalidatePath=no,revalidateTag=no,unstable_noStore=no;`,
+ 'next/server':guardImport+`const no=()=>deny('next_server');export const NextResponse=new Proxy(no,{get:no}),NextRequest=no,after=no;`,
+ sharp:guardImport+`export default function no(){return deny('image')}`,
+ 'geoip-country':guardImport+`module.exports=new Proxy({},{get(){return deny('geoip')}});`,
+};
 const built=await build({absWorkingDir:root,stdin:{contents:entry,resolveDir:root,sourcefile:'operator-private-preview.ts',loader:'ts'},
  tsconfig:path.join(root,'apps/web/tsconfig.json'),packages:'external',platform:'node',
  format:'cjs',target:'node24',bundle:true,write:false,metafile:true,legalComments:'none',
@@ -64,11 +77,16 @@ ${reactFallback.toString('utf8')}
  loader:{'.css':'empty'},plugins:[{name:'server-only-marker',setup(b){
   b.onResolve({filter:/^server-only$/},()=>({path:'server-only-marker',namespace:'readonly-operator'}));
   b.onLoad({filter:/./,namespace:'readonly-operator'},()=>({contents:'',loader:'js'}));
+  b.onResolve({filter:/^(?:next\/(?:headers|cache|server)|sharp|geoip-country|china-preview-scope-guard)$/},args=>({path:args.path,namespace:'readonly-unreachable'}));
+  b.onLoad({filter:/./,namespace:'readonly-unreachable'},args=>({contents:quarantine[args.path],loader:'js'}));
  }}]});
 assert.equal(built.outputFiles.length,1);
+const externals=[...new Set(Object.values(built.metafile.outputs).flatMap(o=>o.imports.filter(i=>i.external).map(i=>i.path)))].sort();
+assert.ok(externals.every(name=>isBuiltin(name)||name==='react'),'unsafe external standalone dependency: '+externals.filter(name=>!isBuiltin(name)&&name!=='react').join(','));
+assert.ok(!Object.keys(built.metafile.inputs).some(name=>name.endsWith('/api/catalog/search/route.ts')),'private proof must not boot Next HTTP route');
 const inputPaths=[...Object.keys(built.metafile.inputs),'apps/web/tsconfig.json','package-lock.json'];
 for(const rel of new Set(inputPaths)){
- if(rel==='operator-private-preview.ts'||rel.startsWith('readonly-operator:'))continue;
+ if(rel==='operator-private-preview.ts'||(rel.startsWith('readonly-operator:')||rel.startsWith('readonly-unreachable:')))continue;
  assert.ok(!path.isAbsolute(rel)&&!rel.startsWith('../'),rel);
  const file=path.join(root,rel);
  assert.equal(await fs.realpath(file),file,rel);
@@ -80,4 +98,4 @@ assert.ok(!bytes.includes("require('next/dist/compiled/react")&&!bytes.includes(
 assert.ok(bytes.includes(reactFallback),'exact official cache provider remains byte-identical');
 await fs.writeFile(out,bytes,{flag:'wx',mode:0o400});
 console.log(JSON.stringify({kind:'private-china-source-bundle-built',appSha:sha,bytes:bytes.length,
- toolVersion:version,bundleSha256:h(bytes),operatorSourceSha256:h(entry),embeddedReactCacheSha256:REACT_CACHE_FALLBACK_SHA,nextVersion:PINNED_NEXT,inputFiles:Object.keys(built.metafile.inputs).length}));
+ toolVersion:version,bundleSha256:h(bytes),operatorSourceSha256:h(entry),embeddedReactCacheSha256:REACT_CACHE_FALLBACK_SHA,nextVersion:PINNED_NEXT,privateProof:'exact-prepared-core-readers',frameworkExternals:externals.filter(name=>!isBuiltin(name)&&name!=='react'),inputFiles:Object.keys(built.metafile.inputs).length}));
