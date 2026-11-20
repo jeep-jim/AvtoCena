@@ -1,0 +1,36 @@
+name: Compare exact Europe views across China grid candidate
+on:
+  push:
+    branches: [main]
+    paths: [.github/market-runs/china-ui-europe-readonly-v1.sha256]
+permissions:
+  contents: read
+jobs:
+  compare:
+    if: github.repository == 'jeep-jim/AvtoCena' && github.repository_id == '1289722938' && github.ref == 'refs/heads/main' && github.run_attempt == '1' && github.event.head_commit.message == 'Compare exact Europe runtime parity without changes'
+    runs-on: ubuntu-latest
+    environment: regcloud-staging
+    timeout-minutes: 4
+    env:
+      IMAGE_ID: 'sha256:8a7326fc17de9a28ae66a4915e68038ac089ba4cdf2954bd7fcbd7cbda46ccf8'
+      CANDIDATE_ID: '52e44ba2810796f9a12ac83984d9571f71ac1290d852206d2a259ad44da02a8d'
+      STANDALONE_SHA256: '391fdc484c6e15d34ba132990a6530e60d885a613bcd594e1948e08f6565b730'
+      WRAPPER_SHA256: '4258b064a04f3ba3651d64bbb8c649829cb47db4d4f2aace2801a439d4fd81bd'
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - name: Check exact observer
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          cmp -s .github/market-runs/china-ui-europe-readonly-v1.sha256 <(printf '%s\n' "$STANDALONE_SHA256")
+          p=.github/operations/china-ui-europe-readonly-v1
+          printf '%s  %s\n' "$WRAPPER_SHA256" "$p/compare-over-ssh.sh" "$STANDALONE_SHA256" "$p/europe.py" | sha256sum --strict --check --status
+      - name: Read only exact redacted Europe comparison
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+        shell: bash
+        run: /usr/bin/bash .github/operations/china-ui-europe-readonly-v1/compare-over-ssh.sh
