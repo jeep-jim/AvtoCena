@@ -1,4 +1,4 @@
-name: Restore exact China archive for isolated native validation only
+name: Restore exact China archive with authenticated report limit
 'on':
   push:
     branches:
@@ -14,8 +14,8 @@ concurrency:
 jobs:
   inspect:
     if: github.repository == 'jeep-jim/AvtoCena' && github.repository_id == '1289722938' && github.ref ==
-      'refs/heads/main' && github.run_attempt == '1' && github.event.before == 'cc9eb73d208790e926b85500c133ce97ca6342b5'
-      && github.event.head_commit.message == 'Restore exact China archive for isolated native validation only'
+      'refs/heads/main' && github.run_attempt == '1' && github.event.before == '130950f0ce4978f8c5dbabedd91398a1fdb245ee'
+      && github.event.head_commit.message == 'Restore exact China archive with authenticated report limit'
     environment: regcloud-staging
     runs-on: ubuntu-latest
     timeout-minutes: 190
@@ -107,7 +107,7 @@ jobs:
         mkdir -pm 0700 candidate-final/producer/operational/upstream/flow/input\ncat > 'archive-code/guarded-capsule-runner.mjs'\
         \ <<'PAYLOAD_EOF'\n/** One-shot manifest-pinned archive restore and native local input admission.\
         \ No writes to storage. */\nimport fs from 'node:fs/promises';import path from 'node:path';import\
-        \ {createHash,createHmac} from 'node:crypto';import {pathToFileURL} from 'node:url';\nimport {actual,prepare}\
+        \ {createHash,createHmac} from 'node:crypto';import {pathToFileURL} from 'node:url';\nimport {actual,prepare,declareNativeArchiveReport}\
         \ from './prepare-native-archive.mjs';import {restoreViaBoundedReads} from './bounded-archive-restore.mjs';\n\
         const G=1024**3,M=1024**2,ownedMax=24*G,memMax=6*G,pinPath='catalog/raw-feed-pins/v1/nonjp-intake-china-44457059256-1.json',manifestPath=actual.archiveRoot+'/complete.json';\n\
         const policy='catalog/raw-feed-coordination/v1/policy.json',state='catalog/raw-feed-coordination/v1/state.json';\n\
@@ -147,10 +147,11 @@ jobs:
         \ globalThis.fetch=async()=>{throw Error('guarded_capsule_unexpected_fetch');};\n let acceptedManifest=false;\n\
         \ const scope=async()=>{need(Date.now()<sourceExpiry,'source_expired');await assertSandbox(scratch);};\n\
         \ const readOnlyGet=async(key,cap)=>{\n  const x=await forStorage.get(key,cap);\n  if(key===manifestPath&&x.status===200&&!acceptedManifest){\n\
-        \   const m=native.validateIntakeArchive(JSON.parse(x.body),actual.archiveRoot,actual.archiveSha256);\n\
-        \   need(m.files.length===shape.files&&m.totalBytes===shape.decoded&&m.files.reduce((n,x)=>n+x.parts.length,0)===shape.parts,'live_census');\n\
-        \   for(const f of m.files)for(const p of f.parts)allowed.add(p.key);\n   acceptedManifest=true;console.log(JSON.stringify({stage:'verified_archive_manifest',files:shape.files,parts:shape.parts,restoredBytes:shape.decoded}));\n\
-        \  }\n  if(allowed.has(key)&&x.status===200&&(forStorage.tally.uniqueArchivePartCount%100===0||forStorage.tally.uniqueArchivePartCount===shape.parts))\n\
+        \   const raw=JSON.parse(x.body),declared=declareNativeArchiveReport(raw,actual.archiveSha256,actual.reportSha256);\n\
+        \   const m=native.validateIntakeArchive(raw,actual.archiveRoot,actual.archiveSha256);\n   need(m.files.length===shape.files&&m.totalBytes===shape.decoded&&m.files.reduce((n,x)=>n+x.parts.length,0)===shape.parts,'live_census');\n\
+        \   for(const f of m.files)for(const p of f.parts)allowed.add(p.key);\n   acceptedManifest=true;console.log(JSON.stringify({stage:'verified_archive_manifest',files:shape.files,parts:shape.parts,restoredBytes:shape.decoded,manifestWireBytes:x.body.length,receiptBytes:receiptBytes.length,reportBytes:declared.bytes,reportParts:declared.parts}));\n\
+        \  }\n  if(key===pinPath&&x.status===200)console.log(JSON.stringify({stage:'ready_pin_metadata_read',pinBytes:x.body.length}));\n\
+        \  if(allowed.has(key)&&x.status===200&&(forStorage.tally.uniqueArchivePartCount%100===0||forStorage.tally.uniqueArchivePartCount===shape.parts))\n\
         \   console.log(JSON.stringify({stage:'archive_part_download',parts:forStorage.tally.uniqueArchivePartCount,totalParts:shape.parts,wireBytes:forStorage.tally.partWireBytes}));\n\
         \  return x;\n };\n const capsule=path.join(scratch,'capsule');\n const restored=await restoreViaBoundedReads({native,receipt,expected:actual,readOnlyGet,localCapsule:capsule,assertReadScope:scope});\n\
         \ need(restored.partCount===shape.parts&&restored.archiveBytes===shape.decoded&&forStorage.tally.partWireBytes===shape.partWire,'full_archive_census');\n\
@@ -163,7 +164,7 @@ jobs:
         \   hardCgroupBytes:memMax,hardScratchCeilingBytes:ownedMax,storageWrites:0,rawUploaded:false,providerRequests:0,publicationAuthorized:false,cursorAdvanceAuthorized:false}));\n\
         \ globalThis.fetch=nativeFetch;\n}\nif(process.argv[1]&&import.meta.url===pathToFileURL(path.resolve(process.argv[1])).href)\n\
         \ try{await main();}catch(e){console.error(JSON.stringify({stage:'guarded_capsule_stopped',reason:/^(guarded_capsule_|china_archive_restore_|china_local_archive_)[a-z0-9_]+$/.test(e?.message||'')?e.message:'guard_or_native_refused',publicationAuthorized:false}));process.exitCode=1;}\n\
-        PAYLOAD_EOF\ntest \"$(sha256sum 'archive-code/guarded-capsule-runner.mjs' | cut -d' ' -f1)\" = 2235fef7671e69a4ad72d5024ad17b0602b9a25f7f9cbfac6b00c1efdff64ae0\n\
+        PAYLOAD_EOF\ntest \"$(sha256sum 'archive-code/guarded-capsule-runner.mjs' | cut -d' ' -f1)\" = 0d54ec02d48bf9c94798fe92cfb0554cac0b45c06cc98e6155ff39e20317a085\n\
         cat > 'archive-code/bounded-archive-restore.mjs' <<'PAYLOAD_EOF'\n/** Plug only a reviewed signed\
         \ GET function into this native restore wrapper.\n * It cannot create native read-protection pins:\
         \ policy and state must genuinely be absent,\n * and the object adapter provides no mutation, HEAD,\
@@ -207,25 +208,33 @@ jobs:
         \ MiB=1024**2, GiB=1024**3, hex=/^[a-f0-9]{64}$/;\nconst hash=v=>createHash('sha256').update(v).digest('hex');\n\
         const digest=v=>hash(JSON.stringify(v));\nexport const actual=Object.freeze({market:'china',collector:{runId:'44457059256',attempt:'1',revision:'038574d914de2436cd10871629b1b0a8fe83a92c'},archiveSha256:'b8a2a25dc27390845dd5a423efa323c9472a338b1b97f413ba96aefa7f3b65ca',reportSha256:'894bb1eb1b37042de7ce611e19d8e33bfd58c01546d2a812f2c87f96cd906caf',receiptSha256:'174893f63c5870628a3df1ab3a5241fe49847f01fa579a84d80a369383c3c49a',completedAt:'2026-11-19T05:02:36.435Z',rows:290044,archiveRoot:'catalog/nonjp-intake/v1/china/44457059256/1'});\n\
         const fail=k=>{throw Error('china_local_archive_'+k);};\nconst need=(b,k)=>{if(!b)fail(k);};\nconst\
-        \ maxTotal=12*GiB, outputCap=16*GiB;\nasync function raw(file,cap){const h=await fs.open(file,flags.O_RDONLY|flags.O_NOFOLLOW);try{const\
-        \ s=await h.stat();need(s.isFile()&&s.nlink===1&&s.size>0&&s.size<=cap,'small_file');const b=await\
-        \ h.readFile();need(b.length===s.size&&(await h.stat()).size===s.size,'metadata_moved');return b;}finally{await\
-        \ h.close();}}\nasync function json(file,cap){const b=await raw(file,cap);return {value:JSON.parse(new\
-        \ TextDecoder('utf-8',{fatal:true}).decode(b)),sha256:hash(b)};}\nasync function streamFile(file,bytes,expected){\n\
-        \ const st=await fs.lstat(file);need(st.isFile()&&st.nlink===1&&st.size===bytes&&bytes<=128*MiB,'archive_file_size');let\
+        \ maxTotal=12*GiB, outputCap=16*GiB;\nasync function raw(file,cap,label,exactBytes){let h;try{h=await\
+        \ fs.open(file,flags.O_RDONLY|flags.O_NOFOLLOW);}catch{fail(label+'_path');}\n try{const s=await h.stat();need(s.isFile()&&s.nlink===1,label+'_file_type');\n\
+        \  need(s.size>0&&s.size<=cap&&(exactBytes===undefined||s.size===exactBytes),label+'_file_size');\n\
+        \  const b=Buffer.alloc(s.size);let offset=0;while(offset<b.length){const r=await h.read(b,offset,b.length-offset,offset);need(r.bytesRead>0,label+'_short');offset+=r.bytesRead;}\n\
+        \  const end=await h.stat();need(end.size===s.size&&end.mtimeMs===s.mtimeMs&&end.ctimeMs===s.ctimeMs,label+'_file_moved');return\
+        \ b;\n }finally{await h.close();}\n}\nasync function json(file,cap,label,exactBytes,expectedSha){const\
+        \ b=await raw(file,cap,label,exactBytes);\n const sha256=hash(b);need(expectedSha===undefined||sha256===expectedSha,label+'_checksum');\n\
+        \ try{return {value:JSON.parse(new TextDecoder('utf-8',{fatal:true}).decode(b)),sha256};}catch{fail(label+'_json');}\n\
+        }\nexport function declareNativeArchiveReport(manifest,expectedArchiveSha,expectedReportSha){\n need(digest(manifest)===expectedArchiveSha,'manifest_checksum');const\
+        \ rows=manifest?.files?.filter(r=>r?.name==='report.json');\n need(rows?.length===1,'report_descriptor');const\
+        \ row=rows[0];\n need(Number.isSafeInteger(row.bytes)&&row.bytes>0&&row.bytes<=128*MiB,'report_declared_size');\n\
+        \ need(row.sha256===expectedReportSha&&Array.isArray(row.parts)&&row.parts.length===Math.ceil(row.bytes/(2*MiB)),'report_descriptor');\n\
+        \ return Object.freeze({bytes:row.bytes,parts:row.parts.length,sha256:row.sha256});\n}\nasync function\
+        \ streamFile(file,bytes,expected,label=\"archive\"){\n const st=await fs.lstat(file);need(st.isFile()&&st.nlink===1&&st.size===bytes&&bytes<=128*MiB,label+'_file_size');let\
         \ count=0;\n const d=createHash('sha256'),h=await fs.open(file,flags.O_RDONLY|flags.O_NOFOLLOW);\n\
         \ try{for await(const chunk of h.createReadStream({autoClose:false,highWaterMark:1024*1024})){count+=chunk.length;need(count<=bytes,'archive_file_growth');d.update(chunk);}\n\
-        \ const sha256=d.digest('hex');need(count===bytes&&(await h.stat()).size===bytes&&(!expected||sha256===expected),'archive_file_checksum');return{bytes,sha256};}finally{await\
+        \ const sha256=d.digest('hex');need(count===bytes&&(await h.stat()).size===bytes&&(!expected||sha256===expected),label+'_file_checksum');return{bytes,sha256};}finally{await\
         \ h.close();}\n}\nasync function dir(file){need(path.isAbsolute(file)&&await fs.realpath(file)===file&&(await\
         \ fs.lstat(file)).isDirectory(),'directory_scope');return file;}\nfunction freshness(anchor,now){const\
         \ at=Date.parse(anchor.completedAt),t=now();need(Number.isSafeInteger(at)&&Number.isSafeInteger(t)&&t>=at&&t<at+48*3600000,'source_expired');return\
         \ new Date(at+48*3600000).toISOString();}\nasync function verifyFiles(directory,manifest,beat,expectedReceipt){\n\
         \ const local=(await fs.readdir(directory)).sort();if(local.includes('own-storage-receipt.json'))need((await\
-        \ json(path.join(directory,'own-storage-receipt.json'),64*1024)).sha256===expectedReceipt,'restored_receipt');const\
+        \ json(path.join(directory,'own-storage-receipt.json'),64*1024,'restored_receipt')).sha256===expectedReceipt,'restored_receipt');const\
         \ names=local.filter(x=>x!=='own-storage-receipt.json'),expected=manifest.files.map(x=>x.name).sort();\n\
         \ need(JSON.stringify(names)===JSON.stringify(expected),'archive_inventory');\n for(const item of\
-        \ manifest.files){await streamFile(path.join(directory,item.name),item.bytes,item.sha256);await beat();}\n\
-        }\nexport async function prepare({nativeRoot,receiptPath,archiveManifestPath,rawPinPath,restoredDirectory,outputDirectory,anchor=actual,now=Date.now,minimumFree=48*GiB,minimumMemoryCap=6*GiB,progress=()=>{}}){\n\
+        \ manifest.files){await streamFile(path.join(directory,item.name),item.bytes,item.sha256,item.name==='report.json'?'report_stream':'archive');await\
+        \ beat();}\n}\nexport async function prepare({nativeRoot,receiptPath,archiveManifestPath,rawPinPath,restoredDirectory,outputDirectory,anchor=actual,now=Date.now,minimumFree=48*GiB,minimumMemoryCap=6*GiB,progress=()=>{}}){\n\
         \ need(anchor.market==='china'&&[anchor.archiveSha256,anchor.reportSha256,anchor.receiptSha256].every(x=>hex.test(x||'')),'anchors');\n\
         \ const revision=execFileSync('git',['-C',nativeRoot,'rev-parse','HEAD'],{encoding:'utf8'}).trim();\n\
         \ need(revision==='bb6317bffd1f7b1832681ac78378fe6c3e39e3b5','native_revision');\n const sourcePins=JSON.parse(await\
@@ -238,14 +247,17 @@ jobs:
         \ const check=async()=>{freshness(anchor,now);const v=await fs.statfs(parent,{bigint:true});need(v.bavail*v.bsize>=BigInt(Math.min(minimumFree,2*GiB)),'scratch_exhausted');need(process.memoryUsage().rss<=minimumMemoryCap,'rss_ceiling');};\n\
         \ if(minimumFree){const v=await fs.statfs(parent,{bigint:true});need(v.bavail*v.bsize>=BigInt(minimumFree),'scratch_admission');}\n\
         \ await check();\n const [{value:receipt,sha256:receiptSha}, {value:pin}, {value:manifestValue}]=await\
-        \ Promise.all([json(receiptPath,64*1024),json(rawPinPath,2*MiB),json(archiveManifestPath,2*MiB)]);\n\
+        \ Promise.all([json(receiptPath,64*1024,'receipt'),json(rawPinPath,2*MiB,'pin'),json(archiveManifestPath,2*MiB,'manifest')]);\n\
         \ need(receiptSha===anchor.receiptSha256,'receipt_bytes');\n provenance.assertDurableIntakeArchive(receipt);provenance.assertRawPin(pin);\n\
         \ need(receipt.market==='china'&&digest(receipt.owner)===digest(anchor.collector)&&receipt.root===anchor.archiveRoot&&receipt.manifestSha256===anchor.archiveSha256&&receipt.reportDigest===anchor.reportSha256,'archive_receipt_pins');\n\
+        \ const declared=declareNativeArchiveReport(manifestValue,anchor.archiveSha256,anchor.reportSha256);\n\
         \ const manifest=native.validateIntakeArchive(manifestValue,anchor.archiveRoot,anchor.archiveSha256);\n\
+        \ progress({stage:'local_archive_metadata_read',receiptBytes:(await fs.stat(receiptPath)).size,pinBytes:(await\
+        \ fs.stat(rawPinPath)).size,manifestBytes:(await fs.stat(archiveManifestPath)).size,reportBytes:declared.bytes,reportParts:declared.parts});\n\
         \ need(manifest.market==='china'&&manifest.collection.complete===true&&manifest.totalBytes<=maxTotal&&manifest.files.length<=1200&&digest(manifest.owner)===digest(receipt.owner)&&manifest.reportDigest===anchor.reportSha256,'complete_collection');\n\
         \ need(['ready','published'].includes(pin.state)&&pin.readyAt===receipt.handoff.readyAt&&pin.operationId===receipt.handoff.operationId&&digest(pin.owner)===digest(receipt.handoff.owner)&&digest(pin.references)===receipt.handoff.referencesSha256&&digest(pin.coordination??null)===digest(receipt.handoff.coordination??null),'archive_pin_identity');\n\
         \ await verifyFiles(input,manifest,check,anchor.receiptSha256);\n const {value:report,sha256:reportSha}=await\
-        \ json(path.join(input,'report.json'),32*MiB);\n need(reportSha===anchor.reportSha256&&report.provider==='auto_api_che168'&&report.completed===true&&report.completedAt===anchor.completedAt,'report_authority');\n\
+        \ json(path.join(input,'report.json'),declared.bytes,'report',declared.bytes,declared.sha256);\n need(reportSha===anchor.reportSha256&&report.provider==='auto_api_che168'&&report.completed===true&&report.completedAt===anchor.completedAt,'report_authority');\n\
         \ if(anchor===actual){const paid=report.sources?.filter(x=>x.provider==='auto_api_che168')??[];\n\
         \  need(report.market==='china'&&paid.length===1&&paid[0].completeInventory===true&&paid[0].stopReason==='source_finished'&&paid[0].replica&&\n\
         \   report.sources.reduce((n,x)=>n+Number(x.observations??0),0)===anchor.rows&&!report.sourceInputWitness&&\n\
@@ -267,7 +279,7 @@ jobs:
         \   progress:event=>console.log(JSON.stringify(event))});\n  console.log(JSON.stringify({stage:'converted_input_only',sourceRows:a.sourceRows,sourceExpiresAt:a.sourceExpiresAt,shards:a.shards.length,outputBytes:a.outputBytes,shardsSha256:a.shardsSha256,inventoryV2SealIssued:false,publicationAuthorized:false}));\n\
         \ }catch(e){console.error(JSON.stringify({stage:'archive_admission_failed',error:/^china_local_archive_[a-z0-9_]+$/.test(e?.message||'')?e.message:'native_validation_failed',publicationAuthorized:false}));process.exitCode=1;}\n\
         }\nPAYLOAD_EOF\ntest \"$(sha256sum 'archive-code/prepare-native-archive.mjs' | cut -d' ' -f1)\" =\
-        \ 1096910dfae684048b1264c805fe0ecb8b51ba4655e52fdc723e63e210b5e84e\ncat > 'candidate-final/producer/operational/upstream/flow/input/SOURCE_PINS.json'\
+        \ d28b74ead71a7f159e6aa872e8e2b429ea25aef068d1f26156ae772957e7c4bb\ncat > 'candidate-final/producer/operational/upstream/flow/input/SOURCE_PINS.json'\
         \ <<'PAYLOAD_EOF'\n{\n  \"files\": {\n    \"scripts/lib/catalog-disk-conversion.mjs\": \"724fb0e853d4f004b53552f8671906b1cb2a07b88fc30028159018eaaa35294f\"\
         ,\n    \"scripts/lib/catalog-raw-coordination.mjs\": \"503bd7a1d0df5cb7ae43826d90e3a807d95d62293fc181fc5ef6efdb6fa40b3d\"\
         ,\n    \"scripts/lib/catalog-raw-provenance.mjs\": \"5027a27aa7cb949564aba8e586e7c27c84288e08e68677663c6a1ae2d14215e3\"\
