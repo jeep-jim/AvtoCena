@@ -1,0 +1,60 @@
+name: Verify exact active China listing position without changes
+on:
+  push:
+    branches: [main]
+    paths: [.github/market-runs/china-offer-witness-v1.sha256]
+permissions:
+  contents: read
+jobs:
+  read:
+    if: github.repository == 'jeep-jim/AvtoCena' && github.repository_id == '1289722938' && github.run_attempt == '1' && github.event.head_commit.message == 'Verify exact active China listing position without changes'
+    environment: regcloud-staging
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: 22867cbcfaee27b2e8917b6bf880e44827f67b60
+          path: actor
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 24.22.1
+      - name: Check exact authorized source and install locked dependencies before credentials
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          python3 - <<'PY2'
+          import json, os
+          with open(os.environ['GITHUB_EVENT_PATH']) as f:
+              ref = json.load(f)
+          head = ref.get('head_commit') or {}
+          changes = ref.get('commits') or []
+          expected = '.github/market-runs/china-offer-witness-v1.sha256'
+          assert ref.get('ref') == 'refs/heads/main' and not ref.get('forced') and not ref.get('deleted')
+          assert len(changes) == 1 and head.get('id') == changes[0].get('id') == os.environ['GITHUB_SHA']
+          assert head.get('added') == [expected] and not head.get('removed') and not head.get('modified')
+          PY2
+          test "$(git -C actor rev-parse HEAD)" = 22867cbcfaee27b2e8917b6bf880e44827f67b60
+          pin=3c31b2653830b753c57fcfb399bfaf69eaeeab2c666916e27ffa142c60240d56
+          cmp -s .github/market-runs/china-offer-witness-v1.sha256 <(printf '%s\n' "$pin")
+          printf '%s  %s\n' "$pin" .github/operations/china-offer-witness-v1/witness.mts | sha256sum -c --status
+          cp .github/operations/china-offer-witness-v1/witness.mts actor/positional-witness.mts
+          cd actor && npm ci --ignore-scripts --no-audit --no-fund
+      - name: Read current rev5, one locator branch and one matched native part
+        working-directory: actor
+        env:
+          AVTOCENA_CHINA_REGCLOUD_RUNTIME: '1'
+          JSON_STORAGE_DRIVER: object
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_REGION: us-east-1
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+          YC_OBJECT_STORAGE_REQUEST_TIMEOUT_MS: '8000'
+        run: timeout 75s node --import tsx positional-witness.mts --exact-read-only
