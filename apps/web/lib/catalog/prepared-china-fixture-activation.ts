@@ -105,7 +105,37 @@ export async function openPreparedChinaSnapshot(m:CatalogPreparedChinaManifest,
    };
    return {projection,loadBlock,loadNativePart};
   };
-  return {partCount:meta.parts.length,selectors:meta.selectors,load};
+  return {partCount:meta.parts.length,partRows:meta.parts.map(part=>part?.rows),selectors:meta.selectors,load};
+ };
+ // Native independently staged China packs seal fixed-size canonical chunks.
+ // Select by absolute ordinal without downloading preceding or unrelated parts.
+ const canonicalWindow=async(start:number,size:number,countOnly:boolean)=>{
+  if(!dir.streamingSelector)return null;
+  if(!Number.isSafeInteger(start)||start<0||!Number.isSafeInteger(size)||size<1||size>48||!Number.isSafeInteger(start+size)||
+     !Number.isSafeInteger(dir.rows)||dir.rows<1||c.chunks.length!==Math.ceil(dir.rows/CATALOG_CHUNK_SIZE)||
+     c.chunks.some((chunk,i)=>chunk!=='chunk-'+String(i+1).padStart(4,'0')))return fail('canonical_window_scope');
+  const end=Math.min(start+size,dir.rows);
+  if(countOnly||start>=end)return {total:dir.rows,items:[]};
+  const reads:Promise<CatalogSearchProjection[]>[]=[];
+  for(let i=Math.floor(start/CATALOG_CHUNK_SIZE);i*CATALOG_CHUNK_SIZE<end;i++){
+   const origin=i*CATALOG_CHUNK_SIZE,rows=Math.min(CATALOG_CHUNK_SIZE,dir.rows-origin);
+   reads.push((async()=>{
+    const meta=await readChunk(c.chunks[i]);
+    if(meta.partRows.some(n=>!Number.isSafeInteger(n)||n<1||n>128)||
+       meta.partRows.reduce((total,n)=>total+n,0)!==rows)return fail('canonical_window_coverage');
+    const parts:Promise<CatalogSearchProjection[]>[]=[];
+    let offset=origin;
+    for(const [part,n] of meta.partRows.entries()){
+     const lo=Math.max(0,start-offset),hi=Math.min(n,end-offset);
+     if(hi>lo)parts.push(meta.load(part).then(x=>x.projection.items.slice(lo,hi)));
+     offset+=n;
+    }
+    return (await Promise.all(parts)).flat();
+   })());
+  }
+  const items=(await Promise.all(reads)).flat();
+  if(items.length!==end-start||new Set(items.map(row=>row.id)).size!==items.length)return fail('canonical_window_coverage');
+  return {total:dir.rows,items};
  };
   const locate=async(id:string)=>{
   if(!validPreparedChinaIdRoots(dir.idRoots))return fail('id_directory_scope');
@@ -124,7 +154,7 @@ export async function openPreparedChinaSnapshot(m:CatalogPreparedChinaManifest,
  };
  return {generationId:m.generationId,chunks:[...c.chunks],rows:c.count,validUntil:dir.validUntil,legalValidUntil:acceptedLegalUntil,idRoots:dir.idRoots,
   modelView:dir.modelView,fixedCityViews:dir.fixedCityViews,deliveryTariffVersion:dir.deliveryTariffVersion,
-  directorySha256:marker.directorySha256,streamingSelector:dir.streamingSelector,navigationFacets:dir.navigationFacets,readChunk,assertCurrent,locate,modelPage,cityPage};
+  directorySha256:marker.directorySha256,streamingSelector:dir.streamingSelector,navigationFacets:dir.navigationFacets,readChunk,assertCurrent,locate,modelPage,cityPage,canonicalWindow};
 }
 
 export async function readActivePreparedChinaFixturePart(storage:JsonStorage,chunk:string,part:number){

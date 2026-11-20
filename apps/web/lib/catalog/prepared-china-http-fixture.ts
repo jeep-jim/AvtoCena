@@ -23,6 +23,9 @@ type Fixture={storage:ObjectJsonStorage;fetchMock:typeof fetch;origin:string;buc
 type Stage={files:StageChinaFiles;indexedModelOnly:true;independentChina:IndependentRead};
 type Regcloud={regcloud:ChinaStageObjectFiles;indexedModelOnly:true;independentChina:IndependentRead};
 const scope=new AsyncLocalStorage<Readonly<Fixture|Stage|Regcloud>>();
+export class PreparedChinaCutChanged extends Error {
+ constructor(){super('prepared_china_cut_changed');}
+}
 export class PreparedChinaFixtureUnavailable extends Error {
  constructor(){super('prepared_china_unavailable');}
 }
@@ -126,38 +129,44 @@ export async function readPreparedChinaFixtureList(unsupported:boolean){
   return {generationId:s.snapshot.generationId,rows,assertCurrent:s.assertCurrent};
  }catch{throw new PreparedChinaFixtureUnavailable();}
 }
-/** Local canary reader: unproven shapes never become a market-wide authority. */
-export async function readPreparedChinaIndexedModel(params:CatalogSearchParams,countOnly:boolean){
- if(!preparedChinaIndexedModelOnly()||params.market!=='china'||!params.make||!params.model||
-    params.sort!=='totalRub'||
-    Object.entries(params).some(([k,v])=>v!==undefined&&!['market','make','model','sort','page','pageSize','budgetFrom','budgetTo'].includes(k)))return null;
+const MAX_PREPARED_MODEL_PART_READS=4;
+const modelScopeKeys=['market','make','model','sort','page','pageSize','budgetFrom','budgetTo'];
+type PreparedModelScope=NonNullable<Awaited<ReturnType<typeof compilePreparedChinaModelScope>>>;
+async function readIndexedModelPage(s:OpenFixture,selection:PreparedModelScope,params:CatalogSearchParams,countOnly:boolean){
  const page=params.page??1,size=params.pageSize??24,pageSize=Math.min(48,size),start=(page-1)*pageSize;
  if(!Number.isSafeInteger(page)||page<1||!Number.isSafeInteger(size)||size<1||!Number.isSafeInteger(start+pageSize))return null;
+ const result=await s.snapshot.modelPage(selection.keySha256,{lower:params.budgetFrom,upper:params.budgetTo,start,pageSize,countOnly});
+ if(!result)return null;
+ const generationId=s.snapshot.generationId;
+ if(countOnly){
+  await s.assertCurrent();
+  return {generationId,total:result.total,items:[],marketCountInfo:{}};
+ }
+ const partKey=(position:{chunk:string;part:number})=>position.chunk+':'+position.part;
+ const unique=[...new Map(result.positions.map(row=>[partKey(row),row])).values()];
+ const chunks=new Map<string,Promise<OpenChunk>>(),parts=new Map<string,OpenPart>();
+ for(let i=0;i<unique.length;i+=MAX_PREPARED_MODEL_PART_READS)await Promise.all(unique.slice(i,i+MAX_PREPARED_MODEL_PART_READS).map(async row=>{
+  let chunk=chunks.get(row.chunk);
+  if(!chunk){chunk=s.snapshot.readChunk(row.chunk);chunks.set(row.chunk,chunk);}
+  parts.set(partKey(row),await (await chunk).load(row.part));
+ }));
+ const items=result.positions.map(row=>{
+  const item=parts.get(partKey(row))?.projection.items[row.offset];
+  if(item?.id!==row.id||item.totalRub!==row.rub||!selection.matches(item))throw new PreparedChinaFixtureUnavailable();
+  return attachChinaSelection(preparedChinaModelPublicItem(item,row.rub),generationId);
+ });
+ await s.assertCurrent();
+ return {generationId,total:result.total,page,pageSize,items,usedIndexShards:[]};
+}
+/** Only exact model ranking authorized by the immutable directory. */
+export async function readPreparedChinaIndexedModel(params:CatalogSearchParams,countOnly:boolean){
+ if(!preparedChinaIndexedModelOnly()||params.market!=='china'||!params.make||!params.model||
+    params.sort!=='totalRub'||Object.entries(params).some(([k,v])=>v!==undefined&&!modelScopeKeys.includes(k)))return null;
  try{
   const selection=await compilePreparedChinaModelScope(params.make,params.model);
   if(!selection)return null;
   const s=await open();
-  if(!s)return null;
-  const result=await s.snapshot.modelPage(selection.keySha256,{lower:params.budgetFrom,upper:params.budgetTo,start,pageSize,countOnly});
-  if(!result)return null;
-  if(countOnly){
-   await s.assertCurrent();
-   return {generationId:s.snapshot.generationId,total:result.total,items:[],marketCountInfo:{}};
-  }
-  const chunks=new Map<string,OpenChunk>(),parts=new Map<string,OpenPart>();
-  const items=[];
-  for(const row of result.positions){
-   let chunk=chunks.get(row.chunk);
-   if(!chunk){chunk=await s.snapshot.readChunk(row.chunk);chunks.set(row.chunk,chunk);}
-   const key=row.chunk+':'+row.part;
-   let part=parts.get(key);
-   if(!part){part=await chunk.load(row.part);parts.set(key,part);}
-   const item=part.projection.items[row.offset];
-   if(item?.id!==row.id||item.totalRub!==row.rub||!selection.matches(item))throw new PreparedChinaFixtureUnavailable();
-   items.push(attachChinaSelection(preparedChinaModelPublicItem(item,row.rub),s.snapshot.generationId));
-  }
-  await s.assertCurrent();
-  return {generationId:s.snapshot.generationId,total:result.total,page,pageSize,items,usedIndexShards:[]};
+  return s?await readIndexedModelPage(s,selection,params,countOnly):null;
  }catch{throw new PreparedChinaFixtureUnavailable();}
 }
 export async function readPreparedChinaIndexedCity(params:CatalogSearchParams,countOnly:boolean){
@@ -218,12 +227,13 @@ function compatibilityRows(s:OpenFixture){
 /** Bounded correctness fixture, not a full-feed performance path. Search
  * reuses same-cut projections and the existing exact filters/order/paging. */
 export async function readPreparedChinaCompatibility(params:CatalogSearchParams,options:{
- countOnly:boolean;includeFacets:boolean;marketPage:boolean;unsupported:boolean;navigationFacets?:true;
+ countOnly:boolean;includeFacets:boolean;marketPage:boolean;unsupported:boolean;navigationFacets?:true;expectedGeneration?:string|null;
 }){
  if(!hasIndependentChinaHttpFixture()||params.market!=='china')return null;
  try{
   const s=await open();
-  if(!s)return null; // the only permission to use the original route
+  if(!s){if(options.expectedGeneration)throw new PreparedChinaCutChanged();return null;} // authenticated legacy rollback only
+  if(options.expectedGeneration&&options.expectedGeneration!==s.snapshot.generationId)throw new PreparedChinaCutChanged();
   if(options.unsupported)throw new PreparedChinaFixtureUnavailable();
   const {city}=params;
   const deliveryCity=city?preparedChinaDeliveryQuote(city).city:undefined;
@@ -233,12 +243,42 @@ export async function readPreparedChinaCompatibility(params:CatalogSearchParams,
   const page=params.page??1,pageSize=options.marketPage?MARKET_PAGE_SIZE:Math.min(48,params.pageSize??24),start=(page-1)*pageSize;
   if(!Number.isSafeInteger(page)||page<1||!Number.isSafeInteger(pageSize)||pageSize<1||!Number.isSafeInteger(start+pageSize))
    throw new PreparedChinaFixtureUnavailable();
-  const isDefaultMarketPage=options.marketPage&&(!params.sort||params.sort==='updatedAt')&&
+  const isUnsortedUnfiltered=(!params.sort||params.sort==='updatedAt')&&
    Object.entries(params).every(([k,v])=>['market','city','page','pageSize','sort'].includes(k)||!v);
+  const isDefaultMarketPage=options.marketPage&&isUnsortedUnfiltered;
+  const generationId=s.snapshot.generationId;
+  const makePublic=(row:CatalogSearchProjection)=>{
+   const adjusted=city?projectPreparedChinaDelivery(row,city):row;
+   return attachChinaSelection(preparedChinaModelPublicItem(adjusted,adjusted.totalRub||0),generationId,deliveryCity);
+  };
+  // "Без сортировки": use the entire sealed order across all page links.
+  // Explicit filters/sort still use the existing exact selection path below.
+  if(isDefaultMarketPage||isUnsortedUnfiltered&&options.countOnly){
+   const window=await s.snapshot.canonicalWindow(start,pageSize,options.countOnly&&!options.marketPage);
+   if(window){
+    if(window.items.some(row=>!projectionCanRenderCard(row)))throw new PreparedChinaFixtureUnavailable();
+    const items=window.items.map(makePublic);
+    const facets=options.navigationFacets?s.snapshot.navigationFacets:undefined;
+    await s.assertCurrent();
+    if(options.countOnly&&!options.marketPage)return {generationId,total:window.total,items:[],marketCountInfo:{}};
+    return {generationId,total:window.total,page,pageSize,items,usedIndexShards:[],...(facets?{facets}:{})};
+   }
+  }
+  // Share the exact immutable model index with the SSR grid and its normal
+  // 24-card pagination API. Word ranges, city, additional filters, facets
+  // scoped to the selected rows, and other sorts stay on the existing adapter.
+  const indexedGridKeys=['market','make','model','sort','page','pageSize'];
+  if(options.marketPage&&!options.includeFacets&&params.make&&params.model&&params.sort==='totalRub'&&
+     Object.entries(params).every(([key,value])=>!value||indexedGridKeys.includes(key))){
+   const selection=await compilePreparedChinaModelScope(params.make,params.model);
+   if(selection){
+    const indexed=await readIndexedModelPage(s,selection,{...params,page,pageSize},false);
+    if(indexed&&'page' in indexed)return {...indexed,...(options.navigationFacets?{facets:s.snapshot.navigationFacets}:{})};
+   }
+  }
   // Base projection is used by the existing count/filter oracle. Existing
   // city predicate applies its delta once. Adjust returned DTOs only.
   const query=isDefaultMarketPage?{...params,city:undefined}:params;
-  const generationId=s.snapshot.generationId;
   const width=pageSize*MARKET_DIVERSITY_WINDOW_PAGES,offset=Math.floor(start/width)*width;
   const limit=options.countOnly&&!options.marketPage?0:isDefaultMarketPage?offset+width:start+pageSize;
   const facetQuery=options.navigationFacets?{market:'china',hasPrice:'yes'}:options.includeFacets&&!options.marketPage&&!options.countOnly?params:undefined;
@@ -272,10 +312,6 @@ export async function readPreparedChinaCompatibility(params:CatalogSearchParams,
   if(options.countOnly&&!options.marketPage){
    await s.assertCurrent();return {generationId,total,items:[],marketCountInfo:{}};
   }
-  const makePublic=(row:CatalogSearchProjection)=>{
-   const adjusted=city?projectPreparedChinaDelivery(row,city):row;
-   return attachChinaSelection(preparedChinaModelPublicItem(adjusted,adjusted.totalRub||0),generationId,deliveryCity);
-  };
   let items;
   if(isDefaultMarketPage){
    const window=balanceBusinessRows(matched.slice(offset,offset+width).map(row=>preparedChinaModelPublicItem(row,row.totalRub||0)));
@@ -288,7 +324,7 @@ export async function readPreparedChinaCompatibility(params:CatalogSearchParams,
   }
   await s.assertCurrent();
   return {generationId,total,page,pageSize,items,usedIndexShards:[],...(facets?{facets}:{})};
- }catch{throw new PreparedChinaFixtureUnavailable();}
+ }catch(error){if(error instanceof PreparedChinaCutChanged)throw error;throw new PreparedChinaFixtureUnavailable();}
 }
 
 /** Deliberately knows only the prepared generation. The existing public
