@@ -16,7 +16,7 @@ import {absoluteAvtocenaUrl} from '../ai-discovery';
 import {parseSpecialId,specialTitle,calculateSpecial} from '../dealers/showcase-model';
 import {getSpecialOffer} from '../dealers/public-showcase';
 
-type Query={calculation?:string;direct?:string;powerHp?:string;modificationId?:string;preview?:string;estimate?:string;share?:string;dealer?:string};
+type Query={market?:string;city?:string;preparedCut?:string;calculation?:string;direct?:string;powerHp?:string;modificationId?:string;preview?:string;estimate?:string;share?:string;dealer?:string};
 function metadata(title:string,description:string,url:string,images:string[],index=true,canonical=url):Metadata {
  images=images.map(socialImageUrl);
  return {title,description,alternates:{canonical},openGraph:{type:'website',title,description,url,images:images.map(url=>({url,alt:title}))},twitter:{card:'summary_large_image',title,description,images},robots:{index,follow:index,'max-image-preview':'large'}};
@@ -31,10 +31,11 @@ export async function generateOfferMetadata({params,searchParams}:{params:Promis
   const title=offerShareTitle({title:specialTitle(offer),year:offer.year,engineCc:offer.engineCc,fuel:offer.fuel,totalRub:calculation.totalRub});
   return metadata(q.share==='3'?title.replace(/ — (?:[\d ]+ ₽|Цена уточняется)$/,''):title,`${calculation.city?'Доставка: '+calculation.city+'. ':''}Фотографии, комплектация и условия покупки — в карточке автомобиля.`,absoluteAvtocenaUrl(`/cars/offer/${id}`),offer.photos.slice(0,3).map(p=>absoluteAvtocenaUrl(p.url)),!q.preview);
  }
- const {offer:stored}=await readOfferDetailForPage(id);
- if(!stored)return {title:'Автомобиль — АвтоЦена',robots:{index:false,follow:true}};
  const power=Number(q.powerHp||0);const safePower=Number.isFinite(power)&&power>=20&&power<=2500?Math.round(power):0;
- const [display,saved,client]=await Promise.all([resolveOfferDisplay(stored,safePower,q.modificationId||''),getSavedOfferCalculation(stored),q.calculation?getSavedOfferCalculation(stored,q.calculation):Promise.resolve(null)]);
+ const detail=await readOfferDetailForPage(id,!Boolean(q.calculation||q.estimate||q.direct||q.modificationId||safePower),{market:q.market,city:q.city,preparedCut:q.preparedCut});
+ const stored=detail.offer;
+ if(!stored)return {title:'Автомобиль — АвтоЦена',robots:{index:false,follow:true}};
+ const [display,saved,client]=await Promise.all([resolveOfferDisplay(stored,safePower,q.modificationId||''),detail.prepared?Promise.resolve(null):getSavedOfferCalculation(stored),q.calculation?getSavedOfferCalculation(stored,q.calculation):Promise.resolve(null)]);
  const direct=client || (q.direct==='novokuznetsk'?await directOfferScenario(stored):null);
  const explicit=q.estimate?await sharedOfferScenario(stored,q.estimate):null;
  const automatic=!direct&&!saved&&display.sellerPricing&&!display.selectionRequired ? await sharedOfferScenario(stored,encodeShareDraft(offerParameterDraft(display.offer,display.raw))) : null;

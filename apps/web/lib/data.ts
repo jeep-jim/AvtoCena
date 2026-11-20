@@ -140,6 +140,7 @@ export async function readObjectStorageResponseBody(
   response: Response,
   timeoutMs: number,
   controller = new AbortController(),
+  maximumBytes = Infinity,
 ) {
   if (!response.body) return Buffer.alloc(0);
   const reader = response.body.getReader();
@@ -167,6 +168,11 @@ export async function readObjectStorageResponseBody(
           break;
         }
         if (!value?.byteLength) continue;
+        if(total+value.byteLength>maximumBytes){
+          controller.abort();
+          void reader.cancel("object_storage_response_limit").catch(()=>undefined);
+          throw new Error("object_storage_response_limit");
+        }
         chunks.push(value);
         total += value.byteLength;
         sliceBytes += value.byteLength;
@@ -199,7 +205,7 @@ function objectStorageResponseText(response: Response) {
 export class ObjectJsonStorage implements JsonStorage {
   driver: JsonStorageDriver = "object";
   private key(relativePath: string) { const cfg = objectConfig(); return [cfg.prefix, normalizeStorageKey(relativePath)].filter(Boolean).join("/"); }
-  private async signedRequest(method: string, url: URL, body?: string | Buffer, extraHeaders: Record<string, string> = {}, query = "") {
+  private async signedRequest(method: string, url: URL, body?: string | Buffer, extraHeaders: Record<string, string> = {}, query = "", maximumResponseBytes = Infinity) {
     const cfg = objectConfig();
     // REG S3 returns quoted ETags but requires bare If-Match values on PUT.
     // Keep the condition and sign its actual wire representation; never retry
@@ -232,14 +238,16 @@ export class ObjectJsonStorage implements JsonStorage {
       const headerTimeout = setTimeout(() => controller.abort(), Math.min(timeoutMs,deadline-Date.now()));
       let response: Response;
       try {
-        response = await fetch(url, { method, headers, body: body as any, signal: controller.signal });
+        response = await fetch(url, { method, headers, body: body as any, signal: controller.signal,
+          ...(Number.isFinite(maximumResponseBytes)?{redirect:"error" as const}:{}) });
         clearTimeout(headerTimeout);
         if (response.body && method !== "HEAD") {
-          const responseBytes = await readObjectStorageResponseBody(response, Math.min(timeoutMs,Math.max(1,deadline-Date.now())), controller);
+          const responseBytes = await readObjectStorageResponseBody(response, Math.min(timeoutMs,Math.max(1,deadline-Date.now())), controller, maximumResponseBytes);
           objectStorageResponseBodies.set(response, responseBytes);
         }
       }
-      catch (error) { lastError = error; if (attempt + 1 >= attempts) break; await sleep(Math.max(0,Math.min(5_000, 250 * 2 ** attempt,deadline-Date.now()))); continue; }
+      catch (error) { if(error instanceof Error&&error.message==='object_storage_response_limit')throw error;
+        lastError = error; if (attempt + 1 >= attempts) break; await sleep(Math.max(0,Math.min(5_000, 250 * 2 ** attempt,deadline-Date.now()))); continue; }
       finally { clearTimeout(headerTimeout); }
       if (response.ok || response.status === 304 || response.status === 404 || response.status === 412 || response.status === 409) return response;
       if (!TRANSIENT_STATUS.has(response.status)) {
@@ -255,12 +263,12 @@ export class ObjectJsonStorage implements JsonStorage {
     const detail = lastError instanceof Error ? lastError.message : String(lastError || "unknown");
     throw new Error(`object_storage_${method}_unreachable:${detail}`);
   }
-  private async request(method: string, relativePath: string, body?: string | Buffer, extraHeaders: Record<string, string> = {}) {
+  private async request(method: string, relativePath: string, body?: string | Buffer, extraHeaders: Record<string, string> = {}, maximumResponseBytes = Infinity) {
   const cfg = objectConfig();
   const normalizedPath = normalizeStorageKey(relativePath);
   const url = new URL(`${cfg.endpoint}/${cfg.bucket}/${encodeKey(this.key(normalizedPath))}`);
   try {
-    return await this.signedRequest(method, url, body, extraHeaders);
+    return await this.signedRequest(method, url, body, extraHeaders, "", maximumResponseBytes);
   } catch (error) {
     const detail = error instanceof Error ? error.message : String(error);
     throw new Error(`${detail}:path=${normalizedPath.slice(0, 240)}:bytes=${Buffer.byteLength(body ?? "")}`);
@@ -293,6 +301,25 @@ export class ObjectJsonStorage implements JsonStorage {
   async deleteJson(relativePath: string) { await this.request("DELETE", relativePath); }
   async putBinary(relativePath: string, data: Buffer, contentType: string, condition?: JsonWriteCondition) { const headers: Record<string,string> = { "content-type": contentType }; if (condition?.ifMatch) headers["if-match"] = condition.ifMatch; if (condition?.ifNoneMatch) headers["if-none-match"] = condition.ifNoneMatch; const res = await this.request("PUT", relativePath, data, headers); if (res.status === 409 || res.status === 412) throw new StorageConflictError(); if (!res.ok) throw new Error(`object_storage_binary_write_${res.status}`); return { objectKey: normalizeStorageKey(relativePath), mimeType: contentType, size: data.length, checksum: sha256(data) }; }
   async getBinary(relativePath: string) { const res = await this.request("GET", relativePath); if (!res.ok) throw new Error(`object_storage_binary_read_${res.status}`); const data = objectStorageResponseBody(res); return { data, mimeType: res.headers.get("content-type") || undefined, size: data.length, checksum: sha256(data) }; }
+  /** Explicit bounded readback for the private prepared-stage path. */
+  async getBinaryBounded(relativePath:string,maximumBytes:number){
+    if(!Number.isSafeInteger(maximumBytes)||maximumBytes<1||maximumBytes>4*1024*1024)throw Error('object_storage_binary_read_limit');
+    const res=await this.request('GET',relativePath,undefined,{},maximumBytes);
+    if(!res.ok)throw Error(`object_storage_binary_read_${res.status}`);
+    const data=objectStorageResponseBody(res);
+    return {data,size:data.length,checksum:sha256(data)};
+  }
+  /** Bounded authenticated metadata read for a single market control. */
+  async readScopedControl(relativePath:string){
+    const res=await this.request('GET',relativePath,undefined,{},32*1024);
+    if(res.status===404)return null;
+    if(!res.ok)throw Error(`object_storage_control_read_${res.status}`);
+    const etag=cleanEtag(res.headers.get("etag"));
+    if(!etag)throw Error('object_storage_control_etag');
+    const data=objectStorageResponseBody(res);
+    return {data,etag,checksum:sha256(data)};
+  }
+
   async createBinaryDownloadUrl(relativePath: string, expiresSeconds = 900) {
     const cfg = objectConfig();
     const normalizedPath = normalizeStorageKey(relativePath);

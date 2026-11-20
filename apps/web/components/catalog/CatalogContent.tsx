@@ -1,3 +1,4 @@
+import {hasIndependentChinaHttpFixture,readPreparedChinaCompatibility,PreparedChinaFixtureUnavailable} from '@/lib/catalog/prepared-china-http-fixture';
 import {catalogFilterFacetsForClient} from '@/lib/catalog/filter-facets-wire';
 import {readMarketSection} from '@/lib/catalog/market-section-result';
 import {catalogSearchHeading,canonicalCatalogHref} from '@/lib/catalog/catalog-routes';
@@ -96,11 +97,8 @@ function catalogResultScope(params:Record<string,string|string[]|undefined>,deal
 async function ReadCatalogContent({params={},dealer=null,embedded=false}:{params?:Record<string,string|string[]|undefined>;dealer?:DealerBrowsingContext|null;embedded?:boolean}) {
   params={...params,...(params.make?{make:catalogBrandFilter(first(params.make))}:{}),...(params.brand?{brand:catalogBrandFilter(first(params.brand))}:{})};
   if(first(params.stock)==="green"&&(!dealer||dealer.markets.includes("japan")))return <GreenCornerCatalog params={{...Object.fromEntries(Object.entries(params).map(([k,v])=>[k,first(v)])),dealer:dealer?.id}} embedded={embedded}/>;
-  const [liveChina,liveKorea]=await Promise.all([usesAjesMarket('china'),usesAjesMarket('korea')]);
-  const liveMarket=(id:string)=>id==='china'&&liveChina||id==='korea'&&liveKorea;
   const allowedMarkets=dealer?marketOrder.filter(m=>dealer.markets.includes(m.id)):marketOrder;
   if(dealer&&!allowedMarkets.length)return <p className="py-10 text-[var(--ac-muted)]">Компания пока не указала направления доставки.</p>;
-  if ((!dealer||dealer.markets.includes(first(params.market) as any)) && await usesAjesMarket(first(params.market),first(params.source))) return <AjesCatalog params={params} embedded={embedded} dealer={dealer}/>;
   const requestedMarkets = filterSelections(first(params.market).toLowerCase());
   const requestedMarket = requestedMarkets.length===1 && requestedMarkets[0]!=="green" ? requestedMarkets[0] : "";
   const selectedMarkets=requestedMarkets.filter(m=>m==="green"?(!dealer||dealer.markets.includes("japan")):allowedMarkets.some(a=>a.id===m));
@@ -123,6 +121,15 @@ async function ReadCatalogContent({params={},dealer=null,embedded=false}:{params
   const markets = requestedMarkets.length ? allowedMarkets.filter(item=>selectedMarkets.includes(item.id)) : allowedMarkets;
   const overviewEligible = !requestedMarkets.length && !hasFilters && !customSort && requestedPage === 1;
   const japanAll = selectedMarket === "japan" && first(params.stock) === "all";
+  // Scoped preview only. Resolve own immutable rows and navigation facets
+  // before touching any live supplier setting or cross-market serving alias.
+  const chinaCut=selectedMarket==='china'&&hasIndependentChinaHttpFixture()
+   ?await readPreparedChinaCompatibility({...common,market:'china',page:requestedPage},{countOnly:false,includeFacets:false,
+     marketPage:true,navigationFacets:true,unsupported:Boolean(first(params.source)||first(params.stock))}):null;
+  const [liveChina,liveKorea]=chinaCut?[false,false]:await Promise.all([usesAjesMarket('china'),usesAjesMarket('korea')]);
+  const liveMarket=(id:string)=>id==='china'&&liveChina||id==='korea'&&liveKorea;
+  if(!chinaCut&&(!dealer||dealer.markets.includes(first(params.market) as any))&&await usesAjesMarket(first(params.market),first(params.source)))
+   return <AjesCatalog params={params} embedded={embedded} dealer={dealer}/>;
   // Start supplier previews alongside local indexes instead of after all local work.
   const railReads=new Map<string,ReturnType<typeof readAjesRailData>>(markets.filter(m=>liveMarket(m.id)||m.id==='japan').map(m=>[m.id,readAjesRailData(m.id as 'japan'|'china'|'korea',params)]));
   // Stock and market snapshots are independent; start both storage reads together.
@@ -134,7 +141,12 @@ async function ReadCatalogContent({params={},dealer=null,embedded=false}:{params
 
   let facets: Awaited<ReturnType<typeof readCatalogNavigationFacets>>;
   let groupedMarkets: MarketGroup[];
-  if (overview) {
+  if(chinaCut){
+    const market=markets.find(m=>m.id==='china');
+    if(!market||!('facets' in chinaCut)||!chinaCut.facets||!('page' in chinaCut))throw new PreparedChinaFixtureUnavailable();
+    facets=chinaCut.facets;
+    groupedMarkets=[{...market,items:chinaCut.items,total:chinaCut.total,page:chinaCut.page,pageSize:chinaCut.pageSize}];
+  } else if (overview) {
     facets = overview.facets;
     groupedMarkets = await Promise.all(allowedMarkets.map((market) => readMarketSection(async () => {
       if(liveMarket(market.id)||market.id==='japan')return {...market,items:[],total:0,page:1,pageSize:OVERVIEW_CARDS};
@@ -256,11 +268,11 @@ async function ReadCatalogContent({params={},dealer=null,embedded=false}:{params
       </div>
       </>}>
       {embedded&&<div className="hidden md:block"><BrandLogoRail initial={initial} brands={brandNames} resultCount={countIncomplete?undefined:total} /></div>}
-      <div className="mt-8 grid gap-10 md:mt-9 md:gap-12">{visibleMarkets.map((market, marketIndex) => liveMarket(market.id) ? <Suspense key={market.id} fallback={<CatalogSectionLoading active/>}><AjesRail market={market.id as "china"|"korea"} params={params} prepared={railReads.get(market.id)}/></Suspense> : market.id === "japan" ? <div key="japan" className="min-w-0"><Suspense fallback={<CatalogSectionLoading active/>}><AjesRail params={params} prepared={railReads.get("japan")}/></Suspense>{showGreen&&<GreenCornerRail items={greenItems} total={greenTotal} href={pageHref({...params,stock:"green",market:"japan"},1)} />}</div> : <div key={market.id} className="min-w-0"><section><CatalogSectionLoading/><div className="mb-4 flex items-end justify-between gap-4"><h2 className="flex min-w-0 flex-wrap items-center gap-2 text-[26px] font-black tracking-[-0.04em] md:text-4xl"><CatalogMarketFlag market={market.id} className="h-5 w-7 md:h-6 md:w-9" /><span>{market.label}</span><MarketResultCount total={market.unavailable?undefined:market.total}>{market.unavailable?"Количество уточняется":formatCatalogCount(market.total)}</MarketResultCount></h2>{!selectedMarket ? <Link href={pageHref({...params, market: market.id}, 1)} className="ac-market-all-link shrink-0 text-sm font-black">Все →</Link> : null}</div>{market.unavailable ? <p role="status" className="rounded-xl border border-[var(--ac-border)] p-4 text-sm">Не удалось загрузить автомобили этого направления. <Link href={pageHref({...params,market:market.id},requestedPage)} className="underline">Повторить</Link></p> : market.items.length ? selectedMarket ? <CatalogLoadMore key={pageHref(params, requestedPage)} query={{...common, market: market.id}} initialPage={requestedPage} initialTotal={market.total} initialCount={market.items.length} initialCards={market.items.map((offer: any, index: number) => <CatalogCard key={offer.id} offer={offer} compact dense eagerPrefetch={index < 4} />)} /> : <div className={MARKET_RAIL_CLASS}>{market.items.map((offer: any, index: number) => <div key={offer.id} className="min-w-0"><CatalogCard offer={offer} compact dense eagerPrefetch={marketIndex === 0 && index < 4} /></div>)}</div> : <div className="rounded-[1.5rem] bg-white/[0.04] px-6 py-7 text-sm font-bold text-white/55">По выбранным параметрам автомобили не найдены. Попробуйте изменить условия поиска.</div>}</section></div>)}</div>
+      <div className="mt-8 grid gap-10 md:mt-9 md:gap-12">{visibleMarkets.map((market, marketIndex) => liveMarket(market.id) ? <Suspense key={market.id} fallback={<CatalogSectionLoading active/>}><AjesRail market={market.id as "china"|"korea"} params={params} prepared={railReads.get(market.id)}/></Suspense> : market.id === "japan" ? <div key="japan" className="min-w-0"><Suspense fallback={<CatalogSectionLoading active/>}><AjesRail params={params} prepared={railReads.get("japan")}/></Suspense>{showGreen&&<GreenCornerRail items={greenItems} total={greenTotal} href={pageHref({...params,stock:"green",market:"japan"},1)} />}</div> : <div key={market.id} className="min-w-0"><section><CatalogSectionLoading/><div className="mb-4 flex items-end justify-between gap-4"><h2 className="flex min-w-0 flex-wrap items-center gap-2 text-[26px] font-black tracking-[-0.04em] md:text-4xl"><CatalogMarketFlag market={market.id} className="h-5 w-7 md:h-6 md:w-9" /><span>{market.label}</span><MarketResultCount total={market.unavailable?undefined:market.total}>{market.unavailable?"Количество уточняется":formatCatalogCount(market.total)}</MarketResultCount></h2>{!selectedMarket ? <Link href={pageHref({...params, market: market.id}, 1)} className="ac-market-all-link shrink-0 text-sm font-black">Все →</Link> : null}</div>{market.unavailable ? <p role="status" className="rounded-xl border border-[var(--ac-border)] p-4 text-sm">Не удалось загрузить автомобили этого направления. <Link href={pageHref({...params,market:market.id},requestedPage)} className="underline">Повторить</Link></p> : market.items.length ? selectedMarket ? <CatalogLoadMore key={pageHref(params, requestedPage)} query={{...common, market: market.id,...(chinaCut?{preparedCut:chinaCut.generationId}:{})}} initialPage={requestedPage} initialTotal={market.total} initialCount={market.items.length} initialCards={market.items.map((offer: any, index: number) => <CatalogCard key={offer.id} offer={offer} compact dense eagerPrefetch={index < 4} />)} /> : <div className={MARKET_RAIL_CLASS}>{market.items.map((offer: any, index: number) => <div key={offer.id} className="min-w-0"><CatalogCard offer={offer} compact dense eagerPrefetch={marketIndex === 0 && index < 4} /></div>)}</div> : <div className="rounded-[1.5rem] bg-white/[0.04] px-6 py-7 text-sm font-bold text-white/55">По выбранным параметрам автомобили не найдены. Попробуйте изменить условия поиска.</div>}</section></div>)}</div>
 {showGreen&&!markets.some(m=>m.id==="japan")&&<GreenCornerRail items={greenItems} total={greenTotal} href={pageHref({...params,stock:"green",market:"japan"},1)}/>}
 {!selectedMarket&&!localIncomplete&&<Suspense fallback={null}><CatalogEmptyResults localTotal={localTotal} reads={[...railReads.values()]}/></Suspense>}
 </CatalogSidebar>
-      <CurrencyRatesStrip variant="mobile" className="mt-8 lg:hidden" />
+      {!chinaCut&&<CurrencyRatesStrip variant="mobile" className="mt-8 lg:hidden" />}
     </section>
     <style dangerouslySetInnerHTML={{ __html: `
       @media(max-width:767px){

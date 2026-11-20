@@ -413,6 +413,11 @@ export function buildCatalogBrandSummary(generationId: string, rows: CatalogSear
       }])),
   };
 }
+// Opt-in metadata on the real v2 schema; the native manifest never sets it.
+export type CatalogPreparedChinaManifest = CatalogManifest & {
+  markets:Record<string,CatalogManifest['markets'][string] & {preparedChinaPriceReadV1?:{directorySha256:string}}>;
+};
+
 export function offerPath(generationId: string, market: string, chunk: string) { return generationPath(generationId, `offers/${market}/${chunk}.json`); }
 function storedOfferChunkPath(generationId: string, market: string, chunk: string) {
   return String(chunk || "").startsWith("catalog/") ? String(chunk) : offerPath(generationId, market, chunk);
@@ -915,15 +920,17 @@ export async function filterCatalogProjectionRows(rows:CatalogSearchProjection[]
  return selected;
 }
 function projectionFreshness(row: CatalogSearchProjection) { return Date.parse(String(row.auctionDate || row.sourcePublishedAt || row.firstSeenAt || row.updatedAt || "")) || 0; }
-export function catalogSearchProjectionSort(rows: CatalogSearchProjection[], sort = "updatedAt", city?: string) {
+export function catalogSearchProjectionComparator(sort = "updatedAt", city?: string) {
   const displayOrder=catalogDisplayOrderComparator();
   const dates=new WeakMap<CatalogSearchProjection,number>();
   const freshness=(row:CatalogSearchProjection)=>{let value=dates.get(row);if(value===undefined){value=projectionFreshness(row);dates.set(row,value);}return value;};
   const priceKeys=new WeakMap<CatalogSearchProjection,number>();
   const price = (row: CatalogSearchProjection, missing: number) => { if(priceKeys.has(row))return priceKeys.get(row)!||missing; const priced=city ? priceCardForCity(row,city).offer : row; const rub=calculatedCatalogPrice(priced); const value=!hasModificationSelection(row) && rub>0 ? rub : 0;priceKeys.set(row,value);return value||missing; };
   const terms=parseCatalogSort(sort)||[];
-  return rows.sort((a,b)=>terms.length?compareCatalogTerms(a,b,terms,row=>price(row,0))||a.id.localeCompare(b.id):displayOrder(a,b)||Number(price(b,0)>0)-Number(price(a,0)>0)||freshness(b)-freshness(a)||String(b.updatedAt||'').localeCompare(String(a.updatedAt||'')));
-
+  return (a:CatalogSearchProjection,b:CatalogSearchProjection)=>terms.length?compareCatalogTerms(a,b,terms,row=>price(row,0))||a.id.localeCompare(b.id):displayOrder(a,b)||Number(price(b,0)>0)-Number(price(a,0)>0)||freshness(b)-freshness(a)||String(b.updatedAt||'').localeCompare(String(a.updatedAt||''));
+}
+export function catalogSearchProjectionSort(rows: CatalogSearchProjection[], sort = "updatedAt", city?: string) {
+  return rows.sort(catalogSearchProjectionComparator(sort,city));
 }
 export function catalogSearchProjectionBalanceSources(rows: CatalogSearchProjection[]) {
   const groups = new Map<string, CatalogSearchProjection[]>();
@@ -1260,7 +1267,12 @@ async function facetsFromProjection(generationId: string, rows: CatalogSearchPro
     rows=await currentSearchPrices(rows,generationId);
   }
   const offers = rows.filter((row) => catalogSearchProjectionMatches(row, params, modelKeys));
-  const values = (selector: (offer: CatalogSearchProjection) => unknown) => uniqueText(offers.map(selector)).sort((a, b) => a.localeCompare(b, "ru"));
+  return preparedFacetsFromRows(generationId,offers);
+}
+
+export type CatalogFacetProjection=Pick<CatalogSearchProjection,"make"|"model"|"bodyType"|"fuel"|"transmission"|"drive">;
+function preparedFacetsFromRows(generationId:string,offers:CatalogFacetProjection[]) {
+  const values = (selector: (offer: CatalogFacetProjection) => unknown) => uniqueText(offers.map(selector)).sort((a, b) => a.localeCompare(b, "ru"));
   const offerModels = [...new Map(offers.map((offer) => [`${cleanFacet(offer.make)}:${cleanFacet(offer.model)}`, { make: cleanFacet(offer.make), model: cleanFacet(offer.model) }])).values()]
     .filter((item) => item.make && item.model)
     .sort((a, b) => `${a.make} ${a.model}`.localeCompare(`${b.make} ${b.model}`, "ru"));
@@ -1269,6 +1281,7 @@ async function facetsFromProjection(generationId: string, rows: CatalogSearchPro
     bodyTypes: values((offer) => offer.bodyType), fuels: values((offer) => offer.fuel), transmissions: values((offer) => offer.transmission), drives: values((offer) => offer.drive),
   };
 }
+
 // First eight pages use exactly the same sort/source balancing as full search.
 // Immutable, generation-scoped objects avoid parsing an entire market on cold starts.
 const MARKET_LANDING_LIMIT = 192;
@@ -3092,6 +3105,59 @@ export async function getUnavailableOffer(id: string): Promise<UnavailableOffer 
   const offers = await previousOfferChunkCache.get(path,()=>readDataJson<VehicleOffer[]>(path, []));
   const offer = offers.find(item => item.id === id);
   return offer ? unavailableOfferRecord(offer) : null;
+}
+
+/** Exactly one materialized query identity, using the same model/alias resolver
+ * and predicate as catalog search. A changed alias expansion cannot reuse it. */
+export async function compilePreparedChinaModelScope(makeValue:unknown,modelValue:unknown) {
+ const make=cleanFacet(makeValue),model=cleanFacet(modelValue);
+ if(!make||!model||make.length>128||model.length>128||/[,|]/.test(make)||/[,|]/.test(model))return null;
+ const params={market:'china',make,model} satisfies CatalogSearchParams;
+ const keys=await projectionModelKeys(params);
+ const keySha256=crypto.createHash('sha256').update(JSON.stringify(['china-model-scope-v1',
+  make.toLocaleLowerCase('ru-RU'),model.toLocaleLowerCase('ru-RU'),[...(keys||[])].sort()])).digest('hex');
+ return {keySha256,matches:(row:CatalogSearchProjection)=>projectionCanRenderCard(row)&&catalogSearchProjectionMatches(row,params,keys)};
+}
+export function preparedChinaModelIndexedPrice(row:CatalogSearchProjection){
+ const rub=calculatedCatalogPrice(row);
+ if(!Number.isSafeInteger(rub)||rub<=0||row.totalRub!==rub)throw Error('prepared_china_model_price');
+ return rub;
+}
+export function preparedChinaModelPublicItem(row:CatalogSearchProjection,rub:number){
+ const item=publicOfferFromProjection(row);
+ if(row.totalRub!==rub||catalogOfferVisibleRub(item)!==rub)throw Error('prepared_china_projection_visibility');
+ return item;
+}
+
+/** Use the existing public filter, ordering and DTO on authenticated prepared
+ * rows without reapplying mutable encyclopedia prices or invoking the engine. */
+/** Pure cut-scoped compatibility selection. Its authorized caller supplies
+ * already prepared rows from one independently verified generation. */
+export async function selectPreparedChinaCompatibilityRows(rows:CatalogSearchProjection[],params:CatalogSearchParams) {
+ return rows.filter(await compilePreparedChinaCompatibilityPredicate(params));
+}
+export async function compilePreparedChinaCompatibilityPredicate(params:CatalogSearchParams){
+ const modelKeys=await projectionModelKeys(params);
+ return (row:CatalogSearchProjection)=>projectionCanRenderCard(row)&&catalogSearchProjectionMatches(row,params,modelKeys);
+}
+export function orderPreparedChinaCompatibilityRows(rows:CatalogSearchProjection[],params:CatalogSearchParams) {
+ sortCatalogSearchRows(rows,params);
+}
+export function facetsForPreparedChinaCompatibilityRows(generationId:string,rows:CatalogFacetProjection[],params:CatalogSearchParams) {
+ const hasFilters=Object.entries(params).some(([key,value])=>!['market','city','page','pageSize','sort'].includes(key)&&value!==undefined&&value!=='');
+ if(hasFilters)return preparedFacetsFromRows(generationId,rows);
+ return {generationId,makes:uniqueText(rows.map(row=>row.make)).sort((a,b)=>a.localeCompare(b,'ru')),models:[],
+  markets:[...PUBLIC_CATALOG_MARKETS],bodyTypes:uniqueText(rows.map(row=>row.bodyType)).sort(),fuels:uniqueText(rows.map(row=>row.fuel)).sort(),
+  transmissions:uniqueText(rows.map(row=>row.transmission)).sort(),drives:uniqueText(rows.map(row=>row.drive)).sort()};
+}
+export async function projectPreparedChinaFixtureSearch(rows:CatalogSearchProjection[],params:CatalogSearchParams,countOnly:boolean) {
+ const modelKeys=await projectionModelKeys(params);
+ const matches=rows.filter(row=>projectionCanRenderCard(row)&&catalogSearchProjectionMatches(row,params,modelKeys));
+ if(countOnly)return {total:matches.length,items:[],marketCountInfo:{}};
+ sortCatalogSearchRows(matches,params);
+ const page=Math.max(1,Number(params.page||1)),pageSize=Math.min(48,Math.max(1,Number(params.pageSize||24)));
+ const items=matches.slice((page-1)*pageSize,page*pageSize).map(row=>preparedChinaModelPublicItem(row,row.totalRub||0));
+ return {total:matches.length,page,pageSize,items,usedIndexShards:[]};
 }
 
 export async function searchOffers(params: CatalogSearchParams, internalPageLimit = 48, admissionGroup?: 'related'){return withCatalogEditorial(()=>withCatalogColorFilter(params,()=>searchOffersEditorial(params,internalPageLimit,admissionGroup)));}

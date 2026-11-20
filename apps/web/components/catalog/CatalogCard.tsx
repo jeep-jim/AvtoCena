@@ -8,7 +8,7 @@ import {publicationWithdrawn} from "@/lib/catalog/publication-policy";
 import {chinaCardVariant} from "@/lib/catalog/china-card-variant";
 import {useDealerBrowsing} from "@/components/dealers/DealerBrowsingContext";
 import {dealerBrowsingHref} from "@/lib/dealers/browsing-context";
-import {offerPath} from "@/lib/catalog/offer-url";
+import {offerCardPath,preparedChinaCardContext} from "@/lib/catalog/offer-url";
 import {useSavedCalculationPreview} from "./useSavedCalculationPreview";
 import {offerWithSavedPreview,savedCalculationPreviewRub} from "../../lib/catalog/saved-calculation-preview";
 import { isGreenCornerOffer } from "../../lib/catalog/green-corner-contract";
@@ -62,8 +62,9 @@ export function CatalogCard({ offer, compact = false, dense = false, eagerPrefet
   const retro=isRetroOffer(offer);
   const dealer=useDealerBrowsing();
   const view=useCatalogView();
-  const candidatePreview = useSavedCalculationPreview(offer);
-  const savedPreview = savedCalculationPreviewRub(candidatePreview) ? candidatePreview : undefined;
+  const cut=preparedChinaCardContext(offer);
+  const candidatePreview = useSavedCalculationPreview(cut?{id:""}:offer);
+  const savedPreview = !cut&&savedCalculationPreviewRub(candidatePreview) ? candidatePreview : undefined;
   offer = {...offer,savedCalculationPreview:savedPreview};
   const selectionRequired = !retro && !savedPreview && hasModificationSelection(offer);
   const sellerPricing = !savedPreview && isSellerPricedOffer(offer);
@@ -81,7 +82,7 @@ export function CatalogCard({ offer, compact = false, dense = false, eagerPrefet
   const isElectric = powertrainKind === "electric" || ["electric", "электро", "электромобиль", "bev"].includes(fuelKind);
   const isElectrified = isElectric || ["series_hybrid", "other_hybrid"].includes(powertrainKind) || /hybrid|гибрид|phev|hev/.test(fuelKind);
   const variantLabel=chinaCardVariant(offer);
-  const href = dealerBrowsingHref(offerPath(offer),dealer);
+  const href = dealerBrowsingHref(offerCardPath(offer),dealer);
   const imageUrl = o.images[0] || "";
 
   /* Imported prices pass the public gate. The separate manager overlay comes
