@@ -1,0 +1,85 @@
+name: Verify exact China V4 replay equivalence without changes
+'on':
+  push:
+    branches: [main]
+    paths: [.github/market-runs/china-v4-base-replay-v1.json]
+permissions:
+  contents: read
+concurrency:
+  group: china-v4-base-replay-v1-read-only
+  cancel-in-progress: false
+jobs:
+  custody:
+    if: >-
+      github.repository == 'jeep-jim/AvtoCena' && github.repository_id == '1289722938' &&
+      github.ref == 'refs/heads/main' && github.run_attempt == '1' && !github.event.deleted &&
+      github.event.head_commit.message == 'Verify saved China V4 source equivalence without writes'
+    environment: regcloud-staging
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 2
+          persist-credentials: false
+      - name: Verify exact private read trigger, operator closure and source config before credentials
+        shell: bash
+        env:
+          EVENT_BEFORE: ${{ github.event.before }}
+          EVENT_SHA: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import hashlib,json,os,pathlib,re,subprocess
+          ver='china-v4-base-replay-v1'
+          prefix='.github/operations/'+ver+'/'
+          marker='.github/market-runs/'+ver+'.json'
+          workflow='.github/workflows/'+ver+'.yml'
+          expected='015da94b00152bd8abc91100d8df117363698191ee3f5c89db7c92e16e9ebe1e'
+          def git(*args): return subprocess.check_output(['git',*args])
+          def unique(rows):
+              out={}
+              for key,value in rows:
+                  assert key not in out
+                  out[key]=value
+              return out
+          parent=os.environ['EVENT_BEFORE']; head=os.environ['EVENT_SHA']
+          assert all(re.fullmatch(r'[a-f0-9]{40}',x) and x!='0'*40 for x in (head,parent))
+          assert git('rev-parse','HEAD').decode().strip()==head
+          assert git('rev-list','--parents','-n','1','HEAD').decode().split()==[head,parent]
+          assert git('diff','--name-status','--no-renames',parent,head).decode().splitlines()==['A\t'+marker]
+          assert git('show',parent+':'+workflow)==pathlib.Path(workflow).read_bytes()
+          closure=pathlib.Path(prefix+'BUNDLE.sha256').read_bytes()
+          assert hashlib.sha256(closure).hexdigest()==expected and git('show',parent+':'+prefix+'BUNDLE.sha256')==closure
+          allow={'base-replay.mjs','custody.mjs','exact-missing-details.mjs','signed-readonly-actor.mjs','original-snapshot-config.b64'}
+          pairs=[line.split('  ') for line in closure.decode().splitlines()]
+          assert len(pairs)==len(allow) and {file for _,file in pairs}==allow
+          for digest,file in pairs:
+              here=pathlib.Path(prefix+file)
+              assert here.is_file() and not here.is_symlink()
+              body=here.read_bytes()
+              assert hashlib.sha256(body).hexdigest()==digest and git('show',parent+':'+prefix+file)==body
+          f=pathlib.Path(marker)
+          assert f.is_file() and not f.is_symlink() and f.stat().st_size<=4096
+          assert json.loads(f.read_bytes(),object_pairs_hook=unique)=={
+              'v':1,'operation':ver,'parent':parent,'bundleSha256':expected,'custodyRun':44765240609,'terminalMetadataJob':136466951375,
+              'acceptedCursor':13123821,'candidateCursor':13180841,'maxSignedGets':535
+          }
+          PY
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24.22.2'
+      - name: Replay one accepted base copy and verified journal; no provider or writes
+        shell: bash
+        env:
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+        run: |
+          set -euo pipefail
+          umask 077
+          part="$GITHUB_WORKSPACE/.github/operations/china-v4-base-replay-v1"
+          work="$(mktemp -d "$RUNNER_TEMP/china-v4-body-custody.XXXXXXXX")"
+          trap 'if [[ "$work" == "$RUNNER_TEMP"/china-v4-body-custody.* && -d "$work" && ! -L "$work" ]]; then rm -rf -- "$work"; fi' EXIT
+          base64 -d "$part/original-snapshot-config.b64" > "$work/config.json"
+          timeout --kill-after=10s 27m node --max-old-space-size=768 "$part/signed-readonly-actor.mjs" \
+            --signed-read-only-custody "$work" "$work/config.json"
