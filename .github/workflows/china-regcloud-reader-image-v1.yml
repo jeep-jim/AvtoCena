@@ -1,0 +1,111 @@
+name: China reader · build exact OFF image without activation
+on:
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/china-regcloud-reader-image-v1.json']
+permissions:
+  contents: read
+concurrency:
+  group: china-regcloud-reader-image-v1
+  cancel-in-progress: false
+jobs:
+  build-image:
+    if: github.repository == 'jeep-jim/AvtoCena' && github.repository_id == '1289722938' && github.ref == 'refs/heads/main' && github.run_attempt == '1' && github.event.head_commit.message == 'Build protected China reader without activation'
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    environment: regcloud-staging
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: Verify reviewed image-only marker and current incumbent
+        id: plan
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          python3 -B .github/china-reader-off-v1/plan.test.py
+          python3 -B .github/china-reader-off-v1/plan.py outputs
+          app=$(sed -n 's/^appSha=//p' "$GITHUB_OUTPUT")
+          test "$(gh api repos/jeep-jim/AvtoCena/git/ref/heads/review/china-installed-reader-20261120 --jq .object.sha)" = "$app"
+          curl -fsS --max-time 15 --max-filesize 8192 -H 'Cache-Control: no-cache' https://avtocena.com/api/health | python3 .github/china-reader-off-v1/plan.py prior-health
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ steps.plan.outputs.appSha }}
+          fetch-depth: 0
+          path: candidate
+          persist-credentials: false
+      - name: Check exact source tree and reviewed delta from the installed source
+        run: python3 .github/china-reader-off-v1/plan.py checkout candidate
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 24.22.1
+          cache: npm
+          cache-dependency-path: candidate/package-lock.json
+      - name: Gate OFF behavior and storage on the exact tree, without secrets
+        working-directory: candidate
+        env:
+          EXPECTED_CANDIDATE_CALCULATOR: ${{ steps.plan.outputs.candidateCalculator }}
+        run: |
+          set -euo pipefail
+          npm ci --ignore-scripts --no-audit --no-fund
+          test "$(node scripts/catalog-calculation-version.mjs)" = "$EXPECTED_CANDIDATE_CALCULATOR"
+          npm run typecheck
+          env -u AVTOCENA_CHINA_REGCLOUD_RUNTIME node --import tsx --import ./tests/helpers/offline-fetch.mjs --test --test-concurrency=1 tests/catalog-market-page-boundary.test.ts tests/catalog-storage-serialization.test.ts tests/regcloud-storage-compatibility.test.ts tests/storage.test.ts tests/catalog-shared-budget-prices.test.ts tests/public-rates-cache.test.ts tests/catalog-budget-runtime.test.ts
+          python3 tests/regcloud-performance-gate.test.py
+      - name: Restore only the incumbent's exact immutable private index
+        working-directory: candidate
+        env:
+          JSON_STORAGE_DRIVER: object
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_REGION: us-east-1
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+          YC_OBJECT_STORAGE_REQUEST_TIMEOUT_MS: '120000'
+          INCUMBENT_RELEASE: ${{ steps.plan.outputs.previousSha }}
+          EXPECTED_INDEX: ${{ steps.plan.outputs.privateIndexSha256 }}
+        run: |
+          set -euo pipefail
+          node --import tsx --input-type=module <<'RESTORE'
+          import {getJsonStorage} from './apps/web/lib/data.ts';
+          import {restoreReleaseEncyclopedia} from './scripts/encyclopedia/restore-calculation-index.mjs';
+          const real=getJsonStorage();
+          if(real.driver!=='object')throw Error('object_storage_required');
+          const r=process.env.INCUMBENT_RELEASE;
+          const binding='knowledge/encyclopedia/calculation-releases/'+r+'.json';
+          const index='knowledge/encyclopedia/calculation-indexes/'+process.env.EXPECTED_INDEX+'.json';
+          const readOnly={async readJson(k,fallback){
+            if(k!==binding&&k!==index)throw Error('unexpected_index_get');
+            return real.readJson(k,fallback);
+          }};
+          const digest=await restoreReleaseEncyclopedia(readOnly,process.cwd(),r);
+          if(digest!==process.env.EXPECTED_INDEX)throw Error('incumbent_index_digest_changed');
+          console.log(JSON.stringify({incumbent:r,privateIndexSha256:digest,storageWrites:0}));
+          RESTORE
+      - name: Build exact review image without runtime credentials
+        id: image
+        working-directory: candidate
+        env:
+          APP_SHA: ${{ steps.plan.outputs.appSha }}
+        run: |
+          set -euo pipefail
+          docker build --label "org.opencontainers.image.revision=$APP_SHA" -t "avtocena-regcloud:$APP_SHA" .
+          image_id=$(docker image inspect --format '{{.Id}}' "avtocena-regcloud:$APP_SHA")
+          [[ "$image_id" =~ ^sha256:[a-f0-9]{64}$ ]]
+          echo "id=$image_id" >> "$GITHUB_OUTPUT"
+      - name: Optionally load the exact image without starting it
+        if: steps.plan.outputs.mayLoadImage == 'true'
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+          APP_SHA: ${{ steps.plan.outputs.appSha }}
+          OLD_SHA: ${{ steps.plan.outputs.previousSha }}
+          OLD_CALCULATOR: ${{ steps.plan.outputs.previousCalculator }}
+          IMAGE_ID: ${{ steps.image.outputs.id }}
+        run: bash .github/china-reader-off-v1/load-image.sh
+      - name: Verify unchanged public release after image qualification
+        run: |
+          set -euo pipefail
+          curl -fsS --max-time 15 --max-filesize 8192 -H 'Cache-Control: no-cache' https://avtocena.com/api/health | python3 .github/china-reader-off-v1/plan.py prior-health
+          echo 'Image qualification only; no application activation or catalog publication.'
