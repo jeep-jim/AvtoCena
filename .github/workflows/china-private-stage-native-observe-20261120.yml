@@ -1,4 +1,4 @@
-name: Read exact fast China durable receipt
+name: Reconcile exact China switch state read only
 on:
   push:
     branches: [main]
@@ -7,7 +7,7 @@ permissions:
   contents: read
 jobs:
   observe:
-    if: github.repository == 'jeep-jim/AvtoCena' && github.repository_id == '1289722938' && github.ref == 'refs/heads/main' && github.run_attempt == '1' && github.event.head_commit.message == 'Read exact fast China durable receipt'
+    if: github.repository == 'jeep-jim/AvtoCena' && github.repository_id == '1289722938' && github.ref == 'refs/heads/main' && github.run_attempt == '1' && github.event.head_commit.message == 'Reconcile exact China switch state read only'
     environment: regcloud-staging
     runs-on: ubuntu-latest
     timeout-minutes: 4
@@ -15,12 +15,10 @@ jobs:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
           persist-credentials: false
-          sparse-checkout: .github/china-reader-off-v1/observe-fast.mjs
+          sparse-checkout: .github/china-reader-off-v1/observe-state.mjs
           sparse-checkout-cone-mode: false
-      - name: Return bounded candidate metadata only, zero storage writes
+      - name: Check exact own pointer and public release, zero storage writes
         env:
-          REG_ACCESS: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
-          REG_SECRET: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
-        run: node .github/china-reader-off-v1/observe-fast.mjs
-
-# Terminal private READY verification, 10:22 UTC.
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+        run: node .github/china-reader-off-v1/observe-state.mjs
