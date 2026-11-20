@@ -20,22 +20,33 @@ def terminal(file):
         f.seek(max(0, p.stat().st_size - 8192))
         return json.loads(f.read(8192).splitlines()[-1])
 
-def reject(reason):
-    print(json.dumps(dict(outcome="held", reason=reason, **protected), separators=(",", ":")))
+def reject(reason, diagnostics=None):
+    print(json.dumps(dict(outcome="held", reason=reason, **(diagnostics or {}), **protected), separators=(",", ":")))
     sys.exit(1)
 
 if code:
+    phases = {"preflight","authority","bucket_privacy","base_read","replica_spool","guard","policy",
+              "pin_read","pin_put","owner_controls","provider_request","archive","post_archive_privacy"}
+    cats = {"ENOSPC","EIO","EACCES","EPERM","ENOENT","EXDEV","EMFILE","ETIMEDOUT","ECONNRESET","EAI_AGAIN",
+            "ERR_SQLITE_ERROR","owner_disabled","owner_controls_invalid","raw_pin_readback_mismatch","raw_pin_ownership_lost",
+            "raw_pin_not_owned","raw_coord_policy_missing","raw_coord_policy_invalid","raw_coord_registry_changed",
+            "runtime_type_or_transport","unclassified"}
+    diagnostics = None
     reason = "source_collection_unverified"
     try:
         v = terminal("actor.stderr")
         if v.get("outcome") == "held":
             r = v.get("reason", "")
+            phase, category = v.get("phase"), v.get("category")
+            attempted = v.get("providerRequestAttempted")
+            if isinstance(phase,str) and phase in phases and isinstance(category,str) and category in cats and type(attempted) is bool:
+                diagnostics = dict(phase=phase, category=category, providerRequestAttempted=attempted)
             # No free-form remote error, ID, path or object data in output.
-            if re.fullmatch(r"china_daily_(?:authority|privacy|once|collect|dry|source):[a-z0-9_]{1,45}(?::\d{3})?|china_private_stage_privacy:[a-z0-9_]{1,45}(?::\d{3})?|auto_api_http_\d{3}", r):
+            if re.fullmatch(r"china_daily_(?:authority|privacy|once|collect|dry|source):[a-z0-9_]{1,45}(?::\d{3})?|china_private_stage_privacy:[a-z0-9_]{1,45}(?::\d{3})?|auto_api_http_\d{3}|auto_api_(?:time_budget|transport_failed|invalid_json|invalid_replay_checkpoint|replay_storage_budget|bulk_collection_failed)", r):
                 reason = r
     except (OSError, ValueError, IndexError, TypeError):
         pass
-    reject(reason)
+    reject(reason, diagnostics)
 try:
     v = terminal("actor.stdout")
     if any(v.get(k) is not expected for k, expected in protected.items()):

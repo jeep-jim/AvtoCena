@@ -1,10 +1,10 @@
 # Inert until this one exact reviewed approval marker is committed with the fixed title.
 # Never add a cron or workflow_dispatch input to this source-only controller.
-name: Collect one independent China delta after token-format fix without publication
+name: Collect one independent China delta with guarded recovery without publication
 on:
   push:
     branches: [main]
-    paths: [.github/market-runs/china-independent-daily-source-collect-v2.sha256]
+    paths: [.github/market-runs/china-independent-daily-source-collect-v3.sha256]
 permissions:
   contents: read
   actions: read
@@ -13,8 +13,8 @@ concurrency:
   cancel-in-progress: false
 jobs:
   collect:
-    name: Collect one independent China delta after token-format fix without publication
-    if: github.repository == 'jeep-jim/AvtoCena' && github.repository_id == '1289722938' && github.ref == 'refs/heads/main' && github.run_attempt == '1' && github.event.head_commit.message == 'Collect one independent China delta after token-format fix without publication'
+    name: Collect one independent China delta with guarded recovery without publication
+    if: github.repository == 'jeep-jim/AvtoCena' && github.repository_id == '1289722938' && github.ref == 'refs/heads/main' && github.run_attempt == '1' && github.event.head_commit.message == 'Collect one independent China delta with guarded recovery without publication'
     runs-on: ubuntu-24.04
     environment: regcloud-staging
     timeout-minutes: 330
@@ -22,7 +22,7 @@ jobs:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
           persist-credentials: false
-          fetch-depth: 2
+          fetch-depth: 3
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
           ref: f4dc98aaab916b29419d173994d66562aa5901f1
@@ -37,12 +37,25 @@ jobs:
           set -euo pipefail
           umask 077
           readonly ops="$GITHUB_WORKSPACE/.github/operations/china-daily-source-collect-v1"
-          readonly marker=".github/market-runs/china-independent-daily-source-collect-v2.sha256"
+          readonly marker=".github/market-runs/china-independent-daily-source-collect-v3.sha256"
           readonly approved_sha="$(sha256sum "$ops/approved-collect.json" | cut -d ' ' -f 1)"
           printf '%s\n' "$approved_sha" | cmp -s - "$marker"
           (cd "$ops"; sha256sum --strict --check --status APPROVED_CODE.sha256)
           test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
           test "$(git show -s --format=%P HEAD | wc -w)" = 1
+          test "$(git rev-parse HEAD^^)" = af64ab02881540c39161de1e695c90e6ba465918
+          test "$(git show -s --format=%P HEAD^ | wc -w)" = 1
+          python3 - <<'PY3'
+          import json,os,subprocess
+          with open(os.environ['GITHUB_EVENT_PATH']) as f: event=json.load(f)
+          parent=subprocess.check_output(['git','rev-parse','HEAD^'],text=True).strip()
+          changes=event.get('commits') or []
+          assert event.get('before')==parent and event.get('forced') is False and event.get('deleted') is False
+          assert len(changes)==1 and event.get('head_commit',{}).get('id')==changes[0].get('id')==os.environ['GITHUB_SHA']
+          PY3
+          cmp -s <(git diff-tree --no-commit-id -r --name-status --no-renames -z HEAD^^ HEAD^) <(printf 'M\0%s\0M\0%s\0M\0%s\0M\0%s\0M\0%s\0'             .github/operations/china-daily-source-collect-v1/APPROVED_CODE.sha256             .github/operations/china-daily-source-collect-v1/approved-collect.json             .github/operations/china-daily-source-collect-v1/filter-source-result.py             .github/operations/china-daily-source-collect-v1/worker-overlay.patch             .github/workflows/china-independent-daily-source-collect-v1.yml)
+          # Source-only overnight launch must fit genuine source authority from the accepted base.
+          test "$(date -u +%s)" -lt "$(date -u -d '2026-11-20 23:30:00' +%s)"
           cmp -s <(git diff-tree --no-commit-id -r --name-status --no-renames -z HEAD^ HEAD) <(printf 'A\0%s\0' "$marker")
           test "$(git -C daily-collect-worker rev-parse HEAD)" = f4dc98aaab916b29419d173994d66562aa5901f1
           test "$(sha256sum daily-collect-worker/package-lock.json | cut -d ' ' -f 1)" = c0fa7c95f31d67a4025aec11095f7889842b32dfb1a6eb12fc64f3d89e9936eb

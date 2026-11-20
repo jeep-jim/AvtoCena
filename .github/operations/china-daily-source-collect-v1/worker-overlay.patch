@@ -240,7 +240,7 @@ index b739d245..181d7971 100644
 +      return relativePath.endsWith('/head.json')?2*1024**2:64*1024**2;
 +    if(/^catalog\/nonjp-intake\/v1\/china\/[1-9]\d{0,19}\/[1-9]\d{0,5}\/(?:complete\.json|files\/(?:report\.json|autohome_used_china_open-\d{6}\.jsonl)\/\d{1,6}-[a-f0-9]{64}\.json)$/.test(relativePath))return 4*1024**2;
 +    if(/^catalog\/raw-feed-pins\/v1\/(?:che168-intake|nonjp-intake-china)-[1-9]\d{0,19}-[1-9]\d{0,5}\.json$/.test(relativePath))return 1*1024**2;
-+    if(/^catalog\/(?:provider-snapshots\/che168\/[a-f0-9]{64}\/manifest|raw-feed-handoffs\/v1\/che168-snapshot\/[a-f0-9]{64}|raw-feed-coordination\/v1\/policy)\.json$/.test(relativePath))return 2*1024**2;
++    if(/^catalog\/(?:provider-snapshots\/che168\/[a-f0-9]{64}\/manifest|raw-feed-handoffs\/v1\/che168-snapshot\/[a-f0-9]{64}|raw-feed-coordination\/v1\/(?:policy|state))\.json$/.test(relativePath))return 2*1024**2;
 +    throw Error('china_daily_privacy:scope');
 +  }
 +  async readChinaDailySourceJson<T>(key:string,fallback:T):Promise<JsonReadResult<T>>{
@@ -466,7 +466,7 @@ new file mode 100644
 index 00000000..1cdc7963
 --- /dev/null
 +++ b/scripts/catalog-china-daily-collect-core.mts
-@@ -0,0 +1,121 @@
+@@ -0,0 +1,131 @@
 +/** In-process source-only core. No executable entry, environment grant, global
 + * publish/legacy cursor fallback, or operator marker. Host must inject the
 + * independently authenticated producer scope. */
@@ -487,23 +487,27 @@ index 00000000..1cdc7963
 + authorize:(claim:{controlSha256:string;replicaSha256:string;cursor:number})=>Promise<void>;
 + assertEnabled:()=>Promise<void>;
 + request:(endpoint:string,params:Record<string,unknown>)=>Promise<unknown>;
++ progress?:(phase:'base_read'|'replica_spool'|'guard'|'policy'|'pin_read'|'pin_put'|'owner_controls'|'provider_request'|'archive')=>void;
 +};
 +export async function collectChinaDailySource(input:Input,ports:Ports){
 + const owner=rawProducerOwner(),root=await fs.mkdtemp(path.join(os.tmpdir(),'china-daily-source-'));
 + try{
 +  const replica=path.join(root,'replica.sqlite'),observations=path.join(root,'collection');
 +  let verified:ChinaDailyNativeBase|undefined,parts=0;
++  const mark=(phase:Parameters<NonNullable<Ports['progress']>>[0])=>ports.progress?.(phase);
++  mark('replica_spool');
 +  const file=await fs.open(replica,'wx',0o600);
++  mark('base_read');
 +  const evidence=await (async()=>{try{return await inspectChinaDailyDry({...input,
 +    onVerifiedReplicaChunk:async(bytes,index)=>{
 +      if(index!==parts++)throw Error('china_daily_collect:replica_order');
-+      await file.writeFile(bytes);
++      mark('replica_spool');await file.writeFile(bytes);mark('base_read');
 +    },onVerifiedBase:base=>{verified=base;}});}
 +    finally{await file.close();}})();
 +  if(!verified||!parts)throw Error('china_daily_collect:verified_base');
 +  const base=verified,claim=Object.freeze({controlSha256:evidence.controlSha256,
 +    replicaSha256:base.checkpoint.replica.sha256,cursor:base.checkpoint.replica.cursor});
-+  const guard=async()=>{await ports.authorize(claim);await base.assertCurrent();};
++  const guard=async()=>{mark('guard');await ports.authorize(claim);await base.assertCurrent();};
 +  await guard();
 +  const initialJournal='catalog/intake-working/che168-v1/'+evidence.nativeResume.artifactRunId+'/';
 +  const archiveRoot=`catalog/nonjp-intake/v1/china/${owner.runId}/${owner.attempt}/`;
@@ -516,15 +520,16 @@ index 00000000..1cdc7963
 +  const baseRoot=base.checkpoint.replica.key;
 +  const snapshotRoot='catalog/provider-snapshots/che168/'+base.checkpoint.replica.binding;
 +  const snapshotMapping='catalog/raw-feed-handoffs/v1/che168-snapshot/'+rawDigest(snapshotRoot)+'.json';
-+  const policyKey='catalog/raw-feed-coordination/v1/policy.json';
++  const policyKey='catalog/raw-feed-coordination/v1/policy.json',stateKey='catalog/raw-feed-coordination/v1/state.json';
 +  const rawRoot=(key:string)=>rawRep.test(key)?key.slice(0,key.lastIndexOf('/')):null;
 +  const journalKey=(key:string)=>key.startsWith(initialJournal)&&/^(?:head|[a-f0-9]{8}(?:-[a-f0-9]{4}){3}-[a-f0-9]{12})\.json$/.test(key.slice(initialJournal.length));
 +  const archiveKey=(key:string)=>key.startsWith(archiveRoot)&&/^(?:complete\.json|files\/(?:report\.json|autohome_used_china_open-\d{6}\.jsonl)\/\d{1,6}-[a-f0-9]{64}\.json)$/.test(key.slice(archiveRoot.length));
 +  // The first independent collect does not mutate a shared raw registry or
 +  // retire any roots. If the optional registry is ACTIVE, fail before intake;
 +  // do not pretend a verified GET grants its writer role.
-+  const policy=await ports.storage.readJson(policyKey,null);
-+  if(policy!==null)throw Error('china_daily_collect:shared_raw_registry_enabled');
++  mark('policy');
++  const [policy,state]=await Promise.all([policyKey,stateKey].map(key=>ports.storage.readJsonWithMeta(key,null)));
++  if(policy.found!==false||state.found!==false)throw Error('china_daily_collect:shared_raw_registry_enabled');
 +  let newReplica:string|undefined,lister=0;
 +  const storage=new Proxy(ports.storage,{get(target,prop,receiver){
 +    const value=Reflect.get(target,prop,receiver);
@@ -540,13 +545,16 @@ index 00000000..1cdc7963
 +        if(candidates[0])newReplica=candidates[0].root;
 +      }
 +      await guard();
++      if(key===collectorPin)mark('pin_put');
 +      return value.call(target,key,...args);
 +    };
 +    if(['readJson','readJsonWithMeta','getBinary','getBinaryBounded','readJsonBounded'].includes(String(prop)))return(key:string,...args:unknown[])=>{
 +      // If the policy becomes present after preflight, native raw helpers
 +      // may try to read the shared registry. That request is not allowed.
-+      if(!expectedPins.has(key)&&!journalKey(key)&&!archiveKey(key)&&key!==policyKey&&key!==snapshotMapping&&key!==snapshotRoot+'/manifest.json'
++      if(!expectedPins.has(key)&&!journalKey(key)&&!archiveKey(key)&&key!==policyKey&&key!==stateKey&&key!==snapshotMapping&&key!==snapshotRoot+'/manifest.json'
 +         && (rawRoot(key)===null||!(rawRoot(key)===baseRoot||rawRoot(key)===newReplica)))throw Error('china_daily_collect:read_scope');
++      if(key===collectorPin)mark('pin_read');
++      else if(key===policyKey||key===stateKey)mark('policy');
 +      return value.call(target,key,...args);
 +    };
 +    // Existing byte reserve is a bounded read-only bucket census, not a
@@ -566,13 +574,14 @@ index 00000000..1cdc7963
 +      // The verifier's own private file, never a caller-provided path.
 +      await fs.link(replica,filename);
 +      await fs.unlink(replica);
-+    }},directory:observations,storage,resolvePolicy:ports.assertEnabled,
++    }},directory:observations,storage,resolvePolicy:async()=>{mark('owner_controls');await ports.assertEnabled();},
 +    request:async(endpoint:string,params:Record<string,unknown>)=>{
 +      const names=Object.keys(params);
 +      if(names.length!==1||!(endpoint==='changes'&&names[0]==='change_id'&&Number.isSafeInteger(params.change_id)&&Number(params.change_id)>=claim.cursor
 +        ||endpoint==='offer'&&names[0]==='inner_id'&&/^[0-9]{1,20}$/.test(String(params.inner_id))))throw Error('china_daily_collect:provider_scope');
 +      if(++requests>15_000||Date.now()>=until)throw Error('china_daily_collect:provider_budget');
 +      await guard();
++      mark('provider_request');
 +      return ports.request(endpoint,params);
 +    }});
 +  await guard();
@@ -581,6 +590,7 @@ index 00000000..1cdc7963
 +  if(!transferred||!result.completed||result.failure||!result.sourceInputWitness||
 +      !source?.completeInventory||source.stopReason!=='source_finished'||source.initialCursor!==claim.cursor||source.cursor<=claim.cursor||
 +      source.baseReplica?.sha256!==claim.replicaSha256||source.observations!==source.uniqueOffers)throw Error('china_daily_collect:unsealed_source');
++  mark('archive');
 +  const receipt=await archiveIntakeDirectory({storage,directory:observations,market:'china',owner});
 +  await guard();
 +  const raw=await fs.readFile(path.join(observations,'own-storage-receipt.json'));
@@ -728,8 +738,8 @@ index 00000000..4510a54e
 +const need=(v:unknown,c:string)=>{if(!v)throw Error('china_daily_authority:'+c);};
 +const REPO='jeep-jim/AvtoCena',REPO_ID='1289722938';
 +export const CHINA_DAILY_SOURCE_WORKFLOW='.github/workflows/china-independent-daily-source-collect-v1.yml';
-+export const CHINA_DAILY_SOURCE_MARKER='.github/market-runs/china-independent-daily-source-collect-v2.sha256';
-+export const CHINA_DAILY_SOURCE_TITLE='Collect one independent China delta after token-format fix without publication';
++export const CHINA_DAILY_SOURCE_MARKER='.github/market-runs/china-independent-daily-source-collect-v3.sha256';
++export const CHINA_DAILY_SOURCE_TITLE='Collect one independent China delta with guarded recovery without publication';
 +const API='https://api.github.com/repos/'+REPO+'/actions/runs';
 +// Existing source collectors, not unrelated publication, UI or neighbor jobs.
 +const SOURCE_WORKFLOWS=new Set([CHINA_DAILY_SOURCE_WORKFLOW,'.github/workflows/collect-china-ordinary-20261119.yml',
@@ -843,7 +853,7 @@ new file mode 100644
 index 00000000..04d512e5
 --- /dev/null
 +++ b/scripts/catalog-china-daily-source-once.mts
-@@ -0,0 +1,71 @@
+@@ -0,0 +1,80 @@
 +import fs from 'node:fs/promises';
 +import path from 'node:path';
 +import {fileURLToPath,pathToFileURL} from 'node:url';
@@ -876,6 +886,7 @@ index 00000000..04d512e5
 + if(path.dirname(out)!==temp||path.basename(out)!=='china-daily-archive-private.json')throw Error('china_daily_once:private_result_path');
 + return {temp,out};
 +}
++let phase='preflight',providerRequestAttempted=false;
 +async function main(){
 + const {values}=parseArgs({options:{approval:{type:'string'},'approval-sha':{type:'string'},'dry-plan':{type:'string'},
 +   'bootstrap-receipt':{type:'string'},'private-result-file':{type:'string'},'private-temp':{type:'string'}}});
@@ -890,12 +901,15 @@ index 00000000..04d512e5
 + const authority=createChinaDailySourceAuthority({plan:approved,expectedPlanSha256:values['approval-sha']??'',
 +  actorRoot:path.dirname(workerRoot),workerRoot});
 + if(sha(dry)!==authority.dryPlanSha256)throw Error('china_daily_once:dry_plan_sha');
-+ await authority.attest(true);
++ phase='authority';await authority.attest(true);
++ phase='bucket_privacy';
 + const storage=await openChinaDailySourcePrivateStore({native:new ObjectJsonStorage(),owner:authority.owner,assertAuthority:authority.attest});
 + // Fixed standard client, no alternate identity, endpoint or access mode.
 + const client=autoApiChe168Client({apiKey:process.env.AUTO_API_CHE168_KEY,deadline:Date.now()+210*60_000,requestDelayMs:200,retryRateLimit:false});
 + const result=await collectChinaDailySource({plan:dry,expectedPlanSha256:authority.dryPlanSha256,snapshotConfig:snapshot,bootstrapReceipt:original},
-+  {storage,authorize:authority.authorize,nativeWitness:authority.nativeWitness,assertEnabled:()=>assertCollectionEnabled('che168_feed'),request:client});
++  {storage,authorize:authority.authorize,nativeWitness:authority.nativeWitness,assertEnabled:()=>assertCollectionEnabled('che168_feed'),request:client,
++   progress(next){phase=next;if(next==='provider_request')providerRequestAttempted=true;}});
++ phase='post_archive_privacy';
 + await storage.assertPrivate(true);
 + if(result.outcome==='archive_verified'){
 +  const bytes=Buffer.from(JSON.stringify(result.receipt));
@@ -912,7 +926,12 @@ index 00000000..04d512e5
 + const message=e instanceof Error?e.message:'';
 + const known=/^(?:china_daily_(?:authority|privacy|once|collect|dry|source)|china_own_regcloud|china_private_stage_privacy):[a-z0-9_]+(?::\d{3})?$/.test(message)||
 +   /^auto_api_(?:http_\d{3}|time_budget|transport_failed|invalid_json|invalid_replay_checkpoint|replay_storage_budget|bulk_collection_failed)$/.test(message);
-+ console.error(JSON.stringify({outcome:'held',reason:known?message:'source_collection_unverified',publicationAuthorized:false,cursorAdvanceAuthorized:false,scheduleHeld:true}));
++ const system=(e as {code?:string})?.code;
++ const category=typeof system==='string'&&/^(?:ENOSPC|EIO|EACCES|EPERM|ENOENT|EXDEV|EMFILE|ETIMEDOUT|ECONNRESET|EAI_AGAIN|ERR_SQLITE_ERROR)$/.test(system)?system:
++   message==='collection_disabled_by_owner:che168_feed'?'owner_disabled':message==='invalid_collection_controls'?'owner_controls_invalid':
++   /^(?:raw_pin_readback_mismatch|raw_pin_ownership_lost|raw_pin_not_owned|raw_coord_policy_missing|raw_coord_policy_invalid|raw_coord_registry_changed)$/.test(message)?message:
++   e instanceof TypeError?'runtime_type_or_transport':'unclassified';
++ console.error(JSON.stringify({outcome:'held',reason:known?message:'source_collection_unverified',phase,category,providerRequestAttempted,publicationAuthorized:false,cursorAdvanceAuthorized:false,scheduleHeld:true}));
 + process.exitCode=1;
 +}
 diff --git a/scripts/catalog-china-daily-source-private-store.mts b/scripts/catalog-china-daily-source-private-store.mts
