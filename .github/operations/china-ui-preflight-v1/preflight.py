@@ -73,4 +73,25 @@ def main():
     except Exception:
         print('{"status":"readback_unverified"}')
         return 1
-if __name__=='__main__':raise SystemExit(main())
+
+
+def after_ui():
+    name='avtocena-china-grid-dark-22867cbcfaee'
+    config_base='135ccf27648e4410f1ab0d23df9cf87c7866d4ae6ee157466c5546097203478a'
+    try:
+        baseline=config()
+        a,b=[role(r) for r in ROLE]
+        x=json.loads(execute('docker','inspect','--type','container',name))[0]
+        match=x['Name']=='/'+name and x['Image']=='sha256:8a7326fc17de9a28ae66a4915e68038ac089ba4cdf2954bd7fcbd7cbda46ccf8' and x['Id']=='52e44ba2810796f9a12ac83984d9571f71ac1290d852206d2a259ad44da02a8d' and x['State']['Running'] is True
+        p=x['HostConfig']['RestartPolicy']['Name']
+        p=p if p in ('no','unless-stopped') else 'other'
+        raw=execute('/usr/bin/curl','--fail','--silent','--noproxy','*','--max-time','4','--max-filesize','8192','https://avtocena.com/api/health')
+        public=json.loads(raw)
+        same=public.get('releaseSha')==APP and public.get('calculationVersion')==CALC and public.get('ok') is True
+        verified=config()==baseline=={'sha256':config_base,'exactSingle3000':True} and a['exact'] and b['exact'] and match and p=='no' and same and health('gateway')=='incumbent'
+        print(json.dumps({'status':'ui_incumbent_preserved_readonly' if verified else 'ui_state_needs_reconcile','hostWrites':0,'gatewayStillExactIncumbent':baseline=={'sha256':config_base,'exactSingle3000':True},'actualPublicIncumbent':same,'candidateExact':match,'candidateRestartPolicy':p}))
+        return 0 if verified else 2
+    except Exception:
+        print('{"status":"ui_state_unverified","hostWrites":0}')
+        return 2
+if __name__=='__main__':raise SystemExit(after_ui())

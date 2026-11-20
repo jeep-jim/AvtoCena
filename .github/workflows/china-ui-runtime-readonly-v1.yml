@@ -1,6 +1,6 @@
 # Exact single historical readback; imports are inert until the incident marker
 # is changed under the exact reviewed main push below.
-name: Observe China runtime headroom
+name: Reconcile exact China grid runtime
 on:
   push:
     branches: [main]
@@ -9,7 +9,7 @@ permissions:
   contents: read
 jobs:
   read:
-    if: github.repository == 'jeep-jim/AvtoCena' && github.repository_id == '1289722938' && github.ref == 'refs/heads/main' && github.run_attempt == '1' && github.event.head_commit.message == 'Observe China runtime headroom without changes'
+    if: github.repository == 'jeep-jim/AvtoCena' && github.repository_id == '1289722938' && github.ref == 'refs/heads/main' && github.run_attempt == '1' && github.event.head_commit.message == 'Reconcile exact China grid runtime without changes'
     environment: regcloud-staging
     runs-on: ubuntu-latest
     timeout-minutes: 3
@@ -25,7 +25,7 @@ jobs:
           test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
           readonly ops=.github/operations/china-ui-preflight-v1
           readonly marker=.github/market-runs/china-ui-runtime-readonly-v1.sha256
-          readonly observer=666c17aa06cbad1fe0091948f98784ce37f0a4dc3a6cd201c7e513ed01a09921
+          readonly observer=0133abc89bf0df3bb6cd3967ad9be81004b098d357fbc975d7765c3d5ae63678
           readonly wrapper=c2046db680499285b6afe25c0c5b03652cc90652cbdb161f2c8829d3390c61f3
           cmp -s "$marker" <(printf '%s\n' "$observer")
           printf '%s  %s\n' "$observer" "$ops/preflight.py" "$wrapper" "$ops/read-via-ssh.sh" | sha256sum --check --status
