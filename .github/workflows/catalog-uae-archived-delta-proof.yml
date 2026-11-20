@@ -1,0 +1,48 @@
+name: UAE archived delta continuity proof
+on:
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/uae-archived-delta-proof-20261120.sha256']
+permissions:
+  contents: read
+concurrency:
+  group: uae-archived-delta-proof
+  cancel-in-progress: false
+jobs:
+  probe:
+    if: github.repository_id == '1289722938' && github.ref == 'refs/heads/main' && github.run_attempt == 1 && github.event.head_commit.message == 'Observe archived UAE continuity without writes'
+    runs-on: ubuntu-24.04
+    environment: regcloud-staging
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with: {persist-credentials: false, fetch-depth: 2}
+      - name: Admit only the exact single-file marker and sealed proof sources
+        env:
+          EXPECTED_BEFORE: ${{ github.event.before }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          [[ "$EXPECTED_BEFORE" =~ ^[0-9a-f]{40}$ ]]
+          test "$(git rev-list --parents -n1 HEAD)" = "$GITHUB_SHA $EXPECTED_BEFORE"
+          test "$(git show -s --format=%B HEAD)" = 'Observe archived UAE continuity without writes'
+          test "$(git diff --no-renames --name-status "$EXPECTED_BEFORE" "$GITHUB_SHA" --)" = "$(printf 'A\t%s' '.github/market-runs/uae-archived-delta-proof-20261120.sha256')"
+          printf '%s  %s\n' '62ef160363bf51e1c416abd8c65ee1e3eaa07ee1e28922f38b23aa3cf6d2a7b7' '.github/market-runs/uae-archived-delta-proof-20261120.sha256' | sha256sum -c -
+          sha256sum -c '.github/market-runs/uae-archived-delta-proof-20261120.sha256'
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with: {node-version: 24, cache: npm}
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Verify the fixed UAE evidence contracts offline
+        run: node --test .github/operations/uae-archived-delta-proof/uae-delta-proof.test.mjs
+      - name: Read pinned UAE metadata and two public UAE chunks only
+        env:
+          JSON_STORAGE_DRIVER: object
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_REGION: us-east-1
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+          YC_OBJECT_STORAGE_REQUEST_TIMEOUT_MS: '6500'
+          YC_OBJECT_STORAGE_MAX_ATTEMPTS: '1'
+        run: node --import tsx .github/operations/uae-archived-delta-proof/uae-hosted-proof.mjs
