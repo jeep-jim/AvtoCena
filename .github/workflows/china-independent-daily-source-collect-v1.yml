@@ -1,10 +1,10 @@
 # Inert until this one exact reviewed approval marker is committed with the fixed title.
 # Never add a cron or workflow_dispatch input to this source-only controller.
-name: Collect one independent China delta without publication
+name: Collect one independent China delta after token-format fix without publication
 on:
   push:
     branches: [main]
-    paths: [.github/market-runs/china-independent-daily-source-collect-v1.sha256]
+    paths: [.github/market-runs/china-independent-daily-source-collect-v2.sha256]
 permissions:
   contents: read
   actions: read
@@ -13,8 +13,8 @@ concurrency:
   cancel-in-progress: false
 jobs:
   collect:
-    name: Collect one independent China delta without publication
-    if: github.repository == 'jeep-jim/AvtoCena' && github.repository_id == '1289722938' && github.ref == 'refs/heads/main' && github.run_attempt == '1' && github.event.head_commit.message == 'Collect one independent China delta without publication'
+    name: Collect one independent China delta after token-format fix without publication
+    if: github.repository == 'jeep-jim/AvtoCena' && github.repository_id == '1289722938' && github.ref == 'refs/heads/main' && github.run_attempt == '1' && github.event.head_commit.message == 'Collect one independent China delta after token-format fix without publication'
     runs-on: ubuntu-24.04
     environment: regcloud-staging
     timeout-minutes: 330
@@ -22,6 +22,7 @@ jobs:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
           persist-credentials: false
+          fetch-depth: 2
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
           ref: f4dc98aaab916b29419d173994d66562aa5901f1
@@ -36,11 +37,13 @@ jobs:
           set -euo pipefail
           umask 077
           readonly ops="$GITHUB_WORKSPACE/.github/operations/china-daily-source-collect-v1"
-          readonly marker=".github/market-runs/china-independent-daily-source-collect-v1.sha256"
+          readonly marker=".github/market-runs/china-independent-daily-source-collect-v2.sha256"
           readonly approved_sha="$(sha256sum "$ops/approved-collect.json" | cut -d ' ' -f 1)"
           printf '%s\n' "$approved_sha" | cmp -s - "$marker"
           (cd "$ops"; sha256sum --strict --check --status APPROVED_CODE.sha256)
           test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          test "$(git show -s --format=%P HEAD | wc -w)" = 1
+          cmp -s <(git diff-tree --no-commit-id -r --name-status --no-renames -z HEAD^ HEAD) <(printf 'A\0%s\0' "$marker")
           test "$(git -C daily-collect-worker rev-parse HEAD)" = f4dc98aaab916b29419d173994d66562aa5901f1
           test "$(sha256sum daily-collect-worker/package-lock.json | cut -d ' ' -f 1)" = c0fa7c95f31d67a4025aec11095f7889842b32dfb1a6eb12fc64f3d89e9936eb
           git -C daily-collect-worker apply --check "$ops/worker-overlay.patch"

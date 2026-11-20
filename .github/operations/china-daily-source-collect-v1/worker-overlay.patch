@@ -714,7 +714,7 @@ new file mode 100644
 index 00000000..4510a54e
 --- /dev/null
 +++ b/scripts/catalog-china-daily-source-authority.mts
-@@ -0,0 +1,122 @@
+@@ -0,0 +1,123 @@
 +import {createHash} from 'node:crypto';
 +import {execFileSync} from 'node:child_process';
 +import {lstatSync,readFileSync,realpathSync} from 'node:fs';
@@ -728,8 +728,8 @@ index 00000000..4510a54e
 +const need=(v:unknown,c:string)=>{if(!v)throw Error('china_daily_authority:'+c);};
 +const REPO='jeep-jim/AvtoCena',REPO_ID='1289722938';
 +export const CHINA_DAILY_SOURCE_WORKFLOW='.github/workflows/china-independent-daily-source-collect-v1.yml';
-+export const CHINA_DAILY_SOURCE_MARKER='.github/market-runs/china-independent-daily-source-collect-v1.sha256';
-+export const CHINA_DAILY_SOURCE_TITLE='Collect one independent China delta without publication';
++export const CHINA_DAILY_SOURCE_MARKER='.github/market-runs/china-independent-daily-source-collect-v2.sha256';
++export const CHINA_DAILY_SOURCE_TITLE='Collect one independent China delta after token-format fix without publication';
 +const API='https://api.github.com/repos/'+REPO+'/actions/runs';
 +// Existing source collectors, not unrelated publication, UI or neighbor jobs.
 +const SOURCE_WORKFLOWS=new Set([CHINA_DAILY_SOURCE_WORKFLOW,'.github/workflows/collect-china-ordinary-20261119.yml',
@@ -775,8 +775,9 @@ index 00000000..4510a54e
 + const actor=path.resolve(input.actorRoot),worker=path.resolve(input.workerRoot);
 + const actorRevision=env.GITHUB_SHA,runId=env.GITHUB_RUN_ID,token=env.GITHUB_TOKEN;
 + const now=Date.now(),mono=performance.now(),clock=()=>now+Math.max(performance.now()-mono,Date.now()-now);
-+ need(GIT.test(actorRevision??'')&&actorRevision!==p.workerHead&&ID.test(runId??'')&&
-+  typeof token==='string'&&/^[A-Za-z0-9_]{10,1024}$/.test(token)&&realpathSync(actor)===actor&&realpathSync(worker)===worker&&actor!==worker&&
++ need(GIT.test(actorRevision??'')&&actorRevision!==p.workerHead&&ID.test(runId??''),'bound_runtime_identity');
++ need(typeof token==='string'&&token.length<=4096&&(/^ghs_[A-Za-z0-9]{36}$/.test(token)||/^ghs_[0-9]{1,20}_[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+$/.test(token)),'github_installation_token_shape');
++ need(realpathSync(actor)===actor&&realpathSync(worker)===worker&&actor!==worker&&
 +  path.dirname(worker)===actor&&worker===path.dirname(path.dirname(fileURLToPath(import.meta.url))),'bound_runtime_roots');
 + // Record actual Actions writer identity as owner; worker code gets its own attestation.
 + const owner=Object.freeze({runId:runId!,attempt:'1',revision:actorRevision!});
