@@ -1,0 +1,42 @@
+name: Observe installed UAE technical evidence
+on:
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/uae-installed-technical-v1.sha256']
+permissions:
+  contents: read
+concurrency:
+  group: uae-installed-technical-readonly
+  cancel-in-progress: false
+jobs:
+  observe:
+    if: github.repository == 'jeep-jim/AvtoCena' && github.repository_id == '1289722938' && github.ref == 'refs/heads/main' && github.run_attempt == '1' && github.event.head_commit.message == 'Observe installed UAE technical evidence without writes'
+    runs-on: ubuntu-24.04
+    environment: regcloud-staging
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 2
+          persist-credentials: false
+      - name: Require exact first-attempt isolated marker and pinned source
+        shell: bash
+        env:
+          EXPECTED_BEFORE: ${{ github.event.before }}
+        run: |
+          set -euo pipefail
+          readonly marker=.github/market-runs/uae-installed-technical-v1.sha256
+          [[ "$EXPECTED_BEFORE" =~ ^[a-f0-9]{40}$ ]]
+          test "$(git rev-list --parents -n1 HEAD)" = "$GITHUB_SHA $EXPECTED_BEFORE"
+          test "$(git show -s --format=%B HEAD)" = 'Observe installed UAE technical evidence without writes'
+          test "$(git diff --no-renames --name-status "$EXPECTED_BEFORE" "$GITHUB_SHA" --)" = "$(printf 'A\t%s' "$marker")"
+          printf '%s  %s\n' '0c0abd89257228ee9350a0608612885538eed452f6a1806fd38d61926793cdd8' "$marker" | sha256sum --check --status
+          sha256sum --strict --check --status "$marker"
+          bash -n .github/operations/uae-installed-technical-v1/run.sh
+          node --test .github/operations/uae-installed-technical-v1/observe.test.mjs
+      - name: Read exact serving 22867 index structural coverage
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+        shell: bash
+        run: /usr/bin/bash .github/operations/uae-installed-technical-v1/run.sh
