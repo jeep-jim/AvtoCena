@@ -1,4 +1,4 @@
-name: Restore exact China archive with authenticated report limit
+name: Validate saved China archive and applied ancestry in one isolated job
 'on':
   push:
     branches:
@@ -14,8 +14,9 @@ concurrency:
 jobs:
   inspect:
     if: github.repository == 'jeep-jim/AvtoCena' && github.repository_id == '1289722938' && github.ref ==
-      'refs/heads/main' && github.run_attempt == '1' && github.event.before == '130950f0ce4978f8c5dbabedd91398a1fdb245ee'
-      && github.event.head_commit.message == 'Restore exact China archive with authenticated report limit'
+      'refs/heads/main' && github.run_attempt == '1' && github.event.before == '9cc6bb358c10372a0b153194af1ef02798a51c85'
+      && github.event.head_commit.message == 'Validate saved China archive and applied ancestry in one isolated
+      job'
     environment: regcloud-staging
     runs-on: ubuntu-latest
     timeout-minutes: 190
@@ -148,23 +149,30 @@ jobs:
         \ const scope=async()=>{need(Date.now()<sourceExpiry,'source_expired');await assertSandbox(scratch);};\n\
         \ const readOnlyGet=async(key,cap)=>{\n  const x=await forStorage.get(key,cap);\n  if(key===manifestPath&&x.status===200&&!acceptedManifest){\n\
         \   const raw=JSON.parse(x.body),declared=declareNativeArchiveReport(raw,actual.archiveSha256,actual.reportSha256);\n\
-        \   const m=native.validateIntakeArchive(raw,actual.archiveRoot,actual.archiveSha256);\n   need(m.files.length===shape.files&&m.totalBytes===shape.decoded&&m.files.reduce((n,x)=>n+x.parts.length,0)===shape.parts,'live_census');\n\
+        \   need(declared.bytes===44775200&&declared.parts===22,'report_observed_dimensions');\n   const m=native.validateIntakeArchive(raw,actual.archiveRoot,actual.archiveSha256);\n\
+        \   need(m.files.length===shape.files&&m.totalBytes===shape.decoded&&m.files.reduce((n,x)=>n+x.parts.length,0)===shape.parts,'live_census');\n\
         \   for(const f of m.files)for(const p of f.parts)allowed.add(p.key);\n   acceptedManifest=true;console.log(JSON.stringify({stage:'verified_archive_manifest',files:shape.files,parts:shape.parts,restoredBytes:shape.decoded,manifestWireBytes:x.body.length,receiptBytes:receiptBytes.length,reportBytes:declared.bytes,reportParts:declared.parts}));\n\
         \  }\n  if(key===pinPath&&x.status===200)console.log(JSON.stringify({stage:'ready_pin_metadata_read',pinBytes:x.body.length}));\n\
         \  if(allowed.has(key)&&x.status===200&&(forStorage.tally.uniqueArchivePartCount%100===0||forStorage.tally.uniqueArchivePartCount===shape.parts))\n\
         \   console.log(JSON.stringify({stage:'archive_part_download',parts:forStorage.tally.uniqueArchivePartCount,totalParts:shape.parts,wireBytes:forStorage.tally.partWireBytes}));\n\
-        \  return x;\n };\n const capsule=path.join(scratch,'capsule');\n const restored=await restoreViaBoundedReads({native,receipt,expected:actual,readOnlyGet,localCapsule:capsule,assertReadScope:scope});\n\
+        \  return x;\n };\n const {createChinaContinuitySnapshotReader}=await import('./read-current-china-proof.mjs');\n\
+        \ const {bindConvertedContinuity}=await import('./bind-converted-continuity.mjs');\n const readAuthenticatedSnapshot=createChinaContinuitySnapshotReader({access,secret,fetchImpl:nativeFetch});\n\
+        \ await readAuthenticatedSnapshot();console.log(JSON.stringify({stage:'current_china_read_only_baseline_guard_passed',publicationAuthorized:false}));\n\
+        \ const capsule=path.join(scratch,'capsule');\n const restored=await restoreViaBoundedReads({native,receipt,expected:actual,readOnlyGet,localCapsule:capsule,assertReadScope:scope});\n\
         \ need(restored.partCount===shape.parts&&restored.archiveBytes===shape.decoded&&forStorage.tally.partWireBytes===shape.partWire,'full_archive_census');\n\
         \ console.log(JSON.stringify({stage:'archive_bytes_verified',parts:shape.parts,totalBytes:shape.decoded}));\n\
         \ const outputDirectory=path.join(scratch,'input-converted');\n const result=await prepare({nativeRoot,receiptPath:receiptFile,archiveManifestPath:path.join(capsule,'complete.json'),rawPinPath:path.join(capsule,'pin.json'),\n\
         \   restoredDirectory:restored.directory,outputDirectory,minimumFree:18*G,minimumMemoryCap:memMax,progress:msg=>console.log(JSON.stringify(msg))});\n\
         \ await scope();\n const raw=await fs.readFile(path.join(outputDirectory,'LOCAL_ADMISSION.json'));\n\
-        \ console.log(JSON.stringify({stage:'native_sqlite_conversion_admitted',sourceRows:result.sourceRows,shards:result.shards.length,convertedBytes:result.outputBytes,\n\
+        \ need(result.sourceRows===290044&&result.shards.length===581&&result.outputBytes===2741225874,'observed_native_dimensions');\n\
+        \ const p=await bindConvertedContinuity({convertedRoot:outputDirectory,admissionSha256:hash(raw),archiveReportPath:path.join(restored.directory,'report.json'),readAuthenticatedSnapshot});\n\
+        \ await p.assertContinuityCurrent();console.log(JSON.stringify({stage:'native_conversion_and_applied_china_ancestry_admitted',rows:p.result.rows,continuitySha256:p.continuitySha256,priorCursor:p.result.applied.value,candidateCursor:p.result.candidate.cursor,requiresV2RetainedMerge:true,cursorAdvanceAuthorized:false,publicationAuthorized:false}));\n\
+        \n console.log(JSON.stringify({stage:'native_sqlite_conversion_admitted',sourceRows:result.sourceRows,shards:result.shards.length,convertedBytes:result.outputBytes,\n\
         \   admissionSha256:hash(raw),orderedShardInventorySha256:result.shardsSha256,archiveManifestSha256:result.archiveManifestSha256,\n\
         \   hardCgroupBytes:memMax,hardScratchCeilingBytes:ownedMax,storageWrites:0,rawUploaded:false,providerRequests:0,publicationAuthorized:false,cursorAdvanceAuthorized:false}));\n\
         \ globalThis.fetch=nativeFetch;\n}\nif(process.argv[1]&&import.meta.url===pathToFileURL(path.resolve(process.argv[1])).href)\n\
-        \ try{await main();}catch(e){console.error(JSON.stringify({stage:'guarded_capsule_stopped',reason:/^(guarded_capsule_|china_archive_restore_|china_local_archive_)[a-z0-9_]+$/.test(e?.message||'')?e.message:'guard_or_native_refused',publicationAuthorized:false}));process.exitCode=1;}\n\
-        PAYLOAD_EOF\ntest \"$(sha256sum 'archive-code/guarded-capsule-runner.mjs' | cut -d' ' -f1)\" = 0d54ec02d48bf9c94798fe92cfb0554cac0b45c06cc98e6155ff39e20317a085\n\
+        \ try{await main();}catch(e){console.error(JSON.stringify({stage:'guarded_capsule_stopped',reason:/^(guarded_capsule_|china_archive_restore_|china_local_archive_|china_continuity_)[a-z0-9_]+$/.test(e?.message||'')?e.message:'guard_or_native_refused',publicationAuthorized:false}));process.exitCode=1;}\n\
+        PAYLOAD_EOF\ntest \"$(sha256sum 'archive-code/guarded-capsule-runner.mjs' | cut -d' ' -f1)\" = d8d831d63c26090a5dc82cda7379e480c736716398c2e2a6c4147ef990d512b6\n\
         cat > 'archive-code/bounded-archive-restore.mjs' <<'PAYLOAD_EOF'\n/** Plug only a reviewed signed\
         \ GET function into this native restore wrapper.\n * It cannot create native read-protection pins:\
         \ policy and state must genuinely be absent,\n * and the object adapter provides no mutation, HEAD,\
@@ -294,7 +302,95 @@ jobs:
         ,\n    \"apps/web/lib/catalog/runtime-config.ts\": \"300e6ad216e6879eb6815dca986373233e9e78b1ee0c7d1f6531b174bf821752\"\
         \n  },\n  \"unresolved\": [],\n  \"externalPackagesPinned\": false\n}\nPAYLOAD_EOF\ntest \"$(sha256sum\
         \ 'candidate-final/producer/operational/upstream/flow/input/SOURCE_PINS.json' | cut -d' ' -f1)\" =\
-        \ 3d0dcc69269e175625166c799532a3a59259c28b7cdcef88886743d367980b06\n\n[[ \"$GITHUB_RUN_ID\" =~ ^[0-9]+$\
+        \ 3d0dcc69269e175625166c799532a3a59259c28b7cdcef88886743d367980b06\ncat > 'archive-code/bind-converted-continuity.mjs'\
+        \ <<'PAYLOAD_EOF'\n/** Same-run local bridge. It does not collect, reconvert, mint a V2 inventory\n\
+        \ * seal, or write to source storage / cursor. The V2 retention step must follow. */\nimport fs from\
+        \ 'node:fs/promises';import path from 'node:path';import {createHash}from'node:crypto';import{constants}from'node:fs';\n\
+        import{actual}from'./prepare-native-archive.mjs';\nconst sha=b=>createHash('sha256').update(b).digest('hex'),digest=x=>sha(JSON.stringify(x)),hex=/^[a-f0-9]{64}$/;\n\
+        const need=(v,k)=>{if(!v)throw Error('china_continuity_'+k);};\nexport const expected=Object.freeze({publicSha:'4c34c20d9784b571414390cab450ceeeaee60b00c168476100419ec5c05cb038',publicGeneration:'gen_1794878284419_a611dfcf',\n\
+        \ internalSha:'df7d672ed585349a06e6718429f5496978f1cf625eacd55a7fc6d7483a72edc4',internalGeneration:'gen_1795145660283_bbfbf3d1',\n\
+        \ appliedCursorSha:'ea61f0889d966f68ccae3ad30ac6de8d486911e80344df8c8ab745c24eb3f34c',appliedCursorETag:'\"\
+        d6948b6ab14de88ee77f905f6689e195\"',appliedCursorGeneration:'gen_1792660229591_c103ed94',appliedCursor:12360638,candidateCursor:13123821,\n\
+        \ sourceAt:actual.completedAt,reportSha:actual.reportSha256,archiveSha:actual.archiveSha256,receiptSha:actual.receiptSha256,rows:actual.rows});\n\
+        async function readLocal(file,max){\n const h=await fs.open(file,constants.O_RDONLY|constants.O_NOFOLLOW);\n\
+        \ try{const s=await h.stat();need(s.isFile()&&s.nlink===1&&s.size>0&&s.size<=max,'local_scope');const\
+        \ b=await h.readFile();need(b.length===s.size&&(await h.stat()).mtimeMs===s.mtimeMs,'local_changed');return\
+        \ b;}finally{await h.close();}\n}\nconst decode=b=>JSON.parse(new TextDecoder('utf-8',{fatal:true}).decode(b));\n\
+        const captured=(r,hash,tag)=>{need(Buffer.isBuffer(r?.body)&&r.body.length<=4*1024**2&&sha(r.body)===hash&&(!tag||tag===r.etag),'baseline_identity');return\
+        \ decode(r.body);};\nexport async function bindConvertedContinuity({convertedRoot,admissionSha256,archiveReportPath,readAuthenticatedSnapshot,now=Date.now,pins=expected}){\n\
+        \ // Snapshot callback is a pinned read-only authority, not a caller supplied JSON path.\n // Require\
+        \ exact hash+ETag observed independently, and actual old replica evidence.\n need(typeof readAuthenticatedSnapshot==='function'&&hex.test(admissionSha256||'')&&path.isAbsolute(convertedRoot)&&await\
+        \ fs.realpath(convertedRoot)===convertedRoot,'scope');\n const sourceEpoch=Date.parse(pins.sourceAt)+48*3600000;const\
+        \ time=()=>need(now()>=Date.parse(pins.sourceAt)&&now()<sourceEpoch,'source_expired');\n async function\
+        \ snapshot(){\n  time();const a=await readAuthenticatedSnapshot();time();\n  const pub=captured(a.public,pins.publicSha),int=captured(a.internal,pins.internalSha),cursor=captured(a.appliedCursor,pins.appliedCursorSha,pins.appliedCursorETag);\n\
+        \  need(pub?.generationId===pins.publicGeneration&&int?.generationId===pins.internalGeneration&&cursor?.generationId===pins.appliedCursorGeneration&&cursor?.version===1&&cursor.market==='china','baseline_generation');\n\
+        \  need(a.lease===null||a.lease?.lockedUntil===''||Number.isFinite(Date.parse(a.lease?.lockedUntil))&&Date.parse(a.lease.lockedUntil)<=now(),'shared_lease_active');\n\
+        \  const ctl=a.controls;need(ctl?.version===1&&ctl.markets?.china?.enabled===true&&ctl.sources?.che168_feed?.enabled===true&&ctl.sources?.ajes_china_feed?.enabled===false,'owner_controls');\n\
+        \  const matches=cursor?.sources?.filter(s=>s.provider==='auto_api_che168')??[];\n  const source=matches[0],replica=source?.replica;\n\
+        \  need(matches.length===1&&source.cursor===pins.appliedCursor&&source.stopReason==='source_finished'&&\n\
+        \   /^catalog\\/provider-replicas\\/che168\\/[a-f0-9-]{36}$/.test(replica?.key||'')&&hex.test(replica?.sha256||'')&&hex.test(source.snapshotBinding||''),'applied_cursor_identity');\n\
+        \  const currentReplica=a.appliedReplica?.value;\n  need(a.appliedReplica?.key===replica.key+'/manifest.json'&&Boolean(currentReplica)&&digest(currentReplica)===replica.sha256&&currentReplica?.version===1&&currentReplica.cursor===source.cursor&&\n\
+        \   replica.binding===source.snapshotBinding&&currentReplica.binding===source.snapshotBinding&&replica.cursor===source.cursor&&Array.isArray(currentReplica.parts)&&currentReplica.parts.length>0,'independent_replica_anchor');\n\
+        \  return {public:{sha256:pins.publicSha,etag:a.public.etag,generation:pins.publicGeneration},\n \
+        \  internal:{sha256:pins.internalSha,etag:a.internal.etag,generation:pins.internalGeneration},leaseSha256:digest(a.lease),\n\
+        \   controlsSha256:digest(ctl),appliedCursor:{sha256:pins.appliedCursorSha,etag:a.appliedCursor.etag,value:source.cursor,replicaSha256:replica.sha256,snapshotBinding:source.snapshotBinding,replicaKey:replica.key}};\n\
+        \ }\n const before=await snapshot();\n const receiptBytes=await readLocal(path.join(convertedRoot,'LOCAL_ADMISSION.json'),2*1024**2);\n\
+        \ need(sha(receiptBytes)===admissionSha256,'admission_sha');const ad=decode(receiptBytes);\n need(ad?.kind==='china-local-confirmed-input-only'&&ad.version===1&&ad.sourceCompletedAt===pins.sourceAt&&Date.parse(ad.sourceExpiresAt)===sourceEpoch&&ad.sourceRows===pins.rows&&\n\
+        \      ad.archiveManifestSha256===pins.archiveSha&&ad.reportSha256===pins.reportSha&&ad.receiptSha256===pins.receiptSha&&ad.inventoryV2SealIssued===false&&ad.publicationAuthorized===false&&ad.cursorAdvanceAuthorized===false&&\n\
+        \      Array.isArray(ad.shards)&&ad.shards.length>0&&ad.shards.length<=1200&&digest(ad.shards)===ad.shardsSha256&&new\
+        \ Set(ad.shards.map(x=>x.file)).size===ad.shards.length,'admission_binding');\n const reportBytes=await\
+        \ readLocal(archiveReportPath,128*1024**2);need(sha(reportBytes)===pins.reportSha,'report_sha');const\
+        \ report=decode(reportBytes),paid=report?.sources?.filter(x=>x.provider==='auto_api_che168')??[];\n\
+        \ const next=paid[0];\n const common=report?.completed===true&&report.provider==='auto_api_che168'&&report.market==='china'&&report.completedAt===pins.sourceAt&&paid.length===1&&next.completeInventory===true&&next.stopReason==='source_finished'&&next.cursor===pins.candidateCursor&&next.replica?.cursor===next.cursor&&next.replica?.binding===next.snapshotBinding&&hex.test(next.replica?.sha256||'');\n\
+        \ if(common&&!next.baseReplica)throw Error('china_continuity_authenticated_full_snapshot_no_delta_ancestry');\n\
+        \ need(report?.completed===true&&report.provider==='auto_api_che168'&&report.market==='china'&&report.completedAt===pins.sourceAt&&paid.length===1&&next.completeInventory===true&&\n\
+        \  next.stopReason==='source_finished'&&next.initialCursor===pins.appliedCursor&&next.cursor===pins.candidateCursor&&next.cursor>next.initialCursor&&\n\
+        \  next.baseReplica?.key===before.appliedCursor.replicaKey&&next.baseReplica?.sha256===before.appliedCursor.replicaSha256&&next.snapshotBinding===before.appliedCursor.snapshotBinding&&\n\
+        \  next.replica?.cursor===next.cursor&&next.replica?.binding===next.snapshotBinding&&hex.test(next.replica?.sha256||''),'gap_free_applied_ancestry');\n\
+        \ const after=await snapshot();need(digest(before)===digest(after),'snapshot_moved');time();\n const\
+        \ {replicaKey:_,...applied}=after.appliedCursor;\n const result={version:1,kind:'china-local-conversion-continuity-only',archiveManifestSha256:pins.archiveSha,nativeAdmissionSha256:admissionSha256,preparedShardsSha256:ad.shardsSha256,rows:ad.sourceRows,sourceExpiresAt:ad.sourceExpiresAt,\n\
+        \  baseline:{public:after.public,internal:after.internal},applied,candidate:{cursor:next.cursor,replicaSha256:next.replica.sha256},requiresV2RetainedMerge:true,v2SealIssued:false,publishAuthorized:false,cursorAdvanceAuthorized:false};\n\
+        \ const file=path.join(convertedRoot,'LOCAL_CONTINUITY.json'),bytes=Buffer.from(JSON.stringify(result));\n\
+        \ await fs.writeFile(file,bytes,{flag:'wx',mode:0o600});\n need(sha(await readLocal(file,32768))===sha(bytes),'continuity_readback');\n\
+        \ return Object.freeze({result,continuitySha256:sha(bytes),async readShard(i){\n  time();need(Number.isSafeInteger(i)&&i>=0&&i<ad.shards.length,'shard_index');\n\
+        \  const v=ad.shards[i];need(/^catalog-rebuild-china-[0-9]+\\.json$/.test(v.file||'')&&hex.test(v.sha256||'')&&Number.isSafeInteger(v.bytes),'shard_scope');\n\
+        \  const b=await readLocal(path.join(convertedRoot,v.file),128*1024**2);need(b.length===v.bytes&&sha(b)===v.sha256,'shard_readback');return\
+        \ b;\n },async assertContinuityCurrent(){need(digest(await snapshot())===digest(after),'snapshot_moved');}});\n\
+        }\nPAYLOAD_EOF\ntest \"$(sha256sum 'archive-code/bind-converted-continuity.mjs' | cut -d' ' -f1)\"\
+        \ = 0f79de01252adc80dfb489e18a8f4ef9613bda970afb93e3f2811e1c2b511ecc\ncat > 'archive-code/read-current-china-proof.mjs'\
+        \ <<'PAYLOAD_EOF'\n/** Fixed-origin signed GETs for same-job continuity only, called by authorized\
+        \ successor. */\nimport {createHash,createHmac} from 'node:crypto';\nimport {expected} from './bind-converted-continuity.mjs';\n\
+        const chars=/^[a-zA-Z0-9_+=./-]{1,256}$/, H=1024**2;\nconst sha=b=>createHash('sha256').update(b).digest('hex'),hmac=(k,b)=>createHmac('sha256',k).update(b).digest();\n\
+        const must=(ok,k)=>{if(!ok)throw Error('china_continuity_read_'+k);};\nconst paths=Object.freeze({public:'catalog/manifest.json',internal:'catalog/internal/manifest.json',lease:'catalog/import-lock.json',appliedCursor:'catalog/intake-cursors/v1/china.json',controls:'catalog/operations/collection-controls-v1.json'});\n\
+        export function createChinaContinuitySnapshotReader({access,secret,fetchImpl=globalThis.fetch,now=Date.now,pins=expected}){\n\
+        \ must(typeof access==='string'&&chars.test(access)&&typeof secret==='string'&&secret.length>0&&secret.length<=1024&&!/[\\\
+        r\\n\\x00]/.test(secret),'credential');\n const expiry=Date.parse(pins.sourceAt)+48*3600000,allow=new\
+        \ Map([[paths.public,4*H],[paths.internal,4*H],[paths.lease,64*1024],[paths.appliedCursor,256*1024],[paths.controls,256*1024]]);\n\
+        \ let replicaPath=null;\n async function get(key){\n  const e=now(),cap=allow.get(key);must(e>=Date.parse(pins.sourceAt)&&e<expiry&&cap,'scope');\n\
+        \  const host='s3.regru.cloud',p='/avtocena-staging-8120751/migration-staging/full-20261011/'+key,t=new\
+        \ Date(e).toISOString().replace(/[:-]|\\.\\d{3}/g,''),day=t.slice(0,8),scope=day+'/us-east-1/s3/aws4_request';\n\
+        \  const headers={host,'x-amz-content-sha256':sha(''),'x-amz-date':t},names=Object.keys(headers).sort();\n\
+        \  const request=['GET',p,'',names.map(k=>k+':'+headers[k]+'\\n').join(''),names.join(';'),sha('')].join('\\\
+        n'),sign=hmac(hmac(hmac(hmac('AWS4'+secret,day),'us-east-1'),'s3'),'aws4_request');\n  headers.authorization='AWS4-HMAC-SHA256\
+        \ Credential='+access+'/'+scope+', SignedHeaders='+names.join(';')+', Signature='+createHmac('sha256',sign).update(['AWS4-HMAC-SHA256',t,scope,sha(request)].join('\\\
+        n')).digest('hex');\n  const r=await fetchImpl('https://'+host+p,{method:'GET',headers,redirect:'error',signal:AbortSignal.timeout(Math.min(20000,expiry-e))});\n\
+        \  if(key===paths.lease&&r.status===404){await r.body?.cancel();return null;}\n  const length=r.headers.get('content-length'),etag=r.headers.get('etag'),n=Number(length);\n\
+        \  if(r.status!==200||!/^\\d+$/.test(length||'')||n<=0||n>cap||!/^\"[^\"\\r\\n]{1,128}\"$/.test(etag||'')||r.headers.get('content-encoding')){await\
+        \ r.body?.cancel();throw Error('china_continuity_read_response');}\n  const body=Buffer.alloc(n);let\
+        \ offset=0;\n  for await(const chunk of r.body){must(offset+chunk.length<=n,'cap');body.set(chunk,offset);offset+=chunk.length;}\n\
+        \  must(offset===n&&now()<expiry,'changed');\n  return {body,etag,value:JSON.parse(new TextDecoder('utf-8',{fatal:true}).decode(body))};\n\
+        \ }\n return async()=>{\n  const [pub,int,cursor,lease,controls]=await Promise.all([paths.public,paths.internal,paths.appliedCursor,paths.lease,paths.controls].map(get));\n\
+        \  must(sha(pub.body)===pins.publicSha&&pub.value?.generationId===pins.publicGeneration&&sha(int.body)===pins.internalSha&&int.value?.generationId===pins.internalGeneration&&\n\
+        \    sha(cursor.body)===pins.appliedCursorSha&&cursor.etag===pins.appliedCursorETag&&cursor.value?.generationId===pins.appliedCursorGeneration,'fixed_baseline');\n\
+        \  must(lease===null||lease.value?.lockedUntil===''||Number.isFinite(Date.parse(lease.value?.lockedUntil))&&Date.parse(lease.value.lockedUntil)<=now(),'lease_active');\n\
+        \  const c=controls.value;must(c?.version===1&&c.markets?.china?.enabled===true&&c.sources?.che168_feed?.enabled===true&&c.sources?.ajes_china_feed?.enabled===false,'owner_controls');\n\
+        \  const s=cursor.value?.sources?.filter(x=>x.provider==='auto_api_che168')??[];\n  must(s.length===1&&s[0].cursor===pins.appliedCursor&&/^catalog\\\
+        /provider-replicas\\/che168\\/[a-f0-9-]{36}$/.test(s[0].replica?.key||'')&&/^[a-f0-9]{64}$/.test(s[0].replica?.sha256||''),'replica_anchor');\n\
+        \  const next=s[0].replica.key+'/manifest.json';must(replicaPath===null||next===replicaPath,'replica_scope');replicaPath=next;allow.set(next,2*H);\n\
+        \  const r=await get(replicaPath);must(sha(JSON.stringify(r.value))===s[0].replica.sha256&&r.value?.cursor===s[0].cursor,'replica_digest');\n\
+        \  return {public:pub,internal:int,appliedCursor:cursor,lease:lease?.value??null,controls:c,appliedReplica:{key:replicaPath,value:r.value}};\n\
+        \ };\n}\nPAYLOAD_EOF\ntest \"$(sha256sum 'archive-code/read-current-china-proof.mjs' | cut -d' ' -f1)\"\
+        \ = 5a816c8faed6fc53f7c3ca6bb9cb0565b014b938c455a9cdf91d3638afb29542\n\n[[ \"$GITHUB_RUN_ID\" =~ ^[0-9]+$\
         \ && \"$GITHUB_RUN_ATTEMPT\" = 1 ]]\nunit=\"china-capsule-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}\"\
         \nimage=\"$root/owned-scratch.ext4\"\nmnt=\"$root/private-scratch\"\ncred=\"$root/private-storage.json\"\
         \nnode_bin=\"$(command -v node)\"\n[[ \"$node_bin\" = /* && \"$(node --version)\" = v24.22.1 ]]\n\
