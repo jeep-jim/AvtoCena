@@ -158,6 +158,7 @@ jobs:
           PY
           unset REG_ACCESS REG_SECRET GH_TOKEN
           pin="$(sha256sum "$root/launch.json" | cut -d ' ' -f1)"
+          install -m 0600 "$GITHUB_WORKSPACE/orchestrator/$OPS/runtime-context-plan.json" "$root/runtime-context-plan.json"
           sudo -n systemd-run --unit="$unit" --wait --collect --pipe --quiet --uid="$(id -u)" --gid="$(id -g)" \
             --working-directory="$PWD" --setenv="TMPDIR=$mnt" --setenv="HOME=$mnt" \
             --property="EnvironmentFile=$processenv" --property=MemoryMax=6442450944 --property=MemorySwapMax=0 \
