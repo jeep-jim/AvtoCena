@@ -1,0 +1,120 @@
+name: Verify corrected source-only Europe append candidate without writes
+'on':
+  push:
+    branches: [main]
+    paths: [.github/market-runs/europe-combined-ephemeral-readonly-v2.json]
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: europe-combined-ephemeral-readonly-v2
+  cancel-in-progress: false
+jobs:
+  dry:
+    if: >-
+      github.repository == 'jeep-jim/AvtoCena' &&
+      github.repository_id == '1289722938' &&
+      github.ref == 'refs/heads/main' &&
+      github.run_attempt == '1' && !github.event.deleted &&
+      github.event.head_commit.message == 'Verify corrected ephemeral AutoScout seller append without writes'
+    environment: regcloud-staging
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 2
+          persist-credentials: false
+      - name: Verify exact one-time marker, immutable controller and pricing day
+        env:
+          EVENT_BEFORE: ${{ github.event.before }}
+          EVENT_SHA: ${{ github.sha }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import hashlib,json,os,pathlib,re,subprocess,time
+          ver='europe-combined-ephemeral-readonly-v2'
+          prefix='scripts/'+ver+'/'
+          workflow='.github/workflows/'+ver+'.yml'
+          marker='.github/market-runs/'+ver+'.json'
+          bundle='189f620a5fec0b52d11a392b5ad91f64a007026f88a5b33cd5cdf2e1b98ad8c0'
+          def git(*args): return subprocess.check_output(['git',*args])
+          def unique(rows):
+              out={}
+              for key,value in rows:
+                  assert key not in out
+                  out[key]=value
+              return out
+          now=int(time.time())
+          assert 1795132800<=now<1795219200-300
+          parent=os.environ['EVENT_BEFORE']; head=os.environ['EVENT_SHA']
+          assert all(re.fullmatch(r'[a-f0-9]{40}',x) and x!='0'*40 for x in (parent,head))
+          assert git('rev-parse','HEAD').decode().strip()==head
+          assert git('rev-list','--parents','-n','1','HEAD').decode().split()==[head,parent]
+          assert git('diff','--name-status','--no-renames',parent,head).decode().splitlines()==['A\t'+marker]
+          assert git('show',parent+':'+workflow)==pathlib.Path(workflow).read_bytes()
+          manifest=pathlib.Path(prefix+'BUNDLE.sha256').read_bytes()
+          assert hashlib.sha256(manifest).hexdigest()==bundle and git('show',parent+':'+prefix+'BUNDLE.sha256')==manifest
+          expected={'archive-membership.py','cbr-nov20.xml.b64','combined.mjs','exact-tree.tsv','fetch-saved-archive.sh',
+             'inline-stream.mjs','instrument.py','prepare-native.sh','signed-inline-probe.mjs','strict-offline.mjs','verify-native.mjs'}
+          pairs=[line.split('  ') for line in manifest.decode().splitlines()]
+          assert len(pairs)==len(expected) and {f for _,f in pairs}==expected
+          for digest,f in pairs:
+              path=prefix+f; local=pathlib.Path(path)
+              assert local.is_file() and not local.is_symlink()
+              body=local.read_bytes()
+              assert hashlib.sha256(body).hexdigest()==digest and git('show',parent+':'+path)==body
+          assert pathlib.Path(marker).stat().st_size<=4096
+          assert json.loads(pathlib.Path(marker).read_bytes(),object_pairs_hook=unique)=={
+              'v':1,'operation':ver,'parent':parent,'bundleSha256':bundle,'archiveRun':44637245131,'artifact':14584484747,
+              'nativeRelease':'22867cbcfaee27b2e8917b6bf880e44827f67b60','publicProofRun':44769053821,'failedControlRun':44772901789,'pricingDay':'2026-11-20'}
+          PY
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24.22.2'
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          repository: jeep-jim/AvtoCena
+          ref: 22867cbcfaee27b2e8917b6bf880e44827f67b60
+          path: pristine-europe-runtime
+          fetch-depth: 1
+          persist-credentials: false
+      - name: Fetch only the exact saved artifact with read-only GitHub authority
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          umask 077
+          root="$RUNNER_TEMP/europe-combined-ephemeral-readonly-v2"
+          mkdir -m700 -- "$root"
+          bash scripts/europe-combined-ephemeral-readonly-v2/fetch-saved-archive.sh "$root"
+      - name: Replay native seller-only pricing offline before storage authority
+        shell: bash
+        run: |
+          set -euo pipefail
+          umask 077
+          root="$RUNNER_TEMP/europe-combined-ephemeral-readonly-v2"
+          bundle="$GITHUB_WORKSPACE/scripts/europe-combined-ephemeral-readonly-v2"
+          native="$GITHUB_WORKSPACE/pristine-europe-runtime"
+          test "$(git -C "$native" rev-parse HEAD)" = 22867cbcfaee27b2e8917b6bf880e44827f67b60
+          base64 -d "$bundle/cbr-nov20.xml.b64" > "$root/official.xml"
+          (cd "$native"; timeout --kill-after=5s 180s npm ci --ignore-scripts --no-fund --no-audit) > "$root/dependencies.log" 2>&1
+          bash "$bundle/prepare-native.sh" "$native" "$native/node_modules" "$root/original.zip" "$root/official.xml" "$root/native"
+      - name: Compute signed ephemeral Europe append hashes; no persisted candidate
+        env:
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --max-old-space-size=192 scripts/europe-combined-ephemeral-readonly-v2/combined.mjs \
+            "$RUNNER_TEMP/europe-combined-ephemeral-readonly-v2/native/evidence"
+      - name: Discard ephemeral source data without uploading
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          root="$RUNNER_TEMP/europe-combined-ephemeral-readonly-v2"
+          if [[ -d "$root" && ! -L "$root" ]]; then chmod -R u+rwX -- "$root"; rm -rf -- "$root"; fi
