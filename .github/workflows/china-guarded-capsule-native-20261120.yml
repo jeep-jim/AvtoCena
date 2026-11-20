@@ -1,4 +1,4 @@
-name: Validate saved China archive and applied ancestry in one isolated job
+name: Check actual China overlaps and native retention before V2
 'on':
   push:
     branches:
@@ -14,9 +14,8 @@ concurrency:
 jobs:
   inspect:
     if: github.repository == 'jeep-jim/AvtoCena' && github.repository_id == '1289722938' && github.ref ==
-      'refs/heads/main' && github.run_attempt == '1' && github.event.before == '9cc6bb358c10372a0b153194af1ef02798a51c85'
-      && github.event.head_commit.message == 'Validate saved China archive and applied ancestry in one isolated
-      job'
+      'refs/heads/main' && github.run_attempt == '1' && github.event.before == '91b124dcf327c798a5ee85f7322c1291d5918ba3'
+      && github.event.head_commit.message == 'Check actual China overlaps and native retention before V2'
     environment: regcloud-staging
     runs-on: ubuntu-latest
     timeout-minutes: 190
@@ -33,6 +32,8 @@ jobs:
           apps/web/lib
 
           packages/engine/src
+
+          data/catalog
 
           '
     - uses: actions/setup-node@v4
@@ -105,12 +106,12 @@ jobs:
         YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
         YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
       run: "set -euo pipefail\numask 077\nroot=\"$RUNNER_TEMP/china-job\"\ncd \"$root\"\nmkdir -m 0700 archive-code\n\
-        mkdir -pm 0700 candidate-final/producer/operational/upstream/flow/input\ncat > 'archive-code/guarded-capsule-runner.mjs'\
-        \ <<'PAYLOAD_EOF'\n/** One-shot manifest-pinned archive restore and native local input admission.\
-        \ No writes to storage. */\nimport fs from 'node:fs/promises';import path from 'node:path';import\
-        \ {createHash,createHmac} from 'node:crypto';import {pathToFileURL} from 'node:url';\nimport {actual,prepare,declareNativeArchiveReport}\
-        \ from './prepare-native-archive.mjs';import {restoreViaBoundedReads} from './bounded-archive-restore.mjs';\n\
-        const G=1024**3,M=1024**2,ownedMax=24*G,memMax=6*G,pinPath='catalog/raw-feed-pins/v1/nonjp-intake-china-44457059256-1.json',manifestPath=actual.archiveRoot+'/complete.json';\n\
+        mkdir -pm 0700 candidate-final/producer/operational/upstream/flow/input\nmkdir -pm 0700 candidate-final/producer/operational/upstream/flow/input\n\
+        cat > 'archive-code/guarded-capsule-runner.mjs' <<'PAYLOAD_EOF'\n/** One-shot manifest-pinned archive\
+        \ restore and native local input admission. No writes to storage. */\nimport fs from 'node:fs/promises';import\
+        \ path from 'node:path';import {createHash,createHmac} from 'node:crypto';import {pathToFileURL} from\
+        \ 'node:url';\nimport {actual,prepare,declareNativeArchiveReport} from './prepare-native-archive.mjs';import\
+        \ {restoreViaBoundedReads} from './bounded-archive-restore.mjs';\nconst G=1024**3,M=1024**2,ownedMax=64*G,memMax=10*G,pinPath='catalog/raw-feed-pins/v1/nonjp-intake-china-44457059256-1.json',manifestPath=actual.archiveRoot+'/complete.json';\n\
         const policy='catalog/raw-feed-coordination/v1/policy.json',state='catalog/raw-feed-coordination/v1/state.json';\n\
         const shape=Object.freeze({files:582,parts:1758,decoded:2760633543,partWire:386094361});\nconst sourceExpiry=Date.parse(actual.completedAt)+48*3600000;\n\
         const hash=b=>createHash('sha256').update(b).digest('hex'),hmac=(k,s)=>createHmac('sha256',k).update(s).digest(),digest=v=>hash(JSON.stringify(v));\n\
@@ -167,12 +168,19 @@ jobs:
         \ need(result.sourceRows===290044&&result.shards.length===581&&result.outputBytes===2741225874,'observed_native_dimensions');\n\
         \ const p=await bindConvertedContinuity({convertedRoot:outputDirectory,admissionSha256:hash(raw),archiveReportPath:path.join(restored.directory,'report.json'),readAuthenticatedSnapshot});\n\
         \ await p.assertContinuityCurrent();console.log(JSON.stringify({stage:'native_conversion_and_applied_china_ancestry_admitted',rows:p.result.rows,continuitySha256:p.continuitySha256,priorCursor:p.result.applied.value,candidateCursor:p.result.candidate.cursor,requiresV2RetainedMerge:true,cursorAdvanceAuthorized:false,publicationAuthorized:false}));\n\
+        \n const {createChinaRetainedTransport,captureChinaRetained,resolveChinaRetainedCapture}=await import('./capture-china-retained.mjs');\n\
+        \ const c=await captureChinaRetained({continuity:p,readAuthenticatedSnapshot,transport:createChinaRetainedTransport({access,secret,fetchImpl:nativeFetch}),output:path.join(scratch,'retained-china'),progress:msg=>console.log(JSON.stringify(msg))});\n\
+        \ await scope();await p.assertContinuityCurrent();\n const retained=resolveChinaRetainedCapture(c).receipt;\n\
+        \ console.log(JSON.stringify({stage:'china_retained_body_snapshot_verified',sha256:c.sha256,objects:retained.objects,bytes:retained.bytes,groups:retained.groups.map(g=>({rows:g.rows,objects:g.files.length})),inventoryV2SealIssued:false,publicationAuthorized:false,cursorAdvanceAuthorized:false}));\n\
+        \ const {qualifyNativeChinaRetention}=await import('./qualify-native-china-retention.mjs');\n const\
+        \ qualification=await qualifyNativeChinaRetention({continuity:p,retained:c,readAuthenticatedSnapshot,nativeRoot,progress:msg=>console.log(JSON.stringify(msg))});\n\
+        \ await scope();await p.assertContinuityCurrent();\n console.log(JSON.stringify({stage:'china_exact_union_native_retention_measured',...qualification}));\n\
         \n console.log(JSON.stringify({stage:'native_sqlite_conversion_admitted',sourceRows:result.sourceRows,shards:result.shards.length,convertedBytes:result.outputBytes,\n\
         \   admissionSha256:hash(raw),orderedShardInventorySha256:result.shardsSha256,archiveManifestSha256:result.archiveManifestSha256,\n\
         \   hardCgroupBytes:memMax,hardScratchCeilingBytes:ownedMax,storageWrites:0,rawUploaded:false,providerRequests:0,publicationAuthorized:false,cursorAdvanceAuthorized:false}));\n\
         \ globalThis.fetch=nativeFetch;\n}\nif(process.argv[1]&&import.meta.url===pathToFileURL(path.resolve(process.argv[1])).href)\n\
-        \ try{await main();}catch(e){console.error(JSON.stringify({stage:'guarded_capsule_stopped',reason:/^(guarded_capsule_|china_archive_restore_|china_local_archive_|china_continuity_)[a-z0-9_]+$/.test(e?.message||'')?e.message:'guard_or_native_refused',publicationAuthorized:false}));process.exitCode=1;}\n\
-        PAYLOAD_EOF\ntest \"$(sha256sum 'archive-code/guarded-capsule-runner.mjs' | cut -d' ' -f1)\" = d8d831d63c26090a5dc82cda7379e480c736716398c2e2a6c4147ef990d512b6\n\
+        \ try{await main();}catch(e){console.error(JSON.stringify({stage:'guarded_capsule_stopped',reason:/^(guarded_capsule_|china_archive_restore_|china_local_archive_|china_continuity_|china_retained_|china_retention_gate_|capture_)[a-z0-9_]+$/.test(e?.message||'')?e.message:'guard_or_native_refused',publicationAuthorized:false}));process.exitCode=1;}\n\
+        PAYLOAD_EOF\ntest \"$(sha256sum 'archive-code/guarded-capsule-runner.mjs' | cut -d' ' -f1)\" = 59b40b7dcc032078b95123232c296d78b426acafe3b1d374f7d8d124a7fdd8a1\n\
         cat > 'archive-code/bounded-archive-restore.mjs' <<'PAYLOAD_EOF'\n/** Plug only a reviewed signed\
         \ GET function into this native restore wrapper.\n * It cannot create native read-protection pins:\
         \ policy and state must genuinely be absent,\n * and the object adapter provides no mutation, HEAD,\
@@ -307,6 +315,7 @@ jobs:
         \ * seal, or write to source storage / cursor. The V2 retention step must follow. */\nimport fs from\
         \ 'node:fs/promises';import path from 'node:path';import {createHash}from'node:crypto';import{constants}from'node:fs';\n\
         import{actual}from'./prepare-native-archive.mjs';\nconst sha=b=>createHash('sha256').update(b).digest('hex'),digest=x=>sha(JSON.stringify(x)),hex=/^[a-f0-9]{64}$/;\n\
+        const liveCapabilities=new WeakSet();\nexport function isBoundChinaContinuity(v){return liveCapabilities.has(v);}\n\
         const need=(v,k)=>{if(!v)throw Error('china_continuity_'+k);};\nexport const expected=Object.freeze({publicSha:'4c34c20d9784b571414390cab450ceeeaee60b00c168476100419ec5c05cb038',publicGeneration:'gen_1794878284419_a611dfcf',\n\
         \ internalSha:'df7d672ed585349a06e6718429f5496978f1cf625eacd55a7fc6d7483a72edc4',internalGeneration:'gen_1795145660283_bbfbf3d1',\n\
         \ appliedCursorSha:'ea61f0889d966f68ccae3ad30ac6de8d486911e80344df8c8ab745c24eb3f34c',appliedCursorETag:'\"\
@@ -352,12 +361,14 @@ jobs:
         \  baseline:{public:after.public,internal:after.internal},applied,candidate:{cursor:next.cursor,replicaSha256:next.replica.sha256},requiresV2RetainedMerge:true,v2SealIssued:false,publishAuthorized:false,cursorAdvanceAuthorized:false};\n\
         \ const file=path.join(convertedRoot,'LOCAL_CONTINUITY.json'),bytes=Buffer.from(JSON.stringify(result));\n\
         \ await fs.writeFile(file,bytes,{flag:'wx',mode:0o600});\n need(sha(await readLocal(file,32768))===sha(bytes),'continuity_readback');\n\
-        \ return Object.freeze({result,continuitySha256:sha(bytes),async readShard(i){\n  time();need(Number.isSafeInteger(i)&&i>=0&&i<ad.shards.length,'shard_index');\n\
+        \ const capability=Object.freeze({result,shardCount:ad.shards.length,continuitySha256:sha(bytes),async\
+        \ readReport(){time();const b=await readLocal(archiveReportPath,128*1024**2);need(sha(b)===pins.reportSha,'report_sha');return\
+        \ b;},async readShard(i){\n  time();need(Number.isSafeInteger(i)&&i>=0&&i<ad.shards.length,'shard_index');\n\
         \  const v=ad.shards[i];need(/^catalog-rebuild-china-[0-9]+\\.json$/.test(v.file||'')&&hex.test(v.sha256||'')&&Number.isSafeInteger(v.bytes),'shard_scope');\n\
         \  const b=await readLocal(path.join(convertedRoot,v.file),128*1024**2);need(b.length===v.bytes&&sha(b)===v.sha256,'shard_readback');return\
         \ b;\n },async assertContinuityCurrent(){need(digest(await snapshot())===digest(after),'snapshot_moved');}});\n\
-        }\nPAYLOAD_EOF\ntest \"$(sha256sum 'archive-code/bind-converted-continuity.mjs' | cut -d' ' -f1)\"\
-        \ = 0f79de01252adc80dfb489e18a8f4ef9613bda970afb93e3f2811e1c2b511ecc\ncat > 'archive-code/read-current-china-proof.mjs'\
+        \ liveCapabilities.add(capability);return capability;\n}\nPAYLOAD_EOF\ntest \"$(sha256sum 'archive-code/bind-converted-continuity.mjs'\
+        \ | cut -d' ' -f1)\" = 3d69b1181e87880b313cf8e7707065ab060bcad97298b93965f6cd0b8a4cd232\ncat > 'archive-code/read-current-china-proof.mjs'\
         \ <<'PAYLOAD_EOF'\n/** Fixed-origin signed GETs for same-job continuity only, called by authorized\
         \ successor. */\nimport {createHash,createHmac} from 'node:crypto';\nimport {expected} from './bind-converted-continuity.mjs';\n\
         const chars=/^[a-zA-Z0-9_+=./-]{1,256}$/, H=1024**2;\nconst sha=b=>createHash('sha256').update(b).digest('hex'),hmac=(k,b)=>createHmac('sha256',k).update(b).digest();\n\
@@ -390,7 +401,142 @@ jobs:
         \  const r=await get(replicaPath);must(sha(JSON.stringify(r.value))===s[0].replica.sha256&&r.value?.cursor===s[0].cursor,'replica_digest');\n\
         \  return {public:pub,internal:int,appliedCursor:cursor,lease:lease?.value??null,controls:c,appliedReplica:{key:replicaPath,value:r.value}};\n\
         \ };\n}\nPAYLOAD_EOF\ntest \"$(sha256sum 'archive-code/read-current-china-proof.mjs' | cut -d' ' -f1)\"\
-        \ = 5a816c8faed6fc53f7c3ca6bb9cb0565b014b938c455a9cdf91d3638afb29542\n\n[[ \"$GITHUB_RUN_ID\" =~ ^[0-9]+$\
+        \ = 5a816c8faed6fc53f7c3ca6bb9cb0565b014b938c455a9cdf91d3638afb29542\ncat > 'archive-code/capture-china-retained.mjs'\
+        \ <<'PAYLOAD_EOF'\n/** Collect only the three China retention groups into isolated local scratch.\
+        \ */\nimport fs from 'node:fs/promises';\nimport path from 'node:path';\nimport {constants} from 'node:fs';\n\
+        import {createHash} from 'node:crypto';\nimport {expected,isBoundChinaContinuity} from './bind-converted-continuity.mjs';\n\
+        import {createDescriptorTransport} from '../candidate-final/producer/operational/upstream/flow/input/capture-transport.mjs';\n\
+        const sha=b=>createHash('sha256').update(b).digest('hex'), digest=b=>sha(JSON.stringify(b));\nconst\
+        \ req=(b,k)=>{if(!b)throw Error('china_retained_'+k);};\nconst ids=['autohome_used_china_open','autohome_new_china_open'],\
+        \ countsLive=[[244471,null],[271896,544],[3770,8]];\nconst publicScope=/^catalog\\/generations\\/gen_[a-zA-Z0-9_-]+\\\
+        /offers\\/china\\/chunk-\\d{4,10}\\.json$/;\nconst internalScope=/^catalog\\/internal\\/offers\\/(autohome_used_china_open|autohome_new_china_open)\\\
+        /gen_[a-zA-Z0-9_-]+-chunk-\\d{4,10}\\.json$/;\nconst origin='https://s3.regru.cloud', bucket='avtocena-staging-8120751',\
+        \ prefix='migration-staging/full-20261011';\nconst decode=b=>JSON.parse(new TextDecoder('utf-8',{fatal:true}).decode(b));\n\
+        const getKeyScope=k=>publicScope.test(k)||internalScope.test(k);\nexport function createChinaRetainedTransport({access,secret,fetchImpl=globalThis.fetch}){\n\
+        \ const signed=createDescriptorTransport({env:{YC_OBJECT_STORAGE_ENDPOINT:origin,YC_OBJECT_STORAGE_BUCKET:bucket,YC_OBJECT_STORAGE_PREFIX:prefix,YC_OBJECT_STORAGE_REGION:'us-east-1',YC_OBJECT_STORAGE_ACCESS_KEY_ID:access,YC_OBJECT_STORAGE_SECRET_ACCESS_KEY:secret},fetchImpl:(url,opt)=>{\n\
+        \  const p='/'+bucket+'/'+prefix+'/';req(url.origin===origin&&!url.search&&!url.hash&&url.pathname.startsWith(p)&&getKeyScope(url.pathname.slice(p.length))&&['HEAD','GET'].includes(opt?.method)&&opt.redirect==='error','fixed_host');\n\
+        \  return fetchImpl(url,opt);\n }});\n return opts=>{req(getKeyScope(opts.key),'request_scope');return\
+        \ signed(opts);};\n}\nconst snapKey=x=>digest([sha(x.public.body),x.public.etag,sha(x.internal.body),x.internal.etag,sha(x.appliedCursor.body),x.appliedCursor.etag,x.lease,x.controls,x.appliedReplica]);\n\
+        const snapshotIds=new WeakMap();\nexport function resolveChinaRetainedCapture(x){const v=snapshotIds.get(x);req(v,'capture_capability');return\
+        \ v;}\nexport async function captureChinaRetained({continuity,readAuthenticatedSnapshot,transport,output,progress=()=>{},now=Date.now,counts=countsLive,diskBudget=8*1024**3}){\n\
+        \ const since=Date.parse(expected.sourceAt),until=since+48*3600000,time=()=>req(now()>=since&&now()<until,'source_expired');\n\
+        \ req(isBoundChinaContinuity(continuity)&&continuity?.result?.requiresV2RetainedMerge===true&&typeof\
+        \ continuity.readShard==='function'&&typeof continuity.assertContinuityCurrent==='function'&&\n /^[a-f0-9]{64}$/.test(continuity.continuitySha256||'')&&path.isAbsolute(output)&&path.normalize(output)===output&&await\
+        \ fs.realpath(path.dirname(output))===path.dirname(output)&&Number.isSafeInteger(diskBudget)&&diskBudget>0&&diskBudget<=8*1024**3,'capture_scope');\n\
+        \ time();await continuity.assertContinuityCurrent();\n const first=await readAuthenticatedSnapshot(),baseline=snapKey(first),pub=decode(first.public.body),intr=decode(first.internal.body);\n\
+        \ for(const i of ['public','internal']){\n  const v=first[i],c=continuity.result.baseline[i];req(sha(v.body)===c.sha256&&v.etag===c.etag&&decode(v.body).generationId===c.generation,'continuity_baseline');\n\
+        \ }\n req(pub?.version===2&&pub.markets?.china&&intr.sources,'manifest');\n const keysAll=new Set();\n\
+        \ const groups=[pub.markets.china,...ids.map(x=>intr.sources[x])].map((d,i)=>{\n  const id=i?ids[i-1]:'china';\n\
+        \  req(d?.count===counts[i][0]&&Array.isArray(d.chunks)&&d.chunks.length>0&&(counts[i][1]===null||d.chunks.length===counts[i][1]),'descriptor_census');\n\
+        \  const keys=d.chunks.map(k=>{\n   req(typeof k==='string','descriptor_shape');\n   const v=i||k.startsWith('catalog/')?k:'catalog/generations/'+pub.generationId+'/offers/china/'+k+'.json';\n\
+        \   req((i?internalScope.test(v)&&v.split('/')[3]===id:publicScope.test(v))&&!keysAll.has(v),'descriptor_scope');\n\
+        \   keysAll.add(v);return v;\n  });\n  return {id,keys,rows:d.count};\n });\n const total=keysAll.size;req(total<=1312,'descriptor_cap');\n\
+        \ await fs.mkdir(output,{mode:0o700});\n const records=[],owned=new Set();let bytes=0,objects=0;\n\
+        \ for(const group of groups){\n  let rows=0;const idsSeen=new Set(),files=[];\n  for(let offset=0;offset<group.keys.length;offset+=4){\n\
+        \   time();const results=await Promise.allSettled(group.keys.slice(offset,offset+4).map(async key=>{\n\
+        \    let reserved=0;\n    const v=await transport({key,maxBytes:16*1024**2,reserveBytes:n=>{req(!reserved&&Number.isSafeInteger(n)&&n>0&&n<=16*1024**2&&(bytes+=n)<=diskBudget,'disk_budget');reserved=n;}});\n\
+        \    req(Buffer.isBuffer(v.body)&&v.body.length===reserved&&v.bytes===reserved&&v.sha256===sha(v.body)&&/^\"\
+        [^\"\\r\\n]{1,128}\"$/.test(v.etag),'body_binding');return {key,...v};\n   }));\n   const failure=results.find(x=>x.status==='rejected');if(failure)throw\
+        \ failure.reason;\n   for(const {value:{key,body,bytes,sha256,etag}} of results){\n    time();const\
+        \ offers=decode(body);req(Array.isArray(offers)&&offers.length<=500,'row_shape');\n    for(const row\
+        \ of offers){req(typeof row?.id==='string'&&row.id.length>0&&row.id.length<=1024&&!idsSeen.has(row.id)&&row.market==='china'&&(group.id==='china'||row.sourceId===group.id),'row_scope');idsSeen.add(row.id);}\n\
+        \    const file=objects+'.json',entry=Object.freeze({file,key,bytes,sha256,etag,rows:offers.length});\n\
+        \    await fs.writeFile(path.join(output,file),body,{flag:'wx',mode:0o600});files.push(entry);owned.add(entry);rows+=offers.length;objects++;\n\
+        \    if(objects%25===0||objects===total)progress({stage:'china_retained_body_progress',objects,total,bytes});\n\
+        \   }\n  }\n  req(rows===group.rows,'row_census');records.push(Object.freeze({id:group.id,rows,files:Object.freeze(files)}));\n\
+        \ }\n await continuity.assertContinuityCurrent();req(snapKey(await readAuthenticatedSnapshot())===baseline,'baseline_moved');time();\n\
+        \ const receipt=Object.freeze({version:1,kind:'native-china-retained-input-only',sourceReceiptSha256:expected.receiptSha,continuitySha256:continuity.continuitySha256,baselineSha256:baseline,objects,bytes,groups:Object.freeze(records),inventoryV2SealIssued:false,publicationAuthorized:false});\n\
+        \ const raw=Buffer.from(JSON.stringify(receipt));req(raw.length<=2*1024**2,'receipt_cap');await fs.writeFile(path.join(output,'LOCAL_RETAINED.json'),raw,{flag:'wx',mode:0o600});\n\
+        \ const capability=Object.freeze({sha256:sha(raw)});\n snapshotIds.set(capability,Object.freeze({receipt,async\
+        \ read(entry){\n  time();req(owned.has(entry),'owned_receipt');const h=await fs.open(path.join(output,entry.file),constants.O_RDONLY|constants.O_NOFOLLOW);\n\
+        \  try{const s=await h.stat();req(s.isFile()&&s.nlink===1&&s.size===entry.bytes,'local_readback');const\
+        \ b=await h.readFile();req(b.length===entry.bytes&&sha(b)===entry.sha256,'local_readback');return\
+        \ b;}finally{await h.close();}\n }}));\n return capability;\n}\nPAYLOAD_EOF\ntest \"$(sha256sum 'archive-code/capture-china-retained.mjs'\
+        \ | cut -d' ' -f1)\" = dde624d8b289feda3ae0de4d7c2ae85ba272c7dffef579fff0d5dbdccdcf227f\ncat > 'candidate-final/producer/operational/upstream/flow/input/capture-transport.mjs'\
+        \ <<'PAYLOAD_EOF'\nimport {createHash,createHmac} from 'node:crypto';\nconst sha=b=>createHash('sha256').update(b).digest('hex');const\
+        \ hmac=(k,v)=>createHmac('sha256',k).update(v).digest();\nexport function createDescriptorTransport({env=process.env,fetchImpl=globalThis.fetch,timeoutMs=30000}){\n\
+        \ const cfg={endpoint:env.YC_OBJECT_STORAGE_ENDPOINT||'https://storage.yandexcloud.net',region:env.YC_OBJECT_STORAGE_REGION||'ru-central1',bucket:env.YC_OBJECT_STORAGE_BUCKET,access:env.YC_OBJECT_STORAGE_ACCESS_KEY_ID,secret:env.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY,prefix:(env.YC_OBJECT_STORAGE_PREFIX||'').replace(/^\\\
+        /+|\\/+$/g,'')};\n if(!cfg.bucket||!cfg.access||!cfg.secret||!Number.isSafeInteger(timeoutMs)||timeoutMs<1||timeoutMs>120000)throw\
+        \ Error('capture_config');const endpoint=new URL(cfg.endpoint);if(endpoint.protocol!=='https:'||endpoint.username||endpoint.password||endpoint.search||endpoint.hash)throw\
+        \ Error('capture_endpoint');\n async function request(method,key,extra,signal){const url=new URL(`${cfg.endpoint.replace(/\\\
+        /+$/,'')}/${cfg.bucket}/${[cfg.prefix,key].filter(Boolean).join('/').split('/').map(encodeURIComponent).join('/')}`);const\
+        \ dateTime=new Date().toISOString().replace(/[:-]|\\.\\d{3}/g,''),date=dateTime.slice(0,8),payload=sha('');const\
+        \ headers={host:url.host,'x-amz-content-sha256':payload,'x-amz-date':dateTime,...extra};const names=Object.keys(headers).sort();const\
+        \ canonical=[method,url.pathname,'',names.map(k=>`${k}:${headers[k].trim()}\\n`).join(''),names.join(';'),payload].join('\\\
+        n');const scope=`${date}/${cfg.region}/s3/aws4_request`,signKey=hmac(hmac(hmac(hmac(`AWS4${cfg.secret}`,date),cfg.region),'s3'),'aws4_request');headers.authorization=`AWS4-HMAC-SHA256\
+        \ Credential=${cfg.access}/${scope}, SignedHeaders=${names.join(';')}, Signature=${createHmac('sha256',signKey).update(['AWS4-HMAC-SHA256',dateTime,scope,sha(canonical)].join('\\\
+        n')).digest('hex')}`;return fetchImpl(url,{method,headers,signal,redirect:'error'});}\n return async({key,maxBytes,reserveBytes,signal})=>{if(typeof\
+        \ key!=='string'||!/^catalog\\/[A-Za-z0-9_./-]+$/.test(key)||key.includes('..')||!Number.isSafeInteger(maxBytes)||maxBytes<1||maxBytes>16*1024*1024||typeof\
+        \ reserveBytes!=='function')throw Error('capture_scope');const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),timeoutMs);let\
+        \ reader;const abort=()=>controller.abort();signal?.addEventListener('abort',abort,{once:true});try{if(signal?.aborted)throw\
+        \ Error('capture_aborted');const head=await request('HEAD',key,{},controller.signal),length=head.headers.get('content-length'),etag=head.headers.get('etag');if(head.status!==200||!/^\\\
+        d+$/.test(length||'')||!etag||etag.length>256||head.headers.get('content-encoding'))throw Error('capture_head');const\
+        \ bytes=Number(length);if(!Number.isSafeInteger(bytes)||bytes>maxBytes)throw Error('capture_object_cap');await\
+        \ reserveBytes(bytes);const res=await request('GET',key,{'if-match':etag},controller.signal);if(res.status!==200||res.headers.get('etag')!==etag||res.headers.get('content-length')!==length||res.headers.get('content-encoding')||!res.body)throw\
+        \ Error('capture_response');reader=res.body.getReader();const body=Buffer.alloc(bytes);let n=0;for(;;){const{done,value}=await\
+        \ reader.read();if(done)break;if(value.byteLength>bytes-n)throw Error('capture_stream_cap');body.set(value,n);n+=value.byteLength;}if(n!==bytes)throw\
+        \ Error('capture_short');return{body,bytes,etag,sha256:sha(body)};}catch(e){controller.abort();throw\
+        \ Error(e?.message?.startsWith('capture_')?e.message:'capture_transport');}finally{signal?.removeEventListener('abort',abort);clearTimeout(timer);if(reader){await\
+        \ reader.cancel().catch(()=>{});reader.releaseLock();}}};\n}\nPAYLOAD_EOF\ntest \"$(sha256sum 'candidate-final/producer/operational/upstream/flow/input/capture-transport.mjs'\
+        \ | cut -d' ' -f1)\" = fb6240d181a0ec06e612df69db4c19553bf05bd743ddcc094802600ddcbce32f\ncat > 'archive-code/qualify-native-china-retention.mjs'\
+        \ <<'PAYLOAD_EOF'\nimport fs from 'node:fs/promises';\nimport path from 'node:path';\nimport {registerHooks}\
+        \ from 'node:module';\nimport {pathToFileURL} from 'node:url';\nimport {createHash} from 'node:crypto';\n\
+        import {isBoundChinaContinuity} from './bind-converted-continuity.mjs';\nimport {resolveChinaRetainedCapture}\
+        \ from './capture-china-retained.mjs';\nconst sha=b=>createHash('sha256').update(b).digest('hex'),\
+        \ digest=o=>sha(JSON.stringify(o));\nconst need=(v,c)=>{if(!v)throw Error('china_retention_gate_'+c);};\n\
+        const parse=b=>JSON.parse(new TextDecoder('utf-8',{fatal:true}).decode(b));\nconst files={'source-retention.ts':'2440b4aa6938ae2cc043fa9f0d2409bf70a6d7d01907bd35815fddd6fc67c8ec','refresh-policy.ts':'d681d8bc54f74df387705d6183618954c439bac7a53bd1149565734ddab1dba5','required-catalog-sources.ts':'8ad3ff7a869ce22637497325aef686ff42d2a31e9b6b51d548c98ecb6eb3154c'};\n\
+        const rawPolicy='data/catalog/refresh-policy-v1.json',policySha='62d37e7400722a06521d19df2a65e9b27c68c87adf2978e2e1bc47fcb7835419';\n\
+        export async function loadExactRetention(root){\n need(path.isAbsolute(root)&&await fs.realpath(root)===root,'root');\n\
+        \ const repo=pathToFileURL(root+'/').href, lib=repo+'apps/web/lib/catalog/';\n for(const [name,pin]\
+        \ of Object.entries(files))need(sha(await fs.readFile(new URL(lib+name)))===pin,'native_pin');\n const\
+        \ policy=await fs.readFile(new URL(repo+rawPolicy));need(sha(policy)===policySha,'native_policy_pin');\n\
+        \ const policyModule='data:text/javascript;base64,'+Buffer.from('export default '+JSON.stringify(parse(policy))).toString('base64');\n\
+        \ // Resolve only the four exact, hash-read files. No dependency installation, no legacy publisher.\n\
+        \ if(process.execArgv.includes('tsx'))return {native:await import(lib+'source-retention.ts'),refresh:await\
+        \ import(lib+'refresh-policy.ts')};\n const hook=registerHooks({resolve(spec,ctx,next){\n  if(Object.keys(files).some(s=>ctx.parentURL===lib+s)){\n\
+        \   if(spec==='./refresh-policy'||spec==='./required-catalog-sources')return next(lib+spec.slice(2)+'.ts',ctx);\n\
+        \   if(new URL(spec,ctx.parentURL).href===repo+rawPolicy)return next(policyModule,ctx);\n  }\n  return\
+        \ next(spec,ctx);\n }});\n try{return {native:await import(lib+'source-retention.ts'),refresh:await\
+        \ import(lib+'refresh-policy.ts')};}\n finally{hook.deregister();}\n}\nfunction fact(row){return {id:row.id,market:row.market,sourceId:row.sourceId,sourceOfferId:row.sourceOfferId,status:row.status,updatedAt:row.updatedAt,firstSeenAt:row.firstSeenAt,operational:{lastSeenAt:row.operational?.lastSeenAt,sourcePublishedAt:row.operational?.sourcePublishedAt}};}\n\
+        export async function qualifyNativeChinaRetention({continuity,retained,readAuthenticatedSnapshot,nativeRoot,now=Date.now,progress=()=>{}}){\n\
+        \ need(isBoundChinaContinuity(continuity),'closure');\n const {receipt,read}=resolveChinaRetainedCapture(retained);need(receipt.continuitySha256===continuity.continuitySha256,'closure_binding');\n\
+        \ const expiry=Date.parse(continuity.result.sourceExpiresAt),epoch=now();const time=()=>need(now()>=epoch&&now()<expiry,'source_time');\n\
+        \ time();await continuity.assertContinuityCurrent();const snap=await readAuthenticatedSnapshot(),\
+        \ manifest=parse(snap.public.body), base=continuity.result.baseline.public;\n need(sha(snap.public.body)===base.sha256&&snap.public.etag===base.etag&&manifest?.generationId===base.generation,'pointer');\n\
+        \ const marketKeys=Object.keys(manifest.markets);\n need(marketKeys.includes('china')&&marketKeys.every(k=>['china','japan','europe','korea','uae','georgia'].includes(k)),'protected_scope');\n\
+        \ let protectedRows=0;\n for(const k of marketKeys)if(k!=='china'){const n=manifest.markets[k]?.count;need(Number.isSafeInteger(n)&&n>=0&&(protectedRows+=n)<=750000,'protected_declared');}\n\
+        \ const {native,refresh}=await loadExactRetention(nativeRoot), rawReport=await continuity.readReport(),\
+        \ report=parse(rawReport);\n const payloads=[{report:{...report,sources:report.sources.map(s=>({...s,mode:'live',freshSaved:s.observations||0}))}}];\n\
+        \ const paid=report.sources.filter(x=>x.provider==='auto_api_che168');\n need(report.completed===true&&!report.failure&&report.market==='china'&&paid.length===1&&paid[0].sourceId==='autohome_used_china_open'&&paid[0].completeInventory===true&&paid[0].rejectedIdentity===0&&paid[0].observations===continuity.result.rows,'report_complete');\n\
+        \ const withdrawalIndex=native.catalogConfirmedWithdrawalIndex(payloads,'china'),sourceStates=native.catalogSourceRefreshStates(payloads),retentionMs=refresh.catalogMarketRetentionMs('china');\n\
+        \ const freshIds=new Set(), retainedIds=new Set(), publicIds=new Set(), candidate=new Map();\n let\
+        \ ID_BYTES=0,freshWithdrawn=0,retainedRows=0,observations=0,retainedLocalBytes=0,freshSeenBytes=0;\n\
+        \ function add(s,id){\n  need(typeof id==='string'&&id.length>0&&id.length<=150,'id_shape');\n  if(s.has(id))return\
+        \ false;ID_BYTES+=Buffer.byteLength(id);need(ID_BYTES<=128*1024**2&&s.size<1_000_000,'id_cap');s.add(id);return\
+        \ true;\n }\n for(let i=0;i<continuity.shardCount;i++){\n  time();const b=await continuity.readShard(i),shard=parse(b);freshSeenBytes+=b.length;\n\
+        \  need(Array.isArray(shard.offers)&&shard.offers.length<=500,'fresh_shape');\n  for(const row of\
+        \ shard.offers){need(row.market==='china'&&add(freshIds,row.id),'fresh_duplicate');if(native.catalogOfferWithdrawnByReport(row,withdrawalIndex))freshWithdrawn++;}\n\
+        \  if(i%50===0)progress({stage:'china_retention_fresh_overlap',objects:i+1,rows:freshIds.size});\n\
+        \ }\n need(freshIds.size===continuity.result.rows,'fresh_census');\n for(const group of receipt.groups){\n\
+        \  for(const entry of group.files){\n   time();const body=await read(entry),rows=parse(body);retainedLocalBytes+=body.length;\n\
+        \   need(Array.isArray(rows)&&rows.length===entry.rows&&body.length===entry.bytes,'retained_scope');\n\
+        \   for(const row of rows){\n    observations++;add(retainedIds,row.id);\n    if(group.id==='china'){need(add(publicIds,row.id),'public_duplicate');candidate.set(row.id,fact(row));}\n\
+        \    else if(!publicIds.has(row.id)&&refresh.catalogOfferWithinRetention(row,epoch))candidate.set(row.id,fact(row));\n\
+        \   }\n  }\n }\n need(observations===receipt.groups.reduce((n,g)=>n+g.rows,0)&&retainedLocalBytes===receipt.bytes,'retained_total');\n\
+        \ let shared=0,retainedOnly=0,explicitWithdrawn=0,paidAbsent=0,ageOrInactive=0,earliest=expiry;\n\
+        \ for(const id of retainedIds)if(freshIds.has(id))shared++;\n for(const row of candidate.values()){\n\
+        \  time();\n  if(native.catalogOfferWithdrawnByReport(row,withdrawalIndex)||refresh.catalogOfferConfirmedWithdrawn(row)){explicitWithdrawn++;continue;}\n\
+        \  if(row.sourceId==='autohome_used_china_open'&&!freshIds.has(row.id)){paidAbsent++;continue;}\n\
+        \  if(row.status!=='active'||!native.catalogRetentionDecision({offer:row,retentionMs,sourceStates,now:epoch,outageGraceMultiplier:1}).retain){ageOrInactive++;continue;}\n\
+        \  retainedRows++;if(!freshIds.has(row.id))retainedOnly++;\n  earliest=Math.min(earliest,refresh.catalogOfferFreshness(row)+retentionMs);\n\
+        \ }\n const union=freshIds.size+retainedIds.size-shared;\n await continuity.assertContinuityCurrent();time();\n\
+        \ const current=await readAuthenticatedSnapshot();need(sha(current.public.body)===base.sha256&&current.public.etag===base.etag,'pointer_moved');\n\
+        \ time();\n return Object.freeze({version:1,kind:'china-native-retention-and-resource-input-evidence-only',retainedBodyReceiptSha256:retained.sha256,continuitySha256:continuity.continuitySha256,reportSha256:sha(rawReport),retentionPolicySha256:policySha,observedAt:new\
+        \ Date(epoch).toISOString(),sourceExpiresAt:expiry,retainedCandidateExpiresAt:earliest,\n  freshRows:freshIds.size,retainedObservations:observations,upstreamInputObservations:freshIds.size+observations,retainedDistinct:retainedIds.size,exactOverlap:shared,exactChinaUnion:union,protectedDeclaredRows:protectedRows,withinDeclCanonicalUpperBound:union+protectedRows<=750000,freshSeenBytes,retainedLocalBytes,\n\
+        \  preAudit:{retainedCandidates:retainedRows,retainedOnly,freshExplicitlyWithdrawn:freshWithdrawn,priorExplicitlyWithdrawn:explicitWithdrawn,paidAbsentNotSold:paidAbsent,ageOrInactiveNotSold:ageOrInactive},\n\
+        \  actualProtectedBodyCountsVerified:false,inventoryV2SealIssued:false,publicationAuthorized:false,cursorAdvanceAuthorized:false});\n\
+        }\nPAYLOAD_EOF\ntest \"$(sha256sum 'archive-code/qualify-native-china-retention.mjs' | cut -d' ' -f1)\"\
+        \ = 00fee1e7088764015a45490f32030aea3aa457e1189a81d552044b2d46045707\n\n[[ \"$GITHUB_RUN_ID\" =~ ^[0-9]+$\
         \ && \"$GITHUB_RUN_ATTEMPT\" = 1 ]]\nunit=\"china-capsule-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}\"\
         \nimage=\"$root/owned-scratch.ext4\"\nmnt=\"$root/private-scratch\"\ncred=\"$root/private-storage.json\"\
         \nnode_bin=\"$(command -v node)\"\n[[ \"$node_bin\" = /* && \"$(node --version)\" = v24.22.1 ]]\n\
@@ -400,16 +546,18 @@ jobs:
         \ >/dev/null 2>&1 || true\n  if mountpoint -q \"$mnt\"; then\n    sudo -n umount \"$mnt\" || { echo\
         \ 'isolated_scratch_cleanup_unverified'; return 1; }\n  fi\n  rm -f -- \"$cred\" \"$image\"\n  return\
         \ \"$status\"\n}\ntrap cleanup EXIT\nseconds=\"$(python - <<'PYLIMIT'\nimport os,time\nfrom datetime\
-        \ import datetime\nf=os.statvfs(os.environ['RUNNER_TEMP'])\nassert f.f_bavail*f.f_frsize>=48*1024**3,'actual_job_starting_free_space'\n\
-        expires=datetime.fromisoformat('2026-11-21T05:02:36.435+00:00').timestamp()\nremaining=int(expires-time.time())\n\
-        assert remaining>0,'actual_source_expired'\nprint(min(10800,remaining))\nPYLIMIT\n)\"\ntruncate -s\
-        \ $((24*1024*1024*1024)) \"$image\"\nmkfs.ext4 -q -F -m 0 -E nodiscard,lazy_itable_init=1,lazy_journal_init=1\
+        \ import datetime\nf=os.statvfs(os.environ['RUNNER_TEMP'])\nassert f.f_bavail*f.f_frsize>=80*1024**3,'actual_job_starting_free_space'\n\
+        expires=datetime.fromisoformat('2026-11-21T05:02:36.435+00:00').timestamp()\nwith open('/proc/meminfo')\
+        \ as f:\n mem={k.rstrip(':'):int(v) for k,v,*_ in (s.split() for s in f) if v.isdecimal()}\nassert\
+        \ mem.get('MemTotal',0)>=14*1024**2 and mem.get('MemAvailable',0)>=12*1024**2, 'actual_job_starting_memory'\n\
+        remaining=int(expires-time.time())\nassert remaining>0,'actual_source_expired'\nprint(min(10800,remaining))\n\
+        PYLIMIT\n)\"\ntruncate -s $((64*1024*1024*1024)) \"$image\"\nmkfs.ext4 -q -F -m 0 -E nodiscard,lazy_itable_init=1,lazy_journal_init=1\
         \ \"$image\"\nsudo -n mount -t ext4 -o loop,nodev,nosuid,noexec \"$image\" \"$mnt\"\nsudo -n chown\
         \ \"$(id -u):$(id -g)\" \"$mnt\"\nchmod 0700 \"$mnt\"\npython - \"$cred\" <<'PYCRED'\nimport json,os,sys\n\
         with open(sys.argv[1],'x') as f:\n json.dump({'access':os.environ['YC_OBJECT_STORAGE_ACCESS_KEY_ID'],'secret':os.environ['YC_OBJECT_STORAGE_SECRET_ACCESS_KEY']},f)\n\
         PYCRED\nunset YC_OBJECT_STORAGE_ACCESS_KEY_ID YC_OBJECT_STORAGE_SECRET_ACCESS_KEY\nsudo -n systemd-run\
         \ --unit=\"$unit\" --wait --collect --pipe --quiet --uid=\"$(id -u)\" --gid=\"$(id -g)\" \\\n  --working-directory=\"\
-        $root\" --setenv=\"TMPDIR=$mnt\" --setenv=\"HOME=$mnt\" \\\n  --property=MemoryMax=6442450944 --property=MemorySwapMax=0\
+        $root\" --setenv=\"TMPDIR=$mnt\" --setenv=\"HOME=$mnt\" \\\n  --property=MemoryMax=10737418240 --property=MemorySwapMax=0\
         \ --property=OOMPolicy=stop \\\n  --property=\"RuntimeMaxSec=$seconds\" --property=TimeoutStopSec=30\
         \ --property=KillMode=control-group \\\n  --property=ProtectSystem=strict --property=\"ReadWritePaths=$mnt\"\
         \ --property=NoNewPrivileges=yes \\\n  \"$node_bin\" --max-old-space-size=4096 \"$root/archive-code/guarded-capsule-runner.mjs\"\
