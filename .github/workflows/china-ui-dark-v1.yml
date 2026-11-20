@@ -1,0 +1,35 @@
+name: Verify ordinary China grid privately
+on:
+  push:
+    branches: [main]
+    paths: [.github/market-runs/china-ui-dark-v1.sha256]
+permissions:
+  contents: read
+jobs:
+  verify:
+    if: github.repository == 'jeep-jim/AvtoCena' && github.repository_id == '1289722938' && github.ref == 'refs/heads/main' && github.run_attempt == '1' && github.event.head_commit.message == 'Verify reviewed China grid privately without traffic'
+    runs-on: ubuntu-latest
+    environment: regcloud-staging
+    timeout-minutes: 7
+    env:
+      IMAGE_ID: "sha256:8a7326fc17de9a28ae66a4915e68038ac089ba4cdf2954bd7fcbd7cbda46ccf8"
+      STANDALONE_SHA256: '9d3cb980380237cb7e7a6d91484578c2a491dd22d337ca3f340b83c1b71ca81b'
+      WRAPPER_SHA256: 'c3152b57721bd519300392b0b10a41b03132fce930b50f7c8eeef92e683ce1e6'
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - name: Check exact single dark image scope
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          cmp -s .github/market-runs/china-ui-dark-v1.sha256 <(printf '%s\n%s\n' "$IMAGE_ID" "$STANDALONE_SHA256")
+          p=.github/operations/china-ui-dark-v1
+          printf '%s  %s\n' "$WRAPPER_SHA256" "$p/run-dark-over-ssh.sh" "$STANDALONE_SHA256" "$p/dark-standalone.py" | sha256sum --strict --check --status
+      - name: Boot only exact image and check ordinary private grid
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+        shell: bash
+        run: /usr/bin/bash .github/operations/china-ui-dark-v1/run-dark-over-ssh.sh
