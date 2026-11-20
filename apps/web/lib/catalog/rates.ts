@@ -1,3 +1,5 @@
+import { AsyncLocalStorage } from "node:async_hooks";
+import { createHash, randomUUID } from "node:crypto";
 import { readDataJson } from "../data";
 
 export type CurrencyRateSnapshot = {
@@ -46,23 +48,108 @@ const FALLBACK_ENV: Record<string, string> = {
   SGD: "CATALOG_FALLBACK_RATE_SGD_RUB",
 };
 
-/** Actual conversion authority, including freshness transitions, without fetch timestamps. */
-export async function catalogRateFingerprintInputs() {
-  return Promise.all([...Object.keys(FALLBACK_ENV), 'RUB'].map(async currency => {
-    const rate = await convertToRub(1, currency).catch(() => null);
-    if (!rate) return [currency, null];
-    const {fetchedAt: _fetchedAt, ...value} = rate;
-    return [currency, value, Math.abs(Date.now() - Date.parse(rate.rateDate)) <= 4 * 86400000];
+const frozenMarkets = new Set(["china", "korea", "uae", "europe", "georgia"]);
+type FrozenRate = Readonly<Omit<CurrencyRateSnapshot, "sourcePrice" | "sourcePriceRub">>;
+type FxReceipt = Readonly<{version: 1; market: string; runId: string; pricingAsOf: string; observedAt: string; rates: Readonly<Record<string, FrozenRate>>}>;
+export type CatalogFxBatch = Readonly<{receipt: FxReceipt; receiptSha256: string}>;
+const frozenFx = new AsyncLocalStorage<CatalogFxBatch>();
+const issuedFxBatches = new WeakSet<CatalogFxBatch>();
+const fxDigest = (receipt: unknown) => createHash("sha256").update(JSON.stringify(receipt)).digest("hex");
+
+/** Capture authority once. An independent resolver cache shares one stored/live
+ * observation within this run but cannot reuse a prior run's pending response. */
+export async function captureCatalogFxBatch(market: string, sourceCurrencies: readonly string[]): Promise<CatalogFxBatch> {
+  return (await captureCatalogFxBatches({[market]: sourceCurrencies}))[market];
+}
+
+export async function captureCatalogFxBatches(plan: Readonly<Record<string, readonly string[]>>): Promise<Record<string, CatalogFxBatch>> {
+  const entries = Object.entries(plan);
+  if (!entries.length || entries.some(([market]) => !frozenMarkets.has(market)) || frozenFx.getStore()) throw Error("catalog_fx_batch_scope");
+  const byMarket = entries.map(([market, sourceCurrencies]) => [market, [...new Set([
+    "EUR", "RUB", "USD", ...(market === "china" ? ["CNY"] : []), ...sourceCurrencies.map(value => value.trim().toUpperCase()),
+  ])].sort()] as const);
+  const codes = [...new Set(byMarket.flatMap(([, currencies]) => currencies))].sort();
+  if (codes.some(code => code !== "RUB" && !Object.hasOwn(FALLBACK_ENV, code))) throw Error("catalog_fx_batch_currency");
+  const runId = randomUUID(), pricingAsOf = new Date().toISOString(), cache = emptyResolverCache();
+  const pairs = await Promise.all(codes.map(async code => {
+    const rate = await resolveRate(1, code, {preferLive: code === "USD", requireDatedOfficial: true}, cache);
+    if (!rate || !["cbr", "cbr_live"].includes(rate.rateSource) ||
+        ![rate.effectiveRate, rate.cbrRate, rate.nominal].every(value => Number.isFinite(value) && value > 0) ||
+        !Number.isFinite(Date.parse(rate.rateDate))) throw Error(`catalog_fx_authority_unavailable:${code}`);
+    const {sourcePrice: _sourcePrice, sourcePriceRub: _sourcePriceRub, ...quote} = rate;
+    return [code, Object.freeze(quote)] as const;
+  }));
+  const observedAt = new Date().toISOString(), allRates = Object.fromEntries(pairs);
+  return Object.fromEntries(byMarket.map(([market, currencies]) => {
+    const receipt: FxReceipt = Object.freeze({version: 1, market, runId, pricingAsOf, observedAt,
+      rates: Object.freeze(Object.fromEntries(currencies.map(code => [code, allRates[code]])))});
+    return [market, issueFxBatch(receipt)];
   }));
 }
 
-type LiveRate = { cbrRate: number; nominal: number; effectiveRate: number; rateDate: string; fetchedAt: string };
-let liveCbrRatesPromise: Promise<Map<string, LiveRate>> | null = null;
-let storedRatesPromise: Promise<any> | null = null;
+function issueFxBatch(receipt: FxReceipt): CatalogFxBatch {
+  const result = Object.freeze({receipt, receiptSha256: fxDigest(receipt)});
+  issuedFxBatches.add(result);
+  return result;
+}
+
+/** Reconstitute only after the runner authenticates the independent transport
+ * digest. A digest supplied by the same untrusted object is not authority. */
+export function importCatalogFxBatch(wire: CatalogFxBatch, expectedDigest: string): CatalogFxBatch {
+  const r = wire?.receipt, fail = () => { throw Error("catalog_fx_receipt_mismatch"); };
+  const validTimestamp = (value: string) => Number.isFinite(Date.parse(value)) && new Date(value).toISOString() === value;
+  if (!r || !/^[a-f0-9]{64}$/.test(expectedDigest) || wire.receiptSha256 !== expectedDigest || fxDigest(r) !== expectedDigest ||
+      r.version !== 1 || !frozenMarkets.has(r.market) || !/^[a-f0-9-]{36}$/.test(r.runId) ||
+      !validTimestamp(r.pricingAsOf) || !validTimestamp(r.observedAt) || r.observedAt < r.pricingAsOf || !r.rates ||
+      !["EUR","RUB","USD",...(r.market === "china" ? ["CNY"] : [])].every(code => Object.hasOwn(r.rates, code))) return fail();
+  const rates = structuredClone(r.rates);
+  for (const [code, quote] of Object.entries(rates)) {
+    if ((!Object.hasOwn(FALLBACK_ENV, code) && code !== "RUB") || quote?.currency !== code ||
+        !["cbr","cbr_live"].includes(quote.rateSource) || !isExactRateDate(quote.rateDate) ||
+        ![quote.cbrRate,quote.nominal,quote.effectiveRate].every(n => Number.isFinite(n) && n > 0) ||
+        quote.effectiveRate !== quote.cbrRate / quote.nominal || (code === "RUB" && quote.effectiveRate !== 1)) return fail();
+    Object.freeze(quote);
+  }
+  return issueFxBatch(Object.freeze({...r,rates:Object.freeze(rates)}));
+}
+
+export function withCatalogFxBatch<T>(batch: CatalogFxBatch, task: () => T): T {
+  if (!issuedFxBatches.has(batch) || frozenFx.getStore()) throw Error("catalog_fx_batch_scope");
+  return frozenFx.run(batch, task);
+}
+
+/** Compare authority read back from the same run, not current wall-clock FX. */
+export function verifyCatalogFxReadback(batch: CatalogFxBatch, receipt: unknown, receiptSha256: string) {
+  if (!issuedFxBatches.has(batch) || receiptSha256 !== batch.receiptSha256 || !receipt || fxDigest(receipt) !== receiptSha256)
+    throw Error("catalog_fx_receipt_mismatch");
+}
+
+export const activeCatalogFxBatch = () => frozenFx.getStore();
+export const catalogPricingNow = () => {
+  const batch = activeCatalogFxBatch();
+  return batch ? Date.parse(batch.receipt.pricingAsOf) : Date.now();
+};
+
+/** Actual conversion authority, including freshness transitions, without fetch timestamps. */
+export async function catalogRateFingerprintInputs() {
+  const batch = activeCatalogFxBatch();
+  const currencies = batch ? Object.keys(batch.receipt.rates) : [...Object.keys(FALLBACK_ENV), "RUB"];
+  return Promise.all(currencies.map(async currency => {
+    const rate = await convertToRub(1, currency).catch(() => null);
+    if (!rate) return [currency, null];
+    const {fetchedAt: _fetchedAt, ...value} = rate;
+    return [currency, value, Math.abs(catalogPricingNow() - Date.parse(rate.rateDate)) <= 4 * 86400000];
+  }));
+}
+
+type LiveRate = { cbrRate: number; nominal: number; effectiveRate: number; rateDate: string; fetchedAt: string; explicitDate: boolean };
+type RateResolverCache = {
+  live: Promise<Map<string, LiveRate>> | null; stored: Promise<any> | null;
+  storedExpires: number; liveExpires: number; liveRetry: number;
+};
+const emptyResolverCache = (): RateResolverCache => ({live: null, stored: null, storedExpires: 0, liveExpires: 0, liveRetry: 0});
+const sharedRateResolver = emptyResolverCache();
 const RATE_CACHE_MS = 5 * 60_000;
-let storedRatesExpiresAt = 0;
-let liveRatesExpiresAt = 0;
-let liveRatesRetryAt = 0;
 
 function validDate(value: unknown) {
   return typeof value === "string" && /^\d{4}-\d{2}-\d{2}/.test(value)
@@ -90,33 +177,37 @@ function xmlValue(block: string, tag: string) {
   return block.match(new RegExp(`<${tag}>([\\s\\S]*?)<\\/${tag}>`, "i"))?.[1]?.trim() || "";
 }
 
-function cbrXmlDate(xml: string) {
-  const raw = xml.match(/<ValCurs[^>]+Date=["'](\d{2})\.(\d{2})\.(\d{4})["']/i);
-  return raw ? `${raw[3]}-${raw[2]}-${raw[1]}` : new Date().toISOString().slice(0, 10);
+function isExactRateDate(value: unknown): value is string {
+  if (typeof value !== "string" || !/^\d{4}-\d{2}-\d{2}$/.test(value)) return false;
+  const parsed = new Date(value);
+  return Number.isFinite(parsed.getTime()) && parsed.toISOString().slice(0, 10) === value;
 }
 
-async function readStoredRates() {
-  if (!storedRatesPromise || Date.now() >= storedRatesExpiresAt) {
-    storedRatesExpiresAt = Date.now() + RATE_CACHE_MS;
-    storedRatesPromise = readDataJson<any>("fees/exchange-rates.json", {}).catch((error) => {
-      storedRatesPromise = null;
+function cbrXmlDate(xml: string) {
+  const raw = xml.match(/<ValCurs[^>]+Date=["'](\d{2})\.(\d{2})\.(\d{4})["']/i);
+  return raw ? `${raw[3]}-${raw[2]}-${raw[1]}` : null;
+}
+
+async function readStoredRates(cache: RateResolverCache) {
+  if (!cache.stored || Date.now() >= cache.storedExpires) {
+    cache.storedExpires = Date.now() + RATE_CACHE_MS;
+    cache.stored = readDataJson<any>("fees/exchange-rates.json", {}).catch((error) => {
+      cache.stored = null;
       throw error;
     });
   }
-  return storedRatesPromise;
+  return cache.stored;
 }
 
 export function resetCatalogRateCache() {
-  storedRatesPromise = null;
-  liveCbrRatesPromise = null;
-  storedRatesExpiresAt = liveRatesExpiresAt = liveRatesRetryAt = 0;
+  Object.assign(sharedRateResolver, emptyResolverCache());
 }
 
-async function fetchLiveCbrRates() {
-  if (liveCbrRatesPromise && Date.now() < liveRatesExpiresAt) return liveCbrRatesPromise;
-  if (Date.now() < liveRatesRetryAt) return new Map<string, LiveRate>();
-  liveRatesExpiresAt = Date.now() + RATE_CACHE_MS;
-  liveCbrRatesPromise = (async () => {
+async function fetchLiveCbrRates(cache: RateResolverCache) {
+  if (cache.live && Date.now() < cache.liveExpires) return cache.live;
+  if (Date.now() < cache.liveRetry) return new Map<string, LiveRate>();
+  cache.liveExpires = Date.now() + RATE_CACHE_MS;
+  cache.live = (async () => {
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), Number(process.env.CATALOG_RATE_TIMEOUT_MS || 12_000));
     try {
@@ -128,7 +219,8 @@ async function fetchLiveCbrRates() {
       });
       if (!response.ok) throw new Error(`cbr_rates_http_${response.status}`);
       const xml = await response.text();
-      const rateDate = cbrXmlDate(xml);
+      const publishedDate = cbrXmlDate(xml);
+      const rateDate = publishedDate || new Date().toISOString().slice(0, 10);
       const fetchedAt = new Date().toISOString();
       const result = new Map<string, LiveRate>();
       for (const match of xml.matchAll(/<Valute\b[^>]*>([\s\S]*?)<\/Valute>/gi)) {
@@ -137,21 +229,21 @@ async function fetchLiveCbrRates() {
         const nominal = Number(xmlValue(block, "Nominal").replace(/[^0-9.]/g, ""));
         const cbrRate = Number(xmlValue(block, "Value").replace(/\s/g, "").replace(",", "."));
         if (!currency || !Number.isFinite(nominal) || nominal <= 0 || !Number.isFinite(cbrRate) || cbrRate <= 0) continue;
-        result.set(currency, { cbrRate, nominal, effectiveRate: cbrRate / nominal, rateDate, fetchedAt });
+        result.set(currency, { cbrRate, nominal, effectiveRate: cbrRate / nominal, rateDate, fetchedAt, explicitDate: isExactRateDate(publishedDate) });
       }
       if (!result.size) throw new Error("cbr_rates_empty");
       return result;
     } catch (error) {
-      liveCbrRatesPromise = null;
+      cache.live = null;
       // Failed official requests remain failures; only suppress a request storm.
       // Callers still enforce freshness and never publish a fallback as ready.
-      liveRatesRetryAt = Date.now() + 30_000;
+      cache.liveRetry = Date.now() + 30_000;
       throw error;
     } finally {
       clearTimeout(timeout);
     }
   })();
-  return liveCbrRatesPromise;
+  return cache.live;
 }
 
 export async function convertToRub(
@@ -160,12 +252,21 @@ export async function convertToRub(
   options: { preferLive?: boolean } = {},
 ): Promise<CurrencyRateSnapshot | null> {
   if (!sourcePrice || !currency) return null;
+  const batch = activeCatalogFxBatch();
+  if (!batch) return resolveRate(sourcePrice, currency, options, sharedRateResolver);
+  const code = currency.toUpperCase().trim();
+  const rate = batch.receipt.rates[code];
+  if (!rate || !Object.hasOwn(batch.receipt.rates, code)) throw Error(`catalog_fx_unsealed_currency:${code}`);
+  return { ...rate, sourcePrice, sourcePriceRub: Math.round(sourcePrice * rate.effectiveRate) };
+}
+
+async function resolveRate(sourcePrice: number, currency: string, options: {preferLive?: boolean; requireDatedOfficial?: boolean}, cache: RateResolverCache): Promise<CurrencyRateSnapshot | null> {
   const code = currency.toUpperCase().trim();
   if (code === "RUB") {
     return { currency: code, cbrRate: 1, nominal: 1, effectiveRate: 1, rateDate: new Date().toISOString().slice(0, 10), fetchedAt: new Date().toISOString(), rateSource: "cbr", sourcePrice, sourcePriceRub: Math.round(sourcePrice) };
   }
 
-  const rates = await readStoredRates();
+  const rates = await readStoredRates(cache);
   const structured = Array.isArray(rates.rates)
     ? rates.rates.find((rate: any) => String(rate.currency).toUpperCase() === code)
     : rates[code] && typeof rates[code] === "object"
@@ -177,12 +278,17 @@ export async function convertToRub(
   // publication before reusing a stale snapshot. The stored value remains the
   // fail-safe when CBR is temporarily unavailable.
   const structuredDate = structured?.rateDate || structured?.date || rates.updatedAt;
+  const publishedDate = structured?.rateDate || structured?.date;
+  const storedNominal = Number(structured?.nominal);
+  const datedOfficialStored = isExactRateDate(publishedDate) && ["cbr", "cbr_live"].includes(structured?.rateSource)
+    && Number.isFinite(storedNominal) && storedNominal > 0;
   const official = !structured?.rateSource || String(structured.rateSource).startsWith("cbr");
   // A recent stored date is a fallback, not proof that no newer publication
   // exists. All consumers share one in-flight request and a five-minute cache.
   if (!liveRatesDisabled() && (options.preferLive || official || !storedRateIsFresh(structuredDate))) {
-    const live = await fetchLiveCbrRates().then((map) => map.get(code)).catch(() => undefined);
-    if (live && (!structuredDate || live.rateDate >= String(structuredDate).slice(0,10))) {
+    const live = await fetchLiveCbrRates(cache).then((map) => map.get(code)).catch(() => undefined);
+    if (live && (!options.requireDatedOfficial || live.explicitDate) &&
+        (!structuredDate || (options.requireDatedOfficial && !datedOfficialStored) || live.rateDate >= String(structuredDate).slice(0,10))) {
       return {
         currency: code,
         cbrRate: live.cbrRate,
@@ -197,7 +303,7 @@ export async function convertToRub(
     }
   }
 
-  if (structured) {
+  if (structured && (!options.requireDatedOfficial || datedOfficialStored)) {
     const cbrRate = Number(structured.cbrRate ?? structured.value);
     const nominal = Number(structured.nominal || 1);
     if (cbrRate > 0 && nominal > 0) {
@@ -215,7 +321,7 @@ export async function convertToRub(
         rateDelta: Number.isFinite(Number(structured.rateDelta)) ? Number(structured.rateDelta) : undefined,
         rateDate: validDate(structured.rateDate || structured.date || rates.updatedAt),
         fetchedAt: structured.fetchedAt || rates.updatedAt,
-        rateSource: source === "moex" ? "moex" : source === "legacy_json" ? "legacy_json" : "cbr",
+        rateSource: source === "moex" ? "moex" : source === "legacy_json" ? "legacy_json" : options.requireDatedOfficial && source === "cbr_live" ? "cbr_live" : "cbr",
         sourcePrice,
         sourcePriceRub: Math.round(sourcePrice * effectiveRate),
       };
@@ -224,8 +330,8 @@ export async function convertToRub(
 
   const live = liveRatesDisabled()
     ? undefined
-    : await fetchLiveCbrRates().then((map) => map.get(code)).catch(() => undefined);
-  if (live) {
+    : await fetchLiveCbrRates(cache).then((map) => map.get(code)).catch(() => undefined);
+  if (live && (!options.requireDatedOfficial || live.explicitDate)) {
     return {
       currency: code,
       cbrRate: live.cbrRate,
@@ -238,6 +344,8 @@ export async function convertToRub(
       sourcePriceRub: Math.round(sourcePrice * live.effectiveRate),
     };
   }
+
+  if (options.requireDatedOfficial) return null;
 
   const legacy = Number(rates[`${code}_RUB`]);
   if (legacy > 0) {

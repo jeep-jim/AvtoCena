@@ -17,7 +17,7 @@ import { getEffectiveMarketsWithDefaults, getEffectiveMarketVersion } from "../e
 import { calculateAvtocenaFromBusinessConfig } from "../../../../packages/engine/src/calculation/calculateAvtocena";
 import { applyEncyclopediaDisplayIdentity, applyEncyclopediaDisplayIdentityBatch } from "./display-identity";
 import { resolveCatalogMarketConfig } from "./estimated-market-config";
-import { convertToRub } from "./rates";
+import { activeCatalogFxBatch, catalogPricingNow, convertToRub } from "./rates";
 import type { CatalogMarket, VehicleOffer } from "./types";
 import { safePublicPricing } from './safe-public-pricing';
 
@@ -49,7 +49,7 @@ async function attachCurrentCurrencyRate<T extends Partial<VehicleOffer>>(offer:
   if (offer.catalogPricingMode === 'seller') {
     const rate = isGreenCornerOffer(offer) ? await greenCornerPaymentRate(offer as VehicleOffer) : await convertToRub(offer.sourcePrice ?? null, offer.sourceCurrency ?? null).catch(() => null);
     if (!rate || !(['cbr','cbr_live'].includes(rate.rateSource) || isGreenCornerOffer(offer) && rate.rateSource==='atb_akebono')
-      || !Number.isFinite(Date.parse(rate.rateDate)) || Math.abs(Date.now()-Date.parse(rate.rateDate)) > 4*86400000) return offer;
+      || !Number.isFinite(Date.parse(rate.rateDate)) || Math.abs(catalogPricingNow()-Date.parse(rate.rateDate)) > 4*86400000) return offer;
     return {...offer, sellerPriceRub:Math.round(rate.sourcePriceRub), totalRub:null,
       publicVisibleRub:undefined,publicSpecificationVerified:false,calculationStatus:'needs_data',
       calculationSnapshot:{currencyRate:rate,sourcePriceRub:Math.round(rate.sourcePriceRub),pricingConfidence:'unavailable'}} as T;
@@ -74,7 +74,7 @@ async function attachCurrentCurrencyRate<T extends Partial<VehicleOffer>>(offer:
   if (!offer.chinaPriceConversion && !offer.calculationSnapshot?.customsInput && snapshotSourcePriceRub(offer) > 0 && positive(storedRate?.effectiveRate) > 0) return offer;
 
   const [rate,eurRate] = await Promise.all([convertToRub(sourcePrice, sourceCurrency).catch(() => null),convertToRub(1,"EUR").catch(() => null)]);
-  const fresh = (item:any) => item && ["cbr","cbr_live"].includes(item.rateSource) && Number.isFinite(Date.parse(item.rateDate)) && Math.abs(Date.now()-Date.parse(item.rateDate)) <= 4*86400000;
+  const fresh = (item:any) => item && ["cbr","cbr_live"].includes(item.rateSource) && Number.isFinite(Date.parse(item.rateDate)) && Math.abs(catalogPricingNow()-Date.parse(item.rateDate)) <= 4*86400000;
   if (!rate && !offer.calculationSnapshot?.customsInput) return offer;
   if (offer.calculationSnapshot?.customsInput && (!fresh(rate) || !fresh(eurRate))) return {...offer,totalRub:null,publicVisibleRub:undefined,publicSpecificationVerified:false,calculationStatus:"needs_currency_rate",calculationSnapshot:{...offer.calculationSnapshot,missing:["fresh_official_currency_rates"],priceIncludesAllCustoms:false}} as T;
 
@@ -105,7 +105,7 @@ export function repriceOfferWithBusinessConfig<T extends Partial<VehicleOffer>>(
   // Replay the exact inputs saved by the shared engine: a tariff anniversary or
   // changed N1 freight costs must not leave the previous customs amount frozen.
   if (snapshot.customsInput && snapshot.customs?.status === "ready" && !snapshot.missing?.length && snapshot.priceIncludesAllCustoms !== false) {
-    const inputs = {...snapshot.customsInput, customsValueRub:snapshotSourcePriceRub(offer), importedAt:new Date(),
+    const inputs = {...snapshot.customsInput, customsValueRub:snapshotSourcePriceRub(offer), importedAt:new Date(catalogPricingNow()),
       ...(offer.powertrainKind === 'combustion' && offer.utilizationPowerKw === offer.powerKw && offer.powerKw
         ? {powerHp:offer.powerHp,powerKw:offer.powerKw,icePowerKw:offer.icePowerKw,utilizationPowerKw:offer.utilizationPowerKw} : {})};
     const commercial = inputs.vehicleCategory === "N1" || String(inputs.tnVedCode || "").replace(/\D/g, "").startsWith("8704");
@@ -157,7 +157,7 @@ export function repriceOfferWithBusinessConfig<T extends Partial<VehicleOffer>>(
   const previousTotal = positive(offer.totalRub);
   const changed = previousTotal > 0 && previousTotal !== calculation.totalRub;
   const oldSnapshot = offer.calculationSnapshot || {};
-  const repricedAt = new Date().toISOString();
+  const repricedAt = new Date(catalogPricingNow()).toISOString();
 
   return {
     ...offer,
@@ -220,6 +220,8 @@ async function repriceEncyclopediaOffer<T extends Partial<VehicleOffer>>(input:T
 
 export async function applyActiveBusinessPricing<T extends Partial<VehicleOffer>>(offer: T): Promise<T> {
   if (!offer.market) return offer;
+  const fx = activeCatalogFxBatch();
+  if (fx && offer.market !== fx.receipt.market) throw Error("catalog_fx_batch_offer_scope");
   const editorial=await readCatalogEditorial();
   offer=offer.id?applyCatalogEditorial(offer as T & {id:string},editorial):offer;
   offer=await repriceEncyclopediaOffer(await repriceEditorialOffer(await withChinaCnyPrice(offer)));
@@ -230,18 +232,28 @@ export async function applyActiveBusinessPricing<T extends Partial<VehicleOffer>
 }
 
 /** Shared price replay for selectors and visible cards; no display-identity or saved-draft reads. */
-export async function applyActiveBusinessPriceBatch<T extends Partial<VehicleOffer>>(offers: T[], options:{readOnly?:boolean}={}, marketSnapshot?:Promise<Awaited<ReturnType<typeof getEffectiveMarketsWithDefaults>>>|Awaited<ReturnType<typeof getEffectiveMarketsWithDefaults>>): Promise<T[]> {
+export async function applyActiveBusinessPriceBatch<T extends Partial<VehicleOffer>>(offers: T[], options:{readOnly?:boolean;retainFullSnapshot?:boolean}={}, marketSnapshot?:Promise<Awaited<ReturnType<typeof getEffectiveMarketsWithDefaults>>>|Awaited<ReturnType<typeof getEffectiveMarketsWithDefaults>>): Promise<T[]> {
   if (!offers.length) return offers;
+  const fx = activeCatalogFxBatch();
+  if(options.retainFullSnapshot && (!fx||!options.readOnly))throw Error("catalog_fx_full_snapshot_scope");
+  if (fx && offers.some(offer => offer.market !== fx.receipt.market ||
+    (offer.sourceCurrency && !Object.hasOwn(fx.receipt.rates, offer.sourceCurrency.trim().toUpperCase())))) {
+    throw Error("catalog_fx_batch_offer_scope");
+  }
   const editorial=await readCatalogEditorial();
   offers=offers.map(offer=>offer.id?applyCatalogEditorial(offer as T & {id:string},editorial):offer);
   offers=await Promise.all((await withChinaCnyPrices(offers,options)).map(async offer=>repriceEncyclopediaOffer(await repriceEditorialOffer(offer))));
+  if (fx && marketSnapshot) throw Error("catalog_fx_external_market_snapshot");
   const marketsPromise=marketSnapshot?Promise.resolve(marketSnapshot):getEffectiveMarketsWithDefaults();
   const [markets, ratedOffers] = await Promise.all([
     marketsPromise,
     Promise.all(offers.map((offer) => attachCurrentCurrencyRate(withReplayInputs(safePublicPricing(offer))))),
   ]);
   const configs = new Map(markets.map((market) => [market.id, market.effectiveVersion || null]));
-  const repriced = ratedOffers.map((offer) => compactRepricedProjection(repriceOfferWithBusinessConfig(offer, configs.get(String(offer.market)))));
+  const repriced = ratedOffers.map((offer) => {
+    const priced = repriceOfferWithBusinessConfig(offer, configs.get(String(offer.market)));
+    return options.retainFullSnapshot ? priced : compactRepricedProjection(priced);
+  });
   return repriced;
 }
 

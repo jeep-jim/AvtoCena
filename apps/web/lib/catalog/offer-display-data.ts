@@ -17,8 +17,19 @@ import {calculateOfferWithRussiaCustoms,calculateOfferWithUserPowerScenario} fro
 import {readCatalogPowerScenario} from './power-scenario';
 import type {VehicleOffer} from './types';
 
+import {preparedChinaOfferGuard,PreparedChinaFixtureUnavailable} from './prepared-china-http-fixture';
+
 // One request-local calculation feeds the visible page and link metadata.
 export const resolveOfferDisplay = cache(async (storedOffer:VehicleOffer,safeRequestedPowerHp=0,modificationId='')=>{
+  const prepared=preparedChinaOfferGuard(storedOffer);
+  if(prepared){
+    if(safeRequestedPowerHp||modificationId)throw new PreparedChinaFixtureUnavailable();
+    const raw=publicOffer(storedOffer), visibleRub=catalogOfferVisibleRub(raw);
+    if(!visibleRub||visibleRub!==storedOffer.totalRub)throw new PreparedChinaFixtureUnavailable();
+    await prepared();
+    return {offer:storedOffer,sellerPricing:false,selectionRequired:false,selectedModification:null,enrichedOffer:storedOffer,
+      normalizedEnrichedOffer:storedOffer,initialPublic:raw,pricedOffer:storedOffer,raw,visibleRub};
+  }
   const editorial=await readCatalogEditorial();
   const sourceOffer = enrichOfferWithSourceTableParameters(restoreProAuctionsPower(applyCatalogEditorial(storedOffer,editorial)));
   const restoredOffer = applyUaeManualSpecifications(sourceOffer);

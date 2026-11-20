@@ -12,7 +12,9 @@ import { parseEngineCc } from "@/lib/catalog/engine-input";
 import { applyActiveBusinessPricingBatch } from "@/lib/catalog/live-business-pricing";
 import { NextResponse } from "next/server";
 import { loadPublicRateExtras } from "@/lib/catalog/public-rates";
-import { countCatalogOffers, readCatalogFacets, searchOffers } from "@/lib/catalog/storage";
+import { countCatalogOffers, readCatalogFacets, searchOffers, projectPreparedChinaFixtureSearch } from "@/lib/catalog/storage";
+
+import {hasPreparedChinaHttpFixture,preparedChinaIndexedModelOnly,readPreparedChinaFixtureList,readPreparedChinaIndexedModel,readPreparedChinaIndexedCity,readPreparedChinaCompatibility,hasIndependentChinaHttpFixture} from "@/lib/catalog/prepared-china-http-fixture";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -34,6 +36,8 @@ export async function GET(request: Request) {
     return NextResponse.json({ok:true,total:parts.reduce((sum,p)=>sum+(Number(p.total)||0),0),countIncomplete:parts.some(p=>p.countIncomplete||p.total==null),items:[]},{headers:{'Cache-Control':'private, max-age=15'}});
   }
   if(p.get('stock')==='green'&&(!p.get('market')||p.get('market')==='japan'))return greenSearch(request);
+  const chinaPrepared=p.get('market')==='china'&&hasPreparedChinaHttpFixture();
+  const existingAjesResponse=async()=>{
   if(await usesAjesMarket(p.get('market'),p.get('source'))&&!(p.get('market')==='japan'&&p.get('stock')==='green')){
     try{
       const phases=new Map<string,number>();
@@ -43,6 +47,12 @@ export async function GET(request: Request) {
       const result=summary?{total:exactAjesCount(summary)??null,countSummary:summary,countIncomplete:exactAjesCount(summary)===undefined,items:[]}:await readAjesCatalogPage(params,measure);
       return NextResponse.json({ok:true,...result},{headers:{'Cache-Control':'private, max-age=15, stale-while-revalidate=30','Server-Timing':[`catalog-total;dur=${(performance.now()-started).toFixed(1)}`,...[...phases].map(([phase,ms])=>`${phase};dur=${ms.toFixed(1)}`)].join(', ')}});
     }catch(e){const failure=ajesErrorResponse(e);return NextResponse.json(failure.body,{status:failure.status,headers:{'Cache-Control':'no-store'}});}
+  }
+    return null;
+  };
+  if(!chinaPrepared){
+    const a=await existingAjesResponse();
+    if(a)return a;
   }
   const query: Parameters<typeof searchOffers>[0] = {
     color:p.get("color")||undefined, city: p.get("city") || undefined,
@@ -71,6 +81,40 @@ export async function GET(request: Request) {
     page: n(p.get("page")),
     pageSize: n(p.get("pageSize")),
   };
+  if(chinaPrepared){
+    try{
+      const extras=Boolean(p.get('source')||p.get('stock')||p.get('marketPage')==='1'||
+        p.get('includeFacets')==='1'||p.get('includeRates')==='1');
+      if(preparedChinaIndexedModelOnly()){
+        const pinned=hasIndependentChinaHttpFixture()?p.get('preparedCut'):null;
+        const current=(cut:{generationId:string})=>!pinned||pinned===cut.generationId;
+        const stale=()=>NextResponse.json({ok:false,reason:'prepared_china_cut_changed'},{status:409,headers:{'Cache-Control':'no-store'}});
+        const countOnly=p.get('countOnly')==='1';
+        const indexed=extras?null:query.city?await readPreparedChinaIndexedCity(query,countOnly):await readPreparedChinaIndexedModel(query,countOnly);
+        if(indexed)return current(indexed)?NextResponse.json({ok:true,...indexed},{headers:{'Cache-Control':'no-store'}}):stale();
+        if(hasIndependentChinaHttpFixture()){
+          const marketPage=p.get('marketPage')==='1',requestedPage=p.has('page')?Number(p.get('page')):1;
+          if(marketPage&&(!Number.isSafeInteger(requestedPage)||requestedPage<1||!Number.isSafeInteger(requestedPage*24)))
+            return NextResponse.json({ok:false},{status:400});
+          const cut=await readPreparedChinaCompatibility(query,{countOnly,marketPage,includeFacets:p.get('includeFacets')==='1',
+            unsupported:Boolean(p.get('source')||p.get('stock')||p.get('includeRates')==='1')});
+          if(cut)return current(cut)?NextResponse.json({ok:true,...cut},{headers:{'Cache-Control':'no-store'}}):stale();
+          if(pinned)return stale();
+        }
+      }else{
+        const prepared=await readPreparedChinaFixtureList(extras||Boolean(query.city));
+        if(prepared){
+          const result=await projectPreparedChinaFixtureSearch(prepared.rows,query,p.get('countOnly')==='1');
+          await prepared.assertCurrent();
+          return NextResponse.json({ok:true,generationId:prepared.generationId,...result},{headers:{'Cache-Control':'no-store'}});
+        }
+      }
+    }catch{return NextResponse.json({ok:false,reason:'prepared_china_unavailable'},{status:503,headers:{'Cache-Control':'no-store'}});}
+  }
+  if(chinaPrepared){
+    const a=await existingAjesResponse();
+    if(a)return a;
+  }
   if (p.get("marketPage") === "1") {
     const requestedPage = p.has("page") ? Number(p.get("page")) : 1;
     // Page links come from the complete inventory count, which can exceed

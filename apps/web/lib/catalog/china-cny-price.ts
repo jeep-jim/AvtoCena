@@ -1,6 +1,6 @@
 import {createHash} from 'node:crypto';
 import {getJsonStorage,mutateDataJson,readDataJson} from '../data';
-import {convertToRub,type CurrencyRateSnapshot} from './rates';
+import {activeCatalogFxBatch,catalogPricingNow,convertToRub,type CurrencyRateSnapshot} from './rates';
 import {DetailReadCache} from './detail-read-cache';
 import type {VehicleOffer} from './types';
 
@@ -40,7 +40,7 @@ export async function chinaCnyPriceFingerprint(){
  if(!fingerprint){fingerprint=createHash('sha256').update(JSON.stringify(index)).digest('hex');fingerprints.set(index,fingerprint);}
  return fingerprint;
 }
-const fresh=(rate:CurrencyRateSnapshot|null)=>rate && ['cbr','cbr_live'].includes(rate.rateSource) && rate.effectiveRate>0 && Math.abs(Date.now()-Date.parse(rate.rateDate))<=4*86400000;
+const fresh=(rate:CurrencyRateSnapshot|null)=>rate && ['cbr','cbr_live'].includes(rate.rateSource) && rate.effectiveRate>0 && Math.abs(catalogPricingNow()-Date.parse(rate.rateDate))<=4*86400000;
 export function chinaCnyConversion(price:number,usd:CurrencyRateSnapshot|null,cny:CurrencyRateSnapshot|null):ChinaPriceConversion|null {
  if(!Number.isFinite(price)||price<=0||!fresh(usd)||!fresh(cny)||usd!.rateDate!==cny!.rateDate)return null;
  return {sourceCurrency:'USD',sourcePrice:price,sourcePriceCny:price*usd!.effectiveRate/cny!.effectiveRate,usdRub:usd!.effectiveRate,cnyRub:cny!.effectiveRate,rateDate:usd!.rateDate};
@@ -64,7 +64,7 @@ export async function withChinaCnyPrices<T extends Partial<VehicleOffer>>(offers
    // Search replays small batches against a large shared index. Keep only the
    // new batch entries rather than copying every saved price for every batch.
    // Persisted anchors still win; the shared snapshot is never mutated.
-   if(options.readOnly)transient=added;
+   if(options.readOnly||activeCatalogFxBatch())transient=added;
    else {index=await mutateDataJson<Index>(path,{version:1,entries:{}},current=>({version:1,entries:{...added,...current.entries}}));resetChinaCnyPriceCache();}
   }
  }

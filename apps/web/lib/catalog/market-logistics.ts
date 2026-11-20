@@ -1,6 +1,6 @@
 import type { MarketBusinessConfig } from "../../../../packages/engine/src/types";
 import type { MarketId } from "../settings-validation";
-import { convertToRub, type CurrencyRateSnapshot } from "./rates";
+import { catalogPricingNow, convertToRub, type CurrencyRateSnapshot } from "./rates";
 
 export const MARKET_LOGISTICS_USD: Record<MarketId, number> = {
   korea: 1_200,
@@ -23,7 +23,7 @@ export type DynamicLogisticsConfig = MarketBusinessConfig & {
 function officialCurrentUsdRate(rate: CurrencyRateSnapshot | null) {
   if (!rate || !["cbr", "cbr_live"].includes(rate.rateSource)) return false;
   const timestamp = Date.parse(rate.rateDate);
-  return Number.isFinite(timestamp) && Math.abs(Date.now() - timestamp) <= 4 * 86_400_000;
+  return Number.isFinite(timestamp) && Math.abs(catalogPricingNow() - timestamp) <= 4 * 86_400_000;
 }
 
 export function applyMarketLogisticsUsdRate(

@@ -177,7 +177,7 @@ function OfferPriceBreakdown({ offer, powerInfo }: { offer: any; powerInfo: Recy
   </details>;
 }
 
-async function OfferPageContent({ params, searchParams }: { params: Promise<{ id: string; slug?: string }>; searchParams?: Promise<{ powerHp?: string; modificationId?: string; direct?: string; calculation?:string;estimate?:string;preview?:string;dealer?:string;edit?:string }> }) {
+async function OfferPageContent({ params, searchParams }: { params: Promise<{ id: string; slug?: string }>; searchParams?: Promise<{ market?:string;city?:string;preparedCut?:string;powerHp?: string; modificationId?: string; direct?: string; calculation?:string;estimate?:string;preview?:string;dealer?:string;edit?:string }> }) {
   const { id: routeId, slug: routeSlug } = await params;
   if (parseSpecialId(offerRouteId(routeId))) return <SpecialOfferPage id={offerRouteId(routeId)} initialCity={(await searchParams)?.estimate ? decodeShareDraft((await searchParams)!.estimate!)?.deliveryCity || "" : undefined} previewRequested={(await searchParams)?.preview === "1"}/>;
   let id = offerRouteId(routeId);
@@ -195,8 +195,9 @@ async function OfferPageContent({ params, searchParams }: { params: Promise<{ id
   // markets keep the immutable detail record first because it retains exact
   // identity evidence (for example Encar's resolver-backed Lexus UX250h model)
   // which can be absent from a compact current shard.
-  const detail = await readOfferDetailForPage(id);
+  const detail = await readOfferDetailForPage(id,!Boolean(query.calculation||query.estimate||query.edit||query.direct||query.modificationId||safeRequestedPowerHp),{market:query.market,city:query.city,preparedCut:query.preparedCut});
   if(detail.unavailable)return <SupplierUnavailableOffer disabled={'disabled' in detail&&detail.disabled}/>;
+  if(detail.withdrawn)return <UnavailableOffer offer={detail.withdrawn} />;
   let storedOffer = detail.offer;
   const editorialPreview = query.edit === "1" && canEditCatalog(await getCurrentUser());
   if(!storedOffer && editorialPreview){
@@ -220,7 +221,7 @@ async function OfferPageContent({ params, searchParams }: { params: Promise<{ id
     }
     permanentRedirect(canonicalPath + (preserved.size ? `?${preserved}` : ''));
   }
-  const [savedCalculation,clientScenario,currentUser,display] = await Promise.all([getSavedOfferCalculation(storedOffer),query.calculation ? getSavedOfferCalculation(storedOffer,query.calculation) : Promise.resolve(null),getCurrentUser(),resolveOfferDisplay(storedOffer,safeRequestedPowerHp,query.modificationId || '')]);
+  const [savedCalculation,clientScenario,currentUser,display] = await Promise.all([detail.prepared?Promise.resolve(null):getSavedOfferCalculation(storedOffer),query.calculation ? getSavedOfferCalculation(storedOffer,query.calculation) : Promise.resolve(null),getCurrentUser(),resolveOfferDisplay(storedOffer,safeRequestedPowerHp,query.modificationId || '')]);
   const sharedScenario = query.estimate ? await sharedOfferScenario(storedOffer,query.estimate) : null;
   // The last saved edit belongs to the vehicle, independently of shared scenarios.
   const savedByName = isCrmRole(currentUser?.role) && savedCalculation

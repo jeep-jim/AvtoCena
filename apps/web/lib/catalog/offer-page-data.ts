@@ -6,6 +6,8 @@ import { cache } from "react";
 import { unstable_cache } from "next/cache";
 import { getOfferWithoutEditorial, getOfferFromCurrentShard, getOfferFromCurrentProjection, isJapanCatalogOfferId } from "./storage";
 
+import {PreparedChinaFixtureUnavailable,hasPreparedChinaHttpFixture,hasIndependentChinaHttpFixture,assertIndependentChinaFallbackAllowed,readPreparedChinaFixtureOffer,preparedChinaNormalRegcloudEnabled} from './prepared-china-http-fixture';
+
 // The offer id is stable across catalog generations. Keep a short shared cache
 // so a route prefetch warms the actual offer for the following click, including
 // when Yandex sends both requests through the same provisioned container.
@@ -52,7 +54,35 @@ export const getOfferDetailRecord = cache(async (id:string)=>{
 });
 
 /** Never treat a provider refusal as a sold car or an application-wide crash. */
-export async function readOfferDetailForPage(id:string){
- try{return {offer:await getOfferDetailRecord(id),unavailable:false};}
- catch(error){if(error instanceof CollectionDisabledError)return {offer:null,unavailable:true,disabled:true as const};if(error instanceof AjesUnavailable)return {offer:null,unavailable:true};throw error;}
+export async function readOfferDetailForPage(id:string,allowPrepared=true,scope?:{market?:string;city?:string;preparedCut?:string}){
+ try{
+  // Legacy unqualified ids are market-ambiguous. Resolve a known non-China
+  // record first so that a failed China read cannot hide Korea or Japan. A
+  // legacy China record is never returned as the current independent cut.
+  if(allowPrepared&&preparedChinaNormalRegcloudEnabled()&&!scope?.market){
+   const known=await getOfferDetailRecord(id);
+   if(known&&known.market!=='china')return {offer:known,unavailable:false};
+  }
+  const ownChina=hasIndependentChinaHttpFixture()&&(!scope?.market||scope.market==='china');
+  const prepared=allowPrepared&&hasPreparedChinaHttpFixture()&&(!hasIndependentChinaHttpFixture()||ownChina)
+   ?await readPreparedChinaFixtureOffer(id,ownChina?scope?.city:undefined,ownChina?scope?.preparedCut:undefined):null;
+  if(prepared?.offer)return {offer:prepared.offer,unavailable:false,prepared:true as const};
+  if(prepared?.withdrawn)return {offer:null,unavailable:false,prepared:true as const,withdrawn:prepared.withdrawn};
+  if(ownChina){
+   if(prepared||scope?.preparedCut)return {offer:null,unavailable:true,prepared:true as const};
+   await assertIndependentChinaFallbackAllowed();
+  }
+  const offer=await getOfferDetailRecord(id);
+  if(prepared){
+   await prepared.assertCurrent();
+   // An absent China id may not fall back to a previous-generation cache.
+   if(offer?.market==='china')return {offer:null,unavailable:false};
+  }
+  return {offer,unavailable:false};
+ }catch(error){
+  if(error instanceof PreparedChinaFixtureUnavailable)return {offer:null,unavailable:true,prepared:true as const};
+  if(error instanceof CollectionDisabledError)return {offer:null,unavailable:true,disabled:true as const};
+  if(error instanceof AjesUnavailable)return {offer:null,unavailable:true};
+  throw error;
+ }
 }

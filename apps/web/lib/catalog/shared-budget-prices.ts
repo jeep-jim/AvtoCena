@@ -6,7 +6,7 @@ import {promisify} from 'node:util';
 const gzipAsync=promisify(gzip),gunzipAsync=promisify(gunzip);
 import {getJsonStorage,StorageConflictError} from '../data';
 import {getEffectiveMarketVersion} from '../effective-market-settings';
-import {catalogRateFingerprintInputs} from './rates';
+import {activeCatalogFxBatch,catalogPricingNow,catalogRateFingerprintInputs} from './rates';
 import {chinaCnyPriceFingerprint} from './china-cny-price';
 import {resolveCatalogMarketConfig} from './estimated-market-config';
 import type {CatalogMarket} from './types';
@@ -24,12 +24,14 @@ export function calculationCacheVersion(){
 // exact path until those authorities have a separate versioned contract.
 export async function budgetPricingFingerprint(market:string):Promise<string|null> {
  if(!markets.has(market))return null;
+ const fx=activeCatalogFxBatch();
+ if(fx && fx.receipt.market!==market)throw Error("catalog_fx_batch_market");
  const [rates,configured,anchors,editorial]=await Promise.all([
   catalogRateFingerprintInputs(),getEffectiveMarketVersion(market),
   market==='china'?chinaCnyPriceFingerprint():null,readCatalogEditorial(),
  ]);
- return hash({schema:1,release:calculationCacheVersion(),encyclopedia:readCalculationIndex()?.digest||null,market,
-  utcDay:new Date().toISOString().slice(0,10),rates,configured,
+ return hash({schema:fx?2:1,release:calculationCacheVersion(),encyclopedia:readCalculationIndex()?.digest||null,market,
+  utcDay:new Date(catalogPricingNow()).toISOString().slice(0,10),rates,configured,
   editorialPrices:Object.values(editorial.entries).filter(entry=>entry.market===market&&entry.sellerPrice).map(entry=>[entry.id,entry.sellerPrice]),
   resolved:resolveCatalogMarketConfig(market as CatalogMarket,configured),anchors});
 }
@@ -91,12 +93,21 @@ export function restoreBudgetPrices(value:any,key:string,source:BudgetCountRow[]
  return rows;
 }
 
+function priceSnapshotKey(index:BudgetCountIndex,market:string,fingerprint:string,sourceIds:string,displayPrices:boolean,receiptSha256?:string) {
+ const fx=activeCatalogFxBatch();
+ if(fx && (fx.receipt.market!==market || receiptSha256 && fx.receiptSha256!==receiptSha256))throw Error("catalog_fx_batch_market");
+ const digest=receiptSha256||fx?.receiptSha256;
+ return hash([index.generationId,market,fingerprint,sourceIds,...(displayPrices?["display-price-v2"]:[]),
+  ...(digest?["frozen-fx-v1",digest]:[])]);
+}
+
 /** Read only an already prepared, validated price snapshot. A miss must not
  * start or join whole-market calculation from a narrow model request. */
-export async function readPreparedBudgetPrices(index:BudgetCountIndex,market:string,fingerprint:string,displayPrices=false) {
+export async function readPreparedBudgetPrices(index:BudgetCountIndex,market:string,fingerprint:string,displayPrices=false,receiptSha256?:string) {
+ if(receiptSha256!==undefined&&!/^[a-f0-9]{64}$/.test(receiptSha256))return null;
  const source=[...index.rows,...(index.otherRows||[])].filter(row=>row[0]===market);
  const sourceIds=hash(source.map(row=>row[5].id));
- const key=hash([index.generationId,market,fingerprint,sourceIds,...(displayPrices?["display-price-v2"]:[])]);
+ const key=priceSnapshotKey(index,market,fingerprint,sourceIds,displayPrices,receiptSha256);
  const present=cache.peekFresh(key);if(present)return present;
  try {
   return await cache.get(key,async()=>{
@@ -117,7 +128,7 @@ export async function sharedBudgetPrices(index:BudgetCountIndex,market:string,fi
  load:()=>Promise<BudgetCountRow[]>,fingerprintNow=()=>budgetPricingFingerprint(market),displayPrices=false,options:BudgetPriceOptions={}) {
  const source=[...index.rows,...(index.otherRows||[])].filter(row=>row[0]===market);
  const sourceIds=hash(source.map(row=>row[5].id));
- const key=hash([index.generationId,market,fingerprint,sourceIds,...(displayPrices?["display-price-v2"]:[])]);
+ const key=priceSnapshotKey(index,market,fingerprint,sourceIds,displayPrices);
  // A separate namespace preserves plain v1 snapshots for an old instance or rollback.
  const path=`catalog/${displayPrices?"runtime-sort-prices-v3":"runtime-budget-prices-v3"}/${market}/${key}.json`;
  const snapshotFor=(rows:BudgetCountRow[]):Snapshot=>{
