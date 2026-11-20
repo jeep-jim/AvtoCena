@@ -1,0 +1,79 @@
+name: Inspect exact Georgia internal settlement without writes
+'on':
+  push:
+    branches:
+    - main
+    paths:
+    - .github/workflows/georgia-internal-settlement-readonly-20261120.yml
+permissions:
+  contents: read
+concurrency:
+  group: georgia-internal-settlement-readonly-20261120
+  cancel-in-progress: false
+jobs:
+  inspect:
+    if: github.repository == 'jeep-jim/AvtoCena' && github.repository_id == '1289722938' && github.ref ==
+      'refs/heads/main' && github.run_attempt == '1' && github.event.before == '8759b1840eab44300a5c2371e78b63e5389ed1fc' && github.event.head_commit.message == 'Inspect exact
+      Georgia internal settlement without writes'
+    environment: regcloud-staging
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+    - uses: actions/setup-node@v4
+      with:
+        node-version: 24
+    - name: Read pinned internal pointer and exact settlement metadata only
+      env:
+        YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+        YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+      run: "set -euo pipefail\numask 077\ncat > \"$RUNNER_TEMP/inspect.mjs\" <<'READER'\nimport {createHash,createHmac}\
+        \ from 'node:crypto';\nconst g='gen_1795139106795_31f0f85d',root='catalog/raw-feed-coordination/v1/',key='catalog/internal/manifest.json',lockKey='catalog/import-lock.json',stateKey=root+'state.json',policyKey=root+'policy.json',proofKey=root+'internal/'+g+'/provenance.json',sessionKey=root+'internal/'+g+'/session.json';\n\
+        const keys=new Set([key,lockKey,stateKey,policyKey,proofKey,sessionKey]);\nconst sha=b=>createHash('sha256').update(b).digest('hex'),hmac=(k,s)=>createHmac('sha256',k).update(s).digest(),digest=v=>sha(JSON.stringify(v));\n\
+        const require=(condition,code)=>{if(!condition)throw Error(code);};\nexport async function readExact(key,env=process.env,receiptKey=null){\n\
+        \ require(keys.has(key)||(receiptKey===key&&/^catalog\\/raw-feed-coordination\\/v1\\/pointer-receipts\\\
+        /[a-f0-9]{32,64}\\.json$/.test(key)),'newday_scope');const access=env.YC_OBJECT_STORAGE_ACCESS_KEY_ID,secret=env.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY;\n\
+        \ require(access&&secret,'newday_credentials');\n const pathname='/avtocena-staging-8120751/migration-staging/full-20261011/'+key,host='s3.regru.cloud';\n\
+        \ const t=new Date().toISOString().replace(/[:-]|\\.\\d{3}/g,''),day=t.slice(0,8),scope=day+'/us-east-1/s3/aws4_request';\n\
+        \ const headers={host,'x-amz-content-sha256':sha(''),'x-amz-date':t},names=Object.keys(headers).sort();\n\
+        \ const request=['GET',pathname,'',names.map(k=>k+':'+headers[k]+'\\n').join(''),names.join(';'),sha('')].join('\\\
+        n');\n const signing=hmac(hmac(hmac(hmac('AWS4'+secret,day),'us-east-1'),'s3'),'aws4_request');\n\
+        \ headers.authorization='AWS4-HMAC-SHA256 Credential='+access+'/'+scope+', SignedHeaders='+names.join(';')+',\
+        \ Signature='+createHmac('sha256',signing).update(['AWS4-HMAC-SHA256',t,scope,sha(request)].join('\\\
+        n')).digest('hex');\n const r=await fetch('https://'+host+pathname,{method:'GET',headers,redirect:'error',signal:AbortSignal.timeout(15000)});\n\
+        \ if(r.status===404){await r.body?.cancel();return null;}\n const cap=key===stateKey?8*1024**2:1024**2;require(r.status===200&&!r.headers.get('content-encoding')&&/^\\\
+        d+$/.test(r.headers.get('content-length')||'')&&Number(r.headers.get('content-length'))<=cap,'newday_http');\n\
+        \ let n=0,parts=[];for await(const part of r.body){n+=part.length;require(n<=cap,'newday_size');parts.push(part);}\n\
+        \ const b=Buffer.concat(parts,n);const etag=r.headers.get('etag');require(n===Number(r.headers.get('content-length'))&&/^\"\
+        [^\"\\r\\n]{1,128}\"$/.test(etag||''),'newday_wire');return{digest:sha(b),etag,value:JSON.parse(new\
+        \ TextDecoder('utf-8',{fatal:true}).decode(b))};\n}\n\nconst run='44636687252',attempt='1',head='15f51970fb68555ad56b7c40f622517a15643377';\n\
+        const observed='f502f7ca0876fe7dc6a5a0b40c2752b496546f402fc0773bad1af02376cba6f1',old='0aa3524abf2aa0563811a7980ebe9eded7566a1d2ab36b057557dfb7caba6585';\n\
+        const pinnedOwner='701d3b25cb45ab68f4c7216f147ff4cc3c7c72249f2707aab5b15aacbe8a3779';\nconst ownerOK=v=>v?.runId===run&&v.attempt===attempt&&v.sourceSha===head;\n\
+        const nonce=v=>typeof v==='string'&&/^[a-f0-9]{32,64}$/.test(v);\nfunction ticket(v,registryId=v?.registryId){return\
+        \ {registryId,operationId:v?.operationId,owner:v?.owner,token:v?.token,grantRevision:v?.grantRevision,revision:v?.revision};}\n\
+        function pinTicket(t){return ownerOK(t?.owner)&&nonce(t.registryId)&&nonce(t.token)&&typeof t.operationId==='string'&&sha(t.operationId)===pinnedOwner&&Number.isSafeInteger(t.grantRevision)&&t.grantRevision>0&&Number.isSafeInteger(t.revision)&&t.revision>=t.grantRevision;}\n\
+        export function classify({manifest,proof,session,state,policy,receipt,lock}){\n if(!manifest||manifest.digest!==observed||manifest.value?.generationId!==g)return\
+        \ 'observed_internal_changed';\n if(!session||!state||!policy||!proof)return 'coordination_evidence_missing';\n\
+        \ const m=manifest.value,p=proof.value,s=session.value,r=state.value,pl=policy.value,rc=receipt?.value,l=lock?.value;\n\
+        \ const t=s?.binding?.ticket,b=s?.binding?.policy,c=s?.candidate,v=r?.pointers?.filter(x=>x?.id==='internal_catalog');\n\
+        \ if(p?.generationId!==g||p?.manifestSha256!==digest(m)||c?.sha256!==digest(m)||c?.provenanceSha256!==digest(p)||s?.base?.sha256!==old||\n\
+        \    !pinTicket(t)||s?.version!==1||s?.binding?.version!==1||b?.version!==1||b?.registryId!==t.registryId||b?.policySha256!==digest(pl)||\n\
+        \    pl?.version!==1||pl?.mode!=='required'||pl?.protocolVersion!==1||pl?.registryId!==t.registryId||\n\
+        \    r?.version!==1||r?.scope!=='nonjp_raw_lifecycle_v1'||r?.registryId!==t.registryId||v?.length!==1||\n\
+        \    (l?.operationType==='catalog_v3_publish_georgia'&&sha(l.operationId??'')!==pinnedOwner))return\
+        \ 'identity_or_digest_mismatch';\n const pointer=v[0],same=(x,y)=>digest(x)===digest(y);\n const rightReceipt=rc?.version===1&&rc.kind==='pointer_write_settled'&&rc.id==='internal_catalog'&&rc.key===key&&rc.valueSha256===c.sha256&&same(rc.ticket,t);\n\
+        \ if(pointer.pending!==null){\n  if(!pinTicket(ticket(pointer.pending,r.registryId))||!same(ticket(pointer.pending,r.registryId),t)||!same(pointer.pending.candidate,c)||!same(pointer.pending.base,s.base)||!same(pointer.current,s.base))return\
+        \ 'pending_mismatch';\n  if(receipt&&!rightReceipt)return 'settled_receipt_mismatch';\n  return rightReceipt?'physical_cas_receipt_present_registry_pending':'physical_cas_observed_without_settled_receipt';\n\
+        \ }\n if(!rightReceipt||!same(pointer.current,c)||!same(ticket(pointer.lastCommit,r.registryId),t)||!Number.isSafeInteger(pointer.lastCommit?.committedRevision)||pointer.lastCommit.committedRevision>pointer.revision)return\
+        \ 'registry_commit_or_receipt_mismatch';\n return 'exact_georgia_internal_commit_settled';\n}\nexport\
+        \ async function evaluate(read=readExact){\n const stableInputs=[key,lockKey,stateKey];const before=await\
+        \ Promise.all(stableInputs.map(k=>read(k)));\n const [proof,session,policy]=await Promise.all([proofKey,sessionKey,policyKey].map(k=>read(k)));\n\
+        \ const t=session?.value?.binding?.ticket;\n const path=pinTicket(t)?root+'pointer-receipts/'+t.token+'.json':null;\n\
+        \ const receipt=path?await read(path,process.env,path):null;\n const after=await Promise.all(stableInputs.map(k=>read(k)));\n\
+        \ const [manifest,lock,state]=after,stable=after.every((x,i)=>x?.digest===before[i]?.digest&&x?.etag===before[i]?.etag);\n\
+        \ const classification=stable?classify({manifest,lock,state,proof,session,policy,receipt}):'pointer_or_lease_moved_during_probe';\n\
+        \ const sources=manifest?.value?.sources,changesNotYetProven=[];\n if(sources&&typeof sources==='object')for(const\
+        \ id of ['autohome_used_china_open','autohome_new_china_open'])changesNotYetProven.push({source:id,rowCount:Number.isSafeInteger(sources[id]?.count)?sources[id].count:null,descriptorSha256:sources[id]?digest(sources[id]):null});\n\
+        \ return{checkedAt:new Date().toISOString(),runId:run,stable,classification,publicUnchangedNotChecked:true,logicalOnlyGeorgiaNotProven:true,chinaDescriptorsUncompared:changesNotYetProven,storageGets:path?10:9,storageWrites:0,supplierCalls:0,publicationAuthorized:false};\n\
+        }\nif(process.argv.includes('--inspect'))try{const x=await evaluate();console.log(JSON.stringify(x));if(x.classification!=='exact_georgia_internal_commit_settled')process.exitCode=2;}catch{console.error(JSON.stringify({classification:'exact_read_failed',storageWrites:0,supplierCalls:0}));process.exitCode=1;}\n\
+        READER\ntest \"$(sha256sum \"$RUNNER_TEMP/inspect.mjs\" | cut -d' ' -f1)\" = 329f86b3255967819e012dfdbb20c1db91602e3c034c7faead07dbe152e5fc25\n\
+        node \"$RUNNER_TEMP/inspect.mjs\" --inspect\n"
