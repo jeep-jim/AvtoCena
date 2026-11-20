@@ -1,0 +1,76 @@
+name: Verify Europe source membership from one exact inline object without writes
+'on':
+  push:
+    branches: [main]
+    paths: [.github/market-runs/europe-inline-membership-readonly-v1.json]
+permissions:
+  contents: read
+concurrency:
+  group: europe-inline-membership-readonly-v1
+  cancel-in-progress: false
+jobs:
+  inspect:
+    if: >-
+      github.repository == 'jeep-jim/AvtoCena' &&
+      github.repository_id == '1289722938' &&
+      github.ref == 'refs/heads/main' &&
+      github.run_attempt == '1' &&
+      !github.event.deleted &&
+      github.event.head_commit.message == 'Verify exact inline Europe source membership without writes'
+    environment: regcloud-staging
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 2
+          persist-credentials: false
+      - name: Check strict marker and exact installed files before using credentials
+        env:
+          EVENT_BEFORE: ${{ github.event.before }}
+          EVENT_SHA: ${{ github.sha }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import hashlib,json,os,pathlib,re,subprocess
+          prefix='scripts/europe-inline-membership-readonly-v1/'
+          workflow='.github/workflows/europe-inline-membership-readonly-v1.yml'
+          marker='.github/market-runs/europe-inline-membership-readonly-v1.json'
+          readers={'inline-stream.mjs':'2432c1ea33454b8f0854a4bd5b6b5ef89f57b26f581603734270e72b7cede807','signed-inline-probe.mjs':'07cf6879ca88792e9b285bd9002ee48e4f87d05ec77153591a955245477332ba'}
+          def git(*args): return subprocess.check_output(['git',*args])
+          def unique(rows):
+              out={}
+              for key,value in rows:
+                  assert key not in out
+                  out[key]=value
+              return out
+          parent=os.environ['EVENT_BEFORE']; head=os.environ['EVENT_SHA']
+          assert re.fullmatch(r'[a-f0-9]{40}',parent) and re.fullmatch(r'[a-f0-9]{40}',head)
+          assert git('rev-parse','HEAD').decode().strip()==head
+          assert git('rev-list','--parents','-n','1','HEAD').decode().split()==[head,parent]
+          assert git('diff','--name-only',parent,head).decode().splitlines()==[marker]
+          assert git('show',parent+':'+workflow)==pathlib.Path(workflow).read_bytes()
+          for file,sha in readers.items():
+              path=prefix+file
+              body=pathlib.Path(path).read_bytes()
+              assert hashlib.sha256(body).hexdigest()==sha and git('show',parent+':'+path)==body
+          m=pathlib.Path(marker)
+          assert m.stat().st_size<=8192
+          assert json.loads(m.read_bytes(),object_pairs_hook=unique)=={
+              'version':1,'operation':'europe_exact_inline_membership_get_only_v1','parent':parent,
+              'headEvidenceRun':44768118600,'generation':'gen_1794878284419_a611dfcf',
+              'exactWireBytes':96505936,'readers':readers
+          }
+          PY
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 24
+      - name: Stream one signed immutable Europe object into aggregate hashes only
+        env:
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --max-old-space-size=192 scripts/europe-inline-membership-readonly-v1/signed-inline-probe.mjs
