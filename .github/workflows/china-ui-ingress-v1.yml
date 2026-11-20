@@ -16,6 +16,7 @@ jobs:
       CANDIDATE_ID: '52e44ba2810796f9a12ac83984d9571f71ac1290d852206d2a259ad44da02a8d'
       AFTER_SHA256: 'b55e61e9686c639d9f0deac678b881ec56633e1cfd2b4703084b0ad9aaecaf6f'
       STANDALONE_SHA256: 'ed9120d620074efc9f952c1c98e0994c2cc7d467ed8b3a148230139a35ede3c8'
+      PARITY_OBSERVER: '44732004344'
       WRAPPER_SHA256: '4e073bdbcb2a89887e4e841279bacd19181726a99f82ce7fbe7a0022b631686d'
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
@@ -27,7 +28,7 @@ jobs:
         run: |
           set -euo pipefail
           test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
-          cmp -s .github/market-runs/china-ui-ingress-v1.sha256 <(printf '%s\n%s\n%s\n%s\n' "$IMAGE_ID" "$CANDIDATE_ID" "$AFTER_SHA256" "$STANDALONE_SHA256")
+          cmp -s .github/market-runs/china-ui-ingress-v1.sha256 <(printf '%s\n%s\n%s\n%s\n%s\n' "$IMAGE_ID" "$CANDIDATE_ID" "$AFTER_SHA256" "$STANDALONE_SHA256" "$PARITY_OBSERVER")
           p=.github/operations/china-ui-ingress-v1
           printf '%s  %s\n' "$WRAPPER_SHA256" "$p/run-ingress-over-ssh.sh" "$STANDALONE_SHA256" "$p/ingress-standalone.py" | sha256sum --strict --check --status
       - name: Switch only site ingress and verify ordinary public grid
