@@ -1,0 +1,139 @@
+name: Verify exact China archived object membership after Europe without writes
+permissions:
+  contents: read
+concurrency:
+  group: china-europe-archived-membership-readonly-20261120
+  cancel-in-progress: false
+jobs:
+  census:
+    if: github.repository == 'jeep-jim/AvtoCena' && github.repository_id == '1289722938' && github.ref ==
+      'refs/heads/main' && github.run_attempt == '1' && github.event.before == 'db23e888738b9d5106e05769a1c348e8ce5db439'
+      && github.event.head_commit.message == 'Verify exact China archived object membership after Europe without
+      writes'
+    environment: regcloud-staging
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+    - uses: actions/setup-node@v4
+      with:
+        node-version: 24
+    - name: Materialize exact readonly metadata code
+      run: "set -euo pipefail\ncat > \"$RUNNER_TEMP/signer.mjs\" <<'READER'\nimport {createHash,createHmac}\
+        \ from 'node:crypto';\nimport {performance} from 'node:perf_hooks';\nimport {writeFile} from 'node:fs/promises';\n\
+        import {pathToFileURL} from 'node:url';\nconst ENDPOINT='https://s3.regru.cloud',BUCKET='avtocena-staging-8120751',PREFIX='migration-staging/full-20261011/';\n\
+        export const MANIFESTS=['catalog/manifest.json','catalog/internal/manifest.json'];\nconst SOURCES=['autohome_used_china_open','autohome_new_china_open'];\n\
+        const GEN='gen_\\\\d{1,20}_[a-z0-9-]{1,80}',gen=v=>typeof v==='string'&&new RegExp('^'+GEN+'$').test(v);\n\
+        const sha=x=>createHash('sha256').update(x).digest('hex'),hmac=(k,s)=>createHmac('sha256',k).update(s).digest();\n\
+        const fail=x=>{throw Error('probe_'+x);};\n// Canonical SigV4 from reviewed stage2 signer; method\
+        \ and If-Match are signed.\nexport function sign(key,method,credentials,allowed,etag,date=new Date()){\n\
+        \ if(!allowed.has(key)||!['GET','HEAD'].includes(method))fail('request_denied');\n if(!credentials.accessKeyId||!credentials.secretAccessKey)fail('credentials_missing');\n\
+        \ const pathname='/'+BUCKET+'/'+PREFIX+key,stamp=date.toISOString().replace(/[:-]|\\.\\d{3}/g,''),day=stamp.slice(0,8),scope=`${day}/us-east-1/s3/aws4_request`;\n\
+        \ const headers={host:'s3.regru.cloud','x-amz-content-sha256':sha(''),'x-amz-date':stamp};if(etag)headers['if-match']=etag;\n\
+        \ const names=Object.keys(headers).sort(),canonical=names.map(k=>`${k}:${headers[k]}\\n`).join('');\n\
+        \ const request=[method,pathname,'',canonical,names.join(';'),sha('')].join('\\n');\n const signing=hmac(hmac(hmac(hmac('AWS4'+credentials.secretAccessKey,day),'us-east-1'),'s3'),'aws4_request');\n\
+        \ headers.authorization=`AWS4-HMAC-SHA256 Credential=${credentials.accessKeyId}/${scope}, SignedHeaders=${names.join(';')},\
+        \ Signature=${createHmac('sha256',signing).update(`AWS4-HMAC-SHA256\\n${stamp}\\n${scope}\\n${sha(request)}`).digest('hex')}`;\n\
+        \ return {url:ENDPOINT+pathname,options:{method,headers,redirect:'error'}};\n}\nREADER\ntest \"$(sha256sum\
+        \ \"$RUNNER_TEMP/signer.mjs\" | cut -d' ' -f1)\" = 94aefb1274e9074bfcb170c6176163309599f0531ebfc0b369cfdc9a52eb38bd\n\
+        cat > \"$RUNNER_TEMP/census.mjs\" <<'READER'\nimport {createHash} from 'node:crypto';\nimport {writeFile}\
+        \ from 'node:fs/promises';\nimport {pathToFileURL} from 'node:url';\nimport {sign,MANIFESTS} from\
+        \ './signer.mjs';\nconst sha=x=>createHash('sha256').update(x).digest('hex'), fail=s=>{throw Error('census_'+s);};\n\
+        const GEN='gen_\\\\d{1,20}_[a-z0-9-]{1,80}',validGen=v=>new RegExp('^'+GEN+'$').test(v||'');\nconst\
+        \ LOCK='catalog/import-lock.json';\nconst OLD={\"manifests\":[{\"kind\":\"public\",\"generationId\"\
+        :\"gen_1794878284419_a611dfcf\",\"sha256\":\"4c34c20d9784b571414390cab450ceeeaee60b00c168476100419ec5c05cb038\"\
+        ,\"etag\":\"\\\"de7be92050ed3919e2422e86b7fda737\\\"\",\"bytes\":10387},{\"kind\":\"internal\",\"\
+        generationId\":\"gen_1794888961200_1ea2a688\",\"sha256\":\"0aa3524abf2aa0563811a7980ebe9eded7566a1d2ab36b057557dfb7caba6585\"\
+        ,\"etag\":\"\\\"dc38c32d0c3937415c811028f5e1684e\\\"\",\"bytes\":77687}],\"keys\":\"f7b14a737d07e1cdc8d86a43ff54a3e7efd6e79ed51fa55cf374e2cc939aac2b\"\
+        ,\"heads\":\"3cb32b93bd9d055ed71a667826360016972cb209995d921b084e7ea6ce5f5ac2\"};\nconst ANCHOR=null;\n\
+        const CURRENT_INTERNAL_SHA='df7d672ed585349a06e6718429f5496978f1cf625eacd55a7fc6d7483a72edc4';\nconst\
+        \ CURRENT_INTERNAL_GEN='gen_1795145660283_bbfbf3d1',PROVENANCE='catalog/raw-feed-coordination/v1/internal/'+CURRENT_INTERNAL_GEN+'/provenance.json';\n\
+        const OLD_CHINA_COUNTS=[271896,3770],OLD_CHINA_OBJECTS=[544,8],HEAD_CAP=1312;\nexport function interpretArchivedMembership(keys,heads,bothCounts,expected=OLD){\n\
+        \ return {keyMembershipMatched:keys===expected.keys,objectHeadMetadataMatched:heads===expected.heads,\n\
+        \  bothChinaCensusesMatched:bothCounts,metadataCompatibility:keys===expected.keys&&heads===expected.heads&&bothCounts,\n\
+        \  exactDescriptorEqualityProven:false,logicalRowsAcrossAllSourcesProven:false,publicationAuthorized:false};\n\
+        }\nfunction interpretProvenance(v,manifest){\n if(v===null)return {status:'absent_404'};\n const p=v.value,semantic=sha(JSON.stringify(manifest));\n\
+        \ if(![1,2].includes(p?.version)||p.generationId!==CURRENT_INTERNAL_GEN||p.manifestSha256!==semantic||!Array.isArray(p.unknownSources))return\
+        \ {status:'present_invalid_or_unbound',sha256:v.sha256};\n return {status:'present_generation_and_manifest_bound',sha256:v.sha256,version:p.version,chinaSourcesCovered:['autohome_used_china_open','autohome_new_china_open'].map(source=>!p.unknownSources.includes(source)&&p.version===2&&Array.isArray(p.contributions)&&p.contributions.filter(x=>x?.sourceId===source&&/^[a-f0-9]{64}$/.test(x.sourceSha256||'')&&x.sourceSha256===sha(JSON.stringify(manifest.sources?.[source]))).length===1)};\n\
+        }\nconst scopes=['public:china','internal:autohome_used_china_open','internal:autohome_new_china_open'];\n\
+        const smallToken=v=>typeof v==='string'&&/^[a-zA-Z0-9_.:+-]{1,180}$/.test(v)?v:null;\nfunction lease(raw,now){\n\
+        \ if(!raw)return{found:false,state:'absent',active:false,checkedAt:new Date(now).toISOString()};\n\
+        \ const v=raw.value, until=v?.lockedUntil;\n if(!v||Array.isArray(v)||typeof v!=='object'||typeof\
+        \ until!=='string'||(until!==''&&!Number.isFinite(Date.parse(until))))fail('lock_shape');\n const\
+        \ expiry=until===''?0:Date.parse(until),active=expiry>now;\n return{found:true,state:active?'active':until===''?'released':'expired',active,checkedAt:new\
+        \ Date(now).toISOString(),lockedUntil:until||null,operationType:smallToken(v.operationType),digest:raw.sha256};\n\
+        }\nconst markets=['china','korea','uae','europe','georgia','japan'];\nexport function descriptors(pub,internal){\n\
+        \ if(pub?.version!==2||!validGen(pub.generationId)||!validGen(internal?.generationId)||!internal.sources||typeof\
+        \ internal.sources!=='object'||Array.isArray(internal.sources))fail('manifest');\n let descriptorReferences=0;const\
+        \ rows=[],seen=new Set(),counts={public:{},internalChina:{}};\n const add=(key,kind,count)=>{descriptorReferences++;if(seen.has(key))fail('duplicate_descriptor');seen.add(key);rows.push({key,kind});if(rows.length>3000)fail('descriptor_cap');};\n\
+        \ for(const [market,d]of Object.entries(pub.markets||{})){\n  if(!markets.includes(market)||!Array.isArray(d.chunks)||!Number.isSafeInteger(d.count)||d.count<0)fail('market');counts.public[market]={rows:d.count,descriptors:d.chunks.length};\n\
+        \  for(const file of d.chunks){if(typeof file!=='string')fail('descriptor');const key=file.startsWith('catalog/')?file:`catalog/generations/${pub.generationId}/offers/${market}/${file}.json`;if(!new\
+        \ RegExp('^catalog/generations/'+GEN+'/offers/'+market+'/chunk-\\\\d{4,10}\\\\.json$').test(key))fail('descriptor');add(key,'public:'+market);}\n\
+        \ }\n for(const source of ['autohome_used_china_open','autohome_new_china_open']){if(!Object.hasOwn(internal.sources,source))continue;const\
+        \ d=internal.sources[source];if(!d||typeof d!=='object'||Array.isArray(d))fail('source');if(!Array.isArray(d.chunks)||!Number.isSafeInteger(d.count)||d.count<0)fail('source');counts.internalChina[source]={rows:d.count,descriptors:d.chunks.length};for(const\
+        \ key of d.chunks){if(typeof key!=='string'||!new RegExp('^catalog/internal/offers/'+source+'/'+GEN+'-chunk-\\\
+        \\d{4,10}\\\\.json$').test(key))fail('descriptor');add(key,'internal:'+source);}}\n if(!counts.public.china||Object.keys(counts.internalChina).length!==2||!rows.length)fail('china_missing');return\
+        \ {rows,counts,descriptorReferences};\n}\nexport async function census({credentials,fetchImpl=fetch,timeoutMs=10000,wallMs=600000}={}){\n\
+        \ const allowed=new Set([...MANIFESTS,LOCK,PROVENANCE]),start=Date.now();let requests=0,bodyBytes=0,heads=0;\n\
+        \ async function request(key,method='GET',etag){\n  if(Date.now()-start>wallMs||++requests>HEAD_CAP+8)fail('limit');const\
+        \ signed=sign(key,method,credentials,allowed,etag);const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),Math.min(timeoutMs,wallMs-(Date.now()-start)));\n\
+        \  try{const r=await fetchImpl(signed.url,{...signed.options,signal:controller.signal});if((key===LOCK||key===PROVENANCE)&&r.status===404){await\
+        \ r.body?.cancel();return null;}if(r.status!==200){await r.body?.cancel();fail('status');}const e=r.headers.get('etag'),length=r.headers.get('content-length');if(!/^\"\
+        ?[a-fA-F0-9-]{1,128}\"?$/.test(e||'')||etag&&e!==etag)fail('etag');if(!/^\\d+$/.test(length||'')||!Number.isSafeInteger(Number(length)))fail('length');const\
+        \ bytes=Number(length);\n   if(method==='HEAD'){heads++;await r.body?.cancel();return {bytes,etag:e};}\n\
+        \   const limit=key===LOCK?16*1024:key===PROVENANCE?1024*1024:4*1024*1024;if(!MANIFESTS.includes(key)&&key!==LOCK&&key!==PROVENANCE||bytes>limit)fail('get_scope_or_size');const\
+        \ chunks=[],reader=r.body.getReader();let n=0;try{while(true){const q=await reader.read();if(q.done)break;n+=q.value.length;bodyBytes+=q.value.length;if(n>limit||bodyBytes>18*1024*1024+32*1024)fail('body_cap');chunks.push(q.value);}}finally{await\
+        \ reader.cancel().catch(()=>{});reader.releaseLock();}if(n!==bytes)fail('body_length');const body=Buffer.concat(chunks,n);return\
+        \ {bytes,etag:e,sha256:sha(body),value:JSON.parse(new TextDecoder('utf-8',{fatal:true}).decode(body))};\n\
+        \  }finally{clearTimeout(timer);controller.abort();}\n }\n const lockBefore=lease(await request(LOCK),Date.now()),before=[];for(const\
+        \ key of MANIFESTS)before.push(await request(key));const [pub,int]=before;\n           if(pub.sha256!==OLD.manifests[0].sha256||pub.etag!==OLD.manifests[0].etag||pub.value.generationId!==OLD.manifests[0].generationId||pub.bytes!==OLD.manifests[0].bytes||int.sha256!==CURRENT_INTERNAL_SHA||int.value.generationId!==CURRENT_INTERNAL_GEN)fail('exact_pointer_binding');\n\
+        \           if(lockBefore.active)fail('writer_or_lease_change');\n           const firstProv=await\
+        \ request(PROVENANCE);\n           const provenance=interpretProvenance(firstProv,int.value);\n  \
+        \         const d=descriptors(pub.value,int.value);\n           const chinaCounts=['autohome_used_china_open','autohome_new_china_open'].every((id,i)=>d.counts.internalChina[id]?.rows===OLD_CHINA_COUNTS[i]&&d.counts.internalChina[id]?.descriptors===OLD_CHINA_OBJECTS[i]);\n\
+        \           if(d.rows.length>HEAD_CAP)fail('historical_descriptor_head_cap');\n           for(const\
+        \ r of d.rows)allowed.add(r.key);let cursor=0,failed=false;const totals={},scope=[];\n async function\
+        \ worker(){while(!failed&&cursor<d.rows.length){const row=d.rows[cursor++],meta=await request(row.key,'HEAD');const\
+        \ t=totals[row.kind]??={objects:0,bytes:0,maxObjectBytes:0,over16MiB:0};scope.push({key:row.key,bytes:meta.bytes,etag:meta.etag,kind:row.kind});t.objects++;t.bytes+=meta.bytes;t.maxObjectBytes=Math.max(t.maxObjectBytes,meta.bytes);if(meta.bytes>16*1024*1024)t.over16MiB++;if(!Number.isSafeInteger(t.bytes))fail('total_bytes');}}\n\
+        \ const results=await Promise.allSettled(Array.from({length:8},()=>worker().catch(e=>{failed=true;throw\
+        \ e;})));const failure=results.find(r=>r.status==='rejected');if(failure)throw failure.reason;const\
+        \ after=[];for(let i=0;i<MANIFESTS.length;i++)after.push(await request(MANIFESTS[i],'GET',before[i].etag));if(!before.every((x,i)=>x.sha256===after[i].sha256&&x.value.generationId===after[i].value.generationId))fail('manifest_changed');\n\
+        \ const lockAfter=lease(await request(LOCK),Date.now());\n           const lastProv=await request(PROVENANCE,\
+        \ 'GET', firstProv?.etag);\n           if(firstProv?.sha256!==lastProv?.sha256||firstProv?.etag!==lastProv?.etag)fail('provenance_changed');const\
+        \ keysSha256=sha(JSON.stringify(scope.map(r=>r.key).sort()));const sorted=scope.sort((a,b)=>a.key<b.key?-1:a.key>b.key?1:0);\n\
+        \ const strip=({key,bytes,etag})=>({key,bytes,etag});\n const observedHeadMetadataSha256=sha(JSON.stringify(sorted.map(strip)));\n\
+        \ const manifests=before.map((x,i)=>({kind:i?'internal':'public',generationId:x.value.generationId,sha256:x.sha256,etag:x.etag,bytes:x.bytes}));\n\
+        \ const chinaIdentity=Object.fromEntries(scopes.map(kind=>{const d=kind==='public:china'?before[0].value.markets.china:before[1].value.sources[kind.slice(9)];\n\
+        \  return [kind,{descriptorSha256:sha(JSON.stringify({descriptor:d,resolvedKeys:d.chunks.length&&d.chunks.map((_,i)=>dFor(kind,i)),count:d.count})),objectIdentitySha256:sha(JSON.stringify(sorted.filter(x=>x.kind===kind).map(strip)))}];}));\n\
+        \ function dFor(kind,i){return d.rows.filter(x=>x.kind===kind)[i]?.key??fail('descriptor_order');}\n\
+        \ const sameManifests=JSON.stringify(manifests)===JSON.stringify(OLD.manifests);\n const sameAllHeadMetadata=keysSha256===OLD.keys&&observedHeadMetadataSha256===OLD.heads;\n\
+        \ const sameChina=ANCHOR!==null&&scopes.every(k=>Object.keys(chinaIdentity[k]).every(f=>chinaIdentity[k][f]===ANCHOR.groups[k][f]));\n\
+        \ const qualification='read_only_membership_evidence_not_a_rebind_approval';\n if(lockBefore.active||lockAfter.active||lockBefore.digest!==lockAfter.digest)fail('writer_or_lease_change');const\
+        \ protectedPublicRows=Object.entries(d.counts.public).reduce((n,[k,v])=>n+(k==='china'?0:v.rows),0);const\
+        \ combinedBytes=Object.values(totals).reduce((s,t)=>s+t.bytes,0);if(!Number.isSafeInteger(combinedBytes))fail('combined_bytes');return\
+        \ {complete:true,archivedMembership:interpretArchivedMembership(keysSha256,observedHeadMetadataSha256,chinaCounts),provenance,qualification,chinaIdentity,nonChinaChainStillRequired:qualification!=='original-exact',publishAuthorization:false,checkedAt:new\
+        \ Date().toISOString(),scope:{description:'all current public and only two named internal China offer\
+        \ descriptors; not total bucket',keysSha256,observedHeadMetadataSha256},publicationLock:{before:lockBefore,after:lockAfter,changedObserved:lockBefore.digest!==lockAfter.digest||lockBefore.active!==lockAfter.active,publishAuthorization:false},protectedPublicRows,maxCaptureBytes:combinedBytes+before.reduce((n,x)=>n+x.bytes,0),manifestStableObserved:true,atomicSnapshotProven:false,manifests:before.map((x,i)=>({kind:i?'internal':'public',generationId:x.value.generationId,sha256:x.sha256,etag:x.etag,bytes:x.bytes})),counts:d.counts,totals,combined:{uniqueKeys:d.rows.length,descriptorReferences:d.descriptorReferences,duplicateReferences:d.descriptorReferences-d.rows.length,sumBytes:combinedBytes},requests,heads,bodyBytes,elapsedMs:Date.now()-start,storageWrites:0,leaseRequests:2,listRequests:0,supplierRequests:0,chunkBodyGets:0};\n\
+        }\nif(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href){let report;try{report=await\
+        \ census({credentials:{accessKeyId:process.env.YC_OBJECT_STORAGE_ACCESS_KEY_ID,secretAccessKey:process.env.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY}});}catch(e){report={complete:false,error:/^census_[a-z_]+$/.test(e?.message||'')?e.message:'descriptor_census_failed_closed',publicationAuthorized:false,storageWrites:0};process.exitCode=1;}await\
+        \ writeFile('descriptor-census-report.json',JSON.stringify(report,null,2));}\nREADER\ntest \"$(sha256sum\
+        \ \"$RUNNER_TEMP/census.mjs\" | cut -d' ' -f1)\" = b276c275eaeea404cce1b7b4b2fe18acd18851eb88db5180cd918cec9339cfe1\n"
+    - name: Read manifests and descriptor HEAD metadata only
+      env:
+        YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+        YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+      run: timeout --signal=TERM --kill-after=5s 630s node --max-old-space-size=256 "$RUNNER_TEMP/census.mjs"
+    - name: Show redacted result
+      if: always()
+      run: if test -f descriptor-census-report.json; then node -e 'const r=JSON.parse(require("node:fs").readFileSync("descriptor-census-report.json","utf8"));console.log(JSON.stringify(Object.fromEntries(Object.entries(r).filter(([k])=>["complete","error","archivedMembership","qualification","manifestStableObserved","heads","storageWrites","supplierRequests","elapsedMs"].includes(k)))));';
+        fi
+    - uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: china-europe-archived-membership-readonly-20261120
+        path: descriptor-census-report.json
+        if-no-files-found: error
+'on':
+  push:
+    branches:
+    - main
+    paths:
+    - .github/workflows/china-europe-archived-membership-readonly-20261120.yml
