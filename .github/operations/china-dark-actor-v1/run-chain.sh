@@ -2,15 +2,17 @@
 # Same authenticated Actions job; no broad runtime deploy / provider cursor.
 set -euo pipefail
 umask 077
-[[ $# == 8 ]]
-readonly host=$1 pin=$2 actorpin=$3 hostpin=$4 flip_pin=$5 compose_pin=$6 ingress=$7 owner_ingress=$8
+[[ $# == 9 ]]
+readonly host=$1 pin=$2 actorpin=$3 hostpin=$4 flip_pin=$5 compose_pin=$6 ingress=$7 owner_ingress=$8 mode=$9
 [[ "$host" =~ ^/opt/avtocena/releases/85296f6b8797aaa93227b69da7e9e9e928e8f9b5/china-switch-runs/[1-9][0-9]{0,19}$ ]]
 for n in "$pin" "$actorpin" "$hostpin" "$flip_pin" "$compose_pin"; do [[ "$n" =~ ^[a-f0-9]{64}$ ]]; done
+[[ "$mode" == activate || "$mode" == verify-only && "$ingress" == false && "$owner_ingress" == none ]]
 [[ "$ingress" == false && "$owner_ingress" == none || "$ingress" == true && "$owner_ingress" =~ ^[a-f0-9]{64}$ ]]
 for spec in "$actorpin  $host/china-dark-control-switch.mjs" "$hostpin  $host/host-control-dispatch.py" "$flip_pin  $host/flip_ingress.py" "$compose_pin  $host/compose-ingress.py"; do
  printf '%s\n' "$spec" | sha256sum --strict --check --status
 done
 cmd=(/usr/bin/python3 "$host/host-control-dispatch.py" "$host" "$pin" "$actorpin")
+if [[ "$mode" == verify-only ]]; then "${cmd[@]}" verify-only; exit; fi
 "${cmd[@]}" activate > "$host/dark.json"
 cat "$host/dark.json"
 if [[ "$ingress" == false ]]; then exit 0; fi

@@ -21,8 +21,9 @@ def main():
  root=pathlib.Path(sys.argv[1]);pin=sys.argv[2];bundle_pin=sys.argv[3];mode=sys.argv[4]
  require(root.resolve()==root and root.parent==BASE/'china-switch-runs' and re.fullmatch(r'[1-9][0-9]{0,19}',root.name) and
   root.stat().st_uid==0 and root.stat().st_mode&0o077==0 and SHA.fullmatch(pin) and SHA.fullmatch(bundle_pin))
- require(mode in ('activate','read-control','rollback-control','ingress') and (mode in ('rollback-control','ingress'))==(len(sys.argv)==6))
+ require(mode in ('activate','verify-only','read-control','rollback-control','ingress') and (mode in ('rollback-control','ingress'))==(len(sys.argv)==6))
  raw=private(root,'plan.json',65536);require(digest(raw)==pin);p=json.loads(raw)
+ require(p['writeExactly']==('no-publication' if mode=='verify-only' else 'china-independent-control-only'))
  code=private(root,'china-dark-control-switch.mjs',8*1024*1024);require(digest(code)==bundle_pin)
  job=json.loads(private(root,'job.json',8192))
  require(set(job)==set(KEYS) and all(isinstance(v,str) and not re.search(r'[\x00\r\n]',v) for v in job.values()) and
@@ -46,11 +47,17 @@ def main():
     node=str(candidate);break
   except (OSError,subprocess.SubprocessError):continue
  require(node)
- if mode=='activate':
+ if mode in ('activate','verify-only'):
+  mounts=BASE/'china-private';mount_info=mounts.lstat()
+  require(mounts.resolve()==mounts and stat.S_ISDIR(mount_info.st_mode) and mount_info.st_uid==0 and mount_info.st_mode&0o077==0)
+  run_mount=mounts/root.name
+  try: run_mount.mkdir(mode=0o700)
+  except FileExistsError: pass
+  st=run_mount.lstat()
+  require(run_mount.resolve()==run_mount and stat.S_ISDIR(st.st_mode) and st.st_uid==0 and st.st_mode&0o077==0)
   for name,pin_key in [('preview.cjs','previewBundleSha256'),('grant.json','previewGrantSha256')]:
    body=private(root,name,32*1024*1024);require(digest(body)==p[pin_key])
-   dst=BASE/'china-private'/name
-   require(dst.parent.resolve()==dst.parent and dst.parent.stat().st_uid==0 and dst.parent.stat().st_mode&0o077==0)
+   dst=run_mount/name
    try:
     fd=os.open(dst,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o400)
     with os.fdopen(fd,'wb') as f: f.write(body);f.flush();os.fsync(f.fileno())
@@ -70,6 +77,7 @@ def main():
   if fd!=9:os.dup2(fd,9,inheritable=True);os.close(fd)
   else:os.set_inheritable(fd,True)
  if mode=='read-control':args.append('--read-control')
+ if mode=='verify-only':args.append('--verify-only')
  if mode=='rollback-control':
   require(SHA.fullmatch(sys.argv[5]))
   args+=['--rollback-control','--expect-control-sha',sys.argv[5]]

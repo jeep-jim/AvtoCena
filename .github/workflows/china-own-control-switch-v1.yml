@@ -4,7 +4,7 @@ name: Switch exact China cut without traffic
 on:
   push:
     branches: [main]
-    paths: [.github/market-runs/china-own-control-switch-v1.sha256]
+    paths: [.github/market-runs/china-own-control-switch-v1.sha256, .github/market-runs/china-own-control-verify-v1.sha256]
 permissions:
   contents: read
   actions: read
@@ -14,7 +14,7 @@ concurrency:
 jobs:
   switch:
     name: Switch exact China cut without traffic
-    if: github.repository == 'jeep-jim/AvtoCena' && github.repository_id == '1289722938' && github.ref == 'refs/heads/main' && github.run_attempt == '1' && github.event.head_commit.message == 'Switch exact China cut without traffic'
+    if: github.repository == 'jeep-jim/AvtoCena' && github.repository_id == '1289722938' && github.ref == 'refs/heads/main' && github.run_attempt == '1' && (github.event.head_commit.message == 'Switch exact China cut without traffic' || github.event.head_commit.message == 'Verify exact China cut without publication')
     environment: regcloud-staging
     runs-on: ubuntu-latest
     timeout-minutes: 18
@@ -42,7 +42,7 @@ jobs:
           umask 077
           root="$GITHUB_WORKSPACE"
           ops="$root/.github/operations/china-dark-actor-v1"
-          test "$(sha256sum "$ops/APPROVED_CODE.sha256" | cut -d ' ' -f 1)" = ff6ec62fbb5b93759d92d26f10413e04f1358108b41d05514001ea3b97e8e72a
+          test "$(sha256sum "$ops/APPROVED_CODE.sha256" | cut -d ' ' -f 1)" = 7aa0ee5bb024d9e7e6539526a73de6200057ff329e4045cb71e1e52c787fba70
           (cd "$ops"; sha256sum --strict --check --status APPROVED_CODE.sha256)
           [[ "$(git -C writer rev-parse HEAD)" == f4dc98aaab916b29419d173994d66562aa5901f1 ]]
           [[ "$(git -C reader rev-parse HEAD)" == 85296f6b8797aaa93227b69da7e9e9e928e8f9b5 ]]
@@ -63,10 +63,11 @@ jobs:
           print(json.dumps({'operatorSourcesVerified':True,'actorProjectInputs':a['projectInputs'],'previewProjectInputs':r['inputFiles']}))
           PY
           printf 'CHINA_OPERATOR_BUILD=%s\n' "$stage" >> "$GITHUB_ENV"
-      - name: Execute exact dark China control and ordinary loopback proof, without ingress
+      - name: Verify without changes or execute the exact approved China control
         env:
           SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
           GITHUB_TOKEN: ${{ github.token }}
+          CHINA_VERIFY_ONLY: ${{ github.event.head_commit.message == 'Verify exact China cut without publication' }}
         shell: bash
         run: |
           set -euo pipefail
@@ -81,8 +82,11 @@ jobs:
           readonly release=85296f6b8797aaa93227b69da7e9e9e928e8f9b5
           readonly target=root@151.248.113.177
           [[ "$GITHUB_RUN_ID" =~ ^[1-9][0-9]{0,19}$ ]]
+          [[ "$CHINA_VERIFY_ONLY" == true || "$CHINA_VERIFY_ONLY" == false ]]
+          mode=activate
+          if [[ "$CHINA_VERIFY_ONLY" == true ]]; then mode=verify-only; fi
           test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
-          test "$(sha256sum "$ops/APPROVED_CODE.sha256" | cut -d ' ' -f 1)" = ff6ec62fbb5b93759d92d26f10413e04f1358108b41d05514001ea3b97e8e72a
+          test "$(sha256sum "$ops/APPROVED_CODE.sha256" | cut -d ' ' -f 1)" = 7aa0ee5bb024d9e7e6539526a73de6200057ff329e4045cb71e1e52c787fba70
           (cd "$ops"; sha256sum --strict --check --status APPROVED_CODE.sha256)
           scratch="$(mktemp -d "$RUNNER_TEMP/china-dark-switch.XXXXXXXX")"
           trap 'rm -rf -- "$scratch"' EXIT
@@ -95,7 +99,8 @@ jobs:
           from pathlib import Path
           import hashlib,json,os,re,time
           ops=Path('.github/operations/china-dark-actor-v1')
-          marker=Path('.github/market-runs/china-own-control-switch-v1.sha256').read_text()
+          verify=os.environ['CHINA_VERIFY_ONLY']=='true'
+          marker=Path('.github/market-runs/china-own-control-'+('verify' if verify else 'switch')+'-v1.sha256').read_text()
           raw=(ops/'approved-switch.json').read_bytes()
           assert re.fullmatch(r'[a-f0-9]{64}\n',marker) and hashlib.sha256(raw).hexdigest()==marker.strip()
           assert 0<len(raw)<=32*1024
@@ -120,6 +125,7 @@ jobs:
           g=write('grant.json',grant)
           ingress=s['authorizesIngress'];auth=s['ownerIngressApprovalSha256']
           assert type(ingress) is bool and ((ingress and re.fullmatch(r'[a-f0-9]{64}',auth)) or (not ingress and auth=='none'))
+          if verify: ingress,auth=False,'none'
           write('ingress-authorization.json',{'version':1,'ownerIngressApprovalSha256':auth,'authorizesIngress':ingress,'authorizesDataWrite':False})
           keys='GITHUB_REPOSITORY GITHUB_REPOSITORY_ID GITHUB_SHA GITHUB_REF GITHUB_WORKFLOW_REF GITHUB_JOB GITHUB_RUN_ID GITHUB_RUN_ATTEMPT GITHUB_TOKEN'.split()
           job={k:os.environ[k] for k in keys};write('job.json',job)
@@ -131,7 +137,7 @@ jobs:
            'previewBundleSha256':os.environ['CHINA_PREVIEW_PIN'],'previewGrantSha256':g,
            'candidate':{'release':new,'calculationVersion':calc,'imageSha256':new_image,'name':'avtocena-china-candidate-'+new[:12],'port':3000},
            'incumbent':{'release':old,'calculationVersion':calc,'imageSha256':old_image,'name':'avtocena-production','port':3001},
-           'query':s['query'],'legacyQuery':s['legacyQuery'],'writeExactly':'china-independent-control-only','noIngressChange':True,'cursorAdvanceAuthorized':False}
+           'query':s['query'],'legacyQuery':s['legacyQuery'],'writeExactly':'no-publication' if verify else 'china-independent-control-only','noIngressChange':True,'cursorAdvanceAuthorized':False}
           write('plan.json',p)
           PY
           unset GITHUB_TOKEN
@@ -164,4 +170,4 @@ jobs:
           fi
           # Same protected job and authenticated host; ingress is a separate
           # phase and requires its own pinned approval in approved-switch.json.
-          timeout 810s ssh "${ssh_args[@]}" "$target" "set -euo pipefail; umask 077; chmod 0500 '$host/china-dark-control-switch.mjs'; chmod 0400 '$host/host-control-dispatch.py' '$host/preview.cjs' '$host/job.json' '$host/plan.json' '$host/grant.json' '$host/flip_ingress.py' '$host/compose-ingress.py' '$host/run-chain.sh' '$host/ingress-authorization.json'; test \"\$(sha256sum '$host/run-chain.sh' | cut -d ' ' -f 1)\" = '$chain_pin'; /usr/bin/bash '$host/run-chain.sh' '$host' '$pin' '$actorpin' '$hostpin' '$flip_pin' '$compose_pin' '$ingress' '$ingress_owner'"
+          timeout 810s ssh "${ssh_args[@]}" "$target" "set -euo pipefail; umask 077; chmod 0500 '$host/china-dark-control-switch.mjs'; chmod 0400 '$host/host-control-dispatch.py' '$host/preview.cjs' '$host/job.json' '$host/plan.json' '$host/grant.json' '$host/flip_ingress.py' '$host/compose-ingress.py' '$host/run-chain.sh' '$host/ingress-authorization.json'; test \"\$(sha256sum '$host/run-chain.sh' | cut -d ' ' -f 1)\" = '$chain_pin'; /usr/bin/bash '$host/run-chain.sh' '$host' '$pin' '$actorpin' '$hostpin' '$flip_pin' '$compose_pin' '$ingress' '$ingress_owner' '$mode'"

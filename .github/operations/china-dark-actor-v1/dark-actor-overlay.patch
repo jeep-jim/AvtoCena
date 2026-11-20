@@ -58,7 +58,7 @@ diff --git a/scripts/catalog-china-own-control-switch.ts b/scripts/catalog-china
 new file mode 100644
 --- /dev/null
 +++ b/scripts/catalog-china-own-control-switch.ts
-@@ -0,0 +1,184 @@
+@@ -0,0 +1,205 @@
 +/** Owner-run China-only compare-and-swap; never changes Nginx, containers, or cursors. */
 +import {createHash} from 'node:crypto';
 +import {ObjectJsonStorage} from '../apps/web/lib/data';
@@ -85,7 +85,7 @@ new file mode 100644
 + target:ChinaPublicRef;previous:ChinaLegacyRollback;expectedArchiveSha256:string;expectedManifestSha256:string;expectedPricingReceiptSha256:string;
 + expectedAdmittedRows:number;expectedBaseSha256:string;validUntil:number;rollbackUntil:number;previewBundleSha256:string;previewGrantSha256:string;
 + candidate:Instance;incumbent:Instance;query:Query;legacyQuery:Query;
-+ writeExactly:'china-independent-control-only';noIngressChange:true;cursorAdvanceAuthorized:false;
++ writeExactly:'china-independent-control-only'|'no-publication';noIngressChange:true;cursorAdvanceAuthorized:false;
 +};
 +const validQuery=(q:Query)=>q&&Object.keys(q).length===2&&[q.make,q.model].every(x=>typeof x==='string'&&x.length>0&&x.length<=64&&!/[\u0000-\u001f\u007f]/.test(x));
 +const validInstance=(i:Instance)=>i&&GIT.test(i.release)&&SHA.test(i.calculationVersion)&&SHA.test(i.imageSha256)&&[3000,3001].includes(i.port);
@@ -99,7 +99,7 @@ new file mode 100644
 +  p.expectedBaseSha256===chinaObjectDigest(null)&&positive(p.expectedAdmittedRows)&&
 +  positive(p.validUntil)&&positive(p.rollbackUntil)&&(rollbackWindow?p.rollbackUntil:p.validUntil)> Date.now()&&p.validUntil<=Date.now()+15*60_000&&
 +  p.rollbackUntil>=p.validUntil+60_000&&p.rollbackUntil<=p.validUntil+5*60_000&&
-+  p.writeExactly==='china-independent-control-only'&&p.noIngressChange===true&&p.cursorAdvanceAuthorized===false&&
++  (p.writeExactly==='china-independent-control-only'||p.writeExactly==='no-publication')&&p.noIngressChange===true&&p.cursorAdvanceAuthorized===false&&
 +  validInstance(p.candidate)&&validInstance(p.incumbent)&&p.candidate.port!==p.incumbent.port&&
 +  p.candidate.release!==p.incumbent.release&&p.candidate.imageSha256!==p.incumbent.imageSha256&&
 +  p.incumbent.name==='avtocena-production'&&p.candidate.name==='avtocena-china-candidate-'+p.candidate.release.slice(0,12)&&
@@ -147,6 +147,7 @@ new file mode 100644
 + privateCandidate:()=>Promise<VerifiedChinaRuntimeProbe>;normalCandidate:(privateProof:VerifiedChinaRuntimeProbe)=>Promise<VerifiedChinaRuntimeProbe>;
 + normalLegacy:()=>Promise<VerifiedChinaRuntimeProbe>;
 + storeOrdinaryProof?:(proof:VerifiedChinaRuntimeProbe)=>Promise<void>;
++ onPhase?:(phase:'scope_and_owner'|'host_lease'|'own_baseline'|'legacy_manifest'|'candidate_ready'|'legacy_http'|'private_candidate'|'control_cas'|'prepared_http'|'final_readback')=>void;
 +};
 +export function expectedDarkControlSha256(p:Readonly<ChinaDarkSwitchPlan>){
 + return chinaObjectDigest({version:1,market:'china',revision:1,active:p.target,previous:p.previous});
@@ -155,6 +156,7 @@ new file mode 100644
 + * same actor/job lease are proved again, within its pre-approved rollback window. */
 +export async function runChinaDarkControlRollback(raw:Buffer,expectedPlanSha:string,expectedCurrentSha:string,services:Pick<Services,'storage'|'assertOwnerJob'|'assertDarkLease'|'normalLegacy'>){
 + const p=parseChinaDarkSwitchPlan(raw,expectedPlanSha,true),{storage}=services;
++ need(p.writeExactly==='china-independent-control-only','rollback_authority');
 + need(expectedCurrentSha===expectedDarkControlSha256(p),'rollback_current_pin');
 + const guard=async()=>{
 +  need(Date.now()<p.rollbackUntil,'deadline');
@@ -176,27 +178,46 @@ new file mode 100644
 + return {status:'legacy_china_control_restored' as const,controlSha256:restored.controlSha256,generationId:p.previous.generationId,
 +  cursorAdvanced:false,publicIngressChanged:false};
 +}
-+/** Internal reviewed host actor. The shell supplies real lease/image/ingress
-+ * checks and probes through the same fixed private process; no public API. */
-+export async function runChinaDarkControlSwitch(raw:Buffer,expectedPlanSha:string,services:Services){
-+ const p=parseChinaDarkSwitchPlan(raw,expectedPlanSha),{storage}=services;
-+ const checkpoint=async(rollback=false)=>{
++type PreflightServices=Omit<Services,'normalCandidate'|'storeOrdinaryProof'>;
++async function preflight(p:Readonly<ChinaDarkSwitchPlan>,services:PreflightServices){
++ const {storage}=services,phase=services.onPhase??(()=>{});
++ const checkpoint=async(rollback=false,displayInitialPhase=false)=>{
 +  need(Date.now()<(rollback?p.rollbackUntil:p.validUntil),'deadline');
 +  const scope=readConfiguredRegcloudScope();
 +  need(Object.entries(boundStorage).every(([k,v])=>scope[k as keyof typeof scope]===v),'storage_scope');
-+  await services.assertOwnerJob();await services.assertDarkLease();
++  await services.assertOwnerJob();
++  if(displayInitialPhase)phase('host_lease');
++  await services.assertDarkLease();
 + };
-+ await checkpoint();
-+ need(await readChinaPublicState(storage)===null,'initial_control_not_absent');
-+ await assertChinaLegacyRollback(storage,p.previous);
-+ const stage=await openChinaStageObjectFiles(storage,p.target,async()=>{
++ phase('scope_and_owner');await checkpoint(false,true);
++ phase('own_baseline');need(await readChinaPublicState(storage)===null,'initial_control_not_absent');
++ phase('legacy_manifest');await assertChinaLegacyRollback(storage,p.previous);
++ phase('candidate_ready');const stage=await openChinaStageObjectFiles(storage,p.target,async()=>{
 +  await services.assertDarkLease();
 +  need(await readChinaPublicState(storage)===null,'initial_control_changed');
 + });
 + need(stage.durable.archiveSha256===p.expectedArchiveSha256&&stage.durable.manifestSha256===p.expectedManifestSha256&&stage.durable.pricingReceiptSha256===p.expectedPricingReceiptSha256&&
 +   stage.durable.admittedRows===p.expectedAdmittedRows&&stage.durable.expectedChinaPublicBaseSha256===p.expectedBaseSha256,'ready_identity');
-+ const legacy=await services.normalLegacy();requireProbe(legacy,p,'normal-china-legacy-readback');
-+ const privateProof=await services.privateCandidate();requireProbe(privateProof,p,'private-china-candidate-readback');
++ phase('legacy_http');const legacy=await services.normalLegacy();requireProbe(legacy,p,'normal-china-legacy-readback');
++ phase('private_candidate');const privateProof=await services.privateCandidate();requireProbe(privateProof,p,'private-china-candidate-readback');
++ return {privateProof,checkpoint};
++}
++/** Same pre-CAS probes as the writer, but this path cannot construct a permit,
++ * enter the switch/rollback code or produce an ingress receipt. */
++export async function verifyChinaDarkControlOnly(raw:Buffer,expectedPlanSha:string,services:PreflightServices){
++ const p=parseChinaDarkSwitchPlan(raw,expectedPlanSha);
++ need(p.writeExactly==='no-publication','verify_only_authority');
++ const {checkpoint}=await preflight(p,services);
++ services.onPhase?.('final_readback');await checkpoint();
++ need(await readChinaPublicState(services.storage)===null,'initial_control_changed');
++ return {status:'china_prepublication_verified' as const,generationId:p.target.generationId,storageWrites:0,publicIngressChanged:false,cursorAdvanced:false};
++}
++/** Internal reviewed host actor. The shell supplies real lease/image/ingress
++ * checks and probes through the same fixed private process; no public API. */
++export async function runChinaDarkControlSwitch(raw:Buffer,expectedPlanSha:string,services:Services){
++ const p=parseChinaDarkSwitchPlan(raw,expectedPlanSha),{storage}=services;
++ need(p.writeExactly==='china-independent-control-only','activation_authority');
++ const {privateProof,checkpoint}=await preflight(p,services);
 + const permit:ChinaOwnSwitchPermit={version:1,kind:'china-own-public-cut-cas-v1',market:'china',action:'activate',storage:boundStorage,
 +  expectedBaseSha256:p.expectedBaseSha256,expectedPublicControlSha256:null,target:p.target,bootstrapPrevious:p.previous,
 +  expectedRuntimeProbeSha256:chinaObjectDigest(privateProof),validUntil:p.validUntil,darkActivation:'isolated-runtime-before-ingress'};
@@ -204,7 +225,7 @@ new file mode 100644
 + const exactNew=expectedDarkControlSha256(p);
 + let attempted=false;
 + try{
-+  await checkpoint();
++  services.onPhase?.('control_cas');await checkpoint();
 +  attempted=true;
 +  const write=await switchChinaRegcloudCut({storage,permit,expectedPermitSha256:permitSha,
 +   async assertApprovedRunner(_p,actual){need(actual===permitSha,'activate_permit');await checkpoint();},
@@ -212,7 +233,7 @@ new file mode 100644
 +   async verifyNormalRuntimeReadback(){requireProbe(privateProof,p,'private-china-candidate-readback');return privateProof;}});
 +  need(write.controlSha256===exactNew,'written_pointer_identity');
 +  await checkpoint();
-+  const proof=await services.normalCandidate(privateProof);requireProbe(proof,p,'normal-china-runtime-readback');
++  services.onPhase?.('prepared_http');const proof=await services.normalCandidate(privateProof);requireProbe(proof,p,'normal-china-runtime-readback');
 +  need(proof.cardId===privateProof.cardId&&proof.listRub===privateProof.listRub&&proof.filteredCount===privateProof.filteredCount,'private_normal_parity');
 +  await checkpoint();
 +  need((await readChinaPublicState(storage))?.checksum===exactNew,'postcheck_pointer_changed');
@@ -247,7 +268,7 @@ diff --git a/scripts/catalog-china-own-control-switch-host.mts b/scripts/catalog
 new file mode 100644
 --- /dev/null
 +++ b/scripts/catalog-china-own-control-switch-host.mts
-@@ -0,0 +1,202 @@
+@@ -0,0 +1,217 @@
 +/** Existing RegCloud operator host, not a public route. Run with the existing
 + * flock held by this process (flock --exclusive --nonblock --no-fork ...). */
 +import fs from 'node:fs/promises';
@@ -257,8 +278,9 @@ new file mode 100644
 +import {createHash} from 'node:crypto';
 +import {pathToFileURL} from 'node:url';
 +import {ObjectJsonStorage} from '../apps/web/lib/data';
++import {canonicalCatalogHref} from '../apps/web/lib/catalog/catalog-routes';
 +import {chinaObjectDigest,readConfiguredRegcloudScope,readChinaPublicState,chinaLegacyRollback} from '../apps/web/lib/catalog/china-regcloud-object-reader';
-+import {createChinaSwitchJobAuthenticator,failChinaDarkSwitch,parseChinaDarkSwitchPlan,expectedDarkControlSha256,runChinaDarkControlSwitch,runChinaDarkControlRollback,type ChinaDarkSwitchPlan} from './catalog-china-own-control-switch';
++import {createChinaSwitchJobAuthenticator,failChinaDarkSwitch,parseChinaDarkSwitchPlan,expectedDarkControlSha256,runChinaDarkControlSwitch,runChinaDarkControlRollback,verifyChinaDarkControlOnly,type ChinaDarkSwitchPlan} from './catalog-china-own-control-switch';
 +import type {VerifiedChinaRuntimeProbe} from '../apps/web/lib/catalog/china-regcloud-cut-switch';
 +
 +const LOCK='/run/lock/avtocena-runtime-change.lock',MOUNT='/run/avtocena-china-switch';
@@ -303,7 +325,7 @@ new file mode 100644
 + }),'host_runtime_lease_not_held');
 +}
 +async function readResponse(url:URL,max:number,html:boolean,timeout=15000){
-+ const r=await fetch(url,{method:'GET',redirect:'error',headers:{accept:html?'text/html':'application/json','cache-control':'no-cache'},signal:AbortSignal.timeout(timeout)});
++ const r=await fetch(url,{method:'GET',redirect:'manual',headers:{accept:html?'text/html':'application/json','cache-control':'no-cache'},signal:AbortSignal.timeout(timeout)});
 + if(r.status!==200||!r.body){await r.body?.cancel();return failChinaDarkSwitch('ordinary_loopback_http_'+r.status);}
 + const chunks:Uint8Array[]=[];let n=0;
 + for await(const c of r.body){n+=c.length;if(n>max)return failChinaDarkSwitch('ordinary_loopback_response_limit');chunks.push(c);}
@@ -329,7 +351,9 @@ new file mode 100644
 + const count=await get('/api/catalog/search?'+countFilter,128*1024);
 + need(count?.ok===true&&count.countIncomplete!==true&&positive(count.total)&&count.total===list.total&&
 +  (legacy||count.generationId===target.generationId)&&(!expect||count.total===expect.filteredCount),'ordinary_loopback_count');
-+ const htmlPage=await get('/cars/china?'+filter,5*1024*1024,true);
++ // A production middleware 308 would otherwise turn this exact BMW/X3
++ // query into a fetch failure before the candidate can even be probed.
++ const htmlPage=await get(canonicalCatalogHref('/cars/china?'+filter),5*1024*1024,true);
 + const prefix='/cars/offer/'+encodeURIComponent(row.id);
 + const direct=[...String(htmlPage).matchAll(/href="([^"]+)"/g)].map(m=>m[1].replace(/&amp;/g,'&'))
 +  .find(href=>{
@@ -386,8 +410,8 @@ new file mode 100644
 +  await assertDarkLease();
 +  const d=await inspect(p.candidate,false),mounts=(d.Mounts??[]).filter((m:any)=>mountName(m.Destination));
 +  need(mounts.length===1&&mounts[0].Type==='bind'&&mounts[0].RW===false&&typeof mounts[0].Source==='string'&&
-+   mounts[0].Source.startsWith('/opt/avtocena/releases/'+p.candidate.release+'/'),'preview_mount');
-+  const source=mounts[0].Source;
++   mounts[0].Source==='/opt/avtocena/releases/'+p.candidate.release+'/china-private','preview_mount');
++  const source=path.join(mounts[0].Source,p.ownerJob.runId), inside=MOUNT+'/'+p.ownerJob.runId;
 +  const a=await privateFile(path.join(source,'preview.cjs'),32*1024*1024),g=await privateFile(path.join(source,'grant.json'),32*1024);
 +  need(sha(a)===p.previewBundleSha256&&sha(g)===p.previewGrantSha256,'preview_blob_pin');
 +  const grant=tryJson(g.toString('utf8'),'preview_grant_json');
@@ -400,7 +424,7 @@ new file mode 100644
 +   grant.admittedRows===p.expectedAdmittedRows&&grant.make===p.query.make&&grant.model===p.query.model,'preview_grant_binding');
 +  const {stdout}=await run('/usr/bin/docker',['exec','-e','AVTOCENA_CHINA_REGCLOUD_RUNTIME=0','-e','JSON_STORAGE_DRIVER=object',
 +   '-e','CATALOG_STORAGE_TIMING=0','-e','NODE_PATH=/app/node_modules:/app/apps/web/node_modules',candidateContainer,
-+   'node',MOUNT+'/preview.cjs',MOUNT+'/grant.json',p.previewGrantSha256],{maxBuffer:16*1024,timeout:75000});
++   'node',inside+'/preview.cjs',inside+'/grant.json',p.previewGrantSha256],{maxBuffer:16*1024,timeout:75000});
 +  const proof=tryJson(stdout.trim(),'private_preview_receipt');
 +  need(proof?.kind==='private-china-candidate-readback','not_private_probe');
 +  await assertDarkLease();
@@ -411,17 +435,19 @@ new file mode 100644
 +  normalCandidate:(proof:VerifiedChinaRuntimeProbe)=>probeChinaOrdinaryLoopback(p,false,proof),
 +  hostLeaseSnapshot:()=>({oldContainerId:incumbentContainer,candidateContainerId:candidateContainer,nginxBeforeSha256:nginxFileSha})};
 +}
-+export {ObjectJsonStorage,parseChinaDarkSwitchPlan,createChinaSwitchJobAuthenticator,runChinaDarkControlSwitch,runChinaDarkControlRollback};
++export {ObjectJsonStorage,parseChinaDarkSwitchPlan,createChinaSwitchJobAuthenticator,runChinaDarkControlSwitch,runChinaDarkControlRollback,verifyChinaDarkControlOnly};
 +if(process.argv[1]&&import.meta.url===pathToFileURL(path.resolve(process.argv[1])).href){
++ let phase='input';
 + try{
 +  const {values}=parseArgs({options:{plan:{type:'string'},'expect-plan-sha':{type:'string'},'read-control':{type:'boolean'},
-+   'rollback-control':{type:'boolean'},'expect-control-sha':{type:'string'}}});
++   'rollback-control':{type:'boolean'},'verify-only':{type:'boolean'},'expect-control-sha':{type:'string'}}});
 +  need(typeof values.plan==='string'&&SHA.test(values['expect-plan-sha']??'')&&
-+   !(values['read-control']&&values['rollback-control'])&&(!values['rollback-control']||SHA.test(values['expect-control-sha']??''))&&
++   [values['read-control'],values['rollback-control'],values['verify-only']].filter(Boolean).length<=1&&(!values['rollback-control']||SHA.test(values['expect-control-sha']??''))&&
 +   (!values['expect-control-sha']||values['rollback-control']),'args');
 +  const raw=await privateFile(values.plan!,64*1024),pin=values['expect-plan-sha']!;
 +  const p=parseChinaDarkSwitchPlan(raw,pin,values['read-control']||values['rollback-control']);
 +  if(values['read-control']){
++   need(p.writeExactly==='china-independent-control-only','read_control_authority');
 +   const cfg=readConfiguredRegcloudScope();
 +   need(cfg.endpoint==='https://s3.regru.cloud'&&cfg.bucket==='avtocena-staging-8120751'&&
 +    cfg.prefix==='migration-staging/full-20261011'&&cfg.region==='us-east-1','read_control_storage_scope');
@@ -436,8 +462,10 @@ new file mode 100644
 +   const evidenceHome=path.dirname(values.plan!);
 +   if(!values['rollback-control'])need(path.basename(values.plan!)==='plan.json'&&
 +    evidenceHome==='/opt/avtocena/releases/'+p.candidate.release+'/china-switch-runs/'+p.ownerJob.runId,'proof_output_scope');
-+   const result=values['rollback-control']?await runChinaDarkControlRollback(raw,pin,values['expect-control-sha']!,services):
-+    await runChinaDarkControlSwitch(raw,pin,{...services,async storeOrdinaryProof(proof){
++   const reportPhase=(name:string)=>{phase=name;};
++   const result=values['verify-only']?await verifyChinaDarkControlOnly(raw,pin,{...services,onPhase:reportPhase}):
++    values['rollback-control']?await runChinaDarkControlRollback(raw,pin,values['expect-control-sha']!,services):
++    await runChinaDarkControlSwitch(raw,pin,{...services,onPhase:reportPhase,async storeOrdinaryProof(proof){
 +     await fs.writeFile(path.join(evidenceHome,'ordinary.json'),JSON.stringify(proof),{flag:'wx',mode:0o600});
 +     await fs.writeFile(path.join(evidenceHome,'host.json'),JSON.stringify(services.hostLeaseSnapshot()),{flag:'wx',mode:0o600});
 +    }});
@@ -445,8 +473,16 @@ new file mode 100644
 +  }
 + }catch(e){
 +  const error=e instanceof Error?e.message:'';
-+  console.error(JSON.stringify({status:'not_verified',reason:/^(?:china_dark_switch|china_regcloud_switch):[a-z0-9_]+$/.test(error)?error:'verify_state_before_retry',
-+   publicIngressChanged:false,cursorAdvanced:false}));
++  // Report only known identifiers. Raw exception/stderr may contain private
++  // paths, signed request details or staged payloads.
++  const code=(e as NodeJS.ErrnoException)?.code,w=(e as Error)?.name;
++  const reason=/^(?:china_dark_switch|china_regcloud_switch|china_own_regcloud):[a-z0-9_]+$/.test(error)?error:
++   /^object_storage_(?:binary_read|control_read)_\d{3}$/.test(error)?error:
++   w==='TimeoutError'||w==='AbortError'?'request_timeout':
++   typeof code==='string'&&['ENOENT','EACCES','EPERM','ENOTDIR','ERR_CHILD_PROCESS_STDIO_MAXBUFFER'].includes(code)?code:
++   typeof code==='number'?'subprocess_failed':
++   error==='fetch failed'?'fetch_failed':'verify_state_before_retry';
++  console.error(JSON.stringify({status:'not_verified',phase,reason,publicIngressChanged:false,cursorAdvanced:false}));
 +  process.exitCode=1;
 + }
 +}
