@@ -1,0 +1,69 @@
+name: Compare exact saved AutoScout and live Europe sibling boundaries read-only
+'on':
+  push:
+    branches: [main]
+    paths:
+      - .github/market-runs/europe-stage-sibling-readonly-20261120.json
+permissions:
+  contents: read
+concurrency:
+  group: europe-stage-sibling-readonly-20261120
+  cancel-in-progress: false
+jobs:
+  inspect:
+    if: >-
+      github.repository == 'jeep-jim/AvtoCena' &&
+      github.repository_id == '1289722938' &&
+      github.ref == 'refs/heads/main' &&
+      github.run_attempt == '1' &&
+      github.event.before != '0000000000000000000000000000000000000000' &&
+      !github.event.deleted &&
+      github.event.head_commit.message == 'Inspect saved AutoScout stage inputs and Europe sibling descriptors read-only'
+    environment: regcloud-staging
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 2
+          persist-credentials: false
+      - name: Verify the exact marker, installed parent and probe bytes before secrets
+        env:
+          EVENT_BEFORE: ${{ github.event.before }}
+          EVENT_SHA: ${{ github.sha }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PROBE_SHA=5be76b510a9ff9872b03c434016763bcc47e14f9ae068d6fc0755f696aa4369c
+          python3 - <<'PY'
+          import hashlib,json,os,pathlib,re,subprocess
+          marker='.github/market-runs/europe-stage-sibling-readonly-20261120.json'
+          script='scripts/europe-stage-sibling-readonly-20261120.mjs'
+          workflow='.github/workflows/europe-stage-sibling-readonly-20261120.yml'
+          def git(*args): return subprocess.check_output(['git',*args])
+          parent=os.environ['EVENT_BEFORE']; current=os.environ['EVENT_SHA']
+          assert re.fullmatch(r'[a-f0-9]{40}',parent) and re.fullmatch(r'[a-f0-9]{40}',current)
+          assert git('rev-parse','HEAD').decode().strip()==current
+          assert git('rev-list','--parents','-n','1','HEAD').decode().split()==[current,parent]
+          assert git('diff','--name-only',parent,current).decode().splitlines()==[marker]
+          for name in (script,workflow):
+              assert git('show',parent+':'+name)==pathlib.Path(name).read_bytes()
+          assert hashlib.sha256(pathlib.Path(script).read_bytes()).hexdigest()==os.environ['PROBE_SHA']
+          assert json.loads(pathlib.Path(marker).read_bytes())=={
+              'version':1,'operation':'europe_stage_exact_metadata_get_only_20261120',
+              'installedParent':parent,'probeSha256':os.environ['PROBE_SHA'],
+              'assertArchiveRun':44637245131,'assertArchiveAttempt':1,'assertArtifactId':14584484747
+          }
+          PY
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 24.22.1
+      - name: Read exact bounded metadata and the saved AutoScout report
+        env:
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          umask 077
+          node scripts/europe-stage-sibling-readonly-20261120.mjs
