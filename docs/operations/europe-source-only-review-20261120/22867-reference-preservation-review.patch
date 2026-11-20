@@ -1,0 +1,108 @@
+diff --git a/apps/web/lib/catalog/storage.ts b/apps/web/lib/catalog/storage.ts
+--- a/apps/web/lib/catalog/storage.ts
++++ b/apps/web/lib/catalog/storage.ts
+@@ -3113,7 +3113,14 @@
+   const index = await previousLocationCache.get(previous.generationId,()=>readIndex<{byId: Record<string, OfferLocation>}>(previous.generationId, "offers-by-id.json", {byId:{}}));
+   const location = index.byId[id];
+   if (!location || location.market === "japan") return null;
+-  const path=offerPath(previous.generationId, location.market, location.chunk);
++  // Europe append-only candidates can carry a complete inherited chunk key.
++  // Only resolve an exact same-market key referenced by the previous manifest.
++  const inheritedEurope = location.market === "europe" && typeof location.chunk === "string" && location.chunk.startsWith("catalog/");
++  if (inheritedEurope && (!/^catalog\/generations\/gen_\d{1,20}_[-a-z0-9]{1,64}\/offers\/europe\/chunk-\d{4,8}\.json$/.test(location.chunk)
++    || !Array.isArray(previous.markets?.europe?.chunks) || !previous.markets.europe.chunks.includes(location.chunk))) return null;
++  const path=inheritedEurope
++    ? storedOfferChunkPath(previous.generationId, location.market, location.chunk)
++    : offerPath(previous.generationId, location.market, location.chunk);
+   const offers = await previousOfferChunkCache.get(path,()=>readDataJson<VehicleOffer[]>(path, []));
+   const offer = offers.find(item => item.id === id);
+   return offer ? unavailableOfferRecord(offer) : null;
+diff --git a/scripts/catalog-clean-failed-generations.mjs b/scripts/catalog-clean-failed-generations.mjs
+--- a/scripts/catalog-clean-failed-generations.mjs
++++ b/scripts/catalog-clean-failed-generations.mjs
+@@ -1,4 +1,5 @@
+ import fs from "node:fs/promises";
++import {europeReferencedGenerationIds} from "./lib/catalog-europe-reference-retention.mjs";
+ 
+ const { getJsonStorage, readDataJson } = await import("../apps/web/lib/data.ts");
+ 
+@@ -19,9 +20,10 @@
+ }
+ 
+ const startedAt = new Date().toISOString();
+-const [manifest, internalManifest] = await Promise.all([
++const [manifest, internalManifest, previousManifest] = await Promise.all([
+   readDataJson("catalog/manifest.json", { generationId: "", markets: {} }),
+   readDataJson("catalog/internal/manifest.json", { generationId: "", sources: {} }),
++  readDataJson("catalog/previous-manifest.json", null),
+ ]);
+ const liveGeneration = String(manifest?.generationId || "");
+ if (!liveGeneration) throw new Error("failed_generation_cleanup_live_manifest_missing");
+@@ -32,7 +34,8 @@
+ ]);
+ const generations = [...new Set(objects.map((item) => generationIdFromKey(item.key)).filter(Boolean))]
+   .sort((left, right) => Number(right.match(/^gen_(\d+)_/)?.[1] || 0) - Number(left.match(/^gen_(\d+)_/)?.[1] || 0));
+-const protectedGenerations = new Set([liveGeneration, ...generations.slice(0, keepGenerations), ...configuredProtectedGenerations]);
++const protectedGenerations = new Set([liveGeneration, ...generations.slice(0, keepGenerations), ...configuredProtectedGenerations,
++  ...europeReferencedGenerationIds(manifest, previousManifest)]);
+ const candidates = generations.filter((generationId) => !protectedGenerations.has(generationId));
+ const candidateObjects = objects.filter((item) => candidates.includes(generationIdFromKey(item.key)));
+ const protectedInternalPaths = new Set(Object.values(internalManifest?.sources || {})
+diff --git a/scripts/catalog-clean-object-storage.mjs b/scripts/catalog-clean-object-storage.mjs
+--- a/scripts/catalog-clean-object-storage.mjs
++++ b/scripts/catalog-clean-object-storage.mjs
+@@ -1,4 +1,5 @@
+ import fs from "node:fs/promises";
++import {europeReferencedGenerationIds} from "./lib/catalog-europe-reference-retention.mjs";
+ import {staleJapanPreviewObjects,stalePriceSnapshotObjects} from "./lib/catalog-runtime-cleanup.mjs";
+ import { readProtectedImageReferences } from "./lib/catalog-cleanup-image-references.mjs";
+ import { planInternalChunkCleanup } from "./lib/catalog-internal-cleanup.mjs";
+@@ -135,6 +136,7 @@
+ const imageCleanupDeferredGenerations = [];
+ const protectedGenerations = new Set([
+   publicGeneration,
++  ...europeReferencedGenerationIds(publicManifest, previousManifest),
+   ...(previousManifest?.generationId ? [String(previousManifest.generationId)] : []),
+   ...(!EMERGENCY && internalGeneration ? [internalGeneration] : []),
+   ...(!EMERGENCY ? generationIds.slice(0, KEEP_GENERATIONS) : []),
+diff --git a/scripts/lib/catalog-europe-reference-retention.mjs b/scripts/lib/catalog-europe-reference-retention.mjs
+new file mode 100644
+--- /dev/null
++++ b/scripts/lib/catalog-europe-reference-retention.mjs
+@@ -0,0 +1,36 @@
++// Local proof helper; not a publisher. Never discover keys through LIST or
++// expand an append into another market's manifest.
++const GEN='gen_\\d{1,20}_[-a-z0-9]{1,64}';
++export const EUROPE_STORED_OFFER_CHUNK=new RegExp('^catalog/generations/('+GEN+')/offers/europe/chunk-\\d{4,8}\\.json$');
++const validGen=new RegExp('^'+GEN+'$');
++const relative=/^chunk-\d{4,8}$/;
++const ask=(test,code)=>{if(!test)throw Error(code);};
++
++function canonicalReference(generation,chunk){
++ if(typeof chunk==='string'&&relative.test(chunk))return 'catalog/generations/'+generation+'/offers/europe/'+chunk+'.json';
++ ask(typeof chunk==='string'&&EUROPE_STORED_OFFER_CHUNK.test(chunk),'malformed_or_foreign_europe_chunk_reference');
++ return chunk;
++}
++function europeBaseline(manifest) {
++ ask(manifest?.version===2&&validGen.test(manifest.generationId)&&manifest.markets&&typeof manifest.markets==='object'&&!Array.isArray(manifest.markets),
++      'europe_baseline_manifest_invalid');
++ const d=manifest.markets.europe;
++ if(d===undefined)return null;
++ ask(Number.isSafeInteger(d.count)&&d.count>=0&&Array.isArray(d.chunks)&&(d.count===0?d.chunks.length===0:d.chunks.length>0)
++   &&d.chunks.length<=10000,'europe_baseline_descriptor_invalid');
++ const references=d.chunks.map(chunk=>canonicalReference(manifest.generationId,chunk));
++ ask(references.length===new Set(references).size,'duplicate_europe_chunk_reference');
++ return {d,references};
++}
++export function europeReferencedGenerationIds(...manifests){
++ const ids=new Set();
++ for(const manifest of manifests){
++  // Existing older sites can have no previous pointer. Do not allow a
++  // present/invalid pointer to be interpreted as empty; callers should
++  // independently require both pointers before approving append activation.
++  if(manifest===null||manifest===undefined)continue;
++  const base=europeBaseline(manifest);
++  if(base)for(const key of base.references)ids.add(key.match(EUROPE_STORED_OFFER_CHUNK)[1]);
++ }
++ return ids;
++}
