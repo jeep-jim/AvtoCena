@@ -1,4 +1,4 @@
-name: Read exact China and UAE pointers after cooperative stop
+name: Read catalog pointers and native cursor receipts only
 'on':
   push:
     branches:
@@ -13,8 +13,8 @@ concurrency:
 jobs:
   inspect:
     if: github.repository == 'jeep-jim/AvtoCena' && github.repository_id == '1289722938' && github.ref ==
-      'refs/heads/main' && github.run_attempt == '1' && github.event.before == '15f51970fb68555ad56b7c40f622517a15643377'
-      && github.event.head_commit.message == 'Read exact China and UAE pointers after cooperative stop'
+      'refs/heads/main' && github.run_attempt == '1' && github.event.before == '1c2df7064ff052613baa624776d1e6fd6e4c9862'
+      && github.event.head_commit.message == 'Read exact native market receipts after stop request'
     environment: regcloud-staging
     runs-on: ubuntu-latest
     timeout-minutes: 3
@@ -64,9 +64,10 @@ jobs:
         \ generation==='string'&&/^gen_\\d{1,20}_[a-z0-9-]{1,80}$/.test(generation),'newday_manifest');return\
         \ {sha256:x.digest,etag:x.etag,bytes:x.bytes,generation};}\n function cursor(x,market){if(x===null)return\
         \ {exists:false};require(x.value?.market===market&&x.value?.version===1&&Array.isArray(x.value?.sources)&&x.value.sources.length<=12,'newday_cursor_shape');\n\
-        \   const sources=x.value.sources.map(s=>{require(typeof s.provider==='string'&&/^[a-zA-Z0-9_-]{1,48}$/.test(s.provider),'newday_cursor_shape');return\
-        \ {provider:s.provider,cursor:Number.isSafeInteger(s.cursor)&&s.cursor>=0?s.cursor:null,replicaPresent:Boolean(s.replica),snapshotBindingPresent:typeof\
-        \ s.snapshotBinding==='string'&&/^[a-f0-9]{64}$/.test(s.snapshotBinding)};});\n   return {exists:true,sha256:x.digest,etag:x.etag,sources};\n\
+        \   const sources=x.value.sources.map(s=>{require(s&&typeof s==='object'&&(s.provider===undefined||typeof\
+        \ s.provider==='string'&&/^[a-zA-Z0-9_-]{1,48}$/.test(s.provider)),'newday_cursor_shape');return {provider:s.provider??null,cursor:Number.isSafeInteger(s.cursor)&&s.cursor>=0?s.cursor:null,replicaPresent:Boolean(s.replica),snapshotBindingPresent:typeof\
+        \ s.snapshotBinding==='string'&&/^[a-f0-9]{64}$/.test(s.snapshotBinding)};});\n   return {exists:true,sha256:x.digest,etag:x.etag,generation:typeof\
+        \ x.value.generationId==='string'&&/^gen_\\d{1,20}_[a-z0-9-]{1,80}$/.test(x.value.generationId)?x.value.generationId:null,sources};\n\
         \ }\n function leaseState(x,t){if(x===null)return {state:'absent'};const u=x.value?.lockedUntil;\n\
         \   require(typeof u==='string'&&(u===''||Number.isFinite(Date.parse(u))),'newday_lease_shape');\n\
         \   const v=x.value.operationType,type=typeof v==='string'&&/^[a-zA-Z0-9_-]{1,100}$/.test(v)?v:null;\n\
@@ -78,5 +79,5 @@ jobs:
         \ const lock=leaseState(lease,now());\n return {checkedAt:new Date(now()).toISOString(),stable,atomicSnapshotProven:false,readyToEvaluate:stable&&lock.state!=='active',originalChinaGate,public:manifest(pub),internal:manifest(internal),lock,chinaCursor:cursor(china,'china'),uaeCursor:cursor(uae,'uae'),europeCursor:cursor(europe,'europe'),georgiaCursor:cursor(georgia,'georgia'),controls:gates,storageGets,storageHeads:0,storageWrites:0,supplierCalls:0,publicationAuthorized:false};\n\
         }\nif(process.argv.includes('--reconcile')){\n try{const report=await reconcile();console.log(JSON.stringify(report));if(!report.readyToEvaluate)process.exitCode=2;}\n\
         \ catch(e){console.error(JSON.stringify({error:/^newday_[a-z_]+$/.test(e?.message||'')?e.message:'newday_read_failed',storageWrites:0,supplierCalls:0}));process.exitCode=1;}\n\
-        }\nREADER\ntest \"$(sha256sum \"$RUNNER_TEMP/reconcile.mjs\" | cut -d' ' -f1)\" = 61569ef28d9f72d9c5fcb2da87741cf5412fe12c6d251bfc9f4b8e8401fcd81b\n\
+        }\nREADER\ntest \"$(sha256sum \"$RUNNER_TEMP/reconcile.mjs\" | cut -d' ' -f1)\" = 40add3681b7b7ecb74e146127fec6f420923ca37efe4b308228510c7f1d599ed\n\
         node \"$RUNNER_TEMP/reconcile.mjs\" --reconcile\n"
