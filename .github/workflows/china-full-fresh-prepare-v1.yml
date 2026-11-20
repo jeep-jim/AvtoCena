@@ -1,0 +1,171 @@
+name: Prepare full fresh China with one frozen quote
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/operations/china-full-fresh-v1/ARMED_SHA256
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: avtocena-china-full-fresh-private-v1
+  cancel-in-progress: false
+jobs:
+  prepare:
+    name: Prepare full fresh China with one frozen quote
+    if: github.repository == 'jeep-jim/AvtoCena' && github.repository_id == '1289722938' && github.ref == 'refs/heads/main' && github.run_attempt == '1' && github.event.head_commit.message == 'Prepare full fresh China with one frozen quote'
+    runs-on: ubuntu-latest
+    environment: regcloud-staging
+    timeout-minutes: 190
+    env:
+      GH_TOKEN: ${{ github.token }}
+      OPS: .github/operations/china-full-fresh-v1
+      CHINA_COLLECTOR_RUN: '44457059256'
+      CHINA_COLLECTOR_ATTEMPT: '1'
+      CHINA_COLLECTOR_REVISION: 038574d914de2436cd10871629b1b0a8fe83a92c
+      CHINA_RECEIPT_ARTIFACT: '14500964905'
+      CHINA_RECEIPT_ZIP_SHA256: c0802faab0b9ecc39e6d44b53d66f76c19cac485258f5ed2c80e5c2b59ac8097
+      CHINA_EXPECTED_ARCHIVE_SHA256: b8a2a25dc27390845dd5a423efa323c9472a338b1b97f413ba96aefa7f3b65ca
+      CHINA_EXPECTED_REPORT_DIGEST: 894bb1eb1b37042de7ce611e19d8e33bfd58c01546d2a812f2c87f96cd906caf
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+          path: orchestrator
+          persist-credentials: false
+          fetch-depth: 0
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: 5a254a3dce9993fca726471866eee614ddebfd0a
+          path: candidate
+          persist-credentials: false
+          fetch-depth: 2
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: bb6317bffd1f7b1832681ac78378fe6c3e39e3b5
+          path: publisher
+          persist-credentials: false
+          sparse-checkout: |
+            scripts/lib
+            scripts/publisher-runtime83
+            apps/web/lib
+            packages/engine/src
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: 83ff17075e9188dcf227c8752dc064248d5f42e0
+          path: installed-models
+          persist-credentials: false
+          sparse-checkout: data/catalog/vehicle-knowledge
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 24.22.1
+      - name: Verify exact actor, review pins and private launch
+        working-directory: orchestrator
+        shell: bash
+        run: |
+          set -euo pipefail
+          umask 077
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          test "$(git -C ../candidate rev-parse HEAD)" = 5a254a3dce9993fca726471866eee614ddebfd0a
+          test "$(git -C ../publisher rev-parse HEAD)" = bb6317bffd1f7b1832681ac78378fe6c3e39e3b5
+          test "$(git -C ../installed-models rev-parse HEAD)" = 83ff17075e9188dcf227c8752dc064248d5f42e0
+          test "$(git show "$GITHUB_SHA:$OPS/ARMED_SHA256" | wc -c)" -eq 65
+          approved="$(git show "$GITHUB_SHA:$OPS/ARMED_SHA256")"
+          [[ "$approved" =~ ^[a-f0-9]{64}$ ]]
+          install -d -m 0700 "$RUNNER_TEMP/china-job"
+          GITHUB_TOKEN="$GH_TOKEN" node "$OPS/compose-split-launch-contract.mjs" \
+            --approved "$PWD/$OPS/approved.json" --expect-approved-sha "$approved" \
+            --out "$RUNNER_TEMP/china-job/launch.json" --candidate-root "$GITHUB_WORKSPACE/candidate"
+          test "$(git show "$GITHUB_SHA:$OPS/approved.json" | sha256sum | cut -d ' ' -f 1)" = "$approved"
+          actual_calc="$(node ../candidate/scripts/catalog-calculation-version.mjs "$GITHUB_WORKSPACE/candidate")"
+          approved_calc="$(node -p 'require(process.argv[1]).calculationVersion' "$RUNNER_TEMP/china-job/launch.json")"
+          test "$actual_calc" = "$approved_calc"
+      - name: Install exact locked candidate dependencies before exposing storage credentials
+        working-directory: candidate
+        shell: bash
+        run: |
+          set -euo pipefail
+          env -u GH_TOKEN npm ci --ignore-scripts --no-audit --no-fund
+          git diff --exit-code
+      - name: Authenticate the existing exact collector receipt only
+        working-directory: orchestrator
+        shell: bash
+        run: |
+          set -euo pipefail
+          umask 077
+          root="$RUNNER_TEMP/china-job"
+          (ulimit -f 1024; timeout 40s gh api "repos/jeep-jim/AvtoCena/actions/runs/$CHINA_COLLECTOR_RUN" > "$root/producer-run.json")
+          (ulimit -f 1024; timeout 40s gh api "repos/jeep-jim/AvtoCena/actions/artifacts/$CHINA_RECEIPT_ARTIFACT" > "$root/producer-artifact.json")
+          (ulimit -f 32; timeout 40s gh api "repos/jeep-jim/AvtoCena/actions/artifacts/$CHINA_RECEIPT_ARTIFACT/zip" > "$root/producer-receipt.zip")
+          python "$OPS/verify-collector-receipt.py"
+          test "$(sha256sum "$root/producer-receipt.json" | cut -d ' ' -f1)" = 174893f63c5870628a3df1ab3a5241fe49847f01fa579a84d80a369383c3c49a
+      - name: Bounded private preflight, restore, price once and verify durable China stage
+        working-directory: candidate
+        shell: bash
+        env:
+          REG_ACCESS: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          REG_SECRET: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+        run: |
+          set -euo pipefail
+          umask 077
+          root="$RUNNER_TEMP/china-job"
+          mnt="$root/scratch"
+          image="$root/private-scratch.img"
+          cred="$root/regcloud.json"
+          processenv="$root/run.env"
+          unit="china-capsule-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          node_bin="$(command -v node)"
+          test "$(stat -f -c '%T' /sys/fs/cgroup)" = cgroup2fs
+          test ! -e "$image" && test ! -e "$cred" && test ! -e "$mnt" && test ! -e "$processenv"
+          mkdir -m 0700 "$mnt"
+          cleanup() {
+            status=$?
+            sudo -n systemctl stop "$unit.service" >/dev/null 2>&1 || true
+            rm -f -- "$cred" "$processenv"
+            if mountpoint -q "$mnt"; then
+              sudo -n umount "$mnt" || { echo 'isolated_scratch_cleanup_unverified' >&2; return 1; }
+            fi
+            rm -f -- "$image"
+            return "$status"
+          }
+          trap cleanup EXIT
+          seconds="$(python - <<'PY'
+          import os,time
+          from datetime import datetime
+          f=os.statvfs(os.environ['RUNNER_TEMP'])
+          assert f.f_bavail*f.f_frsize>=48*1024**3,'actual_job_starting_free_space'
+          remain=int(datetime.fromisoformat('2026-11-21T05:02:36.435+00:00').timestamp()-time.time())
+          assert remain>0,'actual_source_expired'
+          print(min(10800,remain))
+          PY
+          )"
+          truncate -s $((24*1024*1024*1024)) "$image"
+          mkfs.ext4 -q -F -m 0 -E nodiscard,lazy_itable_init=1,lazy_journal_init=1 "$image"
+          sudo -n mount -t ext4 -o loop,nodev,nosuid,noexec "$image" "$mnt"
+          sudo -n chown "$(id -u):$(id -g)" "$mnt"
+          chmod 0700 "$mnt"
+          python - "$cred" "$processenv" <<'PY'
+          import json,os,re,sys
+          key,secret=os.environ.pop('REG_ACCESS'),os.environ.pop('REG_SECRET')
+          assert key and secret,'existing_regcloud_stage_credentials_missing'
+          with open(sys.argv[1],'x') as f: json.dump({'access':key,'secret':secret},f)
+          keys='GITHUB_SHA GITHUB_REPOSITORY GITHUB_REPOSITORY_ID GITHUB_REF GITHUB_WORKFLOW_REF GITHUB_JOB GITHUB_RUN_ID GITHUB_RUN_ATTEMPT'.split()
+          data={k:os.environ[k] for k in keys};data['GITHUB_TOKEN']=os.environ['GH_TOKEN']
+          with open(sys.argv[2],'x') as f:
+           for k,v in data.items():
+            assert re.fullmatch(r'[A-Za-z0-9_./@-]+',v),'job_env_shape'
+            f.write(k+'='+v+'\n')
+          PY
+          unset REG_ACCESS REG_SECRET GH_TOKEN
+          pin="$(sha256sum "$root/launch.json" | cut -d ' ' -f1)"
+          sudo -n systemd-run --unit="$unit" --wait --collect --pipe --quiet --uid="$(id -u)" --gid="$(id -g)" \
+            --working-directory="$PWD" --setenv="TMPDIR=$mnt" --setenv="HOME=$mnt" \
+            --property="EnvironmentFile=$processenv" --property=MemoryMax=6442450944 --property=MemorySwapMax=0 \
+            --property=OOMPolicy=stop --property="RuntimeMaxSec=$seconds" --property=TimeoutStopSec=30 --property=KillMode=control-group \
+            --property=ProtectSystem=strict --property="ReadWritePaths=$mnt" --property=NoNewPrivileges=yes \
+            "$node_bin" --max-old-space-size=4096 --import tsx "$PWD/scripts/catalog-china-full-fresh-one-shot.mjs" \
+            --launch "$root/launch.json" --expect-launch-sha "$pin" \
+            --guard-bundle "$GITHUB_WORKSPACE/orchestrator/$OPS/guard" --native-root "$GITHUB_WORKSPACE/publisher" --receipt "$root/producer-receipt.json" \
+            --source-secrets "$cred" --stage-secrets "$cred" --scratch "$mnt" \
+            --runtime-context "$mnt/avtocena-china-context-own-run" --runtime-context-plan "$root/runtime-context-plan.json" \
+            --runtime-context-release-root "$GITHUB_WORKSPACE/installed-models"
