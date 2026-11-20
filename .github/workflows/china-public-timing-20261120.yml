@@ -1,0 +1,29 @@
+name: Observe exact China public timing
+on:
+  push:
+    branches: [main]
+    paths: [.github/market-runs/china-public-timing-20261120.sha256]
+permissions:
+  contents: read
+jobs:
+  public_timing:
+    if: github.repository == 'jeep-jim/AvtoCena' && github.repository_id == '1289722938' && github.ref == 'refs/heads/main' && github.run_attempt == '1' && github.event.head_commit.message == 'Measure exact China public storefront timing without changes'
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - name: Verify reviewed source and take one bounded public sample
+        shell: bash
+        run: |
+          set -euo pipefail
+          umask 077
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          readonly probe=.github/operations/china-public-timing-20261120/probe.py
+          readonly marker=.github/market-runs/china-public-timing-20261120.sha256
+          readonly pin=1e3dafe2e09fbc83237fad16beed282e1395737cf19c3dfaa61dbfa192ed949f
+          cmp -s "$marker" <(printf '%s\n' "$pin")
+          printf '%s  %s\n' "$pin" "$probe" | sha256sum --check --status
+          /usr/bin/python3 -I -B "$probe"
