@@ -17,11 +17,38 @@ if(proofRepo===repo){
 const root=await fs.realpath(repo);
 const require=createRequire(path.join(root,'package.json'));
 const {build,version}=require('esbuild');
+const h=b=>createHash('sha256').update(b).digest('hex');
+// Embed the precise Next production React cache provider the sidecar had
+// used, not the Next module tree. Standalone output tracing may omit the
+// require target. Preserve the official module's license and CJS semantics
+// and leave the runtime's own cache untouched if it already has one.
+const lock=JSON.parse(await fs.readFile(path.join(root,'package-lock.json'),'utf8'));
+const PINNED_NEXT='15.5.28';
+const PINNED_NEXT_INTEGRITY='sha512-JjhLBBY1PNnuwPtcZ7t8yxVeJVYvD2Jyp633J+gRCNbzSt7N0E+xqCf6uQiff3+3qmUkwcF/ksfSsK1xsZ76Tw==';
+const REACT_CACHE_FALLBACK_SHA='125bcbc3a09182b916dce9d7e0d4b1b569f8e994f4bb98ae0d54855f9b74bfb7';
+const lockedNext=lock.packages['node_modules/next'];
+assert.equal(lockedNext.version,PINNED_NEXT);
+assert.equal(lockedNext.integrity,PINNED_NEXT_INTEGRITY);
+assert.equal(require('next/package.json').version,PINNED_NEXT);
+assert.equal(require('react/package.json').version,lock.packages['node_modules/react'].version);
+const reactFallback=await fs.readFile(require.resolve('next/dist/compiled/react/cjs/react.production.js'));
+assert.equal(h(reactFallback),REACT_CACHE_FALLBACK_SHA,'exact locked Next production React provider');
 const entry=await fs.readFile(new URL('./private-preview-entry.ts',import.meta.url),'utf8');
 const built=await build({absWorkingDir:root,stdin:{contents:entry,resolveDir:root,sourcefile:'operator-private-preview.ts',loader:'ts'},
  tsconfig:path.join(root,'apps/web/tsconfig.json'),packages:'external',platform:'node',
  format:'cjs',target:'node24',bundle:true,write:false,metafile:true,legalComments:'none',
- banner:{js:"try { const r=require('react'); if (typeof r.cache!=='function') r.cache=require('next/dist/compiled/react').cache; if(typeof r.cache!=='function') throw Error('exact_next_react_cache_unavailable');"},
+ banner:{js:`try {
+  const r=require('react');
+  if (typeof r.cache!=='function') {
+   const m={exports:{}};
+   (function(module,exports){
+${reactFallback.toString('utf8')}
+   })(m,m.exports);
+   if (typeof m.exports.cache!=='function') throw Error('exact_next_react_cache_unavailable');
+   r.cache=m.exports.cache;
+  }
+  if (typeof r.cache!=='function') throw Error('exact_next_react_cache_unavailable');
+ `},
  footer:{js:String.raw` } catch(e) {
   if(require.main!==module)throw e;
   const msg=e instanceof Error?e.message:'',code=e&&e.code;
@@ -47,9 +74,10 @@ for(const rel of new Set(inputPaths)){
  assert.equal(await fs.realpath(file),file,rel);
  assert.equal(git('hash-object','--',file).trim(),git('rev-parse',sha+':'+rel).trim(),rel);
 }
-const bytes=built.outputFiles[0].contents;
+const bytes=Buffer.from(built.outputFiles[0].contents);
 assert.ok(bytes.length<8*1024*1024);
-const h=b=>createHash('sha256').update(b).digest('hex');
+assert.ok(!bytes.includes("require('next/dist/compiled/react")&&!bytes.includes('require("next/dist/compiled/react'),'no runtime resolution of omitted Next React');
+assert.ok(bytes.includes(reactFallback),'exact official cache provider remains byte-identical');
 await fs.writeFile(out,bytes,{flag:'wx',mode:0o400});
 console.log(JSON.stringify({kind:'private-china-source-bundle-built',appSha:sha,bytes:bytes.length,
- toolVersion:version,bundleSha256:h(bytes),operatorSourceSha256:h(entry),inputFiles:Object.keys(built.metafile.inputs).length}));
+ toolVersion:version,bundleSha256:h(bytes),operatorSourceSha256:h(entry),embeddedReactCacheSha256:REACT_CACHE_FALLBACK_SHA,nextVersion:PINNED_NEXT,inputFiles:Object.keys(built.metafile.inputs).length}));

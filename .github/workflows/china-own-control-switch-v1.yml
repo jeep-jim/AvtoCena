@@ -42,7 +42,7 @@ jobs:
           umask 077
           root="$GITHUB_WORKSPACE"
           ops="$root/.github/operations/china-dark-actor-v1"
-          test "$(sha256sum "$ops/APPROVED_CODE.sha256" | cut -d ' ' -f 1)" = 63a202ac76ef951e5a31bd4cf4c9f87caf6d995ff07146d1ee836eeaaf25a7d7
+          test "$(sha256sum "$ops/APPROVED_CODE.sha256" | cut -d ' ' -f 1)" = 0a90c63638a472d3ae1810e266733df031ce20ba5116aba889f9bfad65057f0a
           (cd "$ops"; sha256sum --strict --check --status APPROVED_CODE.sha256)
           [[ "$(git -C writer rev-parse HEAD)" == f4dc98aaab916b29419d173994d66562aa5901f1 ]]
           [[ "$(git -C reader rev-parse HEAD)" == 85296f6b8797aaa93227b69da7e9e9e928e8f9b5 ]]
@@ -58,6 +58,7 @@ jobs:
           p=pathlib.Path(sys.argv[1]);a=json.loads((p/'actor-build.json').read_text());r=json.loads((p/'preview-build.json').read_text())
           assert a['base']=='f4dc98aaab916b29419d173994d66562aa5901f1' and a['externalModules']=='node-builtins-only'
           assert r['appSha']=='85296f6b8797aaa93227b69da7e9e9e928e8f9b5'
+          assert r["nextVersion"]=="15.5.28" and r["embeddedReactCacheSha256"]=="125bcbc3a09182b916dce9d7e0d4b1b569f8e994f4bb98ae0d54855f9b74bfb7"
           assert hashlib.sha256((p/'china-dark-control-switch.mjs').read_bytes()).hexdigest()==a['sha256']
           assert hashlib.sha256((p/'preview.cjs').read_bytes()).hexdigest()==r['bundleSha256']
           print(json.dumps({'operatorSourcesVerified':True,'actorProjectInputs':a['projectInputs'],'previewProjectInputs':r['inputFiles']}))
@@ -86,7 +87,7 @@ jobs:
           mode=activate
           if [[ "$CHINA_VERIFY_ONLY" == true ]]; then mode=verify-only; fi
           test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
-          test "$(sha256sum "$ops/APPROVED_CODE.sha256" | cut -d ' ' -f 1)" = 63a202ac76ef951e5a31bd4cf4c9f87caf6d995ff07146d1ee836eeaaf25a7d7
+          test "$(sha256sum "$ops/APPROVED_CODE.sha256" | cut -d ' ' -f 1)" = 0a90c63638a472d3ae1810e266733df031ce20ba5116aba889f9bfad65057f0a
           (cd "$ops"; sha256sum --strict --check --status APPROVED_CODE.sha256)
           scratch="$(mktemp -d "$RUNNER_TEMP/china-dark-switch.XXXXXXXX")"
           trap 'rm -rf -- "$scratch"' EXIT
