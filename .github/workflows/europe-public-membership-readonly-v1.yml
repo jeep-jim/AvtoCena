@@ -1,0 +1,79 @@
+name: Verify compact public Europe membership without offer chunk reads
+'on':
+  push:
+    branches: [main]
+    paths: [.github/market-runs/europe-public-membership-readonly-v1.json]
+permissions:
+  contents: read
+concurrency:
+  group: europe-public-membership-readonly-v1
+  cancel-in-progress: false
+jobs:
+  inspect:
+    if: >-
+      github.repository == 'jeep-jim/AvtoCena' &&
+      github.repository_id == '1289722938' &&
+      github.ref == 'refs/heads/main' &&
+      github.run_attempt == '1' &&
+      !github.event.deleted &&
+      github.event.head_commit.message == 'Verify pinned Europe public source membership read-only'
+    environment: regcloud-staging
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 2
+          persist-credentials: false
+      - name: Check exact marker-only commit and frozen reader before secrets
+        env:
+          EVENT_BEFORE: ${{ github.event.before }}
+          EVENT_SHA: ${{ github.sha }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import hashlib,json,os,pathlib,re,subprocess
+          root='scripts/europe-public-membership-readonly-v1/'
+          workflow='.github/workflows/europe-public-membership-readonly-v1.yml'
+          marker='.github/market-runs/europe-public-membership-readonly-v1.json'
+          expected={
+            'native-catalog-projection-parts-22867.ts':'639467183320cee484129ae36253d48d7b29db862670e747564ac3ef5d380391',
+            'public-reverse-membership.mjs':'c7301ffe1545b73de608ea1b7ef383276fe04059c23266fee199df084b5171b4',
+            'signed-read-projection.mjs':'aeab94b160d52cc1ff31f7f54a21512d16989c49776122bf0afb789d388cf39a',
+          }
+          def git(*args): return subprocess.check_output(['git',*args])
+          def pairs(rows):
+              out={}
+              for name,value in rows:
+                  assert name not in out
+                  out[name]=value
+              return out
+          parent=os.environ['EVENT_BEFORE']; head=os.environ['EVENT_SHA']
+          assert re.fullmatch(r'[a-f0-9]{40}',parent) and re.fullmatch(r'[a-f0-9]{40}',head)
+          assert git('rev-parse','HEAD').decode().strip()==head
+          assert git('rev-list','--parents','-n','1','HEAD').decode().split()==[head,parent]
+          assert git('diff','--name-only',parent,head).decode().splitlines()==[marker]
+          assert git('show',parent+':'+workflow)==pathlib.Path(workflow).read_bytes()
+          for name,digest in expected.items():
+              file=root+name
+              data=pathlib.Path(file).read_bytes()
+              assert git('show',parent+':'+file)==data and hashlib.sha256(data).hexdigest()==digest
+          m=pathlib.Path(marker)
+          assert m.stat().st_size<=8192
+          assert json.loads(m.read_bytes(),object_pairs_hook=pairs)=={
+            'version':1,'operation':'europe_public_reverse_membership_get_only_v1','parent':parent,
+            'stageProofRun':44765774453,'generation':'gen_1794878284419_a611dfcf','readers':expected
+          }
+          PY
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 24
+      - name: Signed bounded Europe projection reads only
+        env:
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          node scripts/europe-public-membership-readonly-v1/signed-read-projection.mjs
