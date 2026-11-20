@@ -10,6 +10,8 @@ import {withCatalogFxBatch,type CatalogFxBatch} from './rates';
 import {fxTariffHorizon,certifiedFxTariffHorizon} from './fx-tariff-horizon';
 import {projectionCanRenderCard,searchProjectionFromOffer,type CatalogManifest} from './storage';
 import {hasModificationSelection} from './modification-contract';
+import {validPreparedChinaEditorialSpecifications} from './china-prepared-editorial.mjs';
+import type {EditorialSpecifications} from './editorial-specifications';
 import type {CatalogMarket,CatalogSearchParams,VehicleOffer} from './types';
 
 const markets=['china','korea','uae','europe','georgia'] as const;
@@ -29,7 +31,7 @@ type Binding={
 };
 export type PreparedPriceCardDescriptor=Binding & {bytes:number;contentSha256:string;projectionSha256:string;tariffValidUntil:number;legalValidUntil?:number};
 type Ledger=Record<string,unknown> & {breakdown:Array<{id:string;amountRub:number}>;customs:{status:string;utilizationPowerKw?:number}};
-type Detail={id:string;totalRub:number;calculationStatus:VehicleOffer['calculationStatus'];ledger:Ledger};
+type Detail={id:string;totalRub:number;calculationStatus:VehicleOffer['calculationStatus'];ledger:Ledger;editorialSpecifications?:EditorialSpecifications};
 type Block={binding:Binding;tariffValidUntil:number;legalValidUntil?:number;projectionSha256:string;index:BudgetCountIndex;details:Detail[]};
 const ledgerKeys=[
  'breakdown','paymentPlan','marketConfig','configVersion','effectiveFrom','currencyRate','eurRate','sourcePriceRub',
@@ -118,7 +120,9 @@ function validatedPreparedPriceDetail(row:VehicleOffer,input:VehicleOffer,fx:Cat
  const {sourceTitle:_sourceTitle,...customsInput}=s.customsInput;
  const ledger=Object.fromEntries(ledgerKeys.filter(key=>s[key]!==undefined)
   .map(key=>[key,key==='customsInput'?customsInput:s[key]])) as Ledger;
- const detail={id:row.id,totalRub:row.totalRub!,calculationStatus:row.calculationStatus,ledger};
+ const editorialSpecifications=binding.market==='china'&&binding.freshSourceValidUntil!==undefined?row.editorialSpecifications:undefined;
+ const detail={id:row.id,totalRub:row.totalRub!,calculationStatus:row.calculationStatus,ledger,
+  ...(editorialSpecifications===undefined?{}:{editorialSpecifications})};
  assertLedger(detail,binding);
  return detail;
 }
@@ -130,6 +134,8 @@ function exactRate(rate:any,fx:CatalogFxBatch,code:string){
 }
 
 function assertLedger(detail:Detail,binding:Binding){
+ if(detail.editorialSpecifications!==undefined&&(binding.market!=='china'||binding.freshSourceValidUntil===undefined||
+    !validPreparedChinaEditorialSpecifications(detail.editorialSpecifications)))return fail('editorial_specifications');
  const ledger=detail?.ledger, lines=ledger?.breakdown;
  const wholesale=lines?.map(line=>line?.id);
  if(!Array.isArray(lines)||lines.length<3||lines.length>128||!wholesale?.includes('car')||

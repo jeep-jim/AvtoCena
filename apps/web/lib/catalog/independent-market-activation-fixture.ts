@@ -288,13 +288,13 @@ function openIndependentMarketBackend<T extends ObjectJsonStorage|StageChinaFile
   const cut=await readCut(active,true);
   if(!cut.preparedChina)return null;
   if(!same(cut.source.cursor,active.cursor))return fail('active_cursor');
-  const inventory=await readPaper(cut,'inventory'),prices=await readPaper(cut,'prices');
+  const inventory=await readPaper(cut,'inventory'),prices=await readPaper(cut,'prices'),search=await readPaper(cut,'search');
   const assertCurrent=async():Promise<void>=>{
    const {value:v}=await readState();
    if(base(v.active)!==base(active)||Date.now()>=(acceptedLegalUntil??Math.min(cut.source.validUntil,cut.pricing.validUntil)))return fail('read_changed');
   };
   await assertCurrent();
-  return {cut,inventory,prices,assertCurrent,acceptedLegalUntil,read:(key:string,sha?:string)=>readChinaPrepared(cut.generationId,key,sha)};
+  return {cut,inventory,prices,search,assertCurrent,acceptedLegalUntil,read:(key:string,sha?:string)=>readChinaPrepared(cut.generationId,key,sha)};
  };
  return {market,observe,acquire,prepare,activate,rollback,release,read,chinaPreparation,openChinaPrepared};
 }
@@ -316,12 +316,10 @@ function openIndependentChinaRuntimeRead(files:StageChinaFiles|ChinaStageObjectF
       scoped.cut.admitted.count!==ready.admittedRows||scoped.cut.pricing.receiptSha256!==ready.pricingReceiptSha256||
       Math.min(scoped.cut.source.validUntil,scoped.cut.pricing.validUntil)!==ready.validUntil||ready.legalValidUntil!==scoped.cut.pricing.legalValidUntil)
     return fail('stage_readiness_binding');
-   const search=await readSide.read('search');
    const marker=(scoped.prices.payload as {manifest?:{markets?:{china?:{preparedChinaPriceReadV1?:{directorySha256?:string}}}}})
     ?.manifest?.markets?.china?.preparedChinaPriceReadV1?.directorySha256;
-   const paper=search.status==='ready'?search.payload as {directorySha256?:string;streamingSelector?:true}:null;
-   if(search.status!=='ready'||search.generationId!==ready.generationId||search.manifestSha256!==ready.manifestSha256||
-      !validSha(marker)||paper?.directorySha256!==marker||paper.streamingSelector!==true)return fail('stage_search_readiness');
+   const paper=scoped.search.payload as {directorySha256?:string;streamingSelector?:true}|null;
+   if(!validSha(marker)||paper?.directorySha256!==marker||paper.streamingSelector!==true)return fail('stage_search_readiness');
    const assertCurrent=async()=>{await scoped.assertCurrent();await assertPointer();};
    await assertCurrent();return {...scoped,assertCurrent};
   },

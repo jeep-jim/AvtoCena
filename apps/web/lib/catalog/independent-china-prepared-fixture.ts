@@ -31,7 +31,7 @@ type PricePaper={
  receiptSha256:string;orderedIdsSha256:string;
 };
 type InventoryPaper={withdrawn:UnavailableOffer[];sourceReceiptSha256:string;previousCursorSha256:string};
-type SearchPaper={directorySha256:string;modelScope:{make:string;model:string};fixedCityScopes?:true;streamingSelector?:true};
+type SearchPaper={directorySha256:string;modelScope:{make:string;model:string};fixedCityScopes?:true;streamingSelector?:true;chinaEditorialSha256?:string};
 type Read=(key:string,sha?:string)=>Promise<Buffer>;
 
 export function independentChinaSourceDigest(capture:Omit<Captured,'expectedReceiptSha256'>){
@@ -65,7 +65,8 @@ export async function verifyIndependentChinaPreparedArtifacts(cut:IndependentCut
  const withdrawn=withdrawnLookup(cut,papers.inventory),manifest=nativeManifest(cut,papers.prices);
  const search=papers.search.payload as SearchPaper;
  if(!search||search.directorySha256!==manifest.markets.china.preparedChinaPriceReadV1?.directorySha256||
-    !search.modelScope?.make||!search.modelScope?.model)return fail('search_scope');
+    !search.modelScope?.make||!search.modelScope?.model||
+    (search.chinaEditorialSha256!==undefined&&!SHA.test(search.chinaEditorialSha256)))return fail('search_scope');
  const snapshot=await openPreparedChinaSnapshot(manifest,read,async()=>{});
  if(snapshot.streamingSelector!==search.streamingSelector)return fail('selector_scope');
  if(snapshot.validUntil!==cut.pricing.validUntil||cut.source.validUntil<snapshot.validUntil)return fail('validity');
@@ -127,7 +128,9 @@ export async function openIndependentChinaPrepared(publication:Pick<IndependentF
  const withdrawn=withdrawnLookup(active.cut,active.inventory);
  const snapshot=await openPreparedChinaSnapshot(nativeManifest(active.cut,active.prices),active.read,active.assertCurrent,active.acceptedLegalUntil);
  if(snapshot.validUntil!==active.cut.pricing.validUntil)return fail('validity');
- return {snapshot,withdrawn,orderedAdmittedIdsSha256:active.cut.admitted.orderedIdsSha256};
+ const {chinaEditorialSha256}=active.search.payload as SearchPaper;
+ if(chinaEditorialSha256!==undefined&&!SHA.test(chinaEditorialSha256))return fail('search_editorial_binding');
+ return {snapshot,withdrawn,orderedAdmittedIdsSha256:active.cut.admitted.orderedIdsSha256,chinaEditorialSha256};
 }
 
 /** Explicit mock fixture only. Caller supplies the native canonical rows and an
@@ -168,7 +171,7 @@ export async function prepareIndependentChinaFixture(input:{
 export async function prepareIndependentChinaCanonicalChunks(input:{
  publication:IndependentFixturePublication;lease:IndependentMarketLease;count:number;
  chunks:()=>AsyncIterable<readonly VehicleOffer[]>;withdrawn:UnavailableOffer[];
- source:Omit<IndependentCut['source'],'complete'>;expectedAdmittedIdsSha256:string;priceReplay?:FreshChinaPriceReplay;
+ source:Omit<IndependentCut['source'],'complete'>;expectedAdmittedIdsSha256:string;priceReplay?:FreshChinaPriceReplay;chinaEditorialSha256?:string;
  expectedBlocks:()=>AsyncIterable<PreparedPriceExpectedBlock>;blockRows:number;
  fx:CatalogFxBatch;pricingFingerprint:string;calculationVersion:string;modelScope:{make:string;model:string};withFixedCities?:true;withStreamingSearch?:true;freshSnapshot?:true;
  backend:Extract<PrivatePriceSealAuthority['backend'],{kind:'mock-s3'}>;
@@ -179,6 +182,7 @@ export async function prepareIndependentChinaCanonicalChunks(input:{
     !Number.isSafeInteger(source.observedAt)||source.observedAt<=0||source.observedAt>Date.now()||
     !Number.isSafeInteger(source.validUntil)||Date.now()>=source.validUntil||
     !SHA.test(source.receiptSha256)||!source.cursor||!Number.isSafeInteger(source.cursor.sequence)||!SHA.test(source.cursor.anchorSha256)||
+    (input.chinaEditorialSha256!==undefined&&(!input.freshSnapshot||!input.priceReplay||!SHA.test(input.chinaEditorialSha256)))||
     !Number.isSafeInteger(input.blockRows)||input.blockRows<1||input.blockRows>128||!SHA.test(input.expectedAdmittedIdsSha256))
   return fail('archive_contract');
  if(io.baseCursor&&(source.cursor.stream!==io.baseCursor.stream||source.cursor.sequence<io.baseCursor.sequence||
@@ -226,7 +230,7 @@ export async function prepareIndependentChinaCanonicalChunks(input:{
   inventory:{withdrawn,sourceReceiptSha256,previousCursorSha256} satisfies InventoryPaper,
   prices:{manifest:built.marked,coverageSha256:digest(report),privateSealSha256:sealed.sha256,
    receiptSha256:pricingReceiptSha256,orderedIdsSha256} satisfies PricePaper,
-  search:{directorySha256:built.marked.markets.china.preparedChinaPriceReadV1!.directorySha256,modelScope:input.modelScope,...(input.withFixedCities?{fixedCityScopes:true as const}:{}),...(input.withStreamingSearch?{streamingSelector:true as const}:{})} satisfies SearchPaper,
+  search:{directorySha256:built.marked.markets.china.preparedChinaPriceReadV1!.directorySha256,modelScope:input.modelScope,...(input.chinaEditorialSha256===undefined?{}:{chinaEditorialSha256:input.chinaEditorialSha256}),...(input.withFixedCities?{fixedCityScopes:true as const}:{}),...(input.withStreamingSearch?{streamingSelector:true as const}:{})} satisfies SearchPaper,
  };
  const paper=(role:keyof typeof payloads):IndependentMarketPaper=>({version:1,role,market:'china',generationId,
   sourceReceiptSha256,pricingReceiptSha256,orderedIdsSha256,count,payload:payloads[role]});

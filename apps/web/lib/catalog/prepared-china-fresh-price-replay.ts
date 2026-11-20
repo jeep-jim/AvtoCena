@@ -4,6 +4,8 @@ import {createHash} from 'node:crypto';
 import {createRequire} from 'node:module';
 import {applyActiveBusinessPriceBatch} from './live-business-pricing';
 import {calculateOfferWithVerifiedSpecifications} from './customs-pricing';
+import {readCatalogEditorialFresh} from './editorial';
+import {chinaPreparedEditorialOffer,preparedChinaEditorialEvidence} from './china-prepared-editorial.mjs';
 import {specificationEvidenceComplete} from './modification-matching';
 import {enrichOfferWithSourceTableDisplacement} from './source-table-displacement';
 import {withCatalogFxBatch,type CatalogFxBatch} from './rates';
@@ -97,6 +99,7 @@ export async function openFreshChinaPriceReplay(input:{
     typeof input.assertSourceAuthority!=='function')return fail('scope');
  const sourceBinding=Object.freeze({...input.source});
  await input.assertSourceAuthority();
+ const editorial=sourceBinding.sourceBinding?preparedChinaEditorialEvidence(await readCatalogEditorialFresh()):undefined;
  await fs.mkdir(directory,{mode:0o700});
  const {DatabaseSync}=createRequire(import.meta.url)('node:sqlite');
  const filename=path.join(directory,'priced.sqlite'),db=new DatabaseSync(filename);
@@ -144,8 +147,11 @@ export async function openFreshChinaPriceReplay(input:{
      // The fresh collector never calculates prices. Strip any out-of-contract
      // stored price from this pathway rather than importing an earlier ledger.
      const sourceExact=sourceBinding.sourceBinding?exactChe168SourceParameters(row):null;
-     const unpriced=sourceBinding.sourceBinding?{...row,totalRub:null,calculationSnapshot:undefined}:row;
-     ready.push({row:unpriced,d,i,sourceExact:sourceExact?{...sourceExact,totalRub:null,calculationSnapshot:undefined}:null});
+     const adjusted=editorial?chinaPreparedEditorialOffer(row,editorial):{row};
+     if(!adjusted.row){outputs[i]=reject(d,adjusted.reason??'editorial_conflict');continue;}
+     const unpriced=sourceBinding.sourceBinding?{...adjusted.row,totalRub:null,calculationSnapshot:undefined}:row;
+     const exact=sourceExact&&editorial?chinaPreparedEditorialOffer(sourceExact,editorial).row:sourceExact;
+     ready.push({row:unpriced,d,i,sourceExact:exact?{...exact,totalRub:null,calculationSnapshot:undefined}:null});
     }
     const update=db.prepare('UPDATE eval SET pricedSha=?,price=?,native=? WHERE id=?');
     for(let start=0;start<ready.length;start+=64){
@@ -282,7 +288,8 @@ export async function openFreshChinaPriceReplay(input:{
     const {prepareIndependentChinaCanonicalChunks}=await import('./independent-china-prepared-fixture');
     const {selection:_selection,...stage}=inputStage;
     return await prepareIndependentChinaCanonicalChunks({...stage,count:ordinal,chunks,expectedBlocks,fx,pricingFingerprint,calculationVersion,
-      expectedAdmittedIdsSha256:selection.orderedAdmittedIdsSha256,priceReplay:token});
+      expectedAdmittedIdsSha256:selection.orderedAdmittedIdsSha256,priceReplay:token,
+      ...(editorial?{chinaEditorialSha256:editorial.sha256}:{})});
    }catch(error){try{db.exec('ROLLBACK');}catch{}throw error;}
    finally{busy=false;}
   },

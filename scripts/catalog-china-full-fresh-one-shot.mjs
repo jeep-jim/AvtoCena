@@ -93,7 +93,7 @@ export async function runChinaFullFreshOneShot(argv=process.argv.slice(2),env=pr
  if(plan.expectedAppHeadSha!==undefined){
   // Main owns the GitHub job, not the prepared app checkout. The split
   // composer authenticates both real roots; never impersonate the main SHA.
-  const appParent='5a254a3dce9993fca726471866eee614ddebfd0a';
+  const appParent='40e86a1bd28ca5759ac00cd09f665a45f66afb0a';
   requireValue(/^[a-f0-9]{40}$/.test(plan.expectedAppHeadSha)&&plan.expectedAppHeadSha!==env.GITHUB_SHA&&
    plan.authorizedHeadSha===env.GITHUB_SHA&&SHA.test(plan.composedFromPolicySha256??''),'split_app_authority');
   const git=async ref=>(await exec('git',['rev-parse',ref],{cwd:root,maxBuffer:4096})).stdout.trim();
@@ -114,7 +114,7 @@ export async function runChinaFullFreshOneShot(argv=process.argv.slice(2),env=pr
  await verifyFiles(root,plan.runtimeCodeFiles,[
   'apps/web/lib/catalog/prepared-china-fresh-price-replay.ts','apps/web/lib/catalog/china-durable-object-stage.ts','scripts/lib/china-shadow-disk.mjs',
   'apps/web/lib/catalog/independent-china-prepared-fixture.ts','apps/web/lib/catalog/prepared-price-card-block.ts',
-  'apps/web/lib/data.ts','apps/web/lib/catalog/china-private-stage-privacy.ts',
+  'apps/web/lib/data.ts','apps/web/lib/catalog/china-private-stage-privacy.ts','apps/web/lib/catalog/china-prepared-editorial.mjs',
  ]);
  // The workflow's authenticated launch composer already verified the active
  // run/job with the GitHub API. Probe only the exact approved stage bucket
@@ -298,6 +298,6 @@ export async function runChinaFullFreshOneShot(argv=process.argv.slice(2),env=pr
 }
 if(process.argv[1]&&import.meta.url===pathToFileURL(path.resolve(process.argv[1])).href){
  try{await runChinaFullFreshOneShot();}
- catch(error){console.error(JSON.stringify({status:'not_ready',reason:/^(?:china_full_fresh_one_job|china_private_stage_privacy):[a-zA-Z0-9_-]+(?::[0-9]{3})?$/.test(error?.message)?error.message:
+ catch(error){console.error(JSON.stringify({status:'not_ready',reason:/^(?:china_full_fresh_one_job|china_private_stage_privacy|china_runtime_context):[a-zA-Z0-9_-]+(?::[0-9]{3})?$/.test(error?.message)?error.message:
   'guard_or_native_refused',publicationAuthorized:false,cursorAdvanceAuthorized:false}));process.exitCode=1;}
 }

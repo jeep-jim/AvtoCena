@@ -8,6 +8,7 @@ import {promisify} from 'node:util';
 import {execFile} from 'node:child_process';
 import {createHash,createHmac} from 'node:crypto';
 import {gunzipSync} from 'node:zlib';
+import {preparedChinaEditorialEvidence} from '../apps/web/lib/catalog/china-prepared-editorial.mjs';
 const origin='https://s3.regru.cloud',physical='/avtocena-staging-8120751/migration-staging/full-20261011/',region='us-east-1';
 const SHA=/^[a-f0-9]{64}$/,REL=/^[a-f0-9]{40}$/,MiB=1024**2,MAX_INDEX=256*MiB;
 const fixed=Object.freeze({'markets/markets.json':2*MiB,'fees/exchange-rates.json':2*MiB,
@@ -67,8 +68,7 @@ function validateDynamic(key,value){
    ['cbr','cbr_live'].includes(row.rateSource)&&Number(row.cbrRate)>0&&Number(row.nominal)>0&&
    /^\d{4}-\d{2}-\d{2}$/.test(row.rateDate??''))),'official_rate_table_missing');
  }else if(key==='catalog-editorial/current.json'){
-  need(value?.entries&&typeof value.entries==='object'&&!Array.isArray(value.entries)&&
-   Object.values(value.entries).every(x=>x&&x.market!=='china'),'china_editorial_needs_explicit_support');
+  try{preparedChinaEditorialEvidence(value);}catch{need(false,'china_editorial_identity_or_schema');}
  }else if(key==='catalog/china-cny-prices/current.json'){
   need(value?.version===1&&value.entries&&typeof value.entries==='object'&&!Array.isArray(value.entries),'china_anchor_shape');
  }

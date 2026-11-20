@@ -1,6 +1,7 @@
 import {AsyncLocalStorage} from 'node:async_hooks';
 import {ObjectJsonStorage} from '../data';
 import {readCatalogEditorialFresh,withCatalogEditorialSnapshot} from './editorial';
+import {preparedChinaEditorialEvidence} from './china-prepared-editorial.mjs';
 import {openActivePreparedChinaFixture} from './prepared-china-fixture-activation';
 import {catalogOfferVisibleRub} from './public-priority';
 import {compilePreparedChinaModelScope,compilePreparedChinaCompatibilityPredicate,preparedChinaModelPublicItem,projectionCanRenderCard,catalogSearchProjectionMatches,selectPreparedChinaCompatibilityRows,orderPreparedChinaCompatibilityRows,facetsForPreparedChinaCompatibilityRows,type CatalogSearchProjection} from './storage';
@@ -82,7 +83,9 @@ async function open(){
   // silently reuse pre-edit amounts or recalculate as part of the fixture.
   if(!('files' in f)){
    const editorial=await readCatalogEditorialFresh();
-   if(Object.values(editorial.entries).some(entry=>entry.market==='china'))throw new PreparedChinaFixtureUnavailable();
+   if(scoped?.chinaEditorialSha256!==undefined
+     ?preparedChinaEditorialEvidence(editorial).sha256!==scoped.chinaEditorialSha256
+     :Object.values(editorial.entries).some(entry=>entry.market==='china'))throw new PreparedChinaFixtureUnavailable();
   }
   assertFixture(f);
   await snapshot.assertCurrent();
@@ -312,7 +315,11 @@ export async function readPreparedChinaFixtureOffer(id:string,city?:string,clien
     const block=await part.loadBlock(),detail=block.details[i],native=(await part.loadNativePart())[i];
     if(!native||native.id!==id||native.market!=='china'||detail.id!==id)throw new PreparedChinaFixtureUnavailable();
     const snapshot={...detail.ledger,missing:[]} as unknown as VehicleOffer['calculationSnapshot'];
-    offer={...native,calculationSnapshot:snapshot,totalRub:detail.totalRub,calculationStatus:detail.calculationStatus};
+    const specs=detail.editorialSpecifications;
+    if(specs&&Object.entries(specs).some(([key,value])=>projected[key as keyof typeof projected]!==value))
+     throw new PreparedChinaFixtureUnavailable();
+    offer={...native,...specs,...(specs?{editorialSpecifications:specs}:{}),
+     calculationSnapshot:snapshot,totalRub:detail.totalRub,calculationStatus:detail.calculationStatus};
     if(catalogOfferVisibleRub(offer)!==detail.totalRub)throw new PreparedChinaFixtureUnavailable();
     if(city){
      if(s.snapshot.deliveryTariffVersion!==DELIVERY_TARIFF_VERSION)throw new PreparedChinaFixtureUnavailable();
