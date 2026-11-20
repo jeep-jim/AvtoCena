@@ -1,0 +1,147 @@
+name: Check exact China daily prerequisites without changes
+on:
+  push:
+    branches: [main]
+    paths: [.github/market-runs/china-daily-early-checkpoint-v1.sha256]
+permissions:
+  contents: read
+jobs:
+  read:
+    if: github.repository == 'jeep-jim/AvtoCena' && github.repository_id == '1289722938' && github.run_attempt == '1' && github.event.head_commit.message == 'Check exact China daily prerequisites without changes'
+    environment: regcloud-staging
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 3
+          persist-credentials: false
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: 22867cbcfaee27b2e8917b6bf880e44827f67b60
+          path: actor
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 24.22.1
+      - name: Check exact authorized source and install locked dependencies before credentials
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          python3 - <<'PY2'
+          import json, os, subprocess
+          with open(os.environ['GITHUB_EVENT_PATH']) as f:
+              event = json.load(f)
+          commits = event.get('commits') or []
+          head = event.get('head_commit') or {}
+          assert event.get('ref') == 'refs/heads/main' and event.get('forced') is False and event.get('deleted') is False
+          assert len(commits) == 1 and head.get('id') == commits[0].get('id') == os.environ['GITHUB_SHA']
+          parent = subprocess.check_output(['git', 'rev-parse', 'HEAD^'], text=True).strip()
+          assert event.get('before') == parent
+          PY2
+          test "$(git rev-parse HEAD^^)" = 5cf6f3e4e79c5d72c1d1062bb16bfc3832628eda
+          test "$(git show -s --format=%P HEAD^ | wc -w)" = 1
+          cmp -s <(git diff-tree --no-commit-id -r --name-status --no-renames -z HEAD^^ HEAD^) <(printf 'A\0%s\0' .github/workflows/china-daily-early-checkpoint-v1.yml)
+          test "$(git -C actor rev-parse HEAD)" = 22867cbcfaee27b2e8917b6bf880e44827f67b60
+          pin=f58505328e60d49df97394f66880636c88d4546fffe7c9926d9c17d2c7bfd53c
+          test "$(git show -s --format=%P HEAD | wc -w)" = 1
+          cmp -s <(git diff-tree --no-commit-id -r --name-status --no-renames -z HEAD^ HEAD) <(printf 'A\0%s\0' .github/market-runs/china-daily-early-checkpoint-v1.sha256)
+          cmp -s .github/market-runs/china-daily-early-checkpoint-v1.sha256 <(printf '%s\n' "$pin")
+          base64 --decode > actor/checkpoint-entry.mts <<'CHECKPOINT_BYTES'
+          aW1wb3J0IHtjcmVhdGVIYXNofSBmcm9tICdub2RlOmNyeXB0byc7CmltcG9ydCB7T2JqZWN0SnNv
+          blN0b3JhZ2V9IGZyb20gJy4vYXBwcy93ZWIvbGliL2RhdGEnOwppbXBvcnQge0NISU5BX1BVQkxJ
+          Q19DT05UUk9MLHJlYWRDaGluYVB1YmxpY1N0YXRlLHJlYWRDb25maWd1cmVkUmVnY2xvdWRTY29w
+          ZSxjaGluYUxlZ2FjeVJvbGxiYWNrfSBmcm9tICcuL2FwcHMvd2ViL2xpYi9jYXRhbG9nL2NoaW5h
+          LXJlZ2Nsb3VkLW9iamVjdC1yZWFkZXInOwppbXBvcnQge3ZhbGlkYXRlQ29sbGVjdGlvbkNvbnRy
+          b2xzLENPTExFQ1RJT05fQ09OVFJPTFNfS0VZfSBmcm9tICcuL2FwcHMvd2ViL2xpYi9jYXRhbG9n
+          L2NvbGxlY3Rpb24tY29udHJvbHMnOwppbXBvcnQge2NvbGxlY3Rpb25FbmFibGVkLGRlZmF1bHRD
+          b2xsZWN0aW9uQ29udHJvbHN9IGZyb20gJy4vYXBwcy93ZWIvbGliL2NhdGFsb2cvY29sbGVjdGlv
+          bi1jb250cm9scy1zY2hlbWEnOwpjb25zdCBDVVQ9J2dlbl8xNzk1MTY2NTg2NDU1X2NoaW5hNDQ3
+          MTAwODcxNTknLCBSRUFEWT0nMTA4MGYwNjY0MDk1ZDNlZDc4NGViMTEzNGNmMjBhYjg5YzBmYWNk
+          MzM0ODliODJmNTc1ZWI3ZDI3OWViN2NiNic7CmNvbnN0IENPTlRST0w9JzllM2Y3M2Q2MjgyNDY1
+          MDE5ZjQzZGNkMDM3MGJmOWM3MTY4ODQ0NWEwZTM2MWRjY2Y2NDFiZDQ1YWNjNWJlNjInOwpjb25z
+          dCBLRVlTPXtwb2xpY3k6J2NhdGFsb2cvcmF3LWZlZWQtY29vcmRpbmF0aW9uL3YxL3BvbGljeS5q
+          c29uJyxzdGF0ZTonY2F0YWxvZy9yYXctZmVlZC1jb29yZGluYXRpb24vdjEvc3RhdGUuanNvbics
+          CiByZWFkeTonY2F0YWxvZy9wcml2YXRlLW1hcmtldC1zdGFnZS12MS9jaGluYS9mdWxsLWZyZXNo
+          LTQ0NzEwMDg3MTU5LTEvUkVBRFkuanNvbicsY29udHJvbHM6Q09MTEVDVElPTl9DT05UUk9MU19L
+          RVl9IGFzIGNvbnN0Owpjb25zdCBzY29wZT17ZW5kcG9pbnQ6J2h0dHBzOi8vczMucmVncnUuY2xv
+          dWQnLGJ1Y2tldDonYXZ0b2NlbmEtc3RhZ2luZy04MTIwNzUxJyxyZWdpb246J3VzLWVhc3QtMScs
+          cHJlZml4OidtaWdyYXRpb24tc3RhZ2luZy9mdWxsLTIwMjYxMDExJ307CmNvbnN0IHNoYT0oczpz
+          dHJpbmd8QnVmZmVyKT0+Y3JlYXRlSGFzaCgnc2hhMjU2JykudXBkYXRlKHMpLmRpZ2VzdCgnaGV4
+          Jyk7CmNvbnN0IG5lZWQ9KHY6dW5rbm93bix3aHk6c3RyaW5nKT0+e2lmKCF2KXRocm93IEVycm9y
+          KCdmb3JlbnNpY18nK3doeSl9Owpjb25zdCBqc29uPShiOkJ1ZmZlcik9PkpTT04ucGFyc2UobmV3
+          IFRleHREZWNvZGVyKCd1dGYtOCcse2ZhdGFsOnRydWV9KS5kZWNvZGUoYikpOwpleHBvcnQgZnVu
+          Y3Rpb24gY2xhc3NpZnlDb250cm9scyhiOkJ1ZmZlcnxudWxsKXsKIHRyeXsKICBjb25zdCBjPWI9
+          PT1udWxsP2RlZmF1bHRDb2xsZWN0aW9uQ29udHJvbHMoKTp2YWxpZGF0ZUNvbGxlY3Rpb25Db250
+          cm9scyhqc29uKGIpKTsKICByZXR1cm4ge3N0YXRlOmI9PT1udWxsPydkb2N1bWVudGVkX2RlZmF1
+          bHQnOid2YWxpZGF0ZWQnLGNoZTE2OEVuYWJsZWQ6Y29sbGVjdGlvbkVuYWJsZWQoYywnY2hlMTY4
+          X2ZlZWQnKX07CiB9Y2F0Y2h7cmV0dXJuIHtzdGF0ZTonbWFsZm9ybWVkJyxjaGUxNjhFbmFibGVk
+          Om51bGx9fQp9CmV4cG9ydCBmdW5jdGlvbiBjbGFzc2lmeUNvb3JkaW5hdGlvbihiOkJ1ZmZlcnxu
+          dWxsLGtpbmQ6J3BvbGljeSd8J3N0YXRlJyl7CiBpZihiPT09bnVsbClyZXR1cm4gJ2Fic2VudCc7
+          CiB0cnl7CiAgY29uc3Qgdj1qc29uKGIpOwogIGlmKGtpbmQ9PT0ncG9saWN5JyYmdj8udmVyc2lv
+          bj09PTEmJnYubW9kZT09PSdyZXF1aXJlZCcmJnYucHJvdG9jb2xWZXJzaW9uPT09MSYmL15bYS1m
+          MC05XXszMiw2NH0kLy50ZXN0KHYucmVnaXN0cnlJZCkpcmV0dXJuICdwcmVzZW50X25hdGl2ZSc7
+          CiAgaWYoa2luZD09PSdzdGF0ZScmJnY/LnZlcnNpb249PT0xJiZ2LnNjb3BlPT09J25vbmpwX3Jh
+          d19saWZlY3ljbGVfdjEnJiYvXlthLWYwLTldezMyLDY0fSQvLnRlc3Qodi5yZWdpc3RyeUlkKSly
+          ZXR1cm4gJ3ByZXNlbnRfbmF0aXZlJzsKIH1jYXRjaHt9CiByZXR1cm4gJ3ByZXNlbnRfdW5xdWFs
+          aWZpZWQnOwp9CmFzeW5jIGZ1bmN0aW9uIHJ1bigpewogY29uc3QgYz1yZWFkQ29uZmlndXJlZFJl
+          Z2Nsb3VkU2NvcGUoKTsKIG5lZWQoT2JqZWN0LmVudHJpZXMoc2NvcGUpLmV2ZXJ5KChbayx2XSk9
+          PmNbayBhcyBrZXlvZiB0eXBlb2YgY109PT12KSwnc3RvcmFnZV9zY29wZScpOwogY29uc3Qgb2xk
+          PWdsb2JhbFRoaXMuZmV0Y2gsIHJvb3Q9Jy8nK3Njb3BlLmJ1Y2tldCsnLycrc2NvcGUucHJlZml4
+          KycvJywgYWxsb3dlZD1uZXcgU2V0PHN0cmluZz4oW0NISU5BX1BVQkxJQ19DT05UUk9MLC4uLk9i
+          amVjdC52YWx1ZXMoS0VZUyldKTsKIGNvbnN0IGRlYWRsaW5lPURhdGUubm93KCkrMzVfMDAwO2xl
+          dCBjYWxscz0wOwogZ2xvYmFsVGhpcy5mZXRjaD1hc3luYyhyYXcsaW5pdCk9PnsKICBuZWVkKCh0
+          eXBlb2YgcmF3PT09J3N0cmluZyd8fHJhdyBpbnN0YW5jZW9mIFVSTCkmJmluaXQ/Lm1ldGhvZD09
+          PSdHRVQnJiZpbml0LnJlZGlyZWN0PT09J2Vycm9yJyYmRGF0ZS5ub3coKTxkZWFkbGluZSYmKytj
+          YWxsczw9NiwnbmV0d29ya19zY29wZScpOwogIGNvbnN0IHU9bmV3IFVSTChTdHJpbmcocmF3KSk7
+          CiAgbmVlZCh1Lm9yaWdpbj09PXNjb3BlLmVuZHBvaW50JiYhdS5zZWFyY2gmJiF1Lmhhc2gmJiF1
+          LnVzZXJuYW1lJiYhdS5wYXNzd29yZCYmdS5wYXRobmFtZS5zdGFydHNXaXRoKHJvb3QpJiZhbGxv
+          d2VkLmhhcyhkZWNvZGVVUklDb21wb25lbnQodS5wYXRobmFtZS5zbGljZShyb290Lmxlbmd0aCkp
+          KSwndXJsX3Njb3BlJyk7CiAgcmV0dXJuIG9sZChyYXcsaW5pdCk7CiB9OwogdHJ5ewogIGNvbnN0
+          IHM9bmV3IE9iamVjdEpzb25TdG9yYWdlKCksIGJlZm9yZT1hd2FpdCByZWFkQ2hpbmFQdWJsaWNT
+          dGF0ZShzKTsKICBpZighYmVmb3JlfHxjaGluYUxlZ2FjeVJvbGxiYWNrKGJlZm9yZS5zdGF0ZS5h
+          Y3RpdmUpKXRocm93IEVycm9yKCdmb3JlbnNpY19jb250cm9sX3BpbicpOwogIG5lZWQoISFiZWZv
+          cmUuZXRhZyYmYmVmb3JlLmNoZWNrc3VtPT09Q09OVFJPTCYmYmVmb3JlLnN0YXRlLnJldmlzaW9u
+          PT09NSYmYmVmb3JlLnN0YXRlLmFjdGl2ZS5nZW5lcmF0aW9uSWQ9PT1DVVQmJmJlZm9yZS5zdGF0
+          ZS5hY3RpdmUucmVhZHlTaGEyNTY9PT1SRUFEWSwnY29udHJvbF9waW4nKTsKICBjb25zdCBnZXQ9
+          YXN5bmMoazpzdHJpbmcpPT57CiAgIHRyeXtyZXR1cm4gKGF3YWl0IHMuZ2V0QmluYXJ5Qm91bmRl
+          ZChrLGs9PT1LRVlTLnJlYWR5PzMyKjEwMjQ6MioxMDI0KjEwMjQpKS5kYXRhO30KICAgY2F0Y2go
+          ZSl7aWYoZSBpbnN0YW5jZW9mIEVycm9yJiZlLm1lc3NhZ2U9PT0nb2JqZWN0X3N0b3JhZ2VfYmlu
+          YXJ5X3JlYWRfNDA0JylyZXR1cm4gbnVsbDt0aHJvdyBlO30KICB9OwogIGNvbnN0IFtwb2xpY3ks
+          c3RhdGUscmVhZHksY29udHJvbHNdPWF3YWl0IFByb21pc2UuYWxsKFtnZXQoS0VZUy5wb2xpY3kp
+          LGdldChLRVlTLnN0YXRlKSxnZXQoS0VZUy5yZWFkeSksZ2V0KEtFWVMuY29udHJvbHMpXSk7CiAg
+          Y29uc3QgYWZ0ZXI9YXdhaXQgcmVhZENoaW5hUHVibGljU3RhdGUocyk7CiAgbmVlZChhZnRlcj8u
+          ZXRhZz09PWJlZm9yZS5ldGFnJiZhZnRlci5jaGVja3N1bT09PWJlZm9yZS5jaGVja3N1bSwnY29u
+          dHJvbF9tb3ZlZCcpOwogIGNvbnN0IHBvbGljeVN0YXR1cz1jbGFzc2lmeUNvb3JkaW5hdGlvbihw
+          b2xpY3ksJ3BvbGljeScpLHN0YXRlU3RhdHVzPWNsYXNzaWZ5Q29vcmRpbmF0aW9uKHN0YXRlLCdz
+          dGF0ZScpOwogIGNvbnN0IGV4YWN0UmVhZHk9cmVhZHkhPT1udWxsJiZzaGEocmVhZHkpPT09UkVB
+          RFk7CiAgY29uc3Qgb3duZXJDb250cm9sPWNsYXNzaWZ5Q29udHJvbHMoY29udHJvbHMpOwogIGNv
+          bnNvbGUubG9nKEpTT04uc3RyaW5naWZ5KHtzdGF0dXM6J2NoaW5hX2RhaWx5X2Vhcmx5X2NoZWNr
+          cG9pbnRfb25seScsZ2VuZXJhdGlvbklkOkNVVCxyZXZpc2lvbjo1LAogICBjb29yZGluYXRpb246
+          e3BvbGljeTpwb2xpY3lTdGF0dXMsc3RhdGU6c3RhdGVTdGF0dXMsZGlzYWJsZWRCeUJvdGhBYnNl
+          bnQ6cG9saWN5U3RhdHVzPT09J2Fic2VudCcmJnN0YXRlU3RhdHVzPT09J2Fic2VudCd9LAogICBl
+          eGFjdFJlYWR5LG93bmVyQ29udHJvbCxib2R5UmVhZFNjb3BlOidtYW5pZmVzdGxlc3MnLHNpZ25l
+          ZFN0b3JhZ2VHZXRzOmNhbGxzLHN0b3JhZ2VXcml0ZXM6MCxzdXBwbGllclJlcXVlc3RzOjB9KSk7
+          CiB9ZmluYWxseXtnbG9iYWxUaGlzLmZldGNoPW9sZDt9Cn0KaWYocHJvY2Vzcy5hcmd2LmluY2x1
+          ZGVzKCctLXJlYWQtZXhhY3QtY2hlY2twb2ludCcpKXsKIHRyeXthd2FpdCBydW4oKX1jYXRjaChl
+          KXtjb25zdCBtPWUgaW5zdGFuY2VvZiBFcnJvcj9lLm1lc3NhZ2U6Jyc7Y29uc29sZS5sb2coSlNP
+          Ti5zdHJpbmdpZnkoe3N0YXR1czonaGVsZCcscmVhc29uOi9eZm9yZW5zaWNfW2Etel9dKyQvLnRl
+          c3QobSk/bTonZm9yZW5zaWNfcmVhZF91bnZlcmlmaWVkJ30pKTtwcm9jZXNzLmV4aXRDb2RlPTF9
+          Cn0K
+          CHECKPOINT_BYTES
+          printf '%s  %s\n' "$pin" actor/checkpoint-entry.mts | sha256sum -c --status
+          cd actor && npm ci --ignore-scripts --no-audit --no-fund
+      - name: Read exact policy and owner switch without changes
+        working-directory: actor
+        env:
+          AVTOCENA_CHINA_REGCLOUD_RUNTIME: '1'
+          JSON_STORAGE_DRIVER: object
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_REGION: us-east-1
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+          YC_OBJECT_STORAGE_REQUEST_TIMEOUT_MS: '8000'
+        run: timeout 75s node --import tsx checkpoint-entry.mts --read-exact-checkpoint
