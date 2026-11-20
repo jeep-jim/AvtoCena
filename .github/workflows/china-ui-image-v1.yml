@@ -1,0 +1,88 @@
+name: Build and load China grid image without enabling
+on:
+  push:
+    branches: [main]
+    paths: [.github/market-runs/china-ui-image-v1.sha256]
+permissions:
+  contents: read
+jobs:
+  load:
+    if: github.repository == 'jeep-jim/AvtoCena' && github.repository_id == '1289722938' && github.run_attempt == '1' && github.event.head_commit.message == 'Build reviewed China grid image without enabling'
+    environment: regcloud-staging
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      APP_SHA: 22867cbcfaee27b2e8917b6bf880e44827f67b60
+      DIFF_SHA256: 97704914d2485b3a77b04f8ed2c57f0ed729decd9fd680de6d6cba1025d7cd89
+      LOAD_SHA256: ff88354f7f1f4aa0e60c7ccc9001d08fac1a0924a6c358da35e5eeeadc356656
+      TRANSFER_SHA256: 879b0dc357f32b5ec2456da35077b3bd6e6e9bc167ba2d94624a0b7f4a3a4cc6
+      BUILD_SHA256: 36849c6baf9deed2f8e98ceab22bd659a209bdf08a7bf0d2b9bf7e62607b8672
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - name: Check exact reviewed operator and one-time marker
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          cmp -s .github/market-runs/china-ui-image-v1.sha256 <(printf '%s\n%s\n' "$APP_SHA" "$DIFF_SHA256")
+          p=.github/operations/china-ui-image-v1
+          printf '%s  %s\n' "$LOAD_SHA256" "$p/load-remote.sh" "$TRANSFER_SHA256" "$p/transfer.sh" "$BUILD_SHA256" "$p/build.sh" | sha256sum --check --status
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ env.APP_SHA }}
+          fetch-depth: 0
+          path: candidate
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 24.22.1
+      - name: Test exact reviewed candidate source without secrets
+        working-directory: candidate
+        run: bash "$GITHUB_WORKSPACE/.github/operations/china-ui-image-v1/build.sh"
+      - name: Restore only the incumbent's exact immutable private index
+        working-directory: candidate
+        env:
+          JSON_STORAGE_DRIVER: object
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_REGION: us-east-1
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+          YC_OBJECT_STORAGE_REQUEST_TIMEOUT_MS: '120000'
+          INCUMBENT_RELEASE: '83ff17075e9188dcf227c8752dc064248d5f42e0'
+          EXPECTED_INDEX: 'bf2c72cb7a260ef093c0a43c2b0dad9c4c9094a4d6dc3811dd0d7f7626b0d72b'
+        run: |
+          set -euo pipefail
+          node --import tsx --input-type=module <<'RESTORE'
+          import {getJsonStorage} from './apps/web/lib/data.ts';
+          import {restoreReleaseEncyclopedia} from './scripts/encyclopedia/restore-calculation-index.mjs';
+          const real=getJsonStorage();
+          if(real.driver!=='object')throw Error('object_storage_required');
+          const r=process.env.INCUMBENT_RELEASE;
+          const binding='knowledge/encyclopedia/calculation-releases/'+r+'.json';
+          const index='knowledge/encyclopedia/calculation-indexes/'+process.env.EXPECTED_INDEX+'.json';
+          const readOnly={async readJson(k,fallback){
+            if(k!==binding&&k!==index)throw Error('unexpected_index_get');
+            return real.readJson(k,fallback);
+          }};
+          const digest=await restoreReleaseEncyclopedia(readOnly,process.cwd(),r);
+          if(digest!==process.env.EXPECTED_INDEX)throw Error('incumbent_index_digest_changed');
+          console.log(JSON.stringify({incumbent:r,privateIndexSha256:digest,storageWrites:0}));
+          RESTORE
+      - name: Build exact candidate image on fresh CI runner
+        id: image
+        working-directory: candidate
+        run: |
+          set -euo pipefail
+          docker build --label "org.opencontainers.image.revision=$APP_SHA" -t "avtocena-regcloud:$APP_SHA" .
+          id=$(docker image inspect --format '{{.Id}}' "avtocena-regcloud:$APP_SHA")
+          [[ "$id" =~ ^sha256:[a-f0-9]{64}$ ]]
+          echo "id=$id" >> "$GITHUB_OUTPUT"
+      - name: Load image only; no app process or ingress change
+        env:
+          IMAGE_ID: ${{ steps.image.outputs.id }}
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+        run: bash .github/operations/china-ui-image-v1/transfer.sh
