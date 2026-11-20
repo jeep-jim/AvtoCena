@@ -1,0 +1,35 @@
+name: Check nighttime theme candidate capacity without changes
+on:
+  push:
+    branches: [main]
+    paths: [.github/market-runs/avtocena-theme-capacity-readonly-v2.sha256]
+permissions:
+  contents: read
+jobs:
+  read:
+    if: github.repository == 'jeep-jim/AvtoCena' && github.repository_id == '1289722938' && github.ref == 'refs/heads/main' && github.run_attempt == '1' && github.event.head_commit.message == 'Check exact AvtoCena theme deployment capacity overnight without changes'
+    environment: regcloud-staging
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 2
+          persist-credentials: false
+      - name: Verify exact single-added trigger and preflight bytes
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          test "$(git show -s --format=%P HEAD | wc -w)" = 1
+          readonly marker=.github/market-runs/avtocena-theme-capacity-readonly-v2.sha256
+          readonly op=.github/operations/avtocena-theme-capacity-readonly-v1
+          readonly actor=88f0201e1cf29e9efaafee1b9795da98d8c406e71ce97e769f663a944f794194 wrapper=ad57ee5c9355cdb74075b5706c55c0a1992de4f1638c0b909720da41c29a59c0
+          cmp -s <(git diff-tree --no-commit-id -r --name-status --no-renames -z HEAD^ HEAD) <(printf 'A\0%s\0' "$marker")
+          cmp -s "$marker" <(printf '%s\n' "$actor" 'af92475a9a8e6d377e0eddc87f3fdf54c92c19a0')
+          printf '%s  %s\n' "$actor" "$op/preflight.py" "$wrapper" "$op/read-via-ssh.sh" | sha256sum --check --status
+      - name: Read existing three runtime roles and unused loopback 3003
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+        shell: bash
+        run: bash .github/operations/avtocena-theme-capacity-readonly-v1/read-via-ssh.sh
