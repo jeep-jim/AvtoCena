@@ -93,7 +93,7 @@ export async function runChinaFullFreshOneShot(argv=process.argv.slice(2),env=pr
  if(plan.expectedAppHeadSha!==undefined){
   // Main owns the GitHub job, not the prepared app checkout. The split
   // composer authenticates both real roots; never impersonate the main SHA.
-  const appParent='40e86a1bd28ca5759ac00cd09f665a45f66afb0a';
+  const appParent='f4dc98aaab916b29419d173994d66562aa5901f1';
   requireValue(/^[a-f0-9]{40}$/.test(plan.expectedAppHeadSha)&&plan.expectedAppHeadSha!==env.GITHUB_SHA&&
    plan.authorizedHeadSha===env.GITHUB_SHA&&SHA.test(plan.composedFromPolicySha256??''),'split_app_authority');
   const git=async ref=>(await exec('git',['rev-parse',ref],{cwd:root,maxBuffer:4096})).stdout.trim();

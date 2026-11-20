@@ -9,7 +9,7 @@ import {CHINA_PRIVATE_STAGE_PREFIX as REMOTE_ROOT} from './china-private-stage-p
 export const CHINA_REGCLOUD_STAGE_ORIGIN='https://s3.regru.cloud';
 const LOCAL_ROOT='catalog/market-activation-fixture-v1/china/';
 const SHA=/^[a-f0-9]{64}$/,GEN=/^gen_\d{13}_[a-z0-9]{1,64}$/,RUN=/^[a-z0-9][a-z0-9-]{4,63}$/;
-const MAX_OBJECT=4*1024*1024,MAX_FILES=100_000,MAX_BYTES=96*1024**3;
+const MAX_OBJECT=4*1024*1024,MAX_FILES=100_000,MAX_BYTES=96*1024**3,MAX_IN_FLIGHT=6;
 const json=(x:unknown)=>Buffer.from(JSON.stringify(x));
 const digest=(b:Buffer|string)=>createHash('sha256').update(b).digest('hex');
 const fail=(reason:string):never=>{throw Error('china_durable_stage:'+reason);};
@@ -83,10 +83,18 @@ export async function transferChinaPrivateStage({
  const uploaded=new Set<string>();
  const running=createHash('sha256').update('china-regcloud-private-stage-ordered-objects-v1\n');
  let objectCount=0,artifactBytes=0,resumedObjects=0,nativeParts=0,projectionParts=0,priceBlocks=0;
- const immutable=async(relative:string,body:Buffer)=>{
+ const inFlight=new Set<Promise<void>>();
+ let firstFailure:unknown,failed=false,releaseSlot:(()=>void)|undefined;
+ const stop=(cause:unknown)=>{if(!failed){firstFailure=cause;failed=true;}};
+ const check=()=>{if(failed)throw firstFailure;};
+ const drain=async()=>{await Promise.all(inFlight);};
+ const immutable=async(relative:string,body:Buffer,sha=digest(body))=>{
   if(!relative.split('/').every(safe)||!body.length||body.length>MAX_OBJECT)return fail('object_bound');
-  const key=runRoot+relative,sha=digest(body);
+  const key=runRoot+relative;
   await auth();
+  // First failure prevents new object writes. Already-started writes still complete
+  // their owner/byte readback so nothing runs after this producer has stopped.
+  check();
   try{await storage.createPrivateStageObject(key,body);}
   catch(error){if(!(error instanceof StorageConflictError))throw error;resumedObjects++;}
   await auth();
@@ -95,10 +103,23 @@ export async function transferChinaPrivateStage({
   if(found.checksum!==sha||!found.data.equals(body))return fail('immutable_conflict');
   return sha;
  };
- const transfer=async(relative:string,body:Buffer)=>{
+ const transfer=async(relative:string,body:Buffer,sha=digest(body))=>{
+  check();
+  while(inFlight.size>=MAX_IN_FLIGHT){
+   // The native artifact verifier is a single awaited visitor. Use one
+   // wakeup, not repeated Promise.race handlers on a slow upload.
+   await new Promise<void>(resolve=>{releaseSlot=resolve;});check();
+  }
+  if(!relative.split('/').every(safe)||!body.length||body.length>MAX_OBJECT)return fail('object_bound');
   if(++objectCount>MAX_FILES||(artifactBytes+=body.length)>p.maxArtifactBytes)return fail('artifact_budget');
-  const sha=await immutable(relative,body);
+  // Order is declared by the existing verifier, never by network completion.
+  // Each of six in-flight lanes owns at most one bounded immutable upload.
   running.update(JSON.stringify([relative,body.length,sha])+'\n');
+  const task=immutable(relative,Buffer.from(body),sha).then(()=>undefined,stop).finally(()=>{
+   inFlight.delete(task);
+   const resume=releaseSlot;releaseSlot=undefined;resume?.();
+  });
+  inFlight.add(task);
  };
  // Transfer only the exact dependencies requested by the existing native
  // whole-cut verifier. In the same pass, every expected hash is verified on
@@ -106,45 +127,54 @@ export async function transferChinaPrivateStage({
  // second remote scan; corrupt/unrelated files can never issue READY.
  const evidence={} as Record<'inventory'|'prices'|'search',IndependentMarketPaper>;
  const localVerified=async(relative:string,expected:string)=>{
+  check();
   if(!artifactRelative(relative)||!SHA.test(expected))return fail('artifact_binding');
   const data=(await files.getBinary(localGeneration+relative)).data;
   if(digest(data)!==expected)return fail('local_artifact_integrity');
   if(!uploaded.has(relative)){
-   await transfer('objects/'+localGeneration+relative,data);uploaded.add(relative);
+   await transfer('objects/'+localGeneration+relative,data,expected);uploaded.add(relative);
    if(relative.includes('/offers/china/'))nativeParts++;
    if(relative.includes('/projections/'))projectionParts++;
    if(relative.includes('/prepared-price-cards-v1/china/'))priceBlocks++;
   }
   return data;
  };
- const m=files.ready.manifestSha256;
- await localVerified('binding.json',digest(json({version:1,market:'china',generationId:p.generationId,manifestSha256:m})));
- await localVerified('ready-'+m+'.json',m);
- for(const role of ['inventory','prices','search'] as const){
-  const sha=active.cut.papers[role];
-  evidence[role]=JSON.parse((await localVerified(role+'-'+sha+'.json',sha)).toString('utf8'));
+ try{
+  const m=files.ready.manifestSha256;
+  await localVerified('binding.json',digest(json({version:1,market:'china',generationId:p.generationId,manifestSha256:m})));
+  await localVerified('ready-'+m+'.json',m);
+  for(const role of ['inventory','prices','search'] as const){
+   const sha=active.cut.papers[role];
+   evidence[role]=JSON.parse((await localVerified(role+'-'+sha+'.json',sha)).toString('utf8'));
+  }
+  const generationRoot='catalog/generations/'+p.generationId+'/';
+  await verifyIndependentChinaPreparedArtifacts(active.cut,evidence,async(key,checksum)=>{
+   if(!key.startsWith(generationRoot)||!checksum)return fail('unbound_dependency');
+   return localVerified('prepared/'+key.slice(generationRoot.length),checksum);
+  });
+  await drain();check();
+  if(!nativeParts||nativeParts!==projectionParts||nativeParts!==priceBlocks)return fail('artifact_set');
+  await active.assertCurrent();
+  await transfer('objects/'+LOCAL_ROOT+'control.json',(await files.getBinary(LOCAL_ROOT+'control.json')).data);
+  const readyBytes=json(files.ready);
+  if(digest(readyBytes)!==files.readySha256)return fail('runtime_ready_bytes');
+  await transfer('runtime-ready.json',readyBytes,files.readySha256);
+  await drain();check();
+  const result={version:1,kind:'china-private-durable-stage-ready-v1',market:'china',runId:p.runId,stageRoot:runRoot,
+   generationId:p.generationId,archiveSha256:p.archiveSha256,runtimeReadySha256:p.runtimeReadySha256,permitSha256:expectedPermitSha256,
+   manifestSha256:files.ready.manifestSha256,activeControlSha256:files.ready.activeControlSha256,
+   expectedChinaPublicBaseSha256:p.expectedChinaPublicBaseSha256,admittedRows:files.ready.admittedRows,
+   sourceCursor:active.cut.source.cursor,pricingReceiptSha256:files.ready.pricingReceiptSha256,validUntil:p.validUntil,
+   artifacts:{count:objectCount,bytes:artifactBytes,orderedSha256:running.digest('hex'),nativeParts,projectionParts,priceBlocks},
+   publicationAuthorized:false,cursorAdvanceAuthorized:false};
+  await active.assertCurrent();
+  // Never published/current/control outside this private run. READY written last.
+  await assertSamePrivacy();
+  const readySha256=await immutable('READY.json',json(result));
+  return {ready:result,readySha256,resumedObjects};
+ }catch(error){
+  stop(error);
+  await drain();
+  throw firstFailure;
  }
- const generationRoot='catalog/generations/'+p.generationId+'/';
- await verifyIndependentChinaPreparedArtifacts(active.cut,evidence,async(key,checksum)=>{
-  if(!key.startsWith(generationRoot)||!checksum)return fail('unbound_dependency');
-  return localVerified('prepared/'+key.slice(generationRoot.length),checksum);
- });
- if(!nativeParts||nativeParts!==projectionParts||nativeParts!==priceBlocks)return fail('artifact_set');
- await active.assertCurrent();
- await transfer('objects/'+LOCAL_ROOT+'control.json',(await files.getBinary(LOCAL_ROOT+'control.json')).data);
- const readyBytes=json(files.ready);
- if(digest(readyBytes)!==files.readySha256)return fail('runtime_ready_bytes');
- await transfer('runtime-ready.json',readyBytes);
- const result={version:1,kind:'china-private-durable-stage-ready-v1',market:'china',runId:p.runId,stageRoot:runRoot,
-  generationId:p.generationId,archiveSha256:p.archiveSha256,runtimeReadySha256:p.runtimeReadySha256,permitSha256:expectedPermitSha256,
-  manifestSha256:files.ready.manifestSha256,activeControlSha256:files.ready.activeControlSha256,
-  expectedChinaPublicBaseSha256:p.expectedChinaPublicBaseSha256,admittedRows:files.ready.admittedRows,
-  sourceCursor:active.cut.source.cursor,pricingReceiptSha256:files.ready.pricingReceiptSha256,validUntil:p.validUntil,
-  artifacts:{count:objectCount,bytes:artifactBytes,orderedSha256:running.digest('hex'),nativeParts,projectionParts,priceBlocks},
-  publicationAuthorized:false,cursorAdvanceAuthorized:false};
- await active.assertCurrent();
- // Never published/current/control outside this private run. READY written last.
- await assertSamePrivacy();
- const readySha256=await immutable('READY.json',json(result));
- return {ready:result,readySha256,resumedObjects};
 }

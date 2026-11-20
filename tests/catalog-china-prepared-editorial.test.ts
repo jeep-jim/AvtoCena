@@ -12,6 +12,7 @@ import {openIndependentMarketFixture,openIndependentChinaStage} from '../apps/we
 import {openIndependentChinaPrepared} from '../apps/web/lib/catalog/independent-china-prepared-fixture';
 import {openStageChinaFiles} from '../apps/web/lib/catalog/china-stage-runtime-files';
 import {readPreparedChinaFixtureOffer,withPreparedChinaStageRuntime} from '../apps/web/lib/catalog/prepared-china-http-fixture';
+import {CHINA_REGCLOUD_STAGE_ORIGIN,transferChinaPrivateStage,type ChinaDurableStagePermit} from '../apps/web/lib/catalog/china-durable-object-stage';
 import {ObjectJsonStorage,getJsonStorage} from '../apps/web/lib/data';
 import {budgetPricingFingerprint} from '../apps/web/lib/catalog/shared-budget-prices';
 import {applyActiveBusinessPriceBatch} from '../apps/web/lib/catalog/live-business-pricing';
@@ -149,6 +150,87 @@ test('exact same-source editorial specs survive pricing projection and immutable
     const card=await withPreparedChinaStageRuntime(files,()=>readPreparedChinaFixtureOffer(big.id));
     assert.equal(card?.offer?.drive,'rwd');assert.equal(card?.offer?.color,'Металлик');
     assert.equal(card?.offer?.totalRub,exact[0].totalRub);
+
+    const privateEnv={YC_OBJECT_STORAGE_ENDPOINT:CHINA_REGCLOUD_STAGE_ORIGIN,YC_OBJECT_STORAGE_BUCKET:'fixture-owned-stage',
+     YC_OBJECT_STORAGE_PREFIX:'fixture/scope',YC_OBJECT_STORAGE_REGION:'us-east-1',
+     YC_OBJECT_STORAGE_ACCESS_KEY_ID:'fixture-stage',YC_OBJECT_STORAGE_SECRET_ACCESS_KEY:'fixture-only'};
+    Object.assign(process.env,privateEnv);
+    const privateScope={endpoint:CHINA_REGCLOUD_STAGE_ORIGIN,bucket:'fixture-owned-stage',prefix:'fixture/scope',region:'us-east-1'};
+    const remote=new Map<string,Buffer>(),trace:{key:string;method:string;query:string;completed:number}[]=[];
+    const acl='<AccessControlPolicy xmlns="http://s3.amazonaws.com/doc/2006-03-01/"><Owner><ID>fixture-owner</ID></Owner><AccessControlList><Grant><Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CanonicalUser"><ID>fixture-owner</ID></Grantee><Permission>FULL_CONTROL</Permission></Grant></AccessControlList></AccessControlPolicy>';
+    const netDelay=(ms:number)=>new Promise(resolve=>setTimeout(resolve,ms));
+    const physical='/fixture-owned-stage/fixture/scope/';
+    let activeHttp=0,maxHttp=0,failedPuts=0,initialHealthy=0,done=0,releaseSuccess:()=>void,releaseFail:()=>void;
+    const healthyGate=new Promise<void>(resolve=>{releaseSuccess=resolve;});
+    const failureGate=new Promise<void>(resolve=>{releaseFail=resolve;});
+    globalThis.fetch=async(input,init)=>{
+     const u=new URL(String(input)),method=init?.method??'GET',headers=new Headers(init?.headers);
+     assert.equal(u.origin,CHINA_REGCLOUD_STAGE_ORIGIN);assert.equal(init?.redirect,'error');
+     assert.match(headers.get('authorization')??'',/^AWS4-HMAC-SHA256 Credential=fixture-stage\//);
+     if(u.pathname==='/fixture-owned-stage'){
+      assert.equal(method,'GET');
+      trace.push({key:'bucket',method,query:u.search,completed:++done});
+      return u.search==='?acl='?new Response(acl):new Response('<Error><Code>NoSuchBucketPolicy</Code></Error>',{status:404});
+     }
+     assert.ok(u.pathname.startsWith(physical));
+     const key=decodeURIComponent(u.pathname.slice(physical.length));
+     assert.ok(key.startsWith('catalog/private-market-stage-v1/china/'));
+     const call={key,method,query:u.search,completed:0};trace.push(call);
+     maxHttp=Math.max(maxHttp,++activeHttp);
+     try{
+      if(method==='PUT'){
+       assert.equal(headers.get('if-none-match'),'*');
+       assert.equal(headers.get('x-amz-acl'),'private');
+       assert.match(headers.get('authorization')??'',/SignedHeaders=[^,]+x-amz-acl/);
+       if(key.includes('/ordered-failure/')){
+        if(++failedPuts===6)releaseFail!();
+        await failureGate;
+        if(key.endsWith('/binding.json'))return new Response('<Error><Code>AccessDenied</Code></Error>',{status:403});
+        await netDelay(24);
+       }else{
+        if(++initialHealthy===6)releaseSuccess!();
+        await healthyGate;await netDelay(key.endsWith('/binding.json')?35:3);
+       }
+       if(remote.has(key))return new Response(null,{status:412});
+       remote.set(key,Buffer.from(init?.body as Buffer));
+       return new Response(null,{status:200});
+      }
+      assert.equal(method,'GET');await netDelay(2);
+      const body=remote.get(key);
+      if(!body)return new Response(null,{status:404});
+      return u.search==='?acl='?new Response(acl):new Response(new Uint8Array(body));
+     }finally{activeHttp--;call.completed=++done;}
+    };
+    const durablePermit=(runId:string):ChinaDurableStagePermit=>({version:1,kind:'china-own-regcloud-private-stage-v1',market:'china',runId,
+     storage:privateScope,generationId,archiveSha256,runtimeReadySha256:files.readySha256,expectedChinaPublicBaseSha256:'1'.repeat(64),
+     minAdmittedRows:offers.length,maxArtifactBytes:32*1024*1024,validUntil:files.ready.validUntil,expectedOwnerApprovalSha256:'2'.repeat(64),
+     publicationAuthorized:false,cursorAdvanceAuthorized:false});
+    const upload=(runId:string)=>{
+     const permit=durablePermit(runId);
+     return transferChinaPrivateStage({storage:new ObjectJsonStorage(),files,permit,expectedPermitSha256:preparedPriceCardDigest(permit),async assertApprovedRunner(){}});
+    };
+    const proper=await upload('ordered-ready');
+    assert.equal(maxHttp,6);assert.equal(activeHttp,0);assert.equal(proper.ready.publicationAuthorized,false);
+    const initialTrace=trace.slice(),readyIdx=initialTrace.findIndex(t=>t.key.endsWith('/READY.json')&&t.method==='PUT');
+    assert.ok(readyIdx>0);
+    const remoteReady=initialTrace[readyIdx];
+    assert.equal(readyIdx,initialTrace.length-3);
+    assert.deepEqual(initialTrace.slice(readyIdx-2,readyIdx).map(o=>[o.key,o.query]),[['bucket','?acl='],['bucket','?policy=']]);
+    for(const call of initialTrace.slice(0,readyIdx)){
+     assert.ok(call.completed<remoteReady.completed);
+     if(call.method==='PUT'){
+      assert.equal(initialTrace.filter(t=>t.key===call.key&&t.method==='GET'&&t.query==='?acl=').length,1);
+      assert.equal(initialTrace.filter(t=>t.key===call.key&&t.method==='GET'&&t.query==='').length,1);
+     }
+    }
+    const resumed=await upload('ordered-ready');
+    assert.equal(resumed.readySha256,proper.readySha256);
+    assert.equal(resumed.resumedObjects,proper.ready.artifacts.count+1);
+    await assert.rejects(upload('ordered-failure'),/object_storage_PUT_403:AccessDenied/);
+    assert.equal(failedPuts,6);assert.equal(activeHttp,0);
+    const failureTrace=trace.filter(t=>t.key.includes('/ordered-failure/'));
+    assert.ok(failureTrace.every(t=>!t.key.endsWith('/READY.json')&&t.completed>0));
+    assert.equal(failureTrace.filter(t=>t.method==='GET'&&t.query==='?acl=').length,5);
    }finally{
     globalThis.fetch=fetchBefore;
     for(const [k,v]of Object.entries(envBefore))if(v===undefined)delete process.env[k];else process.env[k]=v;
