@@ -42,7 +42,7 @@ jobs:
           umask 077
           root="$GITHUB_WORKSPACE"
           ops="$root/.github/operations/china-dark-actor-v1"
-          test "$(sha256sum "$ops/APPROVED_CODE.sha256" | cut -d ' ' -f 1)" = 7aa0ee5bb024d9e7e6539526a73de6200057ff329e4045cb71e1e52c787fba70
+          test "$(sha256sum "$ops/APPROVED_CODE.sha256" | cut -d ' ' -f 1)" = 63a202ac76ef951e5a31bd4cf4c9f87caf6d995ff07146d1ee836eeaaf25a7d7
           (cd "$ops"; sha256sum --strict --check --status APPROVED_CODE.sha256)
           [[ "$(git -C writer rev-parse HEAD)" == f4dc98aaab916b29419d173994d66562aa5901f1 ]]
           [[ "$(git -C reader rev-parse HEAD)" == 85296f6b8797aaa93227b69da7e9e9e928e8f9b5 ]]
@@ -86,7 +86,7 @@ jobs:
           mode=activate
           if [[ "$CHINA_VERIFY_ONLY" == true ]]; then mode=verify-only; fi
           test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
-          test "$(sha256sum "$ops/APPROVED_CODE.sha256" | cut -d ' ' -f 1)" = 7aa0ee5bb024d9e7e6539526a73de6200057ff329e4045cb71e1e52c787fba70
+          test "$(sha256sum "$ops/APPROVED_CODE.sha256" | cut -d ' ' -f 1)" = 63a202ac76ef951e5a31bd4cf4c9f87caf6d995ff07146d1ee836eeaaf25a7d7
           (cd "$ops"; sha256sum --strict --check --status APPROVED_CODE.sha256)
           scratch="$(mktemp -d "$RUNNER_TEMP/china-dark-switch.XXXXXXXX")"
           trap 'rm -rf -- "$scratch"' EXIT

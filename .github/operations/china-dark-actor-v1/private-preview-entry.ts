@@ -14,6 +14,19 @@ const LIMIT=96, BYTES=64*1024*1024, MAX_MS=60_000;
 const hash=(b:Uint8Array)=>createHash('sha256').update(b).digest('hex');
 class Refuse extends Error {}
 const check=(v:unknown,e:string)=>{if(!v)throw new Refuse(e);};
+const EARLY=['EACCES','EPERM','ENOENT','ENOTDIR','ELOOP'];
+function safePreviewFailure(e:unknown){
+ const err=e as NodeJS.ErrnoException|undefined,reason=err?.message??'';
+ if(e instanceof Refuse)return reason; // Refuse labels are literal and host allowlisted.
+ if(err?.code&&EARLY.includes(err.code))return 'fs_'+err.code.toLowerCase();
+ if(err?.name==='TimeoutError'||err?.name==='AbortError')return 'request_timeout';
+ if(/^china_own_regcloud:[a-z0-9_]+$/.test(reason))return 'storage_'+reason.slice('china_own_regcloud:'.length);
+ const http=reason.match(/^object_storage_(?:binary_read|control_read|GET)_(\d{3})(?::[^\r\n]*)?$/);
+ if(http)return 'storage_http_'+http[1];
+ if(/^object_storage_(?:response_limit|response_timeout|read_deadline|GET_unreachable)(?::[^\r\n]*)?$/.test(reason))
+  return 'storage_transport';
+ return 'exact_reader_refused';
+}
 const validCount=(n:unknown):n is number=>Number.isSafeInteger(n)&&Number(n)>0&&Number(n)<=10_000_000;
 type Grant={version:1;kind:'china-private-preview-grant-v1';stage:ChinaPublicRef;storage:ChinaConfiguredStorageScope;
  appSha:string;legacyRuntimeSha256:string;imageSha256:string;expiresAt:number;archiveSha256:string;manifestSha256:string;
@@ -50,8 +63,11 @@ function sameScope(g:Grant){
  const current=readConfiguredRegcloudScope();
  check(Object.entries(current).every(([k,v])=>g.storage[k as keyof ChinaConfiguredStorageScope]===v),'storage_mismatch');
 }
-export async function runPrivateChinaPreview(file:string,expected:string){
+type PreviewPhase='grant'|'runtime'|'ready'|'index'|'search'|'detail'|'readback';
+export async function runPrivateChinaPreview(file:string,expected:string,onPhase:(p:PreviewPhase)=>void=()=>{}){
+ onPhase('grant');
  const g=readGrant(await boundedGrant(file),expected);
+ onPhase('runtime');
  check(process.env.AVTOCENA_RELEASE_SHA===BUILD&&process.env.AVTOCENA_CALCULATION_VERSION===LEGACY&&
   process.env.AVTOCENA_CHINA_REGCLOUD_RUNTIME==='0'&&process.env.JSON_STORAGE_DRIVER==='object'&&
   process.env.CATALOG_STORAGE_TIMING!=='1','runtime_env');
@@ -86,7 +102,7 @@ export async function runPrivateChinaPreview(file:string,expected:string){
   sameScope(g);
  };
  try{
-  const files=await openChinaStageObjectFiles(new ObjectJsonStorage(),g.stage,assertGrant);
+  onPhase('ready');const files=await openChinaStageObjectFiles(new ObjectJsonStorage(),g.stage,assertGrant);
   check(files.durable.archiveSha256===g.archiveSha256&&files.durable.manifestSha256===g.manifestSha256&&
    files.durable.pricingReceiptSha256===g.pricingReceiptSha256&&files.durable.admittedRows===g.admittedRows,'ready_binding');
   return await withPreparedChinaRegcloudPreview(files,async()=>{
@@ -94,10 +110,10 @@ export async function runPrivateChinaPreview(file:string,expected:string){
    const query={market:'china',make:g.make,model:g.model,sort:'totalRub',pageSize:1};
    // Confirm the exact indexed shape first. The route may never fall back to a
    // full-market scan under a malformed make or a missing model index.
-   const fast=await readPreparedChinaIndexedModel(query,true);
+   onPhase('index');const fast=await readPreparedChinaIndexedModel(query,true);
    check(fast?.generationId===generationId&&validCount(fast.total)&&fast.total<=g.admittedRows&&
     (g.expectedModelCount===undefined||g.expectedModelCount===fast.total),'indexed_count');
-   const url=new URL('http://127.0.0.1/api/catalog/search');
+   onPhase('search');const url=new URL('http://127.0.0.1/api/catalog/search');
    url.search=new URLSearchParams({...query,pageSize:'1',preparedCut:generationId}).toString();
    const list=await GET(new Request(url));
    url.searchParams.set('countOnly','1');const countResponse=await GET(new Request(url));
@@ -108,9 +124,9 @@ export async function runPrivateChinaPreview(file:string,expected:string){
    const row=body.items[0];
    check(row.market==='china'&&row.preparedChinaSelection?.generationId===generationId&&
     /^[a-f0-9]{24}$/.test(row.id)&&Number.isSafeInteger(row.totalRub)&&row.totalRub>0,'card_price');
-   const detail=await readPreparedChinaFixtureOffer(row.id,undefined,generationId);
+   onPhase('detail');const detail=await readPreparedChinaFixtureOffer(row.id,undefined,generationId);
    check(detail?.offer?.id===row.id&&detail.offer.totalRub===row.totalRub,'card_price_parity');
-   await assertGrant();await files.assertPointer();
+   onPhase('readback');await assertGrant();await files.assertPointer();
    return {version:1,kind:'private-china-candidate-readback',readySha256:g.stage.readySha256,generationId,
     buildSha256:g.imageSha256,checkedAt:Date.now(),cardId:row.id,listRub:row.totalRub,detailRub:detail!.offer!.totalRub,filteredCount:body.total};
   });
@@ -118,8 +134,9 @@ export async function runPrivateChinaPreview(file:string,expected:string){
 }
 
 if(process.argv[1]&&require.main===module){
- runPrivateChinaPreview(process.argv[2]||'',process.argv[3]||'').then(x=>console.log(JSON.stringify(x))).catch(e=>{
-  console.error(JSON.stringify({kind:'private-china-candidate-refused',reason:e instanceof Refuse?e.message:'exact_reader_refused'}));
+ let phase:PreviewPhase='grant';
+ runPrivateChinaPreview(process.argv[2]||'',process.argv[3]||'',p=>{phase=p;}).then(x=>console.log(JSON.stringify(x))).catch(e=>{
+  console.error(JSON.stringify({kind:'private-china-candidate-refused',phase,reason:safePreviewFailure(e)}));
   process.exitCode=2;
  });
 }

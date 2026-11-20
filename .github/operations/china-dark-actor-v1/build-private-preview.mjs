@@ -21,7 +21,19 @@ const entry=await fs.readFile(new URL('./private-preview-entry.ts',import.meta.u
 const built=await build({absWorkingDir:root,stdin:{contents:entry,resolveDir:root,sourcefile:'operator-private-preview.ts',loader:'ts'},
  tsconfig:path.join(root,'apps/web/tsconfig.json'),packages:'external',platform:'node',
  format:'cjs',target:'node24',bundle:true,write:false,metafile:true,legalComments:'none',
- banner:{js:"{const r=require('react'); if (typeof r.cache!=='function') r.cache=require('next/dist/compiled/react').cache; if(typeof r.cache!=='function') throw Error('exact_next_react_cache_unavailable');}"},
+ banner:{js:"try { const r=require('react'); if (typeof r.cache!=='function') r.cache=require('next/dist/compiled/react').cache; if(typeof r.cache!=='function') throw Error('exact_next_react_cache_unavailable');"},
+ footer:{js:String.raw` } catch(e) {
+  if(require.main!==module)throw e;
+  const msg=e instanceof Error?e.message:'',code=e&&e.code;
+  const missing=msg.match(/^Cannot find module ['"]([^'"]+)['"]/);
+  const modules={'react':'react','next/dist/compiled/react':'next_compiled_react','next/cache':'next_cache','next/headers':'next_headers','next/server':'next_server','sharp':'sharp','geoip-country':'geoip_country'};
+  const reason=(code==='MODULE_NOT_FOUND'||code==='ERR_MODULE_NOT_FOUND')?
+   (missing&&Object.hasOwn(modules,missing[1])?'module_'+modules[missing[1]]:'module_untraced'):
+   msg==='exact_next_react_cache_unavailable'?'react_cache_unavailable':
+   /^Could not load the "sharp" module using the linuxmusl-(?:x64|arm64) runtime/.test(msg)?'sharp_alpine_runtime':
+   ['EACCES','EPERM','ENOENT','ENOTDIR','ELOOP'].includes(code)?'fs_'+code.toLowerCase():'boot_failed';
+  console.error(JSON.stringify({kind:'private-china-candidate-refused',phase:'boot',reason}));process.exitCode=2;
+ }`},
  loader:{'.css':'empty'},plugins:[{name:'server-only-marker',setup(b){
   b.onResolve({filter:/^server-only$/},()=>({path:'server-only-marker',namespace:'readonly-operator'}));
   b.onLoad({filter:/./,namespace:'readonly-operator'},()=>({contents:'',loader:'js'}));

@@ -268,7 +268,7 @@ diff --git a/scripts/catalog-china-own-control-switch-host.mts b/scripts/catalog
 new file mode 100644
 --- /dev/null
 +++ b/scripts/catalog-china-own-control-switch-host.mts
-@@ -0,0 +1,217 @@
+@@ -0,0 +1,254 @@
 +/** Existing RegCloud operator host, not a public route. Run with the existing
 + * flock held by this process (flock --exclusive --nonblock --no-fork ...). */
 +import fs from 'node:fs/promises';
@@ -371,6 +371,42 @@ new file mode 100644
 +  ...(legacy?{legacyManifestSha256:p.previous.manifestSha256}:{readySha256:p.target.readySha256}),
 +  generationId:target.generationId,buildSha256:app.imageSha256,checkedAt:Date.now(),cardId:row.id,listRub:row.totalRub,detailRub:amount,filteredCount:count.total};
 +}
++const PREVIEW_PHASES=new Set(['boot','grant','runtime','ready','index','search','detail','readback']);
++const PREVIEW_REASONS=new Set([
++ 'grant_bytes','grant_scope','grant_selector','grant_storage','grant_fields','grant_path','grant_file','grant_changed','runtime_env','storage_mismatch',
++ 'net_type','net_scope','net_object_scope','net_bound','net_body_bound','ready_binding','indexed_count','list_count_parity','card_price','card_price_parity',
++ 'exact_reader_refused','boot_failed','react_cache_unavailable','sharp_alpine_runtime','request_timeout','storage_transport',
++ 'module_react','module_next_compiled_react','module_next_cache','module_next_headers','module_next_server','module_sharp','module_geoip_country','module_untraced',
++ 'fs_eacces','fs_eperm','fs_enoent','fs_enotdir','fs_eloop',
++ 'storage_scope','storage_changed','storage_ready_sha','storage_ready_scope','storage_runtime_ready_sha','storage_runtime_ready_scope',
++ 'storage_stage_authority','storage_key_scope','storage_stage_control_sha','storage_control_scope',
++]);
++/** Only fixed labels survive a child failure; never copy stderr, arguments,
++ * paths, response bodies or an arbitrary missing module name into logs. */
++export function classifyPrivatePreviewFailure(error:unknown){
++ const e=error as {code?:string|number;signal?:string;killed?:boolean;stderr?:unknown}|undefined;
++ if(e?.code===2&&typeof e.stderr==='string'&&e.stderr.length<=16*1024){
++  const last=e.stderr.trim().split('\n').at(-1)??'';
++  if(last.length<=256){
++   try{
++    const d=JSON.parse(last);
++    if(d?.kind==='private-china-candidate-refused'&&Object.keys(d).sort().join(',')==='kind,phase,reason'&&
++       typeof d.reason==='string'&&PREVIEW_PHASES.has(d.phase)&&(PREVIEW_REASONS.has(d.reason)||/^storage_http_[1-5]\d{2}$/.test(d.reason)))
++     return 'preview_'+d.phase+'_'+d.reason;
++   }catch{/* Discard unknown child stderr. */}
++  }
++ }
++ if(e?.killed||e?.signal==='SIGTERM')return 'preview_subprocess_timeout';
++ if(e?.signal==='SIGKILL'||e?.code===137)return 'preview_subprocess_killed';
++ if(e?.code===125)return 'preview_docker_exec_refused';
++ if(e?.code===126)return 'preview_command_not_executable';
++ if(e?.code===127)return 'preview_command_unavailable';
++ if(e?.code===1&&typeof e.stderr==='string'&&e.stderr.length<=16*1024){
++  if(/(?:^|\n)Error: Cannot find module ['"]\/run\/avtocena-china-switch\/[1-9]\d{0,19}\/preview\.cjs['"](?:\n|$)/.test(e.stderr))return 'preview_bundle_not_readable';
++  if(/(?:^|\n)Error: (?:EACCES|EPERM): permission denied, (?:open|stat) ['"]\/run\/avtocena-china-switch\//.test(e.stderr))return 'preview_mount_permission';
++ }
++ return 'preview_subprocess_failed';
++}
 +const mountName=(s:string)=>s===MOUNT;
 +export async function createRealChinaDarkServices(p:Readonly<ChinaDarkSwitchPlan>){
 + let incumbentContainer='',candidateContainer='',ingressSha='',nginxFileSha='';
@@ -424,7 +460,8 @@ new file mode 100644
 +   grant.admittedRows===p.expectedAdmittedRows&&grant.make===p.query.make&&grant.model===p.query.model,'preview_grant_binding');
 +  const {stdout}=await run('/usr/bin/docker',['exec','-e','AVTOCENA_CHINA_REGCLOUD_RUNTIME=0','-e','JSON_STORAGE_DRIVER=object',
 +   '-e','CATALOG_STORAGE_TIMING=0','-e','NODE_PATH=/app/node_modules:/app/apps/web/node_modules',candidateContainer,
-+   'node',inside+'/preview.cjs',inside+'/grant.json',p.previewGrantSha256],{maxBuffer:16*1024,timeout:75000});
++   'node',inside+'/preview.cjs',inside+'/grant.json',p.previewGrantSha256],{maxBuffer:16*1024,timeout:75000})
++   .catch(error=>failChinaDarkSwitch(classifyPrivatePreviewFailure(error)));
 +  const proof=tryJson(stdout.trim(),'private_preview_receipt');
 +  need(proof?.kind==='private-china-candidate-readback','not_private_probe');
 +  await assertDarkLease();
