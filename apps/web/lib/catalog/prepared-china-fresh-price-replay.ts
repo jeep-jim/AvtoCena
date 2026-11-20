@@ -299,3 +299,117 @@ export async function openFreshChinaPriceReplay(input:{
   },
  });
 }
+
+/** Private same-process adapter for a verified mixed delta. This does not
+ * authenticate an archive itself or create/publish READY. The caller must
+ * supply a typed verifier of the exact native terminal/accepted-cut ledger. */
+type VerifiedMixedDecision={
+  id:string;sourceInputSha256:string;action:'changed';
+}|{
+  id:string;sourceInputSha256:string;action:'frozen';previousSourceInputSha256:string;previousReceiptSha256:string;
+};
+type VerifiedMixedFrozen={
+  id:string;sourceInputSha256:string;previousReceiptSha256:string;pricedRow:VehicleOffer;
+  fxReceiptSha256:string;pricingFingerprint:string;calculationVersion:string;pricingAsOf:string;legalValidUntil:number;
+};
+export async function openMixedChinaPriceReplay(input:{
+  fx:CatalogFxBatch;pricingFingerprint:string;calculationVersion:string;legalValidUntil:number;
+  source:CleanChinaPriceSourceBinding;expectedChangedRows:number;
+  verifyTerminalAndPrevious:()=>Promise<{
+    assertCurrent:()=>Promise<void>;
+    decision:(id:string)=>Promise<VerifiedMixedDecision|null>;
+    readFrozen:(id:string)=>Promise<VerifiedMixedFrozen|null>;
+  }>;
+}){
+ const {fx,pricingFingerprint,calculationVersion,legalValidUntil}=input;
+ const source=Object.freeze({...input.source}),expectedChangedRows=input.expectedChangedRows;
+ if(fx.receipt.market!=='china'||![fx.receiptSha256,pricingFingerprint,calculationVersion,source.continuitySha256,
+   source.sourceReportSha256,source.nativeAdmissionSha256,source.sourceReplicaSha256,source.sourceBinding].every(x=>sha.test(x??''))||
+   !Number.isSafeInteger(source.sourceCursor)||source.sourceCursor<1||!Number.isSafeInteger(source.sourceExpiresAt)||
+   !Number.isSafeInteger(legalValidUntil)||!Number.isSafeInteger(expectedChangedRows)||expectedChangedRows<0||expectedChangedRows>50000||
+   !Number.isFinite(Date.parse(fx.receipt.pricingAsOf))||Date.parse(fx.receipt.pricingAsOf)>Date.now()||
+   Date.now()>=Math.min(legalValidUntil,source.sourceExpiresAt))return fail('mixed_scope');
+ const verified=await input.verifyTerminalAndPrevious();
+ const check=async()=>{
+  if(Date.now()>=Math.min(legalValidUntil,source.sourceExpiresAt))return fail('mixed_expired');
+  await verified.assertCurrent();
+  await withCatalogFxBatch(fx,async()=>{
+   if(await budgetPricingFingerprint('china')!==pricingFingerprint||calculationCacheVersion()!==calculationVersion)return fail('mixed_context');
+  });
+ };
+ await check();
+ const editorial=preparedChinaEditorialEvidence(await readCatalogEditorialFresh());
+ const changed=new Map<string,{inputSha256:string;priced:Promise<{text:string;sha256:string}>}>();
+ const checkOutput=(row:VehicleOffer,result:VehicleOffer)=>{
+  if(result.id!==row.id||result.market!=='china'||result.sourcePrice!==row.sourcePrice||
+     result.sourceCurrency!==row.sourceCurrency||preparedChinaCalculationIncomplete(result,fx.receipt.pricingAsOf)||
+     !projectionCanRenderCard(searchProjectionFromOffer(result)))return fail('mixed_output');
+  const asOf=result.calculationSnapshot?.customsInput?.importedAt;
+  if((asOf instanceof Date?asOf.toISOString():asOf)!==fx.receipt.pricingAsOf)return fail('mixed_as_of');
+  return result;
+ };
+ let closed=false, encodedChangedBytes=0;
+ const token:FreshChinaPriceReplay=Object.freeze({[authority]:true as const});
+ readers.set(token,async(rows,askedFx,askedPricing,askedVersion)=>{
+  if(closed||!rows.length||rows.length>500||new Set(rows.map(x=>x.id)).size!==rows.length||
+    askedFx.receiptSha256!==fx.receiptSha256||askedPricing!==pricingFingerprint||askedVersion!==calculationVersion)return fail('mixed_request');
+  await check();
+  const result:VehicleOffer[]=[];
+  for(const row of rows){
+   const content=JSON.stringify(row),inputSha256=hash(content);
+   if(Buffer.byteLength(content)>1024*1024||row.market!=='china'||!exactChe168Identity(row,source)||
+     row.status!=='active'||row.sourceCurrency!=='CNY'||!(row.sourcePrice>0))return fail('mixed_native_row');
+   const d=await verified.decision(row.id);
+   if(!d||d.id!==row.id||d.sourceInputSha256!==inputSha256)return fail('mixed_missing_decision');
+   if(d.action==='frozen'){
+    const v=await verified.readFrozen(row.id);
+    if(!v||v.id!==row.id||!sha.test(d.previousSourceInputSha256)||v.sourceInputSha256!==d.previousSourceInputSha256||!sha.test(d.previousReceiptSha256)||
+       v.previousReceiptSha256!==d.previousReceiptSha256||v.fxReceiptSha256!==fx.receiptSha256||
+       v.pricingFingerprint!==pricingFingerprint||v.calculationVersion!==calculationVersion||
+       v.pricingAsOf!==fx.receipt.pricingAsOf||!Number.isSafeInteger(v.legalValidUntil)||Date.now()>=v.legalValidUntil)
+      return fail('mixed_frozen_binding');
+    result.push(checkOutput(row,structuredClone(v.pricedRow)));continue;
+   }
+   if(d.action!=='changed')return fail('mixed_decision');
+   let saved=changed.get(row.id);
+   if(saved&&saved.inputSha256!==inputSha256)return fail('mixed_changed_drift');
+   if(!saved){
+    if(changed.size>=expectedChangedRows)return fail('mixed_changed_limit');
+    const calculate=async()=>{
+     const exact=exactChe168SourceParameters(row);
+     const adjusted=chinaPreparedEditorialOffer(exact??row,editorial);
+     if(!adjusted.row)return fail('mixed_editorial');
+     const sourceRow={...adjusted.row,totalRub:null,calculationSnapshot:undefined};
+     const priced=await withCatalogFxBatch(fx,async()=>{
+      if(!exact)return (await applyActiveBusinessPriceBatch([sourceRow],{readOnly:true,retainFullSnapshot:true}))[0];
+      const r=await calculateOfferWithVerifiedSpecifications(sourceRow);
+      return r.calculationSnapshot?.customs?.status==='ready'?
+       {...r,calculationSnapshot:{...r.calculationSnapshot,businessRepricedAt:fx.receipt.pricingAsOf}}:r;
+     });
+     const serialized=JSON.stringify(checkOutput(row,priced));
+     const bytes=Buffer.byteLength(serialized);
+     if(bytes>1024*1024||(encodedChangedBytes+=bytes)>64*1024*1024)return fail('mixed_price_budget');
+     return {text:serialized,sha256:hash(serialized)};
+    };
+    // Set the promise synchronously before awaiting it. Competing reader
+    // calls share one result (including a held error), never re-run engine.
+    saved={inputSha256,priced:calculate()};changed.set(row.id,saved);
+   }
+   const q=await saved.priced;
+   if(hash(q.text)!==q.sha256)return fail('mixed_quote_integrity');
+   const priced=JSON.parse(q.text) as VehicleOffer;
+   if(priced.calculationSnapshot?.customsInput)
+    priced.calculationSnapshot.customsInput.importedAt=new Date(fx.receipt.pricingAsOf);
+   result.push(checkOutput(row,priced));
+  }
+  await check();return result;
+ });
+ return Object.freeze({replay:token,
+  async finish(){
+   if(closed||changed.size!==expectedChangedRows)return fail('mixed_changed_coverage');
+   await Promise.all([...changed.values()].map(x=>x.priced));
+   await check();return {changedRows:changed.size,publicationAuthorized:false,cursorAdvanceAuthorized:false} as const;
+  },
+  close(){closed=true;readers.delete(token);changed.clear();}
+ });
+}
