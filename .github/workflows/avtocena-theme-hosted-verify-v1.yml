@@ -1,0 +1,56 @@
+name: Verify and compile exact theme candidate on GitHub only
+on:
+  push:
+    branches: [main]
+    paths: [.github/market-runs/avtocena-theme-hosted-verify-v1.sha256]
+permissions:
+  contents: read
+jobs:
+  verify:
+    if: github.repository == 'jeep-jim/AvtoCena' && github.repository_id == '1289722938' && github.ref == 'refs/heads/main' && github.run_attempt == '1' && github.event.head_commit.message == 'Verify and compile exact AvtoCena theme candidate on GitHub only'
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      APP_SHA: a10e3a26f9a681cbc5b56b0c8f45f1499935a405
+      APP_TREE: af92475a9a8e6d377e0eddc87f3fdf54c92c19a0
+      ACTOR_SHA: '19111337407efa99c4e9ff5a749db969f8e1469e2299ceb9a794aee3d49ede9b'
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 2
+          persist-credentials: false
+      - name: Check exact single-file trigger and test actor
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          test "$(git show -s --format=%P HEAD | wc -w)" = 1
+          readonly marker=.github/market-runs/avtocena-theme-hosted-verify-v1.sha256
+          cmp -s <(git diff-tree --no-commit-id -r --name-status --no-renames -z HEAD^ HEAD) <(printf 'A\0%s\0' "$marker")
+          cmp -s "$marker" <(printf '%s\n' "$APP_SHA" "$APP_TREE" "$ACTOR_SHA")
+          printf '%s  %s\n' "$ACTOR_SHA" ".github/operations/avtocena-theme-hosted-verify-v1/verify.sh" | sha256sum --check --status
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ env.APP_SHA }}
+          fetch-depth: 2
+          path: exact-app
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 24.22.1
+      - name: Verify exact source, closure, types and ordinary regression
+        working-directory: exact-app
+        shell: bash
+        run: bash "$GITHUB_WORKSPACE/.github/operations/avtocena-theme-hosted-verify-v1/verify.sh"
+      - name: Compile smoke image with no private inputs or transfer
+        working-directory: exact-app
+        shell: bash
+        run: |
+          set -euo pipefail
+          tag="avtocena-theme-hosted-verify:$APP_SHA"
+          docker build --label "org.opencontainers.image.revision=$APP_SHA" --label "avtocena.verification=hosted-compile-only" -t "$tag" .
+          test "$(docker image inspect --format '{{index .Config.Labels "org.opencontainers.image.revision"}}' "$tag")" = "$APP_SHA"
+          digest="$(docker image inspect --format '{{.Id}}' "$tag")"
+          [[ "$digest" =~ ^sha256:[a-f0-9]{64}$ ]]
+          printf '{"status":"hosted_compile_only","release":"%s","imageId":"%s","hostWrites":0,"storageWrites":0,"privateIndexRestored":false,"imageExported":false,"deployableImage":false}\n' "$APP_SHA" "$digest"
