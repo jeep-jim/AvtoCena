@@ -16,7 +16,7 @@ const need=(v,k)=>{if(!v)throw Error('china_launch_composer:'+k);};
 const parse=b=>JSON.parse(new TextDecoder('utf-8',{fatal:true}).decode(b));
 const clock=()=>Date.now();
 const ROOT=path.resolve(fileURLToPath(new URL('../../../',import.meta.url)));
-const CANDIDATE='5a254a3dce9993fca726471866eee614ddebfd0a',CANDIDATE_PARENT='d22f92d14bce98ec8ce2db41ba07b5b05afd23f6';
+const CANDIDATE='40e86a1bd28ca5759ac00cd09f665a45f66afb0a',CANDIDATE_PARENT='5a254a3dce9993fca726471866eee614ddebfd0a';
 const ops='.github/operations/china-full-fresh-v1';
 const launcher='scripts/catalog-china-full-fresh-one-shot.mjs';
 const storage={endpoint:'https://s3.regru.cloud',bucket:'avtocena-staging-8120751',prefix:'migration-staging/full-20261011',region:'us-east-1'};
