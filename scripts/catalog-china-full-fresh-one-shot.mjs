@@ -93,7 +93,7 @@ export async function runChinaFullFreshOneShot(argv=process.argv.slice(2),env=pr
  if(plan.expectedAppHeadSha!==undefined){
   // Main owns the GitHub job, not the prepared app checkout. The split
   // composer authenticates both real roots; never impersonate the main SHA.
-  const appParent='d22f92d14bce98ec8ce2db41ba07b5b05afd23f6';
+  const appParent='5a254a3dce9993fca726471866eee614ddebfd0a';
   requireValue(/^[a-f0-9]{40}$/.test(plan.expectedAppHeadSha)&&plan.expectedAppHeadSha!==env.GITHUB_SHA&&
    plan.authorizedHeadSha===env.GITHUB_SHA&&SHA.test(plan.composedFromPolicySha256??''),'split_app_authority');
   const git=async ref=>(await exec('git',['rev-parse',ref],{cwd:root,maxBuffer:4096})).stdout.trim();
@@ -235,7 +235,7 @@ export async function runChinaFullFreshOneShot(argv=process.argv.slice(2),env=pr
   });
   const priceJob=await replay.openFreshChinaPriceReplay({directory:path.join(scratch,'avtocena-china-fresh-prices-own-run'),fx,pricingFingerprint:priceFingerprint,
    calculationVersion:plan.calculationVersion,expectedInputRows:clean.proof.sourceRows,
-   source:Object.fromEntries(['continuitySha256','sourceReportSha256','nativeAdmissionSha256','sourceReplicaSha256','sourceCursor','sourceExpiresAt'].map(k=>[k,clean.proof[k]])),
+   source:Object.fromEntries(['continuitySha256','sourceReportSha256','nativeAdmissionSha256','sourceReplicaSha256','sourceCursor','sourceExpiresAt','sourceBinding'].map(k=>[k,clean.proof[k]])),
    assertSourceAuthority:fence});
   let staged;
   try{

@@ -3,6 +3,9 @@ import path from 'node:path';
 import {createHash} from 'node:crypto';
 import {createRequire} from 'node:module';
 import {applyActiveBusinessPriceBatch} from './live-business-pricing';
+import {calculateOfferWithVerifiedSpecifications} from './customs-pricing';
+import {specificationEvidenceComplete} from './modification-matching';
+import {enrichOfferWithSourceTableDisplacement} from './source-table-displacement';
 import {withCatalogFxBatch,type CatalogFxBatch} from './rates';
 import {budgetPricingFingerprint,calculationCacheVersion} from './shared-budget-prices';
 import type {VehicleOffer} from './types';
@@ -24,12 +27,48 @@ type CleanDecision={id:string;inputSha256:string;state:'eligible_unpriced'}|{
 };
 type PricedDecision=CleanDecision|{id:string;inputSha256:string;state:'admitted';canonicalSha256:string};
 export type CleanChinaPriceSourceBinding={continuitySha256:string;sourceReportSha256:string;nativeAdmissionSha256:string;
- sourceReplicaSha256:string;sourceCursor:number;sourceExpiresAt:number};
+ sourceReplicaSha256:string;sourceCursor:number;sourceExpiresAt:number;sourceBinding?:string};
 export type CleanChinaPriceSourceProof=CleanChinaPriceSourceBinding&{
  version:1;kind:'china-full-fresh-source-admission-only';coverage:'materialized_complete_replica_after_committed_delta';
  oldRowsMerged:false;sourceRows:number;eligibleUnpricedRows:number;excludedRows:number;explicitlyWithdrawnRows:number;
  orderedInputSha256:string;priced:false;publicationAuthorized:false;cursorAdvanceAuthorized:false;
 };
+const CHE168='autohome_used_china_open';
+/** Clean admission authenticated the exact collector archive and each row.
+ * Re-check the native Che168 data shape and current snapshot binding here so
+ * unrelated rows cannot enter the source-only branch. */
+function exactChe168Identity(row:VehicleOffer,source:CleanChinaPriceSourceBinding){
+ const o=row.operational,v=(o as any)?.che168ActiveVerification;
+ return row.sourceId===CHE168&&/^\d{1,150}$/.test(row.sourceOfferId??'')&&row.id===hash(CHE168+':'+row.sourceOfferId).slice(0,24)&&
+  o?.provider==='auto-api.com'&&o.detailIdentityVerified===true&&o.fieldIdentityVerified===true&&
+  new RegExp('^https://www\\.che168\\.com/dealer/\\d+/'+row.sourceOfferId+'\\.html$').test(o.sourceUrl??'')&&
+  v?.method==='snapshot_and_complete_change_stream'&&v.snapshotBinding===source.sourceBinding&&v.cursor===source.sourceCursor;
+}
+function exactChe168SourceParameters(row:VehicleOffer):VehicleOffer|null {
+ // The actual mapper carries ICE PS/kW but does NOT grant authenticated
+ // 30-minute power from peak data; electrified rows still require the existing
+ // exact encyclopedia/certificate route. No representative/seller fallback.
+ if(row.powertrainKind!=='combustion'||!row.powerHp||row.powerDataConfidence!=='source_exact'||
+    row.powerDataSource!=='auto_api_che168_source')return null;
+ const o=row.operational!,e=o.semanticEvidence as any,s=o.sourceSpecifications;
+ if(!s||s.sourceId!==row.sourceId||s.sourceOfferId!==row.sourceOfferId||s.sourceUrl!==o.sourceUrl||
+    !/^\d+$/.test(s.specificationId)||e?.powerHp?.status!=='exact'||e.powerHp.source!=='auto_api_che168:power_ps'||
+    e.powerHp.value!==row.powerHp||e?.fuel?.status!=='exact'||e.fuel.source!=='auto_api_che168:engine_type'||
+    e.fuel.value!==row.fuel||e?.engineCc?.status!=='exact'||e.engineCc.value!==row.engineCc||
+    e.engineCc.source!=='source_table:'+row.sourceId+':'+row.sourceOfferId+':'+s.specificationId||
+    enrichOfferWithSourceTableDisplacement({...row,engineCc:undefined}).engineCc!==row.engineCc||
+    !specificationEvidenceComplete(row))return null;
+ if(row.powerKw===undefined&&row.icePowerKw===undefined)return row;
+ if(!Number.isFinite(row.powerKw)||row.powerKw!<=0||row.powerKw!==row.icePowerKw||
+    Math.abs(row.powerHp-row.powerKw!*1.3596216173)>2||
+    (e?.powerKw!==undefined&&(e.powerKw.status!=='exact'||e.powerKw.value!==row.powerKw)))return null;
+ // normalizeAutoApiChe168 writes these equal numeric kW fields from explicit
+ // ice_power_kw, but its semantic map names only PS. Attest the validated
+ // native kW in the pricing copy so normal consistency logic cannot convert PS
+ // back into a different kW. Canonical input and its SHA remain unchanged.
+ return {...row,operational:{...o,semanticEvidence:{...e,
+  powerKw:{status:'exact',source:'auto_api_che168:ice_power_kw',value:row.powerKw}}}};
+}
 /** Retain only a process-local capability; there is no trust in a serialized
  * 'already priced' flag. Exact block validation still runs before publishing. */
 export async function readFreshChinaPreparedPrices(replay:FreshChinaPriceReplay,rows:readonly VehicleOffer[],
@@ -54,7 +93,7 @@ export async function openFreshChinaPriceReplay(input:{
     !Number.isSafeInteger(input.expectedInputRows)||input.expectedInputRows<1||input.expectedInputRows>1_000_000||
     ![input.source?.continuitySha256,input.source?.sourceReportSha256,input.source?.nativeAdmissionSha256,
       input.source?.sourceReplicaSha256].every(x=>sha.test(x??''))||!Number.isSafeInteger(input.source?.sourceCursor)||
-    input.source.sourceCursor<1||!Number.isSafeInteger(input.source?.sourceExpiresAt)||Date.now()>=input.source.sourceExpiresAt||
+    input.source.sourceCursor<1||(input.source.sourceBinding!==undefined&&!sha.test(input.source.sourceBinding))||!Number.isSafeInteger(input.source?.sourceExpiresAt)||Date.now()>=input.source.sourceExpiresAt||
     typeof input.assertSourceAuthority!=='function')return fail('scope');
  const sourceBinding=Object.freeze({...input.source});
  await input.assertSourceAuthority();
@@ -87,7 +126,7 @@ export async function openFreshChinaPriceReplay(input:{
    busy=true;
    try{
     await check();db.exec('BEGIN');
-    const outputs:PricedDecision[]=[],ready:{row:VehicleOffer;d:CleanDecision;i:number}[]=[];
+    const outputs:PricedDecision[]=[],ready:{row:VehicleOffer;sourceExact:VehicleOffer|null;d:CleanDecision;i:number}[]=[];
     for(const [i,row]of batch.rows.entries()){
      const d=batch.dispositions[i],serialized=JSON.stringify(row);
      if(!d||d.id!==row.id||d.inputSha256!==hash(serialized)||!id.test(row.id)||row.market!=='china'||
@@ -101,15 +140,34 @@ export async function openFreshChinaPriceReplay(input:{
      if(row.status!=='active'||row.sourceCurrency!=='CNY'||!Number.isFinite(row.sourcePrice)||!(row.sourcePrice>0)){
       outputs[i]=reject(d,'pricing:source_price_unusable');continue;
      }
-     ready.push({row,d,i});
+     if(sourceBinding.sourceBinding&&!exactChe168Identity(row,sourceBinding))return fail('native_source_identity');
+     // The fresh collector never calculates prices. Strip any out-of-contract
+     // stored price from this pathway rather than importing an earlier ledger.
+     const sourceExact=sourceBinding.sourceBinding?exactChe168SourceParameters(row):null;
+     const unpriced=sourceBinding.sourceBinding?{...row,totalRub:null,calculationSnapshot:undefined}:row;
+     ready.push({row:unpriced,d,i,sourceExact:sourceExact?{...sourceExact,totalRub:null,calculationSnapshot:undefined}:null});
     }
     const update=db.prepare('UPDATE eval SET pricedSha=?,price=?,native=? WHERE id=?');
     for(let start=0;start<ready.length;start+=64){
      const group=ready.slice(start,start+64);
-     const priced=await withCatalogFxBatch(fx,()=>applyActiveBusinessPriceBatch(group.map(x=>x.row),{readOnly:true,retainFullSnapshot:true}));
+     const priced=await withCatalogFxBatch(fx,async()=>{
+      const fallback=group.filter(x=>!x.sourceExact);
+      const unchanged=await applyActiveBusinessPriceBatch(fallback.map(x=>x.row),{readOnly:true,retainFullSnapshot:true});
+      let i=0;
+      return Promise.all(group.map(async x=>{
+       if(!x.sourceExact)return unchanged[i++];
+       // The same standard engine used for exact verified rows; no second
+       // customs computation in business repricing. Only record the actual
+       // frozen pricing clock that the calculator used.
+       const result=await calculateOfferWithVerifiedSpecifications(x.sourceExact);
+       return result.calculationSnapshot?.customs?.status==='ready'?{...result,
+        calculationSnapshot:{...result.calculationSnapshot,businessRepricedAt:fx.receipt.pricingAsOf}}:result;
+      }));
+     });
      for(const [j,row]of priced.entries()){
-      const {row:source,d,i}=group[j];
-      if(row.id!==source.id||row.sourceCurrency!==source.sourceCurrency||row.sourcePrice!==source.sourcePrice)return fail('engine_source_identity');
+      const {row:pricedInput,d,i}=group[j];
+      const source=batch.rows[i];
+      if(row.id!==source.id||row.sourceCurrency!==source.sourceCurrency||row.sourcePrice!==source.sourcePrice||pricedInput.id!==source.id)return fail('engine_source_identity');
       if(preparedChinaCalculationIncomplete(row,fx.receipt.pricingAsOf)){
        const reason=['needs_data','needs_customs_data','needs_currency_rate','estimated','ready'].includes(row.calculationStatus)?
         row.calculationStatus:'incomplete';
