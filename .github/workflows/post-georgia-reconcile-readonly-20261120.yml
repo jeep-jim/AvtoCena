@@ -1,0 +1,130 @@
+name: Reconcile exact post-Georgia internal and public state without writes
+'on':
+  push:
+    branches:
+    - main
+    paths:
+    - .github/workflows/post-georgia-reconcile-readonly-20261120.yml
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: post-georgia-reconcile-readonly-20261120
+  cancel-in-progress: false
+jobs:
+  inspect:
+    if: github.repository == 'jeep-jim/AvtoCena' && github.repository_id == '1289722938' && github.ref ==
+      'refs/heads/main' && github.run_attempt == '1' && github.event.before == 'ce7b0d77adb1db75a61fb4e6346a85e8a6585fc2'
+      && github.event.head_commit.message == 'Reconcile exact post-Georgia internal and public state without
+      writes'
+    environment: regcloud-staging
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+    - uses: actions/setup-node@v4
+      with:
+        node-version: 24
+    - name: Read exact current metadata and scoped Georgia settlement only
+      env:
+        GH_TOKEN: ${{ github.token }}
+        YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+        YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+      run: "set -euo pipefail\numask 077\ngh api /repos/jeep-jim/AvtoCena/actions/runs/44636687252 > \"$RUNNER_TEMP/georgia-run.json\"\
+        \ngh api /repos/jeep-jim/AvtoCena/actions/runs/44637245131 > \"$RUNNER_TEMP/europe-run.json\"\npython\
+        \ - \"$RUNNER_TEMP/georgia-run.json\" \"$RUNNER_TEMP/europe-run.json\" <<'PYRUN' \nimport json,sys\n\
+        r=json.load(open(sys.argv[1]))\nassert (r['id'],r['repository']['id'],r['run_attempt'],r['head_sha'],r['event'],r['head_branch'],r['path'],r['status'],r['conclusion'])==(44636687252,1289722938,1,'15f51970fb68555ad56b7c40f622517a15643377','schedule','main','.github/workflows/catalog-refresh-georgia.yml','completed','cancelled')\n\
+        e=json.load(open(sys.argv[2]))\nassert (e['id'],e['repository']['id'],e['run_attempt'],e['head_sha'],e['event'],e['head_branch'],e['path'],e['status'])==(44637245131,1289722938,1,'15f51970fb68555ad56b7c40f622517a15643377','schedule','main','.github/workflows/catalog-refresh-europe.yml','completed')\
+        \ and e['conclusion']\nPYRUN\ncat > \"$RUNNER_TEMP/inspect.mjs\" <<'READER'\nimport {createHash,createHmac}\
+        \ from 'node:crypto';\nconst g='gen_1795139106795_31f0f85d',root='catalog/raw-feed-coordination/v1/',key='catalog/internal/manifest.json',lockKey='catalog/import-lock.json',stateKey=root+'state.json',policyKey=root+'policy.json',proofKey=root+'internal/'+g+'/provenance.json',sessionKey=root+'internal/'+g+'/session.json';\n\
+        const pubKey='catalog/manifest.json',cursorNames=['china','uae','europe','georgia'],cursorKeys=cursorNames.map(m=>'catalog/intake-cursors/v1/'+m+'.json'),oldProofKey=root+'internal/gen_1794888961200_1ea2a688/provenance.json';\n\
+        const keys=new Set([pubKey,key,lockKey,stateKey,policyKey,proofKey,sessionKey,oldProofKey,...cursorKeys]);\n\
+        const sha=b=>createHash('sha256').update(b).digest('hex'),hmac=(k,s)=>createHmac('sha256',k).update(s).digest(),digest=v=>sha(JSON.stringify(v));\n\
+        const require=(condition,code)=>{if(!condition)throw Error(code);};\nexport async function readExact(key,env=process.env,receiptKey=null){\n\
+        \ require(keys.has(key)||(receiptKey===key&&/^catalog\\/raw-feed-coordination\\/v1\\/pointer-receipts\\\
+        /[a-f0-9]{32,64}\\.json$/.test(key)),'newday_scope');const access=env.YC_OBJECT_STORAGE_ACCESS_KEY_ID,secret=env.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY;\n\
+        \ require(access&&secret,'newday_credentials');\n const pathname='/avtocena-staging-8120751/migration-staging/full-20261011/'+key,host='s3.regru.cloud';\n\
+        \ const t=new Date().toISOString().replace(/[:-]|\\.\\d{3}/g,''),day=t.slice(0,8),scope=day+'/us-east-1/s3/aws4_request';\n\
+        \ const headers={host,'x-amz-content-sha256':sha(''),'x-amz-date':t},names=Object.keys(headers).sort();\n\
+        \ const request=['GET',pathname,'',names.map(k=>k+':'+headers[k]+'\\n').join(''),names.join(';'),sha('')].join('\\\
+        n');\n const signing=hmac(hmac(hmac(hmac('AWS4'+secret,day),'us-east-1'),'s3'),'aws4_request');\n\
+        \ headers.authorization='AWS4-HMAC-SHA256 Credential='+access+'/'+scope+', SignedHeaders='+names.join(';')+',\
+        \ Signature='+createHmac('sha256',signing).update(['AWS4-HMAC-SHA256',t,scope,sha(request)].join('\\\
+        n')).digest('hex');\n const r=await fetch('https://'+host+pathname,{method:'GET',headers,redirect:'error',signal:AbortSignal.timeout(15000)});\n\
+        \ if(r.status===404){await r.body?.cancel();return null;}\n const cap=key===stateKey?8*1024**2:1024**2;require(r.status===200&&!r.headers.get('content-encoding')&&/^\\\
+        d+$/.test(r.headers.get('content-length')||'')&&Number(r.headers.get('content-length'))<=cap,'newday_http');\n\
+        \ let n=0,parts=[];for await(const part of r.body){n+=part.length;require(n<=cap,'newday_size');parts.push(part);}\n\
+        \ const b=Buffer.concat(parts,n);const etag=r.headers.get('etag');require(n===Number(r.headers.get('content-length'))&&/^\"\
+        [^\"\\r\\n]{1,128}\"$/.test(etag||''),'newday_wire');return{digest:sha(b),etag,value:JSON.parse(new\
+        \ TextDecoder('utf-8',{fatal:true}).decode(b))};\n}\n\nconst run='44636687252',attempt='1',head='15f51970fb68555ad56b7c40f622517a15643377';\n\
+        const observed='f502f7ca0876fe7dc6a5a0b40c2752b496546f402fc0773bad1af02376cba6f1',old='0aa3524abf2aa0563811a7980ebe9eded7566a1d2ab36b057557dfb7caba6585';\n\
+        const pinnedOwner='701d3b25cb45ab68f4c7216f147ff4cc3c7c72249f2707aab5b15aacbe8a3779';\nconst ownerOK=v=>v?.runId===run&&v.attempt===attempt&&v.sourceSha===head;\n\
+        const nonce=v=>typeof v==='string'&&/^[a-f0-9]{32,64}$/.test(v);\nfunction ticket(v,registryId=v?.registryId){return\
+        \ {registryId,operationId:v?.operationId,owner:v?.owner,token:v?.token,grantRevision:v?.grantRevision,revision:v?.revision};}\n\
+        function pinTicket(t){return ownerOK(t?.owner)&&nonce(t.registryId)&&nonce(t.token)&&typeof t.operationId==='string'&&sha(t.operationId)===pinnedOwner&&Number.isSafeInteger(t.grantRevision)&&t.grantRevision>0&&Number.isSafeInteger(t.revision)&&t.revision>=t.grantRevision;}\n\
+        export function classify({manifest,proof,session,state,policy,receipt,lock}){\n if(!manifest||manifest.digest!==observed||manifest.value?.generationId!==g)return\
+        \ 'observed_internal_changed';\n if(!session||!state||!policy||!proof)return 'coordination_evidence_missing';\n\
+        \ const m=manifest.value,p=proof.value,s=session.value,r=state.value,pl=policy.value,rc=receipt?.value,l=lock?.value;\n\
+        \ const t=s?.binding?.ticket,b=s?.binding?.policy,c=s?.candidate,v=r?.pointers?.filter(x=>x?.id==='internal_catalog');\n\
+        \ if(p?.generationId!==g||p?.manifestSha256!==digest(m)||c?.sha256!==digest(m)||c?.provenanceSha256!==digest(p)||s?.base?.sha256!==old||\n\
+        \    !pinTicket(t)||s?.version!==1||s?.binding?.version!==1||b?.version!==1||b?.registryId!==t.registryId||b?.policySha256!==digest(pl)||\n\
+        \    pl?.version!==1||pl?.mode!=='required'||pl?.protocolVersion!==1||pl?.registryId!==t.registryId||\n\
+        \    r?.version!==1||r?.scope!=='nonjp_raw_lifecycle_v1'||r?.registryId!==t.registryId||v?.length!==1||\n\
+        \    (l?.operationType==='catalog_v3_publish_georgia'&&sha(l.operationId??'')!==pinnedOwner))return\
+        \ 'identity_or_digest_mismatch';\n const pointer=v[0],same=(x,y)=>digest(x)===digest(y);\n const rightReceipt=rc?.version===1&&rc.kind==='pointer_write_settled'&&rc.id==='internal_catalog'&&rc.key===key&&rc.valueSha256===c.sha256&&same(rc.ticket,t);\n\
+        \ if(pointer.pending!==null){\n  if(!pinTicket(ticket(pointer.pending,r.registryId))||!same(ticket(pointer.pending,r.registryId),t)||!same(pointer.pending.candidate,c)||!same(pointer.pending.base,s.base)||!same(pointer.current,s.base))return\
+        \ 'pending_mismatch';\n  if(receipt&&!rightReceipt)return 'settled_receipt_mismatch';\n  return rightReceipt?'physical_cas_receipt_present_registry_pending':'physical_cas_observed_without_settled_receipt';\n\
+        \ }\n if(!rightReceipt||!same(pointer.current,c)||!same(ticket(pointer.lastCommit,r.registryId),t)||!Number.isSafeInteger(pointer.lastCommit?.committedRevision)||pointer.lastCommit.committedRevision>pointer.revision)return\
+        \ 'registry_commit_or_receipt_mismatch';\n return 'exact_georgia_internal_commit_settled';\n}\n\n\
+        const shaRE=/^[a-f0-9]{64}$/;\nconst oldPublic='4c34c20d9784b571414390cab450ceeeaee60b00c168476100419ec5c05cb038';\n\
+        function validPolicy(p){return p?.version===1&&p.mode==='required'&&p.protocolVersion===1&&nonce(p.registryId);}\n\
+        function validState(s){return s?.version===1&&s.scope==='nonjp_raw_lifecycle_v1'&&nonce(s.registryId)&&Array.isArray(s.pointers)&&s.pointers.length<=32&&s.pointers.filter(x=>x?.id==='internal_catalog').length===1;}\n\
+        function validProof(p){return [1,2].includes(p?.version)&&typeof p.generationId==='string'&&shaRE.test(p.manifestSha256||'')&&Number.isSafeInteger(p.count)&&p.count>=0;}\n\
+        function validSession(s){return s?.version===1&&s?.binding?.version===1&&s.binding.policy?.version===1&&pinTicket(s.binding.ticket)&&shaRE.test(s?.candidate?.sha256||'')&&shaRE.test(s?.base?.sha256||'');}\n\
+        function validReceipt(r){return r?.version===1&&r.kind==='pointer_write_settled'&&r.id==='internal_catalog'&&r.key===key&&shaRE.test(r.valueSha256||'')&&pinTicket(r.ticket);}\n\
+        const tag=(x,validator)=>x.kind==='present'&&!validator(x.data.value)?'invalid_shape':x.kind;\nfunction\
+        \ redactPointer(x){if(x.kind!=='present')return {status:x.kind};const generation=x.data.value?.generationId;return\
+        \ /^gen_\\d{1,20}_[a-z0-9-]{1,80}$/.test(generation||'')?{status:'present',generation,sha256:x.data.digest,etag:x.data.etag}:{status:'invalid_shape'};}\n\
+        function redactCursor(x,market){\n if(x.kind!=='present')return {status:x.kind};const v=x.data.value;\n\
+        \ if(v?.version!==1||v.market!==market||!Array.isArray(v.sources)||v.sources.length>20||v.sources.some(s=>!s||typeof\
+        \ s!=='object'||!/^[-a-zA-Z0-9_]{1,72}$/.test(s.sourceId||'')||(s.provider!==undefined&&!/^[a-zA-Z0-9_-]{1,64}$/.test(s.provider))))return\
+        \ {status:'invalid_shape'};\n return {status:'present',sha256:x.data.digest,etag:x.data.etag,generation:/^gen_\\\
+        d{1,20}_[a-z0-9-]{1,80}$/.test(v.generationId||'')?v.generationId:null,sources:v.sources.map(s=>({sourceId:s.sourceId,provider:s.provider??null,cursor:Number.isSafeInteger(s.cursor)&&s.cursor>=0?s.cursor:null,cursorTokenPresent:typeof\
+        \ s.cursor==='string'&&s.cursor.length>0,replicaPresent:Boolean(s.replica)}))};\n}\nfunction redactLock(x,now){\n\
+        \ if(x.kind!=='present')return {status:x.kind};const v=x.data.value;\n if(typeof v?.lockedUntil!=='string'||v.lockedUntil!==''&&!Number.isFinite(Date.parse(v.lockedUntil)))return\
+        \ {status:'invalid_shape'};\n return {status:'present',state:v.lockedUntil===''?'released':Date.parse(v.lockedUntil)<=now?'expired':'active',expiresAt:v.lockedUntil||null,operationType:/^[a-zA-Z0-9_-]{1,100}$/.test(v.operationType||'')?v.operationType:null,observedGeorgiaOperation:v.operationId?sha(v.operationId)===pinnedOwner:false};\n\
+        }\nfunction compareChina(newManifest,oldBytes){\n const ids=['autohome_used_china_open','autohome_new_china_open'];\n\
+        \ if(!Buffer.isBuffer(oldBytes)||oldBytes.length>1024**2||sha(oldBytes)!==old)return {status:'uncompared_no_authenticated_full_old_manifest'};\n\
+        \ let previous;try{previous=JSON.parse(new TextDecoder('utf-8',{fatal:true}).decode(oldBytes));}catch{return\
+        \ {status:'invalid_authenticated_base'};}\n if(previous.generationId!=='gen_1794888961200_1ea2a688'||!previous.sources||!newManifest?.sources)return\
+        \ {status:'invalid_authenticated_base'};\n const scopes=ids.map(source=>{const a=previous.sources[source],b=newManifest.sources[source];return\
+        \ {source,previousSha256:a?digest(a):null,currentSha256:b?digest(b):null,matched:Boolean(a&&b&&digest(a)===digest(b))};});\n\
+        \ return {status:scopes.every(x=>x.matched)?'both_exact_descriptors_unchanged':'descriptor_mismatch',scopes};\n\
+        }\nexport function compareOldProvenanceChina(newManifest,p,authenticatedProvenanceSha256=null){\n\
+        \ // A prior provenance file with the correct generation and embedded manifest\n // digest is only\
+        \ a lead unless the older object's own exact SHA was independently pinned.\n const ids=['autohome_used_china_open','autohome_new_china_open'];\n\
+        \ if(p?.version!==2||p.generationId!=='gen_1794888961200_1ea2a688'||p.manifestSha256!==old||!Array.isArray(p.contributions)||p.contributions.length>100||!Array.isArray(p.unknownSources))return\
+        \ {status:'unavailable'};\n const anchored=shaRE.test(authenticatedProvenanceSha256||'')&&digest(p)===authenticatedProvenanceSha256;\n\
+        \ const scopes=ids.map(source=>{const entries=p.contributions.filter(x=>x?.sourceId===source),current=newManifest?.sources?.[source],proof=entries[0];\n\
+        \  const covered=entries.length===1&&!p.unknownSources.includes(source)&&shaRE.test(proof?.sourceSha256||'')&&shaRE.test(proof?.sha256||'')&&Number.isSafeInteger(proof?.count)&&proof.count>0;\n\
+        \  return {source,covered,descriptorMatched:covered&&Boolean(current)&&current.count===proof.count&&digest(current)===proof.sourceSha256};\n\
+        \ });\n return {status:!anchored?'unanchored_prior_provenance_lead':!scopes.every(x=>x.covered)?'authenticated_but_incomplete':scopes.every(x=>x.descriptorMatched)?'authenticated_exact_descriptor_match':'authenticated_descriptor_mismatch',scopes};\n\
+        }\nexport async function reconcile({read=readExact,now=()=>Date.now(),oldBytes=null,oldProvenanceSha256=null,requiredByRuntime=null}={}){\n\
+        \ let calls=0;\n const status=async(k,receipt)=>{calls++;try{const a=await read(k,process.env,receipt);return\
+        \ a===null?{kind:'absent_404'}:{kind:'present',data:a};}catch{return {kind:'invalid_or_unreadable'};}};\n\
+        \ const stableKeys=[pubKey,key,lockKey,stateKey,policyKey,...cursorKeys],gets=()=>Promise.all(stableKeys.map(k=>status(k)));\n\
+        \ const before=await gets(),[proof,session,priorProof]=await Promise.all([proofKey,sessionKey,oldProofKey].map(k=>status(k)));\n\
+        \ const t=session.data?.value?.binding?.ticket;const receiptKey=validSession(session.data?.value)?root+'pointer-receipts/'+t.token+'.json':null;\n\
+        \ const receipt=receiptKey?await status(receiptKey,receiptKey):{kind:'unresolved_no_authenticated_ticket'};\n\
+        \ const after=await gets(),[pub,internal,lock,state,policy,...cursors]=after;\n const tuple=x=>[x.kind,x.data?.digest,x.data?.etag];\n\
+        \ const stable=after.every((x,i)=>JSON.stringify(tuple(x))===JSON.stringify(tuple(before[i])))&&!after.some(x=>x.kind==='invalid_or_unreadable');\n\
+        \ const objects={policy:tag(policy,validPolicy),state:tag(state,validState),provenance:tag(proof,validProof),session:tag(session,validSession),receipt:tag(receipt,validReceipt),previousProvenance:tag(priorProof,validProof)};\n\
+        \ const hasPolicy=objects.policy==='present',hasState=objects.state==='present';\n const registryMatch=hasPolicy&&hasState&&policy.data.value.registryId===state.data.value.registryId;\n\
+        \ const bothAbsent=objects.policy==='absent_404'&&objects.state==='absent_404';\n const disabled=bothAbsent&&requiredByRuntime===false;\n\
+        \ const coord=registryMatch?'required_active_registry':disabled?'disabled_confirmed_policy_and_state_absent':bothAbsent&&requiredByRuntime===null?'both_absent_runtime_requirement_unverified':'invalid_or_unreadable_not_disabled';\n\
+        \ let settlement;\n if(!stable)settlement='unstable_or_unreadable';\n else if(internal.data?.digest!==observed)settlement='observed_internal_changed';\n\
+        \ else if(disabled){\n  const current=internal.data.value,p=proof.data?.value;\n  settlement=objects.session!=='absent_404'?'disabled_conflicting_session':objects.provenance!=='present'||p.generationId!==g||p.manifestSha256!==digest(current)?'disabled_missing_or_invalid_provenance':'disabled_valid_provenance_pointer_only_no_registry_settlement';\n\
+        \ }else if(!registryMatch)settlement='coordination_invalid';\n else settlement=classify(Object.fromEntries(Object.entries({manifest:internal,lock,state,policy,proof,session,receipt}).map(([k,v])=>[k,v.data??null])));\n\
+        \ return {checkedAt:new Date(now()).toISOString(),stable,rawCoordinationRequiredByReviewedRuntime:requiredByRuntime,coordination:coord,objects,settlement,publicationAuthorized:false,public:{...redactPointer(pub),sameAsPinned:pub.data?.digest===oldPublic},internal:redactPointer(internal),lease:redactLock(lock,now()),cursors:Object.fromEntries(cursors.map((x,i)=>[cursorNames[i],redactCursor(x,cursorNames[i])])),china:compareChina(internal.data?.value,oldBytes),oldProvenanceChina:compareOldProvenanceChina(internal.data?.value,priorProof.data?.value,oldProvenanceSha256),storageGets:calls,storageWrites:0,supplierCalls:0};\n\
+        }\nif(process.argv.includes('--inspect'))try{const x=await reconcile();console.log(JSON.stringify(x));if(!x.stable||!x.public.sameAsPinned||x.lease.state==='active'||x.china.status!=='both_exact_descriptors_unchanged'||x.settlement!=='exact_georgia_internal_commit_settled')process.exitCode=2;}catch{console.error(JSON.stringify({settlement:'exact_read_failed',storageWrites:0,supplierCalls:0}));process.exitCode=1;}\n\
+        READER\ntest \"$(sha256sum \"$RUNNER_TEMP/inspect.mjs\" | cut -d' ' -f1)\" = 3bc7d952d87b8b5bbcc7143215c8fbaccedf44c124d7acdc416ee85e3b6eedcb\n\
+        node \"$RUNNER_TEMP/inspect.mjs\" --inspect\n"
