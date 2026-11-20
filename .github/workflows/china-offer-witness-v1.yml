@@ -2,7 +2,7 @@ name: Verify exact active China listing position without changes
 on:
   push:
     branches: [main]
-    paths: [.github/market-runs/china-offer-witness-v1.sha256]
+    paths: [.github/market-runs/china-offer-witness-v2.sha256]
 permissions:
   contents: read
 jobs:
@@ -15,6 +15,7 @@ jobs:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
           ref: ${{ github.sha }}
+          fetch-depth: 2
           persist-credentials: false
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
@@ -34,14 +35,17 @@ jobs:
               ref = json.load(f)
           head = ref.get('head_commit') or {}
           changes = ref.get('commits') or []
-          expected = '.github/market-runs/china-offer-witness-v1.sha256'
           assert ref.get('ref') == 'refs/heads/main' and not ref.get('forced') and not ref.get('deleted')
           assert len(changes) == 1 and head.get('id') == changes[0].get('id') == os.environ['GITHUB_SHA']
-          assert head.get('added') == [expected] and not head.get('removed') and not head.get('modified')
+          import subprocess
+          parent = subprocess.check_output(['git', 'rev-parse', 'HEAD^'], text=True).strip()
+          assert ref.get('before') == parent, 'unexpected push parent'
+          diff = subprocess.check_output(['git','diff-tree','--no-commit-id','--name-status','-r','HEAD'],text=True).splitlines()
+          assert diff == ['A\t.github/market-runs/china-offer-witness-v2.sha256'], 'not the single exact added marker'
           PY2
           test "$(git -C actor rev-parse HEAD)" = 22867cbcfaee27b2e8917b6bf880e44827f67b60
           pin=3c31b2653830b753c57fcfb399bfaf69eaeeab2c666916e27ffa142c60240d56
-          cmp -s .github/market-runs/china-offer-witness-v1.sha256 <(printf '%s\n' "$pin")
+          cmp -s .github/market-runs/china-offer-witness-v2.sha256 <(printf '%s\n' "$pin")
           printf '%s  %s\n' "$pin" .github/operations/china-offer-witness-v1/witness.mts | sha256sum -c --status
           cp .github/operations/china-offer-witness-v1/witness.mts actor/positional-witness.mts
           cd actor && npm ci --ignore-scripts --no-audit --no-fund
