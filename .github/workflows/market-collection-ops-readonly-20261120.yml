@@ -1,0 +1,53 @@
+name: Check collection switches and market operations without writes
+on:
+  push:
+    branches: [main]
+    paths: [.github/market-runs/market-collection-ops-readonly-20261120.json]
+permissions:
+  contents: read
+jobs:
+  inspect:
+    if: >-
+      github.event_name == 'push' && github.repository == 'jeep-jim/AvtoCena' &&
+      github.repository_id == '1289722938' && github.ref == 'refs/heads/main' &&
+      github.run_attempt == '1' && !github.event.deleted && !github.event.forced &&
+      github.event.head_commit.message == 'Check collection switches and market operations without writes'
+    environment: regcloud-staging
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    env:
+      PROBE_SHA: 453c3b5b8c5b6f867de98e33065eb3982e06e633e8f572c39d911128067f5ac0
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 2
+          persist-credentials: false
+      - name: Require only the reviewed marker added to exact push parent
+        shell: bash
+        env:
+          EVENT_BEFORE: ${{ github.event.before }}
+        run: |
+          set -euo pipefail
+          readonly marker=.github/market-runs/market-collection-ops-readonly-20261120.json
+          readonly script=.github/operations/market-collection-ops-readonly-20261120/probe.mjs
+          readonly workflow=.github/workflows/market-collection-ops-readonly-20261120.yml
+          [[ "$GITHUB_SHA" =~ ^[a-f0-9]{40}$ && "$EVENT_BEFORE" =~ ^[a-f0-9]{40}$ && "$EVENT_BEFORE" != 0000000000000000000000000000000000000000 ]]
+          [[ "$(git rev-parse HEAD)" == "$GITHUB_SHA" && "$(git show -s --format=%P HEAD)" == "$EVENT_BEFORE" ]]
+          cmp -s <(git diff --no-ext-diff --no-renames --name-status -z "$EVENT_BEFORE" "$GITHUB_SHA" --) <(printf 'A\0%s\0' "$marker")
+          [[ "$(git ls-tree HEAD -- "$marker" | cut -d' ' -f1)" == 100644 ]]
+          for file in "$script" "$workflow"; do cmp -s <(git show "$EVENT_BEFORE:$file") "$file"; done
+          printf '%s  %s\n' "$PROBE_SHA" "$script" | sha256sum --strict --check --status
+          cmp -s "$marker" <(printf '{"version":1,"operation":"market_collection_ops_get_only_20261120","installedParent":"%s","probeSha256":"%s"}\n' "$EVENT_BEFORE" "$PROBE_SHA")
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 24.22.1
+      - name: Read up to six exact Regcloud summaries
+        shell: bash
+        env:
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+        run: |
+          set -euo pipefail
+          umask 077
+          node .github/operations/market-collection-ops-readonly-20261120/probe.mjs
