@@ -23,4 +23,4 @@ jobs:
           YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
         run: node .github/china-reader-off-v1/observe-state.mjs
 
-# Exact state after the automatically rolled-back switch, 10:55 UTC.
+# Exact state after final gateway check rolled back, 11:06 UTC.
