@@ -1,0 +1,104 @@
+name: Verify isolated China private runtime inputs
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/china-own-runtime-context-readonly-v1.yml
+permissions:
+  contents: read
+concurrency:
+  group: china-own-runtime-context-readonly-v1
+  cancel-in-progress: false
+jobs:
+  inspect:
+    if: github.repository == 'jeep-jim/AvtoCena' && github.repository_id == '1289722938' && github.ref == 'refs/heads/main' && github.run_attempt == '1' && github.event.head_commit.message == 'Verify isolated China private runtime inputs'
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    environment: regcloud-staging
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: 182afa41b96f008fab1471bb82b46b68812a2c6d
+          path: context-plan
+          persist-credentials: false
+          sparse-checkout: .github/operations/china-full-fresh-v1/runtime-context-plan.json
+          sparse-checkout-cone-mode: false
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: f4dc98aaab916b29419d173994d66562aa5901f1
+          path: reviewed
+          persist-credentials: false
+          sparse-checkout: |
+            scripts/catalog-china-materialize-runtime.mjs
+            apps/web/lib/catalog/china-prepared-editorial.mjs
+          sparse-checkout-cone-mode: false
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: 83ff17075e9188dcf227c8752dc064248d5f42e0
+          path: installed-models
+          persist-credentials: false
+          sparse-checkout: data/catalog/vehicle-knowledge
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 24.22.1
+      - name: Read exact approved runtime inputs with redacted diagnostics
+        shell: bash
+        env:
+          REG_ACCESS: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          REG_SECRET: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+        run: |
+          set -euo pipefail
+          umask 077
+          test "$(git -C context-plan rev-parse HEAD)" = 182afa41b96f008fab1471bb82b46b68812a2c6d
+          test "$(git -C reviewed rev-parse HEAD)" = f4dc98aaab916b29419d173994d66562aa5901f1
+          test "$(git -C installed-models rev-parse HEAD)" = 83ff17075e9188dcf227c8752dc064248d5f42e0
+          dir="$(mktemp -d "$(realpath "$RUNNER_TEMP")/china-runtime-context-readonly.XXXXXXXX")"
+          trap 'rm -rf -- "$dir"' EXIT
+          install -m 0600 context-plan/.github/operations/china-full-fresh-v1/runtime-context-plan.json "$dir/plan.json"
+          test "$(sha256sum "$dir/plan.json" | cut -d ' ' -f 1)" = cb45a5f988a58711a1e8a26f322708ec48fc6e3b3b214b92576ceea9daca5271
+          CHINA_PROBE_DIR="$dir" node --input-type=module - <<'JS'
+          import {materializeChinaRuntimeContext} from './reviewed/scripts/catalog-china-materialize-runtime.mjs';
+          import {readFile,realpath} from 'node:fs/promises';
+          import {createHash} from 'node:crypto';
+          import path from 'node:path';
+          const DIR=await realpath(process.env.CHINA_PROBE_DIR);
+          const raw=await readFile(path.join(DIR,'plan.json')),plan=JSON.parse(raw);
+          const digest=createHash('sha256').update(raw).digest('hex');
+          const release='83ff17075e9188dcf227c8752dc064248d5f42e0',idx='bf2c72cb7a260ef093c0a43c2b0dad9c4c9094a4d6dc3811dd0d7f7626b0d72b';
+          const origin='https://s3.regru.cloud',prefix='/avtocena-staging-8120751/migration-staging/full-20261011/';
+          const labels=new Map(Object.entries({
+           ['knowledge/encyclopedia/calculation-releases/'+release+'.json']:'encyclopedia_release_alias',
+           ['knowledge/encyclopedia/calculation-indexes/'+idx+'.json']:'encyclopedia_index',
+           'markets/markets.json':'market_settings','fees/exchange-rates.json':'stored_official_fx',
+           'catalog-editorial/current.json':'editorial','catalog/china-cny-prices/current.json':'cny_price_anchor',
+          }));
+          const access=process.env.REG_ACCESS,secret=process.env.REG_SECRET;
+          delete process.env.REG_ACCESS;delete process.env.REG_SECRET;
+          let requests=0;
+          const log=(record)=>console.log(JSON.stringify({...record,storageWrites:0,publicationAuthorized:false,cursorAdvanceAuthorized:false}));
+          try{
+           const result=await materializeChinaRuntimeContext({plan,expectedPlanSha256:digest,
+            releaseRoot:await realpath('installed-models'),out:path.join(DIR,'avtocena-china-context-readonly'),credentials:{access,secret},
+            fetchImpl:async(input,opts)=>{
+             const u=new URL(String(input)),method=opts?.method;
+             const label=u.pathname.startsWith(prefix)?labels.get(u.pathname.slice(prefix.length)):undefined;
+             if(u.origin!==origin||u.search||u.hash||!label||!['HEAD','GET'].includes(method)||opts.redirect!=='error'||++requests>18)
+              throw Error('china_runtime_context:probe_read_scope');
+             let r;
+             try{r=await fetch(input,opts);}
+             catch{log({phase:'readonly_io',object:label,method,transportFailure:true});throw Error('china_runtime_context:probe_transport');}
+             const len=r.headers.get('content-length'),etag=r.headers.get('etag'),encoding=r.headers.get('content-encoding');
+             log({phase:'readonly_io',object:label,method,http:r.status,
+              validQuotedEtag:/^"[^"\r\n]{1,128}"$/.test(etag??''),
+              contentLength:len&&/^\d{1,12}$/.test(len)?Number(len):null,
+              encoding:encoding===null?'identity':encoding==='gzip'?'gzip':'other'});
+             return r;
+            }});
+           log({status:'local_context_verified',receiptSha256:result.receiptSha256,files:result.receipt.runtimeDataFiles.length,requests});
+          }catch(e){
+           const reason=typeof e?.message==='string'&&/^china_runtime_context:[a-z0-9_]+$/.test(e.message)?e.message:
+            e?.code==='ENOENT'?'local_input_missing':'runtime_read_refused';
+           log({status:'not_materialized',reason,requests});
+           process.exitCode=1;
+          }
+          JS
