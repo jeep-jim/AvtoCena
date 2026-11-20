@@ -1,0 +1,82 @@
+name: Read exact China and UAE pointers after cooperative stop
+'on':
+  push:
+    branches:
+    - main
+    paths:
+    - .github/workflows/china-uae-after-stop-readonly-20261120.yml
+permissions:
+  contents: read
+concurrency:
+  group: china-uae-after-stop-readonly-20261120
+  cancel-in-progress: false
+jobs:
+  inspect:
+    if: github.repository == 'jeep-jim/AvtoCena' && github.repository_id == '1289722938' && github.ref ==
+      'refs/heads/main' && github.run_attempt == '1' && github.event.before == '15f51970fb68555ad56b7c40f622517a15643377'
+      && github.event.head_commit.message == 'Read exact China and UAE pointers after cooperative stop'
+    environment: regcloud-staging
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+    - uses: actions/setup-node@v4
+      with:
+        node-version: 24
+    - name: Read only eight selected storage objects twice
+      env:
+        YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+        YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+      run: "set -euo pipefail\numask 077\ncat > \"$RUNNER_TEMP/reconcile.mjs\" <<'READER'\nimport {createHash,createHmac}\
+        \ from 'node:crypto';\nconst keys=new Set(['catalog/manifest.json','catalog/internal/manifest.json','catalog/import-lock.json','catalog/intake-cursors/v1/china.json','catalog/operations/collection-controls-v1.json','catalog/intake-cursors/v1/uae.json','catalog/intake-cursors/v1/europe.json','catalog/intake-cursors/v1/georgia.json']);\n\
+        const sha=b=>createHash('sha256').update(b).digest('hex'),hmac=(k,s)=>createHmac('sha256',k).update(s).digest();\n\
+        const fixed={\n public:'4c34c20d9784b571414390cab450ceeeaee60b00c168476100419ec5c05cb038',\n internal:'0aa3524abf2aa0563811a7980ebe9eded7566a1d2ab36b057557dfb7caba6585',\n\
+        \ publicGen:'gen_1794878284419_a611dfcf', internalGen:'gen_1794888961200_1ea2a688'\n};\nconst require=(condition,code)=>{if(!condition)throw\
+        \ Error(code);};\nexport async function readChinaGoKey(key,env=process.env){\n require(keys.has(key),'newday_scope');const\
+        \ access=env.YC_OBJECT_STORAGE_ACCESS_KEY_ID,secret=env.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY;\n require(access&&secret,'newday_credentials');\n\
+        \ const pathname='/avtocena-staging-8120751/migration-staging/full-20261011/'+key,host='s3.regru.cloud';\n\
+        \ const t=new Date().toISOString().replace(/[:-]|\\.\\d{3}/g,''),day=t.slice(0,8),scope=day+'/us-east-1/s3/aws4_request';\n\
+        \ const headers={host,'x-amz-content-sha256':sha(''),'x-amz-date':t},names=Object.keys(headers).sort();\n\
+        \ const request=['GET',pathname,'',names.map(k=>k+':'+headers[k]+'\\n').join(''),names.join(';'),sha('')].join('\\\
+        n');\n const signing=hmac(hmac(hmac(hmac('AWS4'+secret,day),'us-east-1'),'s3'),'aws4_request');\n\
+        \ headers.authorization='AWS4-HMAC-SHA256 Credential='+access+'/'+scope+', SignedHeaders='+names.join(';')+',\
+        \ Signature='+createHmac('sha256',signing).update(['AWS4-HMAC-SHA256',t,scope,sha(request)].join('\\\
+        n')).digest('hex');\n const r=await fetch('https://'+host+pathname,{method:'GET',headers,redirect:'error',signal:AbortSignal.timeout(15000)});\n\
+        \ if((key==='catalog/import-lock.json'||['catalog/intake-cursors/v1/uae.json','catalog/intake-cursors/v1/europe.json','catalog/intake-cursors/v1/georgia.json'].includes(key))&&r.status===404){await\
+        \ r.body?.cancel();return null;}\n require(r.status===200&&!r.headers.get('content-encoding')&&/^\\\
+        d+$/.test(r.headers.get('content-length')||'')&&Number(r.headers.get('content-length'))<=1024**2,'newday_http');\n\
+        \ let n=0,parts=[];for await(const part of r.body){n+=part.length;require(n<=1024**2,'newday_size');parts.push(part);}\n\
+        \ const b=Buffer.concat(parts,n),etag=r.headers.get('etag');require(n===Number(r.headers.get('content-length'))&&/^\"\
+        [^\"\\r\\n]{1,128}\"$/.test(etag||''),'newday_wire');return{digest:sha(b),etag,bytes:n,value:JSON.parse(new\
+        \ TextDecoder('utf-8',{fatal:true}).decode(b))};\n}\nexport function validateNewChinaScope({pub,internal,lease,cursor,controls},now=Date.now()){\n\
+        \ require(pub?.digest===fixed.public&&pub.value?.generationId===fixed.publicGen&&pub.etag==='\"de7be92050ed3919e2422e86b7fda737\"\
+        '&&\n  internal?.digest===fixed.internal&&internal.value?.generationId===fixed.internalGen&&internal.etag==='\"\
+        dc38c32d0c3937415c811028f5e1684e\"','newday_baseline');\n const until=lease?.value?.lockedUntil;\n\
+        \ require(lease===null||until===''||typeof until==='string'&&Date.parse(until)<=now,'newday_lease');\n\
+        \ const sources=cursor?.value?.sources?.filter(x=>x.provider==='auto_api_che168')??[];\n require(cursor?.etag&&cursor.value.version===1&&cursor.value.market==='china'&&sources.length===1&&sources[0].cursor===12360638&&\n\
+        \  typeof sources[0].snapshotBinding==='string'&&/^[0-9a-f]{64}$/.test(sources[0].snapshotBinding)&&sources[0].replica,'newday_cursor');\n\
+        \ const c=controls?.value;\n require(c?.version===1&&c.markets?.china?.enabled===true&&c.sources?.che168_feed?.enabled===true&&c.sources?.ajes_china_feed?.enabled===false,'newday_controls');\n\
+        \ return {baselineMatched:true,leaseNotActive:true,chinaCursor:12360638,ownerChinaAndChe168Enabled:true,ownerAjesDisabled:true};\n\
+        }\n\nexport async function reconcile({read=readChinaGoKey,now=()=>Date.now()}={}){\n let storageGets=0;\n\
+        \ const batch=()=>Promise.all([...keys].map(k=>{storageGets++;return read(k);}));\n const before=await\
+        \ batch(),after=await batch();const [pub,internal,lease,china,controls,uae,europe,georgia]=after;\n\
+        \ const ident=v=>v?[v.digest,v.etag,v.bytes]:null;\n const stable=after.every((v,i)=>JSON.stringify(ident(v))===JSON.stringify(ident(before[i])));\n\
+        \ require(pub&&internal&&china&&controls,'newday_required');\n function manifest(x){const generation=x.value?.generationId;require(typeof\
+        \ generation==='string'&&/^gen_\\d{1,20}_[a-z0-9-]{1,80}$/.test(generation),'newday_manifest');return\
+        \ {sha256:x.digest,etag:x.etag,bytes:x.bytes,generation};}\n function cursor(x,market){if(x===null)return\
+        \ {exists:false};require(x.value?.market===market&&x.value?.version===1&&Array.isArray(x.value?.sources)&&x.value.sources.length<=12,'newday_cursor_shape');\n\
+        \   const sources=x.value.sources.map(s=>{require(typeof s.provider==='string'&&/^[a-zA-Z0-9_-]{1,48}$/.test(s.provider),'newday_cursor_shape');return\
+        \ {provider:s.provider,cursor:Number.isSafeInteger(s.cursor)&&s.cursor>=0?s.cursor:null,replicaPresent:Boolean(s.replica),snapshotBindingPresent:typeof\
+        \ s.snapshotBinding==='string'&&/^[a-f0-9]{64}$/.test(s.snapshotBinding)};});\n   return {exists:true,sha256:x.digest,etag:x.etag,sources};\n\
+        \ }\n function leaseState(x,t){if(x===null)return {state:'absent'};const u=x.value?.lockedUntil;\n\
+        \   require(typeof u==='string'&&(u===''||Number.isFinite(Date.parse(u))),'newday_lease_shape');\n\
+        \   const v=x.value.operationType,type=typeof v==='string'&&/^[a-zA-Z0-9_-]{1,100}$/.test(v)?v:null;\n\
+        \   return {state:u===''?'released':Date.parse(u)<=t?'expired':'active',operationType:type,expiresAt:u||null,ownerDigest:typeof\
+        \ x.value.operationId==='string'?sha(x.value.operationId):null,sha256:x.digest};\n }\n const c=controls.value;\n\
+        \ require(c?.version===1&&typeof c.markets?.china?.enabled==='boolean'&&typeof c.sources?.che168_feed?.enabled==='boolean'&&typeof\
+        \ c.sources?.ajes_china_feed?.enabled==='boolean','newday_controls');\n const gates={chinaEnabled:c.markets.china.enabled,che168Enabled:c.sources.che168_feed.enabled,ajesChinaEnabled:c.sources.ajes_china_feed.enabled,uaeEnabled:typeof\
+        \ c.markets?.uae?.enabled==='boolean'?c.markets.uae.enabled:null};\n let originalChinaGate=false;try{originalChinaGate=validateNewChinaScope({pub,internal,lease,cursor:china,controls},now()).baselineMatched;}catch{}\n\
+        \ const lock=leaseState(lease,now());\n return {checkedAt:new Date(now()).toISOString(),stable,atomicSnapshotProven:false,readyToEvaluate:stable&&lock.state!=='active',originalChinaGate,public:manifest(pub),internal:manifest(internal),lock,chinaCursor:cursor(china,'china'),uaeCursor:cursor(uae,'uae'),europeCursor:cursor(europe,'europe'),georgiaCursor:cursor(georgia,'georgia'),controls:gates,storageGets,storageHeads:0,storageWrites:0,supplierCalls:0,publicationAuthorized:false};\n\
+        }\nif(process.argv.includes('--reconcile')){\n try{const report=await reconcile();console.log(JSON.stringify(report));if(!report.readyToEvaluate)process.exitCode=2;}\n\
+        \ catch(e){console.error(JSON.stringify({error:/^newday_[a-z_]+$/.test(e?.message||'')?e.message:'newday_read_failed',storageWrites:0,supplierCalls:0}));process.exitCode=1;}\n\
+        }\nREADER\ntest \"$(sha256sum \"$RUNNER_TEMP/reconcile.mjs\" | cut -d' ' -f1)\" = 61569ef28d9f72d9c5fcb2da87741cf5412fe12c6d251bfc9f4b8e8401fcd81b\n\
+        node \"$RUNNER_TEMP/reconcile.mjs\" --reconcile\n"
