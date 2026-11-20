@@ -7,9 +7,10 @@ import { PublicStaffAlerts } from "../crm/PublicStaffAlerts";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { BrandMark } from "@/components/brand/BrandMark";
+import { setSiteTheme, useSiteTheme } from "@/lib/theme/use-site-theme";
+import type { SiteTheme } from "@/lib/theme/browser-theme";
 
 const FAVORITES_KEY = "avtocena_favorites";
-const THEME_KEY = "avtocena_theme";
 
 type Props = {
   backHref?: string;
@@ -17,8 +18,6 @@ type Props = {
   backLabel?: string;
   className?: string;
 };
-
-type Theme = "dark" | "light";
 
 function readCount() {
   try {
@@ -29,7 +28,7 @@ function readCount() {
   }
 }
 
-function updateBrowserChrome(theme: Theme) {
+function updateBrowserChrome(theme: SiteTheme) {
   const color = theme === "light" ? "#ffffff" : "#0f172a";
   let themeColor = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]');
   if (!themeColor) {
@@ -46,14 +45,9 @@ function updateBrowserChrome(theme: Theme) {
     document.head.appendChild(statusBar);
   }
   statusBar.content = theme === "light" ? "default" : "black-translucent";
-  document.documentElement.style.colorScheme = theme;
 }
 
-function applyBrowserTheme(theme: Theme) {
-  document.documentElement.dataset.theme = theme;
-  localStorage.setItem(THEME_KEY, theme);
-  updateBrowserChrome(theme);
-
+function updateThemeIcon() {
   let icon = document.querySelector<HTMLLinkElement>('link[data-avtocena-theme-icon]');
   if (!icon) {
     icon = document.createElement("link");
@@ -63,7 +57,6 @@ function applyBrowserTheme(theme: Theme) {
   }
   icon.href = "/favicon-round-v3.svg";
   icon.type = "image/svg+xml";
-  window.dispatchEvent(new CustomEvent("avtocena:theme-changed", { detail: { theme } }));
 }
 
 function StarIcon({ filled = true }: { filled?: boolean }) {
@@ -74,7 +67,7 @@ function StarIcon({ filled = true }: { filled?: boolean }) {
   );
 }
 
-function ThemeIcon({ theme }: { theme: Theme }) {
+function ThemeIcon({ theme }: { theme: SiteTheme }) {
   if (theme === "light") {
     return (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -107,7 +100,7 @@ export function PublicHeader({ backHref, hideBack = false, backLabel = "Наза
   const pathname = usePathname();
   const router = useRouter();
   const [favoritesCount, setFavoritesCount] = useState(0);
-  const [theme, setTheme] = useState<Theme>("dark");
+  const { preference, theme } = useSiteTheme();
   const catalogActive = pathname === "/cars" || pathname.startsWith("/cars/");
 
   useEffect(() => {
@@ -122,24 +115,10 @@ export function PublicHeader({ backHref, hideBack = false, backLabel = "Наза
   }, []);
 
   useEffect(() => {
-    const current = document.documentElement.dataset.theme;
-    const stored = localStorage.getItem(THEME_KEY);
-    const initial: Theme = current === "light" || current === "dark"
-      ? current
-      : stored === "light" || stored === "dark"
-        ? stored
-        : window.matchMedia?.("(prefers-color-scheme: light)").matches
-          ? "light"
-          : "dark";
-    setTheme(initial);
-    applyBrowserTheme(initial);
-  }, []);
-
-  function toggleTheme() {
-    const next: Theme = theme === "dark" ? "light" : "dark";
-    setTheme(next);
-    applyBrowserTheme(next);
-  }
+    if (document.documentElement.dataset.miniapp === "true") return;
+    updateBrowserChrome(theme);
+    updateThemeIcon();
+  }, [theme]);
 
   const favoriteButtonClass = theme === "dark"
     ? "bg-white/[0.045] text-[#ff353d] hover:bg-white/[0.085]"
@@ -179,9 +158,17 @@ export function PublicHeader({ backHref, hideBack = false, backLabel = "Наза
 
           <div className="flex items-center gap-1.5 md:gap-2">
             <PublicStaffAlerts />
-            <button type="button" onClick={toggleTheme} className={`ac-icon-button flex h-11 w-11 items-center justify-center rounded-xl bg-white/[0.045] transition hover:bg-white/[0.085] ${themeIconClass}`} aria-label={theme === "dark" ? "Включить светлую тему" : "Включить тёмную тему"} title={theme === "dark" ? "Светлая тема" : "Тёмная тема"}>
+            <label className={`ac-icon-button relative flex h-11 w-11 items-center justify-center rounded-xl bg-white/[0.045] transition hover:bg-white/[0.085] focus-within:ring-2 focus-within:ring-current ${themeIconClass}`} title="Тема сайта">
               <ThemeIcon theme={theme} />
-            </button>
+              <select aria-label="Тема сайта" className="absolute inset-0 h-full w-full cursor-pointer bg-[var(--ac-surface)] text-[var(--ac-text)] opacity-0" value={preference} onChange={(event) => {
+                const value = event.currentTarget.value;
+                if (value === "system" || value === "light" || value === "dark") setSiteTheme(value);
+              }}>
+                <option value="system">Как в браузере</option>
+                <option value="light">Светлая</option>
+                <option value="dark">Тёмная</option>
+              </select>
+            </label>
 
             <Link href="/favorites" className={`ac-favorite-nav relative flex h-11 w-12 items-center justify-center rounded-xl transition ${favoriteButtonClass}`} aria-label="Избранные автомобили">
               <StarIcon filled={favoritesCount > 0} />

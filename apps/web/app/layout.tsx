@@ -4,6 +4,7 @@ import {readPublicDisplayFeatures} from "@/lib/dealers/showcase-store";
 import "../components/telegram/telegram-miniapp.css";
 import {TelegramMiniApp} from "../components/telegram/TelegramMiniApp";
 import {miniAppBootstrap} from "../lib/telegram-miniapp";
+import {browserThemeBootstrap} from "../lib/theme/browser-theme";
 import "./select-controls.css";
 import "./globals.css";
 import "./catalog-ui.css";
@@ -44,18 +45,6 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 1
 };
-
-const themeBootstrap = `
-(function () {
-  try {
-    var stored = localStorage.getItem('avtocena_theme');
-    var theme = stored === 'light' || stored === 'dark'
-      ? stored
-      : (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
-    document.documentElement.dataset.theme = theme;
-  } catch (_) {}
-})();
-`;
 
 const publicUiCorrections = `
 :root {
@@ -303,7 +292,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <head>
         <style>{siteVisibilityCss(features)}</style>
         <meta name="mitgo-verification" content="e4fe0a6f-d7e2-4232-97cb-b46956026c1d" />
-        <script dangerouslySetInnerHTML={{ __html: themeBootstrap }} />
+        <script dangerouslySetInnerHTML={{ __html: browserThemeBootstrap }} />
         <script dangerouslySetInnerHTML={{ __html: miniAppBootstrap }} />
         <style dangerouslySetInnerHTML={{ __html: publicUiCorrections }} />
       </head>
