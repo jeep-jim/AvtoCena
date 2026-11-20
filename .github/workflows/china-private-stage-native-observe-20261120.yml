@@ -23,4 +23,4 @@ jobs:
           REG_SECRET: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
         run: node .github/china-reader-off-v1/observe-fast.mjs
 
-# Follow-up exact observation at 10:16 UTC.
+# Terminal private READY verification, 10:22 UTC.
