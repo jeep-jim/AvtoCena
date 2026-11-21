@@ -1,0 +1,41 @@
+name: Check fresh exact Haval capacity without changes
+on:
+  push:
+    branches: [main]
+    paths: [.github/market-runs/avtocena-haval-capacity-readonly-v2.sha256]
+permissions:
+  contents: read
+jobs:
+  read:
+    if: github.repository == 'jeep-jim/AvtoCena' && github.repository_id == '1289722938' && github.ref == 'refs/heads/main' && github.run_attempt == '1' && github.event.head_commit.message == 'Check fresh exact AvtoCena Haval capacity without changes'
+    environment: regcloud-staging
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 2
+          persist-credentials: false
+      - name: Verify exact single-added trigger and preflight bytes
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          test "$(git show -s --format=%P HEAD | wc -w)" = 1
+          readonly marker=.github/market-runs/avtocena-haval-capacity-readonly-v2.sha256
+          readonly op=.github/operations/avtocena-haval-capacity-readonly-v2
+          readonly actor=ad2d06e74112e8909c9493d96d8254c849eaebcc0d098ba4536f39161d15015c wrapper=619877f6f6fd98b837e8b6e8e26282bbbbf172a61d479084561a091caaa93c62
+          cmp -s <(git diff-tree --no-commit-id -r --name-status --no-renames -z HEAD^ HEAD) <(printf 'A\0%s\0' "$marker")
+          cmp -s "$marker" <(printf '%s\n' "$actor" '0d577596d14bbd5c4f6eafa48fb9b153ae7ef2ec' 'a2d52f40104ea8cc3162a21b182478d0225ef997')
+          printf '%s  %s\n' "$actor" "$op/preflight.py" "$wrapper" "$op/read-via-ssh.sh" | sha256sum --check --status
+      - name: Verify current GitHub commit and tree identity without building
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          timeout 20s gh api repos/jeep-jim/AvtoCena/git/commits/0d577596d14bbd5c4f6eafa48fb9b153ae7ef2ec | python3 -c 'import json,sys; d=json.load(sys.stdin); assert d["sha"]=="0d577596d14bbd5c4f6eafa48fb9b153ae7ef2ec"; assert d["tree"]["sha"]=="a2d52f40104ea8cc3162a21b182478d0225ef997"; assert [p["sha"] for p in d["parents"]]==["7617caba7f06e4a6b0ab017d31e5c64b73f4a90e"]; print("candidate_git_identity_verified")'
+      - name: Read existing three runtime roles and unused loopback 3003
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+        shell: bash
+        run: bash .github/operations/avtocena-haval-capacity-readonly-v2/read-via-ssh.sh
