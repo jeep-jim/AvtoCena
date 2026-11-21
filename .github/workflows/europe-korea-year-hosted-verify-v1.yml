@@ -1,0 +1,56 @@
+name: Verify and compile exact Europe and Korea year policy on GitHub only
+on:
+  push:
+    branches: [main]
+    paths: [.github/market-runs/europe-korea-year-hosted-verify-v1.sha256]
+permissions:
+  contents: read
+jobs:
+  verify:
+    if: github.repository == 'jeep-jim/AvtoCena' && github.repository_id == '1289722938' && github.ref == 'refs/heads/main' && github.run_attempt == '1' && github.event.head_commit.message == 'Verify exact Europe and Korea year-2022 candidate on GitHub only'
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      APP_SHA: f692f5b06b4d1d220712904752cadd94c09e7753
+      APP_TREE: 1aa1bc244ab68538d849d7c0507fbc58323eeab6
+      ACTOR_SHA: 'b0a33d492d0f0cf9c5533ecdcd58d2f122115f21c6c2fad5632a3856009581a5'
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 2
+          persist-credentials: false
+      - name: Check exact single-file trigger and test actor
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          test "$(git show -s --format=%P HEAD | wc -w)" = 1
+          readonly marker=.github/market-runs/europe-korea-year-hosted-verify-v1.sha256
+          cmp -s <(git diff-tree --no-commit-id -r --name-status --no-renames -z HEAD^ HEAD) <(printf 'A\0%s\0' "$marker")
+          cmp -s "$marker" <(printf '%s\n' "$APP_SHA" "$APP_TREE" "$ACTOR_SHA")
+          printf '%s  %s\n' "$ACTOR_SHA" ".github/operations/europe-korea-year-hosted-verify-v1/verify.sh" | sha256sum --check --status
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ env.APP_SHA }}
+          fetch-depth: 3
+          path: exact-app
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 24.22.1
+      - name: Verify exact source, dependency closure, types and ordinary regressions
+        working-directory: exact-app
+        shell: bash
+        run: bash "$GITHUB_WORKSPACE/.github/operations/europe-korea-year-hosted-verify-v1/verify.sh"
+      - name: Compile smoke image with no private inputs or transfer
+        working-directory: exact-app
+        shell: bash
+        run: |
+          set -euo pipefail
+          readonly tag="avtocena-year-hosted-verify:$APP_SHA"
+          docker build --label "org.opencontainers.image.revision=$APP_SHA" --label "avtocena.verification=hosted-compile-only" -t "$tag" .
+          test "$(docker image inspect --format '{{index .Config.Labels "org.opencontainers.image.revision"}}' "$tag")" = "$APP_SHA"
+          digest="$(docker image inspect --format '{{.Id}}' "$tag")"
+          [[ "$digest" =~ ^sha256:[a-f0-9]{64}$ ]]
+          printf '{"status":"hosted_compile_only","release":"%s","imageId":"%s","hostWrites":0,"storageWrites":0,"privateIndexRestored":false,"imageExported":false,"deployableImage":false}\n' "$APP_SHA" "$digest"
