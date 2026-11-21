@@ -1,0 +1,121 @@
+name: Collect paid DubiCars v2 changes privately
+on:
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/uae-dubicars-private-delta-v1.json']
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: catalog-refresh-uae
+  cancel-in-progress: false
+env:
+  UAE_DELTA_OPS: .github/operations/uae-dubicars-private-delta-v1
+jobs:
+  admit:
+    if: github.repository_id == '1289722938' && github.ref == 'refs/heads/main' && github.run_attempt == 1 && github.event.head_commit.message == 'Collect exact paid UAE delta privately'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    outputs:
+      tree: ${{ steps.bind.outputs.tree }}
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 2
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with: {node-version: '24.22.1'}
+      - name: Bind exact source archive, current authority and transport
+        id: bind
+        shell: bash
+        env:
+          BEFORE: ${{ github.event.before }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          marker=.github/market-runs/uae-dubicars-private-delta-v1.json
+          [[ "$BEFORE" =~ ^[a-f0-9]{40}$ ]]
+          test "$(git rev-list --parents -n1 HEAD)" = "$GITHUB_SHA $BEFORE"
+          test "$(git show -s --format=%B HEAD)" = 'Collect exact paid UAE delta privately'
+          test "$(git diff --no-renames --name-status "$BEFORE" "$GITHUB_SHA" --)" = "$(printf 'A\t%s' "$marker")"
+          test "$(git rev-parse HEAD:apps/web/lib/data.ts)" = '5869976bd6feb36e12db6ce0d052c577a5fe6dda'
+          test "$(git rev-parse HEAD:apps/web/lib/catalog/collection-controls.ts)" = 'f6fdcde174914ce3db140a77f02a7d45565414b0'
+          test "$(git rev-parse HEAD:apps/web/lib/catalog/collection-controls-schema.ts)" = 'ef31a2e5bb956d20a20495ada76927ed7dbb7b44'
+          test "$(git rev-parse HEAD:package-lock.json)" = 'f60b4a7b321400b449e3bfdda02d0af972adc103'
+          printf '%s  %s\n' '00e0a0f8cc0e23f18b2714a494960ff569530463fb3062b199bbd3475965764e' '.github/operations/uae-dubicars-private-delta-v1/actor.mjs' | sha256sum --strict -c -
+          printf '%s  %s\n' '821af96f3d5b7f208155474bbb694e77a0a8ae3f27ddd54c39adcad88c89c217' '.github/operations/uae-dubicars-private-delta-v1/collector.mjs' | sha256sum --strict -c -
+          printf '%s  %s\n' '70b058ff7ddfd4c64082e60951fe89dc4181cacba65054d855966aa084457f75' '.github/operations/uae-dubicars-private-delta-v1/collector.test.mjs' | sha256sum --strict -c -
+          gh api "repos/$GITHUB_REPOSITORY/actions/runs/44860475749" | jq -e '(.id==44860475749 and .run_attempt==1 and .head_sha=="235fec15caa3baf2ad0f1079439348f8daeb2248" and .conclusion=="success")' >/dev/null
+          gh api "repos/$GITHUB_REPOSITORY/actions/jobs/136712448103" | jq -e '(.id==136712448103 and .run_id==44860475749 and .conclusion=="success")' >/dev/null
+          tree="$(git rev-parse "$BEFORE^{tree}")"
+          node --input-type=module - "$tree" "$marker" <<'EOF'
+          import fs from 'node:fs';
+          import {admit} from './.github/operations/uae-dubicars-private-delta-v1/collector.mjs';
+          const p=JSON.parse(fs.readFileSync(process.argv[3],'utf8'));
+          if(p.reviewedWorkerTree!==process.argv[2])throw Error('unreviewed worker tree');
+          admit(p,Date.now());
+          EOF
+          node --test "$UAE_DELTA_OPS/collector.test.mjs"
+          printf 'tree=%s\n' "$tree" >> "$GITHUB_OUTPUT"
+  delta:
+    needs: [admit]
+    if: github.run_attempt == 1 && needs.admit.result == 'success'
+    outputs:
+      state: ${{ steps.changes.outputs.state }}
+      can_continue: ${{ steps.changes.outputs.can_continue }}
+    runs-on: ubuntu-24.04
+    environment: regcloud-staging
+    timeout-minutes: 85
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with: {node-version: '24.22.1', cache: npm}
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Collect documented changes only into the owned private prefix
+        id: changes
+        env:
+          UAE_DELTA_REVIEWED_TREE: ${{ needs.admit.outputs.tree }}
+          AUTO_API_DUBICARS_KEY: ${{ secrets.AUTO_API_DUBICARS_KEY }}
+          JSON_STORAGE_DRIVER: object
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_REGION: us-east-1
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+          YC_OBJECT_STORAGE_REQUEST_TIMEOUT_MS: '8000'
+          YC_OBJECT_STORAGE_MAX_ATTEMPTS: '1'
+        run: node --import tsx "$UAE_DELTA_OPS/actor.mjs"
+  continuation:
+    needs: [admit, delta]
+    if: github.run_attempt == 1 && needs.admit.result == 'success' && needs.delta.result == 'success' && needs.delta.outputs.state == 'partial' && needs.delta.outputs.can_continue == 'true'
+    runs-on: ubuntu-24.04
+    environment: regcloud-staging
+    timeout-minutes: 85
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with: {node-version: '24.22.1', cache: npm}
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Collect documented changes only into the owned private prefix
+        id: changes
+        env:
+          UAE_DELTA_REVIEWED_TREE: ${{ needs.admit.outputs.tree }}
+          AUTO_API_DUBICARS_KEY: ${{ secrets.AUTO_API_DUBICARS_KEY }}
+          JSON_STORAGE_DRIVER: object
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_REGION: us-east-1
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+          YC_OBJECT_STORAGE_REQUEST_TIMEOUT_MS: '8000'
+          YC_OBJECT_STORAGE_MAX_ATTEMPTS: '1'
+        run: node --import tsx "$UAE_DELTA_OPS/actor.mjs"
