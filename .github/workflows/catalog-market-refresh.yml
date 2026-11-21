@@ -85,7 +85,7 @@ jobs:
             artifactId:process.env.PREPARED_ENCAR_ARTIFACT_ID,artifactDigest:process.env.PREPARED_ENCAR_ARTIFACT_DIGEST,
             repositoryId:process.env.GITHUB_REPOSITORY_ID,headSha:process.env.GITHUB_SHA},{preparedRunId:preparedEncar});
           else if (process.env.PREPARED_ENCAR_ATTEMPT || process.env.PREPARED_ENCAR_ARTIFACT_ID || process.env.PREPARED_ENCAR_ARTIFACT_DIGEST) throw Error('unexpected_prepared_encar_binding');
-          const run = !paused && (preparedEncar || ['push','workflow_dispatch'].includes(process.env.EVENT_NAME) || (process.env.EVENT_NAME === 'schedule' && (market === 'china' || catalogRefreshDue())));
+          const run = !paused && (preparedEncar || ['push','workflow_dispatch'].includes(process.env.EVENT_NAME) || (process.env.EVENT_NAME === 'schedule' && catalogRefreshDue(new Date(), market)));
           if (paused) console.log(`Market refresh paused: ${market}: ${policy.pausedMarkets?.[market] || 'no_enabled_background_source'}`);
           const marker = process.env.EVENT_NAME === 'push' ? JSON.parse(fs.readFileSync(`.github/market-runs/${market}-refresh.json`,'utf8')) : {};
           if (preparedEncar && marker.refreshMarkets?.length) throw Error('prepared_encar_collection_overlay_forbidden');
@@ -122,6 +122,7 @@ jobs:
       matrix:
         market: ${{ fromJSON(needs.plan.outputs.collect_markets) }}
     env:
+      MARKET_RATE_RUN: ${{ matrix.market != 'china' && github.run_id || '' }}
       CATALOG_INTAKE_MARKET: ${{ matrix.market }}
       AUTO_API_DUBICARS_KEY: ${{ matrix.market == 'uae' && secrets.AUTO_API_DUBICARS_KEY || '' }}
       AUTO_API_CHE168_KEY: ${{ matrix.market == 'china' && secrets.AUTO_API_CHE168_KEY || '' }}
@@ -136,7 +137,7 @@ jobs:
       YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
       YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
       CATALOG_INTAKE_TIME_MS: ${{ matrix.market == 'korea' && '18000000' || '12600000' }}
-      CATALOG_INTAKE_MAX_ROWS_PER_SOURCE: '100000'
+      CATALOG_REQUIRE_FULL_INPUT: ${{ contains(fromJSON('["europe","georgia"]'), matrix.market) && '1' || '0' }}
       CATALOG_SOURCE_INVENTORY_MODE: '1'
       CATALOG_SOURCE_REQUEST_TIMEOUT_MS: '20000'
       CATALOG_SOURCE_TIMEOUT_MS: '25000'
@@ -211,7 +212,7 @@ jobs:
     needs: [plan, collect]
     # Paid China must finish both snapshot and changes. A refusal, exhausted
     # budget or schema drift cannot publish a partially collected paid feed.
-    if: always() && needs.plan.outputs.run == 'true' && needs.collect.result != 'cancelled' && (!contains(fromJSON('["china","uae"]'), inputs.market) || needs.collect.result == 'success' || needs.plan.outputs.reuse_run_id != '')
+    if: always() && needs.plan.outputs.run == 'true' && needs.collect.result != 'cancelled' && (needs.collect.result == 'success' || (needs.collect.result == 'skipped' && needs.plan.outputs.reuse_run_id != ''))
     environment: regcloud-staging
     runs-on: ubuntu-latest
     # Each market gets its own budget; a large Georgia publish must not consume
@@ -232,6 +233,7 @@ jobs:
       YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
       YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
       CATALOG_IMAGE_CDN_URL: ${{ secrets.CATALOG_IMAGE_CDN_URL }}
+      MARKET_RATE_RUN: ${{ matrix.market != 'china' && (needs.plan.outputs.reuse_run_id || github.run_id) || '' }}
       CATALOG_SELLER_INVENTORY: '1'
       CATALOG_IMAGE_STORAGE_MODE: source_urls_only
       CATALOG_PUBLICATION_DRY_RUN: '0'

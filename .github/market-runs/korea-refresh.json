@@ -1,10 +1,10 @@
 {
-  "operation": "owner-owned-feed-korea-20261116",
-  "requestedAt": "2026-11-16T14:56:11.000Z",
+  "operation": "owner-full-korea-to-reg-20261121",
+  "requestedAt": "2026-11-21T14:53:29+00:00",
   "market": "korea",
   "publishMarkets": [
     "korea"
   ],
   "resetCursors": true,
-  "reason": "Owner requested a fresh complete paid Encar snapshot in own REG storage, verified readback and preparation before publication. Use corrected supplier displacement_cc / displacement units, power and drive evidence; preserve manual specifications, owner source switches and existing schedules. Japan is excluded; the active China run is unchanged. Raw deletion remains disabled until independent replacement and writer coverage are verified."
+  "reason": "Collect the full configured market into private REG storage from the first page. Record the FX cut once for this intake. Preserve all other markets, Japan and Green Corner."
 }

@@ -1,7 +1,8 @@
-// A continuous 72-hour calendar, including month/year boundaries. The daily
-// cron is only a wake-up; collection runs on one day out of three at 17:00 UTC (midnight UTC+7).
+// Midnight in UTC+7, with continuous day intervals across month boundaries.
 export const CATALOG_REFRESH_ANCHOR = '2026-09-17T17:00:00Z';
-export function catalogRefreshDue(now = new Date()) {
+const intervalDays = {china: 1, korea: 2, uae: 2, georgia: 2, green: 3, europe: 3};
+export function catalogRefreshDue(now = new Date(), market = 'green') {
   const elapsed = now.getTime() - Date.parse(CATALOG_REFRESH_ANCHOR);
-  return Number.isFinite(elapsed) && elapsed >= 0 && Math.floor(elapsed / 86400000) % 3 === 0;
+  return Number.isFinite(elapsed) && elapsed >= 0 && Object.hasOwn(intervalDays, market)
+    && Math.floor(elapsed / 86400000) % intervalDays[market] === 0;
 }

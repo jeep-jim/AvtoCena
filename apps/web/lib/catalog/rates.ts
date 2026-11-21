@@ -1,3 +1,4 @@
+import {frozenConversion} from './feed-rate-snapshot';
 import { readDataJson } from "../data";
 
 export type CurrencyRateSnapshot = {
@@ -161,6 +162,8 @@ export async function convertToRub(
 ): Promise<CurrencyRateSnapshot | null> {
   if (!sourcePrice || !currency) return null;
   const code = currency.toUpperCase().trim();
+  const pinned = frozenConversion(sourcePrice, code);
+  if (pinned !== undefined) return pinned;
   if (code === "RUB") {
     return { currency: code, cbrRate: 1, nominal: 1, effectiveRate: 1, rateDate: new Date().toISOString().slice(0, 10), fetchedAt: new Date().toISOString(), rateSource: "cbr", sourcePrice, sourcePriceRub: Math.round(sourcePrice) };
   }

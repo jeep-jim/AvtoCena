@@ -1,3 +1,4 @@
+import {bindFeedRates} from './lib/market-feed-rates.mjs';
 import {imageKey,uniqueImages,mergeOfferVersions} from './lib/catalog-offer-merge.mjs';
 import {isAllDubicarsOffer,isUnpricedDubicarsOffer} from '../apps/web/lib/catalog/dubicars-owner-policy.ts';
 import {catalogInventoryLimit,catalogMarketInventoryLimit} from "./lib/catalog-inventory-limit.mjs";
@@ -49,6 +50,7 @@ const configuredMarkets = String(process.env.CATALOG_REBUILD_MARKETS || "")
   .map((value) => value.trim())
   .filter(Boolean);
 const market = configuredMarkets[0] || "";
+if (market !== 'japan') await bindFeedRates(market,'read');
 const targetPerSource = catalogInventoryLimit(process.env.CATALOG_REBUILD_TARGET_PER_SOURCE);
 const targetPerMarket = catalogMarketInventoryLimit(market, Math.max(1, Number(process.env.CATALOG_PUBLISH_TARGET_PER_MARKET || 100_000)));
 const maximumPerMarket = catalogMarketInventoryLimit(market, Math.max(targetPerMarket, catalogInventoryLimit(process.env.CATALOG_PUBLISH_MAX_PER_MARKET)));

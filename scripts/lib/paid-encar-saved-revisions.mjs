@@ -46,7 +46,7 @@ const earlier=(a,b)=>a.page<b.page||a.page===b.page&&a.row<b.row;
 export async function buildSavedEncarSelection({storage,root,snapshot,pageVerifier,assertEnabled=async()=>{},onProgress=()=>{},concurrency=4}){
  assert.match(root,/^catalog\/intake-staging\/encar\/\d+\/[1-9]\d*$/);
  assert.ok(pageVerifier&&typeof pageVerifier.verify==='function'&&typeof pageVerifier.finish==='function','encar_revision_full_receipt_verifier_required');
- assert.ok(Number.isSafeInteger(snapshot.pages)&&snapshot.pages>0&&snapshot.pages<=100000&&Number.isSafeInteger(snapshot.count)&&snapshot.count>0&&snapshot.count<=1000000,'encar_revision_snapshot_bounds');
+ assert.ok(Number.isSafeInteger(snapshot.pages)&&snapshot.pages>0&&Number.isSafeInteger(snapshot.count)&&snapshot.count>0,'encar_revision_snapshot_bounds');
  assert.ok(Number.isInteger(concurrency)&&concurrency>=1&&concurrency<=4);
  const snapshotHash=rawHash(snapshot);assert.equal(rawHash(await storage.readJson(root+'/complete.json',null)),snapshotHash,'encar_revision_snapshot_changed');
  const selected=new Map(),allVersions=new Map(),quarantine=new Map(),pageHashes=new Map(),jobs=new Map();let count=0;

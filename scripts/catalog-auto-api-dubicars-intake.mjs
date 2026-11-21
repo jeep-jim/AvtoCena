@@ -1,3 +1,4 @@
+import {bindFeedRates} from './lib/market-feed-rates.mjs';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import {assertCollectionEnabled} from '../apps/web/lib/catalog/collection-controls.ts';
@@ -8,6 +9,7 @@ import {autoApiChe168Client,collectAutoApiChe168} from './lib/auto-api-che168-cl
 import {observationShardWriter} from './lib/catalog-intake-checkpoint.mjs';
 import {assertDubicarsPriorIntake, captureDubicarsResponses} from './lib/nonjp-intake-capture.mjs';
 await assertCollectionEnabled('dubicars_feed');
+await bindFeedRates('uae','capture');
 const directory=process.env.AUTO_API_INTAKE_DIR||'catalog-intake-uae';
 await fs.mkdir(directory,{recursive:true});
 const files=await fs.readdir(directory);

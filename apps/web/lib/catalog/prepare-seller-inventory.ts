@@ -30,6 +30,21 @@ export function inventorySourceEvidence(input: VehicleOffer): VehicleOffer {
   return sourceBound && declared ? copy : restoreSavedSourceEvidence(copy);
 }
 
+function hasSeparatePaidEncarIcePower(offer: VehicleOffer) {
+  const op = offer.operational;
+  if (offer.market !== 'korea' || op?.provider !== 'auto_api_encar'
+      || op.detailIdentityVerified !== true || op.fieldIdentityVerified !== true) return false;
+  const raw = op.sourcePower as {iceHp?:{source?:string; status?:string; unit?:string; value?:number}} | undefined;
+  const field = raw?.iceHp;
+  const semantic = op.semanticEvidence as {powerHp?:{status?:string; source?:string}} | undefined;
+  return semantic?.powerHp?.source === 'auto_api_encar:v3:power' && semantic.powerHp.status === 'missing'
+    && field?.source === 'auto_api_encar:v3:power_ice_hp' && field.status === 'exact' && field.unit === 'hp'
+    && typeof field.value === 'number' && typeof offer.icePowerKw === 'number'
+    && Math.abs(offer.icePowerKw - field.value / 1.35962) < 0.01
+    && offer.powertrainKind !== 'electric' && offer.powertrainKind !== 'unknown'
+    && classifySpecificationEvidence(offer, 'fuelPowertrain').state === 'exact';
+}
+
 export async function prepareSellerInventory(input: VehicleOffer, options: { preservePublishedPrice?: boolean } = {}): Promise<VehicleOffer | null> {
   input=applyUaeManualSpecifications(input);
   if (!sourceInventoryInScope(input)) return null;
@@ -61,7 +76,8 @@ export async function prepareSellerInventory(input: VehicleOffer, options: { pre
   delete offer.modificationSelection; delete offer.recoveryQualification;
   if (classifySpecificationEvidence(original,"engineCc").state !== "exact") offer.engineCc = undefined;
   if (classifySpecificationEvidence(original,"powerHp").state !== "exact") {
-    offer.powerHp = undefined; offer.powerKw = undefined; offer.icePowerKw = undefined;
+    offer.powerHp = undefined; offer.powerKw = undefined;
+    if (!hasSeparatePaidEncarIcePower(original)) offer.icePowerKw = undefined;
     offer.powerDataConfidence = undefined; offer.powerDataSource = undefined;
   }
   if (classifySpecificationEvidence(original,"fuelPowertrain").state !== "exact") {

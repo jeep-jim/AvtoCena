@@ -1,10 +1,10 @@
 {
-  "operation": "owner-owned-feed-europe-20261116",
-  "requestedAt": "2026-11-16T13:49:24Z",
+  "operation": "owner-full-europe-to-reg-20261121",
+  "requestedAt": "2026-11-21T14:53:29+00:00",
   "market": "europe",
   "publishMarkets": [
     "europe"
   ],
   "resetCursors": true,
-  "reason": "Owner requested full non-Japan feed storage in our REG bucket, verified archive/readback and prepublication calculations. Respect current source switches, source evidence, manual specifications, source image URLs and existing publication guards. No Japan calls and no restart of the active China publisher."
+  "reason": "Collect the full configured market into private REG storage from the first page. Record the FX cut once for this intake. Preserve all other markets, Japan and Green Corner."
 }

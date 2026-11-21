@@ -5,7 +5,6 @@ export function catalogInventoryLimit(value, fallback = 100_000) {
  return limit === 0 ? Number.MAX_SAFE_INTEGER : limit;
 }
 
-// Owner decision 07.10.2026: Europe is maintained within 50,000 published cars.
-export function catalogMarketInventoryLimit(market, configuredLimit) {
- return market === 'europe' ? Math.min(50_000, configuredLimit) : configuredLimit;
+export function catalogMarketInventoryLimit(_market, configuredLimit) {
+ return configuredLimit;
 }

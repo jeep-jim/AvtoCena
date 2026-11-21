@@ -1,3 +1,4 @@
+import {bindFeedRates} from './lib/market-feed-rates.mjs';
 import {readCollectionControls} from '../apps/web/lib/catalog/collection-controls.ts';
 import {collectionEnabled,collectionMarketEnabled} from '../apps/web/lib/catalog/collection-controls-schema.ts';
 import fs from 'node:fs/promises';
@@ -10,6 +11,7 @@ const market=process.env.CATALOG_INTAKE_MARKET;
 if (!['japan','china','korea','uae','europe','georgia'].includes(market)) throw Error('Invalid market');
 const ownerControls=await readCollectionControls();
 if(!collectionMarketEnabled(ownerControls,market))throw Error('collection_disabled_by_owner:'+market);
+if (market !== 'japan') await bindFeedRates(market,'capture');
 process.env.CATALOG_REBUILD_MARKET=market;
 process.env.CATALOG_IMAGE_STORAGE_MODE='source_urls_only';
 process.env.CATALOG_SOURCE_MIN_YEAR=String(market==='japan'?2010:new Date().getUTCFullYear()-6);
@@ -46,7 +48,7 @@ const writers=new Map(states.map(state=>[state.sourceId,observationShardWriter(d
 const rawWriters=new Map(market==='japan'?[]:states.map(state=>[state.sourceId,observationShardWriter(directory,'raw-'+state.sourceId)]));
 const startedAt=new Date().toISOString();
 const deadline=Date.now()+Math.min((market==='korea'?300:210)*60000,Math.max(60000,Number(process.env.CATALOG_INTAKE_TIME_MS || 40*60000)));
-const maxRowsPerSource=Math.min(100000,Math.max(1,Number(process.env.CATALOG_INTAKE_MAX_ROWS_PER_SOURCE || 100000)));
+const maxRowsPerSource = market === 'japan' ? Math.min(100000, Math.max(1, Number(process.env.CATALOG_INTAKE_MAX_ROWS_PER_SOURCE || 100000))) : Infinity;
 const report={version:1,market,startedAt,productionWrites:false,mode:'source_observations',controlsRevision:ownerControls.revision,requiredSourceIds:selectedSources.map(s=>s.sourceId),
   note:'JSONL contains listing and detail revisions. Count unique sourceId + offer.id, not lines. Auction history is not active inventory.'};
 let checkpointQueue = Promise.resolve();
@@ -64,7 +66,7 @@ function checkpoint() {
  });
 }
 await checkpoint();
-await collectSourceStates(states,state=>({market,deadline,maxRows:maxRowsPerSource,maxPages:2000,detailConcurrency:4,
+await collectSourceStates(states,state=>({market,deadline,maxRows:maxRowsPerSource,maxPages:market === 'japan' ? 2000 : Infinity,detailConcurrency:4,
       minYear:state.sourceId==='autohome_new_china_open'?AUTOHOME_NEW_MIN_YEAR:market==='japan'?2010:new Date().getUTCFullYear()-6,
       inventoryAgeEligible:offer=>catalogInventoryAgeDecision(offer).eligible && !catalogHeavyVehicleExcluded(offer),
       snapshot:sourceListingSnapshot,checkpoint,
@@ -80,3 +82,9 @@ report.partialSources=states.filter(s=>s.stopReason!=="source_finished").map(s=>
 report.qualityStatus=report.partialSources.length?"partial":"configured_routes_finished";
 await checkpoint();
 console.log(JSON.stringify({...report,...intakeReportEvidence(states)}));
+
+// Preserve partial source receipts for diagnosis and continuation. A failed
+// source must never replace a market with only the other supplier's rows.
+if (process.env.CATALOG_REQUIRE_FULL_INPUT === '1' && report.partialSources.length) {
+  throw Error('catalog_source_incomplete:' + report.partialSources.map(s=>s.sourceId+'='+s.reason).join(','));
+}

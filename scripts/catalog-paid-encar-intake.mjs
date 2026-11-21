@@ -1,3 +1,4 @@
+import {bindFeedRates} from './lib/market-feed-rates.mjs';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import fs from 'node:fs/promises';
@@ -9,7 +10,6 @@ import {catalogRefreshDue} from './lib/catalog-refresh-schedule.mjs';
 
 const integerText = value => typeof value === 'string' && /^[1-9]\d*$/.test(value)
   && Number.isSafeInteger(Number(value)) && String(Number(value)) === value;
-const MAX_PAGES = 100000;
 const SNAPSHOT_LIFETIME_MS = 3 * 86400000;
 export const PAID_ENCAR_PAUSE_MARGIN_MS = 180000;
 const digest = value => createHash('sha256').update(JSON.stringify(value)).digest('hex');
@@ -36,7 +36,7 @@ export function paidEncarRequest({apiKey, assertEnabled, fetchImpl = fetch, slee
   });
   return async (endpoint, params) => {
     assert.equal(endpoint, 'offers', 'paid_encar_request_endpoint_invalid');
-    return request('offers', params);
+    return request('offers', {...params, year_from:2022, for_sale:1});
   };
 }
 
@@ -52,7 +52,7 @@ export function paidEncarRefreshDecision({eventName, controls, policy, marker = 
   if (policy?.pausedMarkets?.korea) return {run: false, reason: 'market_paused'};
   if (controls?.markets?.korea?.enabled !== true) return {run: false, reason: 'market_disabled'};
   if (controls?.sources?.encar_feed?.enabled !== true) return {run: false, reason: 'paid_source_disabled'};
-  if (eventName === 'schedule' && !catalogRefreshDue(now)) return {run: false, reason: 'cadence_not_due'};
+  if (eventName === 'schedule' && !catalogRefreshDue(now, 'korea')) return {run: false, reason: 'cadence_not_due'};
   return {run: true, reason: 'paid_source_due'};
 }
 
@@ -65,7 +65,7 @@ export function assertPaidEncarSnapshotReceipt(receipt, {runId, attempt, headSha
   assert.equal(receipt?.runId, runId, 'paid_encar_snapshot_receipt_run');
   assert.equal(receipt?.attempt, attempt, 'paid_encar_snapshot_receipt_attempt');
   assert.equal(receipt?.producerSha, headSha, 'paid_encar_snapshot_receipt_source');
-  assert.ok(Number.isSafeInteger(receipt.pages) && receipt.pages > 0 && receipt.pages <= MAX_PAGES
+  assert.ok(Number.isSafeInteger(receipt.pages) && receipt.pages > 0
     && Number.isSafeInteger(receipt.count) && receipt.count > 0, 'paid_encar_snapshot_receipt_count');
   const age = now - Date.parse(receipt.completedAt);
   // A delayed retry must not republish a snapshot older than the existing cadence.
@@ -118,12 +118,12 @@ export function paidEncarSavedPageVerifier(snapshot, context) {
 }
 
 function numberedKeys(objects, directory) {
-  assert.ok(Array.isArray(objects) && objects.length <= MAX_PAGES, 'paid_encar_snapshot_saved_index_invalid');
+  assert.ok(Array.isArray(objects), 'paid_encar_snapshot_saved_index_invalid');
   const result = new Map();
   for (const entry of objects) {
     assert.ok(typeof entry?.key === 'string' && entry.key.startsWith(directory + '/'), 'paid_encar_snapshot_saved_key_invalid');
     const name = entry.key.slice(directory.length + 1), match = /^([1-9]\d*)\.json$/.exec(name);
-    assert.ok(match && integerText(match[1]) && Number(match[1]) <= MAX_PAGES, 'paid_encar_snapshot_saved_key_invalid');
+    assert.ok(match && integerText(match[1]), 'paid_encar_snapshot_saved_key_invalid');
     const page = Number(match[1]);
     assert.ok(!result.has(page), 'paid_encar_snapshot_saved_page_duplicate');
     result.set(page, entry.key);
@@ -195,7 +195,7 @@ export async function collectPaidEncarSnapshot({storage, request, assertEnabled,
     assert.equal(saved.page, page, 'paid_encar_snapshot_saved_page_sequence');
     assert.equal(saved.previousSha256, previousSha256, 'paid_encar_snapshot_receipt_chain');
     assert.ok(Number.isSafeInteger(saved.count) && saved.count >= 0, 'paid_encar_snapshot_saved_count');
-    assert.ok(saved.next === null || saved.next === page + 1 && saved.count > 0 && saved.next <= MAX_PAGES, 'paid_encar_snapshot_saved_next');
+    assert.ok(saved.next === null || saved.next === page + 1 && saved.count > 0, 'paid_encar_snapshot_saved_next');
     assert.match(saved.sha256 || '', /^[a-f0-9]{64}$/, 'paid_encar_snapshot_saved_digest');
     count += saved.count; pages++;
     assert.ok(Number.isSafeInteger(count), 'paid_encar_snapshot_count_invalid');
@@ -216,7 +216,6 @@ export async function collectPaidEncarSnapshot({storage, request, assertEnabled,
       assert.ok(allowPartial, 'paid_encar_snapshot_incomplete_time_budget');
       return {...identity, startedAt: start.startedAt, completed: false, pages, count, nextPage: page};
     }
-    assert.ok(page <= MAX_PAGES, 'paid_encar_snapshot_page_limit');
     await assertEnabled();
     if (clock() + PAID_ENCAR_PAUSE_MARGIN_MS >= deadline) {
       assert.ok(allowPartial, 'paid_encar_snapshot_incomplete_time_budget');
@@ -224,7 +223,7 @@ export async function collectPaidEncarSnapshot({storage, request, assertEnabled,
     }
     const {items, next} = autoApiPage(await request('offers', {page}), page);
     assert.ok(items.every(row => row?.inner_id && row?.data), 'paid_encar_offer_envelope_invalid');
-    assert.ok(next === null || next === page + 1 && next <= MAX_PAGES, 'paid_encar_snapshot_page_sequence_invalid');
+    assert.ok(next === null || next === page + 1, 'paid_encar_snapshot_page_sequence_invalid');
     await createOnly(storage, `${prefix}/pages/${page}.json`, items);
     count += items.length; pages++;
     assert.ok(Number.isSafeInteger(count) && Number.isSafeInteger(pages), 'paid_encar_snapshot_count_invalid');
@@ -257,6 +256,7 @@ async function main() {
   };
   await assertEnabled();
   const budget = Number(process.env.CATALOG_INTAKE_TIME_MS || 18000000);
+  await bindFeedRates('korea','capture');
   assert.ok(Number.isSafeInteger(budget) && budget > 0 && budget <= 18000000, 'paid_encar_intake_budget_invalid');
   assert.ok(['true', 'false'].includes(process.env.ENCAR_ALLOW_PARTIAL || 'false'), 'paid_encar_partial_mode_invalid');
   const scope = paidEncarSnapshotScope({runId: process.env.GITHUB_RUN_ID, runAttempt: process.env.GITHUB_RUN_ATTEMPT,
