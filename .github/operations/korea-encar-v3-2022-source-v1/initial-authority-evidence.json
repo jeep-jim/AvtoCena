@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "scope": "encar_v3_2022_for_sale_source_only",
+  "authorizationSource": "Owner instruction conveyed by coordinating Dot: use ordinary already-paid Encar to prepare Korea 2022+ listings, without new purchases or upgrades.",
+  "precedent": {
+    "repository": "jeep-jim/AvtoCena",
+    "run": "43989797288",
+    "collectJob": "133845674226",
+    "collectedAt": "2026-11-17T06:25:08Z",
+    "collectConclusion": "success",
+    "paidEncarOrdinaryRoute": "https://api1.auto-api.com/api/v3/encar/offers"
+  },
+  "noNewPurchaseOrUpgrade": true,
+  "providerBalanceVerified": false,
+  "incrementalPricingEntitlementVerified": false
+}

@@ -1,0 +1,9 @@
+{
+  "version": 1,
+  "intent": "Use the existing approved protected REG operation storage and ordinary role; no ACL or credential changes.",
+  "source": "Same existing protected REG operating environment used by the private market carriers.",
+  "relativeScope": "catalog/operations/korea-encar-scoped-source/v1/<current_run>/attempt-1/",
+  "requireExclusivePutAndExactReadbackBeforeProvider": true,
+  "exactPrefixWriteCapabilityObserved": false,
+  "policyOrAclChanged": false
+}

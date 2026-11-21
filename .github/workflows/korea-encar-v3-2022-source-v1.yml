@@ -1,0 +1,213 @@
+name: Stage scoped Encar v3 Korea 2022+ observations only
+on:
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/korea-encar-v3-2022-source-v1.json']
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: catalog-refresh-korea
+  cancel-in-progress: false
+env:
+  ENCAR_OPS: .github/operations/korea-encar-v3-2022-source-v1
+jobs:
+  admit:
+    if: github.repository_id == '1289722938' && github.ref == 'refs/heads/main' && github.run_attempt == 1 && github.event.head_commit.message == 'Stage scoped Encar v3 Korea 2022 without publication'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    outputs:
+      worker_tree: ${{ steps.bind.outputs.worker_tree }}
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 2
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with: {node-version: '24.22.1'}
+      - name: Bind sole plan marker and immutable native worker; no secrets
+        id: bind
+        env:
+          BEFORE: ${{ github.event.before }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          marker=.github/market-runs/korea-encar-v3-2022-source-v1.json
+          [[ "$BEFORE" =~ ^[a-f0-9]{40}$ ]]
+          test "$(git rev-list --parents -n1 HEAD)" = "$GITHUB_SHA $BEFORE"
+          test "$(git show -s --format=%B HEAD)" = 'Stage scoped Encar v3 Korea 2022 without publication'
+          diff="$(git diff --no-renames --name-status "$BEFORE" "$GITHUB_SHA" --)"
+          if [[ "$diff" == "$(printf 'A\t%s' "$marker")" ]]; then
+            jq -e 'has("predecessor") | not' "$marker" >/dev/null
+          elif [[ "$diff" == "$(printf 'M\t%s' "$marker")" ]]; then
+            jq -e '.predecessor.runId | strings | test("^[1-9][0-9]{8,14}$")' "$marker" >/dev/null
+            previous_run="$(jq -er .predecessor.runId "$marker")"
+            previous_revision="$(jq -er .predecessor.revision "$marker")"
+            gh api "repos/$GITHUB_REPOSITORY/actions/runs/$previous_run" |
+              jq -e --arg rid "$previous_run" --arg sha "$previous_revision" --arg workflow '.github/workflows/korea-encar-v3-2022-source-v1.yml' '
+                (.id | tostring)==$rid and .head_sha==$sha and .head_branch=="main" and .run_attempt==1 and
+                .repository.id==1289722938 and .head_repository.id==1289722938 and
+                .status=="completed" and .conclusion=="success" and .event=="push" and .path==$workflow' >/dev/null
+          else
+            exit 1
+          fi
+          test "$(git rev-parse HEAD:apps/web/lib/catalog/collection-controls-schema.ts)" = 'ef31a2e5bb956d20a20495ada76927ed7dbb7b44'
+          test "$(git rev-parse HEAD:apps/web/lib/catalog/collection-controls.ts)" = 'f6fdcde174914ce3db140a77f02a7d45565414b0'
+          test "$(git rev-parse HEAD:apps/web/lib/data.ts)" = '5869976bd6feb36e12db6ce0d052c577a5fe6dda'
+          test "$(git rev-parse HEAD:data/catalog/refresh-policy-v1.json)" = '597b2d42719f3730cc82a70a4b33006d9264c59d'
+          test "$(git rev-parse HEAD:package-lock.json)" = 'f60b4a7b321400b449e3bfdda02d0af972adc103'
+          test "$(git rev-parse HEAD:package.json)" = 'c4992f2ac64606e886871ea24de9d2363e612308'
+          printf '%s  %s\n' '16d0c2435f6bf4d309b0b9c4a25b24a1401831cfc8d9fbb6465d9f75a344d066' '.github/operations/korea-encar-v3-2022-source-v1/actor.mjs' | sha256sum --strict -c -
+          printf '%s  %s\n' '3f80da577c8cf8b99dbe328f00c578547543b89534d3553a39a5afef2885381b' '.github/operations/korea-encar-v3-2022-source-v1/carrier.mjs' | sha256sum --strict -c -
+          printf '%s  %s\n' '2f6572e3641e7a94f539d5b1578fd040cdf308bf665e59262ea1612dde0a0b96' '.github/operations/korea-encar-v3-2022-source-v1/scoped-source.mjs' | sha256sum --strict -c -
+          printf '%s  %s\n' '8b71595ba927ce1c8d88a934c335ecc173e4c4b3a08a3723aea245d2f630a3be' '.github/operations/korea-encar-v3-2022-source-v1/carrier.test.mjs' | sha256sum --strict -c -
+          printf '%s  %s\n' '6fc77c3d5c32b2dd40991f45b2fff73f9a0a146e73ee0b64462862d472172239' '.github/operations/korea-encar-v3-2022-source-v1/initial-authority-evidence.json' | sha256sum --strict -c -
+          test "$(jq -er .authorityEvidenceSha256 "$marker")" = '6fc77c3d5c32b2dd40991f45b2fff73f9a0a146e73ee0b64462862d472172239'
+          printf '%s  %s\n' '88b817f95c16ea38efd61ee93856aa329d7ecc93f107df4b61c60d15a5af54dd' '.github/operations/korea-encar-v3-2022-source-v1/initial-store-intent.json' | sha256sum --strict -c -
+          test "$(jq -er .privatePrefixApprovalSha256 "$marker")" = '88b817f95c16ea38efd61ee93856aa329d7ecc93f107df4b61c60d15a5af54dd'
+          tree="$(git rev-parse "$BEFORE^{tree}")"
+          node --input-type=module - "$tree" "$marker" <<'EOF'
+          import fs from 'node:fs';
+          import {authorized} from './.github/operations/korea-encar-v3-2022-source-v1/carrier.mjs';
+          authorized(JSON.parse(fs.readFileSync(process.argv[3], 'utf8')),process.argv[2]);
+          EOF
+          node --test "$ENCAR_OPS/carrier.test.mjs"
+          printf 'worker_tree=%s\n' "$tree" >> "$GITHUB_OUTPUT"
+  initial:
+    needs: [admit]
+    if: github.run_attempt == 1 && needs.admit.result == 'success'
+    outputs:
+      phase_result: ${{ steps.raw.outputs.phase_result }}
+      continue_allowed: ${{ steps.raw.outputs.continue_allowed }}
+    runs-on: ubuntu-24.04
+    environment: regcloud-staging
+    timeout-minutes: 50
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with: {node-version: '24.22.1', cache: npm}
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Save exact ordinary paid source only
+        id: raw
+        env:
+          ENCAR_REVIEWED_WORKER_TREE: ${{ needs.admit.outputs.worker_tree }}
+          ACCOUNT_KEY: ${{ secrets.AUTO_API_DUBICARS_KEY || secrets.AUTO_API_CHE168_KEY }}
+          JSON_STORAGE_DRIVER: object
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_REGION: us-east-1
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+          YC_OBJECT_STORAGE_REQUEST_TIMEOUT_MS: '8000'
+          YC_OBJECT_STORAGE_MAX_ATTEMPTS: '1'
+          NODE_OPTIONS: --max-old-space-size=512
+        run: node --import tsx "$ENCAR_OPS/actor.mjs" initial
+  phase2:
+    needs: [admit, initial]
+    if: github.run_attempt == 1 && needs.admit.result == 'success' && needs.initial.result == 'success' && needs.initial.outputs.continue_allowed == 'true'
+    outputs:
+      phase_result: ${{ steps.raw.outputs.phase_result }}
+      continue_allowed: ${{ steps.raw.outputs.continue_allowed }}
+    runs-on: ubuntu-24.04
+    environment: regcloud-staging
+    timeout-minutes: 50
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with: {node-version: '24.22.1', cache: npm}
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Save exact ordinary paid source only
+        id: raw
+        env:
+          ENCAR_REVIEWED_WORKER_TREE: ${{ needs.admit.outputs.worker_tree }}
+          ACCOUNT_KEY: ${{ secrets.AUTO_API_DUBICARS_KEY || secrets.AUTO_API_CHE168_KEY }}
+          JSON_STORAGE_DRIVER: object
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_REGION: us-east-1
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+          YC_OBJECT_STORAGE_REQUEST_TIMEOUT_MS: '8000'
+          YC_OBJECT_STORAGE_MAX_ATTEMPTS: '1'
+          NODE_OPTIONS: --max-old-space-size=512
+          ENCAR_PREVIOUS_RESULT: ${{ needs.initial.outputs.phase_result }}
+        run: node --import tsx "$ENCAR_OPS/actor.mjs" phase2
+
+  phase3:
+    needs: [admit, phase2]
+    if: github.run_attempt == 1 && needs.admit.result == 'success' && needs.phase2.result == 'success' && needs.phase2.outputs.continue_allowed == 'true'
+    outputs:
+      phase_result: ${{ steps.raw.outputs.phase_result }}
+      continue_allowed: ${{ steps.raw.outputs.continue_allowed }}
+    runs-on: ubuntu-24.04
+    environment: regcloud-staging
+    timeout-minutes: 50
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with: {node-version: '24.22.1', cache: npm}
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Save exact ordinary paid source only
+        id: raw
+        env:
+          ENCAR_REVIEWED_WORKER_TREE: ${{ needs.admit.outputs.worker_tree }}
+          ACCOUNT_KEY: ${{ secrets.AUTO_API_DUBICARS_KEY || secrets.AUTO_API_CHE168_KEY }}
+          JSON_STORAGE_DRIVER: object
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_REGION: us-east-1
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+          YC_OBJECT_STORAGE_REQUEST_TIMEOUT_MS: '8000'
+          YC_OBJECT_STORAGE_MAX_ATTEMPTS: '1'
+          NODE_OPTIONS: --max-old-space-size=512
+          ENCAR_PREVIOUS_RESULT: ${{ needs.phase2.outputs.phase_result }}
+        run: node --import tsx "$ENCAR_OPS/actor.mjs" phase3
+
+  phase4:
+    needs: [admit, phase3]
+    if: github.run_attempt == 1 && needs.admit.result == 'success' && needs.phase3.result == 'success' && needs.phase3.outputs.continue_allowed == 'true'
+    outputs:
+      phase_result: ${{ steps.raw.outputs.phase_result }}
+      continue_allowed: ${{ steps.raw.outputs.continue_allowed }}
+    runs-on: ubuntu-24.04
+    environment: regcloud-staging
+    timeout-minutes: 50
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with: {node-version: '24.22.1', cache: npm}
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Save exact ordinary paid source only
+        id: raw
+        env:
+          ENCAR_REVIEWED_WORKER_TREE: ${{ needs.admit.outputs.worker_tree }}
+          ACCOUNT_KEY: ${{ secrets.AUTO_API_DUBICARS_KEY || secrets.AUTO_API_CHE168_KEY }}
+          JSON_STORAGE_DRIVER: object
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_REGION: us-east-1
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+          YC_OBJECT_STORAGE_REQUEST_TIMEOUT_MS: '8000'
+          YC_OBJECT_STORAGE_MAX_ATTEMPTS: '1'
+          NODE_OPTIONS: --max-old-space-size=512
+          ENCAR_PREVIOUS_RESULT: ${{ needs.phase3.outputs.phase_result }}
+        run: node --import tsx "$ENCAR_OPS/actor.mjs" phase4
