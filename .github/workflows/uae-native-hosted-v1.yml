@@ -1,0 +1,55 @@
+name: Verify exact UAE source and standard browser routes on GitHub only
+on:
+  push:
+    branches: [main]
+    paths: [.github/market-runs/uae-native-hosted-v1.sha256]
+permissions:
+  contents: read
+jobs:
+  verify:
+    if: github.repository == 'jeep-jim/AvtoCena' && github.repository_id == '1289722938' && github.ref == 'refs/heads/main' && github.run_attempt == '1' && github.event.head_commit.message == 'Verify exact independent UAE candidate on GitHub only'
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      BUNDLE_SHA: cad28038cb91512832723986b22f26d3e33ffa3252ee5d20e0c031b29c9a967f
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 2
+          persist-credentials: false
+      - name: Bind single exact marker and verify immutable actor package
+        id: guard
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          test "$(git show -s --format=%P HEAD | wc -w)" = 1
+          readonly marker=.github/market-runs/uae-native-hosted-v1.sha256
+          cmp -s <(git diff-tree --no-commit-id -r --name-status --no-renames -z HEAD^ HEAD) <(printf 'A\0%s\0' "$marker")
+          mapfile -t pins < "$marker"
+          test "${#pins[@]}" = 3
+          [[ "${pins[0]}" =~ ^[0-9a-f]{40}$ && "${pins[1]}" =~ ^[0-9a-f]{40}$ && "${pins[2]}" == "$BUNDLE_SHA" ]]
+          cmp -s "$marker" <(printf '%s\n' "${pins[@]}")
+          (
+            cd .github/operations/uae-native-hosted-v1
+            printf '%s  bundle.sha256\n' "$BUNDLE_SHA" | sha256sum --check --status
+            sha256sum --check --strict --status bundle.sha256
+          )
+          { printf 'app_sha=%s\n' "${pins[0]}"; printf 'app_tree=%s\n' "${pins[1]}"; } >> "$GITHUB_OUTPUT"
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ steps.guard.outputs.app_sha }}
+          fetch-depth: 2
+          path: exact-app
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 24.22.1
+      - name: Verify immutable app source, compile, and test exact synthetic native routes
+        working-directory: exact-app
+        env:
+          UAE_APP_SHA: ${{ steps.guard.outputs.app_sha }}
+          UAE_APP_TREE: ${{ steps.guard.outputs.app_tree }}
+        shell: bash
+        run: bash "$GITHUB_WORKSPACE/.github/operations/uae-native-hosted-v1/verify.sh"
