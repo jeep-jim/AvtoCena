@@ -1,0 +1,2648 @@
+diff --git a/apps/web/lib/catalog/china-daily-source-checkpoint.ts b/apps/web/lib/catalog/china-daily-source-checkpoint.ts
+new file mode 100644
+index 00000000..101c8462
+--- /dev/null
++++ b/apps/web/lib/catalog/china-daily-source-checkpoint.ts
+@@ -0,0 +1,129 @@
++import {createHash} from 'node:crypto';
++import {gunzipSync} from 'node:zlib';
++import {ObjectJsonStorage} from '../data';
++import {assertDurableIntakeArchive} from '../../../../scripts/lib/catalog-raw-provenance.mjs';
++import {chinaObjectDigest,openAcceptedChinaRegcloudFiles,type ChinaStageObjectFiles} from './china-regcloud-object-reader';
++import {openIndependentChinaRegcloud,type IndependentCut} from './independent-market-activation-fixture';
++
++const SHA=/^[a-f0-9]{64}$/, ROOT=/^catalog\/nonjp-intake\/v1\/china\/[1-9]\d{0,19}\/[1-9]\d{0,5}$/;
++const REPLICA=/^catalog\/provider-replicas\/che168\/[a-f0-9]{8}(?:-[a-f0-9]{4}){3}-[a-f0-9]{12}$/;
++const MiB=1024**2, PART=2*MiB, REPLICA_PART=16*MiB, MAX_REPORT=128*MiB, MAX_RECEIPT=16*1024;
++const fail=(reason:string):never=>{throw Error('china_daily_source:'+reason);};
++const sha=(b:Buffer)=>createHash('sha256').update(b).digest('hex');
++const parse=(bytes:Buffer)=>JSON.parse(new TextDecoder('utf-8',{fatal:true}).decode(bytes));
++const int=(n:unknown):n is number=>Number.isSafeInteger(n)&&Number(n)>0;
++type Source=IndependentCut['source'];
++type Anchor={root:string;manifestSha256:string;reportSha256:string;receiptSha256:string};
++type ReplicaChunkSink=(chunk:Buffer,index:number)=>Promise<void>;
++type Replica={key:string;binding:string;cursor:number;sha256:string};
++export type ChinaDailySourceCheckpoint={
++ version:1;kind:'china-daily-source-checkpoint-v1';market:'china';archive:Anchor;replica:Replica;
++ observedAt:number;sourceRows:number;
++};
++export type ChinaDailyBase={checksum:string;etag:string};
++
++function anchorFromReceipt(b:Buffer,source:Source,archiveSha256:string):Anchor{
++ if(!Buffer.isBuffer(b)||b.length<1||b.length>MAX_RECEIPT||sha(b)!==source.receiptSha256)return fail('receipt_sha');
++ const raw=parse(b);
++ let receipt;try{receipt=assertDurableIntakeArchive(raw,'china');}catch{return fail('archive_receipt');}
++ if(receipt.manifestSha256!==archiveSha256||!ROOT.test(receipt.root))return fail('archive_receipt');
++ return {root:receipt.root,manifestSha256:receipt.manifestSha256,reportSha256:receipt.reportDigest,receiptSha256:source.receiptSha256};
++}
++async function openArchiveSource(storage:ObjectJsonStorage,anchor:Anchor,source:Source,archiveSha256:string,guard:()=>Promise<void>,verifyReplicaParts:boolean,expectedSnapshotBinding?:string,onVerifiedReplicaChunk?:ReplicaChunkSink){
++ if(!anchor||!ROOT.test(anchor.root)||![anchor.manifestSha256,anchor.receiptSha256,anchor.reportSha256].every(x=>SHA.test(x??''))||
++    anchor.manifestSha256!==archiveSha256||anchor.receiptSha256!==source.receiptSha256||source.cursor.stream!=='che168')return fail('archive_scope');
++ const read=async(key:string,max:number)=>{await guard();const r=await storage.getBinaryBounded(key,max);await guard();return r.data;};
++ const manifest=parse(await read(anchor.root+'/complete.json',2*MiB));
++ if(chinaObjectDigest(manifest)!==archiveSha256||manifest?.version!==1||manifest.kind!=='nonjp-intake'||manifest.market!=='china'||
++    manifest.collection?.complete!==true||manifest.reportDigest!==anchor.reportSha256||!Array.isArray(manifest.files)||manifest.files.length>20_000||
++    anchor.root!=='catalog/nonjp-intake/v1/china/'+manifest.owner?.runId+'/'+manifest.owner?.attempt)return fail('archive_manifest');
++ const entries=manifest.files.filter((f:{name?:string}|null)=>f?.name==='report.json');
++ const f=entries[0];
++ if(entries.length!==1||!int(f.bytes)||f.bytes>MAX_REPORT||f.sha256!==anchor.reportSha256||!Array.isArray(f.parts)||
++    f.parts.length!==Math.ceil(f.bytes/PART))return fail('archive_report_manifest');
++ const bytes=Buffer.alloc(f.bytes),hash=createHash('sha256');
++ for(const [i,part] of f.parts.entries()){
++  const size=Math.min(PART,f.bytes-i*PART);
++  if(!SHA.test(part?.sha256??'')||part.bytes!==size||part.key!==anchor.root+'/files/report.json/'+i+'-'+part.sha256+'.json')
++   return fail('report_shard_scope');
++  const wire=parse(await read(part.key,4*MiB));
++  if(wire?.version!==1||wire.encoding!=='gzip-base64'||wire.sha256!==part.sha256||wire.bytes!==size||
++     typeof wire.payload!=='string'||wire.payload.length>4*MiB)return fail('report_shard_wire');
++  const encoded=Buffer.from(wire.payload,'base64');
++  if(encoded.toString('base64')!==wire.payload)return fail('report_shard_wire');
++  let raw;try{raw=gunzipSync(encoded,{maxOutputLength:size});}catch{return fail('report_shard_integrity');}
++  if(raw.length!==size||sha(raw)!==part.sha256)return fail('report_shard_integrity');
++  raw.copy(bytes,i*PART);hash.update(raw);
++ }
++ if(hash.digest('hex')!==anchor.reportSha256)return fail('report_sha');
++ const report=parse(bytes),matches=Array.isArray(report?.sources)?report.sources.filter((x:{provider?:string}|null)=>x?.provider==='auto_api_che168'):[];
++ const next=matches[0],replica=next?.replica;
++ if(report?.version!==1||report.market!=='china'||report.provider!=='auto_api_che168'||report.completed!==true||report.failure||
++    Date.parse(report.completedAt)!==source.observedAt||matches.length!==1||next.sourceId!=='autohome_used_china_open'||
++    next.completeInventory!==true||next.stopReason!=='source_finished'||next.rejectedIdentity!==0||
++    !int(next.uniqueOffers)||next.uniqueOffers!==next.observations||!int(next.initialCursor)||next.initialCursor>next.cursor||
++    next.cursor!==source.cursor.sequence||!REPLICA.test(replica?.key??'')||replica.sha256!==source.cursor.anchorSha256||
++    replica.cursor!==next.cursor||!SHA.test(replica.binding??'')||replica.binding!==next.snapshotBinding)return fail('report_source');
++ if(expectedSnapshotBinding!==undefined&&replica.binding!==expectedSnapshotBinding)return fail('snapshot_binding');
++ const replicaManifest=parse(await read(replica.key+'/manifest.json',2*MiB));
++ if(chinaObjectDigest(replicaManifest)!==replica.sha256||replicaManifest?.version!==1||
++    replicaManifest.binding!==replica.binding||replicaManifest.cursor!==replica.cursor||!int(replicaManifest.bytes)||
++    !Array.isArray(replicaManifest.parts)||replicaManifest.parts.length!==Math.ceil(replicaManifest.bytes/REPLICA_PART)||
++    replicaManifest.parts.length>1024)return fail('replica_manifest');
++ for(const [i,part] of replicaManifest.parts.entries()){
++  const size=Math.min(REPLICA_PART,replicaManifest.bytes-i*REPLICA_PART);
++  if(part?.bytes!==size||!SHA.test(part.sha256??''))return fail('replica_manifest');
++  if(!verifyReplicaParts)continue;
++  await guard();
++  const gzip=await storage.getChinaReplicaPartBounded(replica.key+'/'+i+'.gz',Math.min(17*MiB,size+65_536));
++  let raw;try{raw=gunzipSync(gzip,{maxOutputLength:size});}catch{return fail('replica_shard_integrity');}
++  if(raw.length!==size||sha(raw)!==part.sha256)return fail('replica_shard_integrity');
++  await onVerifiedReplicaChunk?.(raw,i);
++ }
++ await guard();
++ const descriptor:Replica={key:replica.key,binding:replica.binding,cursor:replica.cursor,sha256:replica.sha256};
++ const checkpoint:ChinaDailySourceCheckpoint={version:1,kind:'china-daily-source-checkpoint-v1',market:'china',archive:anchor,
++  replica:descriptor,observedAt:source.observedAt,sourceRows:next.uniqueOffers};
++ return {checkpoint,initialCursor:next.initialCursor as number,baseReplica:next.baseReplica as {key?:string;sha256?:string}|undefined};
++}
++
++function activeGuard(stage:ChinaStageObjectFiles,cut:{assertCurrent:()=>Promise<void>}){
++ return async()=>{await cut.assertCurrent();await stage.assertPointer();};
++}
++/** Existing v1 first-cut READY needs no rewrite. An optional bootstrap
++ * receipt must be byte-exact to its own cut, not to a legacy cursor. */
++export async function openChinaDailyAcceptedSource(storage:ObjectJsonStorage,expected:ChinaDailyBase,bootstrapReceipt?:Buffer,expectedSnapshotBinding?:string,onVerifiedReplicaChunk?:ReplicaChunkSink){
++ return openAcceptedSource(storage,expected,bootstrapReceipt,true,expectedSnapshotBinding,onVerifiedReplicaChunk);
++}
++async function openAcceptedSource(storage:ObjectJsonStorage,expected:ChinaDailyBase,bootstrapReceipt:Buffer|undefined,verifyReplicaParts:boolean,expectedSnapshotBinding?:string,onVerifiedReplicaChunk?:ReplicaChunkSink){
++ const stage=await openAcceptedChinaRegcloudFiles(storage,expected,'active');
++ const opened=await openIndependentChinaRegcloud(stage).openChinaPrepared(),source=opened.cut.source,guard=activeGuard(stage,opened);
++ const [stored,archiveSha256]=[await stage.readDailySourceCheckpoint(),stage.ready.archiveSha256];
++ if(stored&&bootstrapReceipt)return fail('bootstrap_not_permitted');
++ const decoded=stored?parse(stored) as ChinaDailySourceCheckpoint:null;
++ if(!decoded&&!bootstrapReceipt)return fail('bootstrap_receipt_required');
++ const anchor=decoded?decoded.archive:anchorFromReceipt(bootstrapReceipt!,source,archiveSha256);
++ const result=await openArchiveSource(storage,anchor,source,archiveSha256,guard,verifyReplicaParts,expectedSnapshotBinding,onVerifiedReplicaChunk);
++ if(decoded&&chinaObjectDigest(result.checkpoint)!==sha(stored!))return fail('checkpoint_binding');
++ await guard();
++ return {checkpoint:result.checkpoint,assertCurrent:guard};
++}
++
++export async function bindChinaDailyStageSource(input:{
++ storage:ObjectJsonStorage;base:ChinaDailyBase;expectedBaseSha256:string;
++ candidate:Source;archiveSha256:string;receipt:Buffer;bootstrapReceipt?:Buffer;
++}){
++ const current=await openAcceptedSource(input.storage,input.base,input.bootstrapReceipt,false);
++ // The opaque state witness fixes the exact cursor/pointer revision while
++ // expectedBaseSha256 must also match the active reference of that witness.
++ const stage=await openAcceptedChinaRegcloudFiles(input.storage,input.base,'active');
++ if(stage.acceptedRefSha256!==input.expectedBaseSha256)return fail('base_ref');
++ const anchor=anchorFromReceipt(input.receipt,input.candidate,input.archiveSha256);
++ const next=await openArchiveSource(input.storage,anchor,input.candidate,input.archiveSha256,current.assertCurrent,true);
++ const prev=current.checkpoint.replica,replica=next.checkpoint.replica;
++ if(next.initialCursor!==prev.cursor||next.baseReplica?.key!==prev.key||next.baseReplica.sha256!==prev.sha256||
++    replica.binding!==prev.binding||replica.cursor<prev.cursor||
++    (replica.cursor===prev.cursor&&(replica.key!==prev.key||replica.sha256!==prev.sha256)))return fail('replica_ancestry');
++ await current.assertCurrent();
++ return {bytes:Buffer.from(JSON.stringify(next.checkpoint)),assertCurrent:current.assertCurrent};
++}
+diff --git a/apps/web/lib/catalog/china-regcloud-object-reader.ts b/apps/web/lib/catalog/china-regcloud-object-reader.ts
+index 7451c1bf..ab831f6a 100644
+--- a/apps/web/lib/catalog/china-regcloud-object-reader.ts
++++ b/apps/web/lib/catalog/china-regcloud-object-reader.ts
+@@ -18,6 +18,7 @@ export type ChinaPublicState={version:1;market:'china';revision:number;active:Ch
+ type DurableReady={version:1;kind:'china-private-durable-stage-ready-v1';runId:string;market:'china';stageRoot:string;generationId:string;
+  archiveSha256:string;runtimeReadySha256:string;permitSha256:string;manifestSha256:string;pricingReceiptSha256:string;
+  activeControlSha256:string;expectedChinaPublicBaseSha256:string;admittedRows:number;validUntil:number;
++ sourceCursor:{stream:string;sequence:number;anchorSha256:string};dailySourceCheckpointSha256?:string;
+  artifacts:{count:number;bytes:number;orderedSha256:string};publicationAuthorized:false;cursorAdvanceAuthorized:false};
+ export type ChinaConfiguredStorageScope={endpoint:string;bucket:string;prefix:string;region:string};
+ export function readConfiguredRegcloudScope():ChinaConfiguredStorageScope{
+@@ -71,9 +72,11 @@ export type ChinaStageObjectFiles=Readonly<{
+  ready:Readonly<ChinaRuntimeReady>;
+  readySha256:string;
+  acceptedLegalUntil?:number;
++ acceptedRefSha256?:string;
+  durable:Readonly<DurableReady>;
+  getBinary(key:string):Promise<{data:Buffer;size:number;checksum:string}>;
+  readJsonWithMeta<T>(key:string,fallback:T):Promise<JsonReadResult<T>>;
++ readDailySourceCheckpoint():Promise<Buffer|null>;
+  assertPointer():Promise<void>;
+ }>;
+ export function assertChinaStageObjectFiles(handle:ChinaStageObjectFiles){
+@@ -104,6 +107,7 @@ async function openChinaStageObject(storage:ObjectJsonStorage,reference:ChinaPub
+     ![durable.archiveSha256,durable.runtimeReadySha256,durable.permitSha256,durable.manifestSha256,durable.pricingReceiptSha256,
+      durable.activeControlSha256,durable.expectedChinaPublicBaseSha256,durable.artifacts?.orderedSha256].every(x=>SHA.test(x??''))||
+     !clock(durable.admittedRows)||!clock(durable.artifacts.count)||!clock(durable.artifacts.bytes)||!clock(durable.validUntil)||
++    (durable.dailySourceCheckpointSha256!==undefined&&!SHA.test(durable.dailySourceCheckpointSha256))||
+     (!acceptedRead&&Date.now()>=durable.validUntil))return fail('ready_scope');
+  const stageRuntime=await read('runtime-ready.json',8192);
+  if(stageRuntime.checksum!==durable.runtimeReadySha256)return fail('runtime_ready_sha');
+@@ -122,8 +126,16 @@ async function openChinaStageObject(storage:ObjectJsonStorage,reference:ChinaPub
+   if(key===LOCAL_CONTROL&&result.checksum!==ready.activeControlSha256)return fail('stage_control_sha');
+   assertChinaStageObjectFiles(handle);return result;
+  };
+- const handle:ChinaStageObjectFiles=Object.freeze({ready:Object.freeze(ready),readySha256:ref.readySha256,...(acceptedLegalUntil===undefined?{}:{acceptedLegalUntil}),durable:Object.freeze(durable),
++ const handle:ChinaStageObjectFiles=Object.freeze({ready:Object.freeze(ready),readySha256:ref.readySha256,...(acceptedLegalUntil===undefined?{}:{acceptedLegalUntil}),
++  ...(acceptedRead?{acceptedRefSha256:chinaObjectDigest(ref)}:{}),durable:Object.freeze(durable),
+   getBinary:data,
++  async readDailySourceCheckpoint(){
++   await handle.assertPointer();
++   if(!durable.dailySourceCheckpointSha256)return null;
++   const object=await read('daily-source-'+durable.dailySourceCheckpointSha256+'.json',16*1024);
++   if(object.checksum!==durable.dailySourceCheckpointSha256)return fail('daily_source_sha');
++   await handle.assertPointer();return object.data;
++  },
+   async readJsonWithMeta<T>(key:string,_fallback:T):Promise<JsonReadResult<T>>{
+    if(key!==LOCAL_CONTROL)return fail('control_scope');
+    const body=await data(key);
+@@ -134,6 +146,22 @@ async function openChinaStageObject(storage:ObjectJsonStorage,reference:ChinaPub
+  minted.add(handle);await handle.assertPointer();
+  return handle;
+ }
++/** Open only a pointer's accepted active/previous reference, never an
++ * arbitrary expired private draft. Both the initial witness and every
++ * subsequent read are fenced to the same opaque ETag and checksum. */
++export async function openAcceptedChinaRegcloudFiles(storage:ObjectJsonStorage,
++ expected:{checksum:string;etag:string},role:'active'|'previous'){
++ const checksum=expected.checksum,etag=expected.etag;
++ const current=async()=>{
++  const own=await readChinaPublicState(storage);
++  if(!own||own.checksum!==checksum||own.etag!==etag)return fail('active_cut_changed');
++  return own;
++ };
++ const own=await current();
++ const ref=own.state[role];
++ if(!ref||chinaLegacyRollback(ref))return fail('accepted_ref');
++ return openChinaStageObject(storage,ref,async()=>{await current();},true);
++}
+ export async function openConfiguredChinaRegcloudFiles(){
+  if(!chinaRegcloudRuntimeConfigured())return fail('disabled');
+  const scopeKey=chinaObjectDigest(readConfiguredRegcloudScope()),credentialKey=credentials();
+diff --git a/apps/web/lib/data.ts b/apps/web/lib/data.ts
+index b739d245..181d7971 100644
+--- a/apps/web/lib/data.ts
++++ b/apps/web/lib/data.ts
+@@ -331,7 +331,11 @@ export class ObjectJsonStorage implements JsonStorage {
+   }
+   /** Verify the exact new or resumed object retained no grants except its expected owner. */
+   async assertChinaPrivateStageObjectOwner(relativePath:string,owner:string){
+-    const cfg=this.requireChinaPrivateStageScope(relativePath);
++    this.requireChinaPrivateStageScope(relativePath);
++    return this.assertChinaPrivateObjectOwner(relativePath,owner);
++  }
++  private async assertChinaPrivateObjectOwner(relativePath:string,owner:string){
++    const cfg=this.requireChinaPrivateStageScope();
+     const query=canonicalQuery({acl:''}),url=new URL(`${cfg.endpoint}/${cfg.bucket}/${encodeKey(this.key(relativePath))}`);
+     url.search=query;
+     let acl:Response;
+@@ -354,6 +358,84 @@ export class ObjectJsonStorage implements JsonStorage {
+     if(!res.ok)throw Error(`object_storage_binary_write_${res.status}`);
+     return {size:data.length,checksum:sha256(data)};
+   }
++  /** Private native daily-source data only. The operator also fences exact
++   * per-job keys and accepted ancestry before calling these narrow signed IO methods. */
++  private requireChinaDailySourceKey(relativePath:string){
++    const cfg=this.requireChinaPrivateStageScope();
++    if(cfg.bucket!=='avtocena-staging-8120751'||cfg.prefix!=='migration-staging/full-20261011'||cfg.region!=='us-east-1'||
++       relativePath!==normalizeStorageKey(relativePath))throw Error('china_daily_privacy:scope');
++    const uuid='[a-f0-9]{8}(?:-[a-f0-9]{4}){3}-[a-f0-9]{12}';
++    if(new RegExp('^catalog/provider-replicas/che168/'+uuid+'/(?:manifest\\.json|(?:0|[1-9]\\d{0,3})\\.gz)$').test(relativePath))
++      return relativePath.endsWith('.gz')?17*1024**2:2*1024**2;
++    if(new RegExp('^catalog/intake-working/che168-v1/[1-9]\\d{0,19}/(?:head|'+uuid+')\\.json$').test(relativePath))
++      return relativePath.endsWith('/head.json')?2*1024**2:64*1024**2;
++    if(/^catalog\/nonjp-intake\/v1\/china\/[1-9]\d{0,19}\/[1-9]\d{0,5}\/(?:complete\.json|files\/(?:report\.json|autohome_used_china_open-\d{6}\.jsonl)\/\d{1,6}-[a-f0-9]{64}\.json)$/.test(relativePath))return 4*1024**2;
++    if(/^catalog\/raw-feed-pins\/v1\/(?:che168-intake|nonjp-intake-china)-[1-9]\d{0,19}-[1-9]\d{0,5}\.json$/.test(relativePath))return 1*1024**2;
++    if(/^catalog\/(?:provider-snapshots\/che168\/[a-f0-9]{64}\/manifest|raw-feed-handoffs\/v1\/che168-snapshot\/[a-f0-9]{64}|raw-feed-coordination\/v1\/(?:policy|state))\.json$/.test(relativePath))return 2*1024**2;
++    throw Error('china_daily_privacy:scope');
++  }
++  async readChinaDailySourceJson<T>(key:string,fallback:T):Promise<JsonReadResult<T>>{
++    const max=this.requireChinaDailySourceKey(key);
++    if(!key.endsWith('.json'))throw Error('china_daily_privacy:json_read_scope');
++    const res=await this.request('GET',key,undefined,{},max);
++    if(res.status===404)return {found:false,value:fallback};
++    if(!res.ok)throw Error('china_daily_privacy:json_read');
++    const etag=cleanEtag(res.headers.get('etag'));
++    if(!etag)throw Error('china_daily_privacy:etag');
++    return {found:true,etag,value:parseStorageJson<T>(objectStorageResponseBody(res))};
++  }
++  async putChinaDailySourcePrivate(key:string,bytes:Buffer,type:'application/json'|'application/gzip',condition:JsonWriteCondition,owner:string){
++    const max=this.requireChinaDailySourceKey(key);
++    if(!Buffer.isBuffer(bytes)||bytes.length<1||bytes.length>max||
++       type!==(key.endsWith('.gz')?'application/gzip':'application/json')||
++       !/^catalog\/(?:provider-replicas|intake-working|nonjp-intake|raw-feed-pins)\//.test(key))
++      throw Error('china_daily_privacy:private_put_scope');
++    const mutable=key.endsWith('/head.json')||key.startsWith('catalog/raw-feed-pins/');
++    if(!condition||!(condition.ifNoneMatch==='*'&&condition.ifMatch===undefined||
++      mutable&&condition.ifNoneMatch===undefined&&typeof condition.ifMatch==='string'&&/^(?:"[!-~]{1,250}"|[a-zA-Z0-9_-]{1,250})$/.test(condition.ifMatch)))
++      throw Error('china_daily_privacy:conditional_put_required');
++    const headers:Record<string,string>={'x-amz-acl':'private','content-type':type};
++    if(condition.ifMatch)headers['if-match']=condition.ifMatch;
++    if(condition.ifNoneMatch)headers['if-none-match']=condition.ifNoneMatch;
++    const res=await this.request('PUT',key,bytes,headers,64*1024);
++    if(res.status===409||res.status===412){
++      if(!mutable)await this.assertChinaPrivateObjectOwner(key,owner);
++      throw new StorageConflictError();
++    }
++    if(!res.ok)throw Error('china_daily_privacy:private_put');
++    await this.assertChinaPrivateObjectOwner(key,owner);
++    return {objectKey:this.key(key),mimeType:type,size:bytes.length,checksum:sha256(bytes)};
++  }
++  async assertChinaDailySourceObjectOwner(key:string,owner:string){
++    this.requireChinaDailySourceKey(key);
++    return this.assertChinaPrivateObjectOwner(key,owner);
++  }
++  async listChinaDailyArchiveReserve(){
++    const cfg=this.requireChinaPrivateStageScope();
++    if(cfg.bucket!=='avtocena-staging-8120751'||cfg.prefix!=='migration-staging/full-20261011'||cfg.region!=='us-east-1')throw Error('china_daily_privacy:scope');
++    const rows:{size:number}[]=[],seen=new Set<string>();
++    let token='';
++    do{
++      if(seen.has(token)||seen.size>=1000)throw Error('china_daily_privacy:reserve_budget');
++      seen.add(token);
++      const query=canonicalQuery({'list-type':'2',prefix:'','max-keys':'1000',...(token?{'continuation-token':token}:{})});
++      const url=new URL(`${cfg.endpoint}/${cfg.bucket}`);url.search=query;
++      const res=await this.signedRequest('GET',url,undefined,{},query,2*1024**2);
++      if(!res.ok)throw Error('china_daily_privacy:reserve_response');
++      const xml=objectStorageResponseText(res);
++      const keys=xml.match(/<(?:\w+:)?KeyCount>(\d{1,4})<\/(?:\w+:)?KeyCount>/)?.[1];
++      const matches=[...xml.matchAll(/<Contents>[\s\S]*?<Size>(\d{1,16})<\/Size>[\s\S]*?<\/Contents>/g)];
++      if(!/<ListBucketResult(?:\s|>)/.test(xml)||(keys!==undefined&&matches.length!==Number(keys))||
++         (xml.match(/<Contents>/g)??[]).length!==matches.length||matches.length>1000)
++        throw Error('china_daily_privacy:reserve_xml');
++      for(const item of matches){const n=Number(item[1]);if(!Number.isSafeInteger(n))throw Error('china_daily_privacy:reserve_size');rows.push({size:n});}
++      const truncated=xml.match(/<IsTruncated>(true|false)<\/IsTruncated>/)?.[1];
++      if(!truncated)throw Error('china_daily_privacy:reserve_xml');
++      token=truncated==='true'?decodeXml(xml.match(/<NextContinuationToken>([\s\S]*?)<\/NextContinuationToken>/)?.[1]??''):'';
++      if(truncated==='true'&&(!token||token.length>1024))throw Error('china_daily_privacy:reserve_cursor');
++    }while(token);
++    return rows;
++  }
+   /** Explicit bounded readback for the private prepared-stage path. */
+   async getBinaryBounded(relativePath:string,maximumBytes:number){
+     if(!Number.isSafeInteger(maximumBytes)||maximumBytes<1||maximumBytes>4*1024*1024)throw Error('object_storage_binary_read_limit');
+@@ -362,6 +444,15 @@ export class ObjectJsonStorage implements JsonStorage {
+     const data=objectStorageResponseBody(res);
+     return {data,size:data.length,checksum:sha256(data)};
+   }
++  /** Daily China only: immutable native Che168 gzip parts need the native
++   * 16 MiB chunk size plus bounded compression overhead, never arbitrary keys. */
++  async getChinaReplicaPartBounded(relativePath:string,maximumBytes:number){
++    if(!/^catalog\/provider-replicas\/che168\/[a-f0-9]{8}(?:-[a-f0-9]{4}){3}-[a-f0-9]{12}\/(?:0|[1-9]\d{0,3})\.gz$/.test(relativePath)||
++      !Number.isSafeInteger(maximumBytes)||maximumBytes<1||maximumBytes>17*1024*1024)throw Error('china_replica_read_scope');
++    const res=await this.request("GET",relativePath,undefined,{},maximumBytes);
++    if(!res.ok)throw Error(`object_storage_binary_read_${res.status}`);
++    return objectStorageResponseBody(res);
++  }
+   /** Bounded authenticated metadata read for a single market control. */
+   async readScopedControl(relativePath:string){
+     const res=await this.request('GET',relativePath,undefined,{},32*1024);
+diff --git a/scripts/catalog-auto-api-che168-bulk-intake.mjs b/scripts/catalog-auto-api-che168-bulk-intake.mjs
+index 90b1e185..99ba5d8b 100644
+--- a/scripts/catalog-auto-api-che168-bulk-intake.mjs
++++ b/scripts/catalog-auto-api-che168-bulk-intake.mjs
+@@ -5,12 +5,13 @@ import fs from 'node:fs/promises';
+ import path from 'node:path';
+ import os from 'node:os';
+ import {DatabaseSync} from 'node:sqlite';
+-import {createHash} from 'node:crypto';
++import {pathToFileURL} from 'node:url';
+ import {getJsonStorage} from '../apps/web/lib/data.ts';
+ import {normalizeAutoApiChe168,autoApiChe168RejectionReason,isAutoApiChe168QuarantineReason,AUTO_API_CHE168_SOURCE as sourceId} from '../apps/web/lib/catalog/auto-api-che168.ts';
+ import {stableOfferId} from '../apps/web/lib/catalog/storage.ts';
+ import {autoApiChe168Client,collectAutoApiChe168} from './lib/auto-api-che168-client.mjs';
+ import {snapshotBinding,readChe168Snapshot} from './lib/che168-snapshot.mjs';
++import {resolveChe168BulkResume} from './lib/che168-bulk-resume.mjs';
+ import {consumeChe168Csv} from './lib/che168-csv-stream.mjs';
+ import {saveChe168Replica,restoreChe168Replica} from './lib/che168-replica.mjs';
+ import {prepareChe168ReplicaInputWitness} from './lib/che168-replica-witness.mjs';
+@@ -19,23 +20,22 @@ import {observationShardWriter} from './lib/catalog-intake-checkpoint.mjs';
+ import {openRawFeedPin,rawProducerOwner,readRawRootHandoff} from './lib/catalog-raw-provenance.mjs';
+ import {commitChe168RawConfig} from './lib/che168-raw-config.mjs';
+ 
+-await assertCollectionEnabled('che168_feed');
+-const directory=process.env.AUTO_API_INTAKE_DIR||'catalog-intake-china';
+-const config=JSON.parse(await fs.readFile(process.env.CHE168_SNAPSHOT_CONFIG||'data/catalog/che168-snapshot-v1.json','utf8'));
+-const binding=snapshotBinding(config);
+-let storage=getJsonStorage();
++export async function runChe168BulkIntake({accepted,storage:providedStorage,directory:providedDirectory,resolvePolicy,request:providedRequest}={}) {
++const checkEnabled=resolvePolicy??(()=>assertCollectionEnabled('che168_feed'));
++await checkEnabled();
++const directory=providedDirectory??process.env.AUTO_API_INTAKE_DIR??'catalog-intake-china';
++const config=accepted?.config??JSON.parse(await fs.readFile(process.env.CHE168_SNAPSHOT_CONFIG||'data/catalog/che168-snapshot-v1.json','utf8'));
++snapshotBinding(config); // Preserve refusal before any legacy cursor read.
++let storage=providedStorage??getJsonStorage();
+ if(storage.driver!=='object')throw Error('auto_api_durable_storage_required');
+ const yearFrom=CHINA_MIN_MODEL_YEAR;
+-const saved=await storage.readJson('catalog/intake-cursors/v1/china.json',null);
+-const previous=saved?.sources?.find(row=>row.sourceId===sourceId);
+-// A legacy cursor is not aligned to the supplier's new file. Bootstrap once;
+-// later runs only restore the replica associated with a published cursor.
+-const resume=previous?.snapshotBinding===binding && previous.yearFrom===yearFrom;
+-if(process.env.AUTO_API_CHE168_REQUIRE_REPLICA==='1'&&!resume)throw Error('auto_api_saved_replica_required');
+-if(resume && (saved.version!==1||saved.market!=='china'||!saved.generationId||previous.provider!=='auto_api_che168'
+-  ||!Number.isSafeInteger(previous.cursor)||previous.cursor<config.initialCursor||!previous.replica
+-  ||!Number.isFinite(Date.parse(saved.updatedAt))||Date.parse(saved.updatedAt)>Date.now()
+-  ||previous.stopReason!=='source_finished'))throw Error('auto_api_invalid_saved_replica_cursor');
++const saved=accepted?accepted.saved:await storage.readJson('catalog/intake-cursors/v1/china.json',null);
++const {binding,previous,resume,initialCursor,journalBinding,artifactRunId}=
++ resolveChe168BulkResume({config,saved,sourceId,yearFrom,required:Boolean(accepted)||process.env.AUTO_API_CHE168_REQUIRE_REPLICA==='1'});
++if(accepted){
++ if(!providedStorage||!providedDirectory||!providedRequest||typeof accepted.restore!=='function'||typeof accepted.assertCurrent!=='function')throw Error('auto_api_accepted_handoff_required');
++ await accepted.assertCurrent();
++}
+ await fs.mkdir(directory,{recursive:true});
+ const files=await fs.readdir(directory);
+ let prior;
+@@ -48,9 +48,6 @@ const temp=await fs.mkdtemp(path.join(os.tmpdir(),'che168-replica-')),filename=p
+ let db,source={sourceId,provider:'auto_api_che168',snapshotBinding:binding,snapshotStartedAt:config.modifiedAt,yearFrom,
+   syncMode:'snapshot',mode:'snapshot',pages:resume?0:1,observations:0,rejectedIdentity:0,stopReason:'collecting'};
+ const report={version:1,provider:'auto_api_che168',market:'china',productionWrites:false,startedAt:new Date().toISOString(),completed:false,sources:[source,...(prior?.sources||[])],confirmedWithdrawals:[]};
+-const initialCursor=resume?previous.cursor:config.initialCursor;
+-const journalBinding=createHash('sha256').update(JSON.stringify({binding,initialCursor,base:resume?previous.replica:null,replayVersion:2})).digest('hex');
+-const artifactRunId=BigInt(`0x${journalBinding.slice(0,14)}`).toString();
+ const owner=rawProducerOwner(),snapshotRoot=`catalog/provider-snapshots/che168/${binding}`;
+ source.workingJournal={key:`catalog/intake-working/che168-v1/${artifactRunId}`,binding:journalBinding};
+ if(resume)source.baseReplica={key:previous.replica.key,sha256:previous.replica.sha256};
+@@ -58,13 +55,14 @@ const rawPin=await openRawFeedPin({storage,owner,operationId:`che168-intake-${ow
+   references:[{kind:'che168-snapshot',root:snapshotRoot},{kind:'che168-journal',root:source.workingJournal.key},
+     ...(resume?[{kind:'che168-replica',root:previous.replica.key,sha256:previous.replica.sha256}]:[])]});
+ await rawPin.add([]); // Refuse to resume collection after its handoff was frozen.
+-await commitChe168RawConfig({storage,config,owner});
++if(!accepted)await commitChe168RawConfig({storage,config,owner});
+ storage=rawPin.storage;
+ const withdrawals=new Map(),quarantine=new Map();
+ async function checkpoint(){await fs.writeFile(path.join(directory,'report.tmp'),JSON.stringify(report));await fs.rename(path.join(directory,'report.tmp'),path.join(directory,'report.json'));}
+ await checkpoint();
+ try {
+-  if(resume)await restoreChe168Replica({storage,filename,descriptor:previous.replica,binding,cursor:previous.cursor});
++  if(accepted){await accepted.restore(filename,previous.replica);await accepted.assertCurrent();}
++  else if(resume)await restoreChe168Replica({storage,filename,descriptor:previous.replica,binding,cursor:previous.cursor});
+   db=new DatabaseSync(filename);
+   db.exec('PRAGMA cache_size=-16384; PRAGMA temp_store=FILE; CREATE TABLE IF NOT EXISTS inventory(id TEXT PRIMARY KEY,payload TEXT NOT NULL,event INTEGER NOT NULL);');
+   if(db.prepare('PRAGMA quick_check').get().quick_check!=='ok')throw Error('auto_api_invalid_replica_database');
+@@ -117,8 +115,8 @@ try {
+   const save=async()=>{
+     if(lastCursor!==journal.cursor){await journal.commit({cursor:lastCursor,changes:totalChanges,events:pending});pending=[];pendingBytes=0;lastSave=Date.now();}
+   };
+-  const request=async (...args)=>{await assertCollectionEnabled('che168_feed');return rawRequest(...args);};
+-  const rawRequest=autoApiChe168Client({apiKey:process.env.AUTO_API_CHE168_KEY,deadline:Date.now()+Math.min(240*60000,Number(process.env.CATALOG_INTAKE_TIME_MS||210*60000)),requestDelayMs:200,retryRateLimit:process.env.AUTO_API_CHE168_STOP_ON_QUOTA!=='1'});
++  const request=async (...args)=>{await checkEnabled();await accepted?.assertCurrent();return rawRequest(...args);};
++  const rawRequest=providedRequest??autoApiChe168Client({apiKey:process.env.AUTO_API_CHE168_KEY,deadline:Date.now()+Math.min(240*60000,Number(process.env.CATALOG_INTAKE_TIME_MS||210*60000)),requestDelayMs:200,retryRateLimit:process.env.AUTO_API_CHE168_STOP_ON_QUOTA!=='1'});
+   let completed;
+   try{
+     completed=await collectAutoApiChe168({request,yearFrom,resume:{cursor:journal.cursor,snapshotStartedAt:config.modifiedAt},useChangeData:true,
+@@ -140,6 +138,15 @@ try {
+     await save();
+     source.cursor=lastCursor;source.changes=totalChanges;
+   }catch(error){await save();source.cursor=lastCursor;source.changes=totalChanges;throw error;}
++  if(accepted&&completed.cursor===initialCursor){
++    if(totalChanges!==0)throw Error('auto_api_unchanged_cursor_with_changes');
++    await accepted.assertCurrent();
++    // A successful no-op is not a new accepted generation or fresh archive.
++    // Close our working producer pin but leave existing accepted ancestry intact.
++    await rawPin.handoff();
++    await accepted.assertCurrent();
++    return {noDelta:true,cursor:initialCursor};
++  }
+   const count=Number(db.prepare('SELECT COUNT(*) AS n FROM inventory').get().n);
+   if(!count)throw Error('auto_api_empty_inventory');
+   // Owner instruction 09.10.2026: exclude unsuitable rows individually;
+@@ -162,7 +169,8 @@ try {
+     source.observations++;
+   }
+   db.close();db=null;
+-  const replica=await saveChe168Replica({storage,filename,binding,cursor:completed.cursor,
++  await accepted?.assertCurrent();
++  const replica=await saveChe168Replica({storage,filename,binding,cursor:completed.cursor,immutable:Boolean(accepted),
+     beforeWrite:root=>rawPin.add([{kind:'che168-replica',root}])});
+   Object.assign(source,{cursor:completed.cursor,initialCursor,changes:totalChanges,uniqueOffers:count,replica,
+     completeInventory:true,quarantined:quarantine.size,stopReason:'source_finished'});
+@@ -174,9 +182,14 @@ try {
+   // The current replica and full emitted rows already exist; prove their
+   // independent materialization before the ordinary immutable intake archive.
+   // Unavailable proof preserves the feed and its existing ancestral refs.
+-  Object.assign(report,await prepareChe168ReplicaInputWitness({storage,directory:path.resolve(directory),config,owner}));
++  Object.assign(report,await (accepted?.nativeWitness??prepareChe168ReplicaInputWitness)({storage,directory:path.resolve(directory),config,owner}));
+   await checkpoint();
++  await accepted?.assertCurrent();
+   console.log(JSON.stringify({completed:true,mode:resume?'local_replica_and_changes':'csv_and_changes',offers:count,changes:totalChanges,cursor:completed.cursor,replicaSaved:true}));
++  return report;
+ }catch(error){
+   report.failure=/^auto_api_[a-z0-9_]+$/.test(error?.message)?error.message:'auto_api_bulk_collection_failed';await checkpoint();throw Error(report.failure);
+ }finally{db?.close();await fs.rm(temp,{recursive:true,force:true});}
++
++}
++if(process.argv[1]&&import.meta.url===pathToFileURL(path.resolve(process.argv[1])).href)await runChe168BulkIntake();
+diff --git a/scripts/catalog-china-daily-collect-core.mts b/scripts/catalog-china-daily-collect-core.mts
+new file mode 100644
+index 00000000..1cdc7963
+--- /dev/null
++++ b/scripts/catalog-china-daily-collect-core.mts
+@@ -0,0 +1,134 @@
++/** In-process source-only core. No executable entry, environment grant, global
++ * publish/legacy cursor fallback, or operator marker. Host must inject the
++ * independently authenticated producer scope. */
++import {createHash} from 'node:crypto';
++import type {ObjectJsonStorage} from '../apps/web/lib/data';
++import fs from 'node:fs/promises';
++import os from 'node:os';
++import path from 'node:path';
++import {inspectChinaDailyDry,type ChinaDailyNativeBase} from './catalog-china-daily-dry.mts';
++import {runChe168BulkIntake} from './catalog-auto-api-che168-bulk-intake.mjs';
++import {rawDigest,rawProducerOwner} from './lib/catalog-raw-provenance.mjs';
++import {archiveIntakeDirectory} from './lib/nonjp-intake-archive.mjs';
++
++type Input=Pick<Parameters<typeof inspectChinaDailyDry>[0],'plan'|'expectedPlanSha256'|'snapshotConfig'|'bootstrapReceipt'>;
++type Ports={
++ storage:Pick<ObjectJsonStorage,'driver'|'readJson'|'readJsonWithMeta'|'putBinary'|'writeJson'|'getBinary'> & {listBucketObjects(prefix?:string):Promise<{size:number}[]>};
++ nativeWitness?:(args:any)=>Promise<any>;
++ authorize:(claim:{controlSha256:string;replicaSha256:string;cursor:number})=>Promise<void>;
++ assertEnabled:()=>Promise<void>;
++ request:(endpoint:string,params:Record<string,unknown>)=>Promise<unknown>;
++ progress?:(phase:'base_read'|'replica_spool'|'guard'|'policy'|'pin_read'|'pin_put'|'owner_controls'|'provider_request'|'archive')=>void;
++};
++export async function collectChinaDailySource(input:Input,ports:Ports){
++ const owner=rawProducerOwner(),root=await fs.mkdtemp(path.join(os.tmpdir(),'china-daily-source-'));
++ try{
++  const replica=path.join(root,'replica.sqlite'),observations=path.join(root,'collection');
++  let verified:ChinaDailyNativeBase|undefined,parts=0;
++  const mark=(phase:Parameters<NonNullable<Ports['progress']>>[0])=>ports.progress?.(phase);
++  mark('replica_spool');
++  const file=await fs.open(replica,'wx',0o600);
++  mark('base_read');
++  const evidence=await (async()=>{try{return await inspectChinaDailyDry({...input,
++    onVerifiedReplicaChunk:async(bytes,index)=>{
++      if(index!==parts++)throw Error('china_daily_collect:replica_order');
++      mark('replica_spool');await file.writeFile(bytes);mark('base_read');
++    },onVerifiedBase:base=>{verified=base;}});}
++    finally{await file.close();}})();
++  if(!verified||!parts)throw Error('china_daily_collect:verified_base');
++  const base=verified,claim=Object.freeze({controlSha256:evidence.controlSha256,
++    replicaSha256:base.checkpoint.replica.sha256,cursor:base.checkpoint.replica.cursor});
++  const guard=async()=>{mark('guard');await ports.authorize(claim);await base.assertCurrent();};
++  await guard();
++  const initialJournal='catalog/intake-working/che168-v1/'+evidence.nativeResume.artifactRunId+'/';
++  const archiveRoot=`catalog/nonjp-intake/v1/china/${owner.runId}/${owner.attempt}/`;
++  const collectorPin=`catalog/raw-feed-pins/v1/che168-intake-${owner.runId}-${owner.attempt}.json`;
++  const expectedPins=new Set([
++    collectorPin,
++    `catalog/raw-feed-pins/v1/nonjp-intake-china-${owner.runId}-${owner.attempt}.json`,
++  ]);
++  const rawRep=/^catalog\/provider-replicas\/che168\/[a-f0-9]{8}(?:-[a-f0-9]{4}){3}-[a-f0-9]{12}\/(?:manifest\.json|(?:0|[1-9]\d{0,3})\.gz)$/;
++  const baseRoot=base.checkpoint.replica.key;
++  const snapshotRoot='catalog/provider-snapshots/che168/'+base.checkpoint.replica.binding;
++  const snapshotMapping='catalog/raw-feed-handoffs/v1/che168-snapshot/'+rawDigest(snapshotRoot)+'.json';
++  const policyKey='catalog/raw-feed-coordination/v1/policy.json',stateKey='catalog/raw-feed-coordination/v1/state.json';
++  const rawRoot=(key:string)=>rawRep.test(key)?key.slice(0,key.lastIndexOf('/')):null;
++  const journalKey=(key:string)=>key.startsWith(initialJournal)&&/^(?:head|[a-f0-9]{8}(?:-[a-f0-9]{4}){3}-[a-f0-9]{12})\.json$/.test(key.slice(initialJournal.length));
++  const archiveKey=(key:string)=>key.startsWith(archiveRoot)&&/^(?:complete\.json|files\/(?:report\.json|autohome_used_china_open-\d{6}\.jsonl)\/\d{1,6}-[a-f0-9]{64}\.json)$/.test(key.slice(archiveRoot.length));
++  // The first independent collect does not mutate a shared raw registry or
++  // retire any roots. If the optional registry is ACTIVE, fail before intake;
++  // do not pretend a verified GET grants its writer role.
++  mark('policy');
++  const [policy,state]=await Promise.all([policyKey,stateKey].map(key=>ports.storage.readJsonWithMeta(key,null)));
++  if(policy.found!==false||state.found!==false)throw Error('china_daily_collect:shared_raw_registry_enabled');
++  let newReplica:string|undefined,lister=0;
++  const storage=new Proxy(Object.create(null) as Ports['storage'],{
++    set:()=>false,defineProperty:()=>false,deleteProperty:()=>false,
++    get(_shell,prop){
++    // A guard returns a new method; it cannot proxy a frozen own method directly.
++    const target=ports.storage,value=Reflect.get(target,prop,target);
++    if(typeof value!=='function')return value;
++    if(prop==='writeJson'||prop==='putBinary')return async(key:string,...args:unknown[])=>{
++      if(!expectedPins.has(key)&&!journalKey(key)&&!archiveKey(key)&&(!newReplica||rawRoot(key)!==newReplica))
++        throw Error('china_daily_collect:write_scope');
++      if(key===collectorPin&&prop==='writeJson'){
++        const refs=(args[0] as {references?:{kind:string;root:string}[]})?.references??[];
++        const candidates=refs.filter(r=>r.kind==='che168-replica'&&r.root!==baseRoot);
++        if(candidates.length>1||candidates.some(r=>rawRoot(r.root+'/manifest.json')!==r.root||(newReplica&&newReplica!==r.root)))
++          throw Error('china_daily_collect:replica_scope');
++        if(candidates[0])newReplica=candidates[0].root;
++      }
++      await guard();
++      if(key===collectorPin)mark('pin_put');
++      return value.call(target,key,...args);
++    };
++    if(['readJson','readJsonWithMeta','getBinary','getBinaryBounded','readJsonBounded'].includes(String(prop)))return(key:string,...args:unknown[])=>{
++      // If the policy becomes present after preflight, native raw helpers
++      // may try to read the shared registry. That request is not allowed.
++      if(!expectedPins.has(key)&&!journalKey(key)&&!archiveKey(key)&&key!==policyKey&&key!==stateKey&&key!==snapshotMapping&&key!==snapshotRoot+'/manifest.json'
++         && (rawRoot(key)===null||!(rawRoot(key)===baseRoot||rawRoot(key)===newReplica)))throw Error('china_daily_collect:read_scope');
++      if(key===collectorPin)mark('pin_read');
++      else if(key===policyKey||key===stateKey)mark('policy');
++      return value.call(target,key,...args);
++    };
++    // Existing byte reserve is a bounded read-only bucket census, not a
++    // cross-market lease. No results leave the collector process.
++    if(prop==='listBucketObjects')return async(prefix='')=>{
++      if(prefix!==''||++lister!==1)throw Error('china_daily_collect:reserve_scope');
++      await guard();return value.call(target,prefix);
++    };
++    return ()=>{throw Error('china_daily_collect:unsupported_storage_operation');};
++  }});
++  let transferred=false,requests=0;
++  const until=Date.now()+210*60_000;
++  const result=await runChe168BulkIntake({accepted:{config:base.config,saved:base.saved,assertCurrent:guard,nativeWitness:ports.nativeWitness,
++    restore:async(filename:string,descriptor:typeof base.checkpoint.replica)=>{
++      if(transferred||JSON.stringify(descriptor)!==JSON.stringify(base.checkpoint.replica))throw Error('china_daily_collect:replica_identity');
++      transferred=true;
++      // The verifier's own private file, never a caller-provided path.
++      await fs.link(replica,filename);
++      await fs.unlink(replica);
++    }},directory:observations,storage,resolvePolicy:async()=>{mark('owner_controls');await ports.assertEnabled();},
++    request:async(endpoint:string,params:Record<string,unknown>)=>{
++      const names=Object.keys(params);
++      if(names.length!==1||!(endpoint==='changes'&&names[0]==='change_id'&&Number.isSafeInteger(params.change_id)&&Number(params.change_id)>=claim.cursor
++        ||endpoint==='offer'&&names[0]==='inner_id'&&/^[0-9]{1,20}$/.test(String(params.inner_id))))throw Error('china_daily_collect:provider_scope');
++      if(++requests>15_000||Date.now()>=until)throw Error('china_daily_collect:provider_budget');
++      await guard();
++      mark('provider_request');
++      return ports.request(endpoint,params);
++    }});
++  await guard();
++  if('noDelta' in result)return {outcome:'no_delta',cursor:claim.cursor,publicationAuthorized:false,cursorAdvanceAuthorized:false} as const;
++  const source=result.sources.find((x:any)=>x.sourceId==='autohome_used_china_open') as any;
++  if(!transferred||!result.completed||result.failure||!result.sourceInputWitness||
++      !source?.completeInventory||source.stopReason!=='source_finished'||source.initialCursor!==claim.cursor||source.cursor<=claim.cursor||
++      source.baseReplica?.sha256!==claim.replicaSha256||source.observations!==source.uniqueOffers)throw Error('china_daily_collect:unsealed_source');
++  mark('archive');
++  const receipt=await archiveIntakeDirectory({storage,directory:observations,market:'china',owner});
++  await guard();
++  const raw=await fs.readFile(path.join(observations,'own-storage-receipt.json'));
++  return {outcome:'archive_verified',cursor:source.cursor,offers:source.uniqueOffers,receipt,receiptSha256:createHash('sha256').update(raw).digest('hex'),
++    publicationAuthorized:false,cursorAdvanceAuthorized:false} as const;
++ }finally{await fs.rm(root,{recursive:true,force:true});}
++}
+diff --git a/scripts/catalog-china-daily-dry.mts b/scripts/catalog-china-daily-dry.mts
+new file mode 100644
+index 00000000..bae731a0
+--- /dev/null
++++ b/scripts/catalog-china-daily-dry.mts
+@@ -0,0 +1,115 @@
++/** Dry owner review only. No supplier client, collector executable, pricing,
++ * scheduling, cursor writer or activation is imported or callable here. */
++import {createHash} from 'node:crypto';
++import fs from 'node:fs/promises';
++import path from 'node:path';
++import {pathToFileURL} from 'node:url';
++import {parseArgs} from 'node:util';
++import {ObjectJsonStorage} from '../apps/web/lib/data';
++import {CHINA_MIN_MODEL_YEAR} from '../apps/web/lib/catalog/china-year-policy';
++import {AUTO_API_CHE168_SOURCE as sourceId} from '../apps/web/lib/catalog/auto-api-che168';
++import {openChinaDailyAcceptedSource} from '../apps/web/lib/catalog/china-daily-source-checkpoint';
++import {CHINA_PUBLIC_CONTROL,openAcceptedChinaRegcloudFiles,readChinaPublicState,readConfiguredRegcloudScope,
++ chinaLegacyRollback,validChinaPublicRef,chinaObjectDigest,type ChinaPublicRef} from '../apps/web/lib/catalog/china-regcloud-object-reader';
++import {resolveChe168BulkResume} from './lib/che168-bulk-resume.mjs';
++import {snapshotBinding} from './lib/che168-snapshot.mjs';
++
++const SHA=/^[a-f0-9]{64}$/,ROOT=/^catalog\/nonjp-intake\/v1\/china\/[1-9]\d{0,19}\/[1-9]\d{0,5}$/;
++const STORAGE=Object.freeze({endpoint:'https://s3.regru.cloud',bucket:'avtocena-staging-8120751',region:'us-east-1',prefix:'migration-staging/full-20261011'});
++const cfg=(x:unknown)=>Object.entries(STORAGE).every(([k,v])=>(x as Record<string,unknown>)?.[k]===v);
++const fail=(label:string):never=>{throw Error('china_daily_dry:'+label);};
++const sha=(b:Buffer)=>createHash('sha256').update(b).digest('hex');
++const json=(b:Buffer)=>JSON.parse(new TextDecoder('utf-8',{fatal:true}).decode(b));
++const storedPrefix='catalog/private-market-stage-v1/china/';
++const REP=/^catalog\/provider-replicas\/che168\/[a-f0-9]{8}(?:-[a-f0-9]{4}){3}-[a-f0-9]{12}\/(?:manifest\.json|(?:0|[1-9]\d{0,3})\.gz)$/;
++
++export type ChinaDailyNativeBase={config:unknown;saved:unknown;checkpoint:Awaited<ReturnType<typeof openChinaDailyAcceptedSource>>['checkpoint'];assertCurrent:()=>Promise<void>};
++type Approved={
++ version:1;kind:'china-independent-daily-dry-v1';market:'china';
++ controlSha256:string;revision:number;target:ChinaPublicRef;archiveRoot:string;archiveSha256:string;
++ snapshotConfigSha256:string;bootstrapReceiptSha256?:string;
++};
++function parseApproved(raw:Buffer,expected:string):Approved{
++ if(!Buffer.isBuffer(raw)||raw.length===0||raw.length>16*1024||!SHA.test(expected)||sha(raw)!==expected)return fail('plan_sha');
++ const a=json(raw);
++ const names=['version','kind','market','controlSha256','revision','target','archiveRoot','archiveSha256','snapshotConfigSha256'];
++ if(a?.version!==1||a.kind!=='china-independent-daily-dry-v1'||a.market!=='china'||!validChinaPublicRef(a.target)||
++  Object.keys(a.target).length!==3||!Number.isSafeInteger(a.revision)||a.revision<1||!ROOT.test(a.archiveRoot??'')||
++  ![a.controlSha256,a.archiveSha256,a.snapshotConfigSha256].every(x=>SHA.test(x??''))||
++  (a.bootstrapReceiptSha256!==undefined&&!SHA.test(a.bootstrapReceiptSha256))||
++  Object.keys(a).some(k=>!names.includes(k)&&k!=='bootstrapReceiptSha256'))return fail('plan_scope');
++ return a;
++}
++export async function inspectChinaDailyDry(input:{plan:Buffer;expectedPlanSha256:string;snapshotConfig:Buffer;bootstrapReceipt?:Buffer;onVerifiedReplicaChunk?:(chunk:Buffer,index:number)=>Promise<void>;onVerifiedBase?:(base:ChinaDailyNativeBase)=>void}){
++ const p=parseApproved(input.plan,input.expectedPlanSha256);
++ if(!cfg(readConfiguredRegcloudScope()))return fail('storage_scope');
++ if(!Buffer.isBuffer(input.snapshotConfig)||input.snapshotConfig.length>128*1024||sha(input.snapshotConfig)!==p.snapshotConfigSha256||
++    p.bootstrapReceiptSha256!==(input.bootstrapReceipt?sha(input.bootstrapReceipt):undefined))return fail('local_input_pin');
++ const config=json(input.snapshotConfig),expectedSnapshotBinding=snapshotBinding(config);
++ const original=globalThis.fetch,begin=Date.now();
++ const bound='/'+STORAGE.bucket+'/'+STORAGE.prefix+'/',cutPrefix=storedPrefix+p.target.runId+'/';
++ let gets=0;const seen=new Set<string>();
++ const allow=(key:string)=>key===CHINA_PUBLIC_CONTROL||REP.test(key)||
++  key===p.archiveRoot+'/complete.json'||(key.startsWith(p.archiveRoot+'/files/report.json/')&&/^\d+-[a-f0-9]{64}\.json$/.test(key.slice(p.archiveRoot.length+19)))||
++  (key.startsWith(cutPrefix)&&key.split('/').every(x=>/^[a-zA-Z0-9_.-]+$/.test(x)&&x!=='.'&&x!=='..'));
++ globalThis.fetch=async(raw,init)=>{
++  if(!(typeof raw==='string'||raw instanceof URL)||init?.method!=='GET'||init?.redirect!=='error')return fail('no_network_write');
++  const u=new URL(raw);
++  if(u.origin!==STORAGE.endpoint||u.search||u.hash||u.username||u.password||!u.pathname.startsWith(bound))return fail('no_supplier_or_foreign_read');
++  const key=decodeURIComponent(u.pathname.slice(bound.length));
++  if(!allow(key)||++gets>12_000||Date.now()-begin>=600_000)return fail('read_scope_or_budget');
++  seen.add(key);
++  return original(raw,init);
++ };
++ try{
++  const storage=new ObjectJsonStorage(),before=await readChinaPublicState(storage);
++  if(!before||before.checksum!==p.controlSha256||before.state.revision!==p.revision||chinaLegacyRollback(before.state.active)||
++    chinaObjectDigest(before.state.active)!==chinaObjectDigest(p.target))return fail('accepted_pointer');
++  const stage=await openAcceptedChinaRegcloudFiles(storage,before,'active');
++  if(stage.ready.archiveSha256!==p.archiveSha256)return fail('archive_pin');
++  const accepted=await openChinaDailyAcceptedSource(storage,before,input.bootstrapReceipt,expectedSnapshotBinding,input.onVerifiedReplicaChunk);
++  const a=accepted.checkpoint;
++  if(a.archive.root!==p.archiveRoot||a.archive.manifestSha256!==p.archiveSha256)return fail('archive_pin');
++  // No data is written into the legacy cursor. This in-memory adapter is the
++  // exact input the existing native bulk collector would use, not authority.
++  const saved={version:1,market:'china',generationId:p.target.generationId,updatedAt:new Date(a.observedAt).toISOString(),
++   sources:[{sourceId,provider:'auto_api_che168',snapshotBinding:a.replica.binding,yearFrom:CHINA_MIN_MODEL_YEAR,
++    cursor:a.replica.cursor,replica:a.replica,stopReason:'source_finished'}]};
++  const native=resolveChe168BulkResume({config,saved,sourceId,yearFrom:CHINA_MIN_MODEL_YEAR,required:true});
++  if(!native.resume||native.initialCursor!==a.replica.cursor||native.binding!==a.replica.binding)return fail('native_continuity');
++  await accepted.assertCurrent();
++  input.onVerifiedBase?.({config,saved,checkpoint:a,assertCurrent:accepted.assertCurrent});
++  const now=Date.now();
++  return {version:1,kind:'china-independent-daily-dry-evidence-v1',market:'china',generationId:p.target.generationId,revision:p.revision,
++   controlSha256:p.controlSha256,sourceObservedAt:new Date(a.observedAt).toISOString(),sourceRows:a.sourceRows,
++   currentStageDraftExpired:now>=stage.ready.validUntil,currentStageDraftValidUntil:stage.ready.validUntil,acceptedLegalUntil:stage.acceptedLegalUntil??stage.ready.validUntil,
++   nativeResume:{mode:'local_replica_and_changes',initialCursor:native.initialCursor,replicaSha256:a.replica.sha256,
++    snapshotBinding:native.binding,journalBinding:native.journalBinding,artifactRunId:native.artifactRunId},
++   nextArchiveMustBeFresh:true,scheduleHeld:true,scheduledUtc:'14:00',signedStorageGets:gets,distinctObjects:seen.size,
++   supplierRequests:0,storageWrites:0,publicationAuthorized:false,cursorAdvanceAuthorized:false};
++ }finally{globalThis.fetch=original;}
++}
++async function local(file:string,max:number){
++ const resolved=path.resolve(file);
++ if(await fs.realpath(resolved)!==resolved)return fail('local_file');
++ const handle=await fs.open(resolved,'r');try{
++  const st=await handle.stat();
++  if(!st.isFile()||st.size<1||st.size>max)return fail('local_file');
++  const b=await handle.readFile();if(b.length!==st.size)return fail('local_file');return b;
++ }finally{await handle.close();}
++}
++if(process.argv[1]&&import.meta.url===pathToFileURL(path.resolve(process.argv[1])).href){
++ try{
++  const {values:v}=parseArgs({options:{plan:{type:'string'},'expect-plan-sha':{type:'string'},'snapshot-config':{type:'string'},'bootstrap-receipt':{type:'string'}}});
++  if(!v.plan||!v['expect-plan-sha']||!v['snapshot-config'])throw Error('china_daily_dry:args');
++  const detail=await inspectChinaDailyDry({plan:await local(v.plan,16*1024),expectedPlanSha256:v['expect-plan-sha'],
++   snapshotConfig:await local(v['snapshot-config'],128*1024),bootstrapReceipt:v['bootstrap-receipt']?await local(v['bootstrap-receipt'],16*1024):undefined});
++  console.log(JSON.stringify(detail));
++ }catch(e){
++  const msg=e instanceof Error?e.message:'';
++  console.error(JSON.stringify({status:'held',reason:/^(?:china_daily_dry|china_daily_source|china_own_regcloud):[a-z0-9_]+$/.test(msg)?msg:
++   /^auto_api_(?:saved_replica_required|invalid_saved_replica_cursor|invalid_snapshot_config)$/.test(msg)?msg:'source_validation_unverified',
++   scheduleHeld:true,supplierRequests:0,storageWrites:0,publicationAuthorized:false,cursorAdvanceAuthorized:false}));
++  process.exitCode=1;
++ }
++}
+diff --git a/scripts/catalog-china-daily-source-authority.mts b/scripts/catalog-china-daily-source-authority.mts
+new file mode 100644
+index 00000000..4510a54e
+--- /dev/null
++++ b/scripts/catalog-china-daily-source-authority.mts
+@@ -0,0 +1,123 @@
++import {createHash} from 'node:crypto';
++import {execFileSync} from 'node:child_process';
++import {lstatSync,readFileSync,realpathSync} from 'node:fs';
++import path from 'node:path';
++import {fileURLToPath} from 'node:url';
++import {performance} from 'node:perf_hooks';
++import {verifyChe168ReplicaInput} from './lib/che168-replica-witness.mjs';
++
++const SHA=/^[a-f0-9]{64}$/,GIT=/^[a-f0-9]{40}$/,ID=/^[1-9]\d{0,19}$/;
++const hash=(x:Buffer)=>createHash('sha256').update(x).digest('hex');
++const need=(v:unknown,c:string)=>{if(!v)throw Error('china_daily_authority:'+c);};
++const REPO='jeep-jim/AvtoCena',REPO_ID='1289722938';
++export const CHINA_DAILY_SOURCE_WORKFLOW='.github/workflows/china-independent-daily-source-collect-v1.yml';
++export const CHINA_DAILY_SOURCE_MARKER='.github/market-runs/china-independent-daily-source-collect-v4.sha256';
++export const CHINA_DAILY_SOURCE_TITLE='Collect one independent China delta with frozen-port fix without publication';
++const API='https://api.github.com/repos/'+REPO+'/actions/runs';
++// Existing source collectors, not unrelated publication, UI or neighbor jobs.
++const SOURCE_WORKFLOWS=new Set([CHINA_DAILY_SOURCE_WORKFLOW,'.github/workflows/collect-china-ordinary-20261119.yml',
++ '.github/workflows/catalog-refresh-china.yml','.github/workflows/catalog-v2-china.yml','.github/workflows/che168-diagnose.yml']);
++const ARCHIVE='459c98611117227fa68ae336f1f65c7de939ef4bdb4d8f8e2f132ace171d4247';
++const BOOTSTRAP='3b59460ceca450b10d5565fd31da6d1da10c993498a7419085327bb2594524d3';
++const CONTROL='9e3f73d6282465019f43dcd0370bf9c71688445a0e361dccf641bd45acc5be62';
++type Claim={controlSha256:string;replicaSha256:string;cursor:number};
++type Owner={runId:string;attempt:string;revision:string};
++type Approved={version:1;kind:'china-daily-source-collect-approval-v1';dryPlanSha256:string;controlSha256:string;
++ cursor:number;workflowSha256:string;workerHead:string;workerTree:string;maxJobMs:number;noPublication:true;noCursorWrite:true};
++const fields=['version','kind','dryPlanSha256','controlSha256','cursor','workflowSha256','workerHead','workerTree','maxJobMs','noPublication','noCursorWrite'];
++function parsePlan(raw:Buffer,expected:string):Readonly<Approved>{
++ need(Buffer.isBuffer(raw)&&raw.length>1&&raw.length<=16_384&&SHA.test(expected)&&hash(raw)===expected,'approved_bytes');
++ let p:Approved;try{p=JSON.parse(new TextDecoder('utf-8',{fatal:true}).decode(raw));}catch{throw Error('china_daily_authority:approved_json');}
++ need(p&&Object.keys(p).length===fields.length&&Object.keys(p).every(k=>fields.includes(k))&&p.version===1&&
++  p.kind==='china-daily-source-collect-approval-v1'&&p.dryPlanSha256===BOOTSTRAP&&p.controlSha256===CONTROL&&p.cursor===13123821&&
++  SHA.test(p.workflowSha256)&&GIT.test(p.workerHead)&&GIT.test(p.workerTree)&&Number.isSafeInteger(p.maxJobMs)&&
++  p.maxJobMs>=10*60_000&&p.maxJobMs<=320*60_000&&p.noPublication===true&&p.noCursorWrite===true,'approved_scope');
++ return Object.freeze(p!);
++}
++function git(cwd:string,...args:string[]){
++ try{
++  const env={...process.env};for(const k of Object.keys(env))if(k.startsWith('GIT_'))delete env[k];
++  env.GIT_CONFIG_NOSYSTEM='1';env.GIT_CONFIG_GLOBAL='/dev/null';env.GIT_TERMINAL_PROMPT='0';
++  return execFileSync('git',args,{cwd,env,encoding:'buffer',maxBuffer:1024*1024,timeout:20_000,stdio:['ignore','pipe','pipe']});
++ }catch{throw Error('china_daily_authority:git_check');}
++}
++function safeFile(root:string,relative:string,max:number){
++ const absolute=path.join(root,relative),st=lstatSync(absolute);
++ need(realpathSync(absolute)===absolute&&st.isFile()&&st.size>0&&st.size<=max,'pinned_local_file');
++ return readFileSync(absolute);
++}
++async function boundedJson(response:Response){
++ if(response.status!==200||!response.body){await response.body?.cancel();throw Error('china_daily_authority:github_response');}
++ const pieces:Buffer[]=[];let n=0;
++ for await(const chunk of response.body){n+=chunk.length;need(n<=2*1024**2,'github_bytes');pieces.push(Buffer.from(chunk));}
++ try{return JSON.parse(Buffer.concat(pieces).toString('utf8'));}catch{throw Error('china_daily_authority:github_json');}
++}
++export function createChinaDailySourceAuthority(input:{plan:Buffer;expectedPlanSha256:string;actorRoot:string;workerRoot:string;
++ env?:NodeJS.ProcessEnv;fetchImpl?:typeof fetch}){
++ const p=parsePlan(input.plan,input.expectedPlanSha256),env=input.env??process.env,fetcher=input.fetchImpl??globalThis.fetch;
++ const actor=path.resolve(input.actorRoot),worker=path.resolve(input.workerRoot);
++ const actorRevision=env.GITHUB_SHA,runId=env.GITHUB_RUN_ID,token=env.GITHUB_TOKEN;
++ const now=Date.now(),mono=performance.now(),clock=()=>now+Math.max(performance.now()-mono,Date.now()-now);
++ need(GIT.test(actorRevision??'')&&actorRevision!==p.workerHead&&ID.test(runId??''),'bound_runtime_identity');
++ need(typeof token==='string'&&token.length<=4096&&(/^ghs_[A-Za-z0-9]{36}$/.test(token)||/^ghs_[0-9]{1,20}_[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+$/.test(token)),'github_installation_token_shape');
++ need(realpathSync(actor)===actor&&realpathSync(worker)===worker&&actor!==worker&&
++  path.dirname(worker)===actor&&worker===path.dirname(path.dirname(fileURLToPath(import.meta.url))),'bound_runtime_roots');
++ // Record actual Actions writer identity as owner; worker code gets its own attestation.
++ const owner=Object.freeze({runId:runId!,attempt:'1',revision:actorRevision!});
++ const checkEnv=()=>need(env.GITHUB_REPOSITORY===REPO&&env.GITHUB_REPOSITORY_ID===REPO_ID&&env.GITHUB_REF==='refs/heads/main'&&
++  env.GITHUB_WORKFLOW_REF===REPO+'/'+CHINA_DAILY_SOURCE_WORKFLOW+'@refs/heads/main'&&env.GITHUB_EVENT_NAME==='push'&&env.GITHUB_JOB==='collect'&&
++  env.GITHUB_RUN_ID===runId&&env.GITHUB_RUN_ATTEMPT==='1'&&env.GITHUB_SHA===actorRevision&&env.GITHUB_TOKEN===token,'job_environment');
++ const workerCheck=()=>{
++  need(git(worker,'rev-parse','--verify','HEAD').toString().trim()===p.workerHead&&git(worker,'write-tree').toString().trim()===p.workerTree&&
++    git(worker,'diff','--name-only','--').length===0&&git(worker,'ls-files','--others','--exclude-standard','--','apps','packages','scripts','data').length===0&&
++    git(worker,'ls-files','--others','--ignored','--exclude-standard','--','apps','packages','scripts','data').length===0&&
++    hash(safeFile(worker,'scripts/lib/nonjp-intake-archive.mjs',128*1024))===ARCHIVE,'worker_tree');
++ };
++ const actorCheck=()=>{
++  const workflow=safeFile(actor,CHINA_DAILY_SOURCE_WORKFLOW,128*1024),marker=safeFile(actor,CHINA_DAILY_SOURCE_MARKER,128);
++  need(git(actor,'rev-parse','--verify','HEAD').toString().trim()===owner.revision&&hash(workflow)===p.workflowSha256&&
++   workflow.equals(git(actor,'show',owner.revision+':'+CHINA_DAILY_SOURCE_WORKFLOW))&&
++   /^concurrency:\n {2}group: catalog-refresh-china\n {2}cancel-in-progress: false$/m.test(workflow.toString('utf8'))&&
++   marker.toString('ascii')===input.expectedPlanSha256+'\n'&&marker.equals(git(actor,'show',owner.revision+':'+CHINA_DAILY_SOURCE_MARKER)),'actor_tree');
++ };
++ async function req(url:string){return boundedJson(await fetcher(url,{method:'GET',redirect:'error',headers:{authorization:'Bearer '+token,
++  accept:'application/vnd.github+json','accept-encoding':'identity'},signal:AbortSignal.timeout(15_000)}));}
++ let nextCheck=0,deadline=0,initialReplica:string|undefined,flight:Promise<void>|undefined;
++ async function remote(){
++  checkEnv();actorCheck();workerCheck();
++  const self=API+'/'+runId,[run,jobs,active]=await Promise.all([req(self),req(self+'/attempts/1/jobs?per_page=100'),req(API+'?status=in_progress&per_page=100')]);
++  const job=jobs.jobs?.filter((row:any)=>row?.name===CHINA_DAILY_SOURCE_TITLE);
++  const started=Date.parse(job?.[0]?.started_at);
++  need(String(run.id)===runId&&run.run_attempt===1&&run.head_sha===actorRevision&&run.head_branch==='main'&&run.path===CHINA_DAILY_SOURCE_WORKFLOW&&
++   run.event==='push'&&run.status==='in_progress'&&run.head_commit?.message===CHINA_DAILY_SOURCE_TITLE&&
++   String(run.repository?.id)===REPO_ID&&run.repository?.full_name===REPO&&
++   Array.isArray(jobs.jobs)&&jobs.total_count===jobs.jobs.length&&jobs.total_count<=100&&job?.length===1&&
++   String(job[0].run_id)===runId&&job[0].head_sha===actorRevision&&job[0].status==='in_progress'&&
++   Number.isFinite(started)&&started<=clock()+5_000&&started+p.maxJobMs>clock(),'remote_job');
++  need(Array.isArray(active.workflow_runs)&&active.total_count===active.workflow_runs.length&&active.total_count<=100&&
++   active.workflow_runs.some((row:any)=>String(row.id)===runId&&row.path===CHINA_DAILY_SOURCE_WORKFLOW&&row.head_sha===actorRevision)&&
++   active.workflow_runs.every((row:any)=>String(row.id)===runId||!SOURCE_WORKFLOWS.has(row.path)),'source_lane_busy_or_unknown');
++  if(deadline)need(deadline===started+p.maxJobMs,'job_start_changed');
++  deadline=started+p.maxJobMs;nextCheck=clock()+60_000;
++ }
++ async function attest(force=false){
++  checkEnv();if(deadline)need(clock()<deadline,'job_deadline');
++  if(!deadline||force||clock()>=nextCheck){
++   if(!flight)flight=remote().finally(()=>{flight=undefined;});
++   await flight;
++  }
++  checkEnv();need(clock()<deadline,'job_deadline');
++ }
++ const authorize=async(claim:Claim)=>{
++  need(claim?.controlSha256===p.controlSha256&&claim.cursor===p.cursor&&SHA.test(claim.replicaSha256)&&
++    (!initialReplica||initialReplica===claim.replicaSha256),'accepted_claim');
++  await attest();initialReplica=claim.replicaSha256;
++ };
++ return Object.freeze({owner,workerHead:p.workerHead,workerTree:p.workerTree,dryPlanSha256:p.dryPlanSha256,attest,authorize,
++  async nativeWitness({storage,directory,config,owner:actual}:{storage:any;directory:string;config:any;owner:Owner}){
++   need(actual?.runId===owner.runId&&actual.attempt===owner.attempt&&actual.revision===owner.revision&&Boolean(initialReplica),'native_provenance');
++   await attest(true);workerCheck();
++   const witness=await verifyChe168ReplicaInput({storage,directory,config,producer:{runId:owner.runId,attempt:owner.attempt,sourceSha:owner.revision},independentDailySource:true});
++   await attest(true);return {sourceInputWitness:witness};
++  }});
++}
+diff --git a/scripts/catalog-china-daily-source-once.mts b/scripts/catalog-china-daily-source-once.mts
+new file mode 100644
+index 00000000..04d512e5
+--- /dev/null
++++ b/scripts/catalog-china-daily-source-once.mts
+@@ -0,0 +1,80 @@
++import fs from 'node:fs/promises';
++import path from 'node:path';
++import {fileURLToPath,pathToFileURL} from 'node:url';
++import {parseArgs} from 'node:util';
++import {constants} from 'node:fs';
++import {createHash} from 'node:crypto';
++import {ObjectJsonStorage} from '../apps/web/lib/data';
++import {assertCollectionEnabled} from '../apps/web/lib/catalog/collection-controls';
++import {autoApiChe168Client} from './lib/auto-api-che168-client.mjs';
++import {collectChinaDailySource} from './catalog-china-daily-collect-core.mts';
++import {createChinaDailySourceAuthority} from './catalog-china-daily-source-authority.mts';
++import {openChinaDailySourcePrivateStore} from './catalog-china-daily-source-private-store.mts';
++
++const sha=(bytes:Buffer)=>createHash('sha256').update(bytes).digest('hex');
++async function pinnedLocal(file:string|undefined,max:number){
++ if(!file)throw Error('china_daily_once:missing_argument');
++ const name=path.resolve(file);
++ if(await fs.realpath(name)!==name)throw Error('china_daily_once:local_input');
++ const f=await fs.open(name,constants.O_RDONLY|constants.O_NOFOLLOW);try{
++  const before=await f.stat();
++  if(!before.isFile()||before.size<1||before.size>max)throw Error('china_daily_once:local_input');
++  const buffer=Buffer.alloc(before.size),r=await f.read(buffer,0,before.size,0),after=await f.stat();
++  if(r.bytesRead!==before.size||after.size!==before.size||after.mtimeMs!==before.mtimeMs||after.ctimeMs!==before.ctimeMs)throw Error('china_daily_once:local_input');
++  return buffer;
++ }finally{await f.close();}
++}
++function claimPrivateLocalOutput(name:string|undefined,scratch:string|undefined){
++ if(!name||!scratch)throw Error('china_daily_once:private_result_path');
++ const temp=path.resolve(scratch),out=path.resolve(name);
++ if(path.dirname(out)!==temp||path.basename(out)!=='china-daily-archive-private.json')throw Error('china_daily_once:private_result_path');
++ return {temp,out};
++}
++let phase='preflight',providerRequestAttempted=false;
++async function main(){
++ const {values}=parseArgs({options:{approval:{type:'string'},'approval-sha':{type:'string'},'dry-plan':{type:'string'},
++   'bootstrap-receipt':{type:'string'},'private-result-file':{type:'string'},'private-temp':{type:'string'}}});
++ const approved=await pinnedLocal(values.approval,16384),dry=await pinnedLocal(values['dry-plan'],16384);
++ const original=await pinnedLocal(values['bootstrap-receipt'],16384);
++ const {temp,out}=claimPrivateLocalOutput(values['private-result-file'],values['private-temp']);
++ const st=await fs.stat(temp);
++ if(await fs.realpath(temp)!==temp||!st.isDirectory()||(st.mode&0o077)!==0)throw Error('china_daily_once:private_result_path');
++ await fs.access(out).then(()=>{throw Error('china_daily_once:private_result_exists');},e=>{if(e?.code!=='ENOENT')throw e;});
++ const workerRoot=path.dirname(path.dirname(fileURLToPath(import.meta.url)));
++ const snapshot=await pinnedLocal(path.join(workerRoot,'data/catalog/che168-snapshot-v1.json'),128*1024);
++ const authority=createChinaDailySourceAuthority({plan:approved,expectedPlanSha256:values['approval-sha']??'',
++  actorRoot:path.dirname(workerRoot),workerRoot});
++ if(sha(dry)!==authority.dryPlanSha256)throw Error('china_daily_once:dry_plan_sha');
++ phase='authority';await authority.attest(true);
++ phase='bucket_privacy';
++ const storage=await openChinaDailySourcePrivateStore({native:new ObjectJsonStorage(),owner:authority.owner,assertAuthority:authority.attest});
++ // Fixed standard client, no alternate identity, endpoint or access mode.
++ const client=autoApiChe168Client({apiKey:process.env.AUTO_API_CHE168_KEY,deadline:Date.now()+210*60_000,requestDelayMs:200,retryRateLimit:false});
++ const result=await collectChinaDailySource({plan:dry,expectedPlanSha256:authority.dryPlanSha256,snapshotConfig:snapshot,bootstrapReceipt:original},
++  {storage,authorize:authority.authorize,nativeWitness:authority.nativeWitness,assertEnabled:()=>assertCollectionEnabled('che168_feed'),request:client,
++   progress(next){phase=next;if(next==='provider_request')providerRequestAttempted=true;}});
++ phase='post_archive_privacy';
++ await storage.assertPrivate(true);
++ if(result.outcome==='archive_verified'){
++  const bytes=Buffer.from(JSON.stringify(result.receipt));
++  if(sha(bytes)!==result.receiptSha256)throw Error('china_daily_once:private_receipt_sha');
++  await fs.writeFile(out,bytes,{mode:0o600,flag:'wx'});
++ }
++ // No raw input, seller-identifiable output, opaque ETag, price or credential here.
++ const output={outcome:result.outcome,cursor:result.cursor,publicationAuthorized:false,cursorAdvanceAuthorized:false,scheduleHeld:true,
++   ...(result.outcome==='archive_verified'?{offers:result.offers,manifestSha256:result.receipt.manifestSha256,receiptSha256:result.receiptSha256}:{})};
++ console.log(JSON.stringify(output));
++}
++if(process.argv[1]&&import.meta.url===pathToFileURL(path.resolve(process.argv[1])).href)try{await main();}
++catch(e){
++ const message=e instanceof Error?e.message:'';
++ const known=/^(?:china_daily_(?:authority|privacy|once|collect|dry|source)|china_own_regcloud|china_private_stage_privacy):[a-z0-9_]+(?::\d{3})?$/.test(message)||
++   /^auto_api_(?:http_\d{3}|time_budget|transport_failed|invalid_json|invalid_replay_checkpoint|replay_storage_budget|bulk_collection_failed)$/.test(message);
++ const system=(e as {code?:string})?.code;
++ const category=typeof system==='string'&&/^(?:ENOSPC|EIO|EACCES|EPERM|ENOENT|EXDEV|EMFILE|ETIMEDOUT|ECONNRESET|EAI_AGAIN|ERR_SQLITE_ERROR)$/.test(system)?system:
++   message==='collection_disabled_by_owner:che168_feed'?'owner_disabled':message==='invalid_collection_controls'?'owner_controls_invalid':
++   /^(?:raw_pin_readback_mismatch|raw_pin_ownership_lost|raw_pin_not_owned|raw_coord_policy_missing|raw_coord_policy_invalid|raw_coord_registry_changed)$/.test(message)?message:
++   e instanceof TypeError?'runtime_type_or_transport':'unclassified';
++ console.error(JSON.stringify({outcome:'held',reason:known?message:'source_collection_unverified',phase,category,providerRequestAttempted,publicationAuthorized:false,cursorAdvanceAuthorized:false,scheduleHeld:true}));
++ process.exitCode=1;
++}
+diff --git a/scripts/catalog-china-daily-source-private-store.mts b/scripts/catalog-china-daily-source-private-store.mts
+new file mode 100644
+index 00000000..42fd6364
+--- /dev/null
++++ b/scripts/catalog-china-daily-source-private-store.mts
+@@ -0,0 +1,48 @@
++import {createHash} from 'node:crypto';
++import {ObjectJsonStorage,type JsonWriteCondition} from '../apps/web/lib/data';
++import {readConfiguredRegcloudScope} from '../apps/web/lib/catalog/china-regcloud-object-reader';
++
++const scope={endpoint:'https://s3.regru.cloud',bucket:'avtocena-staging-8120751',region:'us-east-1',prefix:'migration-staging/full-20261011'};
++const demand=(cond:unknown,code:string)=>{if(!cond)throw Error('china_daily_privacy:'+code);};
++type Native=Pick<ObjectJsonStorage,'readChinaPrivateStageBucketPrivacy'|'readChinaDailySourceJson'|
++ 'putChinaDailySourcePrivate'|'getChinaReplicaPartBounded'|'listChinaDailyArchiveReserve'>;
++type Own={runId:string;attempt:string};
++/** Performs real signed readback with existing owner's credentials only.
++ * Called only after independent GitHub actor proof. The core applies the more
++ * specific ancestry-derived journal/replica/read key predicates atop this port. */
++export async function openChinaDailySourcePrivateStore({native,owner,assertAuthority}:{native:Native;owner:Own;assertAuthority:(force?:boolean)=>Promise<void>}){
++ demand(/^[1-9]\d{0,19}$/.test(owner.runId)&&owner.attempt==='1','owner_scope');
++ const before=readConfiguredRegcloudScope();
++ demand(Object.entries(scope).every(([k,v])=>before[k as keyof typeof before]===v),'storage_scope');
++ await assertAuthority(true);
++ const privacy=await native.readChinaPrivateStageBucketPrivacy();
++ const archive=`catalog/nonjp-intake/v1/china/${owner.runId}/${owner.attempt}/`;
++ const pins=new Set([ `catalog/raw-feed-pins/v1/che168-intake-${owner.runId}-${owner.attempt}.json`,
++  `catalog/raw-feed-pins/v1/nonjp-intake-china-${owner.runId}-${owner.attempt}.json`]);
++ let last=Date.now(),flight:Promise<void>|undefined,objects=0,total=0;
++ function pathAllowed(key:string){return pins.has(key)||key.startsWith(archive)||/^catalog\/(?:intake-working\/che168-v1|provider-replicas\/che168)\//.test(key);}
++ async function privacyStill(force=false){
++  await assertAuthority(force);
++  if(!force&&Date.now()-last<60_000)return;
++  if(!flight)flight=(async()=>{
++   const after=await native.readChinaPrivateStageBucketPrivacy();
++   demand(after.owner===privacy.owner&&after.policySha256===privacy.policySha256,'bucket_privacy_changed');
++   last=Date.now();
++  })().finally(()=>{flight=undefined;});
++  await flight;
++ }
++ async function put(key:string,bytes:Buffer,type:'application/json'|'application/gzip',condition?:JsonWriteCondition){
++  demand(pathAllowed(key),'write_scope');
++  demand(++objects<=28_000&&(total+=bytes.length)<=20*1024**3,'write_budget');
++  await privacyStill();
++  return native.putChinaDailySourcePrivate(key,bytes,type,condition!,privacy.owner);
++ }
++ const readJsonWithMeta=async<T>(key:string,fallback:T)=>native.readChinaDailySourceJson(key,fallback);
++ return Object.freeze({driver:'object' as const,assertPrivate:privacyStill,readJsonWithMeta,
++   async readJson<T>(key:string,fallback:T){return (await readJsonWithMeta(key,fallback)).value;},
++   async writeJson(key:string,value:unknown,condition?:JsonWriteCondition){await put(key,Buffer.from(JSON.stringify(value)),'application/json',condition);},
++   async putBinary(key:string,bytes:Buffer,type:string,condition?:JsonWriteCondition){demand(type==='application/gzip','binary_type');return put(key,bytes,'application/gzip',condition);},
++   async getBinary(key:string){const data=await native.getChinaReplicaPartBounded(key,17*1024**2);return {data,size:data.length,checksum:createHash('sha256').update(data).digest('hex')};},
++   async listBucketObjects(prefix?:string){demand((prefix??'')==='','reserve_scope');await privacyStill();return native.listChinaDailyArchiveReserve();},
++  });
++}
+diff --git a/scripts/lib/che168-bulk-resume.mjs b/scripts/lib/che168-bulk-resume.mjs
+new file mode 100644
+index 00000000..b8e781fe
+--- /dev/null
++++ b/scripts/lib/che168-bulk-resume.mjs
+@@ -0,0 +1,19 @@
++import {createHash} from 'node:crypto';
++import {snapshotBinding} from './che168-snapshot.mjs';
++
++/** Exact native Che168 start state. This function does no IO and has no
++ * permission to collect, save a cursor, choose a global publisher or retry. */
++export function resolveChe168BulkResume({config,saved,sourceId,yearFrom,required=false,now=Date.now()}){
++ const binding=snapshotBinding(config);
++ const previous=saved?.sources?.find(row=>row.sourceId===sourceId);
++ const resume=previous?.snapshotBinding===binding && previous.yearFrom===yearFrom;
++ if(required&&!resume)throw Error('auto_api_saved_replica_required');
++ if(resume&&(saved.version!==1||saved.market!=='china'||!saved.generationId||previous.provider!=='auto_api_che168'
++  ||!Number.isSafeInteger(previous.cursor)||previous.cursor<config.initialCursor||!previous.replica
++  ||!Number.isFinite(Date.parse(saved.updatedAt))||Date.parse(saved.updatedAt)>now
++  ||previous.stopReason!=='source_finished'))throw Error('auto_api_invalid_saved_replica_cursor');
++ const initialCursor=resume?previous.cursor:config.initialCursor;
++ const journalBinding=createHash('sha256').update(JSON.stringify({binding,initialCursor,base:resume?previous.replica:null,replayVersion:2})).digest('hex');
++ const artifactRunId=BigInt('0x'+journalBinding.slice(0,14)).toString();
++ return {binding,previous,resume,initialCursor,journalBinding,artifactRunId};
++}
+diff --git a/scripts/lib/che168-replica-witness.mjs b/scripts/lib/che168-replica-witness.mjs
+index a179f857..74a408b8 100644
+--- a/scripts/lib/che168-replica-witness.mjs
++++ b/scripts/lib/che168-replica-witness.mjs
+@@ -14,7 +14,7 @@ import {assertRawHandoff, assertRawPin, rawDigest, rawReferences} from './catalo
+ export const CHE168_REPLICA_WITNESS_KIND = 'independent_che168_replica_v1';
+ export const CHE168_REPLICA_WITNESS_SOURCE = 'autohome_used_china_open';
+ export const CHE168_REPLICA_WORKER_CLOSURE = Object.freeze([
+-  'scripts/catalog-auto-api-che168-bulk-intake.mjs', 'scripts/lib/che168-replica-witness.mjs',
++  'scripts/catalog-auto-api-che168-bulk-intake.mjs', 'scripts/lib/che168-replica-witness.mjs', 'scripts/lib/che168-bulk-resume.mjs',
+   'scripts/lib/che168-replica.mjs', 'scripts/lib/che168-replay-journal.mjs', 'scripts/lib/che168-snapshot.mjs',
+   'scripts/lib/che168-csv-stream.mjs', 'scripts/lib/auto-api-che168-client.mjs', 'scripts/lib/che168-missing-details.mjs',
+   'scripts/lib/catalog-intake-checkpoint.mjs', 'scripts/lib/catalog-raw-provenance.mjs',
+@@ -285,8 +285,8 @@ async function runInspection(options, signal) {
+  * The saved producer report is the completion authority; it does not contain
+  * the supplier's terminal response, and this helper never creates one. */
+ export async function verifyChe168ReplicaInput({storage, directory, config, producer, limits: overrides = {},
+-  deadline = Date.now() + CHE168_REPLICA_WITNESS_LIMITS.workMs, signal, temporaryParent = os.tmpdir()}) {
+-  const limits = boundedLimits(overrides); let temp;
++  deadline = Date.now() + CHE168_REPLICA_WITNESS_LIMITS.workMs, signal, temporaryParent = os.tmpdir(), independentDailySource = false}) {
++  const limits = boundedLimits(overrides,independentDailySource); let temp;
+   const within = () => check(!signal?.aborted && Date.now() < deadline, 'deadline');
+   check(object(config) && object(producer), 'arguments');
+   config = JSON.parse(JSON.stringify(config)); producer = JSON.parse(JSON.stringify(producer));
+diff --git a/scripts/lib/che168-replica.mjs b/scripts/lib/che168-replica.mjs
+index 75b61455..6965588c 100644
+--- a/scripts/lib/che168-replica.mjs
++++ b/scripts/lib/che168-replica.mjs
+@@ -6,7 +6,7 @@ const sha=b=>createHash('sha256').update(b).digest('hex');
+ const prefix='catalog/provider-replicas/che168/';
+ /** Working inventory is immutable until its descriptor is committed together
+  * with the successful publication cursor. No public database writes here. */
+-export async function saveChe168Replica({storage,filename,binding,cursor,beforeWrite=async()=>{}}) {
++export async function saveChe168Replica({storage,filename,binding,cursor,beforeWrite=async()=>{},immutable=false}) {
+   const key=`${prefix}${randomUUID()}`,file=await fs.open(filename,'r'),parts=[];
+   try {
+     await beforeWrite(key);
+@@ -15,11 +15,11 @@ export async function saveChe168Replica({storage,filename,binding,cursor,beforeW
+       const buffer=Buffer.alloc(CHUNK),{bytesRead}=await file.read(buffer,0,CHUNK,offset);
+       if(!bytesRead)break;
+       const raw=buffer.subarray(0,bytesRead),index=parts.length;
+-      await storage.putBinary(`${key}/${index}.gz`,gzipSync(raw,{level:1}),'application/gzip');
++      await storage.putBinary(`${key}/${index}.gz`,gzipSync(raw,{level:1}),'application/gzip',immutable?{ifNoneMatch:'*'}:undefined);
+       parts.push({bytes:bytesRead,sha256:sha(raw)});offset+=bytesRead;
+     }
+     const manifest={version:1,binding,cursor,bytes:offset,parts};
+-    await storage.writeJson(`${key}/manifest.json`,manifest);
++    await storage.writeJson(`${key}/manifest.json`,manifest,immutable?{ifNoneMatch:'*'}:undefined);
+     return {key,sha256:sha(JSON.stringify(manifest)),binding,cursor};
+   }finally{await file.close();}
+ }
+diff --git a/scripts/lib/nonjp-intake-archive.mjs b/scripts/lib/nonjp-intake-archive.mjs
+index cf5ff3a3..e986f30a 100644
+--- a/scripts/lib/nonjp-intake-archive.mjs
++++ b/scripts/lib/nonjp-intake-archive.mjs
+@@ -1,5 +1,6 @@
+ import assert from 'node:assert/strict';
+ import fs from 'node:fs/promises';
++import {constants} from 'node:fs';
+ import path from 'node:path';
+ import {createHash} from 'node:crypto';
+ import {gzipSync, gunzipSync} from 'node:zlib';
+@@ -10,6 +11,9 @@ import {catalogStorageBudget} from './catalog-storage-budget.mjs';
+ export const NONJP_INTAKE_MARKETS = Object.freeze(['china', 'korea', 'uae', 'europe', 'georgia']);
+ export const INTAKE_ARCHIVE_RECEIPT = 'own-storage-receipt.json';
+ const PART_BYTES = 2 * 1024 * 1024, MAX_FILE_BYTES = 32 * 1024 * 1024;
++// Reports carry the complete withdrawal ledger; observations remain tightly bounded.
++const MAX_REPORT_BYTES = 128 * 1024 * 1024;
++const fileLimit = name => name === 'report.json' ? MAX_REPORT_BYTES : MAX_FILE_BYTES;
+ const MAX_FILES = 20000, MAX_TOTAL_BYTES = 128 * 1024 ** 3, HEX = /^[a-f0-9]{64}$/;
+ const MAX_MANIFEST_BYTES = 2 * 1024 * 1024;
+ const digest = bytes => createHash('sha256').update(bytes).digest('hex');
+@@ -33,7 +37,7 @@ export function validateIntakeArchive(manifest, expectedRoot, expectedDigest) {
+   const names = new Set(); let total = 0;
+   for (const file of manifest.files) {
+     assert.ok(fileName(file?.name) && !names.has(file.name) && HEX.test(file.sha256 || '')
+-      && Number.isSafeInteger(file.bytes) && file.bytes >= 0 && file.bytes <= MAX_FILE_BYTES
++      && Number.isSafeInteger(file.bytes) && file.bytes >= 0 && file.bytes <= fileLimit(file.name)
+       && Array.isArray(file.parts) && file.parts.length === Math.ceil(file.bytes / PART_BYTES), 'intake_archive_file');
+     names.add(file.name); total += file.bytes;
+     for (const [index, part] of file.parts.entries()) {
+@@ -63,6 +67,34 @@ async function assertArchiveReserve(storage, files) {
+   assert.ok(budget.ok, 'intake_archive_storage_reserve_insufficient');
+ }
+ 
++async function scanLocalFile(target, name, consume) {
++  const handle = await fs.open(target, constants.O_RDONLY | constants.O_NOFOLLOW);
++  try {
++    const before = await handle.stat(), maximum = fileLimit(name);
++    assert.ok(before.isFile() && before.size <= maximum,
++      `intake_archive_local_size:name=${name}:actual=${before.size}:maximum=${maximum}`);
++    const hash = createHash('sha256'); let total = 0, index = 0;
++    for (;;) {
++      const buffer = Buffer.alloc(Math.min(PART_BYTES, Math.max(1, before.size - total)));
++      let length = 0;
++      while (length < buffer.length) {
++        const read = await handle.read(buffer, length, buffer.length - length, null);
++        if (!read.bytesRead) break;
++        length += read.bytesRead;
++      }
++      if (!length) break;
++      const part = buffer.subarray(0, length); total += length;
++      assert.ok(total <= maximum && total <= before.size, 'intake_archive_source_changed');
++      hash.update(part);
++      if (consume) await consume(part, index++);
++    }
++    const after = await handle.stat();
++    assert.ok(total === before.size && after.size === before.size && after.mtimeMs === before.mtimeMs
++      && after.ctimeMs === before.ctimeMs, 'intake_archive_source_changed');
++    return {name, bytes: total, sha256: hash.digest('hex')};
++  } finally {await handle.close();}
++}
++
+ async function localInventory(directory) {
+   const entries = await fs.readdir(directory, {withFileTypes: true});
+   assert.ok(entries.length > 0 && entries.length <= MAX_FILES + 1, 'intake_archive_file_count');
+@@ -70,11 +102,7 @@ async function localInventory(directory) {
+   for (const entry of entries.sort((a,b) => a.name.localeCompare(b.name))) {
+     if (entry.name === INTAKE_ARCHIVE_RECEIPT) { assert.ok(entry.isFile(), 'intake_archive_receipt_type'); continue; }
+     assert.ok(entry.isFile() && fileName(entry.name), 'intake_archive_local_path');
+-    const target = path.join(directory, entry.name), stat = await fs.lstat(target);
+-    assert.ok(stat.isFile() && stat.size <= MAX_FILE_BYTES, 'intake_archive_local_size');
+-    const bytes = await fs.readFile(target);
+-    assert.equal(bytes.length, stat.size, 'intake_archive_source_changed');
+-    files.push({name: entry.name, bytes: bytes.length, sha256: digest(bytes)});
++    files.push(await scanLocalFile(path.join(directory, entry.name), entry.name));
+   }
+   assert.ok(files.some(row => row.name === 'report.json') && files.reduce((sum,row) => sum + row.bytes,0) <= MAX_TOTAL_BYTES,
+     'intake_archive_local_inventory');
+@@ -197,7 +225,14 @@ function receiptFromReadyPin({market, owner, root, manifest, pin}) {
+  * observations. A complete ARCHIVE never claims a complete supplier inventory. */
+ export async function archiveIntakeDirectory({storage, directory, market, owner = rawProducerOwner()}) {
+   assert.equal(storage.driver, 'object', 'intake_archive_requires_object_storage');
+-  const files = await localInventory(directory), report = JSON.parse(await fs.readFile(path.join(directory,'report.json'),'utf8'));
++  const files = await localInventory(directory);
++  // Parsing is explicitly bounded, and must match the inventory bytes even if
++  // a producer changes the report between inventory and parsing.
++  const reportParts = [];
++  const reportFile = await scanLocalFile(path.join(directory,'report.json'), 'report.json', part => {reportParts.push(part);});
++  assert.equal(rawDigest(reportFile), rawDigest(files.find(file => file.name === 'report.json')), 'intake_archive_source_changed');
++  const report = JSON.parse(Buffer.concat(reportParts, reportFile.bytes).toString('utf8'));
++  reportParts.length = 0;
+   assert.equal(report.market, market, 'intake_archive_report_market');
+   const receiptPath = path.join(directory, INTAKE_ARCHIVE_RECEIPT);
+   let saved;
+@@ -240,16 +275,14 @@ export async function archiveIntakeDirectory({storage, directory, market, owner
+   const writingStorage = pin.storage;
+   const storedFiles=[];
+   for (const file of files) {
+-    const bytes = await fs.readFile(path.join(directory,file.name));
+-    assert.ok(bytes.length === file.bytes && digest(bytes) === file.sha256,'intake_archive_source_changed');
+     const parts=[];
+-    for (let offset=0;offset<bytes.length;offset+=PART_BYTES) {
+-      const part=bytes.subarray(offset,offset+PART_BYTES), sha256=digest(part);
+-      const key=`${root}/files/${file.name}/${parts.length}-${sha256}.json`;
++    const actual = await scanLocalFile(path.join(directory,file.name), file.name, async (part, index) => {
++      const sha256=digest(part), key=`${root}/files/${file.name}/${index}-${sha256}.json`;
+       await immutableJson(writingStorage,key,{version:1,encoding:'gzip-base64',bytes:part.length,sha256,
+         payload:gzipSync(part,{level:6}).toString('base64')});
+       parts.push({key,bytes:part.length,sha256});
+-    }
++    });
++    assert.equal(rawDigest(actual), rawDigest(file), 'intake_archive_source_changed');
+     storedFiles.push({...file,parts});
+   }
+   assert.equal(rawDigest(await localInventory(directory)),rawDigest(files),'intake_archive_source_changed');
+--- /dev/null
++++ b/scripts/continuation-authority.mts
+@@ -0,0 +1,123 @@
++import {createHash} from 'node:crypto';
++import {execFileSync} from 'node:child_process';
++import {lstatSync,readFileSync,realpathSync} from 'node:fs';
++import path from 'node:path';
++import {fileURLToPath} from 'node:url';
++import {performance} from 'node:perf_hooks';
++import {verifyChe168ReplicaInput} from './lib/che168-replica-witness.mjs';
++
++const SHA=/^[a-f0-9]{64}$/,GIT=/^[a-f0-9]{40}$/,ID=/^[1-9]\d{0,19}$/;
++const hash=(x:Buffer)=>createHash('sha256').update(x).digest('hex');
++const need=(v:unknown,c:string)=>{if(!v)throw Error('china_daily_authority:'+c);};
++const REPO='jeep-jim/AvtoCena',REPO_ID='1289722938';
++export const CHINA_DAILY_SOURCE_WORKFLOW='.github/workflows/china-v4-continuation-linked.yml';
++export const CHINA_DAILY_SOURCE_MARKER='.github/market-runs/china-v4-continuation-linked.sha256';
++export const CHINA_DAILY_SOURCE_TITLE='Continue China from verified private checkpoint with linked reads';
++const API='https://api.github.com/repos/'+REPO+'/actions/runs';
++// Existing source collectors, not unrelated publication, UI or neighbor jobs.
++const SOURCE_WORKFLOWS=new Set([CHINA_DAILY_SOURCE_WORKFLOW,'.github/workflows/china-v4-continuation-resume-first.yml','.github/workflows/china-v4-continuation-once.yml','.github/workflows/china-independent-daily-source-collect-v1.yml','.github/workflows/collect-china-ordinary-20261119.yml',
++ '.github/workflows/catalog-refresh-china.yml','.github/workflows/catalog-v2-china.yml','.github/workflows/che168-diagnose.yml']);
++const ARCHIVE='459c98611117227fa68ae336f1f65c7de939ef4bdb4d8f8e2f132ace171d4247';
++const BOOTSTRAP='3b59460ceca450b10d5565fd31da6d1da10c993498a7419085327bb2594524d3';
++const CONTROL='9e3f73d6282465019f43dcd0370bf9c71688445a0e361dccf641bd45acc5be62';
++type Claim={controlSha256:string;replicaSha256:string;cursor:number};
++type Owner={runId:string;attempt:string;revision:string};
++type Approved={version:1;kind:'china-daily-source-collect-approval-v1';dryPlanSha256:string;controlSha256:string;
++ cursor:number;authorizedScopeSha256:string;workflowSha256:string;workerHead:string;workerTree:string;maxJobMs:number;noPublication:true;noCursorWrite:true};
++const fields=['version','kind','dryPlanSha256','controlSha256','cursor','authorizedScopeSha256','workflowSha256','workerHead','workerTree','maxJobMs','noPublication','noCursorWrite'];
++function parsePlan(raw:Buffer,expected:string):Readonly<Approved>{
++ need(Buffer.isBuffer(raw)&&raw.length>1&&raw.length<=16_384&&SHA.test(expected)&&hash(raw)===expected,'approved_bytes');
++ let p:Approved;try{p=JSON.parse(new TextDecoder('utf-8',{fatal:true}).decode(raw));}catch{throw Error('china_daily_authority:approved_json');}
++ need(p&&Object.keys(p).length===fields.length&&Object.keys(p).every(k=>fields.includes(k))&&p.version===1&&
++  p.kind==='china-daily-source-collect-approval-v1'&&p.dryPlanSha256===BOOTSTRAP&&p.controlSha256===CONTROL&&p.cursor===13123821&&
++  SHA.test(p.authorizedScopeSha256)&&SHA.test(p.workflowSha256)&&GIT.test(p.workerHead)&&GIT.test(p.workerTree)&&Number.isSafeInteger(p.maxJobMs)&&
++  p.maxJobMs>=10*60_000&&p.maxJobMs<=320*60_000&&p.noPublication===true&&p.noCursorWrite===true,'approved_scope');
++ return Object.freeze(p!);
++}
++function git(cwd:string,...args:string[]){
++ try{
++  const env={...process.env};for(const k of Object.keys(env))if(k.startsWith('GIT_'))delete env[k];
++  env.GIT_CONFIG_NOSYSTEM='1';env.GIT_CONFIG_GLOBAL='/dev/null';env.GIT_TERMINAL_PROMPT='0';
++  return execFileSync('git',args,{cwd,env,encoding:'buffer',maxBuffer:1024*1024,timeout:20_000,stdio:['ignore','pipe','pipe']});
++ }catch{throw Error('china_daily_authority:git_check');}
++}
++function safeFile(root:string,relative:string,max:number){
++ const absolute=path.join(root,relative),st=lstatSync(absolute);
++ need(realpathSync(absolute)===absolute&&st.isFile()&&st.size>0&&st.size<=max,'pinned_local_file');
++ return readFileSync(absolute);
++}
++async function boundedJson(response:Response){
++ if(response.status!==200||!response.body){await response.body?.cancel();throw Error('china_daily_authority:github_response');}
++ const pieces:Buffer[]=[];let n=0;
++ for await(const chunk of response.body){n+=chunk.length;need(n<=2*1024**2,'github_bytes');pieces.push(Buffer.from(chunk));}
++ try{return JSON.parse(Buffer.concat(pieces).toString('utf8'));}catch{throw Error('china_daily_authority:github_json');}
++}
++export function createChinaDailySourceAuthority(input:{plan:Buffer;expectedPlanSha256:string;actorRoot:string;workerRoot:string;
++ env?:NodeJS.ProcessEnv;fetchImpl?:typeof fetch}){
++ const p=parsePlan(input.plan,input.expectedPlanSha256),env=input.env??process.env,fetcher=input.fetchImpl??globalThis.fetch;
++ const actor=path.resolve(input.actorRoot),worker=path.resolve(input.workerRoot);
++ const actorRevision=env.GITHUB_SHA,runId=env.GITHUB_RUN_ID,token=env.GITHUB_TOKEN;
++ const now=Date.now(),mono=performance.now(),clock=()=>now+Math.max(performance.now()-mono,Date.now()-now);
++ need(GIT.test(actorRevision??'')&&actorRevision!==p.workerHead&&ID.test(runId??''),'bound_runtime_identity');
++ need(typeof token==='string'&&token.length<=4096&&(/^ghs_[A-Za-z0-9]{36}$/.test(token)||/^ghs_[0-9]{1,20}_[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+$/.test(token)),'github_installation_token_shape');
++ need(realpathSync(actor)===actor&&realpathSync(worker)===worker&&actor!==worker&&
++  path.dirname(worker)===actor&&worker===path.dirname(path.dirname(fileURLToPath(import.meta.url))),'bound_runtime_roots');
++ // Record actual Actions writer identity as owner; worker code gets its own attestation.
++ const owner=Object.freeze({runId:runId!,attempt:'1',revision:actorRevision!});
++ const checkEnv=()=>need(env.GITHUB_REPOSITORY===REPO&&env.GITHUB_REPOSITORY_ID===REPO_ID&&env.GITHUB_REF==='refs/heads/main'&&
++  env.GITHUB_WORKFLOW_REF===REPO+'/'+CHINA_DAILY_SOURCE_WORKFLOW+'@refs/heads/main'&&env.GITHUB_EVENT_NAME==='push'&&env.GITHUB_JOB==='collect'&&
++  env.GITHUB_RUN_ID===runId&&env.GITHUB_RUN_ATTEMPT==='1'&&env.GITHUB_SHA===actorRevision&&env.GITHUB_TOKEN===token,'job_environment');
++ const workerCheck=()=>{
++  need(git(worker,'rev-parse','--verify','HEAD').toString().trim()===p.workerHead&&git(worker,'write-tree').toString().trim()===p.workerTree&&
++    git(worker,'diff','--name-only','--').length===0&&git(worker,'ls-files','--others','--exclude-standard','--','apps','packages','scripts','data').length===0&&
++    git(worker,'ls-files','--others','--ignored','--exclude-standard','--','apps','packages','scripts','data').length===0&&
++    hash(safeFile(worker,'scripts/lib/nonjp-intake-archive.mjs',128*1024))===ARCHIVE,'worker_tree');
++ };
++ const actorCheck=()=>{
++  const workflow=safeFile(actor,CHINA_DAILY_SOURCE_WORKFLOW,128*1024),marker=safeFile(actor,CHINA_DAILY_SOURCE_MARKER,128);
++  need(git(actor,'rev-parse','--verify','HEAD').toString().trim()===owner.revision&&hash(workflow)===p.workflowSha256&&
++   workflow.equals(git(actor,'show',owner.revision+':'+CHINA_DAILY_SOURCE_WORKFLOW))&&
++   /^concurrency:\n {2}group: catalog-refresh-china\n {2}cancel-in-progress: false$/m.test(workflow.toString('utf8'))&&
++   marker.toString('ascii')===input.expectedPlanSha256+'\n'+git(actor,'rev-parse','HEAD^').toString().trim()+'\n'&&marker.equals(git(actor,'show',owner.revision+':'+CHINA_DAILY_SOURCE_MARKER)),'actor_tree');
++ };
++ async function req(url:string){return boundedJson(await fetcher(url,{method:'GET',redirect:'error',headers:{authorization:'Bearer '+token,
++  accept:'application/vnd.github+json','accept-encoding':'identity'},signal:AbortSignal.timeout(15_000)}));}
++ let nextCheck=0,deadline=0,initialReplica:string|undefined,flight:Promise<void>|undefined;
++ async function remote(){
++  checkEnv();actorCheck();workerCheck();
++  const self=API+'/'+runId,[run,jobs,active]=await Promise.all([req(self),req(self+'/attempts/1/jobs?per_page=100'),req(API+'?status=in_progress&per_page=100')]);
++  const job=jobs.jobs?.filter((row:any)=>row?.name===CHINA_DAILY_SOURCE_TITLE);
++  const started=Date.parse(job?.[0]?.started_at);
++  need(String(run.id)===runId&&run.run_attempt===1&&run.head_sha===actorRevision&&run.head_branch==='main'&&run.path===CHINA_DAILY_SOURCE_WORKFLOW&&
++   run.event==='push'&&run.status==='in_progress'&&run.head_commit?.message===CHINA_DAILY_SOURCE_TITLE&&
++   String(run.repository?.id)===REPO_ID&&run.repository?.full_name===REPO&&
++   Array.isArray(jobs.jobs)&&jobs.total_count===jobs.jobs.length&&jobs.total_count<=100&&job?.length===1&&
++   String(job[0].run_id)===runId&&job[0].head_sha===actorRevision&&job[0].status==='in_progress'&&
++   Number.isFinite(started)&&started<=clock()+5_000&&started+p.maxJobMs>clock(),'remote_job');
++  need(Array.isArray(active.workflow_runs)&&active.total_count===active.workflow_runs.length&&active.total_count<=100&&
++   active.workflow_runs.some((row:any)=>String(row.id)===runId&&row.path===CHINA_DAILY_SOURCE_WORKFLOW&&row.head_sha===actorRevision)&&
++   active.workflow_runs.every((row:any)=>String(row.id)===runId||!SOURCE_WORKFLOWS.has(row.path)),'source_lane_busy_or_unknown');
++  if(deadline)need(deadline===started+p.maxJobMs,'job_start_changed');
++  deadline=started+p.maxJobMs;nextCheck=clock()+60_000;
++ }
++ async function attest(force=false){
++  checkEnv();if(deadline)need(clock()<deadline,'job_deadline');
++  if(!deadline||force||clock()>=nextCheck){
++   if(!flight)flight=remote().finally(()=>{flight=undefined;});
++   await flight;
++  }
++  checkEnv();need(clock()<deadline,'job_deadline');
++ }
++ const authorize=async(claim:Claim)=>{
++  need(claim?.controlSha256===p.controlSha256&&claim.cursor===p.cursor&&SHA.test(claim.replicaSha256)&&
++    (!initialReplica||initialReplica===claim.replicaSha256),'accepted_claim');
++  await attest();initialReplica=claim.replicaSha256;
++ };
++ return Object.freeze({owner,authorizedScopeSha256:p.authorizedScopeSha256,workerHead:p.workerHead,workerTree:p.workerTree,dryPlanSha256:p.dryPlanSha256,attest,authorize,
++  async nativeWitness({storage,directory,config,owner:actual}:{storage:any;directory:string;config:any;owner:Owner}){
++   need(actual?.runId===owner.runId&&actual.attempt===owner.attempt&&actual.revision===owner.revision&&Boolean(initialReplica),'native_provenance');
++   await attest(true);workerCheck();
++   const witness=await verifyChe168ReplicaInput({storage,directory,config,producer:{runId:owner.runId,attempt:owner.attempt,sourceSha:owner.revision},independentDailySource:true});
++   await attest(true);return {sourceInputWitness:witness};
++  }});
++}
+--- /dev/null
++++ b/scripts/continuation-entry.mts
+@@ -0,0 +1,61 @@
++import path from 'node:path';
++import fs from 'node:fs/promises';
++import {createHash} from 'node:crypto';
++import {fileURLToPath} from 'node:url';
++import {ObjectJsonStorage} from '../apps/web/lib/data';
++import {assertCollectionEnabled} from '../apps/web/lib/catalog/collection-controls';
++import {normalizeAutoApiChe168,autoApiChe168RejectionReason,isAutoApiChe168QuarantineReason} from '../apps/web/lib/catalog/auto-api-che168';
++import {collectAutoApiChe168} from './lib/auto-api-che168-client.mjs';
++import {saveChe168Replica,restoreChe168Replica} from './lib/che168-replica.mjs';
++import {createChinaDailySourceAuthority} from './continuation-authority.mts';
++import {runExactReadOnlyCustody,assertExactRev5ReadOnly} from './base-signed-reader.with-bounded-hook.mjs';
++import {readActualFirstPartial} from './recover-first-partial.mjs';
++import {runBoundedHostedChinaContinuation} from './hosted-carrier.mjs';
++const sha=(b:Buffer)=>createHash('sha256').update(b).digest('hex');
++function normalizeOrQuarantine(row:any,at:string){
++ const offer=normalizeAutoApiChe168(row,at);
++ if(offer)return {kind:'offer',offer,at};
++ const reason=autoApiChe168RejectionReason(row);
++ if(!isAutoApiChe168QuarantineReason(reason))throw Error('continuation_entry_identity_hold');
++ return {kind:'quarantine',innerId:String(row.inner_id),reason,at};
++}
++try{
++ const worker=path.dirname(path.dirname(fileURLToPath(import.meta.url))), actor=path.dirname(worker);
++ const scratch=path.resolve(process.env.CHINA_CONTINUATION_SCRATCH??'/');
++ const st=await fs.stat(scratch), space=await fs.statfs(scratch,{bigint:true});
++ if(await fs.realpath(scratch)!==scratch||!st.isDirectory()||(st.mode&0o077)!==0||
++  space.bsize*space.bavail<12n*1024n**3n||!scratch.startsWith((process.env.RUNNER_TEMP??'')+'/china-v4-continuation.'))
++  throw Error('continuation_entry_private_scratch');
++ const dir=path.join(actor,'.github/operations/china-v4-continuation-linked');
++ const plan=await fs.readFile(path.join(dir,'approved.json'));
++ // Protected setup independently pins the approved scope in APPROVED_CODE.sha256.
++ const scope=await fs.readFile(path.join(dir,'authorized-existing-scope.json'));
++ const authority=createChinaDailySourceAuthority({plan,expectedPlanSha256:sha(plan),actorRoot:actor,workerRoot:worker});
++ if(scope.length<2||scope.length>2048||sha(scope)!==authority.authorizedScopeSha256)throw Error('continuation_entry_scope_digest');
++ const activePaidScope=JSON.parse(scope.toString('utf8'));
++ await authority.attest(true);
++ await assertCollectionEnabled('che168_feed');
++ let nextRev5=0;
++ const assertRev5=async()=>{if(Date.now()>=nextRev5){ await assertExactRev5ReadOnly();nextRev5=Date.now()+60_000; }};
++ const native=new ObjectJsonStorage();
++ const prior=await readActualFirstPartial({native,assertExactActor:async()=>{await authority.attest();await assertRev5();}});
++ console.log(JSON.stringify({status:'authenticated_previous_continuation_checkpoint',...prior.summary,
++  providerRequestsThisRun:0,published:false,cursorMoved:false}));
++ if(!prior.resumeAuthorizedReason)throw Error('continuation_entry_previous_reason_hold');
++ const result=await runBoundedHostedChinaContinuation({
++  scratch,snapshotConfigFile:path.join(dir,'original-snapshot.json'),native,
++  apiKey:process.env.AUTO_API_CHE168_KEY,deadline:Date.now()+75*60_000,assertSignedActor:()=>authority.attest(),
++  authenticatedOwner:Object.freeze({...authority.owner,repositoryId:"1289722938",ownerApprovalSha256:sha(plan)}),assertRev5,runExactReadOnlyCustody,collectAutoApiChe168,normalizeOrQuarantine,
++  saveReplica:saveChe168Replica,restoreReplica:restoreChe168Replica,activePaidScope,readAuthenticatedPartial:prior.authenticateAndReplay,
++ });
++ await authority.attest(true);await assertExactRev5ReadOnly();
++ const o=result.output;
++ console.log(JSON.stringify({status:o.status??o.kind,providerAttempts:result.providerAttempts,linkedOfferAttempts:result.linkedOfferAttempts,privateSourceReady:o.kind==='china_v4_ordinary_continuation_source_ready',
++  ...('terminalReceiptSha256' in o?{terminalReceiptSha256:o.terminalReceiptSha256}:{}),
++  ...('partialReceiptSha256' in o?{partialReceiptSha256:o.partialReceiptSha256,reason:o.reason,lastDurableCursor:o.lastDurableCursor,durablePages:o.durablePages,durableEvents:o.durableEvents}:{}),published:false,cursorMoved:false}));
++}catch(e){
++ const message=e instanceof Error?e.message:'';
++ const safe=/^(?:china_(?:v4_[a-z_]+|daily_authority):[a-z0-9_]+|continuation_entry_[a-z_]+|collection_disabled_by_owner:che168_feed|invalid_collection_controls|auto_api_http_[0-9]{3})$/.test(message);
++ console.error(JSON.stringify({status:'held',reason:safe?message:'source_continuation_unverified',published:false,cursorMoved:false}));
++ process.exitCode=1;
++}
+--- /dev/null
++++ b/scripts/base-signed-reader.with-bounded-hook.mjs
+@@ -0,0 +1,213 @@
++// Production-scope read-only carrier. Two signed metadata fences and one
++// hydration; no cloud writer, provider client, cursor or publication code.
++import fs from 'node:fs/promises';
++import path from 'node:path';
++import {createHash,createHmac} from 'node:crypto';
++import {gunzipSync} from 'node:zlib';
++import {pathToFileURL} from 'node:url';
++import {openVerifiedBaseReplay} from './base-replay.mjs';
++import {exactV4PinRoles,exactV4SealedReadPlan,inspectExactV4Custody} from './custody.mjs';
++
++const M=1024**2,CHUNK=16*M,MAX_JOURNAL=512*M,MAX_METADATA=12*M;
++const HOST='s3.regru.cloud',PREFIX='/avtocena-staging-8120751/migration-staging/full-20261011/',REGION='us-east-1';
++const ROOT_CONTROL='catalog/independent-market-public-v1/china/control.json';
++const READY='catalog/private-market-stage-v1/china/full-fresh-44710087159-1/READY.json';
++const PIN='catalog/raw-feed-pins/v1/che168-intake-44765240609-1.json';
++const controlSha='9e3f73d6282465019f43dcd0370bf9c71688445a0e361dccf641bd45acc5be62';
++const readySha='1080f0664095d3ed784eb1134cf20ab89c0facd33489b82f575eb7d279eb7cb6';
++const pinSha='a14bda5ccf4c4e8a3920ff8858d6bad6a8d5307fad0d706dd8236650a9b4f4d2';
++const controlEtagSha='447424f806e20f917cd2922e3c5f841a957410054fc05f9d8bba5bd18cfef79e';
++const authMeta=Object.freeze({
++ producerRun:'44765240609',producerOperator:'891a5e3ed885872b99487a47b7d88edd172b1665',workerTree:'4dbbe41885deab5ab80002147aa04738d1048e67',
++ controlRev:5,controlSha256:controlSha,pinWireSha256:pinSha,
++ candidateManifestSha256:'e55a984351971929609780d2aa588215b78eb51c1debb4da07e13621481e9a0d',
++ journalHeadSha256:'36c279e55fd61db002a85b7720fd32980124ce4d60ea08cb8f985d9f2359f9c2',
++ pinAndHeadsRechecked:true,privateObjectScopeAuthenticated:true,
++});
++export const budget=Object.freeze({candidateParts:178,encodedCandidateBytes:471890664,candidateRawBytes:2971688960,journalChunks:91,journalEvents:57020,
++ journalWireLimit:MAX_JOURNAL,metadataWireLimit:MAX_METADATA,bodyGets:269,metadataGets:10,maxGet:535,windowsMs:25*60_000,minimumScratchBytes:12*1024**3,acceptedBasePartsMax:256,acceptedBaseRawMax:4*1024**3,acceptedBaseEncodedMax:2*1024**3,parallelCandidateRead:4});
++const sha=x=>createHash('sha256').update(x).digest('hex');
++const hmac=(key,s)=>createHmac('sha256',key).update(s).digest();
++const parse=b=>JSON.parse(new TextDecoder('utf-8',{fatal:true}).decode(b));
++const req=(x,c)=>{if(!x)throw Error('china_v4_body_'+c);};
++const safeKey=k=>typeof k==='string'&&k.split('/').every(p=>/^[A-Za-z0-9_.-]+$/.test(p)&&p!=='.'&&p!=='..');
++const responseSize=x=>typeof x==='string'&&/^\d{1,12}$/.test(x)?Number(x):0;
++const reqMeta=(v,shaExpected,code)=>req(v?.sha256===shaExpected,code);
++const validMode=mode=>(mode&0o077)===0;
++
++function makePort({fetcher=fetch,env=process.env,clock=Date.now}={}){
++ const expires=clock()+budget.windowsMs,seen=new Map(),stats={metadata:0,candidate:0,journal:0,acceptedBase:0,metadataBytes:0,candidateBytes:0,journalBytes:0,acceptedBaseBytes:0};
++ const empty=sha(''),allowed=new Map(),ceil={metadata:MAX_METADATA,candidate:budget.encodedCandidateBytes,journal:MAX_JOURNAL,acceptedBase:budget.acceptedBaseEncodedMax};
++ function within(){req(clock()<expires,'global_read_deadline');}
++ function authorize(key,kind,maximumUses,cap){
++  req(!allowed.has(key)&&safeKey(key)&&Object.hasOwn(ceil,kind)&&Number.isSafeInteger(cap)&&cap>=1&&cap<=64*M&&
++    (kind==='metadata'?maximumUses===1||maximumUses===2:maximumUses===1),'strict_signed_allowlist');
++  allowed.set(key,{kind,maximumUses,cap});
++ }
++ async function get(key){
++  within();
++  const permit=allowed.get(key);
++  req(permit&&(seen.get(key)??0)<permit.maximumUses&&stats.metadata+stats.candidate+stats.journal+stats.acceptedBase<budget.maxGet,'exact_get_only_scope');
++  const {kind,cap}=permit,readCap={metadata:budget.metadataGets,candidate:budget.candidateParts,journal:budget.journalChunks,acceptedBase:budget.acceptedBasePartsMax};
++  req(stats[kind]<readCap[kind],'exact_group_request_cap');stats[kind]++;seen.set(key,(seen.get(key)??0)+1);
++  const access=env.YC_OBJECT_STORAGE_ACCESS_KEY_ID,secret=env.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY;
++  req(typeof access==='string'&&access.length>0&&typeof secret==='string'&&secret.length>0,'read_authority_required');
++  const amz=new Date(clock()).toISOString().replace(/[:-]|\.\d{3}/g,''),day=amz.slice(0,8);
++  const route=PREFIX+key,scope=day+'/'+REGION+'/s3/aws4_request';
++  const names='host;x-amz-content-sha256;x-amz-date';
++  const headers={host:HOST,'x-amz-content-sha256':empty,'x-amz-date':amz};
++  const canonical='GET\n'+route+'\n\n'+['host','x-amz-content-sha256','x-amz-date'].map(n=>n+':'+headers[n]+'\n').join('')+'\n'+names+'\n'+empty;
++  const signature=createHmac('sha256',hmac(hmac(hmac(hmac('AWS4'+secret,day),REGION),'s3'),'aws4_request'))
++   .update(['AWS4-HMAC-SHA256',amz,scope,sha(canonical)].join('\n')).digest('hex');
++  headers.authorization='AWS4-HMAC-SHA256 Credential='+access+'/'+scope+', SignedHeaders='+names+', Signature='+signature;
++  const r=await fetcher('https://'+HOST+route,{method:'GET',headers,redirect:'error',
++    signal:AbortSignal.timeout(Math.min(kind==='metadata'?12000:25000,expires-clock()))});
++  const length=responseSize(r.headers.get('content-length')),etag=r.headers.get('etag');
++  const bounded=r.status===200&&length>0&&length<=cap&&typeof etag==='string'&&/^(?:W\/)?"[^"\r\n]{1,128}"$/.test(etag)&&
++    !r.headers.get('content-encoding');
++  if(!bounded){await r.body?.cancel?.();req(false,'http_size_or_token_unbound');}
++  const pieces=[];let bytes=0;
++  for await(const part of r.body){
++   within();bytes+=part.byteLength;stats[kind+'Bytes']+=part.byteLength;
++   req(bytes<=length&&stats[kind+'Bytes']<=ceil[kind],'bounded_signed_body_overrun');pieces.push(part);
++  }
++  req(bytes===length,'body_length_readback_mismatch');
++  const data=Buffer.concat(pieces,bytes);
++  return {data,sha256:sha(data),etagSha256:sha(etag.replace(/^W\//,''))};
++ }
++ return Object.freeze({authorize,get,within,stats:()=>({...stats})});
++}
++
++function checkPublic(o){
++ reqMeta(o,controlSha,'rev5_wire_changed');
++ req(o.etagSha256===controlEtagSha,'rev5_etag_changed');
++ const a=parse(o.data);
++ req(a.version===1&&a.market==='china'&&a.revision===5&&a.active?.runId==='full-fresh-44710087159-1'&&
++   a.active.generationId==='gen_1795166586455_china44710087159'&&a.active.readySha256===readySha,'rev5_active_changed');
++}
++function exactPlanStats(m,j){
++ req(m.cursor===13180841&&m.bytes===budget.candidateRawBytes&&m.parts.length===budget.candidateParts&&
++  j.initialCursor===13123821&&j.cursor===m.cursor&&j.changes===budget.journalEvents&&j.chunks.length===budget.journalChunks,
++ 'verified_metadata_exact_totals_changed');
++}
++async function diskRoot(scratch){
++ req(typeof scratch==='string'&&path.isAbsolute(scratch)&&await fs.realpath(scratch)===scratch,'isolated_scratch_path');
++ const meta=await fs.lstat(scratch);req(meta.isDirectory()&&validMode(meta.mode),'private_scratch_required');
++ const stats=await fs.statfs(scratch,{bigint:true});
++ req(stats.bavail*stats.bsize>=BigInt(budget.minimumScratchBytes),'private_scratch_insufficient');
++}
++async function hydrateCandidate({storage,manifest,root,filename}){
++ const f=await fs.open(filename,'wx',0o600);
++ let size=0;
++ try{
++  for(let start=0;start<manifest.parts.length;start+=budget.parallelCandidateRead){
++   storage.within();
++   const partial=manifest.parts.slice(start,start+budget.parallelCandidateRead);
++   const wire=await Promise.all(partial.map((_,i)=>storage.get(root+'/'+(start+i)+'.gz')));
++   for(const [off,v] of wire.entries()){
++    const descriptor=partial[off],body=gunzipSync(v.data,{maxOutputLength:CHUNK});
++    req(body.length===descriptor.bytes&&sha(body)===descriptor.sha256,'restored_replica_part_commitment_mismatch');
++    size+=body.length;
++    req(size<=manifest.bytes,'candidate_disk_size_bound');
++    await f.writeFile(body);
++   }
++  }
++  req(size===manifest.bytes,'candidate_file_missing_parts');await f.sync();
++ }finally{await f.close();}
++}
++
++export async function runExactReadOnlyCustody({scratch,snapshotConfigFile,makeReader=()=>makePort(),diagnostic={phase:'preflight'},onVerifiedPrivateSession,getPrivateSessionDeadline,clock=Date.now}){
++ await diskRoot(scratch);
++ const configPath=path.resolve(snapshotConfigFile);
++ const st=await fs.lstat(configPath);
++ req(st.isFile()&&st.size>0&&st.size<=128*1024&&await fs.realpath(configPath)===configPath,'pinned_original_config_file');
++ const snapshotConfigWire=await fs.readFile(configPath);
++ req(sha(snapshotConfigWire)==='25abfa4b8f1b053b12a1fcd86f01dc42de65eb8cb74f3863abf1a49115dfdb27','pinned_original_config_digest');
++ const storage=makeReader();
++ diagnostic.stats=storage.stats;
++ diagnostic.phase='signed_public_and_custody_metadata';
++ storage.authorize(ROOT_CONTROL,'metadata',2,32*1024);storage.authorize(PIN,'metadata',2,32*1024);storage.authorize(READY,'metadata',1,32*1024);
++ const [control,pin,ready]=await Promise.all([storage.get(ROOT_CONTROL),storage.get(PIN),storage.get(READY)]);
++ checkPublic(control);reqMeta(pin,pinSha,'old_custody_pin_changed');reqMeta(ready,readySha,'base_rev5_ready_changed');
++ const roles=exactV4PinRoles(pin.data);
++ const acceptedManifestKey=roles.previous.key+'/manifest.json',manifestKey=roles.candidateRoot+'/manifest.json',journalHeadKey=roles.journalRoot+'/head.json';
++ storage.authorize(acceptedManifestKey,'metadata',1,2*M);storage.authorize(manifestKey,'metadata',2,2*M);storage.authorize(journalHeadKey,'metadata',2,2*M);
++ const [oldMeta,candidateMeta,journalMeta]=await Promise.all([storage.get(acceptedManifestKey),storage.get(manifestKey),storage.get(journalHeadKey)]);
++ const accepted=parse(oldMeta.data);
++ req(accepted.version===1&&accepted.binding===roles.previous.binding&&accepted.cursor===roles.previous.cursor&&
++   sha(JSON.stringify(accepted))===roles.previous.sha256,'old_accepted_replica_manifest_changed');
++ const input={pinWire:pin.data,snapshotConfigWire,candidateManifestWire:candidateMeta.data,journalHeadWire:journalMeta.data,attested:authMeta};
++ const {manifest,journal}=exactV4SealedReadPlan(input);exactPlanStats(manifest,journal);
++ req(Number.isSafeInteger(accepted.bytes)&&accepted.bytes>0&&accepted.bytes<=budget.acceptedBaseRawMax&&
++  Array.isArray(accepted.parts)&&accepted.parts.length===Math.ceil(accepted.bytes/CHUNK)&&accepted.parts.length<=budget.acceptedBasePartsMax&&
++  accepted.parts.every((p,i)=>p?.bytes===Math.min(CHUNK,accepted.bytes-i*CHUNK)&&/^[a-f0-9]{64}$/.test(p.sha256??'')),'old_base_parts_scope');
++ for(const [i,obj] of accepted.parts.entries())storage.authorize(roles.previous.key+'/'+i+'.gz','acceptedBase',1,Math.min(17*M,obj.bytes+65536));
++ for(const [i,obj] of manifest.parts.entries())storage.authorize(roles.candidateRoot+'/'+i+'.gz','candidate',1,Math.min(17*M,obj.bytes+65536));
++ for(const obj of journal.chunks)storage.authorize(roles.journalRoot+'/'+obj.id+'.json','journal',1,Math.min(64*M,journal.bytes));
++ const work=await fs.mkdtemp(path.join(scratch,'china-v4-custody-'));
++ const filename=path.join(work,'inventory.sqlite'),oldFilename=path.join(work,'base-replay.sqlite');
++ let replay;
++ try{
++  diagnostic.phase='verified_candidate_hydration';
++  await hydrateCandidate({storage,manifest,root:roles.candidateRoot,filename});
++  req(storage.stats().candidateBytes===budget.encodedCandidateBytes,'compressed_terminal_wire_total_changed');
++  diagnostic.phase='single_accepted_base_hydration';
++  await hydrateCandidate({storage,manifest:accepted,root:roles.previous.key,filename:oldFilename});
++  replay=openVerifiedBaseReplay({privateBaseFilename:oldFilename,config:parse(snapshotConfigWire),cursorFrom:journal.initialCursor,
++    cursorTo:journal.cursor,expectedEvents:journal.changes,within:storage.within});
++  diagnostic.phase='authenticated_ordered_journal_and_sqlite_integrity';
++  const result=await inspectExactV4Custody({...input,localCandidateReplica:filename,readLocalJournalChunk:async id=>
++   (await storage.get(roles.journalRoot+'/'+id+'.json')).data,onVerifiedEvent:e=>replay.apply(e)});
++  diagnostic.phase='private_sqlite_source_equivalence';
++  req(result.receipt.inventoryRows===289167&&result.receipt.inventoryPayloadLedgerSha256==='c6ca74a1071f078e633d84b9b928338ab69c73dde29a5d50c43a255471d8dc5f'&&
++    result.receipt.candidateReplicaFileSha256==='8eeaf9bd943f2837e271175f815fd7f819993a19613acd3b31bcff0d783cdd1e','prior_candidate_body_custody_changed');
++  const equivalence=await replay.compare({candidateFilename:filename,expectedCandidateLedgerSha256:result.receipt.inventoryPayloadLedgerSha256,
++    expectedRows:result.receipt.inventoryRows});
++  diagnostic.phase='signed_final_read_only_fence';
++  const [finalControl,finalPin,finalM,finalJ]=await Promise.all([storage.get(ROOT_CONTROL),storage.get(PIN),storage.get(manifestKey),storage.get(journalHeadKey)]);
++  checkPublic(finalControl);reqMeta(finalPin,pinSha,'old_custody_pin_changed_after');
++  req(finalPin.etagSha256===pin.etagSha256&&finalM.etagSha256===candidateMeta.etagSha256&&finalJ.etagSha256===journalMeta.etagSha256&&
++    finalM.sha256===candidateMeta.sha256&&finalJ.sha256===journalMeta.sha256,'exact_body_scope_changed');
++  const c=storage.stats();
++  req(c.metadata===budget.metadataGets&&c.candidate===budget.candidateParts&&c.journal===budget.journalChunks&&c.journalBytes===journal.bytes&&c.acceptedBase===accepted.parts.length,'body_scope_exact_totals');
++  diagnostic.phase='verified_read_only_custody';
++  // Local process hook only; the hosted CLI never passes one. Future prepared
++  // actor can consume the already verified files/ledger before scratch erasure.
++  if(onVerifiedPrivateSession!==undefined){
++   req(typeof onVerifiedPrivateSession==='function','private_session_hook_scope');
++   storage.within();
++   req(typeof getPrivateSessionDeadline==='function','private_session_deadline');
++   const privateSessionDeadline=getPrivateSessionDeadline();
++   req(Number.isSafeInteger(privateSessionDeadline)&&privateSessionDeadline>clock()&&
++     privateSessionDeadline-clock()<=45*60*1000,'private_session_deadline');
++   replay.close(); replay=undefined;
++   await fs.unlink(oldFilename);
++   await onVerifiedPrivateSession(Object.freeze({candidateFilename:filename,consumablePrivateScratchCandidate:true,
++     equivalence,privateSessionDeadline,custodyReceipt:Object.freeze({...result.receipt}),privateLedger:result.privateLedger,publicationAuthorized:false,cursorAdvanced:false}));
++   req(clock()<privateSessionDeadline,'private_session_deadline');
++  }
++  return {status:'candidate_and_accepted_base_native_replay_equivalence_only',metadataProofJob:'136466951375',...result.receipt,
++    ...equivalence,authenticatedReads:c,existingAcceptedBaseRead:'exact_once_from_immutable_parts',oldAcceptedBaseIndependentReplay:true,
++    priorCustodyUnreplayedRows:result.receipt.unchangedNotIndependentlyReplayed,priorCustodyPriceOnlyUnprovedRows:result.receipt.priceOnlyBaseFieldsUnproved,
++    unchangedNotIndependentlyReplayed:0,priceOnlyBaseFieldsUnproved:0,localTypedPrivateRowsUploaded:false};
++ }finally{replay?.close();await fs.rm(work,{recursive:true,force:true});}
++}
++export const rehearseBoundedPort=makePort;
++export const rehearsePrivateHydration=hydrateCandidate;
++if(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href){
++ const diagnostic={phase:'preflight'};
++ try{
++  req(process.argv[2]==='--signed-read-only-custody'&&process.argv.length===5,'explicit_authorized_carrier_required');
++  console.log(JSON.stringify(await runExactReadOnlyCustody({scratch:process.argv[3],snapshotConfigFile:process.argv[4],diagnostic})));
++ }catch(e){
++  const reason=typeof e.message==='string'&&/^(?:china_v4_(?:body|custody)_[a-z_]{1,110}|auto_api_detail_404_unresolved)$/.test(e.message)?e.message:'bounded_custody_failed';
++  console.log(JSON.stringify({status:'held',reason,phase:diagnostic.phase,authenticatedReads:diagnostic.stats?.()??{},providerRequests:0,storageWrites:0,
++    sourceCompletenessAdmissionsAuthorized:false,publicationAuthorized:false,cursorAdvanced:false}));
++  process.exitCode=2;
++ }
++}
++export async function assertExactRev5ReadOnly({clock=Date.now}={}){
++ const storage=makePort({clock});
++ storage.authorize(ROOT_CONTROL,'metadata',1,64*1024);
++ checkPublic(await storage.get(ROOT_CONTROL));
++}
+--- /dev/null
++++ b/scripts/hosted-carrier.mjs
+@@ -0,0 +1,64 @@
++import {createHash} from 'node:crypto';
++import fs from 'node:fs/promises';
++import {runContinuationInPrivateSession} from './e2e-local.mjs';
++import {singleAttemptChe168,caps} from './continuation.mjs';
++const need=(v,k)=>{if(!v)throw Error('china_v4_hosted:'+k)};
++const hash=x=>createHash('sha256').update(x).digest('hex');
++const configSha='25abfa4b8f1b053b12a1fcd86f01dc42de65eb8cb74f3863abf1a49115dfdb27';
++const priorPin='a14bda5ccf4c4e8a3920ff8858d6bad6a8d5307fad0d706dd8236650a9b4f4d2';
++/** Concrete one-shot composition; no implicit CLI. The host must supply a
++ * separately reviewed actor attestation, its existing configuration and port. */
++export async function runBoundedHostedChinaContinuation({
++ scratch,snapshotConfigFile,native,apiKey,deadline,assertSignedActor,authenticatedOwner,assertRev5,
++ runExactReadOnlyCustody,collectAutoApiChe168,normalizeOrQuarantine,saveReplica,restoreReplica,
++ activePaidScope,fetchImpl=globalThis.fetch,clock=Date.now,readAuthenticatedPartial,
++}){
++ need(activePaidScope?.operation==='ordinary_existing_che168_v2_changes_and_event_linked_offer'&&activePaidScope.ordinaryUseAuthorized===true&&
++  activePaidScope.noAddedPurchaseOrUpgrade===true&&Number.isSafeInteger(activePaidScope.maxChangesCalls)&&activePaidScope.maxChangesCalls>=1&&
++  activePaidScope.maxChangesCalls<=caps.changeRequests&&Number.isSafeInteger(activePaidScope.maxLinkedOfferCalls)&&activePaidScope.maxLinkedOfferCalls>=1&&activePaidScope.maxLinkedOfferCalls<=20,'ordinary_billing_authority');
++ need(typeof assertSignedActor==='function'&&typeof assertRev5==='function'&&typeof runExactReadOnlyCustody==='function'&&
++  Number.isSafeInteger(deadline)&&deadline>clock(),'exact_actor');
++ await assertSignedActor();await assertRev5();
++ const configBytes=await fs.readFile(snapshotConfigFile);
++ need(configBytes.length<=128*1024&&hash(configBytes)===configSha,'config_identity');
++ const config=JSON.parse(configBytes.toString('utf8')),replicaBinding=hash(JSON.stringify(config));
++ let output,calls=0,detailCalls=0,captured=false;
++ const go=await runExactReadOnlyCustody({scratch,snapshotConfigFile,clock,getPrivateSessionDeadline:()=>Math.min(deadline,clock()+caps.wallMs),onVerifiedPrivateSession:async session=>{
++  need(!captured&&session?.custodyReceipt?.journalChanges===57020&&session?.equivalence?.replayedAcceptedBase===true,'one_exact_custody_callback');
++  captured=true;
++  // Distinct finite provider window; the approved hosted workflow must cover both windows.
++  const t=session.privateSessionDeadline;
++  need(Number.isSafeInteger(t)&&t>clock()&&t<=deadline,'private_phase_deadline');
++  const get=singleAttemptChe168({apiKey,fetchImpl,clock,deadline:t});
++  output=await runContinuationInPrivateSession({
++   verified:{...session,replicaBinding,proof:{
++    operation:'candidate_and_accepted_base_native_replay_equivalence_only',oldAcceptedBaseIndependentReplay:true,
++    untouchedBaseInventoryEqualityProven:session.equivalence.untouchedBaseInventoryEqualityProven,
++    priceOnlyBaseFieldEqualityProven:session.equivalence.priceOnlyBaseFieldEqualityProven,
++    baseCursor:session.custodyReceipt.acceptedStartCursor,cursor:session.custodyReceipt.candidateTerminalCursor,changes:session.custodyReceipt.journalChanges,
++    oldPinSha256:priorPin,oldJournalHeadSha256:session.custodyReceipt.journalHeadSha256,
++    replicaManifestSha256:session.custodyReceipt.candidateManifestSha256,inventorySha256:session.custodyReceipt.inventoryPayloadLedgerSha256,
++   },resumePartialBeforeProvider:readAuthenticatedPartial},
++   actor:authenticatedOwner,native,assertExactActor:async()=>{need(clock()<t,'host_deadline');await assertSignedActor();await assertRev5();},
++   linkedDetailsAuthorized:true,
++   requestOnce:async(endpoint,p)=>{
++    if(endpoint==='offer'){
++     if(detailCalls>=activePaidScope.maxLinkedOfferCalls)throw Error('china_v4_continuation:linked_detail_budget');
++     detailCalls++;
++     try{return await get(endpoint,p);}catch(e){
++      if(e?.message==='auto_api_http_404')throw Error('china_v4_continuation:linked_detail_missing_404');
++      throw e;
++     }
++    }
++    need(endpoint==='changes','changes_and_event_linked_offer_only');
++    need(calls!==0||p?.change_id===13182101,'exact_first_uncommitted_page');
++    if(calls>=activePaidScope.maxChangesCalls)throw Error('china_v4_continuation:ordinary_request_budget');
++    calls++;const page=await get(endpoint,p);
++    need(Array.isArray(page.payload?.result)&&page.payload.result.length<=20,'one_page_native_result_limit');return page;
++   },collectAutoApiChe168,normalizeOrQuarantine,saveReplica,restoreReplica,
++   continuationId:'verified-v4-che168-'+authenticatedOwner.runId,config,clock,
++  });
++ }});
++ need(captured&&output&&go?.oldAcceptedBaseIndependentReplay===true,'custody_or_continuation_held');
++ return Object.freeze({output,providerAttempts:calls,linkedOfferAttempts:detailCalls,published:false,cursorMoved:false});
++}
+--- /dev/null
++++ b/scripts/continuation.mjs
+@@ -0,0 +1,192 @@
++import {createHash} from 'node:crypto';
++import {verifiedPrivateResumePosition} from './read-partial.mjs';
++const BASE='https://api1.auto-api.com/api/v2/che168/';
++const CURSOR=13180841,APPLIED=13123821;
++const SHA=/^[a-f0-9]{64}$/, HASH=s=>createHash('sha256').update(s).digest('hex'), digest=x=>HASH(JSON.stringify(x));
++const known=Object.freeze({baseCursor:APPLIED,cursor:CURSOR,changes:57020,
++ oldPinSha256:'a14bda5ccf4c4e8a3920ff8858d6bad6a8d5307fad0d706dd8236650a9b4f4d2',
++ oldJournalHeadSha256:'36c279e55fd61db002a85b7720fd32980124ce4d60ea08cb8f985d9f2359f9c2',
++ replicaManifestSha256:'e55a984351971929609780d2aa588215b78eb51c1debb4da07e13621481e9a0d',
++ inventorySha256:'c6ca74a1071f078e633d84b9b928338ab69c73dde29a5d50c43a255471d8dc5f'});
++export const caps=Object.freeze({attempts:1200,changeRequests:256,detailRequests:1024,eventCount:50000,wallMs:45*60_000,
++ routeBodyBytes:4*1024*1024,perRequestMs:30000,minimumSpacingMs:200});
++const req=(ok,k)=>{if(!ok)throw Error('china_v4_continuation:'+k)};
++const int=x=>Number.isSafeInteger(x)&&x>=0;
++const iso=x=>typeof x==='string'&&Number.isFinite(Date.parse(x));
++export function openExactContinuationProof(receipt){
++ req(receipt?.operation==='candidate_and_accepted_base_native_replay_equivalence_only'&&
++   receipt.oldAcceptedBaseIndependentReplay===true&&receipt.untouchedBaseInventoryEqualityProven===true&&
++   receipt.priceOnlyBaseFieldEqualityProven===true&&Object.keys(known).every(k=>receipt[k]===known[k]),'whole_verified_base');
++ return Object.freeze({...known});
++}
++/** Free pure dry plan: no client construction, secrets, store or network. */
++export function dryPlanVerifiedV4(receipt,{linkedDetailsAuthorized=false}={}){
++ const p=openExactContinuationProof(receipt);
++ req(typeof linkedDetailsAuthorized==='boolean','dry_detail_option');
++ return Object.freeze({status:'local_plan_only',market:'china',acceptedCursor:p.baseCursor,continuationCursor:p.cursor,
++   inheritedChanges:p.changes,allowedIntents:linkedDetailsAuthorized?['changes','event_linked_offer']:['changes'],
++   caps,externalRequests:0,storageWrites:0,publicationAuthorized:false,paidLaunchAuthorized:false,
++   paidBudgetProofRequired:true,signedPrivateCarrierRequired:true});
++}
++/** Ordinary exact existing endpoint; one transport attempt. Credentials never
++ * enter receipts/errors. Live adapter requires separately approved execution. */
++export function singleAttemptChe168({apiKey,fetchImpl=globalThis.fetch,clock=Date.now,deadline}){
++ req(typeof apiKey==='string'&&apiKey.length>0&&apiKey.length<=1024&&!/\s/.test(apiKey)&&Number.isFinite(deadline),'transport_scope');
++ return async(endpoint,params)=>{
++  req(endpoint==='changes'||endpoint==='offer','endpoint_scope');
++  const n=endpoint==='changes'?'change_id':'inner_id',value=params?.[n];
++  req(Object.keys(params??{}).length===1&&(endpoint==='changes'?int(value)&&value>=CURSOR:/^\d{1,20}$/.test(value??'')),'transport_params');
++  const before=clock();req(before<deadline,'transport_deadline');
++  const url=new URL(endpoint,BASE); url.searchParams.set(n,String(value));url.searchParams.set('api_key',apiKey);
++  let r;
++  try{r=await fetchImpl(url,{method:'GET',redirect:'error',headers:{accept:'application/json','accept-encoding':'identity'},
++   signal:AbortSignal.timeout(Math.min(caps.perRequestMs,deadline-before))});}
++  catch{throw Error('china_v4_continuation:transport_failed');}
++  if(r.status!==200){await r.body?.cancel();throw Error('auto_api_http_'+String(r.status));}
++  req(r.body&&r.headers.get('content-type')?.toLowerCase().includes('application/json'),'wire_shape');
++  const chunks=[];let size=0;
++  try{for await(const x of r.body){
++   size+=x.byteLength;req(size<=caps.routeBodyBytes&&clock()<deadline,'wire_bound');chunks.push(Buffer.from(x));
++  }}catch{throw Error('china_v4_continuation:wire_failed');}
++  const raw=Buffer.concat(chunks,size);
++  let payload;try{payload=JSON.parse(new TextDecoder('utf-8',{fatal:true}).decode(raw));}catch{throw Error('china_v4_continuation:wire_json');}
++  const observedMs=clock();
++  req(observedMs>=before&&observedMs<deadline,'clock');
++  return {payload,wireSha256:HASH(raw),observedAt:new Date(observedMs).toISOString()};
++ };
++}
++/** Archive-only orchestration. Inject reviewed actor with native collector and
++ * exact bounded private conditional persistence. Does not admit or publish. */
++export async function continueFromVerifiedV4({continuationId,proof,privateJournal,assertOwnerAndLiveBase,requestOnce,runNative,
++ validateLocalNormalizedState,snapshotStartedAt,linkedDetailsAuthorized=false,terminalOnly=false,priorPartialCapability,clock=Date.now,sleep=ms=>new Promise(r=>setTimeout(r,ms))}){
++ req(typeof linkedDetailsAuthorized==='boolean'&&typeof terminalOnly==='boolean','detail_option');
++ req(typeof continuationId==='string'&&/^[a-z0-9-]{1,64}$/.test(continuationId)&&iso(snapshotStartedAt),'request_scope');
++ const p=openExactContinuationProof(proof),started=clock(),deadline=started+caps.wallMs;
++ const prior=priorPartialCapability===undefined?null:verifiedPrivateResumePosition(priorPartialCapability),startCursor=prior?.resumeCursor??CURSOR;
++ const genesis={version:1,kind:'china_v4_verified_candidate_continuation',continuationId,market:'china',...p,newCollectionStartCursor:startCursor,...(prior?{priorPrivateCheckpoint:prior}:{})};
++ const genesisSha256=digest(genesis);
++ await assertOwnerAndLiveBase();
++ const opened=await privateJournal.openIfAbsent(genesis,genesisSha256);
++ req(opened?.created===true&&opened.sha256===genesisSha256,'immutable_genesis_already_used');
++ let active=startCursor,attempts=0,pages=0,details=0,eventCount=0,durableEvents=0,durablePages=0,priorStart=-Infinity,final=null,pending=null,head=genesisSha256;
++ const issued=new Set();
++ async function reqOnce(endpoint,params){
++  req(!final&&clock()<deadline,'request_deadline');
++  const key=endpoint==='changes'?'change_id':endpoint==='offer'?'inner_id':'';
++  req(key&&Object.keys(params??{}).length===1,'ordinary_source_scope');
++  const value=params[key],sig=endpoint+':'+value;
++  // Duplicate detail IDs can be semantically relevant on later source pages.
++  // Single transport attempt per native call, not a ban on distinct events.
++  if(endpoint==='changes'){
++   req(!pending&&value===active&&!issued.has(sig)&&++pages<=caps.changeRequests,'ordered_changes_cursor');issued.add(sig);
++  }else{
++   req(linkedDetailsAuthorized,'linked_detail_not_authorized');
++   req(pending?.allowedDetails.has(String(value)),'detail_identity_scope');
++   if(pending.detailPayloads.has(String(value)))return pending.detailPayloads.get(String(value));
++   req(++details<=caps.detailRequests,'detail_identity_scope');
++  }
++  req(++attempts<=caps.attempts,'ordinary_request_budget');
++  const wait=Math.max(0,caps.minimumSpacingMs+priorStart-clock()); if(wait)await sleep(wait);
++  req(clock()<deadline&&clock()-priorStart>=caps.minimumSpacingMs,'request_spacing_deadline');
++  await assertOwnerAndLiveBase();priorStart=clock();
++  const x=await requestOnce(endpoint,params);
++  req(SHA.test(x?.wireSha256??'')&&iso(x.observedAt)&&Date.parse(x.observedAt)>=priorStart&&Date.parse(x.observedAt)<=clock()&&clock()<deadline,'typed_transport_evidence');
++  if(endpoint!=='changes'){
++   pending.detailWitnesses.push({wireSha256:x.wireSha256,observedAt:x.observedAt});
++   pending.detailPayloads.set(String(value),x.payload);
++   return x.payload;
++  }
++  const v=x.payload;
++  req(Array.isArray(v?.result)&&v.meta?.cur_change_id===active,'native_cursor_echo');
++  if(v.result.length===0){
++   req(v.meta.next_change_id===undefined||v.meta.next_change_id===null||v.meta.next_change_id===active,'ambiguous_empty_page_cursor');
++   const evidence={version:1,kind:'china_che168_terminal_empty_wire_receipt',genesisSha256,persistedPageHeadSha256:head,
++    terminalCursor:active,responseWireSha256:x.wireSha256,observedAt:x.observedAt,providerRequestAttempts:attempts,
++    publicationAuthorized:false,cursorAdvanceAuthorized:false};
++   const sha=digest(evidence);
++   // Saved before native completion/admission/archive or a subsequent failure.
++   await assertOwnerAndLiveBase();
++   req(await privateJournal.recordTerminalIfAbsent(evidence,sha)===sha,'terminal_wire_durable');
++   final={evidence,sha256:sha};return v;
++  }
++  req(int(v.meta.next_change_id)&&v.meta.next_change_id>active,'invalid_source_next_cursor');
++  req((eventCount+=v.result.length)<=caps.eventCount,'source_event_budget');
++  const allowedDetails=new Set();
++  for(const e of v.result){
++   req(/^\d{1,20}$/.test(String(e?.inner_id??''))&&['added','changed','removed'].includes(e.change_type)&&
++        int(e.id)&&e.id>=active&&e.id<=v.meta.next_change_id&&iso(e.created_at),'native_event_shape');
++   if(e.change_type!=='removed')allowedDetails.add(String(e.inner_id));
++  }
++  pending={from:active,to:v.meta.next_change_id,changeCount:v.result.length,wireSha256:x.wireSha256,allowedDetails,detailWitnesses:[],detailPayloads:new Map()};
++  return v;
++ }
++ let result;
++ try{result=await runNative({resume:{cursor:startCursor,snapshotStartedAt},request:reqOnce,useChangeData:true,async onVerifiedPage({cursor,normalizedEvents}){
++  const p=pending;
++  req(p&&cursor===p.to&&Array.isArray(normalizedEvents)&&normalizedEvents.length===p.changeCount,'exact_page_normalization');
++  await assertOwnerAndLiveBase();
++  const record={version:1,kind:'china_v4_append_only_normalized_page',genesisSha256,previousHeadSha256:head,from:p.from,to:p.to,
++   changeCount:p.changeCount,sourceWireSha256:p.wireSha256,normalizedEventsSha256:digest(normalizedEvents),...(p.detailWitnesses.length?{linkedDetailWitnesses:p.detailWitnesses}:{} )};
++  const hash=digest(record);
++  req(await privateJournal.appendImmutablePage(record,normalizedEvents,hash)===hash,'page_commit_readback');
++  head=hash;active=cursor;durableEvents+=p.changeCount;durablePages++;pending=null;
++ }});}catch(error){
++  const raw=error instanceof Error?error.message:'', reason=(
++    /^china_v4_continuation:(?:request_deadline|ordered_changes_cursor|ordinary_request_budget|request_spacing_deadline|source_event_budget|linked_detail_not_authorized|linked_detail_missing_404|linked_detail_budget)$/.test(raw)||
++    /^auto_api_http_(?:402|429|5[0-9]{2})$/.test(raw))?raw:null;
++  // Only fully committed pages can be resumed. The observed but uncommitted
++  // page is not advanced. Terminal wire if present is already durable instead.
++  if(!reason||final||typeof privateJournal.recordPartialIfAbsent!=='function')throw error;
++  await assertOwnerAndLiveBase();
++  const partial={version:1,kind:'china_v4_ordinary_continuation_partial',genesisSha256,persistedPageHeadSha256:head,
++   baseCursor:startCursor,lastDurableCursor:active,durableEvents,durablePages,providerRequestAttempts:attempts,
++   ordinaryContinuationHasNotReachedTerminal:true,reason,publicationAuthorized:false,cursorAdvanceAuthorized:false};
++  const sha=digest(partial);
++  req(await privateJournal.recordPartialIfAbsent(partial,sha)===sha,'partial_witness_durable');
++  return Object.freeze({status:'partial_checkpoint_not_source_ready',lastDurableCursor:active,durablePages,durableEvents,
++    partialReceiptSha256:sha,reason,privateSourceReady:false,publicationAuthorized:false,cursorAdvanceAuthorized:false});
++ }
++ req(final&&!pending&&result?.cursor===active&&result?.initialCursor===startCursor&&result?.changes===eventCount,'native_completion');
++ if(terminalOnly){
++  await assertOwnerAndLiveBase();
++  return Object.freeze({status:'terminal_wire_and_pages_durable_only',terminalCursor:active,priorChanges:p.changes,
++   appendedChanges:eventCount,terminalReceiptSha256:final.sha256,terminalWireObservedAt:final.evidence.observedAt,
++   privateSourceReady:false,publicationAuthorized:false,cursorAdvanceAuthorized:false});
++ }
++ const state=await validateLocalNormalizedState({cursor:active,changes:eventCount,priorChanges:p.changes,previousPrivateEvents:prior?.events??0,terminal:final.evidence});
++ req(state?.fullyVerified===true&&state?.acceptedAncestorCursor===APPLIED&&state?.cursor===active&&
++  state.priorJournalHeadSha256===p.oldJournalHeadSha256&&state.priorChangesIncluded===p.changes&&
++  [state.replicaSha256,state.journalSha256,state.withdrawalsSha256,state.inventorySha256].every(x=>SHA.test(x??'')),'native_final_custody');
++ await assertOwnerAndLiveBase();
++ const ready={version:1,kind:'china_v4_ordinary_continuation_source_ready',genesisSha256,terminalReceiptSha256:final.sha256,headSha256:head,
++   startCursor,acceptedPublicCursor:APPLIED,terminalCursor:active,priorChanges:p.changes,appendedChanges:eventCount,
++   sourceObservedAt:final.evidence.observedAt,replicaSha256:state.replicaSha256,journalSha256:state.journalSha256,
++   withdrawalsSha256:state.withdrawalsSha256,inventorySha256:state.inventorySha256,publicationAuthorized:false,cursorAdvanceAuthorized:false};
++ req(await privateJournal.recordSourceReadyIfAbsent(ready,digest(ready))===digest(ready),'source_ready_durable');
++ return Object.freeze(ready);
++}
++
++/** Bridge to pinned native collectAutoApiChe168; apply is the same checked
++ * normalized journal reducer over an independently restored private SQLite. */
++export function bridgeNativeContinuation({collectAutoApiChe168,normalizeOrQuarantine,apply,readExisting,missingDetails}){
++ return async ({resume,request,useChangeData,onVerifiedPage})=>{
++  req(useChangeData===true&&Number.isSafeInteger(resume.cursor)&&resume.cursor>=CURSOR,'native_bridge_scope');
++  let events=[];
++  async function commit(e){await apply(e);events.push(e);}
++  return collectAutoApiChe168({resume,request,useChangeData:true,
++   missingDetails:{record:async e=>commit({kind:'missing_detail',innerId:String(e.inner_id),at:e.created_at,event:e.id}),
++    assertResolved:()=>missingDetails.assertResolved()},
++   onOffer:async (row,at,e)=>commit({...normalizeOrQuarantine(row,at),event:e.id}),
++   onPriceChange:async e=>{
++    const innerId=String(e.inner_id),price=Number(e.data.new_price);
++    req(Number.isFinite(price)&&price>0,'native_price_event');
++    if(!readExisting(innerId))return false;
++    await commit({kind:'price',innerId,price,at:e.created_at,event:e.id});return true;
++   },
++   onRemoval:async e=>commit({kind:'removed',innerId:String(e.inner_id),at:e.created_at,event:e.id}),
++   onProgress:async p=>{
++    const page=events;events=[];
++    await onVerifiedPage({cursor:p.cursor,normalizedEvents:page});
++   }});
++ };
++}
+--- /dev/null
++++ b/scripts/e2e-local.mjs
+@@ -0,0 +1,84 @@
++import {createHash} from 'node:crypto';
++import fs from 'node:fs/promises';
++import path from 'node:path';
++import {DatabaseSync} from 'node:sqlite';
++import {bridgeNativeContinuation,continueFromVerifiedV4} from './continuation.mjs';
++import {openExistingPrivateAppendPort} from './existing-private-port.mjs';
++import {makeAppendOnlyPrivateLedger} from './private-ledger.mjs';
++import {openVerifiedBaseReplay} from './base-replay.mjs';
++import {makeExistingReplicaPort} from './existing-replica-port.mjs';
++import {openRealSameSessionReconciliation} from './reconcile-real-session.mjs';
++import {createChe168MissingDetails} from './exact-missing-details.mjs';
++const sha=b=>createHash('sha256').update(b).digest('hex'), digest=x=>sha(JSON.stringify(x));
++const need=(v,k)=>{if(!v)throw Error('china_v4_stage:'+k)};
++const KEY=/^catalog\/provider-replicas\/che168\/[a-f0-9]{8}(?:-[a-f0-9]{4}){3}-[a-f0-9]{12}$/;
++function inventorySignature(filename){
++ const db=new DatabaseSync(filename,{readOnly:true,allowExtension:false});
++ const h=createHash('sha256').update('[');let rows=0;
++ try{
++  db.exec('PRAGMA query_only=ON; PRAGMA trusted_schema=OFF; PRAGMA cache_size=-16384;');
++  need(db.prepare('PRAGMA quick_check').get()?.quick_check==='ok','saved_sqlite_integrity');
++  for(const x of db.prepare('SELECT id,payload,event FROM inventory ORDER BY id COLLATE BINARY').iterate()){
++   need(typeof x.id==='string'&&/^\d{1,32}$/.test(x.id)&&typeof x.payload==='string'&&Number.isSafeInteger(x.event)&&
++    rows<500000&&Buffer.byteLength(x.payload)<=1<<20,'saved_sqlite_row');
++   if(rows++)h.update(',');h.update(JSON.stringify([x.id,sha(x.payload),x.event]));
++  }
++ }finally{db.close();}
++ h.update(']'); return {rows,sha256:h.digest('hex')};
++}
++/** Under the reviewed same-job V4 custody hook, caller supplies actual native
++ * save/restore helpers, a local private copy and bounded already-authorized
++ * replica IO callbacks. CLI/provider/production credentials deliberately absent. */
++export async function runContinuationInPrivateSession({
++ verified,actor,native,assertExactActor,requestOnce,collectAutoApiChe168,normalizeOrQuarantine,
++ saveReplica,restoreReplica,makeReplicaPort,continuationId,config,clock=Date.now,sleep,linkedDetailsAuthorized=false,
++}){
++ need(verified?.equivalence?.replayedAcceptedBase===true&&typeof verified.candidateFilename==='string'&&
++  path.isAbsolute(verified.candidateFilename)&&Number.isSafeInteger(config?.initialCursor),'verified_private_session');
++ const base=verified.candidateFilename,dir=path.dirname(base);
++ const consume=verified.consumablePrivateScratchCandidate===true;
++ const local=consume?base:path.join(dir,'continuation-base.sqlite'),readback=path.join(dir,'continuation-readback.sqlite');
++ if(!consume)await fs.copyFile(base,local,fs.constants.COPYFILE_EXCL);
++ await fs.chmod(local,0o600);
++ const now=clock, deadline=now()+45*60*1000,within=()=>need(now()<deadline,'wall_clock');
++ const reducer=openVerifiedBaseReplay({privateBaseFilename:local,config,cursorFrom:13180841,cursorTo:Number.MAX_SAFE_INTEGER,expectedEvents:100000,within});
++ try{
++  const p=await openExistingPrivateAppendPort({native,assertExactActor,clock});
++  const ledger=makeAppendOnlyPrivateLedger({...p,verifiedActor:actor});
++  const historical=verified.custodyReceipt?openRealSameSessionReconciliation(verified):null;
++  const missing=createChe168MissingDetails();
++  const apply=async e=>{await reducer.apply(e);missing.apply(e);historical?.apply(e);};
++  const priorPartialCapability=verified.resumePartialBeforeProvider
++   ?await verified.resumePartialBeforeProvider(async events=>{for(const event of events)await apply(event);})
++   :undefined;
++  const runNative=bridgeNativeContinuation({collectAutoApiChe168,normalizeOrQuarantine,
++   apply,readExisting:i=>reducer.readExisting(i),missingDetails:missing});
++  return await continueFromVerifiedV4({continuationId,proof:verified.proof,privateJournal:ledger,assertOwnerAndLiveBase:p.assertPrivate,
++   requestOnce,runNative,snapshotStartedAt:config.modifiedAt,clock,sleep,linkedDetailsAuthorized,priorPartialCapability,
++   async validateLocalNormalizedState({cursor,changes,previousPrivateEvents,terminal}){
++    const cumulative=changes+previousPrivateEvents;
++    const localFence=reducer.finishAt(cumulative,cursor);
++    const previous=historical?historical.finish({cursor,changes:cumulative,terminal,readCandidatePresence:id=>reducer.readFinalPresence(id)}):
++     await verified.reconcileHistoricalAndNewJournal({cursor,changes,terminal});
++    need(localFence.cursor===cursor&&previous?.acceptedAncestorCursor===13123821&&
++     /^[a-f0-9]{64}$/.test(previous.withdrawalsSha256??'')&&/^[a-f0-9]{64}$/.test(previous.journalSha256??''),'native_ancestry');
++    let expectedRoot=null;
++    const beforePut=async k=>{
++     await p.assertPrivate();
++     need(expectedRoot&&k.startsWith(expectedRoot+'/')&&/^(?:manifest\.json|(?:0|[1-9]\d{0,2})\.gz)$/.test(k.slice(expectedRoot.length+1)),'replica_key');
++    };
++    const port=makeReplicaPort?await makeReplicaPort({beforePut}):makeExistingReplicaPort({native,
++     existingOwner:p.ownerForExistingNativeReplicaPort,assertPrivate:p.assertPrivate,beforePut,
++     claimDurably:root=>ledger.recordImmutableReplicaClaim(root,digest(terminal))});
++    const descriptor=await saveReplica({storage:port,filename:local,binding:verified.replicaBinding,cursor,immutable:true,
++     beforeWrite:async root=>{need(expectedRoot===null&&KEY.test(root),'new_replica_root');await port.claimImmutableRoot(root);expectedRoot=root;}});
++    need(descriptor.key===expectedRoot&&descriptor.cursor===cursor&&descriptor.binding===verified.replicaBinding,'native_put_descriptor');
++    await restoreReplica({storage:port,filename:readback,descriptor,binding:verified.replicaBinding,cursor});
++    const want=inventorySignature(local),got=inventorySignature(readback);
++    need(got.rows===want.rows&&got.sha256===want.sha256,'signed_sqlite_readback_mismatch');
++    return {fullyVerified:true,cursor,acceptedAncestorCursor:13123821,priorJournalHeadSha256:previous.priorJournalHeadSha256,
++     priorChangesIncluded:previous.priorChangesIncluded,replicaSha256:descriptor.sha256,
++     journalSha256:previous.journalSha256,withdrawalsSha256:previous.withdrawalsSha256,inventorySha256:got.sha256};
++   }});
++ }finally{reducer.close();}
++}
+--- /dev/null
++++ b/scripts/private-ledger.mjs
+@@ -0,0 +1,74 @@
++import {createHash} from 'node:crypto';
++const hash=s=>createHash('sha256').update(s).digest('hex');
++const H=/^[a-f0-9]{64}$/,RUN=/^[1-9]\d{0,19}$/,GIT=/^[a-f0-9]{40}$/;
++const fail=(ok,why)=>{if(!ok)throw Error('china_v4_append:'+why)};
++const JSON_BYTES=16*1024**2,MAX_TOTAL=256*1024**2;
++const prefix='catalog/intake-working/che168-v1/';
++const uuid=s=>[s.slice(0,8),s.slice(8,12),s.slice(12,16),s.slice(16,20),s.slice(20,32)].join('-');
++/** Existing Regcloud V4 scoped primitives only (not a capability grant).
++ * caller checks exact authenticated launch plus existing bucket/object privacy. */
++export function makeAppendOnlyPrivateLedger({storage,verifiedActor,assertPrivate}){
++ fail(verifiedActor?.repositoryId==='1289722938'&&RUN.test(verifiedActor?.runId??'')&&verifiedActor.attempt==='1'&&
++  GIT.test(verifiedActor.revision??'')&&H.test(verifiedActor.ownerApprovalSha256??''),'actor_scope');
++ fail(storage&&typeof storage.writeJson==='function'&&typeof storage.readJsonWithMeta==='function'&&typeof assertPrivate==='function','existing_port_required');
++ const owner=Object.freeze({...verifiedActor});
++ let root=null,head=null,final=null,n=0,writtenBytes=0,closed=false;
++ async function append(kind,key,data,max=JSON_BYTES){
++  fail(root&&key.startsWith(root+'/')&&/^[a-f0-9-]{36}\.json$/.test(key.slice(root.length+1)),'private_key_scope');
++  const serialized=JSON.stringify(data),bytes=Buffer.byteLength(serialized);
++  fail(bytes>0&&bytes<=max&&(writtenBytes+=bytes)<=MAX_TOTAL,'private_write_budget');
++  await assertPrivate();
++  // No overwrite and no conflict-as-success replay. Existing marker permanently holds the actor.
++  await storage.writeJson(key,data,{ifNoneMatch:'*'});
++  const after=await storage.readJsonWithMeta(key,null);
++  fail(after?.found===true&&typeof after.etag==='string'&&after.etag.length>0&&
++   hash(JSON.stringify(after.value))===hash(serialized),'conditional_readback');
++  await assertPrivate();
++  return hash(serialized);
++ }
++ const key=(k,i=0)=>root+'/'+uuid(hash('china-v4-continuation-v1:'+k+':'+i)) + '.json';
++ return Object.freeze({
++  async openIfAbsent(genesis,sha256){
++   fail(!root&&genesis?.kind==='china_v4_verified_candidate_continuation'&&genesis.cursor===13180841&&
++    genesis.baseCursor===13123821&&hash(JSON.stringify(genesis))===sha256,'genesis_scope');
++   const binding=hash(JSON.stringify([owner.repositoryId,owner.runId,owner.attempt,owner.revision,owner.ownerApprovalSha256,sha256]));
++   // Separate per-run immutable namespace using the existing authorized UUID object class.
++   const derived=BigInt('0x'+binding.slice(0,20)).toString();
++   // Native journal ID is 14 hex digits (~17 decimal); runtime data gate permits up to 20 decimal.
++   // Keep this separately derived 64-bit ID within that already authorized class.
++   const id=BigInt('0x'+binding.slice(0,16)).toString();
++   fail(BigInt(derived)>0n&&RUN.test(id),'root_binding');
++   root=prefix+id;
++   await append('genesis',key('genesis'),{owner,binding,genesis,genesisSha256:sha256},32*1024);
++   head=sha256;return{created:true,sha256};
++  },
++  async appendImmutablePage(record,events,sha256){
++   fail(head&&!final&&!closed&&record?.previousHeadSha256===head&&
++    hash(JSON.stringify(record))===sha256&&hash(JSON.stringify(events))===record.normalizedEventsSha256&&
++    Array.isArray(events)&&events.length===record.changeCount&&++n<=256,'page_chain');
++   await append('page',key('page',n),{record,events,sha256});head=sha256;return sha256;
++  },
++  async recordPartialIfAbsent(record,sha256){
++   fail(head&&!final&&!closed&&record?.persistedPageHeadSha256===head&&record.durablePages===n&&
++    record.publicationAuthorized===false&&record.cursorAdvanceAuthorized===false&&hash(JSON.stringify(record))===sha256,'partial_chain');
++   await append('partial',key('partial'),{record,sha256},32*1024);closed=true;return sha256;
++  },
++  async recordTerminalIfAbsent(record,sha256){
++   fail(head&&!final&&!closed&&record?.persistedPageHeadSha256===head&&record.publicationAuthorized===false&&
++    record.cursorAdvanceAuthorized===false&&hash(JSON.stringify(record))===sha256,'terminal_chain');
++   await append('terminal',key('terminal'),{record,sha256},32*1024);final=sha256;return sha256;
++  },
++  async recordImmutableReplicaClaim(replicaRoot,terminalReceiptSha256){
++   fail(final===terminalReceiptSha256&&!closed&&typeof replicaRoot==='string'&&
++   /^catalog\/provider-replicas\/che168\/[a-f0-9-]{36}$/.test(replicaRoot),'replica_claim');
++   const record={kind:'china_v4_owned_continuation_replica_claim',terminalReceiptSha256,privateReplicaRoot:replicaRoot};
++   await append('claim',key('claim'),record,32*1024);
++   return {created:true,readBackExact:true};
++  },
++  async recordSourceReadyIfAbsent(record,sha256){
++   fail(final&&!closed&&record?.terminalReceiptSha256===final&&record.headSha256===head&&
++    record.publicationAuthorized===false&&record.cursorAdvanceAuthorized===false&&hash(JSON.stringify(record))===sha256,'ready_chain');
++   await append('ready',key('ready'),{record,sha256},32*1024);closed=true;return sha256;
++  },
++ });
++}
+--- /dev/null
++++ b/scripts/existing-private-port.mjs
+@@ -0,0 +1,44 @@
++/** Stationary wiring around the already-reviewed V4 REGCLOUD native actor.
++ * No environment, credentials, alternate auth, supplier, or generic IO. */
++const CUSTODY_KEY=/^catalog\/intake-working\/che168-v1\/[1-9]\d{0,19}\/[a-f0-9]{8}(?:-[a-f0-9]{4}){3}-[a-f0-9]{12}\.json$/;
++const H=/^[a-f0-9]{64}$/;
++const need=(ok,k)=>{if(!ok)throw Error('china_v4_append_transport:'+k)};
++export async function openExistingPrivateAppendPort({native,assertExactActor,clock=Date.now}){
++ for(const method of ['readChinaPrivateStageBucketPrivacy','readChinaDailySourceJson','putChinaDailySourcePrivate'])
++  need(typeof native?.[method]==='function','pinned_v4_port');
++ need(typeof assertExactActor==='function','existing_actor');
++ await assertExactActor();
++ const seal=await native.readChinaPrivateStageBucketPrivacy();
++ need(typeof seal?.owner==='string'&&seal.owner.length>=1&&seal.owner.length<=256&&(seal.policySha256===null||typeof seal.policySha256==='string'&&
++   H.test(seal.policySha256)),'owner_only_bucket');
++ let time=clock(),qualifiedRoot=null;
++ function scope(key){
++  need(typeof key==='string'&&CUSTODY_KEY.test(key),'exact_archive_scope');
++  const root=key.slice(0,key.lastIndexOf('/'));
++  if(qualifiedRoot===null)qualifiedRoot=root;
++  need(root===qualifiedRoot,'private_root_changed');
++ }
++ const assertPrivate=async()=>{
++  await assertExactActor();
++  const now=clock();
++  need(now>=time,'clock_regression');
++  if(now-time>=60000){
++   const next=await native.readChinaPrivateStageBucketPrivacy();
++   need(next?.owner===seal.owner&&next.policySha256===seal.policySha256,'bucket_privacy_changed');
++   time=now;
++  }
++ };
++ return Object.freeze({assertPrivate,ownerForExistingNativeReplicaPort:seal.owner,storage:Object.freeze({
++  async writeJson(key,value,condition){
++   scope(key);await assertPrivate();
++   need(condition?.ifNoneMatch==='*'&&Object.keys(condition).length===1,'immutable_write');
++   const raw=Buffer.from(JSON.stringify(value));
++   need(raw.length>0&&raw.length<=16*1024*1024,'signed_byte_bound');
++   return native.putChinaDailySourcePrivate(key,raw,'application/json',{ifNoneMatch:'*'},seal.owner);
++  },
++  async readJsonWithMeta(key,fallback){
++   scope(key);await assertPrivate();
++   return native.readChinaDailySourceJson(key,fallback);
++  }
++ })});
++}
+--- /dev/null
++++ b/scripts/existing-replica-port.mjs
+@@ -0,0 +1,42 @@
++import {createHash} from 'node:crypto';
++const ROOT=/^catalog\/provider-replicas\/che168\/[a-f0-9]{8}(?:-[a-f0-9]{4}){3}-[a-f0-9]{12}$/;
++const need=(ok,k)=>{if(!ok)throw Error('china_v4_replica:'+k)};
++const H=x=>createHash('sha256').update(x).digest('hex');
++/** Use only the existing V4 private-native JSON/gzip/ACL methods.
++ * claimDurably binds this new root to the exact owner run/terminal receipt
++ * and must return an independently read/verified claim before any part PUT. */
++export function makeExistingReplicaPort({native,existingOwner,assertPrivate,claimDurably,beforePut}){
++ need(typeof existingOwner==='string'&&existingOwner.length>0&&existingOwner.length<=256&&
++  [assertPrivate,claimDurably,beforePut].every(f=>typeof f==='function'),'owner_scope');
++ for(const name of ['putChinaDailySourcePrivate','readChinaDailySourceJson','getChinaReplicaPartBounded'])
++  need(typeof native?.[name]==='function','existing_native_port');
++ let root=null,parts=0,encoded=0,manifest=false,reads=0;
++ const file=(key,kind)=>root&&key.startsWith(root+'/')&&(kind==='manifest'?key===root+'/manifest.json':
++  /^(?:0|[1-9]\d{0,2})\.gz$/.test(key.slice(root.length+1)));
++ async function put(key,body,kind,condition){
++  need(file(key,kind)&&Buffer.isBuffer(body)&&condition?.ifNoneMatch==='*'&&Object.keys(condition).length===1,'immutable_replica_scope');
++  if(kind==='part'){
++   need(!manifest&&parts<256&&key===root+'/'+parts+'.gz'&&body.length>0&&body.length<=17*1024**2&&
++     (encoded+=body.length)<=1024**3,'replica_part_budget');parts++;
++  }else{
++   need(!manifest&&parts>0&&body.length<=512*1024,'manifest_scope');manifest=true;
++  }
++  await beforePut(key);await assertPrivate();
++  const r=await native.putChinaDailySourcePrivate(key,body,kind==='part'?'application/gzip':'application/json',{ifNoneMatch:'*'},existingOwner);
++  need(r?.size===body.length&&r.checksum===H(body),'signed_replica_write_receipt');
++ }
++ return Object.freeze({driver:'object',
++  async claimImmutableRoot(k){
++   need(root===null&&ROOT.test(k),'first_unique_root');
++   await assertPrivate();const x=await claimDurably(k);
++   need(x?.created===true&&x.readBackExact===true,'root_custody');
++   root=k;
++  },
++  async putBinary(key,bytes,type,cond){need(type==='application/gzip','binary_type');return put(key,bytes,'part',cond);},
++  async writeJson(key,value,cond){return put(key,Buffer.from(JSON.stringify(value)),'manifest',cond);},
++  async readJson(key,fallback){need(manifest&&file(key,'manifest')&&reads++===0,'read_manifest_once');await assertPrivate();return (await native.readChinaDailySourceJson(key,fallback)).value;},
++  async getBinary(key){need(manifest&&file(key,'part')&&reads<=parts&&key===root+'/'+(reads-1)+'.gz','read_part_scope');reads++;
++    await assertPrivate(); const data=await native.getChinaReplicaPartBounded(key,17*1024**2);
++    need(Buffer.isBuffer(data)&&data.length>0&&data.length<=17*1024**2,'read_part_bound');return {data};},
++ });
++}
+--- /dev/null
++++ b/scripts/reconcile-real-session.mjs
+@@ -0,0 +1,52 @@
++import {createHash} from 'node:crypto';
++const sha=s=>createHash('sha256').update(s).digest('hex');
++const digest=x=>sha(JSON.stringify(x));
++const need=(ok,k)=>{if(!ok)throw Error('china_v4_history:'+k)};
++const ORIGINAL_JOURNAL='36c279e55fd61db002a85b7720fd32980124ce4d60ea08cb8f985d9f2359f9c2';
++const ORIGINAL_INV='c6ca74a1071f078e633d84b9b928338ab69c73dde29a5d50c43a255471d8dc5f';
++const SOURCE='autohome_used_china_open',ID=/^\d{1,32}$/;
++const stable=i=>sha(SOURCE+':'+i).slice(0,24);
++/** Consumes the exact private callback values already present in the hosted
++ * replay. No second reads; no direct network/storage. */
++export function openRealSameSessionReconciliation({custodyReceipt,privateLedger,equivalence}){
++ need(custodyReceipt?.journalHeadSha256===ORIGINAL_JOURNAL&&custodyReceipt.journalChanges===57020&&
++  custodyReceipt.acceptedStartCursor===13123821&&custodyReceipt.candidateTerminalCursor===13180841&&
++  custodyReceipt.inventoryPayloadLedgerSha256===ORIGINAL_INV&&equivalence?.replayedAcceptedBase===true&&
++  equivalence.inventoryPayloadLedgerSha256===ORIGINAL_INV&&equivalence.exactInventoryRows===289167&&
++  Array.isArray(privateLedger)&&privateLedger.length<=500000&&
++  digest(privateLedger)===custodyReceipt.custodyReconciledWithdrawalSha256,'exact_old_chain');
++ const rows=new Map();
++ for(const r of privateLedger){
++  const id=r.sourceOfferId;
++  need(typeof id==='string'&&ID.test(id)&&r.id===stable(id)&&r.sourceId===SOURCE&&r.market==='china'&&
++   r.status==='removed'&&typeof r.observedAt==='string'&&Number.isFinite(Date.parse(r.observedAt))&&
++   Number.isSafeInteger(r.confirmedRemovalEvent)&&r.confirmedRemovalEvent<=13180841&&
++   ['present_reinserted','absent'].includes(r.terminalCandidateStatus)&&!rows.has(id),'historical_withdrawals');
++  rows.set(id,{...r});
++ }
++ let n=0,prev=13180841;
++ const journal=createHash('sha256').update('china_v4_native_immutable_chain_and_continuation_v1\n').update(ORIGINAL_JOURNAL+'\n');
++ return Object.freeze({
++  apply(e){
++   const id=e?.kind==='offer'?e.offer?.sourceOfferId:e?.innerId;
++   need(typeof id==='string'&&ID.test(id)&&['offer','price','removed','quarantine','missing_detail'].includes(e.kind)&&
++    Number.isSafeInteger(e.event)&&e.event>=prev&&++n<=100000&&typeof e.at==='string'&&Number.isFinite(Date.parse(e.at)),'append_event');
++   prev=e.event;journal.update(digest(e)+'\n');
++   if(e.kind==='removed'){
++    rows.set(id,{id:stable(id),sourceId:SOURCE,sourceOfferId:id,market:'china',status:'removed',observedAt:e.at,
++      confirmedRemovalEvent:e.event,terminalChangedEvent:e.event,terminalCandidateStatus:'absent'});
++   }else if(rows.has(id)&&e.kind!=='missing_detail'){
++    const r=rows.get(id);
++    r.terminalChangedEvent=e.event;
++    r.terminalCandidateStatus=(e.kind==='offer'||e.kind==='price')?'present_reinserted':'absent';
++   }
++  },
++  finish({cursor,changes,terminal,readCandidatePresence}){
++   need(changes===n&&terminal?.terminalCursor===cursor&&cursor>=prev&&typeof readCandidatePresence==='function','final_cursor');
++   // Prove each withdrawal's final classification from same native SQLite.
++   for(const [id,r] of rows)need(readCandidatePresence(id)===(r.terminalCandidateStatus==='present_reinserted'),'final_candidate_availability');
++   return {acceptedAncestorCursor:13123821,priorJournalHeadSha256:ORIGINAL_JOURNAL,priorChangesIncluded:57020,
++    journalSha256:journal.copy().update(digest(terminal)).digest('hex'),withdrawalsSha256:digest([...rows.values()])};
++  },
++ });
++}
+--- /dev/null
++++ b/scripts/read-partial.mjs
+@@ -0,0 +1,37 @@
++import {createHash} from 'node:crypto';
++const H=/^[a-f0-9]{64}$/,sha=x=>createHash('sha256').update(JSON.stringify(x)??'undefined').digest('hex'),need=(v,k)=>{if(!v)throw Error('china_v4_partial:'+k)};
++const minted=new WeakMap;
++/** Read callbacks must remain exact authorized private immutable keys of
++ * the prior signed run; never accept a user/operator nominated URL. */
++export async function authenticatePartialV4({expected,readGenesis,readPartial,readPage,replayVerifiedPage}){
++ need(expected?.scope==='reviewed_previous_run'&&H.test(expected.genesisSha256??'')&&H.test(expected.partialReceiptSha256??'')&&
++  typeof replayVerifiedPage==='function','scope');
++ const g=await readGenesis(),p=await readPartial();
++ need(sha(g?.genesis)===expected.genesisSha256&&g.genesisSha256===expected.genesisSha256&&
++  g.genesis.cursor===13180841&&g.genesis.baseCursor===13123821&&g.genesis.market==='china','genesis');
++ const r=p?.record;
++ need(sha(r)===expected.partialReceiptSha256&&p.sha256===expected.partialReceiptSha256&&
++  r?.kind==='china_v4_ordinary_continuation_partial'&&r.genesisSha256===expected.genesisSha256&&
++  r.ordinaryContinuationHasNotReachedTerminal===true&&r.publicationAuthorized===false&&r.cursorAdvanceAuthorized===false&&
++  r.baseCursor===13180841&&Number.isSafeInteger(r.durablePages)&&r.durablePages>=1&&r.durablePages<=256&&
++  Number.isSafeInteger(r.durableEvents)&&r.durableEvents>=1&&r.durableEvents<=50000,'partial');
++ let head=expected.genesisSha256,cursor=r.baseCursor,events=0;
++ for(let k=1;k<=r.durablePages;k++){
++  const bytes=await readPage(k),page=bytes?.record;
++  need(page?.genesisSha256===expected.genesisSha256&&page.previousHeadSha256===head&&page.from===cursor&&
++   Number.isSafeInteger(page.to)&&page.to>cursor&&Array.isArray(bytes.events)&&bytes.events.length===page.changeCount&&
++   bytes.events.length>0&&H.test(page.sourceWireSha256)&&sha(bytes.events)===page.normalizedEventsSha256&&sha(page)===bytes.sha256,
++   'page_chain');
++  await replayVerifiedPage(bytes.events,page);
++  head=bytes.sha256;cursor=page.to;events+=page.changeCount;
++ }
++ need(head===r.persistedPageHeadSha256&&cursor===r.lastDurableCursor&&events===r.durableEvents,'partial_terminal');
++ const token=Object.freeze({kind:'verified_private_resume_only'});
++ minted.set(token,Object.freeze({resumeCursor:cursor,events,headSha256:head,priorPartialSha256:expected.partialReceiptSha256}));
++ return token;
++}
++export function verifiedPrivateResumePosition(token){
++ const x=minted.get(token);
++ need(x,'untrusted');
++ return x;
++}
+--- /dev/null
++++ b/scripts/base-replay.mjs
+@@ -0,0 +1,120 @@
++import {DatabaseSync} from 'node:sqlite';
++import {createHash} from 'node:crypto';
++import {createChe168MissingDetails} from './exact-missing-details.mjs';
++const sourceId='autohome_used_china_open', SHA=/^[a-f0-9]{64}$/, ID=/^\d{1,32}$/;
++const fail=(ok,k)=>{if(!ok)throw Error('china_v4_custody_base_'+k)};
++const sha=x=>createHash('sha256').update(x).digest('hex');
++const stableOfferId=(s,id)=>sha(s+':'+id).slice(0,24);
++const isAutoApiChe168QuarantineReason=x=>x==='missing_model'||x==='invalid_year';
++function validate(db){
++ const schema=db.prepare('SELECT type,name,tbl_name,sql FROM sqlite_schema ORDER BY name COLLATE BINARY').all();
++ const tbl=schema.find(x=>x.type==='table'&&x.name==='inventory');
++ fail(schema.length===2&&tbl?.tbl_name==='inventory'&&tbl.sql.replace(/\s/g,'').toLowerCase()===
++   'createtableinventory(idtextprimarykey,payloadtextnotnull,eventintegernotnull)'&&
++   schema.some(r=>r.type==='index'&&r.name==='sqlite_autoindex_inventory_1'&&r.tbl_name==='inventory'&&r.sql===null),'schema');
++ fail(db.prepare('PRAGMA quick_check').get()?.quick_check==='ok','integrity');
++}
++/** Only writes a new, runtime-owned PRIVATE restore of the old SQLite file.
++ * Never open the accepted shared file or a pathname supplied by source data. */
++export function openVerifiedBaseReplay({privateBaseFilename,config,cursorFrom,cursorTo,expectedEvents,within=()=>{}}){
++ fail(typeof privateBaseFilename==='string'&&privateBaseFilename.startsWith('/')&&
++  Number.isSafeInteger(config?.initialCursor)&&config.initialCursor<=cursorFrom&&Number.isSafeInteger(cursorFrom)&&
++  Number.isSafeInteger(cursorTo)&&cursorTo>cursorFrom&&Number.isSafeInteger(expectedEvents)&&expectedEvents>0&&expectedEvents<=500000,'input');
++ const db=new DatabaseSync(privateBaseFilename,{readOnly:false,allowExtension:false});
++ const withdrawals=new Map(),quarantine=new Map(),missingDetails=createChe168MissingDetails();
++ let count=0,current=cursorFrom,finished=false,closed=false;
++ try{
++  db.exec('PRAGMA trusted_schema=OFF; PRAGMA cache_size=-16384; PRAGMA temp_store=FILE; PRAGMA journal_mode=DELETE;');
++  validate(db);
++  const pageBytes=db.prepare('PRAGMA page_size').get()?.page_size;
++  fail(Number.isSafeInteger(pageBytes)&&pageBytes>=512&&pageBytes<=65536,'page_size');
++  const maxPages=Math.floor(4*1024**3/pageBytes);
++  fail(db.prepare('PRAGMA page_count').get()?.page_count<=maxPages&&
++    db.prepare('PRAGMA max_page_count='+maxPages).get()?.max_page_count===maxPages,'scratch_db_limit');
++ }catch(e){db.close();throw e;}
++ const put=db.prepare('INSERT INTO inventory VALUES(?,?,?) ON CONFLICT(id) DO UPDATE SET payload=excluded.payload,event=excluded.event WHERE excluded.event>=inventory.event');
++ const get=db.prepare('SELECT payload,event FROM inventory WHERE id=?'),remove=db.prepare('DELETE FROM inventory WHERE id=? AND event<=?');
++ // Native apply body below is copied exactly from the authenticated V4 worker
++ // (normalization was already done before the journal transaction committed).
++  const apply=async event=>{
++    if(!Number.isSafeInteger(event?.event)||event.event<config.initialCursor-1)throw Error('auto_api_invalid_replica_event');
++    if(event.kind==='offer'){
++      const o=event.offer;
++      if(o?.sourceId!==sourceId||o.market!=='china'||o.id!==stableOfferId(sourceId,String(o.sourceOfferId))
++        ||o.operational?.provider!=='auto-api.com'||o.operational?.detailIdentityVerified!==true)throw Error('auto_api_invalid_replica_offer');
++      put.run(String(o.sourceOfferId),JSON.stringify(o),event.event);quarantine.delete(String(o.sourceOfferId));
++    }else if(event.kind==='price'){
++      const row=get.get(event.innerId);
++      if(!row||!Number.isFinite(event.price)||event.price<=0||!Number.isFinite(Date.parse(event.at)))throw Error('auto_api_invalid_replica_price');
++      if(row.event<=event.event){const o=JSON.parse(row.payload);
++        o.sourcePrice=event.price;o.totalRub=null;o.calculationStatus='needs_data';o.updatedAt=event.at;
++        o.operational={...o.operational,lastSeenAt:event.at,che168PriceChangeId:event.event};
++        put.run(event.innerId,JSON.stringify(o),event.event);}
++    }else if(event.kind==='removed'||event.kind==='quarantine'){
++      if(!/^\d+$/.test(event.innerId)||!Number.isFinite(Date.parse(event.at)))throw Error('auto_api_invalid_replica_event');
++      remove.run(event.innerId,event.event);
++      if(event.kind==='quarantine'){
++        if(!isAutoApiChe168QuarantineReason(event.reason))throw Error('auto_api_invalid_replica_quarantine');
++        quarantine.set(event.innerId,event.reason);
++      }else{const id=stableOfferId(sourceId,event.innerId);withdrawals.set(id,{id,sourceId,sourceOfferId:event.innerId,market:'china',status:'removed',observedAt:event.at});quarantine.delete(event.innerId);}
++    }else if(event.kind!=='missing_detail')throw Error('auto_api_invalid_replica_event');
++    missingDetails.apply(event);
++  };
++ db.exec('BEGIN');
++ return Object.freeze({
++  async apply(event){
++   within();
++   const n=event?.event;
++   fail(!finished&&!closed&&Number.isSafeInteger(n)&&n>=current&&n<=cursorTo&&++count<=expectedEvents,'event_scope');
++   current=n;
++   await apply(event);
++  },
++  readExisting(innerId){
++   fail(!closed&&!finished&&typeof innerId==='string'&&ID.test(innerId),'local_source_id');
++   return Boolean(get.get(innerId));
++  },
++  readFinalPresence(innerId){
++   fail(!closed&&finished&&typeof innerId==='string'&&ID.test(innerId),'final_source_id');
++   return Boolean(get.get(innerId));
++  },
++  finishAt(countExpected,cursorExpected){
++   within();
++   fail(!closed&&!finished&&count===countExpected&&Number.isSafeInteger(cursorExpected)&&cursorExpected>=current,'sealed_cursor');
++   missingDetails.assertResolved();db.exec('COMMIT');finished=true;validate(db);
++   return {events:count,cursor:cursorExpected};
++  },
++  async compare({candidateFilename,expectedCandidateLedgerSha256,expectedRows,maxBytes=8*1024**3}){
++   within();
++   fail(!closed&&!finished&&count===expectedEvents&&SHA.test(expectedCandidateLedgerSha256)&&Number.isSafeInteger(expectedRows)&&expectedRows>0&&expectedRows<=500000,'terminal_scope');
++   missingDetails.assertResolved();db.exec('COMMIT');finished=true;
++   const right=new DatabaseSync(candidateFilename,{readOnly:true,allowExtension:false});
++   let l,r;
++   try{
++    right.exec('PRAGMA query_only=ON; PRAGMA trusted_schema=OFF; PRAGMA cache_size=-16384;');
++    // Existing candidate verifier already proved physical schema, full
++    // integrity, and stable inode/stat immediately before this comparison.
++    validate(right);
++    const sel='SELECT id,payload,event FROM inventory ORDER BY id COLLATE BINARY';
++    l=db.prepare(sel).iterate();r=right.prepare(sel).iterate();const digest=createHash('sha256').update('[');
++    let rows=0,bytes=0,previous='';
++    for(;;){
++     if((rows&1023)===0)within();
++     const a=l.next(),b=r.next();
++     fail(a.done===b.done,'row_count');
++     if(a.done)break;
++     const x=a.value,y=b.value;
++     fail(typeof x.id==='string'&&ID.test(x.id)&&x.id>previous&&x.id===y.id&&typeof x.payload==='string'&&x.payload===y.payload&&
++       Number.isSafeInteger(x.event)&&x.event===y.event&&x.event>=config.initialCursor-1&&x.event<=cursorTo,'exact_row');
++     const n=Buffer.byteLength(x.payload);fail(n>0&&n<=1024*1024&&(bytes+=n)<=maxBytes,'compare_byte_scope');
++     fail(rows<expectedRows,'row_count');if(rows++)digest.update(',');digest.update(JSON.stringify([x.id,sha(x.payload),x.event]));previous=x.id;
++    }
++    const h=digest.update(']').digest('hex');
++    fail(rows===expectedRows&&h===expectedCandidateLedgerSha256,'exact_candidate_ledger');
++    return Object.freeze({exactInventoryRows:rows,replayedJournalEvents:count,inventoryPayloadLedgerSha256:h,
++      replayedAcceptedBase:true,untouchedBaseInventoryEqualityProven:true,priceOnlyBaseFieldEqualityProven:true,storageWrites:0,
++      publicationAuthorized:false,cursorAdvanced:false});
++   }finally{l?.return?.();r?.return?.();right.close();}
++  },
++  close(){if(closed)return;closed=true;if(!finished)try{db.exec('ROLLBACK');}catch{}db.close();}
++ });
++}
+--- /dev/null
++++ b/scripts/exact-missing-details.mjs
+@@ -0,0 +1,22 @@
++/** Tracks unresolved detail reads through a complete ordered replay. Persist each
++ * missing event in the private journal; a working cursor is never publication.
++ * A 404 alone cannot remove a vehicle or make the replay publishable. */
++export function createChe168MissingDetails() {
++  const pending=new Map();
++  return {
++    apply(event) {
++      const id=String(event.kind==='offer'?event.offer?.sourceOfferId:event.innerId);
++      if(!/^\d+$/.test(id)||!Number.isSafeInteger(event.event)||!Number.isFinite(Date.parse(event.at)))throw Error('auto_api_invalid_missing_detail_event');
++      if(event.kind==='missing_detail') {
++        const old=pending.get(id);
++        if(!old||event.event>old.event)pending.set(id,{event:event.event,at:event.at});
++        if(pending.size>100000)throw Error('auto_api_missing_detail_budget');
++      } else if(['offer','removed','quarantine'].includes(event.kind)) {
++        const old=pending.get(id);
++        if(old&&event.event>old.event&&Date.parse(event.at)>=Date.parse(old.at))pending.delete(id);
++      }
++    },
++    assertResolved() { if(pending.size)throw Error('auto_api_detail_404_unresolved'); },
++    get size() {return pending.size;}
++  };
++}
+--- /dev/null
++++ b/scripts/recover-first-partial.mjs
+@@ -0,0 +1,51 @@
++import {createHash} from 'node:crypto';
++import {authenticatePartialV4} from './read-partial.mjs';
++const sha=x=>createHash('sha256').update(x).digest('hex'), d=x=>sha(JSON.stringify(x));
++export const priorOwner=Object.freeze({repositoryId:'1289722938',runId:'44860270709',attempt:'1',revision:'78a7a0b0a316d80315f173ff4afa034167540129',ownerApprovalSha256:'31070225bdb8c62b8f884c0ade8785b7d904e0495838a7228b8e9e481553b528'});
++export const expectedPartial='373984db2a76029a599e7969e871af41fdbcb2fbe3d9589366bb6810f70edbba';
++const genesis=Object.freeze({version:1,kind:'china_v4_verified_candidate_continuation',continuationId:'verified-v4-che168-44860270709',
++ market:'china',baseCursor:13123821,cursor:13180841,changes:57020,
++ oldPinSha256:'a14bda5ccf4c4e8a3920ff8858d6bad6a8d5307fad0d706dd8236650a9b4f4d2',
++ oldJournalHeadSha256:'36c279e55fd61db002a85b7720fd32980124ce4d60ea08cb8f985d9f2359f9c2',
++ replicaManifestSha256:'e55a984351971929609780d2aa588215b78eb51c1debb4da07e13621481e9a0d',
++ inventorySha256:'c6ca74a1071f078e633d84b9b928338ab69c73dde29a5d50c43a255471d8dc5f',newCollectionStartCursor:13180841});
++const genesisSha256=d(genesis), binding=d([priorOwner.repositoryId,priorOwner.runId,priorOwner.attempt,priorOwner.revision,priorOwner.ownerApprovalSha256,genesisSha256]);
++const root='catalog/intake-working/che168-v1/'+BigInt('0x'+binding.slice(0,16)).toString();
++const uuid=s=>[s.slice(0,8),s.slice(8,12),s.slice(12,16),s.slice(16,20),s.slice(20,32)].join('-');
++export const firstPartialKey=(kind,n=0)=>{
++ if(!(['genesis','partial'].includes(kind)&&n===0||kind==='page'&&Number.isSafeInteger(n)&&n>=1&&n<=64))throw Error('china_v4_partial:fixed_read_scope');
++ return root+'/'+uuid(sha('china-v4-continuation-v1:'+kind+':'+n))+'.json';
++};
++const need=(ok,k)=>{if(!ok)throw Error('china_v4_partial:'+k)};
++export async function readActualFirstPartial({native,assertExactActor}){
++ need(typeof native?.readChinaDailySourceJson==='function'&&typeof assertExactActor==='function','native_read');
++ let total=0;
++ async function get(kind,n){
++  await assertExactActor();
++  const r=await native.readChinaDailySourceJson(firstPartialKey(kind,n),null);
++  need(r?.found===true&&typeof r.etag==='string'&&r.etag.length>0,'previous_receipt_missing');
++  const bytes=Buffer.byteLength(JSON.stringify(r.value));
++  need(bytes>0&&bytes<=(kind==='page'?16*1024**2:32*1024)&&(total+=bytes)<=256*1024**2,'previous_ledger_bytes');
++  return r.value;
++ }
++ const g=await get('genesis'),part=await get('partial'),r=part?.record;
++ need(g?.binding===binding&&g.genesisSha256===genesisSha256&&d(g.genesis)===genesisSha256&&
++  Object.keys(g.owner??{}).length===5&&Object.keys(priorOwner).every(k=>g.owner?.[k]===priorOwner[k]),'previous_owner');
++ need(part?.sha256===expectedPartial&&d(r)===expectedPartial&&r.genesisSha256===genesisSha256&&
++  r.baseCursor===13180841&&r.durablePages>=1&&r.durablePages<=64&&Number.isSafeInteger(r.lastDurableCursor)&&r.lastDurableCursor>13180841&&
++  Number.isSafeInteger(r.providerRequestAttempts)&&r.providerRequestAttempts>=r.durablePages&&r.providerRequestAttempts<=65&&
++  r.publicationAuthorized===false&&r.cursorAdvanceAuthorized===false&&typeof r.reason==='string'&&
++  /^(?:china_v4_continuation:[a-z_]+|auto_api_http_(?:402|429|5[0-9]{2}))$/.test(r.reason),'exact_reported_partial');
++ const summary=Object.freeze({reason:r.reason,lastDurableCursor:r.lastDurableCursor,durablePages:r.durablePages,durableEvents:r.durableEvents,recordedLogicalAttempts:r.providerRequestAttempts,partialReceiptSha256:expectedPartial,publicCursor:13123821});
++ const resumeAuthorizedReason=summary.reason==='china_v4_continuation:linked_detail_not_authorized'&&
++  summary.recordedLogicalAttempts===64&&summary.durablePages===63&&summary.durableEvents===1260&&summary.lastDurableCursor===13182101;
++ let consumed=false;
++ return Object.freeze({summary,resumeAuthorizedReason,async authenticateAndReplay(replayVerifiedPage){
++  need(!consumed,'one_historical_replay');consumed=true;
++  // A quota/payment/detail HOLD is not automatically retryable. No provider
++  // requests or private genesis until the exact previous reason is known.
++  need(resumeAuthorizedReason,'previous_stop_not_resumable');
++  return authenticatePartialV4({expected:{scope:'reviewed_previous_run',genesisSha256,partialReceiptSha256:expectedPartial},
++   readGenesis:async()=>g,readPartial:async()=>part,readPage:n=>get('page',n),replayVerifiedPage});
++ }});
++}
+--- /dev/null
++++ b/scripts/custody.mjs
+@@ -0,0 +1,240 @@
++// Forensic, local-only object custody. No provider, live storage, publisher,
++// report.json, guessed observation date or writer capability exists here.
++import {createHash} from 'node:crypto';
++import {gunzipSync} from 'node:zlib';
++import {DatabaseSync} from 'node:sqlite';
++import {constants as fsConstants} from 'node:fs';
++import fs from 'node:fs/promises';
++import path from 'node:path';
++import {createChe168MissingDetails} from './exact-missing-details.mjs';
++const M=1024**2, CHUNK=16*M, RAW_CHUNK=64*M;
++const REF='catalog/provider-replicas/che168/', SNAP='catalog/provider-snapshots/che168/', J='catalog/intake-working/che168-v1/';
++const SOURCE='autohome_used_china_open', SHA=/^[a-f0-9]{64}$/, UUID=/^[a-f0-9]{8}(?:-[a-f0-9]{4}){3}-[a-f0-9]{12}$/;
++const ID=/^\d{1,32}$/;
++const hash=()=>createHash('sha256');
++const sha=x=>hash().update(x).digest('hex');
++const digest=x=>sha(JSON.stringify(x));
++const stable=id=>sha(SOURCE+':'+id).slice(0,24);
++const uint=(x,min=0,max=Number.MAX_SAFE_INTEGER)=>Number.isSafeInteger(x)&&x>=min&&x<=max;
++const obj=x=>x&&typeof x==='object'&&!Array.isArray(x);
++const check=(x,c)=>{if(!x)throw Error('china_v4_custody_'+c);};
++const validDate=x=>typeof x==='string'&&Number.isFinite(Date.parse(x));
++const decode=(b,cap)=>{check(Buffer.isBuffer(b)&&b.length>0&&b.length<=cap,'local_wire_bound');return JSON.parse(new TextDecoder('utf-8',{fatal:true}).decode(b));};
++const pinContext=Object.freeze({
++ runId:'44765240609',attempt:'1',operator:'891a5e3ed885872b99487a47b7d88edd172b1665',
++ workerHead:'f4dc98aaab916b29419d173994d66562aa5901f1',workerTree:'4dbbe41885deab5ab80002147aa04738d1048e67',
++ pinWireSha:'a14bda5ccf4c4e8a3920ff8858d6bad6a8d5307fad0d706dd8236650a9b4f4d2',
++ activeControlSha:'9e3f73d6282465019f43dcd0370bf9c71688445a0e361dccf641bd45acc5be62',
++ activeControlRev:5,baseCursor:13123821,
++ snapshotConfigWireSha:'25abfa4b8f1b053b12a1fcd86f01dc42de65eb8cb74f3863abf1a49115dfdb27',
++ lowerBound:'2026-11-20T15:38:59.000Z',readyAt:'2026-11-20T17:45:03.110Z',
++});
++function derive(raw,p){
++ const x=decode(raw,32*1024);
++ check(sha(raw)===p.pinWireSha&&x.version===1&&x.operationId==='che168-intake-'+p.runId+'-'+p.attempt&&x.state==='ready'&&
++  x.owner?.runId===p.runId&&x.owner.attempt===p.attempt&&x.owner.revision===p.operator&&x.readyAt===p.readyAt&&x.updatedAt===p.readyAt&&
++  x.releasePolicy==='published_generation_references'&&!x.coordination&&Array.isArray(x.references)&&x.references.length===4,
++ 'old_ready_custody_pin');
++ check(x.references.every(r=>typeof r?.root==='string')&&new Set(x.references.map(r=>r.root)).size===4,'exact_reference_roles');
++ const snapshots=x.references.filter(r=>r.kind==='che168-snapshot'),replicas=x.references.filter(r=>r.kind==='che168-replica'),
++   journal=x.references.filter(r=>r.kind==='che168-journal');
++ check(snapshots.length===1&&replicas.length===2&&journal.length===1&&snapshots[0].root.startsWith(SNAP)&&
++  replicas.every(r=>r.root.startsWith(REF)&&UUID.test(r.root.slice(REF.length))),'exact_reference_roles');
++ const binding=snapshots[0].root.slice(SNAP.length), oldRoots=replicas.filter(r=>SHA.test(r.sha256??'')),
++  candidateRoots=replicas.filter(r=>!Object.hasOwn(r,'sha256'));
++ check(SHA.test(binding)&&oldRoots.length===1&&candidateRoots.length===1,'reference_binding_shape');
++ // Exact historical collector/checkpoint property order is a protocol input.
++ // Reordering to key,sha256,binding,cursor generates a different namespace.
++ const previous={key:oldRoots[0].root,binding,cursor:p.baseCursor,sha256:oldRoots[0].sha256};
++ const journalBinding=digest({binding,initialCursor:p.baseCursor,base:previous,replayVersion:2});
++ const journalId=BigInt('0x'+journalBinding.slice(0,14)).toString();
++ check(journal[0].root===J+journalId,'exact_historical_journal_binding');
++ return {binding,previous,journalBinding,journalRoot:journal[0].root,candidateRoot:candidateRoots[0].root};
++}
++function attestInputs(inputs,p,derived){
++ const a=inputs.attested;
++ // A read-only authority outside this pure/local adapter must pin these two
++ // object digests under the exact old producer and current private control.
++ // Do not derive their expected values from these same unauthenticated files.
++ check(a?.producerRun===p.runId&&a.producerOperator===p.operator&&a.workerTree===p.workerTree&&
++   a.controlSha256===p.activeControlSha&&a.controlRev===p.activeControlRev&&a.pinWireSha256===p.pinWireSha&&
++   SHA.test(a.candidateManifestSha256??'')&&SHA.test(a.journalHeadSha256??'')&&
++   a.pinAndHeadsRechecked===true&&a.privateObjectScopeAuthenticated===true,'separately_read_verified_object_authority_required');
++ const m=decode(inputs.candidateManifestWire,2*M),j=decode(inputs.journalHeadWire,2*M);
++ check(digest(m)===a.candidateManifestSha256&&digest(j)===a.journalHeadSha256,'candidate_or_journal_digest_drift');
++ check(m.version===1&&m.binding===derived.binding&&uint(m.cursor,p.baseCursor+1)&&uint(m.bytes,1,16*1024*M)&&
++   Array.isArray(m.parts)&&m.parts.length===Math.ceil(m.bytes/CHUNK)&&m.parts.length<=1024&&
++   m.parts.every((part,i)=>part?.bytes===Math.min(CHUNK,m.bytes-i*CHUNK)&&SHA.test(part.sha256??'')),'candidate_manifest_binding');
++ check(j.version===2&&j.binding===derived.journalBinding&&j.initialCursor===p.baseCursor&&j.cursor===m.cursor&&
++   uint(j.changes,1,500000)&&uint(j.bytes,1,512*M)&&uint(j.rawBytes,1,8*1024*M)&&Array.isArray(j.chunks)&&
++   j.chunks.length>=1&&j.chunks.length<=10000&&j.chunks.every(r=>UUID.test(r?.id??'')&&SHA.test(r.sha??''))&&
++   new Set(j.chunks.map(r=>r.id)).size===j.chunks.length,'exact_terminal_head');
++ return {m,j};
++}
++function verifyOffer(o,id){
++ check(obj(o)&&typeof id==='string'&&ID.test(id)&&o.id===stable(id)&&o.sourceOfferId===id&&o.sourceId===SOURCE&&o.market==='china'&&
++  o.operational?.provider==='auto-api.com'&&o.operational?.detailIdentityVerified===true,'replica_offer_identity');
++}
++function nonPriceHash(offer){
++ const {sourcePrice,totalRub,calculationStatus,updatedAt,operational,...rest}=offer;
++ const {lastSeenAt,che168PriceChangeId,...operations}=operational;
++ return digest({rest,operations});
++}
++async function reconstructJournal(j,derived,readLocalJournalChunk,onVerifiedEvent){
++ let cursor=j.initialCursor,changes=0,encBytes=0,rawBytes=0;
++ const states=new Map(), withdrawals=new Map(), lastRemovalEvent=new Map(), missing=createChe168MissingDetails();
++ const tally={offer:0,price:0,removed:0,quarantine:0,missing_detail:0};
++ for(const descriptor of j.chunks){
++  // Fixture/owner-approved offline port only receives one previously verified
++  // immutable descriptor at a time. No arbitrary network or bucket name.
++  const b=await readLocalJournalChunk(descriptor.id);
++  const stored=decode(b,RAW_CHUNK);
++  check(stored?.encoding==='gzip-base64'&&typeof stored.data==='string'&&digest(stored)===descriptor.sha,'journal_chunk_digest');
++  const compressed=Buffer.from(stored.data,'base64');
++  check(compressed.length>0&&compressed.toString('base64')===stored.data,'canonical_journal_compression');
++  const decoded=gunzipSync(compressed,{maxOutputLength:RAW_CHUNK});
++  const chunk=decode(decoded,RAW_CHUNK);
++  check(chunk.binding===derived.journalBinding&&chunk.from===cursor&&uint(chunk.to,cursor+1,j.cursor)&&uint(chunk.changes,1,j.changes)&&
++   Array.isArray(chunk.events)&&chunk.events.length===chunk.changes,'full_accepted_v4_one_event_per_change');
++  encBytes+=Buffer.byteLength(JSON.stringify(stored));rawBytes+=Buffer.byteLength(JSON.stringify(chunk));changes+=chunk.changes;
++  check(encBytes<=j.bytes&&rawBytes<=j.rawBytes&&changes<=j.changes,'journal_length_overrun');
++  let previousEvent=cursor;
++  for(const e of chunk.events){
++   check(Object.hasOwn(tally,e?.kind)&&uint(e.event,previousEvent,chunk.to)&&validDate(e.at),'journal_order_or_event');
++   const id=e.kind==='offer'?e.offer?.sourceOfferId:e.innerId;
++   check(typeof id==='string'&&ID.test(id),'journal_source_id');
++   previousEvent=e.event;
++   tally[e.kind]++;
++   missing.apply(e);
++   await onVerifiedEvent?.(e);
++   const prior=states.get(id);
++   if(e.kind==='offer'){
++    verifyOffer(e.offer,id);
++    states.set(id,{kind:'offer',event:e.event,offerSha:digest(e.offer),preservedNonPrice:nonPriceHash(e.offer)});
++   }else if(e.kind==='price'){
++    check(Number.isFinite(e.price)&&e.price>0&&prior?.kind!=='removed'&&prior?.kind!=='quarantine','price_cannot_reinsert');
++    states.set(id,{kind:'price',event:e.event,price:e.price,at:e.at,preservedNonPrice:prior?.preservedNonPrice});
++   }else if(e.kind==='removed'){
++    // First occurrence seeds insertion order; newer removals replace the value.
++    // A later re-add does NOT erase the historical report ledger.
++    withdrawals.set(id,{id:stable(id),sourceId:SOURCE,sourceOfferId:id,market:'china',status:'removed',observedAt:e.at});
++    lastRemovalEvent.set(id,e.event);states.set(id,{kind:'removed',event:e.event});
++   }else if(e.kind==='quarantine'){
++    check(['missing_model','invalid_year'].includes(e.reason),'unsupported_quarantine_reason');
++    states.set(id,{kind:'quarantine',event:e.event,reason:e.reason});
++   }
++  }
++  check(states.size<=500000&&withdrawals.size<=500000,'working_inventory_budget');
++  cursor=chunk.to;
++ }
++ check(cursor===j.cursor&&changes===j.changes&&encBytes===j.bytes&&rawBytes===j.rawBytes,'journal_terminal_fence');
++ missing.assertResolved();
++ return {states,withdrawals,lastRemovalEvent,changes,tally};
++}
++async function replicaWire(pathname,manifest){
++ check(typeof pathname==='string'&&path.isAbsolute(pathname)&&await fs.realpath(pathname)===pathname,'local_replica_only');
++ const f=await fs.open(pathname,fsConstants.O_RDONLY|fsConstants.O_NOFOLLOW),h=hash();
++ try{
++  const before=await f.stat();
++  check(before.isFile()&&(before.mode&0o077)===0&&before.size===manifest.bytes,'read_only_private_replica_shape');
++  let offset=0;
++  for(let i=0;i<manifest.parts.length;i++){
++    const part=manifest.parts[i],b=Buffer.allocUnsafe(part.bytes);
++    let position=0;
++    while(position<b.length){const {bytesRead}=await f.read(b,position,b.length-position,offset+position);
++      check(bytesRead>0,'replica_part_short');position+=bytesRead;}
++    if(i===0)check(b.subarray(0,16).equals(Buffer.from('SQLite format 3\0'))&&b[18]===1&&b[19]===1,'closed_sqlite_replica');
++    check(sha(b)===part.sha256,'ordered_candidate_part_hash');h.update(b);offset+=part.bytes;
++  }
++  const after=await f.stat();
++  check(after.size===before.size&&after.ino===before.ino&&after.ctimeMs===before.ctimeMs&&after.mtimeMs===before.mtimeMs&&offset===manifest.bytes,'replica_file_changed');
++  return {before,bytes:offset,sha256:h.digest('hex')};
++ }finally{await f.close();}
++}
++async function inspectCandidate(filename,manifest,chain,earliestEvent){
++ const asFile=await replicaWire(filename,manifest),db=new DatabaseSync(filename,{readOnly:true,allowExtension:false});
++ const seenChanges=new Set(),inventory=hash().update('[');
++ let count=0,activeChanged=0,unchangedNotIndependentlyReplayed=0,priceOnlyBaseFieldsUnproved=0,reappearanceCount=0;
++ try{
++  db.exec('PRAGMA query_only=ON; PRAGMA trusted_schema=OFF; PRAGMA cache_size=-16384;');
++  const schema=db.prepare('SELECT type,name,tbl_name,sql FROM sqlite_schema ORDER BY name COLLATE BINARY').all();
++  const tbl=schema.find(x=>x.type==='table'&&x.name==='inventory');
++  check(schema.length===2&&tbl?.tbl_name==='inventory'&&tbl.sql.replace(/\s/g,'').toLowerCase()===
++   'createtableinventory(idtextprimarykey,payloadtextnotnull,eventintegernotnull)'&&
++   schema.some(r=>r.type==='index'&&r.name==='sqlite_autoindex_inventory_1'&&r.tbl_name==='inventory'&&r.sql===null),'replica_schema');
++  const integrity=db.prepare('PRAGMA integrity_check').all();
++  check(integrity.length===1&&integrity[0].integrity_check==='ok','replica_integrity');
++  const pageSize=Number(db.prepare('PRAGMA page_size').get().page_size),pageCount=Number(db.prepare('PRAGMA page_count').get().page_count);
++  check(uint(pageSize,512,65536)&&uint(pageCount,1)&&pageSize*pageCount===asFile.bytes,'replica_page_length');
++  let prev='';
++  for(const row of db.prepare('SELECT id,payload,event FROM inventory ORDER BY id COLLATE BINARY').iterate()){
++   check(row.id>prev&&ID.test(row.id)&&typeof row.payload==='string'&&Buffer.byteLength(row.payload)<=M&&uint(row.event,earliestEvent,manifest.cursor),
++      'candidate_inventory_row_bounds');prev=row.id;
++   const o=JSON.parse(row.payload);verifyOffer(o,row.id);check(JSON.stringify(o)===row.payload,'candidate_payload_order');
++   if(count++)inventory.update(',');
++   check(count<=500000,'candidate_row_budget');inventory.update(JSON.stringify([row.id,sha(row.payload),row.event]));
++   const change=chain.states.get(row.id);
++   if(!change){unchangedNotIndependentlyReplayed++;continue;}
++   check(change.kind==='offer'||change.kind==='price','journal_removed_or_quarantined_present');
++   check(change.event===row.event,'candidate_latest_event_mismatch');
++   if(change.kind==='offer')check(change.offerSha===digest(o),'journal_offer_body_mismatch');
++   else{
++    check(o.sourcePrice===change.price&&o.updatedAt===change.at&&o.operational.lastSeenAt===change.at&&
++      o.operational.che168PriceChangeId===change.event&&o.totalRub===null&&o.calculationStatus==='needs_data','journal_latest_price_mismatch');
++    if(change.preservedNonPrice)check(change.preservedNonPrice===nonPriceHash(o),'price_changed_non_price_fields');
++    else priceOnlyBaseFieldsUnproved++;
++   }
++   seenChanges.add(row.id);activeChanged++;
++   if(chain.withdrawals.has(row.id))reappearanceCount++;
++  }
++  check(count>0,'candidate_empty_inventory');
++  for(const [id,s] of chain.states)if(s.kind==='offer'||s.kind==='price')check(seenChanges.has(id),'active_journal_id_missing_from_candidate');
++ }finally{db.close();}
++ const after=await fs.lstat(filename);
++ check(after.ino===asFile.before.ino&&after.size===asFile.before.size&&after.ctimeMs===asFile.before.ctimeMs&&after.mtimeMs===asFile.before.mtimeMs,
++   'replica_file_changed');
++ return {inventoryRows:count,activeChanged,unchangedNotIndependentlyReplayed,priceOnlyBaseFieldsUnproved,reappearanceCount,
++   inventoryPayloadLedgerSha256:inventory.update(']').digest('hex'),candidateReplicaBytes:asFile.bytes,candidateReplicaFileSha256:asFile.sha256};
++}
++
++// Only the independently authenticated runner needs opaque next keys. Keep
++// these functions out of ordinary stdout and never let a supplied URL choose.
++export function exactV4PinRoles(pinWire){return derive(pinWire,pinContext);}
++export function exactV4SealedReadPlan(input){
++ const expected=derive(input.pinWire,pinContext);
++ const {m,j}=attestInputs(input,pinContext,expected);
++ return {expected,manifest:m,journal:j};
++}
++export function inspectExactV4Custody(input){return build(input,pinContext);}
++export function rehearseCustody(input,p){return build(input,p);}
++async function build(input,p){
++ check(validDate(p.lowerBound)&&validDate(p.readyAt)&&Date.parse(p.lowerBound)<Date.parse(p.readyAt),'completion_interval_authentication');
++ const derived=derive(input.pinWire,p),{m,j}=attestInputs(input,p,derived);
++ // Bind the exact original snapshot config bytes; a caller must never
++ // nominate a different old cursor or interpret event time as as-of UTC.
++ const config=decode(input.snapshotConfigWire,128*1024);
++ check(typeof input.readLocalJournalChunk==='function'&&sha(input.snapshotConfigWire)===p.snapshotConfigWireSha&&digest(config)===derived.binding&&
++   config.version===1&&uint(config.initialCursor,1,p.baseCursor)&&validDate(config.modifiedAt),'snapshot_ancestry');
++ const chain=await reconstructJournal(j,derived,input.readLocalJournalChunk,input.onVerifiedEvent);
++ const inventory=await inspectCandidate(input.localCandidateReplica,m,chain,config.initialCursor-1);
++ const nativeLedger=[...chain.withdrawals.values()];
++ const privateLedger=[...chain.withdrawals.entries()].map(([id,w])=>({...w,confirmedRemovalEvent:chain.lastRemovalEvent.get(id),terminalChangedEvent:chain.states.get(id)?.event??null,
++   ...(chain.states.has(id)&&['offer','price'].includes(chain.states.get(id).kind)?{terminalCandidateStatus:'present_reinserted'}:{terminalCandidateStatus:'absent'})}));
++ const quarantine={missing_model:0,invalid_year:0};
++ for(const s of chain.states.values())if(s.kind==='quarantine')quarantine[s.reason]++;
++ const receipt={
++   version:1,kind:'china_v4_private_forensic_custody_v1',oldProducerRun:p.runId,oldWorkerTree:p.workerTree,
++   acceptedStartCursor:p.baseCursor,candidateTerminalCursor:m.cursor,
++   candidateManifestSha256:digest(m),journalHeadSha256:digest(j),journalChanges:chain.changes,journalEventKinds:chain.tally,
++   ...inventory,withdrawalLedgerCount:privateLedger.length,nativeWithdrawalFieldSha256:digest(nativeLedger),custodyReconciledWithdrawalSha256:digest(privateLedger),quarantine,
++   absentAfterConfirmedRemove:privateLedger.length-inventory.reappearanceCount,
++   completionInterval:{notBefore:p.lowerBound,notAfter:p.readyAt,notAnExactObservationUtc:true,
++     lowerProof:'official_protected_step_earliest',upperProof:'authenticated_old_ready_pin_after_collection'},
++   exactCompletedAt:null,wholeSourceFreshnessWitness:false,providerEndResponsePersisted:false,
++   sourceCompletenessAdmissionsAuthorized:false,untouchedBaseInventoryEqualityProven:false,
++   nativeReportReconstructed:false,archivalCustodyOnly:true,providerRequests:0,storageWrites:0,publicationAuthorized:false,cursorAdvanced:false,
++ };
++ // Keep raw source keys/IDs out of formatted stdout. This data is only for the
++ // caller's approved private custody process; it cannot function as a report.
++ return {receipt,privateLedger,nativeWithdrawalsForPrivateEvidenceOnly:nativeLedger};
++}
