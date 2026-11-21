@@ -3224,8 +3224,13 @@ async function readUaeSealedProjection(ready:UaeReadHandle,directory:Awaited<Ret
  return rows;
 }
 export const preparedUaeEditorial={revision:'prepared-uae',entries:{}};
-const uaeOwnPublicRow=(row:CatalogSearchProjection,generationId:string)=>({...publicOfferFromProjection(row),
- preparedUaeSelection:{version:1 as const,generationId}});
+// The general public DTO drops sourceGroup/sourceId. The existing DubiCars
+// on-request rendering gate still needs its exact native source label; never
+// copy private operational data or an arbitrary input source into the DTO.
+export const withPreparedUaeOnRequestSource=<T extends object>(dto:T,source:unknown):T=>
+ isPriceOnRequestDubicarsOffer(source)?{...dto,sourceId:'dubicars_uae_exact'}:dto;
+const uaeOwnPublicRow=(row:CatalogSearchProjection,generationId:string)=>withPreparedUaeOnRequestSource(
+ {...publicOfferFromProjection(row),preparedUaeSelection:{version:1 as const,generationId}},row);
 /** Existing projection selector, price predicate and DTO, no price-engine work. */
 export async function readPreparedUaeSearch(params:CatalogSearchParams,{countOnly=false,includeFacets=false,expectedGeneration=null,pageLimit=48}:{
  countOnly?:boolean;includeFacets?:boolean;expectedGeneration?:string|null;pageLimit?:number;

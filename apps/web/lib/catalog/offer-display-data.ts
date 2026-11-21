@@ -11,7 +11,7 @@ import {hasModificationSelection,withoutDeliveredPrice} from './modification-con
 import {calculateSelectedModification,conditionalModificationRub} from './modification-recovery';
 import {enrichOfferForDisplay} from './display-enrichment';
 import {normalizeVehicleOfferSpecs} from './spec-normalization';
-import {preparedUaeDetailGuard,preparedUaeEditorial,PreparedUaeUnavailable,publicOffer} from './storage';
+import {preparedUaeDetailGuard,preparedUaeEditorial,PreparedUaeUnavailable,publicOffer,withPreparedUaeOnRequestSource} from './storage';
 import {catalogOfferVisibleRub} from './public-priority';
 import {calculateOfferWithRussiaCustoms,calculateOfferWithUserPowerScenario} from './customs-pricing';
 import {readCatalogPowerScenario} from './power-scenario';
@@ -24,7 +24,7 @@ export const resolveOfferDisplay = cache(async (storedOffer:VehicleOffer,safeReq
   const uae=preparedUaeDetailGuard(storedOffer);
   if(uae){
     if(safeRequestedPowerHp||modificationId)throw new PreparedUaeUnavailable('explicit_scenario');
-    const raw=await withCatalogEditorialSnapshot(preparedUaeEditorial,async()=>publicOffer(storedOffer));
+    const raw=await withCatalogEditorialSnapshot(preparedUaeEditorial,async()=>withPreparedUaeOnRequestSource(publicOffer(storedOffer),storedOffer));
     const sellerPricing=isSellerPricedOffer(storedOffer);
     const visibleRub=sellerPricing?0:catalogOfferVisibleRub(raw);
     await uae();
