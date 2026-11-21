@@ -1,3 +1,4 @@
+import {FIXED_MARKET_MIN_MODEL_YEAR,permitsFixedMarketModelYear} from './inventory-admission';
 import type {CalculationIndex} from '../encyclopedia/calculation-index';
 import {pickupSourceCandidateSql} from './pickup-body';
 import {japanDriveSql} from './japan-drive';
@@ -38,7 +39,7 @@ export function ajesQuery(input: unknown,driveIndex:CalculationIndex|null=null) 
   }
   const values=(value:unknown,separator:string)=>{if(value===undefined)return [];if(typeof value!=='string')throw new AjesInputError();const parts=value.split(separator).map(v=>name(v)!);if(parts.length>20||parts.some(v=>!v))throw new AjesInputError();return [...new Set(parts)];};
   const makes=values(q.make,','),models=values(q.model,'|'),families=values(q.modelFamilies,'|');
-  const stock=table==='korea'||table==='china',minYear=table==='china'?CHINA_MIN_MODEL_YEAR:stock?new Date().getUTCFullYear()-6:JAPAN_MIN_MODEL_YEAR;
+  const stock=table==='korea'||table==='china',minYear=table==='china'?CHINA_MIN_MODEL_YEAR:stock?Math.max(FIXED_MARKET_MIN_MODEL_YEAR,new Date().getUTCFullYear()-6):JAPAN_MIN_MODEL_YEAR;
   const requestedYearFrom=integer(q.yearFrom,1900,1900,2100), yearTo=integer(q.yearTo,2100,1900,2100);
   if (requestedYearFrom>yearTo) throw new AjesInputError();
   // A shared catalog range may begin before this market's admission floor.
@@ -130,6 +131,7 @@ export function ajesLot(row: Record<string, unknown>, table: AjesTable, detail: 
   const number=(key:string)=>/^\d+(?:\.\d+)?$/.test(text(key))?Number(text(key)):null;
   const id=text('ID'), year=number('YEAR'),stock=table==='korea'||table==='china';
   if (!/^[A-Za-z0-9_-]{1,64}$/.test(id) || !text('MARKA_NAME') || !text('MODEL_NAME') || !year || year<(stock?new Date().getUTCFullYear()-6:JAPAN_MIN_MODEL_YEAR) || !Number.isInteger(year) || year>new Date().getUTCFullYear()+1 || (!stock&&number('AUCTION_TYPE')===1)) return null;
+  if(!permitsFixedMarketModelYear(table,year))return null;
   const sold=table==='stats' && /^sold$/i.test(text('STATUS'));
   if((['stats','main'].includes(table)&&japanExcludedMake(text('MARKA_NAME')))||knownHeavyVehicleFamily(text('MARKA_NAME'),text('MODEL_NAME'))||motorcycleExcluded({make:text('MARKA_NAME'),model:text('MODEL_NAME'),trim:text('GRADE'),bodyType:text('BODY_TYPE'),vehicleCategory:text('VEHICLE_CATEGORY')}))return null;
   if(stock&&/^(?:sold|removed|withdrawn|deleted)$/i.test(text('STATUS')))return null;

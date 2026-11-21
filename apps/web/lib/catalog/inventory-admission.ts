@@ -3,6 +3,15 @@ import {motorcycleExcluded} from './motorcycle-policy';
 import {isAllDubicarsOffer} from './dubicars-owner-policy';
 import {JAPAN_MIN_MODEL_YEAR} from './japan-year-policy';
 import {knownHeavyVehicleFamily} from './heavy-vehicle-families';
+/** Fixed owner admission by model year, independently of production age. */
+export const FIXED_MARKET_MIN_MODEL_YEAR=2022;
+export const FIXED_MARKET_MODEL_YEAR_POLICY='korea-europe-min-model-year-2022-v1';
+export const hasFixedMarketModelYear=(market:unknown)=>market==='korea'||market==='europe';
+export const permitsFixedMarketModelYear=(market:unknown,yearValue:unknown)=>{
+ if(!hasFixedMarketModelYear(market))return true;
+ const year=Number(yearValue);
+ return Number.isInteger(year)&&year>=FIXED_MARKET_MIN_MODEL_YEAR;
+};
 /** Inventory policy approved 06.10.2026. Dates retain the source's precision. */
 export function catalogInventoryDate(offer: any): string | undefined {
  const op=offer.operational||{},raw=op.raw||{},e=op.semanticEvidence?.productionDate;
@@ -21,6 +30,7 @@ export function catalogInventoryAgeDecision(offer:any,now=new Date()){
  const today=new Date(now.getTime()+7*3600000).toISOString().slice(0,10);
  const year=Number(offer.year),current=Number(today.slice(0,4));
  if(offer.market==='japan')return {eligible:Number.isInteger(year)&&year>=JAPAN_MIN_MODEL_YEAR&&year<=current+1,basis:'japan_2008'};
+ if(!permitsFixedMarketModelYear(offer.market,year))return {eligible:false,basis:'fixed_model_year_2022'};
  const date=catalogInventoryDate(offer);
  if(offer.market==='china')return {eligible:Number.isInteger(year)&&year>=CHINA_MIN_MODEL_YEAR&&year<=current&&(!date||date<=today.slice(0,date.length)),basis:'china_2014'};
  if(date){

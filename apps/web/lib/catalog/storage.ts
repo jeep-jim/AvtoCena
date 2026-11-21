@@ -27,7 +27,7 @@ import {splitPackedBudgetSelectors,verifiedPackedBudgetSelector,type PackedBudge
 import {matchingEditorial,withCatalogEditorial,resetCatalogEditorialCache,editorialRevision,editorialEntries,editorialHasHidden,editorialHidden,applyCatalogEditorial,applyCatalogEditorialSpecifications} from "./editorial";
 import {splitBudgetMarketIndex,validBudgetMarketIndex,type BudgetMarketDirectory} from './budget-market-index';
 import {budgetPricingFingerprint,sharedBudgetPrices,readPreparedBudgetPrices,resetSharedBudgetPriceCache,calculationCacheVersion} from './shared-budget-prices';
-import {catalogInventoryAgeDecision,catalogInventoryDate,catalogVehicleExcluded,catalogGrossVehicleWeightKg} from './inventory-admission';
+import {catalogInventoryAgeDecision,catalogInventoryDate,catalogVehicleExcluded,catalogGrossVehicleWeightKg,hasFixedMarketModelYear,permitsFixedMarketModelYear,FIXED_MARKET_MODEL_YEAR_POLICY} from './inventory-admission';
 import {compareCatalogDisplayOrder,catalogDisplayOrderComparator} from './display-order';
 import {currentDepositCosts} from "./deposit-cost-projection";
 import {isReviewedSourceDuplicate, REVIEWED_DUPLICATE_POLICY} from './reviewed-source-duplicates';
@@ -866,7 +866,7 @@ function projectionIdentityMatches(row: Pick<CatalogSearchProjection,'market'|'m
   return true;
 }
 export function catalogSearchProjectionMatches(row: CatalogSearchProjection, params: CatalogSearchParams, modelKeys: Set<string> | null = null) {
-  if(editorialHidden(row))return false;
+  if(editorialHidden(row)||!permitsFixedMarketModelYear(row.market,row.year))return false;
   if (isConfirmedSourceWithdrawn(row) || isReviewedSourceDuplicate(row)) return false;
   // A make-only membership test has no price or specification input. Keep the
   // same withdrawal/editorial/alias rules without normalizing engines per row.
@@ -1024,18 +1024,42 @@ async function currentProjectionRows(params: CatalogSearchParams = {}) {
   return { generationId: manifest.generationId, rows: await readProjectionRows(manifest, params) };
 }
 
+// Old per-market/brand aggregate totals carry no model years. Never treat them
+// as proof for changed markets. Compact rows are re-admitted under the new rule.
+function floorCanAffectQuery(market?:string){
+ return !market||market==='any'||hasFixedMarketModelYear(market);
+}
+function floorHasRows(manifest:CatalogManifest){
+ return Number(manifest.markets?.korea?.count)>0||Number(manifest.markets?.europe?.count)>0;
+}
+function floorCouldAffectBrand(row:{marketCounts?:Record<string,number>}){
+ return Number(row.marketCounts?.korea)>0||Number(row.marketCounts?.europe)>0;
+}
 /** Small publication summary for directory counts; no full catalog download on a landing page. */
 async function readCatalogDirectoryCountRowsEditorial() {
   const [manifest,summary]=await Promise.all([readManifest(),readEditorialBrandSummary()]);
-  if(summary.generationId===manifest.generationId) return Object.values(summary.brands).flatMap(brand=>brand.models.map(model=>({make:brand.make,model:model.model,count:model.count-(omitLegacyChinaAggregate()?Number(model.marketCounts.china||0):0)})).filter(row=>row.count>0));
-  return (await currentProjectionRows({})).rows.map(row=>({make:row.make,model:row.model,count:1}));
+  if(summary.generationId===manifest.generationId&&!Object.values(summary.brands).some(floorCouldAffectBrand)) return Object.values(summary.brands).flatMap(brand=>brand.models.map(model=>({make:brand.make,model:model.model,count:model.count-(omitLegacyChinaAggregate()?Number(model.marketCounts.china||0):0)})).filter(row=>row.count>0));
+  const compact=await readBudgetSelection({sort:"year"});
+  const rows=compact?compact.rows.map(row=>row[5]):(await currentProjectionRows({})).rows;
+  return rows.map(row=>({make:row.make,model:row.model,count:1}));
 }
 
-/** Names for discovery do not need prices, offer blocks or moderation recounts. */
-export async function readCatalogModelNames(make = '', market = '') {
+/** Names use the small legacy directory except where the new year floor must remove stale options. */
+export async function readCatalogModelNames(make = '', market = ''):Promise<CatalogFacets['models']> {
   const [manifest, summary] = await Promise.all([readManifest(), readCurrentBrandSummary()]);
   const makes = make ? new Set(catalogMakeFilterValues(make).map(value => cleanFacet(value).toLocaleLowerCase('ru-RU'))) : null;
   const markets = market.split('|').filter(value => value && value !== 'any');
+  if ((!markets.length&&floorHasRows(manifest))||markets.some(name=>hasFixedMarketModelYear(name)&&Number(manifest.markets?.[name]?.count)>0)) {
+    const scopes=markets.length?markets:[undefined];
+    const parts=await mapWithConcurrency(scopes,2,async scope=>{
+      if(scope&&!hasFixedMarketModelYear(scope))return readCatalogModelNames(make,scope);
+      const facets=await readCatalogFacets({market:scope as CatalogMarket|undefined,make:make||undefined});
+      if(facets.generationId!==manifest.generationId)throw Error('catalog_model_directory_generation_changed');
+      return facets.models;
+    });
+    if((await readManifest()).generationId!==manifest.generationId)throw Error('catalog_model_directory_generation_changed');
+    return [...new Map(parts.flat().map(row=>[`${row.make}:${row.model}`,row])).values()];
+  }
   if (summary.generationId === manifest.generationId) {
     return Object.values(summary.brands)
       .filter(brand => !makes || makes.has(cleanFacet(brand.make).toLocaleLowerCase('ru-RU')))
@@ -1121,7 +1145,8 @@ async function readCatalogBrandCountsEditorial(params: CatalogSearchParams = {})
     || filters.yearFrom || filters.yearTo || filters.mileageFrom || filters.mileageTo || filters.engineFrom || filters.engineTo
     || filters.powerFrom || filters.powerTo || filters.fuel || filters.transmission || filters.drive || filters.bodyType
     || filters.auctionGrade || filters.auctionDateFrom || filters.auctionDateTo);
-  if (!hasPredicates) {
+  const floorAffectsCounts=!hasPredicates&&floorCanAffectQuery(filters.market)&&floorHasRows(await readManifest());
+  if (!hasPredicates && !floorAffectsCounts) {
     const [manifest, summary] = await Promise.all([readManifest(), readEditorialBrandSummary()]);
     if (summary.generationId === manifest.generationId) {
       const market = filters.market && filters.market !== "any" ? filters.market : undefined;
@@ -1136,7 +1161,7 @@ async function readCatalogBrandCountsEditorial(params: CatalogSearchParams = {})
       return {generationId: manifest.generationId, counts: Object.fromEntries(brands.map(brand => [brand.make, brand.count])), modelCounts: Object.fromEntries(brands.map(brand => [brand.make, brand.models]))};
     }
   }
-  const compact=await readBudgetSelection(filters);
+  const compact=await readBudgetSelection(floorAffectsCounts?{...filters,sort:"year"}:filters);
   if(compact){
     const counts=new Map<string,number>(),models=new Map<string,Set<string>>();
     for(const tuple of compact.rows){
@@ -1178,7 +1203,7 @@ async function readCatalogBrandCountsEditorial(params: CatalogSearchParams = {})
 async function readCatalogBrandModelCountsEditorial(make: string) {
   const filters: CatalogSearchParams = { make };
   const [manifest, summary] = await Promise.all([readManifest(), readEditorialBrandSummary()]);
-  if (summary.generationId === manifest.generationId) {
+  if (summary.generationId === manifest.generationId&&!floorCouldAffectBrand(summary.brands[catalogBrandReadModelKey(make)]||{})) {
     const models=summary.brands[catalogBrandReadModelKey(make)]?.models||[];
     return {generationId:manifest.generationId,models:omitLegacyChinaAggregate()?models.map(m=>{
       const {china,...marketCounts}=m.marketCounts;return {...m,count:m.count-(china||0),marketCounts};
@@ -1298,7 +1323,7 @@ function preparedFacetsFromRows(generationId:string,offers:CatalogFacetProjectio
 // Immutable, generation-scoped objects avoid parsing an entire market on cold starts.
 const MARKET_LANDING_LIMIT = 192;
 type MarketLanding = {
-  version: 1; policyDate?:string; generationId: string; market: string; sourceTotal: number; duplicatePolicy?: string;
+  version: 1; policyDate?:string; generationId: string; market: string; sourceTotal: number; duplicatePolicy?: string; modelYearPolicy?:string;
   total: number; items: CatalogSearchProjection[]; facets: CatalogFacets;
 };
 export function catalogMarketLandingPath(generationId: string, market: string) {
@@ -1317,8 +1342,8 @@ export async function buildCatalogMarketLanding(generationId: string, market: st
   const now=options.now||new Date();
   const rows = options.now ? prepareCatalogProjectionRowsForDate(items,now) : prepareCatalogProjectionRows(items);
   sortCatalogSearchRows(rows, {market: market as CatalogMarket, sort: "updatedAt"});
-  return {version: 1, policyDate:new Date(now.getTime()+7*3600000).toISOString().slice(0,10), generationId, market, duplicatePolicy: REVIEWED_DUPLICATE_POLICY, sourceTotal: items.length, total: rows.length,
-    items: rows.slice(0, MARKET_LANDING_LIMIT), facets: await facetsFromProjection(generationId, rows, {}, false)};
+  return {version: 1, policyDate:new Date(now.getTime()+7*3600000).toISOString().slice(0,10), generationId, market, duplicatePolicy: REVIEWED_DUPLICATE_POLICY, ...(hasFixedMarketModelYear(market)?{modelYearPolicy:FIXED_MARKET_MODEL_YEAR_POLICY}:{}), sourceTotal: items.length, total: rows.length,
+    items: rows.slice(0, MARKET_LANDING_LIMIT), facets: hasFixedMarketModelYear(market)?preparedFacetsFromRows(generationId,rows):await facetsFromProjection(generationId, rows, {}, false)};
 }
 async function readMarketLanding(params: CatalogSearchParams): Promise<MarketLanding | null> {
   if (!canUseMarketLanding(params) || params.market === "japan") return null;
@@ -1340,7 +1365,7 @@ async function readMarketLanding(params: CatalogSearchParams): Promise<MarketLan
       let value = await readDataJson<MarketLanding | null>(path, null);
       const day=new Date(Date.now()+7*3600000).toISOString().slice(0,10);
       if(value?.policyDate!==day)value=await readDataJson<MarketLanding|null>(datedCatalogPagePath(path,day),null);
-      if (!value || value.policyDate!==new Date(Date.now()+7*3600000).toISOString().slice(0,10) || (market === "china" && value.duplicatePolicy !== REVIEWED_DUPLICATE_POLICY) || value.version !== 1 || value.generationId !== manifest.generationId || value.market !== market
+      if (!value || value.policyDate!==new Date(Date.now()+7*3600000).toISOString().slice(0,10) || (market === "china" && value.duplicatePolicy !== REVIEWED_DUPLICATE_POLICY) || (hasFixedMarketModelYear(market)&&value.modelYearPolicy!==FIXED_MARKET_MODEL_YEAR_POLICY) || value.version !== 1 || value.generationId !== manifest.generationId || value.market !== market
         || value.sourceTotal !== Number(manifest.markets?.[market]?.count || 0)
         || !Number.isInteger(value.total) || value.total < 0 || value.total > value.sourceTotal
         || !Array.isArray(value.items) || value.items.length !== Math.min(value.total, MARKET_LANDING_LIMIT)
@@ -1423,7 +1448,8 @@ async function readCatalogFacetsUncached(input: CatalogSearchParams = {}): Promi
   // Hidden listings invalidate prepared facet counts, not the compact metadata.
   // Force metadata selection for an otherwise unfiltered directory so one hidden
   // offer cannot trigger full-country projection downloads on every cache expiry.
-  const budget=await readBudgetSelection(editorialHasHidden(params.market)
+  const floorAffectsFacets=floorCanAffectQuery(params.market)&&floorHasRows(await readManifest());
+  const budget=await readBudgetSelection(editorialHasHidden(params.market)||floorAffectsFacets
     ? {...params,sort:"year"} : params);
   if(budget){
     const cached=budgetFacetCache.get(budget.rows);
@@ -1446,14 +1472,14 @@ async function readCatalogFacetsUncached(input: CatalogSearchParams = {}): Promi
     || params.mileageFrom || params.mileageTo || params.engineFrom || params.engineTo
     || params.powerFrom || params.powerTo || params.fuel || params.bodyType
     || params.transmission || params.drive || params.auctionGrade || params.auctionDateFrom || params.auctionDateTo);
-  if (!hasFilters && !omitLegacyChinaAggregate() && !editorialHasHidden() && (!params.market || params.market === "any")) {
+  if (!hasFilters && !floorAffectsFacets && !omitLegacyChinaAggregate() && !editorialHasHidden() && (!params.market || params.market === "any")) {
     const [manifest, facets] = await Promise.all([readManifest(), readCurrentFacets()]);
     if (facets.generationId === manifest.generationId) return withEditorialFacetOptions(facets);
     const stored = await readIndex<CatalogFacets | null>(manifest.generationId, "facets.json", null);
     if (stored?.generationId === manifest.generationId) return withEditorialFacetOptions(stored);
   }
   const { generationId, rows } = await currentProjectionRows(params);
-  return facetsFromProjection(generationId, rows, params, hasFilters);
+  return !hasFilters&&floorAffectsFacets?preparedFacetsFromRows(generationId,rows):facetsFromProjection(generationId, rows, params, hasFilters);
 }
 
 export async function persistInternalCatalog(
@@ -2255,7 +2281,7 @@ async function readBudgetSelection(params:CatalogSearchParams){
  // The prepared landing covers only the first 192 rows. Deep category pages
  // must use the same verified compact display order rather than reading the
  // complete market projection. Keep first-page reads on the small landing.
- const compactDefaultQuery=canUseMarketLanding(params)&&(editorialHasHidden(params.market)||Number(params.page||1)*Number(params.pageSize||24)>MARKET_LANDING_LIMIT);
+ const compactDefaultQuery=canUseMarketLanding(params)&&(hasFixedMarketModelYear(params.market)||editorialHasHidden(params.market)||Number(params.page||1)*Number(params.pageSize||24)>MARKET_LANDING_LIMIT);
  const metadataQuery=(compactDefaultQuery || hasBudget || Boolean(params.sort && params.sort!=="updatedAt") || metadataFields.some(key=>Boolean((params as any)[key]))) && Object.entries(params).every(([key,value])=>value===undefined || value==='' || [...metadataFields,'market','city','budgetFrom','budgetTo','sort','page','pageSize'].includes(key));
  const defaultBrandQuery=Boolean((params.make || params.model) && (!params.sort || params.sort==="updatedAt"));
  const defaultDisplayQuery=defaultBrandQuery||compactDefaultQuery;
@@ -2726,6 +2752,15 @@ async function searchOffersEditorial(params: CatalogSearchParams, internalPageLi
 }
 async function searchOffersUncached(params: CatalogSearchParams, internalPageLimit = 48) {
   if(params.market === "japan")return {generationId:await catalogGenerationId(),total:0,page:Math.max(1,Number(params.page||1)),pageSize:Math.min(internalPageLimit,Number(params.pageSize||24)),items:[],usedIndexShards:[]};
+  if(hasFixedMarketModelYear(params.market)&&canUseMarketLanding(params)){
+    const landing=await readMarketLanding(params);
+    const page=Math.max(1,Number(params.page||1));
+    const pageSize=Math.min(Math.max(1,Math.min(384,internalPageLimit)),Math.max(1,Number(params.pageSize||24)));
+    if(landing&&(page*pageSize<=landing.items.length||landing.total<=landing.items.length||(page-1)*pageSize>=landing.total)){
+      return {generationId:landing.generationId,total:landing.total,page,pageSize,items:landing.items.slice((page-1)*pageSize,page*pageSize).map(publicOfferFromProjection),
+        usedIndexShards:[catalogMarketLandingPath(landing.generationId,landing.market)]};
+    }
+  }
   const budgetResult=await searchBudgetIndex(params,internalPageLimit);
   if(budgetResult)return budgetResult;
   return searchOffersWithoutBudgetIndexForTests(params,internalPageLimit);
@@ -2851,7 +2886,14 @@ async function searchOffersStored(params: CatalogSearchParams, internalPageLimit
   const used: string[] = [];
   const byId = await readIndex<{ byId: Record<string, OfferLocation> }>(manifest.generationId, "offers-by-id.json", { byId: {} });
   const order = await readIndex<{ ids: string[] }>(manifest.generationId, "order-updatedAt.json", { ids: Object.keys(byId.byId) });
-  const idList = (ids ? order.ids.filter((id) => ids.has(id)) : order.ids).filter(id=>(!omitLegacyChinaAggregate()||!!byId.byId[id]&&legacyAggregateMarketAllowed(byId.byId[id].market))&&!editorialHidden({id,market:byId.byId[id]?.market}));
+  let idList = (ids ? order.ids.filter((id) => ids.has(id)) : order.ids).filter(id=>(!omitLegacyChinaAggregate()||!!byId.byId[id]&&legacyAggregateMarketAllowed(byId.byId[id].market))&&!editorialHidden({id,market:byId.byId[id]?.market}));
+  if(!needsProjection&&floorCanAffectQuery(params.market)&&floorHasRows(manifest)){
+    // The old unfiltered ordering has no years. Only recheck affected
+    // partitions, preserving other-market positions and normal chunk reads.
+    const affected=MARKETS.filter(market=>hasFixedMarketModelYear(market)&&Number(manifest.markets?.[market]?.count)>0);
+    const allowed=new Set((await mapWithConcurrency(affected,1,market=>readProjectionRows(manifest,{market}))).flat().map(row=>row.id));
+    idList=idList.filter(id=>!hasFixedMarketModelYear(byId.byId[id]?.market)||allowed.has(id));
+  }
   let total = idList.length;
   let pageIds = idList.slice((page - 1) * pageSize, page * pageSize);
 
@@ -3216,7 +3258,7 @@ export async function readHomeCatalogSnapshot(perMarket=6){
  let items=snapshot.items.filter(item=>legacyAggregateMarketAllowed(item.market)).map(item=>applyCatalogEditorial(item));
  const markets=MARKETS.slice(0,0);
  for(const market of MARKETS){
-  if(!legacyAggregateMarketAllowed(market)||!editorialHasHidden(market))continue;
+  if(!legacyAggregateMarketAllowed(market)||!(editorialHasHidden(market)||hasFixedMarketModelYear(market)))continue;
   if(homeSnapshotMarketIsEmpty(snapshot,market))continue;
   markets.push(market);
  }
