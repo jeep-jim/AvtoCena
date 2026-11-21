@@ -198,7 +198,7 @@ async function OfferPageContent({ params, searchParams }: { params: Promise<{ id
   // which can be absent from a compact current shard.
   const detail = await readOfferDetailForPage(id,!Boolean(query.calculation||query.estimate||query.edit||query.direct||query.modificationId||safeRequestedPowerHp),{market:query.market,city:query.city,preparedCut:query.preparedCut});
   if(detail.unavailable)return <SupplierUnavailableOffer disabled={'disabled' in detail&&detail.disabled}/>;
-  if(detail.withdrawn)return <UnavailableOffer offer={detail.withdrawn} />;
+  if('withdrawn' in detail&&detail.withdrawn)return <UnavailableOffer offer={detail.withdrawn} />;
   let storedOffer = detail.offer;
   const editorialPreview = query.edit === "1" && canEditCatalog(await getCurrentUser());
   if(!storedOffer && editorialPreview){
