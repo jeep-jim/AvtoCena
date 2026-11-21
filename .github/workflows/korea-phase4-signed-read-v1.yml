@@ -1,0 +1,79 @@
+name: Verify Korea phase4 checkpoint without writes
+on:
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/korea-phase4-signed-read-v1.json']
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: korea-phase4-signed-read-44863525814
+  cancel-in-progress: false
+env:
+  OPS: .github/operations/korea-phase4-signed-read-v1
+jobs:
+  admit:
+    if: github.repository_id == '1289722938' && github.ref == 'refs/heads/main' && github.run_attempt == 1 && github.event.head_commit.message == 'Verify Korea phase4 checkpoint without writes'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 2
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with: {node-version: '24.22.1'}
+      - name: Confirm single marker, worker hashes, and authentic completed Korea job
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BEFORE: ${{ github.event.before }}
+        run: |
+          set -euo pipefail
+          marker=.github/market-runs/korea-phase4-signed-read-v1.json
+          [[ "$BEFORE" =~ ^[a-f0-9]{40}$ ]]
+          test "$(git rev-list --parents -n1 HEAD)" = "$GITHUB_SHA $BEFORE"
+          test "$(git show -s --format=%B HEAD)" = 'Verify Korea phase4 checkpoint without writes'
+          test "$(git diff --no-renames --name-status "$BEFORE" "$GITHUB_SHA" --)" = "$(printf 'A\t%s' "$marker")"
+          worker="$(git rev-parse "$BEFORE^{tree}")"
+          jq -e --arg tree "$worker" '.=={version:1,scope:"korea_phase4_signed_read_only",workerTree:$tree,runId:"44863525814",jobId:"136747027105",priorHead:"175413fda63f02cce3ecce7b2ed5e769487db736",maxGet:5,maxHead:3}' "$marker" >/dev/null
+          test "$(git rev-parse HEAD:apps/web/lib/data.ts)" = '5869976bd6feb36e12db6ce0d052c577a5fe6dda'
+          test "$(git rev-parse HEAD:package-lock.json)" = 'f60b4a7b321400b449e3bfdda02d0af972adc103'
+          test "$(git rev-parse HEAD:package.json)" = 'c4992f2ac64606e886871ea24de9d2363e612308'
+          printf '%s  %s\n' '14f38c19917fb7c741de0de23dca96b10ba2eb6fa63241e5054494b0aca8cec3' "$OPS/signed-read-44863525814-phase4.mjs" | sha256sum --strict -c -
+          printf '%s  %s\n' 'bafa866d7d9d9cba63d8f8b325ebf421ed67015818d1362ab47fd696f9f392a0' "$OPS/verify-44863525814-checkpoint.mjs" | sha256sum --strict -c -
+          printf '%s  %s\n' 'ef00a2d568edaaf00862c838307696d3035aff7e5618296971a6ba019f0de0af' "$OPS/signed-read-44863525814-phase4.test.mjs" | sha256sum --strict -c -
+          timeout 15s gh api "repos/$GITHUB_REPOSITORY/actions/runs/44863525814" | jq -e '
+            .id==44863525814 and .run_attempt==1 and .head_sha=="175413fda63f02cce3ecce7b2ed5e769487db736" and
+            .head_branch=="main" and .path==".github/workflows/korea-encar-v3-2022-source-v1.yml" and .event=="push" and
+            .status=="completed" and .conclusion=="success" and .repository.id==1289722938 and .head_repository.id==1289722938' >/dev/null
+          timeout 15s gh api "repos/$GITHUB_REPOSITORY/actions/runs/44863525814/attempts/1/jobs?per_page=100" | jq -e '
+            [.jobs[]|select(.id==136747027105 and .run_id==44863525814 and .name=="phase4" and .status=="completed" and .conclusion=="success")]|length==1' >/dev/null
+          node --test "$OPS/signed-read-44863525814-phase4.test.mjs"
+  inspect:
+    needs: admit
+    if: github.repository_id == '1289722938' && github.run_attempt == 1 && needs.admit.result == 'success'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    environment: regcloud-staging
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with: {node-version: '24.22.1'}
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Read and verify exact Korea predecessor metadata only
+        env:
+          JSON_STORAGE_DRIVER: object
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_REGION: us-east-1
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+          YC_OBJECT_STORAGE_REQUEST_TIMEOUT_MS: '8000'
+          YC_OBJECT_STORAGE_MAX_ATTEMPTS: '1'
+        run: timeout 90s node --import tsx "$OPS/signed-read-44863525814-phase4.mjs" "$GITHUB_WORKSPACE"
