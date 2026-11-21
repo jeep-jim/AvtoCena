@@ -24,7 +24,7 @@ function validatePublic(manifest,available){
   }
  }
 }
-export function planRegRetention({generationObjects,internalObjects,publicManifest,previousManifest,internalManifest,extraReferences=[],now=Date.now(),maxDeletes=100000,graceMs=86400000}){
+export function planRegRetention({generationObjects,internalObjects,publicManifest,previousManifest,internalManifest,extraReferences=[],market,now=Date.now(),maxDeletes=100000,graceMs=86400000}){
  assert.ok(Number.isFinite(now)&&Number.isInteger(maxDeletes)&&maxDeletes>0&&maxDeletes<=250000,'invalid_budget');
  assert.ok(Number.isFinite(graceMs)&&graceMs>=21600000,'unsafe_grace');
  const objects=[...generationObjects,...internalObjects],available=new Set();
@@ -43,11 +43,13 @@ export function planRegRetention({generationObjects,internalObjects,publicManife
  ids.slice(0,2).forEach(id=>protectedIds.add(id));
  const stale=row=>{const modified=Date.parse(row.lastModified||'');return Number.isFinite(modified)&&modified>0&&modified<cutoff;};
  for(const [id,rows] of groups)if(time(id)<=0||time(id)>=cutoff||rows.some(row=>!stale(row)))protectedIds.add(id);
+ const scoped=market!==undefined;
+ if(scoped)assert.ok(['china','korea','uae','europe','georgia'].includes(market),'invalid_cleanup_market');
  const candidates=[];
- for(const id of [...ids].reverse())if(!protectedIds.has(id))candidates.push(...groups.get(id).map(row=>({...row,kind:'generation',generationId:id})));
- for(const row of internalObjects){const m=row.key.match(INTERNAL_OBJECT);if(m&&!referencedInternal.has(row.key)&&!protectedIds.has(m[1])&&time(m[1])>0&&time(m[1])<cutoff&&stale(row))candidates.push({...row,kind:'internal',generationId:m[1]});}
+ for(const id of [...ids].reverse())if(!protectedIds.has(id))candidates.push(...groups.get(id).filter(row=>!scoped || row.key.startsWith('catalog/generations/'+id+'/offers/'+market+'/')).map(row=>({...row,kind:'generation',generationId:id})));
+ for(const row of internalObjects){const m=row.key.match(INTERNAL_OBJECT);if(!scoped&&m&&!referencedInternal.has(row.key)&&!protectedIds.has(m[1])&&time(m[1])>0&&time(m[1])<cutoff&&stale(row))candidates.push({...row,kind:'internal',generationId:m[1]});}
  const selected=candidates.slice(0,maxDeletes),bytes=rows=>rows.reduce((n,r)=>n+r.size,0);
- return {selected,summary:{version:1,at:new Date(now).toISOString(),graceMs,maxDeletes,protectedGenerations:[...protectedIds].sort(),currentGeneration:publicManifest.generationId,previousGeneration:previousManifest.generationId,internalGeneration:internalManifest.generationId,generationObjects:generationObjects.length,internalObjects:internalObjects.length,referencedInternal:referencedInternal.size,candidateObjects:candidates.length,candidateBytes:bytes(candidates),selectedObjects:selected.length,selectedBytes:bytes(selected),remainingObjects:candidates.length-selected.length,selectionDigest:fingerprint(selected.map(r=>[r.key,r.size,r.lastModified]))}};
+ return {selected,summary:{version:1,...(scoped?{market}:{}),at:new Date(now).toISOString(),graceMs,maxDeletes,protectedGenerations:[...protectedIds].sort(),currentGeneration:publicManifest.generationId,previousGeneration:previousManifest.generationId,internalGeneration:internalManifest.generationId,generationObjects:generationObjects.length,internalObjects:internalObjects.length,referencedInternal:referencedInternal.size,candidateObjects:candidates.length,candidateBytes:bytes(candidates),selectedObjects:selected.length,selectedBytes:bytes(selected),remainingObjects:candidates.length-selected.length,selectionDigest:fingerprint(selected.map(r=>[r.key,r.size,r.lastModified]))}};
 }
 export async function applyExactSelection({selected,checkFence,deleteObjects,onProgress=()=>{},batchSize=500}){
  assert.ok(Number.isInteger(batchSize)&&batchSize>0&&batchSize<=1000);const seen=new Set();

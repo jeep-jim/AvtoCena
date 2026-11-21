@@ -17,3 +17,17 @@ test('executor sends only explicit bounded keys and checks every batch',async()=
 test('partial or rejected deletion is not reported as success',async()=>{await assert.rejects(applyExactSelection({selected:planRegRetention(fixture()).selected,checkFence:async()=>{},deleteObjects:async()=>0}),/acknowledgment/);});
 test('executor cannot delete outside approved families',async()=>{await assert.rejects(applyExactSelection({selected:[{key:'crm/client.json'}],checkFence:async()=>{},deleteObjects:async()=>1}),/unsafe/);});
 test('generation IDs in internal chunk keys exclude chunk suffix',()=>{assert.deepEqual([...generationReferences({key:`catalog/internal/offers/x/${gid(6)}-chunk-001.json`})],[gid(6)]);});
+
+test('refresh-triggered cleanup selects only unreferenced published chunks of the refreshed market',()=>{
+ const f=fixture(),old=gid(6);
+ f.maxDeletes=20;
+ for(const market of ['europe','japan','green']){
+  f.generationObjects.push({...object(6),key:'catalog/generations/'+old+'/offers/'+market+'/chunk-00001.json'});
+ }
+ f.generationObjects.push({...object(6),key:'catalog/generations/'+old+'/manifest.json'});
+ f.internalObjects.push({...object(6),key:'catalog/internal/offers/source/'+old+'-chunk-00001.json'});
+ const result=planRegRetention({...f,market:'europe'});
+ assert.deepEqual(result.selected.map(x=>x.key),['catalog/generations/'+old+'/offers/europe/chunk-00001.json']);
+ assert.equal(result.summary.market,'europe');
+ assert.throws(()=>planRegRetention({...f,market:'japan'}),/invalid_cleanup_market/);
+});

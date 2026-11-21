@@ -38,7 +38,7 @@ try{
  const generationObjects=await listCompleteObjects(storage,'catalog/generations/');
  const internalObjects=await listCompleteObjects(storage,'catalog/internal/offers/');
  await fence();
- const plan=planRegRetention({generationObjects,internalObjects,publicManifest:baseline[roots[0]].value,previousManifest:baseline[roots[1]].value,internalManifest:baseline[roots[2]].value,extraReferences:extras,maxDeletes:marker.maxDeletes,graceMs:86400000});
+ const plan=planRegRetention({generationObjects,internalObjects,publicManifest:baseline[roots[0]].value,previousManifest:baseline[roots[1]].value,internalManifest:baseline[roots[2]].value,extraReferences:extras,maxDeletes:marker.maxDeletes,market:marker.market,graceMs:86400000});
  report.plan=plan.summary;report.manifestHashes=Object.fromEntries(roots.map(k=>[k,fingerprint(baseline[k].value)]));
  report.marketCounts=Object.fromEntries(Object.entries(baseline[roots[0]].value.markets).map(([k,v])=>[k,v.count]));
  report.namespaceBeforeBytes=[...generationObjects,...internalObjects].reduce((n,r)=>n+r.size,0);

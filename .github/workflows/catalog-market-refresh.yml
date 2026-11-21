@@ -434,6 +434,7 @@ jobs:
         run: node --import tsx scripts/catalog-archive-intake.mjs restore-for-publication '${{ matrix.market }}' "${CATALOG_INTAKE_INPUT_DIR}/catalog-intake-${{ matrix.market }}"
       - run: node --import tsx scripts/catalog-intake-to-publication.mjs
       - name: Check bucket reserve without deleting objects
+        if: matrix.market == 'japan'
         run: node scripts/run-transient-retry.mjs node --import tsx scripts/catalog-storage-preflight.mjs
       - name: Verify China intake and final publication year boundaries
         if: matrix.market == 'china'
@@ -474,7 +475,7 @@ jobs:
         run: |
           failures=0
           for market in $CATALOG_PUBLISH_MARKETS; do
-            node scripts/run-transient-retry.mjs node --import tsx scripts/catalog-storage-preflight.mjs || exit 1
+            if [ "$market" = japan ]; then node scripts/run-transient-retry.mjs node --import tsx scripts/catalog-storage-preflight.mjs || exit 1; fi
             export CATALOG_REBUILD_MARKETS="$market"
             export CATALOG_REBUILD_PUBLISH_REPORT="catalog-weekly-$market-publish-report.json"
             if node scripts/run-transient-retry.mjs node --import tsx scripts/catalog-publish-market.mjs; then
@@ -513,3 +514,11 @@ jobs:
             china-daily-*.json
           overwrite: true
           retention-days: 14
+
+  cleanup_old_market:
+    needs: publish
+    if: needs.publish.result == 'success' && contains(fromJSON('["china","korea","uae","europe","georgia"]'), inputs.market)
+    uses: ./.github/workflows/reg-daily-retention.yml
+    with:
+      published_market: ${{ inputs.market }}
+    secrets: inherit

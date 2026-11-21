@@ -19,8 +19,7 @@ if(files.length){
  assertDubicarsPriorIntake(files,prior);
 }
 const write=observationShardWriter(directory,sourceId),seen=new Set(),withdrawn=new Map();
-const deadline=Date.now()+Math.min(300*60000,Number(process.env.CATALOG_INTAKE_TIME_MS||210*60000));
-const upstream=autoApiChe168Client({platform:'dubicars',apiKey:process.env.AUTO_API_DUBICARS_KEY,deadline,requestDelayMs:200,fetchImpl:async(...args)=>{await assertCollectionEnabled('dubicars_feed');return fetch(...args);}});
+const upstream=autoApiChe168Client({platform:'dubicars',apiKey:process.env.AUTO_API_DUBICARS_KEY,requestDelayMs:200,fetchImpl:async(...args)=>{await assertCollectionEnabled('dubicars_feed');return fetch(...args);}});
 const writeRaw=observationShardWriter(directory,'raw-'+sourceId);
 const request=captureDubicarsResponses(upstream,writeRaw);
 const saved=await getJsonStorage().readJson('catalog/intake-cursors/v1/uae.json',null);

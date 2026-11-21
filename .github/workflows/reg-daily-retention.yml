@@ -1,6 +1,11 @@
 name: REG daily bounded retention
 on:
   workflow_dispatch:
+  workflow_call:
+    inputs:
+      published_market:
+        type: string
+        required: true
   schedule:
     - cron: '0 4 * * *'
 permissions:
@@ -15,6 +20,7 @@ jobs:
     timeout-minutes: 40
     environment: regcloud-staging
     env:
+      RETENTION_MARKET: ${{ inputs.published_market }}
       JSON_STORAGE_DRIVER: object
       YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
       YC_OBJECT_STORAGE_REGION: us-east-1
@@ -38,7 +44,7 @@ jobs:
         run: |
           node --input-type=module <<'JS'
           import fs from 'node:fs';
-          fs.writeFileSync('.github/market-runs/reg-retention.json',JSON.stringify({authorization:'owner-2026-11-07-storage-cleanup',mode:'plan',maxDeletes:20000,expectedPlanDigest:''}));
+          fs.writeFileSync('.github/market-runs/reg-retention.json',JSON.stringify({authorization:'owner-2026-11-07-storage-cleanup',...(process.env.RETENTION_MARKET?{market:process.env.RETENTION_MARKET}:{}),mode:'plan',maxDeletes:20000,expectedPlanDigest:''}));
           JS
           node --import tsx scripts/reg-clean-catalog.mjs
       - name: Preserve plan and bind apply to its exact digest
@@ -55,7 +61,7 @@ jobs:
             if(report.plan.selectedObjects===0){fs.appendFileSync(process.env.GITHUB_OUTPUT,'apply=false\n');console.log('No eligible expired objects');}
             else{
               fs.copyFileSync('reg-retention-report/selection.json','reg-daily-retention-report/selection.json');
-              fs.writeFileSync('.github/market-runs/reg-retention.json',JSON.stringify({authorization:'owner-2026-11-07-storage-cleanup',mode:'apply',maxDeletes:20000,expectedPlanDigest:report.plan.selectionDigest}));
+              fs.writeFileSync('.github/market-runs/reg-retention.json',JSON.stringify({authorization:'owner-2026-11-07-storage-cleanup',...(process.env.RETENTION_MARKET?{market:process.env.RETENTION_MARKET}:{}),mode:'apply',maxDeletes:20000,expectedPlanDigest:report.plan.selectionDigest}));
               fs.appendFileSync(process.env.GITHUB_OUTPUT,'apply=true\n');
             }
           }
