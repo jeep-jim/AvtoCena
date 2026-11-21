@@ -1,0 +1,44 @@
+name: Verify exact mixed Haval prepared China and UAE
+on:
+  push:
+    branches: [main]
+    paths: [.github/market-runs/avtocena-mixed-haval-native-canary-v1.sha256]
+permissions:
+  contents: read
+jobs:
+  native:
+    if: github.repository == 'jeep-jim/AvtoCena' && github.repository_id == '1289722938' && github.ref == 'refs/heads/main' && github.run_attempt == '1' && github.event.head_commit.message == 'Verify mixed Haval China and UAE without publication'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      BUNDLE_SHA: '8a6ce3d84f5776e7f158b546bf76f37cf515ff28adc7aefbbf162185e945cd2f'
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 2
+          persist-credentials: false
+      - name: Verify single additive marker and exact operator bundle
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          test "$(git show -s --format=%P HEAD | wc -w)" = 1
+          readonly marker=.github/market-runs/avtocena-mixed-haval-native-canary-v1.sha256
+          cmp -s <(git diff-tree --no-commit-id -r --name-status --no-renames -z HEAD^ HEAD) <(printf 'A\0%s\0' "$marker")
+          cmp -s "$marker" <(printf '%s\n' 0d577596d14bbd5c4f6eafa48fb9b153ae7ef2ec a2d52f40104ea8cc3162a21b182478d0225ef997 "$BUNDLE_SHA")
+          cd .github/operations/avtocena-mixed-haval-native-canary-v1
+          printf '%s  bundle.sha256\n' "$BUNDLE_SHA" | sha256sum --check --status
+          sha256sum --check --strict --status bundle.sha256
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: 0d577596d14bbd5c4f6eafa48fb9b153ae7ef2ec
+          fetch-depth: 3
+          path: exact-app
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with: {node-version: '24.22.1'}
+      - name: Check exact types, provenance, real native readers and streamed mixed server component
+        working-directory: exact-app
+        shell: bash
+        run: bash "$GITHUB_WORKSPACE/.github/operations/avtocena-mixed-haval-native-canary-v1/verify.sh"
