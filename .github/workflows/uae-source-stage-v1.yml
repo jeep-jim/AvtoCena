@@ -1,0 +1,82 @@
+name: Prepare UAE archive-only private source evidence
+on:
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/uae-source-stage-v1.sha256']
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: uae-private-source-stage-v1
+  cancel-in-progress: false
+jobs:
+  stage:
+    if: github.repository_id == '1289722938' && github.ref == 'refs/heads/main' && github.run_attempt == 1 && github.event.head_commit.message == 'Stage exact archived UAE source privately'
+    runs-on: ubuntu-24.04
+    environment: regcloud-staging
+    timeout-minutes: 10
+    env:
+      STAGE_PATH: .github/operations/uae-source-stage-v1
+      UAE_STAGE_EXPECTED_GITHUB_SHA: ${{ github.sha }}
+      UAE_STAGE_EXPECTED_LIVE_RELEASE: 22867cbcfaee27b2e8917b6bf880e44827f67b60
+      UAE_STAGE_EXPECTED_LIVE_CALC: 4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 2
+          persist-credentials: false
+      - name: Require sole pinned marker and exact guarded native adapter
+        env:
+          BEFORE: ${{ github.event.before }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          marker=.github/market-runs/uae-source-stage-v1.sha256
+          [[ "$BEFORE" =~ ^[a-f0-9]{40}$ ]]
+          test "$(git rev-list --parents -n1 HEAD)" = "$GITHUB_SHA $BEFORE"
+          test "$(git show -s --format=%B HEAD)" = 'Stage exact archived UAE source privately'
+          test "$(git diff --no-renames --name-status "$BEFORE" "$GITHUB_SHA" --)" = "$(printf 'A\t%s' "$marker")"
+          printf '%s  %s\n' 4fb15e631783d2d1b68f24855439ad5a20249b38194f84729d379ad906d3f91d "$marker" | sha256sum -c -
+          sha256sum --strict -c "$marker"
+          test "$(git rev-parse HEAD:apps/web/lib/data.ts)" = '5869976bd6feb36e12db6ce0d052c577a5fe6dda'
+          test "$(git rev-parse HEAD:apps/web/lib/catalog/collection-controls.ts)" = 'f6fdcde174914ce3db140a77f02a7d45565414b0'
+          test "$(git rev-parse HEAD:apps/web/lib/catalog/collection-controls-schema.ts)" = 'ef31a2e5bb956d20a20495ada76927ed7dbb7b44'
+          test "$(git rev-parse HEAD:package-lock.json)" = 'f60b4a7b321400b449e3bfdda02d0af972adc103'
+          test "$(git rev-parse HEAD:package.json)" = 'c4992f2ac64606e886871ea24de9d2363e612308'
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with: {node-version: '24.22.1', cache: npm}
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Reconstruct source from two exact sealed GitHub assets only
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          umask 077
+          private="$(mktemp -d "$RUNNER_TEMP/uae-archive.XXXXXX")"
+          export PYTHONDONTWRITEBYTECODE=1
+          mkdir -m 700 "$private/zip" "$private/output"
+          for id in 14287441994 14586057004; do
+            # curl never forwards this Authorization header to a foreign redirect origin.
+            curl -fSsL --proto '=https' --proto-redir '=https' --max-redirs 1 --max-time 90 --max-filesize 50000000 \
+              -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github+json" \
+              "https://api.github.com/repos/jeep-jim/AvtoCena/actions/artifacts/$id/zip" -o "$private/zip/$id.zip"
+          done
+          python3 "$STAGE_PATH/stage-source-shadow.py" "$private/zip" "$private/output" > "$private/stage.json"
+          dir="$(jq -er .localDir "$private/stage.json")"
+          python3 "$STAGE_PATH/check-source-shadow.py" "$dir" "$private/zip"
+          UAE_LOCAL_EXACT="$dir" node --test "$STAGE_PATH/stage.test.mjs"
+          printf 'UAE_EXACT_LOCAL=%s\n' "$dir" >> "$GITHUB_ENV"
+      - name: Compare live UAE and stage privately, never publish
+        env:
+          JSON_STORAGE_DRIVER: object
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_REGION: us-east-1
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+          YC_OBJECT_STORAGE_REQUEST_TIMEOUT_MS: '8000'
+          YC_OBJECT_STORAGE_MAX_ATTEMPTS: '1'
+        run: node --import tsx "$STAGE_PATH/actor.mjs" "$UAE_EXACT_LOCAL" "$UAE_STAGE_EXPECTED_LIVE_RELEASE" "$UAE_STAGE_EXPECTED_LIVE_CALC"
