@@ -1,12 +1,6 @@
 {
-  "operation": "owner-china-recover-completed-intake-20261101",
-  "requestedAt": "2026-10-31T17:08:48.182Z",
+  "operation": "owner-daily-che168-to-reg-20261121",
   "market": "china",
-  "publishMarkets": [
-    "china"
-  ],
-  "reuseRunId": "41111109988",
-  "refreshMarkets": [],
-  "resetCursors": false,
-  "reason": "Owner-authorized stale-market recovery after independent publication heartbeat fix PR1672 passed full CI. Reuse complete Oct30 source intake, no paid recollection; retain lock ownership, generation, completeness and publication safeguards."
+  "requestedAt": "2026-11-21T15:00:43+00:00",
+  "reason": "Continue from the accepted full Che168 dataset. Persist all supplier changes before advancing the source cursor."
 }
