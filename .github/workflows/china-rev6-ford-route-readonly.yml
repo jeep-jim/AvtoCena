@@ -1,0 +1,49 @@
+name: Verify exact live China Ford redirect without changes
+on:
+  push:
+    branches: [main]
+    paths: [.github/market-runs/china-rev6-ford-route-readonly.sha256]
+permissions:
+  contents: read
+jobs:
+  verify:
+    name: Verify exact live China Ford redirect without changes
+    if: github.repository == 'jeep-jim/AvtoCena' && github.repository_id == '1289722938' && github.ref == 'refs/heads/main' && github.run_attempt == '1' && github.event.head_commit.message == 'Verify exact live China Ford redirect without changes'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+          fetch-depth: 3
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with: {node-version: 24.22.1}
+      - name: Fit exact public-only scope and sole marker
+        shell: bash
+        run: |
+          set -euo pipefail
+          readonly actor=.github/operations/china-rev6-ford-route-readonly/reconcile.mjs
+          readonly marker=.github/market-runs/china-rev6-ford-route-readonly.sha256
+          readonly workflow=.github/workflows/china-rev6-ford-route-readonly.yml
+          readonly digest=bffcf53f5aaee7d4a0bce3abce32c05627ef120b29c6171945f4c3019903bfb9
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          test "$(git rev-parse HEAD^^)" = a0d3be5a8938ac1c6c51e913e9ff385af16803d1
+          test "$(git rev-parse HEAD^^^{tree})" = 556b0178d980446f363925152d45ac881a0ede05
+          test "$(git show -s --format=%P HEAD | wc -w)" = 1
+          test "$(git show -s --format=%P HEAD^ | wc -w)" = 1
+          python3 - <<'PY'
+          import json,os,subprocess
+          with open(os.environ['GITHUB_EVENT_PATH']) as f: e=json.load(f)
+          parent=subprocess.check_output(['git','rev-parse','HEAD^'],text=True).strip()
+          assert e['before']==parent and e['forced'] is False and e['deleted'] is False
+          assert len(e['commits'])==1 and e['commits'][0]['id']==e['head_commit']['id']==os.environ['GITHUB_SHA']
+          PY
+          cmp -s <(git diff-tree --no-commit-id -r --name-status --no-renames -z HEAD^ HEAD) <(printf 'A\0%s\0' "$marker")
+          cmp -s <(git diff-tree --no-commit-id -r --name-status --no-renames -z HEAD^^ HEAD^) <(printf 'A\0%s\0A\0%s\0' "$actor" "$workflow")
+          test "$(sha256sum "$actor" |cut -d' ' -f1)" = "$digest"
+          printf '%s\n%s\n' "$digest" "$(git rev-parse HEAD^)" | cmp -s - "$marker"
+      - name: Discriminate public SSR card price and Ford state by HTTPS GET only
+        shell: bash
+        run: |
+          set -euo pipefail
+          timeout -k 5s 105s node .github/operations/china-rev6-ford-route-readonly/reconcile.mjs
