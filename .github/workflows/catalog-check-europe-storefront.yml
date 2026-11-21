@@ -1,0 +1,38 @@
+name: Verify published Europe catalog on avtocena.com
+on:
+  workflow_run:
+    workflows: ['Catalog refresh europe']
+    branches: [main]
+    types: [completed]
+permissions:
+  contents: read
+  actions: read
+jobs:
+  verify:
+    if: github.event.workflow_run.head_repository.full_name == github.repository && github.event.workflow_run.head_branch == 'main'
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Check whether Europe was published in this run
+        id: parent
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const jobs = await github.paginate(github.rest.actions.listJobsForWorkflowRun, {
+              ...context.repo, run_id: context.payload.workflow_run.id, per_page: 100
+            })
+            const published = jobs.some(job => job.name.endsWith('publish (europe)') &&
+              job.steps?.some(step => step.name === 'Publish markets through calculation and retention guards' && step.conclusion === 'success'))
+            core.setOutput('published', String(published))
+      - uses: actions/download-artifact@v4
+        if: steps.parent.outputs.published == 'true'
+        with:
+          name: catalog-quality-rebuild-reports-europe
+          path: reports
+          run-id: ${{ github.event.workflow_run.id }}
+          github-token: ${{ github.token }}
+      - name: Check the public counter, first page and filter up to 160 hp
+        if: steps.parent.outputs.published == 'true'
+        run: node scripts/catalog-check-europe-storefront.mjs reports/catalog-weekly-europe-publish-report.json
