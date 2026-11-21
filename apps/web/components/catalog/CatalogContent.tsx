@@ -14,6 +14,7 @@ import {normalizedCatalogSort} from '@/lib/catalog/catalog-sort';
 import {CatalogSidebar} from './CatalogSidebar';
 import {GreenCornerCatalog} from "./GreenCornerCatalog";
 import {usesAjesMarket} from '@/lib/catalog/ajes-market-selection';
+import {readCatalogRouteSourceScope} from '@/lib/catalog/catalog-route-source-scope';
 import {exactAjesCount} from '@/lib/catalog/ajes-count-display';
 import {AjesCatalog} from './AjesCatalog';
 import {AjesRail,readAjesRailData,readAjesRailCount,CatalogEmptyResults} from './AjesRail';
@@ -128,13 +129,18 @@ async function ReadCatalogContent({params={},dealer=null,embedded=false}:{params
    ?await readPreparedChinaCompatibility({...common,market:'china',page:requestedPage},{countOnly:false,includeFacets:false,
      marketPage:true,navigationFacets:true,unsupported:Boolean(first(params.source)||first(params.stock)),expectedGeneration:first(params.preparedCut)}):null;
   const omitChina=omitLegacyChinaAggregate()&&!selectedMarket;
-  const [liveChina,liveKorea]=chinaCut?[false,false]:await Promise.all([omitChina?false:usesAjesMarket('china'),usesAjesMarket('korea')]);
+  const rawMarket=first(params.market);
+  const directMarket=!dealer||dealer.markets.includes(rawMarket as any)?rawMarket:'';
+  const {liveChina,liveKorea,direct}=await readCatalogRouteSourceScope({
+    renderedMarkets:markets.map(m=>m.id),directMarket,directSource:first(params.source),
+    preparedChina:Boolean(chinaCut),omitLegacyChina:omitChina,
+  },usesAjesMarket);
   const aggregateChinaSection=async(market:{id:string;label:string})=>{
     const fresh=(!hasFilters&&!customSort&&requestedPage===1)?await readPreparedChinaHomeCards(OVERVIEW_CARDS).catch(()=>null):null;
     return {...market,items:fresh?.items??[],total:fresh?.total??0,page:1,pageSize:OVERVIEW_CARDS,...(!fresh?{unavailable:true}:{})};
   };
   const liveMarket=(id:string)=>id==='china'&&liveChina||id==='korea'&&liveKorea;
-  if(!chinaCut&&(!dealer||dealer.markets.includes(first(params.market) as any))&&await usesAjesMarket(first(params.market),first(params.source)))
+  if(direct)
    return <AjesCatalog params={params} embedded={embedded} dealer={dealer}/>;
   // Start supplier previews alongside local indexes instead of after all local work.
   const railReads=new Map<string,ReturnType<typeof readAjesRailData>>(markets.filter(m=>liveMarket(m.id)||m.id==='japan').map(m=>[m.id,readAjesRailData(m.id as 'japan'|'china'|'korea',params)]));

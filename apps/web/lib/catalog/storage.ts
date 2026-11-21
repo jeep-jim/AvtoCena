@@ -1276,7 +1276,7 @@ async function facetsFromProjection(generationId: string, rows: CatalogSearchPro
   }
   const modelKeys = await projectionModelKeys(params);
   if (params.budgetFrom || params.budgetTo || params.engineFrom || params.engineTo || params.hasPrice) {
-    rows=await currentSearchPrices(rows,generationId);
+    rows=await currentSearchPrices(narrowKnownProjectionRanges(rows,params),generationId);
   }
   const offers = rows.filter((row) => catalogSearchProjectionMatches(row, params, modelKeys));
   return preparedFacetsFromRows(generationId,offers);
@@ -2151,7 +2151,24 @@ async function writeBudgetSearchIndex(generationId:string,rows:CatalogSearchProj
 // Price selection must replay the same FX, customs anniversaries and business
 // settings as rendered cards. Cache only compact tuples, never whole markets.
 const liveBudgetBlockCache = new DetailReadCache<BudgetCountIndex|null>({maxEntries:512,maxBytes:32*1024*1024,ttlMs:60_000,concurrency:3});
+// Price replay cannot turn a known year or mileage into a different value for
+// these ordinary local projections. Keep unknowns and edited rows for the
+// authoritative matcher, and never use this shortcut in live/mixed/Japan paths.
+function narrowKnownProjectionRanges(rows:CatalogSearchProjection[],query:CatalogSearchParams){
+ const market=query.market;
+ if(!market||!['korea','europe','uae','georgia','kyrgyzstan','usa'].includes(market)
+   ||query.preparedCut||query.after||query.auctionGrade||query.auctionDateFrom||query.auctionDateTo
+   ||!(query.yearFrom||query.yearTo||query.mileageFrom||query.mileageTo))return rows;
+ return rows.filter(row=>{
+  if(row.market!==market||matchingEditorial(row))return true;
+  const year=row.year,mileage=row.mileageKm;
+  if(Number.isInteger(year)&&year>0&&((query.yearFrom&&year<query.yearFrom)||(query.yearTo&&year>query.yearTo)))return false;
+  return !(typeof mileage==='number'&&Number.isFinite(mileage)&&mileage>0
+    &&((query.mileageFrom&&mileage<query.mileageFrom)||(query.mileageTo&&mileage>query.mileageTo)));
+ });
+}
 async function currentSearchPrices(rows:CatalogSearchProjection[],generationId:string){
+ if(!rows.length)return rows;
  const {applyActiveBusinessPriceBatch}=await import("./live-business-pricing");
  const {attachJapanSearchValues}=await import("./japan-delivered-preview");
  const {attachSellerDeliveredPreviews}=await import('./seller-delivered-preview');
@@ -2159,7 +2176,7 @@ async function currentSearchPrices(rows:CatalogSearchProjection[],generationId:s
  const result:CatalogSearchProjection[]=[];
  for(let start=0;start<rows.length;start+=128){
   const prepared=rows.slice(start,start+128);
-  const priced=await applyActiveBusinessPriceBatch(prepared as any[],{readOnly:true}) as CatalogSearchProjection[];
+  const priced=await applyActiveBusinessPriceBatch(prepared as any[],{readOnly:true},configurations) as CatalogSearchProjection[];
   // Use only retained projection inputs here: no per-listing detail or supplier scan.
   // The same preview must exist before ordering, not only after a page is selected.
   const delivered=await attachSellerDeliveredPreviews(priced as any[],configurations,{projectionOnly:true}) as CatalogSearchProjection[];
@@ -2704,7 +2721,7 @@ async function countCatalogOffersEditorial(params: CatalogSearchParams) {
     if(budget)return {generationId:budget.generationId,total:budget.rows.length};
     let {generationId, rows} = await currentProjectionRows(query);
     if (query.budgetFrom || query.budgetTo || query.engineFrom || query.engineTo || query.hasPrice) {
-      rows = await currentSearchPrices(rows, generationId);
+      rows = await currentSearchPrices(narrowKnownProjectionRanges(rows, query), generationId);
     }
     const modelKeys = await projectionModelKeys(query);
     let total = 0;
@@ -2734,7 +2751,7 @@ async function searchOffersUncached(params: CatalogSearchParams, internalPageLim
 async function searchOffersWithoutBudgetIndexForTestsEditorial(params:CatalogSearchParams,internalPageLimit=48){
   if (params.budgetFrom || params.budgetTo || params.hasPrice || parseCatalogSort(params.sort)?.some(term=>term.startsWith("totalRub")) || ((!params.market || params.market === "any" || params.market === "japan") && (params.engineFrom || params.engineTo))) {
     const {generationId,rows}=await currentProjectionRows(params);
-    const prepared=await currentSearchPrices(rows,generationId);
+    const prepared=await currentSearchPrices(narrowKnownProjectionRanges(rows,params),generationId);
     const modelKeys=await projectionModelKeys(params);
     const matching=prepared.filter(row=>catalogSearchProjectionMatches(row,params,modelKeys));
     sortCatalogSearchRows(matching,params);
