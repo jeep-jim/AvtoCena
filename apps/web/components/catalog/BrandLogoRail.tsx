@@ -5,9 +5,11 @@ import {useDealerBrowsing} from "@/components/dealers/DealerBrowsingContext";
 import {dealerBrowsingHref} from "@/lib/dealers/browsing-context";
 
 import Link from "next/link";
-import {brandContextQuery,brandSelectionQuery} from "@/lib/catalog/brand-navigation";
+import {brandContextQuery,brandSelectionQuery,brandFilterHref} from "@/lib/catalog/brand-navigation";
+import {rememberFilterScroll} from "@/lib/catalog/filter-scroll";
+import {readSelectedCity,useSelectedCity} from "@/lib/location/selected-city";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useMemo, useRef, useState, useSyncExternalStore, type MouseEvent } from "react";
+import { startTransition, useEffect, useMemo, useRef, useState, useSyncExternalStore, type MouseEvent } from "react";
 import {subscribeBrandTheme,readBrandTheme,serverBrandTheme} from "./brand-theme-store";
 import { CATALOG_BRANDS, canonicalCatalogBrand, catalogBrandSlug, catalogBrandPresentation } from "@/lib/catalog/brands";
 
@@ -81,10 +83,11 @@ export function BrandLogoVisual({ brand, className = "" }: { brand: string; clas
   />;
 }
 
-function BrandTile({ brand, href, onClick }: { brand: string; href: string; onClick?: (event: MouseEvent<HTMLAnchorElement>) => void }) {
+function BrandTile({ brand, href, onClick, localFilter }: { brand: string; href: string; localFilter?: boolean; onClick?: (event: MouseEvent<HTMLAnchorElement>) => void }) {
   return <Link
     href={href}
     prefetch={false}
+    data-no-route-loader={localFilter ? "true" : undefined}
     onClick={onClick}
     className="flex h-[78px] min-w-[94px] shrink-0 touch-manipulation select-none flex-col items-center justify-center gap-1.5 px-1.5 transition md:hover:-translate-y-0.5"
     title={`Автомобили ${brand} под заказ`}
@@ -99,6 +102,7 @@ function BrandDirectoryTile({
   href,
   countLabel,
   selected = false,
+  localFilter,
   onClick,
   onPointerEnter,
 }: {
@@ -106,12 +110,14 @@ function BrandDirectoryTile({
   href: string;
   countLabel: string;
   selected?: boolean;
+  localFilter?: boolean;
   onClick?: (event: MouseEvent<HTMLAnchorElement>) => void;
   onPointerEnter?: () => void;
 }) {
   return <Link
     href={href}
     prefetch={false}
+    data-no-route-loader={localFilter ? "true" : undefined}
     onClick={onClick}
     onPointerEnter={onPointerEnter}
     className={`group flex min-h-[62px] min-w-0 items-center gap-3 rounded-2xl px-3 py-2 transition hover:bg-[var(--ac-surface-2)] focus-visible:bg-[var(--ac-surface-2)] focus-visible:outline-none ${selected ? "bg-[var(--ac-surface-2)]" : ""}`}
@@ -148,6 +154,7 @@ function BrandLogoRailContent({
   const pathname = usePathname();
   const router = useRouter();
   const searchParams = useSearchParams();
+  const selectedCity=useSelectedCity();
   const searchParamsText = brandContextQuery(searchParams.toString(),initial);
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
@@ -156,7 +163,9 @@ function BrandLogoRailContent({
   const railRef = useRef<HTMLDivElement>(null);
   const drag = useRef<{ pointerId: number; startX: number; startScrollLeft: number; moved: boolean } | null>(null);
   const suppressClick = useRef(false);
+  const lastFilterNavigation=useRef<{href:string;at:number}|null>(null);
   const homeBrandDirectory = directoryMode || pathname === "/";
+  const localFilter = !homeBrandDirectory && !dealer;
   const suppliedBrands = useMemo(() => {
     const map = new Map<string, string>();
     for (const value of brands) {
@@ -265,15 +274,32 @@ function BrandLogoRailContent({
   };
 
   const setCatalogBrands = (nextBrands: string[]) => {
+    if (localFilter) {
+      const href=brandFilterHref(searchParamsText,nextBrands,null,readSelectedCity());
+      if (href===pathname+(searchParams.size?`?${searchParams.toString()}`:"")) return;
+      const at=Date.now();
+      if (lastFilterNavigation.current?.href===href && at-lastFilterNavigation.current.at<350) return;
+      lastFilterNavigation.current={href,at};
+      rememberFilterScroll(href);
+      startTransition(()=>router.push(href,{scroll:false}));
+      return;
+    }
     const queryString = brandSelectionQuery(searchParamsText,nextBrands);
     router.replace(dealerBrowsingHref(queryString ? `/cars?${queryString}` : "/cars",dealer), { scroll: false });
   };
 
   const clearSelectedBrands = () => setCatalogBrands([]);
 
+  const nextForBrand = (brand: string) => {
+    const key=brand.toLocaleLowerCase("en-US");
+    return selectedBrandKeys.has(key)
+      ? selectedBrands.filter(item=>item.toLocaleLowerCase("en-US")!==key)
+      : [...selectedBrands,brand];
+  };
   const hrefForBrand = (brand: string) => homeBrandDirectory
     ? `/cars/brand/${catalogBrandSlug(brand)}`
-    : dealerBrowsingHref(`/cars?${brandSelectionQuery(searchParamsText,selectedBrandKeys.has(brand.toLocaleLowerCase("en-US"))?selectedBrands.filter(item=>item.toLocaleLowerCase("en-US")!==brand.toLocaleLowerCase("en-US")):[...selectedBrands,brand])}`,dealer);
+    : localFilter ? brandFilterHref(searchParamsText,nextForBrand(brand),null,selectedCity)
+    : dealerBrowsingHref(`/cars?${brandSelectionQuery(searchParamsText,nextForBrand(brand))}`,dealer);
 
   const handleBrandClick = (brand: string, closeAfter = false) => (event: MouseEvent<HTMLAnchorElement>) => {
     if (homeBrandDirectory) {
@@ -281,12 +307,9 @@ function BrandLogoRailContent({
       return;
     }
 
+    if (localFilter && (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey)) return;
     event.preventDefault();
-    const key = brand.toLocaleLowerCase("en-US");
-    const next = selectedBrandKeys.has(key)
-      ? selectedBrands.filter((item) => item.toLocaleLowerCase("en-US") !== key)
-      : [...selectedBrands, brand];
-    setCatalogBrands(next);
+    setCatalogBrands(nextForBrand(brand));
   };
 
   const countLabelForBrand = (brand: string) => {
@@ -353,7 +376,7 @@ function BrandLogoRailContent({
           event.stopPropagation();
         }}
       >
-        {railBrands.map((brand) => <BrandTile key={brand.toLocaleLowerCase("en-US")} brand={brand} href={hrefForBrand(brand)} onClick={handleBrandClick(brand)} />)}
+        {railBrands.map((brand) => <BrandTile key={brand.toLocaleLowerCase("en-US")} brand={brand} href={hrefForBrand(brand)} localFilter={localFilter} onClick={handleBrandClick(brand)} />)}
         {!railBrands.length ? <div className="px-4 py-6 text-sm font-bold text-[var(--ac-muted)]">Марка не найдена</div> : null}
       </div>
       <button type="button" onClick={() => setOpen(true)} className="absolute right-2 top-1/2 flex h-12 w-9 -translate-y-1/2 items-center justify-center rounded-xl bg-[var(--ac-surface-2)] text-xl font-black text-red-500" aria-label="Показать все марки">›</button>
@@ -366,7 +389,7 @@ function BrandLogoRailContent({
           <input value={query} onChange={(event) => setQuery(event.target.value)} autoFocus placeholder="Найти марку" className="ac-filter-search mt-4 h-12 w-full rounded-2xl px-4 text-sm font-bold outline-none" />
         </div>
         <div className="grid grid-cols-1 gap-1 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-3 lg:gap-y-1.5">
-          {filtered.map((brand) => <BrandDirectoryTile key={brand} brand={brand} href={hrefForBrand(brand)} countLabel={countLabelForBrand(brand)} selected={!homeBrandDirectory && selectedBrandKeys.has(brand.toLocaleLowerCase("en-US"))} onPointerEnter={homeBrandDirectory ? () => router.prefetch(hrefForBrand(brand)) : undefined} onClick={handleBrandClick(brand, true)} />)}
+          {filtered.map((brand) => <BrandDirectoryTile key={brand} brand={brand} href={hrefForBrand(brand)} localFilter={localFilter} countLabel={countLabelForBrand(brand)} selected={!homeBrandDirectory && selectedBrandKeys.has(brand.toLocaleLowerCase("en-US"))} onPointerEnter={homeBrandDirectory ? () => router.prefetch(hrefForBrand(brand)) : undefined} onClick={handleBrandClick(brand, true)} />)}
         </div>
         {!filtered.length ? <div className="py-12 text-center font-bold text-[var(--ac-muted)]">Марка не найдена</div> : null}
       </div>

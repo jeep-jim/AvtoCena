@@ -16,7 +16,7 @@ import {StickyCatalogControls} from "./StickyCatalogControls";
 import {createPortal} from "react-dom";
 import {CatalogMarketFlag} from "./CatalogMarketFlag";
 import {useDealerBrowsing} from "@/components/dealers/DealerBrowsingContext";
-import {dealerBrowsingHref} from "@/lib/dealers/browsing-context";
+import {catalogFilterHref} from "@/lib/catalog/brand-navigation";
 import { CityPickerDialog, LocationIcon } from "../home/CitySelector";
 import { useSelectedCity } from "../../lib/location/selected-city";
 import { persistCity, readSelectedCity } from "../../lib/location/selected-city";
@@ -374,8 +374,7 @@ export function CatalogFilters({ initial, facets, resultCount, auctionResults=fa
       const city=readSelectedCity();if(city)query.set("city",city);
       for(const key of ["utm_source","utm_medium","utm_campaign","utm_content","utm_term","yclid"]) { const value=current.get(key); if(value)query.set(key,value); }
       if(initial.source&&draft.market===initial.market)query.set('source',initial.source);
-      const basePath=draft.market === "japan" && draft.stock === "green" ? "/cars/green" : "/cars";
-      const href=dealerBrowsingHref(query.size ? `${basePath}?${query}` : basePath,dealer);
+      const href=catalogFilterHref(query,dealer);
       rememberFilterScroll(href);
       startTransition(()=>router.push(href, { scroll: false }));
     // Let a chassis/lot/frame number be typed before spending supplier requests.
@@ -503,8 +502,7 @@ export function CatalogFilters({ initial, facets, resultCount, auctionResults=fa
     for (const key of ["utm_source","utm_medium","utm_campaign","utm_content","utm_term","yclid"]) {
       const value = current.get(key); if (value) query.set(key,value);
     }
-    const basePath = draft.market === "japan" && draft.stock === "green" ? "/cars/green" : "/cars";
-    const href=dealerBrowsingHref(query.size ? `${basePath}?${query}` : basePath,dealer);
+    const href=catalogFilterHref(query,dealer);
     rememberFilterScroll(href);
     startTransition(() => router.push(href, {scroll:false}));
   };

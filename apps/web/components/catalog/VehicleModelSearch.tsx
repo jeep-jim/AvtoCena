@@ -6,7 +6,7 @@ import { createPortal, flushSync } from "react-dom";
 import {createModelSuggestionSearch, mergeModelSuggestions, typedModelSelection, typedModelMake} from "@/lib/catalog/model-suggestion-search";
 import {canonicalCatalogBrand} from "@/lib/catalog/brands";
 import {loadModelSuggestions} from "@/lib/catalog/model-suggestion-loader";
-import {modelDirectoryMarkets} from "@/lib/catalog/market-selection";
+import {inventoryDirectoryScopes, modelDirectoryMarkets} from "@/lib/catalog/market-selection";
 
 type ModelSuggestion = {
   id?: string;
@@ -174,7 +174,7 @@ export function VehicleModelSearch({
   const [query, setQuery] = useState(multiple ? value.split("|").filter(Boolean).join(", ") : value || "");
   const [remoteItems, setItems] = useState<ModelSuggestion[]>([]);
   const [directory,setDirectory]=useState<ReturnType<typeof createModelSuggestionSearch>|null>(null);
-  const [inventory,setInventory]=useState<ReturnType<typeof createModelSuggestionSearch>|null>(null);
+  const [inventory,setInventory]=useState<Array<ReturnType<typeof createModelSuggestionSearch>>>([]);
   const [stockDirectory,setStockDirectory]=useState<ReturnType<typeof createModelSuggestionSearch>|null>(null);
   const [supplierLoading,setSupplierLoading]=useState(0);
   const [supplierError,setSupplierError]=useState(false);
@@ -188,7 +188,8 @@ export function VehicleModelSearch({
   const sourceOnly=Boolean(sourceItems)&&sourceStock==='green';
   const sourceSearch=useMemo(()=>sourceItems?createModelSuggestionSearch({version:1,brands:[],models:sourceItems.map(item=>[item.make,item.model,item.aliases||[],1])}):null,[sourceItems]);
   const items=useMemo(()=>{
-    const local=sourceSearch?mergeModelSuggestions(inventory?.(searchQuery,make)||[],mergeModelSuggestions(sourceSearch(searchQuery,make),sourceOnly?[]:directory?.(searchQuery,make)||[],searchQuery),searchQuery):contextual?mergeModelSuggestions(inventory?.(searchQuery,make)||[],directory?.(searchQuery,make)||[],searchQuery):remoteItems.map(item=>({...item,aliases:item.aliases||[]}));
+    const inventoryItems=inventory.flatMap(search=>search(searchQuery,make));
+    const local=sourceSearch?mergeModelSuggestions(inventoryItems,mergeModelSuggestions(sourceSearch(searchQuery,make),sourceOnly?[]:directory?.(searchQuery,make)||[],searchQuery),searchQuery):contextual?mergeModelSuggestions(inventoryItems,directory?.(searchQuery,make)||[],searchQuery):remoteItems.map(item=>({...item,aliases:item.aliases||[]}));
     const merged=mergeModelSuggestions([...supplierSearches.flatMap(search=>search(searchQuery,make)),...(stockDirectory?.(searchQuery,make)||[])],local,searchQuery);
     return contextual?groupFilterModels(merged):merged;
   },[sourceSearch,sourceOnly,contextual,inventory,directory,searchQuery,make,remoteItems,supplierSearches,stockDirectory]);
@@ -240,14 +241,14 @@ export function VehicleModelSearch({
   useEffect(()=>{
     setSupplierSearches([]);setSupplierError(false);setSupplierLoading(0);
     if(!contextual||!open||sourceStock==='green')return;
-    const markets=modelDirectoryMarkets(sourceMarket,make,Boolean(sourceItems));
+    const markets=modelDirectoryMarkets(sourceMarket,make);
     let cancelled=false;setSupplierLoading(markets.length);
     // Each directory can extend the picker immediately, independently of peers.
     for(const market of markets)loadModelSuggestions(true,{market,make}).then(search=>{
       if(!cancelled)setSupplierSearches(current=>[...current,search]);
     }).catch(()=>{if(!cancelled)setSupplierError(true);}).finally(()=>{if(!cancelled)setSupplierLoading(count=>Math.max(0,count-1));});
     return()=>{cancelled=true;};
-  },[Boolean(sourceItems),contextual,sourceMarket,sourceStock,make,open,retry]);
+  },[contextual,sourceMarket,sourceStock,make,open,retry]);
 
   useEffect(()=>{
     if(sourceOnly||!contextual||!open||directory)return;
@@ -257,14 +258,23 @@ export function VehicleModelSearch({
   },[sourceOnly,contextual,open,directory,retry]);
 
   useEffect(()=>{
+    setInventory([]);setInventoryLoading(false);setInventoryError(false);
     if(sourceItems||!contextual||!open)return;
-    let cancelled=false;setInventoryLoading(true);setInventoryError(false);
-    loadModelSuggestions(true,undefined,make,sourceMarket).then(search=>{if(!cancelled){setInventoryLoading(false);setInventory(()=>search);}})
-      .catch(()=>{if(!cancelled)setInventoryError(true);})
-      .finally(()=>{if(!cancelled)setInventoryLoading(false);});
+    const scopes=inventoryDirectoryScopes(sourceMarket);
+    let cancelled=false;
+    setInventoryLoading(scopes.length>0);
+    void Promise.all(scopes.map(async market=>{
+      try{
+        const search=await loadModelSuggestions(true,undefined,make,market);
+        if(!cancelled)setInventory(current=>[...current,search]);
+      }catch{
+        if(!cancelled)setInventoryError(true);
+      }
+    })).then(()=>{if(!cancelled)setInventoryLoading(false);});
     return()=>{cancelled=true;};
   },[sourceItems,contextual,open,retry,make,sourceMarket]);
   useEffect(()=>{
+    setStockDirectory(null);
     if(sourceItems||!contextual||!open||sourceMarket&&!sourceMarket.split('|').some(market=>market==='japan'||market==='green'))return;
     let cancelled=false;
     loadModelSuggestions(true,undefined,make,'green').then(search=>{if(!cancelled)setStockDirectory(()=>search);})

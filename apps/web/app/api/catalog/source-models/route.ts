@@ -1,4 +1,5 @@
 import {NextResponse} from 'next/server';
+import {publishedModelSuggestions} from '@/lib/catalog/published-model-directory';
 import {readAjesDirectory} from '@/lib/catalog/ajes-catalog';
 import {AjesUnavailable} from '@/lib/catalog/ajes-client';
 import {AjesInputError} from '@/lib/catalog/ajes-query';
@@ -7,6 +8,10 @@ export async function GET(request:Request){
  const p=new URL(request.url).searchParams,market=p.get('market');
  if(!['china','korea','japan'].includes(market||''))return NextResponse.json({error:'invalid_market'},{status:400});
  try{
+  if(market==='korea'||market==='china'){
+   const result=await publishedModelSuggestions(p.get('make')||'',market);
+   return NextResponse.json(result,{headers:{'Cache-Control':'no-store'}});
+  }
   const result=await readAjesDirectory({market,make:p.get('make')||undefined});
   return NextResponse.json({version:1,brands:[],models:result.models.map(row=>[row.make,row.model,[],row.total]),stale:result.stale},{headers:{'Cache-Control':'no-store'}});
  }catch(error){

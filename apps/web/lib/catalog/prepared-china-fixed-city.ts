@@ -20,7 +20,9 @@ const equal=(a:unknown,b:unknown)=>JSON.stringify(a)===JSON.stringify(b);
 
 export function preparedChinaDeliveryQuote(city:string){
  const q=quoteCityDelivery(city,'china');
- if(q.status!=='estimated'||q.origin!=='Уссурийск'||!Number.isSafeInteger(q.amountRub)||q.amountRub<=0)return fail('quote_unavailable');
+ const exactOriginPickup=q.city===q.origin&&q.distanceKm===0&&q.amountRub===0;
+ if(q.status!=='estimated'||q.origin!=='Уссурийск'||!Number.isSafeInteger(q.amountRub)||
+  !(q.amountRub>0||exactOriginPickup))return fail('quote_unavailable');
  return q;
 }
 export function fixedChinaCityQuote(scope:ChinaFixedCityScope){

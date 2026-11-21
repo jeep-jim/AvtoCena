@@ -102,13 +102,16 @@ function attachChinaSelection<T>(item:T,generationId:string,city?:string){
 type OpenFixture=NonNullable<Awaited<ReturnType<typeof open>>>;
 type OpenChunk=Awaited<ReturnType<OpenFixture['snapshot']['readChunk']>>;
 type OpenPart=Awaited<ReturnType<OpenChunk['load']>>;
-async function walk(s:OpenFixture,visit:(part:OpenPart)=>Promise<void>){
+async function walk(s:OpenFixture,visit:(part:OpenPart)=>Promise<void>,signal?:AbortSignal){
  let rows=0;
  const seen=new Set<string>();
  for(const chunk of s.snapshot.chunks){
+  signal?.throwIfAborted();
   const reader=await s.snapshot.readChunk(chunk);
   for(let i=0;i<reader.partCount;i++){
+   signal?.throwIfAborted();
    const part=await reader.load(i);
+   signal?.throwIfAborted();
    for(const row of part.projection.items){
     if(!row.id||seen.has(row.id)||++rows>s.snapshot.rows)throw new PreparedChinaFixtureUnavailable();
     seen.add(row.id);
@@ -202,12 +205,12 @@ export async function readPreparedChinaIndexedCity(params:CatalogSearchParams,co
 
 const MAX_COMPATIBILITY_ROWS=512;
 const packs=new WeakMap<IndependentRead,{authority:string;rows:Promise<CatalogSearchProjection[]>}>();
-function compatibilityRows(s:OpenFixture){
+function compatibilityRows(s:OpenFixture,signal?:AbortSignal){
  const publication=scope.getStore()?.independentChina;
  if(!publication||s.snapshot.rows>MAX_COMPATIBILITY_ROWS)throw new PreparedChinaFixtureUnavailable();
  const identity=JSON.stringify([s.snapshot.generationId,s.snapshot.directorySha256]);
  const old=packs.get(publication);
- if(old?.authority===identity)return old.rows;
+ if(!signal&&old?.authority===identity)return old.rows;
  const rows=(async()=>{
   const projected:CatalogSearchProjection[]=[],proof=createPreparedCoverageIdsDigest();let bytes=0;
   await walk(s,async part=>{
@@ -215,10 +218,11 @@ function compatibilityRows(s:OpenFixture){
    if(bytes>12*1024*1024)throw new PreparedChinaFixtureUnavailable();
    projected.push(...part.projection.items);
    for(const row of part.projection.items)proof.add(row.id);
-  });
+  },signal);
   if(proof.finish()!==s.orderedAdmittedIdsSha256)throw new PreparedChinaFixtureUnavailable();
   return projected;
  })();
+ if(signal)return rows;
  packs.set(publication,{authority:identity,rows});
  void rows.catch(()=>{if(packs.get(publication)?.rows===rows)packs.delete(publication);});
  return rows;
@@ -227,11 +231,14 @@ function compatibilityRows(s:OpenFixture){
 /** Bounded correctness fixture, not a full-feed performance path. Search
  * reuses same-cut projections and the existing exact filters/order/paging. */
 export async function readPreparedChinaCompatibility(params:CatalogSearchParams,options:{
- countOnly:boolean;includeFacets:boolean;marketPage:boolean;unsupported:boolean;navigationFacets?:true;expectedGeneration?:string|null;
+ countOnly:boolean;includeFacets:boolean;marketPage:boolean;unsupported:boolean;navigationFacets?:true;expectedGeneration?:string|null;signal?:AbortSignal;
 }){
  if(!hasIndependentChinaHttpFixture()||params.market!=='china')return null;
+ const {signal}=options;
  try{
+  signal?.throwIfAborted();
   const s=await open();
+  signal?.throwIfAborted();
   if(!s){if(options.expectedGeneration)throw new PreparedChinaCutChanged();return null;} // authenticated legacy rollback only
   if(options.expectedGeneration&&options.expectedGeneration!==s.snapshot.generationId)throw new PreparedChinaCutChanged();
   if(options.unsupported)throw new PreparedChinaFixtureUnavailable();
@@ -289,22 +296,31 @@ export async function readPreparedChinaCompatibility(params:CatalogSearchParams,
    const accum=facetQuery&&!options.navigationFacets?createChinaSelectorFacets(generationId,facetQuery):undefined;
    // Broad exact membership may require a compact projection scan.
    // Navigation facets are presealed; skip unrelated blocks even in SSR.
-   for(const chunk of s.snapshot.chunks){
-    const reader=await s.snapshot.readChunk(chunk);
-    if(!reader.selectors)throw new PreparedChinaFixtureUnavailable();
-    for(let i=0;i<reader.partCount;i++){
-     const relevant=readsPart(reader.selectors[i]);
-     if(!relevant)continue;
-     const part=await reader.load(i);
-     for(const row of part.projection.items){
-      if(predicate(row)){total++;ranking.add(row);accum?.add(row);}
+   // Keep the sealed ordinal (including ties) while overlapping independent
+   // storage reads. Consume a bounded batch before scheduling more I/O.
+   const batchSize = 3;
+   for(let startChunk=0;startChunk<s.snapshot.chunks.length;startChunk+=batchSize){
+    signal?.throwIfAborted();
+    const chunks=s.snapshot.chunks.slice(startChunk,startChunk+batchSize);
+    const readers=await Promise.all(chunks.map(chunk=>s.snapshot.readChunk(chunk)));
+    for(const reader of readers){
+     if(!reader.selectors)throw new PreparedChinaFixtureUnavailable();
+     const positions=reader.selectors.flatMap((selector,index)=>readsPart(selector)?[index]:[]);
+     for(let at=0;at<positions.length;at+=batchSize){
+      signal?.throwIfAborted();
+      const parts=await Promise.all(positions.slice(at,at+batchSize).map(index=>reader.load(index)));
+      signal?.throwIfAborted();
+      for(const part of parts)for(const row of part.projection.items){
+       if(predicate(row)){total++;ranking.add(row);accum?.add(row);}
+      }
      }
     }
    }
    matched=ranking.finish();
    facets=options.navigationFacets?s.snapshot.navigationFacets:accum?.finish();
   }else{
-   const rows=await compatibilityRows(s);
+   const rows=await compatibilityRows(s,signal);
+   signal?.throwIfAborted();
    matched=await selectPreparedChinaCompatibilityRows(rows,query);total=matched.length;
    if(limit)orderPreparedChinaCompatibilityRows(matched,query);
    facets=facetQuery?facetsForPreparedChinaCompatibilityRows(generationId,options.navigationFacets?rows:matched,facetQuery):undefined;
@@ -322,7 +338,9 @@ export async function readPreparedChinaCompatibility(params:CatalogSearchParams,
    if(options.marketPage)items=params.sort&&params.sort!=='updatedAt'?sortCatalogRows(items,params.sort,params.city):
     params.model?items.sort(businessOrder):balanceBusinessRows(items);
   }
+  signal?.throwIfAborted();
   await s.assertCurrent();
+  signal?.throwIfAborted();
   return {generationId,total,page,pageSize,items,usedIndexShards:[],...(facets?{facets}:{})};
  }catch(error){if(error instanceof PreparedChinaCutChanged)throw error;throw new PreparedChinaFixtureUnavailable();}
 }
