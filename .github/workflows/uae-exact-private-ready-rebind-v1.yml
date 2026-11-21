@@ -1,0 +1,119 @@
+name: Repair exact private UAE READY without publishing
+on:
+  push:
+    branches: [main]
+    paths: [.github/market-runs/uae-exact-private-ready-rebind-v1.sha256]
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: uae-private-buyer-qualification-22867-v1
+  cancel-in-progress: false
+env:
+  UAE_REBIND_OP: .github/operations/uae-exact-private-ready-rebind-v1
+  UAE_BUNDLE_SHA: 5d23af3290e2fb0e67b56910aed0b7fb874a24cb2df1baf935a09dc26d7c1c22
+  UAE_APP: 23dde90f6a8230e6a2b027746edb4638c55a327d
+  UAE_TREE: 894f03b41b1a0223e7e04d2734926d2e403d7451
+jobs:
+  bind:
+    if: github.repository == 'jeep-jim/AvtoCena' && github.repository_id == '1289722938' && github.ref == 'refs/heads/main' && github.run_attempt == '1' && github.event.head_commit.message == 'Rebind exact verified UAE private READY without publishing'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 2
+          persist-credentials: false
+      - name: Bind the sole marker, exact qualification and prior producer
+        shell: bash
+        env: {GH_TOKEN: '${{ github.token }}'}
+        run: |
+          set -euo pipefail
+          readonly marker=.github/market-runs/uae-exact-private-ready-rebind-v1.sha256
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          test "$(git show -s --format=%P HEAD | wc -w)" = 1
+          cmp -s <(git diff-tree --no-commit-id -r --name-status --no-renames -z HEAD^ HEAD) <(printf 'A\0%s\0' "$marker")
+          cmp -s "$marker" <(printf '%s\n' "$UAE_BUNDLE_SHA" "$UAE_APP" 'ceba3aab83516e1947562e8a3dbe7600fe0f7f13cacd5c19cc8d70b0dc717ee2' 'private-rebind-only/no-pointer/no-provider')
+          (cd "$UAE_REBIND_OP"; printf '%s  bundle.sha256\n' "$UAE_BUNDLE_SHA" | sha256sum --check --status; sha256sum --check --strict --status bundle.sha256)
+          gh api "repos/$GITHUB_REPOSITORY/actions/jobs/136724327745" | jq -e '.id==136724327745 and .run_id==44864273301 and .conclusion=="success"' >/dev/null
+          gh api "repos/$GITHUB_REPOSITORY/actions/jobs/136738367831" | jq -e '.id==136738367831 and .run_id==44868777867 and .conclusion=="success"' >/dev/null
+          gh api "repos/$GITHUB_REPOSITORY/actions/jobs/136742399352" | jq -e '.id==136742399352 and .run_id==44870078327 and .conclusion=="success"' >/dev/null
+  proof:
+    needs: bind
+    outputs:
+      gate_sha: ${{ steps.gate.outputs.gate_sha }}
+    runs-on: ubuntu-24.04
+    environment: regcloud-staging
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with: {ref: '${{ github.sha }}', persist-credentials: false}
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ env.UAE_APP }}
+          path: exact-app
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with: {node-version: '24.22.1'}
+      - name: Verify exact approved native app and operator bytes without storage credentials
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git -C exact-app rev-parse HEAD)" = "$UAE_APP"
+          test "$(git -C exact-app rev-parse 'HEAD^{tree}')" = "$UAE_TREE"
+          (cd "$UAE_REBIND_OP"; printf '%s  bundle.sha256\n' "$UAE_BUNDLE_SHA" | sha256sum --check --status; sha256sum --check --strict --status bundle.sha256; node --test *.test.mjs)
+          mkdir -p "exact-app/$UAE_REBIND_OP"
+          cp "$UAE_REBIND_OP/"{repair.mjs,storage.mjs,run.mts} "exact-app/$UAE_REBIND_OP/"
+          cd exact-app; npm ci --ignore-scripts --no-audit --no-fund
+      - name: Signed source, qualification, privacy and two samples -- zero writes
+        id: gate
+        working-directory: exact-app
+        shell: bash
+        env:
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_REGION: us-east-1
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+        run: node --import tsx "$UAE_REBIND_OP/run.mts" proof
+  rebind:
+    needs: [bind, proof]
+    if: needs.proof.result == 'success' && needs.proof.outputs.gate_sha != ''
+    runs-on: ubuntu-24.04
+    environment: regcloud-staging
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with: {ref: '${{ github.sha }}', persist-credentials: false}
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ env.UAE_APP }}
+          path: exact-app
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with: {node-version: '24.22.1'}
+      - name: Verify exact approved native app and operator bytes without storage credentials
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git -C exact-app rev-parse HEAD)" = "$UAE_APP"
+          test "$(git -C exact-app rev-parse 'HEAD^{tree}')" = "$UAE_TREE"
+          (cd "$UAE_REBIND_OP"; printf '%s  bundle.sha256\n' "$UAE_BUNDLE_SHA" | sha256sum --check --status; sha256sum --check --strict --status bundle.sha256; node --test *.test.mjs)
+          mkdir -p "exact-app/$UAE_REBIND_OP"
+          cp "$UAE_REBIND_OP/"{repair.mjs,storage.mjs,run.mts} "exact-app/$UAE_REBIND_OP/"
+          cd exact-app; npm ci --ignore-scripts --no-audit --no-fund
+      - name: Reprove exact admission, conditionally copy private only, native read and READY last
+        id: gate
+        working-directory: exact-app
+        shell: bash
+        env:
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_REGION: us-east-1
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+          UAE_REBIND_GATE_SHA: ${{ needs.proof.outputs.gate_sha }}
+        run: node --import tsx "$UAE_REBIND_OP/run.mts" rebind
