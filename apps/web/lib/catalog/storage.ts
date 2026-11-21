@@ -1,3 +1,6 @@
+import {selectedCatalogMarkets} from './market-selection';
+import {uaeRegcloudRuntimeConfigured} from './uae-regcloud-object-reader';
+import {isPreparedUaeGallery,isPreparedUaeGalleryPath} from './dubicars-gallery-policy';
 import {chinaAggregateCacheKey,legacyAggregateMarketAllowed,omitLegacyChinaAggregate,readChinaAggregateAuthority,withChinaAggregateAuthority} from './china-public-aggregate';
 import {budgetSelectionFilterKey} from './budget-selection-key';
 import {homeSnapshotMarketIsEmpty} from "./home-editorial-empty";
@@ -17,14 +20,14 @@ import {applyEncyclopediaCalculation,readCalculationIndex} from '../encyclopedia
 import {buildCatalogColorIndex,withCatalogColorFilter,matchesCatalogColor} from './catalog-color-index';
 import {parseCatalogSort,compareCatalogTerms,compareSortNumbers,sortNumber} from './catalog-sort';
 import {matchesFilterSelection,compileFilterSelection} from './filter-selections';
-import {isAllDubicarsOffer,isUnpricedDubicarsOffer} from './dubicars-owner-policy';
+import {isAllDubicarsOffer,isPriceOnRequestDubicarsOffer,isUnpricedDubicarsOffer} from './dubicars-owner-policy';
 import {catalogBodyType} from './pickup-body';
 import {filterBudgetRows} from "./budget-selection-filter";
 import {BudgetEligibilityCache} from "./budget-eligibility-cache";
 import {specificationSelectorDirectory,type CompressedBudgetDirectory} from './budget-selector-codec';
 import {enrichBudgetSpecifications} from './budget-specification-index';
 import {splitPackedBudgetSelectors,verifiedPackedBudgetSelector,type PackedBudgetDirectory,type PackedBudgetSelector} from './budget-selector-codec';
-import {matchingEditorial,withCatalogEditorial,resetCatalogEditorialCache,editorialRevision,editorialEntries,editorialHasHidden,editorialHidden,applyCatalogEditorial,applyCatalogEditorialSpecifications} from "./editorial";
+import {matchingEditorial,withCatalogEditorial,resetCatalogEditorialCache,editorialRevision,editorialEntries,withCatalogEditorialSnapshot,editorialHasHidden,editorialHidden,applyCatalogEditorial,applyCatalogEditorialSpecifications} from "./editorial";
 import {splitBudgetMarketIndex,validBudgetMarketIndex,type BudgetMarketDirectory} from './budget-market-index';
 import {budgetPricingFingerprint,sharedBudgetPrices,readPreparedBudgetPrices,resetSharedBudgetPriceCache,calculationCacheVersion} from './shared-budget-prices';
 import {catalogInventoryAgeDecision,catalogInventoryDate,catalogVehicleExcluded,catalogGrossVehicleWeightKg} from './inventory-admission';
@@ -1033,6 +1036,12 @@ async function readCatalogDirectoryCountRowsEditorial() {
 
 /** Names for discovery do not need prices, offer blocks or moderation recounts. */
 export async function readCatalogModelNames(make = '', market = '') {
+  if(market==='uae'&&uaeRegcloudRuntimeConfigured()){
+    const result=await requiredPreparedUaeSearch({market:'uae',make:make||undefined},{countOnly:true,includeFacets:true});
+    return result.facets!.models;
+  }
+  const owned=preparedUaeAggregateScope(market)?await readPreparedUaeAggregateSearch({market,make:make||undefined},{countOnly:true,includeFacets:true}).catch(()=>null):null;
+  if(owned?.facets)return owned.facets.models;
   const [manifest, summary] = await Promise.all([readManifest(), readCurrentBrandSummary()]);
   const makes = make ? new Set(catalogMakeFilterValues(make).map(value => cleanFacet(value).toLocaleLowerCase('ru-RU'))) : null;
   const markets = market.split('|').filter(value => value && value !== 'any');
@@ -3172,23 +3181,223 @@ export async function projectPreparedChinaFixtureSearch(rows:CatalogSearchProjec
  return {total:matches.length,page,pageSize,items,usedIndexShards:[]};
 }
 
-export async function searchOffers(params: CatalogSearchParams, internalPageLimit = 48, admissionGroup?: 'related'){return withChinaAggregateAuthority(params.market,()=>withCatalogEditorial(()=>withCatalogColorFilter(params,()=>searchOffersEditorial(params,internalPageLimit,admissionGroup))));}
+
+export class PreparedUaeUnavailable extends Error {}
+export class PreparedUaeCutChanged extends Error {}
+
+type UaeReadHandle=NonNullable<Awaited<ReturnType<typeof import('./uae-regcloud-object-reader').openConfiguredUaeRegcloudFiles>>>;
+async function withPreparedUaeCut<T>(expectedGeneration:string|null,read:(cut:UaeReadHandle)=>Promise<T>){
+ const {openConfiguredUaeRegcloudFiles}=await import('./uae-regcloud-object-reader');
+ const use=async(target:'active'|'previous')=>{
+  const cut=await openConfiguredUaeRegcloudFiles(target);
+  if(!cut)return null;
+  if(expectedGeneration&&expectedGeneration!==cut.generationId)throw new PreparedUaeCutChanged();
+  return read(cut);
+ };
+ try{return await use('active');}
+ catch(error){
+  if(error instanceof Error&&error.message==='uae_regcloud:cut_changed')throw new PreparedUaeCutChanged();
+  const previous=await use('previous').catch(()=>null);
+  if(previous!==null)return previous;
+  throw error;
+ }
+}
+async function readUaeSealedProjection(ready:UaeReadHandle,directory:Awaited<ReturnType<UaeReadHandle['readPublicDirectory']>>){
+ const ids=new Set<string>(),rows:CatalogSearchProjection[]=[];
+  const observed={seller:0,onRequest:0,retainedDelivered:0};
+  for await(const block of ready.readProjectionBlocks(directory)){
+   for(const untrusted of block){
+    const row=untrusted as CatalogSearchProjection;
+    if(row?.market!=='uae'||typeof row.id!=='string'||!row.id||ids.has(row.id)||!projectionCanRenderCard(row))
+     throw new PreparedUaeUnavailable('row');
+    if(row.cardImageUrl&&!isPreparedUaeGalleryPath(row.cardImageUrl))throw new PreparedUaeUnavailable('projection_gallery');
+    ids.add(row.id);
+    if(isSellerPricedOffer(row)&&Number(row.totalRub??0)===0&&row.sourceCurrency==='AED'&&isAllDubicarsOffer(row))observed.seller++;
+    else if(isPriceOnRequestDubicarsOffer(row))observed.onRequest++;
+    else if(calculatedCatalogPrice(row)>0&&row.totalRub===calculatedCatalogPrice(row)&&!isSellerPricedOffer(row))observed.retainedDelivered++;
+    else throw new PreparedUaeUnavailable('price_mode');
+    rows.push(row);
+   }
+  }
+  if((Object.keys(observed) as (keyof typeof observed)[]).some(k=>observed[k]!==directory.admitted[k]))
+   throw new PreparedUaeUnavailable('membership');
+ return rows;
+}
+export const preparedUaeEditorial={revision:'prepared-uae',entries:{}};
+const uaeOwnPublicRow=(row:CatalogSearchProjection,generationId:string)=>({...publicOfferFromProjection(row),
+ preparedUaeSelection:{version:1 as const,generationId}});
+/** Existing projection selector, price predicate and DTO, no price-engine work. */
+export async function readPreparedUaeSearch(params:CatalogSearchParams,{countOnly=false,includeFacets=false,expectedGeneration=null,pageLimit=48}:{
+ countOnly?:boolean;includeFacets?:boolean;expectedGeneration?:string|null;pageLimit?:number;
+}={}){
+ if(params.market!=='uae')throw new PreparedUaeUnavailable('market_scope');
+ return withPreparedUaeCut(expectedGeneration,ready=>withCatalogEditorialSnapshot(preparedUaeEditorial,async()=>{
+  const directory=await ready.readPublicDirectory(),keys=await projectionModelKeys(params);
+  const page=params.page||1,pageSize=Math.min(pageLimit,params.pageSize||24);
+  if(!Number.isSafeInteger(page)||page<1||!Number.isSafeInteger(pageSize)||pageSize<1||!Number.isSafeInteger(page*pageSize))
+   throw new PreparedUaeUnavailable('pagination');
+  if(parseCatalogSort(params.sort)===null)throw new PreparedUaeUnavailable('sort');
+  const predicates=Object.entries(params).some(([k,v])=>!['market','sort','page','pageSize','city','preparedCut'].includes(k)&&Boolean(v));
+  if(countOnly&&!includeFacets&&!predicates){
+   await ready.assertCurrent();
+   return {generationId:ready.generationId,total:Object.values(directory.admitted).reduce((a,b)=>a+b,0),page,pageSize,items:[]};
+  }
+  const matched=(await readUaeSealedProjection(ready,directory)).filter(row=>(!params.color||Boolean(row.color))&&catalogSearchProjectionMatches(row,params,keys));
+  const total=matched.length,rows=countOnly&&!includeFacets?[]:matched;
+  if(!countOnly)sortCatalogSearchRows(rows,params);
+  const selected=countOnly?[]:rows.slice((page-1)*pageSize,page*pageSize).map(row=>uaeOwnPublicRow(row,ready.generationId));
+  await ready.assertCurrent();
+  return {generationId:ready.generationId,total,page,pageSize,items:selected,
+    ...(includeFacets?{facets:preparedFacetsFromRows(ready.generationId,rows)}:{})};
+ }));
+}
+const preparedUaeDetails=new WeakMap<VehicleOffer,()=>Promise<void>>();
+export const preparedUaeDetailGuard=(offer:VehicleOffer)=>preparedUaeDetails.get(offer);
+export async function readPreparedUaeDetail(id:string,generation?:string){
+ const {openConfiguredUaeRegcloudFiles}=await import('./uae-regcloud-object-reader');
+ const read=async(target:'active'|'previous')=>{
+ const handle=await openConfiguredUaeRegcloudFiles(target);
+ if(!handle)return null;
+ if(generation&&generation!==handle.generationId)throw new PreparedUaeCutChanged();
+ const directory=await handle.readPublicDirectory();
+ const offer=await handle.readDetail(directory,id) as VehicleOffer|null;
+ if(!offer)return null;
+ if(offer.id!==id||offer.market!=='uae'||offer.status!=='active'||!publishedOfferCanRenderUnderCurrentPolicy(offer)||
+  !((isSellerPricedOffer(offer)&&offer.sourceCurrency==='AED'&&isAllDubicarsOffer(offer)&&Number(offer.totalRub??0)===0)||
+    isPriceOnRequestDubicarsOffer(offer)||(calculatedCatalogPrice(offer)>0&&offer.totalRub===calculatedCatalogPrice(offer))))
+  throw new PreparedUaeUnavailable('detail');
+ const cover=(offer as VehicleOffer&{cardImageUrl?:unknown}).cardImageUrl;
+ if(!isPreparedUaeGallery(offer.images)||(cover&&!isPreparedUaeGalleryPath(cover)))
+  throw new PreparedUaeUnavailable('detail_gallery');
+ preparedUaeDetails.set(offer,handle.assertCurrent);
+ return offer;
+ };
+ try{return await read('active');}
+ catch(error){
+  if(error instanceof Error&&error.message==='uae_regcloud:cut_changed')throw new PreparedUaeCutChanged();
+  const previous=await read('previous').catch(()=>null);
+  if(previous)return previous;
+  throw error;
+ }
+}
+
+
+export function preparedUaeAggregateScope(market?:string){
+ if(!uaeRegcloudRuntimeConfigured()||market==='uae')return false;
+ if(!market||market==='any')return true;
+ const selected=selectedCatalogMarkets(market);
+ return selected.length>1&&selected.includes('uae');
+}
+/** Substitute the already-attested UAE rows before matching/ranking/paging.
+ * Other markets' immutable source and pricing paths are the incumbent ones. */
+async function withPreparedUaeAggregate<T>(params:CatalogSearchParams,read:(view:{
+ rows:CatalogSearchProjection[];generationId:string;uaeGenerationId:string;scopeIncomplete:boolean;
+})=>Promise<T>,repriceLegacy=false){
+ if(!preparedUaeAggregateScope(params.market))return null;
+ const selected=selectedCatalogMarkets(params.market);
+ const effective={...params,market:undefined,preparedCut:undefined,after:undefined};
+ return withPreparedUaeCut(null,async own=>{
+  const directory=await own.readPublicDirectory();
+  const keys=await projectionModelKeys(effective);
+  const owned=await withCatalogEditorialSnapshot(preparedUaeEditorial,async()=>
+   (await readUaeSealedProjection(own,directory)).filter(row=>(!effective.color||Boolean(row.color))&&catalogSearchProjectionMatches(row,effective,keys)));
+  const scopeIncomplete=selected.includes('japan')||selected.includes('green')||
+    ((!selected.length||selected.includes('china'))&&omitLegacyChinaAggregate());
+  let {generationId,rows}=await currentProjectionRows(effective);
+  rows=rows.filter(row=>row.market!=='uae'&&(!selected.length||selected.includes(row.market)));
+  if(repriceLegacy&&(params.budgetFrom||params.budgetTo||params.hasPrice||parseCatalogSort(params.sort)?.some(term=>term.startsWith('totalRub'))))
+   rows=await currentSearchPrices(rows,generationId);
+  const visible=await filterCatalogProjectionRows(rows,effective,keys);
+  const ids=new Set(visible.map(row=>row.id));
+  if(owned.some(row=>ids.has(row.id)))throw new PreparedUaeUnavailable('aggregate_identity');
+  const result=await read({rows:[...visible,...owned],generationId,uaeGenerationId:own.generationId,scopeIncomplete});
+  await own.assertCurrent();
+  return result;
+ });
+}
+export async function readPreparedUaeAggregateSearch(params:CatalogSearchParams,options:{countOnly?:boolean;includeFacets?:boolean;pageLimit?:number}={}){
+ if(!preparedUaeAggregateScope(params.market))return null;
+ return withChinaAggregateAuthority(undefined,()=>withCatalogEditorial(()=>withCatalogColorFilter(params,()=>withPreparedUaeAggregate(params,
+  async({rows,generationId,uaeGenerationId,scopeIncomplete})=>{
+   const page=params.page||1,pageSize=Math.min(options.pageLimit||48,params.pageSize||24);
+   if(!Number.isSafeInteger(page)||page<1||!Number.isSafeInteger(pageSize)||pageSize<1||!Number.isSafeInteger(page*pageSize)||parseCatalogSort(params.sort)===null)
+    throw new PreparedUaeUnavailable('aggregate_query');
+   if(!options.countOnly)sortCatalogSearchRows(rows,{...params,market:undefined});
+   const items:PublicVehicleOffer[]=[];
+   if(!options.countOnly)for(const row of rows.slice((page-1)*pageSize,page*pageSize)){
+    items.push(row.market==='uae'?await withCatalogEditorialSnapshot(preparedUaeEditorial,async()=>uaeOwnPublicRow(row,uaeGenerationId)):publicOfferFromProjection(row));
+   }
+   return {generationId,uaeGenerationId,total:rows.length,page,pageSize,items,usedIndexShards:[],scopeIncomplete,
+    ...(options.includeFacets?{facets:preparedFacetsFromRows(generationId,rows)}:{})};
+  },true))));
+}
+export async function requiredPreparedUaeSearch(params:CatalogSearchParams,options:Parameters<typeof readPreparedUaeSearch>[1]={}){
+ const result=await readPreparedUaeSearch(params,{...options,expectedGeneration:options.expectedGeneration??params.preparedCut});
+ if(!result)throw new PreparedUaeUnavailable('missing');
+ return result;
+}
+export async function searchOffers(params: CatalogSearchParams, internalPageLimit = 48, admissionGroup?: 'related'){
+ if(params.market==='uae'&&uaeRegcloudRuntimeConfigured())
+  return {...await requiredPreparedUaeSearch(params,{pageLimit:internalPageLimit}),usedIndexShards:[]};
+ const owned=preparedUaeAggregateScope(params.market)?await readPreparedUaeAggregateSearch(params,{pageLimit:internalPageLimit}).catch(()=>null):null;
+ if(owned)return owned;
+ return withChinaAggregateAuthority(params.market,()=>withCatalogEditorial(()=>withCatalogColorFilter(params,()=>searchOffersEditorial(params,internalPageLimit,admissionGroup))));
+}
 
 export async function searchOffersWithoutBudgetIndexForTests(params:CatalogSearchParams,internalPageLimit=48){return withCatalogEditorial(()=>searchOffersWithoutBudgetIndexForTestsEditorial(params,internalPageLimit));}
 
-export async function countCatalogOffers(params: CatalogSearchParams){return withChinaAggregateAuthority(params.market,()=>withCatalogEditorial(()=>withCatalogColorFilter(params,()=>countCatalogOffersEditorial(params))));}
+export async function countCatalogOffers(params: CatalogSearchParams){
+ if(params.market==='uae'&&uaeRegcloudRuntimeConfigured()){
+  const {generationId,total}=await requiredPreparedUaeSearch(params,{countOnly:true});
+  return {generationId,total};
+ }
+ const owned=preparedUaeAggregateScope(params.market)?await readPreparedUaeAggregateSearch(params,{countOnly:true}).catch(()=>null):null;
+ if(owned)return {generationId:owned.generationId,total:owned.total,...(owned.scopeIncomplete?{countIncomplete:true}:{})};
+ return withChinaAggregateAuthority(params.market,()=>withCatalogEditorial(()=>withCatalogColorFilter(params,()=>countCatalogOffersEditorial(params))));
+}
 
-export async function readCatalogFacets(params: CatalogSearchParams = {}){return withChinaAggregateAuthority(params.market,()=>withCatalogEditorial(()=>withCatalogColorFilter(params,()=>readCatalogFacetsEditorial(params))));}
+export async function readCatalogFacets(params: CatalogSearchParams = {}){
+ if(params.market==='uae'&&uaeRegcloudRuntimeConfigured())
+  return (await requiredPreparedUaeSearch(params,{countOnly:true,includeFacets:true})).facets!;
+ const owned=preparedUaeAggregateScope(params.market)?await readPreparedUaeAggregateSearch(params,{countOnly:true,includeFacets:true}).catch(()=>null):null;
+ if(owned?.facets)return owned.facets;
+ return withChinaAggregateAuthority(params.market,()=>withCatalogEditorial(()=>withCatalogColorFilter(params,()=>readCatalogFacetsEditorial(params))));
+}
 
 export async function readCatalogBrandCounts(params: CatalogSearchParams = {}){return withChinaAggregateAuthority(params.market,()=>withCatalogEditorial(()=>withCatalogColorFilter(params,()=>readCatalogBrandCountsEditorial(params))));}
 
-export async function readCatalogBrandModelCounts(make: string){return withChinaAggregateAuthority(undefined,()=>withCatalogEditorial(()=>readCatalogBrandModelCountsEditorial(make)));}
+export async function readCatalogBrandModelCounts(make: string){
+ return withChinaAggregateAuthority(undefined,()=>withCatalogEditorial(async()=>{
+  const owned=uaeRegcloudRuntimeConfigured()?await withPreparedUaeAggregate({make},async view=>{
+   const summary=buildCatalogBrandSummary(view.generationId,view.rows);
+   return {generationId:view.generationId,models:summary.brands[catalogBrandReadModelKey(make)]?.models||[]};
+  }).catch(()=>null):null;
+  return owned||readCatalogBrandModelCountsEditorial(make);
+ }));
+}
 
-export async function readCatalogDirectoryCountRows(){return withChinaAggregateAuthority(undefined,()=>withCatalogEditorial(()=>readCatalogDirectoryCountRowsEditorial()));}
+export async function readCatalogDirectoryCountRows(){
+ return withChinaAggregateAuthority(undefined,()=>withCatalogEditorial(async()=>{
+  const owned=uaeRegcloudRuntimeConfigured()?await withPreparedUaeAggregate({},async view=>view.rows.map(row=>({make:row.make,model:row.model,count:1}))).catch(()=>null):null;
+  return owned||readCatalogDirectoryCountRowsEditorial();
+ }));
+}
 
-export async function readCurrentPublicCatalogProjection(){return withChinaAggregateAuthority(undefined,()=>withCatalogEditorial(()=>readCurrentPublicCatalogProjectionEditorial()));}
+export async function readCurrentPublicCatalogProjection(){
+ const legacy=await withChinaAggregateAuthority(undefined,()=>withCatalogEditorial(()=>readCurrentPublicCatalogProjectionEditorial()));
+ if(!uaeRegcloudRuntimeConfigured())return legacy;
+ const active=await withPreparedUaeCut(null,cut=>cut.readPublicDirectory()).catch(()=>null);
+ return active?{...legacy,rows:legacy.rows.filter(row=>row.market!=='uae')}:legacy;
+}
 
-export async function readPublicCatalogMarketCounts(){return withChinaAggregateAuthority(undefined,()=>withCatalogEditorial(()=>readPublicCatalogMarketCountsEditorial()));}
+export async function readPublicCatalogMarketCounts(){
+ const legacy=await withChinaAggregateAuthority(undefined,()=>withCatalogEditorial(()=>readPublicCatalogMarketCountsEditorial()));
+ if(!uaeRegcloudRuntimeConfigured())return legacy;
+ const scoped=await readPreparedUaeSearch({market:'uae'},{countOnly:true}).catch(()=>null);
+ if(!scoped)return legacy;
+ const markets={...legacy.markets,uae:scoped.total};
+ return {...legacy,markets,total:Object.values(markets).reduce((a,b)=>a+b,0)};
+}
 
 const editorialSummaryCache=new DetailReadCache<CatalogBrandSummary>({maxEntries:4,maxBytes:8*1024*1024,ttlMs:30_000,concurrency:2});
 async function readEditorialBrandSummary(){
@@ -3225,6 +3434,13 @@ export async function readHomeCatalogSnapshot(perMarket=6){
  for(const {market,result} of refreshed){
   marketCounts[market]=result.total;
   items=[...items.filter(item=>item.market!==market),...result.items];
+ }
+ if(uaeRegcloudRuntimeConfigured()){
+  const fresh=await readPreparedUaeSearch({market:'uae',pageSize:Math.min(12,Math.max(1,perMarket))}).catch(()=>null);
+  if(fresh){
+   marketCounts.uae=fresh.total;
+   items=[...items.filter(item=>item.market!=='uae'),...fresh.items];
+  }
  }
  let independentChina=false,countIncomplete=false;
  if(omitLegacyChinaAggregate()){

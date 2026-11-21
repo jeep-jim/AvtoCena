@@ -4,8 +4,9 @@ import {AjesUnavailable} from './ajes-client';
 import {readCatalogEditorial,editorialHidden,applyCatalogEditorial} from "./editorial";
 import { cache } from "react";
 import { unstable_cache } from "next/cache";
-import { getOfferWithoutEditorial, getOfferFromCurrentShard, getOfferFromCurrentProjection, isJapanCatalogOfferId } from "./storage";
+import { getOfferWithoutEditorial, getOfferFromCurrentShard, getOfferFromCurrentProjection, isJapanCatalogOfferId,readPreparedUaeDetail } from "./storage";
 
+import {uaeRegcloudRuntimeConfigured} from "./uae-regcloud-object-reader";
 import {PreparedChinaFixtureUnavailable,hasPreparedChinaHttpFixture,hasIndependentChinaHttpFixture,assertIndependentChinaFallbackAllowed,readPreparedChinaFixtureOffer,preparedChinaNormalRegcloudEnabled} from './prepared-china-http-fixture';
 
 // The offer id is stable across catalog generations. Keep a short shared cache
@@ -55,13 +56,25 @@ export const getOfferDetailRecord = cache(async (id:string)=>{
 
 /** Never treat a provider refusal as a sold car or an application-wide crash. */
 export async function readOfferDetailForPage(id:string,allowPrepared=true,scope?:{market?:string;city?:string;preparedCut?:string}){
+ const readOwnUae=async()=>{
+  if(!allowPrepared)return {offer:null,unavailable:true,prepared:true as const,preparedUae:true as const};
+  try{
+   const offer=await readPreparedUaeDetail(id,scope?.preparedCut);
+   return {offer,unavailable:!offer,prepared:true as const,preparedUae:true as const};
+  }catch{
+   return {offer:null,unavailable:true,prepared:true as const,preparedUae:true as const};
+  }
+ };
+ if(scope?.market==='uae'&&uaeRegcloudRuntimeConfigured())return readOwnUae();
  try{
   // Legacy unqualified ids are market-ambiguous. Resolve a known non-China
   // record first so that a failed China read cannot hide Korea or Japan. A
   // legacy China record is never returned as the current independent cut.
-  if(allowPrepared&&preparedChinaNormalRegcloudEnabled()&&!scope?.market){
-   const known=await getOfferDetailRecord(id);
-   if(known&&known.market!=='china')return {offer:known,unavailable:false};
+  let known:Awaited<ReturnType<typeof getOfferDetailRecord>>|undefined;
+  if(!scope?.market&&(uaeRegcloudRuntimeConfigured()||allowPrepared&&preparedChinaNormalRegcloudEnabled())){
+   known=await getOfferDetailRecord(id);
+   if(known?.market==='uae'&&uaeRegcloudRuntimeConfigured())return readOwnUae();
+   if(known&&known.market!=='china'&&allowPrepared&&preparedChinaNormalRegcloudEnabled())return {offer:known,unavailable:false};
   }
   const ownChina=hasIndependentChinaHttpFixture()&&(!scope?.market||scope.market==='china');
   const prepared=allowPrepared&&hasPreparedChinaHttpFixture()&&(!hasIndependentChinaHttpFixture()||ownChina)
@@ -72,7 +85,7 @@ export async function readOfferDetailForPage(id:string,allowPrepared=true,scope?
    if(prepared||scope?.preparedCut)return {offer:null,unavailable:true,prepared:true as const};
    await assertIndependentChinaFallbackAllowed();
   }
-  const offer=await getOfferDetailRecord(id);
+  const offer=known===undefined?await getOfferDetailRecord(id):known;
   if(prepared){
    await prepared.assertCurrent();
    // An absent China id may not fall back to a previous-generation cache.

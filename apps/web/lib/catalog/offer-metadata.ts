@@ -38,7 +38,7 @@ export async function generateOfferMetadata({params,searchParams}:{params:Promis
  const [display,saved,client]=await Promise.all([resolveOfferDisplay(stored,safePower,q.modificationId||''),detail.prepared?Promise.resolve(null):getSavedOfferCalculation(stored),q.calculation?getSavedOfferCalculation(stored,q.calculation):Promise.resolve(null)]);
  const direct=client || (q.direct==='novokuznetsk'?await directOfferScenario(stored):null);
  const explicit=q.estimate?await sharedOfferScenario(stored,q.estimate):null;
- const automatic=!direct&&!saved&&display.sellerPricing&&!display.selectionRequired ? await sharedOfferScenario(stored,encodeShareDraft(offerParameterDraft(display.offer,display.raw))) : null;
+ const automatic=!('preparedUae' in detail)&&!direct&&!saved&&display.sellerPricing&&!display.selectionRequired ? await sharedOfferScenario(stored,encodeShareDraft(offerParameterDraft(display.offer,display.raw))) : null;
  const scenario=explicit||direct||saved||automatic;
  const {offer,raw,pricedOffer,visibleRub,sellerPricing,selectionRequired}=display;
  const presented=presentCatalogOffer(raw);

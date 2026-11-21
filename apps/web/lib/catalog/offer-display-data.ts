@@ -1,5 +1,5 @@
 import {invalidateManagementPrice} from './management-knowledge';
-import {applyCatalogEditorial,readCatalogEditorial} from './editorial';
+import {applyCatalogEditorial,readCatalogEditorial,withCatalogEditorialSnapshot} from './editorial';
 import {cache} from 'react';
 import {applyUaeManualSpecifications} from './uae-manual-specifications';
 import {safePublicPricing} from './safe-public-pricing';
@@ -11,7 +11,7 @@ import {hasModificationSelection,withoutDeliveredPrice} from './modification-con
 import {calculateSelectedModification,conditionalModificationRub} from './modification-recovery';
 import {enrichOfferForDisplay} from './display-enrichment';
 import {normalizeVehicleOfferSpecs} from './spec-normalization';
-import {publicOffer} from './storage';
+import {preparedUaeDetailGuard,preparedUaeEditorial,PreparedUaeUnavailable,publicOffer} from './storage';
 import {catalogOfferVisibleRub} from './public-priority';
 import {calculateOfferWithRussiaCustoms,calculateOfferWithUserPowerScenario} from './customs-pricing';
 import {readCatalogPowerScenario} from './power-scenario';
@@ -21,6 +21,16 @@ import {preparedChinaOfferGuard,PreparedChinaFixtureUnavailable} from './prepare
 
 // One request-local calculation feeds the visible page and link metadata.
 export const resolveOfferDisplay = cache(async (storedOffer:VehicleOffer,safeRequestedPowerHp=0,modificationId='')=>{
+  const uae=preparedUaeDetailGuard(storedOffer);
+  if(uae){
+    if(safeRequestedPowerHp||modificationId)throw new PreparedUaeUnavailable('explicit_scenario');
+    const raw=await withCatalogEditorialSnapshot(preparedUaeEditorial,async()=>publicOffer(storedOffer));
+    const sellerPricing=isSellerPricedOffer(storedOffer);
+    const visibleRub=sellerPricing?0:catalogOfferVisibleRub(raw);
+    await uae();
+    return {offer:storedOffer,sellerPricing,selectionRequired:false,selectedModification:null,enrichedOffer:storedOffer,
+      normalizedEnrichedOffer:storedOffer,initialPublic:raw,pricedOffer:storedOffer,raw,visibleRub};
+  }
   const prepared=preparedChinaOfferGuard(storedOffer);
   if(prepared){
     if(safeRequestedPowerHp||modificationId)throw new PreparedChinaFixtureUnavailable();

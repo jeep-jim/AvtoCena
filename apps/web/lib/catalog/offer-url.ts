@@ -21,8 +21,11 @@ export function preparedChinaCardContext(offer:{market?:unknown;preparedChinaSel
     (marker.city!==undefined&&(typeof marker.city!=='string'||!marker.city||marker.city.length>100)))return null;
  return {generationId:marker.generationId,city:marker.city as string|undefined};
 }
-export function offerCardPath(offer:OfferUrlData&{preparedChinaSelection?:unknown}){
+export function offerCardPath(offer:OfferUrlData&{preparedChinaSelection?:unknown;preparedUaeSelection?:unknown}){
  const path=offerPath(offer),prepared=preparedChinaCardContext(offer);
+ const uae=offer.preparedUaeSelection as {version?:number;generationId?:unknown}|undefined;
+ if(offer.market==='uae'&&uae?.version===1&&typeof uae.generationId==='string'&&/^gen_\d{13}_[a-z0-9]{1,64}$/.test(uae.generationId))
+  return path+'?'+new URLSearchParams({market:'uae',preparedCut:uae.generationId});
  if(!prepared)return path;
  const query=new URLSearchParams({market:'china',preparedCut:prepared.generationId});
  if(prepared.city)query.set('city',prepared.city);

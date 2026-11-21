@@ -1,3 +1,4 @@
+import {uaeRegcloudRuntimeConfigured,openConfiguredUaeRegcloudFiles} from "./catalog/uae-regcloud-object-reader";
 import {legacyAggregateMarketAllowed,withChinaAggregateAuthority} from './catalog/china-public-aggregate';
 import {readCatalogEditorial,editorialHidden,applyCatalogEditorial} from "./catalog/editorial";
 import {offerPath, type OfferUrlData} from "./catalog/offer-url";
@@ -36,24 +37,35 @@ export type AiCatalogManifest = {
   markets: Record<string, { count?: number; updatedAt?: string }>;
 };
 
+async function omitLegacyUaeDiscovery(){
+ if(!uaeRegcloudRuntimeConfigured())return false;
+ for(const target of ['active','previous'] as const){
+  try{
+   const cut=await openConfiguredUaeRegcloudFiles(target);
+   if(cut&&await cut.readPublicDirectory())return true;
+  }catch{/* An unverified response cannot replace previously accepted discovery. */}
+ }
+ return false;
+}
 export async function readAiCatalogProjection(): Promise<AiCatalogProjection> {
   const projection = await readDataJson<AiCatalogProjection>(AI_CATALOG_PROJECTION_PATH, {
     generationId: "",
     items: [],
   });
 
-  const editorial=await readCatalogEditorial();
+  const [editorial,omitUae]=await Promise.all([readCatalogEditorial(),omitLegacyUaeDiscovery()]);
   return {
     generationId: String(projection.generationId || ""),
     items: Array.isArray(projection.items)
-      ? projection.items.filter((item) => Boolean(item?.id && item?.make && item?.model && item?.year)&&!editorialHidden(item,editorial)).map(item=>applyCatalogEditorial(item,editorial))
+      ? projection.items.filter((item) => Boolean(item?.id && item?.make && item?.model && item?.year)&&(!omitUae||item.market!=='uae')&&!editorialHidden(item,editorial)).map(item=>applyCatalogEditorial(item,editorial))
       : [],
   };
 }
 
 export async function readAiCatalogManifest(): Promise<AiCatalogManifest> {
   const manifest=await readDataJson<AiCatalogManifest>("catalog/manifest.json", {generationId:"",markets:{}});
-  return withChinaAggregateAuthority(undefined,async()=>({...manifest,markets:Object.fromEntries(Object.entries(manifest.markets??{}).filter(([market])=>legacyAggregateMarketAllowed(market)))}));
+  const omitUae=await omitLegacyUaeDiscovery();
+  return withChinaAggregateAuthority(undefined,async()=>({...manifest,markets:Object.fromEntries(Object.entries(manifest.markets??{}).filter(([market])=>legacyAggregateMarketAllowed(market)&&(!omitUae||market!=='uae')))}));
 }
 
 export type AiSitemapProjection = { generationId: string; items: Array<Pick<CatalogSearchProjection, 'id' | 'market' | 'updatedAt' | 'cardImageUrl' | 'make' | 'model' | 'trim' | 'year'>> };
@@ -79,8 +91,8 @@ export async function readAiSitemapProjection(storage?: JsonStorage): Promise<Ai
     throw error;
   });
   if(!projection)return null;
-  const editorial=await readCatalogEditorial();
-  return withChinaAggregateAuthority(undefined,async()=>({...projection,items:projection.items.filter(item=>legacyAggregateMarketAllowed(item.market)&&!editorialHidden(item,editorial)).map(item=>applyCatalogEditorial(item,editorial))}));
+  const [editorial,omitUae]=await Promise.all([readCatalogEditorial(),omitLegacyUaeDiscovery()]);
+  return withChinaAggregateAuthority(undefined,async()=>({...projection,items:projection.items.filter(item=>legacyAggregateMarketAllowed(item.market)&&(!omitUae||item.market!=='uae')&&!editorialHidden(item,editorial)).map(item=>applyCatalogEditorial(item,editorial))}));
 }
 
 export function buildAiSitemapProjection(projection: AiCatalogProjection): AiSitemapProjection {

@@ -27,7 +27,8 @@ import { formatCatalogCount } from "@/lib/catalog/count-format";
 import {DealerLink as Link} from "@/components/dealers/DealerBrowsingContext";
 import type {DealerBrowsingContext} from "@/lib/dealers/browsing-context";
 import { redirect } from "next/navigation";
-import { readCatalogFacets, readCatalogNavigationFacets, searchOffers } from "@/lib/catalog/storage";
+import { uaeRegcloudRuntimeConfigured } from '@/lib/catalog/uae-regcloud-object-reader';
+import { readCatalogFacets, readCatalogNavigationFacets, readPreparedUaeSearch, searchOffers } from "@/lib/catalog/storage";
 import {CatalogSectionLoading} from "./CatalogLoading";
 import { readPublicCatalogOverview } from "@/lib/catalog/editorial-overview";
 import { PublicHeader } from "@/components/layout/PublicHeader";
@@ -127,6 +128,10 @@ async function ReadCatalogContent({params={},dealer=null,embedded=false}:{params
   const chinaCut=selectedMarket==='china'&&hasIndependentChinaHttpFixture()
    ?await readPreparedChinaCompatibility({...common,market:'china',page:requestedPage},{countOnly:false,includeFacets:false,
      marketPage:true,navigationFacets:true,unsupported:Boolean(first(params.source)||first(params.stock)),expectedGeneration:first(params.preparedCut)}):null;
+  const uaeEnabled=uaeRegcloudRuntimeConfigured();
+  const uaeAggregate=uaeEnabled&&!selectedMarket&&(!requestedMarkets.length||selectedMarkets.includes('uae'));
+  const uaeCut=uaeEnabled&&selectedMarket==='uae'?await readPreparedUaeSearch({...common,market:'uae',
+    page:requestedPage,pageSize:MARKET_PAGE_SIZE},{includeFacets:true,expectedGeneration:first(params.preparedCut)}).catch(()=>null):null;
   const omitChina=omitLegacyChinaAggregate()&&!selectedMarket;
   const [liveChina,liveKorea]=chinaCut?[false,false]:await Promise.all([omitChina?false:usesAjesMarket('china'),usesAjesMarket('korea')]);
   const aggregateChinaSection=async(market:{id:string;label:string})=>{
@@ -152,12 +157,20 @@ async function ReadCatalogContent({params={},dealer=null,embedded=false}:{params
     if(!market||!('facets' in chinaCut)||!chinaCut.facets||!('page' in chinaCut))throw new PreparedChinaFixtureUnavailable();
     facets=chinaCut.facets;
     groupedMarkets=[{...market,items:chinaCut.items,total:chinaCut.total,page:chinaCut.page,pageSize:chinaCut.pageSize}];
+  } else if(uaeCut?.facets){
+    const market=markets.find(m=>m.id==='uae')!;
+    facets=uaeCut.facets;
+    groupedMarkets=[{...market,items:uaeCut.items,total:uaeCut.total,page:uaeCut.page,pageSize:uaeCut.pageSize}];
   } else if (overview) {
-    facets = omitChina?await readCatalogFacets():overview.facets;
+    facets = omitChina||uaeAggregate?await readCatalogFacets():overview.facets;
     groupedMarkets = await Promise.all(allowedMarkets.map((market) => readMarketSection(async () => {
       if(omitChina&&market.id==='china')return aggregateChinaSection(market);
       if(liveMarket(market.id)||market.id==='japan')return {...market,items:[],total:0,page:1,pageSize:OVERVIEW_CARDS};
       const snapshot = overview.markets[market.id] || { total: 0, items: [] };
+      if(uaeEnabled&&market.id==='uae'){
+        const fresh=await readPreparedUaeSearch({market:'uae',page:1,pageSize:OVERVIEW_CARDS}).catch(()=>null);
+        if(fresh)return {...market,items:fresh.items,total:fresh.total,page:1,pageSize:OVERVIEW_CARDS};
+      }
       const snapshotCandidates = balanceBusinessRows((snapshot.items as any[]).filter(isRenderablePublicCatalogOffer));
       // The overview is a replaceable speed cache. If its compact showcase was
       // produced before the active card-projection contract, keep its trustworthy
@@ -174,13 +187,20 @@ async function ReadCatalogContent({params={},dealer=null,embedded=false}:{params
   } else {
     [facets, groupedMarkets] = await Promise.all([
       // Navigation options come from prepared directories, independently of the selected filter.
-      omitChina?readCatalogFacets():readCatalogNavigationFacets(selectedMarket),
+      uaeAggregate?readCatalogFacets({market:requestedMarkets.length?requestedMarkets.join('|'):undefined}):
+        omitChina?readCatalogFacets():readCatalogNavigationFacets(selectedMarket),
       Promise.all(markets.map((market) => readMarketSection(async () => {
         if(omitChina&&market.id==='china')return aggregateChinaSection(market);
         if(liveMarket(market.id)||market.id==='japan')return {...market,items:[],total:0,page:1,pageSize:OVERVIEW_CARDS};
         const pageSize = selectedMarket ? MARKET_PAGE_SIZE : OVERVIEW_CARDS;
         const page = selectedMarket ? requestedPage : 1;
 
+        if(uaeEnabled&&market.id==='uae'){
+          if(selectedMarket)throw Error('prepared_uae_unavailable');
+          const result=await readPreparedUaeSearch({...common,market:'uae',page,pageSize});
+          if(!result)throw Error('prepared_uae_unavailable');
+          return {...market,...result};
+        }
         if (selectedMarket) {
           const result = await readCatalogMarketPage({...common, market: market.id, page});
           return {...market, ...result};
@@ -276,7 +296,7 @@ async function ReadCatalogContent({params={},dealer=null,embedded=false}:{params
       </div>
       </>}>
       {embedded&&<div className="hidden md:block"><BrandLogoRail initial={initial} brands={brandNames} resultCount={countIncomplete?undefined:total} /></div>}
-      <div className="mt-8 grid gap-10 md:mt-9 md:gap-12">{visibleMarkets.map((market, marketIndex) => liveMarket(market.id) ? <Suspense key={market.id} fallback={<CatalogSectionLoading active/>}><AjesRail market={market.id as "china"|"korea"} params={params} prepared={railReads.get(market.id)}/></Suspense> : market.id === "japan" ? <div key="japan" className="min-w-0"><Suspense fallback={<CatalogSectionLoading active/>}><AjesRail params={params} prepared={railReads.get("japan")}/></Suspense>{showGreen&&<GreenCornerRail items={greenItems} total={greenTotal} href={pageHref({...params,stock:"green",market:"japan"},1)} />}</div> : <div key={market.id} className="min-w-0"><section><CatalogSectionLoading/><div className="mb-4 flex items-end justify-between gap-4"><h2 className="flex min-w-0 flex-wrap items-center gap-2 text-[26px] font-black tracking-[-0.04em] md:text-4xl"><CatalogMarketFlag market={market.id} className="h-5 w-7 md:h-6 md:w-9" /><span>{market.label}</span><MarketResultCount total={market.unavailable?undefined:market.total}>{market.unavailable?"Количество уточняется":formatCatalogCount(market.total)}</MarketResultCount></h2>{!selectedMarket ? <Link href={pageHref({...params, market: market.id}, 1)} className="ac-market-all-link shrink-0 text-sm font-black">Все →</Link> : null}</div>{market.unavailable ? <p role="status" className="rounded-xl border border-[var(--ac-border)] p-4 text-sm">Не удалось загрузить автомобили этого направления. <Link href={pageHref({...params,market:market.id},requestedPage)} className="underline">Повторить</Link></p> : market.items.length ? selectedMarket ? <CatalogLoadMore key={pageHref(params, requestedPage)+(chinaCut?':'+chinaCut.generationId:'')} query={{...common, market: market.id,...(chinaCut?{preparedCut:chinaCut.generationId}:{})}} initialPage={requestedPage} initialTotal={market.total} initialCount={market.items.length} initialCards={market.items.map((offer: any, index: number) => <CatalogCard key={offer.id} offer={offer} compact dense eagerPrefetch={index < 4} />)} /> : <div className={MARKET_RAIL_CLASS}>{market.items.map((offer: any, index: number) => <div key={offer.id} className="min-w-0"><CatalogCard offer={offer} compact dense eagerPrefetch={marketIndex === 0 && index < 4} /></div>)}</div> : <div className="rounded-[1.5rem] bg-white/[0.04] px-6 py-7 text-sm font-bold text-white/55">По выбранным параметрам автомобили не найдены. Попробуйте изменить условия поиска.</div>}</section></div>)}</div>
+      <div className="mt-8 grid gap-10 md:mt-9 md:gap-12">{visibleMarkets.map((market, marketIndex) => liveMarket(market.id) ? <Suspense key={market.id} fallback={<CatalogSectionLoading active/>}><AjesRail market={market.id as "china"|"korea"} params={params} prepared={railReads.get(market.id)}/></Suspense> : market.id === "japan" ? <div key="japan" className="min-w-0"><Suspense fallback={<CatalogSectionLoading active/>}><AjesRail params={params} prepared={railReads.get("japan")}/></Suspense>{showGreen&&<GreenCornerRail items={greenItems} total={greenTotal} href={pageHref({...params,stock:"green",market:"japan"},1)} />}</div> : <div key={market.id} className="min-w-0"><section><CatalogSectionLoading/><div className="mb-4 flex items-end justify-between gap-4"><h2 className="flex min-w-0 flex-wrap items-center gap-2 text-[26px] font-black tracking-[-0.04em] md:text-4xl"><CatalogMarketFlag market={market.id} className="h-5 w-7 md:h-6 md:w-9" /><span>{market.label}</span><MarketResultCount total={market.unavailable?undefined:market.total}>{market.unavailable?"Количество уточняется":formatCatalogCount(market.total)}</MarketResultCount></h2>{!selectedMarket ? <Link href={pageHref({...params, market: market.id}, 1)} className="ac-market-all-link shrink-0 text-sm font-black">Все →</Link> : null}</div>{market.unavailable ? <p role="status" className="rounded-xl border border-[var(--ac-border)] p-4 text-sm">Не удалось загрузить автомобили этого направления. <Link href={pageHref({...params,market:market.id},requestedPage)} className="underline">Повторить</Link></p> : market.items.length ? selectedMarket ? <CatalogLoadMore key={pageHref(params, requestedPage)+((chinaCut||uaeCut)?':'+(chinaCut||uaeCut)!.generationId:'')} query={{...common, market: market.id,...((chinaCut||uaeCut)?{preparedCut:(chinaCut||uaeCut)!.generationId}:{})}} initialPage={requestedPage} initialTotal={market.total} initialCount={market.items.length} initialCards={market.items.map((offer: any, index: number) => <CatalogCard key={offer.id} offer={offer} compact dense eagerPrefetch={index < 4} />)} /> : <div className={MARKET_RAIL_CLASS}>{market.items.map((offer: any, index: number) => <div key={offer.id} className="min-w-0"><CatalogCard offer={offer} compact dense eagerPrefetch={marketIndex === 0 && index < 4} /></div>)}</div> : <div className="rounded-[1.5rem] bg-white/[0.04] px-6 py-7 text-sm font-bold text-white/55">По выбранным параметрам автомобили не найдены. Попробуйте изменить условия поиска.</div>}</section></div>)}</div>
 {showGreen&&!markets.some(m=>m.id==="japan")&&<GreenCornerRail items={greenItems} total={greenTotal} href={pageHref({...params,stock:"green",market:"japan"},1)}/>}
 {!selectedMarket&&!localIncomplete&&<Suspense fallback={null}><CatalogEmptyResults localTotal={localTotal} reads={[...railReads.values()]}/></Suspense>}
 </CatalogSidebar>

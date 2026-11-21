@@ -1,5 +1,6 @@
 import {omitLegacyChinaAggregate,withChinaAggregateAuthority} from '@/lib/catalog/china-public-aggregate';
 import {readMixedMarketCounts} from '@/lib/catalog/mixed-market-count';
+import {uaeRegcloudRuntimeConfigured} from '@/lib/catalog/uae-regcloud-object-reader';
 import {chinaRegcloudRuntimeConfigured} from '@/lib/catalog/china-regcloud-object-reader';
 import {selectedCatalogMarkets,marketSelectionUrl} from "@/lib/catalog/market-selection";
 import {readGreenCorner,readGreenCornerPage} from '@/lib/catalog/green-corner';
@@ -15,7 +16,7 @@ import { parseEngineCc } from "@/lib/catalog/engine-input";
 import { applyActiveBusinessPricingBatch } from "@/lib/catalog/live-business-pricing";
 import { NextResponse } from "next/server";
 import { loadPublicRateExtras } from "@/lib/catalog/public-rates";
-import { countCatalogOffers, readCatalogFacets, searchOffers, projectPreparedChinaFixtureSearch } from "@/lib/catalog/storage";
+import { countCatalogOffers, readCatalogFacets, searchOffers, projectPreparedChinaFixtureSearch,readPreparedUaeSearch,readPreparedUaeAggregateSearch,preparedUaeAggregateScope,PreparedUaeCutChanged } from "@/lib/catalog/storage";
 
 import {hasPreparedChinaHttpFixture,preparedChinaIndexedModelOnly,readPreparedChinaFixtureList,readPreparedChinaIndexedModel,readPreparedChinaIndexedCity,readPreparedChinaCompatibility,hasIndependentChinaHttpFixture,PreparedChinaCutChanged} from "@/lib/catalog/prepared-china-http-fixture";
 
@@ -35,7 +36,8 @@ export async function GET(request: Request) {
   if(markets.length>1&&p.get('countOnly')==='1'){
     // Preserve the incumbent behavior and cache for all other traffic. A new
     // failure policy is needed only when an independent China is selected.
-    if(!chinaRegcloudRuntimeConfigured()||!markets.includes('china')){
+    if(!(chinaRegcloudRuntimeConfigured()&&markets.includes('china'))&&
+       !(uaeRegcloudRuntimeConfigured()&&markets.includes('uae'))){
       const responses=await Promise.all(markets.map(m=>GET(new Request(marketSelectionUrl(u,m),request))));
       const failed=responses.find(r=>!r.ok);if(failed)return failed;
       const parts=await Promise.all(responses.map(r=>r.json()));
@@ -47,6 +49,7 @@ export async function GET(request: Request) {
     return NextResponse.json({ok:true,...counts,items:[]},{headers:{'Cache-Control':counts.countIncomplete?'no-store':'private, max-age=15'}});
   }
   if(p.get('stock')==='green'&&(!p.get('market')||p.get('market')==='japan'))return greenSearch(request);
+  const uaePrepared=p.get('market')==='uae'&&uaeRegcloudRuntimeConfigured();
   const chinaPrepared=p.get('market')==='china'&&hasPreparedChinaHttpFixture();
   const existingAjesResponse=async()=>{
   if(await usesAjesMarket(p.get('market'),p.get('source'))&&!(p.get('market')==='japan'&&p.get('stock')==='green')){
@@ -61,7 +64,7 @@ export async function GET(request: Request) {
   }
     return null;
   };
-  if(!chinaPrepared){
+  if(!chinaPrepared&&!uaePrepared){
     const a=await existingAjesResponse();
     if(a)return a;
   }
@@ -92,6 +95,30 @@ export async function GET(request: Request) {
     page: n(p.get("page")),
     pageSize: n(p.get("pageSize")),
   };
+  if(uaePrepared){
+    const headers={'Cache-Control':'no-store'};
+    const requestedPage=p.has('page')?Number(p.get('page')):1;
+    if(!Number.isSafeInteger(requestedPage)||requestedPage<1||!Number.isSafeInteger(requestedPage*24))
+      return NextResponse.json({ok:false,reason:'prepared_uae_page'},{status:400,headers});
+    if(p.get('source')||p.get('stock')||p.get('includeRates')==='1')
+      return NextResponse.json({ok:false,reason:'prepared_uae_scope'},{status:422,headers});
+    try{
+      const result=await readPreparedUaeSearch({...query,page:requestedPage,
+        ...(p.get('marketPage')==='1'?{pageSize:24}:{})},{
+        countOnly:p.get('countOnly')==='1',includeFacets:p.get('includeFacets')==='1',
+        expectedGeneration:p.get('preparedCut')});
+      if(!result)return NextResponse.json({ok:false,reason:'prepared_uae_unavailable'},{status:503,headers});
+      return NextResponse.json({ok:true,...result},{headers});
+    }catch(error){
+      const stale=error instanceof PreparedUaeCutChanged;
+      return NextResponse.json({ok:false,reason:stale?'prepared_uae_cut_changed':'prepared_uae_unavailable'},{status:stale?409:503,headers});
+    }
+  }
+  if(p.get('countOnly')!=='1'&&preparedUaeAggregateScope(query.market)){
+    const combined=await readPreparedUaeAggregateSearch(query,{includeFacets:p.get('includeFacets')==='1'}).catch(()=>null);
+    if(combined)return NextResponse.json({ok:true,...combined,total:null,partial:true,countIncomplete:true},
+      {headers:{'Cache-Control':'no-store'}});
+  }
   if(chinaPrepared){
     try{
       const extras=Boolean(p.get('source')||p.get('stock')||p.get('marketPage')==='1'||
