@@ -1327,7 +1327,10 @@ type MarketLanding = {
   total: number; items: CatalogSearchProjection[]; facets: CatalogFacets;
 };
 export function catalogMarketLandingPath(generationId: string, market: string) {
-  return generationPath(generationId, `indexes/market-landing-v1/${cleanShard(market)}.json`);
+  // The prior application remains a rollback reader of market-landing-v1.
+  // Never write the stricter year policy's derivatives into those keys.
+  const namespace=hasFixedMarketModelYear(market)?'market-landing-year2022-v1':'market-landing-v1';
+  return generationPath(generationId, `indexes/${namespace}/${cleanShard(market)}.json`);
 }
 const editorialLandingCache = new DetailReadCache<MarketLanding>({maxEntries:8,maxBytes:12_000_000,ttlMs:300_000,concurrency:2});
 const marketLandingCache = new DetailReadCache<MarketLanding>({maxEntries: 8, maxBytes: 12_000_000, ttlMs: 300_000, concurrency: 4});
@@ -1353,7 +1356,7 @@ async function readMarketLanding(params: CatalogSearchParams): Promise<MarketLan
   if(editorialHasHidden(market)){
     // Rebuild only this small landing in process memory once per editorial
     // revision/generation/day. No full price replay, feed crawl or catalog write.
-    const key=JSON.stringify([manifest.generationId,market,editorialRevision(),new Date(Date.now()+7*3600000).toISOString().slice(0,10)]);
+    const key=JSON.stringify([path,editorialRevision(),new Date(Date.now()+7*3600000).toISOString().slice(0,10)]);
     return editorialLandingCache.get(key,async()=>{
       const projection=await currentProjectionRows({market});
       if(projection.generationId!==manifest.generationId)throw Error('catalog_editorial_generation_changed');
@@ -1379,7 +1382,8 @@ async function readMarketLanding(params: CatalogSearchParams): Promise<MarketLan
   } catch { return null; } // Existing full search remains the authoritative fallback.
 }
 /** Append only derived indexes; never change catalog pointers, prices or inventory. */
-export async function backfillCatalogMarketLandings(options: {refreshDateSensitive?: boolean; repairLease?: import('./publication-lease').CatalogRepairLease} = {}) {
+export async function backfillCatalogMarketLandings(options: {refreshDateSensitive?: boolean; year2022Only?:boolean; repairLease?: import('./publication-lease').CatalogRepairLease} = {}) {
+  if(options.year2022Only&&!options.refreshDateSensitive)throw Error('catalog_year2022_landing_refresh_required');
   const manifest = await readDataJson<CatalogManifest>("catalog/manifest.json", {generationId: "", markets: {}} as CatalogManifest);
   if (!manifest.generationId) throw new Error("catalog_market_landing_no_generation");
   const storage = getJsonStorage();
@@ -1398,6 +1402,7 @@ export async function backfillCatalogMarketLandings(options: {refreshDateSensiti
   await assertRefreshContext();
   const results = [];
   for (const market of MARKETS) {
+    if(options.year2022Only&&!hasFixedMarketModelYear(market))continue;
     const count = Number(manifest.markets?.[market]?.count || 0);
     if (!count) continue;
     const landingPath = catalogMarketLandingPath(manifest.generationId, market);

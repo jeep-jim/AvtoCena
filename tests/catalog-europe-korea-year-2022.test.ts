@@ -4,9 +4,10 @@ import {catalogInventoryAgeDecision} from '../apps/web/lib/catalog/inventory-adm
 import {catalogMinYearForMarket,isCatalogYearAllowed} from '../apps/web/lib/catalog/offer-quality';
 import {ajesLot,ajesQuery} from '../apps/web/lib/catalog/ajes-query';
 import {getJsonStorage} from '../apps/web/lib/data';
+import {datedCatalogPagePath} from '../apps/web/lib/catalog/dated-pages';
 import {buildBudgetCountIndex} from '../apps/web/lib/catalog/budget-count-index';
 import {
- buildCatalogBrandSummary,buildCatalogMarketLanding,catalogMarketLandingPath,
+ backfillCatalogMarketLandings,buildCatalogBrandSummary,buildCatalogMarketLanding,catalogMarketLandingPath,
  countCatalogOffers,currentOfferShardName,getOfferWithoutEditorial,projectionCanRenderCard,
  readCatalogFacets,readCatalogModelNames,readPublicCatalogMarketCounts,resetCatalogReadCachesForTests,searchOffers,
 } from '../apps/web/lib/catalog/storage';
@@ -178,4 +179,87 @@ test('old global order fallback touches only affected eligibility partitions and
  assert.equal(georgiaOnly.total,2);
  assert.ok(reads.some(file=>file.endsWith("/offers/georgia/first.json")));
  assert.ok(!reads.some(file=>file.endsWith('/offers/georgia/never.json')));
+});
+
+test('only Korea and Europe use separate canonical and dated landing keys; a stale-generation object falls back',async t=>{
+ t.mock.timers.enable({apis:['Date'],now:new Date(day)});
+ const oldGeneration='gen_1795233600000_old',newGeneration='gen_1795233600001_new',market='korea',unaffected='georgia';
+ let generation=oldGeneration;
+ const korea=marketRows(market),georgia=marketRows(unaffected);
+ const oldKorea=`catalog/generations/${generation}/indexes/market-landing-v1/korea.json`;
+ const newKorea=catalogMarketLandingPath(generation,market);
+ assert.equal(newKorea,`catalog/generations/${generation}/indexes/market-landing-year2022-v1/korea.json`);
+ assert.equal(catalogMarketLandingPath(generation,'europe'),`catalog/generations/${generation}/indexes/market-landing-year2022-v1/europe.json`);
+ for(const neighbor of ['china','georgia','uae','japan']){
+  assert.equal(catalogMarketLandingPath(generation,neighbor),`catalog/generations/${generation}/indexes/market-landing-v1/${neighbor}.json`);
+ }
+ const stamped=await buildCatalogMarketLanding(generation,market,korea);
+ const sameDay=stamped.policyDate!;
+ const other=await buildCatalogMarketLanding(generation,unaffected,georgia);
+ const oldDated=datedCatalogPagePath(oldKorea,sameDay),newDated=datedCatalogPagePath(newKorea,sameDay);
+ assert.notEqual(oldDated,newDated);
+ const values=new Map([
+  [oldKorea,{...stamped,total:26}],[oldDated,{...stamped,total:26}],[newKorea,{...stamped,policyDate:'2000-01-01'}],[newDated,stamped],
+  [catalogMarketLandingPath(generation,unaffected),other],
+ ]);
+ const before=JSON.stringify([...values]);const reads:string[]=[];
+ t.mock.method(getJsonStorage(),'readJsonWithMeta',async(file:string,fallback:any)=>{
+   reads.push(file);
+   const value=file==='catalog/manifest.json'?{generationId:generation,markets:{korea:{count:26},georgia:{count:26}}}
+    :values.get(file)??(file===catalogMarketLandingPath(newGeneration,market)?stamped
+    :file.endsWith('/indexes/budget-count-v2.json')?buildBudgetCountIndex(generation,korea)
+    :file.endsWith('/indexes/budget-cards-v2/0.json')?{generationId:generation,items:korea}:fallback);
+   return {found:value!==fallback,value};
+ });
+ t.mock.method(getJsonStorage(),'writeJson',async()=>{throw Error('read_only');});
+ resetCatalogReadCachesForTests();
+ assert.equal((await searchOffers({market})).total,25);
+ assert.equal((await searchOffers({market:unaffected})).total,26);
+ assert.ok(reads.includes(newKorea)&&reads.includes(newDated)&&!reads.includes(oldKorea)&&!reads.includes(oldDated));
+ assert.ok(!reads.some(file=>file.includes('/projection/')||file.includes('budget-cards-')));
+ generation=newGeneration;resetCatalogReadCachesForTests();reads.length=0;
+ const after=await searchOffers({market});
+ assert.equal(after.generationId,newGeneration);assert.equal(after.total,25);
+ assert.ok(after.usedIndexShards.includes('budget-cards-v2/0.json'));
+ assert.ok(!reads.includes(oldKorea)&&!reads.includes(oldDated));
+ assert.equal(JSON.stringify([...values]),before);
+});
+
+test('scope-only backfill preserves rollback keys, requires CAS and fences a moved manifest before writes',async t=>{
+ t.mock.timers.enable({apis:['Date'],now:new Date(day)});
+ const generation='gen_1795233600000_scoped',wrong='gen_1795233600001_other',storage=getJsonStorage();
+ const markets={korea:{count:26},europe:{count:26},georgia:{count:26}};
+ const korea=catalogMarketLandingPath(generation,'korea'),europe=catalogMarketLandingPath(generation,'europe');
+ const allowed=new Set([korea,europe]);const writes:any[]=[];const reads:string[]=[];
+ let denyProjection=false,moveGeneration=false,moved=false;
+ t.mock.method(storage,'readJsonWithMeta',async(file:string,fallback:any)=>{
+  reads.push(file);
+  if(file==='catalog/manifest.json')return {found:true,value:{generationId:moved?wrong:generation,markets}};
+  if(file==='catalog/import-lock.json')return {found:true,value:null};
+  if(file===korea)return {found:true,value:{},etag:'"new-korea-only"'};
+  if(file.endsWith('/projection/korea.json')||file.endsWith('/projection/europe.json')){
+   if(denyProjection)throw Error('storage_permission_denied');
+   if(moveGeneration)moved=true;
+   return {found:true,value:{generationId:generation,items:marketRows(file.endsWith('/korea.json')?'korea':'europe')}};
+  }
+  return {found:false,value:fallback};
+ });
+ t.mock.method(storage,'writeJson',async(file:string,value:any,condition:any)=>{
+  assert.ok(allowed.has(file),'writer attempted to use incumbent/neighbor namespace');
+  writes.push({file,value,condition});
+ });
+ await assert.rejects(backfillCatalogMarketLandings({year2022Only:true}),/catalog_year2022_landing_refresh_required/);
+ assert.deepEqual(writes,[]);
+ const result=await backfillCatalogMarketLandings({year2022Only:true,refreshDateSensitive:true});
+ assert.deepEqual(result.results.map(r=>r.market).sort(),['europe','korea']);
+ assert.deepEqual(writes.find(r=>r.file===korea).condition,{ifMatch:'"new-korea-only"'});
+ assert.deepEqual(writes.find(r=>r.file===europe).condition,{ifNoneMatch:'*'});
+ assert.ok(writes.every(r=>r.value.generationId===generation&&r.value.total===25));
+ assert.ok(!reads.some(file=>file.includes('/market-landing-v1/')||file.endsWith('/projection/georgia.json')));
+ writes.length=0;denyProjection=true;
+ await assert.rejects(backfillCatalogMarketLandings({year2022Only:true,refreshDateSensitive:true}),/storage_permission_denied/);
+ assert.deepEqual(writes,[]);
+ denyProjection=false;moveGeneration=true;
+ await assert.rejects(backfillCatalogMarketLandings({year2022Only:true,refreshDateSensitive:true}),/catalog_market_landing_generation_changed_retry/);
+ assert.deepEqual(writes,[]);
 });
