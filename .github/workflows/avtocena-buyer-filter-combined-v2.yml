@@ -1,0 +1,43 @@
+name: Verify exact AvtoCena buyer filter route, count and city
+on:
+  push:
+    branches: [main]
+    paths: [.github/market-runs/avtocena-buyer-filter-combined-v2.sha256]
+permissions:
+  contents: read
+jobs:
+  verify:
+    if: github.repository == 'jeep-jim/AvtoCena' && github.repository_id == '1289722938' && github.ref == 'refs/heads/main' && github.run_attempt == '1' && github.event.head_commit.message == 'Verify exact AvtoCena common filter and Ussuriysk result parity'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    env: {BUNDLE_SHA: 'fb1aac14767060922310190e72d395ecf95ecd8efd07a64e09397e8df737f721'}
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 2
+          persist-credentials: false
+      - name: Verify sole local-check marker and exact actor bytes
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          test "$(git show -s --format=%P HEAD | wc -w)" = 1
+          readonly marker=.github/market-runs/avtocena-buyer-filter-combined-v2.sha256
+          cmp -s <(git diff-tree --no-commit-id -r --name-status --no-renames -z HEAD^ HEAD) <(printf 'A\0%s\0' "$marker")
+          cmp -s "$marker" <(printf '%s\n' 01fab2584c11839b0fefbaecb1edf75d31f92b68 c7650e6b01610087ebc3aaefe063ee259a341c17 "$BUNDLE_SHA")
+          cd .github/operations/avtocena-buyer-filter-combined-v2
+          printf '%s  bundle.sha256\n' "$BUNDLE_SHA" | sha256sum --check --status
+          sha256sum --check --strict --status bundle.sha256
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: 01fab2584c11839b0fefbaecb1edf75d31f92b68
+          fetch-depth: 3
+          path: exact-app
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with: {node-version: '24.22.1'}
+      - name: Build and verify standard buyer route browser interactions using synthetic data only
+        working-directory: exact-app
+        shell: bash
+        run: bash "$GITHUB_WORKSPACE/.github/operations/avtocena-buyer-filter-combined-v2/verify.sh"
