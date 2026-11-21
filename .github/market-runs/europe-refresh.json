@@ -1,10 +1,12 @@
 {
-  "operation": "owner-europe-autoscout-only",
-  "requestedAt": "2026-11-21T15:25:52.262438+00:00",
+  "operation": "publish-sealed-autoscout-europe",
+  "requestedAt": "2026-11-21T15:50:35.205809+00:00",
   "market": "europe",
   "publishMarkets": [
     "europe"
   ],
-  "resetCursors": true,
-  "reason": "Retire mobile.de from Europe collection and publication. Replace the Europe catalog from the completed AutoScout24 listing feed."
+  "resetCursors": false,
+  "reason": "Use the completed AutoScout24-only REG snapshot and its captured currency rates. Apply the approved Europe model year floor of 2022. No supplier requests.",
+  "reuseRunId": "44919202807",
+  "refreshMarkets": []
 }
