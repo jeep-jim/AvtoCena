@@ -1,0 +1,88 @@
+name: Qualify fresh UAE buyer data privately
+on:
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/uae-private-buyer-run-22867-v1.sha256']
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: uae-private-buyer-qualification-22867-v1
+  cancel-in-progress: false
+env:
+  UAE_BUYER_OPS: .github/operations/uae-private-buyer-run-22867-v1
+jobs:
+  qualification:
+    if: github.repository_id == '1289722938' && github.ref == 'refs/heads/main' && github.run_attempt == 1 && github.event.head_commit.message == 'Qualify exact fresh UAE buyer data privately'
+    runs-on: ubuntu-24.04
+    environment: regcloud-staging
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 2
+          persist-credentials: false
+      - name: Verify sole pinned marker and exact prior completed UAE source stage
+        shell: bash
+        env:
+          BEFORE: ${{ github.event.before }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          marker=.github/market-runs/uae-private-buyer-run-22867-v1.sha256
+          [[ "$BEFORE" =~ ^[a-f0-9]{40}$ ]]
+          test "$(git rev-list --parents -n1 HEAD)" = "$GITHUB_SHA $BEFORE"
+          test "$(git show -s --format=%B HEAD)" = 'Qualify exact fresh UAE buyer data privately'
+          test "$(git diff --no-renames --name-status "$BEFORE" "$GITHUB_SHA" --)" = "$(printf 'A\t%s' "$marker")"
+          printf '%s  %s\n' 3c7af314ecb364f6d68ee03bf9709fef8034e7824dd8a95b52f2974f0fe010d5 "$marker" | sha256sum --strict -c -
+          sha256sum --strict -c "$marker"
+          gh api "repos/$GITHUB_REPOSITORY/actions/jobs/136724327745" | jq -e '(.id==136724327745 and .run_id==44864273301 and .conclusion=="success")' >/dev/null
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: 22867cbcfaee27b2e8917b6bf880e44827f67b60
+          path: .native-22867
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with: {node-version: '24.22.1'}
+      - name: Verify source scope and load exact native installed modules
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --test "$UAE_BUYER_OPS/qualify.test.mjs" "$UAE_BUYER_OPS/cbr.test.mjs"
+          test "$(git -C .native-22867 rev-parse HEAD)" = 22867cbcfaee27b2e8917b6bf880e44827f67b60
+          test "$(git -C .native-22867 rev-parse HEAD:apps/web/lib/catalog/prepare-seller-inventory.ts)" = e1b53ede554455a3be3314eba0e129c560205101
+          test "$(git -C .native-22867 rev-parse HEAD:apps/web/lib/catalog/storage.ts)" = f402e951d56998efb75c7ac8cd1187ddc7726532
+          mkdir -p ".native-22867/$UAE_BUYER_OPS"
+          cp "$UAE_BUYER_OPS"/* ".native-22867/$UAE_BUYER_OPS/"
+          cd .native-22867 && npm ci --ignore-scripts --no-audit --no-fund
+      - name: Fetch one public exact dated central-bank FX input, before private role
+        shell: bash
+        run: |
+          set -euo pipefail
+          umask 077
+          private="$(mktemp -d "$RUNNER_TEMP/uae-buyer-run.XXXXXX")"
+          curl -fSs --proto '=https' --max-time 25 --max-filesize 524288 \
+            'https://www.cbr.ru/currency_base/daily/?UniDbQuery.Posted=True&UniDbQuery.To=21.11.2026' -o "$private/cbr.html"
+          node --input-type=module - "$private/cbr.html" <<'EOF'
+          import fs from 'node:fs';
+          import {datedCbr} from './.github/operations/uae-private-buyer-run-22867-v1/cbr.mjs';
+          const verified=datedCbr(fs.readFileSync(process.argv[2]));
+          console.log(JSON.stringify({fxDate:'2026-11-21',sha256:verified.wireSha256,currencies:3}));
+          EOF
+          printf 'UAE_BUYER_PRIVATE=%s\n' "$private" >> "$GITHUB_ENV"
+      - name: Native private price and editorial qualification only, no supplier or public mutation
+        working-directory: .native-22867
+        shell: bash
+        env:
+          JSON_STORAGE_DRIVER: object
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_REGION: us-east-1
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+          YC_OBJECT_STORAGE_REQUEST_TIMEOUT_MS: '8000'
+          YC_OBJECT_STORAGE_MAX_ATTEMPTS: '1'
+          NODE_OPTIONS: --max-old-space-size=6144
+        run: node --import tsx "$UAE_BUYER_OPS/run-private.mts" "$UAE_BUYER_PRIVATE" "$UAE_BUYER_PRIVATE/cbr.html"
