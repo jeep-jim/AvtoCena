@@ -1,0 +1,116 @@
+name: Verify accepted China daily bootstrap without supplier
+on:
+  push:
+    branches: [main]
+    paths: [.github/market-runs/china-daily-rev6-bootstrap-readonly-v1.sha256]
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: china-daily-rev6-bootstrap-readonly-audit-v1
+  cancel-in-progress: false
+jobs:
+  observe:
+    name: Verify accepted China daily bootstrap without supplier
+    if: github.repository == 'jeep-jim/AvtoCena' && github.repository_id == '1289722938' && github.ref == 'refs/heads/main' && github.run_attempt == '1' && github.event.head_commit.message == 'Verify accepted China daily bootstrap without supplier'
+    runs-on: ubuntu-24.04
+    environment: regcloud-staging
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+          path: orchestrator
+          persist-credentials: false
+          fetch-depth: 3
+          sparse-checkout: |
+            .github/operations/china-daily-rev6-bootstrap-readonly-v1
+            .github/market-runs
+            .github/workflows/china-daily-rev6-bootstrap-readonly-v1.yml
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: 22867cbcfaee27b2e8917b6bf880e44827f67b60
+          path: candidate
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: bb6317bffd1f7b1832681ac78378fe6c3e39e3b5
+          path: raw-pins
+          persist-credentials: false
+          sparse-checkout: |
+            scripts/lib
+            scripts/publisher-runtime83
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 24.22.1
+      - name: Fit sole marker, source bundle and pinned native reader with no storage credentials
+        shell: bash
+        run: |
+          set -euo pipefail
+          umask 077
+          cd "$GITHUB_WORKSPACE/orchestrator"
+          readonly ops=.github/operations/china-daily-rev6-bootstrap-readonly-v1
+          readonly m=.github/market-runs/china-daily-rev6-bootstrap-readonly-v1.sha256
+          readonly wf=.github/workflows/china-daily-rev6-bootstrap-readonly-v1.yml
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          test "$(git show -s --format=%B HEAD)" = 'Verify accepted China daily bootstrap without supplier'
+          test "$(git show -s --format=%P HEAD | wc -w)" -eq 1
+          test "$(git show -s --format=%P HEAD^ | wc -w)" -eq 1
+          test "$(git diff-tree --no-commit-id -r --name-status --no-renames HEAD^ HEAD)" = "$(printf 'A\t%s' "$m")"
+          test "$(git cat-file -s "HEAD:$m")" -eq 229
+          test "$(git cat-file -s "HEAD:$ops/APPROVED_CODE.sha256")" -le 2048
+          digest="$(sha256sum "$ops/APPROVED_CODE.sha256" | cut -d ' ' -f1)"
+          printf '%s\n%s\n%s\n%s\n%s\n' "$digest" "$(git rev-parse HEAD^)" "$(git rev-parse 'HEAD^:')" "$(git rev-parse HEAD^^)" "$(git rev-parse 'HEAD^^:')" | cmp -s - "$m"
+          sha256sum --strict --quiet -c "$ops/APPROVED_CODE.sha256"
+          python3 - "$ops" "$wf" <<'PY'
+          import subprocess,sys,pathlib,re,json,os
+          ops,wf=sys.argv[1:]
+          base=pathlib.Path(ops)
+          expected={str(base/f) for f in ('APPROVED_CODE.sha256','daily-core.mjs','rev6-bootstrap.mjs','native-bootstrap-preview.mts','signed-read-entry.mts','official-proof.mjs','snapshot.json')}|{wf}
+          listed=set()
+          for line in (base/'APPROVED_CODE.sha256').read_text().splitlines():
+           m=re.fullmatch(r'[0-9a-f]{64}  ([A-Za-z0-9_./-]+)',line); assert m and m[1] not in listed and m[1] in expected;listed.add(m[1])
+          assert listed==expected-{str(base/'APPROVED_CODE.sha256')}
+          assert set(subprocess.check_output(['git','diff-tree','--no-commit-id','-r','--name-status','--no-renames','HEAD^^','HEAD^'],text=True).splitlines())=={'A\t'+x for x in expected}
+          e=json.load(open(os.environ['GITHUB_EVENT_PATH']))
+          assert e['before']==subprocess.check_output(['git','rev-parse','HEAD^'],text=True).strip() and not e['forced'] and not e['deleted']
+          assert len(e['commits'])==1 and e['commits'][0]['id']==e['head_commit']['id']==os.environ['GITHUB_SHA']
+          PY
+          test "$(git -C ../candidate rev-parse HEAD)" = 22867cbcfaee27b2e8917b6bf880e44827f67b60
+          test "$(git -C ../raw-pins rev-parse HEAD)" = bb6317bffd1f7b1832681ac78378fe6c3e39e3b5
+          test "$(sha256sum ../raw-pins/scripts/lib/catalog-raw-provenance.mjs | cut -d ' ' -f1)" = 5027a27aa7cb949564aba8e586e7c27c84288e08e68677663c6a1ae2d14215e3
+          test "$(sha256sum "$ops/snapshot.json" | cut -d ' ' -f1)" = 25abfa4b8f1b053b12a1fcd86f01dc42de65eb8cb74f3863abf1a49115dfdb27
+          test -z "$(git -C ../candidate status --porcelain)" && test -z "$(git -C ../raw-pins status --porcelain)"
+          (cd ../candidate; npm ci --ignore-scripts --no-audit --no-fund)
+          for f in daily-core.mjs rev6-bootstrap.mjs native-bootstrap-preview.mts signed-read-entry.mts; do
+            test ! -e "../candidate/$f"
+            install -m 0600 "$ops/$f" "../candidate/$f"
+          done
+      - name: Attest official exact producer and successful public reads without storage credentials
+        working-directory: orchestrator
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          node .github/operations/china-daily-rev6-bootstrap-readonly-v1/official-proof.mjs
+      - name: Read current independent READY and six exact immutable source metadata objects
+        working-directory: candidate
+        env:
+          JSON_STORAGE_DRIVER: object
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011
+          YC_OBJECT_STORAGE_REGION: us-east-1
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+          AVTOCENA_RELEASE_SHA: 22867cbcfaee27b2e8917b6bf880e44827f67b60
+          AVTOCENA_CALCULATION_VERSION: 4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90
+          AVTOCENA_CHINA_REGCLOUD_RUNTIME: '1'
+        shell: bash
+        run: |
+          set -euo pipefail
+          unset GITHUB_TOKEN AUTO_API_CHE168_KEY
+          readonly ops="$GITHUB_WORKSPACE/orchestrator/.github/operations/china-daily-rev6-bootstrap-readonly-v1"
+          timeout -k 3 55 node --import tsx ./signed-read-entry.mts "$ops/snapshot.json" "$GITHUB_WORKSPACE/raw-pins/scripts/lib/catalog-raw-provenance.mjs"
