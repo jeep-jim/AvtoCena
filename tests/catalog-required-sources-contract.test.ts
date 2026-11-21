@@ -21,7 +21,6 @@ const APPROVED_SOURCES: Record<CatalogMarket, readonly (readonly [string, string
     ["kcar_korea_open", "https://www.kcar.com/"],
   ],
   europe: [
-    ["mobile_de_open", "https://www.mobile.de/"],
     ["autoscout_europe_open", "https://www.autoscout24.com/"],
   ],
   georgia: [
@@ -36,9 +35,9 @@ const APPROVED_SOURCES: Record<CatalogMarket, readonly (readonly [string, string
   ],
 };
 
-test("the 11 generic owner-approved catalog source ids and domains are permanently encoded for six markets", () => {
+test("the active owner-approved catalog source ids and domains are permanently encoded for six markets", () => {
   const total = Object.values(REQUIRED_CATALOG_SOURCES).reduce((sum, sources) => sum + sources.length, 0);
-  assert.equal(total, 11);
+  assert.equal(total, 10);
   assert.deepEqual(Object.keys(REQUIRED_CATALOG_SOURCES).sort(), ["china", "europe", "georgia", "japan", "korea", "uae"]);
 
   for (const [marketName, expectedSources] of Object.entries(APPROVED_SOURCES)) {
@@ -102,4 +101,10 @@ test("Only owner-approved Global host can enter the Che168 production slot", () 
  for (const host of ["global.che168.com"]) {
   assert.equal(isAllowedCatalogSourceUrl("china","autohome_used_china_open",`https://${host}/dealer/1/59848501.html`),true);
  }
+});
+
+test('Europe refresh and publication use AutoScout24 after the owner retired mobile.de',()=>{
+  assert.deepEqual(catalogV2RequiredSourceIds('europe'),['autoscout_europe_open']);
+  assert.deepEqual(catalogV2SourceIds('europe'),['autoscout_europe_open']);
+  assert.equal(isAllowedCatalogSourceId('europe','mobile_de_open'),false);
 });

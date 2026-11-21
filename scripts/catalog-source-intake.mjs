@@ -47,7 +47,7 @@ const writers=new Map(states.map(state=>[state.sourceId,observationShardWriter(d
 // on its separate source path and has no non-Japan archive output.
 const rawWriters=new Map(market==='japan'?[]:states.map(state=>[state.sourceId,observationShardWriter(directory,'raw-'+state.sourceId)]));
 const startedAt=new Date().toISOString();
-const deadline=Date.now()+Math.min((market==='korea'?300:210)*60000,Math.max(60000,Number(process.env.CATALOG_INTAKE_TIME_MS || 40*60000)));
+const deadline=market==='japan'?Date.now()+Math.min(210*60000,Math.max(60000,Number(process.env.CATALOG_INTAKE_TIME_MS || 40*60000))):Infinity;
 const maxRowsPerSource = market === 'japan' ? Math.min(100000, Math.max(1, Number(process.env.CATALOG_INTAKE_MAX_ROWS_PER_SOURCE || 100000))) : Infinity;
 const report={version:1,market,startedAt,productionWrites:false,mode:'source_observations',controlsRevision:ownerControls.revision,requiredSourceIds:selectedSources.map(s=>s.sourceId),
   note:'JSONL contains listing and detail revisions. Count unique sourceId + offer.id, not lines. Auction history is not active inventory.'};
@@ -70,7 +70,7 @@ await collectSourceStates(states,state=>({market,deadline,maxRows:maxRowsPerSour
       minYear:state.sourceId==='autohome_new_china_open'?AUTOHOME_NEW_MIN_YEAR:market==='japan'?2010:new Date().getUTCFullYear()-6,
       inventoryAgeEligible:offer=>catalogInventoryAgeDecision(offer).eligible && !catalogHeavyVehicleExcluded(offer),
       snapshot:sourceListingSnapshot,checkpoint,
-      hasDiskRoom:async()=>{const disk=await fs.statfs(directory);return disk.bavail*disk.bsize>=2*1024**3;},
+      hasDiskRoom:market==='japan'?async()=>{const disk=await fs.statfs(directory);return disk.bavail*disk.bsize>=2*1024**3;}:undefined,
       translationReport:groups=>untranslatedSpecificationFields(groups),
       specificationReport:offer=>Object.fromEntries(['year','engineCc','powerHp','fuelPowertrain','certifiedPower'].map(field=>[field,classifySpecificationEvidence(offer,field).state])),
       archivePage:market==='japan'?undefined:async(page,cursor)=>rawWriters.get(state.sourceId)({version:1,kind:'source_page',

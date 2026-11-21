@@ -1,10 +1,10 @@
 {
-  "operation": "owner-full-europe-to-reg-20261121",
-  "requestedAt": "2026-11-21T14:53:29+00:00",
+  "operation": "owner-europe-autoscout-only",
+  "requestedAt": "2026-11-21T15:25:52.262438+00:00",
   "market": "europe",
   "publishMarkets": [
     "europe"
   ],
   "resetCursors": true,
-  "reason": "Collect the full configured market into private REG storage from the first page. Record the FX cut once for this intake. Preserve all other markets, Japan and Green Corner."
+  "reason": "Retire mobile.de from Europe collection and publication. Replace the Europe catalog from the completed AutoScout24 listing feed."
 }

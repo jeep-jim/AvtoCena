@@ -38,6 +38,7 @@ export async function saveCollectionSwitch(input:unknown,actor:string,storage:Js
   if(!body || !['market','source'].includes(String(body.scope)) || typeof body.id!=='string' || typeof body.enabled!=='boolean' || !Number.isSafeInteger(body.revision))throw new CollectionControlsInputError('Некорректная настройка');
   const scope=body.scope as 'market'|'source',id=body.id,enabled=body.enabled;
   if(!(scope==='market'?COLLECTION_MARKETS:COLLECTION_SOURCES).some(row=>row.id===id))throw new CollectionControlsInputError('Неизвестный источник или рынок');
+  if(scope==='source' && id==='mobile_de_open' && enabled)throw new CollectionControlsInputError('Сбор с mobile.de отключён.');
   const meta=await storage.readJsonWithMeta<unknown>(COLLECTION_CONTROLS_KEY,null),current=meta.found?validateCollectionControls(meta.value):defaultCollectionControls();
   if(current.revision!==body.revision)throw new CollectionControlsConflict('Настройки уже изменились. Обновите список.');
   const field=scope==='market'?'markets':'sources',before=current[field][id];

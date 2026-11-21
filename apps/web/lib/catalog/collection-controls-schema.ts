@@ -22,7 +22,7 @@ export const COLLECTION_SOURCES = [
     ['europe','autoscout_europe_open','AutoScout24','https://www.autoscout24.com/'],
     ['georgia','myauto_georgia_list','MyAuto','https://www.myauto.ge/'],
     ['georgia','autopapa_georgia_open','AutoPapa','https://autopapa.ge/'],
-  ].map(([market,id,label,url])=>({id,market:market as CollectionMarket,label,url,kind:'parser',defaultEnabled:true,
+  ].map(([market,id,label,url])=>({id,market:market as CollectionMarket,label,url,kind:'parser',defaultEnabled:id!=='mobile_de_open',
     frequency:'Раз в 3 дня; при неполном сборе возможны ограниченные повторные попытки',description:'Сбор объявлений и характеристик с площадки. Отключение прекращает новые обращения сборщика.',
     settings:`До ${market==='korea'?300:210} минут за запуск; до 100 000 наблюдений на источник, до 2 000 страниц, до 4 карточек одновременно, до 30 фото.`})),
   {id:'akebono_green',market:'japan',label:'Akebono · зелёный угол',url:'https://akebono.world/',kind:'parser',defaultEnabled:true,frequency:'Раз в 3 дня, окно 06:47 по Красноярску',description:'Автомобили в наличии и условия поставки.',settings:'По 50 записей на страницу; неполная выгрузка не заменяет опубликованный список.'},
@@ -35,7 +35,7 @@ export function defaultCollectionControls():CollectionControls {
   return {version:1,revision:0,updatedAt:null,markets:Object.fromEntries(COLLECTION_MARKETS.map(m=>[m.id,value(true)])),sources:Object.fromEntries(COLLECTION_SOURCES.map(s=>[s.id,value(s.defaultEnabled)])),history:[]};
 }
 export function collectionEnabled(controls:CollectionControls,id:string):boolean {
-  if (['proauctions_japan_stat','jptrade_japan_stat'].includes(id)) return false;
+  if (['proauctions_japan_stat','jptrade_japan_stat','mobile_de_open'].includes(id)) return false;
   const source=COLLECTION_SOURCES.find(s=>s.id===id);
   if(!source)throw Error('unknown_collection_source');
   return controls.markets[source.market]?.enabled===true && controls.sources[id]?.enabled===true;

@@ -68,3 +68,9 @@ test('owner-only API and source collection gates remain wired',()=>{
  const watchdog=readFileSync('scripts/catalog-autonomy-watchdog.mjs','utf8');assert.match(watchdog,/disabled_by_owner/);assert.doesNotMatch(watchdog,/rerun-failed-jobs/);
  assert.equal(COLLECTION_CONTROLS_KEY,'catalog/operations/collection-controls-v1.json');
 });
+
+test('an old saved mobile.de switch cannot resume a retired European source',()=>{
+ const controls=defaultCollectionControls();controls.sources.mobile_de_open.enabled=true;
+ assert.equal(collectionEnabled(controls,'mobile_de_open'),false);
+ assert.equal(collectionEnabled(controls,'autoscout_europe_open'),true);
+});

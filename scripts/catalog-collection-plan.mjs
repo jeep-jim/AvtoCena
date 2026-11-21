@@ -1,9 +1,15 @@
 import fs from 'node:fs/promises';
-import {readCollectionControls} from '../apps/web/lib/catalog/collection-controls.ts';
+import {readCollectionControls,saveCollectionSwitch,CollectionControlsConflict} from '../apps/web/lib/catalog/collection-controls.ts';
 import {COLLECTION_MARKETS,COLLECTION_SOURCES,collectionEnabled,collectionMarketEnabled} from '../apps/web/lib/catalog/collection-controls-schema.ts';
 const market=process.env.CATALOG_INTAKE_MARKET;
 if(!COLLECTION_MARKETS.some(m=>m.id===market))throw Error('invalid_market');
-const controls=await readCollectionControls();
+let controls=await readCollectionControls();
+if(market==='europe'){
+ while(controls.sources.mobile_de_open?.enabled===true){
+  try{controls=await saveCollectionSwitch({scope:'source',id:'mobile_de_open',enabled:false,revision:controls.revision},'owner-europe-source-retirement');}
+  catch(error){if(!(error instanceof CollectionControlsConflict))throw error;controls=await readCollectionControls();}
+ }
+}
 if(!collectionMarketEnabled(controls,market))throw Error('collection_disabled_by_owner:'+market);
 const feed=market==='china'&&collectionEnabled(controls,'che168_feed');
 const dubicarsFeed=market==='uae'&&collectionEnabled(controls,'dubicars_feed');
