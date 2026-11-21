@@ -101,6 +101,17 @@ function decodePart(value, expected) {
   return bytes;
 }
 
+export async function readArchivedReport(storage,root,manifestDigest) {
+  const manifest=validateIntakeArchive(await storage.readJson(root+'/complete.json',null),root,manifestDigest);
+  const file=manifest.files.find(entry=>entry.name==='report.json');
+  assert.equal(file.sha256,manifest.reportDigest,'archive_report_identity');
+  const parts=[];
+  for(const part of file.parts) parts.push(decodePart(await storage.readJson(part.key,null),part));
+  const bytes=Buffer.concat(parts);
+  assert.ok(bytes.length===file.bytes && digest(bytes)===file.sha256,'archive_report_integrity');
+  return JSON.parse(bytes);
+}
+
 /** Small immutable identity check used again before publication; full parts were
  * already verified by restore. This does not label provider coverage complete. */
 async function readIntakeArchiveManifestScoped({storage, receipt}) {

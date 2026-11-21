@@ -1,3 +1,4 @@
+import {selectChinaCut,savedChinaInventory,ownedChinaRequests} from './lib/owned-china-prepare.mjs';
 import {createChe168MissingDetails} from './lib/che168-missing-details.mjs';
 import {CHINA_MIN_MODEL_YEAR} from '../apps/web/lib/catalog/china-year-policy.ts';
 import {assertCollectionEnabled} from '../apps/web/lib/catalog/collection-controls.ts';
@@ -26,11 +27,14 @@ const binding=snapshotBinding(config);
 let storage=getJsonStorage();
 if(storage.driver!=='object')throw Error('auto_api_durable_storage_required');
 const yearFrom=CHINA_MIN_MODEL_YEAR;
-const saved=await storage.readJson('catalog/intake-cursors/v1/china.json',null);
+const cutId=process.env.OWNED_CHINA_CUT;
+const selection=cutId?await selectChinaCut(storage):null;
+if(cutId&&selection?.cut.runId!==cutId)throw Error('china_materialization_head_changed');
+const saved=selection?await savedChinaInventory(storage,selection,binding):await storage.readJson('catalog/intake-cursors/v1/china.json',null);
 const previous=saved?.sources?.find(row=>row.sourceId===sourceId);
 // A legacy cursor is not aligned to the supplier's new file. Bootstrap once;
 // later runs only restore the replica associated with a published cursor.
-const resume=previous?.snapshotBinding===binding && previous.yearFrom===yearFrom;
+const resume=previous?.snapshotBinding===binding && (previous.yearFrom===yearFrom || (selection && previous.yearFrom===undefined));
 if(process.env.AUTO_API_CHE168_REQUIRE_REPLICA==='1'&&!resume)throw Error('auto_api_saved_replica_required');
 if(resume && (saved.version!==1||saved.market!=='china'||!saved.generationId||previous.provider!=='auto_api_che168'
   ||!Number.isSafeInteger(previous.cursor)||previous.cursor<config.initialCursor||!previous.replica
@@ -49,9 +53,10 @@ let db,source={sourceId,provider:'auto_api_che168',snapshotBinding:binding,snaps
   syncMode:'snapshot',mode:'snapshot',pages:resume?0:1,observations:0,rejectedIdentity:0,stopReason:'collecting'};
 const report={version:1,provider:'auto_api_che168',market:'china',productionWrites:false,startedAt:new Date().toISOString(),completed:false,sources:[source,...(prior?.sources||[])],confirmedWithdrawals:[]};
 const initialCursor=resume?previous.cursor:config.initialCursor;
-const journalBinding=createHash('sha256').update(JSON.stringify({binding,initialCursor,base:resume?previous.replica:null,replayVersion:2})).digest('hex');
+const journalBinding=createHash('sha256').update(JSON.stringify({binding,initialCursor,base:resume?previous.replica:null,...(cutId?{cutId}:{}),replayVersion:2})).digest('hex');
 const artifactRunId=BigInt(`0x${journalBinding.slice(0,14)}`).toString();
 const owner=rawProducerOwner(),snapshotRoot=`catalog/provider-snapshots/che168/${binding}`;
+if(cutId)source.ownedFeedRun=cutId;
 source.workingJournal={key:`catalog/intake-working/che168-v1/${artifactRunId}`,binding:journalBinding};
 if(resume)source.baseReplica={key:previous.replica.key,sha256:previous.replica.sha256};
 const rawPin=await openRawFeedPin({storage,owner,operationId:`che168-intake-${owner.runId}-${owner.attempt}`,
@@ -117,8 +122,10 @@ try {
   const save=async()=>{
     if(lastCursor!==journal.cursor){await journal.commit({cursor:lastCursor,changes:totalChanges,events:pending});pending=[];pendingBytes=0;lastSave=Date.now();}
   };
-  const request=async (...args)=>{await assertCollectionEnabled('che168_feed');return rawRequest(...args);};
-  const rawRequest=autoApiChe168Client({apiKey:process.env.AUTO_API_CHE168_KEY,deadline:Date.now()+Math.min(240*60000,Number(process.env.CATALOG_INTAKE_TIME_MS||210*60000)),requestDelayMs:200,retryRateLimit:process.env.AUTO_API_CHE168_STOP_ON_QUOTA!=='1'});
+  const ownedStorage=getJsonStorage();
+  const rawRequest=autoApiChe168Client({apiKey:process.env.AUTO_API_CHE168_KEY,deadline:cutId?Infinity:Date.now()+Math.min(240*60000,Number(process.env.CATALOG_INTAKE_TIME_MS||210*60000)),requestDelayMs:200,retryRateLimit:process.env.AUTO_API_CHE168_STOP_ON_QUOTA!=='1'});
+  const upstream=async(...args)=>{await assertCollectionEnabled('che168_feed');return rawRequest(...args);};
+  const request=selection?ownedChinaRequests(ownedStorage,selection.cut,upstream):upstream;
   let completed;
   try{
     completed=await collectAutoApiChe168({request,yearFrom,resume:{cursor:journal.cursor,snapshotStartedAt:config.modifiedAt},useChangeData:true,

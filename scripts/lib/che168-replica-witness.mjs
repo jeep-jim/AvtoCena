@@ -130,7 +130,9 @@ function validateReport(report, config, producer, limits) {
   const base = source.baseReplica ? {key: source.baseReplica.key, sha256: source.baseReplica.sha256, binding, cursor: source.initialCursor} : null;
   check(!base || ROOT.test(base.key || '') && SHA.test(base.sha256 || '') && base.key !== descriptor.key, 'base_replica');
   check(base || source.initialCursor === config.initialCursor, 'initial_cursor');
-  const journalBinding = rawDigest({binding, initialCursor: source.initialCursor, base, replayVersion: 2});
+  const cutId=source.ownedFeedRun;
+  check(cutId===undefined || typeof cutId==='string' && /^[1-9]\d*$/.test(cutId),'owned_feed_run');
+  const journalBinding = rawDigest({binding, initialCursor: source.initialCursor, base, ...(cutId?{cutId}:{}), replayVersion: 2});
   const journalKey = 'catalog/intake-working/che168-v1/' + BigInt('0x' + journalBinding.slice(0, 14)).toString();
   check(source.workingJournal?.key === journalKey && source.workingJournal.binding === journalBinding, 'journal_binding');
   check(Array.isArray(report.rawStoragePins) && report.rawStoragePins.length <= 64, 'producer_pin');
