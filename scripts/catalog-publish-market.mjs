@@ -33,7 +33,7 @@ import { isCommercialInventoryOffer as isCommercial } from "./lib/catalog-vehicl
 
 const { getJsonStorage, mutateDataJson } = await import("../apps/web/lib/data.ts");
 const { calculateOfferWithRussiaCustoms } = await import("../apps/web/lib/catalog/customs-pricing.ts");
-const { minimumPublicationImages, hasAllowedCatalogSourceProvenance, isCrediblePublicOffer, isCatalogYearAllowed } = await import("../apps/web/lib/catalog/offer-quality.ts");
+const { minimumPublicationImages, hasAllowedCatalogSourceProvenance, isCrediblePublicOffer, isCatalogYearAllowed, isPreservedCatalogYearAllowed } = await import("../apps/web/lib/catalog/offer-quality.ts");
 const { compareCatalogPublicPriority, japanAuctionSoldIdentityVerified } = await import("../apps/web/lib/catalog/public-priority.ts");
 const { classifyCatalogV2Offer, selectCatalogV2MarketOffers } = await import("../apps/web/lib/catalog/catalog-v2-policy.ts");
 const { normalizeVehicleOfferSpecs } = await import("../apps/web/lib/catalog/spec-normalization.ts");
@@ -584,7 +584,7 @@ async function loadPreservedMarkets() {
     const preservedRows = rows.filter((offer) => hasAllowedCatalogSourceProvenance(offer));
     const invalid = preservedRows.filter((offer) => !offer?.id || !offer?.make || !offer?.model
       || String(offer?.market || "") !== otherMarket
-      || !(otherMarket==='uae'&&offer?.sourceId==='dubicars_uae_exact')&&!isCatalogYearAllowed(offer?.year, otherMarket)
+      || !(otherMarket==='uae'&&offer?.sourceId==='dubicars_uae_exact')&&!isPreservedCatalogYearAllowed(offer?.year, otherMarket)
       || !Array.isArray(offer?.images) || (offer.images.length === 0&&!isAllDubicarsOffer(offer)));
     if (invalid.length) throw new Error(`catalog_preserved_public_gate_failed:${otherMarket}:${invalid.length}`);
     purgedForbiddenPublicByMarket[otherMarket] = forbidden.length;

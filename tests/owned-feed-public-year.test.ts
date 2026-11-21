@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import {permitsFixedMarketModelYear,catalogInventoryAgeDecision} from '../apps/web/lib/catalog/inventory-admission';
-import {isCatalogYearAllowed} from '../apps/web/lib/catalog/offer-quality';
+import {isCatalogYearAllowed,isPreservedCatalogYearAllowed} from '../apps/web/lib/catalog/offer-quality';
 
 test('Europe and Korea rebuilds enforce the agreed 2022 model year on archived and new observations',()=>{
  for(const market of ['europe','korea']){
@@ -13,6 +13,8 @@ test('Europe and Korea rebuilds enforce the agreed 2022 model year on archived a
   assert.equal(permitsFixedMarketModelYear(market,2022),true);
   assert.equal(isCatalogYearAllowed(2022,market),true);
  }
+ assert.equal(isPreservedCatalogYearAllowed(2021,'korea'),true);
+ assert.equal(isPreservedCatalogYearAllowed('unknown','korea'),false);
  assert.equal(permitsFixedMarketModelYear('japan',2020),true);
  assert.equal(permitsFixedMarketModelYear('china',2015),true);
 });

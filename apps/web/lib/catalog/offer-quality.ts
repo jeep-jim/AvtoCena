@@ -46,6 +46,12 @@ export function isCatalogYearAllowed(yearValue: unknown, marketValue?: unknown) 
   return Number.isFinite(year) && year >= catalogMinYearForMarket(marketValue) && year <= currentYear + 1;
 }
 
+/** An independently published neighbour keeps its previously admitted rows
+ * until its own rebuild applies the 2022 model-year policy. */
+export function isPreservedCatalogYearAllowed(year:unknown,market:unknown) {
+  return isCatalogYearAllowed(year,hasFixedMarketModelYear(market)?undefined:market);
+}
+
 function clean(value: unknown) { return String(value || "").replace(/\s+/g, " ").trim(); }
 function credibleIdentityValue(value: unknown) {
   const identity = clean(value);
