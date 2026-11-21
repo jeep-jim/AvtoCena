@@ -316,7 +316,7 @@ async function ResolvedCatalogCount({summary}:{summary:{total:number;countIncomp
  return <CatalogCountLabel {...await summary}/>;
 }
 
-async function ResolvedMixedChinaRail({read,render}:{read:Promise<MarketGroup>;render:(market:MarketGroup)=>React.ReactNode}){
+async function ResolvedMixedChinaRail({read,render}:{read:Promise<MarketGroup>;render:(market:MarketGroup)=>React.ReactElement}){
  const market=await read;
  return market.unavailable||market.total>0?render(market):null;
 }
