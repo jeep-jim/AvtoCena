@@ -1,0 +1,103 @@
+name: Activate exactly one prepared China cut without deployment
+on:
+  push:
+    branches: [main]
+    paths: [.github/market-runs/china-rev5-own-cut-once.sha256]
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: avtocena-own-china-dark-control-v1
+  cancel-in-progress: false
+jobs:
+  activate:
+    name: Activate exactly one prepared China cut without deployment
+    if: github.repository == 'jeep-jim/AvtoCena' && github.repository_id == '1289722938' && github.ref == 'refs/heads/main' && github.run_attempt == '1' && github.event.head_commit.message == 'Activate exactly one prepared China cut without deployment'
+    environment: regcloud-staging
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+          fetch-depth: 3
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: f4dc98aaab916b29419d173994d66562aa5901f1
+          path: writer
+          persist-credentials: false
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: 22867cbcfaee27b2e8917b6bf880e44827f67b60
+          path: reader
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with: {node-version: 24.22.1}
+      - name: Verify exact immutable closure and build only the private preview
+        shell: bash
+        run: |
+          set -euo pipefail
+          umask 077
+          readonly op="$GITHUB_WORKSPACE/.github/operations/china-rev5-own-cut-once"
+          readonly marker=.github/market-runs/china-rev5-own-cut-once.sha256
+          test "$(git rev-parse HEAD^^)" = eee44623ea85b9d95bbe6d02e0b9b7abe7df769d
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          test "$(git show -s --format=%P HEAD | wc -w)" = 1
+          test "$(git show -s --format=%P HEAD^ | wc -w)" = 1
+          cmp -s <(git diff-tree --no-commit-id -r --name-status --no-renames -z HEAD^ HEAD) <(printf 'A\0%s\0' "$marker")
+          python3 - <<'PY'
+          import json,os,subprocess
+          with open(os.environ['GITHUB_EVENT_PATH']) as f: event=json.load(f)
+          assert event.get('before')==subprocess.check_output(['git','rev-parse','HEAD^'],text=True).strip()
+          assert event.get('forced') is False and event.get('deleted') is False
+          matches=event.get('commits') or []
+          assert len(matches)==1 and matches[0]['id']==event.get('head_commit',{}).get('id')==os.environ['GITHUB_SHA']
+          PY
+          readonly expected_files=(
+            APPROVED_CODE.sha256 approved.json authority.json build-private-preview.mjs cut-entry.mts host-lease.mjs
+            make-preview-grant.py native-removal-preview.mts native-rev5-successor-adapter.mts pinned-native-rev5-writer-overlay.patch
+            private-preview-entry.ts public-acceptance.mjs removal-witness.mjs rev5-successor-core.mjs runtime-lease.py verified-prepared-pins.json)
+          cmp -s <(git diff-tree --no-commit-id -r --name-status --no-renames -z HEAD^^ HEAD^) <(
+            for f in "${expected_files[@]}"; do printf 'A\0%s\0' ".github/operations/china-rev5-own-cut-once/$f"; done
+            printf 'A\0%s\0' .github/workflows/china-rev5-own-cut-once.yml
+          )
+          printf '%s\n%s\n%s\n' "$(sha256sum "$op/approved.json" |cut -d' ' -f1)" "$(git rev-parse HEAD^)" \
+            "$(sha256sum "$op/APPROVED_CODE.sha256" |cut -d' ' -f1)" | cmp -s - "$marker"
+          (cd "$op";sha256sum --strict --check --status APPROVED_CODE.sha256)
+          test "$(git -C writer rev-parse HEAD)" = f4dc98aaab916b29419d173994d66562aa5901f1
+          test "$(git -C reader rev-parse HEAD)" = 22867cbcfaee27b2e8917b6bf880e44827f67b60
+          git -C writer apply --check "$op/pinned-native-rev5-writer-overlay.patch"
+          git -C writer apply "$op/pinned-native-rev5-writer-overlay.patch"
+          for x in cut-entry.mts host-lease.mjs public-acceptance.mjs native-rev5-successor-adapter.mts rev5-successor-core.mjs; do cp "$op/$x" "writer/$x"; done
+          (cd reader; npm ci --ignore-scripts --no-audit --no-fund)
+          (cd writer; npm ci --ignore-scripts --no-audit --no-fund)
+          node "$op/build-private-preview.mjs" "$GITHUB_WORKSPACE/reader" "$GITHUB_WORKSPACE/reader/preview.cjs" positive
+          node "$op/build-private-preview.mjs" "$GITHUB_WORKSPACE/reader" "$GITHUB_WORKSPACE/reader/removal.cjs" removal
+          test "$(sha256sum reader/preview.cjs |cut -d' ' -f1)" = cc8bba2d43d56d5bd08ad4bbc7799da43d47feb473009c8c5682715af08f139b
+          test "$(sha256sum reader/removal.cjs |cut -d' ' -f1)" = d32be8c9c73ef9fe0d796d18c316d78a8a0425a5caf29fd73f72aa266305abc2
+      - name: Exact independent China control compare/swap and public acceptance
+        shell: bash
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+          GITHUB_TOKEN: ${{ github.token }}
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011
+          YC_OBJECT_STORAGE_REGION: us-east-1
+          JSON_STORAGE_DRIVER: object
+          NODE_OPTIONS: ''
+        run: |
+          set -euo pipefail
+          umask 077
+          scratch="$(mktemp -d "$RUNNER_TEMP/china-cut-private.XXXXXXXX")"
+          key="$scratch/host-key"
+          trap 'rm -rf -- "$scratch"' EXIT
+          printf '%s\n' "$SSH_PRIVATE_KEY" > "$key"
+          unset SSH_PRIVATE_KEY
+          readonly op="$GITHUB_WORKSPACE/.github/operations/china-rev5-own-cut-once"
+          (cd "$op"; sha256sum --strict --check --status APPROVED_CODE.sha256)
+          (cd writer; timeout -k 5s 480s node --import tsx cut-entry.mts "$op/approved.json" "$op/authority.json" \
+            "$GITHUB_WORKSPACE/reader/preview.cjs" "$GITHUB_WORKSPACE/reader/removal.cjs" "$key" \
+            "$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts" "$op/runtime-lease.py" "$scratch")

@@ -1,0 +1,85 @@
+diff --git a/apps/web/lib/catalog/china-regcloud-object-reader.ts b/apps/web/lib/catalog/china-regcloud-object-reader.ts
+--- a/apps/web/lib/catalog/china-regcloud-object-reader.ts
++++ b/apps/web/lib/catalog/china-regcloud-object-reader.ts
+@@ -134,6 +134,28 @@
+  minted.add(handle);await handle.assertPointer();
+  return handle;
+ }
++/** Operator-only accepted read of exactly the proven rev5 target. Never used
++ * to admit a candidate. Keep native readiness and legal checks untouched. */
++export async function openPreviouslyAcceptedRev5ForSuccessor(storage:ObjectJsonStorage,pin:{
++ checksum:string;etag:string;allowExactPreviouslyPublishedBackup?:string;assertCurrent:()=>Promise<void>;
++}){
++ const oldSha='fd69b2d1e628759e7658f13139268f2513fe0afbf7b83b9ebaee1f26233c57a5';
++ const rev5='9e3f73d6282465019f43dcd0370bf9c71688445a0e361dccf641bd45acc5be62';
++ const backup=pin.allowExactPreviouslyPublishedBackup!==undefined;
++ if(typeof pin.assertCurrent!=='function'||!SHA.test(pin.checksum)||!pin.etag||
++   (!backup&&pin.checksum!==rev5)||(backup&&pin.allowExactPreviouslyPublishedBackup!==oldSha))return fail('accepted_rev5_scope');
++ const read=async()=>{
++  await pin.assertCurrent();
++  const live=await readChinaPublicState(storage);
++  const old=backup?live?.state.previous:live?.state.active;
++  if(!live||live.checksum!==pin.checksum||live.etag!==pin.etag||live.state.revision!==(backup?6:5)||
++     !old||chinaLegacyRollback(old)||chinaObjectDigest(old)!==oldSha)return fail('accepted_rev5_changed');
++  return old;
++ };
++ const old=await read(),files=await openChinaStageObject(storage,old,async()=>{await read();},true);
++ if(files.acceptedLegalUntil===undefined||Date.now()>=files.acceptedLegalUntil)return fail('accepted_rev5_legal');
++ return files;
++}
+ export async function openConfiguredChinaRegcloudFiles(){
+  if(!chinaRegcloudRuntimeConfigured())return fail('disabled');
+  const scopeKey=chinaObjectDigest(readConfiguredRegcloudScope()),credentialKey=credentials();
+diff --git a/apps/web/lib/data.ts b/apps/web/lib/data.ts
+--- a/apps/web/lib/data.ts
++++ b/apps/web/lib/data.ts
+@@ -206,7 +206,7 @@
+ export class ObjectJsonStorage implements JsonStorage {
+   driver: JsonStorageDriver = "object";
+   private key(relativePath: string) { const cfg = objectConfig(); return [cfg.prefix, normalizeStorageKey(relativePath)].filter(Boolean).join("/"); }
+-  private async signedRequest(method: string, url: URL, body?: string | Buffer, extraHeaders: Record<string, string> = {}, query = "", maximumResponseBytes = Infinity) {
++  private async signedRequest(method: string, url: URL, body?: string | Buffer, extraHeaders: Record<string, string> = {}, query = "", maximumResponseBytes = Infinity, controlDeadline?:number) {
+     const cfg = objectConfig();
+     // REG S3 returns quoted ETags but requires bare If-Match values on PUT.
+     // Keep the condition and sign its actual wire representation; never retry
+@@ -218,8 +218,8 @@
+     const payloadHash = sha256(body ?? "");
+     const readBudget=Number(process.env.AVTOCENA_INTERACTIVE_READ_BUDGET_MS||0);
+     const boundedRead=(method==='GET'||method==='HEAD')&&Number.isFinite(readBudget)&&readBudget>0;
+-    const deadline=boundedRead?Date.now()+readBudget:Infinity;
+-    const attempts = boundedRead?2:Math.max(3, Number(process.env.YC_OBJECT_STORAGE_MAX_ATTEMPTS || 6));
++    const deadline=controlDeadline??(boundedRead?Date.now()+readBudget:Infinity);
++    const attempts = controlDeadline!==undefined?1:boundedRead?2:Math.max(3, Number(process.env.YC_OBJECT_STORAGE_MAX_ATTEMPTS || 6));
+     const timeoutMs = objectStorageRequestTimeoutMs(Buffer.byteLength(body ?? ""));
+     let lastError: unknown;
+     for (let attempt = 0; attempt < attempts; attempt++) {
+@@ -264,12 +264,12 @@
+     const detail = lastError instanceof Error ? lastError.message : String(lastError || "unknown");
+     throw new Error(`object_storage_${method}_unreachable:${detail}`);
+   }
+-  private async request(method: string, relativePath: string, body?: string | Buffer, extraHeaders: Record<string, string> = {}, maximumResponseBytes = Infinity) {
++  private async request(method: string, relativePath: string, body?: string | Buffer, extraHeaders: Record<string, string> = {}, maximumResponseBytes = Infinity, controlDeadline?:number) {
+   const cfg = objectConfig();
+   const normalizedPath = normalizeStorageKey(relativePath);
+   const url = new URL(`${cfg.endpoint}/${cfg.bucket}/${encodeKey(this.key(normalizedPath))}`);
+   try {
+-    return await this.signedRequest(method, url, body, extraHeaders, "", maximumResponseBytes);
++    return await this.signedRequest(method, url, body, extraHeaders, "", maximumResponseBytes, controlDeadline);
+   } catch (error) {
+     const detail = error instanceof Error ? error.message : String(error);
+     throw new Error(`${detail}:path=${normalizedPath.slice(0, 240)}:bytes=${Buffer.byteLength(body ?? "")}`);
+@@ -373,10 +373,12 @@
+     return {data,etag,checksum:sha256(data)};
+   }
+   /** Deliberately no automatic unconditional retry: use the exact prior ETag. */
+-  async compareAndSwapScopedControl(relativePath:string,data:Buffer,etag:string|null){
++  async compareAndSwapScopedControl(relativePath:string,data:Buffer,etag:string|null,controlDeadline?:number){
+     if(!data.length||data.length>32*1024||etag==='')throw Error('object_storage_control_scope');
+     const headers:Record<string,string>={'content-type':'application/json',...(etag?{'if-match':etag}:{'if-none-match':'*'})};
+-    const res=await this.request('PUT',relativePath,data,headers,64*1024);
++    if(controlDeadline!==undefined&&(!etag||!Number.isSafeInteger(controlDeadline)||controlDeadline<=Date.now()||controlDeadline>Date.now()+25_000))
++      throw Error('object_storage_control_deadline');
++    const res=await this.request('PUT',relativePath,data,headers,64*1024,controlDeadline);
+     if(res.status===409||res.status===412)throw new StorageConflictError();
+     if(!res.ok)throw Error(`object_storage_control_write_${res.status}`);
+   }
