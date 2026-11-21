@@ -1,0 +1,95 @@
+name: Prepare fresh UAE full source privately
+on:
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/uae-private-replay-22867-v2.sha256']
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: uae-private-replay-22867-v2
+  cancel-in-progress: false
+env:
+  UAE_REPLAY_OPS: .github/operations/uae-private-replay-22867-v2
+jobs:
+  replay:
+    if: github.repository_id == '1289722938' && github.ref == 'refs/heads/main' && github.run_attempt == 1 && github.event.head_commit.message == 'Stage fresh UAE source without old body duplication'
+    runs-on: ubuntu-24.04
+    environment: regcloud-staging
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 2
+          persist-credentials: false
+      - name: Admit uniquely pinned operator marker and two completed source jobs
+        shell: bash
+        env:
+          BEFORE: ${{ github.event.before }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          marker=.github/market-runs/uae-private-replay-22867-v2.sha256
+          [[ "$BEFORE" =~ ^[a-f0-9]{40}$ ]]
+          test "$(git rev-list --parents -n1 HEAD)" = "$GITHUB_SHA $BEFORE"
+          test "$(git show -s --format=%B HEAD)" = 'Stage fresh UAE source without old body duplication'
+          test "$(git diff --no-renames --name-status "$BEFORE" "$GITHUB_SHA" --)" = "$(printf 'A\t%s' "$marker")"
+          printf '%s  %s\n' 4dba443f8d3e72016b12c09ec3707b892d20e32c323049fc3b3ab2c2813e766d "$marker" | sha256sum --strict -c -
+          sha256sum --strict -c "$marker"
+          gh api "repos/$GITHUB_REPOSITORY/actions/jobs/136712448103" | jq -e '(.id==136712448103 and .run_id==44860475749 and .conclusion=="success")' >/dev/null
+          gh api "repos/$GITHUB_REPOSITORY/actions/jobs/136717032543" | jq -e '(.id==136717032543 and .run_id==44861891514 and .conclusion=="success")' >/dev/null
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: 22867cbcfaee27b2e8917b6bf880e44827f67b60
+          path: .native-22867
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with: {node-version: '24.22.1'}
+      - name: Test private transport and install the exact installed-release native dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --test "$UAE_REPLAY_OPS/replay.test.mjs" "$UAE_REPLAY_OPS/private-plan.test.mjs"
+          test "$(git -C .native-22867 rev-parse HEAD)" = '22867cbcfaee27b2e8917b6bf880e44827f67b60'
+          test "$(git -C .native-22867 rev-parse HEAD:apps/web/lib/catalog/auto-api-dubicars.ts)" = 'a8653ed53f86a70e2a7a03eebf8987acb0b62e46'
+          test "$(git -C .native-22867 rev-parse HEAD:apps/web/lib/catalog/storage.ts)" = 'f402e951d56998efb75c7ac8cd1187ddc7726532'
+          test ! -e ".native-22867/$UAE_REPLAY_OPS"
+          mkdir -p ".native-22867/$UAE_REPLAY_OPS"
+          cp "$UAE_REPLAY_OPS"/* ".native-22867/$UAE_REPLAY_OPS/"
+          cd .native-22867
+          npm ci --ignore-scripts --no-audit --no-fund
+      - name: Retrieve only the two authenticated original saved ZIPs
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          umask 077
+          private="$(mktemp -d "$RUNNER_TEMP/uae-replay.XXXXXX")"
+          mkdir -m 700 "$private/zip" "$private/out"
+          for id in 14287441994 14586057004; do
+            curl -fSsL --proto '=https' --proto-redir '=https' --max-redirs 1 --max-time 90 --max-filesize 50000000 \
+              -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github+json" \
+              "https://api.github.com/repos/jeep-jim/AvtoCena/actions/artifacts/$id/zip" -o "$private/zip/$id.zip"
+          done
+          printf 'UAE_REPLAY_PRIVATE=%s\n' "$private" >> "$GITHUB_ENV"
+      - name: Restore and compare exact UAE native rows and privately seal exact source input only
+        working-directory: .native-22867
+        shell: bash
+        env:
+          PYTHONDONTWRITEBYTECODE: 1
+          JSON_STORAGE_DRIVER: object
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_REGION: us-east-1
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+          YC_OBJECT_STORAGE_REQUEST_TIMEOUT_MS: '8000'
+          YC_OBJECT_STORAGE_MAX_ATTEMPTS: '1'
+          NODE_OPTIONS: --max-old-space-size=6144
+        run: |
+          set -euo pipefail
+          python3 "$UAE_REPLAY_OPS/archive-input.py" "$UAE_REPLAY_PRIVATE/zip" \
+            | node --import tsx "$UAE_REPLAY_OPS/hosted-replay.mts" "$UAE_REPLAY_PRIVATE/out"
