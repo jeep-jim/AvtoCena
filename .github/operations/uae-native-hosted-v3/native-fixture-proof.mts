@@ -1,0 +1,17 @@
+import './helpers/server-only-hook.mjs';
+import {readFileSync} from 'node:fs';
+import {readPreparedUaeSearch,readPreparedUaeDetail,searchOffers} from '../apps/web/lib/catalog/storage';
+import assert from 'node:assert/strict';
+const p=JSON.parse(readFileSync(process.env.EXPECTED_FIXTURE!,'utf8'));
+const a=await readPreparedUaeSearch({market:'uae',page:1}),b=await readPreparedUaeSearch({market:'uae',page:2});
+assert.equal(a?.total,53);
+assert.equal(a?.items.length,24);
+assert.equal(b?.items.length,24);
+assert.ok([...a!.items,...b!.items].some(x=>x.id===p.seller.id));
+assert.equal((await readPreparedUaeDetail(p.seller.id,p.generationId))?.sellerPriceRub,p.seller.rub);
+assert.equal((await readPreparedUaeDetail(p.onRequest.id,p.generationId))?.sourcePrice,null);
+assert.equal((await readPreparedUaeSearch({market:'uae',make:'Kia',model:'Sportage',yearFrom:2023},{countOnly:true}))?.total,26);
+const georgia=await searchOffers({market:'georgia'});assert.equal(georgia.total,1);
+process.env.AVTOCENA_UAE_REGCLOUD_RUNTIME='0';
+assert.equal((await searchOffers({market:'uae'})).items[0]?.make,'Legacy');
+console.log('fixture_native_proof_passed');
