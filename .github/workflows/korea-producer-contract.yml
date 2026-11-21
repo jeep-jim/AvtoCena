@@ -1,0 +1,36 @@
+name: Korea date and propane producer contract
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'scripts/lib/paid-encar-offer.mjs'
+      - 'tests/propane-*'
+      - '.github/workflows/korea-producer-contract.yml'
+permissions: {contents: read}
+jobs:
+  contract:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: '${{ github.event.pull_request.head.sha || github.sha }}', persist-credentials: false}
+      - uses: actions/setup-node@v4
+        with: {node-version: '24.22.1', cache: npm}
+      - uses: actions/checkout@v4
+        with: {ref: e2683ae8711e0ac421ef9557c2b154db6166edf9, path: pinned-app, persist-credentials: false}
+      - uses: actions/checkout@v4
+        with: {ref: 9b0f76fa330bb86ecc85ca78e87b01363837ca6d, path: pinned-baseline, persist-credentials: false}
+      - name: Verify explicit checkout identities
+        run: |
+          test "$(git -C pinned-app rev-parse HEAD)" = e2683ae8711e0ac421ef9557c2b154db6166edf9
+          test "$(git -C pinned-baseline rev-parse HEAD)" = 9b0f76fa330bb86ecc85ca78e87b01363837ca6d
+          test "$(git rev-parse HEAD)" = '${{ github.event.pull_request.head.sha || github.sha }}'
+      - name: Install exact lockfiles
+        run: |
+          npm ci
+          npm ci --prefix pinned-app
+      - name: Offline pure producer and pinned app contract
+        env:
+          APP_RUNTIME_ROOT: ${{ github.workspace }}/pinned-app
+          BASELINE_PRODUCER_ROOT: ${{ github.workspace }}/pinned-baseline
+        run: node --import tsx --test tests/propane-producer.test.mjs
