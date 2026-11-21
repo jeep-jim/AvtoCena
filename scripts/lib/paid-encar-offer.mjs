@@ -113,8 +113,16 @@ export function normalizePaidEncarOffer(data, {id, observedAt, adapter}) {
     ? {status: 'conflict', reason: combustionConflict ? 'combustion_total_ice_mismatch' : sanity.reason}
     : hp;
   if (powerResult.status !== 'exact') {
-    offer.powerHp = undefined; offer.powerKw = undefined; offer.icePowerKw = undefined;
-    offer.utilizationPowerKw = undefined; offer.powerDataConfidence = undefined; offer.powerDataSource = undefined;
+    offer.powerHp = undefined; offer.powerKw = undefined;
+    offer.powerDataConfidence = undefined; offer.powerDataSource = undefined;
+    // The supplier measures ICE separately from total power. Retain that
+    // measurement only when both its unit and powertrain identity are clear.
+    const independentIce = powerResult.status === 'missing' && iceHp.status === 'exact'
+      && fuelResult.status === 'exact' && fuelKind !== 'electric' && fuelKind !== 'unknown';
+    if (!independentIce) {
+      offer.icePowerKw = undefined;
+      offer.utilizationPowerKw = undefined;
+    }
   }
   // A freshly attested source value of 100 hp can pass the existing sanity
   // gate; any genuine source/physical rejection is preserved above.

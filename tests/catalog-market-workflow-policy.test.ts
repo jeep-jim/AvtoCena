@@ -18,7 +18,7 @@ async function plan(market,enabled,event='schedule',due=true,marketEnabled=true,
  controls.markets[market].enabled=marketEnabled;
  let output='';const logs=[];
  const fakeFs={readFileSync:path=>JSON.stringify(path.endsWith('refresh-policy-v1.json')?{pausedMarkets:{}}:marker),appendFileSync:(_path,value)=>{output+=value;}};
- await planner(fakeFs,()=>due,async()=>controls,collectionMarketEnabled,collectionWorkflowEnabled,validatePaidEncarArtifactBinding,{env:{TARGET_MARKET:market,EVENT_NAME:event,GITHUB_OUTPUT:'offline',...extraEnv}},{log:value=>logs.push(value)});
+ await planner(fakeFs,(_now, marketName)=>marketName==='china'||due,async()=>controls,collectionMarketEnabled,collectionWorkflowEnabled,validatePaidEncarArtifactBinding,{env:{TARGET_MARKET:market,EVENT_NAME:event,GITHUB_OUTPUT:'offline',...extraEnv}},{log:value=>logs.push(value)});
  return {values:Object.fromEntries(output.trim().split('\n').map(line=>{const i=line.indexOf('=');return[line.slice(0,i),line.slice(i+1)];})),logs,controls};
 }
 test('AJES-only Korea stays available without starting empty legacy collection/publication',async()=>{
@@ -39,7 +39,7 @@ test('paid China and UAE workers retain their existing routes',async()=>{
  assert.equal((await plan('uae',['dubicars_feed'])).values.run,'true');
  assert.equal((await plan('china',['ajes_china_feed'])).values.run,'false');
 });
-test('three-day background cadence and explicit dispatch semantics are preserved',async()=>{
+test('market cadence and explicit dispatch semantics are preserved',async()=>{
  assert.equal((await plan('korea',['encar_direct'],'schedule',false)).values.run,'false');
  assert.equal((await plan('korea',['encar_direct'],'workflow_dispatch',false)).values.run,'true');
 });

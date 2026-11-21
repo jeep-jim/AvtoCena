@@ -85,7 +85,7 @@ jobs:
             artifactId:process.env.PREPARED_ENCAR_ARTIFACT_ID,artifactDigest:process.env.PREPARED_ENCAR_ARTIFACT_DIGEST,
             repositoryId:process.env.GITHUB_REPOSITORY_ID,headSha:process.env.GITHUB_SHA},{preparedRunId:preparedEncar});
           else if (process.env.PREPARED_ENCAR_ATTEMPT || process.env.PREPARED_ENCAR_ARTIFACT_ID || process.env.PREPARED_ENCAR_ARTIFACT_DIGEST) throw Error('unexpected_prepared_encar_binding');
-          const run = !paused && (preparedEncar || ['push','workflow_dispatch'].includes(process.env.EVENT_NAME) || (process.env.EVENT_NAME === 'schedule' && (market === 'china' || catalogRefreshDue())));
+          const run = !paused && (preparedEncar || ['push','workflow_dispatch'].includes(process.env.EVENT_NAME) || (process.env.EVENT_NAME === 'schedule' && catalogRefreshDue(new Date(), market)));
           if (paused) console.log(`Market refresh paused: ${market}: ${policy.pausedMarkets?.[market] || 'no_enabled_background_source'}`);
           const marker = process.env.EVENT_NAME === 'push' ? JSON.parse(fs.readFileSync(`.github/market-runs/${market}-refresh.json`,'utf8')) : {};
           if (preparedEncar && marker.refreshMarkets?.length) throw Error('prepared_encar_collection_overlay_forbidden');

@@ -52,7 +52,7 @@ export function paidEncarRefreshDecision({eventName, controls, policy, marker = 
   if (policy?.pausedMarkets?.korea) return {run: false, reason: 'market_paused'};
   if (controls?.markets?.korea?.enabled !== true) return {run: false, reason: 'market_disabled'};
   if (controls?.sources?.encar_feed?.enabled !== true) return {run: false, reason: 'paid_source_disabled'};
-  if (eventName === 'schedule' && !catalogRefreshDue(now)) return {run: false, reason: 'cadence_not_due'};
+  if (eventName === 'schedule' && !catalogRefreshDue(now, 'korea')) return {run: false, reason: 'cadence_not_due'};
   return {run: true, reason: 'paid_source_due'};
 }
 

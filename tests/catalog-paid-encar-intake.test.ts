@@ -121,8 +121,8 @@ test('actual saved restorer emits an independent witness only after its actual n
   assert.ok(!f.events.some(event => event.kind === 'api'));
 });
 
-test('paid scheduler preserves the existing November 16/19 three-day calendar', () => {
-  for (const [day, due] of [[16, true], [17, false], [18, false], [19, true]]) {
+test('paid Korean intake follows the two-day collection calendar', () => {
+  for (const [day, due] of [[16, true], [17, false], [18, true], [19, false]]) {
     const decision = paidEncarRefreshDecision({eventName: 'schedule', controls: controls(),
       policy: {pausedMarkets: {}}, now: new Date(`2026-11-${day}T17:00:00Z`)});
     assert.deepEqual(decision, {run: due, reason: due ? 'paid_source_due' : 'cadence_not_due'});

@@ -215,6 +215,25 @@ test('hybrid total hp and electric peak kW never become ICE or certified utiliza
   });
 });
 
+test('paid v3 retains separately reported hybrid ICE power when total hp is missing', async () => {
+  await withOfflinePublication(async () => {
+    const patch = {engine_type: 'Гибрид', model: 'Niro', configuration: 'Hybrid', power: null,
+      displacement_cc: 1598, power_ice_hp: 105, power_electro_kw: 32};
+    const offer = mapped(patch);
+    const prepared = await prepareSellerInventory(normalizeVehicleOfferSpecs(offer));
+    assert.ok(prepared);
+    for (const row of [offer, prepared, compactPublicStorageOffer(prepared)]) {
+      assert.ok(Math.abs(row.icePowerKw - 105 / 1.35962) < 0.01, JSON.stringify({stage:row===offer?"mapped":row===prepared?"prepared":"compact",ice:row.icePowerKw,source:row.operational?.semanticEvidence?.powerHp, fuel:row.operational?.semanticEvidence?.fuel}));
+      assert.equal(row.power30MinKw, undefined);
+      assert.equal(row.utilizationPowerKw, undefined);
+    }
+    assert.equal(offer.powerHp, undefined);
+    assert.equal(offer.operational.semanticEvidence.powerHp.status, 'missing');
+    assert.equal(mapped({...patch, engine_type: 'Электро'}).icePowerKw, undefined);
+    assert.equal(mapped({...patch, engine_type: 'Бензин'}).icePowerKw, undefined);
+  });
+});
+
 test('legacy adapter contract remains separate from the paid v3 mapper', () => {
   const legacy = adapter.normalizeOffer({Id: 'legacy-fixture', Manufacturer: 'Kia', Model: 'Cerato', FormYear: 2024,
     Price: 1200, FuelType: 'Gasoline', Displacement: '1998', Power: '150', DriveType: 'FWD', UpdatedDate: observedAt});
