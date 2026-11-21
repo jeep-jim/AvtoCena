@@ -79,6 +79,7 @@ await collectSourceStates(states,state=>({market,deadline,maxRows:maxRowsPerSour
 for(const state of states) if(!state.done) {state.done=true;state.stopReason='time_budget';}
 report.completedAt=new Date().toISOString();
 report.partialSources=states.filter(s=>s.stopReason!=="source_finished").map(s=>({sourceId:s.sourceId,reason:s.stopReason}));
+report.completed=states.length>0 && report.partialSources.length===0;
 report.qualityStatus=report.partialSources.length?"partial":"configured_routes_finished";
 await checkpoint();
 console.log(JSON.stringify({...report,...intakeReportEvidence(states)}));

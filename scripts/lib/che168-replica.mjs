@@ -27,7 +27,7 @@ export async function restoreChe168Replica({storage,filename,descriptor,binding,
   if(!new RegExp(`^${prefix}[a-f0-9-]{36}$`).test(descriptor?.key)||descriptor.binding!==binding||descriptor.cursor!==cursor)throw Error('auto_api_invalid_replica');
   const manifest=await storage.readJson(`${descriptor.key}/manifest.json`,null);
   if(!manifest||sha(JSON.stringify(manifest))!==descriptor.sha256||manifest.version!==1||manifest.binding!==binding||manifest.cursor!==cursor
-    ||!Array.isArray(manifest.parts)||!manifest.parts.length||manifest.parts.length>1024)throw Error('auto_api_invalid_replica');
+    ||!Array.isArray(manifest.parts)||!manifest.parts.length||!Number.isSafeInteger(manifest.bytes)||manifest.bytes<=0||manifest.parts.length!==Math.ceil(manifest.bytes/CHUNK))throw Error('auto_api_invalid_replica');
   const file=await fs.open(filename,'wx');let bytes=0;
   try {
     for(let index=0;index<manifest.parts.length;index++) {

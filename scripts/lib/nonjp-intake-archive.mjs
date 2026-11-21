@@ -5,15 +5,14 @@ import {createHash} from 'node:crypto';
 import {gzipSync, gunzipSync} from 'node:zlib';
 import {openRawFeedPin, rawProducerOwner, rawDigest, rawReferences, RAW_PIN_PREFIX,
   assertRawHandoff, assertRawPin, assertDurableIntakeArchive} from './catalog-raw-provenance.mjs';
-import {catalogStorageBudget} from './catalog-storage-budget.mjs';
 
 export const NONJP_INTAKE_MARKETS = Object.freeze(['china', 'korea', 'uae', 'europe', 'georgia']);
 export const INTAKE_ARCHIVE_RECEIPT = 'own-storage-receipt.json';
-const PART_BYTES = 2 * 1024 * 1024, MAX_FILE_BYTES = 32 * 1024 * 1024;
-const MAX_FILES = 20000, MAX_TOTAL_BYTES = 128 * 1024 ** 3, HEX = /^[a-f0-9]{64}$/;
-const MAX_MANIFEST_BYTES = 2 * 1024 * 1024;
+const PART_BYTES = 2 * 1024 * 1024;
+const HEX = /^[a-f0-9]{64}$/;
+const MAX_HEADER_BYTES = 2 * 1024 * 1024;
 const digest = bytes => createHash('sha256').update(bytes).digest('hex');
-const fileName = name => name === 'report.json' || /^[a-z0-9_-]+-[0-9]{6}\.jsonl$/i.test(name);
+const fileName = name => name === 'report.json' || /^[a-z0-9_-]+-[0-9]{6,}\.jsonl$/i.test(name);
 
 export function intakeArchiveRoot(market, owner) {
   assert.ok(NONJP_INTAKE_MARKETS.includes(market), 'intake_archive_market');
@@ -22,18 +21,18 @@ export function intakeArchiveRoot(market, owner) {
 }
 
 export function validateIntakeArchive(manifest, expectedRoot, expectedDigest) {
-  assert.ok(Buffer.byteLength(JSON.stringify(manifest)) <= MAX_MANIFEST_BYTES, 'intake_archive_manifest_bytes');
+  assert.ok(Buffer.byteLength(JSON.stringify({...manifest,files:[]})) <= MAX_HEADER_BYTES, 'intake_archive_manifest_bytes');
   assert.ok(manifest?.version === 1 && manifest.kind === 'nonjp-intake'
     && intakeArchiveRoot(manifest.market, manifest.owner) === expectedRoot
     && HEX.test(expectedDigest || '') && rawDigest(manifest) === expectedDigest && HEX.test(manifest.reportDigest || ''), 'intake_archive_identity');
   assert.ok(typeof manifest.collection?.complete === 'boolean' && (manifest.collection.qualityStatus === null
     || typeof manifest.collection.qualityStatus === 'string' && manifest.collection.qualityStatus.length <= 100), 'intake_archive_collection');
-  assert.ok(Array.isArray(manifest.files) && manifest.files.length > 0 && manifest.files.length <= MAX_FILES,
+  assert.ok(Array.isArray(manifest.files) && manifest.files.length > 0,
     'intake_archive_file_count');
   const names = new Set(); let total = 0;
   for (const file of manifest.files) {
     assert.ok(fileName(file?.name) && !names.has(file.name) && HEX.test(file.sha256 || '')
-      && Number.isSafeInteger(file.bytes) && file.bytes >= 0 && file.bytes <= MAX_FILE_BYTES
+      && Number.isSafeInteger(file.bytes) && file.bytes >= 0
       && Array.isArray(file.parts) && file.parts.length === Math.ceil(file.bytes / PART_BYTES), 'intake_archive_file');
     names.add(file.name); total += file.bytes;
     for (const [index, part] of file.parts.entries()) {
@@ -43,7 +42,7 @@ export function validateIntakeArchive(manifest, expectedRoot, expectedDigest) {
     }
   }
   assert.ok(names.has('report.json') && manifest.files.find(file => file.name === 'report.json').bytes > 0
-    && manifest.totalBytes === total && total <= MAX_TOTAL_BYTES,
+    && manifest.totalBytes === total && Number.isSafeInteger(total),
     'intake_archive_bytes');
   return manifest;
 }
@@ -54,29 +53,39 @@ async function immutableJson(storage, key, value) {
   assert.equal(rawDigest(await storage.readJson(key, null)), rawDigest(value), 'intake_archive_write_readback');
 }
 
-async function assertArchiveReserve(storage, files) {
-  assert.equal(typeof storage.listBucketObjects, 'function', 'intake_archive_bucket_inventory_missing');
-  const objects = await storage.listBucketObjects('');
-  assert.ok(Array.isArray(objects) && objects.length <= 1000000
-    && objects.every(row => Number.isSafeInteger(row.size) && row.size >= 0), 'intake_archive_bucket_inventory_invalid');
-  const budget = catalogStorageBudget(objects.reduce((sum, row) => sum + row.size, 0), files.reduce((sum, row) => sum + row.bytes, 0));
-  assert.ok(budget.ok, 'intake_archive_storage_reserve_insufficient');
+// Keep memory bounded by the transport part, independently of total file size.
+async function* fileParts(filename) {
+  const file = await fs.open(filename, 'r');
+  try {
+    while (true) {
+      const buffer = Buffer.allocUnsafe(PART_BYTES);
+      let used = 0;
+      while (used < PART_BYTES) {
+        const {bytesRead} = await file.read(buffer,used,PART_BYTES-used,null);
+        if (!bytesRead) break;
+        used += bytesRead;
+      }
+      if (used) yield buffer.subarray(0,used);
+      if (used < PART_BYTES) break;
+    }
+  } finally { await file.close(); }
 }
 
 async function localInventory(directory) {
   const entries = await fs.readdir(directory, {withFileTypes: true});
-  assert.ok(entries.length > 0 && entries.length <= MAX_FILES + 1, 'intake_archive_file_count');
+  assert.ok(entries.length > 0, 'intake_archive_file_count');
   const files = [];
   for (const entry of entries.sort((a,b) => a.name.localeCompare(b.name))) {
     if (entry.name === INTAKE_ARCHIVE_RECEIPT) { assert.ok(entry.isFile(), 'intake_archive_receipt_type'); continue; }
     assert.ok(entry.isFile() && fileName(entry.name), 'intake_archive_local_path');
     const target = path.join(directory, entry.name), stat = await fs.lstat(target);
-    assert.ok(stat.isFile() && stat.size <= MAX_FILE_BYTES, 'intake_archive_local_size');
-    const bytes = await fs.readFile(target);
-    assert.equal(bytes.length, stat.size, 'intake_archive_source_changed');
-    files.push({name: entry.name, bytes: bytes.length, sha256: digest(bytes)});
+    assert.ok(stat.isFile() && Number.isSafeInteger(stat.size), 'intake_archive_local_size');
+    const hash=createHash('sha256'); let size=0;
+    for await (const part of fileParts(target)) { hash.update(part); size+=part.length; }
+    assert.equal(size,stat.size,'intake_archive_source_changed');
+    files.push({name:entry.name,bytes:size,sha256:hash.digest('hex')});
   }
-  assert.ok(files.some(row => row.name === 'report.json') && files.reduce((sum,row) => sum + row.bytes,0) <= MAX_TOTAL_BYTES,
+  assert.ok(files.some(row => row.name === 'report.json'),
     'intake_archive_local_inventory');
   return files;
 }
@@ -233,23 +242,23 @@ export async function archiveIntakeDirectory({storage, directory, market, owner 
       return receipt;
     }
   }
-  await assertArchiveReserve(storage, files);
   const pin = await openRawFeedPin({storage, owner, operationId,
     references:[{kind:'nonjp-intake',root}]});
   await pin.add([]);
   const writingStorage = pin.storage;
   const storedFiles=[];
   for (const file of files) {
-    const bytes = await fs.readFile(path.join(directory,file.name));
-    assert.ok(bytes.length === file.bytes && digest(bytes) === file.sha256,'intake_archive_source_changed');
-    const parts=[];
-    for (let offset=0;offset<bytes.length;offset+=PART_BYTES) {
-      const part=bytes.subarray(offset,offset+PART_BYTES), sha256=digest(part);
+    const hash=createHash('sha256'),parts=[];
+    let size=0;
+    for await (const part of fileParts(path.join(directory,file.name))) {
+      hash.update(part);size+=part.length;
+      const sha256=digest(part);
       const key=`${root}/files/${file.name}/${parts.length}-${sha256}.json`;
       await immutableJson(writingStorage,key,{version:1,encoding:'gzip-base64',bytes:part.length,sha256,
         payload:gzipSync(part,{level:6}).toString('base64')});
       parts.push({key,bytes:part.length,sha256});
     }
+    assert.ok(size===file.bytes && hash.digest('hex')===file.sha256,'intake_archive_source_changed');
     storedFiles.push({...file,parts});
   }
   assert.equal(rawDigest(await localInventory(directory)),rawDigest(files),'intake_archive_source_changed');

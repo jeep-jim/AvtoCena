@@ -114,15 +114,15 @@ test('partial collection remains partial; complete archive is not a complete sup
   } finally {await fs.rm(d.root,{recursive:true,force:true});}
 });
 
-test('bounded multipart restoration preserves bytes across compression and part boundaries',async()=>{
+test('multipart restoration preserves a shard larger than the old 32 MiB cutoff',async()=>{
   const f=storageFixture(),d=await directory();
   try {
-    const bytes=Buffer.alloc(5*1024*1024+31);
+    const bytes=Buffer.alloc(33*1024*1024+31);
     for(let offset=0;offset<bytes.length;offset++)bytes[offset]=33+(offset%90);
     await fs.writeFile(path.join(d.input,'source-000001.jsonl'),bytes);
     const receipt=await archiveIntakeDirectory({storage:f.storage,directory:d.input,market:'uae',owner});
     const manifest=await verifyIntakeArchive({storage:f.storage,receipt,directory:path.join(d.root,'restored')});
-    assert.equal(manifest.files.find((row:any)=>row.name.endsWith('.jsonl')).parts.length,3);
+    assert.equal(manifest.files.find((row:any)=>row.name.endsWith('.jsonl')).parts.length,17);
     assert.deepEqual(await fs.readFile(path.join(d.root,'restored','source-000001.jsonl')),bytes);
   } finally {await fs.rm(d.root,{recursive:true,force:true});}
 });
@@ -157,13 +157,10 @@ test('failed or changed source writes never produce a locally usable receipt',as
   } finally {await fs.rm(d.root,{recursive:true,force:true});}
 });
 
-test('new archives preserve the existing 1 TB / 200 GB reserve before any pin or object write',async()=>{
+test('full archives can be written without an estimated bucket reserve and are reusable by receipt',async()=>{
   const f=storageFixture(),d=await directory();
   f.storage.listBucketObjects=async()=>[{key:'existing',size:900_000_000_000}];
   try {
-    await assert.rejects(archiveIntakeDirectory({storage:f.storage,directory:d.input,market:'uae',owner}),/reserve_insufficient/);
-    assert.equal(f.writes.length,0);
-    f.storage.listBucketObjects=async()=>[{key:'existing',size:100_000_000_000}];
     const receipt=await archiveIntakeDirectory({storage:f.storage,directory:d.input,market:'uae',owner});
     const count=f.writes.length;
     f.storage.listBucketObjects=async()=>{throw Error('must_not_request_capacity_for_read_only_reuse');};
