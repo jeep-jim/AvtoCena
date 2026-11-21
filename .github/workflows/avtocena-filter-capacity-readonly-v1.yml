@@ -1,0 +1,41 @@
+name: Check combined filter candidate capacity without changes
+on:
+  push:
+    branches: [main]
+    paths: [.github/market-runs/avtocena-filter-capacity-readonly-v1.sha256]
+permissions:
+  contents: read
+jobs:
+  read:
+    if: github.repository == 'jeep-jim/AvtoCena' && github.repository_id == '1289722938' && github.ref == 'refs/heads/main' && github.run_attempt == '1' && github.event.head_commit.message == 'Check exact combined AvtoCena filter capacity without changes'
+    environment: regcloud-staging
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 2
+          persist-credentials: false
+      - name: Verify exact single-added trigger and preflight bytes
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          test "$(git show -s --format=%P HEAD | wc -w)" = 1
+          readonly marker=.github/market-runs/avtocena-filter-capacity-readonly-v1.sha256
+          readonly op=.github/operations/avtocena-filter-capacity-readonly-v1
+          readonly actor=8a8566d12e0d162a2aba175b7f97c534cc60752c31dd56b6b55a7cae9fae72ce wrapper=06787f49c5ff7cf22253016efa5a4a49dfe57c56b791aea3501451ae25f735df
+          cmp -s <(git diff-tree --no-commit-id -r --name-status --no-renames -z HEAD^ HEAD) <(printf 'A\0%s\0' "$marker")
+          cmp -s "$marker" <(printf '%s\n' "$actor" '01fab2584c11839b0fefbaecb1edf75d31f92b68' 'c7650e6b01610087ebc3aaefe063ee259a341c17')
+          printf '%s  %s\n' "$actor" "$op/preflight.py" "$wrapper" "$op/read-via-ssh.sh" | sha256sum --check --status
+      - name: Verify current GitHub commit and tree identity without building
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          timeout 20s gh api repos/jeep-jim/AvtoCena/git/commits/01fab2584c11839b0fefbaecb1edf75d31f92b68 | python3 -c 'import json,sys; d=json.load(sys.stdin); assert d["sha"]=="01fab2584c11839b0fefbaecb1edf75d31f92b68"; assert d["tree"]["sha"]=="c7650e6b01610087ebc3aaefe063ee259a341c17"; assert [p["sha"] for p in d["parents"]]==["08797524f21b946246a535d5a614400a0f946be6"]; print("candidate_git_identity_verified")'
+      - name: Read existing three runtime roles and unused loopback 3003
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+        shell: bash
+        run: bash .github/operations/avtocena-filter-capacity-readonly-v1/read-via-ssh.sh
