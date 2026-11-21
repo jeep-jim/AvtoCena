@@ -5,9 +5,25 @@
   "inExistingPaidScopeVerified": true,
   "authorityEvidenceSha256": "6fc77c3d5c32b2dd40991f45b2fff73f9a0a146e73ee0b64462862d472172239",
   "privatePrefixApprovalSha256": "88b817f95c16ea38efd61ee93856aa329d7ecc93f107df4b61c60d15a5af54dd",
-  "workerTree": "93f6e0130d3713c47fe0e4c659d0f04b736c0ff5",
-  "programMaxHttpAttempts": 2000,
+  "workerTree": "08405a920d224f4262242f46c752accb3580f671",
+  "programMaxHttpAttempts": 416,
   "anchorDate": "2026-11-21",
   "checkedAt": "2026-11-21T03:55:17.602Z",
-  "expiresAt": "2026-11-21T07:55:17.602Z"
+  "expiresAt": "2026-11-21T07:55:17.602Z",
+  "predecessor": {
+    "runId": "44863525814",
+    "revision": "175413fda63f02cce3ecce7b2ed5e769487db736",
+    "phase": "phase4",
+    "receiptSha256": "7f5386c479b50e82a506a6841fe34189f802531c0eb22f5f85351c31d24a9ef0",
+    "chain": "a3d7571fc8c9d43c0b8a4d0d539cc510af6b186dd373e614540b45775c4d6fe2",
+    "nextPage": 1584,
+    "originalRunId": "44863525814",
+    "originalAnchor": {
+      "date": "2026-11-21",
+      "id": 10197174,
+      "receivedAt": "2026-11-21T03:56:32.124Z"
+    },
+    "originalAnchorSha256": "6a96d6c226f0da849f0cece3aadde95008189fa1c6b70aa63ec759021af98c6c",
+    "priorDepth": 0
+  }
 }
