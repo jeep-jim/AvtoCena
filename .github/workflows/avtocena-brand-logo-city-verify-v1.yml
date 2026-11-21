@@ -1,0 +1,43 @@
+name: Verify exact AvtoCena logo uses ordinary catalog filters
+on:
+  push:
+    branches: [main]
+    paths: [.github/market-runs/avtocena-brand-logo-city-verify-v1.sha256]
+permissions:
+  contents: read
+jobs:
+  verify:
+    if: github.repository == 'jeep-jim/AvtoCena' && github.repository_id == '1289722938' && github.ref == 'refs/heads/main' && github.run_attempt == '1' && github.event.head_commit.message == 'Verify exact AvtoCena logo and sidebar city parity'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    env: {BUNDLE_SHA: '8cb60978045db8209526d587f860473feb5e45c21d1024f3385ebabd79e33323'}
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 2
+          persist-credentials: false
+      - name: Verify sole local-check marker and exact actor bytes
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          test "$(git show -s --format=%P HEAD | wc -w)" = 1
+          readonly marker=.github/market-runs/avtocena-brand-logo-city-verify-v1.sha256
+          cmp -s <(git diff-tree --no-commit-id -r --name-status --no-renames -z HEAD^ HEAD) <(printf 'A\0%s\0' "$marker")
+          cmp -s "$marker" <(printf '%s\n' 08797524f21b946246a535d5a614400a0f946be6 1ac7bd77c9fd66288b502e3762d38baa8214bf1a "$BUNDLE_SHA")
+          cd .github/operations/avtocena-brand-logo-city-verify-v1
+          printf '%s  bundle.sha256\n' "$BUNDLE_SHA" | sha256sum --check --status
+          sha256sum --check --strict --status bundle.sha256
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: 08797524f21b946246a535d5a614400a0f946be6
+          fetch-depth: 2
+          path: exact-app
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with: {node-version: '24.22.1'}
+      - name: Build and verify standard buyer route browser interactions using synthetic data only
+        working-directory: exact-app
+        shell: bash
+        run: bash "$GITHUB_WORKSPACE/.github/operations/avtocena-brand-logo-city-verify-v1/verify.sh"
