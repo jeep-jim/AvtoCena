@@ -1,0 +1,140 @@
+name: Reuse verified China archive for private preparation
+on:
+  push:
+    branches: [main]
+    paths: [.github/market-runs/china-rev5-reuse-archive-v1.sha256]
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: avtocena-china-rev5-own-private-source-stage-v1
+  cancel-in-progress: false
+jobs:
+  prepare:
+    if: github.repository == 'jeep-jim/AvtoCena' && github.repository_id == '1289722938' && github.ref == 'refs/heads/main' && github.run_attempt == '1' && github.event.head_commit.message == 'Reuse verified China archive for private preparation'
+    name: Prepare full fresh China with one frozen quote
+    runs-on: ubuntu-latest
+    environment: regcloud-staging
+    timeout-minutes: 190
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+          path: orchestrator
+          persist-credentials: false
+          fetch-depth: 2
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: 1c5f8f6af60f35c3b8cf91ef524d05a454bfcee7
+          path: candidate
+          persist-credentials: false
+          fetch-depth: 2
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: bb6317bffd1f7b1832681ac78378fe6c3e39e3b5
+          path: publisher
+          persist-credentials: false
+          sparse-checkout: |
+            scripts/lib
+            scripts/publisher-runtime83
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: 83ff17075e9188dcf227c8752dc064248d5f42e0
+          path: installed-models
+          persist-credentials: false
+          sparse-checkout: data/catalog/vehicle-knowledge
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 24.22.1
+      - name: Verify sole marker, exact code, source pins and dependencies without credentials
+        shell: bash
+        run: |
+          set -euo pipefail
+          umask 077
+          root="$GITHUB_WORKSPACE"
+          o="$root/orchestrator"
+          f=".github/market-runs/china-rev5-reuse-archive-v1.sha256"
+          ops="$o/.github/operations/china-rev5-reuse-archive-v1"
+          test "$(git -C "$o" rev-parse HEAD)" = "$GITHUB_SHA"
+          test "$(git -C "$o" log -1 --format=%B)" = 'Reuse verified China archive for private preparation'
+          test "$(git -C "$o" diff-tree --no-commit-id --name-status -r HEAD)" = "$(printf 'A\t%s' "$f")"
+          test "$(git -C "$o" show "HEAD:$f")" = "$(printf '%s\n%s' "$(sha256sum "$ops/approved.json" | cut -d' ' -f1)" "$(git -C "$o" rev-parse HEAD^)")"
+          plan="$(jq -er .workflowSha256 "$ops/approved.json")"
+          [[ "$plan" =~ ^[a-f0-9]{64}$ ]]
+          test "$plan" = "$(sha256sum "$o/.github/workflows/china-rev5-reuse-archive-v1.yml" | cut -d' ' -f1)"
+          test "$(jq -er .opsCodeSha256 "$ops/approved.json")" = "$(sha256sum "$ops/APPROVED_CODE.sha256" | cut -d' ' -f1)"
+          (cd "$ops"; sha256sum --strict --quiet -c APPROVED_CODE.sha256)
+          test -z "$(git -C "$root/candidate" status --porcelain)" && test -z "$(git -C "$root/publisher" status --porcelain)"
+          install -m 0644 "$ops/prepare-once/catalog-china-rev5-prepare-once.mjs" "$root/candidate/scripts/catalog-china-rev5-prepare-once.mjs"
+          test "$(sha256sum "$root/publisher/scripts/lib/nonjp-intake-archive.mjs" | cut -d' ' -f1)" = 459c98611117227fa68ae336f1f65c7de939ef4bdb4d8f8e2f132ace171d4247
+          test "$(sha256sum "$root/publisher/scripts/lib/catalog-disk-conversion.mjs" | cut -d' ' -f1)" = 724fb0e853d4f004b53552f8671906b1cb2a07b88fc30028159018eaaa35294f
+          install -m 0644 "$ops/prepare-once/catalog-disk-conversion.mjs" "$root/publisher/scripts/lib/catalog-disk-conversion.mjs"
+          (cd "$root/candidate"; sha256sum --strict --quiet -c "$ops/SOURCE_CLOSURE.sha256"; npm ci --ignore-scripts --no-audit --no-fund)
+          (cd "$root/candidate"; test "$(node scripts/catalog-calculation-version.mjs "$PWD")" = a72dc08b17d43b4f2685bbc17d33cae639e2015d79c67e242042ab9a35d09ce5)
+      - name: Reverify saved native archive and prepare private READY once
+        working-directory: candidate
+        shell: bash
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          REG_ACCESS: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          REG_SECRET: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+        run: |
+          set -euo pipefail
+          umask 077
+          opp="$GITHUB_WORKSPACE/orchestrator/.github/operations/china-rev5-reuse-archive-v1"
+          job="$(mktemp -d "$RUNNER_TEMP/china-rev5-prep.XXXXXXXX")"
+          image="$job/sandbox.ext4"
+          scratch="$job/scratch"
+          cred="$job/credentials.json"
+          proc="$job/process.env"
+          unit="china-rev5-prep-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          test "$(stat -f -c '%T' /sys/fs/cgroup)" = cgroup2fs
+          cleanup(){
+            st=$?
+            sudo -n systemctl stop "$unit.service" >/dev/null 2>&1 || true
+            rm -f -- "$cred" "$proc"
+            if mountpoint -q "$scratch"; then sudo -n umount "$scratch" || { echo covered_scratch_cleanup_held >&2; return 1; }; fi
+            rm -f -- "$image"
+            return "$st"
+          }
+          trap cleanup EXIT
+          bounds="$(python3 - "$opp/approved.json" <<'PY'
+          import json,os,sys,time
+          p=json.load(open(sys.argv[1]))
+          assert p['producer']['receiptClass']=='completedSuccess' and p['noPublication'] and p['noCursorWrite'] and p['noIngress']
+          f=os.statvfs(os.environ['RUNNER_TEMP'])
+          free=f.f_bavail*f.f_frsize
+          size=next((n*1024**3 for n in (24,20,16,14,12,11) if free>=n*1024**3+1536*1024**2),0)
+          assert size,'runner_local_free_below_fixed_private_floor'
+          left=min(p['producer']['preflightDeadline'],p['producer']['conservativeSourceDeadline'])/1000-time.time()
+          assert left>=110*60,'insufficient_source_authority_window'
+          print(min(10500,int(left),p['privateStageBudgetMinutes']*60),size,free)
+          PY
+          )"
+          read -r seconds allocatedBytes measuredFree <<< "$bounds"
+          printf '{"stage":"measured_host_scratch","runnerFreeBytes":%s,"privateFsAllocatedBytes":%s,"hostReserveBytes":1610612736}\n' "$measuredFree" "$allocatedBytes"
+          [[ "$allocatedBytes" =~ ^[0-9]+$ && "$seconds" =~ ^[0-9]+$ ]]
+          mkdir -m0700 "$scratch"
+          truncate -s "$allocatedBytes" "$image"
+          mkfs.ext4 -q -F -m 0 -E nodiscard,lazy_itable_init=1,lazy_journal_init=1 "$image"
+          sudo -n mount -t ext4 -o loop,nodev,nosuid,noexec "$image" "$scratch"
+          sudo -n chown "$(id -u):$(id -g)" "$scratch"
+          chmod 0700 "$scratch"
+          python3 - "$cred" "$proc" <<'PY'
+          import json,os,re,sys
+          c={'access':os.environ['REG_ACCESS'],'secret':os.environ['REG_SECRET']}
+          assert c['access'] and c['secret']
+          with open(sys.argv[1],'x') as f: json.dump(c,f)
+          names='GITHUB_SHA GITHUB_REPOSITORY GITHUB_REPOSITORY_ID GITHUB_REF GITHUB_WORKFLOW_REF GITHUB_JOB GITHUB_RUN_ID GITHUB_RUN_ATTEMPT GITHUB_TOKEN'
+          with open(sys.argv[2],'x') as f:
+           for k in names.split():
+            v=os.environ[k]; assert re.fullmatch('[A-Za-z0-9_./@-]+',v); f.write(k+'='+v+'\n')
+          PY
+          unset REG_ACCESS REG_SECRET GITHUB_TOKEN
+          sudo -n systemd-run --unit="$unit" --wait --collect --pipe --quiet --uid="$(id -u)" --gid="$(id -g)" \
+            --working-directory="$PWD" --setenv="TMPDIR=$scratch" --setenv="HOME=$scratch" \
+            --property="EnvironmentFile=$proc" --property=MemoryMax=6442450944 --property=MemorySwapMax=0 \
+            --property=OOMPolicy=stop --property="RuntimeMaxSec=$seconds" --property=TimeoutStopSec=30 --property=KillMode=control-group \
+            --property=ProtectSystem=strict --property="ReadWritePaths=$scratch" --property=NoNewPrivileges=yes \
+            "$(command -v node)" --max-old-space-size=4096 --import tsx "$opp/prepare-once/factory.mjs" \
+            "$GITHUB_WORKSPACE/orchestrator" "$PWD" "$GITHUB_WORKSPACE/publisher" "$GITHUB_WORKSPACE/installed-models" "$cred" "$scratch"
