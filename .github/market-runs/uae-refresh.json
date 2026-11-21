@@ -1,11 +1,11 @@
 {
-  "operation": "owner-owned-feed-uae-20261116",
-  "requestedAt": "2026-11-16T13:30:22.776000+00:00",
+  "operation": "owner-refresh-paid-dubicars-to-reg-20261121",
+  "requestedAt": "2026-11-21T14:43:03Z",
   "market": "uae",
   "publishMarkets": [
     "uae"
   ],
   "resetCursors": true,
   "dubicarsOnly": true,
-  "reason": "Owner requested complete non-Japan feeds in own REG storage. Fresh UAE traversal uses reviewed durable archive, byte-verified restoration and prepublication calculation guards; preserve source controls, manual specifications and source image URLs. No Japan or China restart."
+  "reason": "Owner requested a new full paid DubiCars download into REG storage, preparation and publication of UAE alone. Japan and Green Corner are outside this operation."
 }
