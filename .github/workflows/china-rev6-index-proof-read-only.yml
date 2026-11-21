@@ -1,0 +1,80 @@
+name: Verify active China rev6 filter index read-only
+on:
+  push:
+    branches: [main]
+    paths: [.github/market-runs/china-rev6-index-proof-read-only.sha256]
+permissions:
+  contents: read
+jobs:
+  projection:
+    name: Verify active China rev6 filter index read-only
+    if: github.repository == 'jeep-jim/AvtoCena' && github.repository_id == '1289722938' && github.ref == 'refs/heads/main' && github.run_attempt == '1' && github.event.head_commit.message == 'Verify active China rev6 filter index read-only'
+    runs-on: ubuntu-24.04
+    environment: regcloud-staging
+    timeout-minutes: 13
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+          fetch-depth: 3
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+          ref: 22867cbcfaee27b2e8917b6bf880e44827f67b60
+          path: preview-reader
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with: {node-version: 24.22.1}
+      - name: Validate one-shot stage and compile exact reader before credentials
+        shell: bash
+        run: |
+          set -euo pipefail
+          umask 077
+          readonly op=.github/operations/china-rev6-index-proof-read-only
+          readonly marker=.github/market-runs/china-rev6-index-proof-read-only.sha256
+          test "$(git rev-parse HEAD^^)" = 96af6af1782f27855826136340f087c0055de20f
+          test "$(git rev-parse HEAD^^^{tree})" = a3bf3ea0beeb4807aaa50042146fffa8ea9f915d
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          test "$(git show -s --format=%P HEAD | wc -w)" = 1
+          test "$(git show -s --format=%P HEAD^ | wc -w)" = 1
+          python3 - <<'PY'
+          import json,os,subprocess
+          with open(os.environ['GITHUB_EVENT_PATH']) as f: e=json.load(f)
+          p=subprocess.check_output(['git','rev-parse','HEAD^'],text=True).strip()
+          assert e['before']==p and e['forced'] is False and e['deleted'] is False
+          assert len(e['commits'])==1 and e['commits'][0]['id']==e['head_commit']['id']==os.environ['GITHUB_SHA']
+          PY
+          cmp -s <(git diff-tree --no-commit-id -r --name-status --no-renames -z HEAD^ HEAD) <(printf 'A\0%s\0' "$marker")
+          cmp -s <(git diff-tree --no-commit-id -r --name-status --no-renames -z HEAD^^ HEAD^) <(printf 'A\0%s\0' \
+            "$op/APPROVED_CODE.sha256" "$op/batch.test.mjs" "$op/build-rev6-index-proof.mjs" "$op/native-rev6-index-proof.mts" \
+            "$op/prepared-exact-filter-index.mjs" .github/workflows/china-rev6-index-proof-read-only.yml)
+          (cd "$op"; sha256sum --strict --check --status APPROVED_CODE.sha256)
+          readonly code="$(sha256sum "$op/APPROVED_CODE.sha256" |cut -d' ' -f1)"
+          printf '%s\n%s\n' "$code" "$(git rev-parse HEAD^)" | cmp -s - "$marker"
+          test "$(git -C preview-reader rev-parse HEAD)" = 22867cbcfaee27b2e8917b6bf880e44827f67b60
+          test "$(git -C preview-reader rev-parse HEAD^{tree})" = cb53c3c2b2ae656e3cabff8c63e78705e74314ba
+          test "$(git -C preview-reader hash-object package-lock.json)" = f60b4a7b321400b449e3bfdda02d0af972adc103
+          node --test "$op/batch.test.mjs"
+          (cd preview-reader; npm ci --ignore-scripts --no-audit --no-fund)
+          readonly reader="$GITHUB_WORKSPACE/preview-reader"
+          node "$op/build-rev6-index-proof.mjs" "$reader" "$reader/.china-rev6-index-proof.cjs"
+          sha256sum "$reader/.china-rev6-index-proof.cjs" > "$RUNNER_TEMP/china-rev6-index-bundle.sha256"
+      - name: Stream exact accepted projection once with existing protected reader
+        shell: bash
+        env:
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011
+          YC_OBJECT_STORAGE_REGION: us-east-1
+          JSON_STORAGE_DRIVER: object
+          AVTOCENA_CHINA_REGCLOUD_RUNTIME: '1'
+          AVTOCENA_RELEASE_SHA: 22867cbcfaee27b2e8917b6bf880e44827f67b60
+          AVTOCENA_CALCULATION_VERSION: 4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90
+          NODE_OPTIONS: ''
+        run: |
+          set -euo pipefail
+          readonly reader="$GITHUB_WORKSPACE/preview-reader"
+          sha256sum --strict --check --status "$RUNNER_TEMP/china-rev6-index-bundle.sha256"
+          cd "$reader"
+          timeout --signal=TERM --kill-after=5s 315s node --max-old-space-size=768 .china-rev6-index-proof.cjs
