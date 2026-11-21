@@ -1,0 +1,13 @@
+M	3ff4eba09b7b87c5d5e27780a7eed0e36111f7a0	apps/web/app/(public)/api/catalog/search/route.ts
+M	868a24308690737b3da4720639cd2f1fbb9fc50f	apps/web/app/(public)/cars/offer/[id]/page.tsx
+M	b721e7a16632f50d346c7405bfaac7813ba11cb4	apps/web/components/catalog/CatalogContent.tsx
+M	c876778f6cc935f0a539e2387deb003f7057ed46	apps/web/lib/ai-discovery.ts
+A	f0d70adce19489311748dbb2a66fba431f510e39	apps/web/lib/catalog/dubicars-gallery-policy.ts
+M	3e589ce4366da3c8656eaff6dc503994c012a206	apps/web/lib/catalog/market-page.ts
+M	6ddd63143dd606ac87f1be32bc3eee6b6be25f2c	apps/web/lib/catalog/offer-display-data.ts
+M	4811122161afb8b5ef28f0cd897cdcaf964ec98a	apps/web/lib/catalog/offer-metadata.ts
+M	ac5b3fbd7443d1b190f8d9bbece48d99a1620c3c	apps/web/lib/catalog/offer-page-data.ts
+M	00060815d57d70874ac896f12d193a18b4535c46	apps/web/lib/catalog/offer-url.ts
+M	f9facce3a3eed37ce20bfe89c41d0b7f365d7e55	apps/web/lib/catalog/storage.ts
+A	9c6e92000e1af3a2221a8785746eb2f773915eb6	apps/web/lib/catalog/uae-regcloud-object-reader.ts
+A	c1b55d2867ea89f0b49d3bff1d2242bda794360e	tests/uae-regcloud-object-reader.test.ts
