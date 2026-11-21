@@ -1,0 +1,23 @@
+{
+  "prepareRunId": "44871616387",
+  "prepareJobId": "136747174596",
+  "prepareHeadSha": "f9e1e2c7e98ab90a0a49264b2e762cbc05bf2071",
+  "prepareWorkflow": ".github/workflows/china-rev5-reuse-archive-v2.yml",
+  "stage": {
+    "runId": "full-fresh-44871616387-1",
+    "generationId": "gen_1795239842026_china44871616387",
+    "readySha256": "c66a7f5e6b0ee3373e8d850195bfe34409adec641f86457d0e2485bc7a07494e"
+  },
+  "runtimeReadySha256": "e655826ced21c191d4092152d2f66eff24253d13ed0a174d4b427ed5e6101208",
+  "pricingReceiptSha256": "cd671bd0ac500d963dcece6b37979bee77084a80af9b2cb7b11b2dc6406c4c1d",
+  "archiveSha256": "c438e8f3476783d0e0d0b567199f635e40c3089eff8806ca2f2d6c54c482cb46",
+  "manifestSha256": "aad60963901acb3019ab9bfab856a702c9ed586b81e9e83b21270e40c542c5f3",
+  "admittedRows": 168662,
+  "sourceRows": 286546,
+  "sourceExpiresAt": 1795406675417,
+  "terminalWitnessSha256": "3eb0b346ce24d3f3503ebfdd0cd95968ebb8375b3bc44ec13683cc692c9a9d79",
+  "acceptedExpected": 5,
+  "verifiedDeterministicPositiveBundleSha256": "44420cdd648fbf86f4e67351afea736858878d2e8e1af134611b12f0da244823",
+  "publicationAuthorized": false,
+  "cursorAdvanceAuthorized": false
+}

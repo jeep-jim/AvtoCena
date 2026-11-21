@@ -1,0 +1,82 @@
+name: Verify exact persisted China catalog read-only
+on:
+  push:
+    branches: [main]
+    paths: [.github/market-runs/china-persisted-ready-read-only.sha256]
+permissions:
+  contents: read
+jobs:
+  preview:
+    name: Verify exact persisted China catalog read-only
+    if: github.repository == 'jeep-jim/AvtoCena' && github.repository_id == '1289722938' && github.ref == 'refs/heads/main' && github.run_attempt == '1' && github.event.head_commit.message == 'Verify exact persisted China catalog read-only'
+    runs-on: ubuntu-24.04
+    environment: regcloud-staging
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+          fetch-depth: 3
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+          ref: 22867cbcfaee27b2e8917b6bf880e44827f67b60
+          path: preview-reader
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with: {node-version: 24.22.1}
+      - name: Isolate exact proof scope and authenticate stage before service credentials
+        shell: bash
+        run: |
+          set -euo pipefail
+          umask 077
+          readonly op=.github/operations/china-persisted-ready-read-only
+          readonly marker=.github/market-runs/china-persisted-ready-read-only.sha256
+          test "$(git rev-parse HEAD^^)" = 08956d8a96206567ec05642585fc01ce63f9c8e0
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          test "$(git show -s --format=%P HEAD | wc -w)" = 1
+          test "$(git show -s --format=%P HEAD^ | wc -w)" = 1
+          python3 - <<'PY'
+          import json,os,subprocess
+          with open(os.environ['GITHUB_EVENT_PATH']) as f: e=json.load(f)
+          p=subprocess.check_output(['git','rev-parse','HEAD^'],text=True).strip()
+          assert e['before']==p and e['forced'] is False and e['deleted'] is False
+          assert len(e['commits'])==1 and e['commits'][0]['id']==e['head_commit']['id']==os.environ['GITHUB_SHA']
+          PY
+          cmp -s <(git diff-tree --no-commit-id -r --name-status --no-renames -z HEAD^ HEAD) <(printf 'A\0%s\0' "$marker")
+          cmp -s <(git diff-tree --no-commit-id -r --name-status --no-renames -z HEAD^^ HEAD^) <(printf 'A\0%s\0' \
+            "$op/APPROVED_CODE.sha256" "$op/build-private-preview.mjs" "$op/make-preview-grant.py" "$op/native-removal-preview.mts" \
+            "$op/private-preview-entry.ts" "$op/removal-witness.mjs" "$op/run-read-only-preview.sh" "$op/verified-prepared-pins.json" .github/workflows/china-persisted-ready-read-only.yml)
+          (cd "$op"; sha256sum --strict --check --status APPROVED_CODE.sha256)
+          readonly code="$(sha256sum "$op/APPROVED_CODE.sha256" |cut -d' ' -f1)"
+          printf '%s\n%s\n' "$code" "$(git rev-parse HEAD^)" | cmp -s - "$marker"
+          test "$(git -C preview-reader rev-parse HEAD)" = 22867cbcfaee27b2e8917b6bf880e44827f67b60
+          test "$(git -C preview-reader rev-parse HEAD^{tree})" = cb53c3c2b2ae656e3cabff8c63e78705e74314ba
+          test "$(git -C preview-reader hash-object package-lock.json)" = f60b4a7b321400b449e3bfdda02d0af972adc103
+          (cd preview-reader; npm ci --ignore-scripts --no-audit --no-fund)
+          umask 077
+          shared="$(mktemp -d "$RUNNER_TEMP/china-preview-built.XXXXXXXX")"
+          readonly runop="$GITHUB_WORKSPACE/$op"
+          readonly reader="$GITHUB_WORKSPACE/preview-reader"
+          node "$runop/build-private-preview.mjs" "$reader" "$reader/.china-withdrawn-preview.cjs" removal > "$shared/removal.json"
+          node "$runop/build-private-preview.mjs" "$reader" "$reader/.china-native-preview.cjs" positive > "$shared/positive.json"
+          printf 'CHINA_PROTECTED_PREVIEW_BUILD=%s\n' "$shared" >> "$GITHUB_ENV"
+      - name: Read authenticated candidate through exact native 22867; no activation
+        shell: bash
+        env:
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011
+          YC_OBJECT_STORAGE_REGION: us-east-1
+          JSON_STORAGE_DRIVER: object
+          NODE_OPTIONS: ''
+        run: |
+          set -euo pipefail
+          umask 077
+          readonly op="$GITHUB_WORKSPACE/.github/operations/china-persisted-ready-read-only"
+          (cd "$op"; sha256sum --strict --check --status APPROVED_CODE.sha256)
+          private="$(mktemp -d "$RUNNER_TEMP/china-persisted-preview.XXXXXXXX")"
+          trap 'rm -rf -- "$private"' EXIT
+          [[ "$CHINA_PROTECTED_PREVIEW_BUILD" == "$RUNNER_TEMP"/china-preview-built.* ]]
+          bash "$op/run-read-only-preview.sh" "$op" "$GITHUB_WORKSPACE/preview-reader" "$private" "$CHINA_PROTECTED_PREVIEW_BUILD"
