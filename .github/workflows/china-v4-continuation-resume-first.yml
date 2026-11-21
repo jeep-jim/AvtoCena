@@ -1,0 +1,88 @@
+name: Resume verified China changes from private checkpoint
+on:
+  push:
+    branches: [main]
+    paths: [.github/market-runs/china-v4-continuation-resume-first.sha256]
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: catalog-refresh-china
+  cancel-in-progress: false
+jobs:
+  collect:
+    name: Resume verified China changes from private checkpoint
+    if: github.repository == 'jeep-jim/AvtoCena' && github.repository_id == '1289722938' && github.ref == 'refs/heads/main' && github.run_attempt == '1' && github.event.head_commit.message == 'Resume verified China changes from private checkpoint'
+    runs-on: ubuntu-24.04
+    environment: regcloud-staging
+    timeout-minutes: 95
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+          fetch-depth: 3
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: f4dc98aaab916b29419d173994d66562aa5901f1
+          path: continuation-worker
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 24.22.1
+      - name: Authenticate exact private-continuation closure before credentials
+        shell: bash
+        run: |
+          set -euo pipefail
+          umask 077
+          readonly ops=.github/operations/china-v4-continuation-resume-first
+          readonly marker=.github/market-runs/china-v4-continuation-resume-first.sha256
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          test "$(git show -s --format=%P HEAD | wc -w)" = 1
+          test "$(git show -s --format=%P HEAD^ | wc -w)" = 1
+          test "$(git rev-parse HEAD^^)" = 235fec15caa3baf2ad0f1079439348f8daeb2248
+          python3 - <<'PY'
+          import json, os, subprocess
+          with open(os.environ['GITHUB_EVENT_PATH']) as f: event=json.load(f)
+          parent=subprocess.check_output(['git','rev-parse','HEAD^'],text=True).strip()
+          assert event.get('before')==parent and event.get('forced') is False and event.get('deleted') is False
+          commits=event.get('commits') or []
+          assert len(commits)==1 and event.get('head_commit',{}).get('id')==commits[0].get('id')==os.environ['GITHUB_SHA']
+          PY
+          cmp -s <(git diff-tree --no-commit-id -r --name-status --no-renames -z HEAD^ HEAD) <(printf 'A\0%s\0' "$marker")
+          cmp -s <(git diff-tree --no-commit-id -r --name-status --no-renames -z HEAD^^ HEAD^) <(printf 'A\0%s\0' \
+            "$ops/APPROVED_CODE.sha256" "$ops/approved.json" "$ops/authorized-existing-scope.json" "$ops/original-snapshot.json" "$ops/worker-overlay.patch" \
+            .github/workflows/china-v4-continuation-resume-first.yml)
+          (cd "$ops"; sha256sum --strict --check --status APPROVED_CODE.sha256)
+          printf '%s\n%s\n' "$(sha256sum "$ops/approved.json" | cut -d ' ' -f 1)" "$(git rev-parse HEAD^)" | cmp -s - "$marker"
+          test "$(git -C continuation-worker rev-parse HEAD)" = f4dc98aaab916b29419d173994d66562aa5901f1
+          test "$(sha256sum continuation-worker/package-lock.json | cut -d ' ' -f 1)" = c0fa7c95f31d67a4025aec11095f7889842b32dfb1a6eb12fc64f3d89e9936eb
+          git -C continuation-worker apply --check "../$ops/worker-overlay.patch"
+          git -C continuation-worker apply --index "../$ops/worker-overlay.patch"
+          (cd continuation-worker; npm ci --ignore-scripts --no-audit --no-fund)
+          git -C continuation-worker diff --exit-code
+          test "$(git -C continuation-worker write-tree)" = "$(jq -er .workerTree "$ops/approved.json")"
+      - name: Capture exact private source continuation without publishing
+        shell: bash
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          AUTO_API_CHE168_KEY: ${{ secrets.AUTO_API_CHE168_KEY }}
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011
+          YC_OBJECT_STORAGE_REGION: us-east-1
+          JSON_STORAGE_DRIVER: object
+          YC_OBJECT_STORAGE_MAX_ATTEMPTS: '3'
+          YC_OBJECT_STORAGE_REQUEST_TIMEOUT_MS: '35000'
+          NODE_OPTIONS: ''
+        run: |
+          set -euo pipefail
+          umask 077
+          scratch="$(mktemp -d "$RUNNER_TEMP/china-v4-continuation.XXXXXXXX")"
+          trap 'rm -rf -- "$scratch"' EXIT
+          export CHINA_CONTINUATION_SCRATCH="$scratch" TMPDIR="$scratch"
+          cd continuation-worker
+          # Hard 4.125 GiB per process file, including SQLite rollback journal.
+          ulimit -f 4325376
+          timeout -k 10s 4700s node --import tsx scripts/continuation-entry.mts
