@@ -1,0 +1,80 @@
+name: Build exact 22867 China private read preview without credentials
+on:
+  push:
+    branches: [main]
+    paths: [.github/market-runs/china-exact-22867-preview-build.sha256]
+permissions:
+  contents: read
+jobs:
+  preview:
+    name: Build exact 22867 China private read preview without credentials
+    if: github.repository == 'jeep-jim/AvtoCena' && github.repository_id == '1289722938' && github.ref == 'refs/heads/main' && github.run_attempt == '1' && github.event.head_commit.message == 'Build exact 22867 China private read preview without credentials'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+          fetch-depth: 3
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+          ref: 22867cbcfaee27b2e8917b6bf880e44827f67b60
+          path: preview-reader
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with: {node-version: 24.22.1}
+      - name: Validate sole-added marker and exact source dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          umask 077
+          readonly op=.github/operations/china-exact-22867-preview-build
+          readonly marker=.github/market-runs/china-exact-22867-preview-build.sha256
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          test "$(git show -s --format=%P HEAD | wc -w)" = 1
+          test "$(git show -s --format=%P HEAD^ | wc -w)" = 1
+          python3 - <<'PY'
+          import json,os,subprocess
+          with open(os.environ['GITHUB_EVENT_PATH']) as f: e=json.load(f)
+          p=subprocess.check_output(['git','rev-parse','HEAD^'],text=True).strip()
+          assert e['before']==p and e['forced'] is False and e['deleted'] is False
+          assert len(e['commits'])==1 and e['commits'][0]['id']==e['head_commit']['id']==os.environ['GITHUB_SHA']
+          PY
+          cmp -s <(git diff-tree --no-commit-id -r --name-status --no-renames -z HEAD^ HEAD) <(printf 'A\0%s\0' "$marker")
+          cmp -s <(git diff-tree --no-commit-id -r --name-status --no-renames -z HEAD^^ HEAD^) <(printf 'A\0%s\0' \
+            "$op/build-private-preview.mjs" "$op/private-preview-entry.ts" .github/workflows/china-exact-22867-preview-build.yml)
+          readonly code="$(sha256sum "$op/build-private-preview.mjs" "$op/private-preview-entry.ts" | sha256sum | cut -d' ' -f1)"
+          printf '%s\n%s\n' "$code" "$(git rev-parse HEAD^)" | cmp -s - "$marker"
+          test "$(git -C preview-reader rev-parse HEAD)" = 22867cbcfaee27b2e8917b6bf880e44827f67b60
+          test "$(git -C preview-reader rev-parse HEAD^{tree})" = cb53c3c2b2ae656e3cabff8c63e78705e74314ba
+          test "$(git -C preview-reader hash-object package-lock.json)" = f60b4a7b321400b449e3bfdda02d0af972adc103
+          test "$(git -C preview-reader hash-object package.json)" = c4992f2ac64606e886871ea24de9d2363e612308
+      - name: Double-build and require byte-identical native 22867 program
+        shell: bash
+        run: |
+          set -euo pipefail
+          umask 077
+          readonly op="$GITHUB_WORKSPACE/.github/operations/china-exact-22867-preview-build"
+          readonly reader="$GITHUB_WORKSPACE/preview-reader"
+          (cd "$reader"; npm ci --ignore-scripts --no-audit --no-fund)
+          tmp="$(mktemp -d "$RUNNER_TEMP/china-22867-preview.XXXXXXXX")"
+          trap 'rm -rf -- "$tmp"' EXIT
+          node "$op/build-private-preview.mjs" "$reader" "$tmp/first.cjs" > "$tmp/first.json"
+          node "$op/build-private-preview.mjs" "$reader" "$tmp/second.cjs" > "$tmp/second.json"
+          cmp -s "$tmp/first.cjs" "$tmp/second.cjs"
+          cmp -s "$tmp/first.json" "$tmp/second.json"
+          node --check "$tmp/first.cjs"
+          python3 - "$tmp/first.json" "$tmp/first.cjs" <<'PY'
+          import hashlib,json,pathlib,sys
+          summary=json.loads(pathlib.Path(sys.argv[1]).read_bytes())
+          binary=pathlib.Path(sys.argv[2]).read_bytes()
+          assert summary['appSha']=='22867cbcfaee27b2e8917b6bf880e44827f67b60'
+          assert summary['bundleSha256']==hashlib.sha256(binary).hexdigest()
+          assert summary['bytes']==len(binary) and 0<len(binary)<8*1024*1024
+          assert summary['embeddedReactCacheSha256']=='125bcbc3a09182b916dce9d7e0d4b1b569f8e994f4bb98ae0d54855f9b74bfb7'
+          assert summary['nextVersion']=='15.5.28' and summary['frameworkExternals']==[]
+          assert summary['privateProof']=='exact-prepared-core-readers'
+          print(json.dumps({**summary,'deterministicDoubleBuild':True,'authenticatedGitTree':'cb53c3c2b2ae656e3cabff8c63e78705e74314ba',
+           'servingCalcNamespace':'4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90',
+           'compiledOnly':True,'privateStorageRequests':0,'serverChanges':0},separators=(',',':')))
+          PY
