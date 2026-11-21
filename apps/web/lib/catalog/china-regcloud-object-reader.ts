@@ -1,6 +1,7 @@
 import {createHash} from 'node:crypto';
 import type {JsonReadResult} from '../data';
 import {ObjectJsonStorage} from '../data';
+import {DetailReadCache} from './detail-read-cache';
 import type {ChinaRuntimeReady} from './china-stage-runtime-files';
 
 export const CHINA_PUBLIC_CONTROL='catalog/independent-market-public-v1/china/control.json';
@@ -66,6 +67,11 @@ export async function readChinaPublicState(storage:ObjectJsonStorage){
   return fail('control_integrity');
  return {state,etag:obj.etag,checksum:obj.checksum};
 }
+type StageBinary = Awaited<ReturnType<ObjectJsonStorage['getBinaryBounded']>>;
+const immutableIndexCache = new DetailReadCache<StageBinary>({
+ maxEntries:1024, maxBytes:32*1024*1024, ttlMs:5*60_000, concurrency:8,
+ sizeOf:object => object.size,
+});
 const minted=new WeakSet<ChinaStageObjectFiles>();
 export type ChinaStageObjectFiles=Readonly<{
  ready:Readonly<ChinaRuntimeReady>;
@@ -118,7 +124,18 @@ async function openChinaStageObject(storage:ObjectJsonStorage,reference:ChinaPub
  const data=async(key:string)=>{
   assertChinaStageObjectFiles(handle);
   if(key!==LOCAL_CONTROL&&!key.startsWith(LOCAL+'generations/'+ref.generationId+'/'))return fail('key_scope');
-  const result=await read('objects/'+key,key===LOCAL_CONTROL?32*1024:4*1024*1024);
+  check();
+  // Only the content-addressed directory and chunk selectors are shared.
+  // The active pointer, receipts, row projections, and prices use normal reads.
+  const index = acceptedRead && key.match(/\/prepared-china-read-v1\/(?:directory-|chunks\/[a-z0-9_.-]+-)([0-9a-f]{64})\.json$/);
+  const load = async () => {
+   const result = await read('objects/'+key, key===LOCAL_CONTROL ? 32*1024 : 4*1024*1024);
+   if (index && result.checksum !== index[1]) return fail('index_sha');
+   return result;
+  };
+  const result = index ? await immutableIndexCache.get(
+   JSON.stringify([configKey, credentialKey, ref.readySha256, root, key]), load) : await load();
+  check();
   if(key===LOCAL_CONTROL&&result.checksum!==ready.activeControlSha256)return fail('stage_control_sha');
   assertChinaStageObjectFiles(handle);return result;
  };

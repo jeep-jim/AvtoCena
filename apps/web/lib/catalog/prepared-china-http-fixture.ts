@@ -296,18 +296,23 @@ export async function readPreparedChinaCompatibility(params:CatalogSearchParams,
    const accum=facetQuery&&!options.navigationFacets?createChinaSelectorFacets(generationId,facetQuery):undefined;
    // Broad exact membership may require a compact projection scan.
    // Navigation facets are presealed; skip unrelated blocks even in SSR.
-   for(const chunk of s.snapshot.chunks){
+   // Keep the sealed ordinal (including ties) while overlapping independent
+   // storage reads. Consume a bounded batch before scheduling more I/O.
+   const batchSize = 3;
+   for(let startChunk=0;startChunk<s.snapshot.chunks.length;startChunk+=batchSize){
     signal?.throwIfAborted();
-    const reader=await s.snapshot.readChunk(chunk);
-    if(!reader.selectors)throw new PreparedChinaFixtureUnavailable();
-    for(let i=0;i<reader.partCount;i++){
-     const relevant=readsPart(reader.selectors[i]);
-     if(!relevant)continue;
-     signal?.throwIfAborted();
-     const part=await reader.load(i);
-     signal?.throwIfAborted();
-     for(const row of part.projection.items){
-      if(predicate(row)){total++;ranking.add(row);accum?.add(row);}
+    const chunks=s.snapshot.chunks.slice(startChunk,startChunk+batchSize);
+    const readers=await Promise.all(chunks.map(chunk=>s.snapshot.readChunk(chunk)));
+    for(const reader of readers){
+     if(!reader.selectors)throw new PreparedChinaFixtureUnavailable();
+     const positions=reader.selectors.flatMap((selector,index)=>readsPart(selector)?[index]:[]);
+     for(let at=0;at<positions.length;at+=batchSize){
+      signal?.throwIfAborted();
+      const parts=await Promise.all(positions.slice(at,at+batchSize).map(index=>reader.load(index)));
+      signal?.throwIfAborted();
+      for(const part of parts)for(const row of part.projection.items){
+       if(predicate(row)){total++;ranking.add(row);accum?.add(row);}
+      }
      }
     }
    }
