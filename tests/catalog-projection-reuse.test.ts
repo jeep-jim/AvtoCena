@@ -104,8 +104,8 @@ test('early model filtering preserves an explicit Yaris L source identity from o
 });
 test('cached admission is rechecked after Krasnoyarsk midnight',t=>{
  resetCatalogReadCachesForTests();
- t.mock.timers.enable({apis:['Date'],now:new Date('2026-10-12T16:59:59Z')});
- const input={...row(),year:2020,inventorySourceDate:'2020-10-12'};
+ t.mock.timers.enable({apis:['Date'],now:new Date('2028-10-12T16:59:59Z')});
+ const input={...row(),year:2022,inventorySourceDate:'2022-10-12'};
  assert.equal(prepareCatalogProjectionRows([input]).length,1);
  t.mock.timers.tick(2000);
  assert.equal(prepareCatalogProjectionRows([input]).length,0);

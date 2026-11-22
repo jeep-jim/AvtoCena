@@ -30,5 +30,7 @@ test('publication year gate accepts the same China lower boundary as intake',()=
  }
  assert.equal(isCatalogYearAllowed(2013,'china'),false);
  assert.equal(catalogMinYearForMarket('japan'),2008);
- for(const market of ['korea','europe','georgia'])assert.equal(catalogMinYearForMarket(market),new Date(Date.now()+7*3600000).getUTCFullYear()-6);
+ const rollingMinimum=new Date(Date.now()+7*3600000).getUTCFullYear()-6;
+ for(const market of ['korea','europe'])assert.equal(catalogMinYearForMarket(market),Math.max(2022,rollingMinimum));
+ assert.equal(catalogMinYearForMarket('georgia'),rollingMinimum);
 });

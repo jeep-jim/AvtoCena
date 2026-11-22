@@ -22,7 +22,8 @@ test("catalog card never bypasses the validated public ruble price", () => {
   assert.doesNotMatch(card, /ориентир под ключ/);
   assert.match(offerPage, /const visibleRub = modificationRub \|\| customerScenarioRub \|\| catalogOfferVisibleRub\(raw\)/);
   assert.match(offerPage, /conditionalModificationRub\(/);
-  assert.match(offerPage, /if \(!retro && !directScenario && !savedCalculation && !visibleRub && !selectionRequired && !sellerPricing && !isPriceOnRequestDubicarsOffer\(raw\)\) return <UnavailableOffer/);
+  assert.match(offerPage, /const explicitScenario = sharedScenario \|\| \(clientScenario \?/);
+  assert.match(offerPage, /if \(!retro && !explicitScenario && !savedCalculation && !visibleRub && !selectionRequired && !sellerPricing && !isPriceOnRequestDubicarsOffer\(raw\)\) return <UnavailableOffer/);
   assert.doesNotMatch(offerPage, /exactTotalRub\s*\|\|/);
 });
 

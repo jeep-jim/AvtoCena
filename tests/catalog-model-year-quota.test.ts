@@ -136,13 +136,17 @@ test("coverage-first does not let newer Casper rows crowd out Casper 2022 at a s
   assert.equal(selected.filter((row) => row.year === 2025).length, 1);
 });
 
-test("market age gates keep Japan at the agreed 2008 floor", () => {
-  assert.equal(catalogMinYearForMarket("korea"), 2020);
-  assert.equal(catalogMinYearForMarket("europe"), 2020);
+test("market age gates retain Japan 2008 and Korea/Europe 2022 floors", t => {
+  t.mock.timers.enable({apis:['Date'],now:new Date('2026-11-22T12:00:00Z')});
+  assert.equal(catalogMinYearForMarket("korea"), 2022);
+  assert.equal(catalogMinYearForMarket("europe"), 2022);
   assert.equal(catalogMinYearForMarket("georgia"), 2020);
   assert.equal(catalogMinYearForMarket("japan"), 2008);
   assert.equal(isCatalogYearAllowed(2019, "korea"), false);
-  assert.equal(isCatalogYearAllowed(2020, "korea"), true);
+  for(const market of ['korea','europe']){
+    assert.equal(isCatalogYearAllowed(2021, market), false);
+    assert.equal(isCatalogYearAllowed(2022, market), true);
+  }
   assert.equal(isCatalogYearAllowed(2007, "japan"), false);
   assert.equal(isCatalogYearAllowed(2008, "japan"), true);
 });

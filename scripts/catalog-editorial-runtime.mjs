@@ -4,6 +4,7 @@ import {execFileSync} from 'node:child_process';
 import {pathToFileURL,fileURLToPath} from 'node:url';
 import {restoreReleaseEncyclopedia} from './encyclopedia/restore-calculation-index.mjs';
 import {budgetPreparationDecision} from './catalog-budget-runtime.mjs';
+import {assertStagedCalculatorBuild} from './lib/catalog-staged-budget.mjs';
 
 export const EDITORIAL_HEALTH_URL='https://avtocena.com/api/health';
 // Explicit source compatibility only; inclusion is not a release acceptance verdict.
@@ -13,6 +14,9 @@ export const KNOWN_PRE_EDITORIAL_RELEASES=Object.freeze([
  '83ff17075e9188dcf227c8752dc064248d5f42e0',
  'e4f2781ed52f12f53430118bea51ef150608ccfe',
  '7f9165125edc773221da8e17a5ed39f3592db31c',
+ // Verified installed grid source has no editorial-home.ts. The strict
+ // calculator binding below still runs before this explicit unsupported path.
+ '22867cbcfaee27b2e8917b6bf880e44827f67b60',
 ]);
 const HELPER='apps/web/lib/catalog/editorial-home.ts';
 const PRIVATE_INDEX='data/knowledge/encyclopedia/calculation-v1.json';
@@ -38,6 +42,13 @@ export async function readEditorialHealth(fetchImpl=fetch,timeoutMs=15000){
 }
 export function assertEditorialHealth(expected,actual){
  if(actual.release!==expected.release||actual.calculationVersion!==expected.calculationVersion)throw Error('editorial_runtime_health_changed');
+}
+export function assertEditorialCalculatorBuild(expected,build){
+ // The deployed grid release retains its verified calculator identity. Reuse
+ // the same exact source/build/serving binding as market preparation; never
+ // accept a general mismatch or substitute the controller's calculator.
+ try{assertStagedCalculatorBuild(expected.release,build,expected.calculationVersion);}
+ catch(cause){throw Error('editorial_runtime_calculation_mismatch',{cause});}
 }
 export async function installedEditorialSupported(root,release){
  try{await fs.access(path.join(root,HELPER));return true;}catch(error){
@@ -73,7 +84,7 @@ export async function prepareInstalledEditorial({root,expected,readHealth=readEd
  if(head!==expected.release)throw Error('editorial_runtime_checkout_mismatch');
  const load=relative=>import(pathToFileURL(path.join(root,relative)).href);
  const {calculationVersion}=await load('scripts/catalog-calculation-version.mjs');
- if(calculationVersion(root)!==expected.calculationVersion)throw Error('editorial_runtime_calculation_mismatch');
+ assertEditorialCalculatorBuild(expected,calculationVersion(root));
  if(!await installedEditorialSupported(root,expected.release)){
   assertEditorialHealth(expected,await readHealth());
   return {...expected,supported:false,prepared:false,reason:'known_pre_helper_release'};

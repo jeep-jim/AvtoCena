@@ -35,7 +35,7 @@ test("source price and low power allow inventory admission but cannot prove affo
 });
 
 test("small inventory selection admits recent high-power offers but preserves the minimum model year", () => {
-  const offers = Array.from({ length: 10 }, (_, index) => offer({ id: `korea-${index}`, year: 2020, powerHp: 200 }));
+  const offers = Array.from({ length: 10 }, (_, index) => offer({ id: `korea-${index}`, year: 2022, powerHp: 200 }));
   const result = selectCatalogV2MarketOffers(offers, {
     priorityTarget: 1_000,
     maximumPerMarket: 10,
@@ -47,5 +47,6 @@ test("small inventory selection admits recent high-power offers but preserves th
   });
   assert.equal(result.fallbackUnlocked, true);
   assert.equal(result.selected.length, 10);
+  assert.equal(classifyCatalogV2Offer(offer({ year: 2021 })).reason, "year");
   assert.equal(classifyCatalogV2Offer(offer({ year: 2015 })).reason, "year");
 });

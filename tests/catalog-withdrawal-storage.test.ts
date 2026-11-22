@@ -19,7 +19,7 @@ test("publication does not resurrect omitted, sold or expired Korea rows from in
   const now = new Date().toISOString();
   const offer: any = {
     id: "withdrawal-target", sourceId: "encar_direct", sourceOfferId: "FILTER", market: "korea", offerType: "fixed", status: "active",
-    make: "Hyundai", model: "Avante (CN7)", year: 2021, sourcePrice: 18_000_000, sourceCurrency: "KRW", priceMode: "fixed",
+    make: "Hyundai", model: "Avante (CN7)", year: 2024, sourcePrice: 18_000_000, sourceCurrency: "KRW", priceMode: "fixed",
     images: Array.from({ length: 5 }, (_, index) => ({ id: `w-${index}`, url: `https://ci.encar.com/carpicture/2026/09/07/12345678/${String(index + 1).padStart(3, '0')}.jpg`, objectKey: "", checksum: "", size: 0, mimeType: "image/jpeg" })),
     totalRub: 2_021_912, mileageKm: 61_114, engineCc: 1_598, powerHp: 123, fuel: "petrol", transmission: "automatic", drive: "fwd", bodyType: "sedan",
     calculationStatus: "ready", calculationSnapshot: { customs: { status: "ready" },

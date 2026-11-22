@@ -141,15 +141,15 @@ test('nested repair landing keeps owner verification and CAS through the write b
 });
 
 test('future landing uses exact age date and cannot poison the current-day cache',async()=>{
- const today=new Date('2026-10-26T16:59:00Z'),tomorrow=new Date('2026-10-26T17:01:00Z');
- const source=[{...rows[0],id:'expires',year:2020,inventorySourceDate:'2020-10-26'},
-  {...rows[1],id:'retained',year:2020,inventorySourceDate:'2020-10-27'}];
+ const today=new Date('2028-10-26T16:59:00Z'),tomorrow=new Date('2028-10-26T17:01:00Z');
+ const source=[{...rows[0],id:'expires',year:2022,inventorySourceDate:'2022-10-26'},
+  {...rows[1],id:'retained',year:2022,inventorySourceDate:'2022-10-27'}];
  const before=await buildCatalogMarketLanding('test','korea',source,{now:today});
  const after=await buildCatalogMarketLanding('test','korea',source,{now:tomorrow});
  assert.equal(before.total,2);assert.equal(after.total,1);assert.equal(after.items[0].id,'retained');
- assert.equal(after.sourceTotal,2);assert.equal(after.policyDate,'2026-10-27');
+ assert.equal(after.sourceTotal,2);assert.equal(after.policyDate,'2028-10-27');
  const overview=await buildCatalogOverviewFromProjections('test',source,{now:tomorrow});
- assert.equal(overview.policyDate,'2026-10-27');assert.equal(overview.markets.korea.sourceTotal,2);
+ assert.equal(overview.policyDate,'2028-10-27');assert.equal(overview.markets.korea.sourceTotal,2);
  assert.equal(overview.markets.korea.total,1);assert.deepEqual(overview.markets.korea.items.map(row=>row.id),['retained']);
  assert.equal((await buildCatalogMarketLanding('test','korea',source,{now:today})).total,2);
 });

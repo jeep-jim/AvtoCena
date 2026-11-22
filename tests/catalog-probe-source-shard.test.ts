@@ -47,7 +47,6 @@ test("canonical mandatory market source contract cannot silently drift", () => {
     ["dubicars_uae_exact", "https://www.dubicars.com/"],
     ["encar_direct", "https://www.encar.com/"],
     ["kcar_korea_open", "https://www.kcar.com/"],
-    ["mobile_de_open", "https://www.mobile.de/"],
     ["autoscout_europe_open", "https://www.autoscout24.com/"],
     ["myauto_georgia_list", "https://www.myauto.ge/"],
     ["autopapa_georgia_open", "https://autopapa.ge/"],
@@ -58,6 +57,7 @@ test("canonical mandatory market source contract cannot silently drift", () => {
     assert.match(requiredSources, new RegExp(sourceId));
     assert.match(requiredSources, new RegExp(canonicalUrl.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
   }
+  assert.doesNotMatch(requiredSources, /mobile_de_open|mobile\.de/, "disabled Mobile.de must stay outside required collection sources");
   assert.match(sourceRegistry, /catalog_strict_source_allowlist_broken/);
   assert.match(sourceRegistry, /excluded_from_collection/);
 });

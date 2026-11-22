@@ -80,7 +80,7 @@ test('narrow price sorting uses a prepared exact snapshot and reads only visible
 
 test('compact sorting keeps exact order, shares direction price reads and bounds concurrent blocks',async()=>{
  const base:any={market:'korea',make:'Hyundai',model:'Avante',year:2024,mileageKm:40000,engineCc:1598,powerHp:123,fuel:'petrol',powertrainKind:'combustion',transmission:'automatic',drive:'fwd',bodyType:'sedan',cardImageUrl:'https://example.com/car.jpg',cardProjectionVersion:3,publicSpecificationVerified:true,calculationStatus:'ready',updatedAt:'2026-10-04T00:00:00Z'};
- const rows=Array.from({length:60},(_,i)=>({...base,id:`car-${i}`,year:2020+i%7,totalRub:1_000_000+i*10_000,publicVisibleRub:1_000_000+i*10_000}));
+ const rows=Array.from({length:60},(_,i)=>({...base,id:`car-${i}`,year:2022+i%5,totalRub:1_000_000+i*10_000,publicVisibleRub:1_000_000+i*10_000}));
  rows.push({...base,id:'unknown',year:2024,totalRub:null,publicVisibleRub:undefined,catalogPricingMode:'seller',sellerPriceRub:1} as any);
  rows.forEach((row:any,i:number)=>{row.color=i%2?'black':'white';row.mileageKm=i===1?0:i===2?undefined:(60-i)*100;});
  const generationId='compact-sort',index=buildBudgetCountIndex(generationId,rows,new Map(rows.map((r,i)=>[r.id,Math.floor(i/10)])));
@@ -124,7 +124,7 @@ test('compact sorting keeps exact order, shares direction price reads and bounds
 
 test('v3 sorting reuses compact keys and recovers only missing legacy prices',async()=>{
  const base:any={market:'korea',make:'Hyundai',model:'Avante',year:2024,mileageKm:40000,engineCc:1598,powerHp:123,fuel:'petrol',powertrainKind:'combustion',transmission:'automatic',drive:'fwd',bodyType:'sedan',cardImageUrl:'https://example.com/car.jpg',cardProjectionVersion:3,publicSpecificationVerified:true,calculationStatus:'ready',updatedAt:'2026-10-04T00:00:00Z'};
- const rows=Array.from({length:60},(_,i)=>({...base,id:`car-${i}`,year:2020+i%7,totalRub:1_000_000+i*10_000,publicVisibleRub:1_000_000+i*10_000}));
+ const rows=Array.from({length:60},(_,i)=>({...base,id:`car-${i}`,year:2022+i%5,totalRub:1_000_000+i*10_000,publicVisibleRub:1_000_000+i*10_000}));
  rows.push({...base,id:'unknown',year:2024,totalRub:null,publicVisibleRub:undefined} as any);
  const generationId='compact-sort',index=buildBudgetCountIndex(generationId,rows,new Map(rows.map((r,i)=>[r.id,Math.floor(i/10)])),3);
  const storage=getJsonStorage(),original=storage.readJsonWithMeta,originalRead=storage.readJson,originalWrite=storage.writeJson,reads:string[]=[];let active=0,peak=0;
@@ -158,7 +158,7 @@ test('v3 sorting reuses compact keys and recovers only missing legacy prices',as
 
 test('seller prices sort by current visible currency values without becoming delivered totals',async()=>{
  const base:any={catalogPricingMode:'seller',market:'korea',make:'Hyundai',model:'Avante',year:2024,mileageKm:40000,engineCc:1598,powerHp:123,fuel:'petrol',powertrainKind:'combustion',transmission:'automatic',drive:'fwd',bodyType:'sedan',cardImageUrl:'https://example.com/car.jpg',cardProjectionVersion:3,publicSpecificationVerified:true,calculationStatus:'ready',updatedAt:'2026-10-04T00:00:00Z'};
- const rows=Array.from({length:60},(_,i)=>({...base,id:`car-${i}`,sourceCurrency:'USD',sourcePrice:(60-i)*1000,year:2020+i%7,totalRub:1_000_000+i*10_000,publicVisibleRub:1_000_000+i*10_000}));
+ const rows=Array.from({length:60},(_,i)=>({...base,id:`car-${i}`,sourceCurrency:'USD',sourcePrice:(60-i)*1000,year:2022+i%5,totalRub:1_000_000+i*10_000,publicVisibleRub:1_000_000+i*10_000}));
  rows.push({...base,id:'unknown',year:2024,totalRub:null,publicVisibleRub:undefined} as any);
  const generationId='compact-sort',index=buildBudgetCountIndex(generationId,rows,new Map(rows.map((r,i)=>[r.id,Math.floor(i/10)])),3);
  const legacy=index.rows.splice(30);for(const row of legacy){row[1]=0;row[7]=undefined;}index.otherRows!.push(...legacy);

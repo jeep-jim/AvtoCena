@@ -74,7 +74,8 @@ test("brand and model pages use Autocatalog copy, saved previews and no aggregat
 test("removed offers explain availability and offer catalog navigation", () => {
   const offerPage = source("apps/web/app/(public)/cars/offer/[id]/page.tsx");
   assert.match(offerPage, /if \(!storedOffer\) return <UnavailableOffer/);
-  assert.match(offerPage, /if \(!retro && !directScenario && !savedCalculation && !visibleRub && !selectionRequired && !sellerPricing && !isPriceOnRequestDubicarsOffer\(raw\)\) return <UnavailableOffer/);
+  assert.match(offerPage, /const explicitScenario = sharedScenario \|\| \(clientScenario \?/);
+  assert.match(offerPage, /if \(!retro && !explicitScenario && !savedCalculation && !visibleRub && !selectionRequired && !sellerPricing && !isPriceOnRequestDubicarsOffer\(raw\)\) return <UnavailableOffer/);
   assert.doesNotMatch(offerPage, /notFound\(\)/);
   assert.doesNotMatch(offerPage, /!offer \|\| !isCrediblePublicOffer\(offer\)/);
   assert.doesNotMatch(offerPage, /function MissingOffer/);
