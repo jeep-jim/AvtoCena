@@ -5,17 +5,17 @@ import {selectCatalogPowerMix,catalogPowerBand} from '../apps/web/lib/catalog/po
 import {compareCatalogDisplayOrder} from '../apps/web/lib/catalog/display-order';
 import {catalogHardPriceCap} from '../apps/web/lib/catalog/china-owner-policy';
 import {selectCatalogShowcaseDiversity} from '../apps/web/lib/catalog/inventory-quota';
-const now=new Date('2026-10-06T07:00:00Z');
+const now=new Date('2028-10-06T07:00:00Z');
 test('markets with the six-year policy expire by exact day, source month or year without invented days',()=>{
  for(const market of ['korea','uae','europe','georgia']){
- const row={market,year:2020};
- assert.equal(age({...row,productionDate:'2020-10-06'},now).eligible,true);
- assert.equal(age({...row,productionDate:'2020-10-06'},new Date('2026-10-07T07:00:00Z')).eligible,false);
- assert.equal(age({...row,productionDate:'2020-09'},now).eligible,false);
- assert.equal(age({...row,productionDate:'2020-10'},now).eligible,true);
- assert.equal(age({...row,productionDate:'2020-10'},new Date('2026-11-01T00:00:00Z')).eligible,false);
+ const row={market,year:2022};
+ assert.equal(age({...row,productionDate:'2022-10-06'},now).eligible,true);
+ assert.equal(age({...row,productionDate:'2022-10-06'},new Date('2028-10-07T07:00:00Z')).eligible,false);
+ assert.equal(age({...row,productionDate:'2022-09'},now).eligible,false);
+ assert.equal(age({...row,productionDate:'2022-10'},now).eligible,true);
+ assert.equal(age({...row,productionDate:'2022-10'},new Date('2028-11-01T00:00:00Z')).eligible,false);
  assert.equal(age(row,now).eligible,true);
- assert.equal(age(row,new Date('2026-12-31T17:00:00Z')).eligible,false);
+ assert.equal(age(row,new Date('2028-12-31T17:00:00Z')).eligible,false);
  }
  assert.equal(age({market:'japan',year:2008},now).eligible,true);
  assert.equal(age({market:'japan',year:2007},now).eligible,false);

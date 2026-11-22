@@ -22,7 +22,7 @@ const base = {
   raw: {},
 };
 
-test("Mobile.de accepts a current listing with explicit make and model identity", () => {
+test("saved Mobile.de normalization retains explicit make and model identity", () => {
   const offer = source.normalizeOffer(base);
   assert.ok(offer);
   assert.equal(offer!.make, "Volkswagen");
@@ -99,108 +99,47 @@ test("Mobile.de never treats the ambiguous Limousine bucket as an exact sedan bo
   );
 });
 
-function vipAd(overrides: Record<string, unknown> = {}) {
-  return {
-    id: base.id,
-    price: { grossAmount: base.price },
-    makeKey: base.make,
-    modelKey: base.model,
-    title: base.title,
-    attributes: [
-      { tag: "power", value: "110 kW (150 PS)" },
-      { tag: "firstRegistration", value: "01/2025" },
-      { tag: "mileage", value: "12,000 km" },
-      { tag: "cubicCapacity", value: "999 cm³" },
-      { tag: "fuel", value: "Benzin" },
-      { tag: "transmission", value: "Automatik" },
-      { tag: "category", value: "SUV" },
-    ],
-    galleryImages: Array.from({ length: 5 }, (_, index) => ({
-      src: `https://img.classistatic.de/api/v1/mo-prod/images/mobile-test-${index}`,
-    })),
-    ...overrides,
-  };
-}
-
-test("Mobile.de VIP keeps agreeing listing-bound specification evidence", async () => {
-  const offer = source.normalizeOffer({
-    ...base,
-    engineCc: 999,
-    powerKw: 110,
-    powerHp: 150,
-    fuel: "Benzin",
+test("saved Mobile.de listing and VIP specifications preserve agreeing exact evidence", () => {
+  const evidence = mobileDeSpecificationEvidence({
+    listingEngineCc: 999, detailEngineCc: 999,
+    listingPowerHp: 150, detailPowerHp: 150,
+    listingFuel: "Benzin", detailFuel: "Benzin",
   });
-  assert.ok(offer);
-  const originalFetch = global.fetch;
-  global.fetch = async () =>
-    new Response(JSON.stringify({ ad: vipAd() }), {
-      headers: { "content-type": "application/json" },
-    });
-  try {
-    const images = await source.fetchImages(offer!);
-    assert.equal(images.length, 5);
-    assert.equal(offer!.engineCc, 999);
-    assert.equal(offer!.powerHp, 150);
-    assert.equal(offer!.fuel, "petrol");
-    assert.equal(
-      (offer!.operational as any).semanticEvidence.engineCc.status,
-      "exact",
-    );
-    assert.equal(catalogSemanticEvidenceRejectionReason(offer!), "");
-  } finally {
-    global.fetch = originalFetch;
-  }
+  assert.deepEqual(evidence.engineCc, {value: 999, rawValues: [999, 999], status: "exact"});
+  assert.deepEqual(evidence.powerHp, {value: 150, rawValues: [150, 150], status: "exact"});
+  assert.deepEqual(evidence.fuel, {value: "petrol", rawValues: ["Benzin"], status: "exact"});
+  assert.equal(catalogSemanticEvidenceRejectionReason({operational: {semanticEvidence: evidence}}), "");
 });
 
-test("Mobile.de VIP conflicts clear calculation fields and fail closed", async () => {
-  const offer = source.normalizeOffer({
-    ...base,
-    engineCc: 999,
-    powerKw: 110,
-    powerHp: 150,
-    fuel: "Benzin",
+test("saved Mobile.de VIP conflicts retain both observations and cannot become exact calculation inputs", () => {
+  const evidence = mobileDeSpecificationEvidence({
+    listingEngineCc: 999, detailEngineCc: 1498,
+    listingPowerHp: 150, detailPowerHp: 180,
+    listingFuel: "Benzin", detailFuel: "Diesel",
   });
+  assert.deepEqual(evidence.engineCc, {rawValues: [999, 1498], status: "conflict"});
+  assert.deepEqual(evidence.powerHp, {rawValues: [150, 180], status: "conflict"});
+  assert.deepEqual(evidence.fuel, {rawValues: ["Benzin", "Diesel"], status: "conflict"});
+  assert.equal(evidence.engineCc.value, undefined);
+  assert.equal(evidence.powerHp.value, undefined);
+  assert.equal(evidence.fuel.value, undefined);
+  assert.equal(catalogSemanticEvidenceRejectionReason({operational: {semanticEvidence: evidence}}), "semantic_fuel_conflict");
+});
+
+test("disabled Mobile.de VIP rejects before fetch and preserves the saved listing unchanged", async () => {
+  const offer = source.normalizeOffer({...base, engineCc: 999, powerKw: 110, powerHp: 150, fuel: "Benzin"});
   assert.ok(offer);
-  const conflicting = vipAd({
-    attributes: [
-      { tag: "power", value: "132 kW (180 PS)" },
-      { tag: "firstRegistration", value: "01/2025" },
-      { tag: "cubicCapacity", value: "1,498 cm³" },
-      { tag: "fuel", value: "Diesel" },
-    ],
-  });
-  const originalFetch = global.fetch;
-  global.fetch = async () =>
-    new Response(JSON.stringify({ ad: conflicting }), {
-      headers: { "content-type": "application/json" },
-    });
+  const before = structuredClone(offer), originalFetch = global.fetch;
+  let requests = 0;
+  global.fetch = async () => { requests++; throw new Error("unexpected_mobile_de_request"); };
   try {
-    await source.fetchImages(offer!);
-    assert.equal(offer!.engineCc, undefined);
-    assert.equal(offer!.powerHp, undefined);
-    assert.equal(offer!.powerKw, undefined);
-    assert.equal(offer!.fuel, undefined);
-    assert.equal(offer!.powertrainKind, "unknown");
-    assert.equal(offer!.calculationStatus, "needs_data");
-    assert.equal(
-      (offer!.operational as any).semanticEvidence.fuel.status,
-      "conflict",
-    );
-    assert.equal(
-      (offer!.operational as any).semanticEvidence.engineCc.status,
-      "conflict",
-    );
-    assert.equal(
-      (offer!.operational as any).semanticEvidence.powerHp.status,
-      "conflict",
-    );
-    assert.equal(
-      catalogSemanticEvidenceRejectionReason(offer!),
-      "semantic_fuel_conflict",
-    );
-  } finally {
-    global.fetch = originalFetch;
-  }
+    await assert.rejects(source.fetchImages(offer!), {
+      name: "CollectionDisabledError", message: "collection_disabled_by_owner:mobile_de_open",
+    });
+    assert.equal(requests, 0);
+    assert.deepEqual(offer, before);
+    assert.equal(isCrediblePublicOffer(offer!), false);
+  } finally { global.fetch = originalFetch; }
 });
 
 test("Mobile.de rejects source placeholder identity instead of inferring a model from the title", () => {
@@ -211,9 +150,11 @@ test("Mobile.de rejects source placeholder identity instead of inferring a model
   );
 });
 
-test("Mobile.de enforces the non-Japan 2020 minimum at collector normalization", () => {
-  assert.equal(source.normalizeOffer({ ...base, year: 2019 }), null);
-  assert.ok(source.normalizeOffer({ ...base, year: 2020 }));
+test("saved Mobile.de normalization enforces the Europe 2022 minimum without allowing publication", () => {
+  for (const year of [2019, 2020, 2021]) assert.equal(source.normalizeOffer({ ...base, year }), null);
+  const offer = source.normalizeOffer({ ...base, year: 2022 });
+  assert.ok(offer);
+  assert.equal(isCrediblePublicOffer(offer!), false);
 });
 
 
@@ -236,12 +177,15 @@ test("unassigned optional body does not discard an otherwise credible car; inven
   offer.images = Array.from({ length: 5 }, (_, index) => ({ id: "", url: `https://img.classistatic.de/api/v1/mo-prod/images/body-test-${index}.jpg`, mimeType: "image/jpeg", size: 0 }));
   assert.equal(offer.bodyType, undefined);
   assert.equal(catalogSemanticEvidenceRejectionReason(offer), "");
-  assert.equal(isCrediblePublicOffer(offer), true);
-  assert.equal(isCrediblePublicOffer({ ...offer, bodyType: "sedan" }), false);
-  const contradiction = structuredClone(offer);
+  assert.equal(isCrediblePublicOffer(offer), false, "saved Mobile.de rows stay excluded from publication");
+  const approved = {...offer, sourceId: "autoscout_europe_open", operational: {...offer.operational,
+    sourceUrl: "https://www.autoscout24.com/offers/fixture-body-1"}};
+  assert.equal(isCrediblePublicOffer(approved), true);
+  assert.equal(isCrediblePublicOffer({ ...approved, bodyType: "sedan" }), false);
+  const contradiction = structuredClone(approved);
   (contradiction.operational as any).semanticEvidence.bodyType.status = "conflict";
   assert.equal(isCrediblePublicOffer(contradiction), false);
-  const missingSpecs = structuredClone(offer);
+  const missingSpecs = structuredClone(approved);
   (missingSpecs.operational as any).semanticEvidence.engineCc.status = "ambiguous";
   assert.equal(isCrediblePublicOffer(missingSpecs), false);
 });

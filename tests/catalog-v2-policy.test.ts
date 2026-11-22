@@ -125,7 +125,7 @@ test("selection fills a market instead of shrinking it when low-power stock is s
 
 test("affordable recent low-power cars sort ahead of old expensive high-power cars", () => {
   const rows = [
-    offer("old-expensive", { year: 2020, powerHp: 220, totalRub: 8_000_000 }),
+    offer("old-expensive", { year: 2022, powerHp: 220, totalRub: 8_000_000 }),
     offer("recent-cheap", { year: 2025, powerHp: 120, totalRub: 2_000_000 }),
     offer("recent-cheap-2", { year: 2024, powerHp: 130, totalRub: 2_200_000 }),
     offer("recent-cheap-3", { year: 2023, powerHp: 140, totalRub: 2_400_000 }),

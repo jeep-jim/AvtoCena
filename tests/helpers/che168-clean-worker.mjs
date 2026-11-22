@@ -23,6 +23,8 @@ export async function che168CleanWorkerCheckout(t) {
   git(root, 'sparse-checkout', 'set', '--no-cone', '/scripts/', '/apps/web/lib/', '/packages/',
     '/.gitignore', '/package.json', '/package-lock.json', '/tsconfig.json',
     '/apps/web/package.json', '/apps/web/tsconfig.json',
+    '/.github/operations/china-daily-rev6-bootstrap-readonly-v1/daily-core.mjs',
+    '/.github/operations/china-daily-rev6-bootstrap-readonly-v1/rev6-bootstrap.mjs',
     '/data/catalog/power-reference/reported-power30-precedents.json',
     '/data/catalog/source-gallery-review-v1.json', '/data/catalog/research/public-quote-quarantine-20260916.json',
     '/data/catalog/korea-official-power/snapshot.json', '/data/catalog/refresh-policy-v1.json');

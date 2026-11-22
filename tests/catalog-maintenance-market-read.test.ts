@@ -1,13 +1,13 @@
 import test,{mock} from 'node:test';
 import assert from 'node:assert/strict';
 import {LocalJsonStorage} from '../apps/web/lib/data';
-import {readAllOffersForMaintenance, readMarketMaintenanceOffers} from '../apps/web/lib/catalog/storage';
+import {readAllOffersForMaintenance, readMarketMaintenanceOffers, iterateOffersForMaintenance} from '../apps/web/lib/catalog/storage';
 
 test('market refresh skips its obsolete source chunks before I/O and retains unknown sources for auditing',async()=>{
  const fixtures:any={
  'catalog/internal/manifest.json':{sources:{mobile_de_open:{chunks:['large-europe.json']},encar_direct:{chunks:['korea.json']},retired_unknown:{chunks:['unknown.json']}}},
  'catalog/japan-auction-history/manifest.json':{chunks:['japan.json']},
- 'large-europe.json':[{id:'e',market:'europe'}], 'korea.json':[{id:'k',market:'korea'}], 'unknown.json':[{id:'u',market:'china'},{id:'e2',market:'europe'}], 'japan.json':[{id:'j',market:'japan'}]};
+ 'large-europe.json':[{id:'e',market:'europe',sourceId:'mobile_de_open'}], 'korea.json':[{id:'k',market:'korea',sourceId:'encar_direct'}], 'unknown.json':[{id:'u',market:'china',sourceId:'retired_unknown'},{id:'e2',market:'europe',sourceId:'retired_unknown'}], 'japan.json':[{id:'j',market:'japan'}]};
  const reads:string[]=[];
  const reader=mock.method(LocalJsonStorage.prototype,'readJsonWithMeta',async(key:string)=>{reads.push(key);return {found:true,value:fixtures[key]??{}};});
  try {
@@ -15,13 +15,17 @@ test('market refresh skips its obsolete source chunks before I/O and retains unk
   assert.ok(!reads.includes('large-europe.json'));assert.ok(reads.includes('unknown.json'));
   reads.length=0;assert.deepEqual((await readAllOffersForMaintenance({excludeMarket:'japan'})).map(o=>o.id).sort(),['e','e2','k','u']);assert.ok(!reads.includes('japan.json'));
   assert.equal((await readAllOffersForMaintenance()).length,5);
+  reads.length=0;const streamed=[];
+  for await(const rows of iterateOffersForMaintenance({excludeMarket:'europe'}))streamed.push(...rows);
+  assert.deepEqual(streamed.map(o=>o.id).sort(),['k','u']);
+  assert.ok(!reads.includes('large-europe.json'));assert.ok(reads.includes('unknown.json'));
  }finally{reader.mock.restore();}
 });
 
 
 test('target reserve reads sequentially, excludes replaced IDs and preserves raw evidence', async () => {
  const fixtures:any={
-  'catalog/internal/manifest.json':{sources:{mobile_de_open:{chunks:['one.json','two.json','one.json']},encar_direct:{chunks:['other.json']}}},
+  'catalog/internal/manifest.json':{sources:{autoscout_europe_open:{chunks:['one.json','two.json','one.json']},mobile_de_open:{chunks:['retired.json']},encar_direct:{chunks:['other.json']}}},
   'one.json':[{id:'published',market:'europe',operational:{raw:{large:'superseded'}}},{id:'reserve',market:'europe',operational:{raw:{power:'exact'}}}],
   'two.json':[{id:'reserve2',market:'europe'}],
  };
@@ -36,6 +40,7 @@ test('target reserve reads sequentially, excludes replaced IDs and preserves raw
   assert.deepEqual(rows[0].operational?.raw,{power:'exact'});
   assert.equal(peak,1);assert.equal(reads.filter(key=>key==='one.json').length,1);
   assert.ok(!reads.includes('other.json'));
+  assert.ok(!reads.includes('retired.json'),'retired sources remain excluded from the approved reserve');
   delete fixtures['two.json'];
   await assert.rejects(readMarketMaintenanceOffers('europe'),/catalog_maintenance_chunk_missing/);
  } finally {reader.mock.restore();}

@@ -10,9 +10,9 @@ import {getJsonStorage} from "../apps/web/lib/data";
 import {cleanSavedDraft,matchingSavedCalculation,saveOfferCalculation,SavedCalculationConflict,getSavedOfferCalculation} from "../apps/web/lib/catalog/saved-offer-calculation";
 import {unseenNewLeads,latestLeadIncomingAt} from "../apps/web/lib/crm-alert-state";
 
-const draft={year:"2021",productionMonth:"11",fuel:"petrol",engineCc:"1998",powerHp:"150",powerKw:"110.3248125",deliveryCity:"Новокузнецк"};
+const draft={year:"2024",productionMonth:"11",fuel:"petrol",engineCc:"1998",powerHp:"150",powerKw:"110.3248125",deliveryCity:"Новокузнецк"};
 test("saved employee calculation survives fresh reads and price updates, rejects lost updates and missing identity",async()=>{
- const offer:any={id:`test-saved-${randomUUID()}`,market:"korea",sourceId:"encar",sourceOfferId:"lot-1",sourcePrice:20000000,sourceCurrency:"KRW",make:"Hyundai",model:"Elantra",year:2021,status:"active"};
+ const offer:any={id:`test-saved-${randomUUID()}`,market:"korea",sourceId:"encar",sourceOfferId:"lot-1",sourcePrice:20000000,sourceCurrency:"KRW",make:"Hyundai",model:"Elantra",year:2024,status:"active"};
  const today=new Date().toISOString(),readOriginal=LocalJsonStorage.prototype.readJsonWithMeta;
  const read=mock.method(LocalJsonStorage.prototype,"readJsonWithMeta",async function(this:LocalJsonStorage,key:string,fallback:any){return key==="catalog/manifest.json"?{found:true,value:{version:2,generationId:"saved-test",markets:{}}}:key.startsWith("catalog/public/offers/")?{found:true,value:{generationId:"saved-test",items:[offer]}}:key==="fees/exchange-rates.json"?{found:true,value:{updatedAt:today,EUR:{cbrRate:95,nominal:1,rateDate:today},KRW:{cbrRate:6,nominal:100,rateDate:today},USD:{cbrRate:90,nominal:1,rateDate:today}}}:readOriginal.call(this,key,fallback);});
  resetCatalogRateCache();

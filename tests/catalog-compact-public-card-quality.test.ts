@@ -3,10 +3,10 @@ import test from "node:test";
 import { isCrediblePublicOffer } from "../apps/web/lib/catalog/offer-quality";
 
 const compactSourceCard = {
-  id: "mobile-card-1",
-  sourceId: "mobile_de_open",
+  id: "encar-card-1",
+  sourceId: "encar_direct",
   sourceOfferId: "card-1",
-  market: "europe",
+  market: "korea",
   status: "active",
   make: "Toyota",
   model: "Corolla",
@@ -14,13 +14,13 @@ const compactSourceCard = {
   sourceTitle: "Toyota Corolla 2024",
   year: 2024,
   mileageKm: 12_000,
-  sourcePrice: 19_000,
-  sourceCurrency: "EUR",
-  operational: { sourceUrl: "https://suchen.mobile.de/fahrzeuge/details.html?id=1" },
+  sourcePrice: 19_000_000,
+  sourceCurrency: "KRW",
+  operational: { sourceUrl: "https://fem.encar.com/cars/detail/1" },
   cardProjectionVersion: 2,
   images: [{
     id: "",
-    url: "https://prod.pictures.autoscout24.net/listing-images/card-1.jpg",
+    url: "https://ci.encar.com/carpicture/fixture-card-1.jpg",
     size: 0,
     mimeType: "image/jpeg",
   }],

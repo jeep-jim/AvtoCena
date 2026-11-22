@@ -8,7 +8,7 @@ import {searchOffers,readPublicCatalogMarketCounts,countCatalogOffers,readCatalo
 
 test('budget with year and mileage uses only candidate blocks and keeps exact results/counts/facets',async()=>{
  const base:any={market:'korea',make:'Hyundai',model:'Avante',year:2024,totalRub:1500000,mileageKm:40000,engineCc:1598,powerHp:123,fuel:'petrol',powertrainKind:'combustion',transmission:'automatic',drive:'fwd',bodyType:'sedan',cardImageUrl:'https://example.com/car.jpg',cardProjectionVersion:3,publicVisibleRub:1500000,publicSpecificationVerified:true,calculationStatus:'ready',updatedAt:'2026-10-04T00:00:00Z'};
- const rows=[{...base,id:'match'},{...base,id:'old',year:2020},{...base,id:'mileage',mileageKm:90000},{...base,id:'unknown-mileage',mileageKm:undefined},{...base,id:'expensive',totalRub:4000000,publicVisibleRub:4000000},{...base,id:'diesel',fuel:'diesel'}];
+ const rows=[{...base,id:'match'},{...base,id:'old',year:2022},{...base,id:'mileage',mileageKm:90000},{...base,id:'unknown-mileage',mileageKm:undefined},{...base,id:'expensive',totalRub:4000000,publicVisibleRub:4000000},{...base,id:'diesel',fuel:'diesel'}];
  const unresolved:any={...base,id:'needs-modification',sourcePrice:10000,sourceCurrency:'USD',totalRub:null,publicVisibleRub:undefined,calculationStatus:'needs_modification',recoveryQualification:{status:'selection_required'}};
  unresolved.modificationSelection={version:1,status:'selection_required',binding:modificationBinding(unresolved),options:[{id:'petrol',label:'1.6',market:'korea',fuel:'petrol',powertrainKind:'combustion',engineCc:1598,powerHp:123,powerKw:90.47,evidenceIds:['fixture']}]};
  rows.push(unresolved);
@@ -38,9 +38,9 @@ test('budget with year and mileage uses only candidate blocks and keeps exact re
   assert.equal(reads.some(key=>key.includes('/projection/')||key.includes('/budget-cards-')),false,'missing landings use compact eligibility without card downloads');
   for(const filterVersion of [1,undefined] as const){
    index.filterVersion=filterVersion;
-   for(const params of [{make:'Hyundai',budgetTo:1710000,yearFrom:2022},{make:'Hyundai',model:'Avante',budgetTo:1710000,yearFrom:2022},{make:'Hyundai',model:'Avante',budgetTo:1710000,yearFrom:2022,sort:'updatedAt'},{budgetTo:1710000,yearFrom:2022},{budgetTo:1710000,yearFrom:2022,mileageTo:50000},{budgetTo:1710000,yearFrom:2022,mileageTo:50000,fuel:'petrol'},{budgetTo:1710000,yearFrom:2022,mileageTo:50000,fuel:'petrol|diesel',transmission:'automatic|cvt',drive:'fwd|awd',bodyType:'sedan|hatchback'},{budgetTo:100000,yearFrom:2022,mileageTo:50000}]){
+   for(const params of [{make:'Hyundai',budgetTo:1710000,yearFrom:2023},{make:'Hyundai',model:'Avante',budgetTo:1710000,yearFrom:2023},{make:'Hyundai',model:'Avante',budgetTo:1710000,yearFrom:2023,sort:'updatedAt'},{budgetTo:1710000,yearFrom:2023},{budgetTo:1710000,yearFrom:2023,mileageTo:50000},{budgetTo:1710000,yearFrom:2023,mileageTo:50000,fuel:'petrol'},{budgetTo:1710000,yearFrom:2023,mileageTo:50000,fuel:'petrol|diesel',transmission:'automatic|cvt',drive:'fwd|awd',bodyType:'sedan|hatchback'},{budgetTo:100000,yearFrom:2023,mileageTo:50000}]){
    resetCatalogReadCachesForTests();reads.length=0;
-   if('make' in params)await countCatalogOffers({yearFrom:2022});
+   if('make' in params)await countCatalogOffers({yearFrom:2023});
    const expected=rows.map(row=>applyDepositToProjection(row,110000)).filter(row=>catalogSearchProjectionMatches(row,params)).map(row=>row.id).sort();
    const [results,count,facets,brands]=await Promise.all([searchOffers(params),countCatalogOffers(params),readCatalogFacets(params),readCatalogBrandCounts(params)]);
    assert.deepEqual(brands.counts,expected.length?{Hyundai:expected.length}:{});
@@ -53,12 +53,12 @@ test('budget with year and mileage uses only candidate blocks and keeps exact re
   }
   }
   index.filterVersion=1;resetCatalogReadCachesForTests();reads.length=0;
-  const params={budgetTo:1710000,yearFrom:2022,mileageTo:50000};
+  const params={budgetTo:1710000,yearFrom:2023,mileageTo:50000};
   const [count,facets,brands]=await Promise.all([countCatalogOffers(params),readCatalogFacets(params),readCatalogBrandCounts(params)]);
    assert.deepEqual(brands.counts,rows.map(row=>applyDepositToProjection(row,110000)).filter(row=>catalogSearchProjectionMatches(row,params)).length?{Hyundai:rows.map(row=>applyDepositToProjection(row,110000)).filter(row=>catalogSearchProjectionMatches(row,params)).length}:{});
   assert.equal(count.total,2);assert.deepEqual(facets.makes,['Hyundai']);
   assert.equal(reads.filter(key=>key.includes('budget-cards-v2')).length,4,'price predicates replay only metadata candidates, shared by count and facets');
-  for(const params of [{make:'Hyundai'},{make:'Hyundai',model:'Avante'},{make:'Hyundai',yearFrom:2022},{bodyType:'sedan'},{bodyType:'suv'},{fuel:'petrol',transmission:'automatic',drive:'fwd'},{yearFrom:2022,mileageTo:50000}]){
+  for(const params of [{make:'Hyundai'},{make:'Hyundai',model:'Avante'},{make:'Hyundai',yearFrom:2023},{bodyType:'sedan'},{bodyType:'suv'},{fuel:'petrol',transmission:'automatic',drive:'fwd'},{yearFrom:2023,mileageTo:50000}]){
    resetCatalogReadCachesForTests();reads.length=0;
    const expected=rows.map(row=>applyDepositToProjection(row,110000)).filter(row=>catalogSearchProjectionMatches(row,params)).map(row=>row.id).sort();
    const [count,facets,brands]=await Promise.all([countCatalogOffers(params),readCatalogFacets(params),readCatalogBrandCounts(params)]);

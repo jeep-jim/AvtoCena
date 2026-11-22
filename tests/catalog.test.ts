@@ -104,14 +104,14 @@ test("catalog generation chunks stay under 500 and search loads indexed chunks o
   }));
   const offers: any[] = Array.from({ length: CATALOG_CHUNK_SIZE + 1 }, (_, i) => ({
     id: `o${i}`,
-    sourceId: "mobile_de_open",
+    sourceId: "autoscout_europe_open",
     sourceOfferId: `${i}`,
     market: "europe",
     offerType: "fixed",
     status: "active",
     make: "Toyota",
     model: ["Corolla", "Camry", "RAV4", "Yaris", "C-HR"][i % 5],
-    year: 2020 + (Math.floor(i / 5) % 6),
+    year: 2022 + (Math.floor(i / 5) % 4),
     sourcePrice: 10000,
     sourceCurrency: "EUR",
     priceMode: "fixed",
@@ -135,7 +135,7 @@ test("catalog generation chunks stay under 500 and search loads indexed chunks o
     },
     firstSeenAt: now,
     updatedAt: now,
-    operational: { sourceUrl: `https://suchen.mobile.de/fahrzeuge/details.html?id=${i}`, photoIdentityVerified: true,
+    operational: { sourceUrl: `https://www.autoscout24.com/offers/fixture-${i}`, photoIdentityVerified: true,
       semanticEvidence: {fuel:{status:'exact',value:'petrol'},engineCc:{status:'exact',value:1798},powerHp:{status:'exact',value:122}} },
   }));
   await persistCatalogOffers(offers);

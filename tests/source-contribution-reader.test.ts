@@ -3,7 +3,7 @@ import test from 'node:test';
 import {gzipSync} from 'node:zlib';
 import {verifySourceContribution, sourceContributionKey, CONTRIBUTION_SOURCE_MARKETS} from '../apps/web/lib/catalog/source-contribution-reader.mjs';
 import {buildRawInternalProvenance, verifiedRawInternalPointerDescriptor} from '../apps/web/lib/catalog/raw-internal-provenance.mjs';
-import {REQUIRED_CATALOG_SOURCES} from '../apps/web/lib/catalog/required-catalog-sources';
+import {REQUIRED_CATALOG_SOURCES, isAllowedCatalogSourceId} from '../apps/web/lib/catalog/required-catalog-sources';
 import {sourceContributionFixture, contributionDigest as hash, signContribution} from './helpers/source-contribution-fixture.mjs';
 
 const verify = f => verifySourceContribution({storage: f.storage, ...f.reference, internalManifest: f.internalManifest});
@@ -29,8 +29,15 @@ test('the same standard witness handles an approved non-Korea source, while unkn
       sha256: 'a'.repeat(64), internalManifest: f.internalManifest}), /scope|reference/);
   }
   assert.equal(f.reads.length, before);
-  assert.deepEqual(Object.fromEntries(Object.entries(REQUIRED_CATALOG_SOURCES).filter(([market]) => market !== 'japan')
-    .flatMap(([market, sources]) => sources.map(source => [source.sourceId, market]))), CONTRIBUTION_SOURCE_MARKETS);
+  const approved = Object.fromEntries(Object.entries(REQUIRED_CATALOG_SOURCES).filter(([market]) => market !== 'japan')
+    .flatMap(([market, sources]) => sources.map(source => [source.sourceId, market])));
+  // The proof namespace includes historical source IDs; it is not the current
+  // collection/publication allowlist. Name its sole retired compatibility entry.
+  assert.equal(Object.hasOwn(approved, 'mobile_de_open'), false);
+  assert.deepEqual(CONTRIBUTION_SOURCE_MARKETS, {...approved, mobile_de_open: 'europe'});
+  const historical = sourceContributionFixture({market: 'europe', sourceId: 'mobile_de_open'});
+  await assert.rejects(verify(historical), /snapshot_market/, "a Che168 witness cannot authorize a retired European source");
+  assert.equal(isAllowedCatalogSourceId('europe', 'mobile_de_open'), false);
 });
 
 test('a borrowed source can carry its witness into a new global generation only with the exact source entry and actual chunks', async () => {

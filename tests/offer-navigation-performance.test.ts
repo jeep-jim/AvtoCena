@@ -188,7 +188,8 @@ test("offer actions retain stable page slots when the mobile contact floats", ()
 
 test("offer page does not re-run source-only publication gates on compact public records", () => {
   assert.match(page, /if \(!storedOffer\) return <UnavailableOffer/);
-  assert.match(page, /if \(!retro && !directScenario && !savedCalculation && !visibleRub && !selectionRequired && !sellerPricing && !isPriceOnRequestDubicarsOffer\(raw\)\) return <UnavailableOffer/);
+  assert.match(page, /const explicitScenario = sharedScenario \|\| \(clientScenario \?/);
+  assert.match(page, /if \(!retro && !explicitScenario && !savedCalculation && !visibleRub && !selectionRequired && !sellerPricing && !isPriceOnRequestDubicarsOffer\(raw\)\) return <UnavailableOffer/);
   assert.doesNotMatch(page, /notFound\(\)/);
   assert.doesNotMatch(page, /!offer \|\| !isCrediblePublicOffer\(offer\)/);
   assert.doesNotMatch(page, /!catalogPublicPriority\(raw\)\.eligible/);

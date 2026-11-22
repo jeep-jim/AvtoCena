@@ -9,7 +9,7 @@ import { calculateOfferWithCustomerParameters, calculateOfferWithCustomerParamet
 import { LocalJsonStorage } from "../apps/web/lib/data";
 import { resetCatalogRateCache } from "../apps/web/lib/catalog/rates";
 
-const seller=():any=>({id:"test:one",sourceId:"mobile_de_open",sourceOfferId:"one",market:"europe",make:"Toyota",model:"Corolla",year:2021,
+const seller=():any=>({id:"test:one",sourceId:"autoscout_europe_open",sourceOfferId:"one",market:"europe",make:"Toyota",model:"Corolla",year:2022,
  status:"active",totalRub:null,sourcePrice:10000,sourceCurrency:"EUR",catalogPricingMode:"seller",sellerPriceRub:950000,calculationStatus:"needs_data",
  images:[{url:"https://example.test/vehicle.jpg"}],calculationSnapshot:{currencyRate:{currency:"EUR",sourcePrice:10000,effectiveRate:95,rateSource:"cbr"}}});
 

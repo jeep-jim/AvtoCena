@@ -118,7 +118,7 @@ test("uses the configured V3 two-photo admission contract across live source mar
       rawOffer,
       { ...rawOffer, market: "georgia", sourceId: "autopapa_georgia_open", sourceCurrency: "USD", operational: { sourceUrl: "https://autopapa.ge/en/car/100", photoIdentityVerified: true } },
       { ...rawOffer, market: "china", sourceId: "autohome_new_china_open", sourceCurrency: "CNY", operational: { sourceUrl: "https://www.autohome.com.cn/100/", photoIdentityVerified: true } },
-      { ...rawOffer, market: "europe", sourceId: "mobile_de_open", sourceCurrency: "EUR", operational: { sourceUrl: "https://www.mobile.de/auto-inserat/100.html", photoIdentityVerified: true } },
+      { ...rawOffer, market: "europe", sourceId: "autoscout_europe_open", sourceCurrency: "EUR", operational: { sourceUrl: "https://www.autoscout24.com/offers/fixture-100", photoIdentityVerified: true } },
     ];
     for (const offer of liveMarkets) {
       assert.equal(isCrediblePublicOffer({ ...offer, images: rawOffer.images.slice(0, 1) } as any), false, `${offer.market}: one image`);

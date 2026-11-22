@@ -15,8 +15,8 @@ const variant: any = { id: "fixture/variant-petrol", modelId: "fixture/model", n
   yearFrom: 2020, yearTo: 2026, fuel: "petrol", powertrainKind: "combustion", engineCc: 1798, powerHp: 140,
   status: "verified", evidence: [{ sourceId: "fixture-manufacturer", status: "verified", confidence: "official",
     fields: ["market", "yearFrom", "yearTo", "fuel", "powertrainKind", "engineCc", "powerHp"] }] };
-const offer = (overrides: any = {}): any => ({ id: "fixture-listing", sourceOfferId: "1", sourceId: "mobile_de_open", market: "europe", make: "Fixture", model: "Model",
-  year: 2021, offerType: "fixed", status: "active", sourcePrice: 10000, sourceCurrency: "EUR", priceMode: "fixed", bodyType: "sedan",
+const offer = (overrides: any = {}): any => ({ id: "fixture-listing", sourceOfferId: "1", sourceId: "autoscout_europe_open", market: "europe", make: "Fixture", model: "Model",
+  year: 2022, offerType: "fixed", status: "active", sourcePrice: 10000, sourceCurrency: "EUR", priceMode: "fixed", bodyType: "sedan",
   firstSeenAt: "2026-09-01T00:00:00Z", updatedAt: "2026-09-01T00:00:00Z", images: [{ id: "fixture-image", url: "https://example.invalid/car.jpg", objectKey: "", mimeType: "image/jpeg" }], ...overrides });
 const options = () => compatibleModificationOptions(offer(), [variant], variant.modelId);
 const selection = (overrides: any = {}): any => {
@@ -101,6 +101,9 @@ test("retained listing fields repair fuel; ranges, guesses and wrong identity do
   assert.equal(restored.powerHp, 140); assert.equal(restored.totalRub, null);
   assert.equal(original.powerHp, 99); assert.equal(original.totalRub, 2000000);
   assert.equal(specificationEvidenceComplete(restored), false);
+  const savedMobile = restoreSavedSourceEvidence({ ...original, sourceId: "mobile_de_open" });
+  assert.equal(savedMobile.fuel, "hybrid"); assert.equal(savedMobile.powerHp, 140);
+  assert.equal(savedMobile.totalRub, null, "saved Mobile.de parsing clears the stale delivered price");
   const valid = restoreSavedSourceEvidence(offer({ operational: { raw: { ...raw, parsed: { ...raw.parsed, fuel: "Benzin" } } } }));
   assert.equal(specificationEvidenceComplete(valid), true);
   const listBound = offer({ sourceId: "autoscout_europe_open", operational: { raw: { detailIdentityVerified: false,

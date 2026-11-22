@@ -3,14 +3,15 @@ import fs from "node:fs";
 import test from "node:test";
 import { catalogMinYearForMarket, isCatalogYearAllowed } from "../apps/web/lib/catalog/offer-quality";
 
-test("production year gates keep Japan 2008+, China 2014+, and other markets at six years", () => {
+test("production year gates retain fixed market floors and the six-year boundary", () => {
   for (const [market, minimum] of [["japan", 2008], ["china", 2014]] as const) {
     assert.equal(catalogMinYearForMarket(market), minimum);
     assert.equal(isCatalogYearAllowed(minimum - 1, market), false);
     assert.equal(isCatalogYearAllowed(minimum, market), true);
   }
-  const minimum = new Date(Date.now() + 7 * 3600000).getUTCFullYear() - 6;
+  const rollingMinimum = new Date(Date.now() + 7 * 3600000).getUTCFullYear() - 6;
   for (const market of ["korea", "uae", "europe", "georgia"]) {
+    const minimum = ['korea','europe'].includes(market) ? Math.max(2022,rollingMinimum) : rollingMinimum;
     assert.equal(catalogMinYearForMarket(market), minimum, market);
     assert.equal(isCatalogYearAllowed(minimum - 1, market), false, market);
     assert.equal(isCatalogYearAllowed(minimum, market), true, market);

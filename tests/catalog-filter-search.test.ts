@@ -37,7 +37,7 @@ test("all catalog filters use the projection when optional categorical shards ar
     }));
     await persistCatalogOffers([{
       id: "filter-target", sourceId: "encar_direct", sourceOfferId: "FILTER", market: "korea", offerType: "fixed", status: "active",
-      make: "Hyundai", model: "Avante (CN7)", year: 2021, sourcePrice: 18_000_000, sourceCurrency: "KRW", priceMode: "fixed", images,
+      make: "Hyundai", model: "Avante (CN7)", year: 2024, sourcePrice: 18_000_000, sourceCurrency: "KRW", priceMode: "fixed", images,
       totalRub: 2_021_912, mileageKm: 61_114, engineCc: 1_598, powerHp: 123, powerDataConfidence:'source_exact', powerDataSource:'synthetic_exact_fixture', fuel: "petrol", transmission: "automatic", drive: "fwd", bodyType: "sedan",
       calculationStatus: "ready", calculationSnapshot: {
         customs: { status: "ready" },
@@ -59,7 +59,7 @@ test("all catalog filters use the projection when optional categorical shards ar
     fs.rmSync(safeStoragePath(`catalog/generations/${manifest.generationId}/indexes/make/hyundai.json`), { force: true });
     fs.rmSync(safeStoragePath(`catalog/generations/${manifest.generationId}/indexes/model/hyundai-avante-cn7.json`), { force: true });
 
-    const filters = { market: "korea", make: "Hyundai", model: "Avante (CN7)", hasPrice: "yes", budgetFrom: 2_000_000, budgetTo: 2_300_000, yearFrom: 2021, yearTo: 2021, mileageFrom: 60_000, mileageTo: 62_000, engineFrom: 1_500, engineTo: 1_600, powerFrom: 120, powerTo: 160, fuel: "petrol", transmission: "automatic", drive: "fwd", bodyType: "sedan", pageSize: 10 } as const;
+    const filters = { market: "korea", make: "Hyundai", model: "Avante (CN7)", hasPrice: "yes", budgetFrom: 2_000_000, budgetTo: 2_300_000, yearFrom: 2024, yearTo: 2024, mileageFrom: 60_000, mileageTo: 62_000, engineFrom: 1_500, engineTo: 1_600, powerFrom: 120, powerTo: 160, fuel: "petrol", transmission: "automatic", drive: "fwd", bodyType: "sedan", pageSize: 10 } as const;
     for (const [name, value] of Object.entries(filters)) {
       if (name === "pageSize") continue;
       const isolated = await searchOffers({ market: "korea", [name]: value, pageSize: 10 });
@@ -90,7 +90,7 @@ test("all catalog filters use the projection when optional categorical shards ar
       assert.equal((await countCatalogOffers({market:'korea',engineTo:1600,powerTo:160})).total,1);
       assert.equal((await countCatalogOffers({market:'korea',engineTo:1500,powerTo:160})).total,0);
     } finally {storage.readJsonWithMeta=originalRead;resetCatalogReadCachesForTests();}
-    await countCatalogOffers({market:'korea',yearFrom:2021});
+    await countCatalogOffers({market:'korea',yearFrom:2024});
     let projectionReads = 0;
     let brandProjectionReads = 0;
     storage.readJsonWithMeta = async (relativePath: string, fallback: unknown) => {
@@ -143,7 +143,7 @@ test("all catalog filters use the projection when optional categorical shards ar
       assert.deepEqual((await searchOffers(filters)).items.map(offer=>offer.id),["filter-target"]);
       await storage.writeJson("catalog/public/facets.json",{generationId:"future-staging",makes:[],models:[]});
       resetCatalogReadCachesForTests();
-      assert.deepEqual((await searchOffers({market:"korea",yearFrom:2021,yearTo:2021,pageSize:10})).items.map(offer=>offer.id),["filter-target"],"a staged market alias must be skipped before its large body is downloaded");
+      assert.deepEqual((await searchOffers({market:"korea",yearFrom:2024,yearTo:2024,pageSize:10})).items.map(offer=>offer.id),["filter-target"],"a staged market alias must be skipped before its large body is downloaded");
     } finally { storage.readJsonWithMeta=originalRead; }
 
     fs.rmSync(safeStoragePath(`catalog/generations/${manifest.generationId}/indexes/projection/korea.json`), { force: true });
