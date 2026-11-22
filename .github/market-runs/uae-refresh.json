@@ -1,11 +1,11 @@
 {
-  "operation": "owner-refresh-paid-dubicars-to-reg-20261121",
-  "requestedAt": "2026-11-21T14:43:03Z",
+  "operation": "refresh-dubicars-with-original-rate-and-serving-index",
+  "requestedAt": "2026-11-22T00:52:28.774235+00:00",
   "market": "uae",
   "publishMarkets": [
     "uae"
   ],
   "resetCursors": true,
   "dubicarsOnly": true,
-  "reason": "Owner requested a new full paid DubiCars download into REG storage, preparation and publication of UAE alone. Japan and Green Corner are outside this operation."
+  "reason": "The previous collection predated per-feed exchange-rate capture. Take a new complete paid DubiCars snapshot with its own immutable AED, EUR and USD rates and publish from REG."
 }
