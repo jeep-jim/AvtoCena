@@ -1,12 +1,12 @@
 {
-  "operation": "publish-owned-autoscout-with-verified-serving-index",
-  "requestedAt": "2026-11-22T00:48:23.781514+00:00",
+  "operation": "publish-owned-autoscout-with-verified-build-and-serving-version",
+  "requestedAt": "2026-11-22T02:35:13Z",
   "market": "europe",
   "publishMarkets": [
     "europe"
   ],
   "resetCursors": false,
-  "reason": "Publish the completed AutoScout24 intake using the verified index from the installed image and the original exchange rates.",
+  "reason": "Reuse the verified European intake and original rates with the calculator identities pinned by the serving image deployment.",
   "reuseRunId": "44919202807",
   "refreshMarkets": []
 }

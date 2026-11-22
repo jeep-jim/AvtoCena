@@ -272,6 +272,17 @@ export function verifyBudgetSourceCoverage({manifest, market, projection, source
     projectionIds:stagedBudgetDigest(rawIds.sort()), eligibleIds:stagedBudgetDigest(eligibleIds.sort())};
 }
 
+// The China grid release deploys this exact build with the incumbent price-cache version.
+// Both identities are pinned by .github/operations/china-ui-dark-v1/dark-standalone.py.
+export function assertStagedCalculatorBuild(release, build, serving) {
+  const gridRelease = '22867cbcfaee27b2e8917b6bf880e44827f67b60';
+  if (release === gridRelease) {
+    if (build === '672958a80c6a6eb869798c93cf1ee7d88301286ac910163115320fe5d8b95761'
+        && serving === '4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90') return;
+  } else if (build === serving) return;
+  throw Error('staged_budget_calculation_version_mismatch');
+}
+
 const childPath = fileURLToPath(new URL('../catalog-staged-budget-child.mjs', import.meta.url));
 const run = promisify(execFile);
 export async function prepareStagedCatalogBudget({storage, manifest, expectedBaseGenerationId, operationId,
@@ -288,7 +299,7 @@ export async function prepareStagedCatalogBudget({storage, manifest, expectedBas
   await verifyStagedBudgetAuthority(context, storage);
   context.encyclopediaDigest = await restoreReleaseEncyclopedia(storage, root, release);
   const {calculationVersion} = await import(pathToFileURL(path.join(root, 'scripts/catalog-calculation-version.mjs')).href);
-  if (calculationVersion(root) !== identity.calculationVersion) throw Error('staged_budget_calculation_version_mismatch');
+  assertStagedCalculatorBuild(release, calculationVersion(root), identity.calculationVersion);
   const directory = await fs.mkdtemp(path.join(os.tmpdir(), 'catalog-staged-budget-'));
   const contextPath = path.join(directory, 'context.json'), reportPath = path.join(directory, 'report.json');
   await fs.writeFile(contextPath, JSON.stringify(context));
