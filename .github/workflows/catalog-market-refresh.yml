@@ -512,8 +512,8 @@ jobs:
           CATALOG_REBUILD_MARKETS: ${{ matrix.market }}
           CATALOG_REBUILD_PUBLISH_REPORT: catalog-weekly-${{ matrix.market }}-publish-report.json
         run: node --import tsx scripts/record-market-refresh.mjs
-      - name: Audit the active catalog after all market publications
-        run: node --import tsx scripts/catalog-audit-visible-calculation-coverage.mjs
+      - name: Audit the published market
+        run: node --import tsx scripts/catalog-audit-visible-calculation-coverage.mjs --market '${{ matrix.market }}'
       - uses: actions/upload-artifact@v4
         if: always()
         with:
