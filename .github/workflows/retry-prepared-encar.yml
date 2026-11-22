@@ -1,0 +1,118 @@
+name: Retry the verified prepared Encar intake
+on:
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/korea-prepared-retry.json']
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: catalog-refresh-korea
+  cancel-in-progress: false
+jobs:
+  verify:
+    if: github.repository == 'jeep-jim/AvtoCena' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    outputs:
+      verified: ${{ steps.verify.outputs.verified || 'false' }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Verify the approved source, saved intake and unchanged live catalog
+        id: verify
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          node --input-type=module <<'VERIFY_PREPARED_ENCAR_RETRY'
+          import fs from 'node:fs';
+          const markerPath='.github/market-runs/korea-prepared-retry.json';
+          const repository='jeep-jim/AvtoCena', repositoryId=1289722938;
+          const sourceSha='c6859fc4658759b60c3ed38709bf9de0e95c041c';
+          const preparedRun=45002244430, failedRun=45004098806, artifactId=14747335552;
+          const artifactDigest='sha256:a68b622760549b03db92dfb5e34b32c9bbad551f98a55de87f55d0a5c3b49799';
+          const release='22867cbcfaee27b2e8917b6bf880e44827f67b60';
+          const calculation='4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90';
+          const generation='gen_1794878284419_a611dfcf';
+          const api='https://api.github.com/repos/'+repository;
+          const check=(condition,code)=>{if(!condition)throw Error(code);};
+          fs.appendFileSync(process.env.GITHUB_OUTPUT,'verified=false\n');
+          async function getJson(url,label) {
+            const headers={'accept':'application/json','cache-control':'no-cache'};
+            if(url.startsWith(api+'/')) {
+              headers.authorization='Bearer '+process.env.GH_TOKEN;
+              headers['X-GitHub-Api-Version']='2022-11-28';
+            }
+            const response=await fetch(url,{headers,redirect:'error',signal:AbortSignal.timeout(30000)});
+            check(response.ok,label+'_http_'+response.status);
+            const text=await response.text();
+            check(text.length<=1048576,label+'_response_too_large');
+            return JSON.parse(text);
+          }
+          function checkRun(run,id,workflow,event,conclusion) {
+            check(run?.id===id && run.run_attempt===1 && run.path===workflow
+              && run.event===event && run.head_branch==='main' && run.head_sha===sourceSha
+              && run.repository?.id===repositoryId && run.head_repository?.id===repositoryId,
+              'retry_run_identity_'+id);
+            check(run.status==='completed' && run.conclusion===conclusion,'retry_run_state_'+id);
+          }
+          try {
+            check(process.env.GITHUB_REPOSITORY===repository
+              && process.env.GITHUB_REPOSITORY_ID===String(repositoryId)
+              && process.env.GITHUB_REF==='refs/heads/main'
+              && process.env.GITHUB_EVENT_NAME==='push'
+              && /^[a-f0-9]{40}$/.test(process.env.GITHUB_SHA||'')
+              && !!process.env.GH_TOKEN,'retry_event_invalid');
+            check(fs.lstatSync(markerPath).isFile(),'retry_marker_type');
+            const marker=JSON.parse(fs.readFileSync(markerPath,'utf8'));
+            check(marker?.version===1 && marker.operation==='retry-prepared-encar-45002244430'
+              && /^[a-f0-9]{40}$/.test(marker.approvedSourceSha||'')
+              && Object.keys(marker).sort().join(',')==='approvedSourceSha,operation,version',
+              'retry_marker_invalid');
+            const commit=await getJson(api+'/commits/'+process.env.GITHUB_SHA,'retry_trigger_commit');
+            check(commit.sha===process.env.GITHUB_SHA && commit.parents?.length===1
+              && commit.parents[0].sha===marker.approvedSourceSha,'retry_source_parent_changed');
+            check(commit.files?.length===1 && commit.files[0].filename===markerPath
+              && ['added','modified'].includes(commit.files[0].status)
+              && !commit.files[0].previous_filename,'retry_code_changed');
+            const [prepared,failed,artifact,health,catalog]=await Promise.all([
+              getJson(api+'/actions/runs/'+preparedRun,'retry_prepared_run'),
+              getJson(api+'/actions/runs/'+failedRun,'retry_failed_run'),
+              getJson(api+'/actions/artifacts/'+artifactId,'retry_intake_artifact'),
+              getJson('https://avtocena.com/api/health','retry_live_health'),
+              getJson('https://avtocena.com/api/catalog/search?market=korea&source=existing&page=1&pageSize=1','retry_live_catalog')
+            ]);
+            checkRun(prepared,preparedRun,'.github/workflows/prepare-paid-encar-intake.yml','push','success');
+            checkRun(failed,failedRun,'.github/workflows/publish-prepared-encar.yml','workflow_run','failure');
+            check(artifact.id===artifactId && artifact.name==='catalog-intake-korea'
+              && artifact.expired===false && artifact.digest===artifactDigest
+              && artifact.workflow_run?.id===preparedRun
+              && artifact.workflow_run.repository_id===repositoryId
+              && artifact.workflow_run.head_repository_id===repositoryId
+              && artifact.workflow_run.head_sha===sourceSha
+              && artifact.workflow_run.head_branch==='main','retry_artifact_changed');
+            check(health.ok===true && health.releaseSha===release,'retry_live_release_changed');
+            check(health.calculationVersion===calculation,'retry_live_calculation_changed');
+            check(catalog.ok===true && catalog.generationId===generation,'retry_live_generation_changed');
+            fs.appendFileSync(process.env.GITHUB_OUTPUT,'verified=true\n');
+            console.log(JSON.stringify({verified:true,approvedSourceSha:marker.approvedSourceSha,
+              preparedRun,failedRun,artifactId,release,calculation,generation,supplierRequests:0}));
+          } catch(error) {
+            console.error(error instanceof Error?error.message:'retry_verification_failed');
+            process.exitCode=1;
+          }
+          VERIFY_PREPARED_ENCAR_RETRY
+  publish:
+    needs: verify
+    if: needs.verify.result == 'success' && needs.verify.outputs.verified == 'true'
+    uses: ./.github/workflows/catalog-market-refresh.yml
+    with:
+      market: korea
+      prepared_encar_run: '45002244430'
+      prepared_encar_self: false
+    secrets: inherit

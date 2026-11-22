@@ -289,14 +289,18 @@ export function assertStagedCalculatorBuild(release, build, serving) {
 
 const childPath = fileURLToPath(new URL('../catalog-staged-budget-child.mjs', import.meta.url));
 const run = promisify(execFile);
-export async function prepareStagedCatalogBudget({storage, manifest, expectedBaseGenerationId, operationId,
-  runtimeRoot = process.env.CATALOG_BUDGET_RUNTIME_ROOT, release = process.env.CATALOG_BUDGET_RUNTIME_RELEASE}) {
-  if (storage.driver !== 'object' || !runtimeRoot || !SHA.test(release || '')) throw Error('staged_budget_runtime_required');
-  const root = path.resolve(runtimeRoot);
+export function assertStagedRuntimeSource(root, release) {
+  if (!root || !SHA.test(release || '')) throw Error('staged_budget_runtime_required');
   const source = execFileSync('git', ['rev-parse', 'HEAD'], {cwd:root, encoding:'utf8'}).trim();
   if (source !== release || execFileSync('git', ['diff', '--name-only', 'HEAD', '--', 'apps/web/lib', 'packages', 'data', 'scripts'], {cwd:root, encoding:'utf8'}).trim()) {
     throw Error('staged_budget_runtime_source_changed');
   }
+}
+export async function prepareStagedCatalogBudget({storage, manifest, expectedBaseGenerationId, operationId,
+  runtimeRoot = process.env.CATALOG_BUDGET_RUNTIME_ROOT, release = process.env.CATALOG_BUDGET_RUNTIME_RELEASE}) {
+  if (storage.driver !== 'object' || !runtimeRoot || !SHA.test(release || '')) throw Error('staged_budget_runtime_required');
+  const root = path.resolve(runtimeRoot);
+  assertStagedRuntimeSource(root, release);
   const [identity, base] = await Promise.all([readLiveBudgetIdentity(), storage.readJsonWithMeta('catalog/manifest.json', null)]);
   if (identity.release !== release) throw Error('staged_budget_live_calculator_changed');
   const context = {version:1, ...identity, manifest, expectedBaseGenerationId, baseEtag:base.etag, operationId};

@@ -13,7 +13,7 @@
 | Рынок | UTC+7 | Интервал | Последний известный результат |
 | --- | --- | --- | --- |
 | Китай | 21:00 | Ежедневно | Сохранены загрузка и prepared intake; автоматическое публичное продолжение не подключено |
-| Корея | 00:00 | 2 дня | [45004098806](https://github.com/jeep-jim/AvtoCena/actions/runs/45004098806): terminal результат ещё нужно проверить |
+| Корея | 00:00 | 2 дня | [45004098806](https://github.com/jeep-jim/AvtoCena/actions/runs/45004098806): failure на retained Europe coverage; исправленные характеристики ещё не опубликованы |
 | ОАЭ | 00:00 | 2 дня | [44990370917](https://github.com/jeep-jim/AvtoCena/actions/runs/44990370917), попытка 2: terminal результат ещё нужно проверить |
 | Грузия | 00:00 | 2 дня | [44968899905](https://github.com/jeep-jim/AvtoCena/actions/runs/44968899905): MyAuto transport failure; intake неполон |
 | Европа | 00:00 | 3 дня | [44976801536](https://github.com/jeep-jim/AvtoCena/actions/runs/44976801536): coverage guard остановил публикацию; нужен исправленный workflow |
@@ -40,7 +40,7 @@ Adapter сохраняет только `error.message`; route и bridge доп�
 
 ## Следующие действия
 
-1. Korea и UAE на 19:41 ещё выполняются. Дождаться terminal состояния, не создавать пересекающиеся writers; затем проверить публичные карточки и поля.
+1. Korea завершилась failure: использовать готовый intake после исправления совместимости индексов; [короткий разбор и проверка характеристик](../operations/korea-characteristics.md). Terminal результат UAE ещё нужно проверить. Пересекающиеся writers не запускать.
 2. Европу повторять только из сохранённого intake на исправленном workflow, без ослабления retained-market coverage.
 3. Завершить независимую публикацию Китая с индексом и действующими guards. Старые одноразовые rev5 pins не менять; до принятия нового среза сохранять текущий.
 4. Overview: обычные триггеры — cron 17:05 UTC и завершение UAE, manual на main с inputs `{}`, существующий push marker. Listener завершения Korea paid publish отсутствует. Весь main как runtime не выпускать.
