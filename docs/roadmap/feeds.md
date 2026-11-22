@@ -1,6 +1,6 @@
 # Фиды и расписания
 
-Обновлено: 22.11.2026, Asia/Krasnoyarsk. Готовность всех фидов и новая публикация Китая не подтверждены.
+Проверено: 22.11.2026, 19:41 Asia/Krasnoyarsk. Готовность всех фидов и новая публикация Китая не подтверждены.
 
 ## Контракт
 
@@ -24,6 +24,8 @@
 
 [CI 45022338709](https://github.com/jeep-jim/AvtoCena/actions/runs/45022338709) и [45022383527](https://github.com/jeep-jim/AvtoCena/actions/runs/45022383527) завершились успешно, включая production build. PR принят в main: `2686cc203a1dd5e38b38d29d84423145f2aeeb16`. Установка нового runtime сайта этим merge не выполнялась.
 
+[Overview 45023361500](https://github.com/jeep-jim/AvtoCena/actions/runs/45023361500) завершился успешно на исправленном main. Для `gen_1794878284419_a611dfcf` подтверждены `alreadyPrepared:true` на 22, 23 и 24 ноября. Установленный 22867 честно вернул `supported:false, prepared:false, reason:known_pre_helper_release`; это не заявленная готовность отсутствующего editorial helper. Ошибка совместимости устранена.
+
 ## Китай: сохранённый вход публикации
 
 [Загрузка 44945974384](https://github.com/jeep-jim/AvtoCena/actions/runs/44945974384): 5 530 событий, 278 страниц, cursor 13205327. [Подготовка 44947482013](https://github.com/jeep-jim/AvtoCena/actions/runs/44947482013): 290 560 observations. Публичный Китай этим не переключён.
@@ -38,7 +40,7 @@ Adapter сохраняет только `error.message`; route и bridge доп�
 
 ## Следующие действия
 
-1. Проверить запуск `regcloud-overview.yml` после обновления существующего push marker на main. Обычные триггеры: cron 17:05 UTC и завершение UAE; manual inputs `{}`. Listener завершения Korea paid publish отсутствует.
-2. У live 22867 нет editorial-home helper: сохранять честные `supported:false, prepared:false`; обычный overview должен подготовиться. Не выпускать весь main как runtime.
-3. Перед повтором Korea/UAE проверить terminal состояния, не создавать пересекающиеся writers. Затем проверить публичные карточки и поля. Европу повторять только из сохранённого intake на исправленном workflow, без ослабления retained-market coverage.
-4. Завершить независимую публикацию Китая с индексом и действующими guards. Старые одноразовые rev5 pins не менять; до принятия нового среза сохранять текущий.
+1. Korea и UAE на 19:41 ещё выполняются. Дождаться terminal состояния, не создавать пересекающиеся writers; затем проверить публичные карточки и поля.
+2. Европу повторять только из сохранённого intake на исправленном workflow, без ослабления retained-market coverage.
+3. Завершить независимую публикацию Китая с индексом и действующими guards. Старые одноразовые rev5 pins не менять; до принятия нового среза сохранять текущий.
+4. Overview: обычные триггеры — cron 17:05 UTC и завершение UAE, manual на main с inputs `{}`, существующий push marker. Listener завершения Korea paid publish отсутствует. Весь main как runtime не выпускать.
