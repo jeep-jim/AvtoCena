@@ -7,10 +7,24 @@ import {execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {calculationVersion} from '../scripts/catalog-calculation-version.mjs';
 import {EDITORIAL_HEALTH_URL,KNOWN_PRE_EDITORIAL_RELEASES,validateEditorialHealth,readEditorialHealth,
- assertEditorialHealth,installedEditorialSupported,editorialPreparationFetch,prepareInstalledEditorial} from '../scripts/catalog-editorial-runtime.mjs';
+ assertEditorialHealth,assertEditorialCalculatorBuild,installedEditorialSupported,editorialPreparationFetch,prepareInstalledEditorial} from '../scripts/catalog-editorial-runtime.mjs';
 
 const sha='a'.repeat(40),calc='b'.repeat(64),health={ok:true,releaseSha:sha,calculationVersion:calc};
 const objectEnv={YC_OBJECT_STORAGE_ENDPOINT:'https://s3.regru.cloud',YC_OBJECT_STORAGE_BUCKET:'avtocena-staging-8120751',YC_OBJECT_STORAGE_PREFIX:'migration-staging/full-20261011/'};
+test('editorial preparation accepts only the exact deployed grid calculator binding',()=>{
+ const expected={release:'22867cbcfaee27b2e8917b6bf880e44827f67b60',
+  calculationVersion:'4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90'};
+ const build='672958a80c6a6eb869798c93cf1ee7d88301286ac910163115320fe5d8b95761';
+ assert.doesNotThrow(()=>assertEditorialCalculatorBuild(expected,build));
+ for(const [identity,source] of [
+  [{...expected,release:'22867cbcfaee27b2e8917b6bf880e44827f67b61'},build],
+  [{...expected,calculationVersion:calc},build],
+  [expected,'c'.repeat(64)],
+  [expected,expected.calculationVersion],
+ ])assert.throws(()=>assertEditorialCalculatorBuild(identity,source),/editorial_runtime_calculation_mismatch/);
+ assert.doesNotThrow(()=>assertEditorialCalculatorBuild({release:sha,calculationVersion:calc},calc));
+ assert.throws(()=>assertEditorialCalculatorBuild({release:sha,calculationVersion:calc},build),/editorial_runtime_calculation_mismatch/);
+});
 test('fixed health reader validates a complete bounded response and exact release/calculator',async()=>{
  const actual=await readEditorialHealth(async(url,options)=>{
   assert.equal(url,EDITORIAL_HEALTH_URL);assert.equal(options.redirect,'error');assert.equal(options.headers['cache-control'],'no-cache');
@@ -120,6 +134,7 @@ test('only the explicit pre-helper sources may skip the helper without an accept
   '83ff17075e9188dcf227c8752dc064248d5f42e0',
   'e4f2781ed52f12f53430118bea51ef150608ccfe',
   '7f9165125edc773221da8e17a5ed39f3592db31c',
+  '22867cbcfaee27b2e8917b6bf880e44827f67b60',
  ]);
  assert.equal(Object.isFrozen(KNOWN_PRE_EDITORIAL_RELEASES),true);
  for(const release of KNOWN_PRE_EDITORIAL_RELEASES)assert.equal(await installedEditorialSupported(f.root,release),false);
@@ -142,6 +157,17 @@ test('known homepage scheduling source cannot skip exact installed checkout vali
  const expected={...f.expected,release:'7f9165125edc773221da8e17a5ed39f3592db31c'};
  assert.equal(await installedEditorialSupported(f.root,expected.release),false);
  await assert.rejects(prepareInstalledEditorial({root:f.root,expected,readHealth:async()=>({...expected})}),/editorial_runtime_checkout_mismatch/);
+ assert.deepEqual(f.events,[]);assert.deepEqual(f.writes,[]);await f.assertClean();
+});
+
+test('verified grid release may lack the editorial helper but still requires its exact calculator and checkout',async t=>{
+ const f=await fixture(t,{helper:false});
+ const expected={release:'22867cbcfaee27b2e8917b6bf880e44827f67b60',
+  calculationVersion:'4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90'};
+ assertEditorialCalculatorBuild(expected,'672958a80c6a6eb869798c93cf1ee7d88301286ac910163115320fe5d8b95761');
+ assert.equal(await installedEditorialSupported(f.root,expected.release),false);
+ await assert.rejects(installedEditorialSupported(f.root,'22867cbcfaee27b2e8917b6bf880e44827f67b61'),/editorial_runtime_helper_missing/);
+ await assert.rejects(prepareInstalledEditorial({root:f.root,expected,readHealth:async()=>expected}),/editorial_runtime_checkout_mismatch/);
  assert.deepEqual(f.events,[]);assert.deepEqual(f.writes,[]);await f.assertClean();
 });
 
