@@ -1,11 +1,13 @@
 {
-  "operation": "refresh-dubicars-with-original-rate-and-serving-index",
-  "requestedAt": "2026-11-22T00:52:28.774235+00:00",
+  "operation": "publish-saved-dubicars-with-serving-encyclopedia",
+  "requestedAt": "2026-11-22T05:39:35.651Z",
   "market": "uae",
   "publishMarkets": [
     "uae"
   ],
-  "resetCursors": true,
+  "resetCursors": false,
   "dubicarsOnly": true,
-  "reason": "The previous collection predated per-feed exchange-rate capture. Take a new complete paid DubiCars snapshot with its own immutable AED, EUR and USD rates and publish from REG."
+  "reason": "Publish the completed DubiCars archive at its own rates and build the market indexes with the verified serving encyclopedia.",
+  "reuseRunId": "44968751012",
+  "refreshMarkets": []
 }

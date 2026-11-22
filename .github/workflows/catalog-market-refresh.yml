@@ -464,6 +464,19 @@ jobs:
           JSON_STORAGE_DRIVER: local
           CATALOG_LIVE_RATE_DISABLED: 'true'
         run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test --test-concurrency=1 tests/catalog-staged-budget.test.ts
+      - name: Restore the serving encyclopedia before building the market indexes
+        if: contains(fromJSON('["europe","korea","uae","georgia"]'), matrix.market)
+        env:
+          SERVING_RELEASE: ${{ steps.budget_runtime.outputs.release }}
+        run: |
+          node --import tsx --input-type=module <<'JS'
+          import {getJsonStorage} from './apps/web/lib/data.ts';
+          import {readCalculationIndex} from './apps/web/lib/encyclopedia/calculation-index.ts';
+          import {restoreReleaseEncyclopedia} from './scripts/encyclopedia/restore-calculation-index.mjs';
+          const digest = await restoreReleaseEncyclopedia(getJsonStorage(), process.cwd(), process.env.SERVING_RELEASE);
+          if (!digest || readCalculationIndex()?.digest !== digest) throw Error('publisher_encyclopedia_index_mismatch');
+          console.log(JSON.stringify({stage:'publisher_encyclopedia_verified', release:process.env.SERVING_RELEASE, digest}));
+          JS
       - name: Publish markets through calculation and retention guards
         env:
           CATALOG_BUDGET_RUNTIME_ROOT: ${{ github.workspace }}/.catalog-serving-runtime

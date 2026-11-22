@@ -266,6 +266,10 @@ export function verifyBudgetSourceCoverage({manifest, market, projection, source
   if (selected.size !== source.length || sourceIds.some(id => !raw.has(id))) throw Error('staged_budget_selector_identity_invalid:' + market);
   const eligibleIds = prepareRows(projection.items).map(row => row.id);
   if (new Set(eligibleIds).size !== eligibleIds.length || eligibleIds.some(id => !selected.has(id))) {
+    const missing = eligibleIds.filter(id => !selected.has(id));
+    console.error(JSON.stringify({stage:'staged_budget_source_coverage_mismatch', market, generationId:manifest.generationId,
+      eligibleRows:eligibleIds.length, selectorRows:sourceIds.length, duplicateEligibleRows:eligibleIds.length - new Set(eligibleIds).size,
+      missingRows:missing.length, missingSample:missing.slice(0,10)}));
     throw Error('staged_budget_eligible_source_missing:' + market);
   }
   return {projectionRows:rawIds.length, selectorRows:sourceIds.length, eligibleRows:eligibleIds.length,
