@@ -121,11 +121,12 @@ test('overview readiness rejects missing, blank, untrimmed, foreign or duplicate
 test('future builders reevaluate raw age evidence without source fetches or current-cache contamination',async(t)=>{
   let fetches=0;t.mock.method(globalThis,'fetch',async()=>{fetches++;throw Error('source_fetch_forbidden');});
   const f=fixture();
-  const base:any={market:'korea',make:'Kia',model:'K5',year:2020,cardProjectionVersion:3,
+  f.setClock(new Date('2028-10-26T16:59:00Z'));
+  const base:any={market:'korea',make:'Kia',model:'K5',year:2022,cardProjectionVersion:3,
     cardImageUrl:'https://example.test/car.jpg',fuel:'petrol',powertrainKind:'combustion',bodyType:'sedan',
     engineCc:1999,powerHp:160,powerKw:117.68,icePowerKw:117.68,utilizationPowerKw:117.68,
     publicVisibleRub:3000000,publicSpecificationVerified:true,totalRub:3000000,sourcePrice:30000000,sourceCurrency:'KRW'};
-  const rows=[{...base,id:'expires',inventorySourceDate:'2020-10-26'},{...base,id:'retained',inventorySourceDate:'2020-10-28'}];
+  const rows=[{...base,id:'expires',inventorySourceDate:'2022-10-26'},{...base,id:'retained',inventorySourceDate:'2022-10-28'}];
   const original=JSON.stringify(rows);
   const result=await stageCatalogPageWindow({...f.options,markets:['korea'],rows,rowsByMarket:new Map([['korea',rows]]),
     buildLanding:(g,m,r,now)=>buildCatalogMarketLanding(g,m,r,{now}),

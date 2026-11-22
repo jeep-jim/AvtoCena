@@ -1,12 +1,12 @@
 {
-  "operation": "publish-sealed-autoscout-europe",
-  "requestedAt": "2026-11-21T15:56:12.970512+00:00",
+  "operation": "publish-owned-autoscout-with-verified-serving-index",
+  "requestedAt": "2026-11-22T00:48:23.781514+00:00",
   "market": "europe",
   "publishMarkets": [
     "europe"
   ],
   "resetCursors": false,
-  "reason": "Apply the recorded 2022 floor to Europe alone using the verified AutoScout24 archive and its original FX cut. Preserve published Korean rows until their own refresh.",
+  "reason": "Publish the completed AutoScout24 intake using the verified index from the installed image and the original exchange rates.",
   "reuseRunId": "44919202807",
   "refreshMarkets": []
 }

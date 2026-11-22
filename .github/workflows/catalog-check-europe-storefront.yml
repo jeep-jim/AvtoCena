@@ -26,6 +26,10 @@ jobs:
             const published = jobs.some(job => job.name.endsWith('publish (europe)') &&
               job.steps?.some(step => step.name === 'Publish markets through calculation and retention guards' && step.conclusion === 'success'))
             core.setOutput('published', String(published))
+            if (!published && jobs.some(job => job.name.endsWith('publish (europe)') &&
+              ['failure','cancelled','timed_out'].includes(job.conclusion))) {
+              core.setFailed('Europe publication failed before the live storefront could be checked')
+            }
       - uses: actions/download-artifact@v4
         if: steps.parent.outputs.published == 'true'
         with:
