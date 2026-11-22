@@ -10,6 +10,8 @@ import {createChinaFixedCityViews,fixedChinaCityViewRef,type ChinaFixedCityRefs,
 import {DELIVERY_TARIFF_VERSION} from './city-delivery';
 import type {VehicleOffer} from './types';
 import {createChinaSelectorFacets,chinaSelectorNavigationQuery,summarizeChinaSelectorPart,type ChinaSelectorPart} from './prepared-china-streaming-selector';
+import {selectPreparedChinaFilterPage,type PreparedChinaFilterIndexRef} from './prepared-china-filter-index';
+import type {CatalogSearchParams} from './types';
 
 const ACTIVE='catalog/manifest.json',MAX=4*1024*1024,MAX_CHUNKS=2_000;
 const SHA=/^[a-f0-9]{64}$/,GEN=/^gen_\d{13}_[a-z0-9]{1,64}$/,CHUNK=/^chunk-\d{4,10}$/;
@@ -18,7 +20,7 @@ const hash=(data:Buffer)=>createHash('sha256').update(data).digest('hex');
 const json=(value:unknown)=>Buffer.from(JSON.stringify(value));
 const parse=<T>(value:Buffer)=>JSON.parse(value.toString('utf8')) as T;
 const {isArray}=Array;
-type Directory={version:1;generationId:string;marketDigest:string;validUntil:number;legalValidUntil?:number;rows:number;chunkSha256:string[];idRoots?:Array<string|null>;modelView?:PreparedChinaModelViewRef;fixedCityViews?:ChinaFixedCityRefs;deliveryTariffVersion?:string;streamingSelector?:true;navigationFacets?:CatalogFacets};
+type Directory={version:1;generationId:string;marketDigest:string;validUntil:number;legalValidUntil?:number;rows:number;chunkSha256:string[];idRoots?:Array<string|null>;modelView?:PreparedChinaModelViewRef;fixedCityViews?:ChinaFixedCityRefs;deliveryTariffVersion?:string;streamingSelector?:true;navigationFacets?:CatalogFacets;filterIndex?:PreparedChinaFilterIndexRef};
 type Chunk={version:1;generationId:string;chunk:string;parts:PreparedPriceCardDescriptor[];selectors?:ChinaSelectorPart[]};
 type Projection={generationId:string;items:CatalogSearchProjection[]};
 const location=(g:string)=>`catalog/generations/${g}/indexes/prepared-china-read-v1/`;
@@ -152,9 +154,13 @@ export async function openPreparedChinaSnapshot(m:CatalogPreparedChinaManifest,
   const ref=fixedChinaCityViewRef(dir.fixedCityViews,scope);
   return ref?selectPreparedChinaModelPage(m.generationId,ref,input,(key,checksum)=>readObject(key,checksum)):null;
  };
+ const filterPage=async(params:CatalogSearchParams,input:Parameters<typeof selectPreparedChinaFilterPage>[3])=>{
+  if(!Object.hasOwn(dir,'filterIndex'))return null;
+  return selectPreparedChinaFilterPage({generationId:m.generationId,marketDigest:dir.marketDigest,rows:dir.rows},dir.filterIndex!,params,input,readObject);
+ };
  return {generationId:m.generationId,chunks:[...c.chunks],rows:c.count,validUntil:dir.validUntil,legalValidUntil:acceptedLegalUntil,idRoots:dir.idRoots,
   modelView:dir.modelView,fixedCityViews:dir.fixedCityViews,deliveryTariffVersion:dir.deliveryTariffVersion,
-  directorySha256:marker.directorySha256,streamingSelector:dir.streamingSelector,navigationFacets:dir.navigationFacets,readChunk,assertCurrent,locate,modelPage,cityPage,canonicalWindow};
+  directorySha256:marker.directorySha256,streamingSelector:dir.streamingSelector,navigationFacets:dir.navigationFacets,filterIndex:dir.filterIndex,readChunk,assertCurrent,locate,modelPage,cityPage,filterPage,canonicalWindow};
 }
 
 export async function readActivePreparedChinaFixturePart(storage:JsonStorage,chunk:string,part:number){

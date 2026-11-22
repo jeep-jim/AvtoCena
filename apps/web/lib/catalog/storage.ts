@@ -875,7 +875,14 @@ export function catalogSearchProjectionMatches(row: CatalogSearchProjection, par
     const make=cleanFacet(identity.make).toLocaleLowerCase("ru-RU");
     return catalogMakeFilterValues(params.make).some(value=>cleanFacet(value).toLocaleLowerCase("ru-RU")===make);
   }
-  row = applyCatalogEditorialSpecifications(preparedProjectionRows.get(row) || safePublicPricing(row));
+  row = normalizedCatalogSearchProjection(row);
+  return catalogNormalizedProjectionMatches(row, params, modelKeys);
+}
+/** The independently prepared selector records these exact resolved fields. */
+export function normalizedCatalogSearchProjection(row: CatalogSearchProjection) {
+  return applyCatalogEditorialSpecifications(preparedProjectionRows.get(row) || safePublicPricing(row));
+}
+function catalogNormalizedProjectionMatches(row: CatalogSearchProjection, params: CatalogSearchParams, modelKeys: Set<string> | null = null) {
   if (!projectionIdentityMatches(row,params,modelKeys)) return false;
   const priced = params.city && (params.budgetFrom || params.budgetTo || params.hasPrice) ? priceCardForCity(row,params.city).offer : row;
   const filterPrice = calculatedCatalogPrice(priced);
@@ -3151,6 +3158,11 @@ export async function selectPreparedChinaCompatibilityRows(rows:CatalogSearchPro
 export async function compilePreparedChinaCompatibilityPredicate(params:CatalogSearchParams){
  const modelKeys=await projectionModelKeys(params);
  return (row:CatalogSearchProjection)=>projectionCanRenderCard(row)&&catalogSearchProjectionMatches(row,params,modelKeys);
+}
+/** Only for authenticated metadata produced after full projection admission. */
+export async function compilePreparedChinaFilterMetadataPredicate(params:CatalogSearchParams){
+ const modelKeys=await projectionModelKeys(params);
+ return (row:CatalogSearchProjection)=>catalogNormalizedProjectionMatches(row,params,modelKeys);
 }
 export function orderPreparedChinaCompatibilityRows(rows:CatalogSearchProjection[],params:CatalogSearchParams) {
  sortCatalogSearchRows(rows,params);

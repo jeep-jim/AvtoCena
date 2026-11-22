@@ -16,6 +16,7 @@ import {applyPreparedChinaDeliveryLedger,eligibleChinaFixedCityQuery,fixedChinaC
 import {createPreparedCoverageIdsDigest} from './prepared-price-coverage';
 import {DELIVERY_TARIFF_VERSION} from './city-delivery';
 import {compileChinaPartDispatch,createChinaSelectorFacets,createChinaSelectorPage} from './prepared-china-streaming-selector';
+import {assertPreparedChinaFilterEntry} from './prepared-china-filter-index';
 import {balanceBusinessRows,businessOrder,sortCatalogRows,MARKET_DIVERSITY_WINDOW_PAGES,MARKET_PAGE_SIZE} from './market-page';
 
 type IndependentRead=Pick<IndependentFixturePublication,'market'|'observe'|'openChinaPrepared'>;
@@ -279,6 +280,34 @@ export async function readPreparedChinaCompatibility(params:CatalogSearchParams,
   // Base projection is used by the existing count/filter oracle. Existing
   // city predicate applies its delta once. Adjust returned DTOs only.
   const query=isDefaultMarketPage?{...params,city:undefined}:params;
+  if(!options.includeFacets||options.navigationFacets||options.countOnly&&!options.marketPage){
+   const countOnly=options.countOnly&&!options.marketPage;
+   const selected=await s.snapshot.filterPage(query,{start,pageSize,countOnly});
+   if(selected){
+    if(countOnly){await s.assertCurrent();return {generationId,total:selected.total,items:[],marketCountInfo:{}};}
+    const predicate=await compilePreparedChinaCompatibilityPredicate(query);
+    const chunks=new Map<string,Promise<OpenChunk>>(),parts=new Map<string,Promise<OpenPart>>();
+    const load=(chunk:string,part:number)=>{
+     if(!chunks.has(chunk))chunks.set(chunk,s.snapshot.readChunk(chunk));
+     const key=JSON.stringify([chunk,part]);
+     if(!parts.has(key))parts.set(key,chunks.get(chunk)!.then(reader=>reader.load(part)));
+     return parts.get(key)!;
+    };
+    const rows:CatalogSearchProjection[]=[];
+    // Only page locations are hydrated. No full-market card read or preparation.
+    for(let offset=0;offset<selected.positions.length;offset+=4){
+     rows.push(...await Promise.all(selected.positions.slice(offset,offset+4).map(async entry=>{
+      const row=(await load(entry[1],entry[2])).projection.items[entry[3]];
+      if(!row||row.id!==entry[0]||!predicate(row))throw new PreparedChinaFixtureUnavailable();
+      assertPreparedChinaFilterEntry(row,entry);return row;
+     })));
+    }
+    let items=rows.map(makePublic);
+    if(options.marketPage)items=params.model?items.sort(businessOrder):balanceBusinessRows(items);
+    await s.assertCurrent();
+    return {generationId,total:selected.total,page,pageSize,items,usedIndexShards:[],...(options.navigationFacets?{facets:s.snapshot.navigationFacets}:{})};
+   }
+  }
   const width=pageSize*MARKET_DIVERSITY_WINDOW_PAGES,offset=Math.floor(start/width)*width;
   const limit=options.countOnly&&!options.marketPage?0:isDefaultMarketPage?offset+width:start+pageSize;
   const facetQuery=options.navigationFacets?{market:'china',hasPrice:'yes'}:options.includeFacets&&!options.marketPage&&!options.countOnly?params:undefined;
