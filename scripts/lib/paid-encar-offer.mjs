@@ -46,6 +46,46 @@ function assertNoUndocumentedThirtyMinutePower(offer) {
   }
 }
 
+// Public display is built only from the vehicle columns in the v3 contract.
+function paidEncarSpecificationGroups(data, offer) {
+  const items = [];
+  function add(name, value) {
+    if (typeof value === 'string' && value.trim()) items.push({name, value: value.trim()});
+    if (typeof value === 'number' && Number.isFinite(value)) items.push({name, value: String(value)});
+  }
+  add('Поколение', data.generation);
+  add('Код поколения', data.generation_code);
+  add('Модификация', data.configuration);
+  add('Комплектация', data.complectation);
+  add('Модельный год по данным поставщика', data.model_year);
+  add('Дата производства', offer.productionDate);
+  add('Первая регистрация', data.first_registration_date || data.first_registration);
+  add('Тип двигателя по данным поставщика', data.engine_type);
+  add('Рабочий объём, см³', offer.engineCc);
+  add('Рабочий объём по данным поставщика, л', offer.operational.sourceDisplacementLitres);
+  add('Суммарная мощность, л.с.', offer.powerHp);
+  const {iceHp, electricPeakKw} = offer.operational.sourcePower;
+  if (iceHp.status === 'exact' && offer.icePowerKw > 0) add('Мощность ДВС, л.с.', iceHp.value);
+  if (electricPeakKw.status === 'exact' && offer.motorPeakKw > 0) add('Пиковая мощность электрической части, кВт', electricPeakKw.value);
+  add('Код двигателя по акту осмотра', data.inspection?.engine_code);
+  add('Тип кузова', data.body_type);
+  add('Коробка передач', data.transmission_type);
+  add('Обозначение привода у поставщика', data.drive_type);
+  add('Цвет кузова', data.color);
+  add('Цвет салона', data.seat_color);
+  add('Число мест', data.seat_count);
+  add('Число владельцев по данным поставщика', data.owners_count);
+  add('Тип импорта', data.import_type);
+  if (typeof data.is_brand_certified === 'boolean') add('Сертификация марки', data.is_brand_certified ? 'Да' : 'Нет');
+  const groups = items.length ? [{name: 'Данные объявления Encar', items}] : [];
+  for (const [name, options] of Object.entries(data.options || {})) {
+    if (!name.trim() || !Array.isArray(options)) continue;
+    const names = new Set(options.filter(value => typeof value === 'string' && value.trim()).map(value => value.trim()));
+    if (names.size) groups.push({name, items: Array.from(names, option => ({name: option, value: 'Есть'}))});
+  }
+  return groups;
+}
+
 /** Pure mapping of one already identity-verified, paid v3 snapshot row.
  * No provider calls, model-spec guesses or changes to legacy Encar adapters.
  */
@@ -148,6 +188,12 @@ export function normalizePaidEncarOffer(data, {id, observedAt, adapter}) {
         ...(ambiguousDrive ? {reason: 'driven_axle_unspecified'} : {})}),
       certifiedPower: evidence('certified_30min_power', {status: 'missing'}, 'kW'),
     }});
+  const groups = paidEncarSpecificationGroups(data, offer);
+  if (groups.length) offer.operational.sourceSpecifications = {
+    version: 1, sourceId: offer.sourceId, sourceOfferId: offer.sourceOfferId,
+    specificationId: String(id), sourceUrl: offer.operational.sourceUrl,
+    capturedAt: observedAt, groups,
+  };
   assertNoUndocumentedThirtyMinutePower(offer);
   return offer;
 }

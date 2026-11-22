@@ -29,7 +29,7 @@ if (!Number.isSafeInteger(snapshot?.pages) || snapshot.pages < 1 ||
 await rawPin.add([{kind:'encar-reports',root:`catalog/paid-encar-reports/v1/${Date.parse(snapshot.completedAt)}`}]);
 const reconcileSavedRevisions=process.env.ENCAR_RECONCILE_SAVED_REVISIONS==='1';
 const snapshotContext={runId:run,attempt,headSha:process.env.GITHUB_SHA};
-if(reconcileSavedRevisions){
+if(reconcileSavedRevisions || process.env.ENCAR_SNAPSHOT_PRODUCER_SHA || process.env.ENCAR_SNAPSHOT_SHA256){
   // Resume a verified foreign producer only with both externally supplied pins.
   // Never derive expected authority from the snapshot being checked.
   assert.match(process.env.ENCAR_SNAPSHOT_PRODUCER_SHA||'',/^[a-f0-9]{40}$/);
@@ -59,6 +59,8 @@ const seen = new Set();
 let count = 0;
 let excluded = 0;
 let observations = 0;
+const fieldCoverage = {rows:0, withGroups:0, withOptions:0, options:0, withHp:0, withCc:0, withFuel:0};
+const sampleSpecs = [];
 let superseded = 0;
 let quarantined = 0;
 for (let page = 1; page <= snapshot.pages; page++) {
@@ -81,6 +83,23 @@ for (let page = 1; page <= snapshot.pages; page++) {
     if (d.currency !== 'KRW' || !Number.isSafeInteger(price)) throw Error('Invalid Encar cash price');
     const offer = normalizePaidEncarOffer(d, {id, observedAt:snapshot.completedAt, adapter});
     if (!offer) throw Error('Invalid listing identity for Encar ' + id);
+    const groups = offer.operational.sourceSpecifications?.groups || [];
+    const options = Object.values(d.options || {}).filter(Array.isArray).reduce((n,list) =>
+      n + new Set(list.filter(value => typeof value === 'string' && value.trim()).map(value=>value.trim())).size, 0);
+    fieldCoverage.rows++;
+    fieldCoverage.withGroups += Number(groups.length > 0);
+    fieldCoverage.withOptions += Number(options > 0);
+    fieldCoverage.options += options;
+    fieldCoverage.withHp += Number(offer.powerHp > 0);
+    fieldCoverage.withCc += Number(offer.engineCc > 0);
+    fieldCoverage.withFuel += Number(Boolean(offer.fuel));
+    if (sampleSpecs.length < 2 || ['42799484','42760061'].includes(id)) {
+      const sample = {sourceOfferId:id, id:offer.id, rawHp:d.power ?? null, mappedHp:offer.powerHp ?? null,
+        rawCc:d.displacement_cc ?? null, mappedCc:offer.engineCc ?? null, hasFuel:Boolean(offer.fuel), options,
+        displayedFields:groups.reduce((n,group)=>n+group.items.length,0)};
+      sampleSpecs.push(sample);
+      console.log(JSON.stringify({stage:'saved_encar_vehicle_fields', ...sample}));
+    }
     offer.sourcePrice = price;
     offer.images = [...new Set(Array.isArray(d.photos) ? d.photos : [])].filter(value => {
       try {
@@ -110,7 +129,7 @@ const rawPaidInputWitness = await independentInput.finish({observations, exclude
 // Withhold optional retirement proof so existing provenance keeps raw roots.
 const paidInputWitness = quarantined===0 ? rawPaidInputWitness : null;
 const report = {version:1,market:'korea',provider:'auto_api_encar',completed:true,completedAt:snapshot.completedAt,
-  snapshotRun:run,snapshotAttempt:attempt,...(selection?{savedRevisionSelection:selection.summary,savedRevisionQuarantine:selection.quarantineManifest(),...(quarantined?{rawRetirementBlocked:'saved_revision_quarantine'}:{})}:{}),requiredSourceIds:[adapter.sourceId],confirmedWithdrawals:[],
+  snapshotRun:run,snapshotAttempt:attempt,fieldCoverage,sampleSpecs,...(selection?{savedRevisionSelection:selection.summary,savedRevisionQuarantine:selection.quarantineManifest(),...(quarantined?{rawRetirementBlocked:'saved_revision_quarantine'}:{})}:{}),requiredSourceIds:[adapter.sourceId],confirmedWithdrawals:[],
   ...(paidInputWitness ? {paidInputWitness} : {}),
   sources:[{sourceId:adapter.sourceId,provider:'auto_api_encar',observations,uniqueOffers:seen.size,
     stopReason:'source_finished',syncMode:'snapshot',pages:snapshot.pages,excluded,...(selection?{superseded,quarantined}: {})}]};
@@ -120,4 +139,4 @@ const reportPreparation=await preparePaidEncarReports({selection});
 const sourceHandoff=await readRawRootHandoff(storage,prefix,snapshot);
 report.rawStoragePins=[await rawPin.handoff(),...(sourceHandoff?[sourceHandoff]:[]),...reportPreparation.rawStoragePins];
 await fs.writeFile(path.join(output,'report.json'),JSON.stringify(report));
-console.log(JSON.stringify({count,excluded,superseded,quarantined,observations,uniqueOffers:seen.size}));
+console.log(JSON.stringify({count,excluded,superseded,quarantined,observations,uniqueOffers:seen.size,fieldCoverage}));

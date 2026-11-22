@@ -1,5 +1,8 @@
 name: Prepare completed Encar snapshot for Korea publication
 on:
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/korea-restore.json']
   workflow_run:
     workflows: ['Verify paid Encar inventory']
     types: [completed]
@@ -13,7 +16,7 @@ permissions:
   contents: read
 jobs:
   prepare:
-    if: github.ref == 'refs/heads/main' && (github.event_name == 'workflow_dispatch' || (github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'main'))
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch' || (github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'main'))
     runs-on: ubuntu-24.04
     environment: regcloud-staging
     timeout-minutes: 300
@@ -23,6 +26,19 @@ jobs:
         with:
           node-version: 24
       - run: npm ci
+      - name: Read the selected snapshot identity from the collection receipt
+        if: github.event_name == 'push'
+        id: saved
+        run: |
+          node --input-type=module <<'JS'
+          import fs from 'node:fs';
+          import assert from 'node:assert/strict';
+          const m=JSON.parse(fs.readFileSync('.github/market-runs/korea-restore.json','utf8'));
+          assert.match(m.runId,/^[1-9][0-9]*$/); assert.match(m.attempt,/^[1-9][0-9]*$/);
+          assert.match(m.producerSha,/^[0-9a-f]{40}$/); assert.match(m.completeSha256,/^[0-9a-f]{64}$/);
+          for(const [k,v] of Object.entries({run:m.runId, attempt:m.attempt, source:m.producerSha, digest:m.completeSha256}))
+            fs.appendFileSync(process.env.GITHUB_OUTPUT,k+'='+v+'\n');
+          JS
       - name: Restore only the specified completed inventory
         env:
           JSON_STORAGE_DRIVER: object
@@ -32,8 +48,10 @@ jobs:
           YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
           YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
           YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
-          ENCAR_SNAPSHOT_RUN: ${{ inputs.run_id || github.event.workflow_run.id }}
-          ENCAR_SNAPSHOT_ATTEMPT: ${{ inputs.attempt || github.event.workflow_run.run_attempt }}
+          ENCAR_SNAPSHOT_PRODUCER_SHA: ${{ steps.saved.outputs.source }}
+          ENCAR_SNAPSHOT_SHA256: ${{ steps.saved.outputs.digest }}
+          ENCAR_SNAPSHOT_RUN: ${{ steps.saved.outputs.run || inputs.run_id || github.event.workflow_run.id }}
+          ENCAR_SNAPSHOT_ATTEMPT: ${{ steps.saved.outputs.attempt || inputs.attempt || github.event.workflow_run.run_attempt }}
         run: |
           node --import tsx scripts/catalog-restore-encar-snapshot.mjs
           node --import tsx scripts/catalog-archive-intake.mjs archive korea catalog-intake-korea

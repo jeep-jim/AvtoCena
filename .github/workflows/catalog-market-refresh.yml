@@ -428,6 +428,8 @@ jobs:
           }
           assert.ok(r.completed && r.market==='korea' && r.provider==='auto_api_encar');
           assert.ok(r.sources.length===1 && r.sources[0].sourceId==='encar_direct' && r.sources[0].uniqueOffers>0);
+          assert.match(r.snapshotRun,/^[1-9][0-9]*$/);
+          fs.appendFileSync(process.env.GITHUB_ENV,'MARKET_RATE_RUN='+r.snapshotRun+'\n');
           JS
       - name: Restore verified non-Japan input from our own storage
         if: matrix.market != 'japan'

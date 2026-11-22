@@ -293,3 +293,23 @@ test('coarse hybrid fuel permits an explicit series or plug-in identity without 
     }
   });
 });
+
+test('paid v3 equipment and exact listing fields reach the stored detail without seller columns', async () => {
+  await withOfflinePublication(async () => {
+    const offer = mapped({options: {'Безопасность': ['Камера заднего вида', 'Камера заднего вида'], 'Салон': ['Кожа']},
+      generation_code: 'JA', inspection: {engine_code: 'G3LA'}, seat_count: 5, owners_count: 0,
+      seller: 'private-seller', address: 'private-address', vin: 'private-vin', drive_type: '2WD'});
+    const stored = compactPublicStorageOffer(await prepareSellerInventory(normalizeVehicleOfferSpecs(offer)));
+    const snapshot = stored.operational.sourceSpecifications;
+    assert.equal(snapshot.sourceOfferId, stored.sourceOfferId);
+    const {offerSpecificationGroups} = await import('../apps/web/lib/catalog/offer-specification-groups');
+    const values = offerSpecificationGroups(stored).flatMap(group => group.items);
+    for (const [name, value] of [['Число мест','5'], ['Число владельцев по данным поставщика','0'],
+      ['Код двигателя по акту осмотра','G3LA'], ['Код поколения','JA'], ['Обозначение привода у поставщика','2WD'],
+      ['Камера заднего вида','Есть'], ['Кожа','Есть']])
+      assert.ok(values.some(item => item.name === name && item.value === value), name);
+    assert.equal(stored.drive, undefined);
+    assert.doesNotMatch(JSON.stringify(snapshot), /private-seller|private-address|private-vin/);
+    assert.equal(values.filter(item => item.name === 'Камера заднего вида').length, 1);
+  });
+});
