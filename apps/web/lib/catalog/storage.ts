@@ -1605,6 +1605,12 @@ async function assertCurrentCatalogReadModelsReady(generationId: string, offers:
     (stage,count)=>{if(process.env.CATALOG_PUBLICATION_PROGRESS==='1')console.log(JSON.stringify({stage:'verify_'+stage,count,generationId,rss:process.memoryUsage().rss}));});
 }
 
+export type PublicationReadModelBuilders = {
+  prepareBudgetRows(rows: CatalogSearchProjection[]): CatalogSearchProjection[] | Promise<CatalogSearchProjection[]>;
+  buildLanding: typeof buildCatalogMarketLanding;
+  buildOverview: typeof buildCatalogOverviewFromProjections;
+};
+
 export type PersistCatalogOptions = {
   unavailableOffers?: UnavailableOffer[];
   productionRefreshMarket?: CatalogMarket;
@@ -1616,6 +1622,9 @@ export type PersistCatalogOptions = {
   // Prepare the exact serving calculator against immutable candidate indexes
   // before replacing current aliases. Revalidate its context before each CAS.
   beforePreparedGeneration?: (manifest: CatalogManifest) => Promise<() => Promise<void>>;
+  // A publication controller may bind derived membership to the verified
+  // serving runtime while retaining newer admission rules for its fresh feed.
+  publicationReadModelBuilders?: PublicationReadModelBuilders;
   beforePreparedInternalManifest?: PrepareInternalManifest;
   // A callback alone cannot bypass the durable pending reservation checked by
   // the runtime itself before aliases and every public manifest CAS.
@@ -1649,6 +1658,11 @@ export function isCatalogProductionRefreshAllowed(options: PersistCatalogOptions
     && Object.keys(preserved).every((other) => MARKETS.includes(other as CatalogMarket)));
 }
 export async function persistCatalogOffers(nextOffers: VehicleOffer[], options: PersistCatalogOptions = {}) {
+  const readModelBuilders = options.publicationReadModelBuilders;
+  if (readModelBuilders !== undefined && (!readModelBuilders
+      || ['prepareBudgetRows', 'buildLanding', 'buildOverview'].some(key => typeof readModelBuilders[key as keyof PublicationReadModelBuilders] !== 'function'))) {
+    throw Error('catalog_publication_read_model_builders_invalid');
+  }
   const progress = (stage: string, details: Record<string, unknown> = {}) => {
     if (process.env.CATALOG_PUBLICATION_PROGRESS === "1") console.log(JSON.stringify({ stage, ...details, rss: process.memoryUsage().rss }));
   };
@@ -1784,7 +1798,7 @@ export async function persistCatalogOffers(nextOffers: VehicleOffer[], options: 
     }
     progress("market_chunks_written", { market, count: offers.length, chunks: chunks.length });
   }
-  await rebuildIndexes(generationId, publishedOffers, byId, imagesById);
+  await rebuildIndexes(generationId, publishedOffers, byId, imagesById, readModelBuilders);
   progress("generation_indexes_written");
   const previousManifest = await readManifest();
   const previousUnavailable = previousManifest?.generationId
@@ -1826,7 +1840,7 @@ export async function persistCatalogOffers(nextOffers: VehicleOffer[], options: 
       }
       await verifyRawReservation();
       await assertPublicationBase();
-    });
+    }, readModelBuilders);
   progress("current_read_models_written");
   await assertCurrentCatalogReadModelsReady(generationId, publishedOffers);
   assertCatalogPageWindowCurrent(currentReadModels.pageWindow);
@@ -1851,7 +1865,7 @@ export async function persistCatalogOffers(nextOffers: VehicleOffer[], options: 
   }
   throw new StorageConflictError();
 }
-export async function rebuildIndexes(generationId: string, offers: VehicleOffer[], byId: Record<string, OfferLocation>, imagesById: Record<string, { objectKey: string; mimeType: string; checksum: string; size: number }> = {}) {
+export async function rebuildIndexes(generationId: string, offers: VehicleOffer[], byId: Record<string, OfferLocation>, imagesById: Record<string, { objectKey: string; mimeType: string; checksum: string; size: number }> = {}, readModelBuilders?: PublicationReadModelBuilders) {
   await writeJsonAtomic(generationPath(generationId,'indexes/colors-v1.json'),buildCatalogColorIndex(generationId,offers));
   // Public search and facets use compact current projections. Only the market
   // shard is still read by the homepage; the thousands of per-value shards that
@@ -1892,7 +1906,7 @@ export async function rebuildIndexes(generationId: string, offers: VehicleOffer[
   await mapWithConcurrency([...projectionsByMarket.entries()], 4, async ([market, items]) => {
     const projection = { generationId, items };
     await writeJsonAtomic(generationPath(generationId, `indexes/projection/${cleanShard(market)}.json`), projection);
-    await writeJsonAtomic(catalogMarketLandingPath(generationId, market), await buildCatalogMarketLanding(generationId, market, items));
+    await writeJsonAtomic(catalogMarketLandingPath(generationId, market), await (readModelBuilders?.buildLanding ?? buildCatalogMarketLanding)(generationId, market, items));
   });
   const freshness = (offer: VehicleOffer) => Date.parse(String((offer.operational as any)?.sourcePublishedAt || offer.firstSeenAt || offer.updatedAt || "")) || 0;
   await writeJsonAtomic(generationPath(generationId, "indexes/order-updatedAt.json"), { generationId, ids: [...offers].sort((a,b) => freshness(b) - freshness(a) || String(b.updatedAt || "").localeCompare(String(a.updatedAt || ""))).map((o) => o.id) });
@@ -1941,8 +1955,23 @@ export async function previewCanonicalPublicCatalogOffers(storedOffers: VehicleO
   return canonicalizePublicCatalogOffers([...protectedPublicOffers, ...normalized], new Set<CatalogMarket>(), protectedIds, retainedPowerMixIds, minimumCountByMarket);
 }
 
-async function writeGenerationDirectoryIndexes(generationId:string,rows:CatalogSearchProjection[]) {
-  await writeBudgetSearchIndex(generationId,prepareCatalogProjectionRows(rows));
+async function writeGenerationDirectoryIndexes(generationId:string,rows:CatalogSearchProjection[],prepareBudgetRows?:PublicationReadModelBuilders['prepareBudgetRows']) {
+  let budgetRows: CatalogSearchProjection[];
+  if (prepareBudgetRows) {
+    // Capture identity before invoking external builders. Only derived fields
+    // may change: no duplicate, foreign ID or market can enter the source index.
+    const source = new Map(rows.map(row => [row.id, row.market]));
+    if (source.size !== rows.length) throw Error('catalog_publication_budget_source_identity_invalid');
+    budgetRows = await prepareBudgetRows(rows);
+    const seen = new Set<string>();
+    if (!Array.isArray(budgetRows)) throw Error('catalog_publication_budget_selection_invalid');
+    for (const row of budgetRows) {
+      if (!row || typeof row.id !== 'string' || !row.id || row.id !== row.id.trim() || seen.has(row.id)
+          || !source.has(row.id) || source.get(row.id) !== row.market) throw Error('catalog_publication_budget_selection_invalid');
+      seen.add(row.id);
+    }
+  } else budgetRows = prepareCatalogProjectionRows(rows);
+  await writeBudgetSearchIndex(generationId,budgetRows);
   const brands=new Map<string,CatalogSearchProjection[]>();
   for(const row of rows){const make=catalogBrandReadModelKey(row.make);if(!make)continue;const items=brands.get(make)||[];items.push(row);brands.set(make,items);}
   await mapWithConcurrency([...brands],catalogMaintenanceIoConcurrency(),([make,items])=>writeJsonAtomic(generationBrandProjectionPath(generationId,make),{generationId,items}));
@@ -1972,7 +2001,7 @@ type PreparedCurrentReadModels = {
   writeDetails: () => Promise<number>;
 };
 async function writeCurrentCatalogReadModels(generationId: string, storedOffers: VehicleOffer[], alreadyCanonical = false, prepared?: PreparedCurrentReadModels,
-  assertPageContext?: () => Promise<void>, beforeMutableAliases?: () => Promise<void>) {
+  assertPageContext?: () => Promise<void>, beforeMutableAliases?: () => Promise<void>, readModelBuilders?: PublicationReadModelBuilders) {
   if (!assertPageContext) throw Error('catalog_page_window_context_required');
   const reportStage=(stage:string)=>{if(process.env.CATALOG_PUBLICATION_PROGRESS === "1")
     console.log(JSON.stringify({stage:"current_read_models_"+stage,generationId,at:new Date().toISOString(),rss:process.memoryUsage().rss}));};
@@ -2027,7 +2056,7 @@ async function writeCurrentCatalogReadModels(generationId: string, storedOffers:
   }
 
   reportStage("projections_built");
-  await writeGenerationDirectoryIndexes(generationId,allProjectionItems);
+  await writeGenerationDirectoryIndexes(generationId,allProjectionItems,readModelBuilders?.prepareBudgetRows);
   reportStage("directory_written");
   await beforeMutableAliases?.();
   await writeJsonAtomic(CURRENT_FACETS_PATH, facets, false);
@@ -2059,8 +2088,8 @@ async function writeCurrentCatalogReadModels(generationId: string, storedOffers:
   // forcing every homepage visit to parse the entire catalog instead.
   const pageWindow = await stageCatalogPageWindow({storage: getJsonStorage(), generationId, markets: MARKETS,
     rows: allProjectionItems, rowsByMarket: projectionsByMarket, assertContext: assertPageContext,
-    buildLanding: (g, market, rows, now) => buildCatalogMarketLanding(g, market, rows, {now}),
-    buildOverview: (g, rows, now) => buildCatalogOverviewFromProjections(g, rows, {now}),
+    buildLanding: (g, market, rows, now) => (readModelBuilders?.buildLanding ?? buildCatalogMarketLanding)(g, market, rows, {now}),
+    buildOverview: (g, rows, now) => (readModelBuilders?.buildOverview ?? buildCatalogOverviewFromProjections)(g, rows, {now}),
     landingPath: catalogMarketLandingPath, overviewPath: catalogOverviewGenerationPath});
   // Keep the compatibility alias caller-owned; dated writes never touch it.
   await assertPageContext();

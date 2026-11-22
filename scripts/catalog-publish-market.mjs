@@ -6,6 +6,8 @@ import {startPublicationHeartbeat} from './lib/publication-heartbeat.mjs';
 import {isCompletedChe168Delta,isCompletedDubicarsDelta} from './lib/auto-api-che168-client.mjs';
 import {assertPaidKoreaPublicationSource} from './lib/paid-korea-publication-guard.mjs';
 import {prepareStagedCatalogBudget} from './lib/catalog-staged-budget.mjs';
+import {createServingPublicationReadModelBuilders} from './lib/catalog-serving-read-models.mjs';
+import {paidEncarTechnicalCoverage, readPaidEncarTechnicalCoverage} from './lib/paid-encar-field-coverage.mjs';
 import {prepareRawPublication} from './lib/catalog-raw-publication.mjs';
 import {prepareRawInternalPublication} from './lib/catalog-raw-internal-publication.mjs';
 import {createPaidRepairPublicationGuard} from './lib/paid-encar-repair-io.mjs';
@@ -664,6 +666,7 @@ const preflight = { market, published:false, dryRun, previousManifestPreserved:t
     after:technicalRepairPreflight, examples:technicalRepairGuard.examples(canonicalTargetPreview.offers)}} : {}),
   sourceShare: canonicalTargetPreview.sourceShare.report,
   powerMix: canonicalTargetPreview.powerMix.report,
+  ...(market === 'korea' ? {canonicalTechnicalCoverage:paidEncarTechnicalCoverage(canonicalTargetPreview.offers)} : {}),
   auditedRemovals: currentRetainedRows.filter(offer=>!nextIds.has(offer.id)).map(offer=>({id:offer.id,reason:auditedRemovals.get(offer.id)||"unexplained"})),
   generated:generatedCandidateCount, retained:currentRetainedRows.length, candidates:orderedCandidates.length,
   selected:selected.length, canonical:canonicalTargetPreview.offers.length,
@@ -760,6 +763,12 @@ let rawPublication = null, rawPinRelease = null, rawInternalPublication = null;
 let paidInternalContribution = null, paidPublicContribution = null;
 let che168InternalContribution = null, che168PublicContribution = null;
 let technicalRepairReadback = null;
+let publicationReadModelBuilders;
+let readModelCleanup = null;
+const technicalFieldCoverage = market === 'korea' ? {
+  canonical:paidEncarTechnicalCoverage(canonicalTargetPreview.offers), persistedCandidate:null,
+  servingBudget:null, storedReadback:null, verified:false,
+} : null;
 let nextPublicCount = 0;
 let publishedSourceCounts = {};
 
@@ -789,10 +798,20 @@ if (regressionBlocked) {
     assertCatalogRowsUnchanged(preparedTargetSnapshot, latestTargetRows, market);
     await loadPreservedMarkets();
     process.env.CATALOG_GROW_ONLY_MARKETS = "";
+    if (market !== 'japan' && getJsonStorage().driver === 'object') {
+      publicationReadModelBuilders = await createServingPublicationReadModelBuilders({storage:getJsonStorage()});
+      const prepareBudgetRows = publicationReadModelBuilders.prepareBudgetRows;
+      publicationReadModelBuilders.prepareBudgetRows = async rows => {
+        const prepared = await prepareBudgetRows(rows);
+        if (technicalFieldCoverage) technicalFieldCoverage.servingBudget = paidEncarTechnicalCoverage(prepared.filter(row => row.market === market));
+        return prepared;
+      };
+    }
     logPublicationMemory("before_persist");
     manifest = await persistCatalogOffers(allOffers, {
       productionRefreshMarket: market,
       expectedBaseGenerationId,
+      ...(publicationReadModelBuilders ? {publicationReadModelBuilders} : {}),
       ...(market !== 'japan' && getJsonStorage().driver === 'object' ? {
         rawCoordinationTicket: () => rawPublication?.binding?.ticket,
         beforePreparedInternalManifest: async ({manifest: internalManifest, baseManifest}) => {
@@ -888,6 +907,7 @@ if (regressionBlocked) {
           if (hashRows(rows) !== expectedHash) failures.push(`${currentMarket}:hash`);
         }
         nextPublicCount = publishedOffers.filter((offer) => String(offer?.market || "") === market).length;
+        if (technicalFieldCoverage) technicalFieldCoverage.persistedCandidate = paidEncarTechnicalCoverage(publishedOffers.filter(offer => offer.market === market));
         publishedSourceCounts = countSources(publishedOffers.filter(offer => offer.market === market));
         if (failures.length) throw new Error(`catalog_public_regression_guard:${failures.join("|")}`);
         paidContributions?.captureFinal(publishedOffers.filter(offer => offer.market === market));
@@ -896,9 +916,21 @@ if (regressionBlocked) {
     });
     if (technicalRepairGuard) technicalRepairReadback = await technicalRepairGuard.verifyPublished(manifest.generationId, publishOperationId);
     if (rawPublication) rawPinRelease = await rawPublication.afterCommit();
+    if (technicalFieldCoverage) {
+      const stored = await readPaidEncarTechnicalCoverage(getJsonStorage(), manifest);
+      technicalFieldCoverage.storedReadback = stored.coverage;
+      technicalFieldCoverage.verified = stored.generationId === manifest.generationId
+        && JSON.stringify(technicalFieldCoverage.storedReadback) === JSON.stringify(technicalFieldCoverage.persistedCandidate);
+      if (!technicalFieldCoverage.verified) throw Error('paid_encar_technical_readback_mismatch');
+    }
   } catch (error) {
     publicationError = String(error?.message || error);
     console.error(error?.stack || publicationError);
+  } finally {
+    if (publicationReadModelBuilders) {
+      try { await publicationReadModelBuilders.dispose(); readModelCleanup = 'complete'; }
+      catch { readModelCleanup = 'failed'; console.error('serving_read_model_temporary_cleanup_failed'); }
+    }
   }
 } else {
   await loadPreservedMarkets();
@@ -923,6 +955,8 @@ const report = {
   publishedAt: new Date().toISOString(),
   published: Boolean(manifest),
   publicationError,
+  ...(technicalFieldCoverage ? {technicalFieldCoverage} : {}),
+  ...(publicationReadModelBuilders ? {readModelRuntime:publicationReadModelBuilders.context, readModelCleanup} : {}),
   ...(technicalRepairReceipt ? {technicalRepair:technicalRepairReadback || {receiptSha256:technicalRepairReceipt.sha256, verified:false}} : {}),
   rawPinRelease,
   rawCoordination: rawPublication?.binding || null,
@@ -1023,7 +1057,8 @@ console.log(JSON.stringify(report, (key, value) => {
   if (key === "freshOfferAudit" && value?.summary) return value.summary;
   return value;
 }, 2));
-if (!report.published || technicalRepairReceipt && !technicalRepairReadback?.verified) process.exitCode = 1;
+if (!report.published || technicalRepairReceipt && !technicalRepairReadback?.verified
+    || technicalFieldCoverage && !technicalFieldCoverage.verified) process.exitCode = 1;
 } finally {
   await releasePublishLock();
 }
