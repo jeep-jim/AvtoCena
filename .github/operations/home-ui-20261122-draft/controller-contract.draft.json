@@ -1,0 +1,98 @@
+{
+  "version": 1,
+  "status": "draft-disabled-not-an-executable-release",
+  "scope": "home SSR scheduling and post-pricing browser payload only",
+  "appBaseSha": "22867cbcfaee27b2e8917b6bf880e44827f67b60",
+  "expectedSourceCalculationVersion": "672958a80c6a6eb869798c93cf1ee7d88301286ac910163115320fe5d8b95761",
+  "unresolvedPinsMustFailClosed": {
+    "appSha": "c1622514c73e78ee798ae321c242174aef71706c",
+    "completeBinaryDiffSha256": "1e3284a735f40a5689d9ed23895a696ed9a29524bd106e32de193c185bb24307",
+    "operatorCommitSha": null,
+    "operatorFileSha256Manifest": null,
+    "observedIncumbentReleaseAndImage": null,
+    "observedIncumbentContainerAndProcessIdentity": null,
+    "observedServingCalculationVersion": null,
+    "observedPrivateEncyclopediaBindingAndIndex": null,
+    "observedChinaControlAndProtectedMarkets": null,
+    "observedNginxPreimageAndAllowedPostimage": null,
+    "candidateImageAndContainerIdentity": null
+  },
+  "separation": {
+    "applicationCheckout": "exact committed home-only SHA, directly based on appBaseSha",
+    "operatorCheckout": "separate exact reviewed operator commit; modern release scripts must not be copied into the app source closure",
+    "calculationIdentity": "source hash is a source proof; serving namespace must match freshly observed incumbent and immutable ready data",
+    "providerIntake": "none",
+    "dataPublication": "none",
+    "chinaPointerChanges": "none"
+  },
+  "orderedStages": [
+    {
+      "name": "source-and-build",
+      "basedOn": ".github/workflows/china-ui-image-v1.yml",
+      "required": [
+        "New controller and marker pins, without editing or reusing old one-time authorization",
+        "Run verify-home-ui-source.mjs against exact clean app checkout and reviewed full diff",
+        "Locked dependency installation and exact-source security checks without production credentials",
+        "Web and engine TypeScript; home-card-payload, home-initial-catalog and home-rendering tests",
+        "Preserve all applicable current release regressions; do not reclassify failures as success",
+        "Restore only freshly verified immutable incumbent encyclopedia binding/index, using read-only allowlisted object access",
+        "Docker revision label equals exact app SHA; record immutable image ID",
+        "Load the exact image without app start or ingress change"
+      ]
+    },
+    {
+      "name": "private-candidate",
+      "basedOn": ".github/workflows/china-ui-dark-v1.yml",
+      "required": [
+        "No overlapping release; exact current container, image, environment, process and Nginx preimage",
+        "Acquire existing /run/lock/avtocena-runtime-change.lock, never a second independent lease",
+        "Create only the exact new loopback candidate; preserve current serving calculation namespace and active China runtime mode",
+        "Exact release/calculation health; complete home SSR and API, prices, totals, selected city and evidence semantics",
+        "Protected China generation, lists/details and neighbouring markets remain unchanged",
+        "Current complete overview readiness for current UTC+7 day and next two days, without provider intake or manifest changes",
+        "Existing frozen server timings including warm and expired-cache phases; do not remove routes or raise thresholds"
+      ]
+    },
+    {
+      "name": "guarded-activation",
+      "basedOn": ".github/operations/china-ui-ingress-v1/ingress-standalone.py plus current browser handoff",
+      "required": [
+        "Extend tests/release-speed-guard-contract.test.mjs to inventory the new controller before enabling it",
+        "Verify both frozen baseline digests before host access and again at the applicable runtime gate",
+        "Use the current regcloud-deploy-with-browser.sh nonce/verdict contract; no direct unguarded deploy entrypoint",
+        "Do not run generic host activation unchanged against different current container roles; preserve exact identity and CAS protections in the reviewed operator",
+        "Hold the same runtime lease across final identity checks, rollback backup, exact allowed Nginx change and acceptance",
+        "Check config preimage again immediately before change; nginx test and reload only on the approved deterministic postimage",
+        "Exact release health through private, gateway and public paths; full visible results and unchanged protected data",
+        "Post-switch server speed enforcement and resource measurements",
+        "Mobile and desktop browser functional, price, city, filter, request-count and speed checks",
+        "Browser verdict must match app SHA and one-use nonce; missing, stale, timeout or failed result keeps rollback mandatory",
+        "Disarm rollback only after every required gate succeeds; retain previous image, environment and Nginx configuration"
+      ]
+    },
+    {
+      "name": "rollback",
+      "required": [
+        "On any failed acceptance restore only the exact captured predecessor",
+        "Never overwrite a foreign Nginx postimage or changed runtime identity",
+        "Restore captured restart policy and ingress, then verify predecessor health and protected data",
+        "Keep data pointers and provider cursors unchanged throughout"
+      ]
+    }
+  ],
+  "frozenBaselines": {
+    "docs/operations/2026-11-11-accepted-speed-baseline.json": "32fba449b77e40983803483ea7b6cb4ece09afa997c2ae08dd968c675f528c59",
+    "docs/operations/2026-11-11-accepted-browser-speed-baseline.json": "1ad263a9f9c6c4d656ffec4aca51d2b96f5fd284afb759e96ae53cee2bf39b06"
+  },
+  "requiredCurrentOperatorSources": [
+    "scripts/verify-frozen-speed-baselines.mjs",
+    "tests/release-speed-guard-contract.test.mjs",
+    "scripts/regcloud-deploy-with-browser.sh",
+    "scripts/regcloud-deploy-production.sh",
+    "scripts/regcloud-performance-gate.py",
+    "scripts/regcloud-resource-sampler.py",
+    "scripts/regcloud-browser-verdict.py",
+    "tests/browser/owner-filter-speed-live.mjs",
+    "docs/operations/performance-contract.md"
+  ]
+}
