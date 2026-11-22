@@ -1,3 +1,4 @@
+import {homeCardPayload} from "@/lib/catalog/home-card-payload";
 import {createHomePhaseTiming} from "@/lib/catalog/home-phase-timing";
 import {BuyerGallery} from '@/components/home/BuyerGallery';
 import {SpecialRail} from '@/components/dealers/SpecialRail';
@@ -69,25 +70,29 @@ export default async function HomePage({ searchParams }: { searchParams?: Promis
   const fromQuery = cleanCity(first(params.city));
   const fromCookie = decodeCity(cookieStore.get("avtocena_city")?.value || "");
   const dealer=timing.measure("dealer",()=>readShowcase("dealer_topavto")).catch(error=>{console.error("home_dealer_failed",error);return null;});
-  const [catalog, green] = await Promise.all([
-    timing.measure("snapshot",()=>readHomeCatalogSnapshot(10)).then(value=>{timing.setGeneration(value.generationId);return timing.measure("counts",()=>withAjesCount(value));}).catch((error) => {
+  const catalogRead = timing.measure("snapshot",()=>readHomeCatalogSnapshot(10)).then(value=>{timing.setGeneration(value.generationId);return timing.measure("counts",()=>withAjesCount(value));}).catch((error) => {
       console.error("home_initial_catalog_failed", error);
       return { items: [], marketCounts: {}, total: 0, countIncomplete:true, marketCountInfo:{} };
+    });
+  const greenRead = timing.measure("green",()=>readGreenCorner()).catch(() => null);
+  const [[catalog, pricedItems], [green, greenItems]] = await Promise.all([
+    catalogRead.then(async catalog => {
+      const priced = await timing.measure("catalogPricing",async()=>{
+        const allowed=catalog.items.filter(item=>!(item as {preparedChinaSelection?:unknown}).preparedChinaSelection);
+        if(allowed.length===catalog.items.length)return applyActiveBusinessPricingBatch(catalog.items);
+        const repriced=await applyActiveBusinessPricingBatch(allowed);
+        const byId=new Map(repriced.map(item=>[item.id,item]));
+        return catalog.items.map(item=>(item as {preparedChinaSelection?:unknown}).preparedChinaSelection?item:byId.get(item.id)??item);
+      }).catch((error) => {
+        console.error("home_initial_pricing_failed", error);
+        // Preserve the last audited quote if settings storage is temporarily down.
+        return catalog.items;
+      });
+      return [catalog, priced.map(homeCardPayload)] as const;
     }),
-    timing.measure("green",()=>readGreenCorner()).catch(() => null),
-  ]);
-  const [greenItems, pricedItems] = await Promise.all([
-    timing.measure("greenPricing",()=>applyActiveBusinessPricingBatch((green?.items || []).slice(0,10).map(publicGreenOffer))),
-    timing.measure("catalogPricing",async()=>{
-      const allowed=catalog.items.filter(item=>!(item as {preparedChinaSelection?:unknown}).preparedChinaSelection);
-      if(allowed.length===catalog.items.length)return applyActiveBusinessPricingBatch(catalog.items);
-      const repriced=await applyActiveBusinessPricingBatch(allowed);
-      const byId=new Map(repriced.map(item=>[item.id,item]));
-      return catalog.items.map(item=>(item as {preparedChinaSelection?:unknown}).preparedChinaSelection?item:byId.get(item.id)??item);
-    }).catch((error) => {
-      console.error("home_initial_pricing_failed", error);
-      // Preserve the last audited quote if settings storage is temporarily down.
-      return catalog.items;
+    greenRead.then(async green => {
+      const items = await timing.measure("greenPricing",()=>applyActiveBusinessPricingBatch((green?.items || []).slice(0,10).map(publicGreenOffer)));
+      return [green, items.map(homeCardPayload)] as const;
     }),
   ]);
   return <>
