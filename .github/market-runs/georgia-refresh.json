@@ -1,10 +1,10 @@
 {
-  "operation": "owner-full-georgia-to-reg-20261121",
-  "requestedAt": "2026-11-21T14:53:29+00:00",
+  "operation": "georgia-retry-current-source-page",
+  "requestedAt": "2026-11-22T00:54:22.053518+00:00",
   "market": "georgia",
   "publishMarkets": [
     "georgia"
   ],
   "resetCursors": true,
-  "reason": "Collect the full configured market into private REG storage from the first page. Record the FX cut once for this intake. Preserve all other markets, Japan and Green Corner."
+  "reason": "Retry the existing MyAuto route with time for its full page of vehicle details and preserve completed input in REG. A supplier refusal must still stop the source."
 }

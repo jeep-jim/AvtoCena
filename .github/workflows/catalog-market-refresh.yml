@@ -140,7 +140,9 @@ jobs:
       CATALOG_REQUIRE_FULL_INPUT: ${{ contains(fromJSON('["europe","georgia"]'), matrix.market) && '1' || '0' }}
       CATALOG_SOURCE_INVENTORY_MODE: '1'
       CATALOG_SOURCE_REQUEST_TIMEOUT_MS: '20000'
-      CATALOG_SOURCE_TIMEOUT_MS: '25000'
+      # One Georgia response includes the listing page and its vehicle details.
+      # Allow the existing in-flight page to finish before retrying its cursor.
+      CATALOG_SOURCE_TIMEOUT_MS: ${{ matrix.market == 'georgia' && '120000' || '25000' }}
       CATALOG_IMAGE_STORAGE_MODE: source_urls_only
       CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: '1'
       CATALOG_MAX_IMAGES_PER_OFFER: '30'
