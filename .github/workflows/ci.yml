@@ -33,10 +33,10 @@ jobs:
           python3 tests/regcloud-browser-handoff.test.py
           python3 tests/regcloud-release-retention.test.py
           node --test tests/catalog-interaction-acceptance.test.mjs
+      - name: Feed preparation guards
+        run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/catalog-editorial-runtime.test.mjs tests/catalog-owned-china-verification.test.mjs
       - name: Complete regression suite
         run: npm test
-      - name: Installed editorial preparation guards
-        run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/catalog-editorial-runtime.test.mjs
       - name: Customs tests
         run: node --import tsx --test tests/russia-customs.test.ts
       - name: Catalog modification recovery contract tests
