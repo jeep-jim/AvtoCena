@@ -11,6 +11,7 @@ import {createChinaFixedCityViews,fixedChinaCityViewRef,type ChinaFixedCityRefs,
 import {DELIVERY_TARIFF_VERSION} from './city-delivery';
 import type {VehicleOffer} from './types';
 import {createChinaSelectorFacets,chinaSelectorNavigationQuery,summarizeChinaSelectorPart,type ChinaSelectorPart} from './prepared-china-streaming-selector';
+import {createPreparedChinaFilterIndex,type PreparedChinaFilterIndexRef} from './prepared-china-filter-index';
 
 const ACTIVE='catalog/manifest.json',MAX=4*1024*1024,MAX_CHUNKS=2_000;
 const SHA=/^[a-f0-9]{64}$/,GEN=/^gen_\d{13}_[a-z0-9]{1,64}$/,CHUNK=/^chunk-\d{4,10}$/;
@@ -19,7 +20,7 @@ const hash=(data:Buffer)=>createHash('sha256').update(data).digest('hex');
 const json=(value:unknown)=>Buffer.from(JSON.stringify(value));
 const parse=<T>(value:Buffer)=>JSON.parse(value.toString('utf8')) as T;
 const {isArray}=Array;
-type Directory={version:1;generationId:string;marketDigest:string;validUntil:number;legalValidUntil?:number;rows:number;chunkSha256:string[];idRoots?:Array<string|null>;modelView?:PreparedChinaModelViewRef;fixedCityViews?:ChinaFixedCityRefs;deliveryTariffVersion?:string;streamingSelector?:true;navigationFacets?:CatalogFacets};
+type Directory={version:1;generationId:string;marketDigest:string;validUntil:number;legalValidUntil?:number;rows:number;chunkSha256:string[];idRoots?:Array<string|null>;modelView?:PreparedChinaModelViewRef;fixedCityViews?:ChinaFixedCityRefs;deliveryTariffVersion?:string;streamingSelector?:true;navigationFacets?:CatalogFacets;filterIndex?:PreparedChinaFilterIndexRef};
 type Chunk={version:1;generationId:string;chunk:string;parts:PreparedPriceCardDescriptor[];selectors?:ChinaSelectorPart[]};
 type Projection={generationId:string;items:CatalogSearchProjection[]};
 const location=(g:string)=>`catalog/generations/${g}/indexes/prepared-china-read-v1/`;
@@ -129,6 +130,7 @@ export async function stagePreparedChinaArtifacts(input:{
  try{
   const chunkSha256:string[]=[];
   const navigation=input.withStreamingSearch?createChinaSelectorFacets(candidate.generationId,chinaSelectorNavigationQuery):undefined;
+  const filterIndex=input.withStreamingSearch?createPreparedChinaFilterIndex({generationId:candidate.generationId,marketDigest:a.candidateMarketDigest}):undefined;
   let minimumLegalValidUntil=Infinity;
   let chunkName='',rows:VehicleOffer[]=[],parts:PreparedPriceCardDescriptor[]=[],selectors:ChinaSelectorPart[]=[],offset=0,expectedRows=0;
   const flush=async()=>{
@@ -160,6 +162,7 @@ export async function stagePreparedChinaArtifacts(input:{
     for(const row of projected.items)navigation.add(row);
    }
    const locations=projected.items.map((row,position)=>({id:row.id,chunk:d.sourceChunk,part:d.part,offset:position}));
+   if(filterIndex)for(const [position,row] of projected.items.entries())filterIndex.add(row,locations[position]);
    await spool.append(locations);
    if(modelView||cityViews)for(const [i,row] of projected.items.entries()){
     if(modelView&&model?.matches(row))modelView.add({...locations[i],rub:preparedChinaModelIndexedPrice(row)});
@@ -178,6 +181,7 @@ export async function stagePreparedChinaArtifacts(input:{
   const directory:Directory={version:1,generationId:candidate.generationId,marketDigest:a.candidateMarketDigest,
    rows:seal.report.admittedRows,validUntil,...(acceptedLegalHorizon===undefined?{}:{legalValidUntil:acceptedLegalHorizon}),chunkSha256,idRoots,deliveryTariffVersion:DELIVERY_TARIFF_VERSION,
    ...(navigation?{streamingSelector:true as const,navigationFacets:navigation.finish()}:{}),
+   ...(filterIndex?{filterIndex:await filterIndex.publish((key,contents)=>put(key,contents,validUntil))}:{}),
    ...(modelView?{modelView:await modelView.publish((key,contents)=>put(key,contents,validUntil))}:{}),
    ...(cityViews?{fixedCityViews:await cityViews.publish((key,contents)=>put(key,contents,validUntil))}:{})};
   const body=json(directory),directorySha256=hash(body);
