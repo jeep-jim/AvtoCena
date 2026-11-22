@@ -17,7 +17,7 @@ Korea/UAE уточнены: 22.11.2026, 23:06 Asia/Krasnoyarsk; остальны
 | Китай | 21:00 | Ежедневно | Сохранены загрузка и prepared intake; автоматическое публичное продолжение не подключено |
 | Корея | 00:00 | 2 дня | После failure на retained Europe coverage принят PR 1802. [Повтор 45041812628](https://github.com/jeep-jim/AvtoCena/actions/runs/45041812628): verify SUCCESS, ожидает UAE; публичная приёмка ещё впереди |
 | ОАЭ | 00:00 | 2 дня | [44990370917](https://github.com/jeep-jim/AvtoCena/actions/runs/44990370917), попытка 2: in_progress; не отменять и не дублировать |
-| Грузия | 00:00 | 2 дня | [44968899905](https://github.com/jeep-jim/AvtoCena/actions/runs/44968899905): MyAuto transport failure; intake неполон |
+| Грузия | 00:00 | 2 дня | [44968899905](https://github.com/jeep-jim/AvtoCena/actions/runs/44968899905): попытка 2 завершена с неполным сбором MyAuto и AutoPapa; публикация и очистка пропущены |
 | Европа | 00:00 | 3 дня | [44976801536](https://github.com/jeep-jim/AvtoCena/actions/runs/44976801536): coverage guard остановил публикацию; нужен исправленный workflow |
 
 ## Проверки PR 1801
@@ -39,6 +39,8 @@ Korea/UAE уточнены: 22.11.2026, 23:06 Asia/Krasnoyarsk; остальны
 В [job 137044250368](https://github.com/jeep-jim/AvtoCena/actions/runs/44968899905/job/137044250368), artifact 14738319396, `report.json` содержит три одинаковых `yandex_bridge_http_502_myauto_1_myauto_list_routes_failed:...fetch_failed`. У MyAuto 0 страниц, строк и попыток деталей; AutoPapa сохранил 1 149 наблюдений. 502 сформирован нашим Yandex worker после ошибки fetch до разбора HTML; это не доказательство HTTP 502 или Cloudflare-блокировки MyAuto.
 
 Adapter сохраняет только `error.message`; route и bridge дополнительно обрезают текст. DNS, TLS, connect timeout, egress и недоступность поставщика по этому artifact не различить. Следующий шаг — безопасно записывать `error.name` и `error.cause.code/name` в worker и проверить следующий штатный запуск без внепланового сбора.
+
+[Повторный сбор 22.11](https://github.com/jeep-jim/AvtoCena/actions/runs/44968899905/job/137214239146) завершился в 21:38 по Новокузнецку. MyAuto не получил первую страницу после трёх попыток. AutoPapa сохранил 396 уникальных объявлений с 385 страниц; журнал содержит HTTP 503 и три последовательных сбоя списка. Публикация и очистка пропущены. При проверке в 23:46 [каталог Грузии](https://avtocena.com/api/catalog/search?market=georgia&pageSize=24) вернул прежнее поколение `gen_1794878284419_a611dfcf`, 1 123 объявления и 24 записи на первой странице.
 
 ## Следующие действия
 
