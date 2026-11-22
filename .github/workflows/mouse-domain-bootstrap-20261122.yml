@@ -48,7 +48,7 @@ jobs:
           test ! -L /opt/osminog/website
           exec 8>/opt/osminog/website/.deploy.lock
           flock -n 8
-          mouse_release=e9b73014c5ca716f8c1c12483f087c42d504f57f
+          mouse_release=fb354f3b4e4d635f4b51b241335449c171c39abb
           mouse_config=/etc/nginx/conf.d/mouse.black.conf
           mouse_work=$(mktemp -d /root/mouse-domain-activation.XXXXXX)
           mouse_started=no
@@ -123,13 +123,14 @@ jobs:
               content = '\n'.join(line.split('#', 1)[0] for line in content.splitlines())
               for names in re.findall(r'\bserver_name\s+([^;]+);', content):
                   assert not {'mouse.black', 'www.mouse.black'} & set(names.split()), 'Conflicting Mouse host in another active configuration'
+          print('NGINX_ACTIVE_LISTEN_DIRECTIVES ' + repr(sorted(set(re.findall(r'\blisten\s+([^;]+);', active)))))
           print('MOUSE_NGINX_INCLUDE_AND_HOST_PREFLIGHT_OK')
           PY
           mouse_setup=$mouse_work/reviewed-bootstrap.sh
           install -o root -g root -m 600 \
             "/opt/osminog/website/bootstrap-${mouse_release}.sh" "$mouse_setup"
           printf '%s  %s\n' \
-            '21397fe27c9452979d3f484a2b4aa9dbfe36461f0dcf6b080dc677ec92e22226' \
+            'dd0e07c445fce5c99a0c1c17a5c780605ba729bd6c993e3467f31fe1472b3ef3' \
             "$mouse_setup" | sha256sum --check --status
           bash -n "$mouse_setup"
           mouse_started=yes
@@ -151,7 +152,7 @@ jobs:
             -o StrictHostKeyChecking=yes -o UserKnownHostsFile="$hosts_file" \
             root@151.248.113.177 'timeout 480 bash -s' < "$payload" | tee "$RUNNER_TEMP/mouse-admin-activation.log"
           printf '%s\n' '## Owner-approved Mouse domain activation' \
-            'Pinned Mouse source e9b73014c5ca716f8c1c12483f087c42d504f57f was activated with the reviewed bootstrap.' \
+            'Pinned Mouse source fb354f3b4e4d635f4b51b241335449c171c39abb was activated with the reviewed bootstrap.' \
             'Only the Mouse webroot, virtual host, certificate and renewal timer were installed. Nginx was validated and reloaded.' \
             'Existing site health/release, application process and protected configuration were compared before and after.' \
             'Independent public Mouse HTML, SEO and complete installer checks still run from OSMINOG. Remove this temporary workflow after completion.' >> "$GITHUB_STEP_SUMMARY"
