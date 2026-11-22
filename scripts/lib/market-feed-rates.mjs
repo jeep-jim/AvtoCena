@@ -25,5 +25,9 @@ export async function bindFeedRates(market, mode, {runId=process.env.MARKET_RATE
  if (mode === 'read' && (!snapshot.rates[required] || !snapshot.rates.EUR || !snapshot.rates.USD))
   throw Error('required_feed_currency_unavailable');
  install(snapshot);
+ if (mode === 'read' && market === 'korea') {
+  const {effectiveRate, rateSource} = snapshot.rates.KRW;
+  console.log(JSON.stringify({stage:'encar_feed_rate', runId, capturedAt:snapshot.capturedAt, currency:'KRW', effectiveRate, rateSource}));
+ }
  return snapshot;
 }
