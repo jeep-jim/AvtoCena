@@ -1,7 +1,75 @@
 import fs from "node:fs/promises";
+import {createHash} from "node:crypto";
+import {isDeepStrictEqual} from "node:util";
 import {isVerifiedPriceOnRequestForAudit} from './lib/visible-audit-price-policy.mjs';
 
-const { readCurrentPublicCatalogProjection } = await import("../apps/web/lib/catalog/storage.ts");
+const { PUBLIC_CATALOG_MARKETS } = await import("../apps/web/lib/catalog/runtime-config.ts");
+function auditMarket(args) {
+  let market=null;
+  for(let index=0;index<args.length;index++) {
+    const argument=args[index];
+    if(argument!=='--market' && !argument.startsWith('--market=')) throw Error('visible_audit_argument_invalid');
+    if(market!==null) throw Error('visible_audit_market_repeated');
+    const value=argument==='--market'?args[++index]:argument.slice('--market='.length);
+    if(!PUBLIC_CATALOG_MARKETS.includes(value)) throw Error('visible_audit_market_invalid');
+    market=value;
+  }
+  return market;
+}
+const requestedMarket=auditMarket(process.argv.slice(2));
+
+async function readScopedAuditProjection(storage,manifest,market,retainRows) {
+  const {readCatalogProjectionBatches}=await import("../apps/web/lib/catalog-projection-parts.ts");
+  const generationId=manifest?.generationId, entry=manifest?.markets?.[market];
+  if(!/^gen_\d+_[a-z0-9]+$/.test(generationId||'') || !entry
+      || !Number.isSafeInteger(entry.count) || entry.count<0) throw Error('visible_audit_manifest_invalid');
+  const key='catalog/generations/'+generationId+'/indexes/projection/'+market+'.json';
+  const rows=[], ids=new Set(), hash=createHash('sha256').update('[');
+  let count=0;
+  // Read the active immutable market projection, never a staged public alias
+  // or an all-market projection which gives unrelated data a veto.
+  for await(const batch of readCatalogProjectionBatches(storage,key)) {
+    if(batch.generationId!==generationId) throw Error('visible_audit_projection_generation_changed');
+    for(const row of batch.items) {
+      if(row?.market!==market || typeof row.id!=='string' || !row.id || row.id!==row.id.trim() || ids.has(row.id)) {
+        throw Error('visible_audit_projection_identity');
+      }
+      ids.add(row.id);
+      hash.update((count?',':'')+JSON.stringify(row)); count++;
+      if(retainRows) rows.push(row);
+      if(count>entry.count) throw Error('visible_audit_projection_count');
+    }
+  }
+  if(count!==entry.count) throw Error('visible_audit_projection_count');
+  return {generationId,entry,rows,sha256:hash.update(']').digest('hex')};
+}
+async function readAuditProjection(market) {
+  if(market===null) {
+    const {readCurrentPublicCatalogProjection}=await import("../apps/web/lib/catalog/storage.ts");
+    return readCurrentPublicCatalogProjection();
+  }
+  const {getJsonStorage}=await import("../apps/web/lib/data.ts");
+  const storage=getJsonStorage();
+  const original=await readScopedAuditProjection(storage,await storage.readJson('catalog/manifest.json',null),market,true);
+  const {prepareCatalogProjectionRows}=await import("../apps/web/lib/catalog/storage.ts");
+  const {withCatalogEditorial}=await import("../apps/web/lib/catalog/editorial.ts");
+  // Preserve the default reader's visibility, withdrawal, current-day admission
+  // and moderation semantics, after validating every raw row in this market.
+  const rows=await withCatalogEditorial(async()=>prepareCatalogProjectionRows(original.rows));
+  let checked=original;
+  for(let readbacks=0;;readbacks++) {
+    const current=await storage.readJson('catalog/manifest.json',null);
+    if(!isDeepStrictEqual(current?.markets?.[market],original.entry)) throw Error('visible_audit_target_changed');
+    if(current?.generationId===checked.generationId) {
+      return {generationId:original.generationId,observedGenerationId:checked.generationId,rows};
+    }
+    // A neighbour may publish while this read-only audit runs. Prove that the
+    // target survived byte-for-byte by reading only its new immutable shard.
+    if(readbacks===2) throw Error('visible_audit_target_readback_unstable');
+    checked=await readScopedAuditProjection(storage,current,market,false);
+    if(checked.sha256!==original.sha256) throw Error('visible_audit_target_changed');
+  }
+}
 const { hasCredibleCatalogIdentity } = await import("../apps/web/lib/catalog/offer-quality.ts");
 const { catalogOfferVisibleRub, catalogRequiredSpecificationRejectionReason } = await import("../apps/web/lib/catalog/public-priority.ts");
 
@@ -103,7 +171,7 @@ function sortedCounts(map, limit = SAMPLE_LIMIT) {
     .slice(0, limit);
 }
 
-const publicReadmodel = await readCurrentPublicCatalogProjection();
+const publicReadmodel = await readAuditProjection(requestedMarket);
 const visible = publicReadmodel.rows || [];
 
 const byMarket = new Map();
@@ -246,9 +314,11 @@ const report = {
   version: 2,
   auditedAt: new Date().toISOString(),
   mode: "production_visible_read_only",
+  scope: requestedMarket===null?{kind:"global"}:{kind:"market",market:requestedMarket},
   totals: {
     publicReadmodelOffers: visible.length,
     generationId: publicReadmodel.generationId,
+    observedGenerationId: publicReadmodel.observedGenerationId ?? publicReadmodel.generationId,
     visibleOffers: visible.length,
     visibleMakeModelPairs: visibleModels.size,
     resolvedIdentity,
@@ -306,11 +376,15 @@ const report = {
       && blockingNeedsData === 0,
   },
 };
+// A successful market audit makes no claim about the markets it did not read.
+report.globalReleaseGate={audited:requestedMarket===null,pass:requestedMarket===null?report.releaseGate.pass:null};
 
 await fs.writeFile(OUTPUT, `${JSON.stringify(report, null, 2)}\n`);
 console.log(JSON.stringify(report, null, 2));
 
 if (process.env.GITHUB_OUTPUT) {
+  await fs.appendFile(process.env.GITHUB_OUTPUT, 'audit_scope='+report.scope.kind+'\n');
+  if(requestedMarket!==null) await fs.appendFile(process.env.GITHUB_OUTPUT,'audit_market='+requestedMarket+'\n');
   await fs.appendFile(process.env.GITHUB_OUTPUT, `visible_offers=${report.totals.visibleOffers}\n`);
   await fs.appendFile(process.env.GITHUB_OUTPUT, `visible_models=${report.totals.visibleMakeModelPairs}\n`);
   await fs.appendFile(process.env.GITHUB_OUTPUT, `ready_exact=${report.totals.readyExact}\n`);
