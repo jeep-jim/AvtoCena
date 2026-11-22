@@ -1,0 +1,157 @@
+name: One-time owner-approved Mouse domain activation
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/mouse-domain-bootstrap-20261122.yml']
+permissions:
+  contents: read
+concurrency:
+  group: mouse-domain-bootstrap-20261122
+  cancel-in-progress: false
+jobs:
+  activate:
+    if: >-
+      github.ref == 'refs/heads/main' &&
+      github.event_name == 'push' &&
+      github.event.head_commit.message == 'Owner-approved one-time Mouse domain activation (2026-11-22)'
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    environment: regcloud-staging
+    steps:
+      - name: Activate only the reviewed Mouse host and verify existing site
+        shell: bash
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+        run: |
+          set -euo pipefail
+          umask 077
+          test -n "$SSH_PRIVATE_KEY"
+          key_file=$(mktemp)
+          hosts_file=$(mktemp)
+          payload=$(mktemp)
+          trap 'rm -f -- "$key_file" "$hosts_file" "$payload"' EXIT
+          printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
+          unset SSH_PRIVATE_KEY
+          ssh-keygen -y -f "$key_file" >/dev/null
+          printf '%s\n' '151.248.113.177 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAwiP6mOUcqHc5+Xvih7YY0Ikc7TyNsIoLoFTVx1JcSV' > "$hosts_file"
+          cat > "$payload" <<'REMOTE'
+          set -euo pipefail
+          umask 077
+          test "$(id -u)" = 0
+          test "$(hostname -s)" = cv8120751
+          for binary in python3 curl docker nginx certbot systemctl sha256sum install flock runuser; do
+            command -v "$binary" >/dev/null
+          done
+          exec 9>/run/lock/mouse-domain-bootstrap.lock
+          flock -n 9
+          test -d /opt/osminog/website
+          test ! -L /opt/osminog/website
+          exec 8>/opt/osminog/website/.deploy.lock
+          flock -n 8
+          mouse_release=e9b73014c5ca716f8c1c12483f087c42d504f57f
+          mouse_config=/etc/nginx/conf.d/mouse.black.conf
+          mouse_work=$(mktemp -d /root/mouse-domain-activation.XXXXXX)
+          mouse_started=no
+          mouse_had_config=no
+          mouse_timer_existed=no
+          if systemctl cat mouse-website-cert-renew.timer >/dev/null 2>&1; then mouse_timer_existed=yes; fi
+          if test -e "$mouse_config"; then
+            test ! -L "$mouse_config"
+            test -f "$mouse_config"
+            test "$(head -1 "$mouse_config")" = '# Managed by OSMINOG: mouse.black website'
+            cp -p "$mouse_config" "$mouse_work/previous-mouse.conf"
+            mouse_had_config=yes
+          fi
+          finish() {
+            mouse_status=$?
+            trap - EXIT TERM INT
+            if test "$mouse_status" -ne 0 && test "$mouse_started" = yes; then
+              if test "$mouse_had_config" = yes; then
+                install -m 644 "$mouse_work/previous-mouse.conf" "$mouse_config"
+              else
+                rm -f -- "$mouse_config"
+              fi
+              if nginx -t && systemctl reload nginx; then
+                printf '%s\n' 'MOUSE_VHOST_ROLLBACK_VERIFIED'
+              else
+                printf '%s\n' 'MOUSE_VHOST_ROLLBACK_FAILED' >&2
+              fi
+              if test "$mouse_timer_existed" = no; then
+                systemctl disable --now mouse-website-cert-renew.timer >/dev/null 2>&1 || true
+              fi
+              if health_release >/dev/null; then
+                printf '%s\n' 'AVTOCENA_HEALTH_OK_AFTER_ROLLBACK'
+              else
+                printf '%s\n' 'AVTOCENA_HEALTH_RECHECK_REQUIRED' >&2
+              fi
+            fi
+            rm -rf -- "$mouse_work"
+            exit "$mouse_status"
+          }
+          trap finish EXIT
+          trap 'exit 143' TERM
+          trap 'exit 130' INT
+          health_release() {
+            curl --fail --silent --show-error --noproxy '*' --max-time 20 \
+              --resolve avtocena.com:443:127.0.0.1 https://avtocena.com/api/health |
+              python3 -c 'import sys,json,re; d=json.load(sys.stdin); s=d.get("releaseSha", ""); assert d.get("ok") is True and re.fullmatch("[0-9a-f]{40}",s); print(s)'
+          }
+          protected_state() {
+            docker inspect --format '{{.Id}} {{.State.Running}} {{.State.StartedAt}} {{.State.Pid}} {{.RestartCount}}' avtocena-production
+            systemctl show ssh nginx docker --property=MainPID,ActiveState,ActiveEnterTimestampMonotonic --no-pager
+            for path in /root/.ssh/authorized_keys /etc/ssh/sshd_config /etc/nginx/nginx.conf /etc/sudoers; do
+              if test -f "$path"; then sha256sum "$path"; else printf 'absent %s\n' "$path"; fi
+            done
+          }
+          test "$(docker inspect --format '{{.State.Running}}' avtocena-production)" = true
+          test "$(systemctl is-active nginx)" = active
+          before_release=$(health_release)
+          protected_state > "$mouse_work/protected-before.txt"
+          printf 'AVTOCENA_HEALTH_BEFORE_OK release=%s\n' "$before_release"
+          nginx -T > "$mouse_work/nginx-before.conf" 2> "$mouse_work/nginx-before.stderr"
+          python3 - "$mouse_work/nginx-before.conf" <<'PY'
+          import re, sys
+          from pathlib import Path
+          text = Path(sys.argv[1]).read_text()
+          sections = re.split(r'^# configuration file (.+):\s*$', text, flags=re.M)
+          active = '\n'.join(line.split('#', 1)[0] for line in text.splitlines())
+          assert re.search(r'\binclude\s+[\"\']?/etc/nginx/conf\.d/\*\.conf[\"\']?\s*;', active), 'Expected Nginx conf.d include is not active'
+          for index in range(1, len(sections), 2):
+              filename, content = sections[index], sections[index + 1]
+              if filename == '/etc/nginx/conf.d/mouse.black.conf':
+                  continue
+              content = '\n'.join(line.split('#', 1)[0] for line in content.splitlines())
+              for names in re.findall(r'\bserver_name\s+([^;]+);', content):
+                  assert not {'mouse.black', 'www.mouse.black'} & set(names.split()), 'Conflicting Mouse host in another active configuration'
+          print('MOUSE_NGINX_INCLUDE_AND_HOST_PREFLIGHT_OK')
+          PY
+          mouse_setup=$mouse_work/reviewed-bootstrap.sh
+          install -o root -g root -m 600 \
+            "/opt/osminog/website/bootstrap-${mouse_release}.sh" "$mouse_setup"
+          printf '%s  %s\n' \
+            '21397fe27c9452979d3f484a2b4aa9dbfe36461f0dcf6b080dc677ec92e22226' \
+            "$mouse_setup" | sha256sum --check --status
+          bash -n "$mouse_setup"
+          mouse_started=yes
+          bash "$mouse_setup" "$mouse_release"
+          after_release=$(health_release)
+          protected_state > "$mouse_work/protected-after.txt"
+          test "$before_release" = "$after_release"
+          cmp --silent "$mouse_work/protected-before.txt" "$mouse_work/protected-after.txt"
+          test "$(id -nG osminog)" = osminog
+          runuser -u osminog -- test ! -w /etc/nginx
+          runuser -u osminog -- test ! -w /var/run/docker.sock
+          test "$(systemctl is-active mouse-website-cert-renew.timer)" = active
+          printf 'AVTOCENA_HEALTH_AFTER_OK release=%s\n' "$after_release"
+          printf '%s\n' 'AVTOCENA_PROCESS_AND_PROTECTED_CONFIG_UNCHANGED' 'OSMINOG_PRIVILEGES_UNCHANGED' 'MOUSE_ADMIN_ACTIVATION_COMPLETE'
+          REMOTE
+          bash -n "$payload"
+          ssh -i "$key_file" -o IdentitiesOnly=yes -o BatchMode=yes -o ConnectTimeout=12 \
+            -o ServerAliveInterval=15 -o ServerAliveCountMax=2 \
+            -o StrictHostKeyChecking=yes -o UserKnownHostsFile="$hosts_file" \
+            root@151.248.113.177 'timeout 480 bash -s' < "$payload" | tee "$RUNNER_TEMP/mouse-admin-activation.log"
+          printf '%s\n' '## Owner-approved Mouse domain activation' \
+            'Pinned Mouse source e9b73014c5ca716f8c1c12483f087c42d504f57f was activated with the reviewed bootstrap.' \
+            'Only the Mouse webroot, virtual host, certificate and renewal timer were installed. Nginx was validated and reloaded.' \
+            'Existing site health/release, application process and protected configuration were compared before and after.' \
+            'Independent public Mouse HTML, SEO and complete installer checks still run from OSMINOG. Remove this temporary workflow after completion.' >> "$GITHUB_STEP_SUMMARY"
