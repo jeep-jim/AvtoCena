@@ -1,43 +1,44 @@
 # Фиды и расписания
 
-Последняя проверка запусков: 22.11.2026, около 19:14 Asia/Krasnoyarsk. Готовность всех фидов не подтверждена.
+Обновлено: 22.11.2026, Asia/Krasnoyarsk. Готовность всех фидов и новая публикация Китая не подтверждены.
 
 ## Контракт
 
-Каждый рынок обновляется независимо. Данные, цены и индексы готовятся в фоне; посетитель получает сохранённую версию. Курс фиксируется для версии фида. Ручные значения, неизвестные параметры, проверки полноты, lease/CAS и предыдущая рабочая версия сохраняются. Сбой источника не является продажей.
+Каждый рынок обновляется независимо. Данные, цены и индексы готовятся в фоне; курс фиксируется для версии. Сохраняются ручные значения, неизвестные параметры, полнота, lease/CAS и предыдущий рабочий срез. Ошибка источника не является продажей. Японию и свежий Зелёный угол повторно не собирать.
 
-## Проверенное расписание
+## Штатное расписание
 
-Код: `scripts/lib/catalog-refresh-schedule.mjs` и `.github/workflows/catalog-refresh-<market>.yml`. Cron вызывает проверку, interval guard определяет нужный день.
+Контракт: `scripts/lib/catalog-refresh-schedule.mjs` и `.github/workflows/catalog-refresh-<market>.yml`. Cron проверяет окно, interval guard определяет нужный день.
 
-| Рынок | Местное время UTC+7 | Интервал | Последний проверенный результат |
+| Рынок | UTC+7 | Интервал | Последний известный результат |
 | --- | --- | --- | --- |
-| Китай | 21:00 | Ежедневно | Загрузка и локальная подготовка успешны; автоматическое публичное продолжение не подключено |
-| Корея | 00:00 | 2 дня | Публикация 45004098806 выполнялась |
-| ОАЭ | 00:00 | 2 дня | Публикация 44990370917, попытка 2, выполнялась |
-| Грузия | 00:00 | 2 дня | 44968899905: `myauto_georgia_list=list_failed`; общий intake неполон |
-| Европа | 00:00 | 3 дня | 44976801536 отказал до нового исправления контекста энциклопедии |
-| Япония / Зелёный угол | Существующий режим | Не менять | Повторный сбор в этой задаче не запускать |
+| Китай | 21:00 | Ежедневно | Сохранены загрузка и prepared intake; автоматическое публичное продолжение не подключено |
+| Корея | 00:00 | 2 дня | [45004098806](https://github.com/jeep-jim/AvtoCena/actions/runs/45004098806): terminal результат ещё нужно проверить |
+| ОАЭ | 00:00 | 2 дня | [44990370917](https://github.com/jeep-jim/AvtoCena/actions/runs/44990370917), попытка 2: terminal результат ещё нужно проверить |
+| Грузия | 00:00 | 2 дня | [44968899905](https://github.com/jeep-jim/AvtoCena/actions/runs/44968899905): MyAuto transport failure; intake неполон |
+| Европа | 00:00 | 3 дня | [44976801536](https://github.com/jeep-jim/AvtoCena/actions/runs/44976801536): coverage guard остановил публикацию; нужен исправленный workflow |
 
-## Доказательства
+## Проверки PR 1801
 
-- [Китай, загрузка](https://github.com/jeep-jim/AvtoCena/actions/runs/44945974384): 5 530 событий, 278 страниц, cursor 13205327. [Подготовка](https://github.com/jeep-jim/AvtoCena/actions/runs/44947482013): 290 560 observations. Это не подтверждение переключения публичного Китая.
-- [Корея, прерванная попытка](https://github.com/jeep-jim/AvtoCena/actions/runs/44984423545): 47 333 входных Korea → 325 224 общих строк; завершение `runner has received a shutdown signal`. OOM не доказан. [Новая публикация](https://github.com/jeep-jim/AvtoCena/actions/runs/45004098806) прошла восстановление serving encyclopedia.
-- [Европа](https://github.com/jeep-jim/AvtoCena/actions/runs/44976801536): `staged_budget_eligible_source_missing:korea` на старом workflow. В актуальном коде exact serving encyclopedia уже восстанавливается перед writer. Нельзя исключать retained Korea из guard общего generation.
-- [ОАЭ](https://github.com/jeep-jim/AvtoCena/actions/runs/44990370917) и [Грузия](https://github.com/jeep-jim/AvtoCena/actions/runs/44968899905): итог проверять по самим запускам, не по этому сохранённому снимку статуса.
+[PR 1801](https://github.com/jeep-jim/AvtoCena/pull/1801): head `20ca52413c2d8c63063961c9358285c5064f3c71`, tree `1b3e7755612c5824a733a33a5062725add6e1fbe`. Локально `npm test`: 3 386 / 3 386, без skipped; TypeScript web и engine PASS; 25 editorial и owned guards PASS. Mobile.de остаётся выключенным, действующие ограничения источников сохранены.
 
-## Подготовленные изменения
+[CI 45022338709](https://github.com/jeep-jim/AvtoCena/actions/runs/45022338709) и [45022383527](https://github.com/jeep-jim/AvtoCena/actions/runs/45022383527) завершились успешно, включая production build. PR принят в main: `2686cc203a1dd5e38b38d29d84423145f2aeeb16`. Установка нового runtime сайта этим merge не выполнялась.
 
-[PR 1801](https://github.com/jeep-jim/AvtoCena/pull/1801): точная совместимость установленного калькулятора и честная проверка China mirror вместо требования отсутствующего публикационного artifact. 42 адресных локальных теста прошли. Первый CI: 3 385 тестов, 38 отказов; 37 точно воспроизведены на исходной базе, один отказ старого документационного контракта исправлен. Тесты новых guards включены перед полной регрессией; обязательные проверки не пропускаются. Не считать PR установленным исправлением до merge и нового успешного запуска.
+## Китай: сохранённый вход публикации
 
-[Сохранённый China source adapter](https://github.com/jeep-jim/AvtoCena/tree/fix/china-publication-source-20261122): проверяет official run/attempt/SHA, готовый archive, frozen rates, cursor, replica manifest, срок источника и неизменность China control. 15 адресных проверок прошли. Это входной план, а не разрешение на публикацию: native admission, полный active/retirement proof, price seal, private preview и CAS ещё нужны.
+[Загрузка 44945974384](https://github.com/jeep-jim/AvtoCena/actions/runs/44945974384): 5 530 событий, 278 страниц, cursor 13205327. [Подготовка 44947482013](https://github.com/jeep-jim/AvtoCena/actions/runs/44947482013): 290 560 observations. Публичный Китай этим не переключён.
 
-У live 22867 нет editorial-home helper: результат должен быть `supported:false, prepared:false`, а не ложная готовность. Обычная подготовка overview сохраняется.
+Ветка `fix/china-publication-source-20261122`, [SHA b209f4f27ad84eae2878c4535e0daa269593a981](https://github.com/jeep-jim/AvtoCena/commit/b209f4f27ad84eae2878c4535e0daa269593a981): 15 тестов PASS. Adapter связывает official run/attempt/SHA, archive, frozen rates, cursor, replica manifest, срок источника и China control/ETag. Возвращается только входной план: native admission, полный active/retirement proof, price seal, private preview и CAS ещё нужны. Индекс — в [документе скорости](performance.md).
 
-## Следующее действие
+## Грузия: установленная причина и предел диагностики
 
-1. Устранить подтверждённые отказы обязательного CI, проверить PR 1801 на точном новом SHA, затем проверить подготовку overview.
-2. Не дублировать действующие Korea/UAE writers. После terminal результата проверить публичные карточки и поля.
-3. Европу повторить на исправленном workflow из сохранённого intake, без повторного сбора и без ослабления coverage.
-4. Завершить связку China prepared receipt → independent private stage → native parity → CAS одного China control. Одноразовые старые rev5 pins не переписывать.
-5. Для Грузии отдельно проверить отказ источника; сохранять прежний полный срез до принятия нового.
+В [job 137044250368](https://github.com/jeep-jim/AvtoCena/actions/runs/44968899905/job/137044250368), artifact 14738319396, `report.json` содержит три одинаковых `yandex_bridge_http_502_myauto_1_myauto_list_routes_failed:...fetch_failed`. У MyAuto 0 страниц, строк и попыток деталей; AutoPapa сохранил 1 149 наблюдений. 502 сформирован нашим Yandex worker после ошибки fetch до разбора HTML; это не доказательство HTTP 502 или Cloudflare-блокировки MyAuto.
+
+Adapter сохраняет только `error.message`; route и bridge дополнительно обрезают текст. DNS, TLS, connect timeout, egress и недоступность поставщика по этому artifact не различить. Следующий шаг — безопасно записывать `error.name` и `error.cause.code/name` в worker и проверить следующий штатный запуск без внепланового сбора.
+
+## Следующие действия
+
+1. Проверить запуск `regcloud-overview.yml` после обновления существующего push marker на main. Обычные триггеры: cron 17:05 UTC и завершение UAE; manual inputs `{}`. Listener завершения Korea paid publish отсутствует.
+2. У live 22867 нет editorial-home helper: сохранять честные `supported:false, prepared:false`; обычный overview должен подготовиться. Не выпускать весь main как runtime.
+3. Перед повтором Korea/UAE проверить terminal состояния, не создавать пересекающиеся writers. Затем проверить публичные карточки и поля. Европу повторять только из сохранённого intake на исправленном workflow, без ослабления retained-market coverage.
+4. Завершить независимую публикацию Китая с индексом и действующими guards. Старые одноразовые rev5 pins не менять; до принятия нового среза сохранять текущий.
