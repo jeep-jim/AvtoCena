@@ -1,3 +1,4 @@
+import {homeCardPayload} from "@/app/_lib/home-card-payload";
 import {readGreenCorner} from '@/lib/catalog/green-corner';
 import {withAjesCount} from '@/lib/catalog/ajes-catalog';
 import { NextResponse } from "next/server";
@@ -43,7 +44,7 @@ export async function GET() {
       items=combined.items.map(item=>item.preparedChinaSelection?item:byId.get(item.id)??item);
     }
     const pricingMs = performance.now() - started - readMs;
-    return NextResponse.json({ ...combined, total:combined.total+(green?.items.length||0),countIncomplete:combined.countIncomplete||!green, items }, {
+    return NextResponse.json({ ...combined, total:combined.total+(green?.items.length||0),countIncomplete:combined.countIncomplete||!green, items:items.map(homeCardPayload) }, {
       headers: { "Cache-Control": "no-store, max-age=0", "Server-Timing": `catalog-read;dur=${readMs.toFixed(1)}, catalog-pricing;dur=${pricingMs.toFixed(1)}` },
     });
   } catch (error) {
