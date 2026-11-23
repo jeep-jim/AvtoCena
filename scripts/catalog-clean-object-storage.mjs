@@ -1,4 +1,4 @@
-import {referencedCatalogGenerations} from './lib/catalog-generation-references.mjs';
+import {readReferencedCatalogGenerationClosure} from './lib/catalog-generation-references.mjs';
 import fs from "node:fs/promises";
 import {staleJapanPreviewObjects,stalePriceSnapshotObjects} from "./lib/catalog-runtime-cleanup.mjs";
 import { readProtectedImageReferences } from "./lib/catalog-cleanup-image-references.mjs";
@@ -109,8 +109,8 @@ const multipartUploadsPromise = storage.listMultipartUploads
   ? storage.listMultipartUploads().catch((error) => { inventoryErrors.push({ stage: "multipart_uploads", error: String(error?.message || error) }); return []; })
   : Promise.resolve([]);
 const [publicManifest, internalManifest, bucketObjects, objectVersions, multipartUploads, namespaceObjects, catalogObjects, generationObjects, internalObjects, imageObjects, sourceCandidateObjects, brandProjectionObjects] = await Promise.all([
-  readDataJson("catalog/manifest.json", { generationId: "", markets: {} }),
-  readDataJson("catalog/internal/manifest.json", { generationId: "", sources: {} }),
+  storage.readJson("catalog/manifest.json", null),
+  storage.readJson("catalog/internal/manifest.json", null),
   storage.listBucketObjects?.("") || storage.listObjects(""),
   objectVersionsPromise,
   multipartUploadsPromise,
@@ -132,10 +132,18 @@ const generationIds = [...new Set(generationObjects.map((object) => generationId
   .sort((left, right) => generationTimestamp(right) - generationTimestamp(left));
 const publicGeneration = String(publicManifest?.generationId || "");
 const internalGeneration = String(internalManifest?.generationId || "");
-const previousManifest = await readDataJson("catalog/previous-manifest.json", null);
+const previousManifest = await storage.readJson("catalog/previous-manifest.json", null);
+const generationClosure = await readReferencedCatalogGenerationClosure({
+  roots: [
+    {key: "catalog/manifest.json", value: publicManifest},
+    {key: "catalog/previous-manifest.json", value: previousManifest},
+    {key: "catalog/internal/manifest.json", value: internalManifest},
+  ],
+  readJson: (key, fallback) => storage.readJson(key, fallback),
+});
 const imageCleanupDeferredGenerations = [];
 const protectedGenerations = new Set([
-  ...referencedCatalogGenerations(publicManifest, previousManifest, internalManifest),
+  ...generationClosure.generations,
   publicGeneration,
   ...(previousManifest?.generationId ? [String(previousManifest.generationId)] : []),
   ...(!EMERGENCY && internalGeneration ? [internalGeneration] : []),
@@ -187,7 +195,8 @@ if (!publicGeneration || !generationIds.length) {
     const modifiedAt = objectAge(object.lastModified);
     return object.key && modifiedAt > 0 && modifiedAt < stagingCutoff;
   });
-  const staleRuntimeObjects = [...staleJapanPreviewObjects(catalogObjects, protectedGenerations, cutoff),...stalePriceSnapshotObjects(catalogObjects)];
+  const staleRuntimeObjects = [...staleJapanPreviewObjects(catalogObjects, protectedGenerations, cutoff),...stalePriceSnapshotObjects(catalogObjects)]
+    .filter(object => !generationClosure.objectKeys.has(object.key));
   const allDeleteObjects = [...generationDeleteObjects, ...internalDeleteObjects, ...imageDeleteObjects, ...staleSourceCandidateObjects, ...staleBrandProjectionObjects, ...staleRuntimeObjects];
   const plannedDeletes = allDeleteObjects.length;
   const plannedBytes = objectBytes(allDeleteObjects);
@@ -201,6 +210,7 @@ if (!publicGeneration || !generationIds.length) {
   let deletedRuntimeObjects = 0;
 
   if (!DRY_RUN && !blocked) {
+    await generationClosure.assertUnchanged();
     const runtimeResults = await mapWithConcurrency(staleRuntimeObjects, DELETE_CONCURRENCY, async (object) => {
       try { await storage.deleteJson(object.key); return 1; }
       catch (error) { errors.push({ stage: "runtime", key: object.key, error: String(error?.message || error) }); return 0; }
@@ -250,6 +260,8 @@ if (!publicGeneration || !generationIds.length) {
     currentPublicGeneration: publicGeneration,
     currentInternalGeneration: internalGeneration || null,
     protectedGenerations: [...protectedGenerations],
+    protectedMarketReceipts: generationClosure.receiptCount,
+    protectedMarketObjects: generationClosure.objectKeys.size,
     imageCleanupDeferred: imageCleanupDeferredGenerations.length > 0,
     imageCleanupDeferredGenerations,
     candidateGenerations,
