@@ -48,11 +48,11 @@ jobs:
                   if not eligible(second,target) or second['head_sha']!=first['head_sha']:
                       print(run_id,'changed before cancellation',flush=True)
                       continue
-                  status=api(run_id+'/cancel','POST')
+                  status=api(run_id+'/force-cancel','POST')
                   print(run_id,'requested',status,flush=True)
                   pending.add(run_id)
               except urllib.error.HTTPError as error:
-                  errors.append((run_id,error.code))
+                  body=json.loads(error.read().decode() or '{}');errors.append((run_id,error.code,body.get('message','')[:150]))
                   print(run_id,'request error',error.code,flush=True)
           deadline=time.monotonic()+240
           cancelled=[]
