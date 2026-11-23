@@ -3,6 +3,7 @@ import {createHash} from 'node:crypto';
 import fs from 'node:fs/promises';
 import {execFile} from 'node:child_process';
 import {promisify} from 'node:util';
+import {fileURLToPath} from 'node:url';
 import assert from 'node:assert/strict';
 import {catalogPowerBand} from '../apps/web/lib/catalog/power-mix.ts';
 import {getJsonStorage} from '../apps/web/lib/data.ts';
@@ -71,8 +72,14 @@ for(const market of ["china","korea","europe","uae","georgia"]){
 }
 
 const reports=[];
+const resourceLauncher=process.env.CATALOG_NODE_RESOURCE_LAUNCHER
+ ||fileURLToPath(new URL('./run-node-with-resources.mjs',import.meta.url));
 for(const params of [{market:'china',budgetTo:3000000,pageSize:12},{market:'china',budgetFrom:1500000,budgetTo:2500000,city:'Новокузнецк',yearFrom:2022,pageSize:12},{market:'korea',budgetTo:3000000,pageSize:12}]){
- const {stdout}=await promisify(execFile)(process.execPath,['--import','tsx',process.argv[1],'--probe',JSON.stringify(params)],{maxBuffer:4*1024*1024});
+ const {stdout,stderr}=await promisify(execFile)(process.execPath,[resourceLauncher,'--import','tsx',process.argv[1],'--probe',JSON.stringify(params)],{maxBuffer:4*1024*1024});
+ for(const line of stderr.split('\n')){
+  let event;try{event=JSON.parse(line);}catch{continue;}
+  if(event?.stage==='node_resource_memory')console.error(line);
+ }
  reports.push(JSON.parse(stdout.trim().split('\n').at(-1)));
 }
 const report={at:new Date().toISOString(),release:process.env.AVTOCENA_RELEASE_SHA,selectors,warmed,sorted,reports};

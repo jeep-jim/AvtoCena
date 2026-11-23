@@ -27,6 +27,7 @@ jobs:
             availableRamBytes:process.availableMemory()}));
           RESOURCE_PROBE
           node scripts/run-node-with-resources.mjs -e "console.log('publication_resource_startup_ok')"
+          node --test tests/catalog-background-memory.test.mjs
       - name: Audit production dependencies before merge
         run: npm audit --omit=dev --audit-level=high
       - name: Enforce performance release budgets
