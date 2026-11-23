@@ -37,7 +37,6 @@ jobs:
       YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
       YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
       CHE168_VERIFY_RUN_ID: ${{ github.event.workflow_run.id }}
-      NODE_OPTIONS: --max-old-space-size=6144
     steps:
       - uses: actions/checkout@v4
         with:
@@ -54,7 +53,7 @@ jobs:
         id: operation
         env:
           GITHUB_TOKEN: ${{ github.token }}
-        run: node --import tsx scripts/catalog-verify-owned-china.mjs
+        run: node scripts/run-node-with-resources.mjs --import tsx scripts/catalog-verify-owned-china.mjs
       - uses: actions/download-artifact@v4
         if: steps.operation.outputs.mode == 'publication'
         with:
@@ -64,15 +63,15 @@ jobs:
           github-token: ${{ github.token }}
       - name: Verify active generation and committed feed cursor
         if: steps.operation.outputs.mode == 'publication'
-        run: node --import tsx scripts/catalog-verify-che168-publication.mjs
+        run: node scripts/run-node-with-resources.mjs --import tsx scripts/catalog-verify-che168-publication.mjs
       - name: Audit published calculation coverage
         if: steps.operation.outputs.mode == 'publication'
-        run: node --import tsx scripts/catalog-audit-visible-calculation-coverage.mjs
+        run: node scripts/run-node-with-resources.mjs --import tsx scripts/catalog-audit-visible-calculation-coverage.mjs
       - name: Reconcile paid-feed status after successful verification
         if: steps.operation.outputs.mode == 'publication'
         env:
           CHE168_RECONCILE_OUTCOME: '1'
-        run: node --import tsx scripts/catalog-verify-che168-publication.mjs
+        run: node scripts/run-node-with-resources.mjs --import tsx scripts/catalog-verify-che168-publication.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:

@@ -203,7 +203,7 @@ test('daily workflow preserves schedule/triggers and uses isolated installed sou
  assert.match(workflow,/group: regcloud-overview-read-model\n  cancel-in-progress: false/);
  assert.match(workflow,/CATALOG_PREPARE_EDITORIAL_HOME: 'false'/);
  assert.match(workflow,/ref: \$\{\{ steps\.installed\.outputs\.release \}\}/);
- assert.match(workflow,/timeout --signal=TERM --kill-after=10s 300s node --import tsx/);
+ assert.match(workflow,/timeout --signal=TERM --kill-after=10s 300s node \.\.\/scripts\/run-node-with-resources\.mjs --import tsx/);
  assert.match(workflow,/if: always\(\)\n        run: rm -rf -- installed-editorial-runtime/);
  assert.doesNotMatch(workflow,/upload-artifact|ssh|docker (?:run|start|restart)/);
  const builder=await fs.readFile(new URL('../scripts/catalog-refresh-generation-pages.mjs',import.meta.url),'utf8');

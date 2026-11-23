@@ -4,10 +4,11 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import os from 'node:os';
 import {DatabaseSync} from 'node:sqlite';
-import {createHash} from 'node:crypto';
+import {createHash, randomUUID} from 'node:crypto';
 import {gzipSync} from 'node:zlib';
 import {execFileSync} from 'node:child_process';
 import {pathToFileURL} from 'node:url';
+import {setTimeout as delay} from 'node:timers/promises';
 import {che168CleanWorkerCheckout} from './helpers/che168-clean-worker.mjs';
 import {normalizeAutoApiChe168} from '../apps/web/lib/catalog/auto-api-che168';
 import {collectAutoApiChe168} from '../scripts/lib/auto-api-che168-client.mjs';
@@ -18,7 +19,8 @@ import {openRawFeedPin, rawDigest} from '../scripts/lib/catalog-raw-provenance.m
 import {observationShardWriter} from '../scripts/lib/catalog-intake-checkpoint.mjs';
 import {archiveIntakeDirectory, verifyIntakeArchive} from '../scripts/lib/nonjp-intake-archive.mjs';
 import {verifyChe168ReplicaInput, assertChe168ReplicaInputWitness, CHE168_REPLICA_WITNESS_SOURCE as SOURCE,
-  CHE168_REPLICA_WITNESS_KIND, CHE168_REPLICA_WORKER_CLOSURE, che168ReplicaWorkerSource} from '../scripts/lib/che168-replica-witness.mjs';
+  CHE168_REPLICA_WITNESS_KIND, CHE168_REPLICA_WORKER_CLOSURE, che168ReplicaWorkerSource,
+  addChe168WitnessCount} from '../scripts/lib/che168-replica-witness.mjs';
 
 const hash = (value: any) => rawDigest(value), sha = (bytes: Buffer | string) => createHash('sha256').update(bytes).digest('hex');
 const at = '2026-11-16T12:00:00.000Z', oldAt = '2026-10-09T08:09:40.000Z';
@@ -144,6 +146,78 @@ test('real SQLite is reconstructed from only the new replica and matches all emi
   assert.deepEqual(await verifyChe168ReplicaInput(f.optionsOf()), witness);
 });
 
+async function withInspectionObserver(f: any, hook: string, run: (record: string) => Promise<void>) {
+  const record = path.join(f.root, 'inspection-resource'), preload = path.join(f.root, 'inspection-observer.mjs');
+  await fs.writeFile(preload, `
+    import fs from 'node:fs';
+    import {isMainThread} from 'node:worker_threads';
+    import {getHeapStatistics} from 'node:v8';
+    globalThis.fetch=async()=>{throw Error('test_live_fetch_blocked');};
+    fs.writeFileSync(${JSON.stringify(record)}+(isMainThread?'.child.json':'.thread.json'),JSON.stringify({pid:process.pid,
+      heap:getHeapStatistics().heap_size_limit,args:process.execArgv,options:process.env.NODE_OPTIONS,
+      plan:JSON.parse(process.env.AVTOCENA_NODE_RESOURCE_MEMORY_PLAN)}));
+    ${hook}
+  `);
+  const previousOptions = process.env.NODE_OPTIONS, previousPlan = process.env.AVTOCENA_NODE_RESOURCE_MEMORY_PLAN;
+  process.env.NODE_OPTIONS = '--trace-warnings --max-old-space-size=32 --import ' + pathToFileURL(preload).href;
+  process.env.AVTOCENA_NODE_RESOURCE_MEMORY_PLAN = JSON.stringify({version: 1, role: 'stale-parent', heapMiB: 1,
+    capacityBytes: 1048576, sampledAt: '2000-01-01T00:00:00.000Z'});
+  try {await run(record);}
+  finally {
+    if (previousOptions === undefined) delete process.env.NODE_OPTIONS; else process.env.NODE_OPTIONS = previousOptions;
+    if (previousPlan === undefined) delete process.env.AVTOCENA_NODE_RESOURCE_MEMORY_PLAN; else process.env.AVTOCENA_NODE_RESOURCE_MEMORY_PLAN = previousPlan;
+  }
+}
+
+test('real witness child and inspector thread use the fresh verified resource heap with no REG writes', async t => {
+  const f = await fixture(t), started = Date.now();
+  await withInspectionObserver(f, '', async record => {
+    const witness = await verifyChe168ReplicaInput(f.optionsOf()); assert.equal(witness.normalized.rows, 3);
+    const child = JSON.parse(await fs.readFile(record + '.child.json', 'utf8'));
+    const thread = JSON.parse(await fs.readFile(record + '.thread.json', 'utf8'));
+    assert.notEqual(child.pid, process.pid); assert.equal(thread.pid, child.pid);
+    assert.equal(child.plan.role, 'che168-replica-witness'); assert.ok(Date.parse(child.plan.sampledAt) >= started);
+    assert.equal(child.plan.capacityBytes, child.plan.availableRamBytes + child.plan.usableSwapBytes);
+    assert.equal(child.plan.heapMiB, Math.floor(child.plan.capacityBytes / 1024 ** 2));
+    assert.equal(child.heap, child.plan.heapMiB * 1024 ** 2); assert.equal(thread.heap, child.heap);
+    assert.deepEqual(thread.plan, child.plan);
+    assert.ok(child.args.includes('--max-heap-size=' + child.plan.heapMiB));
+    assert.ok(!child.args.some((arg: string) => /max[-_]old[-_]space[-_]size/.test(arg)));
+    assert.match(child.options, /trace-warnings/); assert.ok(!/max[-_]old[-_]space[-_]size/.test(child.options));
+    assert.throws(() => process.kill(child.pid, 0), {code: 'ESRCH'});
+    assert.equal(f.storage.writes.length, 0); assert.deepEqual(await fs.readdir(f.scratch), []);
+  });
+});
+
+test('abort terminates a real busy inspector thread and its child before cleaning temporary storage', async t => {
+  const f = await fixture(t), controller = new AbortController();
+  await withInspectionObserver(f, 'if(!isMainThread){for(;;){}}', async record => {
+    const outcome = verifyChe168ReplicaInput({...f.optionsOf(), signal: controller.signal})
+      .then(value => ({value, error: undefined}), error => ({value: undefined, error}));
+    let child;
+    try {
+      const deadline = Date.now() + 5000;
+      for (;;) {
+        try {child = JSON.parse(await fs.readFile(record + '.thread.json', 'utf8')); break;}
+        catch (error) {if (error.code !== 'ENOENT') throw error; assert.ok(Date.now() < deadline, 'inspection child did not start'); await delay(20);}
+      }
+    } finally {controller.abort(); await outcome;}
+    const result = await outcome; assert.match(result.error?.message || '', /che168_replica_witness_deadline/);
+    assert.throws(() => process.kill(child.pid, 0), {code: 'ESRCH'});
+    assert.equal(f.storage.writes.length, 0); assert.deepEqual(await fs.readdir(f.scratch), []);
+  });
+});
+
+test('the real IPC child cannot substitute a response with a foreign nonce', async t => {
+  const f = await fixture(t);
+  await withInspectionObserver(f, "if(isMainThread){process.once('message',()=>process.send({nonce:'foreign',ok:true,value:{}}));await new Promise(()=>{});}", async record => {
+    await assert.rejects(() => verifyChe168ReplicaInput(f.optionsOf()), /che168_replica_witness_worker/);
+    const child = JSON.parse(await fs.readFile(record + '.child.json', 'utf8'));
+    assert.throws(() => process.kill(child.pid, 0), {code: 'ESRCH'});
+    assert.equal(f.storage.writes.length, 0); assert.deepEqual(await fs.readdir(f.scratch), []);
+  });
+});
+
 test('zero-change resume uses a full current replica without reading its missing base or creating a fictional journal head', async t => {
   const f = await fixture(t, {resume: true}); assert.ok(!f.storage.data.has(f.journalKey + '/head.json'));
   const witness = await verifyChe168ReplicaInput(f.optionsOf());
@@ -157,6 +231,90 @@ test('over 500 actual output rows cross ordinary shard boundaries without changi
   const f = await fixture(t, {rows: 503}); const witness = await verifyChe168ReplicaInput(f.optionsOf());
   assert.equal(witness.normalized.rows, 503); assert.equal((await fs.readdir(f.directory)).filter(name => name.endsWith('.jsonl')).length, 2);
   assert.equal(witness.normalized.idsSha256, hash(f.rows.map(row => row.id).sort()));
+});
+
+test('more than 2000 real observation files retain complete checksummed coverage and reject a missing file', async t => {
+  const f = await fixture(t, {rows: 2001});
+  for (const name of await fs.readdir(f.directory)) if (name.startsWith(SOURCE + '-')) await fs.unlink(path.join(f.directory, name));
+  const expected = [];
+  for (const [index, offer] of f.rows.entries()) {
+    const name = SOURCE + '-' + String(index + 1).padStart(6, '0') + '.jsonl';
+    const bytes = Buffer.from(JSON.stringify({stage: 'detail', observedAt: at, offer}) + '\n');
+    await fs.writeFile(path.join(f.directory, name), bytes);
+    expected.push({name, bytes: bytes.length, sha256: sha(bytes), rows: 1});
+  }
+  const witness = await verifyChe168ReplicaInput(f.optionsOf());
+  assert.equal(witness.normalized.rows, 2001);
+  assert.equal(witness.replicaReadback.inventory.observationFilesSha256, hash(expected));
+  assert.equal(witness.replicaReadback.inventory.observationBytes, expected.reduce((sum, file) => sum + file.bytes, 0));
+  await fs.unlink(path.join(f.directory, expected.at(-1)!.name));
+  await assert.rejects(() => verifyChe168ReplicaInput(f.optionsOf()), /observation_missing/);
+  assert.equal(f.storage.writes.length, 0);
+});
+
+test('a shard above 32 MiB is checked record by record with full hashes and required final newline', async t => {
+  const f = await fixture(t, {rows: 503, mutate(db) {
+    const records = db.prepare('SELECT id,payload FROM inventory').all(), update = db.prepare('UPDATE inventory SET payload=? WHERE id=?');
+    for (const row of records) {
+      const offer = JSON.parse(row.payload as string); offer.operational.fixtureDetail = 'x'.repeat(70000) + '€';
+      update.run(JSON.stringify(offer), row.id as string);
+    }
+  }});
+  // Ordinary writers roll at 8 MiB; this valid saved shard still obeys the
+  // existing 500-record and individual-record contracts.
+  for (const name of await fs.readdir(f.directory)) if (name.startsWith(SOURCE + '-')) await fs.unlink(path.join(f.directory, name));
+  for (let offset = 0; offset < f.rows.length; offset += 500) {
+    const name = SOURCE + '-' + String(offset / 500 + 1).padStart(6, '0') + '.jsonl';
+    await fs.writeFile(path.join(f.directory, name), f.rows.slice(offset, offset + 500)
+      .map(offer => JSON.stringify({stage: 'detail', observedAt: at, offer}) + '\n').join(''));
+  }
+  const files = (await fs.readdir(f.directory)).filter(name => name.startsWith(SOURCE + '-')).sort();
+  const first = path.join(f.directory, files[0]); assert.ok((await fs.stat(first)).size > 32 * 1024 ** 2);
+  const witness = await verifyChe168ReplicaInput(f.optionsOf()); assert.equal(witness.normalized.rows, 503);
+  const expected = [];
+  for (const name of files) {const bytes = await fs.readFile(path.join(f.directory, name)); expected.push({name, bytes: bytes.length, sha256: sha(bytes), rows: bytes.toString('utf8').trimEnd().split('\n').length});}
+  assert.equal(witness.replicaReadback.inventory.observationFilesSha256, hash(expected));
+  assert.equal(witness.replicaReadback.inventory.observationBytes, expected.reduce((sum, file) => sum + file.bytes, 0));
+  const last = path.join(f.directory, files.at(-1)!); await fs.truncate(last, (await fs.stat(last)).size - 1);
+  await assert.rejects(() => verifyChe168ReplicaInput(f.optionsOf()), /shard_bytes/);
+  assert.equal(f.storage.writes.length, 0);
+});
+
+test('large saved report and journal metadata retain exact source-only hashes without reading old journal chunks', async t => {
+  const f = await fixture(t, {resume: true}), changes = 10001, cursor = f.source.initialCursor + changes;
+  const head = {version: 2, binding: f.source.workingJournal.binding, initialCursor: f.source.initialCursor,
+    cursor, changes, bytes: 0, rawBytes: 0, chunks: [] as any[], fixtureMetadata: 'x'.repeat(4 * 1024 ** 2)};
+  for (let index = 0; index < changes; index++) {
+    const chunk = {binding: head.binding, from: head.initialCursor + index, to: head.initialCursor + index + 1, changes: 1, events: []};
+    const id = randomUUID(), raw = JSON.stringify(chunk), stored = {encoding: 'gzip-base64', data: gzipSync(Buffer.from(raw)).toString('base64')};
+    f.storage.data.set(f.journalKey + '/' + id + '.json', stored);
+    head.chunks.push({id, sha: hash(stored)}); head.bytes += Buffer.byteLength(JSON.stringify(stored)); head.rawBytes += Buffer.byteLength(raw);
+  }
+  f.storage.data.set(f.journalKey + '/head.json', head);
+  f.source.cursor = cursor; f.source.changes = changes; f.replica.cursor = cursor;
+  const manifest = f.storage.data.get(f.replica.key + '/manifest.json'); manifest.cursor = cursor; f.replica.sha256 = hash(manifest);
+  for (const offer of f.rows) offer.operational.che168ActiveVerification.cursor = cursor;
+  const shard = path.join(f.directory, SOURCE + '-000001.jsonl');
+  await fs.writeFile(shard, f.rows.map(offer => JSON.stringify({stage: 'detail', observedAt: at, offer}) + '\n').join(''));
+  f.report.fixtureMetadata = 'x'.repeat(4 * 1024 ** 2); await f.writeReport();
+  const witness = await verifyChe168ReplicaInput(f.optionsOf());
+  assert.equal(witness.replicaReadback.completion.journalHeadSha256, hash(head));
+  assert.equal(witness.replicaReadback.completion.reportSha256, hash(f.report));
+  assert.equal(witness.replicaReadback.completion.changes, changes); assert.equal(witness.normalized.rows, 3);
+  assert.ok(!f.storage.reads.some(key => key.startsWith(f.journalKey + '/') && !key.endsWith('/head.json')));
+  assert.equal(f.storage.writes.length, 0);
+});
+
+test('whole-proof counters have no former volume ceilings but reject unsafe integer census', () => {
+  for (const amount of [500000, 1024, 2000, 512 * 1024 ** 2, 8 * 1024 ** 3, 16 * 1024 ** 3]) {
+    assert.equal(addChe168WitnessCount(amount, 1), amount + 1);
+  }
+  assert.equal(addChe168WitnessCount(Number.MAX_SAFE_INTEGER - 1, 1), Number.MAX_SAFE_INTEGER);
+  for (const value of [-1, 0.5, NaN, Infinity, Number.MAX_SAFE_INTEGER + 1, '1', null]) {
+    assert.throws(() => addChe168WitnessCount(value, 1), /census/);
+    assert.throws(() => addChe168WitnessCount(1, value), /census/);
+  }
+  assert.throws(() => addChe168WitnessCount(Number.MAX_SAFE_INTEGER, 1), /census/);
 });
 
 test('a real multi-part SQLite file is restored in full and every saved part is read once', async t => {
@@ -322,8 +480,8 @@ test('the completed report and producer ready state are actual fenced inputs rat
 
 test('declared bounds and abort/deadline reject without partial storage mutations', async t => {
   const f = await fixture(t);
-  await assert.rejects(() => verifyChe168ReplicaInput({...f.optionsOf(), limits: {rows: 2}}), /source_report/);
-  await assert.rejects(() => verifyChe168ReplicaInput({...f.optionsOf(), limits: {replicaBytes: 100}}), /manifest/);
+  await assert.rejects(() => verifyChe168ReplicaInput({...f.optionsOf(), limits: {payloadBytes: 64}}), /inventory_row/);
+  await assert.rejects(() => verifyChe168ReplicaInput({...f.optionsOf(), limits: {replicaBytes: 100}}), /limits/);
   const controller = new AbortController(); controller.abort();
   await assert.rejects(() => verifyChe168ReplicaInput({...f.optionsOf(), signal: controller.signal}), /deadline/);
   const g = await fixture(t); g.storage.readJson = async () => new Promise(() => {});

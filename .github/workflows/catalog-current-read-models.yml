@@ -34,7 +34,6 @@ concurrency:
   cancel-in-progress: false
 
 env:
-  NODE_OPTIONS: --max-old-space-size=8192
   CATALOG_PUBLICATION_PROGRESS: "1"
   CATALOG_CHUNKED_ALL_PROJECTION_WRITE: "1"
   CATALOG_CHUNKED_PROJECTIONS_WRITE: "1"
@@ -83,7 +82,7 @@ jobs:
       - name: Publish one-hop projections and offer shards
         run: |
           set -o pipefail
-          npx tsx scripts/catalog-publish-current-read-models.mjs | tee catalog-current-read-models.log
+          node scripts/run-node-with-resources.mjs --import tsx scripts/catalog-publish-current-read-models.mjs | tee catalog-current-read-models.log
       - uses: actions/upload-artifact@v4
         if: always()
         with:

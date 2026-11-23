@@ -58,4 +58,4 @@ jobs:
       - name: Validate overview builder syntax
         run: node --check scripts/catalog-build-overview-read-model.mjs
       - name: Build compact current overview read model
-        run: npx tsx scripts/catalog-build-overview-read-model.mjs
+        run: node scripts/run-node-with-resources.mjs --import tsx scripts/catalog-build-overview-read-model.mjs
