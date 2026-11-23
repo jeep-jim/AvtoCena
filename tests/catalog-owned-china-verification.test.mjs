@@ -82,7 +82,7 @@ test('published-generation verification stays mandatory for recovery, while mirr
  const yaml=await readFile(new URL('../.github/workflows/catalog-che168-verify-publication.yml',import.meta.url),'utf8');
  assert.match(yaml,/ref: \$\{\{ github\.sha \}\}/);
  assert.doesNotMatch(yaml,/ref: \$\{\{ github\.event\.workflow_run\.head_sha \}\}/);
- assert.match(yaml,/node --import tsx scripts\/catalog-verify-owned-china\.mjs/);
+ assert.match(yaml,/node scripts\/run-node-with-resources\.mjs --import tsx scripts\/catalog-verify-owned-china\.mjs/);
  assert.match(yaml,/uses: actions\/download-artifact@v4\n\s+if: steps\.operation\.outputs\.mode == 'publication'/);
  assert.match(yaml,/name: Verify active generation and committed feed cursor\n\s+if: steps\.operation\.outputs\.mode == 'publication'/);
  assert.doesNotMatch(yaml,/continue-on-error:\s*true/);

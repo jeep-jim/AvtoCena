@@ -370,7 +370,7 @@ test('completed collectors prepare derivatives even when a later step failed',as
   assert.match(workflow,/- cron: '5 17 \* \* \*'/);
   assert.match(workflow,/branches: \[main\]/);
   assert.match(workflow,/contents: read/);
-  assert.match(workflow,/run: npx tsx scripts\/catalog-refresh-generation-pages\.mjs/);
+  assert.match(workflow,/run: node scripts\/run-node-with-resources\.mjs --import tsx scripts\/catalog-refresh-generation-pages\.mjs/);
   assert.doesNotMatch(workflow,/scripts\/(?:catalog-publish|catalog-source-intake|catalog-live-recovery)/);
   const watched=workflow.match(/workflows: \[([^\]]+)\]/)[1].split(',').map(name=>name.trim());
   const names=await Promise.all(['china','korea','europe','uae','georgia','green'].map(async market=>{

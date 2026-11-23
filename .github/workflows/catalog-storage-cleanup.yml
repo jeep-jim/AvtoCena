@@ -61,7 +61,7 @@ jobs:
       - name: Validate cleanup script
         run: node --check scripts/catalog-clean-object-storage.mjs
       - name: Clean expired catalog objects safely
-        run: timeout --signal=TERM --kill-after=120s 13800s npx tsx scripts/catalog-storage-maintenance.mjs
+        run: timeout --signal=TERM --kill-after=120s 13800s node scripts/run-node-with-resources.mjs --import tsx scripts/catalog-storage-maintenance.mjs
       - name: Write cleanup summary
         if: always()
         shell: bash
