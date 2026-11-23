@@ -110,7 +110,7 @@ function openIndependentMarketBackend<T extends ObjectJsonStorage|StageChinaFile
  };
  const get=async(key:string,expected:string,limit:number)=>{
   assertBackend();
-  const {data}=await storage.getBinary(key);
+  const {data}=await storage.getBinary(key,expected);
   if(!data.length||data.length>limit||hash(data)!==expected)return fail('immutable_readback');
   return data;
  };
@@ -143,8 +143,10 @@ function openIndependentMarketBackend<T extends ObjectJsonStorage|StageChinaFile
   bytes({version:1,market,generationId:ref.generationId,manifestSha256:ref.manifestSha256});
  const readCut=async(ref:{generationId:string;manifestSha256:string},activeRead=false)=>{
   if(!GEN.test(ref.generationId)||!validSha(ref.manifestSha256))return fail('cut_reference');
-  await get(path(ref.generationId,'binding.json'),hash(generationBinding(ref)),MAX_ROOT);
-  const body=await get(path(ref.generationId,`ready-${ref.manifestSha256}.json`),ref.manifestSha256,MAX_ROOT);
+  const [,body]=await Promise.all([
+   get(path(ref.generationId,'binding.json'),hash(generationBinding(ref)),MAX_ROOT),
+   get(path(ref.generationId,`ready-${ref.manifestSha256}.json`),ref.manifestSha256,MAX_ROOT),
+  ]);
   const cut=JSON.parse(body.toString('utf8')) as IndependentCut;
   assertCut(cut,market,ref.generationId,Date.now(),activeRead?acceptedLegalUntil:undefined);
   return cut;
@@ -288,7 +290,9 @@ function openIndependentMarketBackend<T extends ObjectJsonStorage|StageChinaFile
   const cut=await readCut(active,true);
   if(!cut.preparedChina)return null;
   if(!same(cut.source.cursor,active.cursor))return fail('active_cursor');
-  const inventory=await readPaper(cut,'inventory'),prices=await readPaper(cut,'prices'),search=await readPaper(cut,'search');
+  const [inventory,prices,search]=await Promise.all([
+   readPaper(cut,'inventory'),readPaper(cut,'prices'),readPaper(cut,'search'),
+  ]);
   const assertCurrent=async():Promise<void>=>{
    const {value:v}=await readState();
    if(base(v.active)!==base(active)||Date.now()>=(acceptedLegalUntil??Math.min(cut.source.validUntil,cut.pricing.validUntil)))return fail('read_changed');

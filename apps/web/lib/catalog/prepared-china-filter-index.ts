@@ -178,18 +178,41 @@ export async function selectPreparedChinaFilterPage(context:Context & {rows:numb
   return {rows,bytes:decodedBytes,cityOrderInvariant:ready.cityOrderInvariant};
  });
  if(params.city&&!loaded.cityOrderInvariant)return null;
+ const preset=params.powerTo===160&&Object.entries(params).every(([name,value])=>
+  value===undefined||value===''||presetFields.has(name));
+ let selection=preset?powerPreset.get(loaded):undefined;
+ if(!selection){
+  selection=selectMatchingRows(loaded,params,input.countOnly&&!preset);
+  if(preset){
+   powerPreset.set(loaded,selection);
+   void selection.catch(()=>powerPreset.delete(loaded));
+  }
+ }
+ const {total,ordered}=await selection;
+ return {total,positions:input.countOnly?[]:ordered.slice(input.start,input.start+input.pageSize)};
+}
+
+// The power-only preset depends exclusively on this authenticated immutable
+// index. Page number and a proven order-invariant city do not change the IDs.
+const presetFields=new Set(['market','powerTo','page','pageSize','sort','city']);
+type Selection={total:number;ordered:PreparedChinaFilterEntry[]};
+const powerPreset=new WeakMap<Loaded,Promise<Selection>>();
+
+async function selectMatchingRows(loaded:Loaded,params:CatalogSearchParams,countOnly:boolean){
  const matches=await compilePreparedChinaFilterMetadataPredicate(params),groups=new Map<string,PreparedChinaFilterEntry[]>();
  const matching:PreparedChinaFilterEntry[]=[];
  let total=0;
  for(let start=0;start<loaded.rows.length;start+=1024){
-  for(const row of loaded.rows.slice(start,start+1024)){
+  const end=Math.min(start+1024,loaded.rows.length);
+  for(let index=start;index<end;index++){
+   const row=loaded.rows[index];
    if(!row[4]||!matches(metadata(row)))continue;
    total++;
-   if(!input.countOnly){matching.push(row);const group=groups.get(row[17])||[];group.push(row);groups.set(row[17],group);}
+   if(!countOnly){matching.push(row);const group=groups.get(row[17])||[];group.push(row);groups.set(row[17],group);}
   }
   if(start+1024<loaded.rows.length)await new Promise<void>(resolve=>setImmediate(resolve));
  }
- if(input.countOnly||input.start>=total)return {total,positions:[] as PreparedChinaFilterEntry[]};
+ if(countOnly)return {total,ordered:[] as PreparedChinaFilterEntry[]};
  const known=[...groups].filter(([source])=>source),unknown=groups.get('')||[];
  let ordered:PreparedChinaFilterEntry[];
  if(known.length<2)ordered=matching;
@@ -198,7 +221,7 @@ export async function selectPreparedChinaFilterPage(context:Context & {rows:numb
   for(let depth=0;known.some(([,rows])=>depth<rows.length);depth++)for(const [,rows] of known)if(rows[depth])ordered.push(rows[depth]);
   ordered.push(...unknown);ordered.sort(compareDisplay);
  }
- return {total,positions:ordered.slice(input.start,input.start+input.pageSize)};
+ return {total,ordered};
 }
 
 export function assertPreparedChinaFilterEntry(row:CatalogSearchProjection,entry:PreparedChinaFilterEntry){

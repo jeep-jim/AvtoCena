@@ -1,6 +1,7 @@
 import {createHash} from 'node:crypto';
 import type {JsonReadResult} from '../data';
 import {ObjectJsonStorage} from '../data';
+import {DetailReadCache} from './detail-read-cache';
 import type {ChinaRuntimeReady} from './china-stage-runtime-files';
 
 export const CHINA_PUBLIC_CONTROL='catalog/independent-market-public-v1/china/control.json';
@@ -66,13 +67,19 @@ export async function readChinaPublicState(storage:ObjectJsonStorage){
   return fail('control_integrity');
  return {state,etag:obj.etag,checksum:obj.checksum};
 }
+// Only byte-verified immutable stage objects can enter this cache. The public
+// control and its ETag are always read through readChinaPublicState.
+const verifiedObjects = new DetailReadCache<Buffer>({
+ maxEntries:512, maxBytes:64*1024*1024, ttlMs:60*60_000,
+ concurrency:24, sizeOf:body=>body.length,
+});
 const minted=new WeakSet<ChinaStageObjectFiles>();
 export type ChinaStageObjectFiles=Readonly<{
  ready:Readonly<ChinaRuntimeReady>;
  readySha256:string;
  acceptedLegalUntil?:number;
  durable:Readonly<DurableReady>;
- getBinary(key:string):Promise<{data:Buffer;size:number;checksum:string}>;
+ getBinary(key:string,expected?:string):Promise<{data:Buffer;size:number;checksum:string}>;
  readJsonWithMeta<T>(key:string,fallback:T):Promise<JsonReadResult<T>>;
  assertPointer():Promise<void>;
 }>;
@@ -89,13 +96,25 @@ async function openChinaStageObject(storage:ObjectJsonStorage,reference:ChinaPub
  const check=()=>{
   if(chinaObjectDigest(readConfiguredRegcloudScope())!==configKey||credentials()!==credentialKey)return fail('storage_changed');
  };
- const read=async(relative:string,max=4*1024*1024)=>{
+ const read=async(relative:string,max:number,expected?:string)=>{
   check();
   if(!relative.split('/').every(safe))return fail('key_scope');
-  const obj=await storage.getBinaryBounded(root+relative,max);
-  check();return obj;
+  if(!acceptedRead || !expected) {
+   const result=await storage.getBinaryBounded(root+relative,max);
+   check();return result;
+  }
+  const key=JSON.stringify([configKey,credentialKey,root,ref.generationId,ref.readySha256,relative,expected,max]);
+  const body=await verifiedObjects.get(key,async()=>{
+   const obj=await storage.getBinaryBounded(root+relative,max);
+   check();
+   if(obj.checksum!==expected)return fail('immutable_checksum');
+   return obj.data;
+  });
+  check();
+  // Callers receive their own bytes, including on concurrent cache hits.
+  return {data:Buffer.from(body),size:body.length,checksum:expected};
  };
- const staged=await read('READY.json',32*1024);
+ const staged=await read('READY.json',32*1024,ref.readySha256);
  if(staged.checksum!==ref.readySha256)return fail('ready_sha');
  const durable=parse<DurableReady>(staged.data);
  if(durable?.version!==1||durable.kind!=='china-private-durable-stage-ready-v1'||durable.runId!==ref.runId||
@@ -105,7 +124,7 @@ async function openChinaStageObject(storage:ObjectJsonStorage,reference:ChinaPub
      durable.activeControlSha256,durable.expectedChinaPublicBaseSha256,durable.artifacts?.orderedSha256].every(x=>SHA.test(x??''))||
     !clock(durable.admittedRows)||!clock(durable.artifacts.count)||!clock(durable.artifacts.bytes)||!clock(durable.validUntil)||
     (!acceptedRead&&Date.now()>=durable.validUntil))return fail('ready_scope');
- const stageRuntime=await read('runtime-ready.json',8192);
+ const stageRuntime=await read('runtime-ready.json',8192,durable.runtimeReadySha256);
  if(stageRuntime.checksum!==durable.runtimeReadySha256)return fail('runtime_ready_sha');
  const ready=parse<ChinaRuntimeReady>(stageRuntime.data);
  if(ready?.version!==1||ready.kind!=='china-isolated-runtime-ready'||ready.archiveSha256!==durable.archiveSha256||
@@ -115,10 +134,14 @@ async function openChinaStageObject(storage:ObjectJsonStorage,reference:ChinaPub
     (ready.legalValidUntil!==undefined&&(!clock(ready.legalValidUntil)||ready.legalValidUntil<ready.validUntil)))return fail('runtime_ready_scope');
  const acceptedLegalUntil=acceptedRead?ready.legalValidUntil:undefined;
  if(Date.now()>=(acceptedLegalUntil??Math.min(durable.validUntil,ready.validUntil)))return fail('stage_authority');
- const data=async(key:string)=>{
+ const data=async(key:string,expectedHash?:string)=>{
   assertChinaStageObjectFiles(handle);
   if(key!==LOCAL_CONTROL&&!key.startsWith(LOCAL+'generations/'+ref.generationId+'/'))return fail('key_scope');
-  const result=await read('objects/'+key,key===LOCAL_CONTROL?32*1024:4*1024*1024);
+  // The stage-local control is itself sealed in READY. The mutable public
+  // control is outside this prefix and cannot pass this reader.
+  if(expectedHash!==undefined&&!SHA.test(expectedHash))return fail('object_digest');
+  const expected=key===LOCAL_CONTROL?ready.activeControlSha256:expectedHash;
+  const result=await read('objects/'+key,key===LOCAL_CONTROL?32*1024:4*1024*1024,expected);
   if(key===LOCAL_CONTROL&&result.checksum!==ready.activeControlSha256)return fail('stage_control_sha');
   assertChinaStageObjectFiles(handle);return result;
  };
