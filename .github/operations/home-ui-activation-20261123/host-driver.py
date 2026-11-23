@@ -317,7 +317,8 @@ def main(reader=sys.stdin.buffer, writer=sys.stdout):
         raise host.HostError('home_host_controller_disconnected')
     for signum in (signal.SIGUSR1, signal.SIGTERM, signal.SIGHUP, signal.SIGINT):
         signal.signal(signum, disconnected)
-    threading.Thread(target=protocol.read_loop, daemon=True).start()
+    reader_thread = threading.Thread(target=protocol.read_loop, daemon=True)
+    reader_thread.start()
     protocol.emit({'kind': 'ready', 'source': host.SOURCE, 'nonce': SESSION_NONCE})
     try:
         while True:
@@ -330,6 +331,10 @@ def main(reader=sys.stdin.buffer, writer=sys.stdout):
                     protocol.graceful = True
                 protocol.emit({'kind': 'result', 'id': identity, 'value': result})
                 if command['method'] == 'close':
+                    # The runner closes its input pipe after receiving this acknowledgement.
+                    # Drain that EOF before Python finalizes its buffered stdin object.
+                    reader_thread.join(timeout=12)
+                    host.need(not reader_thread.is_alive(), 'driver_close_eof')
                     return
             except Exception as error:
                 code = str(error) if isinstance(error, (host.HostError, host.inventory.InventoryError)) else 'home_host_operation_failed'
