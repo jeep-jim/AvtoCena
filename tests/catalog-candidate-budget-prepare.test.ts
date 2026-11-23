@@ -7,8 +7,7 @@ import http from 'node:http';
 import {execFile} from 'node:child_process';
 import {promisify} from 'node:util';
 import {fileURLToPath} from 'node:url';
-import {createRequire} from 'node:module';
-import {candidateBudgetInputs,installCandidateBudgetStorage,verifyCandidateBudgetAuthority,installCandidateBudgetNetworkFence} from '../scripts/catalog-candidate-budget-prepare.mjs';
+import {candidateBudgetInputs,candidateBudgetChildInvocation,installCandidateBudgetStorage,verifyCandidateBudgetAuthority,installCandidateBudgetNetworkFence} from '../scripts/catalog-candidate-budget-prepare.mjs';
 import {candidateBudgetContract,candidateBudgetWriteKind,persistCandidateBudgetObject,candidateControlsRevision,
   candidateControlsKey,assertCandidateBudgetReceipt} from '../scripts/lib/catalog-candidate-budget.mjs';
 import {PREPARED_MARKETS,stagedBudgetDigest as hash} from '../scripts/lib/catalog-staged-budget.mjs';
@@ -195,17 +194,32 @@ test('real runtime requires prepared reader; capable candidate verifies all five
   await fs.writeFile(path.join(temp,'data/knowledge/encyclopedia/calculation-v1.json'),JSON.stringify({version:1,digest:encyclopediaDigest,models:{}}));
   const childEnv={...process.env,NODE_PATH:path.join(root,'node_modules'),JSON_STORAGE_DRIVER:'object',CATALOG_LIVE_RATE_DISABLED:'true',
     YC_OBJECT_STORAGE_ENDPOINT:`http://127.0.0.1:${address.port}`,YC_OBJECT_STORAGE_BUCKET:'test',YC_OBJECT_STORAGE_REGION:'test',YC_OBJECT_STORAGE_PREFIX:'',
-    YC_OBJECT_STORAGE_ACCESS_KEY_ID:'fixture',YC_OBJECT_STORAGE_SECRET_ACCESS_KEY:'fixture',AVTOCENA_RELEASE_SHA:release,AVTOCENA_CALCULATION_VERSION:calculator};
+    YC_OBJECT_STORAGE_ACCESS_KEY_ID:'fixture',YC_OBJECT_STORAGE_SECRET_ACCESS_KEY:'fixture',AVTOCENA_RELEASE_SHA:release,AVTOCENA_CALCULATION_VERSION:calculator,
+    CATALOG_BUDGET_PREPARATION_NODE_OPTIONS:'--max-old-space-size=8 --stack-trace-limit=20'};
   const invoke=async(phase:string)=>{
     await fs.writeFile(contextPath,JSON.stringify(ctx));
-    await run(process.execPath,['--import',createRequire(import.meta.url).resolve('tsx'),path.join(root,'scripts/catalog-candidate-budget-prepare.mjs'),
-      '--child',phase,runtimeRoot,contextPath,reportPath],{cwd:temp,env:childEnv,timeout:30000,maxBuffer:1024*1024});
+    const invocation=await candidateBudgetChildInvocation({phase,root:runtimeRoot,contextPath,reportPath,
+      release,calculationVersion:calculator,env:childEnv});
+    let stderr:string,failure:unknown;
+    try {({stderr}=await run(process.execPath,invocation.args,{cwd:temp,env:invocation.env,timeout:30000,maxBuffer:1024*1024}));}
+    catch(error:any){stderr=String(error.stderr||'');failure=error;}
+    const memory=stderr.split('\n').filter(line=>line.startsWith('{')).map(line=>JSON.parse(line))
+      .filter(row=>row.stage==='node_resource_memory');
+    assert.equal(memory.length,1);
+    assert.equal(memory[0].role,'candidate-budget-'+phase);
+    assert.equal(memory[0].actualHeapBytes,invocation.plan.heapMiB*1024*1024);
+    assert.equal(memory[0].requestedHeapBytes,memory[0].actualHeapBytes);
+    assert.equal(memory[0].sampledAt,invocation.plan.sampledAt);
+    assert.doesNotMatch(invocation.env.NODE_OPTIONS||'',/max-(?:old-space|heap)-size/);
+    assert.match(invocation.env.NODE_OPTIONS||'',/--stack-trace-limit=20/);
+    if(failure)throw failure;
     return JSON.parse(await fs.readFile(reportPath,'utf8'));
   };
   try{
     if(!preparedReader){
       await assert.rejects(invoke('prepare'),/prepared_reader_required/);assert.equal(writes.length,0);
-      t.diagnostic('This source lacks the new reader and was correctly denied; the positive path is also tested with CATALOG_TEST_STAGED_RUNTIME_ROOT pointing to the exact candidate.');return;
+      await assert.rejects(invoke('verify'),/prepared_reader_required/);assert.equal(writes.length,0);
+      t.diagnostic('This source lacks the prepared reader. Both real child phases used the freshly sampled heap and were denied without writes; successful preparation requires a separate exact capable candidate fixture.');return;
     }
     const prepared=await invoke('prepare');assert.ok(prepared.derivedWrites>=20);
     assert.deepEqual(Object.keys(prepared.core.markets).sort(),PREPARED_MARKETS.slice().sort());
