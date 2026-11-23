@@ -80,7 +80,7 @@ jobs:
       - name: Verify the conditional switch and same-owner rollback
         run: |
           set -euo pipefail
-          git -C runtime fetch --no-tags --depth=1 origin 18e81af30cb9187b139924217a777de1c9819bca b4d226491bcfa03eca73d72480ff3bd867d3c6fb 05f289a875866be0be84800c8644dee5f38a1059 59f7e8fd0f7a6a9d8d2de545618962830c7866ea
+          git -C runtime fetch --no-tags --depth=1 origin 18e81af30cb9187b139924217a777de1c9819bca b4d226491bcfa03eca73d72480ff3bd867d3c6fb 05f289a875866be0be84800c8644dee5f38a1059 59f7e8fd0f7a6a9d8d2de545618962830c7866ea a05987cc725c950614ac7310c7de782b73cb093a
           test "$(git -C writer rev-parse HEAD)" = d7b193855b37aa83bf79a3afb38902ee2f20ba30
           git -C writer apply --include=apps/web/lib/data.ts "$GITHUB_WORKSPACE/source/.github/operations/china-rev5-own-cut-once/pinned-native-rev5-writer-overlay.patch"
           (cd source && npm ci --no-audit --no-fund)

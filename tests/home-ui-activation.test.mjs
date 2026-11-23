@@ -27,7 +27,7 @@ const browser=()=>({schemaVersion:1,release:HOME_UI.source,nonce,passed:true,fun
 function transition(fault){
   const events=[];
   let routed=false,accepted=false;
-  const authority={lease:{operationId:'home-ui-catalog-59f7-'+nonce},guard:async()=>{events.push('authority');},
+  const authority={lease:{operationId:'home-ui-catalog-a059-'+nonce},guard:async()=>{events.push('authority');},
     setIngress:value=>events.push('authority:'+value),release:async()=>{events.push('release');if(fault==='release')throw Error('synthetic_release');},
     stopHeartbeat:async()=>events.push('retain-ttl')};
   const session={

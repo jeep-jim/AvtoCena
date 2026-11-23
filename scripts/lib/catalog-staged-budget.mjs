@@ -296,6 +296,9 @@ export function assertStagedCalculatorBuild(release, build, serving) {
   } else if (release === '59f7e8fd0f7a6a9d8d2de545618962830c7866ea') {
     if (build === '8e36af98e215d027eb6f1045380d8646060715e2b908bb8f960cc5e13e426085'
         && serving === '4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90') return;
+  } else if (release === 'a05987cc725c950614ac7310c7de782b73cb093a') {
+    if (build === '641d3f80aec3941af84eae8c3471b806909ae04f580d7b5c6ca0085a4d01f238'
+        && serving === '4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90') return;
   } else if (build === serving) return;
   throw Error('staged_budget_calculation_version_mismatch');
 }

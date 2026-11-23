@@ -1,7 +1,7 @@
 import {HOME_UI, sha256} from '../home-ui-only-20261123/contract.mjs';
 
 const LOCK = 'catalog/import-lock.json', MANIFEST = 'catalog/manifest.json';
-// Existing read-model repair bound:100min covers the entire90min release job.
+// The renewed lease covers the 90-minute activation step after preparation.
 const TTL = 100 * 60_000, HEARTBEAT = 5 * 60_000;
 const need = (value, code) => { if (!value) throw Error('home_authority_' + code); };
 const fingerprint = value => sha256(JSON.stringify({calculationVersion:HOME_UI.servingCalculationVersion,
@@ -9,7 +9,7 @@ const fingerprint = value => sha256(JSON.stringify({calculationVersion:HOME_UI.s
 
 async function homeAuthority({storage, nonce, readLiveIdentity, now = Date.now, heartbeat = true, resume}) {
   need(storage?.driver === 'object' && /^[a-f0-9]{32}$/.test(nonce || '') && typeof readLiveIdentity === 'function', 'context');
-  const operationId = 'home-ui-catalog-59f7-' + nonce;
+  const operationId = 'home-ui-catalog-a059-' + nonce;
   const read = () => storage.readJsonWithMeta(LOCK, {lockedUntil:''});
   const condition = meta => {
     need(!meta.found || typeof meta.etag === 'string' && meta.etag.length > 0, 'etag');
@@ -78,6 +78,21 @@ async function homeAuthority({storage, nonce, readLiveIdentity, now = Date.now, 
 }
 
 export const acquireHomeAuthority = options => homeAuthority(options);
+
+// A derived index can start between the market publication and this release.
+// Wait before acquiring anything, then repeat both the workflow and lease checks.
+export async function waitForHomePublication(check, acquire, pause) {
+  for (;;) {
+    try {
+      const quiescence = await check();
+      const authority = await acquire();
+      return {quiescence, authority};
+    } catch (error) {
+      if (!['home_evidence_other_workflow_active', 'home_authority_publisher_busy'].includes(error.message)) throw error;
+      await pause(error.message);
+    }
+  }
+}
 // Only the same run's random owner and exact manifest may resume its bounded
 // lease between plan-artifact upload and the waiting activation step.
 export const resumeHomeAuthority = options => {

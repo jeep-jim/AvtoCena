@@ -1,6 +1,23 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {acquireHomeAuthority,resumeHomeAuthority} from '../.github/operations/home-ui-activation-20261123/authority.mjs';
+import {acquireHomeAuthority,resumeHomeAuthority,waitForHomePublication} from '../.github/operations/home-ui-activation-20261123/authority.mjs';
+
+test('an existing index preparation delays the release until both checks succeed', async () => {
+  let checks=0, attempts=0;
+  const waited=[];
+  const result=await waitForHomePublication(async()=>{
+    if(++checks===1)throw Error('home_evidence_other_workflow_active');
+    return {otherWriterRuns:0};
+  },async()=>{
+    if(++attempts===1)throw Error('home_authority_publisher_busy');
+    return {generationId:'latest'};
+  },async reason=>{waited.push(reason);});
+  assert.deepEqual(waited,['home_evidence_other_workflow_active','home_authority_publisher_busy']);
+  assert.deepEqual(result,{quiescence:{otherWriterRuns:0},authority:{generationId:'latest'}});
+  assert.equal(checks,3);
+  await assert.rejects(waitForHomePublication(async()=>{throw Error('home_evidence_historical_run_changed');},
+    ()=>assert.fail('acquisition attempted'),()=>assert.fail('unexpected retry')),/historical_run_changed/);
+});
 import {HOME_UI} from '../.github/operations/home-ui-only-20261123/contract.mjs';
 
 function fixture() {

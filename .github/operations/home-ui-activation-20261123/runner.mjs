@@ -8,7 +8,7 @@ import {HOME_UI,sha256,verifyHomeSourceCheckout,verifyHomeGateFiles,assertHomeSo
 import {assertReviewedInventory,acceptReviewedHomeUi} from '../home-ui-only-20261123/acceptance.mjs';
 import {prepareHomeBindingPlan,applyReviewedHomeBinding} from '../home-ui-only-20261123/private-binding.mjs';
 import {buildHomeImageForActivation,RESOURCE_FILES} from '../home-ui-adapter-20261123/build-image.mjs';
-import {acquireHomeAuthority,resumeHomeAuthority} from './authority.mjs';
+import {acquireHomeAuthority,resumeHomeAuthority,waitForHomePublication} from './authority.mjs';
 import {openHomeSshSession} from './ssh-session.mjs';
 import {runBrowserGate} from './browser.mjs';
 import {githubReader,assertPublicationQuiescence,verifyControllerCi,findPlanApproval} from './github-evidence.mjs';
@@ -19,7 +19,7 @@ const INDEX_KEY='knowledge/encyclopedia/calculation-indexes/'+HOME_UI.privateInd
 const jsonFile=async filename=>JSON.parse(await fs.readFile(filename,'utf8'));
 const privateWrite=(filename,value)=>fs.writeFile(filename,JSON.stringify(value,null,2)+'\n',{mode:0o600,flag:'wx'});
 async function digest(filename){const hash=createHash('sha256');for await(const chunk of createReadStream(filename))hash.update(chunk);return hash.digest('hex');}
-async function paths(){const temporary=await fs.realpath(process.env.RUNNER_TEMP);return {directory:path.join(temporary,'home-ui-activation'),image:path.join(temporary,'home-ui-image-catalog-59f7')};}
+async function paths(){const temporary=await fs.realpath(process.env.RUNNER_TEMP);return {directory:path.join(temporary,'home-ui-activation'),image:path.join(temporary,'home-ui-image-catalog-a059')};}
 async function storage(){const module=await import(pathToFileURL(path.join(CONTROLLER_ROOT,'apps/web/lib/data.ts')));const store=module.getJsonStorage();need(store.driver==='object','object_storage');return store;}
 async function liveIdentity(){
   const response=await fetch('https://avtocena.com/api/health',{method:'GET',cache:'no-store',redirect:'error',signal:AbortSignal.timeout(30000)});
@@ -61,10 +61,15 @@ export async function preparePlan(sourceRoot){
     &&imageBuild.imageArchiveSha256===await digest(path.join(image,'image.tar')),'image_changed');
   const inventory=await jsonFile(path.join(CONTROLLER_ROOT,INVENTORY_FILE));assertReviewedInventory(inventory,REVIEWED_INVENTORY_SHA);
   const reader=githubReader(),ci=await verifyControllerCi(reader,CONTROLLER_ROOT,invocation);
-  const quiescence=await assertPublicationQuiescence(reader,process.env.GITHUB_RUN_ID);
   await fs.mkdir(directory,{mode:0o700});
   const store=await storage(),nonce=randomBytes(16).toString('hex');
-  const authority=await acquireHomeAuthority({storage:store,nonce,readLiveIdentity:liveIdentity});
+  const {quiescence,authority}=await waitForHomePublication(
+    ()=>assertPublicationQuiescence(reader,process.env.GITHUB_RUN_ID),
+    ()=>acquireHomeAuthority({storage:store,nonce,readLiveIdentity:liveIdentity}),
+    async reason=>{
+      console.log(JSON.stringify({stage:'waiting_for_publication',reason}));
+      await pause(60_000);
+    });
   let prepared=false;
   try{
     const binding=await prepareHomeBindingPlan({storage:store,sourceRoot,readLiveIdentity:liveIdentity});

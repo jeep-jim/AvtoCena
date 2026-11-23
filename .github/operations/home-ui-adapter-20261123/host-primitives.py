@@ -1,4 +1,4 @@
-"""Exact catalog-59f7 host operations. Imported by a reviewed driver; no activation CLI.
+"""Exact catalog-a059 host operations. Imported by a reviewed driver; no activation CLI.
 
 The existing acceptance.mjs owns the transaction order and publication lease.
 Each mutating primitive calls its mandatory live-authority callback first. The
@@ -27,9 +27,9 @@ import time
 import urllib.parse
 
 ROOT = Path(__file__).resolve().parents[3]
-SOURCE = '59f7e8fd0f7a6a9d8d2de545618962830c7866ea'
-TREE = '06592ed7abaa2f27976afba5453ab48c2a88d824'
-BUILD = '8e36af98e215d027eb6f1045380d8646060715e2b908bb8f960cc5e13e426085'
+SOURCE = 'a05987cc725c950614ac7310c7de782b73cb093a'
+TREE = '3fbbe83eae9ef85ffdbddd2cda6867541d2f3b39'
+BUILD = '641d3f80aec3941af84eae8c3471b806909ae04f580d7b5c6ca0085a4d01f238'
 CALCULATION = '4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90'
 INDEX = 'bf2c72cb7a260ef093c0a43c2b0dad9c4c9094a4d6dc3811dd0d7f7626b0d72b'
 ASSET = 'ee5c872e9127430890f58abf239cddfa48553f86c3032799c9c29953b6109662'
