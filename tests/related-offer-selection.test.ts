@@ -63,3 +63,22 @@ test('Japanese sold lots with missing fuel still appear as same-model recommenda
 test('retired Korean parser inventory never appears as paid-feed recommendations',()=>{
  for(const sourceId of ['encar_direct','kcar'])assert.equal(isRenderableRelatedOffer({market:'korea',sourceId,cardProjectionVersion:3,publicSpecificationVerified:true,publicVisibleRub:1000000,totalRub:1000000,calculationStatus:'estimated'}),false);
 });
+
+test('paid Encar public cards reach the related groups after private provenance is removed', async () => {
+ const morning = {
+   id:'0769313c270b34cdcb084dbb', market:'korea', make:'Kia', model:'Morning', year:2026,
+   status:'active', paidEncar:true, cardProjectionVersion:3, publicSpecificationVerified:true,
+   calculationStatus:'estimated', publicVisibleRub:1539073, totalRub:1539073, fuel:'petrol',
+   offerType:'fixed', powertrainKind:'combustion', powerHp:76, engineCc:998,
+   images:[{id:'cover', url:'https://ci.encar.com/carpicture08/pic4208/42084912_001.jpg'}],
+ };
+ const another = {...morning, id:'another'};
+ const groups = await select({current:morning, modelRows:[morning, another],
+   marketRows:[another, {...morning, id:'third'}], renderable:isRenderableRelatedOffer});
+ assert.deepEqual(groups.sameModel.map(row=>row.id), ['another']);
+ assert.deepEqual(groups.marketRows.map(row=>row.id), ['third']);
+ for (const change of [{paidEncar:false}, {sourceId:'kcar'}, {status:'withdrawn'},
+   {images:[]}, {publicSpecificationVerified:false}]) {
+   assert.equal(isRenderableRelatedOffer({...morning, ...change}), false);
+ }
+});
