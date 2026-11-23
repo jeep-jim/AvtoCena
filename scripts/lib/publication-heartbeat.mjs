@@ -1,11 +1,14 @@
 import {fork} from 'node:child_process';
 import {once} from 'node:events';
+import {createResourceNodeInvocation} from './node-resource-memory.mjs';
 
 // Renew the writer lease independently of CPU-bound normalization in the parent.
 // This process has no inventory/publishing code and exits if its parent exits.
 export async function startPublicationHeartbeat(config, env=process.env) {
+ const invocation=await createResourceNodeInvocation({args:['--import',import.meta.resolve('tsx')],
+  env,role:'publication-heartbeat'});
  const child=fork(new URL('./publication-heartbeat-worker.mjs',import.meta.url),[],{
-  execArgv:['--import',import.meta.resolve('tsx'),'--max-old-space-size=256'],env:{...env,NODE_OPTIONS:''},
+  execArgv:invocation.args,env:invocation.env,
   stdio:['ignore','ignore','inherit','ipc']
  });
  let failure=null,stopping=false;

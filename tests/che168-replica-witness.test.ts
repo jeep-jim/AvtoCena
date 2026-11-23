@@ -8,6 +8,7 @@ import {createHash} from 'node:crypto';
 import {gzipSync} from 'node:zlib';
 import {execFileSync} from 'node:child_process';
 import {pathToFileURL} from 'node:url';
+import {setTimeout as delay} from 'node:timers/promises';
 import {che168CleanWorkerCheckout} from './helpers/che168-clean-worker.mjs';
 import {normalizeAutoApiChe168} from '../apps/web/lib/catalog/auto-api-che168';
 import {collectAutoApiChe168} from '../scripts/lib/auto-api-che168-client.mjs';
@@ -142,6 +143,78 @@ test('real SQLite is reconstructed from only the new replica and matches all emi
   assert.equal(hash([...f.storage.data]), before); assert.equal(hash([...f.storage.binary].map(([k, v]) => [k, sha(v)])), binary);
   assert.deepEqual(await fs.readdir(f.scratch), []);
   assert.deepEqual(await verifyChe168ReplicaInput(f.optionsOf()), witness);
+});
+
+async function withInspectionObserver(f: any, hook: string, run: (record: string) => Promise<void>) {
+  const record = path.join(f.root, 'inspection-resource'), preload = path.join(f.root, 'inspection-observer.mjs');
+  await fs.writeFile(preload, `
+    import fs from 'node:fs';
+    import {isMainThread} from 'node:worker_threads';
+    import {getHeapStatistics} from 'node:v8';
+    globalThis.fetch=async()=>{throw Error('test_live_fetch_blocked');};
+    fs.writeFileSync(${JSON.stringify(record)}+(isMainThread?'.child.json':'.thread.json'),JSON.stringify({pid:process.pid,
+      heap:getHeapStatistics().heap_size_limit,args:process.execArgv,options:process.env.NODE_OPTIONS,
+      plan:JSON.parse(process.env.AVTOCENA_NODE_RESOURCE_MEMORY_PLAN)}));
+    ${hook}
+  `);
+  const previousOptions = process.env.NODE_OPTIONS, previousPlan = process.env.AVTOCENA_NODE_RESOURCE_MEMORY_PLAN;
+  process.env.NODE_OPTIONS = '--trace-warnings --max-old-space-size=32 --import ' + pathToFileURL(preload).href;
+  process.env.AVTOCENA_NODE_RESOURCE_MEMORY_PLAN = JSON.stringify({version: 1, role: 'stale-parent', heapMiB: 1,
+    capacityBytes: 1048576, sampledAt: '2000-01-01T00:00:00.000Z'});
+  try {await run(record);}
+  finally {
+    if (previousOptions === undefined) delete process.env.NODE_OPTIONS; else process.env.NODE_OPTIONS = previousOptions;
+    if (previousPlan === undefined) delete process.env.AVTOCENA_NODE_RESOURCE_MEMORY_PLAN; else process.env.AVTOCENA_NODE_RESOURCE_MEMORY_PLAN = previousPlan;
+  }
+}
+
+test('real witness child and inspector thread use the fresh verified resource heap with no REG writes', async t => {
+  const f = await fixture(t), started = Date.now();
+  await withInspectionObserver(f, '', async record => {
+    const witness = await verifyChe168ReplicaInput(f.optionsOf()); assert.equal(witness.normalized.rows, 3);
+    const child = JSON.parse(await fs.readFile(record + '.child.json', 'utf8'));
+    const thread = JSON.parse(await fs.readFile(record + '.thread.json', 'utf8'));
+    assert.notEqual(child.pid, process.pid); assert.equal(thread.pid, child.pid);
+    assert.equal(child.plan.role, 'che168-replica-witness'); assert.ok(Date.parse(child.plan.sampledAt) >= started);
+    assert.equal(child.plan.capacityBytes, child.plan.availableRamBytes + child.plan.usableSwapBytes);
+    assert.equal(child.plan.heapMiB, Math.floor(child.plan.capacityBytes / 1024 ** 2));
+    assert.equal(child.heap, child.plan.heapMiB * 1024 ** 2); assert.equal(thread.heap, child.heap);
+    assert.deepEqual(thread.plan, child.plan);
+    assert.ok(child.args.includes('--max-heap-size=' + child.plan.heapMiB));
+    assert.ok(!child.args.some((arg: string) => /max[-_]old[-_]space[-_]size/.test(arg)));
+    assert.match(child.options, /trace-warnings/); assert.ok(!/max[-_]old[-_]space[-_]size/.test(child.options));
+    assert.throws(() => process.kill(child.pid, 0), {code: 'ESRCH'});
+    assert.equal(f.storage.writes.length, 0); assert.deepEqual(await fs.readdir(f.scratch), []);
+  });
+});
+
+test('abort terminates a real busy inspector thread and its child before cleaning temporary storage', async t => {
+  const f = await fixture(t), controller = new AbortController();
+  await withInspectionObserver(f, 'if(!isMainThread){for(;;){}}', async record => {
+    const outcome = verifyChe168ReplicaInput({...f.optionsOf(), signal: controller.signal})
+      .then(value => ({value, error: undefined}), error => ({value: undefined, error}));
+    let child;
+    try {
+      const deadline = Date.now() + 5000;
+      for (;;) {
+        try {child = JSON.parse(await fs.readFile(record + '.thread.json', 'utf8')); break;}
+        catch (error) {if (error.code !== 'ENOENT') throw error; assert.ok(Date.now() < deadline, 'inspection child did not start'); await delay(20);}
+      }
+    } finally {controller.abort(); await outcome;}
+    const result = await outcome; assert.match(result.error?.message || '', /che168_replica_witness_deadline/);
+    assert.throws(() => process.kill(child.pid, 0), {code: 'ESRCH'});
+    assert.equal(f.storage.writes.length, 0); assert.deepEqual(await fs.readdir(f.scratch), []);
+  });
+});
+
+test('the real IPC child cannot substitute a response with a foreign nonce', async t => {
+  const f = await fixture(t);
+  await withInspectionObserver(f, "if(isMainThread){process.once('message',()=>process.send({nonce:'foreign',ok:true,value:{}}));await new Promise(()=>{});}", async record => {
+    await assert.rejects(() => verifyChe168ReplicaInput(f.optionsOf()), /che168_replica_witness_worker/);
+    const child = JSON.parse(await fs.readFile(record + '.child.json', 'utf8'));
+    assert.throws(() => process.kill(child.pid, 0), {code: 'ESRCH'});
+    assert.equal(f.storage.writes.length, 0); assert.deepEqual(await fs.readdir(f.scratch), []);
+  });
 });
 
 test('zero-change resume uses a full current replica without reading its missing base or creating a fictional journal head', async t => {

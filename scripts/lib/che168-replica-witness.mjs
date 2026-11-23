@@ -2,14 +2,15 @@ import fs from 'node:fs/promises';
 import {constants, openSync, readSync, closeSync, fstatSync, readdirSync, lstatSync} from 'node:fs';
 import path from 'node:path';
 import os from 'node:os';
-import {createHash} from 'node:crypto';
+import {createHash, randomUUID} from 'node:crypto';
 import {DatabaseSync} from 'node:sqlite';
 import {Worker, isMainThread, parentPort, workerData} from 'node:worker_threads';
-import {execFileSync} from 'node:child_process';
+import {execFileSync, fork} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
 import {snapshotBinding} from './che168-snapshot.mjs';
 import {restoreChe168Replica} from './che168-replica.mjs';
 import {assertRawHandoff, assertRawPin, rawDigest, rawReferences} from './catalog-raw-provenance.mjs';
+import {createResourceNodeInvocation, reportResourceNodeStartup} from './node-resource-memory.mjs';
 
 export const CHE168_REPLICA_WITNESS_KIND = 'independent_che168_replica_v1';
 export const CHE168_REPLICA_WITNESS_SOURCE = 'autohome_used_china_open';
@@ -18,6 +19,7 @@ export const CHE168_REPLICA_WORKER_CLOSURE = Object.freeze([
   'scripts/lib/che168-replica.mjs', 'scripts/lib/che168-replay-journal.mjs', 'scripts/lib/che168-snapshot.mjs',
   'scripts/lib/che168-csv-stream.mjs', 'scripts/lib/auto-api-che168-client.mjs', 'scripts/lib/che168-missing-details.mjs',
   'scripts/lib/catalog-intake-checkpoint.mjs', 'scripts/lib/catalog-raw-provenance.mjs',
+  'scripts/lib/node-resource-memory.mjs', 'scripts/lib/node-resource-memory-startup.mjs',
   'apps/web/lib/catalog/auto-api-che168.ts', 'apps/web/lib/catalog/storage.ts', 'apps/web/lib/data.ts',
   'apps/web/lib/catalog/china-year-policy.ts', 'apps/web/lib/catalog/collection-controls.ts',
 ]);
@@ -25,6 +27,7 @@ export const CHE168_REPLICA_WITNESS_LIMITS = Object.freeze({parts: 1024, replica
   rows: 500000, payloadBytes: 1024 ** 2, shardBytes: 32 * 1024 ** 2, shards: 2000,
   observationBytes: 8 * 1024 ** 3, reportBytes: 4 * 1024 ** 2, workMs: 300000});
 const CHUNK = 16 * 1024 ** 2, SHA = /^[a-f0-9]{64}$/, COMMIT = /^[a-f0-9]{40}$/;
+const INSPECTION_CHILD = '--che168-replica-inspection-child';
 const UUID = '[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}';
 const ROOT = new RegExp('^catalog/provider-replicas/che168/' + UUID + '$');
 const bytesDigest = bytes => createHash('sha256').update(bytes).digest('hex');
@@ -264,10 +267,9 @@ function inspectDatabase({filename, directory, source, config, completedAt, limi
   return {normalized, inventory, observationFiles, schemaSha256, databaseSha256: before.sha256, databaseBytes: before.bytes};
 }
 
-async function runInspection(options, signal) {
+async function runWorkerInspection(options, signal) {
   check(!signal?.aborted && options.deadline > Date.now(), 'deadline');
-  const worker = new Worker(new URL(import.meta.url), {workerData: {kind: 'che168_replica_readback', options}, execArgv: [],
-    resourceLimits: {maxOldGenerationSizeMb: 1024}});
+  const worker = new Worker(new URL(import.meta.url), {workerData: {kind: 'che168_replica_readback', options}, execArgv: []});
   let timer, abort;
   try {
     return await new Promise((resolve, reject) => {
@@ -279,6 +281,39 @@ async function runInspection(options, signal) {
       worker.once('exit', code => {if (code !== 0) reject(Error('che168_replica_witness_worker'));});
     });
   } finally {clearTimeout(timer); signal?.removeEventListener('abort', abort); await worker.terminate();}
+}
+
+async function runInspection(options, signal) {
+  check(!signal?.aborted && options.deadline > Date.now(), 'deadline');
+  // Node's Worker heap inherits process-wide V8 flags; resourceLimits cannot
+  // replace the publisher's old memory sample. A small, fresh-resource child
+  // hosts the same inspector thread and stays responsive to IPC disconnect.
+  const invocation = await createResourceNodeInvocation({args: [], role: 'che168-replica-witness'});
+  check(!signal?.aborted && options.deadline > Date.now(), 'deadline');
+  const nonce = randomUUID(), child = fork(new URL(import.meta.url), [INSPECTION_CHILD], {
+    execArgv: invocation.args, env: invocation.env, stdio: ['ignore', 'ignore', 'inherit', 'ipc'],
+  });
+  let timer, abort;
+  try {
+    return await new Promise((resolve, reject) => {
+      const rejectDeadline = () => reject(Error('che168_replica_witness_deadline'));
+      timer = setTimeout(rejectDeadline, Math.max(1, options.deadline - Date.now())); abort = rejectDeadline;
+      signal?.addEventListener('abort', abort, {once: true});
+      child.once('message', value => value?.nonce === nonce && value.ok === true ? resolve(value.value)
+        : reject(Error(value?.nonce === nonce ? safeError({message: value.error}) : 'che168_replica_witness_worker')));
+      child.once('error', () => reject(Error('che168_replica_witness_worker')));
+      child.once('exit', () => reject(Error('che168_replica_witness_worker')));
+      if (signal?.aborted || options.deadline <= Date.now()) {rejectDeadline(); return;}
+      child.send({kind: 'che168_replica_readback', nonce, options}, error => {
+        if (error) reject(Error('che168_replica_witness_worker'));
+      });
+    });
+  } finally {
+    clearTimeout(timer); signal?.removeEventListener('abort', abort);
+    if (child.pid && child.exitCode === null && child.signalCode === null) {
+      const closed = new Promise(resolve => child.once('close', resolve)); child.kill('SIGKILL'); await closed;
+    }
+  }
 }
 
 /** Source-only proof emitter. It reads only the new replica, the current
@@ -386,6 +421,20 @@ export function assertChe168ReplicaInputWitness(value) {
 }
 
 if (!isMainThread && workerData?.kind === 'che168_replica_readback') {
-  try {parentPort.postMessage({ok: true, value: inspectDatabase(workerData.options)});}
+  try {reportResourceNodeStartup(); parentPort.postMessage({ok: true, value: inspectDatabase(workerData.options)});}
   catch (error) {parentPort.postMessage({ok: false, error: safeError(error)});}
+}
+
+if (isMainThread && process.argv[1] === fileURLToPath(import.meta.url) && process.argv[2] === INSPECTION_CHILD) {
+  check(process.argv.length === 3 && typeof process.send === 'function' && process.connected, 'worker');
+  process.once('disconnect', () => process.exit(0)); // Also terminates a busy inspector thread.
+  process.once('message', async message => {
+    let response;
+    try {
+      check(message?.kind === 'che168_replica_readback' && new RegExp('^' + UUID + '$').test(message.nonce || ''), 'worker');
+      response = {ok: true, value: await runWorkerInspection(message.options)};
+    } catch (error) {response = {ok: false, error: safeError(error)};}
+    if (!process.connected) {process.exit(0); return;}
+    process.send({nonce: message?.nonce, ...response}, () => {if (process.connected) process.disconnect();});
+  });
 }
