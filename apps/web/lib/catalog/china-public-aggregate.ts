@@ -19,8 +19,10 @@ export async function readChinaAggregateAuthority():Promise<Authority>{
 export const omitLegacyChinaAggregate=()=>authority.getStore()==='own'||authority.getStore()==='unavailable';
 export const chinaAggregateCacheKey=()=>omitLegacyChinaAggregate()?['no-old-china']:[];
 export const legacyAggregateMarketAllowed=(market:unknown)=>!omitLegacyChinaAggregate()||market!=='china';
-export async function withChinaAggregateAuthority<T>(market:string|undefined,task:()=>Promise<T>):Promise<T>{
- if((market&&market!=='any')||authority.getStore()||!chinaRegcloudRuntimeConfigured())return task();
+export async function withChinaAggregateAuthority<T>(market:string|string[]|undefined,task:()=>Promise<T>):Promise<T>{
+ const markets=Array.isArray(market)?market:market?[market]:[];
+ const includesCombinedChina=!markets.length||markets.includes('any')||(markets.length>1&&markets.includes('china'));
+ if(!includesCombinedChina||authority.getStore()||!chinaRegcloudRuntimeConfigured())return task();
  const first=await readChinaAggregateAuthority(),output=await authority.run(first,task);
  // Transition after a long shared-cache read cannot publish old China content.
  if(first==='legacy'){

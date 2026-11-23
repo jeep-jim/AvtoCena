@@ -29,6 +29,8 @@ test('exact own China hides old aggregate rows and races; other markets and chec
   pointer=mode(own);
   assert.deepEqual(await withChinaAggregateAuthority('any',read),['no-old-china','keep']);
   calls=[];assert.deepEqual(await withChinaAggregateAuthority('korea',read),['obsolete','keep']);assert.equal(calls.length,0);
+  calls=[];assert.deepEqual(await withChinaAggregateAuthority(['korea','uae','green'],async()=>['eligible']),['eligible']);assert.equal(calls.length,0);
+  assert.deepEqual(await withChinaAggregateAuthority(['korea','china'],read),['no-old-china','keep']);assert(calls.length>0);
   pointer=mode(rollback);let executions=0;
   assert.deepEqual(await withChinaAggregateAuthority(undefined,async()=>{if(++executions===1)pointer=mode(own);return read();}),['no-old-china','keep']);
   assert.equal(executions,2);
