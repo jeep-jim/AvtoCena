@@ -31,3 +31,29 @@ for(const [name,params] of [
   }
 }
 assert.equal(pageIds.size,48);
+
+async function powerCount(market) {
+  const url=new URL('http://127.0.0.1:3107/api/catalog/search?powerTo=160&countOnly=1');
+  if(market)url.searchParams.set('market',market);
+  const started=performance.now();
+  const response=await fetch(url,{signal:AbortSignal.timeout(90_000)});
+  assert.equal(response.status,200);
+  const body=await response.json();
+  assert.equal(body.ok,true);
+  assert.deepEqual(body.items,[]);
+  console.log(JSON.stringify({name:market?'direct-'+market:'combined',total:body.total,
+    marketCounts:body.marketCounts,missingMarkets:body.missingMarkets,ms:Math.round(performance.now()-started)}));
+  return body;
+}
+// Compare Korea and China with their individual counts and keep the unknown auction count explicit.
+const korea=await powerCount('korea');
+assert(Number.isSafeInteger(korea.total) && korea.total>0 && !korea.countIncomplete);
+await powerCount();
+const warm=await powerCount();
+assert.equal(warm.countIncomplete,true);
+assert(Array.isArray(warm.missingMarkets) && warm.missingMarkets.includes('japan'));
+assert.equal(warm.marketCounts.china,expectedCount);
+assert.equal(warm.marketCounts.korea,korea.total);
+const known=Object.entries(warm.marketCounts);
+assert(known.every(([market,count])=>!warm.missingMarkets.includes(market) && Number.isSafeInteger(count) && count>=0));
+assert.equal(warm.total,known.reduce((sum,[,count])=>sum+count,0));
