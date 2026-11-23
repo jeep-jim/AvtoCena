@@ -1,12 +1,12 @@
 {
-  "operation": "publish-owned-autoscout-with-verified-build-and-serving-version",
-  "requestedAt": "2026-11-22T02:35:13Z",
+  "operation": "publish-verified-saved-europe",
+  "requestedAt": "2026-11-23T07:24:32.830Z",
   "market": "europe",
   "publishMarkets": [
     "europe"
   ],
   "resetCursors": false,
-  "reason": "Reuse the verified European intake and original rates with the calculator identities pinned by the serving image deployment.",
-  "reuseRunId": "44919202807",
+  "reason": "Reuse the completed saved intake and its rates after verification of the REG archive. No collection.",
+  "reuseRunId": "45076867904",
   "refreshMarkets": []
 }
