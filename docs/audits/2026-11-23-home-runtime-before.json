@@ -1,0 +1,120 @@
+{
+  "artifactId": 14789082726,
+  "artifactSha256": "4a20d6e7df95148fb2a9aa1714fb0dc1bb5085d99e3402a10566a14bba9291d4",
+  "receipt": {
+    "activationAuthorized": false,
+    "candidatePort": {
+      "dockerReservationVerified": false,
+      "port": 3003,
+      "socketListening": false
+    },
+    "containers": {
+      "chinaRollback": {
+        "containerConfigSha256": "eefe4c20f9567516b1a5cf341d43e595af77b8e35cf644f0027519cdd73121eb",
+        "environmentCount": 46,
+        "environmentSha256": "912296e402d96e751b55c9f440910dec2bcd0a774a99a66cf562460650c52d43",
+        "hostConfigSha256": "25d6dfd391d16fef04cf893d1748cce54fbcd15d40eec2a2d108f750957838ca",
+        "id": "e30facd9dc08d28b6e7d8b4423842b027e9b975befcf5bf52de09f29da60d6a7",
+        "image": "sha256:0bfe542a991a69aaa4f416726a221e4e845986cc15c98a414e24ea7cff462984",
+        "mountsSha256": "a3987dcb34d3639cb8cc1f03e406a250ff6450fe7464e965e53677e8adbbcb52",
+        "name": "avtocena-china-candidate-85296f6b8797",
+        "pid": 14131,
+        "port": 3000,
+        "release": "85296f6b8797aaa93227b69da7e9e9e928e8f9b5",
+        "restartCount": 0,
+        "startedAt": "2026-11-20T09:12:42.209264612Z"
+      },
+      "legacyRollback": {
+        "containerConfigSha256": "1cf6765bc34a452d0f61c85f6f41bc3f16a843f71b44c743779def162ef94ea6",
+        "environmentCount": 44,
+        "environmentSha256": "74bded1f7ae57885bdf3ac9137f255dc9360149385e5bfe2ad3f6a3a02a301a1",
+        "hostConfigSha256": "03af0c598e2bbac2517246b79ec5c6553aa3769c8837df380e8275b5be76f9f1",
+        "id": "21d2c808c25bad327a6d8ac13891d878aeb67fadce52350dcc6f1433e3f6ca78",
+        "image": "sha256:4a055ba772496c7de89594acbbc1c1bc02ac2d2b20050cfad7f637d1f5646dfd",
+        "mountsSha256": "f8341c33dab3a25f9f9a3ebd05cc7f4ec76a0366b839ec15cf43d2a1e7c9aa2b",
+        "name": "avtocena-production",
+        "pid": 1505,
+        "port": 3001,
+        "release": "83ff17075e9188dcf227c8752dc064248d5f42e0",
+        "restartCount": 0,
+        "startedAt": "2026-11-19T22:29:01.399780546Z"
+      },
+      "serving": {
+        "containerConfigSha256": "b665abd0602cb0650a31d622b0a4e6dd37da78725203289bf687c7f4144a56af",
+        "environmentCount": 46,
+        "environmentSha256": "633d58877100b95a0113d49e1d894e5355f2d03693fdc9ae3229af0880639c0d",
+        "hostConfigSha256": "0aad5ec3b1c9fb36b5b61bf201e53f515ca13c851127c0ad489675533566e61a",
+        "id": "52e44ba2810796f9a12ac83984d9571f71ac1290d852206d2a259ad44da02a8d",
+        "image": "sha256:8a7326fc17de9a28ae66a4915e68038ac089ba4cdf2954bd7fcbd7cbda46ccf8",
+        "mountsSha256": "a3987dcb34d3639cb8cc1f03e406a250ff6450fe7464e965e53677e8adbbcb52",
+        "name": "avtocena-china-grid-dark-22867cbcfaee",
+        "pid": 66220,
+        "port": 3002,
+        "release": "22867cbcfaee27b2e8917b6bf880e44827f67b60",
+        "resources": {
+          "Memory": 4294967296,
+          "MemorySwap": 4294967296,
+          "NanoCpus": 2000000000,
+          "OOMKilled": false,
+          "PidsLimit": 512,
+          "RestartCount": 1,
+          "RestartPolicy": {
+            "MaximumRetryCount": 0,
+            "Name": "unless-stopped"
+          }
+        },
+        "restartCount": 1,
+        "startedAt": "2026-11-21T08:13:50.039024596Z"
+      }
+    },
+    "errorCode": "inventory_serving_resources",
+    "lockMode": "shared_nonblocking",
+    "mutations": 0,
+    "nginxSha256": "b55e61e9686c639d9f0deac678b881ec56633e1cfd2b4703084b0ad9aaecaf6f",
+    "observedAt": "2026-11-23T04:09:51.808035+00:00",
+    "readOnly": true,
+    "requiresReviewedRollbackPins": true,
+    "rollbackPins": {
+      "chinaRollback": "e30facd9dc08d28b6e7d8b4423842b027e9b975befcf5bf52de09f29da60d6a7",
+      "legacyRollback": "21d2c808c25bad327a6d8ac13891d878aeb67fadce52350dcc6f1433e3f6ca78"
+    },
+    "servingResourceObservation": {
+      "actual": {
+        "Memory": 4294967296,
+        "MemorySwap": 4294967296,
+        "NanoCpus": 2000000000,
+        "OOMKilled": false,
+        "PidsLimit": 512,
+        "RestartCount": 1,
+        "RestartPolicy": {
+          "MaximumRetryCount": 0,
+          "Name": "unless-stopped"
+        }
+      },
+      "actualSha256": "4873a16351941f8cdcd9caaa660ee9376c00b2b49454c53c553559bb8c80a5ec",
+      "expectedHistorical": {
+        "Memory": 4294967296,
+        "MemorySwap": 4294967296,
+        "NanoCpus": 2000000000,
+        "OOMKilled": false,
+        "PidsLimit": 512,
+        "RestartCount": 0,
+        "RestartPolicy": {
+          "MaximumRetryCount": 0,
+          "Name": "unless-stopped"
+        }
+      },
+      "historicalPinsMatch": false,
+      "historicalSha256": "7e8b838acaa003f010bee51a1811894513469af4e351772e21f52711bc3f6e26",
+      "mismatchedFields": [
+        "RestartCount"
+      ],
+      "role": "serving"
+    },
+    "status": "resource_state_mismatch_requires_review",
+    "supplierRequests": 0,
+    "version": 1
+  },
+  "sourceRun": "https://github.com/jeep-jim/AvtoCena/actions/runs/45110094845",
+  "version": 1
+}

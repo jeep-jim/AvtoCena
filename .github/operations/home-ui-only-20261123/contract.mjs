@@ -24,6 +24,8 @@ export const HOME_UI = Object.freeze({
 export const HOME_RUNTIME = Object.freeze({
   nginxSha256:'b55e61e9686c639d9f0deac678b881ec56633e1cfd2b4703084b0ad9aaecaf6f',
   serving:{name:'avtocena-china-grid-dark-22867cbcfaee', release:HOME_UI.retainedSource, port:3002,
+    // Read-only run45110094845; see docs/audits/2026-11-23-home-runtime-before.json.
+    restartCount:1, startedAt:'2026-11-21T08:13:50.039024596Z',
     id:'52e44ba2810796f9a12ac83984d9571f71ac1290d852206d2a259ad44da02a8d',
     image:'sha256:8a7326fc17de9a28ae66a4915e68038ac089ba4cdf2954bd7fcbd7cbda46ccf8'},
   chinaRollback:{name:'avtocena-china-candidate-85296f6b8797', release:'85296f6b8797aaa93227b69da7e9e9e928e8f9b5', port:3000,
