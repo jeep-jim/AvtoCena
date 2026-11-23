@@ -3,14 +3,21 @@ on:
   pull_request:
     paths:
       - 'apps/web/components/catalog/KoreaReportPanel.tsx'
+      - 'apps/web/components/catalog/PaidKoreaReportPanel.tsx'
+      - 'apps/web/components/catalog/paid-korea-report-contract.ts'
       - 'apps/web/components/catalog/OfferSpecificationsDisclosure.tsx'
+      - 'apps/web/app/(public)/cars/offer/**'
       - 'apps/web/lib/catalog/korea-report*'
       - 'apps/web/lib/catalog/korea-inspection*'
       - 'apps/web/components/catalog/KoreaInspectionBody.tsx'
       - 'tests/fixtures/korea-inspection*'
+      - 'tests/fixtures/paid-korea-report*'
       - 'apps/web/app/api/catalog/korea-report/**'
+      - 'apps/web/app/api/catalog/recommendations/data.ts'
       - 'tests/korea-report*'
       - 'tests/browser/korea-report*'
+      - 'tests/paid-korea-report*'
+      - 'tests/browser/paid-korea-report*'
       - '.github/workflows/verify-korea-reports.yml'
   workflow_dispatch:
 permissions:
@@ -27,13 +34,21 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run typecheck
+      - name: Verify saved paid report identity and displayed facts without network access
+        run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/paid-korea-report-*.test.ts
       - run: npm install --prefix "$RUNNER_TEMP/korea-browser" --no-package-lock --ignore-scripts playwright@1.55.0
       - name: Verify lazy report links and Russian controls
         env:
           CHROME_BIN: /usr/bin/google-chrome
         run: PLAYWRIGHT_MODULE="$RUNNER_TEMP/korea-browser/node_modules/playwright/index.mjs" node tests/browser/korea-report.mjs
+      - name: Verify paid history and inspection on desktop and mobile
+        env:
+          CHROME_BIN: /usr/bin/google-chrome
+        run: PLAYWRIGHT_MODULE="$RUNNER_TEMP/korea-browser/node_modules/playwright/index.mjs" node tests/browser/paid-korea-report.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: korea-report-browser
-          path: artifacts/korea-report/
+          path: |
+            artifacts/korea-report/
+            artifacts/paid-korea-report/
