@@ -27,3 +27,14 @@ export function ownedChinaFrozenFx(prepared, transportId) {
   const receipt={version:1,market:'china',runId:transportId,pricingAsOf,observedAt,rates};
   return {receipt,receiptSha256:rawDigest(receipt)};
 }
+
+/** Prices and source observations retain their original clocks. The public
+ * cut must satisfy both deadlines accepted by the native private price seal. */
+export function ownedChinaPricedSource(source,fxReceipt,now=Date.now()){
+  const asOf=Date.parse(fxReceipt.pricingAsOf);
+  assert(Number.isSafeInteger(asOf)&&asOf<=source.observedAt&&source.observedAt===Date.parse(fxReceipt.observedAt)&&
+    Number.isSafeInteger(source.validUntil),'owned_china_price_source_clock');
+  const validUntil=Math.min(source.validUntil,asOf+48*3600000);
+  assert(now>=source.observedAt&&validUntil>now,'owned_china_priced_source_expired');
+  return {...source,validUntil};
+}

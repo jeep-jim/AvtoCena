@@ -5,6 +5,7 @@ import path from 'node:path';
 import {pathToFileURL} from 'node:url';
 import {chinaHeavyPolicyReason} from '../.github/operations/china-rev5-source-stage-v3/guard/work/budget-fallback/china-heavy-policy.mjs';
 import {rawDigest} from './lib/catalog-raw-provenance.mjs';
+import {ownedChinaPricedSource} from './lib/owned-china-frozen-pricing.mjs';
 
 const [native,temp,planSha]=process.argv.slice(2);
 const bytes=await fs.readFile(path.join(temp,'stage-input.json'));
@@ -26,11 +27,12 @@ const [rates,pricing,replay,publicationModule,heavy,identity,{ObjectJsonStorage}
 const frozen=rates.importCatalogFxBatch(fxWire,fxWire.receiptSha256);
 const fingerprint=await rates.withCatalogFxBatch(frozen,()=>pricing.budgetPricingFingerprint('china'));
 assert.equal(pricing.calculationCacheVersion(),calculationVersion,'pricing context changed');
-const fence=async()=>assert(Date.now()<plan.source.validUntil,'saved source expired');
+const pricedSource=ownedChinaPricedSource(plan.source,frozen.receipt);
+const fence=async()=>assert(Date.now()<pricedSource.validUntil,'saved price or source expired');
 const binding={continuitySha256:rawDigest({source:plan.source,witness,control:plan.control}),sourceReportSha256:plan.evidence.archive.reportSha256,
   nativeAdmissionSha256:rawDigest({conversion:plan.conversion,shards:plan.converted,inventory:witness.normalized}),
   sourceReplicaSha256:plan.source.cursor.anchorSha256,sourceCursor:plan.source.cursor.sequence,
-  sourceExpiresAt:plan.source.validUntil,sourceBinding:sourceReport.binding};
+  sourceExpiresAt:pricedSource.validUntil,sourceBinding:sourceReport.binding};
 const spool=path.join(temp,'avtocena-china-fresh-prices-owned');
 const priceJob=await replay.openFreshChinaPriceReplay({directory:spool,fx:frozen,pricingFingerprint:fingerprint,
   calculationVersion,expectedInputRows:plan.sourceArchiveRows,source:binding,assertSourceAuthority:fence});
@@ -89,11 +91,11 @@ try {
   const backend={kind:'mock-s3',origin:disk.endpoint,bucket:disk.bucket,prefix:disk.prefix,fixtureFetch:disk.fetchMock};
   const publication=publicationModule.openIndependentMarketFixture(storage,'china',{...backend,assertAuthorized:fence});
   const base=await publication.observe();
-  const lease=await publication.acquire({action:'publish',generationId,expectedBaseSha256:base.baseSha256},Math.min(8*3600000,plan.source.validUntil-Date.now()));
-  const staged=await priceJob.stageCanonical({publication,lease,source:plan.source,withdrawn:[],blockRows:50,modelScope:{make:'BMW',model:'X3'},
+  const lease=await publication.acquire({action:'publish',generationId,expectedBaseSha256:base.baseSha256},Math.min(8*3600000,pricedSource.validUntil-Date.now()));
+  const staged=await priceJob.stageCanonical({publication,lease,source:pricedSource,withdrawn:[],blockRows:50,modelScope:{make:'BMW',model:'X3'},
     withStreamingSearch:true,freshSnapshot:true,selection,backend});
   const ready=await diskModule.finalizeChinaShadowStage({disk,storage,publication,lease,staged,archiveSha256:plan.evidence.archive.manifestSha256,
-    source:plan.source,fxReceiptSha256:frozen.receiptSha256,count:admitted,streaming:true});
+    source:pricedSource,fxReceiptSha256:frozen.receiptSha256,count:admitted,streaming:true});
   const summary={ready,counts,unsupported,selected:admitted,orderedAdmittedIdsSha256:selection.orderedAdmittedIdsSha256,
     sourceProofSha256:rawDigest(proof),fxReceiptSha256:frozen.receiptSha256,pricingFingerprint:fingerprint};
   await fs.writeFile(path.join(temp,'private-result.json'),JSON.stringify(summary),{flag:'wx',mode:0o600});
