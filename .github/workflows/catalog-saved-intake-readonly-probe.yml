@@ -1,6 +1,14 @@
 name: Inspect saved UAE and Europe intake metadata
 on:
   workflow_dispatch:
+    inputs:
+      controller_sha:
+        description: Exact reviewed main SHA containing this read-only probe
+        type: string
+        required: true
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/saved-intake-readonly-probe.json']
 permissions:
   contents: read
 concurrency:
@@ -8,20 +16,26 @@ concurrency:
   cancel-in-progress: false
 jobs:
   inspect:
-    if: github.ref == 'refs/heads/main' && github.event_name == 'workflow_dispatch'
+    if: github.repository == 'jeep-jim/AvtoCena' && github.repository_id == '1289722938' && github.ref == 'refs/heads/main' && (github.event_name == 'workflow_dispatch' || github.event_name == 'push') && github.run_attempt == '1'
     environment: regcloud-staging
     runs-on: ubuntu-24.04
     timeout-minutes: 8
+    env:
+      EXPECTED_CONTROLLER_SHA: ${{ inputs.controller_sha }}
     steps:
       - uses: actions/checkout@v4
         with:
           ref: ${{ github.sha }}
+          fetch-depth: 2
           persist-credentials: false
       - uses: actions/setup-node@v4
         with:
           node-version: 24
-      - name: Validate the offline probe
-        run: node --test tests/catalog-saved-intake-readonly-probe.test.mjs
+      - name: Verify reviewed invocation before REG credentials
+        run: |
+          set -euo pipefail
+          node --input-type=module -e 'import {verifySavedIntakeProbeInvocation} from "./scripts/catalog-saved-intake-readonly-probe.mjs"; console.log(JSON.stringify(verifySavedIntakeProbeInvocation()));'
+          node --test tests/catalog-saved-intake-readonly-probe.test.mjs tests/readonly-marker-invocation.test.mjs
       - name: Read exact cursors and saved archive metadata only
         env:
           YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
