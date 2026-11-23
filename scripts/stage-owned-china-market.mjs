@@ -8,6 +8,7 @@ import {createResourceNodeInvocation} from './lib/node-resource-memory.mjs';
 import {rawDigest,rawProducerOwner} from './lib/catalog-raw-provenance.mjs';
 import {openOwnedChinaVerifiedInput} from './lib/open-owned-china-verified-input.mjs';
 import {ownedChinaFrozenFx} from './lib/owned-china-frozen-pricing.mjs';
+import {checkedChinaServingRelease,chinaServingCalculation} from './lib/owned-china-serving-runtime.mjs';
 import {currentPreparedRun,verifyChinaStageInvocation} from './lib/owned-china-stage-invocation.mjs';
 import {OWNED_CHINA_PREPARED} from './lib/owned-china-publication-source.mjs';
 
@@ -20,15 +21,15 @@ const workerCalc=calculationVersion(writer);
 assert.equal(workerCalc,'214076c7c2102da508fc340303ac5e1d32f79da72ff93e7bdb9e29e2b77b79aa');
 const writerImport=name=>import(pathToFileURL(path.join(writer,name)).href);
 const contextPlan=JSON.parse(await fs.readFile(new URL('../.github/operations/china-rev5-source-stage-v3/runtime-context-plan.json',import.meta.url)));
-const servingReleases=new Set(['22867cbcfaee27b2e8917b6bf880e44827f67b60','0509e76cb02523157c98804c52edd7eb784916ba']);
+assert.equal(contextPlan.calculationVersion,chinaServingCalculation);
 const gitTree=rev=>execFileSync('git',['rev-parse',rev+':data/catalog/vehicle-knowledge'],{cwd:release,encoding:'utf8'}).trim();
 async function checkRuntime(){
   const response=await fetch('https://avtocena.com/api/health',{redirect:'error',signal:AbortSignal.timeout(30000)});
   assert(response.ok,'live runtime unavailable');
   const live=await response.json();
-  assert(live.ok && servingReleases.has(live.releaseSha) && live.calculationVersion===contextPlan.calculationVersion,'serving calculation changed');
-  assert.equal(gitTree(live.releaseSha),gitTree(contextPlan.releaseSha),'serving model data changed');
-  return live.releaseSha;
+  const releaseSha=checkedChinaServingRelease(live,{privateStage:true});
+  assert.equal(gitTree(releaseSha),gitTree(contextPlan.releaseSha),'serving model data changed');
+  return releaseSha;
 }
 const {ObjectJsonStorage}=await writerImport('apps/web/lib/data.ts');
 const store=new ObjectJsonStorage();

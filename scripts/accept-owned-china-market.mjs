@@ -8,11 +8,12 @@ import {setTimeout as sleep} from 'node:timers/promises';
 import {captureOwnedChinaControl,OWNED_CHINA_PREPARED,OWNED_CHINA_PUBLIC_CONTROL} from './lib/owned-china-publication-source.mjs';
 import {cutOwnedChina} from './lib/owned-china-cut.mjs';
 import {rawDigest} from './lib/catalog-raw-provenance.mjs';
+import {checkedChinaServingRelease,chinaFilterRelease,chinaServingCalculation as servedCalc} from './lib/owned-china-serving-runtime.mjs';
 
 const runtime=path.resolve(process.argv[2]),writer=path.resolve(process.argv[3]),stageId=process.env.STAGE_RUN_ID;
-const release='0509e76cb02523157c98804c52edd7eb784916ba',servedCalc='4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90';
+const site='https://avtocena.com';
 const git=(dir,...args)=>execFileSync('git',args,{cwd:dir,encoding:'utf8'}).trim();
-assert.equal(git(runtime,'rev-parse','HEAD'),release);
+assert.equal(git(runtime,'rev-parse','HEAD'),chinaFilterRelease);
 assert(/^[1-9]\d{0,19}$/.test(stageId));
 assert.equal(process.env.GITHUB_REPOSITORY,'jeep-jim/AvtoCena');assert.equal(process.env.GITHUB_REPOSITORY_ID,'1289722938');
 assert.equal(process.env.GITHUB_REF,'refs/heads/main');
@@ -42,12 +43,20 @@ assert(receipt.version===1 && receipt.market==='china' && receipt.published===fa
  coverage.previouslyPublishedStillInSource+coverage.previouslyPublishedExplicitlyRemoved+coverage.previouslyPublishedAbsentWithoutRemovalEvent===coverage.previouslyPublished &&
  Array.isArray(receipt.removedVerified) &&
  receipt.removedVerified.length===Math.min(8,coverage.previouslyPublishedExplicitlyRemoved),'incomplete upstream receipt');
+const release=checkedChinaServingRelease(await web('/api/health'));
+if(release!==chinaFilterRelease){
+ for(const input of ['package-lock.json','package.json','apps/web/package.json','packages','data']){
+  assert.equal(git(runtime,'rev-parse',release+':'+input),git(runtime,'rev-parse',chinaFilterRelease+':'+input),'prepared runtime inputs changed');
+ }
+ // Switch only this runner's isolated checkout to the version actually serving clients.
+ git(runtime,'checkout','--quiet','--detach',release);
+}
+assert.equal(git(runtime,'rev-parse','HEAD'),release);
 const load=(dir,name)=>import(pathToFileURL(path.join(dir,'apps/web/lib',name+'.ts')).href);
 const [{ObjectJsonStorage},{ObjectJsonStorage:ScopedWriter},reader,fixture,{offerCardPath}]=await Promise.all([
  load(runtime,'data'),load(writer,'data'),load(runtime,'catalog/china-regcloud-object-reader'),
  load(runtime,'catalog/prepared-china-http-fixture'),load(runtime,'catalog/offer-url')]);
 const storage=new ObjectJsonStorage(),writeStore=new ScopedWriter();
-const site='https://avtocena.com';
 async function web(route,{html=false,absent=false}={}){
  assert(route.startsWith('/') && !route.startsWith('//'));
  const r=await fetch(site+route,{cache:'no-store',redirect:'error',signal:AbortSignal.timeout(40000)});
@@ -58,7 +67,7 @@ async function web(route,{html=false,absent=false}={}){
  const body=Buffer.concat(buffers).toString('utf8');return html?body:JSON.parse(body);
 }
 async function runtimeCurrent(){
- const h=await web('/api/health');assert(h.ok && h.service==='avtocena-web' && h.releaseSha===release && h.calculationVersion===servedCalc,'serving released calculator changed');
+ assert.equal(checkedChinaServingRelease(await web('/api/health')),release,'serving release changed during publication');
 }
 async function sourceCurrent(){
  await runtimeCurrent();

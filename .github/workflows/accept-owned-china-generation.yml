@@ -68,6 +68,7 @@ jobs:
       - name: Verify the conditional switch and same-owner rollback
         run: |
           set -euo pipefail
+          git -C runtime fetch --no-tags --depth=1 origin 18e81af30cb9187b139924217a777de1c9819bca
           test "$(git -C writer rev-parse HEAD)" = d7b193855b37aa83bf79a3afb38902ee2f20ba30
           git -C writer apply --include=apps/web/lib/data.ts "$GITHUB_WORKSPACE/source/.github/operations/china-rev5-own-cut-once/pinned-native-rev5-writer-overlay.patch"
           (cd source && npm ci --no-audit --no-fund)
@@ -79,7 +80,7 @@ jobs:
             fi
           done
           cd source
-          node --test tests/owned-china-cut.test.mjs
+          node --test tests/owned-china-cut.test.mjs tests/owned-china-serving-runtime.test.mjs
       - name: Compare the candidate with the guest catalog and open the verified cut
         working-directory: source
         env:
