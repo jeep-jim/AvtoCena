@@ -26,6 +26,7 @@ class ReliefTest(unittest.TestCase):
         self.io = fixtures.FakeIO()
         self.row = self.io.rows[inv.ROLES[0][1]]
         self.row['RestartCount'] = relief.RESTARTS
+        self.row['HostConfig']['NanoCpus'] = relief.ORIGINAL*10**9
         self.row['State'].update(Pid=relief.OBSERVED_PID, StartedAt=relief.STARTED)
         for role, name, *_ in inv.ROLES[1:]:
             self.io.rows[name]['Id'] = relief.ROLLBACKS[role]
@@ -63,7 +64,7 @@ class ReliefTest(unittest.TestCase):
         self.assertEqual(self.calls, [8, 2])
 
     def test_foreign_process_or_ingress_prevents_update(self):
-        self.row['State']['StartedAt'] = inv.SERVING_STARTED_AT
+        self.row['State']['StartedAt'] = '2026-11-21T08:13:50.039024596Z'
         with self.assertRaises(inv.InventoryError):
             self.apply()
         self.assertEqual(self.calls, [])

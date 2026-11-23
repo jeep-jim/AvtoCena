@@ -19,9 +19,9 @@ CALCULATION = '4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90'
 BASE = '85296f6b8797aaa93227b69da7e9e9e928e8f9b5'
 LEGACY = '83ff17075e9188dcf227c8752dc064248d5f42e0'
 SERVING_ID = '52e44ba2810796f9a12ac83984d9571f71ac1290d852206d2a259ad44da02a8d'
-# Observed in read-only run45110094845; this records identity, not the cause
+# Observed in the post-change inventory of run 45170140085; this records identity, not the cause
 # of that restart. A further restart or different StartedAt needs fresh review.
-SERVING_STARTED_AT = '2026-11-21T08:13:50.039024596Z'
+SERVING_STARTED_AT = '2026-11-23T06:36:17.946542183Z'
 NGINX_SHA256 = 'b55e61e9686c639d9f0deac678b881ec56633e1cfd2b4703084b0ad9aaecaf6f'
 CONFIG_PATH = '/etc/nginx/conf.d/avtocena-prepare.conf'
 LOCK_PATH = '/run/lock/avtocena-runtime-change.lock'
@@ -41,9 +41,9 @@ MOUNTS = {
 DOCKER_GET_PATHS = frozenset('/containers/' + role[1] + '/json' for role in ROLES)
 # Historical comparison only. These values never configure a new process.
 HISTORICAL_SERVING_RESOURCES = {
-    'OOMKilled': False, 'RestartCount': 1,
+    'OOMKilled': False, 'RestartCount': 3,
     'Memory': 4 * 1024**3, 'MemorySwap': 4 * 1024**3,
-    'NanoCpus': 2000000000, 'PidsLimit': 512,
+    'NanoCpus': 8000000000, 'PidsLimit': 512,
     'RestartPolicy': {'Name': 'unless-stopped', 'MaximumRetryCount': 0},
 }
 

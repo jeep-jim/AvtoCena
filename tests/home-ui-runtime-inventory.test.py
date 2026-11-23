@@ -29,7 +29,7 @@ def containers():
             env['AVTOCENA_CHINA_REGCLOUD_RUNTIME'] = '1'
         result[name] = {
             'Id': inventory.SERVING_ID if kind == 'serving' else str(index) * 64,
-            'Name': '/' + name, 'Image': image, 'RestartCount': 1 if kind == 'serving' else 0,
+            'Name': '/' + name, 'Image': image, 'RestartCount': inventory.HISTORICAL_SERVING_RESOURCES['RestartCount'] if kind == 'serving' else 0,
             'Config': {'Env': [key + '=' + value for key, value in env.items()],
                        'Labels': {'org.opencontainers.image.revision': revision,
                                   'avtocena.role': 'china-ui-grid-dark'}},
@@ -38,7 +38,7 @@ def containers():
             'HostConfig': {'Privileged': False,
                            'PortBindings': {'3000/tcp': [{'HostIp': '127.0.0.1', 'HostPort': str(port)}]},
                            'Memory': 4 * 1024**3, 'MemorySwap': 4 * 1024**3,
-                           'NanoCpus': 2000000000, 'PidsLimit': 512,
+                           'NanoCpus': inventory.HISTORICAL_SERVING_RESOURCES['NanoCpus'] if kind == 'serving' else 2000000000, 'PidsLimit': 512,
                            'RestartPolicy': {'Name': 'unless-stopped', 'MaximumRetryCount': 0}},
             'Mounts': [{'Type': 'bind', 'RW': False, 'Source': src, 'Destination': dest}
                        for src, dest in sorted(inventory.MOUNTS)],

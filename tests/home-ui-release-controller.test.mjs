@@ -126,8 +126,8 @@ test('a reviewed hash cannot turn failed inventory or mismatched rollback identi
 test('the reviewed restart observation is durable evidence, never an activation receipt', async () => {
   const evidence = JSON.parse(await fs.readFile(path.join(root, 'docs/audits/2026-11-23-home-runtime-before.json'), 'utf8'));
   assert.equal(evidence.sourceRun, 'https://github.com/jeep-jim/AvtoCena/actions/runs/45110094845');
-  assert.equal(evidence.receipt.containers.serving.restartCount, HOME_RUNTIME.serving.restartCount);
-  assert.equal(evidence.receipt.containers.serving.startedAt, HOME_RUNTIME.serving.startedAt);
+  assert.equal(evidence.receipt.containers.serving.restartCount, 1);
+  assert.equal(evidence.receipt.containers.serving.startedAt, '2026-11-21T08:13:50.039024596Z');
   assert.deepEqual(evidence.receipt.servingResourceObservation.mismatchedFields, ['RestartCount']);
   assert.equal(evidence.receipt.activationAuthorized, false);
   assert.throws(() => assertReviewedInventory(evidence.receipt, sha256(JSON.stringify(evidence.receipt))), /inventory_kind/);

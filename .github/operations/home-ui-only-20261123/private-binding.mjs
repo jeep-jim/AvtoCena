@@ -20,7 +20,7 @@ export function assertHomeBindingInputs({sourceProof, live, retainedBinding, tar
   return {...intent, planSha256:sha256(JSON.stringify(intent)), targetAlreadyPresent:targetBinding !== null};
 }
 
-// Preparation is GET-only. The source checkout must be the exact clean catalog-0509
+// Preparation is GET-only. The source checkout must be the exact clean catalog-18e8
 // tree; callers cannot supply a convenient replacement release or digest.
 export async function prepareHomeBindingPlan({storage, sourceRoot, readLiveIdentity}) {
   need(storage?.driver === 'object' && typeof readLiveIdentity === 'function', 'context');
@@ -34,7 +34,7 @@ export async function prepareHomeBindingPlan({storage, sourceRoot, readLiveIdent
 
 // No CLI or workflow calls this writer. A future exact controller must supply
 // the reviewed plan hash and re-prove live identity, source and immutable data.
-// Its only possible write is a conditional creation of catalog-0509's binding.
+// Its only possible write is a conditional creation of catalog-18e8's binding.
 export async function applyReviewedHomeBinding(options) {
   need(/^[a-f0-9]{64}$/.test(options.reviewedPlanSha256 || ''), 'reviewed_plan_missing');
   const plan = await prepareHomeBindingPlan(options);
