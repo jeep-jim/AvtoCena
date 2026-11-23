@@ -1,3 +1,4 @@
+import unassignedRecords from './unassigned-runs-20261123.json' with {type:'json'};
 import {execFileSync} from 'node:child_process';
 import {sha256} from '../home-ui-only-20261123/contract.mjs';
 import {APPROVAL_WORKFLOW,approvalOperation} from './profile.mjs';
@@ -7,6 +8,20 @@ const need = (value, code) => { if (!value) throw Error('home_evidence_' + code)
 const SAFE_CONCURRENT = new Set(['.github/workflows/ci.yml',APPROVAL_WORKFLOW,
   '.github/workflows/home-ui-image-build.yml','.github/workflows/home-ui-runtime-inventory.yml',
   '.github/workflows/catalog-saved-intake-readonly-probe.yml']);
+// Both cancellation endpoints returned 409. Force-cancel explicitly reported
+// these runs had never been queued, although the list endpoint included them.
+// Run 45130287940. A newly assigned job or a new attempt is a real conflict.
+const unassignedRuns=new Map(unassignedRecords.map(([id,path,createdAt])=>[id,{path,createdAt}]));
+async function verifyUnassignedRun(reader,listed){
+  const expected=unassignedRuns.get(listed.id);
+  const sameRun=run=>Boolean(expected && run.status==='queued' && !run.conclusion &&
+    run.run_attempt===1 && run.path===expected.path && run.created_at===expected.createdAt &&
+    run.id===listed.id && run.repository?.full_name===REPO && run.head_sha===listed.head_sha);
+  need(sameRun(listed),'other_workflow_active');
+  const jobs=await reader.json('/actions/runs/'+listed.id+'/jobs?filter=all&per_page=100');
+  need(jobs.total_count===0 && Array.isArray(jobs.jobs) && jobs.jobs.length===0,'historical_run_assigned');
+  need(sameRun(await reader.json('/actions/runs/'+listed.id)),'historical_run_changed');
+}
 const APPROVAL_CODE = [APPROVAL_WORKFLOW,'.github/operations/home-ui-activation-20261123/profile.mjs',
   'scripts/lib/readonly-marker-invocation.mjs'];
 
@@ -44,9 +59,12 @@ export async function assertPublicationQuiescence(reader, ownRunId) {
       && page.workflow_runs.length === page.total_count, 'active_runs_incomplete');
     for(const run of page.workflow_runs) if(String(run.id)!==String(ownRunId)) observed.set(run.id,run);
   }
-  need([...observed.values()].every(run=>SAFE_CONCURRENT.has(run.path)), 'other_workflow_active');
+  const conflicts=[...observed.values()].filter(run=>!SAFE_CONCURRENT.has(run.path));
+  for(let start=0;start<conflicts.length;start+=4){
+    await Promise.all(conflicts.slice(start,start+4).map(run=>verifyUnassignedRun(reader,run)));
+  }
   return {koreaRunId:recovery.id,koreaStatus:recovery.status,koreaConclusion:recovery.conclusion,
-    checkedAt:new Date().toISOString(),otherWriterRuns:0};
+    checkedAt:new Date().toISOString(),otherWriterRuns:0,historicalUnassignedRuns:conflicts.length};
 }
 
 function git(root,args) {

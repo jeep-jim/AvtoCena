@@ -46,7 +46,7 @@ function transition(fault){
     async close(){events.push('close');if(routed&&!accepted)throw Error('synthetic_close_routed');return {closed:true};},
     abort:()=>events.push('abort'),
   };
-  const options={session,authority,sourceProof:proof(),controllerRoot:root,
+  const options={session,authority,verifyQuiescence:async()=>{events.push('live-queue');if(fault==='new-writer')throw Error('other_workflow_active');},sourceProof:proof(),controllerRoot:root,
     receipt:{plan:{nonce,imageArchiveBytes:42},planSha256:'e'.repeat(64),inventory},
     verifyBuild:async()=>events.push('build-proof'),bind:async()=>events.push('private-binding'),
     resources:{},imagePath:'/synthetic/image.tar',indexPath:'/synthetic/private.json'};
@@ -161,6 +161,21 @@ test('active Korea/repair jobs veto starting this UI transaction, while CI does 
   }});
   await client.archive(123);assert.equal(requests[1].options.headers,undefined);
   assert.ok(requests[0].options.headers.Authorization.includes('synthetic-private-token'));
+});
+
+test('never-enqueued historical runs need the exact run and zero jobs at every observation',async()=>{
+  const run={id:43098373792,created_at:'2026-11-11T20:50:23Z',path:'.github/workflows/catalog-overview-read-model.yml',run_attempt:1,
+    head_sha:'a'.repeat(40),status:'queued',conclusion:null,repository:{full_name:'jeep-jim/AvtoCena'}};
+  const client=(jobs=[],changed={})=>({async json(endpoint){
+    if(endpoint==='/actions/runs/45104426224')return {id:45104426224,status:'completed',repository:run.repository};
+    if(endpoint.includes('/jobs?'))return {total_count:jobs.length,jobs};
+    if(endpoint==='/actions/runs/'+run.id)return {...run,...changed};
+    const rows=endpoint.includes('status=queued')?[run]:[];return {total_count:rows.length,workflow_runs:rows};
+  }});
+  assert.equal((await assertPublicationQuiescence(client(),'8')).historicalUnassignedRuns,1);
+  await assert.rejects(assertPublicationQuiescence(client([{status:'queued'}]),'8'),/historical_run_assigned/);
+  await assert.rejects(assertPublicationQuiescence(client([],{run_attempt:2}),'8'),/historical_run_changed/);
+  await assert.rejects(assertPublicationQuiescence(client([],{status:'in_progress'}),'8'),/historical_run_changed/);
 });
 
 test('browser receipt requires actual command exit, exact release and the frozen speed guard',()=>{

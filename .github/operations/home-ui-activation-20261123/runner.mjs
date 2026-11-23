@@ -99,7 +99,7 @@ export async function preparePlan(sourceRoot){
 /** The concrete IO bridge uses the already-held, exact remote flock and the
  * previously acquired publication owner; the accepted controller keeps every
  * private/public/browser/rollback transition and validates every gate receipt. */
-export async function activateWithSession({session,authority,receipt,sourceProof,verifyBuild,bind,resources,imagePath,indexPath,controllerRoot=CONTROLLER_ROOT}){
+export async function activateWithSession({session,authority,receipt,sourceProof,verifyBuild,verifyQuiescence,bind,resources,imagePath,indexPath,controllerRoot=CONTROLLER_ROOT}){
   let candidateStarted=false,closed=false,leaseReleased=false,result,failure,candidate,evidence={};
   const plan=receipt.plan;
   const io={
@@ -123,10 +123,10 @@ export async function activateWithSession({session,authority,receipt,sourceProof
       if(phase==='public')evidence.publicParity=await session.call('parity-public');
       const proof=await session.call('server-'+phase);evidence[phase+'Server']=proof;return proof;
     },
-    switchExactIngressCompareAndSwap:async()=>{await authority.guard();await session.call('switch');authority.setIngress('candidate');},
+    switchExactIngressCompareAndSwap:async()=>{await verifyQuiescence();await authority.guard();await session.call('switch');authority.setIngress('candidate');},
     verifyPublicCandidateIdentity:()=>session.call('public-identity'),
     waitForRequiredBrowserVerdict:async()=>{evidence.browser=await session.call('browser');return evidence.browser;},
-    recordAcceptedRelease:async()=>{await session.call('accept');},
+    recordAcceptedRelease:async()=>{await verifyQuiescence();await authority.guard();await session.call('accept');},
     restoreExactIngressCompareAndSwap:async()=>{await session.call('rollback');authority.setIngress('retained');},
     verifyRetainedPublicIdentity:()=>session.call('retained-identity'),
     cleanupOnlyOwnedUnroutedCandidate:()=>session.call('cleanup'),
@@ -182,6 +182,7 @@ export async function activate(sourceRoot){
     handedOff=true;
     summary=await activateWithSession({session,authority,receipt,sourceProof,resources,
       imagePath:path.join(image,'image.tar'),indexPath:path.join(directory,'calculation-v1.json'),
+      verifyQuiescence:()=>assertPublicationQuiescence(reader,receipt.runId),
       verifyBuild:async()=>{verifyHomeSourceCheckout(sourceRoot);verifyHomeGateFiles(CONTROLLER_ROOT);
         need(receipt.ci.codeFingerprint===(await verifyControllerCi(reader,CONTROLLER_ROOT,invocation)).codeFingerprint,'ci_changed');},
       bind:async()=>{await authority.guard();return applyReviewedHomeBinding({storage:store,sourceRoot,
