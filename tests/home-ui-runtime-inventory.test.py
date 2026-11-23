@@ -29,12 +29,12 @@ def containers():
             env['AVTOCENA_CHINA_REGCLOUD_RUNTIME'] = '1'
         result[name] = {
             'Id': inventory.SERVING_ID if kind == 'serving' else str(index) * 64,
-            'Name': '/' + name, 'Image': image, 'RestartCount': 0,
+            'Name': '/' + name, 'Image': image, 'RestartCount': 1 if kind == 'serving' else 0,
             'Config': {'Env': [key + '=' + value for key, value in env.items()],
                        'Labels': {'org.opencontainers.image.revision': revision,
                                   'avtocena.role': 'china-ui-grid-dark'}},
             'State': {'Running': True, 'OOMKilled': False, 'Pid': 4000 + index,
-                      'StartedAt': '2026-11-20T11:46:00.123456789Z'},
+                      'StartedAt': inventory.SERVING_STARTED_AT if kind == 'serving' else '2026-11-20T11:46:00.123456789Z'},
             'HostConfig': {'Privileged': False,
                            'PortBindings': {'3000/tcp': [{'HostIp': '127.0.0.1', 'HostPort': str(port)}]},
                            'Memory': 4 * 1024**3, 'MemorySwap': 4 * 1024**3,
@@ -132,7 +132,7 @@ class InventoryTests(unittest.TestCase):
     def test_each_historical_resource_difference_is_reported_and_cli_still_fails(self):
         mutations = {
             'OOMKilled': lambda row: row['State'].update(OOMKilled=True),
-            'RestartCount': lambda row: row.update(RestartCount=1),
+            'RestartCount': lambda row: row.update(RestartCount=2),
             'Memory': lambda row: row['HostConfig'].update(Memory=0),
             'MemorySwap': lambda row: row['HostConfig'].update(MemorySwap=-1),
             'NanoCpus': lambda row: row['HostConfig'].update(NanoCpus=0),
@@ -183,6 +183,19 @@ class InventoryTests(unittest.TestCase):
         self.assertEqual(receipt['status'], 'failed')
         self.assertTrue(receipt['servingResourceObservation']['actual']['OOMKilled'])
         self.assertFalse(receipt['activationAuthorized'])
+
+    def test_reviewed_restart_identity_rejects_future_and_older_counts_or_changed_start(self):
+        for count in (0, 2):
+            local = FakeIO()
+            local.rows[inventory.ROLES[0][1]]['RestartCount'] = count
+            receipt = inventory.run_inventory(local)
+            self.assertEqual(receipt['status'], 'resource_state_mismatch_requires_review')
+            self.assertEqual(receipt['servingResourceObservation']['mismatchedFields'], ['RestartCount'])
+            self.assertFalse(receipt['activationAuthorized'])
+        local = FakeIO()
+        local.rows[inventory.ROLES[0][1]]['State']['StartedAt'] = '2026-11-23T04:30:00.000000000Z'
+        with self.assertRaisesRegex(inventory.InventoryError, 'inventory_serving_started_at'):
+            inventory.run_inventory(local)
 
     def test_malformed_resource_values_cannot_expose_private_strings(self):
         local = FakeIO()

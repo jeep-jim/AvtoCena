@@ -54,7 +54,8 @@ export function assertHomeInventoryReceipt(inventory) {
     for (const key of ['environmentSha256','hostConfigSha256','mountsSha256','containerConfigSha256']) {
       need(/^[a-f0-9]{64}$/.test(row[key] || ''), 'inventory_fingerprint');
     }
-    if (kind === 'serving') need(row.restartCount === 0, 'inventory_serving_restart');
+    if (kind === 'serving') need(row.restartCount === HOME_RUNTIME.serving.restartCount
+      && row.startedAt === HOME_RUNTIME.serving.startedAt, 'inventory_serving_restart');
     else need(inventory.rollbackPins[kind] === row.id, 'inventory_rollback_pin');
   }
   return inventory;
