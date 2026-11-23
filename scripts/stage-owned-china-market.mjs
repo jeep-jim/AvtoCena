@@ -13,7 +13,7 @@ import {verifyReadonlyInvocation} from './lib/readonly-marker-invocation.mjs';
 const root=fileURLToPath(new URL('../',import.meta.url));
 const invocation=verifyReadonlyInvocation({root,markerPath:'.github/market-runs/stage-owned-china.json',operation:'prepare-owned-china-private-generation'});
 const native=path.resolve(process.argv[2]),release=path.resolve(process.argv[3]),writer=path.resolve(process.argv[4]);
-assert.equal(execFileSync('git',['rev-parse','HEAD'],{cwd:writer,encoding:'utf8'}).trim(),'e5fe885258ed06832109d199c164bc4a9fe7dcbc');
+assert.equal(execFileSync('git',['rev-parse','HEAD'],{cwd:writer,encoding:'utf8'}).trim(),'d7b193855b37aa83bf79a3afb38902ee2f20ba30');
 const {calculationVersion}=await import(pathToFileURL(path.join(writer,'scripts/catalog-calculation-version.mjs')).href);
 const workerCalc=calculationVersion(writer);
 assert.equal(workerCalc,'214076c7c2102da508fc340303ac5e1d32f79da72ff93e7bdb9e29e2b77b79aa');

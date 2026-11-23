@@ -43,7 +43,7 @@ jobs:
           persist-credentials: false
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
-          ref: e5fe885258ed06832109d199c164bc4a9fe7dcbc
+          ref: d7b193855b37aa83bf79a3afb38902ee2f20ba30
           path: writer
           persist-credentials: false
       - name: Verify the model data for the serving releases
