@@ -1,13 +1,13 @@
 {
-  "operation": "publish-saved-dubicars-with-serving-encyclopedia",
-  "requestedAt": "2026-11-22T05:39:35.651Z",
+  "operation": "publish-verified-saved-uae",
+  "requestedAt": "2026-11-23T07:09:04.763Z",
   "market": "uae",
   "publishMarkets": [
     "uae"
   ],
   "resetCursors": false,
   "dubicarsOnly": true,
-  "reason": "Publish the completed DubiCars archive at its own rates and build the market indexes with the verified serving encyclopedia.",
-  "reuseRunId": "44968751012",
+  "reason": "Reuse the completed saved intake and its rates after verification of the REG archive. No collection.",
+  "reuseRunId": "45076401719",
   "refreshMarkets": []
 }

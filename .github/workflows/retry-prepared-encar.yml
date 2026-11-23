@@ -157,6 +157,7 @@ jobs:
         with:
           node-version: 24
       - name: Verify the published Morning and Seltos in the public site
+        shell: bash
         run: node scripts/verify-korea-public-characteristics.mjs | tee korea-public-characteristics.json
       - uses: actions/upload-artifact@v4
         if: always()

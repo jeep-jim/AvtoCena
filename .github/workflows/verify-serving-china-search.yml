@@ -1,0 +1,70 @@
+name: Verify published China data with the candidate search route
+on:
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/china-serving-search-readback.json']
+permissions:
+  contents: read
+concurrency:
+  group: china-serving-search-readback
+  cancel-in-progress: false
+jobs:
+  prepare:
+    if: github.repository == 'jeep-jim/AvtoCena' && github.event_name == 'push' && github.run_attempt == '1'
+    runs-on: ubuntu-24.04
+    environment: regcloud-staging
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          path: controller
+          fetch-depth: 2
+          persist-credentials: false
+      - name: Verify the operation and approved source
+        working-directory: controller
+        run: |
+          node --input-type=module <<'JS'
+          import {verifyReadonlyInvocation} from './scripts/lib/readonly-marker-invocation.mjs';
+          verifyReadonlyInvocation({root:process.cwd(),env:process.env,
+            markerPath:'.github/market-runs/china-serving-search-readback.json',operation:'verify-serving-china-search'});
+          JS
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          path: application
+          ref: 383bf0045707ff8a89043b330de7938e8da166f7
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - run: npm ci
+        working-directory: application
+      - name: Check index membership, count and pagination offline
+        working-directory: application
+        run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/prepared-china-filter-index.test.ts tests/china-verified-object-reads.test.ts
+      - name: Build the exact application before introducing read credentials
+        working-directory: application
+        run: docker build -t china-search-readback .
+      - name: Verify two result pages and the exact count against the published snapshot
+        working-directory: application
+        env:
+          AVTOCENA_CHINA_REGCLOUD_RUNTIME: '1'
+          JSON_STORAGE_DRIVER: object
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_REGION: us-east-1
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          trap 'docker rm -f china-search-readback >/dev/null 2>&1 || true' EXIT
+          docker run -d --name china-search-readback -p 127.0.0.1:3107:3000 \
+            -e AVTOCENA_CHINA_REGCLOUD_RUNTIME -e JSON_STORAGE_DRIVER \
+            -e YC_OBJECT_STORAGE_ENDPOINT -e YC_OBJECT_STORAGE_REGION -e YC_OBJECT_STORAGE_BUCKET \
+            -e YC_OBJECT_STORAGE_PREFIX -e YC_OBJECT_STORAGE_ACCESS_KEY_ID -e YC_OBJECT_STORAGE_SECRET_ACCESS_KEY \
+            china-search-readback
+          for attempt in $(seq 1 40); do
+            if curl --silent --fail --max-time 2 http://127.0.0.1:3107/api/health >/dev/null; then break; fi
+            sleep 1
+          done
+          node ../controller/scripts/check-serving-china-search.mjs

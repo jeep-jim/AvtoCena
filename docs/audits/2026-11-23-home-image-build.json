@@ -1,0 +1,56 @@
+{
+  "sourceRun": "https://github.com/jeep-jim/AvtoCena/actions/runs/45114096654",
+  "artifactId": 14790717868,
+  "zipSha256": "350ed9674aa565fd60ecfb0f978803c2950fc9d65ff5981c59371d44e84fc037",
+  "receipt": {
+    "version": 1,
+    "status": "verified_exact_home_image_build",
+    "activationAuthorized": false,
+    "source": "c1622514c73e78ee798ae321c242174aef71706c",
+    "tree": "976a82338aaa40de5a8047b6adb055c1d0506c51",
+    "sourceCalculationVersion": "672958a80c6a6eb869798c93cf1ee7d88301286ac910163115320fe5d8b95761",
+    "intendedServingCalculationVersion": "4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90",
+    "imageId": "sha256:9ccd838a809a42461c70f934c32e7c9d91f5bc6fe2b737ddbdc9110f31c86251",
+    "imageArchiveSha256": "bcfa47c23865c629b6fc5088c5a173de6c37b091a9b83651bc929bdc7146fc8f",
+    "nodeVersion": "v24.22.1",
+    "modelAssetSha256": "ee5c872e9127430890f58abf239cddfa48553f86c3032799c9c29953b6109662",
+    "privateIndexInImage": false,
+    "resourceProbePassed": true,
+    "requestedHeapBytes": 15465447424,
+    "actualHeapBytes": 15465447424,
+    "resourceFiles": {
+      "home-bootstrap.mjs": "91e596f19df6134425ab1b8b328c584ddb5a3896e6440781e05c6b4974d5f39c",
+      "run-node-with-resources.mjs": "2671eee12d4504febaabd078b38d305c1b0130ce5922bc6e8d0c95fbbcc26e0d",
+      "lib/node-resource-memory.mjs": "c01bd19147ff062d9edf92caab3162bec0f02e3a78bd12104dc002689894827a",
+      "lib/node-resource-memory-startup.mjs": "5c03ddd4b0234ae76c42eebad9c2ae7588e4aaee77e9423bbfcbec2179b764bc"
+    },
+    "controllerSha": "d7d5ab230376525ecd2f96f117c962e90b62da5d",
+    "sourceProof": {
+      "version": 1,
+      "clean": true,
+      "closureUnchanged": true,
+      "codePaths": [
+        "apps/web/app/(public)/page.tsx",
+        "apps/web/app/_lib/home-card-payload.ts",
+        "apps/web/app/api/catalog/home/route.ts",
+        "tests/home-card-payload.test.ts",
+        "tests/home-initial-catalog.test.ts",
+        "tests/home-rendering.test.ts"
+      ],
+      "source": "c1622514c73e78ee798ae321c242174aef71706c",
+      "tree": "976a82338aaa40de5a8047b6adb055c1d0506c51",
+      "retainedSource": "22867cbcfaee27b2e8917b6bf880e44827f67b60",
+      "retainedTree": "cb53c3c2b2ae656e3cabff8c63e78705e74314ba",
+      "sourceCalculationVersion": "672958a80c6a6eb869798c93cf1ee7d88301286ac910163115320fe5d8b95761",
+      "servingCalculationVersion": "4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90",
+      "codeDiffSha256": "cf1c9a8b2cf1752318f18fb5102fbf38d93c277808a0eefac3601686ac7a644d",
+      "sourceClosureRecords": 6359
+    },
+    "hostContacted": false,
+    "runtimeChanged": false,
+    "imageArchivePublished": false,
+    "privateBindingVerified": false,
+    "privateServerGatePassed": false,
+    "browserGatePassed": false
+  }
+}

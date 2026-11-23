@@ -277,12 +277,18 @@ export function verifyBudgetSourceCoverage({manifest, market, projection, source
     projectionIds:stagedBudgetDigest(rawIds.sort()), eligibleIds:stagedBudgetDigest(eligibleIds.sort())};
 }
 
-// The China grid release deploys this exact build with the incumbent price-cache version.
-// Both identities are pinned by .github/operations/china-ui-dark-v1/dark-standalone.py.
+// Both exact UI trees retain the incumbent price-cache namespace. The home UI
+// source closure is byte-identical to the grid release; its separate controller
+// pins tree/diff/index in .github/operations/home-ui-only-20261123/contract.mjs.
 export function assertStagedCalculatorBuild(release, build, serving) {
   const gridRelease = '22867cbcfaee27b2e8917b6bf880e44827f67b60';
-  if (release === gridRelease) {
+  const homeRelease = 'c1622514c73e78ee798ae321c242174aef71706c';
+  if (release === gridRelease || release === homeRelease) {
     if (build === '672958a80c6a6eb869798c93cf1ee7d88301286ac910163115320fe5d8b95761'
+        && serving === '4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90') return;
+  } else if (release === '0509e76cb02523157c98804c52edd7eb784916ba') {
+    // Exact search-only delta and preserved pricing inputs are checked by the release controller.
+    if (build === '5d791a95278c760ed50d53a4ddf78373f33980c228e7cdc3e1fc5d916bb48d9b'
         && serving === '4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90') return;
   } else if (build === serving) return;
   throw Error('staged_budget_calculation_version_mismatch');

@@ -201,7 +201,7 @@ async function writeLocalReceipt(receiptPath, receipt) {
   }
 }
 
-function receiptFromReadyPin({market, owner, root, manifest, pin}) {
+export function receiptFromReadyPin({market, owner, root, manifest, pin}) {
   assertRawPin(pin);
   const operationId = `nonjp-intake-${market}-${owner.runId}-${owner.attempt}`;
   assert.ok(['ready', 'published'].includes(pin.state) && pin.operationId === operationId

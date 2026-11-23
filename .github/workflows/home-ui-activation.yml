@@ -1,0 +1,144 @@
+name: Prepare and accept exact home UI catalog-0509
+on:
+  workflow_dispatch:
+    inputs:
+      controller_sha:
+        description: Exact accepted main controller SHA
+        required: true
+        type: string
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/home-ui-activation.json']
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: avtocena-home-ui-catalog-0509
+  cancel-in-progress: false
+jobs:
+  await_current_publications:
+    if: github.repository == 'jeep-jim/AvtoCena' && github.repository_id == '1289722938' && github.ref == 'refs/heads/main' && github.run_attempt == '1'
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+    steps:
+      - name: Wait for the two running market publications without a production lease
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          runs=(
+            '45129017812 .github/workflows/catalog-refresh-uae.yml ddc5fdeb5b42372985aa90026153de7cf34484a4'
+            '45130876633 .github/workflows/catalog-refresh-europe.yml 81edfddcfc2856be2378ccda7fd756ec75f17619'
+          )
+          for row in "${runs[@]}"; do
+            read -r id workflow head <<< "$row"
+            while true; do
+              status=$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$id" | jq -er \
+                --argjson id "$id" --arg workflow "$workflow" --arg head "$head" \
+                'select(.id == $id and .repository.id == 1289722938 and .head_repository.id == 1289722938
+                  and .head_branch == "main" and .head_sha == $head and .path == $workflow and .run_attempt == 1) | .status')
+              echo "Market publication $id is $status"
+              case "$status" in
+                completed) break ;;
+                in_progress|queued|pending|waiting|requested) sleep 60 ;;
+                *) exit 1 ;;
+              esac
+            done
+          done
+  accept:
+    needs: await_current_publications
+    if: github.repository == 'jeep-jim/AvtoCena' && github.repository_id == '1289722938' && github.ref == 'refs/heads/main' && github.run_attempt == '1'
+    runs-on: ubuntu-latest
+    environment: regcloud-staging
+    timeout-minutes: 90
+    env:
+      EXPECTED_CONTROLLER_SHA: ${{ inputs.controller_sha }}
+      JSON_STORAGE_DRIVER: object
+      YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+      YC_OBJECT_STORAGE_REGION: us-east-1
+      YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+      YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+          path: controller
+          persist-credentials: false
+          fetch-depth: 2
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Verify accepted controller entry before credentials
+        working-directory: controller
+        run: node .github/operations/home-ui-activation-20261123/profile.mjs --check-start
+      - name: Install and verify exact release controller
+        working-directory: controller
+        run: |
+          npm ci
+          node scripts/verify-frozen-speed-baselines.mjs
+          node --test tests/home-ui-release-controller.test.mjs tests/readonly-marker-invocation.test.mjs tests/home-ui-image-build.test.mjs tests/home-ui-activation-authority.test.mjs tests/home-ui-activation.test.mjs tests/home-ui-activation-transport.test.mjs
+          python3 -I -B tests/home-ui-runtime-inventory.test.py
+          python3 -I -B tests/home-ui-host-primitives.test.py
+          python3 -I -B tests/home-ui-host-driver.test.py
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: 0509e76cb02523157c98804c52edd7eb784916ba
+          path: application
+          persist-credentials: false
+          fetch-depth: 1
+      - name: Fetch the retained source for the exact filter and pricing comparison
+        working-directory: application
+        run: git fetch --no-write-fetch-head --depth=1 origin 22867cbcfaee27b2e8917b6bf880e44827f67b60
+      - name: Check the exact search code with saved links, membership, pagination and customer prices
+        working-directory: application
+        run: |
+          npm ci --no-audit --no-fund
+          node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/prepared-china-filter-index.test.ts tests/catalog-china-common-grid.test.ts tests/catalog-japan-filter-rail.test.ts tests/catalog-market-page-boundary.test.ts tests/catalog-editable-power-scenario.test.ts tests/home-card-payload.test.ts
+      - name: Prepare the existing browser gate outside the application checkout
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm install --prefix "$RUNNER_TEMP/release-browser" --no-package-lock --ignore-scripts playwright@1.55.0
+          printf 'CHROME_BIN=%s\n' "$(readlink -f "$(command -v google-chrome)")" >> "$GITHUB_ENV"
+      - name: Build and probe this run's exact private image
+        working-directory: controller
+        run: node scripts/run-node-with-resources.mjs .github/operations/home-ui-activation-20261123/runner.mjs --build "$GITHUB_WORKSPACE/application"
+      - name: Prove terminal writers and prepare the exact plan before VM contact
+        working-directory: controller
+        env:
+          GH_TOKEN: ${{ github.token }}
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+        run: node scripts/run-node-with-resources.mjs --import tsx .github/operations/home-ui-activation-20261123/runner.mjs --prepare "$GITHUB_WORKSPACE/application"
+      - name: Publish the safe plan for root review
+        uses: actions/upload-artifact@v4
+        with:
+          name: home-ui-activation-safe-plan
+          path: ${{ runner.temp }}/home-ui-activation/plan-receipt.json
+          if-no-files-found: error
+          retention-days: 7
+      - name: Wait for the exact plan marker and accept this same image
+        working-directory: controller
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+        run: node scripts/run-node-with-resources.mjs --import tsx .github/operations/home-ui-activation-20261123/runner.mjs --activate "$GITHUB_WORKSPACE/application"
+      - name: Release only an owned preparation that never contacted the VM
+        if: always()
+        working-directory: controller
+        env:
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+        run: node --import tsx .github/operations/home-ui-activation-20261123/runner.mjs --cleanup
+      - name: Preserve safe factual outcome only
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: home-ui-activation-safe-outcome
+          path: ${{ runner.temp }}/home-ui-activation/result.json
+          if-no-files-found: warn
+          retention-days: 7

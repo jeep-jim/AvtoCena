@@ -1,0 +1,30 @@
+name: Verify exact reviewed home UI plan marker
+on:
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/home-ui-plan-approval.json']
+permissions:
+  contents: read
+jobs:
+  receipt:
+    if: github.repository == 'jeep-jim/AvtoCena' && github.repository_id == '1289722938' && github.ref == 'refs/heads/main' && github.run_attempt == '1'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+          fetch-depth: 2
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Verify actual marker-only push and bound plan tuple
+        run: node .github/operations/home-ui-activation-20261123/profile.mjs --record-approval
+      - name: Preserve approval evidence without VM or storage credentials
+        uses: actions/upload-artifact@v4
+        with:
+          name: home-ui-plan-approval-safe-receipt
+          path: ${{ runner.temp }}/home-ui-plan-approval/approval.json
+          if-no-files-found: error
+          retention-days: 7

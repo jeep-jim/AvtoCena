@@ -5,11 +5,13 @@ import {KOREA_PUBLIC_ACCEPTANCE as PIN, inspectKoreaPublicDetail, publicFlightOb
 
 const nextGeneration='gen_1795350000000_test';
 const encode=value=>String(value).replace(/&/g,'&amp;').replace(/"/g,'&quot;');
-function detail(sample,{missing=false,sourceOfferId=sample.sourceOfferId,mainId=sample.id,htmlPower=sample.powerHp}={}) {
+function detail(sample,{missing=false,sourceOfferId=sample.sourceOfferId,mainId=sample.id,htmlPower=sample.powerHp,
+  offerSourceId=undefined,editorSourceId='encar_direct'}:{missing?:boolean;sourceOfferId?:string;mainId?:string;htmlPower?:number;
+    offerSourceId?:string;editorSourceId?:string}={}) {
   const values=missing?{}:{powerHp:sample.powerHp,engineCc:sample.engineCc,fuel:'petrol'};
-  const offer={id:sample.id,sourceOfferId,sourceId:'encar_direct',market:'korea',...values};
+  const offer={id:sample.id,sourceOfferId,sourceId:offerSourceId,market:'korea',...values};
   const initial={powerHp:missing?'':String(sample.powerHp),engineCc:missing?'':String(sample.engineCc),fuel:missing?'':'petrol'};
-  const component=['$','$L1',null,{offerId:sample.id,priceIdentity:{id:sample.id,sourceId:'encar_direct',market:'korea'},
+  const component=['$','$L1',null,{offerId:sample.id,priceIdentity:{id:sample.id,sourceId:editorSourceId,market:'korea'},
     initial,price:['$','$L2',null,{offer}]}];
   // Text can contain a complete counterfeit JSON record; it is never evidence.
   const text='Русский текст\nff:{"id":"noise","sourceOfferId":"unrelated"}\n';
@@ -62,6 +64,8 @@ test('missing live fields are explicit, independently of the generation gate',()
 test('wrong source, main identity, visible value and truncated Flight cannot pass',()=>{
   const sample=PIN.samples[0];
   assert.throws(()=>inspectKoreaPublicDetail(detail(sample,{sourceOfferId:'42760061'}),sample),/public_detail_source_identity/);
+  assert.throws(()=>inspectKoreaPublicDetail(detail(sample,{offerSourceId:'other'}),sample),/public_detail_source_identity/);
+  assert.throws(()=>inspectKoreaPublicDetail(detail(sample,{editorSourceId:'other'}),sample),/public_detail_source_identity/);
   assert.throws(()=>inspectKoreaPublicDetail(detail(sample,{mainId:PIN.samples[1].id}),sample),/public_detail_identity/);
   assert.throws(()=>inspectKoreaPublicDetail(detail(sample,{htmlPower:77}),sample),/public_detail_powerHp_mismatch/);
   assert.throws(()=>publicFlightObjects('<script>self.__next_f.push([1,"2:Tff,short"])</script>'),/public_flight_invalid/);
