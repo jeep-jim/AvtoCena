@@ -11,7 +11,8 @@ const sha = /^[a-f0-9]{40}$/;
 const checksum = /^[a-f0-9]{64}$/;
 const runPattern = /^[1-9]\d{0,19}$/;
 const attemptPattern = /^[1-9]\d{0,5}$/;
-const namespace = 'catalog-rebuild/checkpoints';
+// Legacy deletePrefix('catalog') uses a raw S3 prefix, including catalog-* keys.
+const namespace = 'rebuild-checkpoints/catalog/20261123';
 
 export class CheckpointError extends Error {
   constructor(code) { super(code); this.name = 'CheckpointError'; this.code = code; }
@@ -30,7 +31,8 @@ function freeze(value) {
   return value;
 }
 requireValue(rawBoundaries.version === 1 && rawBoundaries.repository === 'jeep-jim/AvtoCena'
-  && rawBoundaries.checkpointPrefix === namespace && rawBoundaries.fullBackup === false
+  && rawBoundaries.checkpointPrefix === namespace && !namespace.startsWith('catalog')
+  && rawBoundaries.fullBackup === false
   && rawBoundaries.deletionAllowed === false && Array.isArray(rawBoundaries.roots)
   && rawBoundaries.roots.length > 0, 'checkpoint_boundary_invalid');
 const rootKeys = new Set();

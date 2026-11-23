@@ -9,7 +9,7 @@ const at = Date.parse('2026-11-23T16:00:00Z');
 const base = {runId: '45190000001', attempt: '1', sourceSha: 'a'.repeat(40),
   serving: {ok: true, releaseSha: 'b'.repeat(40), calculationVersion: 'c'.repeat(64),
     checkedAt: new Date(at - 1000).toISOString()}, now: () => at};
-const prefix = `catalog-rebuild/checkpoints/${base.runId}/${base.attempt}`;
+const prefix = `rebuild-checkpoints/catalog/20261123/${base.runId}/${base.attempt}`;
 const manifestKey = 'catalog/manifest.json';
 const previousKey = 'catalog/previous-manifest.json';
 const controlsKey = 'catalog/operations/collection-controls-v1.json';
@@ -95,6 +95,27 @@ test('checkpoint retains exact original bytes, protects source objects and never
   assert.ok(writes.length > 0);
   assert.ok(writes.every(call => call.key.startsWith(prefix + '/') && call.condition.ifNoneMatch === '*'));
   assert.equal(f.headCounts.get(manifestKey), 3);
+});
+
+test('every generated object and receipt remains outside the raw catalog deletion prefix', async () => {
+  const f = fixture();
+  const copyRoots = CHECKPOINT_BOUNDARIES.roots.filter(root => root.mode === 'copy');
+  for (const root of copyRoots) {
+    if (!f.objects.has(root.key)) f.set(root.key, {sourceKey: root.key});
+  }
+  const result = await capture(f), receipt = receiptOf(f, result);
+  const destinations = [...receipt.roots.filter(root => root.copyKey).map(root => root.copyKey), result.receiptKey];
+  assert.equal(destinations.length, copyRoots.length + 1);
+  const writes = f.calls.filter(call => call.method === 'PUT').map(call => call.key);
+  assert.deepEqual(new Set(writes), new Set(destinations));
+  for (const key of destinations) {
+    assert.equal(key.startsWith('catalog'), false, key);
+    assert.ok(key.startsWith(prefix + '/'), key);
+  }
+  // Match the legacy raw S3 prefix, deliberately without a trailing slash.
+  for (const key of f.objects.keys()) if (key.startsWith('catalog')) f.objects.delete(key);
+  for (const key of destinations) assert.ok(f.objects.has(key), key);
+  assert.equal(hash(f.objects.get(result.receiptKey).bytes), result.receiptSha256);
 });
 
 test('protected settings are fingerprints only, and public output excludes private values/history/unknown switches', async () => {
@@ -205,7 +226,7 @@ test('write fence rejects source mutations, deletes, broad reads and uncondition
   const f = fixture(), scoped = createCheckpointStorage(f.storage, base);
   const bytes = Buffer.from('{}'), safeKey = `${prefix}/objects/${hash(bytes)}.json`;
   for (const key of [manifestKey, controlsKey, secretKey, 'clients/clients.json',
-    `catalog-rebuild/checkpoints/999/1/objects/${hash(bytes)}.json`, prefix + '/objects/../escape.json']) {
+    `rebuild-checkpoints/catalog/20261123/999/1/objects/${hash(bytes)}.json`, prefix + '/objects/../escape.json']) {
     assert.throws(() => scoped.putBinary(key, bytes, 'application/json', {ifNoneMatch: '*'}), /checkpoint_write_forbidden/);
   }
   assert.throws(() => scoped.putBinary(safeKey, bytes, 'application/json', {}), /checkpoint_write_forbidden/);
