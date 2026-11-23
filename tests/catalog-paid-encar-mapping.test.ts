@@ -333,7 +333,7 @@ test('paid XC40 B4 reuses its existing mild-hybrid identity through actual publi
   });
 });
 
-test('the narrow B4 resolution preserves other saved total-versus-ICE conflicts', () => {
+test('named hybrid resolutions preserve saved conflicts without explicit provider hybrid identity', () => {
   // Technical examples from the same saved intake; unrelated fixture fields
   // still come from data(). Their mixed source facts are not resolved here.
   for (const patch of [
@@ -343,8 +343,6 @@ test('the narrow B4 resolution preserves other saved total-versus-ICE conflicts'
       engine_type:'Дизель', displacement_cc:2993, power:298, power_ice_hp:286, power_electro_kw:9},
     {inner_id:'41344555', mark:'Mercedes-Benz', model:'GLE-Class', configuration:'GLE300d 4MATIC', year:2022,
       engine_type:'Дизель', displacement_cc:1993, power:272, power_ice_hp:245},
-    {inner_id:'42054624', mark:'Peugeot', model:'3008', configuration:'1.2 HYbrid Allure', year:2025,
-      engine_type:'Бензин', displacement_cc:1199, power:145, power_ice_hp:136, power_electro_kw:15.6},
   ]) {
     const offer = mapped(patch);
     assert.equal(hasKnownMildHybridIdentity(offer), false);
@@ -354,6 +352,101 @@ test('the narrow B4 resolution preserves other saved total-versus-ICE conflicts'
     assert.equal(offer.operational.sourcePower.totalHp.value, patch.power);
     assert.equal(offer.operational.sourcePower.iceHp.value, patch.power_ice_hp);
   }
+});
+
+const namedProviderHybrid = {inner_id:'42054624', mark:'Peugeot', model:'3008', configuration:'1.2 HYbrid Allure', year:2025,
+  engine_type:'Бензин', displacement_cc:1199, power:145, power_ice_hp:136, power_electro_kw:15.6};
+
+test('same-row provider Hybrid/HEV names and three exact power fields survive publication without certifying power', async () => {
+  await withOfflinePublication(async () => {
+    // IDs, retained configuration names and technical measurements come from
+    // saved 45077320093/1. Commercial fields/photos are synthetic as above.
+    for (const patch of [namedProviderHybrid,
+      {...namedProviderHybrid, inner_id:'42207128', model:'408', configuration:'1.2 Hybrid GT'},
+      {inner_id:'42434022', mark:'Kia', model:'Seltos', configuration:'HEV 1.6 2WD Signature X Line', year:2026,
+        engine_type:'Бензин', displacement_cc:1580, power:141, power_ice_hp:105, power_electro_kw:32},
+    ]) {
+      const source = mapped(patch);
+      assert.equal(source.operational.semanticEvidence.fuel.status, 'exact');
+      assert.equal(source.operational.semanticEvidence.fuel.source,
+        'auto_api_encar:v3:engine_type+configuration+complectation+power+power_ice_hp+power_electro_kw');
+      assert.equal(source.operational.semanticEvidence.powertrainKind.status, 'exact');
+      assert.equal(source.operational.semanticEvidence.powerHp.status, 'exact');
+      assert.equal(source.operational.sourcePower.totalHp.value, patch.power);
+      assert.equal(source.operational.sourcePower.iceHp.value, patch.power_ice_hp);
+      assert.equal(source.operational.sourcePower.electricPeakKw.value, patch.power_electro_kw);
+      const normalized = normalizeVehicleOfferSpecs(source);
+      const prepared = await prepareSellerInventory(normalized);
+      assert.ok(prepared);
+      const compact = compactPublicStorageOffer(prepared);
+      for (const row of [source, normalized, prepared, compact, publicOffer(compact), searchProjectionFromOffer(compact)]) {
+        assert.equal(row.powerHp, patch.power); assert.equal(row.engineCc, patch.displacement_cc);
+        assert.equal(row.fuel, 'hybrid'); assert.equal(row.powertrainKind, 'other_hybrid');
+        assert.equal(row.power30MinKw, undefined); assert.equal(row.power30MinKwByMotor, undefined);
+        assert.equal(row.utilizationPowerKw, undefined);
+        assert.equal(catalogPowerBand(row), 'unknown', '141/145 system hp must not admit the car to the <=160 certified filter');
+      }
+      assert.equal(prepared.icePowerKw, Math.round(patch.power_ice_hp / 1.35962 * 100) / 100);
+      assert.equal(prepared.motorPeakKw, patch.power_electro_kw);
+      assert.equal(prepared.totalRub, null, 'source system/peak power is not certified 30-minute power');
+    }
+    // The explicit name may be in either documented provider field.
+    const trim = mapped({...namedProviderHybrid, configuration:'1.2', complectation:'Hybrid Allure'});
+    assert.equal(trim.powertrainKind, 'other_hybrid'); assert.equal(trim.powerHp, 145);
+  });
+});
+
+test('provider hybrid resolution fails closed for incomplete or incompatible power and incompatible fuels', () => {
+  for (const field of ['power', 'power_ice_hp', 'power_electro_kw']) {
+    for (const value of [undefined, null, 0, -1, 'unknown']) {
+      const source = mapped({...namedProviderHybrid, [field]:value});
+      assert.equal(source.powerHp, undefined, field);
+      assert.notEqual(source.operational.semanticEvidence.fuel.status, 'exact', field);
+      assert.equal(source.power30MinKw, undefined); assert.equal(source.utilizationPowerKw, undefined);
+    }
+  }
+  for (const change of [{power:100}, {power:900}, {power_electro_kw:200}, {power:9999}]) {
+    const source = mapped({...namedProviderHybrid, ...change});
+    assert.equal(source.powerHp, undefined);
+    assert.notEqual(source.operational.semanticEvidence.powerHp.status, 'exact');
+  }
+  for (const engine_type of ['Дизель', 'Электро', 'Бензин или Электричество', 'Petrol or diesel']) {
+    const source = mapped({...namedProviderHybrid, engine_type});
+    assert.notEqual(source.operational.semanticEvidence.fuel.status, 'exact');
+    assert.equal(source.operational.semanticEvidence.fuel.source, 'auto_api_encar:v3:engine_type');
+    assert.equal(source.power30MinKw, undefined); assert.equal(source.utilizationPowerKw, undefined);
+  }
+  for (const configuration of ['1.2 GT', 'series hybrid', 'BEV']) {
+    const source = mapped({...namedProviderHybrid, configuration});
+    assert.equal(source.powerHp, undefined);
+    assert.notEqual(source.operational.semanticEvidence.fuel.status, 'exact');
+  }
+  assert.throws(() => mapped({...namedProviderHybrid, configuration:'Hybrid 30 min 50 kW'}),
+    /^Error: paid_encar_v3_undocumented_30_min_power$/);
+});
+
+test('provider hybrid evidence cannot be supplied by an enriched identity or a foreign source record', () => {
+  const normalizeWith = (row: any, modify: (offer: any) => any) => normalizePaidEncarOffer(row,
+    {id:row.inner_id, observedAt, adapter:{normalizeOffer(raw: any) {return modify(adapter.normalizeOffer(raw));}}});
+  for (const modify of [
+    (offer: any) => ({...offer, sourceOfferId:'99999999'}),
+    (offer: any) => ({...offer, sourceOfferId:undefined}),
+    (offer: any) => ({...offer, sourceId:'foreign_source'}),
+    (offer: any) => ({...offer, market:'europe'}),
+  ]) {
+    const source = normalizeWith(data(namedProviderHybrid), modify);
+    assert.equal(source.powerHp, undefined); assert.notEqual(source.operational.semanticEvidence.fuel.status, 'exact');
+  }
+  for (const extra of [{trim:'1.2 Hybrid Allure'}, {sourceTitle:'Peugeot 3008 Hybrid'},
+    {operational:{encyclopediaIdentity:{rawModel:'3008 Hybrid', rawTrim:'Hybrid'}}},
+    {operational:{raw:{recommendedTitle:'Peugeot Hybrid'}}}]) {
+    const source = normalizeWith(data({...namedProviderHybrid, configuration:'1.2 Allure'}),
+      offer => ({...offer, ...extra, operational:{...offer.operational, ...(extra.operational || {})}}));
+    assert.equal(source.powerHp, undefined);
+    assert.notEqual(source.operational.semanticEvidence.fuel.status, 'exact');
+  }
+  assert.throws(() => normalizePaidEncarOffer({...data(namedProviderHybrid), inner_id:undefined},
+    {id:namedProviderHybrid.inner_id, observedAt, adapter}), /^Error: Encar identity mismatch$/);
 });
 
 test('paid v3 equipment and exact listing fields reach the stored detail without seller columns', async () => {

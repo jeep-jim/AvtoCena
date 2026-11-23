@@ -133,12 +133,26 @@ export function normalizePaidEncarOffer(data, {id, observedAt, adapter}) {
     && !/parallel[ -]?hybrid|power[ -]?split|mixed[ -]?hybrid|параллельн[а-яё]*\s+гибрид/i.test(fuelLabel);
   // Reuse the already accepted XC40 B4 identity rule. Its generic petrol label
   // must not undo the adapter's known mild-hybrid classification and create a
-  // new identity conflict. Other electrified names/source conflicts stay strict.
-  const compatibleMildHybridName = sourceFuelKind === 'combustion' && hasKnownMildHybridIdentity(offer)
-    && /^(?:бензин|petrol|gasoline|benzin|가솔린|휘발유)$/i.test(fuelLabel.trim());
-  const identityResolved = compatibleSeriesName || compatibleMildHybridName;
+  // new identity conflict. Other provider names require the separate proof below.
+  const genericPetrol = /^(?:бензин|petrol|gasoline|benzin|가솔린|휘발유)$/i.test(fuelLabel.trim());
+  const compatibleMildHybridName = sourceFuelKind === 'combustion' && hasKnownMildHybridIdentity(offer) && genericPetrol;
+  // v3 separates total hp, ICE hp and electric kW. A generic petrol label does
+  // not negate an explicit Hybrid/HEV configuration in this same source row.
+  // Read that name directly from provider fields, never an enriched offer title.
+  const providerTrim = [data.configuration, data.complectation].filter(value => typeof value === 'string').join(' ');
+  const electricHp = motorKw.value * 1.35962;
+  const compatibleProviderHybridName = sourceFuelKind === 'combustion' && genericPetrol
+    && offer.sourceId === 'encar_direct' && offer.market === 'korea' && offer.sourceOfferId === String(id)
+    && /\b(?:hybrid|hev)\b/i.test(providerTrim)
+    && namedElectrifiedPowertrainKind({trim: providerTrim}) === 'other_hybrid' && namedKind === 'other_hybrid'
+    && [hp, iceHp, motorKw].every(value => value.status === 'exact' && value.value > 0)
+    // Do not require simultaneous peaks to add exactly. Retain the existing
+    // one-hp rounding tolerance, while refusing incompatible component totals.
+    && hp.value + 1 >= Math.max(iceHp.value, electricHp) && hp.value <= iceHp.value + electricHp + 1;
+  const identityResolved = compatibleSeriesName || compatibleMildHybridName || compatibleProviderHybridName;
   const fuelKind = identityResolved ? namedKind : sourceFuelKind;
-  const resolvedFuel = compatibleMildHybridName ? 'hybrid' : fields.fuel;
+  const resolvedFuel = compatibleMildHybridName || compatibleProviderHybridName ? 'hybrid' : fields.fuel;
+  const providerHybridEvidence = 'engine_type+configuration+complectation+power+power_ice_hp+power_electro_kw';
   const fuelConflict = fields.fuel && namedKind && namedKind !== fuelKind;
   const fuelAmbiguous = fuelKind === 'combustion' && motorKw.status === 'exact';
   const fuelResult = {status: alternativeFuel ? 'ambiguous' : fuelConflict ? 'conflict' : fuelAmbiguous ? 'ambiguous'
@@ -186,8 +200,10 @@ export function normalizePaidEncarOffer(data, {id, observedAt, adapter}) {
     semanticEvidence: {
       productionDate: {...production, source: 'auto_api_encar:v3:year_month:production', observedAt},
       year: evidence('year', {status: 'exact', value: offer.year}),
-      fuel: evidence(compatibleMildHybridName ? 'engine_type+identity_name' : 'engine_type', fuelResult),
-      powertrainKind: evidence(identityResolved ? 'engine_type+identity_name' : 'engine_type', {...fuelResult, value: fuelKind}),
+      fuel: evidence(compatibleProviderHybridName ? providerHybridEvidence
+        : compatibleMildHybridName ? 'engine_type+identity_name' : 'engine_type', fuelResult),
+      powertrainKind: evidence(compatibleProviderHybridName ? providerHybridEvidence
+        : identityResolved ? 'engine_type+identity_name' : 'engine_type', {...fuelResult, value: fuelKind}),
       engineCc: evidence('displacement_cc', {...cc,
         ...(cc.status === 'missing' && present(data.displacement) ? {reason: 'litres_do_not_prove_exact_cc'} : {})}, 'cm3'),
       powerHp: evidence('power', powerResult, 'hp'),
