@@ -2,7 +2,7 @@
   "version": 1,
   "operation": "freeze-and-checkpoint",
   "requestedAt": "2026-11-23T15:43:41.825653+00:00",
-  "scopeSha256": "d4cfefacc1a38a99d95129c8ab6a56d427076158b5567e7ed1945e9e9aae038f",
+  "scopeSha256": "1de950bcd80da8c91020031191768134632dc263f31266177fdde6b46578d5ef",
   "checkpointBoundariesSha256": "b2e0b439017fd2a20aad9188289231e053ded76db106caa8b83a595f68170dab",
   "authorization": "Owner instruction 2026-11-23: begin replacement of feeds, parsers, catalog updates and publication; preserve admin, encyclopedia and calculation engines.",
   "fullBackup": false,

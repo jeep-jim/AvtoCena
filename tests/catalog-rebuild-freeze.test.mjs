@@ -10,13 +10,14 @@ const scope = () => ({version: 1, repository: REPOSITORY, repositoryId: REPOSITO
   workflows: [{path: TARGET, blobSha: SHA, reason: 'Fixture catalog writer'}], protectedWorkflows: [PROTECTED]});
 
 function fixture({active = true, conflict = false, staleInventory = false, staleOnce = false, changedSource = false,
-  changeBeforeDisable = false, nonterminalJob = false, otherRepositoryRun = false} = {}) {
+  changeBeforeDisable = false, nonterminalJob = false, otherRepositoryRun = false, unassigned = false, noJobs = false} = {}) {
   const calls = [], snapshots = [];
   const workflows = [
     {id: 10, path: TARGET, state: 'active'},
     {id: 20, path: PROTECTED, state: 'active'},
   ];
-  const runs = active ? [{id: 101, workflow_id: 10, path: TARGET, status: 'in_progress', conclusion: null,
+  const runs = active ? [{id: 101, workflow_id: 10, path: TARGET, status: unassigned ? 'queued' : 'in_progress', conclusion: null,
+    run_attempt: 1, head_branch: 'main', created_at: '2026-11-11T20:50:23Z', updated_at: '2026-11-11T20:50:23Z',
     head_sha: SHA, event: 'schedule', repository: {id: REPOSITORY_ID, full_name: REPOSITORY}, head_repository: {id: otherRepositoryRun ? 99 : REPOSITORY_ID}}] : [];
   // The unrelated protected workflow stays running throughout the operation.
   runs.push({id: 202, workflow_id: 20, path: PROTECTED, status: 'in_progress', conclusion: null,
@@ -48,6 +49,7 @@ function fixture({active = true, conflict = false, staleInventory = false, stale
     if (match) {
       const row = runs.find(run => run.id === Number(match[1]));
       assert(row);
+      if (match[2].startsWith('/jobs?') && noJobs) return {total_count: 0, jobs: []};
       if (match[2].startsWith('/jobs?')) return {total_count: 1, jobs: [{id: row.id * 10, run_id: row.id,
         status: row.status === 'completed' && !nonterminalJob ? 'completed' : 'in_progress'}]};
       if (method === 'POST') {
@@ -177,6 +179,46 @@ test('a final guard failure cannot leave a report claiming quiescence', async ()
   await assert.rejects(freezeWorkflows({scope: scope(), ...f, apply: true}), /protected_workflow_changed/);
   assert.equal(f.snapshots.at(-1).quiescent, false);
   assert.equal(f.snapshots.at(-1).error, 'rebuild_protected_workflow_changed');
+});
+
+function historicalScope() {
+  const s = scope();
+  s.historicalUnassigned = [{id: 101, workflowId: 10, path: TARGET, headSha: SHA, branch: 'main',
+    event: 'schedule', attempt: 1, createdAt: '2026-11-11T20:50:23Z', updatedAt: '2026-11-11T20:50:23Z'}];
+  // The actual admitted record is a push run; use the same identity in fixtures.
+  s.historicalUnassigned[0].event = 'push';
+  return s;
+}
+
+test('only the frozen historical record may remain unassigned without being labelled cancelled', async () => {
+  const f = fixture({unassigned: true, noJobs: true}); f.runs[0].event = 'push';
+  const result = await freezeWorkflows({scope: historicalScope(), ...f, apply: true});
+  assert.equal(result.quiescent, true);
+  assert.equal(result.runs[0].status, 'queued');
+  assert.equal(result.runs[0].cancelRequested, false);
+  assert.equal(result.runs[0].historicalUnassigned, true);
+  assert.deepEqual(result.historicalUnassigned.map(run => run.id), [101]);
+  assert.deepEqual(result.remaining, []);
+  assert.equal(f.calls.filter(call => call.method === 'POST').length, 0);
+  assert(f.calls.filter(call => call.path.includes('/101/jobs?')).length >= 6);
+});
+
+test('unknown empty queued records are not exempted when cancellation is rejected', async () => {
+  const f = fixture({unassigned: true, noJobs: true, conflict: true});
+  const result = await freezeWorkflows({scope: scope(), ...f, apply: true});
+  assert.equal(result.quiescent, false);
+  assert.deepEqual(result.historicalUnassigned, []);
+  assert.equal(result.remaining[0].id, 101);
+});
+
+test('any assigned job or changed historical identity blocks the exception', async () => {
+  const assigned = fixture({unassigned: true}); assigned.runs[0].event = 'push';
+  await assert.rejects(freezeWorkflows({scope: historicalScope(), ...assigned, apply: true}), /historical_run_assigned/);
+  for (const [field, value] of [['head_sha', 'b'.repeat(40)], ['run_attempt', 2], ['updated_at', '2026-11-12T20:50:23Z']]) {
+    const f = fixture({unassigned: true, noJobs: true}); f.runs[0].event = 'push'; f.runs[0][field] = value;
+    await assert.rejects(freezeWorkflows({scope: historicalScope(), ...f, apply: true}), /historical_run_changed/);
+    assert.equal(f.calls.filter(call => call.method === 'POST').length, 0);
+  }
 });
 
 test('HTTP client rejects operations beyond disabling and ordinary cancellation', async () => {

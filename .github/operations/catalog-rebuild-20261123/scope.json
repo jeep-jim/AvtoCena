@@ -234,5 +234,23 @@
     ".github/workflows/release-minimal-paid-encar.yml",
     ".github/workflows/release-paid-encar.yml",
     ".github/workflows/verify-finish-paid-encar.yml"
+  ],
+  "historicalUnassigned": [
+    {
+      "id": 43098373792,
+      "workflowId": 332609349,
+      "path": ".github/workflows/catalog-overview-read-model.yml",
+      "headSha": "65df01a1fcca9a054eef0e08f1ceb2fb13a565bf",
+      "branch": "main",
+      "event": "push",
+      "attempt": 1,
+      "createdAt": "2026-11-11T20:50:23Z",
+      "updatedAt": "2026-11-11T20:50:23Z",
+      "evidence": [
+        "https://github.com/jeep-jim/AvtoCena/actions/runs/45130128516/job/137543479330",
+        "https://github.com/jeep-jim/AvtoCena/actions/runs/45130287940/job/137543980860"
+      ],
+      "classification": "historical-unassigned; never labelled cancelled or terminal; recheck exact identity and zero jobs"
+    }
   ]
 }

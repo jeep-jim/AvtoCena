@@ -27,6 +27,15 @@ export function validateScope(scope) {
   for (const path of scope.protectedWorkflows) assert(FILE.test(path), 'rebuild_scope_protected_path');
   assert(scope.observeOnlyWorkflows === undefined || Array.isArray(scope.observeOnlyWorkflows), 'rebuild_scope_observe_only');
   for (const path of scope.observeOnlyWorkflows ?? []) assert(scope.protectedWorkflows.includes(path) && !paths.has(path), 'rebuild_scope_observe_overlap');
+  assert(scope.historicalUnassigned === undefined || Array.isArray(scope.historicalUnassigned), 'rebuild_scope_historical');
+  const historicalIds = new Set();
+  for (const row of scope.historicalUnassigned ?? []) {
+    assert(Number.isSafeInteger(row.id) && row.id > 0 && !historicalIds.has(row.id) &&
+      Number.isSafeInteger(row.workflowId) && row.workflowId > 0 && paths.has(row.path) && SHA.test(row.headSha ?? '') &&
+      row.branch === 'main' && row.event === 'push' && row.attempt === 1 &&
+      Number.isFinite(Date.parse(row.createdAt)) && row.updatedAt === row.createdAt, 'rebuild_scope_historical_identity');
+    historicalIds.add(row.id);
+  }
   return scope;
 }
 
@@ -97,6 +106,30 @@ async function readJobs(api, run, pause) {
   }, pause);
 }
 
+// The existing publication authority already records this exact contradictory
+// GitHub entry: both cancellation APIs returned 409 / never queued. It has no
+// assigned jobs. This is not a general exemption for queued or empty runs and
+// never proves that the run is cancelled, terminal, or unable to start later.
+async function verifyHistoricalUnassigned(scope, api, run, pause) {
+  const expected = (scope.historicalUnassigned ?? []).find(row => row.id === run.id);
+  if (!expected) return false;
+  const matches = value => value?.id === expected.id && value.workflow_id === expected.workflowId &&
+    value.path === expected.path && value.head_sha === expected.headSha && value.head_branch === expected.branch &&
+    value.event === expected.event && value.run_attempt === expected.attempt && value.created_at === expected.createdAt &&
+    value.updated_at === expected.updatedAt && value.repository?.id === REPOSITORY_ID &&
+    value.repository.full_name === REPOSITORY && value.head_repository?.id === REPOSITORY_ID &&
+    value.status === 'queued' && value.conclusion === null;
+  assert(matches(run), 'rebuild_historical_run_changed');
+  for (let pass = 0; pass < 2; pass++) {
+    const current = await api('GET', `${ROOT}/actions/runs/${run.id}`);
+    assert(matches(current), 'rebuild_historical_run_changed');
+    assert((await readJobs(api, current, pause)).length === 0, 'rebuild_historical_run_assigned');
+  }
+  const final = await api('GET', `${ROOT}/actions/runs/${run.id}`);
+  assert(matches(final), 'rebuild_historical_run_changed');
+  return true;
+}
+
 const runRow = run => ({id: run.id, workflowId: run.workflow_id, path: run.path, status: run.status,
   conclusion: run.conclusion ?? null, headSha: run.head_sha, event: run.event});
 
@@ -107,7 +140,8 @@ export async function freezeWorkflows({scope, api, apply = false, persist, pause
   const report = {version: 1, repository: REPOSITORY, startedAt: new Date().toISOString(), applied: apply,
     scope: 'explicit-reviewed-legacy-workflows', baselineSha: scope.baselineSha,
     workflows: [], protectedWorkflows: [], runs: [], disabled: false, quiescent: false,
-    sharedActiveBefore: [], sharedActiveAfter: [], completeWriterBoundary: false,
+    sharedActiveBefore: [], sharedActiveAfter: [], historicalUnassigned: [], completeWriterBoundary: false,
+    quiescenceBasis: 'No assigned writers observed in the explicit scope; historical unassigned records are not cancelled or terminal.',
     storageWrites: 0, storageDeletes: 0, leaseChanges: 0};
   const save = async () => { await persist(structuredClone(report)); };
   try {
@@ -153,6 +187,13 @@ export async function freezeWorkflows({scope, api, apply = false, persist, pause
       row.jobsBefore = jobs.map(job => ({id: job.id, status: job.status}));
       report.runs.push(row);
       await save();
+      if (await verifyHistoricalUnassigned(scope, api, before, pause)) {
+        row.historicalUnassigned = true;
+        row.cancelSkipped = 'verified-historical-unassigned-record';
+        report.historicalUnassigned.push(runRow(before));
+        await save();
+        continue;
+      }
       if (before.status !== 'completed' && report.workflows.find(target => target.id === run.workflow_id).cancelActive) {
         const result = await api('POST', `${ROOT}/actions/runs/${run.id}/cancel`);
         row.cancelRequested = !result?.conflict;
@@ -168,6 +209,7 @@ export async function freezeWorkflows({scope, api, apply = false, persist, pause
     for (let attempt = 0; attempt < 12; attempt++) {
       let pending = 0;
       for (const row of report.runs) {
+        if (row.historicalUnassigned) continue;
         const current = await api('GET', `${ROOT}/actions/runs/${row.id}`);
         assert(current.id === row.id && current.workflow_id === row.workflowId && current.path === row.path &&
           current.repository?.id === REPOSITORY_ID && current.head_sha === row.headSha, 'rebuild_poll_run_changed');
@@ -179,10 +221,26 @@ export async function freezeWorkflows({scope, api, apply = false, persist, pause
       if (!pending) break;
       if (attempt < 11) await pause(5000);
     }
-    const remaining = (await listActiveRuns(api, pause)).filter(run => targets.has(run.workflow_id));
+    const actualRemaining = async runs => {
+      const remaining = [];
+      for (const run of runs.filter(run => targets.has(run.workflow_id))) {
+        if (await verifyHistoricalUnassigned(scope, api, run, pause)) {
+          if (!report.historicalUnassigned.some(row => row.id === run.id)) report.historicalUnassigned.push(runRow(run));
+          continue;
+        }
+        remaining.push(run);
+      }
+      return remaining;
+    };
+    const remaining = await actualRemaining(await listActiveRuns(api, pause));
     report.remaining = remaining.map(runRow);
     let jobsTerminal = true;
     for (const row of report.runs) {
+      if (row.historicalUnassigned) {
+        await verifyHistoricalUnassigned(scope, api, await api('GET', `${ROOT}/actions/runs/${row.id}`), pause);
+        row.jobsAfter = [];
+        continue;
+      }
       const jobs = await readJobs(api, row, pause);
       row.jobsAfter = jobs.map(job => ({id: job.id, status: job.status}));
       jobsTerminal &&= jobs.every(job => job.status === 'completed');
@@ -191,9 +249,9 @@ export async function freezeWorkflows({scope, api, apply = false, persist, pause
     // pages while the first census and job readbacks were being collected.
     const finalRuns = await listActiveRuns(api, pause);
     report.sharedActiveAfter = finalRuns.filter(run => observe.has(run.workflow_id)).map(runRow);
-    const confirm = finalRuns.filter(run => targets.has(run.workflow_id));
+    const confirm = await actualRemaining(finalRuns);
     report.remaining = [...new Map([...report.remaining, ...confirm.map(runRow)].map(run => [run.id, run])).values()];
-    report.quiescent = report.remaining.length === 0 && jobsTerminal && report.runs.every(run => run.status === 'completed');
+    report.quiescent = report.remaining.length === 0 && jobsTerminal && report.runs.every(run => run.status === 'completed' || run.historicalUnassigned);
     for (const row of report.protectedWorkflows) {
       const after = await api('GET', `${ROOT}/actions/workflows/${row.id}`);
       assert(after.id === row.id && after.path === row.path && after.state === row.before, 'rebuild_protected_workflow_changed');
@@ -227,6 +285,7 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
     apply: process.argv.includes('--apply'), persist: value => fs.writeFile(output, JSON.stringify(value, null, 2) + '\n')});
   console.log(JSON.stringify({disabled: report.disabled, quiescent: report.quiescent, workflows: report.workflows.length,
     remaining: report.remaining?.length ?? null, sharedActive: report.sharedActiveAfter.length, completeWriterBoundary: false,
+    historicalUnassigned: report.historicalUnassigned.length,
     storageWrites: 0, storageDeletes: 0, leaseChanges: 0}));
   if (report.applied && (!report.disabled || !report.quiescent || report.sharedActiveAfter.length > 0)) process.exitCode = 2;
 }
