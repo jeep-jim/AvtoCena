@@ -1,4 +1,4 @@
-name: Prepare and accept exact home UI catalog-b4d2
+name: Prepare and accept exact home UI catalog-05f2
 on:
   workflow_dispatch:
     inputs:
@@ -13,7 +13,7 @@ permissions:
   contents: read
   actions: read
 concurrency:
-  group: avtocena-home-ui-catalog-b4d2
+  group: avtocena-home-ui-catalog-05f2
   cancel-in-progress: false
 jobs:
   await_current_publications:
@@ -32,6 +32,7 @@ jobs:
             '45129017812 .github/workflows/catalog-refresh-uae.yml ddc5fdeb5b42372985aa90026153de7cf34484a4'
             '45130876633 .github/workflows/catalog-refresh-europe.yml 81edfddcfc2856be2378ccda7fd756ec75f17619'
             '45134976110 .github/workflows/home-ui-activation.yml 347093f58180fdf2174222e1b6b40859b8219332'
+            '45173557400 .github/workflows/home-ui-activation.yml 1788c96754ff2a59c2254b127688917bb8d53c40'
           )
           for row in "${runs[@]}"; do
             read -r id workflow head <<< "$row"
@@ -85,7 +86,7 @@ jobs:
           python3 -I -B tests/home-ui-host-driver.test.py
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
-          ref: b4d226491bcfa03eca73d72480ff3bd867d3c6fb
+          ref: 05f289a875866be0be84800c8644dee5f38a1059
           path: application
           persist-credentials: false
           fetch-depth: 1

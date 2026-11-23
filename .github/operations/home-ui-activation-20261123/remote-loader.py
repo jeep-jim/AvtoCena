@@ -12,7 +12,7 @@ import stat
 payload = json.loads(base64.b64decode('__HOME_CONTROLLER_BUNDLE__'))
 nonce = payload['nonce']
 assert re.fullmatch(r'[a-f0-9]{32}', nonce)
-release = 'b4d226491bcfa03eca73d72480ff3bd867d3c6fb'
+release = '05f289a875866be0be84800c8644dee5f38a1059'
 lock = os.open('/run/lock/avtocena-runtime-change.lock', os.O_RDONLY | os.O_NOFOLLOW | os.O_CLOEXEC | os.O_NONBLOCK)
 info = os.fstat(lock)
 assert stat.S_ISREG(info.st_mode) and info.st_uid == 0 and info.st_nlink == 1

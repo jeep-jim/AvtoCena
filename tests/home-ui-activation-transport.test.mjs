@@ -17,7 +17,7 @@ function transport(onMessage,browser=async()=>({schemaVersion:1,release:HOME_UI.
   child.kill=()=>queueMicrotask(()=>child.emit('close',1,'SIGTERM'));
   child.stdin.on('finish',()=>queueMicrotask(()=>child.emit('close',0,null)));
   const session=new HomeSshSession({process:child,nonce,browser,
-    authority:{guard:async()=>({operationId:'home-ui-catalog-b4d2-'+nonce,generationId:'gen_1_test',acceptedReadModelFingerprint:'b'.repeat(64),lockedUntil:new Date(Date.now()+60000).toISOString()})}});
+    authority:{guard:async()=>({operationId:'home-ui-catalog-05f2-'+nonce,generationId:'gen_1_test',acceptedReadModelFingerprint:'b'.repeat(64),lockedUntil:new Date(Date.now()+60000).toISOString()})}});
   emit({kind:'ready',source:HOME_UI.source,nonce});
   return {child,emit,session};
 }

@@ -19,7 +19,7 @@ const INDEX_KEY='knowledge/encyclopedia/calculation-indexes/'+HOME_UI.privateInd
 const jsonFile=async filename=>JSON.parse(await fs.readFile(filename,'utf8'));
 const privateWrite=(filename,value)=>fs.writeFile(filename,JSON.stringify(value,null,2)+'\n',{mode:0o600,flag:'wx'});
 async function digest(filename){const hash=createHash('sha256');for await(const chunk of createReadStream(filename))hash.update(chunk);return hash.digest('hex');}
-async function paths(){const temporary=await fs.realpath(process.env.RUNNER_TEMP);return {directory:path.join(temporary,'home-ui-activation'),image:path.join(temporary,'home-ui-image-catalog-b4d2')};}
+async function paths(){const temporary=await fs.realpath(process.env.RUNNER_TEMP);return {directory:path.join(temporary,'home-ui-activation'),image:path.join(temporary,'home-ui-image-catalog-05f2')};}
 async function storage(){const module=await import(pathToFileURL(path.join(CONTROLLER_ROOT,'apps/web/lib/data.ts')));const store=module.getJsonStorage();need(store.driver==='object','object_storage');return store;}
 async function liveIdentity(){
   const response=await fetch('https://avtocena.com/api/health',{method:'GET',cache:'no-store',redirect:'error',signal:AbortSignal.timeout(30000)});

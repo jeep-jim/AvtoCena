@@ -57,8 +57,14 @@ def check_kia_reports():
     assert 'data-korea-report-trigger' in body and 'История и состояние' in body
     related = json.loads(get('kia-available-recommendations', '/api/catalog/recommendations', dict(id=offer_id, kind='related', markets='korea')))
     assert related['kind'] == 'related' and related['current']['id'] == offer_id
-    assert related['marketTotal'] > 0 and len(related['marketRows']) > 0
-    print(json.dumps(dict(koreaRelated=len(related['marketRows']), koreaTotal=related['marketTotal'])),flush=True)
+    print(json.dumps(dict(koreaRelated=len(related['marketRows']), koreaTotal=related['marketTotal'],
+                          sameModel=len(related['sameModel']), partial=related['partial'])),flush=True)
+    if not related['marketRows'] or not related['marketTotal']:
+        for name, args in [('market', {}), ('model', dict(make='Kia', model='Morning'))]:
+            direct = json.loads(get('direct-korea-' + name, '/api/catalog/search',
+                                    dict(market='korea', marketPage=1, page=1, **args)))
+            print(json.dumps(dict(direct=name, total=direct.get('total'), items=len(direct.get('items', [])))),flush=True)
+        raise AssertionError('no published Korea recommendation cards')
 
 
 def main():

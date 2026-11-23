@@ -6,14 +6,14 @@ import {execFileSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
 
 export const HOME_UI = Object.freeze({
-  source:'b4d226491bcfa03eca73d72480ff3bd867d3c6fb',
-  tree:'55bbadc7e915ed282668229251b191495c4ca71b',
+  source:'05f289a875866be0be84800c8644dee5f38a1059',
+  tree:'857b72d142f00fafe77f36acbe14bafd86301bf4',
   retainedSource:'22867cbcfaee27b2e8917b6bf880e44827f67b60',
   retainedTree:'cb53c3c2b2ae656e3cabff8c63e78705e74314ba',
   sourceCalculationVersion:'07e57453202a22d0ab35f35637be30fe2f3b931ca59f151210002b69164c507b',
   servingCalculationVersion:'4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90',
   calculationAlgorithmBlob:'63c9323ac7a0ddf267a725443ca2316c197cc7d8',
-  codeDiffSha256:'48e191afdd67d95e1ebe65f1b7eb4cd6f9e073f3cb683d588a4589ff3776c1af',
+  codeDiffSha256:'0a28ddb5af528f911822075e96c96590568478b4750850c94671d089ac3be62a',
   privateIndexDigest:'bf2c72cb7a260ef093c0a43c2b0dad9c4c9094a4d6dc3811dd0d7f7626b0d72b',
   privateIndexParent:'83ff17075e9188dcf227c8752dc064248d5f42e0',
   sourceClosureRecords:6364,
