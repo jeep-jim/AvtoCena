@@ -1,5 +1,9 @@
 name: Prepare the saved China inventory for publication
 on:
+  workflow_run:
+    workflows: [Prepare locally stored China feed]
+    types: [completed]
+    branches: [main]
   push:
     branches: [main]
     paths: ['.github/market-runs/stage-owned-china.json']
@@ -11,7 +15,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   verify:
-    if: github.repository_id == '1289722938' && github.ref == 'refs/heads/main' && github.run_attempt == '1'
+    if: github.repository_id == '1289722938' && github.ref == 'refs/heads/main' && github.run_attempt == '1' && (github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success')
     runs-on: ubuntu-24.04
     environment: regcloud-staging
     steps:
@@ -27,8 +31,8 @@ jobs:
         working-directory: source
         run: |
           node --input-type=module <<'JS'
-          import {verifyReadonlyInvocation} from './scripts/lib/readonly-marker-invocation.mjs';
-          verifyReadonlyInvocation({root:process.cwd(),env:process.env,markerPath:'.github/market-runs/stage-owned-china.json',operation:'prepare-owned-china-private-generation'});
+          import {verifyChinaStageInvocation} from './scripts/lib/owned-china-stage-invocation.mjs';
+          verifyChinaStageInvocation(process.cwd());
           JS
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
@@ -60,7 +64,7 @@ jobs:
             fi
           done
           cd source
-          node --import tsx --test tests/owned-china-publication-source.test.mjs tests/owned-china-active-coverage.test.mjs tests/che168-replica-witness.test.ts tests/owned-china-frozen-pricing.test.mjs
+          node --import tsx --test tests/owned-china-publication-source.test.mjs tests/owned-china-active-coverage.test.mjs tests/che168-replica-witness.test.ts tests/owned-china-frozen-pricing.test.mjs tests/owned-china-stage-invocation.test.mjs
       - name: Price, verify and save the private China generation
         working-directory: source
         env:

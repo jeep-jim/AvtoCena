@@ -24,10 +24,16 @@ async function gh(route){
 const [run,jobs]=await Promise.all([gh('runs/'+stageId),gh('runs/'+stageId+'/attempts/1/jobs?per_page=100')]);
 assert(String(run.id)===stageId && run.repository?.id===1289722938 && run.head_repository?.id===1289722938 &&
  run.head_branch==='main' && run.status==='completed' && run.conclusion==='success' && run.run_attempt===1 &&
- run.event==='push' && run.path==='.github/workflows/stage-owned-china-generation.yml','unreviewed upstream stage');
+ ['push','workflow_run'].includes(run.event) && run.path==='.github/workflows/stage-owned-china-generation.yml','unreviewed upstream stage');
 assert(jobs.total_count===1 && jobs.jobs[0].name==='verify' && jobs.jobs[0].status==='completed' &&
  jobs.jobs[0].conclusion==='success' && jobs.jobs[0].head_sha===run.head_sha,'upstream stage not verified');
 const receipt=JSON.parse(await readFile(process.argv[4],'utf8'));
+if(receipt.status==='no_matching_new_archive'){
+ assert(run.event==='workflow_run' && receipt.version===1 && receipt.market==='china' && receipt.published===false &&
+  receipt.owner?.runId===stageId && receipt.owner.attempt==='1' && receipt.owner.revision===run.head_sha,'invalid no-op receipt');
+ console.log(JSON.stringify({stage:'no_matching_new_archive',stageRun:stageId,published:false}));
+ process.exit(0);
+}
 const {source,control,archive,rates,coverage}=receipt.evidence;
 assert(receipt.version===1 && receipt.market==='china' && receipt.published===false && receipt.owner.runId===stageId &&
  receipt.owner.attempt==='1' && receipt.owner.revision===run.head_sha && receipt.target.runId==='owned-china-'+stageId+'-1' &&

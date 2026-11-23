@@ -5,13 +5,14 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import {fileURLToPath,pathToFileURL} from 'node:url';
 import {createResourceNodeInvocation} from './lib/node-resource-memory.mjs';
-import {rawDigest} from './lib/catalog-raw-provenance.mjs';
+import {rawDigest,rawProducerOwner} from './lib/catalog-raw-provenance.mjs';
 import {openOwnedChinaVerifiedInput} from './lib/open-owned-china-verified-input.mjs';
 import {ownedChinaFrozenFx} from './lib/owned-china-frozen-pricing.mjs';
-import {verifyReadonlyInvocation} from './lib/readonly-marker-invocation.mjs';
+import {currentPreparedRun,verifyChinaStageInvocation} from './lib/owned-china-stage-invocation.mjs';
+import {OWNED_CHINA_PREPARED} from './lib/owned-china-publication-source.mjs';
 
 const root=fileURLToPath(new URL('../',import.meta.url));
-const invocation=verifyReadonlyInvocation({root,markerPath:'.github/market-runs/stage-owned-china.json',operation:'prepare-owned-china-private-generation'});
+const invocation=verifyChinaStageInvocation(root);
 const native=path.resolve(process.argv[2]),release=path.resolve(process.argv[3]),writer=path.resolve(process.argv[4]);
 assert.equal(execFileSync('git',['rev-parse','HEAD'],{cwd:writer,encoding:'utf8'}).trim(),'d7b193855b37aa83bf79a3afb38902ee2f20ba30');
 const {calculationVersion}=await import(pathToFileURL(path.join(writer,'scripts/catalog-calculation-version.mjs')).href);
@@ -29,15 +30,27 @@ async function checkRuntime(){
   assert.equal(gitTree(live.releaseSha),gitTree(contextPlan.releaseSha),'serving model data changed');
   return live.releaseSha;
 }
+const {ObjectJsonStorage}=await writerImport('apps/web/lib/data.ts');
+const store=new ObjectJsonStorage();
+if(invocation.producer){
+ const head=await store.readJson(OWNED_CHINA_PREPARED,null);
+ if(!currentPreparedRun(head,invocation.producer)){
+  // A successful prepare can be a no-op or be overtaken by a newer prepare.
+  // Neither completion may claim or activate another run's archive.
+  const receipt={version:1,status:'no_matching_new_archive',market:'china',owner:rawProducerOwner(),
+   producer:invocation.producer,archiveRoot:head.archiveRoot,published:false};
+  await fs.writeFile(path.join(process.env.RUNNER_TEMP,'owned-china-stage.json'),JSON.stringify(receipt),{flag:'wx',mode:0o600});
+  console.log(JSON.stringify(receipt));process.exit(0);
+ }
+}
 await checkRuntime();
 const state=await openOwnedChinaVerifiedInput(native);
 const {prepared,coverage,witness,temp,readerOwner}=state;
 const {plan}=prepared;
+if(invocation.producer)assert.deepEqual(plan.evidence.archive.owner,invocation.producer,'completed prepare and archive producer differ');
 assert.equal(coverage.previouslyPublishedStillInSource+coverage.previouslyPublishedExplicitlyRemoved+coverage.previouslyPublishedAbsentWithoutRemovalEvent,
   coverage.previouslyPublished,'previous inventory is not fully classified');
 assert(plan.source.cursor.sequence>state.base.cursor.sequence,'source already served');
-const {ObjectJsonStorage}=await writerImport('apps/web/lib/data.ts');
-const store=new ObjectJsonStorage();
 const privacy=await store.readChinaPrivateStageBucketPrivacy();
 const {materializeChinaRuntimeContext}=await writerImport('scripts/catalog-china-materialize-runtime.mjs');
 const capture=out=>materializeChinaRuntimeContext({plan:contextPlan,expectedPlanSha256:rawDigest(contextPlan),releaseRoot:release,out,
