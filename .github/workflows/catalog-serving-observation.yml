@@ -1,0 +1,43 @@
+name: Read serving catalog process and host counters
+on:
+  push:
+    branches: [main]
+    paths: [.github/market-runs/catalog-serving-observation.json]
+permissions:
+  contents: read
+jobs:
+  observe:
+    if: github.repository == 'jeep-jim/AvtoCena' && github.run_attempt == '1'
+    runs-on: ubuntu-24.04
+    environment: regcloud-staging
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 2
+          persist-credentials: false
+      - name: Validate marker before reading the serving process
+        run: |
+          node --input-type=module <<'JS'
+          import {verifyReadonlyInvocation} from './scripts/lib/readonly-marker-invocation.mjs';
+          verifyReadonlyInvocation({root:process.cwd(),markerPath:'.github/market-runs/catalog-serving-observation.json',operation:'read-serving-catalog-process'});
+          JS
+      - name: Read serving process, local health and anonymous counters
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+        run: |
+          set -euo pipefail
+          umask 077
+          known=docs/operations/regcloud-staging-known-hosts
+          printf '%s  %s\n' fd37f98aab3eeb16f131fcd4033adbb56f7e9616208c2f1ab5ef7a446caa4e4c "$known" | sha256sum --check --status
+          key=$(mktemp)
+          trap 'rm -f -- "$key"' EXIT
+          printf '%s\n' "$SSH_PRIVATE_KEY" > "$key"
+          unset SSH_PRIVATE_KEY
+          timeout 90 ssh -F /dev/null -T -i "$key" -o BatchMode=yes -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$known" -o UpdateHostKeys=no -o ConnectTimeout=10 -o ClearAllForwardings=yes root@151.248.113.177 '/usr/bin/env -i PATH=/usr/bin:/bin /usr/bin/python3 -I -B -' < .github/operations/catalog-incident/read-serving.py > serving-observation.json
+          cat serving-observation.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: catalog-serving-observation
+          path: serving-observation.json
+          retention-days: 7
