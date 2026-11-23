@@ -4,14 +4,26 @@ import os from 'node:os';
 import {execFile,execFileSync} from 'node:child_process';
 import {promisify} from 'node:util';
 import {fileURLToPath,pathToFileURL} from 'node:url';
+import {createRequire} from 'node:module';
 import {assertActiveBudgetState,verifyActiveBudgetAuthority,restoreCandidateEncyclopedia} from './catalog-active-budget-check.mjs';
 import {collectPreparedBudgetReadiness,installStagedBudgetNetworkFence} from './catalog-staged-budget-child.mjs';
 import {readLiveBudgetIdentity,stagedBudgetDigest as hash,PREPARED_MARKETS} from './lib/catalog-staged-budget.mjs';
 import {candidateControlsKey,candidateControlsRevision,readCandidateBudgetContract,persistCandidateBudgetObject,
   candidateBudgetCore,assertCandidateBudgetReceipt,assertCandidateBudgetContract,candidateBudgetWriteKind} from './lib/catalog-candidate-budget.mjs';
+import {createResourceNodeInvocation,forwardResourceNodeTelemetry} from './lib/node-resource-memory.mjs';
 
 const SHA=/^[a-f0-9]{40}$/,HEX=/^[a-f0-9]{64}$/,GENERATION=/^gen_\d+_[a-z0-9]+$/;
 const script=fileURLToPath(import.meta.url),run=promisify(execFile);
+
+export function candidateBudgetChildInvocation({phase,root,contextPath,reportPath,release,calculationVersion,env=process.env}) {
+  if(!['prepare','verify'].includes(phase))throw Error('candidate_budget_child_phase_invalid');
+  return createResourceNodeInvocation({
+    args:['--import',createRequire(import.meta.url).resolve('tsx'),script,'--child',phase,root,contextPath,reportPath],
+    role:'candidate-budget-'+phase,
+    env:{...env,AVTOCENA_RELEASE_SHA:release,AVTOCENA_CALCULATION_VERSION:calculationVersion,
+      NODE_OPTIONS:env.CATALOG_BUDGET_PREPARATION_NODE_OPTIONS??env.NODE_OPTIONS},
+  });
+}
 
 export function candidateBudgetInputs(env=process.env) {
   const action=env.CATALOG_CANDIDATE_ACTION,healthPhase=env.CATALOG_CANDIDATE_HEALTH_PHASE;
@@ -148,9 +160,13 @@ export async function runCandidateBudgetPrepare(root,env=process.env) {
   await fs.writeFile(contextPath,JSON.stringify(context));
   const invoke=async phase=>{
     assertSource();await verifyCandidateBudgetAuthority(context,storage);
-    const {stdout}=await run(process.execPath,['--import','tsx',script,'--child',phase,root,contextPath,reportPath],{
-      cwd:root,env:{...env,AVTOCENA_RELEASE_SHA:context.release,AVTOCENA_CALCULATION_VERSION:context.calculationVersion,
-        NODE_OPTIONS:env.CATALOG_BUDGET_PREPARATION_NODE_OPTIONS||env.NODE_OPTIONS||'--max-old-space-size=6144'},timeout:120*60_000,maxBuffer:1024*1024});
+    const invocation=await candidateBudgetChildInvocation({phase,root,contextPath,reportPath,
+      release:context.release,calculationVersion:context.calculationVersion,env});
+    let stdout;
+    try{
+      const result=await run(process.execPath,invocation.args,{cwd:root,env:invocation.env,timeout:120*60_000,maxBuffer:1024*1024});
+      stdout=result.stdout;forwardResourceNodeTelemetry(result.stderr);
+    }catch(error){forwardResourceNodeTelemetry(error.stderr);throw error;}
     if(stdout.trim())console.log(stdout.trim());
     assertSource();await verifyCandidateBudgetAuthority(context,storage);
     return JSON.parse(await fs.readFile(reportPath,'utf8'));
