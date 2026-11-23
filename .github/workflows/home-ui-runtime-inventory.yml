@@ -1,0 +1,52 @@
+name: Read exact home UI runtime inventory without changes
+on:
+  workflow_dispatch:
+    inputs:
+      controller_sha:
+        description: Exact reviewed main SHA containing this read-only controller
+        type: string
+        required: true
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/home-ui-runtime-inventory.json']
+permissions:
+  contents: read
+concurrency:
+  group: home-ui-readonly-inventory
+  cancel-in-progress: false
+jobs:
+  inventory:
+    if: github.repository == 'jeep-jim/AvtoCena' && github.repository_id == '1289722938' && github.ref == 'refs/heads/main' && (github.event_name == 'workflow_dispatch' || github.event_name == 'push') && github.run_attempt == '1'
+    environment: regcloud-staging
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      EXPECTED_CONTROLLER_SHA: ${{ inputs.controller_sha }}
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 2
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24.22.3'
+      - name: Verify reviewed controller and read-only contract before SSH
+        run: |
+          set -euo pipefail
+          node .github/operations/home-ui-only-20261123/assert-invocation.mjs
+          node --test tests/home-ui-release-controller.test.mjs tests/readonly-marker-invocation.test.mjs tests/home-ui-inventory-workflow.test.mjs
+          python3 -I -B tests/home-ui-runtime-inventory.test.py
+      - name: Read local Docker, health and Nginx identity without mutation
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+        run: bash .github/operations/home-ui-only-20261123/read-inventory-over-ssh.sh > home-ui-runtime-inventory.json
+      - name: Validate complete receipt without authorizing activation
+        run: node .github/operations/home-ui-only-20261123/validate-inventory.mjs home-ui-runtime-inventory.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: home-ui-runtime-inventory-${{ github.run_id }}
+          path: home-ui-runtime-inventory.json
+          if-no-files-found: warn
+          retention-days: 7
