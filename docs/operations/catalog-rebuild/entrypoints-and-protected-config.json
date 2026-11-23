@@ -1,0 +1,272 @@
+{
+  "version": 1,
+  "auditedCommit": "bd7dc65998cd6ab062f12d01145ff2de6c3ae6e3",
+  "completeLiveServerCensus": false,
+  "sourceTreeServerEntrypoints": [
+    {
+      "path": "docker-compose.yml",
+      "role": "website runtime",
+      "service": "web",
+      "catalogSchedulerDefined": false,
+      "preserve": true,
+      "evidence": {
+        "path": "docker-compose.yml",
+        "line": 4,
+        "literal": "container_name: avtocena-web"
+      }
+    },
+    {
+      "path": "docs/operations/crm-bot.service",
+      "role": "CRM bot",
+      "exec": "/usr/bin/node --import tsx scripts/crm-bot-service.ts",
+      "preserve": true,
+      "evidence": {
+        "path": "docs/operations/crm-bot.service",
+        "line": 11,
+        "literal": "ExecStart="
+      }
+    },
+    {
+      "path": "scripts/regcloud-deploy-production.sh",
+      "role": "shared release operation and system resource sampler installation",
+      "service": "avtocena-resources.service",
+      "preserve": true,
+      "evidence": {
+        "path": "scripts/regcloud-deploy-production.sh",
+        "line": 71,
+        "literal": "ExecStart=/usr/bin/python3 /opt/avtocena/regcloud-resource-sampler.py"
+      }
+    },
+    {
+      "path": "scripts/regcloud-activate-web.sh",
+      "role": "TLS certificate renewal timer setup",
+      "service": "certbot.timer",
+      "preserve": true,
+      "evidence": {
+        "path": "scripts/regcloud-activate-web.sh",
+        "line": 102,
+        "literal": "systemctl enable --now certbot.timer"
+      }
+    },
+    {
+      "path": "apps/web/lib/catalog/public-rates-client.ts",
+      "role": "browser exchange-rate polling, not a feed collector",
+      "preserve": true,
+      "evidence": {
+        "path": "apps/web/lib/catalog/public-rates-client.ts",
+        "line": 13,
+        "literal": "setInterval(refresh,TTL_MS)"
+      }
+    }
+  ],
+  "liveServerUnknowns": [
+    "Actual root/service-user crontabs and /etc/cron entries",
+    "Actual systemd timers and service unit files",
+    "Detached collectors outside GitHub runner lifecycle",
+    "Installed web runtime request-time caches and writes"
+  ],
+  "requiredSafeLiveEvidence": [
+    "List timer/service names and unit ExecStart paths without environment contents",
+    "Read crontab schedule and redact arguments containing credentials, signed URLs or commercial feed URLs",
+    "List process executable paths, parent PID and container IDs without dumping environment or full provider request arguments"
+  ],
+  "protectedConfiguration": [
+    {
+      "key": "catalog/operations/collection-controls-v1.json",
+      "schema": "{version:1,revision,updatedAt,markets:{id:{enabled,enabledAt,disabledAt,changedBy}},sources:{id:{enabled,enabledAt,disabledAt,changedBy}},history:[{revision,at,actor,scope,id,enabled}]}",
+      "credentialMaterial": false,
+      "auditOutputAllowlist": [
+        "version",
+        "revision",
+        "updatedAt",
+        "markets.<id>.enabled",
+        "sources.<id>.enabled"
+      ],
+      "reader": "readCollectionControls(storage); owner-authenticated GET /api/crm/collection-controls",
+      "readOnly": true,
+      "preserveVerbatimPrivately": true,
+      "evidence": [
+        {
+          "path": "apps/web/lib/catalog/collection-controls.ts",
+          "line": 3,
+          "literal": "COLLECTION_CONTROLS_KEY='catalog/operations/collection-controls-v1.json'"
+        },
+        {
+          "path": "apps/web/app/(crm)/api/crm/collection-controls/route.ts",
+          "line": 8,
+          "literal": "export async function GET()"
+        }
+      ]
+    },
+    {
+      "key": "markets/markets.json",
+      "schema": "Array<{id,name,activeVersionId,versions:[versioned business-cost configuration]}>",
+      "credentialMaterial": false,
+      "personalMetadataMayBePresent": true,
+      "auditOutputAllowlist": [
+        "id",
+        "name",
+        "activeVersionId",
+        "versions[].id",
+        "versions[].version",
+        "versions[].status",
+        "versions[].effectiveFrom"
+      ],
+      "reader": "getMarketsSettings()/getMarketsWithEffectiveVersions(); owner settings UI",
+      "readOnly": true,
+      "preserveVerbatimPrivately": true,
+      "evidence": [
+        {
+          "path": "apps/web/lib/business-settings.ts",
+          "line": 40,
+          "literal": "readDataJson<any[]>(\"markets/markets.json\""
+        },
+        {
+          "path": "apps/web/lib/business-settings.ts",
+          "line": 97,
+          "literal": "const candidate ="
+        }
+      ]
+    },
+    {
+      "key": "integrations/ajes/config.json",
+      "schema": "{encryptedPassword: base64(iv).base64(authenticationTag).base64(ciphertext),updatedAt}",
+      "credentialMaterial": true,
+      "auditOutputAllowlist": [
+        "configured boolean only"
+      ],
+      "reader": "owner-authenticated GET /api/crm/ajes/settings returns {configured:Boolean(await ajesPassword())}; no provider request",
+      "readOnly": true,
+      "neverLogStoredObject": true,
+      "preserveVerbatimPrivately": true,
+      "evidence": [
+        {
+          "path": "apps/web/lib/catalog/ajes-settings.ts",
+          "line": 4,
+          "literal": "const path='integrations/ajes/config.json'"
+        },
+        {
+          "path": "apps/web/app/(crm)/api/crm/ajes/settings/route.ts",
+          "line": 13,
+          "literal": "export async function GET()"
+        }
+      ]
+    },
+    {
+      "key": "GitHub/runtime secrets (not an admin JSON object)",
+      "credentialMaterial": true,
+      "names": [
+        "AUTO_API_CHE168_KEY",
+        "AUTO_API_DUBICARS_KEY",
+        "AJES_API_PASSWORD",
+        "AUTH_SECRET",
+        "NEXTAUTH_SECRET"
+      ],
+      "auditOutputAllowlist": [
+        "presence/configured boolean only"
+      ],
+      "preserveVerbatimPrivately": false,
+      "action": "Keep existing secret stores unchanged; never export values to the public inventory. Paid Encar currently receives ACCOUNT_KEY from the Dubicars/Che168 account-secret fallback.",
+      "evidence": [
+        {
+          "path": ".github/workflows/catalog-paid-encar-refresh.yml",
+          "line": 75,
+          "literal": "ACCOUNT_KEY: ${{ secrets.AUTO_API_DUBICARS_KEY || secrets.AUTO_API_CHE168_KEY }}"
+        },
+        {
+          "path": "apps/web/lib/catalog/ajes-settings.ts",
+          "line": 5,
+          "literal": "AUTH_SECRET"
+        }
+      ]
+    },
+    {
+      "key": "data/catalog/refresh-policy-v1.json",
+      "kind": "tracked policy file, not object-storage owner settings",
+      "reader": "Read tracked JSON plus scripts/lib/catalog-refresh-schedule.mjs and YAML schedule; do not infer schedule from UI prose",
+      "preserve": true,
+      "evidence": [
+        {
+          "path": ".github/workflows/catalog-market-refresh.yml",
+          "line": 81,
+          "literal": "data/catalog/refresh-policy-v1.json"
+        },
+        {
+          "path": "scripts/catalog-paid-encar-intake.mjs",
+          "line": 252,
+          "literal": "data/catalog/refresh-policy-v1.json"
+        }
+      ]
+    },
+    {
+      "key": "catalog/raw-feed-coordination/v1/policy.json",
+      "kind": "runtime coordination policy and writer gating",
+      "reader": "readRawCoordinationPolicy(storage)",
+      "preserve": true,
+      "action": "Do not remove or rewrite as part of workflow freeze.",
+      "evidence": [
+        {
+          "path": "apps/web/lib/catalog/raw-coordination-gate.mjs",
+          "line": 6,
+          "literal": "RAW_COORDINATION_POLICY_KEY = 'catalog/raw-feed-coordination/v1/policy.json'"
+        }
+      ]
+    }
+  ],
+  "protectedRuntimeWriteEntrypoints": [
+    {
+      "entrypoint": "POST /api/crm/settings/markets",
+      "effect": "Versioned owner market settings and catalog/reprice-requests/<market>.json marker",
+      "preserve": true,
+      "evidence": {
+        "path": "apps/web/app/(crm)/api/crm/settings/markets/route.ts",
+        "line": 68,
+        "literal": "catalog/reprice-requests/${marketId}.json"
+      }
+    },
+    {
+      "entrypoint": "PUT /api/crm/collection-controls",
+      "effect": "Owner source/market switches with revision/ETag compare-and-swap",
+      "preserve": true,
+      "evidence": {
+        "path": "apps/web/app/(crm)/api/crm/collection-controls/route.ts",
+        "line": 16,
+        "literal": "saveCollectionSwitch(body,user!.id)"
+      }
+    },
+    {
+      "entrypoint": "PUT /api/crm/ajes/settings",
+      "effect": "Explicit owner connection probe then encrypted password save",
+      "preserve": true,
+      "notSafeForMetadataAudit": true,
+      "evidence": {
+        "path": "apps/web/app/(crm)/api/crm/ajes/settings/route.ts",
+        "line": 23,
+        "literal": "await saveAjesPassword(password)"
+      }
+    },
+    {
+      "entrypoint": "AJES query/preview runtime",
+      "effect": "Quota and saved query/preview cache writes during existing app reads/owner preview; GitHub disable does not stop these",
+      "preserveExistingAuthorizedReading": true,
+      "evidence": [
+        {
+          "path": "apps/web/lib/catalog/ajes-quota.ts",
+          "line": 18,
+          "literal": "storage.writeJson(key"
+        },
+        {
+          "path": "apps/web/lib/catalog/ajes-query-cache.ts",
+          "line": 39,
+          "literal": "storage.writeJson(key"
+        },
+        {
+          "path": "apps/web/lib/catalog/ajes-market-preview-runtime.ts",
+          "line": 15,
+          "literal": "save:(market,value)=>getJsonStorage().writeJson"
+        }
+      ]
+    }
+  ],
+  "freezeBoundary": "Exact reviewed GitHub workflow writers only. Preserves current reading and protected owner/business functionality; does not claim the running web application or external VM processes are globally read-only."
+}

@@ -1,0 +1,872 @@
+{
+  "version": 1,
+  "kind": "catalog-dependency-backup-map",
+  "auditOnly": true,
+  "backupPerformed": false,
+  "fullBackup": false,
+  "deletionAllowed": false,
+  "repository": "jeep-jim/AvtoCena",
+  "auditDate": "2026-11-23",
+  "sources": {
+    "inventory": {
+      "sha": "bd7dc65998cd6ab062f12d01145ff2de6c3ae6e3",
+      "meaning": "Локальный checkout и inventorySourceSha boundaries; состояние remote и production заново не проверялось."
+    },
+    "supplementaryChinaReader": {
+      "sha": "a05987cc725c950614ac7310c7de782b73cb093a",
+      "meaning": "Дополнительный известный контракт China reader; не утверждение о текущем deployed release."
+    },
+    "boundaries": {
+      "path": ".github/operations/catalog-rebuild-20261123/boundaries.json",
+      "sha256": "094e1901b7e176bb909af47f9a0fef9e88a842c7a31af8b82812bbf760f1d869",
+      "rootCount": 31
+    }
+  },
+  "scope": {
+    "target": "Следующий этап: частная проверяемая копия содержимого roots и всех их storage-зависимостей. Сейчас выполнен только анализ кода.",
+    "distinction": "Closure от активных roots не равен копии всех сохранённых фидов, прерванных staging runs, истории или всего bucket. Такие объекты требуют отдельного точного prefix inventory.",
+    "protected": "Админка, encyclopedia, ручные расчёты и настройки сохраняются как данные; их бизнес-правила, расписания и admission limits не переносятся в новую систему автоматически.",
+    "restoration": "Локи, pending claims, leases, collection switches и activation markers сохраняются как evidence. Их автоматическое восстановление в активные roots не разрешено."
+  },
+  "rows": [
+    {
+      "id": "catalog_generations",
+      "roots": [
+        "catalog/manifest.json",
+        "catalog/previous-manifest.json"
+      ],
+      "format": "CatalogManifest version=2: generationId; markets[market]={count,chunks,updatedAt,provider?}.",
+      "referenceFields": [
+        "generationId",
+        "markets.*.chunks[]"
+      ],
+      "canonicalCode": [
+        {
+          "path": "apps/web/lib/catalog/storage.ts",
+          "symbol": "CatalogManifest; generationPath; offerPath; storedOfferChunkPath; rebuildIndexes; writeCurrentCatalogReadModels",
+          "ref": "inventory"
+        }
+      ],
+      "resolution": "Короткий chunk -> catalog/generations/<generationId>/offers/<market>/<chunk>.json. Значение, начинающееся с catalog/, уже полный storage key: оно может вести в старое поколение. Добавить generation/raw-provenance-v1.json и поколения из достигнутых chunk paths.",
+      "inventory": [
+        "catalog/generations/<каждое достигнутое generationId>/",
+        "catalog/public/"
+      ],
+      "risk": "Manifest перечисляет offer chunks, но не все indexes, projection parts, page windows, home snapshots и mutable public aliases. Обход только markets.chunks не полон. Не заменять старые retained chunk refs текущим generationId.",
+      "exhaustiveFromRootFields": false
+    },
+    {
+      "id": "projection_directories",
+      "roots": [],
+      "format": "Inline {generationId,items} либо {storageFormat:'catalog-projection-parts-v1',generationId,count,parts:[{path,count,sha256}]}.",
+      "referenceFields": [
+        "parts[].path"
+      ],
+      "canonicalCode": [
+        {
+          "path": "apps/web/lib/catalog-projection-parts.ts",
+          "symbol": "isCatalogProjectionPath; catalogProjectionBatches; readCatalogProjectionBatches",
+          "ref": "inventory"
+        }
+      ],
+      "resolution": "Для public/projection/all.json scope=all; для других projection roots scope=SHA256(root key). Проверить точное имя catalog/generations/<g>/indexes/projection-parts/<scope>/<ordinal>-<sha>.json, сумму count и semantic SHA256(JSON.stringify({items})). Копировать исходную directory и все части.",
+      "inventory": [
+        "catalog/public/projection/",
+        "catalog/public/projection-brand/",
+        "catalog/generations/<g>/indexes/projection-parts/"
+      ],
+      "risk": "ObjectJsonStorage.readJsonWithMeta автоматически разворачивает directory и скрывает references. Для backup нужен raw GET+строгий JSON.parse. catalogProjectionBatches допустим только с adapter, который строго читает уже известные raw objects и никогда не возвращает fallback.",
+      "exhaustiveFromRootFields": true
+    },
+    {
+      "id": "detail_tree",
+      "roots": [],
+      "format": "{generationId,items,children?:true}; prefix=SHA256(offerId)[:depth].",
+      "referenceFields": [
+        "children",
+        "generationId",
+        "items[].images[].objectKey"
+      ],
+      "canonicalCode": [
+        {
+          "path": "apps/web/lib/catalog/detail-shards.ts",
+          "symbol": "detailHash; detailShardPath; boundedDetailShards",
+          "ref": "inventory"
+        },
+        {
+          "path": "apps/web/lib/catalog/storage.ts",
+          "symbol": "readCurrentOfferShard",
+          "ref": "inventory"
+        }
+      ],
+      "resolution": "Двухсимвольные roots: catalog/public/offers/<prefix>.json. Более глубокие узлы: catalog/generations/<g>/current-offers/<prefix>.json. children=true не перечисляет существующие дочерние prefix.",
+      "inventory": [
+        "catalog/public/offers/",
+        "catalog/generations/<g>/current-offers/"
+      ],
+      "risk": "Чтение карточек по известным id не доказывает полный обход дерева. Нужен полный inventory prefix либо строгий обход всех 16 ветвей каждого узла с доказанными 404. Mutable public roots требуют отдельного consistency fence.",
+      "exhaustiveFromRootFields": false
+    },
+    {
+      "id": "budget_and_runtime_indexes",
+      "roots": [
+        "catalog/operations/budget-preparation-v1.json"
+      ],
+      "format": "BudgetCountIndex v1/2/3; selector directories v1/2/3/4; runtime price snapshots; preparation marker {version,verified,key,release,generationId,selectorVersion,at}.",
+      "referenceFields": [
+        "pricingChunks[market][]",
+        "markets[market].chunks[].name",
+        "generationId",
+        "encyclopediaDigest",
+        "key"
+      ],
+      "canonicalCode": [
+        {
+          "path": "apps/web/lib/catalog/budget-count-index.ts",
+          "symbol": "splitBudgetReplayIndex",
+          "ref": "inventory"
+        },
+        {
+          "path": "apps/web/lib/catalog/budget-selector-codec.ts",
+          "symbol": "specificationSelectorDirectory; unpackBudgetSelector; decompressBudgetSelector",
+          "ref": "inventory"
+        },
+        {
+          "path": "apps/web/lib/catalog/budget-selector-publication.ts",
+          "symbol": "readCompressedSelector",
+          "ref": "inventory"
+        },
+        {
+          "path": "apps/web/lib/catalog/shared-budget-prices.ts",
+          "symbol": "runtime-budget-prices-v3/runtime-sort-prices-v3 path derivation",
+          "ref": "inventory"
+        },
+        {
+          "path": "apps/web/lib/catalog/editorial-home.ts",
+          "symbol": "editorialHomePath",
+          "ref": "inventory"
+        },
+        {
+          "path": "scripts/catalog-budget-runtime.mjs",
+          "symbol": "readyPath / budgetReadyKey",
+          "ref": "inventory"
+        }
+      ],
+      "resolution": "pricingChunks -> catalog/generations/<g>/indexes/<relative path>. Selector v4 chunk.name=parts/<market>/<checksum>; append .json under selected budget-markets directory. Versioned v7 directory derives from encyclopediaDigest+calculationVersion. Home path derives from date+context hash. Preparation key is readiness identity, not an enumerable object directory.",
+      "inventory": [
+        "catalog/generations/<g>/indexes/",
+        "catalog/runtime-budget-prices-v2/",
+        "catalog/runtime-budget-prices-v3/",
+        "catalog/runtime-sort-prices-v2/",
+        "catalog/runtime-sort-prices-v3/",
+        "knowledge/encyclopedia/calculation-indexes/"
+      ],
+      "risk": "Runtime cache keys contain fingerprint/sourceIds/calculation context absent from catalog manifest. Old formats and hash functions differ. Preserve raw wire bytes and separately verify bounded decoded payload. Production helpers may catch corruption as null or warm/write caches; do not invoke warmup or pricing for backup.",
+      "exhaustiveFromRootFields": false
+    },
+    {
+      "id": "internal_and_lineage",
+      "roots": [
+        "catalog/internal/manifest.json"
+      ],
+      "format": "{generationId,updatedAt,sources:{sourceId:{count,chunks,updatedAt}}}; raw-internal provenance v1/v2; source contribution receipts.",
+      "referenceFields": [
+        "sources.*.chunks[]",
+        "provenance.contributions[].key",
+        "provenance.references[].root",
+        "proof.input.archiveRoot",
+        "proof.input.snapshotRoot",
+        "proof.input.snapshotReceiptKey",
+        "proof.materialization.parts[].key",
+        "proof.output.internal.chunks[].key",
+        "proof.output.public.chunks[].key",
+        "proof.internalReceipt.key"
+      ],
+      "canonicalCode": [
+        {
+          "path": "apps/web/lib/catalog/storage.ts",
+          "symbol": "persistInternalCatalog",
+          "ref": "inventory"
+        },
+        {
+          "path": "apps/web/lib/catalog/raw-internal-provenance.mjs",
+          "symbol": "rawInternalProvenanceKey; buildRawInternalProvenance; verifiedRawInternalPointerDescriptor",
+          "ref": "inventory"
+        },
+        {
+          "path": "apps/web/lib/catalog/source-contribution-reader.mjs",
+          "symbol": "sourceContributionKey; sourceContributionReference; verifySourceContribution",
+          "ref": "inventory"
+        }
+      ],
+      "resolution": "Internal chunks are explicit full keys under catalog/internal/offers/<sourceId>/. Provenance -> catalog/raw-feed-coordination/v1/internal/<g>/provenance.json. Contribution roots -> catalog/raw-feed-coordination/v1/contributions/<g>/<sourceId>/; internal.json, manifest.json, rows/NNNN.json. Recursively follow archive witnesses, output chunks and prior internalReceipt.",
+      "inventory": [
+        "catalog/internal/",
+        "catalog/raw-feed-coordination/v1/internal/",
+        "catalog/raw-feed-coordination/v1/contributions/"
+      ],
+      "risk": "Internal chunk lists do not prove raw row lineage. complete=false/unknownSources must remain incomplete evidence. Retained source chunks can belong to earlier generations. Do not apply current source/admission rules to exclude historical objects.",
+      "exhaustiveFromRootFields": false
+    },
+    {
+      "id": "japan_archive",
+      "roots": [
+        "catalog/japan-auction-history/manifest.json"
+      ],
+      "format": "version=1; activeSlot a|b; count; chunks[]; contentHash; retentionDays.",
+      "referenceFields": [
+        "chunks[]",
+        "activeSlot"
+      ],
+      "canonicalCode": [
+        {
+          "path": "apps/web/lib/catalog/storage.ts",
+          "symbol": "JapanAuctionArchiveManifest; persistJapanAuctionHistory",
+          "ref": "inventory"
+        }
+      ],
+      "resolution": "chunks are full keys catalog/japan-auction-history/slots/<a|b>/chunk-NNNN.json. Verify concatenated logical rows against count/contentHash, retain each original chunk.",
+      "inventory": [
+        "catalog/japan-auction-history/"
+      ],
+      "risk": "Two alternating mutable slots are not immutable generations. Copying one root without fencing slot contents can mix publications. Inventory both slots to preserve saved history; retentionDays is old data metadata, not a new deletion rule.",
+      "exhaustiveFromRootFields": false
+    },
+    {
+      "id": "independent_china",
+      "roots": [
+        "catalog/independent-market-public-v1/china/control.json"
+      ],
+      "format": "version=1,market,revision; active/previous = {runId,generationId,readySha256} or legacy-unmodified {generationId,manifestSha256}.",
+      "referenceFields": [
+        "active",
+        "previous",
+        "READY.runtimeReadySha256",
+        "READY.manifestSha256",
+        "READY.pricingReceiptSha256",
+        "READY.artifacts",
+        "runtime-ready.activeControlSha256"
+      ],
+      "canonicalCode": [
+        {
+          "path": "scripts/lib/owned-china-publication-source.mjs",
+          "symbol": "captureOwnedChinaControl",
+          "ref": "inventory"
+        },
+        {
+          "path": "apps/web/lib/catalog/china-regcloud-object-reader.ts",
+          "symbol": "validChinaPointerTarget; readChinaPublicState; openChinaStageObject; assertChinaLegacyRollback",
+          "ref": "supplementaryChinaReader"
+        },
+        {
+          "path": "apps/web/lib/catalog/independent-market-activation-fixture.ts",
+          "symbol": "openIndependentMarketBackend",
+          "ref": "supplementaryChinaReader"
+        }
+      ],
+      "resolution": "For active and previous stage refs: catalog/private-market-stage-v1/china/<runId>/READY.json -> runtime-ready.json and objects/catalog/market-activation-fixture-v1/china/control.json; fixture generation data reside below objects/catalog/market-activation-fixture-v1/china/generations/<g>/. Preserve whole exact stage prefix. Legacy target requires matching catalog/manifest.json bytes/generation; a digest alone is not a historical manifest address.",
+      "inventory": [
+        "catalog/private-market-stage-v1/china/<active-or-previous-runId>/",
+        "catalog/independent-market-public-v1/china/"
+      ],
+      "risk": "READY has digest-only fields and aggregate artifacts.count/bytes/orderedSha256, not a full key list. Current main inventory and supplementary reader differ. Stage TTL checks must not discard expired data during backup; snapshot validation is distinct from publication authorization. Unresolved legacy marker remains an explicit gap.",
+      "exhaustiveFromRootFields": false
+    },
+    {
+      "id": "independent_uae",
+      "roots": [
+        "catalog/independent-market-public-v1/uae/control.json"
+      ],
+      "format": "Observed operation contract: active/previous refs with runId,generationId,readySha256; READY kind uae-private-runtime-ready-v1; public-directory kind uae-public-directory-v1.",
+      "referenceFields": [
+        "active",
+        "previous",
+        "READY.publicDirectorySha256",
+        "READY.sourceReceiptSha256",
+        "READY.priceReceiptSha256",
+        "READY.retainedDetailReceiptSha256",
+        "public-directory.blocks[]",
+        "public-directory.detailShards"
+      ],
+      "canonicalCode": [
+        {
+          "path": ".github/operations/uae-native-hosted-v5/make-fixture.mjs",
+          "symbol": "stage object schemas / derived paths",
+          "ref": "inventory"
+        },
+        {
+          "path": ".github/operations/uae-exact-private-ready-rebind-v1/repair.mjs",
+          "symbol": "inspectMissingSourceSeal; checked",
+          "ref": "inventory"
+        }
+      ],
+      "resolution": "Stage prefix catalog/private-market-stage-v1/uae/<runId>/. public-directory.blocks[ordinal] -> projection/<ordinal>.json; detailShards[prefix] -> details/<prefix>.json. Preserve READY, public-directory, retained-evidence, input-evidence and all other exact stage objects.",
+      "inventory": [
+        "catalog/private-market-stage-v1/uae/<active-or-previous-runId>/",
+        "catalog/independent-market-public-v1/uae/"
+      ],
+      "risk": "Operation fixtures/repair validators establish these schemas but are not a generic deployed reader proof. Source/price receipt digests do not in general encode their object addresses; linked receipt origins need actual private snapshot inspection. Unknown format or unavailable origin prevents declaring a complete dependency closure.",
+      "exhaustiveFromRootFields": false
+    },
+    {
+      "id": "owned_china_chain",
+      "roots": [
+        "catalog/owned-feed/v1/china/source.json",
+        "catalog/owned-feed/v1/china/prepared.json"
+      ],
+      "format": "source status fetching|complete; runId,previousRun,base,startCursor,cursor; prepared runId,cursor,archiveRoot,archiveSha256,observations,rateRun.",
+      "referenceFields": [
+        "runId",
+        "previousRun",
+        "base.archiveRoot",
+        "base.archiveSha256",
+        "prepared.archiveRoot",
+        "prepared.rateRun",
+        "savedPage.payload.meta.next_change_id"
+      ],
+      "canonicalCode": [
+        {
+          "path": "scripts/lib/owned-china-delta.mjs",
+          "symbol": "chinaDeltaPrefix; validateChangePage",
+          "ref": "inventory"
+        },
+        {
+          "path": "scripts/lib/owned-china-prepare.mjs",
+          "symbol": "selectChinaCut; savedChinaInventory; ownedChinaRequests; commitChinaPrepared",
+          "ref": "inventory"
+        }
+      ],
+      "resolution": "source.runId and every previousRun -> catalog/owned-feed/v1/china/runs/<run>/complete.json. Preserve currently fetching run too, even when no complete exists. Pages derive from cursor chain pages/<cursor>.json; details/<cursor>/<inner_id>.json derive from saved changes. archiveRoot -> nonjp archive; rateRun -> catalog/feed-rates/v1/china/<run>.json.",
+      "inventory": [
+        "catalog/owned-feed/v1/china/",
+        "catalog/feed-rates/v1/china/"
+      ],
+      "risk": "Incomplete runs and saved details are not exhausted by complete.json. selectChinaCut intentionally selects only next publishable cut, so is not a full backup enumerator. ownedChinaRequests fetches and writes missing details: do not call.",
+      "exhaustiveFromRootFields": false
+    },
+    {
+      "id": "raw_cursors_coordination",
+      "roots": [
+        "catalog/intake-cursors/v1/china.json",
+        "catalog/intake-cursors/v1/korea.json",
+        "catalog/intake-cursors/v1/uae.json",
+        "catalog/intake-cursors/v1/europe.json",
+        "catalog/intake-cursors/v1/georgia.json",
+        "catalog/raw-feed-coordination/v1/policy.json",
+        "catalog/raw-feed-coordination/v1/state.json"
+      ],
+      "format": "Per-provider intake checkpoints; coordination version=1 scope=nonjp_raw_lifecycle_v1; descriptors, roots registry, claims and pending pointers.",
+      "referenceFields": [
+        "cursor.generationId",
+        "cursor.sources[].replica.key",
+        "cursor.sources[].workingJournal.key",
+        "cursor.sources[].baseReplica.key",
+        "cursor.sources[].snapshotBinding",
+        "state.catalog.current/previous/pending.candidate.references[].root",
+        "state.pointers[].current/pending.candidate.references[].root",
+        "state.claims[].references[].root",
+        "state.roots[].root",
+        "generation raw-provenance references/contributions"
+      ],
+      "canonicalCode": [
+        {
+          "path": "scripts/lib/catalog-raw-coordination.mjs",
+          "symbol": "assertRawCoordination; coordinatedRawReferences; rawCatalogDescriptor",
+          "ref": "inventory"
+        },
+        {
+          "path": "scripts/lib/catalog-raw-provenance.mjs",
+          "symbol": "rawGenerationKey; rawRootKind; rawReferences; rawContributionReferences; intakeRawReferences",
+          "ref": "inventory"
+        },
+        {
+          "path": "scripts/lib/catalog-raw-cursor.mjs",
+          "symbol": "commitCoordinatedIntakeCursor",
+          "ref": "inventory"
+        }
+      ],
+      "resolution": "Resolve only known raw kind+prefix pairs. generation provenance: catalog/generations/<g>/raw-provenance-v1.json. Expand current, previous, pending and ready claims, then explicit archives and contribution proofs. Record policy/registry binding. Inventory pins/handoffs because current roots do not list all historical custody objects.",
+      "inventory": [
+        "catalog/raw-feed-coordination/",
+        "catalog/raw-feed-pins/",
+        "catalog/raw-feed-handoffs/",
+        "catalog/intake-cursors/"
+      ],
+      "risk": "coverage=verified is a GC coordination assertion, not proof that all saved catalog data were backed up. Legacy missing provenance/unknownSources and dangling/deleted registry roots require explicit findings. Pointer payload schemas differ by provider. Authority objects are evidence only; no pin acquisition/reconciliation/GC mutations during backup.",
+      "exhaustiveFromRootFields": false
+    },
+    {
+      "id": "nonjp_archive",
+      "roots": [],
+      "format": "complete.json kind=nonjp-intake v1; files[{name,bytes,sha256,parts[{key,bytes,sha256}]}]; gzip-base64 part envelopes.",
+      "referenceFields": [
+        "receipt.root",
+        "receipt.handoff.key",
+        "receipt.handoff.references[].root",
+        "files[].parts[].key",
+        "report.durableIntakeArchive",
+        "report.rawArchiveDependencies[]",
+        "report.sources[].replica/snapshotBinding/workingJournal/baseReplica",
+        "report.paidInputWitness/sourceInputWitness.snapshot"
+      ],
+      "canonicalCode": [
+        {
+          "path": "scripts/lib/nonjp-intake-archive.mjs",
+          "symbol": "intakeArchiveRoot; validateIntakeArchive; readArchivedReport",
+          "ref": "inventory"
+        },
+        {
+          "path": "scripts/lib/catalog-raw-provenance.mjs",
+          "symbol": "assertDurableIntakeArchive; intakeRawReferences",
+          "ref": "inventory"
+        },
+        {
+          "path": "apps/web/lib/catalog/source-contribution-reader.mjs",
+          "symbol": "readArchiveWitness; verifySourceContribution",
+          "ref": "inventory"
+        }
+      ],
+      "resolution": "catalog/nonjp-intake/v1/<market>/<run>/<attempt>/complete.json. Each part key must equal <root>/files/<filename>/<ordinal>-<decodedPartSha>.json. Verify part decoded bytes/hash, full-file hash and reportDigest; parse report for raw lineage and witnesses. Preserve source-input.json when referenced separately.",
+      "inventory": [
+        "<each reached catalog/nonjp-intake/v1/.../root>/"
+      ],
+      "risk": "File manifest exhausts declared file payload but not all custody/receipt files or incomplete archives. readIntakeArchiveManifest/verifyIntakeArchive call withRawReadProtection and may write pins; do not invoke them. Full saved-source backup also needs inventory of unreached archive roots.",
+      "exhaustiveFromRootFields": false
+    },
+    {
+      "id": "che168_snapshot",
+      "roots": [
+        "catalog/raw-feed-config/v1/che168-snapshot.json"
+      ],
+      "format": "config wrapper version=1,binding,config; snapshot manifest {version,binding,config,parts:[{index,bytes,sha256}],complete}.",
+      "referenceFields": [
+        "binding",
+        "manifest.parts[].index"
+      ],
+      "canonicalCode": [
+        {
+          "path": "scripts/lib/che168-raw-config.mjs",
+          "symbol": "CHE168_RAW_CONFIG_KEY; commitChe168RawConfig",
+          "ref": "inventory"
+        },
+        {
+          "path": "scripts/lib/che168-snapshot.mjs",
+          "symbol": "snapshotBinding; readChe168Snapshot",
+          "ref": "inventory"
+        }
+      ],
+      "resolution": "binding -> catalog/provider-snapshots/che168/<binding>/manifest.json; each index -> zero-padded 5-digit .csv.gz plus sidecar .json in that root. Preserve manifest/config raw bytes and validate decoded CSV-part bytes/sha.",
+      "inventory": [
+        "<each reached catalog/provider-snapshots/che168/<binding>/>"
+      ],
+      "risk": "Config may contain supplier metadata; keep private. archiveChe168Snapshot can request provider data and write, so is forbidden for backup. Current config does not enumerate old, interrupted or unreferenced snapshots.",
+      "exhaustiveFromRootFields": false
+    },
+    {
+      "id": "che168_replica_and_journal",
+      "roots": [],
+      "format": "replica descriptor {key,sha256,binding,cursor}; replica manifest {version,binding,cursor,bytes,parts}; journal head v1|2 with chunks[{id,sha}].",
+      "referenceFields": [
+        "replica.key",
+        "baseReplica.key",
+        "workingJournal.key",
+        "manifest.parts[] by ordinal",
+        "head.chunks[].id"
+      ],
+      "canonicalCode": [
+        {
+          "path": "scripts/lib/che168-replica.mjs",
+          "symbol": "restoreChe168Replica",
+          "ref": "inventory"
+        },
+        {
+          "path": "scripts/lib/che168-replay-journal.mjs",
+          "symbol": "openChe168ReplayJournal",
+          "ref": "inventory"
+        }
+      ],
+      "resolution": "Replica <key>/manifest.json -> <key>/<ordinal>.gz; validate decoded 16 MiB parts and semantic manifest hash. Journal catalog/intake-working/che168-v1/<run>/head.json -> <UUID>.json chunks; v2 has gzip-base64 body. Check binding/from/to/count chain without applying business mutations.",
+      "inventory": [
+        "<each reached replica root>/",
+        "<each reached replay-journal root>/"
+      ],
+      "risk": "Journal opener defaults readOnly=false and migrates v1 chunks/head. Do not execute default reader. Prefer pure structural validation of raw snapshot; a readOnly adapter must deny write methods even if readOnly=true is supplied. Orphan prior/interrupted parts need inventory.",
+      "exhaustiveFromRootFields": false
+    },
+    {
+      "id": "korea_raw_and_reports",
+      "roots": [],
+      "format": "Encar raw complete {pages,count,completedAt}; report complete v1 {observedAtMs,sourceRunId,sourceRunAttempt,bucketPrefixLength,rowCount,history,inspection}.",
+      "referenceFields": [
+        "raw.complete.pages",
+        "offer.operational.paidEncarReportSnapshot",
+        "offer.operational.lastSeenAt/updatedAt/sourcePublishedAt/firstSeenAt",
+        "report.complete.sourceRunId/sourceRunAttempt",
+        "report.complete.history[prefix]",
+        "report.complete.inspection[prefix]"
+      ],
+      "canonicalCode": [
+        {
+          "path": "scripts/catalog-prepare-paid-encar-reports.mjs",
+          "symbol": "reportSnapshotIdentity; buildReportBuckets; verifyCurrentReportCoverage",
+          "ref": "inventory"
+        },
+        {
+          "path": "scripts/lib/catalog-raw-provenance.mjs",
+          "symbol": "paidEncarReportSnapshot / raw report root validation",
+          "ref": "inventory"
+        },
+        {
+          "path": "apps/web/lib/catalog/source-contribution-reader.mjs",
+          "symbol": "verifySourceContribution",
+          "ref": "inventory"
+        }
+      ],
+      "resolution": "Raw: catalog/intake-staging/encar/<run>/<attempt>/complete.json -> pages/1.json..pages/N.json. Paid reports: catalog/paid-encar-reports/v1/<observedAtMs>/complete.json -> history/<prefix>.json and inspection/<prefix>.json, the latter includes diagnosis. Complete links back to raw run/attempt. Follow distinct report observations in retained current/previous/internal offers.",
+      "inventory": [
+        "<each reached Encar raw root>/",
+        "<each reached paid report observation root>/"
+      ],
+      "risk": "Report identity is an observation, not just offer id or latest cursor. Retained cards can reference older report snapshots. Bucket sha hashes rows, not necessarily whole JSON bytes. Do not prepare/publish reports or call supplier endpoints while backing up.",
+      "exhaustiveFromRootFields": false
+    },
+    {
+      "id": "green_snapshot",
+      "roots": [
+        "catalog/green-corner/current.json"
+      ],
+      "format": "version=1,updatedAt,sourceCount,invoiceTerms?,items:VehicleOffer[].",
+      "referenceFields": [
+        "items[].images[].objectKey"
+      ],
+      "canonicalCode": [
+        {
+          "path": "apps/web/lib/catalog/green-corner.ts",
+          "symbol": "GreenCornerSnapshot; GREEN_CORNER_PATH",
+          "ref": "inventory"
+        },
+        {
+          "path": "scripts/catalog-refresh-green-corner.mjs",
+          "symbol": "history/current writes",
+          "ref": "inventory"
+        }
+      ],
+      "resolution": "Current items inline; stored media refs follow media row. Historical snapshots are catalog/green-corner/history/<timestamp>.json.",
+      "inventory": [
+        "catalog/green-corner/"
+      ],
+      "risk": "Current root contains no complete history list. History is saved before current CAS, so orphan history objects may be valid evidence. Do not refresh provider or regenerate snapshot.",
+      "exhaustiveFromRootFields": false
+    },
+    {
+      "id": "autocatalog",
+      "roots": [
+        "catalog/autocatalog/v1/manifest.json"
+      ],
+      "format": "schemaVersion=1; letters[{letter,objectKey,sha256,brands}]; covers[{objectKey,sha256,originalUrl,...}].",
+      "referenceFields": [
+        "letters[].objectKey",
+        "covers[].objectKey"
+      ],
+      "canonicalCode": [
+        {
+          "path": "scripts/publish-autocatalog.mjs",
+          "symbol": "manifest construction / letterManifest / publishedCovers",
+          "ref": "inventory"
+        },
+        {
+          "path": "apps/web/lib/catalog/autocatalog-publication.ts",
+          "symbol": "safeCover",
+          "ref": "inventory"
+        }
+      ],
+      "resolution": "Letters -> catalog/autocatalog/v1/letters/<letter|other>.json; covers -> catalog/autocatalog/v1/media/model-covers/<sha>.webp. Letter checksum uses stableJson with generatedAt omitted; preserve raw object sha separately.",
+      "inventory": [
+        "catalog/autocatalog/v1/"
+      ],
+      "risk": "Consumer safeCover filters entries; backup must preserve raw manifest even for entries the UI suppresses. Current manifest does not enumerate old overwritten letters or orphan cover files. External originalUrl is provenance, not an instruction to fetch.",
+      "exhaustiveFromRootFields": false
+    },
+    {
+      "id": "stored_media",
+      "roots": [],
+      "format": "CatalogImage objectKey; images-by-id index; editorial photos containing local /api/site-media/<64hex> URLs.",
+      "referenceFields": [
+        "offer.images[].objectKey",
+        "indexes/images-by-id.imagesById.*.objectKey",
+        "catalog-editorial.entries.*.photos[]"
+      ],
+      "canonicalCode": [
+        {
+          "path": "apps/web/lib/catalog/storage.ts",
+          "symbol": "CatalogImage storage / imagesById / publicImageUrl",
+          "ref": "inventory"
+        },
+        {
+          "path": "apps/web/app/api/catalog/offer/[id]/editorial/route.ts",
+          "symbol": "local site-media validation",
+          "ref": "inventory"
+        }
+      ],
+      "resolution": "Copy validated catalog/images/<market>/<hash>.<extension> refs. Exact local photo URL maps to settings/account-media/<hash>.webp. Keep supplier URLs as source data; do not request them. Unknown objectKey outside approved roots is a reported closure gap, not arbitrary network traversal.",
+      "inventory": [
+        "catalog/images/",
+        "settings/account-media/"
+      ],
+      "risk": "Stored media can be shared by old/current/manual records. Reachable object refs suffice for that closure; preservation of all previously saved media requires inventory. Native external URLs cannot be claimed as backed-up image contents.",
+      "exhaustiveFromRootFields": false
+    },
+    {
+      "id": "encyclopedia",
+      "roots": [
+        "knowledge/encyclopedia/v1/manifest.json"
+      ],
+      "format": "EncyclopediaManifest v1 with models[].key; ModelRecord.previousKey. directorySnapshot stores counts/timestamp, not a child storage key.",
+      "referenceFields": [
+        "models[].key",
+        "ModelRecord.previousKey",
+        "models[].photo / ModelRecord.photo when local"
+      ],
+      "canonicalCode": [
+        {
+          "path": "apps/web/lib/encyclopedia/schema.ts",
+          "symbol": "EncyclopediaManifest; ModelSummary; ModelRecord",
+          "ref": "inventory"
+        },
+        {
+          "path": "apps/web/lib/encyclopedia/records.ts",
+          "symbol": "ROOT; readEncyclopedia; readModel; revision writes",
+          "ref": "inventory"
+        }
+      ],
+      "resolution": "Read raw unfiltered models list; copy each exact key and follow previousKey recursively with path/generation checks and cycle detection. Revision writes use knowledge/encyclopedia/v1/revisions/<id>/<revision>.json. Copy local media references by verified route contract.",
+      "inventory": [
+        "knowledge/encyclopedia/v1/",
+        "knowledge/encyclopedia/calculation-indexes/"
+      ],
+      "risk": "readEncyclopedia applies application filtering/caching. Revision chains only cover linked history; imports can leave unlinked models/revisions. Calculation index digests may come from released code/context, not this manifest. Bundled knowledge/encyclopedia/calculation-v1.json is a code artifact, not a proven remote root.",
+      "exhaustiveFromRootFields": false
+    },
+    {
+      "id": "manual_editorial_knowledge",
+      "roots": [
+        "catalog-editorial/current.json",
+        "knowledge/management-vehicle-parameters/v1/current.json"
+      ],
+      "format": "Editorial {revision,entries}; ManagementKnowledge {version,revision,models,encyclopediaRevisions?}, facts carry version,previousValues,targetOfferId,supersedes.",
+      "referenceFields": [
+        "entries.*.photos[]",
+        "models.*.*.version",
+        "encyclopediaRevisions"
+      ],
+      "canonicalCode": [
+        {
+          "path": "apps/web/lib/catalog/editorial.ts",
+          "symbol": "CatalogEditorialIndex; saveCatalogEditorial",
+          "ref": "inventory"
+        },
+        {
+          "path": "apps/web/lib/catalog/management-knowledge.ts",
+          "symbol": "ManagementKnowledge; ManagementFact; history archive",
+          "ref": "inventory"
+        }
+      ],
+      "resolution": "Editorial entries are inline. Management fact history path derives from SHA256(fact.version): knowledge/management-vehicle-parameters/v1/history/<hash>.json. Preserve full existing history prefix; current facts/previousValues are not an exhaustive history manifest. Local editorial photos use stored_media contract.",
+      "inventory": [
+        "catalog-editorial/",
+        "knowledge/management-vehicle-parameters/"
+      ],
+      "risk": "These roots are fingerprint-only in first checkpoint: that is not a restore copy. Must copy content privately for dependency backup. Current management code retains at most selected previous values inline; historical files are separate. Do not apply corrections or create new histories during backup.",
+      "exhaustiveFromRootFields": false
+    },
+    {
+      "id": "saved_calculations_and_shares",
+      "roots": [
+        "offer-calculation-previews/current.json"
+      ],
+      "format": "Preview index v1 entries keyed by offerId; saved calculation {version,offerId,identity,draft,calculation}; separate versioned scenarios.",
+      "referenceFields": [
+        "entries[offerId]",
+        "entries.*.preview.version",
+        "saved.version"
+      ],
+      "canonicalCode": [
+        {
+          "path": "apps/web/lib/catalog/saved-calculation-previews.ts",
+          "symbol": "SAVED_PREVIEW_PATH; rebuildSavedPreviewIndex",
+          "ref": "inventory"
+        },
+        {
+          "path": "apps/web/lib/catalog/saved-offer-calculation.ts",
+          "symbol": "saved offer/current and scenario persistence",
+          "ref": "inventory"
+        },
+        {
+          "path": "apps/web/lib/catalog/saved-calculation-input.ts",
+          "symbol": "scenarioPath; readSavedScenarioDraft",
+          "ref": "inventory"
+        }
+      ],
+      "resolution": "Current calculation -> offer-calculations/<SHA256(offerId)>.json; scenario -> offer-calculation-scenarios/<SHA256(offerId)>/<version>.json. Copy exact inventories to include client scenarios that never entered current preview. Issued public-share-links require a separately inventoried protected namespace and their own schema validation.",
+      "inventory": [
+        "offer-calculations/",
+        "offer-calculation-scenarios/",
+        "offer-calculation-previews/",
+        "public-share-links/"
+      ],
+      "risk": "Preview index is a lossy latest view. It cannot enumerate all saved calculations or published share scenarios. Share-link inner schema was not audited here; treat as preservation boundary, not proven closure. rebuildSavedPreviewIndex can price and write; do not execute.",
+      "exhaustiveFromRootFields": false
+    },
+    {
+      "id": "admin_pricing_config",
+      "roots": [
+        "catalog/operations/collection-controls-v1.json",
+        "markets/markets.json",
+        "settings/site-business.json",
+        "fees/exchange-rates.json",
+        "integrations/ajes/config.json",
+        "catalog/china-cny-prices/current.json"
+      ],
+      "format": "Collection controls include inline markets/sources/history; markets is inline array; site business settings inline versions/activeVersionId; rates snapshot inline; AJES encrypted config; CNY conversion entries inline.",
+      "referenceFields": [
+        "No storage child key declared by the audited direct readers; local media/history may be separate protected dependencies."
+      ],
+      "canonicalCode": [
+        {
+          "path": "apps/web/lib/business-settings.ts",
+          "symbol": "getSiteBusinessSettings; market settings; appendChangeLog",
+          "ref": "inventory"
+        },
+        {
+          "path": "apps/web/lib/catalog/collection-controls-schema.ts",
+          "symbol": "CollectionControls",
+          "ref": "inventory"
+        },
+        {
+          "path": "apps/web/lib/catalog/ajes-settings.ts",
+          "symbol": "encrypted config reader",
+          "ref": "inventory"
+        },
+        {
+          "path": "apps/web/lib/catalog/rates.ts",
+          "symbol": "stored rates reader",
+          "ref": "inventory"
+        },
+        {
+          "path": "apps/web/lib/catalog/china-cny-price.ts",
+          "symbol": "current index",
+          "ref": "inventory"
+        },
+        {
+          "path": "apps/web/lib/data.ts",
+          "symbol": "collectionPaths; readChunkedDataJson",
+          "ref": "inventory"
+        }
+      ],
+      "resolution": "Copy exact root bytes privately, not effective versions/defaults/decoded credentials. For historical settings/change-log use sibling change-log-index.json and chunks[].file resolved in same directory if index exists. The listed markets/site roots currently use readDataJson, not chunked readers.",
+      "inventory": [
+        "settings/change-log* (exact file-name family; not a storage wildcard request)"
+      ],
+      "risk": "All these roots are fingerprint-only in checkpoint. Read helpers can substitute local seeds/defaults or select only effective versions. AJES ciphertext additionally depends on external encryption key custody: never decrypt/log it in backup. Generic chunked indexes have separate sibling keys; copying a base file alone does not back up chunked history.",
+      "exhaustiveFromRootFields": false
+    },
+    {
+      "id": "lease_and_cutover_evidence",
+      "roots": [
+        "catalog/import-lock.json",
+        "catalog/operations/china-ajes-cutover-20261018.json"
+      ],
+      "format": "Operation lease/owner/heartbeat state; one-time cutover marker {version,at,revision}.",
+      "referenceFields": [
+        "No child storage dependencies declared by marker contract."
+      ],
+      "canonicalCode": [
+        {
+          "path": "apps/web/lib/catalog/storage.ts",
+          "symbol": "import lock lifecycle",
+          "ref": "inventory"
+        },
+        {
+          "path": "apps/web/lib/catalog/china-feed-cutover.ts",
+          "symbol": "applyChinaFeedCutover",
+          "ref": "inventory"
+        }
+      ],
+      "resolution": "Retain original bytes as evidence only. The marker is not an archive root. Do not call applyChinaFeedCutover; it changes collection controls when marker is absent.",
+      "inventory": [],
+      "risk": "Restoring leases, old writer authority or cutover marker into production could restart or block obsolete workflows. Backup completeness conveys no authority to restore them.",
+      "exhaustiveFromRootFields": true
+    }
+  ],
+  "strictReadContract": {
+    "allowedSourceOperations": [
+      "HEAD exact object",
+      "GET exact object, with conditional/version binding where supported",
+      "paginated LIST of explicit approved prefix"
+    ],
+    "disallowed": [
+      "PUT/DELETE source objects",
+      "pin or lease acquisition/reconciliation",
+      "supplier requests",
+      "pricing/warmup/materialization",
+      "seed fallback",
+      "secret decryption",
+      "business eligibility filtering"
+    ],
+    "transportEvidence": [
+      {
+        "path": "apps/web/lib/data.ts",
+        "symbol": "ObjectJsonStorage.getBinary; readObjectMetadata; readJsonWithMeta; readStorageOrSeed; listRawObjects; normalizeStorageKey",
+        "ref": "inventory"
+      }
+    ],
+    "parsing": "Read original body once, hash original returned bytes, parse strict UTF-8 JSON, dispatch by exact known schema version. Keep arbitrary unknown fields as bytes; unknown schema is preserved but closure remains unresolved. Never recursively follow arbitrary urls/keys.",
+    "hashDomains": "Keep distinct raw object sha256, semantic JSON.stringify digest, descriptor decoded-payload checksum, ordered inventory digest. Do not substitute any of them for opaque ETag.",
+    "listRisk": "listRawObjects currently exits if IsTruncated=true but NextContinuationToken is empty. No repeated-token guard is present in this loop. listObjects normalizes prefix. Therefore existing listObjects result alone does not establish exhaustion. Backup inventory must validate every page, continuation progress, exact slash-boundary scope, unique keys and explicit terminal IsTruncated=false.",
+    "missing": "A root marked optional may have an evidenced 404. A referenced child missing or invalid is a closure gap; do not replace it with null/empty array. Every scan/resource limit must fail incomplete, never silently truncate.",
+    "boundedResources": "Stream objects/parts and process with bounded concurrency; spool inventory and graph locally. Pure codecs can validate one bounded part at a time. No business fleet cap, year threshold or readiness TTL may exclude objects from backup.",
+    "physicalVsLogical": "Existing getBinary returns HTTP-decoded response bytes and omits most S3 metadata/version identity. This supports a logical object copy, not automatically a physical/metadata-preserving backup. Physical restore requires separately verified transport for stored representation, Content-Encoding, Content-Type, metadata and object versions."
+  },
+  "proposedNextStage": [
+    "Define and record exact backup scope: dependency closure plus which entire saved-source/history prefixes are included. Include private contents of fingerprint-only roots if restore capability is intended.",
+    "Capture exact code/runtime/config identities and root vector by raw reads; all source calls read-only. Establish a real consistency boundary for mutable roots/aliases and shared writers. The existing 33-target freeze is not a freeze of every protected/shared writer.",
+    "Expand the rows above using strict schema dispatch; retain an edge ledger with parent key/hash, field, derived child key and checksum domain. Inventory reached generation/stage/raw prefixes. Separately inventory entire allowed raw/history namespaces for all saved inputs, including incomplete/unreferenced runs.",
+    "Validate LIST exhaustiveness and immutable references. Capture object ETag/version and returned-byte hash; revalidate all mutable objects and roots after traversal. Double HEAD is a drift check, not a general cross-object transaction; prefer immutable object versions or a separately authorized writer fence. Any drift or unresolved schema keeps fullBackup=false.",
+    "Copy only to a new private immutable backup namespace with create-only writes, never active roots. Store actual counts/bytes, all keys, digests, recorded absence, unresolved references and metadata limitations. Keep payloads and credentials out of public workflow artifacts.",
+    "Read back every destination object and verify counts/checksums; run an offline restore/reader consistency check against the copied namespace. Publish a completion manifest only after all required closure/inventory checks pass; deletionAllowed remains false and restoring authority objects stays forbidden."
+  ],
+  "inventoryScopeForAllSavedInputs": {
+    "requiredIfAllSavedFeedsAreClaimed": [
+      "catalog/nonjp-intake/",
+      "catalog/provider-snapshots/",
+      "catalog/provider-replicas/",
+      "catalog/intake-working/",
+      "catalog/intake-staging/",
+      "catalog/paid-encar-reports/",
+      "catalog/owned-feed/",
+      "catalog/private-market-stage-v1/",
+      "catalog/raw-feed-pins/",
+      "catalog/raw-feed-handoffs/",
+      "catalog/raw-feed-coordination/",
+      "catalog/feed-rates/"
+    ],
+    "requiredIfAllOldCatalogArtifactsAreClaimed": [
+      "catalog/generations/",
+      "catalog/internal/",
+      "catalog/public/",
+      "catalog/history/",
+      "catalog/japan-auction-history/",
+      "catalog/green-corner/",
+      "catalog/autocatalog/",
+      "catalog/images/"
+    ],
+    "note": "These are proposed exact inventory boundaries, not authorization to delete or modify them. Root closure alone cannot discover orphan saved runs; nothing here claims they exist or that their actual sizes/counts were measured."
+  },
+  "unresolved": [
+    "No remote object listing, actual dependency snapshot, content copy or restore verification was performed in this task.",
+    "UAE operation schemas and supplementary China reader must be checked against actual private root contents/release identity before marking their dependency graph complete.",
+    "Digest-only legacy/stage receipt references may not identify an object key; missing origin mapping must be resolved explicitly or reported incomplete.",
+    "External image URLs, encryption keys and runtime/release-local bundled datasets are outside a plain object-store root closure.",
+    "Public share-link schema, complete CRM/account backup and arbitrary storage namespaces were not audited; they remain protected and outside any deletion scope."
+  ]
+}

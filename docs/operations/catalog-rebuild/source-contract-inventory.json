@@ -1,0 +1,818 @@
+{
+  "version": 1,
+  "repository": "jeep-jim/AvtoCena",
+  "reviewedMainSha": "ebab4d2239656a4df54f33c2a6440a30ef057914",
+  "checkedOn": "2026-11-23",
+  "scope": "Current source wiring and public admin metadata; no provider requests, production writes, credential reads, billing verification or workflow execution.",
+  "interpretation": {
+    "connectedMeans": "Selected or explicitly selectable by the reviewed code, subject to saved owner switches; not proof of current production credentials, enabled state, availability or completeness.",
+    "defaultsAreNotSavedState": true,
+    "legacyAdmissionYearPageCapsAreNewRequirements": false,
+    "missingConfigurationProvesNoPurchase": false,
+    "replacementCoveragePolicy": "Must not inherit historical admission, year, page or publication caps merely because they occur in the old implementation."
+  },
+  "sharedConfiguration": [
+    {
+      "purpose": "Owner market and source switches",
+      "storageKey": "catalog/operations/collection-controls-v1.json",
+      "schema": "version, revision, updatedAt, markets.<id>.enabled, sources.<id>.enabled; original object also retains change metadata/history",
+      "safeRead": "Owner-authenticated GET /api/crm/collection-controls; retain only version, revision, updatedAt and enabled flags for an audit export.",
+      "preserve": true,
+      "evidence": [
+        {
+          "path": "apps/web/lib/catalog/collection-controls.ts",
+          "lines": [
+            3,
+            23,
+            25
+          ]
+        },
+        {
+          "path": "apps/web/lib/catalog/collection-controls-schema.ts",
+          "lines": [
+            30,
+            32,
+            37,
+            41
+          ]
+        },
+        {
+          "path": "apps/web/app/(crm)/api/crm/collection-controls/route.ts",
+          "lines": [
+            8,
+            10
+          ]
+        }
+      ]
+    },
+    {
+      "purpose": "Market calculation settings; not supplier connection configuration",
+      "storageKey": "markets/markets.json",
+      "preserve": true,
+      "evidence": [
+        {
+          "path": "apps/web/lib/business-settings.ts",
+          "lines": [
+            39,
+            40,
+            48,
+            57
+          ]
+        }
+      ]
+    },
+    {
+      "purpose": "Shared AJES connection for Japan, China and Korea",
+      "storageKey": "integrations/ajes/config.json",
+      "privateFields": [
+        "encryptedPassword"
+      ],
+      "environmentFallback": "AJES_API_PASSWORD, only when the saved object is absent",
+      "encryptionEnvironment": [
+        "AUTH_SECRET",
+        "NEXTAUTH_SECRET"
+      ],
+      "safeRead": "Owner-authenticated GET /api/crm/ajes/settings returns configured:boolean; no provider request. Do not export encryptedPassword or call PUT for an inventory.",
+      "preserve": true,
+      "evidence": [
+        {
+          "path": "apps/web/lib/catalog/ajes-settings.ts",
+          "lines": [
+            4,
+            5,
+            6,
+            9,
+            15
+          ]
+        },
+        {
+          "path": "apps/web/app/(crm)/api/crm/ajes/settings/route.ts",
+          "lines": [
+            13,
+            14,
+            21,
+            23
+          ]
+        }
+      ]
+    }
+  ],
+  "markets": [
+    {
+      "market": "china",
+      "label": "Китай",
+      "providers": [
+        {
+          "provider": "Auto API / Che168",
+          "transport": "Authenticated HTTPS original CSV snapshot plus JSON changes API at api1.auto-api.com/api/v2/che168/; owned replica materializes saved snapshot and changes.",
+          "sourceSwitch": "che168_feed",
+          "configuration": [
+            "GitHub Actions secret AUTO_API_CHE168_KEY -> same-named environment variable",
+            "CHE168_SNAPSHOT_CONFIG -> local configuration path; default data/catalog/che168-snapshot-v1.json",
+            "Snapshot configuration pointer: catalog/raw-feed-config/v1/che168-snapshot.json"
+          ],
+          "verified": "Concrete snapshot archiver, changes client, saved raw configuration pointer and normal China workflow wiring exist.",
+          "evidence": [
+            {
+              "path": "scripts/catalog-che168-snapshot-archive.mjs",
+              "lines": [
+                8,
+                9,
+                19,
+                20
+              ]
+            },
+            {
+              "path": "scripts/lib/che168-snapshot.mjs",
+              "lines": [
+                6,
+                12,
+                22,
+                47,
+                50
+              ]
+            },
+            {
+              "path": "scripts/lib/che168-raw-config.mjs",
+              "lines": [
+                5,
+                13,
+                14
+              ]
+            },
+            {
+              "path": "scripts/catalog-download-owned-china.mjs",
+              "lines": [
+                9,
+                10,
+                11,
+                13
+              ]
+            },
+            {
+              "path": "scripts/catalog-prepare-owned-china.mjs",
+              "lines": [
+                7,
+                14,
+                15
+              ]
+            },
+            {
+              "path": ".github/workflows/catalog-refresh-china.yml",
+              "lines": [
+                37,
+                39
+              ]
+            }
+          ]
+        },
+        {
+          "provider": "AJ System / AJES",
+          "transport": "On-demand HTTP API, table china; shared AJES connection.",
+          "sourceSwitch": "ajes_china_feed",
+          "configuration": [
+            "integrations/ajes/config.json",
+            "AJES_API_PASSWORD fallback"
+          ],
+          "verified": "Optional alternative route is explicitly wired; source switch default is off, saved state was not read.",
+          "evidence": [
+            {
+              "path": "apps/web/lib/catalog/collection-controls-schema.ts",
+              "lines": [
+                10
+              ]
+            },
+            {
+              "path": "apps/web/lib/catalog/ajes-market-selection.ts",
+              "lines": [
+                3,
+                14
+              ]
+            },
+            {
+              "path": "apps/web/lib/catalog/ajes-runtime.ts",
+              "lines": [
+                36,
+                40,
+                62
+              ]
+            }
+          ]
+        },
+        {
+          "provider": "Che168 public / Autohome new-car reserve parsers",
+          "transport": "Public source adapters",
+          "sourceSwitches": [
+            "autohome_used_china_open",
+            "autohome_new_china_open"
+          ],
+          "verified": "Reserve entries exist in owner metadata and default off. Paid Che168 and its used-car reserve cannot be enabled together.",
+          "evidence": [
+            {
+              "path": "apps/web/lib/catalog/collection-controls-schema.ts",
+              "lines": [
+                13,
+                14
+              ]
+            },
+            {
+              "path": "apps/web/lib/catalog/collection-controls.ts",
+              "lines": [
+                46
+              ]
+            }
+          ]
+        }
+      ],
+      "businessQuestion": null,
+      "remainingVerification": "Use existing protected settings and private receipts to verify actual credentials, switches and supplier coverage; do not ask the owner to resend known access or infer coverage from old filters."
+    },
+    {
+      "market": "korea",
+      "label": "Корея",
+      "providers": [
+        {
+          "provider": "Auto API / Encar",
+          "transport": "Authenticated HTTPS JSON offers API at api1.auto-api.com/api/v3/encar/ with paginated saved snapshots.",
+          "sourceSwitch": "encar_feed",
+          "configuration": [
+            "catalog-paid-encar-refresh.yml supplies ACCOUNT_KEY from secrets.AUTO_API_DUBICARS_KEY, falling back to secrets.AUTO_API_CHE168_KEY"
+          ],
+          "verified": "Dedicated paid Encar workflow and platform=encar client exist. No dedicated Encar secret is selected by this workflow.",
+          "evidence": [
+            {
+              "path": "scripts/lib/auto-api-che168-client.mjs",
+              "lines": [
+                5,
+                7,
+                17,
+                20
+              ]
+            },
+            {
+              "path": "scripts/catalog-paid-encar-intake.mjs",
+              "lines": [
+                28,
+                39,
+                224,
+                272
+              ]
+            },
+            {
+              "path": ".github/workflows/catalog-paid-encar-refresh.yml",
+              "lines": [
+                75,
+                104
+              ]
+            }
+          ]
+        },
+        {
+          "provider": "AJ System / AJES",
+          "transport": "On-demand HTTP API, table korea; shared AJES connection.",
+          "sourceSwitch": "ajes_korea_feed",
+          "configuration": [
+            "integrations/ajes/config.json",
+            "AJES_API_PASSWORD fallback"
+          ],
+          "verified": "Selection depends on paid Encar switch and published snapshot state; AJES has its own source switch. This inventory does not claim which route is live.",
+          "evidence": [
+            {
+              "path": "apps/web/lib/catalog/ajes-market-selection.ts",
+              "lines": [
+                3,
+                14
+              ]
+            },
+            {
+              "path": "apps/web/lib/catalog/ajes-runtime.ts",
+              "lines": [
+                36,
+                40,
+                62
+              ]
+            },
+            {
+              "path": "apps/web/lib/catalog/collection-controls-schema.ts",
+              "lines": [
+                10
+              ]
+            }
+          ]
+        },
+        {
+          "provider": "Encar direct / K Car",
+          "transport": "Public Encar JSON list/detail APIs, with production bridge in Actions; K Car HTTPS web API and detail data.",
+          "sourceSwitches": [
+            "encar_direct",
+            "kcar_korea_open"
+          ],
+          "configuration": [
+            "Owner collection switches",
+            "Optional CATALOG_ENCAR_DIRECT_LIST_URL",
+            "Shared source bridge configuration"
+          ],
+          "verified": "Both direct adapters are registered in the current canonical source list; paid source routing is separate.",
+          "evidence": [
+            {
+              "path": "apps/web/lib/catalog/required-catalog-sources.ts",
+              "lines": [
+                27,
+                29
+              ]
+            },
+            {
+              "path": "apps/web/lib/catalog/importer.ts",
+              "lines": [
+                85,
+                116,
+                117
+              ]
+            },
+            {
+              "path": "apps/web/lib/catalog/adapters.ts",
+              "lines": [
+                85
+              ]
+            },
+            {
+              "path": "apps/web/lib/catalog/encar-complete-source.ts",
+              "lines": [
+                271
+              ]
+            },
+            {
+              "path": "apps/web/lib/catalog/kcar-exact-source.ts",
+              "lines": [
+                61,
+                62,
+                194,
+                203,
+                239
+              ]
+            }
+          ]
+        }
+      ],
+      "businessQuestion": null,
+      "remainingVerification": "Verify existing protected route selection and paid snapshot receipts. Historical paid-request filters are implementation behavior, not new coverage requirements."
+    },
+    {
+      "market": "uae",
+      "label": "ОАЭ",
+      "providers": [
+        {
+          "provider": "Auto API / DubiCars",
+          "transport": "Authenticated HTTPS JSON offers and changes API at api1.auto-api.com/api/v2/dubicars/.",
+          "sourceSwitch": "dubicars_feed",
+          "configuration": [
+            "GitHub Actions secret AUTO_API_DUBICARS_KEY -> same-named environment variable"
+          ],
+          "verified": "Concrete feed client and collection-plan branch exist; paid DubiCars excludes duplicate direct DubiCars collection in this plan.",
+          "evidence": [
+            {
+              "path": "scripts/catalog-auto-api-dubicars-intake.mjs",
+              "lines": [
+                22,
+                24,
+                33
+              ]
+            },
+            {
+              "path": "scripts/lib/auto-api-che168-client.mjs",
+              "lines": [
+                1,
+                5,
+                7,
+                17
+              ]
+            },
+            {
+              "path": "scripts/catalog-collection-plan.mjs",
+              "lines": [
+                15,
+                18
+              ]
+            },
+            {
+              "path": ".github/workflows/catalog-market-refresh.yml",
+              "lines": [
+                126
+              ]
+            }
+          ]
+        },
+        {
+          "provider": "Dubizzle / CarSwitch / direct DubiCars",
+          "transport": "Dubizzle public search JSON and HTML via source bridge in Actions; CarSwitch HTML/JSON-LD; direct DubiCars HTML adapter when selected.",
+          "sourceSwitches": [
+            "dubizzle_uae_open",
+            "carswitch_uae_open",
+            "dubicars_uae_exact"
+          ],
+          "configuration": [
+            "Owner collection switches",
+            "Shared source bridge configuration",
+            "Optional CATALOG_DUBIZZLE_ALGOLIA_SEARCH_KEY override; no value exported"
+          ],
+          "evidence": [
+            {
+              "path": "apps/web/lib/catalog/required-catalog-sources.ts",
+              "lines": [
+                22,
+                25
+              ]
+            },
+            {
+              "path": "apps/web/lib/catalog/importer.ts",
+              "lines": [
+                79
+              ]
+            },
+            {
+              "path": "apps/web/lib/catalog/dubizzle-exact-source.ts",
+              "lines": [
+                11,
+                431,
+                440,
+                505,
+                507
+              ]
+            },
+            {
+              "path": "apps/web/lib/catalog/carswitch-exact-source.ts",
+              "lines": [
+                7,
+                8,
+                266,
+                276,
+                307,
+                308
+              ]
+            },
+            {
+              "path": "apps/web/lib/catalog/dubicars-exact-source.ts",
+              "lines": [
+                47,
+                51,
+                152
+              ]
+            }
+          ]
+        }
+      ],
+      "businessQuestion": null,
+      "remainingVerification": "Existing admin metadata already identifies the paid DubiCars feed; verify saved enabled state and receipts without asking the owner to identify it again."
+    },
+    {
+      "market": "europe",
+      "label": "Европа",
+      "providers": [
+        {
+          "provider": "AutoScout24",
+          "transport": "Public HTTPS HTML /lst pages and embedded Next data; listing detail HTML. This is not a verified supplier full-feed interface.",
+          "sourceSwitch": "autoscout_europe_open",
+          "configuration": [
+            "Owner collection switch",
+            "Endpoint fixed in autoscout-exact-source-base.ts"
+          ],
+          "verified": "Only AutoScout24 remains in the European canonical source allowlist and its public HTML adapter is installed by importer.",
+          "evidence": [
+            {
+              "path": "apps/web/lib/catalog/required-catalog-sources.ts",
+              "lines": [
+                31,
+                33
+              ]
+            },
+            {
+              "path": "apps/web/lib/catalog/importer.ts",
+              "lines": [
+                110,
+                123,
+                138
+              ]
+            },
+            {
+              "path": "apps/web/lib/catalog/autoscout-exact-source.ts",
+              "lines": [
+                6,
+                7
+              ]
+            },
+            {
+              "path": "apps/web/lib/catalog/autoscout-exact-source-base.ts",
+              "lines": [
+                178,
+                180,
+                185,
+                197
+              ]
+            },
+            {
+              "path": "apps/web/lib/catalog/autoscout-hq-source.ts",
+              "lines": [
+                77,
+                78
+              ]
+            }
+          ]
+        },
+        {
+          "provider": "mobile.de",
+          "transport": "Retained public website/consumer API adapter code; not an enabled production collection source.",
+          "sourceSwitch": "mobile_de_open",
+          "configuration": [
+            "Source metadata retained, but collectionEnabled hard-returns false and saveCollectionSwitch rejects enabling it"
+          ],
+          "verified": "Explicitly retired in current source policy. Re-enabling it is not implied by rebuilding the subsystem.",
+          "evidence": [
+            {
+              "path": "apps/web/lib/catalog/collection-controls-schema.ts",
+              "lines": [
+                21,
+                25,
+                38
+              ]
+            },
+            {
+              "path": "apps/web/lib/catalog/collection-controls.ts",
+              "lines": [
+                41
+              ]
+            },
+            {
+              "path": "scripts/catalog-collection-plan.mjs",
+              "lines": [
+                7,
+                11
+              ]
+            },
+            {
+              "path": "apps/web/lib/catalog/mobile-de-exact-source.ts",
+              "lines": [
+                20,
+                23
+              ]
+            }
+          ]
+        }
+      ],
+      "paidFullFeedWiringFound": false,
+      "absenceEvidence": [
+        {
+          "path": "apps/web/lib/catalog/collection-controls-schema.ts",
+          "lines": [
+            7,
+            28
+          ],
+          "meaning": "European admin source entries are only AutoScout24 and retired mobile.de."
+        },
+        {
+          "path": "scripts/catalog-collection-plan.mjs",
+          "lines": [
+            14,
+            18
+          ],
+          "meaning": "Paid generic plan branches are China and UAE; no European feed branch."
+        },
+        {
+          "path": "apps/web/lib/catalog/adapters.ts",
+          "lines": [
+            448,
+            455
+          ],
+          "meaning": "Generic JSON/CSV partner adapter instances are Japan/Korea only, not Europe."
+        },
+        {
+          "path": "apps/web/lib/catalog/importer.ts",
+          "lines": [
+            123,
+            138
+          ],
+          "meaning": "Runtime rejects/removes unlisted market/source adapter registrations."
+        },
+        {
+          "path": "scripts/lib/auto-api-che168-client.mjs",
+          "lines": [
+            5,
+            7
+          ],
+          "meaning": "Auto API client accepts che168, dubicars and encar only."
+        }
+      ],
+      "businessQuestion": "Identify the intended complete European catalogue supplier and the location of its already-existing specification/connection settings. Ask for a provider name or documentation reference, not credentials. Do not infer that a paid European product was not purchased.",
+      "remainingVerification": "Current code does not establish a complete European feed contract. A public search-window end is not proof that the full supplier catalogue was received."
+    },
+    {
+      "market": "georgia",
+      "label": "Грузия",
+      "providers": [
+        {
+          "provider": "MyAuto / AutoPapa",
+          "transport": "MyAuto HTTPS listing HTML plus api2.myauto.ge JSON detail; AutoPapa HTTPS listing/detail HTML. Actions wraps both direct adapters in the website's authenticated source bridge.",
+          "sourceSwitches": [
+            "myauto_georgia_list",
+            "autopapa_georgia_open"
+          ],
+          "configuration": [
+            "Owner collection switches",
+            "Optional CATALOG_YANDEX_SOURCE_BRIDGE_ORIGIN; default https://avtocena.com",
+            "Optional CATALOG_DISABLE_YANDEX_SOURCE_BRIDGE",
+            "Bridge HMAC uses existing YC_OBJECT_STORAGE_SECRET_ACCESS_KEY; no separate MyAuto/AutoPapa token is selected by this wiring"
+          ],
+          "verified": "Both canonical adapters are installed by importer; Actions uses bridge by default, direct adapter otherwise.",
+          "evidence": [
+            {
+              "path": "apps/web/lib/catalog/required-catalog-sources.ts",
+              "lines": [
+                34,
+                36
+              ]
+            },
+            {
+              "path": "apps/web/lib/catalog/importer.ts",
+              "lines": [
+                74,
+                75,
+                94,
+                95
+              ]
+            },
+            {
+              "path": "apps/web/lib/catalog/yandex-source-bridge.ts",
+              "lines": [
+                33,
+                46,
+                54,
+                59,
+                100,
+                101
+              ]
+            },
+            {
+              "path": "apps/web/lib/catalog/source-bridge-auth.ts",
+              "lines": [
+                4,
+                12
+              ]
+            },
+            {
+              "path": "apps/web/lib/catalog/myauto-list-source.ts",
+              "lines": [
+                19,
+                197,
+                214,
+                266,
+                279,
+                338,
+                351
+              ]
+            },
+            {
+              "path": "apps/web/lib/catalog/autopapa-georgia-source.ts",
+              "lines": [
+                9,
+                406,
+                413,
+                462,
+                466
+              ]
+            }
+          ]
+        }
+      ],
+      "businessQuestion": null,
+      "remainingVerification": "No paid Georgia feed is identified by the reviewed production registration. This is not evidence about purchases outside the repository. Preserve the known source choices pending any explicit replacement contract."
+    },
+    {
+      "market": "japan",
+      "label": "Япония / аукционы",
+      "providers": [
+        {
+          "provider": "AJ System / AJES",
+          "transport": "On-demand HTTP GET API with SQL query parameter; public catalogue query selects table stats. Runtime endpoint selection uses client IP: RU -> http://87.242.72.57/api/, other -> http://78.46.90.228/api/.",
+          "sourceSwitch": "ajes_japan_feed",
+          "configuration": [
+            "integrations/ajes/config.json",
+            "AJES_API_PASSWORD fallback",
+            "Shared owner market/source switches",
+            "Runtime client IP from x-real-ip"
+          ],
+          "verified": "Actual production client explicitly receives saved-password reader and endpoint selector. Japan is selected for AJES, with its own access switch still checked. The ordinary batch canonical Japan source array is empty.",
+          "evidence": [
+            {
+              "path": "apps/web/lib/catalog/ajes-runtime.ts",
+              "lines": [
+                36,
+                40,
+                62,
+                65
+              ]
+            },
+            {
+              "path": "apps/web/lib/catalog/ajes-client.ts",
+              "lines": [
+                63,
+                68,
+                127,
+                142
+              ]
+            },
+            {
+              "path": "apps/web/lib/catalog/ajes-routing.ts",
+              "lines": [
+                5,
+                8
+              ]
+            },
+            {
+              "path": "apps/web/lib/catalog/ajes-query.ts",
+              "lines": [
+                156,
+                158
+              ]
+            },
+            {
+              "path": "apps/web/lib/catalog/ajes-public.ts",
+              "lines": [
+                26,
+                30
+              ]
+            },
+            {
+              "path": "apps/web/lib/catalog/ajes-market-selection.ts",
+              "lines": [
+                3,
+                14
+              ]
+            },
+            {
+              "path": "apps/web/lib/catalog/required-catalog-sources.ts",
+              "lines": [
+                43,
+                44
+              ]
+            }
+          ]
+        }
+      ],
+      "businessQuestion": null,
+      "remainingVerification": "Read the existing configured:boolean and saved source switch; do not treat old request-size, year or auction-admission settings as a new specification."
+    },
+    {
+      "market": "green",
+      "ownerMarket": "japan",
+      "label": "Зелёный угол / отдельный stock-каталог",
+      "providers": [
+        {
+          "provider": "Akebono",
+          "transport": "Anonymous HTTPS POST GraphQL at https://akebono.world/graphql/catalog/open, operation greenCornerLots; separate calculator and exchange-rate GraphQL endpoints.",
+          "sourceSwitch": "akebono_green",
+          "configuration": [
+            "Owner source switch under market japan",
+            "Fixed endpoints in scripts/lib/akebono-green-source.mjs; no provider credential selected by this collector"
+          ],
+          "verified": "Separate Green collector calls the catalogue and terms readers with a guarded fetch. Admin kind=parser does not change the actual GraphQL transport.",
+          "evidence": [
+            {
+              "path": "scripts/lib/akebono-green-source.mjs",
+              "lines": [
+                1,
+                16,
+                44,
+                52
+              ]
+            },
+            {
+              "path": "scripts/catalog-refresh-green-corner.mjs",
+              "lines": [
+                1,
+                3,
+                13,
+                14
+              ]
+            },
+            {
+              "path": "apps/web/lib/catalog/collection-controls-schema.ts",
+              "lines": [
+                28
+              ]
+            },
+            {
+              "path": ".github/workflows/catalog-refresh-green.yml",
+              "lines": [
+                42,
+                43,
+                51,
+                52
+              ]
+            }
+          ]
+        }
+      ],
+      "businessQuestion": null,
+      "remainingVerification": "This source is separate from AJES auction data although its owner switch belongs to Japan. Preserve that distinction; actual saved switches and upstream availability were not read."
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "repository": "jeep-jim/AvtoCena",
+  "auditedCommit": "bd7dc65998cd6ab062f12d01145ff2de6c3ae6e3",
+  "githubWorkflowStateSnapshot": {
+    "source": "Parent read-only GitHub workflows API snapshot",
+    "api": "https://api.github.com/repos/jeep-jim/AvtoCena/actions/workflows?per_page=100",
+    "sha256": "38cb175073fb12e6dfd0dd89d539100d156e7157c106f6c1841f6ead517be31c",
+    "totalRows": 1254,
+    "note": "Observed snapshot only. Re-read exact paths before mutation; current API state may differ."
+  },
+  "summary": {
+    "workflows": 644,
+    "triggerCounts": {
+      "workflow_run": 22,
+      "push": 520,
+      "workflow_dispatch": 380,
+      "pull_request": 35,
+      "schedule": 18,
+      "workflow_call": 9
+    },
+    "classifications": {
+      "verified_legacy_writer": 33,
+      "unreviewed_not_authorized_for_disable": 594,
+      "protected_do_not_disable": 6,
+      "shared_requires_separate_review": 11
+    }
+  },
+  "limitations": [
+    "This is a verified first operational freeze scope, not an assertion that all 644 workflows are exhaustively classified.",
+    "GitHub workflow states come from the identified read-only API snapshot; active-run/job state and each exact workflow state must be fetched again immediately before changes. YAML trigger presence does not prove API enabled state.",
+    "No workflow has been run, disabled or cancelled by this audit. No storage object, owner switch, lease or server process has been changed.",
+    "Disable all verified triggering callers as well as reusable definitions; do not assume disabling only a reusable workflow prevents callers.",
+    "Historical marker, embedded operation and shared release writers remain outside the first allowlist until their execution and protected dependencies are reviewed.",
+    "Actual VM cron/systemd/process inventory is not available from source alone. Source-tree scheduler findings do not prove no external writers.",
+    "Keep administrative source switches, encyclopedia, calculation engines, saved quotes, CRM jobs and release checks intact.",
+    "Existing web-request-time caches and admin-authorized writers are not frozen by a GitHub workflow disable operation."
+  ],
+  "fullInventorySha256": "183d0f0400dfb37b1991fcaff41ca00c727f014f08d99f2fa5b7d082caaac606",
+  "note": "Historical code audit only. The applied scope and actual outcome are linked in README.md. This summary does not claim all 644 workflows are exhaustively retired.",
+  "fullInventoryPath": "docs/operations/catalog-rebuild/workflow-inventory.json.gz"
+}

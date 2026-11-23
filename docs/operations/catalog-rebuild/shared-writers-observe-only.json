@@ -1,0 +1,328 @@
+{
+  "version": 1,
+  "auditedCommit": "bd7dc65998cd6ab062f12d01145ff2de6c3ae6e3",
+  "paths": [
+    ".github/workflows/catalog-certified-power-apply.yml",
+    ".github/workflows/catalog-reindex-vehicle-knowledge.yml",
+    ".github/workflows/catalog-saved-previews.yml",
+    ".github/workflows/container-registry-cleanup.yml",
+    ".github/workflows/finish-installed-paid-encar.yml",
+    ".github/workflows/finish-verified-paid-korea.yml",
+    ".github/workflows/regcloud-deploy.yml",
+    ".github/workflows/regcloud-release-retention.yml",
+    ".github/workflows/release-minimal-paid-encar.yml",
+    ".github/workflows/release-paid-encar.yml",
+    ".github/workflows/verify-finish-paid-encar.yml"
+  ],
+  "workflows": [
+    {
+      "path": ".github/workflows/catalog-certified-power-apply.yml",
+      "name": "Catalog · apply certified 30-minute power",
+      "reason": "Changes reviewed power reference data and recalculates catalog cards. Separate protected reference changes from catalog mutation.",
+      "evidence": [
+        {
+          "path": ".github/workflows/catalog-certified-power-apply.yml",
+          "line": 11,
+          "literal": "scripts/catalog-seed-certified-power-reference.mjs"
+        }
+      ],
+      "allJobsLiteralFalse": false,
+      "triggers": {
+        "workflow_dispatch": null,
+        "push": {
+          "branches": [
+            "main"
+          ],
+          "paths": [
+            "apps/web/lib/catalog/power-reference.ts",
+            "data/catalog/power-reference/30-minute-power.json",
+            "scripts/catalog-seed-certified-power-reference.mjs",
+            "scripts/catalog-apply-certified-power.mjs"
+          ]
+        }
+      }
+    },
+    {
+      "path": ".github/workflows/catalog-reindex-vehicle-knowledge.yml",
+      "name": "Catalog reindex from vehicle knowledge",
+      "reason": "Contains a customs live-proof status gate plus policy-gated catalog reindex via npm; cannot identify writer status from the workflow name alone.",
+      "evidence": [
+        {
+          "path": ".github/workflows/catalog-reindex-vehicle-knowledge.yml",
+          "line": 87,
+          "literal": "npm run catalog:reindex-vehicle-knowledge"
+        }
+      ],
+      "allJobsLiteralFalse": false,
+      "triggers": {
+        "workflow_dispatch": null,
+        "push": {
+          "branches": [
+            "main"
+          ],
+          "paths": [
+            ".github/workflows/catalog-reindex-vehicle-knowledge.yml",
+            "apps/web/lib/catalog/customs-pricing.ts",
+            "packages/engine/src/calculation/russiaCustoms.ts",
+            "packages/engine/src/calculation/russiaCustomsV2.ts",
+            "scripts/catalog-reindex-vehicle-knowledge.mjs",
+            "scripts/catalog-rf-customs-live-card-proof.mjs"
+          ]
+        }
+      }
+    },
+    {
+      "path": ".github/workflows/catalog-saved-previews.yml",
+      "name": "Publish saved calculation previews",
+      "reason": "Rebuilds previews of manager-saved calculations under offer-calculation-previews/current.json. Shares protected saved quotes; keep out of first catalog freeze.",
+      "evidence": [
+        {
+          "path": ".github/workflows/catalog-saved-previews.yml",
+          "line": 7,
+          "literal": "scripts/catalog-rebuild-saved-previews.mjs"
+        }
+      ],
+      "allJobsLiteralFalse": false,
+      "triggers": {
+        "workflow_dispatch": null,
+        "push": {
+          "branches": [
+            "main"
+          ],
+          "paths": [
+            "scripts/catalog-rebuild-saved-previews.mjs",
+            "apps/web/lib/catalog/saved-calculation-previews.ts",
+            ".github/workflows/catalog-saved-previews.yml"
+          ]
+        }
+      }
+    },
+    {
+      "path": ".github/workflows/container-registry-cleanup.yml",
+      "name": "Container registry retention",
+      "reason": "Retention of shared application images, not catalog objects. Preserve checkpoint/rollback images and review separately.",
+      "evidence": [
+        {
+          "path": ".github/workflows/container-registry-cleanup.yml",
+          "line": 8,
+          "literal": "scripts/cleanup-container-registry.mjs"
+        }
+      ],
+      "allJobsLiteralFalse": false,
+      "triggers": {
+        "schedule": [
+          {
+            "cron": "30 16 * * *"
+          }
+        ],
+        "workflow_dispatch": null,
+        "push": {
+          "branches": [
+            "fix/cloud-storage-budget-20260920",
+            "fix/registry-retention-20260919",
+            "main"
+          ],
+          "paths": [
+            ".github/workflows/container-registry-cleanup.yml",
+            "scripts/cleanup-container-registry.mjs",
+            "scripts/lib/registry-retention.mjs",
+            ".github/market-runs/registry-cleanup.json"
+          ]
+        },
+        "workflow_run": {
+          "workflows": [
+            "Deploy to Yandex Cloud"
+          ],
+          "types": [
+            "completed"
+          ],
+          "branches": [
+            "main"
+          ]
+        }
+      }
+    },
+    {
+      "path": ".github/workflows/finish-installed-paid-encar.yml",
+      "name": "Finish installed minimal paid Encar Korea",
+      "reason": "Caller of the shared verification workflow that can change an owner source switch; observe caller run IDs as well as the reusable definition. Never disable or cancel through the catalog-only scope.",
+      "evidence": [
+        {
+          "path": ".github/workflows/finish-installed-paid-encar.yml",
+          "line": 164,
+          "literal": "uses: ./.github/workflows/verify-finish-paid-encar.yml"
+        }
+      ],
+      "allJobsLiteralFalse": false,
+      "triggers": {
+        "workflow_dispatch": null,
+        "push": {
+          "branches": [
+            "main"
+          ],
+          "paths": [
+            ".github/workflows/finish-installed-paid-encar.yml"
+          ]
+        }
+      }
+    },
+    {
+      "path": ".github/workflows/finish-verified-paid-korea.yml",
+      "name": "Finish verified paid Korea cutover",
+      "reason": "Caller of the shared verification workflow that can change an owner source switch; observe caller run IDs as well as the reusable definition. Never disable or cancel through the catalog-only scope.",
+      "evidence": [
+        {
+          "path": ".github/workflows/finish-verified-paid-korea.yml",
+          "line": 42,
+          "literal": "uses: ./.github/workflows/verify-finish-paid-encar.yml"
+        }
+      ],
+      "allJobsLiteralFalse": false,
+      "triggers": {
+        "push": {
+          "branches": [
+            "main"
+          ],
+          "paths": [
+            ".github/workflows/finish-verified-paid-korea.yml"
+          ]
+        }
+      }
+    },
+    {
+      "path": ".github/workflows/regcloud-deploy.yml",
+      "name": "Regcloud — deploy production",
+      "reason": "Deploys the whole website and prepares encyclopedia plus catalog price/page artifacts. Preserve release gates; cannot disable as a catalog-only writer.",
+      "evidence": [
+        {
+          "path": ".github/workflows/regcloud-deploy.yml",
+          "line": 229,
+          "literal": "scripts/regcloud-prepare-prices.mjs"
+        }
+      ],
+      "allJobsLiteralFalse": false,
+      "triggers": {
+        "workflow_dispatch": null,
+        "push": {
+          "branches": [
+            "main"
+          ],
+          "paths": [
+            ".github/market-runs/regcloud-deploy.json"
+          ]
+        }
+      }
+    },
+    {
+      "path": ".github/workflows/regcloud-release-retention.yml",
+      "name": "Regcloud — clean retained application releases",
+      "reason": "Retention of shared installed application releases, not catalog objects. Review rollback preservation separately.",
+      "evidence": [
+        {
+          "path": ".github/workflows/regcloud-release-retention.yml",
+          "line": 71,
+          "literal": "scripts/regcloud-release-retention.py"
+        }
+      ],
+      "allJobsLiteralFalse": false,
+      "triggers": {
+        "workflow_dispatch": null,
+        "workflow_run": {
+          "workflows": [
+            "Release paid Korea insurance history",
+            "Release prepared feed delivery and Korea history"
+          ],
+          "types": [
+            "completed"
+          ],
+          "branches": [
+            "main"
+          ]
+        },
+        "push": {
+          "branches": [
+            "main"
+          ],
+          "paths": [
+            ".github/market-runs/regcloud-release-retention.json"
+          ]
+        }
+      }
+    },
+    {
+      "path": ".github/workflows/release-minimal-paid-encar.yml",
+      "name": "Release minimal paid Encar Korea",
+      "reason": "Caller of the shared verification workflow that can change an owner source switch; observe caller run IDs as well as the reusable definition. Never disable or cancel through the catalog-only scope.",
+      "evidence": [
+        {
+          "path": ".github/workflows/release-minimal-paid-encar.yml",
+          "line": 967,
+          "literal": "uses: ./.github/workflows/verify-finish-paid-encar.yml"
+        }
+      ],
+      "allJobsLiteralFalse": true,
+      "triggers": {
+        "push": {
+          "branches": [
+            "main"
+          ],
+          "paths": [
+            ".github/workflows/release-minimal-paid-encar.yml"
+          ]
+        }
+      }
+    },
+    {
+      "path": ".github/workflows/release-paid-encar.yml",
+      "name": "Release paid Encar Korea",
+      "reason": "Caller of the shared verification workflow that can change an owner source switch; observe caller run IDs as well as the reusable definition. Never disable or cancel through the catalog-only scope.",
+      "evidence": [
+        {
+          "path": ".github/workflows/release-paid-encar.yml",
+          "line": 830,
+          "literal": "uses: ./.github/workflows/verify-finish-paid-encar.yml"
+        }
+      ],
+      "allJobsLiteralFalse": true,
+      "triggers": {
+        "push": {
+          "branches": [
+            "main"
+          ],
+          "paths": [
+            ".github/workflows/release-paid-encar.yml"
+          ]
+        },
+        "workflow_run": {
+          "workflows": [
+            "Publish completed paid Encar intake"
+          ],
+          "types": [
+            "completed"
+          ]
+        },
+        "workflow_dispatch": null
+      }
+    },
+    {
+      "path": ".github/workflows/verify-finish-paid-encar.yml",
+      "name": "Verify and finish paid Encar migration",
+      "reason": "Verification gate also changes an owner source switch; release callers exist. Keep separate from the catalog-only disable list.",
+      "evidence": [
+        {
+          "path": ".github/workflows/verify-finish-paid-encar.yml",
+          "line": 62,
+          "literal": "saveCollectionSwitch"
+        }
+      ],
+      "allJobsLiteralFalse": false,
+      "triggers": {
+        "workflow_dispatch": null,
+        "workflow_call": null
+      }
+    }
+  ],
+  "disableAuthorized": false,
+  "cancelAuthorized": false,
+  "completeWriterBoundary": false
+}

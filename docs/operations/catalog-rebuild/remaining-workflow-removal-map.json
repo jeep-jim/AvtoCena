@@ -1,0 +1,3240 @@
+{
+  "version": 1,
+  "repository": "jeep-jim/AvtoCena",
+  "auditedSourceSha": "bd7dc65998cd6ab062f12d01145ff2de6c3ae6e3",
+  "scope": "42 previously identified candidates only; 2 dry-run companions recorded separately",
+  "currentFreezeScopeUnchanged": true,
+  "currentFreezeScopeCount": 33,
+  "currentFreezeScopeSha256": "d4cfefacc1a38a99d95129c8ab6a56d427076158b5567e7ed1945e9e9aae038f",
+  "remoteOperationsPerformed": false,
+  "activationPerformed": false,
+  "deletionPerformed": false,
+  "summary": {
+    "originalCandidates": 42,
+    "categories": {
+      "A_legacy_catalog_workflow": 31,
+      "C_blocked_at_audited_revision": 9,
+      "B_shared_release_responsibilities": 2
+    },
+    "literalIfFalseWorkflowsAmong42": 0,
+    "purePublicationDryRunWorkflowsAmong42": 0,
+    "additionalDryRunCompanions": 2,
+    "sourcePolicyBlockedBeforeCollector": 8,
+    "expiredDateGuard": 1
+  },
+  "categoryDefinitions": {
+    "A_legacy_catalog_workflow": "Old catalog-only orchestration eligible for YAML retirement in the replacement. Retain shared calculation/encyclopedia helpers and all protected data; this is not permission to execute its reset or delete scripts transitively.",
+    "B_shared_release_responsibilities": "Retired release workflow mixes catalogue work, private encyclopedia release binding and full-site ingress. Separate these responsibilities and preserve acceptance/rollback gates before retirement.",
+    "C_blocked_at_audited_revision": "Old workflow whose current source/date guard prevents the catalog write path. This is not literal if:false and not proof for an older run SHA or another checkout ref."
+  },
+  "deletionPreconditions": [
+    "Confirm targeted runs/jobs are terminal; a YAML deletion does not cancel already assigned work.",
+    "Retire reusable callers and scripted dispatchers as a group, or remove their incoming invocation first.",
+    "Update affected legacy contract tests and workflow_run name references in the replacement; preserve CI, performance and release acceptance gates.",
+    "Do not delete calculation/identity/encyclopedia helpers just because these retired workflows import them.",
+    "Do not execute any old reset/cleanup as the deletion mechanism. No data deletion is authorized by this map."
+  ],
+  "reverseReferenceLimits": "Exact reusable edges and workflow_run names come from all 644 audited workflow definitions. Literal filename references were searched only for these 44 targets in .github, scripts, tests, docs/operations and package.json, excluding generated audit JSON. This does not prove the absence of constructed external callers.",
+  "evidenceGroups": {
+    "market_publisher": [
+      {
+        "path": "scripts/catalog-publish-market.mjs",
+        "line": 821,
+        "literal": "await acquirePublishLock();"
+      },
+      {
+        "path": "scripts/catalog-publish-market.mjs",
+        "line": 849,
+        "literal": "manifest = await persistCatalogOffers(allOffers"
+      },
+      {
+        "path": "scripts/catalog-publish-market.mjs",
+        "line": 850,
+        "literal": "productionRefreshMarket: market"
+      }
+    ],
+    "legacy_final_persistence_pause": [
+      {
+        "path": "apps/web/lib/catalog/storage.ts",
+        "line": 93,
+        "literal": "CATALOG_PRODUCTION_WRITES_PAUSED = true"
+      },
+      {
+        "path": "apps/web/lib/catalog/storage.ts",
+        "line": 97,
+        "literal": "CATALOG_PRODUCTION_REFRESH_MARKETS: readonly CatalogMarket[] = []"
+      },
+      {
+        "path": "apps/web/lib/catalog/storage.ts",
+        "line": 1651,
+        "literal": "const weeklyInventory = process.env.CATALOG_SELLER_INVENTORY"
+      },
+      {
+        "path": "apps/web/lib/catalog/storage.ts",
+        "line": 1670,
+        "literal": "if (CATALOG_PRODUCTION_WRITES_PAUSED && process.env.JSON_STORAGE_DRIVER"
+      }
+    ],
+    "v3_early_pause": [
+      {
+        "path": ".github/workflows/catalog-v3-market-10k-reusable.yml",
+        "line": 106,
+        "literal": "if (CATALOG_PRODUCTION_WRITES_PAUSED && !CATALOG_PRODUCTION_REFRESH_MARKETS.includes"
+      },
+      {
+        "path": ".github/workflows/catalog-v3-market-10k-reusable.yml",
+        "line": 108,
+        "literal": "process.exit(1);"
+      },
+      {
+        "path": ".github/workflows/catalog-v3-market-10k-reusable.yml",
+        "line": 204,
+        "literal": "needs.validate.result == 'success'"
+      },
+      {
+        "path": ".github/workflows/catalog-v3-sequential-queue.yml",
+        "line": 36,
+        "literal": "if (CATALOG_PRODUCTION_WRITES_PAUSED && ![\"korea\", \"china\", \"uae\", \"europe\", \"georgia\"].every"
+      }
+    ],
+    "single_market_recovery": [
+      {
+        "path": "scripts/catalog-live-recovery-publish.mjs",
+        "line": 108,
+        "literal": "await mutateDataJson(publishLockPath"
+      },
+      {
+        "path": "scripts/catalog-live-recovery-publish.mjs",
+        "line": 348,
+        "literal": "manifest = await persistCatalogOffers"
+      }
+    ],
+    "batch_recovery": [
+      {
+        "path": "scripts/catalog-live-recovery-publish-batch.mjs",
+        "line": 22,
+        "literal": "const dryRun ="
+      },
+      {
+        "path": "scripts/catalog-live-recovery-publish-batch.mjs",
+        "line": 327,
+        "literal": "if (dryRun) {"
+      },
+      {
+        "path": "scripts/catalog-live-recovery-publish-batch.mjs",
+        "line": 353,
+        "literal": "const manifest = await persistCatalogOffers"
+      }
+    ],
+    "stable_batch_recovery": [
+      {
+        "path": "scripts/catalog-live-recovery-publish-batch-stable.mjs",
+        "line": 129,
+        "literal": "const manifest = await persistCatalogOffers"
+      }
+    ],
+    "stitch": [
+      {
+        "path": "scripts/catalog-stitch-verified-markets.mjs",
+        "line": 21,
+        "literal": "await assertLegacyRawWriterDisabled(storage)"
+      },
+      {
+        "path": "scripts/catalog-stitch-verified-markets.mjs",
+        "line": 94,
+        "literal": "await storage.writeJson(\"catalog/manifest.json\""
+      }
+    ],
+    "identity_helpers_read_protected_data": [
+      {
+        "path": "scripts/catalog-apply-encyclopedia-identity-master.mjs",
+        "line": 5,
+        "literal": "const { readEncyclopediaIdentityDataset"
+      },
+      {
+        "path": "scripts/catalog-apply-encyclopedia-identity-master.mjs",
+        "line": 173,
+        "literal": "await writeJsonObjectWithArrayAtomic(filename"
+      },
+      {
+        "path": "scripts/catalog-build-knowledge-gaps.mjs",
+        "line": 100,
+        "literal": "await fs.writeFile"
+      }
+    ],
+    "knowledge_audit_keep_helper": [
+      {
+        "path": "scripts/catalog-audit-vehicle-knowledge.mjs",
+        "line": 9,
+        "literal": "const HEALTH_PATH ="
+      },
+      {
+        "path": "scripts/catalog-audit-vehicle-knowledge.mjs",
+        "line": 208,
+        "literal": "await writeDataJson(HEALTH_PATH, report)"
+      },
+      {
+        "path": "package.json",
+        "line": 29,
+        "literal": "\"catalog:audit-vehicle-knowledge\""
+      },
+      {
+        "path": ".github/workflows/catalog-v2-market-reusable.yml",
+        "line": 110,
+        "literal": "scripts/catalog-audit-vehicle-knowledge.mjs"
+      }
+    ],
+    "broad_reset_do_not_execute": [
+      {
+        "path": ".github/workflows/catalog-v4-all-markets-30k.yml",
+        "line": 43,
+        "literal": "if: inputs.reset_catalog"
+      },
+      {
+        "path": "scripts/catalog-reset-public.mjs",
+        "line": 15,
+        "literal": "deletedObjects = await storage.deletePrefix(\"catalog\")"
+      },
+      {
+        "path": "apps/web/lib/catalog/collection-controls.ts",
+        "line": 3,
+        "literal": "COLLECTION_CONTROLS_KEY='catalog/operations/collection-controls-v1.json'"
+      },
+      {
+        "path": "apps/web/lib/data.ts",
+        "line": 445,
+        "literal": "const batches: StorageObject[][] = [];"
+      },
+      {
+        "path": "apps/web/lib/data.ts",
+        "line": 348,
+        "literal": "return this.listRawObjects([cfg.prefix, requested ? normalizeStorageKey(requested) : \"\"].filter(Boolean).join(\"/\"), true)"
+      },
+      {
+        "path": "apps/web/lib/data.ts",
+        "line": 327,
+        "literal": "prefix: normalizedPrefix"
+      }
+    ],
+    "technical_repair": [
+      {
+        "path": ".github/workflows/repair-paid-encar-technical.yml",
+        "line": 406,
+        "literal": "if: ${{ inputs.review_for_apply && steps.review.outcome == 'success' }}"
+      },
+      {
+        "path": ".github/workflows/repair-paid-encar-technical.yml",
+        "line": 414,
+        "literal": "scripts/catalog-repair-paid-encar-technical.mjs apply"
+      },
+      {
+        "path": "scripts/catalog-repair-paid-encar-technical.mjs",
+        "line": 94,
+        "literal": "CATALOG_PUBLICATION_DRY_RUN:action === 'plan' ? '1' : '0'"
+      },
+      {
+        "path": "scripts/catalog-repair-paid-encar-technical.mjs",
+        "line": 100,
+        "literal": "await import('./catalog-publish-market.mjs')"
+      }
+    ],
+    "technical_repair_dispatch": [
+      {
+        "path": ".github/workflows/dispatch-paid-encar-technical-once.yml",
+        "line": 39,
+        "literal": "const workflow = 'repair-paid-encar-technical.yml'"
+      },
+      {
+        "path": ".github/workflows/dispatch-paid-encar-technical-once.yml",
+        "line": 75,
+        "literal": "await github.rest.actions.createWorkflowDispatch"
+      }
+    ],
+    "korea_history_mixed_release": [
+      {
+        "path": ".github/workflows/release-paid-korea-history.yml",
+        "line": 583,
+        "literal": "try { await storage.writeJson(targetKey, binding, {ifNoneMatch:"
+      },
+      {
+        "path": ".github/workflows/release-paid-korea-history.yml",
+        "line": 486,
+        "literal": "knowledge/encyclopedia/calculation-releases/${release}.json"
+      },
+      {
+        "path": ".github/workflows/release-paid-korea-history.yml",
+        "line": 1556,
+        "literal": "bash scripts/regcloud-deploy-with-browser.sh \"$key_file\""
+      },
+      {
+        "path": ".github/workflows/release-paid-korea-history.yml",
+        "line": 913,
+        "literal": "result = post('actions/jobs/' + str(JOB) + '/rerun')"
+      }
+    ],
+    "prepared_delivery_mixed_release": [
+      {
+        "path": ".github/workflows/release-prepared-feed-delivery.yml",
+        "line": 1632,
+        "literal": "try { await storage.writeJson(targetKey, binding, {ifNoneMatch:"
+      },
+      {
+        "path": ".github/workflows/release-prepared-feed-delivery.yml",
+        "line": 1523,
+        "literal": "knowledge/encyclopedia/calculation-releases/${release}.json"
+      },
+      {
+        "path": ".github/workflows/release-prepared-feed-delivery.yml",
+        "line": 3564,
+        "literal": "bash scripts/regcloud-deploy-with-browser.sh \"$key_file\""
+      }
+    ],
+    "expired_home_date": [
+      {
+        "path": ".github/workflows/owner-current-home-preparation.yml",
+        "line": 44,
+        "literal": "'2026-11-12'"
+      },
+      {
+        "path": ".github/workflows/owner-current-home-preparation.yml",
+        "line": 58,
+        "literal": "node --import tsx scripts/catalog-refresh-generation-pages.mjs | tee"
+      }
+    ],
+    "publisher_dry_run": [
+      {
+        "path": "scripts/catalog-publish-market.mjs",
+        "line": 298,
+        "literal": "const dryRun = process.env.CATALOG_PUBLICATION_DRY_RUN === \"1\""
+      },
+      {
+        "path": "scripts/catalog-publish-market.mjs",
+        "line": 713,
+        "literal": "if (dryRun) {"
+      },
+      {
+        "path": "scripts/catalog-publish-market.mjs",
+        "line": 821,
+        "literal": "await acquirePublishLock();"
+      }
+    ]
+  },
+  "workflows": [
+    {
+      "path": ".github/workflows/catalog-five-market-full-rebuild.yml",
+      "name": "Catalog · Five-market full rebuild",
+      "category": "A_legacy_catalog_workflow",
+      "why": "Старая самостоятельная цепочка intake → преобразование → очистка → публикация пяти рынков.",
+      "deletionDisposition": "remove_yaml_only_as_part_of_replacement",
+      "removalScope": "workflow_yaml_only_not_transitive_scripts_or_data",
+      "currentMode": "conditional_catalog_writer_or_dispatcher",
+      "literalAllJobsFalse": false,
+      "directEvidence": [
+        {
+          "path": ".github/workflows/catalog-five-market-full-rebuild.yml",
+          "line": 178,
+          "literal": "scripts/catalog-publish-market.mjs"
+        }
+      ],
+      "evidenceGroups": [
+        "market_publisher"
+      ],
+      "triggers": {
+        "workflow_dispatch": null,
+        "push": {
+          "branches": [
+            "main"
+          ],
+          "paths": [
+            ".github/market-runs/five-market-full-rebuild.json"
+          ]
+        }
+      },
+      "reusableCallers": [],
+      "reusableDependencies": [],
+      "workflowRunDependents": [
+        {
+          "path": ".github/workflows/catalog-overview-read-model.yml",
+          "upstreamName": "Catalog · Five-market full rebuild"
+        },
+        {
+          "path": ".github/workflows/catalog-translate-descriptions.yml",
+          "upstreamName": "Catalog · Five-market full rebuild"
+        }
+      ],
+      "literalReverseReferences": [
+        {
+          "path": "docs/operations/2026-11-16-raw-writer-entrypoint-audit.md",
+          "line": 44,
+          "kind": "documentation_reference",
+          "literal": "catalog-five-market-full-rebuild.yml"
+        },
+        {
+          "path": "tests/catalog-republish-artifacts-workflow.test.ts",
+          "line": 16,
+          "kind": "test_contract_reference",
+          "literal": "catalog-five-market-full-rebuild.yml"
+        },
+        {
+          "path": "tests/catalog-republish-artifacts-workflow.test.ts",
+          "line": 29,
+          "kind": "test_contract_reference",
+          "literal": "catalog-five-market-full-rebuild.yml"
+        },
+        {
+          "path": "tests/catalog-republish-artifacts-workflow.test.ts",
+          "line": 44,
+          "kind": "test_contract_reference",
+          "literal": "catalog-five-market-full-rebuild.yml"
+        },
+        {
+          "path": "tests/catalog-republish-artifacts-workflow.test.ts",
+          "line": 55,
+          "kind": "test_contract_reference",
+          "literal": "catalog-five-market-full-rebuild.yml"
+        },
+        {
+          "path": "tests/catalog-republish-artifacts-workflow.test.ts",
+          "line": 93,
+          "kind": "test_contract_reference",
+          "literal": "catalog-five-market-full-rebuild.yml"
+        },
+        {
+          "path": "tests/catalog-single-active-pipeline.test.ts",
+          "line": 47,
+          "kind": "test_contract_reference",
+          "literal": "catalog-five-market-full-rebuild.yml"
+        }
+      ],
+      "activeRunStatus": "not_read_in_this_followup",
+      "remoteDisableAuthorizedByThisMap": false,
+      "scriptedDispatchCallers": [],
+      "scriptedDispatchDependencies": []
+    },
+    {
+      "path": ".github/workflows/catalog-japan-publish-verified-aggregate.yml",
+      "name": "Catalog Japan · publish verified Prestige aggregate",
+      "category": "A_legacy_catalog_workflow",
+      "why": "Публикует Japan из сохранённого Prestige aggregate; техническое обогащение меняет локальный вход, а не справочник энциклопедии.",
+      "deletionDisposition": "remove_yaml_only_as_part_of_replacement",
+      "removalScope": "workflow_yaml_only_not_transitive_scripts_or_data",
+      "currentMode": "conditional_catalog_writer_or_dispatcher",
+      "literalAllJobsFalse": false,
+      "directEvidence": [
+        {
+          "path": ".github/workflows/catalog-japan-publish-verified-aggregate.yml",
+          "line": 129,
+          "literal": "scripts/catalog-live-recovery-publish.mjs"
+        }
+      ],
+      "evidenceGroups": [
+        "single_market_recovery",
+        "identity_helpers_read_protected_data",
+        "legacy_final_persistence_pause"
+      ],
+      "triggers": {
+        "workflow_dispatch": null
+      },
+      "reusableCallers": [],
+      "reusableDependencies": [],
+      "workflowRunDependents": [
+        {
+          "path": ".github/workflows/catalog-current-read-models.yml",
+          "upstreamName": "Catalog Japan · publish verified Prestige aggregate"
+        }
+      ],
+      "literalReverseReferences": [
+        {
+          "path": "tests/catalog-operations.test.ts",
+          "line": 59,
+          "kind": "test_contract_reference",
+          "literal": "catalog-japan-publish-verified-aggregate.yml"
+        },
+        {
+          "path": "tests/catalog-v6-shared-publish-lock.test.ts",
+          "line": 6,
+          "kind": "test_contract_reference",
+          "literal": "catalog-japan-publish-verified-aggregate.yml"
+        }
+      ],
+      "activeRunStatus": "not_read_in_this_followup",
+      "remoteDisableAuthorizedByThisMap": false,
+      "finalPublicationGuard": "At the audited storage source, these recovery scripts omit productionRefreshMarket and cannot pass isCatalogProductionRefreshAllowed; do not infer that their collection, rates/cache or lease effects are absent.",
+      "scriptedDispatchCallers": [],
+      "scriptedDispatchDependencies": []
+    },
+    {
+      "path": ".github/workflows/catalog-live-recovery-6-markets.yml",
+      "name": "Catalog live recovery · 5 non-Japan markets (legacy manual)",
+      "category": "A_legacy_catalog_workflow",
+      "why": "Старый ручной сбор пяти non-Japan рынков с последующей публикацией.",
+      "deletionDisposition": "remove_yaml_only_as_part_of_replacement",
+      "removalScope": "workflow_yaml_only_not_transitive_scripts_or_data",
+      "currentMode": "conditional_catalog_writer_or_dispatcher",
+      "literalAllJobsFalse": false,
+      "directEvidence": [
+        {
+          "path": ".github/workflows/catalog-live-recovery-6-markets.yml",
+          "line": 50,
+          "literal": "scripts/catalog-live-recovery-publish.mjs"
+        }
+      ],
+      "evidenceGroups": [
+        "single_market_recovery",
+        "legacy_final_persistence_pause"
+      ],
+      "triggers": {
+        "workflow_dispatch": null
+      },
+      "reusableCallers": [],
+      "reusableDependencies": [],
+      "workflowRunDependents": [],
+      "literalReverseReferences": [
+        {
+          "path": "tests/catalog-model-year-quota.test.ts",
+          "line": 189,
+          "kind": "test_contract_reference",
+          "literal": "catalog-live-recovery-6-markets.yml"
+        },
+        {
+          "path": "tests/catalog-model-year-quota.test.ts",
+          "line": 204,
+          "kind": "test_contract_reference",
+          "literal": "catalog-live-recovery-6-markets.yml"
+        }
+      ],
+      "activeRunStatus": "not_read_in_this_followup",
+      "remoteDisableAuthorizedByThisMap": false,
+      "finalPublicationGuard": "At the audited storage source, these recovery scripts omit productionRefreshMarket and cannot pass isCatalogProductionRefreshAllowed; do not infer that their collection, rates/cache or lease effects are absent.",
+      "scriptedDispatchCallers": [],
+      "scriptedDispatchDependencies": []
+    },
+    {
+      "path": ".github/workflows/catalog-live-recovery-europe-otomoto.yml",
+      "name": "Catalog live recovery · Europe OTOMOTO",
+      "category": "A_legacy_catalog_workflow",
+      "why": "Старый ручной OTOMOTO-сбор и batch publication Европы.",
+      "deletionDisposition": "remove_yaml_only_as_part_of_replacement",
+      "removalScope": "workflow_yaml_only_not_transitive_scripts_or_data",
+      "currentMode": "conditional_catalog_writer_or_dispatcher",
+      "literalAllJobsFalse": false,
+      "directEvidence": [
+        {
+          "path": ".github/workflows/catalog-live-recovery-europe-otomoto.yml",
+          "line": 45,
+          "literal": "scripts/catalog-live-recovery-publish-batch.mjs"
+        }
+      ],
+      "evidenceGroups": [
+        "batch_recovery",
+        "legacy_final_persistence_pause"
+      ],
+      "triggers": {
+        "workflow_dispatch": null
+      },
+      "reusableCallers": [],
+      "reusableDependencies": [],
+      "workflowRunDependents": [],
+      "literalReverseReferences": [],
+      "activeRunStatus": "not_read_in_this_followup",
+      "remoteDisableAuthorizedByThisMap": false,
+      "finalPublicationGuard": "At the audited storage source, these recovery scripts omit productionRefreshMarket and cannot pass isCatalogProductionRefreshAllowed; do not infer that their collection, rates/cache or lease effects are absent.",
+      "scriptedDispatchCallers": [],
+      "scriptedDispatchDependencies": []
+    },
+    {
+      "path": ".github/workflows/catalog-live-recovery-georgia-yandex-v2.yml",
+      "name": "Catalog live recovery · Georgia via Yandex v2",
+      "category": "A_legacy_catalog_workflow",
+      "why": "Собирает Georgia через bridge; push или apply=true достигает настоящего publisher, несмотря на отдельный dry-run job.",
+      "deletionDisposition": "remove_yaml_only_as_part_of_replacement",
+      "removalScope": "workflow_yaml_only_not_transitive_scripts_or_data",
+      "currentMode": "conditional_catalog_writer_or_dispatcher",
+      "literalAllJobsFalse": false,
+      "directEvidence": [
+        {
+          "path": ".github/workflows/catalog-live-recovery-georgia-yandex-v2.yml",
+          "line": 48,
+          "literal": "scripts/catalog-live-recovery-publish-batch.mjs"
+        }
+      ],
+      "evidenceGroups": [
+        "batch_recovery",
+        "legacy_final_persistence_pause"
+      ],
+      "triggers": {
+        "workflow_dispatch": {
+          "inputs": {
+            "apply": {
+              "description": "Persist a new full catalog generation after the strict dry-run",
+              "required": true,
+              "default": false,
+              "type": "boolean"
+            }
+          }
+        },
+        "push": {
+          "branches": [
+            "main"
+          ],
+          "paths": [
+            ".github/market-runs/georgia-yandex"
+          ]
+        }
+      },
+      "reusableCallers": [],
+      "reusableDependencies": [],
+      "workflowRunDependents": [],
+      "literalReverseReferences": [
+        {
+          "path": "tests/catalog-georgia-yandex-v2-workflow.test.ts",
+          "line": 5,
+          "kind": "test_contract_reference",
+          "literal": "catalog-live-recovery-georgia-yandex-v2.yml"
+        },
+        {
+          "path": "tests/catalog-model-year-quota.test.ts",
+          "line": 199,
+          "kind": "test_contract_reference",
+          "literal": "catalog-live-recovery-georgia-yandex-v2.yml"
+        },
+        {
+          "path": "tests/catalog-v2-market-recovery.test.ts",
+          "line": 13,
+          "kind": "test_contract_reference",
+          "literal": "catalog-live-recovery-georgia-yandex-v2.yml"
+        }
+      ],
+      "activeRunStatus": "not_read_in_this_followup",
+      "remoteDisableAuthorizedByThisMap": false,
+      "whyNotDryRun": "A genuine apply/publication branch remains callable; default false or a separate read-only plan does not make the workflow inert.",
+      "finalPublicationGuard": "At the audited storage source, these recovery scripts omit productionRefreshMarket and cannot pass isCatalogProductionRefreshAllowed; do not infer that their collection, rates/cache or lease effects are absent.",
+      "scriptedDispatchCallers": [],
+      "scriptedDispatchDependencies": []
+    },
+    {
+      "path": ".github/workflows/catalog-live-recovery-georgia-yandex.yml",
+      "name": "Catalog live recovery · Georgia via Yandex",
+      "category": "A_legacy_catalog_workflow",
+      "why": "Ручной Georgia bridge pipeline; apply=true включает publisher. Значение по умолчанию false не делает весь workflow dry-run.",
+      "deletionDisposition": "remove_yaml_only_as_part_of_replacement",
+      "removalScope": "workflow_yaml_only_not_transitive_scripts_or_data",
+      "currentMode": "conditional_catalog_writer_or_dispatcher",
+      "literalAllJobsFalse": false,
+      "directEvidence": [
+        {
+          "path": ".github/workflows/catalog-live-recovery-georgia-yandex.yml",
+          "line": 45,
+          "literal": "scripts/catalog-live-recovery-publish-batch.mjs"
+        }
+      ],
+      "evidenceGroups": [
+        "batch_recovery",
+        "legacy_final_persistence_pause"
+      ],
+      "triggers": {
+        "workflow_dispatch": {
+          "inputs": {
+            "apply": {
+              "description": "Persist a new full catalog generation after the strict dry-run",
+              "required": true,
+              "default": false,
+              "type": "boolean"
+            }
+          }
+        }
+      },
+      "reusableCallers": [],
+      "reusableDependencies": [],
+      "workflowRunDependents": [],
+      "literalReverseReferences": [
+        {
+          "path": "tests/catalog-georgia-yandex-recovery-workflow.test.ts",
+          "line": 5,
+          "kind": "test_contract_reference",
+          "literal": "catalog-live-recovery-georgia-yandex.yml"
+        }
+      ],
+      "activeRunStatus": "not_read_in_this_followup",
+      "remoteDisableAuthorizedByThisMap": false,
+      "whyNotDryRun": "A genuine apply/publication branch remains callable; default false or a separate read-only plan does not make the workflow inert.",
+      "finalPublicationGuard": "At the audited storage source, these recovery scripts omit productionRefreshMarket and cannot pass isCatalogProductionRefreshAllowed; do not infer that their collection, rates/cache or lease effects are absent.",
+      "scriptedDispatchCallers": [],
+      "scriptedDispatchDependencies": []
+    },
+    {
+      "path": ".github/workflows/catalog-live-recovery-japan-from-prestige.yml",
+      "name": "Catalog live recovery · Japan from Prestige",
+      "category": "A_legacy_catalog_workflow",
+      "why": "Преобразует сохранённый Prestige artifact и пытается публиковать Japan; имеются два старых внешних workflow-dispatch caller.",
+      "deletionDisposition": "remove_yaml_only_as_part_of_replacement",
+      "removalScope": "workflow_yaml_only_not_transitive_scripts_or_data",
+      "currentMode": "conditional_catalog_writer_or_dispatcher",
+      "literalAllJobsFalse": false,
+      "directEvidence": [
+        {
+          "path": ".github/workflows/catalog-live-recovery-japan-from-prestige.yml",
+          "line": 54,
+          "literal": "scripts/catalog-live-recovery-publish.mjs"
+        }
+      ],
+      "evidenceGroups": [
+        "single_market_recovery",
+        "legacy_final_persistence_pause"
+      ],
+      "triggers": {
+        "workflow_dispatch": {
+          "inputs": {
+            "source_run_id": {
+              "description": "Prestige repair workflow run ID",
+              "required": true
+            }
+          }
+        }
+      },
+      "reusableCallers": [],
+      "reusableDependencies": [],
+      "workflowRunDependents": [],
+      "literalReverseReferences": [
+        {
+          "path": ".github/operations/home-ui-activation-20261123/unassigned-runs-20261123.json",
+          "line": 129,
+          "kind": "script_reference",
+          "literal": "catalog-live-recovery-japan-from-prestige.yml"
+        },
+        {
+          "path": ".github/operations/home-ui-activation-20261123/unassigned-runs-20261123.json",
+          "line": 134,
+          "kind": "script_reference",
+          "literal": "catalog-live-recovery-japan-from-prestige.yml"
+        },
+        {
+          "path": ".github/patches/apply-japan-official-chassis-production.py",
+          "line": 20,
+          "kind": "documentation_reference",
+          "literal": "catalog-live-recovery-japan-from-prestige.yml"
+        },
+        {
+          "path": ".github/workflows/oneshot-deploy-exact-power-20260811.yml",
+          "line": 19,
+          "kind": "workflow_source_reference",
+          "literal": "catalog-live-recovery-japan-from-prestige.yml"
+        },
+        {
+          "path": ".github/workflows/oneshot-dispatch-japan-prestige-live-20260810.yml",
+          "line": 22,
+          "kind": "workflow_source_reference",
+          "literal": "catalog-live-recovery-japan-from-prestige.yml"
+        },
+        {
+          "path": ".github/workflows/oneshot-dispatch-japan-priority.yml",
+          "line": 25,
+          "kind": "workflow_source_reference",
+          "literal": "catalog-live-recovery-japan-from-prestige.yml"
+        },
+        {
+          "path": "docs/operations/2026-11-16-raw-writer-entrypoint-audit.md",
+          "line": 116,
+          "kind": "documentation_reference",
+          "literal": "catalog-live-recovery-japan-from-prestige.yml"
+        }
+      ],
+      "activeRunStatus": "not_read_in_this_followup",
+      "remoteDisableAuthorizedByThisMap": false,
+      "finalPublicationGuard": "At the audited storage source, these recovery scripts omit productionRefreshMarket and cannot pass isCatalogProductionRefreshAllowed; do not infer that their collection, rates/cache or lease effects are absent.",
+      "scriptedDispatchCallers": [
+        {
+          "from": ".github/workflows/oneshot-dispatch-japan-prestige-live-20260810.yml",
+          "to": ".github/workflows/catalog-live-recovery-japan-from-prestige.yml",
+          "kind": "workflow_dispatch",
+          "evidence": {
+            "path": ".github/workflows/oneshot-dispatch-japan-prestige-live-20260810.yml",
+            "line": 22,
+            "literal": "gh workflow run catalog-live-recovery-japan-from-prestige.yml"
+          }
+        },
+        {
+          "from": ".github/workflows/oneshot-dispatch-japan-priority.yml",
+          "to": ".github/workflows/catalog-live-recovery-japan-from-prestige.yml",
+          "kind": "workflow_dispatch",
+          "evidence": {
+            "path": ".github/workflows/oneshot-dispatch-japan-priority.yml",
+            "line": 25,
+            "literal": "catalog-live-recovery-japan-from-prestige.yml/dispatches"
+          }
+        }
+      ],
+      "scriptedDispatchDependencies": []
+    },
+    {
+      "path": ".github/workflows/catalog-live-recovery-japan-now.yml",
+      "name": "Catalog live recovery · Japan now",
+      "category": "A_legacy_catalog_workflow",
+      "why": "Старый ручной Japan publisher из выбранных shard artifacts.",
+      "deletionDisposition": "remove_yaml_only_as_part_of_replacement",
+      "removalScope": "workflow_yaml_only_not_transitive_scripts_or_data",
+      "currentMode": "conditional_catalog_writer_or_dispatcher",
+      "literalAllJobsFalse": false,
+      "directEvidence": [
+        {
+          "path": ".github/workflows/catalog-live-recovery-japan-now.yml",
+          "line": 51,
+          "literal": "scripts/catalog-live-recovery-publish.mjs"
+        }
+      ],
+      "evidenceGroups": [
+        "single_market_recovery",
+        "legacy_final_persistence_pause"
+      ],
+      "triggers": {
+        "workflow_dispatch": {
+          "inputs": {
+            "source_run_id": {
+              "description": "Prestige source collection run ID",
+              "required": true,
+              "default": "31261509359"
+            }
+          }
+        }
+      },
+      "reusableCallers": [],
+      "reusableDependencies": [],
+      "workflowRunDependents": [],
+      "literalReverseReferences": [],
+      "activeRunStatus": "not_read_in_this_followup",
+      "remoteDisableAuthorizedByThisMap": false,
+      "finalPublicationGuard": "At the audited storage source, these recovery scripts omit productionRefreshMarket and cannot pass isCatalogProductionRefreshAllowed; do not infer that their collection, rates/cache or lease effects are absent.",
+      "scriptedDispatchCallers": [],
+      "scriptedDispatchDependencies": []
+    },
+    {
+      "path": ".github/workflows/catalog-live-recovery-uae-georgia-direct.yml",
+      "name": "Catalog live recovery · UAE + Georgia direct",
+      "category": "A_legacy_catalog_workflow",
+      "why": "Самостоятельная старая цепочка прямого сбора и совместной batch publication UAE/Georgia.",
+      "deletionDisposition": "remove_yaml_only_as_part_of_replacement",
+      "removalScope": "workflow_yaml_only_not_transitive_scripts_or_data",
+      "currentMode": "conditional_catalog_writer_or_dispatcher",
+      "literalAllJobsFalse": false,
+      "directEvidence": [
+        {
+          "path": ".github/workflows/catalog-live-recovery-uae-georgia-direct.yml",
+          "line": 50,
+          "literal": "scripts/catalog-live-recovery-publish-batch.mjs"
+        }
+      ],
+      "evidenceGroups": [
+        "batch_recovery",
+        "legacy_final_persistence_pause"
+      ],
+      "triggers": {
+        "workflow_dispatch": null
+      },
+      "reusableCallers": [],
+      "reusableDependencies": [],
+      "workflowRunDependents": [],
+      "literalReverseReferences": [
+        {
+          "path": "tests/catalog-direct-recovery.test.ts",
+          "line": 6,
+          "kind": "test_contract_reference",
+          "literal": "catalog-live-recovery-uae-georgia-direct.yml"
+        },
+        {
+          "path": "tests/catalog-global-model-cap.test.ts",
+          "line": 17,
+          "kind": "test_contract_reference",
+          "literal": "catalog-live-recovery-uae-georgia-direct.yml"
+        },
+        {
+          "path": "tests/catalog-model-year-quota.test.ts",
+          "line": 190,
+          "kind": "test_contract_reference",
+          "literal": "catalog-live-recovery-uae-georgia-direct.yml"
+        }
+      ],
+      "activeRunStatus": "not_read_in_this_followup",
+      "remoteDisableAuthorizedByThisMap": false,
+      "finalPublicationGuard": "At the audited storage source, these recovery scripts omit productionRefreshMarket and cannot pass isCatalogProductionRefreshAllowed; do not infer that their collection, rates/cache or lease effects are absent.",
+      "scriptedDispatchCallers": [],
+      "scriptedDispatchDependencies": []
+    },
+    {
+      "path": ".github/workflows/catalog-power-mix-rebalance.yml",
+      "name": "Rebalance Europe public inventory to 80 percent low power",
+      "category": "A_legacy_catalog_workflow",
+      "why": "Перепубликует существующую Europe для прежней квоты мощности; источник не собирает.",
+      "deletionDisposition": "remove_yaml_only_as_part_of_replacement",
+      "removalScope": "workflow_yaml_only_not_transitive_scripts_or_data",
+      "currentMode": "conditional_catalog_writer_or_dispatcher",
+      "literalAllJobsFalse": false,
+      "directEvidence": [
+        {
+          "path": ".github/workflows/catalog-power-mix-rebalance.yml",
+          "line": 54,
+          "literal": "scripts/catalog-publish-market.mjs"
+        }
+      ],
+      "evidenceGroups": [
+        "market_publisher"
+      ],
+      "triggers": {
+        "push": {
+          "branches": [
+            "main"
+          ],
+          "paths": [
+            ".github/market-runs/power-mix-rebalance.json"
+          ]
+        }
+      },
+      "reusableCallers": [],
+      "reusableDependencies": [],
+      "workflowRunDependents": [],
+      "literalReverseReferences": [],
+      "activeRunStatus": "not_read_in_this_followup",
+      "remoteDisableAuthorizedByThisMap": false,
+      "scriptedDispatchCallers": [],
+      "scriptedDispatchDependencies": []
+    },
+    {
+      "path": ".github/workflows/catalog-republish-market-artifacts.yml",
+      "name": "Catalog V3 · republish collected market artifacts",
+      "category": "A_legacy_catalog_workflow",
+      "why": "Переиздаёт выбранные market artifacts. Identity/knowledge helpers читают справочник и переписывают локальные inputs.",
+      "deletionDisposition": "remove_yaml_only_as_part_of_replacement",
+      "removalScope": "workflow_yaml_only_not_transitive_scripts_or_data",
+      "currentMode": "conditional_catalog_writer_or_dispatcher",
+      "literalAllJobsFalse": false,
+      "directEvidence": [
+        {
+          "path": ".github/workflows/catalog-republish-market-artifacts.yml",
+          "line": 135,
+          "literal": "scripts/catalog-publish-market.mjs"
+        }
+      ],
+      "evidenceGroups": [
+        "market_publisher",
+        "identity_helpers_read_protected_data"
+      ],
+      "triggers": {
+        "push": {
+          "branches": [
+            "main"
+          ],
+          "paths": [
+            ".github/market-runs/republish-artifacts"
+          ]
+        },
+        "workflow_dispatch": {
+          "inputs": {
+            "market": {
+              "description": "Market to publish",
+              "required": true,
+              "type": "choice",
+              "options": [
+                "korea",
+                "china",
+                "japan",
+                "uae",
+                "europe",
+                "georgia"
+              ]
+            },
+            "source_run_id": {
+              "description": "Completed Catalog V3 run containing five shard artifacts",
+              "required": true,
+              "type": "string"
+            }
+          }
+        }
+      },
+      "reusableCallers": [],
+      "reusableDependencies": [],
+      "workflowRunDependents": [],
+      "literalReverseReferences": [
+        {
+          "path": "tests/catalog-republish-artifacts-workflow.test.ts",
+          "line": 13,
+          "kind": "test_contract_reference",
+          "literal": "catalog-republish-market-artifacts.yml"
+        }
+      ],
+      "activeRunStatus": "not_read_in_this_followup",
+      "remoteDisableAuthorizedByThisMap": false,
+      "scriptedDispatchCallers": [],
+      "scriptedDispatchDependencies": []
+    },
+    {
+      "path": ".github/workflows/catalog-six-market-quality-rebuild.yml",
+      "name": "Catalog · Six-market quality rebuild",
+      "category": "A_legacy_catalog_workflow",
+      "why": "Старый branch-push pipeline intake → publisher; не относится к текущему штатному расписанию.",
+      "deletionDisposition": "remove_yaml_only_as_part_of_replacement",
+      "removalScope": "workflow_yaml_only_not_transitive_scripts_or_data",
+      "currentMode": "conditional_catalog_writer_or_dispatcher",
+      "literalAllJobsFalse": false,
+      "directEvidence": [
+        {
+          "path": ".github/workflows/catalog-six-market-quality-rebuild.yml",
+          "line": 136,
+          "literal": "scripts/catalog-publish-market.mjs"
+        }
+      ],
+      "evidenceGroups": [
+        "market_publisher"
+      ],
+      "triggers": {
+        "push": {
+          "branches": [
+            "fix/encar-inspection-engine-20260909"
+          ],
+          "paths": [
+            ".github/workflows/catalog-six-market-quality-rebuild.yml"
+          ]
+        }
+      },
+      "reusableCallers": [],
+      "reusableDependencies": [],
+      "workflowRunDependents": [],
+      "literalReverseReferences": [],
+      "activeRunStatus": "not_read_in_this_followup",
+      "remoteDisableAuthorizedByThisMap": false,
+      "scriptedDispatchCallers": [],
+      "scriptedDispatchDependencies": []
+    },
+    {
+      "path": ".github/workflows/catalog-stitch-preserved-markets.yml",
+      "name": "Catalog stitch · restore verified preserved markets",
+      "category": "A_legacy_catalog_workflow",
+      "why": "Старый отдельный восстановитель catalog generation и manifest CAS; координационный guard зависит от состояния storage.",
+      "deletionDisposition": "remove_yaml_only_as_part_of_replacement",
+      "removalScope": "workflow_yaml_only_not_transitive_scripts_or_data",
+      "currentMode": "conditional_catalog_writer_or_dispatcher",
+      "literalAllJobsFalse": false,
+      "directEvidence": [
+        {
+          "path": ".github/workflows/catalog-stitch-preserved-markets.yml",
+          "line": 11,
+          "literal": "scripts/catalog-stitch-verified-markets.mjs"
+        }
+      ],
+      "evidenceGroups": [
+        "stitch"
+      ],
+      "triggers": {
+        "workflow_dispatch": null,
+        "push": {
+          "branches": [
+            "main"
+          ],
+          "paths": [
+            ".github/workflows/catalog-stitch-preserved-markets.yml",
+            "scripts/catalog-stitch-verified-markets.mjs"
+          ]
+        }
+      },
+      "reusableCallers": [],
+      "reusableDependencies": [],
+      "workflowRunDependents": [],
+      "literalReverseReferences": [
+        {
+          "path": "docs/operations/2026-11-16-raw-writer-entrypoint-audit.md",
+          "line": 42,
+          "kind": "documentation_reference",
+          "literal": "catalog-stitch-preserved-markets.yml"
+        }
+      ],
+      "activeRunStatus": "not_read_in_this_followup",
+      "remoteDisableAuthorizedByThisMap": false,
+      "scriptedDispatchCallers": [],
+      "scriptedDispatchDependencies": []
+    },
+    {
+      "path": ".github/workflows/catalog-uae-georgia-republish-stable.yml",
+      "name": "Catalog UAE Georgia stable republish",
+      "category": "A_legacy_catalog_workflow",
+      "why": "Старый сохранённый UAE/Georgia batch republisher; публичная запись отдельно блокируется текущей storage policy.",
+      "deletionDisposition": "remove_yaml_only_as_part_of_replacement",
+      "removalScope": "workflow_yaml_only_not_transitive_scripts_or_data",
+      "currentMode": "conditional_catalog_writer_or_dispatcher",
+      "literalAllJobsFalse": false,
+      "directEvidence": [
+        {
+          "path": ".github/workflows/catalog-uae-georgia-republish-stable.yml",
+          "line": 11,
+          "literal": "scripts/catalog-live-recovery-publish-batch-stable.mjs"
+        }
+      ],
+      "evidenceGroups": [
+        "stable_batch_recovery",
+        "legacy_final_persistence_pause"
+      ],
+      "triggers": {
+        "workflow_dispatch": null,
+        "push": {
+          "branches": [
+            "main"
+          ],
+          "paths": [
+            ".github/workflows/catalog-uae-georgia-republish-stable.yml",
+            "scripts/catalog-live-recovery-publish-batch-stable.mjs"
+          ]
+        }
+      },
+      "reusableCallers": [],
+      "reusableDependencies": [],
+      "workflowRunDependents": [],
+      "literalReverseReferences": [],
+      "activeRunStatus": "not_read_in_this_followup",
+      "remoteDisableAuthorizedByThisMap": false,
+      "finalPublicationGuard": "At the audited storage source, these recovery scripts omit productionRefreshMarket and cannot pass isCatalogProductionRefreshAllowed; do not infer that their collection, rates/cache or lease effects are absent.",
+      "scriptedDispatchCallers": [],
+      "scriptedDispatchDependencies": []
+    },
+    {
+      "path": ".github/workflows/catalog-uae-publish-preserved-shards.yml",
+      "name": "Catalog UAE · publish preserved source shards",
+      "category": "A_legacy_catalog_workflow",
+      "why": "Старый самостоятельный UAE publisher из сохранённых source shards.",
+      "deletionDisposition": "remove_yaml_only_as_part_of_replacement",
+      "removalScope": "workflow_yaml_only_not_transitive_scripts_or_data",
+      "currentMode": "conditional_catalog_writer_or_dispatcher",
+      "literalAllJobsFalse": false,
+      "directEvidence": [
+        {
+          "path": ".github/workflows/catalog-uae-publish-preserved-shards.yml",
+          "line": 107,
+          "literal": "scripts/catalog-live-recovery-publish.mjs"
+        }
+      ],
+      "evidenceGroups": [
+        "single_market_recovery",
+        "legacy_final_persistence_pause"
+      ],
+      "triggers": {
+        "workflow_dispatch": null,
+        "push": {
+          "branches": [
+            "main"
+          ],
+          "paths": [
+            ".github/workflows/catalog-uae-publish-preserved-shards.yml",
+            ".github/market-runs/publish-preserved-uae-shards"
+          ]
+        }
+      },
+      "reusableCallers": [],
+      "reusableDependencies": [],
+      "workflowRunDependents": [
+        {
+          "path": ".github/workflows/catalog-current-read-models.yml",
+          "upstreamName": "Catalog UAE · publish preserved source shards"
+        }
+      ],
+      "literalReverseReferences": [],
+      "activeRunStatus": "not_read_in_this_followup",
+      "remoteDisableAuthorizedByThisMap": false,
+      "finalPublicationGuard": "At the audited storage source, these recovery scripts omit productionRefreshMarket and cannot pass isCatalogProductionRefreshAllowed; do not infer that their collection, rates/cache or lease effects are absent.",
+      "scriptedDispatchCallers": [],
+      "scriptedDispatchDependencies": []
+    },
+    {
+      "path": ".github/workflows/catalog-v2-china.yml",
+      "name": "Catalog V3 · China · 10k",
+      "category": "C_blocked_at_audited_revision",
+      "why": "Старый V3 orchestrator; ранний guard требует разрешённый рынок, но в проверенном source WRITES_PAUSED=true и REFRESH_MARKETS=[]. Collector/publisher не запускается на этой ревизии.",
+      "deletionDisposition": "remove_obsolete_yaml_with_its_legacy_callers",
+      "removalScope": "workflow_yaml_only_not_transitive_scripts_or_data",
+      "currentMode": "early_source_policy_exit_before_collection",
+      "literalAllJobsFalse": false,
+      "directEvidence": [
+        {
+          "path": ".github/workflows/catalog-v2-china.yml",
+          "line": 17,
+          "literal": "uses: ./.github/workflows/catalog-v3-market-10k-reusable.yml"
+        }
+      ],
+      "evidenceGroups": [
+        "v3_early_pause",
+        "legacy_final_persistence_pause"
+      ],
+      "triggers": {
+        "workflow_dispatch": null,
+        "push": {
+          "branches": [
+            "main"
+          ],
+          "paths": [
+            ".github/market-runs/china"
+          ]
+        }
+      },
+      "reusableCallers": [],
+      "reusableDependencies": [
+        {
+          "path": ".github/workflows/catalog-v3-market-10k-reusable.yml",
+          "job": "china",
+          "if": null
+        }
+      ],
+      "workflowRunDependents": [],
+      "literalReverseReferences": [
+        {
+          "path": ".github/operations/china-daily-source-collect-v1/worker-overlay.patch",
+          "line": 749,
+          "kind": "script_reference",
+          "literal": "catalog-v2-china.yml"
+        },
+        {
+          "path": ".github/operations/china-v4-continuation-chain/worker-overlay.patch",
+          "line": 749,
+          "kind": "script_reference",
+          "literal": "catalog-v2-china.yml"
+        },
+        {
+          "path": ".github/operations/china-v4-continuation-chain/worker-overlay.patch",
+          "line": 1206,
+          "kind": "script_reference",
+          "literal": "catalog-v2-china.yml"
+        },
+        {
+          "path": ".github/operations/china-v4-continuation-linked/worker-overlay.patch",
+          "line": 749,
+          "kind": "script_reference",
+          "literal": "catalog-v2-china.yml"
+        },
+        {
+          "path": ".github/operations/china-v4-continuation-linked/worker-overlay.patch",
+          "line": 1206,
+          "kind": "script_reference",
+          "literal": "catalog-v2-china.yml"
+        },
+        {
+          "path": ".github/operations/china-v4-continuation-once/worker-overlay.patch",
+          "line": 749,
+          "kind": "script_reference",
+          "literal": "catalog-v2-china.yml"
+        },
+        {
+          "path": ".github/operations/china-v4-continuation-once/worker-overlay.patch",
+          "line": 1206,
+          "kind": "script_reference",
+          "literal": "catalog-v2-china.yml"
+        },
+        {
+          "path": ".github/operations/china-v4-continuation-resume-first/worker-overlay.patch",
+          "line": 749,
+          "kind": "script_reference",
+          "literal": "catalog-v2-china.yml"
+        },
+        {
+          "path": ".github/operations/china-v4-continuation-resume-first/worker-overlay.patch",
+          "line": 1206,
+          "kind": "script_reference",
+          "literal": "catalog-v2-china.yml"
+        }
+      ],
+      "activeRunStatus": "not_read_in_this_followup",
+      "remoteDisableAuthorizedByThisMap": false,
+      "scriptedDispatchCallers": [],
+      "scriptedDispatchDependencies": []
+    },
+    {
+      "path": ".github/workflows/catalog-v2-europe.yml",
+      "name": "Catalog V3 · Europe · 10k",
+      "category": "C_blocked_at_audited_revision",
+      "why": "Старый V3 orchestrator; ранний guard требует разрешённый рынок, но в проверенном source WRITES_PAUSED=true и REFRESH_MARKETS=[]. Collector/publisher не запускается на этой ревизии.",
+      "deletionDisposition": "remove_obsolete_yaml_with_its_legacy_callers",
+      "removalScope": "workflow_yaml_only_not_transitive_scripts_or_data",
+      "currentMode": "early_source_policy_exit_before_collection",
+      "literalAllJobsFalse": false,
+      "directEvidence": [
+        {
+          "path": ".github/workflows/catalog-v2-europe.yml",
+          "line": 17,
+          "literal": "uses: ./.github/workflows/catalog-v3-market-10k-reusable.yml"
+        }
+      ],
+      "evidenceGroups": [
+        "v3_early_pause",
+        "legacy_final_persistence_pause"
+      ],
+      "triggers": {
+        "workflow_dispatch": null,
+        "push": {
+          "branches": [
+            "main"
+          ],
+          "paths": [
+            ".github/market-runs/europe"
+          ]
+        }
+      },
+      "reusableCallers": [],
+      "reusableDependencies": [
+        {
+          "path": ".github/workflows/catalog-v3-market-10k-reusable.yml",
+          "job": "europe",
+          "if": null
+        }
+      ],
+      "workflowRunDependents": [],
+      "literalReverseReferences": [],
+      "activeRunStatus": "not_read_in_this_followup",
+      "remoteDisableAuthorizedByThisMap": false,
+      "scriptedDispatchCallers": [],
+      "scriptedDispatchDependencies": []
+    },
+    {
+      "path": ".github/workflows/catalog-v2-georgia.yml",
+      "name": "Catalog V3 · Georgia · 10k",
+      "category": "C_blocked_at_audited_revision",
+      "why": "Старый V3 orchestrator; ранний guard требует разрешённый рынок, но в проверенном source WRITES_PAUSED=true и REFRESH_MARKETS=[]. Collector/publisher не запускается на этой ревизии.",
+      "deletionDisposition": "remove_obsolete_yaml_with_its_legacy_callers",
+      "removalScope": "workflow_yaml_only_not_transitive_scripts_or_data",
+      "currentMode": "early_source_policy_exit_before_collection",
+      "literalAllJobsFalse": false,
+      "directEvidence": [
+        {
+          "path": ".github/workflows/catalog-v2-georgia.yml",
+          "line": 17,
+          "literal": "uses: ./.github/workflows/catalog-v3-market-10k-reusable.yml"
+        }
+      ],
+      "evidenceGroups": [
+        "v3_early_pause",
+        "legacy_final_persistence_pause"
+      ],
+      "triggers": {
+        "workflow_dispatch": null,
+        "push": {
+          "branches": [
+            "main"
+          ],
+          "paths": [
+            ".github/market-runs/georgia"
+          ]
+        }
+      },
+      "reusableCallers": [],
+      "reusableDependencies": [
+        {
+          "path": ".github/workflows/catalog-v3-market-10k-reusable.yml",
+          "job": "georgia",
+          "if": null
+        }
+      ],
+      "workflowRunDependents": [],
+      "literalReverseReferences": [],
+      "activeRunStatus": "not_read_in_this_followup",
+      "remoteDisableAuthorizedByThisMap": false,
+      "scriptedDispatchCallers": [],
+      "scriptedDispatchDependencies": []
+    },
+    {
+      "path": ".github/workflows/catalog-v2-japan.yml",
+      "name": "Catalog V3 · Japan · 30k",
+      "category": "C_blocked_at_audited_revision",
+      "why": "Старый V3 orchestrator; ранний guard требует разрешённый рынок, но в проверенном source WRITES_PAUSED=true и REFRESH_MARKETS=[]. Collector/publisher не запускается на этой ревизии.",
+      "deletionDisposition": "remove_obsolete_yaml_with_its_legacy_callers",
+      "removalScope": "workflow_yaml_only_not_transitive_scripts_or_data",
+      "currentMode": "early_source_policy_exit_before_collection",
+      "literalAllJobsFalse": false,
+      "directEvidence": [
+        {
+          "path": ".github/workflows/catalog-v2-japan.yml",
+          "line": 18,
+          "literal": "uses: ./.github/workflows/catalog-v3-market-10k-reusable.yml"
+        }
+      ],
+      "evidenceGroups": [
+        "v3_early_pause",
+        "legacy_final_persistence_pause"
+      ],
+      "triggers": {
+        "workflow_dispatch": null,
+        "push": {
+          "branches": [
+            "main"
+          ],
+          "paths": [
+            ".github/market-runs/japan"
+          ]
+        }
+      },
+      "reusableCallers": [],
+      "reusableDependencies": [
+        {
+          "path": ".github/workflows/catalog-v3-market-10k-reusable.yml",
+          "job": "japan",
+          "if": null
+        }
+      ],
+      "workflowRunDependents": [],
+      "literalReverseReferences": [
+        {
+          "path": ".github/workflows/catalog-v6-prestige-up-to-30k.yml",
+          "line": 10,
+          "kind": "workflow_source_reference",
+          "literal": "catalog-v2-japan.yml"
+        },
+        {
+          "path": "tests/catalog-probe-source-shard.test.ts",
+          "line": 19,
+          "kind": "test_contract_reference",
+          "literal": "catalog-v2-japan.yml"
+        },
+        {
+          "path": "tests/catalog-single-active-pipeline.test.ts",
+          "line": 97,
+          "kind": "test_contract_reference",
+          "literal": "catalog-v2-japan.yml"
+        },
+        {
+          "path": "tests/catalog-source-page-partition.test.ts",
+          "line": 53,
+          "kind": "test_contract_reference",
+          "literal": "catalog-v2-japan.yml"
+        }
+      ],
+      "activeRunStatus": "not_read_in_this_followup",
+      "remoteDisableAuthorizedByThisMap": false,
+      "scriptedDispatchCallers": [],
+      "scriptedDispatchDependencies": []
+    },
+    {
+      "path": ".github/workflows/catalog-v2-korea-smoke10.yml",
+      "name": "Catalog V2 · Korea · Smoke10",
+      "category": "A_legacy_catalog_workflow",
+      "why": "Caller настоящего Smoke10 collector/publisher; название smoke не означает dry-run.",
+      "deletionDisposition": "remove_yaml_only_as_part_of_replacement",
+      "removalScope": "workflow_yaml_only_not_transitive_scripts_or_data",
+      "currentMode": "conditional_catalog_writer_or_dispatcher",
+      "literalAllJobsFalse": false,
+      "directEvidence": [
+        {
+          "path": ".github/workflows/catalog-v2-korea-smoke10.yml",
+          "line": 13,
+          "literal": "uses: ./.github/workflows/catalog-v2-smoke10-reusable.yml"
+        }
+      ],
+      "evidenceGroups": [],
+      "triggers": {
+        "workflow_dispatch": null
+      },
+      "reusableCallers": [],
+      "reusableDependencies": [
+        {
+          "path": ".github/workflows/catalog-v2-smoke10-reusable.yml",
+          "job": "korea-smoke10",
+          "if": null
+        }
+      ],
+      "workflowRunDependents": [],
+      "literalReverseReferences": [],
+      "activeRunStatus": "not_read_in_this_followup",
+      "remoteDisableAuthorizedByThisMap": false,
+      "whyNotDryRun": "Smoke10 invokes the real collector and publisher; cursor/candidate/lease effects may precede publication rejection.",
+      "scriptedDispatchCallers": [],
+      "scriptedDispatchDependencies": []
+    },
+    {
+      "path": ".github/workflows/catalog-v2-korea.yml",
+      "name": "Catalog V3 · Korea · 10k",
+      "category": "C_blocked_at_audited_revision",
+      "why": "Старый V3 orchestrator; ранний guard требует разрешённый рынок, но в проверенном source WRITES_PAUSED=true и REFRESH_MARKETS=[]. Collector/publisher не запускается на этой ревизии.",
+      "deletionDisposition": "remove_obsolete_yaml_with_its_legacy_callers",
+      "removalScope": "workflow_yaml_only_not_transitive_scripts_or_data",
+      "currentMode": "early_source_policy_exit_before_collection",
+      "literalAllJobsFalse": false,
+      "directEvidence": [
+        {
+          "path": ".github/workflows/catalog-v2-korea.yml",
+          "line": 17,
+          "literal": "uses: ./.github/workflows/catalog-v3-market-10k-reusable.yml"
+        }
+      ],
+      "evidenceGroups": [
+        "v3_early_pause",
+        "legacy_final_persistence_pause"
+      ],
+      "triggers": {
+        "workflow_dispatch": null,
+        "push": {
+          "branches": [
+            "main"
+          ],
+          "paths": [
+            ".github/market-runs/korea"
+          ]
+        }
+      },
+      "reusableCallers": [],
+      "reusableDependencies": [
+        {
+          "path": ".github/workflows/catalog-v3-market-10k-reusable.yml",
+          "job": "korea",
+          "if": null
+        }
+      ],
+      "workflowRunDependents": [],
+      "literalReverseReferences": [
+        {
+          "path": "tests/catalog-publication-gate.test.ts",
+          "line": 7,
+          "kind": "test_contract_reference",
+          "literal": "catalog-v2-korea.yml"
+        }
+      ],
+      "activeRunStatus": "not_read_in_this_followup",
+      "remoteDisableAuthorizedByThisMap": false,
+      "scriptedDispatchCallers": [],
+      "scriptedDispatchDependencies": []
+    },
+    {
+      "path": ".github/workflows/catalog-v2-market-recovery-reusable.yml",
+      "name": "Catalog V2 market recovery reusable",
+      "category": "A_legacy_catalog_workflow",
+      "why": "Старый collector/publisher с cleanup после capacity failure; workflow_call-only, текущих callers нет.",
+      "deletionDisposition": "remove_yaml_only_as_part_of_replacement",
+      "removalScope": "workflow_yaml_only_not_transitive_scripts_or_data",
+      "currentMode": "orphan_workflow_call_definition_in_current_repository",
+      "literalAllJobsFalse": false,
+      "directEvidence": [
+        {
+          "path": ".github/workflows/catalog-v2-market-recovery-reusable.yml",
+          "line": 68,
+          "literal": "scripts/catalog-publish-market.mjs"
+        }
+      ],
+      "evidenceGroups": [
+        "market_publisher"
+      ],
+      "triggers": {
+        "workflow_call": {
+          "inputs": {
+            "market": {
+              "required": true,
+              "type": "string"
+            },
+            "display_name": {
+              "required": true,
+              "type": "string"
+            }
+          },
+          "secrets": {
+            "YC_OBJECT_STORAGE_ENDPOINT": {
+              "required": false
+            },
+            "YC_OBJECT_STORAGE_REGION": {
+              "required": false
+            },
+            "YC_OBJECT_STORAGE_BUCKET": {
+              "required": true
+            },
+            "YC_OBJECT_STORAGE_ACCESS_KEY_ID": {
+              "required": true
+            },
+            "YC_OBJECT_STORAGE_SECRET_ACCESS_KEY": {
+              "required": true
+            },
+            "YC_OBJECT_STORAGE_PREFIX": {
+              "required": false
+            },
+            "CATALOG_IMAGE_CDN_URL": {
+              "required": false
+            }
+          }
+        }
+      },
+      "reusableCallers": [],
+      "reusableDependencies": [],
+      "workflowRunDependents": [],
+      "literalReverseReferences": [
+        {
+          "path": "docs/operations/2026-11-16-raw-writer-entrypoint-audit.md",
+          "line": 141,
+          "kind": "documentation_reference",
+          "literal": "catalog-v2-market-recovery-reusable.yml"
+        },
+        {
+          "path": "tests/catalog-v2-market-recovery.test.ts",
+          "line": 5,
+          "kind": "test_contract_reference",
+          "literal": "catalog-v2-market-recovery-reusable.yml"
+        }
+      ],
+      "activeRunStatus": "not_read_in_this_followup",
+      "remoteDisableAuthorizedByThisMap": false,
+      "noCurrentRepositoryReusableCallers": true,
+      "scriptedDispatchCallers": [],
+      "scriptedDispatchDependencies": []
+    },
+    {
+      "path": ".github/workflows/catalog-v2-market-reusable.yml",
+      "name": "Catalog V2 market reusable",
+      "category": "A_legacy_catalog_workflow",
+      "why": "Старый orphan workflow_call pipeline. При удалении только YAML сохранить knowledge audit helper: он читает справочники и пишет лишь health-report.",
+      "deletionDisposition": "remove_yaml_only_as_part_of_replacement",
+      "removalScope": "workflow_yaml_only_not_transitive_scripts_or_data",
+      "currentMode": "orphan_workflow_call_definition_in_current_repository",
+      "literalAllJobsFalse": false,
+      "directEvidence": [
+        {
+          "path": ".github/workflows/catalog-v2-market-reusable.yml",
+          "line": 110,
+          "literal": "scripts/catalog-audit-vehicle-knowledge.mjs"
+        }
+      ],
+      "evidenceGroups": [
+        "market_publisher",
+        "knowledge_audit_keep_helper"
+      ],
+      "triggers": {
+        "workflow_call": {
+          "inputs": {
+            "market": {
+              "required": true,
+              "type": "string"
+            },
+            "display_name": {
+              "required": true,
+              "type": "string"
+            }
+          },
+          "secrets": {
+            "YC_OBJECT_STORAGE_ENDPOINT": {
+              "required": false
+            },
+            "YC_OBJECT_STORAGE_REGION": {
+              "required": false
+            },
+            "YC_OBJECT_STORAGE_BUCKET": {
+              "required": true
+            },
+            "YC_OBJECT_STORAGE_ACCESS_KEY_ID": {
+              "required": true
+            },
+            "YC_OBJECT_STORAGE_SECRET_ACCESS_KEY": {
+              "required": true
+            },
+            "YC_OBJECT_STORAGE_PREFIX": {
+              "required": false
+            },
+            "CATALOG_IMAGE_CDN_URL": {
+              "required": false
+            }
+          }
+        }
+      },
+      "reusableCallers": [],
+      "reusableDependencies": [],
+      "workflowRunDependents": [],
+      "literalReverseReferences": [
+        {
+          "path": "docs/operations/2026-11-16-raw-writer-entrypoint-audit.md",
+          "line": 141,
+          "kind": "documentation_reference",
+          "literal": "catalog-v2-market-reusable.yml"
+        },
+        {
+          "path": "tests/catalog-publication-gate.test.ts",
+          "line": 6,
+          "kind": "test_contract_reference",
+          "literal": "catalog-v2-market-reusable.yml"
+        }
+      ],
+      "activeRunStatus": "not_read_in_this_followup",
+      "remoteDisableAuthorizedByThisMap": false,
+      "noCurrentRepositoryReusableCallers": true,
+      "keepProtectedHelpersAndObjects": [
+        "scripts/catalog-audit-vehicle-knowledge.mjs",
+        "package.json script catalog:audit-vehicle-knowledge",
+        "catalog/vehicle-knowledge/models.json",
+        "catalog/vehicle-knowledge/variants.json",
+        "catalog/power-knowledge/vehicles.json",
+        "catalog/power-reference/30-minute-power.json",
+        "catalog/vehicle-knowledge/health-report.json"
+      ],
+      "protectedWriteBoundary": "Audit writes health-report only; no models/variants/power-reference/admin mutations. Removing orphan YAML must not delete its shared helper or data.",
+      "scriptedDispatchCallers": [],
+      "scriptedDispatchDependencies": []
+    },
+    {
+      "path": ".github/workflows/catalog-v2-smoke10-reusable.yml",
+      "name": "Catalog V2 strict Smoke10 reusable",
+      "category": "A_legacy_catalog_workflow",
+      "why": "Собирает, обрезает локальный input до 10 и вызывает реальный publisher; cursor/candidate записи возможны до финального publication guard.",
+      "deletionDisposition": "remove_yaml_only_as_part_of_replacement",
+      "removalScope": "workflow_yaml_only_not_transitive_scripts_or_data",
+      "currentMode": "conditional_catalog_writer_or_dispatcher",
+      "literalAllJobsFalse": false,
+      "directEvidence": [
+        {
+          "path": ".github/workflows/catalog-v2-smoke10-reusable.yml",
+          "line": 99,
+          "literal": "scripts/catalog-publish-market.mjs"
+        }
+      ],
+      "evidenceGroups": [
+        "market_publisher"
+      ],
+      "triggers": {
+        "workflow_call": {
+          "inputs": {
+            "market": {
+              "required": true,
+              "type": "string"
+            },
+            "display_name": {
+              "required": true,
+              "type": "string"
+            }
+          },
+          "secrets": {
+            "YC_OBJECT_STORAGE_ENDPOINT": {
+              "required": false
+            },
+            "YC_OBJECT_STORAGE_REGION": {
+              "required": false
+            },
+            "YC_OBJECT_STORAGE_BUCKET": {
+              "required": true
+            },
+            "YC_OBJECT_STORAGE_ACCESS_KEY_ID": {
+              "required": true
+            },
+            "YC_OBJECT_STORAGE_SECRET_ACCESS_KEY": {
+              "required": true
+            },
+            "YC_OBJECT_STORAGE_PREFIX": {
+              "required": false
+            },
+            "CATALOG_IMAGE_CDN_URL": {
+              "required": false
+            }
+          }
+        }
+      },
+      "reusableCallers": [
+        {
+          "path": ".github/workflows/catalog-v2-korea-smoke10.yml",
+          "job": "korea-smoke10",
+          "if": null
+        }
+      ],
+      "reusableDependencies": [],
+      "workflowRunDependents": [],
+      "literalReverseReferences": [
+        {
+          "path": ".github/workflows/catalog-v2-korea-smoke10.yml",
+          "line": 13,
+          "kind": "workflow_source_reference",
+          "literal": "catalog-v2-smoke10-reusable.yml"
+        }
+      ],
+      "activeRunStatus": "not_read_in_this_followup",
+      "remoteDisableAuthorizedByThisMap": false,
+      "whyNotDryRun": "Smoke10 invokes the real collector and publisher; cursor/candidate/lease effects may precede publication rejection.",
+      "scriptedDispatchCallers": [],
+      "scriptedDispatchDependencies": []
+    },
+    {
+      "path": ".github/workflows/catalog-v2-uae.yml",
+      "name": "Catalog V3 · UAE · 10k",
+      "category": "C_blocked_at_audited_revision",
+      "why": "Старый V3 orchestrator; ранний guard требует разрешённый рынок, но в проверенном source WRITES_PAUSED=true и REFRESH_MARKETS=[]. Collector/publisher не запускается на этой ревизии.",
+      "deletionDisposition": "remove_obsolete_yaml_with_its_legacy_callers",
+      "removalScope": "workflow_yaml_only_not_transitive_scripts_or_data",
+      "currentMode": "early_source_policy_exit_before_collection",
+      "literalAllJobsFalse": false,
+      "directEvidence": [
+        {
+          "path": ".github/workflows/catalog-v2-uae.yml",
+          "line": 17,
+          "literal": "uses: ./.github/workflows/catalog-v3-market-10k-reusable.yml"
+        }
+      ],
+      "evidenceGroups": [
+        "v3_early_pause",
+        "legacy_final_persistence_pause"
+      ],
+      "triggers": {
+        "workflow_dispatch": null,
+        "push": {
+          "branches": [
+            "main"
+          ],
+          "paths": [
+            ".github/market-runs/uae"
+          ]
+        }
+      },
+      "reusableCallers": [],
+      "reusableDependencies": [
+        {
+          "path": ".github/workflows/catalog-v3-market-10k-reusable.yml",
+          "job": "uae",
+          "if": null
+        }
+      ],
+      "workflowRunDependents": [],
+      "literalReverseReferences": [],
+      "activeRunStatus": "not_read_in_this_followup",
+      "remoteDisableAuthorizedByThisMap": false,
+      "scriptedDispatchCallers": [],
+      "scriptedDispatchDependencies": []
+    },
+    {
+      "path": ".github/workflows/catalog-v3-japan-republish-collected.yml",
+      "name": "Catalog V3 · Japan · republish collected",
+      "category": "A_legacy_catalog_workflow",
+      "why": "Прямой republisher Japan из artifacts, без раннего V3 validate guard; локальная обработка и lease предшествуют возможному отказу persistence.",
+      "deletionDisposition": "remove_yaml_only_as_part_of_replacement",
+      "removalScope": "workflow_yaml_only_not_transitive_scripts_or_data",
+      "currentMode": "conditional_catalog_writer_or_dispatcher",
+      "literalAllJobsFalse": false,
+      "directEvidence": [
+        {
+          "path": ".github/workflows/catalog-v3-japan-republish-collected.yml",
+          "line": 115,
+          "literal": "scripts/catalog-publish-market.mjs"
+        }
+      ],
+      "evidenceGroups": [
+        "market_publisher",
+        "legacy_final_persistence_pause"
+      ],
+      "triggers": {
+        "push": {
+          "branches": [
+            "main"
+          ],
+          "paths": [
+            ".github/market-republish/japan"
+          ]
+        },
+        "workflow_dispatch": null
+      },
+      "reusableCallers": [],
+      "reusableDependencies": [],
+      "workflowRunDependents": [],
+      "literalReverseReferences": [],
+      "activeRunStatus": "not_read_in_this_followup",
+      "remoteDisableAuthorizedByThisMap": false,
+      "scriptedDispatchCallers": [],
+      "scriptedDispatchDependencies": []
+    },
+    {
+      "path": ".github/workflows/catalog-v3-market-10k-reusable.yml",
+      "name": "Catalog V3 independent market 10k",
+      "category": "C_blocked_at_audited_revision",
+      "why": "Старый V3 orchestrator; ранний guard требует разрешённый рынок, но в проверенном source WRITES_PAUSED=true и REFRESH_MARKETS=[]. Collector/publisher не запускается на этой ревизии.",
+      "deletionDisposition": "remove_obsolete_yaml_with_its_legacy_callers",
+      "removalScope": "workflow_yaml_only_not_transitive_scripts_or_data",
+      "currentMode": "early_source_policy_exit_before_collection",
+      "literalAllJobsFalse": false,
+      "directEvidence": [
+        {
+          "path": ".github/workflows/catalog-v3-market-10k-reusable.yml",
+          "line": 105,
+          "literal": "CATALOG_PRODUCTION_WRITES_PAUSED"
+        }
+      ],
+      "evidenceGroups": [
+        "v3_early_pause",
+        "legacy_final_persistence_pause"
+      ],
+      "triggers": {
+        "workflow_call": {
+          "inputs": {
+            "market": {
+              "required": true,
+              "type": "string"
+            },
+            "display_name": {
+              "required": true,
+              "type": "string"
+            },
+            "retention_ms": {
+              "required": false,
+              "type": "string",
+              "default": "1209600000"
+            },
+            "target_per_source": {
+              "required": false,
+              "type": "string",
+              "default": "10000"
+            },
+            "target_per_market": {
+              "required": false,
+              "type": "string",
+              "default": "10000"
+            },
+            "maximum_per_market": {
+              "required": false,
+              "type": "string",
+              "default": "100000"
+            },
+            "priority_target": {
+              "required": false,
+              "type": "string",
+              "default": "8000"
+            },
+            "reset_cursor": {
+              "required": false,
+              "type": "boolean",
+              "default": false
+            },
+            "page_partition_count": {
+              "required": false,
+              "type": "string",
+              "default": "3"
+            }
+          },
+          "secrets": {
+            "YC_OBJECT_STORAGE_ENDPOINT": {
+              "required": false
+            },
+            "YC_OBJECT_STORAGE_REGION": {
+              "required": false
+            },
+            "YC_OBJECT_STORAGE_BUCKET": {
+              "required": true
+            },
+            "YC_OBJECT_STORAGE_ACCESS_KEY_ID": {
+              "required": true
+            },
+            "YC_OBJECT_STORAGE_SECRET_ACCESS_KEY": {
+              "required": true
+            },
+            "YC_OBJECT_STORAGE_PREFIX": {
+              "required": false
+            },
+            "CATALOG_IMAGE_CDN_URL": {
+              "required": false
+            }
+          }
+        }
+      },
+      "reusableCallers": [
+        {
+          "path": ".github/workflows/catalog-v2-china.yml",
+          "job": "china",
+          "if": null
+        },
+        {
+          "path": ".github/workflows/catalog-v2-europe.yml",
+          "job": "europe",
+          "if": null
+        },
+        {
+          "path": ".github/workflows/catalog-v2-georgia.yml",
+          "job": "georgia",
+          "if": null
+        },
+        {
+          "path": ".github/workflows/catalog-v2-japan.yml",
+          "job": "japan",
+          "if": null
+        },
+        {
+          "path": ".github/workflows/catalog-v2-korea.yml",
+          "job": "korea",
+          "if": null
+        },
+        {
+          "path": ".github/workflows/catalog-v2-uae.yml",
+          "job": "uae",
+          "if": null
+        },
+        {
+          "path": ".github/workflows/catalog-v3-sequential-queue.yml",
+          "job": "korea",
+          "if": "needs.plan.result == 'success'"
+        },
+        {
+          "path": ".github/workflows/catalog-v3-sequential-queue.yml",
+          "job": "china",
+          "if": "always() && needs.plan.result == 'success'"
+        },
+        {
+          "path": ".github/workflows/catalog-v3-sequential-queue.yml",
+          "job": "uae",
+          "if": "always() && needs.plan.result == 'success'"
+        },
+        {
+          "path": ".github/workflows/catalog-v3-sequential-queue.yml",
+          "job": "europe",
+          "if": "always() && needs.plan.result == 'success'"
+        },
+        {
+          "path": ".github/workflows/catalog-v3-sequential-queue.yml",
+          "job": "georgia",
+          "if": "always() && needs.plan.result == 'success'"
+        },
+        {
+          "path": ".github/workflows/catalog-v4-all-markets-30k.yml",
+          "job": "korea",
+          "if": "${{ always() && !cancelled() }}"
+        },
+        {
+          "path": ".github/workflows/catalog-v4-all-markets-30k.yml",
+          "job": "japan",
+          "if": "${{ always() && !cancelled() }}"
+        },
+        {
+          "path": ".github/workflows/catalog-v4-all-markets-30k.yml",
+          "job": "china",
+          "if": "${{ always() && !cancelled() }}"
+        },
+        {
+          "path": ".github/workflows/catalog-v4-all-markets-30k.yml",
+          "job": "uae",
+          "if": "${{ always() && !cancelled() }}"
+        },
+        {
+          "path": ".github/workflows/catalog-v4-all-markets-30k.yml",
+          "job": "europe",
+          "if": "${{ always() && !cancelled() }}"
+        },
+        {
+          "path": ".github/workflows/catalog-v4-all-markets-30k.yml",
+          "job": "georgia",
+          "if": "${{ always() && !cancelled() }}"
+        }
+      ],
+      "reusableDependencies": [],
+      "workflowRunDependents": [],
+      "literalReverseReferences": [
+        {
+          "path": ".github/workflows/catalog-v2-china.yml",
+          "line": 17,
+          "kind": "workflow_source_reference",
+          "literal": "catalog-v3-market-10k-reusable.yml"
+        },
+        {
+          "path": ".github/workflows/catalog-v2-europe.yml",
+          "line": 17,
+          "kind": "workflow_source_reference",
+          "literal": "catalog-v3-market-10k-reusable.yml"
+        },
+        {
+          "path": ".github/workflows/catalog-v2-georgia.yml",
+          "line": 17,
+          "kind": "workflow_source_reference",
+          "literal": "catalog-v3-market-10k-reusable.yml"
+        },
+        {
+          "path": ".github/workflows/catalog-v2-japan.yml",
+          "line": 18,
+          "kind": "workflow_source_reference",
+          "literal": "catalog-v3-market-10k-reusable.yml"
+        },
+        {
+          "path": ".github/workflows/catalog-v2-korea.yml",
+          "line": 17,
+          "kind": "workflow_source_reference",
+          "literal": "catalog-v3-market-10k-reusable.yml"
+        },
+        {
+          "path": ".github/workflows/catalog-v2-uae.yml",
+          "line": 17,
+          "kind": "workflow_source_reference",
+          "literal": "catalog-v3-market-10k-reusable.yml"
+        },
+        {
+          "path": ".github/workflows/catalog-v3-sequential-queue.yml",
+          "line": 45,
+          "kind": "workflow_source_reference",
+          "literal": "catalog-v3-market-10k-reusable.yml"
+        },
+        {
+          "path": ".github/workflows/catalog-v3-sequential-queue.yml",
+          "line": 60,
+          "kind": "workflow_source_reference",
+          "literal": "catalog-v3-market-10k-reusable.yml"
+        },
+        {
+          "path": ".github/workflows/catalog-v3-sequential-queue.yml",
+          "line": 75,
+          "kind": "workflow_source_reference",
+          "literal": "catalog-v3-market-10k-reusable.yml"
+        },
+        {
+          "path": ".github/workflows/catalog-v3-sequential-queue.yml",
+          "line": 90,
+          "kind": "workflow_source_reference",
+          "literal": "catalog-v3-market-10k-reusable.yml"
+        },
+        {
+          "path": ".github/workflows/catalog-v3-sequential-queue.yml",
+          "line": 105,
+          "kind": "workflow_source_reference",
+          "literal": "catalog-v3-market-10k-reusable.yml"
+        },
+        {
+          "path": ".github/workflows/catalog-v4-all-markets-30k.yml",
+          "line": 52,
+          "kind": "workflow_source_reference",
+          "literal": "catalog-v3-market-10k-reusable.yml"
+        },
+        {
+          "path": ".github/workflows/catalog-v4-all-markets-30k.yml",
+          "line": 64,
+          "kind": "workflow_source_reference",
+          "literal": "catalog-v3-market-10k-reusable.yml"
+        },
+        {
+          "path": ".github/workflows/catalog-v4-all-markets-30k.yml",
+          "line": 77,
+          "kind": "workflow_source_reference",
+          "literal": "catalog-v3-market-10k-reusable.yml"
+        },
+        {
+          "path": ".github/workflows/catalog-v4-all-markets-30k.yml",
+          "line": 89,
+          "kind": "workflow_source_reference",
+          "literal": "catalog-v3-market-10k-reusable.yml"
+        },
+        {
+          "path": ".github/workflows/catalog-v4-all-markets-30k.yml",
+          "line": 101,
+          "kind": "workflow_source_reference",
+          "literal": "catalog-v3-market-10k-reusable.yml"
+        },
+        {
+          "path": ".github/workflows/catalog-v4-all-markets-30k.yml",
+          "line": 113,
+          "kind": "workflow_source_reference",
+          "literal": "catalog-v3-market-10k-reusable.yml"
+        },
+        {
+          "path": "scripts/repair-catalog-core-20260822.mjs",
+          "line": 43,
+          "kind": "script_reference",
+          "literal": "catalog-v3-market-10k-reusable.yml"
+        },
+        {
+          "path": "scripts/repair-knowledge-core-20260822.mjs",
+          "line": 46,
+          "kind": "script_reference",
+          "literal": "catalog-v3-market-10k-reusable.yml"
+        },
+        {
+          "path": "tests/catalog-current-pipeline-contract.test.ts",
+          "line": 6,
+          "kind": "test_contract_reference",
+          "literal": "catalog-v3-market-10k-reusable.yml"
+        },
+        {
+          "path": "tests/catalog-knowledge-core-contract.test.ts",
+          "line": 37,
+          "kind": "test_contract_reference",
+          "literal": "catalog-v3-market-10k-reusable.yml"
+        },
+        {
+          "path": "tests/catalog-production-hardening.test.ts",
+          "line": 20,
+          "kind": "test_contract_reference",
+          "literal": "catalog-v3-market-10k-reusable.yml"
+        },
+        {
+          "path": "tests/catalog-production-pause.test.ts",
+          "line": 10,
+          "kind": "test_contract_reference",
+          "literal": "catalog-v3-market-10k-reusable.yml"
+        },
+        {
+          "path": "tests/catalog-single-active-pipeline.test.ts",
+          "line": 69,
+          "kind": "test_contract_reference",
+          "literal": "catalog-v3-market-10k-reusable.yml"
+        },
+        {
+          "path": "tests/catalog-source-page-partition.test.ts",
+          "line": 52,
+          "kind": "test_contract_reference",
+          "literal": "catalog-v3-market-10k-reusable.yml"
+        },
+        {
+          "path": "tests/catalog-v2-market-recovery.test.ts",
+          "line": 8,
+          "kind": "test_contract_reference",
+          "literal": "catalog-v3-market-10k-reusable.yml"
+        },
+        {
+          "path": "tests/catalog-v3-throughput.test.ts",
+          "line": 6,
+          "kind": "test_contract_reference",
+          "literal": "catalog-v3-market-10k-reusable.yml"
+        }
+      ],
+      "activeRunStatus": "not_read_in_this_followup",
+      "remoteDisableAuthorizedByThisMap": false,
+      "scriptedDispatchCallers": [],
+      "scriptedDispatchDependencies": []
+    },
+    {
+      "path": ".github/workflows/catalog-v3-sequential-queue.yml",
+      "name": "Catalog V3 · Sequential production queue",
+      "category": "C_blocked_at_audited_revision",
+      "why": "Старый V3 orchestrator; ранний guard требует разрешённый рынок, но в проверенном source WRITES_PAUSED=true и REFRESH_MARKETS=[]. Collector/publisher не запускается на этой ревизии.",
+      "deletionDisposition": "remove_obsolete_yaml_with_its_legacy_callers",
+      "removalScope": "workflow_yaml_only_not_transitive_scripts_or_data",
+      "currentMode": "early_source_policy_exit_before_collection",
+      "literalAllJobsFalse": false,
+      "directEvidence": [
+        {
+          "path": ".github/workflows/catalog-v3-sequential-queue.yml",
+          "line": 35,
+          "literal": "CATALOG_PRODUCTION_WRITES_PAUSED"
+        }
+      ],
+      "evidenceGroups": [
+        "v3_early_pause",
+        "legacy_final_persistence_pause"
+      ],
+      "triggers": {
+        "workflow_dispatch": null,
+        "push": {
+          "branches": [
+            "main"
+          ],
+          "paths": [
+            ".github/catalog-v3-run-all"
+          ]
+        }
+      },
+      "reusableCallers": [],
+      "reusableDependencies": [
+        {
+          "path": ".github/workflows/catalog-v3-market-10k-reusable.yml",
+          "job": "korea",
+          "if": "needs.plan.result == 'success'"
+        },
+        {
+          "path": ".github/workflows/catalog-v3-market-10k-reusable.yml",
+          "job": "china",
+          "if": "always() && needs.plan.result == 'success'"
+        },
+        {
+          "path": ".github/workflows/catalog-v3-market-10k-reusable.yml",
+          "job": "uae",
+          "if": "always() && needs.plan.result == 'success'"
+        },
+        {
+          "path": ".github/workflows/catalog-v3-market-10k-reusable.yml",
+          "job": "europe",
+          "if": "always() && needs.plan.result == 'success'"
+        },
+        {
+          "path": ".github/workflows/catalog-v3-market-10k-reusable.yml",
+          "job": "georgia",
+          "if": "always() && needs.plan.result == 'success'"
+        }
+      ],
+      "workflowRunDependents": [
+        {
+          "path": ".github/workflows/catalog-current-read-models.yml",
+          "upstreamName": "Catalog V3 · Sequential production queue"
+        }
+      ],
+      "literalReverseReferences": [
+        {
+          "path": ".github/workflows/catalog-v2-china.yml",
+          "line": 11,
+          "kind": "workflow_source_reference",
+          "literal": "catalog-v3-sequential-queue.yml"
+        },
+        {
+          "path": ".github/workflows/catalog-v2-europe.yml",
+          "line": 11,
+          "kind": "workflow_source_reference",
+          "literal": "catalog-v3-sequential-queue.yml"
+        },
+        {
+          "path": ".github/workflows/catalog-v2-georgia.yml",
+          "line": 11,
+          "kind": "workflow_source_reference",
+          "literal": "catalog-v3-sequential-queue.yml"
+        },
+        {
+          "path": ".github/workflows/catalog-v2-japan.yml",
+          "line": 11,
+          "kind": "workflow_source_reference",
+          "literal": "catalog-v3-sequential-queue.yml"
+        },
+        {
+          "path": ".github/workflows/catalog-v2-korea.yml",
+          "line": 11,
+          "kind": "workflow_source_reference",
+          "literal": "catalog-v3-sequential-queue.yml"
+        },
+        {
+          "path": ".github/workflows/catalog-v2-uae.yml",
+          "line": 11,
+          "kind": "workflow_source_reference",
+          "literal": "catalog-v3-sequential-queue.yml"
+        },
+        {
+          "path": "tests/catalog-probe-source-shard.test.ts",
+          "line": 20,
+          "kind": "test_contract_reference",
+          "literal": "catalog-v3-sequential-queue.yml"
+        },
+        {
+          "path": "tests/catalog-production-pause.test.ts",
+          "line": 7,
+          "kind": "test_contract_reference",
+          "literal": "catalog-v3-sequential-queue.yml"
+        },
+        {
+          "path": "tests/catalog-production-pause.test.ts",
+          "line": 34,
+          "kind": "test_contract_reference",
+          "literal": "catalog-v3-sequential-queue.yml"
+        },
+        {
+          "path": "tests/catalog-single-active-pipeline.test.ts",
+          "line": 68,
+          "kind": "test_contract_reference",
+          "literal": "catalog-v3-sequential-queue.yml"
+        },
+        {
+          "path": "tests/catalog-single-active-pipeline.test.ts",
+          "line": 88,
+          "kind": "test_contract_reference",
+          "literal": "catalog-v3-sequential-queue.yml"
+        },
+        {
+          "path": "tests/catalog-six-market-contract.test.ts",
+          "line": 11,
+          "kind": "test_contract_reference",
+          "literal": "catalog-v3-sequential-queue.yml"
+        },
+        {
+          "path": "tests/catalog-source-page-partition.test.ts",
+          "line": 54,
+          "kind": "test_contract_reference",
+          "literal": "catalog-v3-sequential-queue.yml"
+        },
+        {
+          "path": "tests/catalog-v2-market-recovery.test.ts",
+          "line": 9,
+          "kind": "test_contract_reference",
+          "literal": "catalog-v3-sequential-queue.yml"
+        },
+        {
+          "path": "tests/catalog-v3-sequential-queue.test.ts",
+          "line": 5,
+          "kind": "test_contract_reference",
+          "literal": "catalog-v3-sequential-queue.yml"
+        }
+      ],
+      "activeRunStatus": "not_read_in_this_followup",
+      "remoteDisableAuthorizedByThisMap": false,
+      "scriptedDispatchCallers": [],
+      "scriptedDispatchDependencies": []
+    },
+    {
+      "path": ".github/workflows/catalog-v4-all-markets-30k.yml",
+      "name": "Catalog calculated · 6 markets · up to 30k each",
+      "category": "A_legacy_catalog_workflow",
+      "why": "Старый manual orchestrator с необязательным широким reset. Удалять entrypoint, но никогда не исполнять и не переносить deletePrefix(catalog).",
+      "deletionDisposition": "remove_yaml_only_as_part_of_replacement",
+      "removalScope": "workflow_yaml_only_not_transitive_scripts_or_data",
+      "currentMode": "conditional_catalog_writer_or_dispatcher",
+      "literalAllJobsFalse": false,
+      "directEvidence": [
+        {
+          "path": ".github/workflows/catalog-v4-all-markets-30k.yml",
+          "line": 44,
+          "literal": "scripts/catalog-reset-public.mjs"
+        }
+      ],
+      "evidenceGroups": [
+        "broad_reset_do_not_execute"
+      ],
+      "triggers": {
+        "workflow_dispatch": {
+          "inputs": {
+            "reset_catalog": {
+              "description": "Delete the current catalog before collection",
+              "required": false,
+              "default": false,
+              "type": "boolean"
+            }
+          }
+        }
+      },
+      "reusableCallers": [],
+      "reusableDependencies": [
+        {
+          "path": ".github/workflows/catalog-v3-market-10k-reusable.yml",
+          "job": "korea",
+          "if": "${{ always() && !cancelled() }}"
+        },
+        {
+          "path": ".github/workflows/catalog-v3-market-10k-reusable.yml",
+          "job": "japan",
+          "if": "${{ always() && !cancelled() }}"
+        },
+        {
+          "path": ".github/workflows/catalog-v3-market-10k-reusable.yml",
+          "job": "china",
+          "if": "${{ always() && !cancelled() }}"
+        },
+        {
+          "path": ".github/workflows/catalog-v3-market-10k-reusable.yml",
+          "job": "uae",
+          "if": "${{ always() && !cancelled() }}"
+        },
+        {
+          "path": ".github/workflows/catalog-v3-market-10k-reusable.yml",
+          "job": "europe",
+          "if": "${{ always() && !cancelled() }}"
+        },
+        {
+          "path": ".github/workflows/catalog-v3-market-10k-reusable.yml",
+          "job": "georgia",
+          "if": "${{ always() && !cancelled() }}"
+        }
+      ],
+      "workflowRunDependents": [],
+      "literalReverseReferences": [
+        {
+          "path": "docs/operations/2026-11-16-raw-writer-entrypoint-audit.md",
+          "line": 45,
+          "kind": "documentation_reference",
+          "literal": "catalog-v4-all-markets-30k.yml"
+        },
+        {
+          "path": "tests/catalog-production-hardening.test.ts",
+          "line": 21,
+          "kind": "test_contract_reference",
+          "literal": "catalog-v4-all-markets-30k.yml"
+        }
+      ],
+      "activeRunStatus": "not_read_in_this_followup",
+      "remoteDisableAuthorizedByThisMap": false,
+      "neverExecuteOrTransplant": [
+        "scripts/catalog-reset-public.mjs",
+        "deletePrefix(\"catalog\")"
+      ],
+      "protectedNamespacesAtRisk": [
+        "catalog/operations/collection-controls-v1.json",
+        "catalog/vehicle-knowledge/",
+        "catalog/power-knowledge/",
+        "catalog/power-reference/",
+        "catalog/vehicle-encyclopedia-v2/",
+        "catalog-rebuild/"
+      ],
+      "whyNotC": "Optional reset can execute before downstream V3 validation. The raw-policy guard depends on actual storage and is not a source-proven permanent blocker.",
+      "checkpointPrefixOverlap": "Object listObjects normalizes the supplied prefix without appending a slash and passes it unchanged to the S3 prefix query. Thus deletePrefix(\"catalog\") can also select catalog-rebuild/...; it is not a filesystem-directory boundary. A checkpoint namespace not beginning with catalog avoids this specific legacy reset prefix, but does not prove protection against every other cleaner.",
+      "scriptedDispatchCallers": [],
+      "scriptedDispatchDependencies": []
+    },
+    {
+      "path": ".github/workflows/catalog-v6-japan-approved-exact-resume.yml",
+      "name": "Catalog V6 · Japan exact resume",
+      "category": "A_legacy_catalog_workflow",
+      "why": "Старый exact Japan recovery: join сохранённых/источниковых частей, расчёт и publisher.",
+      "deletionDisposition": "remove_yaml_only_as_part_of_replacement",
+      "removalScope": "workflow_yaml_only_not_transitive_scripts_or_data",
+      "currentMode": "conditional_catalog_writer_or_dispatcher",
+      "literalAllJobsFalse": false,
+      "directEvidence": [
+        {
+          "path": ".github/workflows/catalog-v6-japan-approved-exact-resume.yml",
+          "line": 169,
+          "literal": "scripts/catalog-live-recovery-publish.mjs"
+        }
+      ],
+      "evidenceGroups": [
+        "single_market_recovery",
+        "legacy_final_persistence_pause"
+      ],
+      "triggers": {
+        "push": {
+          "branches": [
+            "main"
+          ],
+          "paths": [
+            ".github/market-runs/japan-approved-exact-resume"
+          ]
+        }
+      },
+      "reusableCallers": [],
+      "reusableDependencies": [],
+      "workflowRunDependents": [],
+      "literalReverseReferences": [
+        {
+          "path": "tests/japan-carvector-jpauc-exact-scale.test.ts",
+          "line": 109,
+          "kind": "test_contract_reference",
+          "literal": "catalog-v6-japan-approved-exact-resume.yml"
+        }
+      ],
+      "activeRunStatus": "not_read_in_this_followup",
+      "remoteDisableAuthorizedByThisMap": false,
+      "finalPublicationGuard": "At the audited storage source, these recovery scripts omit productionRefreshMarket and cannot pass isCatalogProductionRefreshAllowed; do not infer that their collection, rates/cache or lease effects are absent.",
+      "scriptedDispatchCallers": [],
+      "scriptedDispatchDependencies": []
+    },
+    {
+      "path": ".github/workflows/catalog-v6-japan-approved-exact-scale.yml",
+      "name": "Catalog V6 · Japan approved exact scale",
+      "category": "A_legacy_catalog_workflow",
+      "why": "Старая source-evidence/aggregate/join цепочка Japan с последующим publisher.",
+      "deletionDisposition": "remove_yaml_only_as_part_of_replacement",
+      "removalScope": "workflow_yaml_only_not_transitive_scripts_or_data",
+      "currentMode": "conditional_catalog_writer_or_dispatcher",
+      "literalAllJobsFalse": false,
+      "directEvidence": [
+        {
+          "path": ".github/workflows/catalog-v6-japan-approved-exact-scale.yml",
+          "line": 211,
+          "literal": "scripts/catalog-live-recovery-publish.mjs"
+        }
+      ],
+      "evidenceGroups": [
+        "single_market_recovery",
+        "legacy_final_persistence_pause"
+      ],
+      "triggers": {
+        "workflow_dispatch": null,
+        "push": {
+          "branches": [
+            "main"
+          ],
+          "paths": [
+            ".github/market-runs/japan-approved-exact-scale"
+          ]
+        }
+      },
+      "reusableCallers": [],
+      "reusableDependencies": [],
+      "workflowRunDependents": [],
+      "literalReverseReferences": [
+        {
+          "path": "tests/japan-carvector-jpauc-exact-scale.test.ts",
+          "line": 74,
+          "kind": "test_contract_reference",
+          "literal": "catalog-v6-japan-approved-exact-scale.yml"
+        }
+      ],
+      "activeRunStatus": "not_read_in_this_followup",
+      "remoteDisableAuthorizedByThisMap": false,
+      "finalPublicationGuard": "At the audited storage source, these recovery scripts omit productionRefreshMarket and cannot pass isCatalogProductionRefreshAllowed; do not infer that their collection, rates/cache or lease effects are absent.",
+      "scriptedDispatchCallers": [],
+      "scriptedDispatchDependencies": []
+    },
+    {
+      "path": ".github/workflows/catalog-v6-japan-approved-safe-price-resume.yml",
+      "name": "Catalog V6 · Japan safe price resume",
+      "category": "A_legacy_catalog_workflow",
+      "why": "Старый Japan repricing/publisher из сохранённого exact input.",
+      "deletionDisposition": "remove_yaml_only_as_part_of_replacement",
+      "removalScope": "workflow_yaml_only_not_transitive_scripts_or_data",
+      "currentMode": "conditional_catalog_writer_or_dispatcher",
+      "literalAllJobsFalse": false,
+      "directEvidence": [
+        {
+          "path": ".github/workflows/catalog-v6-japan-approved-safe-price-resume.yml",
+          "line": 106,
+          "literal": "scripts/catalog-live-recovery-publish.mjs"
+        }
+      ],
+      "evidenceGroups": [
+        "single_market_recovery",
+        "legacy_final_persistence_pause"
+      ],
+      "triggers": {
+        "push": {
+          "branches": [
+            "main"
+          ],
+          "paths": [
+            ".github/market-runs/japan-approved-safe-price-resume"
+          ]
+        }
+      },
+      "reusableCallers": [],
+      "reusableDependencies": [],
+      "workflowRunDependents": [],
+      "literalReverseReferences": [
+        {
+          "path": "tests/japan-carvector-jpauc-exact-scale.test.ts",
+          "line": 123,
+          "kind": "test_contract_reference",
+          "literal": "catalog-v6-japan-approved-safe-price-resume.yml"
+        }
+      ],
+      "activeRunStatus": "not_read_in_this_followup",
+      "remoteDisableAuthorizedByThisMap": false,
+      "finalPublicationGuard": "At the audited storage source, these recovery scripts omit productionRefreshMarket and cannot pass isCatalogProductionRefreshAllowed; do not infer that their collection, rates/cache or lease effects are absent.",
+      "scriptedDispatchCallers": [],
+      "scriptedDispatchDependencies": []
+    },
+    {
+      "path": ".github/workflows/catalog-v6-prestige-up-to-30k.yml",
+      "name": "Catalog V6 · Prestige exact sold up-to-30k",
+      "category": "A_legacy_catalog_workflow",
+      "why": "Старая ограниченная Prestige collection/aggregate/publication цепочка; encyclopedia helpers здесь не публикуют справочник.",
+      "deletionDisposition": "remove_yaml_only_as_part_of_replacement",
+      "removalScope": "workflow_yaml_only_not_transitive_scripts_or_data",
+      "currentMode": "conditional_catalog_writer_or_dispatcher",
+      "literalAllJobsFalse": false,
+      "directEvidence": [
+        {
+          "path": ".github/workflows/catalog-v6-prestige-up-to-30k.yml",
+          "line": 248,
+          "literal": "scripts/catalog-live-recovery-publish.mjs"
+        }
+      ],
+      "evidenceGroups": [
+        "single_market_recovery",
+        "legacy_final_persistence_pause"
+      ],
+      "triggers": {
+        "workflow_dispatch": null,
+        "push": {
+          "branches": [
+            "main"
+          ],
+          "paths": [
+            ".github/market-runs/japan-prestige-30k"
+          ]
+        }
+      },
+      "reusableCallers": [],
+      "reusableDependencies": [],
+      "workflowRunDependents": [
+        {
+          "path": ".github/workflows/catalog-current-read-models.yml",
+          "upstreamName": "Catalog V6 · Prestige exact sold up-to-30k"
+        }
+      ],
+      "literalReverseReferences": [
+        {
+          "path": "tests/catalog-global-model-cap.test.ts",
+          "line": 18,
+          "kind": "test_contract_reference",
+          "literal": "catalog-v6-prestige-up-to-30k.yml"
+        },
+        {
+          "path": "tests/catalog-operations.test.ts",
+          "line": 37,
+          "kind": "test_contract_reference",
+          "literal": "catalog-v6-prestige-up-to-30k.yml"
+        },
+        {
+          "path": "tests/catalog-recovery-publisher-min-images.test.ts",
+          "line": 7,
+          "kind": "test_contract_reference",
+          "literal": "catalog-v6-prestige-up-to-30k.yml"
+        },
+        {
+          "path": "tests/catalog-v6-shared-publish-lock.test.ts",
+          "line": 5,
+          "kind": "test_contract_reference",
+          "literal": "catalog-v6-prestige-up-to-30k.yml"
+        }
+      ],
+      "activeRunStatus": "not_read_in_this_followup",
+      "remoteDisableAuthorizedByThisMap": false,
+      "finalPublicationGuard": "At the audited storage source, these recovery scripts omit productionRefreshMarket and cannot pass isCatalogProductionRefreshAllowed; do not infer that their collection, rates/cache or lease effects are absent.",
+      "scriptedDispatchCallers": [],
+      "scriptedDispatchDependencies": []
+    },
+    {
+      "path": ".github/workflows/catalog-weekly-six-markets.yml",
+      "name": "Catalog · Weekly six-market collection and publication",
+      "category": "A_legacy_catalog_workflow",
+      "why": "Название weekly, но текущие triggers только manual; старая intake/publication цепочка шести рынков.",
+      "deletionDisposition": "remove_yaml_only_as_part_of_replacement",
+      "removalScope": "workflow_yaml_only_not_transitive_scripts_or_data",
+      "currentMode": "conditional_catalog_writer_or_dispatcher",
+      "literalAllJobsFalse": false,
+      "directEvidence": [
+        {
+          "path": ".github/workflows/catalog-weekly-six-markets.yml",
+          "line": 136,
+          "literal": "scripts/catalog-publish-market.mjs"
+        }
+      ],
+      "evidenceGroups": [
+        "market_publisher"
+      ],
+      "triggers": {
+        "workflow_dispatch": null
+      },
+      "reusableCallers": [],
+      "reusableDependencies": [],
+      "workflowRunDependents": [],
+      "literalReverseReferences": [],
+      "activeRunStatus": "not_read_in_this_followup",
+      "remoteDisableAuthorizedByThisMap": false,
+      "scriptedDispatchCallers": [],
+      "scriptedDispatchDependencies": []
+    },
+    {
+      "path": ".github/workflows/china-saved-recovery83-20261117.yml",
+      "name": "Recover verified saved China without supplier requests",
+      "category": "A_legacy_catalog_workflow",
+      "why": "Отдельное старое восстановление China с закреплёнными source/runtime SHA, raw archive, cursor handoff и publisher.",
+      "deletionDisposition": "remove_yaml_only_as_part_of_replacement",
+      "removalScope": "workflow_yaml_only_not_transitive_scripts_or_data",
+      "currentMode": "conditional_catalog_writer_or_dispatcher",
+      "literalAllJobsFalse": false,
+      "directEvidence": [
+        {
+          "path": ".github/workflows/china-saved-recovery83-20261117.yml",
+          "line": 186,
+          "literal": "scripts/catalog-publish-market.mjs"
+        }
+      ],
+      "evidenceGroups": [
+        "market_publisher"
+      ],
+      "triggers": {
+        "push": {
+          "branches": [
+            "main"
+          ],
+          "paths": [
+            ".github/workflows/china-saved-recovery83-20261117.yml"
+          ]
+        },
+        "workflow_dispatch": null
+      },
+      "reusableCallers": [],
+      "reusableDependencies": [],
+      "workflowRunDependents": [],
+      "literalReverseReferences": [],
+      "activeRunStatus": "not_read_in_this_followup",
+      "remoteDisableAuthorizedByThisMap": false,
+      "scriptedDispatchCallers": [],
+      "scriptedDispatchDependencies": []
+    },
+    {
+      "path": ".github/workflows/dispatch-paid-encar-technical-once.yml",
+      "name": "Start reviewed paid Korea technical operation",
+      "category": "A_legacy_catalog_workflow",
+      "why": "Старый точечный dispatcher technical repair; способен запустить apply-mode после проверок. Удалять вместе с целевым repair workflow.",
+      "deletionDisposition": "remove_yaml_only_as_part_of_replacement",
+      "removalScope": "workflow_yaml_only_not_transitive_scripts_or_data",
+      "currentMode": "conditional_catalog_writer_or_dispatcher",
+      "literalAllJobsFalse": false,
+      "directEvidence": [
+        {
+          "path": ".github/workflows/dispatch-paid-encar-technical-once.yml",
+          "line": 75,
+          "literal": "await github.rest.actions.createWorkflowDispatch"
+        }
+      ],
+      "evidenceGroups": [
+        "technical_repair_dispatch"
+      ],
+      "triggers": {
+        "push": {
+          "branches": [
+            "main"
+          ],
+          "paths": [
+            ".github/workflows/dispatch-paid-encar-technical-once.yml"
+          ]
+        }
+      },
+      "reusableCallers": [],
+      "reusableDependencies": [],
+      "workflowRunDependents": [],
+      "literalReverseReferences": [
+        {
+          "path": "tests/catalog-paid-encar-review-source.test.ts",
+          "line": 19,
+          "kind": "test_contract_reference",
+          "literal": "dispatch-paid-encar-technical-once.yml"
+        }
+      ],
+      "activeRunStatus": "not_read_in_this_followup",
+      "remoteDisableAuthorizedByThisMap": false,
+      "scriptedDispatchCallers": [],
+      "scriptedDispatchDependencies": [
+        {
+          "from": ".github/workflows/dispatch-paid-encar-technical-once.yml",
+          "to": ".github/workflows/repair-paid-encar-technical.yml",
+          "kind": "workflow_dispatch",
+          "evidence": {
+            "path": ".github/workflows/dispatch-paid-encar-technical-once.yml",
+            "line": 75,
+            "literal": "await github.rest.actions.createWorkflowDispatch"
+          }
+        }
+      ]
+    },
+    {
+      "path": ".github/workflows/owner-current-home-preparation.yml",
+      "name": "Prepare missing current home overview once",
+      "category": "C_blocked_at_audited_revision",
+      "why": "Одноразовая подготовка требует календарную дату 2026-11-12 и фиксированный прежний release; на дату аудита 2026-11-23 guard прерывает job до записи.",
+      "deletionDisposition": "remove_obsolete_yaml_with_its_legacy_callers",
+      "removalScope": "workflow_yaml_only_not_transitive_scripts_or_data",
+      "currentMode": "expired_exact_date_guard",
+      "literalAllJobsFalse": false,
+      "directEvidence": [
+        {
+          "path": ".github/workflows/owner-current-home-preparation.yml",
+          "line": 44,
+          "literal": "'2026-11-12'"
+        }
+      ],
+      "evidenceGroups": [
+        "expired_home_date"
+      ],
+      "triggers": {
+        "push": {
+          "branches": [
+            "main"
+          ],
+          "paths": [
+            ".github/workflows/owner-current-home-preparation.yml"
+          ]
+        }
+      },
+      "reusableCallers": [],
+      "reusableDependencies": [],
+      "workflowRunDependents": [],
+      "literalReverseReferences": [],
+      "activeRunStatus": "not_read_in_this_followup",
+      "remoteDisableAuthorizedByThisMap": false,
+      "scriptedDispatchCallers": [],
+      "scriptedDispatchDependencies": []
+    },
+    {
+      "path": ".github/workflows/publish-saved-six-market-20260917.yml",
+      "name": "Publish saved verified markets 20260917",
+      "category": "A_legacy_catalog_workflow",
+      "why": "Старый branch-push publisher сохранённых шести рынков с dry-run=0.",
+      "deletionDisposition": "remove_yaml_only_as_part_of_replacement",
+      "removalScope": "workflow_yaml_only_not_transitive_scripts_or_data",
+      "currentMode": "conditional_catalog_writer_or_dispatcher",
+      "literalAllJobsFalse": false,
+      "directEvidence": [
+        {
+          "path": ".github/workflows/publish-saved-six-market-20260917.yml",
+          "line": 57,
+          "literal": "scripts/catalog-publish-market.mjs"
+        }
+      ],
+      "evidenceGroups": [
+        "market_publisher"
+      ],
+      "triggers": {
+        "push": {
+          "branches": [
+            "fix/finish-fresh-catalog-20260917"
+          ],
+          "paths": [
+            ".github/workflows/publish-saved-six-market-20260917.yml"
+          ]
+        }
+      },
+      "reusableCallers": [],
+      "reusableDependencies": [],
+      "workflowRunDependents": [],
+      "literalReverseReferences": [],
+      "activeRunStatus": "not_read_in_this_followup",
+      "remoteDisableAuthorizedByThisMap": false,
+      "scriptedDispatchCallers": [],
+      "scriptedDispatchDependencies": []
+    },
+    {
+      "path": ".github/workflows/publish-saved-six-market-complete-20260917.yml",
+      "name": "Catalog · Publish saved six-market collection",
+      "category": "A_legacy_catalog_workflow",
+      "why": "Старый main marker/self-push publisher сохранённого six-market intake.",
+      "deletionDisposition": "remove_yaml_only_as_part_of_replacement",
+      "removalScope": "workflow_yaml_only_not_transitive_scripts_or_data",
+      "currentMode": "conditional_catalog_writer_or_dispatcher",
+      "literalAllJobsFalse": false,
+      "directEvidence": [
+        {
+          "path": ".github/workflows/publish-saved-six-market-complete-20260917.yml",
+          "line": 100,
+          "literal": "scripts/catalog-publish-market.mjs"
+        }
+      ],
+      "evidenceGroups": [
+        "market_publisher"
+      ],
+      "triggers": {
+        "push": {
+          "branches": [
+            "main"
+          ],
+          "paths": [
+            ".github/market-runs/publish-saved-six-market-complete-20260917.json",
+            ".github/workflows/publish-saved-six-market-complete-20260917.yml"
+          ]
+        }
+      },
+      "reusableCallers": [],
+      "reusableDependencies": [],
+      "workflowRunDependents": [],
+      "literalReverseReferences": [],
+      "activeRunStatus": "not_read_in_this_followup",
+      "remoteDisableAuthorizedByThisMap": false,
+      "scriptedDispatchCallers": [],
+      "scriptedDispatchDependencies": []
+    },
+    {
+      "path": ".github/workflows/release-paid-korea-history.yml",
+      "name": "Release paid Korea insurance history",
+      "category": "B_shared_release_responsibilities",
+      "why": "Закреплённый старый выпуск совмещает каталог с созданием encyclopedia calculation-release binding и переключением всего приложения; хранение shared gates и границу ingress нужно разобрать отдельно.",
+      "deletionDisposition": "separate_release_binding_and_ingress_responsibilities_before_retirement",
+      "removalScope": "workflow_yaml_only_not_transitive_scripts_or_data",
+      "currentMode": "pinned_source_and_review_gated_release_writer",
+      "literalAllJobsFalse": false,
+      "directEvidence": [
+        {
+          "path": ".github/workflows/release-paid-korea-history.yml",
+          "line": 1556,
+          "literal": "bash scripts/regcloud-deploy-with-browser.sh \"$key_file\""
+        }
+      ],
+      "evidenceGroups": [
+        "korea_history_mixed_release"
+      ],
+      "triggers": {
+        "workflow_dispatch": null,
+        "push": {
+          "branches": [
+            "main"
+          ],
+          "paths": [
+            ".github/workflows/release-paid-korea-history.yml"
+          ]
+        }
+      },
+      "reusableCallers": [],
+      "reusableDependencies": [],
+      "workflowRunDependents": [
+        {
+          "path": ".github/workflows/regcloud-release-retention.yml",
+          "upstreamName": "Release paid Korea insurance history"
+        }
+      ],
+      "literalReverseReferences": [
+        {
+          "path": ".github/workflows/record-release-repair-checkpoint.yml",
+          "line": 20,
+          "kind": "workflow_source_reference",
+          "literal": "release-paid-korea-history.yml"
+        },
+        {
+          "path": "tests/regcloud-release-retention.test.py",
+          "line": 328,
+          "kind": "test_contract_reference",
+          "literal": "release-paid-korea-history.yml"
+        },
+        {
+          "path": "tests/release-speed-guard-contract.test.mjs",
+          "line": 49,
+          "kind": "test_contract_reference",
+          "literal": "release-paid-korea-history.yml"
+        }
+      ],
+      "activeRunStatus": "not_read_in_this_followup",
+      "remoteDisableAuthorizedByThisMap": false,
+      "keepProtectedHelpersAndObjects": [
+        "scripts/regcloud-deploy-production.sh",
+        "scripts/regcloud-deploy-with-browser.sh",
+        "scripts/regcloud-performance-gate.py",
+        "scripts/regcloud-browser-verdict.py",
+        "scripts/verify-frozen-speed-baselines.mjs",
+        "knowledge/encyclopedia/calculation-releases/",
+        "knowledge/encyclopedia/calculation-indexes/"
+      ],
+      "activeIngressPolicy": "Do not interrupt a possibly active switch; require terminal accepted/rollback evidence before retirement.",
+      "scriptedDispatchCallers": [],
+      "scriptedDispatchDependencies": []
+    },
+    {
+      "path": ".github/workflows/release-prepared-feed-delivery.yml",
+      "name": "Release prepared feed delivery and Korea history",
+      "category": "B_shared_release_responsibilities",
+      "why": "Закреплённый старый выпуск совмещает каталог с созданием encyclopedia calculation-release binding и переключением всего приложения; хранение shared gates и границу ingress нужно разобрать отдельно.",
+      "deletionDisposition": "separate_release_binding_and_ingress_responsibilities_before_retirement",
+      "removalScope": "workflow_yaml_only_not_transitive_scripts_or_data",
+      "currentMode": "pinned_source_and_review_gated_release_writer",
+      "literalAllJobsFalse": false,
+      "directEvidence": [
+        {
+          "path": ".github/workflows/release-prepared-feed-delivery.yml",
+          "line": 3564,
+          "literal": "bash scripts/regcloud-deploy-with-browser.sh \"$key_file\""
+        }
+      ],
+      "evidenceGroups": [
+        "prepared_delivery_mixed_release"
+      ],
+      "triggers": {
+        "workflow_dispatch": {
+          "inputs": {
+            "phase": {
+              "description": "Prepare inactive candidate or activate with every frozen gate",
+              "required": true,
+              "type": "choice",
+              "default": "prepare-only",
+              "options": [
+                "prepare-only",
+                "activate"
+              ]
+            }
+          }
+        },
+        "push": {
+          "branches": [
+            "main"
+          ],
+          "paths": [
+            ".github/workflows/release-prepared-feed-delivery.yml"
+          ]
+        }
+      },
+      "reusableCallers": [],
+      "reusableDependencies": [],
+      "workflowRunDependents": [
+        {
+          "path": ".github/workflows/regcloud-release-retention.yml",
+          "upstreamName": "Release prepared feed delivery and Korea history"
+        }
+      ],
+      "literalReverseReferences": [
+        {
+          "path": ".github/workflows/diagnose-696-owned-preparation.yml",
+          "line": 2797,
+          "kind": "workflow_source_reference",
+          "literal": "release-prepared-feed-delivery.yml"
+        },
+        {
+          "path": "tests/release-prepared-feed-source-guard.test.py",
+          "line": 11,
+          "kind": "test_contract_reference",
+          "literal": "release-prepared-feed-delivery.yml"
+        },
+        {
+          "path": "tests/release-speed-guard-contract.test.mjs",
+          "line": 49,
+          "kind": "test_contract_reference",
+          "literal": "release-prepared-feed-delivery.yml"
+        }
+      ],
+      "activeRunStatus": "not_read_in_this_followup",
+      "remoteDisableAuthorizedByThisMap": false,
+      "keepProtectedHelpersAndObjects": [
+        "scripts/regcloud-deploy-production.sh",
+        "scripts/regcloud-deploy-with-browser.sh",
+        "scripts/regcloud-performance-gate.py",
+        "scripts/regcloud-browser-verdict.py",
+        "scripts/verify-frozen-speed-baselines.mjs",
+        "knowledge/encyclopedia/calculation-releases/",
+        "knowledge/encyclopedia/calculation-indexes/"
+      ],
+      "activeIngressPolicy": "Do not interrupt a possibly active switch; require terminal accepted/rollback evidence before retirement.",
+      "scriptedDispatchCallers": [],
+      "scriptedDispatchDependencies": []
+    },
+    {
+      "path": ".github/workflows/repair-paid-encar-technical.yml",
+      "name": "Repair saved paid Korea technical fields",
+      "category": "A_legacy_catalog_workflow",
+      "why": "Старая точечная Korea plan/review/apply операция. apply-mode вызывает обычный publisher; default plan не означает отсутствие writer ветки.",
+      "deletionDisposition": "remove_yaml_only_as_part_of_replacement",
+      "removalScope": "workflow_yaml_only_not_transitive_scripts_or_data",
+      "currentMode": "conditional_catalog_writer_or_dispatcher",
+      "literalAllJobsFalse": false,
+      "directEvidence": [
+        {
+          "path": ".github/workflows/repair-paid-encar-technical.yml",
+          "line": 414,
+          "literal": "scripts/catalog-repair-paid-encar-technical.mjs apply"
+        }
+      ],
+      "evidenceGroups": [
+        "technical_repair"
+      ],
+      "triggers": {
+        "workflow_dispatch": {
+          "inputs": {
+            "controller_sha": {
+              "description": "Reviewed exact main controller revision",
+              "type": "string",
+              "required": true
+            },
+            "expected_release": {
+              "description": "Exact currently accepted health release SHA",
+              "type": "string",
+              "required": true
+            },
+            "expected_calculator": {
+              "description": "Exact currently accepted health calculation version",
+              "type": "string",
+              "required": true
+            },
+            "review_for_apply": {
+              "description": "After a successful read-only plan, wait for its exact main review receipt and apply in this same run",
+              "type": "boolean",
+              "default": false,
+              "required": true
+            }
+          }
+        }
+      },
+      "reusableCallers": [],
+      "reusableDependencies": [],
+      "workflowRunDependents": [],
+      "literalReverseReferences": [
+        {
+          "path": ".github/workflows/dispatch-paid-encar-technical-once.yml",
+          "line": 39,
+          "kind": "workflow_source_reference",
+          "literal": "repair-paid-encar-technical.yml"
+        },
+        {
+          "path": "docs/operations/2026-11-16-paid-korea-technical-repair.md",
+          "line": 47,
+          "kind": "documentation_reference",
+          "literal": "repair-paid-encar-technical.yml"
+        },
+        {
+          "path": "docs/operations/2026-11-16-raw-writer-entrypoint-audit.md",
+          "line": 106,
+          "kind": "documentation_reference",
+          "literal": "repair-paid-encar-technical.yml"
+        },
+        {
+          "path": "tests/catalog-paid-encar-review-source.test.ts",
+          "line": 18,
+          "kind": "test_contract_reference",
+          "literal": "repair-paid-encar-technical.yml"
+        },
+        {
+          "path": "tests/catalog-paid-encar-review-source.test.ts",
+          "line": 42,
+          "kind": "test_contract_reference",
+          "literal": "repair-paid-encar-technical.yml"
+        },
+        {
+          "path": "tests/catalog-paid-encar-review-source.test.ts",
+          "line": 89,
+          "kind": "test_contract_reference",
+          "literal": "repair-paid-encar-technical.yml"
+        },
+        {
+          "path": "tests/catalog-paid-encar-technical-repair.test.ts",
+          "line": 287,
+          "kind": "test_contract_reference",
+          "literal": "repair-paid-encar-technical.yml"
+        }
+      ],
+      "activeRunStatus": "not_read_in_this_followup",
+      "remoteDisableAuthorizedByThisMap": false,
+      "whyNotDryRun": "A genuine apply/publication branch remains callable; default false or a separate read-only plan does not make the workflow inert.",
+      "scriptedDispatchCallers": [
+        {
+          "from": ".github/workflows/dispatch-paid-encar-technical-once.yml",
+          "to": ".github/workflows/repair-paid-encar-technical.yml",
+          "kind": "workflow_dispatch",
+          "evidence": {
+            "path": ".github/workflows/dispatch-paid-encar-technical-once.yml",
+            "line": 75,
+            "literal": "await github.rest.actions.createWorkflowDispatch"
+          }
+        }
+      ],
+      "scriptedDispatchDependencies": []
+    }
+  ],
+  "dryRunCompanions": [
+    {
+      "path": ".github/workflows/catalog-publication-diagnosis.yml",
+      "category": "C_configured_publication_dry_run",
+      "partOfOriginal42": false,
+      "why": "Workflow sets CATALOG_PUBLICATION_DRY_RUN=1; publisher takes its dry-run branch before publication lease/persistence. This is a publication guarantee, not an assertion that every imported helper is globally read-only.",
+      "directEvidence": [
+        {
+          "path": ".github/workflows/catalog-publication-diagnosis.yml",
+          "line": 23,
+          "literal": "CATALOG_PUBLICATION_DRY_RUN:"
+        }
+      ],
+      "evidenceGroups": [
+        "publisher_dry_run"
+      ],
+      "deletionDisposition": "retire_or_replace_legacy_diagnostic_with_new_contracts",
+      "literalReverseReferences": [
+        {
+          "path": "docs/operations/2026-11-16-raw-writer-entrypoint-audit.md",
+          "line": 149,
+          "kind": "documentation_reference",
+          "literal": "catalog-publication-diagnosis.yml"
+        }
+      ]
+    },
+    {
+      "path": ".github/workflows/qualify-saved-jptrade-20260917.yml",
+      "category": "C_configured_publication_dry_run",
+      "partOfOriginal42": false,
+      "why": "Workflow sets CATALOG_PUBLICATION_DRY_RUN=1; publisher takes its dry-run branch before publication lease/persistence. This is a publication guarantee, not an assertion that every imported helper is globally read-only.",
+      "directEvidence": [
+        {
+          "path": ".github/workflows/qualify-saved-jptrade-20260917.yml",
+          "line": 26,
+          "literal": "CATALOG_PUBLICATION_DRY_RUN:"
+        }
+      ],
+      "evidenceGroups": [
+        "publisher_dry_run"
+      ],
+      "deletionDisposition": "retire_or_replace_legacy_diagnostic_with_new_contracts",
+      "literalReverseReferences": []
+    }
+  ],
+  "scriptedDispatchEdges": [
+    {
+      "from": ".github/workflows/oneshot-dispatch-japan-prestige-live-20260810.yml",
+      "to": ".github/workflows/catalog-live-recovery-japan-from-prestige.yml",
+      "kind": "workflow_dispatch",
+      "evidence": {
+        "path": ".github/workflows/oneshot-dispatch-japan-prestige-live-20260810.yml",
+        "line": 22,
+        "literal": "gh workflow run catalog-live-recovery-japan-from-prestige.yml"
+      }
+    },
+    {
+      "from": ".github/workflows/oneshot-dispatch-japan-priority.yml",
+      "to": ".github/workflows/catalog-live-recovery-japan-from-prestige.yml",
+      "kind": "workflow_dispatch",
+      "evidence": {
+        "path": ".github/workflows/oneshot-dispatch-japan-priority.yml",
+        "line": 25,
+        "literal": "catalog-live-recovery-japan-from-prestige.yml/dispatches"
+      }
+    },
+    {
+      "from": ".github/workflows/dispatch-paid-encar-technical-once.yml",
+      "to": ".github/workflows/repair-paid-encar-technical.yml",
+      "kind": "workflow_dispatch",
+      "evidence": {
+        "path": ".github/workflows/dispatch-paid-encar-technical-once.yml",
+        "line": 75,
+        "literal": "await github.rest.actions.createWorkflowDispatch"
+      }
+    }
+  ]
+}
