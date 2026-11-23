@@ -36,6 +36,13 @@ MOUNTS = {
     ('/opt/avtocena/releases/' + BASE + '/china-private', '/run/avtocena-china-switch'),
 }
 DOCKER_GET_PATHS = frozenset('/containers/' + role[1] + '/json' for role in ROLES)
+# Historical comparison only. These values never configure a new process.
+HISTORICAL_SERVING_RESOURCES = {
+    'OOMKilled': False, 'RestartCount': 0,
+    'Memory': 4 * 1024**3, 'MemorySwap': 4 * 1024**3,
+    'NanoCpus': 2000000000, 'PidsLimit': 512,
+    'RestartPolicy': {'Name': 'unless-stopped', 'MaximumRetryCount': 0},
+}
 
 
 class InventoryError(Exception):
@@ -64,6 +71,34 @@ def environment(container):
         need(key not in result, 'inventory_env_duplicate')
         result[key] = value
     return result
+
+
+def serving_resources(container):
+    host, state = container['HostConfig'], container['State']
+    values = {'OOMKilled': state['OOMKilled'], 'RestartCount': container['RestartCount'],
+              **{key: host[key] for key in ('Memory', 'MemorySwap', 'NanoCpus', 'PidsLimit')}}
+    policy = host['RestartPolicy']
+    need(type(values['OOMKilled']) is bool
+         and all(type(values[key]) is int and values[key] >= 0
+                 for key in ('RestartCount', 'Memory', 'NanoCpus'))
+         and type(values['MemorySwap']) is int and values['MemorySwap'] >= -1
+         and (values['PidsLimit'] is None or type(values['PidsLimit']) is int and values['PidsLimit'] >= -1)
+         and isinstance(policy, dict) and set(policy) == {'Name', 'MaximumRetryCount'}
+         and policy['Name'] in ('', 'no', 'always', 'unless-stopped', 'on-failure')
+         and type(policy['MaximumRetryCount']) is int and policy['MaximumRetryCount'] >= 0,
+         'inventory_resource_observation_invalid')
+    values['RestartPolicy'] = {key: policy[key] for key in ('Name', 'MaximumRetryCount')}
+    return values
+
+
+def compare_serving_resources(actual):
+    expected = HISTORICAL_SERVING_RESOURCES
+    different = [key for key in expected if key != 'RestartPolicy' and actual[key] != expected[key]]
+    different.extend('RestartPolicy.' + key for key in expected['RestartPolicy']
+                     if actual['RestartPolicy'][key] != expected['RestartPolicy'][key])
+    return {'role': 'serving', 'actual': actual, 'expectedHistorical': expected,
+            'actualSha256': digest(actual), 'historicalSha256': digest(expected),
+            'historicalPinsMatch': not different, 'mismatchedFields': different}
 
 
 def validate_container(container, role):
@@ -99,12 +134,6 @@ def validate_container(container, role):
         need(config['Labels'].get('avtocena.role') == 'china-ui-grid-dark'
              and env.get('AVTOCENA_BUILD_CALCULATION_VERSION') == BUILD,
              'inventory_serving_build')
-        # These are the existing installed identity guards, not new resource settings.
-        need(state['OOMKilled'] is False and container['RestartCount'] == 0
-             and host['Memory'] == host['MemorySwap'] == 4 * 1024**3
-             and host['NanoCpus'] == 2000000000 and host['PidsLimit'] == 512
-             and host['RestartPolicy'] == {'Name': 'unless-stopped', 'MaximumRetryCount': 0},
-             'inventory_serving_resources')
     safe = {
         'name': name, 'id': container['Id'], 'image': image, 'release': revision,
         'port': port, 'pid': state['Pid'], 'startedAt': state['StartedAt'],
@@ -113,6 +142,10 @@ def validate_container(container, role):
         'hostConfigSha256': digest(host), 'mountsSha256': digest(container['Mounts']),
         'containerConfigSha256': digest({k: v for k, v in config.items() if k != 'Env'}),
     }
+    if kind == 'serving':
+        # Keep actual state in both snapshots. A mismatch is a failed diagnostic
+        # receipt after the other checks, never a verified or deployable receipt.
+        safe['resources'] = serving_resources(container)
     return safe, env
 
 
@@ -149,15 +182,26 @@ def run_inventory(io):
     with io.lock():
         verify_config(io.config())
         before = snapshot(io)
-        verify_health(io)
-        need(3003 not in io.listening_ports(), 'inventory_candidate_port_listening')
-        after = snapshot(io)
-        verify_config(io.config())
-        verify_health(io)
-        need(before == after, 'inventory_identity_changed')
-        need(3003 not in io.listening_ports(), 'inventory_candidate_port_listening')
-        return {
-            'version': 1, 'status': 'verified_inventory_requires_review', 'readOnly': True,
+        observation = compare_serving_resources(before['serving']['resources'])
+        try:
+            verify_health(io)
+            need(3003 not in io.listening_ports(), 'inventory_candidate_port_listening')
+            after = snapshot(io)
+            observation = compare_serving_resources(after['serving']['resources'])
+            verify_config(io.config())
+            verify_health(io)
+            need(before == after, 'inventory_identity_changed')
+            need(3003 not in io.listening_ports(), 'inventory_candidate_port_listening')
+        except InventoryError as error:
+            # Preserve already validated, allowlisted observations even if a
+            # later gate fails. The error and failed status still block release.
+            error.resource_observation = observation
+            raise
+        matched = observation['historicalPinsMatch']
+        receipt = {
+            'version': 1,
+            'status': 'verified_inventory_requires_review' if matched else 'resource_state_mismatch_requires_review',
+            'readOnly': True,
             'observedAt': datetime.datetime.now(datetime.timezone.utc).isoformat(),
             'activationAuthorized': False, 'requiresReviewedRollbackPins': True,
             'lockMode': 'shared_nonblocking', 'nginxSha256': NGINX_SHA256,
@@ -165,8 +209,12 @@ def run_inventory(io):
             'rollbackPins': {kind: row['id'] for kind, row in after.items() if kind != 'serving'},
             'candidatePort': {'port': 3003, 'socketListening': False,
                               'dockerReservationVerified': False},
+            'servingResourceObservation': observation,
             'supplierRequests': 0, 'mutations': 0,
         }
+        if not matched:
+            receipt['errorCode'] = 'inventory_serving_resources'
+        return receipt
 
 
 def listening_ports_from_proc(raw):
@@ -303,11 +351,14 @@ def main(argv=None, io=None):
         need(not (sys.argv[1:] if argv is None else argv), 'inventory_arguments_not_allowed')
         receipt = run_inventory(io or LocalIO())
         print(json.dumps(receipt, sort_keys=True))
-        return 0
+        return 0 if receipt['status'] == 'verified_inventory_requires_review' else 1
     except Exception as error:
         code = str(error) if isinstance(error, InventoryError) else 'inventory_failed'
-        print(json.dumps({'status': 'failed', 'errorCode': code, 'readOnly': True,
-                          'activationAuthorized': False}, sort_keys=True))
+        receipt = {'status': 'failed', 'errorCode': code, 'readOnly': True,
+                   'activationAuthorized': False}
+        if isinstance(error, InventoryError) and getattr(error, 'resource_observation', None) is not None:
+            receipt['servingResourceObservation'] = error.resource_observation
+        print(json.dumps(receipt, sort_keys=True))
         return 1
 
 
