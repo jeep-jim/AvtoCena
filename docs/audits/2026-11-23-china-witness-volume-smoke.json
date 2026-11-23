@@ -1,0 +1,26 @@
+{
+  "passed": true,
+  "synthetic": true,
+  "base": "767c357c620c318bb7e56bd78608e6ca3cbbcba2",
+  "sourceSha256": "5c46452542677e3d6aa2f02e955a978a76b6143223554784f66393f44905e233",
+  "rows": 500001,
+  "databaseBytes": 17179873280,
+  "parts": 1025,
+  "observationFiles": 2001,
+  "observationBytes": 8976406848,
+  "reportBytes": 4195979,
+  "expectedNormalized": {
+    "rows": 500001,
+    "idsSha256": "08af29cc492a6aeb30c55e559a6427d51abfacb267fff1a0f971baefa09adf13",
+    "rowsSha256": "96acf9ac2f5e04d53633fd8cc3b84763bd088a6b7552b4d45b126081e55523cb"
+  },
+  "allReplicaPartsChecked": true,
+  "allObservationRowsAndHashesChecked": true,
+  "readbackStable": true,
+  "supplierRequests": 0,
+  "externalStorageWrites": 0,
+  "verificationWrites": 0,
+  "elapsedMs": 191872,
+  "readbackMs": 110199,
+  "maxRssKiB": 571304
+}

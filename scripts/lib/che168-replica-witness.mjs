@@ -23,9 +23,7 @@ export const CHE168_REPLICA_WORKER_CLOSURE = Object.freeze([
   'apps/web/lib/catalog/auto-api-che168.ts', 'apps/web/lib/catalog/storage.ts', 'apps/web/lib/data.ts',
   'apps/web/lib/catalog/china-year-policy.ts', 'apps/web/lib/catalog/collection-controls.ts',
 ]);
-export const CHE168_REPLICA_WITNESS_LIMITS = Object.freeze({parts: 1024, replicaBytes: 16 * 1024 ** 3,
-  rows: 500000, payloadBytes: 1024 ** 2, shardBytes: 32 * 1024 ** 2, shards: 2000,
-  observationBytes: 8 * 1024 ** 3, reportBytes: 4 * 1024 ** 2, workMs: 300000});
+export const CHE168_REPLICA_WITNESS_LIMITS = Object.freeze({payloadBytes: 1024 ** 2, workMs: 300000});
 const CHUNK = 16 * 1024 ** 2, SHA = /^[a-f0-9]{64}$/, COMMIT = /^[a-f0-9]{40}$/;
 const INSPECTION_CHILD = '--che168-replica-inspection-child';
 const UUID = '[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}';
@@ -41,6 +39,10 @@ const signed = body => ({...body, checksum: rawDigest(body)});
 const sourceId = CHE168_REPLICA_WITNESS_SOURCE;
 const stableId = id => bytesDigest(sourceId + ':' + id).slice(0, 24);
 const safeError = error => /^che168_replica_witness_[a-z0-9_]+$/.test(error?.message || '') ? error.message : 'che168_replica_witness_failed';
+export function addChe168WitnessCount(total, increment) {
+  check(integer(total) && integer(increment), 'census');
+  const next = total + increment; check(integer(next), 'census'); return next;
+}
 
 /** Workflow SHA cannot substitute for a different or dirty collector checkout.
  * The mandatory closure must be tracked; all tracked differences and any
@@ -87,28 +89,13 @@ function boundedLimits(options) {
   return value;
 }
 
-function readFileBounded(filename, maximum) {
-  const fd = openSync(filename, constants.O_RDONLY | constants.O_NOFOLLOW);
-  try {
-    const before = fstatSync(fd); check(before.isFile() && integer(before.size, maximum, 1), 'local_file_size');
-    const pieces = []; let count = 0;
-    for (;;) {
-      const piece = Buffer.alloc(Math.min(65536, maximum - count + 1)), length = readSync(fd, piece, 0, piece.length, null);
-      if (!length) break;
-      count += length; check(count <= maximum, 'local_file_size'); pieces.push(piece.subarray(0, length));
-    }
-    const after = fstatSync(fd);
-    check(before.size === count && before.size === after.size && before.mtimeMs === after.mtimeMs && before.ctimeMs === after.ctimeMs, 'local_file_changed');
-    return Buffer.concat(pieces, count);
-  } finally {closeSync(fd);}
-}
-
-function readReport(directory, limit) {
-  const bytes = readFileBounded(path.join(directory, 'report.json'), limit);
+function readReport(directory) {
+  const pieces = [], scan = fileDigest(path.join(directory, 'report.json'), chunk => pieces.push(Buffer.from(chunk)));
+  const bytes = Buffer.concat(pieces, scan.bytes);
   const report = JSON.parse(new TextDecoder('utf-8', {fatal: true}).decode(bytes));
   check(object(report), 'report');
   const {sourceInputWitness, ...body} = report;
-  return {report, body, bytesSha256: bytesDigest(bytes)};
+  return {report, body, bytesSha256: scan.sha256};
 }
 
 function validateReport(report, config, producer, limits) {
@@ -124,7 +111,7 @@ function validateReport(report, config, producer, limits) {
     && !source.partial && !source.failure && source.snapshotBinding === binding
     && source.snapshotStartedAt === config.modifiedAt && integer(source.initialCursor) && source.initialCursor >= config.initialCursor
     && integer(source.cursor) && source.cursor >= source.initialCursor && integer(source.changes)
-    && integer(source.uniqueOffers, limits.rows, 1) && source.observations === source.uniqueOffers, 'source_report');
+    && integer(source.uniqueOffers, Number.MAX_SAFE_INTEGER, 1) && source.observations === source.uniqueOffers, 'source_report');
   const descriptor = source.replica;
   check(ROOT.test(descriptor?.key || '') && SHA.test(descriptor.sha256 || '') && descriptor.binding === binding
     && descriptor.cursor === source.cursor, 'replica_identity');
@@ -151,8 +138,8 @@ function validateReport(report, config, producer, limits) {
 function validateManifest(manifest, context, limits) {
   const {descriptor, binding, source} = context;
   check(object(manifest) && rawDigest(manifest) === descriptor.sha256 && manifest.version === 1
-    && manifest.binding === binding && manifest.cursor === source.cursor && integer(manifest.bytes, limits.replicaBytes, 1)
-    && Array.isArray(manifest.parts) && manifest.parts.length > 0 && manifest.parts.length <= limits.parts
+    && manifest.binding === binding && manifest.cursor === source.cursor && integer(manifest.bytes, Number.MAX_SAFE_INTEGER, 1)
+    && Array.isArray(manifest.parts) && manifest.parts.length > 0
     && manifest.parts.length === Math.ceil(manifest.bytes / CHUNK)
     && manifest.parts.every((part, index) => object(part) && part.bytes === Math.min(CHUNK, manifest.bytes - index * CHUNK)
       && SHA.test(part.sha256 || '')), 'manifest');
@@ -166,8 +153,8 @@ function validateJournal(head, context) {
   if (head === null) {check(source.cursor === source.initialCursor && source.changes === 0, 'journal_missing'); return;}
   check(object(head) && head.version === 2 && head.binding === journalBinding && head.initialCursor === source.initialCursor
     && head.cursor === source.cursor && head.changes === source.changes
-    && integer(head.bytes, 512 * 1024 ** 2) && integer(head.rawBytes, 8 * 1024 ** 3)
-    && Array.isArray(head.chunks) && head.chunks.length <= 10000
+    && integer(head.bytes) && integer(head.rawBytes)
+    && Array.isArray(head.chunks)
     && head.chunks.every(row => new RegExp('^' + UUID + '$').test(row?.id || '') && SHA.test(row.sha || ''))
     && new Set(head.chunks.map(row => row.id)).size === head.chunks.length
     && (head.cursor === head.initialCursor ? head.changes === 0 && head.chunks.length === 0 && head.bytes === 0 && head.rawBytes === 0
@@ -181,22 +168,45 @@ function validateProducerPin(pin, handoff) {
     && rawDigest(rawReferences(pin.references)) === handoff.referencesSha256, 'producer_pin_changed');
 }
 
-function fileDigest(filename, maximum) {
+function fileDigest(filename, onChunk = () => {}) {
   const fd = openSync(filename, constants.O_RDONLY | constants.O_NOFOLLOW), hash = createHash('sha256');
   try {
-    const before = fstatSync(fd); check(before.isFile() && integer(before.size, maximum, 1), 'database_size');
+    const before = fstatSync(fd); check(before.isFile() && integer(before.size, Number.MAX_SAFE_INTEGER, 1), 'database_size');
     const buffer = Buffer.alloc(65536); let total = 0, header;
     for (;;) {const bytes = readSync(fd, buffer, 0, buffer.length, null); if (!bytes) break;
-      total += bytes; check(total <= maximum, 'database_size'); if (!header) header = Buffer.from(buffer.subarray(0, Math.min(100, bytes))); hash.update(buffer.subarray(0, bytes));}
+      total = addChe168WitnessCount(total, bytes); check(total <= before.size, 'database_size');
+      if (!header) header = Buffer.from(buffer.subarray(0, Math.min(100, bytes)));
+      hash.update(buffer.subarray(0, bytes)); onChunk(buffer.subarray(0, bytes));}
     const after = fstatSync(fd); check(total === before.size && total === after.size
       && before.mtimeMs === after.mtimeMs && before.ctimeMs === after.ctimeMs, 'database_changed');
     return {bytes: total, sha256: hash.digest('hex'), header};
   } finally {closeSync(fd);}
 }
 
+function readObservationShard(filename, rowBytes, onRow) {
+  let pending = [], pendingBytes = 0, rows = 0;
+  const scan = fileDigest(filename, chunk => {
+    let start = 0;
+    while (start < chunk.length) {
+      const newline = chunk.indexOf(10, start), end = newline < 0 ? chunk.length : newline;
+      if (end > start) {
+        pendingBytes = addChe168WitnessCount(pendingBytes, end - start); check(pendingBytes <= rowBytes, 'observation_size');
+        pending.push(Buffer.from(chunk.subarray(start, end)));
+      }
+      if (newline < 0) break;
+      check(pendingBytes > 0, 'observation_size');
+      const row = JSON.parse(new TextDecoder('utf-8', {fatal: true}).decode(Buffer.concat(pending, pendingBytes)));
+      pending = []; pendingBytes = 0; rows = addChe168WitnessCount(rows, 1);
+      check(rows <= 500, 'observation_count'); onRow(row); start = newline + 1;
+    }
+  });
+  check(pendingBytes === 0, 'shard_bytes');
+  return {bytes: scan.bytes, sha256: scan.sha256, rows};
+}
+
 function inspectDatabase({filename, directory, source, config, completedAt, limits, deadline}) {
   const within = () => check(Date.now() < deadline, 'deadline'); within();
-  const before = fileDigest(filename, limits.replicaBytes), header = before.header;
+  const before = fileDigest(filename), header = before.header;
   check(header?.length === 100 && header.subarray(0, 16).equals(Buffer.from('SQLite format 3\0'))
     && header[18] === 1 && header[19] === 1, 'closed_database');
   const db = new DatabaseSync(filename, {readOnly: true, allowExtension: false});
@@ -216,9 +226,10 @@ function inspectDatabase({filename, directory, source, config, completedAt, limi
     const integrity = db.prepare('PRAGMA integrity_check').all(); within();
     check(integrity.length === 1 && integrity[0].integrity_check === 'ok', 'integrity');
     const count = Number(db.prepare('SELECT count(*) AS n FROM inventory').get().n);
-    check(integer(count, limits.rows, 1) && count === source.uniqueOffers, 'count');
+    check(integer(count, Number.MAX_SAFE_INTEGER, 1) && count === source.uniqueOffers, 'count');
     const pageSize = Number(db.prepare('PRAGMA page_size').get().page_size), pages = Number(db.prepare('PRAGMA page_count').get().page_count);
-    check(integer(pageSize, 65536, 512) && integer(pages, Number.MAX_SAFE_INTEGER, 1) && pageSize * pages === before.bytes, 'database_pages');
+    check(integer(pageSize, 65536, 512) && integer(pages, Number.MAX_SAFE_INTEGER, 1)
+      && integer(pageSize * pages) && pageSize * pages === before.bytes, 'database_pages');
     const pairs = new Map(), idsHash = createHash('sha256').update('['), payloadHash = createHash('sha256').update('[');
     let previous = '', rows = 0, minEvent = Infinity, maxEvent = -Infinity;
     for (const row of db.prepare('SELECT id,payload,event FROM inventory ORDER BY id COLLATE BINARY').iterate()) {
@@ -231,7 +242,7 @@ function inspectDatabase({filename, directory, source, config, completedAt, limi
         && offer.operational?.provider === 'auto-api.com' && offer.operational.detailIdentityVerified === true, 'row_identity');
       if (rows) {idsHash.update(','); payloadHash.update(',');}
       idsHash.update(JSON.stringify(row.id)); payloadHash.update(JSON.stringify([row.id, bytesDigest(row.payload), row.event]));
-      previous = row.id; rows++; minEvent = Math.min(minEvent, row.event); maxEvent = Math.max(maxEvent, row.event);
+      previous = row.id; rows = addChe168WitnessCount(rows, 1); minEvent = Math.min(minEvent, row.event); maxEvent = Math.max(maxEvent, row.event);
       offer.operational = {...offer.operational, lastSeenAt: completedAt,
         che168ActiveVerification: {method: 'snapshot_and_complete_change_stream', snapshotBinding: source.snapshotBinding,
           initialCursor: config.initialCursor, cursor: source.cursor, verifiedAt: completedAt}};
@@ -240,21 +251,18 @@ function inspectDatabase({filename, directory, source, config, completedAt, limi
     check(rows === count, 'count');
     inventory = {rows, idsSha256: idsHash.update(']').digest('hex'), rowsSha256: payloadHash.update(']').digest('hex'), minEvent, maxEvent};
     const seen = new Set(), files = [], names = readdirSync(directory).filter(name => name.startsWith(sourceId + '-')).sort(ascii);
-    check(names.length > 0 && names.length <= limits.shards, 'shard_count'); let totalBytes = 0;
+    check(names.length > 0, 'shard_count'); let totalBytes = 0;
     for (const [index, name] of names.entries()) {
       within(); check(name === sourceId + '-' + String(index + 1).padStart(6, '0') + '.jsonl', 'shard_name');
       const target = path.join(directory, name); check(lstatSync(target).isFile(), 'shard_type');
-      const bytes = readFileBounded(target, limits.shardBytes); totalBytes += bytes.length;
-      check(totalBytes <= limits.observationBytes && bytes.at(-1) === 10, 'shard_bytes');
-      let start = 0, observations = 0;
-      for (let cursor = 0; cursor < bytes.length; cursor++) if (bytes[cursor] === 10) {
-        within(); check(cursor > start && cursor - start <= limits.payloadBytes + 4096, 'observation_size');
-        const row = JSON.parse(new TextDecoder('utf-8', {fatal: true}).decode(bytes.subarray(start, cursor))); start = cursor + 1;
+      const actual = readObservationShard(target, limits.payloadBytes + 4096, row => {
+        within();
         check(row?.stage === 'detail' && row.observedAt === completedAt && object(row.offer)
           && !seen.has(row.offer.id) && pairs.get(row.offer.id) === rawDigest(row.offer), 'observation_changed');
-        seen.add(row.offer.id); observations++; check(seen.size <= count && observations <= 500, 'observation_count');
-      }
-      files.push({name, bytes: bytes.length, sha256: bytesDigest(bytes), rows: observations});
+        seen.add(row.offer.id); check(seen.size <= count, 'observation_count');
+      });
+      totalBytes = addChe168WitnessCount(totalBytes, actual.bytes);
+      files.push({name, ...actual});
     }
     check(seen.size === count && seen.size === source.observations, 'observation_missing');
     const sorted = [...pairs].sort(([a], [b]) => ascii(a, b));
@@ -262,7 +270,7 @@ function inspectDatabase({filename, directory, source, config, completedAt, limi
     inventory.observationFilesSha256 = rawDigest(files); inventory.observationBytes = totalBytes;
     observationFiles = files;
   } finally {db.close();}
-  within(); const after = fileDigest(filename, limits.replicaBytes);
+  within(); const after = fileDigest(filename);
   check(after.sha256 === before.sha256 && after.bytes === before.bytes && readdirSync(path.dirname(filename)).length === 1, 'database_changed');
   return {normalized, inventory, observationFiles, schemaSha256, databaseSha256: before.sha256, databaseBytes: before.bytes};
 }
@@ -331,7 +339,7 @@ export async function verifyChe168ReplicaInput({storage, directory, config, prod
     && storage?.driver === 'object' && typeof storage.readJson === 'function' && typeof storage.getBinary === 'function'
     && Number.isFinite(deadline) && deadline > Date.now() && deadline <= Date.now() + limits.workMs, 'arguments');
   try {
-    within(); const initial = readReport(directory, limits.reportBytes), context = validateReport(initial.body, config, producer, limits);
+    within(); const initial = readReport(directory), context = validateReport(initial.body, config, producer, limits);
     const {source, descriptor, binding, journalKey, handoff} = context, manifestKey = descriptor.key + '/manifest.json';
     const keys = new Set([manifestKey, journalKey + '/head.json', handoff.key]);
     const bounded = async call => {
@@ -343,8 +351,7 @@ export async function verifyChe168ReplicaInput({storage, directory, config, prod
     };
     const read = async key => {
       within(); check(keys.has(key), 'read_scope'); const value = await bounded(() => storage.readJson(key, null)); within();
-      check((object(value) || value === null && key === journalKey + '/head.json')
-        && Buffer.byteLength(JSON.stringify(value)) <= 4 * 1024 ** 2, 'read_size'); return value;
+      check(object(value) || value === null && key === journalKey + '/head.json', 'read_size'); return value;
     };
     const manifest = await read(manifestKey); validateManifest(manifest, context, limits);
     const journal = await read(journalKey + '/head.json'); validateJournal(journal, context);
@@ -369,10 +376,10 @@ export async function verifyChe168ReplicaInput({storage, directory, config, prod
     check(same(readdirSync(directory).filter(name => name.startsWith(sourceId + '-')).sort(ascii),
       actual.observationFiles.map(row => row.name)), 'observations_changed');
     for (const file of actual.observationFiles) {
-      within(); const bytes = readFileBounded(path.join(directory, file.name), limits.shardBytes);
-      check(bytes.length === file.bytes && bytesDigest(bytes) === file.sha256, 'observations_changed');
+      within(); const actual = fileDigest(path.join(directory, file.name));
+      check(actual.bytes === file.bytes && actual.sha256 === file.sha256, 'observations_changed');
     }
-    const final = readReport(directory, limits.reportBytes); check(final.bytesSha256 === initial.bytesSha256, 'report_changed'); within();
+    const final = readReport(directory); check(final.bytesSha256 === initial.bytesSha256, 'report_changed'); within();
     const witness = signed({version: 1, kind: CHE168_REPLICA_WITNESS_KIND, sourceId, producer: {...producer},
       snapshot: {root: descriptor.key, completeSha256: descriptor.sha256, pages: manifest.parts.length,
         pagesSha256: rawDigest(manifest.parts.map((part, index) => [index, part.sha256, part.bytes])),
@@ -393,8 +400,8 @@ export function assertChe168ReplicaInputWitness(value) {
   check(object(value) && SHA.test(value.checksum || ''), 'checksum'); const {checksum, ...body} = value;
   check(rawDigest(body) === checksum && value.version === 1 && value.kind === CHE168_REPLICA_WITNESS_KIND
     && value.sourceId === sourceId && ROOT.test(value.snapshot?.root || '')
-    && SHA.test(value.snapshot.completeSha256 || '') && integer(value.snapshot.pages, 1024, 1)
-    && SHA.test(value.snapshot.pagesSha256 || '') && integer(value.snapshot.rows, 500000, 1)
+    && SHA.test(value.snapshot.completeSha256 || '') && integer(value.snapshot.pages, Number.MAX_SAFE_INTEGER, 1)
+    && SHA.test(value.snapshot.pagesSha256 || '') && integer(value.snapshot.rows, Number.MAX_SAFE_INTEGER, 1)
     && Number.isFinite(Date.parse(value.snapshot.completedAt)), 'witness');
   check(/^\d{1,20}$/.test(value.producer?.runId || '') && /^[1-9]\d{0,5}$/.test(value.producer?.attempt || '')
     && COMMIT.test(value.producer?.sourceSha || ''), 'producer');
@@ -404,13 +411,13 @@ export function assertChe168ReplicaInputWitness(value) {
     && proof.integrity === 'ok' && SHA.test(proof.binding || '') && integer(proof.initialCursor)
     && integer(proof.replayInitialCursor) && proof.replayInitialCursor >= proof.initialCursor
     && integer(proof.cursor) && proof.cursor >= proof.replayInitialCursor
-    && integer(proof.databaseBytes, CHE168_REPLICA_WITNESS_LIMITS.replicaBytes, 1)
+    && integer(proof.databaseBytes, Number.MAX_SAFE_INTEGER, 1)
     && value.snapshot.pages === Math.ceil(proof.databaseBytes / CHUNK)
     && ['databaseSha256', 'schemaSha256', 'compressedPartsSha256'].every(key => SHA.test(proof[key] || ''))
     && proof.inventory?.rows === normalized.rows && ['idsSha256', 'rowsSha256', 'observationFilesSha256'].every(key => SHA.test(proof.inventory[key] || ''))
     && integer(proof.inventory.minEvent, proof.cursor, proof.initialCursor - 1)
     && integer(proof.inventory.maxEvent, proof.cursor, proof.inventory.minEvent)
-    && integer(proof.inventory.observationBytes, CHE168_REPLICA_WITNESS_LIMITS.observationBytes, 1)
+    && integer(proof.inventory.observationBytes, Number.MAX_SAFE_INTEGER, 1)
     && proof.completion?.authority === 'saved_completed_producer_report' && proof.completion.terminalResponseArchived === false
     && proof.completion.cursor === proof.cursor && integer(proof.completion.changes)
     && typeof proof.completion.journalHeadFound === 'boolean'
