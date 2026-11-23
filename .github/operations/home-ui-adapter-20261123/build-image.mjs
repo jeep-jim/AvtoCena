@@ -27,6 +27,7 @@ export function imageBuildReceipt({proof, inspection, probeLog, imageArchiveSha2
   assertHomeSourceEvidence(proof);
   need(/^[a-f0-9]{64}$/.test(imageArchiveSha256 || '') && /^[a-f0-9]{40}$/.test(controllerSha || ''), 'digest');
   need(/^sha256:[a-f0-9]{64}$/.test(inspection?.Id || '') && inspection.Os === 'linux' && inspection.Architecture === 'amd64', 'image_identity');
+  need(Number.isSafeInteger(inspection.Size) && inspection.Size > 0, 'image_size');
   const config = inspection.Config;
   need(config?.WorkingDir === '/app' && JSON.stringify(config.Cmd) === JSON.stringify(['node','apps/web/server.js'])
     && config.Labels?.['org.opencontainers.image.revision'] === HOME_UI.source
@@ -51,6 +52,7 @@ export function imageBuildReceipt({proof, inspection, probeLog, imageArchiveSha2
   return {version:1, status:'verified_exact_home_image_build', activationAuthorized:false,
     source:HOME_UI.source, tree:HOME_UI.tree, sourceCalculationVersion:HOME_UI.sourceCalculationVersion,
     intendedServingCalculationVersion:HOME_UI.servingCalculationVersion, imageId:inspection.Id, imageArchiveSha256,
+    imageUnpackedBytes:inspection.Size,
     nodeVersion:probe.nodeVersion, modelAssetSha256:ASSET, privateIndexInImage:false,
     resourceProbePassed:true, requestedHeapBytes:resource.requestedHeapBytes, actualHeapBytes:resource.actualHeapBytes,
     resourceFiles, controllerSha, sourceProof:proof, hostContacted:false, runtimeChanged:false,
@@ -79,8 +81,10 @@ async function fileDigest(filename) {
 
 /** Ephemeral runner only: build/probe/hash, no SSH, registry push, REG writes or
  * public image artifact. The separate accepted runtime is never contacted. */
-export async function buildHomeImage(sourceRoot, outputRoot) {
-  const invocation = checkBuildInvocation();
+async function buildImage(sourceRoot, outputRoot, activation) {
+  const checkInvocation = activation ? () => verifyReadonlyInvocation({root:controllerRoot,
+    markerPath:'.github/market-runs/home-ui-activation.json', operation:'prepare-home-ui-c162'}) : checkBuildInvocation;
+  const invocation = checkInvocation();
   verifyHomeGateFiles(controllerRoot);
   const proof = verifyHomeSourceCheckout(sourceRoot);
   const runner = await fs.realpath(process.env.RUNNER_TEMP || '');
@@ -106,7 +110,7 @@ export async function buildHomeImage(sourceRoot, outputRoot) {
   }
   const docker = args => execute('/usr/bin/docker', ['--host=unix:///var/run/docker.sock', ...args], {env});
   const tag = 'avtocena-home-build:' + HOME_UI.source;
-  checkBuildInvocation();
+  checkInvocation();
   await execute('/usr/bin/docker', ['--host=unix:///var/run/docker.sock','build','--pull',
     '--label','org.opencontainers.image.revision=' + HOME_UI.source,
     '--label','org.opencontainers.image.source=https://github.com/jeep-jim/AvtoCena',
@@ -125,6 +129,11 @@ export async function buildHomeImage(sourceRoot, outputRoot) {
   console.log(JSON.stringify(receipt));
   return receipt;
 }
+
+export const buildHomeImage = (sourceRoot, outputRoot) => buildImage(sourceRoot, outputRoot, false);
+// Separate, closed entry profile; build-only callers retain their original
+// marker/manual checks and cannot publish, contact the VM or bind private data.
+export const buildHomeImageForActivation = (sourceRoot, outputRoot) => buildImage(sourceRoot, outputRoot, true);
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   try {
