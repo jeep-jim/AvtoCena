@@ -1,4 +1,4 @@
-name: Prepare and accept exact home UI c162
+name: Prepare and accept exact home UI catalog-0509
 on:
   workflow_dispatch:
     inputs:
@@ -13,7 +13,7 @@ permissions:
   contents: read
   actions: read
 concurrency:
-  group: avtocena-home-ui-c162
+  group: avtocena-home-ui-catalog-0509
   cancel-in-progress: false
 jobs:
   accept:
@@ -52,13 +52,18 @@ jobs:
           python3 -I -B tests/home-ui-host-driver.test.py
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
-          ref: c1622514c73e78ee798ae321c242174aef71706c
+          ref: 0509e76cb02523157c98804c52edd7eb784916ba
           path: application
           persist-credentials: false
           fetch-depth: 1
-      - name: Fetch retained source for the unchanged calculation closure
+      - name: Fetch the retained source for the exact filter and pricing comparison
         working-directory: application
         run: git fetch --no-write-fetch-head --depth=1 origin 22867cbcfaee27b2e8917b6bf880e44827f67b60
+      - name: Check the exact search code with saved links, membership, pagination and customer prices
+        working-directory: application
+        run: |
+          npm ci --no-audit --no-fund
+          node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/prepared-china-filter-index.test.ts tests/catalog-china-common-grid.test.ts tests/catalog-japan-filter-rail.test.ts tests/catalog-market-page-boundary.test.ts tests/catalog-editable-power-scenario.test.ts tests/home-card-payload.test.ts
       - name: Prepare the existing browser gate outside the application checkout
         shell: bash
         run: |

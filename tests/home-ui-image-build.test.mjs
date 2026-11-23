@@ -12,7 +12,7 @@ import {imageBuildReceipt, RESOURCE_FILES, checkBuildInvocation, IMAGE_MARKER, I
 import {parseNodeOptions} from '../scripts/lib/node-resource-memory.mjs';
 
 const root = fileURLToPath(new URL('..', import.meta.url)), run = promisify(execFile);
-const proof = () => ({version:1, clean:true, closureUnchanged:true,
+const proof = () => ({version:1, clean:true, reviewedFilterChangesOnly:true,
   ...Object.fromEntries(['source','tree','retainedSource','retainedTree','sourceCalculationVersion',
     'servingCalculationVersion','codeDiffSha256','sourceClosureRecords','codePaths'].map(key => [key, structuredClone(HOME_UI[key])]))});
 const fixture = () => ({proof:proof(), imageArchiveSha256:'c'.repeat(64), controllerSha:'d'.repeat(40),
@@ -111,10 +111,10 @@ test('build workflow has no runtime transport or private artifact and mandatory 
   assert.match(workflow, /github\.repository_id == '1289722938'/);
   assert.match(workflow, /github\.run_attempt == '1'/);
   assert.ok(workflow.includes(IMAGE_MARKER));
-  assert.match(workflow, /ref: c1622514c73e78ee798ae321c242174aef71706c/);
+  assert.match(workflow, /ref: 0509e76cb02523157c98804c52edd7eb784916ba/);
   assert.match(workflow, /git fetch --no-write-fetch-head --depth=1 origin 22867cbcfaee27b2e8917b6bf880e44827f67b60/);
   assert.doesNotMatch(workflow, /secrets\.|SSH|scp|contents: write|actions: write|schedule:|catalog-publish|regcloud-deploy/);
-  assert.match(workflow, /path: \$\{\{ runner.temp \}\}\/home-ui-image-c162\/receipt\.json/);
+  assert.match(workflow, /path: \$\{\{ runner.temp \}\}\/home-ui-image-catalog-0509\/receipt\.json/);
   const cli = await fs.readFile(path.join(root, '.github/operations/home-ui-adapter-20261123/build-image.mjs'), 'utf8');
   assert.match(cli, /--host=unix:\/\/\/var\/run\/docker\.sock/);
   assert.match(cli, /'archive','--format=tar'/);

@@ -378,6 +378,15 @@ class HostPrimitiveTests(unittest.TestCase):
             if path.startswith('/cars/offer/'):
                 identity = path.split('/')[3].split('?')[0]
                 return 200, None, ('<html><main data-offer-id="' + identity + '" data-offer-price-rub="1500000"></main></html>').encode()
+            if path in (host.CHINA_GRID,host.CHINA_SAVED_GRID,host.CHINA_FILTER+'&countOnly=1',*host.CHINA_FILTER_PAGES):
+                filtered='powerTo=160' in path
+                start=24 if 'page=2' in path else 0
+                rows=[] if 'countOnly' in path else [
+                    {'id':format(i, '024x'),'market':'china','totalRub':1500000,'preparedChinaSelection':{'generationId':host.CHINA_CUT}}
+                    for i in range(start,start+24)]
+                if changes.get('duplicateChina') and 'page=2' in path: rows[0]['id']=format(0,'024x')
+                data={'ok':True,'items':rows,'generationId':host.CHINA_CUT,'total':host.CHINA_FILTER_TOTAL if filtered else host.CHINA_TOTAL}
+                return 200,None,host.json_bytes(data)
             market = path.split('market=')[1].split('&')[0] if 'market=' in path else 'korea'
             row = {'id': 'a' * 24, 'market': market, 'totalRub': 1500000, 'powerHp': None,
                    'operational': {'semanticEvidence': {'powerHp': {'confidence': 'unknown', 'provenance': [{'private': SECRET}]}}}}
@@ -390,8 +399,9 @@ class HostPrimitiveTests(unittest.TestCase):
         receipt = host.check_card_price_auth_parity(lambda _: None, get=get)
         self.assertTrue(receipt['passed'])
         self.assertNotIn(SECRET, json.dumps(receipt))
-        self.assertTrue(all('source=existing' in path for _, path in calls if '/search?' in path))
-        for change in ({'row': {'powerHp': 0}}, {'row': {'totalRub': None}}, {'auth': 200}, {'searchBibliography': True}):
+        self.assertTrue(all('source=existing' in path or path == host.CHINA_GRID for _, path in calls if '/search?' in path))
+        self.assertEqual(receipt['chinaSearch']['distinctPageIds'],48)
+        for change in ({'duplicateChina': True},{'row': {'powerHp': 0}}, {'row': {'totalRub': None}}, {'auth': 200}, {'searchBibliography': True}):
             changes.clear()
             changes.update(change)
             with self.assertRaises(host.HostError):

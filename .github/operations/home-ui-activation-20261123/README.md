@@ -1,19 +1,16 @@
-# Exact home UI c162 activation
+# Catalog search and home activation for 0509e76
+The candidate is `0509e76cb02523157c98804c52edd7eb784916ba`. It includes the dealer search, filtered mixed-market previews, the homepage payload change and the verified China index for the accepted 168,662 rows. Its source calculation fingerprint is `5d791a95278c760ed50d53a4ddf78373f33980c228e7cdc3e1fc5d916bb48d9b`. The incumbent public pricing identity is `4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90`. The controller checks all seven changed source records, their exact before/after Git blobs, the full code diff, the retained runtime, the catalog lease and the private encyclopedia binding. The accepted pricing inputs, applications of tariffs and package dependencies are unchanged.
 
-This controller deploys only `c1622514c73e78ee798ae321c242174aef71706c`.
-The accepted six-path application diff, 6,359 unchanged calculation records,
-source `672958…` → serving `465438…` bridge and private `bf2c72…` index remain
-enforced by `home-ui-only-20261123/contract.mjs` and `private-binding.mjs`.
-The main application tree is never deployed.
+The retained China source=existing URL returns 503. The controller compares all 24 rows, their prices and the first detail between both runtimes using the retained canonical page. It additionally requires the saved-link alias to return the same complete page on the candidate, 64,605 matching cars in the filtered count, and 48 distinct IDs over the first two filtered pages. The existing 17-route speed gates, dealer/browser checks and rollback transaction remain mandatory.
 
 ## Concrete entry and review
 
 1. Merge the controller after CI. Start `home-ui-activation.yml` on exact main,
    either by its existing manual SHA input or one marker-only commit at
    `.github/market-runs/home-ui-activation.json` with exactly
-   `{version:1, operation:"prepare-home-ui-c162", approvedSourceSha:<main parent>}`.
+   `{version:1, operation:"prepare-home-ui-catalog-0509", approvedSourceSha:<main parent>}`.
    Do not combine another changed file or preceding commit with this push.
-2. The runner checks matching successful CI, builds clean c162 and probes actual
+2. The runner checks matching successful CI, builds the exact search candidate and probes actual
    Alpine Node 24.22.1, the immutable public model asset and applied resource heap.
    It refuses an active Korea recovery or another writer workflow. It conditionally
    acquires the existing publication lease; it never steals or forces an owner.
@@ -37,7 +34,7 @@ The main application tree is never deployed.
 
 - A persistent Python session holds the existing exclusive runtime flock.
   Every effect requires the driver's current owner/manifest proof. The private
-  binding is created only for c162 with `ifNoneMatch` and readback; no catalogue
+  binding is created only for the candidate SHA with `ifNoneMatch` and readback; no catalogue
   manifest, listing, price or source generation is changed.
 - Image tar and private JSON stream in bounded chunks. The host checks digests
   before Docker load/use. Private data and the external resource launcher are

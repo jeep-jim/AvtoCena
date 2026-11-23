@@ -11,7 +11,7 @@ import {assertFullServerReceipt, assertHomeBrowserVerdict, assertReviewedInvento
 import {assertStagedCalculatorBuild} from '../scripts/lib/catalog-staged-budget.mjs';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
-const sourceProof = () => ({version:1, clean:true, closureUnchanged:true,
+const sourceProof = () => ({version:1, clean:true, reviewedFilterChangesOnly:true,
   ...Object.fromEntries(['source','tree','retainedSource','retainedTree','sourceCalculationVersion',
     'servingCalculationVersion','codeDiffSha256','sourceClosureRecords','codePaths'].map(key => [key, structuredClone(HOME_UI[key])]))});
 const nonce = 'a'.repeat(32), {routes} = verifyHomeGateFiles(root);
@@ -46,7 +46,7 @@ test('the bridge admits only the exact reviewed home tuple and source proof', ()
     [HOME_UI.source, HOME_UI.servingCalculationVersion, HOME_UI.servingCalculationVersion],
   ]) assert.throws(() => assertStagedCalculatorBuild(release, build, serving), /calculation_version_mismatch/);
   for (const change of [proof => proof.tree = 'f'.repeat(40), proof => proof.clean = false,
-    proof => proof.closureUnchanged = false, proof => proof.codePaths.push('apps/web/lib/catalog/storage.ts'),
+    proof => proof.reviewedFilterChangesOnly = false, proof => proof.codePaths.push('apps/web/lib/catalog/storage.ts'),
     proof => proof.sourceClosureRecords--]) {
     const proof = sourceProof(); change(proof); assert.throws(() => assertHomeSourceEvidence(proof), /home_ui_source/);
   }
