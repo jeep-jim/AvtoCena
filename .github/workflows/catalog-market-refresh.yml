@@ -12,6 +12,9 @@ on:
         type: boolean
         required: false
         default: false
+      prepared_encar_source_sha:
+        type: string
+        required: false
       prepared_encar_attempt:
         type: string
         required: false
@@ -61,6 +64,7 @@ jobs:
           EVENT_NAME: ${{ github.event_name }}
           PREPARED_ENCAR_RUN: ${{ inputs.prepared_encar_run }}
           PREPARED_ENCAR_SELF: ${{ inputs.prepared_encar_self }}
+          PREPARED_ENCAR_SOURCE_SHA: ${{ inputs.prepared_encar_source_sha }}
           PREPARED_ENCAR_ATTEMPT: ${{ inputs.prepared_encar_attempt }}
           PREPARED_ENCAR_ARTIFACT_ID: ${{ inputs.prepared_encar_artifact_id }}
           PREPARED_ENCAR_ARTIFACT_DIGEST: ${{ inputs.prepared_encar_artifact_digest }}
@@ -69,7 +73,7 @@ jobs:
           node --import tsx --input-type=module <<'JS'
           import fs from 'node:fs';
           import { catalogRefreshDue } from './scripts/lib/catalog-refresh-schedule.mjs';
-          import {validatePaidEncarArtifactBinding} from './scripts/lib/paid-encar-artifact-binding.mjs';
+          import {paidEncarBindingFromWorkflow} from './scripts/lib/paid-encar-artifact-binding.mjs';
           const {readCollectionControls}=await import('./apps/web/lib/catalog/collection-controls.ts');
           const {collectionMarketEnabled,collectionWorkflowEnabled}=await import('./apps/web/lib/catalog/collection-controls-schema.ts');
           const controls=await readCollectionControls();
@@ -79,12 +83,7 @@ jobs:
           const paused = Boolean(policy.pausedMarkets?.[market]) || !collectionMarketEnabled(controls,market) || !collectionWorkflowEnabled(controls,market);
           const preparedEncar = process.env.PREPARED_ENCAR_RUN || '';
           if (preparedEncar && (market !== 'korea' || !/^\d+$/.test(preparedEncar) || !controls.sources.encar_feed?.enabled)) throw Error('invalid_prepared_encar_source');
-          const sameRunEncar = process.env.PREPARED_ENCAR_SELF === 'true';
-          if (sameRunEncar) validatePaidEncarArtifactBinding({runId:process.env.GITHUB_RUN_ID,
-            currentAttempt:process.env.GITHUB_RUN_ATTEMPT,snapshotAttempt:process.env.PREPARED_ENCAR_ATTEMPT,
-            artifactId:process.env.PREPARED_ENCAR_ARTIFACT_ID,artifactDigest:process.env.PREPARED_ENCAR_ARTIFACT_DIGEST,
-            repositoryId:process.env.GITHUB_REPOSITORY_ID,headSha:process.env.GITHUB_SHA},{preparedRunId:preparedEncar});
-          else if (process.env.PREPARED_ENCAR_ATTEMPT || process.env.PREPARED_ENCAR_ARTIFACT_ID || process.env.PREPARED_ENCAR_ARTIFACT_DIGEST) throw Error('unexpected_prepared_encar_binding');
+          paidEncarBindingFromWorkflow(process.env);
           const run = !paused && (preparedEncar || ['push','workflow_dispatch'].includes(process.env.EVENT_NAME) || (process.env.EVENT_NAME === 'schedule' && catalogRefreshDue(new Date(), market)));
           if (paused) console.log(`Market refresh paused: ${market}: ${policy.pausedMarkets?.[market] || 'no_enabled_background_source'}`);
           const marker = process.env.EVENT_NAME === 'push' ? JSON.parse(fs.readFileSync(`.github/market-runs/${market}-refresh.json`,'utf8')) : {};
@@ -147,6 +146,27 @@ jobs:
       CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: '1'
       CATALOG_MAX_IMAGES_PER_OFFER: '30'
     steps:
+      - name: Read the verified resource launcher independently of the publisher checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          path: publication-resource-controller
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            scripts/run-node-with-resources.mjs
+            scripts/lib/node-resource-memory.mjs
+            scripts/lib/node-resource-memory-startup.mjs
+      - name: Preserve the launcher outside the exact publisher source
+        shell: bash
+        run: |
+          set -euo pipefail
+          resource_root="$RUNNER_TEMP/avtocena-node-resources"
+          mkdir -p "$resource_root/scripts/lib"
+          cp publication-resource-controller/scripts/run-node-with-resources.mjs "$resource_root/scripts/"
+          cp publication-resource-controller/scripts/lib/node-resource-memory.mjs "$resource_root/scripts/lib/"
+          cp publication-resource-controller/scripts/lib/node-resource-memory-startup.mjs "$resource_root/scripts/lib/"
+          rm -rf -- publication-resource-controller
       - uses: actions/checkout@v4
         with:
           ref: ${{ inputs.prepared_encar_run && github.sha || github.event.workflow_run.head_sha || github.sha }}
@@ -160,7 +180,7 @@ jobs:
         run: node --import tsx scripts/catalog-collection-plan.mjs
       - name: Preserve the complete Che168 file in private storage
         if: steps.sources.outputs.feed == 'true'
-        run: node --import tsx scripts/catalog-che168-snapshot-archive.mjs
+        run: node "$RUNNER_TEMP/avtocena-node-resources/scripts/run-node-with-resources.mjs" --import tsx scripts/catalog-che168-snapshot-archive.mjs
       - name: Verify paid Che168 access before collection
         if: steps.sources.outputs.feed == 'true'
         run: |
@@ -183,25 +203,25 @@ jobs:
           github-token: ${{ github.token }}
       - name: Validate only saved Autohome observations before reuse
         if: steps.sources.outputs.feed == 'true' && needs.plan.outputs.autohome_reuse_run_id != ''
-        run: node --import tsx scripts/catalog-restore-autohome-intake.mjs
+        run: node "$RUNNER_TEMP/avtocena-node-resources/scripts/run-node-with-resources.mjs" --import tsx scripts/catalog-restore-autohome-intake.mjs
       - name: Collect listing, exact detail and technical tables
         if: steps.sources.outputs.parsers != ''
         env:
           # China HTML sources require the owner switch; never fallback on feed failure.
           CATALOG_INTAKE_SOURCE_IDS: ${{ steps.sources.outputs.parsers }}
           CATALOG_INTAKE_TIME_MS: ${{ matrix.market == 'china' && '1800000' || matrix.market == 'korea' && '18000000' || '12600000' }}
-        run: node --import tsx scripts/catalog-source-intake.mjs
+        run: node "$RUNNER_TEMP/avtocena-node-resources/scripts/run-node-with-resources.mjs" --import tsx scripts/catalog-source-intake.mjs
       - name: Sync Che168 from the complete CSV and then only committed changes
         if: steps.sources.outputs.feed == 'true'
-        run: node --import tsx scripts/catalog-auto-api-che168-bulk-intake.mjs
+        run: node "$RUNNER_TEMP/avtocena-node-resources/scripts/run-node-with-resources.mjs" --import tsx scripts/catalog-auto-api-che168-bulk-intake.mjs
       - name: Sync all Dubicars through the paid API
         if: steps.sources.outputs.dubicars_feed == 'true'
-        run: node --import tsx scripts/catalog-auto-api-dubicars-intake.mjs
+        run: node "$RUNNER_TEMP/avtocena-node-resources/scripts/run-node-with-resources.mjs" --import tsx scripts/catalog-auto-api-dubicars-intake.mjs
       - name: Preserve non-Japan collection in our private object storage
         if: always() && matrix.market != 'japan'
         run: |
           if [ -f "catalog-intake-${{ matrix.market }}/report.json" ]; then
-            node --import tsx scripts/catalog-archive-intake.mjs archive '${{ matrix.market }}' 'catalog-intake-${{ matrix.market }}'
+            node "$RUNNER_TEMP/avtocena-node-resources/scripts/run-node-with-resources.mjs" --import tsx scripts/catalog-archive-intake.mjs archive '${{ matrix.market }}' 'catalog-intake-${{ matrix.market }}'
           fi
       - uses: actions/upload-artifact@v4
         if: always()
@@ -255,8 +275,28 @@ jobs:
       CATALOG_PUBLISH_LOCK_WAIT_MS: '14400000'
       CATALOG_PUBLISH_LOCK_TTL_MS: '1800000'
       CATALOG_PUBLISH_LOCK_HEARTBEAT_MS: '300000'
-      NODE_OPTIONS: ${{ matrix.market == 'china' && '--max-old-space-size=24576' || '--max-old-space-size=12288' }}
     steps:
+      - name: Read the verified resource launcher independently of the publisher checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          path: publication-resource-controller
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            scripts/run-node-with-resources.mjs
+            scripts/lib/node-resource-memory.mjs
+            scripts/lib/node-resource-memory-startup.mjs
+      - name: Preserve the launcher outside the exact publisher source
+        shell: bash
+        run: |
+          set -euo pipefail
+          resource_root="$RUNNER_TEMP/avtocena-node-resources"
+          mkdir -p "$resource_root/scripts/lib"
+          cp publication-resource-controller/scripts/run-node-with-resources.mjs "$resource_root/scripts/"
+          cp publication-resource-controller/scripts/lib/node-resource-memory.mjs "$resource_root/scripts/lib/"
+          cp publication-resource-controller/scripts/lib/node-resource-memory-startup.mjs "$resource_root/scripts/lib/"
+          rm -rf -- publication-resource-controller
       - uses: actions/checkout@v4
         with:
           ref: ${{ matrix.market == 'china' && 'bb6317bffd1f7b1832681ac78378fe6c3e39e3b5' || (inputs.prepared_encar_run && github.sha || github.event.workflow_run.head_sha || github.sha) }}
@@ -313,8 +353,7 @@ jobs:
            console.log(JSON.stringify({market:'china',generationId:checkpoint.generationId,...outcome}));
           }
           CURSOR_CODE
-      - name: Reserve additional memory for China publication
-        if: matrix.market == 'china'
+      - name: Provide disk-backed working memory for each publication worker
         shell: bash
         run: |
           set -euo pipefail
@@ -331,20 +370,22 @@ jobs:
         run: |
           free -m
           df -h .
-          node -e 'console.log(JSON.stringify({heapLimitMiB:Math.round(require("node:v8").getHeapStatistics().heap_size_limit/1048576),availableMiB:Math.round(require("node:os").freemem()/1048576)}))'
+          node "$RUNNER_TEMP/avtocena-node-resources/scripts/run-node-with-resources.mjs" -e 'console.log(JSON.stringify({heapLimitMiB:Math.round(require("node:v8").getHeapStatistics().heap_size_limit/1048576),availableMiB:Math.round(require("node:os").freemem()/1048576)}))'
       - name: Restore collected observations without repeating source requests
         uses: actions/download-artifact@v4
-        if: needs.plan.outputs.reuse_run_id != '' && !inputs.prepared_encar_self
+        if: needs.plan.outputs.reuse_run_id != '' && !inputs.prepared_encar_self && inputs.prepared_encar_source_sha == ''
         with:
           pattern: catalog-intake-${{ matrix.market }}
           path: catalog-intake-input
           run-id: ${{ needs.plan.outputs.reuse_run_id }}
           github-token: ${{ github.token }}
-      - name: Verify the exact completed artifact from this run and producer attempt
-        if: inputs.prepared_encar_self
+      - name: Verify the exact completed artifact and original producer attempt
+        if: inputs.prepared_encar_self || inputs.prepared_encar_source_sha != ''
         env:
           GH_TOKEN: ${{ github.token }}
           PREPARED_ENCAR_RUN: ${{ inputs.prepared_encar_run }}
+          PREPARED_ENCAR_SELF: ${{ inputs.prepared_encar_self }}
+          PREPARED_ENCAR_SOURCE_SHA: ${{ inputs.prepared_encar_source_sha }}
           PREPARED_ENCAR_ATTEMPT: ${{ inputs.prepared_encar_attempt }}
           PREPARED_ENCAR_ARTIFACT_ID: ${{ inputs.prepared_encar_artifact_id }}
           PREPARED_ENCAR_ARTIFACT_DIGEST: ${{ inputs.prepared_encar_artifact_digest }}
@@ -353,19 +394,22 @@ jobs:
           import fs from 'node:fs';
           import path from 'node:path';
           import {execFileSync} from 'node:child_process';
-          import {validatePaidEncarArtifactBinding,assertPaidEncarArtifactBinding} from './scripts/lib/paid-encar-artifact-binding.mjs';
-          const binding=validatePaidEncarArtifactBinding({runId:process.env.GITHUB_RUN_ID,
-            currentAttempt:process.env.GITHUB_RUN_ATTEMPT,snapshotAttempt:process.env.PREPARED_ENCAR_ATTEMPT,
-            artifactId:process.env.PREPARED_ENCAR_ARTIFACT_ID,artifactDigest:process.env.PREPARED_ENCAR_ARTIFACT_DIGEST,
-            repositoryId:process.env.GITHUB_REPOSITORY_ID,headSha:process.env.GITHUB_SHA},
-            {preparedRunId:process.env.PREPARED_ENCAR_RUN});
+          import {paidEncarBindingFromWorkflow,assertPaidEncarArtifactBinding,assertPaidEncarPreparedRun} from './scripts/lib/paid-encar-artifact-binding.mjs';
+          const binding=paidEncarBindingFromWorkflow(process.env);
+          if (!binding) throw Error('paid_encar_artifact_binding_required');
+          if (process.env.PREPARED_ENCAR_SOURCE_SHA) {
+            const api=`repos/${process.env.GITHUB_REPOSITORY}/actions/runs/${binding.runId}`;
+            const producer=JSON.parse(execFileSync('gh',['api',api],{encoding:'utf8'}));
+            const jobs=JSON.parse(execFileSync('gh',['api',`${api}/attempts/${binding.snapshotAttempt}/jobs?per_page=100`],{encoding:'utf8'}));
+            console.log(JSON.stringify({stage:'saved_paid_preparation_verified',...assertPaidEncarPreparedRun(binding,producer,jobs.jobs)}));
+          }
           const artifact=JSON.parse(execFileSync('gh',['api',`repos/${process.env.GITHUB_REPOSITORY}/actions/artifacts/${binding.artifactId}`],{encoding:'utf8'}));
           assertPaidEncarArtifactBinding(binding,artifact);
           fs.writeFileSync(path.join(process.env.RUNNER_TEMP,'paid-encar-artifact-binding.json'),JSON.stringify(binding));
-          console.log(JSON.stringify({stage:'same_run_paid_artifact_verified',...binding}));
+          console.log(JSON.stringify({stage:'paid_artifact_verified',...binding}));
           PAID_SELF_ARTIFACT
-      - name: Verify archive bytes before extracting the same-run paid artifact
-        if: inputs.prepared_encar_self
+      - name: Verify archive bytes before extracting the bound paid artifact
+        if: inputs.prepared_encar_self || inputs.prepared_encar_source_sha != ''
         env:
           GH_TOKEN: ${{ github.token }}
           PREPARED_ENCAR_ARTIFACT_ID: ${{ inputs.prepared_encar_artifact_id }}
@@ -410,11 +454,12 @@ jobs:
         env:
           AUTO_API_CHE168_KEY: ${{ secrets.AUTO_API_CHE168_KEY }}
           CHE168_RECOVERY_ARTIFACT_RUN_ID: ${{ needs.plan.outputs.reuse_run_id }}
-        run: node --import tsx scripts/catalog-auto-api-che168-recover.mjs
+        run: node "$RUNNER_TEMP/avtocena-node-resources/scripts/run-node-with-resources.mjs" --import tsx scripts/catalog-auto-api-che168-recover.mjs
       - name: Verify prepared paid Encar inventory and current CRM switch
         if: inputs.prepared_encar_run != ''
         env:
           PREPARED_ENCAR_SELF: ${{ inputs.prepared_encar_self }}
+          PREPARED_ENCAR_SOURCE_SHA: ${{ inputs.prepared_encar_source_sha }}
         run: |
           node --import tsx --input-type=module <<'JS'
           import fs from 'node:fs';
@@ -424,7 +469,7 @@ jobs:
           import {assertCollectionEnabled} from './apps/web/lib/catalog/collection-controls.ts';
           await assertCollectionEnabled('encar_feed');
           const r=JSON.parse(fs.readFileSync('catalog-intake-input/catalog-intake-korea/report.json'));
-          if (process.env.PREPARED_ENCAR_SELF === 'true') {
+          if (process.env.PREPARED_ENCAR_SELF === 'true' || process.env.PREPARED_ENCAR_SOURCE_SHA) {
             const binding=JSON.parse(fs.readFileSync(path.join(process.env.RUNNER_TEMP,'paid-encar-artifact-binding.json'),'utf8'));
             assertPaidEncarReportBinding(binding,r);
           }
@@ -435,8 +480,8 @@ jobs:
           JS
       - name: Restore verified non-Japan input from our own storage
         if: matrix.market != 'japan'
-        run: node --import tsx scripts/catalog-archive-intake.mjs restore-for-publication '${{ matrix.market }}' "${CATALOG_INTAKE_INPUT_DIR}/catalog-intake-${{ matrix.market }}"
-      - run: node --import tsx scripts/catalog-intake-to-publication.mjs
+        run: node "$RUNNER_TEMP/avtocena-node-resources/scripts/run-node-with-resources.mjs" --import tsx scripts/catalog-archive-intake.mjs restore-for-publication '${{ matrix.market }}' "${CATALOG_INTAKE_INPUT_DIR}/catalog-intake-${{ matrix.market }}"
+      - run: node "$RUNNER_TEMP/avtocena-node-resources/scripts/run-node-with-resources.mjs" --import tsx scripts/catalog-intake-to-publication.mjs
       - name: Check bucket reserve without deleting objects
         if: matrix.market == 'japan'
         run: node scripts/run-transient-retry.mjs node --import tsx scripts/catalog-storage-preflight.mjs
@@ -495,7 +540,7 @@ jobs:
             if [ "$market" = japan ]; then node scripts/run-transient-retry.mjs node --import tsx scripts/catalog-storage-preflight.mjs || exit 1; fi
             export CATALOG_REBUILD_MARKETS="$market"
             export CATALOG_REBUILD_PUBLISH_REPORT="catalog-weekly-$market-publish-report.json"
-            if node scripts/run-transient-retry.mjs node --import tsx scripts/catalog-publish-market.mjs; then
+            if node scripts/run-transient-retry.mjs node "$RUNNER_TEMP/avtocena-node-resources/scripts/run-node-with-resources.mjs" --import tsx scripts/catalog-publish-market.mjs; then
               if [ "${{ matrix.market }}" = china ]; then
                 env YC_OBJECT_STORAGE_REQUEST_TIMEOUT_MS=30000 YC_OBJECT_STORAGE_MAX_ATTEMPTS=3 timeout --signal=TERM --kill-after=10s 600s node --import tsx "$RUNNER_TEMP/china-guarded-cursor.mjs" || failures=$((failures + 1))
               else
@@ -513,7 +558,7 @@ jobs:
           CATALOG_REBUILD_PUBLISH_REPORT: catalog-weekly-${{ matrix.market }}-publish-report.json
         run: node --import tsx scripts/record-market-refresh.mjs
       - name: Audit the published market
-        run: node --import tsx scripts/catalog-audit-visible-calculation-coverage.mjs --market '${{ matrix.market }}'
+        run: node "$RUNNER_TEMP/avtocena-node-resources/scripts/run-node-with-resources.mjs" --import tsx scripts/catalog-audit-visible-calculation-coverage.mjs --market '${{ matrix.market }}'
       - uses: actions/upload-artifact@v4
         if: always()
         with:

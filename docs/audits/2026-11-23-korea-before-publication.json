@@ -1,0 +1,153 @@
+{
+  "phase": "before-new-korea-publication",
+  "method": "One full GET per URL, sequential fresh curl process, default HTTP negotiation, no cache bypass, no retries. Network path uses environment proxy; full time includes TLS/proxy. This is not a browser rendering benchmark.",
+  "records": [
+    {
+      "name": "health",
+      "url": "https://avtocena.com/api/health",
+      "observedAtUtc": "2026-11-23T02:40:49Z",
+      "httpStatus": 200,
+      "fullTimeSeconds": 5.807404,
+      "ttfbSeconds": 5.80732,
+      "tlsSeconds": 4.94434,
+      "downloadBytes": 217,
+      "headers": {
+        "date": "Mon, 23 Nov 2026 02:40:49 GMT",
+        "content-type": "application/json"
+      },
+      "ok": true,
+      "service": "avtocena-web",
+      "catalogProjectionParts": "scoped-v1",
+      "releaseSha": "22867cbcfaee27b2e8917b6bf880e44827f67b60",
+      "calculationVersion": "4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90"
+    },
+    {
+      "name": "korea_saved",
+      "url": "https://avtocena.com/api/catalog/search?market=korea&source=existing&pageSize=24",
+      "startedAtUtc": "2026-11-23T02:42:02.468475+00:00",
+      "finishedAtUtc": "2026-11-23T02:42:11.346340+00:00",
+      "curlExit": 0,
+      "httpStatus": 200,
+      "fullTimeSeconds": 8.862868,
+      "ttfbSeconds": 5.574733,
+      "tlsSeconds": 4.697816,
+      "downloadBytes": 44888,
+      "httpVersion": "2",
+      "redirectCount": 0,
+      "headers": {
+        "date": "Mon, 23 Nov 2026 02:42:07 GMT",
+        "content-type": "application/json",
+        "cache-control": "public, max-age=30, s-maxage=30",
+        "server-timing": "catalog-read;dur=98.8, catalog-pricing;dur=22.1"
+      },
+      "bodyBytes": 44888,
+      "bodySha256": "c4ba62ed987d92bcd113d32ea084e3777d4f098986c8e181a5fb4f95a7de6311",
+      "ok": true,
+      "total": 46862,
+      "generationId": "gen_1794878284419_a611dfcf",
+      "rows": 24,
+      "hpPresent": 0,
+      "hpMin": null,
+      "hpMax": null,
+      "orderedIdsSha256": "3b72510279a3982fc5836ce6fd203ededd2094fe98f60b2b6175bfd36b12bd26",
+      "controlCards": [
+        {
+          "control": "Morning/42799484",
+          "id": "009c1fcaf73d944a40ce94bc",
+          "sourceOfferId": null,
+          "make": "Kia",
+          "model": "Morning",
+          "year": 2026,
+          "powerHp": null,
+          "engineCc": null,
+          "fuel": ""
+        }
+      ]
+    },
+    {
+      "name": "korea_saved_power160",
+      "url": "https://avtocena.com/api/catalog/search?market=korea&source=existing&powerTo=160&pageSize=24",
+      "startedAtUtc": "2026-11-23T02:42:11.347947+00:00",
+      "finishedAtUtc": "2026-11-23T02:42:16.550371+00:00",
+      "curlExit": 0,
+      "httpStatus": 200,
+      "fullTimeSeconds": 5.187188,
+      "ttfbSeconds": 4.707146,
+      "tlsSeconds": 3.548711,
+      "downloadBytes": 385966,
+      "httpVersion": "2",
+      "redirectCount": 0,
+      "headers": {
+        "date": "Mon, 23 Nov 2026 02:42:15 GMT",
+        "content-type": "application/json",
+        "cache-control": "public, max-age=30, s-maxage=30",
+        "server-timing": "catalog-read;dur=718.4, catalog-pricing;dur=8.2"
+      },
+      "bodyBytes": 385966,
+      "bodySha256": "80469f47c97e851429b668c9b19ab3553a9b4019215656cd6e5a17b5e535e8b4",
+      "ok": true,
+      "total": 139,
+      "generationId": "gen_1794878284419_a611dfcf",
+      "rows": 24,
+      "hpPresent": 24,
+      "hpMin": 160,
+      "hpMax": 160,
+      "orderedIdsSha256": "d61f6d028f855b1d4ff9949d72d43eb1b69de7f2d9c69c1561496fd756659fe6",
+      "controlCards": []
+    },
+    {
+      "name": "korea_default_power160",
+      "url": "https://avtocena.com/api/catalog/search?market=korea&powerTo=160&pageSize=24",
+      "startedAtUtc": "2026-11-23T02:42:16.554991+00:00",
+      "finishedAtUtc": "2026-11-23T02:42:21.702205+00:00",
+      "curlExit": 0,
+      "httpStatus": 200,
+      "fullTimeSeconds": 5.136779,
+      "ttfbSeconds": 4.552912,
+      "tlsSeconds": 3.494501,
+      "downloadBytes": 385966,
+      "httpVersion": "2",
+      "redirectCount": 0,
+      "headers": {
+        "date": "Mon, 23 Nov 2026 02:42:20 GMT",
+        "content-type": "application/json",
+        "cache-control": "public, max-age=30, s-maxage=30",
+        "server-timing": "catalog-read;dur=63.9, catalog-pricing;dur=27.6"
+      },
+      "bodyBytes": 385966,
+      "bodySha256": "19e1a825269197e7cd4065c105b2e1d8f8fcc114494785eb17f227d9c4b41528",
+      "ok": true,
+      "total": 139,
+      "generationId": "gen_1794878284419_a611dfcf",
+      "rows": 24,
+      "hpPresent": 24,
+      "hpMin": 160,
+      "hpMax": 160,
+      "orderedIdsSha256": "d61f6d028f855b1d4ff9949d72d43eb1b69de7f2d9c69c1561496fd756659fe6",
+      "controlCards": []
+    },
+    {
+      "name": "home",
+      "url": "https://avtocena.com/",
+      "startedAtUtc": "2026-11-23T02:42:21.706977+00:00",
+      "finishedAtUtc": "2026-11-23T02:42:28.411212+00:00",
+      "curlExit": 0,
+      "httpStatus": 200,
+      "fullTimeSeconds": 6.690602,
+      "ttfbSeconds": 3.608615,
+      "tlsSeconds": 3.182342,
+      "downloadBytes": 1211845,
+      "httpVersion": "2",
+      "redirectCount": 0,
+      "headers": {
+        "date": "Mon, 23 Nov 2026 02:42:25 GMT",
+        "content-type": "text/html; charset=utf-8",
+        "cache-control": "private, no-cache, no-store, max-age=0, must-revalidate"
+      },
+      "bodyBytes": 1211845,
+      "bodySha256": "6be272f7836fede9f1eef0fdcb0b18c5d454da160af7c86bc289d3ae62f89f9b",
+      "title": "АвтоЦена — авто на заказ под ваш бюджет, авторасчёт под ключ",
+      "htmlClosed": true
+    }
+  ]
+}

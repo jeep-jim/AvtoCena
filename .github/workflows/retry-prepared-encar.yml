@@ -33,9 +33,9 @@ jobs:
           import fs from 'node:fs';
           const markerPath='.github/market-runs/korea-prepared-retry.json';
           const repository='jeep-jim/AvtoCena', repositoryId=1289722938;
-          const sourceSha='c6859fc4658759b60c3ed38709bf9de0e95c041c';
-          const preparedRun=45002244430, failedRun=45004098806, artifactId=14747335552;
-          const artifactDigest='sha256:a68b622760549b03db92dfb5e34b32c9bbad551f98a55de87f55d0a5c3b49799';
+          const sourceSha='c90dea655470d2970f5f22cc7d7f98c086874738';
+          const preparedRun=45077320093, preparedAttempt=1, producerJobId=137403171884, artifactId=14779553850;
+          const artifactDigest='sha256:9dafe4744cfaef0522f564978dc38152e28d52d55790fcd6a7d03a670a7d4aeb';
           const release='22867cbcfaee27b2e8917b6bf880e44827f67b60';
           const calculation='4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90';
           const generation='gen_1794878284419_a611dfcf';
@@ -55,7 +55,7 @@ jobs:
             return JSON.parse(text);
           }
           function checkRun(run,id,workflow,event,conclusion) {
-            check(run?.id===id && run.run_attempt===1 && run.path===workflow
+            check(run?.id===id && run.run_attempt===preparedAttempt && run.path===workflow
               && run.event===event && run.head_branch==='main' && run.head_sha===sourceSha
               && run.repository?.id===repositoryId && run.head_repository?.id===repositoryId,
               'retry_run_identity_'+id);
@@ -70,7 +70,7 @@ jobs:
               && !!process.env.GH_TOKEN,'retry_event_invalid');
             check(fs.lstatSync(markerPath).isFile(),'retry_marker_type');
             const marker=JSON.parse(fs.readFileSync(markerPath,'utf8'));
-            check(marker?.version===1 && marker.operation==='retry-prepared-encar-45002244430'
+            check(marker?.version===1 && marker.operation==='retry-prepared-encar-45077320093-1'
               && /^[a-f0-9]{40}$/.test(marker.approvedSourceSha||'')
               && Object.keys(marker).sort().join(',')==='approvedSourceSha,operation,version',
               'retry_marker_invalid');
@@ -80,17 +80,40 @@ jobs:
             check(commit.files?.length===1 && commit.files[0].filename===markerPath
               && ['added','modified'].includes(commit.files[0].status)
               && !commit.files[0].previous_filename,'retry_code_changed');
-            const [prepared,failed,artifact,health,catalog]=await Promise.all([
+            const [prepared,producer,artifact,health,catalog]=await Promise.all([
               getJson(api+'/actions/runs/'+preparedRun,'retry_prepared_run'),
-              getJson(api+'/actions/runs/'+failedRun,'retry_failed_run'),
+              getJson(api+'/actions/jobs/'+producerJobId,'retry_producer_job'),
               getJson(api+'/actions/artifacts/'+artifactId,'retry_intake_artifact'),
               getJson('https://avtocena.com/api/health','retry_live_health'),
               getJson('https://avtocena.com/api/catalog/search?market=korea&source=existing&page=1&pageSize=1','retry_live_catalog')
             ]);
-            checkRun(prepared,preparedRun,'.github/workflows/prepare-paid-encar-intake.yml','push','success');
-            checkRun(failed,failedRun,'.github/workflows/publish-prepared-encar.yml','workflow_run','failure');
-            check(artifact.id===artifactId && artifact.name==='catalog-intake-korea'
+            // This run prepared a complete intake, then failed during publication.
+            checkRun(prepared,preparedRun,'.github/workflows/catalog-refresh-korea.yml','schedule','failure');
+            check(producer?.id===producerJobId && producer.run_id===preparedRun
+              && producer.run_attempt===preparedAttempt && producer.head_sha===sourceSha
+              && producer.head_branch==='main' && producer.name==='refresh / prepare'
+              && producer.workflow_name==='Catalog refresh korea','retry_producer_job_identity');
+            check(producer.status==='completed' && producer.conclusion==='success','retry_producer_job_state');
+            const criticalSteps=[
+              [5,'Verify this completed snapshot and current CRM before restoration'],
+              [6,'Restore paid listings and prepare their saved history and inspection'],
+              [7,'Run actions/upload-artifact@v4'],
+              [8,'Bind the prepared artifact to the successful producer attempt']
+            ];
+            for(const [number,name] of criticalSteps) {
+              const steps=Array.isArray(producer.steps)?producer.steps.filter(step=>step.number===number):[];
+              check(steps.length===1 && steps[0].name===name && steps[0].status==='completed'
+                && steps[0].conclusion==='success','retry_producer_step_'+number);
+            }
+            check(producer.started_at==='2026-11-22T23:52:08Z'
+              && producer.completed_at==='2026-11-23T00:12:18Z','retry_producer_job_time');
+            check(artifact.id===artifactId && artifact.name==='catalog-intake-korea-45077320093-1'
               && artifact.expired===false && artifact.digest===artifactDigest
+              && artifact.size_in_bytes===26217418
+              && artifact.created_at==='2026-11-23T00:12:16Z' && artifact.updated_at===artifact.created_at
+              && artifact.expires_at==='2026-11-26T00:12:12Z' && Date.parse(artifact.expires_at)>Date.now()
+              && artifact.url===api+'/actions/artifacts/'+artifactId
+              && artifact.archive_download_url===api+'/actions/artifacts/'+artifactId+'/zip'
               && artifact.workflow_run?.id===preparedRun
               && artifact.workflow_run.repository_id===repositoryId
               && artifact.workflow_run.head_repository_id===repositoryId
@@ -101,80 +124,24 @@ jobs:
             check(catalog.ok===true && catalog.generationId===generation,'retry_live_generation_changed');
             fs.appendFileSync(process.env.GITHUB_OUTPUT,'verified=true\n');
             console.log(JSON.stringify({verified:true,approvedSourceSha:marker.approvedSourceSha,
-              preparedRun,failedRun,artifactId,release,calculation,generation,supplierRequests:0}));
+              preparedRun,preparedAttempt,producerJobId,artifactId,release,calculation,generation,supplierRequests:0}));
           } catch(error) {
             console.error(error instanceof Error?error.message:'retry_verification_failed');
             process.exitCode=1;
           }
           VERIFY_PREPARED_ENCAR_RETRY
-  wait_current_writer:
+  publish:
     needs: verify
     if: needs.verify.result == 'success' && needs.verify.outputs.verified == 'true'
-    runs-on: ubuntu-24.04
-    timeout-minutes: 130
-    outputs:
-      completed: ${{ steps.wait.outputs.completed || 'false' }}
-    steps:
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 24
-      - name: Wait for the exact existing UAE attempt without changing its lock
-        id: wait
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          node --input-type=module <<'WAIT_CURRENT_UAE_WRITER'
-          import fs from 'node:fs';
-          const runId=44990370917, repositoryId=1289722938;
-          const sourceSha='7209465ad5d00ab4ed1a1c2c24114eddc5a58ff6';
-          const url='https://api.github.com/repos/jeep-jim/AvtoCena/actions/runs/'+runId;
-          const deadline=Date.now()+120*60*1000;
-          const check=(condition,code)=>{if(!condition)throw Error(code);};
-          let polls=0;
-          fs.appendFileSync(process.env.GITHUB_OUTPUT,'completed=false\n');
-          try {
-            for(;;) {
-              const remaining=deadline-Date.now();
-              check(remaining>0,'uae_wait_deadline');
-              const response=await fetch(url,{
-                method:'GET',redirect:'error',signal:AbortSignal.timeout(Math.min(20000,remaining)),
-                headers:{accept:'application/json','cache-control':'no-cache',
-                  authorization:'Bearer '+process.env.GH_TOKEN,'X-GitHub-Api-Version':'2022-11-28'}
-              });
-              check(response.ok,'uae_wait_http_'+response.status);
-              const text=await response.text();
-              check(text.length<=1048576,'uae_wait_response_too_large');
-              const run=JSON.parse(text);
-              check(Date.now()<=deadline,'uae_wait_deadline');
-              check(run?.id===runId && run.run_attempt===2 && run.head_sha===sourceSha
-                && run.path==='.github/workflows/catalog-refresh-uae.yml' && run.head_branch==='main'
-                && run.repository?.id===repositoryId && run.head_repository?.id===repositoryId,
-                'uae_wait_identity_changed');
-              check(['queued','waiting','pending','requested','in_progress','completed'].includes(run.status),
-                'uae_wait_status_invalid');
-              polls++;
-              console.log(JSON.stringify({status:run.status,polls}));
-              if(run.status==='completed') {
-                check(typeof run.conclusion==='string' && run.conclusion.length>0,'uae_wait_terminal_invalid');
-                fs.appendFileSync(process.env.GITHUB_OUTPUT,'completed=true\n');
-                break;
-              }
-              await new Promise(resolve=>setTimeout(resolve,Math.min(30000,Math.max(0,deadline-Date.now()))));
-            }
-          } catch(error) {
-            console.error(error instanceof Error && /^uae_wait_[a-z0-9_]+$/.test(error.message)
-              ? error.message:'uae_wait_request_failed');
-            process.exitCode=1;
-          }
-          WAIT_CURRENT_UAE_WRITER
-  publish:
-    needs: [verify, wait_current_writer]
-    if: needs.verify.result == 'success' && needs.verify.outputs.verified == 'true' && needs.wait_current_writer.result == 'success' && needs.wait_current_writer.outputs.completed == 'true'
     uses: ./.github/workflows/catalog-market-refresh.yml
     with:
       market: korea
-      prepared_encar_run: '45002244430'
+      prepared_encar_run: '45077320093'
       prepared_encar_self: false
+      prepared_encar_source_sha: 'c90dea655470d2970f5f22cc7d7f98c086874738'
+      prepared_encar_attempt: '1'
+      prepared_encar_artifact_id: '14779553850'
+      prepared_encar_artifact_digest: '9dafe4744cfaef0522f564978dc38152e28d52d55790fcd6a7d03a670a7d4aeb'
     secrets: inherit
   verify_public:
     needs: publish

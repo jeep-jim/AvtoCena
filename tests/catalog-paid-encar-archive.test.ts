@@ -14,8 +14,8 @@ const helper = fileURLToPath(new URL('../scripts/lib/paid-encar-artifact-binding
 
 async function actualArchiveBlock() {
   const lines = (await fs.readFile(workflow, 'utf8')).split('\n');
-  const step = lines.indexOf('      - name: Verify archive bytes before extracting the same-run paid artifact');
-  assert.ok(step >= 0, 'the same-run archive step must exist');
+  const step = lines.indexOf('      - name: Verify archive bytes before extracting the bound paid artifact');
+  assert.ok(step >= 0, 'the bound archive step must exist');
   const run = lines.findIndex((line, index) => index > step && line === '        run: |');
   assert.ok(run > step);
   const body = [];

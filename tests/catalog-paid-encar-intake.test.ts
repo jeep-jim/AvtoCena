@@ -455,7 +455,7 @@ test('the workflow pins the producer scope and serializes two collectors before 
     assert.match(job, /ENCAR_SNAPSHOT_RUN: \$\{\{ needs\.plan\.outputs\.snapshot_run \}\}/);
     assert.match(job, /ENCAR_SNAPSHOT_ATTEMPT: \$\{\{ needs\.plan\.outputs\.snapshot_attempt \}\}/);
     assert.match(job, /ACCOUNT_KEY: \$\{\{ secrets\.AUTO_API_DUBICARS_KEY \|\| secrets\.AUTO_API_CHE168_KEY \}\}/);
-    assert.match(job, /run: node --import tsx scripts\/catalog-paid-encar-intake\.mjs/);
+    assert.match(job, /run: node scripts\/run-node-with-resources\.mjs --import tsx scripts\/catalog-paid-encar-intake\.mjs/);
   }
   assert.match(first, /ENCAR_ALLOW_PARTIAL: 'true'/); assert.match(last, /ENCAR_ALLOW_PARTIAL: 'false'/);
   assert.match(prepare, /^    needs: collect$/m);

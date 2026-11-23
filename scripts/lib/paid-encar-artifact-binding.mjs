@@ -37,6 +37,63 @@ export function validatePaidEncarArtifactBinding(binding, {preparedRunId} = {}) 
   return Object.freeze(result);
 }
 
+/** A saved producer remains bound to its own run, attempt and source SHA.
+ * The recovery publisher's newer commit never relabels the collected evidence.
+ */
+export function paidEncarBindingFromWorkflow(env) {
+  const sameRun = env.PREPARED_ENCAR_SELF === 'true';
+  const sourceSha = env.PREPARED_ENCAR_SOURCE_SHA || '';
+  if (!sameRun && !sourceSha) {
+    if (env.PREPARED_ENCAR_ATTEMPT || env.PREPARED_ENCAR_ARTIFACT_ID || env.PREPARED_ENCAR_ARTIFACT_DIGEST) {
+      throw Error('unexpected_prepared_encar_binding');
+    }
+    return null;
+  }
+  if (sameRun && sourceSha) fail('source_mode');
+  if (!sameRun && env.PREPARED_ENCAR_RUN === env.GITHUB_RUN_ID) fail('saved_run');
+  return validatePaidEncarArtifactBinding({
+    runId:sameRun ? env.GITHUB_RUN_ID : env.PREPARED_ENCAR_RUN,
+    currentAttempt:sameRun ? env.GITHUB_RUN_ATTEMPT : env.PREPARED_ENCAR_ATTEMPT,
+    snapshotAttempt:env.PREPARED_ENCAR_ATTEMPT,
+    artifactId:env.PREPARED_ENCAR_ARTIFACT_ID,
+    artifactDigest:env.PREPARED_ENCAR_ARTIFACT_DIGEST,
+    repositoryId:env.GITHUB_REPOSITORY_ID,
+    headSha:sameRun ? env.GITHUB_SHA : sourceSha,
+  }, {preparedRunId:env.PREPARED_ENCAR_RUN});
+}
+
+/** A downstream publication failure does not invalidate a completed preparation.
+ * Verify the original attempt's successful snapshot, restoration and upload steps
+ * before reusing its exact immutable artifact; never run the supplier again here.
+ */
+export function assertPaidEncarPreparedRun(binding, run, jobs) {
+  const expected = validatePaidEncarArtifactBinding(binding);
+  if (metadataInteger(run?.id, 'prepared_run_id') !== expected.runId
+      || run.head_sha !== expected.headSha || run.head_branch !== 'main'
+      || metadataInteger(run.repository?.id, 'prepared_repository') !== expected.repositoryId
+      || metadataInteger(run.head_repository?.id, 'prepared_head_repository') !== expected.repositoryId
+      || run.path !== '.github/workflows/catalog-refresh-korea.yml'
+      || !['schedule', 'push'].includes(run.event)
+      || run.status !== 'completed' || !['success', 'failure'].includes(run.conclusion)) fail('prepared_run');
+  const currentAttempt = metadataInteger(run.run_attempt, 'prepared_current_attempt');
+  validatePaidEncarArtifactBinding({...expected, currentAttempt});
+  if (!Array.isArray(jobs)) fail('prepared_jobs');
+  const requiredSteps = [
+    'Verify this completed snapshot and current CRM before restoration',
+    'Restore paid listings and prepare their saved history and inspection',
+    'Run actions/upload-artifact@v4',
+    'Bind the prepared artifact to the successful producer attempt',
+  ];
+  const prepared = jobs.filter(job => job?.run_id === Number(expected.runId)
+    && job.run_attempt === Number(expected.snapshotAttempt) && job.head_sha === expected.headSha
+    && job.head_branch === 'main' && job.status === 'completed' && job.conclusion === 'success'
+    && Array.isArray(job.steps) && requiredSteps.every(name => job.steps.some(step =>
+      step.name === name && step.status === 'completed' && step.conclusion === 'success')));
+  if (prepared.length !== 1) fail('prepared_job');
+  return {runId:expected.runId, snapshotAttempt:expected.snapshotAttempt,
+    jobId:metadataInteger(prepared[0].id, 'prepared_job_id'), sourceSha:expected.headSha};
+}
+
 /** Validate GET /actions/artifacts/{id} metadata; this helper performs no I/O. */
 export function assertPaidEncarArtifactBinding(binding, artifact) {
   const expected = validatePaidEncarArtifactBinding(binding);

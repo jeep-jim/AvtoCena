@@ -15,35 +15,97 @@ async function temp(t:any) {
   t.after(() => fs.rm(root, {recursive:true, force:true}));
   return root;
 }
-async function rows(file:string) {
+async function rows(file:string, expected?:{rows:number;bytes:number;sha256:string}) {
   const result:any[] = [];
-  for await (const row of readServingProjectionRows(file)) result.push(row);
+  for await (const row of readServingProjectionRows(file, expected)) result.push(row);
   return result;
 }
 
 test('streamed budget uses bounded batches, rejects foreign identities and verifies complete input', async t => {
   const root = await temp(t), input = path.join(root,'input.jsonl'), output = path.join(root,'output.jsonl');
   const source = Array.from({length:501}, (_, i) => ({id:'row-'+i, market:'europe', year:2021}));
-  await writeServingProjectionRows(input, source);
+  const inputReceipt = await writeServingProjectionRows(input, source);
   const batches:number[] = [];
   const catalog = {prepareCatalogProjectionRows:async (values:any[]) => { batches.push(values.length); return values; }};
-  await buildServingReadModel({catalog, request:{task:'budget',input,output,rows:501}});
-  assert.deepEqual(batches,[500,1]); assert.deepEqual(await rows(output),source);
+  const report = await buildServingReadModel({catalog, request:{task:'budget',input,inputReceipt,output,rows:501}});
+  assert.equal(report.inputRows,501); assert.equal(report.output.rows,501);
+  assert.deepEqual(batches,[500,1]); assert.deepEqual(await rows(output, report.output),source);
   await assert.rejects(buildServingReadModel({catalog:{prepareCatalogProjectionRows:() => [{id:'foreign',market:'europe'}]},
-    request:{task:'budget',input,output:path.join(root,'foreign.jsonl'),rows:501}}), /budget_identity_invalid/);
+    request:{task:'budget',input,inputReceipt,output:path.join(root,'foreign.jsonl'),rows:501}}), /budget_identity_invalid/);
   await assert.rejects(buildServingReadModel({catalog,
-    request:{task:'budget',input,output:path.join(root,'incomplete.jsonl'),rows:502}}), /input_incomplete/);
+    request:{task:'budget',input,inputReceipt,output:path.join(root,'incomplete.jsonl'),rows:502}}), /input_incomplete/);
 });
 
 test('budget cannot cross a policy day and dated builders must return their requested generation', async t => {
   const root = await temp(t), input = path.join(root,'input.jsonl');
-  await writeServingProjectionRows(input,[{id:'one',market:'korea'}]);
+  const inputReceipt = await writeServingProjectionRows(input,[{id:'one',market:'korea'}]);
   const times = [new Date('2026-11-22T16:59:59Z'),new Date('2026-11-22T17:00:00Z')];
   await assert.rejects(buildServingReadModel({catalog:{prepareCatalogProjectionRows:(r:any[])=>r},
-    request:{task:'budget',input,output:path.join(root,'day.jsonl'),rows:1},now:()=>times.shift()}),/policy_day_changed/);
+    request:{task:'budget',input,inputReceipt,output:path.join(root,'day.jsonl'),rows:1},now:()=>times.shift()}),/policy_day_changed/);
   await assert.rejects(buildServingReadModel({catalog:{buildCatalogOverviewFromProjections:()=>({generationId:'wrong'})},
-    request:{task:'overview',input,output:path.join(root,'wrong.json'),rows:1,
+    request:{task:'overview',input,inputReceipt,output:path.join(root,'wrong.json'),rows:1,
       generationId:'gen_1790000000000_abc12345',now:'2026-11-22T12:00:00Z'}}),/result_invalid/);
+});
+
+test('JSONL roundtrip streams multibyte records across buffers and binds exact bytes and rows', async t => {
+  const root = await temp(t), input = path.join(root,'unicode.jsonl');
+  const payload = 'Авто🙂'.repeat(12_000), total = 37;
+  async function* source() {
+    for (let i=0;i<total;i++) yield {id:'row-'+i,market:'korea',payload};
+  }
+  const receipt = await writeServingProjectionRows(input, source());
+  assert.equal(receipt.rows,total);
+  assert.equal(receipt.bytes,(await fs.stat(input)).size);
+  assert.ok(receipt.bytes > 4*1024**2,'fixture crosses writer buffers and many reader chunks');
+  let read = 0;
+  for await (const row of readServingProjectionRows(input, receipt)) {
+    assert.deepEqual(row,{id:'row-'+read,market:'korea',payload}); read++;
+  }
+  assert.equal(read,total);
+  await assert.rejects(rows(input,{...receipt,rows:total+1}),/input_incomplete/);
+  await assert.rejects(rows(input,{...receipt,rows:total-1}),/input_incomplete/);
+  await assert.rejects(rows(input,{...receipt,bytes:receipt.bytes+1}),/transfer_changed/);
+  await assert.rejects(rows(input,{...receipt,sha256:'0'.repeat(64)}),/transfer_changed/);
+});
+
+test('input and prepared-output corruption cannot be accepted with their original receipt', async t => {
+  const root = await temp(t), input = path.join(root,'input.jsonl'), output = path.join(root,'output.jsonl');
+  const source = [{id:'one',market:'europe',year:2022},{id:'two',market:'europe',year:2019}];
+  const inputReceipt = await writeServingProjectionRows(input,source);
+  const catalog = {prepareCatalogProjectionRows:(values:any[])=>values.filter(row=>row.year>=2022)};
+  const request = {task:'budget',input,inputReceipt,output,rows:source.length};
+  const report = await buildServingReadModel({catalog,request});
+  assert.equal(report.inputRows,2); assert.equal(report.output.rows,1,'serving admission may exclude a source row');
+  assert.deepEqual(await rows(output,report.output),[source[0]]);
+  const original = await fs.readFile(output,'utf8');
+  await fs.writeFile(output,original.replace('one','six'));
+  await assert.rejects(rows(output,report.output),/transfer_changed/,'same-length valid JSON substitution');
+  await fs.writeFile(output,'');
+  await assert.rejects(rows(output,report.output),/input_incomplete/,'missing prepared rows');
+  await fs.writeFile(input,(await fs.readFile(input,'utf8')).replace('one','six'));
+  await assert.rejects(buildServingReadModel({catalog,request:{...request,output:path.join(root,'changed.jsonl')}}),
+    /transfer_changed/,'input hash is checked before a successful child receipt');
+});
+
+test('malformed, unterminated and oversized individual JSONL rows still fail', async t => {
+  const root = await temp(t), input = path.join(root,'malformed.jsonl');
+  for (const [content,code] of [
+    ['{"id":"one"}',/input_truncated/],
+    ['{"id":\n',/row_invalid/],
+    ['\n',/row_invalid/],
+    ['null\n',/row_invalid/],
+    ['[]\n',/row_invalid/],
+    [Buffer.from([123,34,120,34,58,34,255,34,125,10]),/row_invalid/],
+    [' '.repeat(4*1024**2),/line_bound/],
+  ] as const) {
+    await fs.writeFile(input,content);
+    await assert.rejects(rows(input),code);
+  }
+  await assert.rejects(writeServingProjectionRows(path.join(root,'large.jsonl'),
+    [{id:'large',payload:'x'.repeat(4*1024**2)}]),/line_bound/);
+  const empty = path.join(root,'empty.jsonl'), receipt = await writeServingProjectionRows(empty,[]);
+  assert.deepEqual(await rows(empty,receipt),[]);
+  assert.equal(receipt.sha256,createHash('sha256').update('').digest('hex'));
 });
 
 test('exact checkout builders resolve their own cwd and encyclopedia without storage or network', async t => {

@@ -323,17 +323,17 @@ const preservedEnd = publisherSource.indexOf('\nconst canonicalTargetPreview =',
 assert.ok(preservedStart >= 0 && preservedEnd > preservedStart);
 const AsyncFunction = Object.getPrototypeOf(async function(){}).constructor;
 const runPreservedLoader = new AsyncFunction('technicalRepairGuard','readMarketOffers','hasAllowedCatalogSourceProvenance',
-  'isCatalogYearAllowed','isAllDubicarsOffer','hashRows', `
+  'isCatalogYearAllowed','isAllDubicarsOffer','hashRows','logPublicationMemory', `
   const PUBLIC_CATALOG_MARKETS = ['korea','uae'], market = 'korea';
   const preservedByMarket = {}, preservedPublicHashByMarket = {}, preservedPublicRowsByMarket = {};
   const expectedPublishedByMarket = {}, expectedPublishedHashByMarket = {}, purgedForbiddenPublicByMarket = {};
   ${publisherSource.slice(preservedStart,preservedEnd)}
   await loadPreservedMarkets();
   return {preservedByMarket,preservedPublicHashByMarket,preservedPublicRowsByMarket};`);
-async function loadPreservedForTest(f, legacy = async () => {throw Error('legacy_reader_forbidden');}, repair = true) {
+async function loadPreservedForTest(f, legacy = async () => {throw Error('legacy_reader_forbidden');}, repair = true, progress = (..._args:any[]) => {}) {
   const guard = repair ? await createPaidRepairPublicationGuard({storage:f.storage,receipt:f.receipt,
     expectedSha256:f.receipt.sha256,readIdentity:async()=>liveIdentity,now:()=>now}) : null;
-  return runPreservedLoader(guard,legacy,hasAllowedCatalogSourceProvenance,isCatalogYearAllowed,isAllDubicarsOffer,hashRows);
+  return runPreservedLoader(guard,legacy,hasAllowedCatalogSourceProvenance,isCatalogYearAllowed,isAllDubicarsOffer,hashRows,progress);
 }
 
 test('actual repair preservation reads all 25666 UAE IDs and keeps prices, dates, photos and manual values byte-stable', async () => {
@@ -348,13 +348,19 @@ test('actual repair preservation reads all 25666 UAE IDs and keeps prices, dates
     active++;peak=Math.max(peak,active);parts++;
     try {return await read(key,fallback);} finally {active--;}
   };
-  const loaded = await loadPreservedForTest(f);
+  const progress:any[]=[];
+  const loaded = await loadPreservedForTest(f,undefined,true,(stage,details)=>progress.push({stage,...details}));
   assert.equal(loaded.preservedByMarket.uae,25666);
   assert.equal(loaded.preservedPublicHashByMarket.uae,before);
   assert.deepEqual(loaded.preservedPublicRowsByMarket.uae,snapshot);
   for (const id of missingUaeIds) assert.ok(loaded.preservedPublicRowsByMarket.uae.some(row=>row.id===id));
   assert.equal(hashRows(f.rows),before,'read validation must not normalize or mutate preserved records');
   assert.equal(parts,directory.parts.length);assert.equal(peak,1,'only one verified projection part is retained at a time');
+  assert.deepEqual(progress,[
+    {stage:'preserved_market_read_start',preservedMarket:'uae'},
+    {stage:'preserved_market_read_complete',preservedMarket:'uae',rows:25666},
+    {stage:'preserved_market_verified',preservedMarket:'uae',rows:25666,purgedForbidden:0,retainedRows:25666},
+  ]);
 });
 
 test('actual repair preservation stops missing chunks, incomplete or replaced IDs and generation drift before persistence', async () => {

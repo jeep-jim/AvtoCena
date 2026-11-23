@@ -18,6 +18,15 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
+      - name: Verify publication memory discovery on this runner
+        run: |
+          node --input-type=module <<'RESOURCE_PROBE'
+          import os from 'node:os';
+          console.log(JSON.stringify({stage:'node_resource_probe',nodeVersion:process.version,
+            physicalRamBytes:os.totalmem(),constrainedRamBytes:process.constrainedMemory(),
+            availableRamBytes:process.availableMemory()}));
+          RESOURCE_PROBE
+          node scripts/run-node-with-resources.mjs -e "console.log('publication_resource_startup_ok')"
       - name: Audit production dependencies before merge
         run: npm audit --omit=dev --audit-level=high
       - name: Enforce performance release budgets

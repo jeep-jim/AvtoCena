@@ -38,4 +38,4 @@ jobs:
           YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
           YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
           YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
-        run: node --import tsx scripts/catalog-prepare-owned-china.mjs
+        run: node scripts/run-node-with-resources.mjs --import tsx scripts/catalog-prepare-owned-china.mjs

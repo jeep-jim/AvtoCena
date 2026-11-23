@@ -2,9 +2,11 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import http from 'node:http';
 import https from 'node:https';
+import {createHash} from 'node:crypto';
 import {syncBuiltinESMExports} from 'node:module';
 import {fileURLToPath, pathToFileURL} from 'node:url';
-import {assertServingReadModelContext, readServingProjectionRows} from './lib/catalog-serving-read-models.mjs';
+import {assertServingReadModelContext, assertServingProjectionReceipt,
+  readServingProjectionRows, writeServingProjectionRows} from './lib/catalog-serving-read-models.mjs';
 import {assertStagedRuntimeSource} from './lib/catalog-staged-budget.mjs';
 
 export function installServingReadModelNetworkFence() {
@@ -17,44 +19,36 @@ export function installServingReadModelNetworkFence() {
 export async function buildServingReadModel({catalog, request, now = () => new Date()}) {
   if (!['budget', 'landing', 'overview'].includes(request?.task)
       || !Number.isSafeInteger(request.rows) || request.rows < 0) throw Error('serving_read_model_request_invalid');
+  assertServingProjectionReceipt(request.inputReceipt);
+  if (request.inputReceipt.rows !== request.rows) throw Error('serving_read_model_input_incomplete');
   const started = now(), day = value => new Date(value.getTime() + 7 * 3600000).toISOString().slice(0,10);
-  let count = 0;
+  let count = 0, output;
   if (request.task === 'budget') {
-    const handle = await fs.open(request.output, 'wx', 0o600);
-    let batch = [], writtenBytes = 0;
-    const flush = async () => {
+    const prepare = async batch => {
       const prepared = await catalog.prepareCatalogProjectionRows(batch);
       const ids = new Map(batch.map(row => [row.id, row.market])), seen = new Set();
       if (!Array.isArray(prepared) || prepared.some(row => !ids.has(row?.id)
           || ids.get(row.id) !== row.market || seen.has(row.id) || !seen.add(row.id))) {
         throw Error('serving_read_model_budget_identity_invalid');
       }
-      let buffer = '', bytes = 0;
-      for (const row of prepared) {
-        const line = JSON.stringify(row) + '\n', length = Buffer.byteLength(line);
-        if (length > 4 * 1024 ** 2) throw Error('serving_read_model_line_bound');
-        writtenBytes += length;
-        if (writtenBytes > 2 * 1024 ** 3) throw Error('serving_read_model_byte_bound');
-        if (bytes + length > 4 * 1024 ** 2) { await handle.write(buffer); buffer = ''; bytes = 0; }
-        buffer += line; bytes += length;
-      }
-      if (buffer) await handle.write(buffer);
-      batch = [];
+      return prepared;
     };
-    try {
-      for await (const row of readServingProjectionRows(request.input)) {
+    async function* preparedRows() {
+      let batch = [];
+      for await (const row of readServingProjectionRows(request.input, request.inputReceipt)) {
         count++; batch.push(row);
-        if (batch.length === 500) await flush();
+        if (batch.length === 500) { yield* await prepare(batch); batch = []; }
       }
-      if (batch.length) await flush();
-    } finally { await handle.close(); }
+      if (batch.length) yield* await prepare(batch);
+    }
+    output = await writeServingProjectionRows(request.output, preparedRows());
     if (day(started) !== day(now())) throw Error('serving_read_model_policy_day_changed');
   } else {
     if (!/^gen_\d+_[a-z0-9]+$/.test(request.generationId || '') || !/^\d{4}-\d{2}-\d{2}T/.test(request.now || '')) {
       throw Error('serving_read_model_request_invalid');
     }
     const rows = [];
-    for await (const row of readServingProjectionRows(request.input)) { count++; rows.push(row); }
+    for await (const row of readServingProjectionRows(request.input, request.inputReceipt)) { count++; rows.push(row); }
     const date = new Date(request.now);
     if (!Number.isFinite(date.getTime())) throw Error('serving_read_model_request_invalid');
     const result = request.task === 'landing'
@@ -67,9 +61,10 @@ export async function buildServingReadModel({catalog, request, now = () => new D
     const body = JSON.stringify(result);
     if (Buffer.byteLength(body) > 32 * 1024 ** 2) throw Error('serving_read_model_result_bound');
     await fs.writeFile(request.output, body, {flag:'wx', mode:0o600});
+    output = {bytes:Buffer.byteLength(body), sha256:createHash('sha256').update(body).digest('hex')};
   }
   if (count !== request.rows) throw Error('serving_read_model_input_incomplete');
-  return {task:request.task, inputRows:count};
+  return {task:request.task, inputRows:count, output};
 }
 
 async function main() {
@@ -93,7 +88,10 @@ async function main() {
   const encyclopedia = await runtime('apps/web/lib/encyclopedia/calculation-index.ts');
   if ((encyclopedia.readCalculationIndex()?.digest || null) !== context.encyclopediaDigest) throw Error('serving_read_model_encyclopedia_changed');
   const catalog = await runtime('apps/web/lib/catalog/storage.ts');
-  const report = await buildServingReadModel({catalog, request:JSON.parse(await fs.readFile(requestPath, 'utf8'))});
+  const request = JSON.parse(await fs.readFile(requestPath, 'utf8'));
+  if (typeof request.reportPath !== 'string' || !request.reportPath) throw Error('serving_read_model_request_invalid');
+  const report = await buildServingReadModel({catalog, request});
+  await fs.writeFile(request.reportPath, JSON.stringify(report), {flag:'wx', mode:0o600});
   console.log(JSON.stringify({stage:'serving_read_model_prepared', ...report, release:context.release}));
 }
 
