@@ -643,7 +643,7 @@ export function resetCatalogReadCachesForTests() {
   previousOfferChunkCache.clear();
   resetCatalogEditorialCache();
   resetSharedBudgetPriceCache();
-  budgetEligibility.clear();stableBudgetSelections.clear();
+  budgetEligibility.clear();stableBudgetSelections.clear();stableMarketFilters.clear();
   compactSortCache=new WeakMap();compactSortOrders.clear();resetBudgetRowSizes();
   marketLandingCache.clear();
   editorialLandingCache.clear();
@@ -2255,6 +2255,7 @@ async function currentBudgetReplay(index:BudgetCountIndex,market:string,displayP
 }
 const budgetEligibility=new BudgetEligibilityCache();
 const stableBudgetSelections=new StableBudgetSelectionCache();
+const stableMarketFilters=new StableBudgetSelectionCache();
 const filteredBudgetSelectionCache = new DetailReadCache<CompactSelection|null>({maxEntries:32,maxBytes:256*1024*1024,ttlMs:30_000,concurrency:4,sizeOf:budgetSelectionBytes});
 async function readBudgetSelection(params:CatalogSearchParams){
  const hasBudget=Boolean(params.budgetFrom || params.budgetTo);
@@ -2319,7 +2320,7 @@ async function readBudgetSelection(params:CatalogSearchParams){
   const transmissionMatches=compileFilterSelection(params.transmission);
   const driveMatches=compileFilterSelection(params.drive);
   const marketKey=params.market&&params.market!=='any'?cleanFacet(params.market).toLocaleLowerCase('ru-RU'):null;
-  let candidates=await filterBudgetRows(sourceRows,editedRow,row=>
+  const matchesMetadata=(row:BudgetCountIndex['rows'][number])=>
    (!wantedMakes || wantedMakes.has(cleanFacet(row[5].make).toLocaleLowerCase('ru-RU'))) &&
    ((!params.make && !params.model) || catalogSearchProjectionMatches({...row[5],market:row[0]} as CatalogSearchProjection,{make:params.make,model:params.model},compactModelKeys)) &&
    eligible.has(row[5].id) && (!params.color || matchesCatalogColor({...row[5],market:row[0]},params.color)) &&
@@ -2329,7 +2330,28 @@ async function readBudgetSelection(params:CatalogSearchParams){
    && transmissionMatches(row[5].transmission)
    && driveMatches(row[5].drive) &&
    (!params.yearFrom || Number(row[5].year||0)>=params.yearFrom) && (!params.yearTo || Number(row[5].year||0)<=params.yearTo)
-   && (index.filterVersion!==1 || ((!params.mileageFrom || projectionNumber(row[5].mileageKm,0)>=params.mileageFrom) && (!params.mileageTo || projectionNumber(row[5].mileageKm,Infinity)<=params.mileageTo))));
+   && (index.filterVersion!==1 || ((!params.mileageFrom || projectionNumber(row[5].mileageKm,0)>=params.mileageFrom) && (!params.mileageTo || projectionNumber(row[5].mileageKm,Infinity)<=params.mileageTo)));
+  const specificationQuery=Boolean(params.engineFrom||params.engineTo||params.powerFrom||params.powerTo);
+  const matchesSpecs=(row:BudgetCountIndex['rows'][number])=>{
+    const identity=row[3],quote=identity?quotes[identity.id]:undefined;
+    const preview=quote&&identity&&matchesJapanPreviewInput(quote,identity)?quote:undefined;
+    const engine=projectionNumber(row[5].engineCc||preview?.engineCc,0);
+    if((params.engineFrom||params.engineTo)&&(!engine||(params.engineFrom&&engine<params.engineFrom)||(params.engineTo&&engine>params.engineTo)))return false;
+    const hp=projectionUtilizationPowerHp(row[5]);
+    return !(params.powerFrom||params.powerTo)||Boolean(hp&&(!params.powerFrom||hp>=params.powerFrom)&&(!params.powerTo||hp<=params.powerTo+0.01));
+  };
+  // These memberships depend only on the authenticated selector, editorial
+  // revision and policy date. Model aliases, colors and all budget queries
+  // keep their own authorities. Visible prices are still applied per page.
+  if(!hasBudget&&metadataQuery&&marketKey&&['korea','europe','uae','georgia'].includes(marketKey)&&
+     !params.make&&!params.model&&!params.color&&index.specificationFilterVersion===1&&index.filterVersion===1){
+   const filterKey=JSON.stringify(budgetSelectionFilterKey(params));
+   const rows=await stableMarketFilters.get(index,eligibilityContext,filterKey,()=>
+    filterBudgetRows(sourceRows,editedRow,row=>matchesMetadata(row)&&(!specificationQuery||matchesSpecs(row))));
+   return {generationId:manifest.generationId,cardVersion,indexKey:compactSortOrders.indexKey(index),rows};
+  }
+  let candidates=await filterBudgetRows(sourceRows,editedRow,matchesMetadata);
+
   if(hasBudget && index.version===3){
    const ids=new Set(candidates.map(row=>row[5].id));
    const markets=[...new Set(candidates.map(row=>row[0]))];
@@ -2347,17 +2369,7 @@ async function readBudgetSelection(params:CatalogSearchParams){
   if(hasBudget)candidates=candidates.map(editedRow);
   // A newly edited seller price invalidates its stored ranking inputs.
   if(defaultBrandQuery && candidates.some(row=>matchingEditorial({id:row[5].id,market:row[0]})?.sellerPrice))return null;
-  const specificationQuery=Boolean(params.engineFrom||params.engineTo||params.powerFrom||params.powerTo);
-  if(index.specificationFilterVersion===1 && specificationQuery){
-   candidates=candidates.filter(row=>{
-    const identity=row[3],quote=identity?quotes[identity.id]:undefined;
-    const preview=quote&&identity&&matchesJapanPreviewInput(quote,identity)?quote:undefined;
-    const engine=projectionNumber(row[5].engineCc||preview?.engineCc,0);
-    if((params.engineFrom||params.engineTo)&&(!engine||(params.engineFrom&&engine<params.engineFrom)||(params.engineTo&&engine>params.engineTo)))return false;
-    const hp=projectionUtilizationPowerHp(row[5]);
-    return !(params.powerFrom||params.powerTo)||Boolean(hp&&(!params.powerFrom||hp>=params.powerFrom)&&(!params.powerTo||hp<=params.powerTo+0.01));
-   });
-  }
+  if(index.specificationFilterVersion===1&&specificationQuery)candidates=candidates.filter(matchesSpecs);
   if(metadataQuery && (!specificationQuery||index.specificationFilterVersion===1) && (index.filterVersion===1 || !(params.mileageFrom || params.mileageTo)))return {generationId:manifest.generationId,cardVersion,indexKey:compactSortOrders.indexKey(index),rows:candidates};
   const ids=new Set(candidates.map(row=>row[5].id));
   const blocks=[...new Set(candidates.map(row=>row[5].block))];
@@ -2691,7 +2703,7 @@ export async function backfillCatalogBudgetCountIndex(){
  const stored=await readIndex<BudgetCountIndex|null>(generationId,"budget-count-v3.json",null);
  if(stored?.version!==3 || stored.generationId!==generationId || stored.filterVersion!==1 || !Array.isArray(stored.otherRows)
   || stored.rows.length!==index.rows.length || stored.otherRows.length!==index.otherRows!.length)throw Error("catalog_compact_index_v3_not_verified");
- budgetIndexCache.clear();stableBudgetSelections.clear();filteredBudgetSelectionCache.clear();liveBudgetReplayCache.clear();liveBudgetBlockCache.clear();
+ budgetIndexCache.clear();stableBudgetSelections.clear();stableMarketFilters.clear();filteredBudgetSelectionCache.clear();liveBudgetReplayCache.clear();liveBudgetBlockCache.clear();
  return {generationId,version:stored.version,verified:true,sourceRows:stored.sourceRows,rows:stored.rows.length,otherRows:stored.otherRows.length,bytes:Buffer.byteLength(JSON.stringify(stored))};
 }
 const catalogCountCache = new DetailReadCache<{generationId: string; total: number}>({maxEntries:128,maxBytes:128*1024,ttlMs:30_000,concurrency:4});
