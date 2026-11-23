@@ -7,6 +7,7 @@ import {catalogBrandFilter} from '@/lib/catalog/brands';
 import {catalogFailureDiagnostic} from './catalog-failure-diagnostic';
 import {MARKET_RAIL_CLASS} from './market-rail-layout';
 import {filterSelections} from "@/lib/catalog/filter-selections";
+import {readGroupedCatalogFacets} from "@/lib/catalog/market-facets";
 import {CatalogBreadcrumbs} from "./CatalogBreadcrumbs";
 import {CatalogCountLabel} from "./CatalogCountLabel";
 import {MarketResultCount} from './MarketResultCount';
@@ -76,7 +77,7 @@ function pageHref(params: Record<string, string | string[] | undefined>, page: n
 
 type CatalogContentProps={params?:Record<string,string|string[]|undefined>;dealer?:DealerBrowsingContext|null;embedded?:boolean};
 export async function CatalogContent(props:CatalogContentProps){
- try{const selected=filterSelections(first(props.params?.market));return await withChinaAggregateAuthority(selected.length===1?selected[0]:undefined,()=>ReadCatalogContent(props));}catch(error){
+ try{const selected=filterSelections(first(props.params?.market).toLowerCase());return await withChinaAggregateAuthority(selected,()=>ReadCatalogContent(props));}catch(error){
   // Redirects and framework navigation signals must retain their semantics.
   if(error&&typeof error==='object'&&'digest' in error&&String(error.digest).startsWith('NEXT_'))throw error;
   console.error('catalog_page_unavailable', catalogFailureDiagnostic(error));
@@ -128,7 +129,10 @@ async function ReadCatalogContent({params={},dealer=null,embedded=false}:{params
    ?await readPreparedChinaCompatibility({...common,market:'china',page:requestedPage},{countOnly:false,includeFacets:false,
      marketPage:true,navigationFacets:true,unsupported:unsupportedPreparedChinaSource(first(params.source),first(params.stock)),expectedGeneration:first(params.preparedCut)}):null;
   const omitChina=omitLegacyChinaAggregate()&&!selectedMarket;
-  const [liveChina,liveKorea]=chinaCut?[false,false]:await Promise.all([omitChina?false:usesAjesMarket('china'),usesAjesMarket('korea')]);
+  const [liveChina,liveKorea]=chinaCut?[false,false]:await Promise.all([
+    !omitChina&&markets.some(m=>m.id==='china')&&usesAjesMarket('china'),
+    markets.some(m=>m.id==='korea')&&usesAjesMarket('korea'),
+  ]);
   const aggregateChinaSection=async(market:{id:string;label:string})=>{
     const unsupported=unsupportedPreparedChinaSource(first(params.source),first(params.stock));
     const fresh=unsupported?null:(!hasFilters&&!customSort)
@@ -178,7 +182,9 @@ async function ReadCatalogContent({params={},dealer=null,embedded=false}:{params
   } else {
     [facets, groupedMarkets] = await Promise.all([
       // Navigation options come from prepared directories, independently of the selected filter.
-      omitChina?readCatalogFacets():readCatalogNavigationFacets(selectedMarket),
+      selectedMarkets.length>1&&!selectedMarkets.includes('china')
+        ?readGroupedCatalogFacets({},markets.map(m=>m.id),query=>readCatalogNavigationFacets(query.market))
+        :omitChina?readCatalogFacets():readCatalogNavigationFacets(selectedMarket),
       Promise.all(markets.map((market) => readMarketSection(async () => {
         if(omitChina&&market.id==='china')return aggregateChinaSection(market);
         if(liveMarket(market.id)||market.id==='japan')return {...market,items:[],total:0,page:1,pageSize:OVERVIEW_CARDS};
