@@ -2,7 +2,7 @@ name: Begin catalog rebuild with a scoped stop and private checkpoint
 
 on:
   push:
-    branches: [rebuild/catalog-core-20261123]
+    branches: [main]
     paths: ['.github/operations/catalog-rebuild-20261123/start.json']
   workflow_dispatch:
 
@@ -15,7 +15,7 @@ concurrency:
 
 jobs:
   checkpoint:
-    if: github.repository_id == '1289722938' && github.ref == 'refs/heads/rebuild/catalog-core-20261123'
+    if: github.repository_id == '1289722938' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     environment: regcloud-staging
     timeout-minutes: 25
