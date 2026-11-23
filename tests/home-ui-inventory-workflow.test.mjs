@@ -10,7 +10,7 @@ import {fileURLToPath} from 'node:url';
 
 const execute = promisify(execFile), root = fileURLToPath(new URL('..', import.meta.url));
 const packagePath = '.github/operations/home-ui-only-20261123';
-const inventoryDigest = 'e0a94ee7d05152d83075783b496d443e543f8fde4b0a8927083cb1d7f1bae858';
+const inventoryDigest = 'f9ba6713f076c211f5ac75086a83021383f06a1c231c158edffa7a51db1092f0';
 const hostDigest = 'fd37f98aab3eeb16f131fcd4033adbb56f7e9616208c2f1ab5ef7a446caa4e4c';
 const digest = bytes => createHash('sha256').update(bytes).digest('hex');
 

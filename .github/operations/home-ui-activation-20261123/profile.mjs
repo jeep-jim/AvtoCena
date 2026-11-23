@@ -8,8 +8,8 @@ export const ACTIVATION_MARKER = '.github/market-runs/home-ui-activation.json';
 export const APPROVAL_MARKER = '.github/market-runs/home-ui-plan-approval.json';
 export const APPROVAL_WORKFLOW = '.github/workflows/home-ui-plan-approval.yml';
 export const CONTROLLER_ROOT = path.resolve(fileURLToPath(new URL('../../..', import.meta.url)));
-export const REVIEWED_INVENTORY_SHA = 'c23377808905f6a39deca0dbc6c3f482467b7635f23c9eb3074a5096e328d432';
-export const INVENTORY_FILE = 'docs/audits/2026-11-23-home-runtime-after-cpu.json';
+export const REVIEWED_INVENTORY_SHA = '92252b71d0a40d956331fe9683bc7ea700583426df21cb27f27d59a6cf01962c';
+export const INVENTORY_FILE = 'docs/audits/2026-11-23-home-runtime-process-four.json';
 const need = (value, code) => { if (!value) throw Error('home_activation_' + code); };
 
 export const checkActivationInvocation = (root = CONTROLLER_ROOT, env = process.env) =>
