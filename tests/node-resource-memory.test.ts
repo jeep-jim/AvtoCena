@@ -114,17 +114,47 @@ test('each spawn resamples available RAM, preserves other flags, and never mutat
   await assert.rejects(readNodeMemoryResources(fakeResources({}, {availableMemory:() => 0})), /ram_unavailable/);
 });
 
+test('libuv unlimited uint64 constraint does not reject or inflate valid available RAM', async () => {
+  // Node's uint64_t -> double conversion of libuv UINT64_MAX; no allocations.
+  const unlimited = Number((1n << 64n) - 1n);
+  assert.equal(Number.isSafeInteger(unlimited), false);
+  for (const constraint of [0, GIB, 8 * GIB, Number.MAX_SAFE_INTEGER + 1, unlimited]) {
+    const resources = await readNodeMemoryResources(fakeResources({'/proc/meminfo':noSwap}, {
+      availableMemory:() => 2 * GIB, constrainedMemory:() => constraint,
+    }));
+    const expected = constraint === GIB ? GIB : 2 * GIB;
+    assert.equal(resources.availableRamBytes, expected);
+    assert.equal(resources.constrainedRamBytes, constraint);
+    const invocation = await createResourceNodeInvocation({args:['job.mjs'], env:{}, readResources:async () => resources});
+    assert.equal(invocation.plan.capacityBytes, expected);
+    assert.equal(invocation.plan.heapMiB, expected / MIB);
+  }
+  for (const constraint of [-1, 1.5, NaN, Infinity, -Infinity, 2 ** 65, 'max', undefined]) {
+    await assert.rejects(readNodeMemoryResources(fakeResources({'/proc/meminfo':noSwap}, {
+      constrainedMemory:() => constraint,
+    })), /ram_unavailable/);
+  }
+  for (const field of ['availableMemory', 'totalMemory']) {
+    for (const bytes of [0, -1, NaN, Infinity, 1.5, unlimited]) {
+      await assert.rejects(readNodeMemoryResources(fakeResources({'/proc/meminfo':noSwap}, {
+        [field]:() => bytes, constrainedMemory:() => unlimited,
+      })), /ram_unavailable/);
+    }
+  }
+});
+
 test('the launched Node process confirms its real heap instead of silently reverting to default or inherited old-space flags', async () => {
   const code = 'console.log(JSON.stringify({heap:require("node:v8").getHeapStatistics().heap_size_limit,title:process.title,options:process.env.NODE_OPTIONS}))';
   const invocation = await createResourceNodeInvocation({args:['--max-heap-size=8192', '--title=resource-memory-test', '-e', code],
     env:{...process.env, NODE_OPTIONS:'--trace-warnings --max_old_space_size=32 --max-semi-space-size=4 --max-old-space-size-percentage=50'},
-    role:'test-memory', readResources:smallResourceFixture});
+    role:'test-memory', readResources:async () => ({...await smallResourceFixture(), constrainedRamBytes:Number((1n << 64n) - 1n)})});
   const result = await run(process.execPath, invocation.args, {env:invocation.env, timeout:10000});
   const actual = JSON.parse(result.stdout), telemetry = JSON.parse(result.stderr.trim());
   assert.equal(actual.heap, 256 * MIB); assert.equal(actual.title, 'resource-memory-test');
   assert.deepEqual(parseNodeOptions(actual.options), ['--trace-warnings']);
   assert.equal(telemetry.requestedHeapBytes, actual.heap); assert.equal(telemetry.actualHeapBytes, actual.heap);
   assert.equal(telemetry.availableRamBytes, 256 * MIB + 1200);
+  assert.equal(telemetry.constrainedRamBytes, Number((1n << 64n) - 1n));
   const conflicting = [...invocation.args.slice(0, 3), '--max-old-space-size=32', ...invocation.args.slice(3)];
   await assert.rejects(run(process.execPath, conflicting, {env:invocation.env, timeout:10000}), (error:any) => {
     assert.match(error.stderr, /node_resource_heap_not_applied/); assert.equal(error.stdout, ''); return true;
@@ -135,9 +165,11 @@ test('telemetry forwarding selects only resource records and safe fields, includ
   const output:string[] = [];
   const count = forwardResourceNodeTelemetry('arbitrary private diagnostic\n' + JSON.stringify({stage:'node_resource_memory',
     role:'serving-read-model', requestedHeapBytes:256 * MIB, actualHeapBytes:256 * MIB, TOKEN:'private',
-    nodeVersion:process.version, swapReason:'no_free_swap', availableRamBytes:300 * MIB}) + '\n', (line:string) => output.push(line));
+    nodeVersion:process.version, swapReason:'no_free_swap', availableRamBytes:300 * MIB,
+    constrainedRamBytes:Number((1n << 64n) - 1n)}) + '\n', (line:string) => output.push(line));
   assert.equal(count, 1); assert.equal(output.length, 1); assert.doesNotMatch(output[0], /private|TOKEN/);
   assert.equal(JSON.parse(output[0]).availableRamBytes, 300 * MIB);
+  assert.equal(JSON.parse(output[0]).constrainedRamBytes, Number((1n << 64n) - 1n));
 });
 
 test('the three-file copied launcher preserves script arguments, output and failure status outside its repository', async () => {

@@ -67,6 +67,11 @@ export function stripNodeMemoryArguments(args, {environment = false} = {}) {
 }
 
 const isBytes = value => Number.isSafeInteger(value) && value >= 0;
+// libuv returns UINT64_MAX for an unlimited cgroup, and Node converts that
+// uint64_t to double. It rounds to 2**64, outside JS's safe integer range.
+// A limit above physical RAM is still a valid bound: only compare/min it;
+// never add it to usable capacity or treat it as available memory.
+const isMemoryBound = value => Number.isInteger(value) && value >= 0 && value <= Number((1n << 64n) - 1n);
 function readBytes(value) {
   if (!/^\d+$/.test(value.trim())) throw Error('invalid_accounting');
   const number = Number(value.trim());
@@ -131,7 +136,7 @@ export async function readNodeMemoryResources({readFile = fs.readFile, platform 
   totalMemory = () => os.totalmem()} = {}) {
   const physicalRamBytes = totalMemory(), constrainedRamBytes = constrainedMemory();
   let availableRamBytes = availableMemory();
-  if (!isBytes(physicalRamBytes) || physicalRamBytes === 0 || !isBytes(constrainedRamBytes)
+  if (!isBytes(physicalRamBytes) || physicalRamBytes === 0 || !isMemoryBound(constrainedRamBytes)
       || !isBytes(availableRamBytes) || availableRamBytes === 0) throw Error('node_resource_ram_unavailable');
   availableRamBytes = Math.min(availableRamBytes, physicalRamBytes, constrainedRamBytes || Infinity);
   const result = {physicalRamBytes, constrainedRamBytes, availableRamBytes, observedSwapFreeBytes:0,
@@ -215,7 +220,8 @@ export function forwardResourceNodeTelemetry(stderr, write = text => process.std
         || !isBytes(event.requestedHeapBytes) || !isBytes(event.actualHeapBytes)) continue;
     const safe = {stage:event.stage, role:event.role};
     for (const [name, value] of Object.entries(event)) {
-      if (/Bytes$/.test(name) && (value === null || isBytes(value))) safe[name] = value;
+      if (/Bytes$/.test(name) && (value === null || isBytes(value)
+          || name === 'constrainedRamBytes' && isMemoryBound(value))) safe[name] = value;
     }
     if (Number.isSafeInteger(event.cgroupScopes) && event.cgroupScopes >= 0) safe.cgroupScopes = event.cgroupScopes;
     if (/^v\d+\.\d+\.\d+$/.test(event.nodeVersion || '')) safe.nodeVersion = event.nodeVersion;
