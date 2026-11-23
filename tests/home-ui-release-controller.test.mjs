@@ -110,6 +110,9 @@ test('a reviewed hash cannot turn failed inventory or mismatched rollback identi
   const good = inventoryFixture(); assertReviewedInventory(good, sha256(JSON.stringify(good)));
   const failed = {version:1, status:'failed', errorCode:'inventory_lock_busy', readOnly:true, activationAuthorized:false};
   assert.throws(() => assertReviewedInventory(failed, sha256(JSON.stringify(failed))), /inventory_kind/);
+  const resourceMismatch = {...good, status:'resource_state_mismatch_requires_review',
+    errorCode:'inventory_serving_resources', servingResourceObservation:{historicalPinsMatch:false}};
+  assert.throws(() => assertReviewedInventory(resourceMismatch, sha256(JSON.stringify(resourceMismatch))), /inventory_kind/);
   for (const change of [r => r.containers.serving.id = '9'.repeat(64), r => delete r.containers.legacyRollback,
     r => r.rollbackPins.chinaRollback = '9'.repeat(64), r => r.nginxSha256 = '9'.repeat(64),
     r => r.candidatePort.socketListening = true, r => r.containers.serving.environmentSha256 = 'invalid']) {
