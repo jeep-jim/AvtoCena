@@ -6,6 +6,7 @@ import {execFile, execFileSync} from 'node:child_process';
 import {promisify} from 'node:util';
 import {fileURLToPath, pathToFileURL} from 'node:url';
 import {restoreReleaseEncyclopedia} from '../encyclopedia/restore-calculation-index.mjs';
+import {createResourceNodeInvocation, forwardResourceNodeTelemetry} from './node-resource-memory.mjs';
 
 export const PREPARED_MARKETS = ['china', 'korea', 'uae', 'europe', 'georgia'];
 export const stagedBudgetDigest = value => createHash('sha256').update(JSON.stringify(value)).digest('hex');
@@ -313,11 +314,18 @@ export async function prepareStagedCatalogBudget({storage, manifest, expectedBas
   await fs.writeFile(contextPath, JSON.stringify(context));
   const invoke = async mode => {
     await verifyStagedBudgetAuthority(context, storage);
-    const {stdout} = await run(process.execPath, ['--import', 'tsx', childPath, mode, root, contextPath, reportPath], {
-      cwd:root, env:{...process.env, AVTOCENA_RELEASE_SHA:release, AVTOCENA_CALCULATION_VERSION:identity.calculationVersion,
-        NODE_OPTIONS:process.env.CATALOG_BUDGET_PREPARATION_NODE_OPTIONS || '--max-old-space-size=6144'},
-      timeout:120 * 60_000, maxBuffer:1024 * 1024,
+    const invocation = await createResourceNodeInvocation({
+      args:['--import', 'tsx', childPath, mode, root, contextPath, reportPath], role:'staged-budget-' + mode,
+      env:{...process.env, AVTOCENA_RELEASE_SHA:release, AVTOCENA_CALCULATION_VERSION:identity.calculationVersion,
+        NODE_OPTIONS:process.env.CATALOG_BUDGET_PREPARATION_NODE_OPTIONS ?? process.env.NODE_OPTIONS},
     });
+    let stdout;
+    try {
+      const result = await run(process.execPath, invocation.args, {cwd:root, env:invocation.env,
+        timeout:120 * 60_000, maxBuffer:1024 * 1024});
+      stdout = result.stdout;
+      forwardResourceNodeTelemetry(result.stderr);
+    } catch (error) { forwardResourceNodeTelemetry(error.stderr); throw error; }
     if (stdout.trim()) console.log(stdout.trim());
     await verifyStagedBudgetAuthority(context, storage);
     return JSON.parse(await fs.readFile(reportPath, 'utf8'));

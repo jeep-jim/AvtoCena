@@ -1,56 +1,46 @@
 # Фиды и расписания
 
-Проверка 23.11.2026 после полуночи по Новокузнецку. Все четыре отслеживаемые попытки завершены.
+Проверено 23.11.2026, 09:44 Asia/Krasnoyarsk. Новый повтор Korea ещё не запущен: сначала проходит проверка исправленного кода.
 
-## Контракт
+## Правила
 
-Каждый рынок обновляется независимо. Данные, цены и индексы готовятся в фоне; курс фиксируется для версии. Сохраняются ручные значения, неизвестные параметры, полнота, lease/CAS и предыдущий рабочий срез. Ошибка источника не является продажей. Японию и свежий Зелёный угол повторно не собирать.
+Рынки должны обновляться независимо. Сохраняются принятые срезы, даты, цены, ручные значения, неизвестные параметры, полнота, provenance, lease/CAS. Ошибка источника не доказывает продажу. Японию и свежий Зелёный угол повторно не собирать. Ограничения источников — [source-policy.md](source-policy.md).
 
-Дополнение владельца 22.11: рынок не вправе останавливать чужую публикацию. Итоговый audit штатного refresh теперь получает целевой `--market`; global diagnostic остаётся отдельным режимом. Полная изоляция ещё требует отдельных принятых поколений, совместимого reader и короткого CAS: [контракт перехода](../operations/market-publication-isolation.md). Работающий закреплённый retry Korea этой правкой не заменяется.
+В PR 1803 итоговый audit ограничен целевым рынком. Полная изоляция ещё не внедрена: [контракт перехода](../operations/market-publication-isolation.md). Поручение 23.11: убрать произвольные фиксированные потолки памяти и общего размера корректного фида; [разбор и подготовленный патч](../operations/publication-memory.md).
 
-## Штатное расписание
+## Последний сбор, хранилище и публикация
 
-Контракт: `scripts/lib/catalog-refresh-schedule.mjs` и `.github/workflows/catalog-refresh-<market>.yml`. Cron проверяет окно, interval guard определяет нужный день.
+| Рынок | Получено и сохранено | Публикация этого сбора |
+| --- | --- | --- |
+| Китай | [Загрузка 45067305608](https://github.com/jeep-jim/AvtoCena/actions/runs/45067305608): 30 690 событий. [Подготовка 45072915347](https://github.com/jeep-jim/AvtoCena/actions/runs/45072915347): 283 583 наблюдения, replica и prepared archive в REG | Нет: verifier `mode:mirror`, `publicPublished:false`; автоматическое публичное продолжение не подключено |
+| Корея | [45077320093](https://github.com/jeep-jim/AvtoCena/actions/runs/45077320093): 46 649 уникальных, 2 333 страницы; подготовка и REG archive подтверждены; artifact 14779553850 | Publisher OOM. На 09:42 сайт: старый `gen_1794878284419_a611dfcf`, 46 862; до 160 л.с. — 139; у первых 24 без фильтра мощность не заполнена |
+| ОАЭ | [45076401719](https://github.com/jeep-jim/AvtoCena/actions/runs/45076401719): 8 207 событий → 5 206 наблюдений → 4 870 уникальных; completed intake и REG archive подтверждены | Нет: `serving_read_model_byte_bound`, прежний manifest сохранён |
+| Европа | [45076867904](https://github.com/jeep-jim/AvtoCena/actions/runs/45076867904): 2 890 наблюдений AutoScout с 201 страницы; completed intake и REG archive подтверждены | Publish job failed; точная причина последнего отказа в полученных журналах не установлена |
+| Грузия | [45076431110](https://github.com/jeep-jim/AvtoCena/actions/runs/45076431110): AutoPapa 13, MyAuto 0; частичный archive в REG, `completed:false` | Пропущена. У обоих источников `list_failed`; неполный сбор нельзя выдавать за обновление |
+| Япония | Нового ночного сбора не обнаружено; свежий archive отдельно не проверялся | Нового ночного запуска публикации не обнаружено; текущий срез не трогать |
+| Зелёный угол | [45077330661](https://github.com/jeep-jim/AvtoCena/actions/runs/45077330661): 509 исходных → 503 в проверенном срезе | Да: 23.11 05:23 UTC+7, запись и readback; внеплановый повтор не нужен |
 
-| Рынок | UTC+7 | Интервал | Последний известный результат |
-| --- | --- | --- | --- |
-| Китай | 21:00 | Ежедневно | Сохранены загрузка и prepared intake; автоматическое публичное продолжение не подключено |
-| Корея | 00:00 | 2 дня | После failure на retained Europe coverage принят PR 1802. [Повтор 45041812628](https://github.com/jeep-jim/AvtoCena/actions/runs/45041812628): verify и ожидание UAE прошли; publisher завершился по JavaScript heap OOM, verify_public пропущен |
-| ОАЭ | 00:00 | 2 дня | [44990370917](https://github.com/jeep-jim/AvtoCena/actions/runs/44990370917), попытка 2 завершилась на проверке покрытия цен Korea; published:false |
-| Грузия | 00:00 | 2 дня | [44968899905](https://github.com/jeep-jim/AvtoCena/actions/runs/44968899905): попытка 2 завершена с неполным сбором MyAuto и AutoPapa; публикация и очистка пропущены |
-| Европа | 00:00 | 3 дня | [44976801536](https://github.com/jeep-jim/AvtoCena/actions/runs/44976801536): coverage guard остановил публикацию; нужен исправленный workflow |
+REG подтверждён первичными журналами записи/проверки перечисленных запусков; отдельное прямое чтение всего REG не выполнялось. Не смешивать наблюдения/события и количество уникальных машин, а также сбор и публикацию.
 
-## Проверки PR 1801
+## Расписание
 
-[PR 1801](https://github.com/jeep-jim/AvtoCena/pull/1801): head `20ca52413c2d8c63063961c9358285c5064f3c71`, tree `1b3e7755612c5824a733a33a5062725add6e1fbe`. Локально `npm test`: 3 386 / 3 386, без skipped; TypeScript web и engine PASS; 25 editorial и owned guards PASS. Mobile.de остаётся выключенным, действующие ограничения источников сохранены.
+Источник: `scripts/lib/catalog-refresh-schedule.mjs` и текущие `catalog-refresh-<market>.yml`. Cron проверяется ежедневно; календарный interval guard решает, наступил ли день. Переключатели владельца сохраняются.
 
-[CI 45022338709](https://github.com/jeep-jim/AvtoCena/actions/runs/45022338709) и [45022383527](https://github.com/jeep-jim/AvtoCena/actions/runs/45022383527) завершились успешно, включая production build. PR принят в main: `2686cc203a1dd5e38b38d29d84423145f2aeeb16`. Установка нового runtime сайта этим merge не выполнялась.
+| Рынок | Интервал | Ближайшее разрешённое окно UTC+7 |
+| --- | --- | --- |
+| Китай | Ежедневно | 23.11, 21:00 |
+| Корея, ОАЭ, Грузия | 2 дня | 25.11, 00:00 |
+| Европа, Зелёный угол | 3 дня | 26.11, 00:00 |
+| Япония | В проверенных текущих workflows/queue нет автоматического cron | Не установлено |
 
-[Overview 45023361500](https://github.com/jeep-jim/AvtoCena/actions/runs/45023361500) завершился успешно на исправленном main. Для `gen_1794878284419_a611dfcf` подтверждены `alreadyPrepared:true` на 22, 23 и 24 ноября. Установленный 22867 честно вернул `supported:false, prepared:false, reason:known_pre_helper_release`; это не заявленная готовность отсутствующего editorial helper. Ошибка совместимости устранена.
+Срабатывание расписания подтверждено ночными runs. Успешная публикация всех рынков по расписанию пока не достигнута.
 
-## Китай: сохранённый вход публикации
+## Что сделано и что дальше
 
-[Загрузка 44945974384](https://github.com/jeep-jim/AvtoCena/actions/runs/44945974384): 5 530 событий, 278 страниц, cursor 13205327. [Подготовка 44947482013](https://github.com/jeep-jim/AvtoCena/actions/runs/44947482013): 290 560 observations. Публичный Китай этим не переключён.
+Приняты [PR 1801](https://github.com/jeep-jim/AvtoCena/pull/1801), [1802](https://github.com/jeep-jim/AvtoCena/pull/1802), [1803](https://github.com/jeep-jim/AvtoCena/pull/1803). Их успешный CI не означает публикацию данных или установку runtime. Сайт остаётся на `22867cbcfaee27b2e8917b6bf880e44827f67b60`; main целиком не выпускать.
 
-Ветка `fix/china-publication-source-20261122`, [SHA b209f4f27ad84eae2878c4535e0daa269593a981](https://github.com/jeep-jim/AvtoCena/commit/b209f4f27ad84eae2878c4535e0daa269593a981): 15 тестов PASS. Adapter связывает official run/attempt/SHA, archive, frozen rates, cursor, replica manifest, срок источника и China control/ETag. Возвращается только входной план: native admission, полный active/retirement proof, price seal, private preview и CAS ещё нужны. Индекс — в [документе скорости](performance.md).
-
-## Грузия: установленная причина и предел диагностики
-
-В [job 137044250368](https://github.com/jeep-jim/AvtoCena/actions/runs/44968899905/job/137044250368), artifact 14738319396, `report.json` содержит три одинаковых `yandex_bridge_http_502_myauto_1_myauto_list_routes_failed:...fetch_failed`. У MyAuto 0 страниц, строк и попыток деталей; AutoPapa сохранил 1 149 наблюдений. 502 сформирован нашим Yandex worker после ошибки fetch до разбора HTML; это не доказательство HTTP 502 или Cloudflare-блокировки MyAuto.
-
-Adapter сохраняет только `error.message`; route и bridge дополнительно обрезают текст. DNS, TLS, connect timeout, egress и недоступность поставщика по этому artifact не различить. Следующий шаг — безопасно записывать `error.name` и `error.cause.code/name` в worker и проверить следующий штатный запуск без внепланового сбора.
-
-[Повторный сбор 22.11](https://github.com/jeep-jim/AvtoCena/actions/runs/44968899905/job/137214239146) завершился в 21:38 по Новокузнецку. MyAuto не получил первую страницу после трёх попыток. AutoPapa сохранил 396 уникальных объявлений с 385 страниц; журнал содержит HTTP 503 и три последовательных сбоя списка. Публикация и очистка пропущены. При проверке в 23:46 [каталог Грузии](https://avtocena.com/api/catalog/search?market=georgia&pageSize=24) вернул прежнее поколение `gen_1794878284419_a611dfcf`, 1 123 объявления и 24 записи на первой странице.
-
-## Результат Korea и UAE, 23.11
-
-[Корея](https://github.com/jeep-jim/AvtoCena/actions/runs/45041812628/job/137280315531) успешно дождалась UAE, обработала сохранённый intake и прошла preflight. В 00:15 V8 исчерпал heap около 10 ГБ. Подтверждения принятого manifest и immutable technical readback нет. Штатная публичная проверка и cleanup пропущены. Отдельный запуск закреплённого GET-only verifier показал прежнее `gen_1794878284419_a611dfcf`; у Morning 42799484 и Seltos 42760061 мощность, объём и топливо пусты. В публичном поиске 69 386, первая страница 24; до 160 л.с. — 139, первая страница 24. Курс первой карточки — 61,7607 ₽ за 1 000 KRW на 21.11. Это результат прежнего поколения.
-
-[ОАЭ](https://github.com/jeep-jim/AvtoCena/actions/runs/44990370917/job/137187544406): staged-budget остановлен до переключения из-за сохранённой Korea: 69 386 eligible, 46 862 selector, 22 524 missing. В отчёте `published:false`, `previousManifestPreserved:true`; cleanup пропущен. Публичный поиск ОАЭ вернул 25 480.
-
-## Следующие действия
-
-1. Для следующего восстановления Korea локализовать рост heap после preflight на сохранённом intake; для UAE использовать совместимую подготовку сохранённых разделов. Следующие попытки требуют сохранения всех проверок, lease/CAS и подтверждения фактической публикации.
-2. Европу повторять только из сохранённого intake на исправленном workflow, без ослабления retained-market coverage.
-3. Завершить независимую публикацию Китая с индексом и действующими guards. Старые одноразовые rev5 pins не менять; до принятия нового среза сохранять текущий.
-4. Overview: обычные триггеры — cron 17:05 UTC и завершение UAE, manual на main с inputs `{}`, существующий push marker. Listener завершения Korea paid publish отсутствует. Весь main как runtime не выпускать.
+1. Проверить ресурсный патч, затем один раз опубликовать сохранённый Korea `45077320093/1`; подтвердить характеристики, правильные карточки и фильтр до 160 л.с. на сайте. Свежий поставщик для этого не нужен.
+2. Повторять UAE/Europe из сохранённого завершённого intake после исправления причины, сохраняя все проверки и CAS. Общая независимость рынков остаётся открытой.
+3. Китай: ветка `fix/china-publication-source-20261122`, SHA `b209f4f27ad84eae2878c4535e0daa269593a981`, 15 адресных тестов PASS. Adapter только подготавливает проверенный вход; native admission, active/retirement proof, price seal, private preview и CAS ещё нужны. Индекс — [performance.md](performance.md).
+4. Грузия: bridge возвращает 502 после `fetch_failed`; это не доказательство блокировки поставщика. Уточнить безопасные `error.name`/`cause.code` worker до повторного сбора.
+5. Overview последнего запуска подготовлен для старого поколения на 23/24/25 ноября. Общая подготовка цен завершилась `publication_in_progress`; ускорение всех фильтров и страниц не подтверждено.

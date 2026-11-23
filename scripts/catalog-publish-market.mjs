@@ -28,6 +28,7 @@ const { isSellerPricedOffer } = await import("../apps/web/lib/catalog/seller-pri
 const { assertNoDeliveredPriceRegression } = await import("../apps/web/lib/catalog/publication-price-preservation.ts");
 import fs from "node:fs/promises";
 import crypto from "node:crypto";
+import { getHeapStatistics } from "node:v8";
 import path from "node:path";
 import { catalogPublicCountGuard } from "./lib/catalog-public-count-guard.mjs";
 import { hashRows, snapshotCatalogRows, assertCatalogRowsUnchanged } from "./lib/catalog-row-hash.mjs";
@@ -296,9 +297,12 @@ if (!dryRun && market !== 'japan' && getJsonStorage().driver === 'object'
     && (!process.env.CATALOG_BUDGET_RUNTIME_ROOT || !/^[a-f0-9]{40}$/.test(process.env.CATALOG_BUDGET_RUNTIME_RELEASE || ''))) {
   throw Error('staged_budget_runtime_required');
 }
-function logPublicationMemory(stage) {
-  const { rss, heapUsed, external } = process.memoryUsage();
-  console.log(JSON.stringify({ market, stage, memoryBytes: { rss, heapUsed, external } }));
+function logPublicationMemory(stage, progress = {}) {
+  const { rss, heapUsed, external, arrayBuffers } = process.memoryUsage();
+  console.log(JSON.stringify({ ...progress, market, stage, at:new Date().toISOString(),
+    pid:process.pid, ppid:process.ppid, nodeVersion:process.version,
+    memoryBytes: { rss, heapUsed, external, arrayBuffers,
+      availableMemory:process.availableMemory(), heapLimit:getHeapStatistics().heap_size_limit } }));
 }
 try {
 let expectedBaseGenerationId = await catalogGenerationId();
@@ -441,6 +445,7 @@ const freshIds = new Set(generation.offers.map(offer => offer.id));
 retainedPublishedIds = new Set(currentRetainedRows.filter(offer => !freshIds.has(offer.id)).map(offer => offer.id));
 const authoritativeExpiredCount = [...retentionDecisions.values()].filter((decision) => decision.reason === "expired_after_authoritative_refresh").length;
 const outageGraceExpiredCount = [...retentionDecisions.values()].filter((decision) => decision.reason === "unverified_retention_expired").length;
+retentionDecisions.clear();
 
 // A fresh observation already carries the source evidence required for its
 // audit. Keeping the older raw response beside it made China retain several
@@ -536,6 +541,9 @@ for (let start = 0; start < orderedCandidates.length && selected.length < select
 for (const offer of orderedCandidates) {
   if (offer) rejectFreshOffer(offer.id, "selection:candidate_limit");
 }
+// Ownership and duplicate checks are complete; selected rows keep their images.
+selectedIds.clear();
+imageOwners.clear();
 
 // Retained rows pass the same audit as fresh intake. V2 first orders eligible
 // inventory; the canonical public stage below then enforces the non-Japan mix.
@@ -558,6 +566,7 @@ for (const offer of selected) if (!selectedMarketOffersById.has(String(offer.id)
   rejectFreshOffer(offer.id, "selection:v2_policy");
   auditedRemovals.set(offer.id, "selection:v2_policy");
 }
+selectedMarketOffersById.clear();
 const preservedByMarket = {};
 const preservedPublicHashByMarket = {};
 const expectedPublishedByMarket = {};
@@ -572,11 +581,14 @@ async function loadPreservedMarkets() {
   // was preparing its own candidates.
   for (const otherMarket of PUBLIC_CATALOG_MARKETS) {
     if (otherMarket === market) continue;
+    logPublicationMemory("preserved_market_read_start", {preservedMarket:otherMarket});
     let rows = [];
     try { rows = technicalRepairGuard ? await technicalRepairGuard.readPreservedMarket(otherMarket)
       : await readMarketOffers(otherMarket); } catch (error) {
+      logPublicationMemory("preserved_market_read_failed", {preservedMarket:otherMarket});
       throw new Error(`catalog_preserved_public_read_failed:${otherMarket}:${String(error?.message || error)}`);
     }
+    logPublicationMemory("preserved_market_read_complete", {preservedMarket:otherMarket, rows:rows.length});
     // Exact preservation applies only to owner-approved provenance. Rows from a
     // removed adapter/domain are stale public tails: quarantine them from the next
     // generation, while keeping every still-approved row byte-stable. Structural
@@ -595,6 +607,8 @@ async function loadPreservedMarkets() {
     preservedPublicRowsByMarket[otherMarket] = preservedRows;
     expectedPublishedByMarket[otherMarket] = preservedRows.length;
     expectedPublishedHashByMarket[otherMarket] = preservedPublicHashByMarket[otherMarket];
+    logPublicationMemory("preserved_market_verified", {preservedMarket:otherMarket, rows:preservedRows.length,
+      purgedForbidden:forbidden.length, retainedRows:Object.values(preservedByMarket).reduce((sum,count)=>sum+count,0)});
   }
 }
 
@@ -728,6 +742,10 @@ orderedCandidates.length = 0;
 selected.length = 0;
 v2Selection.selected.length = 0;
 candidatesById.clear();
+// Per-ID evidence has been copied into the immutable audit report. The Europe
+// replacement baseline above was the last consumer of the preparation maps.
+freshOfferMetaById.clear();
+freshOfferRejectionReasonById.clear();
 const purgedForbiddenInternalByMarket = Object.fromEntries(PUBLIC_CATALOG_MARKETS.map(id => [id, 0]));
 
 const unique = new Map();
@@ -743,6 +761,7 @@ for (const rows of Object.values(preservedPublicRowsByMarket)) {
   for (const offer of rows) if (offer?.id && !unique.has(offer.id)) unique.set(offer.id, offer);
 }
 const allOffers = [...unique.values()];
+unique.clear();
 const previousRetainedCount = retainedCandidateCount;
 const completedSourceIds = new Set(freshOfferAudit.summary.complete
   ? Object.values(sourceRefreshStates).filter(state => state?.observed && state?.authoritative
@@ -794,12 +813,20 @@ if (regressionBlocked) {
     await assertCurrentKoreaPublicationSource();
     if (process.env.JSON_STORAGE_DRIVER === "object") await import("./catalog-storage-preflight.mjs");
     expectedBaseGenerationId = await catalogGenerationId();
+    logPublicationMemory("target_snapshot_read_start");
     const latestTargetRows = await readMarketOffers(market);
+    logPublicationMemory("target_snapshot_read_complete", {rows:latestTargetRows.length});
     assertCatalogRowsUnchanged(preparedTargetSnapshot, latestTargetRows, market);
+    // The reader returns a fresh array. Keep the checked digest, not a second
+    // full copy of the old target while every preserved market is loaded.
+    latestTargetRows.length = 0;
+    logPublicationMemory("target_snapshot_released", {rows:preparedTargetSnapshot.count});
     await loadPreservedMarkets();
     process.env.CATALOG_GROW_ONLY_MARKETS = "";
     if (market !== 'japan' && getJsonStorage().driver === 'object') {
+      logPublicationMemory("serving_read_models_initialize_start");
       publicationReadModelBuilders = await createServingPublicationReadModelBuilders({storage:getJsonStorage()});
+      logPublicationMemory("serving_read_models_initialize_complete");
       const prepareBudgetRows = publicationReadModelBuilders.prepareBudgetRows;
       publicationReadModelBuilders.prepareBudgetRows = async rows => {
         const prepared = await prepareBudgetRows(rows);

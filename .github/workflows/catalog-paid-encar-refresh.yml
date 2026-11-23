@@ -78,8 +78,7 @@ jobs:
           ENCAR_ALLOW_PARTIAL: 'true'
           CATALOG_INTAKE_TIME_MS: '18000000'
           YC_OBJECT_STORAGE_REQUEST_TIMEOUT_MS: '120000'
-          NODE_OPTIONS: --max-old-space-size=6144
-        run: node --import tsx scripts/catalog-paid-encar-intake.mjs
+        run: node scripts/run-node-with-resources.mjs --import tsx scripts/catalog-paid-encar-intake.mjs
   collect:
     needs: [plan, collect_initial]
     if: needs.plan.outputs.run == 'true' && needs.collect_initial.result == 'success'
@@ -108,8 +107,7 @@ jobs:
           ENCAR_ALLOW_PARTIAL: 'false'
           CATALOG_INTAKE_TIME_MS: '18000000'
           YC_OBJECT_STORAGE_REQUEST_TIMEOUT_MS: '120000'
-          NODE_OPTIONS: --max-old-space-size=6144
-        run: node --import tsx scripts/catalog-paid-encar-intake.mjs
+        run: node scripts/run-node-with-resources.mjs --import tsx scripts/catalog-paid-encar-intake.mjs
   prepare:
     needs: collect
     if: needs.collect.result == 'success' && needs.collect.outputs.snapshot_complete == 'true'
@@ -125,7 +123,6 @@ jobs:
     env:
       ENCAR_SNAPSHOT_RUN: ${{ needs.collect.outputs.snapshot_run }}
       ENCAR_SNAPSHOT_ATTEMPT: ${{ needs.collect.outputs.snapshot_attempt }}
-      NODE_OPTIONS: --max-old-space-size=6144
     steps:
       - uses: actions/checkout@v4
         with:
@@ -151,7 +148,7 @@ jobs:
             {runId:process.env.ENCAR_SNAPSHOT_RUN,attempt:process.env.ENCAR_SNAPSHOT_ATTEMPT,headSha:process.env.GITHUB_SHA});
           PAID_SNAPSHOT
       - name: Restore paid listings and prepare their saved history and inspection
-        run: node --import tsx scripts/catalog-restore-encar-snapshot.mjs
+        run: node scripts/run-node-with-resources.mjs --import tsx scripts/catalog-restore-encar-snapshot.mjs
       - uses: actions/upload-artifact@v4
         id: intake
         with:

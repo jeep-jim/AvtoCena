@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {defaultCollectionControls,collectionMarketEnabled,collectionWorkflowEnabled} from '../apps/web/lib/catalog/collection-controls-schema.ts';
-import {validatePaidEncarArtifactBinding} from '../scripts/lib/paid-encar-artifact-binding.mjs';
+import {paidEncarBindingFromWorkflow} from '../scripts/lib/paid-encar-artifact-binding.mjs';
 
 // Execute the actual workflow planner with offline controls and filesystem.
 const workflow=fs.readFileSync('.github/workflows/catalog-market-refresh.yml','utf8');
@@ -10,7 +10,7 @@ const match=workflow.match(/node --import tsx --input-type=module <<'JS'\n([\s\S
 assert.ok(match,'workflow planner exists');
 const body=match[1].split('\n').map(line=>line.slice(10)).filter(line=>!line.startsWith('import ')&&!line.includes("await import('./apps/web/lib/catalog/collection-")).join('\n');
 const AsyncFunction=Object.getPrototypeOf(async function(){}).constructor;
-const planner=new AsyncFunction('fs','catalogRefreshDue','readCollectionControls','collectionMarketEnabled','collectionWorkflowEnabled','validatePaidEncarArtifactBinding','process','console',body);
+const planner=new AsyncFunction('fs','catalogRefreshDue','readCollectionControls','collectionMarketEnabled','collectionWorkflowEnabled','paidEncarBindingFromWorkflow','process','console',body);
 async function plan(market,enabled,event='schedule',due=true,marketEnabled=true,extraEnv={},marker={}){
  const controls=defaultCollectionControls();
  for(const value of Object.values(controls.sources))value.enabled=false;
@@ -18,7 +18,7 @@ async function plan(market,enabled,event='schedule',due=true,marketEnabled=true,
  controls.markets[market].enabled=marketEnabled;
  let output='';const logs=[];
  const fakeFs={readFileSync:path=>JSON.stringify(path.endsWith('refresh-policy-v1.json')?{pausedMarkets:{}}:marker),appendFileSync:(_path,value)=>{output+=value;}};
- await planner(fakeFs,(_now, marketName)=>marketName==='china'||due,async()=>controls,collectionMarketEnabled,collectionWorkflowEnabled,validatePaidEncarArtifactBinding,{env:{TARGET_MARKET:market,EVENT_NAME:event,GITHUB_OUTPUT:'offline',...extraEnv}},{log:value=>logs.push(value)});
+ await planner(fakeFs,(_now, marketName)=>marketName==='china'||due,async()=>controls,collectionMarketEnabled,collectionWorkflowEnabled,paidEncarBindingFromWorkflow,{env:{TARGET_MARKET:market,EVENT_NAME:event,GITHUB_OUTPUT:'offline',...extraEnv}},{log:value=>logs.push(value)});
  return {values:Object.fromEntries(output.trim().split('\n').map(line=>{const i=line.indexOf('=');return[line.slice(0,i),line.slice(i+1)];})),logs,controls};
 }
 test('AJES-only Korea stays available without starting empty legacy collection/publication',async()=>{
@@ -98,4 +98,17 @@ test('China daily cursor uses the same lease and conditional write wrapper while
  assert.ok(p.includes("before.found?{ifMatch:before.etag}:{ifNoneMatch:'*'}"));
  assert.ok(p.includes('node --import tsx "$RUNNER_TEMP/china-guarded-cursor.mjs"'));
  assert.ok(p.includes('node --import tsx scripts/catalog-commit-intake-cursor.mjs'));
+});
+
+
+test('saved paid producer is bound to its original source and never collects again',async()=>{
+ const saved={...sameRun,PREPARED_ENCAR_SELF:'false',PREPARED_ENCAR_RUN:'400',PREPARED_ENCAR_SOURCE_SHA:'b'.repeat(40)};
+ const p=await plan('korea',['encar_feed'],'push',false,true,saved);
+ assert.equal(p.values.run,'true');assert.equal(p.values.reuse_run_id,'400');
+ assert.equal(p.values.collect_markets,'[]');assert.equal(p.values.publish_matrix,'["korea"]');
+ for(const changed of [{PREPARED_ENCAR_SOURCE_SHA:'invalid'},{PREPARED_ENCAR_RUN:'500'},
+  {PREPARED_ENCAR_ARTIFACT_DIGEST:''},{PREPARED_ENCAR_ARTIFACT_ID:''}]){
+  await assert.rejects(plan('korea',['encar_feed'],'push',true,true,{...saved,...changed}),/paid_encar_artifact_binding_/);
+ }
+ await assert.rejects(plan('korea',['encar_feed'],'push',true,true,{...sameRun,PREPARED_ENCAR_SOURCE_SHA:'b'.repeat(40)}),/source_mode/);
 });
