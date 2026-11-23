@@ -75,6 +75,18 @@ export function canonicalizeSemanticSourceFields<T extends Partial<VehicleOffer>
   return {...input, fuel:canonicalSourceFuel(input.fuel), transmission:transmission(input.transmission), drive:drive(input.drive), bodyType:body(input.bodyType)} as T;
 }
 
+/** The existing exact mild-hybrid identity rule, shared with paid source mapping. */
+export function hasKnownMildHybridIdentity(input: Partial<VehicleOffer>) {
+  const operational = input.operational as any;
+  // Volvo Korea explicitly identifies XC40 B4 as a 48 V mild hybrid:
+  // https://www.volvocars.com/kr/cars/xc40/ . Generic petrol in a listing
+  // describes the fuel, and cannot override this exact model/trim badge.
+  return /^(?:volvo|볼보)$/i.test(String(input.make || "").trim())
+    && /^XC40(?:\b|\s)/i.test(String(input.model || "").trim())
+    && Number(input.year) >= 2020
+    && /\bB4\b/i.test([input.trim, input.sourceTitle, operational?.sourceTitle, operational?.encyclopediaIdentity?.rawTrim].filter(Boolean).join(" "));
+}
+
 /**
  * Resolve an explicitly named electrified powertrain only from identity-bound
  * top-level fields. Raw marketplace payloads are deliberately excluded: they
@@ -98,14 +110,7 @@ export function namedElectrifiedPowertrainKind(input: Partial<VehicleOffer>) {
     operational?.encyclopediaIdentity?.rawModel,
     operational?.encyclopediaIdentity?.rawTrim,
   ].filter(Boolean).join(" ");
-  // Volvo Korea explicitly identifies XC40 B4 as a 48 V mild hybrid:
-  // https://www.volvocars.com/kr/cars/xc40/ . Generic petrol in a listing
-  // describes the fuel, and cannot override this exact model/trim badge.
-  const volvoXc40B4 = /^(?:volvo|볼보)$/i.test(String(input.make || "").trim())
-    && /^XC40(?:\b|\s)/i.test(String(input.model || "").trim())
-    && Number(input.year) >= 2020
-    && /\bB4\b/i.test([input.trim, input.sourceTitle, operational?.sourceTitle, operational?.encyclopediaIdentity?.rawTrim].filter(Boolean).join(" "));
-  if (volvoXc40B4) return "other_hybrid" as const;
+  if (hasKnownMildHybridIdentity(input)) return "other_hybrid" as const;
   if (SERIES_HYBRID_PRIMARY_RE.test(primary)) return "series_hybrid" as const;
   if (HYBRID_PRIMARY_RE.test(primary) || LEXUS_HYBRID_BADGE_RE.test(primary)) return "other_hybrid" as const;
   if (ELECTRIC_PRIMARY_RE.test(primary)) return "electric" as const;

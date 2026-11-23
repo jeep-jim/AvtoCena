@@ -7,6 +7,8 @@ import {resetCatalogRateCache} from '../apps/web/lib/catalog/rates';
 import {prepareSellerInventory} from '../apps/web/lib/catalog/prepare-seller-inventory';
 import {normalizeVehicleOfferSpecs} from '../apps/web/lib/catalog/spec-normalization';
 import {classifySpecificationEvidence} from '../apps/web/lib/catalog/specification-evidence-audit';
+import {catalogPowerBand} from '../apps/web/lib/catalog/power-mix';
+import {hasKnownMildHybridIdentity} from '../apps/web/lib/catalog/powertrain-safety';
 import {compactPublicStorageOffer, publicOffer, searchProjectionFromOffer} from '../apps/web/lib/catalog/storage';
 
 const observedAt = '2026-11-16T15:00:00.000Z';
@@ -292,6 +294,66 @@ test('coarse hybrid fuel permits an explicit series or plug-in identity without 
       }
     }
   });
+});
+
+test('paid XC40 B4 reuses its existing mild-hybrid identity through actual publication without certifying power', async () => {
+  await withOfflinePublication(async () => {
+    // These technical fields identify a saved 45077320093/1 observation.
+    // Price, mileage and photos remain synthetic fixtures from data()/mapped().
+    const patch = {inner_id:'41593352', mark:'Volvo', model:'XC40', configuration:'B4 Ultimate Bright',
+      year:2023, engine_type:'Бензин', displacement_cc:1969, power:197, power_ice_hp:197};
+    const source = mapped(patch);
+    assert.equal(hasKnownMildHybridIdentity(source), true);
+    assert.equal(source.operational.semanticEvidence.fuel.source, 'auto_api_encar:v3:engine_type+identity_name');
+    assert.equal(source.operational.semanticEvidence.powerHp.status, 'exact');
+    assert.equal(source.operational.sourcePower.totalHp.value, 197);
+    assert.equal(source.operational.sourcePower.iceHp.value, 197);
+    assert.ok(source.operational.sourceSpecifications.groups.flatMap(group => group.items)
+      .some(item => item.name === 'Тип двигателя по данным поставщика' && item.value === 'Бензин'));
+    const normalized = normalizeVehicleOfferSpecs(source);
+    const prepared = await prepareSellerInventory(normalized);
+    assert.ok(prepared);
+    for (const row of [source, normalized, prepared, publicOffer(compactPublicStorageOffer(prepared)),
+      searchProjectionFromOffer(compactPublicStorageOffer(prepared))]) {
+      assert.equal(row.powerHp, 197); assert.equal(row.engineCc, 1969);
+      assert.equal(row.fuel, 'hybrid'); assert.equal(row.powertrainKind, 'other_hybrid');
+      assert.equal(row.power30MinKw, undefined); assert.equal(row.utilizationPowerKw, undefined);
+      assert.equal(catalogPowerBand(row), 'unknown');
+    }
+    assert.equal(prepared.totalRub, null, 'unknown certified power remains seller-priced');
+    assert.equal(mapped({...patch, power:null}).powerHp, undefined, 'no horsepower is invented when the source omits it');
+    const low = mapped({...patch, power:150, power_ice_hp:150});
+    assert.equal(catalogPowerBand(normalizeVehicleOfferSpecs(low)), 'unknown', 'system hp below160 is not certified power');
+    for (const engine_type of ['Дизель', 'Электро', 'Бензин или Электричество']) {
+      const rejected = mapped({...patch, engine_type});
+      assert.notEqual(rejected.operational.semanticEvidence.fuel.status, 'exact');
+    }
+    for (const change of [{mark:'Kia'}, {model:'XC60'}, {configuration:'T4'}, {year:2019}])
+      assert.equal(hasKnownMildHybridIdentity(mapped({...patch, ...change})), false);
+  });
+});
+
+test('the narrow B4 resolution preserves other saved total-versus-ICE conflicts', () => {
+  // Technical examples from the same saved intake; unrelated fixture fields
+  // still come from data(). Their mixed source facts are not resolved here.
+  for (const patch of [
+    {inner_id:'40859072', mark:'Porsche', model:'911', configuration:'Carrera GTS', year:2025,
+      engine_type:'Бензин', displacement_cc:3591, power:541, power_ice_hp:485, power_electro_kw:40},
+    {inner_id:'38418605', mark:'BMW', model:'X5', configuration:'xDrive 30d M Sport', year:2023,
+      engine_type:'Дизель', displacement_cc:2993, power:298, power_ice_hp:286, power_electro_kw:9},
+    {inner_id:'41344555', mark:'Mercedes-Benz', model:'GLE-Class', configuration:'GLE300d 4MATIC', year:2022,
+      engine_type:'Дизель', displacement_cc:1993, power:272, power_ice_hp:245},
+    {inner_id:'42054624', mark:'Peugeot', model:'3008', configuration:'1.2 HYbrid Allure', year:2025,
+      engine_type:'Бензин', displacement_cc:1199, power:145, power_ice_hp:136, power_electro_kw:15.6},
+  ]) {
+    const offer = mapped(patch);
+    assert.equal(hasKnownMildHybridIdentity(offer), false);
+    assert.equal(offer.powerHp, undefined);
+    assert.equal(offer.operational.semanticEvidence.powerHp.status, 'conflict');
+    assert.equal(offer.operational.semanticEvidence.powerHp.reason, 'combustion_total_ice_mismatch');
+    assert.equal(offer.operational.sourcePower.totalHp.value, patch.power);
+    assert.equal(offer.operational.sourcePower.iceHp.value, patch.power_ice_hp);
+  }
 });
 
 test('paid v3 equipment and exact listing fields reach the stored detail without seller columns', async () => {
