@@ -1,7 +1,7 @@
 # Текущая задача: фиды и скорость
 
 Дата постановки: 22.11.2026, Asia/Krasnoyarsk. Репозиторий: `jeep-jim/AvtoCena`. Сайт: https://avtocena.com.
-Состояние на 23.11, 11:38 UTC+7; результаты сайта отдельно проверены в 11:15–11:20.
+Состояние на 23.11, 12:06 UTC+7; API сайта проверен в 11:38, браузер — в 11:20.
 
 ## Поручение владельца
 
@@ -18,10 +18,10 @@
 
 ## Следующие действия
 
-1. Korea: [восстановление 45104426224](https://github.com/jeep-jim/AvtoCena/actions/runs/45104426224) из сохранённого intake `45077320093/1`, artifact `14779553850`; collect skipped. На 11:28:39 publisher выполняет шаг 29, ошибок шагов нет. Последняя проверка сайта: старый `gen_1794878284419_a611dfcf`, 46 862 машины; фильтр до 160 л.с. — 139, у контрольных Morning/Seltos мощность неизвестна. Дождаться terminal, проверить отчёт, новый manifest, persisted coverage, карточки и фильтр. [Память](../operations/publication-memory.md), [фиды](feeds.md).
+1. Korea: [восстановление 45104426224](https://github.com/jeep-jim/AvtoCena/actions/runs/45104426224) из сохранённого intake `45077320093/1`, artifact `14779553850`; collect skipped. На 12:01 publisher выполняет шаг 29, ошибок шагов нет; log API вернул BlobNotFound, внутренняя фаза неизвестна. Последняя проверка сайта: старый `gen_1794878284419_a611dfcf`, 46 862 машины; фильтр до 160 л.с. — 139, у контрольных Morning/Seltos мощность неизвестна. Дождаться terminal, проверить отчёт, новый manifest, persisted coverage, карточки и фильтр. [Память](../operations/publication-memory.md), [фиды](feeds.md).
    Следом завершить независимые принятые поколения рынков: reader, затем target-only writer и короткий CAS. Сужение итогового аудита не завершает эту миграцию. Live runtime во время закреплённой публикации не менять.
 2. Завершить независимую публикацию China из проверенного сохранённого источника, сохранив действующие проверки и CAS; новый компактный индекс должен войти в новое поколение.
-3. Завершить точный выпуск главной после релизных проверок. Кандидат `c162` собран локально; образ и production adapter не опубликованы. [Inventory 45110094845](https://github.com/jeep-jim/AvtoCena/actions/runs/45110094845) подтвердил единственное расхождение прежних ресурсных pins: RestartCount 1, StartedAt `2026-11-21T08:13:50.039024596Z`; причина перезапуска неизвестна. Текущий контейнер по-прежнему имеет Memory 4 GiB. Runtime не менять во время Korea. [Скорость](performance.md).
+3. Завершить точный выпуск главной после Korea и фоновых записей. [Реальная Docker-сборка c162](https://github.com/jeep-jim/AvtoCena/actions/runs/45114096654) PASS: Alpine Node 24.22.1, источник/closure, публичный model asset и свежий heap проверены. Образ не установлен и не опубликован в artifact. [Третий inventory](https://github.com/jeep-jim/AvtoCena/actions/runs/45114122338) PASS, canonical SHA `b0ff41c20fdcf5c459d75b4d967ed2009a550322e449f16bff5b26e938e8e6eb`; текущий Memory 4 GiB, прежний RestartCount 1. Activation driver и точный plan-review handoff ещё готовятся. [Скорость](performance.md).
 4. Для Georgia уточнить транспортную причину MyAuto через безопасную диагностику worker. После исправлений подтвердить установленный SHA, выдачу и сопоставимые измерения на сайте.
 
 ## Когда задача считается выполненной
@@ -32,6 +32,8 @@
 
 Принят [PR 1804](https://github.com/jeep-jim/AvtoCena/pull/1804): CI 3 441 / 3 441, typecheck/build и browser PASS. Также приняты [1806](https://github.com/jeep-jim/AvtoCena/pull/1806) и [1808](https://github.com/jeep-jim/AvtoCena/pull/1808) (UAE cursor и точный saved-feed probe; probe ещё не запускали), [1807](https://github.com/jeep-jim/AvtoCena/pull/1807) и [1809](https://github.com/jeep-jim/AvtoCena/pull/1809) (UI controller/read-only inventory и точная диагностика ресурсов).
 
-- [PR 1805](https://github.com/jeep-jim/AvtoCena/pull/1805), head `30e587e`: CI green, merge после Korea. [PR 1810](https://github.com/jeep-jim/AvtoCena/pull/1810) дополнен heartbeat и witness, новый head `767c357c620c318bb7e56bd78608e6ca3cbbcba2`: новый CI ещё предстоит; 3 443 / 3 443 PASS относится только к прежнему `97ac7b4`. Merge удержан из-за self-trigger `catalog-current-read-models.yml`.
-- [PR 1811](https://github.com/jeep-jim/AvtoCena/pull/1811), head `0bf7954`: снятие общего потолка China archive; [CI 45112119949](https://github.com/jeep-jim/AvtoCena/actions/runs/45112119949) идёт, реальная проверка объёма свыше 20 GiB выполнена офлайн. На production не установлен.
+- [PR 1805](https://github.com/jeep-jim/AvtoCena/pull/1805), head `30e587e`: CI green, merge после Korea. [PR 1810](https://github.com/jeep-jim/AvtoCena/pull/1810), head `7d9ba69`: active jobs, heartbeat/witness и полный witness volume; новый [CI 45114659977](https://github.com/jeep-jim/AvtoCena/actions/runs/45114659977) идёт, прежний `767c357` — 3 447 PASS. Merge удержан: self-trigger запускает writer current-read-models.
+- [PR 1811](https://github.com/jeep-jim/AvtoCena/pull/1811) принят, CI 3 446 PASS: China archive без общего потолка. [PR 1812](https://github.com/jeep-jim/AvtoCena/pull/1812) принят: build-only и фактический inventory pin; это не deployment.
 - Live остаётся `22867cbcfaee27b2e8917b6bf880e44827f67b60`; main целиком не выпускать. Все фиды и скорость всех страниц ещё не исправлены; независимые поколения рынков и установка индекса остаются открытыми.
+
+Подготовленная Korea: [полный census](../audits/2026-11-23-korea-prepared-power-coverage.json) — 46 649 строк, hp 46 073; из 576 пустых у 263 source hp exact, но заблокирован конфликтом. Это данные intake, не результат публикации. Узкий B4 mapper fix ещё проверяется; другие противоречия не разрешены.
