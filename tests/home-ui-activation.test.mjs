@@ -239,3 +239,17 @@ test('a changing Actions page must become complete before it can authorize a swi
   await assert.rejects(assertPublicationQuiescence(reader, '8', pause), /active_runs_incomplete/);
   assert.equal(waits, 3);
 });
+
+test('publications retry intermittent read-only API failures without credentials in diagnostics', async () => {
+  let attempt=0;
+  const reader=githubReader({token:'synthetic',pause:async()=>{},fetchImpl:async()=>{
+    attempt++;
+    if(attempt===1)throw new Error('private detail');
+    if(attempt===2)return new Response('',{status:503});
+    return new Response(JSON.stringify({value:42}),{status:200});
+  }});
+  assert.deepEqual(await reader.json('/actions/runs/1'),{value:42});
+  assert.equal(attempt,3);
+  const unavailable=githubReader({token:'synthetic',pause:async()=>{},fetchImpl:async()=>{throw new Error('private detail');}});
+  await assert.rejects(unavailable.json('/actions/runs/1'),/^Error: home_evidence_github_transport$/);
+});
