@@ -22,9 +22,6 @@ jobs:
     permissions:
       contents: read
       actions: write
-    env:
-      REBUILD_FREEZE_REPORT: ${{ runner.temp }}/catalog-rebuild-freeze.json
-      CHECKPOINT_REPORT_PATH: ${{ runner.temp }}/catalog-rebuild-checkpoint.json
     steps:
       - uses: actions/checkout@v4
         with:
@@ -34,6 +31,15 @@ jobs:
         with:
           node-version: 24
           cache: npm
+      - name: Set report paths after the runner is available
+        run: |
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import fs from 'node:fs/promises';
+          import path from 'node:path';
+          assert(process.env.RUNNER_TEMP && process.env.GITHUB_ENV, 'checkpoint_runner_paths_missing');
+          await fs.appendFile(process.env.GITHUB_ENV, `REBUILD_FREEZE_REPORT=${path.join(process.env.RUNNER_TEMP, 'catalog-rebuild-freeze.json')}\nCHECKPOINT_REPORT_PATH=${path.join(process.env.RUNNER_TEMP, 'catalog-rebuild-checkpoint.json')}\n`);
+          NODE
       - name: Check the stop and checkpoint boundaries before any change
         run: node --test tests/catalog-rebuild-freeze.test.mjs tests/catalog-rebuild-checkpoint.test.mjs
       - name: Preserve prior workflow states and stop only reviewed legacy writers
