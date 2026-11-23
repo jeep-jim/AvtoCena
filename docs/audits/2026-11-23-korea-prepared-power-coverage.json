@@ -1,0 +1,63 @@
+{
+  "phase": "prepared_intake_before_publication",
+  "sourceRun": "https://github.com/jeep-jim/AvtoCena/actions/runs/45077320093",
+  "sourceCommit": "c90dea655470d2970f5f22cc7d7f98c086874738",
+  "artifactSizeBytes": 26217418,
+  "artifactId": 14779553850,
+  "preparedRun": "45077320093/1",
+  "zipSha256": "9dafe4744cfaef0522f564978dc38152e28d52d55790fcd6a7d03a670a7d4aeb",
+  "jsonlFiles": 94,
+  "counts": {
+    "rows": 46649,
+    "withHp": 46073,
+    "withCc": 40980,
+    "withFuel": 44973,
+    "missingHp": 576
+  },
+  "uniqueIds": 46649,
+  "missingSemanticPowerHp": {
+    "missing/none": 311,
+    "conflict/combustion_total_ice_mismatch": 218,
+    "conflict/powertrain_identity_conflict": 47
+  },
+  "missingSourceTotalHp": {
+    "missing/none": 313,
+    "exact/none": 263
+  },
+  "missingJoint": {
+    "missing/none | missing/none": 311,
+    "conflict/combustion_total_ice_mismatch | exact/none": 218,
+    "conflict/powertrain_identity_conflict | exact/none": 45,
+    "conflict/powertrain_identity_conflict | missing/none": 2
+  },
+  "examples": [
+    {
+      "classification": "missing/none",
+      "id": "ff1bd34db1b4ff3616149c6a",
+      "sourceOfferId": "40340785"
+    },
+    {
+      "classification": "conflict/combustion_total_ice_mismatch",
+      "id": "a179109985785fde346242e6",
+      "sourceOfferId": "40859072"
+    },
+    {
+      "classification": "conflict/powertrain_identity_conflict",
+      "id": "c52eeebd23d12fea84d23c28",
+      "sourceOfferId": "41593352"
+    },
+    {
+      "classification": "missing/none",
+      "id": "26f6ef6cd92ea2cedf26a5f1",
+      "sourceOfferId": "42024431"
+    },
+    {
+      "classification": "missing/none",
+      "id": "8aa70364c550328c692804b2",
+      "sourceOfferId": "42189588"
+    }
+  ],
+  "reportCoverageMatched": true,
+  "supplierRequests": 0,
+  "regRequests": 0
+}

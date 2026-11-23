@@ -75,7 +75,10 @@ export function inspectKoreaPublicDetail(html, sample) {
   const offers=objects.filter(row=>row.id===sample.id&&Object.hasOwn(row,'sourceOfferId'));
   const editors=objects.filter(row=>row.offerId===sample.id&&row.initial&&row.priceIdentity);
   if(!offers.length||editors.length!==1)fail('public_detail_binding_missing');
-  if(offers.some(row=>String(row.sourceOfferId)!==sample.sourceOfferId||row.sourceId!=='encar_direct'||row.market!=='korea')
+  // Public calculator props omit the adapter ID. The editor's price identity
+  // binds the same listing to Encar; reject any conflicting explicit adapter.
+  if(offers.some(row=>String(row.sourceOfferId)!==sample.sourceOfferId||row.market!=='korea'
+      ||(Object.hasOwn(row,'sourceId')&&row.sourceId!=='encar_direct'))
     ||editors[0].priceIdentity.id!==sample.id||editors[0].priceIdentity.sourceId!=='encar_direct'
     ||editors[0].priceIdentity.market!=='korea')fail('public_detail_source_identity');
   const {attrs,body}=mains[0], initial=editors[0].initial;

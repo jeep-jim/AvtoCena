@@ -1,3 +1,4 @@
+import reviewedFilterBlobs from './catalog-search-source-diff.json' with {type:'json'};
 import fs from 'node:fs';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
@@ -5,25 +6,49 @@ import {execFileSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
 
 export const HOME_UI = Object.freeze({
-  source:'c1622514c73e78ee798ae321c242174aef71706c',
-  tree:'976a82338aaa40de5a8047b6adb055c1d0506c51',
+  source:'0509e76cb02523157c98804c52edd7eb784916ba',
+  tree:'6a65cc95e3bebeaf88fe972a9329f05c7474d06e',
   retainedSource:'22867cbcfaee27b2e8917b6bf880e44827f67b60',
   retainedTree:'cb53c3c2b2ae656e3cabff8c63e78705e74314ba',
-  sourceCalculationVersion:'672958a80c6a6eb869798c93cf1ee7d88301286ac910163115320fe5d8b95761',
+  sourceCalculationVersion:'5d791a95278c760ed50d53a4ddf78373f33980c228e7cdc3e1fc5d916bb48d9b',
   servingCalculationVersion:'4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90',
   calculationAlgorithmBlob:'63c9323ac7a0ddf267a725443ca2316c197cc7d8',
-  codeDiffSha256:'cf1c9a8b2cf1752318f18fb5102fbf38d93c277808a0eefac3601686ac7a644d',
+  codeDiffSha256:'5c6a2ce1e44f21bba86012861163af7a2117551e471727b278020494e0891756',
   privateIndexDigest:'bf2c72cb7a260ef093c0a43c2b0dad9c4c9094a4d6dc3811dd0d7f7626b0d72b',
   privateIndexParent:'83ff17075e9188dcf227c8752dc064248d5f42e0',
-  sourceClosureRecords:6359,
-  codePaths:Object.freeze(['apps/web/app/(public)/page.tsx','apps/web/app/_lib/home-card-payload.ts',
-    'apps/web/app/api/catalog/home/route.ts','tests/home-card-payload.test.ts',
-    'tests/home-initial-catalog.test.ts','tests/home-rendering.test.ts']),
+  sourceClosureRecords:6363,
+  codePaths:Object.freeze([
+    "apps/web/app/(public)/api/catalog/search/route.ts",
+    "apps/web/app/(public)/page.tsx",
+    "apps/web/app/api/catalog/home/route.ts",
+    "apps/web/components/catalog/CatalogContent.tsx",
+    "apps/web/lib/catalog/home-card-payload.ts",
+    "apps/web/lib/catalog/prepared-china-filter-index.ts",
+    "apps/web/lib/catalog/prepared-china-fixture-activation.ts",
+    "apps/web/lib/catalog/prepared-china-http-fixture.ts",
+    "apps/web/lib/catalog/serving-china-filter-index.ts",
+    "apps/web/lib/catalog/storage.ts",
+    "scripts/build-serving-china-filter-index.mts",
+    "tests/catalog-china-common-grid.test.ts",
+    "tests/catalog-current-read-model-empty-market-policy.test.ts",
+    "tests/catalog-editable-power-scenario.test.ts",
+    "tests/catalog-japan-filter-rail.test.ts",
+    "tests/catalog-market-page-boundary.test.ts",
+    "tests/catalog-source-qualification-contract.test.ts",
+    "tests/home-card-payload.test.ts",
+    "tests/home-editorial-empty.test.ts",
+    "tests/home-initial-catalog.test.ts",
+    "tests/offer-navigation-performance.test.ts",
+    "tests/prepared-china-filter-index.test.ts",
+    "tests/public-page-recovery.test.ts"
+]),
 });
 
 export const HOME_RUNTIME = Object.freeze({
   nginxSha256:'b55e61e9686c639d9f0deac678b881ec56633e1cfd2b4703084b0ad9aaecaf6f',
   serving:{name:'avtocena-china-grid-dark-22867cbcfaee', release:HOME_UI.retainedSource, port:3002,
+    // Read-only run45110094845; see docs/audits/2026-11-23-home-runtime-before.json.
+    restartCount:1, startedAt:'2026-11-21T08:13:50.039024596Z',
     id:'52e44ba2810796f9a12ac83984d9571f71ac1290d852206d2a259ad44da02a8d',
     image:'sha256:8a7326fc17de9a28ae66a4915e68038ac089ba4cdf2954bd7fcbd7cbda46ccf8'},
   chinaRollback:{name:'avtocena-china-candidate-85296f6b8797', release:'85296f6b8797aaa93227b69da7e9e9e928e8f9b5', port:3000,
@@ -59,7 +84,7 @@ function calculationRecords(root, ref) {
 }
 
 export function assertHomeSourceEvidence(proof) {
-  need(proof?.version === 1 && proof.clean === true && proof.closureUnchanged === true, 'source_evidence');
+  need(proof?.version === 1 && proof.clean === true && proof.reviewedFilterChangesOnly === true, 'source_evidence');
   for (const key of ['source','tree','retainedSource','retainedTree','sourceCalculationVersion',
     'servingCalculationVersion','codeDiffSha256','sourceClosureRecords']) need(proof[key] === HOME_UI[key], 'source_' + key);
   need(JSON.stringify(proof.codePaths) === JSON.stringify(HOME_UI.codePaths), 'source_paths');
@@ -75,13 +100,20 @@ export function verifyHomeSourceCheckout(root) {
     need(git(root, ['rev-parse',ref + ':scripts/catalog-calculation-version.mjs']).trim() === HOME_UI.calculationAlgorithmBlob, 'calculation_algorithm');
   }
   const before = calculationRecords(root, HOME_UI.retainedSource), after = calculationRecords(root, HOME_UI.source);
-  need(JSON.stringify(before) === JSON.stringify(after), 'calculation_closure_changed');
+  const byPath=records=>new Map(records.map(row=>{
+    const [identity,name]=row.split('\t');return [name,identity];
+  }));
+  const retained=byPath(before),candidate=byPath(after);
+  const changes=[...new Set([...retained.keys(),...candidate.keys()])].sort()
+    .filter(name=>retained.get(name)!==candidate.get(name))
+    .map(name=>[name,retained.get(name)??null,candidate.get(name)??null]);
+  need(JSON.stringify(changes)===JSON.stringify(reviewedFilterBlobs),'calculation_closure_changed');
   need(after.length === HOME_UI.sourceClosureRecords, 'calculation_closure_count');
   const sourceCalculationVersion = sha256('avtocena-calculator-v1\0' + after.join('\0'));
   need(sourceCalculationVersion === HOME_UI.sourceCalculationVersion, 'calculation_version');
   const codePaths = git(root, ['diff','--name-only','--no-renames',HOME_UI.retainedSource,HOME_UI.source,'--',...codeRoots]).trim().split('\n');
   const diff = git(root, ['diff','--no-ext-diff','--no-renames','--no-textconv','--binary','--full-index',HOME_UI.retainedSource,HOME_UI.source,'--',...codeRoots]);
-  return assertHomeSourceEvidence({version:1, clean:true, closureUnchanged:true, codePaths,
+  return assertHomeSourceEvidence({version:1, clean:true, reviewedFilterChangesOnly:true, codePaths,
     source:HOME_UI.source, tree:HOME_UI.tree, retainedSource:HOME_UI.retainedSource, retainedTree:HOME_UI.retainedTree,
     sourceCalculationVersion, servingCalculationVersion:HOME_UI.servingCalculationVersion,
     codeDiffSha256:sha256(diff), sourceClosureRecords:after.length});

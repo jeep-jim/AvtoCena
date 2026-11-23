@@ -1,0 +1,60 @@
+name: Build exact home UI image without deployment
+on:
+  workflow_dispatch:
+    inputs:
+      controller_sha:
+        description: Exact accepted main controller SHA
+        required: true
+        type: string
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/home-ui-image-build.json']
+permissions:
+  contents: read
+jobs:
+  build:
+    if: github.repository == 'jeep-jim/AvtoCena' && github.repository_id == '1289722938' && github.ref == 'refs/heads/main' && github.run_attempt == '1'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      EXPECTED_CONTROLLER_SHA: ${{ inputs.controller_sha }}
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+          path: controller
+          persist-credentials: false
+          fetch-depth: 2
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Verify exact manual or single-marker controller entry
+        working-directory: controller
+        run: node .github/operations/home-ui-adapter-20261123/build-image.mjs --check-invocation
+      - name: Offline controller guards before building
+        working-directory: controller
+        run: |
+          node --test tests/readonly-marker-invocation.test.mjs tests/home-ui-image-build.test.mjs
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: 0509e76cb02523157c98804c52edd7eb784916ba
+          path: application
+          persist-credentials: false
+          fetch-depth: 1
+      - name: Fetch only the retained source needed for the closure proof
+        working-directory: application
+        run: git fetch --no-write-fetch-head --depth=1 origin 22867cbcfaee27b2e8917b6bf880e44827f67b60
+      - name: Build exact clean image and probe actual Alpine Node resources offline
+        working-directory: controller
+        shell: bash
+        run: |
+          set -euo pipefail
+          node scripts/run-node-with-resources.mjs .github/operations/home-ui-adapter-20261123/build-image.mjs \
+            "$GITHUB_WORKSPACE/application" "$RUNNER_TEMP/home-ui-image-catalog-0509"
+      - name: Preserve safe build evidence only
+        uses: actions/upload-artifact@v4
+        with:
+          name: home-ui-image-build-safe-receipt
+          path: ${{ runner.temp }}/home-ui-image-catalog-0509/receipt.json
+          if-no-files-found: error
+          retention-days: 7

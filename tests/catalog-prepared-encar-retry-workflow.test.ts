@@ -14,6 +14,7 @@ test('public acceptance runs only after the publisher and preserves its failure 
   assert.match(job,/needs: publish/);
   assert.match(job,/if: needs\.publish\.result == 'success'/);
   assert.match(job,/node scripts\/verify-korea-public-characteristics\.mjs \| tee korea-public-characteristics\.json/);
+  assert.match(job,/shell: bash\s+run: node scripts\/verify-korea-public-characteristics/);
   assert.match(job,/if: always\(\)/);
   assert.match(job,/if-no-files-found: error/);
   assert.doesNotMatch(job,/continue-on-error|\|\| true|secrets:|API_KEY/);

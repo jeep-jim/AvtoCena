@@ -11,7 +11,7 @@ import {assertFullServerReceipt, assertHomeBrowserVerdict, assertReviewedInvento
 import {assertStagedCalculatorBuild} from '../scripts/lib/catalog-staged-budget.mjs';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
-const sourceProof = () => ({version:1, clean:true, closureUnchanged:true,
+const sourceProof = () => ({version:1, clean:true, reviewedFilterChangesOnly:true,
   ...Object.fromEntries(['source','tree','retainedSource','retainedTree','sourceCalculationVersion',
     'servingCalculationVersion','codeDiffSha256','sourceClosureRecords','codePaths'].map(key => [key, structuredClone(HOME_UI[key])]))});
 const nonce = 'a'.repeat(32), {routes} = verifyHomeGateFiles(root);
@@ -26,7 +26,8 @@ const browserVerdict = () => ({schemaVersion:1, release:HOME_UI.source, nonce,
 function inventoryFixture() {
   const kinds = ['serving','chinaRollback','legacyRollback'];
   const containers = Object.fromEntries(kinds.map((kind, index) => [kind, {...HOME_RUNTIME[kind],
-    id:HOME_RUNTIME[kind].id || String(index).repeat(64), pid:100 + index, startedAt:'2026-11-23T03:00:00.000Z', restartCount:0,
+    id:HOME_RUNTIME[kind].id || String(index).repeat(64), pid:100 + index,
+    startedAt:HOME_RUNTIME[kind].startedAt || '2026-11-23T03:00:00.000Z', restartCount:HOME_RUNTIME[kind].restartCount ?? 0,
     environmentCount:12, environmentSha256:'d'.repeat(64), hostConfigSha256:'e'.repeat(64), mountsSha256:'f'.repeat(64), containerConfigSha256:'0'.repeat(64)}]));
   return {version:1, status:'verified_inventory_requires_review', readOnly:true, observedAt:'2026-11-23T03:00:00.000Z',
     activationAuthorized:false, requiresReviewedRollbackPins:true, lockMode:'shared_nonblocking',
@@ -45,7 +46,7 @@ test('the bridge admits only the exact reviewed home tuple and source proof', ()
     [HOME_UI.source, HOME_UI.servingCalculationVersion, HOME_UI.servingCalculationVersion],
   ]) assert.throws(() => assertStagedCalculatorBuild(release, build, serving), /calculation_version_mismatch/);
   for (const change of [proof => proof.tree = 'f'.repeat(40), proof => proof.clean = false,
-    proof => proof.closureUnchanged = false, proof => proof.codePaths.push('apps/web/lib/catalog/storage.ts'),
+    proof => proof.reviewedFilterChangesOnly = false, proof => proof.codePaths.push('apps/web/lib/catalog/storage.ts'),
     proof => proof.sourceClosureRecords--]) {
     const proof = sourceProof(); change(proof); assert.throws(() => assertHomeSourceEvidence(proof), /home_ui_source/);
   }
@@ -110,12 +111,26 @@ test('a reviewed hash cannot turn failed inventory or mismatched rollback identi
   const good = inventoryFixture(); assertReviewedInventory(good, sha256(JSON.stringify(good)));
   const failed = {version:1, status:'failed', errorCode:'inventory_lock_busy', readOnly:true, activationAuthorized:false};
   assert.throws(() => assertReviewedInventory(failed, sha256(JSON.stringify(failed))), /inventory_kind/);
+  const resourceMismatch = {...good, status:'resource_state_mismatch_requires_review',
+    errorCode:'inventory_serving_resources', servingResourceObservation:{historicalPinsMatch:false}};
+  assert.throws(() => assertReviewedInventory(resourceMismatch, sha256(JSON.stringify(resourceMismatch))), /inventory_kind/);
   for (const change of [r => r.containers.serving.id = '9'.repeat(64), r => delete r.containers.legacyRollback,
+    r => r.containers.serving.restartCount = 2, r => r.containers.serving.startedAt = '2026-11-23T04:30:00.000Z',
     r => r.rollbackPins.chinaRollback = '9'.repeat(64), r => r.nginxSha256 = '9'.repeat(64),
     r => r.candidatePort.socketListening = true, r => r.containers.serving.environmentSha256 = 'invalid']) {
     const receipt = inventoryFixture(); change(receipt);
     assert.throws(() => assertReviewedInventory(receipt, sha256(JSON.stringify(receipt))), /inventory_/);
   }
+});
+
+test('the reviewed restart observation is durable evidence, never an activation receipt', async () => {
+  const evidence = JSON.parse(await fs.readFile(path.join(root, 'docs/audits/2026-11-23-home-runtime-before.json'), 'utf8'));
+  assert.equal(evidence.sourceRun, 'https://github.com/jeep-jim/AvtoCena/actions/runs/45110094845');
+  assert.equal(evidence.receipt.containers.serving.restartCount, HOME_RUNTIME.serving.restartCount);
+  assert.equal(evidence.receipt.containers.serving.startedAt, HOME_RUNTIME.serving.startedAt);
+  assert.deepEqual(evidence.receipt.servingResourceObservation.mismatchedFields, ['RestartCount']);
+  assert.equal(evidence.receipt.activationAuthorized, false);
+  assert.throws(() => assertReviewedInventory(evidence.receipt, sha256(JSON.stringify(evidence.receipt))), /inventory_kind/);
 });
 
 test('reviewable cutover keeps the lock and publication lease through both full server gates and the browser verdict', async () => {

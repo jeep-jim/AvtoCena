@@ -46,6 +46,10 @@ jobs:
         run: |
           node --test tests/home-ui-release-controller.test.mjs tests/readonly-marker-invocation.test.mjs tests/home-ui-inventory-workflow.test.mjs
           python3 -I -B tests/home-ui-runtime-inventory.test.py
+          node --test tests/home-ui-image-build.test.mjs
+          node --test tests/home-ui-activation-authority.test.mjs tests/home-ui-activation.test.mjs tests/home-ui-activation-transport.test.mjs
+          python3 -I -B tests/home-ui-host-primitives.test.py
+          python3 -I -B tests/home-ui-host-driver.test.py
       - name: Feed preparation guards
         run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/catalog-editorial-runtime.test.mjs tests/catalog-owned-china-verification.test.mjs
       - name: Saved UAE cursor and archive guards

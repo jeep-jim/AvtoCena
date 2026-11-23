@@ -29,12 +29,12 @@ def containers():
             env['AVTOCENA_CHINA_REGCLOUD_RUNTIME'] = '1'
         result[name] = {
             'Id': inventory.SERVING_ID if kind == 'serving' else str(index) * 64,
-            'Name': '/' + name, 'Image': image, 'RestartCount': 0,
+            'Name': '/' + name, 'Image': image, 'RestartCount': 1 if kind == 'serving' else 0,
             'Config': {'Env': [key + '=' + value for key, value in env.items()],
                        'Labels': {'org.opencontainers.image.revision': revision,
                                   'avtocena.role': 'china-ui-grid-dark'}},
             'State': {'Running': True, 'OOMKilled': False, 'Pid': 4000 + index,
-                      'StartedAt': '2026-11-20T11:46:00.123456789Z'},
+                      'StartedAt': inventory.SERVING_STARTED_AT if kind == 'serving' else '2026-11-20T11:46:00.123456789Z'},
             'HostConfig': {'Privileged': False,
                            'PortBindings': {'3000/tcp': [{'HostIp': '127.0.0.1', 'HostPort': str(port)}]},
                            'Memory': 4 * 1024**3, 'MemorySwap': 4 * 1024**3,
@@ -97,6 +97,8 @@ class InventoryTests(unittest.TestCase):
         self.assertTrue(receipt['requiresReviewedRollbackPins'])
         self.assertFalse(receipt['candidatePort']['dockerReservationVerified'])
         self.assertEqual(receipt['mutations'], 0)
+        self.assertTrue(receipt['servingResourceObservation']['historicalPinsMatch'])
+        self.assertEqual(receipt['servingResourceObservation']['mismatchedFields'], [])
         self.assertEqual(local.commands, [('GET', '/containers/' + role[1] + '/json')
                                           for _ in range(2) for role in inventory.ROLES])
         serialized = json.dumps(receipt)
@@ -108,7 +110,7 @@ class InventoryTests(unittest.TestCase):
             self.assertRegex(row['hostConfigSha256'], r'^[0-9a-f]{64}$')
             self.assertEqual(row['environmentCount'], len(local.rows[row['name']]['Config']['Env']))
 
-    def test_foreign_identity_mount_resources_and_env_fail_closed(self):
+    def test_foreign_identity_mount_and_env_fail_closed(self):
         mutations = {
             'container': lambda row: row.update(Id='f' * 64),
             'image': lambda row: row.update(Image='sha256:' + 'f' * 64),
@@ -116,7 +118,6 @@ class InventoryTests(unittest.TestCase):
             'port': lambda row: row['HostConfig']['PortBindings']['3000/tcp'][0].update(HostIp='0.0.0.0'),
             'mount_rw': lambda row: row['Mounts'][0].update(RW=True),
             'mount_path': lambda row: row['Mounts'][0].update(Source='/foreign'),
-            'resources': lambda row: row['HostConfig'].update(Memory=8 * 1024**3),
             'env_inheritance': lambda row: row['Config']['Env'].append('UNREVIEWED=value'),
             'env_duplicate': lambda row: row['Config']['Env'].append('PRIVATE_TOKEN=' + SECRET),
             'build': lambda row: row['Config']['Env'].__setitem__(1, 'AVTOCENA_BUILD_CALCULATION_VERSION=' + 'f' * 64),
@@ -127,6 +128,84 @@ class InventoryTests(unittest.TestCase):
                 change(local.rows[inventory.ROLES[0][1]])
                 with self.assertRaises(inventory.InventoryError):
                     inventory.run_inventory(local)
+
+    def test_each_historical_resource_difference_is_reported_and_cli_still_fails(self):
+        mutations = {
+            'OOMKilled': lambda row: row['State'].update(OOMKilled=True),
+            'RestartCount': lambda row: row.update(RestartCount=2),
+            'Memory': lambda row: row['HostConfig'].update(Memory=0),
+            'MemorySwap': lambda row: row['HostConfig'].update(MemorySwap=-1),
+            'NanoCpus': lambda row: row['HostConfig'].update(NanoCpus=0),
+            'PidsLimit': lambda row: row['HostConfig'].update(PidsLimit=None),
+            'RestartPolicy.Name': lambda row: row['HostConfig']['RestartPolicy'].update(Name='on-failure'),
+            'RestartPolicy.MaximumRetryCount': lambda row: row['HostConfig']['RestartPolicy'].update(MaximumRetryCount=4),
+        }
+        for field, change in mutations.items():
+            with self.subTest(field=field):
+                local = FakeIO()
+                change(local.rows[inventory.ROLES[0][1]])
+                output = io.StringIO()
+                with contextlib.redirect_stdout(output):
+                    self.assertEqual(inventory.main([], local), 1)
+                receipt = json.loads(output.getvalue())
+                self.assertEqual(receipt['status'], 'resource_state_mismatch_requires_review')
+                self.assertFalse(receipt['activationAuthorized'])
+                self.assertEqual(receipt['mutations'], 0)
+                observation = receipt['servingResourceObservation']
+                self.assertEqual(observation['mismatchedFields'], [field])
+                self.assertFalse(observation['historicalPinsMatch'])
+                self.assertEqual(observation['actual'], receipt['containers']['serving']['resources'])
+                self.assertEqual(observation['actualSha256'], inventory.digest(observation['actual']))
+                self.assertNotIn(SECRET, output.getvalue())
+                self.assertNotIn('PRIVATE_TOKEN', output.getvalue())
+
+    def test_resource_drift_between_snapshots_and_later_health_failure_still_block(self):
+        local = FakeIO()
+        def change_at_second_snapshot(fake, count):
+            if count == 4:
+                fake.rows[inventory.ROLES[0][1]]['HostConfig']['Memory'] = 0
+        local.on_inspect = change_at_second_snapshot
+        output = io.StringIO()
+        with contextlib.redirect_stdout(output):
+            self.assertEqual(inventory.main([], local), 1)
+        receipt = json.loads(output.getvalue())
+        self.assertEqual(receipt['errorCode'], 'inventory_identity_changed')
+        self.assertEqual(receipt['status'], 'failed')
+        self.assertEqual(receipt['servingResourceObservation']['actual']['Memory'], 0)
+        local = FakeIO()
+        local.rows[inventory.ROLES[0][1]]['State']['OOMKilled'] = True
+        local.health_override[3002] = {'ok': False}
+        output = io.StringIO()
+        with contextlib.redirect_stdout(output):
+            self.assertEqual(inventory.main([], local), 1)
+        receipt = json.loads(output.getvalue())
+        self.assertEqual(receipt['errorCode'], 'inventory_health_identity')
+        self.assertEqual(receipt['status'], 'failed')
+        self.assertTrue(receipt['servingResourceObservation']['actual']['OOMKilled'])
+        self.assertFalse(receipt['activationAuthorized'])
+
+    def test_reviewed_restart_identity_rejects_future_and_older_counts_or_changed_start(self):
+        for count in (0, 2):
+            local = FakeIO()
+            local.rows[inventory.ROLES[0][1]]['RestartCount'] = count
+            receipt = inventory.run_inventory(local)
+            self.assertEqual(receipt['status'], 'resource_state_mismatch_requires_review')
+            self.assertEqual(receipt['servingResourceObservation']['mismatchedFields'], ['RestartCount'])
+            self.assertFalse(receipt['activationAuthorized'])
+        local = FakeIO()
+        local.rows[inventory.ROLES[0][1]]['State']['StartedAt'] = '2026-11-23T04:30:00.000000000Z'
+        with self.assertRaisesRegex(inventory.InventoryError, 'inventory_serving_started_at'):
+            inventory.run_inventory(local)
+
+    def test_malformed_resource_values_cannot_expose_private_strings(self):
+        local = FakeIO()
+        local.rows[inventory.ROLES[0][1]]['HostConfig']['Memory'] = SECRET
+        output = io.StringIO()
+        with contextlib.redirect_stdout(output):
+            self.assertEqual(inventory.main([], local), 1)
+        receipt = json.loads(output.getvalue())
+        self.assertEqual(receipt['errorCode'], 'inventory_resource_observation_invalid')
+        self.assertNotIn(SECRET, output.getvalue())
 
     def test_rollback_identity_and_changed_process_are_rejected(self):
         for index in (1, 2):
