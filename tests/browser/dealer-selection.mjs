@@ -55,10 +55,14 @@ async function openFilters(page,width){if(width===390)await page.evaluate(()=>wi
 // Temporary, bounded observation of the existing close assertion. No scroll,
 // history, focus or timing decision is changed by this diagnostic.
 function installDealerScrollTrace(){
- if(innerWidth!==390)return;
+ if(window.dealerScrollTrace)return;
+ // Initial viewport width is diagnostic data, not an admission condition.
+ // Recording still starts only at the existing mobile close case below.
+ const init={width:innerWidth,readyState:document.readyState};
+ let installed=false;
  let active=false,started=0,dropped=0;
  const rows=[];
- const state=()=>({y:scrollY,bodyPosition:document.body?.style.position,bodyTop:document.body?.style.top,
+ const state=()=>({width:innerWidth,readyState:document.readyState,y:scrollY,bodyPosition:document.body?.style.position,bodyTop:document.body?.style.top,
   height:document.documentElement.scrollHeight,viewport:innerHeight,
   catalogTop:document.getElementById('catalog')?.getBoundingClientRect().top??null,
   restoration:history.scrollRestoration,overlay:history.state?.acOverlayStep??null,
@@ -70,6 +74,13 @@ function installDealerScrollTrace(){
  };
  const caller=()=>new Error().stack?.split('\n').slice(3,6).join('\n');
  const frames=label=>{if(!active)return;requestAnimationFrame(()=>{record(`${label}:raf1`);requestAnimationFrame(()=>record(`${label}:raf2`));});};
+ // Publish the observer before installing hooks so a partially installed trace
+ // still reports its initial state instead of disappearing from the artifact.
+ window.dealerScrollTrace={
+  start(){active=true;started=performance.now();rows.length=0;dropped=0;record('trace:start');},
+  mark:record,
+  snapshot(){return {init,installed,rows,dropped,final:state()};},
+ };
  const wrap=(target,name,details)=>{
   const original=target[name];
   target[name]=function(...args){
@@ -101,11 +112,7 @@ function installDealerScrollTrace(){
   observer.observe(document.documentElement,{attributes:true,attributeFilter:['style']});
  };
  if(document.body)observe();else document.addEventListener('DOMContentLoaded',observe,{once:true});
- window.dealerScrollTrace={
-  start(){active=true;started=performance.now();rows.length=0;dropped=0;record('trace:start');},
-  mark:record,
-  snapshot(){return {rows,dropped,final:state()};},
- };
+ installed=true;
 }
 const browser=await chromium.launch({headless:true,executablePath:process.env.CHROME_BIN,args:['--no-sandbox']});
 try{for(const width of [390,1440]){
@@ -159,7 +166,12 @@ try{for(const width of [390,1440]){
  const target=new URL(shares.at(-1).path,origin);assert.equal(target.hash,'#catalog');assert.equal(target.searchParams.get('city'),'Новокузнецк');assert.equal(target.searchParams.get('budget'),'2500000');
  for(const [key,value] of Object.entries({savedJapanChassis:'ZVW30',savedJapanFrameNumber:'ZVW30-1234567',savedJapanLotNumber:'12345',savedJapanAuctionGrade:'4.5',savedJapanSalePeriod:'month'}))assert.equal(target.searchParams.get(key),value,`shared selection retains ${key} after filters and reload`);
  if(width===390){for(const method of ['button','back']){
-  const beforeClose=await page.evaluate(method=>{if(method==='button')window.dealerScrollTrace?.start();window.dealerScrollTrace?.mark('close-case:setup',{method});window.scrollTo({top:900,behavior:'instant'});window.dealerScrollTrace?.mark('close-case:position',{method});return window.scrollY;},method);assert.ok(beforeClose>500);await openFilters(page,width);await page.getByRole('dialog',{name:'Фильтры каталога'}).waitFor();
+  const beforeClose=await page.evaluate(method=>{
+   const trace=window.dealerScrollTrace;
+   if(!trace)throw Error(`dealer_scroll_trace_unavailable:width=${innerWidth}:readyState=${document.readyState}`);
+   if(method==='button')trace.start();trace.mark('close-case:setup',{method});
+   window.scrollTo({top:900,behavior:'instant'});trace.mark('close-case:position',{method});return window.scrollY;
+  },method);assert.ok(beforeClose>500);await openFilters(page,width);await page.getByRole('dialog',{name:'Фильтры каталога'}).waitFor();
   await page.waitForFunction(()=>Boolean(history.state?.acOverlayStep));
   if(method==='button')await page.locator('button[data-ac-mobile-close="1"]').click();else await page.goBack();
   await page.getByRole('dialog',{name:'Фильтры каталога'}).waitFor({state:'hidden'});await page.waitForFunction(y=>Math.abs(scrollY-y)<3,beforeClose);console.log(`close ${method}: restored ${beforeClose}px`);
