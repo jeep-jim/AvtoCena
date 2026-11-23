@@ -9,7 +9,7 @@ import {assertCollectionEnabled} from './collection-controls';
 import {DetailReadCache} from './detail-read-cache';
 import {heavyVehicleSqlExclusion} from './heavy-vehicle-families';
 import {createAjesClient} from './ajes-client';
-import {findSavedAjesSearch,findSavedAjesStockSearch,savedAjesFacets} from './ajes-saved-search';
+import {findSavedAjesSearch,findSavedAjesStockSearch,savedAjesFacets,savedAjesJapanCandidates} from './ajes-saved-search';
 import {reserveAjesRequest} from './ajes-quota';
 
 // A cold direct link may need a row already shown by an earlier process. Only
@@ -27,6 +27,11 @@ async function readSavedListIndex(){
   }
   return result;
  });
+}
+export async function readSavedJapanCandidates(input:import('./ajes-query').AjesQuery){
+ await assertCollectionEnabled('ajes_japan_feed');
+ const records=savedAjesJapanCandidates(input,await readSavedListIndex(),Date.now(),readCalculationIndex());
+ return records?.filter(record=>Array.isArray(record.items[0].images))??null;
 }
 export async function readSavedAjesFacets(){await assertCollectionEnabled('ajes_japan_feed');return savedAjesFacets(await readSavedListIndex());}
 async function readListedDetail(table:string,id:string){

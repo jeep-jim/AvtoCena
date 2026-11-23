@@ -8,7 +8,7 @@ import type {CalculationIndex} from '../encyclopedia/calculation-index';
  * Supplier PW is intentionally ignored here. readAjesPublic enriches candidates locally,
  * then the same final encyclopedia power filter used for fresh pages decides eligibility.
  */
-export function findSavedAjesSearch(input:AjesQuery,snapshots:Record<string,any>,now=Date.now(),driveIndex:CalculationIndex|null=null){
+export function savedAjesJapanCandidates(input:AjesQuery,snapshots:Record<string,any>,now=Date.now(),driveIndex:CalculationIndex|null=null){
  const query=ajesQuery(input,driveIndex);
  if(query.kind!=='list'||query.table!=='stats'||query.page!==1)return null;
  const supported=new Set(['table','page','pageSize','chassis','frameNumber','lotNumber','make','model','modelFamilies','drive','sort','yearFrom','yearTo','powerFrom','powerTo']);
@@ -30,6 +30,13 @@ export function findSavedAjesSearch(input:AjesQuery,snapshots:Record<string,any>
  });
  const unique=[...new Map(matches.map(s=>[s.items[0].id,s])).values()];
  unique.sort((a,b)=>String(b.items[0].auctionDate).localeCompare(String(a.items[0].auctionDate))||String(a.items[0].id).localeCompare(String(b.items[0].id)));
+ return unique;
+}
+
+export function findSavedAjesSearch(input:AjesQuery,snapshots:Record<string,any>,now=Date.now(),driveIndex:CalculationIndex|null=null){
+ const unique=savedAjesJapanCandidates(input,snapshots,now,driveIndex);
+ if(!unique)return null;
+ const query=ajesQuery(input,driveIndex);
  const selected=unique.slice(0,query.pageSize);
  if(!selected.length)return null; // No saved match is not proof of zero supplier matches.
  return {schemaVersion:2,items:selected.map(s=>s.items[0]),page:1,pageSize:query.pageSize,received:selected.length,rejected:0,
