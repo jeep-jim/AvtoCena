@@ -223,3 +223,19 @@ test('workflow exposes only safe plan/outcome artifacts and gates SSH after the 
   const ci=await fs.readFile(path.join(root,'.github/workflows/ci.yml'),'utf8');
   for(const testFile of ['home-ui-activation.test.mjs','home-ui-activation-transport.test.mjs','home-ui-host-driver.test.py'])assert.ok(ci.includes(testFile));
 });
+
+test('a changing Actions page must become complete before it can authorize a switch', async () => {
+  let inconsistent = 1;
+  const reader = {async json(endpoint) {
+    if (endpoint === '/actions/runs/45104426224') return {id:45104426224, status:'completed', repository:{full_name:'jeep-jim/AvtoCena'}};
+    if (endpoint.includes('status=in_progress') && inconsistent-- > 0) return {total_count:1, workflow_runs:[]};
+    return {total_count:0, workflow_runs:[]};
+  }};
+  let waits = 0;
+  const pause = async () => { waits++; };
+  assert.equal((await assertPublicationQuiescence(reader, '8', pause)).otherWriterRuns, 0);
+  assert.equal(waits, 1);
+  inconsistent = 3;
+  await assert.rejects(assertPublicationQuiescence(reader, '8', pause), /active_runs_incomplete/);
+  assert.equal(waits, 3);
+});
