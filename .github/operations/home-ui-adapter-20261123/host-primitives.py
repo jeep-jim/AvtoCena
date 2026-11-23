@@ -1,4 +1,4 @@
-"""Exact c162 host operations. Imported by a reviewed driver; no activation CLI.
+"""Exact catalog-0509 host operations. Imported by a reviewed driver; no activation CLI.
 
 The existing acceptance.mjs owns the transaction order and publication lease.
 Each mutating primitive calls its mandatory live-authority callback first. The
@@ -27,9 +27,9 @@ import time
 import urllib.parse
 
 ROOT = Path(__file__).resolve().parents[3]
-SOURCE = 'c1622514c73e78ee798ae321c242174aef71706c'
-TREE = '976a82338aaa40de5a8047b6adb055c1d0506c51'
-BUILD = '672958a80c6a6eb869798c93cf1ee7d88301286ac910163115320fe5d8b95761'
+SOURCE = '0509e76cb02523157c98804c52edd7eb784916ba'
+TREE = '6a65cc95e3bebeaf88fe972a9329f05c7474d06e'
+BUILD = '5d791a95278c760ed50d53a4ddf78373f33980c228e7cdc3e1fc5d916bb48d9b'
 CALCULATION = '4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90'
 INDEX = 'bf2c72cb7a260ef093c0a43c2b0dad9c4c9094a4d6dc3811dd0d7f7626b0d72b'
 ASSET = 'ee5c872e9127430890f58abf239cddfa48553f86c3032799c9c29953b6109662'
@@ -705,10 +705,48 @@ class HostPrimitives:
 
 PARITY_MARKETS = ('china', 'korea', 'uae', 'europe', 'georgia')
 
+CHINA_GRID = '/api/catalog/search?market=china&marketPage=1&page=1'
+CHINA_SAVED_GRID = CHINA_GRID + '&source=existing'
+CHINA_FILTER = '/api/catalog/search?market=china&source=existing&powerTo=160'
+CHINA_FILTER_PAGES = [CHINA_FILTER + '&marketPage=1&page=' + str(page) for page in (1, 2)]
+CHINA_CUT = 'gen_1795239842026_china44871616387'
+CHINA_TOTAL = 168662
+CHINA_FILTER_TOTAL = 64605
+
+
+def parity_search(market):
+    if market == 'china':
+        return CHINA_GRID
+    return '/api/catalog/search?source=existing&market=' + market + '&pageSize=2'
+
+
+def verify_saved_china(get, where, canonical):
+    status, _, raw = get(where, CHINA_SAVED_GRID)
+    need(status == 200 and json.loads(raw) == canonical and canonical.get('total') == CHINA_TOTAL
+         and canonical.get('generationId') == CHINA_CUT and len(canonical['items']) == 24, 'china_saved_grid')
+    ids = set()
+    for route in [CHINA_FILTER + '&countOnly=1', *CHINA_FILTER_PAGES]:
+        status, _, raw = get(where, route)
+        need(status == 200, 'china_filter_http')
+        data = json.loads(raw)
+        need(data.get('ok') is True and data.get('total') == CHINA_FILTER_TOTAL
+             and data.get('generationId') == CHINA_CUT, 'china_filter_count')
+        if route.endswith('countOnly=1'):
+            need(data.get('items') == [], 'china_count_items')
+            continue
+        need(len(data.get('items', [])) == 24, 'china_filter_rows')
+        for row in data['items']:
+            item_id = row.get('id')
+            need(isinstance(item_id,str) and re.fullmatch(r'[a-f0-9]{24}',item_id)
+                 and item_id not in ids and row.get('market') == 'china'
+                 and (row.get('preparedChinaSelection') or {}).get('generationId') == CHINA_CUT,'china_filter_membership')
+            ids.add(item_id)
+    return {'rows': CHINA_TOTAL, 'powerTo160': CHINA_FILTER_TOTAL, 'distinctPageIds':len(ids)}
+
 
 def public_get(where, path):
     need(where in ('retained', 'candidate', 'public'), 'parity_origin')
-    searches = {'/api/catalog/search?source=existing&market=' + market + '&pageSize=2' for market in PARITY_MARKETS}
+    searches = {parity_search(market) for market in PARITY_MARKETS} | {CHINA_SAVED_GRID, CHINA_FILTER + '&countOnly=1', *CHINA_FILTER_PAGES}
     parsed = urllib.parse.urlsplit(path)
     detail = re.fullmatch(r'/cars/offer/[a-f0-9]{24}(?:/[a-z0-9-]{1,200})?', parsed.path)
     query = urllib.parse.parse_qs(parsed.query)
@@ -794,8 +832,7 @@ def check_card_price_auth_parity(guard, *, get=public_get, target='candidate'):
     for where, bucket in (('retained', before), (target, after)):
         status, _, raw = get(where, '/api/crm/reviews')
         need(status == 401, 'anonymous_crm_authorization')
-        paths = ['/api/catalog/home'] + ['/api/catalog/search?source=existing&market=' + market + '&pageSize=2'
-                                         for market in PARITY_MARKETS]
+        paths = ['/api/catalog/home'] + [parity_search(market) for market in PARITY_MARKETS]
         for path in paths:
             status, _, raw = get(where, path)
             need(status == 200, 'parity_api_status')
@@ -813,10 +850,11 @@ def check_card_price_auth_parity(guard, *, get=public_get, target='candidate'):
                 first = value['items'][0]
                 bucket['detail:' + first['market']] = detail_identity(get, where, first)
     need(before == after, 'card_price_or_generation_changed')
+    china_search = verify_saved_china(get, target, after[CHINA_GRID])
     guard('parity_readback')
     return {'source': SOURCE, 'target': target, 'passed': True, 'anonymousCrmRejected': True,
             'catalogWrites': 0, 'supplierRequests': 0, 'snapshotSha256': inventory.digest(before),
-            'marketSamples': len(PARITY_MARKETS), 'homeCards': len(before['/api/catalog/home']['items'])}
+            'marketSamples': len(PARITY_MARKETS), 'chinaSearch':china_search, 'homeCards': len(before['/api/catalog/home']['items'])}
 
 
 def run_full_server_gate(controller_root, nonce, phase, execute=subprocess.run):

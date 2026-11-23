@@ -286,6 +286,10 @@ export function assertStagedCalculatorBuild(release, build, serving) {
   if (release === gridRelease || release === homeRelease) {
     if (build === '672958a80c6a6eb869798c93cf1ee7d88301286ac910163115320fe5d8b95761'
         && serving === '4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90') return;
+  } else if (release === '0509e76cb02523157c98804c52edd7eb784916ba') {
+    // Exact search-only delta and preserved pricing inputs are checked by the release controller.
+    if (build === '5d791a95278c760ed50d53a4ddf78373f33980c228e7cdc3e1fc5d916bb48d9b'
+        && serving === '4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90') return;
   } else if (build === serving) return;
   throw Error('staged_budget_calculation_version_mismatch');
 }

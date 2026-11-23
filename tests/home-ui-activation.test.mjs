@@ -15,7 +15,7 @@ import {browserVerdict} from '../.github/operations/home-ui-activation-20261123/
 const root=path.resolve(fileURLToPath(new URL('..',import.meta.url))),nonce='a'.repeat(32);
 const inventory=JSON.parse(await fs.readFile(path.join(root,INVENTORY_FILE),'utf8'));
 const {routes}=verifyHomeGateFiles(root);
-const proof=()=>({version:1,clean:true,closureUnchanged:true,...Object.fromEntries(['source','tree','retainedSource','retainedTree',
+const proof=()=>({version:1,clean:true,reviewedFilterChangesOnly:true,...Object.fromEntries(['source','tree','retainedSource','retainedTree',
   'sourceCalculationVersion','servingCalculationVersion','codeDiffSha256','sourceClosureRecords','codePaths'].map(key=>[key,structuredClone(HOME_UI[key])]))});
 const server=phase=>({release:HOME_UI.source,nonce,phase,exitCode:0,logSha256:'b'.repeat(64),
   baselineSha256:GATE_FILES['docs/operations/2026-11-11-accepted-speed-baseline.json'],
@@ -27,7 +27,7 @@ const browser=()=>({schemaVersion:1,release:HOME_UI.source,nonce,passed:true,fun
 function transition(fault){
   const events=[];
   let routed=false,accepted=false;
-  const authority={lease:{operationId:'home-ui-c162-'+nonce},guard:async()=>{events.push('authority');},
+  const authority={lease:{operationId:'home-ui-catalog-0509-'+nonce},guard:async()=>{events.push('authority');},
     setIngress:value=>events.push('authority:'+value),release:async()=>{events.push('release');if(fault==='release')throw Error('synthetic_release');},
     stopHeartbeat:async()=>events.push('retain-ttl')};
   const session={

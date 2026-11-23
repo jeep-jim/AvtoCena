@@ -1,3 +1,9 @@
+# Current release profile
+
+The activation profile now targets the combined catalog and homepage candidate. See the [exact release, changed-blob evidence and acceptance checks](../home-ui-activation-20261123/README.md). The earlier c162 homepage image was built but not activated. Its source proof does not apply to the combined candidate.
+
+## Archived c162 profile
+
 # Exact home UI controller: preparation and read-only inventory
 
 Application source is `c1622514c73e78ee798ae321c242174aef71706c`; incumbent source is
