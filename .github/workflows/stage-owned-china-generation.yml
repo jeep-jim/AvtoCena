@@ -1,0 +1,81 @@
+name: Prepare the saved China inventory for publication
+on:
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/stage-owned-china.json']
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: stage-owned-china-generation
+  cancel-in-progress: false
+jobs:
+  verify:
+    if: github.repository_id == '1289722938' && github.ref == 'refs/heads/main' && github.run_attempt == '1'
+    runs-on: ubuntu-24.04
+    environment: regcloud-staging
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          path: source
+          fetch-depth: 2
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Verify the invocation
+        working-directory: source
+        run: |
+          node --input-type=module <<'JS'
+          import {verifyReadonlyInvocation} from './scripts/lib/readonly-marker-invocation.mjs';
+          verifyReadonlyInvocation({root:process.cwd(),env:process.env,markerPath:'.github/market-runs/stage-owned-china.json',operation:'prepare-owned-china-private-generation'});
+          JS
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: fdb1bc1b98c97256e7b94988aeeeab996f2f9e4b
+          path: native
+          persist-credentials: false
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: 83ff17075e9188dcf227c8752dc064248d5f42e0
+          path: retained
+          sparse-checkout: data/catalog/vehicle-knowledge
+          persist-credentials: false
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: e5fe885258ed06832109d199c164bc4a9fe7dcbc
+          path: writer
+          persist-credentials: false
+      - name: Verify the model data for the serving releases
+        working-directory: retained
+        run: git fetch --no-tags --depth=1 origin 22867cbcfaee27b2e8917b6bf880e44827f67b60 0509e76cb02523157c98804c52edd7eb784916ba
+      - name: Install and verify both readers
+        run: |
+          (cd source && npm ci --no-audit --no-fund)
+          for tree in native writer; do
+            if cmp -s source/package-lock.json "$tree/package-lock.json"; then
+              ln -s "$GITHUB_WORKSPACE/source/node_modules" "$tree/node_modules"
+            else
+              (cd "$tree" && npm ci --no-audit --no-fund)
+            fi
+          done
+          cd source
+          node --import tsx --test tests/owned-china-publication-source.test.mjs tests/owned-china-active-coverage.test.mjs tests/che168-replica-witness.test.ts tests/owned-china-frozen-pricing.test.mjs
+      - name: Price, verify and save the private China generation
+        working-directory: source
+        env:
+          GH_TOKEN: ${{ github.token }}
+          AVTOCENA_CHINA_REGCLOUD_RUNTIME: '1'
+          JSON_STORAGE_DRIVER: object
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_REGION: us-east-1
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+        run: node scripts/run-node-with-resources.mjs --import tsx scripts/stage-owned-china-market.mjs "$GITHUB_WORKSPACE/native" "$GITHUB_WORKSPACE/retained" "$GITHUB_WORKSPACE/writer"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: owned-china-stage
+          path: ${{ runner.temp }}/owned-china-stage.json
+          if-no-files-found: error

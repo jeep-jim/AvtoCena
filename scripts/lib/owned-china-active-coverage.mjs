@@ -37,7 +37,7 @@ export async function verifiedOwnedReplica({prepared,storage,readerOwner,config,
  return witness;
 }
 
-export async function ownedChinaCoverage({prepared,witness,incumbentIds,incumbent}){
+export async function ownedChinaCoverage({prepared,witness,incumbentIds,incumbent,onConfirmedRemoval}){
  const activeIds=new Set(),previousIds=new Set(),withdrawals=new Set(prepared.report.confirmedWithdrawals.map(row=>row.id));
  const src=prepared.report.sources[0];
  for await(const rows of prepared.chunks())for(const row of rows){
@@ -56,7 +56,7 @@ export async function ownedChinaCoverage({prepared,witness,incumbentIds,incumben
   assert(typeof id==='string'&&id.length>0&&!previousIds.has(id),'owned_incumbent_duplicate');
   previousIds.add(id);
   if(activeIds.has(id))retained++;
-  else if(withdrawals.has(id))explicitlyRemoved++;
+  else if(withdrawals.has(id)){explicitlyRemoved++;onConfirmedRemoval?.(id);}
   else absentFromReplica++;
  }
  assert.equal(previousIds.size,incumbent.rows,'owned_incumbent_count');
