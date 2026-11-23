@@ -1,0 +1,318 @@
+{
+  "version": 1,
+  "repository": "jeep-jim/AvtoCena",
+  "inventorySourceSha": "bd7dc65998cd6ab062f12d01145ff2de6c3ae6e3",
+  "checkpointPrefix": "rebuild-checkpoints/catalog/20261123",
+  "fullBackup": false,
+  "deletionAllowed": false,
+  "roots": [
+    {
+      "key": "catalog/manifest.json",
+      "mode": "copy",
+      "required": true
+    },
+    {
+      "key": "catalog/previous-manifest.json",
+      "mode": "copy",
+      "required": false
+    },
+    {
+      "key": "catalog/internal/manifest.json",
+      "mode": "copy",
+      "required": false
+    },
+    {
+      "key": "catalog/japan-auction-history/manifest.json",
+      "mode": "copy",
+      "required": false
+    },
+    {
+      "key": "catalog/independent-market-public-v1/china/control.json",
+      "mode": "copy",
+      "required": false
+    },
+    {
+      "key": "catalog/independent-market-public-v1/uae/control.json",
+      "mode": "copy",
+      "required": false
+    },
+    {
+      "key": "catalog/owned-feed/v1/china/source.json",
+      "mode": "copy",
+      "required": false
+    },
+    {
+      "key": "catalog/owned-feed/v1/china/prepared.json",
+      "mode": "copy",
+      "required": false
+    },
+    {
+      "key": "catalog/intake-cursors/v1/china.json",
+      "mode": "copy",
+      "required": false
+    },
+    {
+      "key": "catalog/intake-cursors/v1/korea.json",
+      "mode": "copy",
+      "required": false
+    },
+    {
+      "key": "catalog/intake-cursors/v1/uae.json",
+      "mode": "copy",
+      "required": false
+    },
+    {
+      "key": "catalog/intake-cursors/v1/europe.json",
+      "mode": "copy",
+      "required": false
+    },
+    {
+      "key": "catalog/intake-cursors/v1/georgia.json",
+      "mode": "copy",
+      "required": false
+    },
+    {
+      "key": "catalog/operations/collection-controls-v1.json",
+      "mode": "fingerprint",
+      "required": false
+    },
+    {
+      "key": "catalog/raw-feed-config/v1/che168-snapshot.json",
+      "mode": "copy",
+      "required": false
+    },
+    {
+      "key": "catalog/raw-feed-coordination/v1/policy.json",
+      "mode": "copy",
+      "required": false
+    },
+    {
+      "key": "catalog/raw-feed-coordination/v1/state.json",
+      "mode": "copy",
+      "required": false
+    },
+    {
+      "key": "markets/markets.json",
+      "mode": "fingerprint",
+      "required": false
+    },
+    {
+      "key": "settings/site-business.json",
+      "mode": "fingerprint",
+      "required": false
+    },
+    {
+      "key": "fees/exchange-rates.json",
+      "mode": "fingerprint",
+      "required": false
+    },
+    {
+      "key": "catalog-editorial/current.json",
+      "mode": "fingerprint",
+      "required": false
+    },
+    {
+      "key": "knowledge/management-vehicle-parameters/v1/current.json",
+      "mode": "fingerprint",
+      "required": false
+    },
+    {
+      "key": "knowledge/encyclopedia/v1/manifest.json",
+      "mode": "fingerprint",
+      "required": false
+    },
+    {
+      "key": "offer-calculation-previews/current.json",
+      "mode": "fingerprint",
+      "required": false
+    },
+    {
+      "key": "catalog/china-cny-prices/current.json",
+      "mode": "fingerprint",
+      "required": false
+    },
+    {
+      "key": "catalog/green-corner/current.json",
+      "mode": "copy",
+      "required": false
+    },
+    {
+      "key": "catalog/autocatalog/v1/manifest.json",
+      "mode": "copy",
+      "required": false
+    },
+    {
+      "key": "integrations/ajes/config.json",
+      "mode": "fingerprint",
+      "required": false
+    },
+    {
+      "key": "catalog/import-lock.json",
+      "mode": "copy",
+      "required": false
+    },
+    {
+      "key": "catalog/operations/budget-preparation-v1.json",
+      "mode": "copy",
+      "required": false
+    },
+    {
+      "key": "catalog/operations/china-ajes-cutover-20261018.json",
+      "mode": "copy",
+      "required": false
+    }
+  ],
+  "controls": {
+    "key": "catalog/operations/collection-controls-v1.json",
+    "markets": [
+      "china",
+      "japan",
+      "korea",
+      "uae",
+      "europe",
+      "georgia"
+    ],
+    "sources": [
+      "encar_feed",
+      "dubicars_feed",
+      "ajes_china_feed",
+      "ajes_korea_feed",
+      "ajes_japan_feed",
+      "che168_feed",
+      "autohome_used_china_open",
+      "autohome_new_china_open",
+      "encar_direct",
+      "kcar_korea_open",
+      "dubizzle_uae_open",
+      "dubicars_uae_exact",
+      "carswitch_uae_open",
+      "mobile_de_open",
+      "autoscout_europe_open",
+      "myauto_georgia_list",
+      "autopapa_georgia_open",
+      "akebono_green"
+    ]
+  },
+  "protectedCodePrefixes": [
+    "packages/engine/",
+    "apps/web/lib/encyclopedia/",
+    "apps/web/components/encyclopedia/",
+    "apps/web/app/api/encyclopedia/",
+    "apps/web/app/(crm)/",
+    "apps/web/lib/account/",
+    "apps/web/lib/dealers/",
+    "apps/web/lib/autocalc/",
+    "data/catalog/vehicle-encyclopedia-v2/",
+    "data/catalog/knowledge-core/",
+    "data/catalog/vehicle-knowledge/",
+    "data/catalog/power-knowledge/",
+    "data/catalog/power-reference/"
+  ],
+  "protectedCodeFiles": [
+    "apps/web/lib/data.ts",
+    "apps/web/lib/auth.ts",
+    "apps/web/lib/platform-access.ts",
+    "apps/web/lib/crm-permissions.ts",
+    "apps/web/lib/business-settings.ts",
+    "apps/web/lib/effective-market-settings.ts",
+    "apps/web/lib/settings-validation.ts",
+    "apps/web/lib/catalog/collection-controls.ts",
+    "apps/web/lib/catalog/collection-controls-schema.ts",
+    "apps/web/lib/catalog/ajes-settings.ts",
+    "apps/web/lib/catalog/editorial.ts",
+    "apps/web/lib/catalog/editorial-access.ts",
+    "apps/web/lib/catalog/editorial-specifications.ts",
+    "apps/web/lib/catalog/management-knowledge.ts",
+    "apps/web/lib/catalog/saved-offer-calculation.ts",
+    "apps/web/lib/catalog/saved-calculation-input.ts",
+    "apps/web/lib/catalog/saved-calculation-previews.ts",
+    "apps/web/lib/catalog/customer-parameters.ts",
+    "apps/web/lib/catalog/customs-pricing.ts",
+    "apps/web/lib/catalog/live-business-pricing.ts",
+    "apps/web/lib/catalog/feed-rate-snapshot.ts",
+    "apps/web/lib/catalog/rates.ts",
+    "apps/web/lib/catalog/market-logistics.ts",
+    "apps/web/lib/catalog/estimated-market-config.ts",
+    "apps/web/lib/catalog/card-city-delivery.ts",
+    "apps/web/lib/catalog/city-delivery.ts",
+    "apps/web/lib/catalog/types.ts",
+    "apps/web/lib/catalog/brands.ts",
+    "apps/web/lib/catalog/encyclopedia-identity.ts",
+    "apps/web/lib/catalog/encyclopedia-identity-application.ts",
+    "apps/web/lib/catalog/display-identity.ts",
+    "apps/web/lib/catalog/knowledge-core.ts",
+    "apps/web/lib/catalog/vehicle-knowledge.ts",
+    "apps/web/lib/catalog/power-knowledge.ts",
+    "apps/web/lib/catalog/power-reference.ts",
+    "apps/web/app/api/catalog/offer/[id]/save/route.ts",
+    "apps/web/app/api/catalog/offer/[id]/calculate/route.ts",
+    "apps/web/app/api/catalog/offer/[id]/editorial/route.ts",
+    "apps/web/app/api/catalog/offer/[id]/pdf/route.ts",
+    "apps/web/app/api/autocalc/route.ts",
+    "scripts/encyclopedia/restore-calculation-index.mjs",
+    "scripts/catalog-calculation-version.mjs"
+  ],
+  "protectedStoragePrefixes": [
+    "clients/",
+    "leads/",
+    "deals/",
+    "activity/",
+    "partners/",
+    "cpa/",
+    "contracts/",
+    "crm/",
+    "accounts/",
+    "auth/",
+    "dealers/",
+    "telegram/",
+    "settings/",
+    "markets/",
+    "fees/",
+    "integrations/",
+    "knowledge/",
+    "catalog-editorial/",
+    "catalog-translations/",
+    "offer-calculations/",
+    "offer-calculation-scenarios/",
+    "offer-calculation-previews/",
+    "public-share-links/",
+    "catalog/operations/",
+    "catalog/reprice-requests/",
+    "catalog/vehicle-encyclopedia-v2/",
+    "catalog/knowledge-core/",
+    "catalog/vehicle-knowledge/",
+    "catalog/power-knowledge/",
+    "catalog/power-reference/",
+    "catalog/feed-rates/",
+    "catalog/china-cny-prices/",
+    "catalog/provider-snapshots/",
+    "catalog/provider-replicas/",
+    "catalog/intake-working/",
+    "catalog/intake-staging/",
+    "catalog/paid-encar-reports/",
+    "catalog/nonjp-intake/",
+    "catalog/raw-feed-pins/",
+    "catalog/raw-feed-handoffs/",
+    "catalog/raw-feed-coordination/",
+    "catalog/raw-feed-config/",
+    "catalog/intake-cursors/",
+    "catalog/owned-feed/",
+    "catalog/independent-market-public-v1/",
+    "catalog/green-corner/",
+    "catalog/japan-auction-history/",
+    "catalog/autocatalog/",
+    "catalog/images/",
+    "catalog/generations/",
+    "catalog/public/",
+    "catalog/internal/",
+    "catalog/history/"
+  ],
+  "limitations": [
+    "Fixed-root capture only; raw archives, generation objects, CRM chunks, encyclopedia revision chains and media are not backed up by this job.",
+    "No source writes, deletes, supplier requests, secret decryption or seed fallback.",
+    "Settings and manual records are fingerprinted without copying their content.",
+    "knowledge/encyclopedia/calculation-v1.json is a local bundled path, not a required object-store root.",
+    "Captured leases/authority are evidence only and must never be automatically restored.",
+    "Existing storage returns HTTP-decoded response bytes. This is not a physical S3 metadata or compressed-representation backup."
+  ]
+}

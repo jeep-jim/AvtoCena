@@ -1,0 +1,98 @@
+name: Begin catalog rebuild with a scoped stop and private checkpoint
+
+on:
+  push:
+    branches: [main]
+    paths: ['.github/operations/catalog-rebuild-20261123/start.json']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: catalog-rebuild-initial-checkpoint
+  cancel-in-progress: false
+
+jobs:
+  checkpoint:
+    if: github.repository_id == '1289722938' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment: regcloud-staging
+    timeout-minutes: 25
+    permissions:
+      contents: read
+      actions: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - name: Set report paths after the runner is available
+        run: |
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import fs from 'node:fs/promises';
+          import path from 'node:path';
+          assert(process.env.RUNNER_TEMP && process.env.GITHUB_ENV, 'checkpoint_runner_paths_missing');
+          await fs.appendFile(process.env.GITHUB_ENV, `REBUILD_FREEZE_REPORT=${path.join(process.env.RUNNER_TEMP, 'catalog-rebuild-freeze.json')}\nCHECKPOINT_REPORT_PATH=${path.join(process.env.RUNNER_TEMP, 'catalog-rebuild-checkpoint.json')}\n`);
+          NODE
+      - name: Check the stop and checkpoint boundaries before any change
+        run: node --test tests/catalog-rebuild-freeze.test.mjs tests/catalog-rebuild-checkpoint.test.mjs
+      - name: Preserve prior workflow states and stop only reviewed legacy writers
+        id: freeze
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: node .github/operations/catalog-rebuild-20261123/freeze.mjs --apply
+      - name: Install the existing storage runtime
+        run: npm ci --ignore-scripts
+      - name: Read the actual serving identity
+        run: |
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import fs from 'node:fs/promises';
+          const response = await fetch('https://avtocena.com/api/health', {redirect: 'error', signal: AbortSignal.timeout(30000), cache: 'no-store'});
+          assert(response.ok, 'checkpoint_serving_health_http');
+          const health = await response.json();
+          assert(health.ok === true && health.service === 'avtocena-web' && /^[a-f0-9]{40}$/.test(health.releaseSha ?? '') && /^[a-f0-9]{64}$/.test(health.calculationVersion ?? ''), 'checkpoint_serving_health_invalid');
+          await fs.appendFile(process.env.GITHUB_ENV, `CHECKPOINT_SERVING_HEALTH_OK=true\nCHECKPOINT_SERVING_RELEASE_SHA=${health.releaseSha}\nCHECKPOINT_SERVING_CALCULATION_VERSION=${health.calculationVersion}\nCHECKPOINT_SERVING_CHECKED_AT=${new Date().toISOString()}\n`);
+          NODE
+      - name: Copy fixed roots privately and verify source objects stayed unchanged
+        env:
+          JSON_STORAGE_DRIVER: object
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_REGION: us-east-1
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+        run: node --import tsx .github/operations/catalog-rebuild-20261123/checkpoint.mjs
+      - name: Confirm the serving release did not change during capture
+        run: |
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import fs from 'node:fs/promises';
+          const response = await fetch('https://avtocena.com/api/health', {redirect: 'error', signal: AbortSignal.timeout(30000), cache: 'no-store'});
+          assert(response.ok, 'checkpoint_serving_final_http');
+          const health = await response.json();
+          assert(health.ok === true && health.releaseSha === process.env.CHECKPOINT_SERVING_RELEASE_SHA && health.calculationVersion === process.env.CHECKPOINT_SERVING_CALCULATION_VERSION, 'checkpoint_serving_changed');
+          const freeze = JSON.parse(await fs.readFile(process.env.REBUILD_FREEZE_REPORT, 'utf8'));
+          assert(freeze.disabled === true && freeze.quiescent === true && !freeze.error && freeze.sharedActiveAfter.length === 0, 'checkpoint_freeze_not_confirmed');
+          const report = JSON.parse(await fs.readFile(process.env.CHECKPOINT_REPORT_PATH, 'utf8'));
+          assert(report.kind === 'fixed_roots' && report.complete === true && report.fullBackup === false && report.deletionAllowed === false, 'checkpoint_report_invalid');
+          await fs.writeFile(process.env.CHECKPOINT_REPORT_PATH, JSON.stringify({...report, operationAccepted: true, servingStabilityVerified: true, acceptedAt: new Date().toISOString()}, null, 2) + '\n');
+          console.log('Serving identity unchanged; fixed-root checkpoint is not a complete data backup.');
+          NODE
+      - name: Preserve only sanitized operation reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: catalog-rebuild-initial-reports
+          path: |
+            ${{ runner.temp }}/catalog-rebuild-freeze.json
+            ${{ runner.temp }}/catalog-rebuild-checkpoint.json
+          if-no-files-found: error
+          retention-days: 30
