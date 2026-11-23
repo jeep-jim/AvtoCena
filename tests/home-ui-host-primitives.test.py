@@ -369,6 +369,19 @@ class HostPrimitiveTests(unittest.TestCase):
             with self.assertRaisesRegex(host.HostError, 'server_coverage'):
                 host.run_full_server_gate(ROOT, NONCE, 'private', execute)
 
+    def test_loopback_home_uses_real_ssh_peer_for_japanese_market_count(self):
+        connection = mock.MagicMock()
+        connection.getresponse.return_value.read.return_value = b'{}'
+        with mock.patch.dict(os.environ, {'SSH_CONNECTION':'8.8.8.8 1111 10.0.0.1 22'}), \
+             mock.patch.object(host.http.client, 'HTTPConnection', return_value=connection), \
+             mock.patch.object(host.http.client, 'HTTPSConnection', return_value=connection):
+            for origin in ('retained','candidate','public'):
+                host.public_get(origin, '/api/catalog/home')
+                peer = connection.request.call_args.kwargs['headers'].get('X-Real-IP')
+                self.assertEqual(peer, None if origin == 'public' else '8.8.8.8')
+            with mock.patch.dict(os.environ, {'SSH_CONNECTION':''}), self.assertRaisesRegex(host.HostError, 'peer_missing'):
+                host.public_get('retained','/api/catalog/home')
+
     def test_parity_accepts_only_home_provenance_omission_keeps_prices_unknown_and_auth(self):
         calls, changes = [], {}
         def get(where, path):

@@ -1,3 +1,4 @@
+import {finishAbandonedHomeRelease} from './retained-release.mjs';
 import fs from 'node:fs/promises';
 import {createReadStream} from 'node:fs';
 import path from 'node:path';
@@ -68,7 +69,10 @@ export async function preparePlan(sourceRoot){
   console.log(JSON.stringify({stage:'publication-and-storage-lease'}));
   const {quiescence,authority}=await waitForHomePublication(
     ()=>assertPublicationQuiescence(reader,process.env.GITHUB_RUN_ID),
-    ()=>acquireHomeAuthority({storage:store,nonce,readLiveIdentity:liveIdentity}),
+    async ()=>{
+      if (await finishAbandonedHomeRelease(store,reader,liveIdentity)) console.log('Confirmed cleanup of failed release 45200151578');
+      return acquireHomeAuthority({storage:store,nonce,readLiveIdentity:liveIdentity});
+    },
     async reason=>{
       console.log(JSON.stringify({stage:'waiting_for_publication',reason}));
       await pause(60_000);

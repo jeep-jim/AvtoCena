@@ -757,7 +757,8 @@ def public_get(where, path):
                   else http.client.HTTPConnection('127.0.0.1', PORT if where == 'candidate' else 3002, timeout=90))
     try:
         headers = {'Host': HOST, 'Accept-Encoding': 'identity', 'Cache-Control': 'no-cache', 'Connection': 'close'}
-        if where != 'public' and query.get('market') == ['korea']:
+        # The anonymous aggregate also contains the peer-scoped Japanese count.
+        if where != 'public' and (path == '/api/catalog/home' or query.get('market') == ['korea']):
             connection_parts = os.environ.get('SSH_CONNECTION', '').split()
             need(len(connection_parts) == 4, 'parity_ssh_peer_missing')
             try:
@@ -835,12 +836,13 @@ def check_card_price_auth_parity(guard, *, get=public_get, target='candidate'):
         paths = ['/api/catalog/home'] + [parity_search(market) for market in PARITY_MARKETS]
         for path in paths:
             status, _, raw = get(where, path)
-            need(status == 200, 'parity_api_status')
+            scope = 'home' if path == '/api/catalog/home' else urllib.parse.parse_qs(urllib.parse.urlsplit(path).query)['market'][0]
+            need(status == 200, 'parity_api_status_' + where + '_' + scope)
             value = json.loads(raw)
             need(isinstance(value, dict) and not value.get('error') and value.get('ok') is not False
                  and not any(value.get(key) for key in ('stale', 'partial', 'interrupted', 'countIncomplete'))
                  and isinstance(value.get('items'), list) and value['items']
-                 and type(value.get('total')) is int and value['total'] > 0, 'parity_api_complete')
+                 and type(value.get('total')) is int and value['total'] > 0, 'parity_api_complete_' + where + '_' + scope)
             # Only the intentionally removed home bibliography differs. Every
             # other row, price/unknown value, count and generation stays exact.
             if path == '/api/catalog/home':
@@ -849,7 +851,14 @@ def check_card_price_auth_parity(guard, *, get=public_get, target='candidate'):
             if path != '/api/catalog/home':
                 first = value['items'][0]
                 bucket['detail:' + first['market']] = detail_identity(get, where, first)
-    need(before == after, 'card_price_or_generation_changed')
+    for path, original in before.items():
+        current = after[path]
+        if original != current:
+            scope = ('home' if path == '/api/catalog/home' else path.replace('detail:', '') if path.startswith('detail:')
+                     else urllib.parse.parse_qs(urllib.parse.urlsplit(path).query)['market'][0])
+            different = next((key for key in sorted(set(original) | set(current)) if original.get(key) != current.get(key)), 'other')
+            safe_key = different.lower() if different in ('items','marketCountInfo','marketCounts','total','generationId') else 'other'
+            raise HostError('home_host_card_price_or_generation_changed_' + scope + '_' + safe_key)
     china_search = verify_saved_china(get, target, after[CHINA_GRID])
     guard('parity_readback')
     return {'source': SOURCE, 'target': target, 'passed': True, 'anonymousCrmRejected': True,
