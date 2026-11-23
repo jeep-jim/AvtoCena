@@ -58,6 +58,10 @@ export function withPreparedChinaRegcloudPreview<T>(regcloud:ChinaStageObjectFil
 }
 export const preparedChinaNormalRegcloudEnabled=()=>!scope.getStore()&&chinaRegcloudRuntimeConfigured();
 export const hasPreparedChinaHttpFixture=()=>!!scope.getStore()||preparedChinaNormalRegcloudEnabled();
+/** The saved catalog and the default China route read the same accepted generation. */
+export function unsupportedPreparedChinaSource(source:string|null|undefined,stock:string|null|undefined) {
+ return Boolean(stock || (source && source !== 'existing'));
+}
 export const hasIndependentChinaHttpFixture=()=>!!scope.getStore()?.independentChina||preparedChinaNormalRegcloudEnabled();
 export const preparedChinaIndexedModelOnly=()=>scope.getStore()?.indexedModelOnly===true||preparedChinaNormalRegcloudEnabled();
 const preparedOffers=new WeakMap<VehicleOffer,()=>Promise<void>>();

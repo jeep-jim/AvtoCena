@@ -17,7 +17,7 @@ import { NextResponse } from "next/server";
 import { loadPublicRateExtras } from "@/lib/catalog/public-rates";
 import { countCatalogOffers, readCatalogFacets, searchOffers, projectPreparedChinaFixtureSearch } from "@/lib/catalog/storage";
 
-import {hasPreparedChinaHttpFixture,preparedChinaIndexedModelOnly,readPreparedChinaFixtureList,readPreparedChinaIndexedModel,readPreparedChinaIndexedCity,readPreparedChinaCompatibility,hasIndependentChinaHttpFixture,PreparedChinaCutChanged} from "@/lib/catalog/prepared-china-http-fixture";
+import {unsupportedPreparedChinaSource,hasPreparedChinaHttpFixture,preparedChinaIndexedModelOnly,readPreparedChinaFixtureList,readPreparedChinaIndexedModel,readPreparedChinaIndexedCity,readPreparedChinaCompatibility,hasIndependentChinaHttpFixture,PreparedChinaCutChanged} from "@/lib/catalog/prepared-china-http-fixture";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -94,7 +94,8 @@ export async function GET(request: Request) {
   };
   if(chinaPrepared){
     try{
-      const extras=Boolean(p.get('source')||p.get('stock')||p.get('marketPage')==='1'||
+      const unsupportedSource=unsupportedPreparedChinaSource(p.get('source'),p.get('stock'));
+      const extras=Boolean(unsupportedSource||p.get('marketPage')==='1'||
         p.get('includeFacets')==='1'||p.get('includeRates')==='1');
       if(preparedChinaIndexedModelOnly()){
         const pinned=hasIndependentChinaHttpFixture()?p.get('preparedCut'):null;
@@ -108,7 +109,7 @@ export async function GET(request: Request) {
           if(marketPage&&(!Number.isSafeInteger(requestedPage)||requestedPage<1||!Number.isSafeInteger(requestedPage*24)))
             return NextResponse.json({ok:false},{status:400});
           const cut=await readPreparedChinaCompatibility(query,{countOnly,marketPage,includeFacets:p.get('includeFacets')==='1',
-            unsupported:Boolean(p.get('source')||p.get('stock')||p.get('includeRates')==='1'),expectedGeneration:pinned});
+            unsupported:unsupportedSource||p.get('includeRates')==='1',expectedGeneration:pinned});
           if(cut)return current(cut)?NextResponse.json({ok:true,...cut},{headers:{'Cache-Control':'no-store'}}):stale();
           if(pinned)return stale();
         }

@@ -1,5 +1,5 @@
 import {omitLegacyChinaAggregate,withChinaAggregateAuthority} from '@/lib/catalog/china-public-aggregate';
-import {hasIndependentChinaHttpFixture,readPreparedChinaCompatibility,readPreparedChinaHomeCards,PreparedChinaFixtureUnavailable} from '@/lib/catalog/prepared-china-http-fixture';
+import {unsupportedPreparedChinaSource,hasIndependentChinaHttpFixture,readPreparedChinaCompatibility,readPreparedChinaHomeCards,PreparedChinaFixtureUnavailable} from '@/lib/catalog/prepared-china-http-fixture';
 import {catalogFilterFacetsForClient} from '@/lib/catalog/filter-facets-wire';
 import {readMarketSection} from '@/lib/catalog/market-section-result';
 import {catalogSearchHeading,canonicalCatalogHref} from '@/lib/catalog/catalog-routes';
@@ -126,7 +126,7 @@ async function ReadCatalogContent({params={},dealer=null,embedded=false}:{params
   // before touching any live supplier setting or cross-market serving alias.
   const chinaCut=selectedMarket==='china'&&hasIndependentChinaHttpFixture()
    ?await readPreparedChinaCompatibility({...common,market:'china',page:requestedPage},{countOnly:false,includeFacets:false,
-     marketPage:true,navigationFacets:true,unsupported:Boolean(first(params.source)||first(params.stock)),expectedGeneration:first(params.preparedCut)}):null;
+     marketPage:true,navigationFacets:true,unsupported:unsupportedPreparedChinaSource(first(params.source),first(params.stock)),expectedGeneration:first(params.preparedCut)}):null;
   const omitChina=omitLegacyChinaAggregate()&&!selectedMarket;
   const [liveChina,liveKorea]=chinaCut?[false,false]:await Promise.all([omitChina?false:usesAjesMarket('china'),usesAjesMarket('korea')]);
   const aggregateChinaSection=async(market:{id:string;label:string})=>{

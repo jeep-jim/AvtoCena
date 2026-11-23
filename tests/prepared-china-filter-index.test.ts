@@ -157,3 +157,20 @@ test('authenticated snapshots hydrate only selected page parts and keep pointer 
  assert.equal(await legacy.filterPage(query,{start:0,pageSize:24,countOnly:false}),null);
  assert.equal(f.reads.length,before,'absence does not trigger on-demand index generation or a speculative lookup');
 });
+
+
+test('dealer and public saved-search links select the own China cut with the same filters',async()=>{
+ const {unsupportedPreparedChinaSource:blocked}=await import('../apps/web/lib/catalog/prepared-china-http-fixture');
+ for(const source of [undefined,null,'','existing'])assert.equal(blocked(source,''),false);
+ assert.equal(blocked('ajes',null),true);
+ assert.equal(blocked('existing','green'),true);
+ const rows=Array.from({length:72},(_,i)=>offer(i));
+ const f=await fixture(rows);
+ const query={market:'china',powerTo:160} as CatalogSearchParams;
+ const matches=await selectPreparedChinaCompatibilityRows(rows,query);orderPreparedChinaCompatibilityRows(matches,query);
+ for(const start of [0,24]){
+  const page=await f.select(query,start);
+  assert.equal(page?.total,matches.length);
+  assert.deepEqual(page?.positions.map(x=>x[0]),matches.slice(start,start+24).map(x=>x.id));
+ }
+});

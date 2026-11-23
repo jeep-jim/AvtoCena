@@ -158,7 +158,7 @@ export async function openPreparedChinaSnapshot(m:CatalogPreparedChinaManifest,
   if(!Object.hasOwn(dir,'filterIndex'))return null;
   return selectPreparedChinaFilterPage({generationId:m.generationId,marketDigest:dir.marketDigest,rows:dir.rows},dir.filterIndex!,params,input,readObject);
  };
- return {generationId:m.generationId,chunks:[...c.chunks],rows:c.count,validUntil:dir.validUntil,legalValidUntil:acceptedLegalUntil,idRoots:dir.idRoots,
+ return {generationId:m.generationId,marketDigest:dir.marketDigest,chunks:[...c.chunks],rows:c.count,validUntil:dir.validUntil,legalValidUntil:acceptedLegalUntil,idRoots:dir.idRoots,
   modelView:dir.modelView,fixedCityViews:dir.fixedCityViews,deliveryTariffVersion:dir.deliveryTariffVersion,
   directorySha256:marker.directorySha256,streamingSelector:dir.streamingSelector,navigationFacets:dir.navigationFacets,filterIndex:dir.filterIndex,readChunk,assertCurrent,locate,modelPage,cityPage,filterPage,canonicalWindow};
 }
