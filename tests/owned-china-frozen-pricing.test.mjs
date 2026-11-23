@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {randomUUID} from 'node:crypto';
 import {rawDigest} from '../scripts/lib/catalog-raw-provenance.mjs';
-import {ownedChinaFrozenFx} from '../scripts/lib/owned-china-frozen-pricing.mjs';
+import {ownedChinaFrozenFx,ownedChinaPricedSource} from '../scripts/lib/owned-china-frozen-pricing.mjs';
 
 const capturedAt='2026-11-22T21:14:00.000Z',observedAt='2026-11-22T21:34:55.563Z';
 function prepared(){
@@ -25,4 +25,15 @@ test('a changed archive, a preliminary or absent currency, an inverted clock and
   const d=prepared();change(d);d.plan.evidence.rateSnapshot.sha256=rawDigest(d.rates);
   assert.throws(()=>ownedChinaFrozenFx(d,randomUUID()));
  }
+});
+
+test('a download finishing after the FX capture cannot extend prices beyond the frozen 48 hours',()=>{
+ const data=prepared(),{receipt}=ownedChinaFrozenFx(data,randomUUID());
+ const start=Date.parse(capturedAt),end=Date.parse(observedAt),span=48*3600000;
+ const source={...data.plan.source,validUntil:end+span,cursor:{stream:'che168',sequence:5}};
+ const cut=ownedChinaPricedSource(source,receipt,end);
+ assert.deepEqual(cut,{...source,validUntil:start+span});
+ assert.equal(source.validUntil,end+span);
+ assert.equal(ownedChinaPricedSource({...source,validUntil:end+1000},receipt,end).validUntil,end+1000);
+ assert.throws(()=>ownedChinaPricedSource(source,receipt,start+span),/expired/);
 });
