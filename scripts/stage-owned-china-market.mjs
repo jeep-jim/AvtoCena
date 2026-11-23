@@ -33,7 +33,8 @@ await checkRuntime();
 const state=await openOwnedChinaVerifiedInput(native);
 const {prepared,coverage,witness,temp,readerOwner}=state;
 const {plan}=prepared;
-assert.equal(coverage.previouslyPublishedAbsentWithoutRemovalEvent,0,'previous listings missing without a removal decision');
+assert.equal(coverage.previouslyPublishedStillInSource+coverage.previouslyPublishedExplicitlyRemoved+coverage.previouslyPublishedAbsentWithoutRemovalEvent,
+  coverage.previouslyPublished,'previous inventory is not fully classified');
 assert(plan.source.cursor.sequence>state.base.cursor.sequence,'source already served');
 const {ObjectJsonStorage}=await writerImport('apps/web/lib/data.ts');
 const store=new ObjectJsonStorage();
