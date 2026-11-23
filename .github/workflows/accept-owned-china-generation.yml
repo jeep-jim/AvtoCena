@@ -1,7 +1,7 @@
 name: Publish the verified owned China generation
 on:
   workflow_run:
-    workflows: [Prepare the saved China inventory for publication]
+    workflows: [Prepare the saved China inventory for publication, Prepare and accept exact home UI catalog-0509]
     types: [completed]
     branches: [main]
   push:
@@ -21,11 +21,23 @@ concurrency:
   cancel-in-progress: false
 jobs:
   accept:
-    if: github.repository_id == '1289722938' && github.ref == 'refs/heads/main' && (github.event_name != 'workflow_run' || (github.event.workflow_run.conclusion == 'success' && (github.event.workflow_run.event == 'push' || github.event.workflow_run.event == 'workflow_run') && github.event.workflow_run.run_attempt == 1))
+    if: >-
+      github.repository_id == '1289722938' && github.ref == 'refs/heads/main' &&
+      (github.event_name != 'workflow_run' || (
+        github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.run_attempt == 1 &&
+        github.event.workflow_run.head_branch == 'main' && github.event.workflow_run.head_repository.id == 1289722938 && (
+          (github.event.workflow_run.path == '.github/workflows/stage-owned-china-generation.yml' &&
+           (github.event.workflow_run.event == 'push' || github.event.workflow_run.event == 'workflow_run')) ||
+          (github.event.workflow_run.path == '.github/workflows/home-ui-activation.yml' &&
+           github.event.workflow_run.id == 45134976110 && github.event.workflow_run.event == 'push' &&
+           github.event.workflow_run.head_sha == '347093f58180fdf2174222e1b6b40859b8219332')
+        )
+      ))
     runs-on: ubuntu-24.04
     environment: regcloud-staging
     env:
-      STAGE_RUN_ID: ${{ github.event.workflow_run.id || inputs.stage_run }}
+      # This verified private stage completed while clients were still on the retained release.
+      STAGE_RUN_ID: ${{ github.event.workflow_run.path == '.github/workflows/home-ui-activation.yml' && '45150223558' || github.event.workflow_run.id || inputs.stage_run }}
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
