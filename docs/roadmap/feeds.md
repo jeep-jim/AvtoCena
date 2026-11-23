@@ -1,6 +1,6 @@
 # Фиды и расписания
 
-Проверено 23.11.2026, 10:21 Asia/Krasnoyarsk. [Повтор Korea 45104426224](https://github.com/jeep-jim/AvtoCena/actions/runs/45104426224) идёт после принятого PR 1804; архив и exact serving calculator проверены, новый сбор пропущен. Публичный результат пока не подтверждён.
+Состояние 23.11.2026, 11:38 Asia/Krasnoyarsk. [Повтор Korea 45104426224](https://github.com/jeep-jim/AvtoCena/actions/runs/45104426224) после принятого PR 1804: архив и exact serving calculator проверены, collect skipped. На 11:28:39 шаг 29 выполняется без failed steps; новый публичный срез пока не подтверждён.
 
 ## Правила
 
@@ -13,7 +13,7 @@
 | Рынок | Получено и сохранено | Публикация этого сбора |
 | --- | --- | --- |
 | Китай | [Загрузка 45067305608](https://github.com/jeep-jim/AvtoCena/actions/runs/45067305608): 30 690 событий. [Подготовка 45072915347](https://github.com/jeep-jim/AvtoCena/actions/runs/45072915347): 283 583 наблюдения, replica и prepared archive в REG | Нет: verifier `mode:mirror`, `publicPublished:false`; автоматическое публичное продолжение не подключено |
-| Корея | [45077320093](https://github.com/jeep-jim/AvtoCena/actions/runs/45077320093): 46 649 уникальных, 2 333 страницы; подготовка и REG archive подтверждены; artifact 14779553850 | Первый publisher OOM; восстановление 45104426224 идёт. На 09:42 сайт: старый `gen_1794878284419_a611dfcf`, 46 862; до 160 л.с. — 139; у первых 24 без фильтра мощность не заполнена |
+| Корея | [45077320093](https://github.com/jeep-jim/AvtoCena/actions/runs/45077320093): 46 649 уникальных, 2 333 страницы; подготовка и REG archive подтверждены; artifact 14779553850 | Первый publisher OOM; восстановление 45104426224 идёт. API 11:15 / браузер 11:20: старый `gen_1794878284419_a611dfcf`, 46 862; до 160 л.с. — 139; у контрольных Morning/Seltos мощность неизвестна |
 | ОАЭ | [45076401719](https://github.com/jeep-jim/AvtoCena/actions/runs/45076401719): 8 207 событий → 5 206 наблюдений → 4 870 уникальных; completed intake и REG archive подтверждены | Нет: `serving_read_model_byte_bound`, прежний manifest сохранён |
 | Европа | [45076867904](https://github.com/jeep-jim/AvtoCena/actions/runs/45076867904): 2 890 наблюдений AutoScout с 201 страницы; completed intake и REG archive подтверждены | Publish job failed; точная причина последнего отказа в полученных журналах не установлена |
 | Грузия | [45076431110](https://github.com/jeep-jim/AvtoCena/actions/runs/45076431110): AutoPapa 13, MyAuto 0; частичный archive в REG, `completed:false` | Пропущена. У обоих источников `list_failed`; неполный сбор нельзя выдавать за обновление |
@@ -38,8 +38,10 @@ REG подтверждён первичными журналами записи/
 ## Что сделано и что дальше
 
 Приняты [PR 1801](https://github.com/jeep-jim/AvtoCena/pull/1801), [1802](https://github.com/jeep-jim/AvtoCena/pull/1802), [1803](https://github.com/jeep-jim/AvtoCena/pull/1803), [1804](https://github.com/jeep-jim/AvtoCena/pull/1804). Их успешный CI не означает публикацию данных или установку runtime. Сайт остаётся на `22867cbcfaee27b2e8917b6bf880e44827f67b60`; main целиком не выпускать.
+Приняты [1806](https://github.com/jeep-jim/AvtoCena/pull/1806) (защита UAE cursor) и [1808](https://github.com/jeep-jim/AvtoCena/pull/1808) (точный read-only saved-feed probe); сам probe ещё не запускали. Это не подтверждает восстановление UAE.
+[1805](https://github.com/jeep-jim/AvtoCena/pull/1805) (`30e587e`) green, merge после Korea. [1810](https://github.com/jeep-jim/AvtoCena/pull/1810) дополнен heartbeat и witness, новый head `767c357c620c318bb7e56bd78608e6ca3cbbcba2`: новый CI ещё предстоит; 3 443 / 3 443 PASS относится только к прежнему `97ac7b4`. Merge удержан из-за self-trigger `catalog-current-read-models.yml`. [1811](https://github.com/jeep-jim/AvtoCena/pull/1811) (`0bf7954`, полный China archive без общего потолка): [CI 45112119949](https://github.com/jeep-jim/AvtoCena/actions/runs/45112119949) идёт; офлайн потоковый объём свыше 20 GiB проверен, production не менялся.
 
-1. Дождаться текущего восстановления Korea `45104426224`; подтвердить persisted coverage, характеристики, карточки и фильтр до 160 л.с. на сайте. Не запускать дубликат и не менять runtime 22867 во время публикации.
+1. Дождаться текущего восстановления Korea `45104426224`; проверить terminal job, `published`/`publicationError`, generation, `technicalFieldCoverage` и `freshOfferAudit`, затем Morning 76/998, Seltos 193/1598 и фильтр до 160 л.с. на сайте. Не складывать 46 649 новых наблюдений с прежними 46 862 публичными строками; итог берётся из принятого отчёта. Не запускать дубликат и не менять runtime 22867.
 2. Повторять UAE/Europe из сохранённого завершённого intake после исправления причины, сохраняя все проверки и CAS. Общая независимость рынков остаётся открытой.
 3. Китай: ветка `fix/china-publication-source-20261122`, SHA `b209f4f27ad84eae2878c4535e0daa269593a981`, 15 адресных тестов PASS. Adapter только подготавливает проверенный вход; native admission, active/retirement proof, price seal, private preview и CAS ещё нужны. Индекс — [performance.md](performance.md).
 4. Грузия: bridge возвращает 502 после `fetch_failed`; это не доказательство блокировки поставщика. Уточнить безопасные `error.name`/`cause.code` worker до повторного сбора.
