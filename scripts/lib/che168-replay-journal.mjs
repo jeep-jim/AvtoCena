@@ -4,11 +4,15 @@ import {gzipSync, gunzipSync} from 'node:zlib';
 const digest = value => createHash('sha256').update(JSON.stringify(value)).digest('hex');
 const validCursor = n => Number.isSafeInteger(n) && n >= 0;
 const fail = () => { throw Error('auto_api_invalid_replay_checkpoint'); };
-const MAX_BYTES = 512 * 1024 * 1024;
 const MAX_CHUNK_BYTES = 64 * 1024 * 1024;
-const MAX_RAW_BYTES = 8 * 1024 * 1024 * 1024;
 const size = value => Buffer.byteLength(JSON.stringify(value));
 const encode = chunk => ({encoding:'gzip-base64',data:gzipSync(Buffer.from(JSON.stringify(chunk)),{level:1}).toString('base64')});
+export function addReplayCount(total, increment) {
+  if (!validCursor(total) || !validCursor(increment)) fail();
+  const next = total + increment;
+  if (!validCursor(next)) fail();
+  return next;
+}
 function decode(value) {
   try { return JSON.parse(gunzipSync(Buffer.from(value.data,'base64'),{maxOutputLength:MAX_CHUNK_BYTES}).toString('utf8')); }
   catch { fail(); }
@@ -25,8 +29,8 @@ export async function openChe168ReplayJournal({storage, artifactRunId, binding, 
   let head = meta.found ? meta.value : {version:2, binding, initialCursor, cursor:initialCursor, changes:0, bytes:0, rawBytes:0, chunks:[]};
   if (![1,2].includes(head?.version) || head.binding !== binding || head.initialCursor !== initialCursor
     || !validCursor(head.cursor) || !validCursor(head.changes) || !validCursor(head.bytes)
-    || head.bytes > MAX_BYTES || !Array.isArray(head.chunks) || head.chunks.length > 10000
-    || (head.version === 2 && (!validCursor(head.rawBytes) || head.rawBytes > MAX_RAW_BYTES))
+    || !Array.isArray(head.chunks)
+    || (head.version === 2 && !validCursor(head.rawBytes))
     || (meta.found && !meta.etag)) fail();
   let cursor = initialCursor, changes = 0, bytes = 0, rawBytes = 0;
   const migrated = []; let migratedBytes = 0;
@@ -40,14 +44,17 @@ export async function openChe168ReplayJournal({storage, artifactRunId, binding, 
       || !validCursor(chunk.to) || chunk.to <= cursor || !validCursor(chunk.changes) || chunk.changes <= 0
       || !Array.isArray(chunk.events) || chunk.events.length > chunk.changes) fail();
     const rawSize = size(chunk);
-    bytes += size(stored); rawBytes += rawSize;
-    if (bytes > MAX_BYTES || rawSize > MAX_CHUNK_BYTES || rawBytes > MAX_RAW_BYTES) fail();
+    if (rawSize > MAX_CHUNK_BYTES) fail();
+    bytes = addReplayCount(bytes, size(stored)); rawBytes = addReplayCount(rawBytes, rawSize);
+    changes = addReplayCount(changes, chunk.changes);
     for (const event of chunk.events) await apply(event);
-    cursor = chunk.to; changes += chunk.changes;
+    cursor = chunk.to;
     if (head.version === 1 && !readOnly) {
       const compressed = encode(chunk), id = randomUUID();
+      if (size(compressed) > MAX_CHUNK_BYTES) throw Error('auto_api_replay_storage_budget');
+      migratedBytes = addReplayCount(migratedBytes, size(compressed));
       await storage.writeJson(`${prefix}/${id}.json`, compressed, {ifNoneMatch:'*'});
-      migrated.push({id,sha:digest(compressed)}); migratedBytes += size(compressed);
+      migrated.push({id,sha:digest(compressed)});
     }
   }
   if (cursor !== head.cursor || changes !== head.changes || bytes !== head.bytes || (head.version === 2 && rawBytes !== head.rawBytes)) fail();
@@ -58,7 +65,6 @@ export async function openChe168ReplayJournal({storage, artifactRunId, binding, 
     head = next; meta = nextMeta;
   }
   if (head.version === 1 && !readOnly) {
-    if (migratedBytes > MAX_BYTES) throw Error('auto_api_replay_storage_budget');
     await saveHead({...head,version:2,bytes:migratedBytes,rawBytes,chunks:migrated});
     console.log(JSON.stringify({replayCheckpointCompressed:true,changes,cursor,rawBytes,bytes:migratedBytes}));
   }
@@ -70,10 +76,10 @@ export async function openChe168ReplayJournal({storage, artifactRunId, binding, 
       if (!validCursor(cursor) || cursor <= head.cursor || !validCursor(changes) || changes <= head.changes
         || !Array.isArray(events) || events.length > changes - head.changes) fail();
       const chunk = {binding, from:head.cursor, to:cursor, changes:changes-head.changes, events};
-      const rawSize = size(chunk), rawBytes = head.rawBytes + rawSize;
-      if (rawSize > MAX_CHUNK_BYTES || rawBytes > MAX_RAW_BYTES || head.chunks.length >= 10000) throw Error('auto_api_replay_storage_budget');
-      const stored = encode(chunk), bytes = head.bytes + size(stored);
-      if (bytes > MAX_BYTES || size(stored) > MAX_CHUNK_BYTES) throw Error('auto_api_replay_storage_budget');
+      const rawSize = size(chunk), rawBytes = addReplayCount(head.rawBytes, rawSize);
+      if (rawSize > MAX_CHUNK_BYTES) throw Error('auto_api_replay_storage_budget');
+      const stored = encode(chunk), bytes = addReplayCount(head.bytes, size(stored));
+      if (size(stored) > MAX_CHUNK_BYTES) throw Error('auto_api_replay_storage_budget');
       const id = randomUUID(), sha = digest(stored);
       await storage.writeJson(`${prefix}/${id}.json`, stored, {ifNoneMatch:'*'});
       await saveHead({...head, cursor, changes, bytes, rawBytes, chunks:[...head.chunks, {id, sha}]});
