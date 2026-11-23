@@ -12,6 +12,8 @@ test('page recovery preserves route and cannot reload repeatedly',()=>{
 });
 test('supplier refusal stays local to the offer; unexpected errors still surface',async()=>{
  const mocks:any={
+  './prepared-china-http-fixture':`export class PreparedChinaFixtureUnavailable extends Error{};export const hasPreparedChinaHttpFixture=()=>false,hasIndependentChinaHttpFixture=()=>false,preparedChinaNormalRegcloudEnabled=()=>false;export const assertIndependentChinaFallbackAllowed=async()=>{},readPreparedChinaFixtureOffer=async()=>null;`,
+  './management-knowledge':`export const attachManagementKnowledge=async rows=>rows;`,
   'react':`export const cache=f=>f;`,
   'next/cache':`export const unstable_cache=f=>f;`,
   './collection-controls':`export class CollectionDisabledError extends Error{}`,
@@ -29,6 +31,8 @@ test('supplier refusal stays local to the offer; unexpected errors still surface
 
 test('layout, legacy redirect and calculation contain disabled sources for every paid market',async()=>{
  const mocks:Record<string,string>={
+  './prepared-china-http-fixture':`export class PreparedChinaFixtureUnavailable extends Error{};export const hasPreparedChinaHttpFixture=()=>false,hasIndependentChinaHttpFixture=()=>false,preparedChinaNormalRegcloudEnabled=()=>false;export const assertIndependentChinaFallbackAllowed=async()=>{},readPreparedChinaFixtureOffer=async()=>null;`,
+  './management-knowledge':`export const attachManagementKnowledge=async rows=>rows;`,
   'react':`export const cache=f=>f;`,
   'next/cache':`export const unstable_cache=f=>f;`,
   './collection-controls':`export class CollectionDisabledError extends Error{}`,
