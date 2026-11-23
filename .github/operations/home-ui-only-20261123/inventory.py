@@ -94,8 +94,7 @@ def serving_resources(container):
     return values
 
 
-def compare_serving_resources(actual):
-    expected = HISTORICAL_SERVING_RESOURCES
+def compare_serving_resources(actual, expected=HISTORICAL_SERVING_RESOURCES):
     different = [key for key in expected if key != 'RestartPolicy' and actual[key] != expected[key]]
     different.extend('RestartPolicy.' + key for key in expected['RestartPolicy']
                      if actual['RestartPolicy'][key] != expected['RestartPolicy'][key])
@@ -104,7 +103,7 @@ def compare_serving_resources(actual):
             'historicalPinsMatch': not different, 'mismatchedFields': different}
 
 
-def validate_container(container, role):
+def validate_container(container, role, expected_start=SERVING_STARTED_AT):
     kind, name, revision, image, port, armed = role
     need(isinstance(container, dict), 'inventory_container_invalid')
     config, host, state = container['Config'], container['HostConfig'], container['State']
@@ -134,7 +133,7 @@ def validate_container(container, role):
              'inventory_mounts')
     if kind == 'serving':
         need(container['Id'] == SERVING_ID, 'inventory_serving_id')
-        need(state['StartedAt'] == SERVING_STARTED_AT, 'inventory_serving_started_at')
+        need(state['StartedAt'] == expected_start, 'inventory_serving_started_at')
         need(config['Labels'].get('avtocena.role') == 'china-ui-grid-dark'
              and env.get('AVTOCENA_BUILD_CALCULATION_VERSION') == BUILD,
              'inventory_serving_build')
@@ -153,10 +152,10 @@ def validate_container(container, role):
     return safe, env
 
 
-def snapshot(io):
+def snapshot(io, expected_start=SERVING_STARTED_AT):
     safe, environments = {}, {}
     for role in ROLES:
-        safe[role[0]], environments[role[0]] = validate_container(io.inspect(role[1]), role)
+        safe[role[0]], environments[role[0]] = validate_container(io.inspect(role[1]), role, expected_start)
     excluded = {'AVTOCENA_RELEASE_SHA', 'AVTOCENA_BUILD_CALCULATION_VERSION'}
     inherited = [{k: v for k, v in environments[kind].items() if k not in excluded}
                  for kind in ('serving', 'chinaRollback')]
@@ -182,16 +181,16 @@ def verify_health(io):
          and observed.get('calculationVersion') == CALCULATION, 'inventory_gateway_health')
 
 
-def run_inventory(io):
+def run_inventory(io, *, expected_start=SERVING_STARTED_AT, expected_resources=HISTORICAL_SERVING_RESOURCES):
     with io.lock():
         verify_config(io.config())
-        before = snapshot(io)
-        observation = compare_serving_resources(before['serving']['resources'])
+        before = snapshot(io, expected_start)
+        observation = compare_serving_resources(before['serving']['resources'], expected_resources)
         try:
             verify_health(io)
             need(3003 not in io.listening_ports(), 'inventory_candidate_port_listening')
-            after = snapshot(io)
-            observation = compare_serving_resources(after['serving']['resources'])
+            after = snapshot(io, expected_start)
+            observation = compare_serving_resources(after['serving']['resources'], expected_resources)
             verify_config(io.config())
             verify_health(io)
             need(before == after, 'inventory_identity_changed')
