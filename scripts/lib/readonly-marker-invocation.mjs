@@ -40,9 +40,12 @@ export function verifyReadonlyInvocation({root, env = process.env, markerPath, o
   need(marker && typeof marker === 'object' && !Array.isArray(marker)
     && Object.keys(marker).sort().join(',') === 'approvedSourceSha,operation,version'
     && marker.version === 1 && marker.operation === operation && isSha(marker.approvedSourceSha), 'marker_contract');
-  const parents = git(['rev-list', '--parents', '-n', '1', 'HEAD']).trim().split(/\s+/);
-  need(parents.length === 2 && parents[0] === sourceSha && parents[1] === marker.approvedSourceSha,
-    'approved_parent');
+  // The approval fetch can put HEAD at a shallow boundary even when both
+  // objects are present. Check its immutable commit header, then diff the two
+  // exact trees below. Only a single original parent is acceptable.
+  const header = git(['--no-replace-objects', 'cat-file', 'commit', sourceSha]).split('\n\n', 1)[0];
+  const parents = header.split('\n').filter(line => line.startsWith('parent '));
+  need(parents.length === 1 && parents[0] === 'parent ' + marker.approvedSourceSha, 'approved_parent');
   const changed = git(['diff', '--no-ext-diff', '--no-textconv', '--no-renames', '--name-status', '-z',
     marker.approvedSourceSha, sourceSha, '--']).split('\0');
   need(changed.length === 3 && ['A', 'M'].includes(changed[0]) && changed[1] === markerPath
