@@ -63,3 +63,7 @@ The local tests exercise the complete accepted transition controller with the
 concrete IO bridge, stream protocol and refusal/rollback cases. They do not prove
 a production activation. The new workflow must still run its actual private,
 public and browser gates after Korea is terminal and root reviews that run's plan.
+
+### Historical GitHub runs, 23 November
+
+The run list contains 28 historical entries with zero jobs. After the owner approved cancellation, both [cancel](https://github.com/jeep-jim/AvtoCena/actions/runs/45130128516) and [force-cancel](https://github.com/jeep-jim/AvtoCena/actions/runs/45130287940) returned HTTP 409. Force-cancel reported that the executions had never entered the queue. No cancelled execution was confirmed. The controller re-reads each recorded ID and its job list. Its repository, workflow, creation time and first attempt must match. Any job assignment, changed run, or other writer blocks the release. The queue is checked again before switching ingress and final acceptance.
