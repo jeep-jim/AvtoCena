@@ -110,6 +110,15 @@ class InventoryTests(unittest.TestCase):
             self.assertRegex(row['hostConfigSha256'], r'^[0-9a-f]{64}$')
             self.assertEqual(row['environmentCount'], len(local.rows[row['name']]['Config']['Env']))
 
+    def test_mount_order_is_irrelevant_but_a_changed_mount_attribute_remains_visible(self):
+        role = inventory.ROLES[0]
+        row = containers()[role[1]]
+        original = inventory.validate_container(row, role)[0]['mountsSha256']
+        row['Mounts'].reverse()
+        self.assertEqual(inventory.validate_container(row, role)[0]['mountsSha256'], original)
+        row['Mounts'][0]['Propagation'] = 'changed'
+        self.assertNotEqual(inventory.validate_container(row, role)[0]['mountsSha256'], original)
+
     def test_foreign_identity_mount_and_env_fail_closed(self):
         mutations = {
             'container': lambda row: row.update(Id='f' * 64),
