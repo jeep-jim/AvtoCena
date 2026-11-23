@@ -1,0 +1,54 @@
+name: Prepare filters for the published China catalog
+on:
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/china-serving-filter-index.json']
+permissions:
+  contents: read
+concurrency:
+  group: china-serving-filter-index
+  cancel-in-progress: false
+jobs:
+  prepare:
+    if: github.repository == 'jeep-jim/AvtoCena' && github.event_name == 'push' && github.run_attempt == '1'
+    runs-on: ubuntu-24.04
+    environment: regcloud-staging
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          path: controller
+          fetch-depth: 2
+          persist-credentials: false
+      - name: Verify the operation and approved source
+        working-directory: controller
+        run: |
+          node --input-type=module <<'JS'
+          import {verifyReadonlyInvocation} from './scripts/lib/readonly-marker-invocation.mjs';
+          verifyReadonlyInvocation({root:process.cwd(),env:process.env,
+            markerPath:'.github/market-runs/china-serving-filter-index.json',operation:'prepare-serving-china-filter-index'});
+          JS
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          path: application
+          ref: 073de4c7cd7a51045d92c1e2f8d7367ce51b42d2
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - run: npm ci
+        working-directory: application
+      - name: Check index membership, count and pagination offline
+        working-directory: application
+        run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/prepared-china-filter-index.test.ts
+      - name: Build and read back immutable derived files in REG
+        working-directory: application
+        env:
+          AVTOCENA_CHINA_REGCLOUD_RUNTIME: '1'
+          JSON_STORAGE_DRIVER: object
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_REGION: us-east-1
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+        run: node ../controller/scripts/run-node-with-resources.mjs --import tsx scripts/build-serving-china-filter-index.mts gen_1795239842026_china44871616387
