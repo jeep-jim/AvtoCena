@@ -1,4 +1,4 @@
-"""Exact catalog-18e8 host operations. Imported by a reviewed driver; no activation CLI.
+"""Exact catalog-b4d2 host operations. Imported by a reviewed driver; no activation CLI.
 
 The existing acceptance.mjs owns the transaction order and publication lease.
 Each mutating primitive calls its mandatory live-authority callback first. The
@@ -27,8 +27,8 @@ import time
 import urllib.parse
 
 ROOT = Path(__file__).resolve().parents[3]
-SOURCE = '18e81af30cb9187b139924217a777de1c9819bca'
-TREE = '49de08c52cc0f4b721e4bec96aad8790bebe39e1'
+SOURCE = 'b4d226491bcfa03eca73d72480ff3bd867d3c6fb'
+TREE = '55bbadc7e915ed282668229251b191495c4ca71b'
 BUILD = '07e57453202a22d0ab35f35637be30fe2f3b931ca59f151210002b69164c507b'
 CALCULATION = '4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90'
 INDEX = 'bf2c72cb7a260ef093c0a43c2b0dad9c4c9094a4d6dc3811dd0d7f7626b0d72b'

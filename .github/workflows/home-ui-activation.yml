@@ -1,4 +1,4 @@
-name: Prepare and accept exact home UI catalog-18e8
+name: Prepare and accept exact home UI catalog-b4d2
 on:
   workflow_dispatch:
     inputs:
@@ -13,7 +13,7 @@ permissions:
   contents: read
   actions: read
 concurrency:
-  group: avtocena-home-ui-catalog-18e8
+  group: avtocena-home-ui-catalog-b4d2
   cancel-in-progress: false
 jobs:
   await_current_publications:
@@ -85,7 +85,7 @@ jobs:
           python3 -I -B tests/home-ui-host-driver.test.py
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
-          ref: 18e81af30cb9187b139924217a777de1c9819bca
+          ref: b4d226491bcfa03eca73d72480ff3bd867d3c6fb
           path: application
           persist-credentials: false
           fetch-depth: 1
@@ -96,7 +96,7 @@ jobs:
         working-directory: application
         run: |
           npm ci --no-audit --no-fund
-          node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/prepared-china-filter-index.test.ts tests/catalog-china-common-grid.test.ts tests/catalog-japan-filter-rail.test.ts tests/catalog-market-page-boundary.test.ts tests/catalog-editable-power-scenario.test.ts tests/home-card-payload.test.ts tests/ajes-saved-power-page.test.ts tests/catalog-china-default-showcase.test.ts tests/catalog-market-selection.test.ts tests/china-verified-object-reads.test.ts
+          node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/prepared-china-filter-index.test.ts tests/catalog-china-common-grid.test.ts tests/catalog-japan-filter-rail.test.ts tests/catalog-market-page-boundary.test.ts tests/catalog-editable-power-scenario.test.ts tests/home-card-payload.test.ts tests/ajes-saved-power-page.test.ts tests/catalog-china-default-showcase.test.ts tests/catalog-market-selection.test.ts tests/china-verified-object-reads.test.ts tests/paid-korea-report-contract.test.ts tests/paid-korea-report-reader.test.ts tests/paid-korea-report-recommendations.test.ts tests/paid-korea-report-render.test.ts
       - name: Prepare the existing browser gate outside the application checkout
         shell: bash
         run: |

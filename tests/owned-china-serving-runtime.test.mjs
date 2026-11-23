@@ -1,14 +1,14 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import {
-  checkedChinaServingRelease, chinaCountRelease, chinaFilterRelease,
+  checkedChinaServingRelease, chinaCountRelease, chinaFilterRelease, koreaHistoryRelease,
   chinaServingCalculation, retainedChinaRelease,
 } from '../scripts/lib/owned-china-serving-runtime.mjs';
 
 const health = releaseSha => ({ok:true,service:'avtocena-web',calculationVersion:chinaServingCalculation,releaseSha});
 
 test('the public cut uses only a reviewed runtime that implements the verified power filter', () => {
-  for (const release of [chinaFilterRelease,chinaCountRelease]) {
+  for (const release of [chinaFilterRelease,chinaCountRelease,koreaHistoryRelease]) {
     assert.equal(checkedChinaServingRelease(health(release)),release);
     assert.equal(checkedChinaServingRelease(health(release),{privateStage:true}),release);
   }

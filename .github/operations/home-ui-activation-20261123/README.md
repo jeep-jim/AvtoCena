@@ -1,5 +1,5 @@
-# Catalog search and home activation for 18e81af
-The candidate is `18e81af30cb9187b139924217a777de1c9819bca`. It includes the dealer search, filtered mixed-market previews, the homepage payload change and the verified China index for the accepted 168,662 rows. Its source calculation fingerprint is `07e57453202a22d0ab35f35637be30fe2f3b931ca59f151210002b69164c507b`. The incumbent public pricing identity is `4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90`. The controller checks all 15 changed source records, their exact before/after Git blobs, the full code diff, the retained runtime, the catalog lease and the private encyclopedia binding. The accepted pricing inputs, applications of tariffs and package dependencies are unchanged.
+# Catalog search and home activation for b4d2264
+The candidate is `b4d226491bcfa03eca73d72480ff3bd867d3c6fb`. It includes the dealer search, filtered mixed-market previews, the homepage payload change and the verified China index for the accepted 168,662 rows. Its source calculation fingerprint is `07e57453202a22d0ab35f35637be30fe2f3b931ca59f151210002b69164c507b`. The incumbent public pricing identity is `4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90`. The controller checks all 15 changed source records, their exact before/after Git blobs, the full code diff, the retained runtime, the catalog lease and the private encyclopedia binding. The accepted pricing inputs, applications of tariffs and package dependencies are unchanged.
 
 The retained China source=existing URL returns 503. The controller compares all 24 rows, their prices and the first detail between both runtimes using the retained canonical page. It additionally requires the saved-link alias to return the same complete page on the candidate, 64,605 matching cars in the filtered count, and 48 distinct IDs over the first two filtered pages. The existing 17-route speed gates, dealer/browser checks and rollback transaction remain mandatory.
 
@@ -8,7 +8,7 @@ The retained China source=existing URL returns 503. The controller compares all 
 1. Merge the controller after CI. Start `home-ui-activation.yml` on exact main,
    either by its existing manual SHA input or one marker-only commit at
    `.github/market-runs/home-ui-activation.json` with exactly
-   `{version:1, operation:"prepare-home-ui-catalog-18e8", approvedSourceSha:<main parent>}`.
+   `{version:1, operation:"prepare-home-ui-catalog-b4d2", approvedSourceSha:<main parent>}`.
    Do not combine another changed file or preceding commit with this push.
 2. The runner checks matching successful CI, builds the exact search candidate and probes actual
    Alpine Node 24.22.1, the immutable public model asset and applied resource heap.
