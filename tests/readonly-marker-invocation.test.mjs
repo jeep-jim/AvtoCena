@@ -105,3 +105,19 @@ test('a stale marker in a later commit and unknown marker fields or operations a
     assert.throws(() => verifyReadonlyInvocation(profile), mode === 'stale' ? /approved_parent/ : /marker_contract/);
   });
 });
+
+test('an approval fetch may hide the original traversal edge while the exact parent and both trees remain verifiable', async () => {
+  await fixture(async ({profile, accepted, push, root, directory}) => {
+    await push();
+    const checkout = path.join(directory, 'controller');
+    await execute('git', ['clone', '--quiet', '--depth=2', pathToFileURL(root).href, checkout]);
+    assert.equal(verifyReadonlyInvocation({...profile, root:checkout}).approvedSourceSha, accepted);
+    await fs.writeFile(path.join(root, 'next-approval.json'), '{}');
+    await git(root, ['add', 'next-approval.json']);
+    await git(root, ['commit', '-qm', 'next reviewed approval']);
+    const next = await git(root, ['rev-parse', 'HEAD']);
+    await git(checkout, ['fetch', '--no-write-fetch-head', '--depth=2', 'origin', next]);
+    assert.equal(await git(checkout, ['rev-list', '--parents', '-n', '1', 'HEAD']), profile.env.GITHUB_SHA);
+    assert.equal(verifyReadonlyInvocation({...profile, root:checkout}).approvedSourceSha, accepted);
+  });
+});

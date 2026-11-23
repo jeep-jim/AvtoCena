@@ -234,6 +234,6 @@ if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.ur
   }catch(error){if(error.homeUiOutcome)console.log(JSON.stringify(error.homeUiOutcome));
     const safeCode=['ETIMEDOUT','ECONNRESET','ENOTFOUND','ENOENT','EACCES','ENOSPC','EEXIST','UND_ERR_CONNECT_TIMEOUT']
       .find(code=>code===error.code||code===error.cause?.code);
-    console.error(/^home_[a-z0-9_:-]+$/.test(error.message||'')?error.message:
+    console.error(/^(?:home_[a-z0-9_:-]+|readonly_invocation_[a-z_]+)$/.test(error.message||'')?error.message:
       safeCode?'home_activation_'+safeCode.toLowerCase():error.name==='TimeoutError'?'home_activation_transport_timeout':'home_activation_failed');process.exitCode=1;}
 }
