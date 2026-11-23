@@ -1,0 +1,31 @@
+{
+  "passed": true,
+  "synthetic": true,
+  "base": "4b731016fbee1036e948a3a8c98b36b77285f614",
+  "sourceSha256": {
+    "journal": "4c943357f6d2cf516033c97d090332e0f39bb200f598c19babdb42f42b5d0e87",
+    "snapshot": "bcc1ee5bf23fa9a5e1cd2c327083ac05848dd584718f608036d82c3a1a7eba5d"
+  },
+  "journal": {
+    "chunks": 172,
+    "encodedBytes": 602880272,
+    "rawBytes": 8606737280,
+    "readChunks": 172,
+    "maxConcurrentReads": 1,
+    "maxStoredChunkBytes": 12636440,
+    "cursorAfterAppend": 173,
+    "appendedByConditionalHead": true,
+    "allChunkChecksumsAndCensusVerified": true
+  },
+  "snapshot": {
+    "bytes": 21474836497,
+    "parts": 1281,
+    "maxConcurrentReads": 1,
+    "maxRawPartBytes": 16777216,
+    "allPartChecksumsVerified": true
+  },
+  "supplierRequests": 0,
+  "externalStorageWrites": 0,
+  "elapsedMs": 124770,
+  "maxRssKiB": 747020
+}

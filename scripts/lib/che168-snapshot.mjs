@@ -7,7 +7,7 @@ export function snapshotBinding(config) {
   if (config?.version !== 1 || config.host !== 'https://autobase-barrett.auto-api.com'
     || !/^\d{4}-\d{2}-\d{2}$/.test(config.date) || config.filename !== 'active_offer.csv'
     || config.delimiter !== '|' || !Number.isSafeInteger(config.initialCursor) || config.initialCursor < 0
-    || !Number.isSafeInteger(config.bytes) || config.bytes <= 0 || config.bytes > 20 * 1024**3
+    || !Number.isSafeInteger(config.bytes) || config.bytes <= 0
     || !/^"[^"\r\n]+"$/.test(config.etag) || !Number.isFinite(Date.parse(config.modifiedAt))) {
     throw Error('auto_api_invalid_snapshot_config');
   }
@@ -22,7 +22,7 @@ function verifyPart(descriptor, raw, index, config) {
 export async function archiveChe168Snapshot({config, storage, password, fetchImpl=fetch, onProgress=()=>{}}) {
   const binding = snapshotBinding(config), prefix = `catalog/provider-snapshots/che168/${binding}`;
   if (!storage.putBinary || !storage.getBinary) throw Error('auto_api_snapshot_binary_storage_required');
-  const count = Math.ceil(config.bytes / CHUNK), parts = new Array(count);
+  const count = Math.ceil(config.bytes / CHUNK), parts = [];
   const archived=await storage.readJson(`${prefix}/manifest.json`,null);
   if(archived){
     if(archived.complete!==true||archived.binding!==binding||snapshotBinding(archived.config)!==binding
