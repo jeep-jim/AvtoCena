@@ -10,7 +10,8 @@ const contract = fs.readFileSync(
   new URL("docs/catalog-source-qualification-v1.md", root),
   "utf8",
 );
-const roadmap = fs.readFileSync(new URL("roadmap.md", root), "utf8");
+const sourcePolicy = fs.readFileSync(new URL("docs/roadmap/source-policy.md", root), "utf8");
+const roadmapIndex = fs.readFileSync(new URL("docs/roadmap/README.md", root), "utf8");
 const fieldAuditSummary = JSON.parse(
   fs.readFileSync(new URL("data/catalog/source-field-audit-v1-summary.json", root), "utf8"),
 );
@@ -50,8 +51,16 @@ test("qualification contract requires both source-level and offer-level proof", 
   assert.match(contract, /Квалификация площадки не означает автоматического доверия/);
   assert.match(contract, /Offer-level exact gate/);
   assert.match(contract, /не удаляют и не пишут в production Object Storage/);
-  assert.match(roadmap, /Новый курс: квалификация источников для шести рынков/);
-  assert.match(roadmap, /Не продолжать бесконечное точечное лечение прежних площадок/);
+  assert.match(roadmapIndex, /\]\(source-policy\.md\)/);
+  assert.ok(Buffer.byteLength(sourcePolicy, "utf8") <= 10 * 1024, "current policy stays bounded; no historical roadmap is loaded");
+  assert.ok(sourcePolicy.split("\n").length <= 100);
+  assert.match(sourcePolicy, /source-level/);
+  assert.match(sourcePolicy, /offer-level/);
+  assert.match(sourcePolicy, /publishAllowed=false/);
+  assert.match(sourcePolicy, /не удаляют и не пишут данные в production Object Storage/);
+  assert.match(sourcePolicy, /Япония и свежий Зелёный угол не входят в текущие изменения/);
+  assert.match(sourcePolicy, /\]\(\.\.\/catalog-source-qualification-v1\.md\)/);
+  assert.match(sourcePolicy, /\]\(\.\.\/\.\.\/data\/catalog\/source-qualification-v1\.json\)/);
 });
 
 test("historical field audit stays no-write while later restrictive decisions remain valid", () => {

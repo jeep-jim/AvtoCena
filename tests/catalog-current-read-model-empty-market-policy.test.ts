@@ -27,7 +27,7 @@ const homeClient = fs.readFileSync(new URL("../apps/web/components/home/HomePage
 test("homepage never erases an admitted market while a compact read-model shard catches up", () => {
   assert.doesNotMatch(homeClient, /isCrediblePublicOffer\(raw/);
   assert.match(homeClient, /nextMarketItems\.length \? nextMarketItems : previousMarketItems/);
-  assert.match(homeClient, /incomingCount > 0 \? incomingCount : previousCount/);
+  assert.match(homeClient, /incomingCount\s*>\s*0\s*\?\s*incomingCount\s*:\s*previousCount/);
   assert.match(homeClient, /incomingTotal > 0 \? incomingTotal : previousCount/);
 });
 

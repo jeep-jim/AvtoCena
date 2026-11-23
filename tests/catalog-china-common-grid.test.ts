@@ -82,7 +82,7 @@ test('selected China shares normal grid and canonical page href; other market ra
  assert.doesNotMatch(page,/Открыть полный список|data-china-default-showcase/);
  assert.match(page,/selectedMarket \? <CatalogLoadMore/);
  assert.match(page,/preparedCut:chinaCut.generationId/);
- assert.match(page,/readPreparedChinaHomeCards\(OVERVIEW_CARDS\)/);
+ assert.match(page,/readPreparedChinaHomeCards\(OVERVIEW_CARDS,\{city:common\.city\}\)/);
  assert.match(ordinaryGrid,/data-catalog-batch=\{batch.page\}[^\n]*grid-cols-2[^\n]*md:grid-cols-3 xl:grid-cols-4/);
  assert.match(ordinaryGrid,/<CatalogPagination/);
  assert.equal(dealerBrowsingHref('/cars?market=china&page=2&preparedCut='+generationId,null),'/cars/china?page=2&preparedCut='+generationId);

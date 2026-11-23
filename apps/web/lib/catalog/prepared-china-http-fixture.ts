@@ -17,6 +17,7 @@ import {createPreparedCoverageIdsDigest} from './prepared-price-coverage';
 import {DELIVERY_TARIFF_VERSION} from './city-delivery';
 import {compileChinaPartDispatch,createChinaSelectorFacets,createChinaSelectorPage} from './prepared-china-streaming-selector';
 import {assertPreparedChinaFilterEntry} from './prepared-china-filter-index';
+import {selectServingChinaFilterPage,servingChinaFilterBinding} from './serving-china-filter-index';
 import {balanceBusinessRows,businessOrder,sortCatalogRows,MARKET_DIVERSITY_WINDOW_PAGES,MARKET_PAGE_SIZE} from './market-page';
 
 type IndependentRead=Pick<IndependentFixturePublication,'market'|'observe'|'openChinaPrepared'>;
@@ -58,6 +59,10 @@ export function withPreparedChinaRegcloudPreview<T>(regcloud:ChinaStageObjectFil
 }
 export const preparedChinaNormalRegcloudEnabled=()=>!scope.getStore()&&chinaRegcloudRuntimeConfigured();
 export const hasPreparedChinaHttpFixture=()=>!!scope.getStore()||preparedChinaNormalRegcloudEnabled();
+/** The saved catalog and the default China route read the same accepted generation. */
+export function unsupportedPreparedChinaSource(source:string|null|undefined,stock:string|null|undefined) {
+ return Boolean(stock || (source && source !== 'existing'));
+}
 export const hasIndependentChinaHttpFixture=()=>!!scope.getStore()?.independentChina||preparedChinaNormalRegcloudEnabled();
 export const preparedChinaIndexedModelOnly=()=>scope.getStore()?.indexedModelOnly===true||preparedChinaNormalRegcloudEnabled();
 const preparedOffers=new WeakMap<VehicleOffer,()=>Promise<void>>();
@@ -228,7 +233,7 @@ function compatibilityRows(s:OpenFixture){
 /** Bounded correctness fixture, not a full-feed performance path. Search
  * reuses same-cut projections and the existing exact filters/order/paging. */
 export async function readPreparedChinaCompatibility(params:CatalogSearchParams,options:{
- countOnly:boolean;includeFacets:boolean;marketPage:boolean;unsupported:boolean;navigationFacets?:true;expectedGeneration?:string|null;
+ countOnly:boolean;includeFacets:boolean;marketPage:boolean;unsupported:boolean;navigationFacets?:true;indexedOnly?:boolean;expectedGeneration?:string|null;
 }){
  if(!hasIndependentChinaHttpFixture()||params.market!=='china')return null;
  try{
@@ -282,7 +287,13 @@ export async function readPreparedChinaCompatibility(params:CatalogSearchParams,
   const query=isDefaultMarketPage?{...params,city:undefined}:params;
   if(!options.includeFacets||options.navigationFacets||options.countOnly&&!options.marketPage){
    const countOnly=options.countOnly&&!options.marketPage;
-   const selected=await s.snapshot.filterPage(query,{start,pageSize,countOnly});
+   const window={start,pageSize,countOnly};
+   let selected=await s.snapshot.filterPage(query,window);
+   if(!selected && !s.snapshot.hasFilterIndex && preparedChinaNormalRegcloudEnabled()){
+    const storage=new ObjectJsonStorage();
+    selected=await selectServingChinaFilterPage(s.snapshot,servingChinaFilterBinding,query,window,
+      (key,limit)=>storage.getBinaryBounded(key,limit));
+   }
    if(selected){
     if(countOnly){await s.assertCurrent();return {generationId,total:selected.total,items:[],marketCountInfo:{}};}
     const predicate=await compilePreparedChinaCompatibilityPredicate(query);
@@ -308,6 +319,9 @@ export async function readPreparedChinaCompatibility(params:CatalogSearchParams,
     return {generationId,total:selected.total,page,pageSize,items,usedIndexShards:[],...(options.navigationFacets?{facets:s.snapshot.navigationFacets}:{})};
    }
   }
+  // A cross-market preview must stay bounded when an old generation or an
+  // unsupported sort has no matching index. The single-market route remains exact.
+  if(options.indexedOnly)return null;
   const width=pageSize*MARKET_DIVERSITY_WINDOW_PAGES,offset=Math.floor(start/width)*width;
   const limit=options.countOnly&&!options.marketPage?0:isDefaultMarketPage?offset+width:start+pageSize;
   const facetQuery=options.navigationFacets?{market:'china',hasPrice:'yes'}:options.includeFacets&&!options.marketPage&&!options.countOnly?params:undefined;
