@@ -3,6 +3,7 @@ import {getOfferDetailRecord} from '@/lib/catalog/offer-page-data';
 import {getUnavailableOffer,publicOffer,searchOffers} from '@/lib/catalog/storage';
 import {readAjesPublic} from '@/lib/catalog/ajes-public';
 import {usesAjesMarket} from '@/lib/catalog/ajes-market-selection';
+import {readCatalogMarketPage} from '@/lib/catalog/market-page';
 import {readAjesCount} from '@/lib/catalog/ajes-catalog';
 import {readRelatedModelFamily} from '@/lib/catalog/related-model-family';
 import {selectRelatedOfferGroups,isRenderableRelatedOffer} from '@/lib/catalog/related-offer-selection';
@@ -40,6 +41,12 @@ export async function loadRelatedRecommendations({id,markets}:{id:string;markets
     try {
       const ajes=params.market==='korea'?await usesAjesMarket('korea')
         :params.market==='japan'||(/^ajes-(?:korea|china)-/.test(current.id)&&params.market===current.market);
+      if (params.market === 'korea' && !ajes) {
+        // Reuse the visible catalog page for the country and model rails. Two
+        // cold related searches otherwise contend for the same single admission slot.
+        const page = await readCatalogMarketPage({market:'korea', page:1, make:params.make, model:params.model});
+        return {items:page.items, total:page.total};
+      }
       return ajes
         ? await readAjesPublic({table:params.market==='korea'?'korea':params.market==='china'?'china':'stats',make:params.make,model:params.model?(/^ajes-(?:stats|korea|china)-/.test(current.id)?String(current.model):params.model):undefined,pageSize:24}).then(result=>({items:result.items,total:null}))
         : await searchOffers(params,48,'related');
