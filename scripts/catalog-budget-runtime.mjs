@@ -2,7 +2,7 @@ import {restoreReleaseEncyclopedia} from './encyclopedia/restore-calculation-ind
 import fs from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import path from 'node:path';
-import {pathToFileURL} from 'node:url';
+import {fileURLToPath,pathToFileURL} from 'node:url';
 import {spawn} from 'node:child_process';
 
 export async function liveBudgetRelease(fetchImpl=fetch) {
@@ -39,6 +39,13 @@ export async function verifyLiveCalculationVersion(expected,fetchImpl=fetch){
  if(!response.ok)throw Error('budget_calculator_health_http_'+response.status);
  const health=await response.json();
  if(health.ok!==true || health.calculationVersion!==expected)throw Error('budget_calculation_version_mismatch');
+}
+// The controller lives outside the exact deployed checkout. Its portable
+// launcher samples current resources for this worker and every cold probe.
+export function budgetWorkerInvocation(root,args,{env=process.env}={}) {
+ const launcher=fileURLToPath(new URL('./run-node-with-resources.mjs',import.meta.url));
+ return {command:process.execPath,args:[launcher,...args],options:{cwd:path.resolve(root),
+  env:{...env,CATALOG_NODE_RESOURCE_LAUNCHER:launcher}}};
 }
 async function main(){
   if(process.argv[2]==='--resolve'){
@@ -83,7 +90,8 @@ async function main(){
     // Run the exact deployed calculator and its existing independent cold-process
     // parity probes. That script permits only disposable cache/selector writes.
     await new Promise((resolve,reject)=>{
-      const child=spawn(process.execPath,['--import','tsx','scripts/catalog-budget-shared-warmup.mjs'],{cwd:root,stdio:'inherit',env:process.env});
+      const invocation=budgetWorkerInvocation(root,['--import','tsx','scripts/catalog-budget-shared-warmup.mjs']);
+      const child=spawn(invocation.command,invocation.args,{...invocation.options,stdio:'inherit'});
       child.on('error',reject);child.on('exit',(code,signal)=>code===0?resolve():reject(Error('budget_warmup_failed_'+(code??signal))));
     });
     await verifyBudgetContext(context);
