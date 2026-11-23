@@ -44,6 +44,8 @@ jobs:
           node --test tests/catalog-interaction-acceptance.test.mjs
       - name: Feed preparation guards
         run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/catalog-editorial-runtime.test.mjs tests/catalog-owned-china-verification.test.mjs
+      - name: Saved UAE cursor and archive guards
+        run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/catalog-raw-session.test.ts tests/catalog-raw-coordination.test.ts tests/catalog-intake-checkpoint.test.ts tests/catalog-dubicars-cursor-guard.test.mjs tests/catalog-saved-intake-readonly-probe.test.mjs tests/catalog-paid-encar-technical-repair.test.ts tests/catalog-publication-memory.test.ts
       - name: Complete regression suite
         run: npm test
       - name: Customs tests
