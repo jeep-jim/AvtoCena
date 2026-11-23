@@ -365,11 +365,6 @@ async function assertCurrentKoreaPublicationSource() {
   });
 }
 const sourceRefreshStates = catalogSourceRefreshStates(generation.payloads);
-const europeReplacement=market==='europe' && generation.payloads.some(({report})=>
-  report?.durableIntakeArchive?.market==='europe' && report.completed===true &&
-  report.qualityStatus==='configured_routes_finished' && report.partialSources?.length===0 &&
-  report.sources?.length===1 && report.sources[0].sourceId==='autoscout_europe_open' &&
-  report.sources[0].stopReason==='source_finished' && report.sources[0].observations>0);
 const retiredEuroRow=row=>market==='europe' && row.sourceId==='mobile_de_open';
 const completeChe168Inventory = generation.payloads.some(payload => {
   const report=payload.report,source=report?.sources?.find(row=>row.sourceId==='autohome_used_china_open');
@@ -380,7 +375,6 @@ const completeChe168Inventory = generation.payloads.some(payload => {
 });
 const confirmedWithdrawals = catalogConfirmedWithdrawalIndex(generation.payloads, market);
 const freshOfferMetaById = new Map();
-const outsideFreshEurope=row=>europeReplacement && !freshOfferMetaById.has(String(row.id));
 let freshOfferMissingIdObservations = 0;
 for (const offer of generation.offers) {
   const id = String(offer?.id || "").trim();
@@ -422,7 +416,10 @@ let currentRetainedRows = [...existingInventory.values()].filter((row) => {
   // removals and quarantine. Do not resurrect an older retained revision.
   // The purchased Korea snapshot owns its prices and gallery even when an
   // older parser observed the same Encar ID. Never merge those revisions.
-  if (paidEncarReport || retiredEuroRow(row) || outsideFreshEurope(row)) return false;
+  // AutoScout's public result window is not a complete inventory snapshot.
+  // Absence from it is not a withdrawal: retain eligible saved rows under the
+  // ordinary dated policy, even when all configured listing routes finished.
+  if (paidEncarReport || retiredEuroRow(row)) return false;
   if (completeChe168Inventory && row.sourceId==='autohome_used_china_open' && !freshOfferMetaById.has(String(row.id))) return false;
   if (row?.status !== "active" || catalogOfferWithdrawnByReport(row, confirmedWithdrawals)) return false;
   const decision = catalogRetentionDecision({
@@ -735,7 +732,7 @@ const expiredPublicIds = new Set(currentMarketRows.filter(row => catalogOfferRet
 const withdrawnSourceCounts = countSources(currentMarketRows.filter(row => catalogOfferWithdrawnByReport(row, confirmedWithdrawals)
   // The same dated 14/30-day policy already removed these candidates above.
   // Keeping them in the safety baseline made legitimate expiry block all future publication.
-  || retiredEuroRow(row) || outsideFreshEurope(row) || expiredPublicIds.has(row.id) || !sourceInventoryInScope(row)));
+  || retiredEuroRow(row) || expiredPublicIds.has(row.id) || !sourceInventoryInScope(row)));
 const replaceInternalSourceIds = new Set([
   ...(market==='europe'?['mobile_de_open']:[]),
   ...currentRetainedRows.map(offer => String(offer?.sourceId || "")),
@@ -752,8 +749,7 @@ orderedCandidates.length = 0;
 selected.length = 0;
 v2Selection.selected.length = 0;
 candidatesById.clear();
-// Per-ID evidence has been copied into the immutable audit report. The Europe
-// replacement baseline above was the last consumer of the preparation maps.
+// Per-ID evidence has been copied into the immutable audit report.
 freshOfferMetaById.clear();
 freshOfferRejectionReasonById.clear();
 const purgedForbiddenInternalByMarket = Object.fromEntries(PUBLIC_CATALOG_MARKETS.map(id => [id, 0]));
