@@ -17,10 +17,15 @@ jobs:
           fetch-depth: 2
           persist-credentials: false
       - name: Validate marker before reading the serving process
+        id: marker
         run: |
           node --input-type=module <<'JS'
           import {verifyReadonlyInvocation} from './scripts/lib/readonly-marker-invocation.mjs';
-          verifyReadonlyInvocation({root:process.cwd(),markerPath:'.github/market-runs/catalog-serving-observation.json',operation:'read-serving-catalog-process'});
+          import fs from 'node:fs';
+          const markerPath='.github/market-runs/catalog-serving-observation.json';
+          const scoped=JSON.parse(fs.readFileSync(markerPath,'utf8')).operation==='read-serving-catalog-guest-parity';
+          verifyReadonlyInvocation({root:process.cwd(),markerPath,operation:scoped?'read-serving-catalog-guest-parity':'read-serving-catalog-process'});
+          fs.appendFileSync(process.env.GITHUB_OUTPUT,'scope='+scoped+'\n');
           JS
       - name: Read serving process, local health and anonymous counters
         env:
@@ -37,6 +42,10 @@ jobs:
           timeout 90 ssh -F /dev/null -T -i "$key" -o BatchMode=yes -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$known" -o UpdateHostKeys=no -o ConnectTimeout=10 -o ClearAllForwardings=yes root@151.248.113.177 '/usr/bin/env -i PATH=/usr/bin:/bin /usr/bin/python3 -I -B -' < .github/operations/catalog-incident/read-serving.py > serving-observation.json
           python3 .github/operations/catalog-incident/build-readonly-inventory.py serving-observation.json > "$RUNNER_TEMP/serving-inventory-reader.py"
           timeout 90 ssh -F /dev/null -T -i "$key" -o BatchMode=yes -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$known" -o UpdateHostKeys=no -o ConnectTimeout=10 -o ClearAllForwardings=yes root@151.248.113.177 '/usr/bin/env -i PATH=/usr/bin:/bin /usr/bin/python3 -I -B -' < "$RUNNER_TEMP/serving-inventory-reader.py" > current-serving-inventory.json
+          if [[ "${{ steps.marker.outputs.scope }}" == true ]]; then
+            timeout 140 ssh -F /dev/null -T -i "$key" -o BatchMode=yes -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$known" -o UpdateHostKeys=no -o ConnectTimeout=10 -o ClearAllForwardings=yes root@151.248.113.177 '/usr/bin/env -i PATH=/usr/bin:/bin SSH_CONNECTION="$SSH_CONNECTION" /usr/bin/python3 -I -B -' < .github/operations/catalog-incident/read-home-guest-scope.py > current-guest-scope.json
+            cat current-guest-scope.json
+          fi
           cat serving-observation.json
       - uses: actions/upload-artifact@v4
         with:
@@ -44,4 +53,5 @@ jobs:
           path: |
             serving-observation.json
             current-serving-inventory.json
+            current-guest-scope.json
           retention-days: 7
