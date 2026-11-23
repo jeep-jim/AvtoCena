@@ -20,7 +20,7 @@
 | Япония | Нового ночного сбора не обнаружено; свежий archive отдельно не проверялся | Нового ночного запуска публикации не обнаружено; текущий срез не трогать |
 | Зелёный угол | [45077330661](https://github.com/jeep-jim/AvtoCena/actions/runs/45077330661): 509 исходных → 503 в проверенном срезе | Да: 23.11 05:23 UTC+7, запись и readback; внеплановый повтор не нужен |
 
-REG подтверждён первичными журналами записи/проверки перечисленных запусков; отдельное прямое чтение всего REG не выполнялось. Не смешивать наблюдения/события и количество уникальных машин, а также сбор и публикацию.
+В хранилище REG проверены 44 из 44 объектов ОАЭ и 97 из 97 объектов Европы. Курсор ОАЭ 320 763 совпал с началом сохранённого обновления до 328 970. [Проверка архивов](https://github.com/jeep-jim/AvtoCena/actions/runs/45128124491).
 
 ## Расписание
 
@@ -38,13 +38,16 @@ REG подтверждён первичными журналами записи/
 ## Что сделано и что дальше
 
 Приняты [PR 1801](https://github.com/jeep-jim/AvtoCena/pull/1801), [1802](https://github.com/jeep-jim/AvtoCena/pull/1802), [1803](https://github.com/jeep-jim/AvtoCena/pull/1803), [1804](https://github.com/jeep-jim/AvtoCena/pull/1804). Их успешный CI не означает публикацию данных или установку runtime. Сайт остаётся на `22867cbcfaee27b2e8917b6bf880e44827f67b60`; main целиком не выпускать.
-Приняты [1806](https://github.com/jeep-jim/AvtoCena/pull/1806) (защита UAE cursor) и [1808](https://github.com/jeep-jim/AvtoCena/pull/1808) (точный read-only saved-feed probe); сам probe ещё не запускали. Это не подтверждает восстановление UAE.
-[1805](https://github.com/jeep-jim/AvtoCena/pull/1805) (`30e587e`) green, merge удержан до Korea. [1810](https://github.com/jeep-jim/AvtoCena/pull/1810) теперь `7d9ba69`; новый [CI 45114659977](https://github.com/jeep-jim/AvtoCena/actions/runs/45114659977) идёт, прежний `767c357` — 3 447 PASS. Merge запускает current-read-models writer, поэтому не пересекать с Korea. [1811](https://github.com/jeep-jim/AvtoCena/pull/1811) принят, CI 3 446 PASS; producer/public China generation ещё не обновлены.
+Архивы приняты в повторную публикацию без обращения к поставщикам. [ОАЭ](https://github.com/jeep-jim/AvtoCena/actions/runs/45129017812) и [Европа](https://github.com/jeep-jim/AvtoCena/actions/runs/45130876633) на момент проверки 23 ноября готовят цены и запись. [Выкладка главной и китайских подборок](https://github.com/jeep-jim/AvtoCena/actions/runs/45134976110) запущена и ждёт завершения этих двух задач.
 
-1. Завершённый запуск Korea `45104426224`; проверить terminal job, `published`/`publicationError`, generation, `technicalFieldCoverage` и `freshOfferAudit`, затем Morning 76/998, Seltos 193/1598 и фильтр до 160 л.с. на сайте. Не складывать 46 649 новых наблюдений с прежними 46 862 публичными строками; итог берётся из принятого отчёта. Не запускать дубликат и не менять runtime 22867.
-2. Повторять UAE/Europe из сохранённого завершённого intake после исправления причины, сохраняя все проверки и CAS. Общая независимость рынков остаётся открытой.
-3. Китай: ветка `fix/china-publication-source-20261122`, SHA `b209f4f27ad84eae2878c4535e0daa269593a981`, 15 адресных тестов PASS. Adapter только подготавливает проверенный вход; native admission, active/retirement proof, price seal, private preview и CAS ещё нужны. Индекс — [performance.md](performance.md).
-4. Грузия: bridge возвращает 502 после `fetch_failed`; это не доказательство блокировки поставщика. Уточнить безопасные `error.name`/`cause.code` worker до повторного сбора.
-5. Overview последнего запуска подготовлен для старого поколения на 23/24/25 ноября. Общая подготовка цен завершилась `publication_in_progress`; ускорение всех фильтров и страниц не подтверждено.
+Корея проверена на сайте. У фильтра до 160 л.с. 8 130 результатов, на первой странице 24 карточки. При повторных запросах серверное время одной страницы менялось от 18 мс до 15,1 с. Европа после одного ответа HTTP 500 вернула 2 765 результатов и 24 карточки за 216 мс серверного времени.
+
+Публичный Китай выдаёт 168 662 автомобиля. Для этого среза [построен индекс](https://github.com/jeep-jim/AvtoCena/actions/runs/45129166147) с 64 605 совпадениями до 160 л.с. [Проверка сборки 383bf00](https://github.com/jeep-jim/AvtoCena/actions/runs/45134994292) подтвердила 48 уникальных карточек на двух страницах. Первый подсчёт занял 12,12 с, повторный 1,16 с. Отдельно [начата сверка свежих 283 583 записей источника с опубликованными машинами](https://github.com/jeep-jim/AvtoCena/actions/runs/45136291794).
+
+GitHub вывел в очереди 28 старых запусков с нулём заданий. Для каждого обе операции отмены вернули HTTP 409. Отменено 0. Перед переключением сайта контроллер заново сверяет каждый запуск и наличие назначенных заданий. [Обычная отмена](https://github.com/jeep-jim/AvtoCena/actions/runs/45130128516) и [принудительная отмена](https://github.com/jeep-jim/AvtoCena/actions/runs/45130287940).
+
+По Грузии в последнем сборе AutoPapa остановился на странице 297 с HTTP 503. Для MyAuto мост вернул HTTP 502. На сайте продолжает действовать предыдущий срез. [Журнал источников](https://github.com/jeep-jim/AvtoCena/actions/runs/45076431110).
+
+Открытые изменения распределения памяти видны в [PR 1805](https://github.com/jeep-jim/AvtoCena/pull/1805) и [PR 1810](https://github.com/jeep-jim/AvtoCena/pull/1810).
 
 [Prepared power census](../audits/2026-11-23-korea-prepared-power-coverage.json): 46 649 unique / 46 073 hp. Из 576 без mapped hp: 311 missing, 218 total/ICE conflict, 47 identity conflict; у 263 source total hp exact. Нельзя приписывать все пропуски поставщику. Новый B4 mapper patch готовится отдельно, frozen recovery его не получает.
