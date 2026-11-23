@@ -52,7 +52,7 @@ jobs:
           persist-credentials: false
       - name: Verify the model data for the serving releases
         working-directory: retained
-        run: git fetch --no-tags --depth=1 origin 22867cbcfaee27b2e8917b6bf880e44827f67b60 0509e76cb02523157c98804c52edd7eb784916ba
+        run: git fetch --no-tags --depth=1 origin 22867cbcfaee27b2e8917b6bf880e44827f67b60 0509e76cb02523157c98804c52edd7eb784916ba 18e81af30cb9187b139924217a777de1c9819bca
       - name: Install and verify both readers
         run: |
           (cd source && npm ci --no-audit --no-fund)
@@ -64,7 +64,7 @@ jobs:
             fi
           done
           cd source
-          node --import tsx --test tests/owned-china-publication-source.test.mjs tests/owned-china-active-coverage.test.mjs tests/che168-replica-witness.test.ts tests/owned-china-frozen-pricing.test.mjs tests/owned-china-stage-invocation.test.mjs
+          node --import tsx --test tests/owned-china-publication-source.test.mjs tests/owned-china-active-coverage.test.mjs tests/che168-replica-witness.test.ts tests/owned-china-frozen-pricing.test.mjs tests/owned-china-stage-invocation.test.mjs tests/owned-china-serving-runtime.test.mjs
       - name: Price, verify and save the private China generation
         working-directory: source
         env:
