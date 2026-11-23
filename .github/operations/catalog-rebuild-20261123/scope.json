@@ -1,0 +1,238 @@
+{
+  "version": 1,
+  "repository": "jeep-jim/AvtoCena",
+  "repositoryId": 1289722938,
+  "baselineSha": "bd7dc65998cd6ab062f12d01145ff2de6c3ae6e3",
+  "workflows": [
+    {
+      "path": ".github/workflows/accept-owned-china-generation.yml",
+      "blobSha": "cab7964af325dc8d112a6e923eebc792e067b687",
+      "reason": "Acquires the catalog publication lease and CAS-switches the public China control.",
+      "cancelActive": true
+    },
+    {
+      "path": ".github/workflows/backfill-budget-count-index.yml",
+      "blobSha": "89d21c3e2c615f9ef50a84056b43bd251807d103",
+      "reason": "Writes the compact budget count index under the read-model repair lease; preserves calculation engine code.",
+      "cancelActive": true
+    },
+    {
+      "path": ".github/workflows/catalog-autonomy-watchdog.yml",
+      "blobSha": "e5e684963372361d3e2e3c5b9aa0aa436f79fb74",
+      "reason": "Can dispatch collectors/cleanup, rerun failed jobs and write recovery state.",
+      "cancelActive": true
+    },
+    {
+      "path": ".github/workflows/catalog-current-read-models.yml",
+      "blobSha": "fbc53aed3d64dba79f65cd3b9367533a5ec658ba",
+      "reason": "Rebuilds current public projections, offer shards and overview for the active generation.",
+      "cancelActive": true
+    },
+    {
+      "path": ".github/workflows/catalog-market-refresh.yml",
+      "blobSha": "27b79e0ca5c0e8b7f7143caf4ad88c8f659c462b",
+      "reason": "Reusable source intake, raw archive, market publication and catalog retention chain.",
+      "cancelActive": true
+    },
+    {
+      "path": ".github/workflows/catalog-overview-read-model.yml",
+      "blobSha": "8e734edaf8a99e03d20d57c06c21fd341d07456d",
+      "reason": "Writes the active-generation overview and current overview alias.",
+      "cancelActive": true
+    },
+    {
+      "path": ".github/workflows/catalog-paid-encar-refresh.yml",
+      "blobSha": "0c1faa787be397101e94ecd02a3d56c0d1afb6ab",
+      "reason": "Reusable paid Encar snapshot collector/restorer, then invokes the market publisher.",
+      "cancelActive": true
+    },
+    {
+      "path": ".github/workflows/catalog-prepare-owned-china.yml",
+      "blobSha": "33a199e838cda395075c413de46c8f5f3072f142",
+      "reason": "Materializes saved Che168 changes, archives intake and moves the prepared head.",
+      "cancelActive": true
+    },
+    {
+      "path": ".github/workflows/catalog-refresh-china.yml",
+      "blobSha": "86e2ee487e5eecbb44809bc95fb42f619bd95625",
+      "reason": "Downloads paid Che168 changes to durable raw storage; manual recovery also calls the legacy publisher.",
+      "cancelActive": true
+    },
+    {
+      "path": ".github/workflows/catalog-refresh-europe.yml",
+      "blobSha": "772c07131d8b22b7ac13b55a5d2a692ab72be1aa",
+      "reason": "Scheduled, marker and manual entrypoint into the catalog collector/publisher reusable workflow.",
+      "cancelActive": true
+    },
+    {
+      "path": ".github/workflows/catalog-refresh-georgia.yml",
+      "blobSha": "98df9bc90308a4e9f9db5aee634132420f53c5f2",
+      "reason": "Scheduled, marker and manual entrypoint into the catalog collector/publisher reusable workflow.",
+      "cancelActive": true
+    },
+    {
+      "path": ".github/workflows/catalog-refresh-green.yml",
+      "blobSha": "a5940ca9d3fd36ebf09b86b3bdafc95680766ad1",
+      "reason": "Replaces the Green Corner current inventory and writes history and operation metadata.",
+      "cancelActive": true
+    },
+    {
+      "path": ".github/workflows/catalog-refresh-korea.yml",
+      "blobSha": "c750ffb9d1abe2a1bb738c59a9b005ca73188286",
+      "reason": "Scheduled and marker entrypoint into the paid Encar collector and publisher.",
+      "cancelActive": true
+    },
+    {
+      "path": ".github/workflows/catalog-refresh-uae.yml",
+      "blobSha": "debebbf18ef4ee79d2e697810f41b6a989c1cd52",
+      "reason": "Scheduled, marker and manual entrypoint into the catalog collector/publisher reusable workflow.",
+      "cancelActive": true
+    },
+    {
+      "path": ".github/workflows/catalog-storage-cleanup.yml",
+      "blobSha": "af92ed4d0944a2f085c5861327649b98f92fa617",
+      "reason": "Acquires the catalog lease, plans and applies object deletion, then saves maintenance metadata.",
+      "cancelActive": true
+    },
+    {
+      "path": ".github/workflows/catalog-translate-descriptions.yml",
+      "blobSha": "186e4561ba2092bbfc37f8cbc107d6d0113e6c32",
+      "reason": "Writes the active catalog specification translation cache.",
+      "cancelActive": true
+    },
+    {
+      "path": ".github/workflows/china-staged-activate.yml",
+      "blobSha": "c561e65144ee94842bb4ff2f83b8e09a8ddfbf83",
+      "reason": "Separate legacy China staged-generation activation invokes manifest CAS and saves recovery/publication metadata.",
+      "cancelActive": true
+    },
+    {
+      "path": ".github/workflows/encar-official-recovery.yml",
+      "blobSha": "edf94240a6f57fa43cd4a833ee54ee1c356cbbe4",
+      "reason": "Separate push/manual legacy Korea recovery path explicitly invokes the production catalog market publisher.",
+      "cancelActive": true
+    },
+    {
+      "path": ".github/workflows/encar-source-refresh.yml",
+      "blobSha": "91ec52d6a6f0c8e6f325c97a72cfca94aa275414",
+      "reason": "Separate push/manual legacy Korea recovery path explicitly invokes the production catalog market publisher.",
+      "cancelActive": true
+    },
+    {
+      "path": ".github/workflows/home-ui-activation.yml",
+      "blobSha": "89ac745db12d9d31be5a0230a8fd75b5c4f67d3e",
+      "reason": "Retired exact catalog-a059 release operation acquires the catalog lease, creates a release binding and can switch site ingress. Disable future runs; never cancel a possibly active ingress switch.",
+      "cancelActive": false
+    },
+    {
+      "path": ".github/workflows/kcar-registry-recovery.yml",
+      "blobSha": "5594062ad597c411bb4a969737ec5c6f26368c51",
+      "reason": "Separate push/manual legacy Korea recovery path explicitly invokes the production catalog market publisher.",
+      "cancelActive": true
+    },
+    {
+      "path": ".github/workflows/ops-refresh-current-display-identity.yml",
+      "blobSha": "40260eaec6586160fb85aed8524281b1f05c6fc8",
+      "reason": "Applies public display identity by republishing current read models.",
+      "cancelActive": true
+    },
+    {
+      "path": ".github/workflows/prepare-paid-encar-intake.yml",
+      "blobSha": "bbfa9540bb58788dfd7a2ae28fef30e5e138c726",
+      "reason": "Restores and archives paid Encar intake; also changes the saved source enablement switch.",
+      "cancelActive": true
+    },
+    {
+      "path": ".github/workflows/prepare-saved-paid-encar-reports.yml",
+      "blobSha": "8a8b4e6b54f282eabc95e94e4eb1d25e4f9f0e15",
+      "reason": "Commit-message-gated one-shot writes durable paid Encar insurance/inspection report buckets and root handoff.",
+      "cancelActive": true
+    },
+    {
+      "path": ".github/workflows/prepare-serving-china-filter-index.yml",
+      "blobSha": "121c8fa4ac1bc8b1ea9dfbb2dad548a4f16dd3e6",
+      "reason": "Pinned legacy China filter-index preparation writes immutable derived files in REG. Application checkout is 073de4c7cd7a51045d92c1e2f8d7367ce51b42d2; the workflow command and source binding are reviewed at the audit commit.",
+      "cancelActive": true
+    },
+    {
+      "path": ".github/workflows/publish-prepared-encar.yml",
+      "blobSha": "81e7badbff9ad57febb3b820c1d4089e7a1e85cc",
+      "reason": "Calls the legacy market publisher after validating prepared Encar input.",
+      "cancelActive": true
+    },
+    {
+      "path": ".github/workflows/reg-daily-retention.yml",
+      "blobSha": "c9ce94a25d4923935c0d98a3fc22838a7603f382",
+      "reason": "Can apply exact catalog generations/internal-offer retention selections under the publication lease.",
+      "cancelActive": true
+    },
+    {
+      "path": ".github/workflows/reg-retention.yml",
+      "blobSha": "a285120546ad6b8acd5f840e8d4fe84f6f9469ae",
+      "reason": "Can apply exact catalog generations/internal-offer retention selections under the publication lease.",
+      "cancelActive": true
+    },
+    {
+      "path": ".github/workflows/regcloud-overview.yml",
+      "blobSha": "75551e4b58b72288db926868a3ab1fd49937c525",
+      "reason": "Writes dated catalog landings/overview and prepares editorial home derivatives.",
+      "cancelActive": true
+    },
+    {
+      "path": ".github/workflows/regcloud-prices.yml",
+      "blobSha": "d8b390efedb7f611c97ff8a3b0d2e883bc511a83",
+      "reason": "Prepares shared catalog budget prices and readiness metadata using the existing serving calculator; does not replace calculation engines.",
+      "cancelActive": true
+    },
+    {
+      "path": ".github/workflows/regcloud-resume-collectors.yml",
+      "blobSha": "cd87219c5dd5cc4c442a22c11a9be17e6650afdf",
+      "reason": "Re-enables old collector workflows from previous state; could undo the freeze.",
+      "cancelActive": true
+    },
+    {
+      "path": ".github/workflows/retry-prepared-encar.yml",
+      "blobSha": "6b5da400be50bad8186423a9d5fa4add6beddd8f",
+      "reason": "Calls the legacy market publisher after validating prepared Encar input.",
+      "cancelActive": true
+    },
+    {
+      "path": ".github/workflows/stage-owned-china-generation.yml",
+      "blobSha": "6c625ac565ef0f8b67fa710ca8e2b4112272d615",
+      "reason": "Writes the private China generation to durable object storage.",
+      "cancelActive": true
+    }
+  ],
+  "protectedWorkflows": [
+    ".github/workflows/autocatalog-publish.yml",
+    ".github/workflows/catalog-certified-power-apply.yml",
+    ".github/workflows/catalog-reindex-vehicle-knowledge.yml",
+    ".github/workflows/catalog-saved-previews.yml",
+    ".github/workflows/ci.yml",
+    ".github/workflows/container-registry-cleanup.yml",
+    ".github/workflows/crm-document-retention.yml",
+    ".github/workflows/crm-telegram-delivery.yml",
+    ".github/workflows/dealer-billing-reconcile.yml",
+    ".github/workflows/dealer-exchange-rate.yml",
+    ".github/workflows/finish-installed-paid-encar.yml",
+    ".github/workflows/finish-verified-paid-korea.yml",
+    ".github/workflows/regcloud-deploy.yml",
+    ".github/workflows/regcloud-release-retention.yml",
+    ".github/workflows/release-minimal-paid-encar.yml",
+    ".github/workflows/release-paid-encar.yml",
+    ".github/workflows/verify-finish-paid-encar.yml"
+  ],
+  "observeOnlyWorkflows": [
+    ".github/workflows/catalog-certified-power-apply.yml",
+    ".github/workflows/catalog-reindex-vehicle-knowledge.yml",
+    ".github/workflows/catalog-saved-previews.yml",
+    ".github/workflows/container-registry-cleanup.yml",
+    ".github/workflows/finish-installed-paid-encar.yml",
+    ".github/workflows/finish-verified-paid-korea.yml",
+    ".github/workflows/regcloud-deploy.yml",
+    ".github/workflows/regcloud-release-retention.yml",
+    ".github/workflows/release-minimal-paid-encar.yml",
+    ".github/workflows/release-paid-encar.yml",
+    ".github/workflows/verify-finish-paid-encar.yml"
+  ]
+}
