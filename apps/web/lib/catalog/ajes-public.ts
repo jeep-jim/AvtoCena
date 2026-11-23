@@ -9,7 +9,9 @@ const openedKoreaDetails=new DetailReadCache<any>({maxEntries:100,maxBytes:4*102
 import 'server-only';
 import {ajesChinaPriceAllowed,ajesChinaSourceCeiling} from './ajes-price-policy';
 import {headers} from 'next/headers';
-import {ajesClient} from './ajes-runtime';
+import {ajesClient,readSavedJapanCandidates} from './ajes-runtime';
+import {ajesResultFilter} from './ajes-result-filter';
+import {fillSavedJapanPowerPage} from './ajes-saved-power-page';
 import {AjesUnavailable} from './ajes-client';
 import {ajesOffer,ajesOfferId} from './ajes-offer';
 import {convertToRub} from './rates';
@@ -35,7 +37,7 @@ export async function readAjesPublic(query:AjesQuery,options:{editorial?:boolean
  });
  options.measure?.('supplier-read',performance.now()-sourceStart);
  const indexStart=performance.now();const index=await readCatalogEditorial();options.measure?.('editorial-read',performance.now()-indexStart);
- const items=await Promise.all(result.items.map(async(lot:NonNullable<ReturnType<typeof ajesLot>>)=>{
+ const enrichLot=async(lot:NonNullable<ReturnType<typeof ajesLot>>,observedAt:string)=>{
   const detailStart=performance.now();
   if(lot.table==='korea'&&!query.id){
    const saved=await openedKoreaDetails.get(lot.id,()=>getJsonStorage().readJson('catalog/partner-cache/ajes/korea/'+lot.id+'.json',null)).catch(()=>null);
@@ -45,7 +47,7 @@ export async function readAjesPublic(query:AjesQuery,options:{editorial?:boolean
   const enrichStart=performance.now();
   const rate=await convertToRub(lot.finalPriceJpy||lot.sourcePrice,lot.currency as 'JPY'|'KRW'|'CNY');
   if(!rate)throw Error('ajes_currency_unavailable');
-  let offer=ajesOffer(lot,rate,result.observedAt);
+  let offer=ajesOffer(lot,rate,observedAt);
   // Exact local release facts also cover auction records. No supplier/detail
   // request or legacy approximate matching is needed for this lookup.
   offer=applyJapanFactoryFuel(applyEncyclopediaCalculation(enrichJapanDrive(offer,readCalculationIndex())));
@@ -55,9 +57,17 @@ export async function readAjesPublic(query:AjesQuery,options:{editorial?:boolean
   }
   options.measure?.('enrichment-sum',performance.now()-enrichStart);
   if(options.editorial!==false&&editorialHidden(offer,index))return null;
-  return applyJapanOwnerSpecifications(options.editorial===false?offer:applyCatalogEditorial(offer,index));
- }));
+  const visible=applyJapanOwnerSpecifications(options.editorial===false?offer:applyCatalogEditorial(offer,index));
+  return ajesChinaPriceAllowed(visible)&&catalogInventoryAgeDecision(visible).eligible&&!catalogVehicleExcluded(visible)?visible:null;
+ };
  const {sourceEvidence: _privateEvidence,sourceEvidenceById: _privateListEvidence,...publicResult}=result;
- return {...publicResult,items:items.filter(offer=>offer&&ajesChinaPriceAllowed(offer)&&catalogInventoryAgeDecision(offer).eligible&&!catalogVehicleExcluded(offer))};
+ const items=(await Promise.all(result.items.map((lot:NonNullable<ReturnType<typeof ajesLot>>)=>enrichLot(lot,result.observedAt)))).filter(Boolean);
+ if(query.table==='stats'&&!query.id&&(query.page??1)===1&&result.partial&&
+    (query.powerFrom!==undefined||query.powerTo!==undefined)){
+  const page=await fillSavedJapanPowerPage({items,pageSize:result.pageSize,observedAt:result.observedAt,
+    matches:ajesResultFilter(query).matchesPower,readCandidates:()=>readSavedJapanCandidates(query),enrich:enrichLot});
+  return {...publicResult,...page};
+ }
+ return {...publicResult,items};
 }
 export async function getAjesOffer(id:string,options:{editorial?:boolean}={}){if(!ajesOfferId(id))return null;const match=id.match(/^ajes-(stats|korea|china)-(.+)$/)!;const result=await readAjesPublic({table:match[1] as 'stats'|'korea'|'china',id:match[2]},options);return result.items[0]||null;}
