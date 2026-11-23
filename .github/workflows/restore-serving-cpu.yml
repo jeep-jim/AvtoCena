@@ -1,0 +1,52 @@
+name: Restore serving catalog CPU availability
+on:
+  push:
+    branches: [main]
+    paths: [.github/market-runs/restore-serving-cpu.json]
+permissions:
+  contents: read
+jobs:
+  restore:
+    if: github.repository == 'jeep-jim/AvtoCena' && github.run_attempt == '1'
+    runs-on: ubuntu-24.04
+    environment: regcloud-staging
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 2
+          persist-credentials: false
+      - name: Validate the CPU operation and test rollback before credentials
+        run: |
+          node --input-type=module <<'JS'
+          import {verifyReadonlyInvocation} from './scripts/lib/readonly-marker-invocation.mjs';
+          verifyReadonlyInvocation({root:process.cwd(),markerPath:'.github/market-runs/restore-serving-cpu.json',operation:'restore-serving-catalog-cpu'});
+          JS
+          python3 -I -B tests/catalog-serving-cpu-relief.test.py
+          python3 - <<'PYTHON'
+          import pathlib
+          root = pathlib.Path('.github/operations')
+          inventory = (root/'home-ui-only-20261123/inventory.py').read_text()
+          operation = (root/'catalog-incident/restore-cpu.py').read_text()
+          bootstrap = "import sys,types\nmod=types.ModuleType('incumbent_inventory')\nsys.modules[mod.__name__]=mod\n"
+          pathlib.Path('cpu-operation.py').write_text(bootstrap + "exec(compile(" + repr(inventory) + ", '<inventory>', 'exec'), mod.__dict__)\n" + operation)
+          PYTHON
+      - name: Apply the exact online CPU change and verify all runtime identities
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+        run: |
+          set -euo pipefail
+          umask 077
+          known=docs/operations/regcloud-staging-known-hosts
+          printf '%s  %s\n' fd37f98aab3eeb16f131fcd4033adbb56f7e9616208c2f1ab5ef7a446caa4e4c "$known" | sha256sum --check --status
+          key=$(mktemp)
+          trap 'rm -f -- "$key"' EXIT
+          printf '%s\n' "$SSH_PRIVATE_KEY" > "$key"
+          unset SSH_PRIVATE_KEY
+          timeout 240 ssh -F /dev/null -T -i "$key" -o BatchMode=yes -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$known" -o UpdateHostKeys=no -o ConnectTimeout=10 -o ClearAllForwardings=yes root@151.248.113.177 '/usr/bin/env -i PATH=/usr/bin:/bin /usr/bin/python3 -I -B -' < cpu-operation.py > serving-cpu-result.json
+          python3 -c 'import json; r=json.load(open("serving-cpu-result.json")); print("CPU",r["effectiveCores"],"changed",r["cpuUpdated"],"inventory",r["inventory"]["status"])'
+      - uses: actions/upload-artifact@v4
+        with:
+          name: serving-cpu-result
+          path: serving-cpu-result.json
+          retention-days: 7
