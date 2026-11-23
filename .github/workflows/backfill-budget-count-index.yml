@@ -8,6 +8,7 @@ on:
     paths: [scripts/backfill-budget-count-index.mjs, scripts/catalog-storage-preflight.mjs, scripts/lib/catalog-preflight-input.mjs, apps/web/lib/catalog/budget-count-index.ts]
 permissions:
   contents: read
+  actions: read
 concurrency:
   group: catalog-budget-index
   cancel-in-progress: false
@@ -33,7 +34,17 @@ jobs:
       - run: npm run typecheck
       - name: Validate compact delivery and budget parity before publishing the derived index
         run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/catalog-budget-count-index.test.ts
+      - name: Read the successful market publisher's budget receipt
+        if: github.event_name == 'workflow_run'
+        uses: actions/download-artifact@v4
+        with:
+          pattern: catalog-quality-rebuild-reports-*
+          path: ${{ runner.temp }}/producer-budget
+          run-id: ${{ github.event.workflow_run.id }}
+          github-token: ${{ github.token }}
       - run: node --import tsx scripts/backfill-budget-count-index.mjs
+        env:
+          BUDGET_PRODUCER_WORKFLOW: ${{ github.event.workflow_run.name }}
       - uses: actions/upload-artifact@v4
         if: always()
         with:
