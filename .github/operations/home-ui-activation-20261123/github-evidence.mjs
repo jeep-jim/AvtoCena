@@ -25,18 +25,32 @@ async function verifyUnassignedRun(reader,listed){
 const APPROVAL_CODE = [APPROVAL_WORKFLOW,'.github/operations/home-ui-activation-20261123/profile.mjs',
   'scripts/lib/readonly-marker-invocation.mjs'];
 
-export function githubReader({token = process.env.GH_TOKEN, fetchImpl = fetch} = {}) {
+export function githubReader({token = process.env.GH_TOKEN, fetchImpl = fetch, pause = ms => new Promise(resolve => setTimeout(resolve, ms))} = {}) {
   need(typeof token === 'string' && token.length > 0, 'token');
+  async function get(url, options) {
+    for (let attempt = 0; attempt < 3; attempt++) {
+      let response;
+      try {
+        response = await fetchImpl(url, {...options, signal:AbortSignal.timeout(30000)});
+      } catch {
+        if (attempt === 2) throw Error('home_evidence_github_transport');
+      }
+      if (response && ![408, 429, 500, 502, 503, 504].includes(response.status)) return response;
+      if (attempt === 2) throw Error('home_evidence_github_transient_http');
+      await response?.body?.cancel();
+      await pause(1000 * (attempt + 1));
+    }
+  }
   async function request(suffix, binary=false) {
     need(/^\/actions\/[a-zA-Z0-9_./?=&%:-]+$/.test(suffix), 'endpoint');
-    const response = await fetchImpl(API + suffix,{method:'GET',redirect:'manual',signal:AbortSignal.timeout(30000),
+    const response = await get(API + suffix,{method:'GET',redirect:'manual',
       headers:{Authorization:'Bearer '+token,Accept:'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28'}});
     if (binary) {
       need(response.status === 302, 'artifact_redirect');
       const location = new URL(response.headers.get('location'));
       need(location.protocol === 'https:' && !location.username && !location.password
         && (/\.blob\.core\.windows\.net$/.test(location.hostname) || /\.actions\.githubusercontent\.com$/.test(location.hostname)), 'artifact_host');
-      const download = await fetchImpl(location,{method:'GET',redirect:'error',signal:AbortSignal.timeout(30000)});
+      const download = await get(location,{method:'GET',redirect:'error'});
       need(download.ok, 'artifact_download');
       const buffer = Buffer.from(await download.arrayBuffer());
       need(buffer.length > 0 && buffer.length <= 1048576, 'artifact_control_size');
@@ -48,15 +62,25 @@ export function githubReader({token = process.env.GH_TOKEN, fetchImpl = fetch} =
   return {json:suffix=>request(suffix),archive:id=>request('/actions/artifacts/'+id+'/zip',true)};
 }
 
-export async function assertPublicationQuiescence(reader, ownRunId) {
+// GitHub can briefly return a count and a page from opposite sides of a job
+// transition. Only a complete observation can authorize a switch or acceptance.
+async function readCompleteRunPage(reader, status, pause) {
+  for (let attempt = 0; attempt < 3; attempt++) {
+    const page = await reader.json('/actions/runs?status=' + status + '&per_page=100');
+    if (Number.isSafeInteger(page.total_count) && page.total_count <= 100 && Array.isArray(page.workflow_runs)
+        && page.workflow_runs.length === page.total_count) return page;
+    if (attempt < 2) await pause(1500);
+  }
+  throw Error('home_evidence_active_runs_incomplete');
+}
+
+export async function assertPublicationQuiescence(reader, ownRunId, pause = ms => new Promise(resolve => setTimeout(resolve, ms))) {
   const recovery = await reader.json('/actions/runs/45104426224');
   need(recovery.id === 45104426224 && recovery.status === 'completed'
     && recovery.repository?.full_name === REPO, 'korea_recovery_active');
   const observed = new Map();
   for (const status of ['in_progress','queued','waiting','pending','requested']) {
-    const page = await reader.json('/actions/runs?status='+status+'&per_page=100');
-    need(Number.isSafeInteger(page.total_count) && page.total_count <= 100 && Array.isArray(page.workflow_runs)
-      && page.workflow_runs.length === page.total_count, 'active_runs_incomplete');
+    const page = await readCompleteRunPage(reader, status, pause);
     for(const run of page.workflow_runs) if(String(run.id)!==String(ownRunId)) observed.set(run.id,run);
   }
   const conflicts=[...observed.values()].filter(run=>!SAFE_CONCURRENT.has(run.path));

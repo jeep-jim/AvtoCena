@@ -223,3 +223,33 @@ test('workflow exposes only safe plan/outcome artifacts and gates SSH after the 
   const ci=await fs.readFile(path.join(root,'.github/workflows/ci.yml'),'utf8');
   for(const testFile of ['home-ui-activation.test.mjs','home-ui-activation-transport.test.mjs','home-ui-host-driver.test.py'])assert.ok(ci.includes(testFile));
 });
+
+test('a changing Actions page must become complete before it can authorize a switch', async () => {
+  let inconsistent = 1;
+  const reader = {async json(endpoint) {
+    if (endpoint === '/actions/runs/45104426224') return {id:45104426224, status:'completed', repository:{full_name:'jeep-jim/AvtoCena'}};
+    if (endpoint.includes('status=in_progress') && inconsistent-- > 0) return {total_count:1, workflow_runs:[]};
+    return {total_count:0, workflow_runs:[]};
+  }};
+  let waits = 0;
+  const pause = async () => { waits++; };
+  assert.equal((await assertPublicationQuiescence(reader, '8', pause)).otherWriterRuns, 0);
+  assert.equal(waits, 1);
+  inconsistent = 3;
+  await assert.rejects(assertPublicationQuiescence(reader, '8', pause), /active_runs_incomplete/);
+  assert.equal(waits, 3);
+});
+
+test('publications retry intermittent read-only API failures without credentials in diagnostics', async () => {
+  let attempt=0;
+  const reader=githubReader({token:'synthetic',pause:async()=>{},fetchImpl:async()=>{
+    attempt++;
+    if(attempt===1)throw new Error('private detail');
+    if(attempt===2)return new Response('',{status:503});
+    return new Response(JSON.stringify({value:42}),{status:200});
+  }});
+  assert.deepEqual(await reader.json('/actions/runs/1'),{value:42});
+  assert.equal(attempt,3);
+  const unavailable=githubReader({token:'synthetic',pause:async()=>{},fetchImpl:async()=>{throw new Error('private detail');}});
+  await assert.rejects(unavailable.json('/actions/runs/1'),/^Error: home_evidence_github_transport$/);
+});

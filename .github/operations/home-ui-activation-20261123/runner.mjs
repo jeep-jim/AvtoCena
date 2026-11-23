@@ -55,14 +55,17 @@ export function checkedPrepared(receipt,{runId,controllerSha,now=Date.now()}){
 
 export async function preparePlan(sourceRoot){
   const invocation=checkActivationInvocation(),{directory,image}=await paths();
+  console.log(JSON.stringify({stage:'source-and-server-gates'}));
   verifyHomeGateFiles(CONTROLLER_ROOT);const sourceProof=verifyHomeSourceCheckout(sourceRoot);
   const imageBuild=await jsonFile(path.join(image,'receipt.json'));
   need(imageBuild.controllerSha===invocation.sourceSha&&imageBuild.source===HOME_UI.source
     &&imageBuild.imageArchiveSha256===await digest(path.join(image,'image.tar')),'image_changed');
   const inventory=await jsonFile(path.join(CONTROLLER_ROOT,INVENTORY_FILE));assertReviewedInventory(inventory,REVIEWED_INVENTORY_SHA);
+  console.log(JSON.stringify({stage:'controller-ci'}));
   const reader=githubReader(),ci=await verifyControllerCi(reader,CONTROLLER_ROOT,invocation);
   await fs.mkdir(directory,{mode:0o700});
   const store=await storage(),nonce=randomBytes(16).toString('hex');
+  console.log(JSON.stringify({stage:'publication-and-storage-lease'}));
   const {quiescence,authority}=await waitForHomePublication(
     ()=>assertPublicationQuiescence(reader,process.env.GITHUB_RUN_ID),
     ()=>acquireHomeAuthority({storage:store,nonce,readLiveIdentity:liveIdentity}),
@@ -72,6 +75,7 @@ export async function preparePlan(sourceRoot){
     });
   let prepared=false;
   try{
+  console.log(JSON.stringify({stage:'private-calculation-readback'}));
     const binding=await prepareHomeBindingPlan({storage:store,sourceRoot,readLiveIdentity:liveIdentity});
     const index=await store.readJson(INDEX_KEY,null);
     need(index?.version===1&&index.digest===HOME_UI.privateIndexDigest
@@ -228,5 +232,8 @@ if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.ur
       if(mode==='--activate')console.log(JSON.stringify(await activate(sourceRoot)));
     }
   }catch(error){if(error.homeUiOutcome)console.log(JSON.stringify(error.homeUiOutcome));
-    console.error(/^home_[a-z0-9_:-]+$/.test(error.message||'')?error.message:'home_activation_failed');process.exitCode=1;}
+    const safeCode=['ETIMEDOUT','ECONNRESET','ENOTFOUND','ENOENT','EACCES','ENOSPC','EEXIST','UND_ERR_CONNECT_TIMEOUT']
+      .find(code=>code===error.code||code===error.cause?.code);
+    console.error(/^home_[a-z0-9_:-]+$/.test(error.message||'')?error.message:
+      safeCode?'home_activation_'+safeCode.toLowerCase():error.name==='TimeoutError'?'home_activation_transport_timeout':'home_activation_failed');process.exitCode=1;}
 }

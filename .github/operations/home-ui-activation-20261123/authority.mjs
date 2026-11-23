@@ -88,7 +88,7 @@ export async function waitForHomePublication(check, acquire, pause) {
       const authority = await acquire();
       return {quiescence, authority};
     } catch (error) {
-      if (!['home_evidence_other_workflow_active', 'home_authority_publisher_busy'].includes(error.message)) throw error;
+      if (!['home_evidence_other_workflow_active', 'home_evidence_active_runs_incomplete', 'home_authority_publisher_busy'].includes(error.message)) throw error;
       await pause(error.message);
     }
   }
