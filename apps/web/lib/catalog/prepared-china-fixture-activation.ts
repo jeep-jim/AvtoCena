@@ -217,6 +217,8 @@ export async function openPreparedChinaSnapshot(m:CatalogPreparedChinaManifest,
     !Number.isSafeInteger(dir.validUntil)||Date.now()>=servingUntil||!isArray(dir.chunkSha256)||
     dir.chunkSha256.length!==c.chunks.length||(dir.streamingSelector===true?dir.navigationFacets?.generationId!==m.generationId:dir.streamingSelector!==undefined||dir.navigationFacets!==undefined)||c.chunks.some((chunk,i)=>!CHUNK.test(chunk)||!SHA.test(dir.chunkSha256[i])))
   return fail('directory_scope');
+ if(Object.hasOwn(dir,'filterIndex') && (dir.streamingSelector!==true || dir.filterIndex?.version!==1 || !SHA.test(dir.filterIndex.sha256)))
+  return fail('filter_index_scope');
  const assertCurrent=async()=>{
   await assertBinding();
   if(Date.now()>=servingUntil)return fail('active_changed');
@@ -278,7 +280,7 @@ export async function openPreparedChinaSnapshot(m:CatalogPreparedChinaManifest,
  };
  return {generationId:m.generationId,chunks:[...c.chunks],rows:c.count,validUntil:dir.validUntil,legalValidUntil:acceptedLegalUntil,idRoots:dir.idRoots,
   modelView:dir.modelView,fixedCityViews:dir.fixedCityViews,deliveryTariffVersion:dir.deliveryTariffVersion,
-  directorySha256:marker.directorySha256,streamingSelector:dir.streamingSelector,navigationFacets:dir.navigationFacets,readChunk,assertCurrent,locate,modelPage,cityPage};
+  directorySha256:marker.directorySha256,marketDigest:dir.marketDigest,filterIndex:dir.filterIndex,streamingSelector:dir.streamingSelector,navigationFacets:dir.navigationFacets,readChunk,assertCurrent,locate,modelPage,cityPage};
 }
 
 export async function readActivePreparedChinaFixturePart(storage:JsonStorage,chunk:string,part:number){

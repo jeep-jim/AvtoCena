@@ -11,6 +11,7 @@ import type {UnavailableOffer} from './offer-availability';
 import type {VehicleOffer} from './types';
 import type {FreshChinaPriceReplay} from './prepared-china-fresh-price-replay';
 
+import {createPreparedChinaFilterIndex} from './prepared-china-filter-index';
 import {createDetailSpool} from './detail-spool';
 import {createPreparedChinaIdShardWriter,type PreparedChinaIdLocation} from './prepared-china-id-locator';
 import {applyFixedChinaCityLedger,createChinaFixedCityViews} from './prepared-china-fixed-city';
@@ -77,6 +78,9 @@ export async function verifyIndependentChinaPreparedArtifacts(cut:IndependentCut
  const ids=createPreparedCoverageIdsDigest(),spool=await createDetailSpool<PreparedChinaIdLocation>(256,{maxBucketBytes:8*1024*1024});
  let rows=0;
  const navigation=snapshot.streamingSelector?createChinaSelectorFacets(cut.generationId,chinaSelectorNavigationQuery):undefined;
+ // The durable writer copies precisely the objects read by this verification.
+ // Rebuild the optional compact index from the same authenticated projections.
+ const filters=snapshot.filterIndex?createPreparedChinaFilterIndex({generationId:cut.generationId,marketDigest:snapshot.marketDigest}):null;
  const modelIndex=createPreparedChinaModelView(cut.generationId,model.keySha256);
  if(Boolean(snapshot.fixedCityViews)!==Boolean(search.fixedCityScopes))return fail('city_scope');
  const cityViews=search.fixedCityScopes?createChinaFixedCityViews(cut.generationId):null;
@@ -98,6 +102,7 @@ export async function verifyIndependentChinaPreparedArtifacts(cut:IndependentCut
      if(withdrawn.has(row.id))return fail('withdrawn_admitted');
      ids.add(row.id);rows++;navigation?.add(row);
      const position={id:row.id,chunk,part:i,offset};
+     filters?.add(row,position);
      if(model.matches(row))modelIndex.add({...position,rub:preparedChinaModelIndexedPrice(row)});
      cityViews?.add(row,position,(scope,rub)=>{
       const ledger=block.details[offset],offer={...native[offset],totalRub:ledger.totalRub,
@@ -114,6 +119,7 @@ export async function verifyIndependentChinaPreparedArtifacts(cut:IndependentCut
   const locator=createPreparedChinaIdShardWriter(cut.generationId,verifyObject);
   await spool.publishShards(locator.write,true);
   if(digest(locator.finish(rows))!==digest(snapshot.idRoots))return fail('locator_scope');
+  if(filters && digest(await filters.publish(verifyObject))!==digest(snapshot.filterIndex))return fail('filter_index_coverage');
   const verifiedModel=await modelIndex.publish(verifyObject);
   if(digest(verifiedModel)!==digest(snapshot.modelView))return fail('search_coverage');
   if(cityViews&&digest(await cityViews.publish(verifyObject))!==digest(snapshot.fixedCityViews))return fail('city_scope');
