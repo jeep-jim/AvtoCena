@@ -232,7 +232,7 @@ function compatibilityRows(s:OpenFixture){
 /** Bounded correctness fixture, not a full-feed performance path. Search
  * reuses same-cut projections and the existing exact filters/order/paging. */
 export async function readPreparedChinaCompatibility(params:CatalogSearchParams,options:{
- countOnly:boolean;includeFacets:boolean;marketPage:boolean;unsupported:boolean;navigationFacets?:true;expectedGeneration?:string|null;
+ countOnly:boolean;includeFacets:boolean;marketPage:boolean;unsupported:boolean;navigationFacets?:true;indexedOnly?:boolean;expectedGeneration?:string|null;
 }){
  if(!hasIndependentChinaHttpFixture()||params.market!=='china')return null;
  try{
@@ -312,6 +312,9 @@ export async function readPreparedChinaCompatibility(params:CatalogSearchParams,
     return {generationId,total:selected.total,page,pageSize,items,usedIndexShards:[],...(options.navigationFacets?{facets:s.snapshot.navigationFacets}:{})};
    }
   }
+  // A cross-market preview must stay bounded when an old generation or an
+  // unsupported sort has no matching index. The single-market route remains exact.
+  if(options.indexedOnly)return null;
   const width=pageSize*MARKET_DIVERSITY_WINDOW_PAGES,offset=Math.floor(start/width)*width;
   const limit=options.countOnly&&!options.marketPage?0:isDefaultMarketPage?offset+width:start+pageSize;
   const facetQuery=options.navigationFacets?{market:'china',hasPrice:'yes'}:options.includeFacets&&!options.marketPage&&!options.countOnly?params:undefined;

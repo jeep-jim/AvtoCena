@@ -130,7 +130,11 @@ async function ReadCatalogContent({params={},dealer=null,embedded=false}:{params
   const omitChina=omitLegacyChinaAggregate()&&!selectedMarket;
   const [liveChina,liveKorea]=chinaCut?[false,false]:await Promise.all([omitChina?false:usesAjesMarket('china'),usesAjesMarket('korea')]);
   const aggregateChinaSection=async(market:{id:string;label:string})=>{
-    const fresh=(!hasFilters&&!customSort&&requestedPage===1)?await readPreparedChinaHomeCards(OVERVIEW_CARDS).catch(()=>null):null;
+    const unsupported=unsupportedPreparedChinaSource(first(params.source),first(params.stock));
+    const fresh=unsupported?null:(!hasFilters&&!customSort)
+      ?await readPreparedChinaHomeCards(OVERVIEW_CARDS,{city:common.city})
+      :await readPreparedChinaCompatibility({...common,market:'china',page:1,pageSize:OVERVIEW_CARDS},
+        {countOnly:false,includeFacets:false,marketPage:false,indexedOnly:true,unsupported:false});
     return {...market,items:fresh?.items??[],total:fresh?.total??0,page:1,pageSize:OVERVIEW_CARDS,...(!fresh?{unavailable:true}:{})};
   };
   const liveMarket=(id:string)=>id==='china'&&liveChina||id==='korea'&&liveKorea;
