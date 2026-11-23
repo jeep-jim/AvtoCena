@@ -30,7 +30,7 @@ jobs:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
           path: application
-          ref: 383bf0045707ff8a89043b330de7938e8da166f7
+          ref: 18e81af30cb9187b139924217a777de1c9819bca
           persist-credentials: false
       - uses: actions/setup-node@v4
         with:
@@ -39,11 +39,11 @@ jobs:
         working-directory: application
       - name: Check index membership, count and pagination offline
         working-directory: application
-        run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/prepared-china-filter-index.test.ts tests/china-verified-object-reads.test.ts
+        run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/prepared-china-filter-index.test.ts tests/china-verified-object-reads.test.ts tests/catalog-china-default-showcase.test.ts tests/ajes-saved-power-page.test.ts tests/catalog-market-page-boundary.test.ts
       - name: Build the exact application before introducing read credentials
         working-directory: application
         run: docker build -t china-search-readback .
-      - name: Verify two result pages and the exact count against the published snapshot
+      - name: Verify two China pages and the combined power count against the published catalogs
         working-directory: application
         env:
           AVTOCENA_CHINA_REGCLOUD_RUNTIME: '1'
