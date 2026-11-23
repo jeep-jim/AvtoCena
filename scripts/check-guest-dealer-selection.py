@@ -50,9 +50,14 @@ def check_kia_reports():
                 ('report_date', 'own_damage_count', 'own_damage_cost_won', 'other_damage_count', 'other_damage_cost_won')}
             print(json.dumps(dict(offerId=offer_id, lot=lot, observedAt=report['observedAt'], history=summary,
                                   recordedEvents=len(h['accidents']) if h and isinstance(h.get('accidents'),list) else None)),flush=True)
+            assert h is not None, 'expected the saved Kia insurance report'
+            if report['observedAt'] == '2026-11-22T23:51:15.460Z':
+                assert (h['own_damage_count'], h['own_damage_cost_won']) == (1, 621824)
+                assert (h['other_damage_count'], h['other_damage_cost_won']) == (1, 704609)
         else:
             print(json.dumps(dict(offerId=offer_id, inspectionAvailable=bool(report.get('inspection')),
                                   diagnosisAvailable=bool(report.get('diagnosis')))),flush=True)
+            assert report.get('inspection') and report.get('diagnosis'), 'expected the saved Kia inspection and diagnosis'
     body = get('kia-offer-card', '/cars/offer/' + offer_id + '/kia-morning-van-prestige-2026', {}).decode()
     assert 'data-korea-report-trigger' in body and 'История и состояние' in body
     related = json.loads(get('kia-available-recommendations', '/api/catalog/recommendations', dict(id=offer_id, kind='related', markets='korea')))
@@ -65,6 +70,10 @@ def check_kia_reports():
                                     dict(market='korea', marketPage=1, page=1, **args)))
             print(json.dumps(dict(direct=name, total=direct.get('total'), items=len(direct.get('items', [])))),flush=True)
         raise AssertionError('no published Korea recommendation cards')
+    assert related['sameModel'] and not related['partial']
+    cars = related['marketRows'] + related['sameModel']
+    assert all(car['market'] == 'korea' and car.get('paidEncar') and car['images'] for car in cars)
+    assert len({car['id'] for car in cars}) == len(cars) and all(car['id'] != offer_id for car in cars)
 
 
 def main():

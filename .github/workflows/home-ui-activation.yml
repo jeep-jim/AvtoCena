@@ -1,4 +1,4 @@
-name: Prepare and accept exact home UI catalog-05f2
+name: Prepare and accept exact home UI catalog-59f7
 on:
   workflow_dispatch:
     inputs:
@@ -13,7 +13,7 @@ permissions:
   contents: read
   actions: read
 concurrency:
-  group: avtocena-home-ui-catalog-05f2
+  group: avtocena-home-ui-catalog-59f7
   cancel-in-progress: false
 jobs:
   await_current_publications:
@@ -86,7 +86,7 @@ jobs:
           python3 -I -B tests/home-ui-host-driver.test.py
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
-          ref: 05f289a875866be0be84800c8644dee5f38a1059
+          ref: 59f7e8fd0f7a6a9d8d2de545618962830c7866ea
           path: application
           persist-credentials: false
           fetch-depth: 1
@@ -97,7 +97,7 @@ jobs:
         working-directory: application
         run: |
           npm ci --no-audit --no-fund
-          node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/prepared-china-filter-index.test.ts tests/catalog-china-common-grid.test.ts tests/catalog-japan-filter-rail.test.ts tests/catalog-market-page-boundary.test.ts tests/catalog-editable-power-scenario.test.ts tests/home-card-payload.test.ts tests/ajes-saved-power-page.test.ts tests/catalog-china-default-showcase.test.ts tests/catalog-market-selection.test.ts tests/china-verified-object-reads.test.ts tests/paid-korea-report-contract.test.ts tests/paid-korea-report-reader.test.ts tests/paid-korea-report-recommendations.test.ts tests/paid-korea-report-render.test.ts
+          node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/prepared-china-filter-index.test.ts tests/catalog-china-common-grid.test.ts tests/catalog-japan-filter-rail.test.ts tests/catalog-market-page-boundary.test.ts tests/catalog-editable-power-scenario.test.ts tests/home-card-payload.test.ts tests/ajes-saved-power-page.test.ts tests/catalog-china-default-showcase.test.ts tests/catalog-market-selection.test.ts tests/china-verified-object-reads.test.ts tests/paid-korea-report-contract.test.ts tests/paid-korea-report-reader.test.ts tests/paid-korea-report-recommendations.test.ts tests/related-offer-selection.test.ts tests/paid-korea-report-render.test.ts
       - name: Prepare the existing browser gate outside the application checkout
         shell: bash
         run: |
