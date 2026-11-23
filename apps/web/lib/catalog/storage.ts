@@ -1,5 +1,7 @@
 import {japanPowerSearchHint} from './japan-source-power';
 import {budgetSelectionFilterKey} from './budget-selection-key';
+import {resolveCatalogMarketGeneration, assertCatalogMarketGenerationChunk, assertCatalogMarketGenerationCount,
+  type CatalogMarketManifestEntry} from './market-generation';
 import {homeSnapshotMarketIsEmpty} from "./home-editorial-empty";
 import {readEditorialHome,resetEditorialHomeCache} from './editorial-home';
 import {createHomePhaseTiming} from "./home-phase-timing";
@@ -213,7 +215,7 @@ const ALLOWED_IMAGE_HOSTS = [
 ];
 export { CATALOG_CHUNK_SIZE };
 export type OfferLocation = { market: CatalogMarket; chunk: string };
-export type CatalogManifest = { version: 2; generationId: string; updatedAt: string; markets: Record<string, { count: number; chunks: string[]; updatedAt: string; provider?: "auto_api_encar" }> };
+export type CatalogManifest = { version: 2; generationId: string; updatedAt: string; markets: Record<string, CatalogMarketManifestEntry> };
 type JapanAuctionArchiveManifest = { version: 1; updatedAt: string; retentionDays: 30; activeSlot: "a" | "b"; count: number; chunks: string[]; contentHash: string };
 export type CatalogFacets = { generationId: string; makes: string[]; models: Array<{ make: string; model: string; aliases?: string[]; popularityDecile?: number }>; markets: string[]; bodyTypes: string[]; fuels: string[]; transmissions: string[]; drives: string[] };
 export type CatalogBrandSummaryModel = { model: string; count: number; marketCounts: Record<string, number> };
@@ -1211,8 +1213,16 @@ async function readOfferLists(paths: string[]) {
 
 export async function readMarketOffers(market: string) {
   const manifest = await readManifest();
-  const chunks: string[] = manifest.markets?.[market]?.chunks || [];
-  return readOfferLists(chunks.map((chunk) => storedOfferChunkPath(manifest.generationId, market, chunk)));
+  const storage = getJsonStorage();
+  const read = await resolveCatalogMarketGeneration(manifest, market, (key, fallback) => storage.readJson(key, fallback));
+  if (!read) return [];
+  if (read.kind === 'legacy') return readOfferLists([...read.chunkKeys]);
+  const concurrency = Math.max(1, Math.min(32, Number(process.env.CATALOG_READ_CONCURRENCY || 12)));
+  const rows = (await mapWithConcurrency([...read.chunkKeys], concurrency, async key => {
+    const value = await storage.readJson<VehicleOffer[] | null>(key, null);
+    assertCatalogMarketGenerationChunk(read, key, value); return value as VehicleOffer[];
+  })).flat();
+  assertCatalogMarketGenerationCount(read, rows); return rows;
 }
 /** Exclusion may recognize retired sources without admitting them to retention
  * or publication. Unknown source chunks still need to be read for auditing. */
