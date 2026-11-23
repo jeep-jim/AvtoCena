@@ -95,7 +95,7 @@ class HostDriverTests(unittest.TestCase):
         for fault in (None, 'operationId', 'generationId', 'acceptedReadModelFingerprint', 'lockedUntilMs'):
             protocol = driver.Protocol(io.BytesIO(), io.StringIO(), NONCE, interrupt=lambda: None)
             def emit(value):
-                reply = {'ok': True, 'operationId': 'home-ui-catalog-b4d2-' + NONCE, 'generationId': 'gen_1_test',
+                reply = {'ok': True, 'operationId': 'home-ui-catalog-05f2-' + NONCE, 'generationId': 'gen_1_test',
                          'acceptedReadModelFingerprint': 'b' * 64, 'lockedUntilMs': int(time.time() * 1000) + 60000}
                 if fault:
                     reply[fault] = 0 if fault == 'lockedUntilMs' else 'foreign'
