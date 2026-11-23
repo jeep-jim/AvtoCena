@@ -30,7 +30,7 @@ jobs:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
           path: application
-          ref: 18e81af30cb9187b139924217a777de1c9819bca
+          ref: b4d226491bcfa03eca73d72480ff3bd867d3c6fb
           persist-credentials: false
       - uses: actions/setup-node@v4
         with:
@@ -43,7 +43,7 @@ jobs:
       - name: Build the exact application before introducing read credentials
         working-directory: application
         run: docker build -t china-search-readback .
-      - name: Verify two China pages and the combined power count against the published catalogs
+      - name: Check saved Korean insurance, dealer selections and Chinese catalog pages
         working-directory: application
         env:
           AVTOCENA_CHINA_REGCLOUD_RUNTIME: '1'
