@@ -796,6 +796,9 @@ test('real writer pre-immutable coverage, private seal and mock CAS retain exact
     baselineRef={runId:uploaded.ready.runId,generationId:uploaded.ready.generationId,readySha256:uploaded.readySha256};
     assert.equal(uploaded.ready.publicationAuthorized,false);assert.equal(uploaded.ready.cursorAdvanceAuthorized,false);
     assert.deepEqual([uploaded.ready.artifacts.nativeParts,uploaded.ready.artifacts.projectionParts,uploaded.ready.artifacts.priceBlocks],[3,3,3]);
+    const filterParts=[...remote.keys()].filter(key=>key.startsWith(run)&&key.includes('/filters-v1/parts/'));
+    assert.ok(filterParts.length>0 && [...remote.keys()].some(key=>key.startsWith(run)&&key.includes('/filters-v1/ready-')));
+    for(const key of filterParts)assert.ok(key.endsWith(createHash('sha256').update(remote.get(key)!).digest('hex')+'.json'));
     assert.equal(preparedPriceCardDigest(JSON.parse(remote.get(run+'READY.json')!.toString())),uploaded.readySha256);
     assert.equal(requestsDurable.filter(x=>x.method==='PUT').at(-1)?.key,run+'READY.json');
     const size=remote.size,resumed=await upload();assert.equal(remote.size,size);assert.equal(resumed.readySha256,uploaded.readySha256);
