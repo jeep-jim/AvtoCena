@@ -7,7 +7,7 @@ test('last China page beyond 10000 reaches search; invalid offsets never do',asy
  const calls:any[]=[];
  (globalThis as any).__marketBoundary=async(q:any)=>{calls.push(q);return {page:q.page,total:244471,items:[{id:'last-car'}]};};
  const mocks:Record<string,string>={
-  'market-selection':'export const selectedCatalogMarkets=x=>[x];export const marketSelectionUrl=()=>"";',
+  'market-selection':'export const countRequestMarkets=p=>[p.get("market")];export const marketSelectionUrl=()=>"";',
   'green-corner':'export const readGreenCorner=()=>{};export const readGreenCornerPage=()=>{};',
   'route':'export const GET=()=>{};',
   'ajes-count-display':'export const exactAjesCount=()=>{};',

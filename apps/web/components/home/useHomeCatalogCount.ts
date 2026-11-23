@@ -1,5 +1,6 @@
 "use client";
 import {ajesCountText} from "@/lib/catalog/ajes-count-display";
+import {confirmedMarketMinimum} from "@/lib/catalog/count-format";
 import { useEffect, useState } from "react";
 
 /** The homepage has one count owner. Errors are not empty search results. */
@@ -28,6 +29,11 @@ export function useHomeCatalogCount(query: string, catalogTotal: number | null) 
         const summary=data?.countSummary;
         if(data?.ok!==false&&Number.isSafeInteger(summary?.total)&&summary.total>=0){
           if(active&&!controller.signal.aborted)setResult({query,count:null,error:false,countText:ajesCountText(summary)});
+          return;
+        }
+        const minimum = confirmedMarketMinimum(data);
+        if (minimum) {
+          if (active && !controller.signal.aborted) setResult({query, count: null, error: false, countText: minimum});
           return;
         }
         if (data?.countIncomplete || data?.ok === false || typeof data?.total !== "number" || !Number.isSafeInteger(data.total) || data.total < 0) throw new Error("catalog_count_invalid");

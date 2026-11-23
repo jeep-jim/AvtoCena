@@ -1,7 +1,7 @@
 import {omitLegacyChinaAggregate,withChinaAggregateAuthority} from '@/lib/catalog/china-public-aggregate';
 import {readMixedMarketCounts} from '@/lib/catalog/mixed-market-count';
 import {chinaRegcloudRuntimeConfigured} from '@/lib/catalog/china-regcloud-object-reader';
-import {selectedCatalogMarkets,marketSelectionUrl} from "@/lib/catalog/market-selection";
+import {countRequestMarkets,marketSelectionUrl} from "@/lib/catalog/market-selection";
 import {readGreenCorner,readGreenCornerPage} from '@/lib/catalog/green-corner';
 import {GET as greenSearch} from "@/app/api/catalog/green/route";
 import {exactAjesCount} from '@/lib/catalog/ajes-count-display';
@@ -31,10 +31,9 @@ export async function GET(request: Request) {
   const started = performance.now();
   const u = new URL(request.url);
   const p = u.searchParams;
-  const markets=selectedCatalogMarkets(p.get('market'));
-  if(markets.length>1&&p.get('countOnly')==='1'){
-    // Preserve the incumbent behavior and cache for all other traffic. A new
-    // failure policy is needed only when an independent China is selected.
+  const markets=p.get('countOnly')==='1'?countRequestMarkets(p,chinaRegcloudRuntimeConfigured()):[];
+  if(markets.length>1){
+    // An independent market may have an exact count while another is unavailable.
     if(!chinaRegcloudRuntimeConfigured()||!markets.includes('china')){
       const responses=await Promise.all(markets.map(m=>GET(new Request(marketSelectionUrl(u,m),request))));
       const failed=responses.find(r=>!r.ok);if(failed)return failed;
