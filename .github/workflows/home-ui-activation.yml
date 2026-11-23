@@ -16,7 +16,39 @@ concurrency:
   group: avtocena-home-ui-catalog-0509
   cancel-in-progress: false
 jobs:
+  await_current_publications:
+    if: github.repository == 'jeep-jim/AvtoCena' && github.repository_id == '1289722938' && github.ref == 'refs/heads/main' && github.run_attempt == '1'
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+    steps:
+      - name: Wait for the two running market publications without a production lease
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          runs=(
+            '45129017812 .github/workflows/catalog-refresh-uae.yml ddc5fdeb5b42372985aa90026153de7cf34484a4'
+            '45130876633 .github/workflows/catalog-refresh-europe.yml 81edfddcfc2856be2378ccda7fd756ec75f17619'
+          )
+          for row in "${runs[@]}"; do
+            read -r id workflow head <<< "$row"
+            while true; do
+              status=$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$id" | jq -er \
+                --argjson id "$id" --arg workflow "$workflow" --arg head "$head" \
+                'select(.id == $id and .repository.id == 1289722938 and .head_repository.id == 1289722938
+                  and .head_branch == "main" and .head_sha == $head and .path == $workflow and .run_attempt == 1) | .status')
+              echo "Market publication $id is $status"
+              case "$status" in
+                completed) break ;;
+                in_progress|queued|pending|waiting|requested) sleep 60 ;;
+                *) exit 1 ;;
+              esac
+            done
+          done
   accept:
+    needs: await_current_publications
     if: github.repository == 'jeep-jim/AvtoCena' && github.repository_id == '1289722938' && github.ref == 'refs/heads/main' && github.run_attempt == '1'
     runs-on: ubuntu-latest
     environment: regcloud-staging

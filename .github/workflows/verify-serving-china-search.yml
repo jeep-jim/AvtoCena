@@ -30,7 +30,7 @@ jobs:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
           path: application
-          ref: 5852ef2296208c7263198d7a95e672ed2f4e6ddb
+          ref: 383bf0045707ff8a89043b330de7938e8da166f7
           persist-credentials: false
       - uses: actions/setup-node@v4
         with:
@@ -39,7 +39,7 @@ jobs:
         working-directory: application
       - name: Check index membership, count and pagination offline
         working-directory: application
-        run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/prepared-china-filter-index.test.ts
+        run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/prepared-china-filter-index.test.ts tests/china-verified-object-reads.test.ts
       - name: Build the exact application before introducing read credentials
         working-directory: application
         run: docker build -t china-search-readback .
