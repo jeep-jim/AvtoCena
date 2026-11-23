@@ -51,3 +51,5 @@ GitHub вывел в очереди 28 старых запусков с нулё
 Открытые изменения распределения памяти видны в [PR 1805](https://github.com/jeep-jim/AvtoCena/pull/1805) и [PR 1810](https://github.com/jeep-jim/AvtoCena/pull/1810).
 
 [Prepared power census](../audits/2026-11-23-korea-prepared-power-coverage.json): 46 649 unique / 46 073 hp. Из 576 без mapped hp: 311 missing, 218 total/ICE conflict, 47 identity conflict; у 263 source total hp exact. Нельзя приписывать все пропуски поставщику. Новый B4 mapper patch готовится отдельно, frozen recovery его не получает.
+
+23.11, 17:45 UTC+7. [Новый Китай подготовлен и проверен в REG](https://github.com/jeep-jim/AvtoCena/actions/runs/45150223558). Из 283 583 активных записей источника допущены 166 478, с подтверждённой мощностью до 160 л.с. — 63 566. Проверены 48 разных карточек двух страниц и восемь ранее снятых машин. Курсор 13 236 017. В момент проверки клиенты видели прежние 168 662 автомобиля.
