@@ -6,14 +6,14 @@ import {execFileSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
 
 export const HOME_UI = Object.freeze({
-  source:'05f289a875866be0be84800c8644dee5f38a1059',
-  tree:'857b72d142f00fafe77f36acbe14bafd86301bf4',
+  source:'59f7e8fd0f7a6a9d8d2de545618962830c7866ea',
+  tree:'06592ed7abaa2f27976afba5453ab48c2a88d824',
   retainedSource:'22867cbcfaee27b2e8917b6bf880e44827f67b60',
   retainedTree:'cb53c3c2b2ae656e3cabff8c63e78705e74314ba',
-  sourceCalculationVersion:'07e57453202a22d0ab35f35637be30fe2f3b931ca59f151210002b69164c507b',
+  sourceCalculationVersion:'8e36af98e215d027eb6f1045380d8646060715e2b908bb8f960cc5e13e426085',
   servingCalculationVersion:'4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90',
   calculationAlgorithmBlob:'63c9323ac7a0ddf267a725443ca2316c197cc7d8',
-  codeDiffSha256:'0a28ddb5af528f911822075e96c96590568478b4750850c94671d089ac3be62a',
+  codeDiffSha256:'f3e7434d8d478b6e5aeaa69156dbfe952114673aaae9d15990384ee1bd14e391',
   privateIndexDigest:'bf2c72cb7a260ef093c0a43c2b0dad9c4c9094a4d6dc3811dd0d7f7626b0d72b',
   privateIndexParent:'83ff17075e9188dcf227c8752dc064248d5f42e0',
   sourceClosureRecords:6364,
@@ -44,6 +44,7 @@ export const HOME_UI = Object.freeze({
     "apps/web/lib/catalog/prepared-china-filter-index.ts",
     "apps/web/lib/catalog/prepared-china-fixture-activation.ts",
     "apps/web/lib/catalog/prepared-china-http-fixture.ts",
+    "apps/web/lib/catalog/related-offer-selection.ts",
     "apps/web/lib/catalog/serving-china-filter-index.ts",
     "apps/web/lib/catalog/storage.ts",
     "scripts/build-serving-china-filter-index.mts",
@@ -71,7 +72,8 @@ export const HOME_UI = Object.freeze({
     "tests/paid-korea-report-recommendations.test.ts",
     "tests/paid-korea-report-render.test.ts",
     "tests/prepared-china-filter-index.test.ts",
-    "tests/public-page-recovery.test.ts"
+    "tests/public-page-recovery.test.ts",
+    "tests/related-offer-selection.test.ts"
 ]),
 });
 

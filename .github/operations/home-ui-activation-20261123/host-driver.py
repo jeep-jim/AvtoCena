@@ -89,7 +89,7 @@ class Protocol:
             value = reply.get(timeout=60)
             host.need(value.get('ok') is True and value.get('generationId') == generation
                       and value.get('acceptedReadModelFingerprint') == fingerprint
-                      and value.get('operationId') == 'home-ui-catalog-05f2-' + self.nonce
+                      and value.get('operationId') == 'home-ui-catalog-59f7-' + self.nonce
                       and type(value.get('lockedUntilMs')) is int and value['lockedUntilMs'] > time.time() * 1000,
                       'controller_authority')
         finally:

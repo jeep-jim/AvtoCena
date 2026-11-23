@@ -30,7 +30,7 @@ jobs:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
           path: application
-          ref: 05f289a875866be0be84800c8644dee5f38a1059
+          ref: 59f7e8fd0f7a6a9d8d2de545618962830c7866ea
           persist-credentials: false
       - uses: actions/setup-node@v4
         with:

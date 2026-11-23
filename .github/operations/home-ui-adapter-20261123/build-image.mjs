@@ -8,7 +8,7 @@ import {HOME_UI, sha256, assertHomeSourceEvidence, verifyHomeSourceCheckout, ver
 import {verifyReadonlyInvocation} from '../../../scripts/lib/readonly-marker-invocation.mjs';
 
 export const IMAGE_MARKER = '.github/market-runs/home-ui-image-build.json';
-export const IMAGE_OPERATION = 'build-home-ui-image-catalog-05f2';
+export const IMAGE_OPERATION = 'build-home-ui-image-catalog-59f7';
 export const RESOURCE_FILES = Object.freeze({
   'home-bootstrap.mjs':'.github/operations/home-ui-adapter-20261123/home-bootstrap.mjs',
   'run-node-with-resources.mjs':'scripts/run-node-with-resources.mjs',
@@ -83,12 +83,12 @@ async function fileDigest(filename) {
  * public image artifact. The separate accepted runtime is never contacted. */
 async function buildImage(sourceRoot, outputRoot, activation) {
   const checkInvocation = activation ? () => verifyReadonlyInvocation({root:controllerRoot,
-    markerPath:'.github/market-runs/home-ui-activation.json', operation:'prepare-home-ui-catalog-05f2'}) : checkBuildInvocation;
+    markerPath:'.github/market-runs/home-ui-activation.json', operation:'prepare-home-ui-catalog-59f7'}) : checkBuildInvocation;
   const invocation = checkInvocation();
   verifyHomeGateFiles(controllerRoot);
   const proof = verifyHomeSourceCheckout(sourceRoot);
   const runner = await fs.realpath(process.env.RUNNER_TEMP || '');
-  need(path.resolve(outputRoot) === path.join(runner, 'home-ui-image-catalog-05f2'), 'output_scope');
+  need(path.resolve(outputRoot) === path.join(runner, 'home-ui-image-catalog-59f7'), 'output_scope');
   await fs.mkdir(outputRoot, {mode:0o700});
   const context = path.join(outputRoot, 'context'), bundle = path.join(outputRoot, 'node-resources');
   for (const directory of [context, bundle, path.join(outputRoot, 'docker-config')]) await fs.mkdir(directory, {mode:0o700});
