@@ -1,0 +1,68 @@
+name: Retire the owner-approved unstarted historical runs
+on:
+  push:
+    branches: [ops/retire-unstarted-20261123]
+    paths: ['.github/workflows/retire-unstarted-20261123.yml']
+permissions:
+  actions: write
+jobs:
+  retire:
+    if: github.repository == 'jeep-jim/AvtoCena' && github.run_attempt == '1'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - name: Recheck each frozen run and verify only unstarted cancellations
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: python
+        run: |
+          TARGETS=[('43098373829', '.github/workflows/owner-speed-checkpoint.yml', '2026-11-11T20:50:24Z'), ('43098373669', '.github/workflows/verify-crm-mobile-security.yml', '2026-11-11T20:50:23Z'), ('43098373694', '.github/workflows/verify-green-budget.yml', '2026-11-11T20:50:23Z'), ('43098373788', '.github/workflows/owner-navigation-retention.yml', '2026-11-11T20:50:23Z'), ('43098373743', '.github/workflows/verify-dealer-selection.yml', '2026-11-11T20:50:23Z'), ('43098373792', '.github/workflows/catalog-overview-read-model.yml', '2026-11-11T20:50:23Z'), ('43098373776', '.github/workflows/verify-mobile-filter-overlays.yml', '2026-11-11T20:50:23Z'), ('43098373717', '.github/workflows/owner-packaged-browser.yml', '2026-11-11T20:50:23Z'), ('43097880967', '.github/workflows/verify-site-chat.yml', '2026-11-11T20:44:59Z'), ('43097880998', '.github/workflows/verify-catalog-resilience.yml', '2026-11-11T20:44:59Z'), ('43097880711', '.github/workflows/verify-dealer-offer-services.yml', '2026-11-11T20:44:59Z'), ('43097880791', '.github/workflows/verify-dealer-map.yml', '2026-11-11T20:44:59Z'), ('43097880783', '.github/workflows/ci.yml', '2026-11-11T20:44:59Z'), ('43097880907', '.github/workflows/verify-catalog-load-more.yml', '2026-11-11T20:44:59Z'), ('43097880879', '.github/workflows/verify-green-budget.yml', '2026-11-11T20:44:59Z'), ('43097880716', '.github/workflows/verify-model-suggestions.yml', '2026-11-11T20:44:59Z'), ('43097880834', '.github/workflows/verify-offer-share.yml', '2026-11-11T20:44:59Z'), ('43097880839', '.github/workflows/verify-model-search-controls.yml', '2026-11-11T20:44:59Z'), ('43097880735', '.github/workflows/verify-dealer-workspace.yml', '2026-11-11T20:44:59Z'), ('43097880835', '.github/workflows/verify-owner-polish.yml', '2026-11-11T20:44:59Z'), ('43097880886', '.github/workflows/verify-catalog-sidebar.yml', '2026-11-11T20:44:59Z'), ('43097880945', '.github/workflows/qr-gallery-qa.yml', '2026-11-11T20:44:59Z'), ('43097384265', '.github/workflows/owner-search-checkpoint.yml', '2026-11-11T20:39:54Z'), ('43096164711', '.github/workflows/owner-search-checkpoint.yml', '2026-11-11T20:27:28Z'), ('38994950593', '.github/workflows/deploy-yandex.yml', '2026-10-17T02:26:51Z'), ('38994894574', '.github/workflows/catalog-live-recovery-japan-from-prestige.yml', '2026-10-17T02:26:00Z'), ('38994824794', '.github/workflows/catalog-live-recovery-japan-from-prestige.yml', '2026-10-17T02:24:56Z'), ('31164670128', '.github/workflows/catalog-strict-dubicars-smoke.yml', '2026-08-07T09:08:57Z')]
+          import json, os, time, urllib.request, urllib.error
+          repo='jeep-jim/AvtoCena'
+          headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Accept':'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28'}
+          def api(path, method='GET'):
+              request=urllib.request.Request('https://api.github.com/repos/'+repo+'/actions/runs/'+path,method=method,headers=headers)
+              with urllib.request.urlopen(request,timeout=20) as response:
+                  return json.load(response) if method=='GET' else response.status
+          def eligible(run, expected):
+              return (run['repository']['full_name']==repo and run['status']=='queued'
+                      and run['run_attempt']==1 and str(run['id'])==expected[0]
+                      and run['path']==expected[1] and run['created_at']==expected[2]
+                      and run['created_at']<'2026-11-12T00:00:00Z')
+          def unstarted(run_id):
+              jobs=api(run_id+'/jobs?filter=all&per_page=100')
+              return jobs['total_count']==len(jobs['jobs']) and all(
+                  j['status']=='queued' and not j.get('started_at') and not j.get('runner_id')
+                  and all(s['status'] in ('queued','pending') for s in j.get('steps') or [])
+                  for j in jobs['jobs'])
+          pending=set()
+          errors=[]
+          for target in TARGETS:
+              run_id=target[0]
+              try:
+                  first=api(run_id)
+                  if not eligible(first,target) or not unstarted(run_id):
+                      print(run_id,'skipped',first['status'],flush=True)
+                      continue
+                  second=api(run_id)
+                  if not eligible(second,target) or second['head_sha']!=first['head_sha']:
+                      print(run_id,'changed before cancellation',flush=True)
+                      continue
+                  status=api(run_id+'/cancel','POST')
+                  print(run_id,'requested',status,flush=True)
+                  pending.add(run_id)
+              except urllib.error.HTTPError as error:
+                  errors.append((run_id,error.code))
+                  print(run_id,'request error',error.code,flush=True)
+          deadline=time.monotonic()+240
+          cancelled=[]
+          while pending and time.monotonic()<deadline:
+              for run_id in list(pending):
+                  run=api(run_id)
+                  if run['status']=='completed':
+                      pending.remove(run_id)
+                      if run['conclusion']=='cancelled': cancelled.append(run_id)
+                      else: errors.append((run_id,run['conclusion']))
+              if pending: time.sleep(8)
+          print(json.dumps({'verifiedCancelled':sorted(cancelled),'pending':sorted(pending),'errors':errors}))
+          if pending or errors: raise SystemExit(1)
