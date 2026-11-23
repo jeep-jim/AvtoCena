@@ -111,10 +111,10 @@ test('build workflow has no runtime transport or private artifact and mandatory 
   assert.match(workflow, /github\.repository_id == '1289722938'/);
   assert.match(workflow, /github\.run_attempt == '1'/);
   assert.ok(workflow.includes(IMAGE_MARKER));
-  assert.match(workflow, /ref: 59f7e8fd0f7a6a9d8d2de545618962830c7866ea/);
+  assert.match(workflow, /ref: a05987cc725c950614ac7310c7de782b73cb093a/);
   assert.match(workflow, /git fetch --no-write-fetch-head --depth=1 origin 22867cbcfaee27b2e8917b6bf880e44827f67b60/);
   assert.doesNotMatch(workflow, /secrets\.|SSH|scp|contents: write|actions: write|schedule:|catalog-publish|regcloud-deploy/);
-  assert.match(workflow, /path: \$\{\{ runner.temp \}\}\/home-ui-image-catalog-59f7\/receipt\.json/);
+  assert.match(workflow, /path: \$\{\{ runner.temp \}\}\/home-ui-image-catalog-a059\/receipt\.json/);
   const cli = await fs.readFile(path.join(root, '.github/operations/home-ui-adapter-20261123/build-image.mjs'), 'utf8');
   assert.match(cli, /--host=unix:\/\/\/var\/run\/docker\.sock/);
   assert.match(cli, /'archive','--format=tar'/);

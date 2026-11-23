@@ -1,5 +1,8 @@
 name: Catalog — release exact cancelled repair lease
 on:
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/release-terminal-budget-lock.json']
   workflow_dispatch:
     inputs:
       run_id:
@@ -18,6 +21,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   release:
+    if: github.repository_id == '1289722938' && (github.event_name != 'push' || (github.ref == 'refs/heads/main' && github.run_attempt == 1))
     runs-on: ubuntu-latest
     environment: regcloud-staging
     timeout-minutes: 10
@@ -25,17 +29,34 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
+          fetch-depth: 2
       - uses: actions/setup-node@v4
         with:
           node-version: 24
           cache: npm
       - run: npm ci
       - run: node --test tests/release-cancelled-repair-lock.test.mjs
+      - name: Verify the exact recovery request before storage access
+        if: github.event_name == 'push'
+        run: |
+          node --input-type=module <<'JS'
+          import {verifyReadonlyInvocation} from './scripts/lib/readonly-marker-invocation.mjs';
+          verifyReadonlyInvocation({root:process.cwd(),markerPath:'.github/market-runs/release-terminal-budget-lock.json',
+            operation:'release-terminal-budget-owner-45179611817'});
+          JS
+      - uses: actions/download-artifact@v4
+        if: github.event_name == 'push' || inputs.run_id == '45179611817'
+        with:
+          artifact-ids: 14822552451
+          run-id: 45179611817
+          github-token: ${{ github.token }}
+          merge-multiple: true
+          path: budget-lock-proof
       - name: Verify cancelled owner then release only its unchanged lease
         env:
           GITHUB_TOKEN: ${{ github.token }}
-          CANCELLED_REPAIR_RUN_ID: ${{ inputs.run_id }}
-          CANCELLED_REPAIR_OPERATION_ID: ${{ inputs.operation_id }}
+          CANCELLED_REPAIR_RUN_ID: ${{ github.event_name == 'push' && '45179611817' || inputs.run_id }}
+          CANCELLED_REPAIR_OPERATION_ID: ${{ github.event_name == 'push' && 'read-model-repair-bdaa91cb-4e4a-4c7f-9087-9bcdbb5b5121' || inputs.operation_id }}
           JSON_STORAGE_DRIVER: object
           YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
           YC_OBJECT_STORAGE_REGION: us-east-1

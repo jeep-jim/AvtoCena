@@ -6,11 +6,12 @@ export const chinaCountRelease = '18e81af30cb9187b139924217a777de1c9819bca';
 export const koreaHistoryRelease = 'b4d226491bcfa03eca73d72480ff3bd867d3c6fb';
 export const koreaCatalogPageRelease = '05f289a875866be0be84800c8644dee5f38a1059';
 export const paidEncarCardRelease = '59f7e8fd0f7a6a9d8d2de545618962830c7866ea';
+export const scopedDealerRelease = 'a05987cc725c950614ac7310c7de782b73cb093a';
 export const chinaServingCalculation = '4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90';
 
 export function checkedChinaServingRelease(health, {privateStage = false} = {}) {
   const release = health?.releaseSha;
-  const supported = release === chinaFilterRelease || release === chinaCountRelease || release === koreaHistoryRelease || release === koreaCatalogPageRelease || release === paidEncarCardRelease
+  const supported = release === chinaFilterRelease || release === chinaCountRelease || release === koreaHistoryRelease || release === koreaCatalogPageRelease || release === paidEncarCardRelease || release === scopedDealerRelease
     || (privateStage && release === retainedChinaRelease);
   assert(health?.ok === true && health.service === 'avtocena-web' && supported
     && health.calculationVersion === chinaServingCalculation, 'serving released calculator changed');

@@ -52,7 +52,7 @@ jobs:
           persist-credentials: false
       - name: Verify the model data for the serving releases
         working-directory: retained
-        run: git fetch --no-tags --depth=1 origin 22867cbcfaee27b2e8917b6bf880e44827f67b60 0509e76cb02523157c98804c52edd7eb784916ba 18e81af30cb9187b139924217a777de1c9819bca b4d226491bcfa03eca73d72480ff3bd867d3c6fb 05f289a875866be0be84800c8644dee5f38a1059 59f7e8fd0f7a6a9d8d2de545618962830c7866ea
+        run: git fetch --no-tags --depth=1 origin 22867cbcfaee27b2e8917b6bf880e44827f67b60 0509e76cb02523157c98804c52edd7eb784916ba 18e81af30cb9187b139924217a777de1c9819bca b4d226491bcfa03eca73d72480ff3bd867d3c6fb 05f289a875866be0be84800c8644dee5f38a1059 59f7e8fd0f7a6a9d8d2de545618962830c7866ea a05987cc725c950614ac7310c7de782b73cb093a
       - name: Install and verify both readers
         run: |
           (cd source && npm ci --no-audit --no-fund)
