@@ -1,7 +1,8 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import {pathToFileURL} from 'node:url';
+import {fileURLToPath,pathToFileURL} from 'node:url';
+import {verifyReadonlyInvocation} from './lib/readonly-marker-invocation.mjs';
 import {createReadOnlyRawGcS3Transport} from './lib/catalog-raw-gc-s3.mjs';
 import {RAW_GC_TARGET, RAW_GC_POLICY_KEY} from './lib/catalog-raw-gc.mjs';
 import {RAW_COORDINATION_KEY, assertRawCoordination} from './lib/catalog-raw-coordination.mjs';
@@ -24,6 +25,11 @@ export const SAVED_INTAKE_PROBE_ARCHIVES = Object.freeze([
     manifestSha256:'a78c30abb8c52b09b273699ebcba9fc57d7a7ddc0726533e40e5835ba5de8b78'}),
 ]);
 const CURSOR_KEY='catalog/intake-cursors/v1/uae.json';
+const REPO_ROOT=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
+export function verifySavedIntakeProbeInvocation({root=REPO_ROOT,env=process.env}={}) {
+  return verifyReadonlyInvocation({root,env,
+    markerPath:'.github/market-runs/saved-intake-readonly-probe.json',operation:'saved-intake-readonly-probe'});
+}
 const CONTROL_KEYS=[RAW_GC_POLICY_KEY,RAW_COORDINATION_KEY,CURSOR_KEY,'catalog/manifest.json'];
 const SHA=/^[a-f0-9]{64}$/;
 const MAX_OBJECTS=4096,WORK_MS=300000;
@@ -32,7 +38,7 @@ const safeTime=value=>typeof value==='string'&&Number.isFinite(Date.parse(value)
 const fingerprint=meta=>({found:meta.found,...(meta.found?{etag:meta.etag,sha256:rawDigest(meta.value)}:{})});
 const safeReason=error=>{
   const first=String(error?.message||'').split('\n')[0];
-  return /^(?:saved_intake_probe|raw_gc_s3|intake_archive|raw_coord)_[a-z0-9_]+$/.test(first)
+  return /^(?:saved_intake_probe|raw_gc_s3|intake_archive|raw_coord|readonly_invocation)_[a-z0-9_]+$/.test(first)
     ?first:'saved_intake_probe_failed';
 };
 const fixedFlags={scope:'exact_saved_intake_metadata_only',payloadIntegrityVerified:false,
@@ -177,9 +183,7 @@ export async function probeSavedIntakesReadOnly({io,pins=SAVED_INTAKE_PROBE_ARCH
 
 async function main() {
   assert.ok(process.argv.length===4&&process.argv[2]==='--output'&&path.isAbsolute(process.argv[3]),'saved_intake_probe_arguments');
-  assert.ok(process.env.GITHUB_REPOSITORY==='jeep-jim/AvtoCena'&&process.env.GITHUB_REF==='refs/heads/main'
-    &&process.env.GITHUB_EVENT_NAME==='workflow_dispatch'&&/^[a-f0-9]{40}$/.test(process.env.GITHUB_SHA||''),
-  'saved_intake_probe_source');
+  const invocation=verifySavedIntakeProbeInvocation();
   const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),WORK_MS);
   try {
     let result;
@@ -187,7 +191,7 @@ async function main() {
       const io=createReadOnlyRawGcS3Transport({signal:controller.signal,limits:{requests:8192,responseBytes:32*1024**2}});
       result=await probeSavedIntakesReadOnly({io});
     } catch(error) {result={version:1,status:'failed',reason:safeReason(error),...fixedFlags};}
-    const report={...result,sourceSha:process.env.GITHUB_SHA};
+    const report={...result,sourceSha:invocation.sourceSha,invocation};
     await fs.writeFile(process.argv[3],JSON.stringify(report,null,2)+'\n',{flag:'wx',mode:0o600});
     console.log(JSON.stringify(report));
     if(report.status!=='verified_metadata_only')process.exitCode=1;

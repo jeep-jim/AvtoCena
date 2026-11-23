@@ -1,7 +1,11 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import {readFileSync} from 'node:fs';
-import {probeSavedIntakesReadOnly,SAVED_INTAKE_PROBE_ARCHIVES} from '../scripts/catalog-saved-intake-readonly-probe.mjs';
+import {readFileSync,mkdtempSync,mkdirSync,writeFileSync,rmSync,existsSync} from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import {fileURLToPath,pathToFileURL} from 'node:url';
+import {execFileSync,spawnSync} from 'node:child_process';
+import {probeSavedIntakesReadOnly,SAVED_INTAKE_PROBE_ARCHIVES,verifySavedIntakeProbeInvocation} from '../scripts/catalog-saved-intake-readonly-probe.mjs';
 import {createReadOnlyRawGcS3Transport} from '../scripts/lib/catalog-raw-gc-s3.mjs';
 import {RAW_GC_TARGET,RAW_GC_POLICY_KEY} from '../scripts/lib/catalog-raw-gc.mjs';
 import {RAW_COORDINATION_KEY} from '../scripts/lib/catalog-raw-coordination.mjs';
@@ -145,11 +149,91 @@ test('the real S3 transport performs only exact signed REG GET/HEAD requests in 
   assert.ok(!JSON.stringify(report).includes('do-not-log'));
 });
 
-test('workflow has only a manual main trigger and no data collection or mutation command',()=>{
+test('workflow allows only reviewed manual or exact marker entry and gates before REG credentials',()=>{
   const workflow=readFileSync(new URL('../.github/workflows/catalog-saved-intake-readonly-probe.yml',import.meta.url),'utf8');
-  assert.match(workflow,/on:\n  workflow_dispatch:\npermissions:/);
+  assert.match(workflow,/workflow_dispatch:\n    inputs:\n      controller_sha:/);
+  assert.match(workflow,/EXPECTED_CONTROLLER_SHA: \$\{\{ inputs\.controller_sha \}\}/);
+  assert.match(workflow,/push:\n    branches: \[main\]\n    paths: \['\.github\/market-runs\/saved-intake-readonly-probe\.json'\]/);
   assert.match(workflow,/ref: \$\{\{ github\.sha \}\}/);assert.match(workflow,/persist-credentials: false/);
-  assert.ok(!/^\s*(?:push|schedule|workflow_run):/m.test(workflow));
+  assert.match(workflow,/fetch-depth: 2/);assert.match(workflow,/github\.run_attempt == '1'/);
+  assert.match(workflow,/github\.repository_id == '1289722938'/);
+  assert.ok(!/^\s*(?:schedule|workflow_run):/m.test(workflow));
   assert.ok(!/catalog-(?:collect|publish|commit|archive)-|delete-batch|executeRawGc|npm (?:run|ci)/.test(workflow));
+  assert.ok(!/actions:\s*write/.test(workflow));
+  assert.ok(workflow.indexOf('verifySavedIntakeProbeInvocation')<workflow.indexOf('REGCLOUD_S3_'));
+  assert.match(workflow,/tests\/catalog-saved-intake-readonly-probe\.test\.mjs tests\/readonly-marker-invocation\.test\.mjs/);
   assert.equal((workflow.match(/REGCLOUD_S3_/g)||[]).length,2);
+});
+
+const markerPath='.github/market-runs/saved-intake-readonly-probe.json';
+const operation='saved-intake-readonly-probe';
+function invocationFixture(run,existing=false) {
+  const directory=mkdtempSync(path.join(os.tmpdir(),'saved-intake-marker-test-'));
+  const root=path.join(directory,'repo'),eventPath=path.join(directory,'push.json');
+  const git=args=>execFileSync('git',['-c','user.name=Read-only fixture','-c','user.email=readonly@example.invalid',...args],
+    {cwd:root,encoding:'utf8',stdio:['ignore','pipe','pipe']}).trim();
+  try {
+    mkdirSync(path.join(root,'.github/market-runs'),{recursive:true});
+    git(['init','--quiet','--initial-branch=main']);writeFileSync(path.join(root,'controller.txt'),'reviewed fixture\n');
+    if(existing)writeFileSync(path.join(root,markerPath),JSON.stringify({version:1,operation,approvedSourceSha:'0'.repeat(40)}));
+    const commit=()=>{git(['add','--all']);git(['commit','--quiet','-m','synthetic local fixture']);return git(['rev-parse','HEAD']);};
+    const accepted=commit(),env={GITHUB_REPOSITORY:'jeep-jim/AvtoCena',GITHUB_REPOSITORY_ID:'1289722938',
+      GITHUB_REF:'refs/heads/main',GITHUB_RUN_ATTEMPT:'1',GITHUB_EVENT_NAME:'workflow_dispatch',GITHUB_SHA:accepted,
+      EXPECTED_CONTROLLER_SHA:accepted,GITHUB_EVENT_PATH:eventPath};
+    const push=({marker={version:1,operation,approvedSourceSha:accepted},extra=false}={})=>{
+      writeFileSync(path.join(root,markerPath),JSON.stringify(marker));
+      if(extra)writeFileSync(path.join(root,'controller.txt'),'unreviewed fixture change\n');
+      env.GITHUB_SHA=commit();env.GITHUB_EVENT_NAME='push';env.EXPECTED_CONTROLLER_SHA='';
+      writeFileSync(eventPath,JSON.stringify({before:accepted,after:env.GITHUB_SHA,ref:env.GITHUB_REF,
+        forced:false,created:false,deleted:false}));
+    };
+    return run({directory,root,env,accepted,push,eventPath});
+  } finally {rmSync(directory,{recursive:true,force:true});}
+}
+
+test('actual probe wrapper preserves exact reviewed manual dispatch and rejects a missing or wrong pin',()=>invocationFixture(({root,env,accepted})=>{
+  assert.deepEqual(verifySavedIntakeProbeInvocation({root,env}),{version:1,event:'workflow_dispatch',
+    sourceSha:accepted,approvedSourceSha:accepted,markerPath:null});
+  for(const source of ['', 'b'.repeat(40)])assert.throws(()=>verifySavedIntakeProbeInvocation({root,
+    env:{...env,EXPECTED_CONTROLLER_SHA:source}}),/readonly_invocation_manual_source/);
+}));
+
+test('actual fixed probe wrapper accepts only a marker A/M transition, including a real depth-two checkout',()=>{
+  for(const existing of [false,true])invocationFixture(({root,directory,env,accepted,push})=>{
+    push();const expected={version:1,event:'push',sourceSha:env.GITHUB_SHA,approvedSourceSha:accepted,markerPath};
+    assert.deepEqual(verifySavedIntakeProbeInvocation({root,env}),expected);
+    const clone=path.join(directory,'shallow');
+    execFileSync('git',['clone','--quiet','--depth=2',pathToFileURL(root).href,clone],{stdio:['ignore','pipe','pipe']});
+    assert.deepEqual(verifySavedIntakeProbeInvocation({root:clone,env}),expected);
+  },existing);
+});
+
+test('probe wrapper cannot be redirected to another operation, accept extra source changes, or replay a forced push',()=>{
+  for(const mode of ['operation','extra','event'])invocationFixture(({root,env,accepted,push,eventPath})=>{
+    push(mode==='operation'?{marker:{version:1,operation:'another-readonly-operation',approvedSourceSha:accepted}}:{extra:mode==='extra'});
+    if(mode==='event')writeFileSync(eventPath,JSON.stringify({before:accepted,after:env.GITHUB_SHA,ref:env.GITHUB_REF,
+      forced:true,created:false,deleted:false}));
+    assert.throws(()=>verifySavedIntakeProbeInvocation({root,env,operation:'another-readonly-operation',markerPath:'ignored.json'}),
+      mode==='operation'?/readonly_invocation_marker_contract/:mode==='extra'?/readonly_invocation_marker_only_diff/:/readonly_invocation_push_transition/);
+  });
+});
+
+test('native CLI rejects unauthorized invocation before any S3 request and does not expose supplied credentials',()=>{
+  const directory=mkdtempSync(path.join(os.tmpdir(),'saved-intake-cli-test-'));
+  try {
+    const preload=path.join(directory,'deny-fetch.mjs'),requested=path.join(directory,'requested.txt'),output=path.join(directory,'result.json');
+    writeFileSync(preload,`import fs from 'node:fs'; globalThis.fetch=async()=>{fs.writeFileSync(${JSON.stringify(requested)},'unexpected');throw Error('unexpected request');};\n`);
+    const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
+    const result=spawnSync(process.execPath,['--import',preload,'scripts/catalog-saved-intake-readonly-probe.mjs','--output',output],
+      {cwd:root,encoding:'utf8',timeout:10000,env:{...process.env,GITHUB_REPOSITORY:'foreign/repository',
+        GITHUB_REPOSITORY_ID:'1289722938',GITHUB_REF:'refs/heads/main',GITHUB_EVENT_NAME:'workflow_dispatch',
+        GITHUB_RUN_ATTEMPT:'1',GITHUB_SHA:'a'.repeat(40),EXPECTED_CONTROLLER_SHA:'a'.repeat(40),
+        YC_OBJECT_STORAGE_ENDPOINT:RAW_GC_TARGET.endpoint,YC_OBJECT_STORAGE_REGION:'us-east-1',
+        YC_OBJECT_STORAGE_BUCKET:RAW_GC_TARGET.bucket,YC_OBJECT_STORAGE_PREFIX:RAW_GC_TARGET.prefix,
+        YC_OBJECT_STORAGE_ACCESS_KEY_ID:'fixture-key',YC_OBJECT_STORAGE_SECRET_ACCESS_KEY:'fixture-secret-do-not-log'}});
+    assert.equal(result.error,undefined);assert.equal(result.status,1);assert.equal(existsSync(requested),false);
+    assert.equal(existsSync(output),false);assert.equal(result.stdout,'');
+    assert.equal(JSON.parse(result.stderr).reason,'readonly_invocation_repository');
+    assert.ok(!result.stderr.includes('fixture-key'));assert.ok(!result.stderr.includes('fixture-secret-do-not-log'));
+  } finally {rmSync(directory,{recursive:true,force:true});}
 });
