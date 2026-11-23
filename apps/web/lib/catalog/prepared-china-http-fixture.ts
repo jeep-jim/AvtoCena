@@ -17,6 +17,7 @@ import {createPreparedCoverageIdsDigest} from './prepared-price-coverage';
 import {DELIVERY_TARIFF_VERSION} from './city-delivery';
 import {compileChinaPartDispatch,createChinaSelectorFacets,createChinaSelectorPage} from './prepared-china-streaming-selector';
 import {assertPreparedChinaFilterEntry} from './prepared-china-filter-index';
+import {selectServingChinaFilterPage,servingChinaFilterBinding} from './serving-china-filter-index';
 import {balanceBusinessRows,businessOrder,sortCatalogRows,MARKET_DIVERSITY_WINDOW_PAGES,MARKET_PAGE_SIZE} from './market-page';
 
 type IndependentRead=Pick<IndependentFixturePublication,'market'|'observe'|'openChinaPrepared'>;
@@ -286,7 +287,13 @@ export async function readPreparedChinaCompatibility(params:CatalogSearchParams,
   const query=isDefaultMarketPage?{...params,city:undefined}:params;
   if(!options.includeFacets||options.navigationFacets||options.countOnly&&!options.marketPage){
    const countOnly=options.countOnly&&!options.marketPage;
-   const selected=await s.snapshot.filterPage(query,{start,pageSize,countOnly});
+   const window={start,pageSize,countOnly};
+   let selected=await s.snapshot.filterPage(query,window);
+   if(!selected && !s.snapshot.hasFilterIndex && preparedChinaNormalRegcloudEnabled()){
+    const storage=new ObjectJsonStorage();
+    selected=await selectServingChinaFilterPage(s.snapshot,servingChinaFilterBinding,query,window,
+      (key,limit)=>storage.getBinaryBounded(key,limit));
+   }
    if(selected){
     if(countOnly){await s.assertCurrent();return {generationId,total:selected.total,items:[],marketCountInfo:{}};}
     const predicate=await compilePreparedChinaCompatibilityPredicate(query);

@@ -160,7 +160,7 @@ export async function openPreparedChinaSnapshot(m:CatalogPreparedChinaManifest,
  };
  return {generationId:m.generationId,marketDigest:dir.marketDigest,chunks:[...c.chunks],rows:c.count,validUntil:dir.validUntil,legalValidUntil:acceptedLegalUntil,idRoots:dir.idRoots,
   modelView:dir.modelView,fixedCityViews:dir.fixedCityViews,deliveryTariffVersion:dir.deliveryTariffVersion,
-  directorySha256:marker.directorySha256,streamingSelector:dir.streamingSelector,navigationFacets:dir.navigationFacets,filterIndex:dir.filterIndex,readChunk,assertCurrent,locate,modelPage,cityPage,filterPage,canonicalWindow};
+  directorySha256:marker.directorySha256,streamingSelector:dir.streamingSelector,navigationFacets:dir.navigationFacets,hasFilterIndex:Object.hasOwn(dir,'filterIndex'),filterIndex:dir.filterIndex,readChunk,assertCurrent,locate,modelPage,cityPage,filterPage,canonicalWindow};
 }
 
 export async function readActivePreparedChinaFixturePart(storage:JsonStorage,chunk:string,part:number){

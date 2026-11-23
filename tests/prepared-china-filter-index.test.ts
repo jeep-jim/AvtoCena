@@ -174,3 +174,23 @@ test('dealer and public saved-search links select the own China cut with the sam
   assert.deepEqual(page?.positions.map(x=>x[0]),matches.slice(start,start+24).map(x=>x.id));
  }
 });
+
+test('derived index belongs only to its exact accepted snapshot and checks every read',async()=>{
+ const {selectServingChinaFilterPage}=await import('../apps/web/lib/catalog/serving-china-filter-index');
+ const f=await fixture([offer(1),offer(2),offer(3)]),snapshot={...context,rows:3,directorySha256:'d'.repeat(64)};
+ const binding={...snapshot,indexSha256:f.ref.sha256},query={market:'china',powerTo:160},input={start:0,pageSize:24,countOnly:false};
+ const keys:string[]=[];
+ const read=async(key:string)=>{
+  const prefix='catalog/derived-read-cache/china/'+snapshot.directorySha256+'/';
+  assert(key.startsWith(prefix));keys.push(key);
+  return {data:f.objects.get('catalog/generations/'+generationId+'/indexes/prepared-china-read-v1/filters-v1/'+key.slice(prefix.length))!};
+ };
+ for(const patch of [{generationId:'gen_1795166586456_next'},{rows:2},{marketDigest:'b'.repeat(64)},{directorySha256:'e'.repeat(64)}])
+  assert.equal(await selectServingChinaFilterPage({...snapshot,...patch},binding,query,input,read),null);
+ assert.equal(keys.length,0);
+ const actual=await selectServingChinaFilterPage(snapshot,binding,query,input,read);
+ assert.equal(keys.length,2);
+ assert.deepEqual(actual,await f.select(query));
+ resetPreparedChinaFilterIndexCacheForTests();
+ await assert.rejects(selectServingChinaFilterPage(snapshot,binding,query,input,async()=>({data:Buffer.from('{}')})),/integrity/);
+});
