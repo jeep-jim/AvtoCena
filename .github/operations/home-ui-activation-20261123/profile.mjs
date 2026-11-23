@@ -8,23 +8,23 @@ export const ACTIVATION_MARKER = '.github/market-runs/home-ui-activation.json';
 export const APPROVAL_MARKER = '.github/market-runs/home-ui-plan-approval.json';
 export const APPROVAL_WORKFLOW = '.github/workflows/home-ui-plan-approval.yml';
 export const CONTROLLER_ROOT = path.resolve(fileURLToPath(new URL('../../..', import.meta.url)));
-export const REVIEWED_INVENTORY_SHA = 'b0ff41c20fdcf5c459d75b4d967ed2009a550322e449f16bff5b26e938e8e6eb';
-export const INVENTORY_FILE = 'docs/audits/2026-11-23-home-runtime-verified.json';
+export const REVIEWED_INVENTORY_SHA = 'c23377808905f6a39deca0dbc6c3f482467b7635f23c9eb3074a5096e328d432';
+export const INVENTORY_FILE = 'docs/audits/2026-11-23-home-runtime-after-cpu.json';
 const need = (value, code) => { if (!value) throw Error('home_activation_' + code); };
 
 export const checkActivationInvocation = (root = CONTROLLER_ROOT, env = process.env) =>
-  verifyReadonlyInvocation({root, env, markerPath:ACTIVATION_MARKER, operation:'prepare-home-ui-catalog-0509'});
+  verifyReadonlyInvocation({root, env, markerPath:ACTIVATION_MARKER, operation:'prepare-home-ui-catalog-b4d2'});
 
 // Keep the accepted three-field marker contract. The operation itself binds the
 // reviewed plan digest, waiting run and one-use nonce; no caller-supplied code.
 export function approvalOperation({runId, nonce, planSha256}) {
   need(/^[1-9][0-9]{0,19}$/.test(String(runId)) && /^[a-f0-9]{32}$/.test(nonce || '')
     && /^[a-f0-9]{64}$/.test(planSha256 || ''), 'approval_tuple');
-  return `approve-home-ui-catalog-0509-run-${runId}-nonce-${nonce}-plan-${planSha256}`;
+  return `approve-home-ui-catalog-b4d2-run-${runId}-nonce-${nonce}-plan-${planSha256}`;
 }
 
 export function parseApprovalOperation(operation) {
-  const match = /^approve-home-ui-catalog-0509-run-([1-9][0-9]{0,19})-nonce-([a-f0-9]{32})-plan-([a-f0-9]{64})$/.exec(operation || '');
+  const match = /^approve-home-ui-catalog-b4d2-run-([1-9][0-9]{0,19})-nonce-([a-f0-9]{32})-plan-([a-f0-9]{64})$/.exec(operation || '');
   need(match, 'approval_operation');
   return {runId:match[1], nonce:match[2], planSha256:match[3]};
 }

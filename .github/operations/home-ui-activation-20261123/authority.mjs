@@ -9,7 +9,7 @@ const fingerprint = value => sha256(JSON.stringify({calculationVersion:HOME_UI.s
 
 async function homeAuthority({storage, nonce, readLiveIdentity, now = Date.now, heartbeat = true, resume}) {
   need(storage?.driver === 'object' && /^[a-f0-9]{32}$/.test(nonce || '') && typeof readLiveIdentity === 'function', 'context');
-  const operationId = 'home-ui-catalog-0509-' + nonce;
+  const operationId = 'home-ui-catalog-b4d2-' + nonce;
   const read = () => storage.readJsonWithMeta(LOCK, {lockedUntil:''});
   const condition = meta => {
     need(!meta.found || typeof meta.etag === 'string' && meta.etag.length > 0, 'etag');

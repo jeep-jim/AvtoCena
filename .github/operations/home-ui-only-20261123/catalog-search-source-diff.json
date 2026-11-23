@@ -1,13 +1,53 @@
 [
   [
+    "apps/web/lib/catalog/ajes-public.ts",
+    "100644 blob 6553848b398339d4a0832d510cbbc54a58aef6e2",
+    "100644 blob b854093523330cce706045db906dec618c183b59"
+  ],
+  [
+    "apps/web/lib/catalog/ajes-runtime.ts",
+    "100644 blob 7da0b0c0ce7de062a95fb33e6a0e194b722f5404",
+    "100644 blob 04dec1ee919bc324446da4933c2ef09bb4c8ec7a"
+  ],
+  [
+    "apps/web/lib/catalog/ajes-saved-power-page.ts",
+    null,
+    "100644 blob c251270ba9740f44e93a7ca2708da2228ec6250a"
+  ],
+  [
+    "apps/web/lib/catalog/ajes-saved-search.ts",
+    "100644 blob c163c58a0b8c05c652350d392ed16d3bd22a41bf",
+    "100644 blob 0f05cda52dbe2adb83304dceb7f72a873aedb06a"
+  ],
+  [
+    "apps/web/lib/catalog/china-regcloud-object-reader.ts",
+    "100644 blob 7451c1bf43150e6a11b3f4ee1b18249e46a1c587",
+    "100644 blob f4c1143262071b46ad1558986280b6853359693d"
+  ],
+  [
+    "apps/web/lib/catalog/count-format.ts",
+    "100644 blob aaec6f1709586958555affefbb4f9b74429fc362",
+    "100644 blob 462aa3a2d30b031f4318b9d5a5a2cdfc61a8408c"
+  ],
+  [
     "apps/web/lib/catalog/home-card-payload.ts",
     null,
     "100644 blob 0d464e382c49fc01b9e54ce547c13c32e8e80bce"
   ],
   [
+    "apps/web/lib/catalog/independent-market-activation-fixture.ts",
+    "100644 blob 8b98b4743f578e83e48d8f899a2f26a8d8299b96",
+    "100644 blob 5d8c360480c05f541c3c3477a9e3e8d44cd823f4"
+  ],
+  [
+    "apps/web/lib/catalog/market-selection.ts",
+    "100644 blob 3845edc6f789e36b314213baf9637451a1459aa8",
+    "100644 blob 8b32027f92ef93c3ed1f86b8b7594f3a74fd29cf"
+  ],
+  [
     "apps/web/lib/catalog/prepared-china-filter-index.ts",
     null,
-    "100644 blob cfe6603a9546693c5987a65c39a7e4e57a5be9f1"
+    "100644 blob e28132d947e84b7dd23c1bb8d4cd49e79fd756c0"
   ],
   [
     "apps/web/lib/catalog/prepared-china-fixture-activation.ts",
@@ -27,7 +67,7 @@
   [
     "apps/web/lib/catalog/storage.ts",
     "100644 blob f402e951d56998efb75c7ac8cd1187ddc7726532",
-    "100644 blob 8fba3adaf4901a09cfc6bb5922dbe6f18a96af9e"
+    "100644 blob 76187c171db9e57b0c9d328cf7bb9be386578c48"
   ],
   [
     "scripts/build-serving-china-filter-index.mts",

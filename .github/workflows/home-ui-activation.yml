@@ -1,4 +1,4 @@
-name: Prepare and accept exact home UI catalog-0509
+name: Prepare and accept exact home UI catalog-b4d2
 on:
   workflow_dispatch:
     inputs:
@@ -13,7 +13,7 @@ permissions:
   contents: read
   actions: read
 concurrency:
-  group: avtocena-home-ui-catalog-0509
+  group: avtocena-home-ui-catalog-b4d2
   cancel-in-progress: false
 jobs:
   await_current_publications:
@@ -22,7 +22,7 @@ jobs:
     permissions:
       actions: read
     steps:
-      - name: Wait for the two running market publications without a production lease
+      - name: Wait for the active market publications and superseded web run before taking a lease
         env:
           GH_TOKEN: ${{ github.token }}
         shell: bash
@@ -31,6 +31,7 @@ jobs:
           runs=(
             '45129017812 .github/workflows/catalog-refresh-uae.yml ddc5fdeb5b42372985aa90026153de7cf34484a4'
             '45130876633 .github/workflows/catalog-refresh-europe.yml 81edfddcfc2856be2378ccda7fd756ec75f17619'
+            '45134976110 .github/workflows/home-ui-activation.yml 347093f58180fdf2174222e1b6b40859b8219332'
           )
           for row in "${runs[@]}"; do
             read -r id workflow head <<< "$row"
@@ -39,7 +40,7 @@ jobs:
                 --argjson id "$id" --arg workflow "$workflow" --arg head "$head" \
                 'select(.id == $id and .repository.id == 1289722938 and .head_repository.id == 1289722938
                   and .head_branch == "main" and .head_sha == $head and .path == $workflow and .run_attempt == 1) | .status')
-              echo "Market publication $id is $status"
+              echo "Prior workflow $id is $status"
               case "$status" in
                 completed) break ;;
                 in_progress|queued|pending|waiting|requested) sleep 60 ;;
@@ -84,7 +85,7 @@ jobs:
           python3 -I -B tests/home-ui-host-driver.test.py
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
-          ref: 0509e76cb02523157c98804c52edd7eb784916ba
+          ref: b4d226491bcfa03eca73d72480ff3bd867d3c6fb
           path: application
           persist-credentials: false
           fetch-depth: 1
@@ -95,7 +96,7 @@ jobs:
         working-directory: application
         run: |
           npm ci --no-audit --no-fund
-          node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/prepared-china-filter-index.test.ts tests/catalog-china-common-grid.test.ts tests/catalog-japan-filter-rail.test.ts tests/catalog-market-page-boundary.test.ts tests/catalog-editable-power-scenario.test.ts tests/home-card-payload.test.ts
+          node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/prepared-china-filter-index.test.ts tests/catalog-china-common-grid.test.ts tests/catalog-japan-filter-rail.test.ts tests/catalog-market-page-boundary.test.ts tests/catalog-editable-power-scenario.test.ts tests/home-card-payload.test.ts tests/ajes-saved-power-page.test.ts tests/catalog-china-default-showcase.test.ts tests/catalog-market-selection.test.ts tests/china-verified-object-reads.test.ts tests/paid-korea-report-contract.test.ts tests/paid-korea-report-reader.test.ts tests/paid-korea-report-recommendations.test.ts tests/paid-korea-report-render.test.ts
       - name: Prepare the existing browser gate outside the application checkout
         shell: bash
         run: |

@@ -1,4 +1,4 @@
-"""Exact catalog-0509 host operations. Imported by a reviewed driver; no activation CLI.
+"""Exact catalog-b4d2 host operations. Imported by a reviewed driver; no activation CLI.
 
 The existing acceptance.mjs owns the transaction order and publication lease.
 Each mutating primitive calls its mandatory live-authority callback first. The
@@ -27,9 +27,9 @@ import time
 import urllib.parse
 
 ROOT = Path(__file__).resolve().parents[3]
-SOURCE = '0509e76cb02523157c98804c52edd7eb784916ba'
-TREE = '6a65cc95e3bebeaf88fe972a9329f05c7474d06e'
-BUILD = '5d791a95278c760ed50d53a4ddf78373f33980c228e7cdc3e1fc5d916bb48d9b'
+SOURCE = 'b4d226491bcfa03eca73d72480ff3bd867d3c6fb'
+TREE = '55bbadc7e915ed282668229251b191495c4ca71b'
+BUILD = '07e57453202a22d0ab35f35637be30fe2f3b931ca59f151210002b69164c507b'
 CALCULATION = '4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90'
 INDEX = 'bf2c72cb7a260ef093c0a43c2b0dad9c4c9094a4d6dc3811dd0d7f7626b0d72b'
 ASSET = 'ee5c872e9127430890f58abf239cddfa48553f86c3032799c9c29953b6109662'
@@ -134,7 +134,7 @@ def checked_inventory(value):
              == (name, revision, image, port), 'reviewed_role')
         need(row.get('id') == (inventory.SERVING_ID if kind == 'serving' else ROLLBACK_IDS[kind]), 'reviewed_id')
     serving = value['containers']['serving']
-    need(serving.get('restartCount') == 1 and serving.get('startedAt') == inventory.SERVING_STARTED_AT,
+    need(serving.get('restartCount') == inventory.HISTORICAL_SERVING_RESOURCES['RestartCount'] and serving.get('startedAt') == inventory.SERVING_STARTED_AT,
          'reviewed_process')
     return value
 

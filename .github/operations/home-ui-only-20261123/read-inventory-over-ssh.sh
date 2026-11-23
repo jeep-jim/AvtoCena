@@ -9,7 +9,7 @@ node "$repo/.github/operations/home-ui-only-20261123/assert-invocation.mjs" > /d
 readonly source="$repo/.github/operations/home-ui-only-20261123/inventory.py"
 readonly known="$repo/docs/operations/regcloud-staging-known-hosts"
 printf '%s  %s\n' \
-  'd414ccecca7851b0d6650d3f021385d69ca7d4e9f6ee6ee6c2ccdcb6e1af74c1' "$source" \
+  'e0a94ee7d05152d83075783b496d443e543f8fde4b0a8927083cb1d7f1bae858' "$source" \
   'fd37f98aab3eeb16f131fcd4033adbb56f7e9616208c2f1ab5ef7a446caa4e4c' "$known" \
   | sha256sum --check --status
 scratch="$(mktemp -d -- "${RUNNER_TEMP:?}/home-ui-readonly-inventory.XXXXXXXX")"

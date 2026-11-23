@@ -290,6 +290,9 @@ export function assertStagedCalculatorBuild(release, build, serving) {
     // Exact search-only delta and preserved pricing inputs are checked by the release controller.
     if (build === '5d791a95278c760ed50d53a4ddf78373f33980c228e7cdc3e1fc5d916bb48d9b'
         && serving === '4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90') return;
+  } else if (release === '18e81af30cb9187b139924217a777de1c9819bca' || release === 'b4d226491bcfa03eca73d72480ff3bd867d3c6fb') {
+    if (build === '07e57453202a22d0ab35f35637be30fe2f3b931ca59f151210002b69164c507b'
+        && serving === '4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90') return;
   } else if (build === serving) return;
   throw Error('staged_budget_calculation_version_mismatch');
 }
