@@ -42,6 +42,10 @@ jobs:
           python3 tests/regcloud-browser-handoff.test.py
           python3 tests/regcloud-release-retention.test.py
           node --test tests/catalog-interaction-acceptance.test.mjs
+      - name: Verify exact home UI controller and read-only invocation
+        run: |
+          node --test tests/home-ui-release-controller.test.mjs tests/readonly-marker-invocation.test.mjs tests/home-ui-inventory-workflow.test.mjs
+          python3 -I -B tests/home-ui-runtime-inventory.test.py
       - name: Feed preparation guards
         run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/catalog-editorial-runtime.test.mjs tests/catalog-owned-china-verification.test.mjs
       - name: Saved UAE cursor and archive guards
