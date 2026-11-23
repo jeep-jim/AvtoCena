@@ -264,10 +264,24 @@ export async function reconcileRawPublication({storage, binding, manifest}) {
 /** Reserve both old and new cursor/config references, then CAS the actual
  * pointer. A crash after PUT leaves pending protection and is recoverable only
  * from the exact candidate bytes, owner and original reservation token. */
-export async function commitRawPointer({storage, id, key, value, references, complete, owner, operationId}) {
+export async function commitRawPointer({storage, id, key, value, references, complete, owner, operationId,
+  expectedBase, beforeWrite}) {
   const policy = await readRawCoordinationPolicy(storage);
   const meta = await storage.readJsonWithMeta(key, null);
-  if (!policy) { await storage.writeJson(key, value); return {status: 'disabled'}; }
+  if(expectedBase) {
+    assert.ok(expectedBase.found===true&&typeof expectedBase.etag==='string'&&expectedBase.etag.length>0
+      &&/^[a-f0-9]{64}$/.test(expectedBase.sha256),'raw_coord_pointer_expected_base');
+    assert.ok(meta.found&&meta.etag===expectedBase.etag&&rawDigest(meta.value)===expectedBase.sha256,
+      'raw_coord_pointer_expected_base_changed');
+  }
+  // The UAE semantic/lease gate runs before any coordinator mutation, so a
+  // failed precondition cannot create a new pending pointer reservation.
+  await beforeWrite?.();
+  if (!policy) {
+    await storage.writeJson(key, value, expectedBase?{ifMatch:expectedBase.etag}:undefined);
+    if(expectedBase)assert.equal(rawDigest(await storage.readJson(key,null)),rawDigest(value),'raw_coord_pointer_readback_changed');
+    return {status: 'disabled'};
+  }
   const state = await readState(storage, policy), pointer = state.pointers.find(row => row.id === id);
   assert.ok(pointer, 'raw_coord_pointer_scope');
   const candidate = rawPointerDescriptor(value, references, {complete});
@@ -295,6 +309,23 @@ export async function commitRawPointer({storage, id, key, value, references, com
     const beforePut = await readState(storage, policy), pending = beforePut.pointers.find(row => row.id === id)?.pending;
     assert.ok(pending && rawDigest(assertRawCoordinationTicket({...pending, registryId: beforePut.registryId}))
       === rawDigest(capability), 'raw_coord_ownership_changed');
+    try {await beforeWrite?.();}
+    catch(error) {
+      // This branch is reachable only before this invocation starts its PUT.
+      // Never apply it to a recovered/foreign reservation or a failed PUT with
+      // an ambiguous remote outcome. The owned ticket and unchanged base are
+      // both revalidated by abort_pointer; failed cleanup keeps protection.
+      try {
+        const observed=await storage.readJson(key,null);
+        assert.equal(rawDigest(observed),pending.base.sha256,'raw_coord_pointer_abort_base_changed');
+        const proof={version:1,kind:'pointer_write_not_started',id,key,ticket:capability,
+          baseSha256:pending.base.sha256,candidateSha256:candidate.sha256,writeStarted:false};
+        await immutableControlReceipt(storage,pointerDrainedKey(capability),proof);
+        await mutateRawCoordination({storage,command:{type:'abort_pointer',id,ticket:capability,
+          allWritesDrained:true,terminalWriterProofSha256:rawDigest(proof),observedValue:observed}});
+      } catch {throw Error('raw_coord_pointer_prewrite_abort_pending',{cause:error});}
+      throw error;
+    }
     await storage.writeJson(key, value, meta.found && meta.etag ? {ifMatch: meta.etag} : {ifNoneMatch: '*'});
     const observed = await storage.readJson(key, null);
     assert.equal(rawDigest(observed), candidate.sha256, 'raw_coord_pointer_readback_changed');

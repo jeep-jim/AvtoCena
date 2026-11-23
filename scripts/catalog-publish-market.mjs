@@ -10,6 +10,9 @@ import {createServingPublicationReadModelBuilders} from './lib/catalog-serving-r
 import {paidEncarTechnicalCoverage, readPaidEncarTechnicalCoverage} from './lib/paid-encar-field-coverage.mjs';
 import {prepareRawPublication} from './lib/catalog-raw-publication.mjs';
 import {prepareRawInternalPublication} from './lib/catalog-raw-internal-publication.mjs';
+import {createDubicarsDeltaCursorGuard,isDubicarsDeltaIntake} from './lib/catalog-dubicars-cursor-guard.mjs';
+import {publishedIntakeCheckpoint} from './lib/catalog-intake-checkpoint.mjs';
+import {commitCoordinatedIntakeCursor} from './lib/catalog-raw-cursor.mjs';
 import {createPaidRepairPublicationGuard} from './lib/paid-encar-repair-io.mjs';
 import {createPaidPublicationContributions,preparePaidInternalContribution,preparePaidPublicContribution,paidContributionWorkerSource} from './lib/catalog-paid-encar-contributions.mjs';
 import {createChe168PublicationContributions,prepareChe168InternalContribution,prepareChe168PublicContribution,
@@ -712,6 +715,13 @@ if (dryRun) {
   await technicalRepairGuard?.verifyAuthority();
   process.exit(0);
 }
+const dubicarsDeltaReports=market==='uae'?generation.payloads.map(payload=>payload.report).filter(isDubicarsDeltaIntake):[];
+const dubicarsDeltaReport=dubicarsDeltaReports[0];
+const dubicarsCursorGuard=dubicarsDeltaReport?createDubicarsDeltaCursorGuard({
+  storage:getJsonStorage(),intake:dubicarsDeltaReport,operationId:publishOperationId,
+}):null;
+for(const intake of dubicarsDeltaReports)dubicarsCursorGuard.assertIntake(intake);
+let dubicarsCursor=null,dubicarsCursorCommit=null;
 if (sellerInventory) assertNoDeliveredPriceRegression(currentRetainedRows, canonicalTargetPreview.offers, publicationPolicy);
 expectedPublishedByMarket[market] = canonicalTargetPreview.offers.length;
 expectedPublishedHashByMarket[market] = hashRows(canonicalTargetPreview.offers);
@@ -809,6 +819,7 @@ if (regressionBlocked) {
     // target market and storage after acquiring the lease; no stale snapshot is
     // allowed to reach persistence.
     await acquirePublishLock();
+    await dubicarsCursorGuard?.capture();
     await technicalRepairGuard?.verifyAuthority({operationId:publishOperationId});
     await assertCurrentKoreaPublicationSource();
     if (process.env.JSON_STORAGE_DRIVER === "object") await import("./catalog-storage-preflight.mjs");
@@ -885,6 +896,7 @@ if (regressionBlocked) {
           if (current?.operationId !== publishOperationId || Date.parse(current.lockedUntil) <= Date.now()) throw new Error("catalog_publish_lock_lost");
           return { ...current, lockedUntil: new Date(Date.now() + publishLockTtlMs).toISOString(), heartbeatAt: new Date().toISOString() };
         });
+        await dubicarsCursorGuard?.verify();
       },
       retainedPowerMixIds: currentPublicIds,
       retainedPowerMixMinimumByMarket,
@@ -941,8 +953,18 @@ if (regressionBlocked) {
         che168Contributions?.captureFinal(publishedOffers.filter(offer => offer.market === market));
       },
     });
+    if(dubicarsCursorGuard)dubicarsCursor=dubicarsCursorGuard.receipt(manifest);
     if (technicalRepairGuard) technicalRepairReadback = await technicalRepairGuard.verifyPublished(manifest.generationId, publishOperationId);
     if (rawPublication) rawPinRelease = await rawPublication.afterCommit();
+    // A delta must advance its cursor before releasing this publication lease.
+    // The workflow's subsequent cursor CLI is then an exact read-only replay.
+    if(dubicarsCursorGuard) {
+      const publication={market,published:true,generationId:manifest.generationId,dubicarsCursor,
+        rawCoordination:rawPublication?.binding||null,rawPinRelease};
+      dubicarsCursorCommit=await commitCoordinatedIntakeCursor({storage:getJsonStorage(),intake:dubicarsDeltaReport,
+        publication,checkpoint:publishedIntakeCheckpoint(dubicarsDeltaReport,publication)});
+      rawPinRelease=dubicarsCursorCommit.rawPinRelease;
+    }
     if (technicalFieldCoverage) {
       const stored = await readPaidEncarTechnicalCoverage(getJsonStorage(), manifest);
       technicalFieldCoverage.storedReadback = stored.coverage;
@@ -952,6 +974,7 @@ if (regressionBlocked) {
     }
   } catch (error) {
     publicationError = String(error?.message || error);
+    if(manifest&&dubicarsCursorGuard&&!dubicarsCursorCommit)dubicarsCursorCommit={cursorCommitted:false,status:'pending'};
     console.error(error?.stack || publicationError);
   } finally {
     if (publicationReadModelBuilders) {
@@ -982,6 +1005,7 @@ const report = {
   publishedAt: new Date().toISOString(),
   published: Boolean(manifest),
   publicationError,
+  ...(dubicarsCursorGuard?{dubicarsCursor,dubicarsCursorCommit}:{}),
   ...(technicalFieldCoverage ? {technicalFieldCoverage} : {}),
   ...(publicationReadModelBuilders ? {readModelRuntime:publicationReadModelBuilders.context, readModelCleanup} : {}),
   ...(technicalRepairReceipt ? {technicalRepair:technicalRepairReadback || {receiptSha256:technicalRepairReceipt.sha256, verified:false}} : {}),
@@ -1085,7 +1109,8 @@ console.log(JSON.stringify(report, (key, value) => {
   return value;
 }, 2));
 if (!report.published || technicalRepairReceipt && !technicalRepairReadback?.verified
-    || technicalFieldCoverage && !technicalFieldCoverage.verified) process.exitCode = 1;
+    || technicalFieldCoverage && !technicalFieldCoverage.verified
+    || dubicarsCursorGuard && !dubicarsCursorCommit?.cursorCommitted) process.exitCode = 1;
 } finally {
   await releasePublishLock();
 }
