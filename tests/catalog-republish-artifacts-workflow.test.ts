@@ -7,7 +7,9 @@ import { spawnSync } from "node:child_process";
 
 function stageScheduleHelper(directory: string) {
  fs.mkdirSync(path.join(directory, 'scripts/lib'), {recursive:true});
+ fs.mkdirSync(path.join(directory, 'scripts/catalog-next'), {recursive:true});
  fs.copyFileSync('scripts/lib/catalog-refresh-schedule.mjs', path.join(directory, 'scripts/lib/catalog-refresh-schedule.mjs'));
+ fs.copyFileSync('scripts/catalog-next/market-policy.mjs', path.join(directory, 'scripts/catalog-next/market-policy.mjs'));
 }
 
 const workflow = fs.readFileSync(".github/workflows/catalog-republish-market-artifacts.yml", "utf8");
