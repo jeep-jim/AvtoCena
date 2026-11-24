@@ -13,8 +13,16 @@ import base64, copy, datetime, fcntl, importlib.util, io, json, os, pathlib, sta
 spec = importlib.util.spec_from_file_location('failed_upload_host', sys.argv[1])
 m = importlib.util.module_from_spec(spec); spec.loader.exec_module(m)
 assert m.FAILED_UPLOAD_RUNTIME == '822f925bb30c4e07010f6e14b6574f1b4bd6306e'
-assert m.FAILED_WITNESS_ACCEPTED_RUNTIME == '860e1ff601c6852eb3b1474982e52e3a5300c4af'
-assert m.FAILED_WITNESS_BULK_BYTES == 13041560320
+assert m.FAILED_WITNESS_ACCEPTED_RUNTIME == '1518035b9e6b717cd364ae8d13e63d0127899112'
+assert m.FAILED_WITNESS_BULK_BYTES == (13041560320, 13041559296)
+assert sum(m.FAILED_WITNESS_BULK_BYTES) == 26083119616
+assert m.FAILED_WITNESS_TARGETS[0] == m.FAILED_UPLOAD_WITNESS
+assert m.FAILED_WITNESS_TARGETS[1] == dict(m.FAILED_UPLOAD_WITNESS,
+    runtimeSha='860e1ff601c6852eb3b1474982e52e3a5300c4af', nonce='df9db7228781df26f92a990a011eb1bd',
+    planSha256='27888989f2a0e90e235f7a497fcce912ece493e9f5add5c40005e02ad991d9b2',
+    rollbackSha256='d550834e33b9cd9bf9b1be10c4c8f5358563d6aa56b2ba87794c9d5df9fdb5dd',
+    imageId='sha256:3c0389d7fcd0986a850d2f87c3259a75bddff3b0090ed0aef56eb1e190ef2238')
+target_index = int(sys.argv[2])
 assert m.FAILED_UPLOAD_WITNESS['runtimeSha'] == '5e62f9ff3a0079b07cd13b8ab912c5720dd22250'
 assert m.FAILED_UPLOAD_WITNESS['nonce'] == '2d015d0beef2af9f076bd1d47987dd88'
 assert m.FAILED_UPLOAD_WITNESS['planSha256'] == '773cb37c8ecae1de789c895888fd2e56264b73503def96a32c86ee845283338c'
@@ -116,7 +124,8 @@ with tempfile.TemporaryDirectory(prefix='china-failed-upload-host-') as temporar
     accepted = observed(state, '"accepted-2"')
     intent.update(status='committed', resolution={'kind': 'accepted', 'at': receipt['acceptedAt'], 'acceptedETag': accepted['etag'],
         'acceptedSha256': accepted['sha256'], 'hostReceiptSha256': m.sha(receipt_bytes)})
-    params = {'currentState': {'accepted': accepted, 'intent': observed(intent, '"intent-2"')}, 'leaseExpiresAt': '2026-11-24T21:00:00Z'}
+    params = {'currentState': {'accepted': accepted, 'intent': observed(intent, '"intent-2"')},
+        'leaseExpiresAt': '2026-11-24T21:00:00Z', 'targetIndex': target_index}
     targets, targets_binding, bulk = [], [], []
     for target in m.FAILED_UPLOAD_TARGETS:
         directory, plan = create_cut(m.FAILED_UPLOAD_RUNTIME, target['nonce'], 'sha256:' + '4' * 64)
@@ -133,18 +142,24 @@ with tempfile.TemporaryDirectory(prefix='china-failed-upload-host-') as temporar
     # The earlier pre-accept cleanup already removed exactly these eight.
     earlier_targets, earlier_bulk = list(targets), list(bulk)
     for filename in earlier_bulk: filename.unlink()
-    target = dict(m.FAILED_UPLOAD_WITNESS)
-    target_directory, target_plan = create_cut(target['runtimeSha'], target['nonce'], target['imageId'])
-    target_rollback = dict(rollback, nonce=target['nonce'], release=target['runtimeSha'], imageId=target['imageId'])
-    target_rollback_raw = m.json_bytes(target_rollback)
-    write(target_directory / 'ROLLED_BACK.json', target_rollback_raw)
-    m.FAILED_UPLOAD_WITNESS = dict(target, generationManifestSha256=m.sha(generation_bytes),
-        privateGenerationReceiptSha256='e' * 64, planSha256=m.file_sha(target_directory / 'PLAN.json'),
-        rollbackSha256=m.sha(target_rollback_raw))
+    failed_directories, failed_bulk, failed_targets = [], [], []
+    for target in m.FAILED_WITNESS_TARGETS:
+        target_directory, target_plan = create_cut(target['runtimeSha'], target['nonce'], target['imageId'])
+        target_rollback = dict(rollback, nonce=target['nonce'], release=target['runtimeSha'], imageId=target['imageId'])
+        target_rollback_raw = m.json_bytes(target_rollback)
+        write(target_directory / 'ROLLED_BACK.json', target_rollback_raw)
+        failed_targets.append(dict(target, generationManifestSha256=m.sha(generation_bytes),
+            privateGenerationReceiptSha256='e' * 64, planSha256=m.file_sha(target_directory / 'PLAN.json'),
+            rollbackSha256=m.sha(target_rollback_raw)))
+        failed_directories.append(target_directory)
+        failed_bulk.append([(target_directory if name == 'image.tar' else target_directory / 'generation') / name for name in m.FAILED_UPLOAD_BULK_FILES])
+    m.FAILED_WITNESS_TARGETS = tuple(failed_targets)
+    target_directory = failed_directories[target_index]
     targets = [target_directory]
-    bulk = [(target_directory if name == 'image.tar' else target_directory / 'generation') / name for name in m.FAILED_UPLOAD_BULK_FILES]
+    bulk = failed_bulk[target_index]
+    all_bulk = [filename for group in failed_bulk for filename in group]
     # Fixture-only small payloads; no RPC can override any production pin.
-    m.FAILED_WITNESS_BULK_BYTES = sum(filename.stat().st_size for filename in bulk)
+    m.FAILED_WITNESS_BULK_BYTES = tuple(sum(filename.stat().st_size for filename in group) for group in failed_bulk)
     def container(identity, runtime, image_id, port, mounted=None):
         env = ['AVTOCENA_RELEASE_SHA=' + runtime, 'AVTOCENA_CALCULATION_VERSION=' + m.CALCULATION]
         labels, mounts = {}, []
@@ -178,6 +193,9 @@ with tempfile.TemporaryDirectory(prefix='china-failed-upload-host-') as temporar
     def protects_survivors():
         assert all(filename.read_bytes() == raw for filename, raw in initial_files.items() if filename not in bulk)
         assert containers == initial_containers
+    def protects_all_survivors():
+        assert all(filename.read_bytes() == raw for filename, raw in initial_files.items() if filename not in all_bulk)
+        assert containers == initial_containers
     def reject_mutation(code, alter, restore=lambda: None):
         alter(); refused(lambda: m.prune_failed_uploads(params), code); restore(); unchanged()
     def stopped_mount(source):
@@ -188,18 +206,20 @@ with tempfile.TemporaryDirectory(prefix='china-failed-upload-host-') as temporar
         return row['Id']
 `;
 
-function check(body) {
+function check(body, targetIndexes = [0, 1]) {
   const script = harness + '\n' + body.trim().split('\n').map(line => '    ' + line).join('\n') + '\n';
-  const result = spawnSync('python3', ['-I', '-B', '-c', script, host], {encoding: 'utf8', timeout: 10000});
-  assert.equal(result.status, 0, result.stderr || result.stdout || String(result.error));
+  for (const targetIndex of targetIndexes) {
+    const result = spawnSync('python3', ['-I', '-B', '-c', script, host, String(targetIndex)], {encoding: 'utf8', timeout: 10000});
+    assert.equal(result.status, 0, 'target ' + targetIndex + ': ' + (result.stderr || result.stdout || String(result.error)));
+  }
 }
 
-test('after exact first acceptance only four failed5e files are removed; current860e, live56 and all proofs survive', () => check(`
+test('either fixed target removes only its four files; accepted current, live56, the other copy and all proofs survive', () => check(`
 total = sum(filename.stat().st_size for filename in bulk)
 result = m.prune_failed_witness(params)
 assert result['completed'] and result['filesDeleted'] == 4 and result['freedBytes'] == total and result['alreadyAbsentFiles'] == 0
 assert result['runtimeSha'] == m.FAILED_WITNESS_ACCEPTED_RUNTIME and result['phase'] == 'after-first-acceptance'
-assert result['earlierBulkFilesAbsent'] == 8 and result['targetFailedAttempt'] == m.FAILED_UPLOAD_WITNESS
+assert result['earlierBulkFilesAbsent'] == 8 and result['targetIndex'] == target_index and result['targetFailedAttempt'] == m.FAILED_WITNESS_TARGETS[target_index]
 assert all(type(result[key]) is int and 0 <= result[key] <= 9007199254740991 for key in ('diskFreeBytesBefore', 'diskFreeBytesAfter'))
 assert all(result[key] == 0 for key in ('retiredContainers', 'imagesDeleted', 'directoriesDeleted', 'privateGenerationDeletes', 'acceptedStateWrites', 'intentStateWrites'))
 assert len(remaining()) == 0 and all(not filename.exists() for filename in earlier_bulk)
@@ -233,6 +253,64 @@ try:
         unchanged()
 finally: m.os.statvfs = real_statvfs
 `));
+
+test('only the two fixed integer targets are accepted; no caller can supply another path or profile', () => check(`
+for invalid in (None, False, True, -1, 2, 0.0, '0', {}, []):
+    refused(lambda: m.prune_failed_witness(dict(params, targetIndex=invalid)), 'witness_target')
+    unchanged()
+missing = dict(params); del missing['targetIndex']
+refused(lambda: m.prune_failed_witness(missing), 'witness_parameters')
+for key in ('directory', 'target', 'runtimeSha', 'nonce', 'planSha256'):
+    refused(lambda: m.prune_failed_witness(dict(params, **{key: str(target_directory)})), 'witness_parameters')
+unchanged()
+`));
+
+test('a target directory or nonce alias of the accepted current is refused before deletion', () => check(`
+original = m.FAILED_WITNESS_TARGETS
+try:
+    for changes in ({'nonce': current_nonce}, {'runtimeSha': m.FAILED_WITNESS_ACCEPTED_RUNTIME, 'nonce': current_nonce}):
+        altered = list(original); altered[target_index] = dict(altered[target_index], **changes)
+        m.FAILED_WITNESS_TARGETS = tuple(altered)
+        refused(lambda: m.prune_failed_witness(params), 'witness_current_alias')
+        unchanged()
+finally: m.FAILED_WITNESS_TARGETS = original
+`));
+
+test('sequential fixed targets remove exactly all eight files and resume without double-counting', () => check(`
+total = sum(filename.stat().st_size for filename in all_bulk)
+results = [m.prune_failed_witness(dict(params, targetIndex=index)) for index in (0, 1)]
+assert [row['targetIndex'] for row in results] == [0, 1]
+assert sum(row['filesDeleted'] for row in results) == 8 and sum(row['freedBytes'] for row in results) == total
+assert all(not os.path.lexists(filename) for filename in all_bulk)
+protects_all_survivors()
+again = [m.prune_failed_witness(dict(params, targetIndex=index)) for index in (0, 1)]
+assert sum(row['filesDeleted'] for row in again) == 0 and sum(row['freedBytes'] for row in again) == 0
+assert sum(row['alreadyAbsentFiles'] for row in again) == 8
+protects_all_survivors()
+`, [0]));
+
+test('a lost second-target unlink resumes remaining files while preserving the completed first target', () => check(`
+first = m.prune_failed_witness(dict(params, targetIndex=0)); assert first['filesDeleted'] == 4
+original_unlink = pathlib.Path.unlink; removed = []
+def interrupt_unlink(filename, *args, **kwargs):
+    original_unlink(filename, *args, **kwargs)
+    if filename in failed_bulk[1]:
+        removed.append(filename)
+        raise RuntimeError('simulated lost reply after unlink')
+pathlib.Path.unlink = interrupt_unlink
+try:
+    try: m.prune_failed_witness(dict(params, targetIndex=1))
+    except RuntimeError as error: assert str(error) == 'simulated lost reply after unlink'
+    else: raise AssertionError('expected interrupted second target')
+finally: pathlib.Path.unlink = original_unlink
+assert len(removed) == 1
+protects_all_survivors()
+remaining_bytes = sum(filename.stat().st_size for filename in failed_bulk[1] if filename.exists())
+again = [m.prune_failed_witness(dict(params, targetIndex=index)) for index in (0, 1)]
+assert sum(row['filesDeleted'] for row in again) == 3 and sum(row['freedBytes'] for row in again) == remaining_bytes
+assert sum(row['alreadyAbsentFiles'] for row in again) == 5
+protects_all_survivors()
+`, [0]));
 
 test('absent, pending, different runtime or uncommitted state cannot authorize post-accept cleanup', () => check(`
 bad = copy.deepcopy(params); bad['currentState']['accepted'] = absent()
@@ -283,7 +361,7 @@ for source in (target_directory.parent, target_directory, target_directory / 'ge
     identity = stopped_mount(source)
     refused(lambda: m.prune_failed_witness(params), 'witness_files_mounted'); del containers[identity]
 alias.unlink()
-identity = stopped_mount(root / 'unrelated'); containers[identity]['Config']['Labels']['avtocena.china.nonce'] = m.FAILED_UPLOAD_WITNESS['nonce']
+identity = stopped_mount(root / 'unrelated'); containers[identity]['Config']['Labels']['avtocena.china.nonce'] = m.FAILED_WITNESS_TARGETS[target_index]['nonce']
 refused(lambda: m.prune_failed_witness(params), 'witness_candidate_exists'); del containers[identity]
 unchanged()
 `));
@@ -295,7 +373,8 @@ link = root / 'hard-link'; os.link(filename, link)
 refused(lambda: m.prune_failed_witness(params), 'regular_file'); link.unlink()
 filename.chmod(0o600); refused(lambda: m.prune_failed_witness(params), 'reuse_file_permissions'); filename.chmod(0o400)
 write(filename, bytes([raw[0] ^ 1]) + raw[1:]); refused(lambda: m.prune_failed_witness(params), 'witness_file_hash'); write(filename, raw)
-limit = m.FAILED_WITNESS_BULK_BYTES; m.FAILED_WITNESS_BULK_BYTES += 1
+limit = m.FAILED_WITNESS_BULK_BYTES
+m.FAILED_WITNESS_BULK_BYTES = tuple(value + (index == target_index) for index, value in enumerate(limit))
 refused(lambda: m.prune_failed_witness(params), 'witness_files'); m.FAILED_WITNESS_BULK_BYTES = limit
 unchanged()
 `));

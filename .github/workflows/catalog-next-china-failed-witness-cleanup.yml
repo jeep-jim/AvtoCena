@@ -1,4 +1,4 @@
-name: China exact failed witness cleanup after first acceptance
+name: China exact failed copies cleanup after first acceptance
 on:
   push:
     branches: [main]
@@ -37,7 +37,7 @@ jobs:
         run: |
           node scripts/catalog-next/cleanup-failed-witness.mjs --verify
           node --test tests/readonly-marker-invocation.test.mjs tests/catalog-next-failed-witness-cleanup.test.mjs tests/catalog-next-failed-witness-cleanup-host.test.mjs tests/catalog-next-release-ssh.test.mjs tests/catalog-next-china-state.test.mjs
-      - name: Prune the exact failed 5e upload after verified 860e acceptance
+      - name: Prune both exact failed uploads after verified first acceptance
         env:
           SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
           JSON_STORAGE_DRIVER: object

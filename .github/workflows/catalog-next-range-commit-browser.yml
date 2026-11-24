@@ -1,0 +1,67 @@
+name: China serving runtime - committed range browser contract
+on:
+  pull_request:
+    paths:
+      - '.github/operations/catalog-next/china-serving-plan.json'
+      - '.github/workflows/catalog-next-range-commit-browser.yml'
+      - 'scripts/catalog-next/checkout-runtime.mjs'
+      - 'scripts/catalog-next/serving-compatibility.mjs'
+permissions:
+  contents: read
+concurrency:
+  group: catalog-range-commit-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+jobs:
+  browser_contract:
+    if: github.repository_id == '1289722938'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 2
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24.22.3'
+          cache: npm
+      - name: Install reviewed test dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Verify the exact serving runtime and unchanged pricing
+        run: |
+          node scripts/verify-frozen-speed-baselines.mjs
+          node scripts/catalog-next/checkout-runtime.mjs --serving
+          git fetch --no-tags https://github.com/jeep-jim/AvtoCena.git 860e1ff601c6852eb3b1474982e52e3a5300c4af
+          node --input-type=module <<'JS'
+          import fs from 'node:fs/promises';
+          import path from 'node:path';
+          import {verifyServingCompatibility} from './scripts/catalog-next/serving-compatibility.mjs';
+          const read = name => fs.readFile('.github/operations/catalog-next/' + name, 'utf8').then(JSON.parse);
+          const result = await verifyServingCompatibility({runtimeRoot:path.join(process.env.RUNNER_TEMP, 'china-runtime'),
+            servingPlan:await read('china-serving-plan.json'), pricingPlan:await read('china-plan.json')});
+          console.log(JSON.stringify(result));
+          JS
+      - name: Prepare Chromium for isolated component checks
+        run: |
+          npm install --prefix "$RUNNER_TEMP/range-browser" --no-package-lock --ignore-scripts playwright@1.55.0
+          node --input-type=module <<'JS'
+          import fs from 'node:fs';
+          import {execFileSync} from 'node:child_process';
+          const chrome = execFileSync('which', ['google-chrome'], {encoding:'utf8'}).trim();
+          fs.appendFileSync(process.env.GITHUB_ENV, 'CHROME_BIN=' + fs.realpathSync(chrome) + '\nPLAYWRIGHT_MODULE=' + process.env.RUNNER_TEMP + '/range-browser/node_modules/playwright/index.mjs\n');
+          JS
+      - name: Verify actual range commits and retained interaction behavior
+        working-directory: ${{ runner.temp }}/china-runtime
+        env:
+          CATALOG_RANGE_REPORT: ${{ runner.temp }}/catalog-range-commit-report.json
+        run: |
+          node tests/browser/catalog-range-commit.mjs
+          git diff --exit-code HEAD --
+      - name: Preserve component evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: catalog-range-commit-browser-contract
+          path: ${{ runner.temp }}/catalog-range-commit-report.json
+          if-no-files-found: ignore
+          retention-days: 14
