@@ -7,7 +7,7 @@ import {ajesQueryCacheLocation,readAjesQueryCache,saveAjesQueryCache,retainedAje
 function fixture(){
  const objects=new Map<string,any>();
  const storage={readJson:async(key:string)=>objects.get(key)??null,writeJson:async(key:string,value:any)=>{objects.set(key,structuredClone(value));}};
- const first=ajesQuery({table:'korea',page:3}).sql,location=ajesQueryCacheLocation(first).key;
+ const first=ajesQuery({table:'stats',page:3}).sql,location=ajesQueryCacheLocation(first).key;
  const queries=[first];
  for(let i=0;queries.length<6&&i<5000;i++){
   const sql=ajesQuery({table:'stats',lotNumber:String(i)}).sql;
@@ -17,14 +17,14 @@ function fixture(){
  return {objects,storage,queries,location};
 }
 
-test('a previously viewed Korea page survives an unrelated colliding search and a subsequent source refusal',async()=>{
+test('a previously viewed Japan page survives an unrelated colliding search and a subsequent source refusal',async()=>{
  const objects=new Map<string,any>();
  const storage={readJson:async(key:string)=>objects.get(key)??null,writeJson:async(key:string,value:any)=>{objects.set(key,structuredClone(value));}};
- const input={table:'korea' as const,page:3},sql=ajesQuery(input).sql;
+ const input={table:'stats' as const,page:3},sql=ajesQuery(input).sql;
  const location=ajesQueryCacheLocation(sql).key;
  const other=Array.from({length:2000},(_,i)=>ajesQuery({table:'stats',lotNumber:String(i)}).sql).find(key=>ajesQueryCacheLocation(key).key===location)!;
  assert.ok(other,'the current bounded cache has real cross-query collisions');
- const saved={schemaVersion:2,items:[{id:'korea-page-three',table:'korea'}],page:3,pageSize:24,received:24,observedAt:new Date(Date.now()-3600000).toISOString()};
+ const saved={schemaVersion:2,items:[{id:'japan-page-three',table:'stats'}],page:3,pageSize:24,received:24,observedAt:new Date(Date.now()-3600000).toISOString()};
  await saveAjesQueryCache(storage,sql,saved);
  await saveAjesQueryCache(storage,other,{items:[{id:'unrelated',table:'stats'}],page:1,pageSize:24,observedAt:saved.observedAt});
  let requests=0;
@@ -76,10 +76,10 @@ test('legacy single-response slots remain readable, with no mutation of retained
 
 test('expired saved third pages remain unavailable and failed writes do not poison later saves',async()=>{
  const {objects,storage,queries,location}=fixture();
- await saveAjesQueryCache(storage,queries[0],{items:[{id:'expired',table:'korea'}],page:3,pageSize:24,observedAt:'2000-01-01'});
+ await saveAjesQueryCache(storage,queries[0],{items:[{id:'expired',table:'stats'}],page:3,pageSize:24,observedAt:'2000-01-01'});
  await saveAjesQueryCache(storage,queries[1],{items:[]});
  const client=createAjesClient({password:()=> 'fixture',assertEnabled:async()=>{},reserve:async()=>{},readQuery:key=>readAjesQueryCache(storage,key),fetcher:async()=>new Response('bot fixture')});
- await assert.rejects(client.read({table:'korea',page:3},'203.0.113.1'),/visitor_restricted/);
+ await assert.rejects(client.read({table:'stats',page:3},'203.0.113.1'),/visitor_restricted/);
  let fail=true;
  const unreliable={...storage,writeJson:async(key:string,value:any)=>{if(fail){fail=false;throw Error('storage unavailable');}objects.set(key,value);}};
  await assert.rejects(saveAjesQueryCache(unreliable,queries[2],{items:[]}),/storage unavailable/);

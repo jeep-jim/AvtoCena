@@ -17,10 +17,10 @@ test('stock mapping keeps exact units, VIN and first photograph; missing power r
  const cn=ajesLot({...row,FINISH:'108000',PW:'104',TIME:'O'},'china',true)!;
  const c=ajesOffer(cn,{rateSource:'cbr',currency:'CNY',sourcePrice:108000,effectiveRate:12} as any,'2026-10-18');assert.equal(c.sourcePrice,108000);assert.equal(c.powerHp,undefined);assert.equal(c.operational?.raw?.sourcePower,'104');assert.equal(c.fuel,undefined);
 });
-test('switch is checked by requested market; refusals stop without alternate routing',async()=>{
+test('Japan switch is checked and supplier refusals stop without alternate routing',async()=>{
  const tables:string[]=[],urls:string[]=[];
  const client=createAjesClient({password:()=> 'fixture',assertEnabled:async t=>{tables.push(t!);},reserve:async()=>{},endpoint:()=> 'http://78.46.90.228/api/',fetcher:async url=>{urls.push(String(url));return new Response('ban2 fixture');}});
- await assert.rejects(()=>client.read({table:'korea'},'203.0.113.1'),/visitor_restricted/);assert.ok(tables.every(t=>t==='korea'));assert.equal(urls.length,1);assert.ok(urls[0].startsWith('http://78.46.90.228/api/'));
+ await assert.rejects(()=>client.read({table:'stats'},'203.0.113.1'),/visitor_restricted/);assert.ok(tables.every(t=>t==='stats'));assert.equal(urls.length,1);assert.ok(urls[0].startsWith('http://78.46.90.228/api/'));
 });
 
 test('second China feed enforces 15 million at seller and delivered stages without changing Che168',async()=>{
@@ -72,14 +72,14 @@ test('supplier horsepower remains raw provenance and never becomes a verified sp
 });
 
 
-test('Korean detail requests full supplier information and does not accept a recent short detail as complete',async()=>{
+test('retired Korean details cannot reopen either short or full cached supplier records',async()=>{
  const lot=ajesLot(row,'korea',true)!;let request='',saved:any;
  const short={schemaVersion:2,items:[lot],page:1,pageSize:1,observedAt:new Date().toISOString()};
  const client=createAjesClient({password:()=> 'fixture',assertEnabled:async()=>{},reserve:async()=>{},readDetail:async()=>short,saveDetail:async(_t,_id,value)=>{saved=value;},fetcher:async url=>{request=String(url);return Response.json([{...row,PW:'150',ENG_V:'1968'}]);}});
- const result=await client.read({table:'korea',id:row.ID},'203.0.113.45');
- assert.equal(new URL(request).searchParams.has('ajax'),true);assert.equal(result.items[0].sourcePower,'150');assert.equal(result.items[0].engineCc,1968);assert.equal(saved.fullInformation,true);
- const cached=createAjesClient({password:()=> 'fixture',assertEnabled:async()=>{},reserve:async()=>{},readDetail:async()=>saved,fetcher:async()=>{throw Error('unexpected_request');}});
- assert.equal((await cached.read({table:'korea',id:row.ID},'203.0.113.45')).items[0].sourcePower,'150');
+ await assert.rejects(client.read({table:'korea',id:row.ID},'203.0.113.45'),/market_not_supported/);
+ assert.equal(request,'');assert.equal(saved,undefined);
+ const cached=createAjesClient({password:()=> 'fixture',assertEnabled:async()=>{},reserve:async()=>{},readDetail:async()=>({...short,fullInformation:true}),fetcher:async()=>{throw Error('unexpected_request');}});
+ await assert.rejects(cached.read({table:'korea',id:row.ID},'203.0.113.45'),/market_not_supported/);
 });
 
 test('Rexton Sports keeps pickup identity when presentation shortens its model name',async()=>{
@@ -94,31 +94,30 @@ test('Rexton Sports keeps pickup identity when presentation shortens its model n
  assert.notEqual(catalogBodyType(suv),'pickup');
 });
 
-test('opening an already listed Korea car keeps a supplied source URL without extra requests',async()=>{
+test('old Korea list and detail requests cannot reach the supplier',async()=>{
  let calls=0;
  const url='https://www.encar.com/dc/dc_cardetailview.do?carid=43015007';
  const client=createAjesClient({password:()=> 'fixture',assertEnabled:async()=>{},reserve:async()=>{},fetcher:async input=>{
   calls++;const detail=new URL(String(input)).searchParams.has('ajax');
   return Response.json([{...row,LOT:'43015007',STATUS:detail?'':url,FINISH:detail?'17500000':row.FINISH}]);
  }});
- await client.read({table:'korea'},'203.0.113.1');
- const detail=await client.read({table:'korea',id:row.ID},'203.0.113.1');
- assert.equal(detail.items[0].status,url);assert.equal(detail.items[0].sourcePrice,17500000);assert.equal(calls,2);
- const cached=await client.read({table:'korea',id:row.ID},'203.0.113.1');
- assert.equal(cached.items[0].status,url);assert.equal(calls,2);
+ await assert.rejects(client.read({table:'korea'},'203.0.113.1'),/market_not_supported/);
+ await assert.rejects(client.read({table:'korea',id:row.ID},'203.0.113.1'),/market_not_supported/);
+ assert.equal(calls,0);
 });
 
-test('historical compatibility reads occur only after supplier failure, preserving bounded fallback',async()=>{
- let legacyReads=0,requests=0;const lot=ajesLot(row,'korea',false)!;
+test('historical Japan compatibility reads occur only after supplier failure, preserving bounded fallback',async()=>{
+ const japanRow={...row,MARKA_NAME:'TOYOTA',MODEL_NAME:'COROLLA',AUCTION_TYPE:'2',STATUS:'Sold'};
+ let legacyReads=0,requests=0;const lot=ajesLot(japanRow,'stats',false)!;
  const fallback={schemaVersion:0,items:[lot],page:1,pageSize:24,observedAt:new Date().toISOString(),partial:true};
  const deps={password:()=> 'fixture',assertEnabled:async()=>{},reserve:async()=>{},readQuery:async()=>null,
  readLegacyQuery:async()=>{legacyReads++;return fallback;}};
- const healthy=createAjesClient({...deps,fetcher:async()=>{requests++;return Response.json([row]);}});
- const fresh=await healthy.read({table:'korea'},'203.0.113.1');assert.equal(fresh.stale,false);assert.equal(legacyReads,0);assert.equal(requests,1);
+ const healthy=createAjesClient({...deps,fetcher:async()=>{requests++;return Response.json([japanRow]);}});
+ const fresh=await healthy.read({table:'stats'},'203.0.113.1');assert.equal(fresh.stale,false);assert.equal(legacyReads,0);assert.equal(requests,1);
  const failed=createAjesClient({...deps,fetcher:async()=>new Response('',{status:503})});
- const retained=await failed.read({table:'korea'},'203.0.113.1');assert.equal(retained.stale,true);assert.equal(retained.partial,true);assert.deepEqual(retained.items,[lot]);assert.equal(legacyReads,1);
+ const retained=await failed.read({table:'stats'},'203.0.113.1');assert.equal(retained.stale,true);assert.equal(retained.partial,true);assert.deepEqual(retained.items,[lot]);assert.equal(legacyReads,1);
  for(const change of [{page:2},{pageSize:48},{observedAt:'2000-01-01'},{items:[{...lot,table:'china'}]}]){
   const invalid=createAjesClient({...deps,readLegacyQuery:async()=>({...fallback,...change}),fetcher:async()=>new Response('',{status:503})});
-  await assert.rejects(()=>invalid.read({table:'korea'},'203.0.113.1'),/http_503/);
+  await assert.rejects(()=>invalid.read({table:'stats'},'203.0.113.1'),/http_503/);
  }
 });

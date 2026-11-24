@@ -1,4 +1,4 @@
-import {usesAjesMarket} from '@/lib/catalog/ajes-market-selection';
+import {retiredAjesOffer} from '@/lib/catalog/ajes-access-policy';
 import {isGreenCornerOffer} from "@/lib/catalog/green-corner-contract";
 import {DeferredOfferRecommendations} from "@/components/catalog/DeferredOfferRecommendations";
 import {isPriceOnRequestDubicarsOffer} from "@/lib/catalog/dubicars-owner-policy";
@@ -183,6 +183,7 @@ async function OfferPageContent({ params, searchParams }: { params: Promise<{ id
   if (parseSpecialId(offerRouteId(routeId))) return <SpecialOfferPage id={offerRouteId(routeId)} initialCity={(await searchParams)?.estimate ? decodeShareDraft((await searchParams)!.estimate!)?.deliveryCity || "" : undefined} previewRequested={(await searchParams)?.preview === "1"}/>;
   let id = offerRouteId(routeId);
   try { id = offerRouteId(decodeURIComponent(routeId)); } catch { /* Keep the route value. */ }
+  if(retiredAjesOffer(id))return <UnavailableOffer offer={null}/>;
   const query = searchParams ? await searchParams : {};
   const dealer=await resolveDealerBrowsingContext(query.dealer||"",query.preview==="1");
   const requestedPowerHp = Number(query?.powerHp || 0);
@@ -211,8 +212,9 @@ async function OfferPageContent({ params, searchParams }: { params: Promise<{ id
   // longer see source-only evidence removed from operational.raw and used to
   // turn valid Georgia cards into a soft 404.
   if (!storedOffer) return <UnavailableOffer offer={await getUnavailableOffer(id)} />;
-  if(storedOffer.market==='korea' && storedOffer.sourceId!=='ajes_korea_feed' &&
-     (storedOffer.sourceId!=='encar_direct' || storedOffer.operational?.provider!=='auto_api_encar' || await usesAjesMarket('korea'))) permanentRedirect('/cars?'+new URLSearchParams({market:'korea',make:storedOffer.make||'',model:storedOffer.model||''}));
+  if(retiredAjesOffer(storedOffer.id,storedOffer.sourceId))return <UnavailableOffer offer={null}/>;
+  if(storedOffer.market==='korea' &&
+     (storedOffer.sourceId!=='encar_direct' || storedOffer.operational?.provider!=='auto_api_encar')) permanentRedirect('/cars?'+new URLSearchParams({market:'korea',make:storedOffer.make||'',model:storedOffer.model||''}));
   const canonicalPath = offerPath(storedOffer);
   if (`/cars/offer/${encodeURIComponent(routeId)}${routeSlug ? `/${encodeURIComponent(routeSlug)}` : ""}` !== canonicalPath && `/cars/offer/${routeId}${routeSlug ? `/${routeSlug}` : ""}` !== canonicalPath) {
     const preserved = new URLSearchParams();

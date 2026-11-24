@@ -18,7 +18,7 @@ test('market cards remain ready and their late count resolves with exactly the s
  try{
   const built=await build({entryPoints:['apps/web/components/catalog/AjesRail.tsx'],bundle:true,platform:'node',format:'cjs',write:false,jsx:'automatic',packages:'external',plugins:[{name:'rail-fixture',setup(b){b.onResolve({filter:/.*/},a=>{const name=a.path.split('/').at(-1)!;return name in mocks?{path:name,namespace:'stub'}:undefined;});b.onLoad({filter:/.*/,namespace:'stub'},a=>({contents:mocks[a.path]}));}}]});
   const mod={exports:{} as any};new Function('require','module','exports',built.outputFiles[0].text)(require,mod,mod.exports);
-  for(const market of ['korea','japan','china']){
+  for(const market of ['japan']){
    const params={make:'Hyundai',model:'TUCSON',city:'Новокузнецк',market:'korea|japan'};
    const tree=await mod.exports.AjesRail({market,params});
    assert.deepEqual(state.options.at(-1),{includeCount:false});
