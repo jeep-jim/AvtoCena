@@ -184,6 +184,16 @@ test('lost activation response commits only the actual retained host acceptance 
   assert.equal((await f.storage.read('accepted')).value.current.proof.hostReceiptSha256, evidence.hostReceiptSha256);
 });
 
+test('a close response failure after committed acceptance reports the persisted outcome instead of a false rollback', async () => {
+  const f = await fixture(), stage = f.args.stageRelease;
+  f.args.stageRelease = async input => ({...await stage(input), async close() { throw Error('close_response_lost'); }});
+  const result = await runChinaDailyCycle(f.args);
+  assert.equal(result.status, 'accepted'); assert.equal(result.published, true); assert.equal(result.recovered, true);
+  assert.equal(result.leaseReleased, true);
+  assert.equal((await f.storage.read('accepted')).value.current.generationId, candidate(2).generationId);
+  assert.equal(f.events.includes('recover'), false, 'the complete accepted state already carries the verified real proof');
+});
+
 test('unresolved host outcome keeps the reservation protected and prevents a second source refresh', async () => {
   const f = await fixture(), state = createChinaState({storage: f.storage, now: () => nextAt});
   const lease = await state.acquireLease({previous: await state.read('lease'), owner: owner(9), nonce: 'c'.repeat(32), expiresAt: '2026-11-24T13:00:00Z'});
@@ -244,4 +254,54 @@ test('a prepared result with the wrong predecessor or unverified fresh source ca
     await assert.rejects(runChinaDailyCycle(f.args), /source_predecessor|source_not_complete/);
     assert.deepEqual(f.events, ['prepare']); assert.deepEqual(await f.storage.read('accepted'), f.first.accepted);
   }
+});
+
+test('cleanup runs after committed acceptance under the current lease and a failure cannot undo publication', async () => {
+  const f = await fixture(); let attempts = 0;
+  f.args.afterAccepted = async ({previousAccepted, accepted, intent, readState, assertAuthority}) => {
+    attempts++; assert.deepEqual(previousAccepted, f.first.accepted);
+    assert.equal(accepted.value.current.generationId, candidate(2).generationId); assert.equal(intent.value.status, 'committed');
+    assert.equal((await f.storage.read('lease')).value.status, 'held');
+    await assertAuthority(); assert.deepEqual(await readState(), {accepted, intent});
+    const error = Error('china_gc_delete_outcome_unknown');
+    error.report = {status: 'needs_reconciliation', uncertainKey: 'private-object-must-not-be-logged'}; throw error;
+  };
+  const result = await runChinaDailyCycle(f.args);
+  assert.equal(result.status, 'accepted'); assert.equal(result.published, true); assert.equal(attempts, 1);
+  assert.deepEqual(result.retention, {completed: false, status: 'needs_reconciliation', errorCode: 'china_gc_delete_outcome_unknown'});
+  assert.ok(!JSON.stringify(result).includes('private-object')); assert.equal(result.leaseReleased, true);
+});
+
+test('host container-retirement failure is reported after commit without cancelling the accepted data or private cleanup', async () => {
+  const f = await fixture(), stage = f.args.stageRelease; let gc = false;
+  f.args.stageRelease = async input => ({...await stage(input), async afterCommit({accepted, assertAuthority}) {
+    await assertAuthority(); assert.equal(accepted.value.current.generationId, candidate(2).generationId); throw Error('host_cleanup_failure');
+  }});
+  f.args.afterAccepted = async () => { gc = true; return {market: 'china', completed: true, status: 'no_previous_rollback', deletedObjects: 0}; };
+  const result = await runChinaDailyCycle(f.args);
+  assert.equal(result.published, true); assert.equal(result.hostCleanupPending, true); assert.equal(gc, true);
+  assert.equal((await f.storage.read('accepted')).value.current.generationId, candidate(2).generationId);
+});
+
+test('preparation records the old cleanup witness first but cleanup transport failure is not a source refresh gate', async () => {
+  const f = await fixture();
+  f.args.resumeCleanup = async ({readState, assertAuthority}) => {
+    f.events.push('enqueue'); await assertAuthority();
+    assert.deepEqual(await readState(), f.first); assert.equal((await f.storage.read('lease')).value.status, 'held');
+    return {market: 'china', completed: false, status: 'paused', witnessRemembered: false,
+      errorCode: 'china_gc_queue_storage_transport'};
+  };
+  f.args.afterAccepted = async ({assertAuthority}) => {
+    f.events.push('drain'); await assertAuthority();
+    return {market: 'china', completed: true, status: 'complete', witnessRemembered: true,
+      pending: 0, collected: 1, filesDeleted: 2, freedBytes: 512};
+  };
+  const result = await runChinaDailyCycle(f.args);
+  assert.equal(result.published, true); assert.equal(result.retentionResume.completed, false);
+  assert.equal(result.retentionResume.witnessRemembered, false);
+  assert.equal(result.retentionResume.errorCode, 'china_gc_queue_storage_transport');
+  assert.deepEqual(f.events, ['enqueue', 'prepare', 'stage', 'activate', 'close', 'drain']);
+  assert.deepEqual(result.retention, {status: 'complete', completed: true, witnessRemembered: true,
+    collected: 1, pending: 0, filesDeleted: 2, freedBytes: 512});
+  assert.ok(!JSON.stringify(result).includes('private-cleanup'));
 });
