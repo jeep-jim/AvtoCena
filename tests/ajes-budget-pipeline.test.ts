@@ -4,7 +4,7 @@ import {build} from 'esbuild';
 import {createRequire} from 'node:module';
 const require=createRequire(import.meta.url);
 
-test('budget rail finds later accepted rows in one source read, has no competing count, and resumes without repeats',async()=>{
+test('Japan budget rail finds later accepted rows in one source read, has no competing count, and resumes without repeats',async()=>{
  const state={queries:[] as any[],counts:0,priced:0,edits:{} as any};
  (globalThis as any).__budgetPipeline=state;
  const mocks:Record<string,string>={
@@ -28,7 +28,7 @@ test('budget rail finds later accepted rows in one source read, has no competing
    b.onLoad({filter:/.*/,namespace:'stub'},a=>({contents:mocks[a.path]}));
   }}]});
   const mod={exports:{} as any};new Function('require','module','exports',built.outputFiles[0].text)(require,mod,mod.exports);
-  for(const market of ['japan','korea']){
+  for(const market of ['japan']){
    state.queries=[];state.counts=0;state.priced=0;
    const rail=await mod.exports.readAjesCatalogPage({market,budgetTo:'1500000',pageSize:'6'});
    assert.deepEqual(rail.items.map((r:any)=>r.id),['car8','car9','car10','car11','car12','car13']);
@@ -38,11 +38,14 @@ test('budget rail finds later accepted rows in one source read, has no competing
    assert.equal(next.items[0].id,'car14');assert.equal(next.items.length,10);assert.equal(next.hasMore,false);
    assert.equal(new Set([...rail.items,...next.items].map((r:any)=>r.id)).size,16);
   }
-  state.edits={edited:{market:'korea',status:'visible',sellerPrice:{amount:1,currency:'KRW'}}};state.queries=[];
-  await mod.exports.readAjesCatalogPage({market:'korea',budgetTo:'1500000',pageSize:'6'});
+  state.edits={edited:{market:'japan',status:'visible',sellerPrice:{amount:1,currency:'JPY'}}};state.queries=[];
+  await mod.exports.readAjesCatalogPage({market:'japan',budgetTo:'1500000',pageSize:'6'});
   assert.equal(state.queries[0].sourcePriceTo,undefined,'manual seller prices must never be dropped by the supplier cap');
   state.edits={};(state as any).savedPrices=true;state.queries=[];
   await mod.exports.readAjesCatalogPage({market:'japan',budgetTo:'1500000',pageSize:'6'});
   assert.equal(state.queries[0].sourcePriceTo,undefined,'saved delivered quotes must never be dropped by the supplier cap');
+  const before={queries:state.queries.length,priced:state.priced,counts:state.counts};
+  for(const market of ['china','korea'])await assert.rejects(mod.exports.readAjesCatalogPage({market,budgetTo:'1500000',pageSize:'6'}),/market_not_supported/);
+  assert.deepEqual({queries:state.queries.length,priced:state.priced,counts:state.counts},before,'retired markets never enter the Japanese budget pipeline');
  }finally{delete (globalThis as any).__budgetPipeline;}
 });

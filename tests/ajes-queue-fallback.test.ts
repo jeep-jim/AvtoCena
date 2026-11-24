@@ -3,9 +3,9 @@ import assert from 'node:assert/strict';
 import {createAjesClient,AjesUnavailable} from '../apps/web/lib/catalog/ajes-client';
 import {DetailReadCache} from '../apps/web/lib/catalog/detail-read-cache';
 import {ajesQuery} from '../apps/web/lib/catalog/ajes-query';
-import {findSavedAjesStockSearch} from '../apps/web/lib/catalog/ajes-saved-search';
-const input={table:'korea' as const,make:'KIA',model:'SELTOS'};
-const snapshot=()=>({schemaVersion:2,items:[{id:'fixture001',table:'korea',make:'KIA',model:'SELTOS',year:2024,sourcePrice:17000000}],page:1,pageSize:24,received:1,rejected:0,observedAt:new Date(Date.now()-3600000).toISOString()});
+import {findSavedAjesSearch} from '../apps/web/lib/catalog/ajes-saved-search';
+const input={table:'stats' as const,make:'TOYOTA',model:'COROLLA'};
+const snapshot=()=>({schemaVersion:2,items:[{id:'fixture001',table:'stats',make:'TOYOTA',model:'COROLLA',year:2024,finalPriceJpy:1700000,status:'Sold'}],page:1,pageSize:24,received:1,rejected:0,observedAt:new Date(Date.now()-3600000).toISOString()});
 const busy=(e:unknown)=>e instanceof AjesUnavailable&&e.reason==='local_busy';
 function rejectSupplierQueue(t:any,message:string){
   const original=DetailReadCache.prototype.get;
@@ -32,10 +32,10 @@ test('queue recovery rejects expired, future, wrong-market, wrong-page and empty
   await assert.rejects(client.read(input,'203.0.113.1'),busy);
  }
 });
-test('saved first-page recovery preserves exact stock filters, exclusions and partial status',async t=>{
+test('saved first-page recovery preserves exact Japanese result filters, exclusions and partial status',async t=>{
  rejectSupplierQueue(t,'detail_cache_queue_timeout');
- const saved=snapshot(),wrong={...saved,items:[{...saved.items[0],id:'wrong',model:'SPORTAGE'}]},withdrawn={...saved,items:[{...saved.items[0],id:'sold',status:'sold'}]};
- const client=createAjesClient({password:()=> 'fixture',assertEnabled:async()=>{},reserve:async()=>{throw Error('no supplier');},readSavedSearch:async q=>findSavedAjesStockSearch(q,{saved,wrong,withdrawn})});
+ const saved=snapshot(),wrong={...saved,items:[{...saved.items[0],id:'wrong',model:'CAMRY'}]},withdrawn={...saved,items:[{...saved.items[0],id:'unsold',status:'unsold'}]};
+ const client=createAjesClient({password:()=> 'fixture',assertEnabled:async()=>{},reserve:async()=>{throw Error('no supplier');},readSavedSearch:async q=>findSavedAjesSearch(q,{saved,wrong,withdrawn})});
  const value=await client.read(input,'203.0.113.1');assert.deepEqual(value.items,saved.items);assert.equal(value.partial,true);assert.equal(value.stale,true);assert.equal(value.total,undefined);
  await assert.rejects(client.read({...input,page:2},'203.0.113.1'),busy);
 });

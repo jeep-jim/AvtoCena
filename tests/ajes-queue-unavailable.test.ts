@@ -8,14 +8,14 @@ test('local queue saturation is typed unavailability, not a hard page error or a
   const mock=t.mock.method(DetailReadCache.prototype,'get',()=>Promise.reject(new Error(message)));
   let fetches=0;
   const client=createAjesClient({password:()=> 'fixture',assertEnabled:async()=>{},reserve:async()=>{},fetcher:async()=>{fetches++;throw Error('must not fetch');}});
-  await assert.rejects(client.read({table:'korea',id:'fixture001'},'203.0.113.1'),e=>e instanceof AjesUnavailable&&e.reason==='local_busy');
+  await assert.rejects(client.read({table:'stats',id:'fixture001'},'203.0.113.1'),e=>e instanceof AjesUnavailable&&e.reason==='local_busy');
   assert.equal(fetches,0);mock.mock.restore();
  }
 });
 test('unrelated cache failure retains its original identity',async t=>{
  const original=new Error('corrupt_data');t.mock.method(DetailReadCache.prototype,'get',()=>Promise.reject(original));
  const client=createAjesClient({password:()=> 'fixture',assertEnabled:async()=>{},reserve:async()=>{}});
- await assert.rejects(client.read({table:'korea'},'203.0.113.1'),e=>e===original);
+ await assert.rejects(client.read({table:'stats'},'203.0.113.1'),e=>e===original);
 });
 test('queue pressure after successful pages retains cards and exact retry cursor',async()=>{
  const page=await readFilteredAjesPage({page:1,pageSize:24,read:async p=>{if(p===2)throw new AjesUnavailable('local_busy');return {items:['first'],received:24};}});

@@ -1,6 +1,7 @@
 import {attachManagementKnowledge} from './management-knowledge';
 import {CollectionDisabledError} from './collection-controls';
 import {AjesUnavailable} from './ajes-client';
+import {retiredAjesOffer} from './ajes-access-policy';
 import {readCatalogEditorial,editorialHidden,applyCatalogEditorial} from "./editorial";
 import { cache } from "react";
 import { unstable_cache } from "next/cache";
@@ -35,12 +36,14 @@ async function resilientOfferLookup(id: string) {
 
 // Metadata and the page render also share the lookup inside one request.
 export const getOfferForPage = cache(async (id: string) => {
+ if(retiredAjesOffer(id))return null;
  const [offer,index]=await Promise.all([resilientOfferLookup(id),readCatalogEditorial()]);
- return offer&&!editorialHidden(offer,index)?(await attachManagementKnowledge([applyCatalogEditorial(offer,index)]))[0]:null;
+ return offer&&!retiredAjesOffer(offer.id,offer.sourceId)&&!editorialHidden(offer,index)?(await attachManagementKnowledge([applyCatalogEditorial(offer,index)]))[0]:null;
 });
 
 // The same authoritative record feeds the page and its share preview.
 export const getOfferDetailRecord = cache(async (id:string)=>{
+  if(retiredAjesOffer(id))return null;
   if (/^ajes-(?:stats|korea|china)-[A-Za-z0-9_-]{1,64}$/.test(id)){const offer=await getOfferForPage(id);return offer?(await attachManagementKnowledge([offer],true))[0]:null;}
   let storedOffer = isJapanCatalogOfferId(id)
     ? await getOfferFromCurrentShard(id) || await getOfferForPage(id) || await getOfferFromCurrentProjection(id)
@@ -48,11 +51,12 @@ export const getOfferDetailRecord = cache(async (id:string)=>{
   // New auction IDs are hashes, so their market cannot be inferred from the ID.
   if (storedOffer?.market === "japan" && !isJapanCatalogOfferId(id)) storedOffer = await getOfferFromCurrentShard(id) || storedOffer;
   const editorial=await readCatalogEditorial();
-  return storedOffer&&!editorialHidden(storedOffer,editorial)?(await attachManagementKnowledge([applyCatalogEditorial(storedOffer,editorial)],true))[0]:null;
+  return storedOffer&&!retiredAjesOffer(storedOffer.id,storedOffer.sourceId)&&!editorialHidden(storedOffer,editorial)?(await attachManagementKnowledge([applyCatalogEditorial(storedOffer,editorial)],true))[0]:null;
 });
 
 /** Never treat a provider refusal as a sold car or an application-wide crash. */
 export async function readOfferDetailForPage(id:string){
+ if(retiredAjesOffer(id))return {offer:null,unavailable:false};
  try{return {offer:await getOfferDetailRecord(id),unavailable:false};}
  catch(error){if(error instanceof CollectionDisabledError)return {offer:null,unavailable:true,disabled:true as const};if(error instanceof AjesUnavailable)return {offer:null,unavailable:true};throw error;}
 }

@@ -8,6 +8,8 @@ permissions:
   contents: read
 jobs:
   check:
+    # This diagnostic only queried retired AJ Korea; it must not run again.
+    if: false
     runs-on: ubuntu-latest
     timeout-minutes: 10
     environment: regcloud-staging

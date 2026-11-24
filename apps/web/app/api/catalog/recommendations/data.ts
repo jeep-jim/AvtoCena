@@ -1,4 +1,3 @@
-import {usesAjesMarket} from '@/lib/catalog/ajes-market-selection';
 import 'server-only';
 import {getOfferDetailRecord} from '@/lib/catalog/offer-page-data';
 import {getUnavailableOffer,publicOffer,searchOffers} from '@/lib/catalog/storage';
@@ -38,8 +37,8 @@ export async function loadRelatedRecommendations({id,markets}:{id:string;markets
   const empty=()=>({items:[],total:0 as number|null});
   const safeSearch=async(params:Parameters<typeof searchOffers>[0])=>{
     try {
-      return params.market==='japan'||(params.market==='korea'&&await usesAjesMarket('korea'))||(/^ajes-china-/.test(current.id)&&params.market===current.market)
-        ? await readAjesPublic({table:params.market==='korea'?'korea':params.market==='china'?'china':'stats',make:params.make,model:params.model?(/^ajes-(?:stats|korea|china)-/.test(current.id)?String(current.model):params.model):undefined,pageSize:24}).then(result=>({items:result.items,total:null}))
+      return params.market==='japan'
+        ? await readAjesPublic({table:'stats',make:params.make,model:params.model?(/^ajes-stats-/.test(current.id)?String(current.model):params.model):undefined,pageSize:24}).then(result=>({items:result.items,total:null}))
         : await searchOffers(params,48,'related');
     } catch {partial=true;return {items:[],total:null};}
   };
@@ -58,9 +57,8 @@ export async function loadRelatedRecommendations({id,markets}:{id:string;markets
     greenModels,greenRows:(green?.items||[]).map(publicGreenOffer),
     price:applyActiveBusinessPricingBatch,renderable:isRenderableRelatedOffer,
   });
-  const liveStock=/^ajes-(?:korea|china)-/.test(current.id);
-  const japanTotal=current.market==='japan'||liveStock?await readAjesCount(JSON.stringify({market:current.market})).catch(()=>{partial=true;return null;}):null;
-  const marketTotal=liveStock?japanTotal:current.market==='japan'?(japanTotal===null?null:japanTotal+(green?.items.length||0))
+  const japanTotal=current.market==='japan'?await readAjesCount(JSON.stringify({market:'japan'})).catch(()=>{partial=true;return null;}):null;
+  const marketTotal=current.market==='japan'?(japanTotal===null?null:japanTotal+(green?.items.length||0))
     :marketResult.total===null?null:Math.max(0,Number(marketResult.total||0));
   return {kind:'related',current:{id:current.id,market:current.market},make,familyModel,
     greenCurrent:isGreenCornerOffer(current),modelTitle:[presented.makeLabel,familyModel||presented.modelLabel].filter(Boolean).join(' '),

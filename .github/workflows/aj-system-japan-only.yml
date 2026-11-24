@@ -1,0 +1,114 @@
+name: Retire AJ System outside Japan only
+on:
+  workflow_dispatch:
+    inputs:
+      controller_sha:
+        description: Exact reviewed main controller SHA
+        required: true
+        type: string
+  push:
+    branches: [main]
+    paths: [.github/market-runs/aj-system-japan-only.json]
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: aj-system-japan-only-20261124
+  cancel-in-progress: false
+jobs:
+  release:
+    if: github.repository == 'jeep-jim/AvtoCena' && github.repository_id == '1289722938' && github.ref == 'refs/heads/main' && github.run_attempt == '1'
+    environment: regcloud-staging
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    env:
+      EXPECTED_CONTROLLER_SHA: ${{ inputs.controller_sha }}
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          path: controller
+          fetch-depth: 2
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24.22.3'
+      - name: Verify exact AJ entry and unchanged required release gates
+        id: profile
+        working-directory: controller
+        run: |
+          set -euo pipefail
+          node .github/operations/ajes-japan-only-20261124/release-contract.mjs --check-invocation
+          node scripts/verify-frozen-speed-baselines.mjs
+          node --test tests/release-speed-guard-contract.test.mjs tests/ajes-japan-only-release.test.mjs tests/ajes-japan-only-controls-migration.test.mjs
+          python3 -I -B tests/ajes-japan-only-release-host.test.py
+          node --input-type=module <<'JS'
+          import fs from 'node:fs';
+          import {PROFILE,checkedProfile} from './.github/operations/ajes-japan-only-20261124/release-contract.mjs';
+          checkedProfile();
+          fs.appendFileSync(process.env.GITHUB_OUTPUT,'source='+PROFILE.source+'\n');
+          JS
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ steps.profile.outputs.source }}
+          path: application
+          fetch-depth: 2
+          persist-credentials: false
+      - name: Prepare Chromium for the isolated admin fixture and required browser gate
+        run: |
+          set -euo pipefail
+          npm install --prefix "$RUNNER_TEMP/release-browser" --no-package-lock --ignore-scripts playwright@1.55.0
+          printf 'CHROME_BIN=%s\n' "$(readlink -f "$(command -v google-chrome)")" >> "$GITHUB_ENV"
+          printf 'PLAYWRIGHT_MODULE=%s\n' "$RUNNER_TEMP/release-browser/node_modules/playwright/index.mjs" >> "$GITHUB_ENV"
+      - name: Verify only the isolated installed-source AJ change
+        working-directory: application
+        run: |
+          set -euo pipefail
+          npm ci --no-audit --no-fund
+          npm run typecheck
+          # Restore only TypeScript's generated tracked cache from this pinned
+          # checkout. Any other source change still fails verifySource below.
+          git restore --source=HEAD --worktree -- apps/web/tsconfig.tsbuildinfo
+          node --import tsx --import ./tests/helpers/offline-fetch.mjs --test --test-concurrency=1 tests/ajes-*.test.ts tests/china-source-switch.test.ts tests/related-offer-selection.test.ts tests/model-directory-markets.test.ts
+          node --import tsx --import ./tests/helpers/offline-fetch.mjs --test --test-concurrency=1 tests/dealer-offer-markets.test.ts tests/catalog-japan-filter-rail.test.ts tests/catalog-market-page-boundary.test.ts tests/catalog-deferred-recommendations.test.ts tests/catalog-collection-controls.test.ts
+          node --import tsx tests/browser/collection-controls.mjs
+          # Keep the screenshots as evidence, outside the exact source checkout.
+          test ! -e "$RUNNER_TEMP/aj-admin-fixture"
+          mv -- artifacts/collection-controls "$RUNNER_TEMP/aj-admin-fixture"
+          rmdir artifacts
+      - name: Preserve the verified owner admin fixture
+        uses: actions/upload-artifact@v4
+        with:
+          name: aj-system-japan-only-admin-fixture
+          path: ${{ runner.temp }}/aj-admin-fixture/controls-*.png
+          if-no-files-found: error
+          retention-days: 7
+      - name: Build exact application privately on this runner
+        working-directory: controller
+        run: node scripts/run-node-with-resources.mjs .github/operations/ajes-japan-only-20261124/release.mjs --build "$GITHUB_WORKSPACE/application"
+      - name: Install controller dependencies
+        working-directory: controller
+        run: npm ci --no-audit --no-fund
+      - name: Retire the two AJ switches and accept the exact runtime with rollback
+        working-directory: controller
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+          JSON_STORAGE_DRIVER: object
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_REGION: us-east-1
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+        run: node scripts/run-node-with-resources.mjs --import tsx .github/operations/ajes-japan-only-20261124/release.mjs --activate "$GITHUB_WORKSPACE/application"
+      - name: Preserve safe source, image and factual acceptance receipts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: aj-system-japan-only-safe-result
+          path: |
+            ${{ runner.temp }}/aj-japan-release/image-receipt.json
+            ${{ runner.temp }}/aj-japan-release/safe-plan.json
+            ${{ runner.temp }}/aj-japan-release/safe-result.json
+          retention-days: 7
+          if-no-files-found: warn
