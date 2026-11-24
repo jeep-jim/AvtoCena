@@ -37,12 +37,12 @@ test('same 150 in safe cards, presentation, calculator and preliminary price inp
  }
 });
 test('auction power queries defer horsepower to the local encyclopedia and owner override',async()=>{
- for(const aggregate of [undefined,'count'] as const){
-  const sql=ajesQuery({table:'stats',powerTo:160,aggregate}).sql;
+ for(const table of ['stats','main'] as const)for(const aggregate of [undefined,'count'] as const){
+  const sql=ajesQuery({table,powerTo:160,aggregate}).sql;
   assert.doesNotMatch(sql,/pw\s*(?:>=|<=|>|<)/i);
   assert.doesNotMatch(sql,/150<=160/);
  }
- assert.doesNotMatch(ajesQuery({table:'korea',powerTo:160}).sql,/pw\s*(?:>=|<=|>|<)/i);
+ for(const table of ['china','korea'])assert.throws(()=>ajesQuery({table,powerTo:160}),/ajes_invalid_query/);
  assert.deepEqual(ajesPowerFilterValues({...base,sourceId:'ajes_japan_feed',operational:{raw:{sourcePower:'170'}}}),[150]);
  const {ajesResultFilter}=await import('../apps/web/lib/catalog/ajes-result-filter');
  const filter=ajesResultFilter({market:'japan',powerTo:'160'});

@@ -67,17 +67,6 @@ export async function readExpandedJapanRows(sql:string,previous:string,read:(sql
  return null;
 }
 
-/** Reuse a bounded previously viewed China page after introducing the price ceiling.
- * Public mapping still applies the current RUB limit; this is never an exact count.
- */
-export async function readUncappedChinaRows(sql:string,read:(sql:string)=>Promise<any|null>){
- if(!sql.startsWith('select * from china '))return null;
- const previous=sql.replace(/ and finish<=\d+/, '');
- if(previous===sql)return null;
- const value=await read(previous);
- return value?{...value,schemaVersion:0,partial:true}:null;
-}
-
 /** Old viewed rows remain a partial failure fallback; never reuse their old counts. */
 export async function readPreviousTruckPolicyRows(sql:string,read:(sql:string)=>Promise<any|null>){
  if(!sql.startsWith('select * from'))return null;

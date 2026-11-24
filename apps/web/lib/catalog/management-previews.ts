@@ -15,10 +15,9 @@ export async function attachManagementPreviews<T extends Partial<VehicleOffer>>(
   // their detail route. Keep that complete, listing-bound record local instead
   // of issuing one more supplier read for each visible learned calculation.
   // Compact/public rows lack this private context and retain the detail check.
-  const table=offer.market==='japan'?'stats':offer.market;
-  const inline=Boolean(['japan','korea','china'].includes(String(offer.market))
-   &&offer.sourceId===`ajes_${offer.market}_feed`&&offer.sourceOfferId
-   &&offer.id===`ajes-${table}-${offer.sourceOfferId}`
+  const inline=Boolean(offer.market==='japan'
+   &&offer.sourceId==='ajes_japan_feed'&&offer.sourceOfferId
+   &&offer.id===`ajes-stats-${offer.sourceOfferId}`
    &&!(offer as any).cardProjectionVersion&&offer.operational?.raw);
   const key=JSON.stringify([inline,offer.market,offer.sourceId,offer.sourceOfferId,offer.id,offer.sourcePrice,offer.sourceCurrency,offer.updatedAt,offerPrecedentParameterDraft(offer as VehicleOffer),learned,configuration]);
   const preview=await quotes.get(key,async()=>{

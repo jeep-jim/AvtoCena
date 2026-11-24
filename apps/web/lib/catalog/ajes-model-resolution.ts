@@ -39,13 +39,7 @@ export async function resolveAjesQueryModels<T extends {table?:string;model?:str
  if(!query.make)return {query:{...query,modelFamilies:query.model},modelDirectoryUnavailable:false};
  try{
   const directory=await read();
-  // Hyundai Annual Report 2012, Product Lineup: TUCSON ix (ix35).
-  // https://www.hyundai.com/content/dam/hyundai/ww/en/images/about-hyundai/ir/financial-statements/annual-report/hw073495.pdf
-  // Only the Korean directory's actual Tucson ix rows qualify, never later
-  // Tucson generations or Chinese ix35 variants; admission years stay unchanged.
-  const selected=query.table==='korea'&&/^hyundai$/i.test(query.make)&&directory.models.some(row=>matchesCatalogModel(row.model,'TUCSON IX','HYUNDAI'))
-   ?query.model.split('|').map(name=>/^ix[\s-]*35$/i.test(name.trim())?'TUCSON IX':name).join('|'):query.model;
-  const selection=resolveAjesModelSelection(selected,directory.models,query.make);
+  const selection=resolveAjesModelSelection(query.model,directory.models,query.make);
   const next={...query};delete next.model;Object.assign(next,selection);
   return {query:next,modelDirectoryUnavailable:false};
  }catch(error){

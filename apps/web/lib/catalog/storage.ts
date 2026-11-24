@@ -10,6 +10,7 @@ import {budgetSourceRows,resetBudgetSourceIndexes} from './budget-source-index';
 import {inspectCompressedSelectors,publishCompressedSelectors,readCompressedSelector,publishSelectorMarket,MAX_PUBLISHED_SELECTOR_BYTES} from './budget-selector-publication';
 import {calculatedCatalogPrice} from './calculated-price';
 import {compactJapanPowerEstimate} from './ajes-power-estimate';
+import {retiredAjesOffer} from './ajes-access-policy';
 import {verifyCatalogReadModels} from './verify-read-models';
 import {compactFuelPowertrainEvidence} from './specification-evidence-audit';
 import {applyUaeManualSpecifications} from './uae-manual-specifications';
@@ -826,7 +827,8 @@ async function readCurrentOfferShard(id: string) {
   return shard;
 }
 export async function getOfferFromCurrentShard(id: string) {
-  if(/^ajes-(?:stats|korea|china)-[A-Za-z0-9_-]{1,64}$/.test(id))return (await import('./ajes-public')).getAjesOffer(id,{editorial:false});
+  if(retiredAjesOffer(id))return null;
+  if(/^ajes-stats-[A-Za-z0-9_-]{1,64}$/.test(id))return (await import('./ajes-public')).getAjesOffer(id,{editorial:false});
   if (/^green-\d+$/.test(id)) return getGreenCornerOffer(id);
   const [manifest, current] = await Promise.all([readManifest(), readCurrentOfferShard(id)]);
   if (current.generationId !== manifest.generationId) return null;
@@ -2086,7 +2088,8 @@ export async function publishCurrentCatalogReadModels() {
 }
 
 export async function getOfferWithoutEditorial(id: string) {
-  if (/^ajes-(?:stats|korea|china)-[A-Za-z0-9_-]{1,64}$/.test(id)) return (await import('./ajes-public')).getAjesOffer(id);
+  if(retiredAjesOffer(id))return null;
+  if (/^ajes-stats-[A-Za-z0-9_-]{1,64}$/.test(id)) return (await import('./ajes-public')).getAjesOffer(id);
   if (/^green-\d+$/.test(id)) return getGreenCornerOffer(id);
   const [manifest, current] = await Promise.all([readManifest(), readCurrentOfferShard(id)]);
   const readProjectionFallback = () => getOfferFromCurrentProjection(id);

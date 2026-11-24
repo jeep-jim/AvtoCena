@@ -9,8 +9,11 @@ test('ordered sort priorities, direction replacement and strict supplier whiteli
  assert.equal(toggleCatalogSort('totalRub,mileage','totalRubDesc'),'totalRubDesc,mileage');
  assert.equal(toggleCatalogSort('totalRub,mileage','totalRub'),'mileage');
  for(const invalid of ['year,yearAsc','mileage,mileage','totalRub;drop','year,mileage,totalRub,yearAsc']){assert.equal(parseCatalogSort(invalid),null);assert.throws(()=>ajesQuery({sort:invalid}));}
- assert.match(ajesQuery({table:'korea',color:'Белый'}).sql,/color in \(.*'WHITE'/);
- assert.match(ajesQuery({table:'korea',sort:'totalRub,mileage'}).sql,/order by finish asc, mileage asc, id asc/);
+ for(const table of ['stats','main'] as const){
+  assert.match(ajesQuery({table,color:'Белый'}).sql,/color in \(.*'WHITE'/);
+  assert.match(ajesQuery({table,sort:'totalRub,mileage'}).sql,/order by finish asc, mileage asc, auction_date desc, id asc/);
+ }
+ for(const table of ['china','korea'])assert.throws(()=>ajesQuery({table,color:'Белый',sort:'totalRub,mileage'}),/ajes_invalid_query/);
 });
 test('secondary mileage breaks price ties; zero is real, missing stays last in either direction',()=>{
  const rows=[{id:'unknown',price:100,mileageKm:undefined},{id:'more',price:100,mileageKm:20},{id:'zero',price:100,mileageKm:0},{id:'cheaper',price:50,mileageKm:1000}];

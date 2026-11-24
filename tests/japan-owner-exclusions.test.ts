@@ -10,7 +10,8 @@ test('Japan exclusion applies before aggregate counts and to direct lots',()=>{
   assert.equal(ajesLot({ID:'1',MARKA_NAME:make,MODEL_NAME:'OTHER',YEAR:2020},'stats',true),null);
  }
  for(const make of ['Toyota','Honda','Isuzu','Mitsuoka'])assert.equal(japanExcludedMake(make),false);
- assert.ok(!ajesQuery({table:'korea'}).sql.includes("'SUMITOMO'"));
+ assert.ok(ajesQuery({table:'main'}).sql.includes("'SUMITOMO'"));
+ for(const table of ['china','korea'])assert.throws(()=>ajesQuery({table}),/ajes_invalid_query/);
 });
 test('Russian brand queries find Hyundai without changing vehicle identity',()=>{
  for(const query of ['хёндай','хендай','хендэ','HYUNDAI','хюндай'])assert.equal(catalogBrandMatches('Hyundai',query),true);

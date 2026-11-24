@@ -1,5 +1,5 @@
 import {getJsonStorage, StorageConflictError, type JsonStorage} from '../data';
-import {COLLECTION_MARKETS,COLLECTION_SOURCES,defaultCollectionControls,collectionEnabled,type CollectionControls,type CollectionChange} from './collection-controls-schema';
+import {COLLECTION_MARKETS,COLLECTION_SOURCES,RETIRED_AJES_COLLECTION_SOURCES,defaultCollectionControls,collectionEnabled,type CollectionControls,type CollectionChange} from './collection-controls-schema';
 export const COLLECTION_CONTROLS_KEY='catalog/operations/collection-controls-v1.json';
 export class CollectionDisabledError extends Error {constructor(public sourceId:string){super(`collection_disabled_by_owner:${sourceId}`);this.name='CollectionDisabledError';}}
 export class CollectionControlsConflict extends Error {}
@@ -14,11 +14,13 @@ export function validateCollectionControls(value:unknown):CollectionControls {
     for(const id of Object.keys(defaults[scope])){
       const row=v[scope][id];
       // New feed controls default off without resetting any existing switch/history.
-      if(scope==='sources'&&['ajes_japan_feed','ajes_china_feed','ajes_korea_feed','dubicars_feed','encar_feed'].includes(id)&&!Object.prototype.hasOwnProperty.call(v[scope],id))continue;
+      if(scope==='sources'&&['ajes_japan_feed','dubicars_feed','encar_feed'].includes(id)&&!Object.prototype.hasOwnProperty.call(v[scope],id))continue;
       if(!row || (typeof row.enabled!=='boolean' || [row.enabledAt,row.disabledAt].some(t=>t!==null&&!Number.isFinite(Date.parse(t)))))throw Error('invalid_collection_controls');
     }
   }
-  return {...v,markets:{...defaults.markets,...v.markets},sources:{...defaults.sources,...v.sources}};
+  const sources={...defaults.sources,...v.sources};
+  for(const id of RETIRED_AJES_COLLECTION_SOURCES)delete sources[id];
+  return {...v,markets:{...defaults.markets,...v.markets},sources};
 }
 export async function readCollectionControls(storage:JsonStorage=getJsonStorage()) {
   const meta=await storage.readJsonWithMeta<unknown>(COLLECTION_CONTROLS_KEY,null);

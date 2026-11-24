@@ -9,7 +9,6 @@ export function RelatedOffersView({data,markets}:{data:RelatedRecommendations;ma
   const modelParams = new URLSearchParams({market:String(current.market||""),make,model:familyModel});
   const marketParams = new URLSearchParams({market:String(current.market||"")});
   if(current.market==='japan')marketParams.set('stock','all');
-  if(/^ajes-(?:korea|china)-/.test(String(current.id))){marketParams.set('source','ajes');modelParams.set('source','ajes');}
   const rail = (rows:any[]) => <div className="ac-result-rail ac-hide-scrollbar mt-5 md:!grid md:!grid-flow-row md:!grid-cols-2 md:!auto-cols-auto md:!overflow-visible xl:!grid-cols-4">{rows.map(item=><CatalogCard key={item.id} offer={item} compact />)}</div>;
   return <div className="mt-10 space-y-10 md:mt-14 md:space-y-14" data-related-offers>
     {stockModels.length && (!markets||markets.includes("japan")) ? <section data-related-section="stock-model"><div className="flex items-end justify-between gap-3"><h2 className="ac-green-heading text-[26px] font-black md:text-4xl">{modelTitle} · В наличии</h2><Link href={`/cars/green?${modelParams}`} className="ac-market-all-link ac-green-button shrink-0 text-sm font-black">Все →</Link></div>{rail(stockModels)}</section> : null}

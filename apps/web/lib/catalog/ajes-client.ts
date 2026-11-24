@@ -1,12 +1,12 @@
 import {ajesFailureSlot,type AjesRequestDiagnostic} from './ajes-request-diagnostic';
-import {preserveKoreaListingLink} from './ajes-korea-detail-cache';
 import type {CalculationIndex} from '../encyclopedia/calculation-index';
 import {isIP} from 'node:net';
 import {gunzipSync} from 'node:zlib';
 import {DetailReadCache} from './detail-read-cache';
 import {ajesQuery,ajesLot,type AjesTable,type AjesQuery} from './ajes-query';
+import {AjesUnavailable,assertAjesJapanTable} from './ajes-access-policy';
 
-export class AjesUnavailable extends Error {constructor(public reason:string){super(`ajes_${reason}`);}}
+export {AjesUnavailable} from './ajes-access-policy';
 // Release supplier admission before consulting historical
 // storage. Shared callers recover once; stale results never enter the fresh cache.
 class AjesSavedRecovery {
@@ -60,6 +60,9 @@ export function createAjesClient(deps:Dependencies) {
   const cooling=(key:string)=>{const value=failures.get(key);if(value&&value.until>Date.now())return value.reason;failures.delete(key);return null;};
   return {
     async read(input:unknown,clientIp:string) {
+      // Retired tables cannot read caches, credentials, quota or the supplier,
+      // even when an old link or saved owner setting still requests them.
+      assertAjesJapanTable(input&&typeof input==='object'?(input as AjesQuery).table:undefined);
       const query=ajesQuery(input,deps.calculationIndex?.()||null);
       if(!isIP(clientIp)) throw new AjesUnavailable('client_ip_missing');
       await deps.assertEnabled(query.table); // Also applies to cache hits after an owner disables the source.
@@ -87,7 +90,7 @@ export function createAjesClient(deps:Dependencies) {
         }
         return null;
       };
-      // Complete Korea details still follow the original provenance-preserving path.
+      // Detail responses keep their separate identity-bound cache path.
       const inspectPrepared=query.kind!=='detail';
       const inMemory=inspectPrepared?cache.peekFresh(query.sql):undefined;
       if(inMemory!==undefined)return inMemory;
@@ -121,10 +124,10 @@ export function createAjesClient(deps:Dependencies) {
         if(!inspectPrepared)try {saved=await deps.readDetail?.(query.table,query.id!);}catch{}
         const age=Date.now()-Date.parse(saved?.observedAt||'');
         const usable=isUsable(saved);
-        const currentSchema=query.kind==='count'||query.kind==='models'||query.kind==='makes'||query.kind==='colors'||saved?.schemaVersion===2&&(query.table!=='korea'||query.kind!=='detail'||saved?.fullInformation===true);
+        const currentSchema=query.kind==='count'||query.kind==='models'||query.kind==='makes'||query.kind==='colors'||saved?.schemaVersion===2;
         if(usable&&currentSchema&&!saved.stale&&!saved.partial&&age<30*60*1000)return query.kind==='list'?remember({...saved,stale:false}):{...saved,stale:false};
         const url=new URL(await deps.endpoint?.(clientIp)||'http://87.242.72.57/api/');
-        url.search=new URLSearchParams({ip:clientIp,json:'',code:password,sql:query.sql,...(query.table==='korea'&&query.kind==='detail'?{ajax:''}:{})}).toString();
+        url.search=new URLSearchParams({ip:clientIp,json:'',code:password,sql:query.sql}).toString();
         let requestStarted=false,httpStatus:number|null=null,providerCode:string|null=null;
         const startedAt=new Date().toISOString();
         const controller=new AbortController();
@@ -132,7 +135,7 @@ export function createAjesClient(deps:Dependencies) {
         // supplier scan. The local encyclopedia has already been applied before
         // post-filtering, so fail fast and use a bounded saved page when possible.
         const encyclopediaPowerList=query.kind==='list'&&(query.powerFrom!==undefined||query.powerTo!==undefined);
-        const timer=setTimeout(()=>controller.abort(),query.table==='korea'&&query.kind==='detail'?45000:encyclopediaPowerList?4500:20000);
+        const timer=setTimeout(()=>controller.abort(),encyclopediaPowerList?4500:20000);
         try {
           const cooldown=cooling(quotaKey)||cooling('visitor:'+clientIp)||cooling(visitorKey);
           if(cooldown)throw new AjesUnavailable(cooldown);
@@ -178,7 +181,7 @@ export function createAjesClient(deps:Dependencies) {
             return result;
           }
           const items=rows.map(r=>ajesLot(r,query.table,query.kind==='detail')).filter(Boolean);
-          const result={schemaVersion:2,...(query.table==='korea'&&query.kind==='detail'?{fullInformation:true}:{}),stale:false,items,page:query.page,pageSize:query.pageSize,received:rows.length,rejected:rows.length-items.length,observedAt:new Date().toISOString(),
+          const result={schemaVersion:2,stale:false,items,page:query.page,pageSize:query.pageSize,received:rows.length,rejected:rows.length-items.length,observedAt:new Date().toISOString(),
             quota:{counter:quotaNumber(response.headers.get('api-counter')),limit:quotaNumber(response.headers.get('api-limit')),remaining:quotaNumber(response.headers.get('api-rest'))}};
           if(query.kind==='detail'&&items.length===1){
             const row=rows[0];
@@ -234,14 +237,7 @@ export function createAjesClient(deps:Dependencies) {
             throw failure;
           });
         }finally{clearTimeout(timer);}
-      },visitorKey,query.kind==='detail'?'detail':'').then(value=>{
-        if(query.table!=='korea'||query.kind!=='detail'||value.stale||value.items?.length!==1)return value;
-        const snapshot=listed.get('korea:'+query.id)?.value;
-        const age=Date.now()-Date.parse(snapshot?.observedAt||'');
-        if(snapshot?.stale||!(age>=0&&age<30*60000)||snapshot.items?.length!==1)return value;
-        const item=preserveKoreaListingLink(value.items[0],snapshot.items[0]);
-        return item===value.items[0]?value:{...value,items:[item]};
-      }).catch(async error=>{
+      },visitorKey,query.kind==='detail'?'detail':'').catch(async error=>{
         if(error instanceof AjesSavedRecovery)return visitorCache.get(visitorKey,()=>error.read()).catch(recoveryError=>{
           if(recoveryError instanceof Error&&/^detail_cache_queue_(?:timeout|full)$/.test(recoveryError.message))throw new AjesUnavailable('local_busy');
           throw recoveryError;

@@ -1,4 +1,4 @@
-import {usesAjesMarket} from '@/lib/catalog/ajes-market-selection';
+import {retiredAjesOffer} from '@/lib/catalog/ajes-access-policy';
 import {isGreenCornerOffer} from "@/lib/catalog/green-corner-contract";
 import {DeferredOfferRecommendations} from "@/components/catalog/DeferredOfferRecommendations";
 import {isPriceOnRequestDubicarsOffer} from "@/lib/catalog/dubicars-owner-policy";
@@ -183,6 +183,7 @@ async function OfferPageContent({ params, searchParams }: { params: Promise<{ id
   if (parseSpecialId(offerRouteId(routeId))) return <SpecialOfferPage id={offerRouteId(routeId)} initialCity={(await searchParams)?.estimate ? decodeShareDraft((await searchParams)!.estimate!)?.deliveryCity || "" : undefined} previewRequested={(await searchParams)?.preview === "1"}/>;
   let id = offerRouteId(routeId);
   try { id = offerRouteId(decodeURIComponent(routeId)); } catch { /* Keep the route value. */ }
+  if(retiredAjesOffer(id))return <UnavailableOffer offer={null}/>;
   const query = searchParams ? await searchParams : {};
   const dealer=await resolveDealerBrowsingContext(query.dealer||"",query.preview==="1");
   const requestedPowerHp = Number(query?.powerHp || 0);
@@ -211,8 +212,9 @@ async function OfferPageContent({ params, searchParams }: { params: Promise<{ id
   // longer see source-only evidence removed from operational.raw and used to
   // turn valid Georgia cards into a soft 404.
   if (!storedOffer) return <UnavailableOffer offer={await getUnavailableOffer(id)} />;
-  if(storedOffer.market==='korea' && storedOffer.sourceId!=='ajes_korea_feed' &&
-     (storedOffer.sourceId!=='encar_direct' || storedOffer.operational?.provider!=='auto_api_encar' || await usesAjesMarket('korea'))) permanentRedirect('/cars?'+new URLSearchParams({market:'korea',make:storedOffer.make||'',model:storedOffer.model||''}));
+  if(retiredAjesOffer(storedOffer.id,storedOffer.sourceId))return <UnavailableOffer offer={null}/>;
+  if(storedOffer.market==='korea' &&
+     (storedOffer.sourceId!=='encar_direct' || storedOffer.operational?.provider!=='auto_api_encar')) permanentRedirect('/cars?'+new URLSearchParams({market:'korea',make:storedOffer.make||'',model:storedOffer.model||''}));
   const canonicalPath = offerPath(storedOffer);
   if (`/cars/offer/${encodeURIComponent(routeId)}${routeSlug ? `/${encodeURIComponent(routeSlug)}` : ""}` !== canonicalPath && `/cars/offer/${routeId}${routeSlug ? `/${routeSlug}` : ""}` !== canonicalPath) {
     const preserved = new URLSearchParams();
@@ -339,7 +341,6 @@ async function OfferPageContent({ params, searchParams }: { params: Promise<{ id
   </div> : null;
 
   const editorialSource = canEditCatalog(currentUser) ? await getOfferFromCurrentShard(o.id) : null;
-  const historyOfferId = !retro && offer.sourceId === 'ajes_korea_feed' && /^ajes-korea-[A-Za-z0-9_-]{1,64}$/.test(o.id) && /^\d{6,10}$/.test(String(offer.lotNumber || '')) ? o.id : undefined;
   const updatedStatus = <OfferUpdatedStatus sourceUnavailable={enrichedOffer.market==="korea"&&!sourceUrl} date={updatedDate} time={updatedTime} sourceUrl={sourceUrl} />;
 
   return <main data-autobot-electrified={offer.fuel==='hybrid'||offer.fuel==='electric'?'true':'false'} data-autobot-missing={JSON.stringify(missingElectrifiedSpecifications(offer))} data-offer-id={o.id} data-offer-share-name={o.title} data-offer-share-year={directScenario?.draft.year || savedCalculation?.draft.year || offer.year} data-offer-share-engine-cc={directScenario?.draft.engineCc || savedCalculation?.draft.engineCc || offer.engineCc} data-offer-share-fuel={offer.fuel} data-offer-saved-version={clientScenario?.version} data-offer-price-rub={retro ? undefined : directScenario?.calculation.totalRub || savedCalculation?.calculation.totalRub || (sellerPricing ? offer.sellerPriceRub : visibleRub || undefined)} data-offer-preview={JSON.stringify({id:o.id,title:o.title,imageUrl:o.images[0],fuel:offer.fuel,powertrainKind:offer.powertrainKind,year:o.year,totalRub:favoriteRub || null,marketLabel:o.marketLabel})} className="ac-offer-page ac-page-copy min-h-screen overflow-x-clip bg-[#07080d] text-white">
@@ -352,7 +353,7 @@ async function OfferPageContent({ params, searchParams }: { params: Promise<{ id
             <div className="relative mt-2 min-w-0"><h1 className="min-w-0 break-words text-3xl font-black leading-[1.02] tracking-[-0.04em] md:text-5xl">{o.title}</h1></div>
           </header>
           <div className="mt-5 min-w-0 overflow-hidden"><VehicleGallery editor={canEditCatalog(currentUser)?<CatalogEditorialEditor offerId={o.id} originalTitle={o.title} sourcePrice={editorialSource?.sourcePrice} sourceCurrency={editorialSource?.sourceCurrency} sourcePhotos={rankedCatalogImageUrls(editorialSource)} sourceSpecifications={{bodyType:editorialSource?.bodyType,drive:editorialSource?.drive,transmission:editorialSource?.transmission,color:editorialSource?.color}} initial={(await readCatalogEditorial()).entries[o.id]||null}/>:undefined} images={o.images} title={o.title} offerId={o.id} snapshot={snapshot} auctionSheetUrls={catalogAuctionSheetUrls(storedOffer)} /></div>
-          <OfferSpecificationsDisclosure historyOfferId={historyOfferId} historyLot={String(offer.lotNumber || "")} groups={specificationGroups} title={o.title} mode="desktop" sourceUrl={sourceUrl} headerAside={auctionStatus || updatedStatus} />
+          <OfferSpecificationsDisclosure groups={specificationGroups} title={o.title} mode="desktop" sourceUrl={sourceUrl} headerAside={auctionStatus || updatedStatus} />
           {!retro&&<OfferDesktopActions position="below" offerId={o.id} snapshot={snapshot} />}
         </div>
 
@@ -364,7 +365,7 @@ async function OfferPageContent({ params, searchParams }: { params: Promise<{ id
             <h2 className="mt-4 text-3xl font-black">Цена по запросу</h2>
             <p className="mt-4 text-xl font-bold">Классика вне времени</p>
             <p className="mt-2 text-sm leading-6 text-[var(--ac-muted)]">Стоимость покупки и доставки уточним индивидуально.</p>
-            <OfferSpecificationsDisclosure historyOfferId={historyOfferId} historyLot={String(offer.lotNumber || "")} groups={specificationGroups} title={o.title} mode="mobile" sourceUrl={sourceUrl}/>
+            <OfferSpecificationsDisclosure groups={specificationGroups} title={o.title} mode="mobile" sourceUrl={sourceUrl}/>
             <OfferLeadForm offerId={o.id} title="Уточнить стоимость"/>
           </section> : <InlineOfferParameters estimatedPowerHp={ajesPowerEstimateHp(offer)} initialCurrencyRate={raw.calculationSnapshot?.currencyRate} localCitySelection={Boolean(currentUser)} initialScenario={directScenario} copyOffer={canCopyOffer(currentUser) ? {title:o.title,mileageKm:o.mileageKm} : undefined} priceIdentity={{id:offer.id,sourceId:offer.sourceId,offerType:offer.offerType,market:offer.market,auctionGrade:offer.auctionGrade}} afterPrice={<OfferMobileActions offerId={o.id} snapshot={snapshot} />} originalBreakdown={!selectionRequired && visibleRub > 0 ? <div className="ac-original-calculation mt-4"><OfferPriceBreakdown offer={o} powerInfo={recyclingPowerInfo(raw)} /></div> : null} canSave={isCrmRole(currentUser?.role)} savedCalculation={savedCalculation ? {version:savedCalculation.version,draft:savedCalculation.draft,calculation:savedCalculation.calculation,savedAt:isCrmRole(currentUser?.role) ? savedCalculation.savedAt : undefined,savedByName} : null} deliveryMarket={offer.market} exportWarning={japanRestrictionDescription(o.japanExportRestriction)} sourcePriceOnly={sellerPricing || (selectionRequired && !selectedModification)} autoCalculate={sellerPricing || (selectionRequired && !selectedModification)} isPickup={commercialParameters(offer).isPickup} researchContext={[offer.make,offer.model,offer.trim,offer.market].filter(Boolean).join(" ")} showCommercial={commercialParameters(offer).showCommercial} key={[offer.id,clientScenario?.version||'',query.estimate||'',query.direct||''].join(':')} offerId={offer.id} reportedVolume={proAuctionsReportedVolume(offer)} initial={offerParameterDraft(offer,raw)} price={sellerPricing ? <SellerPrice hideJapanBadges offer={{...offer, japanExportRestriction:o.japanExportRestriction}} /> : selectionRequired
             ? <div className="ac-offer-price-panel rounded-[1.35rem] bg-[var(--ac-surface-2)] p-5"><p className="text-xs font-bold normal-case">Цена продавца</p><p className={`ac-price mt-2 text-3xl font-black ${electrified ? "ac-price--electrified" : ""}`}>{Number(offer.sourcePrice).toLocaleString("ru-RU")} {offer.sourceCurrency}</p><p className="mt-2 text-xs text-[var(--ac-muted)]">Без доставки и платежей. Уточните параметры ниже для расчёта.</p></div>
@@ -379,7 +380,7 @@ async function OfferPageContent({ params, searchParams }: { params: Promise<{ id
               <div className="ac-offer-spec-grid grid min-w-0 grid-cols-2 gap-2.5" style={{ gridTemplateColumns: "repeat(2, minmax(0, 1fr))", gridAutoFlow: "row" }}>{primarySpecs.map((spec, index) => <SpecTile key={spec.label} {...spec} fullWidth={primarySpecs.length % 2 === 1 && index === primarySpecs.length - 1} />)}</div>
               {secondarySpecs.length ? <div className="ac-offer-spec-grid grid min-w-0 grid-cols-2 gap-2.5" style={{ gridTemplateColumns: "repeat(2, minmax(0, 1fr))", gridAutoFlow: "row" }}>{secondarySpecs.map((spec, index) => <SpecTile key={spec.label} {...spec} fullWidth={secondarySpecs.length % 2 === 1 && index === secondarySpecs.length - 1} />)}</div> : null}
               <VehicleResearchLink offerId={offer.id} identity={{ make: offer.make, model: offer.model, year: offer.year, trim: offer.trim, market: offer.market, powertrainKind: offer.powertrainKind, chassisCode: typeof offer.operational?.chassisCode === "string" ? offer.operational.chassisCode : typeof offer.operational?.modelCode === "string" ? offer.operational.modelCode : undefined }} />
-              <OfferSpecificationsDisclosure historyOfferId={historyOfferId} historyLot={String(offer.lotNumber || "")} groups={specificationGroups} title={o.title} mode="mobile" sourceUrl={sourceUrl} />
+              <OfferSpecificationsDisclosure groups={specificationGroups} title={o.title} mode="mobile" sourceUrl={sourceUrl} />
             </div>
 
             {!japanAuction ? <div className="mt-3 xl:hidden">{updatedStatus}</div> : null}

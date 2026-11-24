@@ -63,3 +63,11 @@ test('Japanese sold lots with missing fuel still appear as same-model recommenda
 test('retired Korean parser inventory never appears as paid-feed recommendations',()=>{
  for(const sourceId of ['encar_direct','kcar'])assert.equal(isRenderableRelatedOffer({market:'korea',sourceId,cardProjectionVersion:3,publicSpecificationVerified:true,publicVisibleRub:1000000,totalRub:1000000,calculationStatus:'estimated'}),false);
 });
+
+test('paid Auto API Korea cards are eligible while retired AJ cards stay excluded',()=>{
+ const card={id:'paid-kia',market:'korea',cardProjectionVersion:3,publicSpecificationVerified:true,publicVisibleRub:1000000,totalRub:1000000,calculationStatus:'estimated'};
+ assert.equal(isRenderableRelatedOffer({...card,sourceId:'encar_direct',operational:{provider:'auto_api_encar'}}),true);
+ assert.equal(isRenderableRelatedOffer({...card,paidEncar:true}),true);
+ assert.equal(isRenderableRelatedOffer({...card,id:'ajes-korea-old',sourceId:'ajes_korea_feed',paidEncar:true}),false);
+ assert.equal(isRenderableRelatedOffer({...card,market:'china',id:'ajes-china-old',sourceId:'ajes_china_feed'}),false);
+});
