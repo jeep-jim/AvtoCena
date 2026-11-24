@@ -6,7 +6,7 @@ import {promisify} from 'node:util';
 const gzipAsync=promisify(gzip),gunzipAsync=promisify(gunzip);
 import {getJsonStorage} from '../data';
 import {getEffectiveMarketVersion} from '../effective-market-settings';
-import {catalogRateFingerprintInputs} from './rates';
+import {activeCatalogFxBatch,catalogPricingNow,catalogRateFingerprintInputs} from './rates';
 import {chinaCnyPriceFingerprint} from './china-cny-price';
 import {resolveCatalogMarketConfig} from './estimated-market-config';
 import type {CatalogMarket} from './types';
@@ -24,12 +24,14 @@ export function calculationCacheVersion(){
 // exact path until those authorities have a separate versioned contract.
 export async function budgetPricingFingerprint(market:string):Promise<string|null> {
  if(!markets.has(market))return null;
+ const fx=activeCatalogFxBatch();
+ if(fx && fx.receipt.market!==market)throw Error("catalog_fx_batch_market");
  const [rates,configured,anchors,editorial]=await Promise.all([
   catalogRateFingerprintInputs(),getEffectiveMarketVersion(market),
   market==='china'?chinaCnyPriceFingerprint():null,readCatalogEditorial(),
  ]);
- return hash({schema:1,release:calculationCacheVersion(),encyclopedia:readCalculationIndex()?.digest||null,market,
-  utcDay:new Date().toISOString().slice(0,10),rates,configured,
+ return hash({schema:fx?2:1,release:calculationCacheVersion(),encyclopedia:readCalculationIndex()?.digest||null,market,
+  utcDay:new Date(catalogPricingNow()).toISOString().slice(0,10),rates,configured,
   editorialPrices:Object.values(editorial.entries).filter(entry=>entry.market===market&&entry.sellerPrice).map(entry=>[entry.id,entry.sellerPrice]),
   resolved:resolveCatalogMarketConfig(market as CatalogMarket,configured),anchors});
 }

@@ -23,7 +23,7 @@ import { enrichOfferWithExplicitEngineDisplacement } from "./explicit-engine-dis
 import { enrichOfferWithPowerKnowledge } from "./power-knowledge";
 import { enrichOfferWithCertifiedPower } from "./power-reference";
 import { preferExplicitCombustionPowertrain } from "./powertrain-safety";
-import { convertToRub } from "./rates";
+import { activeCatalogFxBatch, catalogPricingNow, convertToRub } from "./rates";
 import { normalizeVehicleOfferSpecs } from "./spec-normalization";
 import type { VehicleOffer } from "./types";
 import { enrichOfferWithKnowledgeCore } from "./knowledge-core";
@@ -180,6 +180,8 @@ export function isPreliminaryElectrifiedCalculation(offer: Partial<VehicleOffer>
 }
 
 async function calculateOfferWithRussiaCustomsInternal(input: VehicleOffer, allowCombustionPreliminary: boolean, requestedPowerHp?: number, resolvedModification = false, userParameters = false): Promise<VehicleOffer> {
+  const batch = activeCatalogFxBatch();
+  if (batch && input.market !== batch.receipt.market) throw Error("catalog_fx_batch_offer_scope");
   input=applyCatalogEditorialPrice(input,await readCatalogEditorial());
   input=await withChinaCnyPrice(input);
   if(input.market==='uae'&&!userParameters&&!hasEncyclopediaCalculationEvidence(input)){
@@ -303,8 +305,10 @@ async function calculateOfferWithRussiaCustomsInternal(input: VehicleOffer, allo
     };
   }
   const commercial = normalizedCategory(offer).category === "N1";
+  const importedAt = userParameters && offer.customsCalculationDate ? new Date(`${offer.customsCalculationDate}T00:00:00Z`)
+    : batch ? new Date(catalogPricingNow()) : undefined;
   const ageInput = {
-    importedAt: userParameters && offer.customsCalculationDate ? new Date(`${offer.customsCalculationDate}T00:00:00Z`) : undefined,
+    importedAt,
     productionDate: userParameters ? offer.productionDate : confirmedProductionValue(offer) || undefined,
     year: userParameters ? offer.year : automaticProductionYear(offer),
   };
@@ -329,7 +333,7 @@ async function calculateOfferWithRussiaCustomsInternal(input: VehicleOffer, allo
   const customsInput = {
     newModelYearScenario: userParameters && !offer.productionDate,
     customsValueRub,
-    importedAt: userParameters && offer.customsCalculationDate ? new Date(`${offer.customsCalculationDate}T00:00:00Z`) : undefined,
+    importedAt,
     eurRateRub: Number(eurRate.effectiveRate || 0),
     engineCc: offer.engineCc,
     powerHp: offer.powerHp,
@@ -529,7 +533,7 @@ export async function calculateOfferWithVerifiedSpecifications(input: VehicleOff
   return requireFreshRecoveryRates(await calculateOfferWithRussiaCustomsInternal(withoutDeliveredPrice(input), false, undefined, true));
 }
 
-export function requireFreshRecoveryRates(offer: VehicleOffer, now = Date.now()): VehicleOffer {
+export function requireFreshRecoveryRates(offer: VehicleOffer, now = catalogPricingNow()): VehicleOffer {
   const snapshot = offer.calculationSnapshot || {};
   const rates = [snapshot.customsCurrencyRate || snapshot.currencyRate, snapshot.eurRate];
   const fresh = rates.every(rate => {

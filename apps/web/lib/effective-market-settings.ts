@@ -2,6 +2,7 @@ import { activeMarketCosts } from "../../../packages/engine/src/calculation/mark
 import { getMarketsSettings, selectActiveMarketVersion } from "./business-settings";
 import { CATALOG_MARKET_DEFAULTS } from "./catalog/estimated-market-config";
 import { applyMarketLogisticsUsdRate, currentUsdLogisticsRate, withCurrentMarketLogisticsUsd } from "./catalog/market-logistics";
+import { catalogPricingNow } from "./catalog/rates";
 import { MARKET_IDS, type MarketId } from "./settings-validation";
 
 // Production trigger 2026-07-27 17:23 +07 for the catalog market settings.
@@ -98,7 +99,7 @@ export async function getEffectiveMarketVersion(marketId: string) {
   if (!MARKET_IDS.includes(marketId as MarketId)) return null;
   const raw = await getCachedMarketsSettings();
   const market = raw.find((item) => item.id === marketId);
-  const current = selectActiveMarketVersion(market);
+  const current = selectActiveMarketVersion(market, new Date(catalogPricingNow()));
   return withCurrentMarketLogisticsUsd(marketId as MarketId, resolveEffectiveMarketVersion(marketId as MarketId, current));
 }
 
@@ -108,7 +109,7 @@ export async function getEffectiveMarketsWithDefaults() {
   const usdRate = await currentUsdLogisticsRate();
   return MARKET_IDS.map((marketId) => {
     const market = byId.get(marketId) || { id: marketId, name: MARKET_NAMES[marketId], versions: [] };
-    const current = selectActiveMarketVersion(market);
+    const current = selectActiveMarketVersion(market, new Date(catalogPricingNow()));
     const effectiveVersion = applyMarketLogisticsUsdRate(marketId, resolveEffectiveMarketVersion(marketId, current), usdRate);
     return {
       ...market,
