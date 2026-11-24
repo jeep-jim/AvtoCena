@@ -3,9 +3,9 @@
   "market": "china",
   "minimumYear": 2014,
   "retainedRuntime": "56d6b94fea70457e0ce2b0820596da9972846b90",
-  "runtimeSha": "3b941979941382cba88bef332d30e55c96fa814d",
-  "runtimeTree": "1cbae34eaa32d6373d85e7be17e5715d92676bb5",
-  "runtimeDiffSha256": "fbd84e385067de2b11bb145de398ef653c197f909b98127a23b5aa8422ca33d4",
+  "runtimeSha": "1518035b9e6b717cd364ae8d13e63d0127899112",
+  "runtimeTree": "71edad8cb0269137dfecf7b4947045a092b4b232",
+  "runtimeDiffSha256": "2363b2c8b71ed9b82ebdf6b549f66f6b6c24b56195a3fc7fa263bbb31911e14d",
   "runtimeFiles": [
     "apps/web/app/(public)/api/catalog/search/route.ts",
     "apps/web/app/(public)/page.tsx",
@@ -61,7 +61,7 @@
   },
   "pricingRuntimeSha": "64c6338e0db23c8999096bceefbf113c0136fe15",
   "pricingRuntimeTree": "d2fc1f171316bfb0dc76f09e90409d4d7336f6b3",
-  "pricingToServingDiffSha256": "3675fed10e5df668aa5cf04e7b1ffbbaf845d2e8c696d1fef2a2513ec0d01f9a",
+  "pricingToServingDiffSha256": "7ebf936e8ff4dc36ecf05776cd882b39c68e1aaa835be0fe2061fb446b97d8fd",
   "pricingToServingFiles": [
     "apps/web/app/(public)/page.tsx",
     "apps/web/app/api/catalog/home/route.ts",
