@@ -66,6 +66,9 @@ type FilterDraft = {
   lotNumber:string;
 };
 type FilterChip = { key: string; label: string; grade?: string };
+const COMMITTED_RANGE_FIELDS = new Set<keyof FilterDraft>([
+  "yearFrom", "yearTo", "budgetFrom", "budget", "mileageFrom", "mileageTo", "engineFrom", "engineTo",
+]);
 
 function clean(value: string) { return String(value || "").replace(/\s+/g, " ").trim(); }
 function splitMakeValues(value: string) { return [...new Set(String(value || "").split(",").map(clean).filter(Boolean))]; }
@@ -258,6 +261,12 @@ function DualRange({ title, fromName, toName, fromValue, toValue, min, max, step
     onChange(from, to);
   };
   const clear = () => applyPreset("", "");
+  const rangeActionPointerDown = (event: React.PointerEvent<HTMLButtonElement>) => {
+    const focused = document.activeElement;
+    // A pointer action commits its own final pair on click. Keep the edited
+    // input focused so its earlier blur cannot submit an intermediate pair.
+    if (event.button === 0 && focused instanceof HTMLInputElement && event.currentTarget.closest(".ac-range-card")?.contains(focused)) event.preventDefault();
+  };
   const summary = fromValue || toValue
     ? `${fromValue ? `от ${format(Number(fromValue))}${unit}` : "без минимума"} · ${toValue ? `до ${format(Number(toValue))}${unit}` : "без максимума"}`
     : "Без ограничений";
@@ -280,13 +289,13 @@ function DualRange({ title, fromName, toName, fromValue, toValue, min, max, step
   return <div className="ac-range-card rounded-[17px] p-3.5" data-year-min={title === "Год" ? min : undefined}>
     <div className="flex items-start justify-between gap-3">
       <div className="min-w-0"><div className="text-xs font-black normal-case tracking-normal text-[var(--ac-muted)]">{title}</div><div className="mt-1 truncate text-[11px] font-bold text-[var(--ac-muted)]">{summary}</div></div>
-      {fromValue || toValue ? <button type="button" onClick={clear} className="ac-range-clear flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-base font-black text-[var(--ac-muted)]" aria-label={`Сбросить ${title}`}>×</button> : null}
+      {fromValue || toValue ? <button type="button" onPointerDown={rangeActionPointerDown} onClick={clear} className="ac-range-clear flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-base font-black text-[var(--ac-muted)]" aria-label={`Сбросить ${title}`}>×</button> : null}
     </div>
     <div className="mt-3 grid grid-cols-2 gap-2">
       <label className="ac-range-input-wrap"><span>От</span><div className="ac-range-input-box"><input inputMode={isEngine ? "decimal" : "numeric"} autoComplete="off" title={isEngine ? "Например: 1,5 л или 1498 см³" : undefined} value={fromText} onChange={(event) => setFromText(digits(event.target.value))} onBlur={() => commit("from")} onKeyDown={keyHandler("from")} placeholder="Не важно" aria-label={`${title}: от`} />{unit ? <small>{unit.trim()}</small> : null}</div></label>
       <label className="ac-range-input-wrap"><span>До</span><div className="ac-range-input-box"><input inputMode={isEngine ? "decimal" : "numeric"} autoComplete="off" title={isEngine ? "Например: 1,5 л или 1498 см³" : undefined} value={toText} onChange={(event) => setToText(digits(event.target.value))} onBlur={() => commit("to")} onKeyDown={keyHandler("to")} placeholder="Не важно" aria-label={`${title}: до`} />{unit ? <small>{unit.trim()}</small> : null}</div></label>
     </div>
-    <div className="mt-2.5 flex flex-wrap gap-1.5" aria-label={`Быстрый выбор: ${title}`}>{presets.map((preset) => <button key={preset.label} type="button" onClick={() => applyPreset(preset.from, preset.to)} className="ac-range-preset rounded-full px-2.5 py-1.5 text-[10px] font-black">{preset.label}</button>)}</div>
+    <div className="mt-2.5 flex flex-wrap gap-1.5" aria-label={`Быстрый выбор: ${title}`}>{presets.map((preset) => <button key={preset.label} type="button" onPointerDown={rangeActionPointerDown} onClick={() => applyPreset(preset.from, preset.to)} className="ac-range-preset rounded-full px-2.5 py-1.5 text-[10px] font-black">{preset.label}</button>)}</div>
     <input type="hidden" name={fromName} value={fromValue} /><input type="hidden" name={toName} value={toValue} />
   </div>;
 }
@@ -366,6 +375,10 @@ export function CatalogFilters({ initial, facets, resultCount, auctionResults=fa
     const serverQuery = catalogQuery(nextInitial, initialSorting.key, initialSorting.direction);
     const nextQuery = catalogQuery(draft, sortKey, sortDirection);
     if (nextQuery === serverQuery && submitted.current === null) return;
+    // DualRange holds keystrokes locally and changes the draft only on commit.
+    // Do not debounce that completed action again; mixed edits still coalesce.
+    const committedRangeOnly = nextQuery !== serverQuery && sortKey === initialSorting.key && sortDirection === initialSorting.direction
+      && Object.entries(draft).every(([key, value]) => COMMITTED_RANGE_FIELDS.has(key as keyof FilterDraft) || value === nextInitial[key as keyof FilterDraft]);
     const timer = window.setTimeout(() => {
       if(submitted.current===nextQuery)return;
       submitted.current=nextQuery;
@@ -379,7 +392,7 @@ export function CatalogFilters({ initial, facets, resultCount, auctionResults=fa
       rememberFilterScroll(href);
       startTransition(()=>router.push(href, { scroll: false }));
     // Let a chassis/lot/frame number be typed before spending supplier requests.
-    }, auctionResults && (draft.chassis !== (initial.chassis || "") || draft.lotNumber !== (initial.lotNumber || "") || draft.frameNumber !== (initial.frameNumber || "")) ? 650 : 180);
+    }, auctionResults && (draft.chassis !== (initial.chassis || "") || draft.lotNumber !== (initial.lotNumber || "") || draft.frameNumber !== (initial.frameNumber || "")) ? 650 : committedRangeOnly ? 0 : 180);
     return () => window.clearTimeout(timer);
   }, [draft, sortKey, sortDirection, formKey, initial, router, mobileOpen]);
 
