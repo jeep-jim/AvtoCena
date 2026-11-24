@@ -1,0 +1,69 @@
+{
+  "runUrl": "https://github.com/jeep-jim/AvtoCena/actions/runs/45435138010",
+  "jobId": 138590767508,
+  "artifactId": 14940931225,
+  "byteMeaning": "freedBytes is the sum of unlinked logical file sizes, not a measured filesystem free-space delta.",
+  "report": {
+    "version": 2,
+    "kind": "china-failed-upload-cleanup-v2",
+    "market": "china",
+    "phase": "before-first-acceptance",
+    "completed": true,
+    "status": "complete",
+    "liveRuntimeSha": "56d6b94fea70457e0ce2b0820596da9972846b90",
+    "protectedFailedAttempt": {
+      "runtimeSha": "5e62f9ff3a0079b07cd13b8ab912c5720dd22250",
+      "pricingRuntimeSha": "64c6338e0db23c8999096bceefbf113c0136fe15",
+      "generationId": "gen_china_45369451603_1",
+      "generationManifestSha256": "d5745797cc162b82e0c0f0b1f49fef65f18f0d6649666562337183b18084dd75",
+      "privateGenerationReceiptSha256": "25f5277665bcc1a72879d9a7e55cb39fc7d4bd57a061be2593d3a6a9d9f1cc22",
+      "nonce": "2d015d0beef2af9f076bd1d47987dd88",
+      "planSha256": "773cb37c8ecae1de789c895888fd2e56264b73503def96a32c86ee845283338c",
+      "rollbackSha256": "3a431be4e34714930ce483f28575c797df5f49687a2157ab2be21d31016a8a06",
+      "imageId": "sha256:7af5df7fa93163687fcb5c0e1ad834176234319de13a4dd92ddc1d954fcc9381"
+    },
+    "filesDeleted": 8,
+    "freedBytes": 26083118592,
+    "alreadyAbsentFiles": 0,
+    "acceptedStateWrites": 0,
+    "intentStateWrites": 0,
+    "privateGenerationDeletes": 0,
+    "leaseRelease": "released",
+    "controllerSha": "266d1491b7856521496dec44010e5866ac216cef",
+    "approvedControllerSha": "a296f0aa6890048f7dc14c527bf13a1c14b78f6a",
+    "result": {
+      "version": 2,
+      "kind": "china-failed-upload-prune-v2",
+      "phase": "before-first-acceptance",
+      "completed": true,
+      "liveRuntimeSha": "56d6b94fea70457e0ce2b0820596da9972846b90",
+      "protectedFailedAttempt": {
+        "runtimeSha": "5e62f9ff3a0079b07cd13b8ab912c5720dd22250",
+        "pricingRuntimeSha": "64c6338e0db23c8999096bceefbf113c0136fe15",
+        "generationId": "gen_china_45369451603_1",
+        "generationManifestSha256": "d5745797cc162b82e0c0f0b1f49fef65f18f0d6649666562337183b18084dd75",
+        "privateGenerationReceiptSha256": "25f5277665bcc1a72879d9a7e55cb39fc7d4bd57a061be2593d3a6a9d9f1cc22",
+        "nonce": "2d015d0beef2af9f076bd1d47987dd88",
+        "planSha256": "773cb37c8ecae1de789c895888fd2e56264b73503def96a32c86ee845283338c",
+        "rollbackSha256": "3a431be4e34714930ce483f28575c797df5f49687a2157ab2be21d31016a8a06",
+        "imageId": "sha256:7af5df7fa93163687fcb5c0e1ad834176234319de13a4dd92ddc1d954fcc9381"
+      },
+      "protectedFilesVerified": 11,
+      "targetRuntimeSha": "822f925bb30c4e07010f6e14b6574f1b4bd6306e",
+      "targetNonces": [
+        "2ab6a761ac784094d102edd7be8708af",
+        "ae835461a771911c083739ddbf03bead"
+      ],
+      "filesDeleted": 8,
+      "freedBytes": 26083118592,
+      "alreadyAbsentFiles": 0,
+      "retiredContainers": 0,
+      "imagesDeleted": 0,
+      "directoriesDeleted": 0,
+      "privateGenerationDeletes": 0,
+      "acceptedStateWrites": 0,
+      "intentStateWrites": 0
+    },
+    "finishedAt": "2026-11-24T16:17:48.101Z"
+  }
+}
