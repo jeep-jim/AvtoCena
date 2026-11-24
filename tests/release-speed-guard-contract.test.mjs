@@ -122,6 +122,7 @@ test('new direct deploy-script entrypoints cannot bypass the reviewed inventory'
 // so register it explicitly instead of pretending it uses that wrapper.
 const customActivators=new Map([
  ['aj-system-japan-only.yml','.github/operations/ajes-japan-only-20261124/release.mjs'],
+ ['catalog-next-china-release.yml','scripts/catalog-next/release.mjs'],
 ]);
 test('the pinned AJ removal preserves frozen gates and requires its exact scope and nonce handshake',()=>{
  const [workflow,entry]=[...customActivators][0],filename=path.join(workflowDirectory,workflow);
@@ -158,6 +159,53 @@ test('the pinned AJ removal preserves frozen gates and requires its exact scope 
   const text=fs.readFileSync(path.join(workflowDirectory,file),'utf8');
   if(text.includes(entry+' --activate'))assert.equal(customActivators.get(file),entry,'unreviewed AJ activation entrypoint: '+file);
  }
+});
+
+test('the independent China activation binds source and generation to exact server and browser acceptance',()=>{
+ const workflow='catalog-next-china-release.yml',entry=customActivators.get(workflow);
+ const filename=path.join(workflowDirectory,workflow);
+ if(!fs.existsSync(filename))return;
+ const source=fs.readFileSync(filename,'utf8');
+ const baseline=source.indexOf('node scripts/verify-frozen-speed-baselines.mjs');
+ const contract=source.search(/^\s+node (?:--import tsx )?--test [^\n]*tests\/release-speed-guard-contract\.test\.mjs/m);
+ const hostTests=source.indexOf('tests/catalog-next-*.test.mjs');
+ const releaseAt=source.indexOf(entry);
+ assert.ok(baseline>=0&&contract>=0&&hostTests>=0&&releaseAt>baseline&&releaseAt>contract&&releaseAt>hostTests,
+  'the registered controller must follow frozen evidence, release contract and real host guard tests');
+ const controller=fs.readFileSync(path.join(root,entry),'utf8');
+ assert.match(controller,/verifyReadonlyInvocation\([\s\S]*operation: 'activate-china-generation'/);
+ assert.match(controller,/verifyFrozenSpeedBaselines\(root\)/);
+ assert.match(controller,/runtimeDiffSha256/);
+ assert.match(controller,/expectedReceiptSha256: release\.receiptSha256/);
+ assert.match(controller,/restored\.receipt\.binding\.generationManifestSha256 === release\.generationManifestSha256/);
+ assert.match(controller,/generation\.source\.supplierLatestVerified === true/);
+ const stages=["session.call('start')","session.call('functional')","session.call('speed')","session.call('switch')",
+  "tests/browser/owner-filter-speed-live.mjs","scripts/catalog-next/browser-acceptance.mjs","session.call('accept'"];
+ let previous=-1;
+ for(const stage of stages){const at=controller.indexOf(stage);assert.ok(at>previous,'China acceptance order: '+stage);previous=at;}
+ assert.match(controller,/browserCode === 0 && browser\.passed === true && browser\.browserPassed === true && browser\.speedGuard\?\.passed === true/);
+ assert.match(controller,/nonce, passed: true, functionalPassed: true, speedPassed: true, reportSha256: hash\(Buffer\.concat\(\[browserRaw, detailsRaw\]\)\)/);
+ assert.match(controller,/detailsCode === 0 && details\.passed === true && details\.release === plan\.runtimeSha && details\.nonce === nonce/);
+ assert.match(controller,/details\.generationManifestSha256 === release\.generationManifestSha256 && details\.precedingSpeedReportSha256 === hash\(browserRaw\)/);
+ assert.match(controller,/session\.abort\(\); await session\.exited/);
+ const host=fs.readFileSync(path.join(root,'scripts/catalog-next/release-host.py'),'utf8');
+ assert.match(host,/AVTOCENA_RELEASE_MARKETS': 'china'/);
+ assert.match(host,/AVTOCENA_SPEED_BASELINE_MODE': 'enforce'/);
+ assert.match(host,/self\.functional_passed and self\.speed_passed and not self\.switched/);
+ assert.match(host,/self\.switched and self\.functional_passed and self\.speed_passed and not self\.accepted/);
+ assert.match(host,/signal\.setitimer\(signal\.ITIMER_REAL, remaining\)/);
+ assert.match(host,/self\.replace_config\(self\.proposed, self\.original\)/);
+ assert.match(host,/cleanup_foreign_container/);
+ const ssh=fs.readFileSync(path.join(root,'scripts/catalog-next/release-ssh.mjs'),'utf8');
+ assert.match(ssh,/StrictHostKeyChecking=yes/);
+ assert.match(ssh,/UserKnownHostsFile=/);
+ assert.match(ssh,/hashlib\.sha256\(raw\)\.hexdigest\(\)/);
+ for(const file of fs.readdirSync(workflowDirectory).filter(name=>/\.ya?ml$/.test(name))){
+  const text=fs.readFileSync(path.join(workflowDirectory,file),'utf8');
+  if(text.includes(entry))assert.equal(customActivators.get(file),entry,'unreviewed China activation entrypoint: '+file);
+ }
+ const ci=fs.readFileSync(path.join(workflowDirectory,'ci.yml'),'utf8');
+ assert.match(ci,/node --import tsx --test tests\/catalog-next-\*\.test\.mjs/);
 });
 
 test('owner-authorized retained-image rescues keep their exact workflow and helper scope',()=>{

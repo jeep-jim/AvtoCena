@@ -1,0 +1,140 @@
+{
+  "version": 1,
+  "kind": "china-runtime-test-harness-evidence-v1",
+  "execution": "local",
+  "runtimeSha": "822f925bb30c4e07010f6e14b6574f1b4bd6306e",
+  "runtimeTree": "064b6688156e8d0ec37214297e84a96106358b25",
+  "baselineRuntimeSha": "56d6b94fea70457e0ce2b0820596da9972846b90",
+  "patchSha256": "1e5e218cdd29ad46e9cf2410b90140a5ac53c9e93fa70dbb075836839920d06f",
+  "originalAffectedTests": {
+    "baseline": {
+      "tests": 56,
+      "passed": 50,
+      "failed": 6
+    },
+    "runtime": {
+      "tests": 56,
+      "passed": 44,
+      "failed": 12,
+      "runtimeSha": "64c6338e0db23c8999096bceefbf113c0136fe15"
+    }
+  },
+  "baselineFailures": [
+    {
+      "file": "tests/catalog-current-read-model-empty-market-policy.test.ts",
+      "test": "homepage never erases an admitted market while a compact read-model shard catches up",
+      "harnessCorrection": "Whitespace-only fallback expression check"
+    },
+    {
+      "file": "tests/catalog-editable-power-scenario.test.ts",
+      "test": "existing power control remains available alongside linked modification selection",
+      "harnessCorrection": "Typed query check assumed a closed property list"
+    },
+    {
+      "file": "tests/home-editorial-empty.test.ts",
+      "test": "actual wrapper skips empty Japan and reconciles populated UAE",
+      "harnessCorrection": "Extracted function lacked existing legacy China authority stubs"
+    },
+    {
+      "file": "tests/home-editorial-empty.test.ts",
+      "test": "home reconciliation overlaps at most two markets and preserves deterministic results",
+      "harnessCorrection": "Extracted function lacked existing legacy China authority stubs"
+    },
+    {
+      "file": "tests/home-initial-catalog.test.ts",
+      "test": "home API reads shared indexes once instead of seven complete searches",
+      "harnessCorrection": "Predicate now also preserves the legacy market authority gate"
+    },
+    {
+      "file": "tests/offer-navigation-performance.test.ts",
+      "test": "offer detail falls back to its active admitted projection instead of 404",
+      "harnessCorrection": "Exact-string assertions assumed the former inline detail call"
+    }
+  ],
+  "newFailures": [
+    {
+      "file": "tests/ajes-japan-only.test.ts",
+      "test": "detail, metadata and recommendations cannot revive retired AJ IDs from shared or prepared caches",
+      "harnessCorrection": "Editorial fixture omitted matchingEditorial export"
+    },
+    {
+      "file": "tests/catalog-market-page-boundary.test.ts",
+      "test": "last China page beyond 10000 reaches search; invalid offsets never do",
+      "harnessCorrection": "Runtime config fixture omitted PUBLIC_CATALOG_MARKETS export"
+    },
+    {
+      "file": "tests/catalog-market-page-city.test.ts",
+      "test": "category city uses the same compact diversity window; real price filters keep city",
+      "harnessCorrection": "Editorial fixture omitted matchingEditorial export"
+    },
+    {
+      "file": "tests/offer-navigation-performance.test.ts",
+      "test": "catalog pricing shares one short-lived market-settings read",
+      "harnessCorrection": "Exact-string assertion omitted the explicit frozen pricing clock"
+    },
+    {
+      "file": "tests/public-page-recovery.test.ts",
+      "test": "supplier refusal stays local to the offer; unexpected errors still surface",
+      "harnessCorrection": "Editorial fixture omitted matchingEditorial export"
+    },
+    {
+      "file": "tests/public-page-recovery.test.ts",
+      "test": "layout, legacy redirect and calculation distinguish active source failures from retired AJ IDs",
+      "harnessCorrection": "Editorial fixture omitted matchingEditorial export"
+    }
+  ],
+  "correctedAffectedTests": {
+    "tests": 56,
+    "passed": 56,
+    "failed": 0
+  },
+  "helperCombinedRun": {
+    "nativeTests": 42,
+    "coreNativeTests": 36,
+    "homeIsolationTests": 6,
+    "affectedTests": 56,
+    "tests": 98,
+    "passed": 98,
+    "failed": 0,
+    "skipped": 0
+  },
+  "helperBoundaryTests": {
+    "tests": 5,
+    "passed": 5,
+    "failed": 0
+  },
+  "allowedFailureExceptions": 0,
+  "productionFilesModified": 0,
+  "runtimeHeadRestored": true,
+  "trackedRuntimeDiffAfterHelper": [],
+  "command": "node scripts/catalog-next/check-runtime-tests.mjs <exact-runtime-root>",
+  "pricingRuntimeHarnessRun": {
+    "runtimeSha": "64c6338e0db23c8999096bceefbf113c0136fe15",
+    "runtimeTree": "d2fc1f171316bfb0dc76f09e90409d4d7336f6b3",
+    "patchSha256": "7a0837a7f13cae1f15db1f1e467438cce1af982f598c2db6f5be40abe1617247",
+    "nativeTests": 36,
+    "affectedTests": 56,
+    "tests": 92,
+    "passed": 92,
+    "failed": 0,
+    "skipped": 0
+  },
+  "pricingRuntimeSha": "64c6338e0db23c8999096bceefbf113c0136fe15",
+  "servingHarnessCorrections": [
+    {
+      "file": "tests/home-editorial-empty.test.ts",
+      "tests": 2,
+      "correction": "Transpile actual extracted TypeScript wrapper before executing; supply editorialHidden and existing authority dependencies; concurrency, count, row and error assertions unchanged"
+    },
+    {
+      "file": "tests/catalog-current-read-model-empty-market-policy.test.ts",
+      "tests": 1,
+      "correction": "Assert exact retained-market selection plus completeness predicate over those markets"
+    },
+    {
+      "file": "tests/home-initial-catalog.test.ts",
+      "tests": 1,
+      "correction": "Assert retained-market selection and current editorial/empty-market predicate; bounded shared-index and no repeated full searches assertions retained"
+    }
+  ]
+}

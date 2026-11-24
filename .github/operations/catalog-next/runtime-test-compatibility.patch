@@ -1,0 +1,196 @@
+diff --git a/tests/ajes-japan-only.test.ts b/tests/ajes-japan-only.test.ts
+index 6047326b3..778ab47d0 100644
+--- a/tests/ajes-japan-only.test.ts
++++ b/tests/ajes-japan-only.test.ts
+@@ -106,7 +106,7 @@ test('public direct AJ IDs and retired queries stop before saved details, rates
+   './ajes-runtime':'export const ajesClient={read:()=>{throw Error("must not read supplier");}};',
+   'next/headers':'export const headers=()=>{throw Error("must not read headers");};',
+   './rates':'export const convertToRub=()=>{throw Error("must not read rates");};',
+-  './editorial':'export const applyCatalogEditorial=()=>{};export const editorialHidden=()=>{};export const readCatalogEditorial=()=>{throw Error("must not read editorial");};',
++  './editorial':'export const applyCatalogEditorial=()=>{};export const editorialHidden=()=>{};export const matchingEditorial=()=>{throw Error("must not read editorial");};export const readCatalogEditorial=()=>{throw Error("must not read editorial");};',
+   './japan-owner-specifications':'export const applyJapanOwnerSpecifications=x=>x;',
+   './japan-drive':'export const enrichJapanDrive=x=>x;export const japanDriveSql=()=>"";',
+   '../encyclopedia/japan-fuel-reference':'export const applyJapanFactoryFuel=x=>x;',
+@@ -146,7 +146,7 @@ test('detail, metadata and recommendations cannot revive retired AJ IDs from sha
+   'next/cache':'export const unstable_cache=fn=>fn;',
+   './management-knowledge':'export const attachManagementKnowledge=()=>{throw Error("must not read knowledge");};',
+   './collection-controls':'export class CollectionDisabledError extends Error{};',
+-  './editorial':'export const applyCatalogEditorial=()=>{};export const editorialHidden=()=>{};export const readCatalogEditorial=()=>{throw Error("must not read editorial");};',
++  './editorial':'export const applyCatalogEditorial=()=>{};export const editorialHidden=()=>{};export const matchingEditorial=()=>{throw Error("must not read editorial");};export const readCatalogEditorial=()=>{throw Error("must not read editorial");};',
+   './storage':'const fail=()=>{throw Error("must not read stored offer");};export const getOfferWithoutEditorial=fail,getOfferFromCurrentShard=fail,getOfferFromCurrentProjection=fail,isJapanCatalogOfferId=fail;',
+   './prepared-china-http-fixture':'export class PreparedChinaFixtureUnavailable extends Error{};const fail=()=>{throw Error("must not read prepared catalog");};export const hasPreparedChinaHttpFixture=fail,hasIndependentChinaHttpFixture=fail,assertIndependentChinaFallbackAllowed=fail,readPreparedChinaFixtureOffer=fail,preparedChinaNormalRegcloudEnabled=fail;',
+  });
+diff --git a/tests/catalog-current-read-model-empty-market-policy.test.ts b/tests/catalog-current-read-model-empty-market-policy.test.ts
+index 39b006b25..16c486dc7 100644
+--- a/tests/catalog-current-read-model-empty-market-policy.test.ts
++++ b/tests/catalog-current-read-model-empty-market-policy.test.ts
+@@ -27,14 +27,15 @@ const homeClient = fs.readFileSync(new URL("../apps/web/components/home/HomePage
+ test("homepage never erases an admitted market while a compact read-model shard catches up", () => {
+   assert.doesNotMatch(homeClient, /isCrediblePublicOffer\(raw/);
+   assert.match(homeClient, /nextMarketItems\.length \? nextMarketItems : previousMarketItems/);
+-  assert.match(homeClient, /incomingCount > 0 \? incomingCount : previousCount/);
++  assert.match(homeClient, /incomingCount\s*>\s*0\s*\?\s*incomingCount\s*:\s*previousCount/);
+   assert.match(homeClient, /incomingTotal > 0 \? incomingTotal : previousCount/);
+ });
+ 
+ const storageSource = fs.readFileSync(new URL("../apps/web/lib/catalog/storage.ts", import.meta.url), "utf8");
+ 
+ test("homepage distinguishes an incomplete read model from a complete market filtered by current safety policy", () => {
+-  assert.match(storageSource, /const projectionComplete = MARKETS\.every/);
++  assert.match(storageSource, /const markets = MARKETS\.filter\(legacyAggregateMarketAllowed\)/);
++  assert.match(storageSource, /const projectionComplete = markets\.every/);
+   assert.match(storageSource, /manifest\.markets\?\.\[market\]\?\.count/);
+   assert.match(storageSource, /rawProjectionRows\.some\(\(row\) => row\.market === market\)/);
+   assert.match(storageSource, /const projectionRows = rawProjectionRows\.filter\(projectionCanRenderCard\)/);
+diff --git a/tests/catalog-editable-power-scenario.test.ts b/tests/catalog-editable-power-scenario.test.ts
+index cf9f6297f..e49aacb0b 100644
+--- a/tests/catalog-editable-power-scenario.test.ts
++++ b/tests/catalog-editable-power-scenario.test.ts
+@@ -75,7 +75,11 @@ test("an electrified horsepower scenario cannot replace certified 30-minute powe
+ test("existing power control remains available alongside linked modification selection", () => {
+   assert.match(offerPage, /InlineOfferParameters/);
+   assert.match(offerPage, /calculateOfferWithUserPowerScenario/);
+-  assert.match(offerPage, /searchParams\?: Promise<\{ powerHp\?: string; modificationId\?: string; direct\?: string; calculation\?:\s*string;estimate\?:string;preview\?:string;dealer\?:string;edit\?:string \}>/);
++  const parameters = offerPage.match(/searchParams\?:\s*Promise<\{([^}]+)\}>/)?.[1];
++  assert.ok(parameters, 'the page retains typed optional query parameters');
++  for (const name of ['powerHp', 'modificationId', 'direct', 'calculation', 'estimate', 'preview', 'dealer', 'edit']) {
++    assert.match(parameters, new RegExp('\\b' + name + '\\?\\s*:\\s*string\\b'), name);
++  }
+   assert.match(editableTile, /Выбрать или ввести мощность в лошадиных силах/);
+   assert.match(editableTile, /setTimeout\(\(\) => commitManual\(value\), 500\)/);
+   assert.doesNotMatch(editableTile, /type="submit"|Пересчитать по введённой мощности/);
+diff --git a/tests/catalog-market-page-boundary.test.ts b/tests/catalog-market-page-boundary.test.ts
+index 7e4f78545..f63b0d5f3 100644
+--- a/tests/catalog-market-page-boundary.test.ts
++++ b/tests/catalog-market-page-boundary.test.ts
+@@ -15,7 +15,7 @@ test('last China page beyond 10000 reaches search; invalid offsets never do',asy
+   'ajes-error-response':'export const ajesErrorResponse=()=>{};',
+   'ajes-catalog':'export const readAjesCatalogPage=()=>{};export const readAjesCountSummary=()=>{};export const withAjesCount=x=>x;',
+   'market-page':'export const readCatalogMarketPage=q=>globalThis.__marketBoundary(q);',
+-  'runtime-config':"export const PUBLIC_CATALOG_MARKET_SET=new Set(['china']);",
++  'runtime-config':"export const PUBLIC_CATALOG_MARKETS=['china'];export const PUBLIC_CATALOG_MARKET_SET=new Set(PUBLIC_CATALOG_MARKETS);",
+   'engine-input':'export const parseEngineCc=()=>undefined;',
+   'live-business-pricing':'export const applyActiveBusinessPricingBatch=x=>x;',
+   'server':'export const NextResponse={json:(body,init)=>Response.json(body,init)};',
+diff --git a/tests/catalog-market-page-city.test.ts b/tests/catalog-market-page-city.test.ts
+index 2124a4449..eabf01d75 100644
+--- a/tests/catalog-market-page-city.test.ts
++++ b/tests/catalog-market-page-city.test.ts
+@@ -6,7 +6,7 @@ const require=createRequire(import.meta.url);
+ test('category city uses the same compact diversity window; real price filters keep city',async()=>{
+  const calls:any[]=[];
+  const mockSearch=async(query:any,limit:number)=>{calls.push({query,limit});return {generationId:'g',total:250,items:Array.from({length:192},(_,i)=>({id:String(i),make:'Kia',model:'Model '+i,year:2024,totalRub:3000000+i,sourcePrice:100000})),page:query.page,pageSize:query.pageSize};};
+- const mocks:Record<string,string>={storage:'export const searchOffers=(...args)=>globalThis.__cityPageSearch(...args);',editorial:"export const readCatalogEditorial=async()=>({revision:'r'});",'live-business-pricing':'export const applyActiveBusinessPricingBatch=async rows=>rows;','offer-quality':'export const isRenderablePublicCatalogOffer=()=>true;'};
++ const mocks:Record<string,string>={storage:'export const searchOffers=(...args)=>globalThis.__cityPageSearch(...args);',editorial:"export const readCatalogEditorial=async()=>({revision:'r',entries:{}});export const matchingEditorial=()=>undefined;",'live-business-pricing':'export const applyActiveBusinessPricingBatch=async rows=>rows;','offer-quality':'export const isRenderablePublicCatalogOffer=()=>true;'};
+  const output=await build({entryPoints:['apps/web/lib/catalog/market-page.ts'],bundle:true,platform:'node',format:'cjs',write:false,packages:'external',plugins:[{name:'fixture',setup(b){b.onResolve({filter:/.*/},a=>{const name=a.path.split('/').at(-1)!;if(mocks[name])return {path:name,namespace:'fixture'};});b.onLoad({filter:/.*/,namespace:'fixture'},a=>({contents:mocks[a.path],loader:'js'}));}}]});
+  const m={exports:{} as any};(globalThis as any).__cityPageSearch=mockSearch;
+  try {
+diff --git a/tests/home-editorial-empty.test.ts b/tests/home-editorial-empty.test.ts
+index 7da10c9d5..74042a8ca 100644
+--- a/tests/home-editorial-empty.test.ts
++++ b/tests/home-editorial-empty.test.ts
+@@ -1,5 +1,6 @@
+ import {test} from 'node:test';
+ import assert from 'node:assert/strict';
++import {transpileModule, ScriptTarget, ModuleKind} from 'typescript';
+ import {homeSnapshotMarketIsEmpty} from '../apps/web/lib/catalog/home-editorial-empty.ts';
+ test('known empty local Japan needs no reconciliation; another market is untouched',()=>{
+  const s={marketCounts:{japan:0,uae:2},items:[{market:'uae'}]};
+@@ -20,13 +21,13 @@ test('actual wrapper skips empty Japan and reconciles populated UAE',async()=>{
+  const source=readFileSync(new URL('../apps/web/lib/catalog/storage.ts',import.meta.url),'utf8');
+  const start=source.indexOf('export async function readHomeCatalogSnapshot(');
+  const end=source.indexOf('\nexport async function getOffer',start);
+- const code=source.slice(start,end).replace('export ','');
++ const code=transpileModule(source.slice(start,end).replace('export ',''),{compilerOptions:{target:ScriptTarget.ESNext,module:ModuleKind.ESNext}}).outputText;
+  const calls:string[]=[];
+  const original={generationId:'gen_1_abc',marketCounts:{japan:0,uae:2},total:2,items:[{id:'old',market:'uae'}]};
+  const timing={measure:(_phase:string,work:()=>any)=>work()};
+- const run=new Function('createHomePhaseTiming','withCatalogEditorial','readHomeCatalogSnapshotOriginal','applyCatalogEditorial','MARKETS','editorialHasHidden','homeSnapshotMarketIsEmpty','searchOffers','compareCatalogDisplayOrder','mapWithConcurrency',code+';return readHomeCatalogSnapshot;')(
++ const run=new Function('createHomePhaseTiming','withCatalogEditorial','readHomeCatalogSnapshotOriginal','applyCatalogEditorial','MARKETS','editorialHasHidden','homeSnapshotMarketIsEmpty','searchOffers','compareCatalogDisplayOrder','mapWithConcurrency','withChinaAggregateAuthority','legacyAggregateMarketAllowed','omitLegacyChinaAggregate','editorialHidden',code+';return readHomeCatalogSnapshot;')(
+  ()=>timing,(work:()=>any)=>work(),async()=>original,(row:any)=>row,['japan','uae'],()=>true,homeSnapshotMarketIsEmpty,
+- async(q:any)=>{calls.push(q.market);assert.equal(q.pageSize,10);assert.equal(q.sort,'updatedAt');return {total:1,items:[{id:'visible',market:'uae'}]};},()=>0,async(items:any[],limit:number,worker:any)=>{assert.equal(limit,2);return Promise.all(items.map(worker));});
++ async(q:any)=>{calls.push(q.market);assert.equal(q.pageSize,10);assert.equal(q.sort,'updatedAt');return {total:1,items:[{id:'visible',market:'uae'}]};},()=>0,async(items:any[],limit:number,worker:any)=>{assert.equal(limit,2);return Promise.all(items.map(worker));},(_market:any,work:any)=>work(),()=>true,()=>false,()=>false);
+  const result=await run(10);
+  assert.deepEqual(calls,['uae']);assert.equal(result.total,1);assert.deepEqual(result.items,[{id:'visible',market:'uae'}]);
+  assert.equal(original.total,2);assert.equal(original.items[0].id,'old');
+@@ -36,7 +37,7 @@ test('home reconciliation overlaps at most two markets and preserves determinist
+  const {readFileSync}=await import('node:fs');
+  const s=readFileSync(new URL('../apps/web/lib/catalog/storage.ts',import.meta.url),'utf8');
+  const begin=s.indexOf('export async function readHomeCatalogSnapshot(');
+- const code=s.slice(begin,s.indexOf('\nexport async function getOffer',begin)).replace('export ','');
++ const code=transpileModule(s.slice(begin,s.indexOf('\nexport async function getOffer',begin)).replace('export ',''),{compilerOptions:{target:ScriptTarget.ESNext,module:ModuleKind.ESNext}}).outputText;
+  const mapStart=s.indexOf('async function mapWithConcurrency<');
+  const mapCode=s.slice(mapStart,s.indexOf('\nexport function searchProjectionFromOffer',mapStart))
+   .replace(/async function mapWithConcurrency[^\n]+/, 'async function mapWithConcurrency(items, concurrency, worker) {').replace('new Array<R>','new Array');
+@@ -44,9 +45,9 @@ test('home reconciliation overlaps at most two markets and preserves determinist
+  const markets=['uae','europe','georgia'];
+  const original={marketCounts:{uae:2,europe:2,georgia:2},total:6,items:markets.map(market=>({id:'old-'+market,market}))};
+  let active=0,peak=0;const calls:string[]=[];let fail=false;
+- const run=new Function('createHomePhaseTiming','withCatalogEditorial','readHomeCatalogSnapshotOriginal','applyCatalogEditorial','MARKETS','editorialHasHidden','homeSnapshotMarketIsEmpty','searchOffers','compareCatalogDisplayOrder','mapWithConcurrency',code+';return readHomeCatalogSnapshot;')(
++ const run=new Function('createHomePhaseTiming','withCatalogEditorial','readHomeCatalogSnapshotOriginal','applyCatalogEditorial','MARKETS','editorialHasHidden','homeSnapshotMarketIsEmpty','searchOffers','compareCatalogDisplayOrder','mapWithConcurrency','withChinaAggregateAuthority','legacyAggregateMarketAllowed','omitLegacyChinaAggregate','editorialHidden',code+';return readHomeCatalogSnapshot;')(
+  ()=>({measure:(_:string,work:any)=>work()}),(work:any)=>work(),async()=>original,(v:any)=>v,markets,()=>true,homeSnapshotMarketIsEmpty,
+- async({market}:any)=>{calls.push(market);active++;peak=Math.max(peak,active);await new Promise(r=>setTimeout(r,market==='uae'?15:1));active--;if(fail&&market==='europe')throw Error('search failed');return {total:1,items:[{id:market,market}]};},()=>0,mapper);
++ async({market}:any)=>{calls.push(market);active++;peak=Math.max(peak,active);await new Promise(r=>setTimeout(r,market==='uae'?15:1));active--;if(fail&&market==='europe')throw Error('search failed');return {total:1,items:[{id:market,market}]};},()=>0,mapper,(_market:any,work:any)=>work(),()=>true,()=>false,()=>false);
+  const result=await run(10);
+  assert.equal(peak,2);assert.deepEqual(calls,markets);assert.deepEqual(result.items.map((x:any)=>x.id),markets);assert.equal(result.total,3);
+  assert.equal(original.total,6);assert.ok(original.items.every(x=>x.id.startsWith('old-')));
+diff --git a/tests/home-initial-catalog.test.ts b/tests/home-initial-catalog.test.ts
+index dd030fd35..767b67aea 100644
+--- a/tests/home-initial-catalog.test.ts
++++ b/tests/home-initial-catalog.test.ts
+@@ -25,7 +25,8 @@ test("home API reads shared indexes once instead of seven complete searches", ()
+   assert.match(implementation, /order-updatedAt\.json/);
+   assert.match(implementation, /market\/\$\{cleanShard\(market\)\}\.json/);
+   assert.doesNotMatch(implementation, /searchOffers\(/);
+-  assert.match(storage, /if\(!editorialHasHidden\(market\)\)continue/);
++  assert.match(storage, /const retainedMarkets=MARKETS\.filter\(legacyAggregateMarketAllowed\)/);
++  assert.match(storage, /if\(editorialHasHidden\(market\)&&!homeSnapshotMarketIsEmpty\(snapshot,market\)\)/);
+ });
+ 
+ test("home client renders a stable skeleton and loads one catalog snapshot in the background", () => {
+diff --git a/tests/offer-navigation-performance.test.ts b/tests/offer-navigation-performance.test.ts
+index 8fecfa5b5..007999d15 100644
+--- a/tests/offer-navigation-performance.test.ts
++++ b/tests/offer-navigation-performance.test.ts
+@@ -95,7 +95,7 @@ test("non-runtime maintenance and documentation do not rebuild the web container
+ test("catalog pricing shares one short-lived market-settings read", () => {
+   assert.match(effectiveMarkets, /EFFECTIVE_MARKETS_CACHE_MS/);
+   assert.match(effectiveMarkets, /getCachedMarketsSettings\(\)/);
+-  assert.match(effectiveMarkets, /selectActiveMarketVersion\(market\)/);
++  assert.match(effectiveMarkets, /selectActiveMarketVersion\(market,\s*new Date\(catalogPricingNow\(\)\)\)/);
+   assert.doesNotMatch(effectiveMarkets, /Promise\.all\(MARKET_IDS\.map/);
+ });
+ 
+@@ -156,8 +156,8 @@ test("offer detail falls back to its active admitted projection instead of 404",
+   assert.match(storage, /return row && !isConfirmedSourceWithdrawn\(row\) && catalogInventoryAgeDecision\(row\)\.eligible && !catalogVehicleExcluded\(row\) \? offerDetailFromProjection\(row\) : null/);
+   assert.match(storage, /export function isJapanCatalogOfferId/);
+   assert.match(data, /isJapanCatalogOfferId\(id\)/);
+-  assert.match(page, /await readOfferDetailForPage\(id\)/);
+-  assert.match(data, /offer:await getOfferDetailRecord\(id\)/);
++  assert.match(page, /await readOfferDetailForPage\(id,!Boolean\(query\.calculation\|\|query\.estimate\|\|query\.edit\|\|query\.direct\|\|query\.modificationId\|\|safeRequestedPowerHp\),\{market:query\.market,city:query\.city,preparedCut:query\.preparedCut\}\)/);
++  assert.match(data, /const offer=await getOfferDetailRecord\(id\);/);
+   assert.match(data, /getOfferFromCurrentShard\(id\)[\s\S]*getOfferForPage\(id\)[\s\S]*getOfferFromCurrentProjection\(id\)/);
+   assert.match(data, /getOfferForPage\(id\)[\s\S]*getOfferFromCurrentShard\(id\)[\s\S]*getOfferFromCurrentProjection\(id\)/);
+   assert.match(layout, /normalizeVehicleOfferSpecs\(storedOffer\)/);
+diff --git a/tests/public-page-recovery.test.ts b/tests/public-page-recovery.test.ts
+index 21ca621b5..5cecb53a0 100644
+--- a/tests/public-page-recovery.test.ts
++++ b/tests/public-page-recovery.test.ts
+@@ -17,7 +17,7 @@ test('supplier refusal stays local to the offer; unexpected errors still surface
+   './collection-controls':`export class CollectionDisabledError extends Error{}`,
+   './ajes-client':`export class AjesUnavailable extends Error{constructor(reason){super(reason);this.reason=reason}}`,
+   './prepared-china-http-fixture':`export class PreparedChinaFixtureUnavailable extends Error{};export const hasPreparedChinaHttpFixture=()=>false;export const hasIndependentChinaHttpFixture=()=>false;export const preparedChinaNormalRegcloudEnabled=()=>false;export const assertIndependentChinaFallbackAllowed=async()=>{throw Error('unexpected prepared lookup')};export const readPreparedChinaFixtureOffer=async()=>{throw Error('unexpected prepared lookup')};`,
+-  './editorial':`export const readCatalogEditorial=async()=>{globalThis.__pageReads++;return {};};export const editorialHidden=()=>false;export const applyCatalogEditorial=x=>x;`,
++  './editorial':`export const readCatalogEditorial=async()=>{globalThis.__pageReads++;return {entries:{}};};export const matchingEditorial=()=>undefined;export const editorialHidden=()=>false;export const applyCatalogEditorial=x=>x;`,
+   './storage':`import {CollectionDisabledError} from './collection-controls';import {AjesUnavailable} from './ajes-client';export const getOfferWithoutEditorial=async()=>{globalThis.__pageReads++;if(globalThis.__pageFailure==='disabled')throw new CollectionDisabledError();if(globalThis.__pageFailure==='supplier')throw new AjesUnavailable('visitor_restricted');if(globalThis.__pageFailure==='unexpected')throw Error('unexpected');return {id:'ajes-stats-123'}};export const getOfferFromCurrentShard=async()=>{globalThis.__pageReads++;return null;};export const getOfferFromCurrentProjection=async()=>{globalThis.__pageReads++;return null;};export const isJapanCatalogOfferId=()=>false;`
+  };
+  const bundle=await build({entryPoints:['apps/web/lib/catalog/offer-page-data.ts'],bundle:true,platform:'node',format:'cjs',write:false,plugins:[{name:'mocks',setup(b){b.onResolve({filter:/.*/},a=>mocks[a.path]?{path:a.path,namespace:'mock'}:undefined);b.onLoad({filter:/.*/,namespace:'mock'},a=>({contents:mocks[a.path]}));}}]});
+@@ -43,7 +43,7 @@ test('layout, legacy redirect and calculation distinguish active source failures
+   './collection-controls':`export class CollectionDisabledError extends Error{}`,
+   './ajes-client':`export class AjesUnavailable extends Error{}`,
+   './prepared-china-http-fixture':`export class PreparedChinaFixtureUnavailable extends Error{};export const hasPreparedChinaHttpFixture=()=>false;export const hasIndependentChinaHttpFixture=()=>false;export const preparedChinaNormalRegcloudEnabled=()=>false;export const assertIndependentChinaFallbackAllowed=async()=>{throw Error('unexpected prepared lookup')};export const readPreparedChinaFixtureOffer=async()=>{throw Error('unexpected prepared lookup')};`,
+-  './editorial':`export const readCatalogEditorial=async()=>{globalThis.__layoutReads++;return {};};export const editorialHidden=()=>false;export const applyCatalogEditorial=x=>x;`,
++  './editorial':`export const readCatalogEditorial=async()=>{globalThis.__layoutReads++;return {entries:{}};};export const matchingEditorial=()=>undefined;export const editorialHidden=()=>false;export const applyCatalogEditorial=x=>x;`,
+   './storage':`import {CollectionDisabledError} from './collection-controls';import {AjesUnavailable} from './ajes-client';export const getOfferWithoutEditorial=async()=>{globalThis.__layoutReads++;if(globalThis.__layoutFailure==='disabled')throw new CollectionDisabledError();if(globalThis.__layoutFailure==='supplier')throw new AjesUnavailable();throw Error('unexpected')};export const getOfferFromCurrentShard=async()=>{globalThis.__layoutReads++;return null;};export const getOfferFromCurrentProjection=async()=>{globalThis.__layoutReads++;return null;};export const isJapanCatalogOfferId=()=>false;`,
+   '@/lib/dealers/showcase-model':`export const parseSpecialId=()=>null;`,
+   '@/lib/catalog/offer-url':`export const offerRouteId=v=>v;export const offerPath=()=>{throw Error('no unavailable slug')};`,
