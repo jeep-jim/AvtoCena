@@ -196,10 +196,14 @@ for(const denied of ['manifest','provider','different-index'])test(`installed he
  await assert.rejects(f.run(),/editorial_runtime_(write_scope|network_scope)_denied/);assert.equal(f.writes.length,0);await f.assertClean();
 });
 
-test('daily workflow preserves schedule/triggers and uses isolated installed source with bounded cleanup',async()=>{
+test('shared overview keeps neighbouring triggers and installed-source guards without subscribing independent China',async()=>{
  const workflow=await fs.readFile(new URL('../.github/workflows/regcloud-overview.yml',import.meta.url),'utf8');
  assert.match(workflow,/cron: '5 17 \* \* \*'/);assert.equal((workflow.match(/cron:/g)||[]).length,1);
- for(const market of ['china','korea','europe','uae','georgia','green'])assert.ok(workflow.includes('Catalog refresh '+market));
+ const watched=workflow.match(/workflows: \[([^\]]+)\]/)[1].split(',').map(name=>name.trim());
+ assert.deepEqual(watched,['korea','europe','uae','georgia','green'].map(market=>'Catalog refresh '+market));
+ const china=await fs.readFile(new URL('../.github/workflows/catalog-refresh-china.yml',import.meta.url),'utf8');
+ assert.ok(!watched.includes(china.match(/^name: (.+)$/m)[1]));
+ assert.ok(!watched.includes('Catalog refresh china'));
  assert.match(workflow,/group: regcloud-overview-read-model\n  cancel-in-progress: false/);
  assert.match(workflow,/CATALOG_PREPARE_EDITORIAL_HOME: 'false'/);
  assert.match(workflow,/ref: \$\{\{ steps\.installed\.outputs\.release \}\}/);
