@@ -76,8 +76,13 @@ export default async function HomePage({ searchParams }: { searchParams?: Promis
     }),
     timing.measure("green",()=>readGreenCorner()).catch(() => null),
   ]);
+  const savedGreenItems=(green?.items || []).slice(0,10).map(publicGreenOffer);
+  let pricingIncomplete=false;
   const [greenItems, pricedItems] = await Promise.all([
-    timing.measure("greenPricing",()=>applyActiveBusinessPricingBatch((green?.items || []).slice(0,10).map(publicGreenOffer))),
+    timing.measure("greenPricing",()=>applyActiveBusinessPricingBatch(savedGreenItems)).catch(()=>{
+      console.error("home_green_pricing_unavailable");pricingIncomplete=true;
+      return savedGreenItems;
+    }),
     timing.measure("catalogPricing",async()=>{
       const allowed=catalog.items.filter(item=>!(item as {preparedChinaSelection?:unknown}).preparedChinaSelection);
       if(allowed.length===catalog.items.length)return applyActiveBusinessPricingBatch(catalog.items);
@@ -86,6 +91,7 @@ export default async function HomePage({ searchParams }: { searchParams?: Promis
       return catalog.items.map(item=>(item as {preparedChinaSelection?:unknown}).preparedChinaSelection?item:byId.get(item.id)??item);
     }).catch((error) => {
       console.error("home_initial_pricing_failed", error);
+      pricingIncomplete=true;
       // Preserve the last audited quote if settings storage is temporarily down.
       return catalog.items;
     }),
@@ -103,7 +109,7 @@ export default async function HomePage({ searchParams }: { searchParams?: Promis
         initialOffers={pricedItems}
         initialMarketCounts={catalog.marketCounts}
         initialCount={catalog.total + (green?.items.length || 0)}
-        initialCountIncomplete={catalog.countIncomplete || !green}
+        initialCountIncomplete={catalog.countIncomplete || !green || pricingIncomplete}
         initialMarketCountInfo={catalog.marketCountInfo}
       />
     </div>

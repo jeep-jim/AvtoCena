@@ -2922,36 +2922,39 @@ export async function buildCatalogOverviewFromProjections(generationId: string, 
 }
 
 async function readHomeCatalogSnapshotOriginal(perMarket: number, timing: ReturnType<typeof createHomePhaseTiming>) {
+  // An independently served market is not an input to the retained markets'
+  // overview completeness check, shard recovery or inventory count.
+  const markets = MARKETS.filter(legacyAggregateMarketAllowed);
   const manifest = await timing.measure("snapshotManifest",()=>readManifest());
   timing.setGeneration(manifest.generationId);
   const limit = Math.min(12, Math.max(1, Number(perMarket || 6)));
   const overview = await timing.measure("snapshotOverview",()=>readCatalogOverview(manifest.generationId)).catch(() => null);
-  if ((overview as any)?.policyDate===new Date(Date.now()+7*3600000).toISOString().slice(0,10) && overview?.generationId === manifest.generationId && MARKETS.every(market => {
+  if ((overview as any)?.policyDate===new Date(Date.now()+7*3600000).toISOString().slice(0,10) && overview?.generationId === manifest.generationId && markets.every(market => {
     if(market === "japan")return true;
     const count = Number(manifest.markets?.[market]?.count || 0);
     const summary = overview.markets[market];
     return catalogOverviewMarketComplete(summary, count, limit);
   })) {
-    const marketCounts = Object.fromEntries(MARKETS.map(market => [market, overview.markets[market].total]));
+    const marketCounts = Object.fromEntries(markets.map(market => [market, overview.markets[market].total]));
     return {generationId: manifest.generationId, marketCounts,
       total: Object.values(marketCounts).reduce((sum, count) => sum + count, 0),
-      items: MARKETS.flatMap(market => overview.markets[market].items.slice(0, limit)).sort(compareCatalogDisplayOrder)};
+      items: markets.flatMap(market => overview.markets[market].items.slice(0, limit)).sort(compareCatalogDisplayOrder)};
   }
   const currentProjection = await timing.measure("snapshotProjection",()=>readCurrentSearchProjection(CURRENT_ALL_MARKETS_PROJECTION));
   if (currentProjection.generationId === manifest.generationId) {
-    const rawProjectionRows = currentProjection.items || [];
+    const rawProjectionRows = (currentProjection.items || []).filter(row => legacyAggregateMarketAllowed(row.market));
     // Current read models are replaced independently from the immutable public
     // generation. During that short window a combined projection can have the
     // new generation id while one market shard is still absent. Never publish a
     // false zero on the homepage: use the fast path only when every market that
     // exists in the manifest has at least one renderable projection row.
-    const projectionComplete = MARKETS.every((market) =>
+    const projectionComplete = markets.every((market) =>
       Number(manifest.markets?.[market]?.count || 0) <= 0
         || rawProjectionRows.some((row) => row.market === market));
     if (projectionComplete) {
       const projectionRows = rawProjectionRows.filter(projectionCanRenderCard);
       const marketCounts: Record<string, number> = {};
-      const items = MARKETS.flatMap((market) => {
+      const items = markets.flatMap((market) => {
         const rows = projectionRows.filter((row) => row.market === market && projectionCanRenderCard(row));
         marketCounts[market] = rows.length;
         catalogSearchProjectionSort(rows, "updatedAt");
@@ -2968,7 +2971,7 @@ async function readHomeCatalogSnapshotOriginal(perMarket: number, timing: Return
   const [byId, order, marketShards] = await Promise.all([
     readIndex<{ byId: Record<string, OfferLocation> }>(manifest.generationId, "offers-by-id.json", { byId: {} }),
     readIndex<{ ids: string[] }>(manifest.generationId, "order-updatedAt.json", { ids: [] }),
-    mapWithConcurrency(MARKETS, MARKETS.length, async (market) => ({
+    mapWithConcurrency(markets, markets.length, async (market) => ({
       market,
       shard: await readIndex<{ ids: string[] }>(manifest.generationId, `market/${cleanShard(market)}.json`, { ids: [] }),
     })),
@@ -2979,7 +2982,7 @@ async function readHomeCatalogSnapshotOriginal(perMarket: number, timing: Return
   // for ~6 cards x 6 markets turned a simple initial render into dozens of object-store
   // reads. Prefer the per-market projection shards and fall back to full chunks only for
   // IDs from an older generation that cannot render a card from projection.
-  const projectionShards = await mapWithConcurrency(MARKETS, MARKETS.length, async (market) => ({
+  const projectionShards = await mapWithConcurrency(markets, markets.length, async (market) => ({
     market,
     items: (await readSearchProjection(manifest.generationId, market)).items || [],
   }));
@@ -3270,31 +3273,57 @@ async function readEditorialBrandSummary(){
 
 export async function readHomeCatalogSnapshot(perMarket=6){
  const timing=createHomePhaseTiming();
- return timing.measure("snapshotContext",()=>withChinaAggregateAuthority(undefined,()=>withCatalogEditorial(()=>timing.measure("snapshotBody",async()=>{
- const snapshot=await timing.measure("snapshotPrepared",()=>readHomeCatalogSnapshotOriginal(perMarket,timing));
- const marketCounts={...snapshot.marketCounts};
- let items=snapshot.items.filter(item=>legacyAggregateMarketAllowed(item.market)).map(item=>applyCatalogEditorial(item));
- const markets=MARKETS.slice(0,0);
- for(const market of MARKETS){
-  if(!legacyAggregateMarketAllowed(market)||!editorialHasHidden(market))continue;
-  if(homeSnapshotMarketIsEmpty(snapshot,market))continue;
-  markets.push(market);
- }
- const refreshed=await mapWithConcurrency(markets,2,async market=>({market,
-  result:await timing.measure(`snapshotEditorial:${market}`,()=>searchOffers({market,pageSize:Math.min(12,Math.max(1,perMarket)),sort:'updatedAt'}))}));
- for(const {market,result} of refreshed){
-  marketCounts[market]=result.total;
-  items=[...items.filter(item=>item.market!==market),...result.items];
- }
- let independentChina=false,countIncomplete=false;
- if(omitLegacyChinaAggregate()){
-  independentChina=true;
-  const fresh=await timing.measure("snapshotEditorial:china",()=>import('./prepared-china-http-fixture').then(m=>m.readPreparedChinaHomeCards(Math.min(12,Math.max(1,perMarket))))).catch(()=>null);
-  marketCounts.china=fresh?.total??0;
-  countIncomplete=!fresh;
-  if(fresh)items.push(...fresh.items);
- }
- return {...snapshot,items:items.sort(compareCatalogDisplayOrder),marketCounts,total:Object.values(marketCounts).reduce((a,b)=>a+b,0),...(independentChina?{independentChina:true,countIncomplete}:{})};
-} ))));}
+ return timing.measure("snapshotContext",()=>withChinaAggregateAuthority(undefined,()=>timing.measure("snapshotBody",async()=>{
+  const independentChina=omitLegacyChinaAggregate();
+  const retainedMarkets=MARKETS.filter(legacyAggregateMarketAllowed);
+  const readRetained=()=>withCatalogEditorial(async()=>{
+   const snapshot=await timing.measure("snapshotPrepared",()=>readHomeCatalogSnapshotOriginal(perMarket,timing));
+   const marketCounts={...snapshot.marketCounts};
+   const unavailableMarkets:CatalogMarket[]=[];
+   const prepared=await mapWithConcurrency(retainedMarkets,2,async market=>{
+    let items=snapshot.items.filter(item=>item.market===market);
+    try{
+     // A failed refresh may retain only cards already confirmed visible by the
+     // captured editorial state. Its full count remains unknown, not zero.
+     items=items.filter(item=>!editorialHidden(item)).map(item=>applyCatalogEditorial(item));
+     if(editorialHasHidden(market)&&!homeSnapshotMarketIsEmpty(snapshot,market)){
+      const result=await timing.measure(`snapshotEditorial:${market}`,()=>searchOffers({market,pageSize:Math.min(12,Math.max(1,perMarket)),sort:'updatedAt'}));
+      marketCounts[market]=result.total;
+      return result.items;
+     }
+     return items;
+    }catch(error){
+     if(!independentChina)throw error;
+     unavailableMarkets.push(market);delete marketCounts[market];
+     // If editorial application itself failed no card from this market has
+     // been confirmed. A search failure can keep the already filtered sample.
+     try{return items.filter(item=>!editorialHidden(item)).map(item=>applyCatalogEditorial(item));}catch{return [];}
+    }
+   });
+   return {...snapshot,items:prepared.flat(),marketCounts,unavailableMarkets,
+    countIncomplete:unavailableMarkets.length>0};
+  });
+  if(!independentChina){
+   const snapshot=await readRetained();
+   return {...snapshot,items:snapshot.items.sort(compareCatalogDisplayOrder),
+    total:Object.values(snapshot.marketCounts).reduce((a,b)=>a+b,0),independentChina:false};
+  }
+  // The native cut needs none of the mutable retained-market inputs. Start it
+  // independently and catch only the failed branch; never substitute old China.
+  const [retained,fresh]=await Promise.all([
+   readRetained().catch(()=>null),
+   timing.measure("snapshotEditorial:china",()=>import('./prepared-china-http-fixture')
+    .then(m=>m.readPreparedChinaHomeCards(Math.min(12,Math.max(1,perMarket))))).catch(()=>null),
+  ]);
+  const marketCounts:Record<string,number>={...retained?.marketCounts};
+  const unavailableMarkets:CatalogMarket[]=retained?[...retained.unavailableMarkets]:[...retainedMarkets];
+  const items=retained?[...retained.items]:[];
+  if(fresh){marketCounts.china=fresh.total;items.push(...fresh.items);}
+  else unavailableMarkets.push('china');
+  return {generationId:retained?.generationId??fresh?.generationId??'unavailable',
+   items:items.sort(compareCatalogDisplayOrder),marketCounts,
+   total:Object.values(marketCounts).reduce((a,b)=>a+b,0),independentChina:true,
+   countIncomplete:unavailableMarkets.length>0,unavailableMarkets};
+})));}
 
 export async function getOffer(id:string){return withCatalogEditorial(async()=>{const offer=await getOfferWithoutEditorial(id);return offer&&!editorialHidden(offer)?applyCatalogEditorial(offer):null;});}

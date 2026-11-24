@@ -9,6 +9,8 @@ import { getOfferWithoutEditorial, getOfferFromCurrentShard, getOfferFromCurrent
 
 import {PreparedChinaFixtureUnavailable,hasPreparedChinaHttpFixture,hasIndependentChinaHttpFixture,assertIndependentChinaFallbackAllowed,readPreparedChinaFixtureOffer,preparedChinaNormalRegcloudEnabled} from './prepared-china-http-fixture';
 import {chinaLocalRuntimeConfigured,readLocalChinaOffer,chinaLocalOfferGuard} from './china-local-reader';
+import type {VehicleOffer} from './types';
+import type {UnavailableOffer} from './offer-availability';
 
 // The offer id is stable across catalog generations. Keep a short shared cache
 // so a route prefetch warms the actual offer for the following click, including
@@ -93,7 +95,7 @@ export async function readOfferDetailForPage(id:string,allowPrepared=true,scope?
    if(known&&known.market!=='china')return {offer:known,unavailable:false};
   }
   const ownChina=hasIndependentChinaHttpFixture()&&(!scope?.market||scope.market==='china');
-  const prepared=allowPrepared&&hasPreparedChinaHttpFixture()&&(!hasIndependentChinaHttpFixture()||ownChina)
+  const prepared:{offer:VehicleOffer|null;withdrawn?:UnavailableOffer;assertCurrent:()=>void|Promise<void>}|null=allowPrepared&&hasPreparedChinaHttpFixture()&&(!hasIndependentChinaHttpFixture()||ownChina)
    ?await readPreparedChinaFixtureOffer(id,ownChina?scope?.city:undefined,ownChina?scope?.preparedCut:undefined):null;
   if(prepared?.offer)return {offer:prepared.offer,unavailable:false,prepared:true as const};
   if(prepared&&'withdrawn' in prepared&&prepared.withdrawn)return {offer:null,unavailable:false,prepared:true as const,withdrawn:prepared.withdrawn};

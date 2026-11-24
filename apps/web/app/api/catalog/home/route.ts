@@ -35,15 +35,23 @@ export async function GET() {
     }
     const readMs = performance.now() - started;
     const [combined,green] = await Promise.all([withAjesCount({...result,items:rows}),readGreenCorner().catch(()=>null)]);
-    let items;
+    let items, pricingIncomplete=false;
     if(!result.independentChina)items=await applyActiveBusinessPricingBatch(combined.items);
     else{
-      const priced=await applyActiveBusinessPricingBatch(combined.items.filter(item=>!item.preparedChinaSelection));
-      const byId=new Map(priced.map(item=>[item.id,item]));
-      items=combined.items.map(item=>item.preparedChinaSelection?item:byId.get(item.id)??item);
+      try{
+        const priced=await applyActiveBusinessPricingBatch(combined.items.filter(item=>!item.preparedChinaSelection));
+        const byId=new Map(priced.map(item=>[item.id,item]));
+        items=combined.items.map(item=>item.preparedChinaSelection?item:byId.get(item.id)??item);
+      }catch{
+        // Same audited-quote fallback as the initial homepage. Keep the exact
+        // returned records, including any unpriced manual edit; invent no price.
+        items=combined.items;pricingIncomplete=true;
+        console.error('catalog_home_retained_pricing_unavailable');
+      }
     }
     const pricingMs = performance.now() - started - readMs;
-    return NextResponse.json({ ...combined, total:combined.total+(green?.items.length||0),countIncomplete:combined.countIncomplete||!green, items }, {
+    return NextResponse.json({ ...combined, total:combined.total+(green?.items.length||0),countIncomplete:combined.countIncomplete||!green||pricingIncomplete,
+      ...(pricingIncomplete?{pricingUnavailableMarkets:[...new Set(combined.items.filter(item=>!item.preparedChinaSelection).map(item=>item.market))]}:{}),items }, {
       headers: { "Cache-Control": "no-store, max-age=0", "Server-Timing": `catalog-read;dur=${readMs.toFixed(1)}, catalog-pricing;dur=${pricingMs.toFixed(1)}` },
     });
   } catch (error) {
