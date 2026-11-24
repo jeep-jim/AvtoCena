@@ -23,11 +23,14 @@ jobs:
           import {verifyReadonlyInvocation} from './scripts/lib/readonly-marker-invocation.mjs';
           import fs from 'node:fs';
           const markerPath='.github/market-runs/catalog-serving-observation.json';
-          const scoped=JSON.parse(fs.readFileSync(markerPath,'utf8')).operation==='read-serving-catalog-guest-parity';
-          verifyReadonlyInvocation({root:process.cwd(),markerPath,operation:scoped?'read-serving-catalog-guest-parity':'read-serving-catalog-process'});
-          fs.appendFileSync(process.env.GITHUB_OUTPUT,'scope='+scoped+'\n');
+          const requested=JSON.parse(fs.readFileSync(markerPath,'utf8')).operation;
+          const operation=['read-serving-catalog-process','read-serving-catalog-guest-parity','read-serving-aj-release-failure'].find(value=>value===requested);
+          if(!operation) throw Error('readonly_invocation_operation');
+          verifyReadonlyInvocation({root:process.cwd(),markerPath,operation});
+          fs.appendFileSync(process.env.GITHUB_OUTPUT,'scope='+(operation==='read-serving-catalog-guest-parity')+'\n'+'aj_failure='+(operation==='read-serving-aj-release-failure')+'\n');
           JS
       - name: Read serving process, local health and anonymous counters
+        if: steps.marker.outputs.aj_failure != 'true'
         env:
           SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
         run: |
@@ -47,11 +50,34 @@ jobs:
             cat current-guest-scope.json
           fi
           cat serving-observation.json
+      - name: Read fixed failed AJ release image and nonce
+        if: steps.marker.outputs.aj_failure == 'true'
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+        run: |
+          set -euo pipefail
+          umask 077
+          python3 -I -B tests/ajes-japan-only-read-failed-host.test.py
+          known=docs/operations/regcloud-staging-known-hosts
+          printf '%s  %s\n' fd37f98aab3eeb16f131fcd4033adbb56f7e9616208c2f1ab5ef7a446caa4e4c "$known" | sha256sum --check --status
+          key=$(mktemp)
+          trap 'rm -f -- "$key"' EXIT
+          printf '%s\n' "$SSH_PRIVATE_KEY" > "$key"
+          unset SSH_PRIVATE_KEY
+          timeout 90 ssh -F /dev/null -T -i "$key" -o BatchMode=yes -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$known" -o UpdateHostKeys=no -o ConnectTimeout=10 -o ClearAllForwardings=yes root@151.248.113.177 '/usr/bin/env -i PATH=/usr/bin:/bin /usr/bin/python3 -I -B -' < .github/operations/ajes-japan-only-20261124/read-failed-host.py > aj-release-failure-observation.json
+          cat aj-release-failure-observation.json
       - uses: actions/upload-artifact@v4
+        if: steps.marker.outputs.aj_failure != 'true'
         with:
           name: catalog-serving-observation
           path: |
             serving-observation.json
             current-serving-inventory.json
             current-guest-scope.json
+          retention-days: 7
+      - uses: actions/upload-artifact@v4
+        if: always() && steps.marker.outputs.aj_failure == 'true'
+        with:
+          name: aj-release-failure-observation
+          path: aj-release-failure-observation.json
           retention-days: 7
