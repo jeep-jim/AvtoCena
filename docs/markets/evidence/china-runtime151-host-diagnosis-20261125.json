@@ -1,0 +1,197 @@
+{
+  "version": 1,
+  "kind": "china-runtime151-host-diagnosis-evidence-v1",
+  "runUrl": "https://github.com/jeep-jim/AvtoCena/actions/runs/45478981237",
+  "artifactId": 14960042703,
+  "archiveSha256": "ec831e4457f95b6acda00fee4306b417462968f886bf8889ddd5f504539169a3",
+  "sourceReportSha256": "9234fea934f6156934b2670b20222943849df4765ce9bff7a952c1c82bc0a1a9",
+  "completed": true,
+  "status": "complete",
+  "readOnly": true,
+  "failedRunId": "45468112113",
+  "diagnosisControllerSha": "72f29d8b0d9e2c81a7b1586cfaa5d85388d88c06",
+  "approvedControllerSha": "c5d8889451dc75710ae5a09ccda5b949190b2cdd",
+  "finishedAt": "2026-11-24T20:16:54.380Z",
+  "hostMutations": 0,
+  "storageWrites": 0,
+  "providerCalls": 0,
+  "pageRequests": 0,
+  "diagnosis": {
+    "selector": {
+      "runtimeSha": "1518035b9e6b717cd364ae8d13e63d0127899112",
+      "pricingRuntimeSha": "64c6338e0db23c8999096bceefbf113c0136fe15",
+      "generationId": "gen_china_45369451603_1",
+      "generationManifestSha256": "d5745797cc162b82e0c0f0b1f49fef65f18f0d6649666562337183b18084dd75",
+      "controllerSha": "73d18897de74a34b8bde17672b4fb7706471f358",
+      "imageId": "sha256:0a1d136f6b292f9d027354fe8db3c14e12079e689e3f7b5773a7b014860213ea",
+      "since": "2026-11-24T19:47:30Z",
+      "until": "2026-11-24T19:52:30Z"
+    },
+    "nonce": "92ec4a21446a23bed345fd789b2b3cc5",
+    "planSha256": "2b038c3566322b7be1f4e622716b8aed85e6e318fd323d31098db05dbb469964",
+    "rollbackSha256": "6f86011baf31bf183c5b156586b4c9b8a6aa22a0648c2d5f3de4c6f6e57538e9",
+    "outcome": "rolled_back",
+    "files": [
+      {
+        "name": "GENERATION.json",
+        "present": true,
+        "bytes": 5556,
+        "expectedBytes": 5556,
+        "sizeMatches": true,
+        "private": true
+      },
+      {
+        "name": "details.sqlite",
+        "present": true,
+        "bytes": 9192034304,
+        "expectedBytes": 9192034304,
+        "sizeMatches": true,
+        "private": true
+      },
+      {
+        "name": "query.sqlite",
+        "present": true,
+        "bytes": 3464159232,
+        "expectedBytes": 3464159232,
+        "sizeMatches": true,
+        "private": true
+      },
+      {
+        "name": "FILTER_SEMANTICS.json",
+        "present": true,
+        "bytes": 519822,
+        "expectedBytes": 519822,
+        "sizeMatches": true,
+        "private": true
+      },
+      {
+        "name": "FX_RECEIPT.json",
+        "present": true,
+        "bytes": 910,
+        "expectedBytes": 910,
+        "sizeMatches": true,
+        "private": true
+      },
+      {
+        "name": "RECONCILIATION.json",
+        "present": true,
+        "bytes": 1211,
+        "expectedBytes": 1211,
+        "sizeMatches": true,
+        "private": true
+      },
+      {
+        "name": "DISPOSITIONS.ndjson",
+        "present": true,
+        "bytes": 126845696,
+        "expectedBytes": 126845696,
+        "sizeMatches": true,
+        "private": true
+      },
+      {
+        "name": "image.tar",
+        "present": true,
+        "bytes": 258522112,
+        "expectedBytes": 258522112,
+        "sizeMatches": true,
+        "private": true
+      },
+      {
+        "name": "acceptance.json",
+        "present": true,
+        "bytes": 14727,
+        "expectedBytes": 14727,
+        "sizeMatches": true,
+        "private": true
+      },
+      {
+        "name": "regcloud-performance-gate.py",
+        "present": true,
+        "bytes": 12894,
+        "expectedBytes": 12894,
+        "sizeMatches": true,
+        "private": true
+      },
+      {
+        "name": "accepted-speed-baseline.json",
+        "present": true,
+        "bytes": 18868,
+        "expectedBytes": 18868,
+        "sizeMatches": true,
+        "private": true
+      }
+    ],
+    "generationVerified": true,
+    "image": {
+      "present": true,
+      "identityMatches": true
+    },
+    "diskFreeBytes": 10467188736,
+    "retained": {
+      "identityConfirmed": true,
+      "running": true
+    },
+    "candidate": {
+      "present": false,
+      "running": null,
+      "status": null,
+      "exitCode": null,
+      "oomKilled": null
+    },
+    "events": {
+      "available": true,
+      "reason": null,
+      "rows": [
+        {
+          "action": "kill",
+          "time": 1795549766,
+          "exitCode": null,
+          "oom": false
+        },
+        {
+          "action": "stop",
+          "time": 1795549766,
+          "exitCode": null,
+          "oom": false
+        },
+        {
+          "action": "die",
+          "time": 1795549766,
+          "exitCode": 0,
+          "oom": false
+        },
+        {
+          "action": "destroy",
+          "time": 1795549766,
+          "exitCode": null,
+          "oom": false
+        }
+      ]
+    },
+    "startup": {
+      "version": 1,
+      "kind": "china-host-startup-v1",
+      "ready": true,
+      "elapsedSeconds": 473.8221,
+      "attempts": 80,
+      "health": "ok",
+      "candidate": {
+        "running": true,
+        "status": "running",
+        "exitCode": 0,
+        "oomKilled": false,
+        "restartCount": 0
+      },
+      "reason": "ready"
+    }
+  },
+  "savedSpeedReportSha256": "a24eaef1708ea31d9b1b83b3c4f2ce4049f4bca032c15524aed77cc3f8a8349e",
+  "savedSpeedMatchesReleaseFailure": true,
+  "all11FileBytes": 13042135332,
+  "fourBulkFileBytes": 13041561344,
+  "sameRuntimeCopyRequiredBytesWith64MiB": 13109244196,
+  "sameRuntimeCopyShortfallBytes": 2642055460,
+  "bulkRehashedByDiagnosis": false,
+  "regAcceptedIntentReadByDiagnosis": false,
+  "newCleanupExecuted": false
+}

@@ -156,6 +156,9 @@ with tempfile.TemporaryDirectory(prefix='china-reuse-test-') as temporary:
             assert started['startup']['ready'] and host.candidate==candidate_id and not host.switched
             assert not any('/images/load' in path or path=='/info' for method,path in operations)
             assert containers[candidate_id]['Config']['Image']==image
+            candidate_env=m.env_map(containers[candidate_id])
+            assert candidate_env['CATALOG_HOME_PHASE_TIMING']=='1'
+            assert candidate_env['CATALOG_HOME_PHASE_TIMING_MAX_UPTIME_SECONDS']=='1800'
         else: assert all(method=='GET' for method,path in operations)
         os.close(host.lock)
     assert fingerprint(old)==before and containers[retained_id]==retained_before

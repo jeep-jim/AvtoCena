@@ -13,15 +13,24 @@ import base64, copy, datetime, fcntl, importlib.util, io, json, os, pathlib, sta
 spec = importlib.util.spec_from_file_location('failed_upload_host', sys.argv[1])
 m = importlib.util.module_from_spec(spec); spec.loader.exec_module(m)
 assert m.FAILED_UPLOAD_RUNTIME == '822f925bb30c4e07010f6e14b6574f1b4bd6306e'
-assert m.FAILED_WITNESS_ACCEPTED_RUNTIME == '1518035b9e6b717cd364ae8d13e63d0127899112'
-assert m.FAILED_WITNESS_BULK_BYTES == (13041560320, 13041559296)
-assert sum(m.FAILED_WITNESS_BULK_BYTES) == 26083119616
+assert m.FAILED_WITNESS_ACCEPTED_RUNTIME == '99c45a3b5d8439bbc1ee34702ba41340ada08125'
+assert m.FAILED_WITNESS_BULK_BYTES == (13041560320, 13041559296, 13041561344)
+assert sum(m.FAILED_WITNESS_BULK_BYTES) == 39124680960
+assert len(m.FAILED_WITNESS_TARGETS) == 3
 assert m.FAILED_WITNESS_TARGETS[0] == m.FAILED_UPLOAD_WITNESS
 assert m.FAILED_WITNESS_TARGETS[1] == dict(m.FAILED_UPLOAD_WITNESS,
     runtimeSha='860e1ff601c6852eb3b1474982e52e3a5300c4af', nonce='df9db7228781df26f92a990a011eb1bd',
     planSha256='27888989f2a0e90e235f7a497fcce912ece493e9f5add5c40005e02ad991d9b2',
     rollbackSha256='d550834e33b9cd9bf9b1be10c4c8f5358563d6aa56b2ba87794c9d5df9fdb5dd',
     imageId='sha256:3c0389d7fcd0986a850d2f87c3259a75bddff3b0090ed0aef56eb1e190ef2238')
+assert m.FAILED_WITNESS_TARGETS[2] == dict(m.FAILED_UPLOAD_WITNESS,
+    runtimeSha='1518035b9e6b717cd364ae8d13e63d0127899112', nonce='92ec4a21446a23bed345fd789b2b3cc5',
+    planSha256='2b038c3566322b7be1f4e622716b8aed85e6e318fd323d31098db05dbb469964',
+    rollbackSha256='6f86011baf31bf183c5b156586b4c9b8a6aa22a0648c2d5f3de4c6f6e57538e9',
+    imageId='sha256:0a1d136f6b292f9d027354fe8db3c14e12079e689e3f7b5773a7b014860213ea')
+assert m.RESOLVED_CLEANUP_TARGETS == m.FAILED_WITNESS_TARGETS[:2] and len(m.RESOLVED_CLEANUP_TARGETS) == 2
+assert m.RESOLVED_CLEANUP_WITNESS == m.FAILED_WITNESS_TARGETS[2]
+assert m.RESOLVED_CLEANUP_BULK_BYTES == (13041560320, 13041559296)
 target_index = int(sys.argv[2])
 assert m.FAILED_UPLOAD_WITNESS['runtimeSha'] == '5e62f9ff3a0079b07cd13b8ab912c5720dd22250'
 assert m.FAILED_UPLOAD_WITNESS['nonce'] == '2d015d0beef2af9f076bd1d47987dd88'
@@ -206,7 +215,7 @@ with tempfile.TemporaryDirectory(prefix='china-failed-upload-host-') as temporar
         return row['Id']
 `;
 
-function check(body, targetIndexes = [0, 1]) {
+function check(body, targetIndexes = [0, 1, 2]) {
   const script = harness + '\n' + body.trim().split('\n').map(line => '    ' + line).join('\n') + '\n';
   for (const targetIndex of targetIndexes) {
     const result = spawnSync('python3', ['-I', '-B', '-c', script, host, String(targetIndex)], {encoding: 'utf8', timeout: 10000});
@@ -214,7 +223,7 @@ function check(body, targetIndexes = [0, 1]) {
   }
 }
 
-test('either fixed target removes only its four files; accepted current, live56, the other copy and all proofs survive', () => check(`
+test('each fixed target removes only its four files; accepted current, live56, the other copies and all proofs survive', () => check(`
 total = sum(filename.stat().st_size for filename in bulk)
 result = m.prune_failed_witness(params)
 assert result['completed'] and result['filesDeleted'] == 4 and result['freedBytes'] == total and result['alreadyAbsentFiles'] == 0
@@ -254,8 +263,8 @@ try:
 finally: m.os.statvfs = real_statvfs
 `));
 
-test('only the two fixed integer targets are accepted; no caller can supply another path or profile', () => check(`
-for invalid in (None, False, True, -1, 2, 0.0, '0', {}, []):
+test('only the three fixed integer targets are accepted; no caller can supply another path or profile', () => check(`
+for invalid in (None, False, True, -1, 3, 0.0, 2.0, '0', {}, []):
     refused(lambda: m.prune_failed_witness(dict(params, targetIndex=invalid)), 'witness_target')
     unchanged()
 missing = dict(params); del missing['targetIndex']
@@ -276,16 +285,16 @@ try:
 finally: m.FAILED_WITNESS_TARGETS = original
 `));
 
-test('sequential fixed targets remove exactly all eight files and resume without double-counting', () => check(`
+test('sequential fixed targets remove exactly all twelve files and resume without double-counting', () => check(`
 total = sum(filename.stat().st_size for filename in all_bulk)
-results = [m.prune_failed_witness(dict(params, targetIndex=index)) for index in (0, 1)]
-assert [row['targetIndex'] for row in results] == [0, 1]
-assert sum(row['filesDeleted'] for row in results) == 8 and sum(row['freedBytes'] for row in results) == total
+results = [m.prune_failed_witness(dict(params, targetIndex=index)) for index in (0, 1, 2)]
+assert [row['targetIndex'] for row in results] == [0, 1, 2]
+assert sum(row['filesDeleted'] for row in results) == 12 and sum(row['freedBytes'] for row in results) == total
 assert all(not os.path.lexists(filename) for filename in all_bulk)
 protects_all_survivors()
-again = [m.prune_failed_witness(dict(params, targetIndex=index)) for index in (0, 1)]
+again = [m.prune_failed_witness(dict(params, targetIndex=index)) for index in (0, 1, 2)]
 assert sum(row['filesDeleted'] for row in again) == 0 and sum(row['freedBytes'] for row in again) == 0
-assert sum(row['alreadyAbsentFiles'] for row in again) == 8
+assert sum(row['alreadyAbsentFiles'] for row in again) == 12
 protects_all_survivors()
 `, [0]));
 
@@ -306,11 +315,60 @@ finally: pathlib.Path.unlink = original_unlink
 assert len(removed) == 1
 protects_all_survivors()
 remaining_bytes = sum(filename.stat().st_size for filename in failed_bulk[1] if filename.exists())
+assert all(filename.exists() for filename in failed_bulk[2]), 'the third target is untouched until requested'
 again = [m.prune_failed_witness(dict(params, targetIndex=index)) for index in (0, 1)]
 assert sum(row['filesDeleted'] for row in again) == 3 and sum(row['freedBytes'] for row in again) == remaining_bytes
 assert sum(row['alreadyAbsentFiles'] for row in again) == 5
 protects_all_survivors()
 `, [0]));
+
+test('after precleanup only four runtime151 files are newly removed and all three attempts remain resumable', () => check(`
+for group in failed_bulk[:2]:
+    for filename in group: filename.unlink()
+total = sum(filename.stat().st_size for filename in failed_bulk[2])
+results = [m.prune_failed_witness(dict(params, targetIndex=index)) for index in (0, 1, 2)]
+assert [row['filesDeleted'] for row in results] == [0, 0, 4]
+assert [row['alreadyAbsentFiles'] for row in results] == [4, 4, 0]
+assert [row['freedBytes'] for row in results] == [0, 0, total]
+assert all(row['earlierBulkFilesAbsent'] == 8 for row in results)
+protects_all_survivors()
+again = [m.prune_failed_witness(dict(params, targetIndex=index)) for index in (0, 1, 2)]
+assert sum(row['filesDeleted'] for row in again) == 0 and sum(row['freedBytes'] for row in again) == 0
+assert sum(row['alreadyAbsentFiles'] for row in again) == 12
+protects_all_survivors()
+`, [2]));
+
+test('a lost runtime151 unlink resumes three remaining files with both earlier target proofs preserved', () => check(`
+first = [m.prune_failed_witness(dict(params, targetIndex=index)) for index in (0, 1)]
+assert sum(row['filesDeleted'] for row in first) == 8
+original_unlink = pathlib.Path.unlink; removed = []
+def interrupt_unlink(filename, *args, **kwargs):
+    original_unlink(filename, *args, **kwargs)
+    if filename in failed_bulk[2]:
+        removed.append(filename)
+        raise RuntimeError('simulated lost reply after runtime151 unlink')
+pathlib.Path.unlink = interrupt_unlink
+try:
+    try: m.prune_failed_witness(dict(params, targetIndex=2))
+    except RuntimeError as error: assert str(error) == 'simulated lost reply after runtime151 unlink'
+    else: raise AssertionError('expected interrupted third target')
+finally: pathlib.Path.unlink = original_unlink
+assert len(removed) == 1
+protects_all_survivors()
+remaining_bytes = sum(filename.stat().st_size for filename in failed_bulk[2] if filename.exists())
+again = [m.prune_failed_witness(dict(params, targetIndex=index)) for index in (0, 1, 2)]
+assert sum(row['filesDeleted'] for row in again) == 3 and sum(row['freedBytes'] for row in again) == remaining_bytes
+assert sum(row['alreadyAbsentFiles'] for row in again) == 9
+protects_all_survivors()
+`, [2]));
+
+test('already absent target bulk still requires its exact PLAN and rollback before any success report', () => check(`
+for filename in bulk: filename.unlink()
+for name in ('PLAN.json', 'ROLLED_BACK.json'):
+    filename = target_directory / name; raw = filename.read_bytes(); write(filename, raw + b' ')
+    refused(lambda: m.prune_failed_witness(params), 'witness_proof'); write(filename, raw)
+protects_survivors()
+`));
 
 test('absent, pending, different runtime or uncommitted state cannot authorize post-accept cleanup', () => check(`
 bad = copy.deepcopy(params); bad['currentState']['accepted'] = absent()
@@ -364,6 +422,29 @@ alias.unlink()
 identity = stopped_mount(root / 'unrelated'); containers[identity]['Config']['Labels']['avtocena.china.nonce'] = m.FAILED_WITNESS_TARGETS[target_index]['nonce']
 refused(lambda: m.prune_failed_witness(params), 'witness_candidate_exists'); del containers[identity]
 unchanged()
+`));
+
+test('mount inode aliases including ancestors above BASE block every unlink while unrelated siblings remain usable', () => check(`
+alias = root / 'bind-alias'; alias.mkdir(mode=0o700)
+unrelated = root / 'unrelated'; unrelated.mkdir(mode=0o700)
+real_stat = pathlib.Path.stat
+for equivalent in (m.BASE.parent, *m.BASE.parents, m.BASE, target_directory.parent.parent,
+        target_directory.parent, target_directory, target_directory / 'generation', bulk[0], earlier_targets[0]):
+    identity = stopped_mount(alias)
+    def aliased_stat(filename, *args, **kwargs):
+        return real_stat(equivalent if filename == alias else filename, *args, **kwargs)
+    pathlib.Path.stat = aliased_stat
+    try:
+        for running in (False, True):
+            containers[identity]['State']['Running'] = running
+            refused(lambda: m.prune_failed_witness(params), 'witness_mount_inode_alias')
+    finally: pathlib.Path.stat = real_stat; del containers[identity]
+    unchanged()
+identity = stopped_mount(unrelated)
+result = m.prune_failed_witness(params)
+assert result['completed'] and result['filesDeleted'] == 4
+del containers[identity]
+protects_survivors()
 `));
 
 test('all four target hashes and exclusive immutable files are required before first unlink', () => check(`
