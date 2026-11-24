@@ -5,8 +5,9 @@ import {isIP} from 'node:net';
 import {gunzipSync} from 'node:zlib';
 import {DetailReadCache} from './detail-read-cache';
 import {ajesQuery,ajesLot,type AjesTable,type AjesQuery} from './ajes-query';
+import {AjesUnavailable,assertAjesJapanTable} from './ajes-access-policy';
 
-export class AjesUnavailable extends Error {constructor(public reason:string){super(`ajes_${reason}`);}}
+export {AjesUnavailable} from './ajes-access-policy';
 // Release supplier admission before consulting historical
 // storage. Shared callers recover once; stale results never enter the fresh cache.
 class AjesSavedRecovery {
@@ -60,6 +61,9 @@ export function createAjesClient(deps:Dependencies) {
   const cooling=(key:string)=>{const value=failures.get(key);if(value&&value.until>Date.now())return value.reason;failures.delete(key);return null;};
   return {
     async read(input:unknown,clientIp:string) {
+      // Retired tables cannot read caches, credentials, quota or the supplier,
+      // even when an old link or saved owner setting still requests them.
+      assertAjesJapanTable(input&&typeof input==='object'?(input as AjesQuery).table:undefined);
       const query=ajesQuery(input,deps.calculationIndex?.()||null);
       if(!isIP(clientIp)) throw new AjesUnavailable('client_ip_missing');
       await deps.assertEnabled(query.table); // Also applies to cache hits after an owner disables the source.

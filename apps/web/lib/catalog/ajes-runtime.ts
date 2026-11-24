@@ -2,14 +2,14 @@ import {readCalculationIndex} from '../encyclopedia/calculation-index';
 import {saveAjesRequestFailure} from './ajes-request-diagnostic';
 import 'server-only';
 import {ajesEndpoint} from './ajes-routing';
-import {readAjesQueryCache,readPreviousTruckPolicyRows,readExpandedJapanRows,readUncappedChinaRows,saveAjesQueryCache,retainedAjesQueryEntries} from './ajes-query-cache';
+import {readAjesQueryCache,readPreviousTruckPolicyRows,readExpandedJapanRows,saveAjesQueryCache,retainedAjesQueryEntries} from './ajes-query-cache';
 import {ajesPassword} from './ajes-settings';
 import {getJsonStorage} from '../data';
 import {assertCollectionEnabled} from './collection-controls';
 import {DetailReadCache} from './detail-read-cache';
 import {heavyVehicleSqlExclusion} from './heavy-vehicle-families';
 import {createAjesClient} from './ajes-client';
-import {findSavedAjesSearch,findSavedAjesStockSearch,savedAjesFacets} from './ajes-saved-search';
+import {findSavedAjesSearch,savedAjesFacets} from './ajes-saved-search';
 import {reserveAjesRequest} from './ajes-quota';
 
 // A cold direct link may need a row already shown by an earlier process. Only
@@ -21,6 +21,7 @@ async function readSavedListIndex(){
   for(let start=0;start<128;start+=8){
    const slots=await Promise.all(Array.from({length:8},(_,i)=>getJsonStorage().readJson<any>(`catalog/partner-cache/ajes/queries/${start+i}.json`,null).catch(()=>null)));
    for(const slot of slots)for(const {value} of retainedAjesQueryEntries(slot))for(const lot of value?.items||[]){
+    if(lot.table!=='stats'&&lot.table!=='main')continue;
     const key=lot.table+':'+lot.id,at=value.observedAt;
     if(!result[key]||Date.parse(result[key].observedAt)<Date.parse(at))result[key]={schemaVersion:value.schemaVersion,items:[lot],page:1,pageSize:1,observedAt:at,partial:true};
    }
@@ -39,7 +40,7 @@ export const ajesClient=createAjesClient({
   password:ajesPassword,
   endpoint:ajesEndpoint,
   readListedDetail,
-  readSavedSearch:async input=>input.table==='china'||input.table==='korea'?(input.make&&input.model?findSavedAjesStockSearch(input,await readSavedListIndex()):null):findSavedAjesSearch(input,await readSavedListIndex(),Date.now(),readCalculationIndex()),
+  readSavedSearch:async input=>findSavedAjesSearch(input,await readSavedListIndex(),Date.now(),readCalculationIndex()),
   saveAggregateEvidence:(kind,value)=>getJsonStorage().writeJson(`catalog/partner-cache/ajes/evidence/${kind}-last.json`,value),
   saveEvidence:(table,value)=>getJsonStorage().writeJson(`catalog/partner-cache/ajes/evidence/${table}-last-detail.json`,value),
   // Bounded list and count pools; exact hashes prevent unrelated cache hits.
@@ -49,7 +50,6 @@ export const ajesClient=createAjesClient({
     // Carry only rows across this selection fix, never an inaccurate old count.
     if(!sql.startsWith('select * from'))return null;
     const priorTrucks=await readPreviousTruckPolicyRows(sql,read);if(priorTrucks)return priorTrucks;
-    const china=await readUncappedChinaRows(sql,read);if(china)return china;
     const previous=sql.replace(heavyVehicleSqlExclusion(),heavyVehicleSqlExclusion(true)).replace("auction_date desc, case when time in ('E','H','HE') then 1 else 0 end asc",'auction_date desc');
     let saved=previous!==sql?await read(previous):null;
     // Older lists remain useful as partial results when broadening Japan to 2008.
@@ -58,7 +58,7 @@ export const ajesClient=createAjesClient({
     return saved?{...saved,schemaVersion:0}:null;
   },
   saveQuery:(sql,value)=>saveAjesQueryCache(getJsonStorage(),sql,value),
-  assertEnabled:table=>assertCollectionEnabled(`ajes_${table==='china'||table==='korea'?table:'japan'}_feed`),
+  assertEnabled:()=>assertCollectionEnabled('ajes_japan_feed'),
   reserve:table=>reserveAjesRequest(getJsonStorage(),table),
   readDetail:(table,id)=>getJsonStorage().readJson(`catalog/partner-cache/ajes/${table}/${id}.json`,null),
   saveDetail:(table,id,value)=>getJsonStorage().writeJson(`catalog/partner-cache/ajes/${table}/${id}.json`,value),

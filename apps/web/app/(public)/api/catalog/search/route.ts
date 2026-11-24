@@ -31,6 +31,8 @@ export async function GET(request: Request) {
   const started = performance.now();
   const u = new URL(request.url);
   const p = u.searchParams;
+  // Old supplier bookmarks use the current market catalog; they cannot select AJ.
+  if(['ajes','existing'].includes(p.get('source')||'')&&(p.get('market')==='china'||p.get('market')==='korea'))p.delete('source');
   const markets=selectedCatalogMarkets(p.get('market'));
   if(markets.length>1&&p.get('countOnly')==='1'){
     // Preserve the incumbent behavior and cache for all other traffic. A new
