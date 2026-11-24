@@ -72,6 +72,39 @@ class Local(native.LocalHost):
     def __init__(self, plan, transport=None):
         super().__init__(plan, transport)
         self.names = {'aj-japan-' + SOURCE[:12] + '-' + plan['nonce'], 'aj-japan-probe-' + SOURCE[:12] + '-' + plan['nonce']}
+        self.request_transport = self.transport
+        self.transport = self.diagnostic_transport
+
+    @staticmethod
+    def endpoint_category(endpoint):
+        # Diagnostics classify an already scoped request; they grant no Docker
+        # permission and never copy a container name, path, body or credential.
+        if endpoint == '/containers/json?all=1':
+            return 'container_list'
+        if endpoint == '/info':
+            return 'daemon_info'
+        if endpoint.startswith('/images/') and endpoint.endswith('/json'):
+            return 'image_inspect'
+        if endpoint.startswith('/containers/create?name='):
+            return 'container_create'
+        if endpoint.startswith('/containers/'):
+            for suffix, category in (('/json', 'container_inspect'), ('/start', 'container_start'),
+                                     ('/stop?t=10', 'container_stop'), ('/update', 'container_update'),
+                                     ('/wait?condition=not-running', 'container_wait'),
+                                     ('/logs?stdout=1&stderr=1&tail=100', 'container_logs'),
+                                     ('?v=false&force=false', 'container_delete')):
+                if endpoint.endswith(suffix):
+                    return category
+        return 'unknown'
+
+    def diagnostic_transport(self, method, endpoint, body):
+        status, raw = self.request_transport(method, endpoint, body)
+        if status not in (200, 201, 204):
+            category = self.endpoint_category(endpoint)
+            verb = {'GET': 'get', 'POST': 'post', 'DELETE': 'delete'}.get(method, 'unknown')
+            code = str(status) if type(status) is int and 100 <= status <= 599 else 'invalid'
+            raise native.HostError('home_host_aj_docker_http_' + verb + '_' + category + '_' + code) from None
+        return status, raw
 
     def create(self, spec, probe=False):
         name = ('aj-japan-probe-' if probe else 'aj-japan-') + SOURCE[:12] + '-' + self.plan['nonce']
@@ -148,6 +181,8 @@ class Host:
         need(image.get('status') == 'verified_aj_japan_image' and image.get('source') == SOURCE and image.get('tree') == PROFILE['tree']
              and image.get('imageId') == plan['imageId'] and image.get('sourceCalculationVersion') == BUILD
              and image.get('privateIndexInImage') is False and image.get('resourceProbePassed') is True
+             and image.get('archiveRoundTripVerified') is True
+             and image.get('builder') == {'version': '29.1.3', 'driver': 'overlayfs', 'driverType': 'io.containerd.snapshotter.v1'}
              and image.get('resourceFiles') == plan['resourceFiles'], 'aj_image_receipt')
         self.plan, self.authority, self.local = plan, authority, Local(plan)
         self.candidate = self.spec = self.process = self.ingress = None
@@ -217,7 +252,8 @@ class Host:
         for name, digest in self.plan['resourceFiles'].items():
             need(sha(regular(RESOURCES / name, mode=0o400)[0]) == digest, 'aj_resource_changed')
         image = self.local.docker('GET', '/images/' + self.plan['imageId'] + '/json')
-        need(image.get('Id') == self.plan['imageId'] and image.get('Config', {}).get('Labels') == {
+        need(image.get('Id') == self.plan['imageId'] and image.get('Descriptor', {}).get('digest') == self.plan['imageId']
+             and image.get('Config', {}).get('Labels') == {
             'org.opencontainers.image.revision': SOURCE, 'org.opencontainers.image.source': 'https://github.com/jeep-jim/AvtoCena', 'avtocena.application': 'web'}
             and image['Config'].get('WorkingDir') == '/app' and image['Config'].get('Cmd') == ['node', 'apps/web/server.js'], 'aj_loaded_image')
 
@@ -487,7 +523,8 @@ class Driver:
                     member = archive.getmember('manifest.json')
                     need(member.isfile() and member.size < 65536, 'aj_image_manifest')
                     manifest = json.load(archive.extractfile(member))
-                    need(len(manifest) == 1 and set(manifest[0].get('RepoTags') or []) <= {'avtocena-aj-japan:' + SOURCE}, 'aj_image_tags')
+                    need(len(manifest) == 1 and set(manifest[0].get('RepoTags') or []) <= {
+                        'avtocena-aj-japan:' + SOURCE, 'docker.io/library/avtocena-aj-japan:' + SOURCE}, 'aj_image_tags')
                 h.guard('image_load_verified')
                 result = private_execute(['/usr/bin/docker', '--host=unix:///var/run/docker.sock', 'image', 'load', '--input', str(target)],
                     env={'PATH': '/usr/bin:/bin'}, stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, timeout=300)

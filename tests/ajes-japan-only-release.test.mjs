@@ -1,9 +1,12 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
+import {EventEmitter} from 'node:events';
+import {PassThrough,Writable} from 'node:stream';
 import {PROFILE,checkedProfile,sha256,verifyGates,assertServerReceipt,assertBrowserReceipt} from '../.github/operations/ajes-japan-only-20261124/release-contract.mjs';
-import {activateTransaction} from '../.github/operations/ajes-japan-only-20261124/release.mjs';
+import {activateTransaction,failureDetails} from '../.github/operations/ajes-japan-only-20261124/release.mjs';
 import {acquireAuthority} from '../.github/operations/ajes-japan-only-20261124/release-authority.mjs';
+import {AjSshSession} from '../.github/operations/ajes-japan-only-20261124/release-ssh.mjs';
 
 const nonce='a'.repeat(32),source='b'.repeat(40),routes=verifyGates();
 const profile={...PROFILE,source,tree:'c'.repeat(40),sourceCalculationVersion:'d'.repeat(64),codeDiffSha256:'e'.repeat(64),
@@ -57,22 +60,100 @@ test('complete release uses both server gates and browser before acceptance',asy
 
 test('a private gate failure never switches ingress and stops only the owned candidate',async()=>{
   const {io,calls}=transaction({fail:'server-private'});
-  await assert.rejects(activateTransaction(io,{nonce,profile,routes}),error=>error.ajOutcome.ingressState==='retained');
+  await assert.rejects(activateTransaction(io,{nonce,profile,routes}),error=>{
+    assert.equal(error.ajOutcome.ingressState,'retained');
+    assert.equal(error.ajOutcome.failedPhase,'server-private');
+    assert.equal(error.ajOutcome.lastCompletedPhase,'aj-private');
+    return true;
+  });
   assert.equal(calls.includes('switch'),false);assert.equal(calls.includes('rollback'),false);assert.equal(calls.at(-1),'cleanup');
 });
 
 for(const failure of ['switch','public-identity','aj-public','server-public','browser','accept'])test(failure+' failure restores ingress before cleanup',async()=>{
   const {io,calls}=transaction({fail:failure});
-  await assert.rejects(activateTransaction(io,{nonce,profile,routes}),error=>error.ajOutcome.accepted===false&&error.ajOutcome.ingressState==='retained');
+  const previous={switch:'fresh','public-identity':'switch','aj-public':'public-identity','server-public':'aj-public',browser:'server-public',accept:'identity'};
+  await assert.rejects(activateTransaction(io,{nonce,profile,routes}),error=>{
+    assert.equal(error.ajOutcome.accepted,false);assert.equal(error.ajOutcome.ingressState,'retained');
+    assert.equal(error.ajOutcome.failedPhase,failure);assert.equal(error.ajOutcome.lastCompletedPhase,previous[failure]);
+    return true;
+  });
   assert.deepEqual(calls.slice(-2),['rollback','cleanup']);
 });
 
 test('wrong browser nonce rolls back; a foreign ingress prevents candidate cleanup',async()=>{
   for(const foreignRollback of [false,true]){
     const {io,calls}=transaction({wrongBrowser:true,foreignRollback});
-    await assert.rejects(activateTransaction(io,{nonce,profile,routes}),error=>error.ajOutcome.ingressState===(foreignRollback?'unknown':'retained'));
+    await assert.rejects(activateTransaction(io,{nonce,profile,routes}),error=>{
+      assert.equal(error.ajOutcome.ingressState,foreignRollback?'unknown':'retained');
+      assert.equal(error.ajOutcome.failedPhase,'browser');assert.equal(error.ajOutcome.lastCompletedPhase,'server-public');
+      return true;
+    });
     assert.equal(calls.includes('accept'),false);assert.equal(calls.includes('cleanup'),!foreignRollback);
   }
+});
+
+function sshFixture(){
+  const child=new EventEmitter(),sent=[],stages=[];
+  child.stdin=new Writable({write(chunk,_encoding,done){sent.push(JSON.parse(chunk.toString()));done();}});
+  child.stdout=new PassThrough();child.stderr=new PassThrough();child.kill=()=>child.emit('close',1,null);
+  const session=new AjSshSession({process:child,nonce,authority:{},browser:()=>{},onStage:phase=>stages.push(phase)});
+  session.message({kind:'ready',source:PROFILE.source,nonce});
+  return {session,sent,stages,finish:()=>child.emit('close',0,null)};
+}
+
+test('SSH failure phase comes from the local pending command and survives later cleanup',async()=>{
+  const f=sshFixture();
+  try{
+    for(const method of ['init','image']){
+      const request=f.session.request(method,{Env:['PRIVATE_FIXTURE']});await f.session.writes;
+      f.session.message({kind:'result',id:request.id,value:{private:'PRIVATE_FIXTURE'},phase:'/root/PRIVATE_FIXTURE'});
+      await request.result;
+    }
+    const request=f.session.request('start');await f.session.writes;
+    f.session.message({kind:'error',id:request.id,code:'home_host_aj_docker_http_get_image_inspect_404',
+      failedPhase:'/root/PRIVATE_FIXTURE',lastCompletedPhase:'accept',body:'AJES_API_PASSWORD=PRIVATE_FIXTURE'});
+    let failure;
+    await assert.rejects(request.result,error=>{failure=error;return true;});
+    const cleanup=f.session.request('cleanup');await f.session.writes;
+    f.session.message({kind:'result',id:cleanup.id,value:{private:'PRIVATE_FIXTURE'}});await cleanup.result;
+    assert.deepEqual(failureDetails(failure,{phase:'close',lastCompletedPhase:'close'}),{
+      failureCode:'home_host_aj_docker_http_get_image_inspect_404',failedPhase:'start',lastCompletedPhase:'image'});
+    assert.equal(f.session.lastCompletedPhase,'cleanup');
+    assert.deepEqual(f.stages,['init','image','cleanup']);
+    assert.doesNotMatch(JSON.stringify({error:failureDetails(failure),stages:f.stages}),/PRIVATE_FIXTURE|AJES_API_PASSWORD|\/root\//);
+  }finally{f.finish();}
+});
+
+test('SSH disconnect identifies its pending phase without exposing a raw transport error',async()=>{
+  const f=sshFixture();
+  try{
+    const initial=f.session.request('init');await f.session.writes;
+    f.session.message({kind:'result',id:initial.id,value:{}});await initial.result;
+    const pending=f.session.request('image');await f.session.writes;
+    f.session.fail(Error('socket /root/PRIVATE_FIXTURE AJES_API_PASSWORD=PRIVATE_FIXTURE'));
+    await assert.rejects(pending.result,error=>{
+      assert.deepEqual(failureDetails(error),{failureCode:'aj_ssh_request_failed',failedPhase:'image',lastCompletedPhase:'init'});
+      assert.doesNotMatch(error.message,/PRIVATE_FIXTURE|\/root\//);return true;
+    });
+    assert.throws(()=>f.session.request('/root/PRIVATE_FIXTURE'),/aj_ssh_method/);
+    assert.deepEqual(f.sent.map(row=>row.method),['init','image']);
+  }finally{f.finish();}
+});
+
+test('receipt diagnostics reject arbitrary phase text and retain the local controller phase',()=>{
+  const error=Object.assign(Error('PRIVATE_FIXTURE https://private.example/secret'),{
+    failedPhase:'/root/PRIVATE_FIXTURE',lastCompletedPhase:'AJES_API_PASSWORD=PRIVATE_FIXTURE'});
+  assert.deepEqual(failureDetails(error,{phase:'controls-retire',lastCompletedPhase:'plan'}),{
+    failureCode:'aj_release_failed',failedPhase:'controls-retire',lastCompletedPhase:'plan'});
+});
+
+test('a local publication guard failure keeps its exact phase before cleanup',async()=>{
+  const {io,calls}=transaction({fail:'guard'});
+  await assert.rejects(activateTransaction(io,{nonce,profile,routes}),error=>{
+    assert.equal(error.ajOutcome.failedPhase,'publication-guard');
+    assert.equal(error.ajOutcome.lastCompletedPhase,'server-private');return true;
+  });
+  assert.equal(calls.includes('switch'),false);assert.equal(calls.at(-1),'cleanup');
 });
 
 test('authority never steals an active foreign lease',async()=>{

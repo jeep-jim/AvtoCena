@@ -54,7 +54,7 @@ jobs:
         run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/catalog-editorial-runtime.test.mjs tests/catalog-owned-china-verification.test.mjs
       - name: AJ Japan-only settings and exact release guards
         run: |
-          node --test tests/ajes-japan-only-controls-migration.test.mjs tests/ajes-japan-only-release.test.mjs
+          node --test tests/ajes-japan-only-controls-migration.test.mjs tests/ajes-japan-only-release.test.mjs tests/ajes-japan-only-image.test.mjs
           python3 -I -B tests/ajes-japan-only-release-host.test.py
       - name: Saved UAE cursor and archive guards
         run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/catalog-raw-session.test.ts tests/catalog-raw-coordination.test.ts tests/catalog-intake-checkpoint.test.ts tests/catalog-dubicars-cursor-guard.test.mjs tests/catalog-saved-intake-readonly-probe.test.mjs tests/catalog-paid-encar-technical-repair.test.ts tests/catalog-publication-memory.test.ts
