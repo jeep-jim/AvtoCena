@@ -17,8 +17,8 @@ function writesCatalogMarkets(source: string) {
   return /catalog-market-refresh\.yml|catalog-paid-encar-refresh\.yml|catalog-v3-market-10k-reusable\.yml|catalog-publish-(?:market|source-scale|fresh)\.mjs|catalog-rebuild-source-shard\.mjs/.test(source);
 }
 
-test("each scheduled market owns its queue and shares guarded publication through the worker", () => {
- const expected=['china','europe','georgia','korea','uae'].map(m=>`catalog-refresh-${m}.yml`).sort();
+test("each remaining legacy scheduled market keeps its own guarded worker", () => {
+ const expected=['europe','georgia','korea','uae'].map(m=>`catalog-refresh-${m}.yml`).sort();
  const scheduled=fs.readdirSync(root).filter(n=>/^catalog.*\.ya?ml$/.test(n)&&hasSchedule(text(n))&&writesCatalogMarkets(text(n))).sort();
  assert.deepEqual(scheduled,expected);
  const groups=new Set<string>();
@@ -37,7 +37,7 @@ test("each scheduled market owns its queue and shares guarded publication throug
    assert.match(paid,/assertPaidEncarReportBinding\(binding/);
   }else assert.match(source,/uses: \.\/\.github\/workflows\/catalog-market-refresh\.yml/);
  }
- assert.equal(groups.size,5);
+ assert.equal(groups.size,4);
  const worker=text('catalog-market-refresh.yml');
  assert.match(worker,/CATALOG_SELLER_INVENTORY: '1'/);
  assert.match(worker,/catalog-storage-preflight/);
@@ -68,7 +68,8 @@ test("active V3 pipeline owns approved market rules", () => {
   const queue = text("catalog-v3-sequential-queue.yml");
   const reusable = text("catalog-v3-market-10k-reusable.yml");
   assert.match(queue, /korea/);
-  assert.match(queue, /china/);
+  assert.doesNotMatch(queue, /^  china:|market: china/m);
+  assert.match(reusable, /REQUESTED_CATALOG_MARKET === "china"/);
   assert.match(queue, /uae/);
   assert.match(queue, /europe/);
   assert.match(queue, /georgia/);
@@ -84,13 +85,13 @@ test("active V3 pipeline owns approved market rules", () => {
   assert.match(reusable, /CATALOG_COLLECTION_IMAGE_LIMIT: "30"/);
 });
 
-test("the five-market queue excludes Japan and stops before collection during the pause", () => {
+test("the four-market legacy queue excludes independent China and Japan and preserves its pause", () => {
   const queue = text("catalog-v3-sequential-queue.yml");
-  assert.doesNotMatch(queue, /^  japan:|run_japan|market: japan/m);
+  assert.doesNotMatch(queue, /^  (?:japan|china):|run_japan|market: (?:japan|china)/m);
   assert.match(queue, /CATALOG_PRODUCTION_WRITES_PAUSED/);
   assert.match(queue, /process\.exit\(1\)/);
-  assert.equal((queue.match(/needs\.plan\.result == 'success'/g) || []).length, 5);
-  assert.equal((queue.match(/retention_ms: "1209600000"/g) || []).length, 5);
+  assert.equal((queue.match(/needs\.plan\.result == 'success'/g) || []).length, 4);
+  assert.equal((queue.match(/retention_ms: "1209600000"/g) || []).length, 4);
 });
 
 test("Japan marker pushes continue accumulation while explicit dispatch remains the reset path", () => {
@@ -99,4 +100,20 @@ test("Japan marker pushes continue accumulation while explicit dispatch remains 
   assert.match(workflow, /workflow_dispatch:/);
   assert.match(workflow, /\.github\/market-runs\/japan/);
   assert.match(workflow, /^\s+reset_cursor: \$\{\{ github\.event_name == 'workflow_dispatch' \}\}$/m);
+});
+
+test("independent China owns its accepted-state entry and has no legacy automatic followers", () => {
+ const daily=text('catalog-refresh-china.yml');
+ assert.match(daily,/group: catalog-next-china/);
+ assert.match(daily,/daily-entry\.mjs --run/);
+ assert.doesNotMatch(daily,/catalog-market-refresh|recover_existing_intake|catalog-download-owned-china/);
+ for(const file of ['catalog-prepare-owned-china.yml','stage-owned-china-generation.yml','accept-owned-china-generation.yml','catalog-che168-verify-publication.yml','catalog-v2-china.yml'])
+  assert.equal(fs.existsSync(path.join(root,file)),false);
+ assert.doesNotMatch(text('catalog-source-intake.yml'),/market: \[[^\]\n]*\bchina\b/);
+ assert.doesNotMatch(text('catalog-market-marker-merge.yml'),/china/);
+ for(const file of ['regcloud-overview.yml','backfill-budget-count-index.yml','catalog-translate-descriptions.yml','catalog-budget-shared-warmup.yml']){
+  const followers=text(file).match(/^    workflows: \[[^\n]+\]$/m)?.[0]; assert.ok(followers);
+  assert.doesNotMatch(followers,/Catalog refresh china|Verify committed Che168 publication/);
+  assert.match(followers,/Catalog refresh korea/);
+ }
 });

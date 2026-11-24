@@ -38,12 +38,12 @@ test('owner-enabled background source remains runnable; disabled market stays st
  assert.equal((await plan('korea',['encar_direct'],'schedule',true,false)).values.run,'false');
  assert.equal((await plan('korea',[])).values.run,'false');
 });
-test('paid China and UAE workers retain their existing routes',async()=>{
- assert.equal((await plan('china',['che168_feed'],'schedule',false)).values.run,'true');
- assert.equal((await plan('china',['che168_feed','ajes_china_feed'],'schedule',false)).values.run,'true');
+test('the legacy worker rejects China while paid UAE keeps its route',async()=>{
+ for(const event of ['schedule','push','workflow_dispatch']) for(const enabled of [['che168_feed'],['che168_feed','ajes_china_feed'],['ajes_china_feed']])
+  await assert.rejects(plan('china',enabled,event,false),/invalid_market/);
  assert.equal((await plan('uae',['dubicars_feed'])).values.run,'true');
- assert.equal((await plan('china',['ajes_china_feed'])).values.run,'false');
 });
+
 test('market cadence and explicit dispatch semantics are preserved',async()=>{
  assert.equal((await plan('korea',['encar_direct'],'schedule',false)).values.run,'false');
  assert.equal((await plan('korea',['encar_direct'],'workflow_dispatch',false)).values.run,'true');
@@ -74,37 +74,27 @@ test('prepared paid Korea cannot overlay parser collection through an old push m
  await assert.rejects(plan('korea',['encar_feed'],'push',true,true,{PREPARED_ENCAR_RUN:'400'},{refreshMarkets:['korea']}),/prepared_encar_collection_overlay_forbidden/);
 });
 
-test('daily China uses the reviewed frozen publisher without changing other market checkout selection',()=>{
- const pin='bb6317bffd1f7b1832681ac78378fe6c3e39e3b5';
- const before=workflow.slice(0,workflow.indexOf('  publish:\n')),publish=workflow.slice(workflow.indexOf('  publish:\n'));
- assert.ok(!before.includes('CHINA_APPROVED_PUBLISHER_SHA')&&!before.includes(pin));
- assert.ok(publish.includes(`ref: \${{ matrix.market == 'china' && '${pin}' || (inputs.prepared_encar_run && github.sha || github.event.workflow_run.head_sha || github.sha) }}`));
- assert.ok(publish.includes(`CHINA_APPROVED_PUBLISHER_SHA: \${{ matrix.market == 'china' && '${pin}' || '' }}`));
- assert.ok(publish.includes(`CATALOG_CHUNKED_PROJECTIONS_WRITE: \${{ matrix.market == 'china' && '1' || '0' }}`));
+test('the legacy publisher has no China checkout or collection while other market source selection remains unchanged',()=>{
+ assert.doesNotMatch(workflow,/bb6317|CHINA_APPROVED_PUBLISHER_SHA|che168|china-guarded-cursor|matrix\.market == 'china'/i);
+ const publish=workflow.slice(workflow.indexOf('  publish:\n'));
+ assert.ok(publish.includes('ref: ${{ inputs.prepared_encar_run && github.sha || github.event.workflow_run.head_sha || github.sha }}'));
+ assert.ok(publish.includes('CATALOG_CHUNKED_PROJECTIONS_WRITE: "0"'));
  assert.ok(publish.includes('CATALOG_CHUNKED_ALL_PROJECTION_WRITE: "1"'));
 });
 
-test('daily China serving mismatch fails before recovery, archive, cursor or even outcome storage writes',()=>{
+test('the remaining markets keep the serving calculator, storage guards and their original cursor handoff',()=>{
  const publish=workflow.slice(workflow.indexOf('  publish:\n'));
- const gate=publish.indexOf('run: node --import tsx scripts/verify-china-publisher-source.mjs');
- assert.ok(gate>publish.indexOf('- run: npm ci'));
- for(const later of ['scripts/catalog-auto-api-che168-recover.mjs','scripts/catalog-archive-intake.mjs restore-for-publication','scripts/catalog-publish-market.mjs','scripts/catalog-commit-intake-cursor.mjs']) assert.ok(publish.indexOf(later)>gate);
- assert.match(publish,/id: china_publisher_source\n        if: matrix.market == 'china'/);
- assert.ok(publish.includes("if: always() && (matrix.market != 'china' || steps.china_publisher_source.conclusion == 'success')"));
+ for(const required of ['scripts/catalog-archive-intake.mjs restore-for-publication','scripts/catalog-publish-market.mjs','scripts/catalog-commit-intake-cursor.mjs','scripts/catalog-storage-preflight.mjs']) assert.ok(publish.includes(required));
  assert.ok(publish.includes('run: node scripts/catalog-budget-runtime.mjs --resolve'));
  assert.ok(publish.includes('ref: ${{ steps.budget_runtime.outputs.release }}'));
  assert.ok(publish.includes('CATALOG_BUDGET_RUNTIME_ROOT: ${{ github.workspace }}/.catalog-serving-runtime'));
 });
 
-test('China daily cursor uses the same lease and conditional write wrapper while other markets retain their CLI',()=>{
- const p=workflow.slice(workflow.indexOf('  publish:\n'));
- assert.ok(p.includes('cursor_existing_etag_required'));
- assert.ok(p.includes("const key='catalog/import-lock.json'"));
- assert.ok(p.includes("before.found?{ifMatch:before.etag}:{ifNoneMatch:'*'}"));
- assert.ok(p.includes('node --import tsx "$RUNNER_TEMP/china-guarded-cursor.mjs"'));
- assert.ok(p.includes('node --import tsx scripts/catalog-commit-intake-cursor.mjs'));
+test('the legacy source planner rejects China before storage access',async()=>{
+ const market=body.indexOf("const market = process.env.TARGET_MARKET;");
+ const guard=body.indexOf("if (!['korea','uae','georgia','europe'].includes(market))");
+ assert.ok(market>=0&&guard>market&&guard<body.indexOf('await readCollectionControls()'));
 });
-
 
 test('saved paid producer is bound to its original source and never collects again',async()=>{
  const saved={...sameRun,PREPARED_ENCAR_SELF:'false',PREPARED_ENCAR_RUN:'400',PREPARED_ENCAR_SOURCE_SHA:'b'.repeat(40)};

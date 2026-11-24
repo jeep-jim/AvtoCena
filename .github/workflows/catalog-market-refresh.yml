@@ -39,8 +39,6 @@ jobs:
       publish_markets: ${{ steps.policy.outputs.publish_markets }}
       publish_matrix: ${{ steps.policy.outputs.publish_matrix }}
       reset_cursors: ${{ steps.policy.outputs.reset_cursors }}
-      recover_paid_snapshot: ${{ steps.policy.outputs.recover_paid_snapshot }}
-      autohome_reuse_run_id: ${{ steps.policy.outputs.autohome_reuse_run_id }}
     env:
       JSON_STORAGE_DRIVER: object
       YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
@@ -76,8 +74,9 @@ jobs:
           import {paidEncarBindingFromWorkflow} from './scripts/lib/paid-encar-artifact-binding.mjs';
           const {readCollectionControls}=await import('./apps/web/lib/catalog/collection-controls.ts');
           const {collectionMarketEnabled,collectionWorkflowEnabled}=await import('./apps/web/lib/catalog/collection-controls-schema.ts');
-          const controls=await readCollectionControls();
           const market = process.env.TARGET_MARKET;
+          if (!['korea','uae','georgia','europe'].includes(market)) throw Error('invalid_market');
+          const controls=await readCollectionControls();
           const policy = JSON.parse(fs.readFileSync('data/catalog/refresh-policy-v1.json','utf8'));
           // AJ System is served on demand and does not produce this worker's intake.
           const paused = Boolean(policy.pausedMarkets?.[market]) || !collectionMarketEnabled(controls,market) || !collectionWorkflowEnabled(controls,market);
@@ -88,15 +87,11 @@ jobs:
           if (paused) console.log(`Market refresh paused: ${market}: ${policy.pausedMarkets?.[market] || 'no_enabled_background_source'}`);
           const marker = process.env.EVENT_NAME === 'push' ? JSON.parse(fs.readFileSync(`.github/market-runs/${market}-refresh.json`,'utf8')) : {};
           if (preparedEncar && marker.refreshMarkets?.length) throw Error('prepared_encar_collection_overlay_forbidden');
-          if (!['china','korea','uae','georgia','europe'].includes(market)) throw Error('invalid_market');
           const reuse = preparedEncar || marker.reuseRunId || '';
-          const autohomeReuse = marker.autohomeReuseRunId || '';
-          if (autohomeReuse && (market !== 'china' || String(autohomeReuse) !== '37907216966' || reuse)) throw Error('invalid_autohome_reuse');
-          fs.appendFileSync(process.env.GITHUB_OUTPUT,`autohome_reuse_run_id=${autohomeReuse}\n`);
+          if (marker.autohomeReuseRunId) throw Error('invalid_autohome_reuse');
           fs.appendFileSync(process.env.GITHUB_OUTPUT,`reset_cursors=${marker.resetCursors === true}\n`);
           if (reuse && !/^\d+$/.test(String(reuse))) throw Error('invalid_reuse_run_id');
-          if (marker.recoverPaidSnapshot && (!reuse || market !== 'china')) throw Error('invalid_paid_snapshot_recovery');
-          fs.appendFileSync(process.env.GITHUB_OUTPUT,`recover_paid_snapshot=${marker.recoverPaidSnapshot === true}\n`);
+          if (marker.recoverPaidSnapshot) throw Error('invalid_paid_snapshot_recovery');
           const allowed = [market];
           const publish = marker.publishMarkets || allowed;
           if (!Array.isArray(publish) || !publish.length || publish.some(market => !allowed.includes(market)) || new Set(publish).size !== publish.length) throw Error('invalid_publish_markets');
@@ -121,10 +116,9 @@ jobs:
       matrix:
         market: ${{ fromJSON(needs.plan.outputs.collect_markets) }}
     env:
-      MARKET_RATE_RUN: ${{ matrix.market != 'china' && github.run_id || '' }}
+      MARKET_RATE_RUN: ${{ github.run_id }}
       CATALOG_INTAKE_MARKET: ${{ matrix.market }}
       AUTO_API_DUBICARS_KEY: ${{ matrix.market == 'uae' && secrets.AUTO_API_DUBICARS_KEY || '' }}
-      AUTO_API_CHE168_KEY: ${{ matrix.market == 'china' && secrets.AUTO_API_CHE168_KEY || '' }}
       # Fresh owner markers start at page 1. Subsequent budget slices resume only
       # committed cursors; access failures are never resumed past the refusal.
       CATALOG_INTAKE_RESUME: ${{ needs.plan.outputs.reset_cursors != 'true' && '1' || '0' }}
@@ -178,42 +172,12 @@ jobs:
       - name: Read owner source switches before provider access
         id: sources
         run: node --import tsx scripts/catalog-collection-plan.mjs
-      - name: Preserve the complete Che168 file in private storage
-        if: steps.sources.outputs.feed == 'true'
-        run: node "$RUNNER_TEMP/avtocena-node-resources/scripts/run-node-with-resources.mjs" --import tsx scripts/catalog-che168-snapshot-archive.mjs
-      - name: Verify paid Che168 access before collection
-        if: steps.sources.outputs.feed == 'true'
-        run: |
-          node --import tsx --input-type=module <<'JS'
-          const {assertCollectionEnabled}=await import('./apps/web/lib/catalog/collection-controls.ts');
-          await assertCollectionEnabled('che168_feed');
-          import {autoApiChe168Client, autoApiPage} from './scripts/lib/auto-api-che168-client.mjs';
-          const request = autoApiChe168Client({apiKey:process.env.AUTO_API_CHE168_KEY});
-          const page = autoApiPage(await request('offers', {page:1, year_from:new Date(Date.now()+7*3600000).getUTCFullYear()-6}), 1);
-          if (!page.items.length) throw Error('auto_api_empty_preflight');
-          console.log(JSON.stringify({provider:'auto_api_che168',access:'ok',sampleRows:page.items.length}));
-          JS
-      - name: Restore the verified same-day Autohome collection
-        if: steps.sources.outputs.feed == 'true' && needs.plan.outputs.autohome_reuse_run_id != ''
-        uses: actions/download-artifact@v4
-        with:
-          name: catalog-intake-china
-          path: autohome-saved-intake
-          run-id: ${{ needs.plan.outputs.autohome_reuse_run_id }}
-          github-token: ${{ github.token }}
-      - name: Validate only saved Autohome observations before reuse
-        if: steps.sources.outputs.feed == 'true' && needs.plan.outputs.autohome_reuse_run_id != ''
-        run: node "$RUNNER_TEMP/avtocena-node-resources/scripts/run-node-with-resources.mjs" --import tsx scripts/catalog-restore-autohome-intake.mjs
       - name: Collect listing, exact detail and technical tables
         if: steps.sources.outputs.parsers != ''
         env:
-          # China HTML sources require the owner switch; never fallback on feed failure.
           CATALOG_INTAKE_SOURCE_IDS: ${{ steps.sources.outputs.parsers }}
-          CATALOG_INTAKE_TIME_MS: ${{ matrix.market == 'china' && '1800000' || matrix.market == 'korea' && '18000000' || '12600000' }}
+          CATALOG_INTAKE_TIME_MS: ${{ matrix.market == 'korea' && '18000000' || '12600000' }}
         run: node "$RUNNER_TEMP/avtocena-node-resources/scripts/run-node-with-resources.mjs" --import tsx scripts/catalog-source-intake.mjs
-      - name: Sync Che168 from the complete CSV and then only committed changes
-        if: steps.sources.outputs.feed == 'true'
-        run: node "$RUNNER_TEMP/avtocena-node-resources/scripts/run-node-with-resources.mjs" --import tsx scripts/catalog-auto-api-che168-bulk-intake.mjs
       - name: Sync all Dubicars through the paid API
         if: steps.sources.outputs.dubicars_feed == 'true'
         run: node "$RUNNER_TEMP/avtocena-node-resources/scripts/run-node-with-resources.mjs" --import tsx scripts/catalog-auto-api-dubicars-intake.mjs
@@ -232,8 +196,6 @@ jobs:
           retention-days: 14
   publish:
     needs: [plan, collect]
-    # Paid China must finish both snapshot and changes. A refusal, exhausted
-    # budget or schema drift cannot publish a partially collected paid feed.
     if: always() && needs.plan.outputs.run == 'true' && needs.collect.result != 'cancelled' && (needs.collect.result == 'success' || (needs.collect.result == 'skipped' && needs.plan.outputs.reuse_run_id != ''))
     environment: regcloud-staging
     runs-on: ubuntu-latest
@@ -246,7 +208,6 @@ jobs:
       matrix:
         market: ${{ fromJSON(needs.plan.outputs.publish_matrix) }}
     env:
-      CHINA_APPROVED_PUBLISHER_SHA: ${{ matrix.market == 'china' && 'bb6317bffd1f7b1832681ac78378fe6c3e39e3b5' || '' }}
       JSON_STORAGE_DRIVER: object
       YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
       YC_OBJECT_STORAGE_REGION: us-east-1
@@ -255,7 +216,7 @@ jobs:
       YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
       YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
       CATALOG_IMAGE_CDN_URL: ${{ secrets.CATALOG_IMAGE_CDN_URL }}
-      MARKET_RATE_RUN: ${{ matrix.market != 'china' && (needs.plan.outputs.reuse_run_id || github.run_id) || '' }}
+      MARKET_RATE_RUN: ${{ needs.plan.outputs.reuse_run_id || github.run_id }}
       CATALOG_SELLER_INVENTORY: '1'
       CATALOG_IMAGE_STORAGE_MODE: source_urls_only
       CATALOG_PUBLICATION_DRY_RUN: '0'
@@ -269,8 +230,8 @@ jobs:
       CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: '1'
       CATALOG_PRIORITY_MAX_TOTAL_RUB: '15000000'
       CATALOG_V2_PRIORITY_TARGET: '8000'
-      CATALOG_PUBLISH_PREPARE_CONCURRENCY: ${{ matrix.market == 'china' && '2' || '4' }}
-      CATALOG_READ_CONCURRENCY: ${{ matrix.market == 'china' && '2' || '4' }}
+      CATALOG_PUBLISH_PREPARE_CONCURRENCY: '4'
+      CATALOG_READ_CONCURRENCY: '4'
       CATALOG_INDEX_WRITE_CONCURRENCY: '8'
       CATALOG_PUBLISH_LOCK_WAIT_MS: '14400000'
       CATALOG_PUBLISH_LOCK_TTL_MS: '1800000'
@@ -299,60 +260,12 @@ jobs:
           rm -rf -- publication-resource-controller
       - uses: actions/checkout@v4
         with:
-          ref: ${{ matrix.market == 'china' && 'bb6317bffd1f7b1832681ac78378fe6c3e39e3b5' || (inputs.prepared_encar_run && github.sha || github.event.workflow_run.head_sha || github.sha) }}
+          ref: ${{ inputs.prepared_encar_run && github.sha || github.event.workflow_run.head_sha || github.sha }}
       - uses: actions/setup-node@v4
         with:
           node-version: 24
           cache: npm
       - run: npm ci
-      - name: Verify frozen China publisher and actual serving compatibility before writes
-        id: china_publisher_source
-        if: matrix.market == 'china'
-        run: node --import tsx scripts/verify-china-publisher-source.mjs
-      - name: Record daily scheduler state without requesting collection
-        if: matrix.market == 'china'
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          gh api repos/jeep-jim/AvtoCena/actions/workflows/363942888 > china-daily-workflow-state.json
-          gh api 'repos/jeep-jim/AvtoCena/actions/workflows/363942888/runs?event=schedule&per_page=20' > china-daily-scheduled-runs.json
-          WORKFLOW_PATH=$(python -c "import json;print(json.load(open('china-daily-workflow-state.json'))['path'])")
-          test -n "$WORKFLOW_PATH"
-          gh api "repos/jeep-jim/AvtoCena/contents/$WORKFLOW_PATH?ref=main" > china-daily-controller-source.json
-      - name: Prepare guarded China cursor handoff
-        if: matrix.market == 'china'
-        run: |
-          cat > "$RUNNER_TEMP/china-guarded-cursor.mjs" <<'CURSOR_CODE'
-          import assert from 'node:assert/strict';
-          export async function guardedCursor({storage,mutate,generationId,operationId,commit,now=Date.now}) {
-           const key='catalog/import-lock.json',cursor='catalog/intake-cursors/v1/china.json',ttl=30*60*1000;
-           let owned=false;
-           try {
-            await mutate(key,{lockedUntil:''},current=>{assert.ok(!(Date.parse(current?.lockedUntil||'')>now()),'cursor_import_lock_busy');return {operationId,operationType:'china_saved_cursor',lockedUntil:new Date(now()+ttl).toISOString()};});owned=true;
-            const before=await storage.readJsonWithMeta(cursor,null);
-            assert.ok(!before.found || (typeof before.etag==='string'&&before.etag.length>0),'cursor_existing_etag_required');
-            async function verify(){const lock=await storage.readJson(key,null);assert.equal(lock?.operationId,operationId,'cursor_import_lock_lost');assert.ok(Date.parse(lock.lockedUntil)>now()+600000,'cursor_lease_too_short');assert.equal((await storage.readJson('catalog/manifest.json',null))?.generationId,generationId,'cursor_generation_changed');}
-            await verify();
-            const guarded=new Proxy(storage,{get(target,property){if(property==='writeJson')return async(path,value,options)=>{assert.equal(path,cursor,'cursor_unexpected_write');assert.ok(Buffer.byteLength(JSON.stringify(value))<=1048576,'cursor_body_limit');await verify();return target.writeJson(path,value,before.found?{ifMatch:before.etag}:{ifNoneMatch:'*'});};const value=target[property];return typeof value==='function'?value.bind(target):value;}});
-            return await commit(guarded);
-           } finally {if(owned)await mutate(key,{lockedUntil:''},current=>current?.operationId===operationId?{...current,lockedUntil:'',finishedAt:new Date(now()).toISOString()}:current);}
-          }
-          if(process.argv[1]===new URL(import.meta.url).pathname){
-           assert.equal(process.env.YC_OBJECT_STORAGE_REQUEST_TIMEOUT_MS,'30000');assert.equal(process.env.YC_OBJECT_STORAGE_MAX_ATTEMPTS,'3');
-           const fs=await import('node:fs/promises'),{pathToFileURL}=await import('node:url'),path=await import('node:path');
-           const load=p=>import(pathToFileURL(path.resolve(p)).href);
-           const {getJsonStorage,mutateDataJson}=await load('apps/web/lib/data.ts');
-           const {publishedIntakeCheckpoint}=await load('scripts/lib/catalog-intake-checkpoint.mjs');
-           const {attachIntakeArchiveReceipt,INTAKE_ARCHIVE_RECEIPT}=await load('scripts/lib/nonjp-intake-archive.mjs');
-           const {commitCoordinatedIntakeCursor}=await load('scripts/lib/catalog-raw-cursor.mjs');
-           assert.equal(process.env.CATALOG_REBUILD_MARKETS,'china');
-           const root=path.join(process.env.CATALOG_INTAKE_INPUT_DIR||'catalog-intake-input','catalog-intake-china');
-           const intake=attachIntakeArchiveReceipt(JSON.parse(await fs.readFile(path.join(root,'report.json'),'utf8')),JSON.parse(await fs.readFile(path.join(root,INTAKE_ARCHIVE_RECEIPT),'utf8')));
-           const publication=JSON.parse(await fs.readFile(process.env.CATALOG_REBUILD_PUBLISH_REPORT,'utf8')),checkpoint=publishedIntakeCheckpoint(intake,publication);
-           const outcome=await guardedCursor({storage:getJsonStorage(),mutate:mutateDataJson,generationId:checkpoint.generationId,operationId:`china-cursor-${process.env.GITHUB_RUN_ID}-${process.env.GITHUB_RUN_ATTEMPT}`,commit:storage=>commitCoordinatedIntakeCursor({storage,intake,publication,checkpoint})});
-           console.log(JSON.stringify({market:'china',generationId:checkpoint.generationId,...outcome}));
-          }
-          CURSOR_CODE
       - name: Provide disk-backed working memory for each publication worker
         shell: bash
         run: |
@@ -444,17 +357,6 @@ jobs:
         with:
           pattern: catalog-intake-${{ matrix.market }}
           path: catalog-intake-input
-      - name: Check reserve before durable Che168 recovery
-        if: needs.plan.outputs.recover_paid_snapshot == 'true' && matrix.market == 'china'
-        env:
-          CATALOG_REBUILD_INPUT_DIR: catalog-intake-input
-        run: node scripts/run-transient-retry.mjs node --import tsx scripts/catalog-storage-preflight.mjs
-      - name: Validate and recover completed legacy paid snapshot
-        if: needs.plan.outputs.recover_paid_snapshot == 'true' && matrix.market == 'china'
-        env:
-          AUTO_API_CHE168_KEY: ${{ secrets.AUTO_API_CHE168_KEY }}
-          CHE168_RECOVERY_ARTIFACT_RUN_ID: ${{ needs.plan.outputs.reuse_run_id }}
-        run: node "$RUNNER_TEMP/avtocena-node-resources/scripts/run-node-with-resources.mjs" --import tsx scripts/catalog-auto-api-che168-recover.mjs
       - name: Verify prepared paid Encar inventory and current CRM switch
         if: inputs.prepared_encar_run != ''
         env:
@@ -485,9 +387,6 @@ jobs:
       - name: Check bucket reserve without deleting objects
         if: matrix.market == 'japan'
         run: node scripts/run-transient-retry.mjs node --import tsx scripts/catalog-storage-preflight.mjs
-      - name: Verify China intake and final publication year boundaries
-        if: matrix.market == 'china'
-        run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/china-year-policy.test.ts tests/catalog-auto-api-che168.test.ts
       - name: Verify atomic dated catalog pages before publication
         env:
           JSON_STORAGE_DRIVER: local
@@ -529,7 +428,7 @@ jobs:
           # Reader deployed and health-verified in f4d7d22 (23 October 2026).
           # Keep the common projection below V8's single-string size limit.
           CATALOG_CHUNKED_ALL_PROJECTION_WRITE: "1"
-          CATALOG_CHUNKED_PROJECTIONS_WRITE: ${{ matrix.market == 'china' && '1' || '0' }}
+          CATALOG_CHUNKED_PROJECTIONS_WRITE: "0"
           # Full publication index is much larger than request-time shards.
           YC_OBJECT_STORAGE_REQUEST_TIMEOUT_MS: "300000"
           CATALOG_PUBLISH_MARKETS: ${{ matrix.market }}
@@ -541,18 +440,14 @@ jobs:
             export CATALOG_REBUILD_MARKETS="$market"
             export CATALOG_REBUILD_PUBLISH_REPORT="catalog-weekly-$market-publish-report.json"
             if node scripts/run-transient-retry.mjs node "$RUNNER_TEMP/avtocena-node-resources/scripts/run-node-with-resources.mjs" --import tsx scripts/catalog-publish-market.mjs; then
-              if [ "${{ matrix.market }}" = china ]; then
-                env YC_OBJECT_STORAGE_REQUEST_TIMEOUT_MS=30000 YC_OBJECT_STORAGE_MAX_ATTEMPTS=3 timeout --signal=TERM --kill-after=10s 600s node --import tsx "$RUNNER_TEMP/china-guarded-cursor.mjs" || failures=$((failures + 1))
-              else
-                node --import tsx scripts/catalog-commit-intake-cursor.mjs || failures=$((failures + 1))
-              fi
+              node --import tsx scripts/catalog-commit-intake-cursor.mjs || failures=$((failures + 1))
             else
               failures=$((failures + 1))
             fi
           done
           test "$failures" -eq 0
       - name: Record collection and publication outcome even after failure
-        if: always() && (matrix.market != 'china' || steps.china_publisher_source.conclusion == 'success')
+        if: always()
         env:
           CATALOG_REBUILD_MARKETS: ${{ matrix.market }}
           CATALOG_REBUILD_PUBLISH_REPORT: catalog-weekly-${{ matrix.market }}-publish-report.json
@@ -572,14 +467,12 @@ jobs:
             catalog-storage-preflight.json
             catalog-visible-calculation-coverage.json
             catalog-staged-budget-report.json
-            china-source-preflight.json
-            china-daily-*.json
           overwrite: true
           retention-days: 14
 
   cleanup_old_market:
     needs: publish
-    if: needs.publish.result == 'success' && contains(fromJSON('["china","korea","uae","europe","georgia"]'), inputs.market)
+    if: needs.publish.result == 'success' && contains(fromJSON('["korea","uae","europe","georgia"]'), inputs.market)
     uses: ./.github/workflows/reg-daily-retention.yml
     with:
       published_market: ${{ inputs.market }}

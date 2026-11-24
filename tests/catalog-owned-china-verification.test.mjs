@@ -77,13 +77,10 @@ test('missing terminal, incomplete pages, wrong census, changed receipts and mis
  await assert.rejects(verifyOwnedChinaDownload(f.storage,owner),/receipt_digest/);
 });
 
-test('published-generation verification stays mandatory for recovery, while mirrors require their own verifier',async()=>{
- const {readFile}=await import('node:fs/promises');
- const yaml=await readFile(new URL('../.github/workflows/catalog-che168-verify-publication.yml',import.meta.url),'utf8');
- assert.match(yaml,/ref: \$\{\{ github\.sha \}\}/);
- assert.doesNotMatch(yaml,/ref: \$\{\{ github\.event\.workflow_run\.head_sha \}\}/);
- assert.match(yaml,/node --import tsx scripts\/catalog-verify-owned-china\.mjs/);
- assert.match(yaml,/uses: actions\/download-artifact@v4\n\s+if: steps\.operation\.outputs\.mode == 'publication'/);
- assert.match(yaml,/name: Verify active generation and committed feed cursor\n\s+if: steps\.operation\.outputs\.mode == 'publication'/);
- assert.doesNotMatch(yaml,/continue-on-error:\s*true/);
+test('legacy publication verifier is retired after the independent daily entry replaces its mirror workflow',async()=>{
+ const {readFile,stat}=await import('node:fs/promises');
+ await assert.rejects(stat(new URL('../.github/workflows/catalog-che168-verify-publication.yml',import.meta.url)),{code:'ENOENT'});
+ const yaml=await readFile(new URL('../.github/workflows/catalog-refresh-china.yml',import.meta.url),'utf8');
+ assert.match(yaml,/daily-entry\.mjs --run/);
+ assert.doesNotMatch(yaml,/catalog-verify-owned-china|recover_existing_intake/);
 });
