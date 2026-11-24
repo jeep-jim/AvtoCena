@@ -32,7 +32,7 @@ async function fixture(t) {
   const servingPlan = () => ({version: 1, market: 'china', runtimeSha: git(['rev-parse', 'HEAD']).trim(),
     runtimeTree: git(['rev-parse', 'HEAD^{tree}']).trim(), pricingRuntimeSha: pricingPlan.runtimeSha,
     pricingRuntimeTree: pricingPlan.runtimeTree,
-    pricingToServingDiffSha256: hash(git(['diff', '--binary', '--no-ext-diff', '--no-renames', pricingPlan.runtimeSha, 'HEAD'])),
+    pricingToServingDiffSha256: hash(git(['diff', '--binary', '--full-index', '--no-ext-diff', '--no-renames', pricingPlan.runtimeSha, 'HEAD'])),
     pricingToServingFiles: git(['diff', '--name-only', '--no-renames', pricingPlan.runtimeSha, 'HEAD']).trim().split('\n').filter(Boolean)});
   return {runtimeRoot, git, write, commit, pricingPlan, servingPlan};
 }
@@ -61,6 +61,44 @@ test('an exact descendant may change only the reviewed serving readers and targe
     'apps/web/lib/catalog/storage.ts', 'tests/catalog-next-home.test.ts']);
   assert.equal(proof.pricingRuntimeSha, f.pricingPlan.runtimeSha);
   assert.equal(proof.protectedPricingPathsUnchanged, true);
+});
+
+test('canonical serving bytes verify across short and full Git abbreviations without changing source', async t => {
+  const f = await fixture(t);
+  await f.write('apps/web/lib/catalog/storage.ts', 'reviewed independent reader\n'); f.commit();
+  const source = f.git(['ls-files', '--stage']);
+  f.git(['config', 'core.abbrev', '7']);
+  const plan = f.servingPlan();
+  const abbreviated = hash(f.git(['diff', '--binary', '--no-ext-diff', '--no-renames',
+    f.pricingPlan.runtimeSha, plan.runtimeSha]));
+  assert.notEqual(abbreviated, plan.pricingToServingDiffSha256);
+  for (const abbreviation of ['40', '7']) {
+    f.git(['config', 'core.abbrev', abbreviation]);
+    assert.deepEqual(f.servingPlan(), plan);
+    const proof = await verifyServingCompatibility({...f, servingPlan: plan});
+    assert.equal(proof.pricingToServingDiffSha256, plan.pricingToServingDiffSha256);
+    assert.deepEqual(proof.pricingToServingFiles, plan.pricingToServingFiles);
+    await assert.rejects(verifyServingCompatibility({...f,
+      servingPlan: {...plan, pricingToServingDiffSha256: abbreviated}}), /china_serving_changed_bytes/);
+    assert.equal(f.git(['ls-files', '--stage']), source);
+    assert.equal(f.git(['status', '--porcelain']), '');
+  }
+});
+
+test('changed serving bytes in the same files cannot reuse a reviewed canonical digest', async t => {
+  const f = await fixture(t);
+  f.git(['config', 'core.abbrev', '7']);
+  await f.write('apps/web/lib/catalog/storage.ts', 'reviewed independent reader\n'); f.commit();
+  const reviewed = f.servingPlan();
+  await f.write('apps/web/lib/catalog/storage.ts', 'different committed reader\n'); f.commit();
+  f.git(['config', 'core.abbrev', '40']);
+  const changed = f.servingPlan();
+  assert.deepEqual(changed.pricingToServingFiles, reviewed.pricingToServingFiles);
+  assert.notEqual(changed.runtimeSha, reviewed.runtimeSha);
+  assert.notEqual(changed.runtimeTree, reviewed.runtimeTree);
+  assert.notEqual(changed.pricingToServingDiffSha256, reviewed.pricingToServingDiffSha256);
+  await assert.rejects(verifyServingCompatibility({...f, servingPlan: {...changed,
+    pricingToServingDiffSha256: reviewed.pricingToServingDiffSha256}}), /china_serving_changed_bytes/);
 });
 
 test('the exact range-control component and its isolated browser fixture may preserve prepared pricing', async t => {

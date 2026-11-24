@@ -58,7 +58,7 @@ FAILED_UPLOAD_TARGETS = (
      'rollbackSha256': 'b26506fabb43efa22e8b38c8163e8f0098a775d0ca33c8e3259124b0b5ce7f28'},
 )
 FAILED_UPLOAD_BULK_FILES = ('details.sqlite', 'query.sqlite', 'DISPOSITIONS.ndjson', 'image.tar')
-FAILED_WITNESS_ACCEPTED_RUNTIME = '1518035b9e6b717cd364ae8d13e63d0127899112'
+FAILED_WITNESS_ACCEPTED_RUNTIME = '99c45a3b5d8439bbc1ee34702ba41340ada08125'
 FAILED_WITNESS_TARGETS = (FAILED_UPLOAD_WITNESS, {
     **FAILED_UPLOAD_WITNESS,
     'runtimeSha': '860e1ff601c6852eb3b1474982e52e3a5300c4af',
@@ -66,8 +66,36 @@ FAILED_WITNESS_TARGETS = (FAILED_UPLOAD_WITNESS, {
     'planSha256': '27888989f2a0e90e235f7a497fcce912ece493e9f5add5c40005e02ad991d9b2',
     'rollbackSha256': 'd550834e33b9cd9bf9b1be10c4c8f5358563d6aa56b2ba87794c9d5df9fdb5dd',
     'imageId': 'sha256:3c0389d7fcd0986a850d2f87c3259a75bddff3b0090ed0aef56eb1e190ef2238',
+}, {
+    **FAILED_UPLOAD_WITNESS,
+    'runtimeSha': '1518035b9e6b717cd364ae8d13e63d0127899112',
+    'nonce': '92ec4a21446a23bed345fd789b2b3cc5',
+    'planSha256': '2b038c3566322b7be1f4e622716b8aed85e6e318fd323d31098db05dbb469964',
+    'rollbackSha256': '6f86011baf31bf183c5b156586b4c9b8a6aa22a0648c2d5f3de4c6f6e57538e9',
+    'imageId': 'sha256:0a1d136f6b292f9d027354fe8db3c14e12079e689e3f7b5773a7b014860213ea',
 })
-FAILED_WITNESS_BULK_BYTES = (13041560320, 13041559296)
+FAILED_WITNESS_BULK_BYTES = (13041560320, 13041559296, 13041561344)
+RESOLVED_CLEANUP_WITNESS = {
+    **FAILED_UPLOAD_WITNESS,
+    'runtimeSha': '1518035b9e6b717cd364ae8d13e63d0127899112',
+    'nonce': '92ec4a21446a23bed345fd789b2b3cc5',
+    'planSha256': '2b038c3566322b7be1f4e622716b8aed85e6e318fd323d31098db05dbb469964',
+    'rollbackSha256': '6f86011baf31bf183c5b156586b4c9b8a6aa22a0648c2d5f3de4c6f6e57538e9',
+    'imageId': 'sha256:0a1d136f6b292f9d027354fe8db3c14e12079e689e3f7b5773a7b014860213ea',
+}
+RESOLVED_CLEANUP_TARGETS = tuple(dict(row) for row in FAILED_WITNESS_TARGETS[:2])
+RESOLVED_CLEANUP_BULK_BYTES = (13041560320, 13041559296)
+
+# Diagnostic bounds are independent of every acceptance route and threshold.
+# Only logs from the existing speed gate's candidate/window are read.
+HOME_TIMING_LOG_LINES = 2048
+HOME_TIMING_LOG_BYTES = 512 * 1024
+HOME_TIMING_ROWS = 512
+HOME_TIMING_CAPTURE_SECONDS = 5
+HOME_TIMING_PHASES = {'dealer', 'snapshot', 'counts', 'green', 'greenPricing', 'catalogPricing',
+                      'dealerRail', 'japanRail', 'snapshotContext', 'snapshotBody', 'snapshotPrepared',
+                      'snapshotManifest', 'snapshotOverview', 'snapshotProjection', 'snapshotEditorialPrepared'} | {
+                          'snapshotEditorial:' + market for market in ('china', 'japan', 'korea', 'uae', 'europe', 'georgia')}
 
 
 class ReleaseError(Exception):
@@ -141,6 +169,103 @@ def docker(method, target, body=None):
         need(len(raw) <= 16 * 1024 * 1024 and response.status in (200, 201, 204), 'docker_http_' + str(response.status))
         return json.loads(raw) if raw else None
     finally:
+        connection.close()
+
+
+class HomeTimingTimeout(Exception):
+    pass
+
+
+def home_timing_row(line):
+    """Copy only typed, bounded existing spans; never copy arbitrary log fields."""
+    if not line.startswith(b'home_phase ') or len(line) > 16 * 1024:
+        return None
+    try:
+        row = json.loads(line[len(b'home_phase '):])
+        if not isinstance(row, dict) or row.get('phase') not in HOME_TIMING_PHASES:
+            return None
+        if not isinstance(row.get('trace'), str) or not re.fullmatch(
+                r'[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}', row['trace']):
+            return None
+        if type(row.get('ms')) not in (int, float) or not math.isfinite(row['ms']) or not 0 <= row['ms'] <= 86400000 or type(row.get('ok')) is not bool:
+            return None
+        for key in ('policyDate', 'completedPolicyDate'):
+            if not isinstance(row.get(key), str) or not re.fullmatch(r'\d{4}-\d{2}-\d{2}', row[key]) or datetime.date.fromisoformat(row[key]).isoformat() != row[key]:
+                return None
+        clean = {key: row[key] for key in ('trace', 'phase', 'ms', 'ok', 'policyDate', 'completedPolicyDate')}
+        if isinstance(row.get('generation'), str) and re.fullmatch(r'gen_[0-9]{1,20}_[a-z0-9-]{1,80}', row['generation']):
+            clean['generation'] = row['generation']
+        return clean
+    except (ValueError, TypeError, OverflowError, RecursionError):
+        return None
+
+
+def home_timing_rows(raw):
+    """Decode bounded non-TTY Docker frames, including split/interleaved lines."""
+    limited = len(raw) > HOME_TIMING_LOG_BYTES
+    raw = raw[:HOME_TIMING_LOG_BYTES]
+    pending = {1: bytearray(), 2: bytearray()}
+    rows, lines, rejected, offset = [], 0, 0, 0
+    while offset < len(raw):
+        if len(raw) - offset < 8:
+            limited = True
+            break
+        header = raw[offset:offset + 8]
+        if header[0] not in pending or header[1:4] != b'\x00\x00\x00':
+            raise ValueError('home_timing_frame')
+        size = int.from_bytes(header[4:8], 'big')
+        offset += 8
+        if size > len(raw) - offset:
+            limited = True
+            break
+        stream = pending[header[0]]
+        stream.extend(raw[offset:offset + size])
+        offset += size
+        while b'\n' in stream:
+            line, _, remainder = stream.partition(b'\n')
+            stream[:] = remainder
+            if lines == HOME_TIMING_LOG_LINES or len(rows) == HOME_TIMING_ROWS:
+                limited = True
+                break
+            lines += 1
+            row = home_timing_row(bytes(line))
+            if row is not None:
+                rows.append(row)
+            elif line.startswith(b'home_phase '):
+                rejected += 1
+        if limited and (lines == HOME_TIMING_LOG_LINES or len(rows) == HOME_TIMING_ROWS):
+            break
+    limited = limited or lines == HOME_TIMING_LOG_LINES or len(rows) == HOME_TIMING_ROWS or any(pending.values())
+    return {'logBytes': len(raw), 'logLines': lines, 'rejectedRows': rejected, 'limited': limited, 'rows': rows}
+
+
+def capture_home_timing(candidate, since, plan):
+    """One read with a total wall-clock deadline, byte cap and Docker line cap."""
+    if not re.fullmatch(r'[a-f0-9]{64}', candidate or '') or type(since) is not int:
+        raise ValueError('home_timing_identity')
+    # Never replace an existing alarm (in particular the browser rollback timer).
+    if signal.getitimer(signal.ITIMER_REAL) != (0.0, 0.0):
+        return None
+    previous_handler = signal.getsignal(signal.SIGALRM)
+    def timeout(*_):
+        raise HomeTimingTimeout()
+    connection = Docker()
+    connection.timeout = HOME_TIMING_CAPTURE_SECONDS
+    try:
+        signal.signal(signal.SIGALRM, timeout)
+        signal.setitimer(signal.ITIMER_REAL, HOME_TIMING_CAPTURE_SECONDS)
+        target = '/containers/' + candidate + '/logs?' + urlencode({'stdout': 1, 'stderr': 1, 'follow': 0,
+            'timestamps': 0, 'tail': HOME_TIMING_LOG_LINES, 'since': since, 'until': int(time.time()) + 1})
+        connection.request('GET', target)
+        response = connection.getresponse()
+        if response.status != 200:
+            raise ValueError('home_timing_http')
+        result = home_timing_rows(response.read(HOME_TIMING_LOG_BYTES + 1))
+        return {'version': 1, 'kind': 'china-home-phase-timing-v1', 'runtimeSha': plan['runtimeSha'],
+                'nonce': plan['nonce'], **result}
+    finally:
+        signal.setitimer(signal.ITIMER_REAL, 0)
+        signal.signal(signal.SIGALRM, previous_handler)
         connection.close()
 
 
@@ -1121,14 +1246,14 @@ def prune_failed_uploads(params):
 
 
 def prune_failed_witness(params):
-    """Retire one of two fixed failed bulk copies after exact acceptance.
+    """Retire one of three fixed failed bulk copies after exact acceptance.
 
     Earlier 822 bulk copies must already be absent. All small proofs, the live
     accepted generation, retained 56, images and REG objects are preserved.
     """
     need(isinstance(params, dict) and set(params) == {'currentState', 'leaseExpiresAt', 'targetIndex'}, 'witness_parameters')
     target_index = params['targetIndex']
-    need(type(target_index) is int and target_index in (0, 1), 'witness_target')
+    need(type(target_index) is int and target_index in (0, 1, 2), 'witness_target')
     expiry = params.get('leaseExpiresAt')
     need(isinstance(expiry, str) and re.fullmatch(r'\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(?:\.\d{1,6})?Z', expiry), 'witness_lease')
     deadline = datetime.datetime.fromisoformat(expiry.replace('Z', '+00:00')).timestamp()
@@ -1225,6 +1350,16 @@ def prune_failed_witness(params):
             pending[filename] = (identity, descriptor)
         absent = len(absent_paths)
 
+        scopes = [directory, *(old_directory for old_directory, _ in earlier)]
+        # A Docker bind source may name an alias of a target, a bulk file or
+        # any ancestor (including above BASE). Resolved paths alone cannot
+        # establish that those inodes are unmounted.
+        mount_directories = {}
+        for scope in scopes:
+            for folder in (scope, scope / 'generation', *scope.parents):
+                info = folder.stat()
+                mount_directories[folder] = (info.st_dev, info.st_ino)
+
         def fence():
             need(time.time() < deadline, 'witness_lease_expired')
             regular(CONFIG, 1024 * 1024)
@@ -1255,9 +1390,15 @@ def prune_failed_witness(params):
             for filename, (identity, _) in pending.items():
                 need(reuse_file_identity(filename) == identity, 'witness_file_changed')
             need(all(not os.path.lexists(filename) for filename in absent_paths), 'witness_file_appeared')
+            for folder, expected in mount_directories.items():
+                info = folder.stat()
+                need((info.st_dev, info.st_ino) == expected, 'witness_directory_changed')
+            scope_ids = {mount_directories[scope] for scope in scopes}
+            watched_ids = set(mount_directories.values()) | {identity[:2] for identity, _ in pending.values()}
+            watched_ids.update(identity[:2] for identity in proof_identities.values())
+            watched_ids.update(identity[:2] for _, old_proofs in earlier for identity, _ in old_proofs.values())
             rows = docker('GET', '/containers/json?all=1')
             need(isinstance(rows, list) and len(rows) <= 1024, 'witness_containers')
-            scopes = [directory, *(old_directory for old_directory, _ in earlier)]
             nonces = {target['nonce'], *(old['nonce'] for old in FAILED_UPLOAD_TARGETS)}
             for item in rows:
                 row = docker('GET', '/containers/' + item['Id'] + '/json')
@@ -1270,6 +1411,11 @@ def prune_failed_witness(params):
                     mounted = Path(source).resolve()
                     need(all(mounted != scope and mounted not in scope.parents and scope not in mounted.parents for scope in scopes),
                          'witness_files_mounted')
+                    info = mounted.stat()
+                    need((info.st_dev, info.st_ino) not in watched_ids, 'witness_mount_inode_alias')
+                    for parent in mounted.parents:
+                        info = parent.stat()
+                        need((info.st_dev, info.st_ino) not in scope_ids, 'witness_mount_inode_alias')
             need(CONFIG.read_bytes() == ingress, 'ingress_changed')
 
         fence()
@@ -1312,6 +1458,319 @@ def prune_failed_witness(params):
                 'privateGenerationDeletes': 0, 'acceptedStateWrites': 0, 'intentStateWrites': 0}
     finally:
         os.close(lock)
+
+
+class ResolvedFailedUploadCleanup:
+    """One fixed, resolved 860 rollback permits eight local bulk unlinks.
+
+    Preparation seals every witness/remaining-target hash under the runtime
+    flock. Each subsequent request carries freshly read REG state and lease;
+    the controller cannot request an arbitrary path, target or unlink order.
+    Disconnecting releases only this flock, with no publication-state writes.
+    """
+    def __init__(self, authority):
+        self.lock = None
+        self.finished = False
+        self.next_index = self.deleted = self.logical_bytes = 0
+        self.authority = copy.deepcopy(authority)
+        self.check_authority(authority)
+        self.lock = reuse_lock()
+        try:
+            self.prepare()
+        except BaseException:
+            self.close()
+            raise
+
+    def check_authority(self, authority):
+        need(isinstance(authority, dict) and set(authority) == {'publicationState', 'lease'}, 'resolved_authority')
+        need(authority == self.authority, 'resolved_authority_changed')
+        view = authority['publicationState']
+        need(isinstance(view, dict) and set(view) == {'accepted', 'intent'}, 'resolved_state')
+        for observation in (*view.values(), authority['lease']):
+            need(isinstance(observation, dict) and set(observation) == {'found', 'etag', 'sha256', 'value'}, 'resolved_observation')
+        state = checked_observation(view['accepted'])
+        need(set(state) == {'version', 'kind', 'market', 'revision', 'current', 'rollback', 'commit', 'pending'}
+             and state['version'] == 1 and state['kind'] == 'china-accepted-state-v1' and state['market'] == 'china'
+             and type(state['revision']) is int and state['revision'] > 0
+             and all(state[key] is None for key in ('current', 'rollback', 'commit', 'pending')), 'resolved_empty_state')
+        intent = checked_observation(view['intent'])
+        target = RESOLVED_CLEANUP_TARGETS[1]
+        need(set(intent) == {'version', 'kind', 'market', 'revision', 'nonce', 'owner', 'createdAt', 'candidate', 'previous', 'status', 'resolution'}
+             and intent['version'] == 1 and intent['kind'] == 'china-publication-intent-v1' and intent['market'] == 'china'
+             and type(intent['revision']) is int and intent['revision'] > 0 and intent['nonce'] == target['nonce']
+             and intent['status'] == 'aborted', 'resolved_intent')
+        previous = checked_observation(intent['previous'], allow_absent=True)
+        if previous is not None:
+            need(set(previous) == set(state) and all(previous[key] == state[key] for key in state if key != 'revision')
+                 and type(previous['revision']) is int and previous['revision'] > 0, 'resolved_previous')
+        need(state['revision'] == (previous['revision'] if previous else 0) + 2, 'resolved_revision')
+        candidate = intent['candidate']
+        bindings = {'runtimeSha': 'runtimeSha', 'pricingRuntimeSha': 'pricingRuntimeSha', 'generationId': 'generationId',
+                    'generationManifestSha256': 'generationManifestSha256', 'receiptSha256': 'privateGenerationReceiptSha256',
+                    'imageId': 'imageId'}
+        need(isinstance(candidate, dict) and set(candidate) == {'market', 'generationId', 'owner', 'receiptSha256', 'sourceDescriptorSha256',
+             'generationManifestSha256', 'sourceCursor', 'sourceObservedAt', 'runtimeSha', 'pricingRuntimeSha', 'imageId'}
+             and candidate['market'] == 'china' and all(candidate[key] == target[value] for key, value in bindings.items()), 'resolved_candidate')
+        resolution = intent['resolution']
+        need(isinstance(resolution, dict) and set(resolution) == {'kind', 'at', 'acceptedETag', 'acceptedSha256', 'hostReceiptSha256', 'rollbackProof'}
+             and resolution['kind'] == 'rolled_back' and resolution['hostReceiptSha256'] is None
+             and resolution['acceptedETag'] == view['accepted']['etag'] and resolution['acceptedSha256'] == view['accepted']['sha256'],
+             'resolved_resolution')
+        proof = resolution['rollbackProof']
+        need(isinstance(proof, dict) and set(proof) == {'kind', 'hostRollbackBase64', 'hostRollbackSha256'}
+             and proof['kind'] == 'china-rollback-proof-v1' and proof['hostRollbackSha256'] == target['rollbackSha256'], 'resolved_rollback_proof')
+        raw, rollback = decode_report(proof['hostRollbackBase64'])
+        need(sha(raw) == target['rollbackSha256'] and rollback.get('version') == 1 and rollback.get('kind') == 'china-host-rollback-v1'
+             and rollback.get('nonce') == intent['nonce'] and rollback.get('release') == target['runtimeSha']
+             and all(rollback.get(value) == candidate[key] for key, value in bindings.items() if key != 'runtimeSha')
+             and rollback.get('sourceDescriptorSha256') == candidate['sourceDescriptorSha256']
+             and rollback.get('previousAcceptedETag') == intent['previous']['etag']
+             and rollback.get('previousAcceptedStateSha256') == intent['previous']['sha256']
+             and rollback.get('retainedRuntimeSha') == RETAINED and rollback.get('retainedRunning') is True
+             and rollback.get('ingressRestored') is True and rollback.get('candidateRemoved') is True, 'resolved_rollback_binding')
+        lease = checked_observation(authority['lease'])
+        need(set(lease) == {'version', 'kind', 'market', 'epoch', 'owner', 'nonce', 'status', 'acquiredAt', 'expiresAt', 'releasedAt'}
+             and lease['version'] == 1 and lease['kind'] == 'china-market-lease-v1' and lease['market'] == 'china'
+             and type(lease['epoch']) is int and lease['epoch'] > 0 and lease['status'] == 'held' and lease['releasedAt'] is None
+             and isinstance(lease['nonce'], str) and re.fullmatch(r'[a-f0-9]{32}', lease['nonce'])
+             and lease['nonce'] not in {row['nonce'] for row in (*RESOLVED_CLEANUP_TARGETS, RESOLVED_CLEANUP_WITNESS)}, 'resolved_lease')
+        for instant in (lease['acquiredAt'], lease['expiresAt']):
+            need(isinstance(instant, str) and re.fullmatch(r'\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(?:\.\d{1,6})?Z', instant), 'resolved_lease')
+        acquired = datetime.datetime.fromisoformat(lease['acquiredAt'].replace('Z', '+00:00')).timestamp()
+        self.deadline = datetime.datetime.fromisoformat(lease['expiresAt'].replace('Z', '+00:00')).timestamp()
+        need(acquired <= time.time() < self.deadline <= acquired + 2 * 60 * 60, 'resolved_lease_expired')
+
+    @staticmethod
+    def directory_identity(folder):
+        private_directory(folder)
+        info = folder.stat()
+        return info.st_dev, info.st_ino, info.st_mode, info.st_uid
+
+    @staticmethod
+    def location(directory, name):
+        return (directory if name in {'image.tar', 'regcloud-performance-gate.py', 'accepted-speed-baseline.json', 'acceptance.json'}
+                else directory / 'generation') / name
+
+    @staticmethod
+    def disk_free_bytes():
+        disk = os.statvfs(BASE)
+        value = disk.f_bavail * disk.f_frsize
+        need(type(value) is int and 0 <= value <= 9007199254740991, 'resolved_disk_capacity')
+        return value
+
+    def prepare(self):
+        self.cuts, self.directories, self.proofs, self.kept, self.pending, self.absent = [], {}, {}, {}, {}, set()
+        # A bind alias of /opt/avtocena, /opt or / still contains the protected
+        # cuts even though its source path is outside BASE. Ancestors need only
+        # stable directory identities; they need not have private permissions.
+        self.mount_ancestors = {}
+        for folder in BASE.parents:
+            info = folder.stat()
+            need(stat.S_ISDIR(info.st_mode), 'resolved_directory_changed')
+            self.mount_ancestors[folder] = (info.st_dev, info.st_ino)
+        for binding in (RESOLVED_CLEANUP_WITNESS, *RESOLVED_CLEANUP_TARGETS):
+            directory = BASE / binding['runtimeSha'] / 'china-next' / binding['nonce']
+            for folder in (BASE, directory.parent.parent, directory.parent, directory, directory / 'generation'):
+                identity = self.directory_identity(folder)
+                need(folder not in self.directories or self.directories[folder] == identity, 'resolved_directory_changed')
+                self.directories[folder] = identity
+            plan, plan_raw = diagnosis_json(directory / 'PLAN.json')
+            rollback, rollback_raw = diagnosis_json(directory / 'ROLLED_BACK.json')
+            need(sha(plan_raw) == binding['planSha256'] and sha(rollback_raw) == binding['rollbackSha256'], 'resolved_proof_hash')
+            validate_plan(plan)
+            need(not generation_update(plan) and all(plan.get(key) == value for key, value in binding.items()
+                 if key not in ('planSha256', 'rollbackSha256')), 'resolved_plan')
+            rollback_bindings = {'nonce': 'nonce', 'release': 'runtimeSha', 'pricingRuntimeSha': 'pricingRuntimeSha',
+                'generationId': 'generationId', 'generationManifestSha256': 'generationManifestSha256',
+                'privateGenerationReceiptSha256': 'privateGenerationReceiptSha256', 'sourceDescriptorSha256': 'sourceDescriptorSha256',
+                'imageId': 'imageId', 'previousAcceptedETag': 'previousAcceptedETag', 'previousAcceptedStateSha256': 'previousAcceptedStateSha256'}
+            need(rollback.get('version') == 1 and rollback.get('kind') == 'china-host-rollback-v1'
+                 and all(rollback.get(left) == plan.get(right) for left, right in rollback_bindings.items())
+                 and rollback.get('retainedRuntimeSha') == RETAINED and rollback.get('retainedRunning') is True
+                 and rollback.get('candidateRemoved') is True and rollback.get('ingressRestored') is True
+                 and re.fullmatch(r'[a-f0-9]{64}', rollback.get('retainedContainerId', ''))
+                 and re.fullmatch(r'sha256:[a-f0-9]{64}', rollback.get('retainedImageId', '')), 'resolved_rollback')
+            for name, raw in (('PLAN.json', plan_raw), ('ROLLED_BACK.json', rollback_raw)):
+                self.proofs[directory / name] = (reuse_file_identity(directory / name), raw)
+            self.cuts.append((directory, plan, rollback))
+        view = self.authority['publicationState']
+        witness_plan = self.cuts[0][1]
+        need(witness_plan['previousAcceptedETag'] == view['accepted']['etag']
+             and witness_plan['previousAcceptedStateSha256'] == view['accepted']['sha256'], 'resolved_witness_predecessor')
+        old_plan = self.cuts[2][1]
+        intent = view['intent']['value']
+        need(old_plan.get('previousAcceptedETag') == intent['previous']['etag']
+             and old_plan.get('previousAcceptedStateSha256') == intent['previous']['sha256']
+             and self.proofs[self.cuts[2][0] / 'ROLLED_BACK.json'][1] == base64.b64decode(intent['resolution']['rollbackProof']['hostRollbackBase64']),
+             'resolved_local_rollback')
+        need(all(plan['sourceDescriptorSha256'] == witness_plan['sourceDescriptorSha256'] for _, plan, _ in self.cuts)
+             and intent['candidate']['sourceDescriptorSha256'] == witness_plan['sourceDescriptorSha256'], 'resolved_source_binding')
+        generation_reference({**intent['candidate'], 'runtimeSha': RESOLVED_CLEANUP_WITNESS['runtimeSha']}, RESOLVED_CLEANUP_WITNESS['nonce'])
+        retained_receipt = self.cuts[0][2]
+        regular(CONFIG, 1024 * 1024)
+        self.ingress = CONFIG.read_bytes()
+        retained = docker('GET', '/containers/' + retained_receipt['retainedContainerId'] + '/json')
+        retained_env = env_map(retained)
+        need(retained['Id'] == retained_receipt['retainedContainerId'] and retained['Image'] == retained_receipt['retainedImageId']
+             and retained['State']['Running'] is True and retained_env.get('AVTOCENA_RELEASE_SHA') == RETAINED
+             and retained_env.get('AVTOCENA_CALCULATION_VERSION') == CALCULATION
+             and any(str(binding.get('HostPort', '')) == str(backend(self.ingress)) for ports in
+                 (retained.get('HostConfig', {}).get('PortBindings') or {}).values() for binding in ports), 'resolved_retained')
+        self.retained_id, self.retained_identity = retained['Id'], protected_identity(retained)
+        need(all(rollback['retainedContainerId'] == retained['Id'] and rollback['retainedImageId'] == retained['Image']
+                 for _, _, rollback in self.cuts), 'resolved_retained_proofs')
+        self.ordered_files = []
+        for index, (directory, plan, _) in enumerate(self.cuts):
+            descriptors = {row['name']: row for row in plan['files']}
+            if index:
+                need(sum(descriptors[name]['bytes'] for name in FAILED_UPLOAD_BULK_FILES) == RESOLVED_CLEANUP_BULK_BYTES[index - 1],
+                     'resolved_bulk_bytes')
+                self.ordered_files.extend((self.location(directory, name), descriptors[name]) for name in FAILED_UPLOAD_BULK_FILES)
+            for descriptor in plan['files']:
+                filename = self.location(directory, descriptor['name'])
+                target = index > 0 and descriptor['name'] in FAILED_UPLOAD_BULK_FILES
+                try:
+                    identity = reuse_file_identity(filename)
+                except FileNotFoundError:
+                    need(target, 'resolved_protected_missing')
+                    self.absent.add(filename)
+                    continue
+                need(identity[2] == descriptor['bytes'], 'resolved_file_size')
+                (self.pending if target else self.kept)[filename] = (identity, descriptor)
+        self.initial_absent = len(self.absent)
+        self.absent_bytes = sum(descriptor['bytes'] for filename, descriptor in self.ordered_files if filename in self.absent)
+        self.fence()
+        # Hash all 11 witness files and all surviving target files before the
+        # first unlink. Subsequent fences preserve their inode/time identities.
+        for files in (self.kept, self.pending):
+            for filename, (identity, descriptor) in files.items():
+                self.fence()
+                need(file_sha(filename) == descriptor['sha256'] and reuse_file_identity(filename) == identity, 'resolved_file_hash')
+        self.fence()
+        self.free_before = self.disk_free_bytes()
+
+    def fence(self):
+        self.check_authority(self.authority)
+        regular(CONFIG, 1024 * 1024)
+        need(CONFIG.read_bytes() == self.ingress, 'ingress_changed')
+        need(protected_identity(docker('GET', '/containers/' + self.retained_id + '/json')) == self.retained_identity, 'resolved_retained_changed')
+        health(backend(self.ingress), RETAINED)
+        for directory, expected in self.directories.items():
+            need(self.directory_identity(directory) == expected, 'resolved_directory_changed')
+        for directory, expected in self.mount_ancestors.items():
+            info = directory.stat()
+            need(stat.S_ISDIR(info.st_mode) and (info.st_dev, info.st_ino) == expected, 'resolved_directory_changed')
+        identities = []
+        for filename, (identity, raw) in self.proofs.items():
+            need(reuse_file_identity(filename) == identity and diagnosis_json(filename)[1] == raw, 'resolved_proof_changed')
+            identities.append(identity[:2])
+        for files in (self.kept, self.pending):
+            for filename, (identity, _) in files.items():
+                need(reuse_file_identity(filename) == identity, 'resolved_file_changed')
+                identities.append(identity[:2])
+        need(len(identities) == len(set(identities)), 'resolved_inode_alias')
+        need(all(not os.path.lexists(filename) for filename in self.absent), 'resolved_file_appeared')
+        for directory, _, _ in self.cuts:
+            need(not os.path.lexists(directory / 'ACCEPTED.json') and not os.path.lexists(directory / 'ACCEPTED.pending'), 'resolved_accepted_file')
+        witness = RESOLVED_CLEANUP_WITNESS
+        image = docker('GET', '/images/' + witness['imageId'] + '/json')
+        need(image.get('Id') == witness['imageId'] and image.get('Os') == 'linux' and image.get('Architecture') == 'amd64'
+             and image.get('Config', {}).get('Labels', {}).get('org.opencontainers.image.revision') == witness['runtimeSha'], 'resolved_witness_image')
+        rows = docker('GET', '/containers/json?all=1')
+        need(isinstance(rows, list) and len(rows) <= 1024, 'resolved_containers')
+        scopes = [directory for directory, _, _ in self.cuts]
+        scope_ids = {self.directories[scope][:2] for scope in scopes}
+        watched_ids = (set(identities) | {identity[:2] for identity in self.directories.values()}
+                       | set(self.mount_ancestors.values()))
+        nonces = {row['nonce'] for row in (witness, *RESOLVED_CLEANUP_TARGETS)}
+        for item in rows:
+            need(isinstance(item, dict) and isinstance(item.get('Id'), str) and re.fullmatch(r'[a-f0-9]{64}', item['Id']), 'resolved_containers')
+            row = docker('GET', '/containers/' + item['Id'] + '/json')
+            need(row.get('Config', {}).get('Labels', {}).get('avtocena.china.nonce') not in nonces, 'resolved_candidate_exists')
+            need(isinstance(row.get('Mounts'), list), 'resolved_mounts')
+            for mount in row['Mounts']:
+                source = mount.get('Source')
+                if not source:
+                    continue
+                need(isinstance(source, str) and Path(source).is_absolute(), 'resolved_mount_path')
+                mounted = Path(source).resolve()
+                need(all(mounted != scope and mounted not in scope.parents and scope not in mounted.parents for scope in scopes),
+                     'resolved_files_mounted')
+                info = mounted.stat()
+                need((info.st_dev, info.st_ino) not in watched_ids, 'resolved_mount_inode_alias')
+                for parent in mounted.parents:
+                    info = parent.stat()
+                    need((info.st_dev, info.st_ino) not in scope_ids, 'resolved_mount_inode_alias')
+        need(CONFIG.read_bytes() == self.ingress, 'ingress_changed')
+
+    def prepared(self):
+        return {'version': 1, 'kind': 'china-resolved-cleanup-prepared-v1', 'prepared': True,
+                'liveRuntimeSha': RETAINED, 'protectedFailedAttempt': dict(RESOLVED_CLEANUP_WITNESS), 'protectedFilesVerified': 11,
+                'targetFailedAttempts': [dict(row) for row in RESOLVED_CLEANUP_TARGETS],
+                'targetFileBytes': [descriptor['bytes'] for _, descriptor in self.ordered_files],
+                'alreadyAbsentFiles': self.initial_absent, 'alreadyAbsentBytes': self.absent_bytes}
+
+    def step(self, params):
+        need(isinstance(params, dict) and set(params) == {'action', 'authority', 'index'} and params['action'] == 'unlink'
+             and type(params['index']) is int and params['index'] == self.next_index < 8 and not self.finished, 'resolved_step')
+        self.check_authority(params['authority'])
+        self.fence()
+        filename, descriptor = self.ordered_files[self.next_index]
+        deleted = filename in self.pending
+        if deleted:
+            identity, _ = self.pending[filename]
+            parent_fd = os.open(filename.parent, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW | os.O_CLOEXEC)
+            try:
+                parent = os.fstat(parent_fd)
+                need((parent.st_dev, parent.st_ino) == self.directories[filename.parent][:2], 'resolved_directory_changed')
+                info = os.stat(filename.name, dir_fd=parent_fd, follow_symlinks=False)
+                need(stat.S_ISREG(info.st_mode) and info.st_nlink == 1 and stat.S_IMODE(info.st_mode) == 0o400
+                     and (info.st_dev, info.st_ino, info.st_size, info.st_mtime_ns, info.st_ctime_ns) == identity, 'resolved_file_changed')
+                need(time.time() < self.deadline, 'resolved_lease_expired')
+                os.unlink(filename.name, dir_fd=parent_fd)
+                os.fsync(parent_fd)
+            finally:
+                os.close(parent_fd)
+            need(not os.path.lexists(filename), 'resolved_file_still_present')
+            del self.pending[filename]
+            self.absent.add(filename)
+            self.deleted += 1
+            self.logical_bytes += descriptor['bytes']
+        self.next_index += 1
+        self.fence()
+        return {'version': 1, 'kind': 'china-resolved-cleanup-step-v1', 'index': params['index'],
+                'deleted': deleted, 'alreadyAbsent': not deleted, 'logicalBytesUnlinked': descriptor['bytes'] if deleted else 0}
+
+    def finish(self, params):
+        need(isinstance(params, dict) and set(params) == {'action', 'authority'} and params['action'] == 'finish'
+             and self.next_index == 8 and not self.pending and not self.finished, 'resolved_finish')
+        self.check_authority(params['authority'])
+        self.fence()
+        # Also persist directory metadata after a resumed, already-absent unlink.
+        for directory, _, _ in self.cuts[1:]:
+            for folder in (directory, directory / 'generation'):
+                fd = os.open(folder, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW | os.O_CLOEXEC)
+                try:
+                    info = os.fstat(fd)
+                    need((info.st_dev, info.st_ino) == self.directories[folder][:2], 'resolved_directory_changed')
+                    os.fsync(fd)
+                finally:
+                    os.close(fd)
+        self.fence()
+        self.finished = True
+        return {'version': 1, 'kind': 'china-resolved-failed-upload-prune-v1', 'phase': 'after-resolved-rollback', 'completed': True,
+                'liveRuntimeSha': RETAINED, 'protectedFailedAttempt': dict(RESOLVED_CLEANUP_WITNESS), 'protectedFilesVerified': 11,
+                'targetFailedAttempts': [dict(row) for row in RESOLVED_CLEANUP_TARGETS],
+                'filesDeleted': self.deleted, 'logicalBytesUnlinked': self.logical_bytes,
+                'alreadyAbsentFiles': self.initial_absent, 'alreadyAbsentBytes': self.absent_bytes,
+                'diskFreeBytesBefore': self.free_before, 'diskFreeBytesAfter': self.disk_free_bytes(),
+                'retiredContainers': 0, 'imagesDeleted': 0, 'directoriesDeleted': 0,
+                'privateGenerationDeletes': 0, 'acceptedStateWrites': 0, 'intentStateWrites': 0}
+
+    def close(self):
+        if self.lock is not None:
+            os.close(self.lock)
+            self.lock = None
 
 
 def reuse_file_identity(filename):
@@ -1670,7 +2129,8 @@ class Host:
             env.update(AVTOCENA_RELEASE_SHA=self.plan['runtimeSha'], AVTOCENA_BUILD_CALCULATION_VERSION=generation['calculationVersion'],
                        CATALOG_CHINA_LOCAL_GENERATION_DIR=GENERATION_MOUNT,
                        CATALOG_CHINA_LOCAL_MANIFEST_SHA256=self.plan['generationManifestSha256'],
-                       CATALOG_CHINA_LOCAL_RUNTIME_SHA=self.plan['pricingRuntimeSha'])
+                       CATALOG_CHINA_LOCAL_RUNTIME_SHA=self.plan['pricingRuntimeSha'],
+                       CATALOG_HOME_PHASE_TIMING='1', CATALOG_HOME_PHASE_TIMING_MAX_UPTIME_SECONDS='1800')
             candidate_env = [key + '=' + value for key, value in sorted(env.items())]
             binds = [row['Source'] + ':' + row['Destination'] + ':ro' for row in mounts]
             need(not any(row['Destination'] == GENERATION_MOUNT for row in mounts), 'generation_mount_collision')
@@ -1792,15 +2252,37 @@ class Host:
         self.functional_passed = True
         return {'functionalPassed': True, 'cases': checked}
 
+    def save_home_timing(self, since):
+        self.home_phase_timing = None
+        env = getattr(self, 'spec', {}).get('Env', [])
+        if 'CATALOG_HOME_PHASE_TIMING=1' not in env or 'CATALOG_HOME_PHASE_TIMING_MAX_UPTIME_SECONDS=1800' not in env:
+            return
+        try:
+            value = capture_home_timing(self.candidate, since, self.plan)
+            if value is not None:
+                new_file(self.directory / 'HOME_PHASE_TIMING.json', json_bytes(value))
+                self.home_phase_timing = value
+        except ReleaseError:
+            # Cancellation still enters the existing rollback path.
+            raise
+        except Exception:
+            # Optional diagnostics cannot replace a gate failure or make a
+            # failed gate successful. Raw Docker/error text is never emitted.
+            pass
+
     def speed(self):
         self.verify_candidate()
         # Reuse the unchanged accepted baseline and its complete warm/expired
         # response checks, scoped to China and shared integrity routes.
         env = {'PATH': '/usr/bin:/bin', 'AVTOCENA_RELEASE_MARKETS': 'china', 'AVTOCENA_SPEED_BASELINE_MODE': 'enforce',
                'AVTOCENA_SPEED_BASELINE': str(self.directory / 'accepted-speed-baseline.json')}
-        process = subprocess.run(['/usr/bin/python3', '-I', '-B', str(self.directory / 'regcloud-performance-gate.py'),
-                                  'http://127.0.0.1:' + str(self.port), self.plan['runtimeSha']],
-                                 stdout=subprocess.PIPE, stderr=subprocess.PIPE, env=env, timeout=1500)
+        since = int(time.time())
+        try:
+            process = subprocess.run(['/usr/bin/python3', '-I', '-B', str(self.directory / 'regcloud-performance-gate.py'),
+                                      'http://127.0.0.1:' + str(self.port), self.plan['runtimeSha']],
+                                     stdout=subprocess.PIPE, stderr=subprocess.PIPE, env=env, timeout=1500)
+        finally:
+            self.save_home_timing(since)
         rows = []
         for line in process.stdout.splitlines():
             try:
@@ -1813,7 +2295,8 @@ class Host:
         need(process.returncode == 0, 'server_speed_failed')
         self.verify_candidate()
         self.speed_passed = True
-        return {'speedPassed': True, 'samples': rows}
+        return {'speedPassed': True, 'samples': rows,
+                **({'homePhaseTiming': self.home_phase_timing} if self.home_phase_timing is not None else {})}
 
     def replace_config(self, expected, wanted):
         regular(CONFIG, 1024 * 1024)
@@ -1989,6 +2472,7 @@ def main():
     signal.signal(signal.SIGHUP, lambda *_: (_ for _ in ()).throw(ReleaseError('china_host_disconnected')))
     signal.signal(signal.SIGALRM, lambda *_: (_ for _ in ()).throw(ReleaseError('china_host_browser_deadline')))
     host = None
+    resolved_cleanup = None
     recovered = maintenance = diagnosed = pruned = witness_pruned = False
     emit({'kind': 'ready', 'protocol': 1})
     try:
@@ -2008,6 +2492,7 @@ def main():
             need(not diagnosed or method in {'diagnose', 'close'}, 'diagnosis_read_only')
             need(not pruned or method in {'prune_failed_uploads', 'close'}, 'prune_protocol_scope')
             need(not witness_pruned or method in {'prune_failed_witness', 'close'}, 'witness_protocol_scope')
+            need(resolved_cleanup is None or method in {'prune_resolved_failed_uploads', 'close'}, 'resolved_protocol_scope')
             params = call.get('params', {})
             if method == 'diagnose':
                 need(host is None, 'diagnosis_after_init')
@@ -2029,8 +2514,21 @@ def main():
                 need(host is None, 'witness_after_init')
                 value = prune_failed_witness(params)
                 recovered = maintenance = witness_pruned = True
+            elif method == 'prune_resolved_failed_uploads':
+                need(host is None and not (diagnosed or pruned or witness_pruned), 'resolved_protocol_scope')
+                if resolved_cleanup is None:
+                    need(not recovered and isinstance(params, dict) and set(params) == {'action', 'authority'}
+                         and params['action'] == 'prepare', 'resolved_prepare')
+                    resolved_cleanup = ResolvedFailedUploadCleanup(params['authority'])
+                    value = resolved_cleanup.prepared()
+                elif params.get('action') == 'unlink':
+                    value = resolved_cleanup.step(params)
+                else:
+                    value = resolved_cleanup.finish(params)
+                recovered = maintenance = True
             elif method == 'close' and host is None:
                 need(recovered, 'close_uninitialized')
+                need(resolved_cleanup is None or resolved_cleanup.finished, 'resolved_close_incomplete')
                 emit({'kind': 'result', 'id': identity, 'value': {'closed': True, 'readOnly': not maintenance}})
                 return
             elif method == 'resume_init':
@@ -2080,6 +2578,8 @@ def main():
             if isinstance(error, ReleaseError) and hasattr(error, 'retained_fence'):
                 reply['retainedFence'] = error.retained_fence
             if host is not None and locals().get('method') == 'speed':
+                if getattr(host, 'home_phase_timing', None) is not None:
+                    reply['homePhaseTiming'] = host.home_phase_timing
                 try:
                     # Same bounded sanitizer as the read-only diagnosis. A
                     # broken/missing diagnostic must not replace the gate's
@@ -2092,6 +2592,8 @@ def main():
             pass
         raise
     finally:
+        if resolved_cleanup is not None:
+            resolved_cleanup.close()
         if host:
             try:
                 host.cleanup()

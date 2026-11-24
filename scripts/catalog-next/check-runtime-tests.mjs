@@ -26,6 +26,8 @@ export const CHINA_RUNTIME_TEST_FILES = Object.freeze([
   'tests/catalog-next-local-reader.test.ts',
   'tests/catalog-frozen-fx-batch.test.ts',
   'tests/catalog-next-home-isolation.test.ts',
+  'tests/catalog-next-home-parallel.test.ts',
+  'tests/catalog-next-home-phase-timing.test.ts',
   ...COMPATIBILITY_TEST_FILES,
 ]);
 

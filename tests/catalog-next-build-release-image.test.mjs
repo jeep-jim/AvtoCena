@@ -37,7 +37,7 @@ async function fixture(t) {
     const runtimeSha = git(['rev-parse', 'HEAD']).trim(), runtimeTree = git(['rev-parse', 'HEAD^{tree}']).trim();
     return {version: 1, market: 'china', minimumYear: 2014, retainedRuntime, runtimeSha, runtimeTree,
       pricingRuntimeSha: runtimeSha, pricingRuntimeTree: runtimeTree, pricingToServingDiffSha256: hash(''), pricingToServingFiles: [],
-      runtimeDiffSha256: hash(git(['diff', '--binary', '--no-ext-diff', '--no-renames', retainedRuntime, 'HEAD'])),
+      runtimeDiffSha256: hash(git(['diff', '--binary', '--full-index', '--no-ext-diff', '--no-renames', retainedRuntime, 'HEAD'])),
       runtimeFiles: git(['diff', '--name-only', '--no-renames', retainedRuntime, 'HEAD']).trim().split('\n')};
   };
   const socket = path.join(runnerTemp, 'daemon.sock');
@@ -140,6 +140,42 @@ test('a wrong source commit, tree, diff or file scope cannot produce an image', 
     await assert.rejects(verifyChinaImageRuntime({runtimeRoot: f.runtimeRoot, plan: {...f.options.plan, ...change}}), /china_image_/);
   }
   await absent(path.join(f.runnerTemp, 'china-release-build'));
+});
+
+test('canonical image source verifies across short and full Git abbreviations without changing source', async t => {
+  const f = await fixture(t);
+  const source = f.git(['ls-files', '--stage']);
+  f.git(['config', 'core.abbrev', '7']);
+  const plan = f.plan();
+  const abbreviated = hash(f.git(['diff', '--binary', '--no-ext-diff', '--no-renames',
+    plan.retainedRuntime, plan.runtimeSha]));
+  assert.notEqual(abbreviated, plan.runtimeDiffSha256);
+  for (const abbreviation of ['40', '7']) {
+    f.git(['config', 'core.abbrev', abbreviation]);
+    assert.deepEqual(f.plan(), plan);
+    const proof = await verifyChinaImageRuntime({runtimeRoot: f.runtimeRoot, plan});
+    assert.equal(proof.runtimeDiffSha256, plan.runtimeDiffSha256);
+    assert.deepEqual(proof.runtimeFiles, plan.runtimeFiles);
+    await assert.rejects(verifyChinaImageRuntime({runtimeRoot: f.runtimeRoot,
+      plan: {...plan, runtimeDiffSha256: abbreviated}}), /china_image_runtime_diff/);
+    assert.equal(f.git(['ls-files', '--stage']), source);
+    assert.equal(f.git(['status', '--porcelain']), '');
+  }
+});
+
+test('changed image source bytes in the same files cannot reuse a reviewed canonical digest', async t => {
+  const f = await fixture(t);
+  f.git(['config', 'core.abbrev', '7']);
+  const reviewed = f.plan();
+  await fs.writeFile(path.join(f.runtimeRoot, 'public.mjs'), 'export const publicValue = 3;\n'); f.commit();
+  f.git(['config', 'core.abbrev', '40']);
+  const changed = f.plan();
+  assert.deepEqual(changed.runtimeFiles, reviewed.runtimeFiles);
+  assert.notEqual(changed.runtimeSha, reviewed.runtimeSha);
+  assert.notEqual(changed.runtimeTree, reviewed.runtimeTree);
+  assert.notEqual(changed.runtimeDiffSha256, reviewed.runtimeDiffSha256);
+  await assert.rejects(verifyChinaImageRuntime({runtimeRoot: f.runtimeRoot,
+    plan: {...changed, runtimeDiffSha256: reviewed.runtimeDiffSha256}}), /china_image_runtime_diff/);
 });
 
 test('a tracked local edit is refused before any Docker command', async t => {

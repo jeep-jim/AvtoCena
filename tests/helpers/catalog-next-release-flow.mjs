@@ -10,7 +10,7 @@ import {EventEmitter} from 'node:events';
 import vm from 'node:vm';
 import {createChinaState, inspectChinaPublicationState} from '../../scripts/catalog-next/china-state.mjs';
 import * as reuseModule from '../../scripts/catalog-next/release-reuse.mjs';
-import {checkedStartupReport, checkedRetainedFenceReport, checkedServerSpeedReport} from '../../scripts/catalog-next/release-ssh.mjs';
+import {checkedStartupReport, checkedRetainedFenceReport, checkedServerSpeedReport, checkedHomePhaseTimingReport} from '../../scripts/catalog-next/release-ssh.mjs';
 
 const ROOT = fileURLToPath(new URL('../../', import.meta.url));
 const [directory, mode] = process.argv.slice(2), config = JSON.parse(await fs.readFile(path.join(directory, 'fixture.json'), 'utf8'));
@@ -73,14 +73,19 @@ const session = {exited: Promise.resolve({code: 0}), abort() { aborted = true; p
       return {functionalPassed: true, cases: config.oracle.cases.map(({name, total}) => ({name, total}))};
     }
     if (method === 'speed') {
-      if (['speed-failure', 'speed-invalid-evidence'].includes(mode)) {
+      const homePhaseTiming = {version: 1, kind: 'china-home-phase-timing-v1', runtimeSha: plan.runtimeSha, nonce: plan.nonce,
+        logBytes: 256, logLines: 1, rejectedRows: 0, limited: false, rows: [{trace: '12345678-1234-1234-1234-123456789012',
+          phase: 'snapshot', ms: 72.5, ok: true, policyDate: '2026-11-25', completedPolicyDate: '2026-11-25'}]};
+      if (['home-timing-invalid', 'speed-invalid-evidence'].includes(mode)) homePhaseTiming.raw = 'synthetic-private-ssh';
+      if (['home-timing-wrong-binding', 'speed-timing-wrong-binding'].includes(mode)) homePhaseTiming.nonce = '0'.repeat(32);
+      if (['speed-failure', 'speed-invalid-evidence', 'speed-timing-wrong-binding'].includes(mode)) {
         const serverSpeed = {present: true, sha256: 'a'.repeat(64), exitCode: 1, rejectedSamples: 0, samples: [
           {speedBaseline: 'warm', path: '/cars?market=china', referenceSeconds: 0.09, measurementNoiseSeconds: 0.05,
             ceilingSeconds: 0.14, seconds: 0.2, blocking: true, passed: false, recheckSeconds: [0.18, 0.19, 0.17], recheckMedianSeconds: 0.18}]};
         if (mode === 'speed-invalid-evidence') serverSpeed.stderr = 'synthetic-private-ssh';
-        throw Object.assign(Error('china_host_server_speed_failed'), {serverSpeed});
+        throw Object.assign(Error('china_host_server_speed_failed'), {serverSpeed, homePhaseTiming});
       }
-      return {speedPassed: true, samples: []};
+      return {speedPassed: true, samples: [], homePhaseTiming};
     }
     if (method === 'switch') {
       assert.equal((await state.read('accepted')).value.pending.nonce, plan.nonce);
@@ -148,7 +153,7 @@ const mocks = {
     return {paths, receipt: {binding: {runtimeSha: servingPlan.pricingRuntimeSha, generationId: release.generationId,
       generationManifestSha256: release.generationManifestSha256, sourceDescriptorSha256: config.result.plan.sourceDescriptorSha256}}};
   }},
-  './release-ssh.mjs': {checkedStartupReport, checkedRetainedFenceReport, checkedServerSpeedReport, async openChinaSshSession() { calls.push('open-session'); return session; }},
+  './release-ssh.mjs': {checkedStartupReport, checkedRetainedFenceReport, checkedServerSpeedReport, checkedHomePhaseTimingReport, async openChinaSshSession() { calls.push('open-session'); return session; }},
   './china-state.mjs': {createChinaStateStorage: () => storage, createChinaState: () => stateProxy, inspectChinaPublicationState},
   '../../apps/web/lib/data.ts': {getJsonStorage: () => ({async readJson(key) { assert.equal(key, 'catalog/operations/collection-controls-v1.json'); return {}; }})},
   './refresh-china-source.mjs': {assertChinaFeedControl() {}},

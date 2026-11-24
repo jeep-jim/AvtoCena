@@ -11,7 +11,7 @@ import {verifyReadonlyInvocation} from '../lib/readonly-marker-invocation.mjs';
 import {verifyFrozenSpeedBaselines} from '../verify-frozen-speed-baselines.mjs';
 import {restorePrivateChinaGeneration} from './private-generation.mjs';
 import {createPrivateChinaGenerationStorage} from './generation-storage.mjs';
-import {openChinaSshSession, checkedStartupReport, checkedRetainedFenceReport, checkedServerSpeedReport} from './release-ssh.mjs';
+import {openChinaSshSession, checkedStartupReport, checkedRetainedFenceReport, checkedServerSpeedReport, checkedHomePhaseTimingReport} from './release-ssh.mjs';
 import {verifyServingCompatibility} from './serving-compatibility.mjs';
 import {createChinaStateStorage, createChinaState, inspectChinaPublicationState} from './china-state.mjs';
 import {getJsonStorage} from '../../apps/web/lib/data.ts';
@@ -77,7 +77,7 @@ try {
   const reuse = resolveChinaReleaseReuse(release, plan);
   const git = args => execFileSync('git', args, {cwd: runtimeRoot, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'], maxBuffer: 32 * 1024 ** 2});
   need(git(['rev-parse', 'HEAD']).trim() === plan.runtimeSha && git(['rev-parse', 'HEAD^{tree}']).trim() === plan.runtimeTree &&
-    hash(git(['diff', '--binary', '--no-ext-diff', '--no-renames', plan.retainedRuntime, plan.runtimeSha])) === plan.runtimeDiffSha256, 'exact_runtime');
+    hash(git(['diff', '--binary', '--full-index', '--no-ext-diff', '--no-renames', plan.retainedRuntime, plan.runtimeSha])) === plan.runtimeDiffSha256, 'exact_runtime');
   git(['diff', '--quiet', 'HEAD', '--']);
   need(JSON.stringify(git(['diff', '--name-only', '--no-renames', plan.retainedRuntime, plan.runtimeSha]).trim().split('\n').sort()) ===
     JSON.stringify([...plan.runtimeFiles].sort()), 'runtime_scope');
@@ -183,6 +183,10 @@ try {
   report.start = await step('start_candidate_preserving_live', () => session.call('start'));
   report.functional = await step('exact_rows_prices_and_filters', () => session.call('functional'));
   report.serverSpeed = await step('unchanged_server_speed_baseline', () => session.call('speed'));
+  if (report.serverSpeed.homePhaseTiming !== undefined) {
+    const timing = report.serverSpeed.homePhaseTiming; delete report.serverSpeed.homePhaseTiming;
+    try { report.homePhaseTiming = checkedHomePhaseTimingReport(timing, hostPlan); } catch {}
+  }
   await checkControl();
   ({intent, reservation} = await step('reserve_china_publication', () => state.reserve({lease, previous, previousIntent, candidate})));
   await step('switch_china_with_rollback_armed', () => session.call('switch'));
@@ -234,6 +238,9 @@ try {
   }
   if (error?.serverSpeed) {
     try { report.serverSpeedFailure = checkedServerSpeedReport(error.serverSpeed); } catch {}
+  }
+  if (error?.homePhaseTiming && hostPlan) {
+    try { report.homePhaseTiming = checkedHomePhaseTimingReport(error.homePhaseTiming, hostPlan); } catch {}
   }
   if (session) { session.abort(); await session.exited; session = null; }
   report.phase = phase; report.errorCode = safeCode(error); report.finishedAt = new Date().toISOString();

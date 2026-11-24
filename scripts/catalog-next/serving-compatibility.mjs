@@ -8,7 +8,8 @@ const hash = raw => createHash('sha256').update(raw).digest('hex');
 const revision = value => /^[a-f0-9]{40}$/.test(value ?? '');
 const allowedProduction = new Set(['apps/web/lib/catalog/storage.ts', 'apps/web/app/api/catalog/home/route.ts',
   'apps/web/app/(public)/page.tsx', 'apps/web/lib/catalog/china-local-reader.ts',
-  'apps/web/lib/catalog/china-city-query.mjs', 'apps/web/components/catalog/CatalogFilters.tsx']);
+  'apps/web/lib/catalog/china-city-query.mjs', 'apps/web/components/catalog/CatalogFilters.tsx',
+  'apps/web/lib/dealers/public-showcase.ts', 'apps/web/lib/catalog/home-phase-timing.ts']);
 const allowedBrowserTests = new Set(['tests/browser/catalog-range-commit.mjs',
   'tests/browser/catalog-range-commit-fixture.tsx']);
 const typeOnlyPath = 'apps/web/lib/catalog/offer-page-data.ts';
@@ -54,7 +55,7 @@ export async function verifyServingCompatibility({runtimeRoot, servingPlan, pric
   const changed = String(git(['diff', '--name-only', '-z', '--no-renames', pricingPlan.runtimeSha, servingPlan.runtimeSha]))
     .split('\0').filter(Boolean).sort();
   need(JSON.stringify(changed) === JSON.stringify([...files].sort()), 'changed_files');
-  const difference = git(['diff', '--binary', '--no-ext-diff', '--no-renames', pricingPlan.runtimeSha, servingPlan.runtimeSha]);
+  const difference = git(['diff', '--binary', '--full-index', '--no-ext-diff', '--no-renames', pricingPlan.runtimeSha, servingPlan.runtimeSha]);
   need(hash(difference) === servingPlan.pricingToServingDiffSha256, 'changed_bytes');
   git(['diff', '--quiet', '--no-ext-diff', pricingPlan.runtimeSha, servingPlan.runtimeSha, '--', ...CHINA_PROTECTED_PRICING_PATHS]);
   const typeOnlyChecks = [];

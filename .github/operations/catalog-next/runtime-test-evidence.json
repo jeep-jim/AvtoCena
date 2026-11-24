@@ -2,10 +2,10 @@
   "version": 1,
   "kind": "china-runtime-test-harness-evidence-v1",
   "execution": "local",
-  "runtimeSha": "1518035b9e6b717cd364ae8d13e63d0127899112",
-  "runtimeTree": "71edad8cb0269137dfecf7b4947045a092b4b232",
+  "runtimeSha": "99c45a3b5d8439bbc1ee34702ba41340ada08125",
+  "runtimeTree": "547d9a4f9df2ca7963e6f43edaaa70f81d3b27cb",
   "baselineRuntimeSha": "56d6b94fea70457e0ce2b0820596da9972846b90",
-  "patchSha256": "1e5e218cdd29ad46e9cf2410b90140a5ac53c9e93fa70dbb075836839920d06f",
+  "patchSha256": "00217d03f8f2d37bf6ad22b4404cc204493982595b0bcd7ea2e6aefcff3fecd7",
   "originalAffectedTests": {
     "baseline": {
       "tests": 56,
@@ -89,14 +89,16 @@
     "failed": 0
   },
   "helperCombinedRun": {
-    "nativeTests": 47,
+    "nativeTests": 66,
     "coreNativeTests": 41,
     "homeIsolationTests": 6,
     "affectedTests": 56,
-    "tests": 103,
-    "passed": 103,
+    "tests": 122,
+    "passed": 122,
     "failed": 0,
-    "skipped": 0
+    "skipped": 0,
+    "homeParallelTests": 15,
+    "homePhaseTimingTests": 4
   },
   "helperBoundaryTests": {
     "tests": 5,
@@ -135,9 +137,14 @@
       "file": "tests/home-initial-catalog.test.ts",
       "tests": 1,
       "correction": "Assert retained-market selection and current editorial/empty-market predicate; bounded shared-index and no repeated full searches assertions retained"
+    },
+    {
+      "file": "tests/home-initial-catalog.test.ts",
+      "tests": 1,
+      "correction": "Recognize the exact parallel snapshot/counts/pricing dependencies and setGeneration/return-value callback while retaining the strict serial branch; assert one snapshot read and counts-failure row fallback. All existing props and bounded-read assertions retained."
     }
   ],
-  "previousServingRuntimeSha": "860e1ff601c6852eb3b1474982e52e3a5300c4af",
+  "previousServingRuntimeSha": "1518035b9e6b717cd364ae8d13e63d0127899112",
   "cityReaderRegression": {
     "tests": 1,
     "passed": 1,
@@ -156,11 +163,14 @@
   "typecheck": {
     "passed": true,
     "command": "npm run typecheck",
-    "runtimeSha": "1518035b9e6b717cd364ae8d13e63d0127899112",
+    "runtimeSha": "99c45a3b5d8439bbc1ee34702ba41340ada08125",
     "workspaces": [
       "@avtocena/web",
       "@avtocena/engine"
-    ]
+    ],
+    "runtimeTree": "547d9a4f9df2ca7963e6f43edaaa70f81d3b27cb",
+    "executedLocalCommit": "bb90860219c6860fa7d449e8025370a4d6bcc368",
+    "exactRemoteTreeVerified": true
   },
   "cityLedgerReaderRegression": {
     "actualReaderAndQueryTests": 21,
@@ -174,11 +184,17 @@
   },
   "controllerContracts": {
     "command": "node --import tsx --test tests/catalog-next-*.test.mjs tests/release-speed-guard-contract.test.mjs",
-    "tests": 383,
-    "passed": 383,
+    "tests": 453,
+    "passed": 453,
     "failed": 0,
     "skipped": 0,
-    "execution": "local"
+    "execution": "local",
+    "composedControllerReviewed": true,
+    "independentCleanupReviews": {
+      "resolvedRollbackTests": 142,
+      "postAcceptanceTests": 152,
+      "allPassed": true
+    }
   },
   "rangeCommitBrowserContract": {
     "runtimeSha": "1518035b9e6b717cd364ae8d13e63d0127899112",
@@ -299,6 +315,11 @@
       "currentDispatchMedianMs": 6.8,
       "scope": "Actual component with recorded/stubbed Next transport; not public response time",
       "evidence": "docs/markets/evidence/china-range-commit-browser-20261125.json"
+    },
+    "unchangedComponentInServingRuntime": {
+      "runtimeSha": "99c45a3b5d8439bbc1ee34702ba41340ada08125",
+      "componentSha256": "32da85f82a00d2140e6d70271dfd307e6c0cc25298bb79aaac8c361602f59de6",
+      "newRuntimeBrowserRunPending": true
     }
   },
   "localValidationInputs": {
@@ -312,5 +333,52 @@
     "failed": 0,
     "skipped": 0,
     "productionComponentSha256": "32da85f82a00d2140e6d70271dfd307e6c0cc25298bb79aaac8c361602f59de6"
+  },
+  "homepageIndependentData": {
+    "runtimeSha": "99c45a3b5d8439bbc1ee34702ba41340ada08125",
+    "runtimeTree": "547d9a4f9df2ca7963e6f43edaaa70f81d3b27cb",
+    "newRuntimeTests": 19,
+    "passed": 19,
+    "failed": 0,
+    "relevantCombinedTests": 37,
+    "independentReviewPassed": true,
+    "singleSnapshotRead": true,
+    "countsDoNotBlockPricing": true,
+    "greenPricingUsesOwnReadDependency": true,
+    "preparedChinaRowsPreserved": true,
+    "originalErrorFallbacksPreserved": true,
+    "dealerReadReusedWithinRequest": true,
+    "optionalPhaseTimingLimitSeconds": 1800,
+    "actualPublicSpeedNotYetVerified": true
+  },
+  "canonicalSourceDiff": {
+    "option": "--full-index",
+    "guards": [
+      "serving-compatibility.mjs",
+      "build-release-image.mjs",
+      "release.mjs",
+      "prepare-generation.mjs"
+    ],
+    "configurationsVerified": [
+      "core.abbrev=7",
+      "core.abbrev=40"
+    ],
+    "newActualGitTests": 4,
+    "targetedTests": 50,
+    "passed": 50,
+    "independentReviewPassed": true,
+    "abbreviatedDigestRejected": true,
+    "changedCommittedBytesRejected": true,
+    "runtimeAndPricingTreesUnchanged": true,
+    "sealedGenerationReceiptsAndManifestsUnchanged": true,
+    "precedingCi": {
+      "headSha": "de109d26ce8ee5a50604e99e40c51d92d7ce781e",
+      "ciRun": "https://github.com/jeep-jim/AvtoCena/actions/runs/45486833011",
+      "ciPassed": true,
+      "browserRun": "https://github.com/jeep-jim/AvtoCena/actions/runs/45486832326",
+      "browserReached": false,
+      "error": "china_serving_changed_bytes"
+    },
+    "finalControllerCiPending": true
   }
 }

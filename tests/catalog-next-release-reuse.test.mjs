@@ -162,7 +162,8 @@ test('the fixed mode step skips only image daemon/build; complete first-release 
   assert.match(controller.slice(common), /state\.abortReserved/); assert.match(controller.slice(common), /state\.finalizeRollback/);
 });
 
-for (const mode of ['initial', 'reuse', 'functional-failure', 'startup-failure', 'retained-failure', 'speed-failure', 'speed-invalid-evidence']) test('real release entrypoint with native state machine: ' + mode, async t => {
+for (const mode of ['initial', 'reuse', 'functional-failure', 'startup-failure', 'retained-failure', 'speed-failure', 'speed-invalid-evidence',
+  'home-timing-invalid', 'home-timing-wrong-binding', 'speed-timing-wrong-binding']) test('real release entrypoint with native state machine: ' + mode, async t => {
   const directory = await fs.mkdtemp(path.join(os.tmpdir(), 'china-release-flow-'));
   t.after(() => fs.rm(directory, {recursive: true, force: true}));
   await fs.writeFile(path.join(directory, 'fixture.json'), JSON.stringify(fixture()));
@@ -171,11 +172,12 @@ for (const mode of ['initial', 'reuse', 'functional-failure', 'startup-failure',
   const value = JSON.parse(await fs.readFile(path.join(directory, 'result.json'), 'utf8'));
   assert.equal(value.privateDataLeaked, false); assert.ok(value.lease.value, JSON.stringify({calls: value.calls, report: value.report}));
   assert.equal(value.lease.value.status, 'released');
-  if (['functional-failure', 'startup-failure', 'retained-failure', 'speed-failure', 'speed-invalid-evidence'].includes(mode)) {
+  if (['functional-failure', 'startup-failure', 'retained-failure', 'speed-failure', 'speed-invalid-evidence', 'speed-timing-wrong-binding'].includes(mode)) {
     assert.equal(value.report.accepted, false); assert.equal(value.exitCode, 1); assert.equal(value.aborted, true);
     assert.equal(value.report.errorCode, { 'functional-failure': 'china_host_functional_fixture',
       'startup-failure': 'china_host_candidate_startup', 'retained-failure': 'china_host_reuse_retained_changed',
-      'speed-failure': 'china_host_server_speed_failed', 'speed-invalid-evidence': 'china_host_server_speed_failed'}[mode]);
+      'speed-failure': 'china_host_server_speed_failed', 'speed-invalid-evidence': 'china_host_server_speed_failed',
+      'speed-timing-wrong-binding': 'china_host_server_speed_failed'}[mode]);
     assert.equal(value.accepted.value, null);
     assert.ok(!value.calls.includes('switch')); assert.ok(!value.calls.includes('state:reserve'));
   } else {
@@ -197,6 +199,12 @@ for (const mode of ['initial', 'reuse', 'functional-failure', 'startup-failure',
     assert.equal(value.report.serverSpeedFailure.samples[0].passed, false);
   }
   if (mode === 'speed-invalid-evidence') assert.equal(value.report.serverSpeedFailure, undefined);
+  if (['initial', 'reuse', 'speed-failure'].includes(mode)) {
+    assert.equal(value.report.homePhaseTiming.rows[0].phase, 'snapshot');
+    assert.equal(value.report.homePhaseTiming.rows[0].ms, 72.5);
+    assert.equal(value.report.homePhaseTiming.runtimeSha, fixture().servingPlan.runtimeSha);
+  } else assert.equal(value.report.homePhaseTiming, undefined);
+  assert.equal(value.report.serverSpeed?.homePhaseTiming, undefined);
   if (mode === 'retained-failure') {
     assert.equal(value.report.phase, 'reuse_verified_server_files');
     assert.deepEqual(value.report.retainedFenceFailure, {version: 1, kind: 'china-host-retained-fence-v1',

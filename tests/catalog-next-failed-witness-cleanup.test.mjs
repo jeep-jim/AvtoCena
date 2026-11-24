@@ -15,8 +15,8 @@ const WORKFLOW = 'jeep-jim/AvtoCena/.github/workflows/catalog-next-china-failed-
 function result(targetIndex = 0) {
   return {version: 1, kind: 'china-failed-witness-prune-v1', phase: 'after-first-acceptance', completed: true, ...CURRENT,
     targetIndex, targetFailedAttempt: {...TARGETS[targetIndex]}, earlierBulkFilesAbsent: 8,
-    filesDeleted: 4, freedBytes: [13041560320, 13041559296][targetIndex], alreadyAbsentFiles: 0,
-    diskFreeBytesBefore: [14000000000, 26000000000][targetIndex], diskFreeBytesAfter: [27000000001, 39000000002][targetIndex],
+    filesDeleted: 4, freedBytes: [13041560320, 13041559296, 13041561344][targetIndex], alreadyAbsentFiles: 0,
+    diskFreeBytesBefore: [14000000000, 26000000000, 38000000000][targetIndex], diskFreeBytesAfter: [27000000001, 39000000002, 51000000003][targetIndex],
     retiredContainers: 0, imagesDeleted: 0, directoriesDeleted: 0, privateGenerationDeletes: 0, acceptedStateWrites: 0, intentStateWrites: 0};
 }
 
@@ -74,22 +74,35 @@ async function fixture(t, {runtimeSha = CURRENT.runtimeSha, generationId = CURRE
   return {root, raw, state, calls, targets, hooks, session, options};
 }
 
+test('all three post-accept targets and the accepted runtime have independent fixed pins', () => {
+  assert.deepEqual(CURRENT, {runtimeSha: '99c45a3b5d8439bbc1ee34702ba41340ada08125', generationId: 'gen_china_45369451603_1'});
+  assert.equal(TARGETS.length, 3); assert.equal(TARGETS[0], TARGET);
+  assert.deepEqual(TARGETS[2], {...TARGET,
+    runtimeSha: '1518035b9e6b717cd364ae8d13e63d0127899112', nonce: '92ec4a21446a23bed345fd789b2b3cc5',
+    planSha256: '2b038c3566322b7be1f4e622716b8aed85e6e318fd323d31098db05dbb469964',
+    rollbackSha256: '6f86011baf31bf183c5b156586b4c9b8a6aa22a0648c2d5f3de4c6f6e57538e9',
+    imageId: 'sha256:0a1d136f6b292f9d027354fe8db3c14e12079e689e3f7b5773a7b014860213ea'});
+  assert(Object.isFrozen(CURRENT) && Object.isFrozen(TARGETS) && TARGETS.every(Object.isFrozen));
+  assert.equal([0, 1, 2].reduce((sum, index) => sum + validateFailedWitnessCleanupReport(result(index), index).freedBytes, 0), 39124680960);
+});
+
 test('exact accepted state and China lease fence local cleanup; only lease is written', async t => {
   const f = await fixture(t), before = await f.state.read('accepted');
   const report = await runFailedWitnessCleanup(f.options);
-  assert.equal(report.completed, true); assert.equal(report.freedBytes, 26083119616); assert.equal(report.filesDeleted, 8);
-  assert.equal(report.diskFreeBytesBefore, 14000000000); assert.equal(report.diskFreeBytesAfter, 39000000002);
-  assert.deepEqual(f.targets, [0, 1]); assert.deepEqual(report.results.map(value => value.targetIndex), [0, 1]);
+  assert.equal(report.completed, true); assert.equal(report.freedBytes, 39124680960); assert.equal(report.filesDeleted, 12);
+  assert.equal(report.diskFreeBytesBefore, 14000000000); assert.equal(report.diskFreeBytesAfter, 51000000003);
+  assert.deepEqual(f.targets, [0, 1, 2]); assert.deepEqual(report.results.map(value => value.targetIndex), [0, 1, 2]);
   assert.equal(Object.hasOwn(report, 'partialResults'), false);
   assert.equal(report.leaseRelease, 'released'); assert.deepEqual(await f.state.read('accepted'), before);
   assert.deepEqual(f.calls.filter(name => !name.startsWith('read:')), ['verify', 'baselines', 'storage', 'privacy',
-    'lease:held', 'open', 'prune_failed_witness', 'prune_failed_witness', 'close', 'lease:released']);
+    'lease:held', 'open', 'prune_failed_witness', 'prune_failed_witness', 'prune_failed_witness', 'close', 'lease:released']);
   assert.equal((await f.state.read('lease')).value.status, 'released');
   const output = await fs.readFile(path.join(f.root, REPORT), 'utf8');
   assert(!output.includes('test secret') && !output.includes('hostReceiptBase64'));
 });
 
-for (const settings of [{accepted: false}, {runtimeSha: '9'.repeat(40)}, {generationId: 'gen_china_999_1'}, {pricingRuntimeSha: '9'.repeat(40)},
+for (const settings of [{accepted: false}, {runtimeSha: '9'.repeat(40)}, {runtimeSha: '1518035b9e6b717cd364ae8d13e63d0127899112'},
+  {generationId: 'gen_china_999_1'}, {pricingRuntimeSha: '9'.repeat(40)},
   {manifest: '9'.repeat(64)}, {receiptSha256: '9'.repeat(64)}]) {
   test('unaccepted or different current runtime cannot acquire cleanup authority ' + JSON.stringify(settings), async t => {
     const f = await fixture(t, settings);
@@ -172,7 +185,7 @@ test('lost close retains only explicit per-target results and cannot claim an ag
   const f = await fixture(t); f.hooks.close = () => { throw Error('china_ssh_closed'); };
   await assert.rejects(runFailedWitnessCleanup(f.options), error => {
     assert.equal(error.report.completed, false); assert.equal(error.report.freedBytes, null);
-    assert.deepEqual(error.report.partialResults.map(value => value.targetIndex), [0, 1]);
+    assert.deepEqual(error.report.partialResults.map(value => value.targetIndex), [0, 1, 2]);
     assert.equal(error.report.diskFreeBytesBefore, null); assert.equal(error.report.diskFreeBytesAfter, null);
     assert.equal(error.report.leaseRelease, 'released'); return true;
   });
@@ -181,7 +194,7 @@ test('lost close retains only explicit per-target results and cannot claim an ag
 test('a resumed host observation never counts absent files as newly freed', async t => {
   const f = await fixture(t); f.hooks.result = index => ({...result(index), filesDeleted: 0, freedBytes: 0, alreadyAbsentFiles: 4});
   const report = await runFailedWitnessCleanup(f.options);
-  assert.equal(report.completed, true); assert.equal(report.freedBytes, 0); assert.equal(report.alreadyAbsentFiles, 8);
+  assert.equal(report.completed, true); assert.equal(report.freedBytes, 0); assert.equal(report.alreadyAbsentFiles, 12);
 });
 
 test('host result rejects arbitrary data, scope changes and inconsistent totals', () => {
@@ -194,8 +207,14 @@ test('host result rejects arbitrary data, scope changes and inconsistent totals'
   assert.equal(validateFailedWitnessCleanupReport({...result(), diskFreeBytesBefore: 20, diskFreeBytesAfter: 0}).diskFreeBytesAfter, 0);
   assert.throws(() => validateFailedWitnessCleanupReport(result(1), 0), /report_identity/);
   assert.throws(() => validateFailedWitnessCleanupReport(result(0), 1), /report_identity/);
-  assert.throws(() => validateFailedWitnessCleanupReport(result(1), 2), /report_target/);
+  assert.throws(() => validateFailedWitnessCleanupReport(result(1), 2), /report_identity/);
+  assert.throws(() => validateFailedWitnessCleanupReport(result(2), 1), /report_identity/);
+  for (const index of [3, -1, null, true, 1.5, '2'])
+    assert.throws(() => validateFailedWitnessCleanupReport(result(2), index), /report_target/);
   assert.throws(() => validateFailedWitnessCleanupReport({...result(1), freedBytes: 13041559297}, 1), /report_counts/);
+  assert.throws(() => validateFailedWitnessCleanupReport({...result(2), freedBytes: 13041561345}, 2), /report_counts/);
+  for (const field of ['runtimeSha', 'nonce', 'planSha256', 'rollbackSha256', 'imageId'])
+    assert.throws(() => validateFailedWitnessCleanupReport({...result(2), targetFailedAttempt: {...TARGETS[2], [field]: 'unbound'}}, 2), /report_identity/);
   assert.equal(validateFailedWitnessCleanupReport(result(1), 1).targetFailedAttempt.planSha256,
     '27888989f2a0e90e235f7a497fcce912ece493e9f5add5c40005e02ad991d9b2');
 });
@@ -222,6 +241,33 @@ test('an authenticated second refusal keeps the first result partial and release
   });
 });
 
+for (const errorCode of ['china_ssh_closed', 'china_host_witness_file_changed']) {
+  test('third-target failure preserves two authenticated partial results and unknown aggregates: ' + errorCode, async t => {
+    const f = await fixture(t), before = await f.state.read('accepted');
+    f.hooks.call = index => { if (index === 2) throw Error(errorCode); };
+    await assert.rejects(runFailedWitnessCleanup(f.options), error => {
+      assert.equal(error.report.completed, false);
+      assert.equal(error.report.leaseRelease, errorCode === 'china_ssh_closed' ? 'expires' : 'released');
+      assert.deepEqual(error.report.partialResults, [result(0), result(1)]);
+      for (const key of ['filesDeleted', 'freedBytes', 'alreadyAbsentFiles', 'diskFreeBytesBefore', 'diskFreeBytesAfter']) assert.equal(error.report[key], null);
+      return error.message === errorCode;
+    });
+    assert.deepEqual(f.targets, [0, 1, 2]); assert(!f.calls.includes('close'));
+    assert.deepEqual(await f.state.read('accepted'), before);
+  });
+}
+
+test('a malformed third reply retains the first two results without inventing totals', async t => {
+  const f = await fixture(t);
+  f.hooks.result = index => index === 2 ? {...result(index), freedBytes: 13041561345} : result(index);
+  await assert.rejects(runFailedWitnessCleanup(f.options), error => {
+    assert.equal(error.report.completed, false); assert.equal(error.report.leaseRelease, 'released');
+    assert.deepEqual(error.report.partialResults, [result(0), result(1)]);
+    for (const key of ['filesDeleted', 'freedBytes', 'alreadyAbsentFiles', 'diskFreeBytesBefore', 'diskFreeBytesAfter']) assert.equal(error.report[key], null);
+    return /report_counts/.test(error.message);
+  });
+});
+
 test('changed authority after the first target blocks the second and the aggregate', async t => {
   const f = await fixture(t);
   f.hooks.call = async index => {
@@ -236,13 +282,40 @@ test('changed authority after the first target blocks the second and the aggrega
   assert.deepEqual(f.targets, [0]);
 });
 
-test('resuming both fixed targets aggregates only newly removed files', async t => {
+test('resuming all three fixed targets aggregates only newly removed files', async t => {
   const f = await fixture(t);
-  f.hooks.result = index => ({...result(index), filesDeleted: index ? 1 : 0,
-    freedBytes: index ? 258520064 : 0, alreadyAbsentFiles: index ? 3 : 4});
+  f.hooks.result = index => ({...result(index), filesDeleted: index === 2 ? 1 : 0,
+    freedBytes: index === 2 ? 258520064 : 0, alreadyAbsentFiles: index === 2 ? 3 : 4});
   const report = await runFailedWitnessCleanup(f.options);
   assert.equal(report.completed, true); assert.equal(report.filesDeleted, 1);
-  assert.equal(report.freedBytes, 258520064); assert.equal(report.alreadyAbsentFiles, 7);
+  assert.equal(report.freedBytes, 258520064); assert.equal(report.alreadyAbsentFiles, 11);
+});
+
+test('normal post-precleanup run reports eight already absent and only four newly deleted runtime151 files', async t => {
+  const f = await fixture(t), before = await f.state.read('accepted');
+  f.hooks.result = index => index < 2 ? {...result(index), filesDeleted: 0, freedBytes: 0, alreadyAbsentFiles: 4} : result(index);
+  const report = await runFailedWitnessCleanup(f.options);
+  assert.equal(report.completed, true); assert.equal(report.filesDeleted, 4);
+  assert.equal(report.freedBytes, 13041561344); assert.equal(report.alreadyAbsentFiles, 8);
+  assert.equal(report.diskFreeBytesBefore, 14000000000); assert.equal(report.diskFreeBytesAfter, 51000000003);
+  assert.deepEqual(report.results.map(value => value.filesDeleted), [0, 0, 4]);
+  assert.deepEqual(report.results.map(value => value.earlierBulkFilesAbsent), [8, 8, 8]);
+  assert.deepEqual(await f.state.read('accepted'), before);
+});
+
+test('authority drift after two completed targets prevents runtime151 deletion and aggregation', async t => {
+  const f = await fixture(t);
+  f.hooks.call = async index => {
+    if (index !== 1) return;
+    const observed = await f.state.read('accepted');
+    await f.raw.compareAndSwap('accepted', observed, {...observed.value, revision: observed.value.revision + 1});
+  };
+  await assert.rejects(runFailedWitnessCleanup(f.options), error => {
+    assert.equal(error.report.completed, false); assert.deepEqual(error.report.partialResults, [result(0), result(1)]);
+    for (const key of ['filesDeleted', 'freedBytes', 'alreadyAbsentFiles', 'diskFreeBytesBefore', 'diskFreeBytesAfter']) assert.equal(error.report[key], null);
+    return /accepted_state/.test(error.message);
+  });
+  assert.deepEqual(f.targets, [0, 1]);
 });
 
 test('manual invocation binds the real clean main HEAD and fixed workflow before use', async t => {
