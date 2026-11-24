@@ -5,6 +5,7 @@ import {isPlatformOwner} from '@/lib/platform-access';
 import {isCalculationOriginAllowed} from '@/lib/catalog/calculation-request-origin';
 import {ajesClient} from '@/lib/catalog/ajes-runtime';
 import {AjesInputError} from '@/lib/catalog/ajes-query';
+import {AjesUnavailable} from '@/lib/catalog/ajes-client';
 export const dynamic='force-dynamic';
 const response=(body:unknown,status=200)=>NextResponse.json(body,{status,headers:{'Cache-Control':'private, no-store'}});
 
@@ -18,6 +19,7 @@ export async function POST(req:Request) {
   try{const raw=await req.text();if(Buffer.byteLength(raw)>4096)return response({error:'Слишком большой запрос'},413);query=JSON.parse(raw);}catch{return response({error:'Некорректный запрос'},400);}
   try{return response({ok:true,...await ajesClient.read(query,ip)});}
   catch(error){
+    if(error instanceof AjesUnavailable&&error.reason==='market_not_supported')return response({error:'AJ System используется только для Японии.',code:'ajes_market_retired'},410);
     if(error instanceof AjesInputError)return response({error:'Проверьте параметры поиска'},400);
     return response({error:'Источник временно недоступен. Проверьте подключение и настройки источника.'},503);
   }
