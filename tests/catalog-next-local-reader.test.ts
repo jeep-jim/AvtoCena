@@ -10,7 +10,7 @@ import {fixture, row, editorialEntry} from './helpers/china-pricing-worker-fixtu
 import {buildChinaPricingGeneration} from '../scripts/catalog-next/pricing-generation.mjs';
 import {initializeLocalChinaReader, searchLocalChina, localChinaFacets, localChinaCounts,
   readLocalChinaOffer, localChinaPublicRates, resetLocalChinaReaderForTests, chinaLocalOfferGuard} from '../apps/web/lib/catalog/china-local-reader';
-import {searchOffers, countCatalogOffers, readCatalogModelNames, publicOffer} from '../apps/web/lib/catalog/storage';
+import {searchOffers, countCatalogOffers, readCatalogModelNames, publicOffer, readCatalogFacets, resetCatalogReadCachesForTests} from '../apps/web/lib/catalog/storage';
 import {readCatalogMarketPage} from '../apps/web/lib/catalog/market-page';
 import {readPreparedChinaCompatibility, PreparedChinaCutChanged} from '../apps/web/lib/catalog/prepared-china-http-fixture';
 import {priceCardForCity} from '../apps/web/lib/catalog/card-city-delivery';
@@ -148,6 +148,42 @@ test('wrong manifest binding is refused before exposing any records', async t =>
   process.env.CATALOG_CHINA_LOCAL_MANIFEST_SHA256 = '0'.repeat(64);
   await assert.rejects(initializeLocalChinaReader(), /manifest_checksum/);
   assert.equal(f.mutableReads(), 0);
+  assert.equal(f.reads().networkCalls, 0);
+});
+
+test('startup keeps foreign routes available while a rejected China generation remains rejected', async t => {
+  const f = await setup(t);
+  process.env.CATALOG_CHINA_LOCAL_MANIFEST_SHA256 = '0'.repeat(64);
+  const previous = process.env.NEXT_RUNTIME; process.env.NEXT_RUNTIME = 'nodejs';
+  t.after(() => { if (previous === undefined) delete process.env.NEXT_RUNTIME; else process.env.NEXT_RUNTIME = previous; });
+  const logs: string[] = []; t.mock.method(console, 'error', (line: string) => { logs.push(line); });
+  const {register} = await import('../apps/web/instrumentation');
+  await register();
+  assert.deepEqual(logs.map(line => JSON.parse(line)), [{event: 'china_local_unavailable', phase: 'startup'}]);
+  await assert.rejects(searchLocalChina({market: 'china'}), /manifest_checksum/);
+  assert.equal(f.mutableReads(), 0); assert.equal(f.reads().networkCalls, 0);
+});
+
+test('mixed facet failure keeps confirmed foreign names and cannot leak the obsolete China directory', async t => {
+  const f = await setup(t);
+  const sample = (await searchLocalChina({market: 'china'}))!.items[0];
+  const foreign = {...sample, id: '1'.repeat(24), market: 'europe', make: 'Foreign', model: 'Saved model', cardImageUrl: 'https://example.invalid/photo.jpg'};
+  const oldChina = {...sample, id: '2'.repeat(24), make: 'Obsolete China', model: 'Must not return', cardImageUrl: 'https://example.invalid/photo.jpg'};
+  const generationId = 'gen_foreign_fixture', storage = getJsonStorage();
+  const values: Record<string, any> = {
+    'catalog/manifest.json': {version: 2, generationId, updatedAt: foreign.updatedAt, markets: {europe: {count: 1}, china: {count: 1}}},
+    'catalog-editorial/current.json': {revision: 'foreign', entries: {}},
+    'catalog/public/facets.json': {generationId, makes: ['Foreign', 'Obsolete China'], models: [], markets: ['china', 'europe'], bodyTypes: [], fuels: [], transmissions: [], drives: []},
+    'catalog/public/projection/all.json': {generationId, items: [foreign, oldChina]},
+  };
+  t.mock.method(storage, 'readJson', async (key: string, fallback: any) => values[key] ?? fallback);
+  t.mock.method(storage, 'readJsonWithMeta', async (key: string, fallback: any) => ({value: values[key] ?? fallback, found: Object.hasOwn(values, key)}));
+  resetCatalogReadCachesForTests(); t.after(() => resetCatalogReadCachesForTests());
+  await fs.chmod(f.built.paths.details, 0o600);
+  await assert.rejects(readCatalogFacets({market: 'china'}), /generation_changed/);
+  const result = await readCatalogFacets({yearFrom: 2014});
+  assert.deepEqual(result.makes, ['Foreign']);
+  assert.deepEqual(result.models, [{make: 'Foreign', model: 'Saved model'}]);
   assert.equal(f.reads().networkCalls, 0);
 });
 

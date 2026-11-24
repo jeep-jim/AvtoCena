@@ -3208,7 +3208,9 @@ export async function readCatalogFacets(params: CatalogSearchParams = {}){
  return withChinaAggregateAuthority(params.market,()=>withCatalogEditorial(()=>withCatalogColorFilter(params,async()=>{
   const legacy=await readCatalogFacetsEditorial(params);
   if(!chinaLocalRuntimeConfigured()||params.market&&params.market!=='any')return legacy;
-  const china=(await localChinaFacets(params))!,merged={...legacy};
+  const china=await localChinaFacets(params).catch(()=>null);
+  if(!china)return legacy;
+  const merged={...legacy};
   for(const key of ['makes','bodyTypes','fuels','transmissions','drives'] as const)merged[key]=[...new Set([...legacy[key],...china[key]])].sort((a,b)=>a.localeCompare(b,'ru'));
   merged.models=[...new Map([...legacy.models,...china.models].map(row=>[`${row.make}:${row.model}`,row])).values()];
   return merged;
