@@ -1,0 +1,82 @@
+{
+  "version": 1,
+  "market": "china",
+  "accepted": false,
+  "encyclopediaWrites": 0,
+  "otherMarketWrites": 0,
+  "controllerSha": "ee8ba8def13a15333fae9dd4ece53e574e37cc14",
+  "runtimeSha": "822f925bb30c4e07010f6e14b6574f1b4bd6306e",
+  "pricingRuntimeSha": "64c6338e0db23c8999096bceefbf113c0136fe15",
+  "generationId": "gen_china_45369451603_1",
+  "sourceObservedAt": "2026-11-24T10:22:41.417Z",
+  "pricingAsOf": "2026-11-24T10:24:33.128Z",
+  "rows": 283188,
+  "sourceRows": 291434,
+  "oracle": [
+    {
+      "name": "china-first-page",
+      "total": 283188,
+      "items": 24
+    },
+    {
+      "name": "china-power-to-160",
+      "total": 71160,
+      "items": 24
+    },
+    {
+      "name": "volkswagen-second-page",
+      "total": 24241,
+      "items": 24
+    },
+    {
+      "name": "volkswagen-2014-budget-three-million",
+      "total": 13578,
+      "items": 24
+    },
+    {
+      "name": "novokuznetsk-first-page",
+      "total": 283188,
+      "items": 24
+    },
+    {
+      "name": "moscow-budget-one-and-half-million",
+      "total": 20110,
+      "items": 24
+    },
+    {
+      "name": "moscow-budget-two-million",
+      "total": 50754,
+      "items": 24
+    },
+    {
+      "name": "china-deep-page-nine",
+      "total": 283188,
+      "items": 24
+    },
+    {
+      "name": "actual-popular-model",
+      "total": 4309,
+      "items": 24
+    },
+    {
+      "name": "popular-model-2014-novokuznetsk",
+      "total": 4442,
+      "items": 24
+    },
+    {
+      "name": "retained-unpriced-inventory",
+      "total": 102138,
+      "items": 24
+    },
+    {
+      "name": "china-frozen-rates-and-facets",
+      "total": 283188,
+      "items": 24
+    }
+  ],
+  "imageId": "sha256:443e87ed141838f003ce6209fc290f4a2435113b7cfb83126e3d88fb6877cf83",
+  "phase": "start_candidate_preserving_live",
+  "errorCode": "china_host_candidate_startup",
+  "finishedAt": "2026-11-24T11:38:44.672Z",
+  "observedPublicRelease": "56d6b94fea70457e0ce2b0820596da9972846b90"
+}

@@ -8,7 +8,42 @@ import {createHash} from 'node:crypto';
 const need = (value, code) => assert(value, 'china_ssh_' + code);
 const hash = raw => createHash('sha256').update(raw).digest('hex');
 const quote = value => "'" + value.replaceAll("'", "'\\''") + "'";
-const methods = new Set(['init', 'upload', 'start', 'functional', 'speed', 'switch', 'browser_evidence', 'accept', 'recover', 'retire', 'retire_recovery', 'close']);
+const methods = new Set(['init', 'resume_init', 'upload', 'start', 'functional', 'speed', 'switch', 'browser_evidence', 'accept', 'recover', 'diagnose', 'retire', 'retire_recovery', 'close']);
+
+export function checkedStartupReport(value) {
+  const keys = ['version', 'kind', 'ready', 'elapsedSeconds', 'attempts', 'health', 'candidate', 'reason'];
+  const exact = (row, expected) => row && typeof row === 'object' && !Array.isArray(row)
+    && JSON.stringify(Object.keys(row).sort()) === JSON.stringify([...expected].sort());
+  need(exact(value, keys) && value.version === 1 && value.kind === 'china-host-startup-v1' && typeof value.ready === 'boolean'
+    && Number.isFinite(value.elapsedSeconds) && value.elapsedSeconds >= 0 && value.elapsedSeconds <= 3600
+    && Number.isSafeInteger(value.attempts) && value.attempts >= 0 && value.attempts <= 10000
+    && ['not_checked', 'ok', 'connection_refused', 'timeout', 'invalid_json', 'identity_mismatch', 'http_response', 'connection_error', 'unavailable'].includes(value.health)
+    && ['ready', 'timeout', 'exited', 'oom', 'restarted', 'inspect_unavailable'].includes(value.reason)
+    && value.ready === (value.reason === 'ready') && (!value.ready || value.health === 'ok'), 'startup_report');
+  const candidate = value.candidate;
+  need(candidate === null || (exact(candidate, ['running', 'status', 'exitCode', 'oomKilled', 'restartCount'])
+    && typeof candidate.running === 'boolean' && typeof candidate.oomKilled === 'boolean'
+    && ['created', 'restarting', 'running', 'removing', 'paused', 'exited', 'dead'].includes(candidate.status)
+    && Number.isSafeInteger(candidate.exitCode) && Math.abs(candidate.exitCode) <= 2147483647
+    && Number.isSafeInteger(candidate.restartCount) && candidate.restartCount >= 0 && candidate.restartCount <= 10000), 'startup_report');
+  return value;
+}
+
+export function checkedRetainedFenceReport(value) {
+  const keys = ['version', 'kind', 'ingressChanged', 'changedFields', 'mountOrderOnly',
+    'beforePid', 'afterPid', 'beforeStartedAt', 'afterStartedAt'];
+  const fields = ['Id', 'Image', 'Config', 'HostConfig', 'Mounts', 'Pid', 'StartedAt', 'RestartCount', 'Running'];
+  need(value && typeof value === 'object' && !Array.isArray(value)
+    && JSON.stringify(Object.keys(value).sort()) === JSON.stringify(keys.sort())
+    && value.version === 1 && value.kind === 'china-host-retained-fence-v1'
+    && typeof value.ingressChanged === 'boolean' && typeof value.mountOrderOnly === 'boolean'
+    && Array.isArray(value.changedFields) && value.changedFields.length <= fields.length
+    && new Set(value.changedFields).size === value.changedFields.length && value.changedFields.every(key => fields.includes(key))
+    && [value.beforePid,value.afterPid].every(pid => pid === null || Number.isSafeInteger(pid) && pid >= 0 && pid <= 2147483647)
+    && [value.beforeStartedAt,value.afterStartedAt].every(time => time === null || typeof time === 'string'
+      && /^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(?:\.\d{1,9})?Z$/.test(time)), 'retained_fence_report');
+  return value;
+}
 
 /** A single authenticated, ordered stream. Raw private files never enter JSON
  * logs; host reads exactly the already-approved compressed byte length. */
@@ -69,10 +104,14 @@ export class ChinaSshSession {
     if (value.kind === 'ready') { need(value.protocol === 1, 'protocol_version'); this.readyResolve(); return; }
     const row = this.pending.get(value.id); need(row, 'reply_id');
     if (value.kind === 'upload-ready') { row.readyResolve(); return; }
+    const startup = value.kind === 'error' && value.startup !== undefined ? checkedStartupReport(value.startup) : undefined;
+    const retainedFence = value.kind === 'error' && value.retainedFence !== undefined ? checkedRetainedFenceReport(value.retainedFence) : undefined;
     clearTimeout(row.timer); this.pending.delete(value.id);
     if (value.kind === 'result') { row.resolve(value.value); row.readyResolve(false); }
     else if (value.kind === 'error') {
       const error = Error(/^china_host_[a-z0-9_]+$/.test(value.code ?? '') ? value.code : 'china_ssh_remote_error');
+      if (startup !== undefined) error.startup = startup;
+      if (retainedFence !== undefined) error.retainedFence = retainedFence;
       row.reject(error); row.readyReject(error);
     } else throw Error('china_ssh_reply_kind');
   }
@@ -82,7 +121,7 @@ export class ChinaSshSession {
     let resolve, reject, readyResolve, readyReject;
     const result = new Promise((yes, no) => { resolve = yes; reject = no; }); result.catch(() => {});
     const ready = new Promise((yes, no) => { readyResolve = yes; readyReject = no; }); ready.catch(() => {});
-    const timeout = method === 'speed' ? 1600000 : method === 'start' ? 1200000 : method === 'upload' ? 1800000 : 300000;
+    const timeout = method === 'speed' ? 1600000 : method === 'start' ? 1200000 : ['upload', 'resume_init'].includes(method) ? 1800000 : 300000;
     const timer = setTimeout(() => this.abort(Error('china_ssh_' + method + '_timeout')), timeout);
     this.pending.set(id, {resolve, reject, readyResolve, readyReject, timer});
     this.write(Buffer.from(JSON.stringify({id, method, params}) + '\n')).catch(error => this.abort(error));

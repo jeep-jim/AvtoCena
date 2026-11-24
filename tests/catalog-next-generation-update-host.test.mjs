@@ -188,7 +188,7 @@ with tempfile.TemporaryDirectory(prefix='china-data-host-') as directory:
             assert candidate_id not in containers
             row = {'Id': candidate_id, 'Image': body['Image'],
                 'Config': {key: copy.deepcopy(body[key]) for key in ('Env', 'WorkingDir', 'Entrypoint', 'Cmd', 'Labels')},
-                'HostConfig': copy.deepcopy(body['HostConfig']), 'State': {'Running': False, 'Pid': 0, 'StartedAt': ''}, 'RestartCount': 0,
+                'HostConfig': copy.deepcopy(body['HostConfig']), 'State': {'Running': False, 'Status': 'created', 'ExitCode': 0, 'OOMKilled': False, 'Pid': 0, 'StartedAt': ''}, 'RestartCount': 0,
                 'Mounts': [{'Type': 'bind', 'Source': binding.split(':')[0], 'Destination': binding.split(':')[1], 'RW': False}
                     for binding in body['HostConfig']['Binds']]}
             containers[candidate_id] = row
@@ -197,7 +197,7 @@ with tempfile.TemporaryDirectory(prefix='china-data-host-') as directory:
         assert identity in (candidate_id, oldest_id), 'must never mutate a protected process'
         if method == 'POST' and target.endswith('/start'):
             assert identity == candidate_id
-            containers[identity]['State'].update(Running=True, Pid=3006, StartedAt='2026-11-24T01:00:00Z')
+            containers[identity]['State'].update(Running=True, Status='running', Pid=3006, StartedAt='2026-11-24T01:00:00Z')
         elif method == 'POST' and target.endswith('/update'):
             assert identity == candidate_id
             containers[identity]['HostConfig']['RestartPolicy'] = copy.deepcopy(body['RestartPolicy'])

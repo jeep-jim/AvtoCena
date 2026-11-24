@@ -34,6 +34,7 @@ jobs:
       - name: Install controller dependencies
         run: npm ci --no-audit --no-fund
       - name: Verify exact invocation, frozen baselines and rollback protocol
+        id: release_profile
         run: |
           node --input-type=module <<'JS'
           import {verifyReadonlyInvocation} from './scripts/lib/readonly-marker-invocation.mjs';
@@ -41,6 +42,7 @@ jobs:
           JS
           node scripts/verify-frozen-speed-baselines.mjs
           node --import tsx --test tests/catalog-next-*.test.mjs tests/release-speed-guard-contract.test.mjs
+          node scripts/catalog-next/release-reuse.mjs --workflow-mode >> "$GITHUB_OUTPUT"
       - name: Checkout the exact runtime
         run: node scripts/catalog-next/checkout-runtime.mjs --serving
       - name: Check the actual runtime reader and calculation context
@@ -59,6 +61,7 @@ jobs:
           fs.appendFileSync(process.env.GITHUB_ENV,'CHROME_BIN='+fs.realpathSync(chrome)+'\nPLAYWRIGHT_MODULE='+process.env.RUNNER_TEMP+'/release-browser/node_modules/playwright/index.mjs\n');
           JS
       - name: Match the host image store in an isolated runner daemon
+        if: steps.release_profile.outputs.reuse_host != 'true'
         id: china_docker
         uses: docker/setup-docker-action@7ec28a010822b4626af4874f9448a4b05ac6f3e5
         with:
@@ -67,6 +70,7 @@ jobs:
           daemon-config: |
             {"features":{"containerd-snapshotter":true}}
       - name: Build the exact verified runtime privately
+        if: steps.release_profile.outputs.reuse_host != 'true'
         env:
           CHINA_BUILD_DOCKER_HOST: ${{ steps.china_docker.outputs.sock }}
         run: node scripts/run-node-with-resources.mjs scripts/catalog-next/build-release-image.mjs "$RUNNER_TEMP/china-runtime"
