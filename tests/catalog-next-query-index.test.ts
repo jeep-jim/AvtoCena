@@ -5,6 +5,7 @@ import fs from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
+import {DatabaseSync} from 'node:sqlite';
 import {buildChinaQueryIndex,openChinaQueryIndex} from '../scripts/catalog-next/query-index.mjs';
 import {catalogSearchProjectionMatches,catalogSearchProjectionComparator} from '../apps/web/lib/catalog/storage';
 import {safePublicPricing} from '../apps/web/lib/catalog/safe-public-pricing';
@@ -153,6 +154,44 @@ test('deep pagination has no legacy 8192-record cap',async t=>scoped(async()=>{
   const actual=f.reader.query({page:350,pageSize:24});
   assert.equal(actual.total,8401);assert.deepEqual(actual.items.map((item:any)=>item.id),f.rows.slice(8376,8400).map(row=>row.id));
   assert.equal(f.reader.query({page:351,pageSize:24}).items.length,1);
+}));
+
+test('range counts and sorted selection never open large card payloads; only selected IDs are hydrated',async t=>scoped(async()=>{
+  const rows=fixtures(512).map(row=>({...row,calculationSnapshot:{...row.calculationSnapshot,fixtureIndexPayload:'x'.repeat(16384)}}));
+  (rows[0] as any).year=undefined;(rows[1] as any).year=0;
+  const f=await setup(t,rows);
+  const inspect=new DatabaseSync(f.filename,{readOnly:true});
+  let payloadRoots:Set<number>;
+  try{
+    const columns=inspect.prepare('PRAGMA table_info(cards)').all().map(row=>row.name);
+    assert(!columns.some(name=>String(name).includes('json')),'filter table must not contain card JSON');
+    payloadRoots=new Set(inspect.prepare("SELECT rootpage FROM sqlite_schema WHERE tbl_name='card_payloads'").all()
+      .map(row=>Number(row.rootpage)).filter(root=>root>0));
+    assert(payloadRoots.size>0);
+  }finally{inspect.close();}
+  const opensPayload=(statement:any)=>statement.bytecode.some((op:any)=>op.opcode==='OpenRead'&&payloadRoots.has(op.p2));
+  const range=f.reader.explainQuery({yearFrom:2020,countOnly:true});
+  assert(range.count.plan.some((step:any)=>/SEARCH c USING COVERING INDEX cards_year \(year>/.test(step.detail)),
+    JSON.stringify(range.count.plan));
+  assert(!opensPayload(range.count));assert.equal(range.selection,null);assert.equal(range.hydration,null);
+  const query={powerTo:160,sort:'mileage',page:2,pageSize:24};
+  const plan=f.reader.explainQuery(query);
+  assert(!opensPayload(plan.count));assert(!opensPayload(plan.selection));
+  assert.doesNotMatch(plan.selection.sql,/projection_json|locator_json|card_payloads/);
+  assert(plan.selection.plan.some((step:any)=>step.detail.includes('TEMP B-TREE FOR ORDER BY')),
+    'fixture deliberately exercises a sort rather than only an already ordered index');
+  assert(opensPayload(plan.hydration));
+  assert(plan.hydration.plan.some((step:any)=>/SEARCH card_payloads USING PRIMARY KEY \(id=/.test(step.detail)),
+    JSON.stringify(plan.hydration.plan));
+  const expected=rows.filter(row=>catalogSearchProjectionMatches(row as any,query)).sort(catalogSearchProjectionComparator(query.sort));
+  const actual=f.reader.query(query);
+  assert.equal(actual.total,expected.length);assert.equal(actual.items.length,24);
+  assert.deepEqual(actual.items.map((item:any)=>item.id),expected.slice(24,48).map(row=>row.id));
+  assert(actual.items.every((item:any)=>item.projection.calculationSnapshot.fixtureIndexPayload.length===16384));
+  for(const bounds of [{yearTo:2014},{yearFrom:2014},{yearFrom:2018,yearTo:2021}]){
+    const wanted=rows.filter(row=>catalogSearchProjectionMatches(row as any,bounds));
+    assert.equal(f.reader.query({...bounds,countOnly:true}).total,wanted.length,JSON.stringify(bounds));
+  }
 }));
 
 test('query is local, unknown fields/sort/city fail and pinned cut change invalidates reads',async t=>scoped(async()=>{

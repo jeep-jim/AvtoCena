@@ -20,6 +20,8 @@ const columns = {make: 'make_key', color: 'color_key', fuel: 'fuel_key', bodyTyp
   transmission: 'transmission_key', drive: 'drive_key', auctionGrade: 'grade_key'};
 const bindingFields = ['sourceSha256', 'pricingReceiptSha256', 'calculationVersion', 'encyclopediaSha256', 'editorialSha256', 'deliveryTariffSha256', 'filterSemanticsSha256'];
 const PRICE_SEMANTICS = 'calculatedCatalogPrice-seller-fallback-v1';
+const LAYOUT = 'filter-columns-with-separate-payloads-v1';
+const HYDRATE_SQL = 'SELECT projection_json,locator_json FROM card_payloads WHERE id=?';
 
 function validateBinding(binding) {
   need(binding?.version === 1 && binding.market === 'china' && typeof binding.generationId === 'string' &&
@@ -66,13 +68,15 @@ export async function buildChinaQueryIndex({filename, binding, rows, expectedRow
         make_key TEXT NOT NULL,color_key TEXT NOT NULL,fuel_key TEXT NOT NULL,body_key TEXT NOT NULL,
         transmission_key TEXT NOT NULL,drive_key TEXT NOT NULL,grade_key TEXT NOT NULL,
         year REAL,mileage_filter REAL,mileage_sort REAL,engine_cc REAL,filter_power_hp REAL,
-        auction_time REAL,auction_date TEXT,filter_rub INTEGER,seller_price_rub REAL,
-        projection_json TEXT NOT NULL,locator_json TEXT NOT NULL,price_ledger_sha256 TEXT);
+        auction_time REAL,auction_date TEXT,filter_rub INTEGER,seller_price_rub REAL);
+      CREATE TABLE card_payloads(id TEXT PRIMARY KEY,projection_json TEXT NOT NULL,
+        locator_json TEXT NOT NULL,price_ledger_sha256 TEXT) WITHOUT ROWID;
       CREATE TABLE model_terms(term TEXT NOT NULL,id TEXT NOT NULL,PRIMARY KEY(term,id));
       CREATE TABLE city_prices(city TEXT NOT NULL,id TEXT NOT NULL,filter_rub INTEGER,
         ledger_sha256 TEXT,PRIMARY KEY(city,id));
       BEGIN;`);
-    const put = db.prepare('INSERT INTO cards VALUES(' + Array.from({length: 21}, () => '?').join(',') + ')');
+    const put = db.prepare('INSERT INTO cards VALUES(' + Array.from({length: 18}, () => '?').join(',') + ')');
+    const payloads = db.prepare('INSERT INTO card_payloads VALUES(?,?,?,?)');
     const model = db.prepare('INSERT INTO model_terms VALUES(?,?)');
     const city = db.prepare('INSERT INTO city_prices VALUES(?,?,?,?)');
     for await (const row of rows) {
@@ -97,7 +101,8 @@ export async function buildChinaQueryIndex({filename, binding, rows, expectedRow
       put.run(projection.id, count, keys.make, keys.color, keys.fuel, keys.bodyType, keys.transmission, keys.drive, keys.auctionGrade,
         positive(projection.year), positive(projection.mileageKm), nonnegative(projection.mileageKm), positive(projection.engineCc), keys.filterPowerHp,
         positive(Date.parse(projection.auctionDate ?? '')), typeof projection.auctionDate === 'string' ? projection.auctionDate : null,
-        filterRub, positive(projection.sellerPriceRub), payload, locator, row.frozenPrice.ledgerSha256);
+        filterRub, positive(projection.sellerPriceRub));
+      payloads.run(projection.id, payload, locator, row.frozenPrice.ledgerSha256);
       for (const term of keys.modelTerms) model.run(term, projection.id);
       for (const key of cityKeys) {
         const cityRub = price(cities[key]);
@@ -119,7 +124,7 @@ export async function buildChinaQueryIndex({filename, binding, rows, expectedRow
       CREATE INDEX cards_engine ON cards(engine_cc,id);
       CREATE INDEX city_prices_price ON city_prices(city,filter_rub,id);
       ANALYZE;`);
-    const metadata = {version: 1, kind: 'china-query-index-v1', priceSemantics: PRICE_SEMANTICS, binding, rows: count, cityKeys: [...cityKeys],
+    const metadata = {version: 1, kind: 'china-query-index-v1', layout: LAYOUT, priceSemantics: PRICE_SEMANTICS, binding, rows: count, cityKeys: [...cityKeys],
       orderedRowsSha256: rowsHash.digest('hex'), frozenPricesSha256: priceHash.digest('hex')};
     db.prepare('INSERT INTO metadata VALUES(?,?)').run('manifest', JSON.stringify(metadata));
     need(db.prepare('PRAGMA integrity_check').get().integrity_check === 'ok', 'integrity');
@@ -165,7 +170,9 @@ function compileQuery(params, manifest) {
     clause(`${rub} IS ${params.hasPrice === 'yes' ? 'NOT ' : ''}NULL`);
   }
   numeric('budgetFrom', `${rub}>=?`); numeric('budgetTo', `${rub}<=?`);
-  numeric('yearFrom', 'COALESCE(c.year,0)>=?'); numeric('yearTo', 'COALESCE(c.year,0)<=?');
+  // Unknown years retain the existing zero-value upper-bound semantics, while
+  // a positive lower bound can use the year index directly.
+  numeric('yearFrom', 'c.year>=?'); numeric('yearTo', '(c.year<=? OR c.year IS NULL)');
   numeric('mileageFrom', 'c.mileage_filter>=?'); numeric('mileageTo', 'c.mileage_filter<=?');
   numeric('engineFrom', 'c.engine_cc>=?'); numeric('engineTo', 'c.engine_cc<=?');
   numeric('powerFrom', 'c.filter_power_hp>=?'); numeric('powerTo', 'c.filter_power_hp<=?', 0.01);
@@ -192,8 +199,10 @@ function compileQuery(params, manifest) {
     Number.isSafeInteger(page * pageSize), 'pagination');
   const from = 'cards c' + (cityKey === undefined ? '' : ' JOIN city_prices p ON p.id=c.id AND p.city=?');
   const bound = cityKey === undefined ? values : [cityKey, ...values];
-  return {where: filters.length ? ' WHERE ' + filters.join(' AND ') : '', from, values: bound, order,
-    page, pageSize, offset: (page - 1) * pageSize, rub};
+  const where = filters.length ? ' WHERE ' + filters.join(' AND ') : '';
+  return {values: bound, page, pageSize, offset: (page - 1) * pageSize,
+    countSql: 'SELECT COUNT(*) n FROM ' + from + where,
+    selectSql: 'SELECT c.id,' + rub + ' query_rub FROM ' + from + where + ' ORDER BY ' + order + ' LIMIT ? OFFSET ?'};
 }
 
 /** Opening performs the full local hash/integrity check BEFORE serving. Query
@@ -202,7 +211,8 @@ function compileQuery(params, manifest) {
 export async function openChinaQueryIndex({filename, manifest, assertAuthority = () => {}}) {
   manifest = structuredClone(manifest);
   validateBinding(manifest?.binding);
-  need(manifest.version === 1 && manifest.kind === 'china-query-index-v1' && manifest.priceSemantics === PRICE_SEMANTICS && integer(manifest.rows) && manifest.rows > 0 &&
+  need(manifest.version === 1 && manifest.kind === 'china-query-index-v1' && manifest.layout === LAYOUT &&
+    manifest.priceSemantics === PRICE_SEMANTICS && integer(manifest.rows) && manifest.rows > 0 &&
     manifest.file?.name === path.basename(filename) && SHA.test(manifest.file?.sha256 ?? ''), 'manifest');
   need(assertAuthority.constructor?.name !== 'AsyncFunction', 'async_request_authority');
   const authority = () => need(assertAuthority()?.then === undefined, 'async_request_authority');
@@ -216,7 +226,8 @@ export async function openChinaQueryIndex({filename, manifest, assertAuthority =
     const {file, ...expected} = manifest;
     const sealed = JSON.parse(db.prepare("SELECT value FROM metadata WHERE key='manifest'").get()?.value ?? 'null');
     need(jsonHash(sealed) === jsonHash(expected) && db.prepare('PRAGMA quick_check').get().quick_check === 'ok' &&
-      db.prepare('SELECT COUNT(*) n FROM cards').get().n === manifest.rows, 'metadata');
+      db.prepare('SELECT COUNT(*) n FROM cards').get().n === manifest.rows &&
+      db.prepare('SELECT COUNT(*) n FROM card_payloads').get().n === manifest.rows, 'metadata');
     authority();
   } catch (error) { db.close(); throw error; }
   const localIdentity = () => {
@@ -229,6 +240,7 @@ export async function openChinaQueryIndex({filename, manifest, assertAuthority =
     return value;
   };
   freeze(manifest);
+  const hydrate = db.prepare(HYDRATE_SQL);
   return Object.freeze({
     manifest,
     query(params = {}) {
@@ -237,13 +249,31 @@ export async function openChinaQueryIndex({filename, manifest, assertAuthority =
       // asynchronous callbacks are explicitly refused.
       authority(); localIdentity();
       const sql = compileQuery(params, manifest);
-      const total = Number(db.prepare('SELECT COUNT(*) n FROM ' + sql.from + sql.where).get(...sql.values).n);
-      const records = params.countOnly ? [] : db.prepare('SELECT c.id,c.projection_json,c.locator_json,' + sql.rub + ' query_rub FROM ' +
-        sql.from + sql.where + ' ORDER BY ' + sql.order + ' LIMIT ? OFFSET ?').all(...sql.values, sql.pageSize, sql.offset);
+      const total = Number(db.prepare(sql.countSql).get(...sql.values).n);
+      // Filtering/sorting handles only compact scalar columns. JSON is read
+      // in a separate point lookup AFTER LIMIT, never by the sorting cursor.
+      const selected = params.countOnly ? [] : db.prepare(sql.selectSql).all(...sql.values, sql.pageSize, sql.offset);
+      const items = selected.map(row => {
+        const payload = hydrate.get(row.id);
+        need(payload, 'payload_missing');
+        return {id: row.id, projection: JSON.parse(payload.projection_json),
+          detailLocator: JSON.parse(payload.locator_json), queryRub: row.query_rub};
+      });
       authority(); localIdentity();
-      return {generationId: manifest.binding.generationId, total, page: sql.page, pageSize: sql.pageSize,
-        items: records.map(row => ({id: row.id, projection: JSON.parse(row.projection_json),
-          detailLocator: JSON.parse(row.locator_json), queryRub: row.query_rub}))};
+      return {generationId: manifest.binding.generationId, total, page: sql.page, pageSize: sql.pageSize, items};
+    },
+    /** Operator/test inspection of the exact statements used above. No vehicle
+     * payload is read or exposed by EXPLAIN. This is not a public route. */
+    explainQuery(params = {}) {
+      need(!closed, 'reader_closed'); authority(); localIdentity();
+      const sql = compileQuery(params, manifest);
+      const explain = (statement, values) => ({sql: statement,
+        plan: db.prepare('EXPLAIN QUERY PLAN ' + statement).all(...values),
+        bytecode: db.prepare('EXPLAIN ' + statement).all(...values)});
+      const result = {count: explain(sql.countSql, sql.values),
+        selection: params.countOnly ? null : explain(sql.selectSql, [...sql.values, sql.pageSize, sql.offset]),
+        hydration: params.countOnly ? null : explain(HYDRATE_SQL, ['0'.repeat(24)])};
+      authority(); localIdentity(); return result;
     },
     close() { if (!closed) { db.close(); closed = true; } },
   });
