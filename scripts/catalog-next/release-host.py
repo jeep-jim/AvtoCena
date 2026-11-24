@@ -2467,6 +2467,709 @@ class Host:
                 new_file(self.directory / 'ROLLED_BACK.json', json_bytes(proof))
 
 
+
+# Dynamic daily attempts have a separate lifecycle and cleanup capability.
+# Historical fixed cleanup and accepted-generation retirement are unchanged.
+DAILY_GENERATION_NAMES = tuple(sorted(('GENERATION.json', 'details.sqlite', 'query.sqlite',
+    'FILTER_SEMANTICS.json', 'FX_RECEIPT.json', 'RECONCILIATION.json', 'DISPOSITIONS.ndjson')))
+DAILY_CACHE_NAMES = ('details.sqlite', 'query.sqlite', 'DISPOSITIONS.ndjson')
+DAILY_HASH_BYTES_PER_CALL = 64 * 1024 * 1024
+DAILY_PROOF_LIMIT = 256 * 1024
+
+
+def daily_exact(value, names, code):
+    need(isinstance(value, dict) and set(value) == set(names), 'daily_' + code)
+
+
+def daily_digest(value):
+    return isinstance(value, str) and re.fullmatch(r'[a-f0-9]{64}', value) is not None
+
+
+def daily_owner(value):
+    daily_exact(value, ('runId', 'attempt', 'revision'), 'owner')
+    need(re.fullmatch(r'[1-9]\d{0,19}', value.get('runId', '')) and
+         re.fullmatch(r'[1-9]\d{0,5}', value.get('attempt', '')) and
+         re.fullmatch(r'[a-f0-9]{40}', value.get('revision', '')), 'daily_owner')
+
+
+def daily_registration(registration, plan):
+    validate_plan(plan)
+    need(generation_update(plan), 'daily_mode')
+    daily_exact(registration, ('version', 'kind', 'market', 'attemptId', 'owner', 'nonce', 'generationId',
+        'planSha256', 'hostIntentSha256', 'registrationSha256'), 'registration')
+    daily_owner(registration['owner'])
+    need(registration['version'] == 1 and registration['kind'] == 'china-daily-attempt-registration-v1'
+         and registration['market'] == 'china' and registration['nonce'] == plan['nonce']
+         and registration['generationId'] == plan['generationId']
+         and plan['generationId'] == 'gen_china_' + registration['owner']['runId'] + '_' + registration['owner']['attempt']
+         and registration['owner']['revision'] == plan['controllerSha']
+         and registration['planSha256'] == canonical_sha(plan), 'daily_registration_binding')
+    identity = {'kind': 'china-daily-attempt-id-v1', 'owner': registration['owner'], 'nonce': plan['nonce'],
+        'generationId': plan['generationId'], 'runtimeSha': plan['runtimeSha'],
+        'pricingRuntimeSha': plan['pricingRuntimeSha'], 'imageId': plan['imageId'],
+        'previousAcceptedSha256': plan['previousAcceptedStateSha256']}
+    need(registration['attemptId'] == canonical_sha(identity) and
+         registration['hostIntentSha256'] == canonical_sha({'version': 1, 'kind': 'china-daily-host-intent-v1',
+             'attemptId': registration['attemptId'], 'planSha256': registration['planSha256']}) and
+         registration['registrationSha256'] == canonical_sha({key: value for key, value in registration.items()
+             if key != 'registrationSha256'}), 'daily_registration_hash')
+
+
+def daily_lease(authority, previous=None, *, publication_may_change=False):
+    daily_exact(authority, ('publicationState', 'lease'), 'authority')
+    daily_exact(authority['publicationState'], ('accepted', 'intent'), 'publication')
+    for observation in (*authority['publicationState'].values(), authority['lease']):
+        daily_exact(observation, ('found', 'etag', 'sha256', 'value'), 'observation')
+    state = checked_observation(authority['publicationState']['accepted'])
+    checked_observation(authority['publicationState']['intent'], allow_absent=True)
+    need(state.get('version') == 1 and state.get('kind') == 'china-accepted-state-v1'
+         and state.get('market') == 'china' and type(state.get('revision')) is int and state['revision'] > 0, 'daily_publication')
+    lease = checked_observation(authority['lease'])
+    daily_exact(lease, ('version', 'kind', 'market', 'epoch', 'owner', 'nonce', 'status',
+        'acquiredAt', 'expiresAt', 'releasedAt'), 'lease')
+    daily_owner(lease['owner'])
+    need(lease['version'] == 1 and lease['kind'] == 'china-market-lease-v1' and lease['market'] == 'china'
+         and type(lease['epoch']) is int and lease['epoch'] > 0 and lease['status'] == 'held'
+         and lease['releasedAt'] is None and isinstance(lease['nonce'], str)
+         and re.fullmatch(r'[a-f0-9]{32}', lease['nonce']), 'daily_lease')
+    instants = []
+    for value in (lease['acquiredAt'], lease['expiresAt']):
+        need(isinstance(value, str) and re.fullmatch(r'\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(?:\.\d{1,6})?Z', value), 'daily_lease_time')
+        instants.append(datetime.datetime.fromisoformat(value.replace('Z', '+00:00')).timestamp())
+    need(instants[0] <= time.time() < instants[1], 'daily_lease_expired')
+    if previous is not None:
+        need(publication_may_change or authority['publicationState'] == previous['publicationState'], 'daily_state_changed')
+        old = previous['lease']['value']
+        need(all(lease[key] == old[key] for key in lease if key != 'expiresAt'), 'daily_lease_changed')
+        old_expiry = datetime.datetime.fromisoformat(old['expiresAt'].replace('Z', '+00:00')).timestamp()
+        need(instants[1] >= old_expiry, 'daily_lease_changed')
+        if instants[1] == old_expiry:
+            need(authority['lease'] == previous['lease'], 'daily_lease_changed')
+        else:
+            need(authority['lease']['etag'] != previous['lease']['etag'] and
+                 authority['lease']['sha256'] != previous['lease']['sha256'], 'daily_lease_changed')
+    return state, instants[1]
+
+
+def daily_read(filename):
+    regular(filename, DAILY_PROOF_LIMIT)
+    raw = filename.read_bytes()
+    need(0 < len(raw) <= DAILY_PROOF_LIMIT, 'daily_record_size')
+    try:
+        value = json.loads(raw)
+    except (ValueError, UnicodeError):
+        raise ReleaseError('china_host_daily_record_json') from None
+    need(isinstance(value, dict), 'daily_record_json')
+    return value, raw
+
+
+def daily_sync(directory):
+    fd = os.open(directory, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW | os.O_CLOEXEC)
+    try:
+        os.fsync(fd)
+    finally:
+        os.close(fd)
+
+
+def daily_record(filename, value):
+    raw = json_bytes(value)
+    need(len(raw) <= DAILY_PROOF_LIMIT, 'daily_record_size')
+    slot = filename.with_name('DAILY-ROLLBACK-SLOT.json') if filename.name == 'ROLLED_BACK.json' else filename
+    if slot.exists():
+        manifest, _ = daily_read(filename.parent / 'DAILY-ATTEMPT.json')
+        initial = manifest.get('slots', {}).get(slot.name)
+        need(isinstance(initial, list) and len(initial) == 6, 'daily_metadata_slot')
+        need(list(daily_identity(slot)) == initial and initial[2] == 0, 'daily_metadata_slot_changed')
+        need(filename == slot or not os.path.lexists(filename), 'daily_metadata_terminal_exists')
+        fd = os.open(slot, os.O_WRONLY | os.O_NOFOLLOW | os.O_CLOEXEC)
+        try:
+            info = os.fstat(fd)
+            need((info.st_dev, info.st_ino, info.st_size) == tuple(initial[:3]), 'daily_metadata_slot_changed')
+            view = memoryview(raw)
+            while view:
+                written = os.write(fd, view)
+                need(written > 0, 'daily_metadata_write')
+                view = view[written:]
+            os.fsync(fd)
+            os.fchmod(fd, 0o400)
+            os.fsync(fd)
+        finally:
+            os.close(fd)
+        if filename != slot:
+            need(not os.path.lexists(filename), 'daily_metadata_terminal_exists')
+            os.rename(slot, filename)
+    else:
+        need(filename.name in ('PLAN.json', 'DAILY-ATTEMPT.json'), 'daily_metadata_slot_missing')
+        new_file(filename, raw)
+    daily_sync(filename.parent)
+    need(filename.read_bytes() == raw, 'daily_record_readback')
+    return raw
+
+
+def daily_identity(filename):
+    info = regular(filename)
+    need(stat.S_IMODE(info.st_mode) in (0o400, 0o600), 'daily_file_mode')
+    return (info.st_dev, info.st_ino, info.st_size, info.st_mtime_ns, info.st_ctime_ns,
+            stat.S_IMODE(info.st_mode))
+
+
+def daily_directory_identity(directory, private=True):
+    if private:
+        private_directory(directory)
+    info = directory.stat()
+    need(stat.S_ISDIR(info.st_mode) and not directory.is_symlink() and directory.resolve() == directory,
+         'daily_directory')
+    return (info.st_dev, info.st_ino, info.st_mode, info.st_uid)
+
+
+def daily_location(directory, name, kind='decoded'):
+    need(name in (FILE_NAMES - {'image.tar'}) and kind in ('decoded', 'incoming'), 'daily_slot')
+    if kind == 'incoming':
+        return directory / (name + '.incoming.gz')
+    return (directory / 'generation' if name in DAILY_GENERATION_NAMES else directory) / name
+
+
+def daily_claim_path(directory, name, kind):
+    need(name in (FILE_NAMES - {'image.tar'}) and kind in ('decoded', 'incoming'), 'daily_slot')
+    return directory / ('DAILY-CLAIM-' + name + '-' + kind + '.json')
+
+
+def daily_closed_receipt(directory, plan, registration):
+    """A rollback is a real terminal outcome. No-start is a different proof."""
+    need(not os.path.lexists(directory / 'ACCEPTED.json') and
+         not os.path.lexists(directory / 'ACCEPTED.pending'), 'daily_acceptance_exists')
+    rollback = directory / 'ROLLED_BACK.json'
+    quiesced = directory / 'DAILY-QUIESCED.json'
+    need(not (rollback.exists() and daily_has_record(quiesced)), 'daily_terminal_conflict')
+    if rollback.exists():
+        value, raw = daily_read(rollback)
+        mapping = {'nonce': 'nonce', 'release': 'runtimeSha', 'pricingRuntimeSha': 'pricingRuntimeSha',
+            'generationId': 'generationId', 'generationManifestSha256': 'generationManifestSha256',
+            'privateGenerationReceiptSha256': 'privateGenerationReceiptSha256', 'sourceDescriptorSha256': 'sourceDescriptorSha256',
+            'imageId': 'imageId', 'previousAcceptedETag': 'previousAcceptedETag',
+            'previousAcceptedStateSha256': 'previousAcceptedStateSha256'}
+        prior = plan['previousAcceptedState']['current']
+        need(value.get('version') == 1 and value.get('kind') == 'china-host-rollback-v1'
+             and all(value.get(left) == plan.get(right) for left, right in mapping.items())
+             and value.get('retainedRuntimeSha') == prior['runtimeSha'] and value.get('retainedImageId') == prior['imageId']
+             and value.get('retainedRunning') is True and value.get('ingressRestored') is True
+             and value.get('candidateRemoved') is True and daily_digest(value.get('retainedContainerId')), 'daily_rollback')
+        return rollback, value, raw
+    need(not daily_has_record(directory / 'DAILY-STARTING.json'), 'daily_outcome_unknown')
+    if daily_has_record(quiesced):
+        value, raw = daily_read(quiesced)
+        daily_exact(value, ('version', 'kind', 'attemptId', 'registrationSha256', 'planSha256', 'neverStarted',
+            'writerClosed', 'candidateAbsent', 'previousAcceptedStateSha256'), 'quiescence')
+        need(value == daily_quiescence(plan, registration), 'daily_quiescence')
+        return quiesced, value, raw
+    return None
+
+
+def daily_quiescence(plan, registration):
+    return {'version': 1, 'kind': 'china-daily-host-quiesced-v1', 'attemptId': registration['attemptId'],
+        'registrationSha256': registration['registrationSha256'], 'planSha256': registration['planSha256'],
+        'neverStarted': True, 'writerClosed': True, 'candidateAbsent': True,
+        'previousAcceptedStateSha256': plan['previousAcceptedStateSha256']}
+
+
+class DailyReferenceFence:
+    """Live current/rollback proofs plus every container, mount and inode alias."""
+    def __init__(self, state, directory, nonce):
+        self.state, self.directory, self.nonce = copy.deepcopy(state), directory, nonce
+        self.ingress = CONFIG.read_bytes()
+        self.guarded = []
+        for position, reference in enumerate((state['current'], state.get('rollback'))):
+            if reference is None:
+                continue
+            receipt = verified_history(reference)
+            if position == 0:
+                container = verify_live_reference(reference, receipt['nonce'])
+            else:
+                rows = [docker('GET', '/containers/' + item['Id'] + '/json')
+                        for item in docker('GET', '/containers/json?all=1')]
+                matches = [row for row in rows if row.get('Config', {}).get('Labels', {}).get('avtocena.china.nonce') == receipt['nonce']]
+                need(len(matches) == 1, 'daily_rollback_container')
+                container = matches[0]
+                check_mounted_reference(container, reference, receipt['nonce'])
+            self.guarded.append((container['Id'], protected_identity(container), reference, receipt['nonce']))
+        self.ancestors = {folder: daily_directory_identity(folder, False) for folder in (directory, *directory.parents)}
+        self.check()
+
+    def check(self, watched=()):
+        regular(CONFIG, 1024 * 1024)
+        need(CONFIG.read_bytes() == self.ingress, 'daily_ingress_changed')
+        protected_file_ids = set()
+        for identity, expected, reference, nonce in self.guarded:
+            current = docker('GET', '/containers/' + identity + '/json')
+            need(protected_identity(current) == expected, 'daily_protected_changed')
+            check_mounted_reference(current, reference, nonce)
+            receipt, _ = accepted_reference_receipt(reference)
+            folder, plan = reference_plan(reference, receipt)
+            for descriptor in plan['files']:
+                filename = ((folder if descriptor['name'] in {'image.tar', 'regcloud-performance-gate.py',
+                    'accepted-speed-baseline.json', 'acceptance.json'} else folder / 'generation') / descriptor['name'])
+                if os.path.lexists(filename):
+                    info = regular(filename)
+                    protected_file_ids.add((info.st_dev, info.st_ino))
+        health(backend(self.ingress), self.state['current']['runtimeSha'])
+        for folder, identity in self.ancestors.items():
+            need(daily_directory_identity(folder, False) == identity, 'daily_directory_changed')
+        scopes = [self.directory, self.directory / 'generation']
+        directory_ids = set()
+        for folder in scopes:
+            if folder.exists():
+                directory_ids.add(daily_directory_identity(folder)[:2])
+        watched_ids = set(watched)
+        need(not (watched_ids & protected_file_ids), 'daily_protected_inode_alias')
+        watched_ids |= directory_ids | {identity[:2] for identity in self.ancestors.values()}
+        rows = docker('GET', '/containers/json?all=1')
+        need(isinstance(rows, list), 'daily_containers')
+        for item in rows:
+            need(isinstance(item, dict) and daily_digest(item.get('Id')), 'daily_containers')
+            row = docker('GET', '/containers/' + item['Id'] + '/json')
+            need(row.get('Config', {}).get('Labels', {}).get('avtocena.china.nonce') != self.nonce, 'daily_candidate_exists')
+            need(isinstance(row.get('Mounts'), list), 'daily_mounts')
+            for mount in row['Mounts']:
+                source = mount.get('Source')
+                if not source:
+                    continue
+                need(isinstance(source, str) and Path(source).is_absolute(), 'daily_mount_path')
+                mounted = Path(source).resolve()
+                need(all(mounted != scope and mounted not in scope.parents and scope not in mounted.parents for scope in scopes),
+                     'daily_files_mounted')
+                info = mounted.stat()
+                need((info.st_dev, info.st_ino) not in watched_ids, 'daily_mount_inode_alias')
+                for parent in mounted.parents:
+                    info = parent.stat()
+                    need((info.st_dev, info.st_ino) not in directory_ids, 'daily_mount_inode_alias')
+        need(CONFIG.read_bytes() == self.ingress, 'daily_ingress_changed')
+
+
+DAILY_METADATA_RESERVE_BYTES = 2 * 1024 * 1024
+
+
+def daily_metadata_slots():
+    names = {'DAILY-STARTING.json', 'DAILY-QUIESCED.json', 'DAILY-ROLLBACK-SLOT.json',
+             'DAILY-CLEANUP-INVENTORY.json', 'DAILY-CACHE-CLEARED.json'}
+    for name in FILE_NAMES - {'image.tar'}:
+        for kind in ('incoming', 'decoded'):
+            names.add('DAILY-CLAIM-' + name + '-' + kind + '.json')
+        names.add('DAILY-RECEIVED-' + name + '.json')
+        names.add('DAILY-VERIFIED-' + name + '.json')
+    for index in range(10):
+        names.add('DAILY-DELETE-' + str(index) + '-INTENT.json')
+        names.add('DAILY-DELETE-' + str(index) + '-DONE.json')
+    return tuple(sorted(names))
+
+
+def daily_has_record(filename):
+    if not os.path.lexists(filename):
+        return False
+    identity = daily_identity(filename)
+    if identity[2] > 0:
+        return True
+    manifest, _ = daily_read(filename.parent / 'DAILY-ATTEMPT.json')
+    need(manifest.get('slots', {}).get(filename.name) == list(identity), 'daily_empty_slot_changed')
+    return False
+
+
+def daily_reserve_header(registration):
+    return ('AVTOCENA_DAILY_METADATA_RESERVE_V1\n' + registration['attemptId'] + '\n' +
+            registration['registrationSha256'] + '\n').encode('ascii')
+
+
+def daily_release_reserve(directory):
+    manifest, _ = daily_read(directory / 'DAILY-ATTEMPT.json')
+    reservation = manifest.get('reserve')
+    daily_exact(reservation, ('dev', 'ino', 'bytes', 'sha256', 'headerBytes', 'headerSha256'), 'reserve')
+    filename = directory / 'DAILY-METADATA-RESERVE'
+    identity = daily_identity(filename)
+    header = daily_reserve_header(manifest['registration'])
+    need(identity[:2] == (reservation['dev'], reservation['ino']) and identity[5] == 0o400
+         and reservation['bytes'] == DAILY_METADATA_RESERVE_BYTES and reservation['headerBytes'] == len(header)
+         and reservation['headerSha256'] == sha(header), 'daily_reserve_binding')
+    need(identity[2] in (reservation['bytes'], len(header)), 'daily_reserve_size')
+    expected = reservation['sha256'] if identity[2] == reservation['bytes'] else reservation['headerSha256']
+    need(file_sha(filename) == expected and filename.read_bytes()[:len(header)] == header, 'daily_reserve_hash')
+    fd = os.open(filename, os.O_RDWR | os.O_NOFOLLOW | os.O_CLOEXEC)
+    try:
+        info = os.fstat(fd)
+        need((info.st_dev, info.st_ino, info.st_size, info.st_mtime_ns, info.st_ctime_ns) == identity[:5],
+             'daily_reserve_changed')
+        # Only the registered zero padding is released. The header and inode
+        # remain; no proof or payload bytes are truncated, and no new inode is
+        # needed for any later cleanup record.
+        if info.st_size != len(header):
+            os.ftruncate(fd, len(header))
+        os.fsync(fd)
+    finally:
+        os.close(fd)
+    daily_sync(directory)
+    need(file_sha(filename) == reservation['headerSha256'], 'daily_reserve_release')
+    return identity[2] - len(header)
+
+
+def daily_initialize_records(directory, plan, registration):
+    slots = {}
+    for name in daily_metadata_slots():
+        filename = directory / name
+        new_file(filename, b'', mode=0o600)
+        slots[name] = list(daily_identity(filename))
+    header = daily_reserve_header(registration)
+    raw = header + bytes(DAILY_METADATA_RESERVE_BYTES - len(header))
+    filename = directory / 'DAILY-METADATA-RESERVE'
+    new_file(filename, raw)
+    info = regular(filename)
+    need(info.st_size == len(raw) and info.st_blocks * 512 >= len(raw)
+         and file_sha(filename) == sha(raw), 'daily_reserve_allocation')
+    manifest = {'version': 1, 'kind': 'china-daily-host-attempt-v1', 'registration': registration,
+        'planSha256': canonical_sha(plan), 'directory': list(daily_directory_identity(directory)),
+        'generationDirectory': list(daily_directory_identity(directory / 'generation')),
+        'slots': slots, 'reserve': {'dev': info.st_dev, 'ino': info.st_ino, 'bytes': len(raw),
+            'sha256': sha(raw), 'headerBytes': len(header), 'headerSha256': sha(header)}}
+    daily_record(directory / 'DAILY-ATTEMPT.json', manifest)
+    daily_sync(directory)
+    return manifest
+
+
+def daily_read_attempt(directory, registration):
+    plan, plan_raw = daily_read(directory / 'PLAN.json')
+    daily_registration(registration, plan)
+    manifest, manifest_raw = daily_read(directory / 'DAILY-ATTEMPT.json')
+    daily_exact(manifest, ('version', 'kind', 'registration', 'planSha256', 'directory',
+        'generationDirectory', 'slots', 'reserve'), 'manifest')
+    need(manifest['version'] == 1 and manifest['kind'] == 'china-daily-host-attempt-v1'
+         and manifest['registration'] == registration and manifest['planSha256'] == canonical_sha(plan)
+         and set(manifest['slots']) == set(daily_metadata_slots())
+         and manifest['directory'] == list(daily_directory_identity(directory))
+         and manifest['generationDirectory'] == list(daily_directory_identity(directory / 'generation')),
+         'daily_manifest_binding')
+    for name, initial in manifest['slots'].items():
+        need(isinstance(initial, list) and len(initial) == 6 and initial[2] == 0 and initial[5] == 0o600,
+             'daily_metadata_slot')
+        filename = directory / name
+        if name == 'DAILY-ROLLBACK-SLOT.json' and not filename.exists():
+            filename = directory / 'ROLLED_BACK.json'
+        identity = daily_identity(filename)
+        need(list(identity[:2]) == initial[:2], 'daily_metadata_slot_changed')
+        if identity[2] == 0:
+            need(list(identity) == initial, 'daily_empty_slot_changed')
+    return plan, manifest, plan_raw, manifest_raw
+
+
+class DailyHost(Host):
+    """Registered daily writer. The shared lock predates every host write."""
+    def __init__(self, params):
+        daily_exact(params, ('plan', 'registration', 'authority'), 'init')
+        plan, registration = copy.deepcopy(params['plan']), copy.deepcopy(params['registration'])
+        daily_registration(registration, plan)
+        state, _ = daily_lease(params['authority'])
+        checked_publication_view(params['authority']['publicationState'])
+        need(params['authority']['publicationState']['accepted'] == {
+            'found': True, 'etag': plan['previousAcceptedETag'], 'sha256': plan['previousAcceptedStateSha256'],
+            'value': plan['previousAcceptedState']}, 'daily_initial_state')
+        lease = params['authority']['lease']['value']
+        need(lease['owner'] == registration['owner'] and lease['nonce'] == registration['nonce'], 'daily_initial_lease')
+        lock = reuse_lock()
+        try:
+            prior, prior_receipt, _ = accepted_predecessor(plan)
+            verified_history(prior)
+            verify_live_reference(prior, prior_receipt['nonce'])
+            directory = BASE / plan['runtimeSha'] / 'china-next' / plan['nonce']
+            private_directory(BASE)
+            for parent in (directory.parent.parent, directory.parent):
+                parent.mkdir(mode=0o700, exist_ok=True)
+                private_directory(parent)
+            directory.mkdir(mode=0o700)
+            (directory / 'generation').mkdir(mode=0o700)
+            daily_record(directory / 'PLAN.json', plan)
+            self.initialize_session(plan)
+            self.lock = lock
+            self.registration = registration
+            self.daily_manifest = daily_initialize_records(directory, plan, registration)
+            self.daily_manifest_raw = (directory / 'DAILY-ATTEMPT.json').read_bytes()
+            self.daily_plan_raw = (directory / 'PLAN.json').read_bytes()
+            self.initial_authority = copy.deepcopy(params['authority'])
+            self.authority = copy.deepcopy(params['authority'])
+            self.daily_fence = DailyReferenceFence(state, directory, plan['nonce'])
+            self.daily_ingress = self.daily_fence.ingress
+            self.daily_started = False
+            self.daily_upload_in_progress = False
+            self.metadata_reserve_released = 0
+            self.daily_guard()
+        except BaseException:
+            os.close(lock)
+            if hasattr(self, 'lock'):
+                self.lock = None
+            raise
+
+    def registered(self):
+        return {'version': 1, 'kind': 'china-daily-host-registration-v1', 'initialized': True,
+            'attemptId': self.registration['attemptId'], 'registrationSha256': self.registration['registrationSha256'],
+            'planSha256': self.registration['planSha256']}
+
+    def authorize(self, authority, method):
+        state, _ = daily_lease(authority, self.authority, publication_may_change=True)
+        need(authority['lease']['value']['owner'] == self.registration['owner'] and
+             authority['lease']['value']['nonce'] == self.plan['nonce'], 'daily_initial_lease')
+        view = authority['publicationState']
+        if method in ('upload', 'start', 'functional', 'speed'):
+            need(view == self.initial_authority['publicationState'], 'daily_stage_state')
+        elif method in ('switch', 'browser_evidence', 'accept'):
+            intent = checked_observation(view['intent'])
+            daily_exact(intent, ('version', 'kind', 'market', 'revision', 'nonce', 'owner', 'createdAt',
+                'candidate', 'previous', 'status', 'resolution'), 'reserved_intent')
+            generation, _ = daily_read(self.generation / 'GENERATION.json')
+            candidate = {'market': 'china', 'generationId': self.plan['generationId'],
+                'owner': self.registration['owner'], 'receiptSha256': self.plan['privateGenerationReceiptSha256'],
+                'sourceDescriptorSha256': self.plan['sourceDescriptorSha256'],
+                'generationManifestSha256': self.plan['generationManifestSha256'],
+                'sourceCursor': generation['source']['cursor'], 'sourceObservedAt': generation['source']['sourceObservedAt'],
+                'runtimeSha': self.plan['runtimeSha'], 'pricingRuntimeSha': self.plan['pricingRuntimeSha'],
+                'imageId': self.plan['imageId']}
+            need(intent['version'] == 1 and intent['kind'] == 'china-publication-intent-v1' and intent['market'] == 'china'
+                 and type(intent['revision']) is int and intent['revision'] > 0 and intent['status'] == 'pending'
+                 and intent['resolution'] is None and intent['nonce'] == self.plan['nonce']
+                 and intent['owner'] == self.registration['owner'] and intent['candidate'] == candidate
+                 and intent['previous'] == self.initial_authority['publicationState']['accepted'], 'daily_reserved_binding')
+            expected = {**self.plan['previousAcceptedState'], 'revision': self.plan['previousAcceptedState']['revision'] + 1,
+                'pending': {'nonce': intent['nonce'], 'intentSha256': canonical_sha(intent),
+                    'candidateSha256': canonical_sha(candidate), 'createdAt': intent['createdAt']}}
+            need(state == expected, 'daily_reservation')
+        elif method == 'retire':
+            state, _ = checked_publication_view(view, committed=True)
+            receipt, raw = accepted_reference_receipt(state['current'])
+            need(receipt['nonce'] == self.plan['nonce'] and raw == (self.directory / 'ACCEPTED.json').read_bytes(),
+                 'daily_committed_binding')
+        else:
+            raise ReleaseError('china_host_daily_method')
+        self.authority = copy.deepcopy(authority)
+
+    def daily_guard(self):
+        need(self.lock is not None and not self.daily_started and not self.candidate
+             and not self.switched and not self.accepted, 'daily_writer_state')
+        need((self.directory / 'DAILY-ATTEMPT.json').read_bytes() == self.daily_manifest_raw and
+             (self.directory / 'PLAN.json').read_bytes() == self.daily_plan_raw, 'daily_writer_manifest_changed')
+        need(not daily_has_record(self.directory / 'DAILY-STARTING.json')
+             and not daily_has_record(self.directory / 'DAILY-QUIESCED.json')
+             and not daily_has_record(self.directory / 'DAILY-CACHE-CLEARED.json')
+             and not os.path.lexists(self.directory / 'ROLLED_BACK.json')
+             and not os.path.lexists(self.directory / 'ACCEPTED.json')
+             and not os.path.lexists(self.directory / 'ACCEPTED.pending'), 'daily_writer_closed')
+        self.daily_fence.check()
+
+    def claim(self, name, kind, fd):
+        info = os.fstat(fd)
+        need(stat.S_ISREG(info.st_mode) and info.st_nlink == 1 and info.st_size == 0, 'daily_claim_file')
+        return daily_record(daily_claim_path(self.directory, name, kind), {
+            'version': 1, 'kind': 'china-daily-host-file-claim-v1', 'attemptId': self.registration['attemptId'],
+            'name': name, 'storageKind': kind, 'dev': info.st_dev, 'ino': info.st_ino,
+            'mode': stat.S_IMODE(info.st_mode)})
+
+    def upload(self, name, stream):
+        need(name in expected_files(self.plan) and name not in self.uploaded and not self.candidate, 'upload_scope')
+        self.daily_guard()
+        descriptor = next(file for file in self.plan['files'] if file['name'] == name)
+        packed = daily_location(self.directory, name, 'incoming')
+        self.daily_upload_in_progress = True
+        try:
+            digest = hashlib.sha256()
+            fd = os.open(packed, os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW, 0o600)
+            with os.fdopen(fd, 'wb') as target:
+                incoming_claim = self.claim(name, 'incoming', target.fileno())
+                remaining = descriptor['compressedBytes']
+                while remaining:
+                    chunk = stream.read(min(1024 * 1024, remaining))
+                    need(chunk and len(chunk) <= remaining, 'upload_incomplete')
+                    target.write(chunk); digest.update(chunk); remaining -= len(chunk)
+                target.flush(); os.fsync(target.fileno())
+            need(digest.hexdigest() == descriptor['compressedSha256'], 'upload_checksum')
+            daily_record(self.directory / ('DAILY-RECEIVED-' + name + '.json'), {
+                'version': 1, 'kind': 'china-daily-host-file-verified-v1', 'attemptId': self.registration['attemptId'],
+                'name': name, 'storageKind': 'incoming', 'claimSha256': sha(incoming_claim),
+                'bytes': descriptor['compressedBytes'], 'sha256': descriptor['compressedSha256']})
+            filename = self.file_path(name)
+            digest = hashlib.sha256(); total = 0
+            fd = os.open(filename, os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW, 0o400)
+            with os.fdopen(fd, 'wb') as target, gzip.open(packed, 'rb') as source:
+                decoded_claim = self.claim(name, 'decoded', target.fileno())
+                for chunk in iter(lambda: source.read(1024 * 1024), b''):
+                    total += len(chunk); need(total <= descriptor['bytes'], 'decoded_size')
+                    digest.update(chunk); target.write(chunk)
+                target.flush(); os.fsync(target.fileno())
+            need(total == descriptor['bytes'] and digest.hexdigest() == descriptor['sha256'], 'decoded_checksum')
+            need(file_sha(filename) == descriptor['sha256'], 'local_readback')
+            daily_record(self.directory / ('DAILY-VERIFIED-' + name + '.json'), {
+                'version': 1, 'kind': 'china-daily-host-file-verified-v1', 'attemptId': self.registration['attemptId'],
+                'name': name, 'storageKind': 'decoded', 'claimSha256': sha(decoded_claim),
+                'bytes': total, 'sha256': descriptor['sha256']})
+            packed.unlink(); daily_sync(self.directory); daily_sync(filename.parent)
+            self.uploaded.add(name)
+            return {'file': name, 'bytes': total, 'verified': True}
+        finally:
+            self.daily_upload_in_progress = False
+
+    def start(self):
+        need(self.uploaded == expected_files(self.plan) and self.candidate is None, 'upload_not_complete')
+        self.daily_guard()
+        daily_record(self.directory / 'DAILY-STARTING.json', {'version': 1,
+            'kind': 'china-daily-host-starting-v1', 'attemptId': self.registration['attemptId'],
+            'registrationSha256': self.registration['registrationSha256'],
+            'planSha256': self.registration['planSha256']})
+        self.daily_started = True
+        regular(CONFIG, 1024 * 1024)
+        need(CONFIG.read_bytes() == self.daily_ingress, 'daily_ingress_changed')
+        self.original = CONFIG.read_bytes()
+        self.old_port = backend(self.original)
+        rows = docker('GET', '/containers/json?all=1')
+        inspected = [docker('GET', '/containers/' + row['Id'] + '/json') for row in rows]
+        serving = [row for row in inspected if any(str(binding.get('HostPort', '')) == str(self.old_port)
+                   for bindings in (row.get('HostConfig', {}).get('PortBindings') or {}).values() for binding in bindings)]
+        need(len(serving) == 1, 'serving_container')
+        self.retained = serving[0]
+        need(self.retained['Id'] == self.daily_fence.guarded[0][0] and
+             protected_identity(self.retained) == self.daily_fence.guarded[0][1], 'daily_protected_changed')
+        if getattr(self, 'reuse_verified', False):
+            changed_order = retained_snapshot_guard(self.original, CONFIG.read_bytes(), self.reuse_retained_identity,
+                self.retained, self.retained_raw_mounts, 'reuse_retained_changed')
+            self.retained_mount_order_variations += int(changed_order)
+        else:
+            self.retained_raw_mounts = copy.deepcopy(self.retained['Mounts'])
+            self.retained_mount_order_variations = 0
+        env = env_map(self.retained)
+        need(env.get('AVTOCENA_RELEASE_SHA') == retained_runtime(self.plan) and env.get('AVTOCENA_CALCULATION_VERSION') == CALCULATION and
+             self.retained['State']['Running'] and not self.retained['HostConfig']['Privileged'], 'serving_identity')
+        need(self.retained['Config'].get('WorkingDir') == '/app' and self.retained['Config'].get('User', '') in ('', 'root', '0'), 'serving_config')
+        mounts = self.retained.get('Mounts', [])
+        need(mounts and all(row.get('Type') == 'bind' and row.get('RW') is False and
+             row.get('Destination') != '/var/run/docker.sock' for row in mounts), 'serving_mounts')
+        private = [row for row in mounts if row['Destination'] == '/app/data/knowledge/encyclopedia/calculation-v1.json']
+        need(len(private) == 1 and file_sha(Path(private[0]['Source'])) ==
+             '66cc4ce64e0469daad2991251f88887dcd3a07cc26510ca1b58696bcea348a3c', 'encyclopedia_unchanged')
+        previous_generation = None
+        if generation_update(self.plan):
+            previous, previous_receipt, previous_raw = accepted_predecessor(self.plan)
+            outcome = read_outcome({'runtimeSha': previous['runtimeSha'], 'nonce': previous_receipt['nonce']})
+            need(outcome.get('status') == 'accepted' and
+                 outcome.get('hostReceiptBase64') == base64.b64encode(previous_raw).decode() and
+                 outcome.get('hostReceiptSha256') == sha(previous_raw), 'predecessor_not_accepted')
+            previous_generation = check_mounted_reference(self.retained, previous, previous_receipt['nonce'])
+        self.retained_identity = protected_identity(self.retained)
+        self.guard()
+        claimed = {int(binding['HostPort']) for row in inspected for bindings in
+                   (row.get('HostConfig', {}).get('PortBindings') or {}).values() for binding in bindings
+                   if str(binding.get('HostPort', '')).isdigit()}
+        ports = [port for port in range(3004, 3011) if port not in claimed]
+        need(ports, 'candidate_port_unavailable')
+        self.port = ports[0]
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as probe:
+            probe.bind(('127.0.0.1', self.port))
+        if not generation_update(self.plan) and not getattr(self, 'reuse_verified', False):
+            info = docker('GET', '/info')
+            need(info.get('ServerVersion') == '29.1.3' and
+                 ['driver-type', 'io.containerd.snapshotter.v1'] in info.get('DriverStatus', []), 'image_store')
+            command(['/usr/bin/docker', 'load', '--input', str(self.directory / 'image.tar')], timeout=900)
+        image = docker('GET', '/images/' + self.plan['imageId'] + '/json')
+        need(image.get('Id') == self.plan['imageId'] and image.get('Os') == 'linux' and image.get('Architecture') == 'amd64' and
+             image['Config'].get('Labels', {}).get('org.opencontainers.image.revision') == self.plan['runtimeSha'], 'image_identity')
+        generation = json.loads((self.generation / 'GENERATION.json').read_bytes())
+        need(generation.get('generationId') == self.plan['generationId'] and generation.get('runtimeSha') == self.plan['pricingRuntimeSha'] and
+             generation.get('prepared') is True and generation.get('source', {}).get('supplierLatestVerified') is True, 'generation_identity')
+        if generation_update(self.plan):
+            need(generation['calculationVersion'] == previous_generation.get('calculationVersion') ==
+                 env.get('AVTOCENA_BUILD_CALCULATION_VERSION'), 'data_only_calculation_version')
+            env['CATALOG_CHINA_LOCAL_MANIFEST_SHA256'] = self.plan['generationManifestSha256']
+            candidate_env = [item.split('=', 1)[0] + '=' + env[item.split('=', 1)[0]] for item in self.retained['Config']['Env']]
+            old_mount = next(row for row in mounts if row['Destination'] == GENERATION_MOUNT)
+            old_bind = old_mount['Source'] + ':' + GENERATION_MOUNT + ':ro'
+            retained_binds = self.retained['HostConfig'].get('Binds')
+            need(isinstance(retained_binds, list) and retained_binds.count(old_bind) == 1 and len(retained_binds) == len(mounts),
+                 'data_only_bindings')
+            binds = [str(self.generation) + ':' + GENERATION_MOUNT + ':ro' if item == old_bind else item for item in retained_binds]
+        else:
+            env.update(AVTOCENA_RELEASE_SHA=self.plan['runtimeSha'], AVTOCENA_BUILD_CALCULATION_VERSION=generation['calculationVersion'],
+                       CATALOG_CHINA_LOCAL_GENERATION_DIR=GENERATION_MOUNT,
+                       CATALOG_CHINA_LOCAL_MANIFEST_SHA256=self.plan['generationManifestSha256'],
+                       CATALOG_CHINA_LOCAL_RUNTIME_SHA=self.plan['pricingRuntimeSha'],
+                       CATALOG_HOME_PHASE_TIMING='1', CATALOG_HOME_PHASE_TIMING_MAX_UPTIME_SECONDS='1800')
+            candidate_env = [key + '=' + value for key, value in sorted(env.items())]
+            binds = [row['Source'] + ':' + row['Destination'] + ':ro' for row in mounts]
+            need(not any(row['Destination'] == GENERATION_MOUNT for row in mounts), 'generation_mount_collision')
+            binds.append(str(self.generation) + ':' + GENERATION_MOUNT + ':ro')
+        self.spec = {'Image': self.plan['imageId'], 'WorkingDir': '/app',
+                     'Entrypoint': copy.deepcopy(self.retained['Config']['Entrypoint']),
+                     'Cmd': copy.deepcopy(self.retained['Config']['Cmd']),
+                     'Env': candidate_env,
+                     'Labels': {'avtocena.application': 'web', 'avtocena.role': 'independent-china',
+                                'org.opencontainers.image.revision': self.plan['runtimeSha'], 'avtocena.china.nonce': self.plan['nonce']},
+                     'ExposedPorts': {'3000/tcp': {}},
+                     'HostConfig': {'Privileged': False, 'NetworkMode': 'bridge', 'Binds': binds,
+                                    'PortBindings': {'3000/tcp': [{'HostIp': '127.0.0.1', 'HostPort': str(self.port)}]},
+                                    'RestartPolicy': {'Name': 'no', 'MaximumRetryCount': 0}}}
+        self.guard()
+        name = 'avtocena-china-next-' + self.plan['runtimeSha'][:12] + '-' + self.plan['nonce'][:8]
+        created = docker('POST', '/containers/create?name=' + name, self.spec)
+        self.candidate = created.get('Id')
+        need(re.fullmatch(r'[a-f0-9]{64}', self.candidate or ''), 'candidate_identity')
+        docker('POST', '/containers/' + self.candidate + '/start')
+        self.wait_startup()
+        self.verify_candidate()
+        return {'started': True, 'release': self.plan['runtimeSha'], 'generationId': self.plan['generationId'],
+                'startup': self.startup_report, 'retainedMountOrderVariations': self.retained_mount_order_variations}
+
+    def cleanup(self):
+        need(not self.daily_upload_in_progress, 'daily_writer_active')
+        if not self.daily_started:
+            self.daily_guard()
+            self.metadata_reserve_released += daily_release_reserve(self.directory)
+            self.daily_fence.check()
+            daily_record(self.directory / 'DAILY-QUIESCED.json', daily_quiescence(self.plan, self.registration))
+            return
+        if not self.accepted and not os.path.lexists(self.directory / 'ACCEPTED.json'):
+            need(not os.path.lexists(self.directory / 'ACCEPTED.pending'), 'daily_outcome_unknown')
+            self.metadata_reserve_released += daily_release_reserve(self.directory)
+        terminal = self.directory / 'ACCEPTED.json'
+        if not self.accepted and terminal.exists():
+            # Also covers a non-signal exception after rename and before the
+            # in-memory flag. A valid terminal acceptance is never rolled back.
+            regular(terminal, 256 * 1024)
+            need(getattr(self, 'acceptance_receipt_sha', None) == file_sha(terminal), 'acceptance_terminal_changed')
+            self.accepted = True
+        if self.accepted:
+            return
+        if self.switched:
+            # Restore only our exact ingress edit; never overwrite a stranger's.
+            current = CONFIG.read_bytes()
+            if current == self.proposed:
+                self.replace_config(self.proposed, self.original)
+            else:
+                need(current == self.original, 'rollback_ingress_changed')
+            health(self.old_port, retained_runtime(self.plan))
+            self.switched = False
+        if self.candidate:
+            row = docker('GET', '/containers/' + self.candidate + '/json')
+            need(row['Config']['Labels'].get('avtocena.china.nonce') == self.plan['nonce'], 'cleanup_foreign_container')
+            if row['State']['Running']:
+                docker('POST', '/containers/' + self.candidate + '/stop?t=10')
+            docker('DELETE', '/containers/' + self.candidate + '?v=false&force=false')
+            self.candidate = None
+        if self.retained is not None and self.original is not None and self.lock is not None and hasattr(self, 'retained_identity'):
+            self.guard()
+            proof = {'version': 1, 'kind': 'china-host-rollback-v1', 'nonce': self.plan['nonce'],
+                     'release': self.plan['runtimeSha'], 'pricingRuntimeSha': self.plan['pricingRuntimeSha'],
+                     'generationId': self.plan['generationId'], 'generationManifestSha256': self.plan['generationManifestSha256'],
+                     'privateGenerationReceiptSha256': self.plan['privateGenerationReceiptSha256'],
+                     'sourceDescriptorSha256': self.plan['sourceDescriptorSha256'], 'imageId': self.plan['imageId'],
+                     'previousAcceptedETag': self.plan.get('previousAcceptedETag'),
+                     'previousAcceptedStateSha256': self.plan.get('previousAcceptedStateSha256'),
+                     'rolledBackAt': datetime.datetime.now(datetime.timezone.utc).isoformat().replace('+00:00', 'Z'),
+                     'retainedContainerId': self.retained['Id'], 'retainedRuntimeSha': retained_runtime(self.plan),
+                     'retainedImageId': self.retained['Image'], 'retainedRunning': True,
+                     'ingressRestored': True, 'candidateRemoved': True}
+            if not (self.directory / 'ROLLED_BACK.json').exists():
+                daily_record(self.directory / 'ROLLED_BACK.json', proof)
+
+
 def main():
     signal.signal(signal.SIGTERM, lambda *_: (_ for _ in ()).throw(ReleaseError('china_host_terminated')))
     signal.signal(signal.SIGHUP, lambda *_: (_ for _ in ()).throw(ReleaseError('china_host_disconnected')))
@@ -2534,12 +3237,18 @@ def main():
             elif method == 'resume_init':
                 need(host is None, 'already_initialized')
                 host, value = resume_failed_upload(params)
+            elif method == 'daily_init':
+                need(host is None and not recovered, 'daily_init_protocol')
+                host = DailyHost(params)
+                value = host.registered()
             elif method == 'init':
                 need(host is None, 'already_initialized')
                 host = Host(params['plan'])
                 value = {'initialized': True}
             else:
                 need(host is not None, 'not_initialized')
+                if isinstance(host, DailyHost) and method != 'close':
+                    host.authorize(params.get('authority'), method)
                 if method == 'upload':
                     emit({'kind': 'upload-ready', 'id': identity})
                     value = host.upload(params['name'], sys.stdin.buffer)

@@ -8,7 +8,7 @@ import {createHash} from 'node:crypto';
 const need = (value, code) => assert(value, 'china_ssh_' + code);
 const hash = raw => createHash('sha256').update(raw).digest('hex');
 const quote = value => "'" + value.replaceAll("'", "'\\''") + "'";
-const methods = new Set(['init', 'resume_init', 'upload', 'start', 'functional', 'speed', 'switch', 'browser_evidence', 'accept', 'recover', 'diagnose', 'retire', 'retire_recovery', 'prune_failed_uploads', 'prune_failed_witness', 'prune_resolved_failed_uploads', 'close']);
+const methods = new Set(['init', 'daily_init', 'resume_init', 'upload', 'start', 'functional', 'speed', 'switch', 'browser_evidence', 'accept', 'recover', 'diagnose', 'retire', 'retire_recovery', 'prune_failed_uploads', 'prune_failed_witness', 'prune_resolved_failed_uploads', 'close']);
 
 export function checkedStartupReport(value) {
   const keys = ['version', 'kind', 'ready', 'elapsedSeconds', 'attempts', 'health', 'candidate', 'reason'];
@@ -240,8 +240,8 @@ export class ChinaSshSession {
     return {result, ready};
   }
   call(method, params) { return this.request(method, params).result; }
-  async upload(name, filename) {
-    const call = this.request('upload', {name});
+  async upload(name, filename, authority) {
+    const call = this.request('upload', authority === undefined ? {name} : {name, authority});
     const begun = await Promise.race([call.ready, call.result.then(() => false)]);
     if (begun !== false) for await (const raw of createReadStream(filename, {highWaterMark: 128 * 1024})) await this.write(raw);
     return call.result;
