@@ -26,6 +26,14 @@ function positive(value: unknown) {
   return Number.isFinite(parsed) && parsed > 0 ? parsed : 0;
 }
 
+function assertFxOfferScope(offer: Partial<VehicleOffer>) {
+  const fx = activeCatalogFxBatch();
+  if (fx && (offer.market !== fx.receipt.market ||
+    (offer.sourceCurrency && !Object.hasOwn(fx.receipt.rates, offer.sourceCurrency.trim().toUpperCase())))) {
+    throw Error("catalog_fx_batch_offer_scope");
+  }
+}
+
 function snapshotSourcePriceRub(offer: Partial<VehicleOffer>) {
   return positive(offer.calculationSnapshot?.currencyRate?.sourcePriceRub)
     || positive(offer.calculationSnapshot?.sourcePriceRub)
@@ -212,6 +220,17 @@ export function repriceOfferWithBusinessConfig<T extends Partial<VehicleOffer>>(
 
 async function repriceEditorialOffer<T extends Partial<VehicleOffer>>(offer:T):Promise<T>{
  if(!offer.editorialPriceKey||offer.catalogPricingMode==='seller'||Number(offer.totalRub)>0)return offer;
+ if(activeCatalogFxBatch()){
+  // The offline context contains the compiled encyclopedia, not mutable detail
+  // shards or the general knowledge corpus. Its next stage may fill these gaps.
+  if(!specificationEvidenceComplete(offer))return {...offer,totalRub:null,
+   previousTotalRub:null,priceDeltaRub:null,publicVisibleRub:undefined,publicSpecificationVerified:false,
+   savedCalculationPreview:undefined,deliveredCalculationPreview:undefined,japanDeliveredPreview:undefined,
+   calculationStatus:'needs_data',calculationSnapshot:undefined} as T;
+  const {calculateOfferWithVerifiedSpecifications}=await import('./customs-pricing');
+  const result=await calculateOfferWithVerifiedSpecifications(offer as VehicleOffer);
+  return {...result,...((offer as any).cardProjectionVersion?{publicVisibleRub:result.totalRub||undefined}: {})} as T;
+ }
  const {calculateOfferWithRussiaCustoms}=await import('./customs-pricing');
  // Compact rows lack engine inputs. Only manually edited rows need a detail read.
  const full=offer.id&&(offer as any).cardProjectionVersion
@@ -236,10 +255,10 @@ async function repriceEncyclopediaOffer<T extends Partial<VehicleOffer>>(input:T
 
 export async function applyActiveBusinessPricing<T extends Partial<VehicleOffer>>(offer: T): Promise<T> {
   if (!offer.market) return offer;
-  const fx = activeCatalogFxBatch();
-  if (fx && offer.market !== fx.receipt.market) throw Error("catalog_fx_batch_offer_scope");
+  assertFxOfferScope(offer);
   const editorial=await readCatalogEditorial();
   offer=offer.id?applyCatalogEditorial(offer as T & {id:string},editorial):offer;
+  assertFxOfferScope(offer);
   offer=await repriceEncyclopediaOffer(await repriceEditorialOffer(await withChinaCnyPrice(offer)));
   const rated = await attachCurrentCurrencyRate(withReplayInputs(safePublicPricing(offer)));
   const configured = await getEffectiveMarketVersion(String(rated.market));
@@ -252,12 +271,10 @@ export async function applyActiveBusinessPriceBatch<T extends Partial<VehicleOff
   if (!offers.length) return offers;
   const fx = activeCatalogFxBatch();
   if(options.retainFullSnapshot && (!fx||!options.readOnly))throw Error("catalog_fx_full_snapshot_scope");
-  if (fx && offers.some(offer => offer.market !== fx.receipt.market ||
-    (offer.sourceCurrency && !Object.hasOwn(fx.receipt.rates, offer.sourceCurrency.trim().toUpperCase())))) {
-    throw Error("catalog_fx_batch_offer_scope");
-  }
+  offers.forEach(assertFxOfferScope);
   const editorial=await readCatalogEditorial();
   offers=offers.map(offer=>offer.id?applyCatalogEditorial(offer as T & {id:string},editorial):offer);
+  offers.forEach(assertFxOfferScope);
   offers=await Promise.all((await withChinaCnyPrices(offers,options)).map(async offer=>repriceEncyclopediaOffer(await repriceEditorialOffer(offer))));
   if (fx && marketSnapshot) throw Error("catalog_fx_external_market_snapshot");
   // A market preparation must not evaluate another market's settings or dates.

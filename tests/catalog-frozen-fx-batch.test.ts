@@ -1,12 +1,16 @@
 import test, { type TestContext } from 'node:test';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
-import { getJsonStorage } from '../apps/web/lib/data';
+import fs from 'node:fs';
+import path from 'node:path';
+import { getDataRoot, getJsonStorage } from '../apps/web/lib/data';
 import { getEffectiveMarketVersion, getEffectiveMarketsWithDefaults, invalidateEffectiveMarketsCache } from '../apps/web/lib/effective-market-settings';
 import { resetChinaCnyPriceCache, withChinaCnyPrices, type ChinaPriceConversion } from '../apps/web/lib/catalog/china-cny-price';
 import { calculateOfferWithVerifiedSpecifications } from '../apps/web/lib/catalog/customs-pricing';
-import { resetCatalogEditorialCache } from '../apps/web/lib/catalog/editorial';
-import { applyActiveBusinessPriceBatch } from '../apps/web/lib/catalog/live-business-pricing';
+import { resetCatalogEditorialCache, type CatalogEditorialEntry, type CatalogEditorialIndex } from '../apps/web/lib/catalog/editorial';
+import { applyActiveBusinessPriceBatch, applyActiveBusinessPricing } from '../apps/web/lib/catalog/live-business-pricing';
+import { resetKnowledgeCoreForTests } from '../apps/web/lib/catalog/knowledge-core';
+import { CALCULATION_INDEX_PATH, checksum, compileModelFacts, modelKey, resetCalculationIndexForTests, type CalculationIndex } from '../apps/web/lib/encyclopedia/calculation-index';
 import { budgetPricingFingerprint } from '../apps/web/lib/catalog/shared-budget-prices';
 import { captureCatalogFxBatch, catalogPricingNow, convertToRub, importCatalogFxBatch, resetCatalogRateCache, verifyCatalogFxReadback, withCatalogFxBatch } from '../apps/web/lib/catalog/rates';
 import type { VehicleOffer } from '../apps/web/lib/catalog/types';
@@ -14,8 +18,9 @@ import { calculateRussiaCustomsForIndividual } from '../packages/engine/src/calc
 
 const day = '2026-11-20';
 const start = Date.parse(`${day}T23:59:59.000Z`);
+type PricedOffer = VehicleOffer & {cardProjectionVersion?: number; publicVisibleRub?: number; publicSpecificationVerified?: boolean; editorialTitle?: string};
 
-function fixture(t: TestContext, options: { live?: boolean; versions?: any[]; foreignMarkets?: any[] } = {}) {
+function fixture(t: TestContext, options: { live?: boolean; versions?: any[]; foreignMarkets?: any[]; editorial?: CatalogEditorialIndex } = {}) {
   t.mock.timers.enable({ apis: ['Date'], now: start });
   const previousDisabled = process.env.CATALOG_LIVE_RATE_DISABLED;
   if (options.live) delete process.env.CATALOG_LIVE_RATE_DISABLED;
@@ -23,6 +28,7 @@ function fixture(t: TestContext, options: { live?: boolean; versions?: any[]; fo
   const db = getJsonStorage();
   const quotes = { USD: 85, CNY: 125, EUR: 95 };
   const anchors: Record<string, ChinaPriceConversion> = {};
+  const storageReads: string[] = [];
   let storedReads = 0, officialReads = 0, writes = 0, dated = true;
   const rates = () => Object.entries(quotes).map(([currency, cbrRate]) => ({
     currency, cbrRate, nominal: currency === 'CNY' ? 10 : 1, rateDate: day,
@@ -30,10 +36,11 @@ function fixture(t: TestContext, options: { live?: boolean; versions?: any[]; fo
     rateSource: 'cbr', fetchedAt: new Date(start).toISOString(),
   }));
   t.mock.method(db, 'readJsonWithMeta', async <T>(key: string, fallback: T) => {
+    storageReads.push(key);
     if (key === 'fees/exchange-rates.json') { storedReads++; return { found: true, value: { rates: rates() } as T }; }
     if (key === 'markets/markets.json') return { found: true, value: [{ id: 'china', versions: options.versions || [] }, ...(options.foreignMarkets || [])] as T };
     if (key === 'catalog/china-cny-prices/current.json') return { found: true, value: { version: 1, entries: anchors } as T };
-    if (key === 'catalog-editorial/current.json') return { found: false, value: fallback };
+    if (key === 'catalog-editorial/current.json') return { found: !!options.editorial, value: options.editorial as T || fallback };
     assert.fail(`Unexpected storage read: ${key}`);
   });
   t.mock.method(db, 'readJson', async <T>(key: string, fallback: T) => (await db.readJsonWithMeta(key, fallback)).value);
@@ -52,12 +59,53 @@ function fixture(t: TestContext, options: { live?: boolean; versions?: any[]; fo
     else process.env.CATALOG_LIVE_RATE_DISABLED = previousDisabled;
     reset();
   });
-  return { quotes, anchors, reads: () => ({ storedReads, officialReads, writes }), setDated: (value: boolean) => { dated = value; } };
+  return { quotes, anchors, storageReads, reads: () => ({ storedReads, officialReads, writes }), setDated: (value: boolean) => { dated = value; } };
 }
 
-function verifiedOffer(id: string): VehicleOffer {
+function manualEntry(offer: Partial<VehicleOffer> & {id: string}, currency = 'CNY'): CatalogEditorialEntry {
+  return {id: offer.id, market: 'china', sourceId: offer.sourceId!, sourceOfferId: offer.sourceOfferId!,
+    make: offer.make!, model: offer.model!, title: 'Saved manual title', photos: ['https://example.test/manual.webp'],
+    status: 'visible', reason: 'Saved review', sellerPrice: {amount: 80000, currency}, version: 'manual-1',
+    specifications: {bodyType: 'sedan'}, updatedAt: `${day}T12:00:00.000Z`, updatedBy: 'fixture',
+    updatedByName: 'Fixture', originalTitle: 'Source title', originalPhoto: ''};
+}
+
+function localPricingInputs(t: TestContext, models: CalculationIndex['models'] = {}) {
+  const root = path.resolve(getDataRoot()) + path.sep;
+  const localReads: string[] = [], forbiddenReads: string[] = [];
+  const index: CalculationIndex = {version: 1, models, digest: checksum(models), manifestDigest: 'fixture', createdAt: `${day}T00:00:00.000Z`};
+  const originalRead = fs.readFileSync;
+  t.mock.method(fs, 'readFileSync', ((file: any, ...args: any[]) => {
+    const name = String(file);
+    if (name.startsWith(root)) {
+      const relative = name.slice(root.length);
+      localReads.push(relative);
+      if (relative === CALCULATION_INDEX_PATH) return JSON.stringify(index);
+      forbiddenReads.push(relative);
+      assert.fail('Only the fixed compiled index may be read from local pricing data');
+    }
+    return (originalRead as any)(file, ...args);
+  }) as any);
+  for (const method of ['readFile', 'readdir'] as const) {
+    const original = fs.promises[method];
+    t.mock.method(fs.promises, method, (async (file: any, ...args: any[]) => {
+      const name = String(file);
+      if (name.startsWith(root) || name === root.slice(0, -1)) {
+        forbiddenReads.push(`${method}:${name.slice(root.length)}`);
+        assert.fail('General knowledge and detail data are outside the frozen pricing context');
+      }
+      return (original as any)(file, ...args);
+    }) as any);
+  }
+  resetCalculationIndexForTests(); resetKnowledgeCoreForTests();
+  t.after(() => { resetCalculationIndexForTests(); resetKnowledgeCoreForTests(); });
+  return {localReads, forbiddenReads};
+}
+
+function verifiedOffer(id: string): PricedOffer {
   return {
     id, market: 'china', sourceId: 'autohome_used_china_open', sourceOfferId: id,
+    offerType: 'fixed', status: 'active', priceMode: 'fixed', images: [], firstSeenAt: '2026-11-18T08:00:00.000Z',
     make: 'Fixture', model: 'Named combustion', year: 2022, sourcePrice: 60000, sourceCurrency: 'CNY',
     engineCc: 2998, powerHp: 370, powerKw: 272, icePowerKw: 272, utilizationPowerKw: 272,
     powertrainKind: 'combustion', fuel: 'petrol', vehicleCategory: 'M1',
@@ -65,7 +113,7 @@ function verifiedOffer(id: string): VehicleOffer {
     totalRub: null, calculationStatus: 'needs_data',
     updatedAt: '2026-11-18T08:00:00.000Z', // Source time precedes current price capture and stays unchanged.
     operational: { semanticEvidence: Object.fromEntries(['engineCc', 'fuel', 'powertrainKind', 'powerHp', 'powerKw'].map(field => [field, { status: 'exact', source: 'named fixture' }])) },
-  } as VehicleOffer;
+  };
 }
 
 test('China captures one official observation, then customs, logistics and batches retain it across cache expiry and midnight', async t => {
@@ -185,7 +233,7 @@ test('a historical total without customs replay inputs cannot carry old FX into 
       customs: {status: 'ready', totalCustomsRub: 320000, knownCustomsRub: 300000, utilizationFeeRub: 20000},
       missing: [], priceIncludesAllCustoms: true, priceIncludesUtilizationFee: true,
       breakdown: [{key: 'old_total', rub: 2000000}],
-    }} as unknown as VehicleOffer;
+    }} as unknown as PricedOffer;
   const fx = await captureCatalogFxBatch('china', ['CNY']);
   const [priced] = await withCatalogFxBatch(fx, () => applyActiveBusinessPriceBatch([input], {readOnly: true, retainFullSnapshot: true}));
   assert.equal(priced.id, input.id);
@@ -205,6 +253,110 @@ test('a historical total without customs replay inputs cannot carry old FX into 
   const [legacy] = await applyActiveBusinessPriceBatch([input], {readOnly: true});
   assert.ok(Number(legacy.totalRub) > 0, 'Ordinary legacy callers keep their existing behavior');
   assert.equal(legacy.calculationSnapshot?.currencyRate?.effectiveRate, 20);
+});
+
+test('pending manual prices remain unpriced without reading detail shards or general knowledge', async t => {
+  const offers = [undefined, 3].map((cardProjectionVersion, i) => ({
+    id: `pending-manual-${i}`, market: 'china', sourceId: 'autohome_used_china_open', sourceOfferId: String(i),
+    make: 'Fixture', model: 'Unknown specifications', year: 2022, sourcePrice: i ? 80000 : 60000, sourceCurrency: 'CNY',
+    totalRub: null, calculationStatus: 'needs_data', cardProjectionVersion,
+    operational: {savedMarker: 'preserve'},
+    ...(i ? {editorialPriceKey: JSON.stringify([80000, 'CNY']), publicVisibleRub: 2000000,
+      calculationSnapshot: {currencyRate: {effectiveRate: 20}, sourcePriceRub: 1600000,
+        customs: {status: 'ready', totalCustomsRub: 320000}}} : {}),
+  } as unknown as PricedOffer));
+  const original = structuredClone(offers);
+  const f = fixture(t, {editorial: {revision: 'manual', entries: Object.fromEntries(offers.map(offer => [offer.id, manualEntry(offer)]))}});
+  const local = localPricingInputs(t);
+  const fx = await captureCatalogFxBatch('china', ['CNY']);
+  const rows = await withCatalogFxBatch(fx, () => applyActiveBusinessPriceBatch(offers, {readOnly: true, retainFullSnapshot: true}));
+  for (const row of rows) {
+    assert.equal(row.sourcePrice, 80000);
+    assert.equal(row.sourceCurrency, 'CNY');
+    assert.equal(row.editorialPriceKey, JSON.stringify([80000, 'CNY']));
+    assert.equal(row.editorialTitle, 'Saved manual title');
+    assert.equal(row.images?.[0]?.url, 'https://example.test/manual.webp');
+    assert.equal(row.bodyType, 'sedan');
+    assert.equal((row.operational as any)?.savedMarker, 'preserve');
+    assert.equal(row.totalRub, null);
+    assert.equal(row.publicVisibleRub, undefined);
+    assert.equal(row.publicSpecificationVerified, false);
+    assert.equal(row.calculationStatus, 'needs_data');
+    assert.equal(row.engineCc, undefined);
+    assert.equal(row.powerHp, undefined);
+    assert.equal(row.calculationSnapshot?.customs, undefined);
+    assert.equal(row.calculationSnapshot?.currencyRate?.effectiveRate, 12.5);
+    assert.equal(row.calculationSnapshot?.sourcePriceRub, 1000000);
+  }
+  assert.deepEqual(offers, original, 'Manual pending preparation does not change the source records');
+  assert.deepEqual(local.forbiddenReads, []);
+  assert.deepEqual(local.localReads, [CALCULATION_INDEX_PATH]);
+  assert.deepEqual([...new Set(f.storageReads)].sort(), ['catalog-editorial/current.json', 'fees/exchange-rates.json', 'markets/markets.json']);
+  assert.deepEqual(f.reads(), {storedReads: 1, officialReads: 0, writes: 0});
+});
+
+test('a complete manual offer uses verified inputs and sealed FX without a compact-card detail read', async t => {
+  const offer = {...verifiedOffer('verified-manual'), cardProjectionVersion: 3};
+  const f = fixture(t, {editorial: {revision: 'manual', entries: {[offer.id]: manualEntry(offer)}}});
+  const local = localPricingInputs(t);
+  const fx = await captureCatalogFxBatch('china', ['CNY']);
+  const [row] = await withCatalogFxBatch(fx, () => applyActiveBusinessPriceBatch([offer], {readOnly: true, retainFullSnapshot: true}));
+  assert.ok(Number(row.totalRub) > 1000000);
+  assert.equal(row.publicVisibleRub, row.totalRub);
+  assert.equal(row.sourcePrice, 80000);
+  assert.equal(row.editorialPriceKey, JSON.stringify([80000, 'CNY']));
+  assert.equal(row.editorialTitle, 'Saved manual title');
+  assert.equal(row.calculationSnapshot?.customs?.status, 'ready');
+  assert.equal(row.calculationSnapshot?.currencyRate?.effectiveRate, 12.5);
+  assert.equal(row.calculationSnapshot?.sourcePriceRub, 1000000);
+  assert.deepEqual(row.calculationSnapshot?.customs, calculateRussiaCustomsForIndividual(row.calculationSnapshot!.customsInput!));
+  assert.deepEqual(local.forbiddenReads, []);
+  assert.ok(f.storageReads.every(key => ['catalog-editorial/current.json', 'fees/exchange-rates.json', 'markets/markets.json'].includes(key)));
+  assert.deepEqual(f.reads(), {storedReads: 1, officialReads: 0, writes: 0});
+});
+
+test('the fixed compiled encyclopedia can complete a pending manual price before the verified calculation', async t => {
+  const offer = {id: 'compiled-manual', market: 'china', sourceId: 'autohome_used_china_open', sourceOfferId: '3',
+    make: 'Audi', model: 'A6', year: 2023, trim: '40 TDI S tronic', fuel: 'diesel', transmission: 'dct', drive: 'fwd',
+    sourcePrice: 60000, sourceCurrency: 'CNY', totalRub: null, calculationStatus: 'needs_data', cardProjectionVersion: 3,
+    operational: {}} as unknown as PricedOffer;
+  const facts = compileModelFacts({id: 'fixture-model', make: 'Audi', model: 'A6', revision: 'r1', variants: [{
+    id: 'v1', year: 2023, trim: offer.trim, status: 'observed', markets: ['china'], fuel: 'diesel', powertrainKind: 'combustion',
+    engineCc: 1968, powerHp: 204, powerKw: 150, transmission: 'dct', drive: 'fwd', bodyType: 'sedan',
+  }]});
+  const f = fixture(t, {editorial: {revision: 'manual', entries: {[offer.id]: manualEntry(offer)}}});
+  const local = localPricingInputs(t, {[modelKey('Audi', 'A6')]: facts});
+  const fx = await captureCatalogFxBatch('china', ['CNY']);
+  const [row] = await withCatalogFxBatch(fx, () => applyActiveBusinessPriceBatch([offer], {readOnly: true, retainFullSnapshot: true}));
+  assert.equal(offer.engineCc, undefined);
+  assert.equal(row.engineCc, 1968);
+  assert.equal(row.powerHp, 204);
+  assert.equal(row.sourcePrice, 80000);
+  assert.equal(row.editorialPriceKey, JSON.stringify([80000, 'CNY']));
+  assert.ok(Number(row.totalRub) > 1000000);
+  assert.equal(row.publicSpecificationVerified, true);
+  assert.equal(row.calculationSnapshot?.customs?.status, 'ready');
+  assert.equal(row.calculationSnapshot?.currencyRate?.effectiveRate, 12.5);
+  assert.deepEqual(local.forbiddenReads, []);
+  assert.deepEqual(local.localReads, [CALCULATION_INDEX_PATH]);
+  assert.ok(f.storageReads.every(key => ['catalog-editorial/current.json', 'fees/exchange-rates.json', 'markets/markets.json'].includes(key)));
+  assert.deepEqual(f.reads(), {storedReads: 1, officialReads: 0, writes: 0});
+});
+
+test('a manual currency outside the sealed receipt is rejected after the editorial overlay', async t => {
+  const offer = {...verifiedOffer('unsealed-manual'), catalogPricingMode: 'seller' as const};
+  const f = fixture(t, {editorial: {revision: 'manual', entries: {[offer.id]: manualEntry(offer, 'KRW')}}});
+  const local = localPricingInputs(t);
+  const fx = await captureCatalogFxBatch('china', ['CNY']);
+  await withCatalogFxBatch(fx, async () => {
+    await assert.rejects(applyActiveBusinessPriceBatch([offer], {readOnly: true, retainFullSnapshot: true}), /catalog_fx_batch_offer_scope/);
+    await assert.rejects(applyActiveBusinessPricing(offer), /catalog_fx_batch_offer_scope/);
+  });
+  assert.equal(offer.sourceCurrency, 'CNY');
+  assert.deepEqual(local.localReads, []);
+  assert.deepEqual(local.forbiddenReads, []);
+  assert.deepEqual([...new Set(f.storageReads)].sort(), ['catalog-editorial/current.json', 'fees/exchange-rates.json']);
+  assert.deepEqual(f.reads(), {storedReads: 1, officialReads: 0, writes: 0});
 });
 
 test('receipt import authenticates independent bytes, rejects mutation and enforces market/currency scope', async t => {
