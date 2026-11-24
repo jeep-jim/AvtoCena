@@ -1,0 +1,222 @@
+{
+  "version": 1,
+  "kind": "china-range-commit-chromium-ci-evidence-v1",
+  "recordedAt": "2026-11-24T19:26:35.939274+00:00",
+  "controllerHead": "26b387aa7f52ab786d99d0258da4644230b631aa",
+  "runtimeSha": "1518035b9e6b717cd364ae8d13e63d0127899112",
+  "runtimeTree": "71edad8cb0269137dfecf7b4947045a092b4b232",
+  "browserRun": {
+    "id": 45466296559,
+    "jobId": 138701985881,
+    "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/45466296559",
+    "conclusion": "success",
+    "sourceReportSha256": "3e8653d83f6bccfd3362ff47f21472bea87b2fb7061bdbec123112612f01e3bf"
+  },
+  "standardCi": {
+    "id": 45466296628,
+    "jobId": 138701985571,
+    "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/45466296628",
+    "conclusion": "success",
+    "regressions": {
+      "tests": 3422,
+      "passed": 3422,
+      "failed": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "typecheck": [
+      "web",
+      "engine"
+    ],
+    "productionPages": 58
+  },
+  "scope": "Isolated production CatalogFilters component in real Chromium with recorded/stubbed Next transport; these timings are not public-page acceptance.",
+  "report": {
+    "passed": true,
+    "runtimeSha": "1518035b9e6b717cd364ae8d13e63d0127899112",
+    "component": "apps/web/components/catalog/CatalogFilters.tsx",
+    "componentSha256": "32da85f82a00d2140e6d70271dfd307e6c0cc25298bb79aaac8c361602f59de6",
+    "baselineRevision": "860e1ff601c6852eb3b1474982e52e3a5300c4af",
+    "baselineComponentSha256": "c8a2812f73e08a682335858e78799726666c2a2ed0d8ad6a1e0db88c877d1c69",
+    "environment": "Actual CatalogFilters in Chromium; local synthetic data and recorded Next transport; no suppliers or public acceptance",
+    "cases": [
+      {
+        "name": "typing waits for Tab; one normalized final query",
+        "passed": true
+      },
+      {
+        "name": "Enter and repeated blur do not duplicate navigation",
+        "passed": true
+      },
+      {
+        "name": "both normalized bounds travel in one query",
+        "passed": true
+      },
+      {
+        "name": "dirty input to held preset click submits only the preset",
+        "passed": true
+      },
+      {
+        "name": "dirty input to held clear click submits only cleared bounds",
+        "passed": true
+      },
+      {
+        "name": "cancelled held preset preserves the original blur commit",
+        "passed": true
+      },
+      {
+        "name": "dirty year and held price preset coalesce across range cards",
+        "passed": true
+      },
+      {
+        "name": "dirty mileage and held price clear coalesce across range cards",
+        "passed": true
+      },
+      {
+        "name": "dirty range and held power checkbox coalesce into one query",
+        "passed": true
+      },
+      {
+        "name": "prevented Tab expires before an unrelated later blur",
+        "passed": true
+      },
+      {
+        "name": "keyboard preset and clear remain accessible with one push each",
+        "passed": true
+      },
+      {
+        "name": "stale route response cannot replace a newer range or resubmit it",
+        "passed": true
+      },
+      {
+        "name": "Enter intent is consumed before an external sticky-chip pointer click",
+        "passed": true
+      },
+      {
+        "name": "acknowledged Back restores controls without another push",
+        "passed": true
+      },
+      {
+        "name": "mobile blur and close share one final navigation",
+        "passed": true
+      },
+      {
+        "name": "touch preset and clear do not submit dirty intermediate text",
+        "passed": true
+      },
+      {
+        "name": "mixed range and categorical edits retain coalescing",
+        "passed": true
+      },
+      {
+        "name": "auction typing keeps the existing 650ms coalescing",
+        "passed": true
+      },
+      {
+        "name": "no-op range blur does not navigate",
+        "passed": true
+      },
+      {
+        "name": "unmount cancels pending navigation",
+        "passed": true
+      }
+    ],
+    "styles": {
+      "source": "Exact root/public layout and CatalogSidebar CSS imports, compiled with apps/web PostCSS and Tailwind configuration",
+      "inputs": [
+        {
+          "file": "apps/web/components/telegram/telegram-miniapp.css",
+          "sha256": "c146c80f77262de48d71190151f2fd24dc38c380fbe5fa08f7abe898d2ebe3c9"
+        },
+        {
+          "file": "apps/web/app/select-controls.css",
+          "sha256": "406a515a0651ab8a97c9ce34fec09c56991196683d47893e8fab14a5073553e5"
+        },
+        {
+          "file": "apps/web/app/globals.css",
+          "sha256": "329bc650b33adba56ea7472f2259696a6865be3fb8125b3f36b5054e36245d6d"
+        },
+        {
+          "file": "apps/web/app/catalog-ui.css",
+          "sha256": "bfd8f05d69dca7c914d00d317e9a8ae012077ca53cc7d20ab8080adff01e539e"
+        },
+        {
+          "file": "apps/web/app/public-polish.css",
+          "sha256": "266ef358607c2c920247f7dc35eb42190ffa53f4b7b7c886c59ac4efa71c6b30"
+        },
+        {
+          "file": "../../AvtoCena/AvtoCena/node_modules/@fontsource-variable/onest/wght.css",
+          "sha256": "b5c8c625aedc971b53c0d964e27fe7cfd511075b2764ab06e97a4f9a5d09d417"
+        },
+        {
+          "file": "apps/web/app/public-typography.css",
+          "sha256": "8490f29dfa64d19e779bdc3c4b469697e80bb2ec95626dae96c63d387ff98215"
+        },
+        {
+          "file": "apps/web/components/catalog/MobileCatalogDropdowns.css",
+          "sha256": "55a8a85c7c435503bb9aa1033a146f5956ded68e794f518a2a03d794bc4641ae"
+        },
+        {
+          "file": "apps/web/app/flat-ui.css",
+          "sha256": "fe3aa96832d62cfa006ed22e791df363757fc29362129f115b1948392d60332a"
+        },
+        {
+          "file": "apps/web/app/public-regression-fixes.css",
+          "sha256": "6b8f844187eee404d7b0f692a4a82841de0f2253d349897c4807f5ce513a4c5e"
+        },
+        {
+          "file": "apps/web/app/public-price-sheet-fix.css",
+          "sha256": "4c1b0eaeedb53035e8c170f40bed47f6c9376983e6d1160a9f6c8e9c2b6a8da5"
+        },
+        {
+          "file": "apps/web/app/catalog-filter-compact.css",
+          "sha256": "eb0565dff2498dc2ef45ae4d89433fe675028ef5458ddc7cf901879abf542383"
+        },
+        {
+          "file": "apps/web/components/catalog/catalog-sidebar.css",
+          "sha256": "dfee1839b9e9cf657bf4316fee2c4dca3c223901fb5a6b4cefb581226180767d"
+        },
+        {
+          "file": "apps/web/postcss.config.js",
+          "sha256": "fa650b380adfabb151a0b352f7135e107e6352345f899060f1c5c231228f94bf"
+        },
+        {
+          "file": "apps/web/tailwind.config.ts",
+          "sha256": "06ee83149a38fb7c94544573f35ee5e40bbaa1af41ab6cdc0ee5446ea63cf027"
+        }
+      ],
+      "compiledSha256": "f150f6212a93b7905b7db14b58449e5f08e972bc91111dd851dd5cad6c01547d"
+    },
+    "profile": {
+      "kind": "actual Tab keydown to router.push in real component; transport stubbed; not public browser acceptance",
+      "baseline": {
+        "samplesMs": [
+          184,
+          182,
+          182,
+          181.8,
+          181.8,
+          181.7,
+          181.7
+        ],
+        "medianMs": 181.8
+      },
+      "current": {
+        "samplesMs": [
+          19.6,
+          18.6,
+          5.3,
+          6.7,
+          6.7,
+          6.8,
+          7.2
+        ],
+        "medianMs": 6.8
+      }
+    }
+  },
+  "medianDispatchDifferenceMs": 175.0,
+  "frozenPublicBrowserHarnessUnchanged": true,
+  "frozenSpeedBaselinesUnchanged": true
+}

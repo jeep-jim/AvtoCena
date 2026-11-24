@@ -186,7 +186,7 @@
     "runner": "tests/browser/catalog-range-commit.mjs",
     "fixture": "tests/browser/catalog-range-commit-fixture.tsx",
     "preparedCases": 20,
-    "execution": "pending GitHub Actions Chromium before activation",
+    "execution": "GitHub Actions Chromium passed; separate from mandatory public acceptance",
     "workflow": ".github/workflows/catalog-next-range-commit-browser.yml",
     "localBrowserBlockedBeforePage": "executor Chromium IPC policy",
     "frozenPublicBrowserHarnessUnchanged": true,
@@ -287,6 +287,18 @@
       "correction": "Include catalog-sidebar.css from actual CatalogSidebar importer; compiled right:6px / desktop right:0 move help button to its real position",
       "browserActionCodeUnchanged": true,
       "productionComponentUnchanged": true
+    },
+    "successfulAttempt": {
+      "runUrl": "https://github.com/jeep-jim/AvtoCena/actions/runs/45466296559",
+      "controllerHead": "26b387aa7f52ab786d99d0258da4644230b631aa",
+      "runtimeSha": "1518035b9e6b717cd364ae8d13e63d0127899112",
+      "cases": 20,
+      "passed": 20,
+      "failed": 0,
+      "baselineDispatchMedianMs": 181.8,
+      "currentDispatchMedianMs": 6.8,
+      "scope": "Actual component with recorded/stubbed Next transport; not public response time",
+      "evidence": "docs/markets/evidence/china-range-commit-browser-20261125.json"
     }
   },
   "localValidationInputs": {
