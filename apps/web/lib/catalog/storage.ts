@@ -1,4 +1,5 @@
 import {chinaAggregateCacheKey,legacyAggregateMarketAllowed,omitLegacyChinaAggregate,readChinaAggregateAuthority,withChinaAggregateAuthority} from './china-public-aggregate';
+import {chinaLocalRuntimeConfigured,searchLocalChina,localChinaFacets,localChinaCounts,readLocalChinaOffer,chinaLocalOfferGuard} from './china-local-reader';
 import {budgetSelectionFilterKey} from './budget-selection-key';
 import {homeSnapshotMarketIsEmpty} from "./home-editorial-empty";
 import {createHomePhaseTiming} from "./home-phase-timing";
@@ -234,7 +235,7 @@ export type CatalogSearchProjection = {
   sourcePrice?: number | null; sourceCurrency?: string | null; priceMode?: string; previousTotalRub?: number | null; priceDeltaRub?: number | null; priceChangedAt?: string;
   calculationStatus?: string; calculationSnapshot?: VehicleOffer["calculationSnapshot"]; publicVisibleRub?: number; publicSpecificationVerified?: boolean; cardImageUrl?: string; seriesId?: string; sourceGroup?: string; cardProjectionVersion?: 1 | 2 | 3;
 };
-export function publicOffer(offer: VehicleOffer): PublicVehicleOffer { offer=applyCatalogEditorial(offer); const safe = safePublicPricing(offer); const { operational, vin, frameNumber, sourceId, ...dto } = safe as any; return { ...dto, ...(offer.market === "korea" && offer.sourceId === "encar_direct" && operational?.provider === "auto_api_encar" ? {paidEncar:true} : {}), japanPowerEstimate:compactJapanPowerEstimate(safe), fuelPowertrainEvidence:compactFuelPowertrainEvidence(safe), chassisCode: /^[A-Za-z0-9][A-Za-z0-9-]{0,19}$/.test(String(operational?.chassisCode || dto.chassisCode || "").trim()) ? String(operational?.chassisCode || dto.chassisCode).trim() : undefined, bodyType:catalogBodyType(offer), catalogEntryKind:isChinaModelSpecification(offer)?"model_variant":undefined, cardImageUrl: dto.cardImageUrl ? protectedPhotoUrl(dto.cardImageUrl, offer.market) : undefined, japanExportRestriction: assessJapanExportRestriction(offer), images: offer.images.map((img) => ({ id: img.id, role: img.role, url: protectedPhotoUrl(img.url, offer.market), width: img.width, height: img.height, size: img.size, mimeType: img.mimeType })) } as any; }
+export function publicOffer(offer: VehicleOffer): PublicVehicleOffer { const frozen=chinaLocalOfferGuard(offer); if(frozen)frozen(); else offer=applyCatalogEditorial(offer); const safe = frozen?offer:safePublicPricing(offer); const { operational, vin, frameNumber, sourceId, ...dto } = safe as any; return { ...dto, ...(offer.market === "korea" && offer.sourceId === "encar_direct" && operational?.provider === "auto_api_encar" ? {paidEncar:true} : {}), japanPowerEstimate:compactJapanPowerEstimate(safe), fuelPowertrainEvidence:compactFuelPowertrainEvidence(safe), chassisCode: /^[A-Za-z0-9][A-Za-z0-9-]{0,19}$/.test(String(operational?.chassisCode || dto.chassisCode || "").trim()) ? String(operational?.chassisCode || dto.chassisCode).trim() : undefined, bodyType:catalogBodyType(offer), catalogEntryKind:isChinaModelSpecification(offer)?"model_variant":undefined, cardImageUrl: dto.cardImageUrl ? protectedPhotoUrl(dto.cardImageUrl, offer.market) : undefined, japanExportRestriction: assessJapanExportRestriction(offer), images: offer.images.map((img) => ({ id: img.id, role: img.role, url: protectedPhotoUrl(img.url, offer.market), width: img.width, height: img.height, size: img.size, mimeType: img.mimeType })) } as any; }
 export function compactPublicStorageOffer(offer: VehicleOffer): VehicleOffer {
   // Source adapters may retain complete HTML/JSON responses in operational.raw
   // for diagnostics. Public generations are immutable and were duplicating that
@@ -1034,7 +1035,7 @@ async function readCatalogDirectoryCountRowsEditorial() {
 }
 
 /** Names for discovery do not need prices, offer blocks or moderation recounts. */
-export async function readCatalogModelNames(make = '', market = '') {
+async function readCatalogModelNamesLegacy(make = '', market = '') {
   const [manifest, summary] = await Promise.all([readManifest(), readCurrentBrandSummary()]);
   const makes = make ? new Set(catalogMakeFilterValues(make).map(value => cleanFacet(value).toLocaleLowerCase('ru-RU'))) : null;
   const markets = market.split('|').filter(value => value && value !== 'any');
@@ -1042,7 +1043,7 @@ export async function readCatalogModelNames(make = '', market = '') {
     return Object.values(summary.brands)
       .filter(brand => !makes || makes.has(cleanFacet(brand.make).toLocaleLowerCase('ru-RU')))
       .flatMap(brand => brand.models
-        .filter(model => markets.length ? markets.some(value => Number(model.marketCounts?.[value]) > 0) : model.count > 0)
+        .filter(model => markets.length ? markets.some(value => legacyAggregateMarketAllowed(value) && Number(model.marketCounts?.[value]) > 0) : model.count - (omitLegacyChinaAggregate()?Number(model.marketCounts?.china||0):0) > 0)
         .map(model => ({make: brand.make, model: model.model})));
   }
   // A publication may update the compact facets before the brand summary.
@@ -1051,9 +1052,20 @@ export async function readCatalogModelNames(make = '', market = '') {
   if (facets.generationId !== manifest.generationId) throw Error('catalog_model_directory_unavailable');
   return facets.models.filter(row => !makes || makes.has(cleanFacet(row.make).toLocaleLowerCase('ru-RU')));
 }
+export async function readCatalogModelNames(make = '', market = '') {
+  if(!chinaLocalRuntimeConfigured())return readCatalogModelNamesLegacy(make,market);
+  const markets=market.split('|').filter(value=>value&&value!=='any');
+  if(markets.length===1&&markets[0]==='china')return (await localChinaFacets({make}))!.models;
+  return withChinaAggregateAuthority(undefined,async()=>{
+    const legacy=await readCatalogModelNamesLegacy(make,market);
+    const china=!markets.length||markets.includes('china')?(await localChinaFacets({make}))!.models:[];
+    return [...new Map([...legacy,...china].map(row=>[`${row.make}:${row.model}`,row])).values()];
+  });
+}
 
 /** Navigation is a name directory, never an availability/count/price query. */
 export async function readCatalogNavigationFacets(market = ''): Promise<CatalogFacets> {
+  if(chinaLocalRuntimeConfigured()&&market==='china')return (await localChinaFacets())!;
   return withCatalogEditorial(async () => {
     const [manifest, current, summary] = await Promise.all([
       readManifest(), readCurrentFacets().catch(() => null),
@@ -2700,7 +2712,7 @@ async function countCatalogOffersEditorial(params: CatalogSearchParams) {
   return catalogCountCache.get(key, async () => {
     const hasPredicates = Object.entries(filters).some(([name,value]) => name !== "market" && value !== undefined && value !== "");
     if (!hasPredicates) {
-      const summary = await readCatalogBrandCounts(query);
+      const summary = await readCatalogBrandCountsEditorial(query);
       return {generationId: summary.generationId, total: Object.values(summary.counts).reduce((sum,count)=>sum+count,0)};
     }
     const budget=await readBudgetSelection(query);
@@ -3175,19 +3187,62 @@ export async function projectPreparedChinaFixtureSearch(rows:CatalogSearchProjec
  return {total:matches.length,page,pageSize,items,usedIndexShards:[]};
 }
 
-export async function searchOffers(params: CatalogSearchParams, internalPageLimit = 48, admissionGroup?: 'related'){return withChinaAggregateAuthority(params.market,()=>withCatalogEditorial(()=>withCatalogColorFilter(params,()=>searchOffersEditorial(params,internalPageLimit,admissionGroup))));}
+export async function searchOffers(params: CatalogSearchParams, internalPageLimit = 48, admissionGroup?: 'related'){
+ if(chinaLocalRuntimeConfigured()&&params.market==='china')return (await searchLocalChina({...params,pageSize:Math.min(48,params.pageSize||24)}))!;
+ return withChinaAggregateAuthority(params.market,()=>withCatalogEditorial(()=>withCatalogColorFilter(params,()=>searchOffersEditorial(params,internalPageLimit,admissionGroup))));
+}
 
 export async function searchOffersWithoutBudgetIndexForTests(params:CatalogSearchParams,internalPageLimit=48){return withCatalogEditorial(()=>searchOffersWithoutBudgetIndexForTestsEditorial(params,internalPageLimit));}
 
-export async function countCatalogOffers(params: CatalogSearchParams){return withChinaAggregateAuthority(params.market,()=>withCatalogEditorial(()=>withCatalogColorFilter(params,()=>countCatalogOffersEditorial(params))));}
+export async function countCatalogOffers(params: CatalogSearchParams){
+ if(chinaLocalRuntimeConfigured()&&params.market==='china'){const result=(await searchLocalChina(params,{countOnly:true}))!;return {generationId:result.generationId,total:result.total};}
+ return withChinaAggregateAuthority(params.market,()=>withCatalogEditorial(()=>withCatalogColorFilter(params,async()=>{
+  const legacy=await countCatalogOffersEditorial(params);
+  if(chinaLocalRuntimeConfigured()&&(!params.market||params.market==='any')){const china=(await searchLocalChina({...params,market:'china'},{countOnly:true}))!;return {...legacy,total:legacy.total+china.total,independentChina:true,chinaGenerationId:china.generationId};}
+  return legacy;
+ })));
+}
 
-export async function readCatalogFacets(params: CatalogSearchParams = {}){return withChinaAggregateAuthority(params.market,()=>withCatalogEditorial(()=>withCatalogColorFilter(params,()=>readCatalogFacetsEditorial(params))));}
+export async function readCatalogFacets(params: CatalogSearchParams = {}){
+ if(chinaLocalRuntimeConfigured()&&params.market==='china')return (await localChinaFacets(params))!;
+ return withChinaAggregateAuthority(params.market,()=>withCatalogEditorial(()=>withCatalogColorFilter(params,async()=>{
+  const legacy=await readCatalogFacetsEditorial(params);
+  if(!chinaLocalRuntimeConfigured()||params.market&&params.market!=='any')return legacy;
+  const china=(await localChinaFacets(params))!,merged={...legacy};
+  for(const key of ['makes','bodyTypes','fuels','transmissions','drives'] as const)merged[key]=[...new Set([...legacy[key],...china[key]])].sort((a,b)=>a.localeCompare(b,'ru'));
+  merged.models=[...new Map([...legacy.models,...china.models].map(row=>[`${row.make}:${row.model}`,row])).values()];
+  return merged;
+ })));
+}
 
-export async function readCatalogBrandCounts(params: CatalogSearchParams = {}){return withChinaAggregateAuthority(params.market,()=>withCatalogEditorial(()=>withCatalogColorFilter(params,()=>readCatalogBrandCountsEditorial(params))));}
+export async function readCatalogBrandCounts(params: CatalogSearchParams = {}){
+ if(chinaLocalRuntimeConfigured()&&params.market==='china'){const china=(await localChinaCounts({...params,make:undefined}))!;return {generationId:china.generationId,counts:china.counts,modelCounts:china.modelCounts};}
+ return withChinaAggregateAuthority(params.market,()=>withCatalogEditorial(()=>withCatalogColorFilter(params,async()=>{
+  const legacy=await readCatalogBrandCountsEditorial(params);
+  if(!chinaLocalRuntimeConfigured()||params.market&&params.market!=='any')return legacy;
+  const [china,foreignFacets]=await Promise.all([localChinaCounts({...params,make:undefined}),readCatalogFacetsEditorial({...params,make:undefined})]);
+  const foreignNames=foreignFacets.models;
+  const counts={...legacy.counts},modelCounts={...legacy.modelCounts};
+  for(const [make,count] of Object.entries(china!.counts))counts[make]=(counts[make]||0)+Number(count);
+  for(const make of Object.keys(china!.counts))modelCounts[make]=new Set([...foreignNames.filter(row=>row.make===make).map(row=>row.model),...china!.models.filter((row:any)=>row.make===make).map((row:any)=>row.model)]).size;
+  return {...legacy,counts,modelCounts};
+ })));
+}
 
-export async function readCatalogBrandModelCounts(make: string){return withChinaAggregateAuthority(undefined,()=>withCatalogEditorial(()=>readCatalogBrandModelCountsEditorial(make)));}
+export async function readCatalogBrandModelCounts(make: string){return withChinaAggregateAuthority(undefined,()=>withCatalogEditorial(async()=>{
+ const legacy=await readCatalogBrandModelCountsEditorial(make);
+ if(!chinaLocalRuntimeConfigured())return legacy;
+ const china=(await localChinaCounts({make}))!,models=new Map(legacy.models.map(row=>[row.model.toLocaleLowerCase('ru-RU'),{...row,marketCounts:{...row.marketCounts}}]));
+ for(const row of china.models){const key=row.model.toLocaleLowerCase('ru-RU'),old=models.get(key)||{model:row.model,count:0,marketCounts:{}};models.set(key,{...old,count:old.count+row.count,marketCounts:{...old.marketCounts,china:row.count}});}
+ return {...legacy,models:[...models.values()].sort((a,b)=>b.count-a.count||a.model.localeCompare(b.model,'ru'))};
+ }));}
 
-export async function readCatalogDirectoryCountRows(){return withChinaAggregateAuthority(undefined,()=>withCatalogEditorial(()=>readCatalogDirectoryCountRowsEditorial()));}
+export async function readCatalogDirectoryCountRows(){return withChinaAggregateAuthority(undefined,()=>withCatalogEditorial(async()=>{
+ const legacy=await readCatalogDirectoryCountRowsEditorial();if(!chinaLocalRuntimeConfigured())return legacy;
+ const china=(await localChinaCounts())!,rows=new Map(legacy.map(row=>[`${row.make}:${row.model}`,{...row}]));
+ for(const row of china.models){const key=`${row.make}:${row.model}`,old=rows.get(key);rows.set(key,{...row,count:(old?.count||0)+row.count});}
+ return [...rows.values()];
+ }));}
 
 export async function readCurrentPublicCatalogProjection(){return withChinaAggregateAuthority(undefined,()=>withCatalogEditorial(()=>readCurrentPublicCatalogProjectionEditorial()));}
 

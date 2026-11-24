@@ -55,6 +55,8 @@ const origins: Record<string, {city: string; column: number}> = {
 };
 routes["минеральные воды"] = ["Минеральные Воды", 10050];
 routes["астрахань"] = ["Астрахань", 9700];
+/** Enumerate the existing tariff table for offline price preparation. */
+export const DELIVERY_CITIES: readonly string[] = Object.freeze(Object.values(routes).map(route => route[0]));
 export function normalizeDeliveryCity(value: unknown): string {
  return typeof value === "string" ? value.trim().replace(/^г(?:\.\s*|\s+)/i, "").replace(/\s+/g," ").slice(0,100) : "";
 }

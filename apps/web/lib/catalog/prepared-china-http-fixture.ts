@@ -1,5 +1,6 @@
 import {AsyncLocalStorage} from 'node:async_hooks';
 import {ObjectJsonStorage} from '../data';
+import {chinaLocalRuntimeConfigured,chinaLocalOfferGuard,searchLocalChina,readLocalChinaOffer} from './china-local-reader';
 import {readCatalogEditorialFresh,withCatalogEditorialSnapshot} from './editorial';
 import {preparedChinaEditorialEvidence} from './china-prepared-editorial.mjs';
 import {openActivePreparedChinaFixture} from './prepared-china-fixture-activation';
@@ -55,12 +56,12 @@ export function withPreparedChinaRegcloudPreview<T>(regcloud:ChinaStageObjectFil
  const scoped=Object.freeze({regcloud,indexedModelOnly:true as const,independentChina:openIndependentChinaRegcloud(regcloud)});
  return scope.run(scoped,run);
 }
-export const preparedChinaNormalRegcloudEnabled=()=>!scope.getStore()&&chinaRegcloudRuntimeConfigured();
-export const hasPreparedChinaHttpFixture=()=>!!scope.getStore()||preparedChinaNormalRegcloudEnabled();
-export const hasIndependentChinaHttpFixture=()=>!!scope.getStore()?.independentChina||preparedChinaNormalRegcloudEnabled();
-export const preparedChinaIndexedModelOnly=()=>scope.getStore()?.indexedModelOnly===true||preparedChinaNormalRegcloudEnabled();
+export const preparedChinaNormalRegcloudEnabled=()=>!scope.getStore()&&!chinaLocalRuntimeConfigured()&&chinaRegcloudRuntimeConfigured();
+export const hasPreparedChinaHttpFixture=()=>chinaLocalRuntimeConfigured()||!!scope.getStore()||preparedChinaNormalRegcloudEnabled();
+export const hasIndependentChinaHttpFixture=()=>chinaLocalRuntimeConfigured()||!!scope.getStore()?.independentChina||preparedChinaNormalRegcloudEnabled();
+export const preparedChinaIndexedModelOnly=()=>chinaLocalRuntimeConfigured()||scope.getStore()?.indexedModelOnly===true||preparedChinaNormalRegcloudEnabled();
 const preparedOffers=new WeakMap<VehicleOffer,()=>Promise<void>>();
-export const preparedChinaOfferGuard=(row:VehicleOffer)=>preparedOffers.get(row);
+export const preparedChinaOfferGuard=(row:VehicleOffer)=>{const local=chinaLocalOfferGuard(row);return local?async()=>local():preparedOffers.get(row);};
 const MAX_FIXTURE_ROWS=128;
 
 async function open(){
@@ -160,6 +161,7 @@ async function readIndexedModelPage(s:OpenFixture,selection:PreparedModelScope,p
 }
 /** Only exact model ranking authorized by the immutable directory. */
 export async function readPreparedChinaIndexedModel(params:CatalogSearchParams,countOnly:boolean){
+ if(chinaLocalRuntimeConfigured()&&params.market==='china')return searchLocalChina(params,{countOnly});
  if(!preparedChinaIndexedModelOnly()||params.market!=='china'||!params.make||!params.model||
     params.sort!=='totalRub'||Object.entries(params).some(([k,v])=>v!==undefined&&!modelScopeKeys.includes(k)))return null;
  try{
@@ -170,6 +172,7 @@ export async function readPreparedChinaIndexedModel(params:CatalogSearchParams,c
  }catch{throw new PreparedChinaFixtureUnavailable();}
 }
 export async function readPreparedChinaIndexedCity(params:CatalogSearchParams,countOnly:boolean){
+ if(chinaLocalRuntimeConfigured()&&params.market==='china')return searchLocalChina(params,{countOnly});
  if(!hasIndependentChinaHttpFixture())return null;
  const scope=eligibleChinaFixedCityQuery(params);
  if(!scope)return null;
@@ -229,6 +232,10 @@ function compatibilityRows(s:OpenFixture){
 export async function readPreparedChinaCompatibility(params:CatalogSearchParams,options:{
  countOnly:boolean;includeFacets:boolean;marketPage:boolean;unsupported:boolean;navigationFacets?:true;expectedGeneration?:string|null;
 }){
+ if(chinaLocalRuntimeConfigured()&&params.market==='china'){
+  if(options.unsupported)throw new PreparedChinaFixtureUnavailable();
+  try{return await searchLocalChina(params,options);}catch(error){if((error as Error).message==='china_local_cut_changed')throw new PreparedChinaCutChanged();throw new PreparedChinaFixtureUnavailable();}
+ }
  if(!hasIndependentChinaHttpFixture()||params.market!=='china')return null;
  try{
   const s=await open();
@@ -335,6 +342,7 @@ export async function assertIndependentChinaFallbackAllowed(){
  if(s)throw new PreparedChinaFixtureUnavailable();
 }
 export async function readPreparedChinaFixtureOffer(id:string,city?:string,clientCut?:string){
+ if(chinaLocalRuntimeConfigured())try{return await readLocalChinaOffer(id,city,clientCut);}catch{throw new PreparedChinaFixtureUnavailable();}
  // An explicitly live AJES card is not an id in this local market.
  if(/^ajes-(?:china|korea|stats)-/.test(id))return null;
  try{
@@ -374,6 +382,7 @@ export async function readPreparedChinaFixtureOffer(id:string,city?:string,clien
 /** Fast homepage bridge: independent count and a small admitted prefix, not
  * an aggregate-sort claim. At most four exact prepared offer blocks. */
 export async function readPreparedChinaHomeCards(rawLimit:number,options?:{city?:string;navigation?:true}){
+ if(chinaLocalRuntimeConfigured())return searchLocalChina({market:'china',city:options?.city,page:1,pageSize:Math.max(1,Math.min(12,Math.floor(rawLimit)||1))},{countOnly:rawLimit===0,navigationFacets:options?.navigation});
  if(!preparedChinaNormalRegcloudEnabled())return null;
  const s=await open();if(!s)return null;
  const limit=Math.max(0,Math.min(12,Math.floor(rawLimit)||0));

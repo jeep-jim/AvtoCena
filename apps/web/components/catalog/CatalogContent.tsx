@@ -1,4 +1,5 @@
 import {omitLegacyChinaAggregate,withChinaAggregateAuthority} from '@/lib/catalog/china-public-aggregate';
+import {chinaLocalRuntimeConfigured} from '@/lib/catalog/china-local-reader';
 import {hasIndependentChinaHttpFixture,readPreparedChinaCompatibility,readPreparedChinaHomeCards,PreparedChinaFixtureUnavailable} from '@/lib/catalog/prepared-china-http-fixture';
 import {catalogFilterFacetsForClient} from '@/lib/catalog/filter-facets-wire';
 import {readMarketSection} from '@/lib/catalog/market-section-result';
@@ -131,6 +132,12 @@ async function ReadCatalogContent({params={},dealer=null,embedded=false}:{params
   const omitChina=omitLegacyChinaAggregate()&&!selectedMarket;
   const [liveChina,liveKorea]=chinaCut?[false,false]:await Promise.all([omitChina?false:usesAjesMarket('china'),usesAjesMarket('korea')]);
   const aggregateChinaSection=async(market:{id:string;label:string})=>{
+    if(chinaLocalRuntimeConfigured()){
+      const fresh=await readPreparedChinaCompatibility({...common,market:'china',page:1,pageSize:OVERVIEW_CARDS},
+        {countOnly:false,includeFacets:false,marketPage:false,unsupported:false});
+      if(!fresh)throw new PreparedChinaFixtureUnavailable();
+      return {...market,items:fresh.items,total:fresh.total,page:1,pageSize:OVERVIEW_CARDS};
+    }
     const fresh=(!hasFilters&&!customSort&&requestedPage===1)?await readPreparedChinaHomeCards(OVERVIEW_CARDS).catch(()=>null):null;
     return {...market,items:fresh?.items??[],total:fresh?.total??0,page:1,pageSize:OVERVIEW_CARDS,...(!fresh?{unavailable:true}:{})};
   };

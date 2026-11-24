@@ -7,6 +7,7 @@ import {ajesClient} from '@/lib/catalog/ajes-runtime';
 import {readAjesColorDirectory} from '@/lib/catalog/ajes-client';
 import {readGreenCorner} from '@/lib/catalog/green-corner';
 import {localCatalogColors,colorName} from '@/lib/catalog/catalog-color-index';
+import {chinaLocalRuntimeConfigured,localChinaFacets} from '@/lib/catalog/china-local-reader';
 export const dynamic='force-dynamic';
 export async function GET(request:Request){
  const p=new URL(request.url).searchParams,market=p.get('market')||'',green=p.get('stock')==='green';
@@ -16,6 +17,7 @@ export async function GET(request:Request){
  const ip=(await headers()).get('x-real-ip')||'';let partial=false;
  const parts=await Promise.all(selected.map(async m=>{
   try{
+   if(m==='china'&&chinaLocalRuntimeConfigured())return (await localChinaFacets())!.colors;
    if(green&&m==='japan')return (await readGreenCorner()).items.map(row=>colorName(row.color)).filter(Boolean);
    if(await usesAjesMarket(m)){const result=await readAjesColorDirectory(ajesClient,{table:m==='japan'?'stats':m},ip);partial ||= result.stale;return result.colors.map(colorName);}
    return await localCatalogColors([m]);

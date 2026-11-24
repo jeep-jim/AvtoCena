@@ -20,7 +20,7 @@ const columns = {make: 'make_key', color: 'color_key', fuel: 'fuel_key', bodyTyp
   transmission: 'transmission_key', drive: 'drive_key', auctionGrade: 'grade_key'};
 const bindingFields = ['sourceSha256', 'pricingReceiptSha256', 'calculationVersion', 'encyclopediaSha256', 'editorialSha256', 'deliveryTariffSha256', 'filterSemanticsSha256'];
 const PRICE_SEMANTICS = 'calculatedCatalogPrice-seller-fallback-v1';
-const LAYOUT = 'filter-columns-with-separate-payloads-v1';
+const LAYOUT = 'filter-columns-with-separate-payloads-v2';
 const HYDRATE_SQL = 'SELECT projection_json,locator_json FROM card_payloads WHERE id=?';
 
 function validateBinding(binding) {
@@ -71,12 +71,15 @@ export async function buildChinaQueryIndex({filename, binding, rows, expectedRow
         auction_time REAL,auction_date TEXT,filter_rub INTEGER,seller_price_rub REAL);
       CREATE TABLE card_payloads(id TEXT PRIMARY KEY,projection_json TEXT NOT NULL,
         locator_json TEXT NOT NULL,price_ledger_sha256 TEXT) WITHOUT ROWID;
+      CREATE TABLE facet_labels(id TEXT PRIMARY KEY,make TEXT NOT NULL,model TEXT NOT NULL,
+        color TEXT NOT NULL,fuel TEXT NOT NULL,bodyType TEXT NOT NULL,transmission TEXT NOT NULL,drive TEXT NOT NULL) WITHOUT ROWID;
       CREATE TABLE model_terms(term TEXT NOT NULL,id TEXT NOT NULL,PRIMARY KEY(term,id));
       CREATE TABLE city_prices(city TEXT NOT NULL,id TEXT NOT NULL,filter_rub INTEGER,
         ledger_sha256 TEXT,PRIMARY KEY(city,id));
       BEGIN;`);
     const put = db.prepare('INSERT INTO cards VALUES(' + Array.from({length: 18}, () => '?').join(',') + ')');
     const payloads = db.prepare('INSERT INTO card_payloads VALUES(?,?,?,?)');
+    const labels = db.prepare('INSERT INTO facet_labels VALUES(?,?,?,?,?,?,?,?)');
     const model = db.prepare('INSERT INTO model_terms VALUES(?,?)');
     const city = db.prepare('INSERT INTO city_prices VALUES(?,?,?,?)');
     for await (const row of rows) {
@@ -103,6 +106,7 @@ export async function buildChinaQueryIndex({filename, binding, rows, expectedRow
         positive(Date.parse(projection.auctionDate ?? '')), typeof projection.auctionDate === 'string' ? projection.auctionDate : null,
         filterRub, positive(projection.sellerPriceRub));
       payloads.run(projection.id, payload, locator, row.frozenPrice.ledgerSha256);
+      labels.run(projection.id, ...['make', 'model', 'color', 'fuel', 'bodyType', 'transmission', 'drive'].map(key => String(projection[key] ?? '').replace(/\s+/g, ' ').trim()));
       for (const term of keys.modelTerms) model.run(term, projection.id);
       for (const key of cityKeys) {
         const cityRub = price(cities[key]);
@@ -122,6 +126,7 @@ export async function buildChinaQueryIndex({filename, binding, rows, expectedRow
       CREATE INDEX cards_year ON cards(year,id);
       CREATE INDEX cards_mileage ON cards(mileage_filter,id);
       CREATE INDEX cards_engine ON cards(engine_cc,id);
+      CREATE INDEX facet_labels_model ON facet_labels(make,model,id);
       CREATE INDEX city_prices_price ON city_prices(city,filter_rub,id);
       ANALYZE;`);
     const metadata = {version: 1, kind: 'china-query-index-v1', layout: LAYOUT, priceSemantics: PRICE_SEMANTICS, binding, rows: count, cityKeys: [...cityKeys],
@@ -150,12 +155,12 @@ function compileQuery(params, manifest) {
   for (const dimension of dimensions) {
     const selected = params[dimension + 'Keys'];
     if (selected === undefined) continue;
-    need(Array.isArray(selected) && selected.length > 0 && selected.length <= 1000 && selected.every(text), 'selection');
-    clause(`c.${columns[dimension]} IN (${selected.map(() => '?').join(',')})`, ...selected);
+    need(Array.isArray(selected) && selected.length <= 1000 && selected.every(text), 'selection');
+    clause(`c.${columns[dimension]} IN (SELECT value FROM json_each(?))`, JSON.stringify(selected));
   }
   if (params.modelTerms !== undefined) {
-    need(Array.isArray(params.modelTerms) && params.modelTerms.length > 0 && params.modelTerms.length <= 1000 && params.modelTerms.every(text), 'model_selection');
-    clause(`c.id IN (SELECT id FROM model_terms WHERE term IN (${params.modelTerms.map(() => '?').join(',')}))`, ...params.modelTerms);
+    need(Array.isArray(params.modelTerms) && params.modelTerms.every(text), 'model_selection');
+    clause('c.id IN (SELECT id FROM model_terms WHERE term IN (SELECT value FROM json_each(?)))', JSON.stringify(params.modelTerms));
   }
   const cityKey = params.cityKey;
   need(cityKey === undefined || manifest.cityKeys.includes(cityKey), 'city_not_prepared');
@@ -200,7 +205,7 @@ function compileQuery(params, manifest) {
   const from = 'cards c' + (cityKey === undefined ? '' : ' JOIN city_prices p ON p.id=c.id AND p.city=?');
   const bound = cityKey === undefined ? values : [cityKey, ...values];
   const where = filters.length ? ' WHERE ' + filters.join(' AND ') : '';
-  return {values: bound, page, pageSize, offset: (page - 1) * pageSize,
+  return {from, where, values: bound, page, pageSize, offset: (page - 1) * pageSize,
     countSql: 'SELECT COUNT(*) n FROM ' + from + where,
     selectSql: 'SELECT c.id,' + rub + ' query_rub FROM ' + from + where + ' ORDER BY ' + order + ' LIMIT ? OFFSET ?'};
 }
@@ -227,7 +232,8 @@ export async function openChinaQueryIndex({filename, manifest, assertAuthority =
     const sealed = JSON.parse(db.prepare("SELECT value FROM metadata WHERE key='manifest'").get()?.value ?? 'null');
     need(jsonHash(sealed) === jsonHash(expected) && db.prepare('PRAGMA quick_check').get().quick_check === 'ok' &&
       db.prepare('SELECT COUNT(*) n FROM cards').get().n === manifest.rows &&
-      db.prepare('SELECT COUNT(*) n FROM card_payloads').get().n === manifest.rows, 'metadata');
+      db.prepare('SELECT COUNT(*) n FROM card_payloads').get().n === manifest.rows &&
+      db.prepare('SELECT COUNT(*) n FROM facet_labels').get().n === manifest.rows, 'metadata');
     authority();
   } catch (error) { db.close(); throw error; }
   const localIdentity = () => {
@@ -241,6 +247,12 @@ export async function openChinaQueryIndex({filename, manifest, assertAuthority =
   };
   freeze(manifest);
   const hydrate = db.prepare(HYDRATE_SQL);
+  const hydrated = row => {
+    const payload = hydrate.get(row.id);
+    need(payload, 'payload_missing');
+    return {id: row.id, projection: JSON.parse(payload.projection_json), detailLocator: JSON.parse(payload.locator_json), queryRub: row.query_rub};
+  };
+  const facetCache = new Map();
   return Object.freeze({
     manifest,
     query(params = {}) {
@@ -253,14 +265,44 @@ export async function openChinaQueryIndex({filename, manifest, assertAuthority =
       // Filtering/sorting handles only compact scalar columns. JSON is read
       // in a separate point lookup AFTER LIMIT, never by the sorting cursor.
       const selected = params.countOnly ? [] : db.prepare(sql.selectSql).all(...sql.values, sql.pageSize, sql.offset);
-      const items = selected.map(row => {
-        const payload = hydrate.get(row.id);
-        need(payload, 'payload_missing');
-        return {id: row.id, projection: JSON.parse(payload.projection_json),
-          detailLocator: JSON.parse(payload.locator_json), queryRub: row.query_rub};
-      });
+      const items = selected.map(hydrated);
       authority(); localIdentity();
       return {generationId: manifest.binding.generationId, total, page: sql.page, pageSize: sql.pageSize, items};
+    },
+    get(id, cityKey) {
+      need(!closed, 'reader_closed'); authority(); localIdentity();
+      need(ID.test(id ?? '') && (cityKey === undefined || manifest.cityKeys.includes(cityKey)), 'detail_identity');
+      const row = cityKey === undefined
+        ? db.prepare('SELECT id,filter_rub query_rub FROM cards WHERE id=?').get(id)
+        : db.prepare('SELECT c.id,p.filter_rub query_rub FROM cards c JOIN city_prices p ON p.id=c.id WHERE c.id=? AND p.city=?').get(id, cityKey);
+      const result = row ? hydrated(row) : null;
+      authority(); localIdentity(); return result;
+    },
+    cityPrices(id) {
+      need(!closed && ID.test(id ?? ''), 'detail_identity'); authority(); localIdentity();
+      const rows = db.prepare('SELECT city,filter_rub FROM city_prices WHERE id=?').all(id);
+      need(rows.length === manifest.cityKeys.length, 'city_price_coverage');
+      authority(); localIdentity(); return Object.fromEntries(rows.map(row => [row.city, row.filter_rub]));
+    },
+    facets(params = {}) {
+      need(!closed, 'reader_closed'); authority(); localIdentity();
+      const filters = {...params}; delete filters.page; delete filters.pageSize; delete filters.sort; delete filters.countOnly;
+      const key = JSON.stringify(filters);
+      if (facetCache.has(key)) return facetCache.get(key);
+      const sql = compileQuery(filters, manifest), from = sql.from + ' JOIN facet_labels f ON f.id=c.id' + sql.where;
+      const labels = column => db.prepare(`SELECT f.${column} value,COUNT(*) n FROM ${from} GROUP BY f.${column}`).all(...sql.values)
+        .filter(row => row.value).sort((a, b) => a.value.localeCompare(b.value, 'ru'));
+      const makes = labels('make');
+      const models = db.prepare(`SELECT f.make,f.model,COUNT(*) count FROM ${from} GROUP BY f.make,f.model`).all(...sql.values)
+        .filter(row => row.make && row.model).sort((a, b) => `${a.make} ${a.model}`.localeCompare(`${b.make} ${b.model}`, 'ru'));
+      const result = freeze({generationId: manifest.binding.generationId, makes: makes.map(row => row.value),
+        models, colors: labels('color').map(row => row.value), fuels: labels('fuel').map(row => row.value),
+        bodyTypes: labels('bodyType').map(row => row.value), transmissions: labels('transmission').map(row => row.value), drives: labels('drive').map(row => row.value),
+        counts: Object.fromEntries(makes.map(row => [row.value, row.n])),
+        modelCounts: Object.fromEntries(makes.map(row => [row.value, models.filter(model => model.make === row.value).length]))});
+      authority(); localIdentity();
+      if (facetCache.size >= 32) facetCache.delete(facetCache.keys().next().value);
+      facetCache.set(key, result); return result;
     },
     /** Operator/test inspection of the exact statements used above. No vehicle
      * payload is read or exposed by EXPLAIN. This is not a public route. */

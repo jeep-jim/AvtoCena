@@ -1,4 +1,5 @@
 import {calculatedCatalogPrice} from './calculated-price';
+import {chinaLocalRuntimeConfigured,searchLocalChina} from './china-local-reader';
 import {parseCatalogSort,compareCatalogTerms} from './catalog-sort';
 import {hasModificationSelection} from "./modification-contract";
 import {priceCardForCity} from "./card-city-delivery";
@@ -110,6 +111,7 @@ async function readDiverseDefaultMarketPage(market: string, page: number) {
 
 const pages = new DetailReadCache<any>({maxEntries: 32, maxBytes: 12 * 1024 * 1024, ttlMs: 60_000, concurrency: 4});
 export async function readCatalogMarketPage(query: CatalogSearchParams) {
+  if(chinaLocalRuntimeConfigured()&&query.market==='china')return (await searchLocalChina(query,{marketPage:true}))!;
   const normalized = {...query, page: Math.max(1, Math.floor(Number(query.page) || 1)), pageSize: MARKET_PAGE_SIZE};
   const key = JSON.stringify([(await readCatalogEditorial()).revision,Object.entries(normalized).sort(([a],[b])=>a.localeCompare(b))]);
   return pages.get(key, async () => {

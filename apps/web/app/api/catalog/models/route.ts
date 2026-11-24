@@ -1,4 +1,5 @@
 import {createModelSuggestionSearch} from "@/lib/catalog/model-suggestion-search";
+import {chinaLocalRuntimeConfigured,localChinaFacets} from '@/lib/catalog/china-local-reader';
 import {greenCornerFacets} from "@/lib/catalog/green-corner-search";
 import {selectedCatalogMarkets} from "@/lib/catalog/market-selection";
 import {readGroupedCatalogFacets} from "@/lib/catalog/market-facets";
@@ -91,6 +92,13 @@ export async function GET(request: Request) {
   }
   const rawQuery = clean(url.searchParams.get("q"));
   const rawMake = clean(url.searchParams.get("make"));
+  if(chinaLocalRuntimeConfigured()&&url.searchParams.get('market')==='china'&&url.searchParams.get('scope')!=='autocalc'){
+    const scope=url.searchParams.get('scope'),limit=Math.min(500,Math.max(1,Number(url.searchParams.get('limit')||30)));
+    const facets=(await localChinaFacets({...contextualFilters(url.searchParams,rawMake,scope==='facets'),...(rawQuery?{model:rawQuery}:{})}))!;
+    if(scope==='facets')return NextResponse.json({facets});
+    if(scope==='makes')return NextResponse.json({items:facets.makes.slice(0,limit).map((value:string)=>({value,label:value}))});
+    return NextResponse.json({items:facets.models.slice(0,limit).map((row:any)=>({...row,aliases:[],label:rawMake?row.model:`${row.make} ${row.model}`}))});
+  }
   // Manual calculation searches the same model directory as knowledge suggestions,
   // without inventory/identity-mode restrictions belonging to catalog filtering.
   if (url.searchParams.get("scope") === "autocalc") {

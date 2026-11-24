@@ -1,4 +1,4 @@
-import { quoteCityDelivery } from "./city-delivery";
+import { normalizeDeliveryCity, quoteCityDelivery } from "./city-delivery";
 
 export type DeliveryPricingBasis = { subtotalRub: number; deliveryRub: number; percents: number[] };
 /** Enough to replay delivery and each rounded percentage without exposing a full ledger. */
@@ -13,6 +13,16 @@ export function deliveryPricingBasis(snapshot: any): DeliveryPricingBasis | unde
 }
 
 export function priceCardForCity(offer: any, city: string) {
+ const frozen=offer?.preparedChinaCityPrices;
+ if(offer?.market==='china'&&frozen?.version===1&&frozen.generationId===offer.preparedChinaSelection?.generationId){
+  const name=normalizeDeliveryCity(city).toLocaleLowerCase('ru-RU').replace(/ё/g,'е');
+  const key=name?Object.keys(frozen.values||{}).find(key=>key.toLocaleLowerCase('ru-RU').replace(/ё/g,'е')===name)||'__unquoted__':undefined;
+  const rub=key?frozen.values?.[key]:frozen.baseRub;
+  const quote={...(offer.calculationSnapshot?.deliveryQuote||{}),city:normalizeDeliveryCity(city),status:!name?'not_selected':key==='__unquoted__'?'needs_quote':'estimated'};
+  if(rub===null)return {offer:{...offer,totalRub:null,publicVisibleRub:undefined},quote,included:false};
+  if(Number.isSafeInteger(rub)&&rub>0)return {offer:{...offer,totalRub:rub,publicVisibleRub:rub},quote,included:quote.status==='estimated'};
+  return {offer:{...offer,totalRub:null,publicVisibleRub:undefined},quote,included:false};
+ }
  const delivered=!offer.savedCalculationPreview && offer.deliveredCalculationPreview;
  if(delivered && Number(delivered.totalRub)>0)offer={...offer,totalRub:delivered.totalRub,catalogPricingMode:undefined,previousTotalRub:null,priceDeltaRub:null,calculationSnapshot:{currencyRate:delivered.currencyRate,deliveryPricingBasis:delivered.deliveryPricingBasis}};
  const quote = quoteCityDelivery(city, offer.market);

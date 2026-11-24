@@ -20,6 +20,7 @@ import { resolveCatalogMarketConfig } from "./estimated-market-config";
 import { activeCatalogFxBatch, catalogPricingNow, convertToRub } from "./rates";
 import type { CatalogMarket, VehicleOffer } from "./types";
 import { safePublicPricing } from './safe-public-pricing';
+import {chinaLocalOfferGuard} from './china-local-reader';
 
 function positive(value: unknown) {
   const parsed = Number(value);
@@ -254,6 +255,7 @@ async function repriceEncyclopediaOffer<T extends Partial<VehicleOffer>>(input:T
 }
 
 export async function applyActiveBusinessPricing<T extends Partial<VehicleOffer>>(offer: T): Promise<T> {
+  const frozen = chinaLocalOfferGuard(offer); if (frozen) { frozen(); return offer; }
   if (!offer.market) return offer;
   assertFxOfferScope(offer);
   const editorial=await readCatalogEditorial();
@@ -269,6 +271,11 @@ export async function applyActiveBusinessPricing<T extends Partial<VehicleOffer>
 /** Shared price replay for selectors and visible cards; no display-identity or saved-draft reads. */
 export async function applyActiveBusinessPriceBatch<T extends Partial<VehicleOffer>>(offers: T[], options:{readOnly?:boolean;retainFullSnapshot?:boolean}={}, marketSnapshot?:Promise<Awaited<ReturnType<typeof getEffectiveMarketsWithDefaults>>>|Awaited<ReturnType<typeof getEffectiveMarketsWithDefaults>>): Promise<T[]> {
   if (!offers.length) return offers;
+  if(offers.some(offer=>chinaLocalOfferGuard(offer))){
+    const mutable=offers.filter(offer=>!chinaLocalOfferGuard(offer));
+    const priced=await applyActiveBusinessPriceBatch(mutable,options,marketSnapshot),byId=new Map(mutable.map((offer,i)=>[offer,priced[i]]));
+    return offers.map(offer=>{const guard=chinaLocalOfferGuard(offer);if(guard){guard();return offer;}return byId.get(offer)!;});
+  }
   const fx = activeCatalogFxBatch();
   if(options.retainFullSnapshot && (!fx||!options.readOnly))throw Error("catalog_fx_full_snapshot_scope");
   offers.forEach(assertFxOfferScope);
@@ -295,6 +302,11 @@ export async function applyActiveBusinessPriceBatch<T extends Partial<VehicleOff
 
 export async function applyActiveBusinessPricingBatch<T extends Partial<VehicleOffer>>(offers: T[]): Promise<T[]> {
   if (!offers.length) return offers;
+  if(offers.some(offer=>chinaLocalOfferGuard(offer))){
+    const mutable=offers.filter(offer=>!chinaLocalOfferGuard(offer)),priced=await applyActiveBusinessPricingBatch(mutable);
+    const byId=new Map(mutable.map((offer,i)=>[offer,priced[i]]));
+    return offers.map(offer=>{const guard=chinaLocalOfferGuard(offer);if(guard){guard();return offer;}return byId.get(offer)!;});
+  }
   // Share one immutable market-settings snapshot across pricing and preview stages.
   // Previously the same batch fetched effective market settings twice.
   const marketsPromise=getEffectiveMarketsWithDefaults();

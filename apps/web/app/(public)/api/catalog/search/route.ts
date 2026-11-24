@@ -1,6 +1,7 @@
 import {omitLegacyChinaAggregate,withChinaAggregateAuthority} from '@/lib/catalog/china-public-aggregate';
 import {readMixedMarketCounts} from '@/lib/catalog/mixed-market-count';
 import {chinaRegcloudRuntimeConfigured} from '@/lib/catalog/china-regcloud-object-reader';
+import {chinaLocalRuntimeConfigured,localChinaPublicRates} from '@/lib/catalog/china-local-reader';
 import {selectedCatalogMarkets,marketSelectionUrl} from "@/lib/catalog/market-selection";
 import {readGreenCorner,readGreenCornerPage} from '@/lib/catalog/green-corner';
 import {GET as greenSearch} from "@/app/api/catalog/green/route";
@@ -39,7 +40,7 @@ export async function GET(request: Request) {
   if(markets.length>1&&p.get('countOnly')==='1'){
     // Preserve the incumbent behavior and cache for all other traffic. A new
     // failure policy is needed only when an independent China is selected.
-    if(!chinaRegcloudRuntimeConfigured()||!markets.includes('china')){
+    if(!(chinaRegcloudRuntimeConfigured()||chinaLocalRuntimeConfigured())||!markets.includes('china')){
       const responses=await Promise.all(markets.map(m=>GET(new Request(marketSelectionUrl(u,m),request))));
       const failed=responses.find(r=>!r.ok);if(failed)return failed;
       const parts=await Promise.all(responses.map(r=>r.json()));
@@ -112,8 +113,8 @@ export async function GET(request: Request) {
           if(marketPage&&(!Number.isSafeInteger(requestedPage)||requestedPage<1||!Number.isSafeInteger(requestedPage*24)))
             return NextResponse.json({ok:false},{status:400});
           const cut=await readPreparedChinaCompatibility(query,{countOnly,marketPage,includeFacets:p.get('includeFacets')==='1',
-            unsupported:Boolean(p.get('source')||p.get('stock')||p.get('includeRates')==='1'),expectedGeneration:pinned});
-          if(cut)return current(cut)?NextResponse.json({ok:true,...cut},{headers:{'Cache-Control':'no-store'}}):stale();
+            unsupported:Boolean(p.get('source')||p.get('stock')||p.get('includeRates')==='1'&&!chinaLocalRuntimeConfigured()),expectedGeneration:pinned});
+          if(cut){const rateExtras=p.get('includeRates')==='1'&&chinaLocalRuntimeConfigured()?await localChinaPublicRates():{};return current(cut)?NextResponse.json({ok:true,...cut,...rateExtras},{headers:{'Cache-Control':'no-store'}}):stale();}
           if(pinned)return stale();
         }
       }else{
@@ -141,11 +142,11 @@ export async function GET(request: Request) {
   if (p.get("countOnly") === "1") {
     return withChinaAggregateAuthority(query.market,async()=>{
     const local=await countCatalogOffers(query);
-    let result=await withAjesCount(omitLegacyChinaAggregate()?{...local,independentChina:true,countIncomplete:true}:local,query);
+    let result=await withAjesCount(omitLegacyChinaAggregate()&&!chinaLocalRuntimeConfigured()?{...local,independentChina:true,countIncomplete:true}:local,query);
     if(!query.market){
       const green=await readGreenCorner().catch(()=>null);
       const greenTotal=green?(await readGreenCornerPage(green.items,{...Object.fromEntries(p),page:"1"})).total:0;
-      result={...result,total:result.total+greenTotal,countIncomplete:result.countIncomplete||!green||chinaRegcloudRuntimeConfigured()};
+      result={...result,total:result.total+greenTotal,countIncomplete:result.countIncomplete||!green||chinaRegcloudRuntimeConfigured()&&!chinaLocalRuntimeConfigured()};
     }
     return NextResponse.json({ok: true, ...result, items: []}, {headers: {"Cache-Control": !query.market&&chinaRegcloudRuntimeConfigured()?"no-store":"public, max-age=30, s-maxage=30", "Server-Timing": `catalog-count;dur=${(performance.now()-started).toFixed(1)}`}});
     });

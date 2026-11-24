@@ -17,7 +17,7 @@ export function offerPath(offer: OfferUrlData) {
 export function preparedChinaCardContext(offer:{market?:unknown;preparedChinaSelection?:unknown}){
  const marker=offer.preparedChinaSelection as {version?:number;generationId?:unknown;city?:unknown}|undefined;
  if(offer.market!=='china'||marker?.version!==1||typeof marker.generationId!=='string'||
-    !/^gen_\d{13}_[a-z0-9]{1,64}$/.test(marker.generationId)||
+    !/^(?:gen_\d{13}_[a-z0-9]{1,64}|gen_china_[1-9]\d{0,19}_[1-9]\d{0,9})$/.test(marker.generationId)||
     (marker.city!==undefined&&(typeof marker.city!=='string'||!marker.city||marker.city.length>100)))return null;
  return {generationId:marker.generationId,city:marker.city as string|undefined};
 }
