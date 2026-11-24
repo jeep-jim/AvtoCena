@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createAjesClient,AjesUnavailable} from '../apps/web/lib/catalog/ajes-client';
 import {DetailReadCache} from '../apps/web/lib/catalog/detail-read-cache';
-const snapshot=(table:string)=>({schemaVersion:2,fullInformation:true,items:[{id:'fixture001',table,...(table==='stats'?{finalPriceJpy:12345,status:'Sold'}:{startPriceJpy:12345})}],page:1,pageSize:1,observedAt:new Date(Date.now()-3600000).toISOString()});
+const snapshot=(table:string)=>({schemaVersion:2,items:[{id:'fixture001',table,...(table==='stats'?{finalPriceJpy:12345,status:'Sold'}:{startPriceJpy:12345})}],page:1,pageSize:1,observedAt:new Date(Date.now()-3600000).toISOString()});
 const busy=(e:unknown)=>e instanceof AjesUnavailable&&e.reason==='local_busy';
 function blockSupplier(t:any,message:string){
  const original=DetailReadCache.prototype.get;

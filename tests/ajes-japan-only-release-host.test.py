@@ -1,8 +1,10 @@
 import importlib.util
+import contextlib
 import io
 import json
 from pathlib import Path
 import subprocess
+import tempfile
 import unittest
 from unittest import mock
 
@@ -165,7 +167,7 @@ class ReleaseHostTests(unittest.TestCase):
             local=host.Local({'nonce':'a'*32,'imageId':'sha256:'+'b'*64},transport=transport)
         with self.assertRaisesRegex(host.native.HostError,'aj_port_reserved'):local.free_port()
 
-    def test_phase_order_cannot_skip_functional_speed_or_browser_gate(self):
+    def test_phase_order_cannot_skip_removal_or_isolated_browser_gate(self):
         protocol=type('Protocol',(),{'nonce':'a'*32})()
         for action in ['start','switch','browser','accept']:
             driver=host.Driver(protocol)
@@ -173,6 +175,96 @@ class ReleaseHostTests(unittest.TestCase):
             driver.completed={'init'}
             with self.assertRaises(host.native.HostError):driver.command(action,{},1)
             self.assertEqual(driver.host.mock_calls,[])
+
+    def test_switch_requires_ui_and_final_acceptance_requires_the_public_removal_check(self):
+        for action,completed in [('switch',{'init','start','removal-private'}),
+                                 ('accept',{'init','start','removal-private','browser','switch'})]:
+            driver=host.Driver(type('Protocol',(),{'nonce':'a'*32})());driver.host=mock.Mock();driver.completed=completed
+            with self.assertRaisesRegex(host.native.HostError,'aj_driver_phase'):driver.command(action,{},1)
+            self.assertEqual(driver.host.mock_calls,[])
+
+    def test_removal_gate_never_searches_a_retained_catalog_or_runs_the_full_performance_program(self):
+        for phase in ('private','public'):
+            with self.subTest(phase=phase):
+                calls=[];guards=[];target='candidate' if phase=='private' else 'public'
+                def respond(where,path):
+                    self.assertEqual(where,target);calls.append(path)
+                    if path=='/api/health':return 200,{'ok':True,'releaseSha':host.SOURCE,'calculationVersion':host.CALCULATION}
+                    if path.startswith('/api/crm/'):return 403,{}
+                    if path=='/api/catalog/search?market=japan&source=ajes':
+                        self.assertEqual(phase,'private')
+                        return 503,{'ok':False,'error':'japan_search_unavailable','reason':'client_ip_missing'}
+                    if path in ('/api/catalog/korea-report?id=ajes-korea-retired',
+                                '/api/catalog/search?market=china&source=ajes&pageSize=24',
+                                '/api/catalog/search?market=korea&source=ajes&pageSize=24'):
+                        return 410,{'ok':False,'error':'source_retired'}
+                    self.fail('unexpected catalog or provider request')
+                with mock.patch.object(host,'public_json',side_effect=respond),\
+                     mock.patch.object(host,'regular',side_effect=lambda path,**options:(Path(path).read_bytes(),None)),\
+                     mock.patch.object(host,'private_execute',side_effect=AssertionError('full performance program must not run')):
+                    receipt=host.removal_gate('a'*32,phase,guards.append)
+                expected=['/api/health','/api/catalog/korea-report?id=ajes-korea-retired',
+                          '/api/catalog/search?market=china&source=ajes&pageSize=24',
+                          '/api/catalog/search?market=korea&source=ajes&pageSize=24']
+                if phase=='private':expected.append('/api/catalog/search?market=japan&source=ajes')
+                self.assertEqual(calls,expected+['/api/crm/ajes','/api/crm/ajes/markets/china','/api/crm/ajes/markets/korea'])
+                self.assertEqual(guards,['removal_before','aj_contract','aj_contract_readback','removal_readback'])
+                self.assertEqual(receipt['acceptance'],host.ACCEPTANCE)
+                self.assertEqual(receipt['ordinaryCatalogRequests'],0);self.assertEqual(receipt['supplierRequests'],0)
+                self.assertEqual(receipt['japanBoundaryVerified'],phase=='private')
+                self.assertIs(receipt['catalogPerformanceRevalidated'],False)
+
+    def test_removal_gate_stops_on_wrong_runtime_identity_before_any_other_probe(self):
+        with mock.patch.object(host,'public_json',return_value=(200,{'ok':True,'releaseSha':'f'*40,'calculationVersion':host.CALCULATION})) as get,\
+             mock.patch.object(host,'regular',side_effect=lambda path,**options:(Path(path).read_bytes(),None)):
+            with self.assertRaisesRegex(host.native.HostError,'aj_health_identity'):
+                host.removal_gate('a'*32,'private',lambda phase:None)
+        self.assertEqual(get.call_args_list,[mock.call('candidate','/api/health')])
+
+    @staticmethod
+    def ui_verdict():
+        return {'schemaVersion':1,'acceptance':host.ACCEPTANCE,'kind':'isolated-owner-ui','release':host.SOURCE,
+                'tree':host.PROFILE['tree'],'codeDiffSha256':host.PROFILE['codeDiffSha256'],
+                'protectedClosureSha256':host.PROFILE['protectedClosureSha256'],'nonce':'a'*32,
+                'passed':True,'uiPassed':True,'retiredSourcesAbsent':True,'japanFormPreserved':True,
+                'retiredRequests':0,'widths':[390,1440],'liveOwnerCrmVerified':False,
+                'catalogPerformanceRevalidated':False,'reportSha256':'b'*64}
+
+    def test_scoped_ui_verdict_rejects_wrong_identity_missing_fields_and_unverified_claims(self):
+        good=self.ui_verdict();self.assertEqual(host.validate_ui_verdict(good,host.SOURCE,'a'*32),good)
+        for change in ({'nonce':'f'*32},{'release':'f'*40},{'tree':'f'*40},{'codeDiffSha256':'f'*64},
+                       {'protectedClosureSha256':'f'*64},{'passed':False},{'retiredSourcesAbsent':False},
+                       {'japanFormPreserved':False},{'retiredRequests':1},{'widths':[390]},
+                       {'liveOwnerCrmVerified':True},{'catalogPerformanceRevalidated':True},{'speedPassed':True},
+                       {'reportSha256':'PRIVATE_FIXTURE /root/secret?password=PRIVATE_FIXTURE'}):
+            with self.subTest(change=change):
+                with self.assertRaises(host.native.HostError) as caught:
+                    host.validate_ui_verdict({**good,**change},host.SOURCE,'a'*32)
+                self.assertNotIn('PRIVATE_FIXTURE',str(caught.exception))
+        bad=dict(good);del bad['japanFormPreserved']
+        with self.assertRaises(host.native.HostError):host.validate_ui_verdict(bad,host.SOURCE,'a'*32)
+
+    def test_scoped_ui_handshake_preserves_nonce_and_300_second_missing_result_deadline(self):
+        with tempfile.TemporaryDirectory() as folder,contextlib.redirect_stdout(io.StringIO()):
+            elapsed=[0]
+            def advance(seconds):elapsed[0]+=seconds
+            with self.assertRaisesRegex(host.native.HostError,'aj_ui_missing_or_timed_out'):
+                host.wait_for_ui_verdict(folder,host.SOURCE,'a'*32,clock=lambda:elapsed[0],sleep=advance)
+            self.assertEqual(elapsed[0],300)
+            ready=json.loads((Path(folder)/('browser-ready-'+'a'*32+'.json')).read_text())
+            self.assertEqual(ready['timeoutSeconds'],300);self.assertEqual(ready['acceptance'],host.ACCEPTANCE)
+            self.assertEqual(ready['phase'],'pre-switch-removal-passed')
+        for failed in (False,True):
+            with self.subTest(failed=failed),tempfile.TemporaryDirectory() as folder,contextlib.redirect_stdout(io.StringIO()),\
+                 mock.patch.object(host,'regular',side_effect=lambda path,**options:(Path(path).read_bytes(),None)) as read:
+                verdict=self.ui_verdict();verdict['passed']=not failed
+                host.write_new(Path(folder)/('browser-verdict-'+'a'*32+'.json'),host.json_bytes(verdict))
+                if failed:
+                    with self.assertRaisesRegex(host.native.HostError,'aj_ui_failed'):
+                        host.wait_for_ui_verdict(folder,host.SOURCE,'a'*32,sleep=lambda seconds:self.fail('unexpected wait'))
+                else:
+                    self.assertEqual(host.wait_for_ui_verdict(folder,host.SOURCE,'a'*32,sleep=lambda seconds:self.fail('unexpected wait')),verdict)
+                read.assert_called_once_with(Path(folder)/('browser-verdict-'+'a'*32+'.json'),mode=0o600,maximum=4096)
 
     def test_failed_rollback_never_cleans_a_potentially_routed_process(self):
         driver=host.Driver(None);driver.host=mock.Mock();driver.switched=True

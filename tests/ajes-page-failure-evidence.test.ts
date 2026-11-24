@@ -7,11 +7,11 @@ import {ajesFailureSlot,saveAjesRequestFailure,type AjesRequestDiagnostic} from 
 test('private page slots preserve page six across later first-page writes and have fixed capacity',async()=>{
  const saved=new Map<string,unknown>();
  const storage={writeJson:async(key:string,value:unknown)=>{saved.set(key,value);}};
- const failure:AjesRequestDiagnostic={table:'korea',kind:'list',page:6,pageSize:24,startedAt:'2026-10-30T09:00:00Z',finishedAt:'2026-10-30T09:00:01Z',clientIp:'203.0.113.32',sql:'select * from korea limit 120,24',endpoint:'http://78.46.90.228/api/',httpStatus:200,providerCode:'bot7',outcome:'visitor_restricted'};
+ const failure:AjesRequestDiagnostic={table:'stats',kind:'list',page:6,pageSize:24,startedAt:'2026-10-30T09:00:00Z',finishedAt:'2026-10-30T09:00:01Z',clientIp:'203.0.113.32',sql:'select * from stats limit 120,24',endpoint:'http://78.46.90.228/api/',httpStatus:200,providerCode:'bot7',outcome:'visitor_restricted'};
  await saveAjesRequestFailure(storage,failure);
- await saveAjesRequestFailure(storage,{...failure,page:1,sql:'select * from korea limit 0,24'});
- assert.deepEqual(saved.get('integrations/ajes/catalog-failure-pages/korea-list-6.json'),failure);
- assert.equal((saved.get('integrations/ajes/catalog-failure-korea.json') as any).page,1,'legacy owner view remains compatible');
+ await saveAjesRequestFailure(storage,{...failure,page:1,sql:'select * from stats limit 0,24'});
+ assert.deepEqual(saved.get('integrations/ajes/catalog-failure-pages/stats-list-6.json'),failure);
+ assert.equal((saved.get('integrations/ajes/catalog-failure-stats.json') as any).page,1,'legacy owner view remains compatible');
  assert.equal(saved.size,3);
  const slots=new Set(Array.from({length:10000},(_,i)=>ajesFailureSlot({...failure,page:i+1})));
  assert.equal(slots.size,9,'large page numbers cannot create unlimited objects');

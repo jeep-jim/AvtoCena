@@ -16,13 +16,14 @@ test('all six projection markets and Green Corner OR each field and AND across f
  }
  assert.deepEqual(filterGreenCorner([first,second,{...first,id:'green-125',drive:'rwd'}],selection).map(x=>x.id),['green-123','green-124']);
 });
-test('all AJES tables expand selected fuel, gearbox and drive into validated unions',()=>{
- for(const table of ['stats','china','korea'] as const){
+test('both Japan AJ tables expand validated unions and reject invalid gearbox codes',()=>{
+ for(const table of ['stats','main'] as const){
   const sql=ajesQuery({table,fuel:selection.fuel,transmission:selection.transmission,drive:selection.drive}).sql;
-  assert.match(sql,/time in \('P','D'\)/);assert.match(sql,/kpp in \('AT','CVT'\)/);if(table==='stats'){assert.ok(sql.includes("grade regexp '(^|[ /(),-])(FWD|FF)([ /(),-]|$)'"));assert.ok(sql.includes("grade regexp '(^|[ /(),-])(4WD|AWD)([ /(),-]|$)'"));assert.match(sql,/priv in \('FF','FWD','4WD','AWD','FULLTIME4WD'\)/);}else assert.match(sql,/priv in \('FF','FWD','4WD','AWD','FULLTIME4WD'\)/);
-  assert.throws(()=>ajesQuery({table,fuel:"petrol|x' OR 1=1"}));
+  assert.match(sql,/time in \('P','D'\)/);assert.match(sql,/kpp in \('AT','CVT'\)/);assert.ok(sql.includes("grade regexp '(^|[ /(),-])(FWD|FF)([ /(),-]|$)'"));assert.ok(sql.includes("grade regexp '(^|[ /(),-])(4WD|AWD)([ /(),-]|$)'"));assert.match(sql,/priv in \('FF','FWD','4WD','AWD','FULLTIME4WD'\)/);
+  assert.throws(()=>ajesQuery({table,fuel:"petrol|x' OR 1=1"}),/ajes_invalid_query/);
+  assert.throws(()=>ajesQuery({table,transmission:'IAT'}),/ajes_invalid_query/,'source-specific Green code is not a normalized gearbox type');
  }
- assert.throws(()=>ajesQuery({table:'china',transmission:'IAT'}),'source-specific Green code is not a normalized gearbox type');
+ for(const table of ['china','korea'])assert.throws(()=>ajesQuery({table,fuel:selection.fuel,transmission:selection.transmission,drive:selection.drive}),/ajes_invalid_query/);
  const filter=ajesResultFilter({bodyType:selection.bodyType});assert.equal(filter.matches(first),true);assert.equal(filter.matches(second),true);assert.equal(filter.matches({...first,bodyType:'coupe'}),false);
 });
 test('option lists retain separate selected values, scalar links and combined electric choices',()=>{

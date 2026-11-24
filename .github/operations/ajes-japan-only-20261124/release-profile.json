@@ -7,9 +7,9 @@
   "servingCalculationVersion": "4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90",
   "privateIndexDigest": "bf2c72cb7a260ef093c0a43c2b0dad9c4c9094a4d6dc3811dd0d7f7626b0d72b",
   "privateIndexParent": "83ff17075e9188dcf227c8752dc064248d5f42e0",
-  "source": "fe289d7e3b6c4c4f1aaff7d5e56b329802d5cd7b",
-  "tree": "4a03642cde3f7c1a7ebb5f887a9b981d8a8e74be",
-  "sourceCalculationVersion": "1daeb0bc382b70a7c811aaf405b589fd1b269fb637b150962f030efd67b0597f",
+  "source": "56d6b94fea70457e0ce2b0820596da9972846b90",
+  "tree": "98e7d217abbc4e40d3beeda94cb1d1e45c5c883c",
+  "sourceCalculationVersion": "3886d0046d115a8a8eed97a5b94e5baead004c55b476ee9f55b5e42855768fe0",
   "codePaths": [
     "apps/web/app/(crm)/api/crm/ajes/markets/[market]/route.ts",
     "apps/web/app/(crm)/api/crm/ajes/route.ts",
@@ -22,29 +22,51 @@
     "apps/web/components/catalog/AjesRail.tsx",
     "apps/web/components/catalog/CatalogContent.tsx",
     "apps/web/components/catalog/FeedSourceTabs.tsx",
+    "apps/web/components/catalog/KoreaReportPanel.tsx",
+    "apps/web/components/catalog/OfferSpecificationsDisclosure.tsx",
+    "apps/web/components/catalog/RelatedOffersView.tsx",
     "apps/web/components/dealers/DealerOfferMarkets.tsx",
     "apps/web/components/site/AjesMarketConnectionSettings.tsx",
     "apps/web/components/site/CollectionControls.tsx",
     "apps/web/lib/catalog/ajes-access-policy.ts",
     "apps/web/lib/catalog/ajes-catalog.ts",
     "apps/web/lib/catalog/ajes-client.ts",
+    "apps/web/lib/catalog/ajes-korea-detail-cache.ts",
     "apps/web/lib/catalog/ajes-market-preview-runtime.ts",
     "apps/web/lib/catalog/ajes-market-preview.ts",
     "apps/web/lib/catalog/ajes-market-selection.ts",
+    "apps/web/lib/catalog/ajes-model-resolution.ts",
+    "apps/web/lib/catalog/ajes-offer.ts",
+    "apps/web/lib/catalog/ajes-price-policy.ts",
     "apps/web/lib/catalog/ajes-public.ts",
+    "apps/web/lib/catalog/ajes-query-cache.ts",
+    "apps/web/lib/catalog/ajes-query.ts",
     "apps/web/lib/catalog/ajes-quota.ts",
+    "apps/web/lib/catalog/ajes-request-diagnostic.ts",
     "apps/web/lib/catalog/ajes-runtime.ts",
+    "apps/web/lib/catalog/ajes-saved-search.ts",
+    "apps/web/lib/catalog/ajes-source-url.ts",
+    "apps/web/lib/catalog/china-feed-cutover.ts",
     "apps/web/lib/catalog/collection-controls-schema.ts",
     "apps/web/lib/catalog/collection-controls.ts",
+    "apps/web/lib/catalog/korea-report-document.ts",
+    "apps/web/lib/catalog/korea-report-service.ts",
+    "apps/web/lib/catalog/korea-report-source.ts",
+    "apps/web/lib/catalog/korea-report-types.ts",
+    "apps/web/lib/catalog/management-previews.ts",
     "apps/web/lib/catalog/market-selection.ts",
     "apps/web/lib/catalog/offer-page-data.ts",
+    "apps/web/lib/catalog/offer-specification-groups.ts",
     "apps/web/lib/catalog/related-offer-selection.ts",
+    "apps/web/lib/catalog/seller-delivered-preview.ts",
+    "apps/web/lib/catalog/storage.ts",
     "tests/ajes-catalog-progressive.test.ts",
     "tests/ajes-count-display.test.ts",
     "tests/ajes-count-progressive.test.ts",
     "tests/ajes-detail-queue-recovery.test.ts",
     "tests/ajes-japan-feed.test.ts",
     "tests/ajes-japan-only.test.ts",
+    "tests/ajes-korea-detail-cache.test.ts",
     "tests/ajes-list-admission.test.ts",
     "tests/ajes-market-preview.test.ts",
     "tests/ajes-model-loader.test.ts",
@@ -57,20 +79,37 @@
     "tests/ajes-rail-late-count.test.ts",
     "tests/ajes-ready-metadata.test.ts",
     "tests/ajes-recovery-isolation.test.ts",
+    "tests/ajes-retired-tables.test.ts",
+    "tests/ajes-source-url.test.ts",
     "tests/ajes-stock-feed.test.ts",
+    "tests/auction-sale-period.test.ts",
     "tests/browser/collection-controls.mjs",
+    "tests/browser/korea-report-fixture.tsx",
+    "tests/browser/korea-report.mjs",
     "tests/catalog-collection-controls.test.ts",
     "tests/catalog-japan-filter-rail.test.ts",
     "tests/catalog-market-page-boundary.test.ts",
     "tests/catalog-market-workflow-policy.test.ts",
+    "tests/catalog-multiselect.test.ts",
+    "tests/catalog-pickup-markets.test.ts",
+    "tests/catalog-sort-color.test.ts",
     "tests/china-feed-cutover.test.ts",
     "tests/china-source-switch.test.ts",
     "tests/dealer-offer-markets.test.ts",
+    "tests/japan-default-fuel.test.ts",
+    "tests/japan-drive-sql-budget.test.ts",
+    "tests/japan-drive.test.ts",
+    "tests/japan-owner-exclusions.test.ts",
+    "tests/japan-stepwgn-owner-power.test.ts",
+    "tests/korea-report-document.test.ts",
+    "tests/korea-report-service.test.ts",
+    "tests/korea-report-source.test.ts",
+    "tests/management-preview-record-reuse.test.ts",
     "tests/model-directory-markets.test.ts",
     "tests/public-page-recovery.test.ts",
     "tests/related-offer-selection.test.ts"
   ],
-  "codeDiffSha256": "88341d61ef41655ae6a7ba5b3454c4fc562bd5528e87863cab9534b82b9b4b5d",
+  "codeDiffSha256": "d3814fa1338ca5ac71b79629bc0abf5c33ed1fe7f0c3b3145130978ec8147ab6",
   "inventory": {
     "activationAuthorized": false,
     "candidatePort": {
@@ -182,5 +221,171 @@
     "supplierRequests": 0,
     "version": 1
   },
-  "inventorySha256": "791659fe8e873ae2ce18885ac23e9ca9b69698e1d58dc5e0b176e40712773166"
+  "inventorySha256": "791659fe8e873ae2ce18885ac23e9ca9b69698e1d58dc5e0b176e40712773166",
+  "acceptance": "remove-unused-aj-outside-japan-v1",
+  "calculationAlgorithmBlob": "63c9323ac7a0ddf267a725443ca2316c197cc7d8",
+  "reviewedClosureChanges": [
+    [
+      "apps/web/lib/catalog/ajes-access-policy.ts",
+      null,
+      "100644 blob 8e5054c918aebfe4ae23158b344a9db3969e5a49"
+    ],
+    [
+      "apps/web/lib/catalog/ajes-catalog.ts",
+      "100644 blob f74fa640642e198c863f16076c3e4186201de3a6",
+      "100644 blob 6b9983b93fc27ad9859170727a236ee07cfee0b9"
+    ],
+    [
+      "apps/web/lib/catalog/ajes-client.ts",
+      "100644 blob da483cb06cf5a1039d5f06fb2b850e7db2fa42b1",
+      "100644 blob a192a0e23681905933ceec615f5c83a46e30849c"
+    ],
+    [
+      "apps/web/lib/catalog/ajes-korea-detail-cache.ts",
+      "100644 blob 07ba144fcf302af5d8d21825bec4b7de4135e9cb",
+      null
+    ],
+    [
+      "apps/web/lib/catalog/ajes-market-preview-runtime.ts",
+      "100644 blob d70175564dd9170c25b0c52ec2dc7ed29b177743",
+      null
+    ],
+    [
+      "apps/web/lib/catalog/ajes-market-preview.ts",
+      "100644 blob 936bb7970760fc3e2e57d8d649d04d5e294d6f34",
+      null
+    ],
+    [
+      "apps/web/lib/catalog/ajes-market-selection.ts",
+      "100644 blob a560c42e6c0897e2eadc98b2c93923ee6b65951c",
+      "100644 blob 6231047b88503b34d04b0549e0340ed817c2f2d5"
+    ],
+    [
+      "apps/web/lib/catalog/ajes-model-resolution.ts",
+      "100644 blob 6be471b27822b33cc781979b2f4942bd074e91da",
+      "100644 blob 5859dc686c85b8ebef312c4a2fc3e42ea6b3898b"
+    ],
+    [
+      "apps/web/lib/catalog/ajes-offer.ts",
+      "100644 blob 245d5e64ffe815d6d8aba3a6bf5441ceeca669bb",
+      "100644 blob fa7932a5f00b4ff5a0fe5e56771802b4f20dd04a"
+    ],
+    [
+      "apps/web/lib/catalog/ajes-price-policy.ts",
+      "100644 blob a5c63188cdf037c605ad40262cd35870d1193515",
+      null
+    ],
+    [
+      "apps/web/lib/catalog/ajes-public.ts",
+      "100644 blob 6553848b398339d4a0832d510cbbc54a58aef6e2",
+      "100644 blob 8c94e89dce7ba7b4bf92cffaaf94b9d080b4def5"
+    ],
+    [
+      "apps/web/lib/catalog/ajes-query-cache.ts",
+      "100644 blob c3e9f519ef81e6d28510c594df0fb6f0e0e0c11d",
+      "100644 blob b3da1e14a85b4561868bf1a35d42a3d5d4acc164"
+    ],
+    [
+      "apps/web/lib/catalog/ajes-query.ts",
+      "100644 blob 2e1a04e03989c3a0a8f7d7aa7e28d899105d892a",
+      "100644 blob 42e070dcfe08d8122d995987c5111196abcd1570"
+    ],
+    [
+      "apps/web/lib/catalog/ajes-quota.ts",
+      "100644 blob a8687f9c191b70d5769ce1475e217fb50db3ff1c",
+      "100644 blob e6d772ac35565e08d9d5dd79523b08fde5672cc0"
+    ],
+    [
+      "apps/web/lib/catalog/ajes-request-diagnostic.ts",
+      "100644 blob f489aad16ab2a5065f872bf4d328b78a13fd72d1",
+      "100644 blob 69160ad140df9ab2d681a58cf2fc29b112ea6f9f"
+    ],
+    [
+      "apps/web/lib/catalog/ajes-runtime.ts",
+      "100644 blob 7da0b0c0ce7de062a95fb33e6a0e194b722f5404",
+      "100644 blob a10a387697c499e7c5bc0d12b3bba992ccc759f9"
+    ],
+    [
+      "apps/web/lib/catalog/ajes-saved-search.ts",
+      "100644 blob c163c58a0b8c05c652350d392ed16d3bd22a41bf",
+      "100644 blob 4b223019765d79b617ac9325dc08545778df8093"
+    ],
+    [
+      "apps/web/lib/catalog/ajes-source-url.ts",
+      "100644 blob d1b688323c23e2de0bc1932bf421eb82748c9053",
+      null
+    ],
+    [
+      "apps/web/lib/catalog/china-feed-cutover.ts",
+      "100644 blob ec418f9af3251e9bef4e808c442f2e5474f4d233",
+      null
+    ],
+    [
+      "apps/web/lib/catalog/collection-controls-schema.ts",
+      "100644 blob ef31a2e5bb956d20a20495ada76927ed7dbb7b44",
+      "100644 blob d8241f912668da655b3da9b3cf08abd6d7224712"
+    ],
+    [
+      "apps/web/lib/catalog/collection-controls.ts",
+      "100644 blob f6fdcde174914ce3db140a77f02a7d45565414b0",
+      "100644 blob 7ed0ffe651b78360b5a1508afa2dcf8b2c22830f"
+    ],
+    [
+      "apps/web/lib/catalog/korea-report-document.ts",
+      "100644 blob 9c9e3aa63eec5584c369bbeb290f9980ae5d4d09",
+      null
+    ],
+    [
+      "apps/web/lib/catalog/korea-report-service.ts",
+      "100644 blob ebb582600792b3ddbad853e0f0f67827d34b68a4",
+      null
+    ],
+    [
+      "apps/web/lib/catalog/korea-report-source.ts",
+      "100644 blob 2a77bd1e58738c8f6d026ca2491e6716b8f705db",
+      null
+    ],
+    [
+      "apps/web/lib/catalog/korea-report-types.ts",
+      "100644 blob b9c908fda68f36eb25f03298e9a8493d48c8db1a",
+      null
+    ],
+    [
+      "apps/web/lib/catalog/management-previews.ts",
+      "100644 blob 329eff6925d4ebff8c3a4e1e653e8a30c46c6c68",
+      "100644 blob 4fc50c570f43a1f4ceb43a87132bb3828dcb1656"
+    ],
+    [
+      "apps/web/lib/catalog/market-selection.ts",
+      "100644 blob 3845edc6f789e36b314213baf9637451a1459aa8",
+      "100644 blob eb6da9d0d5948a5d54c90489a7f19e1df956b522"
+    ],
+    [
+      "apps/web/lib/catalog/offer-page-data.ts",
+      "100644 blob 04862026e93958ff037d7bdfe20026241eb9216f",
+      "100644 blob 8082bf08d31cd3d833c2924e8df126e533b3250e"
+    ],
+    [
+      "apps/web/lib/catalog/offer-specification-groups.ts",
+      "100644 blob 2241936912a5daf6bea2187ecedbcc0f49920a9d",
+      "100644 blob fd407a146fc30a20006f7f52c63e93761d836249"
+    ],
+    [
+      "apps/web/lib/catalog/related-offer-selection.ts",
+      "100644 blob bd48f56ed1b729072841a54b211af553b1791253",
+      "100644 blob ca70967466ba2a8741a66bf824170807e74ee501"
+    ],
+    [
+      "apps/web/lib/catalog/seller-delivered-preview.ts",
+      "100644 blob d8e9e483b972bc925937c4c7243f5a89fe03a61e",
+      "100644 blob 0d66c16e816f17e433bd662b00bb598cd5c83ae0"
+    ],
+    [
+      "apps/web/lib/catalog/storage.ts",
+      "100644 blob f402e951d56998efb75c7ac8cd1187ddc7726532",
+      "100644 blob ece0a59756e043c9b99b7472ba574f0c1f5a56ac"
+    ]
+  ],
+  "protectedClosureRecords": 6328,
+  "protectedClosureSha256": "b27ba7af5670636c4977dd9bdfc91475973d38281c7b8778e1242f7668c0753e"
 }

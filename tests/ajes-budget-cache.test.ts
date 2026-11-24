@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {ajesQuery} from '../apps/web/lib/catalog/ajes-query';
 import {readUncappedBudgetRows} from '../apps/web/lib/catalog/ajes-query-cache';
 test('new delivered budget can recover only its exact previously viewed supplier page',async()=>{
- for(const table of ['stats','korea'] as const){
+ for(const table of ['stats'] as const){
   const old=ajesQuery({table,make:'BMW',page:3,pageSize:24}).sql;
   const capped=ajesQuery({table,make:'BMW',page:3,pageSize:24,sourcePriceTo:1000000}).sql;
   const value={items:[{table,id:'saved'}],page:3,pageSize:24,observedAt:new Date().toISOString()};let reads=0;

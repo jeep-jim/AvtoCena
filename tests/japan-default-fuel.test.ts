@@ -19,8 +19,8 @@ test('known fuel and other markets stay unchanged',()=>{
  for(const market of ['china','korea','uae','europe','georgia']){const o={market};assert.equal(applyJapanDefaultFuel(o),o);}
 });
 test('Japan petrol count and pages include empty supplier fuel before limit',()=>{
- for(const aggregate of [undefined,'count'] as const){const sql=ajesQuery({table:'stats',fuel:'petrol|diesel',aggregate}).sql;assert.match(sql,/time is null or time=''/);if(!aggregate)assert.ok(sql.indexOf('time is null')<sql.indexOf('limit'));}
- assert.doesNotMatch(ajesQuery({table:'korea',fuel:'petrol'}).sql,/time is null/);
+ for(const table of ['stats','main'] as const)for(const aggregate of [undefined,'count'] as const){const sql=ajesQuery({table,fuel:'petrol|diesel',aggregate}).sql;assert.match(sql,/time is null or time=''/);if(!aggregate)assert.ok(sql.indexOf('time is null')<sql.indexOf('limit'));}
+ for(const table of ['china','korea'])assert.throws(()=>ajesQuery({table,fuel:'petrol'}),/ajes_invalid_query/);
 });
 test('source drivetrain wins over grade; mixed source lists do not assert AWD',()=>{
  const offer={market:'japan',trim:'4WD',operational:{raw:{sourceDrive:'FF'}}};

@@ -85,14 +85,15 @@ test('existing compact indexes are upgraded for counts, facets and pages includi
 });
 
 
-test('pickup source predicate is present before count and pagination for Japan and Korea',async()=>{
+test('Japan pickup predicate precedes count and pagination; retired AJ markets reject it',async()=>{
  const {ajesQuery,ajesCatalogQuery}=await import('../apps/web/lib/catalog/ajes-query');
- for(const market of ['japan','korea'])for(const aggregate of [undefined,'count'] as const){
-  const query=ajesQuery({...ajesCatalogQuery({market,bodyType:'pickup'}),aggregate});
+ for(const table of ['stats','main'] as const)for(const aggregate of [undefined,'count'] as const){
+  const query=ajesQuery({...ajesCatalogQuery({market:'japan',bodyType:'pickup'}),table,aggregate});
   assert.match(query.sql,/model_name like '%REXTON%'/);assert.match(query.sql,/model_name like '%HILUX%'/);
   if(!aggregate)assert.ok(query.sql.indexOf("model_name like '%REXTON%'")<query.sql.indexOf('limit'));
-  if(market==='korea')assert.match(query.sql,/info like '%pickup%'/);else assert.doesNotMatch(query.sql,/info like/);
+  assert.doesNotMatch(query.sql,/info like/);
  }
+ for(const market of ['china','korea'])assert.throws(()=>ajesCatalogQuery({market,bodyType:'pickup'}),/market_not_supported/);
  assert.equal(ajesCatalogQuery({market:'japan',bodyType:'pickup|suv'}).pickup,undefined,'never narrow mixed body selection to pickups');
  assert.throws(()=>ajesQuery({pickup:'anything' as any}));
 });

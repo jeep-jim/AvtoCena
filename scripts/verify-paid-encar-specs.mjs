@@ -97,7 +97,7 @@ const currentManifest = await storage.readJson('catalog/manifest.json', null);
 console.log('PAID_KOREA_SPEC_COMPARISON ' + JSON.stringify({version: 1, checkedAt: new Date().toISOString(),
   generation: manifest.generationId, manifestUnchanged: digest(manifest) === digest(currentManifest),
   controlRevision: controls.revision, paidEnabled: controls.sources.encar_feed.enabled,
-  oldEnabled: controls.sources.ajes_korea_feed.enabled, publishedCount: manifest.markets.korea.count,
+  oldEnabled: controls.sources.ajes_korea_feed?.enabled === true, publishedCount: manifest.markets.korea.count,
   snapshotCompletedAt: snapshot.completedAt, snapshotPages: snapshot.pages, snapshotCount: snapshot.count,
   pagesRead, savedScanComplete: saved.size === ids.length || pagesRead === snapshot.pages,
   result, health, storageWrites: 0}));

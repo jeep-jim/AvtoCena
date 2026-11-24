@@ -13,13 +13,12 @@ test('ready Japanese cards return while the independent count is still pending',
   'server-only':'', 'next/headers':"export const headers=async()=>new Map([['x-real-ip','127.0.0.1']]);",
   './ajes-runtime':"export const ajesClient={read:async()=>{globalThis.__countFixture.counts++;return new Promise(()=>{});}};",
   './ajes-public':`export const cappedAjesQuery=async q=>q;export const readAjesPublic=async q=>{globalThis.__countFixture.lists++;return {page:q.page||1,pageSize:24,received:24,items:Array.from({length:q.page===2?23:24},(_,i)=>({id:q.table+'-'+(q.page||1)+'-'+i})),observedAt:'now'};};`,
-  './ajes-query':"export const ajesCatalogQuery=p=>({table:p.market==='japan'?'stats':'korea',page:Number(p.page||1),pageSize:24});export class AjesFilterUnavailable extends Error{};export class AjesInputError extends Error{};",
+  './ajes-query':"export const ajesCatalogQuery=p=>({table:'stats',page:Number(p.page||1),pageSize:24});export class AjesFilterUnavailable extends Error{};export class AjesInputError extends Error{};",
   './ajes-client':"export const readAjesModelDirectory=async()=>({models:[]});export const readAjesMakeDirectory=async()=>({makes:[]});export class AjesUnavailable extends Error{};",
   './ajes-result-filter':"export const ajesResultFilter=()=>({active:false,priceFilter:false,matches:()=>true});",
   './storage':"export const publicOffer=x=>x;",'./market-page':"export const sortCatalogRows=x=>x;",
   './live-business-pricing':"export const applyActiveBusinessPricingBatch=async x=>x;",
   './collection-controls':"export const assertCollectionEnabled=async()=>{};",
-  './ajes-price-policy':"export const ajesChinaPriceAllowed=()=>true;",
   './japan-preview-parameters':"export const japanPreviewParameters=()=>{throw Error('not attested');};",
   '../encyclopedia/calculation-evidence':"export const hasEncyclopediaCalculationEvidence=()=>false;",
  };
@@ -28,8 +27,8 @@ test('ready Japanese cards return while the independent count is still pending',
   const mod={exports:{} as any};new Function('require','module','exports',built.outputFiles[0].text)((id:string)=>id==='react'?{cache:(fn:any)=>fn}:require(id),mod,mod.exports);
   for(const market of ['japan']){
    let timer:ReturnType<typeof setTimeout>;
-   const page:any=await Promise.race([mod.exports.readAjesCatalogPage({market,drive:market==='japan'?'awd':undefined,city:'Новокузнецк'}),new Promise((_,reject)=>{timer=setTimeout(()=>reject(Error('ready cards blocked by count')),300);})]).finally(()=>clearTimeout(timer!));
-   assert.equal(page.items.length,24);assert.equal(page.total,null);assert.equal(page.hasMore,true);assert.equal(page.items[0].id,(market==='japan'?'stats':'korea')+'-1-0');assert.equal(page.nextCursor,undefined,'unfiltered source pages keep numbered offsets');
+   const page:any=await Promise.race([mod.exports.readAjesCatalogPage({market,drive:'awd',city:'Новокузнецк'}),new Promise((_,reject)=>{timer=setTimeout(()=>reject(Error('ready cards blocked by count')),300);})]).finally(()=>clearTimeout(timer!));
+   assert.equal(page.items.length,24);assert.equal(page.total,null);assert.equal(page.hasMore,true);assert.equal(page.items[0].id,'stats-1-0');assert.equal(page.nextCursor,undefined,'unfiltered source pages keep numbered offsets');
   }
   for(const market of ['japan']){
    const second=await mod.exports.readAjesCatalogPage({market,page:'2'},undefined,{includeCount:false});
@@ -54,13 +53,12 @@ for(const continuation of [false,true])test(`${continuation?'pagination':'overvi
   'server-only':'', 'next/headers':"export const headers=async()=>new Map([['x-real-ip','127.0.0.1']]);",
   './ajes-runtime':"export const ajesClient={read:async()=>{return globalThis.__countFixture.count();}};",
   './ajes-public':`export const cappedAjesQuery=async q=>q;export const readAjesPublic=q=>globalThis.__countFixture.list(q);`,
-  './ajes-query':"export const ajesCatalogQuery=p=>({table:p.market==='japan'?'stats':'korea',page:Number(p.page||1),pageSize:24});export class AjesFilterUnavailable extends Error{};export class AjesInputError extends Error{};",
+  './ajes-query':"export const ajesCatalogQuery=p=>({table:'stats',page:Number(p.page||1),pageSize:24});export class AjesFilterUnavailable extends Error{};export class AjesInputError extends Error{};",
   './ajes-client':"export const readAjesModelDirectory=async()=>({models:[]});export const readAjesMakeDirectory=async()=>({makes:[]});export class AjesUnavailable extends Error{};",
   './ajes-result-filter':"export const ajesResultFilter=()=>({active:false,priceFilter:false,matches:()=>true});",
   './storage':"export const publicOffer=x=>x;",'./market-page':"export const sortCatalogRows=x=>x;",
   './live-business-pricing':"export const applyActiveBusinessPricingBatch=async x=>x;",
   './collection-controls':"export const assertCollectionEnabled=async()=>{};",
-  './ajes-price-policy':"export const ajesChinaPriceAllowed=()=>true;",
   './japan-preview-parameters':"export const japanPreviewParameters=()=>{throw Error('not attested');};",
   '../encyclopedia/calculation-evidence':"export const hasEncyclopediaCalculationEvidence=()=>false;",
  };

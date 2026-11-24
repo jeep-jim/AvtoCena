@@ -77,7 +77,7 @@ jobs:
       - name: Verify parallel home loading and preserved city and prices
         run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test --test-concurrency=1 tests/home-parallel-specials.test.ts tests/home-initial-catalog.test.ts tests/home-showcase-priced-first.test.ts tests/home-phase-timing.test.ts
       - name: Verify Japan and Korea delivered budgets, continuation and supplier refusals
-        run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test --test-concurrency=1 tests/ajes-budget-candidates.test.ts tests/ajes-budget-pipeline.test.ts tests/ajes-delivered-budget.test.ts tests/ajes-saved-budget-sort.test.ts tests/ajes-budget-cache.test.ts tests/ajes-provider-limit.test.ts tests/ajes-filtered-page.test.ts tests/ajes-stock-feed.test.ts tests/ajes-rail-late-count.test.ts tests/ajes-market-preview.test.ts tests/ajes-page-failure-evidence.test.ts
+        run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test --test-concurrency=1 tests/ajes-budget-candidates.test.ts tests/ajes-budget-pipeline.test.ts tests/ajes-delivered-budget.test.ts tests/ajes-saved-budget-sort.test.ts tests/ajes-budget-cache.test.ts tests/ajes-provider-limit.test.ts tests/ajes-filtered-page.test.ts tests/ajes-retired-tables.test.ts tests/ajes-rail-late-count.test.ts tests/ajes-market-preview.test.ts tests/ajes-page-failure-evidence.test.ts
       - name: Verify retained choices and forward/Back navigation on this exact source
         env:
           PLAYWRIGHT_MODULE: ${{ runner.temp }}/retention-browser/node_modules/playwright/index.mjs

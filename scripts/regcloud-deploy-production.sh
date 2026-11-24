@@ -134,7 +134,7 @@ for attempt in $(seq 1 30); do
  sleep 1
 done
 python3 - "$port" "$release" "$prewarm" <<'PY'
-import urllib.request,urllib.error,time,json,sys,re,os
+import urllib.request,urllib.error,time,json,sys,os
 markets=os.environ.get("AVTOCENA_RELEASE_MARKETS", "").split(",") if os.environ.get("AVTOCENA_RELEASE_MARKETS") else []
 base='http://127.0.0.1:'+sys.argv[1]
 for path in (['/api/health','/login','/autocalc'] if markets else ['/api/health','/','/cars','/']):
@@ -165,32 +165,19 @@ for path in (['/cars?market='+m for m in markets] if markets else ['/cars?market
   assert value.get('total',0)>0 and len(value.get('items',[]))>0
  else:assert b'</html>' in b and b'$RX(' not in b and len(b)>50000
  print(json.dumps({'prepared':path,'seconds':round(time.monotonic()-t,3),'bytes':len(b)}),flush=True)
-# Delivered-price filters are now supported. A loopback probe has no real visitor
-# IP and must fail at the source boundary, without any supplier request or fake zero.
-# Require the exact typed reason: generic 503, configuration and supplier failures
-# are NOT accepted by this release check. Keep all HTML/local price/auth gates above.
-for market, source in [('japan','ajes'),('korea','ajes'),('korea','existing'),('china','ajes')]:
- if markets and market not in markets:continue
- # The local China budget has a separate exact-price snapshot from sorting.
- # Warm it once, then repeat the unchanged 30-second source-boundary gate.
- for cold in ([True,False] if sys.argv[3]=='1' and market=='china' else [False]):
-  try:
-   with urllib.request.urlopen(base+'/api/catalog/search?market='+market+'&source='+source+'&budgetTo=3000000',timeout=600 if cold else 30) as response:
-    value=json.load(response)
-   # China may use the owner-selected local Che168 catalog. AJES IDs must
-   # never pass this branch; its visitor-IP boundary remains mandatory.
-   assert market=='china', 'live source accepted a request without a real visitor IP'
-   assert value.get('ok') is True and value.get('total',0)>0 and value.get('items')
-   assert all(row.get('market')=='china' and re.fullmatch(r'[a-f0-9]{24}',str(row.get('id',''))) for row in value['items'])
-   print(json.dumps({'market':market,'coldPreparation':cold,'localChe168Catalog':'nonempty_verified'}),flush=True)
-   continue
-  except urllib.error.HTTPError as e:
-   value=json.load(e)
-   assert e.code==503, (market,e.code)
-   assert value.get('ok') is False and value.get('error')=='japan_search_unavailable'
-   assert value.get('reason')=='client_ip_missing', (market,value.get('reason'))
-   assert 'total' not in value and 'items' not in value
-  print(json.dumps({'market':market,'missingVisitorIp':'rejected_without_supplier_request_or_false_zero'}),flush=True)
+# Japan's on-demand source requires a real visitor IP. The loopback check
+# must fail before any supplier request and must not return a false zero.
+if not markets or 'japan' in markets:
+ try:
+  urllib.request.urlopen(base+'/api/catalog/search?market=japan&source=ajes&budgetTo=3000000',timeout=30)
+  raise AssertionError('live Japan source accepted a request without a real visitor IP')
+ except urllib.error.HTTPError as e:
+  value=json.load(e)
+  assert e.code==503, ('japan',e.code)
+  assert value.get('ok') is False and value.get('error')=='japan_search_unavailable'
+  assert value.get('reason')=='client_ip_missing', ('japan',value.get('reason'))
+  assert 'total' not in value and 'items' not in value
+ print(json.dumps({'market':'japan','missingVisitorIp':'rejected_without_supplier_request_or_false_zero'}),flush=True)
 # Admin resource data must never leak anonymously.
 try:urllib.request.urlopen(base+'/api/crm/server-resources',timeout=15);raise AssertionError('metrics exposed')
 except urllib.error.HTTPError as e:assert e.code in [401,403]

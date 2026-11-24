@@ -59,7 +59,7 @@ jobs:
           import fs from 'node:fs';
           import assert from 'node:assert/strict';
           import {getJsonStorage} from './apps/web/lib/data.ts';
-          import {readCollectionControls,saveCollectionSwitch} from './apps/web/lib/catalog/collection-controls.ts';
+          import {readCollectionControls} from './apps/web/lib/catalog/collection-controls.ts';
           const evidence=JSON.parse(fs.readFileSync('paid-encar-before.json','utf8'));
           const storage=getJsonStorage();
           const controls=await readCollectionControls(storage);
@@ -70,9 +70,8 @@ jobs:
           assert.equal(new Set(evidence.offers.map(o=>o.id)).size,3);
           assert.equal(controls.revision,Number(process.env.VERIFIED_REVISION));
           assert.ok(controls.markets.korea.enabled && controls.sources.encar_feed.enabled);
-          if(controls.sources.ajes_korea_feed.enabled)await saveCollectionSwitch({scope:'source',id:'ajes_korea_feed',enabled:false,revision:controls.revision},'Переход на проверенный Auto API Encar',storage);
           const after=await readCollectionControls(storage);
-          assert.equal(after.sources.ajes_korea_feed.enabled,false);
+          assert.equal(Object.hasOwn(after.sources,'ajes_korea_feed'),false);
           assert.equal(after.sources.encar_feed.enabled,true);
           console.log(JSON.stringify({korea:true,encar:true,ajesKorea:false,revision:after.revision}));
           JS

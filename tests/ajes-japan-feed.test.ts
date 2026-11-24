@@ -14,7 +14,7 @@ import {heavyVehicleSqlExclusion} from '../apps/web/lib/catalog/heavy-vehicle-fa
 const row={ID:'test123',MARKA_NAME:'TOYOTA',MODEL_NAME:'TEST',YEAR:'2023',AUCTION_TYPE:'2',STATUS:'Sold',FINISH:'935000',START:'100000',PW:'49',PRIV:'FF,FULLTIME4WD',IMAGES:'https://7.tru.ru/imgs/testABC&h=50'};
 
 test('AJES power filter uses local encyclopedia power, never supplier PW as a specification',async()=>{
- for(const table of ['stats','main','korea','china'] as const){
+ for(const table of ['stats','main'] as const){
   const sql=ajesQuery({table,powerTo:160}).sql;
   assert.doesNotMatch(sql,/pw\s*(?:>=|<=|>|<)/i);
  }
@@ -38,33 +38,17 @@ test('HTTP 414 recovers a previously viewed page as stale instead of failing clo
 });
 
 test('saved AJES fallbacks return bounded car candidates and defer power eligibility to local enrichment',async()=>{
- const {findSavedAjesSearch,findSavedAjesStockSearch}=await import('../apps/web/lib/catalog/ajes-saved-search');
+ const {findSavedAjesSearch}=await import('../apps/web/lib/catalog/ajes-saved-search');
  const {ajesResultFilter}=await import('../apps/web/lib/catalog/ajes-result-filter');
  const now=Date.now(),observedAt=new Date(now).toISOString();
  const japan={schemaVersion:2,observedAt,items:[{id:'jp-saved',table:'stats',make:'TOYOTA',model:'PRIUS',year:2023,status:'Sold',finalPriceJpy:1000000,sourcePower:'150'}]};
- const stock={schemaVersion:2,observedAt,items:[{id:'cn-saved',table:'china',make:'BYD',model:'QIN',year:2024,status:'Active',sourcePrice:10000,sourcePower:'150'}]};
  const jp=findSavedAjesSearch({table:'stats',powerTo:160}, {'stats:jp-saved':japan},now);
- const cn=findSavedAjesStockSearch({table:'china',make:'BYD',model:'QIN',powerTo:160}, {'china:cn-saved':stock},now);
  assert.equal(jp?.items[0].id,'jp-saved');
- assert.equal(cn?.items[0].id,'cn-saved');
  const japanFilter=ajesResultFilter({market:'japan',powerTo:'160'});
- const chinaFilter=ajesResultFilter({market:'china',powerTo:'160'});
  assert.equal(japanFilter.matches({...japan.items[0],sourceId:'ajes_japan_feed',operational:{raw:{sourcePower:'150'}}}),false);
- assert.equal(chinaFilter.matches({...stock.items[0],sourceId:'ajes_china_feed',operational:{raw:{sourcePower:'150'}}}),false);
  assert.equal(japanFilter.matches({...japan.items[0],powerHp:150}),true);
- assert.equal(chinaFilter.matches({...stock.items[0],powerHp:150}),true);
 });
 
-test('stock supplier PW stays raw evidence and never becomes a vehicle horsepower fact',()=>{
- const lot=ajesLot({...row,ID:'cn-power',MARKA_NAME:'BYD',MODEL_NAME:'QIN',YEAR:'2024',STATUS:'Active',FINISH:'10000',PW:'150',ENG_V:'1498',TIME:'P',KPP:'AT',PRIV:'FF'},'china',false);
- assert.ok(lot);
- const offer=ajesOffer(lot!,{currency:'CNY',sourcePrice:10000,effectiveRate:12,rateSource:'cbr'} as any,new Date().toISOString());
- assert.equal(offer.powerHp,undefined);
- assert.equal(offer.powerDataSource,undefined);
- assert.equal(offer.operational?.semanticEvidence?.powerHp,undefined);
- assert.equal(ajesPowerEstimateHp(offer),undefined);
- assert.equal(ajesPowerEstimateHp({...offer,powerHp:150}),150);
-});
 
 test('actual supplier TAG aggregates are positional and strictly numeric',async()=>{
  const read=async(body:unknown,aggregate:'count'|'models')=>createAjesClient({password:()=> 'secret',assertEnabled:async()=>{},reserve:async()=>{},fetcher:async()=>new Response(JSON.stringify(body))}).read({aggregate},'127.0.0.1');
@@ -193,7 +177,7 @@ test('usage accounting retains concurrent attempts and independent tables withou
  await Promise.all(Array.from({length:5},()=>reserveAjesRequest(s,'stats',now)));
  assert.equal((await s.readJsonWithMeta<any>('catalog/operations/ajes-quota-stats.json',null)).value.buckets[hour],19025);
  await reserveAjesRequest(s,'main',now);assert.equal((await s.readJsonWithMeta<any>('catalog/operations/ajes-quota-main.json',null)).value.buckets[hour],1);
- for(const table of ['china','korea'] as const){await assert.rejects(reserveAjesRequest(s,table,now),/market_not_supported/);assert.equal((await s.readJsonWithMeta<any>(`catalog/operations/ajes-quota-${table}.json`,null)).found,false);}
+ for(const table of ['china','korea'] as const){await assert.rejects(reserveAjesRequest(s,table as any,now),/market_not_supported/);assert.equal((await s.readJsonWithMeta<any>(`catalog/operations/ajes-quota-${table}.json`,null)).found,false);}
  await reserveAjesRequest(s,'stats',now+25*3600000);
  assert.deepEqual((await s.readJsonWithMeta<any>('catalog/operations/ajes-quota-stats.json',null)).value.buckets,{[hour+25]:1});
 });
@@ -664,7 +648,7 @@ test('unfiltered Japan first page recovers bounded saved lots honestly after one
  assert.equal(requests,1);assert.equal(page.partial,true);assert.equal(page.stale,true);assert.equal(page.total,undefined);assert.equal(page.items[0].id,lot.id);
  assert.equal(findSavedAjesSearch({table:'stats',page:2},snapshots),null);
  assert.equal(findSavedAjesSearch({table:'stats',fuel:'diesel'},snapshots),null);
- assert.equal(findSavedAjesSearch({table:'korea'},snapshots),null);
+ assert.throws(()=>findSavedAjesSearch({table:'korea'} as any,snapshots),/ajes_invalid_query/);
  assert.equal(findSavedAjesSearch({table:'stats'},{one:{...snapshots.one,observedAt:'2020-01-01'}}),null);
 });
 
@@ -690,9 +674,9 @@ test('truck policy change retains old viewed rows only as a partial refresh/fail
 });
 
 
-test('shared year range intersects each market policy without rejecting older lower bounds',()=>{
- for(const table of ['stats','main','korea','china'] as const){
-   const floor=table==='stats'||table==='main'?2008:table==='china'?2014:new Date().getUTCFullYear()-6;
+test('shared year range intersects Japanese auction policy without rejecting older lower bounds',()=>{
+ for(const table of ['stats','main'] as const){
+   const floor=2008;
    assert.equal(ajesQuery({table,yearFrom:2007}).sql,ajesQuery({table}).sql);
    assert.match(ajesQuery({table,yearFrom:2007,yearTo:2007}).sql,new RegExp('year>='+floor+' and year<=2007'));
    assert.match(ajesQuery({table,yearFrom:2022,yearTo:2024}).sql,/year>=2022 and year<=2024/);

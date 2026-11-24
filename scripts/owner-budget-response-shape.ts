@@ -12,7 +12,7 @@ async function main(){
  const password=await ajesPassword();if(!password)throw Error('not_configured');
  const endpoint=ajesEndpoint(ip);
  for(const table of ['stats'] as const){
-  await assertCollectionEnabled(table==='stats'?'ajes_japan_feed':'ajes_korea_feed');
+  await assertCollectionEnabled('ajes_japan_feed');
   const query=ajesQuery({table,pageSize:6});
   await reserveAjesRequest(getJsonStorage(),table);
   const url=new URL(endpoint);url.search=new URLSearchParams({ip,json:'',code:password,sql:query.sql}).toString();

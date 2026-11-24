@@ -14,7 +14,7 @@ test('provider list and count receive the same sale-date condition and shares re
  const q=ajesCatalogQuery({market:'japan',salePeriod:'week|2months'});
  const range=auctionSaleRange('week|2months')!;
  for(const aggregate of [undefined,'count','makes'] as const){const sql=ajesQuery({...q,aggregate}).sql;assert.ok(sql.includes(`auction_date>='${range.from}'`));assert.ok(sql.includes(`auction_date<'${range.toExclusive}'`));}
- assert.equal(ajesCatalogQuery({market:'china',salePeriod:'week'}).salePeriod,undefined);
+ for(const market of ['china','korea'])assert.throws(()=>ajesCatalogQuery({market,salePeriod:'week'}),/market_not_supported/);
  assert.throws(()=>ajesQuery({table:'stats',salePeriod:"' OR 1=1"}));
  assert.equal(selectionQuery(new URLSearchParams({market:'japan',salePeriod:'week|month'})).get('salePeriod'),'week|month');
 });

@@ -2,7 +2,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import {randomBytes} from 'node:crypto';
 import {fileURLToPath,pathToFileURL} from 'node:url';
-import {PROFILE,ROOT,need,sha256,checkInvocation,verifySource,verifyGates,assertServerReceipt,assertBrowserReceipt} from './release-contract.mjs';
+import {PROFILE,ROOT,ACCEPTANCE,need,sha256,checkInvocation,verifySource,verifyGates,assertRemovalReceipt,assertBrowserReceipt} from './release-contract.mjs';
 import {buildImage,fileDigest,RESOURCE_FILES} from './release-image.mjs';
 import {acquireAuthority} from './release-authority.mjs';
 import {isAjHostPhase,openAjSshSession} from './release-ssh.mjs';
@@ -26,27 +26,27 @@ async function liveIdentity(){
   return {release:value.releaseSha,calculationVersion:value.calculationVersion};
 }
 
-/** The only normal acceptance path. Any failed functional, speed, browser or
- * final ownership check restores exact ingress before an owned candidate stops. */
-export async function activateTransaction(io,{nonce,profile=PROFILE,routes=verifyGates()}){
+/** One exact integration removal, not an ordinary catalog release. The source
+ * proof, protected context, retired endpoints and rendered owner UI are all
+ * mandatory. A failed check restores ingress before the owned candidate stops. */
+export async function activateTransaction(io,{nonce,profile=PROFILE}){
   let started=false,switchAttempted=false,accepted=false,ingressState='retained';
   let phase='start',lastCompletedPhase=null;
   const step=async(name,run)=>{phase=name;const value=await run();lastCompletedPhase=name;return value;};
   try{
     await step('start',()=>io.start());started=true;
     await step('identity',()=>io.identity());
-    await step('aj-private',async()=>need((await io.aj('private'))?.passed===true,'aj_private_contract'));
-    await step('server-private',async()=>assertServerReceipt(await io.server('private'),nonce,'private',profile,routes));
+    await step('removal-private',async()=>assertRemovalReceipt(await io.removal('private'),nonce,'private',profile));
+    await step('browser',async()=>assertBrowserReceipt(await io.browser(),nonce,profile));
     await step('publication-guard',()=>io.guard());await step('fresh',()=>io.fresh());
     switchAttempted=true;ingressState='unknown';
     await step('switch',()=>io.switch());ingressState='candidate';
     await step('public-identity',()=>io.publicIdentity());
-    await step('aj-public',async()=>need((await io.aj('public'))?.passed===true,'aj_public_contract'));
-    await step('server-public',async()=>assertServerReceipt(await io.server('public'),nonce,'public',profile,routes));
-    await step('browser',async()=>assertBrowserReceipt(await io.browser(),nonce,profile));
+    await step('removal-public',async()=>assertRemovalReceipt(await io.removal('public'),nonce,'public',profile));
     await step('publication-guard',()=>io.guard());await step('identity',()=>io.identity());
     await step('accept',()=>io.accept());accepted=true;
-    return {version:1,release:profile.source,accepted,ingressState,nonce,lastCompletedPhase};
+    return {version:1,acceptance:ACCEPTANCE,release:profile.source,accepted,ingressState,nonce,lastCompletedPhase,
+      liveOwnerCrmVerified:false,catalogPerformanceRevalidated:false};
   }catch(error){
     // Freeze the original failure before rollback/cleanup commands complete.
     const details=failureDetails(error,{phase,lastCompletedPhase});
@@ -55,19 +55,22 @@ export async function activateTransaction(io,{nonce,profile=PROFILE,routes=verif
       if(switchAttempted){await io.rollback();ingressState='retained';}
       if(started)await io.cleanup();
     }catch{ingressState='unknown';}
-    error.ajOutcome={version:1,release:profile.source,accepted,ingressState,nonce,...details};
+    error.ajOutcome={version:1,acceptance:ACCEPTANCE,release:profile.source,accepted,ingressState,nonce,...details,
+      liveOwnerCrmVerified:false,catalogPerformanceRevalidated:false};
     throw error;
   }
 }
 
 async function activate(sourceRoot,directory){
-  const invocation=checkInvocation(),routes=verifyGates(),sourceProof=verifySource(sourceRoot);
+  const invocation=checkInvocation();verifyGates();const sourceProof=verifySource(sourceRoot);
   const reader=githubReader();
   const ci=await verifyControllerCi(reader,ROOT,invocation);
   await assertPublicationQuiescence(reader,process.env.GITHUB_RUN_ID);
   const imageBuild=JSON.parse(await fs.readFile(path.join(directory,'image-receipt.json'),'utf8'));
   need(imageBuild.controllerSha===invocation.sourceSha&&imageBuild.source===PROFILE.source&&imageBuild.tree===PROFILE.tree
     &&imageBuild.sourceProof.codeDiffSha256===sourceProof.codeDiffSha256
+    &&imageBuild.sourceProof.acceptance===ACCEPTANCE
+    &&imageBuild.sourceProof.protectedClosureSha256===sourceProof.protectedClosureSha256
     &&imageBuild.imageArchiveSha256===await fileDigest(path.join(directory,'image.tar')),'prepared_image_changed');
   need(process.env.JSON_STORAGE_DRIVER==='object'&&process.env.YC_OBJECT_STORAGE_ENDPOINT==='https://s3.regru.cloud'
     &&process.env.YC_OBJECT_STORAGE_BUCKET==='avtocena-staging-8120751'
@@ -92,7 +95,8 @@ async function activate(sourceRoot,directory){
       &&sha256(JSON.stringify(index.models))===PROFILE.privateIndexDigest,'private_index');
     const indexPath=path.join(directory,'calculation-v1.json');await fs.writeFile(indexPath,binary.data,{mode:0o400,flag:'wx'});
     lastCompletedPhase=phase;
-    const plan={version:1,source:PROFILE.source,tree:PROFILE.tree,sourceCalculationVersion:PROFILE.sourceCalculationVersion,
+    const plan={version:1,acceptance:ACCEPTANCE,protectedClosureSha256:PROFILE.protectedClosureSha256,
+      source:PROFILE.source,tree:PROFILE.tree,sourceCalculationVersion:PROFILE.sourceCalculationVersion,
       servingCalculationVersion:PROFILE.servingCalculationVersion,privateIndexDigest:PROFILE.privateIndexDigest,
       inventorySha256:PROFILE.inventorySha256,nonce,imageId:imageBuild.imageId,imageBuild,
       resourceFiles:imageBuild.resourceFiles,privateFileSha256:sha256(binary.data),privateFileBytes:binary.data.length,
@@ -107,7 +111,7 @@ async function activate(sourceRoot,directory){
     console.log(JSON.stringify({stage:'aj_controls_retired',...controls}));
     hostContacted=true;
     session=await step('ssh-connect',()=>openAjSshSession({root:ROOT,directory,nonce,authority,
-      browser:()=>runBrowserGate({root:ROOT,directory,nonce})}));
+      browser:()=>runBrowserGate({root:ROOT,sourceRoot,directory,nonce})}));
     await step('init',()=>session.call('init',{plan,planSha256:sha256(JSON.stringify(plan))}));
     await step('image',()=>session.upload('image',path.join(directory,'image.tar'),{bytes:imageBuild.imageArchiveBytes}));
     await step('private-index',()=>session.upload('private-index',indexPath));
@@ -121,12 +125,12 @@ async function activate(sourceRoot,directory){
     await step('resources',()=>session.call('resources',{files:resources}));
     phase='activation';
     outcome=await activateTransaction({
-      start:()=>session.call('start'),identity:()=>session.call('identity'),aj:phase=>session.call('aj-'+phase),
-      server:phase=>session.call('server-'+phase),guard:async()=>{await assertPublicationQuiescence(reader,process.env.GITHUB_RUN_ID);await authority.guard();},
+      start:()=>session.call('start'),identity:()=>session.call('identity'),removal:phase=>session.call('removal-'+phase),
+      guard:async()=>{await assertPublicationQuiescence(reader,process.env.GITHUB_RUN_ID);await authority.guard();},
       fresh:()=>session.call('fresh'),switch:async()=>{await session.call('switch');authority.setIngress('candidate');},
       publicIdentity:()=>session.call('public-identity'),browser:()=>session.call('browser'),accept:()=>session.call('accept'),
       rollback:async()=>{await session.call('rollback');authority.setIngress('retained');},cleanup:()=>session.call('cleanup'),
-    },{nonce,routes});
+    },{nonce});
     lastCompletedPhase=outcome.lastCompletedPhase;
     await step('close',()=>session.close());closed=true;
     await step('authority-release',()=>authority.release());

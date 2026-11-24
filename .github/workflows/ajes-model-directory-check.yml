@@ -1,9 +1,6 @@
-name: AJ System — bounded model directory check
+name: AJ System — bounded Japan model directory check
 on:
   workflow_dispatch:
-  push:
-    branches: [main]
-    paths: ['.github/market-runs/ajes-model-directory-check.json']
 permissions:
   contents: read
 jobs:

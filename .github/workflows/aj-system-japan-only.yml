@@ -32,7 +32,7 @@ jobs:
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
           node-version: '24.22.3'
-      - name: Verify exact AJ entry and unchanged required release gates
+      - name: Verify exact AJ removal scope and unchanged ordinary release gates
         id: profile
         working-directory: controller
         run: |
@@ -69,12 +69,12 @@ jobs:
           # checkout. Any other source change still fails verifySource below.
           git restore --source=HEAD --worktree -- apps/web/tsconfig.tsbuildinfo
           node --import tsx --import ./tests/helpers/offline-fetch.mjs --test --test-concurrency=1 tests/ajes-*.test.ts tests/china-source-switch.test.ts tests/related-offer-selection.test.ts tests/model-directory-markets.test.ts
-          node --import tsx --import ./tests/helpers/offline-fetch.mjs --test --test-concurrency=1 tests/dealer-offer-markets.test.ts tests/catalog-japan-filter-rail.test.ts tests/catalog-market-page-boundary.test.ts tests/catalog-deferred-recommendations.test.ts tests/catalog-collection-controls.test.ts tests/catalog-market-workflow-policy.test.ts tests/china-feed-cutover.test.ts tests/public-page-recovery.test.ts
+          node --import tsx --import ./tests/helpers/offline-fetch.mjs --test --test-concurrency=1 tests/dealer-offer-markets.test.ts tests/catalog-japan-filter-rail.test.ts tests/catalog-market-page-boundary.test.ts tests/catalog-deferred-recommendations.test.ts tests/catalog-collection-controls.test.ts tests/catalog-market-workflow-policy.test.ts tests/public-page-recovery.test.ts
           node --import tsx tests/browser/collection-controls.mjs
           # Keep the screenshots as evidence, outside the exact source checkout.
           test ! -e "$RUNNER_TEMP/aj-admin-fixture"
           mv -- artifacts/collection-controls "$RUNNER_TEMP/aj-admin-fixture"
-          rmdir artifacts
+          python3 -I -B -c 'from pathlib import Path; p=Path("artifacts"); p.rmdir() if not any(p.iterdir()) else None'
       - name: Preserve the verified owner admin fixture
         uses: actions/upload-artifact@v4
         with:
@@ -120,5 +120,7 @@ jobs:
             ${{ runner.temp }}/aj-japan-release/image-receipt.json
             ${{ runner.temp }}/aj-japan-release/safe-plan.json
             ${{ runner.temp }}/aj-japan-release/safe-result.json
+            ${{ runner.temp }}/aj-japan-release/browser/owner-ui-report.json
+            ${{ runner.temp }}/aj-japan-release/browser/fixture/controls-*.png
           retention-days: 7
           if-no-files-found: warn

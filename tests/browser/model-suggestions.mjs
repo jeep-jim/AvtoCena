@@ -47,24 +47,25 @@ try{for(const width of [390,1440]){
  console.log(JSON.stringify({width,directoryRequests,inventoryContexts:[...inventoryContexts],inputToSuggestionMs:timings}));await context.close();
 }
  if(process.env.MODEL_SUGGESTIONS_REQUESTS_ONLY!=='true'){
- // Empty source facets plus a failed supplier directory must keep the model picker useful.
+ // Empty Japan source facets plus a failed AJ directory must keep the model picker useful.
  for(const width of [390,1440]){
   const context=await browser.newContext({viewport:{width,height:900}}),page=await context.newPage();let attempts=0;
-  await page.route('**/api/catalog/source-models?**',route=>{attempts++;return route.fulfill({status:503,json:{error:'directory_unavailable'}});});
-  await page.goto(`http://127.0.0.1:${server.address().port}/?source=korea`);
-  await page.getByRole('button',{name:'Hyundai',exact:true}).click();
-  await modelInput(page).fill('ix 35');
-  const option=page.getByRole('button').filter({has:page.getByText('ix35',{exact:true})});await option.waitFor();
+  await page.route('**/api/catalog/source-models?**',route=>{assert.equal(new URL(route.request().url()).searchParams.get('market'),'japan');attempts++;return route.fulfill({status:503,json:{error:'directory_unavailable'}});});
+  await page.goto(`http://127.0.0.1:${server.address().port}/?market=japan&facets=empty`);
+  await page.getByRole('button',{name:'Toyota',exact:true}).click();
+  await modelInput(page).fill('Corolla');
+  const option=page.getByRole('button').filter({has:page.getByText('Corolla',{exact:true})});await option.waitFor();
   await page.getByRole('button',{name:'Не удалось загрузить все модели. Повторить'}).waitFor();
   await page.getByRole('button',{name:'Закрыть список моделей',exact:true}).click();
-  assert.match(await page.getByLabel('Выбрано').textContent(),/Hyundai \/ ix35/);
+  assert.match(await page.getByLabel('Выбрано').textContent(),/Toyota \/ Corolla/);
   await page.getByRole('button',{name:'Сбросить',exact:true}).click();
-  await modelInput(page).fill('ix 35');await option.waitFor();
+  await modelInput(page).fill('Corolla');await option.waitFor();
   await page.getByRole('button',{name:'Закрыть список моделей',exact:true}).click();
-  assert.match(await page.getByLabel('Выбрано').textContent(),/Hyundai \/ ix35/,'typed exact model also selects its unambiguous make');
+  assert.match(await page.getByLabel('Выбрано').textContent(),/Toyota \/ Corolla/,'typed exact model also selects its unambiguous make');
+  assert.ok(attempts>0,'Japan supplier failure is actually exercised');
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
-  await page.screenshot({path:`${out}/${width}-korea-directory-failure.png`});
-  console.log(JSON.stringify({width,koreaDirectoryFallback:true,supplierAttempts:attempts}));await context.close();
+  await page.screenshot({path:`${out}/${width}-japan-directory-failure.png`});
+  console.log(JSON.stringify({width,japanDirectoryFallback:true,supplierAttempts:attempts}));await context.close();
  }
  // The common picker must recover on every public market, with several makes,
  // and changing a make must preserve the previously selected model.
@@ -74,7 +75,7 @@ try{for(const width of [390,1440]){
  ]){
   const context=await browser.newContext({viewport:{width,height:900}}),page=await context.newPage();
   await page.route('**/api/catalog/**',route=>route.fulfill({status:503,json:{error:'unavailable'}}));
-  const facets=['japan','korea'].includes(market)?'&facets=empty':'';
+  const facets=market==='japan'?'&facets=empty':'';
   await page.goto(`http://127.0.0.1:${server.address().port}/?market=${market}${facets}`);
   await page.getByRole('button',{name:'Выбрать марки автомобилей'}).click();
   await page.getByPlaceholder('Найти марку').fill(make);
