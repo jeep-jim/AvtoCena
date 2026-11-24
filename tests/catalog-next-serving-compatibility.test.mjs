@@ -51,10 +51,13 @@ test('an exact descendant may change only the reviewed serving readers and targe
   await f.write('apps/web/lib/catalog/storage.ts', 'reviewed independent reader\n');
   await f.write('apps/web/app/api/catalog/home/route.ts', 'reviewed home reader\n');
   await f.write('apps/web/app/(public)/page.tsx', 'reviewed home SSR fallback\n');
+  await f.write('apps/web/lib/catalog/china-local-reader.ts', 'reviewed prepared city reader\n');
+  await f.write('apps/web/lib/catalog/china-city-query.mjs', 'reviewed read-only city selection\n');
   await f.write('tests/catalog-next-home.test.ts', 'reviewed reader assertion\n'); f.commit();
   const proof = await verifyServingCompatibility({...f, servingPlan: f.servingPlan()});
   assert.notEqual(proof.runtimeSha, proof.pricingRuntimeSha);
   assert.deepEqual(proof.pricingToServingFiles, ['apps/web/app/(public)/page.tsx', 'apps/web/app/api/catalog/home/route.ts',
+    'apps/web/lib/catalog/china-city-query.mjs', 'apps/web/lib/catalog/china-local-reader.ts',
     'apps/web/lib/catalog/storage.ts', 'tests/catalog-next-home.test.ts']);
   assert.equal(proof.pricingRuntimeSha, f.pricingPlan.runtimeSha);
   assert.equal(proof.protectedPricingPathsUnchanged, true);
@@ -63,7 +66,8 @@ test('an exact descendant may change only the reviewed serving readers and targe
 test('pricing, data, worker, encyclopedia and broad runtime changes are refused even when their diff is pinned', async t => {
   const f = await fixture(t);
   for (const filename of ['apps/web/lib/catalog/rates.ts', 'packages/engine/price.ts', 'data/private.json',
-    'scripts/catalog-next/pricing-generation.mjs', 'apps/web/lib/encyclopedia/calculation-index.ts', 'apps/web/app/api/other/route.ts']) {
+    'scripts/catalog-next/pricing-generation.mjs', 'scripts/catalog-next/query-index.mjs',
+    'scripts/catalog-next/query-semantics.mjs', 'apps/web/lib/encyclopedia/calculation-index.ts', 'apps/web/app/api/other/route.ts']) {
     await f.write(filename, 'unapproved pricing or unrelated change\n'); f.commit();
     await assert.rejects(verifyServingCompatibility({...f, servingPlan: f.servingPlan()}), /china_serving_change_scope/);
     f.git(['reset', '--hard', f.pricingPlan.runtimeSha]);

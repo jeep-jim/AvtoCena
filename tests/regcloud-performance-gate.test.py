@@ -13,6 +13,22 @@ FROZEN_ROUTES={
  '/cars/china/BMW/3%20SERIES?powerTo=160&sort=totalRub',
  '/api/catalog/search?market=china&budgetTo=1500000&pageSize=6',
 }
+SHARED_ROUTES={
+ '/api/health','/api/leads','/','/login','/autocalc','/cars','/cars?sort=totalRub',
+ '/cars/autocatalog','/cars/autocatalog?make=Changan',
+}
+CHINA_ROUTES={
+ '/cars?market=china&make=Volkswagen&page=2',
+ '/cars?market=china&city=%D0%9D%D0%BE%D0%B2%D0%BE%D0%BA%D1%83%D0%B7%D0%BD%D0%B5%D1%86%D0%BA',
+ '/api/catalog/search?market=china&marketPage=1&page=9',
+ '/cars/china/BMW/3?powerTo=160&sort=totalRub',
+ '/cars/china/BMW/3%20SERIES?powerTo=160&sort=totalRub',
+ '/api/catalog/search?market=china&budgetTo=1500000&pageSize=6',
+}
+EUROPE_ROUTES={
+ '/cars?market=europe&make=BMW&page=2',
+ '/api/catalog/search?market=europe&make=BMW&page=2',
+}
 class GateTests(unittest.TestCase):
  def test_live_candidate_uses_observed_ssh_peer_without_invented_ip(self):
   with patch.dict(gate.os.environ,{'SSH_CONNECTION':'8.8.4.4 54321 151.248.113.177 22'}):
@@ -118,7 +134,7 @@ class MarketScopeTests(unittest.TestCase):
   self.assertIn(('/api/health',.25,'health'),routes)
   self.assertIn(('/cars/autocatalog',2.0,'encyclopedia'),routes)
   self.assertIn(('/cars/autocatalog?make=Changan',2.0,'encyclopedia'),routes)
-  self.assertFalse(any('china' in p or p in ['/','/cars','/cars?sort=totalRub'] for p,_,_ in routes))
+  self.assertEqual({p for p,_,_ in routes},SHARED_ROUTES|{'/cars?market=korea'})
   with self.assertRaises(AssertionError):gate.validate('/cars?market=korea','catalog',200,b'<html>Unavailable</html>','x')
  def test_invalid_scope_fails_closed(self):
   for scope in ['all','korea,','korea,korea','bad','Korea']:
@@ -129,6 +145,18 @@ class MarketScopeTests(unittest.TestCase):
    gate.main()
   self.assertEqual(sample.call_count,len(gate.release_routes('korea'))*4)
   self.assertTrue(all('china' not in call.args[1] for call in sample.call_args_list))
+ def test_market_scope_recognizes_seo_paths_and_conflicting_selectors(self):
+  for path in CHINA_ROUTES:
+   self.assertTrue(gate.route_in_scope(path,['china']))
+   self.assertFalse(gate.route_in_scope(path,['europe']))
+  for path in EUROPE_ROUTES:
+   self.assertFalse(gate.route_in_scope(path,['china']))
+   self.assertTrue(gate.route_in_scope(path,['europe']))
+  for path in SHARED_ROUTES:
+   self.assertTrue(gate.route_in_scope(path,['china']))
+  self.assertFalse(gate.route_in_scope('/cars/europe/BMW/3?market=china',['china']))
+  self.assertFalse(gate.route_in_scope('/cars?market=china&market=europe',['china']))
+  self.assertTrue(gate.route_in_scope('/cars?market=china&market=europe',['china','europe']))
 
 class AcceptedBaselineTests(unittest.TestCase):
  def test_expired_slow_response_cannot_be_cleared_by_warm_retries(self):
@@ -176,21 +204,53 @@ class AcceptedBaselineTests(unittest.TestCase):
      with self.assertRaisesRegex(AssertionError,'accepted_speed_regression'):
       gate.check_baseline('local','/path','html','release',phase,ceiling+.000001,rows,True)
      self.assertEqual(sample.call_count,3 if phase=='warm' else 0)
- def test_scoped_enforced_acceptance_keeps_every_frozen_route_and_expiry_phase(self):
-  output=io.StringIO()
-  env={'AVTOCENA_RELEASE_MARKETS':'korea','AVTOCENA_SPEED_BASELINE_MODE':'enforce','AVTOCENA_SPEED_BASELINE':'docs/operations/2026-11-11-accepted-speed-baseline.json'}
-  with patch.dict(gate.os.environ,env),patch.object(sys,'argv',['gate','local','release']),patch.object(gate,'sample',return_value=.001) as sample,patch.object(gate.time,'sleep') as sleep,contextlib.redirect_stdout(output):
-   gate.main()
-  expected=FROZEN_ROUTES|{'/cars?market=korea'}
-  self.assertEqual(sample.call_count,len(expected)*4)
-  self.assertEqual([call.args[0] for call in sleep.call_args_list],[35,305])
-  rows=[json.loads(line) for line in output.getvalue().splitlines() if line.startswith('{')]
-  for phase in ['warm','after_ttl','after_directory_ttl']:
-   measured=[row for row in rows if row.get('performanceGate')==phase]
-   self.assertEqual(len(measured),len(expected));self.assertEqual({row['path'] for row in measured},expected)
-   enforced=[row for row in rows if row.get('speedBaseline')==phase]
-   self.assertEqual({row['path'] for row in enforced},FROZEN_ROUTES)
-   self.assertTrue(all(row['blocking'] for row in enforced))
+ def test_scoped_enforced_acceptance_keeps_target_and_shared_frozen_routes_in_every_phase(self):
+  expected_by_scope={
+   'china':SHARED_ROUTES|CHINA_ROUTES|{'/cars?market=china'},
+   'korea':SHARED_ROUTES|{'/cars?market=korea'},
+   'europe':SHARED_ROUTES|EUROPE_ROUTES|{'/cars?market=europe'},
+   'china,europe':FROZEN_ROUTES|{'/cars?market=china','/cars?market=europe'},
+   '':FROZEN_ROUTES,
+  }
+  original_routes=list(gate.ROUTES)
+  for scope,expected in expected_by_scope.items():
+   with self.subTest(scope=scope):
+    output=io.StringIO()
+    env={'AVTOCENA_RELEASE_MARKETS':scope,'AVTOCENA_SPEED_BASELINE_MODE':'enforce','AVTOCENA_SPEED_BASELINE':'docs/operations/2026-11-11-accepted-speed-baseline.json'}
+    with patch.dict(gate.os.environ,env),patch.object(sys,'argv',['gate','local','release']),patch.object(gate,'sample',return_value=.001) as sample,patch.object(gate.time,'sleep') as sleep,contextlib.redirect_stdout(output):
+     gate.main()
+    self.assertEqual(sample.call_count,len(expected)*4)
+    self.assertEqual({call.args[1] for call in sample.call_args_list},expected)
+    self.assertEqual([call.args[0] for call in sleep.call_args_list],[35,305])
+    rows=[json.loads(line) for line in output.getvalue().splitlines() if line.startswith('{')]
+    for phase in ['warm','after_ttl','after_directory_ttl']:
+     measured=[row for row in rows if row.get('performanceGate')==phase]
+     self.assertEqual(len(measured),len(expected));self.assertEqual({row['path'] for row in measured},expected)
+     enforced=[row for row in rows if row.get('speedBaseline')==phase]
+     self.assertEqual({row['path'] for row in enforced},FROZEN_ROUTES&expected)
+     self.assertTrue(all(row['blocking'] for row in enforced))
+    summary=rows[-1]
+    self.assertEqual(summary['marketScope'],scope)
+    self.assertEqual(set(summary['routes']),expected)
+    self.assertEqual(set(summary['acceptedBaselineRoutes']),FROZEN_ROUTES&expected)
+    self.assertEqual(summary['samples'],len(expected)*3)
+    self.assertTrue(summary['acceptedBaselineEnforced'])
+    self.assertEqual(gate.ROUTES,original_routes,'baseline additions must not mutate the route inventory')
+ def test_scoped_china_and_shared_regressions_still_block_in_all_cache_phases(self):
+  city='/cars?market=china&city=%D0%9D%D0%BE%D0%B2%D0%BE%D0%BA%D1%83%D0%B7%D0%BD%D0%B5%D1%86%D0%BA'
+  env={'AVTOCENA_RELEASE_MARKETS':'china','AVTOCENA_SPEED_BASELINE_MODE':'enforce','AVTOCENA_SPEED_BASELINE':'docs/operations/2026-11-11-accepted-speed-baseline.json'}
+  for target in [city,'/cars?sort=totalRub']:
+   for slow_at in [2,3,4]:
+    with self.subTest(target=target,slow_at=slow_at):
+     calls={}
+     def measured(base,path,kind,release):
+      calls[path]=calls.get(path,0)+1
+      return 89 if path==target and calls[path]>=slow_at else .001
+     with patch.dict(gate.os.environ,env),patch.object(sys,'argv',['gate','local','release']),patch.object(gate,'sample',side_effect=measured),patch.object(gate.time,'sleep') as sleep,contextlib.redirect_stdout(io.StringIO()):
+      with self.assertRaisesRegex(AssertionError,'accepted_speed_regression') as error:gate.main()
+     self.assertEqual(str(error.exception),'accepted_speed_regression:'+target)
+     self.assertEqual(calls[target],5 if slow_at==2 else slow_at,'expired-cache failures cannot use warm retries')
+     self.assertEqual([call.args[0] for call in sleep.call_args_list],[35,305][:slow_at-2])
  def test_repeated_slowdown_blocks_but_an_isolated_jitter_is_recorded(self):
   rows={'/path':[{'phase':'warm_'+str(i),'seconds':.5} for i in range(1,4)]+[{'phase':'after_ttl','seconds':1.0},{'phase':'after_directory_ttl','seconds':1.2}]}
   with patch.object(gate,'sample',side_effect=[.7,.8,.9]) as sample,contextlib.redirect_stdout(io.StringIO()):

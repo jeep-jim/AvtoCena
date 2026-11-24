@@ -13,6 +13,7 @@ import hashlib
 import http.client
 import importlib.util
 import json
+import math
 import os
 from pathlib import Path
 import re
@@ -35,6 +36,18 @@ FILE_NAMES = {'GENERATION.json', 'details.sqlite', 'query.sqlite', 'FILTER_SEMAN
 GENERATION_MOUNT = '/run/avtocena-china-generation'
 HOST_BULK_FILES = {'details.sqlite', 'query.sqlite', 'DISPOSITIONS.ndjson', 'FILTER_SEMANTICS.json',
                    'FX_RECEIPT.json', 'RECONCILIATION.json', 'image.tar'}
+FAILED_UPLOAD_RUNTIME = '822f925bb30c4e07010f6e14b6574f1b4bd6306e'
+FAILED_UPLOAD_CURRENT_RUNTIME = '5e62f9ff3a0079b07cd13b8ab912c5720dd22250'
+FAILED_UPLOAD_GENERATION = 'gen_china_45369451603_1'
+FAILED_UPLOAD_TARGETS = (
+    {'nonce': '2ab6a761ac784094d102edd7be8708af',
+     'planSha256': '998a10e522b1aacf493a309e9280075660816cb0d6926246884148f594d6d036',
+     'rollbackSha256': '40d76cec42314ab0085d4ee216ecfa85f3a0910e8f7e4b32f5eb22daddcc0030'},
+    {'nonce': 'ae835461a771911c083739ddbf03bead',
+     'planSha256': '09ef828f1b541f85a9eecb1b1c58305f8a6a3c379222ecc6b2ad57b41168a22f',
+     'rollbackSha256': 'b26506fabb43efa22e8b38c8163e8f0098a775d0ca33c8e3259124b0b5ce7f28'},
+)
+FAILED_UPLOAD_BULK_FILES = ('details.sqlite', 'query.sqlite', 'DISPOSITIONS.ndjson', 'image.tar')
 
 
 class ReleaseError(Exception):
@@ -330,6 +343,106 @@ def diagnosis_events(plan, since, until):
         connection.close()
 
 
+def saved_startup_diagnosis(directory):
+    filename = directory / 'STARTUP.json'
+    if not filename.exists():
+        return None
+    value, _ = diagnosis_json(filename)
+    keys = {'version', 'kind', 'ready', 'elapsedSeconds', 'attempts', 'health', 'candidate', 'reason'}
+    need(set(value) == keys and value.get('version') == 1 and value.get('kind') == 'china-host-startup-v1' and
+         type(value.get('ready')) is bool and type(value.get('elapsedSeconds')) in (int, float) and
+         math.isfinite(value['elapsedSeconds']) and 0 <= value['elapsedSeconds'] <= 3600 and
+         type(value.get('attempts')) is int and 0 <= value['attempts'] <= 10000 and
+         value.get('health') in {'not_checked', 'ok', 'connection_refused', 'timeout', 'invalid_json', 'identity_mismatch',
+                                 'http_response', 'connection_error', 'unavailable'} and
+         value.get('reason') in {'ready', 'timeout', 'exited', 'oom', 'restarted', 'inspect_unavailable'} and
+         value['ready'] == (value['reason'] == 'ready') and (not value['ready'] or value['health'] == 'ok'), 'diagnosis_startup')
+    candidate = value['candidate']
+    need(candidate is None or (isinstance(candidate, dict) and set(candidate) == {'running', 'status', 'exitCode', 'oomKilled', 'restartCount'} and
+         type(candidate.get('running')) is bool and type(candidate.get('oomKilled')) is bool and
+         type(candidate.get('exitCode')) is int and abs(candidate['exitCode']) <= 2147483647 and
+         type(candidate.get('restartCount')) is int and 0 <= candidate['restartCount'] <= 10000 and
+         candidate.get('status') in {'created', 'restarting', 'running', 'removing', 'paused', 'exited', 'dead'}), 'diagnosis_startup')
+    return value
+
+
+def saved_speed_sample(row, paths):
+    need(isinstance(row, dict), 'diagnosis_speed_sample')
+    phases = {'warm', 'after_ttl', 'after_directory_ttl'}
+    def numbers(names):
+        need(all(type(row.get(name)) in (int, float) and math.isfinite(row[name]) and 0 <= row[name] <= 86400
+                 for name in names), 'diagnosis_speed_number')
+        return {name: row[name] for name in names}
+    def booleans(names):
+        need(all(type(row.get(name)) is bool for name in names), 'diagnosis_speed_boolean')
+        return {name: row[name] for name in names}
+    if row.get('performanceGate') == 'summary':
+        need(row.get('marketScope') == 'china' and
+             all(isinstance(row.get(name), list) and len(row[name]) <= 64 and all(path in paths for path in row[name])
+                 for name in ('routes', 'acceptedBaselineRoutes')) and
+             all(type(row.get(name)) is int and 0 <= row[name] <= 10000 for name in ('samples', 'slowSamples')),
+             'diagnosis_speed_summary')
+        return {'performanceGate': 'summary', 'marketScope': 'china', 'routes': list(row['routes']),
+                'acceptedBaselineRoutes': list(row['acceptedBaselineRoutes']), 'samples': row['samples'], 'slowSamples': row['slowSamples'],
+                **booleans(('functionalPassed', 'performanceAccepted', 'latencyBlocking', 'acceptedBaselineEnforced'))}
+    need(isinstance(row.get('path'), str) and row['path'] in paths, 'diagnosis_speed_route')
+    route = {'path': row['path']}
+    if row.get('performanceRequest') in {'started', 'complete', 'failed'}:
+        result = {**route, 'performanceRequest': row['performanceRequest']}
+        if row['performanceRequest'] != 'started':
+            result.update(numbers(('seconds',)))
+        if row['performanceRequest'] == 'complete':
+            result.update(booleans(('functionalPassed',)))
+        if row['performanceRequest'] == 'failed':
+            errors = {'AssertionError', 'HTTPError', 'URLError', 'TimeoutError', 'JSONDecodeError', 'RemoteDisconnected',
+                      'IncompleteRead', 'ConnectionResetError', 'ConnectionRefusedError', 'ValueError', 'KeyError', 'TypeError',
+                      'OSError', 'SSLError', 'UnicodeDecodeError'}
+            result['errorType'] = row.get('errorType') if row.get('errorType') in errors else 'other'
+        return result
+    if row.get('speedBaseline') in phases:
+        result = {**route, 'speedBaseline': row['speedBaseline'],
+                  **numbers(('referenceSeconds', 'measurementNoiseSeconds', 'ceilingSeconds', 'seconds')),
+                  **booleans(('blocking', 'passed'))}
+        if 'recheckSeconds' in row or 'recheckMedianSeconds' in row:
+            values = row.get('recheckSeconds')
+            need(isinstance(values, list) and len(values) == 3 and
+                 all(type(value) in (int, float) and math.isfinite(value) and 0 <= value <= 86400 for value in values),
+                 'diagnosis_speed_recheck')
+            result.update(recheckSeconds=list(values), **numbers(('recheckMedianSeconds',)))
+        return result
+    if row.get('performanceGate') in phases:
+        return {**route, 'performanceGate': row['performanceGate'], **numbers(('seconds', 'ceiling')),
+                **booleans(('passed', 'functionalPassed', 'latencyBlocking'))}
+    raise ReleaseError('china_host_diagnosis_speed_sample')
+
+
+def saved_speed_diagnosis(directory, plan):
+    filename = directory / 'server-speed-result.json'
+    if not filename.exists():
+        return {'present': False, 'sha256': None, 'exitCode': None, 'samples': [], 'rejectedSamples': 0}
+    # Authenticate the exact uploaded gate and frozen reference before exposing
+    # only their known public route/sample fields. Neither file is executed.
+    for name in ('regcloud-performance-gate.py', 'accepted-speed-baseline.json'):
+        expected = next(row for row in plan['files'] if row['name'] == name)
+        regular(directory / name, 256 * 1024)
+        raw = (directory / name).read_bytes()
+        need(len(raw) == expected['bytes'] and sha(raw) == expected['sha256'], 'diagnosis_speed_source')
+    baseline, _ = diagnosis_json(directory / 'accepted-speed-baseline.json')
+    paths = {row['path'] for row in baseline['samples']}
+    paths.add('/cars?market=china')
+    value, raw = diagnosis_json(filename)
+    need(set(value) == {'exitCode', 'samples'} and type(value.get('exitCode')) is int and -255 <= value['exitCode'] <= 255 and
+         isinstance(value.get('samples'), list) and len(value['samples']) <= 512, 'diagnosis_speed_report')
+    samples = []
+    rejected = 0
+    for row in value['samples']:
+        try:
+            samples.append(saved_speed_sample(row, paths))
+        except (ReleaseError, TypeError, ValueError):
+            rejected += 1
+    return {'present': True, 'sha256': sha(raw), 'exitCode': value['exitCode'], 'samples': samples, 'rejectedSamples': rejected}
+
+
 def diagnose_startup(params):
     """Inspect exactly one failed first-release upload. No init, start, stop,
     file write, application request, state mutation or image load is reachable."""
@@ -433,6 +546,8 @@ def diagnose_startup(params):
         candidate = {'present': True, 'running': state['Running'], 'status': state['Status'],
                      'exitCode': state['ExitCode'], 'oomKilled': state['OOMKilled']}
     events = diagnosis_events(plan, since, until)
+    startup = saved_startup_diagnosis(directory)
+    server_speed = saved_speed_diagnosis(directory, plan)
     need(CONFIG.read_bytes() == ingress and
          protected_identity(docker('GET', '/containers/' + retained['Id'] + '/json')) == identity,
          'diagnosis_retained_changed')
@@ -445,6 +560,7 @@ def diagnose_startup(params):
     return {'version': 1, 'kind': 'china-host-startup-diagnosis-v1', 'readOnly': True, 'selector': dict(params),
             'nonce': plan['nonce'], 'planSha256': sha(plan_raw), 'rollbackSha256': sha(rollback_raw), 'outcome': 'rolled_back',
             'files': files, 'generationVerified': True, 'image': image_result, 'diskFreeBytes': free_bytes,
+            'startup': startup, 'serverSpeed': server_speed,
             'retained': {'identityConfirmed': True, 'running': True}, 'candidate': candidate, 'events': events}
 
 
@@ -791,6 +907,141 @@ def reuse_lock():
     except BaseException:
         os.close(lock)
         raise
+
+
+def prune_failed_uploads(params):
+    """Remove only the two reviewed failed local copies after first acceptance.
+
+    These nonces contain the SAME REG generation as the accepted runtime, so
+    they must never enter generation GC. No accepted pointer, ingress, Docker
+    object, directory, proof or REG object is mutated by this operation.
+    Missing files are an idempotent observation, not a claim that we freed them.
+    """
+    need(isinstance(params, dict) and set(params) == {'currentState', 'leaseExpiresAt'}, 'prune_parameters')
+    expiry = params.get('leaseExpiresAt')
+    need(isinstance(expiry, str) and re.fullmatch(r'\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(?:\.\d{1,6})?Z', expiry), 'prune_lease')
+    deadline = datetime.datetime.fromisoformat(expiry.replace('Z', '+00:00')).timestamp()
+    need(time.time() < deadline <= time.time() + 2 * 60 * 60, 'prune_lease')
+    state, _ = checked_publication_view(params['currentState'], committed=True)
+    reference = state['current']
+    need(reference['runtimeSha'] == FAILED_UPLOAD_CURRENT_RUNTIME and reference['generationId'] == FAILED_UPLOAD_GENERATION
+         and state.get('rollback') is None, 'prune_current')
+    lock = reuse_lock()
+    try:
+        current_receipt = verified_history(reference)
+        current = verify_live_reference(reference, current_receipt['nonce'])
+        retained = docker('GET', '/containers/' + current_receipt['retainedContainerId'] + '/json')
+        retained_env = env_map(retained)
+        need(retained['Id'] != current['Id'] and retained['State']['Running'] is True
+             and retained_env.get('AVTOCENA_RELEASE_SHA') == RETAINED
+             and retained_env.get('AVTOCENA_CALCULATION_VERSION') == CALCULATION, 'prune_retained')
+        ingress = CONFIG.read_bytes()
+        protected = {row['Id']: protected_identity(row) for row in (current, retained)}
+        targets = []
+        for target in FAILED_UPLOAD_TARGETS:
+            directory = BASE / FAILED_UPLOAD_RUNTIME / 'china-next' / target['nonce']
+            for parent in (BASE, directory.parent.parent, directory.parent, directory, directory / 'generation'):
+                private_directory(parent)
+            plan, plan_raw = diagnosis_json(directory / 'PLAN.json')
+            rollback, rollback_raw = diagnosis_json(directory / 'ROLLED_BACK.json')
+            need(sha(plan_raw) == target['planSha256'] and sha(rollback_raw) == target['rollbackSha256'], 'prune_proof_hash')
+            validate_plan(plan)
+            need(not generation_update(plan) and plan['runtimeSha'] == FAILED_UPLOAD_RUNTIME
+                 and plan['nonce'] == target['nonce'] and plan['generationId'] == FAILED_UPLOAD_GENERATION
+                 and plan['generationManifestSha256'] == reference['generationManifestSha256']
+                 and plan['privateGenerationReceiptSha256'] == reference['receiptSha256']
+                 and plan['pricingRuntimeSha'] == reference['pricingRuntimeSha'], 'prune_plan')
+            bindings = {'nonce': 'nonce', 'release': 'runtimeSha', 'pricingRuntimeSha': 'pricingRuntimeSha',
+                        'generationId': 'generationId', 'generationManifestSha256': 'generationManifestSha256',
+                        'imageId': 'imageId', 'privateGenerationReceiptSha256': 'privateGenerationReceiptSha256',
+                        'sourceDescriptorSha256': 'sourceDescriptorSha256'}
+            need(rollback.get('version') == 1 and rollback.get('kind') == 'china-host-rollback-v1'
+                 and all(rollback.get(left) == plan[right] for left, right in bindings.items())
+                 and rollback.get('retainedRuntimeSha') == RETAINED and rollback.get('retainedRunning') is True
+                 and rollback.get('candidateRemoved') is True and rollback.get('ingressRestored') is True
+                 and rollback.get('retainedContainerId') == retained['Id']
+                 and rollback.get('retainedImageId') == retained['Image'], 'prune_rollback')
+            descriptors = {row['name']: row for row in plan['files'] if row['name'] in FAILED_UPLOAD_BULK_FILES}
+            need(set(descriptors) == set(FAILED_UPLOAD_BULK_FILES), 'prune_files')
+            targets.append((directory, target, plan_raw, rollback_raw, descriptors))
+
+        def fence():
+            need(time.time() < deadline, 'prune_lease_expired')
+            regular(CONFIG, 1024 * 1024)
+            need(CONFIG.read_bytes() == ingress, 'ingress_changed')
+            for identity, expected in protected.items():
+                need(protected_identity(docker('GET', '/containers/' + identity + '/json')) == expected, 'prune_protected_changed')
+            # Re-read the persisted acceptance and its bound browser reports.
+            need(verified_history(reference) == current_receipt, 'prune_acceptance_changed')
+            check_mounted_reference(docker('GET', '/containers/' + current['Id'] + '/json'), reference, current_receipt['nonce'])
+            health(backend(ingress), reference['runtimeSha'])
+            for directory, target, plan_raw, rollback_raw, _ in targets:
+                for parent in (BASE, directory.parent.parent, directory.parent, directory, directory / 'generation'):
+                    private_directory(parent)
+                need(diagnosis_json(directory / 'PLAN.json')[1] == plan_raw and
+                     diagnosis_json(directory / 'ROLLED_BACK.json')[1] == rollback_raw, 'prune_proof_changed')
+                need(not os.path.lexists(directory / 'ACCEPTED.json') and not os.path.lexists(directory / 'ACCEPTED.pending'), 'prune_accepted_target')
+            rows = [docker('GET', '/containers/' + item['Id'] + '/json') for item in docker('GET', '/containers/json?all=1')]
+            for row in rows:
+                need(row.get('Config', {}).get('Labels', {}).get('avtocena.china.nonce') not in
+                     {target['nonce'] for _, target, _, _, _ in targets}, 'prune_candidate_exists')
+                for mount in row.get('Mounts', []):
+                    source = mount.get('Source')
+                    if not source:
+                        continue
+                    need(isinstance(source, str) and Path(source).is_absolute(), 'prune_mount_path')
+                    mounted = Path(source).resolve()
+                    for directory, _, _, _, _ in targets:
+                        need(mounted != directory and mounted not in directory.parents and directory not in mounted.parents,
+                             'prune_files_mounted')
+            need(CONFIG.read_bytes() == ingress, 'ingress_changed')
+
+        fence()
+        pending, absent = [], 0
+        for directory, target, _, _, descriptors in targets:
+            for name in FAILED_UPLOAD_BULK_FILES:
+                filename = (directory if name == 'image.tar' else directory / 'generation') / name
+                try:
+                    before = reuse_file_identity(filename)
+                except FileNotFoundError:
+                    absent += 1
+                    continue
+                descriptor = descriptors[name]
+                need(before[2] == descriptor['bytes'] and file_sha(filename) == descriptor['sha256']
+                     and reuse_file_identity(filename) == before, 'prune_file_hash')
+                pending.append((filename, before, descriptor['bytes']))
+        # All targets and remaining hashes are checked before the first unlink.
+        fence()
+        deleted = freed = 0
+        for filename, expected, size in pending:
+            fence()
+            need(reuse_file_identity(filename) == expected, 'prune_file_changed')
+            filename.unlink()
+            directory_fd = os.open(filename.parent, os.O_RDONLY | os.O_DIRECTORY)
+            try:
+                os.fsync(directory_fd)
+            finally:
+                os.close(directory_fd)
+            need(not os.path.lexists(filename), 'prune_file_still_present')
+            deleted += 1
+            freed += size
+        # Also make an interrupted prior unlink durable on a resumed run.
+        for directory, _, _, _, _ in targets:
+            for folder in (directory, directory / 'generation'):
+                directory_fd = os.open(folder, os.O_RDONLY | os.O_DIRECTORY)
+                try:
+                    os.fsync(directory_fd)
+                finally:
+                    os.close(directory_fd)
+        fence()
+        return {'version': 1, 'kind': 'china-failed-upload-prune-v1', 'completed': True,
+                'runtimeSha': reference['runtimeSha'], 'generationId': reference['generationId'],
+                'targetNonces': [target['nonce'] for target in FAILED_UPLOAD_TARGETS],
+                'filesDeleted': deleted, 'freedBytes': freed, 'alreadyAbsentFiles': absent,
+                'retiredContainers': 0, 'imagesDeleted': 0, 'directoriesDeleted': 0,
+                'privateGenerationDeletes': 0, 'acceptedStateWrites': 0}
+    finally:
+        os.close(lock)
 
 
 def reuse_file_identity(filename):
@@ -1468,7 +1719,7 @@ def main():
     signal.signal(signal.SIGHUP, lambda *_: (_ for _ in ()).throw(ReleaseError('china_host_disconnected')))
     signal.signal(signal.SIGALRM, lambda *_: (_ for _ in ()).throw(ReleaseError('china_host_browser_deadline')))
     host = None
-    recovered = maintenance = diagnosed = False
+    recovered = maintenance = diagnosed = pruned = False
     emit({'kind': 'ready', 'protocol': 1})
     try:
         while True:
@@ -1485,6 +1736,7 @@ def main():
             identity, method = call['id'], call['method']
             need(type(identity) is int and identity > 0, 'protocol_id')
             need(not diagnosed or method in {'diagnose', 'close'}, 'diagnosis_read_only')
+            need(not pruned or method in {'prune_failed_uploads', 'close'}, 'prune_protocol_scope')
             params = call.get('params', {})
             if method == 'diagnose':
                 need(host is None, 'diagnosis_after_init')
@@ -1498,6 +1750,10 @@ def main():
                 need(host is None, 'recovery_after_init')
                 value = retire_recovery(params)
                 recovered = maintenance = True
+            elif method == 'prune_failed_uploads':
+                need(host is None, 'prune_after_init')
+                value = prune_failed_uploads(params)
+                recovered = maintenance = pruned = True
             elif method == 'close' and host is None:
                 need(recovered, 'close_uninitialized')
                 emit({'kind': 'result', 'id': identity, 'value': {'closed': True, 'readOnly': not maintenance}})

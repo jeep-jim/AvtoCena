@@ -19,7 +19,7 @@ const FILES = ['GENERATION.json', 'details.sqlite', 'query.sqlite', 'FILTER_SEMA
   'regcloud-performance-gate.py', 'accepted-speed-baseline.json'];
 const git = async (root, args) => (await execute('git', ['-c', 'user.name=Startup diagnosis test',
   '-c', 'user.email=diagnosis@example.invalid', ...args], {cwd: root})).stdout.trim();
-const fixedNow = () => '2026-11-24T12:00:00.000Z';
+const fixedNow = () => '2026-11-24T12:40:00.000Z';
 
 function diagnostic() {
   return {version: 1, kind: 'china-host-startup-diagnosis-v1', readOnly: true, selector: {...SELECTOR},
@@ -28,7 +28,28 @@ function diagnostic() {
       sizeMatches: true, private: true})), generationVerified: true, diskFreeBytes: 10 * 1024 ** 3,
     image: {present: true, identityMatches: true}, retained: {identityConfirmed: true, running: true},
     candidate: {present: false, running: null, status: null, exitCode: null, oomKilled: null},
-    events: {available: true, reason: 'empty', rows: []}};
+    events: {available: true, reason: 'empty', rows: []}, startup: null,
+    serverSpeed: {present: false, sha256: null, exitCode: null, samples: [], rejectedSamples: 0}};
+}
+
+function timingDiagnostic() {
+  const value = diagnostic();
+  value.startup = {version: 1, kind: 'china-host-startup-v1', ready: true, elapsedSeconds: 0.8, attempts: 1,
+    health: 'ok', reason: 'ready', candidate: {running: true, status: 'running', exitCode: 0, oomKilled: false, restartCount: 0}};
+  const baseline = {speedBaseline: 'warm', path: '/api/health', referenceSeconds: 0.1, measurementNoiseSeconds: 0.05,
+    ceilingSeconds: 0.15, seconds: 0.25, blocking: true, passed: false};
+  value.serverSpeed = {present: true, sha256: 'd'.repeat(64), exitCode: 1, rejectedSamples: 1, samples: [
+    {performanceRequest: 'started', path: '/api/health'},
+    {performanceRequest: 'complete', path: '/api/health', seconds: 0.2, functionalPassed: true},
+    {performanceRequest: 'failed', path: '/cars?market=china', seconds: 90, errorType: 'TimeoutError'},
+    baseline, {...baseline, recheckSeconds: [0.2, 0.3, 0.4], recheckMedianSeconds: 0.3},
+    {performanceGate: 'after_ttl', path: '/cars?market=china', seconds: 1, ceiling: 2,
+      passed: true, functionalPassed: true, latencyBlocking: false},
+    {performanceGate: 'summary', marketScope: 'china', routes: ['/api/health', '/cars?market=china'],
+      acceptedBaselineRoutes: ['/api/health'], samples: 6, slowSamples: 1, functionalPassed: true,
+      performanceAccepted: false, latencyBlocking: false, acceptedBaselineEnforced: true},
+  ]};
+  return value;
 }
 
 async function fixture(run, {markerExtra = false, markerOperation = 'inspect-china-startup'} = {}) {
@@ -59,6 +80,8 @@ async function fixture(run, {markerExtra = false, markerOperation = 'inspect-chi
 }
 
 test('exact immutable marker-only push authorizes this fixed diagnosis without a manual bypass', async () => fixture(async f => {
+  assert.equal(SELECTOR.controllerSha, '781d0c7fa66e558d5d2047f876e65500167183a8');
+  assert.equal(SELECTOR.since, '2026-11-24T12:33:00Z'); assert.equal(SELECTOR.until, '2026-11-24T12:36:00Z');
   assert.deepEqual(verifyChinaStartupDiagnosisInvocation(f), {version: 1, event: 'push',
     sourceSha: f.sourceSha, approvedSourceSha: f.approvedSourceSha, markerPath: MARKER});
   for (const [key, value] of [['GITHUB_EVENT_NAME', 'workflow_dispatch'], ['GITHUB_EVENT_NAME', 'schedule'],
@@ -102,14 +125,16 @@ test('real invocation then frozen baseline gate precede the secret and only diag
       assert.equal((await fs.stat(directory)).mode & 0o777, 0o700);
       await fs.writeFile(path.join(directory, 'synthetic-key'), privateKey, {mode: 0o600});
       return {async call(method, selector) {
-        calls.push(method); assert.equal(method, 'diagnose'); assert.deepEqual(selector, SELECTOR); return diagnostic();
+        calls.push(method); assert.equal(method, 'diagnose'); assert.deepEqual(selector, SELECTOR); return timingDiagnostic();
       }, async close() { calls.push('close'); return {closed: true, readOnly: true}; },
       abort() { assert.fail('successful session must close normally'); }, exited: Promise.resolve({code: 0})};
     },
   }});
   assert.deepEqual(calls, ['verify', 'baselines', 'key', 'open', 'diagnose', 'close']);
   assert.equal(report.completed, true); assert.equal(report.status, 'complete');
-  assert.equal(report.failedRunId, '45382186572'); assert.deepEqual(report.selector, SELECTOR);
+  assert.deepEqual(report.diagnosis.startup, timingDiagnostic().startup);
+  assert.deepEqual(report.diagnosis.serverSpeed, timingDiagnostic().serverSpeed);
+  assert.equal(report.failedRunId, '45393054543'); assert.deepEqual(report.selector, SELECTOR);
   for (const field of ['hostMutations', 'storageWrites', 'providerCalls', 'pageRequests']) assert.equal(report[field], 0);
   assert.equal(report.finishedAt, fixedNow()); assert.equal(report.diagnosisControllerSha, f.sourceSha);
   assert.equal(report.approvedControllerSha, f.approvedSourceSha);
@@ -165,6 +190,58 @@ test('missing image/files and unavailable/empty event history remain findings, w
     time: Date.parse(SELECTOR.since) / 1000 + 40, exitCode: null, oom: true}, {action: 'die',
     time: Date.parse(SELECTOR.since) / 1000 + 41, exitCode: 137, oom: false}]};
   assert.deepEqual(validateChinaStartupDiagnosis(value), value);
+});
+
+test('saved startup and every typed server timing variant survive without raw host content', async () => {
+  const good = timingDiagnostic(), copied = validateChinaStartupDiagnosis(good);
+  assert.deepEqual(copied, good);
+  copied.serverSpeed.samples[4].recheckSeconds[0] = 30;
+  assert.equal(good.serverSpeed.samples[4].recheckSeconds[0], 0.2);
+  copied.startup.candidate.running = false; assert.equal(good.startup.candidate.running, true);
+  const baseline = JSON.parse(await fs.readFile(path.join(ROOT, 'docs/operations/2026-11-11-accepted-speed-baseline.json'), 'utf8'));
+  const paths = new Set([...baseline.samples.map(row => row.path), '/cars?market=china']);
+  assert.equal(paths.size, 18);
+  good.serverSpeed.samples = [...paths].map(route => ({performanceRequest: 'started', path: route}));
+  assert.deepEqual(validateChinaStartupDiagnosis(good), good);
+});
+
+test('extra private fields, foreign paths and unbounded saved timing values are rejected before publication', () => {
+  const changes = [
+    value => { value.startup.logs = 'private raw log'; },
+    value => { value.startup.candidate.env = ['SECRET=value']; },
+    value => { value.startup.elapsedSeconds = 3601; },
+    value => { value.startup.health = 'connection_refused'; },
+    value => { value.serverSpeed.raw = 'private raw stdout'; },
+    value => { value.serverSpeed.sha256 = null; },
+    value => { value.serverSpeed.sha256 = ['d'.repeat(64)]; },
+    value => { value.serverSpeed.exitCode = 256; },
+    value => { value.serverSpeed.exitCode = 1.5; },
+    value => { value.serverSpeed.rejectedSamples = -1; },
+    value => { value.serverSpeed.rejectedSamples = 512; },
+    value => { value.serverSpeed.samples = Array(513).fill({performanceRequest: 'started', path: '/api/health'}); },
+    value => { value.serverSpeed.samples[0].headers = {authorization: 'secret'}; },
+    value => { value.serverSpeed.samples[0].path = '/api/health?secret=private'; },
+    value => { value.serverSpeed.samples[1].seconds = NaN; },
+    value => { value.serverSpeed.samples[1].seconds = Infinity; },
+    value => { value.serverSpeed.samples[1].seconds = 86401; },
+    value => { value.serverSpeed.samples[1].functionalPassed = 1; },
+    value => { value.serverSpeed.samples[2].errorType = 'private exception message'; },
+    value => { value.serverSpeed.samples[3].speedBaseline = 'warm_1'; },
+    value => { value.serverSpeed.samples[4].recheckSeconds.pop(); },
+    value => { delete value.serverSpeed.samples[4].recheckMedianSeconds; },
+    value => { value.serverSpeed.samples[5].ceiling = -1; },
+    value => { value.serverSpeed.samples[6].routes = ['/crm/site']; },
+    value => { value.serverSpeed.samples[6].acceptedBaselineRoutes = ['/root/private']; },
+    value => { value.serverSpeed.samples[6].marketScope = 'all'; },
+    value => { value.serverSpeed.samples[6].samples = 10001; },
+    value => { value.serverSpeed.samples[6].slowSamples = false; },
+  ];
+  for (const change of changes) {
+    const bad = timingDiagnostic(); change(bad);
+    assert.throws(() => validateChinaStartupDiagnosis(bad), /china_startup_diagnosis_report_/);
+  }
+  const absent = diagnostic(); absent.serverSpeed.exitCode = 0;
+  assert.throws(() => validateChinaStartupDiagnosis(absent), /china_startup_diagnosis_report_speed_absent/);
 });
 
 test('transport failure is sanitized, aborts the open session and removes its local secret directory', async () => fixture(async f => {

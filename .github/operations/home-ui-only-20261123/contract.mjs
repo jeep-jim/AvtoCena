@@ -95,8 +95,11 @@ export const HOME_RUNTIME = Object.freeze({
 // These existing acceptance programs stay independent of the application tree.
 // The three extra server paths are restored by the core gate from its frozen
 // baseline; an empty market scope and that baseline produce all 17 routes.
+// The reviewed 24.11 market-scope fix changes only scoped selection. This
+// controller still forces full scope; its source, approval and baseline pins
+// remain separate from the exact shared executable digest below.
 export const GATE_FILES = Object.freeze({
-  'scripts/regcloud-performance-gate.py':'e16247e26a6ed63d3fb635b0ad1270a616d51b13f52bc6fe29b7801a1949d5ab',
+  'scripts/regcloud-performance-gate.py':'bbe1bac67ae9ca525fb794b264aa26bf6b8b0ab21ec015b245abe7a7b7a679c3',
   'scripts/regcloud-browser-verdict.py':'48853ef1f58e1cac5c3270adf8f03f7103b29ed83d8b1fb8d03573774cca827b',
   'scripts/regcloud-deploy-with-browser.sh':'8cc38243b319b66d98dac23a5e8c9a91a59e0a90fdf3ace3db58ffd79537d266',
   'scripts/verify-frozen-speed-baselines.mjs':'aff727f9b4ff5b26d875e887305ae850eb727585880595ac3d34ca774c19d38f',

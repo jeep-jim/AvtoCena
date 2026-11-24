@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "observedAt": "2026-11-24T12:46:40.248Z",
+  "run": "https://github.com/jeep-jim/AvtoCena/actions/runs/45396692055",
+  "failedRun": "https://github.com/jeep-jim/AvtoCena/actions/runs/45393054543",
+  "runtimeSha": "822f925bb30c4e07010f6e14b6574f1b4bd6306e",
+  "generationId": "gen_china_45369451603_1",
+  "serverSpeedSha256": "45c0ea2970a1bc0fa0b4a4b50d2b7651f8cf6a1c60f37792dbc40517179a7d38",
+  "blockingSamples": [
+    {
+      "path": "/cars?market=china&city=%D0%9D%D0%BE%D0%B2%D0%BE%D0%BA%D1%83%D0%B7%D0%BD%D0%B5%D1%86%D0%BA",
+      "speedBaseline": "warm",
+      "referenceSeconds": 0.0901,
+      "measurementNoiseSeconds": 0.05,
+      "ceilingSeconds": 0.1401,
+      "seconds": 1.8441491359844804,
+      "blocking": true,
+      "passed": false,
+      "recheckSeconds": [
+        0.8704,
+        0.8293,
+        1.1099
+      ],
+      "recheckMedianSeconds": 0.8704
+    }
+  ],
+  "retained": {
+    "identityConfirmed": true,
+    "running": true
+  },
+  "candidate": {
+    "present": false,
+    "running": null,
+    "status": null,
+    "exitCode": null,
+    "oomKilled": null
+  },
+  "outcome": "rolled_back",
+  "sourceCalls": 0,
+  "hostMutations": 0
+}

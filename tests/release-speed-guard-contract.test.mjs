@@ -4,6 +4,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
+import {execFileSync} from 'node:child_process';
 import {FROZEN_SPEED_BASELINES,verifyFrozenSpeedBaselines} from '../scripts/verify-frozen-speed-baselines.mjs';
 
 const root=process.cwd();
@@ -23,6 +24,15 @@ const fixture=run=>{
 test('both original accepted captures retain their independently pinned digests',()=>{
  assert.deepEqual(FROZEN_SPEED_BASELINES,expected);
  assert.doesNotThrow(()=>verifyFrozenSpeedBaselines(root));
+});
+
+test('the actual server gate preserves scoped market and shared acceptance against the complete frozen capture',()=>{
+ // Run the real Python gate with mocked I/O, including every expiry phase and
+ // blocking regressions. The release workflow runs this contract before SSH.
+ execFileSync('python3',['-I','-B','tests/regcloud-performance-gate.test.py','MarketScopeTests','AcceptedBaselineTests'],{
+  cwd:root,encoding:'utf8',stdio:'pipe',
+  env:{...process.env,AVTOCENA_RELEASE_MARKETS:'',AVTOCENA_SPEED_BASELINE_MODE:'observe',AVTOCENA_SPEED_BASELINE:''},
+ });
 });
 
 test('timing inflation, route substitution and request-budget inflation cannot replace accepted evidence',()=>{

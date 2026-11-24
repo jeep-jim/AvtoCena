@@ -1,0 +1,58 @@
+name: China exact failed local upload cleanup
+on:
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/catalog-next-china-failed-upload-cleanup.json']
+  workflow_dispatch:
+    inputs:
+      controller_sha:
+        description: Exact reviewed main controller SHA
+        required: true
+        type: string
+permissions:
+  contents: read
+concurrency:
+  group: catalog-next-china
+  cancel-in-progress: false
+jobs:
+  cleanup:
+    if: github.repository_id == '1289722938' && github.ref == 'refs/heads/main' && github.run_attempt == '1'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    environment: regcloud-staging
+    env:
+      EXPECTED_CONTROLLER_SHA: ${{ inputs.controller_sha }}
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 2
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24.22.3'
+          cache: npm
+      - name: Install reviewed controller dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Verify exact source, frozen baselines and bounded cleanup
+        run: |
+          node scripts/catalog-next/cleanup-failed-uploads.mjs --verify
+          node --test tests/readonly-marker-invocation.test.mjs tests/catalog-next-failed-upload-cleanup.test.mjs tests/catalog-next-failed-upload-cleanup-host.test.mjs tests/catalog-next-release-ssh.test.mjs tests/catalog-next-china-state.test.mjs
+      - name: Prune the two verified failed local uploads after acceptance
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+          JSON_STORAGE_DRIVER: object
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_REGION: us-east-1
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+        run: node scripts/catalog-next/cleanup-failed-uploads.mjs --run
+      - name: Preserve sanitized cleanup evidence
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: catalog-next-china-failed-upload-cleanup-report
+          path: catalog-next-china-failed-upload-cleanup-report.json
+          if-no-files-found: ignore
+          retention-days: 14

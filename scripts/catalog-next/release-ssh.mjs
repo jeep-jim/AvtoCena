@@ -8,7 +8,7 @@ import {createHash} from 'node:crypto';
 const need = (value, code) => assert(value, 'china_ssh_' + code);
 const hash = raw => createHash('sha256').update(raw).digest('hex');
 const quote = value => "'" + value.replaceAll("'", "'\\''") + "'";
-const methods = new Set(['init', 'resume_init', 'upload', 'start', 'functional', 'speed', 'switch', 'browser_evidence', 'accept', 'recover', 'diagnose', 'retire', 'retire_recovery', 'close']);
+const methods = new Set(['init', 'resume_init', 'upload', 'start', 'functional', 'speed', 'switch', 'browser_evidence', 'accept', 'recover', 'diagnose', 'retire', 'retire_recovery', 'prune_failed_uploads', 'close']);
 
 export function checkedStartupReport(value) {
   const keys = ['version', 'kind', 'ready', 'elapsedSeconds', 'attempts', 'health', 'candidate', 'reason'];
@@ -121,7 +121,7 @@ export class ChinaSshSession {
     let resolve, reject, readyResolve, readyReject;
     const result = new Promise((yes, no) => { resolve = yes; reject = no; }); result.catch(() => {});
     const ready = new Promise((yes, no) => { readyResolve = yes; readyReject = no; }); ready.catch(() => {});
-    const timeout = method === 'speed' ? 1600000 : method === 'start' ? 1200000 : ['upload', 'resume_init'].includes(method) ? 1800000 : 300000;
+    const timeout = method === 'speed' ? 1600000 : method === 'start' ? 1200000 : ['upload', 'resume_init', 'prune_failed_uploads'].includes(method) ? 1800000 : 300000;
     const timer = setTimeout(() => this.abort(Error('china_ssh_' + method + '_timeout')), timeout);
     this.pending.set(id, {resolve, reject, readyResolve, readyReject, timer});
     this.write(Buffer.from(JSON.stringify({id, method, params}) + '\n')).catch(error => this.abort(error));
