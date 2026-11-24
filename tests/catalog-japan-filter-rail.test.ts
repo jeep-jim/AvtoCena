@@ -2,14 +2,18 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {build} from 'esbuild';
 import {createRequire} from 'node:module';
+import {renderToStaticMarkup} from 'react-dom/server';
 const require=createRequire(import.meta.url);
 test('all-market filtered results retain Japan, filtered stock and navigation conditions',async()=>{
  const mocks:Record<string,string>={
- 'ajes-market-selection':`export const usesAjesMarket=async market=>['china','korea','japan'].includes(market);`,
+ 'china-public-aggregate':`export const omitLegacyChinaAggregate=()=>false;export const withChinaAggregateAuthority=(_market,run)=>run();`,
+ 'prepared-china-http-fixture':`export const hasIndependentChinaHttpFixture=()=>false;export const readPreparedChinaCompatibility=()=>{throw Error('unexpected China request');};export const readPreparedChinaHomeCards=()=>{throw Error('unexpected China request');};export class PreparedChinaFixtureUnavailable extends Error{}`,
+ 'editorial-overview':`export const readPublicCatalogOverview=async()=>null;`,
+ 'ajes-market-selection':`export const usesAjesMarket=async market=>market==='japan';`,
  'ajes-catalog':`export const withAjesCount=async x=>x;`,
  'green-corner-search':`export const filterGreenCorner=(items,params)=>items.filter(x=>x.make===params.make&&x.powerHp<=Number(params.powerTo));export const greenCornerFacets=()=>({makes:[],models:[],bodyTypes:[],fuels:[],transmissions:[],drives:[]});`,
  'green-corner':`export const readGreenCorner=async()=>({items:[{id:'match',make:'Volkswagen',powerHp:150},{id:'too-powerful',make:'Volkswagen',powerHp:200},{id:'wrong-brand',make:'Toyota',powerHp:100}]});export const publicGreenOffer=x=>x;export const readGreenCornerPage=async(items,params,clampPage,pageSize)=>{if(pageSize!==6)throw Error('preview must price six cards');const rows=items.filter(x=>x.make===params.make&&x.powerHp<=Number(params.powerTo));return {items:rows,total:rows.length}};`,
- 'storage':`export const readCatalogNavigationFacets=async()=>{if(globalThis.__catalogFixtureFail)throw Error('fixture outage');return {}};export const searchOffers=async()=>({total:0,items:[],page:1,pageSize:10});`,
+ 'storage':`export const readCatalogFacets=async()=>({});export const readCatalogNavigationFacets=async()=>{if(globalThis.__catalogFixtureFail)throw Error('fixture outage');return {}};export const searchOffers=async()=>({total:0,items:[],page:1,pageSize:10});`,
  'market-facets':`export const readGroupedCatalogFacets=async()=>({});`,
  'overview':`export const readCatalogOverview=async()=>null;`,
  'market-page':`export const readCatalogMarketPage=async()=>({total:0,items:[]});export const balanceBusinessRows=x=>x;export const businessOrder=()=>0;export const sortCatalogRows=x=>x;`,
@@ -29,14 +33,14 @@ test('all-market filtered results retain Japan, filtered stock and navigation co
  assert.equal(elements.filter(x=>x.type?.name==='ResolvedCatalogCount').length,1,'one public counter across layout slots');
  assert.equal(elements.filter(x=>x.type?.name==='BrandLogoRail').length,1,'one complete public brand rail');
  const counter=elements.find(x=>x.type?.name==='ResolvedCatalogCount');
- const summary=await counter.props.summary;assert.deepEqual(summary,{total:31,countIncomplete:true});
- const label=await counter.type(counter.props);assert.equal(label.type(label.props).props.children,'Общее количество уточняется');
+ const summary=await counter.props.summary;assert.deepEqual(summary,{total:11,countIncomplete:false});
+ const label=await counter.type(counter.props);assert.match(renderToStaticMarkup(label),/11/);
  const dealer={id:'test',markets:['japan'],href:'/dealers/test',preview:false};
  elements.length=0;walk(await m.exports.CatalogContent({params,dealer,embedded:true}));
  assert.deepEqual(await elements.find(x=>x.type?.name==='ResolvedCatalogCount').props.summary,{total:11,countIncomplete:false});
  elements.length=0;walk(tree);
  const rails=elements.filter(x=>x.type?.name==='AjesRail');
- assert.equal(rails.length,3);assert.deepEqual(rails.find(x=>!x.props.market).props.params,params);
+ assert.equal(rails.length,1);assert.deepEqual(rails.find(x=>!x.props.market).props.params,params);
  const green=elements.find(x=>x.type?.name==='GreenCornerRail');assert.equal(green.props.total,1);assert.equal(green.props.items[0].id,'match');
  const link=new URL(green.props.href,'https://avtocena.com');for(const [key,value] of Object.entries(params))assert.equal(link.searchParams.get(key),value);assert.equal(link.searchParams.get('stock'),'green');
  (globalThis as any).__catalogFixtureFail=true;

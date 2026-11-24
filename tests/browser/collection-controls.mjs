@@ -13,8 +13,10 @@ const server=http.createServer((req,res)=>{res.setHeader('Content-Type',req.url=
 await new Promise(r=>server.listen(0,'127.0.0.1',r));
 const browser=await chromium.launch({headless:true,executablePath:process.env.CHROME_BIN||undefined,args:['--no-sandbox']});
 try{for(const width of [1440,390]){
- const page=await browser.newPage({viewport:{width,height:1000}}),errors=[];page.on('pageerror',e=>errors.push(e.message));
+ const page=await browser.newPage({viewport:{width,height:1000}}),errors=[],retiredRequests=[];page.on('pageerror',e=>errors.push(e.message));
+ page.on('request',request=>{if(request.url().includes('/api/crm/ajes/markets/'))retiredRequests.push(request.url());});
  let controls=defaultCollectionControls(),gets=0,puts=0,conflict=false;
+ await page.route('**/api/crm/ajes/settings',route=>route.fulfill({json:{configured:true}}));
  await page.route('**/api/crm/collection-controls',async route=>{
   if(route.request().method()==='GET'){gets++;return route.fulfill({json:controls});}
   puts++;if(conflict)return route.fulfill({status:409,json:{error:'Настройки уже изменились. Обновите список.'}});
@@ -27,8 +29,17 @@ try{for(const width of [1440,390]){
  await page.goto(`http://127.0.0.1:${server.address().port}/crm/site`);
  assert.equal(gets,0,'collapsed section does not add a storage/API read');
  await page.getByText('Обновление каталога · парсеры и фиды',{exact:true}).click();
- const feed=page.getByRole('switch',{name:'Che168 · платный фид',exact:true}),reserve=page.getByRole('switch',{name:'Che168 · резервный парсер',exact:true}),market=page.getByRole('switch',{name:'Обновление рынка Китай',exact:true});
+ const feed=page.getByRole('switch',{name:'Che168 · платный фид Auto API',exact:true}),reserve=page.getByRole('switch',{name:'Che168 · резервный парсер',exact:true}),market=page.getByRole('switch',{name:'Обновление рынка Китай',exact:true});
  await feed.waitFor();assert.equal(await feed.getAttribute('aria-checked'),'true');assert.equal(await reserve.getAttribute('aria-checked'),'false');
+ assert.equal(await page.getByRole('switch',{name:/AJ System/}).count(),1);
+ await page.getByRole('switch',{name:'AJ System · платный фид Японии',exact:true}).waitFor();
+ await page.getByText('AJ System · доступ настроен',{exact:true}).waitFor();
+ assert.equal(await page.getByLabel('API-пароль',{exact:true}).count(),1);
+ for(const label of ['Китай','Корея']){
+  const section=page.locator('section').filter({has:page.getByRole('heading',{name:label,exact:true})});
+  assert.equal(await section.getByText(/AJ System/).count(),0);
+ }
+ assert.deepEqual(retiredRequests,[],'admin never loads removed AJ China/Korea connections');
  await market.click();await page.getByRole('status').filter({hasText:'Сохранено. Новые задания учтут настройку'}).waitFor();assert.equal(await feed.getAttribute('aria-checked'),'true');await page.getByText('Остановлен выключателем рынка',{exact:true}).waitFor();
  await market.click();await feed.click();await reserve.click();await page.waitForFunction(()=>document.querySelector('[aria-label="Che168 · резервный парсер"]')?.getAttribute('aria-checked')==='true');assert.equal(puts,4);
  await page.locator('div.py-3').filter({has:reserve}).getByText('Источник, частота и настройки',{exact:true}).click();
