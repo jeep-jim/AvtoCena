@@ -1,13 +1,11 @@
 name: Probe fixed projection reads only
 on:
   workflow_dispatch:
-  push:
-    branches: [main]
 permissions: {contents: read}
 concurrency: {group: owner-candidate-partial-read-diagnostic, cancel-in-progress: false}
 jobs:
   probe:
-    if: github.event_name == 'workflow_dispatch' || github.event.head_commit.message == 'Probe fixed candidate projection c7e00f72'
+    if: github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-24.04
     environment: regcloud-staging
     timeout-minutes: 10
