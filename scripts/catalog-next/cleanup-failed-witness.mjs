@@ -14,9 +14,18 @@ const MARKER = '.github/market-runs/catalog-next-china-failed-witness-cleanup.js
 const WORKFLOW = 'jeep-jim/AvtoCena/.github/workflows/catalog-next-china-failed-witness-cleanup.yml@refs/heads/main';
 const REPORT = 'catalog-next-china-failed-witness-cleanup-report.json';
 export const FAILED_WITNESS_CLEANUP_CURRENT = Object.freeze({
-  runtimeSha: '860e1ff601c6852eb3b1474982e52e3a5300c4af', generationId: 'gen_china_45369451603_1',
+  runtimeSha: '0fbd8bbf62cdea910645e73afccd1657c089b6a9', generationId: 'gen_china_45369451603_1',
 });
 export const FAILED_WITNESS_CLEANUP_TARGET = FAILED_UPLOAD_CLEANUP_WITNESS;
+export const FAILED_WITNESS_CLEANUP_TARGETS = Object.freeze([FAILED_WITNESS_CLEANUP_TARGET, Object.freeze({
+  ...FAILED_WITNESS_CLEANUP_TARGET,
+  runtimeSha: '860e1ff601c6852eb3b1474982e52e3a5300c4af',
+  nonce: 'df9db7228781df26f92a990a011eb1bd',
+  planSha256: '27888989f2a0e90e235f7a497fcce912ece493e9f5add5c40005e02ad991d9b2',
+  rollbackSha256: 'd550834e33b9cd9bf9b1be10c4c8f5358563d6aa56b2ba87794c9d5df9fdb5dd',
+  imageId: 'sha256:3c0389d7fcd0986a850d2f87c3259a75bddff3b0090ed0aef56eb1e190ef2238',
+})]);
+const TARGET_BYTES = Object.freeze([13041560320, 13041559296]);
 const need = (value, code) => { if (!value) throw Error('china_failed_witness_cleanup_' + code); };
 const object = value => value !== null && typeof value === 'object' && !Array.isArray(value);
 const keys = (value, expected) => object(value) && Object.keys(value).length === expected.length
@@ -37,16 +46,18 @@ export function verifyFailedWitnessCleanupInvocation({root = ROOT, environment =
   return verifyReadonlyInvocation({root, env: environment, markerPath: MARKER, operation: 'prune-failed-china-witness-after-first-acceptance'});
 }
 
-export function validateFailedWitnessCleanupReport(value) {
-  need(keys(value, ['version', 'kind', 'phase', 'completed', 'runtimeSha', 'generationId', 'targetFailedAttempt', 'earlierBulkFilesAbsent', 'filesDeleted',
+export function validateFailedWitnessCleanupReport(value, targetIndex = 0) {
+  need(Number.isInteger(targetIndex) && (targetIndex === 0 || targetIndex === 1), 'report_target');
+  const target = FAILED_WITNESS_CLEANUP_TARGETS[targetIndex];
+  need(keys(value, ['version', 'kind', 'phase', 'completed', 'runtimeSha', 'generationId', 'targetIndex', 'targetFailedAttempt', 'earlierBulkFilesAbsent', 'filesDeleted',
     'freedBytes', 'alreadyAbsentFiles', 'diskFreeBytesBefore', 'diskFreeBytesAfter', 'retiredContainers', 'imagesDeleted', 'directoriesDeleted', 'privateGenerationDeletes',
     'acceptedStateWrites', 'intentStateWrites']) && value.version === 1 && value.kind === 'china-failed-witness-prune-v1' && value.phase === 'after-first-acceptance' && value.completed === true
     && value.runtimeSha === FAILED_WITNESS_CLEANUP_CURRENT.runtimeSha && value.generationId === FAILED_WITNESS_CLEANUP_CURRENT.generationId
-    && keys(value.targetFailedAttempt, Object.keys(FAILED_WITNESS_CLEANUP_TARGET))
-    && Object.entries(FAILED_WITNESS_CLEANUP_TARGET).every(([key, expected]) => value.targetFailedAttempt[key] === expected)
+    && value.targetIndex === targetIndex && keys(value.targetFailedAttempt, Object.keys(target))
+    && Object.entries(target).every(([key, expected]) => value.targetFailedAttempt[key] === expected)
     && value.earlierBulkFilesAbsent === 8, 'report_identity');
   need(natural(value.filesDeleted) && natural(value.alreadyAbsentFiles) && value.filesDeleted + value.alreadyAbsentFiles === 4
-    && natural(value.freedBytes) && value.freedBytes <= 13041560320
+    && natural(value.freedBytes) && value.freedBytes <= TARGET_BYTES[targetIndex]
     && (value.filesDeleted > 0 ? value.freedBytes > 0 : value.freedBytes === 0)
     && natural(value.diskFreeBytesBefore) && natural(value.diskFreeBytesAfter), 'report_counts');
   need(['retiredContainers', 'imagesDeleted', 'directoriesDeleted', 'privateGenerationDeletes', 'acceptedStateWrites', 'intentStateWrites']
@@ -69,7 +80,7 @@ function acceptedFirstPublication(view) {
     && view.accepted.value.commit.nonce === view.intent.value.nonce, 'accepted_state');
 }
 
-/** After real runtime 860e acceptance, retire only the exact failed 5e upload.
+/** After real first acceptance, retire only the exact failed 5e and 860e uploads.
  * It cannot reserve, commit or abort a
  * publication, delete a REG generation, switch ingress or alter containers.
  * Test substitutions are in-process only; the CLI has no target/path override. */
@@ -80,8 +91,9 @@ export async function runFailedWitnessCleanup({root = ROOT, environment = proces
   need(object(capabilities) && Object.keys(capabilities).every(key => Object.hasOwn(defaults, key) && typeof capabilities[key] === 'function')
     && path.isAbsolute(root) && typeof now === 'function' && typeof log === 'function', 'arguments');
   const use = {...defaults, ...capabilities};
-  const report = {version: 1, kind: 'china-failed-witness-cleanup-v1', market: 'china', phase: 'after-first-acceptance', completed: false, status: 'starting',
-    current: FAILED_WITNESS_CLEANUP_CURRENT, targetFailedAttempt: FAILED_WITNESS_CLEANUP_TARGET, filesDeleted: null, freedBytes: null, alreadyAbsentFiles: null,
+  const report = {version: 2, kind: 'china-failed-witness-cleanup-v2', market: 'china', phase: 'after-first-acceptance', completed: false, status: 'starting',
+    current: FAILED_WITNESS_CLEANUP_CURRENT, targetFailedAttempts: FAILED_WITNESS_CLEANUP_TARGETS, partialResults: [],
+    filesDeleted: null, freedBytes: null, alreadyAbsentFiles: null,
     diskFreeBytesBefore: null, diskFreeBytesAfter: null,
     acceptedStateWrites: 0, intentStateWrites: 0, privateGenerationDeletes: 0, leaseRelease: 'not_acquired'};
   let state, lease, expected, session, directory, failure, hostStarted = false, hostSettled = false;
@@ -113,16 +125,23 @@ export async function runFailedWitnessCleanup({root = ROOT, environment = proces
     const temporary = await fs.realpath(environment.RUNNER_TEMP);
     directory = await fs.mkdtemp(path.join(temporary, 'china-failed-witness-cleanup-')); await fs.chmod(directory, 0o700);
     session = await use.openSession({root, directory, privateKey});
-    const currentState = await assertAuthority();
-    hostStarted = true;
-    let raw;
-    try { raw = await session.call('prune_failed_witness', {currentState, leaseExpiresAt: lease.value.expiresAt}); hostSettled = true; }
-    catch (error) { hostSettled = /^china_host_[a-z0-9_]+$/.test(error?.message ?? ''); throw error; }
-    report.result = validateFailedWitnessCleanupReport(raw);
-    for (const key of ['filesDeleted', 'freedBytes', 'alreadyAbsentFiles', 'diskFreeBytesBefore', 'diskFreeBytesAfter']) report[key] = report.result[key];
-    await assertAuthority();
+    for (const targetIndex of [0, 1]) {
+      const currentState = await assertAuthority();
+      hostStarted = true; hostSettled = false;
+      let raw;
+      try { raw = await session.call('prune_failed_witness', {currentState, leaseExpiresAt: lease.value.expiresAt, targetIndex}); hostSettled = true; }
+      catch (error) { hostSettled = /^china_host_[a-z0-9_]+$/.test(error?.message ?? ''); throw error; }
+      report.partialResults.push(validateFailedWitnessCleanupReport(raw, targetIndex));
+      await assertAuthority();
+    }
     const closed = await session.close();
     need(closed?.closed === true && closed.readOnly === false, 'close'); session = null;
+    // Only a fully verified two-target result has an aggregate. On any failure
+    // the individual authenticated results remain explicitly partial instead.
+    report.results = report.partialResults; delete report.partialResults;
+    for (const key of ['filesDeleted', 'freedBytes', 'alreadyAbsentFiles']) report[key] = report.results.reduce((sum, value) => sum + value[key], 0);
+    report.diskFreeBytesBefore = report.results[0].diskFreeBytesBefore;
+    report.diskFreeBytesAfter = report.results[1].diskFreeBytesAfter;
     report.completed = true; report.status = 'complete';
   } catch (error) {
     failure = Error(safeCode(error)); report.status = 'needs_recheck'; report.errorCode = failure.message;

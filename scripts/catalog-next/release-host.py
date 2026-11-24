@@ -58,8 +58,16 @@ FAILED_UPLOAD_TARGETS = (
      'rollbackSha256': 'b26506fabb43efa22e8b38c8163e8f0098a775d0ca33c8e3259124b0b5ce7f28'},
 )
 FAILED_UPLOAD_BULK_FILES = ('details.sqlite', 'query.sqlite', 'DISPOSITIONS.ndjson', 'image.tar')
-FAILED_WITNESS_ACCEPTED_RUNTIME = '860e1ff601c6852eb3b1474982e52e3a5300c4af'
-FAILED_WITNESS_BULK_BYTES = 13041560320
+FAILED_WITNESS_ACCEPTED_RUNTIME = '0fbd8bbf62cdea910645e73afccd1657c089b6a9'
+FAILED_WITNESS_TARGETS = (FAILED_UPLOAD_WITNESS, {
+    **FAILED_UPLOAD_WITNESS,
+    'runtimeSha': '860e1ff601c6852eb3b1474982e52e3a5300c4af',
+    'nonce': 'df9db7228781df26f92a990a011eb1bd',
+    'planSha256': '27888989f2a0e90e235f7a497fcce912ece493e9f5add5c40005e02ad991d9b2',
+    'rollbackSha256': 'd550834e33b9cd9bf9b1be10c4c8f5358563d6aa56b2ba87794c9d5df9fdb5dd',
+    'imageId': 'sha256:3c0389d7fcd0986a850d2f87c3259a75bddff3b0090ed0aef56eb1e190ef2238',
+})
+FAILED_WITNESS_BULK_BYTES = (13041560320, 13041559296)
 
 
 class ReleaseError(Exception):
@@ -1113,18 +1121,20 @@ def prune_failed_uploads(params):
 
 
 def prune_failed_witness(params):
-    """Retire only the failed 5e bulk copy after the exact 860e acceptance.
+    """Retire one of two fixed failed bulk copies after exact acceptance.
 
     Earlier 822 bulk copies must already be absent. All small proofs, the live
     accepted generation, retained 56, images and REG objects are preserved.
     """
-    need(isinstance(params, dict) and set(params) == {'currentState', 'leaseExpiresAt'}, 'witness_parameters')
+    need(isinstance(params, dict) and set(params) == {'currentState', 'leaseExpiresAt', 'targetIndex'}, 'witness_parameters')
+    target_index = params['targetIndex']
+    need(type(target_index) is int and target_index in (0, 1), 'witness_target')
     expiry = params.get('leaseExpiresAt')
     need(isinstance(expiry, str) and re.fullmatch(r'\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(?:\.\d{1,6})?Z', expiry), 'witness_lease')
     deadline = datetime.datetime.fromisoformat(expiry.replace('Z', '+00:00')).timestamp()
     need(time.time() < deadline <= time.time() + 2 * 60 * 60, 'witness_lease')
     state, _ = checked_publication_view(params['currentState'], committed=True)
-    reference, target = state['current'], FAILED_UPLOAD_WITNESS
+    reference, target = state['current'], FAILED_WITNESS_TARGETS[target_index]
     need(reference['runtimeSha'] == FAILED_WITNESS_ACCEPTED_RUNTIME and state.get('rollback') is None
          and reference['generationId'] == target['generationId']
          and reference['pricingRuntimeSha'] == target['pricingRuntimeSha']
@@ -1167,6 +1177,9 @@ def prune_failed_witness(params):
             protected_files[filename] = reuse_file_identity(filename)
 
         directory = BASE / target['runtimeSha'] / 'china-next' / target['nonce']
+        need(directory != current_directory and directory not in current_directory.parents
+             and current_directory not in directory.parents and target['nonce'] != accepted_receipt['nonce'],
+             'witness_current_alias')
         check_directories(directory)
         plan, plan_raw = diagnosis_json(directory / 'PLAN.json')
         rollback, rollback_raw = diagnosis_json(directory / 'ROLLED_BACK.json')
@@ -1188,7 +1201,7 @@ def prune_failed_witness(params):
         proof_identities = {directory / name: reuse_file_identity(directory / name) for name in ('PLAN.json', 'ROLLED_BACK.json')}
         descriptors = {row['name']: row for row in plan['files'] if row['name'] in FAILED_UPLOAD_BULK_FILES}
         need(set(descriptors) == set(FAILED_UPLOAD_BULK_FILES)
-             and sum(row['bytes'] for row in descriptors.values()) == FAILED_WITNESS_BULK_BYTES, 'witness_files')
+             and sum(row['bytes'] for row in descriptors.values()) == FAILED_WITNESS_BULK_BYTES[target_index], 'witness_files')
         earlier = []
         for old in FAILED_UPLOAD_TARGETS:
             old_directory = BASE / FAILED_UPLOAD_RUNTIME / 'china-next' / old['nonce']
@@ -1292,7 +1305,7 @@ def prune_failed_witness(params):
         free_after = disk_free_bytes()
         return {'version': 1, 'kind': 'china-failed-witness-prune-v1', 'phase': 'after-first-acceptance', 'completed': True,
                 'runtimeSha': reference['runtimeSha'], 'generationId': reference['generationId'],
-                'targetFailedAttempt': dict(target), 'earlierBulkFilesAbsent': 8,
+                'targetIndex': target_index, 'targetFailedAttempt': dict(target), 'earlierBulkFilesAbsent': 8,
                 'filesDeleted': deleted, 'freedBytes': freed, 'alreadyAbsentFiles': absent,
                 'diskFreeBytesBefore': free_before, 'diskFreeBytesAfter': free_after,
                 'retiredContainers': 0, 'imagesDeleted': 0, 'directoriesDeleted': 0,
