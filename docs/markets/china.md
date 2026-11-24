@@ -32,3 +32,9 @@ AJ System, Che168 HTML и Autohome не используются как альт
 - Снимок курсов по запуску: `scripts/lib/market-feed-rates.mjs`.
 
 Наличие старого модуля не разрешает повторный запуск прежнего общего publisher. Общие условия: [contract.md](contract.md); прогресс: [current.md](current.md).
+
+## Удаление прежнего запуска при переходе
+
+- Закрыть прежнюю цепочку workflow: `catalog-refresh-china` → `catalog-prepare-owned-china` → `stage-owned-china-generation` → `accept-owned-china-generation`, её markers и follower `catalog-che168-verify-publication`.
+- Удалить вход `recover_existing_intake`: он запускает общий publisher из закреплённого `bb6317b…`, поэтому удаления его файлов только из main недостаточно. Также убрать старый китайский вход `catalog-v2-china`.
+- Общий publisher и reusable других рынков сохраняются до их собственной замены. Новый Китай их не вызывает. Совместимость reader проверять с принятым runtime из `current.md`, а не предполагать, что main уже установлен.
