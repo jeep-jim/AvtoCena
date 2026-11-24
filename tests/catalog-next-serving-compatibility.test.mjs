@@ -63,11 +63,23 @@ test('an exact descendant may change only the reviewed serving readers and targe
   assert.equal(proof.protectedPricingPathsUnchanged, true);
 });
 
+test('the exact range-control component and its isolated browser fixture may preserve prepared pricing', async t => {
+  const f = await fixture(t);
+  const files = ['apps/web/components/catalog/CatalogFilters.tsx', 'tests/browser/catalog-range-commit-fixture.tsx',
+    'tests/browser/catalog-range-commit.mjs'];
+  for (const filename of files) await f.write(filename, 'reviewed committed-range behavior\n');
+  f.commit();
+  const proof = await verifyServingCompatibility({...f, servingPlan: f.servingPlan()});
+  assert.deepEqual(proof.pricingToServingFiles, files);
+  assert.equal(proof.protectedPricingPathsUnchanged, true);
+});
+
 test('pricing, data, worker, encyclopedia and broad runtime changes are refused even when their diff is pinned', async t => {
   const f = await fixture(t);
   for (const filename of ['apps/web/lib/catalog/rates.ts', 'packages/engine/price.ts', 'data/private.json',
     'scripts/catalog-next/pricing-generation.mjs', 'scripts/catalog-next/query-index.mjs',
-    'scripts/catalog-next/query-semantics.mjs', 'apps/web/lib/encyclopedia/calculation-index.ts', 'apps/web/app/api/other/route.ts']) {
+    'scripts/catalog-next/query-semantics.mjs', 'apps/web/lib/encyclopedia/calculation-index.ts', 'apps/web/app/api/other/route.ts',
+    'apps/web/components/catalog/UnreviewedFilters.tsx', 'tests/browser/owner-filter-speed-live.mjs']) {
     await f.write(filename, 'unapproved pricing or unrelated change\n'); f.commit();
     await assert.rejects(verifyServingCompatibility({...f, servingPlan: f.servingPlan()}), /china_serving_change_scope/);
     f.git(['reset', '--hard', f.pricingPlan.runtimeSha]);

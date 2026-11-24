@@ -6,16 +6,17 @@ import os from 'node:os';
 import {execFileSync} from 'node:child_process';
 import {createChinaState} from '../scripts/catalog-next/china-state.mjs';
 import {hash, empty, stateStore} from './helpers/catalog-next-gc-fixture.mjs';
-import {FAILED_WITNESS_CLEANUP_CURRENT as CURRENT, FAILED_WITNESS_CLEANUP_TARGET as TARGET, verifyFailedWitnessCleanupInvocation,
+import {FAILED_WITNESS_CLEANUP_CURRENT as CURRENT, FAILED_WITNESS_CLEANUP_TARGET as TARGET, FAILED_WITNESS_CLEANUP_TARGETS as TARGETS, verifyFailedWitnessCleanupInvocation,
   validateFailedWitnessCleanupReport, runFailedWitnessCleanup} from '../scripts/catalog-next/cleanup-failed-witness.mjs';
 
 const clock = '2026-11-24T20:00:00.000Z', controller = '1'.repeat(40), nonce = 'c'.repeat(32);
 const REPORT = 'catalog-next-china-failed-witness-cleanup-report.json';
 const WORKFLOW = 'jeep-jim/AvtoCena/.github/workflows/catalog-next-china-failed-witness-cleanup.yml@refs/heads/main';
-function result() {
+function result(targetIndex = 0) {
   return {version: 1, kind: 'china-failed-witness-prune-v1', phase: 'after-first-acceptance', completed: true, ...CURRENT,
-    targetFailedAttempt: {...TARGET}, earlierBulkFilesAbsent: 8,
-    filesDeleted: 4, freedBytes: 13041560320, alreadyAbsentFiles: 0, diskFreeBytesBefore: 14000000000, diskFreeBytesAfter: 27000000001,
+    targetIndex, targetFailedAttempt: {...TARGETS[targetIndex]}, earlierBulkFilesAbsent: 8,
+    filesDeleted: 4, freedBytes: [13041560320, 13041559296][targetIndex], alreadyAbsentFiles: 0,
+    diskFreeBytesBefore: [14000000000, 26000000000][targetIndex], diskFreeBytesAfter: [27000000001, 39000000002][targetIndex],
     retiredContainers: 0, imagesDeleted: 0, directoriesDeleted: 0, privateGenerationDeletes: 0, acceptedStateWrites: 0, intentStateWrites: 0};
 }
 
@@ -47,7 +48,7 @@ async function fixture(t, {runtimeSha = CURRENT.runtimeSha, generationId = CURRE
       hostReceiptSha256: hash(receipt), browserSpeedBytes, browserDetailsBytes}});
     await state.releaseLease({lease});
   }
-  const calls = [], hooks = {};
+  const calls = [], targets = [], hooks = {};
   const storage = {async assertPrivateBucket() { calls.push('privacy'); return {verified: true}; },
     async read(name) { calls.push('read:' + name); await hooks.read?.(name); return raw.read(name); },
     async compareAndSwap(name, previous, next) {
@@ -56,10 +57,12 @@ async function fixture(t, {runtimeSha = CURRENT.runtimeSha, generationId = CURRE
     }};
   const session = {
     async call(method, parameters) { calls.push(method); assert.equal(method, 'prune_failed_witness');
-      assert.deepEqual(Object.keys(parameters).sort(), ['currentState', 'leaseExpiresAt']);
+      assert.deepEqual(Object.keys(parameters).sort(), ['currentState', 'leaseExpiresAt', 'targetIndex']);
+      assert.equal(parameters.targetIndex, targets.length); targets.push(parameters.targetIndex);
       assert.deepEqual(parameters.currentState.accepted, await state.read('accepted'));
       assert.equal(parameters.leaseExpiresAt, '2026-11-24T21:00:00.000Z');
-      await hooks.call?.(); return hooks.result ?? result(); },
+      await hooks.call?.(parameters.targetIndex);
+      return typeof hooks.result === 'function' ? hooks.result(parameters.targetIndex) : hooks.result ?? result(parameters.targetIndex); },
     async close() { calls.push('close'); await hooks.close?.(); return {closed: true, readOnly: false}; },
     abort() { calls.push('abort'); }, exited: Promise.resolve({code: 0, signal: null}),
   };
@@ -68,17 +71,19 @@ async function fixture(t, {runtimeSha = CURRENT.runtimeSha, generationId = CURRE
     async openSession() { calls.push('open'); await hooks.open?.(); return session; }};
   const options = {root, environment: {GITHUB_RUN_ID: '1002', GITHUB_RUN_ATTEMPT: '1', RUNNER_TEMP: root,
     SSH_PRIVATE_KEY: 'test secret never printed'}, capabilities, now: () => clock};
-  return {root, raw, state, calls, hooks, session, options};
+  return {root, raw, state, calls, targets, hooks, session, options};
 }
 
 test('exact accepted state and China lease fence local cleanup; only lease is written', async t => {
   const f = await fixture(t), before = await f.state.read('accepted');
   const report = await runFailedWitnessCleanup(f.options);
-  assert.equal(report.completed, true); assert.equal(report.freedBytes, 13041560320);
-  assert.equal(report.diskFreeBytesBefore, 14000000000); assert.equal(report.diskFreeBytesAfter, 27000000001);
+  assert.equal(report.completed, true); assert.equal(report.freedBytes, 26083119616); assert.equal(report.filesDeleted, 8);
+  assert.equal(report.diskFreeBytesBefore, 14000000000); assert.equal(report.diskFreeBytesAfter, 39000000002);
+  assert.deepEqual(f.targets, [0, 1]); assert.deepEqual(report.results.map(value => value.targetIndex), [0, 1]);
+  assert.equal(Object.hasOwn(report, 'partialResults'), false);
   assert.equal(report.leaseRelease, 'released'); assert.deepEqual(await f.state.read('accepted'), before);
   assert.deepEqual(f.calls.filter(name => !name.startsWith('read:')), ['verify', 'baselines', 'storage', 'privacy',
-    'lease:held', 'open', 'prune_failed_witness', 'close', 'lease:released']);
+    'lease:held', 'open', 'prune_failed_witness', 'prune_failed_witness', 'close', 'lease:released']);
   assert.equal((await f.state.read('lease')).value.status, 'released');
   const output = await fs.readFile(path.join(f.root, REPORT), 'utf8');
   assert(!output.includes('test secret') && !output.includes('hostReceiptBase64'));
@@ -163,18 +168,20 @@ test('authenticated refusal is resumable, does not change acceptance and release
   assert.deepEqual(await f.state.read('accepted'), before);
 });
 
-test('lost close keeps verified unlink counts but cannot claim completed', async t => {
+test('lost close retains only explicit per-target results and cannot claim an aggregate', async t => {
   const f = await fixture(t); f.hooks.close = () => { throw Error('china_ssh_closed'); };
   await assert.rejects(runFailedWitnessCleanup(f.options), error => {
-    assert.equal(error.report.completed, false); assert.equal(error.report.freedBytes, 13041560320);
+    assert.equal(error.report.completed, false); assert.equal(error.report.freedBytes, null);
+    assert.deepEqual(error.report.partialResults.map(value => value.targetIndex), [0, 1]);
+    assert.equal(error.report.diskFreeBytesBefore, null); assert.equal(error.report.diskFreeBytesAfter, null);
     assert.equal(error.report.leaseRelease, 'released'); return true;
   });
 });
 
 test('a resumed host observation never counts absent files as newly freed', async t => {
-  const f = await fixture(t); f.hooks.result = {...result(), filesDeleted: 0, freedBytes: 0, alreadyAbsentFiles: 4};
+  const f = await fixture(t); f.hooks.result = index => ({...result(index), filesDeleted: 0, freedBytes: 0, alreadyAbsentFiles: 4});
   const report = await runFailedWitnessCleanup(f.options);
-  assert.equal(report.completed, true); assert.equal(report.freedBytes, 0); assert.equal(report.alreadyAbsentFiles, 4);
+  assert.equal(report.completed, true); assert.equal(report.freedBytes, 0); assert.equal(report.alreadyAbsentFiles, 8);
 });
 
 test('host result rejects arbitrary data, scope changes and inconsistent totals', () => {
@@ -185,6 +192,57 @@ test('host result rejects arbitrary data, scope changes and inconsistent totals'
   }
   // Concurrent live writes can make either measurement differ from logical unlinked bytes.
   assert.equal(validateFailedWitnessCleanupReport({...result(), diskFreeBytesBefore: 20, diskFreeBytesAfter: 0}).diskFreeBytesAfter, 0);
+  assert.throws(() => validateFailedWitnessCleanupReport(result(1), 0), /report_identity/);
+  assert.throws(() => validateFailedWitnessCleanupReport(result(0), 1), /report_identity/);
+  assert.throws(() => validateFailedWitnessCleanupReport(result(1), 2), /report_target/);
+  assert.throws(() => validateFailedWitnessCleanupReport({...result(1), freedBytes: 13041559297}, 1), /report_counts/);
+  assert.equal(validateFailedWitnessCleanupReport(result(1), 1).targetFailedAttempt.planSha256,
+    '27888989f2a0e90e235f7a497fcce912ece493e9f5add5c40005e02ad991d9b2');
+});
+
+test('losing the second reply keeps first proof explicitly partial and every aggregate unknown', async t => {
+  const f = await fixture(t), before = await f.state.read('accepted');
+  f.hooks.call = index => { if (index === 1) throw Error('china_ssh_closed'); };
+  await assert.rejects(runFailedWitnessCleanup(f.options), error => {
+    assert.equal(error.report.completed, false); assert.equal(error.report.leaseRelease, 'expires');
+    assert.deepEqual(error.report.partialResults, [result(0)]);
+    for (const key of ['filesDeleted', 'freedBytes', 'alreadyAbsentFiles', 'diskFreeBytesBefore', 'diskFreeBytesAfter']) assert.equal(error.report[key], null);
+    return error.message === 'china_ssh_closed';
+  });
+  assert.deepEqual(f.targets, [0, 1]); assert.equal((await f.state.read('lease')).value.status, 'held');
+  assert.deepEqual(await f.state.read('accepted'), before);
+});
+
+test('an authenticated second refusal keeps the first result partial and releases after exit', async t => {
+  const f = await fixture(t);
+  f.hooks.call = index => { if (index === 1) throw Error('china_host_witness_file_changed'); };
+  await assert.rejects(runFailedWitnessCleanup(f.options), error => {
+    assert.equal(error.report.freedBytes, null); assert.equal(error.report.leaseRelease, 'released');
+    assert.deepEqual(error.report.partialResults, [result(0)]); return error.message === 'china_host_witness_file_changed';
+  });
+});
+
+test('changed authority after the first target blocks the second and the aggregate', async t => {
+  const f = await fixture(t);
+  f.hooks.call = async index => {
+    assert.equal(index, 0);
+    const observed = await f.state.read('accepted');
+    await f.raw.compareAndSwap('accepted', observed, {...observed.value, revision: observed.value.revision + 1});
+  };
+  await assert.rejects(runFailedWitnessCleanup(f.options), error => {
+    assert.equal(error.report.completed, false); assert.equal(error.report.freedBytes, null);
+    assert.deepEqual(error.report.partialResults, [result(0)]); return /accepted_state/.test(error.message);
+  });
+  assert.deepEqual(f.targets, [0]);
+});
+
+test('resuming both fixed targets aggregates only newly removed files', async t => {
+  const f = await fixture(t);
+  f.hooks.result = index => ({...result(index), filesDeleted: index ? 1 : 0,
+    freedBytes: index ? 258520064 : 0, alreadyAbsentFiles: index ? 3 : 4});
+  const report = await runFailedWitnessCleanup(f.options);
+  assert.equal(report.completed, true); assert.equal(report.filesDeleted, 1);
+  assert.equal(report.freedBytes, 258520064); assert.equal(report.alreadyAbsentFiles, 7);
 });
 
 test('manual invocation binds the real clean main HEAD and fixed workflow before use', async t => {

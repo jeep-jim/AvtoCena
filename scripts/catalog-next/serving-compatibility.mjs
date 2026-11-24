@@ -8,7 +8,9 @@ const hash = raw => createHash('sha256').update(raw).digest('hex');
 const revision = value => /^[a-f0-9]{40}$/.test(value ?? '');
 const allowedProduction = new Set(['apps/web/lib/catalog/storage.ts', 'apps/web/app/api/catalog/home/route.ts',
   'apps/web/app/(public)/page.tsx', 'apps/web/lib/catalog/china-local-reader.ts',
-  'apps/web/lib/catalog/china-city-query.mjs']);
+  'apps/web/lib/catalog/china-city-query.mjs', 'apps/web/components/catalog/CatalogFilters.tsx']);
+const allowedBrowserTests = new Set(['tests/browser/catalog-range-commit.mjs',
+  'tests/browser/catalog-range-commit-fixture.tsx']);
 const typeOnlyPath = 'apps/web/lib/catalog/offer-page-data.ts';
 export const CHINA_PROTECTED_PRICING_PATHS = Object.freeze([
   'packages', 'data', 'scripts/catalog-next', 'apps/web/lib/encyclopedia',
@@ -33,7 +35,7 @@ export async function verifyServingCompatibility({runtimeRoot, servingPlan, pric
     && /^[a-f0-9]{64}$/.test(servingPlan.pricingToServingDiffSha256 ?? ''), 'plan_binding');
   const files = servingPlan.pricingToServingFiles;
   need(Array.isArray(files) && new Set(files).size === files.length && files.every(name =>
-    typeof name === 'string' && (allowedProduction.has(name) || name === typeOnlyPath
+    typeof name === 'string' && (allowedProduction.has(name) || allowedBrowserTests.has(name) || name === typeOnlyPath
       || /^tests\/catalog-next-[a-z0-9-]+\.test\.ts$/.test(name))), 'change_scope');
   runtimeRoot = await fs.realpath(runtimeRoot);
   const git = args => {
