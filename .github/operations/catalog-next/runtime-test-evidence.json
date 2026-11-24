@@ -2,8 +2,8 @@
   "version": 1,
   "kind": "china-runtime-test-harness-evidence-v1",
   "execution": "local",
-  "runtimeSha": "822f925bb30c4e07010f6e14b6574f1b4bd6306e",
-  "runtimeTree": "064b6688156e8d0ec37214297e84a96106358b25",
+  "runtimeSha": "5e62f9ff3a0079b07cd13b8ab912c5720dd22250",
+  "runtimeTree": "7bf3248b75b206b304d0afd872145759840a4aa9",
   "baselineRuntimeSha": "56d6b94fea70457e0ce2b0820596da9972846b90",
   "patchSha256": "1e5e218cdd29ad46e9cf2410b90140a5ac53c9e93fa70dbb075836839920d06f",
   "originalAffectedTests": {
@@ -89,12 +89,12 @@
     "failed": 0
   },
   "helperCombinedRun": {
-    "nativeTests": 42,
-    "coreNativeTests": 36,
+    "nativeTests": 43,
+    "coreNativeTests": 37,
     "homeIsolationTests": 6,
     "affectedTests": 56,
-    "tests": 98,
-    "passed": 98,
+    "tests": 99,
+    "passed": 99,
     "failed": 0,
     "skipped": 0
   },
@@ -136,5 +136,26 @@
       "tests": 1,
       "correction": "Assert retained-market selection and current editorial/empty-market predicate; bounded shared-index and no repeated full searches assertions retained"
     }
-  ]
+  ],
+  "previousServingRuntimeSha": "822f925bb30c4e07010f6e14b6574f1b4bd6306e",
+  "cityReaderRegression": {
+    "tests": 1,
+    "passed": 1,
+    "failed": 0,
+    "producerUnchanged": true,
+    "semantics": [
+      "delivery-only city",
+      "power and year filters",
+      "non-price ordering",
+      "count-only",
+      "price budgets and ordering",
+      "unknown city and invalid fields",
+      "pinned generation"
+    ]
+  },
+  "typecheck": {
+    "passed": true,
+    "command": "npm run typecheck",
+    "runtimeSha": "5e62f9ff3a0079b07cd13b8ab912c5720dd22250"
+  }
 }

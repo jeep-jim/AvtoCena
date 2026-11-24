@@ -26,19 +26,34 @@ ROUTES=[
  ('/cars/autocatalog?make=Changan',2.0,'encyclopedia'),
 ]
 
-# Owner instruction 31.10.2026: a targeted market release must not depend on
-# another market's availability. Full releases keep their original route set.
-def release_routes(scope=''):
- if not scope:return ROUTES
+# Owner instruction 24.11.2026: check the selected market and shared pages,
+# without restoring unrelated markets when loading the frozen baseline.
+MARKETS=('china','korea','japan','europe','uae','georgia')
+def release_markets(scope=''):
+ if not scope:return []
  markets=scope.split(',')
- if len(markets)!=len(set(markets)) or any(m not in ['china','korea','japan','europe','uae','georgia'] for m in markets):
+ if len(markets)!=len(set(markets)) or any(m not in MARKETS for m in markets):
   raise ValueError('release_market_scope_invalid')
- common=[r for r in ROUTES if r[2]=='encyclopedia' or r[0] in ['/api/health','/api/leads','/login','/autocalc','/cars/autocatalog']]
- selected=[r for r in ROUTES if urllib.parse.parse_qs(urllib.parse.urlsplit(r[0]).query).get('market',[''])[0] in markets]
+ return markets
+
+def route_in_scope(path,markets):
+ if not markets:return True
+ url=urllib.parse.urlsplit(path)
+ route_markets=set(urllib.parse.parse_qs(url.query).get('market',[]))
+ parts=url.path.split('/')
+ if len(parts)>2 and parts[1]=='cars' and parts[2] in MARKETS:
+  route_markets.add(parts[2])
+ # Unscoped routes include the home page and aggregate catalog. They remain
+ # mandatory because a target release changes the shared serving path too.
+ return route_markets.issubset(markets)
+
+def release_routes(scope=''):
+ markets=release_markets(scope)
+ selected=[r for r in ROUTES if route_in_scope(r[0],markets)]
  for market in markets:
   route=('/cars?market='+market,2.0,'catalog')
   if route not in selected:selected.append(route)
- return common+selected
+ return selected
 
 # Cover both short selections and the five-minute directory refresh.
 PHASE_DELAYS=[('warm',0),('after_ttl',35),('after_directory_ttl',305)]
@@ -182,13 +197,18 @@ def sample(base,path,kind,release):
 def main():
  parser=argparse.ArgumentParser();parser.add_argument('base');parser.add_argument('release');args=parser.parse_args()
  # Explicit preparation, then measurements. No swallowed timeouts/empty states.
- routes=release_routes(os.environ.get('AVTOCENA_RELEASE_MARKETS',''))
+ scope=os.environ.get('AVTOCENA_RELEASE_MARKETS','')
+ markets=release_markets(scope)
+ routes=release_routes(scope)
  baseline_path=os.environ.get('AVTOCENA_SPEED_BASELINE','')
  baseline=accepted_baseline(baseline_path) if baseline_path else {}
  mode=os.environ.get('AVTOCENA_SPEED_BASELINE_MODE','observe')
  if mode not in ['observe','enforce']:raise AssertionError('accepted_speed_baseline_mode_invalid')
  if mode=='enforce' and not baseline:raise AssertionError('accepted_speed_baseline_missing')
  if baseline:
+  # Verify the complete immutable capture above before selecting its relevant
+  # routes. SEO market paths and query market paths obey the same scope.
+  baseline={path:rows for path,rows in baseline.items() if route_in_scope(path,markets)}
   for path,rows in baseline.items():
    if path not in {r[0] for r in routes}:routes.append((path,rows[0]['targetSeconds'],rows[0]['kind']))
  for path,limit,kind in routes:sample(args.base,path,kind,args.release)

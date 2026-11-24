@@ -48,7 +48,9 @@ ROLLBACK_IDS = {
     'legacyRollback': '21d2c808c25bad327a6d8ac13891d878aeb67fadce52350dcc6f1433e3f6ca78',
 }
 GATES = {
-    'scripts/regcloud-performance-gate.py': 'e16247e26a6ed63d3fb635b0ad1270a616d51b13f52bc6fe29b7801a1949d5ab',
+    # Reviewed shared helper; run_full_server_gate still forces every original
+    # route and phase independently of this executable's scoped-release mode.
+    'scripts/regcloud-performance-gate.py': 'bbe1bac67ae9ca525fb794b264aa26bf6b8b0ab21ec015b245abe7a7b7a679c3',
     'scripts/regcloud-browser-verdict.py': '48853ef1f58e1cac5c3270adf8f03f7103b29ed83d8b1fb8d03573774cca827b',
     'docs/operations/2026-11-11-accepted-speed-baseline.json': '32fba449b77e40983803483ea7b6cb4ece09afa997c2ae08dd968c675f528c59',
 }
