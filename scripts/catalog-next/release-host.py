@@ -23,6 +23,7 @@ import stat
 import subprocess
 import sys
 import time
+from urllib.parse import urlencode
 
 CONFIG = Path('/etc/nginx/conf.d/avtocena-prepare.conf')
 BASE = Path('/opt/avtocena/releases')
@@ -253,6 +254,172 @@ def decode_report(value):
 def private_directory(directory):
     need(directory.resolve() == directory and directory.is_dir() and directory.stat().st_uid == 0 and
          not directory.stat().st_mode & 0o022, 'recovery_directory')
+
+
+def diagnosis_json(filename):
+    """Only bounded metadata is read here; never checksum the uploaded databases."""
+    before = regular(filename, 256 * 1024)
+    raw = filename.read_bytes()
+    after = regular(filename, 256 * 1024)
+    need((before.st_dev, before.st_ino, before.st_size, before.st_mtime_ns, before.st_ctime_ns) ==
+         (after.st_dev, after.st_ino, after.st_size, after.st_mtime_ns, after.st_ctime_ns), 'diagnosis_file_changed')
+    value = json.loads(raw)
+    need(isinstance(value, dict), 'diagnosis_json')
+    return value, raw
+
+
+def diagnosis_events(plan, since, until):
+    """Docker's bounded historical event buffer may outlive a removed container.
+    Return only fixed event names, times, numeric exit codes and OOM flags."""
+    actions = {'create', 'start', 'die', 'oom', 'stop', 'kill', 'destroy', 'restart'}
+    filters = {'type': ['container'], 'label': ['avtocena.china.nonce=' + plan['nonce'],
+               'org.opencontainers.image.revision=' + plan['runtimeSha']], 'event': sorted(actions)}
+    target = '/events?' + urlencode({'since': str(since), 'until': str(until), 'filters': json.dumps(filters)})
+    connection = Docker()
+    connection.timeout = 15
+    try:
+        connection.request('GET', target)
+        response = connection.getresponse()
+        raw = response.read(1024 * 1024 + 1)
+        need(response.status == 200 and len(raw) <= 1024 * 1024, 'diagnosis_events_response')
+        rows = []
+        for line in raw.splitlines():
+            value = json.loads(line)
+            attributes = value.get('Actor', {}).get('Attributes', {})
+            action, when = value.get('Action'), value.get('time')
+            need(value.get('Type') == 'container' and action in actions and type(when) is int and since <= when <= until and
+                 attributes.get('avtocena.china.nonce') == plan['nonce'] and
+                 attributes.get('org.opencontainers.image.revision') == plan['runtimeSha'], 'diagnosis_event_scope')
+            exit_code = attributes.get('exitCode')
+            need(exit_code is None or (isinstance(exit_code, str) and re.fullmatch(r'-?\d{1,8}', exit_code)),
+                 'diagnosis_event_exit')
+            rows.append({'action': action, 'time': when, 'exitCode': int(exit_code) if exit_code is not None else None,
+                         'oom': action == 'oom'})
+            need(len(rows) <= 512, 'diagnosis_events_bound')
+        return {'available': True, 'reason': None if rows else 'empty', 'rows': rows}
+    except Exception:
+        # No Docker response, daemon error, arbitrary label or raw log escapes.
+        return {'available': False, 'reason': 'unavailable', 'rows': []}
+    finally:
+        connection.close()
+
+
+def diagnose_startup(params):
+    """Inspect exactly one failed first-release upload. No init, start, stop,
+    file write, application request, state mutation or image load is reachable."""
+    keys = {'runtimeSha', 'pricingRuntimeSha', 'generationId', 'generationManifestSha256',
+            'controllerSha', 'imageId', 'since', 'until'}
+    need(isinstance(params, dict) and set(params) == keys, 'diagnosis_selector')
+    for name in ('runtimeSha', 'pricingRuntimeSha', 'controllerSha'):
+        need(isinstance(params[name], str) and re.fullmatch(r'[a-f0-9]{40}', params[name]), 'diagnosis_selector')
+    need(re.fullmatch(r'gen_china_[1-9]\d*_[1-9]\d*', params.get('generationId', '')) and
+         re.fullmatch(r'[a-f0-9]{64}', params.get('generationManifestSha256', '')) and
+         re.fullmatch(r'sha256:[a-f0-9]{64}', params.get('imageId', '')), 'diagnosis_selector')
+    times = []
+    for name in ('since', 'until'):
+        need(isinstance(params[name], str) and re.fullmatch(r'\d{4}-\d\d-\d\dT\d\d:\d\d:\d\dZ', params[name]),
+             'diagnosis_window')
+        times.append(int(datetime.datetime.fromisoformat(params[name].replace('Z', '+00:00')).timestamp()))
+    since, until = times
+    need(0 < until - since <= 300 and until <= int(time.time()), 'diagnosis_window')
+    parent = BASE / params['runtimeSha'] / 'china-next'
+    for directory in (BASE, parent.parent, parent):
+        private_directory(directory)
+    children = list(parent.iterdir())
+    need(len(children) <= 200, 'diagnosis_directory_bound')
+    matches = []
+    for directory in children:
+        if not re.fullmatch(r'[a-f0-9]{32}', directory.name):
+            continue
+        private_directory(directory)
+        plan_file = directory / 'PLAN.json'
+        if not plan_file.exists():
+            continue
+        plan, raw = diagnosis_json(plan_file)
+        if all(plan.get(key) == params[key] for key in keys - {'since', 'until'}):
+            validate_plan(plan)
+            need(not generation_update(plan) and plan['nonce'] == directory.name, 'diagnosis_plan')
+            matches.append((directory, plan, raw))
+    need(len(matches) == 1, 'diagnosis_unique_plan')
+    directory, plan, plan_raw = matches[0]
+    need(not (directory / 'ACCEPTED.json').exists() and not (directory / 'ACCEPTED.pending').exists(), 'diagnosis_accepted')
+    rollback, rollback_raw = diagnosis_json(directory / 'ROLLED_BACK.json')
+    bindings = {'nonce': 'nonce', 'release': 'runtimeSha', 'pricingRuntimeSha': 'pricingRuntimeSha',
+                'generationId': 'generationId', 'generationManifestSha256': 'generationManifestSha256',
+                'imageId': 'imageId', 'privateGenerationReceiptSha256': 'privateGenerationReceiptSha256',
+                'sourceDescriptorSha256': 'sourceDescriptorSha256'}
+    need(rollback.get('version') == 1 and rollback.get('kind') == 'china-host-rollback-v1' and
+         all(rollback.get(left) == plan[right] for left, right in bindings.items()) and
+         rollback.get('retainedRuntimeSha') == RETAINED and rollback.get('retainedRunning') is True and
+         rollback.get('candidateRemoved') is True and rollback.get('ingressRestored') is True and
+         re.fullmatch(r'[a-f0-9]{64}', rollback.get('retainedContainerId', '')) and
+         re.fullmatch(r'sha256:[a-f0-9]{64}', rollback.get('retainedImageId', '')), 'diagnosis_rollback')
+    generation_directory = directory / 'generation'
+    private_directory(generation_directory)
+    generation, generation_raw = diagnosis_json(generation_directory / 'GENERATION.json')
+    need(sha(generation_raw) == plan['generationManifestSha256'] and generation.get('generationId') == plan['generationId'] and
+         generation.get('runtimeSha') == plan['pricingRuntimeSha'] and generation.get('prepared') is True, 'diagnosis_generation')
+    generation_names = {'GENERATION.json', 'details.sqlite', 'query.sqlite', 'FILTER_SEMANTICS.json',
+                        'FX_RECEIPT.json', 'RECONCILIATION.json', 'DISPOSITIONS.ndjson'}
+    files = []
+    for descriptor in plan['files']:
+        filename = (generation_directory if descriptor['name'] in generation_names else directory) / descriptor['name']
+        try:
+            info = regular(filename)
+        except FileNotFoundError:
+            files.append({'name': descriptor['name'], 'present': False, 'bytes': None, 'expectedBytes': descriptor['bytes'],
+                          'sizeMatches': False, 'private': False})
+            continue
+        files.append({'name': descriptor['name'], 'present': True, 'bytes': info.st_size, 'expectedBytes': descriptor['bytes'],
+                      'sizeMatches': info.st_size == descriptor['bytes'], 'private': stat.S_IMODE(info.st_mode) == 0o400})
+    regular(CONFIG, 1024 * 1024)
+    ingress = CONFIG.read_bytes()
+    retained = docker('GET', '/containers/' + rollback['retainedContainerId'] + '/json')
+    identity = protected_identity(retained)
+    env = env_map(retained)
+    need(retained.get('Image') == rollback['retainedImageId'] and retained['State']['Running'] is True and
+         env.get('AVTOCENA_RELEASE_SHA') == RETAINED and env.get('AVTOCENA_CALCULATION_VERSION') == CALCULATION and
+         any(str(binding.get('HostPort', '')) == str(backend(ingress)) for bindings in
+             (retained.get('HostConfig', {}).get('PortBindings') or {}).values() for binding in bindings),
+         'diagnosis_retained')
+    try:
+        image = docker('GET', '/images/' + plan['imageId'] + '/json')
+        image_result = {'present': True, 'identityMatches': image.get('Id') == plan['imageId'] and image.get('Os') == 'linux' and
+                        image.get('Architecture') == 'amd64' and
+                        image.get('Config', {}).get('Labels', {}).get('org.opencontainers.image.revision') == plan['runtimeSha']}
+    except ReleaseError as error:
+        if str(error) != 'china_host_docker_http_404':
+            raise
+        image_result = {'present': False, 'identityMatches': False}
+    filter_query = urlencode({'filters': json.dumps({'label': ['avtocena.china.nonce=' + plan['nonce']]})})
+    containers = docker('GET', '/containers/json?all=1&' + filter_query)
+    need(isinstance(containers, list) and len(containers) <= 1, 'diagnosis_candidates')
+    candidate = {'present': False, 'running': None, 'status': None, 'exitCode': None, 'oomKilled': None}
+    if containers:
+        row = docker('GET', '/containers/' + containers[0]['Id'] + '/json')
+        labels = row.get('Config', {}).get('Labels', {})
+        state = row.get('State', {})
+        need(row.get('Image') == plan['imageId'] and labels.get('avtocena.china.nonce') == plan['nonce'] and
+             labels.get('org.opencontainers.image.revision') == plan['runtimeSha'] and
+             labels.get('avtocena.role') == 'independent-china' and type(state.get('Running')) is bool and
+             type(state.get('ExitCode')) is int and type(state.get('OOMKilled')) is bool and
+             state.get('Status') in {'created', 'restarting', 'running', 'removing', 'paused', 'exited', 'dead'}, 'diagnosis_candidate')
+        candidate = {'present': True, 'running': state['Running'], 'status': state['Status'],
+                     'exitCode': state['ExitCode'], 'oomKilled': state['OOMKilled']}
+    events = diagnosis_events(plan, since, until)
+    need(CONFIG.read_bytes() == ingress and
+         protected_identity(docker('GET', '/containers/' + retained['Id'] + '/json')) == identity,
+         'diagnosis_retained_changed')
+    need(diagnosis_json(directory / 'PLAN.json')[1] == plan_raw and
+         diagnosis_json(directory / 'ROLLED_BACK.json')[1] == rollback_raw and not (directory / 'ACCEPTED.json').exists(),
+         'diagnosis_changed')
+    disk = os.statvfs(BASE)
+    free_bytes = disk.f_bavail * disk.f_frsize
+    need(type(free_bytes) is int and 0 <= free_bytes <= 9007199254740991, 'diagnosis_disk_capacity')
+    return {'version': 1, 'kind': 'china-host-startup-diagnosis-v1', 'readOnly': True, 'selector': dict(params),
+            'nonce': plan['nonce'], 'planSha256': sha(plan_raw), 'rollbackSha256': sha(rollback_raw), 'outcome': 'rolled_back',
+            'files': files, 'generationVerified': True, 'image': image_result, 'diskFreeBytes': free_bytes,
+            'retained': {'identityConfirmed': True, 'running': True}, 'candidate': candidate, 'events': events}
 
 
 def check_mounted_reference(container, reference, nonce, *, require_running=True):
@@ -989,7 +1156,7 @@ def main():
     signal.signal(signal.SIGHUP, lambda *_: (_ for _ in ()).throw(ReleaseError('china_host_disconnected')))
     signal.signal(signal.SIGALRM, lambda *_: (_ for _ in ()).throw(ReleaseError('china_host_browser_deadline')))
     host = None
-    recovered = maintenance = False
+    recovered = maintenance = diagnosed = False
     emit({'kind': 'ready', 'protocol': 1})
     try:
         while True:
@@ -1005,8 +1172,13 @@ def main():
             call = json.loads(raw)
             identity, method = call['id'], call['method']
             need(type(identity) is int and identity > 0, 'protocol_id')
+            need(not diagnosed or method in {'diagnose', 'close'}, 'diagnosis_read_only')
             params = call.get('params', {})
-            if method == 'recover':
+            if method == 'diagnose':
+                need(host is None, 'diagnosis_after_init')
+                value = diagnose_startup(params)
+                recovered = diagnosed = True
+            elif method == 'recover':
                 need(host is None, 'recovery_after_init')
                 value = read_outcome(params)
                 recovered = True
