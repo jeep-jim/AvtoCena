@@ -35,7 +35,7 @@ function Fixture() {
     window.addEventListener('keydown', keydown, true);
     return () => { window.removeEventListener('popstate', back); window.removeEventListener('keydown', keydown, true); };
   }, []);
-  return <CatalogSelectionProvider><CatalogFilters initial={initial} facets={facets} resultCount={24} auctionResults={auctionResults}/></CatalogSelectionProvider>;
+  return <CatalogSelectionProvider><CatalogFilters initial={initial} facets={facets} resultCount={24} auctionResults={auctionResults}/><div aria-hidden="true" style={{height: 1600}}/></CatalogSelectionProvider>;
 }
 
 root.render(<Fixture/>);

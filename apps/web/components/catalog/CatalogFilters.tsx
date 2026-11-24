@@ -395,6 +395,7 @@ export function CatalogFilters({ initial, facets, resultCount, auctionResults=fa
     const committedRangeOnly = keyboardRangeCommit.current && nextQuery !== serverQuery && sortKey === initialSorting.key && sortDirection === initialSorting.direction
       && Object.entries(draft).every(([key, value]) => COMMITTED_RANGE_FIELDS.has(key as keyof FilterDraft) || value === nextInitial[key as keyof FilterDraft]);
     const timer = window.setTimeout(() => {
+      keyboardRangeCommit.current = false;
       if(submitted.current===nextQuery)return;
       submitted.current=nextQuery;
       const query=new URLSearchParams(nextQuery);

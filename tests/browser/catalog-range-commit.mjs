@@ -203,6 +203,27 @@ try {
     await page.evaluate(() => window.__filterFixture.acknowledge(window.__filterFixture.calls[1].href));
     await settled(page); await page.waitForTimeout(220); assert.equal((await calls(page)).length, 2);
   });
+  await caseOf('Enter intent is consumed before an external sticky-chip pointer click', async page => {
+    await page.evaluate(() => {window.__filterFixture.autoAcknowledge = false;});
+    await budget(page).fill('2000000'); await budget(page).press('Enter'); await expectCalls(page, 1);
+    await page.locator('.ac-catalog-sticky-sentinel').evaluate(async marker => {
+      marker.scrollIntoView({block: 'center'});
+      await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+      window.scrollTo(0, window.scrollY + marker.getBoundingClientRect().top + 80);
+    });
+    const sticky = page.getByRole('navigation', {name: 'Выбранные фильтры и сортировка'});
+    const chip = sticky.getByRole('button', {name: /^Убрать Цена /});
+    await chip.waitFor({state: 'visible'});
+    assert.equal(await chip.evaluate(button => button.closest('form') === null), true);
+    await page.evaluate(() => document.addEventListener('click', () => {window.__stickyClickAt = performance.now();}, {once: true, capture: true}));
+    await chip.click(); await expectCalls(page, 2);
+    const final = await calls(page), clickedAt = await page.evaluate(() => window.__stickyClickAt);
+    const delay = final[1].at - clickedAt;
+    assert.ok(delay >= 175, `external pointer action must keep the existing 180ms coalescing window, observed ${delay}ms`);
+    assert.equal(new URL(final[1].href, origin).searchParams.has('budget'), false);
+    await page.evaluate(() => window.__filterFixture.acknowledge(window.__filterFixture.calls[1].href));
+    await settled(page); await page.waitForTimeout(230); assert.equal((await calls(page)).length, 2);
+  }, {query: 'market=china&budget=1500000'});
   await caseOf('acknowledged Back restores controls without another push', async page => {
     await budget(page).fill('2000000'); await budget(page).press('Tab');
     await expectCalls(page, 1); await settled(page);
