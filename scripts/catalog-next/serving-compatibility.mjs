@@ -7,7 +7,8 @@ const need = (value, code) => assert(value, 'china_serving_' + code);
 const hash = raw => createHash('sha256').update(raw).digest('hex');
 const revision = value => /^[a-f0-9]{40}$/.test(value ?? '');
 const allowedProduction = new Set(['apps/web/lib/catalog/storage.ts', 'apps/web/app/api/catalog/home/route.ts',
-  'apps/web/app/(public)/page.tsx']);
+  'apps/web/app/(public)/page.tsx', 'apps/web/lib/catalog/china-local-reader.ts',
+  'apps/web/lib/catalog/china-city-query.mjs']);
 const typeOnlyPath = 'apps/web/lib/catalog/offer-page-data.ts';
 export const CHINA_PROTECTED_PRICING_PATHS = Object.freeze([
   'packages', 'data', 'scripts/catalog-next', 'apps/web/lib/encyclopedia',

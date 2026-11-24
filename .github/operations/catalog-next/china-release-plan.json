@@ -1,7 +1,7 @@
 {
   "version": 1,
   "market": "china",
-  "runtimeSha": "822f925bb30c4e07010f6e14b6574f1b4bd6306e",
+  "runtimeSha": "5e62f9ff3a0079b07cd13b8ab912c5720dd22250",
   "pricingRuntimeSha": "64c6338e0db23c8999096bceefbf113c0136fe15",
   "owner": {
     "runId": "45369451603",
@@ -10,14 +10,5 @@
   },
   "receiptSha256": "25f5277665bcc1a72879d9a7e55cb39fc7d4bd57a061be2593d3a6a9d9f1cc22",
   "generationId": "gen_china_45369451603_1",
-  "generationManifestSha256": "d5745797cc162b82e0c0f0b1f49fef65f18f0d6649666562337183b18084dd75",
-  "reuseHostAttempt": {
-    "source": {
-      "runtimeSha": "822f925bb30c4e07010f6e14b6574f1b4bd6306e",
-      "nonce": "2ab6a761ac784094d102edd7be8708af",
-      "planSha256": "998a10e522b1aacf493a309e9280075660816cb0d6926246884148f594d6d036",
-      "rollbackSha256": "40d76cec42314ab0085d4ee216ecfa85f3a0910e8f7e4b32f5eb22daddcc0030"
-    },
-    "imageId": "sha256:443e87ed141838f003ce6209fc290f4a2435113b7cfb83126e3d88fb6877cf83"
-  }
+  "generationManifestSha256": "d5745797cc162b82e0c0f0b1f49fef65f18f0d6649666562337183b18084dd75"
 }
