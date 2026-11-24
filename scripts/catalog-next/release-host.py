@@ -31,6 +31,9 @@ RETAINED = '56d6b94fea70457e0ce2b0820596da9972846b90'
 FILE_NAMES = {'GENERATION.json', 'details.sqlite', 'query.sqlite', 'FILTER_SEMANTICS.json', 'FX_RECEIPT.json',
               'RECONCILIATION.json', 'DISPOSITIONS.ndjson', 'image.tar', 'regcloud-performance-gate.py',
               'accepted-speed-baseline.json', 'acceptance.json'}
+GENERATION_MOUNT = '/run/avtocena-china-generation'
+HOST_BULK_FILES = {'details.sqlite', 'query.sqlite', 'DISPOSITIONS.ndjson', 'FILTER_SEMANTICS.json',
+                   'FX_RECEIPT.json', 'RECONCILIATION.json', 'image.tar'}
 
 
 class ReleaseError(Exception):
@@ -48,6 +51,10 @@ def sha(raw):
 
 def json_bytes(value):
     return json.dumps(value, ensure_ascii=False, separators=(',', ':')).encode()
+
+
+def canonical_sha(value):
+    return sha(json.dumps(value, sort_keys=True, ensure_ascii=False, separators=(',', ':'), allow_nan=False).encode())
 
 
 def file_sha(filename):
@@ -147,8 +154,62 @@ def protected_identity(container):
         'RestartCount': container['RestartCount'], 'Running': container['State']['Running']}
 
 
+def generation_update(plan):
+    return plan.get('mode') == 'generation-update'
+
+
+def expected_files(plan):
+    return FILE_NAMES - {'image.tar'} if generation_update(plan) else FILE_NAMES
+
+
+def retained_runtime(plan):
+    return plan.get('retainedRuntime', RETAINED)
+
+
+def accepted_reference_receipt(reference):
+    need(isinstance(reference, dict), 'predecessor_reference')
+    proof = reference.get('proof')
+    need(reference.get('market') == 'china' and isinstance(proof, dict) and
+         proof.get('kind') == 'china-accepted-proof-v1', 'predecessor_proof')
+    raw, receipt = decode_report(proof.get('hostReceiptBase64'))
+    need(len(raw) <= 48 * 1024 and sha(raw) == proof.get('hostReceiptSha256') and
+         receipt.get('version') == 1 and receipt.get('kind') == 'china-host-acceptance-v1' and
+         re.fullmatch(r'[a-f0-9]{32}', receipt.get('nonce', '')), 'predecessor_proof_hash')
+    bindings = {'runtimeSha': 'release', 'pricingRuntimeSha': 'pricingRuntimeSha', 'imageId': 'imageId',
+                'generationId': 'generationId', 'generationManifestSha256': 'generationManifestSha256',
+                'receiptSha256': 'privateGenerationReceiptSha256', 'sourceDescriptorSha256': 'sourceDescriptorSha256',
+                'sourceCursor': 'sourceCursor', 'sourceObservedAt': 'sourceObservedAt'}
+    need(all(reference.get(left) == receipt.get(right) and left in reference and right in receipt
+             for left, right in bindings.items()), 'predecessor_reference')
+    return receipt, raw
+
+
+def accepted_predecessor(plan):
+    """Authenticate the exact supplied state observation against its retained
+    host receipt. Local receipt and mounted-generation checks happen at start."""
+    state = plan.get('previousAcceptedState')
+    need(isinstance(state, dict) and state.get('version') == 1 and
+         state.get('kind') == 'china-accepted-state-v1' and state.get('market') == 'china' and
+         type(state.get('revision')) is int and state['revision'] > 0 and state.get('pending') is None and
+         isinstance(state.get('current'), dict), 'predecessor_state')
+    need(canonical_sha(state) == plan.get('previousAcceptedStateSha256') and
+         isinstance(plan.get('previousAcceptedETag'), str), 'predecessor_state_hash')
+    reference = state['current']
+    receipt, raw = accepted_reference_receipt(reference)
+    commit = state.get('commit')
+    need(isinstance(commit, dict) and commit.get('nonce') == receipt['nonce'] and
+         commit.get('acceptedAt') == receipt.get('acceptedAt'), 'predecessor_commit')
+    need(plan.get('retainedRuntime') == reference.get('runtimeSha') and
+         all(plan.get(key) == reference.get(key) for key in ('runtimeSha', 'pricingRuntimeSha', 'imageId')) and
+         plan.get('generationId') != reference.get('generationId') and plan.get('nonce') != receipt['nonce'],
+         'data_only_identity')
+    return reference, receipt, raw
+
+
 def validate_plan(plan):
-    need(plan.get('version') == 1 and plan.get('market') == 'china' and plan.get('retainedRuntime') == RETAINED and
+    need(plan.get('mode') in (None, 'generation-update'), 'plan_mode')
+    need(plan.get('version') == 1 and plan.get('market') == 'china' and
+         (generation_update(plan) or plan.get('retainedRuntime') == RETAINED) and
          plan.get('servingCalculationVersion') == CALCULATION, 'plan_scope')
     for key in ('runtimeSha', 'pricingRuntimeSha', 'runtimeTree', 'controllerSha'):
         need(re.fullmatch(r'[a-f0-9]{40}', plan.get(key, '')), 'plan_revision')
@@ -158,7 +219,8 @@ def validate_plan(plan):
          re.fullmatch(r'[a-f0-9]{32}', plan.get('nonce', '')) and
          re.fullmatch(r'sha256:[a-f0-9]{64}', plan.get('imageId', '')), 'plan_identity')
     files = plan.get('files', [])
-    need(isinstance(files, list) and {f['name'] for f in files} == FILE_NAMES and len(files) == len(FILE_NAMES), 'plan_files')
+    required = expected_files(plan)
+    need(isinstance(files, list) and {f['name'] for f in files} == required and len(files) == len(required), 'plan_files')
     for file in files:
         need(type(file.get('bytes')) is int and file['bytes'] > 0 and re.fullmatch(r'[a-f0-9]{64}', file.get('sha256', '')) and
              type(file.get('compressedBytes')) is int and file['compressedBytes'] > 0 and
@@ -170,6 +232,10 @@ def validate_plan(plan):
     need((previous_etag is None and previous_sha is None) or
          (isinstance(previous_etag, str) and re.fullmatch(r'"[^"\x00-\x20\x7f]{1,250}"', previous_etag) and
           isinstance(previous_sha, str) and re.fullmatch(r'[a-f0-9]{64}', previous_sha)), 'previous_state')
+    if generation_update(plan):
+        accepted_predecessor(plan)
+    else:
+        need('previousAcceptedState' not in plan, 'unexpected_predecessor')
 
 
 def decode_report(value):
@@ -189,7 +255,59 @@ def private_directory(directory):
          not directory.stat().st_mode & 0o022, 'recovery_directory')
 
 
-def read_outcome(params):
+def check_mounted_reference(container, reference, nonce, *, require_running=True):
+    env = env_map(container)
+    running = container.get('State', {}).get('Running')
+    need(container.get('Image') == reference['imageId'] and type(running) is bool and (running or not require_running) and
+         env.get('AVTOCENA_RELEASE_SHA') == reference['runtimeSha'] and
+         env.get('AVTOCENA_CALCULATION_VERSION') == CALCULATION and
+         env.get('CATALOG_CHINA_LOCAL_RUNTIME_SHA') == reference['pricingRuntimeSha'] and
+         env.get('CATALOG_CHINA_LOCAL_MANIFEST_SHA256') == reference['generationManifestSha256'] and
+         env.get('CATALOG_CHINA_LOCAL_GENERATION_DIR') == GENERATION_MOUNT and
+         container['Config'].get('Labels', {}).get('avtocena.china.nonce') == nonce, 'mounted_reference')
+    mounts = [row for row in container.get('Mounts', []) if row.get('Destination') == GENERATION_MOUNT]
+    directory = BASE / reference['runtimeSha'] / 'china-next' / nonce / 'generation'
+    need(len(mounts) == 1 and mounts[0].get('Type') == 'bind' and mounts[0].get('RW') is False and
+         mounts[0].get('Source') == str(directory), 'mounted_generation')
+    return generation_reference(reference, nonce)
+
+
+def generation_reference(reference, nonce):
+    directory = BASE / reference['runtimeSha'] / 'china-next' / nonce / 'generation'
+    for parent in (BASE, directory.parent.parent.parent, directory.parent.parent, directory.parent):
+        private_directory(parent)
+    private_directory(directory)
+    filename = directory / 'GENERATION.json'
+    regular(filename, 256 * 1024)
+    raw = filename.read_bytes()
+    need(sha(raw) == reference['generationManifestSha256'], 'mounted_generation_hash')
+    generation = json.loads(raw)
+    need(generation.get('generationId') == reference['generationId'] and
+         generation.get('runtimeSha') == reference['pricingRuntimeSha'] and generation.get('prepared') is True and
+         generation.get('source', {}).get('cursor') == reference['sourceCursor'] and
+         generation.get('source', {}).get('sourceObservedAt') == reference['sourceObservedAt'], 'mounted_generation_identity')
+    return generation
+
+
+def verify_live_reference(reference, nonce):
+    """A historical receipt is not evidence that its cut is still serving."""
+    regular(CONFIG, 1024 * 1024)
+    ingress = CONFIG.read_bytes()
+    port = backend(ingress)
+    rows = [docker('GET', '/containers/' + item['Id'] + '/json') for item in docker('GET', '/containers/json?all=1')]
+    serving = [row for row in rows if any(str(binding.get('HostPort', '')) == str(port)
+               for bindings in (row.get('HostConfig', {}).get('PortBindings') or {}).values() for binding in bindings)]
+    need(len(serving) == 1, 'serving_container')
+    current = serving[0]
+    identity = protected_identity(current)
+    check_mounted_reference(current, reference, nonce)
+    health(port, reference['runtimeSha'])
+    need(CONFIG.read_bytes() == ingress and
+         protected_identity(docker('GET', '/containers/' + current['Id'] + '/json')) == identity, 'recovery_serving_changed')
+    return current
+
+
+def read_outcome(params, *, verify_current=True):
     """Read only the durable result of one authenticated nonce. No inference
     from elapsed time, a missing receipt, or the current ingress is acceptance."""
     release, nonce = params.get('runtimeSha', ''), params.get('nonce', '')
@@ -216,6 +334,13 @@ def read_outcome(params):
             need(sha(report) == receipt['browser'].get(field), 'recovery_browser')
             reports.append(report)
         need(sha(b''.join(reports)) == receipt['browser'].get('reportSha256'), 'recovery_browser')
+        if generation_update(plan) and verify_current:
+            need(receipt.get('generationId') == plan['generationId'] and receipt.get('pricingRuntimeSha') == plan['pricingRuntimeSha'] and
+                 receipt.get('imageId') == plan['imageId'], 'recovery_receipt')
+            verify_live_reference({'runtimeSha': release, 'pricingRuntimeSha': plan['pricingRuntimeSha'],
+                'imageId': plan['imageId'], 'generationId': plan['generationId'],
+                'generationManifestSha256': plan['generationManifestSha256'],
+                'sourceCursor': receipt['sourceCursor'], 'sourceObservedAt': receipt['sourceObservedAt']}, nonce)
         return {'status': 'accepted', 'hostReceiptBase64': base64.b64encode(raw).decode(), 'hostReceiptSha256': sha(raw),
                 'browserSpeedBase64': base64.b64encode(reports[0]).decode(),
                 'browserDetailsBase64': base64.b64encode(reports[1]).decode()}
@@ -225,8 +350,242 @@ def read_outcome(params):
         receipt = json.loads(raw)
         need(receipt.get('release') == release and receipt.get('nonce') == nonce and
              receipt.get('generationManifestSha256') == plan['generationManifestSha256'], 'recovery_receipt')
+        if generation_update(plan) and verify_current:
+            previous, previous_receipt, _ = accepted_predecessor(plan)
+            need(receipt.get('retainedRuntimeSha') == previous['runtimeSha'] and
+                 receipt.get('retainedImageId') == previous['imageId'] and
+                 receipt.get('previousAcceptedETag') == plan['previousAcceptedETag'] and
+                 receipt.get('previousAcceptedStateSha256') == plan['previousAcceptedStateSha256'], 'recovery_rollback')
+            verify_live_reference(previous, previous_receipt['nonce'])
         return {'status': 'rolled_back', 'hostRollbackBase64': base64.b64encode(raw).decode(), 'hostRollbackSha256': sha(raw)}
     return {'status': 'pending'}
+
+
+def checked_observation(observation, *, allow_absent=False):
+    need(isinstance(observation, dict) and type(observation.get('found')) is bool, 'retire_observation')
+    if not observation['found']:
+        need(allow_absent and all(observation.get(key) is None for key in ('value', 'etag', 'sha256')), 'retire_observation')
+        return None
+    need(isinstance(observation.get('etag'), str) and re.fullmatch(r'"[^"\x00-\x20\x7f]{1,250}"', observation['etag']) and
+         isinstance(observation.get('sha256'), str) and re.fullmatch(r'[a-f0-9]{64}', observation['sha256']) and
+         isinstance(observation.get('value'), dict) and canonical_sha(observation['value']) == observation['sha256'], 'retire_observation')
+    return observation['value']
+
+
+def checked_accepted_observation(observation):
+    state = checked_observation(observation)
+    need(state.get('version') == 1 and state.get('kind') == 'china-accepted-state-v1' and state.get('market') == 'china' and
+         type(state.get('revision')) is int and state['revision'] > 0 and state.get('pending') is None, 'retire_state')
+    receipt, _ = accepted_reference_receipt(state.get('current'))
+    commit = state.get('commit')
+    need(isinstance(commit, dict) and commit.get('nonce') == receipt['nonce'] and
+         commit.get('acceptedAt') == receipt.get('acceptedAt') and
+         isinstance(commit.get('intentSha256'), str) and re.fullmatch(r'[a-f0-9]{64}', commit['intentSha256']), 'retire_commit')
+    if state.get('rollback') is not None:
+        accepted_reference_receipt(state['rollback'])
+        need(state['rollback']['generationId'] != state['current']['generationId'], 'retire_protected')
+    return state
+
+
+def checked_publication_view(view, *, committed=False):
+    need(isinstance(view, dict), 'retire_view')
+    state = checked_accepted_observation(view.get('accepted'))
+    intent = checked_observation(view.get('intent'), allow_absent=not committed)
+    if intent is None:
+        return state, None
+    need(intent.get('version') == 1 and intent.get('kind') == 'china-publication-intent-v1' and intent.get('market') == 'china' and
+         type(intent.get('revision')) is int and intent['revision'] > 0 and
+         re.fullmatch(r'[a-f0-9]{32}', intent.get('nonce', '')) and
+         intent.get('status') in (('committed',) if committed else ('committed', 'aborted')), 'retire_intent')
+    resolution = intent.get('resolution')
+    need(isinstance(resolution, dict) and resolution.get('acceptedETag') == view['accepted']['etag'] and
+         resolution.get('acceptedSha256') == view['accepted']['sha256'], 'retire_intent_resolution')
+    if intent['status'] == 'committed':
+        commit = state['commit']
+        original = {**intent, 'status': 'pending', 'resolution': None}
+        candidate = {key: value for key, value in state['current'].items() if key != 'proof'}
+        prior = intent.get('previous')
+        prior_value = checked_observation(prior, allow_absent=True)
+        need(resolution.get('kind') == 'accepted' and
+             resolution.get('hostReceiptSha256') == state['current']['proof']['hostReceiptSha256'] and
+             commit['nonce'] == intent['nonce'] and commit['intentSha256'] == canonical_sha(original) and
+             commit.get('previousETag') == prior['etag'] and commit.get('previousStateSha256') == prior['sha256'] and
+             candidate == intent.get('candidate') and state.get('rollback') == (prior_value.get('current') if prior_value else None),
+             'retire_intent_binding')
+    else:
+        need(resolution.get('kind') in ('never_reserved', 'rolled_back') and
+             resolution.get('hostReceiptSha256') is None, 'retire_intent_resolution')
+    return state, intent
+
+
+def reference_plan(reference, receipt):
+    directory = BASE / reference['runtimeSha'] / 'china-next' / receipt['nonce']
+    for parent in (BASE, directory.parent.parent, directory.parent, directory):
+        private_directory(parent)
+    regular(directory / 'PLAN.json', 256 * 1024)
+    plan = json.loads((directory / 'PLAN.json').read_bytes())
+    validate_plan(plan)
+    bindings = {'runtimeSha': 'runtimeSha', 'pricingRuntimeSha': 'pricingRuntimeSha', 'imageId': 'imageId',
+                'generationId': 'generationId', 'generationManifestSha256': 'generationManifestSha256',
+                'receiptSha256': 'privateGenerationReceiptSha256', 'sourceDescriptorSha256': 'sourceDescriptorSha256'}
+    need(plan.get('nonce') == receipt['nonce'] and all(reference[left] == plan.get(right) for left, right in bindings.items()),
+         'retire_plan_binding')
+    return directory, plan
+
+
+def verified_history(reference, previous=None):
+    receipt, raw = accepted_reference_receipt(reference)
+    outcome = read_outcome({'runtimeSha': reference['runtimeSha'], 'nonce': receipt['nonce']}, verify_current=False)
+    need(outcome.get('status') == 'accepted' and outcome.get('hostReceiptBase64') == base64.b64encode(raw).decode() and
+         outcome.get('hostReceiptSha256') == sha(raw), 'retire_history')
+    _, plan = reference_plan(reference, receipt)
+    if previous is not None:
+        need(generation_update(plan) and plan.get('previousAcceptedState') == previous['value'] and
+             plan.get('previousAcceptedETag') == previous['etag'] and
+             plan.get('previousAcceptedStateSha256') == previous['sha256'], 'retire_original_plan')
+    return receipt
+
+
+def collect_local_generation_files(reference, receipt, assert_current):
+    directory, plan = reference_plan(reference, receipt)
+    generation_reference(reference, receipt['nonce'])
+    descriptors = [row for row in plan['files'] if row['name'] in HOST_BULK_FILES]
+    plan_sha = file_sha(directory / 'PLAN.json')
+    def fence():
+        assert_current()
+        for parent in (BASE, directory.parent.parent, directory.parent, directory, directory / 'generation'):
+            private_directory(parent)
+        regular(directory / 'PLAN.json', 256 * 1024)
+        need(file_sha(directory / 'PLAN.json') == plan_sha, 'retire_plan_changed')
+        rows = [docker('GET', '/containers/' + item['Id'] + '/json') for item in docker('GET', '/containers/json?all=1')]
+        for row in rows:
+            for mount in row.get('Mounts', []):
+                source = mount.get('Source')
+                if not source:
+                    continue
+                need(isinstance(source, str) and Path(source).is_absolute(), 'retire_mount_path')
+                mounted = Path(source).resolve()
+                need(mounted != directory and mounted not in directory.parents and directory not in mounted.parents,
+                     'retire_files_mounted')
+    deleted = freed = 0
+    for descriptor in descriptors:
+        fence()
+        filename = (directory if descriptor['name'] == 'image.tar' else directory / 'generation') / descriptor['name']
+        try:
+            filename.lstat()
+        except FileNotFoundError:
+            continue
+        before = regular(filename)
+        need(before.st_size == descriptor['bytes'] and file_sha(filename) == descriptor['sha256'], 'retire_file_hash')
+        fence()
+        after = regular(filename)
+        need(all(getattr(before, name) == getattr(after, name) for name in
+                 ('st_dev', 'st_ino', 'st_size', 'st_mtime_ns', 'st_ctime_ns')), 'retire_file_changed')
+        filename.unlink()
+        parent_fd = os.open(filename.parent, os.O_RDONLY | os.O_DIRECTORY)
+        try:
+            os.fsync(parent_fd)
+        finally:
+            os.close(parent_fd)
+        need(not filename.exists(), 'retire_file_still_present')
+        deleted += 1
+        freed += descriptor['bytes']
+    fence()
+    # Also make a previous interrupted unlink durable when this attempt found
+    # the file already absent (including image.tar in the nonce directory).
+    for parent in (directory, directory / 'generation'):
+        parent_fd = os.open(parent, os.O_RDONLY | os.O_DIRECTORY)
+        try:
+            os.fsync(parent_fd)
+        finally:
+            os.close(parent_fd)
+    return {'filesDeleted': deleted, 'freedBytes': freed}
+
+
+def retire_reference(obsolete, protected_references, protected_ids, assert_current):
+    """One immutable task target. Its pinned bulk files are removed only after
+    its process and every mount reference are gone; proofs and images remain."""
+    assert_current()
+    result = {'retiredContainers': 0, 'directoriesDeleted': 0, 'imagesDeleted': 0, 'filesDeleted': 0, 'freedBytes': 0}
+    if obsolete is None:
+        return {**result, 'reason': 'no_previous_rollback'}
+    protected = {reference['generationId'] for reference in protected_references if reference}
+    need(obsolete.get('market') == 'china' and obsolete.get('runtimeSha') != RETAINED and
+         obsolete.get('generationId') not in protected, 'retire_protected')
+    old_receipt = verified_history(obsolete)
+    rows = [docker('GET', '/containers/' + item['Id'] + '/json') for item in docker('GET', '/containers/json?all=1')]
+    targets = [row for row in rows if row['Config'].get('Labels', {}).get('avtocena.china.nonce') == old_receipt['nonce']]
+    if not targets:
+        return {**result, **collect_local_generation_files(obsolete, old_receipt, assert_current), 'reason': 'already_absent'}
+    need(len(targets) == 1, 'retire_ambiguous')
+    target = targets[0]
+    need(target['Id'] not in protected_ids and target['Config'].get('Labels', {}).get('avtocena.application') == 'web' and
+         target['Config'].get('Labels', {}).get('avtocena.role') == 'independent-china', 'retire_foreign')
+    check_mounted_reference(target, obsolete, old_receipt['nonce'], require_running=False)
+    identity = protected_identity(target)
+    assert_current()
+    need(protected_identity(docker('GET', '/containers/' + target['Id'] + '/json')) == identity, 'retire_target_changed')
+    if target['State']['Running']:
+        docker('POST', '/containers/' + target['Id'] + '/stop?t=10')
+    stopped = docker('GET', '/containers/' + target['Id'] + '/json')
+    check_mounted_reference(stopped, obsolete, old_receipt['nonce'], require_running=False)
+    need(not stopped['State']['Running'] and all(stopped[key] == target[key] for key in ('Id', 'Image', 'Config', 'HostConfig', 'Mounts')),
+         'retire_target_changed')
+    assert_current()
+    docker('DELETE', '/containers/' + target['Id'] + '?v=false&force=false')
+    assert_current()
+    return {**result, **collect_local_generation_files(obsolete, old_receipt, assert_current),
+            'retiredContainers': 1, 'generationId': obsolete['generationId']}
+
+
+def retire_recovery(params):
+    """Authenticated retry of one queued post-commit cleanup. The caller holds
+    the China lease and sends fresh pinned accepted/intent observations. This
+    function takes the host lock but never initializes a candidate or a nonce
+    directory. All eligibility comes from the original committed witness."""
+    previous_observation = params.get('previousAccepted')
+    previous = checked_accepted_observation(previous_observation)
+    original_view = params.get('acceptedPublication')
+    original, original_intent = checked_publication_view(original_view, committed=True)
+    need(original_intent['previous'] == previous_observation and
+         original['revision'] == previous['revision'] + 2 and original.get('rollback') == previous['current'], 'retire_successor')
+    fresh, _ = checked_publication_view(params.get('currentState'))
+    need(fresh['revision'] >= original['revision'], 'retire_state_older')
+    obsolete = previous.get('rollback')
+    protected = [fresh['current'], fresh.get('rollback')]
+    need(obsolete is None or all(reference is None or reference['generationId'] != obsolete['generationId'] for reference in protected),
+         'retire_protected')
+    lock = os.open('/run/lock/avtocena-runtime-change.lock', os.O_RDONLY | os.O_NOFOLLOW | os.O_CLOEXEC)
+    try:
+        metadata = os.fstat(lock)
+        need(stat.S_ISREG(metadata.st_mode) and metadata.st_uid == 0 and metadata.st_nlink == 1, 'runtime_lock')
+        fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        verified_history(previous['current'])
+        verified_history(original['current'], previous_observation)
+        current_receipt = verified_history(fresh['current'])
+        current = verify_live_reference(fresh['current'], current_receipt['nonce'])
+        ingress = CONFIG.read_bytes()
+        guarded = [(current, fresh['current'], current_receipt['nonce'])]
+        if fresh.get('rollback') is not None:
+            rollback_receipt = verified_history(fresh['rollback'])
+            rows = [docker('GET', '/containers/' + item['Id'] + '/json') for item in docker('GET', '/containers/json?all=1')]
+            rollback = [row for row in rows if row['Config'].get('Labels', {}).get('avtocena.china.nonce') == rollback_receipt['nonce']]
+            need(len(rollback) == 1 and rollback[0]['Id'] != current['Id'], 'retire_rollback')
+            check_mounted_reference(rollback[0], fresh['rollback'], rollback_receipt['nonce'])
+            guarded.append((rollback[0], fresh['rollback'], rollback_receipt['nonce']))
+        identities = {row['Id']: protected_identity(row) for row, _, _ in guarded}
+        def assert_current():
+            regular(CONFIG, 1024 * 1024)
+            need(CONFIG.read_bytes() == ingress, 'ingress_changed')
+            for row, reference, nonce in guarded:
+                actual = docker('GET', '/containers/' + row['Id'] + '/json')
+                need(protected_identity(actual) == identities[row['Id']], 'retire_protected_changed')
+                check_mounted_reference(actual, reference, nonce)
+            health(backend(ingress), fresh['current']['runtimeSha'])
+            need(CONFIG.read_bytes() == ingress, 'ingress_changed')
+        return retire_reference(obsolete, protected, set(identities), assert_current)
+    finally:
+        os.close(lock)
 
 
 class Host:
@@ -259,7 +618,7 @@ class Host:
                                             'FX_RECEIPT.json', 'RECONCILIATION.json', 'DISPOSITIONS.ndjson'} else self.directory) / name
 
     def upload(self, name, stream):
-        need(name in FILE_NAMES and name not in self.uploaded and not self.candidate, 'upload_scope')
+        need(name in expected_files(self.plan) and name not in self.uploaded and not self.candidate, 'upload_scope')
         descriptor = next(f for f in self.plan['files'] if f['name'] == name)
         packed = self.directory / (name + '.incoming.gz')
         digest = hashlib.sha256()
@@ -299,10 +658,10 @@ class Host:
         need(protected_identity(current) == self.retained_identity, 'retained_changed')
         regular(CONFIG, 1024 * 1024)
         need(CONFIG.read_bytes() == (self.proposed if self.switched else self.original), 'ingress_changed')
-        health(self.old_port, RETAINED)
+        health(self.old_port, retained_runtime(self.plan))
 
     def start(self):
-        need(self.uploaded == FILE_NAMES and self.candidate is None, 'upload_not_complete')
+        need(self.uploaded == expected_files(self.plan) and self.candidate is None, 'upload_not_complete')
         self.lock = os.open('/run/lock/avtocena-runtime-change.lock', os.O_RDONLY | os.O_NOFOLLOW | os.O_CLOEXEC)
         info = os.fstat(self.lock)
         need(stat.S_ISREG(info.st_mode) and info.st_uid == 0 and info.st_nlink == 1, 'runtime_lock')
@@ -317,7 +676,7 @@ class Host:
         need(len(serving) == 1, 'serving_container')
         self.retained = serving[0]
         env = env_map(self.retained)
-        need(env.get('AVTOCENA_RELEASE_SHA') == RETAINED and env.get('AVTOCENA_CALCULATION_VERSION') == CALCULATION and
+        need(env.get('AVTOCENA_RELEASE_SHA') == retained_runtime(self.plan) and env.get('AVTOCENA_CALCULATION_VERSION') == CALCULATION and
              self.retained['State']['Running'] and not self.retained['HostConfig']['Privileged'], 'serving_identity')
         need(self.retained['Config'].get('WorkingDir') == '/app' and self.retained['Config'].get('User', '') in ('', 'root', '0'), 'serving_config')
         mounts = self.retained.get('Mounts', [])
@@ -326,6 +685,14 @@ class Host:
         private = [row for row in mounts if row['Destination'] == '/app/data/knowledge/encyclopedia/calculation-v1.json']
         need(len(private) == 1 and file_sha(Path(private[0]['Source'])) ==
              '66cc4ce64e0469daad2991251f88887dcd3a07cc26510ca1b58696bcea348a3c', 'encyclopedia_unchanged')
+        previous_generation = None
+        if generation_update(self.plan):
+            previous, previous_receipt, previous_raw = accepted_predecessor(self.plan)
+            outcome = read_outcome({'runtimeSha': previous['runtimeSha'], 'nonce': previous_receipt['nonce']})
+            need(outcome.get('status') == 'accepted' and
+                 outcome.get('hostReceiptBase64') == base64.b64encode(previous_raw).decode() and
+                 outcome.get('hostReceiptSha256') == sha(previous_raw), 'predecessor_not_accepted')
+            previous_generation = check_mounted_reference(self.retained, previous, previous_receipt['nonce'])
         self.retained_identity = protected_identity(self.retained)
         self.guard()
         claimed = {int(binding['HostPort']) for row in inspected for bindings in
@@ -336,27 +703,41 @@ class Host:
         self.port = ports[0]
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as probe:
             probe.bind(('127.0.0.1', self.port))
-        info = docker('GET', '/info')
-        need(info.get('ServerVersion') == '29.1.3' and
-             ['driver-type', 'io.containerd.snapshotter.v1'] in info.get('DriverStatus', []), 'image_store')
-        command(['/usr/bin/docker', 'load', '--input', str(self.directory / 'image.tar')], timeout=900)
+        if not generation_update(self.plan):
+            info = docker('GET', '/info')
+            need(info.get('ServerVersion') == '29.1.3' and
+                 ['driver-type', 'io.containerd.snapshotter.v1'] in info.get('DriverStatus', []), 'image_store')
+            command(['/usr/bin/docker', 'load', '--input', str(self.directory / 'image.tar')], timeout=900)
         image = docker('GET', '/images/' + self.plan['imageId'] + '/json')
         need(image.get('Id') == self.plan['imageId'] and image.get('Os') == 'linux' and image.get('Architecture') == 'amd64' and
              image['Config'].get('Labels', {}).get('org.opencontainers.image.revision') == self.plan['runtimeSha'], 'image_identity')
         generation = json.loads((self.generation / 'GENERATION.json').read_bytes())
         need(generation.get('generationId') == self.plan['generationId'] and generation.get('runtimeSha') == self.plan['pricingRuntimeSha'] and
              generation.get('prepared') is True and generation.get('source', {}).get('supplierLatestVerified') is True, 'generation_identity')
-        env.update(AVTOCENA_RELEASE_SHA=self.plan['runtimeSha'], AVTOCENA_BUILD_CALCULATION_VERSION=generation['calculationVersion'],
-                   CATALOG_CHINA_LOCAL_GENERATION_DIR='/run/avtocena-china-generation',
-                   CATALOG_CHINA_LOCAL_MANIFEST_SHA256=self.plan['generationManifestSha256'],
-                   CATALOG_CHINA_LOCAL_RUNTIME_SHA=self.plan['pricingRuntimeSha'])
-        binds = [row['Source'] + ':' + row['Destination'] + ':ro' for row in mounts]
-        need(not any(row['Destination'] == '/run/avtocena-china-generation' for row in mounts), 'generation_mount_collision')
-        binds.append(str(self.generation) + ':/run/avtocena-china-generation:ro')
+        if generation_update(self.plan):
+            need(generation['calculationVersion'] == previous_generation.get('calculationVersion') ==
+                 env.get('AVTOCENA_BUILD_CALCULATION_VERSION'), 'data_only_calculation_version')
+            env['CATALOG_CHINA_LOCAL_MANIFEST_SHA256'] = self.plan['generationManifestSha256']
+            candidate_env = [item.split('=', 1)[0] + '=' + env[item.split('=', 1)[0]] for item in self.retained['Config']['Env']]
+            old_mount = next(row for row in mounts if row['Destination'] == GENERATION_MOUNT)
+            old_bind = old_mount['Source'] + ':' + GENERATION_MOUNT + ':ro'
+            retained_binds = self.retained['HostConfig'].get('Binds')
+            need(isinstance(retained_binds, list) and retained_binds.count(old_bind) == 1 and len(retained_binds) == len(mounts),
+                 'data_only_bindings')
+            binds = [str(self.generation) + ':' + GENERATION_MOUNT + ':ro' if item == old_bind else item for item in retained_binds]
+        else:
+            env.update(AVTOCENA_RELEASE_SHA=self.plan['runtimeSha'], AVTOCENA_BUILD_CALCULATION_VERSION=generation['calculationVersion'],
+                       CATALOG_CHINA_LOCAL_GENERATION_DIR=GENERATION_MOUNT,
+                       CATALOG_CHINA_LOCAL_MANIFEST_SHA256=self.plan['generationManifestSha256'],
+                       CATALOG_CHINA_LOCAL_RUNTIME_SHA=self.plan['pricingRuntimeSha'])
+            candidate_env = [key + '=' + value for key, value in sorted(env.items())]
+            binds = [row['Source'] + ':' + row['Destination'] + ':ro' for row in mounts]
+            need(not any(row['Destination'] == GENERATION_MOUNT for row in mounts), 'generation_mount_collision')
+            binds.append(str(self.generation) + ':' + GENERATION_MOUNT + ':ro')
         self.spec = {'Image': self.plan['imageId'], 'WorkingDir': '/app',
                      'Entrypoint': copy.deepcopy(self.retained['Config']['Entrypoint']),
                      'Cmd': copy.deepcopy(self.retained['Config']['Cmd']),
-                     'Env': [key + '=' + value for key, value in sorted(env.items())],
+                     'Env': candidate_env,
                      'Labels': {'avtocena.application': 'web', 'avtocena.role': 'independent-china',
                                 'org.opencontainers.image.revision': self.plan['runtimeSha'], 'avtocena.china.nonce': self.plan['nonce']},
                      'ExposedPorts': {'3000/tcp': {}},
@@ -512,7 +893,7 @@ class Host:
                 'hostReceiptSha256': sha(encoded), 'hostReceiptBase64': base64.b64encode(encoded).decode(),
                 'acceptedAt': accepted_at, 'nonce': self.plan['nonce'],
                 'browserReportSha256': verdict['reportSha256'],
-                'encyclopediaWrites': 0, 'otherMarketWrites': 0, 'retainedRuntime': RETAINED}
+                'encyclopediaWrites': 0, 'otherMarketWrites': 0, 'retainedRuntime': retained_runtime(self.plan)}
 
     def browser_evidence(self, params):
         need(self.switched and not self.accepted and self.verdict_deadline is not None and
@@ -531,6 +912,35 @@ class Host:
             need(file_sha(self.directory / name) == sha(raw), 'browser_evidence_readback')
         return {'saved': True, 'speedReportSha256': sha(speed_raw), 'detailsReportSha256': sha(details_raw)}
 
+    def retire(self, params):
+        """After the private accepted-state CAS, retire only the former rollback
+        process and its verified bulk files. Preserve historical proofs/images."""
+        need(generation_update(self.plan) and self.accepted, 'retire_before_acceptance')
+        self.verify_candidate()
+        state = params.get('acceptedState')
+        need(isinstance(state, dict) and state.get('version') == 1 and state.get('market') == 'china' and
+             state.get('kind') == 'china-accepted-state-v1' and state.get('pending') is None and
+             type(state.get('revision')) is int and state['revision'] == self.plan['previousAcceptedState']['revision'] + 2,
+             'retire_state')
+        need(canonical_sha(state) == params.get('acceptedStateSha256') and
+             isinstance(params.get('acceptedETag'), str) and
+             re.fullmatch(r'"[^"\x00-\x20\x7f]{1,250}"', params['acceptedETag']) and
+             params['acceptedETag'] != self.plan['previousAcceptedETag'], 'retire_state_hash')
+        current = state.get('current')
+        receipt, raw = accepted_reference_receipt(current)
+        terminal = self.directory / 'ACCEPTED.json'
+        regular(terminal, 256 * 1024)
+        commit = state.get('commit')
+        need(raw == terminal.read_bytes() and receipt['nonce'] == self.plan['nonce'] and
+             current['generationId'] == self.plan['generationId'] and isinstance(commit, dict) and
+             commit.get('nonce') == self.plan['nonce'] and commit.get('acceptedAt') == receipt.get('acceptedAt') and
+             commit.get('previousETag') == self.plan['previousAcceptedETag'] and
+             commit.get('previousStateSha256') == self.plan['previousAcceptedStateSha256'] and
+             state.get('rollback') == self.plan['previousAcceptedState']['current'], 'retire_commit')
+        verify_live_reference(current, self.plan['nonce'])
+        return retire_reference(self.plan['previousAcceptedState'].get('rollback'), [state['current'], state['rollback']],
+                                {self.candidate, self.retained['Id']}, self.verify_candidate)
+
     def cleanup(self):
         terminal = self.directory / 'ACCEPTED.json'
         if not self.accepted and terminal.exists():
@@ -548,7 +958,7 @@ class Host:
                 self.replace_config(self.proposed, self.original)
             else:
                 need(current == self.original, 'rollback_ingress_changed')
-            health(self.old_port, RETAINED)
+            health(self.old_port, retained_runtime(self.plan))
             self.switched = False
         if self.candidate:
             row = docker('GET', '/containers/' + self.candidate + '/json')
@@ -567,7 +977,7 @@ class Host:
                      'previousAcceptedETag': self.plan.get('previousAcceptedETag'),
                      'previousAcceptedStateSha256': self.plan.get('previousAcceptedStateSha256'),
                      'rolledBackAt': datetime.datetime.now(datetime.timezone.utc).isoformat().replace('+00:00', 'Z'),
-                     'retainedContainerId': self.retained['Id'], 'retainedRuntimeSha': RETAINED,
+                     'retainedContainerId': self.retained['Id'], 'retainedRuntimeSha': retained_runtime(self.plan),
                      'retainedImageId': self.retained['Image'], 'retainedRunning': True,
                      'ingressRestored': True, 'candidateRemoved': True}
             if not (self.directory / 'ROLLED_BACK.json').exists():
@@ -579,7 +989,7 @@ def main():
     signal.signal(signal.SIGHUP, lambda *_: (_ for _ in ()).throw(ReleaseError('china_host_disconnected')))
     signal.signal(signal.SIGALRM, lambda *_: (_ for _ in ()).throw(ReleaseError('china_host_browser_deadline')))
     host = None
-    recovered = False
+    recovered = maintenance = False
     emit({'kind': 'ready', 'protocol': 1})
     try:
         while True:
@@ -600,9 +1010,13 @@ def main():
                 need(host is None, 'recovery_after_init')
                 value = read_outcome(params)
                 recovered = True
+            elif method == 'retire_recovery':
+                need(host is None, 'recovery_after_init')
+                value = retire_recovery(params)
+                recovered = maintenance = True
             elif method == 'close' and host is None:
                 need(recovered, 'close_uninitialized')
-                emit({'kind': 'result', 'id': identity, 'value': {'closed': True, 'readOnly': True}})
+                emit({'kind': 'result', 'id': identity, 'value': {'closed': True, 'readOnly': not maintenance}})
                 return
             elif method == 'init':
                 need(host is None, 'already_initialized')
@@ -625,6 +1039,8 @@ def main():
                     value = host.accept(params['verdict'])
                 elif method == 'browser_evidence':
                     value = host.browser_evidence(params)
+                elif method == 'retire':
+                    value = host.retire(params)
                 elif method == 'close':
                     need(host.accepted, 'close_unaccepted')
                     emit({'kind': 'result', 'id': identity, 'value': {'closed': True, 'accepted': True}})

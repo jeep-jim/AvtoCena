@@ -8,7 +8,7 @@ import {createHash} from 'node:crypto';
 const need = (value, code) => assert(value, 'china_ssh_' + code);
 const hash = raw => createHash('sha256').update(raw).digest('hex');
 const quote = value => "'" + value.replaceAll("'", "'\\''") + "'";
-const methods = new Set(['init', 'upload', 'start', 'functional', 'speed', 'switch', 'browser_evidence', 'accept', 'recover', 'close']);
+const methods = new Set(['init', 'upload', 'start', 'functional', 'speed', 'switch', 'browser_evidence', 'accept', 'recover', 'retire', 'retire_recovery', 'close']);
 
 /** A single authenticated, ordered stream. Raw private files never enter JSON
  * logs; host reads exactly the already-approved compressed byte length. */
