@@ -39,10 +39,10 @@ for (const variant of ['current', 'baseline']) {
         resolveDir: path.resolve(path.dirname(component))}));
     }}] : [])]});
 }
-// Use the exact root/public layout imports, including the real font files.
+// Use the exact root/public layout and catalog sidebar imports, including fonts.
 // PostCSS runs from apps/web so Tailwind resolves its actual config/content.
-const layoutFiles = ['apps/web/app/layout.tsx', 'apps/web/app/(public)/layout.tsx'];
-const layoutStyles = layoutFiles.flatMap(file => [...fs.readFileSync(file, 'utf8').matchAll(/^import\s+['"]([^'"]+\.css)['"];?/gm)]
+const styleImporters = ['apps/web/app/layout.tsx', 'apps/web/app/(public)/layout.tsx', 'apps/web/components/catalog/CatalogSidebar.tsx'];
+const layoutStyles = styleImporters.flatMap(file => [...fs.readFileSync(file, 'utf8').matchAll(/^import\s+['"]([^'"]+\.css)['"];?/gm)]
   .map(([, specifier]) => specifier.startsWith('.') ? path.resolve(path.dirname(file), specifier)
     : require.resolve(specifier, {paths: [path.resolve(path.dirname(file))]})));
 const styleBuild = await build({stdin: {contents: layoutStyles.map(file => `@import ${JSON.stringify(file)};`).join('\n'),
@@ -60,7 +60,7 @@ execFileSync(process.execPath, ['-e', `
 const styleAssets = new Map(Object.keys(styleBuild.metafile.outputs).map(file => [
   '/' + path.relative(temporary, path.resolve(file)).split(path.sep).join('/'), path.resolve(file)]));
 const digestFile = file => createHash('sha256').update(fs.readFileSync(file)).digest('hex');
-report.styles = {source: 'Exact root/public layout CSS imports, compiled with apps/web PostCSS and Tailwind configuration',
+report.styles = {source: 'Exact root/public layout and CatalogSidebar CSS imports, compiled with apps/web PostCSS and Tailwind configuration',
   inputs: [...layoutStyles, 'apps/web/postcss.config.js', 'apps/web/tailwind.config.ts'].map(file => ({file: path.relative(process.cwd(), file), sha256: digestFile(file)})),
   compiledSha256: digestFile(path.join(temporary, 'app.css'))};
 const server = http.createServer((request, response) => {
