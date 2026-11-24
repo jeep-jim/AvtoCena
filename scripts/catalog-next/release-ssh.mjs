@@ -8,7 +8,7 @@ import {createHash} from 'node:crypto';
 const need = (value, code) => assert(value, 'china_ssh_' + code);
 const hash = raw => createHash('sha256').update(raw).digest('hex');
 const quote = value => "'" + value.replaceAll("'", "'\\''") + "'";
-const methods = new Set(['init', 'resume_init', 'upload', 'start', 'functional', 'speed', 'switch', 'browser_evidence', 'accept', 'recover', 'diagnose', 'retire', 'retire_recovery', 'prune_failed_uploads', 'close']);
+const methods = new Set(['init', 'resume_init', 'upload', 'start', 'functional', 'speed', 'switch', 'browser_evidence', 'accept', 'recover', 'diagnose', 'retire', 'retire_recovery', 'prune_failed_uploads', 'prune_failed_witness', 'close']);
 
 export function checkedStartupReport(value) {
   const keys = ['version', 'kind', 'ready', 'elapsedSeconds', 'attempts', 'health', 'candidate', 'reason'];
@@ -43,6 +43,68 @@ export function checkedRetainedFenceReport(value) {
     && [value.beforeStartedAt,value.afterStartedAt].every(time => time === null || typeof time === 'string'
       && /^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(?:\.\d{1,9})?Z$/.test(time)), 'retained_fence_report');
   return value;
+}
+
+/** Only the public paths in the frozen server baseline, plus the scoped China
+ * route, may cross the SSH/report boundary. No raw output or exception text. */
+export function checkedServerSpeedReport(value) {
+  const paths = new Set(['/', '/api/health', '/api/leads', '/autocalc', '/cars', '/login',
+    '/cars/autocatalog', '/cars/autocatalog?make=Changan', '/cars?sort=totalRub',
+    '/cars?market=china', '/cars?market=china&make=Volkswagen&page=2', '/cars?market=europe&make=BMW&page=2',
+    '/cars?market=china&city=%D0%9D%D0%BE%D0%B2%D0%BE%D0%BA%D1%83%D0%B7%D0%BD%D0%B5%D1%86%D0%BA',
+    '/api/catalog/search?market=europe&make=BMW&page=2', '/api/catalog/search?market=china&marketPage=1&page=9',
+    '/api/catalog/search?market=china&budgetTo=1500000&pageSize=6',
+    '/cars/china/BMW/3%20SERIES?powerTo=160&sort=totalRub', '/cars/china/BMW/3?powerTo=160&sort=totalRub']);
+  const phases = new Set(['warm', 'after_ttl', 'after_directory_ttl']);
+  const errors = new Set(['AssertionError', 'HTTPError', 'URLError', 'TimeoutError', 'JSONDecodeError', 'RemoteDisconnected',
+    'IncompleteRead', 'ConnectionResetError', 'ConnectionRefusedError', 'ValueError', 'KeyError', 'TypeError',
+    'OSError', 'SSLError', 'UnicodeDecodeError', 'other']);
+  const exact = (row, keys) => row !== null && typeof row === 'object' && !Array.isArray(row)
+    && Object.keys(row).length === keys.length && keys.every(key => Object.hasOwn(row, key));
+  const natural = number => Number.isSafeInteger(number) && number >= 0;
+  const seconds = number => Number.isFinite(number) && number >= 0 && number <= 86400;
+  const boolean = number => typeof number === 'boolean';
+  const valid = condition => need(condition, 'server_speed_report');
+  valid(exact(value, ['present', 'sha256', 'exitCode', 'samples', 'rejectedSamples']) && boolean(value.present)
+    && Array.isArray(value.samples) && natural(value.rejectedSamples) && value.samples.length + value.rejectedSamples <= 512);
+  if (!value.present) {
+    valid(value.sha256 === null && value.exitCode === null && value.samples.length === 0 && value.rejectedSamples === 0);
+  } else {
+    valid(typeof value.sha256 === 'string' && /^[a-f0-9]{64}$/.test(value.sha256)
+      && Number.isSafeInteger(value.exitCode) && Math.abs(value.exitCode) <= 255);
+    for (const row of value.samples) {
+      valid(row !== null && typeof row === 'object' && !Array.isArray(row));
+      if (row.performanceGate === 'summary') {
+        valid(exact(row, ['performanceGate', 'marketScope', 'routes', 'acceptedBaselineRoutes', 'samples', 'slowSamples',
+          'functionalPassed', 'performanceAccepted', 'latencyBlocking', 'acceptedBaselineEnforced']) && row.marketScope === 'china'
+          && ['routes', 'acceptedBaselineRoutes'].every(key => Array.isArray(row[key]) && row[key].length <= 64 && row[key].every(route => paths.has(route)))
+          && ['samples', 'slowSamples'].every(key => natural(row[key]) && row[key] <= 10000)
+          && ['functionalPassed', 'performanceAccepted', 'latencyBlocking', 'acceptedBaselineEnforced'].every(key => boolean(row[key])));
+        continue;
+      }
+      valid(paths.has(row.path));
+      if (row.performanceRequest === 'started') {
+        valid(exact(row, ['performanceRequest', 'path']));
+      } else if (row.performanceRequest === 'complete') {
+        valid(exact(row, ['performanceRequest', 'path', 'seconds', 'functionalPassed']) && seconds(row.seconds) && boolean(row.functionalPassed));
+      } else if (row.performanceRequest === 'failed') {
+        valid(exact(row, ['performanceRequest', 'path', 'seconds', 'errorType']) && seconds(row.seconds) && errors.has(row.errorType));
+      } else if (phases.has(row.speedBaseline)) {
+        const keys = ['speedBaseline', 'path', 'referenceSeconds', 'measurementNoiseSeconds', 'ceilingSeconds', 'seconds', 'blocking', 'passed'];
+        if (Object.hasOwn(row, 'recheckSeconds') || Object.hasOwn(row, 'recheckMedianSeconds')) {
+          keys.push('recheckSeconds', 'recheckMedianSeconds');
+          valid(Array.isArray(row.recheckSeconds) && row.recheckSeconds.length === 3 && row.recheckSeconds.every(seconds) && seconds(row.recheckMedianSeconds));
+        }
+        valid(exact(row, keys) && ['referenceSeconds', 'measurementNoiseSeconds', 'ceilingSeconds', 'seconds'].every(key => seconds(row[key]))
+          && boolean(row.blocking) && boolean(row.passed));
+      } else if (phases.has(row.performanceGate)) {
+        valid(exact(row, ['performanceGate', 'path', 'seconds', 'ceiling', 'passed', 'functionalPassed', 'latencyBlocking'])
+          && seconds(row.seconds) && seconds(row.ceiling) && ['passed', 'functionalPassed', 'latencyBlocking'].every(key => boolean(row[key])));
+      } else valid(false);
+    }
+  }
+  const raw = JSON.stringify(value); valid(Buffer.byteLength(raw) <= 256 * 1024);
+  return JSON.parse(raw);
 }
 
 /** A single authenticated, ordered stream. Raw private files never enter JSON
@@ -112,6 +174,11 @@ export class ChinaSshSession {
       const error = Error(/^china_host_[a-z0-9_]+$/.test(value.code ?? '') ? value.code : 'china_ssh_remote_error');
       if (startup !== undefined) error.startup = startup;
       if (retainedFence !== undefined) error.retainedFence = retainedFence;
+      if (value.serverSpeed !== undefined) {
+        // Optional evidence can be omitted when malformed. Keep the original
+        // authenticated gate failure so rollback/recovery behavior is unchanged.
+        try { error.serverSpeed = checkedServerSpeedReport(value.serverSpeed); } catch {}
+      }
       row.reject(error); row.readyReject(error);
     } else throw Error('china_ssh_reply_kind');
   }
@@ -121,7 +188,7 @@ export class ChinaSshSession {
     let resolve, reject, readyResolve, readyReject;
     const result = new Promise((yes, no) => { resolve = yes; reject = no; }); result.catch(() => {});
     const ready = new Promise((yes, no) => { readyResolve = yes; readyReject = no; }); ready.catch(() => {});
-    const timeout = method === 'speed' ? 1600000 : method === 'start' ? 1200000 : ['upload', 'resume_init', 'prune_failed_uploads'].includes(method) ? 1800000 : 300000;
+    const timeout = method === 'speed' ? 1600000 : method === 'start' ? 1200000 : ['upload', 'resume_init', 'prune_failed_uploads', 'prune_failed_witness'].includes(method) ? 1800000 : 300000;
     const timer = setTimeout(() => this.abort(Error('china_ssh_' + method + '_timeout')), timeout);
     this.pending.set(id, {resolve, reject, readyResolve, readyReject, timer});
     this.write(Buffer.from(JSON.stringify({id, method, params}) + '\n')).catch(error => this.abort(error));

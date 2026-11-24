@@ -19,7 +19,7 @@ const FILES = ['GENERATION.json', 'details.sqlite', 'query.sqlite', 'FILTER_SEMA
   'regcloud-performance-gate.py', 'accepted-speed-baseline.json'];
 const git = async (root, args) => (await execute('git', ['-c', 'user.name=Startup diagnosis test',
   '-c', 'user.email=diagnosis@example.invalid', ...args], {cwd: root})).stdout.trim();
-const fixedNow = () => '2026-11-24T12:40:00.000Z';
+const fixedNow = () => '2026-11-24T15:40:00.000Z';
 
 function diagnostic() {
   return {version: 1, kind: 'china-host-startup-diagnosis-v1', readOnly: true, selector: {...SELECTOR},
@@ -80,8 +80,15 @@ async function fixture(run, {markerExtra = false, markerOperation = 'inspect-chi
 }
 
 test('exact immutable marker-only push authorizes this fixed diagnosis without a manual bypass', async () => fixture(async f => {
-  assert.equal(SELECTOR.controllerSha, '781d0c7fa66e558d5d2047f876e65500167183a8');
-  assert.equal(SELECTOR.since, '2026-11-24T12:33:00Z'); assert.equal(SELECTOR.until, '2026-11-24T12:36:00Z');
+  assert.deepEqual(SELECTOR, {
+    runtimeSha: '5e62f9ff3a0079b07cd13b8ab912c5720dd22250',
+    pricingRuntimeSha: '64c6338e0db23c8999096bceefbf113c0136fe15',
+    generationId: 'gen_china_45369451603_1',
+    generationManifestSha256: 'd5745797cc162b82e0c0f0b1f49fef65f18f0d6649666562337183b18084dd75',
+    controllerSha: 'ef855201583c250061aed4412421dddc4e6ea732',
+    imageId: 'sha256:7af5df7fa93163687fcb5c0e1ad834176234319de13a4dd92ddc1d954fcc9381',
+    since: '2026-11-24T15:30:00Z', until: '2026-11-24T15:35:00Z',
+  });
   assert.deepEqual(verifyChinaStartupDiagnosisInvocation(f), {version: 1, event: 'push',
     sourceSha: f.sourceSha, approvedSourceSha: f.approvedSourceSha, markerPath: MARKER});
   for (const [key, value] of [['GITHUB_EVENT_NAME', 'workflow_dispatch'], ['GITHUB_EVENT_NAME', 'schedule'],
@@ -134,7 +141,7 @@ test('real invocation then frozen baseline gate precede the secret and only diag
   assert.equal(report.completed, true); assert.equal(report.status, 'complete');
   assert.deepEqual(report.diagnosis.startup, timingDiagnostic().startup);
   assert.deepEqual(report.diagnosis.serverSpeed, timingDiagnostic().serverSpeed);
-  assert.equal(report.failedRunId, '45393054543'); assert.deepEqual(report.selector, SELECTOR);
+  assert.equal(report.failedRunId, '45419783209'); assert.deepEqual(report.selector, SELECTOR);
   for (const field of ['hostMutations', 'storageWrites', 'providerCalls', 'pageRequests']) assert.equal(report[field], 0);
   assert.equal(report.finishedAt, fixedNow()); assert.equal(report.diagnosisControllerSha, f.sourceSha);
   assert.equal(report.approvedControllerSha, f.approvedSourceSha);

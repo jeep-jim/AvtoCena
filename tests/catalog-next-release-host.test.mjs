@@ -4,6 +4,8 @@ import {spawnSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
 
 const hostFile = fileURLToPath(new URL('../scripts/catalog-next/release-host.py', import.meta.url));
+const gateFile = fileURLToPath(new URL('../scripts/regcloud-performance-gate.py', import.meta.url));
+const baselineFile = fileURLToPath(new URL('../docs/operations/2026-11-11-accepted-speed-baseline.json', import.meta.url));
 // Exercise the real host methods against a private local directory and an
 // in-memory Docker/nginx substitute. No SSH, socket or OS command is allowed.
 const harness = String.raw`
@@ -174,6 +176,33 @@ with tempfile.TemporaryDirectory(prefix='china-host-test-') as directory:
         m.subprocess.run = lambda *args, **kwargs: types.SimpleNamespace(returncode=1, stdout=b'')
         refused(host.speed, 'server_speed_failed')
         assert not host.speed_passed
+    elif case in ('speed_failure_evidence', 'speed_failure_bad_evidence'):
+        host.plan['files'] = []
+        for name, source in [('regcloud-performance-gate.py', sys.argv[3]), ('accepted-speed-baseline.json', sys.argv[4])]:
+            raw = pathlib.Path(source).read_bytes(); m.new_file(host.directory / name, raw)
+            host.plan['files'].append({'name': name, 'bytes': len(raw), 'sha256': m.sha(raw)})
+        if case == 'speed_failure_bad_evidence':
+            (host.directory / 'regcloud-performance-gate.py').chmod(0o600)
+            (host.directory / 'regcloud-performance-gate.py').write_bytes(b'PRIVATE_UNTRUSTED_GATE')
+        sample = {'speedBaseline': 'warm', 'path': '/cars?market=china', 'referenceSeconds': 0.09,
+            'measurementNoiseSeconds': 0.05, 'ceilingSeconds': 0.14, 'seconds': 0.2, 'blocking': True,
+            'passed': False, 'recheckSeconds': [0.18, 0.19, 0.17], 'recheckMedianSeconds': 0.18, 'privateBody': 'PRIVATE_RESPONSE'}
+        m.subprocess.run = lambda *args, **kwargs: types.SimpleNamespace(returncode=1, stdout=m.json_bytes(sample) + b'\n')
+        messages = []; m.emit = messages.append; m.Host = lambda plan: host
+        m.signal.signal = lambda *args: None; m.signal.setitimer = lambda *args: None
+        real_close = m.os.close; m.os.close = lambda descriptor: None if descriptor == 999 else real_close(descriptor)
+        sys.stdin = types.SimpleNamespace(buffer=io.BytesIO(b'{"id":1,"method":"init","params":{"plan":{}}}\n{"id":2,"method":"speed"}\n'))
+        refused(m.main, 'server_speed_failed')
+        failure = messages[-1]
+        assert failure['kind'] == 'error' and failure['code'] == 'china_host_server_speed_failed'
+        assert not host.speed_passed and host.candidate is None and retained == retained_before
+        assert m.CONFIG.read_bytes() == original and (host.directory / 'ROLLED_BACK.json').exists()
+        assert 'PRIVATE' not in json.dumps(failure)
+        if case == 'speed_failure_evidence':
+            del sample['privateBody']
+            assert failure['serverSpeed']['samples'] == [sample] and failure['serverSpeed']['exitCode'] == 1
+            assert failure['serverSpeed']['sha256'] == m.file_sha(host.directory / 'server-speed-result.json')
+        else: assert 'serverSpeed' not in failure
     elif case == 'rollback':
         checked()
         assert host.switch()['switched']
@@ -362,6 +391,8 @@ for (const [name, description] of [
   ['gates', 'requires actual functional and speed gates before switch, and a switch before acceptance'],
   ['functional', 'requires complete oracle coverage, exact card identities and exact prices'],
   ['speed', 'enforces the accepted baseline within China scope and refuses a failed speed process'],
+  ['speed_failure_evidence', 'returns only sanitized server-speed failure evidence and still removes its failed candidate'],
+  ['speed_failure_bad_evidence', 'keeps the original speed failure and rollback when diagnostic verification fails'],
   ['rollback', 'rolls ingress back before removing only its own candidate'],
   ['failed_reload', 'restores the original backend after a switch reload failure'],
   ['foreign_ingress', 'never overwrites changed foreign ingress or stops its possible live backend'],
@@ -375,7 +406,7 @@ for (const [name, description] of [
   ['plan_identity', 'requires exact source, retained runtime, generation bytes and frozen baseline'],
 ]) {
   test('China release host ' + description, () => {
-    const result = spawnSync('python3', ['-I', '-B', '-c', harness, hostFile, name], {encoding: 'utf8', timeout: 10000});
+    const result = spawnSync('python3', ['-I', '-B', '-c', harness, hostFile, name, gateFile, baselineFile], {encoding: 'utf8', timeout: 10000});
     assert.equal(result.status, 0, result.stderr || String(result.error));
     assert.deepEqual(JSON.parse(result.stdout), {case: name, passed: true});
   });

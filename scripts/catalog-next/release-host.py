@@ -37,8 +37,18 @@ GENERATION_MOUNT = '/run/avtocena-china-generation'
 HOST_BULK_FILES = {'details.sqlite', 'query.sqlite', 'DISPOSITIONS.ndjson', 'FILTER_SEMANTICS.json',
                    'FX_RECEIPT.json', 'RECONCILIATION.json', 'image.tar'}
 FAILED_UPLOAD_RUNTIME = '822f925bb30c4e07010f6e14b6574f1b4bd6306e'
-FAILED_UPLOAD_CURRENT_RUNTIME = '5e62f9ff3a0079b07cd13b8ab912c5720dd22250'
 FAILED_UPLOAD_GENERATION = 'gen_china_45369451603_1'
+FAILED_UPLOAD_WITNESS = {
+    'runtimeSha': '5e62f9ff3a0079b07cd13b8ab912c5720dd22250',
+    'pricingRuntimeSha': '64c6338e0db23c8999096bceefbf113c0136fe15',
+    'generationId': FAILED_UPLOAD_GENERATION,
+    'generationManifestSha256': 'd5745797cc162b82e0c0f0b1f49fef65f18f0d6649666562337183b18084dd75',
+    'privateGenerationReceiptSha256': '25f5277665bcc1a72879d9a7e55cb39fc7d4bd57a061be2593d3a6a9d9f1cc22',
+    'nonce': '2d015d0beef2af9f076bd1d47987dd88',
+    'planSha256': '773cb37c8ecae1de789c895888fd2e56264b73503def96a32c86ee845283338c',
+    'rollbackSha256': '3a431be4e34714930ce483f28575c797df5f49687a2157ab2be21d31016a8a06',
+    'imageId': 'sha256:7af5df7fa93163687fcb5c0e1ad834176234319de13a4dd92ddc1d954fcc9381',
+}
 FAILED_UPLOAD_TARGETS = (
     {'nonce': '2ab6a761ac784094d102edd7be8708af',
      'planSha256': '998a10e522b1aacf493a309e9280075660816cb0d6926246884148f594d6d036',
@@ -48,6 +58,8 @@ FAILED_UPLOAD_TARGETS = (
      'rollbackSha256': 'b26506fabb43efa22e8b38c8163e8f0098a775d0ca33c8e3259124b0b5ce7f28'},
 )
 FAILED_UPLOAD_BULK_FILES = ('details.sqlite', 'query.sqlite', 'DISPOSITIONS.ndjson', 'image.tar')
+FAILED_WITNESS_ACCEPTED_RUNTIME = '860e1ff601c6852eb3b1474982e52e3a5300c4af'
+FAILED_WITNESS_BULK_BYTES = 13041560320
 
 
 class ReleaseError(Exception):
@@ -910,112 +922,166 @@ def reuse_lock():
 
 
 def prune_failed_uploads(params):
-    """Remove only the two reviewed failed local copies after first acceptance.
+    """Remove eight old failed-upload files before first China acceptance.
 
-    These nonces contain the SAME REG generation as the accepted runtime, so
-    they must never enter generation GC. No accepted pointer, ingress, Docker
-    object, directory, proof or REG object is mutated by this operation.
-    Missing files are an idempotent observation, not a claim that we freed them.
+    The newer, fully hashed failed upload remains a protected local witness.
+    The same generation stays in REG; no proof, image, directory, publication
+    state, ingress or container is changed. Missing old files are resumable.
     """
-    need(isinstance(params, dict) and set(params) == {'currentState', 'leaseExpiresAt'}, 'prune_parameters')
+    need(isinstance(params, dict) and set(params) == {'publicationState', 'leaseExpiresAt'}, 'prune_parameters')
+    view = params['publicationState']
+    need(isinstance(view, dict) and set(view) == {'accepted', 'intent'}, 'prune_unaccepted_state')
+    for observation in view.values():
+        need(isinstance(observation, dict) and set(observation) == {'found', 'etag', 'sha256', 'value'}
+             and observation['found'] is False and all(observation[key] is None for key in ('etag', 'sha256', 'value')),
+             'prune_unaccepted_state')
     expiry = params.get('leaseExpiresAt')
     need(isinstance(expiry, str) and re.fullmatch(r'\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(?:\.\d{1,6})?Z', expiry), 'prune_lease')
     deadline = datetime.datetime.fromisoformat(expiry.replace('Z', '+00:00')).timestamp()
     need(time.time() < deadline <= time.time() + 2 * 60 * 60, 'prune_lease')
-    state, _ = checked_publication_view(params['currentState'], committed=True)
-    reference = state['current']
-    need(reference['runtimeSha'] == FAILED_UPLOAD_CURRENT_RUNTIME and reference['generationId'] == FAILED_UPLOAD_GENERATION
-         and state.get('rollback') is None, 'prune_current')
     lock = reuse_lock()
     try:
-        current_receipt = verified_history(reference)
-        current = verify_live_reference(reference, current_receipt['nonce'])
-        retained = docker('GET', '/containers/' + current_receipt['retainedContainerId'] + '/json')
-        retained_env = env_map(retained)
-        need(retained['Id'] != current['Id'] and retained['State']['Running'] is True
-             and retained_env.get('AVTOCENA_RELEASE_SHA') == RETAINED
-             and retained_env.get('AVTOCENA_CALCULATION_VERSION') == CALCULATION, 'prune_retained')
+        witness = FAILED_UPLOAD_WITNESS
+        witness_directory = BASE / witness['runtimeSha'] / 'china-next' / witness['nonce']
+        def check_directories(directory):
+            for parent in (BASE, directory.parent.parent, directory.parent, directory, directory / 'generation'):
+                private_directory(parent)
+        check_directories(witness_directory)
+        witness_plan, witness_plan_raw = diagnosis_json(witness_directory / 'PLAN.json')
+        witness_rollback, witness_rollback_raw = diagnosis_json(witness_directory / 'ROLLED_BACK.json')
+        need(sha(witness_plan_raw) == witness['planSha256'] and sha(witness_rollback_raw) == witness['rollbackSha256'],
+             'prune_witness_proof')
+        validate_plan(witness_plan)
+        need(not generation_update(witness_plan)
+             and all(witness_plan[key] == value for key, value in witness.items() if key not in ('planSha256', 'rollbackSha256'))
+             and witness_plan.get('previousAcceptedETag') is None and witness_plan.get('previousAcceptedStateSha256') is None,
+             'prune_witness_plan')
+        bindings = {'nonce': 'nonce', 'release': 'runtimeSha', 'pricingRuntimeSha': 'pricingRuntimeSha',
+                    'generationId': 'generationId', 'generationManifestSha256': 'generationManifestSha256',
+                    'imageId': 'imageId', 'privateGenerationReceiptSha256': 'privateGenerationReceiptSha256',
+                    'sourceDescriptorSha256': 'sourceDescriptorSha256'}
+        def checked_rollback(rollback, plan):
+            need(rollback.get('version') == 1 and rollback.get('kind') == 'china-host-rollback-v1'
+                 and all(rollback.get(left) == plan[right] for left, right in bindings.items())
+                 and rollback.get('retainedRuntimeSha') == RETAINED and rollback.get('retainedRunning') is True
+                 and rollback.get('candidateRemoved') is True and rollback.get('ingressRestored') is True
+                 and re.fullmatch(r'[a-f0-9]{64}', rollback.get('retainedContainerId', ''))
+                 and re.fullmatch(r'sha256:[a-f0-9]{64}', rollback.get('retainedImageId', '')), 'prune_rollback')
+        checked_rollback(witness_rollback, witness_plan)
+        regular(CONFIG, 1024 * 1024)
         ingress = CONFIG.read_bytes()
-        protected = {row['Id']: protected_identity(row) for row in (current, retained)}
+        retained = docker('GET', '/containers/' + witness_rollback['retainedContainerId'] + '/json')
+        retained_env = env_map(retained)
+        need(retained['Image'] == witness_rollback['retainedImageId'] and retained['State']['Running'] is True
+             and retained_env.get('AVTOCENA_RELEASE_SHA') == RETAINED
+             and retained_env.get('AVTOCENA_CALCULATION_VERSION') == CALCULATION
+             and any(str(binding.get('HostPort', '')) == str(backend(ingress)) for ports in
+                     (retained.get('HostConfig', {}).get('PortBindings') or {}).values() for binding in ports), 'prune_retained')
+        retained_identity = protected_identity(retained)
+        generation_names = {'GENERATION.json', 'details.sqlite', 'query.sqlite', 'FILTER_SEMANTICS.json',
+                            'FX_RECEIPT.json', 'RECONCILIATION.json', 'DISPOSITIONS.ndjson'}
+        witness_files = {}
+        for descriptor in witness_plan['files']:
+            filename = (witness_directory / 'generation' if descriptor['name'] in generation_names else witness_directory) / descriptor['name']
+            identity = reuse_file_identity(filename)
+            need(identity[2] == descriptor['bytes'], 'prune_witness_size')
+            witness_files[filename] = (identity, descriptor)
+        witness_proofs = {witness_directory / name: reuse_file_identity(witness_directory / name)
+                          for name in ('PLAN.json', 'ROLLED_BACK.json')}
         targets = []
         for target in FAILED_UPLOAD_TARGETS:
             directory = BASE / FAILED_UPLOAD_RUNTIME / 'china-next' / target['nonce']
-            for parent in (BASE, directory.parent.parent, directory.parent, directory, directory / 'generation'):
-                private_directory(parent)
+            check_directories(directory)
             plan, plan_raw = diagnosis_json(directory / 'PLAN.json')
             rollback, rollback_raw = diagnosis_json(directory / 'ROLLED_BACK.json')
             need(sha(plan_raw) == target['planSha256'] and sha(rollback_raw) == target['rollbackSha256'], 'prune_proof_hash')
             validate_plan(plan)
             need(not generation_update(plan) and plan['runtimeSha'] == FAILED_UPLOAD_RUNTIME
                  and plan['nonce'] == target['nonce'] and plan['generationId'] == FAILED_UPLOAD_GENERATION
-                 and plan['generationManifestSha256'] == reference['generationManifestSha256']
-                 and plan['privateGenerationReceiptSha256'] == reference['receiptSha256']
-                 and plan['pricingRuntimeSha'] == reference['pricingRuntimeSha'], 'prune_plan')
-            bindings = {'nonce': 'nonce', 'release': 'runtimeSha', 'pricingRuntimeSha': 'pricingRuntimeSha',
-                        'generationId': 'generationId', 'generationManifestSha256': 'generationManifestSha256',
-                        'imageId': 'imageId', 'privateGenerationReceiptSha256': 'privateGenerationReceiptSha256',
-                        'sourceDescriptorSha256': 'sourceDescriptorSha256'}
-            need(rollback.get('version') == 1 and rollback.get('kind') == 'china-host-rollback-v1'
-                 and all(rollback.get(left) == plan[right] for left, right in bindings.items())
-                 and rollback.get('retainedRuntimeSha') == RETAINED and rollback.get('retainedRunning') is True
-                 and rollback.get('candidateRemoved') is True and rollback.get('ingressRestored') is True
-                 and rollback.get('retainedContainerId') == retained['Id']
-                 and rollback.get('retainedImageId') == retained['Image'], 'prune_rollback')
+                 and all(plan[key] == witness_plan[key] for key in ('generationManifestSha256', 'privateGenerationReceiptSha256',
+                                                                    'pricingRuntimeSha', 'sourceDescriptorSha256')),
+                 'prune_plan')
+            checked_rollback(rollback, plan)
+            need(rollback['retainedContainerId'] == retained['Id'] and rollback['retainedImageId'] == retained['Image'], 'prune_rollback')
             descriptors = {row['name']: row for row in plan['files'] if row['name'] in FAILED_UPLOAD_BULK_FILES}
             need(set(descriptors) == set(FAILED_UPLOAD_BULK_FILES), 'prune_files')
-            targets.append((directory, target, plan_raw, rollback_raw, descriptors))
+            proofs = {directory / name: reuse_file_identity(directory / name) for name in ('PLAN.json', 'ROLLED_BACK.json')}
+            targets.append((directory, target, plan_raw, rollback_raw, descriptors, proofs))
+        pending, absent_paths = {}, set()
+        for directory, _, _, _, descriptors, _ in targets:
+            for name in FAILED_UPLOAD_BULK_FILES:
+                filename = (directory if name == 'image.tar' else directory / 'generation') / name
+                try:
+                    identity = reuse_file_identity(filename)
+                except FileNotFoundError:
+                    absent_paths.add(filename)
+                    continue
+                need(identity[2] == descriptors[name]['bytes'], 'prune_file_hash')
+                pending[filename] = (identity, descriptors[name])
+        absent = len(absent_paths)
 
         def fence():
             need(time.time() < deadline, 'prune_lease_expired')
             regular(CONFIG, 1024 * 1024)
             need(CONFIG.read_bytes() == ingress, 'ingress_changed')
-            for identity, expected in protected.items():
-                need(protected_identity(docker('GET', '/containers/' + identity + '/json')) == expected, 'prune_protected_changed')
-            # Re-read the persisted acceptance and its bound browser reports.
-            need(verified_history(reference) == current_receipt, 'prune_acceptance_changed')
-            check_mounted_reference(docker('GET', '/containers/' + current['Id'] + '/json'), reference, current_receipt['nonce'])
-            health(backend(ingress), reference['runtimeSha'])
-            for directory, target, plan_raw, rollback_raw, _ in targets:
-                for parent in (BASE, directory.parent.parent, directory.parent, directory, directory / 'generation'):
-                    private_directory(parent)
-                need(diagnosis_json(directory / 'PLAN.json')[1] == plan_raw and
-                     diagnosis_json(directory / 'ROLLED_BACK.json')[1] == rollback_raw, 'prune_proof_changed')
-                need(not os.path.lexists(directory / 'ACCEPTED.json') and not os.path.lexists(directory / 'ACCEPTED.pending'), 'prune_accepted_target')
-            rows = [docker('GET', '/containers/' + item['Id'] + '/json') for item in docker('GET', '/containers/json?all=1')]
-            for row in rows:
-                need(row.get('Config', {}).get('Labels', {}).get('avtocena.china.nonce') not in
-                     {target['nonce'] for _, target, _, _, _ in targets}, 'prune_candidate_exists')
+            need(protected_identity(docker('GET', '/containers/' + retained['Id'] + '/json')) == retained_identity,
+                 'prune_protected_changed')
+            health(backend(ingress), RETAINED)
+            check_directories(witness_directory)
+            need(not os.path.lexists(witness_directory / 'ACCEPTED.json')
+                 and not os.path.lexists(witness_directory / 'ACCEPTED.pending'), 'prune_witness_accepted')
+            need(diagnosis_json(witness_directory / 'PLAN.json')[1] == witness_plan_raw
+                 and diagnosis_json(witness_directory / 'ROLLED_BACK.json')[1] == witness_rollback_raw, 'prune_witness_proof')
+            for filename, identity in witness_proofs.items():
+                need(reuse_file_identity(filename) == identity, 'prune_witness_changed')
+            for filename, (identity, _) in witness_files.items():
+                need(reuse_file_identity(filename) == identity, 'prune_witness_changed')
+            image = docker('GET', '/images/' + witness['imageId'] + '/json')
+            need(image.get('Id') == witness['imageId'] and image.get('Os') == 'linux' and image.get('Architecture') == 'amd64'
+                 and image.get('Config', {}).get('Labels', {}).get('org.opencontainers.image.revision') == witness['runtimeSha'],
+                 'prune_witness_image')
+            for directory, _, plan_raw, rollback_raw, _, proofs in targets:
+                check_directories(directory)
+                need(diagnosis_json(directory / 'PLAN.json')[1] == plan_raw
+                     and diagnosis_json(directory / 'ROLLED_BACK.json')[1] == rollback_raw, 'prune_proof_changed')
+                for filename, identity in proofs.items():
+                    need(reuse_file_identity(filename) == identity, 'prune_proof_changed')
+                need(not os.path.lexists(directory / 'ACCEPTED.json') and not os.path.lexists(directory / 'ACCEPTED.pending'),
+                     'prune_accepted_target')
+            for filename, (identity, _) in pending.items():
+                need(reuse_file_identity(filename) == identity, 'prune_file_changed')
+            need(all(not os.path.lexists(filename) for filename in absent_paths), 'prune_file_appeared')
+            rows = docker('GET', '/containers/json?all=1')
+            need(isinstance(rows, list) and len(rows) <= 1024, 'prune_containers')
+            scopes = [witness_directory, *(directory for directory, *_ in targets)]
+            nonces = {witness['nonce'], *(target['nonce'] for target in FAILED_UPLOAD_TARGETS)}
+            for item in rows:
+                row = docker('GET', '/containers/' + item['Id'] + '/json')
+                need(row.get('Config', {}).get('Labels', {}).get('avtocena.china.nonce') not in nonces, 'prune_candidate_exists')
                 for mount in row.get('Mounts', []):
                     source = mount.get('Source')
                     if not source:
                         continue
                     need(isinstance(source, str) and Path(source).is_absolute(), 'prune_mount_path')
                     mounted = Path(source).resolve()
-                    for directory, _, _, _, _ in targets:
-                        need(mounted != directory and mounted not in directory.parents and directory not in mounted.parents,
-                             'prune_files_mounted')
+                    need(all(mounted != directory and mounted not in directory.parents and directory not in mounted.parents
+                             for directory in scopes), 'prune_files_mounted')
             need(CONFIG.read_bytes() == ingress, 'ingress_changed')
 
+        # One complete hash pass over the protected witness and every remaining
+        # target precedes deletion. Later fences compare identities and proofs;
+        # they do not rehash these bulk files before each of the eight unlinks.
         fence()
-        pending, absent = [], 0
-        for directory, target, _, _, descriptors in targets:
-            for name in FAILED_UPLOAD_BULK_FILES:
-                filename = (directory if name == 'image.tar' else directory / 'generation') / name
-                try:
-                    before = reuse_file_identity(filename)
-                except FileNotFoundError:
-                    absent += 1
-                    continue
-                descriptor = descriptors[name]
-                need(before[2] == descriptor['bytes'] and file_sha(filename) == descriptor['sha256']
-                     and reuse_file_identity(filename) == before, 'prune_file_hash')
-                pending.append((filename, before, descriptor['bytes']))
-        # All targets and remaining hashes are checked before the first unlink.
+        for files, code in ((witness_files, 'prune_witness_hash'), (pending, 'prune_file_hash')):
+            for filename, (identity, descriptor) in files.items():
+                fence()
+                need(file_sha(filename) == descriptor['sha256'] and reuse_file_identity(filename) == identity, code)
         fence()
         deleted = freed = 0
-        for filename, expected, size in pending:
+        for filename in list(pending):
             fence()
-            need(reuse_file_identity(filename) == expected, 'prune_file_changed')
+            identity, descriptor = pending[filename]
+            need(reuse_file_identity(filename) == identity, 'prune_file_changed')
             filename.unlink()
             directory_fd = os.open(filename.parent, os.O_RDONLY | os.O_DIRECTORY)
             try:
@@ -1023,10 +1089,12 @@ def prune_failed_uploads(params):
             finally:
                 os.close(directory_fd)
             need(not os.path.lexists(filename), 'prune_file_still_present')
+            del pending[filename]
+            absent_paths.add(filename)
             deleted += 1
-            freed += size
+            freed += descriptor['bytes']
         # Also make an interrupted prior unlink durable on a resumed run.
-        for directory, _, _, _, _ in targets:
+        for directory, *_ in targets:
             for folder in (directory, directory / 'generation'):
                 directory_fd = os.open(folder, os.O_RDONLY | os.O_DIRECTORY)
                 try:
@@ -1034,12 +1102,201 @@ def prune_failed_uploads(params):
                 finally:
                     os.close(directory_fd)
         fence()
-        return {'version': 1, 'kind': 'china-failed-upload-prune-v1', 'completed': True,
-                'runtimeSha': reference['runtimeSha'], 'generationId': reference['generationId'],
-                'targetNonces': [target['nonce'] for target in FAILED_UPLOAD_TARGETS],
+        return {'version': 2, 'kind': 'china-failed-upload-prune-v2', 'phase': 'before-first-acceptance', 'completed': True,
+                'liveRuntimeSha': RETAINED, 'protectedFailedAttempt': dict(witness), 'protectedFilesVerified': len(witness_files),
+                'targetRuntimeSha': FAILED_UPLOAD_RUNTIME, 'targetNonces': [target['nonce'] for target in FAILED_UPLOAD_TARGETS],
                 'filesDeleted': deleted, 'freedBytes': freed, 'alreadyAbsentFiles': absent,
                 'retiredContainers': 0, 'imagesDeleted': 0, 'directoriesDeleted': 0,
-                'privateGenerationDeletes': 0, 'acceptedStateWrites': 0}
+                'privateGenerationDeletes': 0, 'acceptedStateWrites': 0, 'intentStateWrites': 0}
+    finally:
+        os.close(lock)
+
+
+def prune_failed_witness(params):
+    """Retire only the failed 5e bulk copy after the exact 860e acceptance.
+
+    Earlier 822 bulk copies must already be absent. All small proofs, the live
+    accepted generation, retained 56, images and REG objects are preserved.
+    """
+    need(isinstance(params, dict) and set(params) == {'currentState', 'leaseExpiresAt'}, 'witness_parameters')
+    expiry = params.get('leaseExpiresAt')
+    need(isinstance(expiry, str) and re.fullmatch(r'\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(?:\.\d{1,6})?Z', expiry), 'witness_lease')
+    deadline = datetime.datetime.fromisoformat(expiry.replace('Z', '+00:00')).timestamp()
+    need(time.time() < deadline <= time.time() + 2 * 60 * 60, 'witness_lease')
+    state, _ = checked_publication_view(params['currentState'], committed=True)
+    reference, target = state['current'], FAILED_UPLOAD_WITNESS
+    need(reference['runtimeSha'] == FAILED_WITNESS_ACCEPTED_RUNTIME and state.get('rollback') is None
+         and reference['generationId'] == target['generationId']
+         and reference['pricingRuntimeSha'] == target['pricingRuntimeSha']
+         and reference['generationManifestSha256'] == target['generationManifestSha256']
+         and reference['receiptSha256'] == target['privateGenerationReceiptSha256'], 'witness_current')
+    lock = reuse_lock()
+    try:
+        accepted_receipt = verified_history(reference)
+        current = verify_live_reference(reference, accepted_receipt['nonce'])
+        current_directory, current_plan = reference_plan(reference, accepted_receipt)
+        need(not generation_update(current_plan), 'witness_first_acceptance')
+        retained = docker('GET', '/containers/' + accepted_receipt['retainedContainerId'] + '/json')
+        retained_env = env_map(retained)
+        need(retained['Id'] != current['Id'] and retained['State']['Running'] is True
+             and retained_env.get('AVTOCENA_RELEASE_SHA') == RETAINED
+             and retained_env.get('AVTOCENA_CALCULATION_VERSION') == CALCULATION, 'witness_retained')
+        ingress = CONFIG.read_bytes()
+        protected = {row['Id']: protected_identity(row) for row in (current, retained)}
+        generation_names = {'GENERATION.json', 'details.sqlite', 'query.sqlite', 'FILTER_SEMANTICS.json',
+                            'FX_RECEIPT.json', 'RECONCILIATION.json', 'DISPOSITIONS.ndjson'}
+        def check_directories(directory):
+            for parent in (BASE, directory.parent.parent, directory.parent, directory, directory / 'generation'):
+                private_directory(parent)
+        def location(directory, name):
+            return (directory / 'generation' if name in generation_names else directory) / name
+        def disk_free_bytes():
+            disk = os.statvfs(BASE)
+            available = disk.f_bavail * disk.f_frsize
+            need(type(available) is int and 0 <= available <= 9007199254740991, 'witness_disk_capacity')
+            return available
+        check_directories(current_directory)
+        protected_files = {}
+        for descriptor in current_plan['files']:
+            filename = location(current_directory, descriptor['name'])
+            identity = reuse_file_identity(filename)
+            need(identity[2] == descriptor['bytes'], 'witness_current_file')
+            protected_files[filename] = identity
+        for name in ('PLAN.json', 'ACCEPTED.json', 'BROWSER_SPEED.json', 'BROWSER_DETAILS.json'):
+            filename = current_directory / name
+            protected_files[filename] = reuse_file_identity(filename)
+
+        directory = BASE / target['runtimeSha'] / 'china-next' / target['nonce']
+        check_directories(directory)
+        plan, plan_raw = diagnosis_json(directory / 'PLAN.json')
+        rollback, rollback_raw = diagnosis_json(directory / 'ROLLED_BACK.json')
+        need(sha(plan_raw) == target['planSha256'] and sha(rollback_raw) == target['rollbackSha256'], 'witness_proof')
+        validate_plan(plan)
+        need(not generation_update(plan)
+             and all(plan[key] == value for key, value in target.items() if key not in ('planSha256', 'rollbackSha256'))
+             and plan['sourceDescriptorSha256'] == reference['sourceDescriptorSha256'], 'witness_plan')
+        bindings = {'nonce': 'nonce', 'release': 'runtimeSha', 'pricingRuntimeSha': 'pricingRuntimeSha',
+                    'generationId': 'generationId', 'generationManifestSha256': 'generationManifestSha256',
+                    'imageId': 'imageId', 'privateGenerationReceiptSha256': 'privateGenerationReceiptSha256',
+                    'sourceDescriptorSha256': 'sourceDescriptorSha256'}
+        need(rollback.get('version') == 1 and rollback.get('kind') == 'china-host-rollback-v1'
+             and all(rollback.get(left) == plan[right] for left, right in bindings.items())
+             and rollback.get('retainedRuntimeSha') == RETAINED and rollback.get('retainedRunning') is True
+             and rollback.get('candidateRemoved') is True and rollback.get('ingressRestored') is True
+             and rollback.get('retainedContainerId') == retained['Id']
+             and rollback.get('retainedImageId') == retained['Image'], 'witness_rollback')
+        proof_identities = {directory / name: reuse_file_identity(directory / name) for name in ('PLAN.json', 'ROLLED_BACK.json')}
+        descriptors = {row['name']: row for row in plan['files'] if row['name'] in FAILED_UPLOAD_BULK_FILES}
+        need(set(descriptors) == set(FAILED_UPLOAD_BULK_FILES)
+             and sum(row['bytes'] for row in descriptors.values()) == FAILED_WITNESS_BULK_BYTES, 'witness_files')
+        earlier = []
+        for old in FAILED_UPLOAD_TARGETS:
+            old_directory = BASE / FAILED_UPLOAD_RUNTIME / 'china-next' / old['nonce']
+            check_directories(old_directory)
+            old_proofs = {}
+            for name, expected in (('PLAN.json', old['planSha256']), ('ROLLED_BACK.json', old['rollbackSha256'])):
+                filename = old_directory / name
+                _, raw = diagnosis_json(filename)
+                need(sha(raw) == expected, 'witness_earlier_proof')
+                old_proofs[filename] = (reuse_file_identity(filename), raw)
+            earlier.append((old_directory, old_proofs))
+        pending, absent_paths = {}, set()
+        for name, descriptor in descriptors.items():
+            filename = location(directory, name)
+            try:
+                identity = reuse_file_identity(filename)
+            except FileNotFoundError:
+                absent_paths.add(filename)
+                continue
+            need(identity[2] == descriptor['bytes'], 'witness_file_hash')
+            pending[filename] = (identity, descriptor)
+        absent = len(absent_paths)
+
+        def fence():
+            need(time.time() < deadline, 'witness_lease_expired')
+            regular(CONFIG, 1024 * 1024)
+            need(CONFIG.read_bytes() == ingress, 'ingress_changed')
+            for identity, expected in protected.items():
+                need(protected_identity(docker('GET', '/containers/' + identity + '/json')) == expected, 'witness_protected_changed')
+            need(verified_history(reference) == accepted_receipt, 'witness_acceptance_changed')
+            check_mounted_reference(docker('GET', '/containers/' + current['Id'] + '/json'), reference, accepted_receipt['nonce'])
+            health(backend(ingress), reference['runtimeSha'])
+            check_directories(current_directory)
+            for filename, identity in protected_files.items():
+                need(reuse_file_identity(filename) == identity, 'witness_current_changed')
+            check_directories(directory)
+            need(not os.path.lexists(directory / 'ACCEPTED.json') and not os.path.lexists(directory / 'ACCEPTED.pending'),
+                 'witness_target_accepted')
+            need(diagnosis_json(directory / 'PLAN.json')[1] == plan_raw
+                 and diagnosis_json(directory / 'ROLLED_BACK.json')[1] == rollback_raw, 'witness_proof_changed')
+            for filename, identity in proof_identities.items():
+                need(reuse_file_identity(filename) == identity, 'witness_proof_changed')
+            for old_directory, old_proofs in earlier:
+                check_directories(old_directory)
+                need(not os.path.lexists(old_directory / 'ACCEPTED.json') and not os.path.lexists(old_directory / 'ACCEPTED.pending'),
+                     'witness_earlier_accepted')
+                for filename, (identity, raw) in old_proofs.items():
+                    need(reuse_file_identity(filename) == identity and diagnosis_json(filename)[1] == raw, 'witness_earlier_proof')
+                need(all(not os.path.lexists(location(old_directory, name)) for name in FAILED_UPLOAD_BULK_FILES),
+                     'witness_earlier_bulk_present')
+            for filename, (identity, _) in pending.items():
+                need(reuse_file_identity(filename) == identity, 'witness_file_changed')
+            need(all(not os.path.lexists(filename) for filename in absent_paths), 'witness_file_appeared')
+            rows = docker('GET', '/containers/json?all=1')
+            need(isinstance(rows, list) and len(rows) <= 1024, 'witness_containers')
+            scopes = [directory, *(old_directory for old_directory, _ in earlier)]
+            nonces = {target['nonce'], *(old['nonce'] for old in FAILED_UPLOAD_TARGETS)}
+            for item in rows:
+                row = docker('GET', '/containers/' + item['Id'] + '/json')
+                need(row.get('Config', {}).get('Labels', {}).get('avtocena.china.nonce') not in nonces, 'witness_candidate_exists')
+                for mount in row.get('Mounts', []):
+                    source = mount.get('Source')
+                    if not source:
+                        continue
+                    need(isinstance(source, str) and Path(source).is_absolute(), 'witness_mount_path')
+                    mounted = Path(source).resolve()
+                    need(all(mounted != scope and mounted not in scope.parents and scope not in mounted.parents for scope in scopes),
+                         'witness_files_mounted')
+            need(CONFIG.read_bytes() == ingress, 'ingress_changed')
+
+        fence()
+        # Check every remaining target before the first unlink. The accepted
+        # current is protected by its persisted browser proof and file identities.
+        for filename, (identity, descriptor) in pending.items():
+            need(file_sha(filename) == descriptor['sha256'] and reuse_file_identity(filename) == identity, 'witness_file_hash')
+        fence()
+        free_before = disk_free_bytes()
+        deleted = freed = 0
+        for filename in list(pending):
+            fence()
+            identity, descriptor = pending[filename]
+            need(reuse_file_identity(filename) == identity, 'witness_file_changed')
+            filename.unlink()
+            directory_fd = os.open(filename.parent, os.O_RDONLY | os.O_DIRECTORY)
+            try:
+                os.fsync(directory_fd)
+            finally:
+                os.close(directory_fd)
+            need(not os.path.lexists(filename), 'witness_file_still_present')
+            del pending[filename]
+            absent_paths.add(filename)
+            deleted += 1
+            freed += descriptor['bytes']
+        for folder in (directory, directory / 'generation'):
+            directory_fd = os.open(folder, os.O_RDONLY | os.O_DIRECTORY)
+            try:
+                os.fsync(directory_fd)
+            finally:
+                os.close(directory_fd)
+        fence()
+        free_after = disk_free_bytes()
+        return {'version': 1, 'kind': 'china-failed-witness-prune-v1', 'phase': 'after-first-acceptance', 'completed': True,
+                'runtimeSha': reference['runtimeSha'], 'generationId': reference['generationId'],
+                'targetFailedAttempt': dict(target), 'earlierBulkFilesAbsent': 8,
+                'filesDeleted': deleted, 'freedBytes': freed, 'alreadyAbsentFiles': absent,
+                'diskFreeBytesBefore': free_before, 'diskFreeBytesAfter': free_after,
+                'retiredContainers': 0, 'imagesDeleted': 0, 'directoriesDeleted': 0,
+                'privateGenerationDeletes': 0, 'acceptedStateWrites': 0, 'intentStateWrites': 0}
     finally:
         os.close(lock)
 
@@ -1719,7 +1976,7 @@ def main():
     signal.signal(signal.SIGHUP, lambda *_: (_ for _ in ()).throw(ReleaseError('china_host_disconnected')))
     signal.signal(signal.SIGALRM, lambda *_: (_ for _ in ()).throw(ReleaseError('china_host_browser_deadline')))
     host = None
-    recovered = maintenance = diagnosed = pruned = False
+    recovered = maintenance = diagnosed = pruned = witness_pruned = False
     emit({'kind': 'ready', 'protocol': 1})
     try:
         while True:
@@ -1737,6 +1994,7 @@ def main():
             need(type(identity) is int and identity > 0, 'protocol_id')
             need(not diagnosed or method in {'diagnose', 'close'}, 'diagnosis_read_only')
             need(not pruned or method in {'prune_failed_uploads', 'close'}, 'prune_protocol_scope')
+            need(not witness_pruned or method in {'prune_failed_witness', 'close'}, 'witness_protocol_scope')
             params = call.get('params', {})
             if method == 'diagnose':
                 need(host is None, 'diagnosis_after_init')
@@ -1754,6 +2012,10 @@ def main():
                 need(host is None, 'prune_after_init')
                 value = prune_failed_uploads(params)
                 recovered = maintenance = pruned = True
+            elif method == 'prune_failed_witness':
+                need(host is None, 'witness_after_init')
+                value = prune_failed_witness(params)
+                recovered = maintenance = witness_pruned = True
             elif method == 'close' and host is None:
                 need(recovered, 'close_uninitialized')
                 emit({'kind': 'result', 'id': identity, 'value': {'closed': True, 'readOnly': not maintenance}})
@@ -1804,6 +2066,14 @@ def main():
                 reply['startup'] = host.startup_report
             if isinstance(error, ReleaseError) and hasattr(error, 'retained_fence'):
                 reply['retainedFence'] = error.retained_fence
+            if host is not None and locals().get('method') == 'speed':
+                try:
+                    # Same bounded sanitizer as the read-only diagnosis. A
+                    # broken/missing diagnostic must not replace the gate's
+                    # original failure or prevent the existing rollback.
+                    reply['serverSpeed'] = saved_speed_diagnosis(host.directory, host.plan)
+                except Exception:
+                    pass
             emit(reply)
         except (BrokenPipeError, OSError):
             pass

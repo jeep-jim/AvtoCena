@@ -6,25 +6,27 @@ import os from 'node:os';
 import {execFileSync} from 'node:child_process';
 import {createChinaState} from '../scripts/catalog-next/china-state.mjs';
 import {hash, empty, stateStore} from './helpers/catalog-next-gc-fixture.mjs';
-import {FAILED_UPLOAD_CLEANUP_CURRENT as CURRENT, verifyFailedUploadCleanupInvocation,
+import {FAILED_UPLOAD_CLEANUP_WITNESS as WITNESS, FAILED_UPLOAD_CLEANUP_LIVE_RUNTIME as LIVE, verifyFailedUploadCleanupInvocation,
   validateFailedUploadCleanupReport, runFailedUploadCleanup} from '../scripts/catalog-next/cleanup-failed-uploads.mjs';
 
 const clock = '2026-11-24T20:00:00.000Z', controller = '1'.repeat(40), nonce = 'c'.repeat(32);
 const REPORT = 'catalog-next-china-failed-upload-cleanup-report.json';
 const WORKFLOW = 'jeep-jim/AvtoCena/.github/workflows/catalog-next-china-failed-upload-cleanup.yml@refs/heads/main';
 function result() {
-  return {version: 1, kind: 'china-failed-upload-prune-v1', completed: true, ...CURRENT,
+  return {version: 2, kind: 'china-failed-upload-prune-v2', phase: 'before-first-acceptance', completed: true,
+    liveRuntimeSha: LIVE, protectedFailedAttempt: {...WITNESS}, protectedFilesVerified: 11,
+    targetRuntimeSha: '822f925bb30c4e07010f6e14b6574f1b4bd6306e',
     targetNonces: ['2ab6a761ac784094d102edd7be8708af', 'ae835461a771911c083739ddbf03bead'],
     filesDeleted: 8, freedBytes: 26083118592, alreadyAbsentFiles: 0,
-    retiredContainers: 0, imagesDeleted: 0, directoriesDeleted: 0, privateGenerationDeletes: 0, acceptedStateWrites: 0};
+    retiredContainers: 0, imagesDeleted: 0, directoriesDeleted: 0, privateGenerationDeletes: 0, acceptedStateWrites: 0, intentStateWrites: 0};
 }
 
-async function fixture(t, {runtimeSha = CURRENT.runtimeSha, accepted = true} = {}) {
+async function fixture(t, {runtimeSha = WITNESS.runtimeSha, accepted = false} = {}) {
   const root = await fs.mkdtemp(path.join(os.tmpdir(), 'china-failed-cleanup-'));
   t.after(() => fs.rm(root, {recursive: true, force: true}));
   const raw = stateStore(), state = createChinaState({storage: raw, now: () => clock});
   if (accepted) {
-    const candidate = {market: 'china', ...CURRENT, runtimeSha, owner: {runId: '45369451603', attempt: '1', revision: controller},
+    const candidate = {market: 'china', generationId: WITNESS.generationId, runtimeSha, owner: {runId: '45369451603', attempt: '1', revision: controller},
       pricingRuntimeSha: '2'.repeat(40), receiptSha256: '3'.repeat(64), sourceDescriptorSha256: '4'.repeat(64),
       generationManifestSha256: '5'.repeat(64), sourceCursor: 101, sourceObservedAt: '2026-11-23T12:00:00.000Z', imageId: 'sha256:' + '6'.repeat(64)};
     const lease = await state.acquireLease({previous: empty(), owner: {runId: '1001', attempt: '1', revision: controller},
@@ -54,8 +56,8 @@ async function fixture(t, {runtimeSha = CURRENT.runtimeSha, accepted = true} = {
     }};
   const session = {
     async call(method, parameters) { calls.push(method); assert.equal(method, 'prune_failed_uploads');
-      assert.deepEqual(Object.keys(parameters).sort(), ['currentState', 'leaseExpiresAt']);
-      assert.deepEqual(parameters.currentState.accepted, await state.read('accepted'));
+      assert.deepEqual(Object.keys(parameters).sort(), ['leaseExpiresAt', 'publicationState']);
+      assert.deepEqual(parameters.publicationState.accepted, await state.read('accepted'));
       assert.equal(parameters.leaseExpiresAt, '2026-11-24T21:00:00.000Z');
       await hooks.call?.(); return hooks.result ?? result(); },
     async close() { calls.push('close'); await hooks.close?.(); return {closed: true, readOnly: false}; },
@@ -69,10 +71,13 @@ async function fixture(t, {runtimeSha = CURRENT.runtimeSha, accepted = true} = {
   return {root, raw, state, calls, hooks, session, options};
 }
 
-test('exact accepted state and China lease fence local cleanup; only lease is written', async t => {
+test('validated absent state and China lease fence pre-accept cleanup; only lease is written', async t => {
   const f = await fixture(t), before = await f.state.read('accepted');
+  assert.deepEqual(before, empty()); assert.deepEqual(await f.state.read('intent'), empty());
   const report = await runFailedUploadCleanup(f.options);
   assert.equal(report.completed, true); assert.equal(report.freedBytes, 26083118592);
+  assert.equal(report.phase, 'before-first-acceptance'); assert.equal(report.liveRuntimeSha, LIVE);
+  assert.deepEqual(report.protectedFailedAttempt, WITNESS); assert(!Object.hasOwn(report, 'current'));
   assert.equal(report.leaseRelease, 'released'); assert.deepEqual(await f.state.read('accepted'), before);
   assert.deepEqual(f.calls.filter(name => !name.startsWith('read:')), ['verify', 'baselines', 'storage', 'privacy',
     'lease:held', 'open', 'prune_failed_uploads', 'close', 'lease:released']);
@@ -81,10 +86,10 @@ test('exact accepted state and China lease fence local cleanup; only lease is wr
   assert(!output.includes('test secret') && !output.includes('hostReceiptBase64'));
 });
 
-for (const settings of [{accepted: false}, {runtimeSha: '9'.repeat(40)}]) {
-  test('unaccepted or different current runtime cannot acquire cleanup authority ' + JSON.stringify(settings), async t => {
+for (const settings of [{accepted: true}, {accepted: true, runtimeSha: '9'.repeat(40)}]) {
+  test('an accepted runtime cannot acquire pre-accept cleanup authority ' + JSON.stringify(settings), async t => {
     const f = await fixture(t, settings);
-    await assert.rejects(runFailedUploadCleanup(f.options), /china_failed_cleanup_accepted_state/);
+    await assert.rejects(runFailedUploadCleanup(f.options), /china_failed_cleanup_unaccepted_state/);
     assert(!f.calls.includes('open') && !f.calls.includes('lease:held'));
   });
 }
@@ -97,6 +102,44 @@ test('invalid invocation and frozen baseline fail before any credentials or stor
     await assert.rejects(runFailedUploadCleanup(f.options), error => error.message === 'china_failed_cleanup_failed');
     assert(!f.calls.includes('storage') && !f.calls.includes('open'));
   }
+});
+
+test('a present empty accepted object or an unresolved intent cannot use the absence guard', async t => {
+  const accepted = {version: 1, kind: 'china-accepted-state-v1', market: 'china', revision: 1,
+    current: null, rollback: null, pending: null, commit: null};
+  const candidate = {market: 'china', generationId: WITNESS.generationId, runtimeSha: WITNESS.runtimeSha,
+    pricingRuntimeSha: WITNESS.pricingRuntimeSha, imageId: WITNESS.imageId,
+    owner: {runId: '45369451603', attempt: '1', revision: controller},
+    receiptSha256: WITNESS.privateGenerationReceiptSha256, sourceDescriptorSha256: '4'.repeat(64),
+    generationManifestSha256: WITNESS.generationManifestSha256, sourceCursor: 101, sourceObservedAt: clock};
+  const intent = {version: 1, kind: 'china-publication-intent-v1', market: 'china', revision: 1,
+    nonce, owner: {runId: '1001', attempt: '1', revision: controller}, createdAt: clock,
+    candidate, previous: empty(), status: 'pending', resolution: null};
+  for (const [name, value] of [['accepted', accepted], ['intent', intent]]) {
+    const f = await fixture(t);
+    await f.raw.compareAndSwap(name, empty(), value);
+    await assert.rejects(runFailedUploadCleanup(f.options), /china_failed_cleanup_unaccepted_state/);
+    assert(!f.calls.includes('open') && !f.calls.includes('lease:held'));
+  }
+  // A correctly resolved, aborted bootstrap still is not the exact absent state.
+  const f = await fixture(t);
+  await f.raw.compareAndSwap('intent', empty(), intent);
+  const lease = await f.state.acquireLease({previous: empty(), owner: intent.owner, nonce,
+    expiresAt: '2026-11-24T21:00:00.000Z'});
+  await f.state.abandonUnreserved({lease, intent: await f.state.read('intent')});
+  await f.state.releaseLease({lease});
+  await assert.rejects(runFailedUploadCleanup(f.options), /china_failed_cleanup_unaccepted_state/);
+  assert(!f.calls.includes('open') && !f.calls.includes('lease:held'));
+});
+
+test('a publication object appearing after lease acquisition prevents the host command', async t => {
+  const f = await fixture(t);
+  f.hooks.open = () => f.raw.compareAndSwap('accepted', empty(), {
+    version: 1, kind: 'china-accepted-state-v1', market: 'china', revision: 1,
+    current: null, rollback: null, pending: null, commit: null});
+  await assert.rejects(runFailedUploadCleanup(f.options), /china_failed_cleanup_unaccepted_state/);
+  assert(!f.calls.includes('prune_failed_uploads')); assert(f.calls.includes('abort'));
+  assert.equal((await f.state.read('lease')).value.status, 'released');
 });
 
 test('lease takeover between SSH open and command stops before any prune call', async t => {
@@ -149,7 +192,9 @@ test('a resumed host observation never counts absent files as newly freed', asyn
 
 test('host result rejects arbitrary data, scope changes and inconsistent totals', () => {
   for (const changed of [{extra: 'private'}, {privateGenerationDeletes: 1}, {targetNonces: ['a'.repeat(32)]},
-    {filesDeleted: 9}, {freedBytes: 26083118593}, {filesDeleted: 0}, {completed: false}, {runtimeSha: '8'.repeat(40)}]) {
+    {filesDeleted: 9}, {freedBytes: 26083118593}, {filesDeleted: 0}, {completed: false}, {liveRuntimeSha: '8'.repeat(40)},
+    {protectedFailedAttempt: {...WITNESS, nonce: '0'.repeat(32)}}, {protectedFilesVerified: 10},
+    {phase: 'after-acceptance'}, {intentStateWrites: 1}, {targetRuntimeSha: WITNESS.runtimeSha}]) {
     assert.throws(() => validateFailedUploadCleanupReport({...result(), ...changed}), /china_failed_cleanup_report_/);
   }
 });

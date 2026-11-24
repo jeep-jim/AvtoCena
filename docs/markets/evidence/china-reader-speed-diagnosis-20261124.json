@@ -1,0 +1,666 @@
+{
+  "evidenceVersion": 1,
+  "runUrl": "https://github.com/jeep-jim/AvtoCena/actions/runs/45428112240",
+  "failedReleaseUrl": "https://github.com/jeep-jim/AvtoCena/actions/runs/45419783209",
+  "report": {
+    "version": 1,
+    "kind": "china-startup-diagnosis-v1",
+    "market": "china",
+    "readOnly": true,
+    "failedRunId": "45419783209",
+    "selector": {
+      "runtimeSha": "5e62f9ff3a0079b07cd13b8ab912c5720dd22250",
+      "pricingRuntimeSha": "64c6338e0db23c8999096bceefbf113c0136fe15",
+      "generationId": "gen_china_45369451603_1",
+      "generationManifestSha256": "d5745797cc162b82e0c0f0b1f49fef65f18f0d6649666562337183b18084dd75",
+      "controllerSha": "ef855201583c250061aed4412421dddc4e6ea732",
+      "imageId": "sha256:7af5df7fa93163687fcb5c0e1ad834176234319de13a4dd92ddc1d954fcc9381",
+      "since": "2026-11-24T15:30:00Z",
+      "until": "2026-11-24T15:35:00Z"
+    },
+    "completed": true,
+    "status": "complete",
+    "hostMutations": 0,
+    "storageWrites": 0,
+    "providerCalls": 0,
+    "pageRequests": 0,
+    "diagnosisControllerSha": "9ad83dcb1c1a7ae2dd065219372c403347800fa3",
+    "approvedControllerSha": "39836d2ca36e56141924ec39cbd2c687effe0b5b",
+    "diagnosis": {
+      "version": 1,
+      "kind": "china-host-startup-diagnosis-v1",
+      "readOnly": true,
+      "selector": {
+        "runtimeSha": "5e62f9ff3a0079b07cd13b8ab912c5720dd22250",
+        "pricingRuntimeSha": "64c6338e0db23c8999096bceefbf113c0136fe15",
+        "generationId": "gen_china_45369451603_1",
+        "generationManifestSha256": "d5745797cc162b82e0c0f0b1f49fef65f18f0d6649666562337183b18084dd75",
+        "controllerSha": "ef855201583c250061aed4412421dddc4e6ea732",
+        "imageId": "sha256:7af5df7fa93163687fcb5c0e1ad834176234319de13a4dd92ddc1d954fcc9381",
+        "since": "2026-11-24T15:30:00Z",
+        "until": "2026-11-24T15:35:00Z"
+      },
+      "nonce": "2d015d0beef2af9f076bd1d47987dd88",
+      "planSha256": "773cb37c8ecae1de789c895888fd2e56264b73503def96a32c86ee845283338c",
+      "rollbackSha256": "3a431be4e34714930ce483f28575c797df5f49687a2157ab2be21d31016a8a06",
+      "outcome": "rolled_back",
+      "files": [
+        {
+          "name": "GENERATION.json",
+          "present": true,
+          "bytes": 5556,
+          "expectedBytes": 5556,
+          "sizeMatches": true,
+          "private": true
+        },
+        {
+          "name": "details.sqlite",
+          "present": true,
+          "bytes": 9192034304,
+          "expectedBytes": 9192034304,
+          "sizeMatches": true,
+          "private": true
+        },
+        {
+          "name": "query.sqlite",
+          "present": true,
+          "bytes": 3464159232,
+          "expectedBytes": 3464159232,
+          "sizeMatches": true,
+          "private": true
+        },
+        {
+          "name": "FILTER_SEMANTICS.json",
+          "present": true,
+          "bytes": 519822,
+          "expectedBytes": 519822,
+          "sizeMatches": true,
+          "private": true
+        },
+        {
+          "name": "FX_RECEIPT.json",
+          "present": true,
+          "bytes": 910,
+          "expectedBytes": 910,
+          "sizeMatches": true,
+          "private": true
+        },
+        {
+          "name": "RECONCILIATION.json",
+          "present": true,
+          "bytes": 1211,
+          "expectedBytes": 1211,
+          "sizeMatches": true,
+          "private": true
+        },
+        {
+          "name": "DISPOSITIONS.ndjson",
+          "present": true,
+          "bytes": 126845696,
+          "expectedBytes": 126845696,
+          "sizeMatches": true,
+          "private": true
+        },
+        {
+          "name": "image.tar",
+          "present": true,
+          "bytes": 258521088,
+          "expectedBytes": 258521088,
+          "sizeMatches": true,
+          "private": true
+        },
+        {
+          "name": "acceptance.json",
+          "present": true,
+          "bytes": 14727,
+          "expectedBytes": 14727,
+          "sizeMatches": true,
+          "private": true
+        },
+        {
+          "name": "regcloud-performance-gate.py",
+          "present": true,
+          "bytes": 12894,
+          "expectedBytes": 12894,
+          "sizeMatches": true,
+          "private": true
+        },
+        {
+          "name": "accepted-speed-baseline.json",
+          "present": true,
+          "bytes": 18868,
+          "expectedBytes": 18868,
+          "sizeMatches": true,
+          "private": true
+        }
+      ],
+      "generationVerified": true,
+      "image": {
+        "present": true,
+        "identityMatches": true
+      },
+      "diskFreeBytes": 13146959872,
+      "startup": {
+        "version": 1,
+        "kind": "china-host-startup-v1",
+        "ready": true,
+        "elapsedSeconds": 426.4053,
+        "attempts": 72,
+        "health": "ok",
+        "candidate": {
+          "running": true,
+          "status": "running",
+          "exitCode": 0,
+          "oomKilled": false,
+          "restartCount": 0
+        },
+        "reason": "ready"
+      },
+      "serverSpeed": {
+        "present": true,
+        "sha256": "bbc6959348fdf0ea5938f35e6e7bd075c382ab28c9c179d32eef7f9cafd597be",
+        "exitCode": 1,
+        "samples": [
+          {
+            "path": "/api/health",
+            "performanceRequest": "started"
+          },
+          {
+            "path": "/api/health",
+            "performanceRequest": "complete",
+            "seconds": 0.0126,
+            "functionalPassed": true
+          },
+          {
+            "path": "/api/leads",
+            "performanceRequest": "started"
+          },
+          {
+            "path": "/api/leads",
+            "performanceRequest": "complete",
+            "seconds": 0.016,
+            "functionalPassed": true
+          },
+          {
+            "path": "/",
+            "performanceRequest": "started"
+          },
+          {
+            "path": "/",
+            "performanceRequest": "complete",
+            "seconds": 8.8568,
+            "functionalPassed": true
+          },
+          {
+            "path": "/login",
+            "performanceRequest": "started"
+          },
+          {
+            "path": "/login",
+            "performanceRequest": "complete",
+            "seconds": 0.2771,
+            "functionalPassed": true
+          },
+          {
+            "path": "/autocalc",
+            "performanceRequest": "started"
+          },
+          {
+            "path": "/autocalc",
+            "performanceRequest": "complete",
+            "seconds": 0.0324,
+            "functionalPassed": true
+          },
+          {
+            "path": "/cars",
+            "performanceRequest": "started"
+          },
+          {
+            "path": "/cars",
+            "performanceRequest": "complete",
+            "seconds": 7.9824,
+            "functionalPassed": true
+          },
+          {
+            "path": "/cars?market=china&make=Volkswagen&page=2",
+            "performanceRequest": "started"
+          },
+          {
+            "path": "/cars?market=china&make=Volkswagen&page=2",
+            "performanceRequest": "complete",
+            "seconds": 0.4003,
+            "functionalPassed": true
+          },
+          {
+            "path": "/cars?market=china&city=%D0%9D%D0%BE%D0%B2%D0%BE%D0%BA%D1%83%D0%B7%D0%BD%D0%B5%D1%86%D0%BA",
+            "performanceRequest": "started"
+          },
+          {
+            "path": "/cars?market=china&city=%D0%9D%D0%BE%D0%B2%D0%BE%D0%BA%D1%83%D0%B7%D0%BD%D0%B5%D1%86%D0%BA",
+            "performanceRequest": "complete",
+            "seconds": 0.3671,
+            "functionalPassed": true
+          },
+          {
+            "path": "/cars?sort=totalRub",
+            "performanceRequest": "started"
+          },
+          {
+            "path": "/cars?sort=totalRub",
+            "performanceRequest": "complete",
+            "seconds": 47.2577,
+            "functionalPassed": true
+          },
+          {
+            "path": "/api/catalog/search?market=china&marketPage=1&page=9",
+            "performanceRequest": "started"
+          },
+          {
+            "path": "/api/catalog/search?market=china&marketPage=1&page=9",
+            "performanceRequest": "complete",
+            "seconds": 0.3368,
+            "functionalPassed": true
+          },
+          {
+            "path": "/cars/autocatalog",
+            "performanceRequest": "started"
+          },
+          {
+            "path": "/cars/autocatalog",
+            "performanceRequest": "complete",
+            "seconds": 1.0422,
+            "functionalPassed": true
+          },
+          {
+            "path": "/cars/autocatalog?make=Changan",
+            "performanceRequest": "started"
+          },
+          {
+            "path": "/cars/autocatalog?make=Changan",
+            "performanceRequest": "complete",
+            "seconds": 0.5768,
+            "functionalPassed": true
+          },
+          {
+            "path": "/cars?market=china",
+            "performanceRequest": "started"
+          },
+          {
+            "path": "/cars?market=china",
+            "performanceRequest": "complete",
+            "seconds": 0.1034,
+            "functionalPassed": true
+          },
+          {
+            "path": "/cars/china/BMW/3?powerTo=160&sort=totalRub",
+            "performanceRequest": "started"
+          },
+          {
+            "path": "/cars/china/BMW/3?powerTo=160&sort=totalRub",
+            "performanceRequest": "complete",
+            "seconds": 0.7607,
+            "functionalPassed": true
+          },
+          {
+            "path": "/cars/china/BMW/3%20SERIES?powerTo=160&sort=totalRub",
+            "performanceRequest": "started"
+          },
+          {
+            "path": "/cars/china/BMW/3%20SERIES?powerTo=160&sort=totalRub",
+            "performanceRequest": "complete",
+            "seconds": 0.1222,
+            "functionalPassed": true
+          },
+          {
+            "path": "/api/catalog/search?market=china&budgetTo=1500000&pageSize=6",
+            "performanceRequest": "started"
+          },
+          {
+            "path": "/api/catalog/search?market=china&budgetTo=1500000&pageSize=6",
+            "performanceRequest": "complete",
+            "seconds": 0.0142,
+            "functionalPassed": true
+          },
+          {
+            "path": "/api/health",
+            "performanceRequest": "started"
+          },
+          {
+            "path": "/api/health",
+            "performanceRequest": "complete",
+            "seconds": 0.0027,
+            "functionalPassed": true
+          },
+          {
+            "path": "/api/health",
+            "speedBaseline": "warm",
+            "referenceSeconds": 0.0206,
+            "measurementNoiseSeconds": 0.05,
+            "ceilingSeconds": 0.0706,
+            "seconds": 0.0027373190387152135,
+            "blocking": true,
+            "passed": true
+          },
+          {
+            "path": "/api/health",
+            "performanceGate": "warm",
+            "seconds": 0.0027,
+            "ceiling": 0.25,
+            "passed": true,
+            "functionalPassed": true,
+            "latencyBlocking": false
+          },
+          {
+            "path": "/api/leads",
+            "performanceRequest": "started"
+          },
+          {
+            "path": "/api/leads",
+            "performanceRequest": "complete",
+            "seconds": 0.0096,
+            "functionalPassed": true
+          },
+          {
+            "path": "/api/leads",
+            "speedBaseline": "warm",
+            "referenceSeconds": 0.0065,
+            "measurementNoiseSeconds": 0.05,
+            "ceilingSeconds": 0.0565,
+            "seconds": 0.0096430080011487,
+            "blocking": true,
+            "passed": true
+          },
+          {
+            "path": "/api/leads",
+            "performanceGate": "warm",
+            "seconds": 0.0096,
+            "ceiling": 1,
+            "passed": true,
+            "functionalPassed": true,
+            "latencyBlocking": false
+          },
+          {
+            "path": "/",
+            "performanceRequest": "started"
+          },
+          {
+            "path": "/",
+            "performanceRequest": "complete",
+            "seconds": 0.721,
+            "functionalPassed": true
+          },
+          {
+            "path": "/",
+            "performanceRequest": "started"
+          },
+          {
+            "path": "/",
+            "performanceRequest": "complete",
+            "seconds": 0.3748,
+            "functionalPassed": true
+          },
+          {
+            "path": "/",
+            "performanceRequest": "started"
+          },
+          {
+            "path": "/",
+            "performanceRequest": "complete",
+            "seconds": 0.6361,
+            "functionalPassed": true
+          },
+          {
+            "path": "/",
+            "performanceRequest": "started"
+          },
+          {
+            "path": "/",
+            "performanceRequest": "complete",
+            "seconds": 0.4545,
+            "functionalPassed": true
+          },
+          {
+            "path": "/",
+            "speedBaseline": "warm",
+            "referenceSeconds": 0.4696,
+            "measurementNoiseSeconds": 0.05,
+            "ceilingSeconds": 0.5196,
+            "seconds": 0.7209678610088304,
+            "blocking": true,
+            "passed": true,
+            "recheckSeconds": [
+              0.3748,
+              0.6361,
+              0.4545
+            ],
+            "recheckMedianSeconds": 0.4545
+          },
+          {
+            "path": "/",
+            "performanceGate": "warm",
+            "seconds": 0.721,
+            "ceiling": 2,
+            "passed": true,
+            "functionalPassed": true,
+            "latencyBlocking": false
+          },
+          {
+            "path": "/login",
+            "performanceRequest": "started"
+          },
+          {
+            "path": "/login",
+            "performanceRequest": "complete",
+            "seconds": 0.249,
+            "functionalPassed": true
+          },
+          {
+            "path": "/login",
+            "speedBaseline": "warm",
+            "referenceSeconds": 0.2259,
+            "measurementNoiseSeconds": 0.05,
+            "ceilingSeconds": 0.2759,
+            "seconds": 0.2489534629858099,
+            "blocking": true,
+            "passed": true
+          },
+          {
+            "path": "/login",
+            "performanceGate": "warm",
+            "seconds": 0.249,
+            "ceiling": 1,
+            "passed": true,
+            "functionalPassed": true,
+            "latencyBlocking": false
+          },
+          {
+            "path": "/autocalc",
+            "performanceRequest": "started"
+          },
+          {
+            "path": "/autocalc",
+            "performanceRequest": "complete",
+            "seconds": 0.0172,
+            "functionalPassed": true
+          },
+          {
+            "path": "/autocalc",
+            "speedBaseline": "warm",
+            "referenceSeconds": 0.0139,
+            "measurementNoiseSeconds": 0.05,
+            "ceilingSeconds": 0.0639,
+            "seconds": 0.017200361005961895,
+            "blocking": true,
+            "passed": true
+          },
+          {
+            "path": "/autocalc",
+            "performanceGate": "warm",
+            "seconds": 0.0172,
+            "ceiling": 1,
+            "passed": true,
+            "functionalPassed": true,
+            "latencyBlocking": false
+          },
+          {
+            "path": "/cars",
+            "performanceRequest": "started"
+          },
+          {
+            "path": "/cars",
+            "performanceRequest": "complete",
+            "seconds": 0.1823,
+            "functionalPassed": true
+          },
+          {
+            "path": "/cars",
+            "speedBaseline": "warm",
+            "referenceSeconds": 0.9607,
+            "measurementNoiseSeconds": 0.05,
+            "ceilingSeconds": 1.0107,
+            "seconds": 0.18229366897139698,
+            "blocking": true,
+            "passed": true
+          },
+          {
+            "path": "/cars",
+            "performanceGate": "warm",
+            "seconds": 0.1823,
+            "ceiling": 2,
+            "passed": true,
+            "functionalPassed": true,
+            "latencyBlocking": false
+          },
+          {
+            "path": "/cars?market=china&make=Volkswagen&page=2",
+            "performanceRequest": "started"
+          },
+          {
+            "path": "/cars?market=china&make=Volkswagen&page=2",
+            "performanceRequest": "complete",
+            "seconds": 0.3117,
+            "functionalPassed": true
+          },
+          {
+            "path": "/cars?market=china&make=Volkswagen&page=2",
+            "speedBaseline": "warm",
+            "referenceSeconds": 0.8934,
+            "measurementNoiseSeconds": 0.05,
+            "ceilingSeconds": 0.9434,
+            "seconds": 0.3116704410058446,
+            "blocking": true,
+            "passed": true
+          },
+          {
+            "path": "/cars?market=china&make=Volkswagen&page=2",
+            "performanceGate": "warm",
+            "seconds": 0.3117,
+            "ceiling": 2,
+            "passed": true,
+            "functionalPassed": true,
+            "latencyBlocking": false
+          },
+          {
+            "path": "/cars?market=china&city=%D0%9D%D0%BE%D0%B2%D0%BE%D0%BA%D1%83%D0%B7%D0%BD%D0%B5%D1%86%D0%BA",
+            "performanceRequest": "started"
+          },
+          {
+            "path": "/cars?market=china&city=%D0%9D%D0%BE%D0%B2%D0%BE%D0%BA%D1%83%D0%B7%D0%BD%D0%B5%D1%86%D0%BA",
+            "performanceRequest": "complete",
+            "seconds": 0.1448,
+            "functionalPassed": true
+          },
+          {
+            "path": "/cars?market=china&city=%D0%9D%D0%BE%D0%B2%D0%BE%D0%BA%D1%83%D0%B7%D0%BD%D0%B5%D1%86%D0%BA",
+            "performanceRequest": "started"
+          },
+          {
+            "path": "/cars?market=china&city=%D0%9D%D0%BE%D0%B2%D0%BE%D0%BA%D1%83%D0%B7%D0%BD%D0%B5%D1%86%D0%BA",
+            "performanceRequest": "complete",
+            "seconds": 0.1477,
+            "functionalPassed": true
+          },
+          {
+            "path": "/cars?market=china&city=%D0%9D%D0%BE%D0%B2%D0%BE%D0%BA%D1%83%D0%B7%D0%BD%D0%B5%D1%86%D0%BA",
+            "performanceRequest": "started"
+          },
+          {
+            "path": "/cars?market=china&city=%D0%9D%D0%BE%D0%B2%D0%BE%D0%BA%D1%83%D0%B7%D0%BD%D0%B5%D1%86%D0%BA",
+            "performanceRequest": "complete",
+            "seconds": 0.135,
+            "functionalPassed": true
+          },
+          {
+            "path": "/cars?market=china&city=%D0%9D%D0%BE%D0%B2%D0%BE%D0%BA%D1%83%D0%B7%D0%BD%D0%B5%D1%86%D0%BA",
+            "performanceRequest": "started"
+          },
+          {
+            "path": "/cars?market=china&city=%D0%9D%D0%BE%D0%B2%D0%BE%D0%BA%D1%83%D0%B7%D0%BD%D0%B5%D1%86%D0%BA",
+            "performanceRequest": "complete",
+            "seconds": 0.3644,
+            "functionalPassed": true
+          },
+          {
+            "path": "/cars?market=china&city=%D0%9D%D0%BE%D0%B2%D0%BE%D0%BA%D1%83%D0%B7%D0%BD%D0%B5%D1%86%D0%BA",
+            "speedBaseline": "warm",
+            "referenceSeconds": 0.0901,
+            "measurementNoiseSeconds": 0.05,
+            "ceilingSeconds": 0.1401,
+            "seconds": 0.14482293400214985,
+            "blocking": true,
+            "passed": false,
+            "recheckSeconds": [
+              0.1477,
+              0.135,
+              0.3644
+            ],
+            "recheckMedianSeconds": 0.1477
+          }
+        ],
+        "rejectedSamples": 0
+      },
+      "retained": {
+        "identityConfirmed": true,
+        "running": true
+      },
+      "candidate": {
+        "present": false,
+        "running": null,
+        "status": null,
+        "exitCode": null,
+        "oomKilled": null
+      },
+      "events": {
+        "available": true,
+        "reason": null,
+        "rows": [
+          {
+            "action": "kill",
+            "time": 1795534436,
+            "exitCode": null,
+            "oom": false
+          },
+          {
+            "action": "stop",
+            "time": 1795534436,
+            "exitCode": null,
+            "oom": false
+          },
+          {
+            "action": "die",
+            "time": 1795534436,
+            "exitCode": 0,
+            "oom": false
+          },
+          {
+            "action": "destroy",
+            "time": 1795534436,
+            "exitCode": null,
+            "oom": false
+          }
+        ]
+      }
+    },
+    "finishedAt": "2026-11-24T15:40:41.100Z"
+  }
+}

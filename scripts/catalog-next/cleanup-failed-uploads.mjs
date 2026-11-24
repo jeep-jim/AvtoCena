@@ -11,8 +11,17 @@ const ROOT = fileURLToPath(new URL('../../', import.meta.url));
 const MARKER = '.github/market-runs/catalog-next-china-failed-upload-cleanup.json';
 const WORKFLOW = 'jeep-jim/AvtoCena/.github/workflows/catalog-next-china-failed-upload-cleanup.yml@refs/heads/main';
 const REPORT = 'catalog-next-china-failed-upload-cleanup-report.json';
-export const FAILED_UPLOAD_CLEANUP_CURRENT = Object.freeze({
-  runtimeSha: '5e62f9ff3a0079b07cd13b8ab912c5720dd22250', generationId: 'gen_china_45369451603_1',
+export const FAILED_UPLOAD_CLEANUP_LIVE_RUNTIME = '56d6b94fea70457e0ce2b0820596da9972846b90';
+export const FAILED_UPLOAD_CLEANUP_WITNESS = Object.freeze({
+  runtimeSha: '5e62f9ff3a0079b07cd13b8ab912c5720dd22250',
+  pricingRuntimeSha: '64c6338e0db23c8999096bceefbf113c0136fe15',
+  generationId: 'gen_china_45369451603_1',
+  generationManifestSha256: 'd5745797cc162b82e0c0f0b1f49fef65f18f0d6649666562337183b18084dd75',
+  privateGenerationReceiptSha256: '25f5277665bcc1a72879d9a7e55cb39fc7d4bd57a061be2593d3a6a9d9f1cc22',
+  nonce: '2d015d0beef2af9f076bd1d47987dd88',
+  planSha256: '773cb37c8ecae1de789c895888fd2e56264b73503def96a32c86ee845283338c',
+  rollbackSha256: '3a431be4e34714930ce483f28575c797df5f49687a2157ab2be21d31016a8a06',
+  imageId: 'sha256:7af5df7fa93163687fcb5c0e1ad834176234319de13a4dd92ddc1d954fcc9381',
 });
 const NONCES = Object.freeze(['2ab6a761ac784094d102edd7be8708af', 'ae835461a771911c083739ddbf03bead']);
 const need = (value, code) => { if (!value) throw Error('china_failed_cleanup_' + code); };
@@ -32,29 +41,32 @@ const instant = value => {
  * must be marker-only transitions from the already reviewed main tip. */
 export function verifyFailedUploadCleanupInvocation({root = ROOT, environment = process.env} = {}) {
   need(environment.GITHUB_WORKFLOW_REF === WORKFLOW, 'workflow');
-  return verifyReadonlyInvocation({root, env: environment, markerPath: MARKER, operation: 'prune-failed-china-uploads'});
+  return verifyReadonlyInvocation({root, env: environment, markerPath: MARKER,
+    operation: 'prune-failed-china-uploads-before-first-acceptance'});
 }
 
 export function validateFailedUploadCleanupReport(value) {
-  need(keys(value, ['version', 'kind', 'completed', 'runtimeSha', 'generationId', 'targetNonces', 'filesDeleted',
+  need(keys(value, ['version', 'kind', 'phase', 'completed', 'liveRuntimeSha', 'protectedFailedAttempt', 'protectedFilesVerified',
+    'targetRuntimeSha', 'targetNonces', 'filesDeleted',
     'freedBytes', 'alreadyAbsentFiles', 'retiredContainers', 'imagesDeleted', 'directoriesDeleted', 'privateGenerationDeletes',
-    'acceptedStateWrites']) && value.version === 1 && value.kind === 'china-failed-upload-prune-v1' && value.completed === true
-    && value.runtimeSha === FAILED_UPLOAD_CLEANUP_CURRENT.runtimeSha && value.generationId === FAILED_UPLOAD_CLEANUP_CURRENT.generationId
+    'acceptedStateWrites', 'intentStateWrites']) && value.version === 2 && value.kind === 'china-failed-upload-prune-v2'
+    && value.phase === 'before-first-acceptance' && value.completed === true
+    && value.liveRuntimeSha === FAILED_UPLOAD_CLEANUP_LIVE_RUNTIME
+    && keys(value.protectedFailedAttempt, Object.keys(FAILED_UPLOAD_CLEANUP_WITNESS))
+    && Object.entries(FAILED_UPLOAD_CLEANUP_WITNESS).every(([key, expected]) => value.protectedFailedAttempt[key] === expected)
+    && value.protectedFilesVerified === 11 && value.targetRuntimeSha === '822f925bb30c4e07010f6e14b6574f1b4bd6306e'
     && Array.isArray(value.targetNonces) && JSON.stringify(value.targetNonces) === JSON.stringify(NONCES), 'report_identity');
   need(natural(value.filesDeleted) && natural(value.alreadyAbsentFiles) && value.filesDeleted + value.alreadyAbsentFiles === 8
     && natural(value.freedBytes) && value.freedBytes <= 26083118592
     && (value.filesDeleted > 0 ? value.freedBytes > 0 : value.freedBytes === 0), 'report_counts');
-  need(['retiredContainers', 'imagesDeleted', 'directoriesDeleted', 'privateGenerationDeletes', 'acceptedStateWrites']
+  need(['retiredContainers', 'imagesDeleted', 'directoriesDeleted', 'privateGenerationDeletes', 'acceptedStateWrites', 'intentStateWrites']
     .every(key => value[key] === 0), 'report_scope');
   return structuredClone(value);
 }
 
-function acceptedFirstPublication(view) {
-  need(view.accepted.found && view.accepted.value.pending === null && view.accepted.value.rollback === null
-    && view.accepted.value.current?.runtimeSha === FAILED_UPLOAD_CLEANUP_CURRENT.runtimeSha
-    && view.accepted.value.current?.generationId === FAILED_UPLOAD_CLEANUP_CURRENT.generationId
-    && view.intent.found && view.intent.value.status === 'committed'
-    && inspectChinaPublicationState(view).status === 'resolved', 'accepted_state');
+function unacceptedFirstPublication(view) {
+  const status = inspectChinaPublicationState(view).status;
+  need(status === 'idle' && view.accepted.found === false && view.intent.found === false, 'unaccepted_state');
 }
 
 /** This is local-file retirement only. It cannot reserve, commit or abort a
@@ -67,9 +79,10 @@ export async function runFailedUploadCleanup({root = ROOT, environment = process
   need(object(capabilities) && Object.keys(capabilities).every(key => Object.hasOwn(defaults, key) && typeof capabilities[key] === 'function')
     && path.isAbsolute(root) && typeof now === 'function' && typeof log === 'function', 'arguments');
   const use = {...defaults, ...capabilities};
-  const report = {version: 1, kind: 'china-failed-upload-cleanup-v1', market: 'china', completed: false, status: 'starting',
-    current: FAILED_UPLOAD_CLEANUP_CURRENT, filesDeleted: null, freedBytes: null, alreadyAbsentFiles: null,
-    acceptedStateWrites: 0, privateGenerationDeletes: 0, leaseRelease: 'not_acquired'};
+  const report = {version: 2, kind: 'china-failed-upload-cleanup-v2', market: 'china', phase: 'before-first-acceptance',
+    completed: false, status: 'starting', liveRuntimeSha: FAILED_UPLOAD_CLEANUP_LIVE_RUNTIME,
+    protectedFailedAttempt: FAILED_UPLOAD_CLEANUP_WITNESS, filesDeleted: null, freedBytes: null, alreadyAbsentFiles: null,
+    acceptedStateWrites: 0, intentStateWrites: 0, privateGenerationDeletes: 0, leaseRelease: 'not_acquired'};
   let state, lease, expected, session, directory, failure, hostStarted = false, hostSettled = false;
   const readPair = async () => {
     const [accepted, intent] = await Promise.all([state.read('accepted'), state.read('intent')]); return {accepted, intent};
@@ -77,7 +90,7 @@ export async function runFailedUploadCleanup({root = ROOT, environment = process
   const assertAuthority = async () => {
     const current = await state.read('lease');
     need(sameObservation(current, lease) && current.value?.status === 'held' && instant(current.value.expiresAt) > instant(now()), 'lease_lost');
-    const view = await readPair(); acceptedFirstPublication(view);
+    const view = await readPair(); unacceptedFirstPublication(view);
     need(sameObservation(view.accepted, expected.accepted) && sameObservation(view.intent, expected.intent), 'state_changed');
     return view;
   };
@@ -87,7 +100,7 @@ export async function runFailedUploadCleanup({root = ROOT, environment = process
     use.verifyBaselines(root);
     const storage = use.createStorage({environment});
     need(typeof storage.assertPrivateBucket === 'function' && (await storage.assertPrivateBucket())?.verified === true, 'privacy');
-    state = createChinaState({storage, now}); expected = await readPair(); acceptedFirstPublication(expected);
+    state = createChinaState({storage, now}); expected = await readPair(); unacceptedFirstPublication(expected);
     const previous = await state.read('lease');
     lease = await state.acquireLease({previous,
       owner: {runId: environment.GITHUB_RUN_ID, attempt: environment.GITHUB_RUN_ATTEMPT, revision: invocation.sourceSha},
@@ -99,10 +112,10 @@ export async function runFailedUploadCleanup({root = ROOT, environment = process
     const temporary = await fs.realpath(environment.RUNNER_TEMP);
     directory = await fs.mkdtemp(path.join(temporary, 'china-failed-upload-cleanup-')); await fs.chmod(directory, 0o700);
     session = await use.openSession({root, directory, privateKey});
-    const currentState = await assertAuthority();
+    const publicationState = await assertAuthority();
     hostStarted = true;
     let raw;
-    try { raw = await session.call('prune_failed_uploads', {currentState, leaseExpiresAt: lease.value.expiresAt}); hostSettled = true; }
+    try { raw = await session.call('prune_failed_uploads', {publicationState, leaseExpiresAt: lease.value.expiresAt}); hostSettled = true; }
     catch (error) { hostSettled = /^china_host_[a-z0-9_]+$/.test(error?.message ?? ''); throw error; }
     report.result = validateFailedUploadCleanupReport(raw);
     for (const key of ['filesDeleted', 'freedBytes', 'alreadyAbsentFiles']) report[key] = report.result[key];

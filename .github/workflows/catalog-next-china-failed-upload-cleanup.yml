@@ -1,4 +1,4 @@
-name: China exact failed local upload cleanup
+name: China exact failed local upload cleanup before first acceptance
 on:
   push:
     branches: [main]
@@ -37,7 +37,7 @@ jobs:
         run: |
           node scripts/catalog-next/cleanup-failed-uploads.mjs --verify
           node --test tests/readonly-marker-invocation.test.mjs tests/catalog-next-failed-upload-cleanup.test.mjs tests/catalog-next-failed-upload-cleanup-host.test.mjs tests/catalog-next-release-ssh.test.mjs tests/catalog-next-china-state.test.mjs
-      - name: Prune the two verified failed local uploads after acceptance
+      - name: Prune two failed uploads while preserving the newer failed witness and live runtime
         env:
           SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
           JSON_STORAGE_DRIVER: object

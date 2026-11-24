@@ -1,0 +1,94 @@
+{
+  "version": 1,
+  "kind": "china-city-reader-local-profile-v1",
+  "synthetic": true,
+  "productionAcceptance": false,
+  "baselineRuntimeSha": "5e62f9ff3a0079b07cd13b8ab912c5720dd22250",
+  "patchedRuntimeFiles": {
+    "apps/web/lib/catalog/china-local-reader.ts": "e2bcd7c04749b40bd80107c6b01373e416b54082a821597aac3198f50bcbeeb8",
+    "apps/web/lib/catalog/china-city-query.mjs": "69613104791b24015babad90c278299d49391332fa6ff0cdffd64be8c475f86f"
+  },
+  "method": {
+    "fixture": "Actual buildChinaPricingGeneration from china-pricing-worker-fixture with 24 ready synthetic combustion offers, sourcePrice 60000 + i * 100 CNY, and all 33 prepared city keys including the unquoted key",
+    "requests": [
+      "searchLocalChina market page, no city",
+      "searchLocalChina market page, Novokuznetsk",
+      "readLocalChinaOffer, Novokuznetsk"
+    ],
+    "requestsPerCaseAndMode": 21,
+    "discardedFirstRequests": 1,
+    "statistic": "p50UpperMs = sorted measured request durations after discarding the first request, element index 10 of 20; this is the upper middle observation, not the mean of the two middle observations",
+    "clock": "performance.now(), timed request only, excluding forced GC and fixture preparation",
+    "processes": "Separate fresh Node processes for exact baseline reader/helper source and patched reader/helper source; same local workspace and fixture",
+    "retainedMode": "All 63 returned request objects remain strongly retained through the measurement",
+    "releasedMode": "No returned request object retained; setImmediate job boundary, global.gc(), another setImmediate boundary before every timed request",
+    "instrumentation": "Direct wrappers count city SQL reads, gunzip and city JSON parse work without retaining return objects",
+    "script": "/tmp/china-city-reader-gc-profile.mjs",
+    "limitation": "Local synthetic reader workload; does not measure server HTTP/SSR/browser latency or establish frozen baseline acceptance"
+  },
+  "baseline": {
+    "retained": {
+      "p50UpperMs": {
+        "plain": 5.085106,
+        "city": 25.876084,
+        "detail": 1.345694
+      },
+      "cityRangeMs": [
+        14.504216,
+        47.330519
+      ],
+      "cityLedgerReads": 525
+    },
+    "releasedWithForcedGc": {
+      "p50UpperMs": {
+        "plain": 4.580191,
+        "city": 17.737083,
+        "detail": 1.453997
+      },
+      "cityRangeMs": [
+        14.732448,
+        23.635591
+      ],
+      "cityLedgerReads": 525
+    }
+  },
+  "patched": {
+    "retained": {
+      "p50UpperMs": {
+        "plain": 2.928112,
+        "city": 3.373963,
+        "detail": 0.90706
+      },
+      "cityRangeMs": [
+        3.010058,
+        4.308979
+      ],
+      "cityLedgerReads": 24
+    },
+    "releasedWithForcedGc": {
+      "p50UpperMs": {
+        "plain": 3.319388,
+        "city": 13.0641,
+        "detail": 2.095517
+      },
+      "cityRangeMs": [
+        10.813269,
+        14.06206
+      ],
+      "cityLedgerReads": 525
+    }
+  },
+  "validation": {
+    "actualReaderAndQueryTests": {
+      "passed": 21,
+      "failed": 0
+    },
+    "webTypecheck": "passed: tsc --noEmit --incremental false",
+    "diffCheck": "passed",
+    "peerReview": "approved; exact existing composite city_prices index used for 24-ID and 48-ID batch queries with 33 cities",
+    "producerAndSchemaChanged": false,
+    "speedBaselinesChanged": false
+  },
+  "runtimeSha": "860e1ff601c6852eb3b1474982e52e3a5300c4af",
+  "runtimeTree": "c290c11a7f4b918ebcd7592976af6a184bf44d85"
+}
