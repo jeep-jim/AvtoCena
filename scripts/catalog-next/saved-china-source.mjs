@@ -57,14 +57,16 @@ function validateArchive(head, archive, manifest) {
 }
 
 function validateReport(report, head, archive) {
-  need(report?.version === 1 && report.market === 'china' && report.completed === true && !report.failure &&
+  need(report?.version === 1 && report.market === 'china' && report.provider === 'auto_api_che168' &&
+    report.completed === true && !report.failure && !report.partial &&
     instant(report.startedAt) && instant(report.completedAt) && report.startedAt <= report.completedAt &&
     Array.isArray(report.sources) && report.sources.length === 1, 'report_complete');
   const source = report.sources[0];
   need(source?.sourceId === SOURCE_ID && source.provider === 'auto_api_che168' && source.ownedFeedRun === head.runId &&
     source.completeInventory === true && source.stopReason === 'source_finished' && source.rejectedIdentity === 0 &&
     !source.partial && !source.failure && source.cursor === head.cursor && integer(source.initialCursor) &&
-    source.initialCursor <= source.cursor && source.uniqueOffers === head.observations && source.observations === head.observations &&
+    source.initialCursor <= source.cursor && integer(source.changes) &&
+    source.uniqueOffers === head.observations && source.observations === head.observations &&
     SHA.test(source.snapshotBinding ?? '') && source.replica?.binding === source.snapshotBinding &&
     source.replica.cursor === source.cursor && SHA.test(source.replica.sha256 ?? '') &&
     /^catalog\/provider-replicas\/che168\/[a-f0-9]{8}(?:-[a-f0-9]{4}){3}-[a-f0-9]{12}$/.test(source.replica.key ?? ''), 'source_lineage');
@@ -80,10 +82,13 @@ function validateReport(report, head, archive) {
     witness.snapshot.completeSha256 === source.replica.sha256 && witness.snapshot.rows === head.observations &&
     witness.snapshot.completedAt === report.completedAt && witness.normalized?.rows === head.observations &&
     SHA.test(witness.normalized.idsSha256 ?? '') && SHA.test(witness.normalized.rowsSha256 ?? '') &&
-    witness.replicaReadback?.method === 'closed_sqlite_restore_and_full_output_comparison' &&
+    witness.replicaReadback?.version === 1 && witness.replicaReadback.method === 'closed_sqlite_restore_and_full_output_comparison' &&
     witness.replicaReadback.integrity === 'ok' && witness.replicaReadback.binding === source.snapshotBinding &&
     witness.replicaReadback.cursor === head.cursor && witness.replicaReadback.replayInitialCursor === source.initialCursor &&
-    witness.replicaReadback.completion?.reportSha256 === jsonDigest(reportBody), 'replica_witness');
+    witness.replicaReadback.completion?.authority === 'saved_completed_producer_report' &&
+    witness.replicaReadback.completion.cursor === source.cursor &&
+    witness.replicaReadback.completion.changes === source.changes &&
+    witness.replicaReadback.completion.reportSha256 === jsonDigest(reportBody), 'replica_witness');
   return {source, witness};
 }
 
@@ -126,7 +131,7 @@ export async function buildSavedChinaSource({inputDirectory, outputDirectory, he
   const report = parseJson(reportBytes, 'invalid_report_json'), {source, witness} = validateReport(report, head, archive);
   need(downloadCut?.version === 1 && downloadCut.market === 'china' && downloadCut.status === 'complete' &&
     downloadCut.runId === head.runId && downloadCut.cursor === head.cursor && downloadCut.startCursor === source.initialCursor &&
-    downloadCut.rows === source.changes && instant(downloadCut.completedAt) &&
+    integer(downloadCut.rows) && downloadCut.rows === source.changes && instant(downloadCut.completedAt) &&
     Date.parse(downloadCut.completedAt) <= Date.parse(report.completedAt), 'download_cut');
   const sourceObservedAt = downloadCut.completedAt;
   await assertCurrent();

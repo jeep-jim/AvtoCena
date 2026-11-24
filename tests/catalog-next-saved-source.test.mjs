@@ -30,15 +30,16 @@ async function fixture(t, years = [2013, 2014, undefined, 2020]) {
   const source = {sourceId, provider: 'auto_api_che168', ownedFeedRun: '12340', completeInventory: true,
     stopReason: 'source_finished', rejectedIdentity: 0, initialCursor: 100, cursor: 200,
     observations: offers.length, uniqueOffers: offers.length, changes: 10, snapshotBinding: binding, replica, quarantined: 2};
-  const report = {version: 1, market: 'china', completed: true, startedAt: '2026-11-24T06:00:00.000Z',
+  const report = {version: 1, market: 'china', provider: 'auto_api_che168', completed: true, startedAt: '2026-11-24T06:00:00.000Z',
     completedAt, sources: [source]};
   const pairs = offers.map(offer => [offer.id, hash(offer)]).sort(([a], [b]) => a < b ? -1 : a > b ? 1 : 0);
   const witness = {version: 1, kind: 'independent_che168_replica_v1', sourceId,
     producer: {runId: owner.runId, attempt: owner.attempt, sourceSha: owner.revision},
     snapshot: {root: replica.key, completeSha256: replicaSha, rows: offers.length, completedAt},
     normalized: {rows: offers.length, idsSha256: hash(pairs.map(([id]) => id)), rowsSha256: hash(pairs)},
-    replicaReadback: {method: 'closed_sqlite_restore_and_full_output_comparison', integrity: 'ok', binding,
-      cursor: 200, replayInitialCursor: 100, completion: {reportSha256: hash(report)}}};
+    replicaReadback: {version: 1, method: 'closed_sqlite_restore_and_full_output_comparison', integrity: 'ok', binding,
+      cursor: 200, replayInitialCursor: 100, completion: {authority: 'saved_completed_producer_report',
+        cursor: 200, changes: 10, reportSha256: hash(report)}}};
   report.sourceInputWitness = {...witness, checksum: hash(witness)};
   const head = {version: 1, market: 'china', runId: '12340', rateRun: '12340', cursor: 200,
     observations: offers.length, archiveRoot: root};
@@ -134,4 +135,22 @@ test('prepared source cannot be read after its database is modified', async t =>
   const result = await buildSavedChinaSource(f.args);
   await fs.appendFile(result.paths.database, 'broken');
   await assert.rejects(async () => { for await (const offer of result.offers()) void offer; }, /china_saved_prepared_source_changed/);
+});
+
+test('valid outer checksums cannot hide an incomplete or mismatched event-count witness', async t => {
+  for (const missing of [false, true]) {
+    const f = await fixture(t);
+    const {checksum, ...witness} = f.report.sourceInputWitness;
+    if (missing) {
+      delete f.report.sources[0].changes;
+      delete f.args.downloadCut.rows;
+      delete witness.replicaReadback.completion.changes;
+      const {sourceInputWitness, ...body} = f.report;
+      witness.replicaReadback.completion.reportSha256 = hash(body);
+    } else witness.replicaReadback.completion.changes++;
+    f.report.sourceInputWitness = {...witness, checksum: hash(witness)};
+    await f.write();
+    await assert.rejects(buildSavedChinaSource(f.args), /china_saved_(source_lineage|replica_witness)/);
+    await assert.rejects(fs.stat(path.join(f.outputDirectory, 'source-manifest.json')), /ENOENT/);
+  }
 });
