@@ -256,7 +256,7 @@ test('the active China daily workflow preserves frozen speed, real browser proof
  assert.match(host,/AVTOCENA_SPEED_BASELINE_MODE': 'enforce'/);
  assert.match(host,/previous_generation = check_mounted_reference\(self\.retained, previous, previous_receipt\['nonce'\]\)/);
  assert.match(host,/image\.get\('Id'\) == self\.plan\['imageId'\]/);
- assert.match(host,/if not generation_update\(self\.plan\):[\s\S]*command\(\['\/usr\/bin\/docker', 'load'/);
+ assert.match(host,/if not generation_update\(self\.plan\) and not getattr\(self, 'reuse_verified', False\):[\s\S]*command\(\['\/usr\/bin\/docker', 'load'/);
  assert.match(host,/self\.functional_passed and self\.speed_passed and not self\.switched and not self\.accepted/);
  assert.match(host,/self\.switched and self\.functional_passed and self\.speed_passed and not self\.accepted/);
  assert.match(host,/signal\.setitimer\(signal\.ITIMER_REAL, remaining\)/);
