@@ -28,7 +28,7 @@ jobs:
       - name: Verify exact invocation, unchanged baselines and read-only protocol
         run: |
           node scripts/catalog-next/diagnose-startup.mjs --verify
-          node --test tests/readonly-marker-invocation.test.mjs tests/catalog-next-startup-diagnosis.test.mjs tests/catalog-next-startup-diagnose-host.test.mjs tests/catalog-next-release-ssh.test.mjs tests/release-speed-guard-contract.test.mjs
+          node --test tests/readonly-marker-invocation.test.mjs tests/catalog-next-startup-diagnosis.test.mjs tests/catalog-next-startup-diagnose-host.test.mjs tests/catalog-next-saved-speed-diagnosis.test.mjs tests/catalog-next-release-ssh.test.mjs tests/release-speed-guard-contract.test.mjs
       - name: Read the exact failed startup metadata
         env:
           SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}

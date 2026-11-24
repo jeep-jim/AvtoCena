@@ -3,26 +3,39 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {verifyReadonlyInvocation} from '../lib/readonly-marker-invocation.mjs';
 import {verifyFrozenSpeedBaselines} from '../verify-frozen-speed-baselines.mjs';
-import {openChinaSshSession} from './release-ssh.mjs';
+import {checkedStartupReport, openChinaSshSession} from './release-ssh.mjs';
 
 const ROOT = fileURLToPath(new URL('../../', import.meta.url));
 const MARKER = '.github/market-runs/catalog-next-china-startup-diagnosis.json';
 const OPERATION = 'inspect-china-startup';
 const REPORT = 'catalog-next-china-startup-diagnosis-report.json';
-const FAILED_RUN = '45382186572';
+const FAILED_RUN = '45393054543';
 export const CHINA_STARTUP_DIAGNOSIS_SELECTOR = Object.freeze({
   runtimeSha: '822f925bb30c4e07010f6e14b6574f1b4bd6306e',
   pricingRuntimeSha: '64c6338e0db23c8999096bceefbf113c0136fe15',
   generationId: 'gen_china_45369451603_1',
   generationManifestSha256: 'd5745797cc162b82e0c0f0b1f49fef65f18f0d6649666562337183b18084dd75',
-  controllerSha: 'ee8ba8def13a15333fae9dd4ece53e574e37cc14',
+  controllerSha: '781d0c7fa66e558d5d2047f876e65500167183a8',
   imageId: 'sha256:443e87ed141838f003ce6209fc290f4a2435113b7cfb83126e3d88fb6877cf83',
-  since: '2026-11-24T11:36:00Z',
-  until: '2026-11-24T11:39:30Z',
+  since: '2026-11-24T12:33:00Z',
+  until: '2026-11-24T12:36:00Z',
 });
 const FILES = Object.freeze(['GENERATION.json', 'details.sqlite', 'query.sqlite', 'FILTER_SEMANTICS.json',
   'FX_RECEIPT.json', 'RECONCILIATION.json', 'DISPOSITIONS.ndjson', 'image.tar', 'acceptance.json',
   'regcloud-performance-gate.py', 'accepted-speed-baseline.json']);
+// Exact public paths in the frozen server baseline, plus the China scope route.
+// No arbitrary URL, query, exception text or private response can be forwarded.
+const SPEED_PATHS = new Set(['/', '/api/health', '/api/leads', '/autocalc', '/cars', '/login',
+  '/cars/autocatalog', '/cars/autocatalog?make=Changan', '/cars?sort=totalRub',
+  '/cars?market=china', '/cars?market=china&make=Volkswagen&page=2', '/cars?market=europe&make=BMW&page=2',
+  '/cars?market=china&city=%D0%9D%D0%BE%D0%B2%D0%BE%D0%BA%D1%83%D0%B7%D0%BD%D0%B5%D1%86%D0%BA',
+  '/api/catalog/search?market=europe&make=BMW&page=2', '/api/catalog/search?market=china&marketPage=1&page=9',
+  '/api/catalog/search?market=china&budgetTo=1500000&pageSize=6',
+  '/cars/china/BMW/3%20SERIES?powerTo=160&sort=totalRub', '/cars/china/BMW/3?powerTo=160&sort=totalRub']);
+const SPEED_PHASES = new Set(['warm', 'after_ttl', 'after_directory_ttl']);
+const SPEED_ERRORS = new Set(['AssertionError', 'HTTPError', 'URLError', 'TimeoutError', 'JSONDecodeError',
+  'RemoteDisconnected', 'IncompleteRead', 'ConnectionResetError', 'ConnectionRefusedError', 'ValueError',
+  'KeyError', 'TypeError', 'OSError', 'SSLError', 'UnicodeDecodeError', 'other']);
 const HASH = /^[a-f0-9]{64}$/, NONCE = /^[a-f0-9]{32}$/;
 const need = (value, code) => { if (!value) throw Error('china_startup_diagnosis_' + code); };
 const object = value => value !== null && typeof value === 'object' && !Array.isArray(value);
@@ -31,10 +44,62 @@ const keys = (value, expected) => object(value) && Object.keys(value).length ===
 const natural = value => Number.isSafeInteger(value) && value >= 0;
 const positive = value => Number.isSafeInteger(value) && value > 0;
 const bool = value => typeof value === 'boolean';
+const seconds = value => Number.isFinite(value) && value >= 0 && value <= 86400;
 const sameSelector = value => keys(value, Object.keys(CHINA_STARTUP_DIAGNOSIS_SELECTOR))
   && Object.entries(CHINA_STARTUP_DIAGNOSIS_SELECTOR).every(([key, expected]) => value[key] === expected);
 const safeCode = error => /^(?:china_(?:startup_diagnosis|host|ssh)|readonly_invocation)_[a-z0-9_]{1,140}$/.test(error?.message ?? '')
   ? error.message : 'china_startup_diagnosis_failed';
+
+function validateSpeedSample(row) {
+  need(object(row), 'report_speed_sample');
+  if (row.performanceGate === 'summary') {
+    need(keys(row, ['performanceGate', 'marketScope', 'routes', 'acceptedBaselineRoutes', 'samples', 'slowSamples',
+      'functionalPassed', 'performanceAccepted', 'latencyBlocking', 'acceptedBaselineEnforced']) && row.marketScope === 'china'
+      && ['routes', 'acceptedBaselineRoutes'].every(key => Array.isArray(row[key]) && row[key].length <= 64
+        && row[key].every(route => SPEED_PATHS.has(route)))
+      && ['samples', 'slowSamples'].every(key => natural(row[key]) && row[key] <= 10000)
+      && ['functionalPassed', 'performanceAccepted', 'latencyBlocking', 'acceptedBaselineEnforced'].every(key => bool(row[key])),
+      'report_speed_summary');
+    return;
+  }
+  need(SPEED_PATHS.has(row.path), 'report_speed_path');
+  if (row.performanceRequest === 'started') {
+    need(keys(row, ['performanceRequest', 'path']), 'report_speed_request');
+  } else if (row.performanceRequest === 'complete') {
+    need(keys(row, ['performanceRequest', 'path', 'seconds', 'functionalPassed'])
+      && seconds(row.seconds) && bool(row.functionalPassed), 'report_speed_request');
+  } else if (row.performanceRequest === 'failed') {
+    need(keys(row, ['performanceRequest', 'path', 'seconds', 'errorType'])
+      && seconds(row.seconds) && SPEED_ERRORS.has(row.errorType), 'report_speed_request');
+  } else if (SPEED_PHASES.has(row.speedBaseline)) {
+    const fields = ['speedBaseline', 'path', 'referenceSeconds', 'measurementNoiseSeconds', 'ceilingSeconds', 'seconds', 'blocking', 'passed'];
+    if (Object.hasOwn(row, 'recheckSeconds') || Object.hasOwn(row, 'recheckMedianSeconds')) {
+      fields.push('recheckSeconds', 'recheckMedianSeconds');
+      need(Array.isArray(row.recheckSeconds) && row.recheckSeconds.length === 3 && row.recheckSeconds.every(seconds)
+        && seconds(row.recheckMedianSeconds), 'report_speed_recheck');
+    }
+    need(keys(row, fields) && ['referenceSeconds', 'measurementNoiseSeconds', 'ceilingSeconds', 'seconds'].every(key => seconds(row[key]))
+      && bool(row.blocking) && bool(row.passed), 'report_speed_baseline');
+  } else if (SPEED_PHASES.has(row.performanceGate)) {
+    need(keys(row, ['performanceGate', 'path', 'seconds', 'ceiling', 'passed', 'functionalPassed', 'latencyBlocking'])
+      && seconds(row.seconds) && seconds(row.ceiling)
+      && ['passed', 'functionalPassed', 'latencyBlocking'].every(key => bool(row[key])), 'report_speed_gate');
+  } else need(false, 'report_speed_sample');
+}
+
+function validateServerSpeed(value) {
+  need(keys(value, ['present', 'sha256', 'exitCode', 'samples', 'rejectedSamples']) && bool(value.present)
+    && Array.isArray(value.samples) && natural(value.rejectedSamples) && value.samples.length + value.rejectedSamples <= 512,
+    'report_speed');
+  if (!value.present) {
+    need(value.sha256 === null && value.exitCode === null && value.samples.length === 0 && value.rejectedSamples === 0,
+      'report_speed_absent');
+    return;
+  }
+  need(typeof value.sha256 === 'string' && HASH.test(value.sha256) && Number.isSafeInteger(value.exitCode) && Math.abs(value.exitCode) <= 255,
+    'report_speed_identity');
+  value.samples.forEach(validateSpeedSample);
+}
 
 /** Real immutable marker-only push; neither selector nor operation comes from
  * workflow inputs, environment overrides or an unreviewed argument. */
@@ -48,7 +113,7 @@ export function verifyChinaStartupDiagnosisInvocation({root = ROOT, environment 
  * Reject added fields instead of forwarding environment, raw logs or plans. */
 export function validateChinaStartupDiagnosis(value) {
   need(keys(value, ['version', 'kind', 'readOnly', 'selector', 'nonce', 'planSha256', 'rollbackSha256',
-    'outcome', 'files', 'generationVerified', 'diskFreeBytes', 'image', 'retained', 'candidate', 'events'])
+    'outcome', 'files', 'generationVerified', 'diskFreeBytes', 'image', 'retained', 'candidate', 'events', 'startup', 'serverSpeed'])
     && value.version === 1 && value.kind === 'china-host-startup-diagnosis-v1' && value.readOnly === true
     && sameSelector(value.selector) && NONCE.test(value.nonce ?? '')
     && HASH.test(value.planSha256 ?? '') && HASH.test(value.rollbackSha256 ?? '')
@@ -82,6 +147,10 @@ export function validateChinaStartupDiagnosis(value) {
     && ['create', 'start', 'die', 'oom', 'stop', 'kill', 'destroy', 'restart'].includes(row.action)
     && Number.isSafeInteger(row.time) && row.time >= first && row.time <= last
     && (row.exitCode === null || Number.isSafeInteger(row.exitCode)) && bool(row.oom), 'report_event');
+  if (value.startup !== null) {
+    try { checkedStartupReport(value.startup); } catch { need(false, 'report_startup'); }
+  }
+  validateServerSpeed(value.serverSpeed);
   need(Buffer.byteLength(JSON.stringify(value)) <= 256 * 1024, 'report_size');
   return structuredClone(value);
 }

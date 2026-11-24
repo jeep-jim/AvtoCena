@@ -13,6 +13,7 @@ import hashlib
 import http.client
 import importlib.util
 import json
+import math
 import os
 from pathlib import Path
 import re
@@ -330,6 +331,106 @@ def diagnosis_events(plan, since, until):
         connection.close()
 
 
+def saved_startup_diagnosis(directory):
+    filename = directory / 'STARTUP.json'
+    if not filename.exists():
+        return None
+    value, _ = diagnosis_json(filename)
+    keys = {'version', 'kind', 'ready', 'elapsedSeconds', 'attempts', 'health', 'candidate', 'reason'}
+    need(set(value) == keys and value.get('version') == 1 and value.get('kind') == 'china-host-startup-v1' and
+         type(value.get('ready')) is bool and type(value.get('elapsedSeconds')) in (int, float) and
+         math.isfinite(value['elapsedSeconds']) and 0 <= value['elapsedSeconds'] <= 3600 and
+         type(value.get('attempts')) is int and 0 <= value['attempts'] <= 10000 and
+         value.get('health') in {'not_checked', 'ok', 'connection_refused', 'timeout', 'invalid_json', 'identity_mismatch',
+                                 'http_response', 'connection_error', 'unavailable'} and
+         value.get('reason') in {'ready', 'timeout', 'exited', 'oom', 'restarted', 'inspect_unavailable'} and
+         value['ready'] == (value['reason'] == 'ready') and (not value['ready'] or value['health'] == 'ok'), 'diagnosis_startup')
+    candidate = value['candidate']
+    need(candidate is None or (isinstance(candidate, dict) and set(candidate) == {'running', 'status', 'exitCode', 'oomKilled', 'restartCount'} and
+         type(candidate.get('running')) is bool and type(candidate.get('oomKilled')) is bool and
+         type(candidate.get('exitCode')) is int and abs(candidate['exitCode']) <= 2147483647 and
+         type(candidate.get('restartCount')) is int and 0 <= candidate['restartCount'] <= 10000 and
+         candidate.get('status') in {'created', 'restarting', 'running', 'removing', 'paused', 'exited', 'dead'}), 'diagnosis_startup')
+    return value
+
+
+def saved_speed_sample(row, paths):
+    need(isinstance(row, dict), 'diagnosis_speed_sample')
+    phases = {'warm', 'after_ttl', 'after_directory_ttl'}
+    def numbers(names):
+        need(all(type(row.get(name)) in (int, float) and math.isfinite(row[name]) and 0 <= row[name] <= 86400
+                 for name in names), 'diagnosis_speed_number')
+        return {name: row[name] for name in names}
+    def booleans(names):
+        need(all(type(row.get(name)) is bool for name in names), 'diagnosis_speed_boolean')
+        return {name: row[name] for name in names}
+    if row.get('performanceGate') == 'summary':
+        need(row.get('marketScope') == 'china' and
+             all(isinstance(row.get(name), list) and len(row[name]) <= 64 and all(path in paths for path in row[name])
+                 for name in ('routes', 'acceptedBaselineRoutes')) and
+             all(type(row.get(name)) is int and 0 <= row[name] <= 10000 for name in ('samples', 'slowSamples')),
+             'diagnosis_speed_summary')
+        return {'performanceGate': 'summary', 'marketScope': 'china', 'routes': list(row['routes']),
+                'acceptedBaselineRoutes': list(row['acceptedBaselineRoutes']), 'samples': row['samples'], 'slowSamples': row['slowSamples'],
+                **booleans(('functionalPassed', 'performanceAccepted', 'latencyBlocking', 'acceptedBaselineEnforced'))}
+    need(isinstance(row.get('path'), str) and row['path'] in paths, 'diagnosis_speed_route')
+    route = {'path': row['path']}
+    if row.get('performanceRequest') in {'started', 'complete', 'failed'}:
+        result = {**route, 'performanceRequest': row['performanceRequest']}
+        if row['performanceRequest'] != 'started':
+            result.update(numbers(('seconds',)))
+        if row['performanceRequest'] == 'complete':
+            result.update(booleans(('functionalPassed',)))
+        if row['performanceRequest'] == 'failed':
+            errors = {'AssertionError', 'HTTPError', 'URLError', 'TimeoutError', 'JSONDecodeError', 'RemoteDisconnected',
+                      'IncompleteRead', 'ConnectionResetError', 'ConnectionRefusedError', 'ValueError', 'KeyError', 'TypeError',
+                      'OSError', 'SSLError', 'UnicodeDecodeError'}
+            result['errorType'] = row.get('errorType') if row.get('errorType') in errors else 'other'
+        return result
+    if row.get('speedBaseline') in phases:
+        result = {**route, 'speedBaseline': row['speedBaseline'],
+                  **numbers(('referenceSeconds', 'measurementNoiseSeconds', 'ceilingSeconds', 'seconds')),
+                  **booleans(('blocking', 'passed'))}
+        if 'recheckSeconds' in row or 'recheckMedianSeconds' in row:
+            values = row.get('recheckSeconds')
+            need(isinstance(values, list) and len(values) == 3 and
+                 all(type(value) in (int, float) and math.isfinite(value) and 0 <= value <= 86400 for value in values),
+                 'diagnosis_speed_recheck')
+            result.update(recheckSeconds=list(values), **numbers(('recheckMedianSeconds',)))
+        return result
+    if row.get('performanceGate') in phases:
+        return {**route, 'performanceGate': row['performanceGate'], **numbers(('seconds', 'ceiling')),
+                **booleans(('passed', 'functionalPassed', 'latencyBlocking'))}
+    raise ReleaseError('china_host_diagnosis_speed_sample')
+
+
+def saved_speed_diagnosis(directory, plan):
+    filename = directory / 'server-speed-result.json'
+    if not filename.exists():
+        return {'present': False, 'sha256': None, 'exitCode': None, 'samples': [], 'rejectedSamples': 0}
+    # Authenticate the exact uploaded gate and frozen reference before exposing
+    # only their known public route/sample fields. Neither file is executed.
+    for name in ('regcloud-performance-gate.py', 'accepted-speed-baseline.json'):
+        expected = next(row for row in plan['files'] if row['name'] == name)
+        regular(directory / name, 256 * 1024)
+        raw = (directory / name).read_bytes()
+        need(len(raw) == expected['bytes'] and sha(raw) == expected['sha256'], 'diagnosis_speed_source')
+    baseline, _ = diagnosis_json(directory / 'accepted-speed-baseline.json')
+    paths = {row['path'] for row in baseline['samples']}
+    paths.add('/cars?market=china')
+    value, raw = diagnosis_json(filename)
+    need(set(value) == {'exitCode', 'samples'} and type(value.get('exitCode')) is int and -255 <= value['exitCode'] <= 255 and
+         isinstance(value.get('samples'), list) and len(value['samples']) <= 512, 'diagnosis_speed_report')
+    samples = []
+    rejected = 0
+    for row in value['samples']:
+        try:
+            samples.append(saved_speed_sample(row, paths))
+        except (ReleaseError, TypeError, ValueError):
+            rejected += 1
+    return {'present': True, 'sha256': sha(raw), 'exitCode': value['exitCode'], 'samples': samples, 'rejectedSamples': rejected}
+
+
 def diagnose_startup(params):
     """Inspect exactly one failed first-release upload. No init, start, stop,
     file write, application request, state mutation or image load is reachable."""
@@ -433,6 +534,8 @@ def diagnose_startup(params):
         candidate = {'present': True, 'running': state['Running'], 'status': state['Status'],
                      'exitCode': state['ExitCode'], 'oomKilled': state['OOMKilled']}
     events = diagnosis_events(plan, since, until)
+    startup = saved_startup_diagnosis(directory)
+    server_speed = saved_speed_diagnosis(directory, plan)
     need(CONFIG.read_bytes() == ingress and
          protected_identity(docker('GET', '/containers/' + retained['Id'] + '/json')) == identity,
          'diagnosis_retained_changed')
@@ -445,6 +548,7 @@ def diagnose_startup(params):
     return {'version': 1, 'kind': 'china-host-startup-diagnosis-v1', 'readOnly': True, 'selector': dict(params),
             'nonce': plan['nonce'], 'planSha256': sha(plan_raw), 'rollbackSha256': sha(rollback_raw), 'outcome': 'rolled_back',
             'files': files, 'generationVerified': True, 'image': image_result, 'diskFreeBytes': free_bytes,
+            'startup': startup, 'serverSpeed': server_speed,
             'retained': {'identityConfirmed': True, 'running': True}, 'candidate': candidate, 'events': events}
 
 
