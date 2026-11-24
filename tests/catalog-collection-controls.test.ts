@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {getJsonStorage,StorageConflictError,type JsonStorage} from '../apps/web/lib/data';
-import {defaultCollectionControls,collectionEnabled,collectionMarketEnabled} from '../apps/web/lib/catalog/collection-controls-schema';
+import {COLLECTION_SOURCES,defaultCollectionControls,collectionEnabled,collectionMarketEnabled} from '../apps/web/lib/catalog/collection-controls-schema';
 import {COLLECTION_CONTROLS_KEY,saveCollectionSwitch,readCollectionControls,validateCollectionControls,clearCollectionControlsCache,CollectionControlsConflict,CollectionControlsInputError} from '../apps/web/lib/catalog/collection-controls';
 import {guardCollectionAdapter} from '../apps/web/lib/catalog/collection-adapter-guard';
 import {collectionWorkflowEnabled} from '../apps/web/lib/catalog/collection-controls-schema';
@@ -11,6 +11,46 @@ function memory(){
  let saved:unknown=null,etag=0;
  return {driver:'local',readJsonWithMeta:async()=>({value:structuredClone(saved),found:saved!==null,etag:saved===null?undefined:String(etag)}),writeJson:async (_:string,value:unknown,c:any)=>{if((c.ifNoneMatch==='*'&&saved!==null)||(c.ifMatch!==undefined&&c.ifMatch!==String(etag)))throw new StorageConflictError();saved=structuredClone(value);etag++;}} as unknown as JsonStorage;
 }
+test('AJ System is selectable only for Japan; retired switches cannot permit collection',()=>{
+ const controls=defaultCollectionControls();
+ assert.deepEqual(COLLECTION_SOURCES.filter(source=>source.id.startsWith('ajes_')).map(source=>({id:source.id,market:source.market})),[{id:'ajes_japan_feed',market:'japan'}]);
+ for(const market of ['china','korea']){
+  const id=`ajes_${market}_feed`;
+  assert.equal(id in controls.sources,false);
+  controls.sources[id]={enabled:true,enabledAt:null,disabledAt:null,changedBy:'legacy-owner'};
+  assert.equal(collectionEnabled(controls,id),false);
+ }
+ controls.sources.ajes_japan_feed.enabled=true;
+ assert.equal(collectionEnabled(controls,'ajes_japan_feed'),true);
+ assert.equal(COLLECTION_SOURCES.find(source=>source.id==='che168_feed')?.label,'Che168 · платный фид Auto API');
+ assert.equal(COLLECTION_SOURCES.find(source=>source.id==='dubicars_feed')?.label,'DubiCars · платный фид Auto API');
+});
+test('normalizing legacy controls removes only retired AJ switches and preserves all history and other decisions',async()=>{
+ const legacy=defaultCollectionControls(),at='2026-11-23T12:00:00Z';
+ legacy.revision=23;legacy.updatedAt=at;legacy.markets.uae.enabled=false;
+ legacy.sources.ajes_japan_feed={enabled:true,enabledAt:at,disabledAt:null,changedBy:'owner'};
+ legacy.sources.ajes_china_feed={enabled:true,enabledAt:at,disabledAt:null,changedBy:'owner'};
+ legacy.sources.ajes_korea_feed={enabled:false,enabledAt:null,disabledAt:at,changedBy:'owner'};
+ legacy.sources.retained_future_source={enabled:false,enabledAt:null,disabledAt:at,changedBy:'owner'};
+ legacy.history=[{revision:23,at,actor:'owner',scope:'source',id:'ajes_korea_feed',enabled:false},{revision:22,at,actor:'owner',scope:'source',id:'ajes_japan_feed',enabled:true}];
+ const before=structuredClone(legacy),expected=structuredClone(legacy);
+ delete expected.sources.ajes_china_feed;delete expected.sources.ajes_korea_feed;
+ assert.deepEqual(validateCollectionControls(legacy),expected);assert.deepEqual(legacy,before,'normalization never mutates the stored input');
+ let writes=0;
+ const storage={readJsonWithMeta:async()=>({found:true,value:legacy,etag:'legacy'}),writeJson:async()=>{writes++;}} as unknown as JsonStorage;
+ assert.deepEqual(await readCollectionControls(storage),expected);assert.equal(writes,0,'reading settings does not write a migration');
+});
+test('retired AJ source updates are rejected before storage access, including stale clients',async()=>{
+ let reads=0,writes=0;
+ const storage={readJsonWithMeta:async()=>{reads++;throw Error('unexpected storage read');},writeJson:async()=>{writes++;}} as unknown as JsonStorage;
+ for(const id of ['ajes_china_feed','ajes_korea_feed'])for(const enabled of [true,false]){
+  await assert.rejects(saveCollectionSwitch({scope:'source',id,enabled,revision:0},'owner',storage),CollectionControlsInputError);
+ }
+ assert.equal(reads,0);assert.equal(writes,0);
+ const japan=await saveCollectionSwitch({scope:'source',id:'ajes_japan_feed',enabled:true,revision:0},'owner',memory());
+ assert.equal(collectionEnabled(japan,'ajes_japan_feed'),true);
+ assert.equal(japan.history[0].id,'ajes_japan_feed');
+});
 test('green recovery obeys its Japan parent and fresh-main retries remain bounded across run IDs',()=>{
  const controls=defaultCollectionControls();
  assert.equal(collectionWorkflowEnabled(controls,'green'),true);

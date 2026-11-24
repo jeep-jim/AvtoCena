@@ -65,7 +65,8 @@ test('loopback release probes never reach supplier or credentials without visito
  const {createAjesClient}=await import('../apps/web/lib/catalog/ajes-client');
  let touched=0;const forbidden=async()=>{touched++;throw Error('unexpected dependency call');};
  const client=createAjesClient({password:forbidden,assertEnabled:forbidden,reserve:forbidden,fetcher:forbidden});
- for(const table of ['stats','korea','china'])await assert.rejects(client.read({table},''),/client_ip_missing/);
+ for(const table of ['stats','main'])await assert.rejects(client.read({table},''),/client_ip_missing/);
+ for(const table of ['china','korea'])await assert.rejects(client.read({table},''),/market_not_supported/);
  assert.equal(touched,0);
 });
 

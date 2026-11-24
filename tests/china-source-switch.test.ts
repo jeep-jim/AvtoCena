@@ -15,14 +15,14 @@ async function fixture(entry:string,enabled:boolean,paidSnapshot=false){
  }}]});
  const m={exports:{} as any};new Function('require','module','exports',output.outputFiles[0].text)(require,m,m.exports);return m.exports;
 }
-test('China follows owner source switch, including saved URLs; other markets retain routing',async()=>{
+test('AJ remains Japan-only despite old source switches and saved URLs',async()=>{
  for(const enabled of [false,true]){
   const {usesAjesMarket}=await fixture('apps/web/lib/catalog/ajes-market-selection.ts',enabled);
-  for(const source of [undefined,'existing','ajes'])assert.equal(await usesAjesMarket('china',source),enabled);
+  for(const source of [undefined,'existing','ajes'])assert.equal(await usesAjesMarket('china',source),false);
   assert.equal(await usesAjesMarket('japan'),true);
   assert.equal(await usesAjesMarket('europe'),false);
-  assert.equal(await usesAjesMarket('korea','existing'),true);
-  assert.equal(await usesAjesMarket('korea'),true);
+  assert.equal(await usesAjesMarket('korea','existing'),false);
+  assert.equal(await usesAjesMarket('korea'),false);
  }
 });
 test('disabled AJES preserves Che168 home rows and exact local count',async()=>{
@@ -31,16 +31,16 @@ test('disabled AJES preserves Che168 home rows and exact local count',async()=>{
  const result=await withAjesCount(value,{market:'china'});
  assert.equal(result.total,123);assert.deepEqual(result.marketCounts,value.marketCounts);assert.deepEqual(result.items,value.items);assert.deepEqual(result.marketCountInfo,{});
 });
-test('disabled paid Korea never falls back to historical parser rows or counts',async()=>{
+test('AJ counts preserve the published Korea rows without substituting another source',async()=>{
  const {withAjesCount}=await fixture('apps/web/lib/catalog/ajes-catalog.ts',false);
  const result=await withAjesCount({total:50,marketCounts:{korea:50},items:[{id:'old-kcar',market:'korea'}]},{market:'korea'});
- assert.equal(result.total,0);assert.equal(result.marketCounts.korea,0);assert.deepEqual(result.items,[]);assert.equal(result.countIncomplete,true);
+ assert.equal(result.total,50);assert.equal(result.marketCounts.korea,50);assert.deepEqual(result.items,[{id:'old-kcar',market:'korea'}]);assert.equal(result.countIncomplete,undefined);
 });
 
-test('Korea uses the published inventory only with its paid CRM switch and a bound manifest',async()=>{
+test('missing or disabled paid Korea inventory never selects AJ',async()=>{
  for(const enabled of [false,true])for(const published of [false,true]){
   const {usesAjesMarket}=await fixture('apps/web/lib/catalog/ajes-market-selection.ts',enabled,published);
-  for(const source of [undefined,'ajes','existing'])assert.equal(await usesAjesMarket('korea',source),!(enabled&&published));
+  for(const source of [undefined,'ajes','existing'])assert.equal(await usesAjesMarket('korea',source),false);
  }
  const {withAjesCount}=await fixture('apps/web/lib/catalog/ajes-catalog.ts',true,true);
  const value={total:15,marketCounts:{korea:15},items:[{id:'paid-offer',market:'korea'}]};

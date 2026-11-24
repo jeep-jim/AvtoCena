@@ -182,7 +182,8 @@ test('usage accounting retains concurrent attempts and independent tables withou
  await s.writeJson('catalog/operations/ajes-quota-stats.json',{buckets:{[hour]:19020}},{ifNoneMatch:'*'});
  await Promise.all(Array.from({length:5},()=>reserveAjesRequest(s,'stats',now)));
  assert.equal((await s.readJsonWithMeta<any>('catalog/operations/ajes-quota-stats.json',null)).value.buckets[hour],19025);
- for(const table of ['china','korea'] as const){await reserveAjesRequest(s,table,now);assert.equal((await s.readJsonWithMeta<any>(`catalog/operations/ajes-quota-${table}.json`,null)).value.buckets[hour],1);}
+ await reserveAjesRequest(s,'main',now);assert.equal((await s.readJsonWithMeta<any>('catalog/operations/ajes-quota-main.json',null)).value.buckets[hour],1);
+ for(const table of ['china','korea'] as const){await assert.rejects(reserveAjesRequest(s,table,now),/market_not_supported/);assert.equal((await s.readJsonWithMeta<any>(`catalog/operations/ajes-quota-${table}.json`,null)).found,false);}
  await reserveAjesRequest(s,'stats',now+25*3600000);
  assert.deepEqual((await s.readJsonWithMeta<any>('catalog/operations/ajes-quota-stats.json',null)).value.buckets,{[hour+25]:1});
 });
@@ -694,7 +695,7 @@ test('shared year range intersects each market policy without rejecting older lo
 test('disjoint year ranges return exact empty results without provider I/O and retain access checks',async()=>{
  let calls=0,enabled=true;
  const client=createAjesClient({password:()=> 'secret',assertEnabled:async()=>{if(!enabled)throw Error('disabled');},reserve:async()=>{calls++;},fetcher:async()=>{throw Error('unexpected provider call');}});
- for(const table of ['stats','main','korea','china'] as const){
+ for(const table of ['stats','main'] as const){
   for(const aggregate of [undefined,'count','makes','models'] as const){
    const result=await client.read({table,yearTo:2007,...(aggregate?{aggregate}:{})},'127.0.0.1');
    assert.deepEqual(result.items,[]);assert.equal(result.total,0);assert.equal(result.stale,false);
