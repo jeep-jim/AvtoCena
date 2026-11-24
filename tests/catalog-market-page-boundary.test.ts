@@ -36,6 +36,10 @@ test('last China page beyond 10000 reaches search; invalid offsets never do',asy
    const response=await m.exports.GET(new Request(`https://fixture.test/api/catalog/search?market=china&marketPage=1&page=${page}`));
    assert.equal(response.status,400,page);
   }
-  assert.equal(calls.length,3);
+  for(const source of ['ajes','existing']){
+   const bookmarked=await m.exports.GET(new Request(`https://fixture.test/api/catalog/search?market=china&source=${source}&marketPage=1&page=1&powerTo=160`));
+   assert.equal(bookmarked.status,200);assert.equal((await bookmarked.json()).items[0].id,'last-car');assert.equal(calls.at(-1).powerTo,160);
+  }
+  assert.equal(calls.length,5);
  }finally{delete (globalThis as any).__marketBoundary;}
 });

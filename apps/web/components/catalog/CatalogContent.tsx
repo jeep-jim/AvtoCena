@@ -96,6 +96,7 @@ function catalogResultScope(params:Record<string,string|string[]|undefined>,deal
 
 async function ReadCatalogContent({params={},dealer=null,embedded=false}:{params?:Record<string,string|string[]|undefined>;dealer?:DealerBrowsingContext|null;embedded?:boolean}) {
   params={...params,...(params.make?{make:catalogBrandFilter(first(params.make))}:{}),...(params.brand?{brand:catalogBrandFilter(first(params.brand))}:{})};
+  if(['ajes','existing'].includes(first(params.source))&&(first(params.market)==='china'||first(params.market)==='korea'))delete params.source;
   if(first(params.stock)==="green"&&(!dealer||dealer.markets.includes("japan")))return <GreenCornerCatalog params={{...Object.fromEntries(Object.entries(params).map(([k,v])=>[k,first(v)])),dealer:dealer?.id}} embedded={embedded}/>;
   const [liveChina,liveKorea]=await Promise.all([usesAjesMarket('china'),usesAjesMarket('korea')]);
   const liveMarket=(id:string)=>id==='china'&&liveChina||id==='korea'&&liveKorea;

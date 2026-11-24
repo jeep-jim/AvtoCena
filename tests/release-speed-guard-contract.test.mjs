@@ -117,6 +117,40 @@ test('new direct deploy-script entrypoints cannot bypass the reviewed inventory'
  }
 });
 
+// The AJ-only controller starts from the installed 22867 image context. Its
+// current-ingress adapter differs from the older avtocena-production script,
+// so register it explicitly instead of pretending it uses that wrapper.
+const customActivators=new Map([
+ ['aj-system-japan-only.yml','.github/operations/ajes-japan-only-20261124/release.mjs'],
+]);
+test('the reviewed AJ activator requires the unchanged full gates and nonce handshake',()=>{
+ const [workflow,entry]=[...customActivators][0],filename=path.join(workflowDirectory,workflow);
+ if(!fs.existsSync(filename))return;
+ const source=fs.readFileSync(filename,'utf8');
+ assert.match(source,/verify-frozen-speed-baselines\.mjs/);
+ assert.match(source,/release-speed-guard-contract\.test\.mjs/);
+ assert.match(source,/ajes-japan-only-release\.test\.mjs/);
+ assert.match(source,/ajes-japan-only-release-host\.test\.py/);
+ assert.ok(source.includes(entry+' --activate '),'the registered exact AJ entry is required');
+ const controller=fs.readFileSync(path.join(root,entry),'utf8');
+ assert.match(controller,/assertServerReceipt\(await io\.server\('private'\)/);
+ assert.match(controller,/assertServerReceipt\(await io\.server\('public'\)/);
+ assert.match(controller,/assertBrowserReceipt\(await io\.browser\(\),nonce,profile\)/);
+ const host=fs.readFileSync(path.join(root,'.github/operations/ajes-japan-only-20261124/release-host.py'),'utf8');
+ assert.match(host,/AVTOCENA_RELEASE_MARKETS': ''/);
+ assert.match(host,/AVTOCENA_SPEED_BASELINE_MODE': 'enforce'/);
+ assert.match(host,/len\(routes\) == 17/);
+ assert.match(host,/wait_for_verdict\(directory, SOURCE, self\.protocol\.nonce\)/);
+ assert.match(host,/driver\.emergency_rollback\(\)/);
+ const ci=fs.readFileSync(path.join(workflowDirectory,'ci.yml'),'utf8');
+ assert.match(ci,/^\s+node --test [^\n]*tests\/ajes-japan-only-release\.test\.mjs[^\n]*$/m);
+ assert.match(ci,/^\s+python3 -I -B tests\/ajes-japan-only-release-host\.test\.py\s*$/m);
+ for(const file of fs.readdirSync(workflowDirectory).filter(name=>/\.ya?ml$/.test(name))){
+  const text=fs.readFileSync(path.join(workflowDirectory,file),'utf8');
+  if(text.includes(entry+' --activate'))assert.equal(customActivators.get(file),entry,'unreviewed AJ activation entrypoint: '+file);
+ }
+});
+
 test('owner-authorized retained-image rescues keep their exact workflow and helper scope',()=>{
  for(const [workflow,workflowHash,helper,helperHash] of retainedRescues){
   if(fs.existsSync(path.join(root,workflow)))assert.ok(fs.existsSync(path.join(root,helper)),workflow+' requires its pinned helper');

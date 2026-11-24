@@ -8,6 +8,8 @@ permissions:
   contents: read
 jobs:
   check:
+    # AJ System is retained for Japan only by the owner's 2026-11-24 instruction.
+    if: false
     runs-on: ubuntu-latest
     timeout-minutes: 5
     environment: regcloud-staging

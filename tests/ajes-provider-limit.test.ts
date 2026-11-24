@@ -5,8 +5,8 @@ import {createAjesClient} from '../apps/web/lib/catalog/ajes-client';
 test('short ban/limit refusals use visitor cooldown across budget and continuation queries',async()=>{
  let calls=0;const diagnostics:any[]=[];
  const client=createAjesClient({password:()=> 'private-fixture',assertEnabled:async()=>{},reserve:async()=>{},saveRequestFailure:async value=>{diagnostics.push(value);},fetcher:async()=>{calls++;return new Response('request limit: ban private-fixture');}});
- for(const query of [{table:'korea',sourcePriceTo:25000000},{table:'korea',page:2},{table:'stats'}])await assert.rejects(client.read(query,'203.0.113.1'),/visitor_restricted/);
- assert.equal(calls,1,'a supplier refusal must stop requests across filters and markets for this visitor');
+ for(const query of [{table:'stats',sourcePriceTo:2500000},{table:'stats',page:2},{table:'main'}])await assert.rejects(client.read(query,'203.0.113.1'),/visitor_restricted/);
+ assert.equal(calls,1,'a supplier refusal must stop requests across filters and Japan tables for this visitor');
  await new Promise(resolve=>setImmediate(resolve));
  assert.equal(diagnostics.length,1);assert.equal(diagnostics[0].providerCode,'ban_limit');assert.equal(diagnostics[0].httpStatus,200);
  assert.equal(JSON.stringify(diagnostics).includes('private-fixture'),false);

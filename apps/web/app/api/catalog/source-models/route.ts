@@ -6,6 +6,7 @@ export const dynamic='force-dynamic';
 export async function GET(request:Request){
  const p=new URL(request.url).searchParams,market=p.get('market');
  if(!['china','korea','japan'].includes(market||''))return NextResponse.json({error:'invalid_market'},{status:400});
+ if(market!=='japan')return NextResponse.json({error:'source_retired'},{status:410,headers:{'Cache-Control':'no-store'}});
  try{
   const result=await readAjesDirectory({market,make:p.get('make')||undefined});
   return NextResponse.json({version:1,brands:[],models:result.models.map(row=>[row.make,row.model,[],row.total]),stale:result.stale},{headers:{'Cache-Control':'no-store'}});

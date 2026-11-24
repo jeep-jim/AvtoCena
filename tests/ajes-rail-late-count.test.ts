@@ -18,7 +18,7 @@ test('market cards remain ready and their late count resolves with exactly the s
  try{
   const built=await build({entryPoints:['apps/web/components/catalog/AjesRail.tsx'],bundle:true,platform:'node',format:'cjs',write:false,jsx:'automatic',packages:'external',plugins:[{name:'rail-fixture',setup(b){b.onResolve({filter:/.*/},a=>{const name=a.path.split('/').at(-1)!;return name in mocks?{path:name,namespace:'stub'}:undefined;});b.onLoad({filter:/.*/,namespace:'stub'},a=>({contents:mocks[a.path]}));}}]});
   const mod={exports:{} as any};new Function('require','module','exports',built.outputFiles[0].text)(require,mod,mod.exports);
-  for(const market of ['korea','japan','china']){
+  for(const market of ['japan']){
    const params={make:'Hyundai',model:'TUCSON',city:'Новокузнецк',market:'korea|japan'};
    const tree=await mod.exports.AjesRail({market,params});
    assert.deepEqual(state.options.at(-1),{includeCount:false,fillPreview:true});
@@ -30,7 +30,7 @@ test('market cards remain ready and their late count resolves with exactly the s
    const counter=await pending;assert.equal(counter.props.total,20890);
    assert.deepEqual(JSON.parse(state.countKeys.at(-1)!),state.queries.at(-1));
   }
-  for(const market of ['japan','korea']){
+  for(const market of ['japan']){
    const tree=await mod.exports.AjesRail({market,params:{budget:'1500000',city:'Новокузнецк',page:'5',after:'1.0',source:'existing'},prepared:Promise.resolve({items:[],count:null,hasMore:true,nextCursor:'7.0',filteredByPage:true,partial:false,stale:false})});
    const nodes:any[]=[];function walk(node:any){if(Array.isArray(node))return node.forEach(walk);if(!node||typeof node!=='object')return;nodes.push(node);walk(node.props?.children);}walk(tree);
    const link=nodes.find(n=>n.props?.children==='Продолжить поиск');assert.ok(link);
@@ -38,5 +38,8 @@ test('market cards remain ready and their late count resolves with exactly the s
    assert.equal(q.get('after'),'7.0');assert.equal(q.get('budget'),'1500000');assert.equal(q.get('city'),'Новокузнецк');assert.equal(q.get('market'),market);assert.equal(q.has('page'),false);assert.equal(q.has('source'),false);
    const all=nodes.find(n=>n.props?.children==='Все →');assert.equal(new URL(all.props.href,'https://avtocena.com').searchParams.has('after'),false);
   }
+  const queryCount=state.queries.length;
+  for(const market of ['china','korea'])await assert.rejects(mod.exports.AjesRail({market,params:{budget:'1500000'},prepared:Promise.resolve({items:[{id:'retired-car'}],count:null,hasMore:false})}),/ajes_market_not_supported/);
+  assert.equal(state.queries.length,queryCount,'retired markets cannot load an AJ rail even with prepared cards');
  }finally{delete (globalThis as any).__railFixture;}
 });

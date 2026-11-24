@@ -1,3 +1,4 @@
+import {assertAjesJapanMarket} from '@/lib/catalog/ajes-access-policy';
 import {catalogSearchHeading} from '@/lib/catalog/catalog-routes';
 import {Suspense} from 'react';
 import {CatalogResultCountUpdate} from './CatalogSelectionContext';
@@ -19,7 +20,7 @@ import {AjesUnavailable} from '@/lib/catalog/ajes-client';
 import {ajesCountText,exactAjesCount,ajesPaginationCountText} from '@/lib/catalog/ajes-count-display';
 type Params=Record<string,string|string[]|undefined>;
 export async function AjesCatalog({params,embedded=false,dealer}:{params:Params;embedded?:boolean;dealer?:DealerBrowsingContext|null}){
- const initial=Object.fromEntries(Object.entries(params).map(([k,v])=>[k,Array.isArray(v)?v[0]||'':v||'']));const market=initial.market==='china'?'china':initial.market==='korea'?'korea':'japan';const label=market==='china'?'Китай':market==='korea'?'Корея':'Япония';initial.market=market;if(market!=='japan')initial.source='ajes';if(!initial.make&&initial.brand)initial.make=initial.brand;
+ const initial=Object.fromEntries(Object.entries(params).map(([k,v])=>[k,Array.isArray(v)?v[0]||'':v||'']));assertAjesJapanMarket(initial.market);const market='japan';const label='Япония';initial.market=market;if(!initial.make&&initial.brand)initial.make=initial.brand;
  let result:Awaited<ReturnType<typeof readAjesCatalogPage>>|undefined,error='';
  // The independent streamed count below starts after the visible page. Two
  // concurrent category visits must not fill both supplier slots with counts.

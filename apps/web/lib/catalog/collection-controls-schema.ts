@@ -4,12 +4,13 @@ export const COLLECTION_MARKETS = [
   {id:'uae',label:'ОАЭ'}, {id:'europe',label:'Европа'}, {id:'georgia',label:'Грузия'},
 ] as const;
 export type CollectionMarket = typeof COLLECTION_MARKETS[number]['id'];
+/** Retired by the owner: AJ System supplies Japan only. These IDs cannot be re-enabled. */
+export const RETIRED_AJES_COLLECTION_SOURCES = ['ajes_china_feed','ajes_korea_feed'] as const;
 export const COLLECTION_SOURCES = [
   {id:'encar_feed',market:'korea',label:'Encar · платный фид Auto API',url:'https://auto-api.com/ru/encar',kind:'feed',defaultEnabled:false,frequency:'По расписанию обновления Кореи',description:'Корейские объявления Encar из оплаченного API.',settings:'Обновление из сохранённой выгрузки. Переключение выдачи после проверки цен, фотографий и карточек.'},
-  {id:'dubicars_feed',market:'uae',label:'DubiCars · платный фид',url:'https://auto-api.com/ru/dubicars',kind:'feed',defaultEnabled:true,frequency:'В плановое окно обновления ОАЭ',description:'Все предложения DubiCars без ограничений года, цены и мощности.',settings:'Полный каталог и изменения; публикация только завершённого обновления.'},
-  ...(['china','korea'] as const).map(market=>({id:`ajes_${market}_feed`,market,label:`AJ System · платный фид ${market==='china'?'Китая':'Кореи'}`,url:'https://avto.jp/',kind:'feed',defaultEnabled:false,frequency:'По запросу посетителя',description:'Основной каталог рынка. Отключение прекращает новые запросы поставщику.',settings:'Общий доступ AJ System. Карточки по ID, до 48 автомобилей за запрос. Цена Китая в CNY, Кореи в KRW. Проверка подключения получает 5 записей.'})),
+  {id:'dubicars_feed',market:'uae',label:'DubiCars · платный фид Auto API',url:'https://auto-api.com/ru/dubicars',kind:'feed',defaultEnabled:true,frequency:'В плановое окно обновления ОАЭ',description:'Все предложения DubiCars без ограничений года, цены и мощности.',settings:'Полный каталог и изменения; публикация только завершённого обновления.'},
   {id:'ajes_japan_feed',market:'japan',label:'AJ System · платный фид Японии',url:'https://avto.jp/',kind:'feed',defaultEnabled:false,frequency:'По запросу пользователя',description:'Аукционы и результаты торгов. Подключение проверяется владельцем до публикации.',settings:'До 48 лотов за запрос; карточка запрашивается по ID; фотографии загружаются по прямым ссылкам.'},
-  {id:'che168_feed',market:'china',label:'Che168 · платный фид',url:'https://auto-api.com/',kind:'feed',defaultEnabled:true,frequency:'Ежедневно, 01:11 по Красноярску',description:'Полный исходный файл и последующие изменения поставщика. Ошибка обновления не включает парсеры.',settings:'Только завершённое обновление; курсор сохраняется после проверенной публикации.'},
+  {id:'che168_feed',market:'china',label:'Che168 · платный фид Auto API',url:'https://auto-api.com/',kind:'feed',defaultEnabled:true,frequency:'Ежедневно, 01:11 по Красноярску',description:'Полный исходный файл и последующие изменения поставщика. Ошибка обновления не включает парсеры.',settings:'Только завершённое обновление; курсор сохраняется после проверенной публикации.'},
   {id:'autohome_used_china_open',market:'china',label:'Che168 · резервный парсер',url:'https://global.che168.com/',kind:'parser',defaultEnabled:false,frequency:'После явного включения: ежедневное окно Китая, 01:11 по Красноярску',description:'Прямой сбор подержанных автомобилей. Крайний резерв по решению владельца. Для включения сначала выключите платный фид.',settings:'До 100 000 наблюдений на источник за запуск, до 2 000 страниц; до 4 карточек одновременно, до 30 фото.'},
   {id:'autohome_new_china_open',market:'china',label:'Autohome · резервный парсер новых авто',url:'https://www.autohome.com.cn/',kind:'parser',defaultEnabled:false,frequency:'После явного включения: ежедневное окно Китая, 01:11 по Красноярску',description:'Прямой сбор новых автомобилей. Крайний резерв по решению владельца.',settings:'До 30 минут за запуск, до 100 000 наблюдений; до 4 карточек одновременно, до 30 фото.'},
   ...[
@@ -35,6 +36,7 @@ export function defaultCollectionControls():CollectionControls {
   return {version:1,revision:0,updatedAt:null,markets:Object.fromEntries(COLLECTION_MARKETS.map(m=>[m.id,value(true)])),sources:Object.fromEntries(COLLECTION_SOURCES.map(s=>[s.id,value(s.defaultEnabled)])),history:[]};
 }
 export function collectionEnabled(controls:CollectionControls,id:string):boolean {
+  if (RETIRED_AJES_COLLECTION_SOURCES.some(source=>source===id)) return false;
   if (['proauctions_japan_stat','jptrade_japan_stat','mobile_de_open'].includes(id)) return false;
   const source=COLLECTION_SOURCES.find(s=>s.id===id);
   if(!source)throw Error('unknown_collection_source');
@@ -47,5 +49,5 @@ export function collectionMarketEnabled(controls:CollectionControls,market:strin
 export const COLLECTION_WORKFLOWS:Record<string,string>={china:'catalog-refresh-china.yml',korea:'catalog-refresh-korea.yml',uae:'catalog-refresh-uae.yml',europe:'catalog-refresh-europe.yml',georgia:'catalog-refresh-georgia.yml',japan:'catalog-refresh-green.yml'};
 
 export function collectionWorkflowEnabled(controls:CollectionControls,market:string){
-  return market==='green'?collectionEnabled(controls,'akebono_green'):market==='japan'?false:COLLECTION_SOURCES.some(s=>s.market===market&&!['ajes_china_feed','ajes_korea_feed'].includes(s.id)&&collectionEnabled(controls,s.id));
+  return market==='green'?collectionEnabled(controls,'akebono_green'):market==='japan'?false:COLLECTION_SOURCES.some(s=>s.market===market&&collectionEnabled(controls,s.id));
 }
