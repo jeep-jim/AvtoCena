@@ -1,0 +1,807 @@
+{
+  "version": 1,
+  "kind": "china-runtime99-browser-city-price-failure-evidence-v1",
+  "market": "china",
+  "releaseRun": {
+    "id": 45493093028,
+    "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/45493093028",
+    "attempt": 1,
+    "headSha": "0bb29933c2a06e10adbbc41ed59b3368c1a1fccb",
+    "conclusion": "failure",
+    "finishedAt": "2026-11-24T22:09:32.209Z"
+  },
+  "verification": {
+    "runId": 45498895444,
+    "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/45498895444",
+    "headSha": "36c761eb3a8f07277584cd9b37770129e472d0b3",
+    "artifactId": 14968728651,
+    "archiveSha256": "41bb6e4db3ec465b2bd96428e1cc7f0a3120cfe56cfb9741e6f08e0d0d43ea8c",
+    "archiveBytes": 10618,
+    "archiveBytesIndependentlyVerified": true,
+    "files": {
+      "catalog-next-china-release-report.json": {
+        "bytes": 82501,
+        "sha256": "7b379dc8d15406bc7a3f20262a172640f11cfd09ccb754118517601632bbd9e4"
+      },
+      "china-browser-details-report.json": {
+        "bytes": 1470,
+        "sha256": "2f29c7576caaa222cd118a60e1f0fb7311bfd8908a20205e1e16a21b19789c5b"
+      },
+      "owner-filter-browser-report.json": {
+        "bytes": 13237,
+        "sha256": "35733d93fbb871b72bb909bc84bcd2218183dfb8e852875e04f499d7db95e3b2"
+      },
+      "image-receipt.json": {
+        "bytes": 5004,
+        "sha256": "b68d37843af965ee85a48a95f526819ac836200b2aedfc10d02fa24e8f708edd"
+      }
+    },
+    "provenance": "Release aggregates parsed from the completed workflow stdout JSON; saved browser detail JSON and archive/file SHA256 values read by an independent GitHub Actions artifact-only inspection. No production or supplier requests were made by that inspection."
+  },
+  "runtimeSha": "99c45a3b5d8439bbc1ee34702ba41340ada08125",
+  "pricingRuntimeSha": "64c6338e0db23c8999096bceefbf113c0136fe15",
+  "generationId": "gen_china_45369451603_1",
+  "imageId": "sha256:c12a500a0e50fc692701e2f5a28733a6c8a995c241df9d193c294a2cd85cb87d",
+  "nonce": "eef77195126340e1a7c47262a86bb554",
+  "sourceObservedAt": "2026-11-24T10:22:41.417Z",
+  "pricingAsOf": "2026-11-24T10:24:33.128Z",
+  "sourceRows": 291434,
+  "rows": 283188,
+  "outcome": {
+    "accepted": false,
+    "phase": "general_catalog_power_city_detail_back",
+    "errorCode": "china_release_browser_details_failed",
+    "rollbackVerified": true,
+    "observedPublicRelease": "56d6b94fea70457e0ce2b0820596da9972846b90",
+    "encyclopediaWrites": 0,
+    "otherMarketWrites": 0
+  },
+  "startup": {
+    "version": 1,
+    "kind": "china-host-startup-v1",
+    "ready": true,
+    "elapsedSeconds": 387.8502,
+    "attempts": 66,
+    "health": "ok",
+    "candidate": {
+      "running": true,
+      "status": "running",
+      "exitCode": 0,
+      "oomKilled": false,
+      "restartCount": 0
+    },
+    "reason": "ready"
+  },
+  "functional": {
+    "functionalPassed": true,
+    "cases": [
+      {
+        "name": "china-first-page",
+        "total": 283188,
+        "items": 24,
+        "seconds": 0.3556
+      },
+      {
+        "name": "china-power-to-160",
+        "total": 71160,
+        "items": 24,
+        "seconds": 0.0197
+      },
+      {
+        "name": "volkswagen-second-page",
+        "total": 24241,
+        "items": 24,
+        "seconds": 0.1664
+      },
+      {
+        "name": "volkswagen-2014-budget-three-million",
+        "total": 13578,
+        "items": 24,
+        "seconds": 1.0472
+      },
+      {
+        "name": "novokuznetsk-first-page",
+        "total": 283188,
+        "items": 24,
+        "seconds": 0.0887
+      },
+      {
+        "name": "moscow-budget-one-and-half-million",
+        "total": 20110,
+        "items": 24,
+        "seconds": 0.6691
+      },
+      {
+        "name": "moscow-budget-two-million",
+        "total": 50754,
+        "items": 24,
+        "seconds": 0.3554
+      },
+      {
+        "name": "china-deep-page-nine",
+        "total": 283188,
+        "items": 24,
+        "seconds": 0.1211
+      },
+      {
+        "name": "actual-popular-model",
+        "total": 4309,
+        "items": 24,
+        "seconds": 0.3795
+      },
+      {
+        "name": "popular-model-2014-novokuznetsk",
+        "total": 4442,
+        "items": 24,
+        "seconds": 1.1505
+      },
+      {
+        "name": "retained-unpriced-inventory",
+        "total": 102138,
+        "items": 24,
+        "seconds": 0.3491
+      },
+      {
+        "name": "china-frozen-rates-and-facets",
+        "total": 283188,
+        "items": 24,
+        "seconds": 6.7706
+      }
+    ]
+  },
+  "server": {
+    "passed": true,
+    "samples": 48,
+    "baselineComparisons": 45,
+    "comparisons": [
+      {
+        "phase": "warm",
+        "path": "/api/health",
+        "referenceSeconds": 0.0206,
+        "ceilingSeconds": 0.0706,
+        "seconds": 0.0029074420453980565,
+        "passed": true
+      },
+      {
+        "phase": "warm",
+        "path": "/api/leads",
+        "referenceSeconds": 0.0065,
+        "ceilingSeconds": 0.0565,
+        "seconds": 0.006555510975886136,
+        "passed": true
+      },
+      {
+        "phase": "warm",
+        "path": "/",
+        "referenceSeconds": 0.4696,
+        "ceilingSeconds": 0.5196,
+        "seconds": 0.2926089089596644,
+        "passed": true
+      },
+      {
+        "phase": "warm",
+        "path": "/login",
+        "referenceSeconds": 0.2259,
+        "ceilingSeconds": 0.2759,
+        "seconds": 0.23749183100881055,
+        "passed": true
+      },
+      {
+        "phase": "warm",
+        "path": "/autocalc",
+        "referenceSeconds": 0.0139,
+        "ceilingSeconds": 0.0639,
+        "seconds": 0.014034883002750576,
+        "passed": true
+      },
+      {
+        "phase": "warm",
+        "path": "/cars",
+        "referenceSeconds": 0.9607,
+        "ceilingSeconds": 1.0107,
+        "seconds": 0.23078209499362856,
+        "passed": true
+      },
+      {
+        "phase": "warm",
+        "path": "/cars?market=china&make=Volkswagen&page=2",
+        "referenceSeconds": 0.8934,
+        "ceilingSeconds": 0.9434,
+        "seconds": 0.25317956804065034,
+        "passed": true
+      },
+      {
+        "phase": "warm",
+        "path": "/cars?market=china&city=%D0%9D%D0%BE%D0%B2%D0%BE%D0%BA%D1%83%D0%B7%D0%BD%D0%B5%D1%86%D0%BA",
+        "referenceSeconds": 0.0901,
+        "ceilingSeconds": 0.1401,
+        "seconds": 0.12046560703311116,
+        "passed": true
+      },
+      {
+        "phase": "warm",
+        "path": "/cars?sort=totalRub",
+        "referenceSeconds": 0.485,
+        "ceilingSeconds": 0.535,
+        "seconds": 1.7682356120203622,
+        "passed": true,
+        "recheckSeconds": [
+          0.2617,
+          0.2229,
+          0.2356
+        ],
+        "recheckMedianSeconds": 0.2356
+      },
+      {
+        "phase": "warm",
+        "path": "/api/catalog/search?market=china&marketPage=1&page=9",
+        "referenceSeconds": 0.0822,
+        "ceilingSeconds": 0.1322,
+        "seconds": 0.3203220159630291,
+        "passed": true,
+        "recheckSeconds": [
+          0.0143,
+          0.0148,
+          0.0131
+        ],
+        "recheckMedianSeconds": 0.0143
+      },
+      {
+        "phase": "warm",
+        "path": "/cars/autocatalog",
+        "referenceSeconds": 1.5871,
+        "ceilingSeconds": 1.6665,
+        "seconds": 0.81465874199057,
+        "passed": true
+      },
+      {
+        "phase": "warm",
+        "path": "/cars/autocatalog?make=Changan",
+        "referenceSeconds": 1.8049,
+        "ceilingSeconds": 1.8951,
+        "seconds": 0.5170129450270906,
+        "passed": true
+      },
+      {
+        "phase": "warm",
+        "path": "/cars/china/BMW/3?powerTo=160&sort=totalRub",
+        "referenceSeconds": 0.3441,
+        "ceilingSeconds": 0.3941,
+        "seconds": 0.12229436601046473,
+        "passed": true
+      },
+      {
+        "phase": "warm",
+        "path": "/cars/china/BMW/3%20SERIES?powerTo=160&sort=totalRub",
+        "referenceSeconds": 0.1251,
+        "ceilingSeconds": 0.1751,
+        "seconds": 0.08783586299978197,
+        "passed": true
+      },
+      {
+        "phase": "warm",
+        "path": "/api/catalog/search?market=china&budgetTo=1500000&pageSize=6",
+        "referenceSeconds": 0.0481,
+        "ceilingSeconds": 0.0981,
+        "seconds": 0.008210427011363208,
+        "passed": true
+      },
+      {
+        "phase": "after_ttl",
+        "path": "/api/health",
+        "referenceSeconds": 0.4258,
+        "ceilingSeconds": 0.4758,
+        "seconds": 0.005753334960900247,
+        "passed": true
+      },
+      {
+        "phase": "after_ttl",
+        "path": "/api/leads",
+        "referenceSeconds": 0.0174,
+        "ceilingSeconds": 0.0674,
+        "seconds": 0.005295884038787335,
+        "passed": true
+      },
+      {
+        "phase": "after_ttl",
+        "path": "/",
+        "referenceSeconds": 1.7938,
+        "ceilingSeconds": 1.8835,
+        "seconds": 0.8517400929704309,
+        "passed": true
+      },
+      {
+        "phase": "after_ttl",
+        "path": "/login",
+        "referenceSeconds": 0.3139,
+        "ceilingSeconds": 0.3639,
+        "seconds": 0.2112257329863496,
+        "passed": true
+      },
+      {
+        "phase": "after_ttl",
+        "path": "/autocalc",
+        "referenceSeconds": 0.023,
+        "ceilingSeconds": 0.073,
+        "seconds": 0.014596614986658096,
+        "passed": true
+      },
+      {
+        "phase": "after_ttl",
+        "path": "/cars",
+        "referenceSeconds": 1.3688,
+        "ceilingSeconds": 1.4372,
+        "seconds": 0.19742484600283206,
+        "passed": true
+      },
+      {
+        "phase": "after_ttl",
+        "path": "/cars?market=china&make=Volkswagen&page=2",
+        "referenceSeconds": 1.427,
+        "ceilingSeconds": 1.4984,
+        "seconds": 0.07278696895809844,
+        "passed": true
+      },
+      {
+        "phase": "after_ttl",
+        "path": "/cars?market=china&city=%D0%9D%D0%BE%D0%B2%D0%BE%D0%BA%D1%83%D0%B7%D0%BD%D0%B5%D1%86%D0%BA",
+        "referenceSeconds": 0.1083,
+        "ceilingSeconds": 0.1583,
+        "seconds": 0.09663776302477345,
+        "passed": true
+      },
+      {
+        "phase": "after_ttl",
+        "path": "/cars?sort=totalRub",
+        "referenceSeconds": 10.4885,
+        "ceilingSeconds": 11.0129,
+        "seconds": 0.2566734249703586,
+        "passed": true
+      },
+      {
+        "phase": "after_ttl",
+        "path": "/api/catalog/search?market=china&marketPage=1&page=9",
+        "referenceSeconds": 4.4517,
+        "ceilingSeconds": 4.6743,
+        "seconds": 0.01560744596645236,
+        "passed": true
+      },
+      {
+        "phase": "after_ttl",
+        "path": "/cars/autocatalog",
+        "referenceSeconds": 2.1741,
+        "ceilingSeconds": 2.2828,
+        "seconds": 1.435582218982745,
+        "passed": true
+      },
+      {
+        "phase": "after_ttl",
+        "path": "/cars/autocatalog?make=Changan",
+        "referenceSeconds": 3.6745,
+        "ceilingSeconds": 3.8582,
+        "seconds": 0.7915258940192871,
+        "passed": true
+      },
+      {
+        "phase": "after_ttl",
+        "path": "/cars/china/BMW/3?powerTo=160&sort=totalRub",
+        "referenceSeconds": 3.3663,
+        "ceilingSeconds": 3.5346,
+        "seconds": 0.11493484699167311,
+        "passed": true
+      },
+      {
+        "phase": "after_ttl",
+        "path": "/cars/china/BMW/3%20SERIES?powerTo=160&sort=totalRub",
+        "referenceSeconds": 2.3898,
+        "ceilingSeconds": 2.5093,
+        "seconds": 0.10775755299255252,
+        "passed": true
+      },
+      {
+        "phase": "after_ttl",
+        "path": "/api/catalog/search?market=china&budgetTo=1500000&pageSize=6",
+        "referenceSeconds": 5.9205,
+        "ceilingSeconds": 6.2165,
+        "seconds": 0.008617846004199237,
+        "passed": true
+      },
+      {
+        "phase": "after_directory_ttl",
+        "path": "/api/health",
+        "referenceSeconds": 0.4258,
+        "ceilingSeconds": 0.4758,
+        "seconds": 0.004546959011349827,
+        "passed": true
+      },
+      {
+        "phase": "after_directory_ttl",
+        "path": "/api/leads",
+        "referenceSeconds": 0.0174,
+        "ceilingSeconds": 0.0674,
+        "seconds": 0.00527650403091684,
+        "passed": true
+      },
+      {
+        "phase": "after_directory_ttl",
+        "path": "/",
+        "referenceSeconds": 1.7938,
+        "ceilingSeconds": 1.8835,
+        "seconds": 1.3283586489851587,
+        "passed": true
+      },
+      {
+        "phase": "after_directory_ttl",
+        "path": "/login",
+        "referenceSeconds": 0.3139,
+        "ceilingSeconds": 0.3639,
+        "seconds": 0.20600711199222133,
+        "passed": true
+      },
+      {
+        "phase": "after_directory_ttl",
+        "path": "/autocalc",
+        "referenceSeconds": 0.023,
+        "ceilingSeconds": 0.073,
+        "seconds": 0.015097584982868284,
+        "passed": true
+      },
+      {
+        "phase": "after_directory_ttl",
+        "path": "/cars",
+        "referenceSeconds": 1.3688,
+        "ceilingSeconds": 1.4372,
+        "seconds": 0.2826860850327648,
+        "passed": true
+      },
+      {
+        "phase": "after_directory_ttl",
+        "path": "/cars?market=china&make=Volkswagen&page=2",
+        "referenceSeconds": 1.427,
+        "ceilingSeconds": 1.4984,
+        "seconds": 0.06695671397028491,
+        "passed": true
+      },
+      {
+        "phase": "after_directory_ttl",
+        "path": "/cars?market=china&city=%D0%9D%D0%BE%D0%B2%D0%BE%D0%BA%D1%83%D0%B7%D0%BD%D0%B5%D1%86%D0%BA",
+        "referenceSeconds": 0.1083,
+        "ceilingSeconds": 0.1583,
+        "seconds": 0.12552668602438644,
+        "passed": true
+      },
+      {
+        "phase": "after_directory_ttl",
+        "path": "/cars?sort=totalRub",
+        "referenceSeconds": 10.4885,
+        "ceilingSeconds": 11.0129,
+        "seconds": 0.7774154900107533,
+        "passed": true
+      },
+      {
+        "phase": "after_directory_ttl",
+        "path": "/api/catalog/search?market=china&marketPage=1&page=9",
+        "referenceSeconds": 4.4517,
+        "ceilingSeconds": 4.6743,
+        "seconds": 0.015209938981570303,
+        "passed": true
+      },
+      {
+        "phase": "after_directory_ttl",
+        "path": "/cars/autocatalog",
+        "referenceSeconds": 2.1741,
+        "ceilingSeconds": 2.2828,
+        "seconds": 1.153515528945718,
+        "passed": true
+      },
+      {
+        "phase": "after_directory_ttl",
+        "path": "/cars/autocatalog?make=Changan",
+        "referenceSeconds": 3.6745,
+        "ceilingSeconds": 3.8582,
+        "seconds": 0.5854573120013811,
+        "passed": true
+      },
+      {
+        "phase": "after_directory_ttl",
+        "path": "/cars/china/BMW/3?powerTo=160&sort=totalRub",
+        "referenceSeconds": 3.3663,
+        "ceilingSeconds": 3.5346,
+        "seconds": 0.11089632095536217,
+        "passed": true
+      },
+      {
+        "phase": "after_directory_ttl",
+        "path": "/cars/china/BMW/3%20SERIES?powerTo=160&sort=totalRub",
+        "referenceSeconds": 2.3898,
+        "ceilingSeconds": 2.5093,
+        "seconds": 0.09457553899846971,
+        "passed": true
+      },
+      {
+        "phase": "after_directory_ttl",
+        "path": "/api/catalog/search?market=china&budgetTo=1500000&pageSize=6",
+        "referenceSeconds": 5.9205,
+        "ceilingSeconds": 6.2165,
+        "seconds": 0.008740579010918736,
+        "passed": true
+      }
+    ],
+    "initialPreparationSamples": [
+      {
+        "performanceRequest": "complete",
+        "path": "/api/health",
+        "seconds": 0.0129,
+        "functionalPassed": true
+      },
+      {
+        "performanceRequest": "complete",
+        "path": "/api/leads",
+        "seconds": 0.0115,
+        "functionalPassed": true
+      },
+      {
+        "performanceRequest": "complete",
+        "path": "/",
+        "seconds": 8.7257,
+        "functionalPassed": true
+      },
+      {
+        "performanceRequest": "complete",
+        "path": "/login",
+        "seconds": 0.2936,
+        "functionalPassed": true
+      },
+      {
+        "performanceRequest": "complete",
+        "path": "/autocalc",
+        "seconds": 0.0341,
+        "functionalPassed": true
+      },
+      {
+        "performanceRequest": "complete",
+        "path": "/cars",
+        "seconds": 9.0345,
+        "functionalPassed": true
+      },
+      {
+        "performanceRequest": "complete",
+        "path": "/cars?market=china&make=Volkswagen&page=2",
+        "seconds": 0.3629,
+        "functionalPassed": true
+      },
+      {
+        "performanceRequest": "complete",
+        "path": "/cars?market=china&city=%D0%9D%D0%BE%D0%B2%D0%BE%D0%BA%D1%83%D0%B7%D0%BD%D0%B5%D1%86%D0%BA",
+        "seconds": 0.2865,
+        "functionalPassed": true
+      },
+      {
+        "performanceRequest": "complete",
+        "path": "/cars?sort=totalRub",
+        "seconds": 5.1342,
+        "functionalPassed": true
+      },
+      {
+        "performanceRequest": "complete",
+        "path": "/api/catalog/search?market=china&marketPage=1&page=9",
+        "seconds": 0.2573,
+        "functionalPassed": true
+      },
+      {
+        "performanceRequest": "complete",
+        "path": "/cars/autocatalog",
+        "seconds": 0.9331,
+        "functionalPassed": true
+      },
+      {
+        "performanceRequest": "complete",
+        "path": "/cars/autocatalog?make=Changan",
+        "seconds": 0.8138,
+        "functionalPassed": true
+      },
+      {
+        "performanceRequest": "complete",
+        "path": "/cars?market=china",
+        "seconds": 0.1303,
+        "functionalPassed": true
+      },
+      {
+        "performanceRequest": "complete",
+        "path": "/cars/china/BMW/3?powerTo=160&sort=totalRub",
+        "seconds": 0.9552,
+        "functionalPassed": true
+      },
+      {
+        "performanceRequest": "complete",
+        "path": "/cars/china/BMW/3%20SERIES?powerTo=160&sort=totalRub",
+        "seconds": 0.1092,
+        "functionalPassed": true
+      },
+      {
+        "performanceRequest": "complete",
+        "path": "/api/catalog/search?market=china&budgetTo=1500000&pageSize=6",
+        "seconds": 0.012,
+        "functionalPassed": true
+      }
+    ]
+  },
+  "browserSpeed": {
+    "baselineRelease": "a182cd21b21ecf612b63613d263e5bdd817ea4c0",
+    "environment": "GitHub Actions Chromium external network; cards ready, not image completion; no VPN simulation",
+    "measurementAllowance": "50ms or 5% of the original sample, whichever is larger; no new baseline or discarded slow sample",
+    "passed": true,
+    "checks": [
+      {
+        "width": 390,
+        "scenario": "firstCards",
+        "referenceSeconds": 2.167,
+        "measurementNoiseSeconds": 0.1084,
+        "ceilingSeconds": 2.2753,
+        "seconds": 1.605,
+        "passed": true
+      },
+      {
+        "width": 390,
+        "scenario": "budget:1500000",
+        "referenceSeconds": 4.437,
+        "measurementNoiseSeconds": 0.2219,
+        "ceilingSeconds": 4.6589,
+        "seconds": 0.576,
+        "passed": true
+      },
+      {
+        "width": 390,
+        "scenario": "budget:2000000",
+        "referenceSeconds": 4.425,
+        "measurementNoiseSeconds": 0.2213,
+        "ceilingSeconds": 4.6463,
+        "seconds": 0.518,
+        "passed": true
+      },
+      {
+        "width": 1280,
+        "scenario": "firstCards",
+        "referenceSeconds": 5.654,
+        "measurementNoiseSeconds": 0.2827,
+        "ceilingSeconds": 5.9367,
+        "seconds": 1.517,
+        "passed": true
+      },
+      {
+        "width": 1280,
+        "scenario": "budget:1500000",
+        "referenceSeconds": 1.534,
+        "measurementNoiseSeconds": 0.0767,
+        "ceilingSeconds": 1.6107,
+        "seconds": 0.434,
+        "passed": true
+      },
+      {
+        "width": 1280,
+        "scenario": "budget:2000000",
+        "referenceSeconds": 0.568,
+        "measurementNoiseSeconds": 0.05,
+        "ceilingSeconds": 0.618,
+        "seconds": 0.369,
+        "passed": true
+      }
+    ],
+    "requestChecks": [
+      {
+        "width": 390,
+        "budget": 1500000,
+        "kind": "catalog",
+        "ceilingRequests": 1,
+        "requests": 1,
+        "passed": true
+      },
+      {
+        "width": 390,
+        "budget": 1500000,
+        "kind": "previews",
+        "ceilingRequests": 1,
+        "requests": 0,
+        "passed": true
+      },
+      {
+        "width": 390,
+        "budget": 2000000,
+        "kind": "catalog",
+        "ceilingRequests": 1,
+        "requests": 1,
+        "passed": true
+      },
+      {
+        "width": 390,
+        "budget": 2000000,
+        "kind": "previews",
+        "ceilingRequests": 1,
+        "requests": 0,
+        "passed": true
+      },
+      {
+        "width": 1280,
+        "budget": 1500000,
+        "kind": "catalog",
+        "ceilingRequests": 1,
+        "requests": 1,
+        "passed": true
+      },
+      {
+        "width": 1280,
+        "budget": 1500000,
+        "kind": "previews",
+        "ceilingRequests": 1,
+        "requests": 0,
+        "passed": true
+      },
+      {
+        "width": 1280,
+        "budget": 2000000,
+        "kind": "catalog",
+        "ceilingRequests": 1,
+        "requests": 1,
+        "passed": true
+      },
+      {
+        "width": 1280,
+        "budget": 2000000,
+        "kind": "previews",
+        "ceilingRequests": 1,
+        "requests": 0,
+        "passed": true
+      }
+    ]
+  },
+  "browserDetails": {
+    "version": 1,
+    "kind": "china-browser-details-v1",
+    "release": "99c45a3b5d8439bbc1ee34702ba41340ada08125",
+    "nonce": "eef77195126340e1a7c47262a86bb554",
+    "checkedAt": "2026-11-24T22:09:18.245Z",
+    "phase": "after_existing_speed_gate",
+    "passed": false,
+    "checks": [
+      {
+        "width": 390,
+        "releaseBeforeMatched": true,
+        "homepage": {
+          "total": 283188,
+          "cards": 10,
+          "idsMatched": true,
+          "pricesMatched": true,
+          "balancedOrderAllowed": true
+        },
+        "homeApi": {
+          "total": 283188,
+          "cards": 10,
+          "independentChina": true,
+          "idsMatched": true,
+          "pricesMatched": true,
+          "incompleteOtherMarkets": false
+        },
+        "generalPower": {
+          "total": 71160,
+          "cards": 6,
+          "idsMatched": true,
+          "visiblePowerMatched": true,
+          "maxFilterPowerHp": 155
+        },
+        "unavailableSiblingSections": 0
+      }
+    ],
+    "explicitMutationActions": 0,
+    "explicitSupplierRequests": 0,
+    "generationManifestSha256": "d5745797cc162b82e0c0f0b1f49fef65f18f0d6649666562337183b18084dd75",
+    "pricingRuntimeSha": "64c6338e0db23c8999096bceefbf113c0136fe15",
+    "oracleSha256": "a515ed760039dace1c547b71ce8499206b9fb78d2a05e5e1d360954d0bee8c69",
+    "precedingSpeedReportSha256": "35733d93fbb871b72bb909bc84bcd2218183dfb8e852875e04f499d7db95e3b2",
+    "error": {
+      "stage": "model_city_catalog",
+      "code": "china_browser_card_price",
+      "timeout": false
+    }
+  },
+  "remaining": "The exact UI price mismatch occurred during model_city_catalog at width390. Model/city detail, Back, and width1280 functional checks were not reached. The saved report contains no actual/expected individual prices, so it does not establish which row differed. Runtime code investigation has identified that an empty server snapshot in useSelectedCity can replace a prepared city price with baseRub; a reproducing test and a reviewed fix are still required. No gate or threshold is changed."
+}
