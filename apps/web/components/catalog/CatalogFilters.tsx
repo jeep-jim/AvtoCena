@@ -261,12 +261,6 @@ function DualRange({ title, fromName, toName, fromValue, toValue, min, max, step
     onChange(from, to);
   };
   const clear = () => applyPreset("", "");
-  const rangeActionPointerDown = (event: React.PointerEvent<HTMLButtonElement>) => {
-    const focused = document.activeElement;
-    // A pointer action commits its own final pair on click. Keep the edited
-    // input focused so its earlier blur cannot submit an intermediate pair.
-    if (event.button === 0 && focused instanceof HTMLInputElement && event.currentTarget.closest(".ac-range-card")?.contains(focused)) event.preventDefault();
-  };
   const summary = fromValue || toValue
     ? `${fromValue ? `от ${format(Number(fromValue))}${unit}` : "без минимума"} · ${toValue ? `до ${format(Number(toValue))}${unit}` : "без максимума"}`
     : "Без ограничений";
@@ -289,13 +283,13 @@ function DualRange({ title, fromName, toName, fromValue, toValue, min, max, step
   return <div className="ac-range-card rounded-[17px] p-3.5" data-year-min={title === "Год" ? min : undefined}>
     <div className="flex items-start justify-between gap-3">
       <div className="min-w-0"><div className="text-xs font-black normal-case tracking-normal text-[var(--ac-muted)]">{title}</div><div className="mt-1 truncate text-[11px] font-bold text-[var(--ac-muted)]">{summary}</div></div>
-      {fromValue || toValue ? <button type="button" onPointerDown={rangeActionPointerDown} onClick={clear} className="ac-range-clear flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-base font-black text-[var(--ac-muted)]" aria-label={`Сбросить ${title}`}>×</button> : null}
+      {fromValue || toValue ? <button type="button" onClick={clear} className="ac-range-clear flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-base font-black text-[var(--ac-muted)]" aria-label={`Сбросить ${title}`}>×</button> : null}
     </div>
     <div className="mt-3 grid grid-cols-2 gap-2">
       <label className="ac-range-input-wrap"><span>От</span><div className="ac-range-input-box"><input inputMode={isEngine ? "decimal" : "numeric"} autoComplete="off" title={isEngine ? "Например: 1,5 л или 1498 см³" : undefined} value={fromText} onChange={(event) => setFromText(digits(event.target.value))} onBlur={() => commit("from")} onKeyDown={keyHandler("from")} placeholder="Не важно" aria-label={`${title}: от`} />{unit ? <small>{unit.trim()}</small> : null}</div></label>
       <label className="ac-range-input-wrap"><span>До</span><div className="ac-range-input-box"><input inputMode={isEngine ? "decimal" : "numeric"} autoComplete="off" title={isEngine ? "Например: 1,5 л или 1498 см³" : undefined} value={toText} onChange={(event) => setToText(digits(event.target.value))} onBlur={() => commit("to")} onKeyDown={keyHandler("to")} placeholder="Не важно" aria-label={`${title}: до`} />{unit ? <small>{unit.trim()}</small> : null}</div></label>
     </div>
-    <div className="mt-2.5 flex flex-wrap gap-1.5" aria-label={`Быстрый выбор: ${title}`}>{presets.map((preset) => <button key={preset.label} type="button" onPointerDown={rangeActionPointerDown} onClick={() => applyPreset(preset.from, preset.to)} className="ac-range-preset rounded-full px-2.5 py-1.5 text-[10px] font-black">{preset.label}</button>)}</div>
+    <div className="mt-2.5 flex flex-wrap gap-1.5" aria-label={`Быстрый выбор: ${title}`}>{presets.map((preset) => <button key={preset.label} type="button" onClick={() => applyPreset(preset.from, preset.to)} className="ac-range-preset rounded-full px-2.5 py-1.5 text-[10px] font-black">{preset.label}</button>)}</div>
     <input type="hidden" name={fromName} value={fromValue} /><input type="hidden" name={toName} value={toValue} />
   </div>;
 }
@@ -334,6 +328,26 @@ export function CatalogFilters({ initial, facets, resultCount, auctionResults=fa
   const router = useRouter();
   const [pending,startTransition]=useTransition();
   const submitted=useRef<string|null>(null);
+  const keyboardRangeIntent = useRef<{input: HTMLInputElement} | null>(null);
+  const keyboardRangeCommit = useRef(false);
+  const captureFilterKeyDown = (event: React.KeyboardEvent<HTMLFormElement>) => {
+    keyboardRangeIntent.current = null;
+    keyboardRangeCommit.current = false;
+    if ((event.key === "Tab" || event.key === "Enter") && event.target instanceof HTMLInputElement && event.target.closest(".ac-range-card")) {
+      const intent = {input: event.target};
+      keyboardRangeIntent.current = intent;
+      // A prevented key must not authorize an unrelated later pointer blur.
+      window.setTimeout(() => { if (keyboardRangeIntent.current === intent) keyboardRangeIntent.current = null; }, 0);
+    }
+  };
+  const captureFilterBlur = (event: React.SyntheticEvent<HTMLFormElement>) => {
+    keyboardRangeCommit.current = keyboardRangeIntent.current?.input === event.target;
+    keyboardRangeIntent.current = null;
+  };
+  const captureFilterPointerDown = () => {
+    keyboardRangeIntent.current = null;
+    keyboardRangeCommit.current = false;
+  };
   const formKey = useMemo(() => JSON.stringify(initial), [initial]);
   const streamedCount=useCatalogResultCount();
   const countText=typeof resultCount==="number"?resultCount.toLocaleString("ru-RU"):streamedCount?.queryKey===formKey?streamedCount.text:"Количество уточняется";
@@ -362,6 +376,7 @@ export function CatalogFilters({ initial, facets, resultCount, auctionResults=fa
     if (currentQuery !== acknowledgedQuery.current && incoming !== currentQuery) return;
     acknowledgedQuery.current = incoming;
     submitted.current=null;
+    keyboardRangeCommit.current = false;
     setDraft(draftFromInitial(initial));
     const nextSort = initialSort(initial.sort || "");
     setSortKey(nextSort.key);
@@ -374,10 +389,10 @@ export function CatalogFilters({ initial, facets, resultCount, auctionResults=fa
     const initialSorting = initialSort(initial.sort || "");
     const serverQuery = catalogQuery(nextInitial, initialSorting.key, initialSorting.direction);
     const nextQuery = catalogQuery(draft, sortKey, sortDirection);
-    if (nextQuery === serverQuery && submitted.current === null) return;
-    // DualRange holds keystrokes locally and changes the draft only on commit.
-    // Do not debounce that completed action again; mixed edits still coalesce.
-    const committedRangeOnly = nextQuery !== serverQuery && sortKey === initialSorting.key && sortDirection === initialSorting.direction
+    if (nextQuery === serverQuery && submitted.current === null) { keyboardRangeCommit.current = false; return; }
+    // Tab/Enter already finalize DualRange's local text. Pointer blur and the
+    // following click still need their original window to coalesce together.
+    const committedRangeOnly = keyboardRangeCommit.current && nextQuery !== serverQuery && sortKey === initialSorting.key && sortDirection === initialSorting.direction
       && Object.entries(draft).every(([key, value]) => COMMITTED_RANGE_FIELDS.has(key as keyof FilterDraft) || value === nextInitial[key as keyof FilterDraft]);
     const timer = window.setTimeout(() => {
       if(submitted.current===nextQuery)return;
@@ -528,7 +543,7 @@ export function CatalogFilters({ initial, facets, resultCount, auctionResults=fa
 
   return <><CatalogFilterUiEnhancer />
     <CatalogFilterPending pending={updating}/>
-    <form data-no-route-loader="true" aria-busy={updating} method="get" onSubmit={(event) => event.preventDefault()} className="ac-catalog-filter-panel mt-6 hidden lg:block">
+    <form data-no-route-loader="true" aria-busy={updating} method="get" onKeyDownCapture={captureFilterKeyDown} onBlurCapture={captureFilterBlur} onPointerDownCapture={captureFilterPointerDown} onSubmit={(event) => event.preventDefault()} className="ac-catalog-filter-panel mt-6 hidden lg:block">
       <div className="mb-2.5"><CatalogCityFilter onChange={changeCity} /></div>
       <div className="grid grid-cols-3 gap-2.5">
         <CatalogBrandMultiSelect value={draft.make} options={makeOptions} contextQuery={brandStatsContext} onChange={(value) => { setField("make", value); setField("model", ""); }} />
@@ -550,7 +565,7 @@ export function CatalogFilters({ initial, facets, resultCount, auctionResults=fa
 
     <StickyCatalogControls showAuctionDate={draft.market==="japan"&&draft.stock!=="green"} onOpenFilters={()=>{if(window.matchMedia("(max-width:1023px)").matches)setMobileOpen(true);else document.querySelector(".ac-catalog-filter-panel")?.scrollIntoView({block:"start",behavior:"smooth"});}} hidePrice={false} chips={chips} onRemove={removeFilter} sort={sortParam(sortKey,sortDirection)} onSort={value=>{const next=initialSort(value);setSortKey(next.key);setSortDirection(next.direction);}} hidden={mobileOpen}/>
 
-    {mobileOpen ? createPortal(<div className="ac-mobile-filter-backdrop fixed inset-0 z-[10040] flex items-end bg-black/65 lg:hidden" onClick={() => setMobileOpen(false)}><form data-no-route-loader="true" aria-busy={updating} method="get" onSubmit={(event) => event.preventDefault()} role="dialog" aria-modal="true" aria-label="Фильтры каталога" className="ac-mobile-filter-sheet flex w-full max-h-[91dvh] flex-col overflow-hidden rounded-t-[30px] bg-[var(--ac-surface)] text-[var(--ac-text)]" onClick={(event) => event.stopPropagation()}>
+    {mobileOpen ? createPortal(<div className="ac-mobile-filter-backdrop fixed inset-0 z-[10040] flex items-end bg-black/65 lg:hidden" onClick={() => setMobileOpen(false)}><form data-no-route-loader="true" aria-busy={updating} method="get" onKeyDownCapture={captureFilterKeyDown} onBlurCapture={captureFilterBlur} onPointerDownCapture={captureFilterPointerDown} onSubmit={(event) => event.preventDefault()} role="dialog" aria-modal="true" aria-label="Фильтры каталога" className="ac-mobile-filter-sheet flex w-full max-h-[91dvh] flex-col overflow-hidden rounded-t-[30px] bg-[var(--ac-surface)] text-[var(--ac-text)]" onClick={(event) => event.stopPropagation()}>
       <div className="ac-mobile-filter-header shrink-0 px-4 pt-1"><div className="mx-auto h-1 w-10 rounded-full bg-[var(--ac-muted)]/35" /><div className="flex items-center justify-between gap-2 py-2"><div className="min-w-0 flex items-center gap-2" role="status" aria-live="polite" aria-busy={updating}><span className="ac-pulse-dot ac-pulse-dot--status shrink-0" aria-hidden="true"><span /></span><span className="text-sm font-black tabular-nums">{updating ? countKnown?`Было: ${countText}`:"Считаем варианты…" : countLabel}<span className="block text-[10px] font-normal" aria-hidden={!updating||!countKnown}>{updating&&countKnown?"Обновляем…":""}</span></span></div><button type="button" data-ac-react-close="1" data-ac-mobile-close="1" onClick={() => setMobileOpen(false)} className="ac-mobile-filter-collapse flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-[var(--ac-muted)]" aria-label="Свернуть фильтры" title="Свернуть фильтры"><Chevron /></button></div></div>
       <div className="ac-hide-scrollbar min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 pb-4">
         <section className="ac-mobile-filter-section"><CatalogCityFilter onChange={changeCity} /></section>

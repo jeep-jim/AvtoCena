@@ -90,6 +90,7 @@ async function holdClick(page, locator) {
   await page.mouse.move(rect.x + rect.width / 2, rect.y + rect.height / 2);
   await page.mouse.down();
   await page.waitForTimeout(60);
+  assert.equal((await calls(page)).length, 0, 'pointer blur must still wait for the final click');
   await page.mouse.up();
 }
 
@@ -136,16 +137,50 @@ try {
     assert.equal(new URL(final[0].href, origin).searchParams.has('budget'), false);
     assert.equal(new URL(final[0].href, origin).searchParams.has('budgetFrom'), false);
   }, {query: 'market=china&budget=2000000'});
-  await caseOf('cancelled held preset leaves text pending until keyboard blur', async page => {
+  await caseOf('cancelled held preset preserves the original blur commit', async page => {
     await budget(page).fill('2500000');
     const preset = page.locator('.ac-catalog-filter-panel').getByRole('button', {name: 'до 2 млн', exact: true});
     await preset.scrollIntoViewIfNeeded(); const rect = await preset.boundingBox();
     await page.mouse.move(rect.x + rect.width / 2, rect.y + rect.height / 2); await page.mouse.down();
     await page.waitForTimeout(60); await page.mouse.move(0, 0); await page.mouse.up();
-    await page.waitForTimeout(230); assert.deepEqual(await calls(page), []);
+    await expectCalls(page, 1); await settled(page); await page.waitForTimeout(230);
+    assert.equal((await calls(page)).length, 1);
     assert.equal(await budget(page).inputValue(), '2500000');
-    await budget(page).press('Tab'); await expectCalls(page, 1); await settled(page);
     assert.equal(new URL((await calls(page))[0].href, origin).searchParams.get('budget'), '2500000');
+  });
+  await caseOf('dirty year and held price preset coalesce across range cards', async page => {
+    const panel = page.locator('.ac-catalog-filter-panel');
+    await panel.getByRole('textbox', {name: 'Год: от', exact: true}).fill('2019');
+    await holdClick(page, panel.getByRole('button', {name: 'до 2 млн', exact: true}));
+    await expectCalls(page, 1); await settled(page); await page.waitForTimeout(230);
+    const final = await calls(page); assert.equal(final.length, 1);
+    const query = new URL(final[0].href, origin).searchParams;
+    assert.equal(query.get('yearFrom'), '2019'); assert.equal(query.get('budget'), '2000000');
+  });
+  await caseOf('dirty mileage and held price clear coalesce across range cards', async page => {
+    const panel = page.locator('.ac-catalog-filter-panel');
+    await panel.getByRole('textbox', {name: 'Пробег: до', exact: true}).fill('50000');
+    await holdClick(page, panel.getByRole('button', {name: 'Сбросить Цена', exact: true}));
+    await expectCalls(page, 1); await settled(page); await page.waitForTimeout(230);
+    const final = await calls(page); assert.equal(final.length, 1);
+    const query = new URL(final[0].href, origin).searchParams;
+    assert.equal(query.get('mileageTo'), '50000'); assert.equal(query.has('budget'), false);
+  }, {query: 'market=china&budget=2000000'});
+  await caseOf('dirty range and held power checkbox coalesce into one query', async page => {
+    await budget(page).fill('2000000');
+    await holdClick(page, page.locator('.ac-catalog-filter-panel input[name="powerTo"]'));
+    await expectCalls(page, 1); await settled(page); await page.waitForTimeout(230);
+    const final = await calls(page); assert.equal(final.length, 1);
+    const query = new URL(final[0].href, origin).searchParams;
+    assert.equal(query.get('budget'), '2000000'); assert.equal(query.get('powerTo'), '160');
+  });
+  await caseOf('prevented Tab expires before an unrelated later blur', async page => {
+    await budget(page).fill('2000000');
+    await budget(page).evaluate(input => input.addEventListener('keydown', event => {if (event.key === 'Tab') event.preventDefault();}, {once: true}));
+    await budget(page).press('Tab'); await page.waitForTimeout(30); assert.deepEqual(await calls(page), []);
+    await budget(page).evaluate(input => input.blur());
+    await page.waitForTimeout(80); assert.deepEqual(await calls(page), []);
+    await expectCalls(page, 1); await settled(page);
   });
   await caseOf('keyboard preset and clear remain accessible with one push each', async page => {
     const panel = page.locator('.ac-catalog-filter-panel');
@@ -238,11 +273,8 @@ try {
     await withPage(async page => {
       for (let i = 0; i < 7; i++) {
         await budget(page).fill(String(1500000 + i * 100000));
-        const started = await page.evaluate(() => {
-          const started = performance.now();
-          document.querySelector('.ac-catalog-filter-panel input[aria-label="Цена: до"]').blur();
-          return started;
-        });
+        await budget(page).press('Tab');
+        const started = await page.evaluate(() => window.__filterFixture.keydowns.at(-1).at);
         await expectCalls(page, i + 1); await settled(page);
         samples.push(Number(((await calls(page))[i].at - started).toFixed(3)));
       }
@@ -250,7 +282,7 @@ try {
     profile[variant] = {samplesMs: samples, medianMs: [...samples].sort((a, b) => a - b)[3]};
   }
   report.passed = true;
-  report.profile = {kind: 'local real component blur-to-router.push, transport stubbed; not public browser acceptance', ...profile};
+  report.profile = {kind: 'actual Tab keydown to router.push in real component; transport stubbed; not public browser acceptance', ...profile};
 } catch (error) {
   report.error = {name: error.name, message: String(error.message).slice(0,2000)};
   process.exitCode = 1;

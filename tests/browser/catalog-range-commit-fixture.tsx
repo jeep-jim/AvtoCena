@@ -15,6 +15,7 @@ function Fixture() {
   useEffect(() => {
     const fixture = {
       calls: [] as Array<{href: string; at: number; options: unknown}>,
+      keydowns: [] as Array<{key: string; at: number}>,
       autoAcknowledge: true,
       acknowledge: (href: string) => setInitial(Object.fromEntries(new URL(href, location.href).searchParams)),
       navigate(href: string, options: unknown) {
@@ -26,8 +27,13 @@ function Fixture() {
     };
     (window as any).__filterFixture = fixture;
     const back = () => fixture.acknowledge(location.href);
+    const keydown = (event: KeyboardEvent) => {
+      if ((event.key === 'Tab' || event.key === 'Enter') && event.target instanceof HTMLInputElement && event.target.closest('.ac-range-card'))
+        fixture.keydowns.push({key: event.key, at: performance.now()});
+    };
     window.addEventListener('popstate', back);
-    return () => window.removeEventListener('popstate', back);
+    window.addEventListener('keydown', keydown, true);
+    return () => { window.removeEventListener('popstate', back); window.removeEventListener('keydown', keydown, true); };
   }, []);
   return <CatalogSelectionProvider><CatalogFilters initial={initial} facets={facets} resultCount={24} auctionResults={auctionResults}/></CatalogSelectionProvider>;
 }
