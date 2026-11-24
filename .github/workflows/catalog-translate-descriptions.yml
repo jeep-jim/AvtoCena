@@ -2,7 +2,7 @@ name: Catalog Russian descriptions
 on:
   workflow_dispatch:
   workflow_run:
-    workflows: ['Catalog · Five-market full rebuild', 'Catalog independent market worker', 'Catalog refresh china', 'Catalog refresh korea']
+    workflows: ['Catalog · Five-market full rebuild', 'Catalog independent market worker', 'Catalog refresh korea']
     types: [completed]
 permissions:
   contents: read

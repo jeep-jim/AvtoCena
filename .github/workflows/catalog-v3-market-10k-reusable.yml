@@ -102,6 +102,7 @@ jobs:
           REQUESTED_CATALOG_MARKET: ${{ inputs.market }}
         run: |
           node --import tsx --input-type=module -e '
+            if (process.env.REQUESTED_CATALOG_MARKET === "china") throw Error("independent_china_required");
             const { CATALOG_PRODUCTION_WRITES_PAUSED, CATALOG_PRODUCTION_REFRESH_MARKETS } = await import("./apps/web/lib/catalog/storage.ts");
             if (CATALOG_PRODUCTION_WRITES_PAUSED && !CATALOG_PRODUCTION_REFRESH_MARKETS.includes(process.env.REQUESTED_CATALOG_MARKET)) {
               console.error("Production refresh is paused during the seller-price catalog transition. Do not start a replacement crawl.");

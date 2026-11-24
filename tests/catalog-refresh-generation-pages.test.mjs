@@ -361,7 +361,7 @@ test('missing generation reader or invalid current manifest fails before buildin
   }
 });
 
-test('completed collectors prepare derivatives even when a later step failed',async()=>{
+test('completed shared collectors prepare derivatives without subscribing independent China to the legacy writer',async()=>{
   const {readFile}=await import('node:fs/promises');
   const workflow=await readFile(new URL('../.github/workflows/regcloud-overview.yml',import.meta.url),'utf8');
   assert.match(workflow,/types: \[completed\]/);
@@ -373,9 +373,12 @@ test('completed collectors prepare derivatives even when a later step failed',as
   assert.match(workflow,/run: npx tsx scripts\/catalog-refresh-generation-pages\.mjs/);
   assert.doesNotMatch(workflow,/scripts\/(?:catalog-publish|catalog-source-intake|catalog-live-recovery)/);
   const watched=workflow.match(/workflows: \[([^\]]+)\]/)[1].split(',').map(name=>name.trim());
-  const names=await Promise.all(['china','korea','europe','uae','georgia','green'].map(async market=>{
+  const names=await Promise.all(['korea','europe','uae','georgia','green'].map(async market=>{
     const collector=await readFile(new URL(`../.github/workflows/catalog-refresh-${market}.yml`,import.meta.url),'utf8');
     return collector.match(/^name: (.+)$/m)[1];
   }));
   assert.deepEqual(watched,names);
+  const china=await readFile(new URL('../.github/workflows/catalog-refresh-china.yml',import.meta.url),'utf8');
+  assert.ok(!watched.includes(china.match(/^name: (.+)$/m)[1]));
+  assert.ok(!watched.includes('Catalog refresh china'));
 });

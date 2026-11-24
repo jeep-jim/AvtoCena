@@ -104,7 +104,8 @@ test('guard blocks real adapter methods, preserves class binding and responds to
 test('owner-only API and source collection gates remain wired',()=>{
  const route=readFileSync('apps/web/app/(crm)/api/crm/collection-controls/route.ts','utf8');assert.equal((route.match(/isPlatformOwner\(/g)||[]).length,2);assert.match(route,/isCalculationOriginAllowed\(req\)/);assert.match(route,/private, no-store/);
  const page=readFileSync('apps/web/app/(crm)/crm/site/page.tsx','utf8');assert.match(page,/isPlatformOwner\(user\)&&<CollectionControls/);
- const workflow=readFileSync('.github/workflows/catalog-market-refresh.yml','utf8');assert.match(workflow,/collectionMarketEnabled\(controls,market\)/);assert.match(workflow,/steps.sources.outputs.feed == 'true'/);assert.match(workflow,/steps.sources.outputs.parsers != ''/);
+ const workflow=readFileSync('.github/workflows/catalog-market-refresh.yml','utf8');assert.match(workflow,/collectionMarketEnabled\(controls,market\)/);assert.match(workflow,/steps.sources.outputs.dubicars_feed == 'true'/);assert.match(workflow,/steps.sources.outputs.parsers != ''/);
+ const china=readFileSync('scripts/catalog-next/daily-release.mjs','utf8');assert.match(china,/assertChinaFeedControl/);assert.match(china,/await use.checkControl\(\)/);
  const watchdog=readFileSync('scripts/catalog-autonomy-watchdog.mjs','utf8');assert.match(watchdog,/disabled_by_owner/);assert.doesNotMatch(watchdog,/rerun-failed-jobs/);
  assert.equal(COLLECTION_CONTROLS_KEY,'catalog/operations/collection-controls-v1.json');
 });

@@ -29,10 +29,10 @@ jobs:
               pull_number: context.payload.pull_request.number,
               per_page: 100,
             });
-            const allowed = new Set(['china', 'korea', 'uae', 'georgia', 'europe']);
+            const allowed = new Set(['korea', 'uae', 'georgia', 'europe']);
             const markets = new Set();
             for (const file of files) {
-              const match = file.filename.match(/^\.github\/market-runs\/(china|korea|uae|georgia|europe)-refresh\.json$/);
+              const match = file.filename.match(/^\.github\/market-runs\/(korea|uae|georgia|europe)-refresh\.json$/);
               if (match && allowed.has(match[1])) markets.add(match[1]);
             }
             const mergeSha = context.payload.pull_request.merge_commit_sha;

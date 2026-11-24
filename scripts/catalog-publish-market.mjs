@@ -55,6 +55,7 @@ const configuredMarkets = String(process.env.CATALOG_REBUILD_MARKETS || "")
   .split(",")
   .map((value) => value.trim())
   .filter(Boolean);
+if (configuredMarkets.includes("china")) throw new Error("catalog_china_legacy_publication_retired");
 const market = configuredMarkets[0] || "";
 if (market !== 'japan') await bindFeedRates(market,'read');
 const targetPerSource = catalogInventoryLimit(process.env.CATALOG_REBUILD_TARGET_PER_SOURCE);

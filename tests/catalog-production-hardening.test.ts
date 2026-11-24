@@ -72,7 +72,14 @@ test("catalog reindex reruns whenever the production customs calculation changes
 
 test("each market has an isolated operator trigger in addition to its schedule", () => {
   assert.match(v3MarketWorkflow, /group: catalog-v3-\$\{\{ inputs\.market \}\}/);
-  for (const market of ["korea", "china", "japan", "uae", "europe", "georgia"]) {
+  const chinaWorkflow = fs.readFileSync(new URL("../.github/workflows/catalog-refresh-china.yml", import.meta.url), "utf8");
+  assert.match(chinaWorkflow, /workflow_dispatch:/);
+  assert.match(chinaWorkflow, /\.github\/market-runs\/catalog-next-china-daily\.json/);
+  assert.match(chinaWorkflow, /cron: "0 14 \* \* \*"/);
+  assert.match(chinaWorkflow, /group: catalog-next-china/);
+  assert.match(chinaWorkflow, /daily-entry\.mjs --run/);
+  assert.doesNotMatch(chinaWorkflow, /reset_cursor|catalog-v3-market-10k-reusable/);
+  for (const market of ["korea", "japan", "uae", "europe", "georgia"]) {
     const marketWorkflow = fs.readFileSync(new URL(`../.github/workflows/catalog-v2-${market}.yml`, import.meta.url), "utf8");
     assert.match(marketWorkflow, new RegExp(`\\.github/market-runs/${market}`));
     assert.match(marketWorkflow, new RegExp(`market: ${market}`));

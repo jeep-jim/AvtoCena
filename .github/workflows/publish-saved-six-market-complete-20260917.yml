@@ -5,7 +5,6 @@ on:
     branches: [main]
     paths:
       - ".github/market-runs/publish-saved-six-market-complete-20260917.json"
-      - ".github/workflows/publish-saved-six-market-complete-20260917.yml"
 
 permissions:
   actions: read
@@ -82,7 +81,7 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p catalog-intake-input saved-jptrade
-          for market in china europe korea uae georgia; do
+          for market in europe korea uae georgia; do
             test -d "saved-artifacts/fresh-$market"
             cp -a "saved-artifacts/fresh-$market" "catalog-intake-input/catalog-intake-$market"
           done
@@ -94,7 +93,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          for market in korea china europe uae georgia japan; do
+          for market in korea europe uae georgia japan; do
             export CATALOG_REBUILD_MARKETS="$market"
             export CATALOG_REBUILD_PUBLISH_REPORT="publication-$market.json"
             node --import tsx scripts/catalog-publish-market.mjs
@@ -103,8 +102,8 @@ jobs:
         env:
           CATALOG_AUDIT_OUTPUT: catalog-six-market-saved-postpublish-audit.json
           CATALOG_OFFER_DETAIL_VERIFY_OUTPUT: catalog-six-market-offer-detail-verify.json
-          CATALOG_AUDIT_ASSERT_MARKETS: korea,china,japan,uae,europe,georgia
-          CATALOG_AUDIT_MIN_COUNTS_JSON: '{"korea":14000,"china":18000,"japan":600,"uae":500,"europe":20000,"georgia":8000}'
+          CATALOG_AUDIT_ASSERT_MARKETS: korea,japan,uae,europe,georgia
+          CATALOG_AUDIT_MIN_COUNTS_JSON: '{"korea":14000,"japan":600,"uae":500,"europe":20000,"georgia":8000}'
         run: |
           node --import tsx scripts/catalog-live-postpersist-audit.mjs
           node --import tsx scripts/catalog-audit-current-readmodel-parity.mjs
