@@ -1,0 +1,85 @@
+name: Read exact runtime99 browser failure artifact
+on:
+  push:
+    branches: [diagnose/china-runtime99-browser-report-20261125]
+    paths: ['.github/workflows/catalog-next-read-runtime99-browser-report.yml']
+permissions:
+  actions: read
+  contents: read
+jobs:
+  inspect:
+    if: github.repository_id == '1289722938' && github.run_attempt == '1'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Verify original run and ZIP digest, then read the saved browser report
+        env:
+          GH_READ_TOKEN: ${{ github.token }}
+        run: |
+          python3 - <<'PY'
+          import hashlib, io, json, os, pathlib, urllib.error, urllib.parse, urllib.request, zipfile
+          REPO = 'jeep-jim/AvtoCena'
+          RUN = 45493093028
+          ARTIFACT = 14968728651
+          HEAD = '0bb29933c2a06e10adbbc41ed59b3368c1a1fccb'
+          EXPECTED = '41bb6e4db3ec465b2bd96428e1cc7f0a3120cfe56cfb9741e6f08e0d0d43ea8c'
+          class NoRedirect(urllib.request.HTTPRedirectHandler):
+              def redirect_request(self, req, fp, code, msg, headers, newurl):
+                  return None
+          opener = urllib.request.build_opener(NoRedirect)
+          def api(path):
+              request = urllib.request.Request('https://api.github.com/repos/' + REPO + path, headers={
+                  'Authorization': 'Bearer ' + os.environ['GH_READ_TOKEN'],
+                  'Accept': 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28'})
+              with opener.open(request, timeout=30) as response:
+                  value = response.read(2 * 1024 * 1024 + 1)
+                  assert len(value) <= 2 * 1024 * 1024
+                  return json.loads(value)
+          run = api('/actions/runs/' + str(RUN))
+          assert run['head_sha'] == HEAD and run['head_branch'] == 'main' and run['run_attempt'] == 1
+          assert run['status'] == 'completed' and run['conclusion'] == 'failure'
+          artifact = api('/actions/artifacts/' + str(ARTIFACT))
+          assert artifact['workflow_run']['id'] == RUN and artifact['workflow_run']['head_sha'] == HEAD
+          assert artifact['name'] == 'catalog-next-china-release-report' and artifact['size_in_bytes'] == 10618
+          assert artifact['digest'] == 'sha256:' + EXPECTED and artifact['expired'] is False
+          request = urllib.request.Request('https://api.github.com/repos/' + REPO + '/actions/artifacts/' + str(ARTIFACT) + '/zip',
+              headers={'Authorization': 'Bearer ' + os.environ['GH_READ_TOKEN'], 'Accept': 'application/vnd.github+json'})
+          try:
+              opener.open(request, timeout=30)
+              raise AssertionError('expected_download_redirect')
+          except urllib.error.HTTPError as error:
+              assert error.code in (302, 303, 307)
+              location = error.headers['Location']
+          destination = urllib.parse.urlparse(location)
+          assert destination.scheme == 'https' and destination.hostname and not destination.username and not destination.password
+          # The signed artifact redirect is fetched without any GitHub credential.
+          with urllib.request.urlopen(urllib.request.Request(location), timeout=30) as response:
+              raw = response.read(1024 * 1024 + 1)
+          assert len(raw) == 10618 and hashlib.sha256(raw).hexdigest() == EXPECTED
+          archive = zipfile.ZipFile(io.BytesIO(raw))
+          allowed = {'catalog-next-china-release-report.json', 'owner-filter-browser-report.json',
+              'china-browser-details-report.json', 'image-receipt.json'}
+          files = {}
+          seals = {}
+          assert len(archive.infolist()) <= 32
+          for item in archive.infolist():
+              name = pathlib.PurePosixPath(item.filename)
+              assert not name.is_absolute() and '..' not in name.parts
+              if item.is_dir():
+                  continue
+              assert name.name in allowed and name.name not in files and item.file_size <= 2 * 1024 * 1024
+              data = archive.read(item)
+              assert len(data) == item.file_size
+              files[name.name] = json.loads(data)
+              seals[name.name] = {'bytes': len(data), 'sha256': hashlib.sha256(data).hexdigest()}
+          assert set(files) == allowed
+          release = files['catalog-next-china-release-report.json']
+          details = files['china-browser-details-report.json']
+          assert release['controllerSha'] == HEAD and release['accepted'] is False and release['rollbackVerified'] is True
+          assert release['runtimeSha'] == details['release'] == '99c45a3b5d8439bbc1ee34702ba41340ada08125'
+          assert details['kind'] == 'china-browser-details-v1' and details['passed'] is False
+          assert details['precedingSpeedReportSha256'] == seals['owner-filter-browser-report.json']['sha256']
+          print('CHINA_SAVED_BROWSER_REPORT ' + json.dumps({'version': 1, 'sourceRunId': RUN,
+              'artifactId': ARTIFACT, 'archiveSha256': EXPECTED, 'archiveBytes': len(raw),
+              'archiveBytesIndependentlyVerified': True, 'files': seals, 'details': details}, separators=(',', ':')))
+          PY
