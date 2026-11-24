@@ -7,6 +7,7 @@ import path from 'node:path';
 import {createHash} from 'node:crypto';
 import {DatabaseSync} from 'node:sqlite';
 import {buildChinaQueryIndex,openChinaQueryIndex} from '../scripts/catalog-next/query-index.mjs';
+import {queryChinaWithPreparedCity} from '../apps/web/lib/catalog/china-city-query.mjs';
 import {catalogSearchProjectionMatches,catalogSearchProjectionComparator} from '../apps/web/lib/catalog/storage';
 import {safePublicPricing} from '../apps/web/lib/catalog/safe-public-pricing';
 import {withCatalogEditorialSnapshot} from '../apps/web/lib/catalog/editorial';
@@ -205,6 +206,44 @@ test('query is local, unknown fields/sort/city fail and pinned cut change invali
     assert.equal(f.reader.query({makeKeys:["' OR 1=1 --"]}).total,0);
     f.invalidate();assert.throws(()=>f.reader.query({}),/fixture_cut_changed/);
   }finally{globalThis.fetch=previousFetch;}
+}));
+
+test('delivery-only city pagination selects IDs without a whole-city scan and preserves exact frozen amounts',async t=>scoped(async()=>{
+  const f=await setup(t,fixtures(512));
+  const queries:any[]=[],points:any[]=[];
+  const tracked={manifest:f.reader.manifest,
+    query(params:any){queries.push(params);return f.reader.query(params);},
+    get(id:string,city:string){points.push({id,city});return f.reader.get(id,city);}};
+  for(const city of cities)for(const query of [{},{powerTo:160},{yearFrom:2018,sort:'yearAsc,mileageDesc'}]){
+    const input={...compiled(query),cityKey:city,page:2},expected=f.reader.query(input);
+    queries.length=0;points.length=0;
+    const actual=queryChinaWithPreparedCity(tracked,input);
+    assert.deepEqual(actual,expected,JSON.stringify(input));
+    assert.equal(queries.length,1);assert.equal(queries[0].cityKey,undefined);
+    assert.deepEqual(points,actual.items.map((item:any)=>({id:item.id,city})));
+    const plan=f.reader.explainQuery(queries[0]);
+    assert.doesNotMatch(plan.count.sql,/city_prices/);assert.doesNotMatch(plan.selection.sql,/city_prices/);
+    if(!Object.keys(query).length)assert(!plan.selection.plan.some((step:any)=>/TEMP B-TREE/.test(step.detail)),JSON.stringify(plan.selection.plan));
+    for(const item of actual.items)assert.equal(item.queryRub,calculatedCatalogPrice(priceCardForCity(item.projection,city).offer)||null);
+  }
+  for(const city of cities)for(const sort of [undefined,'year','totalRub','totalRubDesc,mileage']){
+    queries.length=0;points.length=0;
+    const input={cityKey:city,sort,countOnly:true};
+    assert.deepEqual(queryChinaWithPreparedCity(tracked,input),f.reader.query(input));
+    assert.equal(queries[0].cityKey,undefined);assert.deepEqual(points,[]);
+  }
+  for(const input of [{},{cityKey:cities[0],budgetFrom:1_000_000,budgetTo:2_000_000},
+    {cityKey:cities[0],hasPrice:'no'},{cityKey:cities[1],hasPrice:'yes',countOnly:true},
+    {cityKey:cities[0],sort:'totalRub'},{cityKey:cities[1],sort:'year,totalRubDesc'}]){
+    queries.length=0;points.length=0;
+    assert.deepEqual(queryChinaWithPreparedCity(tracked,input),f.reader.query(input));
+    assert.deepEqual(queries,[input]);assert.deepEqual(points,[]);
+  }
+  assert.throws(()=>queryChinaWithPreparedCity(tracked,{cityKey:'not-prepared'}),/china_query_city_not_prepared/);
+  assert.throws(()=>queryChinaWithPreparedCity(tracked,{cityKey:cities[0],unknown:true}),/china_query_unsupported_filter/);
+  assert.throws(()=>queryChinaWithPreparedCity(tracked,{cityKey:cities[0],sort:'invalid'}),/china_query_sort/);
+  f.invalidate();
+  assert.throws(()=>queryChinaWithPreparedCity(tracked,{cityKey:cities[0]}),/fixture_cut_changed/);
 }));
 
 test('wrong bound generation, changed file and mismatched frozen price cannot be accepted',async t=>scoped(async()=>{

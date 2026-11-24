@@ -6,6 +6,7 @@ import {DatabaseSync} from 'node:sqlite';
 import {gunzipSync} from 'node:zlib';
 import {openChinaQueryIndex} from '../../../../scripts/catalog-next/query-index.mjs';
 import {openChinaQuerySemantics} from '../../../../scripts/catalog-next/query-semantics.mjs';
+import {queryChinaWithPreparedCity} from './china-city-query.mjs';
 import {protectedPhotoUrl} from './photo-proxy-policy';
 import {PUBLIC_CATALOG_MARKETS} from './runtime-config';
 import type {CatalogSearchParams, VehicleOffer} from './types';
@@ -153,7 +154,7 @@ export async function searchLocalChina(params: CatalogSearchParams, options: {co
   checkCut(state, options.expectedGeneration || params.preparedCut);
   const pageSize = options.marketPage ? 24 : Math.max(1, Math.min(48, Number(params.pageSize) || 24));
   const query = state.semantics.compileRequest({...params, pageSize});
-  const result = state.query.query({...query, countOnly: Boolean(options.countOnly)});
+  const result = queryChinaWithPreparedCity(state.query, {...query, countOnly: Boolean(options.countOnly)});
   const items = result.items.map((item: any) => {
     const projection = cityPatch(state, item.id, item.projection, query.cityKey, params.city);
     if (item.queryRub !== null) need(projection.totalRub === item.queryRub, 'city_query_price');
