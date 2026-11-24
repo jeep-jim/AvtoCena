@@ -2,8 +2,8 @@
   "version": 1,
   "kind": "china-runtime-test-harness-evidence-v1",
   "execution": "local",
-  "runtimeSha": "11759d82de280a2d15f48ccd3589b59b7e67361f",
-  "runtimeTree": "a57e09483b10fe57806a379d0bdff5cdd32ea24f",
+  "runtimeSha": "3b941979941382cba88bef332d30e55c96fa814d",
+  "runtimeTree": "1cbae34eaa32d6373d85e7be17e5715d92676bb5",
   "baselineRuntimeSha": "56d6b94fea70457e0ce2b0820596da9972846b90",
   "patchSha256": "1e5e218cdd29ad46e9cf2410b90140a5ac53c9e93fa70dbb075836839920d06f",
   "originalAffectedTests": {
@@ -156,7 +156,7 @@
   "typecheck": {
     "passed": true,
     "command": "npm run typecheck",
-    "runtimeSha": "11759d82de280a2d15f48ccd3589b59b7e67361f",
+    "runtimeSha": "3b941979941382cba88bef332d30e55c96fa814d",
     "workspaces": [
       "@avtocena/web",
       "@avtocena/engine"
@@ -181,8 +181,8 @@
     "execution": "local"
   },
   "rangeCommitBrowserContract": {
-    "runtimeSha": "11759d82de280a2d15f48ccd3589b59b7e67361f",
-    "runtimeTree": "a57e09483b10fe57806a379d0bdff5cdd32ea24f",
+    "runtimeSha": "3b941979941382cba88bef332d30e55c96fa814d",
+    "runtimeTree": "1cbae34eaa32d6373d85e7be17e5715d92676bb5",
     "runner": "tests/browser/catalog-range-commit.mjs",
     "fixture": "tests/browser/catalog-range-commit-fixture.tsx",
     "preparedCases": 20,
@@ -211,7 +211,7 @@
       },
       "correction": "Fixture merges production catalogRouteParams after searchParams, as real market pages do; emitted CSS linked and each failure state preserved",
       "productionComponentUnchanged": true,
-      "all20CasesAnd49OriginalAssertionsRetained": true
+      "all20CasesAndOriginalAssertionsRetained": true
     },
     "fixtureValidation": {
       "routeParserTests": 9,
@@ -219,6 +219,39 @@
       "failed": 0,
       "fixtureTypecheckPassed": true,
       "bothExactEsbuildVariantsPassed": true
+    },
+    "secondAttempt": {
+      "runUrl": "https://github.com/jeep-jim/AvtoCena/actions/runs/45460504539",
+      "runtimeSha": "11759d82de280a2d15f48ccd3589b59b7e67361f",
+      "cases": 20,
+      "passed": 17,
+      "failed": 3,
+      "failedCases": [
+        "dirty input to held preset click submits only the preset",
+        "dirty range and held power checkbox coalesce into one query",
+        "touch preset and clear do not submit dirty intermediate text"
+      ],
+      "eachFailedCaseNavigationCount": 1,
+      "pageErrors": [],
+      "profileReached": false,
+      "confirmedFixtureDifferences": [
+        "synthetic layout omitted Tailwind utilities and root/public layout CSS",
+        "fixture used legacy preset buttons intentionally hidden by production CSS"
+      ],
+      "targetMovementCause": "inference pending actual styled Chromium evidence; previous run did not record target geometry"
+    },
+    "styleAndPointerCorrection": {
+      "layoutCssImports": 12,
+      "productionPostcssAndTailwindConfiguration": true,
+      "syntheticLayoutCssRemoved": true,
+      "localFontAssets": 7,
+      "visibleProductionValuePickerUsed": true,
+      "nativePointerTraceLimit": 64,
+      "all20CaseNamesRetained": true,
+      "all56OriginalAssertExpressionsRetained": true,
+      "productionComponentUnchanged": true,
+      "syntaxBuildAndFixtureTypecheckPassed": true,
+      "independentReviewPassed": true
     }
   },
   "localValidationInputs": {
