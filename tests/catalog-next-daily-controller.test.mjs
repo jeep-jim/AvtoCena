@@ -233,12 +233,42 @@ test('heartbeat renews the exact lease observation during preparation and later 
   assert.equal(leases.at(-1).value.epoch, leases.at(-2).value.epoch);
 });
 
-test('daily cadence follows Krasnoyarsk day boundaries and a live foreign lease skips without mutation', async () => {
-  const ref = candidate(1), proof = acceptance(ref, firstNonce, '2026-11-23T17:05:00Z');
-  const accepted = {...ref, proof: {kind: 'china-accepted-proof-v1', hostReceiptBase64: proof.hostReceiptBase64,
+function acceptedSource(sourceObservedAt, acceptedAt) {
+  const ref = {...candidate(1), sourceObservedAt}, proof = acceptance(ref, firstNonce, acceptedAt);
+  return {...ref, proof: {kind: 'china-accepted-proof-v1', hostReceiptBase64: proof.hostReceiptBase64,
     hostReceiptSha256: proof.hostReceiptSha256}};
-  assert.equal(chinaDailyIsDue(accepted, '2026-11-24T16:59:59Z'), false);
-  assert.equal(chinaDailyIsDue(accepted, '2026-11-24T17:00:00Z'), true);
+}
+
+test('daily cadence follows the verified source day through Krasnoyarsk day, month and year boundaries', () => {
+  for (const date of ['2026-11-23', '2026-11-30', '2026-12-31']) {
+    const accepted = acceptedSource(date + 'T16:55:00Z', date + 'T16:56:00Z');
+    assert.equal(chinaDailyIsDue(accepted, date + 'T16:59:59Z'), false);
+    assert.equal(chinaDailyIsDue(accepted, date + 'T17:00:00Z'), true);
+  }
+});
+
+test('late first acceptance does not skip the next scheduled refresh of a prior-day source', () => {
+  const accepted = acceptedSource('2026-11-24T10:22:41Z', '2026-11-24T17:05:00Z');
+  // The source was verified Nov 24, then accepted Nov 25 at 00:05 Krasnoyarsk.
+  // Nov 25's 21:00 schedule must still refresh it on its first opportunity.
+  assert.equal(chinaDailyIsDue(accepted, '2026-11-25T14:00:00Z'), true);
+  const refreshed = acceptedSource('2026-11-25T14:10:00Z', '2026-11-25T15:00:00Z');
+  assert.equal(chinaDailyIsDue(refreshed, '2026-11-25T16:00:00Z'), false);
+  assert.equal(chinaDailyIsDue(refreshed, '2026-11-26T14:00:00Z'), true);
+});
+
+test('source-based cadence retains accepted proof and future timestamp guards', () => {
+  const accepted = acceptedSource('2026-11-24T10:22:41Z', '2026-11-24T17:05:00Z');
+  assert.throws(() => chinaDailyIsDue(accepted, '2026-11-24T17:04:59Z'), /china_daily_clock_before_acceptance/);
+  assert.throws(() => chinaDailyIsDue({...accepted, sourceObservedAt: '2026-11-25T13:00:00Z'}, '2026-11-25T14:00:00Z'),
+    /china_state_host_binding/);
+  const futureSource = acceptedSource('2026-11-25T15:00:00Z', '2026-11-25T14:00:00Z');
+  assert.throws(() => chinaDailyIsDue(futureSource, '2026-11-25T14:30:00Z'), /china_state_host_binding/);
+  assert.throws(() => chinaDailyIsDue({...accepted, proof: {...accepted.proof, hostReceiptSha256: '0'.repeat(64)}},
+    '2026-11-25T14:00:00Z'), /china_state_proof_bytes/);
+});
+
+test('a live foreign lease skips without mutation', async () => {
   const f = await fixture(), state = createChinaState({storage: f.storage, now: () => nextAt});
   await state.acquireLease({previous: await state.read('lease'), owner: owner(9), nonce: 'e'.repeat(32), expiresAt: '2026-11-24T13:00:00Z'});
   const count = f.storage.writes.length, result = await runChinaDailyCycle(f.args);

@@ -14,7 +14,7 @@ jobs:
       fail-fast: false
       max-parallel: 2
       matrix:
-        market: [korea, china, uae, europe, georgia, japan]
+        market: [korea, uae, europe, georgia, japan]
     env:
       CATALOG_INTAKE_MARKET: ${{ matrix.market }}
       CATALOG_INTAKE_TIME_MS: '2400000'

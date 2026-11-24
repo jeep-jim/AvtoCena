@@ -133,6 +133,7 @@ test('new direct deploy-script entrypoints cannot bypass the reviewed inventory'
 const customActivators=new Map([
  ['aj-system-japan-only.yml','.github/operations/ajes-japan-only-20261124/release.mjs'],
  ['catalog-next-china-release.yml','scripts/catalog-next/release.mjs'],
+ ['catalog-refresh-china.yml','scripts/catalog-next/daily-entry.mjs'],
 ]);
 test('the pinned AJ removal preserves frozen gates and requires its exact scope and nonce handshake',()=>{
  const [workflow,entry]=[...customActivators][0],filename=path.join(workflowDirectory,workflow);
@@ -216,6 +217,67 @@ test('the independent China activation binds source and generation to exact serv
  }
  const ci=fs.readFileSync(path.join(workflowDirectory,'ci.yml'),'utf8');
  assert.match(ci,/node --import tsx --test tests\/catalog-next-\*\.test\.mjs/);
+});
+
+test('the active China daily workflow preserves frozen speed, real browser proof and rollback while replacing data in the accepted image',()=>{
+ const workflow='catalog-refresh-china.yml',entry=customActivators.get(workflow);
+ const source=fs.readFileSync(path.join(workflowDirectory,workflow),'utf8');
+ const baseline=source.indexOf('node scripts/verify-frozen-speed-baselines.mjs');
+ const contracts=source.search(/^\s+node --import tsx --import \.\/tests\/helpers\/offline-fetch\.mjs --test tests\/catalog-next-\*\.test\.mjs tests\/release-speed-guard-contract\.test\.mjs\s*$/m);
+ const releaseAt=source.indexOf(entry+' --run');
+ assert.ok(baseline>=0&&contracts>baseline&&releaseAt>contracts,
+  'the active daily controller requires frozen evidence and actual host/browser contract tests before activation');
+ const refresh=jobs(source).find(job=>job.name==='refresh');
+ assert.ok(refresh&&!disabled(refresh),'the reviewed daily refresh is an active job');
+ assert.match(refresh.body,/^    if: github\.repository == 'jeep-jim\/AvtoCena' && github\.repository_id == '1289722938' && github\.ref == 'refs\/heads\/main' && github\.run_attempt == '1'$/m);
+ assert.match(source,/^  schedule:\n    - cron: "0 14 \* \* \*"$/m);
+ assert.match(source,/group: catalog-next-china\n  cancel-in-progress: false/);
+ const controller=fs.readFileSync(path.join(root,entry),'utf8');
+ assert.match(controller,/verifyReadonlyInvocation\([\s\S]*operation: 'refresh-china-generation'/);
+ assert.match(controller,/verifyBaselines: verifyFrozenSpeedBaselines/);
+ assert.match(controller,/use\.verifyBaselines\(root\)/);
+ assert.match(controller,/validateChinaGenerationReference\(accepted\.value\.current, \{requireAccepted: true\}\)/);
+ assert.match(controller,/pricingRoot !== servingRoot/);
+ assert.match(controller,/createRelease: createChinaDailyRelease, runCycle: runChinaDailyCycle/);
+ const release=fs.readFileSync(path.join(root,'scripts/catalog-next/daily-release.mjs'),'utf8');
+ assert.match(release,/candidate\.runtimeSha === prior\.current\.runtimeSha && candidate\.imageId === prior\.current\.imageId/);
+ assert.match(release,/candidate\.pricingRuntimeSha === prior\.current\.pricingRuntimeSha/);
+ assert.match(release,/use\.verifyBaselines\(root\)/);
+ assert.match(release,/expectedReceiptSha256: candidate\.receiptSha256/);
+ assert.match(release,/generation\.source\?\.supplierLatestVerified === true/);
+ assert.match(release,/args: \[servingRoot, path\.join\(directory, 'generation'\), candidate\.generationManifestSha256, oraclePath\]/);
+ assert.match(release,/mode: 'generation-update'/);
+ assert.match(release,/previousAcceptedETag: previous\.etag, previousAcceptedStateSha256: previous\.sha256, previousAcceptedState: prior/);
+ const stages=["session.call('start')","session.call('functional')","session.call('speed')","session.call('switch')",
+  "tests/browser/owner-filter-speed-live.mjs","scripts/catalog-next/browser-acceptance.mjs","session.call('browser_evidence'","session.call('accept'"];
+ let previous=-1;
+ for(const stage of stages){const at=release.indexOf(stage);assert.ok(at>previous,'daily acceptance order: '+stage);previous=at;}
+ assert.match(release,/browser\.browserPassed === true && browser\.speedGuard\?\.passed === true/);
+ assert.match(release,/details\.release === candidate\.runtimeSha && details\.nonce === nonce/);
+ assert.match(release,/details\.generationManifestSha256 === candidate\.generationManifestSha256/);
+ assert.match(release,/details\.precedingSpeedReportSha256 === hash\(speedRaw\)/);
+ assert.match(release,/receipt\.nonce === nonce && receipt\.browser\.reportSha256 === hash\(Buffer\.concat\(\[speedRaw, detailsRaw\]\)\)/);
+ assert.match(release,/session\.abort\(\); await session\.exited/);
+ const cycle=fs.readFileSync(path.join(root,'scripts/catalog-next/daily-controller.mjs'),'utf8');
+ const reserveAt=cycle.indexOf('await state.reserve('),activateAt=cycle.indexOf('await staged.activate('),commitAt=cycle.indexOf('state.commit({lease, intent: reservation.intent');
+ assert.ok(reserveAt>=0&&activateAt>reserveAt&&commitAt>activateAt,'private reservation precedes switch and real acceptance precedes CAS commit');
+ const host=fs.readFileSync(path.join(root,'scripts/catalog-next/release-host.py'),'utf8');
+ assert.match(host,/AVTOCENA_RELEASE_MARKETS': 'china'/);
+ assert.match(host,/AVTOCENA_SPEED_BASELINE_MODE': 'enforce'/);
+ assert.match(host,/previous_generation = check_mounted_reference\(self\.retained, previous, previous_receipt\['nonce'\]\)/);
+ assert.match(host,/image\.get\('Id'\) == self\.plan\['imageId'\]/);
+ assert.match(host,/if not generation_update\(self\.plan\) and not getattr\(self, 'reuse_verified', False\):[\s\S]*command\(\['\/usr\/bin\/docker', 'load'/);
+ assert.match(host,/self\.functional_passed and self\.speed_passed and not self\.switched and not self\.accepted/);
+ assert.match(host,/self\.switched and self\.functional_passed and self\.speed_passed and not self\.accepted/);
+ assert.match(host,/signal\.setitimer\(signal\.ITIMER_REAL, remaining\)/);
+ assert.match(host,/self\.replace_config\(self\.proposed, self\.original\)/);
+ assert.match(host,/health\(self\.old_port, retained_runtime\(self\.plan\)\)/);
+ assert.match(host,/cleanup_foreign_container/);
+ assert.match(host,/if host:[\s\S]*host\.cleanup\(\)/);
+ for(const file of fs.readdirSync(workflowDirectory).filter(name=>/\.ya?ml$/.test(name))){
+  const text=fs.readFileSync(path.join(workflowDirectory,file),'utf8');
+  if(text.includes(entry+' --run'))assert.equal(customActivators.get(file),entry,'unreviewed daily activation entrypoint: '+file);
+ }
 });
 
 test('owner-authorized retained-image rescues keep their exact workflow and helper scope',()=>{

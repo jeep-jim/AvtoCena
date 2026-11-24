@@ -33,7 +33,7 @@ jobs:
         run: |
           node --import tsx --input-type=module -e '
             const { CATALOG_PRODUCTION_WRITES_PAUSED, CATALOG_PRODUCTION_REFRESH_MARKETS } = await import("./apps/web/lib/catalog/storage.ts");
-            if (CATALOG_PRODUCTION_WRITES_PAUSED && !["korea", "china", "uae", "europe", "georgia"].every(market => CATALOG_PRODUCTION_REFRESH_MARKETS.includes(market))) {
+            if (CATALOG_PRODUCTION_WRITES_PAUSED && !["korea", "uae", "europe", "georgia"].every(market => CATALOG_PRODUCTION_REFRESH_MARKETS.includes(market))) {
               console.error("Production refresh is paused during the seller-price catalog transition. Do not start a replacement crawl.");
               process.exit(1);
             }
@@ -54,23 +54,8 @@ jobs:
       reset_cursor: false
     secrets: inherit
 
-  china:
-    needs: [plan, korea]
-    if: always() && needs.plan.result == 'success'
-    uses: ./.github/workflows/catalog-v3-market-10k-reusable.yml
-    with:
-      market: china
-      display_name: Китай
-      retention_ms: "1209600000"
-      target_per_source: "10000"
-      target_per_market: "10000"
-      maximum_per_market: "10000"
-      priority_target: "8000"
-      reset_cursor: false
-    secrets: inherit
-
   uae:
-    needs: [plan, china]
+    needs: [plan, korea]
     if: always() && needs.plan.result == 'success'
     uses: ./.github/workflows/catalog-v3-market-10k-reusable.yml
     with:

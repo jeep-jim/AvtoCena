@@ -47,7 +47,7 @@ jobs:
       fail-fast: false
       max-parallel: 6
       matrix:
-        market: [korea, china, uae, europe, georgia, japan]
+        market: [korea, uae, europe, georgia, japan]
     env:
       CATALOG_INTAKE_MARKET: ${{ matrix.market }}
       CATALOG_INTAKE_TIME_MS: '9000000'
@@ -130,7 +130,7 @@ jobs:
         shell: bash
         run: |
           failures=0
-          for market in korea china uae europe georgia japan; do
+          for market in korea uae europe georgia japan; do
             export CATALOG_REBUILD_MARKETS="$market"
             export CATALOG_REBUILD_PUBLISH_REPORT="catalog-weekly-$market-publish-report.json"
             if ! node --import tsx scripts/catalog-publish-market.mjs; then failures=$((failures + 1)); fi
