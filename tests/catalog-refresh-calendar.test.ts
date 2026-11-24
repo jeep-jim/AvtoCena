@@ -28,12 +28,12 @@ test('midnight UTC+7 wake-up and delayed starts select the same three-day cycle'
  }
 });
 
-test('independent daily, two-day and three-day market schedules cross calendar boundaries', () => {
+test('independent daily, two-day, three-day and weekly schedules cross calendar boundaries', () => {
  const anchor = Date.parse(CATALOG_REFRESH_ANCHOR);
  for(let day=0;day<400;day++){
   const now = new Date(anchor + day*86400000);
-  for(const [market, days] of Object.entries({china:1, korea:2, uae:2, georgia:2, green:3, europe:3}))
+  for(const [market, days] of Object.entries({china:1, korea:2, uae:2, georgia:2, green:3, europe:3, japan:7}))
    assert.equal(catalogRefreshDue(now, market), day % days === 0, market);
-  assert.equal(catalogRefreshDue(now, 'japan'), false);
+  assert.equal(catalogRefreshDue(now, 'unknown'), false);
  }
 });

@@ -52,6 +52,8 @@ jobs:
           python3 -I -B tests/home-ui-host-driver.test.py
       - name: Feed preparation guards
         run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/catalog-editorial-runtime.test.mjs tests/catalog-owned-china-verification.test.mjs
+      - name: Independent China source and private output
+        run: node --import tsx --test tests/catalog-next-market-policy.test.mjs tests/catalog-next-private-output.test.mjs tests/catalog-next-private-storage.test.mjs tests/catalog-next-saved-source.test.mjs
       - name: AJ Japan-only settings and exact release guards
         run: |
           node --test tests/ajes-japan-only-controls-migration.test.mjs tests/ajes-japan-only-release.test.mjs tests/ajes-japan-only-image.test.mjs
