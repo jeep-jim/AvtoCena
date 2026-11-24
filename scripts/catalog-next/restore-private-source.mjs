@@ -222,15 +222,36 @@ export async function restorePrivateChinaSource({storage, owner, expectedReceipt
       const filename = partial(file.name), handle = await fs.open(filename,
         constants.O_WRONLY | constants.O_CREAT | constants.O_EXCL | constants.O_NOFOLLOW, 0o600);
       created.add(file.name + '.partial');
-      const hash = createHash('sha256'); let bytes = 0;
+      let bytes = 0, nextPart = 0, restoredParts = 0, failure;
       try {
-        for (const part of file.parts) {
-          const chunk = await read(part.key, part);
-          hash.update(chunk); bytes += chunk.length; await handle.writeFile(chunk);
-        }
-        need(bytes === file.bytes && hash.digest('hex') === file.sha256, 'file_checksum');
+        // Parts are immutable and independently hashed. Four bounded readers
+        // avoid one network round trip at a time for the multi-GB source;
+        // positional writes preserve exact byte order without buffering it.
+        const worker = async () => {
+          while (!failure) {
+            const index = nextPart++;
+            if (index >= file.parts.length) return;
+            try {
+              const part = file.parts[index], chunk = await read(part.key, part);
+              let written = 0;
+              while (written < chunk.length) {
+                const result = await handle.write(chunk, written, chunk.length - written, index * PART_BYTES + written);
+                need(result.bytesWritten > 0, 'local_write_incomplete'); written += result.bytesWritten;
+              }
+              bytes += chunk.length; restoredParts++;
+              if (restoredParts % 25 === 0) await onProgress({phase: 'private_source_parts_restored',
+                file: file.name, bytes, parts: restoredParts, totalParts: file.parts.length});
+            } catch (error) { failure ??= error; }
+          }
+        };
+        // Wait for every in-flight read/write before closing or cleaning up.
+        await Promise.all(Array.from({length: Math.min(4, file.parts.length)}, worker));
+        if (failure) throw failure;
+        need(bytes === file.bytes && restoredParts === file.parts.length, 'file_checksum');
         await handle.sync();
       } finally { await handle.close(); }
+      const restored = await hashFile(filename);
+      need(restored.bytes === file.bytes && restored.sha256 === file.sha256, 'file_checksum');
       await onProgress({phase: 'private_source_file_restored', file: file.name, bytes, parts: file.parts.length});
     }
     const manifest = await readLocalJson(partial('source-manifest.json'), receipt.files.find(file => file.name === 'source-manifest.json'));

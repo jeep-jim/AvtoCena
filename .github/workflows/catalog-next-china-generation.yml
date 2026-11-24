@@ -1,0 +1,57 @@
+name: China independent generation - fresh source and frozen local index
+on:
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/catalog-next-china-generation.json']
+  workflow_dispatch:
+    inputs:
+      controller_sha:
+        description: Exact reviewed main controller commit
+        required: true
+        type: string
+permissions:
+  contents: read
+concurrency:
+  group: catalog-next-china
+  cancel-in-progress: false
+jobs:
+  prepare:
+    if: github.repository_id == '1289722938' && github.ref == 'refs/heads/main' && github.run_attempt == '1'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 360
+    environment: regcloud-staging
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 2
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Check source continuity and complete private generations
+        run: node --import tsx --test tests/catalog-next-*.test.mjs
+      - name: Checkout the exact China runtime separately
+        run: |
+          node scripts/catalog-next/checkout-runtime.mjs
+      - name: Prepare fresh source, frozen prices and full local query index
+        env:
+          EXPECTED_CONTROLLER_SHA: ${{ inputs.controller_sha }}
+          JSON_STORAGE_DRIVER: object
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_REGION: us-east-1
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+          AUTO_API_CHE168_KEY: ${{ secrets.AUTO_API_CHE168_KEY }}
+          CATALOG_NEXT_REPORT: catalog-next-china-generation-report.json
+        run: node scripts/run-node-with-resources.mjs --import tsx scripts/catalog-next/prepare-generation.mjs "$RUNNER_TEMP/china-runtime"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: catalog-next-china-generation-report
+          path: catalog-next-china-generation-report.json
+          if-no-files-found: ignore
+          retention-days: 14

@@ -130,10 +130,21 @@ test('actual private upload restores exact generation and all source rows by def
 test('multipart SQLite restores in exact receipt order without loading old raw archives', async t => {
   const f = await fixture(t, {large: true}), database = receipt(f).files.find(file => file.name === 'source.sqlite');
   assert.equal(database.parts.length, 2); assert.equal(database.parts[0].bytes, PART_BYTES);
-  const result = await restore(f);
+  let active = 0, maximum = 0;
+  const completed = [];
+  const result = await restore(f, {storage: {...f.readPort, async getBinary(key) {
+    if (!key.includes('/files/source.sqlite/')) return f.readPort.getBinary(key);
+    active++; maximum = Math.max(maximum, active);
+    if (key === database.parts[0].key) await new Promise(resolve => setTimeout(resolve, 20));
+    try { const value = await f.readPort.getBinary(key); completed.push(key); return value; }
+    finally { active--; }
+  }}});
   assert.equal((await collect(result.offers())).find(row => row.sourceOfferId === '1').largePrivateSourceField.length, 9 * 1024 * 1024);
   const readKeys = f.calls.filter(call => call.get?.includes('/files/source.sqlite/')).map(call => call.get);
-  assert.deepEqual(readKeys, database.parts.map(part => part.key));
+  assert.deepEqual([...readKeys].sort(), database.parts.map(part => part.key).sort());
+  assert.equal(maximum, 2); assert.equal(active, 0);
+  assert.deepEqual(completed, [...database.parts].reverse().map(part => part.key));
+  assert.deepEqual(await fs.readFile(result.paths.database), await fs.readFile(path.join(f.input, 'source.sqlite')));
 });
 
 test('completion must exist and match the externally selected SHA before any source parts are read', async t => {
