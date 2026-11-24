@@ -58,7 +58,8 @@ test("qualification contract requires both source-level and offer-level proof", 
   assert.match(sourcePolicy, /offer-level/);
   assert.match(sourcePolicy, /publishAllowed=false/);
   assert.match(sourcePolicy, /не удаляют и не пишут данные в production Object Storage/);
-  assert.match(sourcePolicy, /Япония и свежий Зелёный угол не входят в текущие изменения/);
+  assert.match(sourcePolicy, /Текущий этап — Китай/);
+  assert.match(sourcePolicy, /\]\(\.\.\/markets\/README\.md\)/);
   assert.match(sourcePolicy, /\]\(\.\.\/catalog-source-qualification-v1\.md\)/);
   assert.match(sourcePolicy, /\]\(\.\.\/\.\.\/data\/catalog\/source-qualification-v1\.json\)/);
 });
