@@ -15,8 +15,8 @@ SOURCE='b'*40
 
 class ReleaseHostTests(unittest.TestCase):
     def test_each_fixed_http_probe_reports_timeout_without_changing_deadline_or_retrying(self):
-        self.assertEqual(set(host.HTTP_PROBES.values()),{'retired-report','china-ajes','china-existing',
-            'korea-ajes','korea-existing','japan-boundary','crm-ajes','crm-china','crm-korea','health'})
+        self.assertEqual(set(host.HTTP_PROBES.values()),{'retired-report','china-ajes',
+            'korea-ajes','japan-boundary','crm-ajes','crm-china','crm-korea','health'})
         for path,probe in host.HTTP_PROBES.items():
             with self.subTest(probe=probe):
                 connection=mock.Mock()
@@ -60,6 +60,40 @@ class ReleaseHostTests(unittest.TestCase):
                              (410,{'error':'source_retired'}))
         factory.assert_called_once_with('avtocena.com',timeout=90,context=context)
         connection.close.assert_called_once_with()
+
+    def test_retired_sources_end_with_410_instead_of_starting_a_replacement_search(self):
+        for target in ('candidate','public'):
+            with self.subTest(target=target):
+                calls=[];guards=[]
+                def response(observed,path):
+                    self.assertEqual(observed,target);calls.append(path)
+                    if path=='/api/catalog/korea-report?id=ajes-korea-retired':return 410,{'error':'source_retired'}
+                    if path in ('/api/catalog/search?market=china&source=ajes&pageSize=24',
+                                '/api/catalog/search?market=korea&source=ajes&pageSize=24'):
+                        return 410,{'ok':False,'error':'source_retired'}
+                    if path=='/api/catalog/search?market=japan&source=ajes':
+                        return 503,{'ok':False,'error':'japan_search_unavailable','reason':'client_ip_missing'}
+                    if path in ('/api/crm/ajes','/api/crm/ajes/markets/china','/api/crm/ajes/markets/korea'):return 401,{}
+                    self.fail('unexpected replacement search')
+                with mock.patch.object(host,'public_json',side_effect=response):
+                    result=host.check_aj_contract(target,guards.append)
+                self.assertTrue(result['passed']);self.assertFalse(result['nonJapanAjes'])
+                self.assertEqual(guards,['aj_contract','aj_contract_readback'])
+                expected=['/api/catalog/korea-report?id=ajes-korea-retired',
+                          '/api/catalog/search?market=china&source=ajes&pageSize=24',
+                          '/api/catalog/search?market=korea&source=ajes&pageSize=24']
+                if target=='candidate':expected.append('/api/catalog/search?market=japan&source=ajes')
+                self.assertEqual(calls,expected+['/api/crm/ajes','/api/crm/ajes/markets/china','/api/crm/ajes/markets/korea'])
+
+    def test_retired_source_does_not_accept_a_successful_or_partial_catalog_in_its_place(self):
+        for status,value in [(200,{'ok':True,'total':24,'items':[{'id':'paid-existing','market':'china'}]}),
+                             (410,{'ok':True,'error':'source_retired'}),(503,{'ok':False,'error':'source_retired'}),
+                             (410,{'ok':False,'error':'unavailable'})]:
+            with self.subTest(status=status,value=value):
+                with mock.patch.object(host,'public_json',side_effect=[(410,{'error':'source_retired'}),(status,value)]) as get:
+                    with self.assertRaisesRegex(host.native.HostError,'^home_host_aj_retired_source$'):
+                        host.check_aj_contract('candidate',lambda stage:None)
+                self.assertEqual(get.call_count,2)
 
     def test_candidate_preserves_japan_access_and_runtime_mounts(self):
         original={'AVTOCENA_CALCULATION_VERSION':host.CALCULATION,'AVTOCENA_CHINA_REGCLOUD_RUNTIME':'1',
@@ -155,16 +189,16 @@ class ReleaseHostTests(unittest.TestCase):
             if path.startswith('/api/crm/'):return 401,{'error':'unauthorized'}
             if 'korea-report' in path:return 410,{'error':'source_retired'}
             if 'market=japan' in path:return 503,{'ok':False,'error':'japan_search_unavailable','reason':'client_ip_missing'}
-            market='china' if 'market=china' in path else 'korea'
-            return 200,{'ok':True,'total':1,'items':[{'id':'1'*24,'market':market,'sourceId':'che168_feed' if market=='china' else 'encar_feed'}]}
+            return 410,{'ok':False,'error':'source_retired'}
         with mock.patch.object(host,'public_json',side_effect=respond):
             self.assertTrue(host.check_aj_contract('candidate',lambda phase:None)['passed'])
-        def bad(target,path):
-            status,value=respond(target,path)
-            if 'market=korea' in path:value['items'][0]['id']='ajes-korea-old'
-            return status,value
-        with mock.patch.object(host,'public_json',side_effect=bad):
-            with self.assertRaises(host.native.HostError):host.check_aj_contract('candidate',lambda phase:None)
+        for failed_route in ('korea-report','market=japan'):
+            def bad(target,path):
+                status,value=respond(target,path)
+                if failed_route in path:status=200
+                return status,value
+            with mock.patch.object(host,'public_json',side_effect=bad):
+                with self.assertRaises(host.native.HostError):host.check_aj_contract('candidate',lambda phase:None)
 
     def test_server_gate_requires_all_51_samples_and_enforced_original_baseline(self):
         baseline=json.loads((ROOT/'docs/operations/2026-11-11-accepted-speed-baseline.json').read_text())

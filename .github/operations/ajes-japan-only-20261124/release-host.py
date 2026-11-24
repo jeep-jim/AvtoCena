@@ -40,9 +40,7 @@ RESOURCE_NAMES = {'home-bootstrap.mjs', 'run-node-with-resources.mjs', 'lib/node
 HTTP_PROBES = {
     '/api/catalog/korea-report?id=ajes-korea-retired': 'retired-report',
     '/api/catalog/search?market=china&source=ajes&pageSize=24': 'china-ajes',
-    '/api/catalog/search?market=china&source=existing&pageSize=24': 'china-existing',
     '/api/catalog/search?market=korea&source=ajes&pageSize=24': 'korea-ajes',
-    '/api/catalog/search?market=korea&source=existing&pageSize=24': 'korea-existing',
     '/api/catalog/search?market=japan&source=ajes': 'japan-boundary',
     '/api/crm/ajes': 'crm-ajes',
     '/api/crm/ajes/markets/china': 'crm-china',
@@ -374,13 +372,10 @@ def check_aj_contract(target, guard):
     status, value = public_json(target, '/api/catalog/korea-report?id=ajes-korea-retired')
     need(status == 410 and value.get('error') == 'source_retired', 'aj_retired_report')
     for market in ('china', 'korea'):
-        for source in ('ajes', 'existing'):
-            status, value = public_json(target, '/api/catalog/search?market=' + market + '&source=' + source + '&pageSize=24')
-            need(status == 200 and value.get('ok') is not False and not value.get('error') and value.get('total', 0) > 0
-                 and isinstance(value.get('items'), list) and value['items']
-                 and not any(value.get(flag) for flag in ('stale', 'partial', 'interrupted', 'countIncomplete')), 'aj_local_market_unavailable')
-            need(all(row.get('market') == market and not str(row.get('id', '')).startswith('ajes-')
-                     and not str(row.get('sourceId', '')).startswith('ajes_') for row in value['items']), 'aj_non_japan_source')
+        # The owner requested removal of these suppliers, not a replacement
+        # catalog search. A retired selector must terminate before provider I/O.
+        status, value = public_json(target, '/api/catalog/search?market=' + market + '&source=ajes&pageSize=24')
+        need(status == 410 and value.get('ok') is False and value.get('error') == 'source_retired', 'aj_retired_source')
     # Private loopback has no genuine client peer and must fail before AJ I/O.
     # Public browser checks keep nginx's real peer and never manufacture an IP.
     if target == 'candidate':

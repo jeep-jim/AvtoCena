@@ -45,6 +45,62 @@ test('old AJ source selections cannot activate China, Korea or UAE, even without
  for(const source of [undefined,'ajes','existing'])assert.equal(await usesAjesMarket('japan',source),true);
 });
 
+test('retired AJ search returns 410 before all dependencies; Japanese search and green stock keep their paths',async()=>{
+ const touched:Array<{name:string;args:any[]}>=[];
+ (globalThis as any).__ajSearchRetirement={
+  touch:(name:string,...args:any[])=>{touched.push({name,args});},
+  forbidden:(name:string)=>{touched.push({name,args:[]});throw Error('unexpected '+name);},
+ };
+ const forbidden=(...names:string[])=>names.map(name=>`export const ${name}=()=>globalThis.__ajSearchRetirement.forbidden('${name}');`).join('\n');
+ try{
+  const api=await fixture('apps/web/app/(public)/api/catalog/search/route.ts',{
+   'next/server':'export const NextResponse={json:(body,init)=>Response.json(body,init)};',
+   '@/lib/catalog/china-public-aggregate':forbidden('omitLegacyChinaAggregate','withChinaAggregateAuthority'),
+   '@/lib/catalog/mixed-market-count':forbidden('readMixedMarketCounts'),
+   '@/lib/catalog/china-regcloud-object-reader':forbidden('chinaRegcloudRuntimeConfigured'),
+   '@/lib/catalog/market-selection':`export const selectedCatalogMarkets=market=>{globalThis.__ajSearchRetirement.touch('selectedCatalogMarkets',market);if(market!=='japan')throw Error('unexpected market');return ['japan'];};`+forbidden('marketSelectionUrl'),
+   '@/lib/catalog/green-corner':forbidden('readGreenCorner','readGreenCornerPage'),
+   '@/app/api/catalog/green/route':`export const GET=async request=>{globalThis.__ajSearchRetirement.touch('greenSearch',request.url);return Response.json({ok:true,items:[{id:'green-unchanged'}]});};`,
+   '@/lib/catalog/ajes-count-display':`export const exactAjesCount=summary=>summary.total;`,
+   '@/lib/catalog/ajes-market-selection':`export const usesAjesMarket=async(market,source)=>{globalThis.__ajSearchRetirement.touch('usesAjesMarket',market,source);return market==='japan';};`,
+   '@/lib/catalog/ajes-error-response':forbidden('ajesErrorResponse'),
+   '@/lib/catalog/ajes-catalog':`export const readAjesCatalogPage=async params=>{globalThis.__ajSearchRetirement.touch('readAjesCatalogPage',params);return {total:1,items:[{id:'ajes-stats-unchanged',market:'japan'}]};};export const readAjesCountSummary=async key=>{globalThis.__ajSearchRetirement.touch('readAjesCountSummary',JSON.parse(key));return {total:12,stale:false,upperBound:false};};`+forbidden('withAjesCount'),
+   '@/lib/catalog/market-page':forbidden('readCatalogMarketPage'),
+   '@/lib/catalog/runtime-config':`export const PUBLIC_CATALOG_MARKET_SET=new Set(['china','korea','japan','uae','europe','georgia']);`,
+   '@/lib/catalog/engine-input':forbidden('parseEngineCc'),
+   '@/lib/catalog/live-business-pricing':forbidden('applyActiveBusinessPricingBatch'),
+   '@/lib/catalog/public-rates':forbidden('loadPublicRateExtras'),
+   '@/lib/catalog/storage':forbidden('countCatalogOffers','readCatalogFacets','searchOffers','projectPreparedChinaFixtureSearch'),
+   '@/lib/catalog/prepared-china-http-fixture':'export class PreparedChinaCutChanged extends Error{};'+forbidden('hasPreparedChinaHttpFixture','preparedChinaIndexedModelOnly','readPreparedChinaFixtureList','readPreparedChinaIndexedModel','readPreparedChinaIndexedCity','readPreparedChinaCompatibility','hasIndependentChinaHttpFixture'),
+  });
+  for(const market of ['china','korea','uae','europe','georgia','any','unknown','','japan,korea','japan|china',undefined]){
+   for(const extra of ['', '&countOnly=1&includeFacets=1&includeRates=1', '&marketPage=1&page=2&powerTo=160', '&stock=green']){
+    const params=new URLSearchParams({source:'ajes'});if(market!==undefined)params.set('market',market);
+    const response=await api.GET(new Request('https://fixture.test/api/catalog/search?'+params+extra));
+    assert.equal(response.status,410,`${market}${extra}`);assert.equal(response.headers.get('Cache-Control'),'no-store');
+    assert.deepEqual(await response.json(),{ok:false,error:'source_retired'});
+    assert.deepEqual(touched,[],'must return before selection, AJ, prepared or ordinary catalog, count, facets and pricing');
+   }
+  }
+  for(const source of [undefined,'ajes','existing']){
+   touched.length=0;const params=new URLSearchParams({market:'japan',make:'Toyota',powerTo:'160',page:'2'});if(source)params.set('source',source);
+   const response=await api.GET(new Request('https://fixture.test/api/catalog/search?'+params));
+   assert.equal(response.status,200);assert.equal((await response.json()).items[0].id,'ajes-stats-unchanged');
+   assert.equal(response.headers.get('Cache-Control'),'private, max-age=15, stale-while-revalidate=30');
+   assert.deepEqual(touched.map(x=>x.name),['selectedCatalogMarkets','usesAjesMarket','readAjesCatalogPage']);
+   assert.deepEqual(touched.at(-1)!.args[0],Object.fromEntries(params));
+  }
+  touched.length=0;
+  const count=await api.GET(new Request('https://fixture.test/api/catalog/search?market=japan&source=ajes&countOnly=1'));
+  assert.equal(count.status,200);assert.equal((await count.json()).total,12);
+  assert.deepEqual(touched.map(x=>x.name),['selectedCatalogMarkets','usesAjesMarket','readAjesCountSummary']);
+  touched.length=0;
+  const green=await api.GET(new Request('https://fixture.test/api/catalog/search?market=japan&source=ajes&stock=green'));
+  assert.equal(green.status,200);assert.equal((await green.json()).items[0].id,'green-unchanged');
+  assert.deepEqual(touched.map(x=>x.name),['selectedCatalogMarkets','greenSearch']);
+ }finally{delete (globalThis as any).__ajSearchRetirement;}
+});
+
 test('public direct AJ IDs and retired queries stop before saved details, rates or request headers',async()=>{
  const api=await fixture('apps/web/lib/catalog/ajes-public.ts',{
   './ajes-runtime':'export const ajesClient={read:()=>{throw Error("must not read supplier");}};',
