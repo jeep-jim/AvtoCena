@@ -44,13 +44,13 @@ const server = http.createServer((request, response) => {
   if (url.pathname.startsWith('/api/')) {
     response.setHeader('Content-Type', 'application/json');
     response.end(JSON.stringify({counts: {}, modelCounts: {}, items: [], models: []}));
-  } else if (['/current.js', '/baseline.js'].includes(url.pathname)) {
-    response.setHeader('Content-Type', 'application/javascript');
+  } else if (['/current.js', '/baseline.js', '/current.css', '/baseline.css'].includes(url.pathname)) {
+    response.setHeader('Content-Type', url.pathname.endsWith('.css') ? 'text/css' : 'application/javascript');
     response.end(fs.readFileSync(path.join(temporary, path.basename(url.pathname))));
   } else {
     const variant = url.pathname.startsWith('/baseline/') ? 'baseline' : 'current';
     response.setHeader('Content-Type', 'text/html; charset=utf-8');
-    response.end(`<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>
+    response.end(`<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="/${variant}.css"><style>
       body{font:16px sans-serif;margin:12px}button,input{font:inherit;margin:3px;padding:7px}input{width:150px}.ac-range-card{border:1px solid #ddd;margin:5px;padding:5px}.ac-filter-more-button{display:none}.ac-catalog-filter-panel{display:block}.ac-filter-dropdown{background:white}.ac-mobile-filter-backdrop{position:fixed;inset:0;background:#0007;display:flex;align-items:end}.ac-mobile-filter-sheet{background:white;max-height:96vh;overflow:auto;width:100%}.ac-hide-scrollbar{overflow:auto}.ac-range-value-toggle,.ac-filter-clear{display:none}
       @media(max-width:1023px){.ac-catalog-filter-panel{display:none}.ac-filter-more-button{display:block}}
       </style></head><body><div id="root"></div><script src="/${variant}.js"></script></body></html>`);
@@ -59,6 +59,12 @@ const server = http.createServer((request, response) => {
 await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
 const origin = `http://127.0.0.1:${server.address().port}`;
 let browser;
+const waitPhases = new WeakMap();
+async function waitForFunction(page, phase, predicate, argument) {
+  waitPhases.set(page, phase);
+  await page.waitForFunction(predicate, argument);
+  waitPhases.set(page, 'scenario-actions');
+}
 
 async function withPage(run, {query = 'market=china', width = 1280, variant = 'current'} = {}) {
   const context = await browser.newContext({viewport: {width, height: 1100}, hasTouch: width < 1024, serviceWorkers: 'block', locale: 'ru-RU'});
@@ -66,23 +72,38 @@ async function withPage(run, {query = 'market=china', width = 1280, variant = 'c
   page.on('pageerror', error => errors.push(error.message));
   await page.route('**/*', route => new URL(route.request().url()).origin === origin ? route.continue() : route.abort());
   try {
+    waitPhases.set(page, 'fixture-navigation');
     await page.goto(`${origin}/${variant}/cars?${query}`);
-    await page.waitForFunction(() => window.__filterFixture && !document.querySelector('button[aria-label="Открыть фильтры"]').disabled);
+    await waitForFunction(page, 'fixture-ready', () => window.__filterFixture && !document.querySelector('button[aria-label="Открыть фильтры"]').disabled);
     await run(page);
     assert.deepEqual(errors, []);
+  } catch (error) {
+    report.failure = {variant, width, query, waitPhase: waitPhases.get(page), pageErrors: errors,
+      stack: String(error.stack || '').split('\n').slice(0, 10),
+      state: await page.evaluate(() => {
+        const active = document.activeElement;
+        const input = node => ({tag: node?.tagName, name: node?.getAttribute('name'), label: node?.getAttribute('aria-label'), value: node instanceof HTMLInputElement ? node.value : null});
+        return {url: location.href, fixturePresent: !!window.__filterFixture,
+          calls: window.__filterFixture?.calls ?? null, keydowns: window.__filterFixture?.keydowns ?? null,
+          autoAcknowledge: window.__filterFixture?.autoAcknowledge ?? null,
+          forms: [...document.querySelectorAll('.ac-catalog-filter-panel, .ac-mobile-filter-sheet')].map(form => ({className: form.className, busy: form.getAttribute('aria-busy')})),
+          activeElement: input(active), inputs: [...document.querySelectorAll('.ac-range-input-box input')].map(input)};
+      }).catch(failure => ({captureError: String(failure.message).slice(0, 500)}))};
+    throw error;
   } finally { await context.close(); }
 }
 const calls = page => page.evaluate(() => window.__filterFixture.calls);
-const settled = page => page.waitForFunction(() => document.querySelector('.ac-catalog-filter-panel').getAttribute('aria-busy') === 'false');
+const settled = page => waitForFunction(page, 'catalog-settled', () => document.querySelector('.ac-catalog-filter-panel').getAttribute('aria-busy') === 'false');
 const budget = page => page.locator('.ac-catalog-filter-panel').getByRole('textbox', {name: 'Цена: до', exact: true});
 async function expectCalls(page, count) {
-  await page.waitForFunction(count => window.__filterFixture.calls.length >= count, count);
+  await waitForFunction(page, `navigation-count:${count}`, count => window.__filterFixture.calls.length >= count, count);
   assert.equal((await calls(page)).length, count);
 }
 async function caseOf(name, run, options) {
-  try { await withPage(run, options); }
-  catch (error) { results.push({name, passed: false}); error.message = `${name}: ${error.message}`; throw error; }
-  results.push({name, passed: true});
+  try { await withPage(run, options); results.push({name, passed: true}); }
+  catch (error) {
+    results.push({name, passed: false, error: {name: error.name, message: String(error.message).slice(0, 2000)}, failure: report.failure});
+  }
 }
 async function holdClick(page, locator) {
   await locator.scrollIntoViewIfNeeded();
@@ -213,7 +234,9 @@ try {
     });
     const sticky = page.getByRole('navigation', {name: 'Выбранные фильтры и сортировка'});
     const chip = sticky.getByRole('button', {name: /^Убрать Цена /});
+    waitPhases.set(page, 'sticky-chip-visible');
     await chip.waitFor({state: 'visible'});
+    waitPhases.set(page, 'scenario-actions');
     assert.equal(await chip.evaluate(button => button.closest('form') === null), true);
     await page.evaluate(() => document.addEventListener('click', () => {window.__stickyClickAt = performance.now();}, {once: true, capture: true}));
     await chip.click(); await expectCalls(page, 2);
@@ -228,7 +251,7 @@ try {
     await budget(page).fill('2000000'); await budget(page).press('Tab');
     await expectCalls(page, 1); await settled(page);
     await page.goBack();
-    await page.waitForFunction(() => document.querySelector('.ac-catalog-filter-panel input[aria-label="Цена: до"]').value === '1500000');
+    await waitForFunction(page, 'back-control-restored', () => document.querySelector('.ac-catalog-filter-panel input[aria-label="Цена: до"]').value === '1500000');
     await settled(page); await page.waitForTimeout(220); assert.equal((await calls(page)).length, 1);
   }, {query: 'market=china&budget=1500000'});
   await caseOf('mobile blur and close share one final navigation', async page => {
@@ -288,6 +311,8 @@ try {
     });
     await page.waitForTimeout(230); assert.deepEqual(await calls(page), []);
   });
+  const failedCases = results.filter(result => !result.passed);
+  assert.equal(failedCases.length, 0, `${failedCases.length} independent component cases failed; inspect each case's preserved failure state`);
   const profile = {};
   for (const variant of ['baseline', 'current']) {
     const samples = [];

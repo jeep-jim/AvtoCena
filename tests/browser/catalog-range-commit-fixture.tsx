@@ -2,11 +2,18 @@ import React, {useEffect, useState} from 'react';
 import {createRoot} from 'react-dom/client';
 import {CatalogFilters} from '../../apps/web/components/catalog/CatalogFilters';
 import {CatalogSelectionProvider} from '../../apps/web/components/catalog/CatalogSelectionContext';
+import {catalogRouteParams} from '../../apps/web/lib/catalog/catalog-routes';
 
 const root = createRoot(document.getElementById('root')!);
 const facets = {makes: ['Toyota', 'BMW'], models: [{make: 'Toyota', model: 'Corolla'}], bodyTypes: ['sedan', 'suv'],
   transmissions: ['automatic', 'manual'], fuels: ['petrol', 'electric'], drives: ['fwd', 'awd']};
-const initialQuery = Object.fromEntries(new URLSearchParams(location.search));
+function initialForHref(href: string): Record<string, string> {
+  const url = new URL(href, location.href);
+  // The real market/make/model pages merge authoritative path values after
+  // the query. A canonical /cars/china URL no longer has ?market=china.
+  return {...Object.fromEntries(url.searchParams), ...(catalogRouteParams(url.pathname) || {})};
+}
+const initialQuery = initialForHref(location.href);
 const auctionResults = initialQuery.fixtureAuction === '1';
 delete initialQuery.fixtureAuction;
 
@@ -17,7 +24,7 @@ function Fixture() {
       calls: [] as Array<{href: string; at: number; options: unknown}>,
       keydowns: [] as Array<{key: string; at: number}>,
       autoAcknowledge: true,
-      acknowledge: (href: string) => setInitial(Object.fromEntries(new URL(href, location.href).searchParams)),
+      acknowledge: (href: string) => setInitial(initialForHref(href)),
       navigate(href: string, options: unknown) {
         fixture.calls.push({href, options, at: performance.now()});
         history.pushState(null, '', href);
