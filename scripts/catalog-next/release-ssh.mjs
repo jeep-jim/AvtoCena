@@ -29,6 +29,22 @@ export function checkedStartupReport(value) {
   return value;
 }
 
+export function checkedRetainedFenceReport(value) {
+  const keys = ['version', 'kind', 'ingressChanged', 'changedFields', 'mountOrderOnly',
+    'beforePid', 'afterPid', 'beforeStartedAt', 'afterStartedAt'];
+  const fields = ['Id', 'Image', 'Config', 'HostConfig', 'Mounts', 'Pid', 'StartedAt', 'RestartCount', 'Running'];
+  need(value && typeof value === 'object' && !Array.isArray(value)
+    && JSON.stringify(Object.keys(value).sort()) === JSON.stringify(keys.sort())
+    && value.version === 1 && value.kind === 'china-host-retained-fence-v1'
+    && typeof value.ingressChanged === 'boolean' && typeof value.mountOrderOnly === 'boolean'
+    && Array.isArray(value.changedFields) && value.changedFields.length <= fields.length
+    && new Set(value.changedFields).size === value.changedFields.length && value.changedFields.every(key => fields.includes(key))
+    && [value.beforePid,value.afterPid].every(pid => pid === null || Number.isSafeInteger(pid) && pid >= 0 && pid <= 2147483647)
+    && [value.beforeStartedAt,value.afterStartedAt].every(time => time === null || typeof time === 'string'
+      && /^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(?:\.\d{1,9})?Z$/.test(time)), 'retained_fence_report');
+  return value;
+}
+
 /** A single authenticated, ordered stream. Raw private files never enter JSON
  * logs; host reads exactly the already-approved compressed byte length. */
 export class ChinaSshSession {
@@ -89,11 +105,13 @@ export class ChinaSshSession {
     const row = this.pending.get(value.id); need(row, 'reply_id');
     if (value.kind === 'upload-ready') { row.readyResolve(); return; }
     const startup = value.kind === 'error' && value.startup !== undefined ? checkedStartupReport(value.startup) : undefined;
+    const retainedFence = value.kind === 'error' && value.retainedFence !== undefined ? checkedRetainedFenceReport(value.retainedFence) : undefined;
     clearTimeout(row.timer); this.pending.delete(value.id);
     if (value.kind === 'result') { row.resolve(value.value); row.readyResolve(false); }
     else if (value.kind === 'error') {
       const error = Error(/^china_host_[a-z0-9_]+$/.test(value.code ?? '') ? value.code : 'china_ssh_remote_error');
       if (startup !== undefined) error.startup = startup;
+      if (retainedFence !== undefined) error.retainedFence = retainedFence;
       row.reject(error); row.readyReject(error);
     } else throw Error('china_ssh_reply_kind');
   }

@@ -149,10 +149,36 @@ def health(port, release):
     need(value.get('ok') is True and value.get('releaseSha') == release and value.get('calculationVersion') == CALCULATION, 'health_identity')
 
 
+def canonical_mounts(mounts):
+    need(isinstance(mounts, list) and all(isinstance(row, dict) for row in mounts), 'mounts_shape')
+    pairs = [(json.dumps(row, sort_keys=True, ensure_ascii=False, separators=(',', ':'), allow_nan=False), row) for row in mounts]
+    need(len({key for key, _ in pairs}) == len(pairs), 'mounts_duplicate')
+    # Docker builds this array from a map. Preserve every attribute and every
+    # row; only the order is immaterial to container identity.
+    return [row for _, row in sorted(pairs, key=lambda pair: pair[0])]
+
+
 def protected_identity(container):
-    return {key: container[key] for key in ('Id', 'Image', 'Config', 'HostConfig', 'Mounts')} | {
+    return {key: container[key] for key in ('Id', 'Image', 'Config', 'HostConfig')} | {
+        'Mounts': canonical_mounts(container['Mounts']),
         'Pid': container['State']['Pid'], 'StartedAt': container['State']['StartedAt'],
         'RestartCount': container['RestartCount'], 'Running': container['State']['Running']}
+
+
+def retained_snapshot_guard(original_ingress, actual_ingress, expected, actual, raw_mounts, code):
+    current = protected_identity(actual)
+    if original_ingress == actual_ingress and expected == current:
+        return raw_mounts != actual['Mounts'] and canonical_mounts(raw_mounts) == current['Mounts']
+    error = ReleaseError('china_host_' + code)
+    pid = lambda value: value if type(value) is int and 0 <= value <= 2147483647 else None
+    started = lambda value: value if isinstance(value, str) and re.fullmatch(r'\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(?:\.\d{1,9})?Z', value) else None
+    error.retained_fence = {'version': 1, 'kind': 'china-host-retained-fence-v1',
+        'ingressChanged': original_ingress != actual_ingress,
+        'changedFields': [key for key in expected if expected[key] != current.get(key)],
+        'mountOrderOnly': raw_mounts != actual['Mounts'] and canonical_mounts(raw_mounts) == current['Mounts'],
+        'beforePid': pid(expected['Pid']), 'afterPid': pid(current['Pid']),
+        'beforeStartedAt': started(expected['StartedAt']), 'afterStartedAt': started(current['StartedAt'])}
+    raise error
 
 
 def generation_update(plan):
@@ -870,6 +896,8 @@ def resume_failed_upload(params):
         ingress = CONFIG.read_bytes()
         retained = docker('GET', '/containers/' + rollback['retainedContainerId'] + '/json')
         retained_identity = protected_identity(retained)
+        retained_raw_mounts = copy.deepcopy(retained['Mounts'])
+        mount_order_variations = 0
         retained_env = env_map(retained)
         need(retained['Image'] == rollback['retainedImageId'] and retained['State']['Running'] is True and
              retained_env.get('AVTOCENA_RELEASE_SHA') == RETAINED and retained_env.get('AVTOCENA_CALCULATION_VERSION') == CALCULATION and
@@ -879,9 +907,10 @@ def resume_failed_upload(params):
         need(image.get('Id') == plan['imageId'] and image.get('Os') == 'linux' and image.get('Architecture') == 'amd64' and
              image.get('Config', {}).get('Labels', {}).get('org.opencontainers.image.revision') == plan['runtimeSha'], 'reuse_image')
         def fence():
-            need(CONFIG.read_bytes() == ingress and
-                 protected_identity(docker('GET', '/containers/' + retained['Id'] + '/json')) == retained_identity,
-                 'reuse_retained_changed')
+            nonlocal mount_order_variations
+            current = docker('GET', '/containers/' + retained['Id'] + '/json')
+            mount_order_variations += int(retained_snapshot_guard(ingress, CONFIG.read_bytes(), retained_identity,
+                                          current, retained_raw_mounts, 'reuse_retained_changed'))
             need(diagnosis_json(old_directory / 'PLAN.json')[1] == old_plan_raw and
                  diagnosis_json(old_directory / 'ROLLED_BACK.json')[1] == rollback_raw and
                  not (old_directory / 'ACCEPTED.json').exists() and not (old_directory / 'ACCEPTED.pending').exists(), 'reuse_source_changed')
@@ -948,6 +977,8 @@ def resume_failed_upload(params):
         host.uploaded = set(FILE_NAMES)
         host.reuse_verified = True
         host.reuse_retained_identity = retained_identity
+        host.retained_raw_mounts = retained_raw_mounts
+        host.retained_mount_order_variations = mount_order_variations
         host.lock = lock
         lock = None
         return host, {'initialized': True, 'reused': True, 'plan': plan,
@@ -1031,9 +1062,12 @@ class Host:
     def guard(self):
         need(self.lock is not None and self.retained is not None, 'not_locked')
         current = docker('GET', '/containers/' + self.retained['Id'] + '/json')
-        need(protected_identity(current) == self.retained_identity, 'retained_changed')
         regular(CONFIG, 1024 * 1024)
-        need(CONFIG.read_bytes() == (self.proposed if self.switched else self.original), 'ingress_changed')
+        ingress = CONFIG.read_bytes()
+        need(ingress == (self.proposed if self.switched else self.original), 'ingress_changed')
+        raw_mounts = getattr(self, 'retained_raw_mounts', self.retained['Mounts'])
+        changed_order = retained_snapshot_guard(ingress, ingress, self.retained_identity, current, raw_mounts, 'retained_changed')
+        self.retained_mount_order_variations = getattr(self, 'retained_mount_order_variations', 0) + int(changed_order)
         health(self.old_port, retained_runtime(self.plan))
 
     def start(self):
@@ -1055,7 +1089,12 @@ class Host:
         need(len(serving) == 1, 'serving_container')
         self.retained = serving[0]
         if getattr(self, 'reuse_verified', False):
-            need(protected_identity(self.retained) == self.reuse_retained_identity, 'reuse_retained_changed')
+            changed_order = retained_snapshot_guard(self.original, CONFIG.read_bytes(), self.reuse_retained_identity,
+                self.retained, self.retained_raw_mounts, 'reuse_retained_changed')
+            self.retained_mount_order_variations += int(changed_order)
+        else:
+            self.retained_raw_mounts = copy.deepcopy(self.retained['Mounts'])
+            self.retained_mount_order_variations = 0
         env = env_map(self.retained)
         need(env.get('AVTOCENA_RELEASE_SHA') == retained_runtime(self.plan) and env.get('AVTOCENA_CALCULATION_VERSION') == CALCULATION and
              self.retained['State']['Running'] and not self.retained['HostConfig']['Privileged'], 'serving_identity')
@@ -1134,7 +1173,7 @@ class Host:
         self.wait_startup()
         self.verify_candidate()
         return {'started': True, 'release': self.plan['runtimeSha'], 'generationId': self.plan['generationId'],
-                'startup': self.startup_report}
+                'startup': self.startup_report, 'retainedMountOrderVariations': self.retained_mount_order_variations}
 
     def wait_startup(self):
         started = time.monotonic()
@@ -1507,6 +1546,8 @@ def main():
             reply = {'kind': 'error', 'id': locals().get('identity'), 'code': code}
             if host is not None and hasattr(host, 'startup_report'):
                 reply['startup'] = host.startup_report
+            if isinstance(error, ReleaseError) and hasattr(error, 'retained_fence'):
+                reply['retainedFence'] = error.retained_fence
             emit(reply)
         except (BrokenPipeError, OSError):
             pass

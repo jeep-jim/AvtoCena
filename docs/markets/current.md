@@ -1,6 +1,6 @@
 # Текущий шаг
 
-Обновлено: 24.11.2026, 19:07, Asia/Krasnoyarsk.
+Обновлено: 24.11.2026, 19:18, Asia/Krasnoyarsk.
 
 ## Разрешение и границы
 
@@ -30,6 +30,7 @@ Generation `gen_china_45369451603_1`; квитанция `25f5277665bcc1a72879d9
 
 - [Первая попытка установки](https://github.com/jeep-jim/AvtoCena/actions/runs/45382186572) остановилась в `start_candidate_preserving_live`: `china_host_candidate_startup`. Данные и image были загружены; локальный oracle прошёл 12 сценариев, включая 71 160 машин до 160 л.с. До переключения и браузера дело не дошло. Последняя подтверждённая публичная версия осталась прежней. [Точный отчёт](evidence/china-first-release-20261124.json).
 - [Диагностика сохранённой попытки](https://github.com/jeep-jim/AvtoCena/actions/runs/45389064968) подтвердила: контейнер работал до остановки установщиком через 120 секунд; OOM-события нет. Все 11 загруженных файлов и точный image сохранились, свободно 40 503 066 624 байта. Диагностика не меняла сервер и не обращалась к страницам каталога. [Точный отчёт](evidence/china-startup-diagnosis-20261124.json).
+- [Повтор из файлов сервера](https://github.com/jeep-jim/AvtoCena/actions/runs/45391369901) остановился до копирования: `china_host_reuse_retained_changed` при повторном сравнении работающего контейнера. Публичная версия 56 сохранилась. [Точный отчёт](evidence/china-reuse-fence-20261124.json). Воспроизведена ошибка сравнения: перестановка одинаковых `Mounts` даёт ложное изменение. Причина конкретного серверного отказа ещё не различена; исправление сохраняет каждый атрибут mount и проверку реальных изменений.
 - Последняя принятая установка сайта: `56d6b94fea70457e0ce2b0820596da9972846b90`, [принятый AJ](https://github.com/jeep-jim/AvtoCena/actions/runs/45339694454). Новый Китай **ещё не принят на сайте**.
 - Цены подготовил [runtime64](https://github.com/jeep-jim/AvtoCena/commit/64c6338e0db23c8999096bceefbf113c0136fe15); обслуживать их будет [runtime822](https://github.com/jeep-jim/AvtoCena/commit/822f925bb30c4e07010f6e14b6574f1b4bd6306e). Совместимость и точный набор файлов закреплены в `.github/operations/catalog-next/china-serving-plan.json`; реальные данные — в `china-release-plan.json`.
 - Runtime822: 98 проверок без пропусков и полная проверка TypeScript прошли. [CI контроллера](https://github.com/jeep-jim/AvtoCena/actions/runs/45375715236): независимые проверки, 3 422 регрессии, TypeScript и сборка прошли. Это проверки кода, не замеры сайта.

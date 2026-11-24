@@ -12,11 +12,15 @@ def refused(call,reason):
     try: call()
     except m.ReleaseError as error: assert str(error)=='china_host_'+reason,str(error)
     else: raise AssertionError('required refusal: '+reason)
+foreign_owners=set()
 class RootOwnedStat:
-    def __init__(self,value): self.value=value
-    def __getattr__(self,key): return 0 if key=='st_uid' else getattr(self.value,key)
+    def __init__(self,value,owner): self.value=value; self.owner=owner
+    def __getattr__(self,key): return self.owner if key=='st_uid' else getattr(self.value,key)
 class RootOwnedPath(type(pathlib.Path())):
-    def stat(self,*args,**kwargs): return RootOwnedStat(super().stat(*args,**kwargs))
+    # Production guards still run unchanged against explicit fixture ownership.
+    # Do not rely on pathlib.lstat delegating to an overridden stat on every Python.
+    def stat(self,*args,**kwargs): return RootOwnedStat(super().stat(*args,**kwargs),1001 if str(self) in foreign_owners else 0)
+    def lstat(self,*args,**kwargs): return RootOwnedStat(super().lstat(*args,**kwargs),1001 if str(self) in foreign_owners else 0)
 def forbidden(*args,**kwargs): raise AssertionError('unapproved network or process mutation')
 m.command=m.subprocess.run=forbidden
 with tempfile.TemporaryDirectory(prefix='china-reuse-test-') as temporary:
@@ -102,12 +106,15 @@ with tempfile.TemporaryDirectory(prefix='china-reuse-test-') as temporary:
     if case=='state_changed': params['previousAcceptedETag']='"changed"'; params['previousAcceptedStateSha256']='a'*64
     if case=='plan_changed': params['source']['planSha256']='0'*64
     if case=='rollback_changed': params['source']['rollbackSha256']='0'*64
+    if case=='foreign_file_owner': foreign_owners.add(str(old/'generation'/'query.sqlite'))
+    if case=='foreign_directory_owner': foreign_owners.add(str(old/'generation'))
     if case=='mounted':
         containers['9'*64]={**copy.deepcopy(retained),'Id':'9'*64,'Mounts':[{'Source':str(old/'generation'),'RW':False}]}
     before=fingerprint(old); all_before=fingerprint(root); retained_before=copy.deepcopy(retained)
     failures={'low_disk':'reuse_disk_capacity','bad_source':'reuse_source_size','bad_source_hash':'reuse_source_hash',
         'accepted':'reuse_accepted','state_changed':'reuse_state_changed','plan_changed':'reuse_plan',
-        'rollback_changed':'reuse_rollback','mounted':'reuse_mounted','image_mismatch':'reuse_image'}
+        'rollback_changed':'reuse_rollback','mounted':'reuse_mounted','image_mismatch':'reuse_image',
+        'foreign_file_owner':'file_owner','foreign_directory_owner':'recovery_directory'}
     if case in failures:
         refused(lambda:m.resume_failed_upload(params),failures[case])
         assert not target.exists() and fingerprint(root)==all_before
@@ -155,7 +162,7 @@ with tempfile.TemporaryDirectory(prefix='china-reuse-test-') as temporary:
 print('ok')
 `;
 for (const name of ['copy','replay','low_disk','bad_source','bad_source_hash','accepted','state_changed',
-  'plan_changed','rollback_changed','mounted','image_mismatch','exclusive_copy','start']) {
+  'plan_changed','rollback_changed','mounted','image_mismatch','exclusive_copy','start','foreign_file_owner','foreign_directory_owner']) {
   test('failed-upload reuse: '+name, () => {
     const result=spawnSync('python3',['-I','-B','-c',harness,hostFile,name,baselineFile],{encoding:'utf8',timeout:10000});
     assert.equal(result.status,0,result.stderr||result.stdout); assert.equal(result.stdout.trim(),'ok');

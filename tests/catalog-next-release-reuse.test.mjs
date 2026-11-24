@@ -162,7 +162,7 @@ test('the fixed mode step skips only image daemon/build; complete first-release 
   assert.match(controller.slice(common), /state\.abortReserved/); assert.match(controller.slice(common), /state\.finalizeRollback/);
 });
 
-for (const mode of ['initial', 'reuse', 'functional-failure', 'startup-failure']) test('real release entrypoint with native state machine: ' + mode, async t => {
+for (const mode of ['initial', 'reuse', 'functional-failure', 'startup-failure', 'retained-failure']) test('real release entrypoint with native state machine: ' + mode, async t => {
   const directory = await fs.mkdtemp(path.join(os.tmpdir(), 'china-release-flow-'));
   t.after(() => fs.rm(directory, {recursive: true, force: true}));
   await fs.writeFile(path.join(directory, 'fixture.json'), JSON.stringify(fixture()));
@@ -171,9 +171,10 @@ for (const mode of ['initial', 'reuse', 'functional-failure', 'startup-failure']
   const value = JSON.parse(await fs.readFile(path.join(directory, 'result.json'), 'utf8'));
   assert.equal(value.privateDataLeaked, false); assert.ok(value.lease.value, JSON.stringify({calls: value.calls, report: value.report}));
   assert.equal(value.lease.value.status, 'released');
-  if (mode === 'functional-failure' || mode === 'startup-failure') {
+  if (mode === 'functional-failure' || mode === 'startup-failure' || mode === 'retained-failure') {
     assert.equal(value.report.accepted, false); assert.equal(value.exitCode, 1); assert.equal(value.aborted, true);
-    assert.equal(value.report.errorCode, mode === 'functional-failure' ? 'china_host_functional_fixture' : 'china_host_candidate_startup');
+    assert.equal(value.report.errorCode, { 'functional-failure': 'china_host_functional_fixture',
+      'startup-failure': 'china_host_candidate_startup', 'retained-failure': 'china_host_reuse_retained_changed'}[mode]);
     assert.equal(value.accepted.value, null);
     assert.ok(!value.calls.includes('switch')); assert.ok(!value.calls.includes('state:reserve'));
   } else {
@@ -187,6 +188,14 @@ for (const mode of ['initial', 'reuse', 'functional-failure', 'startup-failure']
   if (mode === 'startup-failure') {
     assert.equal(value.report.startupFailure.reason, 'exited'); assert.equal(value.report.startupFailure.candidate.exitCode, 1);
     assert.equal(value.report.startupFailure.elapsedSeconds, 2); assert.ok(!value.calls.includes('functional'));
+  }
+  if (mode === 'retained-failure') {
+    assert.equal(value.report.phase, 'reuse_verified_server_files');
+    assert.deepEqual(value.report.retainedFenceFailure, {version: 1, kind: 'china-host-retained-fence-v1',
+      ingressChanged: false, changedFields: ['Pid', 'StartedAt'], mountOrderOnly: false,
+      beforePid: 123, afterPid: 124, beforeStartedAt: '2026-11-24T00:00:00Z', afterStartedAt: '2026-11-24T12:00:00Z'});
+    for (const call of ['start', 'functional', 'speed', 'state:reserve', 'switch', 'accept', 'state:commit'])
+      assert.ok(!value.calls.includes(call), call);
   }
   if (mode === 'initial') {
     assert.ok(value.calls.includes('restore-generation')); assert.ok(value.calls.includes('child:acceptance-oracle.mjs'));

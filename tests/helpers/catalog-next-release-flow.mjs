@@ -10,7 +10,7 @@ import {EventEmitter} from 'node:events';
 import vm from 'node:vm';
 import {createChinaState, inspectChinaPublicationState} from '../../scripts/catalog-next/china-state.mjs';
 import * as reuseModule from '../../scripts/catalog-next/release-reuse.mjs';
-import {checkedStartupReport} from '../../scripts/catalog-next/release-ssh.mjs';
+import {checkedStartupReport, checkedRetainedFenceReport} from '../../scripts/catalog-next/release-ssh.mjs';
 
 const ROOT = fileURLToPath(new URL('../../', import.meta.url));
 const [directory, mode] = process.argv.slice(2), config = JSON.parse(await fs.readFile(path.join(directory, 'fixture.json'), 'utf8'));
@@ -52,6 +52,10 @@ const session = {exited: Promise.resolve({code: 0}), abort() { aborted = true; p
       assert.equal(mode === 'initial', false); assert.equal((await state.read('lease')).value.status, 'held');
       assert.equal((await state.read('accepted')).value, null);
       assert.deepEqual(params.source, config.reuse.source); assert.notEqual(params.nonce, params.source.nonce);
+      if (mode === 'retained-failure') throw Object.assign(Error('china_host_reuse_retained_changed'), {retainedFence: {
+        version: 1, kind: 'china-host-retained-fence-v1', ingressChanged: false, changedFields: ['Pid', 'StartedAt'],
+        mountOrderOnly: false, beforePid: 123, afterPid: 124, beforeStartedAt: '2026-11-24T00:00:00Z',
+        afterStartedAt: '2026-11-24T12:00:00Z'}, rawPrivate: 'synthetic-private-ssh'});
       plan = {...copy(config.result.plan), nonce: params.nonce, controllerSha: params.controllerSha,
         previousAcceptedETag: params.previousAcceptedETag, previousAcceptedStateSha256: params.previousAcceptedStateSha256};
       return {...copy(config.result), plan};
@@ -135,7 +139,7 @@ const mocks = {
     return {paths, receipt: {binding: {runtimeSha: servingPlan.pricingRuntimeSha, generationId: release.generationId,
       generationManifestSha256: release.generationManifestSha256, sourceDescriptorSha256: config.result.plan.sourceDescriptorSha256}}};
   }},
-  './release-ssh.mjs': {checkedStartupReport, async openChinaSshSession() { calls.push('open-session'); return session; }},
+  './release-ssh.mjs': {checkedStartupReport, checkedRetainedFenceReport, async openChinaSshSession() { calls.push('open-session'); return session; }},
   './china-state.mjs': {createChinaStateStorage: () => storage, createChinaState: () => stateProxy, inspectChinaPublicationState},
   '../../apps/web/lib/data.ts': {getJsonStorage: () => ({async readJson(key) { assert.equal(key, 'catalog/operations/collection-controls-v1.json'); return {}; }})},
   './refresh-china-source.mjs': {assertChinaFeedControl() {}},

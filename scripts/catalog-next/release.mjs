@@ -11,7 +11,7 @@ import {verifyReadonlyInvocation} from '../lib/readonly-marker-invocation.mjs';
 import {verifyFrozenSpeedBaselines} from '../verify-frozen-speed-baselines.mjs';
 import {restorePrivateChinaGeneration} from './private-generation.mjs';
 import {createPrivateChinaGenerationStorage} from './generation-storage.mjs';
-import {openChinaSshSession, checkedStartupReport} from './release-ssh.mjs';
+import {openChinaSshSession, checkedStartupReport, checkedRetainedFenceReport} from './release-ssh.mjs';
 import {verifyServingCompatibility} from './serving-compatibility.mjs';
 import {createChinaStateStorage, createChinaState, inspectChinaPublicationState} from './china-state.mjs';
 import {getJsonStorage} from '../../apps/web/lib/data.ts';
@@ -228,6 +228,9 @@ try {
 } catch (error) {
   if (error?.startup) {
     try { report.startupFailure = checkedStartupReport(error.startup); } catch {}
+  }
+  if (error?.retainedFence) {
+    try { report.retainedFenceFailure = checkedRetainedFenceReport(error.retainedFence); } catch {}
   }
   if (session) { session.abort(); await session.exited; session = null; }
   report.phase = phase; report.errorCode = safeCode(error); report.finishedAt = new Date().toISOString();
