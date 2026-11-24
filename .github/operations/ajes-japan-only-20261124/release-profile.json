@@ -7,9 +7,9 @@
   "servingCalculationVersion": "4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90",
   "privateIndexDigest": "bf2c72cb7a260ef093c0a43c2b0dad9c4c9094a4d6dc3811dd0d7f7626b0d72b",
   "privateIndexParent": "83ff17075e9188dcf227c8752dc064248d5f42e0",
-  "source": "a0ecdace2d9f2167ace460d1447a64fe7b2b30ab",
-  "tree": "be74008e4863ae5139af33546a9a845d5a13131f",
-  "sourceCalculationVersion": "74561fd4adb892e7ceac5450b6bfaa1c11e7cf0bddc0d02eab7515a207b5c83c",
+  "source": "53af59971f25c7cda6358ee18242ee5e5232eede",
+  "tree": "3c9f978c3765214d907856b3a9a38f9ef8380270",
+  "sourceCalculationVersion": "1daeb0bc382b70a7c811aaf405b589fd1b269fb637b150962f030efd67b0597f",
   "codePaths": [
     "apps/web/app/(crm)/api/crm/ajes/markets/[market]/route.ts",
     "apps/web/app/(crm)/api/crm/ajes/route.ts",
@@ -37,7 +37,6 @@
     "apps/web/lib/catalog/collection-controls-schema.ts",
     "apps/web/lib/catalog/collection-controls.ts",
     "apps/web/lib/catalog/market-selection.ts",
-    "apps/web/lib/catalog/model-suggestion-loader.ts",
     "apps/web/lib/catalog/offer-page-data.ts",
     "apps/web/lib/catalog/related-offer-selection.ts",
     "tests/ajes-catalog-progressive.test.ts",
@@ -63,12 +62,15 @@
     "tests/catalog-collection-controls.test.ts",
     "tests/catalog-japan-filter-rail.test.ts",
     "tests/catalog-market-page-boundary.test.ts",
+    "tests/catalog-market-workflow-policy.test.ts",
+    "tests/china-feed-cutover.test.ts",
     "tests/china-source-switch.test.ts",
     "tests/dealer-offer-markets.test.ts",
     "tests/model-directory-markets.test.ts",
+    "tests/public-page-recovery.test.ts",
     "tests/related-offer-selection.test.ts"
   ],
-  "codeDiffSha256": "587958c7c6955d7336999daa6bd612ce31197abcfd41ef764408a10a7acc423f",
+  "codeDiffSha256": "454904deb17fdc82ebfb863bd762b9abd9b24d5ca7bd0df6d355bee7db8d3fc4",
   "inventory": {
     "activationAuthorized": false,
     "candidatePort": {

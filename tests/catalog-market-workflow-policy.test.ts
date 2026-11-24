@@ -14,17 +14,21 @@ const planner=new AsyncFunction('fs','catalogRefreshDue','readCollectionControls
 async function plan(market,enabled,event='schedule',due=true,marketEnabled=true,extraEnv={},marker={}){
  const controls=defaultCollectionControls();
  for(const value of Object.values(controls.sources))value.enabled=false;
- for(const id of enabled)controls.sources[id].enabled=true;
+ for(const id of enabled){
+  // Simulate an old persisted flag without restoring the retired source schema.
+  if(['ajes_china_feed','ajes_korea_feed'].includes(id))controls.sources[id]={...controls.sources.ajes_japan_feed,enabled:true};
+  else controls.sources[id].enabled=true;
+ }
  controls.markets[market].enabled=marketEnabled;
  let output='';const logs=[];
  const fakeFs={readFileSync:path=>JSON.stringify(path.endsWith('refresh-policy-v1.json')?{pausedMarkets:{}}:marker),appendFileSync:(_path,value)=>{output+=value;}};
  await planner(fakeFs,(_now, marketName)=>marketName==='china'||due,async()=>controls,collectionMarketEnabled,collectionWorkflowEnabled,paidEncarBindingFromWorkflow,{env:{TARGET_MARKET:market,EVENT_NAME:event,GITHUB_OUTPUT:'offline',...extraEnv}},{log:value=>logs.push(value)});
  return {values:Object.fromEntries(output.trim().split('\n').map(line=>{const i=line.indexOf('=');return[line.slice(0,i),line.slice(i+1)];})),logs,controls};
 }
-test('AJES-only Korea stays available without starting empty legacy collection/publication',async()=>{
+test('a legacy enabled AJ Korea flag cannot activate collection or publication',async()=>{
  for(const event of ['schedule','push','workflow_dispatch']){
   const p=await plan('korea',['ajes_korea_feed'],event);
-  assert.equal(collectionMarketEnabled(p.controls,'korea'),true);
+  assert.equal(collectionMarketEnabled(p.controls,'korea'),false);
   assert.equal(p.values.run,'false');assert.match(p.logs[0],/no_enabled_background_source/);
   assert.equal(p.controls.sources.ajes_korea_feed.enabled,true);
  }
@@ -36,6 +40,7 @@ test('owner-enabled background source remains runnable; disabled market stays st
 });
 test('paid China and UAE workers retain their existing routes',async()=>{
  assert.equal((await plan('china',['che168_feed'],'schedule',false)).values.run,'true');
+ assert.equal((await plan('china',['che168_feed','ajes_china_feed'],'schedule',false)).values.run,'true');
  assert.equal((await plan('uae',['dubicars_feed'])).values.run,'true');
  assert.equal((await plan('china',['ajes_china_feed'])).values.run,'false');
 });

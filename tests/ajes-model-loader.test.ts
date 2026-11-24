@@ -1,6 +1,7 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {loadModelSuggestions} from '../apps/web/lib/catalog/model-suggestion-loader';
+import {modelDirectoryMarkets} from '../apps/web/lib/catalog/market-selection';
 test('supplier suggestions include models outside the visible page and share mobile/desktop requests',async()=>{
  const original=globalThis.fetch;let calls=0;
  globalThis.fetch=async(url:any)=>{calls++;assert.match(String(url),/source-models\?market=japan/);return Response.json({version:1,brands:[],models:Array.from({length:80},(_,i)=>['TEST','MODEL '+i,[],1])});};
@@ -34,12 +35,16 @@ test('canonical brands resolve to actual source names, including all Mercedes al
  assert.equal(resolveAjesMakeNames('BMW,Mercedes-Benz',names),'BMW,BENZ,MERCEDES BENZ');
 });
 
-test('legacy non-Japan source requests read published model names without an AJ directory call',async()=>{
+test('current picker requests non-Japanese models from published inventory without selecting an AJ directory',async()=>{
  const original=globalThis.fetch;const urls:string[]=[];
  globalThis.fetch=async input=>{urls.push(String(input));return Response.json({version:1,brands:[],models:[['TEST','LOCAL',[],1]]});};
  try{
   for(const market of ['china','korea','uae']){
-   const search=await loadModelSuggestions(true,{market,make:'LOCAL_TEST'});
+   // VehicleModelSearch uses this selector for its separate supplier requests.
+   const supplierMarkets=modelDirectoryMarkets(market,'LOCAL_TEST',true);
+   assert.deepEqual(supplierMarkets,[]);
+   await Promise.all(supplierMarkets.map(sourceMarket=>loadModelSuggestions(true,{market:sourceMarket,make:'LOCAL_TEST'})));
+   const search=await loadModelSuggestions(true,undefined,'LOCAL_TEST',market);
    assert.equal(search('LOCAL','TEST')[0].model,'LOCAL');
   }
   assert.equal(urls.length,3);
@@ -48,5 +53,6 @@ test('legacy non-Japan source requests read published model names without an AJ 
    assert.equal(url.pathname,'/api/catalog/models');assert.equal(url.searchParams.get('scope'),'inventory');
    assert.equal(url.searchParams.get('market'),market);assert.equal(url.searchParams.get('make'),'LOCAL_TEST');
   }
+  assert.deepEqual(modelDirectoryMarkets('china|japan|korea','LOCAL_TEST',true),['japan']);
  }finally{globalThis.fetch=original;}
 });

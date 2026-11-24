@@ -69,7 +69,7 @@ jobs:
           # checkout. Any other source change still fails verifySource below.
           git restore --source=HEAD --worktree -- apps/web/tsconfig.tsbuildinfo
           node --import tsx --import ./tests/helpers/offline-fetch.mjs --test --test-concurrency=1 tests/ajes-*.test.ts tests/china-source-switch.test.ts tests/related-offer-selection.test.ts tests/model-directory-markets.test.ts
-          node --import tsx --import ./tests/helpers/offline-fetch.mjs --test --test-concurrency=1 tests/dealer-offer-markets.test.ts tests/catalog-japan-filter-rail.test.ts tests/catalog-market-page-boundary.test.ts tests/catalog-deferred-recommendations.test.ts tests/catalog-collection-controls.test.ts
+          node --import tsx --import ./tests/helpers/offline-fetch.mjs --test --test-concurrency=1 tests/dealer-offer-markets.test.ts tests/catalog-japan-filter-rail.test.ts tests/catalog-market-page-boundary.test.ts tests/catalog-deferred-recommendations.test.ts tests/catalog-collection-controls.test.ts tests/catalog-market-workflow-policy.test.ts tests/china-feed-cutover.test.ts tests/public-page-recovery.test.ts
           node --import tsx tests/browser/collection-controls.mjs
           # Keep the screenshots as evidence, outside the exact source checkout.
           test ! -e "$RUNNER_TEMP/aj-admin-fixture"
