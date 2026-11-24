@@ -13,7 +13,7 @@ import base64, copy, datetime, fcntl, importlib.util, io, json, os, pathlib, sta
 spec = importlib.util.spec_from_file_location('failed_upload_host', sys.argv[1])
 m = importlib.util.module_from_spec(spec); spec.loader.exec_module(m)
 assert m.FAILED_UPLOAD_RUNTIME == '822f925bb30c4e07010f6e14b6574f1b4bd6306e'
-assert m.FAILED_WITNESS_ACCEPTED_RUNTIME == '0fbd8bbf62cdea910645e73afccd1657c089b6a9'
+assert m.FAILED_WITNESS_ACCEPTED_RUNTIME == '11759d82de280a2d15f48ccd3589b59b7e67361f'
 assert m.FAILED_WITNESS_BULK_BYTES == (13041560320, 13041559296)
 assert sum(m.FAILED_WITNESS_BULK_BYTES) == 26083119616
 assert m.FAILED_WITNESS_TARGETS[0] == m.FAILED_UPLOAD_WITNESS

@@ -14,7 +14,7 @@ const MARKER = '.github/market-runs/catalog-next-china-failed-witness-cleanup.js
 const WORKFLOW = 'jeep-jim/AvtoCena/.github/workflows/catalog-next-china-failed-witness-cleanup.yml@refs/heads/main';
 const REPORT = 'catalog-next-china-failed-witness-cleanup-report.json';
 export const FAILED_WITNESS_CLEANUP_CURRENT = Object.freeze({
-  runtimeSha: '0fbd8bbf62cdea910645e73afccd1657c089b6a9', generationId: 'gen_china_45369451603_1',
+  runtimeSha: '11759d82de280a2d15f48ccd3589b59b7e67361f', generationId: 'gen_china_45369451603_1',
 });
 export const FAILED_WITNESS_CLEANUP_TARGET = FAILED_UPLOAD_CLEANUP_WITNESS;
 export const FAILED_WITNESS_CLEANUP_TARGETS = Object.freeze([FAILED_WITNESS_CLEANUP_TARGET, Object.freeze({

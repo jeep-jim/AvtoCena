@@ -2,8 +2,8 @@
   "version": 1,
   "kind": "china-runtime-test-harness-evidence-v1",
   "execution": "local",
-  "runtimeSha": "0fbd8bbf62cdea910645e73afccd1657c089b6a9",
-  "runtimeTree": "9a5cbc93859ed78630d8bc58e17ce8634a9ae2b4",
+  "runtimeSha": "11759d82de280a2d15f48ccd3589b59b7e67361f",
+  "runtimeTree": "a57e09483b10fe57806a379d0bdff5cdd32ea24f",
   "baselineRuntimeSha": "56d6b94fea70457e0ce2b0820596da9972846b90",
   "patchSha256": "1e5e218cdd29ad46e9cf2410b90140a5ac53c9e93fa70dbb075836839920d06f",
   "originalAffectedTests": {
@@ -156,7 +156,7 @@
   "typecheck": {
     "passed": true,
     "command": "npm run typecheck",
-    "runtimeSha": "0fbd8bbf62cdea910645e73afccd1657c089b6a9",
+    "runtimeSha": "11759d82de280a2d15f48ccd3589b59b7e67361f",
     "workspaces": [
       "@avtocena/web",
       "@avtocena/engine"
@@ -181,8 +181,8 @@
     "execution": "local"
   },
   "rangeCommitBrowserContract": {
-    "runtimeSha": "0fbd8bbf62cdea910645e73afccd1657c089b6a9",
-    "runtimeTree": "9a5cbc93859ed78630d8bc58e17ce8634a9ae2b4",
+    "runtimeSha": "11759d82de280a2d15f48ccd3589b59b7e67361f",
+    "runtimeTree": "a57e09483b10fe57806a379d0bdff5cdd32ea24f",
     "runner": "tests/browser/catalog-range-commit.mjs",
     "fixture": "tests/browser/catalog-range-commit-fixture.tsx",
     "preparedCases": 20,
@@ -191,10 +191,46 @@
     "localBrowserBlockedBeforePage": "executor Chromium IPC policy",
     "frozenPublicBrowserHarnessUnchanged": true,
     "frozenSpeedBaselinesUnchanged": true,
-    "scope": "Actual component with stubbed Next router; separate from mandatory live-site acceptance"
+    "scope": "Actual component with stubbed Next router; separate from mandatory live-site acceptance",
+    "componentSha256": "32da85f82a00d2140e6d70271dfd307e6c0cc25298bb79aaac8c361602f59de6",
+    "previousAttempt": {
+      "runUrl": "https://github.com/jeep-jim/AvtoCena/actions/runs/45457755220",
+      "runtimeSha": "0fbd8bbf62cdea910645e73afccd1657c089b6a9",
+      "passed": false,
+      "firstCase": "typing waits for Tab; one normalized final query",
+      "error": "page.waitForFunction timeout",
+      "preciseWaitPhase": "not captured by previous runner",
+      "sourceReproduction": {
+        "canonicalHref": "/cars/china?budget=2000000",
+        "oldAcknowledgement": {
+          "budget": "2000000"
+        },
+        "actualRouteParams": {
+          "market": "china"
+        }
+      },
+      "correction": "Fixture merges production catalogRouteParams after searchParams, as real market pages do; emitted CSS linked and each failure state preserved",
+      "productionComponentUnchanged": true,
+      "all20CasesAnd49OriginalAssertionsRetained": true
+    },
+    "fixtureValidation": {
+      "routeParserTests": 9,
+      "passed": 9,
+      "failed": 0,
+      "fixtureTypecheckPassed": true,
+      "bothExactEsbuildVariantsPassed": true
+    }
   },
   "localValidationInputs": {
     "source": "exact tracked HEAD blobs restored into sparse worktrees",
     "productionOrDataContentChanged": false
+  },
+  "rangeCommitTargetedTests": {
+    "command": "node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/catalog-filter-single-autoapply.test.ts tests/catalog-filter-ui.test.ts tests/catalog-filter-scroll.test.ts tests/catalog-filter-layout-regression.test.ts tests/catalog-filter-followup.test.ts tests/catalog-filter-brand-polish.test.ts tests/catalog-filter-facets-wire.test.ts",
+    "tests": 19,
+    "passed": 19,
+    "failed": 0,
+    "skipped": 0,
+    "productionComponentSha256": "32da85f82a00d2140e6d70271dfd307e6c0cc25298bb79aaac8c361602f59de6"
   }
 }
