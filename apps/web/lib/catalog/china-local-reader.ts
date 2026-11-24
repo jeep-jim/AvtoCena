@@ -28,6 +28,22 @@ const identity = (name: string): Identity => {
 };
 const same = (a: unknown, b: unknown) => JSON.stringify(a) === JSON.stringify(b);
 
+function cityLedgerCache() {
+  const entries = new Map<string, WeakRef<Record<string, any>>>();
+  const owners = new WeakMap<object, Record<string, any>>();
+  const collected = new FinalizationRegistry<{id: string; ref: WeakRef<Record<string, any>>}>(({id, ref}) => {
+    if (entries.get(id) === ref) entries.delete(id);
+  });
+  return {
+    get: (id: string) => entries.get(id)?.deref(),
+    put(id: string, ledger: Record<string, any>) {
+      const ref = new WeakRef(ledger); entries.set(id, ref); collected.register(ledger, {id, ref});
+    },
+    own(row: object, ledger: Record<string, any>) { owners.set(row, ledger); },
+    carry(source: object, row: object) { const ledger = owners.get(source); if (ledger) owners.set(row, ledger); },
+  };
+}
+
 function configured() {
   return {directory: process.env.CATALOG_CHINA_LOCAL_GENERATION_DIR || '',
     manifestSha256: process.env.CATALOG_CHINA_LOCAL_MANIFEST_SHA256 || '', runtimeSha: process.env.CATALOG_CHINA_LOCAL_RUNTIME_SHA || ''};
@@ -91,15 +107,48 @@ async function openGeneration() {
   const query = await openChinaQueryIndex({filename: queryFile, manifest: manifest.queryIndex, assertAuthority: assertCurrent});
   pins.set(queryFile, identity(queryFile));
   const details = new DatabaseSync(detailsFile, {readOnly: true, allowExtension: false});
+  let cityPriceDb: DatabaseSync;
   try {
     details.exec('PRAGMA trusted_schema=OFF; PRAGMA query_only=ON;');
     need(details.prepare('PRAGMA quick_check').get()?.quick_check === 'ok' &&
       Number(details.prepare('SELECT COUNT(*) n FROM offers').get()?.n) === manifest.queryIndex.rows, 'details_integrity');
     const offer = details.prepare('SELECT full_json,full_sha256,projection_json,projection_sha256 FROM offers WHERE id=?');
     const city = details.prepare('SELECT patches_gzip,patches_sha256 FROM city_ledgers WHERE id=?');
+    // The query reader has already verified this exact file's hash, metadata
+    // and integrity. A second read-only connection batches only scalar prices
+    // for the selected IDs, without changing the producer or its indexes.
+    cityPriceDb = new DatabaseSync(queryFile, {readOnly: true, allowExtension: false});
+    cityPriceDb.exec('PRAGMA trusted_schema=OFF; PRAGMA query_only=ON;');
+    const cityKeys: string[] = manifest.queryIndex.cityKeys;
+    const citySet = new Set(cityKeys);
+    const cityPricesForIds = (ids: string[]) => {
+      assertCurrent();
+      need(ids.every(id => ID.test(id)) && new Set(ids).size === ids.length, 'city_price_identity');
+      const rowsById = new Map(ids.map(id => [id, new Map<string, number | null>()]));
+      if (ids.length) {
+        const placeholders = (values: unknown[]) => values.map(() => '?').join(',');
+        const rows = cityPriceDb.prepare('SELECT id,city,filter_rub FROM city_prices WHERE city IN (' +
+          placeholders(cityKeys) + ') AND id IN (' + placeholders(ids) + ')').all(...cityKeys, ...ids);
+        for (const row of rows) {
+          const prices = rowsById.get(row.id as string), key = row.city as string;
+          need(prices && citySet.has(key) && !prices.has(key), 'city_price_identity');
+          prices!.set(key, row.filter_rub as number | null);
+        }
+      }
+      const result = new Map(ids.map(id => {
+        const prices = rowsById.get(id)!;
+        need(prices.size === cityKeys.length, 'city_price_coverage');
+        return [id, Object.fromEntries(prices)] as const;
+      }));
+      assertCurrent(); return result;
+    };
     assertCurrent();
-    return {config, manifest, query, semantics, details, offer, city, assertCurrent, publicRates};
-  } catch (error) { details.close(); query.close(); throw error; }
+    // Only live returned cards/details retain expanded city ledgers strongly.
+    // The generation's lookup is weak, so visiting more cars cannot pin the
+    // entire all-city inventory in memory. Collection simply causes a reread.
+    const cityLedgers = cityLedgerCache();
+    return {config, manifest, query, semantics, details, offer, city, cityLedgers, cityPriceDb, cityPricesForIds, assertCurrent, publicRates};
+  } catch (error) { cityPriceDb?.close(); details.close(); query.close(); throw error; }
 }
 
 export async function initializeLocalChinaReader() {
@@ -121,13 +170,20 @@ function publicProjection(row: any) {
 }
 
 type State = NonNullable<Awaited<ReturnType<typeof initializeLocalChinaReader>>>;
-function cityPatch(state: State, id: string, base: any, cityKey?: string, requestedCity?: string, fullDetails = false) {
-  if (!cityKey) return base;
+function cityLedger(state: State, id: string) {
+  // Only called inside search/detail's fresh cut and file-identity fences.
+  const cached = state.cityLedgers.get(id); if (cached) return cached;
   const found = state.city.get(id);
   need(found && found.patches_gzip instanceof Uint8Array, 'city_patch');
   let text: Buffer; try { text = gunzipSync(found!.patches_gzip as Uint8Array, {maxOutputLength: 64 * 1024 * 1024}); } catch { fail('city_patch_gzip'); }
   need(sha(text!) === found!.patches_sha256, 'city_patch_checksum');
-  let patch: any; try { patch = JSON.parse(text!.toString('utf8'))[cityKey]; } catch { fail('city_patch_json'); }
+  let ledger: Record<string, any>; try { ledger = JSON.parse(text!.toString('utf8')); } catch { fail('city_patch_json'); }
+  need(ledger! && typeof ledger! === 'object' && !Array.isArray(ledger!), 'city_patch_json');
+  state.assertCurrent(); state.cityLedgers.put(id, ledger!); return ledger!;
+}
+function cityPatch(state: State, id: string, base: any, cityKey?: string, requestedCity?: string, fullDetails = false) {
+  if (!cityKey) return base;
+  const ledger = cityLedger(state, id), patch = structuredClone(ledger[cityKey]);
   need(patch && typeof patch.offer === 'object' && typeof patch.snapshot === 'object' &&
     !Object.hasOwn(patch.offer, 'id') && !Object.hasOwn(patch.offer, 'market') && !Object.hasOwn(patch.offer, 'sourcePrice') && !Object.hasOwn(patch.offer, 'sourceCurrency'), 'city_patch_scope');
   const snapshot = {...base.calculationSnapshot, ...patch.snapshot};
@@ -138,14 +194,16 @@ function cityPatch(state: State, id: string, base: any, cityKey?: string, reques
     snapshot.breakdown = patch.breakdownPatch.order.map((id: string) => lines.get(id));
   }
   if (cityKey === '__unquoted__' && requestedCity && snapshot.deliveryQuote) snapshot.deliveryQuote = {...snapshot.deliveryQuote, city: requestedCity, status: 'needs_quote'};
-  return {...base, ...patch.offer, deliveryCity: requestedCity || patch.offer.deliveryCity, calculationSnapshot: snapshot};
+  const result = {...base, ...patch.offer, deliveryCity: requestedCity || patch.offer.deliveryCity, calculationSnapshot: snapshot};
+  state.cityLedgers.own(result, ledger); return result;
 }
 
-function mark<T extends object>(state: State, row: T, city?: string, baseRub?: number | null): T {
+function mark<T extends object>(state: State, row: T, city?: string, baseRub?: number | null,
+  preparedPrices?: Record<string, number | null>, ledgerSource: object = row): T {
   const data = row as any;
   const result = {...row, preparedChinaSelection: {version: 1, generationId: state.manifest.generationId, ...(city ? {city} : {})},
-    preparedChinaCityPrices: {version: 1, generationId: state.manifest.generationId, baseRub: baseRub === undefined ? data.totalRub ?? null : baseRub, values: state.query.cityPrices(data.id)}};
-  guards.set(result, state.assertCurrent); return result;
+    preparedChinaCityPrices: {version: 1, generationId: state.manifest.generationId, baseRub: baseRub === undefined ? data.totalRub ?? null : baseRub, values: preparedPrices ?? state.query.cityPrices(data.id)}};
+  state.cityLedgers.carry(ledgerSource, result); guards.set(result, state.assertCurrent); return result;
 }
 function checkCut(state: State, expected?: string | null) { if (expected && expected !== state.manifest.generationId) fail('cut_changed'); state.assertCurrent(); }
 
@@ -154,11 +212,16 @@ export async function searchLocalChina(params: CatalogSearchParams, options: {co
   checkCut(state, options.expectedGeneration || params.preparedCut);
   const pageSize = options.marketPage ? 24 : Math.max(1, Math.min(48, Number(params.pageSize) || 24));
   const query = state.semantics.compileRequest({...params, pageSize});
-  const result = queryChinaWithPreparedCity(state.query, {...query, countOnly: Boolean(options.countOnly)});
+  const cityPricesById = new Map<string, Record<string, number | null>>();
+  const result = queryChinaWithPreparedCity(state.query, {...query, countOnly: Boolean(options.countOnly)},
+    cityPricesById, state.cityPricesForIds);
+  if (cityPricesById.size !== result.items.length) {
+    for (const [id, prices] of state.cityPricesForIds(result.items.map((item: any) => item.id))) cityPricesById.set(id, prices);
+  }
   const items = result.items.map((item: any) => {
     const projection = cityPatch(state, item.id, item.projection, query.cityKey, params.city);
     if (item.queryRub !== null) need(projection.totalRub === item.queryRub, 'city_query_price');
-    return mark(state, publicProjection(projection), params.city, item.projection.totalRub ?? null);
+    return mark(state, publicProjection(projection), params.city, item.projection.totalRub ?? null, cityPricesById.get(item.id), projection);
   });
   const facets = options.includeFacets || options.navigationFacets ? localFacets(state, options.navigationFacets ? {} : query) : undefined;
   state.assertCurrent();
@@ -202,5 +265,5 @@ export async function readLocalChinaOffer(id: string, city?: string, expectedGen
 
 export async function resetLocalChinaReaderForTests() {
   const state = stateStore[stateKey]; delete stateStore[stateKey];
-  if (state) await state.promise.then((value: any) => { value.query.close(); value.details.close(); }, () => {});
+  if (state) await state.promise.then((value: any) => { value.query.close(); value.details.close(); value.cityPriceDb.close(); }, () => {});
 }

@@ -213,14 +213,16 @@ test('delivery-only city pagination selects IDs without a whole-city scan and pr
   const queries:any[]=[],points:any[]=[];
   const tracked={manifest:f.reader.manifest,
     query(params:any){queries.push(params);return f.reader.query(params);},
-    get(id:string,city:string){points.push({id,city});return f.reader.get(id,city);}};
+    cityPrices(id:string){points.push(id);return f.reader.cityPrices(id);},
+    get(){assert.fail('selected projections must not be hydrated twice');}};
   for(const city of cities)for(const query of [{},{powerTo:160},{yearFrom:2018,sort:'yearAsc,mileageDesc'}]){
     const input={...compiled(query),cityKey:city,page:2},expected=f.reader.query(input);
     queries.length=0;points.length=0;
-    const actual=queryChinaWithPreparedCity(tracked,input);
+    const savedPrices=new Map(),actual=queryChinaWithPreparedCity(tracked,input,savedPrices);
     assert.deepEqual(actual,expected,JSON.stringify(input));
     assert.equal(queries.length,1);assert.equal(queries[0].cityKey,undefined);
-    assert.deepEqual(points,actual.items.map((item:any)=>({id:item.id,city})));
+    assert.deepEqual(points,actual.items.map((item:any)=>item.id));
+    for(const item of actual.items)assert.deepEqual(savedPrices.get(item.id),f.reader.cityPrices(item.id));
     const plan=f.reader.explainQuery(queries[0]);
     assert.doesNotMatch(plan.count.sql,/city_prices/);assert.doesNotMatch(plan.selection.sql,/city_prices/);
     if(!Object.keys(query).length)assert(!plan.selection.plan.some((step:any)=>/TEMP B-TREE/.test(step.detail)),JSON.stringify(plan.selection.plan));

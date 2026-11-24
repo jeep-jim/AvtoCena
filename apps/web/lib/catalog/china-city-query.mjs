@@ -1,10 +1,10 @@
 import assert from 'node:assert/strict';
 
 /** A delivery-only city must not turn canonical pagination into a whole-city
- * join/sort. Select IDs with the already verified immutable reader, then ask
- * that same reader for each selected ID's saved city price. Price filters and
+ * join/sort. Select IDs with the already verified immutable reader, then read
+ * those IDs' saved city prices from its verified file. Price filters and
  * price ordering retain the original query and its exact SQL semantics. */
-export function queryChinaWithPreparedCity(reader, params = {}) {
+export function queryChinaWithPreparedCity(reader, params = {}, cityPricesById, readCityPrices) {
   const cityKey = params?.cityKey;
   const priceFilter = params?.hasPrice !== undefined ||
     params?.budgetFrom !== undefined && params.budgetFrom !== 0 ||
@@ -16,12 +16,15 @@ export function queryChinaWithPreparedCity(reader, params = {}) {
   const {cityKey: _city, ...selection} = params;
   const result = reader.query(selection);
   if (params.countOnly) return result;
+  const prepared = readCityPrices?.(result.items.map(item => item.id));
   const items = result.items.map(item => {
-    // get() preserves the same file/authority fences and returns the frozen
-    // projection, detail locator and city price; no mutable storage or FX.
-    const saved = reader.get(item.id, cityKey);
-    assert(saved, 'china_query_city_price_missing');
-    return saved;
+    // The selected projection and locator are already hydrated. Read each
+    // saved scalar price map once with the same file/authority fences; the
+    // native reader also needs it for the card's client-side city controls.
+    const prices = prepared ? prepared.get(item.id) : reader.cityPrices(item.id);
+    assert(prices && Object.hasOwn(prices, cityKey), 'china_query_city_price_missing');
+    cityPricesById?.set(item.id, prices);
+    return {...item, queryRub: prices[cityKey]};
   });
   return {...result, items};
 }
