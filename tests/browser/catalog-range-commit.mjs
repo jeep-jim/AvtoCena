@@ -39,21 +39,42 @@ for (const variant of ['current', 'baseline']) {
         resolveDir: path.resolve(path.dirname(component))}));
     }}] : [])]});
 }
+// Use the exact root/public layout imports, including the real font files.
+// PostCSS runs from apps/web so Tailwind resolves its actual config/content.
+const layoutFiles = ['apps/web/app/layout.tsx', 'apps/web/app/(public)/layout.tsx'];
+const layoutStyles = layoutFiles.flatMap(file => [...fs.readFileSync(file, 'utf8').matchAll(/^import\s+['"]([^'"]+\.css)['"];?/gm)]
+  .map(([, specifier]) => specifier.startsWith('.') ? path.resolve(path.dirname(file), specifier)
+    : require.resolve(specifier, {paths: [path.resolve(path.dirname(file))]})));
+const styleBuild = await build({stdin: {contents: layoutStyles.map(file => `@import ${JSON.stringify(file)};`).join('\n'),
+  loader: 'css', resolveDir: process.cwd()}, bundle: true, outfile: path.join(temporary, 'app.css'),
+  loader: {'.woff2': 'file', '.woff': 'file'}, assetNames: 'assets/[name]-[hash]', publicPath: '/',
+  external: ['/brands/*', '/key-logo.png'], metafile: true});
+execFileSync(process.execPath, ['-e', `
+  const fs = require('node:fs'), path = require('node:path');
+  const config = require(path.resolve('postcss.config.js'));
+  const plugins = Object.entries(config.plugins).map(([name, options]) => require(name)(options));
+  const output = process.argv[1];
+  require('postcss')(plugins).process(fs.readFileSync(output, 'utf8'), {from: output, to: output})
+    .then(result => fs.writeFileSync(output, result.css)).catch(error => {console.error(error); process.exitCode = 1;});
+`, path.join(temporary, 'app.css')], {cwd: path.resolve('apps/web'), env: {...process.env, NODE_ENV: 'production'}, stdio: 'pipe'});
+const styleAssets = new Map(Object.keys(styleBuild.metafile.outputs).map(file => [
+  '/' + path.relative(temporary, path.resolve(file)).split(path.sep).join('/'), path.resolve(file)]));
+const digestFile = file => createHash('sha256').update(fs.readFileSync(file)).digest('hex');
+report.styles = {source: 'Exact root/public layout CSS imports, compiled with apps/web PostCSS and Tailwind configuration',
+  inputs: [...layoutStyles, 'apps/web/postcss.config.js', 'apps/web/tailwind.config.ts'].map(file => ({file: path.relative(process.cwd(), file), sha256: digestFile(file)})),
+  compiledSha256: digestFile(path.join(temporary, 'app.css'))};
 const server = http.createServer((request, response) => {
   const url = new URL(request.url, 'http://fixture');
   if (url.pathname.startsWith('/api/')) {
     response.setHeader('Content-Type', 'application/json');
     response.end(JSON.stringify({counts: {}, modelCounts: {}, items: [], models: []}));
-  } else if (['/current.js', '/baseline.js', '/current.css', '/baseline.css'].includes(url.pathname)) {
-    response.setHeader('Content-Type', url.pathname.endsWith('.css') ? 'text/css' : 'application/javascript');
-    response.end(fs.readFileSync(path.join(temporary, path.basename(url.pathname))));
+  } else if (styleAssets.has(url.pathname) || ['/current.js', '/baseline.js', '/current.css', '/baseline.css'].includes(url.pathname)) {
+    response.setHeader('Content-Type', url.pathname.endsWith('.css') ? 'text/css' : url.pathname.endsWith('.woff2') ? 'font/woff2' : url.pathname.endsWith('.woff') ? 'font/woff' : 'application/javascript');
+    response.end(fs.readFileSync(styleAssets.get(url.pathname) || path.join(temporary, path.basename(url.pathname))));
   } else {
     const variant = url.pathname.startsWith('/baseline/') ? 'baseline' : 'current';
     response.setHeader('Content-Type', 'text/html; charset=utf-8');
-    response.end(`<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="/${variant}.css"><style>
-      body{font:16px sans-serif;margin:12px}button,input{font:inherit;margin:3px;padding:7px}input{width:150px}.ac-range-card{border:1px solid #ddd;margin:5px;padding:5px}.ac-filter-more-button{display:none}.ac-catalog-filter-panel{display:block}.ac-filter-dropdown{background:white}.ac-mobile-filter-backdrop{position:fixed;inset:0;background:#0007;display:flex;align-items:end}.ac-mobile-filter-sheet{background:white;max-height:96vh;overflow:auto;width:100%}.ac-hide-scrollbar{overflow:auto}.ac-range-value-toggle,.ac-filter-clear{display:none}
-      @media(max-width:1023px){.ac-catalog-filter-panel{display:none}.ac-filter-more-button{display:block}}
-      </style></head><body><div id="root"></div><script src="/${variant}.js"></script></body></html>`);
+    response.end(`<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="/app.css"><link rel="stylesheet" href="/${variant}.css"></head><body><div id="root"></div><script src="/${variant}.js"></script></body></html>`);
   }
 });
 await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
@@ -75,6 +96,9 @@ async function withPage(run, {query = 'market=china', width = 1280, variant = 'c
     waitPhases.set(page, 'fixture-navigation');
     await page.goto(`${origin}/${variant}/cars?${query}`);
     await waitForFunction(page, 'fixture-ready', () => window.__filterFixture && !document.querySelector('button[aria-label="Открыть фильтры"]').disabled);
+    waitPhases.set(page, 'production-fonts-ready');
+    await page.evaluate(() => document.fonts.ready);
+    waitPhases.set(page, 'scenario-actions');
     await run(page);
     assert.deepEqual(errors, []);
   } catch (error) {
@@ -82,9 +106,10 @@ async function withPage(run, {query = 'market=china', width = 1280, variant = 'c
       stack: String(error.stack || '').split('\n').slice(0, 10),
       state: await page.evaluate(() => {
         const active = document.activeElement;
-        const input = node => ({tag: node?.tagName, name: node?.getAttribute('name'), label: node?.getAttribute('aria-label'), value: node instanceof HTMLInputElement ? node.value : null});
+        const input = node => ({tag: node?.tagName, name: node?.getAttribute('name'), label: node?.getAttribute('aria-label'), value: node instanceof HTMLInputElement ? node.value : null, checked: node instanceof HTMLInputElement ? node.checked : null});
         return {url: location.href, fixturePresent: !!window.__filterFixture,
           calls: window.__filterFixture?.calls ?? null, keydowns: window.__filterFixture?.keydowns ?? null,
+          pointerTrace: window.__filterFixture?.pointerTrace ?? null,
           autoAcknowledge: window.__filterFixture?.autoAcknowledge ?? null,
           forms: [...document.querySelectorAll('.ac-catalog-filter-panel, .ac-mobile-filter-sheet')].map(form => ({className: form.className, busy: form.getAttribute('aria-busy')})),
           activeElement: input(active), inputs: [...document.querySelectorAll('.ac-range-input-box input')].map(input)};
@@ -108,11 +133,22 @@ async function caseOf(name, run, options) {
 async function holdClick(page, locator) {
   await locator.scrollIntoViewIfNeeded();
   const rect = await locator.boundingBox();
+  await pointerSnapshot(locator, 'before-down', rect);
   await page.mouse.move(rect.x + rect.width / 2, rect.y + rect.height / 2);
   await page.mouse.down();
   await page.waitForTimeout(60);
   assert.equal((await calls(page)).length, 0, 'pointer blur must still wait for the final click');
+  await pointerSnapshot(locator, 'before-up', rect);
   await page.mouse.up();
+}
+async function pointerSnapshot(locator, phase, rect) {
+  await locator.evaluate((target, {phase, rect}) => window.__filterFixture.snapshotPointer(phase, target,
+    rect.x + rect.width / 2, rect.y + rect.height / 2), {phase, rect});
+}
+async function openPriceChoice(panel, label, {touch = false} = {}) {
+  const toggle = panel.getByRole('button', {name: 'Выбрать значение: Цена: до', exact: true});
+  if (touch) await toggle.tap(); else await toggle.click();
+  return toggle.locator('..').getByRole('button', {name: label, exact: true});
 }
 
 try {
@@ -144,8 +180,9 @@ try {
     await page.waitForTimeout(220); assert.equal((await calls(page)).length, 1);
   }, {query: 'market=china&budgetFrom=2000000&budget=3000000'});
   await caseOf('dirty input to held preset click submits only the preset', async page => {
+    const preset = await openPriceChoice(page.locator('.ac-catalog-filter-panel'), '2 млн');
     await budget(page).fill('2500000');
-    await holdClick(page, page.locator('.ac-catalog-filter-panel').getByRole('button', {name: 'до 2 млн', exact: true}));
+    await holdClick(page, preset);
     await expectCalls(page, 1); await settled(page); await page.waitForTimeout(230);
     assert.equal((await calls(page)).length, 1);
     assert.equal(new URL((await calls(page))[0].href, origin).searchParams.get('budget'), '2000000');
@@ -159,9 +196,10 @@ try {
     assert.equal(new URL(final[0].href, origin).searchParams.has('budgetFrom'), false);
   }, {query: 'market=china&budget=2000000'});
   await caseOf('cancelled held preset preserves the original blur commit', async page => {
+    const preset = await openPriceChoice(page.locator('.ac-catalog-filter-panel'), '2 млн');
     await budget(page).fill('2500000');
-    const preset = page.locator('.ac-catalog-filter-panel').getByRole('button', {name: 'до 2 млн', exact: true});
     await preset.scrollIntoViewIfNeeded(); const rect = await preset.boundingBox();
+    await pointerSnapshot(preset, 'before-cancelled-down', rect);
     await page.mouse.move(rect.x + rect.width / 2, rect.y + rect.height / 2); await page.mouse.down();
     await page.waitForTimeout(60); await page.mouse.move(0, 0); await page.mouse.up();
     await expectCalls(page, 1); await settled(page); await page.waitForTimeout(230);
@@ -171,8 +209,9 @@ try {
   });
   await caseOf('dirty year and held price preset coalesce across range cards', async page => {
     const panel = page.locator('.ac-catalog-filter-panel');
+    const preset = await openPriceChoice(panel, '2 млн');
     await panel.getByRole('textbox', {name: 'Год: от', exact: true}).fill('2019');
-    await holdClick(page, panel.getByRole('button', {name: 'до 2 млн', exact: true}));
+    await holdClick(page, preset);
     await expectCalls(page, 1); await settled(page); await page.waitForTimeout(230);
     const final = await calls(page); assert.equal(final.length, 1);
     const query = new URL(final[0].href, origin).searchParams;
@@ -205,8 +244,9 @@ try {
   });
   await caseOf('keyboard preset and clear remain accessible with one push each', async page => {
     const panel = page.locator('.ac-catalog-filter-panel');
-    await panel.getByRole('button', {name: 'до 3 млн', exact: true}).focus();
-    await panel.getByRole('button', {name: 'до 3 млн', exact: true}).press('Enter');
+    const preset = await openPriceChoice(panel, '3 млн');
+    await preset.focus();
+    await preset.press('Enter');
     await expectCalls(page, 1); await settled(page);
     await panel.getByRole('button', {name: 'Сбросить Цена', exact: true}).focus();
     await panel.getByRole('button', {name: 'Сбросить Цена', exact: true}).press('Enter');
@@ -266,8 +306,11 @@ try {
     await page.getByRole('button', {name: 'Открыть фильтры', exact: true}).tap();
     const panel = page.getByRole('dialog', {name: 'Фильтры каталога'});
     const input = panel.getByRole('textbox', {name: 'Цена: до', exact: true});
+    const preset = await openPriceChoice(panel, '2 млн', {touch: true});
     await input.fill('2500000');
-    await panel.getByRole('button', {name: 'до 2 млн', exact: true}).tap();
+    await preset.scrollIntoViewIfNeeded();
+    await pointerSnapshot(preset, 'before-touch', await preset.boundingBox());
+    await preset.tap();
     await expectCalls(page, 1); await settled(page); await page.waitForTimeout(220);
     assert.equal((await calls(page)).length, 1);
     assert.equal(new URL((await calls(page))[0].href, origin).searchParams.get('budget'), '2000000');

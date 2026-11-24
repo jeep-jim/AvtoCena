@@ -23,6 +23,8 @@ function Fixture() {
     const fixture = {
       calls: [] as Array<{href: string; at: number; options: unknown}>,
       keydowns: [] as Array<{key: string; at: number}>,
+      pointerTrace: [] as Array<Record<string, unknown>>,
+      snapshotPointer: (phase: string, target: Element | null, x: number, y: number) => tracePointer(phase, target, x, y),
       autoAcknowledge: true,
       acknowledge: (href: string) => setInitial(initialForHref(href)),
       navigate(href: string, options: unknown) {
@@ -33,6 +35,30 @@ function Fixture() {
       unmount: () => root.unmount(),
     };
     (window as any).__filterFixture = fixture;
+    const describe = (element: Element | null) => {
+      if (!element) return null;
+      const rect = element.getBoundingClientRect();
+      return {tag: element.tagName, name: element.getAttribute('name'), label: element.getAttribute('aria-label'),
+        className: element.getAttribute('class'), text: element.textContent?.trim().slice(0, 80), connected: element.isConnected,
+        value: element instanceof HTMLInputElement ? element.value : null,
+        checked: element instanceof HTMLInputElement ? element.checked : null,
+        rect: {x: rect.x, y: rect.y, width: rect.width, height: rect.height}};
+    };
+    let downTarget: Element | null = null;
+    let pointer = {x: 0, y: 0};
+    function tracePointer(phase: string, target: Element | null, x: number, y: number, event?: Event) {
+      fixture.pointerTrace.push({phase, at: performance.now(), x, y, trusted: event?.isTrusted ?? null,
+        pointerType: event instanceof PointerEvent ? event.pointerType : null,
+        target: describe(target), atPoint: describe(document.elementFromPoint(x, y)), downTarget: describe(downTarget)});
+      if (fixture.pointerTrace.length > 64) fixture.pointerTrace.shift();
+    }
+    const pointerEvent = (event: Event) => {
+      const target = event.target instanceof Element ? event.target : null;
+      if (event instanceof MouseEvent) pointer = {x: event.clientX, y: event.clientY};
+      if (event.type === 'pointerdown') downTarget = target;
+      tracePointer(event.type, target, pointer.x, pointer.y, event);
+    };
+    const pointerEvents = ['pointerdown', 'pointerup', 'pointercancel', 'click', 'focusout'];
     const back = () => fixture.acknowledge(location.href);
     const keydown = (event: KeyboardEvent) => {
       if ((event.key === 'Tab' || event.key === 'Enter') && event.target instanceof HTMLInputElement && event.target.closest('.ac-range-card'))
@@ -40,7 +66,11 @@ function Fixture() {
     };
     window.addEventListener('popstate', back);
     window.addEventListener('keydown', keydown, true);
-    return () => { window.removeEventListener('popstate', back); window.removeEventListener('keydown', keydown, true); };
+    pointerEvents.forEach(name => window.addEventListener(name, pointerEvent, true));
+    return () => {
+      window.removeEventListener('popstate', back); window.removeEventListener('keydown', keydown, true);
+      pointerEvents.forEach(name => window.removeEventListener(name, pointerEvent, true));
+    };
   }, []);
   return <CatalogSelectionProvider><CatalogFilters initial={initial} facets={facets} resultCount={24} auctionResults={auctionResults}/><div aria-hidden="true" style={{height: 1600}}/></CatalogSelectionProvider>;
 }
