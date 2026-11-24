@@ -1,0 +1,15 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import {execFileSync} from 'node:child_process';
+import {fileURLToPath} from 'node:url';
+const root = fileURLToPath(new URL('../../', import.meta.url));
+const plan = JSON.parse(await fs.readFile(path.join(root, '.github/operations/catalog-next/china-plan.json'), 'utf8'));
+assert(/^[a-f0-9]{40}$/.test(plan.runtimeSha ?? '') && plan.retainedRuntime === '56d6b94fea70457e0ce2b0820596da9972846b90', 'china_checkout_plan');
+const directory = path.join(await fs.realpath(process.env.RUNNER_TEMP), 'china-runtime');
+const run = args => execFileSync('git', args, {cwd: root, stdio: ['ignore', 'pipe', 'pipe'], maxBuffer: 1024 * 1024});
+run(['fetch', '--no-tags', 'https://github.com/jeep-jim/AvtoCena.git', plan.runtimeSha]);
+run(['fetch', '--no-tags', 'https://github.com/jeep-jim/AvtoCena.git', plan.retainedRuntime]);
+run(['worktree', 'add', '--detach', directory, plan.runtimeSha]);
+await fs.symlink(path.join(root, 'node_modules'), path.join(directory, 'node_modules'), 'dir');
+console.log(JSON.stringify({phase: 'exact_runtime_checked_out', runtimeSha: plan.runtimeSha}));

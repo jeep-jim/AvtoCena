@@ -1,0 +1,55 @@
+{
+  "version": 1,
+  "market": "china",
+  "minimumYear": 2014,
+  "retainedRuntime": "56d6b94fea70457e0ce2b0820596da9972846b90",
+  "runtimeSha": "55644cfbb324037e964c1c028adb780e29b50c35",
+  "runtimeTree": "0b0414b17016eb062edbdff08424df81fe2259ef",
+  "runtimeDiffSha256": "b2acde4bf138fe43686cbef43d795c01b0822ffb83ec4f1cd17349bcfea47c8e",
+  "runtimeFiles": [
+    "apps/web/app/(public)/api/catalog/search/route.ts",
+    "apps/web/app/api/catalog/colors/route.ts",
+    "apps/web/app/api/catalog/models/route.ts",
+    "apps/web/components/catalog/CatalogContent.tsx",
+    "apps/web/instrumentation.ts",
+    "apps/web/lib/catalog/card-city-delivery.ts",
+    "apps/web/lib/catalog/china-cny-price.ts",
+    "apps/web/lib/catalog/china-local-reader.ts",
+    "apps/web/lib/catalog/china-public-aggregate.ts",
+    "apps/web/lib/catalog/city-delivery.ts",
+    "apps/web/lib/catalog/customs-pricing.ts",
+    "apps/web/lib/catalog/live-business-pricing.ts",
+    "apps/web/lib/catalog/market-logistics.ts",
+    "apps/web/lib/catalog/market-page.ts",
+    "apps/web/lib/catalog/offer-display-data.ts",
+    "apps/web/lib/catalog/offer-page-data.ts",
+    "apps/web/lib/catalog/offer-url.ts",
+    "apps/web/lib/catalog/prepared-china-http-fixture.ts",
+    "apps/web/lib/catalog/rates.ts",
+    "apps/web/lib/catalog/shared-budget-prices.ts",
+    "apps/web/lib/catalog/storage.ts",
+    "apps/web/lib/effective-market-settings.ts",
+    "apps/web/types/node-sqlite.d.ts",
+    "scripts/catalog-next/pricing-generation.mjs",
+    "scripts/catalog-next/pricing-worker-prices.mjs",
+    "scripts/catalog-next/query-index.mjs",
+    "scripts/catalog-next/query-semantics.mjs",
+    "tests/catalog-frozen-fx-batch.test.ts",
+    "tests/catalog-next-local-reader.test.ts",
+    "tests/catalog-next-pricing-worker.test.mjs",
+    "tests/catalog-next-query-index.test.ts",
+    "tests/helpers/china-pricing-worker-fixture.mjs"
+  ],
+  "source": {
+    "owner": {
+      "runId": "45349439965",
+      "attempt": "1",
+      "revision": "be1da8b4c7c54ccfb8285a96a4b8d702aec52741"
+    },
+    "receiptSha256": "ba1475890fdee71c5a4a16b3461e3f7e03ae62bda6d6a20fb3175d75eb494edb"
+  },
+  "encyclopedia": {
+    "bindingReleaseSha": "22867cbcfaee27b2e8917b6bf880e44827f67b60",
+    "expectedIndexDigest": "bf2c72cb7a260ef093c0a43c2b0dad9c4c9094a4d6dc3811dd0d7f7626b0d72b"
+  }
+}
