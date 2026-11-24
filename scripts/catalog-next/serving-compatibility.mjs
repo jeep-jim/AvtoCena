@@ -55,7 +55,7 @@ export async function verifyServingCompatibility({runtimeRoot, servingPlan, pric
   const changed = String(git(['diff', '--name-only', '-z', '--no-renames', pricingPlan.runtimeSha, servingPlan.runtimeSha]))
     .split('\0').filter(Boolean).sort();
   need(JSON.stringify(changed) === JSON.stringify([...files].sort()), 'changed_files');
-  const difference = git(['diff', '--binary', '--no-ext-diff', '--no-renames', pricingPlan.runtimeSha, servingPlan.runtimeSha]);
+  const difference = git(['diff', '--binary', '--full-index', '--no-ext-diff', '--no-renames', pricingPlan.runtimeSha, servingPlan.runtimeSha]);
   need(hash(difference) === servingPlan.pricingToServingDiffSha256, 'changed_bytes');
   git(['diff', '--quiet', '--no-ext-diff', pricingPlan.runtimeSha, servingPlan.runtimeSha, '--', ...CHINA_PROTECTED_PRICING_PATHS]);
   const typeOnlyChecks = [];

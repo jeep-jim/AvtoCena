@@ -82,7 +82,7 @@ export async function verifyChinaImageRuntime({runtimeRoot, plan, execute = exec
   const changed = String(await git(['diff', '--name-only', '-z', '--no-renames',
     plan.retainedRuntime, plan.runtimeSha])).split('\0').filter(Boolean).sort();
   need(JSON.stringify(changed) === JSON.stringify([...plan.runtimeFiles].sort()), 'runtime_scope');
-  const difference = await git(['diff', '--binary', '--no-ext-diff', '--no-renames',
+  const difference = await git(['diff', '--binary', '--full-index', '--no-ext-diff', '--no-renames',
     plan.retainedRuntime, plan.runtimeSha]);
   need(hash(difference) === plan.runtimeDiffSha256, 'runtime_diff');
   await git(['diff', '--quiet', '--no-ext-diff', plan.retainedRuntime, plan.runtimeSha, '--', ...protectedPaths]);

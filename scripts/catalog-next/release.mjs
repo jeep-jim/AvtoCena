@@ -77,7 +77,7 @@ try {
   const reuse = resolveChinaReleaseReuse(release, plan);
   const git = args => execFileSync('git', args, {cwd: runtimeRoot, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'], maxBuffer: 32 * 1024 ** 2});
   need(git(['rev-parse', 'HEAD']).trim() === plan.runtimeSha && git(['rev-parse', 'HEAD^{tree}']).trim() === plan.runtimeTree &&
-    hash(git(['diff', '--binary', '--no-ext-diff', '--no-renames', plan.retainedRuntime, plan.runtimeSha])) === plan.runtimeDiffSha256, 'exact_runtime');
+    hash(git(['diff', '--binary', '--full-index', '--no-ext-diff', '--no-renames', plan.retainedRuntime, plan.runtimeSha])) === plan.runtimeDiffSha256, 'exact_runtime');
   git(['diff', '--quiet', 'HEAD', '--']);
   need(JSON.stringify(git(['diff', '--name-only', '--no-renames', plan.retainedRuntime, plan.runtimeSha]).trim().split('\n').sort()) ===
     JSON.stringify([...plan.runtimeFiles].sort()), 'runtime_scope');

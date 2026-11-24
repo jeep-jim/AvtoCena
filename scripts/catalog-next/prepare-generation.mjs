@@ -98,7 +98,7 @@ function runtimeProof(runtimeRoot, plan) {
   git(['merge-base', '--is-ancestor', plan.retainedRuntime, plan.runtimeSha]);
   const changed = git(['diff', '--name-only', '--no-renames', plan.retainedRuntime, plan.runtimeSha]).trim().split('\n').filter(Boolean).sort();
   need(Array.isArray(plan.runtimeFiles) && JSON.stringify(changed) === JSON.stringify([...plan.runtimeFiles].sort()), 'runtime_change_scope');
-  need(hash(git(['diff', '--binary', '--no-ext-diff', '--no-renames', plan.retainedRuntime, plan.runtimeSha])) === plan.runtimeDiffSha256, 'runtime_diff');
+  need(hash(git(['diff', '--binary', '--full-index', '--no-ext-diff', '--no-renames', plan.retainedRuntime, plan.runtimeSha])) === plan.runtimeDiffSha256, 'runtime_diff');
   // The new reader/FX context may change, but source formula/configuration and
   // encyclopedia/admin content must remain exactly the accepted runtime's.
   git(['diff', '--quiet', plan.retainedRuntime, plan.runtimeSha, '--', 'packages/engine',

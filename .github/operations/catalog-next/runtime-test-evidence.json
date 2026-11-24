@@ -184,8 +184,8 @@
   },
   "controllerContracts": {
     "command": "node --import tsx --test tests/catalog-next-*.test.mjs tests/release-speed-guard-contract.test.mjs",
-    "tests": 449,
-    "passed": 449,
+    "tests": 453,
+    "passed": 453,
     "failed": 0,
     "skipped": 0,
     "execution": "local",
@@ -350,5 +350,35 @@
     "dealerReadReusedWithinRequest": true,
     "optionalPhaseTimingLimitSeconds": 1800,
     "actualPublicSpeedNotYetVerified": true
+  },
+  "canonicalSourceDiff": {
+    "option": "--full-index",
+    "guards": [
+      "serving-compatibility.mjs",
+      "build-release-image.mjs",
+      "release.mjs",
+      "prepare-generation.mjs"
+    ],
+    "configurationsVerified": [
+      "core.abbrev=7",
+      "core.abbrev=40"
+    ],
+    "newActualGitTests": 4,
+    "targetedTests": 50,
+    "passed": 50,
+    "independentReviewPassed": true,
+    "abbreviatedDigestRejected": true,
+    "changedCommittedBytesRejected": true,
+    "runtimeAndPricingTreesUnchanged": true,
+    "sealedGenerationReceiptsAndManifestsUnchanged": true,
+    "precedingCi": {
+      "headSha": "de109d26ce8ee5a50604e99e40c51d92d7ce781e",
+      "ciRun": "https://github.com/jeep-jim/AvtoCena/actions/runs/45486833011",
+      "ciPassed": true,
+      "browserRun": "https://github.com/jeep-jim/AvtoCena/actions/runs/45486832326",
+      "browserReached": false,
+      "error": "china_serving_changed_bytes"
+    },
+    "finalControllerCiPending": true
   }
 }
