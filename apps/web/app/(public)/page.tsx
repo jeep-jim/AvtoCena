@@ -69,20 +69,26 @@ export default async function HomePage({ searchParams }: { searchParams?: Promis
   const fromQuery = cleanCity(first(params.city));
   const fromCookie = decodeCity(cookieStore.get("avtocena_city")?.value || "");
   const dealer=timing.measure("dealer",()=>readShowcase("dealer_topavto")).catch(error=>{console.error("home_dealer_failed",error);return null;});
-  const [catalog, green] = await Promise.all([
-    timing.measure("snapshot",()=>readHomeCatalogSnapshot(10)).then(value=>{timing.setGeneration(value.generationId);return timing.measure("counts",()=>withAjesCount(value));}).catch((error) => {
-      console.error("home_initial_catalog_failed", error);
-      return { items: [], marketCounts: {}, total: 0, countIncomplete:true, marketCountInfo:{} };
-    }),
-    timing.measure("green",()=>readGreenCorner()).catch(() => null),
-  ]);
-  const savedGreenItems=(green?.items || []).slice(0,10).map(publicGreenOffer);
+  const snapshotPromise=timing.measure("snapshot",()=>readHomeCatalogSnapshot(10)).then(value=>{
+    timing.setGeneration(value.generationId);return value;
+  });
+  let catalogFailed=false;
+  const catalogPromise=snapshotPromise.then(value=>timing.measure("counts",()=>withAjesCount(value))).catch((error) => {
+    console.error("home_initial_catalog_failed", error);
+    catalogFailed=true;
+    return { items: [], marketCounts: {}, total: 0, countIncomplete:true, marketCountInfo:{} };
+  });
+  const greenPromise=timing.measure("green",()=>readGreenCorner()).catch(() => null);
   let pricingIncomplete=false;
-  const [greenItems, pricedItems] = await Promise.all([
-    timing.measure("greenPricing",()=>applyActiveBusinessPricingBatch(savedGreenItems)).catch(()=>{
+  const greenPricingPromise=greenPromise.then(green=>{
+    const savedGreenItems=(green?.items || []).slice(0,10).map(publicGreenOffer);
+    return timing.measure("greenPricing",()=>applyActiveBusinessPricingBatch(savedGreenItems)).catch(()=>{
       console.error("home_green_pricing_unavailable");pricingIncomplete=true;
       return savedGreenItems;
-    }),
+    });
+  });
+  // AJ counts preserve the snapshot's items, so pricing need not wait for them.
+  const catalogPricingPromise=snapshotPromise.then(catalog=>
     timing.measure("catalogPricing",async()=>{
       const allowed=catalog.items.filter(item=>!(item as {preparedChinaSelection?:unknown}).preparedChinaSelection);
       if(allowed.length===catalog.items.length)return applyActiveBusinessPricingBatch(catalog.items);
@@ -95,7 +101,14 @@ export default async function HomePage({ searchParams }: { searchParams?: Promis
       // Preserve the last audited quote if settings storage is temporarily down.
       return catalog.items;
     }),
+    // A failed read must not start counts or pricing on an invented snapshot.
+    ()=>[],
+  );
+  const [catalog, green, greenItems, pricedSnapshotItems] = await Promise.all([
+    catalogPromise, greenPromise, greenPricingPromise, catalogPricingPromise,
   ]);
+  // Keep the existing empty-catalog fallback if counts unexpectedly reject.
+  const pricedItems=catalogFailed?catalog.items:pricedSnapshotItems;
   return <>
     <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(WEBSITE_SCHEMA)}}/>
     <DealerCitySync/>

@@ -3,7 +3,10 @@ import { randomUUID } from "node:crypto";
 
 type HomePhase = "dealer" | "snapshot" | "counts" | "green" | "greenPricing" | "catalogPricing" | "dealerRail" | "japanRail" | "snapshotContext" | "snapshotBody" | "snapshotPrepared" | "snapshotManifest" | "snapshotOverview" | "snapshotProjection" | `snapshotEditorial:${CatalogMarket}`;
 export function createHomePhaseTiming() {
-  const enabled = process.env.CATALOG_HOME_PHASE_TIMING === "1";
+  const uptimeLimit = process.env.CATALOG_HOME_PHASE_TIMING_MAX_UPTIME_SECONDS;
+  const maxUptimeSeconds = Number(uptimeLimit);
+  const enabled = process.env.CATALOG_HOME_PHASE_TIMING === "1" &&
+    (uptimeLimit === undefined || (Number.isFinite(maxUptimeSeconds) && maxUptimeSeconds > 0 && process.uptime() < maxUptimeSeconds));
   const trace = enabled ? randomUUID() : "";
   let generation: string | undefined;
   const day = () => new Date(Date.now() + 7 * 3600000).toISOString().slice(0, 10);
