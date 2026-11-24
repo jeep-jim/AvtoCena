@@ -37,6 +37,18 @@ RESOURCES = BASE / 'aj-resources'
 ROLLBACK = BASE / 'aj-rollback'
 RESOURCE_TARGET = '/run/avtocena-node-resources'
 RESOURCE_NAMES = {'home-bootstrap.mjs', 'run-node-with-resources.mjs', 'lib/node-resource-memory.mjs', 'lib/node-resource-memory-startup.mjs'}
+HTTP_PROBES = {
+    '/api/catalog/korea-report?id=ajes-korea-retired': 'retired-report',
+    '/api/catalog/search?market=china&source=ajes&pageSize=24': 'china-ajes',
+    '/api/catalog/search?market=china&source=existing&pageSize=24': 'china-existing',
+    '/api/catalog/search?market=korea&source=ajes&pageSize=24': 'korea-ajes',
+    '/api/catalog/search?market=korea&source=existing&pageSize=24': 'korea-existing',
+    '/api/catalog/search?market=japan&source=ajes': 'japan-boundary',
+    '/api/crm/ajes': 'crm-ajes',
+    '/api/crm/ajes/markets/china': 'crm-china',
+    '/api/crm/ajes/markets/korea': 'crm-korea',
+    '/api/health': 'health',
+}
 
 
 def private_execute(args, **options):
@@ -56,16 +68,29 @@ def private_execute(args, **options):
 
 def public_json(target, path):
     need(target in ('candidate', 'retained', 'public') and path.startswith('/'), 'aj_http_scope')
-    connection = (native.http.client.HTTPSConnection('avtocena.com', timeout=90, context=native.ssl.create_default_context())
-                  if target == 'public' else native.http.client.HTTPConnection('127.0.0.1', 3003 if target == 'candidate' else 3002, timeout=90))
+    need(path in HTTP_PROBES, 'aj_http_probe_scope')
+    probe, status = HTTP_PROBES[path], None
+    def failed(category):
+        code = str(status) if type(status) is int and 100 <= status <= 599 else 'no_status'
+        return native.HostError('home_host_aj_http_' + probe + '_' + category + '_' + code)
     try:
-        connection.request('GET', path, headers={'Host': 'avtocena.com', 'Accept': 'application/json', 'Connection': 'close'})
-        response = connection.getresponse()
-        raw = response.read(20 * 1024 * 1024 + 1)
-        need(len(raw) <= 20 * 1024 * 1024, 'aj_http_bound')
-        return response.status, json.loads(raw)
-    finally:
-        connection.close()
+        connection = (native.http.client.HTTPSConnection('avtocena.com', timeout=90, context=native.ssl.create_default_context())
+                      if target == 'public' else native.http.client.HTTPConnection('127.0.0.1', 3003 if target == 'candidate' else 3002, timeout=90))
+        try:
+            connection.request('GET', path, headers={'Host': 'avtocena.com', 'Accept': 'application/json', 'Connection': 'close'})
+            response = connection.getresponse()
+            status = response.status
+            raw = response.read(20 * 1024 * 1024 + 1)
+            need(len(raw) <= 20 * 1024 * 1024, 'aj_http_bound')
+            return status, json.loads(raw)
+        finally:
+            connection.close()
+    except TimeoutError:
+        raise failed('timeout') from None
+    except (OSError, native.http.client.HTTPException):
+        raise failed('transport') from None
+    except (json.JSONDecodeError, UnicodeDecodeError):
+        raise failed('json') from None
 
 
 class Local(native.LocalHost):
@@ -369,6 +394,32 @@ def check_aj_contract(target, guard):
     return {'release': SOURCE, 'target': target, 'passed': True, 'retiredReport': True, 'nonJapanAjes': False, 'anonymousCrmRejected': True}
 
 
+def server_failure_code(rows, routes, phase):
+    # Only names from this table and a 1-based index into the frozen baseline
+    # may leave the host. Never copy paths, exception text or extra JSON fields.
+    kinds = {'TimeoutError': 'timeout', 'HTTPError': 'http', 'URLError': 'transport',
+             'OSError': 'transport', 'ConnectionError': 'transport', 'ConnectionResetError': 'transport',
+             'ConnectionRefusedError': 'transport', 'RemoteDisconnected': 'transport',
+             'IncompleteRead': 'transport', 'BadStatusLine': 'transport', 'SSLError': 'transport',
+             'SSLCertVerificationError': 'transport', 'JSONDecodeError': 'json',
+             'UnicodeDecodeError': 'json', 'AssertionError': 'assertion', 'ValueError': 'value'}
+    scope = phase if phase in ('private', 'public') else 'unknown'
+    prefix = 'aj_server_gate_failed_' + scope
+    failures = [row for row in rows if row.get('performanceRequest') == 'failed'
+                or ('speedBaseline' in row and row.get('blocking') is True and row.get('passed') is False)]
+    if not failures:
+        return prefix + '_generic'
+    row = failures[-1]
+    route = row.get('path')
+    if not isinstance(route, str) or route not in routes:
+        return prefix + '_generic'
+    if row.get('performanceRequest') == 'failed':
+        kind = kinds.get(row.get('errorType')) if isinstance(row.get('errorType'), str) else None
+    else:
+        kind = 'accepted_speed_regression' if row.get('speedBaseline') in ('warm', 'after_ttl', 'after_directory_ttl') else None
+    return prefix + '_route_' + str(routes.index(route) + 1) + '_' + kind if kind else prefix + '_generic'
+
+
 def full_server_gate(nonce, phase):
     for relative, digest in native.GATES.items():
         need(sha(regular(ROOT / relative)[0]) == digest, 'aj_gate_source')
@@ -381,13 +432,15 @@ def full_server_gate(nonce, phase):
     base = 'http://127.0.0.1:3003' if phase == 'private' else 'https://avtocena.com'
     result = private_execute(['/usr/bin/python3', '-I', '-B', str(ROOT / 'scripts/regcloud-performance-gate.py'), base, SOURCE],
                              env=env, stdin=subprocess.DEVNULL, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, timeout=1800)
-    need(result.returncode == 0, 'aj_server_gate_failed')
     rows = []
     for line in result.stdout.splitlines():
         try:
-            rows.append(json.loads(line))
+            row = json.loads(line)
+            if isinstance(row, dict):
+                rows.append(row)
         except ValueError:
             pass
+    need(result.returncode == 0, server_failure_code(rows, routes, phase))
     summaries = [row for row in rows if row.get('performanceGate') == 'summary']
     phases = [row for row in rows if row.get('performanceGate') in ('warm', 'after_ttl', 'after_directory_ttl')]
     need(len(summaries) == 1 and len(phases) == 51, 'aj_server_coverage')

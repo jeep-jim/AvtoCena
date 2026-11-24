@@ -14,6 +14,53 @@ SOURCE='b'*40
 
 
 class ReleaseHostTests(unittest.TestCase):
+    def test_each_fixed_http_probe_reports_timeout_without_changing_deadline_or_retrying(self):
+        self.assertEqual(set(host.HTTP_PROBES.values()),{'retired-report','china-ajes','china-existing',
+            'korea-ajes','korea-existing','japan-boundary','crm-ajes','crm-china','crm-korea','health'})
+        for path,probe in host.HTTP_PROBES.items():
+            with self.subTest(probe=probe):
+                connection=mock.Mock()
+                connection.request.side_effect=TimeoutError('PRIVATE_FIXTURE 192.0.2.1 /root/secret?password=PRIVATE_FIXTURE')
+                with mock.patch.object(host.native.http.client,'HTTPConnection',return_value=connection) as factory:
+                    with self.assertRaises(host.native.HostError) as caught:host.public_json('candidate',path)
+                self.assertEqual(str(caught.exception),'home_host_aj_http_'+probe+'_timeout_no_status')
+                factory.assert_called_once_with('127.0.0.1',3003,timeout=90)
+                connection.request.assert_called_once_with('GET',path,headers={
+                    'Host':'avtocena.com','Accept':'application/json','Connection':'close'})
+                connection.getresponse.assert_not_called();connection.close.assert_called_once_with()
+
+    def test_http_probe_failure_keeps_received_status_and_redacts_body_and_exception(self):
+        cases=[(TimeoutError('PRIVATE_FIXTURE'),'timeout',503),
+               (host.native.http.client.IncompleteRead(b'PRIVATE_FIXTURE'),'transport',502),
+               (b'PRIVATE_FIXTURE /root/secret?password=PRIVATE_FIXTURE','json',200),
+               (b'\xffPRIVATE_FIXTURE','json',403)]
+        for payload,kind,status in cases:
+            with self.subTest(kind=kind,status=status):
+                connection=mock.Mock();response=connection.getresponse.return_value;response.status=status
+                if isinstance(payload,Exception):response.read.side_effect=payload
+                else:response.read.return_value=payload
+                with mock.patch.object(host.native.http.client,'HTTPConnection',return_value=connection):
+                    with self.assertRaises(host.native.HostError) as caught:host.public_json('retained','/api/health')
+                self.assertEqual(str(caught.exception),'home_host_aj_http_health_'+kind+'_'+str(status))
+                self.assertNotIn('PRIVATE_FIXTURE',str(caught.exception))
+                response.read.assert_called_once_with(20*1024*1024+1)
+                connection.close.assert_called_once_with()
+
+    def test_http_probe_scope_and_successful_http_contract_are_unchanged(self):
+        with mock.patch.object(host.native.http.client,'HTTPConnection') as factory:
+            with self.assertRaisesRegex(host.native.HostError,'^home_host_aj_http_probe_scope$'):
+                host.public_json('candidate','/api/health?password=PRIVATE_FIXTURE')
+            factory.assert_not_called()
+        connection=mock.Mock();response=connection.getresponse.return_value
+        response.status=410;response.read.return_value=b'{"error":"source_retired"}'
+        context=object()
+        with mock.patch.object(host.native.ssl,'create_default_context',return_value=context),\
+             mock.patch.object(host.native.http.client,'HTTPSConnection',return_value=connection) as factory:
+            self.assertEqual(host.public_json('public','/api/catalog/korea-report?id=ajes-korea-retired'),
+                             (410,{'error':'source_retired'}))
+        factory.assert_called_once_with('avtocena.com',timeout=90,context=context)
+        connection.close.assert_called_once_with()
+
     def test_candidate_preserves_japan_access_and_runtime_mounts(self):
         original={'AVTOCENA_CALCULATION_VERSION':host.CALCULATION,'AVTOCENA_CHINA_REGCLOUD_RUNTIME':'1',
                   'AJES_API_PASSWORD':'fixture-only','YC_OBJECT_STORAGE_SECRET_ACCESS_KEY':'fixture-only',
@@ -126,6 +173,7 @@ class ReleaseHostTests(unittest.TestCase):
         summary={'performanceGate':'summary','marketScope':'','functionalPassed':True,'acceptedBaselineEnforced':True,
                  'samples':51,'routes':routes,'acceptedBaselineRoutes':routes}
         def execute(args,**kwargs):
+            self.assertEqual(kwargs['timeout'],1800)
             self.assertEqual(kwargs['env']['AVTOCENA_RELEASE_MARKETS'],'')
             self.assertEqual(kwargs['env']['AVTOCENA_SPEED_BASELINE_MODE'],'enforce')
             self.assertEqual(args[-1],SOURCE)
@@ -137,6 +185,46 @@ class ReleaseHostTests(unittest.TestCase):
             self.assertEqual(len(host.full_server_gate('a'*32,'private')['phases']),51)
             phases.pop()
             with self.assertRaises(host.native.HostError):host.full_server_gate('a'*32,'private')
+
+    def failed_server_output(self,rows,phase='private'):
+        output=b'PRIVATE_FIXTURE not JSON\n["PRIVATE_FIXTURE"]\n'+b'\n'.join(json.dumps(row).encode() for row in rows)
+        def execute(args,**kwargs):
+            self.assertEqual(kwargs['timeout'],1800)
+            self.assertEqual(kwargs['env']['AVTOCENA_RELEASE_MARKETS'],'')
+            self.assertEqual(kwargs['env']['AVTOCENA_SPEED_BASELINE_MODE'],'enforce')
+            self.assertEqual(kwargs['stderr'],subprocess.DEVNULL)
+            return subprocess.CompletedProcess(args,1,output)
+        with mock.patch.object(host,'private_execute',side_effect=execute) as process,\
+             mock.patch.object(host,'regular',side_effect=lambda path,**kwargs:(Path(path).read_bytes(),None)):
+            with self.assertRaises(host.native.HostError) as caught:host.full_server_gate('a'*32,phase)
+        process.assert_called_once()
+        self.assertNotIn('PRIVATE_FIXTURE',str(caught.exception))
+        return str(caught.exception)
+
+    def test_nonzero_server_gate_preserves_last_verified_request_failure(self):
+        baseline=json.loads((ROOT/'docs/operations/2026-11-11-accepted-speed-baseline.json').read_text())
+        routes=list(dict.fromkeys(row['path'] for row in baseline['samples']))
+        first={'performanceRequest':'failed','path':routes[0],'errorType':'HTTPError'}
+        last={'performanceRequest':'failed','path':routes[3],'errorType':'TimeoutError',
+              'message':'PRIVATE_FIXTURE /root/secret?password=PRIVATE_FIXTURE','body':'PRIVATE_FIXTURE'}
+        self.assertEqual(self.failed_server_output([first,last]),'home_host_aj_server_gate_failed_private_route_4_timeout')
+        last['errorType']='JSONDecodeError'
+        self.assertEqual(self.failed_server_output([first,last],'public'),'home_host_aj_server_gate_failed_public_route_4_json')
+        for field,value in [('path','/PRIVATE_FIXTURE?password=PRIVATE_FIXTURE'),('errorType','PRIVATE_FIXTURE'),('errorType',{})]:
+            with self.subTest(field=field,value=value):
+                bad=dict(last);bad[field]=value
+                self.assertEqual(self.failed_server_output([first,bad]),'home_host_aj_server_gate_failed_private_generic')
+
+    def test_only_blocking_failed_accepted_baseline_json_identifies_speed_regression(self):
+        baseline=json.loads((ROOT/'docs/operations/2026-11-11-accepted-speed-baseline.json').read_text())
+        route=baseline['samples'][0]['path']
+        row={'speedBaseline':'after_ttl','path':route,'blocking':True,'passed':False,'private':'PRIVATE_FIXTURE'}
+        self.assertEqual(self.failed_server_output([row],'public'),
+                         'home_host_aj_server_gate_failed_public_route_1_accepted_speed_regression')
+        for change in ({'blocking':False},{'passed':True},{'speedBaseline':'PRIVATE_FIXTURE'},{'path':'/PRIVATE_FIXTURE'}):
+            self.assertEqual(self.failed_server_output([{**row,**change}]),'home_host_aj_server_gate_failed_private_generic')
+        self.assertEqual(self.failed_server_output([{'performanceGate':'summary','functionalPassed':True}]),
+                         'home_host_aj_server_gate_failed_private_generic')
 
 
 if __name__=='__main__':unittest.main()
