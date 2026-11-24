@@ -1,0 +1,109 @@
+name: Catalog next — China
+
+on:
+  push:
+    branches: [main]
+    paths: ['.github/operations/catalog-next-china-20261124/start.json']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: catalog-next-china
+  cancel-in-progress: false
+
+jobs:
+  runtime-inventory:
+    if: github.repository_id == '1289722938' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment: regcloud-staging
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - name: Read current container identity, capacity and feed writer evidence
+        shell: bash
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+        run: |
+          set -euo pipefail
+          umask 077
+          key_file=$(mktemp)
+          trap 'rm -f "$key_file"' EXIT
+          printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
+          unset SSH_PRIVATE_KEY
+          ssh -i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts" root@151.248.113.177 'python3 -I -B -' < .github/operations/catalog-next-china-20261124/runtime-inventory.py > "$RUNNER_TEMP/china-runtime-inventory.json"
+      - name: Preserve sanitized runtime observations
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: catalog-next-china-runtime-inventory
+          path: ${{ runner.temp }}/china-runtime-inventory.json
+          if-no-files-found: error
+          retention-days: 30
+  inventory:
+    if: github.repository_id == '1289722938' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment: regcloud-staging
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24.22.1
+      - name: Validate the read-only invocation and serving identity
+        run: |
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import fs from 'node:fs/promises';
+          import path from 'node:path';
+          const marker = JSON.parse(await fs.readFile('.github/operations/catalog-next-china-20261124/start.json', 'utf8'));
+          assert.deepEqual(marker, {version:1, action:'inventory', market:'china', expectedServingRelease:'22867cbcfaee27b2e8917b6bf880e44827f67b60', expectedCalculationVersion:'4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90'});
+          assert(process.env.RUNNER_TEMP && process.env.GITHUB_ENV, 'china_inventory_runner_paths');
+          const response = await fetch('https://avtocena.com/api/health', {redirect:'error', cache:'no-store', signal:AbortSignal.timeout(30000)});
+          assert(response.ok, 'china_inventory_health_http');
+          const health = await response.json();
+          assert(health.ok === true && health.service === 'avtocena-web' && health.releaseSha === marker.expectedServingRelease && health.calculationVersion === marker.expectedCalculationVersion, 'china_inventory_serving_changed');
+          const values = {
+            CHINA_INVENTORY_REPORT_PATH:path.join(process.env.RUNNER_TEMP,'china-inventory-public.json'),
+            CHINA_INVENTORY_PRIVATE_LEDGER_PATH:path.join(process.env.RUNNER_TEMP,'china-inventory-private.jsonl'),
+            CHINA_INVENTORY_SERVING_RELEASE_SHA:health.releaseSha,
+            CHINA_INVENTORY_CALCULATION_VERSION:health.calculationVersion
+          };
+          await fs.appendFile(process.env.GITHUB_ENV, Object.entries(values).map(([key,value]) => `${key}=${value}\n`).join(''));
+          NODE
+      - name: Verify strict inventory boundaries offline
+        run: node --test .github/operations/catalog-next-china-20261124/tests/*.test.mjs
+      - name: Inspect saved China source and serving references
+        env:
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_REGION: us-east-1
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+        run: node .github/operations/catalog-next-china-20261124/inventory.mjs
+      - name: Confirm serving identity after the read-only inspection
+        run: |
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          const response = await fetch('https://avtocena.com/api/health', {redirect:'error', cache:'no-store', signal:AbortSignal.timeout(30000)});
+          assert(response.ok, 'china_inventory_final_health_http');
+          const health = await response.json();
+          assert(health.ok === true && health.releaseSha === process.env.CHINA_INVENTORY_SERVING_RELEASE_SHA && health.calculationVersion === process.env.CHINA_INVENTORY_CALCULATION_VERSION, 'china_inventory_serving_changed');
+          console.log('Read-only China inspection finished with the same serving identity.');
+          NODE
+      - name: Preserve the sanitized inventory report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: catalog-next-china-inventory
+          path: ${{ runner.temp }}/china-inventory-public.json
+          if-no-files-found: error
+          retention-days: 30
