@@ -39,7 +39,7 @@ jobs:
           set -euo pipefail
           node .github/operations/ajes-japan-only-20261124/release-contract.mjs --check-invocation
           node scripts/verify-frozen-speed-baselines.mjs
-          node --test tests/release-speed-guard-contract.test.mjs tests/ajes-japan-only-release.test.mjs tests/ajes-japan-only-controls-migration.test.mjs
+          node --test tests/release-speed-guard-contract.test.mjs tests/ajes-japan-only-release.test.mjs tests/ajes-japan-only-controls-migration.test.mjs tests/ajes-japan-only-image.test.mjs
           python3 -I -B tests/ajes-japan-only-release-host.test.py
           node --input-type=module <<'JS'
           import fs from 'node:fs';
@@ -82,8 +82,18 @@ jobs:
           path: ${{ runner.temp }}/aj-admin-fixture/controls-*.png
           if-no-files-found: error
           retention-days: 7
+      - name: Match the observed host Docker image store on this disposable runner
+        id: aj_docker
+        uses: docker/setup-docker-action@7ec28a010822b4626af4874f9448a4b05ac6f3e5 # v5.6.0
+        with:
+          version: v29.1.3
+          runtime-basedir: ${{ runner.temp }}/aj-docker
+          daemon-config: |
+            {"features":{"containerd-snapshotter":true}}
       - name: Build exact application privately on this runner
         working-directory: controller
+        env:
+          AJ_BUILD_DOCKER_HOST: ${{ steps.aj_docker.outputs.sock }}
         run: node scripts/run-node-with-resources.mjs .github/operations/ajes-japan-only-20261124/release.mjs --build "$GITHUB_WORKSPACE/application"
       - name: Install controller dependencies
         working-directory: controller

@@ -37,6 +37,41 @@ class ReleaseHostTests(unittest.TestCase):
         for method,route in [('POST','/containers/avtocena-production/stop?t=10'),('DELETE','/images/anything'),('POST','/containers/avtocena-china-grid-dark-22867cbcfaee/update')]:
             with self.assertRaises(host.native.HostError):local.docker(method,route)
 
+    def test_docker_http_failure_identifies_operation_without_body_or_identity(self):
+        identity='c'*64
+        plan={'nonce':'a'*32,'imageId':'sha256:'+'b'*64}
+        private=b'{"message":"PRIVATE_FIXTURE /root/private/file AJES_API_PASSWORD=PRIVATE_FIXTURE"}'
+        cases=[('GET','/images/'+plan['imageId']+'/json',404,'image_inspect'),
+               ('GET','/containers/json?all=1',503,'container_list'),
+               ('GET','/info',500,'daemon_info'),
+               ('GET','/containers/'+identity+'/json',404,'container_inspect'),
+               ('GET','/containers/'+identity+'/logs?stdout=1&stderr=1&tail=100',400,'container_logs'),
+               ('POST','/containers/'+identity+'/start',500,'container_start'),
+               ('POST','/containers/'+identity+'/stop?t=10',304,'container_stop'),
+               ('POST','/containers/'+identity+'/wait?condition=not-running',409,'container_wait'),
+               ('DELETE','/containers/'+identity+'?v=false&force=false',409,'container_delete')]
+        for method,route,status,category in cases:
+            with self.subTest(method=method,category=category,status=status):
+                local=host.Local(plan,transport=lambda *args:(status,private))
+                local.owned.add(identity)
+                with self.assertRaises(host.native.HostError) as caught:local.docker(method,route)
+                self.assertEqual(str(caught.exception),'home_host_aj_docker_http_'+method.lower()+'_'+category+'_'+str(status))
+                for forbidden in ('PRIVATE_FIXTURE','/root/',identity,plan['imageId'],'AJES_API_PASSWORD'):
+                    self.assertNotIn(forbidden,str(caught.exception))
+        local=host.Local(plan,transport=lambda *args:(400,private))
+        with self.assertRaisesRegex(host.native.HostError,'^home_host_aj_docker_http_post_container_create_400$'):
+            local.create({'Image':plan['imageId'],'Env':['AJES_API_PASSWORD=PRIVATE_FIXTURE']})
+
+    def test_docker_diagnostics_preserve_exact_accepted_statuses(self):
+        plan={'nonce':'a'*32,'imageId':'sha256:'+'b'*64}
+        for status in (200,201,204):
+            raw=b'' if status==204 else b'{"verified":true}'
+            local=host.Local(plan,transport=lambda *args:(status,raw))
+            self.assertEqual(local.docker('GET','/info'),None if status==204 else {'verified':True})
+        local=host.Local(plan,transport=lambda *args:('PRIVATE_FIXTURE',b'PRIVATE_FIXTURE'))
+        with self.assertRaisesRegex(host.native.HostError,'^home_host_aj_docker_http_get_daemon_info_invalid$'):
+            local.docker('GET','/info')
+
     def test_stopped_container_configured_port_is_not_mistaken_for_free(self):
         identity='c'*64
         def transport(method,route,body):

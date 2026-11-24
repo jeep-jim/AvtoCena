@@ -16,8 +16,16 @@ const BUNDLE = Object.freeze([
 ]);
 const METHODS = new Set(['init','image','private-index','resources','fresh','start','identity','aj-private','aj-public',
   'server-private','server-public','switch','public-identity','browser','accept','rollback','cleanup','close']);
+export const isAjHostPhase = value => METHODS.has(value);
 const need = (value, code) => { if (!value) throw Error('aj_ssh_' + code); };
 const quote = value => "'" + value.replaceAll("'", "'\\''") + "'";
+function phaseError(error, method, lastCompletedPhase) {
+  const safe = Error(/^(?:aj_ssh_|home_host_|inventory_)[a-z0-9_:-]+$/.test(error?.message || '')
+    ? error.message : 'aj_ssh_request_failed');
+  safe.failedPhase = isAjHostPhase(method) ? method : null;
+  safe.lastCompletedPhase = isAjHostPhase(lastCompletedPhase) ? lastCompletedPhase : null;
+  return safe;
+}
 
 export async function remoteProgram(root, nonce) {
   need(/^[a-f0-9]{32}$/.test(nonce), 'nonce');
@@ -41,9 +49,10 @@ export function remoteCommand(program) {
 }
 
 export class AjSshSession {
-  constructor({process:child, nonce, authority, browser}) {
+  constructor({process:child, nonce, authority, browser, onStage=()=>{}}) {
     this.child = child; this.nonce = nonce; this.authority = authority; this.browser = browser;
     this.sequence = 0; this.pending = new Map(); this.writes = Promise.resolve(); this.buffer = ''; this.closed = false;
+    this.lastCompletedPhase = null; this.onStage = onStage;
     this.ready = new Promise((resolve,reject) => {this.readyResolve=resolve;this.readyReject=reject;});
     this.ready.catch(()=>{});
     this.exited = new Promise(resolve => child.once('close', (code,signal) => {
@@ -63,7 +72,13 @@ export class AjSshSession {
     });
   }
 
-  fail(error) { this.readyReject(error); for(const row of this.pending.values()){row.reject(error);row.readyReject(error);}this.pending.clear(); }
+  fail(error) {
+    this.readyReject(error);
+    for(const row of this.pending.values()){
+      const safe=phaseError(error,row.method,this.lastCompletedPhase);row.reject(safe);row.readyReject(safe);
+    }
+    this.pending.clear();
+  }
   abort(error) { this.fail(error);this.child.stdin.destroy();this.child.kill('SIGTERM'); }
 
   send(value) {
@@ -93,9 +108,13 @@ export class AjSshSession {
     const row=this.pending.get(value.id);need(row,'reply_identity');
     if(value.kind==='upload-ready'){row.readyResolve();return;}
     this.pending.delete(value.id);
-    if(value.kind==='result'){row.resolve(value.value);row.readyResolve(false);}
+    if(value.kind==='result'){
+      this.lastCompletedPhase=row.method;this.onStage(row.method);
+      row.resolve(value.value);row.readyResolve(false);
+    }
     else if(value.kind==='error'){
-      const error=Error(/^(?:home_host_|inventory_)[a-z0-9_:-]+$/.test(value.code||'')?value.code:'aj_ssh_remote_failed');
+      const error=phaseError(Error(/^(?:home_host_|inventory_)[a-z0-9_:-]+$/.test(value.code||'')?value.code:'aj_ssh_remote_failed'),
+        row.method,this.lastCompletedPhase);
       row.reject(error);row.readyReject(error);
     }else throw Error('aj_ssh_reply_kind');
   }
@@ -106,8 +125,10 @@ export class AjSshSession {
     const result=new Promise((yes,no)=>{resolve=yes;reject=no;});
     result.catch(()=>{});
     const ready=new Promise((yes,no)=>{readyResolve=yes;readyReject=no;});ready.catch(()=>{});
-    this.pending.set(id,{resolve,reject,readyResolve,readyReject});
-    this.send({kind:'call',id,method,params}).catch(error=>{reject(error);readyReject(error);});
+    this.pending.set(id,{method,resolve,reject,readyResolve,readyReject});
+    this.send({kind:'call',id,method,params}).catch(error=>{
+      const safe=phaseError(error,method,this.lastCompletedPhase);reject(safe);readyReject(safe);
+    });
     return {id,result,ready};
   }
   call(method,params={}) { return this.request(method,params).result; }
@@ -145,7 +166,8 @@ export async function openAjSshSession({root, directory, nonce, authority, brows
     '-o','UpdateHostKeys=no','-o','ConnectTimeout=10','-o','ClearAllForwardings=yes',
     '-o','ServerAliveInterval=20','-o','ServerAliveCountMax=3','root@151.248.113.177',remoteCommand(program)];
   const child=spawnImpl('/usr/bin/ssh',args,{env:{PATH:'/usr/bin:/bin',LANG:'C.UTF-8'},stdio:['pipe','pipe','pipe']});
-  const session=new AjSshSession({process:child,nonce,authority,browser});
+  const session=new AjSshSession({process:child,nonce,authority,browser,
+    onStage:phase=>console.log(JSON.stringify({stage:'aj_host_completed',phase}))});
   try {if(!child.stdin.write(program))await once(child.stdin,'drain');await session.ready;return session;}
   catch(error){session.abort(error);throw error;}
   finally{await fs.rm(key,{force:true});}

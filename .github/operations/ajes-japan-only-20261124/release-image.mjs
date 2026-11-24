@@ -7,6 +7,13 @@ import {PROFILE,ROOT,need,sha256,verifySource,verifyGates,checkInvocation} from 
 import {RESOURCE_FILES} from '../home-ui-adapter-20261123/build-image.mjs';
 export {RESOURCE_FILES};
 
+export function verifiedBuilder(info){
+  need(info?.ServerVersion==='29.1.3'&&info?.Driver==='overlayfs'
+    &&Array.isArray(info?.DriverStatus)
+    &&info.DriverStatus.some(row=>Array.isArray(row)&&row[0]==='driver-type'&&row[1]==='io.containerd.snapshotter.v1'),'image_builder_store');
+  return {version:info.ServerVersion,driver:info.Driver,driverType:'io.containerd.snapshotter.v1'};
+}
+
 export async function fileDigest(filename){
   const hash=createHash('sha256');for await(const chunk of createReadStream(filename))hash.update(chunk);return hash.digest('hex');
 }
@@ -22,7 +29,7 @@ export async function execute(command,args,{cwd,env,log=false,maximum=8*1024*102
   });
 }
 
-export function checkedImage({inspection,probeLog,sourceProof,archiveSha256,archiveBytes,resourceFiles,controllerSha}){
+export function checkedImage({inspection,probeLog,sourceProof,archiveSha256,archiveBytes,resourceFiles,controllerSha,builder,roundTripImageId}){
   need(sourceProof.source===PROFILE.source&&sourceProof.tree===PROFILE.tree&&sourceProof.codeDiffSha256===PROFILE.codeDiffSha256,'image_source');
   const c=inspection.Config;
   need(/^sha256:[a-f0-9]{64}$/.test(inspection.Id)&&inspection.Os==='linux'&&inspection.Architecture==='amd64'
@@ -31,6 +38,8 @@ export function checkedImage({inspection,probeLog,sourceProof,archiveSha256,arch
     &&c.Labels?.['org.opencontainers.image.revision']===PROFILE.source
     &&c.Labels?.['org.opencontainers.image.source']==='https://github.com/jeep-jim/AvtoCena'
     &&c.Labels?.['avtocena.application']==='web'&&Object.keys(c.Labels).length===3,'image_config');
+  need(builder?.version==='29.1.3'&&builder?.driver==='overlayfs'&&builder?.driverType==='io.containerd.snapshotter.v1'
+    &&inspection.Descriptor?.digest===inspection.Id&&roundTripImageId===inspection.Id,'image_portable_identity');
   const rows=String(probeLog).split('\n').flatMap(line=>{try{return [JSON.parse(line)];}catch{return [];}});
   const probes=rows.filter(row=>row.stage==='home_image_probe'),memories=rows.filter(row=>row.stage==='node_resource_memory');
   need(probes.length===1&&memories.length===1,'image_probe_records');
@@ -46,6 +55,7 @@ export function checkedImage({inspection,probeLog,sourceProof,archiveSha256,arch
   return {version:1,status:'verified_aj_japan_image',activationAuthorized:false,source:PROFILE.source,tree:PROFILE.tree,
     sourceCalculationVersion:PROFILE.sourceCalculationVersion,servingCalculationVersion:PROFILE.servingCalculationVersion,
     imageId:inspection.Id,imageArchiveSha256:archiveSha256,imageArchiveBytes:archiveBytes,imageUnpackedBytes:inspection.Size,
+    builder,archiveRoundTripVerified:true,
     nodeVersion:p.nodeVersion,modelAssetSha256:p.modelAssetSha256,privateIndexInImage:false,resourceProbePassed:true,
     requestedHeapBytes:m.requestedHeapBytes,actualHeapBytes:m.actualHeapBytes,controllerSha,resourceFiles,sourceProof};
 }
@@ -70,9 +80,18 @@ export async function buildImage(sourceRoot,directory){
     await fs.writeFile(path.join(resources,name),raw,{mode:0o400,flag:'wx'});resourceFiles[name]=sha256(raw);
   }
   const tag='avtocena-aj-japan:'+PROFILE.source;
-  const docker=args=>execute('/usr/bin/docker',['--host=unix:///var/run/docker.sock',...args],{env});
+  // The official setup action owns an isolated daemon under this job's temp
+  // directory. Never silently build against the runner's different image store.
+  const host=process.env.AJ_BUILD_DOCKER_HOST;
+  need(typeof host==='string'&&host.startsWith('unix:///'),'image_builder_socket');
+  const socketPath=host.slice('unix://'.length),socketRoot=path.join(await fs.realpath(process.env.RUNNER_TEMP),'aj-docker')+path.sep;
+  need(socketPath.startsWith(socketRoot)&&await fs.realpath(socketPath)===socketPath
+    &&(await fs.stat(socketPath)).isSocket(),'image_builder_socket');
+  env.DOCKER_HOST=host;
+  const docker=args=>execute('/usr/bin/docker',['--host='+host,...args],{env});
+  const builder=verifiedBuilder(JSON.parse(await docker(['info','--format','{{json .}}'])));
   checkInvocation();
-  await execute('/usr/bin/docker',['--host=unix:///var/run/docker.sock','build','--pull',
+  await execute('/usr/bin/docker',['--host='+host,'build','--pull','--platform=linux/amd64','--provenance=false',
     '--label','org.opencontainers.image.revision='+PROFILE.source,
     '--label','org.opencontainers.image.source=https://github.com/jeep-jim/AvtoCena',
     '--label','avtocena.application=web','--tag',tag,context],{env,log:true});
@@ -82,9 +101,16 @@ export async function buildImage(sourceRoot,directory){
     '--env','AVTOCENA_HOME_INHERITED_NODE_OPTIONS=--trace-warnings --max-old-space-size=6144',
     '--mount','type=bind,src='+resources+',dst=/run/avtocena-node-resources,readonly',
     inspection.Id,'/run/avtocena-node-resources/home-bootstrap.mjs','image-probe']);
-  const image=path.join(directory,'image.tar');await docker(['image','save','--output',image,inspection.Id]);
+  const image=path.join(directory,'image.tar');await docker(['image','save','--output',image,tag]);
+  need(JSON.parse(await docker(['image','inspect','--format','{{json .}}',tag])).Id===inspection.Id,'image_export_changed');
+  // Prove that the archive restores the same content-addressed identity before
+  // any server contact. Remove only this fresh image on the disposable daemon.
+  await docker(['image','rm',inspection.Id]);
+  await docker(['image','load','--input',image]);
+  const restored=JSON.parse(await docker(['image','inspect','--format','{{json .}}',inspection.Id]));
+  need(restored.Id===inspection.Id&&restored.Descriptor?.digest===inspection.Id,'image_round_trip');
   const receipt=checkedImage({inspection,probeLog,sourceProof:proof,archiveSha256:await fileDigest(image),
-    archiveBytes:(await fs.stat(image)).size,resourceFiles,controllerSha:invocation.sourceSha});
+    archiveBytes:(await fs.stat(image)).size,resourceFiles,controllerSha:invocation.sourceSha,builder,roundTripImageId:restored.Id});
   await fs.writeFile(path.join(directory,'image-receipt.json'),JSON.stringify(receipt,null,2)+'\n',{mode:0o600,flag:'wx'});
   console.log(JSON.stringify({stage:'aj_image_ready',source:PROFILE.source,imageId:receipt.imageId,
     imageArchiveSha256:receipt.imageArchiveSha256,hostContacted:false,privateDataPublished:false}));
