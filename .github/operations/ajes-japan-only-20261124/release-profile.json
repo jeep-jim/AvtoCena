@@ -7,8 +7,8 @@
   "servingCalculationVersion": "4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90",
   "privateIndexDigest": "bf2c72cb7a260ef093c0a43c2b0dad9c4c9094a4d6dc3811dd0d7f7626b0d72b",
   "privateIndexParent": "83ff17075e9188dcf227c8752dc064248d5f42e0",
-  "source": "53af59971f25c7cda6358ee18242ee5e5232eede",
-  "tree": "3c9f978c3765214d907856b3a9a38f9ef8380270",
+  "source": "fe289d7e3b6c4c4f1aaff7d5e56b329802d5cd7b",
+  "tree": "4a03642cde3f7c1a7ebb5f887a9b981d8a8e74be",
   "sourceCalculationVersion": "1daeb0bc382b70a7c811aaf405b589fd1b269fb637b150962f030efd67b0597f",
   "codePaths": [
     "apps/web/app/(crm)/api/crm/ajes/markets/[market]/route.ts",
@@ -70,7 +70,7 @@
     "tests/public-page-recovery.test.ts",
     "tests/related-offer-selection.test.ts"
   ],
-  "codeDiffSha256": "454904deb17fdc82ebfb863bd762b9abd9b24d5ca7bd0df6d355bee7db8d3fc4",
+  "codeDiffSha256": "88341d61ef41655ae6a7ba5b3454c4fc562bd5528e87863cab9534b82b9b4b5d",
   "inventory": {
     "activationAuthorized": false,
     "candidatePort": {

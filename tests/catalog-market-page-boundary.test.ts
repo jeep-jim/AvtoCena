@@ -38,8 +38,12 @@ test('last China page beyond 10000 reaches search; invalid offsets never do',asy
   }
   for(const source of ['ajes','existing']){
    const bookmarked=await m.exports.GET(new Request(`https://fixture.test/api/catalog/search?market=china&source=${source}&marketPage=1&page=1&powerTo=160`));
+   if(source==='ajes'){
+    assert.equal(bookmarked.status,410);assert.deepEqual(await bookmarked.json(),{ok:false,error:'source_retired'});
+    assert.equal(calls.length,3,'a retired source must not read the ordinary catalog');continue;
+   }
    assert.equal(bookmarked.status,200);assert.equal((await bookmarked.json()).items[0].id,'last-car');assert.equal(calls.at(-1).powerTo,160);
   }
-  assert.equal(calls.length,5);
+  assert.equal(calls.length,4);
  }finally{delete (globalThis as any).__marketBoundary;}
 });
