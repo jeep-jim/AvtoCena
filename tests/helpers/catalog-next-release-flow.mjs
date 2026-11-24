@@ -10,7 +10,7 @@ import {EventEmitter} from 'node:events';
 import vm from 'node:vm';
 import {createChinaState, inspectChinaPublicationState} from '../../scripts/catalog-next/china-state.mjs';
 import * as reuseModule from '../../scripts/catalog-next/release-reuse.mjs';
-import {checkedStartupReport, checkedRetainedFenceReport} from '../../scripts/catalog-next/release-ssh.mjs';
+import {checkedStartupReport, checkedRetainedFenceReport, checkedServerSpeedReport} from '../../scripts/catalog-next/release-ssh.mjs';
 
 const ROOT = fileURLToPath(new URL('../../', import.meta.url));
 const [directory, mode] = process.argv.slice(2), config = JSON.parse(await fs.readFile(path.join(directory, 'fixture.json'), 'utf8'));
@@ -72,7 +72,16 @@ const session = {exited: Promise.resolve({code: 0}), abort() { aborted = true; p
       if (mode === 'functional-failure') throw Error('china_host_functional_fixture');
       return {functionalPassed: true, cases: config.oracle.cases.map(({name, total}) => ({name, total}))};
     }
-    if (method === 'speed') return {speedPassed: true, samples: []};
+    if (method === 'speed') {
+      if (['speed-failure', 'speed-invalid-evidence'].includes(mode)) {
+        const serverSpeed = {present: true, sha256: 'a'.repeat(64), exitCode: 1, rejectedSamples: 0, samples: [
+          {speedBaseline: 'warm', path: '/cars?market=china', referenceSeconds: 0.09, measurementNoiseSeconds: 0.05,
+            ceilingSeconds: 0.14, seconds: 0.2, blocking: true, passed: false, recheckSeconds: [0.18, 0.19, 0.17], recheckMedianSeconds: 0.18}]};
+        if (mode === 'speed-invalid-evidence') serverSpeed.stderr = 'synthetic-private-ssh';
+        throw Object.assign(Error('china_host_server_speed_failed'), {serverSpeed});
+      }
+      return {speedPassed: true, samples: []};
+    }
     if (method === 'switch') {
       assert.equal((await state.read('accepted')).value.pending.nonce, plan.nonce);
       publicRuntime = plan.runtimeSha; return {switched: true, release: plan.runtimeSha, nonce: plan.nonce};
@@ -139,7 +148,7 @@ const mocks = {
     return {paths, receipt: {binding: {runtimeSha: servingPlan.pricingRuntimeSha, generationId: release.generationId,
       generationManifestSha256: release.generationManifestSha256, sourceDescriptorSha256: config.result.plan.sourceDescriptorSha256}}};
   }},
-  './release-ssh.mjs': {checkedStartupReport, checkedRetainedFenceReport, async openChinaSshSession() { calls.push('open-session'); return session; }},
+  './release-ssh.mjs': {checkedStartupReport, checkedRetainedFenceReport, checkedServerSpeedReport, async openChinaSshSession() { calls.push('open-session'); return session; }},
   './china-state.mjs': {createChinaStateStorage: () => storage, createChinaState: () => stateProxy, inspectChinaPublicationState},
   '../../apps/web/lib/data.ts': {getJsonStorage: () => ({async readJson(key) { assert.equal(key, 'catalog/operations/collection-controls-v1.json'); return {}; }})},
   './refresh-china-source.mjs': {assertChinaFeedControl() {}},
