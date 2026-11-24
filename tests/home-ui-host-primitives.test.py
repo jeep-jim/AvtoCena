@@ -369,6 +369,18 @@ class HostPrimitiveTests(unittest.TestCase):
             with self.assertRaisesRegex(host.HostError, 'server_coverage'):
                 host.run_full_server_gate(ROOT, NONCE, 'private', execute)
 
+    def test_unpinned_shared_gate_is_rejected_before_execution(self):
+        def changed_gate(path, **_):
+            raw = Path(path).read_bytes()
+            if Path(path).name == 'regcloud-performance-gate.py':
+                raw += b'\n# unreviewed helper change\n'
+            return raw, None
+        execute = mock.Mock()
+        with mock.patch.object(host, 'regular', side_effect=changed_gate):
+            with self.assertRaisesRegex(host.HostError, 'server_gate_source'):
+                host.run_full_server_gate(ROOT, NONCE, 'private', execute)
+            execute.assert_not_called()
+
     def test_loopback_home_uses_real_ssh_peer_for_japanese_market_count(self):
         connection = mock.MagicMock()
         connection.getresponse.return_value.read.return_value = b'{}'
