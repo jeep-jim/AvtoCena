@@ -141,8 +141,10 @@ function header(headers, name) {
 function metadata(response) {
   const etag = header(response.headers, 'etag'), size = header(response.headers, 'content-length');
   need(opaque(etag) && integerText(size), 'inventory_object_metadata');
-  const versionId = header(response.headers, 'x-amz-version-id');
-  need(versionId === null || opaque(versionId), 'inventory_object_metadata');
+  const rawVersionId = header(response.headers, 'x-amz-version-id');
+  need(rawVersionId === null || opaque(rawVersionId), 'inventory_object_metadata');
+  // S3's literal null version is not an immutable version identity.
+  const versionId = rawVersionId === 'null' ? null : rawVersionId;
   return {found: true, etag, size: Number(size), versionId,
     contentType: header(response.headers, 'content-type'), contentEncoding: header(response.headers, 'content-encoding'),
     lastModified: header(response.headers, 'last-modified')};

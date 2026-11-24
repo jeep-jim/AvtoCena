@@ -138,3 +138,55 @@ test('arbitrary reference to protected or foreign storage is refused before GET'
   await assert.rejects(inventoryChina({storage: f.storage, scope: createInventoryScope(), ledger: ledgerFor(t), serving}), /inventory_reference_scope/);
   assert.equal(f.calls.some(([, key]) => key === 'integrations/ajes/config.json'), false);
 });
+
+function stageFixture() {
+  const runId = 'stage-test', root = 'catalog/private-market-stage-v1/china/' + runId;
+  const local = root + '/objects/catalog/market-activation-fixture-v1/china/';
+  const gen = local + 'generations/' + generation + '/';
+  const values = {}, add = (key, value) => { values[key] = value; return hash(JSON.stringify(value)); };
+  const chunk = {version: 1, generationId: generation, chunk: 'chunk-0001', parts: []};
+  const chunkSha = hash(JSON.stringify(chunk));
+  const chunkKey = gen + 'prepared/indexes/prepared-china-read-v1/chunks/chunk-0001-' + chunkSha + '.json'; add(chunkKey, chunk);
+  const directory = {version: 1, generationId: generation, rows: 2, chunkSha256: [chunkSha], validUntil: 1};
+  const directorySha = hash(JSON.stringify(directory));
+  add(gen + 'prepared/indexes/prepared-china-read-v1/directory-' + directorySha + '.json', directory);
+  const manifest = {version: 2, generationId: generation, markets: {china: {count: 2, chunks: ['chunk-0001'], preparedChinaPriceReadV1: {directorySha256: directorySha}}}};
+  const papers = {};
+  for (const role of ['inventory', 'prices', 'search']) {
+    const paper = {version: 1, market: 'china', role, generationId: generation,
+      payload: role === 'prices' ? {manifest} : {privateVehicleField: 'NEVER_OUTPUT_OFFER_BODY'}};
+    const sha = hash(JSON.stringify(paper)); add(gen + role + '-' + sha + '.json', paper); papers[role] = sha;
+  }
+  const cut = {version: 1, market: 'china', generationId: generation, papers};
+  const manifestSha256 = hash(JSON.stringify(cut)); add(gen + 'ready-' + manifestSha256 + '.json', cut);
+  add(gen + 'binding.json', {version: 1, market: 'china', generationId: generation, manifestSha256});
+  const control = {version: 1, market: 'china', revision: 1, active: {generationId: generation, manifestSha256}, previous: null, lease: null};
+  const activeControlSha256 = add(local + 'control.json', control);
+  const runtime = {version: 1, kind: 'china-isolated-runtime-ready', generationId: generation, manifestSha256, activeControlSha256,
+    archiveSha256: 'c'.repeat(64), pricingReceiptSha256: 'd'.repeat(64), admittedRows: 2, validUntil: 1};
+  const runtimeReadySha256 = add(root + '/runtime-ready.json', runtime);
+  const ready = {...runtime, kind: 'china-private-durable-stage-ready-v1', market: 'china', runId, stageRoot: root + '/',
+    runtimeReadySha256, artifacts: {count: Object.keys(values).length, bytes: 1}, publicationAuthorized: false, cursorAdvanceAuthorized: false};
+  const readySha256 = add(root + '/READY.json', ready);
+  add('catalog/independent-market-public-v1/china/control.json', {version: 1, market: 'china', revision: 1,
+    active: {runId, generationId: generation, readySha256}, previous: null});
+  return {...fixture(values), root, chunkKey};
+}
+test('installed 22867 stage address mapping resolves without invoking readers, pricing or TTL admission', async t => {
+  const f = stageFixture();
+  const report = await inventoryChina({storage: f.storage, scope: createInventoryScope(), ledger: ledgerFor(t), serving});
+  assert.equal(report.inventoryReadCompleted, true);
+  assert(report.references.some(ref => ref.kind === 'stage' && ref.root === f.root));
+  assert(report.sourceObservations.some(row => row.kind === 'serving-stage-ready' && row.reported.admittedRows === 2));
+  assert.equal(JSON.stringify(report).includes('NEVER_OUTPUT_OFFER_BODY'), false);
+  assert(report.unresolved.some(row => row.code === 'stage_archive_digest_has_no_resolved_storage_address'));
+});
+test('stage exact directory reference missing from its enumerated prefix is refused', async t => {
+  const f = stageFixture(); f.values.delete(f.chunkKey);
+  await assert.rejects(inventoryChina({storage: f.storage, scope: createInventoryScope(), ledger: ledgerFor(t), serving}), /inventory_stage_chunk_missing/);
+});
+test('S3 literal null version does not claim immutable version support', async () => {
+  const storage = createInventoryStorage({env, scope: createInventoryScope(), request: async () => ({status: 200,
+    headers: {etag: '"v1"', 'content-length': '0', 'x-amz-version-id': 'null'}, body: Buffer.alloc(0)})});
+  assert.equal((await storage.head('catalog/manifest.json')).versionId, null);
+});

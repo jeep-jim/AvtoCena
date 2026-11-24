@@ -12,6 +12,23 @@ const UUID = '[a-f0-9]{8}(?:-[a-f0-9]{4}){3}-[a-f0-9]{12}';
 const semanticHash = value => hash(JSON.stringify(value));
 const integer = value => Number.isSafeInteger(value) && value >= 0;
 const object = value => value && typeof value === 'object' && !Array.isArray(value);
+function reportedShape(value) {
+  if (!object(value)) return {};
+  const summary = {};
+  for (const field of ['revision', 'cursor', 'startCursor', 'initialCursor', 'pages', 'rows', 'observations', 'uniqueOffers',
+    'changes', 'count', 'admittedRows', 'sourceEvents', 'bytes', 'totalBytes']) {
+    if (integer(value[field])) summary[field] = value[field];
+  }
+  for (const field of ['runId', 'previousRun', 'rateRun']) if (RUN.test(value[field] ?? '')) summary[field] = value[field];
+  if (GEN.test(value.generationId ?? '')) summary.generationId = value.generationId;
+  if (['fetching', 'complete'].includes(value.status)) summary.status = value.status;
+  for (const field of ['completed', 'completeInventory', 'partial']) if (typeof value[field] === 'boolean') summary[field] = value[field];
+  // Use a newly formatted timestamp, never echo an arbitrary upstream string.
+  for (const field of ['startedAt', 'completedAt', 'snapshotStartedAt', 'updatedAt']) {
+    if (typeof value[field] === 'string' && Number.isFinite(Date.parse(value[field]))) summary[field] = new Date(value[field]).toISOString();
+  }
+  return summary;
+}
 const CONTROL = 'catalog/independent-market-public-v1/china/control.json';
 const OWNED = 'catalog/owned-feed/v1/china';
 const CONFIG = 'catalog/raw-feed-config/v1/che168-snapshot.json';
@@ -81,9 +98,9 @@ export async function inventoryChina({storage, scope, ledger, serving, maxJsonBy
   clock = Date.now, deadline = Date.now() + 20 * 60000, onProgress = () => {}}) {
   need(storage && scope && ledger && serving?.releaseSha === SERVING_SCHEMA_SHA && SHA.test(serving.calculationVersion ?? ''), 'inventory_serving_identity');
   need(Number.isSafeInteger(maxJsonBytes) && maxJsonBytes >= 1024, 'inventory_resource_limit');
-  const startedAt = new Date(clock()).toISOString(), heads = new Map(), roots = [], queue = [], queued = new Set(), references = [], unresolved = [];
+  const startedAt = new Date(clock()).toISOString(), heads = new Map(), roots = [], queue = [], queued = new Set(), references = [], unresolved = [], sourceObservations = [];
   const archiveDigests = new Set(), stageArchiveDigests = new Set(), sourceRuns = new Map();
-  const progress = phase => onProgress({phase, roots: structuredClone(roots), references: structuredClone(references), unresolved: structuredClone(unresolved)});
+  const progress = phase => onProgress({phase, roots: structuredClone(roots), references: structuredClone(references), unresolved: structuredClone(unresolved), sourceObservations: structuredClone(sourceObservations)});
   const within = () => need(clock() < deadline, 'inventory_deadline');
   const gap = (code, key) => { if (!unresolved.some(row => row.code === code && row.keySha256 === hash(key))) unresolved.push({code, keySha256: hash(key)}); };
   async function head(key) { within(); const value = await storage.head(key); need(value && typeof value.found === 'boolean', 'inventory_head_invalid'); return value; }
@@ -157,6 +174,8 @@ export async function inventoryChina({storage, scope, ledger, serving, maxJsonBy
   }
   function reportRefs(report, parent) {
     need(object(report) && report.version === 1 && report.market === 'china' && Array.isArray(report.sources), 'inventory_report_schema');
+    sourceObservations.push({kind: 'saved-source-report', key: parent, reported: reportedShape(report),
+      sources: report.sources.filter(row => row?.provider === 'auto_api_che168').map(reportedShape), countsIndependentlyRecounted: false});
     report.sources.forEach((row, i) => {
       if (row?.provider === 'auto_api_che168') sourceRefs(row, parent, 'sources.' + i);
       else gap('unresolved_china_source_schema', parent);
@@ -198,6 +217,9 @@ export async function inventoryChina({storage, scope, ledger, serving, maxJsonBy
       && ready.generationId === ref.generationId && [ready.runtimeReadySha256, ready.manifestSha256, ready.activeControlSha256,
         ready.pricingReceiptSha256, ready.archiveSha256].every(value => SHA.test(value ?? '')), 'inventory_stage_ready_schema');
     stageArchiveDigests.add(ready.archiveSha256);
+    sourceObservations.push({kind: 'serving-stage-ready', key, reported: reportedShape(ready),
+      artifacts: {count: integer(ready.artifacts?.count) ? ready.artifacts.count : null,
+        bytes: integer(ready.artifacts?.bytes) ? ready.artifacts.bytes : null}, countsIndependentlyRecounted: false});
     await scan(ref.root + '/');
     const runtimeKey = ref.root + '/runtime-ready.json', runtime = (await read(runtimeKey, {expected: ready.runtimeReadySha256})).value;
     need(runtime.version === 1 && runtime.kind === 'china-isolated-runtime-ready' && runtime.generationId === ready.generationId
@@ -228,6 +250,12 @@ export async function inventoryChina({storage, scope, ledger, serving, maxJsonBy
         need(value.version === 1 && value.generationId === ready.generationId && Array.isArray(value.chunkSha256)
           && Array.isArray(manifest.markets.china.chunks) && value.chunkSha256.length === manifest.markets.china.chunks.length, 'inventory_stage_directory');
         ledger.edge(paperKey, 'payload.manifest.markets.china.preparedChinaPriceReadV1', directory, 'stage-directory', marker.directorySha256, 'raw');
+        for (const [index, chunk] of manifest.markets.china.chunks.entries()) {
+          need(/^chunk-\d{4,10}$/.test(chunk) && SHA.test(value.chunkSha256[index] ?? ''), 'inventory_stage_chunk_reference');
+          const child = generation + 'prepared/indexes/prepared-china-read-v1/chunks/' + chunk + '-' + value.chunkSha256[index] + '.json';
+          need(ledger.object(child), 'inventory_stage_chunk_missing');
+          ledger.edge(directory, 'chunkSha256.' + index, child, 'stage-chunk-directory', value.chunkSha256[index], 'raw');
+        }
       }
     }
   }
@@ -282,7 +310,8 @@ export async function inventoryChina({storage, scope, ledger, serving, maxJsonBy
       }
     } else if (kind === 'intake') {
       need(value.version === 1 && value.kind === 'nonjp-intake' && value.market === 'china' && Array.isArray(value.files)
-        && SHA.test(value.reportDigest ?? ''), 'inventory_archive_schema');
+        && SHA.test(value.reportDigest ?? '') && RUN.test(value.owner?.runId ?? '') && /^[1-9]\d{0,5}$/.test(value.owner?.attempt ?? '')
+        && root === 'catalog/nonjp-intake/v1/china/' + value.owner.runId + '/' + value.owner.attempt, 'inventory_archive_schema');
       archiveDigests.add(result.semanticSha256);
       const names = new Set(); let total = 0; let reportFile;
       for (const [fileIndex, item] of value.files.entries()) {
@@ -325,6 +354,7 @@ export async function inventoryChina({storage, scope, ledger, serving, maxJsonBy
     const result = await read(root.key, {required: root.required}); values.set(root.key, result?.value ?? null);
     roots.push({key: root.key, found: Boolean(result), ...(result ? {bytes: result.meta.size, sha256: result.sha256,
       etagSha256: hash(result.meta.etag), versioned: result.meta.versionId !== null && result.meta.versionId !== undefined,
+      reported: reportedShape(result.value),
       schemaVersion: integer(result.value?.version) ? result.value.version : null,
       knownFieldsPresent: ['market', 'active', 'previous', 'runId', 'previousRun', 'base', 'archiveRoot', 'archiveSha256',
         'rateRun', 'sources', 'binding', 'config', 'generationId', 'markets', 'roots', 'pointers', 'claims']
@@ -388,7 +418,7 @@ export async function inventoryChina({storage, scope, ledger, serving, maxJsonBy
     contentBackupComplete: false, fullAllMarketBackup: false, deletionAllowed: false, productionWrites: false,
     servingSchemaSha: SERVING_SCHEMA_SHA, sourceSchemaSha: SOURCE_SCHEMA_SHA, serving,
     startedAt, completedAt: new Date(clock()).toISOString(), storageScopeSha256: storage.scopeFingerprint ?? null,
-    roots, protectedHeads, references, unresolved, totals, rootVectorStable: true,
+    roots, protectedHeads, references, sourceObservations, unresolved, totals, rootVectorStable: true,
     limitations: ['LIST and metadata enumeration is not content backup or restore verification.',
       'Root stability is a drift check, not a multi-object transaction or complete writer fence.',
       'Historical TTL, year, admission and fleet caps do not exclude backup dependencies.',
