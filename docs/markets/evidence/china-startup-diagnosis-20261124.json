@@ -1,0 +1,200 @@
+{
+  "version": 1,
+  "kind": "china-startup-diagnosis-v1",
+  "market": "china",
+  "readOnly": true,
+  "failedRunId": "45382186572",
+  "selector": {
+    "runtimeSha": "822f925bb30c4e07010f6e14b6574f1b4bd6306e",
+    "pricingRuntimeSha": "64c6338e0db23c8999096bceefbf113c0136fe15",
+    "generationId": "gen_china_45369451603_1",
+    "generationManifestSha256": "d5745797cc162b82e0c0f0b1f49fef65f18f0d6649666562337183b18084dd75",
+    "controllerSha": "ee8ba8def13a15333fae9dd4ece53e574e37cc14",
+    "imageId": "sha256:443e87ed141838f003ce6209fc290f4a2435113b7cfb83126e3d88fb6877cf83",
+    "since": "2026-11-24T11:36:00Z",
+    "until": "2026-11-24T11:39:30Z"
+  },
+  "completed": true,
+  "status": "complete",
+  "hostMutations": 0,
+  "storageWrites": 0,
+  "providerCalls": 0,
+  "pageRequests": 0,
+  "diagnosisControllerSha": "58b575cbc1c8a8979039168427df1753452983d9",
+  "approvedControllerSha": "d85f9640da0b8c6ae357cfd0ec143a2fbbba17c0",
+  "diagnosis": {
+    "version": 1,
+    "kind": "china-host-startup-diagnosis-v1",
+    "readOnly": true,
+    "selector": {
+      "runtimeSha": "822f925bb30c4e07010f6e14b6574f1b4bd6306e",
+      "pricingRuntimeSha": "64c6338e0db23c8999096bceefbf113c0136fe15",
+      "generationId": "gen_china_45369451603_1",
+      "generationManifestSha256": "d5745797cc162b82e0c0f0b1f49fef65f18f0d6649666562337183b18084dd75",
+      "controllerSha": "ee8ba8def13a15333fae9dd4ece53e574e37cc14",
+      "imageId": "sha256:443e87ed141838f003ce6209fc290f4a2435113b7cfb83126e3d88fb6877cf83",
+      "since": "2026-11-24T11:36:00Z",
+      "until": "2026-11-24T11:39:30Z"
+    },
+    "nonce": "2ab6a761ac784094d102edd7be8708af",
+    "planSha256": "998a10e522b1aacf493a309e9280075660816cb0d6926246884148f594d6d036",
+    "rollbackSha256": "40d76cec42314ab0085d4ee216ecfa85f3a0910e8f7e4b32f5eb22daddcc0030",
+    "outcome": "rolled_back",
+    "files": [
+      {
+        "name": "GENERATION.json",
+        "present": true,
+        "bytes": 5556,
+        "expectedBytes": 5556,
+        "sizeMatches": true,
+        "private": true
+      },
+      {
+        "name": "details.sqlite",
+        "present": true,
+        "bytes": 9192034304,
+        "expectedBytes": 9192034304,
+        "sizeMatches": true,
+        "private": true
+      },
+      {
+        "name": "query.sqlite",
+        "present": true,
+        "bytes": 3464159232,
+        "expectedBytes": 3464159232,
+        "sizeMatches": true,
+        "private": true
+      },
+      {
+        "name": "FILTER_SEMANTICS.json",
+        "present": true,
+        "bytes": 519822,
+        "expectedBytes": 519822,
+        "sizeMatches": true,
+        "private": true
+      },
+      {
+        "name": "FX_RECEIPT.json",
+        "present": true,
+        "bytes": 910,
+        "expectedBytes": 910,
+        "sizeMatches": true,
+        "private": true
+      },
+      {
+        "name": "RECONCILIATION.json",
+        "present": true,
+        "bytes": 1211,
+        "expectedBytes": 1211,
+        "sizeMatches": true,
+        "private": true
+      },
+      {
+        "name": "DISPOSITIONS.ndjson",
+        "present": true,
+        "bytes": 126845696,
+        "expectedBytes": 126845696,
+        "sizeMatches": true,
+        "private": true
+      },
+      {
+        "name": "image.tar",
+        "present": true,
+        "bytes": 258520064,
+        "expectedBytes": 258520064,
+        "sizeMatches": true,
+        "private": true
+      },
+      {
+        "name": "acceptance.json",
+        "present": true,
+        "bytes": 14727,
+        "expectedBytes": 14727,
+        "sizeMatches": true,
+        "private": true
+      },
+      {
+        "name": "regcloud-performance-gate.py",
+        "present": true,
+        "bytes": 12248,
+        "expectedBytes": 12248,
+        "sizeMatches": true,
+        "private": true
+      },
+      {
+        "name": "accepted-speed-baseline.json",
+        "present": true,
+        "bytes": 18868,
+        "expectedBytes": 18868,
+        "sizeMatches": true,
+        "private": true
+      }
+    ],
+    "generationVerified": true,
+    "image": {
+      "present": true,
+      "identityMatches": true
+    },
+    "diskFreeBytes": 40503066624,
+    "retained": {
+      "identityConfirmed": true,
+      "running": true
+    },
+    "candidate": {
+      "present": false,
+      "running": null,
+      "status": null,
+      "exitCode": null,
+      "oomKilled": null
+    },
+    "events": {
+      "available": true,
+      "reason": null,
+      "rows": [
+        {
+          "action": "create",
+          "time": 1795520204,
+          "exitCode": null,
+          "oom": false
+        },
+        {
+          "action": "start",
+          "time": 1795520204,
+          "exitCode": null,
+          "oom": false
+        },
+        {
+          "action": "kill",
+          "time": 1795520324,
+          "exitCode": null,
+          "oom": false
+        },
+        {
+          "action": "kill",
+          "time": 1795520334,
+          "exitCode": null,
+          "oom": false
+        },
+        {
+          "action": "stop",
+          "time": 1795520334,
+          "exitCode": null,
+          "oom": false
+        },
+        {
+          "action": "die",
+          "time": 1795520334,
+          "exitCode": 137,
+          "oom": false
+        },
+        {
+          "action": "destroy",
+          "time": 1795520334,
+          "exitCode": null,
+          "oom": false
+        }
+      ]
+    }
+  },
+  "finishedAt": "2026-11-24T11:59:05.771Z"
+}

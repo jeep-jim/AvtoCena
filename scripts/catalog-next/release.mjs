@@ -11,11 +11,12 @@ import {verifyReadonlyInvocation} from '../lib/readonly-marker-invocation.mjs';
 import {verifyFrozenSpeedBaselines} from '../verify-frozen-speed-baselines.mjs';
 import {restorePrivateChinaGeneration} from './private-generation.mjs';
 import {createPrivateChinaGenerationStorage} from './generation-storage.mjs';
-import {openChinaSshSession} from './release-ssh.mjs';
+import {openChinaSshSession, checkedStartupReport} from './release-ssh.mjs';
 import {verifyServingCompatibility} from './serving-compatibility.mjs';
 import {createChinaStateStorage, createChinaState, inspectChinaPublicationState} from './china-state.mjs';
 import {getJsonStorage} from '../../apps/web/lib/data.ts';
 import {assertChinaFeedControl} from './refresh-china-source.mjs';
+import {resolveChinaReleaseReuse, resumeChinaHostAttempt} from './release-reuse.mjs';
 
 const root = fileURLToPath(new URL('../../', import.meta.url));
 const need = (value, code) => assert(value, 'china_release_' + code);
@@ -73,6 +74,7 @@ try {
   const release = JSON.parse(await fs.readFile(path.join(root, '.github/operations/catalog-next/china-release-plan.json'), 'utf8'));
   need(release.version === 1 && release.market === 'china' && release.runtimeSha === plan.runtimeSha && release.pricingRuntimeSha === plan.pricingRuntimeSha &&
     /^[a-f0-9]{64}$/.test(release.receiptSha256 ?? '') && /^[a-f0-9]{64}$/.test(release.generationManifestSha256 ?? ''), 'profile');
+  const reuse = resolveChinaReleaseReuse(release, plan);
   const git = args => execFileSync('git', args, {cwd: runtimeRoot, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'], maxBuffer: 32 * 1024 ** 2});
   need(git(['rev-parse', 'HEAD']).trim() === plan.runtimeSha && git(['rev-parse', 'HEAD^{tree}']).trim() === plan.runtimeTree &&
     hash(git(['diff', '--binary', '--no-ext-diff', '--no-renames', plan.retainedRuntime, plan.runtimeSha])) === plan.runtimeDiffSha256, 'exact_runtime');
@@ -96,65 +98,87 @@ try {
     }
   };
   await checkControl();
-  const storage = createPrivateChinaGenerationStorage({owner: release.owner});
-  const restored = await step('restore_verified_local_generation', () => restorePrivateChinaGeneration({storage, owner: release.owner,
-    expectedReceiptSha256: release.receiptSha256, outputDirectory: path.join(scratch, 'generation'), names, onProgress: log}));
-  need(restored.receipt.binding.runtimeSha === plan.pricingRuntimeSha && restored.receipt.binding.generationId === release.generationId &&
-    restored.receipt.binding.generationManifestSha256 === release.generationManifestSha256, 'generation_binding');
-  const generation = JSON.parse(await fs.readFile(restored.paths['GENERATION.json'], 'utf8'));
-  need(generation.prepared === true && generation.source.supplierLatestVerified === true && generation.rows > 0, 'prepared_generation');
-  report.sourceObservedAt = generation.source.sourceObservedAt; report.pricingAsOf = generation.pricingAsOf;
-  report.rows = generation.rows; report.sourceRows = generation.sourceRows;
   const localEnv = {PATH: process.env.PATH, NODE_ENV: 'production', JSON_STORAGE_DRIVER: 'local', TZ: 'Asia/Krasnoyarsk'};
   const oracle = path.join(scratch, 'acceptance.json');
-  await step('independent_local_query_oracle', async () => {
-    const status = await child(path.join(root, 'scripts/catalog-next/acceptance-oracle.mjs'),
-      [runtimeRoot, path.join(scratch, 'generation'), release.generationManifestSha256, oracle], localEnv);
-    need(status === 0, 'oracle_failed');
-    const value = JSON.parse(await fs.readFile(oracle, 'utf8'));
+  const nonce = randomBytes(16).toString('hex');
+  let previous, previousIntent, generation;
+  const acquireFirstReleaseFence = async () => {
+    const stateStorage = createChinaStateStorage();
+    await stateStorage.assertPrivateBucket(); state = createChinaState({storage: stateStorage});
+    const [accepted, savedIntent, previousLease] = await Promise.all([state.read('accepted'), state.read('intent'), state.read('lease')]);
+    need(!accepted.value?.current && !accepted.value?.pending && ['idle', 'resolved'].includes(
+      inspectChinaPublicationState({accepted, intent: savedIntent}).status), 'first_release_state');
+    lease = await state.acquireLease({previous: previousLease,
+      owner: {runId: process.env.GITHUB_RUN_ID, attempt: process.env.GITHUB_RUN_ATTEMPT, revision: invocation.sourceSha},
+      nonce, expiresAt: new Date(Date.now() + 2 * 60 * 60 * 1000).toISOString()});
+    return {previous: accepted, previousIntent: savedIntent};
+  };
+  const recordGeneration = generation => {
+    need(generation.prepared === true && generation.source.supplierLatestVerified === true && generation.rows > 0, 'prepared_generation');
+    report.sourceObservedAt = generation.source.sourceObservedAt; report.pricingAsOf = generation.pricingAsOf;
+    report.rows = generation.rows; report.sourceRows = generation.sourceRows;
+  };
+  const recordOracle = value => {
     need(value.runtimeSha === plan.runtimeSha && value.pricingRuntimeSha === plan.pricingRuntimeSha &&
       value.generationManifestSha256 === release.generationManifestSha256 && value.cases.length >= 8, 'oracle_identity');
     report.oracle = value.cases.map(({name, total, ids}) => ({name, total, items: ids.length}));
-  });
-  const imageDirectory = path.join(process.env.RUNNER_TEMP, 'china-release-build');
-  const image = JSON.parse(await fs.readFile(path.join(imageDirectory, 'image-receipt.json'), 'utf8'));
-  const imagePath = path.join(imageDirectory, 'image.tar'), imageSeal = await fileSeal(imagePath);
-  need(image.runtimeSha === plan.runtimeSha && image.pricingRuntimeSha === plan.pricingRuntimeSha &&
-    image.runtimeTree === plan.runtimeTree && image.sha256 === imageSeal.sha256 &&
-    image.bytes === imageSeal.bytes && /^sha256:[a-f0-9]{64}$/.test(image.imageId ?? ''), 'image_receipt');
-  report.imageId = image.imageId;
-  const files = {...restored.paths, 'image.tar': imagePath, 'acceptance.json': oracle,
-    'regcloud-performance-gate.py': path.join(root, 'scripts/regcloud-performance-gate.py'),
-    'accepted-speed-baseline.json': path.join(root, 'docs/operations/2026-11-11-accepted-speed-baseline.json')};
-  const packed = [];
-  await step('pack_verified_files', async () => {
-    for (const [name, filename] of Object.entries(files)) { packed.push(await packFile(filename, scratch, name)); log({phase, file: name}); }
-  });
-  const nonce = randomBytes(16).toString('hex');
-  const stateStorage = createChinaStateStorage();
-  await stateStorage.assertPrivateBucket(); state = createChinaState({storage: stateStorage});
-  const [previous, previousIntent, previousLease] = await Promise.all([state.read('accepted'), state.read('intent'), state.read('lease')]);
-  need(!previous.value?.current && !previous.value?.pending && ['idle', 'resolved'].includes(
-    inspectChinaPublicationState({accepted: previous, intent: previousIntent}).status), 'first_release_state');
-  lease = await state.acquireLease({previous: previousLease,
-    owner: {runId: process.env.GITHUB_RUN_ID, attempt: process.env.GITHUB_RUN_ATTEMPT, revision: invocation.sourceSha},
-    nonce, expiresAt: new Date(Date.now() + 2 * 60 * 60 * 1000).toISOString()});
+  };
+  if (reuse) {
+    // Reuse is only preparation for the same first-publication protocol below.
+    // The exclusive China fence precedes any creation on the authenticated host.
+    ({previous, previousIntent} = await acquireFirstReleaseFence());
+    await checkControl();
+    session = await step('authenticated_server_session', () => openChinaSshSession({root, directory: scratch, privateKey}));
+    const reused = await step('reuse_verified_server_files', () => resumeChinaHostAttempt({session, reuse, release,
+      servingPlan: plan, nonce, controllerSha: invocation.sourceSha, previous, oraclePath: oracle, assertAuthority: checkControl}));
+    hostPlan = reused.plan; generation = reused.generation;
+    recordGeneration(generation); recordOracle(reused.oracle); report.imageId = hostPlan.imageId;
+    report.reuseHostAttempt = {verified: true, sourcePlanSha256: reuse.source.planSha256,
+      copiedFiles: reused.copiedFiles, copiedBytes: reused.copiedBytes};
+  } else {
+    const storage = createPrivateChinaGenerationStorage({owner: release.owner});
+    const restored = await step('restore_verified_local_generation', () => restorePrivateChinaGeneration({storage, owner: release.owner,
+      expectedReceiptSha256: release.receiptSha256, outputDirectory: path.join(scratch, 'generation'), names, onProgress: log}));
+    need(restored.receipt.binding.runtimeSha === plan.pricingRuntimeSha && restored.receipt.binding.generationId === release.generationId &&
+      restored.receipt.binding.generationManifestSha256 === release.generationManifestSha256, 'generation_binding');
+    generation = JSON.parse(await fs.readFile(restored.paths['GENERATION.json'], 'utf8')); recordGeneration(generation);
+    await step('independent_local_query_oracle', async () => {
+      const status = await child(path.join(root, 'scripts/catalog-next/acceptance-oracle.mjs'),
+        [runtimeRoot, path.join(scratch, 'generation'), release.generationManifestSha256, oracle], localEnv);
+      need(status === 0, 'oracle_failed'); recordOracle(JSON.parse(await fs.readFile(oracle, 'utf8')));
+    });
+    const imageDirectory = path.join(process.env.RUNNER_TEMP, 'china-release-build');
+    const image = JSON.parse(await fs.readFile(path.join(imageDirectory, 'image-receipt.json'), 'utf8'));
+    const imagePath = path.join(imageDirectory, 'image.tar'), imageSeal = await fileSeal(imagePath);
+    need(image.runtimeSha === plan.runtimeSha && image.pricingRuntimeSha === plan.pricingRuntimeSha &&
+      image.runtimeTree === plan.runtimeTree && image.sha256 === imageSeal.sha256 &&
+      image.bytes === imageSeal.bytes && /^sha256:[a-f0-9]{64}$/.test(image.imageId ?? ''), 'image_receipt');
+    report.imageId = image.imageId;
+    const files = {...restored.paths, 'image.tar': imagePath, 'acceptance.json': oracle,
+      'regcloud-performance-gate.py': path.join(root, 'scripts/regcloud-performance-gate.py'),
+      'accepted-speed-baseline.json': path.join(root, 'docs/operations/2026-11-11-accepted-speed-baseline.json')};
+    const packed = [];
+    await step('pack_verified_files', async () => {
+      for (const [name, filename] of Object.entries(files)) { packed.push(await packFile(filename, scratch, name)); log({phase, file: name}); }
+    });
+    ({previous, previousIntent} = await acquireFirstReleaseFence());
+    hostPlan = {version: 1, market: 'china', retainedRuntime: plan.retainedRuntime, runtimeSha: plan.runtimeSha, pricingRuntimeSha: plan.pricingRuntimeSha,
+      runtimeTree: plan.runtimeTree, runtimeDiffSha256: plan.runtimeDiffSha256, controllerSha: invocation.sourceSha,
+      servingCalculationVersion: '4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90',
+      generationId: release.generationId, generationManifestSha256: release.generationManifestSha256,
+      privateGenerationReceiptSha256: release.receiptSha256, sourceDescriptorSha256: restored.receipt.binding.sourceDescriptorSha256, imageId: image.imageId, nonce,
+      previousAcceptedETag: previous.etag, previousAcceptedStateSha256: previous.sha256,
+      files: packed.map(file => file.descriptor)};
+    await checkControl();
+    session = await step('authenticated_server_session', () => openChinaSshSession({root, directory: scratch, privateKey}));
+    await session.call('init', {plan: hostPlan});
+    for (const file of packed) await step('upload_' + file.descriptor.name.replaceAll('.', '_'), () => session.upload(file.descriptor.name, file.packed));
+  }
   const candidate = {market: 'china', generationId: release.generationId, owner: release.owner,
-    receiptSha256: release.receiptSha256, sourceDescriptorSha256: restored.receipt.binding.sourceDescriptorSha256,
+    receiptSha256: release.receiptSha256, sourceDescriptorSha256: hostPlan.sourceDescriptorSha256,
     generationManifestSha256: release.generationManifestSha256, sourceCursor: generation.source.cursor,
     sourceObservedAt: generation.source.sourceObservedAt, runtimeSha: plan.runtimeSha,
-    pricingRuntimeSha: plan.pricingRuntimeSha, imageId: image.imageId};
-  hostPlan = {version: 1, market: 'china', retainedRuntime: plan.retainedRuntime, runtimeSha: plan.runtimeSha, pricingRuntimeSha: plan.pricingRuntimeSha,
-    runtimeTree: plan.runtimeTree, runtimeDiffSha256: plan.runtimeDiffSha256, controllerSha: invocation.sourceSha,
-    servingCalculationVersion: '4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90',
-    generationId: release.generationId, generationManifestSha256: release.generationManifestSha256,
-    privateGenerationReceiptSha256: release.receiptSha256, sourceDescriptorSha256: restored.receipt.binding.sourceDescriptorSha256, imageId: image.imageId, nonce,
-    previousAcceptedETag: previous.etag, previousAcceptedStateSha256: previous.sha256,
-    files: packed.map(file => file.descriptor)};
-  await checkControl();
-  session = await step('authenticated_server_session', () => openChinaSshSession({root, directory: scratch, privateKey}));
-  await session.call('init', {plan: hostPlan});
-  for (const file of packed) await step('upload_' + file.descriptor.name.replaceAll('.', '_'), () => session.upload(file.descriptor.name, file.packed));
+    pricingRuntimeSha: plan.pricingRuntimeSha, imageId: hostPlan.imageId};
   await checkControl();
   report.start = await step('start_candidate_preserving_live', () => session.call('start'));
   report.functional = await step('exact_rows_prices_and_filters', () => session.call('functional'));
@@ -202,6 +226,9 @@ try {
   report.accepted = true; report.finishedAt = new Date().toISOString();
   await fs.writeFile(reportPath, JSON.stringify(report, null, 2)); log(report);
 } catch (error) {
+  if (error?.startup) {
+    try { report.startupFailure = checkedStartupReport(error.startup); } catch {}
+  }
   if (session) { session.abort(); await session.exited; session = null; }
   report.phase = phase; report.errorCode = safeCode(error); report.finishedAt = new Date().toISOString();
   if (state && lease && !intent && hostPlan) {

@@ -755,6 +755,209 @@ def retire_recovery(params):
         os.close(lock)
 
 
+def reuse_lock():
+    lock = os.open('/run/lock/avtocena-runtime-change.lock', os.O_RDONLY | os.O_NOFOLLOW | os.O_CLOEXEC)
+    try:
+        info = os.fstat(lock)
+        need(stat.S_ISREG(info.st_mode) and info.st_uid == 0 and info.st_nlink == 1, 'runtime_lock')
+        fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        return lock
+    except BaseException:
+        os.close(lock)
+        raise
+
+
+def reuse_file_identity(filename):
+    info = regular(filename)
+    need(stat.S_IMODE(info.st_mode) == 0o400, 'reuse_file_permissions')
+    return (info.st_dev, info.st_ino, info.st_size, info.st_mtime_ns, info.st_ctime_ns)
+
+
+def reuse_copy_file(source, target, descriptor, identity):
+    """A new private inode, never a hard link, with verified source and readback.
+    Only this invocation's incomplete new file is removed on a copy failure."""
+    need(reuse_file_identity(source) == identity, 'reuse_source_changed')
+    source_fd = os.open(source, os.O_RDONLY | os.O_NOFOLLOW)
+    target_fd = None
+    created = False
+    try:
+        source_stat = os.fstat(source_fd)
+        need((source_stat.st_dev, source_stat.st_ino, source_stat.st_size,
+              source_stat.st_mtime_ns, source_stat.st_ctime_ns) == identity, 'reuse_source_changed')
+        target_fd = os.open(target, os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW, 0o400)
+        created = True
+        digest = hashlib.sha256()
+        total = 0
+        with os.fdopen(target_fd, 'wb') as output:
+            target_fd = None
+            while True:
+                block = os.read(source_fd, 1024 * 1024)
+                if not block:
+                    break
+                total += len(block)
+                need(total <= descriptor['bytes'], 'reuse_copy_size')
+                digest.update(block)
+                output.write(block)
+            output.flush()
+            os.fsync(output.fileno())
+        need(total == descriptor['bytes'] and digest.hexdigest() == descriptor['sha256'], 'reuse_copy_hash')
+        need(reuse_file_identity(source) == identity, 'reuse_source_changed')
+        copied = reuse_file_identity(target)
+        need(copied[:2] != identity[:2] and copied[2] == descriptor['bytes'] and
+             file_sha(target) == descriptor['sha256'] and reuse_file_identity(target) == copied, 'reuse_copy_readback')
+    except BaseException:
+        if target_fd is not None:
+            os.close(target_fd)
+        # The caller supplies an absent path below its newly created private
+        # nonce. Existing files are never unlinked by this helper.
+        if created and target.exists():
+            regular(target)
+            target.unlink()
+        raise
+    finally:
+        os.close(source_fd)
+
+
+def resume_failed_upload(params):
+    """Copy one pinned, fully rolled-back first release into a fresh nonce.
+    The installed image is reused; all publication gates remain in Host.start
+    and its existing methods. No original byte, receipt or container is changed."""
+    need(isinstance(params, dict) and set(params) == {'source', 'nonce', 'controllerSha',
+         'previousAcceptedETag', 'previousAcceptedStateSha256'}, 'reuse_parameters')
+    source = params.get('source')
+    need(isinstance(source, dict) and set(source) == {'runtimeSha', 'nonce', 'planSha256', 'rollbackSha256'} and
+         re.fullmatch(r'[a-f0-9]{40}', source.get('runtimeSha', '')) and
+         re.fullmatch(r'[a-f0-9]{32}', source.get('nonce', '')) and
+         all(re.fullmatch(r'[a-f0-9]{64}', source.get(key, '')) for key in ('planSha256', 'rollbackSha256')) and
+         re.fullmatch(r'[a-f0-9]{32}', params.get('nonce', '')) and params['nonce'] != source['nonce'] and
+         re.fullmatch(r'[a-f0-9]{40}', params.get('controllerSha', '')), 'reuse_identity')
+    old_directory = BASE / source['runtimeSha'] / 'china-next' / source['nonce']
+    for directory in (BASE, old_directory.parent.parent, old_directory.parent, old_directory, old_directory / 'generation'):
+        private_directory(directory)
+    old_plan, old_plan_raw = diagnosis_json(old_directory / 'PLAN.json')
+    validate_plan(old_plan)
+    need(not generation_update(old_plan) and old_plan['runtimeSha'] == source['runtimeSha'] and
+         old_plan['nonce'] == source['nonce'] and sha(old_plan_raw) == source['planSha256'], 'reuse_plan')
+    need(not (old_directory / 'ACCEPTED.json').exists() and not (old_directory / 'ACCEPTED.pending').exists(), 'reuse_accepted')
+    rollback, rollback_raw = diagnosis_json(old_directory / 'ROLLED_BACK.json')
+    bindings = {'nonce': 'nonce', 'release': 'runtimeSha', 'pricingRuntimeSha': 'pricingRuntimeSha', 'imageId': 'imageId',
+                'generationId': 'generationId', 'generationManifestSha256': 'generationManifestSha256',
+                'privateGenerationReceiptSha256': 'privateGenerationReceiptSha256', 'sourceDescriptorSha256': 'sourceDescriptorSha256'}
+    need(sha(rollback_raw) == source['rollbackSha256'] and rollback.get('version') == 1 and
+         rollback.get('kind') == 'china-host-rollback-v1' and all(rollback.get(left) == old_plan[right] for left, right in bindings.items()) and
+         rollback.get('candidateRemoved') is True and rollback.get('ingressRestored') is True and
+         rollback.get('retainedRunning') is True and rollback.get('retainedRuntimeSha') == RETAINED and
+         re.fullmatch(r'[a-f0-9]{64}', rollback.get('retainedContainerId', '')) and
+         re.fullmatch(r'sha256:[a-f0-9]{64}', rollback.get('retainedImageId', '')), 'reuse_rollback')
+    need(all(params[key] == old_plan.get(key) for key in ('previousAcceptedETag', 'previousAcceptedStateSha256')),
+         'reuse_state_changed')
+    plan = {**copy.deepcopy(old_plan), 'nonce': params['nonce'], 'controllerSha': params['controllerSha'], 'reuseSource': dict(source)}
+    validate_plan(plan)
+    directory = old_directory.parent / plan['nonce']
+    generation_names = {'GENERATION.json', 'details.sqlite', 'query.sqlite', 'FILTER_SEMANTICS.json',
+                        'FX_RECEIPT.json', 'RECONCILIATION.json', 'DISPOSITIONS.ndjson'}
+    source_path = lambda name: (old_directory / 'generation' if name in generation_names else old_directory) / name
+    target_path = lambda name: (directory / 'generation' if name in generation_names else directory) / name
+    identities = {row['name']: reuse_file_identity(source_path(row['name'])) for row in plan['files']}
+    need(all(identities[row['name']][2] == row['bytes'] for row in plan['files']), 'reuse_source_size')
+    total_bytes = sum(row['bytes'] for row in plan['files'])
+    copy_proof = {'version': 1, 'kind': 'china-host-local-reuse-v1', 'source': source,
+                  'planSha256': sha(json_bytes(plan)), 'copiedFiles': len(plan['files']), 'copiedBytes': total_bytes}
+    lock = reuse_lock()
+    host = None
+    try:
+        regular(CONFIG, 1024 * 1024)
+        ingress = CONFIG.read_bytes()
+        retained = docker('GET', '/containers/' + rollback['retainedContainerId'] + '/json')
+        retained_identity = protected_identity(retained)
+        retained_env = env_map(retained)
+        need(retained['Image'] == rollback['retainedImageId'] and retained['State']['Running'] is True and
+             retained_env.get('AVTOCENA_RELEASE_SHA') == RETAINED and retained_env.get('AVTOCENA_CALCULATION_VERSION') == CALCULATION and
+             any(str(binding.get('HostPort', '')) == str(backend(ingress)) for bindings in
+                 (retained.get('HostConfig', {}).get('PortBindings') or {}).values() for binding in bindings), 'reuse_retained')
+        image = docker('GET', '/images/' + plan['imageId'] + '/json')
+        need(image.get('Id') == plan['imageId'] and image.get('Os') == 'linux' and image.get('Architecture') == 'amd64' and
+             image.get('Config', {}).get('Labels', {}).get('org.opencontainers.image.revision') == plan['runtimeSha'], 'reuse_image')
+        def fence():
+            need(CONFIG.read_bytes() == ingress and
+                 protected_identity(docker('GET', '/containers/' + retained['Id'] + '/json')) == retained_identity,
+                 'reuse_retained_changed')
+            need(diagnosis_json(old_directory / 'PLAN.json')[1] == old_plan_raw and
+                 diagnosis_json(old_directory / 'ROLLED_BACK.json')[1] == rollback_raw and
+                 not (old_directory / 'ACCEPTED.json').exists() and not (old_directory / 'ACCEPTED.pending').exists(), 'reuse_source_changed')
+            rows = docker('GET', '/containers/json?all=1')
+            need(isinstance(rows, list) and len(rows) <= 1024, 'reuse_containers')
+            for item in rows:
+                row = docker('GET', '/containers/' + item['Id'] + '/json')
+                need(row.get('Config', {}).get('Labels', {}).get('avtocena.china.nonce') not in {source['nonce'], plan['nonce']},
+                     'reuse_candidate_exists')
+                for mount in row.get('Mounts', []):
+                    mounted = mount.get('Source')
+                    if not mounted:
+                        continue
+                    need(isinstance(mounted, str) and Path(mounted).is_absolute(), 'reuse_mount_path')
+                    mounted = Path(mounted).resolve()
+                    need(all(mounted != scope and mounted not in scope.parents and scope not in mounted.parents
+                             for scope in (old_directory, directory)), 'reuse_mounted')
+        fence()
+        already_copied = directory.exists()
+        if already_copied:
+            private_directory(directory); private_directory(directory / 'generation')
+            need(diagnosis_json(directory / 'PLAN.json')[1] == json_bytes(plan) and
+                 not (directory / 'ACCEPTED.json').exists() and not (directory / 'ROLLED_BACK.json').exists() and
+                 not (directory / 'ACCEPTED.pending').exists() and
+                 diagnosis_json(directory / 'REUSED.json')[0] == copy_proof, 'reuse_existing_copy')
+        else:
+            disk = os.statvfs(BASE)
+            # Worst case for ordinary copies, plus bounded metadata/headroom.
+            # This test precedes mkdir, PLAN, temporary files or any write.
+            need(disk.f_bavail * disk.f_frsize >= total_bytes + 64 * 1024 * 1024, 'reuse_disk_capacity')
+        for descriptor in plan['files']:
+            filename = source_path(descriptor['name'])
+            need(file_sha(filename) == descriptor['sha256'] and
+                 reuse_file_identity(filename) == identities[descriptor['name']], 'reuse_source_hash')
+        generation, generation_raw = diagnosis_json(source_path('GENERATION.json'))
+        oracle, oracle_raw = diagnosis_json(source_path('acceptance.json'))
+        need(generation.get('generationId') == plan['generationId'] and generation.get('runtimeSha') == plan['pricingRuntimeSha'] and
+             generation.get('prepared') is True and generation.get('source', {}).get('supplierLatestVerified') is True, 'reuse_generation')
+        need(oracle.get('version') == 1 and oracle.get('runtimeSha') == plan['runtimeSha'] and
+             oracle.get('pricingRuntimeSha') == plan['pricingRuntimeSha'] and
+             oracle.get('generationManifestSha256') == plan['generationManifestSha256'] and
+             isinstance(oracle.get('cases'), list) and len(oracle['cases']) >= 8, 'reuse_oracle')
+        fence()
+        if not already_copied:
+            host = Host(plan)
+            for descriptor in plan['files']:
+                fence()
+                reuse_copy_file(source_path(descriptor['name']), target_path(descriptor['name']), descriptor,
+                                identities[descriptor['name']])
+            new_file(directory / 'REUSED.json', json_bytes(copy_proof))
+            for folder in (directory / 'generation', directory, directory.parent):
+                fd = os.open(folder, os.O_RDONLY | os.O_DIRECTORY)
+                try: os.fsync(fd)
+                finally: os.close(fd)
+        else:
+            for descriptor in plan['files']:
+                filename = target_path(descriptor['name'])
+                identity = reuse_file_identity(filename)
+                need(identity[2] == descriptor['bytes'] and identity[:2] != identities[descriptor['name']][:2] and
+                     file_sha(filename) == descriptor['sha256'] and reuse_file_identity(filename) == identity, 'reuse_copy_readback')
+            host = Host.__new__(Host)
+            host.initialize_session(plan)
+        fence()
+        host.uploaded = set(FILE_NAMES)
+        host.reuse_verified = True
+        host.reuse_retained_identity = retained_identity
+        host.lock = lock
+        lock = None
+        return host, {'initialized': True, 'reused': True, 'plan': plan,
+                      'generationBase64': base64.b64encode(generation_raw).decode(), 'oracleBase64': base64.b64encode(oracle_raw).decode(),
+                      'copiedFiles': len(plan['files']), 'copiedBytes': total_bytes}
+    finally:
+        if lock is not None:
+            os.close(lock)
+
+
 class Host:
     def __init__(self, plan):
         validate_plan(plan)
@@ -768,6 +971,12 @@ class Host:
         new_file(self.directory / 'PLAN.json', json_bytes(plan))
         self.generation = self.directory / 'generation'
         self.generation.mkdir(mode=0o700)
+        self.initialize_session(plan)
+
+    def initialize_session(self, plan):
+        self.plan = plan
+        self.directory = BASE / plan['runtimeSha'] / 'china-next' / plan['nonce']
+        self.generation = self.directory / 'generation'
         self.uploaded = set()
         self.candidate = None
         self.switched = False
@@ -829,10 +1038,13 @@ class Host:
 
     def start(self):
         need(self.uploaded == expected_files(self.plan) and self.candidate is None, 'upload_not_complete')
-        self.lock = os.open('/run/lock/avtocena-runtime-change.lock', os.O_RDONLY | os.O_NOFOLLOW | os.O_CLOEXEC)
-        info = os.fstat(self.lock)
-        need(stat.S_ISREG(info.st_mode) and info.st_uid == 0 and info.st_nlink == 1, 'runtime_lock')
-        fcntl.flock(self.lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        if not getattr(self, 'reuse_verified', False):
+            self.lock = os.open('/run/lock/avtocena-runtime-change.lock', os.O_RDONLY | os.O_NOFOLLOW | os.O_CLOEXEC)
+            info = os.fstat(self.lock)
+            need(stat.S_ISREG(info.st_mode) and info.st_uid == 0 and info.st_nlink == 1, 'runtime_lock')
+            fcntl.flock(self.lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        else:
+            need(self.lock is not None, 'reuse_lock_lost')
         regular(CONFIG, 1024 * 1024)
         self.original = CONFIG.read_bytes()
         self.old_port = backend(self.original)
@@ -842,6 +1054,8 @@ class Host:
                    for bindings in (row.get('HostConfig', {}).get('PortBindings') or {}).values() for binding in bindings)]
         need(len(serving) == 1, 'serving_container')
         self.retained = serving[0]
+        if getattr(self, 'reuse_verified', False):
+            need(protected_identity(self.retained) == self.reuse_retained_identity, 'reuse_retained_changed')
         env = env_map(self.retained)
         need(env.get('AVTOCENA_RELEASE_SHA') == retained_runtime(self.plan) and env.get('AVTOCENA_CALCULATION_VERSION') == CALCULATION and
              self.retained['State']['Running'] and not self.retained['HostConfig']['Privileged'], 'serving_identity')
@@ -870,7 +1084,7 @@ class Host:
         self.port = ports[0]
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as probe:
             probe.bind(('127.0.0.1', self.port))
-        if not generation_update(self.plan):
+        if not generation_update(self.plan) and not getattr(self, 'reuse_verified', False):
             info = docker('GET', '/info')
             need(info.get('ServerVersion') == '29.1.3' and
                  ['driver-type', 'io.containerd.snapshotter.v1'] in info.get('DriverStatus', []), 'image_store')
@@ -917,17 +1131,76 @@ class Host:
         self.candidate = created.get('Id')
         need(re.fullmatch(r'[a-f0-9]{64}', self.candidate or ''), 'candidate_identity')
         docker('POST', '/containers/' + self.candidate + '/start')
-        deadline = time.monotonic() + 120
+        self.wait_startup()
+        self.verify_candidate()
+        return {'started': True, 'release': self.plan['runtimeSha'], 'generationId': self.plan['generationId'],
+                'startup': self.startup_report}
+
+    def wait_startup(self):
+        started = time.monotonic()
+        deadline = started + 900
+        attempts = 0
+        category = 'not_checked'
+        candidate = None
+        def finish(reason):
+            self.startup_report = {'version': 1, 'kind': 'china-host-startup-v1', 'ready': reason == 'ready',
+                                   'elapsedSeconds': round(time.monotonic() - started, 4), 'attempts': attempts,
+                                   'health': category, 'candidate': candidate, 'reason': reason}
+            # Persist and transmit safe metadata before cleanup can remove the
+            # process. No environment, log text, card or supplier data is kept.
+            new_file(self.directory / 'STARTUP.json', json_bytes(self.startup_report))
+            fd = os.open(self.directory, os.O_RDONLY | os.O_DIRECTORY)
+            try: os.fsync(fd)
+            finally: os.close(fd)
         while True:
             try:
-                health(self.port, self.plan['runtimeSha'])
-                break
+                row = docker('GET', '/containers/' + self.candidate + '/json')
+                state = row.get('State', {})
+                need(row.get('Id') == self.candidate and row.get('Image') == self.plan['imageId'] and
+                     row.get('Config', {}).get('Labels', {}).get('avtocena.china.nonce') == self.plan['nonce'] and
+                     type(state.get('Running')) is bool and type(state.get('OOMKilled')) is bool and
+                     type(state.get('ExitCode')) is int and type(row.get('RestartCount')) is int and
+                     state.get('Status') in {'created', 'restarting', 'running', 'removing', 'paused', 'exited', 'dead'},
+                     'candidate_changed')
+                candidate = {'running': state['Running'], 'status': state['Status'], 'exitCode': state['ExitCode'],
+                             'oomKilled': state['OOMKilled'], 'restartCount': row['RestartCount']}
             except Exception:
-                if time.monotonic() >= deadline:
-                    raise ReleaseError('china_host_candidate_startup') from None
-                time.sleep(1)
-        self.verify_candidate()
-        return {'started': True, 'release': self.plan['runtimeSha'], 'generationId': self.plan['generationId']}
+                finish('inspect_unavailable')
+                raise ReleaseError('china_host_candidate_inspection') from None
+            if candidate['oomKilled']:
+                finish('oom')
+                raise ReleaseError('china_host_candidate_oom')
+            if not candidate['running']:
+                finish('exited')
+                raise ReleaseError('china_host_candidate_exited')
+            if candidate['restartCount'] != 0:
+                finish('restarted')
+                raise ReleaseError('china_host_candidate_restarted')
+            attempts += 1
+            ready = False
+            try:
+                health(self.port, self.plan['runtimeSha'])
+                ready = True
+            except ConnectionRefusedError:
+                category = 'connection_refused'
+            except (TimeoutError, socket.timeout):
+                category = 'timeout'
+            except json.JSONDecodeError:
+                category = 'invalid_json'
+            except ReleaseError as error:
+                category = {'china_host_health_identity': 'identity_mismatch', 'china_host_http_response': 'http_response'}.get(str(error), 'unavailable')
+            except OSError:
+                category = 'connection_error'
+            except Exception:
+                category = 'unavailable'
+            if ready:
+                category = 'ok'
+                finish('ready')
+                return
+            if time.monotonic() >= deadline:
+                finish('timeout')
+                raise ReleaseError('china_host_candidate_startup') from None
+            time.sleep(max(0, min(1, deadline - time.monotonic())))
 
     def verify_candidate(self):
         self.guard()
@@ -1190,6 +1463,9 @@ def main():
                 need(recovered, 'close_uninitialized')
                 emit({'kind': 'result', 'id': identity, 'value': {'closed': True, 'readOnly': not maintenance}})
                 return
+            elif method == 'resume_init':
+                need(host is None, 'already_initialized')
+                host, value = resume_failed_upload(params)
             elif method == 'init':
                 need(host is None, 'already_initialized')
                 host = Host(params['plan'])
@@ -1228,7 +1504,10 @@ def main():
             signal.signal(cancellation, signal.SIG_IGN)
         code = str(error) if isinstance(error, ReleaseError) else 'china_host_operation_failed'
         try:
-            emit({'kind': 'error', 'id': locals().get('identity'), 'code': code})
+            reply = {'kind': 'error', 'id': locals().get('identity'), 'code': code}
+            if host is not None and hasattr(host, 'startup_report'):
+                reply['startup'] = host.startup_report
+            emit(reply)
         except (BrokenPipeError, OSError):
             pass
         raise
