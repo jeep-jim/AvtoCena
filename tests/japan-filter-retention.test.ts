@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import {appendJapanFilterQuery,rememberedJapanFilter,JAPAN_FILTER_KEYS,savedJapanFilterKey} from '../apps/web/lib/catalog/japan-filter-retention';
-import {ajesCatalogQuery,ajesQuery,AjesFilterUnavailable} from '../apps/web/lib/catalog/ajes-query';
+import {ajesCatalogQuery,ajesQuery} from '../apps/web/lib/catalog/ajes-query';
 import {selectionQuery,selectionTarget} from '../apps/web/lib/dealers/selection-share';
 
 const chosen={chassis:'ZVW30',frameNumber:'ZVW30-1234567',lotNumber:'12345',auctionGrade:'4.5',salePeriod:'month'};
@@ -12,11 +12,12 @@ test('Japan auction choices reach the real supplier query intact',()=>{
  for(const key of JAPAN_FILTER_KEYS){assert.equal(params.get(key),chosen[key]);assert.equal(params.has(savedJapanFilterKey(key)),false);assert.equal(query[key],chosen[key]);}
  assert.doesNotThrow(()=>ajesQuery(query));
 });
-for(const market of ['korea','china'])test(`${market} retains Japan choices without sending unsupported supplier constraints`,()=>{
- assert.throws(()=>ajesCatalogQuery({market,...chosen}),AjesFilterUnavailable);
- const params=paramsFor(market),query=ajesCatalogQuery(Object.fromEntries(params));
- for(const key of JAPAN_FILTER_KEYS){assert.equal(params.has(key),false);assert.equal(params.get(savedJapanFilterKey(key)),chosen[key]);assert.equal(query[key],undefined);}
- assert.equal(query.make,'TOYOTA');assert.equal(params.get('budget'),'1500000');assert.doesNotThrow(()=>ajesQuery(query));
+for(const market of ['korea','china'])test(`${market} retains Japan choices for return navigation while AJ rejects that market`,()=>{
+ assert.throws(()=>ajesCatalogQuery({market,...chosen}),/market_not_supported/);
+ const params=paramsFor(market);
+ for(const key of JAPAN_FILTER_KEYS){assert.equal(params.has(key),false);assert.equal(params.get(savedJapanFilterKey(key)),chosen[key]);}
+ assert.equal(params.get('market'),market);assert.equal(params.get('make'),'TOYOTA');assert.equal(params.get('model'),'PRIUS');assert.equal(params.get('budget'),'1500000');
+ assert.throws(()=>ajesCatalogQuery(Object.fromEntries(params)),/market_not_supported/);
 });
 test('returning to Japan restores every choice after a URL round trip',()=>{
  const initial=Object.fromEntries(new URLSearchParams(paramsFor('korea').toString()));

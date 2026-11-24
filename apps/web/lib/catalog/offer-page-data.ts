@@ -20,7 +20,7 @@ const getOfferAcrossRequests = unstable_cache(
 );
 
 async function resilientOfferLookup(id: string) {
-  if (/^ajes-(?:stats|korea|china)-[A-Za-z0-9_-]{1,64}$/.test(id)) return getOfferWithoutEditorial(id);
+  if (/^ajes-stats-[A-Za-z0-9_-]{1,64}$/.test(id)) return getOfferWithoutEditorial(id);
   // A transient miss during a catalog publication must not turn a live card
   // into a cached 404 for the full revalidation window. Retry the authoritative
   // reader once outside the shared cache when the cached lookup misses or its
@@ -44,7 +44,7 @@ export const getOfferForPage = cache(async (id: string) => {
 // The same authoritative record feeds the page and its share preview.
 export const getOfferDetailRecord = cache(async (id:string)=>{
   if(retiredAjesOffer(id))return null;
-  if (/^ajes-(?:stats|korea|china)-[A-Za-z0-9_-]{1,64}$/.test(id)){const offer=await getOfferForPage(id);return offer?(await attachManagementKnowledge([offer],true))[0]:null;}
+  if (/^ajes-stats-[A-Za-z0-9_-]{1,64}$/.test(id)){const offer=await getOfferForPage(id);return offer?(await attachManagementKnowledge([offer],true))[0]:null;}
   let storedOffer = isJapanCatalogOfferId(id)
     ? await getOfferFromCurrentShard(id) || await getOfferForPage(id) || await getOfferFromCurrentProjection(id)
     : await getOfferForPage(id) || await getOfferFromCurrentShard(id) || await getOfferFromCurrentProjection(id);

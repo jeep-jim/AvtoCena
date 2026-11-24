@@ -14,7 +14,6 @@ import {cache} from 'react';
 import {DetailReadCache} from './detail-read-cache';
 import {ajesClient} from './ajes-runtime';
 import {AjesUnavailable,readAjesModelDirectory,readAjesMakeDirectory} from './ajes-client';
-import {ajesChinaPriceAllowed} from './ajes-price-policy';
 import {readAjesPublic,cappedAjesQuery} from './ajes-public';
 import {ajesCatalogQuery} from './ajes-query';
 export {ajesCatalogQuery,AjesFilterUnavailable} from './ajes-query';
@@ -53,7 +52,7 @@ export const readAjesCountSummary=cache(async(key='{}'):Promise<AjesCountSummary
  const q={...resolved.query};delete q.page;delete q.pageSize;delete q.sort;
  const result=await ajesClient.read(await cappedAjesQuery({...q,aggregate:'count'}),(await headers()).get('x-real-ip')||'');
  if(!Number.isSafeInteger(result.total)||result.total<0)throw Error('ajes_count_invalid');
- return {total:result.total,stale:Boolean(result.stale),observedAt:result.observedAt,upperBound:q.table==='china'||filter.active};
+ return {total:result.total,stale:Boolean(result.stale),observedAt:result.observedAt,upperBound:filter.active};
 });
 export const readAjesCount=cache(async(key='{}'):Promise<number> => (await readAjesCountSummary(key)).total);
 const directories=new DetailReadCache<any>({maxEntries:16,maxBytes:4*1024*1024,ttlMs:30*60000,concurrency:2,shouldCache:value=>!value.stale});
@@ -77,9 +76,9 @@ export async function readAjesCatalogPage(params:Record<string,unknown>,measure?
  const {modelDirectoryUnavailable}=resolved;
  let query={...resolved.query};
  const visiblePageSize=query.pageSize||24;
- if(filter.priceTo!==undefined&&['stats','korea'].includes(query.table||'stats')){
-  const market=query.table==='korea'?'korea':'japan';
-  const [rate,editorial,savedPrices]=await Promise.all([convertToRub(1,market==='korea'?'KRW':'JPY').catch(()=>null),readCatalogEditorial().catch(()=>null),
+ if(filter.priceTo!==undefined&&(query.table||'stats')==='stats'){
+  const market='japan';
+  const [rate,editorial,savedPrices]=await Promise.all([convertToRub(1,'JPY').catch(()=>null),readCatalogEditorial().catch(()=>null),
    import('./saved-calculation-previews').then(m=>m.hasSavedPreviewEntriesForMarket(market)).catch(()=>true)]);
   const prices=editorial as CatalogEditorialIndex|null;
   query=ajesBudgetCandidates(query,filter.priceTo,rate,savedPrices||!prices||Object.values(prices.entries).some(entry=>entry.market===market&&entry.status==='visible'&&entry.sellerPrice));
@@ -106,7 +105,7 @@ export async function readAjesCatalogPage(params:Record<string,unknown>,measure?
   const page={...received,items:candidates,...(modelDirectoryUnavailable?{partial:true}:{})};
   const pricingStarted=performance.now();
   let priced=page.items;
-  if(query.table==='china'||query.table==='korea'||filter.priceFilter)priced=await applyActiveBusinessPricingBatch(page.items);
+  if(filter.priceFilter)priced=await applyActiveBusinessPricingBatch(page.items);
   else {
    // Only newly attested auction cards need the existing delivered-preview path.
    // Leave unmatched supplier rows on their current inexpensive path.
@@ -114,13 +113,13 @@ export async function readAjesCatalogPage(params:Record<string,unknown>,measure?
    if(matched.length){const updated=new Map((await applyActiveBusinessPricingBatch(matched)).map(v=>[v.id,v]));priced=page.items.map(v=>updated.get(v.id)||v);}
   }
   measure?.('pricing',performance.now()-pricingStarted);
-  return {...page,items:priced.filter(v=>v&&ajesChinaPriceAllowed(v)&&filter.matches(v))};
+  return {...page,items:priced.filter(v=>v&&filter.matches(v))};
  };
  const firstPromise=params.after?null:read(query.page||1);
  // Unfiltered source pages keep their own offsets. Do not borrow rows from the
  // next page: numbered navigation must never repeat borrowed listings.
  // Post-calculation filters still require the explicit continuation below.
- if(query.table!=='china'&&!filter.active&&!params.after&&!options.fillPreview){
+ if(!filter.active&&!params.after&&!options.fillPreview){
   const page=await (firstPromise??read(query.page||1));
   const total=readyCount as AjesCountSummary|null;
   return {...page,filteredByPage:false,total:page.partial?null:exactAjesCount(total)??null,countSummary:total,hasMore:!page.partial&&page.received===page.pageSize,items:(query.sort&&query.sort!=="updatedAt"?sortCatalogRows(page.items,query.sort,String(params.city||"")):page.items).map((v:any)=>publicOffer(v)),generationId:page.observedAt,nextCursor:undefined,scanLimited:false,interrupted:false};

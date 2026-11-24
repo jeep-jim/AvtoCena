@@ -9,6 +9,7 @@ import {verifyReadonlyInvocation} from '../../../scripts/lib/readonly-marker-inv
 
 export const ROOT=fileURLToPath(new URL('../../../',import.meta.url));
 export const PROFILE=Object.freeze(profile);
+export const ACCEPTANCE='remove-unused-aj-outside-japan-v1';
 export const MARKER='.github/market-runs/aj-system-japan-only.json';
 export const sha256=value=>createHash('sha256').update(value).digest('hex');
 export const need=(value,code)=>{if(!value)throw Error('aj_release_'+code);};
@@ -18,16 +19,25 @@ const sameSet=(a,b)=>Array.isArray(a)&&a.length===b.length&&new Set(a).size===a.
 
 export function checkedProfile(value=PROFILE){
   need(value.version===1&&value.operation==='release-ajes-japan-only-20261124','profile_kind');
-  for(const key of ['retainedSource','retainedTree','privateIndexParent','source','tree'])need(sha(value[key]),'profile_'+key);
+  need(value.acceptance===ACCEPTANCE,'profile_acceptance');
+  for(const key of ['retainedSource','retainedTree','privateIndexParent','source','tree','calculationAlgorithmBlob'])need(sha(value[key]),'profile_'+key);
   for(const key of ['retainedSourceCalculationVersion','servingCalculationVersion','privateIndexDigest',
-    'sourceCalculationVersion','codeDiffSha256','inventorySha256'])need(digest(value[key]),'profile_'+key);
+    'sourceCalculationVersion','codeDiffSha256','inventorySha256','protectedClosureSha256'])need(digest(value[key]),'profile_'+key);
   need(value.source!==value.retainedSource,'profile_source_unchanged');
   need(Array.isArray(value.codePaths)&&value.codePaths.length>0&&new Set(value.codePaths).size===value.codePaths.length
     &&value.codePaths.every(name=>typeof name==='string'&&!name.includes('..')&&/^(?:apps\/web\/|tests\/)/.test(name)),'profile_paths');
   // The AJ change may affect the catalog integration and admin form, never the
   // engine, its inputs, dependency lockfiles or the permanent encyclopedia.
+  need(Number.isSafeInteger(value.protectedClosureRecords)&&value.protectedClosureRecords>0
+    &&Array.isArray(value.reviewedClosureChanges)&&value.reviewedClosureChanges.length>0
+    &&value.reviewedClosureChanges.every(row=>Array.isArray(row)&&row.length===3&&value.codePaths.includes(row[0])
+      &&row[1]!==row[2]&&row.slice(1).every(identity=>identity===null||/^(?:100644|100755|120000) blob [a-f0-9]{40}$/.test(identity))),
+    'profile_closure');
+  const ajPricePolicyDeleted=value.reviewedClosureChanges.some(([name,before,after])=>
+    name==='apps/web/lib/catalog/ajes-price-policy.ts'&&before!==null&&after===null);
   need(!value.codePaths.some(name=>/^apps\/web\/(?:lib\/encyclopedia\/|app\/.*encyclopedia|package\.json|tsconfig|next\.config)/.test(name)
-    ||/^apps\/web\/lib\/catalog\/(?:.*pric.*|rates|customs|calculation|knowledge-core|spec-normalization|offer-parameter)/.test(name)),
+    ||(/^apps\/web\/lib\/catalog\/(?:.*pric.*|rates|customs|calculation|knowledge-core|spec-normalization|offer-parameter)/.test(name)
+      &&!(name==='apps/web/lib/catalog/ajes-price-policy.ts'&&ajPricePolicyDeleted))),
     'protected_path');
   const observed=value.inventory;
   need(observed?.version===1&&observed.status==='verified_inventory_requires_review'&&observed.readOnly===true
@@ -62,6 +72,35 @@ function calculationRecords(root,ref){
 }
 export const calculationFingerprint=(root,ref)=>sha256('avtocena-calculator-v1\0'+calculationRecords(root,ref).join('\0'));
 
+/** Exact reviewed AJ edits are listed individually. Every other runtime,
+ * calculator, encyclopedia, data, dependency and build record stays identical.
+ * This is a byte proof, not a claim that catalog performance was revalidated. */
+export function sourceClosureProof(root,retainedRef,sourceRef){
+  const before=calculationRecords(root,retainedRef),after=calculationRecords(root,sourceRef);
+  const byPath=records=>new Map(records.map(record=>{
+    const at=record.indexOf('\t');return [record.slice(at+1),record.slice(0,at)];
+  }));
+  const retained=byPath(before),candidate=byPath(after);
+  const reviewedClosureChanges=[...new Set([...retained.keys(),...candidate.keys()])].sort()
+    .filter(name=>retained.get(name)!==candidate.get(name))
+    .map(name=>[name,retained.get(name)??null,candidate.get(name)??null]);
+  const changed=new Set(reviewedClosureChanges.map(row=>row[0]));
+  const protectedRecords=records=>records.filter(record=>!changed.has(record.slice(record.indexOf('\t')+1)));
+  const protectedBefore=protectedRecords(before),protectedAfter=protectedRecords(after);
+  need(JSON.stringify(protectedBefore)===JSON.stringify(protectedAfter),'protected_closure_changed');
+  const algorithm='scripts/catalog-calculation-version.mjs';
+  const calculationAlgorithmBlob=git(root,['rev-parse',retainedRef+':'+algorithm]).trim();
+  need(git(root,['rev-parse',sourceRef+':'+algorithm]).trim()===calculationAlgorithmBlob,'calculation_algorithm_changed');
+  return {calculationAlgorithmBlob,reviewedClosureChanges,protectedClosureRecords:protectedBefore.length,
+    protectedClosureSha256:sha256('avtocena-aj-protected-runtime-v1\0'+protectedBefore.join('\0'))};
+}
+
+export function assertSourceClosure(proof,value=PROFILE){
+  for(const key of ['calculationAlgorithmBlob','protectedClosureRecords','protectedClosureSha256','reviewedClosureChanges'])
+    need(JSON.stringify(proof[key])===JSON.stringify(value[key]),'source_'+key);
+  return proof;
+}
+
 export function verifySource(root,value=PROFILE){
   checkedProfile(value);
   need(git(root,['rev-parse','HEAD']).trim()===value.source&&git(root,['rev-parse','HEAD^{tree}']).trim()===value.tree,'source_head');
@@ -75,9 +114,10 @@ export function verifySource(root,value=PROFILE){
   need(sha256(diff)===value.codeDiffSha256,'source_diff');
   need(calculationFingerprint(root,value.retainedSource)===value.retainedSourceCalculationVersion
     &&calculationFingerprint(root,value.source)===value.sourceCalculationVersion,'source_calculation');
-  return {version:1,source:value.source,tree:value.tree,retainedSource:value.retainedSource,
+  const closure=assertSourceClosure(sourceClosureProof(root,value.retainedSource,value.source),value);
+  return {version:1,acceptance:ACCEPTANCE,source:value.source,tree:value.tree,retainedSource:value.retainedSource,
     sourceCalculationVersion:value.sourceCalculationVersion,servingCalculationVersion:value.servingCalculationVersion,
-    codeDiffSha256:value.codeDiffSha256,codePaths:paths,protectedTreeUnchanged:true,clean:true};
+    codeDiffSha256:value.codeDiffSha256,codePaths:paths,...closure,protectedTreeUnchanged:true,clean:true};
 }
 
 export function verifyGates(root=ROOT){
@@ -100,9 +140,25 @@ export function assertServerReceipt(receipt,nonce,phase,value=PROFILE,routes=ver
   return receipt;
 }
 
+export function assertRemovalReceipt(receipt,nonce,phase,value=PROFILE){
+  need(['private','public'].includes(phase)&&receipt?.version===1&&receipt.acceptance===ACCEPTANCE
+    &&receipt.release===value.source&&receipt.nonce===nonce&&receipt.phase===phase
+    &&receipt.protectedClosureSha256===value.protectedClosureSha256
+    &&receipt.passed===true&&receipt.healthVerified===true&&receipt.retiredSourcesRejected===true
+    &&receipt.retiredReportRejected===true&&receipt.anonymousCrmRejected===true&&receipt.authorityUnchanged===true
+    &&receipt.japanBoundaryVerified===(phase==='private')&&receipt.ordinaryCatalogRequests===0
+    &&receipt.supplierRequests===0&&receipt.catalogPerformanceRevalidated===false,'removal_failed');
+  return receipt;
+}
+
 export function assertBrowserReceipt(verdict,nonce,value=PROFILE){
-  need(verdict?.schemaVersion===1&&verdict.release===value.source&&verdict.nonce===nonce
-    &&verdict.passed===true&&verdict.functionalPassed===true&&verdict.speedPassed===true&&digest(verdict.reportSha256),'browser_failed');
+  need(verdict?.schemaVersion===1&&verdict.acceptance===ACCEPTANCE&&verdict.kind==='isolated-owner-ui'
+    &&verdict.release===value.source&&verdict.nonce===nonce&&verdict.tree===value.tree
+    &&verdict.codeDiffSha256===value.codeDiffSha256&&verdict.protectedClosureSha256===value.protectedClosureSha256
+    &&verdict.passed===true&&verdict.uiPassed===true&&verdict.retiredSourcesAbsent===true
+    &&verdict.japanFormPreserved===true&&verdict.retiredRequests===0
+    &&JSON.stringify(verdict.widths)==='[390,1440]'&&verdict.liveOwnerCrmVerified===false
+    &&verdict.catalogPerformanceRevalidated===false&&digest(verdict.reportSha256),'browser_failed');
   return verdict;
 }
 

@@ -4,7 +4,7 @@ import {build} from 'esbuild';
 import {createRequire} from 'node:module';
 const require=createRequire(import.meta.url);
 
-test('complete AJES rows reuse exact local facts; compact rows still verify price and identity',async()=>{
+test('complete Japanese AJ rows reuse exact local facts; compact rows still verify price and identity',async()=>{
  const state={reads:[] as string[],calculated:[] as any[],records:new Map<string,any>(),revision:'knowledge-1',hp:150};
  (globalThis as any).__managementReuse=state;
  const stubs:Record<string,string>={
@@ -17,8 +17,8 @@ test('complete AJES rows reuse exact local facts; compact rows still verify pric
  try{
   const built=await build({entryPoints:['apps/web/lib/catalog/management-previews.ts'],bundle:true,platform:'node',format:'cjs',write:false,plugins:[{name:'reuse-fixture',setup(b){b.onResolve({filter:/.*/},a=>a.path in stubs?{path:a.path,namespace:'stub'}:undefined);b.onLoad({filter:/.*/,namespace:'stub'},a=>({contents:stubs[a.path]}));}}]});
   const mod={exports:{} as any};new Function('require','module','exports',built.outputFiles[0].text)(require,mod,mod.exports);
-  const base=(market:string,n:number)=>({id:`ajes-${market==='japan'?'stats':market}-${n}`,sourceId:`ajes_${market}_feed`,sourceOfferId:String(n),market,year:2023,fuel:'petrol',engineCc:1600,sourcePrice:100000+n,sourceCurrency:market==='japan'?'JPY':market==='korea'?'KRW':'CNY',updatedAt:'2026-10-27T15:00:00Z',operational:{raw:{sourceDrive:'4WD'},managementKnowledge:{revision:'knowledge-1',parameters:{powerHp:150,drive:'awd'}}}});
-  const rows=Array.from({length:24},(_,i)=>base(['japan','korea','china'][i%3],i));
+  const base=(n:number)=>({id:`ajes-stats-${n}`,sourceId:'ajes_japan_feed',sourceOfferId:String(n),market:'japan',year:2023,fuel:'petrol',engineCc:1600,sourcePrice:100000+n,sourceCurrency:'JPY',updatedAt:'2026-10-27T15:00:00Z',operational:{raw:{sourceDrive:'4WD'},managementKnowledge:{revision:'knowledge-1',parameters:{powerHp:150,drive:'awd'}}}});
+  const rows=Array.from({length:24},(_,i)=>base(i));
   for(const row of rows)state.records.set(row.id,row);
   const result=await mod.exports.attachManagementPreviews(rows,{version:'one'});
   assert.equal(state.reads.length,0,'SELECT * rows must not refetch 24 details');
@@ -29,11 +29,11 @@ test('complete AJES rows reuse exact local facts; compact rows still verify pric
   const revised=await mod.exports.attachManagementPreviews([{...rows[0],sourcePrice:200000}],{version:'one'});
   assert.equal(revised[0].savedCalculationPreview.totalRub,400160,'new knowledge and recipient price invalidate the quote');
   assert.equal(state.reads.length,0);
-  const compact={...base('korea',100),cardProjectionVersion:3};state.records.set(compact.id,{...base('korea',100),sourcePrice:999});
+  const compact={...base(100),cardProjectionVersion:3};state.records.set(compact.id,{...base(100),sourcePrice:999});
   assert.equal((await mod.exports.attachManagementPreviews([compact],{version:'one'}))[0].savedCalculationPreview,undefined,'changed authoritative price must not get a quote');
-  const publicRow={...base('korea',101),operational:undefined};state.records.set(publicRow.id,base('korea',101));
+  const publicRow={...base(101),operational:undefined};state.records.set(publicRow.id,base(101));
   assert.ok((await mod.exports.attachManagementPreviews([publicRow],{version:'one'}))[0].savedCalculationPreview);
-  const wrong={...base('korea',102),sourceOfferId:'different'};state.records.set(wrong.id,{...wrong,market:'china'});
+  const wrong={...base(102),sourceOfferId:'different'};state.records.set(wrong.id,{...wrong,market:'china'});
   assert.equal((await mod.exports.attachManagementPreviews([wrong],{version:'one'}))[0].savedCalculationPreview,undefined);
   assert.deepEqual(state.reads,[compact.id,publicRow.id,wrong.id]);
  }finally{delete (globalThis as any).__managementReuse;}

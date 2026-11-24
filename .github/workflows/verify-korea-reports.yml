@@ -2,15 +2,10 @@ name: Verify Korea report disclosure
 on:
   pull_request:
     paths:
-      - 'apps/web/components/catalog/KoreaReportPanel.tsx'
-      - 'apps/web/components/catalog/OfferSpecificationsDisclosure.tsx'
-      - 'apps/web/lib/catalog/korea-report*'
-      - 'apps/web/lib/catalog/korea-inspection*'
-      - 'apps/web/components/catalog/KoreaInspectionBody.tsx'
-      - 'tests/fixtures/korea-inspection*'
-      - 'apps/web/app/api/catalog/korea-report/**'
-      - 'tests/korea-report*'
-      - 'tests/browser/korea-report*'
+      - 'scripts/catalog-prepare-paid-encar-reports.mjs'
+      - 'scripts/lib/paid-korea-publication-guard.mjs'
+      - 'tests/paid-encar-report-preparation.test.mjs'
+      - 'tests/paid-korea-publication-guard.test.ts'
       - '.github/workflows/verify-korea-reports.yml'
   workflow_dispatch:
 permissions:
@@ -27,13 +22,5 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run typecheck
-      - run: npm install --prefix "$RUNNER_TEMP/korea-browser" --no-package-lock --ignore-scripts playwright@1.55.0
-      - name: Verify lazy report links and Russian controls
-        env:
-          CHROME_BIN: /usr/bin/google-chrome
-        run: PLAYWRIGHT_MODULE="$RUNNER_TEMP/korea-browser/node_modules/playwright/index.mjs" node tests/browser/korea-report.mjs
-      - uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: korea-report-browser
-          path: artifacts/korea-report/
+      - name: Verify saved Auto API reports and paid-source publication guards
+        run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test --test-concurrency=1 tests/paid-encar-report-preparation.test.mjs tests/paid-korea-publication-guard.test.ts

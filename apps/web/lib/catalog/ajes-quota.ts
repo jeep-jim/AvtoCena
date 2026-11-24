@@ -1,6 +1,6 @@
 import {StorageConflictError,type JsonStorage} from '../data';
 import {AjesUnavailable,assertAjesJapanTable} from './ajes-access-policy';
-export type AjesUsageTable='main'|'stats'|'china'|'korea';
+export type AjesUsageTable='main'|'stats';
 
 /** Owner instruction 17.10.2026: retain usage accounting, remove the local daily cutoff.
  * This does not grant extra supplier quota or bypass supplier refusals/rate limits. */

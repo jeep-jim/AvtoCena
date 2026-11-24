@@ -123,7 +123,7 @@ test('new direct deploy-script entrypoints cannot bypass the reviewed inventory'
 const customActivators=new Map([
  ['aj-system-japan-only.yml','.github/operations/ajes-japan-only-20261124/release.mjs'],
 ]);
-test('the reviewed AJ activator requires the unchanged full gates and nonce handshake',()=>{
+test('the pinned AJ removal preserves frozen gates and requires its exact scope and nonce handshake',()=>{
  const [workflow,entry]=[...customActivators][0],filename=path.join(workflowDirectory,workflow);
  if(!fs.existsSync(filename))return;
  const source=fs.readFileSync(filename,'utf8');
@@ -133,14 +133,23 @@ test('the reviewed AJ activator requires the unchanged full gates and nonce hand
  assert.match(source,/ajes-japan-only-release-host\.test\.py/);
  assert.ok(source.includes(entry+' --activate '),'the registered exact AJ entry is required');
  const controller=fs.readFileSync(path.join(root,entry),'utf8');
- assert.match(controller,/assertServerReceipt\(await io\.server\('private'\)/);
- assert.match(controller,/assertServerReceipt\(await io\.server\('public'\)/);
+ assert.match(controller,/assertRemovalReceipt\(await io\.removal\('private'\)/);
+ assert.match(controller,/assertRemovalReceipt\(await io\.removal\('public'\)/);
  assert.match(controller,/assertBrowserReceipt\(await io\.browser\(\),nonce,profile\)/);
+ assert.doesNotMatch(controller,/step\('server-(?:private|public)'/);
+ const contract=fs.readFileSync(path.join(root,'.github/operations/ajes-japan-only-20261124/release-contract.mjs'),'utf8');
+ assert.match(contract,/remove-unused-aj-outside-japan-v1/);
+ assert.match(contract,/reviewedClosureChanges/);
+ assert.match(contract,/calculationAlgorithmBlob/);
+ assert.match(contract,/protectedClosureSha256/);
+ assert.match(contract,/catalogPerformanceRevalidated===false/);
+ assert.match(contract,/liveOwnerCrmVerified===false/);
  const host=fs.readFileSync(path.join(root,'.github/operations/ajes-japan-only-20261124/release-host.py'),'utf8');
  assert.match(host,/AVTOCENA_RELEASE_MARKETS': ''/);
  assert.match(host,/AVTOCENA_SPEED_BASELINE_MODE': 'enforce'/);
  assert.match(host,/len\(routes\) == 17/);
- assert.match(host,/wait_for_verdict\(directory, SOURCE, self\.protocol\.nonce\)/);
+ assert.match(host,/wait_for_ui_verdict\(directory, SOURCE, self\.protocol\.nonce\)/);
+ assert.match(host,/self\.require\('removal-private', 'removal-public', 'browser'\)/);
  assert.match(host,/driver\.emergency_rollback\(\)/);
  const ci=fs.readFileSync(path.join(workflowDirectory,'ci.yml'),'utf8');
  assert.match(ci,/^\s+node --test [^\n]*tests\/ajes-japan-only-release\.test\.mjs[^\n]*$/m);

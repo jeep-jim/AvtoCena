@@ -30,23 +30,16 @@ test('retained model directory cannot cross expiry, page or source switch',async
  await assert.rejects(readAjesModelDirectory(client,{table:'stats'},'203.0.113.1'),/source_disabled/);
 });
 test('directory failure permits an exact list query but marks unresolved families incomplete',async()=>{
- const input={table:'korea',make:'HYUNDAI',model:'TUCSON',page:1};
+ const input={table:'stats',make:'TOYOTA',model:'COROLLA',page:1};
  for(const error of [new AjesUnavailable('visitor_restricted'),new AjesUnavailable('local_busy'),Error('detail_cache_queue_timeout')]){
   const result=await resolveAjesQueryModels(input,async()=>{throw error;});
-  assert.deepEqual(result,{query:input,modelDirectoryUnavailable:true});assert.equal(input.model,'TUCSON');
+  assert.deepEqual(result,{query:input,modelDirectoryUnavailable:true});assert.equal(input.model,'COROLLA');
  }
- const result=await resolveAjesQueryModels(input,async()=>({models:[{model:'TUCSON'},{model:'TUCSON NX4'},{model:'SANTA FE'}]}));
- assert.equal(result.query.model,'TUCSON|TUCSON NX4');assert.equal(result.modelDirectoryUnavailable,false);
+ const result=await resolveAjesQueryModels(input,async()=>({models:[{model:'COROLLA'},{model:'COROLLA CROSS'},{model:'CAMRY'}]}));
+ assert.equal(result.query.model,'COROLLA|COROLLA CROSS');assert.equal(result.modelDirectoryUnavailable,false);
  for(const error of [new Error('source_disabled'),new Error('programming failure'),new AjesUnavailable('not_configured')])await assert.rejects(resolveAjesQueryModels(input,async()=>{throw error;}),e=>e===error);
 });
 
-test('Korean ix35 discovery resolves only actual Tucson ix directory rows',async()=>{
- const query={table:'korea',make:'HYUNDAI',model:'ix 35'};
- const rows=[{model:'TUCSON IX'},{model:'TUCSON IX LM'},{model:'TUCSON'},{model:'TUCSON NX4'}];
- assert.equal((await resolveAjesQueryModels(query,async()=>({models:rows}))).query.model,'TUCSON IX|TUCSON IX LM');
- for(const input of [{...query,table:'china'},{...query,make:'OTHER'}])assert.equal((await resolveAjesQueryModels(input,async()=>({models:rows}))).query.model,'ix 35');
- assert.equal((await resolveAjesQueryModels(query,async()=>({models:rows.slice(2)}))).query.model,'ix 35');
-});
 
 test('actual catalog wrapper keeps exact model cards on directory failure and never publishes a false zero',async()=>{
  const {build}=await import('esbuild');const {createRequire}=await import('node:module');const require=createRequire(import.meta.url);
@@ -63,7 +56,7 @@ test('actual catalog wrapper keeps exact model cards on directory failure and ne
   './ajes-result-filter':"export const ajesResultFilter=()=>({active:false,priceFilter:false,matches:()=>true});",
   './storage':"export const publicOffer=x=>x;",'./market-page':"export const sortCatalogRows=x=>x;",
   './live-business-pricing':"export const applyActiveBusinessPricingBatch=async x=>x;",
-  './collection-controls':"export const assertCollectionEnabled=async()=>{};",'./ajes-price-policy':"export const ajesChinaPriceAllowed=()=>true;",
+  './collection-controls':"export const assertCollectionEnabled=async()=>{};",
   './japan-preview-parameters':"export const japanPreviewParameters=()=>{throw Error('not attested');};",'../encyclopedia/calculation-evidence':"export const hasEncyclopediaCalculationEvidence=()=>false;",
  };
  try{

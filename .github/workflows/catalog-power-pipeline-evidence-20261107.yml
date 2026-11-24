@@ -1,8 +1,6 @@
-name: Catalog saved power pipeline evidence 2026-11-07
+name: Japan saved power pipeline evidence
 on:
-  push:
-    branches: [main]
-    paths: ['.github/workflows/catalog-power-pipeline-evidence-20261107.yml']
+  workflow_dispatch:
 permissions:
   contents: read
 concurrency:
@@ -30,11 +28,8 @@ jobs:
           import {ajesCatalogQuery,ajesQuery} from '../apps/web/lib/catalog/ajes-query';
           import {readAjesQueryCache} from '../apps/web/lib/catalog/ajes-query-cache';
           import {ajesOffer} from '../apps/web/lib/catalog/ajes-offer';
-          import {newerKoreaDetail} from '../apps/web/lib/catalog/ajes-korea-detail-cache';
           import {enrichJapanDrive} from '../apps/web/lib/catalog/japan-drive';
           import {applyJapanFactoryFuel} from '../apps/web/lib/encyclopedia/japan-fuel-reference';
-          import {enrichOfferWithKnowledgeCore} from '../apps/web/lib/catalog/knowledge-core';
-          import {normalizeVehicleOfferSpecs} from '../apps/web/lib/catalog/spec-normalization';
           import {readCatalogEditorial,applyCatalogEditorial,editorialHidden} from '../apps/web/lib/catalog/editorial';
           import {applyJapanOwnerSpecifications} from '../apps/web/lib/catalog/japan-owner-specifications';
           import {catalogInventoryAgeDecision,catalogVehicleExcluded} from '../apps/web/lib/catalog/inventory-admission';
@@ -44,20 +39,15 @@ jobs:
           async function main(){
             const index=readCalculationIndex();if(!index)throw Error('index_missing');
             const storage=getJsonStorage();const editorial=await readCatalogEditorial();
-            console.log('SCOPE',JSON.stringify({readOnly:true,supplierRequests:0,queries:2,maxLots:48,pricesComputed:false,indexDigest:index.digest,rateSentinel:'Constructor-only rate=1; no price or monetary output; technical fields only'}));
-            for(const market of ['japan','korea']){
+            console.log('SCOPE',JSON.stringify({readOnly:true,supplierRequests:0,queries:1,maxLots:24,pricesComputed:false,indexDigest:index.digest,rateSentinel:'Constructor-only rate=1; no price or monetary output; technical fields only'}));
+            for(const market of ['japan']){
               const query=ajesQuery(ajesCatalogQuery({market,page:'1',pageSize:'24'}));
               const saved:any=await readAjesQueryCache(storage,query.sql);
               const summary:any={market,found:!!saved,observedAt:safe(saved?.observedAt),partial:!!saved?.partial,stale:!!saved?.stale,examined:0,detailPresent:0,detailUsed:0,annualModelMissing:0,powerAt:{constructor:0,calculationIndex:0,knowledgeCore:0,normalized:0,editorial:0,owner:0},knowledgeReasons:{},knownUnder160:0,eligibleUnder160:0,hidden:0,ageExcluded:0,vehicleExcluded:0,samples:[],errors:0};
               for(const original of (Array.isArray(saved?.items)?saved.items:[]).slice(0,24)){
                 if(original.table!==query.table||typeof original.id!=='string'||!/^[A-Za-z0-9_-]{1,64}$/.test(original.id))continue;
                 try{
-                  summary.examined++;let lot=original;
-                  if(market==='korea'){
-                    const detail:any=await storage.readJson('catalog/partner-cache/ajes/korea/'+lot.id+'.json',null);
-                    if(detail)summary.detailPresent++;
-                    lot=newerKoreaDetail(lot,saved.observedAt,detail);if(lot!==original)summary.detailUsed++;
-                  }
+                  summary.examined++;const lot=original;
                   // Required by constructor only. Nothing using the sentinel money is emitted or saved.
                   const amount=lot.finalPriceJpy||lot.sourcePrice;
                   const rate:any={rateSource:'cbr',currency:lot.currency,sourcePrice:amount,effectiveRate:1};
@@ -67,11 +57,9 @@ jobs:
                   let value=applyJapanFactoryFuel(applyEncyclopediaCalculation(enrichJapanDrive(initial,index),index));
                   summary.powerAt.calculationIndex+=Number(power(value));
                   const evidenceBeforeCore=hasEncyclopediaCalculationEvidence(value);
-                  if(market==='korea')value=await enrichOfferWithKnowledgeCore(value);
                   summary.powerAt.knowledgeCore+=Number(power(value));
-                  const reason=market==='japan'?'not_used_for_japan':evidenceBeforeCore?'calculation_evidence_short_circuit':safe(value.operational?.knowledgeCore?.variantResolution?.reason||'matched_or_core_absent');
+                  const reason='not_used_for_japan';
                   summary.knowledgeReasons[reason]=(summary.knowledgeReasons[reason]||0)+1;
-                  if(market==='korea')value=normalizeVehicleOfferSpecs(value);
                   summary.powerAt.normalized+=Number(power(value));
                   const hidden=editorialHidden(value,editorial);summary.hidden+=Number(hidden);
                   value=applyCatalogEditorial(value,editorial);summary.powerAt.editorial+=Number(power(value));

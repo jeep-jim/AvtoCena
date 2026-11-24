@@ -32,7 +32,7 @@ test('all retired AJ query kinds fail before settings, credentials, caches, quot
 test('retired quota calls leave stored historical usage untouched',async()=>{
  let reads=0,writes=0;
  const storage={readJsonWithMeta:async()=>{reads++;throw Error('unexpected');},writeJson:async()=>{writes++;throw Error('unexpected');}} as any;
- for(const table of ['china','korea'] as const)await assert.rejects(reserveAjesRequest(storage,table),/market_not_supported/);
+ for(const table of ['china','korea'] as const)await assert.rejects(reserveAjesRequest(storage,table as any),/market_not_supported/);
  assert.equal(reads,0);assert.equal(writes,0);
 });
 

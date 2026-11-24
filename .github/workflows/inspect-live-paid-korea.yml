@@ -35,7 +35,7 @@ jobs:
           const storage=getJsonStorage();
           const controls=await readCollectionControls(storage);
           const manifest=await storage.readJson('catalog/manifest.json',null);
-          console.log('STORAGE_STATE',JSON.stringify({generation:manifest?.generationId,korea:manifest?.markets?.korea?.count,provider:manifest?.markets?.korea?.provider,revision:controls.revision,market:controls.markets.korea.enabled,paid:controls.sources.encar_feed.enabled,old:controls.sources.ajes_korea_feed.enabled}));
+          console.log('STORAGE_STATE',JSON.stringify({generation:manifest?.generationId,korea:manifest?.markets?.korea?.count,provider:manifest?.markets?.korea?.provider,revision:controls.revision,market:controls.markets.korea.enabled,paid:controls.sources.encar_feed.enabled,old:controls.sources.ajes_korea_feed?.enabled===true}));
           for(const path of ['/api/health','/api/catalog/search?market=korea&marketPage=1&page=1&pageSize=3','/api/encyclopedia/7efa3d4933728bc66771084b?year=2022']){
            for(let attempt=1;attempt<=3;attempt++){
             const start=Date.now();

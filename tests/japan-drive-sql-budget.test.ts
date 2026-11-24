@@ -76,11 +76,12 @@ test('Japan power lists and counts fit the supplier URI budget without losing ow
   assert.match(stepwgnOwnerSql(),/RP\[58\]/);
   assert.doesNotMatch(sql,/pw\s*(?:>=|<=|>|<)/i);
  }
- // No AJES market may use supplier PW as a technical-specification filter.
- for(const table of ['stats','main','korea','china'] as const){
+ // Neither Japanese auction table may use supplier PW as a specification filter.
+ for(const table of ['stats','main'] as const){
   assert.doesNotMatch(ajesQuery({table,powerTo:160}).sql,/pw\s*(?:>=|<=|>|<)/i);
-  assert.ok(ajesQuery({table,...(table==='korea'||table==='china'?{powerTo:160}:{})}).sql.includes(heavyVehicleSqlExclusion()));
+  assert.ok(ajesQuery({table}).sql.includes(heavyVehicleSqlExclusion()));
  }
+ for(const table of ['china','korea'])assert.throws(()=>ajesQuery({table,powerTo:160}),/ajes_invalid_query/);
 });
 test('supplier URI limit is classified without leaking its response or credentials',async()=>{
  const client=createAjesClient({password:()=> 'private-fixture',assertEnabled:async()=>{},reserve:async()=>{},fetcher:async()=>new Response('private provider body',{status:414})});

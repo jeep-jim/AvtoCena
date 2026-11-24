@@ -26,6 +26,7 @@ ROOT = Path(__file__).resolve().parents[3]
 PROFILE = json.loads((Path(__file__).parent / 'release-profile.json').read_bytes())
 SOURCE, BUILD = PROFILE['source'], PROFILE['sourceCalculationVersion']
 CALCULATION, INDEX = PROFILE['servingCalculationVersion'], PROFILE['privateIndexDigest']
+ACCEPTANCE = 'remove-unused-aj-outside-japan-v1'
 spec = importlib.util.spec_from_file_location('aj_native', ROOT / '.github/operations/home-ui-adapter-20261123/host-primitives.py')
 native = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(native)
@@ -192,6 +193,8 @@ def candidate_spec(plan, serving, probe=False):
 class Host:
     def __init__(self, plan, digest, authority):
         need(sha(json_bytes(plan)) == digest and re.fullmatch(r'[a-f0-9]{64}', digest), 'aj_plan_digest')
+        need(PROFILE.get('acceptance') == ACCEPTANCE and plan.get('acceptance') == ACCEPTANCE
+             and plan.get('protectedClosureSha256') == PROFILE['protectedClosureSha256'], 'aj_removal_scope')
         for key in ('source', 'tree', 'sourceCalculationVersion', 'servingCalculationVersion', 'privateIndexDigest', 'inventorySha256'):
             need(plan.get(key) == PROFILE[key], 'aj_plan_identity')
         need(sha(json_bytes(PROFILE['inventory'])) == PROFILE['inventorySha256'], 'aj_inventory_digest')
@@ -205,6 +208,9 @@ class Host:
              and image.get('imageId') == plan['imageId'] and image.get('sourceCalculationVersion') == BUILD
              and image.get('privateIndexInImage') is False and image.get('resourceProbePassed') is True
              and image.get('archiveRoundTripVerified') is True
+             and image.get('sourceProof', {}).get('acceptance') == ACCEPTANCE
+             and image['sourceProof'].get('protectedTreeUnchanged') is True
+             and image['sourceProof'].get('protectedClosureSha256') == PROFILE['protectedClosureSha256']
              and image.get('builder') == {'version': '29.1.3', 'driver': 'overlayfs', 'driverType': 'io.containerd.snapshotter.v1'}
              and image.get('resourceFiles') == plan['resourceFiles'], 'aj_image_receipt')
         self.plan, self.authority, self.local = plan, authority, Local(plan)
@@ -389,6 +395,69 @@ def check_aj_contract(target, guard):
     return {'release': SOURCE, 'target': target, 'passed': True, 'retiredReport': True, 'nonJapanAjes': False, 'anonymousCrmRejected': True}
 
 
+def removal_gate(nonce, phase, guard):
+    """Only the removed integration is exercised; retained catalogs are not searched.
+
+    Their source closure, immutable context and runtime identity are separately
+    bound to the reviewed plan and rechecked by the authority before acceptance.
+    """
+    need(phase in ('private', 'public') and re.fullmatch(r'[a-f0-9]{32}', nonce), 'aj_removal_phase')
+    for relative, digest in native.GATES.items():
+        need(sha(regular(ROOT / relative)[0]) == digest, 'aj_gate_source')
+    guard('removal_before')
+    target = 'candidate' if phase == 'private' else 'public'
+    Local.health(target)
+    checked = check_aj_contract(target, guard)
+    need(checked['passed'] is True and checked['retiredReport'] is True
+         and checked['nonJapanAjes'] is False and checked['anonymousCrmRejected'] is True, 'aj_removal_contract')
+    guard('removal_readback')
+    return {'version': 1, 'acceptance': ACCEPTANCE, 'release': SOURCE, 'nonce': nonce, 'phase': phase,
+            'protectedClosureSha256': PROFILE['protectedClosureSha256'], 'passed': True, 'healthVerified': True,
+            'retiredSourcesRejected': True, 'retiredReportRejected': True, 'anonymousCrmRejected': True,
+            'authorityUnchanged': True, 'japanBoundaryVerified': phase == 'private',
+            'ordinaryCatalogRequests': 0, 'supplierRequests': 0, 'catalogPerformanceRevalidated': False}
+
+
+def validate_ui_verdict(value, release, nonce, require_success=True):
+    fields = {'schemaVersion', 'acceptance', 'kind', 'release', 'tree', 'codeDiffSha256', 'protectedClosureSha256',
+              'nonce', 'passed', 'uiPassed', 'retiredSourcesAbsent', 'japanFormPreserved', 'retiredRequests',
+              'widths', 'liveOwnerCrmVerified', 'catalogPerformanceRevalidated', 'reportSha256'}
+    need(isinstance(value, dict) and set(value) == fields and type(value.get('schemaVersion')) is int
+         and value['schemaVersion'] == 1, 'aj_ui_frame')
+    need(value['acceptance'] == ACCEPTANCE and value['kind'] == 'isolated-owner-ui'
+         and value['release'] == release and value['nonce'] == nonce and value['tree'] == PROFILE['tree']
+         and value['codeDiffSha256'] == PROFILE['codeDiffSha256']
+         and value['protectedClosureSha256'] == PROFILE['protectedClosureSha256'], 'aj_ui_identity')
+    flags = ('passed', 'uiPassed', 'retiredSourcesAbsent', 'japanFormPreserved')
+    need(all(type(value[key]) is bool for key in flags) and value['widths'] == [390, 1440]
+         and type(value['retiredRequests']) is int and value['retiredRequests'] == 0
+         and value['liveOwnerCrmVerified'] is False and value['catalogPerformanceRevalidated'] is False
+         and isinstance(value['reportSha256'], str) and re.fullmatch(r'[a-f0-9]{64}', value['reportSha256']), 'aj_ui_scope')
+    if require_success:
+        need(all(value[key] is True for key in flags), 'aj_ui_failed')
+    return value
+
+
+def wait_for_ui_verdict(directory, release, nonce, timeout=300, clock=time.monotonic, sleep=time.sleep):
+    need(re.fullmatch(r'[a-f0-9]{40}', release) and re.fullmatch(r'[a-f0-9]{32}', nonce), 'aj_ui_handshake')
+    directory = Path(directory)
+    write_new(directory / ('browser-ready-' + nonce + '.json'), json_bytes({
+        'schemaVersion': 1, 'release': release, 'nonce': nonce, 'acceptance': ACCEPTANCE,
+        'phase': 'pre-switch-removal-passed', 'timeoutSeconds': timeout}))
+    print('AJ_UI_ACCEPTANCE_REQUIRED', json.dumps({'release': release, 'nonce': nonce, 'timeoutSeconds': timeout}), flush=True)
+    verdict = directory / ('browser-verdict-' + nonce + '.json')
+    until = clock() + timeout
+    while True:
+        if verdict.exists():
+            try:
+                value = json.loads(regular(verdict, mode=0o600, maximum=4096)[0])
+            except (ValueError, UnicodeDecodeError):
+                need(False, 'aj_ui_json')
+            return validate_ui_verdict(value, release, nonce)
+        need(clock() < until, 'aj_ui_missing_or_timed_out')
+        sleep(1)
+
+
 def server_failure_code(rows, routes, phase):
     # Only names from this table and a 1-based index into the frozen baseline
     # may leave the host. Never copy paths, exception text or extra JSON fields.
@@ -489,10 +558,8 @@ class Protocol:
                     self.replies[identity].put(value)
                 elif kind == 'browser-verdict':
                     verdict = value.get('value')
-                    need(self.verdict_directory is not None and set(verdict) == {'schemaVersion', 'release', 'nonce', 'passed', 'functionalPassed', 'speedPassed', 'reportSha256'}
-                         and verdict['schemaVersion'] == 1 and verdict['release'] == SOURCE and verdict['nonce'] == self.nonce
-                         and all(type(verdict[key]) is bool for key in ('passed', 'functionalPassed', 'speedPassed'))
-                         and re.fullmatch(r'[a-f0-9]{64}', verdict['reportSha256']), 'aj_browser_frame')
+                    need(self.verdict_directory is not None, 'aj_browser_frame')
+                    validate_ui_verdict(verdict, SOURCE, self.nonce, require_success=False)
                     write_new(self.verdict_directory / ('browser-verdict-' + self.nonce + '.json'), json_bytes(verdict))
                 else:
                     raise RuntimeError('aj_protocol_kind')
@@ -603,23 +670,18 @@ class Driver:
             self.require('start'); h.identity(); return {'verified': True}
         elif method == 'fresh':
             h.fresh(); return {'fresh': True}
-        elif method in ('aj-private', 'aj-public'):
-            self.require('start' if method == 'aj-private' else 'switch')
-            value = check_aj_contract('candidate' if method == 'aj-private' else 'public', h.guard)
-        elif method in ('server-private', 'server-public'):
-            self.require('aj-private' if method == 'server-private' else 'aj-public')
-            h.guard(method)
-            value = full_server_gate(self.protocol.nonce, method.split('-')[1])
-            h.guard('server_readback')
+        elif method in ('removal-private', 'removal-public'):
+            self.require('start' if method == 'removal-private' else 'switch')
+            value = removal_gate(self.protocol.nonce, method.split('-')[1], h.guard)
         elif method == 'switch':
-            self.require('server-private')
+            self.require('removal-private', 'browser')
             self.switched = True
             h.switch()
             value = {'switched': True}
         elif method == 'public-identity':
             self.require('switch'); h.local.health('public'); return {'verified': True}
         elif method == 'browser':
-            self.require('server-public')
+            self.require('removal-private')
             directory = ROLLBACK / ('browser-' + self.protocol.nonce)
             directory.mkdir(mode=0o700)
             self.protocol.verdict_directory = directory
@@ -629,17 +691,16 @@ class Driver:
                     before = inner.getvalue()
                     result = super().write(text)
                     after = inner.getvalue()
-                    if 'BROWSER_ACCEPTANCE_REQUIRED ' in after and '\n' in after and '\n' not in before:
+                    if 'AJ_UI_ACCEPTANCE_REQUIRED ' in after and '\n' in after and '\n' not in before:
                         protocol.emit({'kind': 'browser-ready', 'nonce': protocol.nonce, 'release': SOURCE})
                     return result
-            helper = ROOT / 'scripts/regcloud-browser-verdict.py'
-            need(sha(regular(helper)[0]) == native.GATES['scripts/regcloud-browser-verdict.py'], 'aj_browser_helper')
             with contextlib.redirect_stdout(Output()):
-                value = native.load_module('aj_browser', helper).wait_for_verdict(directory, SOURCE, self.protocol.nonce)
+                value = wait_for_ui_verdict(directory, SOURCE, self.protocol.nonce)
         elif method == 'accept':
-            self.require('server-private', 'server-public', 'browser', 'aj-private', 'aj-public')
+            self.require('removal-private', 'removal-public', 'browser')
             h.identity(); h.local.health('public'); h.guard('accept')
-            value = {'accepted': True, 'source': SOURCE, 'imageId': h.plan['imageId'], 'nonce': self.protocol.nonce}
+            value = {'accepted': True, 'acceptance': ACCEPTANCE, 'source': SOURCE, 'imageId': h.plan['imageId'],
+                     'nonce': self.protocol.nonce, 'liveOwnerCrmVerified': False, 'catalogPerformanceRevalidated': False}
             write_new(ROOT / 'accepted.json', json_bytes(value))
             self.accepted = True
         elif method == 'rollback':

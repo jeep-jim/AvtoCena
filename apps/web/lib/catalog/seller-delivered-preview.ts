@@ -17,10 +17,7 @@ export async function attachSellerDeliveredPreviews<T extends Partial<VehicleOff
    try{
     const key=JSON.stringify([options.projectionOnly,offerParameterDraft(offer as VehicleOffer),offer.id,offer.updatedAt,offer.sourcePrice,offer.sourceCurrency,offer.calculationSnapshot?.currencyRate,configuration,new Date().toISOString().slice(0,10)]);
     const quote=await quotes.get(key,async()=>{
-     // AJES lists already use SELECT * and are mapped through the same verified
-     // enrichment as details. Avoid a second supplier request per visible card.
-     const ajes=offer.sourceId==='ajes_korea_feed'||offer.sourceId==='ajes_china_feed';
-     let full=options.projectionOnly?{...offer,sourceId:offer.sourceId||(offer as any).sourceGroup} as VehicleOffer:ajes?offer as VehicleOffer:await (await import("./offer-page-data")).getOfferForPage(offer.id!);
+     let full=options.projectionOnly?{...offer,sourceId:offer.sourceId||(offer as any).sourceGroup} as VehicleOffer:await (await import("./offer-page-data")).getOfferForPage(offer.id!);
      if(!full||full.market!==offer.market||full.sourcePrice!==offer.sourcePrice||full.sourceCurrency!==offer.sourceCurrency)return null;
      const parameters=validateCustomerParameters(offerParameterDraft(full));
      const calculated=await calculateOfferWithCustomerParametersDetailed(full,parameters);

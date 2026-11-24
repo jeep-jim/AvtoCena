@@ -37,7 +37,7 @@ jobs:
           storage.writeJson=async()=>{throw Error('read_only_report_write_forbidden');};
           const {readCollectionControls}=await import('./apps/web/lib/catalog/collection-controls.ts');
           const controls=await readCollectionControls(storage);
-          console.log(JSON.stringify({readOnly:true,koreaEnabled:controls.markets.korea.enabled,encarEnabled:controls.sources.encar_feed.enabled,oldKoreaEnabled:controls.sources.ajes_korea_feed.enabled,revision:controls.revision}));
+          console.log(JSON.stringify({readOnly:true,koreaEnabled:controls.markets.korea.enabled,encarEnabled:controls.sources.encar_feed.enabled,oldKoreaEnabled:controls.sources.ajes_korea_feed?.enabled===true,revision:controls.revision}));
           const {calculationVersion}=await import('./scripts/catalog-calculation-version.mjs');
           console.log(JSON.stringify({source:'83ff17075e9188dcf227c8752dc064248d5f42e0',calculationVersion:calculationVersion(),readOnly:true}));
           const [manifest,lock]=await Promise.all([storage.readJson('catalog/manifest.json',null),storage.readJson('catalog/import-lock.json',null)]);

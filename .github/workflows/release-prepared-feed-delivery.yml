@@ -1576,7 +1576,7 @@ jobs:
           assert.ok(Object.values(catalog.markets || {}).every(row => Number.isSafeInteger(row?.count) && row.count >= 0), 'catalog_market_counts_invalid');
           assert.equal(controls.markets?.korea?.enabled, true, 'korea_disabled');
           assert.equal(controls.sources?.encar_feed?.enabled, true, 'paid_encar_disabled');
-          assert.equal(controls.sources?.ajes_korea_feed?.enabled, false, 'old_ajes_korea_enabled');
+          assert.notEqual(controls.sources?.ajes_korea_feed?.enabled, true, 'old_ajes_korea_enabled');
           const privateManifest = before[PRIVATE_MANIFEST].value;
           assert.ok(Array.isArray(privateManifest?.models) && privateManifest.models.length > 0, 'private_manifest_missing');
           const privateDigest = checksum(privateManifest.models.map(row => [row.id, row.revision, row.key]));
@@ -3675,7 +3675,7 @@ jobs:
         const prior=JSON.parse(fs.readFileSync('private-index-reuse-before.json','utf8'));
         const hash=v=>createHash('sha256').update(JSON.stringify(v)).digest('hex');
         assert.equal(hash(manifest),prior.snapshot.manifestSha256);assert.equal(hash(controls),prior.snapshot.controlsSha256);
-        assert.equal(controls.markets.korea.enabled,true);assert.equal(controls.sources.encar_feed.enabled,true);assert.equal(controls.sources.ajes_korea_feed.enabled,false);
+        assert.equal(controls.markets.korea.enabled,true);assert.equal(controls.sources.encar_feed.enabled,true);assert.notEqual(controls.sources.ajes_korea_feed?.enabled,true);
         assert.equal(manifest.markets.korea.provider,'auto_api_encar');assert.equal(manifest.markets.korea.count,69386);
         const report={passed:true,releaseSha:health.releaseSha,calculationVersion:health.calculationVersion,generationId:manifest.generationId,koreaCount:69386,controlsRevision:controls.revision,encar:true,ajesKorea:false,manifestUnchanged:true,controlsUnchanged:true,writes:0};
         fs.writeFileSync('paid-korea-history-final-state.json',JSON.stringify(report,null,2));console.log(JSON.stringify(report));

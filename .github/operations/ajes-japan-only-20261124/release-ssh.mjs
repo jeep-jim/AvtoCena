@@ -4,6 +4,7 @@ import path from 'node:path';
 import {spawn} from 'node:child_process';
 import {once} from 'node:events';
 import {PROFILE, sha256} from './release-contract.mjs';
+import {failedBrowserVerdict} from './release-browser.mjs';
 
 const HOST_SHA = 'fd37f98aab3eeb16f131fcd4033adbb56f7e9616208c2f1ab5ef7a446caa4e4c';
 const BUNDLE = Object.freeze([
@@ -14,8 +15,8 @@ const BUNDLE = Object.freeze([
   'scripts/regcloud-performance-gate.py','scripts/regcloud-browser-verdict.py',
   'docs/operations/2026-11-11-accepted-speed-baseline.json',
 ]);
-const METHODS = new Set(['init','image','private-index','resources','fresh','start','identity','aj-private','aj-public',
-  'server-private','server-public','switch','public-identity','browser','accept','rollback','cleanup','close']);
+const METHODS = new Set(['init','image','private-index','resources','fresh','start','identity',
+  'removal-private','removal-public','switch','public-identity','browser','accept','rollback','cleanup','close']);
 export const isAjHostPhase = value => METHODS.has(value);
 const need = (value, code) => { if (!value) throw Error('aj_ssh_' + code); };
 const quote = value => "'" + value.replaceAll("'", "'\\''") + "'";
@@ -100,8 +101,7 @@ export class AjSshSession {
     if(value.kind==='browser-ready'){
       need(value.nonce===this.nonce&&value.release===PROFILE.source&&!this.browserStarted,'browser_identity');
       this.browserStarted=true;
-      this.browser().catch(()=>({schemaVersion:1,release:PROFILE.source,nonce:this.nonce,passed:false,
-        functionalPassed:false,speedPassed:false,reportSha256:sha256('{}')}))
+      this.browser().catch(()=>failedBrowserVerdict(this.nonce))
         .then(verdict=>this.send({kind:'browser-verdict',value:verdict})).catch(()=>this.abort(Error('aj_ssh_browser_transport')));
       return;
     }
