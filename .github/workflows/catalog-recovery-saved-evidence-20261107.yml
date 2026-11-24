@@ -1,8 +1,5 @@
 name: Catalog recovery saved evidence 2026-11-07
 on:
-  push:
-    branches: [main]
-    paths: ['.github/workflows/catalog-recovery-saved-evidence-20261107.yml']
   workflow_dispatch:
 permissions:
   contents: read
@@ -43,7 +40,7 @@ jobs:
             // Hypothesis comparison only. No writes and no calculated prices.
             const normalized={...index,models:Object.fromEntries(Object.entries(index.models).map(([key,rows])=>[key,rows.map(row=>({...row,constraints:{...row.constraints,...(row.constraints.chassisCode?{chassisCode:japanChassisCode(row.constraints.chassisCode)}:{})}}))]))};
             const storage=getJsonStorage();
-            for(const market of ['japan','korea'])for(const page of [1,2,3]){
+            for(const market of ['japan'])for(const page of [1,2,3]){
               const q=ajesQuery(ajesCatalogQuery({market,page:String(page),pageSize:'24'}));
               const saved:any=await readAjesQueryCache(storage,q.sql);
               const observed=Date.parse(saved?.observedAt||'');
@@ -80,7 +77,7 @@ jobs:
           import {build} from 'esbuild';
           await build({entryPoints:['scripts/catalog-recovery-saved-evidence.tmp.ts'],outfile:'/tmp/catalog-recovery-saved-evidence.cjs',bundle:true,platform:'node',format:'cjs',plugins:[{name:'server-only',setup(b){b.onResolve({filter:/^server-only$/},()=>({path:'empty',namespace:'empty'}));b.onLoad({filter:/.*/,namespace:'empty'},()=>({contents:''}));}}]});
           JS
-      - name: Read six exact saved queries inside the current production container
+      - name: Read three exact saved Japanese queries inside the current production container
         env:
           SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
         run: |
