@@ -27,6 +27,9 @@ export const CHINA_PHOTO_JAPAN_CODE_PATHS = Object.freeze([...new Set([...CHINA_
   'tests/ajes-catalog-progressive.test.ts',
   'tests/catalog-japan-filter-rail.test.ts',
   'tests/ajes-detail-freshness.test.ts',
+  'tests/ajes-count-display.test.ts',
+  'tests/ajes-japan-only.test.ts',
+  'tests/catalog-market-page-boundary.test.ts',
   'tests/japan-pw-first.test.ts',
   'tests/japan-pw-results.test.ts',
 ])]);

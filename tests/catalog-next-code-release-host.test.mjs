@@ -90,7 +90,7 @@ with tempfile.TemporaryDirectory() as temp:
   'protectedPathsUnchanged':True,'privateDataIncluded':False,'servingCompatibility':{'protectedPricingPathsUnchanged':True},
   'runtimeFiles':sorted(m.PHOTO_CODE_FILES),'imageUnpackedBytes':1024,'bytes':13,'sha256':m.sha(b'new image tar')}
  if case.startswith('combined_'):
-  assert len(m.PHOTO_CODE_FILES)==6 and len(m.PHOTO_JAPAN_CODE_FILES)==24
+  assert len(m.PHOTO_CODE_FILES)==6 and len(m.PHOTO_JAPAN_CODE_FILES)==27
   image_receipt.update(codeScope=m.PHOTO_JAPAN_CODE_SCOPE,runtimeFiles=sorted(m.PHOTO_JAPAN_CODE_FILES))
  elif case=='photo_explicit':image_receipt['codeScope']=m.PHOTO_CODE_SCOPE
  new_bytes={'image.tar':b'new image tar','image-receipt.json':m.json_bytes(image_receipt),'acceptance.json':m.json_bytes({**oracle,'runtimeSha':new}),

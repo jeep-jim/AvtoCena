@@ -35,6 +35,9 @@ const allowedBrowserTests = new Set(['tests/browser/catalog-range-commit.mjs',
   'tests/ajes-catalog-progressive.test.ts',
   'tests/catalog-japan-filter-rail.test.ts',
   'tests/ajes-detail-freshness.test.ts',
+  'tests/ajes-count-display.test.ts',
+  'tests/ajes-japan-only.test.ts',
+  'tests/catalog-market-page-boundary.test.ts',
   'tests/japan-pw-first.test.ts',
   'tests/japan-pw-results.test.ts']);
 const typeOnlyPath = 'apps/web/lib/catalog/offer-page-data.ts';
