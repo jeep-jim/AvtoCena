@@ -80,10 +80,15 @@ export async function readAjesCatalogPage(params:Record<string,unknown>,measure?
  // requested list in the same two-slot supplier queue. The independent count
  // endpoint/header owns aggregate refresh; continuations need only their rows.
  if(options.includeCount!==false&&(query.page||1)===1&&!params.after&&!filter.powerFilter)void readAjesCountSummary(JSON.stringify(params)).then(value=>{readyCount=value;}).catch(()=>{}).finally(()=>measure?.('count',performance.now()-countStarted));
+ let unverifiedPowerSeen=false;
  const read=async(sourcePage:number)=>{
   const received=await readAjesPublic({...query,page:sourcePage},{measure});
   if(modelDirectoryUnavailable&&!received.items.length)throw new AjesUnavailable('directory_unavailable');
-  // Apply locally verified technical filters before delivered-price previews.
+  // A preliminary AJ hint can help discovery but cannot establish a complete
+   // number of cars under a horsepower limit.
+   if(filter.powerFilter&&received.items.some(v=>!(Number.isFinite(Number(v.powerHp))&&Number(v.powerHp)>0)))
+     unverifiedPowerSeen=true;
+   // Apply locally verified technical filters before delivered-price previews.
   // Non-matching cars never enter the expensive customs/management pipeline.
   const candidates=filter.powerFilter?received.items.filter(filter.matchesPower):received.items;
   const page={...received,items:candidates,...(modelDirectoryUnavailable?{partial:true}:{})};
@@ -114,9 +119,9 @@ export async function readAjesCatalogPage(params:Record<string,unknown>,measure?
  let first:Awaited<ReturnType<typeof read>>|undefined=initialPage??undefined;
  const page=await readFilteredAjesPage({startedAt,page:query.page||1,pageSize:query.pageSize||24,after:params.after,sourceTotal:total&&!total.stale?total.total:undefined,
   read:async sourcePage=>{if(firstPromise&&sourcePage===(query.page||1))return first!;const value=await read(sourcePage);first??=value;return value;}});
- const exact=(query.page||1)===1&&!params.after&&!page.hasMore&&!page.partial&&!page.stale?page.items.length:null;
+ const exact=(query.page||1)===1&&!params.after&&!page.hasMore&&!page.partial&&!page.stale&&!unverifiedPowerSeen?page.items.length:null;
  const countSummary=exact!==null?{total:exact,upperBound:false,stale:false,observedAt:first!.observedAt}:total;
- return {...first,...page,page:query.page||1,filteredByPage:filter.active,total:exact,countSummary,items:(query.sort&&query.sort!=="updatedAt"?sortCatalogRows(page.items,query.sort,String(params.city||"")):page.items).map((v:any)=>publicOffer(v)),generationId:first!.observedAt};
+ return {...first,...page,page:query.page||1,filteredByPage:filter.active,powerIncomplete:unverifiedPowerSeen,total:exact,countIncomplete:unverifiedPowerSeen||page.partial||page.stale||page.scanLimited,countSummary,items:(query.sort&&query.sort!=="updatedAt"?sortCatalogRows(page.items,query.sort,String(params.city||"")):page.items).map((v:any)=>publicOffer(v)),generationId:first!.observedAt};
 }
 /** Add once to totals built from the separate local inventory. A failure is not zero inventory. */
 export async function withAjesCount<T extends {total:number;marketCounts?:Record<string,number>;independentChina?:boolean}>(value:T,params:Record<string,unknown>={}):Promise<T & {countIncomplete?:boolean;marketCountInfo:Record<string,AjesCountSummary|null>}>{
