@@ -164,8 +164,11 @@ export async function runChinaBrowserAcceptance({oraclePath, releaseSha, nonce, 
         stage = 'homepage';
         // A fresh browser context has no city inherited from the detail case.
         // Wait for China itself, independently of later streamed foreign rails.
+        const homeStarted = performance.now();
         const homeResponse = await page.goto(ORIGIN + '/', {waitUntil: 'commit', timeout: 90000});
         need(homeResponse?.status() === 200, 'home_response');
+        await page.locator('main[data-home-react-filters] h1').waitFor({state: 'visible', timeout: 60000});
+        result.homeHeadingSeconds = Number(((performance.now() - homeStarted) / 1000).toFixed(3));
         const home = await chinaSection(page, Math.min(10, samples.home.total), {home: true});
         result.homepage = verifyHomeChinaCards(home.rows, home.total, samples.home, oracle.expectedGeneration);
         stage = 'homepage_api';
