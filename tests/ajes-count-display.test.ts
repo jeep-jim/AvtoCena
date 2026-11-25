@@ -111,12 +111,18 @@ test('exact base Corolla does not hide other Corollas in supplier search',async(
  assert.deepEqual(resolveAjesModelSelection('Corolla',[{model:'COROLLA'},{model:'COROLLA CROSS'},{model:'COROLLA FIELDER'},{model:'CAMRY'}]),{model:'COROLLA|COROLLA CROSS|COROLLA FIELDER'});
 });
 
- test('Japan power discovery ignores supplier alternatives and accepts only explicit owner rules',async()=>{
+test('Japan power discovery uses first supplier PW, retains unknown power and keeps owner rules',async()=>{
  const {ajesResultFilter}=await import('../apps/web/lib/catalog/ajes-result-filter');
+ const {japanPowerSearchHint,japanPowerUnknown}=await import('../apps/web/lib/catalog/japan-source-power');
  const filter=ajesResultFilter({market:'japan',powerTo:'160'});
- for(const sourcePower of ['79,98','160','160,200','200,150','','0,98','79,bad','150,2501']){
+ for(const [sourcePower,firstPower,matches] of [
+  ['79,98',79,true],['160',160,true],['160,200',160,true],['200,150',200,false],
+  ['',undefined,true],['0,98',undefined,true],['79,bad',79,true],['150,2501',150,true],
+ ] as const){
   const offer={id:'ajes-stats-fixture',market:'japan',sourceId:'ajes_japan_feed',operational:{raw:{sourcePower}}};
-  assert.equal(filter.matches(offer),false,sourcePower);
+  assert.equal(filter.matches(offer),matches,sourcePower);
+  assert.equal(japanPowerSearchHint(offer)?.horsepower,firstPower,sourcePower);
+  assert.equal(japanPowerUnknown(offer),firstPower===undefined,sourcePower);
   assert.equal('powerHp' in offer,false);
  }
  const ownerStepwgn={id:'ajes-stats-owner',market:'japan',make:'HONDA',model:'STEPWGN',fuel:'petrol',powertrainKind:'combustion',operational:{chassisCode:'RP3',raw:{sourceFuel:'P',sourcePower:''}}};
