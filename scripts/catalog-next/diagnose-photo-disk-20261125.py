@@ -193,6 +193,16 @@ def main():
             'tagCount': len(row.get('RepoTags') or []), 'digestCount': len(row.get('RepoDigests') or []),
             'tags': [tag if re.fullmatch(r'avtocena-(?:regcloud|china-runtime):[a-f0-9-]+', tag) else '<other>'
                      for tag in (row.get('RepoTags') or [])[:10]]})
+    PHASE = 'image_space'
+    detailed = subprocess.run(['/usr/bin/docker', 'system', 'df', '-v'], capture_output=True, text=True, timeout=30)
+    report['imageSpace'] = []
+    short_ids = {identity.removeprefix('sha256:')[:12] for identity in image_ids}
+    if detailed.returncode == 0:
+        for line in detailed.stdout.splitlines():
+            parts = re.split(r'\s{2,}', line.strip())
+            if len(parts) == 8 and parts[2] in short_ids:
+                report['imageSpace'].append({'id': parts[2], 'size': parts[4],
+                    'sharedSize': parts[5], 'uniqueSize': parts[6], 'containers': parts[7]})
     print(json.dumps(report, separators=(',', ':')))
 
 
