@@ -1,4 +1,4 @@
-# Compare retained image CLI/API identities read-only after isolated restore stopped at storage binding.
+# Read disk, failed-code cleanup and bounded saved AJ failure metadata after release 45647364912.
 name: Inspect failed photo release disk - read only
 on:
   push:

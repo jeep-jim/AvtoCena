@@ -1,4 +1,4 @@
-"""Bounded, read-only inventory for the two failed photo/PW releases."""
+"""Bounded, read-only disk, rollback and retained AJ-failure evidence."""
 import fcntl
 import hashlib
 import http.client
@@ -46,6 +46,167 @@ def docker_json(arguments):
     if len(result.stdout) > 2 * 1024 * 1024:
         raise RuntimeError('photo_disk_inventory_too_large')
     return json.loads(result.stdout)
+
+
+# Production getJsonStorage() uses ObjectJsonStorage, not the read-only data
+# mounts. Match data.ts's prefix/bucket/key and SigV4 GET without loading app
+# modules or creating files. Credentials stay inside the serving container.
+AJ_FAILURE_READER = r"""
+import {createHash,createHmac} from 'node:crypto';
+const hash=x=>createHash('sha256').update(x).digest('hex');
+const hmac=(key,value)=>createHmac('sha256',key).update(value).digest();
+const keys=[...Array.from({length:8},(_,i)=>['stats-list-'+(i+1),'integrations/ajes/catalog-failure-pages/stats-list-'+(i+1)+'.json']),
+ ['stats-latest','integrations/ajes/catalog-failure-stats.json']];
+const int=(x,min,max)=>Number.isSafeInteger(x)&&x>=min&&x<=max?x:null;
+const timestamp=x=>typeof x==='string'&&/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/.test(x)&&Number.isFinite(Date.parse(x))?x:null;
+const outcomes=/^(?:http_[1-5]\d{2}|visitor_restricted|request_failed|request_timeout|connect_timeout|quota_exhausted|quota_busy|local_busy|invalid_response|empty_response|query_too_large|response_too_large|identity_mismatch)$/;
+const sanitize=value=>({startedAt:timestamp(value?.startedAt),finishedAt:timestamp(value?.finishedAt),
+ kind:['list','detail','count','models','makes','colors'].includes(value?.kind)?value.kind:null,
+ outcome:typeof value?.outcome==='string'&&outcomes.test(value.outcome)?value.outcome:null,
+ page:int(value?.page,1,1000000),pageSize:int(value?.pageSize,1,500),httpStatus:int(value?.httpStatus,100,599),
+ providerCode:typeof value?.providerCode==='string'&&/^(?:bot|ban)\d{0,13}$/.test(value.providerCode)?value.providerCode:null,
+ sqlSha256:typeof value?.sql==='string'?hash(value.sql):null,sqlBytes:typeof value?.sql==='string'?Buffer.byteLength(value.sql):null});
+let total=0;
+const records=[];
+try {
+ const env=process.env;
+ if(env.JSON_STORAGE_DRIVER!=='object')throw Error();
+ const endpoint=new URL(env.YC_OBJECT_STORAGE_ENDPOINT||'https://storage.yandexcloud.net');
+ if(endpoint.protocol!=='https:'||endpoint.username||endpoint.password||endpoint.search||endpoint.hash)throw Error();
+ const bucket=env.YC_OBJECT_STORAGE_BUCKET||'',access=env.YC_OBJECT_STORAGE_ACCESS_KEY_ID||'',secret=env.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY||'';
+ const region=env.YC_OBJECT_STORAGE_REGION||'ru-central1',prefix=(env.YC_OBJECT_STORAGE_PREFIX||'').replace(/^\/+|\/+$/g,'');
+ if(!/^[a-z0-9][a-z0-9.-]{1,61}[a-z0-9]$/.test(bucket)||!access||!secret||prefix.split('/').some(x=>x==='.'||x==='..'))throw Error();
+ const signal=AbortSignal.timeout(20000);
+ for(const [slot,key] of keys){
+  if(signal.aborted){records.push({slot,readStatus:'deadline'});continue;}
+  if(total>=256*1024){records.push({slot,readStatus:'byte_limit'});continue;}
+  try {
+   const full=[prefix,key].filter(Boolean).join('/').split('/').map(encodeURIComponent).join('/');
+   const url=new URL(endpoint.href.replace(/\/+$/g,'')+'/'+bucket+'/'+full);
+   if(url.origin!==endpoint.origin)throw Error();
+   const date=new Date().toISOString().replace(/[:-]|\.\d{3}/g,''),day=date.slice(0,8),payload=hash('');
+   const headers={host:url.host,'x-amz-content-sha256':payload,'x-amz-date':date};
+   const signed=Object.keys(headers).sort().join(';');
+   const canonical=Object.keys(headers).sort().map(k=>k+':'+headers[k].trim()+'\n').join('');
+   const scope=day+'/'+region+'/s3/aws4_request';
+   const toSign=['AWS4-HMAC-SHA256',date,scope,hash(['GET',url.pathname,'',canonical,signed,payload].join('\n'))].join('\n');
+   const signing=hmac(hmac(hmac(hmac('AWS4'+secret,day),region),'s3'),'aws4_request');
+   headers.authorization='AWS4-HMAC-SHA256 Credential='+access+'/'+scope+', SignedHeaders='+signed+', Signature='+createHmac('sha256',signing).update(toSign).digest('hex');
+   const response=await fetch(url,{method:'GET',headers,redirect:'error',signal});
+   if(response.status!==200){await response.body?.cancel();records.push({slot,readStatus:response.status===404?'missing':'unavailable'});continue;}
+   const limit=Math.min(64*1024,256*1024-total);
+   if(Number(response.headers.get('content-length'))>limit){await response.body?.cancel();records.push({slot,readStatus:'byte_limit'});continue;}
+   const reader=response.body?.getReader();if(!reader)throw Error();
+   const chunks=[];let bytes=0,oversize=false;
+   while(true){const {done,value}=await reader.read();if(done)break;total+=value.byteLength;bytes+=value.byteLength;
+    if(bytes>limit||total>256*1024){oversize=true;await reader.cancel();break;}chunks.push(value);}
+   if(oversize){records.push({slot,readStatus:'byte_limit'});continue;}
+   const value=JSON.parse(Buffer.concat(chunks).toString('utf8'));
+   if(!value||typeof value!=='object'||Array.isArray(value))throw Error();
+   records.push({slot,readStatus:'ok',...sanitize(value)});
+  } catch {records.push({slot,readStatus:signal.aborted?'deadline':'unavailable'});}
+ }
+ process.stdout.write(JSON.stringify({records}));
+} catch {process.stdout.write(JSON.stringify({readStatus:'configuration_unavailable',records:[]}));}
+"""
+
+
+def serving_signature(row, port, release):
+    env = dict(item.split('=', 1) for item in row.get('Config', {}).get('Env', []) if '=' in item)
+    ports = row.get('HostConfig', {}).get('PortBindings') or {}
+    if (not row.get('State', {}).get('Running') or row.get('Config', {}).get('WorkingDir') != '/app'
+            or env.get('AVTOCENA_RELEASE_SHA') != release or env.get('JSON_STORAGE_DRIVER') != 'object'
+            or not any(str(binding.get('HostPort', '')) == str(port)
+                       for bindings in ports.values() for binding in (bindings or []))):
+        raise RuntimeError('photo_disk_ajes_serving')
+    protected = {key: row.get(key) for key in ('Id', 'Image', 'Config', 'HostConfig')}
+    protected['mounts'] = sorted(row.get('Mounts', []), key=lambda value: (value.get('Destination', ''), value.get('Source', '')))
+    protected['startedAt'] = row['State'].get('StartedAt')
+    return hashlib.sha256(json.dumps(protected, sort_keys=True, separators=(',', ':')).encode()).hexdigest()
+
+
+def aj_failure_diagnostic(row, port, health, ingress):
+    identity = row.get('Id', '')
+    if not re.fullmatch(r'[a-f0-9]{64}', identity) or health.get('status') != 200 or health.get('ok') is not True:
+        raise RuntimeError('photo_disk_ajes_serving')
+    before = docker_json(['inspect', identity])[0]
+    signature = serving_signature(before, port, health.get('releaseSha'))
+    if CONFIG.read_bytes() != ingress:
+        raise RuntimeError('photo_disk_ajes_ingress_changed')
+    try:
+        result = subprocess.run(['/usr/bin/docker', 'exec', '-i', '-e', 'NODE_OPTIONS=', identity,
+                                 'node', '--input-type=module'], input=AJ_FAILURE_READER.encode(),
+                                capture_output=True, timeout=30)
+        if result.returncode != 0 or len(result.stdout) > 8192:
+            raise ValueError()
+        value = json.loads(result.stdout)
+        if not isinstance(value, dict) or not isinstance(value.get('records'), list) or len(value['records']) > 9:
+            raise ValueError()
+    except (subprocess.TimeoutExpired, ValueError, UnicodeDecodeError):
+        value = {'readStatus': 'reader_unavailable', 'records': []}
+    after = docker_json(['inspect', identity])[0]
+    if signature != serving_signature(after, port, health.get('releaseSha')) or CONFIG.read_bytes() != ingress:
+        raise RuntimeError('photo_disk_ajes_serving_changed')
+    con = http.client.HTTPConnection('127.0.0.1', port, timeout=15)
+    try:
+        con.request('GET', '/api/health', headers={'Host': 'avtocena.com', 'Connection': 'close'})
+        response = con.getresponse()
+        raw = response.read(65537)
+        if response.status != 200 or len(raw) > 65536:
+            raise RuntimeError('photo_disk_ajes_health_changed')
+        observed = json.loads(raw)
+        if (observed.get('ok') is not True or any(observed.get(key) != health.get(key)
+                for key in ('releaseSha', 'calculationVersion')) or CONFIG.read_bytes() != ingress):
+            raise RuntimeError('photo_disk_ajes_health_changed')
+    finally:
+        con.close()
+    return {'servingBoundBeforeAfter': True, **value}
+
+
+def bounded_proof(path, limit):
+    descriptor = os.open(path, os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK)
+    try:
+        before = os.fstat(descriptor)
+        if (not stat.S_ISREG(before.st_mode) or before.st_uid != 0 or before.st_nlink != 1
+                or before.st_mode & 0o022 or before.st_size > limit):
+            raise ValueError()
+        raw = os.read(descriptor, limit + 1)
+        after = os.fstat(descriptor)
+        fields = ('st_dev', 'st_ino', 'st_size', 'st_mtime_ns', 'st_ctime_ns')
+        if len(raw) != before.st_size or any(getattr(before, key) != getattr(after, key) for key in fields):
+            raise ValueError()
+        value = json.loads(raw)
+        if not isinstance(value, dict):
+            raise ValueError()
+        return value, hashlib.sha256(raw).hexdigest()
+    finally:
+        os.close(descriptor)
+
+
+def failed_code_cleanup_diagnostic(directory):
+    try:
+        value, digest = bounded_proof(directory / 'FAILED_CODE_CLEANUP.json', 16 * 1024)
+    except FileNotFoundError:
+        return {'present': False}
+    except (OSError, ValueError, UnicodeDecodeError):
+        return {'present': True, 'valid': False}
+    try:
+        plan, plan_digest = bounded_proof(directory / 'PLAN.json', 256 * 1024)
+        rollback, rollback_digest = bounded_proof(directory / 'ROLLED_BACK.json', 256 * 1024)
+        numbers = ('filesDeleted', 'logicalBytesDeleted', 'imagesDeleted', 'directoriesDeleted')
+        valid = (value.get('version') == 1 and value.get('kind') == 'china-failed-code-bulk-cleanup-v1'
+                 and all(type(value.get(key)) is int and 0 <= value[key] <= 9007199254740991 for key in numbers)
+                 and type(value.get('completed')) is bool and type(value.get('protectedDeploymentsPreserved')) is bool)
+        if not valid:
+            return {'present': True, 'valid': False, 'receiptSha256': digest}
+        return {'present': True, 'valid': True, 'receiptSha256': digest,
+                **{key: value[key] for key in (*numbers, 'completed', 'protectedDeploymentsPreserved')},
+                'bindsAttempt': value.get('nonce') == directory.name == plan.get('nonce') == rollback.get('nonce')
+                    and value.get('runtimeSha') == RUNTIMES[0] == plan.get('runtimeSha') == rollback.get('release'),
+                'bindsPlan': value.get('planSha256') == plan_digest,
+                'bindsRollback': value.get('rollbackSha256') == rollback_digest}
+    except (OSError, ValueError, UnicodeDecodeError):
+        return {'present': True, 'valid': False, 'receiptSha256': digest}
 
 
 def image_binding_diagnostic():
@@ -117,7 +278,8 @@ def main():
     finally:
         os.close(fd)
     PHASE = 'health'
-    found = re.findall(rb'(?m)^\s*proxy_pass http://127\.0\.0\.1:(\d+);\s*$', CONFIG.read_bytes())
+    ingress = CONFIG.read_bytes()
+    found = re.findall(rb'(?m)^\s*proxy_pass http://127\.0\.0\.1:(\d+);\s*$', ingress)
     if len(found) != 1:
         raise RuntimeError('photo_disk_ingress')
     con = http.client.HTTPConnection('127.0.0.1', int(found[0]), timeout=15)
@@ -138,11 +300,15 @@ def main():
     if len(ids) >= 150 or any(not re.fullmatch(r'[a-f0-9]{64}', row) for row in ids):
         raise RuntimeError('photo_disk_container_identity')
     mounted = []
+    serving = []
     referenced_images = set()
     report['containers'] = []
     for identity in ids:
         PHASE = 'docker_inspect'
         row = docker_json(['inspect', identity])[0]
+        if any(str(binding.get('HostPort', '')) == found[0].decode()
+               for bindings in (row.get('HostConfig', {}).get('PortBindings') or {}).values() for binding in (bindings or [])):
+            serving.append(row)
         referenced_images.add(row['Image'])
         mounts = [os.path.realpath(m['Source']) for m in row.get('Mounts', [])
                   if isinstance(m.get('Source'), str) and m['Source'].startswith('/')]
@@ -150,6 +316,13 @@ def main():
         report['containers'].append({'id': identity[:12], 'running': row['State']['Running'],
                                      'imageId': row['Image'], 'releaseMounts':
                                      [m.split('/china-next/')[0] for m in mounts if m.startswith(str(BASE) + '/')]})
+    PHASE = 'ajes_failure_metadata'
+    if report['runtimeLockBusy']:
+        report['ajesFailures'] = {'readStatus': 'skipped_runtime_busy', 'records': []}
+    elif len(serving) != 1:
+        raise RuntimeError('photo_disk_ajes_serving')
+    else:
+        report['ajesFailures'] = aj_failure_diagnostic(serving[0], int(found[0]), report['health'], ingress)
     report['runtimes'] = {}
     for runtime in RUNTIMES:
         PHASE = 'runtime_inventory'
@@ -189,7 +362,8 @@ def main():
                     'retainedRuntimeSha': rollback.get('retainedRuntimeSha'),
                     'mounted': any(m == str(directory) or m.startswith(str(directory) + '/') or
                                    str(directory).startswith(m + '/') for m in mounted),
-                    'files': files})
+                    'files': files,
+                    **({'failedCodeCleanup': failed_code_cleanup_diagnostic(directory)} if runtime == RUNTIMES[0] else {})})
         report['runtimes'][runtime] = attempts
     PHASE = 'journal'
     journal = subprocess.run(['/usr/bin/journalctl', '-u', 'docker', '-u', 'containerd',
