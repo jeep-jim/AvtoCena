@@ -1,4 +1,4 @@
-# Preserve bounded evidence, including damaged proof-file indicators.
+# Preserve bounded evidence and raw hashes of damaged proof files.
 name: Inspect failed photo release disk - read only
 on:
   push:
