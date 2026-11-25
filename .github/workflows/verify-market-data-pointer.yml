@@ -1,0 +1,24 @@
+name: Verify data-only market pointer (no publish)
+on:
+  push:
+    branches: ['feat/market-data-only-pointer-20261125']
+    paths:
+      - '.github/workflows/verify-market-data-pointer.yml'
+      - 'scripts/catalog-next/market-data-pointer.mjs'
+      - 'tests/catalog-next-market-data-pointer.test.mjs'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    if: github.repository_id == '1289722938' && github.ref == 'refs/heads/feat/market-data-only-pointer-20261125'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: Verify data-only pointer without secrets or deployment
+        run: |
+          node --check scripts/catalog-next/market-data-pointer.mjs
+          node --test tests/catalog-next-market-data-pointer.test.mjs
