@@ -204,6 +204,21 @@ test('code adapter rejects changed image bytes and changed data before starting 
   assert.equal(f.calls.includes('switch'), false);
 });
 
+test('code staging keeps operating space and rejects the incident disk budget before uploads', async t => {
+  const f = await fixture(t);
+  // Actual free/generation bytes from failed run 45621910693. Even this
+  // fixture's tiny image must not let a 12.78 GB copy exhaust serving space.
+  f.preflight.availableDiskBytes = 13_817_753_600;
+  f.preflight.generationFiles.find(row => row.name === 'details.sqlite').bytes += 12_783_566_731 - f.preflight.generationBytes;
+  f.preflight.generationBytes = 12_783_566_731;
+  await assert.rejects(f.release.stageCodeRelease({candidate: f.candidate, previous: f.previous,
+    nonce: 'b'.repeat(32), assertAuthority: async () => {}}), /china_daily_release_code_disk_capacity/);
+  assert.equal(f.calls.includes('init'), false);
+  assert.equal(f.uploaded.size, 0);
+  assert.equal(f.calls.includes('start'), false);
+  assert.equal(f.calls.includes('switch'), false);
+});
+
 test('combined code activation binds the photo and Japan browser report before host acceptance', async t => {
   const f = await fixture(t, {combined: true}), {stage, input} = await reservedStage(f);
   const result = await stage.activate(input);

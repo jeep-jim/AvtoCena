@@ -18,6 +18,7 @@ on:
       - scripts/catalog-next/release-ssh.mjs
       - scripts/catalog-next/serving-compatibility.mjs
       - tests/catalog-next-code-*.test.mjs
+      - tests/browser/photo-japan-recovery-clock.mjs
 permissions:
   contents: read
 concurrency:
@@ -59,6 +60,7 @@ jobs:
         run: |
           set -euo pipefail
           PHOTO_SHA=$(node -p "JSON.parse(require('fs').readFileSync('.github/operations/catalog-next/china-code-serving-plan.json')).runtimeSha")
+          PHOTO_RUNTIME_ROOT="$RUNNER_TEMP/china-serving-runtime-$PHOTO_SHA" node tests/browser/photo-japan-recovery-clock.mjs
           cd "$RUNNER_TEMP/china-serving-runtime-$PHOTO_SHA"
           node --import tsx --import ./tests/helpers/offline-fetch.mjs --test --test-concurrency=1 tests/catalog-photo-retry.test.ts tests/photo-proxy.test.ts tests/ajes-*.test.ts tests/catalog-detail-read-cache.test.ts tests/catalog-japan-filter-rail.test.ts tests/catalog-market-page-boundary.test.ts tests/japan-pw-*.test.ts
           npm run typecheck

@@ -192,6 +192,75 @@ with tempfile.TemporaryDirectory() as temp:
    for name in m.GENERATION_FILES:
     a,b=old_dir/'generation'/name,new_dir/'generation'/name
     assert a.read_bytes()==b.read_bytes() and a.stat().st_ino!=b.stat().st_ino and a.stat().st_nlink==b.stat().st_nlink==1 and stat.S_IMODE(b.stat().st_mode)==0o400
+ elif case in ('cleanup_mount','cleanup_parent_mount','cleanup_file_tamper','cleanup_plan_tamper','cleanup_accepted_symlink',
+               'cleanup_rollback_tamper','cleanup_idempotent','cleanup_copy_failure','cleanup_load_failure',
+               'post_copy_disk_space'):
+  expected=None
+  if case=='cleanup_copy_failure':
+   original_copy=m.reuse_copy_file
+   def interrupted_copy(source,target,descriptor,identity):
+    if descriptor['name']=='query.sqlite':raise m.ReleaseError('china_host_test_copy_interruption')
+    return original_copy(source,target,descriptor,identity)
+   m.reuse_copy_file=interrupted_copy
+   refused(host.start,'test_copy_interruption')
+   assert any((new_dir/'generation'/name).exists() for name in m.HOST_BULK_FILES if name!='image.tar')
+  elif case=='cleanup_load_failure':
+   original_command=m.command
+   def failed_load(args,timeout=120):
+    if args[:2]==['/usr/bin/docker','load']:raise m.ReleaseError('china_host_docker_http_500')
+    return original_command(args,timeout)
+   m.command=failed_load
+   refused(host.start,'docker_http_500')
+   assert all((new_dir/'generation'/name).exists() for name in m.GENERATION_FILES)
+  elif case=='post_copy_disk_space':
+   original_statvfs=m.os.statvfs;observations=[]
+   def shrinking_disk(p):
+    observations.append(str(p))
+    return original_statvfs(p) if len(observations)==1 else types.SimpleNamespace(f_bavail=1,f_frsize=4096)
+   m.os.statvfs=shrinking_disk
+   refused(host.start,'code_disk_space')
+   assert len(observations)==2
+   assert not any(kind=='command' and value[:2]==['/usr/bin/docker','load'] for kind,value in operations)
+  else:host.start()
+  if case in ('cleanup_mount','cleanup_parent_mount'):
+   foreign=make_container('7'*64,old,old_image,'8'*32,old_dir,3009)
+   foreign['State']['Running']=False
+   source=new_dir/'generation' if case=='cleanup_mount' else new_dir.parent
+   foreign['Mounts'].append({'Type':'bind','Source':str(source),'Destination':'/private/saved','RW':False})
+   containers[foreign['Id']]=foreign;expected='code_cleanup_mounted'
+  elif case=='cleanup_file_tamper':
+   p=new_dir/'generation'/'details.sqlite';p.chmod(0o600);p.write_bytes(b'x'*p.stat().st_size);p.chmod(0o400)
+   expected='code_cleanup_file_hash'
+  elif case=='cleanup_plan_tamper':
+   p=new_dir/'PLAN.json';p.chmod(0o600);p.write_bytes(m.json_bytes({**plan,'controllerSha':'9'*40}));p.chmod(0o400)
+   expected='code_cleanup_plan'
+  elif case=='cleanup_rollback_tamper':
+   m.new_file(new_dir/'ROLLED_BACK.json',m.json_bytes({'version':1,'kind':'china-host-rollback-v1','nonce':'9'*32}))
+   expected='code_cleanup_rollback'
+  elif case=='cleanup_accepted_symlink':
+   (new_dir/'ACCEPTED.json').symlink_to(new_dir/'missing-acceptance')
+   expected='code_cleanup_proof_changed'
+  existing={p:p.read_bytes() for p in new_dir.rglob('*') if p.is_file() and p.name in m.HOST_BULK_FILES}
+  if expected:
+   refused(host.cleanup,expected)
+   assert all(p.read_bytes()==raw for p,raw in existing.items()),'unsafe cleanup must unlink nothing'
+   assert not (new_dir/'FAILED_CODE_CLEANUP.json').exists()
+  else:
+   host.cleanup()
+   assert all(not p.exists() for p in existing)
+   assert (new_dir/'PLAN.json').exists() and (new_dir/'ROLLED_BACK.json').exists()
+   assert (new_dir/'image-receipt.json').exists() and (new_dir/'acceptance.json').exists()
+   result=json.loads((new_dir/'FAILED_CODE_CLEANUP.json').read_bytes())
+   assert result['filesDeleted']==len(existing) and result['logicalBytesDeleted']==sum(len(raw) for raw in existing.values())
+   assert result['imagesDeleted']==result['directoriesDeleted']==0 and result['protectedDeploymentsPreserved']
+   outcome=m.read_outcome({'runtimeSha':new,'nonce':new_nonce});assert outcome['status']=='rolled_back'
+   if case=='cleanup_idempotent':
+    receipt=(new_dir/'FAILED_CODE_CLEANUP.json').read_bytes();host.cleanup()
+    assert (new_dir/'FAILED_CODE_CLEANUP.json').read_bytes()==receipt
+  assert m.CONFIG.read_bytes()==original and new_id not in containers and old_container==retained_before
+  for name,raw in old_bytes.items():
+   assert (old_dir/'generation'/name if name in m.GENERATION_FILES else old_dir/name).read_bytes()==raw
+  assert enc.read_bytes()==b'private untouched knowledge'
  elif case=='combined_browser_rejections':
   host.start();host.functional_passed=host.speed_passed=True;host.switch()
   speed,details,_=reports(new,new_nonce);details=json.loads(details)
@@ -221,10 +290,17 @@ with tempfile.TemporaryDirectory() as temp:
    assert m.CONFIG.read_bytes()==original and old_container==retained_before and new_id not in containers
    outcome=m.read_outcome({'runtimeSha':new,'nonce':new_nonce});assert outcome['status']=='rolled_back'
    proof=json.loads(base64.b64decode(outcome['hostRollbackBase64']));assert proof['retainedRuntimeSha']==old and proof['retainedImageId']==old_image and proof['generationId']==generation['generationId']
+   assert all(not host.file_path(name).exists() for name in m.HOST_BULK_FILES)
+   assert (new_dir/'generation'/'GENERATION.json').read_bytes()==manifest
+   assert json.loads((new_dir/'FAILED_CODE_CLEANUP.json').read_bytes())['filesDeleted']==7
   elif case!='start':
    receipt,current,state=finish();assert receipt['transition']=='code-update' and receipt['retainedRuntimeSha']==old and receipt['retainedImageId']==old_image
    observed={'found':True,'value':state,'etag':'"new-state"','sha256':m.canonical_sha(state)};m.checked_accepted_observation(observed)
    assert m.read_outcome({'runtimeSha':new,'nonce':new_nonce})['status']=='accepted'
+   if case=='accept':
+    host.cleanup()
+    assert all(host.file_path(name).exists() for name in m.HOST_BULK_FILES)
+    assert not (new_dir/'FAILED_CODE_CLEANUP.json').exists()
    if case=='proof_required':
     bad=copy.deepcopy(state);raw=json.loads(base64.b64decode(bad['current']['proof']['hostReceiptBase64']));raw.pop('transition');encoded=m.json_bytes(raw)
     bad['current']['proof'].update(hostReceiptBase64=base64.b64encode(encoded).decode(),hostReceiptSha256=m.sha(encoded))
@@ -252,7 +328,7 @@ with tempfile.TemporaryDirectory() as temp:
  else:raise AssertionError('unknown case')
  print('ok')
 `;
-for(const name of ['scope','preflight','copy','oracle_tamper','descriptor_tamper','source_tamper','image_scope','disk_space','plan_changed','start','rollback','accept','proof_required','code_proof_changed_generation','code_proof_missing_rollback','next_daily','retire_copy','combined_accept','photo_explicit','combined_extra','combined_relabel','combined_unbound','photo_relabel','combined_browser_rejections']) {
+for(const name of ['scope','preflight','copy','oracle_tamper','descriptor_tamper','source_tamper','image_scope','disk_space','plan_changed','start','rollback','accept','proof_required','code_proof_changed_generation','code_proof_missing_rollback','next_daily','retire_copy','combined_accept','photo_explicit','combined_extra','combined_relabel','combined_unbound','photo_relabel','combined_browser_rejections','cleanup_mount','cleanup_parent_mount','cleanup_file_tamper','cleanup_plan_tamper','cleanup_rollback_tamper','cleanup_accepted_symlink','cleanup_idempotent','cleanup_copy_failure','cleanup_load_failure','post_copy_disk_space']) {
   test('China code-only host: '+name,()=>{
     const result=spawnSync('python3',['-I','-B','-c',harness,hostFile,name],{encoding:'utf8',timeout:20000});
     assert.equal(result.status,0,result.stderr||result.stdout);

@@ -90,12 +90,38 @@ async function health(context,releaseSha){
  const response=await getJson(context,'/api/health');
  need(response.status===200&&response.data?.releaseSha===releaseSha,'release_changed');
 }
-async function poll(check,code){
- for(let attempt=0;attempt<200;attempt++){
+async function poll(check,code,timeout=10_000){
+ const deadline=Date.now()+timeout;
+ do{
   if(await check())return;
   await new Promise(resolve=>setTimeout(resolve,50));
- }
+ }while(Date.now()<deadline);
  need(false,code);
+}
+
+export async function pausePhotoRecoveryTimers(page){
+ // Keep native network/decode work running, but advance application timers
+ // explicitly. Otherwise waiting for a cold control image can consume the
+ // placeholder's 15-second automatic recovery and remove the manual button.
+ // One second of headroom avoids asking the remote browser to pause in its past.
+ await page.clock.pauseAt(await page.evaluate(()=>Date.now()+1000));
+}
+
+export async function decodedChinaPhotoControl(page,target){
+ const images=page.locator(CARD).locator('img');
+ const candidate=await images.evaluateAll((rows,selected)=>
+  rows.findIndex(img=>img.src!==selected&&img.src.includes('/api/catalog/photo/')),target);
+ need(candidate>=0,'china_healthy_candidate');
+ await images.nth(candidate).scrollIntoViewIfNeeded();
+ let control;
+ // Node timers are deliberately used here: requestAnimationFrame-based page
+ // polling is paused with the page clock, while real image I/O is not.
+ await poll(async()=>{
+  control=await images.evaluateAll((rows,selected)=>
+   rows.find(img=>img.src!==selected&&img.complete&&img.naturalWidth>0&&img.src.includes('/api/catalog/photo/'))?.src||null,target);
+  return Boolean(control);
+ },'china_healthy_control',30_000);
+ return control;
 }
 
 export async function runPhotoJapanBrowserAcceptance({oraclePath,releaseSha,nonce,outputFile,playwrightModule,chromeBin}){
@@ -158,36 +184,29 @@ export async function runPhotoJapanBrowserAcceptance({oraclePath,releaseSha,nonc
    return window.__photoRecoveryErrors>=1&&image?.dataset.photoRetried===image?.getAttribute('src');
   },selected.url,{timeout:15_000});
   stage='china_bounded_retries';
+  await pausePhotoRecoveryTimers(page);
   await page.clock.runFor(18_001);
-  await page.waitForFunction(()=>window.__photoRecoveryErrors>=2,null,{timeout:10_000});
+  await poll(()=>page.evaluate(()=>window.__photoRecoveryErrors>=2),'china_first_retry');
   await page.clock.runFor(38_001);
-  await page.waitForFunction(()=>window.__photoRecoveryErrors>=3,null,{timeout:10_000});
+  await poll(()=>page.evaluate(()=>window.__photoRecoveryErrors>=3),'china_second_retry');
   const retry=card.locator('[data-catalog-photo-retry]');
   await retry.waitFor({state:'visible',timeout:10_000});
   need(targetRequests===3&&await retry.evaluate(button=>button.closest('a')===null),'china_retry_button');
   // The source server may be cold after an atomic cutover. Do not mistake a
   // still-loading native image for proof that the neighbouring photos failed.
   // Scroll one unmodified image into view, then insist on real decoded pixels.
-  const controlCandidate=await page.locator(CARD).locator('img').evaluateAll((images,target)=>
-   images.findIndex(img=>img.src!==target&&img.src.includes('/api/catalog/photo/')),selected.url);
-  need(controlCandidate>=0,'china_healthy_candidate');
-  await page.locator(CARD).locator('img').nth(controlCandidate).scrollIntoViewIfNeeded();
+  let control;
   try {
-   await page.waitForFunction(target=>[...document.querySelectorAll('article.ac-catalog-card img,article.ac-catalog-list-row img')]
-    .some(img=>img.src!==target&&img.naturalWidth>0&&img.src.includes('/api/catalog/photo/')),
-    selected.url,{timeout:30_000});
-  } catch {
+   control=await decodedChinaPhotoControl(page,selected.url);
+  } catch(error) {
    // Preserve the strict acceptance failure; add bounded, URL-free evidence.
    report.checks.chinaPhoto.controlImages=await page.locator(CARD).locator('img').evaluateAll((images,target)=>({
     eligible:images.filter(img=>img.src!==target&&img.src.includes('/api/catalog/photo/')).length,
     decoded:images.filter(img=>img.src!==target&&img.naturalWidth>0).length,
     pending:images.filter(img=>img.src!==target&&!img.complete).length
    }),selected.url);
+   throw error;
   }
-  const control=await page.locator(CARD).locator('img').evaluateAll((images,target)=>{
-   const image=images.find(img=>img.src!==target&&img.naturalWidth>0&&img.src.includes('/api/catalog/photo/'));
-   return image?.src||null;
-  },selected.url);
   need(control,'china_healthy_control');const controlRequests=imageRequests.get(control)||0;
   await capture(page,'china-before-retry');
   const before=page.url();
@@ -198,6 +217,7 @@ export async function runPhotoJapanBrowserAcceptance({oraclePath,releaseSha,nonc
   need(await image.evaluate(img=>img.src)===selected.url&&page.url()===before,'china_retry_identity');
   need(targetRequests===4&&report.checks.chinaPhoto.faultResponses===3&&await retry.count()===0,'china_retry_request_count');
   need((imageRequests.get(control)||0)===controlRequests,'china_healthy_retried');
+  await page.clock.resume();
   report.checks.chinaPhoto={...report.checks.chinaPhoto,targetRequests,successfulOriginalUrl:true,naturalWidth:await image.evaluate(img=>img.naturalWidth),
    sameUrl:true,noNavigation:true,retryOutsideLink:true,healthyControlRequests:controlRequests,healthyControlUnchanged:true,pageErrorsObserved:pageErrors};
   await capture(page,'china-recovered-desktop');

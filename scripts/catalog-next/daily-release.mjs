@@ -17,6 +17,9 @@ import {validateChinaGenerationReference, validateChinaAcceptedState, validateCh
 
 const CALCULATION = '4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90';
 const HASH = /^[a-f0-9]{64}$/;
+// An operating-space policy floor, not an estimate of Docker overhead. Image
+// content-store and unpacked-snapshot bytes are reserved separately below.
+const CODE_DISK_OPERATING_RESERVE = 2 * 1024 ** 3;
 const names = Object.freeze(['GENERATION.json', 'details.sqlite', 'query.sqlite', 'FILTER_SEMANTICS.json',
   'FX_RECEIPT.json', 'RECONCILIATION.json', 'DISPOSITIONS.ndjson']);
 const need = (value, code) => { if (!value) throw Error('china_daily_release_' + code); };
@@ -161,7 +164,7 @@ export function createChinaDailyRelease({root, servingRoot, pricingPlan, serving
     const temporary = await fs.realpath(runnerTemp), directory = await fs.mkdtemp(path.join(temporary, 'china-daily-release-'));
     let session, activated = false, closed = false, acceptedReceiptSha256;
     try {
-      let codePreflight, codeImageUnpackedBytes, files, oracle;
+      let codePreflight, codeImageUnpackedBytes, codeImageArchiveBytes, files, oracle;
       const oraclePath = path.join(directory, 'acceptance.json');
       if (codeUpdate) {
         await guard(); await progress('code_verify_accepted_host_files');
@@ -184,6 +187,7 @@ export function createChinaDailyRelease({root, servingRoot, pricingPlan, serving
           && imageReceipt.protectedPathsUnchanged === true && imageReceipt.servingCompatibility?.protectedPricingPathsUnchanged === true,
         'code_image');
         codeImageUnpackedBytes = imageReceipt.imageUnpackedBytes;
+        codeImageArchiveBytes = image.bytes;
         files = {'image.tar': imagePath, 'image-receipt.json': receiptPath};
       } else {
         await progress('daily_restore_runtime_generation');
@@ -221,10 +225,16 @@ export function createChinaDailyRelease({root, servingRoot, pricingPlan, serving
           uploadedRaw += descriptor.bytes;
           uploadPeak = Math.max(uploadPeak, uploadedRaw + descriptor.compressedBytes);
         }
-        const neededBytes = Math.max(uploadPeak, uploadedRaw + codePreflight.generationBytes + codeImageUnpackedBytes);
+        // Loading into the containerd image store can retain archive content
+        // alongside an unpacked snapshot while our uploaded tar still exists.
+        const imageStorageBytes = codeImageArchiveBytes + codeImageUnpackedBytes;
+        const neededBytes = Math.max(uploadPeak, uploadedRaw + codePreflight.generationBytes + imageStorageBytes)
+          + CODE_DISK_OPERATING_RESERVE;
         need(Number.isSafeInteger(neededBytes) && codePreflight.availableDiskBytes >= neededBytes, 'code_disk_capacity');
         await onProgress({phase: 'code_capacity_checked', market: 'china',
-          generationBytes: codePreflight.generationBytes, availableDiskBytes: codePreflight.availableDiskBytes, neededBytes});
+          generationBytes: codePreflight.generationBytes, imageArchiveBytes: codeImageArchiveBytes,
+          imageUnpackedBytes: codeImageUnpackedBytes, operatingReserveBytes: CODE_DISK_OPERATING_RESERVE,
+          availableDiskBytes: codePreflight.availableDiskBytes, neededBytes});
       }
       const plan = {version: 1, market: 'china', mode, retainedRuntime: prior.current.runtimeSha,
         runtimeSha: candidate.runtimeSha, pricingRuntimeSha: candidate.pricingRuntimeSha,

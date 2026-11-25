@@ -69,6 +69,10 @@ CODE_SCOPE_FILES = {PHOTO_CODE_SCOPE: PHOTO_CODE_FILES, PHOTO_JAPAN_CODE_SCOPE: 
 GENERATION_MOUNT = '/run/avtocena-china-generation'
 HOST_BULK_FILES = {'details.sqlite', 'query.sqlite', 'DISPOSITIONS.ndjson', 'FILTER_SEMANTICS.json',
                    'FX_RECEIPT.json', 'RECONCILIATION.json', 'image.tar'}
+# Keep the serving process out of disk exhaustion while staging. This is an
+# operating-space policy floor; measured image content and unpack bytes are
+# additional reservations, not assumed to fit inside this floor.
+CODE_DISK_OPERATING_RESERVE = 2 * 1024 ** 3
 FAILED_UPLOAD_RUNTIME = '822f925bb30c4e07010f6e14b6574f1b4bd6306e'
 FAILED_UPLOAD_GENERATION = 'gen_china_45369451603_1'
 FAILED_UPLOAD_WITNESS = {
@@ -2209,11 +2213,14 @@ class Host:
              all(isinstance(name, str) for name in image['runtimeFiles']) and
              set(image['runtimeFiles']) == required_code_files and
              type(image.get('imageUnpackedBytes')) is int and image['imageUnpackedBytes'] > 0, 'code_image_receipt')
-        # Uploaded archives already occupy disk. Reserve the actual source
-        # bytes plus the builder's measured unpacked image, not a percentage.
+        # Uploaded archives already occupy disk. Containerd may retain image
+        # content while also extracting its snapshot. Keep the service's free
+        # operating space in addition to both measured image representations.
         copied_bytes = sum(new_files[name]['bytes'] for name in GENERATION_FILES)
+        self.code_image_storage_bytes = new_files['image.tar']['bytes'] + image['imageUnpackedBytes']
         usage = os.statvfs(self.directory)
-        need(usage.f_bavail * usage.f_frsize >= copied_bytes + image['imageUnpackedBytes'], 'code_disk_space')
+        need(usage.f_bavail * usage.f_frsize >= copied_bytes + self.code_image_storage_bytes + CODE_DISK_OPERATING_RESERVE,
+             'code_disk_space')
         identities = {name: reuse_file_identity(directory / 'generation' / name) for name in GENERATION_FILES}
         need(all(identities[name][2] == new_files[name]['bytes'] for name in GENERATION_FILES), 'code_source_size')
         for name in sorted(GENERATION_FILES):
@@ -2334,6 +2341,12 @@ class Host:
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as probe:
             probe.bind(('127.0.0.1', self.port))
         if not generation_update(self.plan) and not getattr(self, 'reuse_verified', False):
+            if code_update(self.plan):
+                # Re-observe after the potentially large generation copy. A
+                # concurrent disk consumer must not invalidate preflight.
+                usage = os.statvfs(self.directory)
+                need(usage.f_bavail * usage.f_frsize >= self.code_image_storage_bytes + CODE_DISK_OPERATING_RESERVE,
+                     'code_disk_space')
             info = docker('GET', '/info')
             need(info.get('ServerVersion') == '29.1.3' and
                  ['driver-type', 'io.containerd.snapshotter.v1'] in info.get('DriverStatus', []), 'image_store')
@@ -2678,6 +2691,121 @@ class Host:
         return retire_reference(self.plan['previousAcceptedState'].get('rollback'), [state['current'], state['rollback']],
                                 {self.candidate, self.retained['Id']}, self.verify_candidate)
 
+    def cleanup_failed_code_files(self):
+        """Remove only this never-accepted code attempt's verified local copies.
+
+        The caller still owns the runtime lock and has restored the retained
+        application. Historical proofs, manifests, images in Docker and every
+        current/rollback deployment are preserved. This is not a general GC.
+        """
+        need(code_update(self.plan) and not self.accepted and not self.switched and self.candidate is None
+             and self.lock is not None and self.retained is not None, 'code_cleanup_phase')
+        plan, plan_raw = diagnosis_json(self.directory / 'PLAN.json')
+        need(plan == self.plan, 'code_cleanup_plan')
+        validate_plan(plan)
+        previous, previous_receipt, _ = accepted_predecessor(plan)
+        protected = [value for value in (plan['previousAcceptedState'].get('current'),
+                                        plan['previousAcceptedState'].get('rollback')) if value is not None]
+        need((plan['runtimeSha'], plan['nonce']) not in {deployment_identity(value) for value in protected},
+             'code_cleanup_protected')
+        for value in protected:
+            verified_history(value)
+        rollback, rollback_raw = diagnosis_json(self.directory / 'ROLLED_BACK.json')
+        bindings = {'nonce': 'nonce', 'release': 'runtimeSha', 'pricingRuntimeSha': 'pricingRuntimeSha',
+                    'generationId': 'generationId', 'generationManifestSha256': 'generationManifestSha256',
+                    'privateGenerationReceiptSha256': 'privateGenerationReceiptSha256',
+                    'sourceDescriptorSha256': 'sourceDescriptorSha256', 'imageId': 'imageId',
+                    'previousAcceptedETag': 'previousAcceptedETag',
+                    'previousAcceptedStateSha256': 'previousAcceptedStateSha256'}
+        need(rollback.get('version') == 1 and rollback.get('kind') == 'china-host-rollback-v1'
+             and all(rollback.get(left) == plan[right] for left, right in bindings.items())
+             and rollback.get('retainedContainerId') == self.retained['Id']
+             and rollback.get('retainedImageId') == previous['imageId']
+             and rollback.get('retainedRuntimeSha') == previous['runtimeSha']
+             and all(rollback.get(key) is True for key in ('retainedRunning', 'ingressRestored', 'candidateRemoved')),
+             'code_cleanup_rollback')
+
+        def fence():
+            self.guard()
+            for parent in (BASE, self.directory.parent.parent, self.directory.parent, self.directory, self.generation):
+                private_directory(parent)
+            need(not (self.directory / 'ACCEPTED.json').exists() and not (self.directory / 'ACCEPTED.json').is_symlink()
+                 and diagnosis_json(self.directory / 'PLAN.json')[1] == plan_raw
+                 and diagnosis_json(self.directory / 'ROLLED_BACK.json')[1] == rollback_raw, 'code_cleanup_proof_changed')
+            check_mounted_reference(docker('GET', '/containers/' + self.retained['Id'] + '/json'), previous,
+                                    previous_receipt['nonce'])
+            # Stopped containers also retain bind references and must block
+            # deletion. A parent-directory bind protects the whole subtree.
+            for row in docker('GET', '/containers/json?all=1'):
+                inspected = docker('GET', '/containers/' + row['Id'] + '/json')
+                for mount in inspected.get('Mounts', []):
+                    source = mount.get('Source')
+                    if not source:
+                        continue
+                    need(isinstance(source, str) and Path(source).is_absolute(), 'code_cleanup_mount_path')
+                    mounted = Path(source).resolve()
+                    need(mounted != self.directory and mounted not in self.directory.parents
+                         and self.directory not in mounted.parents, 'code_cleanup_mounted')
+
+        fence()
+        # The rollback directory entry must be durable before deleting any
+        # bulk copy; retaining only an fsynced file is insufficient on a crash.
+        rollback_directory = os.open(self.directory, os.O_RDONLY | os.O_DIRECTORY)
+        try:
+            os.fsync(rollback_directory)
+        finally:
+            os.close(rollback_directory)
+        # Validate every existing target before the first unlink. A partial
+        # generation copy is already removed by reuse_copy_file on failure.
+        targets = []
+        for descriptor in plan['files']:
+            if descriptor['name'] not in HOST_BULK_FILES:
+                continue
+            filename = self.file_path(descriptor['name'])
+            try:
+                before = regular(filename)
+            except FileNotFoundError:
+                continue
+            need(before.st_size == descriptor['bytes'] and file_sha(filename) == descriptor['sha256'],
+                 'code_cleanup_file_hash')
+            identity = (before.st_dev, before.st_ino, before.st_size, before.st_mtime_ns, before.st_ctime_ns)
+            need(reuse_file_identity(filename) == identity, 'code_cleanup_file_changed')
+            targets.append((filename, identity))
+        deleted = freed = 0
+        for filename, identity in targets:
+            fence()
+            need(reuse_file_identity(filename) == identity, 'code_cleanup_file_changed')
+            filename.unlink()
+            deleted += 1
+            freed += identity[2]
+        for parent in (self.directory, self.generation):
+            descriptor = os.open(parent, os.O_RDONLY | os.O_DIRECTORY)
+            try:
+                os.fsync(descriptor)
+            finally:
+                os.close(descriptor)
+        fence()
+        result = {'version': 1, 'kind': 'china-failed-code-bulk-cleanup-v1', 'runtimeSha': plan['runtimeSha'],
+                  'nonce': plan['nonce'], 'planSha256': sha(plan_raw), 'rollbackSha256': sha(rollback_raw),
+                  'filesDeleted': deleted, 'logicalBytesDeleted': freed, 'completed': True,
+                  'imagesDeleted': 0, 'directoriesDeleted': 0, 'protectedDeploymentsPreserved': True}
+        receipt = self.directory / 'FAILED_CODE_CLEANUP.json'
+        if not receipt.exists():
+            new_file(receipt, json_bytes(result))
+            receipt_directory = os.open(self.directory, os.O_RDONLY | os.O_DIRECTORY)
+            try:
+                os.fsync(receipt_directory)
+            finally:
+                os.close(receipt_directory)
+        else:
+            saved, _ = diagnosis_json(receipt)
+            need(deleted == 0 and all(saved.get(key) == result[key] for key in
+                 ('version', 'kind', 'runtimeSha', 'nonce', 'planSha256', 'rollbackSha256', 'completed',
+                  'imagesDeleted', 'directoriesDeleted', 'protectedDeploymentsPreserved')), 'code_cleanup_receipt_changed')
+            result = saved
+        self.code_failed_cleanup = result
+        return result
+
     def cleanup(self):
         terminal = self.directory / 'ACCEPTED.json'
         if not self.accepted and terminal.exists():
@@ -2719,6 +2847,8 @@ class Host:
                      'ingressRestored': True, 'candidateRemoved': True}
             if not (self.directory / 'ROLLED_BACK.json').exists():
                 new_file(self.directory / 'ROLLED_BACK.json', json_bytes(proof))
+            if code_update(self.plan):
+                self.cleanup_failed_code_files()
 
 
 def main():
