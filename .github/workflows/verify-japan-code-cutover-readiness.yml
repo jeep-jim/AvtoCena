@@ -1,0 +1,120 @@
+name: Japan code-only cutover readiness (read-only)
+on:
+  push:
+    branches: ['release/japan-code-readiness-20261125']
+    paths: ['.github/workflows/verify-japan-code-cutover-readiness.yml']
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: japan-code-cutover-readiness-20261125
+  cancel-in-progress: true
+jobs:
+  evidence:
+    if: github.repository_id == '1289722938' && github.ref == 'refs/heads/release/japan-code-readiness-20261125'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    env:
+      ACCEPTED_SHA: d536c1547c4d82a339ed68ced7d8503f09b6810b
+      JAPAN_SHA: c8b9d3125891fe779ccf6e07933cc6e19a8e6991
+      CONTROLLER_SHA: 6925f42d6dd2d69f03db5521aeec13a9ca315e6e
+    steps:
+      - name: Check out the already tested Japan candidate (never this workflow branch as runtime)
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: c8b9d3125891fe779ccf6e07933cc6e19a8e6991
+          path: application
+          fetch-depth: 80
+          persist-credentials: false
+      - name: Check out the exact China daily controller (read-only)
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: 6925f42d6dd2d69f03db5521aeec13a9ca315e6e
+          path: controller
+          fetch-depth: 1
+          persist-credentials: false
+      - name: Verify exact source boundary and document daily-controller cutover dependency
+        run: |
+          set -euo pipefail
+          node --input-type=module <<'JS'
+          import assert from 'node:assert/strict';
+          import fs from 'node:fs';
+          import {execFileSync} from 'node:child_process';
+          const git=(cwd,args)=>execFileSync('/usr/bin/git',args,{cwd,encoding:'utf8'});
+          assert.equal(git('application',['rev-parse','HEAD']).trim(),process.env.JAPAN_SHA);
+          assert.equal(git('controller',['rev-parse','HEAD']).trim(),process.env.CONTROLLER_SHA);
+          assert.equal(git('application',['rev-parse',process.env.ACCEPTED_SHA+'^{commit}']).trim(),process.env.ACCEPTED_SHA);
+          assert.equal(git('application',['merge-base',process.env.ACCEPTED_SHA,process.env.JAPAN_SHA]).trim(),process.env.ACCEPTED_SHA);
+          const changes=git('application',['diff','--name-only','--no-renames','-z',process.env.ACCEPTED_SHA,process.env.JAPAN_SHA]).split('\0').filter(Boolean).sort();
+          const approved=[
+            '.github/workflows/verify-japan-visible-power-fix.yml',
+            'apps/web/app/(public)/api/catalog/search/route.ts',
+            'apps/web/app/(public)/page.tsx',
+            'apps/web/components/catalog/AjesCatalog.tsx',
+            'apps/web/components/catalog/AjesRail.tsx',
+            'apps/web/components/catalog/CatalogCard.tsx',
+            'apps/web/components/catalog/CatalogContent.tsx',
+            'apps/web/lib/catalog/ajes-catalog.ts',
+            'apps/web/lib/catalog/ajes-public.ts',
+            'apps/web/lib/catalog/ajes-result-filter.ts',
+            'apps/web/lib/catalog/japan-reviewed-power.ts',
+            'apps/web/lib/catalog/japan-source-power.ts',
+            'apps/web/lib/catalog/storage.ts',
+            'tests/japan-visible-power-contract.test.ts'
+          ].sort();
+          assert.deepEqual(changes,approved,'Unexpected runtime changes: deployment must not proceed');
+          const plan=JSON.parse(fs.readFileSync('controller/.github/operations/catalog-next/china-serving-plan.json','utf8'));
+          assert.equal(plan.runtimeSha,process.env.ACCEPTED_SHA);
+          assert.equal(plan.market,'china');
+          const daily=fs.readFileSync('controller/.github/workflows/catalog-next-china-daily.yml','utf8');
+          assert(daily.includes("cron: '0 14 * * *'"));
+          const release=fs.readFileSync('controller/scripts/catalog-next/daily-release.mjs','utf8');
+          assert(release.includes('candidate.runtimeSha === prior.current.runtimeSha'));
+          const finding={
+            version:1,reviewType:'read-only-japan-code-release-boundary',
+            acceptedRuntime:process.env.ACCEPTED_SHA,candidateRuntime:process.env.JAPAN_SHA,
+            sourceBoundaryVerified:true,changedPaths:changes,
+            existingDailyPinnedRuntime:plan.runtimeSha,dailyWillRequireCoordinatedRebind:true,
+            siteSwitched:false,serverWrites:0,deployAuthorizedByThisWorkflow:false
+          };
+          fs.writeFileSync('japan-cutover-readiness.json',JSON.stringify(finding,null,2)+'\n');
+          console.log(JSON.stringify({sourceBoundaryVerified:true,changes:changes.length,dailyWillRequireCoordinatedRebind:true,siteSwitched:false}));
+          JS
+      - name: Set up exact Node runtime
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24.22.3'
+          cache: npm
+          cache-dependency-path: application/package-lock.json
+      - name: Verify Japan contract without supplier requests or deployment
+        working-directory: application
+        run: |
+          set -euo pipefail
+          npm ci --no-audit --no-fund
+          node --import tsx --import ./tests/helpers/offline-fetch.mjs --test --test-concurrency=1 \
+            tests/japan-visible-power-contract.test.ts \
+            tests/ajes-japan-feed.test.ts \
+            tests/ajes-filtered-page.test.ts \
+            tests/ajes-rail-late-count.test.ts
+          npm run typecheck
+      - name: Verify public serving identity (read-only)
+        run: |
+          set -euo pipefail
+          curl --fail --silent --show-error --max-time 25 --retry 1 --retry-delay 2 \
+            --header 'Cache-Control: no-cache' https://avtocena.com/api/health > /tmp/japan-code-cutover-health.json
+          node --input-type=module <<'JS'
+          import assert from 'node:assert/strict';
+          import fs from 'node:fs';
+          const value=JSON.parse(fs.readFileSync('/tmp/japan-code-cutover-health.json','utf8'));
+          assert.equal(value.ok,true);
+          assert.equal(value.releaseSha,process.env.ACCEPTED_SHA,'Serving release changed; repeat compatibility analysis');
+          console.log(JSON.stringify({siteStillOnAcceptedChina:true,releaseSha:value.releaseSha}));
+          JS
+      - name: Save evidence; never claim a public rollout
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: japan-code-cutover-readiness
+          path: japan-cutover-readiness.json
+          if-no-files-found: ignore
+          retention-days: 14
