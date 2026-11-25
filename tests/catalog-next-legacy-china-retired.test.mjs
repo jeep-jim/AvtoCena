@@ -16,7 +16,8 @@ const read=name=>fs.readFileSync(path.join(workflows,name),'utf8');
 
 test('six retired China writers cannot be triggered from current main workflows',()=>{
   for(const name of old)assert.equal(fs.existsSync(path.join(workflows,name)),false,name);
-  assert.equal(fs.existsSync(path.join(workflows,'catalog-next-china-release.yml')),true);
+  // The one-time Docker bootstrap is retired after the accepted 283188-car generation.
+  assert.equal(fs.existsSync(path.join(workflows,'catalog-next-china-release.yml')),false);
 });
 test('old sequential queue never dispatches China or makes UAE wait for China',()=>{
   const src=read('catalog-v3-sequential-queue.yml');
