@@ -33,7 +33,7 @@ export function createChinaLocalPointerStore({rootDirectory,bootstrapManifestSha
     if(initial)return initial;
     need(await fs.realpath(mount)===mount,'root');
     const bytes=await checkedFile(path.join(mount,'GENERATION.json'),1024*1024);
-    need(digest(bytes)===bootstrapManifestSha256,'bootstrap_hash');
+    need(digest(bytes)===bootstrapManifestSha256,'manifest_checksum');
     let manifest;try{manifest=JSON.parse(bytes.toString('utf8'));}catch{fail('bootstrap_json')}
     need(manifest?.kind==='china-local-generation-v1'&&manifest?.version===1&&
       manifest?.market==='china'&&manifest?.prepared===true&&manifest?.source?.supplierLatestVerified===true,
