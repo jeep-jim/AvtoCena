@@ -25,12 +25,12 @@ assert m.FAILED_UPLOAD_TARGETS == (
      'rollbackSha256': 'b26506fabb43efa22e8b38c8163e8f0098a775d0ca33c8e3259124b0b5ce7f28'})
 assert m.FAILED_UPLOAD_BULK_FILES == ('details.sqlite', 'query.sqlite', 'DISPOSITIONS.ndjson', 'image.tar')
 assert m.RESOLVED_CLEANUP_WITNESS['runtimeSha'] == '38895e53f7f770ee68edb0b8ad53056468b928a5'
-assert m.RESOLVED_CLEANUP_WITNESS['nonce'] == 'bb85ea435dc8bbf6f28809be2ec0b447'
-assert m.RESOLVED_CLEANUP_WITNESS['planSha256'] == '9309d5e0b06e2d4e34aefe9e9c09add5f3a54900dfd4130d02ab1f1966efa994'
-assert m.RESOLVED_CLEANUP_WITNESS['rollbackSha256'] == '6e2e1f838df5d9dd7e8a4d61e3277096432c068c8e55b8519bdd5df502c7812e'
-assert m.RESOLVED_CLEANUP_WITNESS['imageId'] == 'sha256:7c093eedb12cd825ba204d8f3758438a834d5bcece80c7a25f0040e4147159d9'
-assert m.RESOLVED_CLEANUP_TARGETS[0] == m.FAILED_WITNESS_TARGETS[2] and m.RESOLVED_CLEANUP_TARGETS[1]['planSha256'] == '027f6e750ff886098174c4da80e44a3a06c1b6cc94a46dc0f619452aa24139fa' and len(m.RESOLVED_CLEANUP_TARGETS) == 2
-assert m.RESOLVED_CLEANUP_BULK_BYTES == (13041561344, 13041562880)
+assert m.RESOLVED_CLEANUP_WITNESS['nonce'] == '4567cf493328df1e43c586c84ba0f801'
+assert m.RESOLVED_CLEANUP_WITNESS['planSha256'] == 'f181c53b79dc0d0d4345745de5d460dd6741cae3462d60a9d1f7d1acbd90b7b4'
+assert m.RESOLVED_CLEANUP_WITNESS['rollbackSha256'] == 'f837bbab9d46863c5c02e7fa87d7e0adb0bcf070f5219879b2d526d9568f98b0'
+assert m.RESOLVED_CLEANUP_WITNESS['imageId'] == 'sha256:c8fca211f0b5a7beede7e62ed6384b81ecc2c40f78f948053365392073f0c47e'
+assert [row['planSha256'] for row in m.RESOLVED_CLEANUP_TARGETS] == ['9309d5e0b06e2d4e34aefe9e9c09add5f3a54900dfd4130d02ab1f1966efa994', '69752a498c9497b363b5ca1357d9ab136aeffeb99c4dcc16433f6bd2ad81f9d7']
+assert m.RESOLVED_CLEANUP_BULK_BYTES == (13041560320, 13041560320)
 def forbidden(*args, **kwargs): raise AssertionError('unexpected external operation')
 m.subprocess.run = m.command = forbidden
 def refused(fn, code):
@@ -115,20 +115,20 @@ with tempfile.TemporaryDirectory(prefix='china-failed-upload-host-') as temporar
     empty_state = {'version': 1, 'kind': 'china-accepted-state-v1', 'market': 'china', 'revision': 2,
         'current': None, 'rollback': None, 'pending': None, 'commit': None}
     accepted = observe(empty_state, '"accepted-after-860"')
+    witness_dir, witness_plan = create_cut(witness['runtimeSha'], witness['nonce'], image)
     candidate = {'market': 'china', 'generationId': witness['generationId'],
         'owner': {'runId': '45369451603', 'attempt': '1', 'revision': 'c' * 40},
         'receiptSha256': witness['privateGenerationReceiptSha256'], 'sourceDescriptorSha256': '9' * 64,
         'generationManifestSha256': m.sha(generation_bytes), 'sourceCursor': 100, 'sourceObservedAt': '2026-11-23T12:00:00Z',
-        'runtimeSha': targets_binding[1]['runtimeSha'], 'pricingRuntimeSha': pricing, 'imageId': targets_binding[1]['imageId']}
-    rollback_raw = (targets[1] / 'ROLLED_BACK.json').read_bytes()
+        'runtimeSha': witness['runtimeSha'], 'pricingRuntimeSha': pricing, 'imageId': witness['imageId']}
+    rollback_raw = (witness_dir / 'ROLLED_BACK.json').read_bytes()
     intent = observe({'version': 1, 'kind': 'china-publication-intent-v1', 'market': 'china', 'revision': 1,
-        'nonce': targets_binding[1]['nonce'], 'owner': {'runId': '45439516316', 'attempt': '1', 'revision': 'c' * 40},
+        'nonce': witness['nonce'], 'owner': {'runId': '45439516316', 'attempt': '1', 'revision': 'c' * 40},
         'createdAt': '2026-11-24T19:00:00Z', 'candidate': candidate, 'previous': absent(), 'status': 'aborted',
         'resolution': {'kind': 'rolled_back', 'at': '2026-11-24T19:31:00Z', 'acceptedETag': accepted['etag'],
             'acceptedSha256': accepted['sha256'], 'hostReceiptSha256': None,
             'rollbackProof': {'kind': 'china-rollback-proof-v1', 'hostRollbackBase64': m.base64.b64encode(rollback_raw).decode(),
                 'hostRollbackSha256': m.sha(rollback_raw)}}}, '"resolved-860-intent"')
-    witness_dir, witness_plan = create_cut(witness['runtimeSha'], witness['nonce'], image, accepted)
     witness_files = [filename for filename in witness_dir.rglob('*') if filename.is_file() and filename.name not in ('PLAN.json', 'ROLLED_BACK.json')]
     assert len(witness_files) == 11
     # Fixture bytes are intentionally tiny. Only fixture digests and byte totals
@@ -249,10 +249,14 @@ for folder in [witness_dir, *targets]:
     for name in ('PLAN.json', 'ROLLED_BACK.json'):
         filename = folder / name; raw = filename.read_bytes(); write(filename, raw + b' ')
         refused(lambda: m.ResolvedFailedUploadCleanup(authority), 'resolved_proof_hash'); write(filename, raw)
-changed = copy.deepcopy(authority); changed['publicationState']['accepted']['etag'] = '"replacement-etag"'
-row = copy.deepcopy(intent['value']); row['resolution']['acceptedETag'] = '"replacement-etag"'
+changed = copy.deepcopy(authority)
+row = changed['publicationState']['intent']['value']
+row['previous'] = observe({**empty_state, 'revision': 1}, '"replacement-etag"')
+changed['publicationState']['accepted'] = observe({**empty_state, 'revision': 3})
+row['resolution']['acceptedSha256'] = changed['publicationState']['accepted']['sha256']
+row['resolution']['acceptedETag'] = changed['publicationState']['accepted']['etag']
 changed['publicationState']['intent'] = observe(row, intent['etag'])
-refused(lambda: m.ResolvedFailedUploadCleanup(changed), 'resolved_witness_predecessor')
+refused(lambda: m.ResolvedFailedUploadCleanup(changed), 'resolved_rollback_binding')
 unchanged()
 `));
 

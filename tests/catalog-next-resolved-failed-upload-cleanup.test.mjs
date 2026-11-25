@@ -11,7 +11,7 @@ import * as production from '../scripts/catalog-next/cleanup-resolved-failed-upl
 const clock = '2026-11-24T20:00:00.000Z', controller = '1'.repeat(40);
 const REPORT = 'catalog-next-china-resolved-failed-upload-cleanup-report.json';
 const WORKFLOW = 'jeep-jim/AvtoCena/.github/workflows/catalog-next-china-resolved-failed-upload-cleanup.yml@refs/heads/main';
-const target = production.RESOLVED_CLEANUP_TARGETS[1];
+const target = production.RESOLVED_CLEANUP_WITNESS;
 const candidate = {market: 'china', generationId: target.generationId,
   owner: {runId: '45369451603', attempt: '1', revision: controller},
   receiptSha256: target.privateGenerationReceiptSha256, sourceDescriptorSha256: '4'.repeat(64),
@@ -36,7 +36,7 @@ const source = (await fs.readFile(sourceUrl, 'utf8'))
 const fixtureModule = await import('data:text/javascript;base64,' + Buffer.from(source).toString('base64'));
 const {runResolvedCleanup, verifyResolvedCleanupState, validateResolvedCleanupPreparation,
   validateResolvedCleanupStep, validateResolvedCleanupReport} = fixtureModule;
-const fileBytes = [6000000000, 6000000000, 1000000000, 41561344, 6000000000, 6000000000, 1000000000, 41562880];
+const fileBytes = [6000000000, 6000000000, 1000000000, 41560320, 6000000000, 6000000000, 1000000000, 41560320];
 const identity = {liveRuntimeSha: production.RESOLVED_CLEANUP_LIVE_RUNTIME,
   protectedFailedAttempt: fixtureModule.RESOLVED_CLEANUP_WITNESS, protectedFilesVerified: 11,
   targetFailedAttempts: fixtureModule.RESOLVED_CLEANUP_TARGETS};
@@ -51,7 +51,7 @@ function step(index, absent = []) {
 function result(absent = []) {
   const prepared = preparation(absent);
   return {version: 1, kind: 'china-resolved-failed-upload-prune-v1', phase: 'after-resolved-rollback', completed: true, ...identity,
-    filesDeleted: 8 - absent.length, logicalBytesUnlinked: 26083124224 - prepared.alreadyAbsentBytes,
+    filesDeleted: 8 - absent.length, logicalBytesUnlinked: 26083120640 - prepared.alreadyAbsentBytes,
     alreadyAbsentFiles: absent.length, alreadyAbsentBytes: prepared.alreadyAbsentBytes,
     diskFreeBytesBefore: 10467188736, diskFreeBytesAfter: 36500000001,
     retiredContainers: 0, imagesDeleted: 0, directoriesDeleted: 0, privateGenerationDeletes: 0, acceptedStateWrites: 0, intentStateWrites: 0};
@@ -102,7 +102,7 @@ async function mutate(f, name, change) {
 test('only fresh CAS lease writes accompany exact resolved-state checks before every bounded unlink', async t => {
   const f = await fixture(t), before = {accepted: await f.state.read('accepted'), intent: await f.state.read('intent')};
   const report = await runResolvedCleanup(f.options);
-  assert.equal(report.completed, true); assert.equal(report.filesDeleted, 8); assert.equal(report.logicalBytesUnlinked, 26083124224);
+  assert.equal(report.completed, true); assert.equal(report.filesDeleted, 8); assert.equal(report.logicalBytesUnlinked, 26083120640);
   assert.equal(report.diskFreeBytesBefore, 10467188736); assert.equal(report.diskFreeBytesAfter, 36500000001);
   assert.equal(report.leaseRelease, 'released'); assert.equal(Object.hasOwn(report, 'partialSteps'), false);
   assert.deepEqual(f.requests.map(row => [row.action, row.index]), [['prepare', undefined], ...Array.from({length: 8}, (_, i) => ['unlink', i]), ['finish', undefined]]);
@@ -122,7 +122,7 @@ test('production pins reject the valid but fabricated fixture rollback proof', a
   const f = await fixture(t), view = {accepted: await f.state.read('accepted'), intent: await f.state.read('intent')};
   verifyResolvedCleanupState(view);
   assert.throws(() => production.verifyResolvedCleanupState(view), /china_resolved_cleanup_resolved_state/);
-  assert.equal(production.RESOLVED_CLEANUP_TARGETS[1].rollbackSha256, 'f47f596c64647fb7dd47e47c3d9b5b2d2d66808d51e74c3a690954076c619e04');
+  assert.equal(production.RESOLVED_CLEANUP_WITNESS.rollbackSha256, 'f837bbab9d46863c5c02e7fa87d7e0adb0bcf070f5219879b2d526d9568f98b0');
 });
 
 test('idle absence is not a resolved rollback and is rejected before lease acquisition', async t => {
@@ -224,7 +224,7 @@ test('resumed absent files are not reported as newly unlinked logical bytes', as
   const absent = [0, 1, 7], f = await fixture(t, {absent});
   const report = await runResolvedCleanup(f.options);
   assert.equal(report.filesDeleted, 5); assert.equal(report.alreadyAbsentFiles, 3);
-  assert.equal(report.alreadyAbsentBytes, 12041562880); assert.equal(report.logicalBytesUnlinked, 14041561344);
+  assert.equal(report.alreadyAbsentBytes, 12041560320); assert.equal(report.logicalBytesUnlinked, 14041560320);
 });
 
 test('sanitized reporting rejects identity, sequence, byte, extra-data and mutation-scope changes', () => {
@@ -237,7 +237,7 @@ test('sanitized reporting rejects identity, sequence, byte, extra-data and mutat
   }
   const steps = Array.from({length: 8}, (_, index) => step(index));
   for (const changed of [{acceptedStateWrites: 1}, {intentStateWrites: 1}, {privateGenerationDeletes: 1}, {directoriesDeleted: 1},
-    {imagesDeleted: 1}, {filesDeleted: 7}, {logicalBytesUnlinked: 26083124223}, {alreadyAbsentBytes: 1}, {diskFreeBytesBefore: -1},
+    {imagesDeleted: 1}, {filesDeleted: 7}, {logicalBytesUnlinked: 26083120639}, {alreadyAbsentBytes: 1}, {diskFreeBytesBefore: -1},
     {diskFreeBytesAfter: Number.MAX_SAFE_INTEGER + 1}, {extra: 'private'}]) {
     assert.throws(() => validateResolvedCleanupReport({...result(), ...changed}, preparation(), steps), /china_resolved_cleanup_report_/);
   }

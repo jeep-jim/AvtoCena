@@ -78,20 +78,27 @@ FAILED_WITNESS_BULK_BYTES = (13041560320, 13041559296, 13041561344)
 RESOLVED_CLEANUP_WITNESS = {
     **FAILED_UPLOAD_WITNESS,
     'runtimeSha': '38895e53f7f770ee68edb0b8ad53056468b928a5',
+    'nonce': '4567cf493328df1e43c586c84ba0f801',
+    'planSha256': 'f181c53b79dc0d0d4345745de5d460dd6741cae3462d60a9d1f7d1acbd90b7b4',
+    'rollbackSha256': 'f837bbab9d46863c5c02e7fa87d7e0adb0bcf070f5219879b2d526d9568f98b0',
+    'imageId': 'sha256:c8fca211f0b5a7beede7e62ed6384b81ecc2c40f78f948053365392073f0c47e',
+}
+RESOLVED_CLEANUP_TARGETS = ({
+    **FAILED_UPLOAD_WITNESS,
+    'runtimeSha': '38895e53f7f770ee68edb0b8ad53056468b928a5',
     'nonce': 'bb85ea435dc8bbf6f28809be2ec0b447',
     'planSha256': '9309d5e0b06e2d4e34aefe9e9c09add5f3a54900dfd4130d02ab1f1966efa994',
     'rollbackSha256': '6e2e1f838df5d9dd7e8a4d61e3277096432c068c8e55b8519bdd5df502c7812e',
     'imageId': 'sha256:7c093eedb12cd825ba204d8f3758438a834d5bcece80c7a25f0040e4147159d9',
-}
-RESOLVED_CLEANUP_TARGETS = (FAILED_WITNESS_TARGETS[2], {
+}, {
     **FAILED_UPLOAD_WITNESS,
-    'runtimeSha': '99c45a3b5d8439bbc1ee34702ba41340ada08125',
-    'nonce': 'eef77195126340e1a7c47262a86bb554',
-    'planSha256': '027f6e750ff886098174c4da80e44a3a06c1b6cc94a46dc0f619452aa24139fa',
-    'rollbackSha256': 'f47f596c64647fb7dd47e47c3d9b5b2d2d66808d51e74c3a690954076c619e04',
-    'imageId': 'sha256:c12a500a0e50fc692701e2f5a28733a6c8a995c241df9d193c294a2cd85cb87d',
+    'runtimeSha': '38895e53f7f770ee68edb0b8ad53056468b928a5',
+    'nonce': '4272af0282816d6454e7e62119d6eb68',
+    'planSha256': '69752a498c9497b363b5ca1357d9ab136aeffeb99c4dcc16433f6bd2ad81f9d7',
+    'rollbackSha256': 'a35e4d794482d9d21f918508e447c7ce5c2aed7e7968a76d1aa1800a8a0ed5b4',
+    'imageId': 'sha256:c883ec9bd2203f5fbdac0da2860826da9ed8cd2233008feb567d128699dcbb54',
 })
-RESOLVED_CLEANUP_BULK_BYTES = (13041561344, 13041562880)
+RESOLVED_CLEANUP_BULK_BYTES = (13041560320, 13041560320)
 
 # Diagnostic bounds are independent of every acceptance route and threshold.
 # Only logs from the existing speed gate's candidate/window are read.
@@ -1501,7 +1508,7 @@ class ResolvedFailedUploadCleanup:
              and type(state['revision']) is int and state['revision'] > 0
              and all(state[key] is None for key in ('current', 'rollback', 'commit', 'pending')), 'resolved_empty_state')
         intent = checked_observation(view['intent'])
-        target = RESOLVED_CLEANUP_TARGETS[1]
+        target = RESOLVED_CLEANUP_WITNESS
         need(set(intent) == {'version', 'kind', 'market', 'revision', 'nonce', 'owner', 'createdAt', 'candidate', 'previous', 'status', 'resolution'}
              and intent['version'] == 1 and intent['kind'] == 'china-publication-intent-v1' and intent['market'] == 'china'
              and type(intent['revision']) is int and intent['revision'] > 0 and intent['nonce'] == target['nonce']
@@ -1602,14 +1609,12 @@ class ResolvedFailedUploadCleanup:
             self.cuts.append((directory, plan, rollback))
         view = self.authority['publicationState']
         witness_plan = self.cuts[0][1]
-        need(witness_plan['previousAcceptedETag'] == view['accepted']['etag']
-             and witness_plan['previousAcceptedStateSha256'] == view['accepted']['sha256'], 'resolved_witness_predecessor')
-        old_plan = self.cuts[2][1]
         intent = view['intent']['value']
-        need(old_plan.get('previousAcceptedETag') == intent['previous']['etag']
-             and old_plan.get('previousAcceptedStateSha256') == intent['previous']['sha256']
-             and self.proofs[self.cuts[2][0] / 'ROLLED_BACK.json'][1] == base64.b64decode(intent['resolution']['rollbackProof']['hostRollbackBase64']),
-             'resolved_local_rollback')
+        for _, plan, _ in self.cuts:
+            need(plan['previousAcceptedETag'] == intent['previous']['etag'] and
+                 plan['previousAcceptedStateSha256'] == intent['previous']['sha256'], 'resolved_witness_predecessor')
+        need(self.proofs[self.cuts[0][0] / 'ROLLED_BACK.json'][1] ==
+             base64.b64decode(intent['resolution']['rollbackProof']['hostRollbackBase64']), 'resolved_local_rollback')
         need(all(plan['sourceDescriptorSha256'] == witness_plan['sourceDescriptorSha256'] for _, plan, _ in self.cuts)
              and intent['candidate']['sourceDescriptorSha256'] == witness_plan['sourceDescriptorSha256'], 'resolved_source_binding')
         generation_reference({**intent['candidate'], 'runtimeSha': RESOLVED_CLEANUP_WITNESS['runtimeSha']}, RESOLVED_CLEANUP_WITNESS['nonce'])

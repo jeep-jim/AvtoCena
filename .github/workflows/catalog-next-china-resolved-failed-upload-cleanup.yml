@@ -12,7 +12,7 @@ on:
 permissions:
   contents: read
 concurrency:
-  group: catalog-next-china
+  group: catalog-next-china-verified-cleanup
   cancel-in-progress: false
 jobs:
   cleanup:
@@ -37,7 +37,7 @@ jobs:
         run: |
           node scripts/catalog-next/cleanup-resolved-failed-uploads.mjs --verify
           node --test tests/readonly-marker-invocation.test.mjs tests/catalog-next-resolved-failed-upload-cleanup.test.mjs tests/catalog-next-resolved-failed-upload-cleanup-host.test.mjs tests/catalog-next-failed-upload-cleanup.test.mjs tests/catalog-next-failed-upload-cleanup-host.test.mjs tests/catalog-next-failed-witness-cleanup.test.mjs tests/catalog-next-failed-witness-cleanup-host.test.mjs tests/catalog-next-release-ssh.test.mjs tests/catalog-next-china-state.test.mjs
-      - name: Prune eight exact bulk files while preserving the sealed 151 witness
+      - name: Prune eight exact bulk files while preserving the latest rolled-back upload
         env:
           SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
           JSON_STORAGE_DRIVER: object

@@ -18,21 +18,29 @@ const GENERATION = Object.freeze({pricingRuntimeSha: '64c6338e0db23c8999096bceef
   generationManifestSha256: 'd5745797cc162b82e0c0f0b1f49fef65f18f0d6649666562337183b18084dd75',
   privateGenerationReceiptSha256: '25f5277665bcc1a72879d9a7e55cb39fc7d4bd57a061be2593d3a6a9d9f1cc22'});
 export const RESOLVED_CLEANUP_WITNESS = Object.freeze({...GENERATION,
-  runtimeSha: '38895e53f7f770ee68edb0b8ad53056468b928a5', nonce: 'bb85ea435dc8bbf6f28809be2ec0b447',
+  runtimeSha: '38895e53f7f770ee68edb0b8ad53056468b928a5',
+  nonce: '4567cf493328df1e43c586c84ba0f801',
+  planSha256: 'f181c53b79dc0d0d4345745de5d460dd6741cae3462d60a9d1f7d1acbd90b7b4',
+  rollbackSha256: 'f837bbab9d46863c5c02e7fa87d7e0adb0bcf070f5219879b2d526d9568f98b0',
+  imageId: 'sha256:c8fca211f0b5a7beede7e62ed6384b81ecc2c40f78f948053365392073f0c47e',
+});
+export const RESOLVED_CLEANUP_TARGETS = Object.freeze([
+Object.freeze({...GENERATION,
+  runtimeSha: '38895e53f7f770ee68edb0b8ad53056468b928a5',
+  nonce: 'bb85ea435dc8bbf6f28809be2ec0b447',
   planSha256: '9309d5e0b06e2d4e34aefe9e9c09add5f3a54900dfd4130d02ab1f1966efa994',
   rollbackSha256: '6e2e1f838df5d9dd7e8a4d61e3277096432c068c8e55b8519bdd5df502c7812e',
-  imageId: 'sha256:7c093eedb12cd825ba204d8f3758438a834d5bcece80c7a25f0040e4147159d9'});
-export const RESOLVED_CLEANUP_TARGETS = Object.freeze([
-  Object.freeze({...GENERATION, runtimeSha: '1518035b9e6b717cd364ae8d13e63d0127899112', nonce: '92ec4a21446a23bed345fd789b2b3cc5',
-    planSha256: '2b038c3566322b7be1f4e622716b8aed85e6e318fd323d31098db05dbb469964',
-    rollbackSha256: '6f86011baf31bf183c5b156586b4c9b8a6aa22a0648c2d5f3de4c6f6e57538e9',
-    imageId: 'sha256:0a1d136f6b292f9d027354fe8db3c14e12079e689e3f7b5773a7b014860213ea'}),
-  Object.freeze({...GENERATION, runtimeSha: '99c45a3b5d8439bbc1ee34702ba41340ada08125', nonce: 'eef77195126340e1a7c47262a86bb554',
-    planSha256: '027f6e750ff886098174c4da80e44a3a06c1b6cc94a46dc0f619452aa24139fa',
-    rollbackSha256: 'f47f596c64647fb7dd47e47c3d9b5b2d2d66808d51e74c3a690954076c619e04',
-    imageId: 'sha256:c12a500a0e50fc692701e2f5a28733a6c8a995c241df9d193c294a2cd85cb87d'}),
+  imageId: 'sha256:7c093eedb12cd825ba204d8f3758438a834d5bcece80c7a25f0040e4147159d9',
+}),
+Object.freeze({...GENERATION,
+  runtimeSha: '38895e53f7f770ee68edb0b8ad53056468b928a5',
+  nonce: '4272af0282816d6454e7e62119d6eb68',
+  planSha256: '69752a498c9497b363b5ca1357d9ab136aeffeb99c4dcc16433f6bd2ad81f9d7',
+  rollbackSha256: 'a35e4d794482d9d21f918508e447c7ce5c2aed7e7968a76d1aa1800a8a0ed5b4',
+  imageId: 'sha256:c883ec9bd2203f5fbdac0da2860826da9ed8cd2233008feb567d128699dcbb54',
+})
 ]);
-const TARGET_BYTES = [13041561344, 13041562880], TOTAL_BYTES = 26083124224;
+const TARGET_BYTES = [13041560320, 13041560320], TOTAL_BYTES = 26083120640;
 const need = (value, code) => { if (!value) throw Error('china_resolved_cleanup_' + code); };
 const object = value => value !== null && typeof value === 'object' && !Array.isArray(value);
 const keys = (value, expected) => object(value) && Object.keys(value).length === expected.length && expected.every(key => Object.hasOwn(value, key));
@@ -48,14 +56,14 @@ const instant = value => {
 export function verifyResolvedCleanupInvocation({root = ROOT, environment = process.env} = {}) {
   need(environment.GITHUB_WORKFLOW_REF === WORKFLOW, 'workflow');
   return verifyReadonlyInvocation({root, env: environment, markerPath: MARKER,
-    operation: 'prune-exact-china-uploads-after-resolved-99-rollback'});
+    operation: 'prune-exact-china-uploads-after-resolved-city-rollback'});
 }
 
 /** inspectChinaPublicationState verifies canonical observations and the complete
  * authenticated rollback receipt. A timeout or an expired lease is no proof. */
 export function verifyResolvedCleanupState(view) {
   const status = inspectChinaPublicationState(view).status;
-  const state = view.accepted.value, intent = view.intent.value, target = RESOLVED_CLEANUP_TARGETS[1];
+  const state = view.accepted.value, intent = view.intent.value, target = RESOLVED_CLEANUP_WITNESS;
   need(status === 'resolved' && view.accepted.found && view.intent.found
     && ['current', 'pending', 'rollback', 'commit'].every(key => state[key] === null)
     && intent.status === 'aborted' && intent.resolution.kind === 'rolled_back'
