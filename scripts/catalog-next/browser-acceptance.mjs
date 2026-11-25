@@ -168,7 +168,9 @@ export async function runChinaBrowserAcceptance({oraclePath, releaseSha, nonce, 
         const homeResponse = await page.goto(ORIGIN + '/', {waitUntil: 'commit', timeout: 90000});
         need(homeResponse?.status() === 200, 'home_response');
         await page.locator('main[data-home-react-filters] h1').waitFor({state: 'visible', timeout: 60000});
-        result.homeHeadingSeconds = Number(((performance.now() - homeStarted) / 1000).toFixed(3));
+        const headingMs = performance.now() - homeStarted;
+        result.homeHeadingSeconds = Number((headingMs / 1000).toFixed(3));
+        need(headingMs <= 3000, 'home_heading_slow');
         const home = await chinaSection(page, Math.min(10, samples.home.total), {home: true});
         result.homepage = verifyHomeChinaCards(home.rows, home.total, samples.home, oracle.expectedGeneration);
         stage = 'homepage_api';

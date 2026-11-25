@@ -228,7 +228,7 @@ class AcceptedBaselineTests(unittest.TestCase):
      self.assertEqual(len(measured),len(expected));self.assertEqual({row['path'] for row in measured},expected)
      enforced=[row for row in rows if row.get('speedBaseline')==phase]
      self.assertEqual({row['path'] for row in enforced},FROZEN_ROUTES&expected)
-     self.assertTrue(all(row['blocking'] for row in enforced))
+     self.assertTrue(all(row['blocking'] == (scope != 'china' or row['path'] != '/') for row in enforced))
     summary=rows[-1]
     self.assertEqual(summary['marketScope'],scope)
     self.assertEqual(set(summary['routes']),expected)
