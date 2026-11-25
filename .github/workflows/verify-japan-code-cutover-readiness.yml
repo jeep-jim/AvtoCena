@@ -97,6 +97,13 @@ jobs:
             tests/ajes-filtered-page.test.ts \
             tests/ajes-rail-late-count.test.ts
           npm run typecheck
+      - name: Build the exact candidate as a production application (not a server image)
+        working-directory: application
+        env:
+          JSON_STORAGE_DRIVER: local
+        run: |
+          set -euo pipefail
+          npm run build
       - name: Verify public serving identity (read-only)
         run: |
           set -euo pipefail
