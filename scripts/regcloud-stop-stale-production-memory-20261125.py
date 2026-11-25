@@ -55,7 +55,105 @@ def connections():
   tokens=line.split()
   if len(tokens)<5:continue
   for value in tokens[3:5]:
-   need(not re.search(r':3001,value),'orphan_connected')
+   need(not re.search(r':3001
+def main():
+ need(len(sys.argv)==1,'arguments')
+ fd=os.open(str(LOCK),os.O_RDONLY|os.O_NOFOLLOW|os.O_CLOEXEC)
+ try:
+  fcntl.flock(fd,fcntl.LOCK_EX|fcntl.LOCK_NB)
+  expected=upstream();current=live();all_routes();connections()
+  before=mem()
+  targets=[]
+  for name,prefix,role,port in TARGETS:
+   row=inspect(name)
+   labels=row.get('Config',{}).get('Labels') or {}
+   actual={int(z['HostPort']) for group in (row.get('HostConfig',{}).get('PortBindings') or {}).values() for z in group or [] if str(z.get('HostPort','')).isdigit()}
+   need(row['Id'].startswith(prefix) and row['State']['Running'] is True and
+     labels.get('org.opencontainers.image.revision')!=MAIN and
+     labels.get('avtocena.role')==role and actual=={port} and
+     row.get('HostConfig',{}).get('RestartPolicy',{}).get('Name')=='unless-stopped','stale_identity')
+   need(row['Id']!=current['Id'],'active_target')
+   targets.append(row)
+  # Protect direct container dependencies and shared network namespaces.
+  for row in json.loads(invoke('/usr/bin/docker','ps','-aq','--no-trunc') and invoke('/usr/bin/docker','inspect',*invoke('/usr/bin/docker','ps','-aq','--no-trunc').split())):
+   if row['State'].get('Running') is not True:continue
+   for old in targets:
+    if row['Id']==old['Id']:continue
+    mode=str(row.get('HostConfig',{}).get('NetworkMode',''))
+    need(old['Id'] not in mode and old['Name'].removeprefix('/') not in mode,'network_dependency')
+  need(upstream()==expected,'ingress_changed')
+  live();connections()
+  for row in targets:
+   invoke('/usr/bin/docker','stop','--time','25',row['Id'],timeout=40)
+   stopped=inspect(row['Id'])
+   need(not stopped['State']['Running'],'stop_not_confirmed')
+   need(upstream()==expected,'ingress_changed')
+   live()
+  time.sleep(3)
+  after=mem()
+  print(json.dumps({'kind':'china-stale-container-memory-retirement-v1',
+    'stopped':[{'id':v['Id'][:12],'role':v['Config']['Labels']['avtocena.role']} for v in targets],
+    'activeChinaUnchanged':True,'memAvailableBeforeBytes':before.get('MemAvailable'),
+    'memAvailableAfterBytes':after.get('MemAvailable'),
+    'deltaAvailableBytes':after.get('MemAvailable',0)-before.get('MemAvailable',0),
+    'imagesRemoved':0,'generationFilesRemoved':0},separators=(',',':')))
+ finally:os.close(fd)
+if __name__=='__main__':
+ try:main()
+ except Exception as e:
+  code=str(e) if isinstance(e,RuntimeError) and re.fullmatch('china_stale_memory_[a-z_]+',str(e)) else 'china_stale_memory_unverified'
+  print(json.dumps({'kind':'china-stale-container-memory-retirement-v1','error':code}),flush=True)
+  sys.exit(1)
+,value),'orphan_connected')
+def main():
+ need(len(sys.argv)==1,'arguments')
+ fd=os.open(str(LOCK),os.O_RDONLY|os.O_NOFOLLOW|os.O_CLOEXEC)
+ try:
+  fcntl.flock(fd,fcntl.LOCK_EX|fcntl.LOCK_NB)
+  expected=upstream();current=live();all_routes();connections()
+  before=mem()
+  targets=[]
+  for name,prefix,role,port in TARGETS:
+   row=inspect(name)
+   labels=row.get('Config',{}).get('Labels') or {}
+   actual={int(z['HostPort']) for group in (row.get('HostConfig',{}).get('PortBindings') or {}).values() for z in group or [] if str(z.get('HostPort','')).isdigit()}
+   need(row['Id'].startswith(prefix) and row['State']['Running'] is True and
+     labels.get('org.opencontainers.image.revision')!=MAIN and
+     labels.get('avtocena.role')==role and actual=={port} and
+     row.get('HostConfig',{}).get('RestartPolicy',{}).get('Name')=='unless-stopped','stale_identity')
+   need(row['Id']!=current['Id'],'active_target')
+   targets.append(row)
+  # Protect direct container dependencies and shared network namespaces.
+  for row in json.loads(invoke('/usr/bin/docker','ps','-aq','--no-trunc') and invoke('/usr/bin/docker','inspect',*invoke('/usr/bin/docker','ps','-aq','--no-trunc').split())):
+   if row['State'].get('Running') is not True:continue
+   for old in targets:
+    if row['Id']==old['Id']:continue
+    mode=str(row.get('HostConfig',{}).get('NetworkMode',''))
+    need(old['Id'] not in mode and old['Name'].removeprefix('/') not in mode,'network_dependency')
+  need(upstream()==expected,'ingress_changed')
+  live();connections()
+  for row in targets:
+   invoke('/usr/bin/docker','stop','--time','25',row['Id'],timeout=40)
+   stopped=inspect(row['Id'])
+   need(not stopped['State']['Running'],'stop_not_confirmed')
+   need(upstream()==expected,'ingress_changed')
+   live()
+  time.sleep(3)
+  after=mem()
+  print(json.dumps({'kind':'china-stale-container-memory-retirement-v1',
+    'stopped':[{'id':v['Id'][:12],'role':v['Config']['Labels']['avtocena.role']} for v in targets],
+    'activeChinaUnchanged':True,'memAvailableBeforeBytes':before.get('MemAvailable'),
+    'memAvailableAfterBytes':after.get('MemAvailable'),
+    'deltaAvailableBytes':after.get('MemAvailable',0)-before.get('MemAvailable',0),
+    'imagesRemoved':0,'generationFilesRemoved':0},separators=(',',':')))
+ finally:os.close(fd)
+if __name__=='__main__':
+ try:main()
+ except Exception as e:
+  code=str(e) if isinstance(e,RuntimeError) and re.fullmatch('china_stale_memory_[a-z_]+',str(e)) else 'china_stale_memory_unverified'
+  print(json.dumps({'kind':'china-stale-container-memory-retirement-v1','error':code}),flush=True)
+  sys.exit(1)
+,value),'orphan_connected')
 def main():
  need(len(sys.argv)==1,'arguments')
  fd=os.open(str(LOCK),os.O_RDONLY|os.O_NOFOLLOW|os.O_CLOEXEC)
