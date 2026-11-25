@@ -1,0 +1,78 @@
+# Production: data-only update of accepted China generation; no Docker image build.
+# Daily at 21:00 Krasnoyarsk (UTC+7), source scope Che168 only.
+name: China independent daily - accepted source and retained image
+on:
+  schedule:
+    - cron: '0 14 * * *'
+  push:
+    branches: [main]
+    paths: [.github/market-runs/catalog-next-china-daily.json]
+  workflow_dispatch:
+    inputs:
+      controller_sha:
+        description: Exact reviewed main controller commit
+        required: true
+        type: string
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: catalog-next-china
+  cancel-in-progress: false
+jobs:
+  refresh:
+    if: github.repository_id == '1289722938' && github.ref == 'refs/heads/main' && github.run_attempt == '1'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 360
+    environment: regcloud-staging
+    env:
+      EXPECTED_CONTROLLER_SHA: ${{ inputs.controller_sha }}
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 2
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24.22.3'
+          cache: npm
+      - name: Install reviewed controller dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Verify unchanged baselines and independent China contracts
+        run: |
+          node scripts/verify-frozen-speed-baselines.mjs
+          node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/catalog-next-*.test.mjs tests/release-speed-guard-contract.test.mjs
+      - name: Checkout distinct pricing and serving revisions
+        run: node --import tsx scripts/catalog-next/daily-entry.mjs --checkout
+      - name: Prepare Chromium for real mobile and desktop acceptance
+        run: |
+          npm install --prefix "$RUNNER_TEMP/daily-browser" --no-package-lock --ignore-scripts playwright@1.55.0
+          node --input-type=module <<'JS'
+          import fs from 'node:fs';
+          import {execFileSync} from 'node:child_process';
+          const chrome=execFileSync('which',['google-chrome'],{encoding:'utf8'}).trim();
+          fs.appendFileSync(process.env.GITHUB_ENV,'CHROME_BIN='+fs.realpathSync(chrome)+'\nPLAYWRIGHT_MODULE='+process.env.RUNNER_TEMP+'/daily-browser/node_modules/playwright/index.mjs\n');
+          JS
+      - name: Refresh accepted China and replace only its data generation
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+          JSON_STORAGE_DRIVER: object
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_REGION: us-east-1
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+          AUTO_API_CHE168_KEY: ${{ secrets.AUTO_API_CHE168_KEY }}
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node scripts/run-node-with-resources.mjs --import tsx scripts/catalog-next/daily-entry.mjs --run
+      - name: Preserve aggregate daily result only
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: catalog-next-china-daily-report
+          path: |
+            catalog-next-china-daily-report.json
+            catalog-next-china-daily-generation-report.json
+          if-no-files-found: ignore
+          retention-days: 14
