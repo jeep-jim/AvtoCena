@@ -2,6 +2,8 @@ import {applyJapanOwnerSpecifications} from './japan-owner-specifications';
 import {enrichJapanDrive} from './japan-drive';
 import {applyJapanFactoryFuel} from '../encyclopedia/japan-fuel-reference';
 import {applyEncyclopediaCalculation,readCalculationIndex} from '../encyclopedia/calculation-index';
+import {readVehiclePowerKnowledge} from './power-knowledge';
+import {reviewedJapanPower} from './japan-reviewed-power';
 import 'server-only';
 import {assertAjesJapanTable} from './ajes-access-policy';
 import {headers} from 'next/headers';
@@ -29,6 +31,11 @@ export async function readAjesPublic(query:AjesQuery,options:{editorial?:boolean
  });
  options.measure?.('supplier-read',performance.now()-sourceStart);
  const indexStart=performance.now();const index=await readCatalogEditorial();options.measure?.('editorial-read',performance.now()-indexStart);
+ // The source's PW cannot establish certified horsepower. Only load the
+ // existing locally reviewed fact library when a horsepower filter needs it.
+ // Missing optional facts must not turn an AJ source page into a failure.
+ const powerFacts=(query.powerFrom!==undefined||query.powerTo!==undefined)
+   ?await readVehiclePowerKnowledge().catch(()=>[]):[];
  const items=await Promise.all(result.items.map(async(lot:NonNullable<ReturnType<typeof ajesLot>>)=>{
   const enrichStart=performance.now();
   const rate=await convertToRub(lot.finalPriceJpy||lot.sourcePrice,lot.currency as 'JPY'|'KRW'|'CNY');
@@ -37,6 +44,11 @@ export async function readAjesPublic(query:AjesQuery,options:{editorial?:boolean
   // Exact local release facts also cover auction records. No supplier/detail
   // request or legacy approximate matching is needed for this lookup.
   offer=applyJapanFactoryFuel(applyEncyclopediaCalculation(enrichJapanDrive(offer,readCalculationIndex())));
+  if(!Number(offer.powerHp)&&powerFacts.length){
+    const documented=reviewedJapanPower(offer,powerFacts);
+    if(documented)offer={...offer,powerHp:documented.powerHp,
+      powerDataSource:`power-knowledge:${documented.referenceId}`,powerDataConfidence:'reference'};
+  }
   options.measure?.('enrichment-sum',performance.now()-enrichStart);
   if(options.editorial!==false&&editorialHidden(offer,index))return null;
   return applyJapanOwnerSpecifications(options.editorial===false?offer:applyCatalogEditorial(offer,index));
