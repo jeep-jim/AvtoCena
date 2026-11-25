@@ -63,6 +63,8 @@ env:
 
 jobs:
   republish:
+    # Retired legacy full-generation republish; the accepted Japan reader is request based.
+    if: false
     runs-on: ubuntu-latest
     timeout-minutes: 60
     steps:
