@@ -12,7 +12,7 @@ import {offerCardPath,preparedChinaCardContext} from "@/lib/catalog/offer-url";
 import {useSavedCalculationPreview} from "./useSavedCalculationPreview";
 import {offerWithSavedPreview,savedCalculationPreviewRub} from "../../lib/catalog/saved-calculation-preview";
 import { isGreenCornerOffer } from "../../lib/catalog/green-corner-contract";
-import { CatalogCover } from "./CatalogCover";
+import { CatalogCover, type CatalogPhotoRecovery } from "./CatalogCover";
 import { recyclingPowerInfo } from "../../lib/catalog/recycling-power";
 import { RecyclingPowerLabel } from "./RecyclingPower";
 import powerStyles from "./RecyclingPower.module.css";
@@ -58,7 +58,13 @@ function ThirtyMinuteIcon({ dense = false }: { dense?: boolean }) {
   return <svg className={dense ? "h-3 w-3 sm:h-3.5 sm:w-3.5" : "h-3.5 w-3.5"} viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3.5" y="6" width="12" height="12" rx="2.5" stroke="currentColor" strokeWidth="1.8" /><path d="M15.5 10h2v4h-2M7.5 9.5h4M7.5 14.5h4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" /><circle cx="18" cy="18" r="4" fill="var(--ac-surface, #11141c)" stroke="currentColor" strokeWidth="1.7" /><path d="M18 15.8V18l1.4 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>;
 }
 
+function PhotoRetry({recovery, title, compact = false}: {recovery: CatalogPhotoRecovery; title: string; compact?: boolean}) {
+  return <button type="button" data-catalog-photo-retry aria-label={`Повторить загрузку фото ${title}`} onClick={recovery.retry}
+    className={`pointer-events-auto rounded-lg border border-white/25 bg-[var(--ac-surface-2)] px-2 py-1.5 font-semibold text-[var(--ac-text)] shadow-sm hover:bg-[var(--ac-surface)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-400 ${compact ? "text-[10px]" : "text-xs"}`}>Повторить фото</button>;
+}
+
 export function CatalogCard({ offer, compact = false, dense = false, eagerPrefetch = false }: { offer: any; compact?: boolean; dense?: boolean; eagerPrefetch?: boolean }) {
+  const [photoRecovery, setPhotoRecovery] = useState<CatalogPhotoRecovery | null>(null);
   const retro=isRetroOffer(offer);
   const dealer=useDealerBrowsing();
   const view=useCatalogView();
@@ -84,6 +90,8 @@ export function CatalogCard({ offer, compact = false, dense = false, eagerPrefet
   const variantLabel=chinaCardVariant(offer);
   const href = dealerBrowsingHref(offerCardPath(offer),dealer);
   const imageUrl = o.images[0] || "";
+  const recovery = photoRecovery?.src === imageUrl ? photoRecovery : null;
+  const reportPhotoRecovery = normalizedOffer.market === "china" ? setPhotoRecovery : undefined;
 
   /* Imported prices pass the public gate. The separate manager overlay comes
      only from the saved, server-calculated scenario used by the detail page. */
@@ -121,7 +129,9 @@ export function CatalogCard({ offer, compact = false, dense = false, eagerPrefet
   if(publicationWithdrawn(offer))return null;
   if(view==="list") return <article className="ac-catalog-list-row" data-green-corner={isGreenCornerOffer(offer)?"true":undefined}>
     <div className="ac-catalog-list-link">
-      <IntentPrefetchLink href={href} eager={eagerPrefetch} className="ac-list-photo">{imageUrl?<CatalogCover src={imageUrl} alt={o.title} eager={eagerPrefetch}/>:<span>Нет фото</span>}</IntentPrefetchLink>
+      <div className="ac-list-photo"><IntentPrefetchLink href={href} eager={eagerPrefetch} className="block h-full w-full">{imageUrl?<CatalogCover src={imageUrl} alt={o.title} eager={eagerPrefetch} onRecoveryChange={reportPhotoRecovery}/>:<span>Нет фото</span>}</IntentPrefetchLink>
+        {recovery ? <div className="pointer-events-none absolute inset-x-0 bottom-1 z-20 flex justify-center"><PhotoRetry recovery={recovery} title={o.title} compact/></div> : null}
+      </div>
       <div className="ac-list-identity"><IntentPrefetchLink href={href} eager={eagerPrefetch}><strong>{o.title}</strong></IntentPrefetchLink><span>{retro?"Ретро · ":""}{priceLabel} · {o.marketLabel}</span>{normalizedOffer.auctionName&&<small title={String(normalizedOffer.auctionName)}>Аукцион · {String(normalizedOffer.auctionName)}</small>}</div>
       <div className="ac-list-body"><span>{normalizedOffer.market==="japan"&&!isGreenCornerOffer(offer)?`Лот ${o.lotNumber||"уточняется"}`:o.transmissionLabel==="уточняется"?"КПП уточняется":o.transmissionLabel}</span>{(o.operational?.chassisCode||o.chassisCode)?<ChassisCopy code={String(o.operational?.chassisCode||o.chassisCode)}/>:<small>{o.bodyLabel&&o.bodyLabel!=="уточняется"?o.bodyLabel:"Кузов уточняется"}</small>}</div>
       <div className="ac-list-engine"><span>{engineLabel}</span><small>{powerScenario?`${Math.round(powerScenario.horsepower)} л.с. · уточнить`:o.powerHp?`${Number(o.powerHp).toLocaleString("ru-RU")} л.с.`:japanPowerLabel||powerDisplay?.thirtyMinuteLabel||"Мощность уточняется"}</small><small>{o.driveLabel==="уточняется"?"Привод уточняется":o.driveLabel}</small></div>
@@ -133,7 +143,7 @@ export function CatalogCard({ offer, compact = false, dense = false, eagerPrefet
     <article data-green-corner={isGreenCornerOffer(offer) ? "true" : undefined} className="ac-catalog-card group relative min-w-0 overflow-visible rounded-[1.35rem] bg-white/[0.045]">
       <IntentPrefetchLink href={href} eager={eagerPrefetch} className="block overflow-hidden rounded-[1.35rem]">
         <div className={`relative overflow-hidden bg-white/[0.04] ${mediaHeight}`}>
-          {imageUrl ? <CatalogCover src={imageUrl} alt={o.title} eager={eagerPrefetch} /> : <div className="flex h-full items-center justify-center text-xs font-black text-white/35 sm:text-sm">Фото загружается</div>}
+          {imageUrl ? <CatalogCover src={imageUrl} alt={o.title} eager={eagerPrefetch} onRecoveryChange={reportPhotoRecovery} /> : <div className="flex h-full items-center justify-center text-xs font-black text-white/35 sm:text-sm">Фото загружается</div>}
           {retro&&<span className="absolute right-3 top-3 z-10 rounded-full bg-[#20242c] px-3 py-1 text-xs font-bold text-white" data-retro-badge>Ретро</span>}
           <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/90 via-black/42 to-transparent sm:h-24" />
           <div className={`ac-on-image absolute font-black normal-case tracking-normal text-white/90 ${dense ? "left-2 top-2 text-[8px] sm:left-3 sm:top-3 sm:text-[10px]" : "left-3 top-3 text-[10px]"}`}><span className="md:hidden">{isGreenCornerOffer(offer) ? "Зелёный угол" : o.marketLabel}</span><span className="hidden items-center gap-2 md:inline-flex"><CatalogMarketFlag market={normalizedOffer.market} className="h-4 w-6" /><span>{isGreenCornerOffer(offer) ? "Зелёный угол" : o.marketLabel}</span></span></div>
@@ -163,6 +173,7 @@ export function CatalogCard({ offer, compact = false, dense = false, eagerPrefet
           </div>
         </div>
       </IntentPrefetchLink>
+      {recovery ? <div className={`pointer-events-none absolute inset-x-0 top-0 z-20 flex items-center justify-center pt-5 ${mediaHeight}`}><PhotoRetry recovery={recovery} title={o.title}/></div> : null}
       <FavoriteToggle offerId={o.id} compact snapshot={snapshot} className={`ac-on-image absolute z-20 bg-black/52 text-red-400 backdrop-blur-md hover:bg-black/68 ${dense ? "right-2 top-2 h-8 w-8 sm:right-3 sm:top-3 sm:h-10 sm:w-10 [&>svg]:h-5 [&>svg]:w-5 sm:[&>svg]:h-[22px] sm:[&>svg]:w-[22px]" : "right-3 top-3"}`} />
     </article>
   );
