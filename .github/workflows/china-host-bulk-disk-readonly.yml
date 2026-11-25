@@ -1,0 +1,23 @@
+name: China host saved-generation census (read only)
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/china-host-bulk-disk-readonly.yml']
+permissions:
+  contents: read
+jobs:
+  observe:
+    if: github.repository_id == '1289722938' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 7
+    environment: regcloud-staging
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: Verify diagnostic syntax
+        run: node --check scripts/catalog-next/diagnose-china-bulk-disk-readonly.mjs
+      - name: Read host free disk and complete generation file counts
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+        run: node scripts/catalog-next/diagnose-china-bulk-disk-readonly.mjs
