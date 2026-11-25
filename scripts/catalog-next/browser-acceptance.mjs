@@ -208,7 +208,11 @@ export async function runChinaBrowserAcceptance({oraclePath, releaseSha, nonce, 
         need(await main.getAttribute('data-offer-id') === samples.modelCity.ids[chosen], 'detail_id');
         need(Number(await main.getAttribute('data-offer-price-rub')) === samples.modelCity.totalRub[chosen], 'detail_price');
         const visiblePrices = await main.locator('.ac-offer-price-panel .ac-price').evaluateAll(nodes => nodes.map(node => Number((node.textContent || '').replace(/[^0-9]/g, ''))));
-        need(visiblePrices.includes(samples.modelCity.totalRub[chosen]), 'visible_detail_price');
+        if (!visiblePrices.includes(samples.modelCity.totalRub[chosen])) {
+          const error = new Error('china_browser_visible_detail_price');
+          error.priceComparison = {position: chosen + 1, expectedRub: samples.modelCity.totalRub[chosen], renderedRub: visiblePrices[0] ?? null};
+          throw error;
+        }
         result.detail = {idMatched: true, savedCityPriceMatched: true, visiblePriceMatched: true};
         stage = 'back_to_filters';
         await page.goBack({waitUntil: 'domcontentloaded', timeout: 90000});
