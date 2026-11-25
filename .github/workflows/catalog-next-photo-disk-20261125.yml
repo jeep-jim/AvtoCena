@@ -1,3 +1,4 @@
+# Preserve bounded partial evidence if a host read is unavailable.
 name: Inspect failed photo release disk - read only
 on:
   push:
