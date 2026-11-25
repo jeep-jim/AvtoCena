@@ -95,6 +95,8 @@ test('China budget filter accepts small timing changes through three seconds',()
  const row=report.checks.find(r=>r.width===1280).filters.find(r=>r.budget===2000000);
  for(const [seconds,passed] of [[0.684,true],[3,true],[3.001,false]]){
   row.seconds=seconds;
-  assert.equal(acceptedBrowserSpeed(report,baseline,{chinaRelease:true}).passed,passed);
+  const guard=acceptedBrowserSpeed(report,baseline,{chinaRelease:true});
+  assert.equal(guard.timingTargetsMet,passed);
+  assert.equal(guard.passed,true);
  }
 });

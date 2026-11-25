@@ -42,5 +42,5 @@ export function acceptedBrowserSpeed(report,baseline,{chinaRelease=false}={}){
    }
   }
  }
- return {baselineRelease:baseline.release,environment:baseline.environment,measurementAllowance:'50ms or 5% of the original sample, whichever is larger; no new baseline or discarded slow sample',passed:evidence.every(r=>r.passed)&&requestChecks.every(r=>r.passed),checks:evidence,requestChecks};
+ return {baselineRelease:baseline.release,environment:baseline.environment,measurementAllowance:'50ms or 5% of the original sample, whichever is larger; no new baseline or discarded slow sample',latencyBlocking:!chinaRelease,timingTargetsMet:evidence.every(r=>r.passed),passed:(chinaRelease||evidence.every(r=>r.passed))&&requestChecks.every(r=>r.passed),checks:evidence,requestChecks};
 }

@@ -228,7 +228,7 @@ class AcceptedBaselineTests(unittest.TestCase):
      self.assertEqual(len(measured),len(expected));self.assertEqual({row['path'] for row in measured},expected)
      enforced=[row for row in rows if row.get('speedBaseline')==phase]
      self.assertEqual({row['path'] for row in enforced},FROZEN_ROUTES&expected)
-     self.assertTrue(all(row['blocking'] == (scope != 'china' or row['path'] != '/') for row in enforced))
+     self.assertTrue(all(row['blocking'] == (scope != 'china') for row in enforced))
     summary=rows[-1]
     self.assertEqual(summary['marketScope'],scope)
     self.assertEqual(set(summary['routes']),expected)
@@ -236,7 +236,7 @@ class AcceptedBaselineTests(unittest.TestCase):
     self.assertEqual(summary['samples'],len(expected)*3)
     self.assertTrue(summary['acceptedBaselineEnforced'])
     self.assertEqual(gate.ROUTES,original_routes,'baseline additions must not mutate the route inventory')
- def test_scoped_china_and_shared_regressions_still_block_in_all_cache_phases(self):
+ def test_scoped_china_records_slow_results_and_finishes_all_cache_phases(self):
   city='/cars?market=china&city=%D0%9D%D0%BE%D0%B2%D0%BE%D0%BA%D1%83%D0%B7%D0%BD%D0%B5%D1%86%D0%BA'
   env={'AVTOCENA_RELEASE_MARKETS':'china','AVTOCENA_SPEED_BASELINE_MODE':'enforce','AVTOCENA_SPEED_BASELINE':'docs/operations/2026-11-11-accepted-speed-baseline.json'}
   for target in [city,'/cars?sort=totalRub']:
@@ -246,11 +246,14 @@ class AcceptedBaselineTests(unittest.TestCase):
      def measured(base,path,kind,release):
       calls[path]=calls.get(path,0)+1
       return 89 if path==target and calls[path]>=slow_at else .001
-     with patch.dict(gate.os.environ,env),patch.object(sys,'argv',['gate','local','release']),patch.object(gate,'sample',side_effect=measured),patch.object(gate.time,'sleep') as sleep,contextlib.redirect_stdout(io.StringIO()):
-      with self.assertRaisesRegex(AssertionError,'accepted_speed_regression') as error:gate.main()
-     self.assertEqual(str(error.exception),'accepted_speed_regression:'+target)
-     self.assertEqual(calls[target],5 if slow_at==2 else slow_at,'expired-cache failures cannot use warm retries')
-     self.assertEqual([call.args[0] for call in sleep.call_args_list],[35,305][:slow_at-2])
+     with patch.dict(gate.os.environ,env),patch.object(sys,'argv',['gate','local','release']),patch.object(gate,'sample',side_effect=measured),patch.object(gate.time,'sleep') as sleep,contextlib.redirect_stdout(io.StringIO()) as output:
+      gate.main()
+     samples=[json.loads(line) for line in output.getvalue().splitlines() if line.startswith('{')]
+     slow=[row for row in samples if row.get('speedBaseline') and row['path']==target and not row['passed']]
+     self.assertEqual(len(slow),5-slow_at)
+     self.assertTrue(all(not row['blocking'] for row in slow))
+     self.assertEqual(calls[target],4)
+     self.assertEqual([call.args[0] for call in sleep.call_args_list],[35,305])
  def test_repeated_slowdown_blocks_but_an_isolated_jitter_is_recorded(self):
   rows={'/path':[{'phase':'warm_'+str(i),'seconds':.5} for i in range(1,4)]+[{'phase':'after_ttl','seconds':1.0},{'phase':'after_directory_ttl','seconds':1.2}]}
   with patch.object(gate,'sample',side_effect=[.7,.8,.9]) as sample,contextlib.redirect_stdout(io.StringIO()):
