@@ -38,7 +38,7 @@ jobs:
           const reuse = marker.reuseRunId || '';
           fs.appendFileSync(process.env.GITHUB_OUTPUT,`reset_cursors=${marker.resetCursors === true}\n`);
           if (reuse && !/^\d+$/.test(String(reuse))) throw Error('invalid_reuse_run_id');
-          const allowed = ['china','korea','uae','georgia','europe'];
+          const allowed = ['korea','uae','georgia','europe'];
           const publish = marker.publishMarkets || allowed;
           if (!Array.isArray(publish) || !publish.length || publish.some(market => !allowed.includes(market)) || new Set(publish).size !== publish.length) throw Error('invalid_publish_markets');
           fs.appendFileSync(process.env.GITHUB_OUTPUT,`publish_matrix=${JSON.stringify(publish)}\n`);
