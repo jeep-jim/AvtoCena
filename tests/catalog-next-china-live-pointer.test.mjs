@@ -72,6 +72,6 @@ test('cannot substitute a different bootstrap generation or unknown market',asyn
   await assert.rejects(store.read('korea'),/market/);
   await assert.rejects(store.directoryFor(pointer(initial,'b'.repeat(64)).active),/bootstrap_changed/);
   const mismatched=createChinaLocalPointerStore({rootDirectory:root,bootstrapManifestSha256:'b'.repeat(64)});
-  await assert.rejects(mismatched.read('china'),/bootstrap_hash/);
+  await assert.rejects(mismatched.read('china'),/manifest_checksum/);
  }finally{await fs.rm(root,{recursive:true,force:true})}
 });
