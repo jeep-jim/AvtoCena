@@ -33,7 +33,11 @@ def ordinary(path):
 def proof(path):
     if not ordinary(path) or path.stat().st_size > 256 * 1024:
         return {}
-    return json.loads(path.read_bytes())
+    try:
+        value = json.loads(path.read_bytes())
+        return value if isinstance(value, dict) else {'_invalidJson': True}
+    except (json.JSONDecodeError, UnicodeDecodeError):
+        return {'_invalidJson': True}
 
 
 def docker_json(arguments):
@@ -120,6 +124,8 @@ def main():
                     'planSha256': hashlib.sha256((directory / 'PLAN.json').read_bytes()).hexdigest() if plan else None,
                     'generationId': plan.get('generationId'),
                     'accepted': (directory / 'ACCEPTED.json').exists(),
+                    'planInvalidJson': plan.get('_invalidJson', False),
+                    'rollbackInvalidJson': rollback.get('_invalidJson', False),
                     'rollback': bool(rollback),
                     'rollbackBindsPlan': bool(rollback) and rollback.get('nonce') == plan.get('nonce') and
                         rollback.get('release') == plan.get('runtimeSha') and
