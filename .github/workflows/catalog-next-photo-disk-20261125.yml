@@ -1,4 +1,4 @@
-# Measure storage totals for safe current, rollback and staging capacity.
+# Inspect exact image ownership and all-container references before any cleanup.
 name: Inspect failed photo release disk - read only
 on:
   push:
