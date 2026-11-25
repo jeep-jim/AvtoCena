@@ -1,0 +1,31 @@
+name: Audit market writers (read-only)
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/market-writer-inventory.yml'
+      - 'scripts/catalog-next/market-writer-inventory.mjs'
+      - 'tests/catalog-next-market-writer-inventory.test.mjs'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  inventory:
+    if: github.repository_id == '1289722938' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: Verify static workflow inventory logic
+        run: node --test tests/catalog-next-market-writer-inventory.test.mjs
+      - name: Inventory market publication and legacy entry points
+        run: |
+          node scripts/catalog-next/market-writer-inventory.mjs > market-writer-inventory.json
+          node --input-type=module -e "import fs from 'node:fs';const a=JSON.parse(fs.readFileSync('market-writer-inventory.json'));console.log(JSON.stringify({kind:a.kind,scanned:a.scannedWorkflowCount,candidates:a.candidates.length,knownLegacyChinaPresent:a.knownLegacyChina.filter(x=>x.presentInMain).length}));"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: market-writer-inventory
+          path: market-writer-inventory.json
+          retention-days: 14
