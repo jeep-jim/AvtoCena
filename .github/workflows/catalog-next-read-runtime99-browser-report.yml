@@ -19,10 +19,10 @@ jobs:
           python3 - <<'PY'
           import hashlib, io, json, os, pathlib, urllib.error, urllib.parse, urllib.request, zipfile
           REPO = 'jeep-jim/AvtoCena'
-          RUN = 45493093028
-          ARTIFACT = 14968728651
-          HEAD = '0bb29933c2a06e10adbbc41ed59b3368c1a1fccb'
-          EXPECTED = '41bb6e4db3ec465b2bd96428e1cc7f0a3120cfe56cfb9741e6f08e0d0d43ea8c'
+          RUN = 45536536119
+          ARTIFACT = 14989446798
+          HEAD = '5431799ba07ff0f678eee8a7107dfbeeac092cf3'
+          EXPECTED = '041b52146ca2835af9413c767c9ad2dd400959606ac92d37ade6de5e3c9bf28a'
           class NoRedirect(urllib.request.HTTPRedirectHandler):
               def redirect_request(self, req, fp, code, msg, headers, newurl):
                   return None
@@ -40,7 +40,7 @@ jobs:
           assert run['status'] == 'completed' and run['conclusion'] == 'failure'
           artifact = api('/actions/artifacts/' + str(ARTIFACT))
           assert artifact['workflow_run']['id'] == RUN and artifact['workflow_run']['head_sha'] == HEAD
-          assert artifact['name'] == 'catalog-next-china-release-report' and artifact['size_in_bytes'] == 10618
+          assert artifact['name'] == 'catalog-next-china-release-report' and artifact['size_in_bytes'] == 10482
           assert artifact['digest'] == 'sha256:' + EXPECTED and artifact['expired'] is False
           request = urllib.request.Request('https://api.github.com/repos/' + REPO + '/actions/artifacts/' + str(ARTIFACT) + '/zip',
               headers={'Authorization': 'Bearer ' + os.environ['GH_READ_TOKEN'], 'Accept': 'application/vnd.github+json'})
@@ -55,7 +55,7 @@ jobs:
           # The signed artifact redirect is fetched without any GitHub credential.
           with urllib.request.urlopen(urllib.request.Request(location), timeout=30) as response:
               raw = response.read(1024 * 1024 + 1)
-          assert len(raw) == 10618 and hashlib.sha256(raw).hexdigest() == EXPECTED
+          assert len(raw) == 10482 and hashlib.sha256(raw).hexdigest() == EXPECTED
           archive = zipfile.ZipFile(io.BytesIO(raw))
           allowed = {'catalog-next-china-release-report.json', 'owner-filter-browser-report.json',
               'china-browser-details-report.json', 'image-receipt.json'}
@@ -75,8 +75,8 @@ jobs:
           assert set(files) == allowed
           release = files['catalog-next-china-release-report.json']
           details = files['china-browser-details-report.json']
-          assert release['controllerSha'] == HEAD and release['accepted'] is False and release['rollbackVerified'] is True
-          assert release['runtimeSha'] == details['release'] == '99c45a3b5d8439bbc1ee34702ba41340ada08125'
+          assert release['controllerSha'] == HEAD and release['accepted'] is False and release['publicationPendingRecovery'] is True
+          assert release['runtimeSha'] == details['release'] == '38895e53f7f770ee68edb0b8ad53056468b928a5'
           assert details['kind'] == 'china-browser-details-v1' and details['passed'] is False
           assert details['precedingSpeedReportSha256'] == seals['owner-filter-browser-report.json']['sha256']
           print('CHINA_SAVED_BROWSER_REPORT ' + json.dumps({'version': 1, 'sourceRunId': RUN,
