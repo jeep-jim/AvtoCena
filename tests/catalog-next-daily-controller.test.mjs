@@ -247,7 +247,7 @@ test('daily cadence follows Krasnoyarsk day boundaries and a live foreign lease 
   const justAccepted={...olderSource,proof:{kind:'china-accepted-proof-v1',
     hostReceiptBase64:initialProof.hostReceiptBase64,hostReceiptSha256:initialProof.hostReceiptSha256}};
   assert.equal(chinaDailyIsDue(justAccepted,'2026-11-25T14:00:00Z'),true);
-  assert.equal(chinaDailyIsDue(justAccepted,'2026-11-24T16:59:59Z'),false);
+  assert.throws(()=>chinaDailyIsDue(justAccepted,'2026-11-24T16:59:59Z'),/clock_before_acceptance/);
 
   const f = await fixture(), state = createChinaState({storage: f.storage, now: () => nextAt});
   await state.acquireLease({previous: await state.read('lease'), owner: owner(9), nonce: 'e'.repeat(32), expiresAt: '2026-11-24T13:00:00Z'});
