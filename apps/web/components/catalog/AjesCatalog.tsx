@@ -33,7 +33,7 @@ export async function AjesCatalog({params,embedded=false,dealer}:{params:Params;
  // supplier-wide count as if it were the exact result of powerTo=160.
  const powerSelected=Boolean(initial.powerFrom||initial.powerTo);
  const sourceTotal=powerSelected?null:result?.countSummary;
- const verifiedTotal=powerSelected&&result?.total!==null&&result?.total!==undefined&&!result.partial&&!result.stale&&!result.scanLimited
+ const verifiedTotal=powerSelected&&result?.total!==null&&result?.total!==undefined&&!result.partial&&!result.stale&&!result.scanLimited&&!result.powerIncomplete
    ? result.total : undefined;
  const displayTotal=powerSelected?verifiedTotal:exactAjesCount(sourceTotal);
  const countText=powerSelected
@@ -70,7 +70,7 @@ export async function AjesCatalog({params,embedded=false,dealer}:{params:Params;
  {!result.items.length&&(result.partial||result.stale||result.scanLimited||result.hasMore)&&<p role="status" className="mb-3 rounded-xl border border-[var(--ac-border)] p-4 text-sm text-[var(--ac-muted)]">Пока нет подтверждённых совпадений в загруженной части японского каталога. Это не означает отсутствие подходящих автомобилей; уточните модель или повторите поиск.</p>}
  {String(initial.sort||'').split(',').some(term=>term.startsWith('totalRub'))&&<p className="mb-3 text-sm text-[var(--ac-muted)]">По рассчитанной цене в загруженной подборке. На следующих страницах могут быть более дешёвые автомобили.</p>}
  {!result.items.length&&!result.hasMore&&!result.partial&&!result.stale&&<p role="status" className="rounded-2xl bg-[var(--ac-surface)] p-6 text-sm text-[var(--ac-muted)]">По выбранным параметрам автомобили не найдены. Попробуйте изменить условия поиска.</p>}
- <CatalogLoadMore resultQueryKey={JSON.stringify(initial)} key={JSON.stringify(initial)} query={{...initial,market} as any} initialPage={result.page} initialTotal={result.total} initialCount={result.items.length} initialCards={result.items.map((offer:any)=><CatalogCard key={offer.id} offer={offer} compact dense/>)} initialIncomplete={Boolean(result.partial||result.stale||result.scanLimited)} initialHasMore={result.hasMore} initialNextCursor={result.nextCursor} resultCountLabel={ajesPaginationCountText(sourceTotal)}/>
+ <CatalogLoadMore resultQueryKey={JSON.stringify(initial)} key={JSON.stringify(initial)} query={{...initial,market} as any} initialPage={result.page} initialTotal={result.total} initialCount={result.items.length} initialCards={result.items.map((offer:any)=><CatalogCard key={offer.id} offer={offer} compact dense/>)} initialIncomplete={Boolean(result.partial||result.stale||result.scanLimited||result.powerIncomplete)} initialHasMore={result.hasMore} initialNextCursor={result.nextCursor} resultCountLabel={ajesPaginationCountText(sourceTotal)}/>
  </div>}
 </CatalogSidebar>
  </section>
