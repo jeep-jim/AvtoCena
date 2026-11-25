@@ -1,4 +1,4 @@
-# Preserve bounded evidence and raw hashes of damaged proof files.
+# Measure storage totals for safe current, rollback and staging capacity.
 name: Inspect failed photo release disk - read only
 on:
   push:
