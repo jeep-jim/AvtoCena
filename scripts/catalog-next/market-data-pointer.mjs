@@ -20,7 +20,9 @@ const fail = code => { throw Error('market_pointer_' + code); };
 const need = (value, code) => { if (!value) fail(code); };
 const instant = value => typeof value === 'string' && !Number.isNaN(Date.parse(value)) && /^\d{4}-\d\d-\d\dT/.test(value);
 const plain = value => value !== null && typeof value === 'object' && !Array.isArray(value);
-const equal = (a,b) => JSON.stringify(a) === JSON.stringify(b);
+const canonical = value => Array.isArray(value) ? value.map(canonical) : plain(value)
+  ? Object.fromEntries(Object.keys(value).sort().map(key => [key,canonical(value[key])])) : value;
+const equal = (a,b) => JSON.stringify(canonical(a)) === JSON.stringify(canonical(b));
 
 export function validateMarketGeneration(market, value) {
   need(MARKET_SET.has(market) && plain(value), 'generation');
