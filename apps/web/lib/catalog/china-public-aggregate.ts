@@ -1,13 +1,13 @@
 import {AsyncLocalStorage} from 'node:async_hooks';
 import {ObjectJsonStorage} from '../data';
 import {assertChinaLegacyRollback,chinaLegacyRollback,chinaRegcloudRuntimeConfigured,readChinaPublicState} from './china-regcloud-object-reader';
-import {chinaLocalRuntimeConfigured,initializeLocalChinaReader} from './china-local-reader';
+import {chinaLocalRuntimeConfigured,localChinaReaderReady} from './china-local-reader';
 type Authority='legacy'|'own'|'unavailable';
 const authority=new AsyncLocalStorage<Authority>();
 /** Existing global China rows are allowed only with no independent cut or an
  * exact authenticated rollback. An uncertain own pointer never leaks legacy stock. */
 export async function readChinaAggregateAuthority():Promise<Authority>{
- if(chinaLocalRuntimeConfigured())try{const state=await initializeLocalChinaReader();state!.assertCurrent();return 'own';}catch{return 'unavailable';}
+ if(chinaLocalRuntimeConfigured())try{const ready=await localChinaReaderReady();return ready?'own':'unavailable';}catch{return 'unavailable';}
  if(!chinaRegcloudRuntimeConfigured())return 'legacy';
  try{
   const storage=new ObjectJsonStorage(),first=await readChinaPublicState(storage);
