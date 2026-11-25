@@ -13,13 +13,14 @@ export function reviewedJapanPower(offer:Partial<VehicleOffer>,facts:ReadonlyArr
     valid(Number(offer.powerHp)))return null;
  const make=key(offer.make),model=key(offer.model),year=Number(offer.year),cc=Number(offer.engineCc);
  const matches=facts.filter(r=>{
+   const tolerance=Math.min(80,Math.max(20,Number(r.engineCcTolerance||80)));
    if(r.active===false||!['manufacturer','registry'].includes(r.confidence)||
       !Array.isArray(r.sourceIds)||!r.sourceIds.length||
       !Number.isFinite(Date.parse(r.verifiedAt))||!valid(r.powerHp)||
       key(r.make)!==make||![r.model,...(r.aliases||[])].some(m=>key(m)===model)||
       (!Number.isSafeInteger(r.yearFrom)&&!Number.isSafeInteger(r.yearTo))||
       (r.yearFrom!==undefined&&year<r.yearFrom)||(r.yearTo!==undefined&&year>r.yearTo)||
-      !valid(Number(r.engineCc))||Math.abs(Number(r.engineCc)-cc)>Math.min(80,Math.max(20,Number(r.engineCcTolerance||80)))))
+      !valid(Number(r.engineCc))||Math.abs(Number(r.engineCc)-cc)>tolerance)
      return false;
    if(r.fuel&&(!offer.fuel||key(r.fuel)!==key(offer.fuel)))return false;
    if(r.powertrainKind&&offer.powertrainKind&&offer.powertrainKind!=='unknown'&&r.powertrainKind!==offer.powertrainKind)return false;
