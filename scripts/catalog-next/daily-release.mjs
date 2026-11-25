@@ -248,7 +248,19 @@ export function createChinaDailyRelease({root, servingRoot, pricingPlan, serving
           codeSourceOracleSha256: codePreflight.previousOracleSha256,
           codeScope: servingPlan.codeScope ?? 'catalog-photo-recovery-v1'} : {})};
       await guard(); session ??= await use.openSession({root, directory, privateKey});
-      await session.call('init', {plan});
+      const initialized = await session.call('init', {plan});
+      if (!codeUpdate) {
+        const admission = initialized?.generationDiskAdmission;
+        const uploadedRawBytes = packed.reduce((sum, file) => sum + file.descriptor.bytes, 0);
+        const largestCompressedBytes = Math.max(...packed.map(file => file.descriptor.compressedBytes));
+        const requiredBytes = uploadedRawBytes + largestCompressedBytes + CODE_DISK_OPERATING_RESERVE;
+        need(initialized?.initialized === true && admission?.kind === 'china-generation-disk-admission-v1'
+          && admission.uploadedRawBytes === uploadedRawBytes && admission.largestCompressedBytes === largestCompressedBytes
+          && admission.operatingReserveBytes === CODE_DISK_OPERATING_RESERVE && admission.requiredBytes === requiredBytes
+          && Number.isSafeInteger(admission.availableDiskBytes) && admission.availableDiskBytes >= requiredBytes,
+        'generation_disk_admission');
+        await onProgress({phase: 'daily_disk_capacity_checked', market: 'china', ...admission});
+      }
       for (const file of packed) { await guard(); const saved = await session.upload(file.descriptor.name, file.packed);
         need(saved?.verified === true && saved.file === file.descriptor.name && saved.bytes === file.descriptor.bytes, 'upload_readback'); }
       await guard(); const started = await session.call('start');

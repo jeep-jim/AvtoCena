@@ -7,7 +7,7 @@ const hostFile = fileURLToPath(new URL('../scripts/catalog-next/release-host.py'
 // Run real host transitions and durable proof readers. Docker, socket probes,
 // health and nginx are replaced at their I/O boundary; no SSH or network runs.
 const harness = String.raw`
-import base64, copy, importlib.util, io, json, os, pathlib, stat, sys, tempfile, types
+import base64, copy, gzip, importlib.util, io, json, os, pathlib, random, stat, sys, tempfile, types
 spec = importlib.util.spec_from_file_location('china_daily_host', sys.argv[1])
 m = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(m)
@@ -338,6 +338,95 @@ with tempfile.TemporaryDirectory(prefix='china-data-host-') as directory:
             refused(lambda: m.validate_plan(bad), 'predecessor_proof_hash')
             refused(lambda: host.upload('image.tar', io.BytesIO(b'')), 'upload_scope')
             assert not operations
+        elif case.startswith('disk_'):
+            reserve = 2 * 1024 ** 3
+            assert m.RELEASE_DISK_OPERATING_RESERVE == reserve
+            if case in ('disk_init_refusal', 'disk_init_compressed_peak', 'disk_init_success'):
+                proposed = copy.deepcopy(plan); proposed['nonce'] = '8' * 32
+                proposed_directory = m.BASE / runtime / 'china-next' / proposed['nonce']
+                if case == 'disk_init_refusal':
+                    # Remaining capacity after copying a current-sized code
+                    # generation is insufficient for the next same-sized cut.
+                    proposed['files'][0]['bytes'] = 12_783_566_731
+                    proposed['files'][0]['compressedBytes'] = 1_000_000_000
+                    available = 25_885_343_744 - 12_783_566_731
+                else:
+                    proposed['files'][0].update(bytes=2000000, compressedBytes=1500000)
+                    available = sum(row['bytes'] for row in proposed['files']) + reserve
+                    if case == 'disk_init_success':
+                        available += max(row['compressedBytes'] for row in proposed['files'])
+                m.os.statvfs = lambda p: types.SimpleNamespace(f_bavail=available, f_frsize=1)
+                before = {str(p): p.read_bytes() for p in root.rglob('*') if p.is_file()}
+                if case != 'disk_init_success':
+                    refused(lambda: m.Host(proposed), 'generation_disk_space')
+                    assert not proposed_directory.exists()
+                    assert before == {str(p): p.read_bytes() for p in root.rglob('*') if p.is_file()}
+                else:
+                    # As elsewhere in this fixture, substitute ownership only;
+                    # actual constructor, directories and writes are exercised.
+                    original_stat = pathlib.Path.stat
+                    def root_owned(filename, *args, **kwargs):
+                        value = original_stat(filename, *args, **kwargs)
+                        return types.SimpleNamespace(**{key: (0 if key == 'st_uid' else getattr(value, key))
+                            for key in dir(value) if key.startswith('st_')})
+                    pathlib.Path.stat = root_owned
+                    try: initialized = m.Host(proposed)
+                    finally: pathlib.Path.stat = original_stat
+                    assert initialized.generation_disk_admission['requiredBytes'] == available
+                    assert initialized.generation_disk_admission['availableDiskBytes'] == available
+                    assert json.loads((proposed_directory / 'PLAN.json').read_bytes()) == proposed
+                    assert (proposed_directory / 'generation').is_dir()
+                    assert all(pathlib.Path(filename).read_bytes() == raw for filename, raw in before.items())
+            elif case == 'disk_before_start':
+                m.os.statvfs = lambda p: types.SimpleNamespace(f_bavail=reserve - 1, f_frsize=1)
+                refused(host.start, 'generation_disk_space')
+                assert host.lock is None and candidate_id not in containers and not operations
+            else:
+                name = 'details.sqlite'; host.uploaded = set(); host.candidate = None
+                raw = random.Random(123).randbytes(3 * 1024 * 1024 + 17)
+                packed = gzip.compress(raw, compresslevel=1)
+                descriptor = next(row for row in plan['files'] if row['name'] == name)
+                descriptor.update(bytes=len(raw), sha256=m.sha(raw), compressedBytes=len(packed), compressedSha256=m.sha(packed))
+                destination = host.generation / name
+                incoming = host.directory / (name + '.incoming.gz')
+                free_bytes = [reserve + len(packed) + len(raw) + 1024 * 1024]
+                calls = [0]
+                class Source(io.BytesIO):
+                    def read(self, amount=-1):
+                        value = super().read(amount); calls[0] += 1
+                        if case == 'disk_compressed_pressure' and calls[0] == 2:
+                            free_bytes[0] = reserve + len(value) - 1
+                        if case == 'disk_before_decode' and self.tell() == len(packed):
+                            free_bytes[0] = reserve + len(raw) - 1
+                        return value
+                def capacity(p):
+                    available = free_bytes[0]
+                    if case == 'disk_decode_pressure' and destination.exists() and destination.stat().st_size >= 1024 * 1024:
+                        available = reserve + 1024 * 1024 - 1
+                    return types.SimpleNamespace(f_bavail=available, f_frsize=1)
+                m.os.statvfs = capacity
+                if case == 'disk_upload_refusal':
+                    free_bytes[0] = reserve + len(raw) + len(packed) - 1
+                if case == 'disk_upload_success':
+                    result = host.upload(name, Source(packed))
+                    assert result == {'file': name, 'bytes': len(raw), 'verified': True}
+                    assert destination.read_bytes() == raw and not incoming.exists() and host.uploaded == {name}
+                else:
+                    refused(lambda: host.upload(name, Source(packed)), 'generation_disk_space')
+                    assert name not in host.uploaded and host.candidate is None
+                    if case == 'disk_upload_refusal':
+                        assert not incoming.exists() and not destination.exists() and calls[0] == 0
+                    elif case == 'disk_compressed_pressure':
+                        assert incoming.stat().st_size == 1024 * 1024 and not destination.exists()
+                    elif case == 'disk_before_decode':
+                        assert incoming.read_bytes() == packed and not destination.exists()
+                    elif case == 'disk_decode_pressure':
+                        assert incoming.read_bytes() == packed and destination.stat().st_size == 1024 * 1024
+                    else: raise AssertionError('unknown disk case')
+                assert not operations and m.CONFIG.read_bytes() == original
+            assert_protected()
+            assert all(pathlib.Path(filename).read_bytes() and m.sha(pathlib.Path(filename).read_bytes()) == value
+                       for filename, value in file_before.items())
         elif case == 'start':
             result = host.start()
             assert result['started'] and result['generationId'] == new_gen['generationId'] and host.port == 3006
@@ -572,6 +661,15 @@ with tempfile.TemporaryDirectory(prefix='china-data-host-') as directory:
 
 for (const [name, description] of [
   ['plan', 'requires the accepted predecessor and forbids a new runtime, image or image upload'],
+  ['disk_init_refusal', 'rejects an inadmissible generation before creating an attempt or writing files'],
+  ['disk_init_compressed_peak', 'reserves temporary compressed data as well as every decoded file'],
+  ['disk_init_success', 'admits a fully budgeted generation and reports the measured capacity'],
+  ['disk_upload_refusal', 'rechecks capacity before reading or writing an upload'],
+  ['disk_compressed_pressure', 'stops compressed transfer before a concurrent consumer can exhaust the reserve'],
+  ['disk_before_decode', 'rechecks the complete decoded requirement after receiving the compressed file'],
+  ['disk_decode_pressure', 'stops decoding at a chunk boundary while preserving the serving reserve'],
+  ['disk_upload_success', 'still verifies and accepts a complete gzip upload with sufficient capacity'],
+  ['disk_before_start', 'refuses to start if operating headroom disappeared after upload'],
   ['start', 'starts from the installed image and changes only generation mount and manifest environment'],
   ['first_daily', 'accepts the first-release predecessor and never invents an obsolete rollback to delete'],
   ['bad_predecessor_mount', 'refuses a writable predecessor mount before creating any process'],

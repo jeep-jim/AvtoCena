@@ -72,7 +72,7 @@ HOST_BULK_FILES = {'details.sqlite', 'query.sqlite', 'DISPOSITIONS.ndjson', 'FIL
 # Keep the serving process out of disk exhaustion while staging. This is an
 # operating-space policy floor; measured image content and unpack bytes are
 # additional reservations, not assumed to fit inside this floor.
-CODE_DISK_OPERATING_RESERVE = 2 * 1024 ** 3
+RELEASE_DISK_OPERATING_RESERVE = 2 * 1024 ** 3
 FAILED_UPLOAD_RUNTIME = '822f925bb30c4e07010f6e14b6574f1b4bd6306e'
 FAILED_UPLOAD_GENERATION = 'gen_china_45369451603_1'
 FAILED_UPLOAD_WITNESS = {
@@ -416,6 +416,28 @@ def expected_files(plan):
 
 def described_files(plan):
     return expected_files(plan) | GENERATION_FILES if code_update(plan) else expected_files(plan)
+
+
+def require_generation_space(directory, additional_bytes=0):
+    """Re-observe actual available blocks before a data-update disk write."""
+    need(type(additional_bytes) is int and additional_bytes >= 0, 'generation_disk_request')
+    usage = os.statvfs(directory)
+    available = usage.f_bavail * usage.f_frsize
+    need(available >= additional_bytes + RELEASE_DISK_OPERATING_RESERVE, 'generation_disk_space')
+    return available
+
+
+def generation_disk_admission(plan, directory):
+    need(generation_update(plan), 'generation_capacity_mode')
+    raw_bytes = sum(item['bytes'] for item in plan['files'])
+    compressed_bytes = max(item['compressedBytes'] for item in plan['files'])
+    # Upload order is unrestricted: the largest compressed input may be last,
+    # while every raw file (including its own decoded bytes) is still present.
+    available = require_generation_space(directory, raw_bytes + compressed_bytes)
+    return {'kind': 'china-generation-disk-admission-v1', 'uploadedRawBytes': raw_bytes,
+            'largestCompressedBytes': compressed_bytes, 'operatingReserveBytes': RELEASE_DISK_OPERATING_RESERVE,
+            'requiredBytes': raw_bytes + compressed_bytes + RELEASE_DISK_OPERATING_RESERVE,
+            'availableDiskBytes': available}
 
 
 def retained_runtime(plan):
@@ -2138,6 +2160,9 @@ def resume_failed_upload(params):
 class Host:
     def __init__(self, plan):
         validate_plan(plan)
+        # Refuse an inadmissible data update before any attempt directory,
+        # PLAN.json or upload is written. No old generation is removed here.
+        admission = generation_disk_admission(plan, BASE) if generation_update(plan) else None
         self.plan = plan
         self.directory = BASE / plan['runtimeSha'] / 'china-next' / plan['nonce']
         need(BASE.resolve() == BASE and BASE.is_dir() and BASE.stat().st_uid == 0 and not BASE.stat().st_mode & 0o022, 'release_root')
@@ -2149,6 +2174,7 @@ class Host:
         self.generation = self.directory / 'generation'
         self.generation.mkdir(mode=0o700)
         self.initialize_session(plan)
+        self.generation_disk_admission = admission
 
     def initialize_session(self, plan):
         self.plan = plan
@@ -2219,7 +2245,7 @@ class Host:
         copied_bytes = sum(new_files[name]['bytes'] for name in GENERATION_FILES)
         self.code_image_storage_bytes = new_files['image.tar']['bytes'] + image['imageUnpackedBytes']
         usage = os.statvfs(self.directory)
-        need(usage.f_bavail * usage.f_frsize >= copied_bytes + self.code_image_storage_bytes + CODE_DISK_OPERATING_RESERVE,
+        need(usage.f_bavail * usage.f_frsize >= copied_bytes + self.code_image_storage_bytes + RELEASE_DISK_OPERATING_RESERVE,
              'code_disk_space')
         identities = {name: reuse_file_identity(directory / 'generation' / name) for name in GENERATION_FILES}
         need(all(identities[name][2] == new_files[name]['bytes'] for name in GENERATION_FILES), 'code_source_size')
@@ -2242,6 +2268,11 @@ class Host:
     def upload(self, name, stream):
         need(name in expected_files(self.plan) and name not in self.uploaded and not self.candidate, 'upload_scope')
         descriptor = next(f for f in self.plan['files'] if f['name'] == name)
+        data_update = generation_update(self.plan)
+        if data_update:
+            # A different disk consumer may have invalidated init admission.
+            # Both the compressed transport and raw result coexist temporarily.
+            require_generation_space(self.directory, descriptor['compressedBytes'] + descriptor['bytes'])
         packed = self.directory / (name + '.incoming.gz')
         digest = hashlib.sha256()
         fd = os.open(packed, os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW, 0o600)
@@ -2250,11 +2281,15 @@ class Host:
             while remaining:
                 chunk = stream.read(min(1024 * 1024, remaining))
                 need(chunk, 'upload_incomplete')
+                if data_update:
+                    require_generation_space(self.directory, len(chunk))
                 target.write(chunk)
                 digest.update(chunk)
                 remaining -= len(chunk)
             target.flush()
             os.fsync(target.fileno())
+        if data_update:
+            require_generation_space(self.directory, descriptor['bytes'])
         need(digest.hexdigest() == descriptor['compressedSha256'], 'upload_checksum')
         filename = self.file_path(name)
         digest = hashlib.sha256()
@@ -2264,10 +2299,14 @@ class Host:
             for chunk in iter(lambda: source.read(1024 * 1024), b''):
                 total += len(chunk)
                 need(total <= descriptor['bytes'], 'decoded_size')
+                if data_update:
+                    require_generation_space(self.directory, len(chunk))
                 digest.update(chunk)
                 target.write(chunk)
             target.flush()
             os.fsync(target.fileno())
+        if data_update:
+            require_generation_space(self.directory)
         need(total == descriptor['bytes'] and digest.hexdigest() == descriptor['sha256'], 'decoded_checksum')
         need(file_sha(filename) == descriptor['sha256'], 'local_readback')
         packed.unlink()
@@ -2287,6 +2326,8 @@ class Host:
 
     def start(self):
         need(self.uploaded == expected_files(self.plan) and self.candidate is None, 'upload_not_complete')
+        if generation_update(self.plan):
+            require_generation_space(self.directory)
         if not getattr(self, 'reuse_verified', False):
             self.lock = os.open('/run/lock/avtocena-runtime-change.lock', os.O_RDONLY | os.O_NOFOLLOW | os.O_CLOEXEC)
             info = os.fstat(self.lock)
@@ -2345,7 +2386,7 @@ class Host:
                 # Re-observe after the potentially large generation copy. A
                 # concurrent disk consumer must not invalidate preflight.
                 usage = os.statvfs(self.directory)
-                need(usage.f_bavail * usage.f_frsize >= self.code_image_storage_bytes + CODE_DISK_OPERATING_RESERVE,
+                need(usage.f_bavail * usage.f_frsize >= self.code_image_storage_bytes + RELEASE_DISK_OPERATING_RESERVE,
                      'code_disk_space')
             info = docker('GET', '/info')
             need(info.get('ServerVersion') == '29.1.3' and
@@ -2926,6 +2967,8 @@ def main():
                 need(host is None, 'already_initialized')
                 host = Host(params['plan'])
                 value = {'initialized': True}
+                if generation_update(host.plan):
+                    value['generationDiskAdmission'] = host.generation_disk_admission
             else:
                 need(host is not None, 'not_initialized')
                 if method == 'upload':

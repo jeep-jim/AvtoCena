@@ -88,7 +88,7 @@ async function fixture(t) {
     privateGeneration: {owner: owner(101), generationId: candidate.generationId, receiptSha256: candidate.receiptSha256,
       sourceDescriptorSha256: candidate.sourceDescriptorSha256, generationManifestSha256: candidate.generationManifestSha256}};
   const calls = [], childCalls = [], uploaded = new Map(); let hostPlan, evidence, outcome, browserBytes;
-  const flags = {wrongOracle: false, browserFails: false, loseAccept: false};
+  const flags = {wrongOracle: false, browserFails: false, loseAccept: false, badDiskAdmission: false};
   const session = () => ({exited: Promise.resolve({code: 0}), abort() { calls.push('abort'); },
     async call(method, params = {}) {
       calls.push(method);
@@ -96,7 +96,13 @@ async function fixture(t) {
         assert.equal(hostPlan.mode, 'generation-update'); assert.equal(hostPlan.retainedRuntime, old.runtimeSha);
         assert.equal(hostPlan.previousAcceptedETag, first.accepted.etag); assert.equal(hostPlan.previousAcceptedStateSha256, first.accepted.sha256);
         assert.deepEqual(hostPlan.previousAcceptedState, first.accepted.value);
-        assert.equal(hostPlan.imageId, old.imageId); assert.ok(!hostPlan.files.some(file => file.name === 'image.tar')); return {}; }
+        assert.equal(hostPlan.imageId, old.imageId); assert.ok(!hostPlan.files.some(file => file.name === 'image.tar'));
+        const uploadedRawBytes = hostPlan.files.reduce((sum, file) => sum + file.bytes, 0);
+        const largestCompressedBytes = Math.max(...hostPlan.files.map(file => file.compressedBytes));
+        return flags.badDiskAdmission ? {initialized: true} : {initialized: true, generationDiskAdmission: {
+          kind: 'china-generation-disk-admission-v1', uploadedRawBytes, largestCompressedBytes,
+          operatingReserveBytes: 2 * 1024 ** 3, requiredBytes: uploadedRawBytes + largestCompressedBytes + 2 * 1024 ** 3,
+          availableDiskBytes: 30 * 1024 ** 3}}; }
       if (method === 'start') { assert.equal(uploaded.size, 10); return {started: true, release: old.runtimeSha, generationId: candidate.generationId}; }
       if (method === 'functional') return {functionalPassed: true, cases: Array.from({length: 8}, (_, i) => ({name: String(i)}))};
       if (method === 'speed') return {speedPassed: true, samples: []};
@@ -219,6 +225,16 @@ test('pricing SHA cannot impersonate the serving oracle, and unbound source meta
   await assert.rejects(f.release.stageRelease({candidate: {...f.candidate, sourceCursor: 201}, previous: f.first.accepted,
     nonce, assertAuthority: async () => {}}), /generation_manifest/);
   assert.equal(f.calls.length, 0);
+});
+
+test('daily adapter requires the host disk admission before sending any generation bytes', async t => {
+  const f = await fixture(t); f.flags.badDiskAdmission = true;
+  await assert.rejects(f.release.stageRelease({candidate: f.candidate, previous: f.first.accepted,
+    nonce, assertAuthority: async () => {}}), /china_daily_release_generation_disk_admission/);
+  assert.ok(f.calls.includes('init'));
+  assert.equal(f.uploaded.size, 0);
+  assert.equal(f.calls.includes('start'), false);
+  assert.deepEqual(await f.storage.read('accepted'), f.first.accepted);
 });
 
 test('failed real browser gate closes the host and reconciles only its actual rollback receipt', async t => {
