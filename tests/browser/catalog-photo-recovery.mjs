@@ -34,7 +34,7 @@ if (process.env.PHOTO_RECOVERY_BUILD_ONLY === '1') {
 }
 
 const {chromium} = await import(process.env.PLAYWRIGHT_MODULE || 'playwright');
-const image = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+aX1cAAAAASUVORK5CYII=', 'base64');
+const image = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAABAAAAAMCAIAAADkharWAAAACXBIWXMAAAPoAAAD6AG1e1JrAAAAGElEQVQokWOoW7CDJMQwqmHBaCjVYQsDAMF4YJCRaxoZAAAAAElFTkSuQmCC', 'base64');
 const cases = new Map();
 const server = http.createServer(async (request, response) => {
   const url = new URL(request.url, 'http://fixture.local');
