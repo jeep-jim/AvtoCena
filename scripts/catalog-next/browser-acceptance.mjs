@@ -45,7 +45,11 @@ export function verifyRenderedChinaCards(cards, total, expected, generationId, {
   for (let index = 0; index < cards.length; index++) {
     const card = cards[index], href = new URL(card.href, ORIGIN);
     need(href.origin === ORIGIN && href.searchParams.get('market') === 'china' && href.searchParams.get('preparedCut') === generationId, 'card_context');
-    if (prices && expected.totalRub[index] > 0) need(card.price === expected.totalRub[index], 'card_price');
+    if (prices && expected.totalRub[index] > 0 && card.price !== expected.totalRub[index]) {
+      const error = new Error('china_browser_card_price');
+      error.priceComparison = {position: index + 1, expectedRub: expected.totalRub[index], renderedRub: card.price};
+      throw error;
+    }
     if (power) {
       const values = expected.power[index];
       need(Number.isFinite(values.filterPowerHp) && values.filterPowerHp > 0 && values.filterPowerHp <= 160.01, 'filtered_power');
@@ -212,7 +216,7 @@ export async function runChinaBrowserAcceptance({oraclePath, releaseSha, nonce, 
     report.passed = true;
   } catch (error) {
     report.error = {stage, code: /^china_browser_[a-z_]+$/.test(error?.message || '') ? error.message : 'china_browser_check_failed',
-      timeout: error?.name === 'TimeoutError'};
+      timeout: error?.name === 'TimeoutError', ...(error?.priceComparison ? {priceComparison: error.priceComparison} : {})};
   } finally {
     if (browser) await browser.close().catch(() => {});
     await fs.writeFile(outputFile, JSON.stringify(report, null, 2) + '\n', {flag: 'wx', mode: 0o600});

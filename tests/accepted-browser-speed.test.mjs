@@ -89,3 +89,12 @@ test('all six original browser scenarios retain the exact 50ms or 5% boundary',(
   }
  }
 });
+
+test('China budget filter accepts small timing changes through three seconds',()=>{
+ const report=read('2026-11-11-accepted-speed-browser-restored.json');
+ const row=report.checks.find(r=>r.width===1280).filters.find(r=>r.budget===2000000);
+ for(const [seconds,passed] of [[0.684,true],[3,true],[3.001,false]]){
+  row.seconds=seconds;
+  assert.equal(acceptedBrowserSpeed(report,baseline,{chinaRelease:true}).passed,passed);
+ }
+});

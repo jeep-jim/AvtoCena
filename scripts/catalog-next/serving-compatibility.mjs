@@ -9,6 +9,7 @@ const revision = value => /^[a-f0-9]{40}$/.test(value ?? '');
 const allowedProduction = new Set(['apps/web/lib/catalog/storage.ts', 'apps/web/app/api/catalog/home/route.ts',
   'apps/web/app/(public)/page.tsx', 'apps/web/lib/catalog/china-local-reader.ts',
   'apps/web/lib/catalog/china-city-query.mjs', 'apps/web/components/catalog/CatalogFilters.tsx',
+  'apps/web/components/catalog/CatalogPrice.tsx', 'apps/web/lib/location/selected-city.ts',
   'apps/web/lib/dealers/public-showcase.ts', 'apps/web/lib/catalog/home-phase-timing.ts']);
 const allowedBrowserTests = new Set(['tests/browser/catalog-range-commit.mjs',
   'tests/browser/catalog-range-commit-fixture.tsx']);

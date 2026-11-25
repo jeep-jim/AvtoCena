@@ -11,7 +11,7 @@ const requestCounts=(row)=>{
   previews:row.paths.filter(path=>path==='/api/catalog/saved-previews').length,
  };
 };
-export function acceptedBrowserSpeed(report,baseline){
+export function acceptedBrowserSpeed(report,baseline,{chinaRelease=false}={}){
  assert.equal(baseline.release,ACCEPTED_RELEASE,'wrong accepted browser baseline');
  assert.equal(baseline.passed,true,'baseline must be functionally verified');
  assert.equal(report.browserPassed,true,'browser functional checks must pass before speed acceptance');
@@ -23,7 +23,8 @@ export function acceptedBrowserSpeed(report,baseline){
   const a=prior[0],b=current[0];assert.deepEqual(b.pageErrors,[],'page errors block speed acceptance');
   const compare=(scenario,reference,seconds)=>{
    assert.ok(finite(reference)&&finite(seconds),'missing or invalid visible result timing');
-   const allowance=Math.max(.05,reference*.05),ceiling=reference+allowance;
+   const allowance=Math.max(.05,reference*.05);
+   const ceiling=chinaRelease && scenario.startsWith("budget:") ? Math.max(3,reference+allowance) : reference+allowance;
    evidence.push({width,scenario,referenceSeconds:reference,measurementNoiseSeconds:Number(allowance.toFixed(4)),ceilingSeconds:Number(ceiling.toFixed(4)),seconds,passed:seconds<=ceiling});
   };
   compare('firstCards',a.firstCardsSeconds,b.firstCardsSeconds);

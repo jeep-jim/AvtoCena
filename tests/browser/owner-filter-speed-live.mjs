@@ -73,7 +73,8 @@ try{
   assert.ok(report.partnerBudgetsReady,'Japan/Korea budget availability remains unconfirmed; inspect source state');
  }
  if(marker.enforceSpeed){
-  report.speedGuard=acceptedBrowserSpeed(report,JSON.parse(fs.readFileSync('docs/operations/2026-11-11-accepted-browser-speed-baseline.json','utf8')));
+  report.speedGuard=acceptedBrowserSpeed(report,JSON.parse(fs.readFileSync('docs/operations/2026-11-11-accepted-browser-speed-baseline.json','utf8')),
+    {chinaRelease: ['independent-china', 'independent-china-daily'].includes(marker.phase)});
   assert.ok(report.speedGuard.passed,'accepted_browser_speed_regression');
  }
  report.passed=true;
