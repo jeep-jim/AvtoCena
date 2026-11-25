@@ -85,9 +85,9 @@ test('exact immutable marker-only push authorizes this fixed diagnosis without a
     pricingRuntimeSha: '64c6338e0db23c8999096bceefbf113c0136fe15',
     generationId: 'gen_china_45369451603_1',
     generationManifestSha256: 'd5745797cc162b82e0c0f0b1f49fef65f18f0d6649666562337183b18084dd75',
-    controllerSha: '0a42902df8b92904fda0a3fea9d1fb2974f93a0f',
-    imageId: 'sha256:c883ec9bd2203f5fbdac0da2860826da9ed8cd2233008feb567d128699dcbb54',
-    since: '2026-11-25T01:35:00Z', until: '2026-11-25T01:40:00Z',
+    controllerSha: 'a2837ea05dbf6ceda996e221f89d3572161f1ad2',
+    imageId: 'sha256:7a653897f9939b4851dff43c8a54a9327b80979cb7932e3ccd542ee330fff878',
+    since: '2026-11-25T02:47:00Z', until: '2026-11-25T02:52:00Z',
   });
   assert.deepEqual(verifyChinaStartupDiagnosisInvocation(f), {version: 1, event: 'push',
     sourceSha: f.sourceSha, approvedSourceSha: f.approvedSourceSha, markerPath: MARKER});
@@ -141,7 +141,7 @@ test('real invocation then frozen baseline gate precede the secret and only diag
   assert.equal(report.completed, true); assert.equal(report.status, 'complete');
   assert.deepEqual(report.diagnosis.startup, timingDiagnostic().startup);
   assert.deepEqual(report.diagnosis.serverSpeed, timingDiagnostic().serverSpeed);
-  assert.equal(report.failedRunId, '45523654629'); assert.deepEqual(report.selector, SELECTOR);
+  assert.equal(report.failedRunId, '45529942538'); assert.deepEqual(report.selector, SELECTOR);
   for (const field of ['hostMutations', 'storageWrites', 'providerCalls', 'pageRequests']) assert.equal(report[field], 0);
   assert.equal(report.finishedAt, fixedNow()); assert.equal(report.diagnosisControllerSha, f.sourceSha);
   assert.equal(report.approvedControllerSha, f.approvedSourceSha);

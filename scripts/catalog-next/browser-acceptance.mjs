@@ -3,6 +3,8 @@ import path from 'node:path';
 import {createHash} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
 
+import {canonicalCatalogHref} from '../../apps/web/lib/catalog/catalog-routes.ts';
+
 const ORIGIN = 'https://avtocena.com';
 const CARD = 'article.ac-catalog-card,article.ac-catalog-list-row';
 const sha = value => createHash('sha256').update(value).digest('hex');
@@ -127,7 +129,9 @@ async function chinaSection(page, expectedCount, {home = false} = {}) {
 
 async function restoredFilters(page, expectedUrl) {
   const actual = new URL(page.url());
-  need(actual.pathname === expectedUrl.pathname && [...expectedUrl.searchParams].every(([key, value]) => actual.searchParams.get(key) === value), 'back_url');
+  const expected = new URL(canonicalCatalogHref(expectedUrl.pathname + expectedUrl.search), ORIGIN);
+  need(actual.origin === expected.origin && actual.pathname === expected.pathname &&
+    [...expected.searchParams].every(([key, value]) => actual.searchParams.get(key) === value), 'back_url');
   await page.waitForFunction(() => {
     const button = document.querySelector('button[aria-label="Открыть фильтры"]');
     return button && !button.disabled && document.querySelector('.ac-catalog-filter-panel[aria-busy="false"]');
