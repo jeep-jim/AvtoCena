@@ -9,8 +9,10 @@ import {verifyFrozenSpeedBaselines} from '../verify-frozen-speed-baselines.mjs';
 import {createChinaStateStorage, createChinaState, inspectChinaPublicationState} from './china-state.mjs';
 
 const ROOT = fileURLToPath(new URL('../../', import.meta.url));
-const WORKFLOW = 'jeep-jim/AvtoCena/.github/workflows/catalog-next-photo-failed-cleanup-20261125.yml@refs/heads/main';
-const MARKER = '.github/market-runs/catalog-next-photo-failed-cleanup-20261125.json';
+const profiles = Object.freeze({
+  rolled_back: {name: 'failed', operation: 'prune-exact-photo-failed-copies', verify: '--verify-targets', remote: ''},
+  orphan_unreferenced: {name: 'orphan', operation: 'prune-exact-unreferenced-photo-copies', verify: '--verify-orphan-targets', remote: ' --orphan'},
+});
 const PYTHON = 'scripts/catalog-next/cleanup-photo-failed-20261125.py';
 const CURRENT = 'd536c1547c4d82a339ed68ced7d8503f09b6810b';
 const HOST_KEY_SHA = 'fd37f98aab3eeb16f131fcd4033adbb56f7e9616208c2f1ab5ef7a446caa4e4c';
@@ -29,27 +31,31 @@ export function verifyPhotoCleanupState(view) {
     && view.accepted.value.current?.generationManifestSha256 === 'd5745797cc162b82e0c0f0b1f49fef65f18f0d6649666562337183b18084dd75', 'state');
 }
 
-export function verifyInvocation(environment = process.env) {
-  need(environment.GITHUB_WORKFLOW_REF === WORKFLOW && environment.GITHUB_JOB === 'cleanup', 'workflow');
-  const result = verifyReadonlyInvocation({root: ROOT, env: environment, markerPath: MARKER,
-    operation: 'prune-exact-photo-failed-copies'});
+export function verifyInvocation(environment = process.env, mode = 'rolled_back') {
+  need(Object.hasOwn(profiles, mode), 'mode');
+  const profile = profiles[mode];
+  const workflow = `jeep-jim/AvtoCena/.github/workflows/catalog-next-photo-${profile.name}-cleanup-20261125.yml@refs/heads/main`;
+  const marker = `.github/market-runs/catalog-next-photo-${profile.name}-cleanup-20261125.json`;
+  need(environment.GITHUB_WORKFLOW_REF === workflow && environment.GITHUB_JOB === 'cleanup', 'workflow');
+  const result = verifyReadonlyInvocation({root: ROOT, env: environment, markerPath: marker, operation: profile.operation});
   verifyFrozenSpeedBaselines(ROOT);
-  const targets = JSON.parse(execFileSync('python3', [path.join(ROOT, PYTHON), '--verify-targets'],
+  const targets = JSON.parse(execFileSync('python3', [path.join(ROOT, PYTHON), profile.verify],
     {encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'], timeout: 10000}));
   need(Number.isInteger(targets.targetCount) && targets.targetCount >= 1 && targets.targetCount <= 2
-    && targets.fileCount === targets.targetCount * 2, 'target_verification');
+    && targets.fileCount === targets.targetCount * 2 && targets.mode === mode, 'target_verification');
   return {...result, fileCount: targets.fileCount};
 }
 
-async function run() {
-  const invocation = verifyInvocation();
+async function run(mode) {
+  const invocation = verifyInvocation(process.env, mode);
+  const profile = profiles[mode];
   const storage = createChinaStateStorage();
   need((await storage.assertPrivateBucket())?.verified === true, 'privacy');
   const state = createChinaState({storage});
   const pair = async () => { const [accepted, intent] = await Promise.all([state.read('accepted'), state.read('intent')]); return {accepted, intent}; };
   const expected = await pair(); verifyPhotoCleanupState(expected);
   let lease, child, exited, directory, settled = true, failure;
-  const report = {version: 1, kind: 'photo-failed-cleanup-20261125', controllerSha: invocation.sourceSha,
+  const report = {version: 1, kind: `photo-${profile.name}-cleanup-20261125`, mode, controllerSha: invocation.sourceSha,
     completed: false, steps: [], leaseRelease: 'not_acquired'};
   const authority = async () => {
     const currentLease = await state.read('lease');
@@ -73,7 +79,7 @@ async function run() {
     const key = path.join(directory, 'key'); await fs.writeFile(key, process.env.SSH_PRIVATE_KEY + '\n', {mode: 0o600});
     const source = await fs.readFile(path.join(ROOT, PYTHON), 'utf8');
     const hostSource = await fs.readFile(path.join(ROOT, 'scripts/catalog-next/release-host.py'), 'utf8');
-    const command = '/usr/bin/env -i PATH=/usr/bin:/bin /usr/bin/python3 -I -B -c ' + quote(source);
+    const command = '/usr/bin/env -i PATH=/usr/bin:/bin /usr/bin/python3 -I -B -c ' + quote(source) + profile.remote;
     child = spawn('/usr/bin/ssh', ['-F', '/dev/null', '-T', '-i', key, '-o', 'BatchMode=yes', '-o', 'IdentitiesOnly=yes',
       '-o', 'ForwardAgent=no', '-o', 'StrictHostKeyChecking=yes', '-o', 'UserKnownHostsFile=' + known,
       '-o', 'GlobalKnownHostsFile=/dev/null', '-o', 'UpdateHostKeys=no', '-o', 'ConnectTimeout=15',
@@ -97,7 +103,7 @@ async function run() {
       } finally { clearTimeout(timer); }
     };
     const prep = await call({hostSource, hostSourceSha256: hash(hostSource), authority: await authority()});
-    need(prep.kind === 'photo-cleanup-prepared-v1' && prep.fileCount === invocation.fileCount
+    need(prep.kind === 'photo-cleanup-prepared-v1' && prep.mode === mode && prep.fileCount === invocation.fileCount
       && Number.isInteger(prep.alreadyAbsentFiles) && prep.alreadyAbsentFiles >= 0 && prep.alreadyAbsentFiles <= prep.fileCount, 'preparation');
     for (let index = 0; index < prep.fileCount; index++) {
       const step = await call({action: 'unlink', index, authority: await authority()});
@@ -109,7 +115,7 @@ async function run() {
         logicalBytesUnlinked: step.logicalBytesUnlinked}) + '\n');
     }
     const result = await call({action: 'finish', authority: await authority()});
-    need(result.kind === 'photo-cleanup-result-v1' && result.completed === true && result.liveRuntimeSha === CURRENT
+    need(result.kind === 'photo-cleanup-result-v1' && result.mode === mode && result.completed === true && result.liveRuntimeSha === CURRENT
       && result.filesDeleted === report.steps.filter(row => row.deleted).length
       && result.logicalBytesUnlinked === report.steps.reduce((sum, row) => sum + row.logicalBytesUnlinked, 0)
       && result.alreadyAbsentFiles === prep.alreadyAbsentFiles
@@ -129,7 +135,7 @@ async function run() {
     }
     if (directory) await fs.rm(directory, {recursive: true, force: true});
     report.finishedAt = new Date().toISOString();
-    await fs.writeFile(path.join(ROOT, 'catalog-next-photo-failed-cleanup-20261125-report.json'), JSON.stringify(report, null, 2) + '\n', {mode: 0o600, flag: 'wx'});
+    await fs.writeFile(path.join(ROOT, `catalog-next-photo-${profile.name}-cleanup-20261125-report.json`), JSON.stringify(report, null, 2) + '\n', {mode: 0o600, flag: 'wx'});
   }
   process.stdout.write(JSON.stringify(report) + '\n');
   if (failure) throw failure;
@@ -137,8 +143,9 @@ async function run() {
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   try {
-    need(process.argv.length === 3 && ['--verify', '--run'].includes(process.argv[2]), 'arguments');
-    if (process.argv[2] === '--verify') process.stdout.write(JSON.stringify(verifyInvocation()) + '\n');
-    else await run();
+    need(process.argv.length === 3 && ['--verify', '--run', '--verify-orphan', '--run-orphan'].includes(process.argv[2]), 'arguments');
+    const mode = process.argv[2].endsWith('-orphan') ? 'orphan_unreferenced' : 'rolled_back';
+    if (process.argv[2].startsWith('--verify')) process.stdout.write(JSON.stringify(verifyInvocation(process.env, mode)) + '\n');
+    else await run(mode);
   } catch (error) { process.stderr.write(safe(error) + '\n'); process.exitCode = 1; }
 }

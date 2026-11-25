@@ -21,6 +21,15 @@ FILES = ('details.sqlite', 'query.sqlite')
 TARGETS = [{'attemptHash': '106d43b93feba748',
             'controllerSha': '118ce5777e3be3a18f99c902db20202f8476d51a',
             'planSha256': '05e398d98be77b082d713da7a0984ecfce11733f9b7b7179da87f5206a8b5534'}]
+# The distinct orphan operation is not historical rollback recovery. Its proof
+# is an unreferenced, never-accepted exact duplicate of the intact current data.
+# The corrupt rollback receipt remains byte-for-byte unchanged. Inventory45628293952
+# confirmed the zero-byte receipt after the first safe cleanup completed.
+ORPHAN_TARGETS = [{'attemptHash': '3191d40064a40833',
+                   'controllerSha': 'a32ead4127d8a57c18e39fe088f8708ea2c02156',
+                   'planSha256': '5abe1c3e3eba6cd3f7f1ab4566d8ff563b7a0196f8e6ba341c70910cce85eaaf',
+                   'rollbackBytes': 0,
+                   'rollbackSha256': 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'}]
 
 
 def need(value, code):
@@ -32,13 +41,65 @@ def digest(raw):
     return hashlib.sha256(raw).hexdigest()
 
 
-def validate_targets(targets):
+def validate_targets(targets, mode='rolled_back'):
+    need(mode in ('rolled_back', 'orphan_unreferenced'), 'mode')
     need(isinstance(targets, list) and 1 <= len(targets) <= 2, 'target_count')
-    need(all(isinstance(row, dict) and set(row) == {'attemptHash', 'controllerSha', 'planSha256'}
+    keys = {'attemptHash', 'controllerSha', 'planSha256'}
+    if mode == 'orphan_unreferenced':
+        keys |= {'rollbackBytes', 'rollbackSha256'}
+    need(all(isinstance(row, dict) and set(row) == keys
              and re.fullmatch(r'[a-f0-9]{16}', row['attemptHash'])
              and row['controllerSha'] in CONTROLLERS
              and re.fullmatch(r'[a-f0-9]{64}', row['planSha256']) for row in targets), 'target_identity')
+    if mode == 'orphan_unreferenced':
+        need(len(targets) == 1 and targets[0]['attemptHash'] == '3191d40064a40833'
+             and targets[0]['controllerSha'] == 'a32ead4127d8a57c18e39fe088f8708ea2c02156'
+             and targets[0]['planSha256'] == '5abe1c3e3eba6cd3f7f1ab4566d8ff563b7a0196f8e6ba341c70910cce85eaaf'
+             and type(targets[0]['rollbackBytes']) is int and 0 <= targets[0]['rollbackBytes'] <= 256 * 1024
+             and re.fullmatch(r'[a-f0-9]{64}', targets[0]['rollbackSha256']), 'orphan_identity')
     need(len({row['attemptHash'] for row in targets}) == len(targets), 'target_duplicate')
+
+
+def orphan_unreferenced(view, nonces, host):
+    accepted = view['accepted']['value']
+    need(accepted.get('pending') is None, 'orphan_pending')
+    intent = view['intent']['value'] if view['intent']['found'] else None
+    need(intent is None or intent.get('status') in ('committed', 'aborted'), 'orphan_pending')
+    need(intent is None or intent.get('nonce') not in nonces, 'orphan_intent_reference')
+
+    def visit(value):
+        if isinstance(value, dict):
+            if value.get('runtimeSha') == FAILED and isinstance(value.get('proof'), dict):
+                receipt, _ = host.accepted_reference_receipt(value)
+                need(receipt['nonce'] not in nonces, 'orphan_accepted_reference')
+            for item in value.values():
+                visit(item)
+        elif isinstance(value, list):
+            for item in value:
+                visit(item)
+    visit(accepted)
+    visit(intent)
+
+
+def orphan_container_unreferenced(container, nonces):
+    config = container.get('Config', {})
+    labels = config.get('Labels') or {}
+    need(labels.get('avtocena.china.nonce') not in nonces
+         and labels.get('org.opencontainers.image.revision') != FAILED, 'orphan_candidate_container')
+    need(not any(row == 'AVTOCENA_RELEASE_SHA=' + FAILED for row in config.get('Env', [])), 'orphan_candidate_container')
+
+
+def corrupt_receipt(host, directory, target):
+    filename = directory / 'ROLLED_BACK.json'
+    meta = host.regular(filename, 256 * 1024)
+    raw = filename.read_bytes()
+    need(meta.st_size == target['rollbackBytes'] == len(raw)
+         and digest(raw) == target['rollbackSha256'], 'orphan_corrupt_receipt_changed')
+    try:
+        json.loads(raw)
+    except (ValueError, UnicodeError):
+        return filename, digest(raw)
+    need(False, 'orphan_receipt_not_corrupt')
 
 
 def identity(info):
@@ -62,8 +123,11 @@ def emit(value):
 
 
 class Cleanup:
-    def __init__(self, host, authority):
-        validate_targets(TARGETS)
+    def __init__(self, host, authority, mode='rolled_back'):
+        self.mode = mode
+        self.configured_targets = TARGETS if mode == 'rolled_back' else ORPHAN_TARGETS
+        validate_targets(self.configured_targets, mode)
+        self.orphan_nonces = set()
         self.h = host
         self.authority = authority
         self.lock = None
@@ -98,6 +162,8 @@ class Cleanup:
         need(state.get('pending') is None and state['current']['runtimeSha'] == CURRENT
              and state['current']['generationId'] == GENERATION
              and state['current']['generationManifestSha256'] == MANIFEST, 'current')
+        if self.mode == 'orphan_unreferenced':
+            orphan_unreferenced(authority['publicationState'], self.orphan_nonces, self.h)
         lease = self.h.checked_observation(authority['lease'])
         need(lease.get('kind') == 'china-market-lease-v1' and lease.get('market') == 'china'
              and lease.get('status') == 'held' and re.fullmatch(r'[a-f0-9]{32}', lease.get('nonce', '')), 'lease')
@@ -132,7 +198,7 @@ class Cleanup:
             h.private_directory(directory)
         entries = list(home.iterdir())
         need(len(entries) <= 64, 'directory_bound')
-        for wanted in TARGETS:
+        for wanted in self.configured_targets:
             matches = [entry for entry in entries if re.fullmatch(r'[a-f0-9]{32}', entry.name)
                        and digest(entry.name.encode())[:16] == wanted['attemptHash']]
             need(len(matches) == 1, 'target_match')
@@ -154,18 +220,23 @@ class Cleanup:
                  and plan['retainedRuntime'] == CURRENT, 'plan_binding')
             previous, previous_receipt, _ = h.accepted_predecessor(plan)
             need(previous == self.current and previous_receipt['nonce'] == self.current_nonce, 'previous_changed')
-            outcome = h.read_outcome({'runtimeSha': FAILED, 'nonce': directory.name})
-            need(outcome['status'] == 'rolled_back', 'rollback_missing')
-            rollback = json.loads((directory / 'ROLLED_BACK.json').read_bytes())
-            need(rollback.get('version') == 1 and rollback.get('kind') == 'china-host-rollback-v1'
-                 and rollback.get('release') == FAILED and rollback.get('nonce') == directory.name
-                 and rollback.get('retainedRuntimeSha') == CURRENT
-                 and rollback.get('retainedContainerId') == self.live_id
-                 and rollback.get('retainedImageId') == self.current['imageId']
-                 and all(rollback.get(key) is True for key in ('candidateRemoved', 'ingressRestored', 'retainedRunning')),
-                 'rollback_binding')
-            self.proofs.extend([(directory / 'PLAN.json', wanted['planSha256']),
-                                (directory / 'ROLLED_BACK.json', h.file_sha(directory / 'ROLLED_BACK.json'))])
+            if self.mode == 'orphan_unreferenced':
+                self.orphan_nonces.add(directory.name)
+                orphan_unreferenced(self.authority['publicationState'], self.orphan_nonces, h)
+                receipt_proof = corrupt_receipt(h, directory, wanted)
+            else:
+                outcome = h.read_outcome({'runtimeSha': FAILED, 'nonce': directory.name})
+                need(outcome['status'] == 'rolled_back', 'rollback_missing')
+                rollback = json.loads((directory / 'ROLLED_BACK.json').read_bytes())
+                need(rollback.get('version') == 1 and rollback.get('kind') == 'china-host-rollback-v1'
+                     and rollback.get('release') == FAILED and rollback.get('nonce') == directory.name
+                     and rollback.get('retainedRuntimeSha') == CURRENT
+                     and rollback.get('retainedContainerId') == self.live_id
+                     and rollback.get('retainedImageId') == self.current['imageId']
+                     and all(rollback.get(key) is True for key in ('candidateRemoved', 'ingressRestored', 'retainedRunning')),
+                     'rollback_binding')
+                receipt_proof = (directory / 'ROLLED_BACK.json', h.file_sha(directory / 'ROLLED_BACK.json'))
+            self.proofs.extend([(directory / 'PLAN.json', wanted['planSha256']), receipt_proof])
             descriptors = {item['name']: item for item in plan['files']}
             for name in FILES:
                 descriptor = descriptors[name]
@@ -198,6 +269,8 @@ class Cleanup:
         mounts = []
         for row in rows:
             container = h.docker('GET', '/containers/' + row['Id'] + '/json')
+            if self.mode == 'orphan_unreferenced':
+                orphan_container_unreferenced(container, self.orphan_nonces)
             for mount in container.get('Mounts', []):
                 if mount.get('Source'):
                     need(isinstance(mount['Source'], str) and Path(mount['Source']).is_absolute(), 'mount_path')
@@ -245,12 +318,15 @@ class Cleanup:
         self.check_authority(message['authority'])
         self.fence()
         self.h.verify_live_reference(self.current, self.current_nonce)
-        return {'kind': 'photo-cleanup-result-v1', 'completed': True, 'filesDeleted': self.deleted,
+        return {'kind': 'photo-cleanup-result-v1', 'mode': self.mode, 'completed': True, 'filesDeleted': self.deleted,
                 'alreadyAbsentFiles': self.absent, 'logicalBytesUnlinked': self.logical,
                 'diskFreeBytesBefore': self.before, 'diskFreeBytesAfter': self.free(),
                 'liveRuntimeSha': CURRENT, 'generationId': GENERATION,
                 'imagesDeleted': 0, 'containersDeleted': 0, 'directoriesDeleted': 0,
-                'acceptedStateWrites': 0, 'intentStateWrites': 0}
+                'acceptedStateWrites': 0, 'intentStateWrites': 0,
+                'corruptEvidencePreserved': [{'attemptHash': item['attemptHash'], 'bytes': item['rollbackBytes'],
+                    'sha256': item['rollbackSha256']} for item in self.configured_targets]
+                    if self.mode == 'orphan_unreferenced' else []}
 
     def close(self):
         if self.lock is not None:
@@ -259,11 +335,13 @@ class Cleanup:
 
 
 def main():
-    validate_targets(TARGETS)
-    if sys.argv[1:] == ['--verify-targets']:
-        emit({'targetCount': len(TARGETS), 'fileCount': len(TARGETS) * len(FILES)})
+    mode = 'orphan_unreferenced' if sys.argv[1:] in (['--orphan'], ['--verify-orphan-targets']) else 'rolled_back'
+    targets = ORPHAN_TARGETS if mode == 'orphan_unreferenced' else TARGETS
+    validate_targets(targets, mode)
+    if sys.argv[1:] in (['--verify-targets'], ['--verify-orphan-targets']):
+        emit({'targetCount': len(targets), 'fileCount': len(targets) * len(FILES), 'mode': mode})
         return
-    need(not sys.argv[1:], 'arguments')
+    need(sys.argv[1:] == ([] if mode == 'rolled_back' else ['--orphan']), 'arguments')
     bootstrap = read_message()
     need(set(bootstrap) == {'hostSource', 'hostSourceSha256', 'authority'}
          and isinstance(bootstrap['hostSource'], str)
@@ -272,8 +350,8 @@ def main():
     exec(compile(bootstrap['hostSource'], 'verified-release-host.py', 'exec'), host.__dict__)
     cleanup = None
     try:
-        cleanup = Cleanup(host, bootstrap['authority'])
-        emit({'kind': 'photo-cleanup-prepared-v1', 'fileCount': len(cleanup.targets), 'alreadyAbsentFiles': cleanup.absent})
+        cleanup = Cleanup(host, bootstrap['authority'], mode)
+        emit({'kind': 'photo-cleanup-prepared-v1', 'mode': mode, 'fileCount': len(cleanup.targets), 'alreadyAbsentFiles': cleanup.absent})
         for _ in range(len(cleanup.targets)):
             emit(cleanup.step(read_message()))
         emit(cleanup.finish(read_message()))

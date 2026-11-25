@@ -43,7 +43,7 @@ with tempfile.TemporaryDirectory() as temp:
  h=types.SimpleNamespace(BASE=base,CONFIG=config,regular=regular,private_directory=private,
   docker=docker,protected_identity=lambda row:{k:row[k] for k in live},file_sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest(),
   verify_live_reference=lambda *a:live)
- c=object.__new__(m.Cleanup);c.h=h;c.authority={};c.check_authority=lambda a:None
+ c=object.__new__(m.Cleanup);c.h=h;c.mode='rolled_back';c.configured_targets=[];c.authority={};c.check_authority=lambda a:None
  c.live_id='live';c.live_identity=live;c.ingress=config.read_bytes();c.protected=[current]
  c.current={};c.current_nonce='x';c.source_files={'details.sqlite':(source,m.identity(source.stat()))}
  c.proofs=[(current/'PLAN.json',h.file_sha(current/'PLAN.json')),(target/'PLAN.json',h.file_sha(target/'PLAN.json')),
@@ -65,4 +65,53 @@ print('guarded filesystem cases passed')
 `;
   const result = execFileSync('python3', ['-B', '-c', source], {cwd: root, encoding: 'utf8', timeout: 10000});
   assert.match(result, /guarded filesystem cases passed/);
+});
+
+test('orphan mode refuses intent, accepted, container or changed-state references and preserves empty evidence', () => {
+  const source = String.raw`
+import importlib.util,types,tempfile,hashlib,json,datetime
+from pathlib import Path
+s=importlib.util.spec_from_file_location('clean','scripts/catalog-next/cleanup-photo-failed-20261125.py');m=importlib.util.module_from_spec(s);s.loader.exec_module(m)
+def throws(fn,word):
+ try:fn()
+ except Exception as e:assert word in str(e),(word,str(e))
+ else:raise AssertionError('expected '+word)
+m.validate_targets(m.ORPHAN_TARGETS,'orphan_unreferenced')
+throws(lambda:m.validate_targets(m.TARGETS,'orphan_unreferenced'),'target_identity')
+nonce='a'*32
+host=types.SimpleNamespace(accepted_reference_receipt=lambda ref:({'nonce':nonce},b''))
+view={'accepted':{'value':{'pending':None,'current':{},'rollback':None}},'intent':{'found':True,'value':{'status':'aborted','nonce':'b'*32}}}
+m.orphan_unreferenced(view,{nonce},host)
+view['intent']['value']['nonce']=nonce;throws(lambda:m.orphan_unreferenced(view,{nonce},host),'orphan_intent_reference')
+view['intent']['value']['nonce']='b'*32;view['intent']['value']['status']='pending';throws(lambda:m.orphan_unreferenced(view,{nonce},host),'orphan_pending')
+view['intent']['value']['status']='aborted';view['accepted']['value']['rollback']={'runtimeSha':m.FAILED,'proof':{}}
+throws(lambda:m.orphan_unreferenced(view,{nonce},host),'orphan_accepted_reference');view['accepted']['value']['rollback']=None
+view['accepted']['value']['pending']={};throws(lambda:m.orphan_unreferenced(view,{nonce},host),'orphan_pending');view['accepted']['value']['pending']=None
+for row in [{'Config':{'Labels':{'avtocena.china.nonce':nonce}}},
+            {'Config':{'Labels':{'org.opencontainers.image.revision':m.FAILED}}},
+            {'Config':{'Env':['AVTOCENA_RELEASE_SHA='+m.FAILED]}}]:
+ throws(lambda:m.orphan_container_unreferenced(row,{nonce}),'orphan_candidate_container')
+m.orphan_container_unreferenced({'Config':{'Labels':{},'Env':[]}},{nonce})
+with tempfile.TemporaryDirectory() as temp:
+ directory=Path(temp);receipt=directory/'ROLLED_BACK.json';receipt.write_bytes(b'')
+ h=types.SimpleNamespace(regular=lambda p,limit:p.stat())
+ pinned=m.ORPHAN_TARGETS[0]
+ assert m.corrupt_receipt(h,directory,pinned)[1]==pinned['rollbackSha256']
+ receipt.write_bytes(b'{}');throws(lambda:m.corrupt_receipt(h,directory,pinned),'orphan_corrupt_receipt_changed')
+ receipt.write_bytes(b'');assert m.corrupt_receipt(h,directory,pinned)[0].read_bytes()==b''
+c=object.__new__(m.Cleanup);c.mode='orphan_unreferenced';c.orphan_nonces={nonce}
+reference={'runtimeSha':m.CURRENT,'generationId':m.GENERATION,'generationManifestSha256':m.MANIFEST}
+view['accepted']['value']['current']=reference
+lease={'value':{'kind':'china-market-lease-v1','market':'china','status':'held','nonce':'c'*32,
+ 'expiresAt':(datetime.datetime.now(datetime.timezone.utc)+datetime.timedelta(hours=1)).isoformat()}}
+c.authority={'publicationState':view,'lease':lease}
+c.h=types.SimpleNamespace(checked_publication_view=lambda v:(v['accepted']['value'],v['intent']['value']),
+ checked_observation=lambda v:v['value'],accepted_reference_receipt=host.accepted_reference_receipt)
+c.check_authority(c.authority)
+changed=json.loads(json.dumps(c.authority));changed['publicationState']['accepted']['etag']='changed'
+throws(lambda:c.check_authority(changed),'state_changed')
+print('orphan reference and evidence guards passed')
+`;
+  const result = execFileSync('python3', ['-B', '-c', source], {cwd: root, encoding: 'utf8', timeout: 10000});
+  assert.match(result, /orphan reference and evidence guards passed/);
 });
