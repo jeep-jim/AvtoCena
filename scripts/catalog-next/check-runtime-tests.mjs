@@ -90,6 +90,11 @@ async function runNativeTests({runtimeRoot, files}) {
   });
 }
 
+// The photo CI reuses these exact identity and offline execution boundaries;
+// it supplies a fixed reviewed superset while the same compatibility patch is
+// applied. These are in-process APIs, not command or environment overrides.
+export {verifyRuntime as verifyRuntimeTestsCheckout, runNativeTests};
+
 /** Exact runtime bytes are restored even if one assertion or the harness
  * application fails. There is no accepted-failure list: every selected test
  * must pass. This does not run tsc or restore any unrelated generated files. */

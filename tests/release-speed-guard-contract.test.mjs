@@ -204,25 +204,36 @@ test('code-only photo activation preserves the independent China fence and compl
 
 test('photo CI always tests shared and China behavior while the combined profile still requires every PW test',()=>{
  const workflow=fs.readFileSync(path.join(workflowDirectory,'verify-china-photo-code.yml'),'utf8');
- assert.match(workflow,/checkedCatalogCodeScope\(JSON\.parse\(fs\.readFileSync\('\.github\/operations\/catalog-next\/china-code-serving-plan\.json'\)\)\)/);
- const matrix=workflow.match(/^          PHOTO_EXTRA_TESTS=\(\)\n[\s\S]*?^          esac$/m)?.[0];
- assert.ok(matrix,'the two reviewed scopes must be explicit');
- const directory=fs.mkdtempSync(path.join(os.tmpdir(),'photo-scope-matrix-'));
- try{
-  fs.mkdirSync(path.join(directory,'tests'));
-  const names=['tests/japan-pw-browser.test.ts','tests/japan-pw-source.test.ts'];
-  for(const filename of names)fs.writeFileSync(path.join(directory,filename),'');
-  const run=scope=>execFileSync('bash',['-euo','pipefail','-c',matrix+"\nprintf '%s\\n' \"${PHOTO_EXTRA_TESTS[@]}\""],{
-   cwd:directory,encoding:'utf8',env:{...process.env,PHOTO_SCOPE:scope},stdio:'pipe'}).trim();
-  assert.equal(run('catalog-photo-recovery-v1'),'');
-  assert.deepEqual(run('catalog-photo-japan-power-v1').split('\n'),names);
-  assert.throws(()=>run('unreviewed-scope'),error=>error.status===1);
- }finally{fs.rmSync(directory,{recursive:true,force:true});}
- const checks=workflow.split('\n').find(line=>line.includes('node --import tsx')&&line.includes('tests/catalog-photo-retry.test.ts'));
+ const checks='node --import tsx scripts/catalog-next/check-photo-runtime-tests.mjs "$RUNNER_TEMP/china-serving-runtime-$PHOTO_SHA"';
+ assert.equal(workflow.split(checks).length-1,1,'the controller helper must execute once before changing directories');
+ assert.ok(workflow.indexOf(checks)<workflow.indexOf('cd "$RUNNER_TEMP/china-serving-runtime-$PHOTO_SHA"'));
+ const helper=fs.readFileSync(path.join(root,'scripts/catalog-next/check-photo-runtime-tests.mjs'),'utf8');
+ const runner=fs.readFileSync(path.join(root,'scripts/catalog-next/check-runtime-tests.mjs'),'utf8');
+ assert.match(helper,/need\(\[PHOTO_SCOPE, COMBINED_SCOPE\]\.includes\(plan\?\.codeScope\), 'scope'\)/);
+ assert.match(helper,/checkedCatalogCodeScope\(plan\)/);
+ assert.match(helper,/verifyRuntimeTestsCheckout\(runtimeRoot, plan\)/);
+ assert.match(helper,/codeScope === PHOTO_SCOPE \? CHINA_RUNTIME_TEST_FILES : power/);
+ assert.match(helper,/power\.length > 0 && required\.every\(name => power\.includes\(name\)\)/);
+ assert.match(helper,/aj\.length > 0/);
+ assert.match(helper,/'ls-tree', '-r', '--name-only', '-z', 'HEAD', '--', 'tests'/);
+ assert.match(helper,/checkChinaRuntimeTests\(\{runtimeRoot, plan, patchPath/);
+ assert.match(helper,/return runTests\(\{runtimeRoot, files\}\)/);
+ assert.match(helper,/need\(exitCode === 0, 'failed'\)/);
+ assert.match(helper,/finally \{ verifyRuntimeTestsCheckout\(runtimeRoot, plan\); \}/);
+ assert.match(helper,/\.github\/operations\/catalog-next\/china-code-serving-plan\.json/);
+ assert.match(helper,/runtime-test-compatibility\.patch/);
  for(const name of ['tests/catalog-photo-retry.test.ts','tests/photo-proxy.test.ts','tests/ajes-*.test.ts',
-  'tests/catalog-detail-read-cache.test.ts','tests/catalog-japan-filter-rail.test.ts','tests/catalog-market-page-boundary.test.ts',
-  '"${PHOTO_EXTRA_TESTS[@]}"','--import ./tests/helpers/offline-fetch.mjs'])assert.ok(checks.includes(name),name);
- assert.ok(workflow.indexOf('node tests/browser/photo-japan-recovery-clock.mjs')<workflow.indexOf(matrix));
+  'tests/catalog-detail-read-cache.test.ts','tests/catalog-japan-filter-rail.test.ts','tests/catalog-market-page-boundary.test.ts']){
+  if(name.includes('*'))assert.match(helper,/tests\\\/ajes-/);
+  else assert.ok(helper.includes(name),name);
+ }
+ assert.match(runner,/'--import', 'tsx', '--import', '\.\/tests\/helpers\/offline-fetch\.mjs'/);
+ assert.match(runner,/'--test', '--test-concurrency=1', \.\.\.files/);
+ assert.match(runner,/finally[\s\S]*git\(runtimeRoot, \['restore', '--source=HEAD', '--worktree', '--', \.\.\.paths\]\)/);
+ for(const filename of ['scripts/catalog-next/check-photo-runtime-tests.mjs','scripts/catalog-next/check-runtime-tests.mjs',
+  '.github/operations/catalog-next/runtime-test-compatibility.patch','tests/catalog-next-check-photo-runtime-tests.test.mjs'])
+  assert.ok(workflow.split('permissions:')[0].includes(filename),'CI must observe '+filename);
+ assert.ok(workflow.indexOf('node tests/browser/photo-japan-recovery-clock.mjs')<workflow.indexOf(checks));
  assert.ok(workflow.indexOf('npm run typecheck')>workflow.indexOf(checks));
  assert.ok(workflow.indexOf('node --import tsx tests/browser/catalog-photo-recovery.mjs')>workflow.indexOf('npm run typecheck'));
 });

@@ -6,8 +6,11 @@ on:
       - .github/workflows/verify-china-photo-code.yml
       - .github/workflows/catalog-next-china-photo-release.yml
       - .github/operations/catalog-next/china-code-serving-plan.json
+      - .github/operations/catalog-next/runtime-test-compatibility.patch
       - scripts/catalog-next/code-*.mjs
       - scripts/catalog-next/photo-code-scope.mjs
+      - scripts/catalog-next/check-photo-runtime-tests.mjs
+      - scripts/catalog-next/check-runtime-tests.mjs
       - scripts/catalog-next/photo-japan-browser-acceptance.mjs
       - scripts/catalog-next/build-release-image.mjs
       - scripts/catalog-next/restore-photo-image.mjs
@@ -19,6 +22,8 @@ on:
       - scripts/catalog-next/release-ssh.mjs
       - scripts/catalog-next/serving-compatibility.mjs
       - tests/catalog-next-code-*.test.mjs
+      - tests/catalog-next-check-photo-runtime-tests.test.mjs
+      - tests/catalog-next-check-runtime-tests.test.mjs
       - tests/catalog-next-restore-photo-image.test.mjs
       - tests/browser/photo-japan-recovery-clock.mjs
 permissions:
@@ -62,16 +67,9 @@ jobs:
         run: |
           set -euo pipefail
           PHOTO_SHA=$(node -p "JSON.parse(require('fs').readFileSync('.github/operations/catalog-next/china-code-serving-plan.json')).runtimeSha")
-          PHOTO_SCOPE=$(node --input-type=module -e "import fs from 'node:fs'; import {checkedCatalogCodeScope} from './scripts/catalog-next/photo-code-scope.mjs'; console.log(checkedCatalogCodeScope(JSON.parse(fs.readFileSync('.github/operations/catalog-next/china-code-serving-plan.json'))));")
           PHOTO_RUNTIME_ROOT="$RUNNER_TEMP/china-serving-runtime-$PHOTO_SHA" node tests/browser/photo-japan-recovery-clock.mjs
+          node --import tsx scripts/catalog-next/check-photo-runtime-tests.mjs "$RUNNER_TEMP/china-serving-runtime-$PHOTO_SHA"
           cd "$RUNNER_TEMP/china-serving-runtime-$PHOTO_SHA"
-          PHOTO_EXTRA_TESTS=()
-          case "$PHOTO_SCOPE" in
-            catalog-photo-recovery-v1) ;;
-            catalog-photo-japan-power-v1) PHOTO_EXTRA_TESTS=(tests/japan-pw-*.test.ts) ;;
-            *) exit 1 ;;
-          esac
-          node --import tsx --import ./tests/helpers/offline-fetch.mjs --test --test-concurrency=1 tests/catalog-photo-retry.test.ts tests/photo-proxy.test.ts tests/ajes-*.test.ts tests/catalog-detail-read-cache.test.ts tests/catalog-japan-filter-rail.test.ts tests/catalog-market-page-boundary.test.ts "${PHOTO_EXTRA_TESTS[@]}"
           npm run typecheck
           git restore --source=HEAD --worktree -- apps/web/tsconfig.tsbuildinfo
           node --import tsx tests/browser/catalog-photo-recovery.mjs

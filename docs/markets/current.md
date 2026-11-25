@@ -1,6 +1,6 @@
 # Текущий шаг
 
-Обновлено: 26.11.2026, 00:28, Asia/Krasnoyarsk. Текущий статус заменяется, история сюда не дописывается.
+Обновлено: 26.11.2026, 00:54, Asia/Krasnoyarsk. Текущий статус заменяется, история сюда не дописывается.
 
 ## Поручение
 
@@ -16,6 +16,7 @@
 
 ## Последняя приёмка и текущий блокер
 
+- Photo-only [CI №45666592894](https://github.com/jeep-jim/AvtoCena/actions/runs/45666592894): 598 contracts, exact `36d707…` и recovery-clock browser прошли; два старых mock-export в source tests остановили дальнейшие этапы. Подключён уже существующий test-only compatibility patch без изменения его SHA или runtime: локально все 301 assertion из полного объединения 40 test files прошли, исходные байты восстановлены. Повторный CI обязателен до выпуска; обе прежние упавшие проверки сохранены.
 - [CI №45646558514](https://github.com/jeep-jim/AvtoCena/actions/runs/45646558514) успешен для контроллера `88d2f7ac`: 570 controller/contract проверок, 204 app-теста, typecheck и оба браузерных набора.
 - [Выпуск №45647364912](https://github.com/jeep-jim/AvtoCena/actions/runs/45647364912) завершился в 23:02:30: `status=rolled_back`, `published=false`, `recovered=true`, `leaseReleased=true`. Точный исходный образ восстановлен без registry requests, receipt сохранён; серверная и базовая браузерная приёмка прошли.
 - Совместный browser report: китайское фото восстановилось по исходному URL на desktop/mobile, контрольное фото не изменилось; 60 результатов, 24 карточки. Два обычных японских чтения дали одинаковые три строки и свежую общую observation: `stale=false`, `partial=false`; общий счётчик ещё неполный.
