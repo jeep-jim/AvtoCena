@@ -2,7 +2,9 @@ name: China host saved-generation census (read only)
 on:
   push:
     branches: [main]
-    paths: ['.github/workflows/china-host-bulk-disk-readonly.yml']
+    paths:
+      - '.github/workflows/china-host-bulk-disk-readonly.yml'
+      - 'scripts/catalog-next/diagnose-china-bulk-disk-readonly.mjs'
 permissions:
   contents: read
 jobs:
