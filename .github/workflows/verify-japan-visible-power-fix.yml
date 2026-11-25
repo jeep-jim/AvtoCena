@@ -1,0 +1,46 @@
+name: Verify Japan visibility and 160-hp fix (no deploy)
+on:
+  push:
+    branches: ['fix/japan-visible-power-20261125']
+    paths:
+      - '.github/workflows/verify-japan-visible-power-fix.yml'
+      - 'apps/web/components/catalog/AjesRail.tsx'
+      - 'apps/web/components/catalog/AjesCatalog.tsx'
+      - 'apps/web/components/catalog/CatalogContent.tsx'
+      - 'apps/web/app/(public)/page.tsx'
+      - 'apps/web/lib/catalog/ajes-public.ts'
+      - 'apps/web/lib/catalog/ajes-result-filter.ts'
+      - 'apps/web/lib/catalog/japan-source-power.ts'
+      - 'apps/web/lib/catalog/japan-reviewed-power.ts'
+      - 'apps/web/lib/catalog/storage.ts'
+      - 'apps/web/components/catalog/CatalogCard.tsx'
+      - 'tests/japan-visible-power-contract.test.ts'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: japan-visible-power-code-branch
+  cancel-in-progress: true
+jobs:
+  verify:
+    if: github.repository_id == '1289722938' && github.ref == 'refs/heads/fix/japan-visible-power-20261125'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24.22.3'
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Test Japan visibility, documented horsepower, preliminary values and bounded pagination
+        run: |
+          node --import tsx --import ./tests/helpers/offline-fetch.mjs --test --test-concurrency=1 \
+            tests/japan-visible-power-contract.test.ts \
+            tests/ajes-japan-feed.test.ts \
+            tests/ajes-filtered-page.test.ts \
+            tests/ajes-rail-late-count.test.ts
+      - name: Typecheck exact China serving runtime with Japan-only changes
+        run: npm run typecheck
