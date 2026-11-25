@@ -20,7 +20,7 @@ function subscribe(notify:()=>void) {
  window.addEventListener("popstate",notify);
  return ()=>{window.removeEventListener(CITY_CHANGED_EVENT,notify);window.removeEventListener("storage",notify);window.removeEventListener("popstate",notify);};
 }
-export function useSelectedCity() { return useSyncExternalStore(subscribe,readSelectedCity,()=>""); }
+export function useSelectedCity(serverCity = "") { return useSyncExternalStore(subscribe,readSelectedCity,()=>serverCity); }
 
 export function storeSelectedCity(city: string) {
   try { localStorage.setItem("avtocena_city", city); } catch {}

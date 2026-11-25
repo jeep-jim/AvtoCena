@@ -68,7 +68,9 @@ function CatalogPriceContent({
 }
 
 export function CatalogPrice(props: Parameters<typeof CatalogPriceContent>[0]) {
- const city = useSelectedCity();
+ const selection = props.offer?.preparedChinaSelection;
+ const initialCity = props.offer?.market === "china" && selection?.version === 1 && typeof selection.city === "string" ? selection.city : "";
+ const city = useSelectedCity(initialCity);
  if(isPriceOnRequestDubicarsOffer(props.offer))return <div data-price-on-request>{props.label&&<p className="text-xs text-[var(--ac-muted)]">{props.label}</p>}<p className={`mt-1 font-black ${props.priceClassName||"text-[22px]"}`}>Цена по запросу</p></div>;
  if(isRetroOffer(props.offer))return <div data-retro-price>{props.label&&<p className="text-xs text-[var(--ac-muted)]">{props.label}</p>}<p className={`mt-1 font-black ${props.priceClassName||"text-[22px]"}`}>Цена по запросу</p></div>;
  const priced = priceCardForCity(props.offer,city);
