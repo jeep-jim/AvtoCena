@@ -9,6 +9,7 @@ on:
       - 'apps/web/app/(public)/cars/offer/[id]/page.tsx'
       - 'tests/catalog-prepared-china-detail-city.test.mjs'
       - 'tests/browser/china-frozen-city-*'
+      - 'scripts/catalog-next/serving-compatibility.mjs'
   workflow_dispatch:
 permissions:
   contents: read
@@ -36,3 +37,34 @@ jobs:
         env:
           PLAYWRIGHT_MODULE: ${{ runner.temp }}/china-city-browser/node_modules/playwright/index.mjs
         run: CHROME_BIN=$(command -v google-chrome) node tests/browser/china-frozen-city-preflight.mjs
+      - name: Record exact code-only price-fix candidate (no activation)
+        run: |
+          git fetch --no-tags origin 56d6b94fea70457e0ce2b0820596da9972846b90
+          git fetch --no-tags origin 64c6338e0db23c8999096bceefbf113c0136fe15
+          git fetch --no-tags origin d536c1547c4d82a339ed68ced7d8503f09b6810b
+          node --input-type=module <<'JS'
+          import {execFileSync} from 'node:child_process';
+          import {createHash} from 'node:crypto';
+          const git=(...args)=>execFileSync('git',args);
+          const price='64c6338e0db23c8999096bceefbf113c0136fe15';
+          const retained='56d6b94fea70457e0ce2b0820596da9972846b90';
+          const serving='d536c1547c4d82a339ed68ced7d8503f09b6810b';
+          const diff=(a,b)=>git('diff','--binary','--full-index','--no-ext-diff','--no-renames',a,b);
+          const digest=bytes=>createHash('sha256').update(bytes).digest('hex');
+          const files=(a,b)=>git('diff','--name-only','-z','--no-renames',a,b).toString().split('\\0').filter(Boolean).sort();
+          const changed=files('38895e53f7f770ee68edb0b8ad53056468b928a5',serving);
+          const expected=[
+            'apps/web/app/(public)/cars/offer/[id]/page.tsx',
+            'apps/web/components/catalog/InlineOfferParameters.tsx',
+            'apps/web/lib/catalog/prepared-china-detail-city.ts'
+          ].sort();
+          if(JSON.stringify(changed)!==JSON.stringify(expected))throw Error('unexpected price fix scope: '+JSON.stringify(changed));
+          console.log('CHINA_PRICE_FIX_PROFILE '+JSON.stringify({
+            servingRuntimeSha:serving,servingRuntimeTree:git('rev-parse',serving+'^{tree}').toString().trim(),
+            retainedToServingDiffSha256:digest(diff(retained,serving)),
+            pricingToServingDiffSha256:digest(diff(price,serving)),
+            retainedToServingFiles:files(retained,serving),
+            pricingToServingFiles:files(price,serving),
+            exactCodeOnlyPatchFiles:changed
+          }));
+          JS
