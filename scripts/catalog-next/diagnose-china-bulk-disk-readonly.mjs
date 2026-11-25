@@ -71,7 +71,12 @@ try{
    fullQueries:r.attempts.filter(a=>a.files?.['query.sqlite']?.present).length,
    partialDetails:r.attempts.filter(a=>a.files?.details_incoming?.present).length,
    generations:r.attempts.filter(a=>a.files?.['GENERATION.json']?.present).length,
-   accepted:r.attempts.filter(a=>a.acceptedPresent).length
+   accepted:r.attempts.filter(a=>a.acceptedPresent).length,
+   rolledBack:r.attempts.filter(a=>a.rollbackPresent).length,
+   detailsBytes:r.attempts.reduce((sum,a)=>sum+(a.files?.['details.sqlite']?.bytes||0),0),
+   queryBytes:r.attempts.reduce((sum,a)=>sum+(a.files?.['query.sqlite']?.bytes||0),0),
+   incomingBytes:r.attempts.reduce((sum,a)=>sum+(a.files?.details_incoming?.bytes||0),0),
+   completedPairs:r.attempts.filter(a=>a.files?.['details.sqlite']?.present&&a.files?.['query.sqlite']?.present&&a.rollbackPresent&&!a.acceptedPresent).length
   }]))};
  process.stdout.write(JSON.stringify({kind:'china-disk-and-retained-generation-readonly',...clean})+'\n');
 }finally{await fs.rm(dir,{recursive:true,force:true})}
