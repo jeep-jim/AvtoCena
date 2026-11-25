@@ -28,7 +28,7 @@ test('old sequential queue never dispatches China or makes UAE wait for China',(
 });
 test('shared legacy V3 writer is rejected for China before collect/publish',()=>{
   const src=read('catalog-v3-market-10k-reusable.yml');
-  assert.match(src,/^  validate:\s*\n\s+if:\s*inputs\.market != 'china'/m);
+  assert.match(src,/^  validate:\s*\n(?:\s*#[^\n]*\n)*\s+if:\s*inputs\.market != 'china' && inputs\.market != 'japan'/m);
   assert.match(src,/^  collect:\s*\n\s+needs:\s*validate/m);
   assert.match(src,/^  publish:\s*\n\s+needs:\s*\[validate, collect\]/m);
 });
