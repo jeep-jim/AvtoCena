@@ -49,7 +49,7 @@ jobs:
     secrets: inherit
 
   uae:
-    needs: japan
+    needs: korea
     if: ${{ always() && !cancelled() }}
     uses: ./.github/workflows/catalog-v3-market-10k-reusable.yml
     with:
