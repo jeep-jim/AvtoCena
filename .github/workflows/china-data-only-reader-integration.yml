@@ -1,0 +1,37 @@
+name: China data-only reader integration (no deploy)
+on:
+  push:
+    branches: ['feat/china-data-only-live-reader-20261125']
+    paths:
+      - '.github/workflows/china-data-only-reader-integration.yml'
+      - 'apps/web/lib/catalog/china-local-reader.ts'
+      - 'apps/web/lib/catalog/china-local-pointer.mjs'
+      - 'apps/web/lib/catalog/china-public-aggregate.ts'
+      - 'scripts/catalog-next/market-data-pointer.mjs'
+      - 'scripts/catalog-next/market-generation-reader.mjs'
+      - 'scripts/catalog-next/market-pointer-reg-storage.mjs'
+      - 'tests/catalog-next-market-*.test.mjs'
+      - 'tests/catalog-next-china-live-pointer.test.mjs'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    if: github.repository_id == '1289722938' && github.ref == 'refs/heads/feat/china-data-only-live-reader-20261125'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24.22.3'
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Validate data-only reader, pointer and boundary tests
+        run: |
+          node --test tests/catalog-next-market-data-pointer.test.mjs tests/catalog-next-market-pointer-reg-storage.test.mjs tests/catalog-next-market-generation-reader.test.mjs tests/catalog-next-china-live-pointer.test.mjs
+          node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/catalog-next-local-reader.test.ts
+      - name: Typecheck integrated serving runtime
+        run: npm run typecheck
