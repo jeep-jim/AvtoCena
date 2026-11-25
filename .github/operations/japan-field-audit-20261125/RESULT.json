@@ -1,0 +1,884 @@
+{
+  "schemaVersion": 1,
+  "observedDate": "2026-11-25",
+  "timezone": "Asia/Krasnoyarsk",
+  "deployedRelease": "d536c1547c4d82a339ed68ced7d8503f09b6810b",
+  "scope": "Owner requested diagnosis of missing China images and whether AJ Japan fields are discarded.",
+  "applicationDeploymentPerformed": false,
+  "catalogPublicationPerformed": false,
+  "china": {
+    "observedDate": "2026-11-25",
+    "releaseSha": "d536c1547c4d82a339ed68ced7d8503f09b6810b",
+    "generationId": "gen_china_45369451603_1",
+    "filteredTotal": 60,
+    "firstPageItems": 24,
+    "firstPageWithImageUrl": 24,
+    "photoNetworkSample": 9,
+    "originImage200": 9,
+    "proxyFullImage200": 9,
+    "proxyCardImage200": 9,
+    "browserFirstPage": {
+      "method": "CUA visible page plus img.complete and naturalWidth inspection after scroll",
+      "photos": 24,
+      "decodedImages": 24,
+      "brokenImages": 0,
+      "note": "Browser city initially defaulted to Moscow; IDs and image URLs matched the supplied Novokuznetsk filter sample. Price parity was not part of this photo audit."
+    }
+  },
+  "japan": {
+    "sourceAuditRun": "https://github.com/jeep-jim/AvtoCena/actions/runs/45593693233",
+    "sourcePhaseCompleted": true,
+    "workflowConclusion": "failure",
+    "workflowLimitation": "The source requests completed; the original host envelope reported a complete Docker identity mismatch while comparing the raw Mounts array order. The precise original differing component was not recorded, so that workflow is not retroactively marked successful.",
+    "supplierRequests": 2,
+    "sourceCacheWrites": 0,
+    "quotaWrites": 2,
+    "powerUnitsAndExactVariantMeaning": "Not established by numeric PW values alone; do not promote to verified powerHp or customs input without supplier semantics and identity evidence.",
+    "observations": [
+      {
+        "event": "JAPAN_SAVED_FIELD_AUDIT",
+        "stage": "saved_evidence",
+        "observedAt": "2026-11-25T10:12:02.371Z",
+        "present": true,
+        "hasValidExactId": true,
+        "fieldNames": [
+          "ID",
+          "LOT",
+          "AUCTION_TYPE",
+          "AUCTION_DATE",
+          "AUCTION",
+          "MARKA_ID",
+          "MODEL_ID",
+          "MARKA_NAME",
+          "MODEL_NAME",
+          "YEAR",
+          "TOWN",
+          "ENG_V",
+          "PW",
+          "KUZOV",
+          "GRADE",
+          "COLOR",
+          "KPP",
+          "KPP_TYPE",
+          "PRIV",
+          "MILEAGE",
+          "MIL_ST",
+          "EQUIP",
+          "RATE",
+          "START",
+          "FINISH",
+          "STATUS",
+          "TIME",
+          "AVG_PRICE",
+          "AVG_STRING",
+          "LHDRIVE",
+          "IMAGES",
+          "SERIAL",
+          "INFO"
+        ],
+        "knownValues": {
+          "rowCount": 1,
+          "fieldCount": 7,
+          "omittedFieldNames": 0,
+          "fields": [
+            {
+              "name": "ENG_V",
+              "present": 1,
+              "types": [
+                "string"
+              ]
+            },
+            {
+              "name": "FUEL",
+              "present": 0,
+              "types": [
+                "null"
+              ]
+            },
+            {
+              "name": "INFO",
+              "present": 1,
+              "types": [
+                "string"
+              ]
+            },
+            {
+              "name": "KPP",
+              "present": 1,
+              "types": [
+                "string"
+              ]
+            },
+            {
+              "name": "PRIV",
+              "present": 1,
+              "types": [
+                "string"
+              ]
+            },
+            {
+              "name": "PW",
+              "present": 1,
+              "types": [
+                "string"
+              ],
+              "powerShapeCounts": {
+                "missing": 0,
+                "scalar": 1,
+                "multiple": 0,
+                "non_numeric": 0
+              },
+              "rawNumericExamples": [
+                "109"
+              ]
+            },
+            {
+              "name": "TIME",
+              "present": 0,
+              "types": [
+                "string"
+              ]
+            }
+          ],
+          "fieldsNotReadByAjesLot": [],
+          "info": [
+            {
+              "present": true,
+              "type": "string",
+              "bytes": 24,
+              "hasPowerTerm": false,
+              "hasPowerUnit": false,
+              "hasDisplacementTerm": false,
+              "hasTableMarkup": false
+            }
+          ]
+        },
+        "rawValuesNotRetainedForFields": [
+          "ID",
+          "LOT",
+          "AUCTION_TYPE",
+          "AUCTION_DATE",
+          "AUCTION",
+          "MARKA_ID",
+          "MODEL_ID",
+          "MARKA_NAME",
+          "MODEL_NAME",
+          "YEAR",
+          "TOWN",
+          "KUZOV",
+          "GRADE",
+          "COLOR",
+          "KPP_TYPE",
+          "MILEAGE",
+          "MIL_ST",
+          "EQUIP",
+          "RATE",
+          "START",
+          "FINISH",
+          "STATUS",
+          "AVG_PRICE",
+          "AVG_STRING",
+          "LHDRIVE",
+          "IMAGES",
+          "SERIAL"
+        ]
+      },
+      {
+        "event": "JAPAN_SAVED_FIELD_AUDIT",
+        "stage": "saved_normalized_detail",
+        "present": true,
+        "identityBound": true,
+        "observedAt": "2026-11-25T10:12:02.371Z",
+        "schemaVersion": 2,
+        "items": 1,
+        "sourcePowerPresent": 1,
+        "sourcePowerShapes": [
+          {
+            "kind": "scalar",
+            "rawNumeric": "109"
+          }
+        ],
+        "powerHpPresent": 0,
+        "infoPresent": 1,
+        "sourceDetailsPresent": 0,
+        "engineCcPresent": 1,
+        "sourceFuelPresent": 0,
+        "equipmentPresent": 1,
+        "productionMonthPresent": 0
+      },
+      {
+        "event": "JAPAN_RAW_FIELD_AUDIT",
+        "stage": "live_raw",
+        "table": "stats",
+        "kind": "detail",
+        "pageSize": 1,
+        "httpStatus": 200,
+        "elapsedMs": 79,
+        "bodyBytes": 1437,
+        "rawParse": "bounded_rows",
+        "summary": {
+          "rowCount": 1,
+          "fieldCount": 34,
+          "omittedFieldNames": 0,
+          "fields": [
+            {
+              "name": "AUCTION",
+              "present": 1,
+              "types": [
+                "string"
+              ]
+            },
+            {
+              "name": "AUCTION_DATE",
+              "present": 1,
+              "types": [
+                "string"
+              ]
+            },
+            {
+              "name": "AUCTION_TYPE",
+              "present": 1,
+              "types": [
+                "string"
+              ]
+            },
+            {
+              "name": "AVG_PRICE",
+              "present": 1,
+              "types": [
+                "string"
+              ]
+            },
+            {
+              "name": "AVG_STRING",
+              "present": 1,
+              "types": [
+                "string"
+              ]
+            },
+            {
+              "name": "COLOR",
+              "present": 1,
+              "types": [
+                "string"
+              ]
+            },
+            {
+              "name": "ENG_V",
+              "present": 1,
+              "types": [
+                "string"
+              ]
+            },
+            {
+              "name": "EQUIP",
+              "present": 1,
+              "types": [
+                "string"
+              ]
+            },
+            {
+              "name": "FINISH",
+              "present": 1,
+              "types": [
+                "string"
+              ]
+            },
+            {
+              "name": "GRADE",
+              "present": 1,
+              "types": [
+                "string"
+              ]
+            },
+            {
+              "name": "ID",
+              "present": 1,
+              "types": [
+                "string"
+              ]
+            },
+            {
+              "name": "IMAGES",
+              "present": 1,
+              "types": [
+                "string"
+              ]
+            },
+            {
+              "name": "INFO",
+              "present": 1,
+              "types": [
+                "string"
+              ]
+            },
+            {
+              "name": "KPP",
+              "present": 1,
+              "types": [
+                "string"
+              ]
+            },
+            {
+              "name": "KPP_TYPE",
+              "present": 1,
+              "types": [
+                "string"
+              ]
+            },
+            {
+              "name": "KUZOV",
+              "present": 1,
+              "types": [
+                "string"
+              ]
+            },
+            {
+              "name": "LHDRIVE",
+              "present": 1,
+              "types": [
+                "string"
+              ]
+            },
+            {
+              "name": "LOT",
+              "present": 1,
+              "types": [
+                "string"
+              ]
+            },
+            {
+              "name": "MARKA_ID",
+              "present": 1,
+              "types": [
+                "string"
+              ]
+            },
+            {
+              "name": "MARKA_NAME",
+              "present": 1,
+              "types": [
+                "string"
+              ]
+            },
+            {
+              "name": "MILEAGE",
+              "present": 1,
+              "types": [
+                "string"
+              ]
+            },
+            {
+              "name": "MIL_ST",
+              "present": 1,
+              "types": [
+                "string"
+              ]
+            },
+            {
+              "name": "MODEL_ID",
+              "present": 1,
+              "types": [
+                "string"
+              ]
+            },
+            {
+              "name": "MODEL_NAME",
+              "present": 1,
+              "types": [
+                "string"
+              ]
+            },
+            {
+              "name": "PRIV",
+              "present": 1,
+              "types": [
+                "string"
+              ]
+            },
+            {
+              "name": "PW",
+              "present": 1,
+              "types": [
+                "string"
+              ],
+              "powerShapeCounts": {
+                "missing": 0,
+                "scalar": 1,
+                "multiple": 0,
+                "non_numeric": 0
+              },
+              "rawNumericExamples": [
+                "109"
+              ]
+            },
+            {
+              "name": "RATE",
+              "present": 1,
+              "types": [
+                "string"
+              ]
+            },
+            {
+              "name": "SANCTION",
+              "present": 1,
+              "types": [
+                "string"
+              ]
+            },
+            {
+              "name": "SERIAL",
+              "present": 0,
+              "types": [
+                "string"
+              ]
+            },
+            {
+              "name": "START",
+              "present": 1,
+              "types": [
+                "string"
+              ]
+            },
+            {
+              "name": "STATUS",
+              "present": 1,
+              "types": [
+                "string"
+              ]
+            },
+            {
+              "name": "TIME",
+              "present": 0,
+              "types": [
+                "string"
+              ]
+            },
+            {
+              "name": "TOWN",
+              "present": 0,
+              "types": [
+                "string"
+              ]
+            },
+            {
+              "name": "YEAR",
+              "present": 1,
+              "types": [
+                "string"
+              ]
+            }
+          ],
+          "fieldsNotReadByAjesLot": [
+            "AVG_PRICE",
+            "AVG_STRING",
+            "LHDRIVE",
+            "MARKA_ID",
+            "MIL_ST",
+            "MODEL_ID",
+            "SANCTION"
+          ],
+          "info": [
+            {
+              "present": true,
+              "type": "string",
+              "bytes": 24,
+              "hasPowerTerm": false,
+              "hasPowerUnit": false,
+              "hasDisplacementTerm": false,
+              "hasTableMarkup": false
+            }
+          ]
+        }
+      },
+      {
+        "event": "JAPAN_NORMALIZED_FIELD_AUDIT",
+        "stage": "live_normalized",
+        "table": "stats",
+        "kind": "detail",
+        "observedAt": "2026-11-25T10:19:16.454Z",
+        "received": 1,
+        "rejected": 0,
+        "stale": false,
+        "items": 1,
+        "sourcePowerPresent": 1,
+        "sourcePowerShapes": [
+          {
+            "kind": "scalar",
+            "rawNumeric": "109"
+          }
+        ],
+        "powerHpPresent": 0,
+        "infoPresent": 1,
+        "sourceDetailsPresent": 0,
+        "engineCcPresent": 1,
+        "sourceFuelPresent": 0,
+        "equipmentPresent": 1,
+        "productionMonthPresent": 0
+      },
+      {
+        "event": "JAPAN_RAW_FIELD_AUDIT",
+        "stage": "live_raw",
+        "table": "main",
+        "kind": "list",
+        "pageSize": 3,
+        "httpStatus": 200,
+        "elapsedMs": 120,
+        "bodyBytes": 2162,
+        "rawParse": "bounded_rows",
+        "summary": {
+          "rowCount": 3,
+          "fieldCount": 31,
+          "omittedFieldNames": 0,
+          "fields": [
+            {
+              "name": "AUCTION",
+              "present": 3,
+              "types": [
+                "string"
+              ]
+            },
+            {
+              "name": "AUCTION_DATE",
+              "present": 3,
+              "types": [
+                "string"
+              ]
+            },
+            {
+              "name": "AUCTION_TYPE",
+              "present": 3,
+              "types": [
+                "string"
+              ]
+            },
+            {
+              "name": "AVG_PRICE",
+              "present": 3,
+              "types": [
+                "string"
+              ]
+            },
+            {
+              "name": "AVG_STRING",
+              "present": 3,
+              "types": [
+                "string"
+              ]
+            },
+            {
+              "name": "COLOR",
+              "present": 3,
+              "types": [
+                "string"
+              ]
+            },
+            {
+              "name": "ENG_V",
+              "present": 3,
+              "types": [
+                "string"
+              ]
+            },
+            {
+              "name": "EQUIP",
+              "present": 3,
+              "types": [
+                "string"
+              ]
+            },
+            {
+              "name": "FINISH",
+              "present": 3,
+              "types": [
+                "string"
+              ]
+            },
+            {
+              "name": "GRADE",
+              "present": 3,
+              "types": [
+                "string"
+              ]
+            },
+            {
+              "name": "ID",
+              "present": 3,
+              "types": [
+                "string"
+              ]
+            },
+            {
+              "name": "IMAGES",
+              "present": 3,
+              "types": [
+                "string"
+              ]
+            },
+            {
+              "name": "KPP",
+              "present": 3,
+              "types": [
+                "string"
+              ]
+            },
+            {
+              "name": "KPP_TYPE",
+              "present": 3,
+              "types": [
+                "string"
+              ]
+            },
+            {
+              "name": "KUZOV",
+              "present": 3,
+              "types": [
+                "string"
+              ]
+            },
+            {
+              "name": "LHDRIVE",
+              "present": 3,
+              "types": [
+                "string"
+              ]
+            },
+            {
+              "name": "LOT",
+              "present": 3,
+              "types": [
+                "string"
+              ]
+            },
+            {
+              "name": "MARKA_ID",
+              "present": 3,
+              "types": [
+                "string"
+              ]
+            },
+            {
+              "name": "MARKA_NAME",
+              "present": 3,
+              "types": [
+                "string"
+              ]
+            },
+            {
+              "name": "MILEAGE",
+              "present": 3,
+              "types": [
+                "string"
+              ]
+            },
+            {
+              "name": "MODEL_ID",
+              "present": 3,
+              "types": [
+                "string"
+              ]
+            },
+            {
+              "name": "MODEL_NAME",
+              "present": 3,
+              "types": [
+                "string"
+              ]
+            },
+            {
+              "name": "PRIV",
+              "present": 3,
+              "types": [
+                "string"
+              ]
+            },
+            {
+              "name": "PW",
+              "present": 3,
+              "types": [
+                "string"
+              ],
+              "powerShapeCounts": {
+                "missing": 0,
+                "scalar": 3,
+                "multiple": 0,
+                "non_numeric": 0
+              },
+              "rawNumericExamples": [
+                "98",
+                "170",
+                "91"
+              ]
+            },
+            {
+              "name": "RATE",
+              "present": 3,
+              "types": [
+                "string"
+              ]
+            },
+            {
+              "name": "SANCTION",
+              "present": 3,
+              "types": [
+                "string"
+              ]
+            },
+            {
+              "name": "START",
+              "present": 3,
+              "types": [
+                "string"
+              ]
+            },
+            {
+              "name": "STATUS",
+              "present": 0,
+              "types": [
+                "string"
+              ]
+            },
+            {
+              "name": "TIME",
+              "present": 3,
+              "types": [
+                "string"
+              ]
+            },
+            {
+              "name": "TOWN",
+              "present": 0,
+              "types": [
+                "string"
+              ]
+            },
+            {
+              "name": "YEAR",
+              "present": 3,
+              "types": [
+                "string"
+              ]
+            }
+          ],
+          "fieldsNotReadByAjesLot": [
+            "AVG_PRICE",
+            "AVG_STRING",
+            "LHDRIVE",
+            "MARKA_ID",
+            "MODEL_ID",
+            "SANCTION"
+          ],
+          "info": [
+            {
+              "present": false,
+              "type": "undefined",
+              "bytes": 0,
+              "hasPowerTerm": false,
+              "hasPowerUnit": false,
+              "hasDisplacementTerm": false,
+              "hasTableMarkup": false
+            },
+            {
+              "present": false,
+              "type": "undefined",
+              "bytes": 0,
+              "hasPowerTerm": false,
+              "hasPowerUnit": false,
+              "hasDisplacementTerm": false,
+              "hasTableMarkup": false
+            },
+            {
+              "present": false,
+              "type": "undefined",
+              "bytes": 0,
+              "hasPowerTerm": false,
+              "hasPowerUnit": false,
+              "hasDisplacementTerm": false,
+              "hasTableMarkup": false
+            }
+          ]
+        }
+      },
+      {
+        "event": "JAPAN_NORMALIZED_FIELD_AUDIT",
+        "stage": "live_normalized",
+        "table": "main",
+        "kind": "list",
+        "observedAt": "2026-11-25T10:19:16.807Z",
+        "received": 3,
+        "rejected": 0,
+        "stale": false,
+        "items": 3,
+        "sourcePowerPresent": 3,
+        "sourcePowerShapes": [
+          {
+            "kind": "scalar",
+            "rawNumeric": "98"
+          },
+          {
+            "kind": "scalar",
+            "rawNumeric": "170"
+          },
+          {
+            "kind": "scalar",
+            "rawNumeric": "91"
+          }
+        ],
+        "powerHpPresent": 0,
+        "infoPresent": 0,
+        "sourceDetailsPresent": 0,
+        "engineCcPresent": 3,
+        "sourceFuelPresent": 3,
+        "equipmentPresent": 3,
+        "productionMonthPresent": 0
+      },
+      {
+        "event": "JAPAN_FIELD_AUDIT_COMPLETE",
+        "stage": "complete",
+        "supplierRequests": 2,
+        "objectRequests": 13,
+        "quotaWrites": 2,
+        "savedObjectsRead": 2,
+        "sourceCacheWrites": 0,
+        "objectListings": 0,
+        "queriesCompleted": 2,
+        "release": "d536c1547c4d82a339ed68ced7d8503f09b6810b"
+      }
+    ]
+  },
+  "verification": {
+    "run": "https://github.com/jeep-jim/AvtoCena/actions/runs/45594459998",
+    "conclusion": "success",
+    "observations": [
+      {
+        "event": "AUDIT_HOST_BEFORE",
+        "observedAt": "2026-11-25T10:24:01.867817+00:00",
+        "releaseSha": "d536c1547c4d82a339ed68ced7d8503f09b6810b",
+        "publicAndLoopbackVerified": true,
+        "actualEgressVerified": true
+      },
+      {
+        "event": "CHINA_PHOTO_LOG_COUNTS",
+        "boundedLogAvailable": false
+      },
+      {
+        "event": "AUDIT_HOST_AFTER",
+        "observedAt": "2026-11-25T10:24:02.000359+00:00",
+        "releaseSha": "d536c1547c4d82a339ed68ced7d8503f09b6810b",
+        "runtimeConfigIngressUnchanged": true,
+        "changedComponents": [],
+        "mountOrderVaried": true,
+        "observations": 4,
+        "verifyOnly": true,
+        "supplierRequestsInVerification": 0,
+        "childExitCode": 0,
+        "childStderrSuppressed": false
+      }
+    ],
+    "interpretation": "The follow-up confirms the current runtime identity and demonstrates varying raw Docker Mounts array order with unchanged complete mount records. It makes no additional supplier requests and does not prove the exact cause of the prior envelope mismatch."
+  },
+  "nextWork": [
+    "Make the exhausted China image placeholder recoverable with bounded retries through the same signed proxy and respect source limits; add bounded diagnostic reasons.",
+    "Map confirmed AJ fields into the Japan offer model and public specifications; settle PW units, per-variant meaning and multi-value semantics before treating it as verified horsepower."
+  ]
+}
