@@ -9,7 +9,6 @@ on:
       - 'apps/web/lib/catalog/china-public-aggregate.ts'
       - 'scripts/catalog-next/market-data-pointer.mjs'
       - 'scripts/catalog-next/market-generation-reader.mjs'
-      - 'scripts/catalog-next/market-pointer-reg-storage.mjs'
       - 'tests/catalog-next-market-*.test.mjs'
       - 'tests/catalog-next-china-live-pointer.test.mjs'
   workflow_dispatch:
@@ -31,7 +30,7 @@ jobs:
       - run: npm ci --no-audit --no-fund
       - name: Validate data-only reader, pointer and boundary tests
         run: |
-          node --test tests/catalog-next-market-data-pointer.test.mjs tests/catalog-next-market-pointer-reg-storage.test.mjs tests/catalog-next-market-generation-reader.test.mjs tests/catalog-next-china-live-pointer.test.mjs
+          node --test tests/catalog-next-market-data-pointer.test.mjs tests/catalog-next-market-generation-reader.test.mjs tests/catalog-next-china-live-pointer.test.mjs
           node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/catalog-next-local-reader.test.ts
       - name: Typecheck integrated serving runtime
         run: npm run typecheck
