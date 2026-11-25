@@ -51,7 +51,7 @@ jobs:
           const serving='d536c1547c4d82a339ed68ced7d8503f09b6810b';
           const diff=(a,b)=>git('diff','--binary','--full-index','--no-ext-diff','--no-renames',a,b);
           const digest=bytes=>createHash('sha256').update(bytes).digest('hex');
-          const files=(a,b)=>git('diff','--name-only','-z','--no-renames',a,b).toString().split('\\0').filter(Boolean).sort();
+          const files=(a,b)=>git('diff','--name-only','-z','--no-renames',a,b).toString().split(String.fromCharCode(0)).filter(Boolean).sort();
           const changed=files('38895e53f7f770ee68edb0b8ad53056468b928a5',serving);
           const expected=[
             'apps/web/app/(public)/cars/offer/[id]/page.tsx',
