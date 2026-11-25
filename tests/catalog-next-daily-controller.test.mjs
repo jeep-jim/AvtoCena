@@ -234,11 +234,21 @@ test('heartbeat renews the exact lease observation during preparation and later 
 });
 
 test('daily cadence follows Krasnoyarsk day boundaries and a live foreign lease skips without mutation', async () => {
-  const ref = candidate(1), proof = acceptance(ref, firstNonce, '2026-11-23T17:05:00Z');
+  const ref = {...candidate(1), sourceObservedAt: '2026-11-23T17:05:00Z'}, proof = acceptance(ref, firstNonce, '2026-11-23T17:05:00Z');
   const accepted = {...ref, proof: {kind: 'china-accepted-proof-v1', hostReceiptBase64: proof.hostReceiptBase64,
     hostReceiptSha256: proof.hostReceiptSha256}};
   assert.equal(chinaDailyIsDue(accepted, '2026-11-24T16:59:59Z'), false);
   assert.equal(chinaDailyIsDue(accepted, '2026-11-24T17:00:00Z'), true);
+  // On first publication the source was still from 24 November, even though
+  // acceptance happened at lunchtime on 25 November. The 21:00 local schedule
+  // must refresh that older feed rather than misclassify it as already fresh.
+  const olderSource={...candidate(1),sourceObservedAt:'2026-11-24T10:22:41.417Z'};
+  const initialProof=acceptance(olderSource,firstNonce,'2026-11-25T05:38:49.555Z');
+  const justAccepted={...olderSource,proof:{kind:'china-accepted-proof-v1',
+    hostReceiptBase64:initialProof.hostReceiptBase64,hostReceiptSha256:initialProof.hostReceiptSha256}};
+  assert.equal(chinaDailyIsDue(justAccepted,'2026-11-25T14:00:00Z'),true);
+  assert.throws(()=>chinaDailyIsDue(justAccepted,'2026-11-24T16:59:59Z'),/clock_before_acceptance/);
+
   const f = await fixture(), state = createChinaState({storage: f.storage, now: () => nextAt});
   await state.acquireLease({previous: await state.read('lease'), owner: owner(9), nonce: 'e'.repeat(32), expiresAt: '2026-11-24T13:00:00Z'});
   const count = f.storage.writes.length, result = await runChinaDailyCycle(f.args);
