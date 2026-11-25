@@ -26,7 +26,7 @@ const gitAt = root => args => {
 export async function verifyChinaDailyInvocation({root = ROOT, environment = process.env, git = gitAt(root), event}) {
   need(environment.GITHUB_REPOSITORY === 'jeep-jim/AvtoCena' && environment.GITHUB_REPOSITORY_ID === '1289722938'
     && environment.GITHUB_REF === 'refs/heads/main'
-    && environment.GITHUB_WORKFLOW_REF === 'jeep-jim/AvtoCena/.github/workflows/catalog-refresh-china.yml@refs/heads/main', 'workflow');
+    && environment.GITHUB_WORKFLOW_REF === 'jeep-jim/AvtoCena/.github/workflows/catalog-next-china-daily.yml@refs/heads/main', 'workflow');
   need(SHA.test(environment.GITHUB_SHA ?? '') && /^[1-9]\d{0,19}$/.test(environment.GITHUB_RUN_ID ?? '')
     && /^[1-9]\d{0,5}$/.test(environment.GITHUB_RUN_ATTEMPT ?? '')
     && ['workflow_dispatch', 'schedule', 'push'].includes(environment.GITHUB_EVENT_NAME), 'event');
