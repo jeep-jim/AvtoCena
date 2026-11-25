@@ -1,6 +1,6 @@
 # Текущий шаг
 
-Обновлено: 26.11.2026, 00:54, Asia/Krasnoyarsk. Текущий статус заменяется, история сюда не дописывается.
+Обновлено: 26.11.2026, 01:01, Asia/Krasnoyarsk. Текущий статус заменяется, история сюда не дописывается.
 
 ## Поручение
 
@@ -8,7 +8,7 @@
 
 ## Что подтверждено на сайте
 
-- Health 26.11 в 00:27: HTTP 200, runtime `d536c1547c4d82a339ed68ced7d8503f09b6810b`, calculation identity `4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90`.
+- Health 26.11 в 00:49: HTTP 200, runtime `d536c1547c4d82a339ed68ced7d8503f09b6810b`, calculation identity `4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90`.
 - Китай: `gen_china_45369451603_1`, принятые данные от 24.11. После последнего отката health вернул HTTP 200 и прежний runtime `d536…`; кандидат `4302f59a0312f35a64fc3cb9c5b25f9463fa9294` не принят.
 - Первое PW кандидата предварительное; неизвестная мощность должна оставаться в выдаче с пометкой, ручные подтверждённые сведения имеют приоритет. Последняя production-приёмка не дошла до проверки этой семантики и японского UI.
 - China daily настроен на 21:00 ежедневно, workflow `429950403`. Первый [ручной проверочный цикл №45655051136](https://github.com/jeep-jim/AvtoCena/actions/runs/45655051136) начат 25.11 в 23:32 на принятом d536. Контракты, checkout и подготовка браузера прошли; обновление поколения выполняется, итог ещё неизвестен. Ручной запуск не доказывает доставку cron; планового запуска этого workflow в истории пока нет.
@@ -16,7 +16,7 @@
 
 ## Последняя приёмка и текущий блокер
 
-- Photo-only [CI №45666592894](https://github.com/jeep-jim/AvtoCena/actions/runs/45666592894): 598 contracts, exact `36d707…` и recovery-clock browser прошли; два старых mock-export в source tests остановили дальнейшие этапы. Подключён уже существующий test-only compatibility patch без изменения его SHA или runtime: локально все 301 assertion из полного объединения 40 test files прошли, исходные байты восстановлены. Повторный CI обязателен до выпуска; обе прежние упавшие проверки сохранены.
+- Photo-only [CI №45669876181](https://github.com/jeep-jim/AvtoCena/actions/runs/45669876181) полностью успешен для контроллера `d151c62e`: 611 controller/contract тестов, exact `36d707…`, 301 тест приложения из полного объединения 40 файлов, web/engine typecheck, recovery-clock и все 6 photo browser scenarios. Существующий test-only patch не изменён; `runtimeRestored=true`. Этот CI не является публикацией на сервере.
 - [CI №45646558514](https://github.com/jeep-jim/AvtoCena/actions/runs/45646558514) успешен для контроллера `88d2f7ac`: 570 controller/contract проверок, 204 app-теста, typecheck и оба браузерных набора.
 - [Выпуск №45647364912](https://github.com/jeep-jim/AvtoCena/actions/runs/45647364912) завершился в 23:02:30: `status=rolled_back`, `published=false`, `recovered=true`, `leaseReleased=true`. Точный исходный образ восстановлен без registry requests, receipt сохранён; серверная и базовая браузерная приёмка прошли.
 - Совместный browser report: китайское фото восстановилось по исходному URL на desktop/mobile, контрольное фото не изменилось; 60 результатов, 24 карточки. Два обычных японских чтения дали одинаковые три строки и свежую общую observation: `stale=false`, `partial=false`; общий счётчик ещё неполный.
