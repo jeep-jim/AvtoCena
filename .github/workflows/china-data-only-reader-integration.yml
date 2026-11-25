@@ -14,6 +14,9 @@ on:
   workflow_dispatch:
 permissions:
   contents: read
+concurrency:
+  group: china-data-only-reader-check-branch
+  cancel-in-progress: true
 jobs:
   verify:
     if: github.repository_id == '1289722938' && github.ref == 'refs/heads/feat/china-data-only-live-reader-20261125'
