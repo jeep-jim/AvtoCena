@@ -165,6 +165,25 @@ export async function runPhotoJapanBrowserAcceptance({oraclePath,releaseSha,nonc
   const retry=card.locator('[data-catalog-photo-retry]');
   await retry.waitFor({state:'visible',timeout:10_000});
   need(targetRequests===3&&await retry.evaluate(button=>button.closest('a')===null),'china_retry_button');
+  // The source server may be cold after an atomic cutover. Do not mistake a
+  // still-loading native image for proof that the neighbouring photos failed.
+  // Scroll one unmodified image into view, then insist on real decoded pixels.
+  const controlCandidate=await page.locator(CARD).locator('img').evaluateAll((images,target)=>
+   images.findIndex(img=>img.src!==target&&img.src.includes('/api/catalog/photo/')),selected.url);
+  need(controlCandidate>=0,'china_healthy_candidate');
+  await page.locator(CARD).locator('img').nth(controlCandidate).scrollIntoViewIfNeeded();
+  try {
+   await page.waitForFunction(target=>[...document.querySelectorAll('article.ac-catalog-card img,article.ac-catalog-list-row img')]
+    .some(img=>img.src!==target&&img.naturalWidth>0&&img.src.includes('/api/catalog/photo/')),
+    selected.url,{timeout:30_000});
+  } catch {
+   // Preserve the strict acceptance failure; add bounded, URL-free evidence.
+   report.checks.chinaPhoto.controlImages=await page.locator(CARD).locator('img').evaluateAll((images,target)=>({
+    eligible:images.filter(img=>img.src!==target&&img.src.includes('/api/catalog/photo/')).length,
+    decoded:images.filter(img=>img.src!==target&&img.naturalWidth>0).length,
+    pending:images.filter(img=>img.src!==target&&!img.complete).length
+   }),selected.url);
+  }
   const control=await page.locator(CARD).locator('img').evaluateAll((images,target)=>{
    const image=images.find(img=>img.src!==target&&img.naturalWidth>0&&img.src.includes('/api/catalog/photo/'));
    return image?.src||null;
