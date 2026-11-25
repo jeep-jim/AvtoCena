@@ -33,7 +33,7 @@ jobs:
           test "$(git -C application rev-parse HEAD)" = d536c1547c4d82a339ed68ced7d8503f09b6810b
           test "$(git -C controller rev-parse HEAD)" = "$GITHUB_SHA"
           audit=controller/.github/operations/japan-field-audit-20261125
-          printf '%s  %s\n' b0da66117800f543915182208013625411199bedbe1d45ccc9a4b06d80490dda "$audit/raw-field-audit.ts" 5cfc17ce7410630d29ffb1a63ec56932bdef6b36e36d890e2c421df99a5025b9 "$audit/run-audit.mjs" | sha256sum --check --status
+          printf '%s  %s\n' b0da66117800f543915182208013625411199bedbe1d45ccc9a4b06d80490dda "$audit/raw-field-audit.ts" 61dc30ea49d3342d952247afc833a8b85573eb0cef45008eac011b695409bf71 "$audit/run-audit.mjs" | sha256sum --check --status
           node "$audit/raw-field-audit-selftest.mjs"
           node "$audit/raw-field-audit-guardtest.mjs"
           node --check "$audit/run-audit.mjs"
@@ -51,9 +51,10 @@ jobs:
           await build({stdin:{contents:fs.readFileSync('../controller/.github/operations/japan-field-audit-20261125/raw-field-audit.ts','utf8'),resolveDir:process.cwd(),sourcefile:'japan-raw-field-audit.ts',loader:'ts'},outfile:path.join(process.env.RUNNER_TEMP,'japan-raw-field-audit.cjs'),bundle:true,platform:'node',format:'cjs',external:['geoip-country'],plugins:[{name:'server-only',setup(b){b.onResolve({filter:/^server-only$/},()=>({path:'empty',namespace:'empty'}));b.onLoad({filter:/.*/,namespace:'empty'},()=>({contents:''}));}}]});
           BUILD
           node --check "$RUNNER_TEMP/japan-raw-field-audit.cjs"
-      - name: Inspect the current host and make at most two accounted AJ reads
+      - name: Verify the host identity without repeating the completed supplier reads
         env:
           SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+          AUDIT_VERIFY_ONLY: '1'
         run: node controller/.github/operations/japan-field-audit-20261125/run-audit.mjs
       - uses: actions/upload-artifact@v4
         if: always()

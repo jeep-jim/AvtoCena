@@ -47,8 +47,15 @@ def selected():
  if row.get('Config',{}).get('Labels',{}).get('org.opencontainers.image.revision')!=SOURCE or not row.get('State',{}).get('Running'):raise RuntimeError('active_revision_changed')
  identity={k:row.get(k) for k in ['Id','Image','Config','HostConfig','Mounts','RestartCount']}
  identity['State']={k:row.get('State',{}).get(k) for k in ['Pid','StartedAt','Running']}
+ raw_fingerprint=hashlib.sha256(json.dumps(identity,sort_keys=True,separators=(',',':')).encode()).hexdigest()
+ mounts=identity['Mounts']
+ if not isinstance(mounts,list) or any(not isinstance(m,dict) or not isinstance(m.get('Destination'),str) for m in mounts):raise RuntimeError('mounts_shape_invalid')
+ if len({m['Destination'] for m in mounts})!=len(mounts):raise RuntimeError('mounts_shape_invalid')
+ # Docker emits Mounts from a map. Preserve all fields and compare by destination.
+ identity['Mounts']=sorted(mounts,key=lambda m:m['Destination'])
  fingerprint=hashlib.sha256(json.dumps(identity,sort_keys=True,separators=(',',':')).encode()).hexdigest()
- return body,port,row['Id'],fingerprint
+ components={k:hashlib.sha256(json.dumps(v,sort_keys=True,separators=(',',':')).encode()).hexdigest() for k,v in identity.items()}
+ return body,port,row['Id'],fingerprint,components,raw_fingerprint
 def photo_logs():
  signatures={'yS-BjLIhOUbNrvino7j8M_Jph8SHxrdWgoqpIKKGFgY':'224491f1e34e02611835a7be','VIrgfhhS6s-Cwd9xCjnTm7pOUYtp1FV48d4SELXsWrw':'6fed5f32b3ca74517ba33d32','X-JoowLSkwKUZ1DrWs4quUBHN8VTxawv3KVrXTnK1FU':'229cd85c10427cf99b58627e','W0EJi_1uzw6YqxVN8TOTiZxoJbiZQyMmlTac30AYh-s':'31f74138f65e9c6261829991'}
  paths=[Path('/var/log/nginx/access.log')]
@@ -82,21 +89,29 @@ try:
  if ip!='151.248.113.177':raise RuntimeError('actual_egress_changed')
  print('AUDIT_HOST_BEFORE',json.dumps({'observedAt':datetime.datetime.now(datetime.timezone.utc).isoformat(),'releaseSha':SOURCE,'publicAndLoopbackVerified':True,'actualEgressVerified':True}),flush=True)
  print('CHINA_PHOTO_LOG_COUNTS',json.dumps(photo_logs(),separators=(',',':')),flush=True)
- child=subprocess.run(['timeout','150s','docker','exec','-i','-e','AJES_DIAG_IP='+ip,before[2],'node'],input=bundle,capture_output=True,timeout=165,check=False)
- lines=child.stdout.decode('utf-8','replace').splitlines()
+ verify_only=payload.get('verifyOnly') is True
+ child_code=0;child_stderr=False;lines=[];observations=[before]
+ if verify_only:
+  observations.extend(selected() for _ in range(2))
+ else:
+  child=subprocess.run(['timeout','150s','docker','exec','-i','-e','AJES_DIAG_IP='+ip,before[2],'node'],input=bundle,capture_output=True,timeout=165,check=False)
+  child_code=child.returncode;child_stderr=bool(child.stderr)
+  if len(child.stdout)>80000:raise RuntimeError('audit_output_size')
+  lines=child.stdout.decode('utf-8','replace').splitlines()
  allowed={'JAPAN_SAVED_FIELD_AUDIT','JAPAN_RAW_FIELD_AUDIT','JAPAN_NORMALIZED_FIELD_AUDIT','JAPAN_FIELD_AUDIT_COMPLETE','JAPAN_FIELD_AUDIT_FAILED','JAPAN_FIELD_AUDIT_SELFTEST'}
- if len(child.stdout)>80000:raise RuntimeError('audit_output_size')
  for line in lines:
   label,sep,data=line.partition(' ')
   if label not in allowed or not sep:raise RuntimeError('audit_output_shape')
   value=json.loads(data)
   print(label,json.dumps(value,separators=(',',':')),flush=True)
  after=selected();health('https://avtocena.com/api/health');health('http://127.0.0.1:'+after[1]+'/api/health')
- unchanged=before==after
- print('AUDIT_HOST_AFTER',json.dumps({'observedAt':datetime.datetime.now(datetime.timezone.utc).isoformat(),'releaseSha':SOURCE,'runtimeConfigIngressUnchanged':unchanged,'childExitCode':child.returncode,'childStderrSuppressed':bool(child.stderr)}),flush=True)
- if not unchanged or child.returncode:sys.exit(1)
+ observations.append(after)
+ unchanged=all(before[:5]==value[:5] for value in observations)
+ changed_components=sorted({key for value in observations for key in before[4] if value[4].get(key)!=before[4][key]})
+ print('AUDIT_HOST_AFTER',json.dumps({'observedAt':datetime.datetime.now(datetime.timezone.utc).isoformat(),'releaseSha':SOURCE,'runtimeConfigIngressUnchanged':unchanged,'changedComponents':changed_components,'mountOrderVaried':len({value[5] for value in observations})>1 and unchanged,'observations':len(observations),'verifyOnly':verify_only,'supplierRequestsInVerification':0 if verify_only else None,'childExitCode':child_code,'childStderrSuppressed':child_stderr}),flush=True)
+ if not unchanged or child_code:sys.exit(1)
 except Exception as error:
- allowed_reasons={'read_command_failed','health_http_failed','health_identity_changed','config_shape_invalid','upstream_ambiguous','no_containers','active_container_ambiguous','active_revision_changed','bundle_integrity_failed','actual_egress_changed','audit_output_size','audit_output_shape'}
+ allowed_reasons={'read_command_failed','health_http_failed','health_identity_changed','config_shape_invalid','upstream_ambiguous','no_containers','active_container_ambiguous','active_revision_changed','bundle_integrity_failed','actual_egress_changed','audit_output_size','audit_output_shape','mounts_shape_invalid'}
  reason=str(error) if isinstance(error,RuntimeError) and str(error) in allowed_reasons else 'bounded_audit_or_identity_check_failed'
  print('AUDIT_HOST_FAILED',json.dumps({'reason':reason}),flush=True)
  sys.exit(1)
@@ -114,7 +129,7 @@ try{
  child.stdout.on('data',data=>{stdout+=data.toString();if(stdout.length>100000)child.kill('SIGTERM');});
  child.stderr.on('data',data=>{stderr+=data.toString();if(stderr.length>4000)child.kill('SIGTERM');});
  const timer=setTimeout(()=>child.kill('SIGTERM'),240000);
- child.stdin.end(JSON.stringify({bundle:bundle.toString('base64'),sha256:sha256(bundle)}));
+ child.stdin.end(JSON.stringify({bundle:bundle.toString('base64'),sha256:sha256(bundle),verifyOnly:process.env.AUDIT_VERIFY_ONLY==='1'}));
  const code=await new Promise((resolve,reject)=>{child.on('error',reject);child.on('close',resolve);});
  clearTimeout(timer);
  if(stdout.length>100000)throw Error('remote_output_size');
