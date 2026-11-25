@@ -9,6 +9,8 @@ on:
       - 'apps/web/components/catalog/CatalogContent.tsx'
       - 'apps/web/app/(public)/page.tsx'
       - 'apps/web/lib/catalog/ajes-public.ts'
+      - 'apps/web/lib/catalog/ajes-catalog.ts'
+      - 'apps/web/app/(public)/api/catalog/search/route.ts'
       - 'apps/web/lib/catalog/ajes-result-filter.ts'
       - 'apps/web/lib/catalog/japan-source-power.ts'
       - 'apps/web/lib/catalog/japan-reviewed-power.ts'
