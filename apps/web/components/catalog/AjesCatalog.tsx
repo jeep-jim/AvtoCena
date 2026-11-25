@@ -18,6 +18,7 @@ import {readAjesCatalogPage,readAjesCountSummary,readAjesMakes,AjesFilterUnavail
 import {AjesInputError} from '@/lib/catalog/ajes-query';
 import {AjesUnavailable} from '@/lib/catalog/ajes-client';
 import {ajesCountText,exactAjesCount,ajesPaginationCountText} from '@/lib/catalog/ajes-count-display';
+import {JAPAN_SOURCE_POWER_NOTICE} from '@/lib/catalog/japan-source-power';
 type Params=Record<string,string|string[]|undefined>;
 export async function AjesCatalog({params,embedded=false,dealer}:{params:Params;embedded?:boolean;dealer?:DealerBrowsingContext|null}){
  const initial=Object.fromEntries(Object.entries(params).map(([k,v])=>[k,Array.isArray(v)?v[0]||'':v||'']));assertAjesJapanMarket(initial.market);const market='japan';const label='Япония';initial.market=market;if(!initial.make&&initial.brand)initial.make=initial.brand;
@@ -27,8 +28,14 @@ export async function AjesCatalog({params,embedded=false,dealer}:{params:Params;
  try{result=await readAjesCatalogPage(initial,undefined,{includeCount:false});}catch(e){error=e instanceof AjesFilterUnavailable?'Это условие поиска пока не поддерживается для выбранного рынка. Снимите его; уточнить параметры и рассчитать доставку можно в карточке.':e instanceof AjesInputError?'Проверьте условия и диапазоны поиска.':e instanceof AjesUnavailable&&e.reason==='visitor_restricted'?'Источник отклонил подключение. Сохранённых результатов этого поиска пока нет. Попробуйте позже.':'Не удалось обновить автомобили. Попробуйте позже.';}
  // Complete brand/model directories are optional navigation metadata. The
  // controls already fetch them on opening; never hold visible cards behind them.
- const sourceTotal=result?.countSummary;
- const displayTotal=exactAjesCount(sourceTotal);
+ const powerSelected=Boolean(initial.powerFrom||initial.powerTo);
+ const sourceTotal=powerSelected?null:result?.countSummary;
+ const displayTotal=powerSelected
+  ? result&&!result.countIncomplete&&!result.powerIncomplete&&result.total!==null?result.total:undefined
+  :exactAjesCount(sourceTotal);
+ const countText=powerSelected
+  ? displayTotal!==undefined?String(displayTotal):'Количество уточняется'
+  :ajesCountText(sourceTotal);
  const models=[...new Map<string,{make:string;model:string;total:number}>((result?.items||[]).map((item:any)=>[`${item.make}|${item.model}`,{make:String(item.make),model:String(item.model),total:0}])).values()];
  const makes=[...new Set([...models.map(m=>m.make),...(initial.make||'').split(',').filter(Boolean)])];
  const facets={makes,models,markets:[market],bodyTypes:[],fuels:['petrol','diesel','hybrid','electric','lpg'],transmissions:['automatic','manual','cvt','dct'],drives:['fwd','rwd','awd']};
@@ -52,12 +59,14 @@ export async function AjesCatalog({params,embedded=false,dealer}:{params:Params;
   <AjesBrandRail initial={initial} fallbackBrands={makes} resultCount={displayTotal??undefined}/>
  </Suspense>
  <div className="mb-4 mt-8 flex flex-wrap items-center justify-between gap-3 md:mt-9">
- <h2 className="flex flex-wrap items-center gap-2 text-[26px] font-black tracking-[-0.04em] md:text-4xl"><CatalogMarketFlag market={market} className="h-5 w-7 md:h-6 md:w-9"/><span>{label}</span><Suspense fallback={<MarketResultCount>{ajesCountText(sourceTotal)}</MarketResultCount>}>{sourceTotal?<><CatalogResultCountUpdate queryKey={JSON.stringify(initial)} text={ajesCountText(sourceTotal)} total={exactAjesCount(sourceTotal)}/><MarketResultCount total={displayTotal??undefined}>{ajesCountText(sourceTotal)}</MarketResultCount></>:<AjesIndependentCount initial={initial}/>}</Suspense></h2>
+ <h2 className="flex flex-wrap items-center gap-2 text-[26px] font-black tracking-[-0.04em] md:text-4xl"><CatalogMarketFlag market={market} className="h-5 w-7 md:h-6 md:w-9"/><span>{label}</span><Suspense fallback={<MarketResultCount>{ajesCountText(sourceTotal)}</MarketResultCount>}>{powerSelected?<><CatalogResultCountUpdate queryKey={JSON.stringify(initial)} text={countText} total={displayTotal}/><MarketResultCount total={displayTotal}>{countText}</MarketResultCount></>:sourceTotal?<><CatalogResultCountUpdate queryKey={JSON.stringify(initial)} text={ajesCountText(sourceTotal)} total={exactAjesCount(sourceTotal)}/><MarketResultCount total={displayTotal??undefined}>{ajesCountText(sourceTotal)}</MarketResultCount></>:<AjesIndependentCount initial={initial}/>}</Suspense></h2>
  {market==='japan'&&<JapanSectionTabs active="auction" params={initial}/>}
  </div>
  {result&&<div>
+ {powerSelected&&<p role="status" className="mb-3 rounded-xl border border-[var(--ac-border)] px-4 py-3 text-sm text-[var(--ac-muted)]">{JAPAN_SOURCE_POWER_NOTICE} В первой загруженной подборке без мощности: {result.powerUnknownCount}; с предварительной мощностью: {result.powerPreliminaryCount}.</p>}
+ {!result.items.length&&(result.partial||result.stale||result.scanLimited||result.powerIncomplete||result.hasMore)&&<p role="status" className="mb-3 text-sm text-[var(--ac-muted)]">В загруженной части каталога совпадений пока нет. Полный результат уточняется; продолжите поиск или выберите модель.</p>}
  {String(initial.sort||'').split(',').some(term=>term.startsWith('totalRub'))&&<p className="mb-3 text-sm text-[var(--ac-muted)]">По рассчитанной цене в загруженной подборке. На следующих страницах могут быть более дешёвые автомобили.</p>}
- {!result.items.length&&!result.hasMore&&!result.partial&&!result.stale&&<p role="status" className="rounded-2xl bg-[var(--ac-surface)] p-6 text-sm text-[var(--ac-muted)]">По выбранным параметрам автомобили не найдены. Попробуйте изменить условия поиска.</p>}
+ {!result.items.length&&!result.hasMore&&!result.partial&&!result.stale&&!result.powerIncomplete&&<p role="status" className="rounded-2xl bg-[var(--ac-surface)] p-6 text-sm text-[var(--ac-muted)]">По выбранным параметрам автомобили не найдены. Попробуйте изменить условия поиска.</p>}
  <CatalogLoadMore resultQueryKey={JSON.stringify(initial)} key={JSON.stringify(initial)} query={{...initial,market} as any} initialPage={result.page} initialTotal={result.total} initialCount={result.items.length} initialCards={result.items.map((offer:any)=><CatalogCard key={offer.id} offer={offer} compact dense/>)} initialIncomplete={Boolean(result.partial||result.stale)} initialHasMore={result.hasMore} initialNextCursor={result.nextCursor} resultCountLabel={ajesPaginationCountText(sourceTotal)}/>
  </div>}
 </CatalogSidebar>

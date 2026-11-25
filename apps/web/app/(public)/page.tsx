@@ -3,7 +3,7 @@ import {BuyerGallery} from '@/components/home/BuyerGallery';
 import {SpecialRail} from '@/components/dealers/SpecialRail';
 import {withAjesCount} from '@/lib/catalog/ajes-catalog';
 import {Suspense} from 'react';
-import {AjesRail,readAjesRailData} from '@/components/catalog/AjesRail';
+import {AjesRail,AjesRailPending,readAjesRailData} from '@/components/catalog/AjesRail';
 import {WEBSITE_SCHEMA} from '@/lib/catalog/search-metadata';
 import {DealerCitySync} from "@/components/dealers/DealerCitySync";
 import {readShowcase} from "@/lib/dealers/showcase-store";
@@ -114,7 +114,7 @@ export default async function HomePage({ searchParams }: { searchParams?: Promis
     <DealerCitySync/>
     <div className={styles.scope}>
       <HomePageClient
-        japanAuctions={<Suspense fallback={null}><HomeJapanRail timing={timing}/></Suspense>}
+        japanAuctions={<Suspense fallback={<AjesRailPending/>}><HomeJapanRail timing={timing}/></Suspense>}
         dealerGallerySlot={<Suspense fallback={<div className="min-h-[160px]" aria-busy="true"/>}><DealerGallery dealer={dealer}/></Suspense>}
         specialRailSlot={<Suspense fallback={null}><DealerSpecials dealer={dealer} city={fromQuery || fromCookie} timing={timing}/></Suspense>}
         initialGreen={{items:greenItems,total:green?.items.length || 0}}

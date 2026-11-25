@@ -11,6 +11,17 @@ import {assertCollectionEnabled} from '@/lib/catalog/collection-controls';
 import {publicOffer} from '@/lib/catalog/storage';
 import {CatalogCard} from './CatalogCard';
 import {CatalogMarketFlag} from './CatalogMarketFlag';
+import {JAPAN_SOURCE_POWER_NOTICE,japanPowerUnknown} from '@/lib/catalog/japan-source-power';
+
+export function AjesRailPending(){
+ return <section aria-label="Япония" className="min-w-0" data-japan-rail-pending="true">
+  <div className="mb-3 flex items-end justify-between gap-3">
+   <h2 className="flex flex-wrap items-center gap-2 text-[26px] font-black tracking-[-0.04em] md:text-4xl"><CatalogMarketFlag market="japan" className="h-5 w-7 md:h-6 md:w-9"/><span>Япония</span><MarketResultCount>Количество уточняется</MarketResultCount></h2>
+   <Link href="/cars/japan" className="ac-market-all-link shrink-0 text-sm font-black">Все →</Link>
+  </div>
+  <CatalogSectionLoading active/>
+ </section>;
+}
 
 function railQuery(market:'japan'|'china'|'korea',params:Record<string,string|string[]|undefined>){assertAjesJapanMarket(market);return {...params,market,page:'1',pageSize:'12'};}
 export function readAjesRailCount(market:'japan'|'china'|'korea',params:Record<string,string|string[]|undefined>){return readAjesCountSummary(JSON.stringify(railQuery(market,params))).catch(()=>null);}
@@ -37,17 +48,19 @@ export async function AjesRail({market='japan',params={},prepared}:{market?:'jap
  const linkParams=new URLSearchParams(Object.entries(params).flatMap(([key,value])=>value?[[key,Array.isArray(value)?value[0]:value]]:[]));linkParams.set('market',market);linkParams.delete('page');linkParams.delete('source');
  const href='/cars?'+linkParams.toString();
  const {disabled,items,count,unavailable,unsupported,partial,stale,filteredByPage,hasMore}=await (prepared||readAjesRailData(market,params));
- if(disabled||(!unavailable&&!items.length&&!partial&&!stale&&!hasMore))return null;
- const total=exactAjesCount(count);
+ if(disabled)return null;
+ const powerSelected=Boolean(params.powerFrom||params.powerTo);
+ const total=powerSelected?undefined:exactAjesCount(count);
  return <section aria-label={label} className="min-w-0">
   <div className="mb-3 flex items-end justify-between gap-3">
-   <h2 className="flex flex-wrap items-center gap-2 text-[26px] font-black tracking-[-0.04em] md:text-4xl"><CatalogMarketFlag market={market} className="h-5 w-7 md:h-6 md:w-9"/><span>{label}</span>{count?<MarketResultCount total={total??undefined}>{ajesCountText(count)}</MarketResultCount>:<Suspense fallback={<MarketResultCount>{ajesCountText(null)}</MarketResultCount>}><RailCount market={market} params={params}/></Suspense>}</h2>
+   <h2 className="flex flex-wrap items-center gap-2 text-[26px] font-black tracking-[-0.04em] md:text-4xl"><CatalogMarketFlag market={market} className="h-5 w-7 md:h-6 md:w-9"/><span>{label}</span>{powerSelected?<MarketResultCount>{`Показано ${items.length} · всего уточняется`}</MarketResultCount>:count?<MarketResultCount total={total??undefined}>{ajesCountText(count)}</MarketResultCount>:<Suspense fallback={<MarketResultCount>{ajesCountText(null)}</MarketResultCount>}><RailCount market={market} params={params}/></Suspense>}</h2>
    <Link href={href} className="ac-market-all-link shrink-0 text-sm font-black">Все →</Link>
   </div>
 
   <CatalogSectionLoading/>
+  {powerSelected&&<p role="status" className="mb-3 text-sm text-[var(--ac-muted)]">{JAPAN_SOURCE_POWER_NOTICE} В этой подборке без мощности: {items.filter(japanPowerUnknown).length}.</p>}
   {String(params.sort||'').split(',').some(term=>term.startsWith('totalRub'))&&<p className="mb-3 text-sm text-[var(--ac-muted)]">По рассчитанной цене в загруженной подборке.</p>}
-  {unsupported?<p role="status" className="text-sm text-[var(--ac-muted)]">Отбор по мощности доступен в <Link href={href+'&stock=green'} className="underline">Зелёном углу</Link>.</p>:unavailable?<p role="status" className="rounded-xl border border-[var(--ac-border)] p-4 text-sm">Не удалось загрузить автомобили. <Link href={href} className="underline">Открыть каталог</Link></p>:items.length?<div className={MARKET_RAIL_CLASS}>{items.map(offer=><div key={offer!.id} className="min-w-0"><CatalogCard offer={publicOffer(offer!)} compact dense/></div>)}</div>:<p className="text-sm text-[var(--ac-muted)]">{filteredByPage||partial||hasMore?'В загруженной подборке совпадений нет.':'Подходящих автомобилей пока нет.'} {(filteredByPage||partial||hasMore)&&<Link href={href} className="underline">Продолжить поиск</Link>}</p>}
+  {unsupported?<p role="status" className="text-sm text-[var(--ac-muted)]">Не удалось применить выбранные условия. <Link href={href} className="underline">Открыть японский каталог</Link>.</p>:unavailable?<p role="status" className="rounded-xl border border-[var(--ac-border)] p-4 text-sm">Не удалось загрузить автомобили. <Link href={href} className="underline">Открыть каталог</Link></p>:items.length?<div className={MARKET_RAIL_CLASS}>{items.map(offer=><div key={offer!.id} className="min-w-0"><CatalogCard offer={publicOffer(offer!)} compact dense/></div>)}</div>:<p role="status" className="text-sm text-[var(--ac-muted)]">{filteredByPage||partial||stale||hasMore?'В загруженной части каталога совпадений пока нет.':'В первой подборке автомобилей пока нет.'} <Link href={href} className="underline">Открыть Японию</Link></p>}
  </section>;
 }
 

@@ -1,4 +1,5 @@
 import {isOwnerStepwgnNonHybrid} from './japan-owner-specifications';
+import {isAjesJapanPowerOffer,japanPowerSearchHint} from './japan-source-power';
 import {matchesCatalogColor} from './catalog-color-index';
 import {filterSelections,matchesFilterSelection} from './filter-selections';
 import {AjesInputError} from './ajes-query';
@@ -22,9 +23,15 @@ export function ajesResultFilter(params:Record<string,unknown>){
  const matchesPower=(offer:any)=>{
   if(!powerFilter)return true;
   const exact=isOwnerStepwgnNonHybrid(offer)?150:Number(offer.powerHp);
-  // Supplier PW is not a vehicle specification. Only the locally enriched,
-  // trusted encyclopedia value (or the explicit owner override) can qualify.
-  return Number.isFinite(exact)&&exact>0&&(powerFrom===undefined||exact>=powerFrom)&&(powerTo===undefined||exact<=powerTo);
+  const within=(value:number)=>(powerFrom===undefined||value>=powerFrom)&&(powerTo===undefined||value<=powerTo);
+  // Existing verified/manual/owner values retain priority. The supplier's first
+  // PW entry is a separate preliminary discovery value, never certified power.
+  if(Number.isFinite(exact)&&exact>0)return within(exact);
+  if(params.market!=='japan'||!isAjesJapanPowerOffer(offer))return false;
+  const hint=japanPowerSearchHint(offer);
+  // The owner explicitly keeps missing-power cars visible, including <=160.
+  // Their separate public unknown flag and count prevent a false qualification.
+  return hint?within(hint.horsepower):true;
  };
  return {active:priceFilter||Boolean(body)||powerFilter||Boolean(params.color)||japanDrive||japanFuel,priceFilter,powerFilter,matchesPower,matches(offer:any){
   if(japanFuel&&!matchesFilterSelection(offer.fuel,fuel==='electrified'?'hybrid|electric':fuel.replaceAll('electrified','hybrid|electric')))return false;

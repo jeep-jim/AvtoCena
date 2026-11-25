@@ -15,6 +15,7 @@ import {readCatalogEditorial,applyCatalogEditorial} from "@/lib/catalog/editoria
 import {commercialParameters} from "@/lib/catalog/commercial-parameters";
 import {decodeShareDraft} from '@/lib/catalog/offer-share';
 import {SpecTile,type SpecItem} from "@/components/catalog/OfferSpecTile";
+import {JapanSourcePowerNotice} from "@/components/catalog/JapanSourcePowerNotice";
 import {offerPrecedentParameterDraft as offerParameterDraft} from '@/lib/catalog/power30-precedent';
 import {sharedOfferScenario} from '@/lib/catalog/shared-offer-scenario';
 import {resolveOfferDisplay} from '@/lib/catalog/offer-display-data';
@@ -361,6 +362,7 @@ async function OfferPageContent({ params, searchParams }: { params: Promise<{ id
         <StickyOfferColumn>
           {auctionStatus ? <div className="mb-3 xl:hidden">{auctionStatus}</div> : null}
           <div id="offer-parameters" className="scroll-mt-24"/>
+          <JapanSourcePowerNotice offer={offer}/>
           {retro ? <section className="rounded-[1.35rem] border border-[var(--ac-border)] bg-[var(--ac-surface)] p-5 text-[var(--ac-text)]" data-retro-offer>
             <span className="inline-flex rounded-full border border-[var(--ac-border)] px-3 py-1 text-xs font-bold">Ретро</span>
             <h2 className="mt-4 text-3xl font-black">Цена по запросу</h2>

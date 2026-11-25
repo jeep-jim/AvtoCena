@@ -20,6 +20,8 @@ export class DetailReadCache<T> {
     staleWhileRevalidateMs?: number;
     sizeOf?: (value: T) => number | undefined | Promise<number | undefined>;
     shouldCache?: (value: T) => boolean;
+    /** Shorten reuse to the remaining source freshness; never extend ttlMs. */
+    remainingTtlMs?: (value: T, now: number) => number;
   }) {}
 
   clear() {
@@ -102,12 +104,16 @@ export class DetailReadCache<T> {
         }
         if (epoch !== this.epoch) return value;
         if (bytes <= this.options.maxBytes) {
+          const storedAt = now();
+          const remaining = this.options.remainingTtlMs?.(value, storedAt);
+          const ttlMs = remaining === undefined ? this.options.ttlMs : Math.min(this.options.ttlMs, Math.max(0, remaining));
+          if (!Number.isFinite(ttlMs) || ttlMs <= 0) return value;
           while (this.entries.size >= this.options.maxEntries || this.bytes + bytes > this.options.maxBytes) {
             const oldest = this.entries.keys().next().value;
             if (oldest === undefined) break;
             this.remove(oldest);
           }
-          this.entries.set(key, { value, bytes, expiresAt: now() + this.options.ttlMs });
+          this.entries.set(key, { value, bytes, expiresAt: storedAt + ttlMs });
           this.bytes += bytes;
         }
         return value;
