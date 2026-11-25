@@ -31,7 +31,8 @@ def selected():
  s=CONFIG.lstat()
  if not stat.S_ISREG(s.st_mode) or s.st_uid!=0 or s.st_nlink!=1:raise RuntimeError('config_shape_invalid')
  body=CONFIG.read_bytes()
- ports=re.findall(rb'^\s*server\s+127\.0\.0\.1:(\d+)\s*;',body,re.M)
+ # Match the deployed controller's exact proxy_pass directive, not an upstream block.
+ ports=re.findall(rb'(?m)^\s*proxy_pass http://127\.0\.0\.1:(\d+);\s*$',body)
  if len(ports)!=1:raise RuntimeError('upstream_ambiguous')
  port=ports[0].decode()
  ids=run('docker','ps','-q').decode().split()
@@ -94,8 +95,10 @@ try:
  unchanged=before==after
  print('AUDIT_HOST_AFTER',json.dumps({'observedAt':datetime.datetime.now(datetime.timezone.utc).isoformat(),'releaseSha':SOURCE,'runtimeConfigIngressUnchanged':unchanged,'childExitCode':child.returncode,'childStderrSuppressed':bool(child.stderr)}),flush=True)
  if not unchanged or child.returncode:sys.exit(1)
-except Exception:
- print('AUDIT_HOST_FAILED',json.dumps({'reason':'bounded_audit_or_identity_check_failed'}),flush=True)
+except Exception as error:
+ allowed_reasons={'read_command_failed','health_http_failed','health_identity_changed','config_shape_invalid','upstream_ambiguous','no_containers','active_container_ambiguous','active_revision_changed','bundle_integrity_failed','actual_egress_changed','audit_output_size','audit_output_shape'}
+ reason=str(error) if isinstance(error,RuntimeError) and str(error) in allowed_reasons else 'bounded_audit_or_identity_check_failed'
+ print('AUDIT_HOST_FAILED',json.dumps({'reason':reason}),flush=True)
  sys.exit(1)
 `;
 const quote=value=>"'"+value.replaceAll("'","'\\''")+"'";

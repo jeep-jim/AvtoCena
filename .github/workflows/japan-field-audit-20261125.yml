@@ -33,7 +33,7 @@ jobs:
           test "$(git -C application rev-parse HEAD)" = d536c1547c4d82a339ed68ced7d8503f09b6810b
           test "$(git -C controller rev-parse HEAD)" = "$GITHUB_SHA"
           audit=controller/.github/operations/japan-field-audit-20261125
-          printf '%s  %s\n' b0da66117800f543915182208013625411199bedbe1d45ccc9a4b06d80490dda "$audit/raw-field-audit.ts" 53efc818dafdb320c1f8d7b0f7a3bcc51b3bb34fc045d69cb780fe33f7232f02 "$audit/run-audit.mjs" | sha256sum --check --status
+          printf '%s  %s\n' b0da66117800f543915182208013625411199bedbe1d45ccc9a4b06d80490dda "$audit/raw-field-audit.ts" 5cfc17ce7410630d29ffb1a63ec56932bdef6b36e36d890e2c421df99a5025b9 "$audit/run-audit.mjs" | sha256sum --check --status
           node "$audit/raw-field-audit-selftest.mjs"
           node "$audit/raw-field-audit-guardtest.mjs"
           node --check "$audit/run-audit.mjs"
