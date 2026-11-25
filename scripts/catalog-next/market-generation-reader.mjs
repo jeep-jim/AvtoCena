@@ -73,5 +73,12 @@ export function createMarketGenerationReader({store,openGeneration,clock=Date.no
       await retiredClose(entry);
     }
   }
-  return Object.freeze({withMarket});
+  async function close() {
+    for(const slot of markets.values()){
+      if(slot.refreshing)await slot.refreshing.catch(()=>{});
+      if(slot.active){slot.active.retired=true;await retiredClose(slot.active);}
+    }
+    markets.clear();
+  }
+  return Object.freeze({withMarket,close});
 }
