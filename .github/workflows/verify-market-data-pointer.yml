@@ -5,7 +5,9 @@ on:
     paths:
       - '.github/workflows/verify-market-data-pointer.yml'
       - 'scripts/catalog-next/market-data-pointer.mjs'
+      - 'scripts/catalog-next/market-pointer-reg-storage.mjs'
       - 'tests/catalog-next-market-data-pointer.test.mjs'
+      - 'tests/catalog-next-market-pointer-reg-storage.test.mjs'
   workflow_dispatch:
 permissions:
   contents: read
@@ -21,4 +23,5 @@ jobs:
       - name: Verify data-only pointer without secrets or deployment
         run: |
           node --check scripts/catalog-next/market-data-pointer.mjs
-          node --test tests/catalog-next-market-data-pointer.test.mjs
+          node --check scripts/catalog-next/market-pointer-reg-storage.mjs
+          node --test tests/catalog-next-market-data-pointer.test.mjs tests/catalog-next-market-pointer-reg-storage.test.mjs
