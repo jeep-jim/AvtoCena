@@ -1,0 +1,55 @@
+name: Japan AJ production readiness (read only)
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/japan-aj-production-readiness.yml'
+      - 'scripts/catalog-next/japan-aj-readiness-readonly.mjs'
+      - 'scripts/catalog-next/japan-aj-host-readiness-readonly.py'
+permissions:
+  contents: read
+concurrency:
+  group: japan-aj-production-readonly
+  cancel-in-progress: true
+jobs:
+  inspect:
+    if: github.repository_id == '1289722938' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    environment: regcloud-staging
+    env:
+      JSON_STORAGE_DRIVER: object
+      YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+      YC_OBJECT_STORAGE_REGION: us-east-1
+      YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+      YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+      YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+      YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24.22.3'
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Read AJ source settings and encrypted credential presence only
+        run: node --import tsx scripts/catalog-next/japan-aj-readiness-readonly.mjs
+      - name: Check read-only host probe syntax
+        run: python3 -m py_compile scripts/catalog-next/japan-aj-host-readiness-readonly.py
+      - name: Check existing AJ container and accepted China without vendor requests
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+        run: |
+          set -euo pipefail
+          umask 077
+          key_file="$(mktemp)"
+          trap 'rm -f "$key_file"' EXIT
+          printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
+          unset SSH_PRIVATE_KEY
+          ssh -F /dev/null -T -i "$key_file" -o BatchMode=yes -o ConnectTimeout=12 \
+            -o StrictHostKeyChecking=yes \
+            -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts" \
+            -o ForwardAgent=no -o ClearAllForwardings=yes \
+            root@151.248.113.177 'nice -n 15 python3 -I -B -' < scripts/catalog-next/japan-aj-host-readiness-readonly.py
