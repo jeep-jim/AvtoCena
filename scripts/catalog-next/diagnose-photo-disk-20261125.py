@@ -126,6 +126,8 @@ def main():
                     'accepted': (directory / 'ACCEPTED.json').exists(),
                     'planInvalidJson': plan.get('_invalidJson', False),
                     'rollbackInvalidJson': rollback.get('_invalidJson', False),
+                    'rollbackBytes': (directory / 'ROLLED_BACK.json').stat().st_size if ordinary(directory / 'ROLLED_BACK.json') else None,
+                    'rollbackSha256': hashlib.sha256((directory / 'ROLLED_BACK.json').read_bytes()).hexdigest() if ordinary(directory / 'ROLLED_BACK.json') and (directory / 'ROLLED_BACK.json').stat().st_size <= 256 * 1024 else None,
                     'rollback': bool(rollback),
                     'rollbackBindsPlan': bool(rollback) and rollback.get('nonce') == plan.get('nonce') and
                         rollback.get('release') == plan.get('runtimeSha') and
