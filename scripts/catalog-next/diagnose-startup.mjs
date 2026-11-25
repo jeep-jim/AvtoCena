@@ -9,16 +9,16 @@ const ROOT = fileURLToPath(new URL('../../', import.meta.url));
 const MARKER = '.github/market-runs/catalog-next-china-startup-diagnosis.json';
 const OPERATION = 'inspect-china-startup';
 const REPORT = 'catalog-next-china-startup-diagnosis-report.json';
-const FAILED_RUN = '45468112113';
+const FAILED_RUN = '45517756259';
 export const CHINA_STARTUP_DIAGNOSIS_SELECTOR = Object.freeze({
-  runtimeSha: '1518035b9e6b717cd364ae8d13e63d0127899112',
+  runtimeSha: '38895e53f7f770ee68edb0b8ad53056468b928a5',
   pricingRuntimeSha: '64c6338e0db23c8999096bceefbf113c0136fe15',
   generationId: 'gen_china_45369451603_1',
   generationManifestSha256: 'd5745797cc162b82e0c0f0b1f49fef65f18f0d6649666562337183b18084dd75',
-  controllerSha: '73d18897de74a34b8bde17672b4fb7706471f358',
-  imageId: 'sha256:0a1d136f6b292f9d027354fe8db3c14e12079e689e3f7b5773a7b014860213ea',
-  since: '2026-11-24T19:47:30Z',
-  until: '2026-11-24T19:52:30Z',
+  controllerSha: '01081d8d18df240a210d405811d6e2edc562dd2a',
+  imageId: 'sha256:7c093eedb12cd825ba204d8f3758438a834d5bcece80c7a25f0040e4147159d9',
+  since: '2026-11-25T00:55:30Z',
+  until: '2026-11-25T01:00:30Z',
 });
 const FILES = Object.freeze(['GENERATION.json', 'details.sqlite', 'query.sqlite', 'FILTER_SEMANTICS.json',
   'FX_RECEIPT.json', 'RECONCILIATION.json', 'DISPOSITIONS.ndjson', 'image.tar', 'acceptance.json',
