@@ -1,0 +1,32 @@
+name: China prepared-city regression (no deploy)
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/china-prepared-city-regression.yml'
+      - 'apps/web/lib/catalog/prepared-china-detail-city.ts'
+      - 'apps/web/components/catalog/InlineOfferParameters.tsx'
+      - 'apps/web/app/(public)/cars/offer/[id]/page.tsx'
+      - 'tests/catalog-prepared-china-detail-city.test.mjs'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  check:
+    if: github.repository_id == '1289722938' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24.22.3'
+          cache: npm
+      - name: Install locked project dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Verify pinned city rules (offline)
+        run: node --import tsx --test tests/catalog-prepared-china-detail-city.test.mjs
+      - name: Type-check the page and client component (offline)
+        run: npm run typecheck
