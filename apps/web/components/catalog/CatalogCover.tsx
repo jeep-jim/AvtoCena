@@ -46,6 +46,6 @@ export function CatalogCover({src, alt, eager, onRecoveryChange}: {
     });
     return () => { active = false; stop(); onRecoveryChange?.(null); };
   }, [src, stage, recoverable, onRecoveryChange]);
-  if (stage >= 2) return <div ref={placeholderRef} role="img" aria-label={`${alt}. Фото временно недоступно`} className={`flex h-full w-full items-center justify-center bg-[var(--ac-surface-2)] px-4 text-center text-sm font-medium text-[var(--ac-muted)]${recoverable ? " pb-10" : ""}`}>Фото временно недоступно</div>;
+  if (stage >= 2) return <div ref={placeholderRef} role="img" aria-label={`${alt}. Фото временно недоступно`} className="flex h-full w-full items-center justify-center bg-[var(--ac-surface-2)] px-4 text-center text-sm font-medium text-[var(--ac-muted)]">{recoverable ? null : "Фото временно недоступно"}</div>;
   return <img key={`${src}:${stage}`} ref={imageRef} src={stage === 1 ? src : thumbnail} alt={alt} width={400} height={300} className="h-full w-full object-cover object-[center_42%]" loading={eager ? "eager" : "lazy"} decoding="async" fetchPriority={eager ? "auto" : "low"} onLoad={event => cancelProtectedPhotoRetry(event.currentTarget)} onError={event => handleFailure(event.currentTarget)} />;
 }

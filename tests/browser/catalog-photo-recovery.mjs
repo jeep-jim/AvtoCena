@@ -34,7 +34,7 @@ if (process.env.PHOTO_RECOVERY_BUILD_ONLY === '1') {
 }
 
 const {chromium} = await import(process.env.PLAYWRIGHT_MODULE || 'playwright');
-const image = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+aX1cAAAAASUVORK5CYII=', 'base64');
+const image = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAABAAAAAMCAIAAADkharWAAAACXBIWXMAAAPoAAAD6AG1e1JrAAAAGElEQVQokWOoW7CDJMQwqmHBaCjVYQsDAMF4YJCRaxoZAAAAAElFTkSuQmCC', 'base64');
 const cases = new Map();
 const server = http.createServer(async (request, response) => {
   const url = new URL(request.url, 'http://fixture.local');
@@ -113,6 +113,19 @@ try {
       const button = page.getByRole('button', {name: 'Повторить загрузку фото Hyundai Elantra'});
       assert.equal(await button.evaluate(element => element.closest('a') === null), true, 'retry is outside navigation link');
       assert.equal(await button.isVisible(), true);
+      const placeholder = page.locator('[data-fixture="broken"]').getByRole('img', {name: 'Hyundai Elantra. Фото временно недоступно', exact: true});
+      assert.equal(await placeholder.textContent(), '', 'compact recovery uses the labelled button without clipped duplicate copy');
+      assert.equal(await button.evaluate(element => {
+        const card = element.closest('article');
+        const frame = card.querySelector('[role="img"]').getBoundingClientRect();
+        const rect = element.getBoundingClientRect();
+        const inside = rect.left >= frame.left && rect.right <= frame.right && rect.top >= frame.top && rect.bottom <= frame.bottom;
+        const overlaps = [...card.querySelectorAll('.ac-on-image')].some(other => {
+          const box = other.getBoundingClientRect();
+          return box.width > 0 && box.height > 0 && rect.left < box.right && rect.right > box.left && rect.top < box.bottom && rect.bottom > box.top;
+        });
+        return inside && !overlaps;
+      }), true, 'retry fits inside the photo without covering the market, favourite or title');
       assert.equal(state.requests.broken.length, 3); assert.equal(state.requests.healthy.length, 1);
       await page.screenshot({path: path.join(out, `${width}-${view}-unavailable.png`), fullPage: true});
       const before = page.url();
