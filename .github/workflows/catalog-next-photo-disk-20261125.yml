@@ -1,4 +1,4 @@
-# Read disk, failed-code cleanup and bounded saved AJ failure metadata after release 45647364912.
+# Read only root filesystem capacity while China daily 45655051136 remains active.
 name: Inspect failed photo release disk - read only
 on:
   push:
@@ -20,18 +20,19 @@ jobs:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
           persist-credentials: false
-      - name: Read bounded disk, rollback and mount evidence
+      - name: Read available filesystem bytes only
         env:
           SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
         run: |
           set -euo pipefail
           umask 077
+          python3 -c "import ast, pathlib; ast.parse(pathlib.Path('scripts/catalog-next/diagnose-photo-disk-20261125.py').read_text())"
           printf '%s\n' 'fd37f98aab3eeb16f131fcd4033adbb56f7e9616208c2f1ab5ef7a446caa4e4c  docs/operations/regcloud-staging-known-hosts' | sha256sum --check --status
           key_file=$(mktemp)
           trap 'rm -f "$key_file"' EXIT
           printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
           unset SSH_PRIVATE_KEY
-          ssh -F /dev/null -T -i "$key_file" -o BatchMode=yes -o IdentitiesOnly=yes -o ForwardAgent=no -o ClearAllForwardings=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=yes -o GlobalKnownHostsFile=/dev/null -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts" root@151.248.113.177 '/usr/bin/env -i PATH=/usr/bin:/bin /usr/bin/python3 -I -B -' < scripts/catalog-next/diagnose-photo-disk-20261125.py | tee photo-release-disk-report.json
+          ssh -F /dev/null -T -i "$key_file" -o BatchMode=yes -o IdentitiesOnly=yes -o ForwardAgent=no -o ClearAllForwardings=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=yes -o GlobalKnownHostsFile=/dev/null -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts" root@151.248.113.177 '/usr/bin/env -i PATH=/usr/bin:/bin /usr/bin/python3 -I -B - --capacity-only' < scripts/catalog-next/diagnose-photo-disk-20261125.py | tee photo-release-disk-report.json
       - name: Preserve aggregate inventory
         uses: actions/upload-artifact@v4
         if: always()

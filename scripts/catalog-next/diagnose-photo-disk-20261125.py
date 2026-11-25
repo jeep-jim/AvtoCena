@@ -1,4 +1,18 @@
 """Bounded, read-only disk, rollback and retained AJ-failure evidence."""
+import sys
+if sys.argv[1:]:
+    if sys.argv[1:] != ['--capacity-only']:
+        raise SystemExit('photo_disk_arguments')
+    import datetime, json, os
+    usage = os.statvfs('/')
+    print(json.dumps({
+        'kind': 'photo-release-capacity-readonly-v1',
+        'measuredAt': datetime.datetime.now(datetime.timezone.utc).isoformat().replace('+00:00', 'Z'),
+        'diskFreeBytes': usage.f_bavail * usage.f_frsize,
+        'diskTotalBytes': usage.f_blocks * usage.f_frsize,
+    }, separators=(',', ':')), flush=True)
+    raise SystemExit(0)
+
 import fcntl
 import hashlib
 import http.client
