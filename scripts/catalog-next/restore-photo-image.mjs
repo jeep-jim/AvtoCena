@@ -253,19 +253,26 @@ export async function restoreChinaPhotoImage({root=ROOT,runtimeRoot,plan,pricing
   const expected={imageId:pins.imageId,imageUnpackedBytes:pins.imageUnpackedBytes,configSha256:pins.configSha256,
    rootFsSha256:pins.rootFsSha256,platform:'linux/amd64'};
   await docker(['image','load','--input',image],{timeoutMs:900000});
-  need(equal(await inspect(),expected),'import_identity');
-  const readStorageProof=async()=>createChinaImageStorageProof({
-   inspection:await readStorageInspection({dockerHost,imageId:pins.imageId}),
-   imageReceipt:receipt,imageReceiptSha256:pins.receiptSha256});
-  const storageProof=await readStorageProof();
+  const imported=await inspect();need(equal(imported,expected),'import_identity');
+  const readStorageProof=async(verifiedImageIdentity,observation)=>{
+   const inspection=await readStorageInspection({dockerHost,imageId:pins.imageId});
+   // Config JSON is serialized by different clients. Log only digests; the
+   // immutable image ID binds API usage to the separately verified CLI proof.
+   onProgress({phase:'china_image_restore_storage_binding',observation,imageId:verifiedImageIdentity.imageId,
+    cliConfigSha256:verifiedImageIdentity.configSha256,apiConfigSha256:hash(JSON.stringify(inspection?.Config??null)),
+    cliRootFsSha256:verifiedImageIdentity.rootFsSha256,apiRootFsSha256:hash(JSON.stringify(inspection?.RootFS??null))});
+   return createChinaImageStorageProof({inspection,verifiedImageIdentity,
+    imageReceipt:receipt,imageReceiptSha256:pins.receiptSha256});
+  };
+  const storageProof=await readStorageProof(imported,'import');
   onProgress({phase:'china_image_restore_roundtrip',imageId:pins.imageId});
   await docker(['image','save','--output',roundtrip,pins.imageId],{timeoutMs:900000});
   need(equal(await inspect(),expected),'export_identity');
   const roundtripSeal=await seal(roundtrip);need(roundtripSeal.bytes>0,'empty_roundtrip');
   await docker(['image','rm',pins.imageId]);
   await docker(['image','load','--input',roundtrip],{timeoutMs:900000});
-  need(equal(await inspect(),expected),'roundtrip_identity');
-  need(equal(await readStorageProof(),storageProof),'storage_changed');
+  const reloaded=await inspect();need(equal(reloaded,expected),'roundtrip_identity');
+  need(equal(await readStorageProof(reloaded,'roundtrip'),storageProof),'storage_changed');
   need(equal(await seal(roundtrip),roundtripSeal)&&equal(await seal(image),originalSeal),'archive_changed');
   need(equal(await verifyRuntime({runtimeRoot,plan,execute}),proof)
    &&equal(await verifyCompatibility({runtimeRoot,servingPlan:plan,pricingPlan}),compatibility),'source_changed');

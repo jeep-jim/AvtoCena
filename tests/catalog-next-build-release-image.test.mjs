@@ -6,7 +6,7 @@ import os from 'node:os';
 import {execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {buildChinaReleaseImage, executeImageCommand, verifyChinaImageBuilder,
-  verifyChinaImageRuntime, createChinaImageStorageProof, verifyChinaImageStorageInspection,
+  verifyChinaImageRuntime, verifyChinaImageInspection, createChinaImageStorageProof, verifyChinaImageStorageInspection,
   verifyChinaImageStorageProof} from '../scripts/catalog-next/build-release-image.mjs';
 
 const hash = raw => createHash('sha256').update(raw).digest('hex');
@@ -147,6 +147,34 @@ test('exact committed source builds a sealed image receipt only after save/remov
   assert.equal(docker.calls.filter(args => args[1] === 'load').length, 1);
 });
 
+test('fresh CLI identity authenticates the receipt when the storage API serializes Config differently', async t => {
+  const f = await fixture(t), docker = fakeDocker(f);
+  // These synthetic values use the seven API Config keys observed on the
+  // original image. A legacy CLI representation includes additional defaults.
+  const apiConfig = {ExposedPorts: {'3000/tcp': {}}, Env: ['NODE_ENV=production'],
+    Entrypoint: ['existing-bootstrap'], Cmd: ['unchanged-command'], WorkingDir: '/app',
+    Labels: docker.inspection.Config.Labels, ArgsEscaped: true};
+  docker.inspection.Config = {User: '', ...structuredClone(apiConfig), Volumes: null, OnBuild: null};
+  const cliConfigSha256 = hash(JSON.stringify(docker.inspection.Config));
+  assert.notEqual(cliConfigSha256, hash(JSON.stringify(apiConfig)));
+  const receipt = await buildChinaReleaseImage({...f.options, execute: docker.execute,
+    readStorageInspection: async args => {
+      const inspection = await docker.readStorageInspection(args);
+      inspection.Config = structuredClone(apiConfig);
+      return inspection;
+    }});
+  const directory = path.join(f.runnerTemp, 'china-release-build');
+  const receiptRaw = await fs.readFile(path.join(directory, 'image-receipt.json'));
+  const proof = JSON.parse(await fs.readFile(path.join(directory, 'image-storage-proof.json')));
+  assert.equal(receipt.configSha256, cliConfigSha256);
+  assert.equal(proof.configSha256, cliConfigSha256);
+  assert.equal(proof.imageReceiptSha256, hash(receiptRaw));
+  assert.equal(proof.imageId, docker.inspection.Id);
+  assert.equal(proof.rootFsSha256, hash(JSON.stringify(docker.inspection.RootFS)));
+  assert.equal(proof.contentBytes, 8192); assert.equal(proof.unpackedBytes, 1_171_000_000);
+  assert.equal(docker.calls.filter(args => args[1] === 'inspect').length, 3);
+});
+
 test('a wrong source commit, tree, diff or file scope cannot produce an image', async t => {
   const f = await fixture(t);
   for (const change of [{runtimeSha: '0'.repeat(40)}, {runtimeTree: '0'.repeat(40)},
@@ -231,11 +259,25 @@ test('storage proof uses explicit snapshot usage and authenticates the unchanged
     rootFsSha256: hash(JSON.stringify(inspection.RootFS)), imageUnpackedBytes: inspection.Size,
     builder: {version: '29.1.3', driver: 'overlayfs', driverType: 'io.containerd.snapshotter.v1'}};
   const original = JSON.stringify(receipt, null, 2) + '\n', receiptHash = hash(original);
-  const proof = createChinaImageStorageProof({inspection, imageReceipt: receipt, imageReceiptSha256: receiptHash});
+  const verifiedImageIdentity = verifyChinaImageInspection(inspection, receipt.runtimeSha);
+  const options = {inspection, verifiedImageIdentity, imageReceipt: receipt, imageReceiptSha256: receiptHash};
+  const proof = createChinaImageStorageProof(options);
   assert.equal(JSON.stringify(receipt, null, 2) + '\n', original);
   assert.equal(receipt.imageUnpackedBytes, 8192);
   assert.equal(proof.contentBytes, 8192); assert.equal(proof.unpackedBytes, 1_171_000_000);
   assert.notEqual(proof.unpackedBytes, receipt.imageUnpackedBytes);
+  for (const identity of [undefined, {...verifiedImageIdentity, configSha256: hash('different CLI configuration')},
+    {...verifiedImageIdentity, rootFsSha256: hash('different CLI filesystem')},
+    {...verifiedImageIdentity, imageId: 'sha256:' + 'e'.repeat(64)},
+    {...verifiedImageIdentity, platform: 'linux/arm64'},
+    {...verifiedImageIdentity, imageUnpackedBytes: inspection.Size + 1},
+    {...verifiedImageIdentity, imageUnpackedBytes: undefined},
+    {...verifiedImageIdentity, extra: 'unverified'},
+  ]) assert.throws(() => createChinaImageStorageProof({...options, verifiedImageIdentity: identity}), /china_image_storage_cli_identity/);
+  for (const contentBytes of [undefined, 0, inspection.Size + 1]) {
+    assert.throws(() => createChinaImageStorageProof({...options,
+      imageReceipt: {...receipt, imageContentBytes: contentBytes}}), /china_image_storage_cli_identity/);
+  }
   for (const mutate of [
     value => { value.imageId = 'sha256:' + 'e'.repeat(64); },
     value => { value.archiveSha256 = hash('different archive'); },

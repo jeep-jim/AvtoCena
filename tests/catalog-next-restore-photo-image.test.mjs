@@ -121,15 +121,59 @@ test('isolated offline roundtrip keeps original receipt truthful and writes sepa
  assert.deepEqual((await fs.readdir(out)).sort(),['image-receipt.json','image-restoration-report.json','image-storage-proof.json','image.tar'].sort());
 });
 
-test('changed imported identity and failed roundtrip never create a usable receipt',async t=>{
- for(const failAt of [1,3]){
+test('storage measurement accepts a different API Config representation while preserving every historical CLI hash',async t=>{
+ const f=await fixture(t),api=structuredClone(f.inspection),progress=[];
+ api.Config={ArgsEscaped:false,Labels:Object.fromEntries(Object.entries(api.Config.Labels).reverse())};
+ const apiConfigSha256=hash(JSON.stringify(api.Config));
+ assert.notEqual(apiConfigSha256,f.pins.configSha256);
+ f.options.readStorageInspection=async()=>structuredClone(api);
+ f.options.onProgress=value=>progress.push(value);
+ const report=await restoreChinaPhotoImage(f.options),out=path.join(f.dir,'china-release-build');
+ assert.equal(report.restored,true);assert.equal(f.calls.filter(row=>row[1]==='inspect').length,3);
+ const proof=JSON.parse(await fs.readFile(path.join(out,'image-storage-proof.json')));
+ assert.equal(proof.configSha256,f.pins.configSha256);assert.equal(proof.rootFsSha256,f.pins.rootFsSha256);
+ assert.equal(proof.imageId,f.pins.imageId);assert.equal(proof.unpackedBytes,1000);
+ assert.deepEqual(await fs.readFile(path.join(out,'image-receipt.json')),f.raw);
+ const bindings=progress.filter(row=>row.phase==='china_image_restore_storage_binding');
+ assert.deepEqual(bindings.map(row=>row.observation),['import','roundtrip']);
+ for(const binding of bindings){
+  assert.equal(binding.cliConfigSha256,f.pins.configSha256);assert.equal(binding.apiConfigSha256,apiConfigSha256);
+  assert.equal(binding.cliRootFsSha256,binding.apiRootFsSha256);
+ }
+ assert.equal(JSON.stringify(bindings).includes('org.opencontainers'),false,'diagnostics contain hashes, never Config values');
+});
+
+test('API usage for another identity, filesystem, packed size or ownership labels cannot publish storage proof',async t=>{
+ for(const kind of ['image','platform','rootfs','size','revision','source','application']){
+  const f=await fixture(t),api=structuredClone(f.inspection);
+  if(kind==='image'){api.Id='sha256:'+'a'.repeat(64);api.Descriptor.digest=api.Id;}
+  if(kind==='platform')api.Architecture='arm64';
+  if(kind==='rootfs')api.RootFS.Layers=['sha256:'+'a'.repeat(64)];
+  if(kind==='size')api.Size++;
+  if(kind==='revision')api.Config.Labels['org.opencontainers.image.revision']='a'.repeat(40);
+  if(kind==='source')api.Config.Labels['org.opencontainers.image.source']='https://invalid.example/project';
+  if(kind==='application')api.Config.Labels['avtocena.application']='different';
+  f.options.readStorageInspection=async()=>structuredClone(api);
+  await assert.rejects(restoreChinaPhotoImage(f.options),/china_image_(storage_|image_identity|image_config)/);
+  await assert.rejects(fs.access(path.join(f.dir,'china-release-build/image-receipt.json')),{code:'ENOENT'});
+  await assert.rejects(fs.access(path.join(f.dir,'china-release-build/image-storage-proof.json')),{code:'ENOENT'});
+ }
+});
+
+test('changed CLI Config or filesystem fails at import, export and final reload without a usable receipt',async t=>{
+ for(const failAt of [1,2,3])for(const changed of ['config','rootfs']){
   const f=await fixture(t),real=f.options.execute;let inspections=0;
   f.options.execute=async(command,args,options)=>{
    const raw=await real(command,args,options);
-   if(args[2]==='inspect'&&++inspections===failAt){const inspected=JSON.parse(raw);inspected.RootFS.Layers=['sha256:'+'f'.repeat(64)];return Buffer.from(JSON.stringify(inspected));}
+   if(args[2]==='inspect'&&++inspections===failAt){
+    const inspected=JSON.parse(raw);
+    if(changed==='config')inspected.Config.Cmd=['different'];
+    else inspected.RootFS.Layers=['sha256:'+'f'.repeat(64)];
+    return Buffer.from(JSON.stringify(inspected));
+   }
    return raw;
   };
-  await assert.rejects(restoreChinaPhotoImage(f.options),/china_image_restore_(import_identity|roundtrip_identity)/);
+  await assert.rejects(restoreChinaPhotoImage(f.options),/china_image_restore_(import_identity|export_identity|roundtrip_identity)/);
   await assert.rejects(fs.access(path.join(f.dir,'china-release-build/image-receipt.json')),{code:'ENOENT'});
  }
 });

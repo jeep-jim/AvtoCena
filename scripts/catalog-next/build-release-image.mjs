@@ -191,9 +191,24 @@ export function verifyChinaImageStorageProof(proof, {imageReceipt, imageReceiptS
   return proof;
 }
 
-export function createChinaImageStorageProof({inspection, imageReceipt, imageReceiptSha256}) {
+export function createChinaImageStorageProof({inspection, verifiedImageIdentity, imageReceipt, imageReceiptSha256}) {
+  const identity = verifiedImageIdentity;
+  need(identity && imageReceipt
+    && Object.keys(identity).sort().join(',') === 'configSha256,imageId,imageUnpackedBytes,platform,rootFsSha256'
+    && ['imageId', 'configSha256', 'rootFsSha256', 'platform'].every(key => identity[key] === imageReceipt[key])
+    && Number.isSafeInteger(identity.imageUnpackedBytes) && identity.imageUnpackedBytes > 0,
+  'storage_cli_identity');
+  const receiptContentBytes = Object.hasOwn(imageReceipt, 'imageContentBytes')
+    ? imageReceipt.imageContentBytes : imageReceipt.imageUnpackedBytes;
+  need(identity.imageUnpackedBytes === receiptContentBytes, 'storage_cli_identity');
   const usage = verifyChinaImageStorageInspection(inspection, imageReceipt.runtimeSha);
+  need(['imageId', 'rootFsSha256', 'platform'].every(key => usage[key] === identity[key])
+    && usage.contentBytes === identity.imageUnpackedBytes, 'storage_identity');
+  // CLI and Engine API Config serialization can differ for the same immutable
+  // image. Keep the receipt's exact fresh CLI identity proof, and bind the API
+  // usage independently to that image's descriptor, platform and RootFS.
   const proof = {version: 1, kind: 'china-image-storage-v1', ...usage,
+    configSha256: identity.configSha256, rootFsSha256: identity.rootFsSha256,
     runtimeSha: imageReceipt.runtimeSha, runtimeTree: imageReceipt.runtimeTree,
     runtimeDiffSha256: imageReceipt.runtimeDiffSha256, archiveBytes: imageReceipt.bytes,
     archiveSha256: imageReceipt.sha256, imageReceiptSha256, builder: {...imageReceipt.builder}};
@@ -278,7 +293,6 @@ export async function buildChinaReleaseImage({runtimeRoot, plan, pricingPlan, ru
     await verifyChinaImageRuntime({runtimeRoot, plan, execute});
     const storageInspection = await readStorageInspection({dockerHost, imageId: inspected.imageId});
     const storage = verifyChinaImageStorageInspection(storageInspection, plan.runtimeSha);
-    need(['imageId', 'configSha256', 'rootFsSha256', 'platform'].every(key => storage[key] === inspected[key]), 'storage_identity');
     const receipt = {version: 1, kind: 'china-runtime-image-v1', market: 'china',
       ...(plan.codeScope === undefined ? {} : {codeScope: plan.codeScope}),
       ...proof, ...inspected, ...archiveSeal, builder, sourceArchive, servingCompatibility,
@@ -288,7 +302,7 @@ export async function buildChinaReleaseImage({runtimeRoot, plan, pricingPlan, ru
       hostContacted: false, privateDataIncluded: false};
     await fs.chmod(image, 0o400);
     const receiptRaw = JSON.stringify(receipt, null, 2) + '\n';
-    const storageProof = createChinaImageStorageProof({inspection: storageInspection,
+    const storageProof = createChinaImageStorageProof({inspection: storageInspection, verifiedImageIdentity: restored,
       imageReceipt: receipt, imageReceiptSha256: hash(receiptRaw)});
     await fs.writeFile(path.join(directory, 'image-receipt.json'), receiptRaw, {mode: 0o400, flag: 'wx'});
     await fs.writeFile(path.join(directory, 'image-storage-proof.json'), JSON.stringify(storageProof, null, 2) + '\n',
