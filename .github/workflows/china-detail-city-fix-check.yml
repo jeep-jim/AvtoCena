@@ -8,6 +8,7 @@ on:
       - 'apps/web/components/catalog/InlineOfferParameters.tsx'
       - 'apps/web/app/(public)/cars/offer/[id]/page.tsx'
       - 'tests/catalog-prepared-china-detail-city.test.mjs'
+      - 'tests/browser/china-frozen-city-*'
   workflow_dispatch:
 permissions:
   contents: read
@@ -29,3 +30,9 @@ jobs:
         run: node --import tsx --test tests/catalog-prepared-china-detail-city.test.mjs
       - name: Exact serving runtime typecheck
         run: npm run typecheck
+      - name: Install isolated browser dependency
+        run: npm install --prefix "$RUNNER_TEMP/china-city-browser" --no-package-lock --ignore-scripts playwright@1.55.0
+      - name: Verify actual React detail price in Chromium before deploying any data
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/china-city-browser/node_modules/playwright/index.mjs
+        run: CHROME_BIN=$(command -v google-chrome) node tests/browser/china-frozen-city-preflight.mjs
