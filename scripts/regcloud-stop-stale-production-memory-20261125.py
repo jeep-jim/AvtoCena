@@ -55,7 +55,7 @@ def connections():
   tokens=line.split()
   if len(tokens)<5:continue
   for value in tokens[3:5]:
-   need(not re.search(r':3001
+   need(not value.endswith(':3001'),'orphan_connected')
 def main():
  need(len(sys.argv)==1,'arguments')
  fd=os.open(str(LOCK),os.O_RDONLY|os.O_NOFOLLOW|os.O_CLOEXEC)
