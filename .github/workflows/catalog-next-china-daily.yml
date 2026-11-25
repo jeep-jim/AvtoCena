@@ -1,4 +1,4 @@
-# Production: data-only update of accepted China generation; no Docker image build.
+# Production: data-only update of accepted China generation; no application rebuild.
 # Daily at 21:00 Krasnoyarsk (UTC+7), source scope Che168 only.
 name: China independent daily - accepted source and retained image
 on:
