@@ -127,6 +127,9 @@ export async function readAjesCatalogPage(params:Record<string,unknown>,measure?
 export async function withAjesCount<T extends {total:number;marketCounts?:Record<string,number>;independentChina?:boolean}>(value:T,params:Record<string,unknown>={}):Promise<T & {countIncomplete?:boolean;marketCountInfo:Record<string,AjesCountSummary|null>}>{
  let result:T & {countIncomplete?:boolean;marketCountInfo:Record<string,AjesCountSummary|null>}={...value,marketCountInfo:{}};
  if(params.market&&params.market!=='japan')return result;
+  // AJ does not filter its aggregate count by locally attested horsepower.
+  // No unfiltered Japanese total may enter a cross-market <=160-hp summary.
+  if(params.powerFrom||params.powerTo){result.countIncomplete=true;result.marketCountInfo.japan=null;return result;}
  try{await assertCollectionEnabled('ajes_japan_feed');}catch{return result;}
  const count=await readAjesCountSummary(JSON.stringify({...params,market:'japan'})).catch(()=>null);
  result.marketCountInfo.japan=count;
