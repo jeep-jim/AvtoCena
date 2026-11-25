@@ -6,6 +6,8 @@ on:
       - '.github/workflows/china-daily-activation-check.yml'
       - '.github/workflows/catalog-next-china-daily.yml'
       - 'scripts/catalog-next/daily-entry.mjs'
+      - 'scripts/catalog-next/daily-controller.mjs'
+      - 'tests/catalog-next-daily-controller.test.mjs'
       - 'tests/catalog-next-daily-entry.test.mjs'
   workflow_dispatch:
 permissions:
