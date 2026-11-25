@@ -147,6 +147,8 @@ export async function runPhotoJapanBrowserAcceptance({oraclePath,releaseSha,nonc
   stage='china_initial_failure';
   const chinaPage=await page.goto(ORIGIN+binding.catalog,{waitUntil:'domcontentloaded',timeout:90_000});
   need(chinaPage?.status()===200,'china_page');
+  await page.locator('.ac-catalog-city-filter').getByRole('button',{name:'Выбрать город. Сейчас: Новокузнецк',exact:true}).waitFor({state:'visible',timeout:60_000});
+  report.checks.chinaPhoto.visibleCityMatched=true;
   const card=page.locator(CARD).filter({has:page.locator(`a[href*="${selected.id}"]`)});
   await card.waitFor({state:'visible',timeout:60_000});need(await card.count()===1,'china_card_ambiguous');
   await card.scrollIntoViewIfNeeded();
