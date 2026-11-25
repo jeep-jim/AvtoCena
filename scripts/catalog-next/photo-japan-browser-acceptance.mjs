@@ -259,7 +259,8 @@ export async function runPhotoJapanBrowserAcceptance({oraclePath,releaseSha,nonc
   need(await cards.count()===power.data.items.length,'japan_ui_count');
   const notice=main.getByRole('status').filter({hasText:'Для поиска используем первое значение мощности поставщика'});
   await notice.waitFor({state:'visible',timeout:10_000});
-  need((await heading.innerText()).includes('всего уточняется'),'japan_ui_incomplete_count');
+  const incompleteCount=heading.getByRole('status').filter({hasText:/^Количество уточняется$/});
+  need(await incompleteCount.isVisible(),'japan_ui_incomplete_count');
   need(await main.getByText('Показаны сохранённые автомобили. Полный список пока недоступен.',{exact:true}).count()===0,'japan_ui_stale');
   let preliminaryVisible=0,unknownVisible=0;
   for(const row of power.data.items){
