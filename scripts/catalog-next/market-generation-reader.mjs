@@ -12,6 +12,11 @@ const ALLOWED=new Set(MARKET_IDS);
 const fail=code=>{throw Error('market_reader_'+code)};
 const need=(ok,code)=>{if(!ok)fail(code)};
 const identity=ref=>ref.generationId+':'+ref.manifestSha256+':'+ref.pricingContextSha256;
+/**
+ * @param {{store?: {read: (market: string) => Promise<any>},
+ *   openGeneration?: (input: any) => Promise<any>,
+ *   clock?: () => number, refreshMs?: number}} [options]
+ */
 export function createMarketGenerationReader({store,openGeneration,clock=Date.now,refreshMs=15000}={}){
   need(store && typeof store.read==='function' && typeof openGeneration==='function','capabilities');
   need(typeof clock==='function' && Number.isSafeInteger(refreshMs)&&refreshMs>=0&&refreshMs<=60000,'clock');
