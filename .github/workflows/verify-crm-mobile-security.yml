@@ -11,11 +11,16 @@ on:
   push:
     branches: [feat/crm-unified-team-20260926, fix/catalog-read-concurrency-20260926, feat/crm-activity-reminders-20260926, fix/crm-client-documents-20260925, fix/catalog-filter-continuity-20260921, fix/crm-mobile-security-20260921, fix/photos-offer-push-20260921, fix/offer-layout-localized-20260921, main]
     paths:
-      - 'apps/web/**'
+      # Avoid running CRM and live-site acceptance on unrelated catalogue/China edits.
+      # Workflow dispatch remains available for full security regression on demand.
+      - 'apps/web/components/crm/**'
+      - 'apps/web/app/(crm)/**'
+      - 'apps/web/app/api/crm/**'
+      - 'apps/web/lib/crm-*.ts'
+      - 'apps/web/lib/crm-*.tsx'
       - 'package-lock.json'
       - 'package.json'
       - 'tests/browser/crm-mobile*'
-      - 'tests/browser/attached-parameter*'
       - 'tests/security-response-policy.test.ts'
       - 'tests/crm-contracts.test.ts'
       - 'scripts/security-photo-audit.mjs'
