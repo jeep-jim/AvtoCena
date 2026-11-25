@@ -6,8 +6,10 @@ on:
       - '.github/workflows/verify-market-data-pointer.yml'
       - 'scripts/catalog-next/market-data-pointer.mjs'
       - 'scripts/catalog-next/market-pointer-reg-storage.mjs'
+      - 'scripts/catalog-next/market-generation-reader.mjs'
       - 'tests/catalog-next-market-data-pointer.test.mjs'
       - 'tests/catalog-next-market-pointer-reg-storage.test.mjs'
+      - 'tests/catalog-next-market-generation-reader.test.mjs'
   workflow_dispatch:
 permissions:
   contents: read
@@ -24,4 +26,5 @@ jobs:
         run: |
           node --check scripts/catalog-next/market-data-pointer.mjs
           node --check scripts/catalog-next/market-pointer-reg-storage.mjs
-          node --test tests/catalog-next-market-data-pointer.test.mjs tests/catalog-next-market-pointer-reg-storage.test.mjs
+          node --check scripts/catalog-next/market-generation-reader.mjs
+          node --test tests/catalog-next-market-data-pointer.test.mjs tests/catalog-next-market-pointer-reg-storage.test.mjs tests/catalog-next-market-generation-reader.test.mjs
