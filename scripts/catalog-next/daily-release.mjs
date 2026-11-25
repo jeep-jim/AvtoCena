@@ -12,6 +12,7 @@ import {createPrivateChinaGenerationStorage} from './generation-storage.mjs';
 import {restorePrivateChinaGeneration} from './private-generation.mjs';
 import {openChinaSshSession} from './release-ssh.mjs';
 import {verifyChinaPhotoCodeRuntime} from './photo-code-scope.mjs';
+import {verifyChinaImageStorageProof} from './build-release-image.mjs';
 import {validateChinaGenerationReference, validateChinaAcceptedState, validateChinaPublicationIntent,
   validateChinaCodeTransition, inspectChinaPublicationState} from './china-state.mjs';
 
@@ -164,7 +165,7 @@ export function createChinaDailyRelease({root, servingRoot, pricingPlan, serving
     const temporary = await fs.realpath(runnerTemp), directory = await fs.mkdtemp(path.join(temporary, 'china-daily-release-'));
     let session, activated = false, closed = false, acceptedReceiptSha256;
     try {
-      let codePreflight, codeImageUnpackedBytes, codeImageArchiveBytes, files, oracle;
+      let codePreflight, codeImageStorageProof, codeImageArchiveBytes, files, oracle;
       const oraclePath = path.join(directory, 'acceptance.json');
       if (codeUpdate) {
         await guard(); await progress('code_verify_accepted_host_files');
@@ -175,7 +176,7 @@ export function createChinaDailyRelease({root, servingRoot, pricingPlan, serving
         await fs.writeFile(oraclePath, JSON.stringify(oracle) + '\n', {mode: 0o600, flag: 'wx'});
         const imageDirectory = path.join(temporary, 'china-release-build');
         const receiptPath = path.join(imageDirectory, 'image-receipt.json'), imagePath = path.join(imageDirectory, 'image.tar');
-        const imageReceipt = JSON.parse(await fs.readFile(receiptPath)), image = await seal(imagePath);
+        const imageReceiptRaw = await fs.readFile(receiptPath), imageReceipt = JSON.parse(imageReceiptRaw), image = await seal(imagePath);
         need(imageReceipt.version === 1 && imageReceipt.kind === 'china-runtime-image-v1'
           && (imageReceipt.codeScope ?? 'catalog-photo-recovery-v1') === (servingPlan.codeScope ?? 'catalog-photo-recovery-v1')
           && imageReceipt.runtimeSha === candidate.runtimeSha && imageReceipt.runtimeTree === servingPlan.runtimeTree
@@ -186,7 +187,12 @@ export function createChinaDailyRelease({root, servingRoot, pricingPlan, serving
           && imageReceipt.archiveRoundTripVerified === true && imageReceipt.privateDataIncluded === false
           && imageReceipt.protectedPathsUnchanged === true && imageReceipt.servingCompatibility?.protectedPricingPathsUnchanged === true,
         'code_image');
-        codeImageUnpackedBytes = imageReceipt.imageUnpackedBytes;
+        const storagePath = path.join(imageDirectory, 'image-storage-proof.json');
+        const storageRaw = await fs.readFile(storagePath), storageSeal = await seal(storagePath);
+        need(storageRaw.length <= 16 * 1024 && storageRaw.length === storageSeal.bytes
+          && hash(storageRaw) === storageSeal.sha256, 'code_storage_file');
+        codeImageStorageProof = verifyChinaImageStorageProof(JSON.parse(storageRaw),
+          {imageReceipt, imageReceiptSha256: hash(imageReceiptRaw)});
         codeImageArchiveBytes = image.bytes;
         files = {'image.tar': imagePath, 'image-receipt.json': receiptPath};
       } else {
@@ -225,15 +231,17 @@ export function createChinaDailyRelease({root, servingRoot, pricingPlan, serving
           uploadedRaw += descriptor.bytes;
           uploadPeak = Math.max(uploadPeak, uploadedRaw + descriptor.compressedBytes);
         }
-        // Loading into the containerd image store can retain archive content
-        // alongside an unpacked snapshot while our uploaded tar still exists.
-        const imageStorageBytes = codeImageArchiveBytes + codeImageUnpackedBytes;
+        // The uploaded archive is already in uploadedRaw. Reserve the complete
+        // measured content store and unpacked snapshot too, even when some of
+        // this exact image may already be cached on the host.
+        const imageStorageBytes = codeImageStorageProof.contentBytes + codeImageStorageProof.unpackedBytes;
         const neededBytes = Math.max(uploadPeak, uploadedRaw + codePreflight.generationBytes + imageStorageBytes)
           + CODE_DISK_OPERATING_RESERVE;
         need(Number.isSafeInteger(neededBytes) && codePreflight.availableDiskBytes >= neededBytes, 'code_disk_capacity');
         await onProgress({phase: 'code_capacity_checked', market: 'china',
           generationBytes: codePreflight.generationBytes, imageArchiveBytes: codeImageArchiveBytes,
-          imageUnpackedBytes: codeImageUnpackedBytes, operatingReserveBytes: CODE_DISK_OPERATING_RESERVE,
+          imageContentBytes: codeImageStorageProof.contentBytes, imageUnpackedBytes: codeImageStorageProof.unpackedBytes,
+          operatingReserveBytes: CODE_DISK_OPERATING_RESERVE,
           availableDiskBytes: codePreflight.availableDiskBytes, neededBytes});
       }
       const plan = {version: 1, market: 'china', mode, retainedRuntime: prior.current.runtimeSha,
@@ -246,7 +254,7 @@ export function createChinaDailyRelease({root, servingRoot, pricingPlan, serving
         files: [...(codePreflight?.generationFiles ?? []), ...packed.map(file => file.descriptor)],
         ...(codeUpdate ? {codeSourcePlanSha256: codePreflight.previousPlanSha256,
           codeSourceOracleSha256: codePreflight.previousOracleSha256,
-          codeScope: servingPlan.codeScope ?? 'catalog-photo-recovery-v1'} : {})};
+          codeScope: servingPlan.codeScope ?? 'catalog-photo-recovery-v1', codeImageStorageProof} : {})};
       await guard(); session ??= await use.openSession({root, directory, privateKey});
       const initialized = await session.call('init', {plan});
       if (!codeUpdate) {

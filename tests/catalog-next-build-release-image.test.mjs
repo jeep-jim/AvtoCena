@@ -6,7 +6,8 @@ import os from 'node:os';
 import {execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {buildChinaReleaseImage, executeImageCommand, verifyChinaImageBuilder,
-  verifyChinaImageRuntime} from '../scripts/catalog-next/build-release-image.mjs';
+  verifyChinaImageRuntime, createChinaImageStorageProof, verifyChinaImageStorageInspection,
+  verifyChinaImageStorageProof} from '../scripts/catalog-next/build-release-image.mjs';
 
 const hash = raw => createHash('sha256').update(raw).digest('hex');
 const validBuilder = {ServerVersion: '29.1.3', Driver: 'overlayfs',
@@ -59,11 +60,18 @@ function fakeDocker(f, {builder = validBuilder, onBuild, onLoad, changeRestoredI
   const inspection = {Id: 'sha256:' + 'a'.repeat(64), Descriptor: {digest: 'sha256:' + 'a'.repeat(64)},
     Os: 'linux', Architecture: 'amd64', Size: 8192,
     RootFS: {Type: 'layers', Layers: ['sha256:' + 'b'.repeat(64)]},
+    Manifests: [{ID: 'sha256:' + 'd'.repeat(64), Descriptor: {digest: 'sha256:' + 'd'.repeat(64)},
+      Kind: 'image', Available: true, Size: {Content: 8100, Total: 8100 + 1_171_000_000},
+      ImageData: {Platform: {os: 'linux', architecture: 'amd64'}, Size: {Unpacked: 1_171_000_000}}}],
     Config: {WorkingDir: '/app', Entrypoint: ['existing-bootstrap'], Cmd: ['unchanged-command'],
       Labels: {'org.opencontainers.image.revision': f.options.plan.runtimeSha,
         'org.opencontainers.image.source': 'https://github.com/jeep-jim/AvtoCena', 'avtocena.application': 'web'}}};
   let image, removed = false, loaded = false;
-  return {calls, inspection, execute: async (command, originalArgs, options) => {
+  return {calls, inspection, readStorageInspection: async args => {
+    assert.deepEqual(args, {dockerHost: f.options.dockerHost, imageId: inspection.Id});
+    assert(loaded, 'snapshot usage is measured after the archive was loaded');
+    return structuredClone(inspection);
+  }, execute: async (command, originalArgs, options) => {
     if (command !== '/usr/bin/docker') return executeImageCommand(command, originalArgs, options);
     assert.equal(originalArgs[0], '--host=' + f.options.dockerHost);
     assert.deepEqual(Object.keys(options.env).sort(), ['DOCKER_BUILDKIT', 'DOCKER_CONFIG', 'DOCKER_HOST', 'PATH']);
@@ -90,7 +98,7 @@ function fakeDocker(f, {builder = validBuilder, onBuild, onLoad, changeRestoredI
     }
     if (args[0] === 'image' && args[1] === 'save') {
       image = args[args.indexOf('--output') + 1];
-      await fs.writeFile(image, 'fixture image bytes whose SHA must remain unchanged\n', {flag: 'wx'});
+      await fs.writeFile(image, Buffer.alloc(16384, 17), {flag: 'wx'});
       return Buffer.alloc(0);
     }
     if (args[0] === 'image' && args[1] === 'rm') {
@@ -112,21 +120,28 @@ test('exact committed source builds a sealed image receipt only after save/remov
   // Neither an untracked secret nor the calling process's environment is a build input.
   await fs.writeFile(path.join(f.runtimeRoot, '.env.local'), 'A_REAL_SECRET_MUST_NOT_BE_COPIED=fixture\n');
   const docker = fakeDocker(f), progress = [];
-  const result = await buildChinaReleaseImage({...f.options, execute: docker.execute, onProgress: value => progress.push(value)});
+  const result = await buildChinaReleaseImage({...f.options, execute: docker.execute, readStorageInspection: docker.readStorageInspection, onProgress: value => progress.push(value)});
   const output = path.join(f.runnerTemp, 'china-release-build');
   const image = await fs.readFile(path.join(output, 'image.tar'));
   assert.equal(result.sha256, hash(image)); assert.equal(result.bytes, image.length);
   assert.equal(result.runtimeSha, f.options.plan.runtimeSha); assert.equal(result.runtimeTree, f.options.plan.runtimeTree);
   assert.equal(result.runtimeDiffSha256, f.options.plan.runtimeDiffSha256);
   assert.equal(result.imageId, docker.inspection.Id); assert.equal(result.archiveRoundTripVerified, true);
+  assert.equal(result.imageContentBytes, 8192);
+  assert.equal(result.imageUnpackedBytes, 1_171_000_000);
   assert.equal(result.configSha256, hash(JSON.stringify(docker.inspection.Config)));
   assert.equal(result.pricingRuntimeSha, f.options.pricingPlan.runtimeSha);
   assert.equal(result.servingCompatibility.protectedPricingPathsUnchanged, true);
   assert.equal(result.hostContacted, false); assert.equal(result.activationAuthorized, false);
   assert.deepEqual(result.builder, {version: '29.1.3', driver: 'overlayfs', driverType: 'io.containerd.snapshotter.v1'});
   assert.deepEqual(JSON.parse(await fs.readFile(path.join(output, 'image-receipt.json'), 'utf8')), result);
+  const receiptRaw = await fs.readFile(path.join(output, 'image-receipt.json'));
+  const storageProof = JSON.parse(await fs.readFile(path.join(output, 'image-storage-proof.json')));
+  assert.equal(storageProof.imageReceiptSha256, hash(receiptRaw));
+  assert.equal(storageProof.contentBytes, 8192); assert.equal(storageProof.unpackedBytes, 1_171_000_000);
+  assert.equal(storageProof.totalBytes, 1_171_008_192);
   assert.equal((await fs.stat(path.join(output, 'image.tar'))).mode & 0o777, 0o400);
-  assert.deepEqual((await fs.readdir(output)).sort(), ['image-receipt.json', 'image.tar']);
+  assert.deepEqual((await fs.readdir(output)).sort(), ['image-receipt.json', 'image-storage-proof.json', 'image.tar']);
   assert.equal(progress.at(-1).phase, 'china_image_ready');
   assert.equal(docker.calls.filter(args => args[1] === 'rm').length, 1);
   assert.equal(docker.calls.filter(args => args[1] === 'load').length, 1);
@@ -181,7 +196,7 @@ test('changed image source bytes in the same files cannot reuse a reviewed canon
 test('a tracked local edit is refused before any Docker command', async t => {
   const f = await fixture(t), docker = fakeDocker(f);
   await fs.writeFile(path.join(f.runtimeRoot, 'public.mjs'), 'changed after review\n');
-  await assert.rejects(buildChinaReleaseImage({...f.options, execute: docker.execute}), /china_image_command_failed/);
+  await assert.rejects(buildChinaReleaseImage({...f.options, execute: docker.execute, readStorageInspection: docker.readStorageInspection}), /china_image_command_failed/);
   assert.equal(docker.calls.length, 0);
   await absent(path.join(f.runnerTemp, 'china-release-build'));
 });
@@ -199,7 +214,7 @@ test('default, remote and symlinked Docker daemons are refused', async t => {
   const link = path.join(f.runnerTemp, 'alias.sock');
   await fs.symlink(f.options.dockerHost.slice('unix://'.length), link);
   for (const host of [undefined, 'tcp://localhost:2375', 'unix:///var/run/docker.sock', 'unix://' + link]) {
-    await assert.rejects(buildChinaReleaseImage({...f.options, dockerHost: host, execute: docker.execute}), /china_image_builder_socket/);
+    await assert.rejects(buildChinaReleaseImage({...f.options, dockerHost: host, execute: docker.execute, readStorageInspection: docker.readStorageInspection}), /china_image_builder_socket/);
   }
   assert.equal(docker.calls.length, 0);
 });
@@ -209,15 +224,65 @@ test('classic image store and an unpinned Docker version are refused', () => {
     {...validBuilder, DriverStatus: []}]) assert.throws(() => verifyChinaImageBuilder(builder), /china_image_builder_store/);
 });
 
+test('storage proof uses explicit snapshot usage and authenticates the unchanged legacy receipt bytes', async t => {
+  const f = await fixture(t), docker = fakeDocker(f), inspection = docker.inspection;
+  const receipt = {...f.options.plan, imageId: inspection.Id, platform: 'linux/amd64', bytes: 16384,
+    sha256: hash('archive'), configSha256: hash(JSON.stringify(inspection.Config)),
+    rootFsSha256: hash(JSON.stringify(inspection.RootFS)), imageUnpackedBytes: inspection.Size,
+    builder: {version: '29.1.3', driver: 'overlayfs', driverType: 'io.containerd.snapshotter.v1'}};
+  const original = JSON.stringify(receipt, null, 2) + '\n', receiptHash = hash(original);
+  const proof = createChinaImageStorageProof({inspection, imageReceipt: receipt, imageReceiptSha256: receiptHash});
+  assert.equal(JSON.stringify(receipt, null, 2) + '\n', original);
+  assert.equal(receipt.imageUnpackedBytes, 8192);
+  assert.equal(proof.contentBytes, 8192); assert.equal(proof.unpackedBytes, 1_171_000_000);
+  assert.notEqual(proof.unpackedBytes, receipt.imageUnpackedBytes);
+  for (const mutate of [
+    value => { value.imageId = 'sha256:' + 'e'.repeat(64); },
+    value => { value.archiveSha256 = hash('different archive'); },
+    value => { value.archiveBytes++; },
+    value => { value.imageReceiptSha256 = hash(JSON.stringify(receipt)); },
+    value => { value.configSha256 = hash('different configuration'); },
+    value => { value.rootFsSha256 = hash('different filesystem'); },
+    value => { value.unpackedBytes = 0; },
+    value => { value.totalBytes = value.contentBytes; },
+    value => { value.builder.version = '29.8.0'; },
+  ]) {
+    const bad = structuredClone(proof); mutate(bad);
+    assert.throws(() => verifyChinaImageStorageProof(bad, {imageReceipt: receipt, imageReceiptSha256: receiptHash}), /china_image_storage_/);
+  }
+});
+
+test('missing, incomplete, foreign-platform or inconsistent manifest usage cannot become a capacity measurement', async t => {
+  const f = await fixture(t), docker = fakeDocker(f);
+  for (const mutate of [
+    value => { delete value.Manifests; },
+    value => { value.Manifests.push(structuredClone(value.Manifests[0])); },
+    value => { value.Manifests[0].Available = false; },
+    value => { value.Manifests[0].ImageData.Platform.architecture = 'arm64'; },
+    value => { value.Manifests[0].Kind = 'attestation'; },
+    value => { value.Manifests[0].ImageData.Size.Unpacked = 0; },
+    value => { value.Manifests[0].Size.Total--; },
+    value => { value.Manifests[0].Descriptor.digest = 'sha256:' + 'e'.repeat(64); },
+    value => { value.Size = 1; },
+  ]) {
+    const bad = structuredClone(docker.inspection); mutate(bad);
+    assert.throws(() => verifyChinaImageStorageInspection(bad, f.options.plan.runtimeSha), /china_image_storage_/);
+  }
+  docker.inspection.Manifests[0].Available = false;
+  await assert.rejects(buildChinaReleaseImage({...f.options, execute: docker.execute,
+    readStorageInspection: docker.readStorageInspection}), /china_image_storage_/);
+  await absent(path.join(f.runnerTemp, 'china-release-build', 'image-receipt.json'));
+});
+
 test('different image identity after load leaves no completed receipt', async t => {
   const f = await fixture(t), docker = fakeDocker(f, {changeRestoredId: true});
-  await assert.rejects(buildChinaReleaseImage({...f.options, execute: docker.execute}), /china_image_archive_roundtrip/);
+  await assert.rejects(buildChinaReleaseImage({...f.options, execute: docker.execute, readStorageInspection: docker.readStorageInspection}), /china_image_archive_roundtrip/);
   await absent(path.join(f.runnerTemp, 'china-release-build', 'image-receipt.json'));
 });
 
 test('an archive modified during the roundtrip cannot receive a receipt', async t => {
   const f = await fixture(t), docker = fakeDocker(f, {onLoad: image => fs.appendFile(image, 'corrupted')});
-  await assert.rejects(buildChinaReleaseImage({...f.options, execute: docker.execute}), /china_image_archive_changed/);
+  await assert.rejects(buildChinaReleaseImage({...f.options, execute: docker.execute, readStorageInspection: docker.readStorageInspection}), /china_image_archive_changed/);
   await absent(path.join(f.runnerTemp, 'china-release-build', 'image-receipt.json'));
 });
 
@@ -225,7 +290,7 @@ test('source changed during the build is refused before exporting the image', as
   const f = await fixture(t), docker = fakeDocker(f, {
     onBuild: () => fs.writeFile(path.join(f.runtimeRoot, 'public.mjs'), 'racing edit\n'),
   });
-  await assert.rejects(buildChinaReleaseImage({...f.options, execute: docker.execute}), /china_image_command_failed/);
+  await assert.rejects(buildChinaReleaseImage({...f.options, execute: docker.execute, readStorageInspection: docker.readStorageInspection}), /china_image_command_failed/);
   assert(!docker.calls.some(args => args[1] === 'save'));
   await absent(path.join(f.runnerTemp, 'china-release-build', 'image-receipt.json'));
 });
@@ -235,7 +300,7 @@ test('a committed private environment file is not allowed into the image context
   await fs.writeFile(path.join(f.runtimeRoot, '.env.production'), 'PRIVATE_KEY=fixture\n');
   f.commit(); f.options.plan = f.plan(); f.options.pricingPlan = f.plan();
   const docker = fakeDocker(f);
-  await assert.rejects(buildChinaReleaseImage({...f.options, execute: docker.execute}), /china_image_private_input/);
+  await assert.rejects(buildChinaReleaseImage({...f.options, execute: docker.execute, readStorageInspection: docker.readStorageInspection}), /china_image_private_input/);
   assert(!docker.calls.some(args => args[0] === 'build'));
   await absent(path.join(f.runnerTemp, 'china-release-build', 'image-receipt.json'));
 });

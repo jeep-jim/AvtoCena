@@ -10,6 +10,7 @@ on:
       - scripts/catalog-next/photo-code-scope.mjs
       - scripts/catalog-next/photo-japan-browser-acceptance.mjs
       - scripts/catalog-next/build-release-image.mjs
+      - scripts/catalog-next/restore-photo-image.mjs
       - scripts/catalog-next/daily-release.mjs
       - scripts/catalog-next/daily-entry.mjs
       - scripts/catalog-next/china-state.mjs
@@ -18,6 +19,7 @@ on:
       - scripts/catalog-next/release-ssh.mjs
       - scripts/catalog-next/serving-compatibility.mjs
       - tests/catalog-next-code-*.test.mjs
+      - tests/catalog-next-restore-photo-image.test.mjs
       - tests/browser/photo-japan-recovery-clock.mjs
 permissions:
   contents: read

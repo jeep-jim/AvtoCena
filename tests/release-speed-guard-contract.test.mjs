@@ -140,8 +140,12 @@ test('code-only photo activation preserves the independent China fence and compl
  const workflow=fs.readFileSync(path.join(workflowDirectory,'catalog-next-china-photo-release.yml'),'utf8');
  const gate=workflow.indexOf('node scripts/verify-frozen-speed-baselines.mjs');
  const contracts=workflow.indexOf('tests/catalog-next-*.test.mjs tests/release-speed-guard-contract.test.mjs');
+ const restoration=workflow.indexOf('scripts/catalog-next/restore-photo-image.mjs --run');
+ const firstHostKey=workflow.indexOf('SSH_PRIVATE_KEY:');
  const activation=workflow.indexOf('scripts/catalog-next/code-entry.mjs --run');
  assert.ok(gate>=0 && contracts>gate && activation>contracts);
+ assert.ok(firstHostKey>contracts && restoration>firstHostKey && activation>restoration,
+  'the exact archived image is restored only after contracts and before normal publication');
  assert.match(workflow,/group: catalog-next-china\n\s+cancel-in-progress: false/);
  assert.match(workflow,/paths: \[\.github\/market-runs\/catalog-next-china-photo-release\.json\]/);
  assert.doesNotMatch(workflow,/AUTO_API_CHE168_KEY|schedule:|release\.mjs --/);

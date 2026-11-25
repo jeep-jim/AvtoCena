@@ -5,6 +5,7 @@ import path from 'node:path';
 import {createHash, randomBytes} from 'node:crypto';
 import {spawn} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
+import http from 'node:http';
 import {verifyServingCompatibility} from './serving-compatibility.mjs';
 
 const root = fileURLToPath(new URL('../../', import.meta.url));
@@ -108,9 +109,95 @@ export function verifyChinaImageInspection(inspection, runtimeSha) {
     && config.Labels?.['avtocena.application'] === 'web', 'image_config');
   need(Array.isArray(inspection.RootFS?.Layers) && inspection.RootFS.Layers.length > 0
     && inspection.RootFS.Layers.every(imageId), 'image_layers');
+  // Historical receipts used this misleading name for Docker 29.1.3's packed
+  // content size. Preserve that identity check for original receipt recovery;
+  // capacity must use the explicit manifest snapshot measurement below.
   return {imageId: inspection.Id, imageUnpackedBytes: inspection.Size,
     configSha256: hash(JSON.stringify(config)), rootFsSha256: hash(JSON.stringify(inspection.RootFS)),
     platform: 'linux/amd64'};
+}
+
+/** Docker 29.1.3 exposes manifest usage through the Engine API, but its CLI
+ * cannot request it. This GET uses only the caller's isolated Unix socket. */
+export async function readChinaImageStorageInspection({dockerHost, imageId: identifier}) {
+  need(typeof dockerHost === 'string' && dockerHost.startsWith('unix:///') && imageId(identifier), 'storage_request');
+  const socketPath = dockerHost.slice('unix://'.length);
+  need(socketPath === path.resolve(socketPath) && await fs.realpath(socketPath) === socketPath
+    && (await fs.lstat(socketPath)).isSocket(), 'builder_socket');
+  return new Promise((resolve, reject) => {
+    const request = http.request({socketPath, method: 'GET',
+      path: '/v1.52/images/' + encodeURIComponent(identifier) + '/json?manifests=true',
+      headers: {Accept: 'application/json', Connection: 'close'}, signal: AbortSignal.timeout(15000)}, response => {
+      if (response.statusCode !== 200) { response.resume(); reject(Error('china_image_storage_status')); return; }
+      const parts = []; let size = 0;
+      response.on('data', part => {
+        size += part.length;
+        if (size > 512 * 1024) { request.destroy(); reject(Error('china_image_storage_size')); }
+        else parts.push(part);
+      });
+      response.on('error', () => reject(Error('china_image_storage_transport')));
+      response.on('end', () => {
+        try { resolve(json(Buffer.concat(parts), 'storage_json')); }
+        catch (error) { reject(error); }
+      });
+    });
+    request.on('error', () => reject(Error('china_image_storage_transport')));
+    request.end();
+  });
+}
+
+export function verifyChinaImageStorageInspection(inspection, runtimeSha) {
+  const identity = verifyChinaImageInspection(inspection, runtimeSha);
+  need(Array.isArray(inspection.Manifests) && inspection.Manifests.length === 1, 'storage_manifests');
+  const manifest = inspection.Manifests[0], unpacked = manifest?.ImageData?.Size?.Unpacked;
+  need(manifest?.Kind === 'image' && manifest.Available === true && imageId(manifest.ID)
+    && manifest.Descriptor?.digest === manifest.ID
+    && manifest.ImageData?.Platform?.os === 'linux' && manifest.ImageData.Platform.architecture === 'amd64'
+    && Number.isSafeInteger(unpacked) && unpacked > 0
+    && Number.isSafeInteger(manifest.Size?.Content) && manifest.Size.Content > 0
+    && Number.isSafeInteger(manifest.Size?.Total) && manifest.Size.Total === manifest.Size.Content + unpacked
+    && inspection.Size >= manifest.Size.Content
+    && Number.isSafeInteger(inspection.Size + unpacked), 'storage_usage');
+  return {imageId: identity.imageId, configSha256: identity.configSha256, rootFsSha256: identity.rootFsSha256,
+    platform: identity.platform, manifestId: manifest.ID,
+    // In this pinned Engine version top-level Size counts packed descriptors,
+    // including any index metadata outside the single image manifest.
+    contentBytes: inspection.Size, unpackedBytes: unpacked, totalBytes: inspection.Size + unpacked};
+}
+
+const storageProofKeys = ['version', 'kind', 'imageId', 'runtimeSha', 'runtimeTree', 'runtimeDiffSha256', 'platform',
+  'archiveBytes', 'archiveSha256', 'imageReceiptSha256', 'configSha256', 'rootFsSha256', 'manifestId',
+  'contentBytes', 'unpackedBytes', 'totalBytes', 'builder'].sort();
+
+export function verifyChinaImageStorageProof(proof, {imageReceipt, imageReceiptSha256}) {
+  need(proof && JSON.stringify(Object.keys(proof).sort()) === JSON.stringify(storageProofKeys)
+    && proof.version === 1 && proof.kind === 'china-image-storage-v1', 'storage_proof');
+  need(sha64(imageReceiptSha256) && proof.imageReceiptSha256 === imageReceiptSha256
+    && imageId(proof.imageId) && imageId(proof.manifestId)
+    && ['runtimeSha', 'runtimeTree'].every(key => sha40(proof[key]))
+    && ['runtimeDiffSha256', 'archiveSha256', 'configSha256', 'rootFsSha256'].every(key => sha64(proof[key]))
+    && ['imageId', 'runtimeSha', 'runtimeTree', 'runtimeDiffSha256', 'configSha256', 'rootFsSha256', 'platform']
+      .every(key => proof[key] === imageReceipt[key])
+    && proof.platform === 'linux/amd64' && proof.archiveBytes === imageReceipt.bytes
+    && proof.archiveSha256 === imageReceipt.sha256, 'storage_binding');
+  const builder = proof.builder;
+  need(builder && Object.keys(builder).sort().join(',') === 'driver,driverType,version'
+    && builder.version === '29.1.3' && builder.driver === 'overlayfs' && builder.driverType === 'io.containerd.snapshotter.v1'
+    && ['version', 'driver', 'driverType'].every(key => builder[key] === imageReceipt.builder?.[key]), 'storage_builder');
+  need(['archiveBytes', 'contentBytes', 'unpackedBytes', 'totalBytes']
+      .every(key => Number.isSafeInteger(proof[key]) && proof[key] > 0)
+    && proof.contentBytes <= proof.archiveBytes
+    && proof.totalBytes === proof.contentBytes + proof.unpackedBytes, 'storage_bytes');
+  return proof;
+}
+
+export function createChinaImageStorageProof({inspection, imageReceipt, imageReceiptSha256}) {
+  const usage = verifyChinaImageStorageInspection(inspection, imageReceipt.runtimeSha);
+  const proof = {version: 1, kind: 'china-image-storage-v1', ...usage,
+    runtimeSha: imageReceipt.runtimeSha, runtimeTree: imageReceipt.runtimeTree,
+    runtimeDiffSha256: imageReceipt.runtimeDiffSha256, archiveBytes: imageReceipt.bytes,
+    archiveSha256: imageReceipt.sha256, imageReceiptSha256, builder: {...imageReceipt.builder}};
+  return verifyChinaImageStorageProof(proof, {imageReceipt, imageReceiptSha256});
 }
 
 async function fileSeal(filename) {
@@ -138,7 +225,7 @@ async function assertNoPrivateBuildInput(context) {
 }
 
 export async function buildChinaReleaseImage({runtimeRoot, plan, pricingPlan, runnerTemp, dockerHost,
-  execute = executeImageCommand, onProgress = () => {}}) {
+  execute = executeImageCommand, readStorageInspection = readChinaImageStorageInspection, onProgress = () => {}}) {
   const temporary = await fs.realpath(runnerTemp);
   need(path.isAbsolute(temporary) && temporary !== path.parse(temporary).root, 'runner_temp');
   need(typeof dockerHost === 'string' && dockerHost.startsWith('unix:///'), 'builder_socket');
@@ -189,17 +276,26 @@ export async function buildChinaReleaseImage({runtimeRoot, plan, pricingPlan, ru
     need(JSON.stringify(restored) === JSON.stringify(inspected), 'archive_roundtrip');
     need(JSON.stringify(await fileSeal(image)) === JSON.stringify(archiveSeal), 'archive_changed');
     await verifyChinaImageRuntime({runtimeRoot, plan, execute});
+    const storageInspection = await readStorageInspection({dockerHost, imageId: inspected.imageId});
+    const storage = verifyChinaImageStorageInspection(storageInspection, plan.runtimeSha);
+    need(['imageId', 'configSha256', 'rootFsSha256', 'platform'].every(key => storage[key] === inspected[key]), 'storage_identity');
     const receipt = {version: 1, kind: 'china-runtime-image-v1', market: 'china',
       ...(plan.codeScope === undefined ? {} : {codeScope: plan.codeScope}),
       ...proof, ...inspected, ...archiveSeal, builder, sourceArchive, servingCompatibility,
+      imageContentBytes: storage.contentBytes, imageUnpackedBytes: storage.unpackedBytes,
       pricingRuntimeSha: pricingPlan.runtimeSha, pricingRuntimeTree: pricingPlan.runtimeTree,
       archiveRoundTripVerified: true, activationAuthorized: false,
       hostContacted: false, privateDataIncluded: false};
     await fs.chmod(image, 0o400);
-    await fs.writeFile(path.join(directory, 'image-receipt.json'), JSON.stringify(receipt, null, 2) + '\n',
+    const receiptRaw = JSON.stringify(receipt, null, 2) + '\n';
+    const storageProof = createChinaImageStorageProof({inspection: storageInspection,
+      imageReceipt: receipt, imageReceiptSha256: hash(receiptRaw)});
+    await fs.writeFile(path.join(directory, 'image-receipt.json'), receiptRaw, {mode: 0o400, flag: 'wx'});
+    await fs.writeFile(path.join(directory, 'image-storage-proof.json'), JSON.stringify(storageProof, null, 2) + '\n',
       {mode: 0o400, flag: 'wx'});
     onProgress({phase: 'china_image_ready', runtimeSha: receipt.runtimeSha, imageId: receipt.imageId,
-      bytes: receipt.bytes, sha256: receipt.sha256, hostContacted: false});
+      bytes: receipt.bytes, sha256: receipt.sha256, contentBytes: storage.contentBytes,
+      unpackedBytes: storage.unpackedBytes, hostContacted: false});
     return receipt;
   } finally {
     // These paths were created by this invocation under its private output.

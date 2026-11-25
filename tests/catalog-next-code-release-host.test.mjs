@@ -88,7 +88,9 @@ with tempfile.TemporaryDirectory() as temp:
  image_receipt={'version':1,'kind':'china-runtime-image-v1','market':'china','runtimeSha':new,'pricingRuntimeSha':pricing,'runtimeTree':'d'*40,
   'runtimeDiffSha256':'f'*64,'retainedRuntime':old,'imageId':new_image,'platform':'linux/amd64','archiveRoundTripVerified':True,
   'protectedPathsUnchanged':True,'privateDataIncluded':False,'servingCompatibility':{'protectedPricingPathsUnchanged':True},
-  'runtimeFiles':sorted(m.PHOTO_CODE_FILES),'imageUnpackedBytes':1024,'bytes':13,'sha256':m.sha(b'new image tar')}
+  'runtimeFiles':sorted(m.PHOTO_CODE_FILES),'imageUnpackedBytes':1024,'bytes':13,'sha256':m.sha(b'new image tar'),
+  'configSha256':'a'*64,'rootFsSha256':'b'*64,
+  'builder':{'version':'29.1.3','driver':'overlayfs','driverType':'io.containerd.snapshotter.v1'}}
  if case.startswith('combined_'):
   assert len(m.PHOTO_CODE_FILES)==6 and len(m.PHOTO_JAPAN_CODE_FILES)==27
   image_receipt.update(codeScope=m.PHOTO_JAPAN_CODE_SCOPE,runtimeFiles=sorted(m.PHOTO_JAPAN_CODE_FILES))
@@ -99,6 +101,10 @@ with tempfile.TemporaryDirectory() as temp:
   'previousAcceptedState':copy.deepcopy(prior),'previousAcceptedETag':observation['etag'],'previousAcceptedStateSha256':observation['sha256'],
   'codeSourcePlanSha256':m.file_sha(old_dir/'PLAN.json'),'codeSourceOracleSha256':m.sha(old_bytes['acceptance.json']),
   'files':[copy.deepcopy(d) for d in old_plan['files'] if d['name'] in m.GENERATION_FILES]+[descriptor(name,raw) for name,raw in new_bytes.items()]}
+ plan['codeImageStorageProof']={'version':1,'kind':'china-image-storage-v1',
+  **{key:copy.deepcopy(image_receipt[key]) for key in ('imageId','runtimeSha','runtimeTree','runtimeDiffSha256','platform','configSha256','rootFsSha256','builder')},
+  'archiveBytes':13,'archiveSha256':m.sha(new_bytes['image.tar']),'imageReceiptSha256':m.sha(new_bytes['image-receipt.json']),
+  'manifestId':'sha256:'+'c'*64,'contentBytes':5,'unpackedBytes':1024,'totalBytes':1029}
  if 'codeScope' in image_receipt:plan['codeScope']=image_receipt['codeScope']
  for name,raw in new_bytes.items():m.new_file(new_dir/name,raw)
  m.new_file(new_dir/'PLAN.json',m.json_bytes(plan));m.validate_plan(plan)
@@ -171,6 +177,30 @@ with tempfile.TemporaryDirectory() as temp:
   assert base64.b64decode(result['acceptanceBase64'])==old_bytes['acceptance.json'] and len(result['generationFiles'])==7
   assert all(method=='GET' for method,target in operations)
   assert before=={str(p):p.read_bytes() for p in root.rglob('*') if p.is_file()}
+ elif case in ('storage_required','storage_image','storage_archive','storage_receipt','storage_zero','storage_source'):
+  bad=copy.deepcopy(plan);bad['nonce']='9'*32
+  if case=='storage_required':
+   bad.pop('codeImageStorageProof');m.validate_plan(bad);expected='code_storage_proof'
+  else:
+   key,value={'storage_image':('imageId','sha256:'+'0'*64),'storage_archive':('archiveSha256','0'*64),
+    'storage_receipt':('imageReceiptSha256','0'*64),'storage_zero':('unpackedBytes',0),
+    'storage_source':('runtimeTree','0'*40)}[case]
+   bad['codeImageStorageProof'][key]=value
+   expected='code_storage_bytes' if case=='storage_zero' else 'code_storage_binding'
+  before={str(p):p.read_bytes() for p in root.rglob('*') if p.is_file()}
+  refused(lambda:m.Host(bad),expected)
+  assert before=={str(p):p.read_bytes() for p in root.rglob('*') if p.is_file()}
+  assert not (new_dir.parent/bad['nonce']).exists() and operations==[]
+ elif case in ('storage_unpacked_space','storage_receipt_identity'):
+  if case=='storage_unpacked_space':
+   storage=plan['codeImageStorageProof'];storage['unpackedBytes']=1_171_000_000;storage['totalBytes']=storage['contentBytes']+storage['unpackedBytes']
+   copied=sum(row['bytes'] for row in plan['files'] if row['name'] in m.GENERATION_FILES)
+   available=copied+m.RELEASE_DISK_OPERATING_RESERVE+512*1024**2
+   assert available>copied+13+image_receipt['imageUnpackedBytes']+m.RELEASE_DISK_OPERATING_RESERVE
+   m.os.statvfs=lambda p:types.SimpleNamespace(f_bavail=available,f_frsize=1);expected='code_disk_space'
+  else:plan['codeImageStorageProof']['configSha256']='0'*64;expected='code_storage_receipt'
+  refused(prepare_only,expected)
+  assert not list((new_dir/'generation').iterdir()) and host.candidate is None and m.CONFIG.read_bytes()==original
  elif case in ('copy','oracle_tamper','descriptor_tamper','source_tamper','image_scope','disk_space','plan_changed','combined_extra','combined_relabel','combined_unbound','photo_relabel'):
   expected=None
   if case=='oracle_tamper':
@@ -316,7 +346,7 @@ with tempfile.TemporaryDirectory() as temp:
    elif case=='next_daily':
     daily={**copy.deepcopy(plan),'mode':'generation-update','retainedRuntime':new,'runtimeSha':new,'imageId':new_image,'nonce':'f'*32,
      'generationId':'gen_china_124_1','previousAcceptedState':state,'previousAcceptedETag':'"new-state"','previousAcceptedStateSha256':m.canonical_sha(state)}
-    daily['files']=[d for d in daily['files'] if d['name'] not in ('image.tar','image-receipt.json')];m.validate_plan(daily)
+    daily.pop('codeImageStorageProof');daily['files']=[d for d in daily['files'] if d['name'] not in ('image.tar','image-receipt.json')];m.validate_plan(daily)
     m.accepted_predecessor(daily);m.check_mounted_reference(containers[new_id],current,new_nonce)
    elif case=='retire_copy':
     refused(lambda:m.retire_reference(reference,[reference,current],{old_id,new_id},lambda:None),'retire_protected')
@@ -328,7 +358,7 @@ with tempfile.TemporaryDirectory() as temp:
  else:raise AssertionError('unknown case')
  print('ok')
 `;
-for(const name of ['scope','preflight','copy','oracle_tamper','descriptor_tamper','source_tamper','image_scope','disk_space','plan_changed','start','rollback','accept','proof_required','code_proof_changed_generation','code_proof_missing_rollback','next_daily','retire_copy','combined_accept','photo_explicit','combined_extra','combined_relabel','combined_unbound','photo_relabel','combined_browser_rejections','cleanup_mount','cleanup_parent_mount','cleanup_file_tamper','cleanup_plan_tamper','cleanup_rollback_tamper','cleanup_accepted_symlink','cleanup_idempotent','cleanup_copy_failure','cleanup_load_failure','post_copy_disk_space']) {
+for(const name of ['scope','preflight','copy','oracle_tamper','descriptor_tamper','source_tamper','image_scope','disk_space','plan_changed','start','rollback','accept','proof_required','code_proof_changed_generation','code_proof_missing_rollback','next_daily','retire_copy','combined_accept','photo_explicit','combined_extra','combined_relabel','combined_unbound','photo_relabel','combined_browser_rejections','cleanup_mount','cleanup_parent_mount','cleanup_file_tamper','cleanup_plan_tamper','cleanup_rollback_tamper','cleanup_accepted_symlink','cleanup_idempotent','cleanup_copy_failure','cleanup_load_failure','post_copy_disk_space','storage_required','storage_image','storage_archive','storage_receipt','storage_zero','storage_source','storage_unpacked_space','storage_receipt_identity']) {
   test('China code-only host: '+name,()=>{
     const result=spawnSync('python3',['-I','-B','-c',harness,hostFile,name],{encoding:'utf8',timeout:20000});
     assert.equal(result.status,0,result.stderr||result.stdout);

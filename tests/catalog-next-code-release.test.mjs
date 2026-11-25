@@ -82,12 +82,23 @@ async function fixture(t, {combined = false} = {}) {
     runtimeTree: '6'.repeat(40), runtimeDiffSha256: hash('photo diff'), pricingRuntimeSha: pricingSha,
     ...(combined ? {codeScope: 'catalog-photo-japan-power-v1'} : {})};
   const pricingPlan = {version: 1, market: 'china', runtimeSha: pricingSha};
-  await fs.writeFile(path.join(imageDirectory, 'image-receipt.json'), JSON.stringify({version: 1,
+  const imageReceipt = {version: 1,
     kind: 'china-runtime-image-v1', runtimeSha: nextSha, runtimeTree: servingPlan.runtimeTree,
     retainedRuntime: oldSha, runtimeDiffSha256: servingPlan.runtimeDiffSha256, pricingRuntimeSha: pricingSha,
     imageId: f.candidate.imageId, bytes: image.length, imageUnpackedBytes: 100, sha256: hash(image), archiveRoundTripVerified: true,
     privateDataIncluded: false, protectedPathsUnchanged: true, servingCompatibility: {protectedPricingPathsUnchanged: true},
-    ...(combined ? {codeScope: servingPlan.codeScope} : {})}));
+    configSha256: hash('configuration'), rootFsSha256: hash('rootfs'), platform: 'linux/amd64',
+    builder: {version: '29.1.3', driver: 'overlayfs', driverType: 'io.containerd.snapshotter.v1'},
+    ...(combined ? {codeScope: servingPlan.codeScope} : {})};
+  const imageReceiptRaw = JSON.stringify(imageReceipt);
+  await fs.writeFile(path.join(imageDirectory, 'image-receipt.json'), imageReceiptRaw);
+  const storageProof = {version: 1, kind: 'china-image-storage-v1',
+    ...Object.fromEntries(['imageId', 'runtimeSha', 'runtimeTree', 'runtimeDiffSha256', 'configSha256', 'rootFsSha256', 'platform', 'builder']
+      .map(key => [key, imageReceipt[key]])),
+    archiveBytes: image.length, archiveSha256: hash(image), imageReceiptSha256: hash(imageReceiptRaw),
+    manifestId: 'sha256:' + '7'.repeat(64), contentBytes: 10, unpackedBytes: 100, totalBytes: 110};
+  const storagePath = path.join(imageDirectory, 'image-storage-proof.json');
+  await fs.writeFile(storagePath, JSON.stringify(storageProof));
   const calls = [], uploaded = new Map(), flags = {gateExit: 0, wrongNonce: false}; let hostPlan, browserBytes;
   const session = {exited: Promise.resolve(), abort() { calls.push('abort'); },
     async call(method, args) {
@@ -99,6 +110,7 @@ async function fixture(t, {combined = false} = {}) {
         assert.equal(hostPlan.generationId, f.current.generationId); assert.equal(hostPlan.retainedRuntime, oldSha);
         assert.equal(hostPlan.codeSourcePlanSha256, f.preflight.previousPlanSha256);
         assert.equal(hostPlan.codeSourceOracleSha256, f.preflight.previousOracleSha256);
+        assert.deepEqual(hostPlan.codeImageStorageProof, storageProof);
         return {};
       }
       if (method === 'start') {
@@ -160,7 +172,7 @@ async function fixture(t, {combined = false} = {}) {
       },
       async openSession() { return session; }, async checkControl() {}, async health(value) { assert.ok([oldSha, nextSha].includes(value)); },
     }});
-  return {...f, directory, imagePath, calls, uploaded, release, flags};
+  return {...f, directory, imagePath, imageReceipt, imageReceiptRaw, storagePath, storageProof, calls, uploaded, release, flags};
 }
 
 async function reservedStage(f) {
@@ -218,6 +230,31 @@ test('code staging keeps operating space and rejects the incident disk budget be
   assert.equal(f.calls.includes('start'), false);
   assert.equal(f.calls.includes('switch'), false);
 });
+
+test('code staging reserves a measured 1.17 GB snapshot even when the original receipt reports only packed bytes', async t => {
+  const f = await fixture(t);
+  f.storageProof.unpackedBytes = 1_171_000_000;
+  f.storageProof.totalBytes = f.storageProof.contentBytes + f.storageProof.unpackedBytes;
+  await fs.writeFile(f.storagePath, JSON.stringify(f.storageProof));
+  f.preflight.availableDiskBytes = 2 * 1024 ** 3 + f.preflight.generationBytes + 512 * 1024 ** 2;
+  assert.ok(f.imageReceipt.imageUnpackedBytes < 512 * 1024 ** 2);
+  await assert.rejects(f.release.stageCodeRelease({candidate: f.candidate, previous: f.previous,
+    nonce: 'b'.repeat(32), assertAuthority: async () => {}}), /china_daily_release_code_disk_capacity/);
+  assert.equal(f.calls.includes('init'), false); assert.equal(f.uploaded.size, 0);
+  assert.equal(await fs.readFile(path.join(path.dirname(f.imagePath), 'image-receipt.json'), 'utf8'), f.imageReceiptRaw);
+});
+
+for (const field of ['imageId', 'archiveSha256', 'imageReceiptSha256', 'runtimeTree']) {
+  test('code staging refuses a storage proof with a different ' + field + ' before uploads', async t => {
+    const f = await fixture(t);
+    f.storageProof[field] = field === 'imageId' ? 'sha256:' + '0'.repeat(64)
+      : field === 'runtimeTree' ? '0'.repeat(40) : '0'.repeat(64);
+    await fs.writeFile(f.storagePath, JSON.stringify(f.storageProof));
+    await assert.rejects(f.release.stageCodeRelease({candidate: f.candidate, previous: f.previous,
+      nonce: 'b'.repeat(32), assertAuthority: async () => {}}), /china_image_storage_binding/);
+    assert.equal(f.calls.includes('init'), false); assert.equal(f.uploaded.size, 0);
+  });
+}
 
 test('combined code activation binds the photo and Japan browser report before host acceptance', async t => {
   const f = await fixture(t, {combined: true}), {stage, input} = await reservedStage(f);

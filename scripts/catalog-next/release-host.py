@@ -525,6 +525,40 @@ def validate_plan(plan):
                      for key in ('codeSourcePlanSha256', 'codeSourceOracleSha256')), 'code_source_binding')
     else:
         need('previousAcceptedState' not in plan, 'unexpected_predecessor')
+    # Existing accepted/rollback records predate storage proofs. Their original
+    # PLAN bytes remain valid history; only a new code Host init requires one.
+    if 'codeImageStorageProof' in plan:
+        checked_code_image_storage_proof(plan)
+
+
+def checked_code_image_storage_proof(plan, image_receipt=None):
+    proof = plan.get('codeImageStorageProof')
+    keys = {'version', 'kind', 'imageId', 'runtimeSha', 'runtimeTree', 'runtimeDiffSha256', 'platform',
+            'archiveBytes', 'archiveSha256', 'imageReceiptSha256', 'configSha256', 'rootFsSha256',
+            'manifestId', 'contentBytes', 'unpackedBytes', 'totalBytes', 'builder'}
+    need(code_update(plan) and isinstance(proof, dict) and set(proof) == keys and
+         proof.get('version') == 1 and proof.get('kind') == 'china-image-storage-v1', 'code_storage_proof')
+    files = {row['name']: row for row in plan['files']}
+    need(all(proof.get(key) == plan.get(key) for key in ('imageId', 'runtimeSha', 'runtimeTree', 'runtimeDiffSha256')) and
+         isinstance(proof.get('manifestId'), str) and re.fullmatch(r'sha256:[a-f0-9]{64}', proof['manifestId']) and
+         proof.get('platform') == 'linux/amd64' and
+         all(isinstance(proof.get(key), str) and re.fullmatch(r'[a-f0-9]{64}', proof[key])
+             for key in ('archiveSha256', 'imageReceiptSha256', 'configSha256', 'rootFsSha256')) and
+         proof.get('archiveBytes') == files['image.tar']['bytes'] and
+         proof.get('archiveSha256') == files['image.tar']['sha256'] and
+         proof.get('imageReceiptSha256') == files['image-receipt.json']['sha256'], 'code_storage_binding')
+    need(proof.get('builder') == {'version': '29.1.3', 'driver': 'overlayfs', 'driverType': 'io.containerd.snapshotter.v1'},
+         'code_storage_builder')
+    need(all(type(proof.get(key)) is int and 0 < proof[key] <= 9007199254740991
+             for key in ('archiveBytes', 'contentBytes', 'unpackedBytes', 'totalBytes')) and
+         proof['contentBytes'] <= proof['archiveBytes'] and
+         proof['totalBytes'] == proof['contentBytes'] + proof['unpackedBytes'], 'code_storage_bytes')
+    if image_receipt is not None:
+        need(all(proof[key] == image_receipt.get(key) for key in
+                 ('imageId', 'runtimeSha', 'runtimeTree', 'runtimeDiffSha256', 'configSha256', 'rootFsSha256', 'platform', 'builder')) and
+             proof['archiveBytes'] == image_receipt.get('bytes') and proof['archiveSha256'] == image_receipt.get('sha256'),
+             'code_storage_receipt')
+    return proof
 
 
 def decode_report(value):
@@ -2160,6 +2194,8 @@ def resume_failed_upload(params):
 class Host:
     def __init__(self, plan):
         validate_plan(plan)
+        if code_update(plan):
+            checked_code_image_storage_proof(plan)
         # Refuse an inadmissible data update before any attempt directory,
         # PLAN.json or upload is written. No old generation is removed here.
         admission = generation_disk_admission(plan, BASE) if generation_update(plan) else None
@@ -2239,11 +2275,12 @@ class Host:
              all(isinstance(name, str) for name in image['runtimeFiles']) and
              set(image['runtimeFiles']) == required_code_files and
              type(image.get('imageUnpackedBytes')) is int and image['imageUnpackedBytes'] > 0, 'code_image_receipt')
-        # Uploaded archives already occupy disk. Containerd may retain image
-        # content while also extracting its snapshot. Keep the service's free
-        # operating space in addition to both measured image representations.
+        storage = checked_code_image_storage_proof(self.plan, image)
+        # Uploaded archives already occupy disk. Reserve the complete packed
+        # content and actual unpacked snapshots measured in the isolated daemon.
+        # Docker 29.1.3 inspect.Size in historical receipts is packed-only.
         copied_bytes = sum(new_files[name]['bytes'] for name in GENERATION_FILES)
-        self.code_image_storage_bytes = new_files['image.tar']['bytes'] + image['imageUnpackedBytes']
+        self.code_image_storage_bytes = storage['contentBytes'] + storage['unpackedBytes']
         usage = os.statvfs(self.directory)
         need(usage.f_bavail * usage.f_frsize >= copied_bytes + self.code_image_storage_bytes + RELEASE_DISK_OPERATING_RESERVE,
              'code_disk_space')

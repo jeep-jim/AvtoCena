@@ -57,10 +57,11 @@ jobs:
           runtime-basedir: ${{ runner.temp }}/photo-docker
           daemon-config: |
             {"features":{"containerd-snapshotter":true}}
-      - name: Build and roundtrip the exact image without private inputs
+      - name: Restore the exact previously built image and repeat its isolated roundtrip
         env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
           CHINA_BUILD_DOCKER_HOST: ${{ steps.photo_docker.outputs.sock }}
-        run: node scripts/run-node-with-resources.mjs --import tsx scripts/catalog-next/code-entry.mjs --build
+        run: node --import tsx scripts/catalog-next/restore-photo-image.mjs --run
       - name: Publish the code with existing China bytes and automatic rollback
         env:
           SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
@@ -82,5 +83,7 @@ jobs:
             catalog-next-photo-japan-browser-report.json
             artifacts/catalog-photo-japan-live/**
             ${{ runner.temp }}/china-release-build/image-receipt.json
+            ${{ runner.temp }}/china-release-build/image-storage-proof.json
+            ${{ runner.temp }}/china-release-build/image-restoration-report.json
           if-no-files-found: ignore
           retention-days: 14
