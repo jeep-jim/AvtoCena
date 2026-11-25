@@ -57,6 +57,13 @@ test('supplier-wide count is never misrepresented as power-filter result',()=>{
  const rail=readFileSync('apps/web/components/catalog/AjesRail.tsx','utf8');
  assert.match(aj,/const sourceTotal=powerSelected\?null:/);
  assert.match(aj,/Показано \$\{result\?\.items\.length\?\?0\} · всего уточняется/);
- assert.match(aj,/JAPAN_POWER_FILTER_NOTICE/);
+ assert.match(aj,/Предварительные значения не используются для расчёта утильсбора/);
+ assert.match(aj,/!result\.powerIncomplete&&<p/);
+ const endpoint=readFileSync('apps/web/app/(public)/api/catalog/search/route.ts','utf8');
+ const reader=readFileSync('apps/web/lib/catalog/ajes-catalog.ts','utf8');
+ assert.match(endpoint,/countOnly/);
+ assert.match(endpoint,/powerIncomplete:true/);
+ assert.match(reader,/unverifiedPowerSeen/);
+ assert.match(reader,/params\.powerFrom\|\|params\.powerTo/);
  assert.match(rail,/powerSelected\?<MarketResultCount>/);
 });
