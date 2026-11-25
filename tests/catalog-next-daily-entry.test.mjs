@@ -7,7 +7,8 @@ import os from 'node:os';
 import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
 import {verifyChinaDailyInvocation, checkoutChinaDailyRuntimes, runChinaDailyEntry,
-  readChinaDailyDeadline, CHINA_DAILY_JOB_TIMEOUT_MINUTES} from '../scripts/catalog-next/daily-entry.mjs';
+  readChinaDailyDeadline, readChinaDailyPlans, selectChinaDailyServingPlan,
+  CHINA_DAILY_JOB_TIMEOUT_MINUTES} from '../scripts/catalog-next/daily-entry.mjs';
 
 const root = process.cwd(), sha = 'a'.repeat(40), hash = value => createHash('sha256').update(value).digest('hex');
 const ordered = value => Array.isArray(value) ? value.map(ordered) : value && typeof value === 'object'
@@ -82,7 +83,7 @@ test('cleanup deadline comes from the exact real job start and metadata errors d
   await assert.rejects(readChinaDailyDeadline({...args, fetcher: async () => new Response('{}', {status: 403})}), /deadline_status/);
 });
 
-async function fixture(t) {
+async function fixture(t, {withCodePlan = false} = {}) {
   const directory = await fs.mkdtemp(path.join(os.tmpdir(), 'china-daily-entry-'));
   t.after(() => fs.rm(directory, {recursive: true, force: true}));
   const control = path.join(directory, 'controller'), temporary = path.join(directory, 'runner');
@@ -92,6 +93,9 @@ async function fixture(t) {
     const raw = await fs.readFile(path.join(root, '.github/operations/catalog-next', name));
     await fs.writeFile(path.join(control, '.github/operations/catalog-next', name), raw); return JSON.parse(raw);
   }));
+  const codePlan = withCodePlan ? {...servingPlan, retainedRuntime: servingPlan.runtimeSha,
+    runtimeSha: 'c'.repeat(40), runtimeTree: 'd'.repeat(40)} : undefined;
+  if (codePlan) await fs.writeFile(path.join(control, '.github/operations/catalog-next/china-code-serving-plan.json'), JSON.stringify(codePlan));
   const calls = [];
   const runtimes = await checkoutChinaDailyRuntimes({root: control, runnerTemp: temporary, git(args) {
     calls.push(args);
@@ -99,7 +103,7 @@ async function fixture(t) {
     else assert.deepEqual(args.slice(0, 3), ['fetch', '--no-tags', 'https://github.com/jeep-jim/AvtoCena.git']);
     return '';
   }});
-  return {control, temporary, pricingPlan, servingPlan, runtimes, calls};
+  return {control, temporary, pricingPlan, servingPlan, codePlan, runtimes, calls};
 }
 
 test('pricing and serving checkouts stay distinct and use the two exact reviewed revisions', async t => {
@@ -110,6 +114,21 @@ test('pricing and serving checkouts stay distinct and use the two exact reviewed
   assert.equal(await fs.readlink(path.join(f.runtimes.pricingRoot, 'node_modules')), path.join(f.control, 'node_modules'));
   assert.equal(await fs.readlink(path.join(f.runtimes.servingRoot, 'node_modules')), path.join(f.control, 'node_modules'));
   await assert.rejects(checkoutChinaDailyRuntimes({root: f.control, runnerTemp: f.temporary, git: () => assert.fail('no overwrite')}), /checkout_exists/);
+});
+
+test('the reviewed code plan adds one exact checkout and cannot infer a revision or change the pricing runtime', async t => {
+  const f = await fixture(t, {withCodePlan: true}), worktrees = f.calls.filter(args => args[0] === 'worktree');
+  assert.deepEqual(worktrees.map(args => args[4]), [f.pricingPlan.runtimeSha, f.servingPlan.runtimeSha, f.codePlan.runtimeSha]);
+  assert.equal(new Set(worktrees.map(args => args[3])).size, 3);
+  const planSet = await readChinaDailyPlans(f.control);
+  assert.equal(selectChinaDailyServingPlan(planSet, f.codePlan.runtimeSha).runtimeTree, f.codePlan.runtimeTree);
+  assert.equal(selectChinaDailyServingPlan(planSet, f.servingPlan.runtimeSha).runtimeTree, f.servingPlan.runtimeTree);
+  assert.throws(() => selectChinaDailyServingPlan(planSet, 'e'.repeat(40)), /accepted_runtime/);
+  const filename = path.join(f.control, '.github/operations/catalog-next/china-code-serving-plan.json');
+  await fs.writeFile(filename, JSON.stringify({...f.codePlan, pricingRuntimeSha: 'e'.repeat(40)}));
+  await assert.rejects(readChinaDailyPlans(f.control), /plans/);
+  await fs.writeFile(filename, JSON.stringify(f.servingPlan));
+  await assert.rejects(readChinaDailyPlans(f.control), /plans/);
 });
 
 function accepted(f) {
@@ -130,6 +149,58 @@ function accepted(f) {
     commit: {nonce, intentSha256: '9'.repeat(64), previousETag: null, previousStateSha256: null, acceptedAt: at}};
   return {found: true, etag: '"native-accepted"', sha256: hash(JSON.stringify(ordered(value))), value};
 }
+
+test('recovery of a code publication selects the new reviewed adapter before the single subsequent daily stage', async t => {
+  const f = await fixture(t, {withCodePlan: true}), initial = accepted(f), recovered = accepted({...f, servingPlan: f.codePlan});
+  const {proof: _proof, ...codeCandidate} = recovered.value.current;
+  const events = [], verifications = [], creations = [];
+  let preparations = 0;
+  const storage = {assertPrivateBucket: async () => ({verified: true}), read: async () => initial,
+    compareAndSwap: async () => assert.fail('this test substitutes the cycle, not the host proof protocol')};
+  const capabilities = {
+    verifyInvocation: async () => ({version: 1, event: 'workflow_dispatch', sourceSha: sha}), verifyBaselines: () => {},
+    runtimeGit: directory => args => { assert.equal(directory, f.runtimes.pricingRoot);
+      return args[0] === 'diff' ? '' : args[1] === 'HEAD' ? f.pricingPlan.runtimeSha : f.pricingPlan.runtimeTree; },
+    verifyCompatibility: async input => {
+      verifications.push(input.servingPlan.runtimeSha);
+      assert.equal(input.runtimeRoot, f.runtimes.servingRoots[input.servingPlan.runtimeSha]);
+    },
+    createStorage: () => storage, readDeadline: async () => '2026-11-25T18:00:00Z',
+    createRelease: input => {
+      const runtime = input.servingPlan.runtimeSha; creations.push(runtime);
+      return {
+        async recoverRelease(args) {
+          assert.equal(runtime, f.codePlan.runtimeSha); assert.equal(args.intent.value.candidate.runtimeSha, runtime);
+          events.push('recover-new'); return {kind: 'accepted', testOnlyRecoveredReference: recovered.value.current};
+        },
+        async stageRelease(args) {
+          assert.equal(runtime, f.codePlan.runtimeSha); assert.equal(args.previous.value.current.runtimeSha, runtime);
+          events.push('stage-new'); return {candidate: args.candidate};
+        },
+        retireHost: async () => assert.fail('no retirement requested'),
+      };
+    },
+    runCycle: async input => {
+      assert.equal(input.plan.runtimeSha, f.pricingPlan.runtimeSha);
+      const result = await input.recoverRelease({intent: {value: {candidate: codeCandidate}}, assertAuthority: async () => {}});
+      assert.equal(result.kind, 'accepted');
+      preparations++;
+      await input.stageRelease({previous: recovered, candidate: {...codeCandidate, generationId: 'gen_china_101_1'},
+        assertAuthority: async () => {}});
+      return {kind: 'china-daily-cycle-v1', completed: true, market: 'china', published: true, status: 'accepted'};
+    },
+  };
+  const result = await runChinaDailyEntry({root: f.control, environment: {...env('workflow_dispatch'),
+    RUNNER_TEMP: f.temporary, JSON_STORAGE_DRIVER: 'object'}, capabilities});
+  assert.equal(result.status, 'accepted'); assert.equal(preparations, 1);
+  assert.deepEqual(events, ['recover-new', 'stage-new']);
+  assert.deepEqual(creations, [f.servingPlan.runtimeSha, f.codePlan.runtimeSha]);
+  assert.deepEqual(verifications, creations);
+  capabilities.runCycle = async input => input.recoverRelease({intent: {value: {candidate: {...codeCandidate, runtimeSha: 'e'.repeat(40)}}},
+    assertAuthority: async () => {}});
+  await assert.rejects(runChinaDailyEntry({root: f.control, environment: {...env('workflow_dispatch'),
+    RUNNER_TEMP: f.temporary, JSON_STORAGE_DRIVER: 'object'}, capabilities}), /accepted_runtime/);
+});
 
 test('production entry binds accepted state, passes pricing root to preparation and serving root only to release, and filters progress logs', async t => {
   const f = await fixture(t), observation = accepted(f), logs = [], called = [];

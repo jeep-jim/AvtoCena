@@ -133,7 +133,37 @@ test('new direct deploy-script entrypoints cannot bypass the reviewed inventory'
 const customActivators=new Map([
  ['aj-system-japan-only.yml','.github/operations/ajes-japan-only-20261124/release.mjs'],
  ['catalog-next-china-release.yml','scripts/catalog-next/release.mjs'],
+ ['catalog-next-china-photo-release.yml','scripts/catalog-next/code-entry.mjs'],
 ]);
+
+test('code-only photo activation preserves the independent China fence and complete browser handoff',()=>{
+ const workflow=fs.readFileSync(path.join(workflowDirectory,'catalog-next-china-photo-release.yml'),'utf8');
+ const gate=workflow.indexOf('node scripts/verify-frozen-speed-baselines.mjs');
+ const contracts=workflow.indexOf('tests/catalog-next-*.test.mjs tests/release-speed-guard-contract.test.mjs');
+ const activation=workflow.indexOf('scripts/catalog-next/code-entry.mjs --run');
+ assert.ok(gate>=0 && contracts>gate && activation>contracts);
+ assert.match(workflow,/group: catalog-next-china\n\s+cancel-in-progress: false/);
+ assert.match(workflow,/paths: \[\.github\/market-runs\/catalog-next-china-photo-release\.json\]/);
+ assert.doesNotMatch(workflow,/AUTO_API_CHE168_KEY|schedule:|release\.mjs --/);
+ const entry=fs.readFileSync(path.join(root,'scripts/catalog-next/code-entry.mjs'),'utf8');
+ assert.match(entry,/verifyReadonlyInvocation\([\s\S]*operation: 'activate-china-photo-code'/);
+ assert.match(entry,/verifyChinaPhotoCodeRuntime/);
+ const adapter=fs.readFileSync(path.join(root,'scripts/catalog-next/daily-release.mjs'),'utf8');
+ const stages=["session.call('start')","session.call('functional')","session.call('speed')","session.call('switch')",
+  "tests/browser/owner-filter-speed-live.mjs","scripts/catalog-next/browser-acceptance.mjs",
+  "scripts/catalog-next/photo-japan-browser-acceptance.mjs","session.call('browser_evidence'","session.call('accept'"];
+ let previous=-1;
+ for(const stage of stages){const at=adapter.indexOf(stage);assert.ok(at>previous,'code acceptance order: '+stage);previous=at;}
+ assert.match(adapter,/details\.nonce === nonce/);
+ assert.match(adapter,/details\.precedingSpeedReportSha256 === hash\(speedRaw\)/);
+ assert.match(adapter,/photoJapan\.oracleSha256 === hash\(await fs\.readFile\(oraclePath\)\)/);
+ assert.match(adapter,/photoJapanReportBase64: photoJapanRaw\.toString\('base64'\)/);
+ assert.match(adapter,/validateChinaCodeTransition\(candidate, prior\.current\)/);
+ const cycle=fs.readFileSync(path.join(root,'scripts/catalog-next/code-controller.mjs'),'utf8');
+ assert.match(cycle,/transition: 'code-update'/);
+ assert.match(cycle,/state\.commit/); assert.match(cycle,/state\.abortReserved/); assert.match(cycle,/state\.finalizeRollback/);
+ assert.doesNotMatch(cycle,/prepareChinaGeneration|restorePrivateChinaGeneration|refreshChinaSource/);
+});
 test('the pinned AJ removal preserves frozen gates and requires its exact scope and nonce handshake',()=>{
  const [workflow,entry]=[...customActivators][0],filename=path.join(workflowDirectory,workflow);
  if(!fs.existsSync(filename))return;

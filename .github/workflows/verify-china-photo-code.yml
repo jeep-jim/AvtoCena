@@ -1,0 +1,74 @@
+name: Verify China photos, Japan power and code-only publication
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/verify-china-photo-code.yml
+      - .github/workflows/catalog-next-china-photo-release.yml
+      - .github/operations/catalog-next/china-code-serving-plan.json
+      - scripts/catalog-next/code-*.mjs
+      - scripts/catalog-next/photo-code-scope.mjs
+      - scripts/catalog-next/photo-japan-browser-acceptance.mjs
+      - scripts/catalog-next/build-release-image.mjs
+      - scripts/catalog-next/daily-release.mjs
+      - scripts/catalog-next/daily-entry.mjs
+      - scripts/catalog-next/china-state.mjs
+      - scripts/catalog-next/china-generation-gc.mjs
+      - scripts/catalog-next/release-host.py
+      - scripts/catalog-next/release-ssh.mjs
+      - scripts/catalog-next/serving-compatibility.mjs
+      - tests/catalog-next-code-*.test.mjs
+permissions:
+  contents: read
+concurrency:
+  group: verify-china-photo-code
+  cancel-in-progress: false
+jobs:
+  verify:
+    if: github.repository_id == '1289722938' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 2
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24.22.3'
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Check publication, daily continuity, rollback and unchanged baselines
+        run: |
+          node scripts/verify-frozen-speed-baselines.mjs
+          node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/catalog-next-*.test.mjs tests/release-speed-guard-contract.test.mjs
+      - name: Checkout and verify the exact isolated photo candidate
+        run: |
+          node --import tsx scripts/catalog-next/code-entry.mjs --checkout
+          node --import tsx scripts/catalog-next/code-entry.mjs --verify
+      - name: Prepare Chromium for the actual photo failure and recovery fixture
+        run: |
+          npm install --prefix "$RUNNER_TEMP/photo-browser" --no-package-lock --ignore-scripts playwright@1.55.0
+          node --input-type=module <<'JS'
+          import fs from 'node:fs';
+          import {execFileSync} from 'node:child_process';
+          const chrome=execFileSync('which',['google-chrome'],{encoding:'utf8'}).trim();
+          fs.appendFileSync(process.env.GITHUB_ENV,'CHROME_BIN='+fs.realpathSync(chrome)+'\nPLAYWRIGHT_MODULE='+process.env.RUNNER_TEMP+'/photo-browser/node_modules/playwright/index.mjs\n');
+          JS
+      - name: Test real photo components, Japan power and source freshness
+        run: |
+          set -euo pipefail
+          PHOTO_SHA=$(node -p "JSON.parse(require('fs').readFileSync('.github/operations/catalog-next/china-code-serving-plan.json')).runtimeSha")
+          cd "$RUNNER_TEMP/china-serving-runtime-$PHOTO_SHA"
+          node --import tsx --import ./tests/helpers/offline-fetch.mjs --test --test-concurrency=1 tests/catalog-photo-retry.test.ts tests/photo-proxy.test.ts tests/ajes-*.test.ts tests/catalog-detail-read-cache.test.ts tests/catalog-japan-filter-rail.test.ts tests/catalog-market-page-boundary.test.ts tests/japan-pw-*.test.ts
+          npm run typecheck
+          git restore --source=HEAD --worktree -- apps/web/tsconfig.tsbuildinfo
+          node --import tsx tests/browser/catalog-photo-recovery.mjs
+      - name: Preserve the browser recovery evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: china-photo-recovery-fixture
+          path: ${{ runner.temp }}/china-serving-runtime-*/artifacts/catalog-photo-recovery/**
+          if-no-files-found: warn
+          retention-days: 7

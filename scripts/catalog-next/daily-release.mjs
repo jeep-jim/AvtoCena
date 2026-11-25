@@ -11,8 +11,9 @@ import {verifyServingCompatibility} from './serving-compatibility.mjs';
 import {createPrivateChinaGenerationStorage} from './generation-storage.mjs';
 import {restorePrivateChinaGeneration} from './private-generation.mjs';
 import {openChinaSshSession} from './release-ssh.mjs';
+import {verifyChinaPhotoCodeRuntime} from './photo-code-scope.mjs';
 import {validateChinaGenerationReference, validateChinaAcceptedState, validateChinaPublicationIntent,
-  inspectChinaPublicationState} from './china-state.mjs';
+  validateChinaCodeTransition, inspectChinaPublicationState} from './china-state.mjs';
 
 const CALCULATION = '4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90';
 const HASH = /^[a-f0-9]{64}$/;
@@ -66,12 +67,56 @@ function decode(value) {
   return bytes;
 }
 
+/** Authenticated host bytes remain private to the controller. The existing
+ * immutable manifest/oracle and all seven local files must match the accepted
+ * reference. Only the candidate UI revision may change in the reused oracle. */
+export function checkedChinaCodePreflight(value, previous, runtimeSha) {
+  const current = validateChinaGenerationReference(previous, {requireAccepted: true});
+  need(value && HASH.test(value.previousPlanSha256 ?? '') && HASH.test(value.previousOracleSha256 ?? '')
+    && /^[a-f0-9]{40}$/.test(runtimeSha ?? '') && runtimeSha !== current.runtimeSha, 'code_preflight');
+  need(Array.isArray(value.generationFiles) && value.generationFiles.length === names.length
+    && new Set(value.generationFiles.map(row => row?.name)).size === names.length
+    && value.generationFiles.every(row => row && names.includes(row.name)
+      && Number.isSafeInteger(row.bytes) && row.bytes > 0 && HASH.test(row.sha256 ?? '')
+      && Number.isSafeInteger(row.compressedBytes) && row.compressedBytes > 0
+      && HASH.test(row.compressedSha256 ?? '')), 'code_files');
+  need(Number.isSafeInteger(value.generationBytes) && value.generationBytes > 0
+    && value.generationBytes === value.generationFiles.reduce((total, row) => total + row.bytes, 0)
+    && Number.isSafeInteger(value.availableDiskBytes) && value.availableDiskBytes >= 0, 'code_capacity_observation');
+  const manifestRaw = decode(value.generationManifestBase64), oldOracleRaw = decode(value.acceptanceBase64);
+  need(hash(manifestRaw) === current.generationManifestSha256
+    && hash(oldOracleRaw) === value.previousOracleSha256, 'code_content_hash');
+  const generation = JSON.parse(manifestRaw), oracle = JSON.parse(oldOracleRaw);
+  need(generation.kind === 'china-local-generation-v1' && generation.market === 'china'
+    && generation.generationId === current.generationId && generation.runtimeSha === current.pricingRuntimeSha
+    && generation.prepared === true && generation.source?.supplierLatestVerified === true
+    && generation.source.cursor === current.sourceCursor && generation.source.sourceObservedAt === current.sourceObservedAt
+    && Number.isSafeInteger(generation.rows) && generation.rows > 0, 'code_manifest');
+  need(value.generationFiles.find(row => row.name === 'GENERATION.json').sha256 === current.generationManifestSha256
+    && value.generationFiles.find(row => row.name === 'GENERATION.json').bytes === manifestRaw.length, 'code_manifest_file');
+  need(oracle.version === 1 && oracle.kind === 'local-native-reader-http-expectations-v1'
+    && oracle.runtimeSha === current.runtimeSha && oracle.pricingRuntimeSha === current.pricingRuntimeSha
+    && oracle.expectedGeneration === current.generationId && oracle.generationManifestSha256 === current.generationManifestSha256
+    && oracle.syntheticExpectations === true && oracle.httpVerified === false
+    && Array.isArray(oracle.cases) && oracle.cases.length >= 8 && oracle.cases.length <= 32
+    && oracle.cases.every(row => typeof row?.name === 'string'
+      && typeof row.path === 'string' && row.path.startsWith('/api/catalog/search?') && row.path.length <= 4096
+      && Number.isSafeInteger(row.total) && row.total >= 0 && Array.isArray(row.ids) && row.ids.length <= 24
+      && row.ids.every(id => /^[a-f0-9]{24}$/.test(id)) && Array.isArray(row.totalRub)
+      && row.totalRub.length === row.ids.length && row.totalRub.every(price => price === null || Number.isFinite(price) && price >= 0)), 'code_oracle');
+  return {previousPlanSha256: value.previousPlanSha256, previousOracleSha256: value.previousOracleSha256,
+    generationBytes: value.generationBytes, availableDiskBytes: value.availableDiskBytes,
+    generationFiles: value.generationFiles.map(row => ({...row})), generation,
+    oracle: {...oracle, runtimeSha}};
+}
+
 /** Production SSH adapter for data-only updates of the already accepted image.
  * Test substitutions are in-process capabilities, never workflow inputs/env.
  * The first-release controller is neither imported nor modified. */
 export function createChinaDailyRelease({root, servingRoot, pricingPlan, servingPlan, controllerSha, runnerTemp,
   environment = process.env, capabilities = {}, onProgress = () => {}}) {
   const defaults = {verifyCompatibility: verifyServingCompatibility, verifyBaselines: verifyFrozenSpeedBaselines,
+    verifyCodeCompatibility: verifyChinaPhotoCodeRuntime,
     generationStorage: owner => createPrivateChinaGenerationStorage({owner, environment}),
     openSession: openChinaSshSession, runChild, health,
     async checkControl() {
@@ -94,24 +139,56 @@ export function createChinaDailyRelease({root, servingRoot, pricingPlan, serving
   const childEnv = () => ({PATH: environment.PATH, NODE_ENV: 'production', JSON_STORAGE_DRIVER: 'local', TZ: 'Asia/Krasnoyarsk'});
   async function stop(session) { if (!session) return; session.abort(); await session.exited; }
 
-  async function stageRelease({candidate, previous, nonce, assertAuthority}) {
+  async function stage(mode, {candidate, previous, nonce, assertAuthority}) {
+    const codeUpdate = mode === 'code-update';
     candidate = validateChinaGenerationReference(candidate);
     need(!candidate.proof && previous?.found === true && typeof assertAuthority === 'function'
       && /^[a-f0-9]{32}$/.test(nonce ?? ''), 'stage_arguments');
     const prior = validateChinaAcceptedState(previous.value);
     need(prior.current && prior.pending === null && /^"[^"\x00-\x20\x7f]{1,250}"$/.test(previous.etag ?? '')
       && digest(prior) === previous.sha256, 'previous_state');
-    need(candidate.runtimeSha === prior.current.runtimeSha && candidate.imageId === prior.current.imageId
-      && candidate.pricingRuntimeSha === prior.current.pricingRuntimeSha && candidate.runtimeSha === servingPlan.runtimeSha
-      && candidate.pricingRuntimeSha === pricingPlan.runtimeSha && candidate.generationId !== prior.current.generationId, 'retained_image');
+    if (codeUpdate) {
+      validateChinaCodeTransition(candidate, prior.current);
+      need(candidate.runtimeSha === servingPlan.runtimeSha && prior.current.runtimeSha === servingPlan.retainedRuntime
+        && candidate.pricingRuntimeSha === pricingPlan.runtimeSha, 'code_plan');
+      const checked = await use.verifyCodeCompatibility({runtimeRoot: servingRoot, servingPlan, pricingPlan});
+      need(checked.frozenHttpOracleReusable === true && checked.retainedRuntime === prior.current.runtimeSha, 'code_scope');
+    } else need(candidate.runtimeSha === prior.current.runtimeSha && candidate.imageId === prior.current.imageId
+        && candidate.pricingRuntimeSha === prior.current.pricingRuntimeSha && candidate.runtimeSha === servingPlan.runtimeSha
+        && candidate.pricingRuntimeSha === pricingPlan.runtimeSha && candidate.generationId !== prior.current.generationId, 'retained_image');
     const guard = async () => { await assertAuthority(); await use.checkControl(); };
     await verifyRuntime(); await guard(); await use.health(prior.current.runtimeSha);
     const temporary = await fs.realpath(runnerTemp), directory = await fs.mkdtemp(path.join(temporary, 'china-daily-release-'));
     let session, activated = false, closed = false, acceptedReceiptSha256;
     try {
-      await progress('daily_restore_runtime_generation');
-      const owner = {runId: candidate.owner.runId, attempt: candidate.owner.attempt, revision: candidate.owner.revision};
-      const restored = await restorePrivateChinaGeneration({storage: await use.generationStorage(owner), owner,
+      let codePreflight, codeImageUnpackedBytes, files, oracle;
+      const oraclePath = path.join(directory, 'acceptance.json');
+      if (codeUpdate) {
+        await guard(); await progress('code_verify_accepted_host_files');
+        session = await use.openSession({root, directory, privateKey});
+        codePreflight = checkedChinaCodePreflight(await session.call('code_preflight', {previousAccepted: previous}),
+          prior.current, candidate.runtimeSha);
+        oracle = codePreflight.oracle;
+        await fs.writeFile(oraclePath, JSON.stringify(oracle) + '\n', {mode: 0o600, flag: 'wx'});
+        const imageDirectory = path.join(temporary, 'china-release-build');
+        const receiptPath = path.join(imageDirectory, 'image-receipt.json'), imagePath = path.join(imageDirectory, 'image.tar');
+        const imageReceipt = JSON.parse(await fs.readFile(receiptPath)), image = await seal(imagePath);
+        need(imageReceipt.version === 1 && imageReceipt.kind === 'china-runtime-image-v1'
+          && (imageReceipt.codeScope ?? 'catalog-photo-recovery-v1') === (servingPlan.codeScope ?? 'catalog-photo-recovery-v1')
+          && imageReceipt.runtimeSha === candidate.runtimeSha && imageReceipt.runtimeTree === servingPlan.runtimeTree
+          && imageReceipt.retainedRuntime === prior.current.runtimeSha && imageReceipt.runtimeDiffSha256 === servingPlan.runtimeDiffSha256
+          && imageReceipt.pricingRuntimeSha === candidate.pricingRuntimeSha && imageReceipt.imageId === candidate.imageId
+          && imageReceipt.sha256 === image.sha256 && imageReceipt.bytes === image.bytes
+          && Number.isSafeInteger(imageReceipt.imageUnpackedBytes) && imageReceipt.imageUnpackedBytes > 0
+          && imageReceipt.archiveRoundTripVerified === true && imageReceipt.privateDataIncluded === false
+          && imageReceipt.protectedPathsUnchanged === true && imageReceipt.servingCompatibility?.protectedPricingPathsUnchanged === true,
+        'code_image');
+        codeImageUnpackedBytes = imageReceipt.imageUnpackedBytes;
+        files = {'image.tar': imagePath, 'image-receipt.json': receiptPath};
+      } else {
+        await progress('daily_restore_runtime_generation');
+        const owner = {runId: candidate.owner.runId, attempt: candidate.owner.attempt, revision: candidate.owner.revision};
+        const restored = await restorePrivateChinaGeneration({storage: await use.generationStorage(owner), owner,
         expectedReceiptSha256: candidate.receiptSha256, outputDirectory: path.join(directory, 'generation'), names,
         onProgress: value => onProgress({...value, market: 'china'})});
       const binding = restored.receipt.binding;
@@ -124,28 +201,43 @@ export function createChinaDailyRelease({root, servingRoot, pricingPlan, serving
         && generation.prepared === true && generation.source?.supplierLatestVerified === true && generation.rows > 0
         && generation.source.cursor === candidate.sourceCursor && generation.source.sourceObservedAt === candidate.sourceObservedAt, 'generation_manifest');
       await guard(); await progress('daily_actual_serving_oracle');
-      const oraclePath = path.join(directory, 'acceptance.json');
       need(await use.runChild({root, script: path.join(root, 'scripts/catalog-next/acceptance-oracle.mjs'),
         args: [servingRoot, path.join(directory, 'generation'), candidate.generationManifestSha256, oraclePath],
         env: childEnv(), cwd: directory}) === 0, 'oracle_failed');
-      const oracle = JSON.parse(await fs.readFile(oraclePath));
+        oracle = JSON.parse(await fs.readFile(oraclePath));
+        files = restored.paths;
+      }
       need(oracle.runtimeSha === candidate.runtimeSha && oracle.pricingRuntimeSha === candidate.pricingRuntimeSha
         && oracle.generationManifestSha256 === candidate.generationManifestSha256 && oracle.expectedGeneration === candidate.generationId
         && Array.isArray(oracle.cases) && oracle.cases.length >= 8, 'oracle_binding');
-      const files = {...restored.paths, 'acceptance.json': oraclePath,
+      files = {...files, 'acceptance.json': oraclePath,
         'regcloud-performance-gate.py': path.join(root, 'scripts/regcloud-performance-gate.py'),
         'accepted-speed-baseline.json': path.join(root, 'docs/operations/2026-11-11-accepted-speed-baseline.json')};
       const packed = [];
       for (const [name, filename] of Object.entries(files)) { await guard(); packed.push(await pack(filename, directory, name)); }
-      const plan = {version: 1, market: 'china', mode: 'generation-update', retainedRuntime: prior.current.runtimeSha,
+      if (codeUpdate) {
+        let uploadedRaw = 0, uploadPeak = 0;
+        for (const {descriptor} of packed) {
+          uploadedRaw += descriptor.bytes;
+          uploadPeak = Math.max(uploadPeak, uploadedRaw + descriptor.compressedBytes);
+        }
+        const neededBytes = Math.max(uploadPeak, uploadedRaw + codePreflight.generationBytes + codeImageUnpackedBytes);
+        need(Number.isSafeInteger(neededBytes) && codePreflight.availableDiskBytes >= neededBytes, 'code_disk_capacity');
+        await onProgress({phase: 'code_capacity_checked', market: 'china',
+          generationBytes: codePreflight.generationBytes, availableDiskBytes: codePreflight.availableDiskBytes, neededBytes});
+      }
+      const plan = {version: 1, market: 'china', mode, retainedRuntime: prior.current.runtimeSha,
         runtimeSha: candidate.runtimeSha, pricingRuntimeSha: candidate.pricingRuntimeSha,
         runtimeTree: servingPlan.runtimeTree, runtimeDiffSha256: servingPlan.runtimeDiffSha256, controllerSha,
         servingCalculationVersion: CALCULATION, generationId: candidate.generationId,
         generationManifestSha256: candidate.generationManifestSha256, privateGenerationReceiptSha256: candidate.receiptSha256,
         sourceDescriptorSha256: candidate.sourceDescriptorSha256, imageId: candidate.imageId, nonce,
         previousAcceptedETag: previous.etag, previousAcceptedStateSha256: previous.sha256, previousAcceptedState: prior,
-        files: packed.map(file => file.descriptor)};
-      await guard(); session = await use.openSession({root, directory, privateKey});
+        files: [...(codePreflight?.generationFiles ?? []), ...packed.map(file => file.descriptor)],
+        ...(codeUpdate ? {codeSourcePlanSha256: codePreflight.previousPlanSha256,
+          codeSourceOracleSha256: codePreflight.previousOracleSha256,
+          codeScope: servingPlan.codeScope ?? 'catalog-photo-recovery-v1'} : {})};
+      await guard(); session ??= await use.openSession({root, directory, privateKey});
       await session.call('init', {plan});
       for (const file of packed) { await guard(); const saved = await session.upload(file.descriptor.name, file.packed);
         need(saved?.verified === true && saved.file === file.descriptor.name && saved.bytes === file.descriptor.bytes, 'upload_readback'); }
@@ -160,6 +252,7 @@ export function createChinaDailyRelease({root, servingRoot, pricingPlan, serving
           validateChinaPublicationIntent(intent?.value);
           need(inspectChinaPublicationState({accepted: reservation, intent}).status === 'reserved'
             && equal(intent.value.candidate, candidate) && intent.value.nonce === nonce
+            && (codeUpdate ? intent.value.transition === 'code-update' : intent.value.transition === undefined)
             && intent.value.previous.etag === previous.etag && intent.value.previous.sha256 === previous.sha256, 'reservation_binding');
           activated = true;
           const activeGuard = async () => { await activeAuthority(); await use.checkControl(); };
@@ -185,11 +278,32 @@ export function createChinaDailyRelease({root, servingRoot, pricingPlan, serving
           need(await use.runChild({root, script: path.join(root, 'scripts/catalog-next/browser-acceptance.mjs'), args: [], cwd: browserDirectory,
             env: {...browserEnv, ORACLE_PATH: oraclePath, CHINA_RELEASE_SHA: candidate.runtimeSha, VERIFICATION_NONCE: nonce,
               OWNER_FILTER_BROWSER_REPORT: speedPath, CHINA_BROWSER_DETAILS_OUTPUT: detailsPath}}) === 0, 'browser_details_failed');
-          const detailsRaw = await fs.readFile(detailsPath), details = JSON.parse(detailsRaw);
+          let detailsRaw = await fs.readFile(detailsPath);
+          const details = JSON.parse(detailsRaw);
           need(detailsRaw.length <= 256 * 1024 && details.kind === 'china-browser-details-v1' && details.passed === true
             && details.release === candidate.runtimeSha && details.nonce === nonce
             && details.generationManifestSha256 === candidate.generationManifestSha256
             && details.precedingSpeedReportSha256 === hash(speedRaw), 'browser_details_binding');
+          if (codeUpdate && servingPlan.codeScope === 'catalog-photo-japan-power-v1') {
+            await activeGuard(); await progress('code_photo_japan_browser');
+            const photoJapanOutput = path.join(root, 'catalog-next-photo-japan-browser-report.json');
+            need(await use.runChild({root, script: path.join(root, 'scripts/catalog-next/photo-japan-browser-acceptance.mjs'),
+              args: [], cwd: browserDirectory, env: {...browserEnv, ORACLE_PATH: oraclePath,
+                EXPECTED_RELEASE_SHA: candidate.runtimeSha, VERIFICATION_NONCE: nonce, OUTPUT: photoJapanOutput}}) === 0,
+            'photo_japan_browser_failed');
+            const photoJapanRaw = await fs.readFile(photoJapanOutput), photoJapan = JSON.parse(photoJapanRaw);
+            need(photoJapanRaw.length <= 128 * 1024 && photoJapan.version === 1
+              && photoJapan.kind === 'china-photo-japan-browser-v1'
+              && photoJapan.release === candidate.runtimeSha && photoJapan.nonce === nonce
+              && photoJapan.generationManifestSha256 === candidate.generationManifestSha256
+              && photoJapan.oracleSha256 === hash(await fs.readFile(oraclePath))
+              && ['passed', 'chinaPhotoPassed', 'japanFreshnessPassed', 'japanPowerApiPassed', 'japanUiPassed']
+                .every(key => photoJapan[key] === true), 'photo_japan_browser_binding');
+            detailsRaw = Buffer.from(JSON.stringify({...details, photoJapanReportBase64: photoJapanRaw.toString('base64'),
+              photoJapanReportSha256: hash(photoJapanRaw)}) + '\n');
+            need(detailsRaw.length <= 256 * 1024, 'browser_details_size');
+            await fs.writeFile(detailsPath, detailsRaw, {mode: 0o600});
+          }
           await activeGuard(); await use.health(candidate.runtimeSha);
           const saved = await session.call('browser_evidence', {speedBase64: speedRaw.toString('base64'), detailsBase64: detailsRaw.toString('base64')});
           need(saved?.saved === true && saved.speedReportSha256 === hash(speedRaw) && saved.detailsReportSha256 === hash(detailsRaw), 'browser_persistence');
@@ -270,5 +384,6 @@ export function createChinaDailyRelease({root, servingRoot, pricingPlan, serving
       return {completed: true, retiredContainers: result.retiredContainers, filesDeleted: result.filesDeleted, freedBytes: result.freedBytes};
     } finally { await stop(session); await fs.rm(directory, {recursive: true, force: true}); }
   }
-  return Object.freeze({stageRelease, recoverRelease, retireHost});
+  return Object.freeze({stageRelease: args => stage('generation-update', args),
+    stageCodeRelease: args => stage('code-update', args), recoverRelease, retireHost});
 }

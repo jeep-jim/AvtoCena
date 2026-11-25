@@ -8,7 +8,7 @@ import {createHash} from 'node:crypto';
 const need = (value, code) => assert(value, 'china_ssh_' + code);
 const hash = raw => createHash('sha256').update(raw).digest('hex');
 const quote = value => "'" + value.replaceAll("'", "'\\''") + "'";
-const methods = new Set(['init', 'resume_init', 'upload', 'start', 'functional', 'speed', 'switch', 'browser_evidence', 'accept', 'recover', 'diagnose', 'retire', 'retire_recovery', 'prune_failed_uploads', 'prune_failed_witness', 'prune_resolved_failed_uploads', 'close']);
+const methods = new Set(['init', 'code_preflight', 'resume_init', 'upload', 'start', 'functional', 'speed', 'switch', 'browser_evidence', 'accept', 'recover', 'diagnose', 'retire', 'retire_recovery', 'prune_failed_uploads', 'prune_failed_witness', 'prune_resolved_failed_uploads', 'close']);
 
 export function checkedStartupReport(value) {
   const keys = ['version', 'kind', 'ready', 'elapsedSeconds', 'attempts', 'health', 'candidate', 'reason'];

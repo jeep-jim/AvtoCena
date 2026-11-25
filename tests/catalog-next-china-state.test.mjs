@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {CHINA_STATE_KEYS, createChinaStateStorage, createChinaState, validateChinaGenerationReference,
-  validateChinaAcceptedState, inspectChinaPublicationState, protectedChinaGenerations} from '../scripts/catalog-next/china-state.mjs';
+  validateChinaAcceptedState, validateChinaCodeTransition, inspectChinaPublicationState, protectedChinaGenerations} from '../scripts/catalog-next/china-state.mjs';
 
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 const ordered = value => Array.isArray(value) ? value.map(ordered) : value && typeof value === 'object'
@@ -66,12 +66,112 @@ function memoryStore() {
   };
   return storage;
 }
-async function setup({clock = () => now} = {}) {
+async function setup({clock = () => now, token = nonce} = {}) {
   const storage = memoryStore(), state = createChinaState({storage, now: clock});
-  const lease = await state.acquireLease({previous: empty(), owner: holder, nonce, expiresAt: expiry});
+  const lease = await state.acquireLease({previous: empty(), owner: holder, nonce: token, expiresAt: expiry});
   return {storage, state, lease};
 }
 const reserve = (state, lease, ref = candidate()) => state.reserve({lease, previous: empty(), previousIntent: empty(), candidate: ref});
+
+function codeCandidate(previous) {
+  const {proof, ...reference} = previous.value.current;
+  return {...reference, runtimeSha: 'a'.repeat(40), imageId: 'sha256:' + 'b'.repeat(64)};
+}
+function codeAcceptance(reference, previous, token = nonce, overrides = {}) {
+  return acceptance(reference, token, {transition: 'code-update', previousAcceptedETag: previous.etag,
+    previousAcceptedStateSha256: previous.sha256, retainedRuntimeSha: previous.value.current.runtimeSha,
+    retainedImageId: previous.value.current.imageId, ...overrides});
+}
+
+async function setupCodeTransition() {
+  const initialToken = 'e'.repeat(32);
+  const {state, storage, lease: initialLease} = await setup({token: initialToken});
+  const first = await state.commit({lease: initialLease, ...await reserve(state, initialLease),
+    evidence: acceptance(candidate(), initialToken)});
+  await state.releaseLease({lease: initialLease});
+  const lease = await state.acquireLease({previous: await state.read('lease'), owner: holder, nonce, expiresAt: expiry});
+  return {state, storage, lease, first};
+}
+
+test('an explicit code update preserves the complete accepted data identity and admits the next daily generation', async () => {
+  const {state, lease, first} = await setupCodeTransition();
+  const changed = codeCandidate(first.accepted);
+  await assert.rejects(state.reserve({lease, previous: first.accepted, previousIntent: first.intent, candidate: changed}), /candidate_is_current/);
+  const staged = await state.reserve({lease, previous: first.accepted, previousIntent: first.intent,
+    candidate: changed, transition: 'code-update'});
+  assert.equal(staged.intent.value.transition, 'code-update');
+  await assert.rejects(state.commit({lease, ...staged, evidence: acceptance(changed)}), /code_update_predecessor/);
+  const updated = await state.commit({lease, ...staged, evidence: codeAcceptance(changed, first.accepted)});
+  assert.equal(updated.accepted.value.current.generationId, updated.accepted.value.rollback.generationId);
+  assert.equal(updated.accepted.value.current.runtimeSha, changed.runtimeSha);
+  assert.deepEqual(updated.accepted.value.rollback, first.accepted.value.current);
+  assert.equal(inspectChinaPublicationState(updated).status, 'resolved');
+  assert.equal(protectedChinaGenerations(updated).references.length, 1, 'data GC protects one shared generation');
+  const next = {...candidate(2), runtimeSha: changed.runtimeSha, imageId: changed.imageId};
+  const daily = await state.reserve({lease, previous: updated.accepted, previousIntent: updated.intent, candidate: next});
+  assert.ok(!Object.hasOwn(daily.intent.value, 'transition'));
+  const done = await state.commit({lease, ...daily, evidence: acceptance(next)});
+  assert.equal(done.accepted.value.current.generationId, next.generationId);
+  assert.deepEqual(done.accepted.value.rollback, updated.accepted.value.current);
+  assert.equal(inspectChinaPublicationState(done).status, 'resolved');
+});
+
+test('code updates cannot relabel data, reuse application identity or accept an unrelated predecessor receipt', async () => {
+  const {state, lease, storage, first} = await setupCodeTransition();
+  const changed = codeCandidate(first.accepted), original = first.accepted.value.current;
+  const invalid = [
+    {...changed, receiptSha256: 'c'.repeat(64)}, {...changed, sourceDescriptorSha256: 'c'.repeat(64)},
+    {...changed, generationManifestSha256: 'c'.repeat(64)}, {...changed, sourceCursor: changed.sourceCursor + 1},
+    {...changed, sourceObservedAt: '2026-11-24T11:01:00Z'}, {...changed, pricingRuntimeSha: 'c'.repeat(40)},
+    {...changed, owner: {...changed.owner, revision: 'c'.repeat(40)}},
+    {...changed, owner: {...changed.owner, attempt: '2'}, generationId: changed.generationId.replace(/_1$/, '_2')},
+  ];
+  for (const reference of invalid) assert.throws(() => validateChinaCodeTransition(reference, original), /code_update_data_identity/);
+  for (const reference of [{...changed, runtimeSha: original.runtimeSha}, {...changed, imageId: original.imageId}])
+    assert.throws(() => validateChinaCodeTransition(reference, original), /code_update_runtime/);
+  const baseline = storage.writes.length;
+  await assert.rejects(state.reserve({lease, previous: first.accepted, previousIntent: first.intent,
+    candidate: changed, transition: 'generation-update'}), /code_update_previous_required/);
+  assert.equal(storage.writes.length, baseline);
+  const staged = await state.reserve({lease, previous: first.accepted, previousIntent: first.intent,
+    candidate: changed, transition: 'code-update'});
+  for (const overrides of [{previousAcceptedETag: '"different"'}, {previousAcceptedStateSha256: 'c'.repeat(64)},
+    {retainedRuntimeSha: 'c'.repeat(40)}, {retainedImageId: 'sha256:' + 'c'.repeat(64)}])
+    await assert.rejects(state.commit({lease, ...staged, evidence: codeAcceptance(changed, first.accepted, nonce, overrides)}), /code_update_predecessor/);
+  assert.deepEqual((await state.read('accepted')).value.current, original);
+});
+
+test('a same-generation rollback pair needs code proof and interrupted code acceptance finalizes without another switch', async () => {
+  const {state, lease, storage, first} = await setupCodeTransition();
+  const changed = codeCandidate(first.accepted);
+  const staged = await state.reserve({lease, previous: first.accepted, previousIntent: first.intent,
+    candidate: changed, transition: 'code-update'});
+  storage.beforeWrite = async (name, previous, value) => { if (name === 'intent' && value.status === 'committed') throw Error('offline'); };
+  await assert.rejects(state.commit({lease, ...staged, evidence: codeAcceptance(changed, first.accepted)}), /write_not_committed/);
+  const saved = await state.read('accepted');
+  assert.equal(inspectChinaPublicationState({accepted: saved, intent: staged.intent}).status, 'accepted_needs_finalization');
+  const withoutProof = copy(saved.value), ordinary = acceptance(changed);
+  withoutProof.current.proof = {kind: 'china-accepted-proof-v1', hostReceiptBase64: ordinary.hostReceiptBase64,
+    hostReceiptSha256: ordinary.hostReceiptSha256};
+  assert.throws(() => validateChinaAcceptedState(withoutProof), /rollback_identity/);
+  const changedCommit = copy(saved.value); changedCommit.commit.previousStateSha256 = 'c'.repeat(64);
+  assert.throws(() => validateChinaAcceptedState(changedCommit), /code_update_predecessor/);
+  storage.beforeWrite = null;
+  const done = await state.finalize({lease, accepted: saved, intent: staged.intent});
+  assert.equal(inspectChinaPublicationState({accepted: saved, intent: done}).status, 'resolved');
+});
+
+test('code-update rollback requires actual rollback proof and restores the previous application and data', async () => {
+  const {state, lease, first} = await setupCodeTransition();
+  const staged = await state.reserve({lease, previous: first.accepted, previousIntent: first.intent,
+    candidate: codeCandidate(first.accepted), transition: 'code-update'});
+  await assert.rejects(state.abortReserved({lease, ...staged, evidence: rollback(staged.intent,
+    {retainedRuntimeSha: 'a'.repeat(40)})}), /rollback_previous/);
+  const done = await state.abortReserved({lease, ...staged, evidence: rollback(staged.intent)});
+  assert.deepEqual(done.accepted.value.current, first.accepted.value.current);
+  assert.deepEqual(done.accepted.value.rollback, first.accepted.value.rollback);
+  assert.equal(inspectChinaPublicationState(done).status, 'resolved');
+});
 
 test('only a bound host receipt makes a reference accepted; bootstrap reservation is not accepted', async () => {
   const {state, lease} = await setup();

@@ -55,6 +55,12 @@ function hostProof(value, reference) {
   need(browser?.release === receipt.release && browser.nonce === receipt.nonce && browser.passed === true
     && browser.functionalPassed === true && browser.speedPassed === true
     && ['reportSha256', 'speedReportSha256', 'detailsReportSha256'].every(key => HASH.test(browser[key] ?? '')), 'browser_binding');
+  if (Object.hasOwn(receipt, 'transition')) {
+    need(receipt.transition === 'code-update' && etag(receipt.previousAcceptedETag)
+      && HASH.test(receipt.previousAcceptedStateSha256 ?? '') && REVISION.test(receipt.retainedRuntimeSha ?? '')
+      && /^sha256:[a-f0-9]{64}$/.test(receipt.retainedImageId ?? '')
+      && receipt.retainedRuntimeSha !== receipt.release && receipt.retainedImageId !== receipt.imageId, 'code_update_host_binding');
+  }
   return receipt;
 }
 
@@ -95,6 +101,31 @@ export function validateChinaGenerationReference(value, {requireAccepted = false
   return immutable(clone(value));
 }
 
+const dataIdentity = reference => Object.fromEntries(['market', 'generationId', 'owner', 'receiptSha256',
+  'sourceDescriptorSha256', 'generationManifestSha256', 'sourceCursor', 'sourceObservedAt', 'pricingRuntimeSha']
+  .map(key => [key, reference[key]]));
+
+/** A code publication changes only the serving application identity. Its data
+ * remains the exact accepted generation; it never relabels or reprices it. */
+export function validateChinaCodeTransition(candidate, previous) {
+  candidate = validateChinaGenerationReference(candidate);
+  previous = validateChinaGenerationReference(previous, {requireAccepted: true});
+  need(!Object.hasOwn(candidate, 'proof'), 'candidate_is_not_accepted');
+  need(equal(dataIdentity(candidate), dataIdentity(previous)), 'code_update_data_identity');
+  need(candidate.runtimeSha !== previous.runtimeSha && candidate.imageId !== previous.imageId, 'code_update_runtime');
+  return candidate;
+}
+
+function codeTransitionProof(receipt, candidate, previous, previousETag, previousStateSha256) {
+  const {proof: _candidateProof, ...unproved} = candidate;
+  validateChinaCodeTransition(unproved, previous);
+  need(receipt.transition === 'code-update' && receipt.previousAcceptedETag === previousETag
+    && receipt.previousAcceptedStateSha256 === previousStateSha256
+    && receipt.retainedRuntimeSha === previous.runtimeSha && receipt.retainedImageId === previous.imageId,
+  'code_update_predecessor');
+  need(receipt.nonce !== hostProof(previous.proof, previous).nonce, 'code_update_nonce');
+}
+
 export function validateChinaAcceptedState(value) {
   need(keys(value, ['version', 'kind', 'market', 'revision', 'current', 'rollback', 'commit', 'pending'])
     && value.version === 1 && value.kind === 'china-accepted-state-v1' && value.market === 'china'
@@ -110,8 +141,11 @@ export function validateChinaAcceptedState(value) {
       && (commit.previousETag === null) === (commit.previousStateSha256 === null), 'commit');
     if (value.rollback !== null) {
       validateChinaGenerationReference(value.rollback, {requireAccepted: true});
-      need(value.rollback.generationId !== value.current.generationId, 'rollback_identity');
+      if (proof.transition === 'code-update')
+        codeTransitionProof(proof, value.current, value.rollback, commit.previousETag, commit.previousStateSha256);
+      else need(value.rollback.generationId !== value.current.generationId, 'rollback_identity');
     }
+    else need(proof.transition !== 'code-update', 'code_update_rollback_required');
   }
   if (value.pending !== null) {
     need(keys(value.pending, ['nonce', 'intentSha256', 'candidateSha256', 'createdAt'])
@@ -137,7 +171,7 @@ function pendingForm(value) { return {...value, status: 'pending', resolution: n
 const intentDigest = value => digest(pendingForm(value));
 
 export function validateChinaPublicationIntent(value) {
-  need(keys(value, ['version', 'kind', 'market', 'revision', 'nonce', 'owner', 'createdAt', 'candidate', 'previous', 'status', 'resolution'])
+  need(keys(value, ['version', 'kind', 'market', 'revision', 'nonce', 'owner', 'createdAt', 'candidate', 'previous', 'status', 'resolution'], ['transition'])
     && value.version === 1 && value.kind === 'china-publication-intent-v1' && value.market === 'china'
     && integer(value.revision) && value.revision > 0 && NONCE.test(value.nonce ?? '') && instant(value.createdAt)
     && ['pending', 'committed', 'aborted'].includes(value.status), 'intent');
@@ -145,7 +179,10 @@ export function validateChinaPublicationIntent(value) {
   need(!Object.hasOwn(value.candidate, 'proof'), 'candidate_is_not_accepted');
   observation('accepted', value.previous);
   need(!value.previous.found || value.previous.value.pending === null, 'previous_pending');
-  need(value.candidate.generationId !== value.previous.value?.current?.generationId, 'candidate_is_current');
+  if (Object.hasOwn(value, 'transition')) {
+    need(value.transition === 'code-update' && value.previous.value?.current, 'code_update_previous_required');
+    validateChinaCodeTransition(value.candidate, value.previous.value.current);
+  } else need(value.candidate.generationId !== value.previous.value?.current?.generationId, 'candidate_is_current');
   if (value.status === 'pending') need(value.resolution === null, 'pending_resolution');
   else {
     need(keys(value.resolution, ['kind', 'at', 'acceptedETag', 'acceptedSha256', 'hostReceiptSha256'], ['rollbackProof'])
@@ -294,6 +331,9 @@ function acceptanceProof(candidate, intent, evidence) {
     hostReceiptSha256: evidence.hostReceiptSha256};
   const receipt = hostProof(proof, candidate);
   need(receipt.nonce === intent.nonce && Date.parse(receipt.acceptedAt) >= Date.parse(intent.createdAt), 'acceptance_intent');
+  if (intent.transition === 'code-update')
+    codeTransitionProof(receipt, candidate, intent.previous.value.current, intent.previous.etag, intent.previous.sha256);
+  else need(receipt.transition === undefined, 'unexpected_code_update_proof');
   const speed = parse(evidence.browserSpeedBytes, 'speed_report'), details = parse(evidence.browserDetailsBytes, 'details_report');
   need(hash(evidence.browserSpeedBytes) === receipt.browser.speedReportSha256
     && hash(evidence.browserDetailsBytes) === receipt.browser.detailsReportSha256
@@ -357,7 +397,7 @@ export function createChinaState({storage, now = () => new Date().toISOString()}
     need(sameObservation(accepted, intent.value.previous), 'conflict');
     return writeOnce('accepted', intent.value.previous, reservedValue(intent.value));
   }
-  async function reserve({lease, previous, previousIntent, candidate}) {
+  async function reserve({lease, previous, previousIntent, candidate, transition}) {
     const holder = await activeLease(lease); observation('accepted', previous); observation('intent', previousIntent);
     candidate = validateChinaGenerationReference(candidate);
     need(!Object.hasOwn(candidate, 'proof') && (!previous.found || previous.value.pending === null), 'reservation_pending');
@@ -365,7 +405,8 @@ export function createChinaState({storage, now = () => new Date().toISOString()}
       && previousIntent.value.resolution.acceptedETag === previous.etag && previousIntent.value.resolution.acceptedSha256 === previous.sha256), 'unresolved_intent');
     await current('accepted', previous);
     const value = {version: 1, kind: 'china-publication-intent-v1', market: 'china', revision: (previousIntent.value?.revision ?? 0) + 1,
-      nonce: holder.nonce, owner: holder.owner, createdAt: clock(), candidate, previous, status: 'pending', resolution: null};
+      nonce: holder.nonce, owner: holder.owner, createdAt: clock(), candidate, previous, status: 'pending', resolution: null,
+      ...(transition !== undefined ? {transition} : {})};
     const intent = await writeOnce('intent', previousIntent, value);
     const reservation = await reserveSavedIntent({lease, intent});
     return immutable({intent, reservation});

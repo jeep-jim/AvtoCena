@@ -190,6 +190,7 @@ export async function buildChinaReleaseImage({runtimeRoot, plan, pricingPlan, ru
     need(JSON.stringify(await fileSeal(image)) === JSON.stringify(archiveSeal), 'archive_changed');
     await verifyChinaImageRuntime({runtimeRoot, plan, execute});
     const receipt = {version: 1, kind: 'china-runtime-image-v1', market: 'china',
+      ...(plan.codeScope === undefined ? {} : {codeScope: plan.codeScope}),
       ...proof, ...inspected, ...archiveSeal, builder, sourceArchive, servingCompatibility,
       pricingRuntimeSha: pricingPlan.runtimeSha, pricingRuntimeTree: pricingPlan.runtimeTree,
       archiveRoundTripVerified: true, activationAuthorized: false,

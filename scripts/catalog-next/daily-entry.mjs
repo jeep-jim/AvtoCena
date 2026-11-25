@@ -69,33 +69,51 @@ export async function readChinaDailyDeadline({environment = process.env, fetcher
   return new Date(started + CHINA_DAILY_JOB_TIMEOUT_MINUTES * 60000).toISOString();
 }
 
-async function plans(root) {
+export async function readChinaDailyPlans(root = ROOT) {
   const [pricingPlan, servingPlan] = await Promise.all(['china-plan.json', 'china-serving-plan.json'].map(async name =>
     JSON.parse(await fs.readFile(path.join(root, '.github/operations/catalog-next', name), 'utf8'))));
+  let codePlan;
+  try { codePlan = JSON.parse(await fs.readFile(path.join(root, '.github/operations/catalog-next/china-code-serving-plan.json'), 'utf8')); }
+  catch (error) { if (error.code !== 'ENOENT') throw error; }
+  const servingPlans = [servingPlan, ...(codePlan === undefined ? [] : [codePlan])];
   need(pricingPlan.version === 1 && pricingPlan.market === 'china' && pricingPlan.minimumYear === 2014
-    && servingPlan.version === 1 && servingPlan.market === 'china' && servingPlan.minimumYear === 2014
-    && [pricingPlan.runtimeSha, pricingPlan.runtimeTree, servingPlan.runtimeSha, servingPlan.runtimeTree,
-      pricingPlan.retainedRuntime].every(value => SHA.test(value ?? ''))
-    && servingPlan.pricingRuntimeSha === pricingPlan.runtimeSha && servingPlan.pricingRuntimeTree === pricingPlan.runtimeTree, 'plans');
-  return {pricingPlan, servingPlan};
+    && [pricingPlan.runtimeSha, pricingPlan.runtimeTree, pricingPlan.retainedRuntime].every(value => SHA.test(value ?? ''))
+    && servingPlans.every(plan => plan?.version === 1 && plan.market === 'china' && plan.minimumYear === 2014
+      && [plan.runtimeSha, plan.runtimeTree, plan.retainedRuntime].every(value => SHA.test(value ?? ''))
+      && plan.pricingRuntimeSha === pricingPlan.runtimeSha && plan.pricingRuntimeTree === pricingPlan.runtimeTree)
+    && new Set(servingPlans.map(plan => plan.runtimeSha)).size === servingPlans.length, 'plans');
+  return {pricingPlan, servingPlan, servingPlans};
 }
+
+/** State selects a reviewed plan, never an unreviewed checkout revision. Both
+ * old and new runtimes remain available during a resumable code publication. */
+export function selectChinaDailyServingPlan(planSet, runtimeSha) {
+  const matches = planSet.servingPlans.filter(plan => plan.runtimeSha === runtimeSha);
+  need(matches.length === 1, 'accepted_runtime');
+  return matches[0];
+}
+const servingDirectoryName = (planSet, plan) => plan === planSet.servingPlan
+  ? 'china-serving-runtime' : 'china-serving-runtime-' + plan.runtimeSha;
 
 /** Two detached roots remain distinct throughout pricing and public-oracle
  * execution. A retained image is reused on the server; no Docker build here. */
 export async function checkoutChinaDailyRuntimes({root = ROOT, runnerTemp = process.env.RUNNER_TEMP, git = gitAt(root)}) {
-  const {pricingPlan, servingPlan} = await plans(root), temporary = await fs.realpath(runnerTemp);
-  const pricingRoot = path.join(temporary, 'china-pricing-runtime'), servingRoot = path.join(temporary, 'china-serving-runtime');
-  for (const directory of [pricingRoot, servingRoot]) {
+  const planSet = await readChinaDailyPlans(root), {pricingPlan, servingPlan, servingPlans} = planSet;
+  const temporary = await fs.realpath(runnerTemp), pricingRoot = path.join(temporary, 'china-pricing-runtime');
+  const servingRoots = Object.fromEntries(servingPlans.map(plan => [plan.runtimeSha, path.join(temporary, servingDirectoryName(planSet, plan))]));
+  for (const directory of [pricingRoot, ...Object.values(servingRoots)]) {
     const exists = await fs.lstat(directory).then(() => true, error => { if (error.code === 'ENOENT') return false; throw error; });
     need(!exists, 'checkout_exists');
   }
-  for (const revision of new Set([pricingPlan.retainedRuntime, pricingPlan.runtimeSha, servingPlan.runtimeSha]))
+  for (const revision of new Set([pricingPlan.retainedRuntime, pricingPlan.runtimeSha, ...servingPlans.map(plan => plan.runtimeSha)]))
     git(['fetch', '--no-tags', 'https://github.com/jeep-jim/AvtoCena.git', revision]);
-  for (const [directory, revision] of [[pricingRoot, pricingPlan.runtimeSha], [servingRoot, servingPlan.runtimeSha]]) {
+  for (const [directory, revision] of [[pricingRoot, pricingPlan.runtimeSha],
+    ...servingPlans.map(plan => [servingRoots[plan.runtimeSha], plan.runtimeSha])]) {
     git(['worktree', 'add', '--detach', directory, revision]);
     await fs.symlink(path.join(root, 'node_modules'), path.join(directory, 'node_modules'), 'dir');
   }
-  return {pricingRoot, servingRoot, pricingRuntimeSha: pricingPlan.runtimeSha, runtimeSha: servingPlan.runtimeSha};
+  return {pricingRoot, servingRoot: servingRoots[servingPlan.runtimeSha], servingRoots,
+    pricingRuntimeSha: pricingPlan.runtimeSha, runtimeSha: servingPlan.runtimeSha};
 }
 
 /** Callable production entry. Only root-controlled dependency functions can be
@@ -113,22 +131,20 @@ export async function runChinaDailyEntry({root = ROOT, environment = process.env
     const invocation = await use.verifyInvocation({root, environment});
     use.verifyBaselines(root);
     need(environment.JSON_STORAGE_DRIVER === 'object', 'storage_driver');
-    const {pricingPlan, servingPlan} = await plans(root);
+    const planSet = await readChinaDailyPlans(root), {pricingPlan} = planSet;
     const runnerTemp = await fs.realpath(environment.RUNNER_TEMP);
-    const [pricingRoot, servingRoot] = await Promise.all(['china-pricing-runtime', 'china-serving-runtime']
-      .map(name => fs.realpath(path.join(runnerTemp, name))));
-    need(pricingRoot !== servingRoot, 'separate_runtime_roots');
+    const pricingRoot = await fs.realpath(path.join(runnerTemp, 'china-pricing-runtime'));
     const pricingGit = use.runtimeGit(pricingRoot);
     need(pricingGit(['rev-parse', 'HEAD']).trim() === pricingPlan.runtimeSha
       && pricingGit(['rev-parse', 'HEAD^{tree}']).trim() === pricingPlan.runtimeTree, 'pricing_checkout');
     pricingGit(['diff', '--quiet', '--no-ext-diff', 'HEAD', '--']);
-    await use.verifyCompatibility({runtimeRoot: servingRoot, servingPlan, pricingPlan});
     const storage = use.createStorage();
     need((await storage.assertPrivateBucket())?.verified === true, 'state_privacy');
     const state = createChinaState({storage}), accepted = await state.read('accepted');
     need(accepted.found && accepted.value.current, 'accepted_source_required');
     const reference = validateChinaGenerationReference(accepted.value.current, {requireAccepted: true});
-    need(reference.runtimeSha === servingPlan.runtimeSha && reference.pricingRuntimeSha === pricingPlan.runtimeSha, 'accepted_runtime');
+    selectChinaDailyServingPlan(planSet, reference.runtimeSha);
+    need(reference.pricingRuntimeSha === pricingPlan.runtimeSha, 'accepted_runtime');
     const progress = value => {
       if (typeof value?.phase !== 'string' || !/^[a-z0-9_:-]{1,120}$/.test(value.phase)) return;
       const record = {phase: value.phase, market: 'china'};
@@ -136,9 +152,33 @@ export async function runChinaDailyEntry({root = ROOT, environment = process.env
         if (Number.isSafeInteger(value[name]) && value[name] >= 0) record[name] = value[name];
       log(record);
     };
-    const release = use.createRelease({root, servingRoot, pricingPlan, servingPlan, controllerSha: invocation.sourceSha,
-      runnerTemp, environment, onProgress: progress});
-    need(typeof release.retireHost === 'function', 'retirement_hook');
+    const releases = new Map();
+    async function releaseFor(runtimeSha) {
+      if (releases.has(runtimeSha)) return releases.get(runtimeSha);
+      const servingPlan = selectChinaDailyServingPlan(planSet, runtimeSha);
+      const servingRoot = await fs.realpath(path.join(runnerTemp, servingDirectoryName(planSet, servingPlan)));
+      need(pricingRoot !== servingRoot, 'separate_runtime_roots');
+      await use.verifyCompatibility({runtimeRoot: servingRoot, servingPlan, pricingPlan});
+      const release = use.createRelease({root, servingRoot, pricingPlan, servingPlan, controllerSha: invocation.sourceSha,
+        runnerTemp, environment, onProgress: progress});
+      need(['stageRelease', 'recoverRelease', 'retireHost'].every(key => typeof release?.[key] === 'function'), 'retirement_hook');
+      releases.set(runtimeSha, release); return release;
+    }
+    await releaseFor(reference.runtimeSha);
+    const release = {
+      async stageRelease(args) {
+        const retained = validateChinaGenerationReference(args.previous?.value?.current, {requireAccepted: true});
+        return (await releaseFor(retained.runtimeSha)).stageRelease(args);
+      },
+      async recoverRelease(args) {
+        const candidate = validateChinaGenerationReference(args.intent?.value?.candidate);
+        return (await releaseFor(candidate.runtimeSha)).recoverRelease(args);
+      },
+      async retireHost(args) {
+        const retained = validateChinaGenerationReference(args.acceptedPublication?.accepted?.value?.current, {requireAccepted: true});
+        return (await releaseFor(retained.runtimeSha)).retireHost(args);
+      },
+    };
     let deadlineAt = null;
     try { deadlineAt = await use.readDeadline({environment}); }
     catch { progress({phase: 'daily_cleanup_deadline_unavailable'}); }

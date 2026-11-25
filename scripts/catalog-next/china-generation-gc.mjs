@@ -79,8 +79,15 @@ function retirementSuccessor(view, previousAccepted) {
 export function validateChinaGenerationRetirementWitness({previousAccepted, acceptedPublication}) {
   const reference = previousReference(previousAccepted);
   if (!reference) return null;
-  checkedState(acceptedPublication, reference);
+  const protection = protectedChinaGenerations(acceptedPublication);
+  need(acceptedPublication.accepted.found && acceptedPublication.accepted.value.current
+    && !acceptedPublication.accepted.value.pending && ['idle', 'resolved'].includes(protection.reconciliation), 'state_unresolved');
   retirementSuccessor(acceptedPublication, previousAccepted);
+  // A code publication can leave two deployment receipts for the same data.
+  // Displacing one deployment does not retire that generation while another
+  // current/rollback reference still uses it. Do not enqueue an impossible GC
+  // task; a later fully accepted successor will provide its own exact witness.
+  if (protection.references.some(retained => sameRoot(retained, reference))) return null;
   const result = structuredClone({reference, previousAccepted, acceptedPublication});
   const freeze = value => { if (value && typeof value === 'object') {
     Object.values(value).forEach(freeze); Object.freeze(value);

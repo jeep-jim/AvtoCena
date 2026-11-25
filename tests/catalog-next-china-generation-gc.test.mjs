@@ -3,8 +3,50 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import {restorePrivateChinaGeneration} from '../scripts/catalog-next/private-generation.mjs';
-import {collectRetiredChinaGeneration, createChinaGenerationGcStorage} from '../scripts/catalog-next/china-generation-gc.mjs';
-import {hash, copy, empty, candidate, acceptance, fixture} from './helpers/catalog-next-gc-fixture.mjs';
+import {collectRetiredChinaGeneration, createChinaGenerationGcStorage,
+  validateChinaGenerationRetirementWitness} from '../scripts/catalog-next/china-generation-gc.mjs';
+import {createChinaState} from '../scripts/catalog-next/china-state.mjs';
+import {hash, copy, empty, candidate, acceptance, fixture, stateStore, clock, nonce, owner} from './helpers/catalog-next-gc-fixture.mjs';
+
+test('code deployments sharing data never enqueue retirement until both current and rollback stop using that generation', async () => {
+  const state = createChinaState({storage: stateStore(), now: () => clock});
+  let lease = await state.acquireLease({previous: empty(), owner: owner(9999), nonce, expiresAt: '2026-11-25T14:00:00.000Z'});
+  function evidence(reference, extra = {}) {
+    const initial = acceptance(reference), speed = JSON.parse(initial.browserSpeedBytes), details = JSON.parse(initial.browserDetailsBytes);
+    const token = lease.value.nonce;
+    speed.release = reference.runtimeSha; details.release = reference.runtimeSha; details.nonce = token;
+    const browserSpeedBytes = Buffer.from(JSON.stringify(speed));
+    details.precedingSpeedReportSha256 = hash(browserSpeedBytes);
+    const browserDetailsBytes = Buffer.from(JSON.stringify(details));
+    const receipt = {...JSON.parse(Buffer.from(initial.hostReceiptBase64, 'base64')), release: reference.runtimeSha, nonce: token, ...extra};
+    receipt.browser = {...receipt.browser, release: reference.runtimeSha, nonce: token, speedReportSha256: hash(browserSpeedBytes),
+      detailsReportSha256: hash(browserDetailsBytes), reportSha256: hash(Buffer.concat([browserSpeedBytes, browserDetailsBytes]))};
+    const raw = Buffer.from(JSON.stringify(receipt));
+    return {hostReceiptBase64: raw.toString('base64'), hostReceiptSha256: hash(raw), browserSpeedBytes, browserDetailsBytes};
+  }
+  const publish = async (reference, transition, extra) => state.commit({lease,
+    ...await state.reserve({lease, previous: await state.read('accepted'), previousIntent: await state.read('intent'),
+      candidate: reference, ...(transition ? {transition} : {})}), evidence: evidence(reference, extra)});
+  const original = candidate(1001), first = await publish(original);
+  await state.releaseLease({lease});
+  lease = await state.acquireLease({previous: await state.read('lease'), owner: owner(9999), nonce: 'd'.repeat(32),
+    expiresAt: '2026-11-25T14:00:00.000Z'});
+  const code = {...original, runtimeSha: 'b'.repeat(40), imageId: 'sha256:' + 'c'.repeat(64)};
+  const second = await publish(code, 'code-update', {transition: 'code-update', previousAcceptedETag: first.accepted.etag,
+    previousAcceptedStateSha256: first.accepted.sha256, retainedRuntimeSha: original.runtimeSha, retainedImageId: original.imageId});
+  const next = {...candidate(1002), runtimeSha: code.runtimeSha, imageId: code.imageId};
+  const third = await publish(next);
+  assert.equal(validateChinaGenerationRetirementWitness({previousAccepted: second.accepted, acceptedPublication: third}), null);
+  const unrelated = copy(second.accepted); unrelated.etag = '"unrelated"';
+  assert.throws(() => validateChinaGenerationRetirementWitness({previousAccepted: unrelated, acceptedPublication: third}), /publication_successor/);
+  await assert.rejects(collectRetiredChinaGeneration({previousAccepted: second.accepted, acceptedPublication: third,
+    readState: async () => third, assertAuthority: async () => {}, storage: {getBinary: async () => assert.fail('shared data must never be read for deletion')}}),
+  /generation_protected/);
+  const fourth = await publish({...candidate(1003), runtimeSha: code.runtimeSha, imageId: code.imageId});
+  const witness = validateChinaGenerationRetirementWitness({previousAccepted: third.accepted, acceptedPublication: fourth});
+  assert.equal(witness.reference.generationId, original.generationId);
+  assert.equal(witness.reference.runtimeSha, code.runtimeSha);
+});
 
 test('a publication with no displaced rollback performs no object I/O', async () => {
   const result = await collectRetiredChinaGeneration({previousAccepted: empty(), readState: async () => assert.fail(),

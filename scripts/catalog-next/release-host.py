@@ -33,6 +33,36 @@ RETAINED = '56d6b94fea70457e0ce2b0820596da9972846b90'
 FILE_NAMES = {'GENERATION.json', 'details.sqlite', 'query.sqlite', 'FILTER_SEMANTICS.json', 'FX_RECEIPT.json',
               'RECONCILIATION.json', 'DISPOSITIONS.ndjson', 'image.tar', 'regcloud-performance-gate.py',
               'accepted-speed-baseline.json', 'acceptance.json'}
+GENERATION_FILES = {'GENERATION.json', 'details.sqlite', 'query.sqlite', 'FILTER_SEMANTICS.json',
+                    'FX_RECEIPT.json', 'RECONCILIATION.json', 'DISPOSITIONS.ndjson'}
+CODE_UPLOAD_FILES = (FILE_NAMES - GENERATION_FILES) | {'image-receipt.json'}
+PHOTO_CODE_FILES = {'apps/web/components/catalog/CatalogCover.tsx', 'apps/web/components/catalog/CatalogCard.tsx',
+                    'apps/web/components/catalog/protected-photo-retry.ts', 'tests/catalog-photo-retry.test.ts',
+                    'tests/browser/catalog-photo-recovery-fixture.tsx', 'tests/browser/catalog-photo-recovery.mjs'}
+PHOTO_CODE_SCOPE = 'catalog-photo-recovery-v1'
+PHOTO_JAPAN_CODE_SCOPE = 'catalog-photo-japan-power-v1'
+PHOTO_JAPAN_CODE_FILES = PHOTO_CODE_FILES | {
+    'apps/web/app/(public)/api/catalog/search/route.ts',
+    'apps/web/app/(public)/cars/offer/[id]/page.tsx',
+    'apps/web/app/(public)/page.tsx',
+    'apps/web/components/catalog/AjesCatalog.tsx',
+    'apps/web/components/catalog/AjesRail.tsx',
+    'apps/web/components/catalog/CatalogCard.tsx',
+    'apps/web/components/catalog/CatalogContent.tsx',
+    'apps/web/components/catalog/JapanSourcePowerNotice.tsx',
+    'apps/web/lib/catalog/ajes-catalog.ts',
+    'apps/web/lib/catalog/ajes-client.ts',
+    'apps/web/lib/catalog/ajes-result-filter.ts',
+    'apps/web/lib/catalog/detail-read-cache.ts',
+    'apps/web/lib/catalog/japan-source-power.ts',
+    'apps/web/lib/catalog/storage.ts',
+    'tests/ajes-catalog-progressive.test.ts',
+    'tests/catalog-japan-filter-rail.test.ts',
+    'tests/ajes-detail-freshness.test.ts',
+    'tests/japan-pw-first.test.ts',
+    'tests/japan-pw-results.test.ts',
+}
+CODE_SCOPE_FILES = {PHOTO_CODE_SCOPE: PHOTO_CODE_FILES, PHOTO_JAPAN_CODE_SCOPE: PHOTO_JAPAN_CODE_FILES}
 GENERATION_MOUNT = '/run/avtocena-china-generation'
 HOST_BULK_FILES = {'details.sqlite', 'query.sqlite', 'DISPOSITIONS.ndjson', 'FILTER_SEMANTICS.json',
                    'FX_RECEIPT.json', 'RECONCILIATION.json', 'image.tar'}
@@ -357,8 +387,28 @@ def generation_update(plan):
     return plan.get('mode') == 'generation-update'
 
 
+def code_update(plan):
+    return plan.get('mode') == 'code-update'
+
+
+def code_scope(plan):
+    scope = plan.get('codeScope', PHOTO_CODE_SCOPE)
+    need(isinstance(scope, str) and scope in CODE_SCOPE_FILES, 'code_scope')
+    return scope
+
+
+def accepted_update(plan):
+    return generation_update(plan) or code_update(plan)
+
+
 def expected_files(plan):
+    if code_update(plan):
+        return CODE_UPLOAD_FILES
     return FILE_NAMES - {'image.tar'} if generation_update(plan) else FILE_NAMES
+
+
+def described_files(plan):
+    return expected_files(plan) | GENERATION_FILES if code_update(plan) else expected_files(plan)
 
 
 def retained_runtime(plan):
@@ -398,17 +448,24 @@ def accepted_predecessor(plan):
     commit = state.get('commit')
     need(isinstance(commit, dict) and commit.get('nonce') == receipt['nonce'] and
          commit.get('acceptedAt') == receipt.get('acceptedAt'), 'predecessor_commit')
-    need(plan.get('retainedRuntime') == reference.get('runtimeSha') and
-         all(plan.get(key) == reference.get(key) for key in ('runtimeSha', 'pricingRuntimeSha', 'imageId')) and
-         plan.get('generationId') != reference.get('generationId') and plan.get('nonce') != receipt['nonce'],
-         'data_only_identity')
+    need(plan.get('retainedRuntime') == reference.get('runtimeSha') and plan.get('nonce') != receipt['nonce'],
+         'predecessor_identity')
+    if code_update(plan):
+        bindings = {'pricingRuntimeSha': 'pricingRuntimeSha', 'generationId': 'generationId',
+                    'generationManifestSha256': 'generationManifestSha256',
+                    'privateGenerationReceiptSha256': 'receiptSha256', 'sourceDescriptorSha256': 'sourceDescriptorSha256'}
+        need(plan.get('runtimeSha') != reference.get('runtimeSha') and plan.get('imageId') != reference.get('imageId') and
+             all(plan.get(left) == reference.get(right) for left, right in bindings.items()), 'code_only_identity')
+    else:
+        need(all(plan.get(key) == reference.get(key) for key in ('runtimeSha', 'pricingRuntimeSha', 'imageId')) and
+             plan.get('generationId') != reference.get('generationId'), 'data_only_identity')
     return reference, receipt, raw
 
 
 def validate_plan(plan):
-    need(plan.get('mode') in (None, 'generation-update'), 'plan_mode')
+    need(plan.get('mode') in (None, 'generation-update', 'code-update'), 'plan_mode')
     need(plan.get('version') == 1 and plan.get('market') == 'china' and
-         (generation_update(plan) or plan.get('retainedRuntime') == RETAINED) and
+         (accepted_update(plan) or plan.get('retainedRuntime') == RETAINED) and
          plan.get('servingCalculationVersion') == CALCULATION, 'plan_scope')
     for key in ('runtimeSha', 'pricingRuntimeSha', 'runtimeTree', 'controllerSha'):
         need(re.fullmatch(r'[a-f0-9]{40}', plan.get(key, '')), 'plan_revision')
@@ -418,7 +475,7 @@ def validate_plan(plan):
          re.fullmatch(r'[a-f0-9]{32}', plan.get('nonce', '')) and
          re.fullmatch(r'sha256:[a-f0-9]{64}', plan.get('imageId', '')), 'plan_identity')
     files = plan.get('files', [])
-    required = expected_files(plan)
+    required = described_files(plan)
     need(isinstance(files, list) and {f['name'] for f in files} == required and len(files) == len(required), 'plan_files')
     for file in files:
         need(type(file.get('bytes')) is int and file['bytes'] > 0 and re.fullmatch(r'[a-f0-9]{64}', file.get('sha256', '')) and
@@ -431,8 +488,12 @@ def validate_plan(plan):
     need((previous_etag is None and previous_sha is None) or
          (isinstance(previous_etag, str) and re.fullmatch(r'"[^"\x00-\x20\x7f]{1,250}"', previous_etag) and
           isinstance(previous_sha, str) and re.fullmatch(r'[a-f0-9]{64}', previous_sha)), 'previous_state')
-    if generation_update(plan):
+    if accepted_update(plan):
         accepted_predecessor(plan)
+        if code_update(plan):
+            code_scope(plan)
+            need(all(isinstance(plan.get(key), str) and re.fullmatch(r'[a-f0-9]{64}', plan[key])
+                     for key in ('codeSourcePlanSha256', 'codeSourceOracleSha256')), 'code_source_binding')
     else:
         need('previousAcceptedState' not in plan, 'unexpected_predecessor')
 
@@ -802,7 +863,14 @@ def read_outcome(params, *, verify_current=True):
             need(sha(report) == receipt['browser'].get(field), 'recovery_browser')
             reports.append(report)
         need(sha(b''.join(reports)) == receipt['browser'].get('reportSha256'), 'recovery_browser')
-        if generation_update(plan) and verify_current:
+        if code_update(plan):
+            previous, _, _ = accepted_predecessor(plan)
+            need(receipt.get('transition') == 'code-update' and
+                 receipt.get('previousAcceptedETag') == plan['previousAcceptedETag'] and
+                 receipt.get('previousAcceptedStateSha256') == plan['previousAcceptedStateSha256'] and
+                 receipt.get('retainedRuntimeSha') == previous['runtimeSha'] and
+                 receipt.get('retainedImageId') == previous['imageId'], 'recovery_code_receipt')
+        if accepted_update(plan) and verify_current:
             need(receipt.get('generationId') == plan['generationId'] and receipt.get('pricingRuntimeSha') == plan['pricingRuntimeSha'] and
                  receipt.get('imageId') == plan['imageId'], 'recovery_receipt')
             verify_live_reference({'runtimeSha': release, 'pricingRuntimeSha': plan['pricingRuntimeSha'],
@@ -818,7 +886,7 @@ def read_outcome(params, *, verify_current=True):
         receipt = json.loads(raw)
         need(receipt.get('release') == release and receipt.get('nonce') == nonce and
              receipt.get('generationManifestSha256') == plan['generationManifestSha256'], 'recovery_receipt')
-        if generation_update(plan) and verify_current:
+        if accepted_update(plan) and verify_current:
             previous, previous_receipt, _ = accepted_predecessor(plan)
             need(receipt.get('retainedRuntimeSha') == previous['runtimeSha'] and
                  receipt.get('retainedImageId') == previous['imageId'] and
@@ -849,9 +917,20 @@ def checked_accepted_observation(observation):
     need(isinstance(commit, dict) and commit.get('nonce') == receipt['nonce'] and
          commit.get('acceptedAt') == receipt.get('acceptedAt') and
          isinstance(commit.get('intentSha256'), str) and re.fullmatch(r'[a-f0-9]{64}', commit['intentSha256']), 'retire_commit')
+    if receipt.get('transition') == 'code-update':
+        need(isinstance(state.get('rollback'), dict) and
+             state['rollback'].get('generationId') == state['current']['generationId'], 'retire_protected')
     if state.get('rollback') is not None:
-        accepted_reference_receipt(state['rollback'])
-        need(state['rollback']['generationId'] != state['current']['generationId'], 'retire_protected')
+        rollback_receipt, _ = accepted_reference_receipt(state['rollback'])
+        if state['rollback']['generationId'] == state['current']['generationId']:
+            current, rollback = state['current'], state['rollback']
+            need(same_generation_data(current, rollback) and current['runtimeSha'] != rollback['runtimeSha'] and
+                 current['imageId'] != rollback['imageId'] and receipt['nonce'] != rollback_receipt['nonce'] and
+                 receipt.get('transition') == 'code-update' and
+                 receipt.get('previousAcceptedETag') == commit.get('previousETag') and
+                 receipt.get('previousAcceptedStateSha256') == commit.get('previousStateSha256') and
+                 receipt.get('retainedRuntimeSha') == rollback['runtimeSha'] and
+                 receipt.get('retainedImageId') == rollback['imageId'], 'retire_protected')
     return state
 
 
@@ -880,6 +959,10 @@ def checked_publication_view(view, *, committed=False):
              commit.get('previousETag') == prior['etag'] and commit.get('previousStateSha256') == prior['sha256'] and
              candidate == intent.get('candidate') and state.get('rollback') == (prior_value.get('current') if prior_value else None),
              'retire_intent_binding')
+        if prior_value and candidate['generationId'] == prior_value['current']['generationId']:
+            need(intent.get('transition') == 'code-update', 'retire_code_intent')
+        else:
+            need(intent.get('transition') is None, 'retire_code_intent')
     else:
         need(resolution.get('kind') in ('never_reserved', 'rolled_back') and
              resolution.get('hostReceiptSha256') is None, 'retire_intent_resolution')
@@ -908,10 +991,74 @@ def verified_history(reference, previous=None):
          outcome.get('hostReceiptSha256') == sha(raw), 'retire_history')
     _, plan = reference_plan(reference, receipt)
     if previous is not None:
-        need(generation_update(plan) and plan.get('previousAcceptedState') == previous['value'] and
+        need(accepted_update(plan) and plan.get('previousAcceptedState') == previous['value'] and
              plan.get('previousAcceptedETag') == previous['etag'] and
              plan.get('previousAcceptedStateSha256') == previous['sha256'], 'retire_original_plan')
     return receipt
+
+
+def same_generation_data(left, right):
+    keys = ('market', 'generationId', 'owner', 'receiptSha256', 'sourceDescriptorSha256',
+            'generationManifestSha256', 'sourceCursor', 'sourceObservedAt', 'pricingRuntimeSha')
+    return all(key in left and key in right and left[key] == right[key] for key in keys)
+
+
+def deployment_identity(reference):
+    receipt, _ = accepted_reference_receipt(reference)
+    return reference['runtimeSha'], receipt['nonce']
+
+
+def code_preflight(params):
+    """Read bounded accepted metadata for a code-only release. No generation
+    restore, supplier request, directory creation or host write is performed."""
+    need(isinstance(params, dict) and set(params) == {'previousAccepted'}, 'code_preflight_parameters')
+    state = checked_accepted_observation(params['previousAccepted'])
+    reference = state['current']
+    lock = os.open('/run/lock/avtocena-runtime-change.lock', os.O_RDONLY | os.O_NOFOLLOW | os.O_CLOEXEC)
+    try:
+        info = os.fstat(lock)
+        need(stat.S_ISREG(info.st_mode) and info.st_uid == 0 and info.st_nlink == 1, 'runtime_lock')
+        fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        receipt = verified_history(reference)
+        retained = verify_live_reference(reference, receipt['nonce'])
+        identity = protected_identity(retained)
+        regular(CONFIG, 1024 * 1024)
+        ingress = CONFIG.read_bytes()
+        directory, plan = reference_plan(reference, receipt)
+        plan_sha = file_sha(directory / 'PLAN.json')
+        raw_manifest = (directory / 'generation' / 'GENERATION.json').read_bytes()
+        need(sha(raw_manifest) == reference['generationManifestSha256'], 'code_manifest_changed')
+        regular(directory / 'acceptance.json', 256 * 1024)
+        raw_oracle = (directory / 'acceptance.json').read_bytes()
+        descriptor = next(row for row in plan['files'] if row['name'] == 'acceptance.json')
+        need(len(raw_oracle) == descriptor['bytes'] and sha(raw_oracle) == descriptor['sha256'], 'code_oracle_changed')
+        checked_code_oracle(json.loads(raw_oracle), reference)
+        need(file_sha(directory / 'PLAN.json') == plan_sha and CONFIG.read_bytes() == ingress and
+             protected_identity(docker('GET', '/containers/' + retained['Id'] + '/json')) == identity,
+             'code_preflight_changed')
+        disk = os.statvfs(BASE)
+        generation_files = [row for row in plan['files'] if row['name'] in GENERATION_FILES]
+        return {'version': 1, 'kind': 'china-code-preflight-v1', 'runtimeSha': reference['runtimeSha'],
+                'generationId': reference['generationId'], 'previousPlanSha256': plan_sha,
+                'previousOracleSha256': sha(raw_oracle),
+                'generationFiles': generation_files,
+                'generationBytes': sum(row['bytes'] for row in generation_files),
+                'availableDiskBytes': disk.f_bavail * disk.f_frsize,
+                'generationManifestBase64': base64.b64encode(raw_manifest).decode(),
+                'acceptanceBase64': base64.b64encode(raw_oracle).decode(),
+                'supplierRequests': 0, 'generationWrites': 0}
+    finally:
+        os.close(lock)
+
+
+def checked_code_oracle(oracle, reference):
+    need(isinstance(oracle, dict) and oracle.get('version') == 1 and
+         oracle.get('kind') == 'local-native-reader-http-expectations-v1' and
+         oracle.get('runtimeSha') == reference['runtimeSha'] and
+         oracle.get('pricingRuntimeSha') == reference['pricingRuntimeSha'] and
+         oracle.get('expectedGeneration') == reference['generationId'] and
+         oracle.get('generationManifestSha256') == reference['generationManifestSha256'] and
+         isinstance(oracle.get('cases'), list) and len(oracle['cases']) >= 8, 'code_oracle_identity')
 
 
 def collect_local_generation_files(reference, receipt, assert_current):
@@ -977,9 +1124,9 @@ def retire_reference(obsolete, protected_references, protected_ids, assert_curre
     result = {'retiredContainers': 0, 'directoriesDeleted': 0, 'imagesDeleted': 0, 'filesDeleted': 0, 'freedBytes': 0}
     if obsolete is None:
         return {**result, 'reason': 'no_previous_rollback'}
-    protected = {reference['generationId'] for reference in protected_references if reference}
+    protected = {deployment_identity(reference) for reference in protected_references if reference}
     need(obsolete.get('market') == 'china' and obsolete.get('runtimeSha') != RETAINED and
-         obsolete.get('generationId') not in protected, 'retire_protected')
+         deployment_identity(obsolete) not in protected, 'retire_protected')
     old_receipt = verified_history(obsolete)
     rows = [docker('GET', '/containers/' + item['Id'] + '/json') for item in docker('GET', '/containers/json?all=1')]
     targets = [row for row in rows if row['Config'].get('Labels', {}).get('avtocena.china.nonce') == old_receipt['nonce']]
@@ -1021,7 +1168,7 @@ def retire_recovery(params):
     need(fresh['revision'] >= original['revision'], 'retire_state_older')
     obsolete = previous.get('rollback')
     protected = [fresh['current'], fresh.get('rollback')]
-    need(obsolete is None or all(reference is None or reference['generationId'] != obsolete['generationId'] for reference in protected),
+    need(obsolete is None or all(reference is None or deployment_identity(reference) != deployment_identity(obsolete) for reference in protected),
          'retire_protected')
     lock = os.open('/run/lock/avtocena-runtime-change.lock', os.O_RDONLY | os.O_NOFOLLOW | os.O_CLOEXEC)
     try:
@@ -2016,6 +2163,72 @@ class Host:
         return (self.generation if name in {'GENERATION.json', 'details.sqlite', 'query.sqlite', 'FILTER_SEMANTICS.json',
                                             'FX_RECEIPT.json', 'RECONCILIATION.json', 'DISPOSITIONS.ndjson'} else self.directory) / name
 
+    def prepare_code_generation(self):
+        """Copy the already accepted immutable generation into this nonce.
+        Preserve independent inode ownership for the existing retirement path;
+        no network restore, hard link, repricing or source refresh is involved."""
+        need(code_update(self.plan) and self.lock is not None and self.retained is not None, 'code_copy_phase')
+        previous, receipt, _ = accepted_predecessor(self.plan)
+        directory, previous_plan = reference_plan(previous, receipt)
+        source_plan_sha = self.plan['codeSourcePlanSha256']
+        need(file_sha(directory / 'PLAN.json') == source_plan_sha, 'code_source_plan_changed')
+        old_files = {row['name']: row for row in previous_plan['files']}
+        new_files = {row['name']: row for row in self.plan['files']}
+        need(all(old_files.get(name) == new_files.get(name) for name in GENERATION_FILES), 'code_generation_descriptors')
+        check_mounted_reference(self.retained, previous, receipt['nonce'])
+        regular(directory / 'acceptance.json', 256 * 1024)
+        old_raw = (directory / 'acceptance.json').read_bytes()
+        need(sha(old_raw) == self.plan['codeSourceOracleSha256'] == old_files['acceptance.json']['sha256'] and
+             len(old_raw) == old_files['acceptance.json']['bytes'], 'code_oracle_changed')
+        old_oracle = json.loads(old_raw)
+        checked_code_oracle(old_oracle, previous)
+        regular(self.directory / 'acceptance.json', 256 * 1024)
+        new_raw = (self.directory / 'acceptance.json').read_bytes()
+        need(len(new_raw) == new_files['acceptance.json']['bytes'] and
+             sha(new_raw) == new_files['acceptance.json']['sha256'] and
+             json.loads(new_raw) == {**old_oracle, 'runtimeSha': self.plan['runtimeSha']}, 'code_oracle_scope')
+        regular(self.directory / 'image-receipt.json', 256 * 1024)
+        image_raw = (self.directory / 'image-receipt.json').read_bytes()
+        need(len(image_raw) == new_files['image-receipt.json']['bytes'] and
+             sha(image_raw) == new_files['image-receipt.json']['sha256'], 'code_image_receipt_hash')
+        image = json.loads(image_raw)
+        scope = code_scope(self.plan)
+        required_code_files = CODE_SCOPE_FILES[scope]
+        need(image.get('version') == 1 and image.get('kind') == 'china-runtime-image-v1' and image.get('market') == 'china' and
+             all(image.get(key) == self.plan[key] for key in ('runtimeSha', 'pricingRuntimeSha', 'runtimeTree',
+                                                            'runtimeDiffSha256', 'retainedRuntime', 'imageId')) and
+             image.get('bytes') == new_files['image.tar']['bytes'] and image.get('sha256') == new_files['image.tar']['sha256'] and
+             image.get('platform') == 'linux/amd64' and image.get('archiveRoundTripVerified') is True and
+             image.get('protectedPathsUnchanged') is True and image.get('privateDataIncluded') is False and
+             image.get('servingCompatibility', {}).get('protectedPricingPathsUnchanged') is True and
+             image.get('codeScope', PHOTO_CODE_SCOPE) == scope and
+             isinstance(image.get('runtimeFiles'), list) and len(image['runtimeFiles']) == len(required_code_files) and
+             all(isinstance(name, str) for name in image['runtimeFiles']) and
+             set(image['runtimeFiles']) == required_code_files and
+             type(image.get('imageUnpackedBytes')) is int and image['imageUnpackedBytes'] > 0, 'code_image_receipt')
+        # Uploaded archives already occupy disk. Reserve the actual source
+        # bytes plus the builder's measured unpacked image, not a percentage.
+        copied_bytes = sum(new_files[name]['bytes'] for name in GENERATION_FILES)
+        usage = os.statvfs(self.directory)
+        need(usage.f_bavail * usage.f_frsize >= copied_bytes + image['imageUnpackedBytes'], 'code_disk_space')
+        identities = {name: reuse_file_identity(directory / 'generation' / name) for name in GENERATION_FILES}
+        need(all(identities[name][2] == new_files[name]['bytes'] for name in GENERATION_FILES), 'code_source_size')
+        for name in sorted(GENERATION_FILES):
+            self.guard()
+            need(file_sha(directory / 'PLAN.json') == source_plan_sha, 'code_source_plan_changed')
+            reuse_copy_file(directory / 'generation' / name, self.generation / name, new_files[name], identities[name])
+        generation_reference({**previous, 'runtimeSha': self.plan['runtimeSha']}, self.plan['nonce'])
+        need(all(reuse_file_identity(directory / 'generation' / name) == identities[name] for name in GENERATION_FILES) and
+             file_sha(directory / 'PLAN.json') == source_plan_sha, 'code_source_changed')
+        descriptor = os.open(self.generation, os.O_RDONLY | os.O_DIRECTORY)
+        try:
+            os.fsync(descriptor)
+        finally:
+            os.close(descriptor)
+        self.guard()
+        self.code_generation_copy = {'files': len(GENERATION_FILES), 'bytes': copied_bytes,
+                                     'sourceDownloads': 0, 'generationId': self.plan['generationId']}
+
     def upload(self, name, stream):
         need(name in expected_files(self.plan) and name not in self.uploaded and not self.candidate, 'upload_scope')
         descriptor = next(f for f in self.plan['files'] if f['name'] == name)
@@ -2098,7 +2311,7 @@ class Host:
         need(len(private) == 1 and file_sha(Path(private[0]['Source'])) ==
              '66cc4ce64e0469daad2991251f88887dcd3a07cc26510ca1b58696bcea348a3c', 'encyclopedia_unchanged')
         previous_generation = None
-        if generation_update(self.plan):
+        if accepted_update(self.plan):
             previous, previous_receipt, previous_raw = accepted_predecessor(self.plan)
             outcome = read_outcome({'runtimeSha': previous['runtimeSha'], 'nonce': previous_receipt['nonce']})
             need(outcome.get('status') == 'accepted' and
@@ -2107,6 +2320,8 @@ class Host:
             previous_generation = check_mounted_reference(self.retained, previous, previous_receipt['nonce'])
         self.retained_identity = protected_identity(self.retained)
         self.guard()
+        if code_update(self.plan):
+            self.prepare_code_generation()
         claimed = {int(binding['HostPort']) for row in inspected for bindings in
                    (row.get('HostConfig', {}).get('PortBindings') or {}).values() for binding in bindings
                    if str(binding.get('HostPort', '')).isdigit()}
@@ -2123,13 +2338,18 @@ class Host:
         image = docker('GET', '/images/' + self.plan['imageId'] + '/json')
         need(image.get('Id') == self.plan['imageId'] and image.get('Os') == 'linux' and image.get('Architecture') == 'amd64' and
              image['Config'].get('Labels', {}).get('org.opencontainers.image.revision') == self.plan['runtimeSha'], 'image_identity')
+        if code_update(self.plan):
+            need(image.get('Descriptor', {}).get('digest') == self.plan['imageId'], 'code_image_descriptor')
         generation = json.loads((self.generation / 'GENERATION.json').read_bytes())
         need(generation.get('generationId') == self.plan['generationId'] and generation.get('runtimeSha') == self.plan['pricingRuntimeSha'] and
              generation.get('prepared') is True and generation.get('source', {}).get('supplierLatestVerified') is True, 'generation_identity')
-        if generation_update(self.plan):
+        if accepted_update(self.plan):
             need(generation['calculationVersion'] == previous_generation.get('calculationVersion') ==
                  env.get('AVTOCENA_BUILD_CALCULATION_VERSION'), 'data_only_calculation_version')
             env['CATALOG_CHINA_LOCAL_MANIFEST_SHA256'] = self.plan['generationManifestSha256']
+            if code_update(self.plan):
+                # All other environment entries retain their values and order.
+                env['AVTOCENA_RELEASE_SHA'] = self.plan['runtimeSha']
             candidate_env = [item.split('=', 1)[0] + '=' + env[item.split('=', 1)[0]] for item in self.retained['Config']['Env']]
             old_mount = next(row for row in mounts if row['Destination'] == GENERATION_MOUNT)
             old_bind = old_mount['Source'] + ':' + GENERATION_MOUNT + ':ro'
@@ -2166,7 +2386,8 @@ class Host:
         self.wait_startup()
         self.verify_candidate()
         return {'started': True, 'release': self.plan['runtimeSha'], 'generationId': self.plan['generationId'],
-                'startup': self.startup_report, 'retainedMountOrderVariations': self.retained_mount_order_variations}
+                'startup': self.startup_report, 'retainedMountOrderVariations': self.retained_mount_order_variations,
+                **({'codeGenerationCopy': self.code_generation_copy} if code_update(self.plan) else {})}
 
     def wait_startup(self):
         started = time.monotonic()
@@ -2362,6 +2583,10 @@ class Host:
                  'sourceDescriptorSha256': self.plan['sourceDescriptorSha256'], 'imageId': self.plan['imageId'],
                  'pricingRuntimeSha': generation['runtimeSha'], 'sourceCursor': generation['source']['cursor'], 'sourceObservedAt': generation['source']['sourceObservedAt'],
                  'nonce': self.plan['nonce'], 'browser': verdict, 'acceptedAt': accepted_at, 'retainedContainerId': self.retained['Id']}
+        if code_update(self.plan):
+            proof.update(transition='code-update', previousAcceptedETag=self.plan['previousAcceptedETag'],
+                         previousAcceptedStateSha256=self.plan['previousAcceptedStateSha256'],
+                         retainedRuntimeSha=retained_runtime(self.plan), retainedImageId=self.retained['Image'])
         encoded = json_bytes(proof)
         # The durable receipt is the commit point, including when SSH closes
         # immediately after the atomic rename. No partial terminal receipt is
@@ -2402,6 +2627,20 @@ class Host:
              details.get('release') == self.plan['runtimeSha'] and details.get('nonce') == self.plan['nonce'] and
              details.get('generationManifestSha256') == self.plan['generationManifestSha256'] and
              details.get('precedingSpeedReportSha256') == sha(speed_raw), 'browser_evidence_binding')
+        if code_update(self.plan) and code_scope(self.plan) == PHOTO_JAPAN_CODE_SCOPE:
+            need(isinstance(details.get('photoJapanReportBase64'), str) and
+                 isinstance(details.get('photoJapanReportSha256'), str) and
+                 re.fullmatch(r'[a-f0-9]{64}', details['photoJapanReportSha256']), 'photo_japan_browser_binding')
+            photo_raw, photo = decode_report(details['photoJapanReportBase64'])
+            oracle_sha = next(row['sha256'] for row in self.plan['files'] if row['name'] == 'acceptance.json')
+            need(sha(photo_raw) == details['photoJapanReportSha256'] and
+                 photo.get('version') == 1 and photo.get('kind') == 'china-photo-japan-browser-v1' and
+                 photo.get('release') == self.plan['runtimeSha'] and photo.get('nonce') == self.plan['nonce'] and
+                 photo.get('generationManifestSha256') == self.plan['generationManifestSha256'] and
+                 photo.get('oracleSha256') == oracle_sha and
+                 all(photo.get(key) is True for key in ('passed', 'chinaPhotoPassed', 'japanFreshnessPassed',
+                                                       'japanPowerApiPassed', 'japanUiPassed')),
+                 'photo_japan_browser_binding')
         for name, raw in [('BROWSER_SPEED.json', speed_raw), ('BROWSER_DETAILS.json', details_raw)]:
             new_file(self.directory / name, raw)
             need(file_sha(self.directory / name) == sha(raw), 'browser_evidence_readback')
@@ -2410,7 +2649,7 @@ class Host:
     def retire(self, params):
         """After the private accepted-state CAS, retire only the former rollback
         process and its verified bulk files. Preserve historical proofs/images."""
-        need(generation_update(self.plan) and self.accepted, 'retire_before_acceptance')
+        need(accepted_update(self.plan) and self.accepted, 'retire_before_acceptance')
         self.verify_candidate()
         state = params.get('acceptedState')
         need(isinstance(state, dict) and state.get('version') == 1 and state.get('market') == 'china' and
@@ -2513,6 +2752,10 @@ def main():
             elif method == 'recover':
                 need(host is None, 'recovery_after_init')
                 value = read_outcome(params)
+                recovered = True
+            elif method == 'code_preflight':
+                need(host is None, 'code_preflight_after_init')
+                value = code_preflight(params)
                 recovered = True
             elif method == 'retire_recovery':
                 need(host is None, 'recovery_after_init')

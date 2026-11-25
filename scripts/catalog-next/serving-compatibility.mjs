@@ -13,9 +13,30 @@ const allowedProduction = new Set(['apps/web/lib/catalog/storage.ts', 'apps/web/
   'apps/web/lib/dealers/public-showcase.ts', 'apps/web/lib/catalog/home-phase-timing.ts',
   'apps/web/app/(public)/cars/offer/[id]/page.tsx',
   'apps/web/components/catalog/InlineOfferParameters.tsx',
+  'apps/web/components/catalog/CatalogCover.tsx',
+  'apps/web/components/catalog/CatalogCard.tsx',
+  'apps/web/components/catalog/protected-photo-retry.ts',
+  'apps/web/app/(public)/api/catalog/search/route.ts',
+  'apps/web/components/catalog/AjesCatalog.tsx',
+  'apps/web/components/catalog/AjesRail.tsx',
+  'apps/web/components/catalog/CatalogContent.tsx',
+  'apps/web/components/catalog/JapanSourcePowerNotice.tsx',
+  'apps/web/lib/catalog/ajes-catalog.ts',
+  'apps/web/lib/catalog/ajes-client.ts',
+  'apps/web/lib/catalog/ajes-result-filter.ts',
+  'apps/web/lib/catalog/detail-read-cache.ts',
+  'apps/web/lib/catalog/japan-source-power.ts',
   'apps/web/lib/catalog/prepared-china-detail-city.ts']);
 const allowedBrowserTests = new Set(['tests/browser/catalog-range-commit.mjs',
-  'tests/browser/catalog-range-commit-fixture.tsx']);
+  'tests/browser/catalog-range-commit-fixture.tsx',
+  'tests/browser/catalog-photo-recovery.mjs',
+  'tests/browser/catalog-photo-recovery-fixture.tsx',
+  'tests/catalog-photo-retry.test.ts',
+  'tests/ajes-catalog-progressive.test.ts',
+  'tests/catalog-japan-filter-rail.test.ts',
+  'tests/ajes-detail-freshness.test.ts',
+  'tests/japan-pw-first.test.ts',
+  'tests/japan-pw-results.test.ts']);
 const typeOnlyPath = 'apps/web/lib/catalog/offer-page-data.ts';
 export const CHINA_PROTECTED_PRICING_PATHS = Object.freeze([
   'packages', 'data', 'scripts/catalog-next', 'apps/web/lib/encyclopedia',

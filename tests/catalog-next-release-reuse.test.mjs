@@ -137,9 +137,13 @@ test('lost authority or corrupt host metadata stops before exposing an oracle to
 
 test('the fixed mode step skips only image daemon/build; complete first-release acceptance remains common', async () => {
   const [workflow, controller] = await Promise.all([
-    fs.readFile(path.join(ROOT, '.github/workflows/catalog-next-china-release.yml'), 'utf8'),
+    fs.readFile(path.join(ROOT, '.github/workflows/catalog-next-china-release.yml'), 'utf8').catch(error => {
+      if (error.code === 'ENOENT') return null;
+      throw error;
+    }),
     fs.readFile(path.join(ROOT, 'scripts/catalog-next/release.mjs'), 'utf8'),
   ]);
+  if (workflow !== null) {
   assert.equal((workflow.match(/if: steps\.release_profile\.outputs\.reuse_host != 'true'/g) ?? []).length, 2);
   assert.match(workflow, /id: release_profile/);
   assert.match(workflow, /node scripts\/catalog-next\/release-reuse\.mjs --workflow-mode >> "\$GITHUB_OUTPUT"/);
@@ -148,6 +152,17 @@ test('the fixed mode step skips only image daemon/build; complete first-release 
   assert.ok(select > workflow.indexOf('node --import tsx --test'));
   assert.ok(select < workflow.indexOf('secrets.REGCLOUD_SSH_KEY'));
   assert.match(workflow, /check-runtime-tests\.mjs/); assert.match(workflow, /npm run typecheck/);
+  } else {
+    // The first-publication entry was retired after China acceptance. Retained
+    // controller recovery remains tested below; an obsolete workflow is not
+    // reinstated merely to let the new data-only schedule pass its gate.
+    const workflows = await fs.readdir(path.join(ROOT, '.github/workflows'));
+    for (const name of workflows.filter(name => /\.ya?ml$/.test(name))) {
+      const text = await fs.readFile(path.join(ROOT, '.github/workflows', name), 'utf8');
+      assert.doesNotMatch(text, /node[^\n]*scripts\/catalog-next\/release\.mjs(?:\s|$)/,
+        'retired first-release entry cannot acquire a new workflow alias: ' + name);
+    }
+  }
   const branch = controller.indexOf('if (reuse) {'), common = controller.indexOf('const candidate =', branch);
   assert.ok(branch > 0 && common > branch);
   const reuseBranch = controller.slice(branch, controller.indexOf('} else {', branch));
