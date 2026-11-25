@@ -18,21 +18,21 @@ const GENERATION = Object.freeze({pricingRuntimeSha: '64c6338e0db23c8999096bceef
   generationManifestSha256: 'd5745797cc162b82e0c0f0b1f49fef65f18f0d6649666562337183b18084dd75',
   privateGenerationReceiptSha256: '25f5277665bcc1a72879d9a7e55cb39fc7d4bd57a061be2593d3a6a9d9f1cc22'});
 export const RESOLVED_CLEANUP_WITNESS = Object.freeze({...GENERATION,
-  runtimeSha: '1518035b9e6b717cd364ae8d13e63d0127899112', nonce: '92ec4a21446a23bed345fd789b2b3cc5',
-  planSha256: '2b038c3566322b7be1f4e622716b8aed85e6e318fd323d31098db05dbb469964',
-  rollbackSha256: '6f86011baf31bf183c5b156586b4c9b8a6aa22a0648c2d5f3de4c6f6e57538e9',
-  imageId: 'sha256:0a1d136f6b292f9d027354fe8db3c14e12079e689e3f7b5773a7b014860213ea'});
+  runtimeSha: '38895e53f7f770ee68edb0b8ad53056468b928a5', nonce: 'bb85ea435dc8bbf6f28809be2ec0b447',
+  planSha256: '9309d5e0b06e2d4e34aefe9e9c09add5f3a54900dfd4130d02ab1f1966efa994',
+  rollbackSha256: '6e2e1f838df5d9dd7e8a4d61e3277096432c068c8e55b8519bdd5df502c7812e',
+  imageId: 'sha256:7c093eedb12cd825ba204d8f3758438a834d5bcece80c7a25f0040e4147159d9'});
 export const RESOLVED_CLEANUP_TARGETS = Object.freeze([
-  Object.freeze({...GENERATION, runtimeSha: '5e62f9ff3a0079b07cd13b8ab912c5720dd22250', nonce: '2d015d0beef2af9f076bd1d47987dd88',
-    planSha256: '773cb37c8ecae1de789c895888fd2e56264b73503def96a32c86ee845283338c',
-    rollbackSha256: '3a431be4e34714930ce483f28575c797df5f49687a2157ab2be21d31016a8a06',
-    imageId: 'sha256:7af5df7fa93163687fcb5c0e1ad834176234319de13a4dd92ddc1d954fcc9381'}),
-  Object.freeze({...GENERATION, runtimeSha: '860e1ff601c6852eb3b1474982e52e3a5300c4af', nonce: 'df9db7228781df26f92a990a011eb1bd',
-    planSha256: '27888989f2a0e90e235f7a497fcce912ece493e9f5add5c40005e02ad991d9b2',
-    rollbackSha256: 'd550834e33b9cd9bf9b1be10c4c8f5358563d6aa56b2ba87794c9d5df9fdb5dd',
-    imageId: 'sha256:3c0389d7fcd0986a850d2f87c3259a75bddff3b0090ed0aef56eb1e190ef2238'}),
+  Object.freeze({...GENERATION, runtimeSha: '1518035b9e6b717cd364ae8d13e63d0127899112', nonce: '92ec4a21446a23bed345fd789b2b3cc5',
+    planSha256: '2b038c3566322b7be1f4e622716b8aed85e6e318fd323d31098db05dbb469964',
+    rollbackSha256: '6f86011baf31bf183c5b156586b4c9b8a6aa22a0648c2d5f3de4c6f6e57538e9',
+    imageId: 'sha256:0a1d136f6b292f9d027354fe8db3c14e12079e689e3f7b5773a7b014860213ea'}),
+  Object.freeze({...GENERATION, runtimeSha: '99c45a3b5d8439bbc1ee34702ba41340ada08125', nonce: 'eef77195126340e1a7c47262a86bb554',
+    planSha256: '027f6e750ff886098174c4da80e44a3a06c1b6cc94a46dc0f619452aa24139fa',
+    rollbackSha256: 'f47f596c64647fb7dd47e47c3d9b5b2d2d66808d51e74c3a690954076c619e04',
+    imageId: 'sha256:c12a500a0e50fc692701e2f5a28733a6c8a995c241df9d193c294a2cd85cb87d'}),
 ]);
-const TARGET_BYTES = [13041560320, 13041559296], TOTAL_BYTES = 26083119616;
+const TARGET_BYTES = [13041561344, 13041562880], TOTAL_BYTES = 26083124224;
 const need = (value, code) => { if (!value) throw Error('china_resolved_cleanup_' + code); };
 const object = value => value !== null && typeof value === 'object' && !Array.isArray(value);
 const keys = (value, expected) => object(value) && Object.keys(value).length === expected.length && expected.every(key => Object.hasOwn(value, key));
@@ -48,7 +48,7 @@ const instant = value => {
 export function verifyResolvedCleanupInvocation({root = ROOT, environment = process.env} = {}) {
   need(environment.GITHUB_WORKFLOW_REF === WORKFLOW, 'workflow');
   return verifyReadonlyInvocation({root, env: environment, markerPath: MARKER,
-    operation: 'prune-exact-china-uploads-after-resolved-860-rollback'});
+    operation: 'prune-exact-china-uploads-after-resolved-99-rollback'});
 }
 
 /** inspectChinaPublicationState verifies canonical observations and the complete

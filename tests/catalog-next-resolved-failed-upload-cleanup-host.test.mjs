@@ -24,13 +24,13 @@ assert m.FAILED_UPLOAD_TARGETS == (
     {'nonce': 'ae835461a771911c083739ddbf03bead', 'planSha256': '09ef828f1b541f85a9eecb1b1c58305f8a6a3c379222ecc6b2ad57b41168a22f',
      'rollbackSha256': 'b26506fabb43efa22e8b38c8163e8f0098a775d0ca33c8e3259124b0b5ce7f28'})
 assert m.FAILED_UPLOAD_BULK_FILES == ('details.sqlite', 'query.sqlite', 'DISPOSITIONS.ndjson', 'image.tar')
-assert m.RESOLVED_CLEANUP_WITNESS['runtimeSha'] == '1518035b9e6b717cd364ae8d13e63d0127899112'
-assert m.RESOLVED_CLEANUP_WITNESS['nonce'] == '92ec4a21446a23bed345fd789b2b3cc5'
-assert m.RESOLVED_CLEANUP_WITNESS['planSha256'] == '2b038c3566322b7be1f4e622716b8aed85e6e318fd323d31098db05dbb469964'
-assert m.RESOLVED_CLEANUP_WITNESS['rollbackSha256'] == '6f86011baf31bf183c5b156586b4c9b8a6aa22a0648c2d5f3de4c6f6e57538e9'
-assert m.RESOLVED_CLEANUP_WITNESS['imageId'] == 'sha256:0a1d136f6b292f9d027354fe8db3c14e12079e689e3f7b5773a7b014860213ea'
-assert m.RESOLVED_CLEANUP_TARGETS == m.FAILED_WITNESS_TARGETS[:2] and len(m.RESOLVED_CLEANUP_TARGETS) == 2
-assert m.RESOLVED_CLEANUP_BULK_BYTES == (13041560320, 13041559296)
+assert m.RESOLVED_CLEANUP_WITNESS['runtimeSha'] == '38895e53f7f770ee68edb0b8ad53056468b928a5'
+assert m.RESOLVED_CLEANUP_WITNESS['nonce'] == 'bb85ea435dc8bbf6f28809be2ec0b447'
+assert m.RESOLVED_CLEANUP_WITNESS['planSha256'] == '9309d5e0b06e2d4e34aefe9e9c09add5f3a54900dfd4130d02ab1f1966efa994'
+assert m.RESOLVED_CLEANUP_WITNESS['rollbackSha256'] == '6e2e1f838df5d9dd7e8a4d61e3277096432c068c8e55b8519bdd5df502c7812e'
+assert m.RESOLVED_CLEANUP_WITNESS['imageId'] == 'sha256:7c093eedb12cd825ba204d8f3758438a834d5bcece80c7a25f0040e4147159d9'
+assert m.RESOLVED_CLEANUP_TARGETS[0] == m.FAILED_WITNESS_TARGETS[2] and m.RESOLVED_CLEANUP_TARGETS[1]['planSha256'] == '027f6e750ff886098174c4da80e44a3a06c1b6cc94a46dc0f619452aa24139fa' and len(m.RESOLVED_CLEANUP_TARGETS) == 2
+assert m.RESOLVED_CLEANUP_BULK_BYTES == (13041561344, 13041562880)
 def forbidden(*args, **kwargs): raise AssertionError('unexpected external operation')
 m.subprocess.run = m.command = forbidden
 def refused(fn, code):
