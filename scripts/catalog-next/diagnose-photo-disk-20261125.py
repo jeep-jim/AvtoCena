@@ -6,6 +6,7 @@ import json
 import os
 from pathlib import Path
 import re
+import socket
 import stat
 import subprocess
 
@@ -45,6 +46,55 @@ def docker_json(arguments):
     if len(result.stdout) > 2 * 1024 * 1024:
         raise RuntimeError('photo_disk_inventory_too_large')
     return json.loads(result.stdout)
+
+
+def image_binding_diagnostic():
+    """Read one already retained public image; publish hashes and key names only."""
+    identity = 'sha256:7b400c45db84145dd591043af255d7bbf41583189eda91fbe268b64b3d427e65'
+    class Engine(http.client.HTTPConnection):
+        def connect(self):
+            self.sock = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+            self.sock.settimeout(20)
+            self.sock.connect('/var/run/docker.sock')
+    con = Engine('localhost', timeout=20)
+    try:
+        con.request('GET', '/v1.52/images/' + identity + '/json?manifests=true',
+                    headers={'Accept': 'application/json', 'Connection': 'close'})
+        response = con.getresponse()
+        raw = response.read(512 * 1024 + 1)
+        if response.status != 200 or len(raw) > 512 * 1024:
+            raise RuntimeError('photo_disk_image_api_response')
+        api = json.loads(raw)
+    finally:
+        con.close()
+    cli = docker_json(['image', 'inspect', '--format', '{{json .}}', identity])
+    client = docker_json(['version', '--format', '{{json .Client}}'])
+    def digest(value, canonical=False):
+        return hashlib.sha256(json.dumps(value, separators=(',', ':'), ensure_ascii=False,
+                                         sort_keys=canonical).encode()).hexdigest()
+    def summary(value):
+        return {'imageId': value.get('Id'), 'descriptorDigest': value.get('Descriptor', {}).get('digest'),
+                'sizeBytes': value.get('Size'), 'os': value.get('Os'), 'architecture': value.get('Architecture'),
+                'configSha256': digest(value.get('Config')), 'rootFsSha256': digest(value.get('RootFS')),
+                'canonicalConfigSha256': digest(value.get('Config'), True),
+                'canonicalRootFsSha256': digest(value.get('RootFS'), True),
+                'configKeys': list((value.get('Config') or {}).keys()),
+                'rootFsKeys': list((value.get('RootFS') or {}).keys())}
+    result = {'imageId': identity, 'apiPathVersion': '1.52',
+              'client': {key: client.get(key) for key in ('Version', 'ApiVersion', 'DefaultAPIVersion')},
+              'cli': summary(cli), 'api': summary(api),
+              'configStructurallyEqual': cli.get('Config') == api.get('Config'),
+              'rootFsStructurallyEqual': cli.get('RootFS') == api.get('RootFS'),
+              'configDifferentKeys': [key for key in sorted(set(cli.get('Config', {})) | set(api.get('Config', {})))
+                                      if key not in cli.get('Config', {}) or key not in api.get('Config', {})
+                                      or cli['Config'][key] != api['Config'][key]],
+              'manifests': []}
+    for manifest in api.get('Manifests', [])[:8]:
+        data = manifest.get('ImageData') or {}
+        result['manifests'].append({'id': manifest.get('ID'), 'kind': manifest.get('Kind'),
+                                   'available': manifest.get('Available'), 'size': manifest.get('Size'),
+                                   'platform': data.get('Platform'), 'snapshotSize': data.get('Size')})
+    return result
 
 
 def main():
@@ -203,6 +253,8 @@ def main():
             if len(parts) == 8 and parts[2] in short_ids:
                 report['imageSpace'].append({'id': parts[2], 'size': parts[4],
                     'sharedSize': parts[5], 'uniqueSize': parts[6], 'containers': parts[7]})
+    PHASE = 'image_binding'
+    report['imageBindingDiagnostic'] = image_binding_diagnostic()
     print(json.dumps(report, separators=(',', ':')))
 
 

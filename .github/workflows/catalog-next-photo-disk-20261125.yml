@@ -1,4 +1,4 @@
-# Inspect exact image ownership, references and shared/unique storage before cleanup.
+# Compare retained image CLI/API identities read-only after isolated restore stopped at storage binding.
 name: Inspect failed photo release disk - read only
 on:
   push:
