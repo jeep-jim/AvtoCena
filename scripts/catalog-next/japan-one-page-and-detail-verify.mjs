@@ -8,7 +8,7 @@ const result={kind:'japan-aj-one-page-verification-v1',source:'public-site',
 async function request(path,html=false) {
  const started=Date.now();
  const response=await fetch(base+path,{headers:{Accept:html?'text/html':'application/json'},
-   redirect:'error',cache:'no-store',signal:AbortSignal.timeout(27000)});
+   redirect:'manual',cache:'no-store',signal:AbortSignal.timeout(27000)});
  const max=html?2*1024*1024:600000;
  const chunks=[];let total=0;
  for await(const part of response.body??[]){
@@ -26,18 +26,23 @@ try {
  result.steps.push({name:'japanPage24',status:list.status,elapsedMs:list.elapsedMs,count:rows.length,
   qualifiedJapanRows:rows.filter(r=>r?.market==='japan').length,
   exactPowerRows:exact.length,exactPowerTo160:exact.filter(r=>r.powerHp<=160).length,
-  preliminaryPowerRows:values.length,stale:list.body?.stale===true,
+  preliminaryPowerRows:values.length,ajesStatsIds:rows.filter(r=>/^ajes-stats-[A-Za-z0-9_-]{1,64}$/.test(String(r?.id||''))).length,stale:list.body?.stale===true,
   partial:list.body?.partial===true});
  assert.equal(list.status,200,'list_http');assert.equal(list.body?.ok,true,'list_failed');
  assert.equal(rows.length>0,true,'no_rows');
  assert.equal(rows.every(r=>r?.market==='japan'),true,'foreign_market');
  const id=rows.find(r=>/^ajes-stats-[A-Za-z0-9_-]{1,64}$/.test(String(r?.id||'')))?.id;
+ let detailConfirmed=false;
  if(id) {
-   const detail=await request('/cars/offer/'+encodeURIComponent(id),true);
-   result.steps.push({name:'offerDetail',status:detail.status,elapsedMs:detail.elapsedMs,
-    hasRubPrice:detail.body.includes('₽'),japanText:detail.body.includes('Япония')});
-   assert.equal(detail.status,200,'detail_http');
-   assert.equal(detail.body.includes('₽'),true,'detail_price');
+   try{
+     const detail=await request('/cars/offer/'+encodeURIComponent(id),true);
+     const canRead=detail.status===200&&detail.body.includes('₽');
+     result.steps.push({name:'offerDetail',status:detail.status,elapsedMs:detail.elapsedMs,
+       hasRubPrice:detail.body.includes('₽'),japanText:detail.body.includes('Япония'),
+       redirected:detail.status>=300&&detail.status<400});
+     detailConfirmed=canRead;
+   }catch(e){result.steps.push({name:'offerDetail',result:'request_not_confirmed',errorType:
+      ['TypeError','AbortError','TimeoutError'].includes(e?.name)?e.name:'unknown'});}
  } else result.steps.push({name:'offerDetail',result:'no_ajes_stats_id_in_sample'});
  const filtered=await request('/api/catalog/search?market=japan&page=1&pageSize=24&yearFrom=2008&powerTo=160');
  const records=Array.isArray(filtered.body?.items)?filtered.body.items:[];
@@ -51,7 +56,8 @@ try {
  assert.equal(filtered.body?.ok,true,'filter_app');
  assert.equal(records.every(r=>r?.market==='japan'),true,'mixed_market');
  assert.equal(records.some(r=>Number.isFinite(r?.powerHp)&&r.powerHp>160),false,'wrong_power');
- result.status='verified';
+ result.status=detailConfirmed?'verified':'detail_not_confirmed';
+ if(!detailConfirmed) process.exitCode=1;
 }catch(e){
  result.status='not_confirmed';
  result.errorCode=typeof e?.message==='string'&&/^[a-z_]+$/.test(e.message)?e.message:'unverified';
