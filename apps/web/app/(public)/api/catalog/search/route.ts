@@ -59,6 +59,10 @@ export async function GET(request: Request) {
       const phases=new Map<string,number>();
       const measure=(stage:string,ms:number)=>{if(Number.isFinite(ms)&&ms>=0)phases.set(stage,(phases.get(stage)||0)+ms);};
       const params=Object.fromEntries(p);
+      // AJ count has no trusted locally verified horsepower predicate.
+      // Do not inflate a <=160-hp result with the unfiltered supplier total.
+      if(p.get('countOnly')==='1'&&(p.has('powerTo')||p.has('powerFrom')))
+        return NextResponse.json({ok:true,total:null,countIncomplete:true,powerIncomplete:true,items:[]},{headers:{'Cache-Control':'no-store'}});
       const summary=p.get('countOnly')==='1'?await readAjesCountSummary(JSON.stringify(params)):null;
       const result=summary?{total:exactAjesCount(summary)??null,countSummary:summary,countIncomplete:exactAjesCount(summary)===undefined,items:[]}:await readAjesCatalogPage(params,measure);
       return NextResponse.json({ok:true,...result},{headers:{'Cache-Control':'private, max-age=15, stale-while-revalidate=30','Server-Timing':[`catalog-total;dur=${(performance.now()-started).toFixed(1)}`,...[...phases].map(([phase,ms])=>`${phase};dur=${ms.toFixed(1)}`)].join(', ')}});
