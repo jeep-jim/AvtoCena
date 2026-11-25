@@ -14,7 +14,7 @@ const ordered = value => Array.isArray(value) ? value.map(ordered) : value && ty
   ? Object.fromEntries(Object.keys(value).sort().map(key => [key, ordered(value[key])])) : value;
 const env = event => ({GITHUB_REPOSITORY: 'jeep-jim/AvtoCena', GITHUB_REPOSITORY_ID: '1289722938',
   GITHUB_REF: 'refs/heads/main', GITHUB_SHA: sha, GITHUB_RUN_ID: '45399999999', GITHUB_RUN_ATTEMPT: '1',
-  GITHUB_WORKFLOW_REF: 'jeep-jim/AvtoCena/.github/workflows/catalog-refresh-china.yml@refs/heads/main',
+  GITHUB_WORKFLOW_REF: 'jeep-jim/AvtoCena/.github/workflows/catalog-next-china-daily.yml@refs/heads/main',
   GITHUB_EVENT_NAME: event, EXPECTED_CONTROLLER_SHA: sha});
 const git = args => { if (args[0] === 'rev-parse') return sha + '\n'; assert.equal(args[0], 'diff'); return ''; };
 
@@ -181,13 +181,14 @@ test('production entry binds accepted state, passes pricing root to preparation 
   assert.deepEqual(called, [], 'no bootstrap, preparation, release or GC without accepted state');
 });
 
-test('the future workflow remains disabled outside active workflows, has no schedule or image build and uploads only aggregates', async () => {
-  const text = await fs.readFile(path.join(root, '.github/operations/catalog-next/china-daily.workflow.yml'), 'utf8');
+test('the production daily workflow has the exact nightly schedule, no image build and aggregate-only artifacts', async () => {
+  const text = await fs.readFile(path.join(root, '.github/workflows/catalog-next-china-daily.yml'), 'utf8');
   assert.match(text, /^name: China independent daily/m);
-  assert.match(text, /^\s+if: \$\{\{ false \}\}/m);
+  assert.match(text, /^\s+if: github\.repository_id == '1289722938'/m);
   assert.match(text, /^\s+workflow_dispatch:/m); assert.match(text, /^\s+push:/m);
   assert.match(text, /paths: \[\.github\/market-runs\/catalog-next-china-daily\.json\]/);
-  assert.doesNotMatch(text, /^\s+(?:schedule|workflow_run):/m);
+  assert.match(text, /^\s+schedule:/m); assert.match(text, /cron: '0 14 \* \* \*'/);
+  assert.doesNotMatch(text, /^\s+workflow_run:/m);
   assert.match(text, /contents: read/); assert.match(text, /cancel-in-progress: false/);
   assert.match(text, /daily-entry\.mjs --checkout/); assert.match(text, /daily-entry\.mjs --run/);
   assert.doesNotMatch(text, /docker|build-release-image|image\.tar|catalog-refresh-market|catalog-prepare-owned-china/i);
@@ -196,5 +197,5 @@ test('the future workflow remains disabled outside active workflows, has no sche
   assert.match(artifact, /catalog-next-china-daily-report\.json/);
   assert.match(artifact, /catalog-next-china-daily-generation-report\.json/);
   assert.doesNotMatch(artifact, /RUNNER_TEMP|sqlite|SOURCE|ACCEPTED|receiptBase64|\*\*/);
-  await assert.rejects(fs.stat(path.join(root, '.github/workflows/catalog-next-china-daily.yml')), {code: 'ENOENT'});
+  assert.ok((await fs.stat(path.join(root, '.github/workflows/catalog-next-china-daily.yml'))).isFile());
 });
