@@ -15,6 +15,7 @@ import {loadPublicRates,subscribePublicRates} from "../../lib/catalog/public-rat
 import { PriceTrend, type PublicCurrencyRate } from "./PriceTrend";
 import { ResearchLink } from "./VehicleResearchLink";
 import { DeliveryCityPanel } from "./DeliveryCityPanel";
+import {detailCityStoragePolicy} from "../../lib/catalog/prepared-china-detail-city";
 import { quoteCityDelivery, deliveryDescription } from "../../lib/catalog/city-delivery";
 import type { BusinessPaymentPlan } from "../../../../packages/engine/src/types";
 import { recyclingPowerInfo } from "../../lib/catalog/recycling-power";
@@ -110,14 +111,14 @@ function Tile({missing=false,label,value,valueNode,warning=false,icon,children,w
   </details>
  </div>;
 }
-export function InlineOfferParameters({onKnowledgeRefresh,estimatedPowerHp,initialCurrencyRate,copyOffer,initialScenario,priceIdentity,localCitySelection=false,canSave=false,savedCalculation,deliveryMarket,offerId,initial,price,originalBreakdown,afterPrice,children,priceBadges,exportWarning,reportedVolume,showCommercial=false,isPickup=false,researchContext="",autoCalculate=false,sourcePriceOnly=false}:{onKnowledgeRefresh?:()=>void;estimatedPowerHp?:number;initialCurrencyRate?:PublicCurrencyRate;copyOffer?:{title:string;mileageKm?:number|null};initialScenario?:{draft:ParameterDraft;calculation:SavedOfferCalculation["calculation"]}|null;priceIdentity?:{id:string;sourceId:string;offerType:string;market:string;auctionGrade?:string};localCitySelection?:boolean;canSave?:boolean;savedCalculation?:Pick<SavedOfferCalculation,"version"|"draft"|"calculation"> & {savedAt?:string;savedByName?:string}|null;offerId:string;reportedVolume?:number;autoCalculate?:boolean;sourcePriceOnly?:boolean;deliveryMarket?:string;initial:ParameterDraft;price:ReactNode;originalBreakdown?:ReactNode;afterPrice?:ReactNode;children:ReactNode;priceBadges?:ReactNode;exportWarning?:string;showCommercial?:boolean;isPickup?:boolean;researchContext?:string}) {
+export function InlineOfferParameters({onKnowledgeRefresh,estimatedPowerHp,initialCurrencyRate,copyOffer,initialScenario,priceIdentity,localCitySelection=false,preparedChinaCityContext=false,canSave=false,savedCalculation,deliveryMarket,offerId,initial,price,originalBreakdown,afterPrice,children,priceBadges,exportWarning,reportedVolume,showCommercial=false,isPickup=false,researchContext="",autoCalculate=false,sourcePriceOnly=false}:{onKnowledgeRefresh?:()=>void;estimatedPowerHp?:number;initialCurrencyRate?:PublicCurrencyRate;copyOffer?:{title:string;mileageKm?:number|null};initialScenario?:{draft:ParameterDraft;calculation:SavedOfferCalculation["calculation"]}|null;priceIdentity?:{id:string;sourceId:string;offerType:string;market:string;auctionGrade?:string};localCitySelection?:boolean;preparedChinaCityContext?:boolean;canSave?:boolean;savedCalculation?:Pick<SavedOfferCalculation,"version"|"draft"|"calculation"> & {savedAt?:string;savedByName?:string}|null;offerId:string;reportedVolume?:number;autoCalculate?:boolean;sourcePriceOnly?:boolean;deliveryMarket?:string;initial:ParameterDraft;price:ReactNode;originalBreakdown?:ReactNode;afterPrice?:ReactNode;children:ReactNode;priceBadges?:ReactNode;exportWarning?:string;showCommercial?:boolean;isPickup?:boolean;researchContext?:string}) {
  const originalDraft=completePowerUnitDraft(initialScenario?.draft || savedCalculation?.draft || initial);
  const [savedDraft,setSavedDraft]=useState(completePowerUnitDraft(savedCalculation?.draft || originalDraft));
  const [savedVersion,setSavedVersion]=useState(savedCalculation?.version || null);
  const [saving,setSaving]=useState(false),[saveMessage,setSaveMessage]=useState("");
  const saveDialog=useRef<HTMLDialogElement>(null);
  const [localCityEdited,setLocalCityEdited]=useState(false);
- const privateCity=Boolean(initialScenario)||((localCitySelection||canSave)&&localCityEdited);
+ const cityPolicy=detailCityStoragePolicy({pinnedPreparedCity:preparedChinaCityContext,initialScenario:Boolean(initialScenario),localCitySelection,canSave,localCityEdited});
  const [userEdited,setUserEdited]=useState(false);
  const [savedByName,setSavedByName]=useState(savedCalculation?.savedByName || "");
  const [savedAt,setSavedAt]=useState(savedCalculation?.savedAt || "");
@@ -128,7 +129,8 @@ export function InlineOfferParameters({onKnowledgeRefresh,estimatedPowerHp,initi
  const [rateRevision,setRateRevision]=useState(0);
  const latestRatesKey=useRef("");
  useEffect(()=>{
-  const apply=(rates:PublicCurrencyRate[])=>{
+  if(preparedChinaCityContext)return;
+   const apply=(rates:PublicCurrencyRate[])=>{
    const key=rates.map(r=>[r.currency,r.rateDate,r.effectiveRate].join(":")).sort().join("|");
    const prior=latestRatesKey.current;latestRatesKey.current=key;
    const saved=(initialScenario?.calculation||savedCalculation?.calculation)?.currencyRate || initialCurrencyRate;
@@ -138,7 +140,7 @@ export function InlineOfferParameters({onKnowledgeRefresh,estimatedPowerHp,initi
   };
   const unsubscribe=subscribePublicRates(apply);void loadPublicRates().then(apply).catch(()=>{});
   return unsubscribe;
- },[offerId]);
+ },[offerId,preparedChinaCityContext]);
  // Empty optional values equal omitted values, so returning to today restores the original scenario.
  const dirty=Object.keys({...originalDraft,...draft}).some(key=>(draft[key]??"")!==(originalDraft[key]??""));
  const syncBlocked=useRef(false),syncPending=useRef(false);
@@ -226,7 +228,7 @@ export function InlineOfferParameters({onKnowledgeRefresh,estimatedPowerHp,initi
   {reportedVolume ? <p className="mt-2 text-xs text-[var(--ac-muted)]">Объём {reportedVolume} см³ указан в аукционных данных и может быть округлён. Расчёт ориентировочный; точный объём уточняется по документам или у менеджера.</p> : null}
   {estimated30Active ? <p role="note" data-power30-precedent className="mt-2 text-xs text-[var(--ac-muted)]">30-минутная мощность {Number(draft.power30MinKw).toLocaleString("ru-RU")} кВт — оценка по близкой версии, не подтверждённая характеристика этой машины. Расчёт предварительный — подтвердите мощность по документам автомобиля.</p> : null}
   {afterPrice}
-  <DeliveryCityPanel value={draft.deliveryCity||""} persistSelection={!localCitySelection&&!canSave&&!initialScenario} syncStored={!privateCity} syncStoredOnMount={!initialScenario} onStoredChange={city=>change("deliveryCity",city,false)} onChange={city=>{setLocalCityEdited(true);change("deliveryCity",city);}} description={deliveryDescription(deliveryQuote)}/>
+  <DeliveryCityPanel value={draft.deliveryCity||""} persistSelection={cityPolicy.persistSelection} syncStored={cityPolicy.syncStored} syncStoredOnMount={cityPolicy.syncStoredOnMount} onStoredChange={city=>change("deliveryCity",city,false)} onChange={city=>{setLocalCityEdited(true);change("deliveryCity",city);}} description={deliveryDescription(deliveryQuote)}/>
 
   {result?.breakdown?.length ? <details className="ac-offer-breakdown group mt-4 min-w-0 rounded-[1.35rem] bg-[var(--ac-surface-2)]">
    <summary className="cursor-pointer list-none p-4 [&::-webkit-details-marker]:hidden">
