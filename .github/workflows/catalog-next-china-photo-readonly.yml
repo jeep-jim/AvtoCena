@@ -1,0 +1,61 @@
+name: Diagnose China card photo responses (read only)
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/catalog-next-china-photo-readonly.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: catalog-next-china-photo-readonly
+  cancel-in-progress: false
+jobs:
+  photo:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Probe bounded public China listing and images without supplier access
+        shell: bash
+        run: |
+          node --input-type=module <<'JS'
+          import {createHash} from 'node:crypto';
+          const origin='https://avtocena.com';
+          const key=s=>createHash('sha256').update(s).digest('hex').slice(0,12);
+          const parameters=new URLSearchParams({market:'china',make:'Hyundai',model:'Elantra',
+            city:'Новокузнецк',budgetFrom:'1650000',budgetTo:'1750000',yearFrom:'2022',
+            yearTo:'2023',mileageTo:'70000',sort:'totalRub',page:'1'});
+          const output={kind:'china-photo-public-diagnosis-v1',at:new Date().toISOString(),
+            readsOnly:true,supplierCalls:0,mutations:0,samples:[]};
+          const health=await fetch(origin+'/api/health',{cache:'no-store',signal:AbortSignal.timeout(15000)});
+          output.healthStatus=health.status;
+          const h=await health.json().catch(()=>({}));output.releaseSha=h.releaseSha||null;
+          const catalog=await fetch(origin+'/api/catalog/search?'+parameters,{cache:'no-store',signal:AbortSignal.timeout(30000)});
+          output.catalogStatus=catalog.status;
+          if(!catalog.ok)throw Error('catalog_http_'+catalog.status);
+          const p=await catalog.json();
+          output.generationId=p.generationId||null;
+          output.total=p.total??null;
+          const images=(p.items||[]).filter(x=>typeof x.cardImageUrl==='string'
+            &&x.cardImageUrl.startsWith('/api/catalog/photo/')).slice(0,5);
+          output.samplesAvailable=images.length;
+          if(images.length<2)throw Error('insufficient_signed_photo_samples');
+          for(const item of images){
+            const source=new URL(item.cardImageUrl,origin);
+            if(source.origin!==origin||source.searchParams.get('market')!=='china')
+              throw Error('unexpected_signed_photo_url');
+            source.searchParams.set('view','card');
+            const itemResult={idHash:key(String(item.id)),urlHash:key(source.href)};
+            try{
+              const r=await fetch(source,{cache:'no-store',signal:AbortSignal.timeout(20000),
+                headers:{Accept:'image/webp,image/jpeg,image/png'}});
+              itemResult.status=r.status;
+              itemResult.photoStatus=r.headers.get('x-photo-status');
+              itemResult.mime=(r.headers.get('content-type')||'').split(';')[0];
+              itemResult.length=r.headers.get('content-length');
+              await r.body?.cancel();
+            }catch(error){itemResult.error=error?.name||'request_failed';}
+            output.samples.push(itemResult);
+          }
+          console.log('PHOTO_DIAGNOSIS '+JSON.stringify(output));
+          if(!output.samples.some(x=>x.status===200))throw Error('china_photo_none_healthy');
+          JS
