@@ -6,6 +6,10 @@ on:
       - '.github/workflows/market-writer-inventory.yml'
       - 'scripts/catalog-next/market-writer-inventory.mjs'
       - 'tests/catalog-next-market-writer-inventory.test.mjs'
+      - 'tests/catalog-next-legacy-china-retired.test.mjs'
+      - '.github/workflows/catalog-v3-sequential-queue.yml'
+      - '.github/workflows/catalog-market-refresh.yml'
+      - '.github/workflows/catalog-v3-market-10k-reusable.yml'
   workflow_dispatch:
 permissions:
   contents: read
@@ -19,7 +23,7 @@ jobs:
         with:
           persist-credentials: false
       - name: Verify static workflow inventory logic
-        run: node --test tests/catalog-next-market-writer-inventory.test.mjs
+        run: node --test tests/catalog-next-market-writer-inventory.test.mjs tests/catalog-next-legacy-china-retired.test.mjs
       - name: Inventory market publication and legacy entry points
         run: |
           node scripts/catalog-next/market-writer-inventory.mjs > market-writer-inventory.json
