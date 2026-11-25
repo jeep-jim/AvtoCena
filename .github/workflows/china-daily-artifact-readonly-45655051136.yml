@@ -1,0 +1,138 @@
+name: Inspect fixed daily artifact
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/china-daily-artifact-readonly-45655051136.yml]
+  workflow_dispatch:
+permissions:
+  actions: read
+  contents: read
+jobs:
+  inspect:
+    if: github.repository_id == '1289722938' && github.ref == 'refs/heads/main' && github.run_attempt == 1
+    runs-on: ubuntu-24.04
+    timeout-minutes: 4
+    steps:
+      - name: Verify fixed artifact
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import hashlib, io, json, os, re, signal, sys, urllib.error, urllib.parse, urllib.request, zipfile
+          RUN, ARTIFACT = 45655051136, 15056260406  # Replace only ARTIFACT and DIGEST.
+          DIGEST = "285c8dfbf63ab8b155dd9cc0849a29c91de726b54e20e1545b86de0a7933c643"
+          HEAD = "5e6f1de8203352cbbb2d8296b2a2cb01e1273f47"
+          BASE = "https://api.github.com/repos/jeep-jim/AvtoCena/actions/"
+          NAME = "catalog-next-china-daily-report"
+          FILES = ("catalog-next-china-daily-report.json", "catalog-next-china-daily-generation-report.json")
+          ZIP_CAP, JSON_CAP = 2*1024*1024, 1024*1024
+          class Guard(Exception): pass
+          def need(ok, code):
+              if not ok: raise Guard(code)
+          def deadline(*_): raise Guard("deadline")
+          signal.signal(signal.SIGALRM, deadline); signal.alarm(120)
+          class NoRedirect(urllib.request.HTTPRedirectHandler):
+              def redirect_request(self, *args, **kwargs): return None
+          opener = urllib.request.build_opener(urllib.request.ProxyHandler({}), NoRedirect())
+          auth = {"Authorization": "Bearer "+os.environ["GITHUB_TOKEN"], "Accept": "application/vnd.github+json",
+                  "X-GitHub-Api-Version": "2022-11-28", "User-Agent": "fixed-artifact-inspector", "Accept-Encoding": "identity"}
+          calls = 0
+          def get(url, headers, status):
+              global calls
+              calls += 1; need(calls <= 4, "request_cap")
+              try: response = opener.open(urllib.request.Request(url, headers=headers, method="GET"), timeout=25)
+              except urllib.error.HTTPError as error: response = error
+              if response.status != status: response.close(); raise Guard("http_status")
+              return response
+          def bounded(response, cap):
+              raw = response.read(cap+1); need(len(raw) <= cap, "byte_cap"); return raw
+          def pairs(items):
+              result = {}
+              for key, value in items: need(key not in result, "duplicate_key"); result[key] = value
+              return result
+          def bad_number(_): raise Guard("json_number")
+          def parse(raw): return json.loads(raw.decode("utf-8"), object_pairs_hook=pairs, parse_constant=bad_number)
+          def api(path):
+              with get(BASE+path, auth, 200) as response: return parse(bounded(response, 256*1024))
+          def pick(obj, keys):
+              need(type(obj) is dict, "report_object"); out = {}
+              for key in keys.split():
+                  if key not in obj: continue
+                  value = obj[key]
+                  if value is None or type(value) is bool: pass
+                  elif type(value) is int: need(0 <= value <= 9007199254740991, "report_integer")
+                  elif type(value) is str:
+                      if key.endswith(("At", "AsOf")): pattern = r"\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(?:\.\d{1,6})?Z"
+                      elif key.endswith(("Sha", "Tree", "Sha256")): pattern = r"(?:[a-f0-9]{40}|[a-f0-9]{64})"
+                      elif key.endswith(("GenerationId", "generationId")): pattern = r"gen_china_[1-9]\d{0,19}_[1-9]\d{0,5}"
+                      elif key == "errorCode": pattern = r"china_[a-z0-9_]{1,150}"
+                      elif key in ("phase", "status", "kind"): pattern = r"[a-z][a-z_-]{0,79}"
+                      else: raise Guard("report_string")
+                      need(re.fullmatch(pattern, value), "report_string")
+                  else: raise Guard("report_scalar")
+                  out[key] = value
+              return out
+          try:
+              need(ARTIFACT > 0 and re.fullmatch(r"[a-f0-9]{64}", DIGEST), "pins_required")
+              run = api("runs/"+str(RUN))
+              need(run.get("id") == RUN and run.get("run_attempt") == 1 and run.get("status") == "completed"
+                   and run.get("head_sha") == HEAD and run.get("head_branch") == "main"
+                   and run.get("repository", {}).get("id") == 1289722938, "run_binding")
+              meta = api("artifacts/"+str(ARTIFACT)); owner = meta.get("workflow_run", {})
+              need(meta.get("id") == ARTIFACT and meta.get("name") == NAME and meta.get("expired") is False
+                   and meta.get("digest") == "sha256:"+DIGEST and owner.get("id") == RUN
+                   and owner.get("repository_id") == 1289722938 and owner.get("head_sha") == HEAD
+                   and type(meta.get("size_in_bytes")) is int and 0 < meta["size_in_bytes"] <= ZIP_CAP, "artifact_binding")
+              with get(BASE+"artifacts/"+str(ARTIFACT)+"/zip", auth, 302) as response: location = response.headers.get("Location", "")
+              target = urllib.parse.urlsplit(location)
+              need(len(location) <= 16384 and target.scheme == "https" and not target.username and not target.password
+                   and target.port in (None, 443) and not target.fragment
+                   and re.fullmatch(r"[a-z0-9-]+\.blob\.core\.windows\.net", target.hostname or ""), "redirect_scope")
+              # Separate request: no Authorization, no cookies, no redirects.
+              with get(location, {"User-Agent": "fixed-artifact-inspector", "Accept-Encoding": "identity"}, 200) as response:
+                  archive = bounded(response, ZIP_CAP)
+              need(len(archive) == meta["size_in_bytes"] and hashlib.sha256(archive).hexdigest() == DIGEST, "zip_digest")
+              reports, hashes = {}, {}
+              with zipfile.ZipFile(io.BytesIO(archive)) as bundle:
+                  infos = bundle.infolist()
+                  need(len(infos) == 2 and {item.filename for item in infos} == set(FILES), "zip_entries")
+                  need(sum(item.file_size for item in infos) <= 2*JSON_CAP, "zip_total")
+                  for item in infos:
+                      need(item.orig_filename == item.filename and not item.is_dir() and not item.flag_bits & 1
+                           and item.compress_type in (zipfile.ZIP_STORED, zipfile.ZIP_DEFLATED)
+                           and 0 < item.file_size <= JSON_CAP, "zip_entry")
+                      with bundle.open(item) as stream: raw = stream.read(JSON_CAP+1)
+                      need(len(raw) == item.file_size and len(raw) <= JSON_CAP, "entry_size")
+                      value = parse(raw)
+                      need(type(value) is dict and type(value.get("version")) is int and value["version"] == 1 and value.get("market") == "china", "report_schema")
+                      reports[item.filename], hashes[item.filename] = value, hashlib.sha256(raw).hexdigest()
+              cycle, prep = (reports[name] for name in FILES)
+              need(cycle.get("kind") == "china-daily-cycle-v1" and "kind" not in prep, "report_kind")
+              need("controllerSha" not in prep or prep["controllerSha"] == HEAD, "preparation_controller")
+              common = "completed published phase status errorCode finishedAt"
+              output = {"version": 1, "kind": "china-daily-artifact-inspection-v1", "status": "verified",
+                        "runId": RUN, "artifactId": ARTIFACT, "artifactSha256": DIGEST, "archiveBytes": len(archive),
+                        "requests": calls, "entrySha256": hashes,
+                        "cycle": pick(cycle, common+" recovered sourcePrepared preparedGenerationId acceptedGenerationId sourceObservedAt leaseReleased leaseReleasePending hostCleanupPending protectedGenerations applicationBuilds encyclopediaWrites otherMarketWrites deletions cleanupDeadlineAt"),
+                        "preparation": pick(prep, common+" controllerSha liveCatalogWrites encyclopediaWrites calculatorFormulaChanges deletions")}
+              for section in ("retention", "retentionResume", "hostCleanup"):
+                  if section in cycle: output["cycle"][section] = pick(cycle[section], "completed status errorCode deletedObjects deletedBytes pending collected pruned retiredContainers filesDeleted freedBytes")
+              for section, keys in (
+                  ("runtime", "runtimeSha runtimeTree runtimeDiffSha256"),
+                  ("sourceInput", "kind generationId sourceObservedAt runtimeSha pricingRuntimeSha"),
+                  ("source", "sourceObservedAt supplierLatestVerified sourceDescriptorSha256"),
+                  ("pricing", "completed runtimeSha generationId generationManifestSha256 sourceObservedAt pricingAsOf finishedAt networkAfterFxCapture"),
+                  ("privateGeneration", "generationId receiptSha256 totalBytes storedBytes generationManifestSha256 sourceDescriptorSha256")):
+                  if section in prep: output["preparation"][section] = pick(prep[section], keys)
+              for section, keys in (
+                  ("source", "sourceRows baseSourceRows eligible insertedRows updatedRows unchangedRows removedRows quarantinedRows unresolvedDetails allInputRowsAccountedFor"),
+                  ("pricing", "sourceRows admittedRows pricedRows sellerOnlyRows unpricedRows cityCount allInputRowsAccountedFor priorPricesReused missingValuesInvented localOnlyPricing sourceApiCalls remoteStorageWrites encyclopediaWritten otherMarketsWritten")):
+                  if "reconciliation" in prep.get(section, {}): output["preparation"][section]["reconciliation"] = pick(prep[section]["reconciliation"], keys)
+              text = json.dumps(output, separators=(",", ":"), ensure_ascii=True)
+              need(len(text.encode()) <= 16384, "output_cap"); signal.alarm(0); print(text)
+          except Exception as error:
+              code = str(error) if type(error) is Guard else "inspection_error"
+              print(json.dumps({"kind": "china-daily-artifact-inspection-v1", "status": "failed", "errorCode": code}))
+              sys.exit(1)
+          PY
