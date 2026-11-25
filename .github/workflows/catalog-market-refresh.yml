@@ -29,7 +29,7 @@ permissions:
   actions: read
 jobs:
   plan:
-    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    if: inputs.market != 'china' && (github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success')
     environment: regcloud-staging
     runs-on: ubuntu-latest
     outputs:
