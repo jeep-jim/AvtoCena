@@ -88,7 +88,8 @@ env:
 
 jobs:
   validate:
-    if: inputs.market != 'china'
+    # Retired both independent markets: China local-generation and Japan AJ on demand.
+    if: inputs.market != 'china' && inputs.market != 'japan'
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
