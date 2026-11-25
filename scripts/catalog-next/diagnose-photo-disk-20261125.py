@@ -88,10 +88,12 @@ def main():
     if len(ids) >= 150 or any(not re.fullmatch(r'[a-f0-9]{64}', row) for row in ids):
         raise RuntimeError('photo_disk_container_identity')
     mounted = []
+    referenced_images = set()
     report['containers'] = []
     for identity in ids:
         PHASE = 'docker_inspect'
         row = docker_json(['inspect', identity])[0]
+        referenced_images.add(row['Image'])
         mounts = [os.path.realpath(m['Source']) for m in row.get('Mounts', [])
                   if isinstance(m.get('Source'), str) and m['Source'].startswith('/')]
         mounted.extend(mounts)
@@ -172,6 +174,25 @@ def main():
         for line in usage.stdout.splitlines()[:8]:
             value = json.loads(line)
             report['dockerStorageUsage'].append({key: value.get(key) for key in ('Type', 'TotalCount', 'Active', 'Size', 'Reclaimable')})
+    PHASE = 'image_inventory'
+    image_ids_result = subprocess.run(['/usr/bin/docker', 'image', 'ls', '-aq', '--no-trunc'],
+                                      capture_output=True, text=True, check=True, timeout=30)
+    image_ids = sorted(set(image_ids_result.stdout.splitlines()))
+    if len(image_ids) > 150 or any(not re.fullmatch(r'sha256:[a-f0-9]{64}', identity) for identity in image_ids):
+        raise RuntimeError('photo_disk_image_identity')
+    report['images'] = []
+    for identity in image_ids:
+        row = docker_json(['image', 'inspect', identity])[0]
+        labels = row.get('Config', {}).get('Labels') or {}
+        revision = labels.get('org.opencontainers.image.revision')
+        report['images'].append({'id': identity, 'created': row.get('Created'), 'sizeBytes': row.get('Size'),
+            'referencedByContainer': identity in referenced_images,
+            'runtimeSha': revision if isinstance(revision, str) and re.fullmatch(r'[a-f0-9]{40}', revision) else None,
+            'ownedApplication': labels.get('org.opencontainers.image.source') == 'https://github.com/jeep-jim/AvtoCena'
+                and labels.get('avtocena.application') == 'web',
+            'tagCount': len(row.get('RepoTags') or []), 'digestCount': len(row.get('RepoDigests') or []),
+            'tags': [tag if re.fullmatch(r'avtocena-(?:regcloud|china-runtime):[a-f0-9-]+', tag) else '<other>'
+                     for tag in (row.get('RepoTags') or [])[:10]]})
     print(json.dumps(report, separators=(',', ':')))
 
 
