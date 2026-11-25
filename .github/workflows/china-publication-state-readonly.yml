@@ -1,4 +1,4 @@
-# Observe China daily 45655051136 durable lease and reservation without host or supplier reads.
+# Observe China daily 45655051136 lease, reservation and public health during the prolonged update.
 name: China publication state proof (read only)
 on:
   push:
@@ -32,3 +32,24 @@ jobs:
       - run: npm ci --no-audit --no-fund
       - name: Read publication state, not data or host
         run: node scripts/catalog-next/verify-publication-state-readonly.mjs
+
+      - name: Read bounded public application health
+        run: |
+          node --input-type=module <<'JS'
+          const response = await fetch('https://avtocena.com/api/health', {
+            redirect: 'error', signal: AbortSignal.timeout(15000)
+          });
+          if (response.status !== 200) throw Error('public_health_http_' + response.status);
+          const chunks = []; let size = 0;
+          for await (const chunk of response.body) {
+            size += chunk.byteLength;
+            if (size > 65536) throw Error('public_health_size');
+            chunks.push(Buffer.from(chunk));
+          }
+          const value = JSON.parse(Buffer.concat(chunks).toString('utf8'));
+          if (value.ok !== true || value.releaseSha !== 'd536c1547c4d82a339ed68ced7d8503f09b6810b'
+              || value.calculationVersion !== '4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90')
+            throw Error('public_health_identity');
+          console.log(JSON.stringify({kind: 'china_daily_wait_public_health', observedAt: new Date().toISOString(),
+            status: response.status, ok: value.ok, releaseSha: value.releaseSha, calculationVersion: value.calculationVersion}));
+          JS
