@@ -1,0 +1,37 @@
+name: Stop exact unused previous production container (free RAM)
+on:
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/stop-stale-production-20261125.json']
+permissions:
+  contents: read
+concurrency:
+  group: catalog-next-china
+  cancel-in-progress: false
+jobs:
+  retire:
+    if: >-
+      github.repository_id == '1289722938'
+      && github.ref == 'refs/heads/main'
+      && github.run_attempt == '1'
+      && github.event.head_commit.message == 'Stop only the verified unserved previous production container'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    environment: regcloud-staging
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: Check one-target stop syntax
+        run: python3 -m py_compile scripts/regcloud-stop-stale-production-memory-20261125.py
+      - name: Verify live China and stop only unused old production with no data removal
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+        run: |
+          set -euo pipefail
+          umask 077
+          key_file=$(mktemp)
+          trap 'rm -f "$key_file"' EXIT
+          printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
+          unset SSH_PRIVATE_KEY
+          ssh -F /dev/null -T -i "$key_file" -o BatchMode=yes -o ConnectTimeout=12 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts" -o ForwardAgent=no -o ClearAllForwardings=yes root@151.248.113.177 'python3 -I -B -' < scripts/regcloud-stop-stale-production-memory-20261125.py
