@@ -151,6 +151,27 @@ def main():
         'inputOutputError': sum('input/output error' in line for line in lines),
         'journalAvailable': journal.returncode == 0,
     }
+    PHASE = 'storage_totals'
+    roots = ('/opt/avtocena/releases', '/var/lib/docker', '/var/lib/containerd', '/var/log', '/tmp')
+    totals = subprocess.run(['/usr/bin/du', '-x', '-B1', '-s', *roots], capture_output=True, text=True, timeout=50)
+    report['storageTotals'] = {}
+    for line in totals.stdout.splitlines():
+        parts = line.split('\t', 1)
+        if len(parts) == 2 and parts[0].isdigit() and parts[1] in roots:
+            report['storageTotals'][parts[1]] = int(parts[0])
+    releases = subprocess.run(['/usr/bin/du', '-x', '-B1', '-d1', str(BASE)], capture_output=True, text=True, timeout=40)
+    sizes = []
+    for line in releases.stdout.splitlines():
+        parts = line.split('\t', 1)
+        if len(parts) == 2 and parts[0].isdigit() and re.fullmatch(re.escape(str(BASE)) + r'/[a-f0-9]{40}', parts[1]):
+            sizes.append({'runtimeSha': Path(parts[1]).name, 'allocatedBytes': int(parts[0])})
+    report['largestReleaseDirectories'] = sorted(sizes, key=lambda row: row['allocatedBytes'], reverse=True)[:20]
+    usage = subprocess.run(['/usr/bin/docker', 'system', 'df', '--format', '{{json .}}'], capture_output=True, text=True, timeout=25)
+    report['dockerStorageUsage'] = []
+    if usage.returncode == 0:
+        for line in usage.stdout.splitlines()[:8]:
+            value = json.loads(line)
+            report['dockerStorageUsage'].append({key: value.get(key) for key in ('Type', 'TotalCount', 'Active', 'Size', 'Reclaimable')})
     print(json.dumps(report, separators=(',', ':')))
 
 
