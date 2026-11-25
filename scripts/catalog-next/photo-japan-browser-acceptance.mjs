@@ -86,8 +86,8 @@ async function getJson(context,url){
  const response=await context.request.get(ORIGIN+url,{timeout:30_000,headers:{'Cache-Control':'no-cache'}});
  return {status:response.status(),data:await response.json().catch(()=>null)};
 }
-async function health(context,releaseSha){
- const response=await getJson(context,'/api/health');
+async function health(context,releaseSha,readJson=getJson){
+ const response=await readJson(context,'/api/health');
  need(response.status===200&&response.data?.releaseSha===releaseSha,'release_changed');
 }
 async function poll(check,code,timeout=10_000){
@@ -124,13 +124,89 @@ export async function decodedChinaPhotoControl(page,target){
  return control;
 }
 
-export async function runPhotoJapanBrowserAcceptance({oraclePath,releaseSha,nonce,outputFile,playwrightModule,chromeBin}){
- const report={version:1,kind:'china-photo-japan-browser-v1',release:releaseSha,nonce,checkedAt:new Date().toISOString(),
-  passed:false,chinaPhotoPassed:false,japanFreshnessPassed:false,japanPowerApiPassed:false,japanUiPassed:false,
+/** Allow only the page, China APIs and local assets required by this check.
+ * Same-origin unqualified catalog reads can reach Japan on the server, so
+ * unknown routes and missing/mixed market selections must stay blocked. */
+export function photoOnlyRequestScope(url,method){
+ if(method!=='GET'&&method!=='HEAD')return 'mutation';
+ let parsed,pathname;
+ try{parsed=new URL(url);pathname=decodeURIComponent(parsed.pathname);}catch{return 'external';}
+ if(parsed.origin!==ORIGIN||parsed.username||parsed.password)return 'external';
+ const params=parsed.searchParams,markets=params.getAll('market');
+ if(/(?:^|\/)(?:japan|ajes)(?:\/|$)/.test(pathname)||pathname.includes('/ajes-')
+  ||markets.some(value=>value.split(',').includes('japan')))return 'japan';
+ if(/(?:^|\/)(?:korea|uae|europe|georgia)(?:\/|$)/.test(pathname)
+  ||markets.some(value=>value!=='china'))return 'otherMarket';
+ if(markets.length>1||params.has('source')||params.has('stock')||/[\\\x00-\x1f\x7f]/.test(pathname)
+  ||pathname.split('/').some(part=>part==='.'||part==='..'))return 'unreviewed';
+ const exactChina=markets.length===1&&markets[0]==='china';
+ if((pathname==='/api/health'||pathname==='/api/catalog/rates')&&!parsed.search)return 'allowed';
+ if(/^\/cars\/china(?:\/[^/]+){0,2}\/?$/.test(pathname))return 'allowed';
+ if(['/api/catalog/search','/api/catalog/brand-counts','/api/catalog/models','/api/catalog/colors'].includes(pathname))
+  return exactChina?'allowed':'unreviewed';
+ if(/^\/api\/catalog\/photo\/[A-Za-z0-9_-]{43}$/.test(pathname)){
+  if(!exactChina||params.getAll('url').length!==1||params.getAll('view').length>1
+   ||[...params.keys()].some(key=>!['market','url','view'].includes(key))
+   ||params.has('view')&&!['card','full'].includes(params.get('view')))return 'unreviewed';
+  let source;
+  try{source=new URL(params.get('url'));}catch{return 'unreviewed';}
+  // The frozen China photo proxy rejects redirects itself. Do not let its
+  // multi-market host policy turn this China-only check into a foreign read.
+  return source.protocol==='https:'&&!source.port&&!source.username&&!source.password
+   &&/^[a-z0-9-]+\.autoimg\.cn$/i.test(source.hostname)?'allowed':'unreviewed';
+ }
+ if(/^\/_next\/static\/[A-Za-z0-9_./+@()\[\]-]+$/.test(pathname)
+  ||/^\/brand-logos\/local\/(?:light|dark)\/[a-z0-9-]+\.png$/.test(pathname)
+  ||/^\/api\/catalog\/brand-logo\/[a-z0-9-]+$/.test(pathname)
+  ||/^\/(?:favicon(?:-[a-z0-9-]+)?\.(?:ico|png|svg)|apple-touch-icon(?:-(?:light|dark))?\.png|key-logo\.png|manifest\.json)$/.test(pathname))return 'allowed';
+ return 'unreviewed';
+}
+
+/** APIRequestContext bypasses browser routing. Its only two accepted paths
+ * therefore validate scope independently and never follow a redirect. */
+export async function getChinaPhotoJson(context,url){
+ need(typeof url==='string'&&url.startsWith('/')&&!url.startsWith('//')
+  &&photoOnlyRequestScope(ORIGIN+url,'GET')==='allowed'
+  &&['/api/health','/api/catalog/search'].includes(new URL(ORIGIN+url).pathname),'photo_api_scope');
+ const response=await context.request.get(ORIGIN+url,{timeout:30_000,maxRedirects:0,headers:{'Cache-Control':'no-cache'}});
+ return {status:response.status(),data:await response.json().catch(()=>null)};
+}
+
+export async function installPhotoOnlyRequestFence(context,report){
+ report.blockedRequests={external:0,japan:0,otherMarket:0,mutation:0,unreviewed:0,redirect:0};
+ await context.route('**/*',async route=>{
+  const request=route.request(),scope=photoOnlyRequestScope(request.url(),request.method());
+  if(scope!=='allowed'){report.blockedRequests[scope]++;await route.abort('blockedbyclient');return;}
+  // Playwright continues redirect chains without calling context.route again.
+  // Fetch one real response, refuse redirects, and deliver its original bytes
+  // to Chromium so image loading/decoding and retry events remain real.
+  let response;
+  try{
+   response=await route.fetch({maxRedirects:0,timeout:30_000});
+   if(response.status()>=300&&response.status()<400&&response.status()!==304){
+    report.blockedRequests.redirect++;await route.abort('blockedbyclient');
+   }else await route.fulfill({response});
+  }catch{await route.abort('failed').catch(()=>{});}
+  finally{if(response)await response.dispose().catch(()=>{});}
+ });
+ report.readOnlyBrowserFence=true;
+}
+
+// The public entry points fix the report profile. No caller option or
+// environment variable can make a combined report omit its Japan checks.
+export function runPhotoJapanBrowserAcceptance(options){return runPhotoBrowserAcceptance(options,true);}
+export function runChinaPhotoBrowserAcceptance(options){return runPhotoBrowserAcceptance(options,false);}
+
+async function runPhotoBrowserAcceptance({oraclePath,releaseSha,nonce,outputFile,playwrightModule,chromeBin},includeJapan){
+ const readJson=includeJapan?getJson:getChinaPhotoJson;
+ const report={version:1,kind:includeJapan?'china-photo-japan-browser-v1':'china-photo-browser-v1',
+  release:releaseSha,nonce,checkedAt:new Date().toISOString(),passed:false,chinaPhotoPassed:false,
+  ...(includeJapan?{japanFreshnessPassed:false,japanPowerApiPassed:false,japanUiPassed:false}
+   :{codeScope:'catalog-photo-recovery-v1',readOnlyBrowserFence:false}),
   productionMutations:0,directSupplierRequests:0,explicitJapanApiRequests:0,japanUiNavigations:0,checks:{},screenshots:[]};
  let browser,context,currentPage,stage='preconditions';
  const capture=async(page,name)=>{
-  const relative=path.join('artifacts/catalog-photo-japan-live',nonce,name+'.png');
+  const relative=path.join(includeJapan?'artifacts/catalog-photo-japan-live':'artifacts/catalog-photo-live',nonce,name+'.png');
   const file=path.join(ROOT,relative);await fs.mkdir(path.dirname(file),{recursive:true});
   const bytes=await page.screenshot({path:file,fullPage:true,animations:'disabled',timeout:5000});
   report.screenshots.push({path:relative,sha256:sha(bytes)});
@@ -144,10 +220,11 @@ export async function runPhotoJapanBrowserAcceptance({oraclePath,releaseSha,nonc
   const {chromium}=await import(playwrightModule||'playwright');
   browser=await chromium.launch({headless:true,executablePath:chromeBin,args:['--no-sandbox']});
   context=await browser.newContext({viewport:{width:1280,height:900},serviceWorkers:'block',locale:'ru-RU'});
-  stage='release_before';await health(context,releaseSha);report.checks.releaseBeforeMatched=true;
+  if(!includeJapan)await installPhotoOnlyRequestFence(context,report);
+  stage='release_before';await health(context,releaseSha,readJson);report.checks.releaseBeforeMatched=true;
 
   stage='china_selection';
-  const china=await getJson(context,binding.api);need(china.status===200,'china_http');
+  const china=await readJson(context,binding.api);need(china.status===200,'china_http');
   const selected=selectChinaRecoveryPhoto(china.data,binding.generation);
   report.checks.chinaPhoto={total:china.data.total,cards:china.data.items.length,generationMatched:true,faultResponses:0};
   const page=await context.newPage();currentPage=page;
@@ -156,12 +233,13 @@ export async function runPhotoJapanBrowserAcceptance({oraclePath,releaseSha,nonc
   page.on('request',request=>{
    if(request.resourceType()==='image')imageRequests.set(request.url(),(imageRequests.get(request.url())||0)+1);
   });
-  // Only this exact signed image is intercepted. Every other request remains native.
+  // Inject failures only for this exact signed image. The photo-only profile
+  // additionally fences unrelated reads; the combined profile stays native.
   await page.route(url=>url.href===selected.url,async route=>{
    targetRequests++;
    if(targetRequests<=3){report.checks.chinaPhoto.faultResponses++;await route.fulfill({status:503,
     headers:{'Cache-Control':'no-store','Retry-After':'15','X-Photo-Status':'photo_busy'},body:''});}
-   else await route.continue();
+   else if(includeJapan)await route.continue();else await route.fallback();
   });
   await page.clock.install({time:new Date()});
   await page.addInitScript(target=>{
@@ -227,6 +305,7 @@ export async function runPhotoJapanBrowserAcceptance({oraclePath,releaseSha,nonc
   report.chinaPhotoPassed=true;
   await page.close();currentPage=null;
 
+  if(includeJapan){
   stage='japan_plain_first';
   report.checks.japanFreshness={observations:[]};const plain=[];
   for(let index=0;index<2;index++){
@@ -278,8 +357,12 @@ export async function runPhotoJapanBrowserAcceptance({oraclePath,releaseSha,nonc
   await capture(japanPage,'japan-desktop');
   await japanPage.setViewportSize({width:390,height:900});await cards.first().scrollIntoViewIfNeeded();
   await capture(japanPage,'japan-mobile');need(japanPageErrors===0,'japan_javascript_errors');report.japanUiPassed=true;
-  stage='release_after';await health(context,releaseSha);report.checks.releaseAfterMatched=true;
-  report.passed=report.chinaPhotoPassed&&report.japanFreshnessPassed&&report.japanPowerApiPassed&&report.japanUiPassed;
+  }
+  stage='release_after';await health(context,releaseSha,readJson);report.checks.releaseAfterMatched=true;
+  report.passed=includeJapan
+   ?report.chinaPhotoPassed&&report.japanFreshnessPassed&&report.japanPowerApiPassed&&report.japanUiPassed
+   :report.chinaPhotoPassed&&report.readOnlyBrowserFence&&report.productionMutations===0
+    &&report.directSupplierRequests===0&&report.explicitJapanApiRequests===0&&report.japanUiNavigations===0;
  }catch(error){
   report.error={stage,code:/^photo_japan_browser_[a-z_]+$/.test(error?.message||'')?error.message:'photo_japan_browser_check_failed',timeout:error?.name==='TimeoutError'};
   if(currentPage&&/^[a-f0-9]{32}$/.test(nonce||''))await capture(currentPage,'failure').catch(()=>{});
@@ -292,9 +375,12 @@ export async function runPhotoJapanBrowserAcceptance({oraclePath,releaseSha,nonc
 
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)){
  try{
-  const report=await runPhotoJapanBrowserAcceptance({oraclePath:process.env.ORACLE_PATH,releaseSha:process.env.EXPECTED_RELEASE_SHA,
-   nonce:process.env.VERIFICATION_NONCE,outputFile:path.resolve(process.env.OUTPUT||path.join(ROOT,'catalog-next-photo-japan-browser-report.json')),
+  const args=process.argv.slice(2);need(args.length===0||args.length===1&&args[0]==='--photo-only','mode');
+  const photoOnly=args[0]==='--photo-only',run=photoOnly?runChinaPhotoBrowserAcceptance:runPhotoJapanBrowserAcceptance;
+  const report=await run({oraclePath:process.env.ORACLE_PATH,releaseSha:process.env.EXPECTED_RELEASE_SHA,
+   nonce:process.env.VERIFICATION_NONCE,outputFile:path.resolve(process.env.OUTPUT||path.join(ROOT,
+    photoOnly?'catalog-next-photo-browser-report.json':'catalog-next-photo-japan-browser-report.json')),
    playwrightModule:process.env.PLAYWRIGHT_MODULE,chromeBin:process.env.CHROME_BIN});
-  process.stdout.write('PHOTO_JAPAN_BROWSER '+JSON.stringify(report)+'\n');if(!report.passed)process.exitCode=1;
+  process.stdout.write((photoOnly?'CHINA_PHOTO_BROWSER ':'PHOTO_JAPAN_BROWSER ')+JSON.stringify(report)+'\n');if(!report.passed)process.exitCode=1;
  }catch{process.stderr.write('photo_japan_browser_report_failed\n');process.exitCode=1;}
 }

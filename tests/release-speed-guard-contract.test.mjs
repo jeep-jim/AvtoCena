@@ -140,12 +140,27 @@ test('code-only photo activation preserves the independent China fence and compl
  const workflow=fs.readFileSync(path.join(workflowDirectory,'catalog-next-china-photo-release.yml'),'utf8');
  const gate=workflow.indexOf('node scripts/verify-frozen-speed-baselines.mjs');
  const contracts=workflow.indexOf('tests/catalog-next-*.test.mjs tests/release-speed-guard-contract.test.mjs');
+ const sourceVerification=workflow.indexOf('scripts/catalog-next/code-entry.mjs --verify');
+ const build=workflow.indexOf('scripts/catalog-next/code-entry.mjs --build');
  const restoration=workflow.indexOf('scripts/catalog-next/restore-photo-image.mjs --run');
  const firstHostKey=workflow.indexOf('SSH_PRIVATE_KEY:');
  const activation=workflow.indexOf('scripts/catalog-next/code-entry.mjs --run');
  assert.ok(gate>=0 && contracts>gate && activation>contracts);
  assert.ok(firstHostKey>contracts && restoration>firstHostKey && activation>restoration,
   'the exact archived image is restored only after contracts and before normal publication');
+ assert.ok(sourceVerification>contracts && build>sourceVerification && build<firstHostKey && activation>build,
+  'the photo-only source is built and roundtripped before host contact');
+ const steps=workflow.split(/(?=^      - )/m);
+ const buildStep=steps.find(step=>step.includes('scripts/catalog-next/code-entry.mjs --build'));
+ const restoreStep=steps.find(step=>step.includes('scripts/catalog-next/restore-photo-image.mjs --run'));
+ assert.match(buildStep,/if: steps\.photo_scope\.outputs\.scope == 'catalog-photo-recovery-v1'/);
+ assert.match(restoreStep,/if: steps\.photo_scope\.outputs\.scope == 'catalog-photo-japan-power-v1'/);
+ assert.match(buildStep,/CHINA_BUILD_DOCKER_HOST: \$\{\{ steps\.photo_docker\.outputs\.sock \}\}/);
+ assert.doesNotMatch(buildStep,/SSH_PRIVATE_KEY|restore-photo-image/);
+ const selector=steps.find(step=>step.includes('id: photo_scope'));
+ assert.match(selector,/checkedCatalogCodeScope\(plan\)/);
+ assert.match(selector,/\.github\/operations\/catalog-next\/china-code-serving-plan\.json/);
+ assert.ok(workflow.indexOf(selector)>sourceVerification && workflow.indexOf(selector)<build);
  assert.match(workflow,/group: catalog-next-china\n\s+cancel-in-progress: false/);
  assert.match(workflow,/paths: \[\.github\/market-runs\/catalog-next-china-photo-release\.json\]/);
  assert.doesNotMatch(workflow,/AUTO_API_CHE168_KEY|schedule:|release\.mjs --/);
@@ -162,11 +177,54 @@ test('code-only photo activation preserves the independent China fence and compl
  assert.match(adapter,/details\.precedingSpeedReportSha256 === hash\(speedRaw\)/);
  assert.match(adapter,/photoJapan\.oracleSha256 === hash\(await fs\.readFile\(oraclePath\)\)/);
  assert.match(adapter,/photoJapanReportBase64: photoJapanRaw\.toString\('base64'\)/);
+ assert.match(adapter,/codeUpdate && plan\.codeScope === 'catalog-photo-recovery-v1'/);
+ assert.match(adapter,/args: \['--photo-only'\]/);
+ assert.match(adapter,/photo\.kind === 'china-photo-browser-v1'/);
+ assert.match(adapter,/photo\.codeScope === plan\.codeScope/);
+ assert.match(adapter,/photo\.oracleSha256 === hash\(await fs\.readFile\(oraclePath\)\)/);
+ assert.match(adapter,/photoReportBase64: photoRaw\.toString\('base64'\)/);
+ assert.match(adapter,/photo\.readOnlyBrowserFence === true/);
+ assert.match(adapter,/\['passed', 'chinaPhotoPassed', 'japanFreshnessPassed', 'japanPowerApiPassed', 'japanUiPassed'\]/);
+ const browser=fs.readFileSync(path.join(root,'scripts/catalog-next/photo-japan-browser-acceptance.mjs'),'utf8');
+ assert.match(browser,/runPhotoJapanBrowserAcceptance\(options\)\{return runPhotoBrowserAcceptance\(options,true\);\}/);
+ assert.match(browser,/runChinaPhotoBrowserAcceptance\(options\)\{return runPhotoBrowserAcceptance\(options,false\);\}/);
+ assert.match(browser,/report\.chinaPhotoPassed&&report\.japanFreshnessPassed&&report\.japanPowerApiPassed&&report\.japanUiPassed/);
+ const host=fs.readFileSync(path.join(root,'scripts/catalog-next/release-host.py'),'utf8');
+ assert.match(host,/code_update\(self\.plan\) and code_scope\(self\.plan\) == PHOTO_CODE_SCOPE/);
+ assert.match(host,/photo\.get\('kind'\) == 'china-photo-browser-v1'/);
+ assert.match(host,/photo\.get\('readOnlyBrowserFence'\) is True/);
+ assert.match(host,/code_update\(self\.plan\) and code_scope\(self\.plan\) == PHOTO_JAPAN_CODE_SCOPE/);
+ assert.match(host,/'passed', 'chinaPhotoPassed', 'japanFreshnessPassed',[\s\S]*'japanPowerApiPassed', 'japanUiPassed'/);
  assert.match(adapter,/validateChinaCodeTransition\(candidate, prior\.current\)/);
  const cycle=fs.readFileSync(path.join(root,'scripts/catalog-next/code-controller.mjs'),'utf8');
  assert.match(cycle,/transition: 'code-update'/);
  assert.match(cycle,/state\.commit/); assert.match(cycle,/state\.abortReserved/); assert.match(cycle,/state\.finalizeRollback/);
  assert.doesNotMatch(cycle,/prepareChinaGeneration|restorePrivateChinaGeneration|refreshChinaSource/);
+});
+
+test('photo CI always tests shared and China behavior while the combined profile still requires every PW test',()=>{
+ const workflow=fs.readFileSync(path.join(workflowDirectory,'verify-china-photo-code.yml'),'utf8');
+ assert.match(workflow,/checkedCatalogCodeScope\(JSON\.parse\(fs\.readFileSync\('\.github\/operations\/catalog-next\/china-code-serving-plan\.json'\)\)\)/);
+ const matrix=workflow.match(/^          PHOTO_EXTRA_TESTS=\(\)\n[\s\S]*?^          esac$/m)?.[0];
+ assert.ok(matrix,'the two reviewed scopes must be explicit');
+ const directory=fs.mkdtempSync(path.join(os.tmpdir(),'photo-scope-matrix-'));
+ try{
+  fs.mkdirSync(path.join(directory,'tests'));
+  const names=['tests/japan-pw-browser.test.ts','tests/japan-pw-source.test.ts'];
+  for(const filename of names)fs.writeFileSync(path.join(directory,filename),'');
+  const run=scope=>execFileSync('bash',['-euo','pipefail','-c',matrix+"\nprintf '%s\\n' \"${PHOTO_EXTRA_TESTS[@]}\""],{
+   cwd:directory,encoding:'utf8',env:{...process.env,PHOTO_SCOPE:scope},stdio:'pipe'}).trim();
+  assert.equal(run('catalog-photo-recovery-v1'),'');
+  assert.deepEqual(run('catalog-photo-japan-power-v1').split('\n'),names);
+  assert.throws(()=>run('unreviewed-scope'),error=>error.status===1);
+ }finally{fs.rmSync(directory,{recursive:true,force:true});}
+ const checks=workflow.split('\n').find(line=>line.includes('node --import tsx')&&line.includes('tests/catalog-photo-retry.test.ts'));
+ for(const name of ['tests/catalog-photo-retry.test.ts','tests/photo-proxy.test.ts','tests/ajes-*.test.ts',
+  'tests/catalog-detail-read-cache.test.ts','tests/catalog-japan-filter-rail.test.ts','tests/catalog-market-page-boundary.test.ts',
+  '"${PHOTO_EXTRA_TESTS[@]}"','--import ./tests/helpers/offline-fetch.mjs'])assert.ok(checks.includes(name),name);
+ assert.ok(workflow.indexOf('node tests/browser/photo-japan-recovery-clock.mjs')<workflow.indexOf(matrix));
+ assert.ok(workflow.indexOf('npm run typecheck')>workflow.indexOf(checks));
+ assert.ok(workflow.indexOf('node --import tsx tests/browser/catalog-photo-recovery.mjs')>workflow.indexOf('npm run typecheck'));
 });
 test('the pinned AJ removal preserves frozen gates and requires its exact scope and nonce handshake',()=>{
  const [workflow,entry]=[...customActivators][0],filename=path.join(workflowDirectory,workflow);

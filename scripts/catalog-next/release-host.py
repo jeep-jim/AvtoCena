@@ -2721,6 +2721,22 @@ class Host:
              details.get('release') == self.plan['runtimeSha'] and details.get('nonce') == self.plan['nonce'] and
              details.get('generationManifestSha256') == self.plan['generationManifestSha256'] and
              details.get('precedingSpeedReportSha256') == sha(speed_raw), 'browser_evidence_binding')
+        if code_update(self.plan) and code_scope(self.plan) == PHOTO_CODE_SCOPE:
+            need(isinstance(details.get('photoReportBase64'), str) and
+                 isinstance(details.get('photoReportSha256'), str) and
+                 re.fullmatch(r'[a-f0-9]{64}', details['photoReportSha256']), 'photo_browser_binding')
+            photo_raw, photo = decode_report(details['photoReportBase64'])
+            oracle_sha = next(row['sha256'] for row in self.plan['files'] if row['name'] == 'acceptance.json')
+            need(len(photo_raw) <= 128 * 1024 and sha(photo_raw) == details['photoReportSha256'] and
+                 photo.get('version') == 1 and photo.get('kind') == 'china-photo-browser-v1' and
+                 photo.get('codeScope') == PHOTO_CODE_SCOPE and
+                 photo.get('release') == self.plan['runtimeSha'] and photo.get('nonce') == self.plan['nonce'] and
+                 photo.get('generationManifestSha256') == self.plan['generationManifestSha256'] and
+                 photo.get('oracleSha256') == oracle_sha and photo.get('passed') is True and
+                 photo.get('chinaPhotoPassed') is True and photo.get('readOnlyBrowserFence') is True and
+                 all(type(photo.get(key)) is int and photo[key] == 0 for key in
+                     ('productionMutations', 'directSupplierRequests', 'explicitJapanApiRequests', 'japanUiNavigations')),
+                 'photo_browser_binding')
         if code_update(self.plan) and code_scope(self.plan) == PHOTO_JAPAN_CODE_SCOPE:
             need(isinstance(details.get('photoJapanReportBase64'), str) and
                  isinstance(details.get('photoJapanReportSha256'), str) and

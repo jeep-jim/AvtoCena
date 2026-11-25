@@ -314,6 +314,26 @@ export function createChinaDailyRelease({root, servingRoot, pricingPlan, serving
             && details.release === candidate.runtimeSha && details.nonce === nonce
             && details.generationManifestSha256 === candidate.generationManifestSha256
             && details.precedingSpeedReportSha256 === hash(speedRaw), 'browser_details_binding');
+          if (codeUpdate && plan.codeScope === 'catalog-photo-recovery-v1') {
+            await activeGuard(); await progress('code_photo_browser');
+            const photoOutput = path.join(root, 'catalog-next-photo-browser-report.json');
+            need(await use.runChild({root, script: path.join(root, 'scripts/catalog-next/photo-japan-browser-acceptance.mjs'),
+              args: ['--photo-only'], cwd: browserDirectory, env: {...browserEnv, ORACLE_PATH: oraclePath,
+                EXPECTED_RELEASE_SHA: candidate.runtimeSha, VERIFICATION_NONCE: nonce, OUTPUT: photoOutput}}) === 0,
+            'photo_browser_failed');
+            const photoRaw = await fs.readFile(photoOutput), photo = JSON.parse(photoRaw);
+            need(photoRaw.length <= 128 * 1024 && photo.version === 1 && photo.kind === 'china-photo-browser-v1'
+              && photo.codeScope === plan.codeScope && photo.release === candidate.runtimeSha && photo.nonce === nonce
+              && photo.generationManifestSha256 === candidate.generationManifestSha256
+              && photo.oracleSha256 === hash(await fs.readFile(oraclePath))
+              && photo.passed === true && photo.chinaPhotoPassed === true && photo.readOnlyBrowserFence === true
+              && ['productionMutations', 'directSupplierRequests', 'explicitJapanApiRequests', 'japanUiNavigations']
+                .every(key => photo[key] === 0), 'photo_browser_binding');
+            detailsRaw = Buffer.from(JSON.stringify({...details, photoReportBase64: photoRaw.toString('base64'),
+              photoReportSha256: hash(photoRaw)}) + '\n');
+            need(detailsRaw.length <= 256 * 1024, 'browser_details_size');
+            await fs.writeFile(detailsPath, detailsRaw, {mode: 0o600});
+          }
           if (codeUpdate && servingPlan.codeScope === 'catalog-photo-japan-power-v1') {
             await activeGuard(); await progress('code_photo_japan_browser');
             const photoJapanOutput = path.join(root, 'catalog-next-photo-japan-browser-report.json');

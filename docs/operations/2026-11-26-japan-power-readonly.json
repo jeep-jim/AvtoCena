@@ -1,0 +1,68 @@
+{
+  "kind": "japan-single-public-visit-v1",
+  "startedAt": "2026-11-25T17:10:58.930Z",
+  "requestCount": 1,
+  "ipHeadersOverridden": false,
+  "retries": 0,
+  "httpStatus": 200,
+  "httpDate": "Wed, 25 Nov 2026 17:11:16 GMT",
+  "serverTiming": [
+    {
+      "name": "catalog-total",
+      "durationMs": 6138.1
+    },
+    {
+      "name": "query-resolution",
+      "durationMs": 0.1
+    },
+    {
+      "name": "supplier-read",
+      "durationMs": 5912.1
+    },
+    {
+      "name": "editorial-read",
+      "durationMs": 225
+    },
+    {
+      "name": "enrichment-sum",
+      "durationMs": 1.1
+    },
+    {
+      "name": "pricing",
+      "durationMs": 0
+    }
+  ],
+  "bodyBytes": 337,
+  "ok": true,
+  "page": 1,
+  "pageSize": 3,
+  "reads": 1,
+  "received": 3,
+  "rejected": 0,
+  "hasMore": false,
+  "stale": true,
+  "partial": true,
+  "interrupted": false,
+  "scanLimited": false,
+  "total": null,
+  "observedAt": "2026-11-25T15:32:18.467Z",
+  "ageSeconds": 5938.407,
+  "items": 0,
+  "validJapanIds": 0,
+  "uniqueIds": 0,
+  "rowsWithPowerHp": 0,
+  "rowsAbove160": 0,
+  "finishedAt": "2026-11-25T17:11:16.874Z",
+  "elapsedMs": 17943,
+  "precedingHealth": {
+    "checkedAt": "2026-11-25T17:08:10.039068+00:00",
+    "httpStatus": 200,
+    "releaseSha": "d536c1547c4d82a339ed68ced7d8503f09b6810b"
+  },
+  "interpretationLimits": [
+    "reads counts source pages, not new supplier requests",
+    "observedAt is inherited from the first source page",
+    "d536 retains its strict power filter; this does not validate provisional PW",
+    "the original release failure at 16:02 UTC is not attributed by this later observation"
+  ]
+}

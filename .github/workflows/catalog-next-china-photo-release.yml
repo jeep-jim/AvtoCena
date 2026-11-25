@@ -1,4 +1,4 @@
-name: Publish China photo recovery and Japan power with accepted China data
+name: Publish reviewed catalog code with accepted China data
 on:
   push:
     branches: [main]
@@ -40,6 +40,15 @@ jobs:
           node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/catalog-next-*.test.mjs tests/release-speed-guard-contract.test.mjs
           node --import tsx scripts/catalog-next/code-entry.mjs --checkout
           node --import tsx scripts/catalog-next/code-entry.mjs --verify
+      - name: Select the verified code scope for image preparation
+        id: photo_scope
+        run: |
+          node --input-type=module <<'JS'
+          import fs from 'node:fs';
+          import {checkedCatalogCodeScope} from './scripts/catalog-next/photo-code-scope.mjs';
+          const plan = JSON.parse(fs.readFileSync('.github/operations/catalog-next/china-code-serving-plan.json', 'utf8'));
+          fs.appendFileSync(process.env.GITHUB_OUTPUT, 'scope=' + checkedCatalogCodeScope(plan) + '\n');
+          JS
       - name: Prepare real mobile and desktop browser acceptance
         run: |
           npm install --prefix "$RUNNER_TEMP/photo-browser" --no-package-lock --ignore-scripts playwright@1.55.0
@@ -57,7 +66,13 @@ jobs:
           runtime-basedir: ${{ runner.temp }}/photo-docker
           daemon-config: |
             {"features":{"containerd-snapshotter":true}}
-      - name: Restore the exact previously built image and repeat its isolated roundtrip
+      - name: Build the verified photo-only source and check its image roundtrip
+        if: steps.photo_scope.outputs.scope == 'catalog-photo-recovery-v1'
+        env:
+          CHINA_BUILD_DOCKER_HOST: ${{ steps.photo_docker.outputs.sock }}
+        run: node scripts/run-node-with-resources.mjs --import tsx scripts/catalog-next/code-entry.mjs --build
+      - name: Restore the exact previously built combined image and repeat its isolated roundtrip
+        if: steps.photo_scope.outputs.scope == 'catalog-photo-japan-power-v1'
         env:
           SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
           CHINA_BUILD_DOCKER_HOST: ${{ steps.photo_docker.outputs.sock }}
@@ -80,6 +95,8 @@ jobs:
           name: china-photo-code-release-result
           path: |
             catalog-next-china-photo-release-report.json
+            catalog-next-photo-browser-report.json
+            artifacts/catalog-photo-live/**
             catalog-next-photo-japan-browser-report.json
             artifacts/catalog-photo-japan-live/**
             ${{ runner.temp }}/china-release-build/image-receipt.json

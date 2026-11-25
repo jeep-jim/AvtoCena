@@ -16,6 +16,7 @@ RUNTIMES = (
     '4302f59a0312f35a64fc3cb9c5b25f9463fa9294',
     'd536c1547c4d82a339ed68ced7d8503f09b6810b',
     '38895e53f7f770ee68edb0b8ad53056468b928a5',
+    '36d707bcb599e861918df411e40d8947074f0430',
 )
 FILES = ('GENERATION.json', 'details.sqlite', 'query.sqlite',
          'FILTER_SEMANTICS.json', 'FX_RECEIPT.json', 'RECONCILIATION.json', 'DISPOSITIONS.ndjson')

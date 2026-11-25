@@ -1,4 +1,4 @@
-name: Verify China photos, Japan power and code-only publication
+name: Verify reviewed catalog code and required market checks
 on:
   push:
     branches: [main]
@@ -58,13 +58,20 @@ jobs:
           const chrome=execFileSync('which',['google-chrome'],{encoding:'utf8'}).trim();
           fs.appendFileSync(process.env.GITHUB_ENV,'CHROME_BIN='+fs.realpathSync(chrome)+'\nPLAYWRIGHT_MODULE='+process.env.RUNNER_TEMP+'/photo-browser/node_modules/playwright/index.mjs\n');
           JS
-      - name: Test real photo components, Japan power and source freshness
+      - name: Test real photo components and the reviewed market scope
         run: |
           set -euo pipefail
           PHOTO_SHA=$(node -p "JSON.parse(require('fs').readFileSync('.github/operations/catalog-next/china-code-serving-plan.json')).runtimeSha")
+          PHOTO_SCOPE=$(node --input-type=module -e "import fs from 'node:fs'; import {checkedCatalogCodeScope} from './scripts/catalog-next/photo-code-scope.mjs'; console.log(checkedCatalogCodeScope(JSON.parse(fs.readFileSync('.github/operations/catalog-next/china-code-serving-plan.json'))));")
           PHOTO_RUNTIME_ROOT="$RUNNER_TEMP/china-serving-runtime-$PHOTO_SHA" node tests/browser/photo-japan-recovery-clock.mjs
           cd "$RUNNER_TEMP/china-serving-runtime-$PHOTO_SHA"
-          node --import tsx --import ./tests/helpers/offline-fetch.mjs --test --test-concurrency=1 tests/catalog-photo-retry.test.ts tests/photo-proxy.test.ts tests/ajes-*.test.ts tests/catalog-detail-read-cache.test.ts tests/catalog-japan-filter-rail.test.ts tests/catalog-market-page-boundary.test.ts tests/japan-pw-*.test.ts
+          PHOTO_EXTRA_TESTS=()
+          case "$PHOTO_SCOPE" in
+            catalog-photo-recovery-v1) ;;
+            catalog-photo-japan-power-v1) PHOTO_EXTRA_TESTS=(tests/japan-pw-*.test.ts) ;;
+            *) exit 1 ;;
+          esac
+          node --import tsx --import ./tests/helpers/offline-fetch.mjs --test --test-concurrency=1 tests/catalog-photo-retry.test.ts tests/photo-proxy.test.ts tests/ajes-*.test.ts tests/catalog-detail-read-cache.test.ts tests/catalog-japan-filter-rail.test.ts tests/catalog-market-page-boundary.test.ts "${PHOTO_EXTRA_TESTS[@]}"
           npm run typecheck
           git restore --source=HEAD --worktree -- apps/web/tsconfig.tsbuildinfo
           node --import tsx tests/browser/catalog-photo-recovery.mjs

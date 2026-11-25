@@ -99,7 +99,7 @@ async function fixture(t, {combined = false} = {}) {
     manifestId: 'sha256:' + '7'.repeat(64), contentBytes: 10, unpackedBytes: 100, totalBytes: 110};
   const storagePath = path.join(imageDirectory, 'image-storage-proof.json');
   await fs.writeFile(storagePath, JSON.stringify(storageProof));
-  const calls = [], uploaded = new Map(), flags = {gateExit: 0, wrongNonce: false}; let hostPlan, browserBytes;
+  const calls = [], uploaded = new Map(), flags = {gateExit: 0, wrongNonce: false, changeReport: null}; let hostPlan, browserBytes;
   const session = {exited: Promise.resolve(), abort() { calls.push('abort'); },
     async call(method, args) {
       calls.push(method);
@@ -122,8 +122,9 @@ async function fixture(t, {combined = false} = {}) {
       if (method === 'switch') return {switched: true, release: nextSha, nonce: hostPlan.nonce};
       if (method === 'browser_evidence') {
         browserBytes = {speed: Buffer.from(args.speedBase64, 'base64'), details: Buffer.from(args.detailsBase64, 'base64')};
-        const details = JSON.parse(browserBytes.details), raw = Buffer.from(details.photoJapanReportBase64, 'base64');
-        assert.equal(hash(raw), details.photoJapanReportSha256);
+        const details = JSON.parse(browserBytes.details), raw = Buffer.from(
+          combined ? details.photoJapanReportBase64 : details.photoReportBase64, 'base64');
+        assert.equal(hash(raw), combined ? details.photoJapanReportSha256 : details.photoReportSha256);
         assert.equal(JSON.parse(raw).nonce, hostPlan.nonce);
         return {saved: true, speedReportSha256: hash(browserBytes.speed), detailsReportSha256: hash(browserBytes.details)};
       }
@@ -160,13 +161,18 @@ async function fixture(t, {combined = false} = {}) {
             precedingSpeedReportSha256: hash(await fs.readFile(args.env.OWNER_FILTER_BROWSER_REPORT))}));
         } else {
           assert.equal(name, 'photo-japan-browser-acceptance.mjs');
+          assert.deepEqual(args.args, combined ? [] : ['--photo-only']);
           assert.equal(args.env.EXPECTED_RELEASE_SHA, nextSha); assert.equal(args.env.VERIFICATION_NONCE, hostPlan.nonce);
           assert.ok(!Object.hasOwn(args.env, 'SSH_PRIVATE_KEY'));
           if (flags.gateExit) return flags.gateExit;
-          await fs.writeFile(args.env.OUTPUT, JSON.stringify({version: 1, kind: 'china-photo-japan-browser-v1', release: nextSha,
+          const report = {version: 1, kind: combined ? 'china-photo-japan-browser-v1' : 'china-photo-browser-v1', release: nextSha,
             nonce: flags.wrongNonce ? 'f'.repeat(32) : hostPlan.nonce, generationManifestSha256: f.candidate.generationManifestSha256,
             oracleSha256: hash(await fs.readFile(args.env.ORACLE_PATH)), passed: true, chinaPhotoPassed: true,
-            japanFreshnessPassed: true, japanPowerApiPassed: true, japanUiPassed: true}));
+            ...(combined ? {japanFreshnessPassed: true, japanPowerApiPassed: true, japanUiPassed: true}
+              : {codeScope: 'catalog-photo-recovery-v1', readOnlyBrowserFence: true, productionMutations: 0,
+                directSupplierRequests: 0, explicitJapanApiRequests: 0, japanUiNavigations: 0})};
+          if (flags.changeReport) flags.changeReport(report);
+          if (!flags.missingReport) await fs.writeFile(args.env.OUTPUT, JSON.stringify(report));
         }
         return 0;
       },
@@ -274,3 +280,49 @@ for (const failure of ['gateExit', 'wrongNonce']) test('combined code rejects ' 
   assert.equal(f.calls.includes('browser_evidence'), false); assert.equal(f.calls.includes('accept'), false);
   await stage.close();
 });
+
+test('photo-only code activation requires its bound fault-recovery report before host acceptance', async t => {
+  const f = await fixture(t), {stage, input} = await reservedStage(f);
+  const result = await stage.activate(input);
+  assert.equal(result.kind, 'accepted');
+  assert.ok(f.calls.indexOf('browser-acceptance.mjs') < f.calls.indexOf('photo-japan-browser-acceptance.mjs'));
+  assert.ok(f.calls.indexOf('photo-japan-browser-acceptance.mjs') < f.calls.indexOf('browser_evidence'));
+  assert.ok(f.calls.indexOf('browser_evidence') < f.calls.indexOf('accept'));
+  const details = JSON.parse(result.evidence.browserDetailsBytes), raw = Buffer.from(details.photoReportBase64, 'base64');
+  assert.equal(hash(raw), details.photoReportSha256);
+  assert.equal(JSON.parse(raw).kind, 'china-photo-browser-v1');
+  assert.equal(JSON.parse(raw).chinaPhotoPassed, true);
+  assert.equal(details.photoJapanReportBase64, undefined);
+  await stage.close();
+});
+
+for (const [field, value] of [
+  ['version', 2], ['kind', 'china-photo-japan-browser-v1'], ['codeScope', 'catalog-photo-japan-power-v1'],
+  ['release', oldSha], ['nonce', nonce], ['generationManifestSha256', '0'.repeat(64)], ['oracleSha256', '0'.repeat(64)],
+  ['passed', false], ['chinaPhotoPassed', false], ['readOnlyBrowserFence', false],
+  ['productionMutations', 1], ['directSupplierRequests', 1], ['explicitJapanApiRequests', 1], ['japanUiNavigations', 1],
+  ['explicitJapanApiRequests', undefined], ['directSupplierRequests', false],
+]) test('photo-only code rejects wrong ' + field + '=' + value + ' before recording acceptance', async t => {
+  const f = await fixture(t); f.flags.changeReport = report => { report[field] = value; };
+  const {stage, input} = await reservedStage(f);
+  await assert.rejects(stage.activate(input), /china_daily_release_photo_browser_binding/);
+  assert.equal(f.calls.includes('browser_evidence'), false); assert.equal(f.calls.includes('accept'), false);
+  await stage.close(); assert.equal(f.calls.at(-1), 'close');
+});
+
+for (const failure of ['gateExit', 'missingReport']) test('photo-only code rejects ' + failure + ' and closes its unaccepted session', async t => {
+  const f = await fixture(t); f.flags[failure] = 1;
+  const {stage, input} = await reservedStage(f);
+  await assert.rejects(stage.activate(input));
+  assert.equal(f.calls.includes('browser_evidence'), false); assert.equal(f.calls.includes('accept'), false);
+  await stage.close(); assert.equal(f.calls.at(-1), 'close');
+});
+
+for (const field of ['japanFreshnessPassed', 'japanPowerApiPassed', 'japanUiPassed'])
+  test('combined code still requires ' + field + ' despite a successful China photo check', async t => {
+    const f = await fixture(t, {combined: true}); f.flags.changeReport = report => { report[field] = false; };
+    const {stage, input} = await reservedStage(f);
+    await assert.rejects(stage.activate(input), /china_daily_release_photo_japan_browser_binding/);
+    assert.equal(f.calls.includes('browser_evidence'), false); assert.equal(f.calls.includes('accept'), false);
+    await stage.close();
+  });
