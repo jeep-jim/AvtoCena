@@ -7,6 +7,8 @@ import {gunzipSync} from 'node:zlib';
 import {openChinaQueryIndex} from '../../../../scripts/catalog-next/query-index.mjs';
 import {openChinaQuerySemantics} from '../../../../scripts/catalog-next/query-semantics.mjs';
 import {queryChinaWithPreparedCity} from './china-city-query.mjs';
+import {createMarketGenerationReader} from '../../../../scripts/catalog-next/market-generation-reader.mjs';
+import {createChinaLocalPointerStore} from './china-local-pointer.mjs';
 import {protectedPhotoUrl} from './photo-proxy-policy';
 import {PUBLIC_CATALOG_MARKETS} from './runtime-config';
 import type {CatalogSearchParams, VehicleOffer} from './types';
@@ -17,7 +19,7 @@ const ID = /^[a-f0-9]{24}$/;
 const sha = (value: string | Buffer) => createHash('sha256').update(value).digest('hex');
 const fail = (reason: string): never => { throw Error('china_local_' + reason); };
 const need = (value: unknown, reason: string) => { if (!value) fail(reason); };
-const stateKey = Symbol.for('avtocena.china.local-generation.v1');
+const stateKey = Symbol.for('avtocena.china.local-generation.v2');
 const guardKey = Symbol.for('avtocena.china.local-offer-guards.v1');
 const stateStore = globalThis as any;
 const guards: WeakMap<object, () => void> = stateStore[guardKey] ||= new WeakMap();
@@ -59,8 +61,10 @@ async function digestFile(filename: string, expected: {bytes: number; sha256: st
   return before;
 }
 
-async function openGeneration() {
-  const config = configured();
+async function openGeneration(selected?: {directory: string; manifestSha256: string; runtimeSha: string}) {
+  const base = configured();
+  const config = selected || base;
+  need(config.runtimeSha === base.runtimeSha, 'runtime_changed');
   need(path.isAbsolute(config.directory) && SHA.test(config.manifestSha256) && RELEASE.test(config.runtimeSha), 'configuration');
   need(await fs.realpath(config.directory) === config.directory, 'directory');
   const manifestPath = path.join(config.directory, 'GENERATION.json');
@@ -101,7 +105,7 @@ async function openGeneration() {
   }));
   need(publicRates.every(rate => /^[A-Z]{3}$/.test(rate.currency) && Number.isFinite(rate.effectiveRate) && rate.effectiveRate > 0), 'fx_quotes');
   const assertCurrent = () => {
-    need(same(configured(), config), 'generation_changed');
+    need(same(configured(), base), 'generation_changed');
     for (const [name, expected] of pins) need(same(identity(name), expected), 'generation_changed');
   };
   const query = await openChinaQueryIndex({filename: queryFile, manifest: manifest.queryIndex, assertAuthority: assertCurrent});
@@ -151,13 +155,34 @@ async function openGeneration() {
   } catch (error) { cityPriceDb?.close(); details.close(); query.close(); throw error; }
 }
 
-export async function initializeLocalChinaReader() {
+function liveManager() {
+  const config = configured(), key = JSON.stringify(config);
+  const existing = stateStore[stateKey];
+  if (existing) { need(existing.key === key, 'generation_changed'); return existing.runtime; }
+  const pointer = createChinaLocalPointerStore({rootDirectory: config.directory,
+    bootstrapManifestSha256: config.manifestSha256});
+  const runtime = createMarketGenerationReader({store: pointer, refreshMs: 15000,
+    openGeneration: async ({reference}: {reference: {generationId: string; manifestSha256: string}}) => {
+      const directory = await pointer.directoryFor(reference);
+      const state = await openGeneration({directory,manifestSha256:reference.manifestSha256,runtimeSha:config.runtimeSha});
+      return {...state, close: async () => {
+        state.query.close();state.details.close();state.cityPriceDb.close();
+      }};
+    }});
+  stateStore[stateKey] = {key,runtime};
+  return runtime;
+}
+async function withLocalChinaReader<T>(visit: (state: State) => Promise<T> | T): Promise<T | null> {
   if (!chinaLocalRuntimeConfigured()) return null;
-  const key = JSON.stringify(configured());
-  const state = stateStore[stateKey];
-  if (state) { need(state.key === key, 'generation_changed'); return state.promise as ReturnType<typeof openGeneration>; }
-  const promise = openGeneration(); stateStore[stateKey] = {key, promise};
-  return promise;
+  return liveManager().withMarket('china', async ({reader}: {reader: State}) => visit(reader));
+}
+// Probe for existing callers; actual catalogue operations below pin the selected
+// generation until their complete read has finished.
+export async function initializeLocalChinaReader() {
+  return withLocalChinaReader(async state => state);
+}
+export async function localChinaReaderReady() {
+  return withLocalChinaReader(async state => {state.assertCurrent();return true;});
 }
 
 function publicProjection(row: any) {
@@ -169,7 +194,7 @@ function publicProjection(row: any) {
     firstSeenAt: value.firstSeenAt || value.updatedAt || '', updatedAt: value.updatedAt || value.firstSeenAt || ''};
 }
 
-type State = NonNullable<Awaited<ReturnType<typeof initializeLocalChinaReader>>>;
+type State = NonNullable<Awaited<ReturnType<typeof openGeneration>>>;
 function cityLedger(state: State, id: string) {
   // Only called inside search/detail's fresh cut and file-identity fences.
   const cached = state.cityLedgers.get(id); if (cached) return cached;
@@ -208,7 +233,7 @@ function mark<T extends object>(state: State, row: T, city?: string, baseRub?: n
 function checkCut(state: State, expected?: string | null) { if (expected && expected !== state.manifest.generationId) fail('cut_changed'); state.assertCurrent(); }
 
 export async function searchLocalChina(params: CatalogSearchParams, options: {countOnly?: boolean; includeFacets?: boolean; navigationFacets?: boolean; marketPage?: boolean; expectedGeneration?: string | null} = {}) {
-  const state = await initializeLocalChinaReader(); if (!state) return null;
+  return withLocalChinaReader(async state => {
   checkCut(state, options.expectedGeneration || params.preparedCut);
   const pageSize = options.marketPage ? 24 : Math.max(1, Math.min(48, Number(params.pageSize) || 24));
   const query = state.semantics.compileRequest({...params, pageSize});
@@ -226,6 +251,7 @@ export async function searchLocalChina(params: CatalogSearchParams, options: {co
   const facets = options.includeFacets || options.navigationFacets ? localFacets(state, options.navigationFacets ? {} : query) : undefined;
   state.assertCurrent();
   return {...result, items, usedIndexShards: [], marketCountInfo: {}, ...(facets ? {facets} : {})};
+  });
 }
 function localFacets(state: State, query: any) {
   const value = state.query.facets(query);
@@ -233,20 +259,22 @@ function localFacets(state: State, query: any) {
     bodyTypes: [...value.bodyTypes], fuels: [...value.fuels], transmissions: [...value.transmissions], drives: [...value.drives], markets: [...PUBLIC_CATALOG_MARKETS]};
 }
 export async function localChinaFacets(params: CatalogSearchParams = {}) {
-  const state = await initializeLocalChinaReader(); if (!state) return null;
-  return localFacets(state, state.semantics.compileRequest({...params, market: 'china'}));
+  return withLocalChinaReader(async state =>
+    localFacets(state, state.semantics.compileRequest({...params, market: 'china'})));
 }
 export async function localChinaCounts(params: CatalogSearchParams = {}) {
-  const state = await initializeLocalChinaReader(); if (!state) return null;
-  return state.query.facets(state.semantics.compileRequest({...params, market: 'china'}));
+  return withLocalChinaReader(async state =>
+    state.query.facets(state.semantics.compileRequest({...params, market: 'china'})));
 }
 export async function localChinaPublicRates() {
-  const state = await initializeLocalChinaReader(); if (!state) return null;
-  state.assertCurrent();
-  return {rates: state.publicRates.map(rate => ({...rate, history: []})), ratesUpdatedAt: state.manifest.pricingAsOf};
+  return withLocalChinaReader(async state => {
+    state.assertCurrent();
+    return {rates: state.publicRates.map(rate => ({...rate, history: []})), ratesUpdatedAt: state.manifest.pricingAsOf};
+  });
 }
 export async function readLocalChinaOffer(id: string, city?: string, expectedGeneration?: string) {
-  const state = await initializeLocalChinaReader(); if (!state || !ID.test(id)) return null;
+  if (!ID.test(id)) return null;
+  return withLocalChinaReader(async state => {
   checkCut(state, expectedGeneration);
   const query = state.semantics.compileRequest({market: 'china', city});
   const locator = state.query.get(id, query.cityKey);
@@ -261,9 +289,10 @@ export async function readLocalChinaOffer(id: string, city?: string, expectedGen
   if (locator.queryRub !== null) need(offer.totalRub === locator.queryRub, 'detail_price');
   state.assertCurrent();
   return {offer: mark(state, offer, city, baseRub) as VehicleOffer, assertCurrent: state.assertCurrent};
+  });
 }
 
 export async function resetLocalChinaReaderForTests() {
   const state = stateStore[stateKey]; delete stateStore[stateKey];
-  if (state) await state.promise.then((value: any) => { value.query.close(); value.details.close(); value.cityPriceDb.close(); }, () => {});
+  if (state) await state.runtime.close();
 }
