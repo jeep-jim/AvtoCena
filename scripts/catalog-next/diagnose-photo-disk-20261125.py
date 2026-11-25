@@ -18,6 +18,8 @@ RUNTIMES = (
 )
 FILES = ('GENERATION.json', 'details.sqlite', 'query.sqlite',
          'FILTER_SEMANTICS.json', 'FX_RECEIPT.json', 'RECONCILIATION.json', 'DISPOSITIONS.ndjson')
+PHASE = 'begin'
+REPORT = {}
 
 
 def ordinary(path):
@@ -42,10 +44,14 @@ def docker_json(arguments):
 
 
 def main():
+    global PHASE, REPORT
+    PHASE = 'disk'
     usage = os.statvfs(BASE)
     report = {'kind': 'photo-release-disk-readonly-v1',
               'diskFreeBytes': usage.f_bavail * usage.f_frsize,
               'diskTotalBytes': usage.f_blocks * usage.f_frsize}
+    REPORT = report
+    PHASE = 'lock'
     fd = os.open('/run/lock/avtocena-runtime-change.lock', os.O_RDONLY | os.O_NOFOLLOW)
     try:
         try:
@@ -56,6 +62,7 @@ def main():
             report['runtimeLockBusy'] = True
     finally:
         os.close(fd)
+    PHASE = 'health'
     found = re.findall(rb'(?m)^\s*proxy_pass http://127\.0\.0\.1:(\d+);\s*$', CONFIG.read_bytes())
     if len(found) != 1:
         raise RuntimeError('photo_disk_ingress')
@@ -70,6 +77,7 @@ def main():
                             'calculationVersion': health.get('calculationVersion')}
     finally:
         con.close()
+    PHASE = 'docker_list'
     ids_result = subprocess.run(['/usr/bin/docker', 'ps', '-aq', '--no-trunc'],
                                 check=True, capture_output=True, text=True, timeout=30)
     ids = ids_result.stdout.splitlines()
@@ -78,6 +86,7 @@ def main():
     mounted = []
     report['containers'] = []
     for identity in ids:
+        PHASE = 'docker_inspect'
         row = docker_json(['inspect', identity])[0]
         mounts = [os.path.realpath(m['Source']) for m in row.get('Mounts', [])
                   if isinstance(m.get('Source'), str) and m['Source'].startswith('/')]
@@ -87,6 +96,7 @@ def main():
                                      [m.split('/china-next/')[0] for m in mounts if m.startswith(str(BASE) + '/')]})
     report['runtimes'] = {}
     for runtime in RUNTIMES:
+        PHASE = 'runtime_inventory'
         home = BASE / runtime / 'china-next'
         attempts = []
         if home.is_dir() and not home.is_symlink():
@@ -121,6 +131,7 @@ def main():
                                    str(directory).startswith(m + '/') for m in mounted),
                     'files': files})
         report['runtimes'][runtime] = attempts
+    PHASE = 'journal'
     journal = subprocess.run(['/usr/bin/journalctl', '-u', 'docker', '-u', 'containerd',
                               '--since', '2026-11-25 13:23:00 UTC', '--until', '2026-11-25 13:27:00 UTC',
                               '--no-pager', '-o', 'cat'], capture_output=True, timeout=20)
@@ -138,6 +149,10 @@ def main():
 if __name__ == '__main__':
     try:
         main()
-    except Exception:
-        print(json.dumps({'kind': 'photo-release-disk-readonly-v1', 'error': 'photo_disk_inventory_failed'}))
+    except Exception as error:
+        REPORT.update({'kind': 'photo-release-disk-readonly-v1', 'error': 'photo_disk_inventory_failed',
+                       'phase': PHASE, 'errorType': type(error).__name__,
+                       'errorNumber': getattr(error, 'errno', None),
+                       'safeReason': str(error) if re.fullmatch(r'photo_disk_[a-z_]+', str(error)) else None})
+        print(json.dumps(REPORT))
         raise SystemExit(1)
