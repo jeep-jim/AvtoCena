@@ -81,13 +81,13 @@ async function fixture(run, {markerExtra = false, markerOperation = 'inspect-chi
 
 test('exact immutable marker-only push authorizes this fixed diagnosis without a manual bypass', async () => fixture(async f => {
   assert.deepEqual(SELECTOR, {
-    runtimeSha: '99c45a3b5d8439bbc1ee34702ba41340ada08125',
+    runtimeSha: '38895e53f7f770ee68edb0b8ad53056468b928a5',
     pricingRuntimeSha: '64c6338e0db23c8999096bceefbf113c0136fe15',
     generationId: 'gen_china_45369451603_1',
     generationManifestSha256: 'd5745797cc162b82e0c0f0b1f49fef65f18f0d6649666562337183b18084dd75',
-    controllerSha: '0bb29933c2a06e10adbbc41ed59b3368c1a1fccb',
-    imageId: 'sha256:c12a500a0e50fc692701e2f5a28733a6c8a995c241df9d193c294a2cd85cb87d',
-    since: '2026-11-24T22:05:00Z', until: '2026-11-24T22:10:00Z',
+    controllerSha: '94ad6bcd18a702ab6429de59d48f752e2f9c7ff6',
+    imageId: 'sha256:c8fca211f0b5a7beede7e62ed6384b81ecc2c40f78f948053365392073f0c47e',
+    since: '2026-11-25T02:10:00Z', until: '2026-11-25T02:15:00Z',
   });
   assert.deepEqual(verifyChinaStartupDiagnosisInvocation(f), {version: 1, event: 'push',
     sourceSha: f.sourceSha, approvedSourceSha: f.approvedSourceSha, markerPath: MARKER});
@@ -141,7 +141,7 @@ test('real invocation then frozen baseline gate precede the secret and only diag
   assert.equal(report.completed, true); assert.equal(report.status, 'complete');
   assert.deepEqual(report.diagnosis.startup, timingDiagnostic().startup);
   assert.deepEqual(report.diagnosis.serverSpeed, timingDiagnostic().serverSpeed);
-  assert.equal(report.failedRunId, '45493093028'); assert.deepEqual(report.selector, SELECTOR);
+  assert.equal(report.failedRunId, '45527580447'); assert.deepEqual(report.selector, SELECTOR);
   for (const field of ['hostMutations', 'storageWrites', 'providerCalls', 'pageRequests']) assert.equal(report[field], 0);
   assert.equal(report.finishedAt, fixedNow()); assert.equal(report.diagnosisControllerSha, f.sourceSha);
   assert.equal(report.approvedControllerSha, f.approvedSourceSha);
