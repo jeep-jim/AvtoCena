@@ -59,3 +59,42 @@ jobs:
           console.log('PHOTO_DIAGNOSIS '+JSON.stringify(output));
           if(!output.samples.some(x=>x.status===200))throw Error('china_photo_none_healthy');
           JS
+
+      - name: Verify actual browser image decoding independently of publication
+        shell: bash
+        run: |
+          npm install --prefix "$RUNNER_TEMP/diagnostic-browser" --no-package-lock --ignore-scripts playwright@1.55.0
+          node --input-type=module <<'JS'
+          import {execFileSync} from 'node:child_process';
+          import {pathToFileURL} from 'node:url';
+          const {chromium}=await import(pathToFileURL(process.env.RUNNER_TEMP+'/diagnostic-browser/node_modules/playwright/index.mjs').href);
+          const chrome=execFileSync('which',['google-chrome'],{encoding:'utf8'}).trim();
+          const browser=await chromium.launch({headless:true,executablePath:chrome,args:['--no-sandbox']});
+          const context=await browser.newContext({viewport:{width:1280,height:900},locale:'ru-RU',serviceWorkers:'block'});
+          const page=await context.newPage();
+          const photoResponses=[];let pageErrors=0;
+          page.on('pageerror',()=>pageErrors++);
+          page.on('response',r=>{if(r.url().includes('/api/catalog/photo/'))
+            photoResponses.push({status:r.status(),reason:r.headers()['x-photo-status']||null});});
+          const filters=new URLSearchParams({city:'Новокузнецк',budgetFrom:'1650000',budgetTo:'1750000',
+            yearFrom:'2022',yearTo:'2023',mileageTo:'70000',sort:'totalRub',page:'1'});
+          let result={kind:'china-photo-browser-readonly-v1'};
+          try{
+            const response=await page.goto('https://avtocena.com/cars/china/Hyundai/Elantra?'+filters,
+              {waitUntil:'domcontentloaded',timeout:90000});
+            await page.locator('article.ac-catalog-card').first().waitFor({state:'visible',timeout:60000});
+            const images=page.locator('article.ac-catalog-card img');
+            const count=await images.count();
+            for(let i=0;i<Math.min(count,4);i++)await images.nth(i).scrollIntoViewIfNeeded();
+            try{await page.waitForFunction(()=>[...document.querySelectorAll('article.ac-catalog-card img')]
+              .some(x=>x.naturalWidth>0),null,{timeout:25000});}catch{}
+            const snap=await images.evaluateAll(nodes=>nodes.slice(0,6).map(x=>({
+              signed:x.src.includes('/api/catalog/photo/'),complete:x.complete,
+              naturalWidth:x.naturalWidth,loading:x.loading,visible:!!x.getClientRects().length})));
+            result={...result,pageStatus:response?.status(),count,images:snap,
+              photoResponses:photoResponses.slice(0,12),pageErrors,
+              hasDecodedImage:snap.some(x=>x.naturalWidth>0)};
+            console.log('BROWSER_PHOTO_DIAGNOSIS '+JSON.stringify(result));
+            if(!result.hasDecodedImage)process.exitCode=1;
+          }finally{await browser.close();}
+          JS
