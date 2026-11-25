@@ -9,7 +9,7 @@ const file=path.join(root,'docs/operations/regcloud-staging-known-hosts');
 const digest=x=>createHash('sha256').update(x).digest('hex');
 const want='fd37f98aab3eeb16f131fcd4033adbb56f7e9616208c2f1ab5ef7a446caa4e4c';
 const codeRemote=String.raw`
-import json,os,stat
+import json,os,stat,fcntl
 from pathlib import Path
 BASE=Path('/opt/avtocena/releases')
 RUNTIMES=['d536c1547c4d82a339ed68ced7d8503f09b6810b','38895e53f7f770ee68edb0b8ad53056468b928a5']
@@ -25,11 +25,20 @@ def item(directory):
  for n in FILES:
   p=g/n
   vals[n]={'present':regular(p),'bytes':p.stat().st_size if regular(p) else 0}
- packed=directory/'details.sqlite.incoming.gz'
- vals['details_incoming']={'present':regular(packed),'bytes':packed.stat().st_size if regular(packed) else 0}
+ for key,fp in [('details_incoming',directory/'details.sqlite.incoming.gz'),('query_incoming',directory/'query.sqlite.incoming.gz'),('image_tar',directory/'image.tar')]:
+  vals[key]={'present':regular(fp),'bytes':fp.stat().st_size if regular(fp) else 0}
  return {'files':vals,'planPresent':regular(directory/'PLAN.json'),'rollbackPresent':regular(directory/'ROLLED_BACK.json'),
          'acceptedPresent':regular(directory/'ACCEPTED.json')}
-v=os.statvfs(BASE);results={'diskFreeBytes':v.f_bavail*v.f_frsize,'diskTotalBytes':v.f_blocks*v.f_frsize,'runtimes':{}}
+v=os.statvfs(BASE)
+lockBusy=None
+try:
+ fd=os.open('/run/lock/avtocena-runtime-change.lock',os.O_RDONLY|os.O_NOFOLLOW)
+ try:
+  try: fcntl.flock(fd,fcntl.LOCK_EX|fcntl.LOCK_NB);lockBusy=False;fcntl.flock(fd,fcntl.LOCK_UN)
+  except BlockingIOError:lockBusy=True
+ finally:os.close(fd)
+except OSError:pass
+results={'diskFreeBytes':v.f_bavail*v.f_frsize,'diskTotalBytes':v.f_blocks*v.f_frsize,'runtimeLockBusy':lockBusy,'runtimes':{}}
 for runtime in RUNTIMES:
  home=BASE/runtime/'china-next'
  choices=[]
@@ -65,7 +74,7 @@ try{
  const report=JSON.parse(stdout);
  if(!Number.isSafeInteger(report.diskFreeBytes)||!Number.isSafeInteger(report.diskTotalBytes)||
     !report.runtimes||!Object.keys(report.runtimes).every(k=>/^[a-f0-9]{40}$/.test(k)))throw Error('china_host_diagnosis_bad_response');
- const clean={diskFreeBytes:report.diskFreeBytes,diskTotalBytes:report.diskTotalBytes,
+ const clean={diskFreeBytes:report.diskFreeBytes,diskTotalBytes:report.diskTotalBytes,runtimeLockBusy:report.runtimeLockBusy,
   runtimes:Object.fromEntries(Object.entries(report.runtimes).map(([id,r])=>[id,{
    attemptsExamined:r.attemptsExamined,fullDetails:r.attempts.filter(a=>a.files?.['details.sqlite']?.present).length,
    fullQueries:r.attempts.filter(a=>a.files?.['query.sqlite']?.present).length,
@@ -75,7 +84,8 @@ try{
    rolledBack:r.attempts.filter(a=>a.rollbackPresent).length,
    detailsBytes:r.attempts.reduce((sum,a)=>sum+(a.files?.['details.sqlite']?.bytes||0),0),
    queryBytes:r.attempts.reduce((sum,a)=>sum+(a.files?.['query.sqlite']?.bytes||0),0),
-   incomingBytes:r.attempts.reduce((sum,a)=>sum+(a.files?.details_incoming?.bytes||0),0),
+   incomingBytes:r.attempts.reduce((sum,a)=>sum+(a.files?.details_incoming?.bytes||0)+(a.files?.query_incoming?.bytes||0),0),
+   imageTarBytes:r.attempts.reduce((sum,a)=>sum+(a.files?.image_tar?.bytes||0),0),
    completedPairs:r.attempts.filter(a=>a.files?.['details.sqlite']?.present&&a.files?.['query.sqlite']?.present&&a.rollbackPresent&&!a.acceptedPresent).length
   }]))};
  process.stdout.write(JSON.stringify({kind:'china-disk-and-retained-generation-readonly',...clean})+'\n');
