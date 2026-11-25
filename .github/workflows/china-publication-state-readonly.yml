@@ -1,4 +1,4 @@
-# Observe China daily 45655051136 lease, reservation and public health during the prolonged update.
+# Verify settled China daily 45655051136 state, public health and one fixed China-only sample.
 name: China publication state proof (read only)
 on:
   push:
@@ -52,4 +52,31 @@ jobs:
             throw Error('public_health_identity');
           console.log(JSON.stringify({kind: 'china_daily_wait_public_health', observedAt: new Date().toISOString(),
             status: response.status, ok: value.ok, releaseSha: value.releaseSha, calculationVersion: value.calculationVersion}));
+          JS
+
+      - name: Read one fixed public China sample from the accepted generation
+        run: |
+          node --input-type=module <<'JS'
+          import {createHash} from 'node:crypto';
+          const url = new URL('https://avtocena.com/api/catalog/search');
+          url.search = new URLSearchParams({market:'china',make:'Hyundai',model:'Elantra',city:'Новокузнецк',
+            budgetFrom:'1650000',budgetTo:'1750000',yearFrom:'2022',yearTo:'2023',mileageTo:'70000',sort:'totalRub',page:'1'}).toString();
+          const response = await fetch(url, {redirect:'error',signal:AbortSignal.timeout(30000)});
+          if (response.status !== 200) throw Error('public_china_sample_http_' + response.status);
+          const chunks = []; let size = 0;
+          for await (const chunk of response.body) {
+            size += chunk.byteLength;
+            if (size > 4*1024*1024) throw Error('public_china_sample_size');
+            chunks.push(Buffer.from(chunk));
+          }
+          const value = JSON.parse(Buffer.concat(chunks).toString('utf8'));
+          if (value.ok !== true || value.generationId !== 'gen_china_45655051136_1'
+              || !Array.isArray(value.items) || value.items.length > 24
+              || !Number.isSafeInteger(value.total) || value.total < value.items.length
+              || value.items.some(item => item.market !== 'china')
+              || value.partial === true || value.countIncomplete === true)
+            throw Error('public_china_sample_identity');
+          console.log(JSON.stringify({kind:'china_daily_public_sample_v1',observedAt:new Date().toISOString(),
+            status:response.status,generationId:value.generationId,total:value.total,itemCount:value.items.length,
+            allChina:true,itemsSha256:createHash('sha256').update(JSON.stringify(value.items)).digest('hex')}));
           JS
