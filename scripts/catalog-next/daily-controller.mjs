@@ -24,9 +24,12 @@ export function chinaDailyIsDue(reference, at) {
   const accepted = validateChinaGenerationReference(reference, {requireAccepted: true});
   const proof = JSON.parse(Buffer.from(accepted.proof.hostReceiptBase64, 'base64'));
   need(time(at) >= time(proof.acceptedAt), 'clock_before_acceptance');
-  // The scheduled cycle is once per Krasnoyarsk calendar day, not 24 hours after
-  // a possibly long preparation completed (which would skip alternating days).
-  return localDate(at) !== localDate(proof.acceptedAt);
+  // Freshness is determined by the SOURCE snapshot, not by the day an older
+  // snapshot happened to be accepted on the website. First accepted China has
+  // a 24 November source and 25 November acceptance, so that evening is due.
+  // The accepted-at guard above still prevents a clock moving behind acceptance.
+  need(time(at) >= time(accepted.sourceObservedAt), 'clock_before_source');
+  return localDate(at) !== localDate(accepted.sourceObservedAt);
 }
 
 function preparedReference(prepared, owner, previous, plan) {
