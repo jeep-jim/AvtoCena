@@ -6,7 +6,9 @@ import path from 'node:path';
 import {createRequire} from 'node:module';
 const {chromium}=await import(process.env.PLAYWRIGHT_MODULE||'playwright');
 const out='artifacts/ajes-pagination';fs.mkdirSync(out,{recursive:true});
-await build({entryPoints:['tests/browser/ajes-pagination-fixture.tsx'],bundle:true,format:'iife',jsx:'automatic',tsconfig:'apps/web/tsconfig.json',outfile:`${out}/app.js`,plugins:[{name:'stubs',setup(b){
+// Next replaces public browser environment references in production.
+// The isolated bundle receives an empty environment and no runner variables.
+await build({entryPoints:['tests/browser/ajes-pagination-fixture.tsx'],bundle:true,format:'iife',jsx:'automatic',define:{'process.env':'{}','process.env.NODE_ENV':'"development"'},tsconfig:'apps/web/tsconfig.json',outfile:`${out}/app.js`,plugins:[{name:'stubs',setup(b){
  b.onResolve({filter:/^next\/navigation$/},()=>({path:'navigation',namespace:'nav'}));
  b.onLoad({filter:/.*/,namespace:'nav'},()=>({contents:"export const usePathname=()=>'/cars';export const useSearchParams=()=>new URLSearchParams();export const useRouter=()=>({prefetch(){},push(href){location.href=href;}});"}));
  b.onResolve({filter:/^next\/link$/},()=>({path:'link',namespace:'stub'}));
