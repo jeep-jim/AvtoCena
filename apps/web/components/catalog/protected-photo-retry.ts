@@ -1,4 +1,5 @@
 import type { SyntheticEvent } from "react";
+import {ajesImageUrl} from "../../lib/catalog/ajes-query";
 const pending = new WeakMap<HTMLImageElement, ReturnType<typeof setTimeout>>();
 const attempts = new WeakMap<HTMLImageElement, {src: string; count: number}>();
 
@@ -8,10 +9,12 @@ export function cancelProtectedPhotoRetry(image: HTMLImageElement) {
   pending.delete(image);
 }
 
-/** Bounded, spaced retries of the same signed URL; never bypass source limits. */
+/** Bounded, spaced retries of the same signed or validated AJ image URL. */
 export function retryProtectedPhotoImage(image: HTMLImageElement) {
   const src = image.getAttribute("src") || "";
-  if (!src.startsWith("/api/catalog/photo/")) return false;
+  // Use the existing source allowlist only for eligibility. Keep the exact
+  // image URL and rendition; never replace it with the normalized return value.
+  if (!src.startsWith("/api/catalog/photo/") && !ajesImageUrl(src)) return false;
   if (pending.has(image)) return true;
   const previous = attempts.get(image);
   const count = previous?.src === src ? previous.count : 0;
