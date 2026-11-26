@@ -1,14 +1,14 @@
 {
   "version": 1,
   "kind": "japan-completion-v2-candidate",
-  "createdAt": "2026-11-26T10:07:02.157575+00:00",
+  "createdAt": "2026-11-26T10:18:17.825999+00:00",
   "status": "tested_candidate_pending_ci_and_live_acceptance",
-  "runtimeSha": "50a660d6bd7b96021453d97a104f9d43cfa62ab6",
-  "runtimeTree": "6b7ca9be114267ac92e5d7693a9a7e4aeefacd5d",
-  "parentRuntime": "8cc5f755f0792c0dcd5517ec2df3295d5c0b2b1a",
+  "runtimeSha": "077cbb17626ab0c64e7f06db055fef9252ad21c0",
+  "runtimeTree": "96d40e9bb96b466ff6d47421e40b4d817a4b5061",
+  "parentRuntime": "50a660d6bd7b96021453d97a104f9d43cfa62ab6",
   "retainedRuntime": "36c7ea726e7f070d10dbc65afc6538f13c0c1a24",
   "codeScope": "catalog-japan-completion-v2",
-  "runtimeDiffSha256": "1e932dc9b90290a4944f56b5805c94643ca5de2f52a17d28e3090c5bd86a8791",
+  "runtimeDiffSha256": "b4a2c93cca4b8b0146fc4f1042fb0e79cb87581d4f2322d3165b2228ba42dd8a",
   "runtimeFiles": [
     "apps/web/components/catalog/CatalogFilters.tsx",
     "apps/web/components/catalog/InlineOfferParameters.tsx",
@@ -30,7 +30,7 @@
     "tests/japan-preview-consistency.test.ts",
     "tests/japan-source-power.test.ts"
   ],
-  "pricingToServingDiffSha256": "f79f30c5bdf6240185893e5835a829a4ca1f607a2a2b5c07221a670a545198ef",
+  "pricingToServingDiffSha256": "4d435691fc3ba7544a1a708deaddb1b1cec5f8f203449a2fc9ba8fc16e38b087",
   "pricingToServingFiles": [
     "apps/web/app/(public)/cars/offer/[id]/page.tsx",
     "apps/web/app/(public)/page.tsx",
@@ -101,11 +101,14 @@
     "nativeTests": {
       "passed": 425,
       "failed": 0,
-      "skipped": 0
+      "skipped": 0,
+      "runtimeSha": "077cbb17626ab0c64e7f06db055fef9252ad21c0"
     },
     "typecheck": {
       "web": 0,
-      "engine": 0
+      "engine": 0,
+      "verifiedOnRuntime": "50a660d6bd7b96021453d97a104f9d43cfa62ab6",
+      "productionFilesIdentical": true
     },
     "focusedChangedTests": {
       "passed": 39,
@@ -203,5 +206,19 @@
     "The originally reported exact zero power-filter interaction was not reproduced before the first attempt; the empty ordinary cached page was independently reproduced.",
     "Candidate source is not installed until exact release and live gates are accepted.",
     "Failed-attempt bulk cleanup is not proved by rolled_back alone."
-  ]
+  ],
+  "previousCiAttempt": {
+    "controllerSha": "8ec59ae631053ea7baa66d4d8772fbf9d3de93f2",
+    "runId": 45798602567,
+    "jobId": 139835611122,
+    "conclusion": "failure",
+    "controllerTestsPassed": 872,
+    "nativeTestsPassed": 424,
+    "nativeTestsFailed": 1,
+    "failedTest": "a new empty page cannot extend an older count observation beyond its source deadline",
+    "reason": "Date.now advanced while Date constructor remained real; identical real-millisecond observedAt failed the correct strict newer-observation guard",
+    "correction": "Only tests/ajes-empty-page-validation.test.ts changed: all three controlled-clock tests now use one mocked Date constructor and Date.now; assertions and runtime application files unchanged",
+    "productionReleaseStarted": false,
+    "cityBrowserFixtureStarted": false
+  }
 }
