@@ -52,7 +52,12 @@ export function japanVehicleExcluded(offer:any):boolean {
  * Truck families retain their existing predicate.
  * COACH in a grade can name a passenger-car edition, so it is model/body only.
  */
-export function japanVehicleSqlExclusion():string {
- const sourcePattern=token('BUS|MINIBUS|MICROBUS|DUMP(ER)?|CRANE|FORKLIFT|TRACTOR|AMBULANCE|TANKER');
- return `(concat_ws(' ',model_name,grade) not regexp '${sourcePattern}' and model_name not regexp '${coachPattern}')`;
+export function japanVehicleSqlExclusion(legacyCache=false):string {
+ const words='BUS|MINIBUS|MICROBUS|DUMP(ER)?|CRANE|FORKLIFT|TRACTOR|AMBULANCE|TANKER',sourcePattern=token(words);
+ // The old literal is an exact cache identity only; never put it on the wire.
+ if(legacyCache)return `(concat_ws(' ',model_name,grade) not regexp '${sourcePattern}' and model_name not regexp '${coachPattern}')`;
+ // Every source token is one contiguous word. The old separating space could
+ // not join a token across model/grade; a NULL grade must remain admitted.
+ // COACH stays model-only so passenger grade names keep their former meaning.
+ return `(model_name not regexp '${token(words+'|COACH')}' and (grade is null or grade not regexp '${sourcePattern}'))`;
 }

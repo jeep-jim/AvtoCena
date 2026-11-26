@@ -88,7 +88,7 @@ export async function readPreviousTruckPolicyRows(sql:string,read:(sql:string)=>
  */
 export async function readPreviousJapanVehiclePolicyRows(sql:string,read:(sql:string)=>Promise<any|null>){
  if(!sql.startsWith('select * from'))return null;
- const canonical=ajesSourceCacheSql(sql),clause=' and '+japanVehicleSqlExclusion();
+ const canonical=ajesSourceCacheSql(sql),clause=' and '+japanVehicleSqlExclusion(true);
  if(!canonical.includes(clause))return null;
  const previous=canonical.replace(clause,''),saved=await read(previous);
  if(!Array.isArray(saved?.items)||!saved.items.length)return null;

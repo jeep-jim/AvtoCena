@@ -21,7 +21,8 @@ const keys = new Set(['pickup','salePeriod','aggregate','sort','color','fuel','t
  * Keep the actual compact SQL on the wire for the existing URI-size boundary.
  */
 export function ajesSourceCacheSql(sql:string):string {
- return sql.replace(heavyVehicleSqlExclusion(false,false,true),heavyVehicleSqlExclusion());
+ return sql.replace(heavyVehicleSqlExclusion(false,false,true),heavyVehicleSqlExclusion())
+  .replace(japanVehicleSqlExclusion(),japanVehicleSqlExclusion(true));
 }
 function integer(value: unknown, fallback: number, min: number, max: number) {
   if (value === undefined) return fallback;

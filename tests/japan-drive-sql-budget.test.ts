@@ -4,6 +4,7 @@ import {DatabaseSync} from 'node:sqlite';
 import {japanDriveSql} from '../apps/web/lib/catalog/japan-drive';
 import {ajesQuery,ajesSourceCacheSql} from '../apps/web/lib/catalog/ajes-query';
 import {ajesQueryCacheLocation} from '../apps/web/lib/catalog/ajes-query-cache';
+import {japanVehicleSqlExclusion} from '../apps/web/lib/catalog/japan-vehicle-policy';
 import {heavyVehicleFamilies,heavyVehicleSqlExclusion} from '../apps/web/lib/catalog/heavy-vehicle-families';
 import {createAjesClient} from '../apps/web/lib/catalog/ajes-client';
 import {ajesErrorResponse} from '../apps/web/lib/catalog/ajes-error-response';
@@ -86,8 +87,9 @@ test('ordinary 48-row pages and every aggregate fit the URI budget with one exac
    const sql=ajesQuery({...input,aggregate}).sql,bytes=new URLSearchParams({sql}).toString().length;
    assert.ok(bytes<6000,`${table}/${aggregate||'list'}/${page}: ${bytes}`);
    assert.ok(sql.includes(compact));assert.equal(sql.includes(full),false);
+   assert.doesNotMatch(sql,/concat_ws/i);
    assert.equal(where(sql),where(list),'list, directory and proof COUNT use identical source predicates');
-   assert.equal(ajesSourceCacheSql(sql),sql.replace(compact,full),'only equivalent SQL spelling changes in the retained key');
+   assert.equal(ajesSourceCacheSql(sql),sql.replace(compact,full).replace(japanVehicleSqlExclusion(),japanVehicleSqlExclusion(true)),'only equivalent SQL spelling changes in the retained key');
   }
  }
  const plain=ajesSourceCacheSql(ajesQuery({table:'stats',page:1,pageSize:48}).sql);
@@ -111,6 +113,18 @@ test('compact ordinary requests reuse the existing full-SQL list and COUNT witho
  assert.deepEqual(await client.read(page,'203.0.113.20'),saved);
  assert.deepEqual(await client.read(count,'203.0.113.20'),total);
  assert.deepEqual(reads,[pageSql,countSql]);
+});
+test('wire list and exact empty COUNT never execute the prior function spelling, while their proof hashes stay unchanged',async t=>{
+ t.mock.timers.enable({apis:['Date'],now:Date.parse('2026-11-26T15:00:00.000Z')});
+ const queries:string[]=[];
+ const client=createAjesClient({password:()=> 'fixture',assertEnabled:async()=>{},reserve:async()=>{},fetcher:async url=>{
+  const sql=new URL(String(url)).searchParams.get('sql')!;queries.push(sql);assert.doesNotMatch(sql,/concat_ws/i);assert.ok(new URLSearchParams({sql}).toString().length<6000);
+  return Response.json(sql.startsWith('select count(*)')?[{total:0}]:[]);
+ }});
+ const input={table:'stats' as const,page:1,pageSize:48},result=await client.read(input,'203.0.113.20');
+ assert.deepEqual(queries,[ajesQuery(input).sql,ajesQuery({...input,aggregate:'count'}).sql]);assert.deepEqual(result.items,[]);assert.equal(result.stale,false);
+ assert.equal(result.emptyPageEvidence.sourceQueryHash,'f308fb65af396c45aaa85ceb950a364f4af08f1344dbd9e9e8cc173a8ccbbf6a');
+ assert.equal(result.emptyPageEvidence.countQueryHash,'03c3e2e37e562fbc65b734d857e5dfe1296574b1303b802c2ce6439d3e689d0f');
 });
 test('Japan power lists and counts fit the supplier URI budget without losing owner power rules',()=>{
  for(const table of ['stats','main'] as const)for(const aggregate of [undefined,'count'] as const)for(const power of [{powerTo:160},{powerFrom:100},{powerFrom:100,powerTo:160}]){

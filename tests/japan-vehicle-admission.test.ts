@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import {DatabaseSync} from 'node:sqlite';
 import {createRequire} from 'node:module';
 import {build} from 'esbuild';
 import {japanVehicleExcluded,japanVehicleSqlExclusion} from '../apps/web/lib/catalog/japan-vehicle-policy';
@@ -87,12 +88,14 @@ test('source pruning is present before list/aggregate pagination and preserves g
  for(const table of ['main','stats'] as const)for(const aggregate of [undefined,'count','makes','models','colors'] as const){
   const query=ajesQuery({table,...(aggregate?{aggregate}:{page:2})});
   assert.ok(query.sql.includes(clause),`${table}/${aggregate||'list'}`);
+  assert.doesNotMatch(query.sql,/concat_ws/i);
+  assert.ok(new URLSearchParams({sql:query.sql}).toString().length<6000);
   if(!aggregate)assert.ok(query.sql.indexOf(clause)<query.sql.indexOf(' limit '));
  }
  const patterns=[...clause.matchAll(/not regexp '([^']+)'/g)].map(match=>new RegExp(match[1],'iu'));
  assert.equal(patterns.length,2);
- assert.ok(clause.includes("concat_ws(' ',model_name,grade)"));
- const admitted=(model:string,grade:string|null)=>!patterns[0].test([model,grade].filter(value=>value!==null).join(' '))&&!patterns[1].test(model);
+ assert.ok(clause.includes('grade is null or grade not regexp'));
+ const admitted=(model:string,grade:string|null)=>!patterns[0].test(model)&&(grade===null||!patterns[1].test(grade));
  for(const [model,grade] of [['TEST BUS','X'],['TEST','CRANE'],['TEST COACH','X'],['TEST','FORKLIFT']])assert.equal(admitted(model,grade),false);
  for(const [model,grade] of [['HIJET VAN','X'],['CLIPPER VAN',null],['HIACE','WELCAB'],['SC430','COACH EDITION'],['FIT','BUSINESS PACKAGE']])assert.equal(admitted(model!,grade),true);
  // Pruning is a subset. Encoded/Unicode and less common machinery still reach
@@ -101,7 +104,33 @@ test('source pruning is present before list/aggregate pagination and preserves g
   assert.equal(admitted(model,trim),true);
   assert.equal(japanVehicleExcluded({market:'japan',make:'TOYOTA',model,trim}),true);
  }
- assert.ok(new URLSearchParams({sql:clause}).toString().length<350,'pruning must leave room for existing power/drive predicates');
+});
+
+test('separate model and nullable grade predicates preserve the prior SQL truth, count and offsets',()=>{
+ const old=japanVehicleSqlExclusion(true),current=japanVehicleSqlExclusion();
+ assert.match(old,/concat_ws/);assert.doesNotMatch(current,/concat_ws/);
+ const words=['BUS','MINIBUS','MICROBUS','DUMP','DUMPER','CRANE','FORKLIFT','TRACTOR','AMBULANCE','TANKER','COACH'];
+ const values=[null,'',' ','HIJET VAN','CLIPPER VAN','HIACE','SC430','COACH EDITION','BUSINESS PACKAGE','MINI','MICRO','FORK','LIFT',
+  ...words.flatMap(word=>[word,word.toLowerCase(),'X'+word,word+'X','('+word+')','X-'+word+'/Y'])];
+ for(const flags of ['','i']){
+  const db=new DatabaseSync(':memory:');
+  db.function('regexp',(pattern,value)=>value===null?null:Number(new RegExp(String(pattern),flags).test(String(value))));
+  db.function('concat_ws',{varargs:true},(separator,...parts)=>parts.filter(value=>value!==null).map(String).join(String(separator)));
+  db.exec('create table cars(id integer,model_name text,grade text)');
+  const insert=db.prepare('insert into cars values(?,?,?)');let id=0;
+  for(const model of values)for(const grade of values)insert.run(id++,model,grade);
+  try{
+   const truth=(clause:string)=>db.prepare('select id, '+clause+' as admitted from cars order by id').all();
+   assert.deepEqual(truth(current),truth(old),'same NULL/false/true result with regexp flags '+flags);
+   const selection=(clause:string)=>" from cars where model_name!='' and "+clause;
+   const count=(clause:string)=>db.prepare('select count(*) as n'+selection(clause)).get();
+   assert.deepEqual(count(current),count(old));
+   for(const offset of [0,24,48]){
+    const page=(clause:string)=>db.prepare('select id'+selection(clause)+` order by id limit ${offset},48`).all();
+    assert.deepEqual(page(current),page(old),'the same source selection keeps offset '+offset);
+   }
+  }finally{db.close();}
+ }
 });
 
 test('an excluded nonempty wire response stays received/rejected data and does not trigger empty COUNT validation',async()=>{
@@ -187,7 +216,7 @@ test('legacy Japan policy recovery preserves exact power phase and source offset
  const powerSnapshot=japanPowerSnapshot(null,{revision:'fixture',entries:{}} as any);
  for(const phase of ['known','unknown'] as const){
   const context={phase,snapshot:powerSnapshot},query={table:'stats' as const,powerTo:160,page:2,pageSize:48};
-  const current=ajesQuery(query,null,context).sql,previous=ajesSourceCacheSql(current).replace(' and '+japanVehicleSqlExclusion(),'');
+  const current=ajesQuery(query,null,context).sql,previous=ajesSourceCacheSql(current).replace(' and '+japanVehicleSqlExclusion(true),'');
   const valid=ajesLot(row,'stats',false)!,saved=snapshot([valid,{...valid,id:'removed-bus',model:'TEST BUS'}],{page:2,pageSize:48,total:999,countSummary:{total:999},emptyPageEvidence:{old:true},observedAt:new Date(Date.now()-3600000).toISOString()});
   const keys:string[]=[];let calls=0;
   const client=createAjesClient({...base,readLegacyQuery:sql=>readPreviousJapanVehiclePolicyRows(sql,async key=>{keys.push(key);return key===previous?saved:null;}),fetcher:async()=>{calls++;return new Response('',{status:503});}});

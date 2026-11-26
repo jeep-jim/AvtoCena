@@ -694,7 +694,7 @@ test('runtime legacy recovery preserves exact canonical policy and age keys afte
   const readLegacy=mod.exports.ajesClient.fixtureDeps.readLegacyQuery;
   const input={table:'stats' as const,page:2,pageSize:48,fuel:'petrol'},wire=ajesQuery(input).sql,canonical=ajesSourceCacheSql(wire);
   const retained={schemaVersion:2,items:[{id:'exact-retained',table:'stats'}],page:2,pageSize:48,received:48,observedAt:new Date().toISOString()};
-  const priorKeys=[canonical.replace(' and '+japanVehicleSqlExclusion(),''),canonical.replace(heavyVehicleSqlExclusion(),heavyVehicleSqlExclusion(false,true)),canonical.replace('year>=2008','year>=2010')];
+  const priorKeys=[canonical.replace(' and '+japanVehicleSqlExclusion(true),''),canonical.replace(heavyVehicleSqlExclusion(),heavyVehicleSqlExclusion(false,true)),canonical.replace('year>=2008','year>=2010')];
   for(const previous of priorKeys){
    files.clear();reads.length=0;const location=ajesQueryCacheLocation(previous);files.set(location.key,{hash:location.hash,value:retained});
    const result=await readLegacy(wire);assert.deepEqual(result.items,retained.items);assert.equal(result.partial,true);assert.equal(result.schemaVersion,0);assert.equal(result.page,2);assert.equal(result.pageSize,48);assert.ok(reads.length<=6);
