@@ -6,8 +6,8 @@ import signal
 import subprocess
 import sys
 
-RUNTIME = "0203c99db4363c263dd2de8a139cd54875a2a1d7"
-PARENT = "a06dd323586d8b3114ffd6133fe675e4e3be1d77"
+RUNTIME = "775973757f5c2c8eb7be408baaa2642c62ad5548"
+PARENT = "0203c99db4363c263dd2de8a139cd54875a2a1d7"
 BASE = "a5ca426eec2663eb17c2df69fe2bfed46e2b8740"
 PRICING = "64c6338e0db23c8999096bceefbf113c0136fe15"
 EXPECTED = {
@@ -20,7 +20,7 @@ EXPECTED = {
   "tests/ajes-count-progressive.test.ts": "73127b4123b98a5acd8e4bc9b3c523909cc8d15b",
   "tests/ajes-filtered-page.test.ts": "2dff6ceee6a86a72eb586e24cb88ce242f5b857a",
   "tests/browser/ajes-pagination-fixture.tsx": "e6d0e9a33a49a2cf98b372f04b9c9b932144b764",
-  "tests/browser/ajes-pagination.mjs": "b25d9e3fc60381fcd4f692ff79aa374ead63888f",
+  "tests/browser/ajes-pagination.mjs": "fb38f3ca68cff0a4b07e5e683d8e21efbad47713",
   "tests/japan-source-power.test.ts": "f5ef64149c27da60c72f14cb839109119f728262"
 }
 KIND = "japan-pagination24-source-freeze-v1"
@@ -55,7 +55,7 @@ def main():
     remote = git("remote", "get-url", "origin", cap=4096).decode().strip()
     need(remote in ("https://github.com/jeep-jim/AvtoCena", "https://github.com/jeep-jim/AvtoCena.git"), "source_freeze_repository")
     git("fetch", "--no-tags", "--depth=1", "origin", RUNTIME, BASE, PRICING)
-    need(git("rev-parse", RUNTIME + "^{tree}", cap=256).decode().strip() == "3bfbb37d1313054ecab41c49ad03d1093dd4ce87", "source_freeze_tree")
+    need(git("rev-parse", RUNTIME + "^{tree}", cap=256).decode().strip() == "a7d0902909ccdf80995ae275cab40ec72db51b92", "source_freeze_tree")
     # The shallow boundary can hide parents from revision walking; read the raw immutable commit object.
     commit = git("cat-file", "commit", RUNTIME, cap=65536).decode()
     parents = [line[7:] for line in commit.split("\n\n", 1)[0].splitlines() if line.startswith("parent ")]
@@ -70,7 +70,7 @@ def main():
     delta = git("diff", "--binary", "--full-index", BASE, RUNTIME)
     cumulative = git("diff", "--binary", "--full-index", PRICING, RUNTIME)
     report = {"version": 1, "kind": KIND, "status": "verified", "runtimeSha": RUNTIME, "runtimeParent": PARENT,
-        "runtimeTree": "3bfbb37d1313054ecab41c49ad03d1093dd4ce87", "retainedRuntime": BASE,
+        "runtimeTree": "a7d0902909ccdf80995ae275cab40ec72db51b92", "retainedRuntime": BASE,
         "pricingRuntimeSha": PRICING, "runtimeDiffSha256": hashlib.sha256(delta).hexdigest(),
         "runtimeDiffBytes": len(delta), "pricingToServingDiffSha256": hashlib.sha256(cumulative).hexdigest(),
         "pricingToServingDiffBytes": len(cumulative), "runtimeFiles": names(BASE),
