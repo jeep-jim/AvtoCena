@@ -4,6 +4,7 @@ import {createHash} from 'node:crypto';
 import {fileURLToPath, pathToFileURL} from 'node:url';
 import {createRequire} from 'node:module';
 import {CRM_CHINA_CODE_SCOPE} from './crm-china-code-scope.mjs';
+import {CRM_JAPAN_PHOTO_CODE_SCOPE} from './crm-japan-photo-code-scope.mjs';
 
 const need = (condition, code) => { if (!condition) throw Error('china_crm_status_' + code); };
 const hash = bytes => createHash('sha256').update(bytes).digest('hex');
@@ -157,9 +158,11 @@ const EVIDENCE_KEYS = ['version', 'kind', 'codeScope', 'release', 'nonce', 'chec
   'unauthorizedBodyIsAuthRequired', 'unauthorizedSetCookieAbsent', 'unsignedAccessDenied',
   'productionMutations', 'directSupplierRequests', 'signedInRequests'];
 
-export function checkedCrmChinaEvidence(value, {candidate, nonce, oracleSha256, rows, startedAt, now = Date.now()}) {
+export function checkedCrmChinaEvidence(value, {candidate, nonce, oracleSha256, rows, startedAt,
+  codeScope = CRM_CHINA_CODE_SCOPE, now = Date.now()}) {
   need(exactKeys(value, EVIDENCE_KEYS) && value.version === 1 && value.kind === 'china-crm-operations-proof-v1'
-    && value.codeScope === CRM_CHINA_CODE_SCOPE && value.release === candidate.runtimeSha && value.nonce === nonce
+    && [CRM_CHINA_CODE_SCOPE, CRM_JAPAN_PHOTO_CODE_SCOPE].includes(codeScope)
+    && value.codeScope === codeScope && value.release === candidate.runtimeSha && value.nonce === nonce
     && value.pricingRuntimeSha === candidate.pricingRuntimeSha && value.generationId === candidate.generationId
     && value.generationManifestSha256 === candidate.generationManifestSha256
     && value.sourceObservedAt === candidate.sourceObservedAt && Number.isSafeInteger(value.rows) && value.rows === rows && rows > 0

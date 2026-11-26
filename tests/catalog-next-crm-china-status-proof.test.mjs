@@ -8,6 +8,7 @@ import {verifyCrmChinaManifest, checkedCrmChinaManifestProof, verifyCrmChinaUnau
   checkedCrmChinaEvidence, checkedCrmChinaBrowserFixture, checkedCrmChinaUnauthorizedResponse, verifyCrmChinaMiddleware}
   from '../scripts/catalog-next/crm-china-status-proof.mjs';
 import {CRM_CHINA_CODE_SCOPE} from '../scripts/catalog-next/crm-china-code-scope.mjs';
+import {CRM_JAPAN_PHOTO_CODE_SCOPE} from '../scripts/catalog-next/crm-japan-photo-code-scope.mjs';
 
 const hash = raw => createHash('sha256').update(raw).digest('hex');
 async function fixture(t, helperResult) {
@@ -162,6 +163,15 @@ test('final proof is bound to this runtime, session, real source observation and
     ['unauthorizedBodyIsAuthRequired', false], ['unauthorizedSetCookieAbsent', false], ['unsignedAccessDenied', false], ['signedInRequests', 1],
     ['productionMutations', 1], ['directSupplierRequests', 1], ['checkedAt', '2026-11-26T17:59:59Z'], ['body', 'PRIVATE']])
     assert.throws(() => checkedCrmChinaEvidence({...evidence, [key]: value}, expected), /china_crm_status_evidence/);
+});
+
+test('combined image recovery keeps the CRM proof exact to its own expected scope', () => {
+  const {expected, evidence} = evidenceFixture();
+  const combined = {...evidence, codeScope: CRM_JAPAN_PHOTO_CODE_SCOPE};
+  assert.equal(checkedCrmChinaEvidence(combined, {...expected, codeScope: CRM_JAPAN_PHOTO_CODE_SCOPE}), combined);
+  assert.throws(() => checkedCrmChinaEvidence(combined, expected), /china_crm_status_evidence/);
+  assert.throws(() => checkedCrmChinaEvidence(evidence, {...expected, codeScope: CRM_JAPAN_PHOTO_CODE_SCOPE}), /china_crm_status_evidence/);
+  assert.throws(() => checkedCrmChinaEvidence({...evidence, codeScope: 'unreviewed'}, {...expected, codeScope: 'unreviewed'}), /china_crm_status_evidence/);
 });
 
 test('CI fixture evidence requires completed desktop and mobile cases plus every existing controls guarantee', () => {

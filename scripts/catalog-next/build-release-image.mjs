@@ -8,6 +8,7 @@ import {fileURLToPath} from 'node:url';
 import http from 'node:http';
 import {verifyServingCompatibility} from './serving-compatibility.mjs';
 import {CRM_CHINA_CODE_SCOPE, CRM_CHINA_PROTECTED_EXCEPTIONS, isExactCrmChinaScope} from './crm-china-code-scope.mjs';
+import {CRM_JAPAN_PHOTO_CODE_SCOPE, isExactCrmJapanPhotoScope} from './crm-japan-photo-code-scope.mjs';
 
 const root = fileURLToPath(new URL('../../', import.meta.url));
 const need = (condition, code) => assert(condition, 'china_image_' + code);
@@ -73,8 +74,8 @@ export async function verifyChinaImageRuntime({runtimeRoot, plan, execute = exec
     && plan.runtimeFiles.every(name => typeof name === 'string' && name.length > 0
       && !name.startsWith('/') && !name.split('/').some(part => ['.', '..', ''].includes(part))
       && !/[\x00-\x1f\x7f\\]/.test(name)), 'runtime_file_list');
-  const crm = plan.codeScope === CRM_CHINA_CODE_SCOPE;
-  need(!crm || isExactCrmChinaScope(plan), 'crm_scope');
+  const crm = plan.codeScope === CRM_CHINA_CODE_SCOPE || plan.codeScope === CRM_JAPAN_PHOTO_CODE_SCOPE;
+  need(!crm || isExactCrmChinaScope(plan) || isExactCrmJapanPhotoScope(plan), 'crm_scope');
   const sourceRoot = await fs.realpath(runtimeRoot);
   const git = args => execute('/usr/bin/git', ['--no-optional-locks', ...args],
     {cwd: sourceRoot, maximum: 32 * 1024 ** 2});

@@ -14,7 +14,9 @@ import {openChinaSshSession, checkedServerSpeedReport, checkedHomePhaseTimingRep
 import {verifyChinaPhotoCodeRuntime} from './photo-code-scope.mjs';
 import {verifyChinaImageStorageProof} from './build-release-image.mjs';
 import {CRM_CHINA_CODE_SCOPE, CRM_CHINA_PROTECTED_EXCEPTIONS} from './crm-china-code-scope.mjs';
+import {CRM_JAPAN_PHOTO_CODE_SCOPE} from './crm-japan-photo-code-scope.mjs';
 import {checkedCrmChinaManifestProof, checkedCrmChinaEvidence, verifyCrmChinaUnauthorizedAccess} from './crm-china-status-proof.mjs';
+import {readJapanPhotoRetryFixture, checkedJapanPhotoRetryEvidence} from './japan-photo-retry-proof.mjs';
 import {validateChinaGenerationReference, validateChinaAcceptedState, validateChinaPublicationIntent,
   validateChinaCodeTransition, inspectChinaPublicationState} from './china-state.mjs';
 
@@ -148,7 +150,8 @@ export function createChinaDailyRelease({root, servingRoot, pricingPlan, serving
 
   async function stage(mode, {candidate, previous, nonce, assertAuthority}) {
     const codeUpdate = mode === 'code-update';
-    const crmCodeUpdate = codeUpdate && servingPlan.codeScope === CRM_CHINA_CODE_SCOPE;
+    const photoRetryCodeUpdate = codeUpdate && servingPlan.codeScope === CRM_JAPAN_PHOTO_CODE_SCOPE;
+    const crmCodeUpdate = codeUpdate && (servingPlan.codeScope === CRM_CHINA_CODE_SCOPE || photoRetryCodeUpdate);
     candidate = validateChinaGenerationReference(candidate);
     need(!candidate.proof && previous?.found === true && typeof assertAuthority === 'function'
       && /^[a-f0-9]{32}$/.test(nonce ?? ''), 'stage_arguments');
@@ -170,6 +173,10 @@ export function createChinaDailyRelease({root, servingRoot, pricingPlan, serving
     let session, activated = false, closed = false, acceptedReceiptSha256;
     try {
       let codePreflight, codeImageStorageProof, codeImageArchiveBytes, files, oracle, crmManifestProof, crmBinding;
+      // The frozen candidate's offline browser fixture ran before its image
+      // build. Missing/failed evidence stops this exact scope before host contact.
+      const photoRetryFixture = photoRetryCodeUpdate
+        ? await readJapanPhotoRetryFixture(path.join(temporary, 'japan-photo-retry-browser-report.json')) : null;
       const oraclePath = path.join(directory, 'acceptance.json');
       if (codeUpdate) {
         await guard(); await progress('code_verify_accepted_host_files');
@@ -346,17 +353,31 @@ export function createChinaDailyRelease({root, servingRoot, pricingPlan, serving
             const access = await use.verifyCrmAccess();
             await use.health(candidate.runtimeSha); await activeGuard();
             const crm = checkedCrmChinaEvidence({version: 1, kind: 'china-crm-operations-proof-v1',
-              codeScope: CRM_CHINA_CODE_SCOPE, release: candidate.runtimeSha, nonce, checkedAt: new Date().toISOString(),
+              codeScope: servingPlan.codeScope, release: candidate.runtimeSha, nonce, checkedAt: new Date().toISOString(),
               pricingRuntimeSha: candidate.pricingRuntimeSha, generationManifestSha256: candidate.generationManifestSha256,
               generationId: candidate.generationId, sourceObservedAt: candidate.sourceObservedAt, rows: crmBinding.rows,
               oracleSha256: hash(await fs.readFile(oraclePath)), passed: true, manifestHelperPassed: true,
               middlewareBoundaryPassed: true, ...access,
               productionMutations: 0, directSupplierRequests: 0, signedInRequests: 0},
-            {candidate, nonce, oracleSha256: hash(await fs.readFile(oraclePath)), rows: crmBinding.rows, startedAt: crmStartedAt});
+            {candidate, nonce, oracleSha256: hash(await fs.readFile(oraclePath)), rows: crmBinding.rows,
+              codeScope: servingPlan.codeScope, startedAt: crmStartedAt});
             const crmRaw = Buffer.from(JSON.stringify(crm) + '\n');
             await fs.writeFile(path.join(root, 'catalog-next-crm-china-operations-report.json'), crmRaw, {mode: 0o600, flag: 'wx'});
-            detailsRaw = Buffer.from(JSON.stringify({...details, crmChinaReportBase64: crmRaw.toString('base64'),
-              crmChinaReportSha256: hash(crmRaw)}) + '\n');
+            const extraDetails = {...details, crmChinaReportBase64: crmRaw.toString('base64'),
+              crmChinaReportSha256: hash(crmRaw)};
+            if (photoRetryCodeUpdate) {
+              const photoStartedAt = Date.now(), oracleSha256 = hash(await fs.readFile(oraclePath));
+              const photo = checkedJapanPhotoRetryEvidence({version: 1, kind: 'japan-photo-retry-proof-v1',
+                codeScope: servingPlan.codeScope, release: candidate.runtimeSha, nonce, checkedAt: new Date().toISOString(),
+                oracleSha256, fixtureBase64: photoRetryFixture.toString('base64'), fixtureSha256: hash(photoRetryFixture),
+                passed: true, directSupplierRequests: 0, productionMutations: 0},
+              {candidate, nonce, oracleSha256, codeScope: servingPlan.codeScope, startedAt: photoStartedAt});
+              const photoRaw = Buffer.from(JSON.stringify(photo) + '\n');
+              await fs.writeFile(path.join(root, 'catalog-next-japan-photo-retry-report.json'), photoRaw, {mode: 0o600, flag: 'wx'});
+              extraDetails.japanPhotoRetryReportBase64 = photoRaw.toString('base64');
+              extraDetails.japanPhotoRetryReportSha256 = hash(photoRaw);
+            }
+            detailsRaw = Buffer.from(JSON.stringify(extraDetails) + '\n');
             need(detailsRaw.length <= 256 * 1024, 'browser_details_size');
             await fs.writeFile(detailsPath, detailsRaw, {mode: 0o600});
           }

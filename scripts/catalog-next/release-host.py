@@ -61,6 +61,13 @@ CRM_CHINA_PROTECTED_EXCEPTIONS = [
     'apps/web/app/(crm)/api/crm/china-catalog-status/route.ts',
     'apps/web/components/site/CollectionControls.tsx',
 ]
+CRM_JAPAN_PHOTO_CODE_SCOPE = 'catalog-crm-japan-photo-retry-v1'
+CRM_JAPAN_PHOTO_CODE_FILES = CRM_CHINA_CODE_FILES | {
+    'apps/web/components/catalog/protected-photo-retry.ts',
+    'tests/catalog-photo-retry.test.ts',
+    'tests/browser/catalog-photo-retry-fixture.tsx',
+    'tests/browser/catalog-photo-retry.mjs',
+}
 PHOTO_JAPAN_CODE_FILES = PHOTO_CODE_FILES | {
     'apps/web/app/(public)/api/catalog/search/route.ts',
     'apps/web/app/(public)/cars/offer/[id]/page.tsx',
@@ -196,7 +203,8 @@ CODE_SCOPE_FILES = {PHOTO_CODE_SCOPE: PHOTO_CODE_FILES, PHOTO_JAPAN_CODE_SCOPE: 
                     JAPAN_CODE_SCOPE: JAPAN_CODE_FILES, JAPAN_COMPLETION_CODE_SCOPE: JAPAN_COMPLETION_CODE_FILES,
                     JAPAN_COMPLETION_V2_CODE_SCOPE: JAPAN_COMPLETION_V2_CODE_FILES,
                     JAPAN_USABILITY_CODE_SCOPE: JAPAN_USABILITY_CODE_FILES,
-                    CRM_CHINA_CODE_SCOPE: CRM_CHINA_CODE_FILES}
+                    CRM_CHINA_CODE_SCOPE: CRM_CHINA_CODE_FILES,
+                    CRM_JAPAN_PHOTO_CODE_SCOPE: CRM_JAPAN_PHOTO_CODE_FILES}
 GENERATION_MOUNT = '/run/avtocena-china-generation'
 HOST_BULK_FILES = {'details.sqlite', 'query.sqlite', 'DISPOSITIONS.ndjson', 'FILTER_SEMANTICS.json',
                    'FX_RECEIPT.json', 'RECONCILIATION.json', 'image.tar'}
@@ -657,7 +665,8 @@ def validate_plan(plan):
                  'code_completion_predecessor')
             need(scope != JAPAN_USABILITY_CODE_SCOPE or plan.get('retainedRuntime') == JAPAN_USABILITY_RETAINED,
                  'code_usability_predecessor')
-            need(scope != CRM_CHINA_CODE_SCOPE or plan.get('retainedRuntime') == CRM_CHINA_RETAINED,
+            need(scope not in (CRM_CHINA_CODE_SCOPE, CRM_JAPAN_PHOTO_CODE_SCOPE)
+                 or plan.get('retainedRuntime') == CRM_CHINA_RETAINED,
                  'code_crm_predecessor')
             need(all(isinstance(plan.get(key), str) and re.fullmatch(r'[a-f0-9]{64}', plan[key])
                      for key in ('codeSourcePlanSha256', 'codeSourceOracleSha256')), 'code_source_binding')
@@ -2417,7 +2426,7 @@ class Host:
              all(isinstance(name, str) for name in image['runtimeFiles']) and
              set(image['runtimeFiles']) == required_code_files and
              type(image.get('imageUnpackedBytes')) is int and image['imageUnpackedBytes'] > 0, 'code_image_receipt')
-        if scope == CRM_CHINA_CODE_SCOPE:
+        if scope in (CRM_CHINA_CODE_SCOPE, CRM_JAPAN_PHOTO_CODE_SCOPE):
             need(image.get('protectedPathExceptions') == CRM_CHINA_PROTECTED_EXCEPTIONS, 'code_crm_image_scope')
         storage = checked_code_image_storage_proof(self.plan, image)
         # Uploaded archives already occupy disk. Reserve the complete packed
@@ -2865,7 +2874,7 @@ class Host:
              details.get('release') == self.plan['runtimeSha'] and details.get('nonce') == self.plan['nonce'] and
              details.get('generationManifestSha256') == self.plan['generationManifestSha256'] and
              details.get('precedingSpeedReportSha256') == sha(speed_raw), 'browser_evidence_binding')
-        if code_update(self.plan) and code_scope(self.plan) == CRM_CHINA_CODE_SCOPE:
+        if code_update(self.plan) and code_scope(self.plan) in (CRM_CHINA_CODE_SCOPE, CRM_JAPAN_PHOTO_CODE_SCOPE):
             need(isinstance(details.get('crmChinaReportBase64'), str) and
                  isinstance(details.get('crmChinaReportSha256'), str) and
                  re.fullmatch(r'[a-f0-9]{64}', details['crmChinaReportSha256']), 'crm_browser_binding')
@@ -2883,7 +2892,7 @@ class Host:
                  'unsignedAccessDenied', 'productionMutations', 'directSupplierRequests', 'signedInRequests'} and
                  len(crm_raw) <= 16 * 1024 and sha(crm_raw) == details['crmChinaReportSha256'] and
                  type(crm.get('version')) is int and crm['version'] == 1 and crm.get('kind') == 'china-crm-operations-proof-v1' and
-                 crm.get('codeScope') == CRM_CHINA_CODE_SCOPE and crm.get('release') == self.plan['runtimeSha'] and
+                 crm.get('codeScope') == code_scope(self.plan) and crm.get('release') == self.plan['runtimeSha'] and
                  crm.get('nonce') == self.plan['nonce'] and crm.get('pricingRuntimeSha') == self.plan['pricingRuntimeSha'] and
                  crm.get('generationManifestSha256') == self.plan['generationManifestSha256'] and
                  crm.get('generationId') == self.plan['generationId'] == manifest.get('generationId') and
@@ -2898,6 +2907,43 @@ class Host:
                  type(crm.get('unauthorizedStatus')) is int and crm['unauthorizedStatus'] == 401 and
                  all(type(crm.get(key)) is int and crm[key] == 0 for key in
                      ('productionMutations', 'directSupplierRequests', 'signedInRequests')), 'crm_browser_binding')
+            if code_scope(self.plan) == CRM_JAPAN_PHOTO_CODE_SCOPE:
+                need(isinstance(details.get('japanPhotoRetryReportBase64'), str) and
+                     isinstance(details.get('japanPhotoRetryReportSha256'), str) and
+                     re.fullmatch(r'[a-f0-9]{64}', details['japanPhotoRetryReportSha256']), 'japan_photo_retry_binding')
+                retry_raw, retry = decode_report(details['japanPhotoRetryReportBase64'])
+                need(0 < len(retry_raw) <= 32 * 1024 and sha(retry_raw) == details['japanPhotoRetryReportSha256'] and
+                     set(retry) == {'version', 'kind', 'codeScope', 'release', 'nonce', 'checkedAt', 'oracleSha256',
+                                    'fixtureBase64', 'fixtureSha256', 'passed', 'directSupplierRequests', 'productionMutations'} and
+                     type(retry.get('version')) is int and retry['version'] == 1 and
+                     retry.get('kind') == 'japan-photo-retry-proof-v1' and
+                     retry.get('codeScope') == CRM_JAPAN_PHOTO_CODE_SCOPE and
+                     retry.get('release') == self.plan['runtimeSha'] and retry.get('nonce') == self.plan['nonce'] and
+                     retry.get('oracleSha256') == oracle_sha and retry.get('passed') is True and
+                     all(type(retry.get(key)) is int and retry[key] == 0 for key in
+                         ('directSupplierRequests', 'productionMutations')) and
+                     isinstance(retry.get('checkedAt'), str) and
+                     re.fullmatch(r'\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d\.\d{3}Z', retry['checkedAt']) and
+                     isinstance(retry.get('fixtureSha256'), str) and
+                     re.fullmatch(r'[a-f0-9]{64}', retry['fixtureSha256']), 'japan_photo_retry_binding')
+                try:
+                    timestamp = datetime.datetime.fromisoformat(retry['checkedAt'].replace('Z', '+00:00'))
+                    need(timestamp.isoformat(timespec='milliseconds').replace('+00:00', 'Z') == retry['checkedAt'],
+                         'japan_photo_retry_date')
+                except (ValueError, TypeError):
+                    need(False, 'japan_photo_retry_date')
+                fixture_raw, fixture = decode_report(retry.get('fixtureBase64'))
+                checks = {'transientRecovery', 'persistentFailureBound', 'sourceChangeCancellation',
+                          'unmountCancellation', 'exactUrl', 'noExternalRequests',
+                          'protectedPhotoPreserved', 'lazyLoadRecovery'}
+                need(0 < len(fixture_raw) <= 16 * 1024 and sha(fixture_raw) == retry['fixtureSha256'] and
+                     set(fixture) == {'version', 'kind', 'passed', 'widths', 'caseCount', 'checks'} and
+                     type(fixture.get('version')) is int and fixture['version'] == 1 and
+                     fixture.get('kind') == 'japan-photo-retry-browser-v1' and fixture.get('passed') is True and
+                     fixture.get('widths') == [1440, 390] and
+                     type(fixture.get('caseCount')) is int and fixture['caseCount'] == 12 and
+                     isinstance(fixture.get('checks'), dict) and set(fixture['checks']) == checks and
+                     all(fixture['checks'][key] is True for key in checks), 'japan_photo_retry_fixture')
         if code_update(self.plan) and code_scope(self.plan) == PHOTO_CODE_SCOPE:
             need(isinstance(details.get('photoReportBase64'), str) and
                  isinstance(details.get('photoReportSha256'), str) and

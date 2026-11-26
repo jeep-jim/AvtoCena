@@ -9,10 +9,14 @@ import {checkedCatalogCodeScope} from '../scripts/catalog-next/photo-code-scope.
 import {CRM_CHINA_CODE_SCOPE, CRM_CHINA_CODE_PATHS, CRM_CHINA_RETAINED_RUNTIME, CRM_CHINA_PROTECTED_EXCEPTIONS}
   from '../scripts/catalog-next/crm-china-code-scope.mjs';
 import {verifyChinaImageRuntime, executeImageCommand} from '../scripts/catalog-next/build-release-image.mjs';
+import {CRM_JAPAN_PHOTO_CODE_SCOPE, CRM_JAPAN_PHOTO_CODE_PATHS, CRM_JAPAN_PHOTO_RETAINED_RUNTIME}
+  from '../scripts/catalog-next/crm-japan-photo-code-scope.mjs';
 
 const hash = raw => createHash('sha256').update(raw).digest('hex');
 const plan = () => ({codeScope: CRM_CHINA_CODE_SCOPE, retainedRuntime: CRM_CHINA_RETAINED_RUNTIME,
   runtimeFiles: [...CRM_CHINA_CODE_PATHS]});
+const photoPlan = () => ({codeScope: CRM_JAPAN_PHOTO_CODE_SCOPE, retainedRuntime: CRM_JAPAN_PHOTO_RETAINED_RUNTIME,
+  runtimeFiles: [...CRM_JAPAN_PHOTO_CODE_PATHS]});
 
 test('CRM is an exact six-file successor of accepted 077, separate from every Japan profile', () => {
   assert.equal(checkedCatalogCodeScope(plan()), CRM_CHINA_CODE_SCOPE);
@@ -26,7 +30,7 @@ test('CRM is an exact six-file successor of accepted 077, separate from every Ja
     assert.throws(() => checkedCatalogCodeScope({...plan(), codeScope}), /china_photo_scope_files/);
 });
 
-async function sourceFixture(t) {
+async function sourceFixture(t, profile = plan) {
   const runtimeRoot = await fs.mkdtemp(path.join(os.tmpdir(), 'crm-source-scope-'));
   t.after(() => fs.rm(runtimeRoot, {recursive: true, force: true}));
   const git = args => execFileSync('/usr/bin/git', args, {cwd: runtimeRoot, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe']});
@@ -37,13 +41,13 @@ async function sourceFixture(t) {
   const commit = () => { git(['add', '.']); git(['-c', 'user.email=fixture@example.invalid', '-c', 'user.name=Fixture',
     'commit', '--quiet', '--no-gpg-sign', '-m', 'fixture']); };
   git(['init', '--quiet']);
-  for (const filename of CRM_CHINA_CODE_PATHS) await write(filename, 'accepted original\n');
+  for (const filename of profile().runtimeFiles) await write(filename, 'accepted original\n');
   await write('apps/web/app/(crm)/api/crm/team/route.ts', 'protected team authorization\n');
   await write('apps/web/components/site/BusinessSettings.tsx', 'protected business controls\n');
   commit(); const base = git(['rev-parse', 'HEAD']).trim();
-  for (const filename of CRM_CHINA_CODE_PATHS) await write(filename, 'reviewed CRM status correction\n');
+  for (const filename of profile().runtimeFiles) await write(filename, 'reviewed CRM status correction\n');
   commit();
-  const currentPlan = () => ({...plan(), version: 1, market: 'china', runtimeSha: git(['rev-parse', 'HEAD']).trim(),
+  const currentPlan = () => ({...profile(), version: 1, market: 'china', runtimeSha: git(['rev-parse', 'HEAD']).trim(),
     runtimeTree: git(['rev-parse', 'HEAD^{tree}']).trim(),
     runtimeDiffSha256: hash(git(['diff', '--binary', '--full-index', '--no-ext-diff', '--no-renames', base, 'HEAD']))});
   const calls = [];
@@ -56,8 +60,9 @@ async function sourceFixture(t) {
   return {runtimeRoot, git, write, commit, currentPlan, execute, calls};
 }
 
-test('image source check allows only the named CRM route and component inside protected trees', async t => {
-  const f = await sourceFixture(t);
+for (const profile of [plan, photoPlan])
+test('image source check allows only the named CRM route and component: ' + profile().codeScope, async t => {
+  const f = await sourceFixture(t, profile);
   const proof = await verifyChinaImageRuntime({...f, plan: f.currentPlan()});
   assert.deepEqual(proof.protectedPathExceptions, CRM_CHINA_PROTECTED_EXCEPTIONS);
   assert.equal(proof.protectedPathsUnchanged, true);
@@ -73,8 +78,9 @@ test('image source check allows only the named CRM route and component inside pr
   }
 });
 
-test('image check refuses another retained ancestor before any Git or build operation', async t => {
-  const f = await sourceFixture(t);
+for (const profile of [plan, photoPlan])
+test('image check refuses another retained ancestor before any Git/build: ' + profile().codeScope, async t => {
+  const f = await sourceFixture(t, profile);
   await assert.rejects(verifyChinaImageRuntime({...f, plan: {...f.currentPlan(), retainedRuntime: 'b'.repeat(40)},
     execute: async () => assert.fail('invalid CRM authority cannot execute commands')}), /china_image_crm_scope/);
 });

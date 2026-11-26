@@ -209,7 +209,7 @@ test('scope CI retains China and Japan native assertions while both old photo pr
  assert.ok(workflow.indexOf(checks)<workflow.indexOf('cd "$RUNNER_TEMP/china-serving-runtime-$PHOTO_SHA"'));
  const helper=fs.readFileSync(path.join(root,'scripts/catalog-next/check-photo-runtime-tests.mjs'),'utf8');
  const runner=fs.readFileSync(path.join(root,'scripts/catalog-next/check-runtime-tests.mjs'),'utf8');
- assert.match(helper,/need\(\[PHOTO_SCOPE, COMBINED_SCOPE, JAPAN_SCOPE, JAPAN_COMPLETION_SCOPE, JAPAN_COMPLETION_V2_SCOPE, JAPAN_USABILITY_SCOPE, CRM_CHINA_CODE_SCOPE\]\.includes\(plan\?\.codeScope\), 'scope'\)/);
+ assert.match(helper,/need\(\[PHOTO_SCOPE, COMBINED_SCOPE, JAPAN_SCOPE, JAPAN_COMPLETION_SCOPE, JAPAN_COMPLETION_V2_SCOPE, JAPAN_USABILITY_SCOPE, CRM_CHINA_CODE_SCOPE, CRM_JAPAN_PHOTO_CODE_SCOPE\]\.includes\(plan\?\.codeScope\), 'scope'\)/);
  assert.match(helper,/checkedCatalogCodeScope\(plan\)/);
  assert.match(helper,/verifyRuntimeTestsCheckout\(runtimeRoot, plan\)/);
  assert.match(helper,/codeScope === PHOTO_SCOPE \? CHINA_RUNTIME_TEST_FILES : power/);
@@ -218,6 +218,7 @@ test('scope CI retains China and Japan native assertions while both old photo pr
  assert.match(helper,/codeScope === JAPAN_COMPLETION_V2_SCOPE \? JAPAN_COMPLETION_V2_TEST_FILES/);
  assert.match(helper,/codeScope === JAPAN_USABILITY_SCOPE \? JAPAN_USABILITY_TEST_FILES/);
  assert.match(helper,/codeScope === CRM_CHINA_CODE_SCOPE \? CRM_CHINA_TEST_FILES/);
+ assert.match(helper,/codeScope === CRM_JAPAN_PHOTO_CODE_SCOPE \? CRM_CHINA_TEST_FILES/);
  assert.match(helper,/'tests\/selection-city-persistence\.test\.ts'/);
  assert.match(helper,/JAPAN_RECOVERY_CODE_PATHS\.filter\(name => name\.startsWith\('tests\/'\)\)/);
  assert.match(helper,/power\.length > 0 && required\.every\(name => power\.includes\(name\)\)/);

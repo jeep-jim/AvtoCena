@@ -11,6 +11,7 @@ import {runChinaCodeCycle} from '../scripts/catalog-next/code-controller.mjs';
 import {checkedCatalogCodeScope,JAPAN_USABILITY_RETAINED_RUNTIME,JAPAN_USABILITY_CODE_PATHS} from '../scripts/catalog-next/photo-code-scope.mjs';
 import {CRM_CHINA_CODE_SCOPE, CRM_CHINA_CODE_PATHS, CRM_CHINA_RETAINED_RUNTIME, CRM_CHINA_PROTECTED_EXCEPTIONS}
   from '../scripts/catalog-next/crm-china-code-scope.mjs';
+import {CRM_JAPAN_PHOTO_CODE_SCOPE, CRM_JAPAN_PHOTO_CODE_PATHS} from '../scripts/catalog-next/crm-japan-photo-code-scope.mjs';
 
 const hash = raw => createHash('sha256').update(raw).digest('hex');
 const ordered = value => Array.isArray(value) ? value.map(ordered) : value && typeof value === 'object'
@@ -72,7 +73,8 @@ test('authenticated photo preflight preserves every frozen expected value and ch
   assert.throws(() => checkedChinaCodePreflight(f.preflight, {...f.current, sourceCursor: 101}, nextSha));
 });
 
-async function fixture(t, {combined = false, japan = false,completion=false, crm=false} = {}) {
+async function fixture(t, {combined = false, japan = false,completion=false, crm=false, crmPhoto=false} = {}) {
+  crm=crm||crmPhoto;
   japan=Boolean(japan||completion);
   const usability=completion===usabilityScope,retainedRuntime=crm?CRM_CHINA_RETAINED_RUNTIME:usability?JAPAN_USABILITY_RETAINED_RUNTIME:oldSha;
   const f = sample(retainedRuntime), directory = await fs.mkdtemp(path.join(os.tmpdir(), 'china-photo-stage-'));
@@ -84,12 +86,17 @@ async function fixture(t, {combined = false, japan = false,completion=false, crm
     await fs.copyFile(path.join(process.cwd(), name), path.join(root, name));
   }
   const imageDirectory = path.join(directory, 'china-release-build'); await fs.mkdir(imageDirectory);
+  const photoFixturePath = path.join(directory, 'japan-photo-retry-browser-report.json');
+  if (crmPhoto) await fs.writeFile(photoFixturePath, JSON.stringify({version: 1, kind: 'japan-photo-retry-browser-v1',
+    passed: true, widths: [1440, 390], caseCount: 12, checks: Object.fromEntries([
+      'transientRecovery', 'persistentFailureBound', 'sourceChangeCancellation', 'unmountCancellation',
+      'exactUrl', 'noExternalRequests', 'protectedPhotoPreserved', 'lazyLoadRecovery'].map(key => [key, true]))}));
   const image = Buffer.from('synthetic roundtrip image'), imagePath = path.join(imageDirectory, 'image.tar');
   await fs.writeFile(imagePath, image);
   const servingPlan = {version: 1, market: 'china', runtimeSha: nextSha, retainedRuntime,
     runtimeTree: '6'.repeat(40), runtimeDiffSha256: hash('photo diff'), pricingRuntimeSha: pricingSha,
     ...(usability?{runtimeFiles:[...JAPAN_USABILITY_CODE_PATHS]}:{}),
-    ...(crm?{runtimeFiles:[...CRM_CHINA_CODE_PATHS], codeScope:CRM_CHINA_CODE_SCOPE}:
+    ...(crm?{runtimeFiles:[...(crmPhoto?CRM_JAPAN_PHOTO_CODE_PATHS:CRM_CHINA_CODE_PATHS)], codeScope:crmPhoto?CRM_JAPAN_PHOTO_CODE_SCOPE:CRM_CHINA_CODE_SCOPE}:
       japan ? {codeScope: completion?(typeof completion==='string'?completion:'catalog-japan-completion-v1'):'catalog-japan-recovery-v1'} : combined ? {codeScope: 'catalog-photo-japan-power-v1'} : {})};
   const pricingPlan = {version: 1, market: 'china', runtimeSha: pricingSha};
   const imageReceipt = {version: 1,
@@ -140,6 +147,14 @@ async function fixture(t, {combined = false, japan = false,completion=false, crm
           crm ? details.crmChinaReportBase64 : japan ? details.japanReportBase64 : combined ? details.photoJapanReportBase64 : details.photoReportBase64, 'base64');
         assert.equal(hash(raw), crm ? details.crmChinaReportSha256 : japan ? details.japanReportSha256 : combined ? details.photoJapanReportSha256 : details.photoReportSha256);
         assert.equal(JSON.parse(raw).nonce, hostPlan.nonce);
+        if (crmPhoto) {
+          const photoRaw = Buffer.from(details.japanPhotoRetryReportBase64, 'base64');
+          const photo = JSON.parse(photoRaw);
+          assert.equal(hash(photoRaw), details.japanPhotoRetryReportSha256);
+          assert.equal(photo.nonce, hostPlan.nonce); assert.equal(photo.release, hostPlan.runtimeSha);
+          assert.equal(photo.codeScope, CRM_JAPAN_PHOTO_CODE_SCOPE);
+          assert.deepEqual(Buffer.from(photo.fixtureBase64, 'base64'), await fs.readFile(photoFixturePath));
+        }
         return {saved: true, speedReportSha256: hash(browserBytes.speed), detailsReportSha256: hash(browserBytes.details)};
       }
       if (method === 'accept') {
@@ -230,7 +245,7 @@ async function fixture(t, {combined = false, japan = false,completion=false, crm
       },
       async openSession() { return session; }, async checkControl() {}, async health(value) { assert.ok([retainedRuntime, nextSha].includes(value)); },
     }});
-  return {...f, directory, imagePath, imageReceipt, imageReceiptRaw, storagePath, storageProof, servingPlan, calls, uploaded, release, flags};
+  return {...f, directory, imagePath, imageReceipt, imageReceiptRaw, storagePath, storageProof, servingPlan, calls, uploaded, release, flags, photoFixturePath};
 }
 
 function memoryStorage(previous) {
@@ -268,8 +283,9 @@ test('app-only adapter uploads only the new image and checks, retaining all seve
   await stage.close();
 });
 
-test('CRM code publication proves authentic source metadata and the unsigned boundary before host acceptance', async t => {
-  const f = await fixture(t, {crm: true});
+for (const crmPhoto of [false, true])
+test('CRM code publication proves source metadata and unsigned access before acceptance; photo=' + crmPhoto, async t => {
+  const f = await fixture(t, {crm: true, crmPhoto});
   const {stage, input} = await reservedStage(f);
   assert.ok(f.calls.indexOf('code_preflight') < f.calls.indexOf('crm-china-status-proof.mjs'));
   assert.ok(f.calls.indexOf('crm-china-status-proof.mjs') < f.calls.indexOf('init'));
@@ -281,7 +297,7 @@ test('CRM code publication proves authentic source metadata and the unsigned bou
   assert.ok(!f.calls.some(name => name.includes('japan-browser') || name === 'acceptance-oracle.mjs'));
   const details = JSON.parse(outcome.evidence.browserDetailsBytes);
   const raw = Buffer.from(details.crmChinaReportBase64, 'base64'), proof = JSON.parse(raw);
-  assert.equal(hash(raw), details.crmChinaReportSha256); assert.equal(proof.codeScope, CRM_CHINA_CODE_SCOPE);
+  assert.equal(hash(raw), details.crmChinaReportSha256); assert.equal(proof.codeScope, crmPhoto?CRM_JAPAN_PHOTO_CODE_SCOPE:CRM_CHINA_CODE_SCOPE);
   assert.equal(proof.sourceObservedAt, f.current.sourceObservedAt); assert.notEqual(proof.sourceObservedAt, acceptedAt);
   assert.equal(proof.rows, 283188); assert.equal(proof.unauthorizedStatus, 401); assert.equal(proof.signedInRequests, 0);
   assert.equal(proof.middlewareBoundaryPassed, true);
@@ -290,9 +306,26 @@ test('CRM code publication proves authentic source metadata and the unsigned bou
   await stage.close();
 });
 
+for (const failure of ['missing', 'failed', 'partial', 'extra'])
+test('combined photo recovery refuses missing or invalid offline proof before host contact: ' + failure, async t => {
+  const f = await fixture(t, {crmPhoto: true});
+  if (failure === 'missing') await fs.unlink(f.photoFixturePath);
+  else {
+    const proof = JSON.parse(await fs.readFile(f.photoFixturePath));
+    if (failure === 'failed') proof.checks.transientRecovery = false;
+    else if (failure === 'partial') proof.caseCount = 11;
+    else proof.unreviewed = true;
+    await fs.writeFile(f.photoFixturePath, JSON.stringify(proof));
+  }
+  await assert.rejects(f.release.stageCodeRelease({candidate: f.candidate, previous: f.previous,
+    nonce: 'b'.repeat(32), assertAuthority: async () => {}}));
+  assert.ok(!f.calls.includes('code_preflight') && !f.calls.includes('init') && !f.calls.includes('switch'));
+});
+
+for (const crmPhoto of [false, true])
 for (const failure of ['child_exit', 'wrong_rows', 'accepted_date', 'wrong_manifest', 'middleware_missing'])
-test('CRM manifest refusal stops before host stage and reservation: ' + failure, async t => {
-  const f = await fixture(t, {crm: true});
+test('CRM manifest refusal stops before host stage and reservation: ' + crmPhoto + '/' + failure, async t => {
+  const f = await fixture(t, {crm: true, crmPhoto});
   if (failure === 'child_exit') f.flags.manifestExit = true;
   else if (failure === 'middleware_missing') f.flags.changeManifestProof = proof => { delete proof.middlewareBoundaryPassed; };
   else f.flags.changeManifestProof = proof => { proof[failure === 'wrong_rows' ? 'rows' : failure === 'accepted_date'
@@ -301,9 +334,10 @@ test('CRM manifest refusal stops before host stage and reservation: ' + failure,
   assert.ok(!f.calls.includes('init') && !f.calls.includes('switch') && !f.calls.includes('accept'));
 });
 
+for (const crmPhoto of [false, true])
 for (const failure of ['accessFailure', 'status200', 'route403', 'wrong_body', 'cookie_present', 'unexpected_private_field'])
-test('CRM boundary failure cannot produce ACCEPTED: ' + failure, async t => {
-  const f = await fixture(t, {crm: true});
+test('CRM boundary failure cannot produce ACCEPTED: ' + crmPhoto + '/' + failure, async t => {
+  const f = await fixture(t, {crm: true, crmPhoto});
   const {stage, input} = await reservedStage(f);
   if (failure === 'accessFailure') f.flags.accessFailure = true;
   else f.flags.accessChange = failure === 'status200' ? {unauthorizedStatus: 200} : failure === 'route403'

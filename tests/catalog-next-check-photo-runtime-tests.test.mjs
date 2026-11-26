@@ -6,6 +6,7 @@ import os from 'node:os';
 import {execFileSync} from 'node:child_process';
 import {checkPhotoRuntimeTests, PHOTO_COMMON_TEST_FILES, JAPAN_RECOVERY_TEST_FILES,JAPAN_COMPLETION_TEST_FILES,JAPAN_COMPLETION_V2_TEST_FILES,JAPAN_USABILITY_TEST_FILES,CRM_CHINA_TEST_FILES} from '../scripts/catalog-next/check-photo-runtime-tests.mjs';
 import {CRM_CHINA_CODE_SCOPE, CRM_CHINA_CODE_PATHS, CRM_CHINA_RETAINED_RUNTIME} from '../scripts/catalog-next/crm-china-code-scope.mjs';
+import {CRM_JAPAN_PHOTO_CODE_SCOPE, CRM_JAPAN_PHOTO_CODE_PATHS} from '../scripts/catalog-next/crm-japan-photo-code-scope.mjs';
 import {CHINA_RUNTIME_TEST_FILES} from '../scripts/catalog-next/check-runtime-tests.mjs';
 import {CHINA_PHOTO_CODE_PATHS, CHINA_PHOTO_JAPAN_CODE_PATHS, JAPAN_RECOVERY_CODE_PATHS,
   JAPAN_RECOVERY_RETAINED_RUNTIME,JAPAN_COMPLETION_CODE_PATHS,JAPAN_COMPLETION_RETAINED_RUNTIME,JAPAN_COMPLETION_V2_CODE_PATHS,JAPAN_USABILITY_CODE_PATHS,JAPAN_USABILITY_RETAINED_RUNTIME} from '../scripts/catalog-next/photo-code-scope.mjs';
@@ -63,7 +64,8 @@ test('photo-only runs the complete common and fixed union while the reviewed pat
   assert.equal(await fs.readFile(path.join(f.runtimeRoot, 'tests/ajes-unreviewed.test.ts'), 'utf8'), 'must never execute\n');
 });
 
-for (const outcome of ['success', 'failure', 'missing_status']) test('CRM native suite preserves accepted 077 assertions: ' + outcome, async t => {
+for (const [scope, paths] of [[CRM_CHINA_CODE_SCOPE, CRM_CHINA_CODE_PATHS], [CRM_JAPAN_PHOTO_CODE_SCOPE, CRM_JAPAN_PHOTO_CODE_PATHS]])
+for (const outcome of ['success', 'failure', 'missing_status']) test('CRM native suite preserves accepted 077 assertions: ' + scope + '/' + outcome, async t => {
   const f = await fixture(t, 'catalog-japan-completion-v2');
   for (const filename of CRM_CHINA_TEST_FILES) {
     await fs.mkdir(path.dirname(path.join(f.runtimeRoot, filename)), {recursive: true});
@@ -71,7 +73,7 @@ for (const outcome of ['success', 'failure', 'missing_status']) test('CRM native
     catch (error) { if (error.code !== 'EEXIST') throw error; }
   }
   f.git(['add', '.']); f.commit(); f.refreshPlan();
-  Object.assign(f.plan, {codeScope: CRM_CHINA_CODE_SCOPE, retainedRuntime: CRM_CHINA_RETAINED_RUNTIME, runtimeFiles: [...CRM_CHINA_CODE_PATHS]});
+  Object.assign(f.plan, {codeScope: scope, retainedRuntime: CRM_CHINA_RETAINED_RUNTIME, runtimeFiles: [...paths]});
   if (outcome === 'missing_status') { f.git(['rm', 'tests/china-catalog-status.test.ts']); f.commit(); f.refreshPlan(); }
   let calls = 0;
   const operation = () => checkPhotoRuntimeTests({...f, patchPath: path.join(f.directory, 'must-not-open'), runTests: async ({files}) => {
@@ -79,6 +81,7 @@ for (const outcome of ['success', 'failure', 'missing_status']) test('CRM native
     assert.deepEqual(files, [...new Set([...CRM_CHINA_TEST_FILES, ...aj])].sort());
     assert.ok(files.includes('tests/ajes-empty-page-validation.test.ts'));
     assert.ok(files.includes('tests/catalog-collection-controls.test.ts'));
+    assert.ok(files.includes('tests/catalog-photo-retry.test.ts'));
     assert.ok(!files.includes('tests/ajes-power-page.test.ts'), 'b25 tests cannot enter an accepted077 CRM candidate');
     return outcome === 'failure' ? 1 : 0;
   }});

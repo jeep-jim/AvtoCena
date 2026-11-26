@@ -3,15 +3,19 @@
   "market": "china",
   "minimumYear": 2014,
   "retainedRuntime": "077cbb17626ab0c64e7f06db055fef9252ad21c0",
-  "runtimeSha": "1e289ae2cbf148af1167f51022084bb39c3c639a",
-  "runtimeTree": "43001fc8a2d1d02f65687ea0c066df4cfca3d412",
-  "runtimeDiffSha256": "be570e1c6e41bf94ca4711c83ad6f213f5304a7e1a7605a2982abce58d83fc92",
+  "runtimeSha": "a5ca426eec2663eb17c2df69fe2bfed46e2b8740",
+  "runtimeTree": "5a6d2c7723e9834204eb3896c06271adb2659991",
+  "runtimeDiffSha256": "6a67b1680bc1f145d39164bbe269029a2450cf4f1284ffd2676616412f146466",
   "runtimeFiles": [
     "apps/web/app/(crm)/api/crm/china-catalog-status/route.ts",
+    "apps/web/components/catalog/protected-photo-retry.ts",
     "apps/web/components/site/CollectionControls.tsx",
     "apps/web/lib/catalog/china-catalog-status.ts",
     "apps/web/lib/catalog/collection-controls-schema.ts",
+    "tests/browser/catalog-photo-retry-fixture.tsx",
+    "tests/browser/catalog-photo-retry.mjs",
     "tests/browser/collection-controls.mjs",
+    "tests/catalog-photo-retry.test.ts",
     "tests/china-catalog-status.test.ts"
   ],
   "source": {
@@ -28,7 +32,7 @@
   },
   "pricingRuntimeSha": "64c6338e0db23c8999096bceefbf113c0136fe15",
   "pricingRuntimeTree": "d2fc1f171316bfb0dc76f09e90409d4d7336f6b3",
-  "pricingToServingDiffSha256": "0f96231226221f72c806b69dc181043f6b1b9522dba5bc33905312bc0f2f93ed",
+  "pricingToServingDiffSha256": "1b1b0e9e122de2a1f6c95865ac46b43c26e7535a131c40df4fbfb91ea0fc669c",
   "pricingToServingFiles": [
     "apps/web/app/(crm)/api/crm/china-catalog-status/route.ts",
     "apps/web/app/(public)/cars/offer/[id]/page.tsx",
@@ -42,6 +46,7 @@
     "apps/web/components/catalog/CatalogPrice.tsx",
     "apps/web/components/catalog/InlineOfferParameters.tsx",
     "apps/web/components/catalog/JapanRailFrame.tsx",
+    "apps/web/components/catalog/protected-photo-retry.ts",
     "apps/web/components/home/HomeJapanFilteredRail.tsx",
     "apps/web/components/home/HomePageClient.tsx",
     "apps/web/components/site/CollectionControls.tsx",
@@ -75,6 +80,8 @@
     "tests/ajes-prepared-admission.test.ts",
     "tests/ajes-rail-late-count.test.ts",
     "tests/ajes-recovery-isolation.test.ts",
+    "tests/browser/catalog-photo-retry-fixture.tsx",
+    "tests/browser/catalog-photo-retry.mjs",
     "tests/browser/catalog-range-commit-fixture.tsx",
     "tests/browser/catalog-range-commit.mjs",
     "tests/browser/collection-controls.mjs",
@@ -89,6 +96,7 @@
     "tests/catalog-next-home-phase-timing.test.ts",
     "tests/catalog-next-local-reader.test.ts",
     "tests/catalog-next-query-index.test.ts",
+    "tests/catalog-photo-retry.test.ts",
     "tests/china-catalog-status.test.ts",
     "tests/home-editorial-empty.test.ts",
     "tests/home-initial-catalog.test.ts",
@@ -101,5 +109,5 @@
     "tests/offer-navigation-performance.test.ts",
     "tests/public-page-recovery.test.ts"
   ],
-  "codeScope": "catalog-crm-china-operations-v1"
+  "codeScope": "catalog-crm-japan-photo-retry-v1"
 }

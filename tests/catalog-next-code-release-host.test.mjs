@@ -14,7 +14,11 @@ def refused(fn,code):
  else:raise AssertionError('required rejection: '+code)
 def forbidden(*a,**k):raise AssertionError('external I/O forbidden')
 case=sys.argv[2]
+crm_photo=case.startswith('crm_photo_')
+if crm_photo:case=case.replace('crm_photo_','crm_',1)
 crm=case.startswith('crm_')
+crm_scope=m.CRM_JAPAN_PHOTO_CODE_SCOPE if crm_photo else m.CRM_CHINA_CODE_SCOPE
+crm_files=m.CRM_JAPAN_PHOTO_CODE_FILES if crm_photo else m.CRM_CHINA_CODE_FILES
 usability=case.startswith('usability_')
 if usability:case=case.replace('usability_','completion_',1)
 completion_v2=case.startswith('completion_v2_')
@@ -73,8 +77,8 @@ with tempfile.TemporaryDirectory() as temp:
  def reports(runtime,nonce):
   speed=m.json_bytes({'release':runtime,'passed':True,'browserPassed':True,'speedGuard':{'passed':True}})
   details={'kind':'china-browser-details-v1','release':runtime,'nonce':nonce,'passed':True,'generationManifestSha256':manifest_sha,'precedingSpeedReportSha256':m.sha(speed)}
-  if runtime==new and plan.get('codeScope')==m.CRM_CHINA_CODE_SCOPE:
-   crm_report=m.json_bytes({'version':1,'kind':'china-crm-operations-proof-v1','codeScope':m.CRM_CHINA_CODE_SCOPE,
+  if runtime==new and plan.get('codeScope') in (m.CRM_CHINA_CODE_SCOPE,m.CRM_JAPAN_PHOTO_CODE_SCOPE):
+   crm_report=m.json_bytes({'version':1,'kind':'china-crm-operations-proof-v1','codeScope':plan['codeScope'],
     'release':runtime,'nonce':nonce,'checkedAt':'2026-11-26T19:00:00.000Z','pricingRuntimeSha':pricing,
     'generationManifestSha256':manifest_sha,'generationId':generation['generationId'],'sourceObservedAt':generation['source']['sourceObservedAt'],
     'rows':generation['rows'],'oracleSha256':next(d['sha256'] for d in plan['files'] if d['name']=='acceptance.json'),
@@ -82,6 +86,16 @@ with tempfile.TemporaryDirectory() as temp:
     'unauthorizedContentTypeJson':True,'unauthorizedBodyIsAuthRequired':True,'unauthorizedSetCookieAbsent':True,
     'unsignedAccessDenied':True,'productionMutations':0,'directSupplierRequests':0,'signedInRequests':0})
    details.update(crmChinaReportBase64=base64.b64encode(crm_report).decode(),crmChinaReportSha256=m.sha(crm_report))
+   if crm_photo:
+    fixture=m.json_bytes({'version':1,'kind':'japan-photo-retry-browser-v1','passed':True,'widths':[1440,390],'caseCount':12,
+     'checks':{key:True for key in ('transientRecovery','persistentFailureBound','sourceChangeCancellation','unmountCancellation',
+      'exactUrl','noExternalRequests','protectedPhotoPreserved','lazyLoadRecovery')}})
+    retry=m.json_bytes({'version':1,'kind':'japan-photo-retry-proof-v1','codeScope':plan['codeScope'],'release':runtime,
+     'nonce':nonce,'checkedAt':'2026-11-26T20:00:00.000Z',
+     'oracleSha256':next(d['sha256'] for d in plan['files'] if d['name']=='acceptance.json'),
+     'fixtureBase64':base64.b64encode(fixture).decode(),'fixtureSha256':m.sha(fixture),
+     'passed':True,'directSupplierRequests':0,'productionMutations':0})
+    details.update(japanPhotoRetryReportBase64=base64.b64encode(retry).decode(),japanPhotoRetryReportSha256=m.sha(retry))
   elif runtime==new and plan.get('codeScope') in (m.JAPAN_CODE_SCOPE,m.JAPAN_COMPLETION_CODE_SCOPE,m.JAPAN_COMPLETION_V2_CODE_SCOPE,m.JAPAN_USABILITY_CODE_SCOPE):
    japan=m.json_bytes({'version':1,'kind':'catalog-japan-browser-v1','codeScope':plan['codeScope'],'release':runtime,'nonce':nonce,
     'checkedAt':m.datetime.datetime.now(m.datetime.timezone.utc).isoformat(),
@@ -128,7 +142,8 @@ with tempfile.TemporaryDirectory() as temp:
   'builder':{'version':'29.1.3','driver':'overlayfs','driverType':'io.containerd.snapshotter.v1'}}
  if crm:
   assert len(m.CRM_CHINA_CODE_FILES)==6 and m.CRM_CHINA_RETAINED=='077cbb17626ab0c64e7f06db055fef9252ad21c0'
-  image_receipt.update(codeScope=m.CRM_CHINA_CODE_SCOPE,runtimeFiles=sorted(m.CRM_CHINA_CODE_FILES),
+  if crm_photo:assert len(m.CRM_JAPAN_PHOTO_CODE_FILES)==10 and m.CRM_JAPAN_PHOTO_CODE_FILES>m.CRM_CHINA_CODE_FILES
+  image_receipt.update(codeScope=crm_scope,runtimeFiles=sorted(crm_files),
    protectedPathExceptions=copy.deepcopy(m.CRM_CHINA_PROTECTED_EXCEPTIONS))
  elif case.startswith('completion_'):
   assert len(m.JAPAN_COMPLETION_CODE_FILES)==12 and m.JAPAN_COMPLETION_CODE_SCOPE=='catalog-japan-completion-v1'
@@ -359,6 +374,37 @@ with tempfile.TemporaryDirectory() as temp:
   for name,raw in old_bytes.items():
    assert (old_dir/'generation'/name if name in m.GENERATION_FILES else old_dir/name).read_bytes()==raw
   assert enc.read_bytes()==b'private untouched knowledge'
+ elif case=='crm_retry_rejections':
+  assert crm_photo
+  host.start();host.functional_passed=host.speed_passed=True;host.switch()
+  speed,details,_=reports(new,new_nonce);details=json.loads(details)
+  encoded,digest='japanPhotoRetryReportBase64','japanPhotoRetryReportSha256'
+  report=json.loads(base64.b64decode(details[encoded]));bad_cases=[]
+  for missing in (encoded,digest):
+   bad=copy.deepcopy(details);bad.pop(missing);bad_cases.append((bad,'japan_photo_retry_binding'))
+  bad_cases.append(({**details,digest:'0'*64},'japan_photo_retry_binding'))
+  fields=[('version',True),('codeScope',m.CRM_CHINA_CODE_SCOPE),('release',old),('nonce',old_nonce),
+   ('oracleSha256','0'*64),('passed',False),('directSupplierRequests',1),('productionMutations',False),
+   ('checkedAt','invalid'),('extra',True)]
+  for field,value in fields:
+   changed=m.json_bytes({**report,field:value})
+   bad_cases.append(({**details,encoded:base64.b64encode(changed).decode(),digest:m.sha(changed)},'japan_photo_retry_binding'))
+  fixture=json.loads(base64.b64decode(report['fixtureBase64']))
+  wrong_fixtures=[{**fixture,'passed':False},{**fixture,'caseCount':11},{**fixture,'widths':[1440]},
+   {**fixture,'extra':True},{**fixture,'version':True}]
+  for flag in fixture['checks']:
+   wrong_fixtures.append({**fixture,'checks':{**fixture['checks'],flag:False}})
+  for bad_fixture in wrong_fixtures:
+   raw=m.json_bytes(bad_fixture);changed=m.json_bytes({**report,'fixtureBase64':base64.b64encode(raw).decode(),'fixtureSha256':m.sha(raw)})
+   bad_cases.append(({**details,encoded:base64.b64encode(changed).decode(),digest:m.sha(changed)},'japan_photo_retry_fixture'))
+  changed=m.json_bytes({**report,'fixtureSha256':'0'*64})
+  bad_cases.append(({**details,encoded:base64.b64encode(changed).decode(),digest:m.sha(changed)},'japan_photo_retry_fixture'))
+  for bad,error in bad_cases:
+   refused(lambda:host.browser_evidence({'speedBase64':base64.b64encode(speed).decode(),
+    'detailsBase64':base64.b64encode(m.json_bytes(bad)).decode()}),error)
+   assert not host.accepted and not (new_dir/'BROWSER_DETAILS.json').exists() and not (new_dir/'ACCEPTED.json').exists()
+  host.cleanup();assert m.CONFIG.read_bytes()==original and new_id not in containers and old_container==retained_before
+  assert m.read_outcome({'runtimeSha':new,'nonce':new_nonce})['status']=='rolled_back'
  elif case=='crm_browser_rejections':
   host.start();host.functional_passed=host.speed_passed=True;host.switch()
   speed,details,_=reports(new,new_nonce);details=json.loads(details)
@@ -498,6 +544,7 @@ for(const name of ['scope','preflight','copy','oracle_tamper','descriptor_tamper
   'completion_v2_accept','completion_v2_rollback','completion_v2_next_daily','completion_v2_predecessor','completion_v2_extra','completion_v2_missing','completion_v2_duplicate','completion_v2_relabel','completion_v2_unbound','completion_v2_browser_rejections',
   'usability_accept','usability_rollback','usability_next_daily','usability_predecessor','usability_extra','usability_missing','usability_duplicate','usability_relabel','usability_unbound','usability_browser_rejections',
   'crm_accept','crm_rollback','crm_next_daily','crm_predecessor','crm_extra','crm_missing','crm_duplicate','crm_relabel','crm_unbound','crm_exceptions','crm_browser_rejections',
+  'crm_photo_accept','crm_photo_rollback','crm_photo_next_daily','crm_photo_predecessor','crm_photo_extra','crm_photo_missing','crm_photo_duplicate','crm_photo_relabel','crm_photo_unbound','crm_photo_exceptions','crm_photo_browser_rejections','crm_photo_retry_rejections',
   'cleanup_mount','cleanup_parent_mount','cleanup_file_tamper','cleanup_plan_tamper','cleanup_rollback_tamper','cleanup_accepted_symlink','cleanup_idempotent','cleanup_copy_failure','cleanup_load_failure','post_copy_disk_space','storage_required','storage_image','storage_archive','storage_receipt','storage_zero','storage_source','storage_unpacked_space','storage_receipt_identity']) {
   test('China code-only host: '+name,()=>{
     const result=spawnSync('python3',['-I','-B','-c',harness,hostFile,name],{encoding:'utf8',timeout:20000});
