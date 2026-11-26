@@ -725,7 +725,7 @@ test('pagination24 requires its own offline actual-component fixture before host
   else {const report=JSON.parse(await fs.readFile(f.paginationFixturePath));report.checks.sourcePageSize24=false;
     await fs.writeFile(f.paginationFixturePath,JSON.stringify(report));}
   await assert.rejects(f.release.stageCodeRelease({candidate:f.candidate,previous:f.previous,nonce:'b'.repeat(32),assertAuthority:async()=>{}}),
-    /japan_pagination_fixture_/);
+    /^Error: china_daily_release_stage_failed$/);
   assert.ok(!f.calls.includes('code_preflight')&&!f.calls.includes('init')&&!f.calls.includes('switch'));
 });
 
