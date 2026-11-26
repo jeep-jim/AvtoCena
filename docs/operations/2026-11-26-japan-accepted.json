@@ -1,0 +1,280 @@
+{
+  "version": 1,
+  "kind": "japan-code-release-accepted-v1",
+  "workflowRunId": 45777433493,
+  "workflowRunUrl": "https://github.com/jeep-jim/AvtoCena/actions/runs/45777433493",
+  "controllerSha": "ed6d7051b421b03d33dcf9b2dc28df544cecffdf",
+  "artifact": {
+    "id": 15097777486,
+    "name": "china-photo-code-release-result",
+    "sha256": "117bf3d757a18e3a27e96233d0c411a0a0c4a1f9d5cb237fa001694d93cd9fc2"
+  },
+  "release": {
+    "version": 1,
+    "kind": "china-code-cycle-v1",
+    "market": "china",
+    "completed": true,
+    "published": true,
+    "status": "accepted",
+    "runtimeSha": "36c7ea726e7f070d10dbc65afc6538f13c0c1a24",
+    "retainedRuntime": "d536c1547c4d82a339ed68ced7d8503f09b6810b",
+    "sourceRequests": 0,
+    "generationRestores": 0,
+    "priceCalculations": 0,
+    "generationWrites": 0,
+    "encyclopediaWrites": 0,
+    "otherMarketWrites": 0,
+    "deletions": 0,
+    "retentionPreserved": true,
+    "hostCleanupPending": true,
+    "recovered": true,
+    "finishedAt": "2026-11-26T08:06:47.638Z",
+    "acceptedGenerationId": "gen_china_45655051136_1",
+    "acceptedRuntimeSha": "36c7ea726e7f070d10dbc65afc6538f13c0c1a24",
+    "imageId": "sha256:8ae738b860228534707b17eccf40c57163bd5e08c9aee0aa9cea2a2bd9c9fd6a",
+    "sourceObservedAt": "2026-11-25T17:34:57.542Z",
+    "sourceCursor": 13313207,
+    "generationManifestSha256": "6711203fb59a70c99cda3c725eb4ee70654142b1871b0784516209d2903c0b8d",
+    "leaseReleased": true
+  },
+  "japanBrowser": {
+    "version": 1,
+    "kind": "catalog-japan-browser-v1",
+    "codeScope": "catalog-japan-recovery-v1",
+    "release": "36c7ea726e7f070d10dbc65afc6538f13c0c1a24",
+    "nonce": "d299e0b03dd133fe03745e9512b3c268",
+    "checkedAt": "2026-11-26T08:06:19.322Z",
+    "passed": true,
+    "japanFreshnessPassed": true,
+    "japanPowerApiPassed": true,
+    "japanUiPassed": true,
+    "japanVisibilityPassed": true,
+    "readOnlyBrowserFence": true,
+    "productionMutations": 0,
+    "directSupplierApiRequests": 0,
+    "supplierImageRequests": 88,
+    "explicitJapanApiRequests": 3,
+    "checks": {
+      "freshness": {
+        "observations": [
+          {
+            "status": 200,
+            "shown": 23,
+            "received": 24,
+            "observedAt": "2026-11-26T08:05:44.676Z",
+            "ageSeconds": 35.787,
+            "stale": false,
+            "partial": false,
+            "total": 660813,
+            "hasMore": true,
+            "durationMs": 354,
+            "sourceObservedDuringRequest": false
+          },
+          {
+            "status": 200,
+            "shown": 23,
+            "received": 24,
+            "observedAt": "2026-11-26T08:05:44.676Z",
+            "ageSeconds": 35.991,
+            "stale": false,
+            "partial": false,
+            "total": 660813,
+            "hasMore": true,
+            "durationMs": 204,
+            "sourceObservedDuringRequest": false
+          }
+        ],
+        "sameObservation": true,
+        "sameRows": true
+      },
+      "responses": [
+        {
+          "stage": "plain_first",
+          "status": 200,
+          "ok": true,
+          "shown": 23,
+          "received": 24,
+          "observedAt": "2026-11-26T08:05:44.676Z",
+          "stale": false,
+          "partial": null,
+          "interrupted": false,
+          "scanLimited": false,
+          "hasMore": true,
+          "total": 660813,
+          "durationMs": 354
+        },
+        {
+          "stage": "plain_warm",
+          "status": 200,
+          "ok": true,
+          "shown": 23,
+          "received": 24,
+          "observedAt": "2026-11-26T08:05:44.676Z",
+          "stale": false,
+          "partial": null,
+          "interrupted": false,
+          "scanLimited": false,
+          "hasMore": true,
+          "total": 660813,
+          "durationMs": 204
+        },
+        {
+          "stage": "power_api",
+          "status": 200,
+          "ok": true,
+          "shown": 23,
+          "received": 24,
+          "observedAt": "2026-11-26T08:05:44.676Z",
+          "stale": false,
+          "partial": null,
+          "interrupted": false,
+          "scanLimited": false,
+          "hasMore": true,
+          "total": null,
+          "durationMs": 168
+        }
+      ],
+      "power": {
+        "status": 200,
+        "shown": 23,
+        "received": 24,
+        "observedAt": "2026-11-26T08:05:44.676Z",
+        "ageSeconds": 36.159,
+        "stale": false,
+        "partial": false,
+        "total": null,
+        "hasMore": true,
+        "localPower": 0,
+        "supplierPower": 18,
+        "unknownPower": 5,
+        "unknownRetainedAndLabelled": true,
+        "countHonest": true,
+        "durationMs": 168
+      },
+      "ui": {
+        "cards": 23,
+        "supplierVisible": 18,
+        "unknownVisible": 5,
+        "durationMs": 2778,
+        "city": "Новокузнецк",
+        "powerTo": 160,
+        "pageErrors": 0,
+        "listCards": 23,
+        "detailOpened": true,
+        "detailSourceKind": "supplier"
+      },
+      "visibility": [
+        {
+          "path": "/",
+          "headingVisible": true,
+          "cards": 6,
+          "linkCityMatched": true,
+          "durationMs": 6972,
+          "pageErrors": 0
+        },
+        {
+          "path": "/cars",
+          "headingVisible": true,
+          "cards": 6,
+          "linkCityMatched": true,
+          "durationMs": 4764,
+          "pageErrors": 0
+        }
+      ]
+    },
+    "screenshots": [
+      {
+        "path": "artifacts/catalog-japan-live/d299e0b03dd133fe03745e9512b3c268/japan-power-desktop.png",
+        "sha256": "127f5549d80d6d39f052194e50c9abf0e2ea9f1fd90048c6d6211605170ab2ef"
+      },
+      {
+        "path": "artifacts/catalog-japan-live/d299e0b03dd133fe03745e9512b3c268/japan-power-list.png",
+        "sha256": "1ffb7481713907427ab0dbf8f782339889d26ac1a5eb8bd80968d944b27b51fe"
+      },
+      {
+        "path": "artifacts/catalog-japan-live/d299e0b03dd133fe03745e9512b3c268/japan-power-mobile.png",
+        "sha256": "6abc55b3140d2499abdb9110f0daa9e0bccf8586a1079a39767a4a44ae510888"
+      },
+      {
+        "path": "artifacts/catalog-japan-live/d299e0b03dd133fe03745e9512b3c268/japan-detail-mobile.png",
+        "sha256": "eb89a68962389f2d8e15329cebb465d5b2da099f0e638a37382297672b4f5327"
+      },
+      {
+        "path": "artifacts/catalog-japan-live/d299e0b03dd133fe03745e9512b3c268/japan-home-desktop.png",
+        "sha256": "1a074e35afc846da52a85722fa387a7ce99c8935c375f8dea50435f51ab94338"
+      },
+      {
+        "path": "artifacts/catalog-japan-live/d299e0b03dd133fe03745e9512b3c268/japan-home-mobile.png",
+        "sha256": "e5f5992a18c526c22d7fd3cb70201fccd3910ce251ec8dfba919ff7bd7e57bea"
+      },
+      {
+        "path": "artifacts/catalog-japan-live/d299e0b03dd133fe03745e9512b3c268/japan-catalog-desktop.png",
+        "sha256": "344a5ac746b4bd99ab3cae82edb9d16cc8d66d1e24056438aab57c49fcca270f"
+      },
+      {
+        "path": "artifacts/catalog-japan-live/d299e0b03dd133fe03745e9512b3c268/japan-catalog-mobile.png",
+        "sha256": "f38ab59385002d0312b8850c82ddd60f0a22f5eb829c5994ead706cfdcb167ca"
+      }
+    ],
+    "generationManifestSha256": "6711203fb59a70c99cda3c725eb4ee70654142b1871b0784516209d2903c0b8d",
+    "oracleSha256": "d4bc60abc04f314a916b70dcb48986ce63a88d8a58e5b85461fe85710d5d94a5",
+    "blockedRequests": {
+      "mutation": 0,
+      "external": 22,
+      "private": 0,
+      "redirect": 0
+    }
+  },
+  "publicHealth": {
+    "checkedAtUtc": "2026-11-26T08:10:23.613424+00:00",
+    "httpStatus": 200,
+    "ok": true,
+    "service": "avtocena-web",
+    "catalogProjectionParts": "scoped-v1",
+    "releaseSha": "36c7ea726e7f070d10dbc65afc6538f13c0c1a24",
+    "calculationVersion": "4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90"
+  },
+  "reviewLimits": {
+    "japanOverviewAuctionCards": 6,
+    "numberedSecondPageLiveNavigationChecked": false,
+    "numberedPageBehaviorCoveredByCandidateTests": true,
+    "fullBrowserPhotoLoadingVerified": false,
+    "screenshotsShowMissingJapaneseCovers": true,
+    "serverPostCommitCleanupConfirmed": false
+  },
+  "limitedPhotoCheck": {
+    "date": "2026-11-26",
+    "method": "One public catalog GET followed by two ordinary public cover-image GETs; no direct supplier API calls, no IP substitution, no auth headers.",
+    "catalog": {
+      "status": 200,
+      "shown": 23,
+      "stale": false,
+      "observedAt": "2026-11-26T08:05:44.676Z"
+    },
+    "covers": [
+      {
+        "position": 1,
+        "status": 200,
+        "contentType": "image/jpeg",
+        "bytes": 48524,
+        "format": "JPEG",
+        "width": 320,
+        "height": 240,
+        "durationMs": 15088,
+        "redirected": true
+      },
+      {
+        "position": 2,
+        "status": 200,
+        "contentType": "image/jpeg",
+        "bytes": 50804,
+        "format": "JPEG",
+        "width": 320,
+        "height": 240,
+        "durationMs": 12603,
+        "redirected": true
+      }
+    ],
+    "conclusion": "These two files decoded successfully. This does not prove all photos load in the browser or establish why acceptance screenshots show missing covers."
+  }
+}
