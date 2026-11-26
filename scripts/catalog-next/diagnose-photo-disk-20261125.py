@@ -495,8 +495,16 @@ def photo_events(plan, since, until):
                        and attributes.get('org.opencontainers.image.revision') == plan['runtimeSha'], 'event_scope')
             exit_code = attributes.get('exitCode')
             speed_need(exit_code is None or isinstance(exit_code, str) and re.fullmatch(r'-?\d{1,8}', exit_code), 'event_exit')
-            rows.append({'action': action, 'time': when, 'exitCode': int(exit_code) if exit_code is not None else None,
-                         'oom': action == 'oom'})
+            row = {'action': action, 'time': when, 'exitCode': int(exit_code) if exit_code is not None else None,
+                   'oom': action == 'oom'}
+            if 'timeNano' in value:
+                nano = value['timeNano']
+                speed_need(type(nano) is int and when * 1_000_000_000 <= nano < (when + 1) * 1_000_000_000,
+                           'event_nanoseconds')
+                # Docker emits an integer beyond JavaScript's safe range.
+                # Keep all digits through JSON and downstream comparisons.
+                row['timeNano'] = str(nano)
+            rows.append(row)
             speed_need(len(rows) <= 512, 'event_count')
         return {'available': True, 'reason': None if rows else 'empty', 'rows': rows}
     except Exception:
@@ -557,7 +565,8 @@ def photo_attempt_only():
         photo_need(speed.get('selected') and speed.get('valid') and speed.get('present') and speed.get('exitCode') == 1
                    and speed.get('sha256') == PHOTO_ATTEMPT_PROOFS['server-speed-result.json']
                    and speed.get('planSha256') == PHOTO_ATTEMPT_PROOFS['PLAN.json'], 'speed_binding')
-        speed_written = snapshots['server-speed-result.json'][1].st_mtime_ns / 1_000_000_000
+        speed_written_ns = snapshots['server-speed-result.json'][1].st_mtime_ns
+        speed_written = speed_written_ns / 1_000_000_000
         rolled_back_at = rollback.get('rolledBackAt')
         photo_need(isinstance(rolled_back_at, str) and re.fullmatch(r'\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(?:\.\d{1,6})?Z', rolled_back_at), 'rollback_time')
         rollback_time = datetime.datetime.fromisoformat(rolled_back_at.replace('Z', '+00:00')).timestamp()
@@ -583,6 +592,7 @@ def photo_attempt_only():
                       proofSha256=dict(PHOTO_ATTEMPT_PROOFS), sourceSha256=dict(PHOTO_SPEED_SOURCES),
                       retainedHealthBoundBeforeAfter=True, retainedHealth=before_health,
                       savedSpeedResultWrittenAt=datetime.datetime.fromtimestamp(speed_written, datetime.timezone.utc).isoformat().replace('+00:00', 'Z'),
+                      savedSpeedResultWrittenTimeNano=str(speed_written_ns),
                       rolledBackAt=rolled_back_at, startup=startup, homePhaseTiming=timing,
                       events={'since': since, 'until': until, 'historyIsFinite': True, 'emptyDoesNotExcludeFailure': True,
                               'exit137DoesNotProveOom': True, 'postFailureTerminalEventsMayBeCleanup': True, **events})

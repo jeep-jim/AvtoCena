@@ -52,7 +52,8 @@ with tempfile.TemporaryDirectory() as temporary:
  m.PHOTO_ATTEMPT_PROOFS={name:put(name,value) for name,value in
   [('PLAN.json',plan),('ROLLED_BACK.json',rollback),('server-speed-result.json',speed)]}
  at=int(datetime.datetime(2026,11,25,19,49,30,tzinfo=datetime.timezone.utc).timestamp())
- os.utime(directory/'server-speed-result.json',(at,at))
+ written_ns=at*1_000_000_000+(423540123 if case=='nano_order' else 0)
+ os.utime(directory/'server-speed-result.json',ns=(written_ns,written_ns))
  startup={'version':1,'kind':'china-host-startup-v1','ready':True,'elapsedSeconds':1.2,'attempts':2,'health':'ok',
   'candidate':{'running':True,'status':'running','exitCode':0,'oomKilled':False,'restartCount':0},'reason':'ready'}
  timing={'version':1,'kind':'china-home-phase-timing-v1','runtimeSha':plan['runtimeSha'],'nonce':token,
@@ -115,6 +116,14 @@ with tempfile.TemporaryDirectory() as temporary:
    if case=='events_window':rows[0]['time']=at-61
    if case=='events_exit':rows[2]['Actor']['Attributes']['exitCode']='PRIVATE_EXIT'
    if case=='events_oversized':return Response(b'x'*(1024*1024+1))
+   if case.startswith('events_nano'):
+    for row in rows:row['timeNano']=row['time']*1_000_000_000+123456789
+    changes={'events_nano_second':rows[0]['timeNano']+1_000_000_000,
+     'events_nano_float':float(rows[0]['timeNano']),'events_nano_string':str(rows[0]['timeNano']),
+     'events_nano_bool':True,'events_nano_null':None,'events_nano_negative':-1}
+    if case in changes:rows[0]['timeNano']=changes[case]
+   if case=='nano_order':
+    rows=[{**rows[2],'time':at,'timeNano':written_ns-1}, {**rows[3],'time':at,'timeNano':written_ns+1}]
    return Response(b'\n'.join(encoded(row) for row in rows))
   def close(self):pass
  m.http.client.HTTPConnection=Health;m.PhotoDocker=Events
@@ -141,11 +150,20 @@ with tempfile.TemporaryDirectory() as temporary:
    assert result['status']=='observed' and result['retainedHealthBoundBeforeAfter']
    assert calls==['health','events','health'],calls
    assert result['proofSha256']==m.PHOTO_ATTEMPT_PROOFS and result['sourceSha256']==m.PHOTO_SPEED_SOURCES
-   assert result['savedSpeedResultWrittenAt']=='2026-11-25T19:49:30Z' and result['rolledBackAt']=='2026-11-25T19:50:10Z'
+   assert result['savedSpeedResultWrittenAt']==('2026-11-25T19:49:30.423540Z' if case=='nano_order' else '2026-11-25T19:49:30Z')
+   assert result['savedSpeedResultWrittenTimeNano']==str(written_ns) and result['rolledBackAt']=='2026-11-25T19:50:10Z'
    assert result['events']['since']==at-60 and result['events']['until']==at+42
    for key in ('historyIsFinite','emptyDoesNotExcludeFailure','exit137DoesNotProveOom','postFailureTerminalEventsMayBeCleanup'):
     assert result['events'][key] is True
    if case=='events_empty':assert result['events']['available'] and result['events']['reason']=='empty' and result['events']['rows']==[]
+   elif case=='events_nano':
+    assert result['events']['available']
+    assert result['events']['rows'][1]=={'action':'oom','time':at-2,'exitCode':None,'oom':True,'timeNano':str((at-2)*1_000_000_000+123456789)}
+   elif case=='nano_order':
+    before_nano,after_nano=[row['timeNano'] for row in result['events']['rows']]
+    assert type(before_nano) is str and type(after_nano) is str
+    assert int(before_nano)+1==int(result['savedSpeedResultWrittenTimeNano'])==int(after_nano)-1
+    assert float(before_nano)==float(after_nano),'fixture must expose lost Number precision'
    elif case.startswith('events_'):assert not result['events']['available'] and result['events']['rows']==[]
    elif case=='cleanup_only':assert result['events']['rows'][0]=={'action':'die','time':at+10,'exitCode':137,'oom':False}
    else:assert result['events']['rows'][1]=={'action':'oom','time':at-2,'exitCode':None,'oom':True}
@@ -163,7 +181,9 @@ print('ok')
 for (const name of ['safe', 'startup_missing', 'startup_private', 'timing_missing', 'timing_private', 'timing_nonce',
   'timing_runtime', 'timing_phase', 'timing_number', 'timing_date', 'wrong_selector', 'plan_pin', 'rollback_pin',
   'speed_pin', 'source_pin', 'speed_symlink', 'health_before', 'health_after', 'proof_changed', 'lock_busy',
-  'events_empty', 'events_foreign', 'events_action', 'events_window', 'events_exit', 'events_oversized', 'cleanup_only']) {
+  'events_empty', 'events_foreign', 'events_action', 'events_window', 'events_exit', 'events_oversized', 'cleanup_only',
+  'events_nano', 'events_nano_second', 'events_nano_float', 'events_nano_string', 'events_nano_bool',
+  'events_nano_null', 'events_nano_negative', 'nano_order']) {
   test('one failed photo attempt, read-only: ' + name, () => {
     const result = spawnSync('python3', ['-I', '-B', '-c', harness, script, name, gate, baseline],
       {encoding: 'utf8', timeout: 10000});

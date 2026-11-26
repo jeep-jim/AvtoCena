@@ -1,4 +1,4 @@
-# Read only exact b6 candidate startup, home phases and bounded historical events.
+# Resolve exact saved b6 failure and cleanup ordering without losing nanosecond precision.
 name: Inspect failed photo release disk - read only
 on:
   push:
