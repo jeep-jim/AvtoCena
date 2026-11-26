@@ -169,6 +169,40 @@ test('browser rejection requires authentic rollback proof before restoring the e
   assert.ok((await bad.storage.read('accepted')).value.pending);
 });
 
+test('a resolved rollback admits a fresh candidate from the same retained runtime with a new lease and exact restored CAS basis',async()=>{
+  const f=await fixture();f.activation='rollback';
+  await assert.rejects(runChinaCodeCycle(f.args),error=>error.report.status==='rolled_back'&&error.report.leaseReleased===true);
+  const restored=await f.storage.read('accepted'),aborted=await f.storage.read('intent');
+  assert.equal(inspectChinaPublicationState({accepted:restored,intent:aborted}).status,'resolved');
+  assert.equal(aborted.value.status,'aborted');assert.notEqual(restored.etag,f.first.accepted.etag);
+  const nextPlan={...plan,runtimeSha:'c'.repeat(40)},nextImage='sha256:'+'d'.repeat(64),nextNonce='3'.repeat(32);
+  const {proof,...retained}=restored.value.current;let stageCalls=0,acceptCalls=0;
+  const result=await runChinaCodeCycle({...f.args,plan:nextPlan,imageId:nextImage,owner:owner(2002),nonce:nextNonce,
+    recoverRelease:async()=>{assert.fail('a resolved rollback must not replay the old host operation');},
+    stageCodeRelease:async input=>{
+      stageCalls++;await input.assertAuthority();
+      assert.deepEqual(input.previous,restored);assert.equal(input.nonce,nextNonce);
+      assert.deepEqual(input.candidate,{...retained,runtimeSha:nextPlan.runtimeSha,imageId:nextImage});
+      return {candidate:input.candidate,async close(){},async activate({intent,reservation,assertAuthority}){
+        acceptCalls++;await assertAuthority();
+        assert.equal(intent.value.revision,aborted.value.revision+1);
+        assert.equal(intent.value.previous.etag,restored.etag);assert.equal(intent.value.nonce,nextNonce);
+        assert.equal((await f.storage.read('accepted')).etag,reservation.etag);
+        return {kind:'accepted',evidence:acceptance(input.candidate,nextNonce,codeAt,
+          {transition:'code-update',previousAcceptedETag:restored.etag,previousAcceptedStateSha256:restored.sha256,
+            retainedRuntimeSha:retained.runtimeSha,retainedImageId:retained.imageId})};
+      }};
+    }});
+  assert.equal(result.status,'accepted');assert.equal(result.leaseReleased,true);
+  assert.equal(stageCalls,1);assert.equal(acceptCalls,1);
+  const accepted=await f.storage.read('accepted');
+  assert.deepEqual(accepted.value.rollback,restored.value.current);
+  assert.equal(accepted.value.current.runtimeSha,nextPlan.runtimeSha);
+  assert.equal(accepted.value.current.generationManifestSha256,retained.generationManifestSha256);
+  assert.equal(accepted.value.current.pricingRuntimeSha,retained.pricingRuntimeSha);
+  assert.equal(inspectChinaPublicationState({accepted,intent:await f.storage.read('intent')}).status,'resolved');
+});
+
 test('code report revalidates injected optional evidence independently without replacing the original failure', async () => {
   for (const invalid of ['serverSpeed', 'homePhaseTiming', 'foreignTiming', 'throwingSpeed']) {
     const f = await fixture();

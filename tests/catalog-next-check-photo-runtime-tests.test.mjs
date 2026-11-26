@@ -4,15 +4,16 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import os from 'node:os';
 import {execFileSync} from 'node:child_process';
-import {checkPhotoRuntimeTests, PHOTO_COMMON_TEST_FILES, JAPAN_RECOVERY_TEST_FILES,JAPAN_COMPLETION_TEST_FILES} from '../scripts/catalog-next/check-photo-runtime-tests.mjs';
+import {checkPhotoRuntimeTests, PHOTO_COMMON_TEST_FILES, JAPAN_RECOVERY_TEST_FILES,JAPAN_COMPLETION_TEST_FILES,JAPAN_COMPLETION_V2_TEST_FILES} from '../scripts/catalog-next/check-photo-runtime-tests.mjs';
 import {CHINA_RUNTIME_TEST_FILES} from '../scripts/catalog-next/check-runtime-tests.mjs';
 import {CHINA_PHOTO_CODE_PATHS, CHINA_PHOTO_JAPAN_CODE_PATHS, JAPAN_RECOVERY_CODE_PATHS,
-  JAPAN_RECOVERY_RETAINED_RUNTIME,JAPAN_COMPLETION_CODE_PATHS,JAPAN_COMPLETION_RETAINED_RUNTIME} from '../scripts/catalog-next/photo-code-scope.mjs';
+  JAPAN_RECOVERY_RETAINED_RUNTIME,JAPAN_COMPLETION_CODE_PATHS,JAPAN_COMPLETION_RETAINED_RUNTIME,JAPAN_COMPLETION_V2_CODE_PATHS} from '../scripts/catalog-next/photo-code-scope.mjs';
 
 const aj = ['tests/ajes-japan-only.test.ts', 'tests/ajes-first.test.ts', 'tests/ajes-last.test.ts'];
 const power = ['tests/japan-pw-first.test.ts', 'tests/japan-pw-results.test.ts', 'tests/japan-pw-additional.test.ts'];
 async function fixture(t, profile = false) {
-  const combined = profile === true, completion=profile==='catalog-japan-completion-v1',
+  const combined = profile === true, completionV2=profile==='catalog-japan-completion-v2',
+    completion=profile==='catalog-japan-completion-v1'||completionV2,
     japan = profile === 'catalog-japan-recovery-v1'||completion;
   const directory = await fs.mkdtemp(path.join(os.tmpdir(), 'china-photo-tests-'));
   t.after(() => fs.rm(directory, {recursive: true, force: true}));
@@ -20,7 +21,7 @@ async function fixture(t, profile = false) {
   await fs.mkdir(path.join(runtimeRoot, 'tests/helpers'), {recursive: true});
   await fs.mkdir(path.join(runtimeRoot, 'apps/web'), {recursive: true});
   const files = [...new Set([...PHOTO_COMMON_TEST_FILES, ...CHINA_RUNTIME_TEST_FILES, ...aj,
-    ...(combined ? power : []), ...(completion?JAPAN_COMPLETION_TEST_FILES:japan ? JAPAN_RECOVERY_TEST_FILES : [])])];
+    ...(combined ? power : []), ...(completionV2?JAPAN_COMPLETION_V2_TEST_FILES:completion?JAPAN_COMPLETION_TEST_FILES:japan ? JAPAN_RECOVERY_TEST_FILES : [])])];
   for (const name of files) await fs.writeFile(path.join(runtimeRoot, name), 'export const fixtureValue = 1;\n');
   const production = path.join(runtimeRoot, 'apps/web/untouched.ts');
   await fs.writeFile(production, 'original runtime bytes\n');
@@ -30,7 +31,7 @@ async function fixture(t, profile = false) {
   const commit = () => git(['-c', 'user.email=fixture@example.invalid', '-c', 'user.name=Fixture', 'commit', '--quiet', '--no-gpg-sign', '-m', 'fixture']);
   commit();
   const plan = {version: 1, market: 'china', codeScope: japan ? profile : combined ? 'catalog-photo-japan-power-v1' : 'catalog-photo-recovery-v1',
-    runtimeFiles: [...(completion?JAPAN_COMPLETION_CODE_PATHS:japan ? JAPAN_RECOVERY_CODE_PATHS : combined ? CHINA_PHOTO_JAPAN_CODE_PATHS : CHINA_PHOTO_CODE_PATHS)],
+    runtimeFiles: [...(completionV2?JAPAN_COMPLETION_V2_CODE_PATHS:completion?JAPAN_COMPLETION_CODE_PATHS:japan ? JAPAN_RECOVERY_CODE_PATHS : combined ? CHINA_PHOTO_JAPAN_CODE_PATHS : CHINA_PHOTO_CODE_PATHS)],
     ...(japan ? {retainedRuntime: completion?JAPAN_COMPLETION_RETAINED_RUNTIME:JAPAN_RECOVERY_RETAINED_RUNTIME} : {})};
   const refreshPlan = () => Object.assign(plan, {runtimeSha: git(['rev-parse', 'HEAD']).trim(), runtimeTree: git(['rev-parse', 'HEAD^{tree}']).trim()});
   refreshPlan();
@@ -90,16 +91,17 @@ test('combined runs all common and PW tests without opening or applying a compat
   assert.deepEqual(result.testFiles, expected); assert.equal(f.git(['diff', '--name-only', 'HEAD', '--']), '');
 });
 
-for(const scope of ['catalog-japan-recovery-v1','catalog-japan-completion-v1'])
+for(const scope of ['catalog-japan-recovery-v1','catalog-japan-completion-v1','catalog-japan-completion-v2'])
 test(scope+' runs native retained China, all changed tests and the reviewed AJ suite without a compatibility patch', async t => {
   const f = await fixture(t, scope), events = [];
   await fs.writeFile(path.join(f.runtimeRoot, 'tests/ajes-unreviewed.test.ts'), 'must never execute\n');
-  const expected = [...new Set([...(scope==='catalog-japan-completion-v1'?JAPAN_COMPLETION_TEST_FILES:JAPAN_RECOVERY_TEST_FILES), ...aj])].sort();
+  const expected = [...new Set([...(scope==='catalog-japan-completion-v2'?JAPAN_COMPLETION_V2_TEST_FILES:scope==='catalog-japan-completion-v1'?JAPAN_COMPLETION_TEST_FILES:JAPAN_RECOVERY_TEST_FILES), ...aj])].sort();
   for (const file of [...CHINA_RUNTIME_TEST_FILES, ...PHOTO_COMMON_TEST_FILES,
     ...JAPAN_RECOVERY_CODE_PATHS.filter(name => name.startsWith('tests/')),
     'tests/ajes-count-progressive.test.ts', 'tests/japan-drive-sql-budget.test.ts',
     'tests/japan-owner-exclusions.test.ts', 'tests/japan-stepwgn-owner-power.test.ts',
-    ...(scope==='catalog-japan-completion-v1'?['tests/japan-catalog-city.test.ts','tests/selection-city-persistence.test.ts']:[])]) {
+    ...(['catalog-japan-completion-v1','catalog-japan-completion-v2'].includes(scope)?['tests/japan-catalog-city.test.ts','tests/selection-city-persistence.test.ts']:[]),
+    ...(scope==='catalog-japan-completion-v2'?['tests/ajes-empty-page-validation.test.ts']:[])]) {
     assert.ok(expected.includes(file), 'required native assertion file: ' + file);
   }
   const result = await checkPhotoRuntimeTests({...f, patchPath: path.join(f.directory, 'does-not-exist'),
@@ -115,7 +117,7 @@ test(scope+' runs native retained China, all changed tests and the reviewed AJ s
   assert.equal(f.git(['diff', '--name-only', 'HEAD', '--']), '');
 });
 
-for(const scope of ['catalog-japan-recovery-v1','catalog-japan-completion-v1'])
+for(const scope of ['catalog-japan-recovery-v1','catalog-japan-completion-v1','catalog-japan-completion-v2'])
 for (const failure of ['nonzero', 'throw', 'progress'])
   test(scope+' propagates ' + failure + ' without reporting a false native success', async t => {
     const f = await fixture(t, scope), events = []; let calls = 0;
@@ -128,7 +130,7 @@ for (const failure of ['nonzero', 'throw', 'progress'])
     assert.equal(f.git(['diff', '--name-only', 'HEAD', '--']), '');
   });
 
-for(const scope of ['catalog-japan-recovery-v1','catalog-japan-completion-v1'])
+for(const scope of ['catalog-japan-recovery-v1','catalog-japan-completion-v1','catalog-japan-completion-v2'])
 for (const missing of ['tests/japan-source-power.test.ts', 'tests/home-japan-preview.test.ts',
   'tests/catalog-next-query-index.test.ts', 'tests/ajes-count-progressive.test.ts'])
   test(scope+' refuses missing required native test ' + missing, async t => {
@@ -138,12 +140,19 @@ for (const missing of ['tests/japan-source-power.test.ts', 'tests/home-japan-pre
     assert.equal(calls, 0);
   });
 
-for(const scope of ['catalog-japan-recovery-v1','catalog-japan-completion-v1'])
+for(const scope of ['catalog-japan-recovery-v1','catalog-japan-completion-v1','catalog-japan-completion-v2'])
 test(scope+' refuses a different retained base before invoking native tests', async t => {
   const f = await fixture(t, scope); let calls = 0;
   await assert.rejects(checkPhotoRuntimeTests({...f, plan: {...f.plan, retainedRuntime: '0'.repeat(40)},
     runTests: async () => { calls++; return 0; }}), /china_photo_scope_retained_runtime/);
   assert.equal(calls, 0);
+});
+
+test('completion v2 cannot omit its new empty-page regression from the immutable source',async t=>{
+  const f=await fixture(t,'catalog-japan-completion-v2');
+  f.git(['rm','--','tests/ajes-empty-page-validation.test.ts']);f.commit();f.refreshPlan();let calls=0;
+  await assert.rejects(checkPhotoRuntimeTests({...f,runTests:async()=>{calls++;return 0;}}),/china_photo_runtime_tests_test_missing/);
+  assert.equal(calls,0);
 });
 
 for (const failure of ['nonzero', 'throw']) test('combined propagates ' + failure + ' without a false success report', async t => {
@@ -181,7 +190,7 @@ test('unknown scopes, missing scope, relabelled file sets, wrong source and dirt
   assert.equal(await fs.readFile(f.filename, 'utf8'), 'export const fixtureValue = 1;\n');
 });
 
-for (const scope of [false, 'catalog-japan-recovery-v1','catalog-japan-completion-v1'])
+for (const scope of [false, 'catalog-japan-recovery-v1','catalog-japan-completion-v1','catalog-japan-completion-v2'])
 test('a test cannot change production bytes and receive a passing result, and its edit is not erased: ' + scope, async t => {
   const f = await fixture(t, scope);
   await assert.rejects(checkPhotoRuntimeTests({...f, runTests: async () => {

@@ -3,7 +3,8 @@ import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {checkedCatalogCodeScope, CHINA_PHOTO_CODE_PATHS, CHINA_PHOTO_JAPAN_CODE_PATHS,
   JAPAN_RECOVERY_CODE_PATHS, JAPAN_RECOVERY_RETAINED_RUNTIME,
-  JAPAN_COMPLETION_CODE_PATHS, JAPAN_COMPLETION_RETAINED_RUNTIME} from '../scripts/catalog-next/photo-code-scope.mjs';
+  JAPAN_COMPLETION_CODE_PATHS, JAPAN_COMPLETION_RETAINED_RUNTIME,
+  JAPAN_COMPLETION_V2_CODE_PATHS, JAPAN_COMPLETION_V2_RETAINED_RUNTIME} from '../scripts/catalog-next/photo-code-scope.mjs';
 
 const digest = files => createHash('sha256').update(JSON.stringify(files)).digest('hex');
 const japanPlan = () => ({codeScope: 'catalog-japan-recovery-v1',
@@ -81,4 +82,37 @@ test('the completion profile rejects another predecessor, a relabelled scope and
     assert.throws(()=>checkedCatalogCodeScope({...completionPlan(),runtimeFiles}),/china_photo_scope_files/);
   for(const codeScope of ['catalog-japan-recovery-v1','catalog-photo-recovery-v1','catalog-photo-japan-power-v1','catalog-japan-completion-v2'])
     assert.throws(()=>checkedCatalogCodeScope({...completionPlan(),codeScope}),/china_photo_scope_files/);
+});
+
+const completionV2Plan=()=>({codeScope:'catalog-japan-completion-v2',retainedRuntime:JAPAN_COMPLETION_V2_RETAINED_RUNTIME,
+  runtimeFiles:[...JAPAN_COMPLETION_V2_CODE_PATHS]});
+test('completion v2 adds only the reviewed empty-page proof to the same accepted 36c7 base',()=>{
+  assert.equal(JAPAN_COMPLETION_V2_RETAINED_RUNTIME,'36c7ea726e7f070d10dbc65afc6538f13c0c1a24');
+  assert.ok(Object.isFrozen(JAPAN_COMPLETION_V2_CODE_PATHS));
+  assert.equal(JAPAN_COMPLETION_V2_CODE_PATHS.length,19);
+  assert.equal(new Set(JAPAN_COMPLETION_V2_CODE_PATHS).size,19);
+  assert.deepEqual([...JAPAN_COMPLETION_V2_CODE_PATHS],[...JAPAN_COMPLETION_CODE_PATHS,
+    'apps/web/lib/catalog/ajes-client.ts',
+    'apps/web/lib/catalog/ajes-public.ts',
+    'apps/web/lib/catalog/detail-read-cache.ts',
+    'tests/ajes-empty-page-validation.test.ts',
+    'tests/ajes-prepared-admission.test.ts',
+    'tests/ajes-recovery-isolation.test.ts',
+    'tests/ajes-list-admission.test.ts',
+  ]);
+  assert.equal(checkedCatalogCodeScope(completionV2Plan()),'catalog-japan-completion-v2');
+  assert.equal(checkedCatalogCodeScope({...completionV2Plan(),runtimeFiles:[...JAPAN_COMPLETION_V2_CODE_PATHS].reverse()}),
+    'catalog-japan-completion-v2');
+});
+
+test('completion v2 cannot adopt the rejected runtime or relabel either exact completion delta',()=>{
+  for(const retainedRuntime of [undefined,'',JAPAN_RECOVERY_RETAINED_RUNTIME,'8cc5f755f0792c0dcd5517ec2df3295d5c0b2b1a','0'.repeat(40)])
+    assert.throws(()=>checkedCatalogCodeScope({...completionV2Plan(),retainedRuntime}),/china_photo_scope_retained_runtime/);
+  for(const runtimeFiles of [JAPAN_COMPLETION_CODE_PATHS,JAPAN_RECOVERY_CODE_PATHS,
+    JAPAN_COMPLETION_V2_CODE_PATHS.slice(1),[...JAPAN_COMPLETION_V2_CODE_PATHS,'apps/web/lib/catalog/ajes-query-cache.ts'],
+    [...JAPAN_COMPLETION_V2_CODE_PATHS.slice(1),JAPAN_COMPLETION_V2_CODE_PATHS[1]]])
+    assert.throws(()=>checkedCatalogCodeScope({...completionV2Plan(),runtimeFiles}),/china_photo_scope_files/);
+  for(const codeScope of ['catalog-japan-completion-v1','catalog-japan-recovery-v1','catalog-photo-recovery-v1',
+    'catalog-photo-japan-power-v1','catalog-japan-completion-v3'])
+    assert.throws(()=>checkedCatalogCodeScope({...completionV2Plan(),codeScope}),/china_photo_scope_files/);
 });

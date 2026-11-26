@@ -44,6 +44,7 @@ PHOTO_JAPAN_CODE_SCOPE = 'catalog-photo-japan-power-v1'
 JAPAN_CODE_SCOPE = 'catalog-japan-recovery-v1'
 JAPAN_COMPLETION_CODE_SCOPE = 'catalog-japan-completion-v1'
 JAPAN_COMPLETION_RETAINED = '36c7ea726e7f070d10dbc65afc6538f13c0c1a24'
+JAPAN_COMPLETION_V2_CODE_SCOPE = 'catalog-japan-completion-v2'
 PHOTO_JAPAN_CODE_FILES = PHOTO_CODE_FILES | {
     'apps/web/app/(public)/api/catalog/search/route.ts',
     'apps/web/app/(public)/cars/offer/[id]/page.tsx',
@@ -121,8 +122,18 @@ JAPAN_COMPLETION_CODE_FILES = {
     'tests/japan-preview-consistency.test.ts',
     'tests/japan-source-power.test.ts',
 }
+JAPAN_COMPLETION_V2_CODE_FILES = JAPAN_COMPLETION_CODE_FILES | {
+    'apps/web/lib/catalog/ajes-client.ts',
+    'apps/web/lib/catalog/ajes-public.ts',
+    'apps/web/lib/catalog/detail-read-cache.ts',
+    'tests/ajes-empty-page-validation.test.ts',
+    'tests/ajes-prepared-admission.test.ts',
+    'tests/ajes-recovery-isolation.test.ts',
+    'tests/ajes-list-admission.test.ts',
+}
 CODE_SCOPE_FILES = {PHOTO_CODE_SCOPE: PHOTO_CODE_FILES, PHOTO_JAPAN_CODE_SCOPE: PHOTO_JAPAN_CODE_FILES,
-                    JAPAN_CODE_SCOPE: JAPAN_CODE_FILES, JAPAN_COMPLETION_CODE_SCOPE: JAPAN_COMPLETION_CODE_FILES}
+                    JAPAN_CODE_SCOPE: JAPAN_CODE_FILES, JAPAN_COMPLETION_CODE_SCOPE: JAPAN_COMPLETION_CODE_FILES,
+                    JAPAN_COMPLETION_V2_CODE_SCOPE: JAPAN_COMPLETION_V2_CODE_FILES}
 GENERATION_MOUNT = '/run/avtocena-china-generation'
 HOST_BULK_FILES = {'details.sqlite', 'query.sqlite', 'DISPOSITIONS.ndjson', 'FILTER_SEMANTICS.json',
                    'FX_RECEIPT.json', 'RECONCILIATION.json', 'image.tar'}
@@ -578,7 +589,8 @@ def validate_plan(plan):
         accepted_predecessor(plan)
         if code_update(plan):
             scope = code_scope(plan)
-            need(scope != JAPAN_COMPLETION_CODE_SCOPE or plan.get('retainedRuntime') == JAPAN_COMPLETION_RETAINED,
+            need(scope not in (JAPAN_COMPLETION_CODE_SCOPE, JAPAN_COMPLETION_V2_CODE_SCOPE)
+                 or plan.get('retainedRuntime') == JAPAN_COMPLETION_RETAINED,
                  'code_completion_predecessor')
             need(all(isinstance(plan.get(key), str) and re.fullmatch(r'[a-f0-9]{64}', plan[key])
                      for key in ('codeSourcePlanSha256', 'codeSourceOracleSha256')), 'code_source_binding')
@@ -2810,7 +2822,7 @@ class Host:
                  all(photo.get(key) is True for key in ('passed', 'chinaPhotoPassed', 'japanFreshnessPassed',
                                                        'japanPowerApiPassed', 'japanUiPassed')),
                  'photo_japan_browser_binding')
-        if code_update(self.plan) and code_scope(self.plan) in (JAPAN_CODE_SCOPE, JAPAN_COMPLETION_CODE_SCOPE):
+        if code_update(self.plan) and code_scope(self.plan) in (JAPAN_CODE_SCOPE, JAPAN_COMPLETION_CODE_SCOPE, JAPAN_COMPLETION_V2_CODE_SCOPE):
             # This session's nonce and the live browser deadline above bind
             # freshness without assuming the runner and host clocks are equal.
             need(isinstance(details.get('japanReportBase64'), str) and
@@ -2828,7 +2840,7 @@ class Host:
                                                        'japanUiPassed', 'japanVisibilityPassed', 'readOnlyBrowserFence')) and
                  all(type(japan.get(key)) is int and japan[key] == 0 for key in
                      ('productionMutations', 'directSupplierApiRequests')), 'japan_browser_binding')
-            if code_scope(self.plan) == JAPAN_COMPLETION_CODE_SCOPE:
+            if code_scope(self.plan) in (JAPAN_COMPLETION_CODE_SCOPE, JAPAN_COMPLETION_V2_CODE_SCOPE):
                 need(all(japan.get(key) is True for key in ('japanPetrolPowerUiPassed', 'japanDetailPowerInputPassed',
                                                           'japanDeliveredCalculationPassed')) and
                      type(japan.get('japanPreviewCalculationRequests')) is int and

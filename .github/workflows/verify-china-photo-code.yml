@@ -68,7 +68,7 @@ jobs:
           fs.appendFileSync(process.env.GITHUB_OUTPUT, 'scope=' + checkedCatalogCodeScope(plan) + '\n');
           JS
       - name: Prepare Chromium for the required runtime browser fixture
-        if: steps.photo_scope.outputs.scope == 'catalog-photo-recovery-v1' || steps.photo_scope.outputs.scope == 'catalog-photo-japan-power-v1' || steps.photo_scope.outputs.scope == 'catalog-japan-completion-v1'
+        if: steps.photo_scope.outputs.scope == 'catalog-photo-recovery-v1' || steps.photo_scope.outputs.scope == 'catalog-photo-japan-power-v1' || steps.photo_scope.outputs.scope == 'catalog-japan-completion-v1' || steps.photo_scope.outputs.scope == 'catalog-japan-completion-v2'
         run: |
           npm install --prefix "$RUNNER_TEMP/photo-browser" --no-package-lock --ignore-scripts playwright@1.55.0
           node --input-type=module <<'JS'
@@ -93,11 +93,11 @@ jobs:
           if [[ "$CATALOG_CODE_SCOPE" == 'catalog-photo-recovery-v1' || "$CATALOG_CODE_SCOPE" == 'catalog-photo-japan-power-v1' ]]; then
             node --import tsx tests/browser/catalog-photo-recovery.mjs
           fi
-          if [[ "$CATALOG_CODE_SCOPE" == 'catalog-japan-completion-v1' ]]; then
+          if [[ "$CATALOG_CODE_SCOPE" == 'catalog-japan-completion-v1' || "$CATALOG_CODE_SCOPE" == 'catalog-japan-completion-v2' ]]; then
             JAPAN_CITY_REPORT="$RUNNER_TEMP/japan-catalog-city-report.json" node tests/browser/japan-catalog-city.mjs
           fi
       - name: Preserve Japan city hydration and filter evidence
-        if: always() && steps.photo_scope.outputs.scope == 'catalog-japan-completion-v1'
+        if: always() && (steps.photo_scope.outputs.scope == 'catalog-japan-completion-v1' || steps.photo_scope.outputs.scope == 'catalog-japan-completion-v2')
         uses: actions/upload-artifact@v4
         with:
           name: japan-catalog-city-fixture

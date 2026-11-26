@@ -90,6 +90,19 @@ export const JAPAN_COMPLETION_CODE_PATHS = Object.freeze([
   'tests/japan-preview-consistency.test.ts',
   'tests/japan-source-power.test.ts',
 ]);
+// The rejected v1 candidate never became the retained runtime. Its successor
+// keeps the complete completion delta from accepted 36c7 and adds only the
+// reviewed empty-page proof and its native fixtures. Historical v1 stays exact.
+export const JAPAN_COMPLETION_V2_RETAINED_RUNTIME = JAPAN_COMPLETION_RETAINED_RUNTIME;
+export const JAPAN_COMPLETION_V2_CODE_PATHS = Object.freeze([...JAPAN_COMPLETION_CODE_PATHS,
+  'apps/web/lib/catalog/ajes-client.ts',
+  'apps/web/lib/catalog/ajes-public.ts',
+  'apps/web/lib/catalog/detail-read-cache.ts',
+  'tests/ajes-empty-page-validation.test.ts',
+  'tests/ajes-prepared-admission.test.ts',
+  'tests/ajes-recovery-isolation.test.ts',
+  'tests/ajes-list-admission.test.ts',
+]);
 const need = (value, code) => { if (!value) throw Error('china_photo_scope_' + code); };
 
 export function checkedCatalogCodeScope(plan) {
@@ -97,11 +110,13 @@ export function checkedCatalogCodeScope(plan) {
   const paths = scope === 'catalog-photo-recovery-v1' ? CHINA_PHOTO_CODE_PATHS
     : scope === 'catalog-photo-japan-power-v1' ? CHINA_PHOTO_JAPAN_CODE_PATHS
     : scope === 'catalog-japan-recovery-v1' ? JAPAN_RECOVERY_CODE_PATHS
-    : scope === 'catalog-japan-completion-v1' ? JAPAN_COMPLETION_CODE_PATHS : null;
+    : scope === 'catalog-japan-completion-v1' ? JAPAN_COMPLETION_CODE_PATHS
+    : scope === 'catalog-japan-completion-v2' ? JAPAN_COMPLETION_V2_CODE_PATHS : null;
   need(paths && Array.isArray(plan.runtimeFiles) && plan.runtimeFiles.length === paths.length
     && paths.every(name => plan.runtimeFiles.includes(name)), 'files');
   need(scope !== 'catalog-japan-recovery-v1' || plan.retainedRuntime === JAPAN_RECOVERY_RETAINED_RUNTIME, 'retained_runtime');
   need(scope !== 'catalog-japan-completion-v1' || plan.retainedRuntime === JAPAN_COMPLETION_RETAINED_RUNTIME, 'retained_runtime');
+  need(scope !== 'catalog-japan-completion-v2' || plan.retainedRuntime === JAPAN_COMPLETION_V2_RETAINED_RUNTIME, 'retained_runtime');
   return scope;
 }
 

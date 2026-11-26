@@ -7,6 +7,7 @@ const ROOT=fileURLToPath(new URL('../../',import.meta.url));
 const ORIGIN='https://avtocena.com';
 const SCOPE='catalog-japan-recovery-v1';
 const COMPLETION_SCOPE='catalog-japan-completion-v1';
+const COMPLETION_V2_SCOPE='catalog-japan-completion-v2';
 const CARD='article.ac-catalog-card,article.ac-catalog-list-row';
 const CITY='Новокузнецк';
 const QUERY=new URLSearchParams({market:'japan',page:'1',pageSize:'24',city:CITY});
@@ -221,7 +222,7 @@ async function readJson(context,url){
 }
 
 export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,outputFile,playwrightModule,chromeBin,codeScope=SCOPE}){
- const completion=codeScope===COMPLETION_SCOPE;
+ const completion=[COMPLETION_SCOPE,COMPLETION_V2_SCOPE].includes(codeScope);
  const report={version:1,kind:'catalog-japan-browser-v1',codeScope,release:releaseSha,nonce,
   checkedAt:new Date().toISOString(),passed:false,japanFreshnessPassed:false,japanPowerApiPassed:false,
   japanUiPassed:false,japanVisibilityPassed:false,readOnlyBrowserFence:false,
@@ -241,7 +242,7 @@ export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,out
   need(value.data.calculationVersion==='4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90','calculation_changed');
  };
  try{
-  need([SCOPE,COMPLETION_SCOPE].includes(codeScope),'code_scope');
+  need([SCOPE,COMPLETION_SCOPE,COMPLETION_V2_SCOPE].includes(codeScope),'code_scope');
   need(path.isAbsolute(outputFile),'output');
   try{await fs.access(outputFile);need(false,'report_exists');}catch(error){if(error?.code!=='ENOENT')throw error;}
   const raw=await fs.readFile(oraclePath),binding=japanReleaseBinding(JSON.parse(raw),releaseSha,nonce);

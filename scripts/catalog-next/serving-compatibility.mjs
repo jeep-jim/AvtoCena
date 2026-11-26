@@ -108,6 +108,13 @@ const allowedJapanCompletion = new Set([...allowedJapanRecovery,
   'tests/japan-delivered-preview.test.ts',
   'tests/japan-preview-consistency.test.ts',
 ]);
+const allowedJapanCompletionV2 = new Set([...allowedJapanCompletion,
+  'apps/web/lib/catalog/ajes-public.ts',
+  'tests/ajes-empty-page-validation.test.ts',
+  'tests/ajes-prepared-admission.test.ts',
+  'tests/ajes-recovery-isolation.test.ts',
+  'tests/ajes-list-admission.test.ts',
+]);
 const typeOnlyPath = 'apps/web/lib/catalog/offer-page-data.ts';
 export const CHINA_PROTECTED_PRICING_PATHS = Object.freeze([
   'packages', 'data', 'scripts/catalog-next', 'apps/web/lib/encyclopedia',
@@ -132,7 +139,8 @@ export async function verifyServingCompatibility({runtimeRoot, servingPlan, pric
     && /^[a-f0-9]{64}$/.test(servingPlan.pricingToServingDiffSha256 ?? ''), 'plan_binding');
   const files = servingPlan.pricingToServingFiles;
   need(Array.isArray(files) && new Set(files).size === files.length && files.every(name =>
-    typeof name === 'string' && (servingPlan.codeScope === 'catalog-japan-completion-v1' ? allowedJapanCompletion.has(name)
+    typeof name === 'string' && (servingPlan.codeScope === 'catalog-japan-completion-v2' ? allowedJapanCompletionV2.has(name)
+      : servingPlan.codeScope === 'catalog-japan-completion-v1' ? allowedJapanCompletion.has(name)
       : servingPlan.codeScope === 'catalog-japan-recovery-v1' ? allowedJapanRecovery.has(name)
       : allowedProduction.has(name) || allowedBrowserTests.has(name) || name === typeOnlyPath
         || /^tests\/catalog-next-[a-z0-9-]+\.test\.ts$/.test(name))), 'change_scope');

@@ -68,7 +68,7 @@ test('authenticated photo preflight preserves every frozen expected value and ch
 });
 
 async function fixture(t, {combined = false, japan = false,completion=false} = {}) {
-  japan=japan||completion;
+  japan=Boolean(japan||completion);
   const f = sample(), directory = await fs.mkdtemp(path.join(os.tmpdir(), 'china-photo-stage-'));
   t.after(() => fs.rm(directory, {recursive: true, force: true}));
   const root = path.join(directory, 'controller');
@@ -82,7 +82,7 @@ async function fixture(t, {combined = false, japan = false,completion=false} = {
   await fs.writeFile(imagePath, image);
   const servingPlan = {version: 1, market: 'china', runtimeSha: nextSha, retainedRuntime: oldSha,
     runtimeTree: '6'.repeat(40), runtimeDiffSha256: hash('photo diff'), pricingRuntimeSha: pricingSha,
-    ...(japan ? {codeScope: completion?'catalog-japan-completion-v1':'catalog-japan-recovery-v1'} : combined ? {codeScope: 'catalog-photo-japan-power-v1'} : {})};
+    ...(japan ? {codeScope: completion?(typeof completion==='string'?completion:'catalog-japan-completion-v1'):'catalog-japan-recovery-v1'} : combined ? {codeScope: 'catalog-photo-japan-power-v1'} : {})};
   const pricingPlan = {version: 1, market: 'china', runtimeSha: pricingSha};
   const imageReceipt = {version: 1,
     kind: 'china-runtime-image-v1', runtimeSha: nextSha, runtimeTree: servingPlan.runtimeTree,
@@ -492,14 +492,15 @@ test('Japan recovery cannot switch when the existing China functional gate fails
   assert.equal(f.calls.at(-1), 'abort');
 });
 
-test('Japan completion requires its live UI/detail/calculation evidence after unchanged China gates',async t=>{
-  const f=await fixture(t,{completion:true}),{stage,input}=await reservedStage(f);
+for(const scope of ['catalog-japan-completion-v1','catalog-japan-completion-v2']){
+test(scope+' requires its live UI/detail/calculation evidence after unchanged China gates',async t=>{
+  const f=await fixture(t,{completion:scope}),{stage,input}=await reservedStage(f);
   const result=await stage.activate(input);assert.equal(result.kind,'accepted');
   const sequence=['functional','speed','switch','owner-filter-speed-live.mjs','browser-acceptance.mjs',
     'japan-browser-acceptance.mjs','browser_evidence','accept'];
   for(let index=1;index<sequence.length;index++)assert.ok(f.calls.indexOf(sequence[index-1])<f.calls.indexOf(sequence[index]));
   const details=JSON.parse(result.evidence.browserDetailsBytes),report=JSON.parse(Buffer.from(details.japanReportBase64,'base64'));
-  assert.equal(report.codeScope,'catalog-japan-completion-v1');assert.equal(report.japanPreviewCalculationRequests,1);
+  assert.equal(report.codeScope,scope);assert.equal(report.japanPreviewCalculationRequests,1);
   assert.equal(report.productionMutations,0);assert.equal(report.japanDeliveredCalculationPassed,true);
   assert.deepEqual(JSON.parse(f.uploaded.get('acceptance.json')),{...f.oracle,runtimeSha:nextSha});
   await stage.close();
@@ -507,20 +508,22 @@ test('Japan completion requires its live UI/detail/calculation evidence after un
 
 for(const [field,value] of [
   ['codeScope','catalog-japan-recovery-v1'],['japanPetrolPowerUiPassed',false],['japanDetailPowerInputPassed',false],
+  ['codeScope',scope==='catalog-japan-completion-v1'?'catalog-japan-completion-v2':'catalog-japan-completion-v1'],
   ['japanDeliveredCalculationPassed',false],['japanPreviewCalculationRequests',0],['japanPreviewCalculationRequests',3],
   ['japanPreviewCalculationRequests',true],['japanPreviewCalculationRequests','1'],['japanPreviewCalculationRequests',undefined],
   ['productionMutations',1],['directSupplierApiRequests',1],['japanPowerApiPassed',false],['japanVisibilityPassed',false],
-])test('Japan completion rejects missing or invalid '+field+'='+value+' before host evidence',async t=>{
-  const f=await fixture(t,{completion:true});f.flags.changeReport=report=>{report[field]=value;};
+])test(scope+' rejects missing or invalid '+field+'='+value+' before host evidence',async t=>{
+  const f=await fixture(t,{completion:scope});f.flags.changeReport=report=>{report[field]=value;};
   const {stage,input}=await reservedStage(f);
   await assert.rejects(stage.activate(input),/china_daily_release_japan_browser_binding/);
   assert.equal(f.calls.includes('browser_evidence'),false);assert.equal(f.calls.includes('accept'),false);await stage.close();
 });
 
 for(const flag of ['functionalFailure','chinaBrowserFailure'])
-test('Japan completion cannot bypass retained China '+flag,async t=>{
-  const f=await fixture(t,{completion:true});f.flags[flag]=true;
+test(scope+' cannot bypass retained China '+flag,async t=>{
+  const f=await fixture(t,{completion:scope});f.flags[flag]=true;
   if(flag==='functionalFailure')await assert.rejects(reservedStage(f),/china_daily_release_functional/);
   else{const {stage,input}=await reservedStage(f);await assert.rejects(stage.activate(input));await stage.close();}
   assert.equal(f.calls.includes('japan-browser-acceptance.mjs'),false);assert.equal(f.calls.includes('accept'),false);
 });
+}

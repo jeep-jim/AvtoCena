@@ -14,6 +14,10 @@ def refused(fn,code):
  else:raise AssertionError('required rejection: '+code)
 def forbidden(*a,**k):raise AssertionError('external I/O forbidden')
 case=sys.argv[2]
+completion_v2=case.startswith('completion_v2_')
+if completion_v2:case=case.replace('completion_v2_','completion_',1)
+completion_scope=m.JAPAN_COMPLETION_V2_CODE_SCOPE if completion_v2 else m.JAPAN_COMPLETION_CODE_SCOPE
+completion_files=m.JAPAN_COMPLETION_V2_CODE_FILES if completion_v2 else m.JAPAN_COMPLETION_CODE_FILES
 old,new,pricing=m.JAPAN_COMPLETION_RETAINED if case.startswith('completion_') and case!='completion_predecessor' else 'a'*40,'b'*40,'c'*40
 old_image,new_image='sha256:'+'1'*64,'sha256:'+'2'*64
 old_nonce,new_nonce='3'*32,'4'*32
@@ -63,14 +67,14 @@ with tempfile.TemporaryDirectory() as temp:
  def reports(runtime,nonce):
   speed=m.json_bytes({'release':runtime,'passed':True,'browserPassed':True,'speedGuard':{'passed':True}})
   details={'kind':'china-browser-details-v1','release':runtime,'nonce':nonce,'passed':True,'generationManifestSha256':manifest_sha,'precedingSpeedReportSha256':m.sha(speed)}
-  if runtime==new and plan.get('codeScope') in (m.JAPAN_CODE_SCOPE,m.JAPAN_COMPLETION_CODE_SCOPE):
+  if runtime==new and plan.get('codeScope') in (m.JAPAN_CODE_SCOPE,m.JAPAN_COMPLETION_CODE_SCOPE,m.JAPAN_COMPLETION_V2_CODE_SCOPE):
    japan=m.json_bytes({'version':1,'kind':'catalog-japan-browser-v1','codeScope':plan['codeScope'],'release':runtime,'nonce':nonce,
     'checkedAt':m.datetime.datetime.now(m.datetime.timezone.utc).isoformat(),
     'generationManifestSha256':manifest_sha,'oracleSha256':next(d['sha256'] for d in plan['files'] if d['name']=='acceptance.json'),
     'passed':True,'japanFreshnessPassed':True,'japanPowerApiPassed':True,'japanUiPassed':True,'japanVisibilityPassed':True,
     'readOnlyBrowserFence':True,'productionMutations':0,'directSupplierApiRequests':0,'explicitJapanApiRequests':3,
     **({'japanPetrolPowerUiPassed':True,'japanDetailPowerInputPassed':True,'japanDeliveredCalculationPassed':True,
-        'japanPreviewCalculationRequests':1} if plan['codeScope']==m.JAPAN_COMPLETION_CODE_SCOPE else {})})
+        'japanPreviewCalculationRequests':1} if plan['codeScope'] in (m.JAPAN_COMPLETION_CODE_SCOPE,m.JAPAN_COMPLETION_V2_CODE_SCOPE) else {})})
    details.update(japanReportBase64=base64.b64encode(japan).decode(),japanReportSha256=m.sha(japan))
   elif runtime==new and plan.get('codeScope')==m.PHOTO_JAPAN_CODE_SCOPE:
    photo=m.json_bytes({'version':1,'kind':'china-photo-japan-browser-v1','release':runtime,'nonce':nonce,
@@ -108,7 +112,8 @@ with tempfile.TemporaryDirectory() as temp:
   'builder':{'version':'29.1.3','driver':'overlayfs','driverType':'io.containerd.snapshotter.v1'}}
  if case.startswith('completion_'):
   assert len(m.JAPAN_COMPLETION_CODE_FILES)==12 and m.JAPAN_COMPLETION_CODE_SCOPE=='catalog-japan-completion-v1'
-  image_receipt.update(codeScope=m.JAPAN_COMPLETION_CODE_SCOPE,runtimeFiles=sorted(m.JAPAN_COMPLETION_CODE_FILES))
+  assert len(m.JAPAN_COMPLETION_V2_CODE_FILES)==19 and m.JAPAN_COMPLETION_V2_CODE_SCOPE=='catalog-japan-completion-v2'
+  image_receipt.update(codeScope=completion_scope,runtimeFiles=sorted(completion_files))
  elif case.startswith('japan_'):
   assert len(m.JAPAN_CODE_FILES)==37 and m.JAPAN_CODE_SCOPE=='catalog-japan-recovery-v1'
   image_receipt.update(codeScope=m.JAPAN_CODE_SCOPE,runtimeFiles=sorted(m.JAPAN_CODE_FILES))
@@ -346,7 +351,8 @@ with tempfile.TemporaryDirectory() as temp:
     (('productionMutations','directSupplierApiRequests') if japan else ('productionMutations','directSupplierRequests','explicitJapanApiRequests','japanUiNavigations'))
     for value in (1,None,False)]
   if japan:scope_fields.append(('version',True))
-  if completion:scope_fields.extend([('japanPreviewCalculationRequests',value) for value in (0,3,True,'1',None)]+[('codeScope',m.JAPAN_CODE_SCOPE)])
+  if completion:scope_fields.extend([('japanPreviewCalculationRequests',value) for value in (0,3,True,'1',None)]+
+   [('codeScope',m.JAPAN_CODE_SCOPE),('codeScope',m.JAPAN_COMPLETION_CODE_SCOPE if completion_v2 else m.JAPAN_COMPLETION_V2_CODE_SCOPE)])
   for field,value in [('version',2),('kind','wrong-kind'),('release',old),('nonce',old_nonce),
    ('generationManifestSha256','0'*64),('oracleSha256','0'*64)]+[(key,False) for key in required_flags]+scope_fields:
    changed=m.json_bytes({**photo,field:value})
@@ -425,6 +431,7 @@ with tempfile.TemporaryDirectory() as temp:
 `;
 for(const name of ['scope','preflight','copy','oracle_tamper','descriptor_tamper','source_tamper','image_scope','disk_space','plan_changed','start','rollback','accept','proof_required','code_proof_changed_generation','code_proof_missing_rollback','next_daily','retire_copy','combined_accept','photo_explicit','combined_extra','combined_relabel','combined_unbound','photo_relabel','combined_browser_rejections','photo_browser_rejections','japan_accept','japan_rollback','japan_extra','japan_missing','japan_duplicate','japan_relabel','japan_unbound','japan_browser_rejections',
   'completion_accept','completion_rollback','completion_next_daily','completion_predecessor','completion_extra','completion_missing','completion_duplicate','completion_relabel','completion_unbound','completion_browser_rejections',
+  'completion_v2_accept','completion_v2_rollback','completion_v2_next_daily','completion_v2_predecessor','completion_v2_extra','completion_v2_missing','completion_v2_duplicate','completion_v2_relabel','completion_v2_unbound','completion_v2_browser_rejections',
   'cleanup_mount','cleanup_parent_mount','cleanup_file_tamper','cleanup_plan_tamper','cleanup_rollback_tamper','cleanup_accepted_symlink','cleanup_idempotent','cleanup_copy_failure','cleanup_load_failure','post_copy_disk_space','storage_required','storage_image','storage_archive','storage_receipt','storage_zero','storage_source','storage_unpacked_space','storage_receipt_identity']) {
   test('China code-only host: '+name,()=>{
     const result=spawnSync('python3',['-I','-B','-c',harness,hostFile,name],{encoding:'utf8',timeout:20000});
