@@ -66,8 +66,23 @@ jobs:
           runtime-basedir: ${{ runner.temp }}/photo-docker
           daemon-config: |
             {"features":{"containerd-snapshotter":true}}
+      - name: Verify China CRM controls on the exact candidate before building
+        if: steps.photo_scope.outputs.scope == 'catalog-crm-china-operations-v1'
+        run: |
+          set -euo pipefail
+          CRM_SHA=$(node -p "JSON.parse(require('fs').readFileSync('.github/operations/catalog-next/china-code-serving-plan.json')).runtimeSha")
+          cd "$RUNNER_TEMP/china-serving-runtime-$CRM_SHA"
+          COLLECTION_CONTROLS_REPORT="$RUNNER_TEMP/china-crm-collection-controls-report.json" node --import tsx tests/browser/collection-controls.mjs
+          cd "$GITHUB_WORKSPACE"
+          node --import tsx --import ./tests/helpers/offline-fetch.mjs --input-type=module <<'JS'
+          import fs from 'node:fs';
+          import {checkedCrmChinaBrowserFixture, verifyCrmChinaMiddleware} from './scripts/catalog-next/crm-china-status-proof.mjs';
+          checkedCrmChinaBrowserFixture(JSON.parse(fs.readFileSync(process.env.RUNNER_TEMP + '/china-crm-collection-controls-report.json')));
+          const plan = JSON.parse(fs.readFileSync('.github/operations/catalog-next/china-code-serving-plan.json'));
+          await verifyCrmChinaMiddleware(process.env.RUNNER_TEMP + '/china-serving-runtime-' + plan.runtimeSha);
+          JS
       - name: Build the verified source and check its image roundtrip
-        if: steps.photo_scope.outputs.scope == 'catalog-photo-recovery-v1' || steps.photo_scope.outputs.scope == 'catalog-japan-recovery-v1' || steps.photo_scope.outputs.scope == 'catalog-japan-completion-v1' || steps.photo_scope.outputs.scope == 'catalog-japan-completion-v2' || steps.photo_scope.outputs.scope == 'catalog-japan-usability-v1'
+        if: steps.photo_scope.outputs.scope == 'catalog-photo-recovery-v1' || steps.photo_scope.outputs.scope == 'catalog-japan-recovery-v1' || steps.photo_scope.outputs.scope == 'catalog-japan-completion-v1' || steps.photo_scope.outputs.scope == 'catalog-japan-completion-v2' || steps.photo_scope.outputs.scope == 'catalog-japan-usability-v1' || steps.photo_scope.outputs.scope == 'catalog-crm-china-operations-v1'
         env:
           CHINA_BUILD_DOCKER_HOST: ${{ steps.photo_docker.outputs.sock }}
         run: node scripts/run-node-with-resources.mjs --import tsx scripts/catalog-next/code-entry.mjs --build
@@ -102,6 +117,8 @@ jobs:
           name: china-photo-code-release-result
           path: |
             catalog-next-china-photo-release-report.json
+            catalog-next-crm-china-operations-report.json
+            ${{ runner.temp }}/china-crm-collection-controls-report.json
             catalog-next-photo-browser-report.json
             artifacts/catalog-photo-live/**
             catalog-next-photo-japan-browser-report.json

@@ -7,6 +7,7 @@ import {spawn} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
 import http from 'node:http';
 import {verifyServingCompatibility} from './serving-compatibility.mjs';
+import {CRM_CHINA_CODE_SCOPE, CRM_CHINA_PROTECTED_EXCEPTIONS, isExactCrmChinaScope} from './crm-china-code-scope.mjs';
 
 const root = fileURLToPath(new URL('../../', import.meta.url));
 const need = (condition, code) => assert(condition, 'china_image_' + code);
@@ -72,6 +73,8 @@ export async function verifyChinaImageRuntime({runtimeRoot, plan, execute = exec
     && plan.runtimeFiles.every(name => typeof name === 'string' && name.length > 0
       && !name.startsWith('/') && !name.split('/').some(part => ['.', '..', ''].includes(part))
       && !/[\x00-\x1f\x7f\\]/.test(name)), 'runtime_file_list');
+  const crm = plan.codeScope === CRM_CHINA_CODE_SCOPE;
+  need(!crm || isExactCrmChinaScope(plan), 'crm_scope');
   const sourceRoot = await fs.realpath(runtimeRoot);
   const git = args => execute('/usr/bin/git', ['--no-optional-locks', ...args],
     {cwd: sourceRoot, maximum: 32 * 1024 ** 2});
@@ -86,10 +89,14 @@ export async function verifyChinaImageRuntime({runtimeRoot, plan, execute = exec
   const difference = await git(['diff', '--binary', '--full-index', '--no-ext-diff', '--no-renames',
     plan.retainedRuntime, plan.runtimeSha]);
   need(hash(difference) === plan.runtimeDiffSha256, 'runtime_diff');
-  await git(['diff', '--quiet', '--no-ext-diff', plan.retainedRuntime, plan.runtimeSha, '--', ...protectedPaths]);
+  // Only this exact reviewed profile may change its two named CRM/UI files.
+  // Every other CRM route, auth file and site component remains protected.
+  await git(['diff', '--quiet', '--no-ext-diff', plan.retainedRuntime, plan.runtimeSha, '--', ...protectedPaths,
+    ...(crm ? CRM_CHINA_PROTECTED_EXCEPTIONS.map(name => ':(exclude,literal)' + name) : [])]);
   return {runtimeSha: plan.runtimeSha, runtimeTree: plan.runtimeTree,
     retainedRuntime: plan.retainedRuntime, runtimeDiffSha256: plan.runtimeDiffSha256,
-    runtimeFiles: changed, protectedPathsUnchanged: true};
+    runtimeFiles: changed, protectedPathsUnchanged: true,
+    ...(crm ? {protectedPathExceptions: [...CRM_CHINA_PROTECTED_EXCEPTIONS]} : {})};
 }
 
 export function verifyChinaImageBuilder(info) {

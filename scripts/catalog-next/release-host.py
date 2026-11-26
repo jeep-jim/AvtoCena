@@ -47,6 +47,20 @@ JAPAN_COMPLETION_RETAINED = '36c7ea726e7f070d10dbc65afc6538f13c0c1a24'
 JAPAN_COMPLETION_V2_CODE_SCOPE = 'catalog-japan-completion-v2'
 JAPAN_USABILITY_CODE_SCOPE = 'catalog-japan-usability-v1'
 JAPAN_USABILITY_RETAINED = '077cbb17626ab0c64e7f06db055fef9252ad21c0'
+CRM_CHINA_CODE_SCOPE = 'catalog-crm-china-operations-v1'
+CRM_CHINA_RETAINED = '077cbb17626ab0c64e7f06db055fef9252ad21c0'
+CRM_CHINA_CODE_FILES = {
+    'apps/web/app/(crm)/api/crm/china-catalog-status/route.ts',
+    'apps/web/components/site/CollectionControls.tsx',
+    'apps/web/lib/catalog/china-catalog-status.ts',
+    'apps/web/lib/catalog/collection-controls-schema.ts',
+    'tests/browser/collection-controls.mjs',
+    'tests/china-catalog-status.test.ts',
+}
+CRM_CHINA_PROTECTED_EXCEPTIONS = [
+    'apps/web/app/(crm)/api/crm/china-catalog-status/route.ts',
+    'apps/web/components/site/CollectionControls.tsx',
+]
 PHOTO_JAPAN_CODE_FILES = PHOTO_CODE_FILES | {
     'apps/web/app/(public)/api/catalog/search/route.ts',
     'apps/web/app/(public)/cars/offer/[id]/page.tsx',
@@ -181,7 +195,8 @@ JAPAN_USABILITY_CODE_FILES = {
 CODE_SCOPE_FILES = {PHOTO_CODE_SCOPE: PHOTO_CODE_FILES, PHOTO_JAPAN_CODE_SCOPE: PHOTO_JAPAN_CODE_FILES,
                     JAPAN_CODE_SCOPE: JAPAN_CODE_FILES, JAPAN_COMPLETION_CODE_SCOPE: JAPAN_COMPLETION_CODE_FILES,
                     JAPAN_COMPLETION_V2_CODE_SCOPE: JAPAN_COMPLETION_V2_CODE_FILES,
-                    JAPAN_USABILITY_CODE_SCOPE: JAPAN_USABILITY_CODE_FILES}
+                    JAPAN_USABILITY_CODE_SCOPE: JAPAN_USABILITY_CODE_FILES,
+                    CRM_CHINA_CODE_SCOPE: CRM_CHINA_CODE_FILES}
 GENERATION_MOUNT = '/run/avtocena-china-generation'
 HOST_BULK_FILES = {'details.sqlite', 'query.sqlite', 'DISPOSITIONS.ndjson', 'FILTER_SEMANTICS.json',
                    'FX_RECEIPT.json', 'RECONCILIATION.json', 'image.tar'}
@@ -642,6 +657,8 @@ def validate_plan(plan):
                  'code_completion_predecessor')
             need(scope != JAPAN_USABILITY_CODE_SCOPE or plan.get('retainedRuntime') == JAPAN_USABILITY_RETAINED,
                  'code_usability_predecessor')
+            need(scope != CRM_CHINA_CODE_SCOPE or plan.get('retainedRuntime') == CRM_CHINA_RETAINED,
+                 'code_crm_predecessor')
             need(all(isinstance(plan.get(key), str) and re.fullmatch(r'[a-f0-9]{64}', plan[key])
                      for key in ('codeSourcePlanSha256', 'codeSourceOracleSha256')), 'code_source_binding')
     else:
@@ -2400,6 +2417,8 @@ class Host:
              all(isinstance(name, str) for name in image['runtimeFiles']) and
              set(image['runtimeFiles']) == required_code_files and
              type(image.get('imageUnpackedBytes')) is int and image['imageUnpackedBytes'] > 0, 'code_image_receipt')
+        if scope == CRM_CHINA_CODE_SCOPE:
+            need(image.get('protectedPathExceptions') == CRM_CHINA_PROTECTED_EXCEPTIONS, 'code_crm_image_scope')
         storage = checked_code_image_storage_proof(self.plan, image)
         # Uploaded archives already occupy disk. Reserve the complete packed
         # content and actual unpacked snapshots measured in the isolated daemon.
@@ -2846,6 +2865,39 @@ class Host:
              details.get('release') == self.plan['runtimeSha'] and details.get('nonce') == self.plan['nonce'] and
              details.get('generationManifestSha256') == self.plan['generationManifestSha256'] and
              details.get('precedingSpeedReportSha256') == sha(speed_raw), 'browser_evidence_binding')
+        if code_update(self.plan) and code_scope(self.plan) == CRM_CHINA_CODE_SCOPE:
+            need(isinstance(details.get('crmChinaReportBase64'), str) and
+                 isinstance(details.get('crmChinaReportSha256'), str) and
+                 re.fullmatch(r'[a-f0-9]{64}', details['crmChinaReportSha256']), 'crm_browser_binding')
+            crm_raw, crm = decode_report(details['crmChinaReportBase64'])
+            oracle_sha = next(row['sha256'] for row in self.plan['files'] if row['name'] == 'acceptance.json')
+            manifest_file = self.generation / 'GENERATION.json'
+            regular(manifest_file, 256 * 1024)
+            manifest_raw = manifest_file.read_bytes()
+            need(sha(manifest_raw) == self.plan['generationManifestSha256'], 'crm_manifest_binding')
+            manifest = json.loads(manifest_raw)
+            need(set(crm) == {'version', 'kind', 'codeScope', 'release', 'nonce', 'checkedAt', 'pricingRuntimeSha',
+                 'generationManifestSha256', 'generationId', 'sourceObservedAt', 'rows', 'oracleSha256', 'passed',
+                 'manifestHelperPassed', 'middlewareBoundaryPassed', 'unauthorizedStatus', 'unauthorizedContentTypeJson',
+                 'unauthorizedBodyIsAuthRequired', 'unauthorizedSetCookieAbsent',
+                 'unsignedAccessDenied', 'productionMutations', 'directSupplierRequests', 'signedInRequests'} and
+                 len(crm_raw) <= 16 * 1024 and sha(crm_raw) == details['crmChinaReportSha256'] and
+                 type(crm.get('version')) is int and crm['version'] == 1 and crm.get('kind') == 'china-crm-operations-proof-v1' and
+                 crm.get('codeScope') == CRM_CHINA_CODE_SCOPE and crm.get('release') == self.plan['runtimeSha'] and
+                 crm.get('nonce') == self.plan['nonce'] and crm.get('pricingRuntimeSha') == self.plan['pricingRuntimeSha'] and
+                 crm.get('generationManifestSha256') == self.plan['generationManifestSha256'] and
+                 crm.get('generationId') == self.plan['generationId'] == manifest.get('generationId') and
+                 crm.get('sourceObservedAt') == manifest.get('source', {}).get('sourceObservedAt') ==
+                    self.plan['previousAcceptedState']['current']['sourceObservedAt'] and
+                 type(crm.get('rows')) is int and crm['rows'] > 0 and crm['rows'] == manifest.get('rows') and
+                 crm.get('oracleSha256') == oracle_sha and
+                 isinstance(crm.get('checkedAt'), str) and
+                 re.fullmatch(r'\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(?:\.\d{1,6})?Z', crm['checkedAt']) and
+                 all(crm.get(key) is True for key in ('passed', 'manifestHelperPassed', 'middlewareBoundaryPassed',
+                     'unauthorizedContentTypeJson', 'unauthorizedBodyIsAuthRequired', 'unauthorizedSetCookieAbsent', 'unsignedAccessDenied')) and
+                 type(crm.get('unauthorizedStatus')) is int and crm['unauthorizedStatus'] == 401 and
+                 all(type(crm.get(key)) is int and crm[key] == 0 for key in
+                     ('productionMutations', 'directSupplierRequests', 'signedInRequests')), 'crm_browser_binding')
         if code_update(self.plan) and code_scope(self.plan) == PHOTO_CODE_SCOPE:
             need(isinstance(details.get('photoReportBase64'), str) and
                  isinstance(details.get('photoReportSha256'), str) and

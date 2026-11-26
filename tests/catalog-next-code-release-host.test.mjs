@@ -14,6 +14,7 @@ def refused(fn,code):
  else:raise AssertionError('required rejection: '+code)
 def forbidden(*a,**k):raise AssertionError('external I/O forbidden')
 case=sys.argv[2]
+crm=case.startswith('crm_')
 usability=case.startswith('usability_')
 if usability:case=case.replace('usability_','completion_',1)
 completion_v2=case.startswith('completion_v2_')
@@ -23,6 +24,7 @@ completion_files=m.JAPAN_USABILITY_CODE_FILES if usability else m.JAPAN_COMPLETI
 completion_retained=m.JAPAN_USABILITY_RETAINED if usability else m.JAPAN_COMPLETION_RETAINED
 usability_flags=('japanBrandDirectoryPassed','japanFullPagesPassed','japanKnownPowerOrderPassed','japanVehiclePolicyPassed','japanQuietCatalogPassed')
 old,new,pricing=completion_retained if case.startswith('completion_') and case!='completion_predecessor' else 'a'*40,'b'*40,'c'*40
+if crm and case!='crm_predecessor':old=m.CRM_CHINA_RETAINED
 old_image,new_image='sha256:'+'1'*64,'sha256:'+'2'*64
 old_nonce,new_nonce='3'*32,'4'*32
 old_id,new_id='5'*64,'6'*64
@@ -71,7 +73,16 @@ with tempfile.TemporaryDirectory() as temp:
  def reports(runtime,nonce):
   speed=m.json_bytes({'release':runtime,'passed':True,'browserPassed':True,'speedGuard':{'passed':True}})
   details={'kind':'china-browser-details-v1','release':runtime,'nonce':nonce,'passed':True,'generationManifestSha256':manifest_sha,'precedingSpeedReportSha256':m.sha(speed)}
-  if runtime==new and plan.get('codeScope') in (m.JAPAN_CODE_SCOPE,m.JAPAN_COMPLETION_CODE_SCOPE,m.JAPAN_COMPLETION_V2_CODE_SCOPE,m.JAPAN_USABILITY_CODE_SCOPE):
+  if runtime==new and plan.get('codeScope')==m.CRM_CHINA_CODE_SCOPE:
+   crm_report=m.json_bytes({'version':1,'kind':'china-crm-operations-proof-v1','codeScope':m.CRM_CHINA_CODE_SCOPE,
+    'release':runtime,'nonce':nonce,'checkedAt':'2026-11-26T19:00:00.000Z','pricingRuntimeSha':pricing,
+    'generationManifestSha256':manifest_sha,'generationId':generation['generationId'],'sourceObservedAt':generation['source']['sourceObservedAt'],
+    'rows':generation['rows'],'oracleSha256':next(d['sha256'] for d in plan['files'] if d['name']=='acceptance.json'),
+    'passed':True,'manifestHelperPassed':True,'middlewareBoundaryPassed':True,'unauthorizedStatus':401,
+    'unauthorizedContentTypeJson':True,'unauthorizedBodyIsAuthRequired':True,'unauthorizedSetCookieAbsent':True,
+    'unsignedAccessDenied':True,'productionMutations':0,'directSupplierRequests':0,'signedInRequests':0})
+   details.update(crmChinaReportBase64=base64.b64encode(crm_report).decode(),crmChinaReportSha256=m.sha(crm_report))
+  elif runtime==new and plan.get('codeScope') in (m.JAPAN_CODE_SCOPE,m.JAPAN_COMPLETION_CODE_SCOPE,m.JAPAN_COMPLETION_V2_CODE_SCOPE,m.JAPAN_USABILITY_CODE_SCOPE):
    japan=m.json_bytes({'version':1,'kind':'catalog-japan-browser-v1','codeScope':plan['codeScope'],'release':runtime,'nonce':nonce,
     'checkedAt':m.datetime.datetime.now(m.datetime.timezone.utc).isoformat(),
     'generationManifestSha256':manifest_sha,'oracleSha256':next(d['sha256'] for d in plan['files'] if d['name']=='acceptance.json'),
@@ -115,7 +126,11 @@ with tempfile.TemporaryDirectory() as temp:
   'runtimeFiles':sorted(m.PHOTO_CODE_FILES),'imageUnpackedBytes':1024,'bytes':13,'sha256':m.sha(b'new image tar'),
   'configSha256':'a'*64,'rootFsSha256':'b'*64,
   'builder':{'version':'29.1.3','driver':'overlayfs','driverType':'io.containerd.snapshotter.v1'}}
- if case.startswith('completion_'):
+ if crm:
+  assert len(m.CRM_CHINA_CODE_FILES)==6 and m.CRM_CHINA_RETAINED=='077cbb17626ab0c64e7f06db055fef9252ad21c0'
+  image_receipt.update(codeScope=m.CRM_CHINA_CODE_SCOPE,runtimeFiles=sorted(m.CRM_CHINA_CODE_FILES),
+   protectedPathExceptions=copy.deepcopy(m.CRM_CHINA_PROTECTED_EXCEPTIONS))
+ elif case.startswith('completion_'):
   assert len(m.JAPAN_COMPLETION_CODE_FILES)==12 and m.JAPAN_COMPLETION_CODE_SCOPE=='catalog-japan-completion-v1'
   assert len(m.JAPAN_COMPLETION_V2_CODE_FILES)==19 and m.JAPAN_COMPLETION_V2_CODE_SCOPE=='catalog-japan-completion-v2'
   if usability:
@@ -144,6 +159,8 @@ with tempfile.TemporaryDirectory() as temp:
  m.new_file(new_dir/'PLAN.json',m.json_bytes(plan))
  if case=='completion_predecessor':
   refused(lambda:m.validate_plan(plan),'code_usability_predecessor' if usability else 'code_completion_predecessor');print('ok');sys.exit(0)
+ if case=='crm_predecessor':
+  refused(lambda:m.validate_plan(plan),'code_crm_predecessor');print('ok');sys.exit(0)
  m.validate_plan(plan)
  def make_container(identity,runtime,image,nonce,directory,port):
   mounts=[{'Type':'bind','Source':str(enc),'Destination':'/app/data/knowledge/encyclopedia/calculation-v1.json','RW':False,'Mode':'ro'},
@@ -240,7 +257,8 @@ with tempfile.TemporaryDirectory() as temp:
   assert not list((new_dir/'generation').iterdir()) and host.candidate is None and m.CONFIG.read_bytes()==original
  elif case in ('copy','oracle_tamper','descriptor_tamper','source_tamper','image_scope','disk_space','plan_changed','combined_extra','combined_relabel','combined_unbound','photo_relabel',
                'japan_extra','japan_missing','japan_duplicate','japan_relabel','japan_unbound',
-               'completion_extra','completion_missing','completion_duplicate','completion_relabel','completion_unbound'):
+               'completion_extra','completion_missing','completion_duplicate','completion_relabel','completion_unbound',
+               'crm_extra','crm_missing','crm_duplicate','crm_relabel','crm_unbound','crm_exceptions'):
   expected=None
   if case=='oracle_tamper':
    bad={**copy.deepcopy(oracle),'runtimeSha':new};bad['cases'][0]['totalRub'][0]+=1;overwrite('acceptance.json',m.json_bytes(bad));expected='code_oracle_scope'
@@ -254,13 +272,16 @@ with tempfile.TemporaryDirectory() as temp:
   if case=='photo_relabel':
    plan['codeScope']=image_receipt['codeScope']=m.PHOTO_JAPAN_CODE_SCOPE;overwrite('image-receipt.json',m.json_bytes(image_receipt));expected='code_image_receipt'
   if case in ('japan_extra','japan_missing','japan_duplicate','japan_relabel',
-              'completion_extra','completion_missing','completion_duplicate','completion_relabel'):
+              'completion_extra','completion_missing','completion_duplicate','completion_relabel',
+              'crm_extra','crm_missing','crm_duplicate','crm_relabel'):
    if case.endswith('_extra'):image_receipt['runtimeFiles'].append('apps/web/lib/catalog/unrelated.ts')
    elif case.endswith('_missing'):image_receipt['runtimeFiles'].pop()
    elif case.endswith('_duplicate'):image_receipt['runtimeFiles'].append(image_receipt['runtimeFiles'][0])
    else:image_receipt['codeScope']=m.PHOTO_CODE_SCOPE
    overwrite('image-receipt.json',m.json_bytes(image_receipt));expected='code_image_receipt'
-  if case in ('japan_unbound','completion_unbound'):plan.pop('codeScope');expected='code_image_receipt'
+  if case in ('japan_unbound','completion_unbound','crm_unbound'):plan.pop('codeScope');expected='code_image_receipt'
+  if case=='crm_exceptions':
+   image_receipt['protectedPathExceptions'].append('apps/web/lib/auth.ts');overwrite('image-receipt.json',m.json_bytes(image_receipt));expected='code_crm_image_scope'
   if case=='disk_space':m.os.statvfs=lambda p:types.SimpleNamespace(f_bavail=0,f_frsize=4096);expected='code_disk_space'
   if case=='plan_changed':plan['codeSourcePlanSha256']='0'*64;expected='code_source_plan_changed'
   if expected:refused(prepare_only,expected);assert host.candidate is None and m.CONFIG.read_bytes()==original
@@ -338,6 +359,32 @@ with tempfile.TemporaryDirectory() as temp:
   for name,raw in old_bytes.items():
    assert (old_dir/'generation'/name if name in m.GENERATION_FILES else old_dir/name).read_bytes()==raw
   assert enc.read_bytes()==b'private untouched knowledge'
+ elif case=='crm_browser_rejections':
+  host.start();host.functional_passed=host.speed_passed=True;host.switch()
+  speed,details,_=reports(new,new_nonce);details=json.loads(details)
+  encoded,digest='crmChinaReportBase64','crmChinaReportSha256'
+  report=json.loads(base64.b64decode(details[encoded]));bad_cases=[]
+  for missing in (encoded,digest):
+   bad=copy.deepcopy(details);bad.pop(missing);bad_cases.append(bad)
+  bad_cases.append({**details,digest:'0'*64})
+  fields=[('version',True),('codeScope',m.JAPAN_USABILITY_CODE_SCOPE),('release',old),('nonce',old_nonce),
+   ('pricingRuntimeSha','0'*40),('generationManifestSha256','0'*64),('generationId','gen_china_124_1'),
+   ('sourceObservedAt',old_receipt['acceptedAt']),('rows',11),('rows',True),('oracleSha256','0'*64),
+   ('unauthorizedStatus',200),('unauthorizedStatus',403),('body','PRIVATE_BODY')]
+  for flag in ('passed','manifestHelperPassed','middlewareBoundaryPassed','unauthorizedContentTypeJson',
+               'unauthorizedBodyIsAuthRequired','unauthorizedSetCookieAbsent','unsignedAccessDenied'):
+   fields.extend((flag,value) for value in (False,1,None,'true'))
+  for count in ('productionMutations','directSupplierRequests','signedInRequests'):
+   fields.extend((count,value) for value in (1,None,False))
+  for field,value in fields:
+   changed=m.json_bytes({**report,field:value})
+   bad_cases.append({**details,encoded:base64.b64encode(changed).decode(),digest:m.sha(changed)})
+  for bad in bad_cases:
+   refused(lambda:host.browser_evidence({'speedBase64':base64.b64encode(speed).decode(),
+    'detailsBase64':base64.b64encode(m.json_bytes(bad)).decode()}),'crm_browser_binding')
+   assert not host.accepted and not (new_dir/'BROWSER_DETAILS.json').exists() and not (new_dir/'ACCEPTED.json').exists()
+  host.cleanup();assert m.CONFIG.read_bytes()==original and new_id not in containers and old_container==retained_before
+  assert m.read_outcome({'runtimeSha':new,'nonce':new_nonce})['status']=='rolled_back'
  elif case in ('combined_browser_rejections','photo_browser_rejections','japan_browser_rejections','completion_browser_rejections'):
   host.start();host.functional_passed=host.speed_passed=True;host.switch()
   speed,details,_=reports(new,new_nonce);details=json.loads(details)
@@ -396,13 +443,14 @@ with tempfile.TemporaryDirectory() as temp:
   assert proof['retainedRuntimeSha']==old and proof['retainedImageId']==old_image
   assert (new_dir/'PLAN.json').exists() and not (new_dir/'ACCEPTED.json').exists()
  elif case in ('start','rollback','accept','proof_required','code_proof_changed_generation','code_proof_missing_rollback','next_daily','retire_copy','combined_accept','photo_explicit',
-               'japan_accept','japan_rollback','completion_accept','completion_rollback','completion_next_daily'):
+               'japan_accept','japan_rollback','completion_accept','completion_rollback','completion_next_daily',
+               'crm_accept','crm_rollback','crm_next_daily'):
   result=host.start();assert result['codeGenerationCopy']['sourceDownloads']==0
   assert old_container==retained_before
   expected_env=[x.replace('AVTOCENA_RELEASE_SHA='+old,'AVTOCENA_RELEASE_SHA='+new) for x in retained_before['Config']['Env']]
   assert host.spec['Env']==expected_env and host.spec['Image']==new_image
   assert host.spec['HostConfig']['Binds']==[x.replace(str(old_dir/'generation'),str(new_dir/'generation')) for x in retained_before['HostConfig']['Binds']]
-  if case in ('rollback','japan_rollback','completion_rollback'):
+  if case in ('rollback','japan_rollback','completion_rollback','crm_rollback'):
    host.functional_passed=host.speed_passed=True;host.switch();host.cleanup()
    assert m.CONFIG.read_bytes()==original and old_container==retained_before and new_id not in containers
    outcome=m.read_outcome({'runtimeSha':new,'nonce':new_nonce});assert outcome['status']=='rolled_back'
@@ -430,7 +478,7 @@ with tempfile.TemporaryDirectory() as temp:
      raw=json.loads(base64.b64decode(bad['current']['proof']['hostReceiptBase64']));raw['generationId']=bad['current']['generationId'];encoded=m.json_bytes(raw)
      bad['current']['proof'].update(hostReceiptBase64=base64.b64encode(encoded).decode(),hostReceiptSha256=m.sha(encoded))
     refused(lambda:m.checked_accepted_observation({'found':True,'value':bad,'etag':'"bad"','sha256':m.canonical_sha(bad)}),'retire_protected')
-   elif case in ('next_daily','completion_next_daily'):
+   elif case in ('next_daily','completion_next_daily','crm_next_daily'):
     daily={**copy.deepcopy(plan),'mode':'generation-update','retainedRuntime':new,'runtimeSha':new,'imageId':new_image,'nonce':'f'*32,
      'generationId':'gen_china_124_1','previousAcceptedState':state,'previousAcceptedETag':'"new-state"','previousAcceptedStateSha256':m.canonical_sha(state)}
     daily.pop('codeImageStorageProof');daily['files']=[d for d in daily['files'] if d['name'] not in ('image.tar','image-receipt.json')];m.validate_plan(daily)
@@ -449,6 +497,7 @@ for(const name of ['scope','preflight','copy','oracle_tamper','descriptor_tamper
   'completion_accept','completion_rollback','completion_next_daily','completion_predecessor','completion_extra','completion_missing','completion_duplicate','completion_relabel','completion_unbound','completion_browser_rejections',
   'completion_v2_accept','completion_v2_rollback','completion_v2_next_daily','completion_v2_predecessor','completion_v2_extra','completion_v2_missing','completion_v2_duplicate','completion_v2_relabel','completion_v2_unbound','completion_v2_browser_rejections',
   'usability_accept','usability_rollback','usability_next_daily','usability_predecessor','usability_extra','usability_missing','usability_duplicate','usability_relabel','usability_unbound','usability_browser_rejections',
+  'crm_accept','crm_rollback','crm_next_daily','crm_predecessor','crm_extra','crm_missing','crm_duplicate','crm_relabel','crm_unbound','crm_exceptions','crm_browser_rejections',
   'cleanup_mount','cleanup_parent_mount','cleanup_file_tamper','cleanup_plan_tamper','cleanup_rollback_tamper','cleanup_accepted_symlink','cleanup_idempotent','cleanup_copy_failure','cleanup_load_failure','post_copy_disk_space','storage_required','storage_image','storage_archive','storage_receipt','storage_zero','storage_source','storage_unpacked_space','storage_receipt_identity']) {
   test('China code-only host: '+name,()=>{
     const result=spawnSync('python3',['-I','-B','-c',harness,hostFile,name],{encoding:'utf8',timeout:20000});

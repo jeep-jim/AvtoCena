@@ -1,5 +1,6 @@
 import {verifyChinaImageRuntime} from './build-release-image.mjs';
 import {verifyServingCompatibility} from './serving-compatibility.mjs';
+import {CRM_CHINA_CODE_SCOPE, CRM_CHINA_CODE_PATHS, CRM_CHINA_RETAINED_RUNTIME} from './crm-china-code-scope.mjs';
 
 export const CHINA_PHOTO_CODE_PATHS = Object.freeze([
   'apps/web/components/catalog/CatalogCover.tsx',
@@ -158,13 +159,15 @@ export function checkedCatalogCodeScope(plan) {
     : scope === 'catalog-japan-recovery-v1' ? JAPAN_RECOVERY_CODE_PATHS
     : scope === 'catalog-japan-completion-v1' ? JAPAN_COMPLETION_CODE_PATHS
     : scope === 'catalog-japan-completion-v2' ? JAPAN_COMPLETION_V2_CODE_PATHS
-    : scope === 'catalog-japan-usability-v1' ? JAPAN_USABILITY_CODE_PATHS : null;
+    : scope === 'catalog-japan-usability-v1' ? JAPAN_USABILITY_CODE_PATHS
+    : scope === CRM_CHINA_CODE_SCOPE ? CRM_CHINA_CODE_PATHS : null;
   need(paths && Array.isArray(plan.runtimeFiles) && plan.runtimeFiles.length === paths.length
     && paths.every(name => plan.runtimeFiles.includes(name)), 'files');
   need(scope !== 'catalog-japan-recovery-v1' || plan.retainedRuntime === JAPAN_RECOVERY_RETAINED_RUNTIME, 'retained_runtime');
   need(scope !== 'catalog-japan-completion-v1' || plan.retainedRuntime === JAPAN_COMPLETION_RETAINED_RUNTIME, 'retained_runtime');
   need(scope !== 'catalog-japan-completion-v2' || plan.retainedRuntime === JAPAN_COMPLETION_V2_RETAINED_RUNTIME, 'retained_runtime');
   need(scope !== 'catalog-japan-usability-v1' || plan.retainedRuntime === JAPAN_USABILITY_RETAINED_RUNTIME, 'retained_runtime');
+  need(scope !== CRM_CHINA_CODE_SCOPE || plan.retainedRuntime === CRM_CHINA_RETAINED_RUNTIME, 'retained_runtime');
   return scope;
 }
 

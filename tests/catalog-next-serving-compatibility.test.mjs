@@ -7,6 +7,7 @@ import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
 import {verifyServingCompatibility} from '../scripts/catalog-next/serving-compatibility.mjs';
 import {JAPAN_RECOVERY_CODE_PATHS,JAPAN_COMPLETION_CODE_PATHS,JAPAN_COMPLETION_V2_CODE_PATHS,JAPAN_USABILITY_CODE_PATHS} from '../scripts/catalog-next/photo-code-scope.mjs';
+import {CRM_CHINA_CODE_SCOPE, CRM_CHINA_CODE_PATHS} from '../scripts/catalog-next/crm-china-code-scope.mjs';
 
 const hash = raw => createHash('sha256').update(raw).digest('hex');
 async function fixture(t) {
@@ -45,6 +46,23 @@ test('the identical serving/pricing runtime is valid with an exact empty diff', 
   assert.equal(proof.pricingToServingDiffSha256, hash(''));
   assert.deepEqual(proof.pricingToServingFiles, []);
   assert.equal(proof.protectedPricingPathsUnchanged, true);
+});
+
+test('CRM compatibility adds its exact paths to accepted completion v2 without admitting b25 or adjacent controls', async t => {
+  const f = await fixture(t);
+  for (const filename of [...JAPAN_COMPLETION_V2_CODE_PATHS, ...CRM_CHINA_CODE_PATHS]) await f.write(filename, 'reviewed cumulative bytes\n');
+  f.commit();
+  const proof = await verifyServingCompatibility({...f, servingPlan: {...f.servingPlan(), codeScope: CRM_CHINA_CODE_SCOPE}});
+  assert.equal(proof.protectedPricingPathsUnchanged, true);
+  for (const codeScope of ['catalog-japan-completion-v2', 'catalog-japan-usability-v1'])
+    await assert.rejects(verifyServingCompatibility({...f, servingPlan: {...f.servingPlan(), codeScope}}), /china_serving_change_scope/);
+  for (const filename of ['apps/web/lib/catalog/ajes-power-page.ts', 'apps/web/lib/catalog/china-local-reader-new.ts',
+    'apps/web/app/(crm)/api/crm/team/route.ts', 'apps/web/components/site/BusinessSettings.tsx',
+    'apps/web/lib/auth.ts', 'apps/web/lib/catalog/rates.ts', 'tests/china-unreviewed.test.ts']) {
+    await f.write(filename, 'unreviewed bytes\n'); f.commit();
+    await assert.rejects(verifyServingCompatibility({...f, servingPlan: {...f.servingPlan(), codeScope: CRM_CHINA_CODE_SCOPE}}), /china_serving_change_scope/);
+    f.git(['reset', '--hard', 'HEAD~1']);
+  }
 });
 
 test('an exact descendant may change only the reviewed serving readers and targeted tests', async t => {

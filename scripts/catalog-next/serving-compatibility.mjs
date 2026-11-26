@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
+import {CRM_CHINA_CODE_SCOPE, CRM_CHINA_CODE_PATHS} from './crm-china-code-scope.mjs';
 
 const need = (value, code) => assert(value, 'china_serving_' + code);
 const hash = raw => createHash('sha256').update(raw).digest('hex');
@@ -160,6 +161,9 @@ const allowedJapanUsability = new Set([...allowedJapanCompletionV2,
   "tests/japan-source-power.test.ts",
   "tests/japan-vehicle-admission.test.ts",
 ]);
+// Accepted 077 is the cumulative ancestor. None of b25's additional usability
+// paths becomes an allowance for this private CRM status/display correction.
+const allowedCrmChina = new Set([...allowedJapanCompletionV2, ...CRM_CHINA_CODE_PATHS]);
 const typeOnlyPath = 'apps/web/lib/catalog/offer-page-data.ts';
 export const CHINA_PROTECTED_PRICING_PATHS = Object.freeze([
   'packages', 'data', 'scripts/catalog-next', 'apps/web/lib/encyclopedia',
@@ -184,7 +188,8 @@ export async function verifyServingCompatibility({runtimeRoot, servingPlan, pric
     && /^[a-f0-9]{64}$/.test(servingPlan.pricingToServingDiffSha256 ?? ''), 'plan_binding');
   const files = servingPlan.pricingToServingFiles;
   need(Array.isArray(files) && new Set(files).size === files.length && files.every(name =>
-    typeof name === 'string' && (servingPlan.codeScope === 'catalog-japan-usability-v1' ? allowedJapanUsability.has(name)
+    typeof name === 'string' && (servingPlan.codeScope === CRM_CHINA_CODE_SCOPE ? allowedCrmChina.has(name)
+      : servingPlan.codeScope === 'catalog-japan-usability-v1' ? allowedJapanUsability.has(name)
       : servingPlan.codeScope === 'catalog-japan-completion-v2' ? allowedJapanCompletionV2.has(name)
       : servingPlan.codeScope === 'catalog-japan-completion-v1' ? allowedJapanCompletion.has(name)
       : servingPlan.codeScope === 'catalog-japan-recovery-v1' ? allowedJapanRecovery.has(name)

@@ -13,6 +13,8 @@ import {restorePrivateChinaGeneration} from './private-generation.mjs';
 import {openChinaSshSession, checkedServerSpeedReport, checkedHomePhaseTimingReport} from './release-ssh.mjs';
 import {verifyChinaPhotoCodeRuntime} from './photo-code-scope.mjs';
 import {verifyChinaImageStorageProof} from './build-release-image.mjs';
+import {CRM_CHINA_CODE_SCOPE, CRM_CHINA_PROTECTED_EXCEPTIONS} from './crm-china-code-scope.mjs';
+import {checkedCrmChinaManifestProof, checkedCrmChinaEvidence, verifyCrmChinaUnauthorizedAccess} from './crm-china-status-proof.mjs';
 import {validateChinaGenerationReference, validateChinaAcceptedState, validateChinaPublicationIntent,
   validateChinaCodeTransition, inspectChinaPublicationState} from './china-state.mjs';
 
@@ -74,7 +76,7 @@ function decode(value) {
 /** Authenticated host bytes remain private to the controller. The existing
  * immutable manifest/oracle and all seven local files must match the accepted
  * reference. Only the candidate UI revision may change in the reused oracle. */
-export function checkedChinaCodePreflight(value, previous, runtimeSha) {
+export function checkedChinaCodePreflight(value, previous, runtimeSha, {includeManifestBytes = false} = {}) {
   const current = validateChinaGenerationReference(previous, {requireAccepted: true});
   need(value && HASH.test(value.previousPlanSha256 ?? '') && HASH.test(value.previousOracleSha256 ?? '')
     && /^[a-f0-9]{40}$/.test(runtimeSha ?? '') && runtimeSha !== current.runtimeSha, 'code_preflight');
@@ -111,6 +113,7 @@ export function checkedChinaCodePreflight(value, previous, runtimeSha) {
   return {previousPlanSha256: value.previousPlanSha256, previousOracleSha256: value.previousOracleSha256,
     generationBytes: value.generationBytes, availableDiskBytes: value.availableDiskBytes,
     generationFiles: value.generationFiles.map(row => ({...row})), generation,
+    ...(includeManifestBytes ? {generationManifestBytes: manifestRaw} : {}),
     oracle: {...oracle, runtimeSha}};
 }
 
@@ -122,7 +125,7 @@ export function createChinaDailyRelease({root, servingRoot, pricingPlan, serving
   const defaults = {verifyCompatibility: verifyServingCompatibility, verifyBaselines: verifyFrozenSpeedBaselines,
     verifyCodeCompatibility: verifyChinaPhotoCodeRuntime,
     generationStorage: owner => createPrivateChinaGenerationStorage({owner, environment}),
-    openSession: openChinaSshSession, runChild, health,
+    openSession: openChinaSshSession, runChild, health, verifyCrmAccess: verifyCrmChinaUnauthorizedAccess,
     async checkControl() {
       need(environment.JSON_STORAGE_DRIVER === 'object', 'storage_driver');
       const [{getJsonStorage}, {assertChinaFeedControl}] = await Promise.all([
@@ -145,6 +148,7 @@ export function createChinaDailyRelease({root, servingRoot, pricingPlan, serving
 
   async function stage(mode, {candidate, previous, nonce, assertAuthority}) {
     const codeUpdate = mode === 'code-update';
+    const crmCodeUpdate = codeUpdate && servingPlan.codeScope === CRM_CHINA_CODE_SCOPE;
     candidate = validateChinaGenerationReference(candidate);
     need(!candidate.proof && previous?.found === true && typeof assertAuthority === 'function'
       && /^[a-f0-9]{32}$/.test(nonce ?? ''), 'stage_arguments');
@@ -165,15 +169,34 @@ export function createChinaDailyRelease({root, servingRoot, pricingPlan, serving
     const temporary = await fs.realpath(runnerTemp), directory = await fs.mkdtemp(path.join(temporary, 'china-daily-release-'));
     let session, activated = false, closed = false, acceptedReceiptSha256;
     try {
-      let codePreflight, codeImageStorageProof, codeImageArchiveBytes, files, oracle;
+      let codePreflight, codeImageStorageProof, codeImageArchiveBytes, files, oracle, crmManifestProof, crmBinding;
       const oraclePath = path.join(directory, 'acceptance.json');
       if (codeUpdate) {
         await guard(); await progress('code_verify_accepted_host_files');
         session = await use.openSession({root, directory, privateKey});
         codePreflight = checkedChinaCodePreflight(await session.call('code_preflight', {previousAccepted: previous}),
-          prior.current, candidate.runtimeSha);
+          prior.current, candidate.runtimeSha, {includeManifestBytes: crmCodeUpdate});
         oracle = codePreflight.oracle;
         await fs.writeFile(oraclePath, JSON.stringify(oracle) + '\n', {mode: 0o600, flag: 'wx'});
+        if (crmCodeUpdate) {
+          await guard(); await progress('code_crm_manifest');
+          const manifestDirectory = path.join(directory, 'crm-status-generation');
+          await fs.mkdir(manifestDirectory, {mode: 0o700});
+          await fs.writeFile(path.join(manifestDirectory, 'GENERATION.json'), codePreflight.generationManifestBytes,
+            {mode: 0o400, flag: 'wx'});
+          crmBinding = {runtimeSha: candidate.runtimeSha, pricingRuntimeSha: candidate.pricingRuntimeSha,
+            generationManifestSha256: candidate.generationManifestSha256, generationId: candidate.generationId,
+            sourceObservedAt: candidate.sourceObservedAt, rows: codePreflight.generation.rows};
+          const bindingPath = path.join(directory, 'crm-status-binding.json'), proofPath = path.join(directory, 'crm-manifest-proof.json');
+          await fs.writeFile(bindingPath, JSON.stringify(crmBinding) + '\n', {mode: 0o600, flag: 'wx'});
+          need(await use.runChild({root, script: path.join(root, 'scripts/catalog-next/crm-china-status-proof.mjs'),
+            args: ['--manifest', servingRoot, manifestDirectory, bindingPath, proofPath], env: childEnv(), cwd: directory}) === 0,
+          'crm_manifest_failed');
+          const proofRaw = await fs.readFile(proofPath);
+          need(proofRaw.length <= 16 * 1024, 'crm_manifest_size');
+          crmManifestProof = checkedCrmChinaManifestProof(JSON.parse(proofRaw), crmBinding);
+          await guard(); await verifyRuntime();
+        }
         const imageDirectory = path.join(temporary, 'china-release-build');
         const receiptPath = path.join(imageDirectory, 'image-receipt.json'), imagePath = path.join(imageDirectory, 'image.tar');
         const imageReceiptRaw = await fs.readFile(receiptPath), imageReceipt = JSON.parse(imageReceiptRaw), image = await seal(imagePath);
@@ -187,6 +210,7 @@ export function createChinaDailyRelease({root, servingRoot, pricingPlan, serving
           && imageReceipt.archiveRoundTripVerified === true && imageReceipt.privateDataIncluded === false
           && imageReceipt.protectedPathsUnchanged === true && imageReceipt.servingCompatibility?.protectedPricingPathsUnchanged === true,
         'code_image');
+        if (crmCodeUpdate) need(equal(imageReceipt.protectedPathExceptions, CRM_CHINA_PROTECTED_EXCEPTIONS), 'crm_image_scope');
         const storagePath = path.join(imageDirectory, 'image-storage-proof.json');
         const storageRaw = await fs.readFile(storagePath), storageSeal = await seal(storagePath);
         need(storageRaw.length <= 16 * 1024 && storageRaw.length === storageSeal.bytes
@@ -314,6 +338,28 @@ export function createChinaDailyRelease({root, servingRoot, pricingPlan, serving
             && details.release === candidate.runtimeSha && details.nonce === nonce
             && details.generationManifestSha256 === candidate.generationManifestSha256
             && details.precedingSpeedReportSha256 === hash(speedRaw), 'browser_details_binding');
+          if (crmCodeUpdate) {
+            const crmStartedAt = Date.now();
+            await activeGuard(); await verifyRuntime(); await use.health(candidate.runtimeSha);
+            await progress('code_crm_access_boundary');
+            checkedCrmChinaManifestProof(crmManifestProof, crmBinding);
+            const access = await use.verifyCrmAccess();
+            await use.health(candidate.runtimeSha); await activeGuard();
+            const crm = checkedCrmChinaEvidence({version: 1, kind: 'china-crm-operations-proof-v1',
+              codeScope: CRM_CHINA_CODE_SCOPE, release: candidate.runtimeSha, nonce, checkedAt: new Date().toISOString(),
+              pricingRuntimeSha: candidate.pricingRuntimeSha, generationManifestSha256: candidate.generationManifestSha256,
+              generationId: candidate.generationId, sourceObservedAt: candidate.sourceObservedAt, rows: crmBinding.rows,
+              oracleSha256: hash(await fs.readFile(oraclePath)), passed: true, manifestHelperPassed: true,
+              middlewareBoundaryPassed: true, ...access,
+              productionMutations: 0, directSupplierRequests: 0, signedInRequests: 0},
+            {candidate, nonce, oracleSha256: hash(await fs.readFile(oraclePath)), rows: crmBinding.rows, startedAt: crmStartedAt});
+            const crmRaw = Buffer.from(JSON.stringify(crm) + '\n');
+            await fs.writeFile(path.join(root, 'catalog-next-crm-china-operations-report.json'), crmRaw, {mode: 0o600, flag: 'wx'});
+            detailsRaw = Buffer.from(JSON.stringify({...details, crmChinaReportBase64: crmRaw.toString('base64'),
+              crmChinaReportSha256: hash(crmRaw)}) + '\n');
+            need(detailsRaw.length <= 256 * 1024, 'browser_details_size');
+            await fs.writeFile(detailsPath, detailsRaw, {mode: 0o600});
+          }
           if (codeUpdate && plan.codeScope === 'catalog-photo-recovery-v1') {
             await activeGuard(); await progress('code_photo_browser');
             const photoOutput = path.join(root, 'catalog-next-photo-browser-report.json');
