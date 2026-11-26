@@ -10,7 +10,7 @@ test('market cards remain ready and their late count resolves with exactly the s
  const mocks:Record<string,string>={
   'ajes-catalog':`export const readAjesCatalogPage=async(q,measure,options)=>{globalThis.__railFixture.queries.push(q);globalThis.__railFixture.options.push(options);return {items:[{id:'car'}],countSummary:null,hasMore:true};};export const readAjesCountSummary=key=>{globalThis.__railFixture.countKeys.push(key);return globalThis.__railFixture.count;};`,
   'ajes-query':`export class AjesFilterUnavailable extends Error{}`,
-  'collection-controls':`export const assertCollectionEnabled=async()=>{};`,
+  'collection-controls':`export class CollectionDisabledError extends Error{};export const assertCollectionEnabled=async()=>{};`,
   'storage':`export const publicOffer=x=>x;`,
   'DealerBrowsingContext':`export const DealerLink=()=>null;`,
  };
@@ -22,7 +22,7 @@ test('market cards remain ready and their late count resolves with exactly the s
    const params={make:'Hyundai',model:'TUCSON',city:'Новокузнецк',market:'korea|japan'};
    const tree=await mod.exports.AjesRail({market,params});
    assert.deepEqual(state.options.at(-1),{includeCount:false});
-   const nodes:any[]=[];function walk(node:any){if(Array.isArray(node))return node.forEach(walk);if(!node||typeof node!=='object')return;nodes.push(node);walk(node.props?.children);}walk(tree);
+   const nodes:any[]=[];function walk(node:any){if(Array.isArray(node))return node.forEach(walk);if(!node||typeof node!=='object')return;nodes.push(node);walk(node.props?.children);walk(node.props?.count);}walk(tree);
    assert.equal(nodes.filter(x=>x.type?.name==='CatalogCard').length,1);
    const late=nodes.find(x=>x.type?.name==='RailCount');assert.ok(late,'late count remains mounted after cards returned');
    const pending=late.type(late.props);resolveCount({total:20890,upperBound:false,stale:false,observedAt:'now'});

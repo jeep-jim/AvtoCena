@@ -3,7 +3,7 @@ import type {CalculationIndex} from '../encyclopedia/calculation-index';
 import {isIP} from 'node:net';
 import {gunzipSync} from 'node:zlib';
 import {DetailReadCache} from './detail-read-cache';
-import {ajesQuery,ajesLot,type AjesTable,type AjesQuery} from './ajes-query';
+import {ajesQuery,ajesLot,ajesSourceCacheSql,type AjesTable,type AjesQuery} from './ajes-query';
 import {AjesUnavailable,assertAjesJapanTable} from './ajes-access-policy';
 
 export {AjesUnavailable} from './ajes-access-policy';
@@ -21,14 +21,15 @@ export function createAjesClient(deps:Dependencies) {
   // Keep the total supplier concurrency at two, including all request kinds.
   // A queued detail may wait for the preceding 45-second read instead of failing
   // at the ordinary five-second queue deadline solely due to serialization.
-  const cache=new DetailReadCache<any>({maxEntries:300,maxBytes:8*1024*1024,ttlMs:30*60*1000,concurrency:2,groupConcurrency:{detail:1},groupQueueTimeoutMs:{detail:50_000},shouldCache:value=>!value.stale});
+  const sourceExpiry=(value:any)=>Date.parse(value?.observedAt||'')+30*60*1000;
+  const cache=new DetailReadCache<any>({maxEntries:300,maxBytes:8*1024*1024,ttlMs:30*60*1000,expiresAt:sourceExpiry,concurrency:2,groupConcurrency:{detail:1},groupQueueTimeoutMs:{detail:50_000},shouldCache:value=>!value.stale&&!value.partial});
   // Stored recovery has its own bounded queue. It must neither occupy supplier
   // admission nor promote a visitor's stale result into the shared fresh cache.
   // Inspect exact already requested lists and metadata, never detail responses.
   // Separate bounded storage admission: a ready saved list must not wait
   // for two unrelated supplier requests. Names/counts have the same existing
   // observation deadline. No new shared TTL, source admission or feed crawl.
-  const preparedReads=new DetailReadCache<any>({maxEntries:300,maxBytes:8*1024*1024,ttlMs:30*60*1000,concurrency:2,maxQueued:32,queueTimeoutMs:5000,shouldCache:value=>{
+  const preparedReads=new DetailReadCache<any>({maxEntries:300,maxBytes:8*1024*1024,ttlMs:30*60*1000,expiresAt:sourceExpiry,concurrency:2,maxQueued:32,queueTimeoutMs:5000,shouldCache:value=>{
     const age=Date.now()-Date.parse(value?.observedAt||'');
     const supported=value?.schemaVersion===2||Array.isArray(value?.makes)||Array.isArray(value?.models)||Array.isArray(value?.colors)||Number.isSafeInteger(value?.total);
     return supported&&!value.stale&&!value.partial&&age>=0&&age<30*60*1000;
@@ -64,6 +65,7 @@ export function createAjesClient(deps:Dependencies) {
       // even when an old link or saved owner setting still requests them.
       assertAjesJapanTable(input&&typeof input==='object'?(input as AjesQuery).table:undefined);
       const query=ajesQuery(input,deps.calculationIndex?.()||null);
+      const cacheSql=ajesSourceCacheSql(query.sql);
       if(!isIP(clientIp)) throw new AjesUnavailable('client_ip_missing');
       await deps.assertEnabled(query.table); // Also applies to cache hits after an owner disables the source.
       const password=await deps.password();
@@ -71,7 +73,7 @@ export function createAjesClient(deps:Dependencies) {
       // A valid year interval outside admission policy is known empty, not a failure.
       // Retain visitor and owner-switch checks even when no supplier request is needed.
       if(query.kind!=='detail'&&query.empty)return {schemaVersion:2,items:[],total:0,colors:query.kind==='colors'?[]:undefined,models:query.kind==='models'?[]:undefined,makes:query.kind==='makes'?[]:undefined,page:query.page,pageSize:query.pageSize,received:0,rejected:0,stale:false,observedAt:new Date().toISOString()};
-      const visitorKey=clientIp+"\0"+query.sql;
+      const visitorKey=clientIp+"\0"+cacheSql;
       const quotaKey='quota:'+query.table+((query.kind==='count'||query.kind==='makes')?':count':'');
       const isUsable=(saved:any)=>{const age=Date.now()-Date.parse(saved?.observedAt||'');return age>=0&&age<7*24*60*60*1000&&Array.isArray(saved?.items)&&saved.items.length<=query.pageSize
           &&saved.page===query.page&&saved.pageSize===query.pageSize
@@ -92,7 +94,7 @@ export function createAjesClient(deps:Dependencies) {
       };
       // Detail responses keep their separate identity-bound cache path.
       const inspectPrepared=query.kind!=='detail';
-      const inMemory=inspectPrepared?cache.peekFresh(query.sql):undefined;
+      const inMemory=inspectPrepared?cache.peekFresh(cacheSql):undefined;
       if(inMemory!==undefined)return inMemory;
       // Reuse only this visitor's already recovered result while the original
       // refusal cooldown is active. Looking it up after queue/storage work made
@@ -104,20 +106,28 @@ export function createAjesClient(deps:Dependencies) {
         await deps.assertEnabled(query.table);
         return recovered;
       }
-      let prepared:any=null;
-      if(inspectPrepared&&deps.readQuery){
-        prepared=await preparedReads.get(query.sql,()=>deps.readQuery!(query.sql),query.sql,'prepared').catch(()=>null);
-      }
       const freshPrepared=(value:any)=>{
         const age=Date.now()-Date.parse(value?.observedAt||'');
         const schema=['count','models','makes','colors'].includes(query.kind)||value?.schemaVersion===2;
         return isUsable(value)&&schema&&!value.stale&&!value.partial&&age<30*60*1000;
       };
+      let prepared:any=null;
+      if(inspectPrepared&&deps.readQuery){
+        prepared=await preparedReads.get(cacheSql,async()=>{
+          const canonical=await deps.readQuery!(cacheSql);
+          if(cacheSql===query.sql||freshPrepared(canonical))return canonical;
+          // Read the previous compact-key cache only when the shared key has no
+          // fresh result. Both keys denote exactly the same unfiltered raw rows.
+          const original=await deps.readQuery!(query.sql);
+          if(freshPrepared(original))return original;
+          return isUsable(original)&&(!isUsable(canonical)||Date.parse(original.observedAt)>Date.parse(canonical.observedAt))?original:canonical;
+        },cacheSql,'prepared').catch(()=>null);
+      }
       if(inspectPrepared&&freshPrepared(prepared)){
         await deps.assertEnabled(query.table);
         return query.kind==='list'?remember({...prepared,stale:false}):{...prepared,stale:false};
       }
-      return cache.get(query.sql,async()=>{
+      return cache.get(cacheSql,async()=>{
         await deps.assertEnabled(query.table); // Recheck after waiting for concurrency slot.
         // Only successful, user-requested responses are retained; never crawl the database.
         let saved:any=prepared;
@@ -131,11 +141,10 @@ export function createAjesClient(deps:Dependencies) {
         let requestStarted=false,httpStatus:number|null=null,providerCode:string|null=null;
         const startedAt=new Date().toISOString();
         const controller=new AbortController();
-        // A power-filter request must never hold a visitor behind a slow
-        // supplier scan. The local encyclopedia has already been applied before
-        // post-filtering, so fail fast and use a bounded saved page when possible.
-        const encyclopediaPowerList=query.kind==='list'&&(query.powerFrom!==undefined||query.powerTo!==undefined);
-        const timer=setTimeout(()=>controller.abort(),encyclopediaPowerList?4500:20000);
+        // Power is a local selection over the same requested raw page. It uses
+        // the ordinary source deadline, not a shorter deadline that discards
+        // otherwise valid responses and unnecessarily falls back to old rows.
+        const timer=setTimeout(()=>controller.abort(),20000);
         try {
           const cooldown=cooling(quotaKey)||cooling('visitor:'+clientIp)||cooling(visitorKey);
           if(cooldown)throw new AjesUnavailable(cooldown);
@@ -177,7 +186,7 @@ export function createAjesClient(deps:Dependencies) {
             if(makes?.some(m=>!m.make))throw new AjesUnavailable('invalid_response');
             const colors=query.kind==='colors'?rows.map(r=>({color:String(r.COLOR??r.color??'').trim(),total:totalOf(r)})).filter(r=>r.color):undefined;
             const result={items:[],models,makes,colors,total:query.kind==='count'?totalOf(rows[0]):undefined,page:query.page,pageSize:query.pageSize,received:rows.length,rejected:0,stale:false,observedAt:new Date().toISOString()};
-            if(deps.saveQuery)persist(()=>deps.saveQuery!(query.sql,result));
+            if(deps.saveQuery)persist(()=>deps.saveQuery!(cacheSql,result));
             return result;
           }
           const items=rows.map(r=>ajesLot(r,query.table,query.kind==='detail')).filter(Boolean);
@@ -199,20 +208,22 @@ export function createAjesClient(deps:Dependencies) {
           }
           // A cache storage outage must not discard a successful provider response.
           if(query.kind==='detail'&&items.length===1&&deps.saveDetail)persist(()=>deps.saveDetail!(query.table,query.id!,result));
-          if(query.kind==='list'&&deps.saveQuery)persist(()=>deps.saveQuery!(query.sql,result));
+          if(query.kind==='list'&&deps.saveQuery)persist(()=>deps.saveQuery!(cacheSql,result));
 
           return query.kind==='list'?remember(result):result;
         }catch(error){
           // Never propagate URLs, provider bodies, credentials or nested fetch causes to logs.
-          const recoverable=!(error instanceof AjesUnavailable)||['visitor_restricted','request_failed','request_timeout','connect_timeout','quota_exhausted','quota_busy','invalid_response','empty_response','query_too_large'].includes(error.reason)||/^http_(429|5\d\d)$/.test(error.reason);
-          if(error instanceof AjesUnavailable&&recoverable){
-            const key=error.reason==='quota_exhausted'?quotaKey:error.reason==='visitor_restricted'?'visitor:'+clientIp:visitorKey;
-            // Do not extend an existing cooldown when merely reading the cached failure.
-            if(!cooling(key))failures.set(key,{reason:error.reason,until:Date.now()+(error.reason==='visitor_restricted'?300000:30000)});
-            while(failures.size>500)failures.delete(failures.keys().next().value!);
-          }
           const code=(error as any)?.cause?.code;
           const failure=error instanceof AjesUnavailable?error:new AjesUnavailable(controller.signal.aborted?'request_timeout':code==='UND_ERR_CONNECT_TIMEOUT'?'connect_timeout':'request_failed');
+          const recoverable=!(error instanceof AjesUnavailable)||['visitor_restricted','request_failed','request_timeout','connect_timeout','quota_exhausted','quota_busy','invalid_response','empty_response','query_too_large'].includes(error.reason)||/^http_(429|5\d\d)$/.test(error.reason);
+          if(recoverable){
+            const key=failure.reason==='quota_exhausted'?quotaKey:failure.reason==='visitor_restricted'?'visitor:'+clientIp:visitorKey;
+            // Native network/abort errors need the same visitor-local cooldown;
+            // otherwise every power toggle repeats the failed source request.
+            // Do not extend an existing cooldown when merely reading the cached failure.
+            if(!cooling(key))failures.set(key,{reason:failure.reason,until:Date.now()+(failure.reason==='visitor_restricted'?300000:30000)});
+            while(failures.size>500)failures.delete(failures.keys().next().value!);
+          }
           // Throttle fixed page/kind slots independently: a first-page failure
           // must not suppress continuation evidence. Cooldown is not a request.
           const failureSlot=ajesFailureSlot(query);

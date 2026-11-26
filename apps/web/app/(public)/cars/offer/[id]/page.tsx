@@ -1,3 +1,4 @@
+import {japanSupplierPowerLabel,japanUnknownPower} from "@/lib/catalog/japan-source-power";
 import {retiredAjesOffer} from '@/lib/catalog/ajes-access-policy';
 import {isGreenCornerOffer} from "@/lib/catalog/green-corner-contract";
 import {DeferredOfferRecommendations} from "@/components/catalog/DeferredOfferRecommendations";
@@ -361,6 +362,7 @@ async function OfferPageContent({ params, searchParams }: { params: Promise<{ id
         <StickyOfferColumn>
           {auctionStatus ? <div className="mb-3 xl:hidden">{auctionStatus}</div> : null}
           <div id="offer-parameters" className="scroll-mt-24"/>
+          {japanSupplierPowerLabel(raw)?<p className="mb-3 text-sm font-bold text-[var(--ac-muted)]" data-japan-supplier-power>{japanSupplierPowerLabel(raw)}</p>:japanUnknownPower(raw)?<p className="mb-3 text-sm text-[var(--ac-muted)]" data-japan-power-unknown>Мощность не указана</p>:null}
           {retro ? <section className="rounded-[1.35rem] border border-[var(--ac-border)] bg-[var(--ac-surface)] p-5 text-[var(--ac-text)]" data-retro-offer>
             <span className="inline-flex rounded-full border border-[var(--ac-border)] px-3 py-1 text-xs font-bold">Ретро</span>
             <h2 className="mt-4 text-3xl font-black">Цена по запросу</h2>

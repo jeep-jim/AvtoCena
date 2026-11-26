@@ -15,7 +15,7 @@ test('last China page beyond 10000 reaches search; invalid offsets never do',asy
   'ajes-error-response':'export const ajesErrorResponse=()=>{};',
   'ajes-catalog':'export const readAjesCatalogPage=()=>{};export const readAjesCountSummary=()=>{};export const withAjesCount=x=>x;',
   'market-page':'export const readCatalogMarketPage=q=>globalThis.__marketBoundary(q);',
-  'runtime-config':"export const PUBLIC_CATALOG_MARKET_SET=new Set(['china']);",
+  'runtime-config':"export const PUBLIC_CATALOG_MARKETS=['china'];export const PUBLIC_CATALOG_MARKET_SET=new Set(PUBLIC_CATALOG_MARKETS);",
   'engine-input':'export const parseEngineCc=()=>undefined;',
   'live-business-pricing':'export const applyActiveBusinessPricingBatch=x=>x;',
   'server':'export const NextResponse={json:(body,init)=>Response.json(body,init)};',

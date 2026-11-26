@@ -106,7 +106,7 @@ test('public direct AJ IDs and retired queries stop before saved details, rates 
   './ajes-runtime':'export const ajesClient={read:()=>{throw Error("must not read supplier");}};',
   'next/headers':'export const headers=()=>{throw Error("must not read headers");};',
   './rates':'export const convertToRub=()=>{throw Error("must not read rates");};',
-  './editorial':'export const applyCatalogEditorial=()=>{};export const editorialHidden=()=>{};export const readCatalogEditorial=()=>{throw Error("must not read editorial");};',
+  './editorial':'export const applyCatalogEditorial=()=>{};export const editorialHidden=()=>{};export const matchingEditorial=()=>{throw Error("must not read editorial");};export const readCatalogEditorial=()=>{throw Error("must not read editorial");};',
   './japan-owner-specifications':'export const applyJapanOwnerSpecifications=x=>x;',
   './japan-drive':'export const enrichJapanDrive=x=>x;export const japanDriveSql=()=>"";',
   '../encyclopedia/japan-fuel-reference':'export const applyJapanFactoryFuel=x=>x;',
@@ -146,7 +146,7 @@ test('detail, metadata and recommendations cannot revive retired AJ IDs from sha
   'next/cache':'export const unstable_cache=fn=>fn;',
   './management-knowledge':'export const attachManagementKnowledge=()=>{throw Error("must not read knowledge");};',
   './collection-controls':'export class CollectionDisabledError extends Error{};',
-  './editorial':'export const applyCatalogEditorial=()=>{};export const editorialHidden=()=>{};export const readCatalogEditorial=()=>{throw Error("must not read editorial");};',
+  './editorial':'export const applyCatalogEditorial=()=>{};export const editorialHidden=()=>{};export const matchingEditorial=()=>{throw Error("must not read editorial");};export const readCatalogEditorial=()=>{throw Error("must not read editorial");};',
   './storage':'const fail=()=>{throw Error("must not read stored offer");};export const getOfferWithoutEditorial=fail,getOfferFromCurrentShard=fail,getOfferFromCurrentProjection=fail,isJapanCatalogOfferId=fail;',
   './prepared-china-http-fixture':'export class PreparedChinaFixtureUnavailable extends Error{};const fail=()=>{throw Error("must not read prepared catalog");};export const hasPreparedChinaHttpFixture=fail,hasIndependentChinaHttpFixture=fail,assertIndependentChinaFallbackAllowed=fail,readPreparedChinaFixtureOffer=fail,preparedChinaNormalRegcloudEnabled=fail;',
  });

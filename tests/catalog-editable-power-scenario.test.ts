@@ -75,7 +75,11 @@ test("an electrified horsepower scenario cannot replace certified 30-minute powe
 test("existing power control remains available alongside linked modification selection", () => {
   assert.match(offerPage, /InlineOfferParameters/);
   assert.match(offerPage, /calculateOfferWithUserPowerScenario/);
-  assert.match(offerPage, /searchParams\?: Promise<\{ powerHp\?: string; modificationId\?: string; direct\?: string; calculation\?:\s*string;estimate\?:string;preview\?:string;dealer\?:string;edit\?:string \}>/);
+  const parameters = offerPage.match(/searchParams\?:\s*Promise<\{([^}]+)\}>/)?.[1];
+  assert.ok(parameters, 'the page retains typed optional query parameters');
+  for (const name of ['powerHp', 'modificationId', 'direct', 'calculation', 'estimate', 'preview', 'dealer', 'edit']) {
+    assert.match(parameters, new RegExp('\\b' + name + '\\?\\s*:\\s*string\\b'), name);
+  }
   assert.match(editableTile, /Выбрать или ввести мощность в лошадиных силах/);
   assert.match(editableTile, /setTimeout\(\(\) => commitManual\(value\), 500\)/);
   assert.doesNotMatch(editableTile, /type="submit"|Пересчитать по введённой мощности/);

@@ -4,6 +4,7 @@ import {SpecialRail} from '@/components/dealers/SpecialRail';
 import {withAjesCount} from '@/lib/catalog/ajes-catalog';
 import {Suspense} from 'react';
 import {AjesRail,readAjesRailData} from '@/components/catalog/AjesRail';
+import {JapanRailLoading} from '@/components/catalog/JapanRailFrame';
 import {WEBSITE_SCHEMA} from '@/lib/catalog/search-metadata';
 import {DealerCitySync} from "@/components/dealers/DealerCitySync";
 import {readShowcase} from "@/lib/dealers/showcase-store";
@@ -48,8 +49,9 @@ export async function generateMetadata({ searchParams }: { searchParams?: Promis
   };
 }
 
-function HomeJapanRail({timing}:{timing:ReturnType<typeof createHomePhaseTiming>}){
- return <AjesRail prepared={timing.measure("japanRail",()=>readAjesRailData("japan"))}/>;
+function HomeJapanRail({timing,city}:{timing:ReturnType<typeof createHomePhaseTiming>;city:string}){
+ const params=city?{city}:{};
+ return <AjesRail params={params} prepared={timing.measure("japanRail",()=>readAjesRailData("japan",params))}/>;
 }
 async function DealerGallery({dealer}:{dealer:ReturnType<typeof readShowcase>}){
  const value=await dealer;
@@ -114,7 +116,7 @@ export default async function HomePage({ searchParams }: { searchParams?: Promis
     <DealerCitySync/>
     <div className={styles.scope}>
       <HomePageClient
-        japanAuctions={<Suspense fallback={null}><HomeJapanRail timing={timing}/></Suspense>}
+        japanAuctions={<Suspense fallback={<JapanRailLoading params={{city:fromQuery||fromCookie}}/>}><HomeJapanRail timing={timing} city={fromQuery||fromCookie}/></Suspense>}
         dealerGallerySlot={<Suspense fallback={<div className="min-h-[160px]" aria-busy="true"/>}><DealerGallery dealer={dealer}/></Suspense>}
         specialRailSlot={<Suspense fallback={null}><DealerSpecials dealer={dealer} city={fromQuery || fromCookie} timing={timing}/></Suspense>}
         initialGreen={{items:greenItems,total:green?.items.length || 0}}

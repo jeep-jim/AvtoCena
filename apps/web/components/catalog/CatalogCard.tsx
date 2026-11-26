@@ -1,5 +1,6 @@
 "use client";
 import {japanPowerEstimateLabel} from "@/lib/catalog/ajes-power-estimate";
+import {japanSupplierPowerLabel,japanUnknownPower} from "@/lib/catalog/japan-source-power";
 import {isPriceOnRequestDubicarsOffer} from "@/lib/catalog/dubicars-owner-policy";
 import {isRetroOffer} from "@/lib/catalog/retro-offer";
 import {useState} from "react";
@@ -75,7 +76,9 @@ export function CatalogCard({ offer, compact = false, dense = false, eagerPrefet
   const o = { ...presented, marketLabel: catalogMarketLabel(normalizedOffer.market), images: rankedImages };
   const powerDisplay = catalogPowerDisplay(normalizedOffer);
   const powerScenario = readCatalogPowerScenario(normalizedOffer);
-  const japanPowerLabel = japanPowerEstimateLabel(normalizedOffer);
+  const supplierPowerLabel = japanSupplierPowerLabel(normalizedOffer);
+  const unknownJapanPower = japanUnknownPower(normalizedOffer);
+  const japanPowerLabel = supplierPowerLabel || (unknownJapanPower ? "" : japanPowerEstimateLabel(normalizedOffer));
   const powerInfo = powerScenario ? null : recyclingPowerInfo(normalizedOffer);
   const powertrainKind = String(normalizedOffer.powertrainKind || "").toLowerCase();
   const fuelKind = String(normalizedOffer.fuel || o.fuelLabel || "").toLowerCase();
@@ -124,7 +127,7 @@ export function CatalogCard({ offer, compact = false, dense = false, eagerPrefet
       <IntentPrefetchLink href={href} eager={eagerPrefetch} className="ac-list-photo">{imageUrl?<CatalogCover src={imageUrl} alt={o.title} eager={eagerPrefetch}/>:<span>Нет фото</span>}</IntentPrefetchLink>
       <div className="ac-list-identity"><IntentPrefetchLink href={href} eager={eagerPrefetch}><strong>{o.title}</strong></IntentPrefetchLink><span>{retro?"Ретро · ":""}{priceLabel} · {o.marketLabel}</span>{normalizedOffer.auctionName&&<small title={String(normalizedOffer.auctionName)}>Аукцион · {String(normalizedOffer.auctionName)}</small>}</div>
       <div className="ac-list-body"><span>{normalizedOffer.market==="japan"&&!isGreenCornerOffer(offer)?`Лот ${o.lotNumber||"уточняется"}`:o.transmissionLabel==="уточняется"?"КПП уточняется":o.transmissionLabel}</span>{(o.operational?.chassisCode||o.chassisCode)?<ChassisCopy code={String(o.operational?.chassisCode||o.chassisCode)}/>:<small>{o.bodyLabel&&o.bodyLabel!=="уточняется"?o.bodyLabel:"Кузов уточняется"}</small>}</div>
-      <div className="ac-list-engine"><span>{engineLabel}</span><small>{powerScenario?`${Math.round(powerScenario.horsepower)} л.с. · уточнить`:o.powerHp?`${Number(o.powerHp).toLocaleString("ru-RU")} л.с.`:japanPowerLabel||powerDisplay?.thirtyMinuteLabel||"Мощность уточняется"}</small><small>{o.driveLabel==="уточняется"?"Привод уточняется":o.driveLabel}</small></div>
+      <div className="ac-list-engine"><span>{engineLabel}</span><small data-japan-supplier-power={supplierPowerLabel?"true":undefined} data-japan-power-unknown={unknownJapanPower||undefined}>{powerScenario?`${Math.round(powerScenario.horsepower)} л.с. · уточнить`:o.powerHp?`${Number(o.powerHp).toLocaleString("ru-RU")} л.с.`:japanPowerLabel||(unknownJapanPower?"Мощность не указана":powerDisplay?.thirtyMinuteLabel||"Мощность уточняется")}</small><small>{o.driveLabel==="уточняется"?"Привод уточняется":o.driveLabel}</small></div>
       <div className="ac-list-mileage"><span>{Number.isFinite(o.mileageKm)?`${Number(o.mileageKm).toLocaleString("ru-RU")} км`:"Пробег уточняется"}</span></div>
       <div className="ac-list-price">{selectionRequired?<strong>Выбрать модификацию</strong>:<CatalogPrice showSaleDate offer={displayOffer} label="" dense priceClassName="text-[18px]"/>}</div>
     </div><FavoriteToggle offerId={o.id} compact snapshot={snapshot} className="ac-list-favorite"/>
@@ -156,7 +159,8 @@ export function CatalogCard({ offer, compact = false, dense = false, eagerPrefet
               ? <span className={tagClass}><PowerIcon dense={dense} /><RecyclingPowerLabel hpLabel={o.powerHp ? `${Number(o.powerHp).toLocaleString("ru-RU", {maximumFractionDigits:2})} л.с.` : ""} info={null} kw={o.powerKw} showKw /></span>
               : o.powerHp
               ? <span className={`${tagClass} ${powerInfo?.borderline ? powerStyles.warningChip : ""}`} title={powerInfo?.reason} data-recycling-power-chip={powerInfo?.borderline || undefined}><PowerIcon dense={dense} /><RecyclingPowerLabel hpLabel={`${Number(o.powerHp).toLocaleString("ru-RU", {maximumFractionDigits:2})} л.с.`} info={powerInfo} kw={o.powerKw} showKw={Boolean(o.powerKw)} /></span>
-              : japanPowerLabel ? <span className={tagClass} title="Предварительные данные мощности; проверьте по документам"><PowerIcon dense={dense}/><span>{japanPowerLabel}</span></span>
+              : japanPowerLabel ? <span className={tagClass} data-japan-supplier-power={supplierPowerLabel?"true":undefined} title={supplierPowerLabel?"Мощность в л.с. по данным поставщика; расчётная мощность проверяется отдельно":"Предварительные данные мощности; проверьте по документам"}><PowerIcon dense={dense}/><span>{japanPowerLabel}</span></span>
+              : unknownJapanPower ? <span className={tagClass} data-japan-power-unknown><PowerIcon dense={dense} /><span>Мощность не указана</span></span>
               : !isElectrified ? <span className={tagClass}><PowerIcon dense={dense} /><span>Мощность уточняется</span></span> : null}
             {powerDisplay ? <span className={tagClass} title={powerDisplay.sourceLabel}><ThirtyMinuteIcon dense={dense} /><span>{powerDisplay.thirtyMinuteLabel}</span></span> : null}
             {powerDisplay?.utilizationLabel ? <span className={tagClass} title="Мощность, по которой рассчитывается утилизационный сбор"><ThirtyMinuteIcon dense={dense} /><span>{powerDisplay.utilizationLabel}</span></span> : null}

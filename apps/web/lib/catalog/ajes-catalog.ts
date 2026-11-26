@@ -6,6 +6,7 @@ import {resolveAjesMakeNames} from './ajes-make-resolution';
 import 'server-only';
 import {resolveAjesQueryModels} from './ajes-model-resolution';
 import {ajesResultFilter} from './ajes-result-filter';
+import {japanPowerFilterSummary} from './japan-source-power';
 import {applyActiveBusinessPricingBatch} from './live-business-pricing';
 import {hasEncyclopediaCalculationEvidence} from '../encyclopedia/calculation-evidence';
 import {assertCollectionEnabled} from './collection-controls';
@@ -40,8 +41,8 @@ export const readAjesCountSummary=cache(async(key='{}'):Promise<AjesCountSummary
  assertAjesJapanMarket(params.market);
  const filter=ajesResultFilter(params);
  if(filter.powerFilter){
-  // Supplier COUNT and directory resolution cannot know the locally enriched
-  // horsepower. Return immediately; never occupy a supplier slot for a false total.
+  // Supplier COUNT cannot apply local overrides and the explicit unknown-power
+  // inclusion rule. Do not spend a supplier request on an inexact power total.
   return {total:0,stale:false,observedAt:new Date().toISOString(),upperBound:true};
  }
  const resolved=await resolvedCatalogQuery(key);
@@ -83,7 +84,7 @@ export async function readAjesCatalogPage(params:Record<string,unknown>,measure?
  const read=async(sourcePage:number)=>{
   const received=await readAjesPublic({...query,page:sourcePage},{measure});
   if(modelDirectoryUnavailable&&!received.items.length)throw new AjesUnavailable('directory_unavailable');
-  // Apply locally verified technical filters before delivered-price previews.
+  // Apply local/manual and supplier discovery filters before delivered-price previews.
   // Non-matching cars never enter the expensive customs/management pipeline.
   const candidates=filter.powerFilter?received.items.filter(filter.matchesPower):received.items;
   const page={...received,items:candidates,...(modelDirectoryUnavailable?{partial:true}:{})};
@@ -116,7 +117,8 @@ export async function readAjesCatalogPage(params:Record<string,unknown>,measure?
   read:async sourcePage=>{if(firstPromise&&sourcePage===(query.page||1))return first!;const value=await read(sourcePage);first??=value;return value;}});
  const exact=(query.page||1)===1&&!params.after&&!page.hasMore&&!page.partial&&!page.stale?page.items.length:null;
  const countSummary=exact!==null?{total:exact,upperBound:false,stale:false,observedAt:first!.observedAt}:total;
- return {...first,...page,page:query.page||1,filteredByPage:filter.active,total:exact,countSummary,items:(query.sort&&query.sort!=="updatedAt"?sortCatalogRows(page.items,query.sort,String(params.city||"")):page.items).map((v:any)=>publicOffer(v)),generationId:first!.observedAt};
+ const items=(query.sort&&query.sort!=="updatedAt"?sortCatalogRows(page.items,query.sort,String(params.city||"")):page.items).map((v:any)=>publicOffer(v));
+ return {...first,...page,page:query.page||1,filteredByPage:filter.active,total:exact,countSummary,...(filter.powerFilter?{powerFilterSummary:japanPowerFilterSummary(items)}:{}),items,generationId:first!.observedAt};
 }
 /** Add once to totals built from the separate local inventory. A failure is not zero inventory. */
 export async function withAjesCount<T extends {total:number;marketCounts?:Record<string,number>;independentChina?:boolean}>(value:T,params:Record<string,unknown>={}):Promise<T & {countIncomplete?:boolean;marketCountInfo:Record<string,AjesCountSummary|null>}>{

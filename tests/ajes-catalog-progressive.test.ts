@@ -7,7 +7,8 @@ const require=createRequire(import.meta.url);
 test('ready cards do not wait for optional brand/model directories; exact selected controls survive',async()=>{
  let calls=0;const never=new Promise(()=>{});
  let readyCount:any={total:1},countResult:any=never,readOptions:any,countKey='';
- (globalThis as any).__ajesTest={readAjesCatalogPage:async(_q:any,_measure:any,options:any)=>{readOptions=options;return {countSummary:readyCount,page:1,total:1,items:[{id:'car1',make:'Toyota',model:'COROLLA'}],hasMore:false};},readAjesMakes:()=>{calls++;return never;},readAjesDirectory:()=>{calls++;return never;},readAjesCountSummary:(key:string)=>{calls++;countKey=key;return countResult;}};
+ let items:any[]=[{id:'car1',make:'Toyota',model:'COROLLA'}];
+ (globalThis as any).__ajesTest={readAjesCatalogPage:async(_q:any,_measure:any,options:any)=>{readOptions=options;return {countSummary:readyCount,page:1,total:items.length,items,hasMore:false};},readAjesMakes:()=>{calls++;return never;},readAjesDirectory:()=>{calls++;return never;},readAjesCountSummary:(key:string)=>{calls++;countKey=key;return countResult;}};
  try{
   const built=await build({entryPoints:['apps/web/components/catalog/AjesCatalog.tsx'],bundle:true,platform:'node',format:'cjs',write:false,jsx:'automatic',external:['react','react/jsx-runtime'],plugins:[{name:'dependencies',setup(b){
    b.onResolve({filter:/.*/},args=>args.kind==='entry-point'||args.path==='react'||args.path==='react/jsx-runtime'?undefined:{path:args.path,namespace:'fixture'});
@@ -18,6 +19,8 @@ test('ready cards do not wait for optional brand/model directories; exact select
     if(args.path.endsWith('/ajes-client'))return {contents:'export class AjesUnavailable extends Error {}'};
     if(args.path.endsWith('/ajes-query'))return {contents:'export class AjesInputError extends Error {}'};
     if(args.path.endsWith('/ajes-count-display'))return {contents:'export const exactAjesCount=s=>s?.total;export const ajesCountText=s=>String(s?.total??"unknown");export const ajesPaginationCountText=ajesCountText;'};
+    if(args.path.endsWith('/japan-source-power'))return {contents:readFileSync('apps/web/lib/catalog/japan-source-power.ts','utf8'),loader:'ts'};
+    if(args.path.endsWith('/japan-owner-specifications'))return {contents:'export const isOwnerStepwgnNonHybrid=()=>false;'};
     if(args.path.endsWith('/CatalogSelectionContext'))return {contents:'export const CatalogResultCountUpdate=props=>null;'};
     if(args.path.endsWith('/ajes-runtime'))return {contents:'export const readSavedAjesFacets=()=>new Promise(()=>{});'};
     const name=args.path.split('/').pop();const exported=name==='DealerBrowsingContext'?'DealerLink':name;
@@ -35,9 +38,19 @@ test('ready cards do not wait for optional brand/model directories; exact select
   assert.equal(filters.props.initial.city,'Новокузнецк');assert.equal(filters.props.initial.make,'Toyota');
   assert.ok(filters.props.facets.makes.includes('Toyota'));assert.ok(nodes.some(n=>n.props?.initialCount===1));
   readyCount=null;
+  items=[
+   {id:'ajes-stats-local',market:'japan',make:'Toyota',model:'COROLLA',powerHp:150},
+   {id:'ajes-stats-supplier',market:'japan',make:'Toyota',model:'COROLLA',japanSupplierPower:{offerId:'ajes-stats-supplier',hp:160,unit:'hp',source:'ajes_pw'}},
+   {id:'ajes-stats-unknown',market:'japan',make:'Toyota',model:'COROLLA',japanPowerUnknown:true},
+  ];
   const lateRoot=await mod.exports.AjesCatalog({params:{market:'japan',powerTo:'160',city:'Новокузнецк'}});
   assert.equal(calls,0,'late count does not precede ready cards');
   const lateNodes=walk(lateRoot),late=lateNodes.find(n=>n.type?.name==='AjesIndependentCount');assert.ok(late);
+  const notice=lateNodes.find(n=>n.props?.['data-japan-power-summary-page']===1);assert.ok(notice);
+  const noticeText=notice.props.children.join('');
+  assert.match(noticeText,/Страница 1:/);assert.match(noticeText,/Мощность по данным поставщика: 1/);
+  assert.match(noticeText,/Мощность не указана: 1/);assert.match(noticeText,/Отбор не подтверждает право/);
+  assert.ok(lateNodes.some(n=>n.props?.initialCount===3),'summary refers to the actual three rendered cards');
   countResult=Promise.resolve({total:42});
   const counterNodes=walk(await late.type(late.props));
   assert.ok(counterNodes.some(n=>n.props?.text==='42'&&n.props?.total===42),'late aggregate includes the numeric pagination value');

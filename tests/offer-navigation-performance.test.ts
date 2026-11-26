@@ -95,7 +95,7 @@ test("non-runtime maintenance and documentation do not rebuild the web container
 test("catalog pricing shares one short-lived market-settings read", () => {
   assert.match(effectiveMarkets, /EFFECTIVE_MARKETS_CACHE_MS/);
   assert.match(effectiveMarkets, /getCachedMarketsSettings\(\)/);
-  assert.match(effectiveMarkets, /selectActiveMarketVersion\(market\)/);
+  assert.match(effectiveMarkets, /selectActiveMarketVersion\(market,\s*new Date\(catalogPricingNow\(\)\)\)/);
   assert.doesNotMatch(effectiveMarkets, /Promise\.all\(MARKET_IDS\.map/);
 });
 
@@ -156,8 +156,8 @@ test("offer detail falls back to its active admitted projection instead of 404",
   assert.match(storage, /return row && !isConfirmedSourceWithdrawn\(row\) && catalogInventoryAgeDecision\(row\)\.eligible && !catalogVehicleExcluded\(row\) \? offerDetailFromProjection\(row\) : null/);
   assert.match(storage, /export function isJapanCatalogOfferId/);
   assert.match(data, /isJapanCatalogOfferId\(id\)/);
-  assert.match(page, /await readOfferDetailForPage\(id\)/);
-  assert.match(data, /offer:await getOfferDetailRecord\(id\)/);
+  assert.match(page, /await readOfferDetailForPage\(id,!Boolean\(query\.calculation\|\|query\.estimate\|\|query\.edit\|\|query\.direct\|\|query\.modificationId\|\|safeRequestedPowerHp\),\{market:query\.market,city:query\.city,preparedCut:query\.preparedCut\}\)/);
+  assert.match(data, /const offer=await getOfferDetailRecord\(id\);/);
   assert.match(data, /getOfferFromCurrentShard\(id\)[\s\S]*getOfferForPage\(id\)[\s\S]*getOfferFromCurrentProjection\(id\)/);
   assert.match(data, /getOfferForPage\(id\)[\s\S]*getOfferFromCurrentShard\(id\)[\s\S]*getOfferFromCurrentProjection\(id\)/);
   assert.match(layout, /normalizeVehicleOfferSpecs\(storedOffer\)/);

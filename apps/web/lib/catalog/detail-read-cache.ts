@@ -20,6 +20,8 @@ export class DetailReadCache<T> {
     staleWhileRevalidateMs?: number;
     sizeOf?: (value: T) => number | undefined | Promise<number | undefined>;
     shouldCache?: (value: T) => boolean;
+    /** A source observation can expire before the ordinary memory TTL. */
+    expiresAt?: (value: T) => number;
   }) {}
 
   clear() {
@@ -107,7 +109,9 @@ export class DetailReadCache<T> {
             if (oldest === undefined) break;
             this.remove(oldest);
           }
-          this.entries.set(key, { value, bytes, expiresAt: now() + this.options.ttlMs });
+          const sourceExpiry=this.options.expiresAt?.(value);
+          const expiresAt=sourceExpiry===undefined?now()+this.options.ttlMs:Math.min(now()+this.options.ttlMs,Number.isFinite(sourceExpiry)?sourceExpiry:now());
+          this.entries.set(key, { value, bytes, expiresAt });
           this.bytes += bytes;
         }
         return value;

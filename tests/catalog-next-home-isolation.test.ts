@@ -140,6 +140,7 @@ test('homepage SSR survives the Green Corner pricing rejection in its shared Pro
   '@/lib/catalog/home-phase-timing':'export const createHomePhaseTiming=()=>({measure:(_name,work)=>work(),setGeneration:()=>{}});',
   '@/components/home/BuyerGallery':'export const BuyerGallery="BuyerGallery";',
   '@/components/dealers/SpecialRail':'export const SpecialRail="SpecialRail";',
+  '@/components/catalog/JapanRailFrame':'export const JapanRailLoading="JapanRailLoading";',
   '@/components/catalog/AjesRail':'export const AjesRail="AjesRail";export const readAjesRailData=async()=>{throw Error("rail must not be queried by this render")};',
   '@/lib/catalog/search-metadata':'export const WEBSITE_SCHEMA={};',
   '@/components/dealers/DealerCitySync':'export const DealerCitySync="DealerCitySync";',

@@ -15,6 +15,13 @@ export type AjesTable = 'stats' | 'main';
 export class AjesInputError extends Error { constructor() { super('ajes_invalid_query'); } }
 export type AjesQuery = {pickup?:boolean;salePeriod?:string; table?: AjesTable; aggregate?: 'count'|'models'|'makes'|'colors'; sort?: string; color?:string; fuel?:string; transmission?:string; drive?:string; auctionGrade?:string; id?: string; make?: string; model?: string; modelFamilies?:string; chassis?:string; frameNumber?:string; lotNumber?:string; sourcePriceTo?:number; powerFrom?:number; powerTo?:number; yearFrom?: number; yearTo?: number; mileageFrom?:number; mileageTo?: number; engineFrom?:number; engineTo?:number; page?: number; pageSize?: number};
 const keys = new Set(['pickup','salePeriod','aggregate','sort','color','fuel','transmission','drive','auctionGrade','table','id','make','model','modelFamilies','chassis','frameNumber','lotNumber','sourcePriceTo','powerFrom','powerTo','yearFrom','yearTo','mileageFrom','mileageTo','engineFrom','engineTo','page','pageSize']);
+/** These fixed predicates select the same raw rows. Sharing their cache identity
+ * lets local power changes reuse an already requested page without another AJ read.
+ * Keep the actual compact SQL on the wire for the existing URI-size boundary.
+ */
+export function ajesSourceCacheSql(sql:string):string {
+ return sql.replace(heavyVehicleSqlExclusion(false,false,true),heavyVehicleSqlExclusion());
+}
 function integer(value: unknown, fallback: number, min: number, max: number) {
   if (value === undefined) return fallback;
   if (typeof value !== 'number' || !Number.isSafeInteger(value) || value < min || value > max) throw new AjesInputError();
@@ -83,8 +90,9 @@ export function ajesQuery(input: unknown,driveIndex:CalculationIndex|null=null) 
   if(q.powerFrom!==undefined||q.powerTo!==undefined){
     const low=integer(q.powerFrom,1,1,2500),high=integer(q.powerTo,2500,1,2500);
     if(low>high)throw new AjesInputError();
-    // Power is deliberately not a supplier SQL predicate. The supplier returns
-    // car identity/photos; local encyclopedia enrichment decides eligibility.
+    // PW is integer hp, but source SQL cannot preserve contradictory local/manual
+    // overrides. Keep the raw candidate page shared with the unfiltered query;
+    // apply power and explicit unknown inclusion after local enrichment.
     // The bounded post-filter below prevents an unbounded scan of supplier pages.
   }
   if(q.aggregate!==undefined&&!['count','models','makes','colors'].includes(q.aggregate))throw new AjesInputError();
@@ -137,7 +145,8 @@ export function ajesLot(row: Record<string, unknown>, table: AjesTable, detail: 
     mileageKm:number('MILEAGE'),engineCc:number('ENG_V'),auction:text('AUCTION'),lot:text('LOT'),auctionDate:text('AUCTION_DATE'),grade:text('RATE'),
     status:text('STATUS'),currency:'JPY',sourcePrice:null,productionMonth:number('MONTH'),finalPriceJpy:sold?finish:null,startPriceJpy:table==='main'?(number('START')||null):null,
     // Supplier confirmed 2026-10-16: TIME is the fuel field; FUEL is a legacy alias.
-    // Ambiguous PW/PRIV remain source evidence, not invented specifications.
+    // PW is integer hp serialized in varchar(30), confirmed by AJ in November 2026.
+    // Preserve the wire value; strict discovery parsing must not invent components.
     sourcePower:text('PW'),sourceDrive:text('PRIV'),sourceTransmission:text('KPP'),sourceFuel:text('TIME')||text('FUEL'),sourceFuelField:text('TIME')?'TIME':text('FUEL')?'FUEL':undefined,
     info:detail?text('INFO'):undefined,
     sourceDate:undefined,

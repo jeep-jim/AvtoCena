@@ -7,7 +7,11 @@ const client = fs.readFileSync("apps/web/components/home/HomePageClient.tsx", "u
 const homeRoute = fs.readFileSync("apps/web/app/api/catalog/home/route.ts", "utf8");
 
 test("home page supplies a bounded server snapshot and recovers from storage errors", () => {
-  assert.match(page, /timing\.measure\("snapshot",\(\)=>readHomeCatalogSnapshot\(10\)\)\.then\(value=>\{timing\.setGeneration\(value\.generationId\);return timing\.measure\("counts",\(\)=>withAjesCount\(value\)\);\}\)\.catch/);
+  assert.match(page, /const snapshotPromise=timing\.measure\("snapshot",\(\)=>readHomeCatalogSnapshot\(10\)\)\.then\(value=>\{\s*timing\.setGeneration\(value\.generationId\);return value;\s*\}\);/);
+  assert.match(page, /const catalogPromise=snapshotPromise\.then\(value=>timing\.measure\("counts",\(\)=>withAjesCount\(value\)\)\)\.catch/);
+  assert.match(page, /const catalogPricingPromise=snapshotPromise\.then/);
+  assert.match(page, /const pricedItems=catalogFailed\?catalog\.items:pricedSnapshotItems/);
+  assert.equal((page.match(/readHomeCatalogSnapshot\(10\)/g) || []).length, 1);
   assert.match(page, /return \{ items: \[\], marketCounts: \{\}, total: 0, countIncomplete:true, marketCountInfo:\{\} \}/);
   assert.match(page, /initialCity=\{fromQuery \|\| fromCookie\}/);
   assert.match(page, /initialOffers=\{pricedItems\}/);
@@ -25,7 +29,8 @@ test("home API reads shared indexes once instead of seven complete searches", ()
   assert.match(implementation, /order-updatedAt\.json/);
   assert.match(implementation, /market\/\$\{cleanShard\(market\)\}\.json/);
   assert.doesNotMatch(implementation, /searchOffers\(/);
-  assert.match(storage, /if\(!editorialHasHidden\(market\)\)continue/);
+  assert.match(storage, /const retainedMarkets=MARKETS\.filter\(legacyAggregateMarketAllowed\)/);
+  assert.match(storage, /if\(editorialHasHidden\(market\)&&!homeSnapshotMarketIsEmpty\(snapshot,market\)\)/);
 });
 
 test("home client renders a stable skeleton and loads one catalog snapshot in the background", () => {

@@ -13,14 +13,14 @@ import {catalogHeavyVehicleExcluded} from '../apps/web/lib/catalog/inventory-adm
 import {heavyVehicleSqlExclusion} from '../apps/web/lib/catalog/heavy-vehicle-families';
 const row={ID:'test123',MARKA_NAME:'TOYOTA',MODEL_NAME:'TEST',YEAR:'2023',AUCTION_TYPE:'2',STATUS:'Sold',FINISH:'935000',START:'100000',PW:'49',PRIV:'FF,FULLTIME4WD',IMAGES:'https://7.tru.ru/imgs/testABC&h=50'};
 
-test('AJES power filter uses local encyclopedia power, never supplier PW as a specification',async()=>{
+test('AJES power filter preserves local priority and rejects unbound source values',async()=>{
  for(const table of ['stats','main'] as const){
   const sql=ajesQuery({table,powerTo:160}).sql;
   assert.doesNotMatch(sql,/pw\s*(?:>=|<=|>|<)/i);
  }
  const {ajesResultFilter}=await import('../apps/web/lib/catalog/ajes-result-filter');
  const filter=ajesResultFilter({market:'japan',powerTo:'160'});
- // Supplier PW alone is not sufficient, even when it claims a matching value.
+ // Source values require a Japanese AJ listing identity; arbitrary objects cannot qualify.
  assert.equal(filter.matches({sourceId:'ajes_japan_feed',operational:{raw:{sourcePower:'150'}}}),false);
  assert.equal(filter.matches({sourceId:'ajes_japan_feed',operational:{raw:{sourcePower:'250'}}}),false);
  // A locally enriched value wins over a contradictory supplier hint.
@@ -118,10 +118,16 @@ test('duplicate user requests coalesce; cache hits still obey source switch',asy
   enabled=false;await assert.rejects(client.read({},'127.0.0.1'),/disabled/);assert.equal(calls,1);
 });
 test('provider failures never expose its URL/body/secret and are not cached as no results',async()=>{
-  let calls=0;
-  const client=createAjesClient({password:()=> 'test-secret',assertEnabled:async()=>{},reserve:async()=>{},fetcher:async()=>{calls++;if(calls===1)throw Error('http://example/?code=test-secret');return new Response(JSON.stringify([row]));}});
-  await assert.rejects(client.read({},'127.0.0.1'),e=>String(e)==='Error: ajes_request_failed');
-  assert.equal((await client.read({},'127.0.0.1')).items.length,1);assert.equal(calls,2);
+  let calls=0,now=Date.now();
+  const clock=mock.method(Date,'now',()=>now);
+  try{
+    const client=createAjesClient({password:()=> 'test-secret',assertEnabled:async()=>{},reserve:async()=>{},fetcher:async()=>{calls++;if(calls===1)throw Error('http://example/?code=test-secret');return new Response(JSON.stringify([row]));}});
+    await assert.rejects(client.read({},'127.0.0.1'),e=>String(e)==='Error: ajes_request_failed');
+    await assert.rejects(client.read({},'127.0.0.1'),e=>String(e)==='Error: ajes_request_failed');
+    assert.equal(calls,1,'ordinary cooldown applies to native network errors too');
+    now+=30_001;
+    assert.equal((await client.read({},'127.0.0.1')).items.length,1);assert.equal(calls,2);
+  }finally{clock.mock.restore();}
 });
 test('wrong detail identity, oversized response and invalid JSON fail closed',async()=>{
   for(const response of [new Response(JSON.stringify([{...row,ID:'wrong'}])),new Response('secret error page'),new Response('[]',{headers:{'content-length':'3000000'}})]){
@@ -343,7 +349,6 @@ test('old normalized cache refreshes TIME on demand and remains available on sup
 
 import {mock} from 'node:test';
 import {validateCustomerParameters} from '../apps/web/lib/catalog/customer-parameters';
-import {ajesPowerEstimateHp} from '../apps/web/lib/catalog/ajes-power-estimate';
 import {offerSpecificationGroups} from '../apps/web/lib/catalog/offer-specification-groups';
 
 test('AJES detail keeps listing identity but never exposes supplier PW as a specification',()=>{

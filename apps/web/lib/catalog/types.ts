@@ -26,6 +26,8 @@ export type CatalogImage = {
 };
 
 export type VehicleOffer = {
+  japanSupplierPower?:import('./japan-source-power').JapanSupplierPower;
+  japanPowerUnknown?:true;
   fuelPowertrainEvidence?:import('./fuel-powertrain-evidence').FuelPowertrainEvidence;
   motorPeakKw?:number; batteryKwh?:number;
   astraPower30Evidence?:import('../encyclopedia/astra-power30-evidence').AstraPower30Evidence;

@@ -35,7 +35,7 @@ function clientProps(tree:any){
 }
 function dataProps(props:any){
  const {japanAuctions,dealerGallerySlot,specialRailSlot,...data}=props;
- assert.equal(japanAuctions.type,'Suspense');assert.equal(japanAuctions.props.fallback,null);
+ assert.equal(japanAuctions.type,'Suspense');assert.equal(japanAuctions.props.fallback.type,'JapanRailLoading');assert.deepEqual(japanAuctions.props.fallback.props.params,{city:'Москва'});assert.equal(japanAuctions.props.children.props.city,'Москва');
  assert.equal(dealerGallerySlot.type,'Suspense');assert.equal(dealerGallerySlot.props.fallback.props['aria-busy'],'true');
  assert.equal(specialRailSlot.type,'Suspense');assert.equal(specialRailSlot.props.fallback,null);
  return data;
@@ -76,6 +76,7 @@ async function homeFixture(t:any){
   'next/headers':'export const cookies=async()=>({get:()=>({value:encodeURIComponent("Казань")})});',
   '@/components/home/BuyerGallery':'export const BuyerGallery="BuyerGallery";',
   '@/components/dealers/SpecialRail':'export const SpecialRail="SpecialRail";',
+  '@/components/catalog/JapanRailFrame':'export const JapanRailLoading="JapanRailLoading";',
   '@/components/catalog/AjesRail':'export const AjesRail="AjesRail";export const readAjesRailData=async()=>{throw Error("unexpected eager Japan rail")};',
   '@/lib/catalog/search-metadata':'export const WEBSITE_SCHEMA={name:"АвтоЦена"};',
   '@/components/dealers/DealerCitySync':'export const DealerCitySync="DealerCitySync";',

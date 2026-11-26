@@ -7,48 +7,53 @@ import {DealerLink as Link} from '@/components/dealers/DealerBrowsingContext';
 import {AjesFilterUnavailable} from '@/lib/catalog/ajes-query';
 import {readAjesCatalogPage,readAjesCountSummary} from '@/lib/catalog/ajes-catalog';
 import {ajesCountText,exactAjesCount} from '@/lib/catalog/ajes-count-display';
-import {assertCollectionEnabled} from '@/lib/catalog/collection-controls';
+import {assertCollectionEnabled,CollectionDisabledError} from '@/lib/catalog/collection-controls';
 import {publicOffer} from '@/lib/catalog/storage';
 import {CatalogCard} from './CatalogCard';
-import {CatalogMarketFlag} from './CatalogMarketFlag';
+import {JapanRailFrame,japanRailHref,japanSavedPreviewText} from './JapanRailFrame';
+import {japanPowerFilterSummary,japanPowerFilterNotice} from '@/lib/catalog/japan-source-power';
 
-function railQuery(market:'japan'|'china'|'korea',params:Record<string,string|string[]|undefined>){assertAjesJapanMarket(market);return {...params,market,page:'1',pageSize:'12'};}
-export function readAjesRailCount(market:'japan'|'china'|'korea',params:Record<string,string|string[]|undefined>){return readAjesCountSummary(JSON.stringify(railQuery(market,params))).catch(()=>null);}
+function railQuery(market:'japan'|'china'|'korea',params:Record<string,string|string[]|undefined>){assertAjesJapanMarket(market);return {...params,market,page:'1',pageSize:'24'};}
+export async function readAjesRailCount(market:'japan'|'china'|'korea',params:Record<string,string|string[]|undefined>){
+ assertAjesJapanMarket(market);
+ try{await assertCollectionEnabled('ajes_japan_feed');return await readAjesCountSummary(JSON.stringify(railQuery(market,params)));}catch{return null;}
+}
 async function RailCount({market,params}:{market:'japan'|'china'|'korea';params:Record<string,string|string[]|undefined>}){
  const count=await readAjesRailCount(market,params);
  return <MarketResultCount total={exactAjesCount(count)??undefined}>{ajesCountText(count)}</MarketResultCount>;
 }
 export async function readAjesRailData(market:'japan'|'china'|'korea',params:Record<string,string|string[]|undefined>={}){
  assertAjesJapanMarket(market);
- try{await assertCollectionEnabled('ajes_japan_feed');}catch{return {disabled:true,items:[],count:null,unavailable:false,unsupported:false,partial:false,stale:false,filteredByPage:false,hasMore:false};}
+ try{await assertCollectionEnabled('ajes_japan_feed');}catch(error){
+  // Only an explicit owner switch hides the market. An unreadable settings
+  // store must remain fail-closed for the supplier, with a visible outage.
+  const disabled=error instanceof CollectionDisabledError;
+  return {disabled,items:[],count:null,unavailable:!disabled,unsupported:false,partial:false,stale:false,filteredByPage:false,hasMore:false,observedAt:undefined};
+ }
  try{
-  // A supplier page may contain rejected rows. One bounded extra row of candidates
-  // fills the six-card preview without pagination scans or bypassing admission.
+  // Reuse the normal first catalogue page for this six-card preview. A distinct
+  // twelve-row query would need a separate supplier/cache read for the same visit.
   // Optional counts must not take supplier slots before the visible list runs.
   // RailCount and the overview total already read counts after these rows.
   const page=await readAjesCatalogPage(railQuery(market,params),undefined,{includeCount:false});
-  return {disabled:false,items:page.items.slice(0,6),count:page.countSummary,unavailable:false,unsupported:false,partial:Boolean(page.partial),stale:Boolean(page.stale),filteredByPage:page.filteredByPage,hasMore:page.hasMore};
- }catch(error){return {disabled:false,items:[],count:null,unavailable:true,unsupported:error instanceof AjesFilterUnavailable,partial:false,stale:false,filteredByPage:false,hasMore:false};}
+  return {disabled:false,items:page.items.slice(0,6),count:page.countSummary,unavailable:false,unsupported:false,partial:Boolean(page.partial),stale:Boolean(page.stale),filteredByPage:page.filteredByPage,hasMore:page.hasMore,observedAt:page.observedAt};
+ }catch(error){return {disabled:false,items:[],count:null,unavailable:true,unsupported:error instanceof AjesFilterUnavailable,partial:false,stale:false,filteredByPage:false,hasMore:false,observedAt:undefined};}
 }
 type RailData=ReturnType<typeof readAjesRailData>;
 export async function AjesRail({market='japan',params={},prepared}:{market?:'japan'|'china'|'korea';params?:Record<string,string|string[]|undefined>;prepared?:RailData}={}){
  assertAjesJapanMarket(market);
- const label='Япония';
- const linkParams=new URLSearchParams(Object.entries(params).flatMap(([key,value])=>value?[[key,Array.isArray(value)?value[0]:value]]:[]));linkParams.set('market',market);linkParams.delete('page');linkParams.delete('source');
- const href='/cars?'+linkParams.toString();
- const {disabled,items,count,unavailable,unsupported,partial,stale,filteredByPage,hasMore}=await (prepared||readAjesRailData(market,params));
- if(disabled||(!unavailable&&!items.length&&!partial&&!stale&&!hasMore))return null;
+ const href=japanRailHref(params);
+ const {disabled,items,count,unavailable,unsupported,partial,stale,filteredByPage,hasMore,observedAt}=await (prepared||readAjesRailData(market,params));
+ if(disabled)return null;
  const total=exactAjesCount(count);
- return <section aria-label={label} className="min-w-0">
-  <div className="mb-3 flex items-end justify-between gap-3">
-   <h2 className="flex flex-wrap items-center gap-2 text-[26px] font-black tracking-[-0.04em] md:text-4xl"><CatalogMarketFlag market={market} className="h-5 w-7 md:h-6 md:w-9"/><span>{label}</span>{count?<MarketResultCount total={total??undefined}>{ajesCountText(count)}</MarketResultCount>:<Suspense fallback={<MarketResultCount>{ajesCountText(null)}</MarketResultCount>}><RailCount market={market} params={params}/></Suspense>}</h2>
-   <Link href={href} className="ac-market-all-link shrink-0 text-sm font-black">Все →</Link>
-  </div>
-
+ const powerNotice=params.powerFrom||params.powerTo?japanPowerFilterNotice(japanPowerFilterSummary(items)):'';
+ return <JapanRailFrame params={params} status={unavailable||unsupported?'unavailable':items.length?'ready':'empty'} count={count?<MarketResultCount total={total??undefined}>{ajesCountText(count)}</MarketResultCount>:<Suspense fallback={<MarketResultCount>{ajesCountText(null)}</MarketResultCount>}><RailCount market={market} params={params}/></Suspense>}>
   <CatalogSectionLoading/>
+  {powerNotice?<p role="status" className="mb-3 text-sm text-[var(--ac-muted)]">{powerNotice}</p>:null}
   {String(params.sort||'').split(',').some(term=>term.startsWith('totalRub'))&&<p className="mb-3 text-sm text-[var(--ac-muted)]">По рассчитанной цене в загруженной подборке.</p>}
-  {unsupported?<p role="status" className="text-sm text-[var(--ac-muted)]">Отбор по мощности доступен в <Link href={href+'&stock=green'} className="underline">Зелёном углу</Link>.</p>:unavailable?<p role="status" className="rounded-xl border border-[var(--ac-border)] p-4 text-sm">Не удалось загрузить автомобили. <Link href={href} className="underline">Открыть каталог</Link></p>:items.length?<div className={MARKET_RAIL_CLASS}>{items.map(offer=><div key={offer!.id} className="min-w-0"><CatalogCard offer={publicOffer(offer!)} compact dense/></div>)}</div>:<p className="text-sm text-[var(--ac-muted)]">{filteredByPage||partial||hasMore?'В загруженной подборке совпадений нет.':'Подходящих автомобилей пока нет.'} {(filteredByPage||partial||hasMore)&&<Link href={href} className="underline">Продолжить поиск</Link>}</p>}
- </section>;
+  {(partial||stale)&&items.length>0?<p role="status" className="mb-3 text-sm text-[var(--ac-muted)]">{stale?japanSavedPreviewText(observedAt):'Показана доступная часть подборки.'} <Link href={href} className="underline">Открыть каталог</Link></p>:null}
+  {unsupported?<p role="status" className="text-sm text-[var(--ac-muted)]">Не удалось применить выбранные условия. <Link href={href} className="underline">Открыть каталог</Link></p>:unavailable?<p role="status" className="rounded-xl border border-[var(--ac-border)] p-4 text-sm">Не удалось загрузить автомобили. <Link href={href} className="underline">Открыть каталог</Link></p>:items.length?<div className={MARKET_RAIL_CLASS}>{items.map(offer=><div key={offer!.id} className="min-w-0"><CatalogCard offer={publicOffer(offer!)} compact dense/></div>)}</div>:<p role="status" className="text-sm text-[var(--ac-muted)]">{filteredByPage||partial||hasMore||stale?'В загруженной подборке совпадений нет.':total===0?'По выбранным параметрам автомобили не найдены.':'В этой подборке автомобили пока не отображаются.'} <Link href={href} className="underline">Продолжить поиск</Link></p>}
+ </JapanRailFrame>;
 }
 
 export async function CatalogEmptyResults({localTotal,reads}:{localTotal:number;reads:RailData[]}){
