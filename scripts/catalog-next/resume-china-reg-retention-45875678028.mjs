@@ -56,6 +56,56 @@ export function safeError(error) {
   return 'operation_failed';
 }
 
+const AUTHORITY_FAILURE_REASONS = new Map([
+  ['china_state_storage_transport','storage_transport'],
+  ['china_state_storage_response_incomplete','storage_incomplete'],
+  ['china_state_conflict','conflict'],
+  ['china_state_write_not_committed','write_not_committed'],
+  ['china_state_lease_not_active','lease_not_active'],
+  ['china_state_lease_extension','lease_extension'],
+  ['china_state_read','storage_read'],
+  ['china_state_object_acl','object_acl'],
+  ['china_state_canonical_document','invalid_document'],
+  ['china_retention_resume_lease_lost','lease_lost']
+]);
+function authorityFailureReason(error) {
+  try { return AUTHORITY_FAILURE_REASONS.get(error?.message) ?? 'operation_failed'; }
+  catch { return 'operation_failed'; }
+}
+function gcTransportCategory(error) {
+  try {
+    if (error?.name === 'TimeoutError') return 'timeout';
+    if (error?.name === 'AbortError') return 'aborted';
+    const code = error?.cause?.code ?? error?.code;
+    if (['ETIMEDOUT','UND_ERR_CONNECT_TIMEOUT','UND_ERR_HEADERS_TIMEOUT'].includes(code)) return 'timeout';
+    if (['ENOTFOUND','EAI_AGAIN'].includes(code)) return 'dns';
+    if (['ECONNRESET','ECONNREFUSED','EPIPE','UND_ERR_SOCKET'].includes(code)) return 'connection';
+    if (['ERR_TLS_CERT_ALTNAME_INVALID','CERT_HAS_EXPIRED','DEPTH_ZERO_SELF_SIGNED_CERT',
+      'UNABLE_TO_VERIFY_LEAF_SIGNATURE'].includes(code)) return 'tls';
+    if (error?.name === 'TypeError') return 'network';
+  } catch {}
+  return 'unknown';
+}
+// Observe only an existing request rejection. Never inspect its URL, headers or
+// body, retry it, replace its signal, or change the original thrown error.
+function observedGcFetcher(fetcher, report) {
+  return async (...args) => {
+    let started; try { started = performance.now(); } catch {}
+    try { return await fetcher(...args); }
+    catch (error) {
+      if (!report.gcTransportFailure) {
+        try {
+          const method = args[1]?.method, elapsed = performance.now() - started;
+          report.gcTransportFailure = {category:gcTransportCategory(error),
+            method:['GET','HEAD','PUT','POST'].includes(method) ? method : 'unknown',
+            durationMs:Number.isFinite(elapsed) && elapsed >= 0 ? Math.round(elapsed) : null};
+        } catch {}
+      }
+      throw error;
+    }
+  };
+}
+
 export function verifyInvocation({root = ROOT, environment = process.env} = {}) {
   need(environment.GITHUB_WORKFLOW_REF === WORKFLOW && environment.GITHUB_JOB === 'resume-retention', 'workflow');
   // This maintenance has no schedule/manual shortcut: a reviewed marker-only
@@ -190,29 +240,39 @@ async function retireOnly({root, runnerTemp, environment, invocation, current, a
 }
 const heartbeat = (fn, interval) => { const timer = setInterval(fn, interval); timer.unref?.(); return () => clearInterval(timer); };
 export async function runRetention({root = ROOT, environment = process.env, capabilities = {},
-  now = () => new Date().toISOString(), scheduleHeartbeat = heartbeat} = {}) {
+  now = () => new Date().toISOString(), scheduleHeartbeat = heartbeat, fetcher = globalThis.fetch} = {}) {
   const defaults = {verifyInvocation, createStorage: args => createChinaStateStorage(args),
     createQueueStorage: args => createChinaGenerationGcQueueStorage(args),
     collectQueue: maintainChinaGenerationGcQueue, readDeadline, retireHost: retireOnly,
     writeReport: report => fs.writeFile(path.join(root, REPORT), JSON.stringify(report, null, 2) + '\n', {mode:0o600})};
   need(capabilities && Object.keys(capabilities).every(key => Object.hasOwn(defaults,key) && typeof capabilities[key] === 'function')
-    && typeof now === 'function' && typeof scheduleHeartbeat === 'function', 'arguments');
+    && typeof now === 'function' && typeof scheduleHeartbeat === 'function' && typeof fetcher === 'function', 'arguments');
   const use = {...defaults,...capabilities}, report = {version:1, kind:'china-reg-retention-resume-v1', market:'china',
     completed:false, status:'starting', currentGenerationId:PINS.current, allowedGenerations:[PINS.a,PINS.b],
     supplierRequests:0, sourcePreparations:0, applicationBuilds:0, publicationReservations:0,
     acceptedStateWrites:0, intentStateWrites:0, leaseAcquired:false, leaseReleased:false};
+  const gcFetcher = observedGcFetcher(fetcher, report);
   let state, lease, stopHeartbeat, expected, invocation, current, deadlineAt, authorityFailure, attemptedAcquire = false;
   const nonce = randomBytes(16).toString('hex');
   let queue = Promise.resolve();
   const serial = work => { const result = queue.then(work); queue = result.catch(() => {}); return result; };
   const at = () => { const value = now(); need(iso(value),'arguments'); return value; };
   const pair = async () => { const [accepted,intent] = await Promise.all([state.read('accepted'),state.read('intent')]); return {accepted,intent}; };
-  async function verifyLease() {
+  async function verifyLease(observeFailure = false) {
     if (authorityFailure) throw Error('china_retention_resume_lease_lost');
-    const observed = await state.read('lease'), time = Date.parse(at());
-    need(lease && sameObservation(observed,lease) && observed.value.status === 'held' && Date.parse(observed.value.expiresAt) > time, 'lease_lost');
-    if (Date.parse(lease.value.expiresAt) - time <= 450000)
-      lease = await state.renewLease({lease,expiresAt:new Date(time + 900000).toISOString()});
+    let phase = 'lease_read';
+    try {
+      const observed = await state.read('lease'), time = Date.parse(at());
+      need(lease && sameObservation(observed,lease) && observed.value.status === 'held' && Date.parse(observed.value.expiresAt) > time, 'lease_lost');
+      if (Date.parse(lease.value.expiresAt) - time <= 450000) {
+        phase = 'lease_renew';
+        lease = await state.renewLease({lease,expiresAt:new Date(time + 900000).toISOString()});
+      }
+    } catch (error) {
+      if (observeFailure && !report.authorityFailure)
+        report.authorityFailure = {phase,reason:authorityFailureReason(error)};
+      throw error;
+    }
   }
   const readState = () => serial(async () => {
     need(Date.parse(at()) < Date.parse(deadlineAt),'deadline'); await verifyLease();
@@ -243,11 +303,12 @@ export async function runRetention({root = ROOT, environment = process.env, capa
     report.leaseAcquired = true;
     expected = await pair(); current = verifyState(expected);
     report.currentRuntimeSha = current.runtimeSha; report.acceptedRevision = expected.accepted.value.revision;
-    stopHeartbeat = scheduleHeartbeat(() => { void serial(verifyLease).catch(error => { authorityFailure = safeError(error); }); },30000);
+    stopHeartbeat = scheduleHeartbeat(() => { void serial(() => verifyLease(true))
+      .catch(error => { authorityFailure ??= authorityFailureReason(error); }); },30000);
     need(typeof stopHeartbeat === 'function','arguments');
     await assertAuthority();
-    const queueStorage = scopedQueueStorage(await use.createQueueStorage({assertAuthority,environment}));
-    const result = await use.collectQueue({mode:'drain',deadlineAt,readState,assertAuthority,queueStorage,environment,now:at,
+    const queueStorage = scopedQueueStorage(await use.createQueueStorage({assertAuthority,environment,fetcher:gcFetcher}));
+    const result = await use.collectQueue({mode:'drain',deadlineAt,readState,assertAuthority,queueStorage,environment,now:at,fetcher:gcFetcher,
       beforeCollect: async args => {
         const reference = verifyTask(args.task);
         await args.assertAuthority(); const view = await readState();

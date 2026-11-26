@@ -7,6 +7,7 @@ import {execFileSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
 import {createChinaState} from '../scripts/catalog-next/china-state.mjs';
 import {maintainChinaGenerationGcQueue} from '../scripts/catalog-next/china-generation-gc-queue.mjs';
+import {createChinaGenerationGcStorage} from '../scripts/catalog-next/china-generation-gc.mjs';
 import {hash, copy, ordered, empty} from './helpers/catalog-next-gc-fixture.mjs';
 import {PINS, MARKER, WORKFLOW, OPERATION, verifyInvocation, leaseOnlyStorage, verifyTask,
   scopedQueueStorage, aggregateGc, readDeadline, runRetention}
@@ -115,6 +116,12 @@ async function fixture({codeAccepted=true}={}) {
     }
   };
   return f;
+}
+
+function deferred() {
+  let resolve, reject;
+  const promise=new Promise((yes,no)=>{resolve=yes;reject=no;});
+  return {promise,resolve,reject};
 }
 
 test('exact marker-only invocation is required; foreign workflow/repository/ref/attempt/manual/dirty source fail',async t=>{
@@ -237,6 +244,87 @@ test('foreign lease replacement is never released or used to continue collection
   assert.equal(report.completed,false);assert.equal(report.leaseReleased,false);assert.equal(report.leaseReleasePending,true);
   assert.equal((await f.storage.read('lease')).value.owner.runId,'9999');
   assert.equal((await f.storage.read('lease')).value.status,'held');assert(!f.calls.includes('collect'));
+});
+
+
+test('first heartbeat renewal failure survives later authority checks while the owned lease remains valid',{timeout:5000},async()=>{
+  const f=await fixture(), entered=deferred(), finish=deferred(), renewalFailed=deferred();
+  const originalCas=f.storage.compareAndSwap.bind(f.storage);
+  let collectorArgs, renewalAttempts=0;
+  f.storage.compareAndSwap=async(name,previous,next)=>{
+    if(name==='lease' && previous.value?.status==='held' && next.status==='held'){
+      renewalAttempts++;renewalFailed.resolve();
+      throw Error('china_state_storage_transport');
+    }
+    return originalCas(name,previous,next);
+  };
+  f.collector=async args=>{
+    collectorArgs=args;entered.resolve();await finish.promise;
+    await args.assertAuthority();
+    throw Error('collector_must_not_continue_after_authority_failure');
+  };
+  const running=runRetention(f.options());
+  await entered.promise;f.advance(8*60000);await f.heartbeat();await renewalFailed.promise;
+  await assert.rejects(collectorArgs.assertAuthority,/china_retention_resume_lease_lost/);
+  await f.heartbeat();
+  const held=await f.storage.read('lease');
+  assert.equal(held.value.status,'held');assert.equal(held.value.owner.runId,f.environment.GITHUB_RUN_ID);
+  assert(Date.parse(held.value.expiresAt)>Date.parse(f.now()));
+  finish.resolve();
+  const report=await running;
+  assert.equal(report.completed,false);assert.equal(report.errorCode,'lease_lost');
+  assert.deepEqual(report.authorityFailure,{phase:'lease_renew',reason:'write_not_committed'});
+  assert.equal(renewalAttempts,1);assert.equal(report.leaseReleased,true);
+  assert.equal(report.gcTransportFailure,undefined);
+  assert.equal(report.retention.pending,1);assert.equal(f.q.tasks.size,1);
+  assert.deepEqual(await f.storage.read('accepted'),f.expected.accepted);
+  assert.deepEqual(await f.storage.read('intent'),f.expected.intent);
+  assert(f.writes.every(name=>name==='lease'));
+  assert(!JSON.stringify(report).includes(PRIVATE));
+});
+
+test('independent collector transport and heartbeat read failure retain separate bounded causes',{timeout:5000},async()=>{
+  const f=await fixture(), transport=deferred(), started=deferred(), heartbeatFailed=deferred();
+  const originalRead=f.storage.read.bind(f.storage);
+  let collectorArgs, failLeaseRead=false, requests=0;
+  f.storage.read=async name=>{
+    if(name==='lease' && failLeaseRead){
+      failLeaseRead=false;heartbeatFailed.resolve();throw Error('china_state_storage_transport');
+    }
+    return originalRead(name);
+  };
+  f.collector=async args=>{
+    collectorArgs=args;await args.assertAuthority();
+    const storage=createChinaGenerationGcStorage({owner:args.previousAccepted.value.rollback.owner,
+      assertAuthority:args.assertAuthority,fetcher:args.fetcher,environment:{
+        YC_OBJECT_STORAGE_ENDPOINT:'https://s3.regru.cloud',YC_OBJECT_STORAGE_REGION:'us-east-1',
+        YC_OBJECT_STORAGE_BUCKET:'avtocena-staging-8120751',YC_OBJECT_STORAGE_PREFIX:'migration-staging/full-20261011/',
+        YC_OBJECT_STORAGE_ACCESS_KEY_ID:'fixture',YC_OBJECT_STORAGE_SECRET_ACCESS_KEY:PRIVATE}});
+    await storage.assertPrivateBucket();
+    throw Error('collector_must_not_continue_after_transport_failure');
+  };
+  const running=runRetention({...f.options(),fetcher:async(_url,options)=>{
+    requests++;assert.equal(options.method,'GET');assert.equal(options.redirect,'error');
+    assert.equal(options.signal.aborted,false);started.resolve();return transport.promise;
+  }});
+  await started.promise;failLeaseRead=true;await f.heartbeat();await heartbeatFailed.promise;
+  await assert.rejects(collectorArgs.assertAuthority,/china_retention_resume_lease_lost/);
+  const held=await f.storage.read('lease');
+  assert.equal(held.value.status,'held');assert.equal(held.value.owner.runId,f.environment.GITHUB_RUN_ID);
+  transport.reject(new TypeError(PRIVATE,{cause:{code:'ECONNRESET',message:PRIVATE,secret:PRIVATE}}));
+  const report=await running;
+  assert.equal(report.completed,false);assert.equal(report.errorCode,'lease_lost');
+  assert.deepEqual(report.authorityFailure,{phase:'lease_read',reason:'storage_transport'});
+  assert.equal(report.retention.errorCode,'storage_transport');
+  assert.equal(report.gcTransportFailure.category,'connection');assert.equal(report.gcTransportFailure.method,'GET');
+  assert(Number.isSafeInteger(report.gcTransportFailure.durationMs) && report.gcTransportFailure.durationMs>=0);
+  assert.deepEqual(Object.keys(report.gcTransportFailure).sort(),['category','durationMs','method']);
+  assert.equal(requests,1);assert.equal(report.leaseReleased,true);
+  assert.equal(report.retention.pending,1);assert.equal(f.q.tasks.size,1);
+  assert.deepEqual(await f.storage.read('accepted'),f.expected.accepted);
+  assert.deepEqual(await f.storage.read('intent'),f.expected.intent);
+  assert(f.writes.every(name=>name==='lease'));
+  assert(!JSON.stringify(report).includes(PRIVATE));
 });
 
 test('deadline stops before collector while renewed owned lease is released in finally',async()=>{
