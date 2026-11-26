@@ -500,6 +500,32 @@ with tempfile.TemporaryDirectory(prefix='china-data-host-') as directory:
             for filename, expected in file_before.items():
                 if pathlib.Path(filename) != m.CONFIG: assert m.sha(pathlib.Path(filename).read_bytes()) == expected
             assert not any(item[0] == 'docker' and item[1] != 'GET' and '/images/' in item[2] for item in operations)
+        elif case in ('retire_mount_order', 'retire_recovery_mount_order', 'retire_mount_changed_after_stop'):
+            host.start(); committed = accepted(); payloads = create_bulk()
+            params = recovery_params(committed) if case == 'retire_recovery_mount_order' else None
+            actual_docker = m.docker
+            def changed_inspection(method, target, body=None):
+                result = actual_docker(method, target, body)
+                if method == 'GET' and target == '/containers/' + oldest_id + '/json' and not result['State']['Running']:
+                    if case == 'retire_mount_changed_after_stop':
+                        result['Mounts'][0]['Propagation'] = 'unexpected-new-value'
+                    else:
+                        result['Mounts'].reverse()
+                return result
+            m.docker = changed_inspection
+            perform = lambda: m.retire_recovery(params) if params else host.retire(committed)
+            if case == 'retire_mount_changed_after_stop':
+                refused(perform, 'retire_target_changed')
+                assert oldest_id in containers and not containers[oldest_id]['State']['Running']
+                assert all(filename.read_bytes() == raw for filename, raw in payloads.items())
+                assert not any(item[0] == 'docker' and item[1] == 'DELETE' for item in operations)
+            else:
+                result = perform()
+                assert result['retiredContainers'] == 1 and result['filesDeleted'] == len(payloads)
+                assert result['freedBytes'] == sum(len(raw) for raw in payloads.values())
+                assert oldest_id not in containers and all(not filename.exists() for filename in payloads)
+                assert result['directoriesDeleted'] == result['imagesDeleted'] == 0
+            assert_protected(); assert m.backend(m.CONFIG.read_bytes()) == 3006
         elif case == 'retire_rejects_uncommitted':
             host.start(); refused(lambda: host.retire({}), 'retire_before_acceptance')
             committed = accepted()
@@ -679,6 +705,9 @@ for (const [name, description] of [
   ['gates_and_rollback', 'keeps functional/speed gates and rolls back to the actual accepted native predecessor'],
   ['accepted_recovery', 'does not report an old accepted receipt as current after ingress or generation changes'],
   ['retire', 'retires exactly the obsolete native process after commit and keeps current, rollback, legacy, files and images'],
+  ['retire_mount_order', 'continues exact post-commit retirement when Docker only reorders mounts after stop'],
+  ['retire_recovery_mount_order', 'continues durable retirement recovery when Docker only reorders mounts after stop'],
+  ['retire_mount_changed_after_stop', 'still refuses retirement when any mount attribute changes after stop'],
   ['retire_rejects_uncommitted', 'refuses retirement before acceptance or without a committed protected rollback'],
   ['retire_rejects_foreign', 'refuses retirement of a changed mount, foreign process or stale ingress'],
   ['retire_recovery', 'resumes only the durable task target without initialization, new directories or a candidate'],

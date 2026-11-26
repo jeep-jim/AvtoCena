@@ -1328,7 +1328,11 @@ def retire_reference(obsolete, protected_references, protected_ids, assert_curre
         docker('POST', '/containers/' + target['Id'] + '/stop?t=10')
     stopped = docker('GET', '/containers/' + target['Id'] + '/json')
     check_mounted_reference(stopped, obsolete, old_receipt['nonce'], require_running=False)
-    need(not stopped['State']['Running'] and all(stopped[key] == target[key] for key in ('Id', 'Image', 'Config', 'HostConfig', 'Mounts')),
+    # Stop changes process state; Docker may also return the same mount map in
+    # another order. Preserve every mount and attribute in the identity fence.
+    need(not stopped['State']['Running'] and
+         all(stopped[key] == target[key] for key in ('Id', 'Image', 'Config', 'HostConfig')) and
+         canonical_mounts(stopped['Mounts']) == canonical_mounts(target['Mounts']),
          'retire_target_changed')
     assert_current()
     docker('DELETE', '/containers/' + target['Id'] + '?v=false&force=false')
