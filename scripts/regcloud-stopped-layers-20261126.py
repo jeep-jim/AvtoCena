@@ -80,6 +80,7 @@ def api(method, path, maximum=2 * 1024 * 1024):
 
 def fingerprint(row):
     value = {key: row.get(key) for key in ('Id', 'Name', 'Image', 'Config', 'HostConfig', 'Mounts', 'RestartCount')}
+    value['Mounts'] = sorted(row.get('Mounts') or [], key=lambda item: json.dumps(item, sort_keys=True, separators=(',', ':')))
     value['state'] = {key: row.get('State', {}).get(key) for key in ('Running', 'Pid', 'StartedAt', 'FinishedAt')}
     return sha(json.dumps(value, sort_keys=True, separators=(',', ':')).encode())
 

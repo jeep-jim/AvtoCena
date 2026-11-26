@@ -97,11 +97,27 @@ def ports(row):
                    if str(binding.get('HostPort', '')).isdigit() and 1 <= int(binding['HostPort']) <= 65535})
 
 
-def signature(row):
+def signature_value(row):
     selected = {key: row.get(key) for key in ('Id', 'Name', 'Image', 'Config', 'HostConfig', 'Mounts', 'RestartCount')}
+    selected['Mounts'] = sorted(row.get('Mounts') or [], key=lambda value: json.dumps(value, sort_keys=True, separators=(',', ':')))
     selected['state'] = {key: row.get('State', {}).get(key) for key in
                          ('Running', 'Pid', 'StartedAt', 'FinishedAt', 'Paused', 'Restarting', 'Dead')}
-    return sha(json.dumps(selected, sort_keys=True, separators=(',', ':')).encode())
+    return selected
+
+
+def signature(row):
+    return sha(json.dumps(signature_value(row), sort_keys=True, separators=(',', ':')).encode())
+
+
+def stability_difference(before, after):
+    left, right = signature_value(before), signature_value(after)
+    changed = {key: {'beforeSha256': sha(json.dumps(left.get(key), sort_keys=True, separators=(',', ':')).encode()),
+                     'afterSha256': sha(json.dumps(right.get(key), sort_keys=True, separators=(',', ':')).encode())}
+               for key in sorted(set(left) | set(right)) if left.get(key) != right.get(key)}
+    def state(row):
+        value = row.get('State') or {}
+        return {key: value.get(key) for key in ('Running', 'Pid', 'StartedAt', 'FinishedAt', 'Paused', 'Restarting', 'Dead')}
+    return {'id': before['Id'], 'changedComponents': changed, 'stateBefore': state(before), 'stateAfter': state(after)}
 
 
 def routes():
@@ -374,6 +390,12 @@ def main():
               'sizeBytes': value.get('Size'), 'created': safe(value.get('Created'), r'[0-9TZ:.-]+'),
               'ownedApplication': labels.get('org.opencontainers.image.source') == 'https://github.com/jeep-jim/AvtoCena' and labels.get('avtocena.application') == 'web',
               'referencedBy': [row['Id'] for row in rows if row.get('Image') == value['Id']],
+              'tagCount': len(value.get('RepoTags') or []), 'digestCount': len(value.get('RepoDigests') or []),
+              'tagsSha256': sha(json.dumps(sorted(value.get('RepoTags') or []), separators=(',', ':')).encode()),
+              'digestsSha256': sha(json.dumps(sorted(value.get('RepoDigests') or []), separators=(',', ':')).encode()),
+              'tagClasses': [('owned_runtime' if re.fullmatch(r'avtocena-(?:regcloud|china-runtime):[a-f0-9-]+', tag)
+                              else 'runtime_identity_present' if str(labels.get('org.opencontainers.image.revision', '')) in tag
+                              else 'opaque') for tag in (value.get('RepoTags') or [])],
               'tags': [safe(tag, r'avtocena-(?:regcloud|china-runtime):[a-f0-9-]+', '<other>') for tag in (value.get('RepoTags') or [])]})
         PHASE = 'storage_summary'
         raw = run(['/usr/bin/docker', 'system', 'df', '--format', '{{json .}}'], 30).decode()
@@ -381,6 +403,9 @@ def main():
                                     for value in (json.loads(line) for line in raw.splitlines())]
         PHASE = 'verify'
         after_rows = docker('inspect', *identities)
+        by_id = {row['Id']: row for row in after_rows}
+        REPORT['containerStabilityDifferences'] = [stability_difference(row, by_id[row['Id']]) for row in rows
+                                                   if row['Id'] in by_id and signature(row) != signature(by_id[row['Id']])]
         need({row['Id']: signature(row) for row in after_rows} == {row['Id']: signature(row) for row in rows}, 'containers_changed')
         need(set(run(['/usr/bin/docker', 'ps', '-aq', '--no-trunc']).decode().split()) == set(identities), 'container_set_changed')
         need(bounded(NGINX) == ingress and routes() == before_routes and health(ingress) == before_health, 'ingress_changed')

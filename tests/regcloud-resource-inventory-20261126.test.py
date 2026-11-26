@@ -34,6 +34,27 @@ class InventoryTests(unittest.TestCase):
         self.assertEqual(value['mounts'][1]['release']['category'], 'china-next')
         self.assertEqual(value['writableBytes'], 2024)
 
+    def test_mount_record_order_is_ignored_but_cmd_and_env_order_are_not(self):
+        row = container()
+        before = module.signature(row)
+        row['Mounts'].reverse()
+        self.assertEqual(module.signature(row), before)
+        row['Config']['Env'].append('SECOND=private')
+        before = module.signature(row)
+        row['Config']['Env'].reverse()
+        self.assertNotEqual(module.signature(row), before)
+
+    def test_changed_component_report_contains_hashes_not_private_configuration(self):
+        import copy
+        before = container()
+        after = copy.deepcopy(before)
+        after['Config']['Env'] = ['SECRET=new-private-secret']
+        after['State']['Pid'] += 1
+        value = module.stability_difference(before, after)
+        self.assertEqual(set(value['changedComponents']), {'Config', 'state'})
+        self.assertNotIn('new-private-secret', json.dumps(value))
+        self.assertEqual(value['stateAfter']['Pid'], 125)
+
     def test_dependency_prevents_calling_other_container_unreferenced(self):
         row = container()
         dependent = container()
