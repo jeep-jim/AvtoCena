@@ -1,7 +1,7 @@
 import test, {mock} from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { attachJapanSearchValues } from '../apps/web/lib/catalog/japan-delivered-preview';
+import { attachJapanSearchValues, attachJapanDeliveredPreviews } from '../apps/web/lib/catalog/japan-delivered-preview';
 import { japanPreviewParameters } from '../apps/web/lib/catalog/japan-preview-parameters';
 import { validateCustomerParameters } from '../apps/web/lib/catalog/customer-parameters';
 import { calculateOfferWithCustomerParametersDetailed } from '../apps/web/lib/catalog/customs-pricing';
@@ -9,6 +9,11 @@ import { LocalJsonStorage } from '../apps/web/lib/data';
 import { resetCatalogRateCache } from '../apps/web/lib/catalog/rates';
 import { compactJapanPreviewInput, matchesJapanPreviewInput } from '../apps/web/lib/catalog/japan-preview-inputs';
 import { visibleBreakdownNote } from '../apps/web/lib/catalog/customs-age-label';
+import { ajesLot } from '../apps/web/lib/catalog/ajes-query';
+import { ajesOffer } from '../apps/web/lib/catalog/ajes-offer';
+import { publicOffer } from '../apps/web/lib/catalog/storage';
+import { offerParameterDraft } from '../apps/web/lib/catalog/offer-parameter-draft';
+import { priceCardForCity } from '../apps/web/lib/catalog/card-city-delivery';
 const fixture=()=>JSON.parse(fs.readFileSync('tests/fixtures/proauctions/published-corolla-cross.json','utf8'));
 
 function electrifiedFixture(kind:string){
@@ -62,6 +67,60 @@ test('missing or conflicting calculation parameters cannot produce preview input
  for(const mutate of [(r:any)=>{r.operational.semanticEvidence.engineCc.status='conflict'},(r:any)=>{r.powerHp=undefined;r.powerKw=undefined},(r:any)=>{r.fuel='electric';r.powertrainKind='electric';r.power30MinKw=undefined}]){
   const input=fixture();mutate(input);assert.throws(()=>japanPreviewParameters(input));assert.equal(compactJapanPreviewInput(input).parameters,null);
  }
+});
+
+test('AJ scalar supplier power produces the same actual delivered calculation in the list and detail',async()=>{
+ const today=new Date().toISOString(),markets=JSON.parse(fs.readFileSync('data/markets/markets.json','utf8'));
+ // Exact scalar shapes and prices observed in the owner's Japan auction page.
+ const rows=[
+  {ID:'0fHPtlRkE77JQwQ',MARKA_NAME:'SUZUKI',MODEL_NAME:'ALTO',YEAR:2019,ENG_V:660,PW:'49',FINISH:159000},
+  {ID:'0fmZ9YT7pC8NDfg',MARKA_NAME:'SUZUKI',MODEL_NAME:'WAGON R',YEAR:2015,ENG_V:660,PW:'52',FINISH:149000},
+  {ID:'0ffhxNHCTiXpqfv',MARKA_NAME:'TOYOTA',MODEL_NAME:'TOWN ACE VAN',YEAR:2021,ENG_V:1500,PW:'97',FINISH:687000},
+ ];
+ const offers=rows.map(row=>ajesOffer(ajesLot({...row,AUCTION_TYPE:2,STATUS:'Sold',TIME:'P',IMAGES:''},'stats',false)!,{
+  currency:'JPY',sourcePrice:row.FINISH,effectiveRate:0.516587,cbrRate:51.6587,nominal:100,rateDate:today,rateSource:'cbr',
+ } as any,today));
+ const before=JSON.stringify(offers),reads:string[]=[];
+ const previous=process.env.CATALOG_LIVE_RATE_DISABLED;process.env.CATALOG_LIVE_RATE_DISABLED='true';resetCatalogRateCache();
+ const read=mock.method(LocalJsonStorage.prototype,'readJsonWithMeta',async(key:string)=>(reads.push(key),{found:true,value:
+  key==='catalog-editorial/current.json'?{revision:'0',entries:{}}:
+  key==='fees/exchange-rates.json'?{updatedAt:today,JPY:{cbrRate:51.6587,nominal:100,rateDate:today,rateSource:'cbr'},EUR:{cbrRate:95,nominal:1,rateDate:today,rateSource:'cbr'},USD:{cbrRate:90,nominal:1,rateDate:today,rateSource:'cbr'}}:
+  key==='markets/markets.json'?markets:{}}));
+ try{
+  const listed=await attachJapanDeliveredPreviews(offers,markets);
+  for(let index=0;index<offers.length;index++){
+   const offer=offers[index],dto=publicOffer(offer) as any,listedDto=publicOffer(listed[index]) as any;
+   const parameters=japanPreviewParameters(offer),draft=offerParameterDraft(offer,dto),projectedDraft=offerParameterDraft(dto);
+   assert.equal(parameters.powerHp,Number(rows[index].PW));assert.equal(draft.powerHp,rows[index].PW);
+   assert.equal(projectedDraft.powerHp,draft.powerHp);assert.equal(japanPreviewParameters(dto).powerHp,parameters.powerHp);
+   const preview=await calculateOfferWithCustomerParametersDetailed(offer,parameters);
+   const detail=await calculateOfferWithCustomerParametersDetailed(offer,validateCustomerParameters(draft));
+   assert.equal(preview.ok,true,JSON.stringify(preview));assert.equal(detail.ok,true,JSON.stringify(detail));
+   if(preview.ok&&detail.ok){
+    assert.equal(preview.calculation.totalRub,detail.calculation.totalRub);
+    assert.equal(listedDto.japanDeliveredPreview?.totalRub,detail.calculation.totalRub);
+    assert.ok(Number(detail.calculation.totalRub)>Number(offer.sellerPriceRub));
+    assert.equal(detail.calculation.customs?.status,'ready');
+    assert.equal(detail.calculation.breakdown.reduce((sum:number,line:any)=>sum+line.amountRub,0),detail.calculation.totalRub);
+    assert.equal(listedDto.japanDeliveredPreview.estimated,true);
+   }
+   const cityDetail=await calculateOfferWithCustomerParametersDetailed(offer,validateCustomerParameters({...draft,deliveryCity:'Новокузнецк'}));
+   const cityList=priceCardForCity(listedDto,'Новокузнецк');
+   assert.equal(cityDetail.ok,true,JSON.stringify(cityDetail));assert.equal(cityList.included,true);
+   if(cityDetail.ok)assert.equal(cityList.offer.japanDeliveredPreview.totalRub,cityDetail.calculation.totalRub);
+   assert.deepEqual(listedDto.japanSupplierPower,dto.japanSupplierPower);
+   for(const key of ['powerHp','powerKw','power30MinKw','icePowerKw','utilizationPowerKw'])assert.equal((listed[index] as any)[key],undefined,key);
+  }
+  const missing=[
+   {...offers[0],engineCc:undefined,operational:{...offers[0].operational,semanticEvidence:{...offers[0].operational?.semanticEvidence,engineCc:{status:'missing'}}}},
+   {...offers[0],operational:{...offers[0].operational,semanticEvidence:{...offers[0].operational?.semanticEvidence,fuel:{status:'conflict'}}}},
+   {...offers[0],sourcePrice:undefined,calculationSnapshot:undefined},
+  ];
+  const incomplete=await attachJapanDeliveredPreviews(missing,markets);
+  incomplete.forEach((offer,index)=>assert.equal(offer.japanDeliveredPreview,undefined,JSON.stringify({index,preview:offer.japanDeliveredPreview})));
+  assert.ok(!reads.some(key=>key.includes('detail')||key.includes('offers/')||key==='catalog/manifest.json'),'AJ preview uses the received lot without detail or generation reads');
+  assert.equal(JSON.stringify(offers),before);
+ }finally{read.mock.restore();resetCatalogRateCache();if(previous===undefined)delete process.env.CATALOG_LIVE_RATE_DISABLED;else process.env.CATALOG_LIVE_RATE_DISABLED=previous;}
 });
 test('tariff age notes are readable Russian for both engine formats',()=>{
  assert.equal(visibleBreakdownNote('over_5_years'),'Старше 5 лет');

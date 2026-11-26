@@ -1,15 +1,17 @@
 import {isOwnerStepwgnNonHybrid} from './japan-owner-specifications';
+import {japanSupplierPreviewPower} from './japan-source-power';
 import type {VehicleOffer} from './types';
 
 /** Owner-authorized starting value for an editable estimate, never a verified specification. */
 export function ajesPowerEstimateHp(offer:Partial<VehicleOffer>):number|undefined {
- const compact=readJapanPowerEstimate(offer as any);if(compact)return compact.values[0];
  if(isOwnerStepwgnNonHybrid(offer))return 150;
  const hp=Number(offer.powerHp);
- return Number.isFinite(hp)&&hp>0&&hp<=2500?hp:undefined;
+ if(Number.isFinite(hp)&&hp>0&&hp<=2500)return hp;
+ const compact=readJapanPowerEstimate(offer as any);if(compact)return compact.values[0];
+ return japanSupplierPreviewPower(offer)?.hp;
 }
 
-/** Only explicit owner rules qualify here; supplier PW is never a power fact. */
+/** Legacy compact estimates contain owner rules; scalar PW keeps its own provenance. */
 export function ajesPowerFilterValues(offer:Partial<VehicleOffer>):number[] {
  return isOwnerStepwgnNonHybrid(offer)?[150]:[];
 }

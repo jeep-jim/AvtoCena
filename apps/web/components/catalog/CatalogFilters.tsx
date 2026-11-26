@@ -19,7 +19,7 @@ import {useDealerBrowsing} from "@/components/dealers/DealerBrowsingContext";
 import {dealerBrowsingHref} from "@/lib/dealers/browsing-context";
 import { CityPickerDialog, LocationIcon } from "../home/CitySelector";
 import { useSelectedCity } from "../../lib/location/selected-city";
-import { persistCity, readSelectedCity } from "../../lib/location/selected-city";
+import { adoptJapanCatalogCity, japanCatalogCity, persistCity, readSelectedCity } from "../../lib/location/selected-city";
 import { parseEngineCc } from "../../lib/catalog/engine-input";
 
 import { CatalogFilterUiEnhancer } from "./CatalogFilterUiEnhancer";
@@ -324,7 +324,8 @@ function AdvancedFields({ draft, setField, makeOptions, marketOptions, bodyOptio
 export function CatalogFilters({ initial, facets, resultCount, auctionResults=false }: { initial: Record<string, string>; facets?: Facets; resultCount?: number; auctionResults?:boolean }) {
   const dealer=useDealerBrowsing();
   const sourceModels=auctionResults||initial.stock==="green"?facets?.models:undefined;
-  const selectedCity=useSelectedCity();
+  const selectedCity=useSelectedCity(japanCatalogCity("/cars",new URLSearchParams(initial).toString())??"");
+  useEffect(()=>{adoptJapanCatalogCity();},[initial.market,initial.city,initial.stock]);
   const router = useRouter();
   const [pending,startTransition]=useTransition();
   const submitted=useRef<string|null>(null);
@@ -545,7 +546,7 @@ export function CatalogFilters({ initial, facets, resultCount, auctionResults=fa
   return <><CatalogFilterUiEnhancer />
     <CatalogFilterPending pending={updating}/>
     <form data-no-route-loader="true" aria-busy={updating} method="get" onKeyDownCapture={captureFilterKeyDown} onBlurCapture={captureFilterBlur} onPointerDownCapture={captureFilterPointerDown} onSubmit={(event) => event.preventDefault()} className="ac-catalog-filter-panel mt-6 hidden lg:block">
-      <div className="mb-2.5"><CatalogCityFilter onChange={changeCity} /></div>
+      <div className="mb-2.5"><CatalogCityFilter city={selectedCity} onChange={changeCity} /></div>
       <div className="grid grid-cols-3 gap-2.5">
         <CatalogBrandMultiSelect value={draft.make} options={makeOptions} contextQuery={brandStatsContext} onChange={(value) => { setField("make", value); setField("model", ""); }} />
         <VehicleModelSearch multiple sourceItems={sourceModels} contextQuery={brandStatsContext} value={draft.model} make={draft.make} onMakeChange={(value) => setField("make", value)} onValueChange={(value) => setField("model", value)} />
@@ -569,7 +570,7 @@ export function CatalogFilters({ initial, facets, resultCount, auctionResults=fa
     {mobileOpen ? createPortal(<div className="ac-mobile-filter-backdrop fixed inset-0 z-[10040] flex items-end bg-black/65 lg:hidden" onClick={() => setMobileOpen(false)}><form data-no-route-loader="true" aria-busy={updating} method="get" onKeyDownCapture={captureFilterKeyDown} onBlurCapture={captureFilterBlur} onPointerDownCapture={captureFilterPointerDown} onSubmit={(event) => event.preventDefault()} role="dialog" aria-modal="true" aria-label="Фильтры каталога" className="ac-mobile-filter-sheet flex w-full max-h-[91dvh] flex-col overflow-hidden rounded-t-[30px] bg-[var(--ac-surface)] text-[var(--ac-text)]" onClick={(event) => event.stopPropagation()}>
       <div className="ac-mobile-filter-header shrink-0 px-4 pt-1"><div className="mx-auto h-1 w-10 rounded-full bg-[var(--ac-muted)]/35" /><div className="flex items-center justify-between gap-2 py-2"><div className="min-w-0 flex items-center gap-2" role="status" aria-live="polite" aria-busy={updating}><span className="ac-pulse-dot ac-pulse-dot--status shrink-0" aria-hidden="true"><span /></span><span className="text-sm font-black tabular-nums">{updating ? countKnown?`Было: ${countText}`:"Считаем варианты…" : countLabel}<span className="block text-[10px] font-normal" aria-hidden={!updating||!countKnown}>{updating&&countKnown?"Обновляем…":""}</span></span></div><button type="button" data-ac-react-close="1" data-ac-mobile-close="1" onClick={() => setMobileOpen(false)} className="ac-mobile-filter-collapse flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-[var(--ac-muted)]" aria-label="Свернуть фильтры" title="Свернуть фильтры"><Chevron /></button></div></div>
       <div className="ac-hide-scrollbar min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 pb-4">
-        <section className="ac-mobile-filter-section"><CatalogCityFilter onChange={changeCity} /></section>
+        <section className="ac-mobile-filter-section"><CatalogCityFilter city={selectedCity} onChange={changeCity} /></section>
         {chips.length ? <section className="mb-4"><div className="mb-2 text-[10px] font-black normal-case tracking-normal text-[var(--ac-muted)]">Выбрано</div><FilterChips chips={chips} onRemove={removeFilter} compact /></section> : null}
         <section className="ac-mobile-filter-section"><div className="ac-mobile-filter-section__title">Сортировка</div><div className="ac-sidebar-sort"><SortControl showAuctionDate={draft.market==="japan"&&draft.stock!=="green"} hidePrice={false} sortKey={sortKey} direction={sortDirection} onChange={chooseSort} /></div></section>
         <section className="ac-mobile-filter-section"><div className="ac-mobile-filter-section__title">Быстрые параметры</div><div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">{<PowerLimitCheckbox sourcePower={draft.stock === "green"} checked={draft.powerTo === "160"} onChange={(checked) => setField("powerTo", checked ? "160" : "")} />}</div></section>
@@ -623,7 +624,7 @@ export function CatalogFilters({ initial, facets, resultCount, auctionResults=fa
   </>;
 }
 
-function CatalogCityFilter({onChange}:{onChange:(city:string)=>void}) {
- const city=useSelectedCity(),[open,setOpen]=useState(false);
+function CatalogCityFilter({city,onChange}:{city:string;onChange:(city:string)=>void}) {
+ const [open,setOpen]=useState(false);
  return <div className="ac-catalog-city-filter min-w-0"><button type="button" className="ac-filter-control flex h-13 w-full min-w-0 items-center justify-between gap-2 rounded-[15px] px-4 text-left text-sm font-black" aria-label={`Выбрать город. Сейчас: ${city || "не выбран"}`} aria-haspopup="dialog" aria-expanded={open} onClick={()=>setOpen(true)}><span className="truncate">{city || "Выбрать город"}</span><LocationIcon className="ac-filter-location h-[18px] w-[18px] shrink-0 text-[#ff353d]"/></button>{open&&<CityPickerDialog persistSelection={false} onChange={onChange} onClose={()=>setOpen(false)}/>}</div>;
 }

@@ -244,7 +244,7 @@ export function InlineOfferParameters({onKnowledgeRefresh,estimatedPowerHp,initi
    </div>
   </details> : null}
   {!showCalculation ? originalBreakdown : null}
-  {estimatedPowerActive ? <p className="mt-3 text-xs text-[var(--ac-muted)]" data-power-estimate-note>Для предварительного расчёта выбрано первое значение мощности: {estimatedPowerHp} л.с. Проверьте его по документам или измените вручную.</p> : null}
+  {estimatedPowerActive ? <p className="mt-3 text-xs text-[var(--ac-muted)]" data-power-estimate-note>Для предварительного расчёта используется мощность {estimatedPowerHp} л.с. Проверьте её по документам или измените вручную.</p> : null}
   {result?.customs?.productionReferenceBasis==="new_model_year_scenario"?<p className="mt-3 text-xs text-[var(--ac-muted)]">{draft.year} — модельный год. Расчёт как для нового автомобиля; дату выпуска уточните по документам.</p>:null}
   <OfferParameterEditors estimated30Active={estimated30Active} draft={draft} change={change} showCommercial={commercialVisible} isPickup={isPickup} researchContext={researchContext}/>
   {canSave && ((userEdited && saveDirty)||knowledgeRetry) ? <div className="mt-4"><button type="button" onClick={()=>saveDialog.current?.showModal()} disabled={saving || pending || !result} className="min-h-12 w-full rounded-2xl bg-red-500 px-4 py-3 text-sm font-bold text-white disabled:opacity-50">{saving?"Сохраняем…":"Сохранить характеристики"}</button></div> : null}

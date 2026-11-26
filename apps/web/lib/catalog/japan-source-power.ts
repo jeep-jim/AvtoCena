@@ -1,9 +1,10 @@
 import {isOwnerStepwgnNonHybrid} from './japan-owner-specifications';
+import {namedElectrifiedPowertrainKind} from './powertrain-safety';
 
 /** AJ confirmed PW is one integer horsepower value. The wire column is varchar(30).
  * Keep this supplier fact separate from local/edited and certified calculation power.
  */
-export type JapanSupplierPower={offerId:string;hp:number;unit:'hp';source:'ajes_pw'};
+export type JapanSupplierPower={offerId:string;hp:number;unit:'hp';source:'ajes_pw';combustionPreviewEligible?:true};
 
 export function parseJapanSourcePower(value:unknown):number|undefined {
  if(typeof value!=='string'&&typeof value!=='number')return undefined;
@@ -24,17 +25,42 @@ export function japanLocalPowerHp(offer:any):number|undefined {
  return Number.isFinite(hp)&&hp>0?hp:undefined;
 }
 
-/** A compact public fact is bound to one listing and cannot populate calculation fields. */
+function combustionPreviewEligible(offer:any):boolean {
+ if(!['petrol','diesel','lpg','cng'].includes(offer?.fuel)
+   ||offer.powertrainKind&&offer.powertrainKind!=='combustion'
+   ||namedElectrifiedPowertrainKind(offer)||offer.operational?.fuelDefaultBlocked)return false;
+ const evidence=offer.operational?.semanticEvidence;
+ if(['fuel','powertrainKind','fuelPowertrain'].some(key=>['conflict','ambiguous'].includes(evidence?.[key]?.status)))return false;
+ // Keep the existing local kW-to-hp draft conversion ahead of a different
+ // supplier hp value, without combining two competing observations.
+ return !(Number(offer.powerKw)>0||Number(offer.icePowerKw)>0);
+}
+
+function supplierFact(offer:any,hp:number,previouslyEligible=false):JapanSupplierPower {
+ const fullRecord=offer.sourceId==='ajes_japan_feed'&&offer.operational&&typeof offer.operational==='object';
+ const eligible=hp<=2500&&combustionPreviewEligible(offer)&&(fullRecord||previouslyEligible);
+ return {offerId:offer.id,hp,unit:'hp',source:'ajes_pw',...(eligible?{combustionPreviewEligible:true as const}:{})};
+}
+
+/** A compact public fact is bound to one listing; it does not rewrite verified specifications. */
 export function japanSupplierPower(offer:any):JapanSupplierPower|undefined {
  if(!isAjesJapanOffer(offer)||japanLocalPowerHp(offer)!==undefined)return undefined;
  const saved=offer.japanSupplierPower;
  if(saved?.offerId===offer.id&&saved.unit==='hp'&&saved.source==='ajes_pw'
    &&typeof saved.hp==='number'&&parseJapanSourcePower(saved.hp)!==undefined){
-  return {offerId:offer.id,hp:saved.hp,unit:'hp',source:'ajes_pw'};
+  return supplierFact(offer,saved.hp,saved.combustionPreviewEligible===true);
  }
  if(offer.sourceId!=='ajes_japan_feed')return undefined;
  const hp=parseJapanSourcePower(offer.operational?.raw?.sourcePower);
- return hp===undefined?undefined:{offerId:offer.id,hp,unit:'hp',source:'ajes_pw'};
+ return hp===undefined?undefined:supplierFact(offer,hp);
+}
+
+/** Scalar supplier hp may seed an editable combustion estimate. It is not
+ * certified electric/30-minute power and never fills those separate quantities.
+ */
+export function japanSupplierPreviewPower(offer:any):JapanSupplierPower|undefined {
+ const power=japanSupplierPower(offer);
+ return power?.combustionPreviewEligible===true?power:undefined;
 }
 
 export function japanSupplierPowerLabel(offer:any):string {

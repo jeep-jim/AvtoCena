@@ -6,13 +6,18 @@ import {compactJapanPreviewInput} from '../apps/web/lib/catalog/japan-preview-in
 import {validateCustomerParameters} from '../apps/web/lib/catalog/customer-parameters';
 import {publicOffer} from '../apps/web/lib/catalog/storage';
 const raw:any={id:'ajes-stats-example',market:'japan',sourceId:'ajes_japan_feed',make:'RENAULT',model:'TWINGO',year:2017,engineCc:900,images:[],operational:{chassisCode:'AHH4B',semanticEvidence:{engineCc:{status:'exact',value:900,source:'ajes:stats:example:ENG_V',rawValues:['900']}},raw:{sourcePower:'90',sourceFuel:''}}};
-test('Every, Alto and Fielder keep known fields without producing incomplete calculation inputs',()=>{
+test('Every keeps ambiguous power missing while Alto and Fielder use scalar supplier hp for previews',()=>{
  for(const [make,model,chassis,cc,power] of [['SUZUKI','EVERY','HBD-DA17V',660,'46,49,64'],['SUZUKI','ALTO','3BA-HA37S',660,'46'],['TOYOTA','COROLLA FIELDER','NZE164G',1500,'103']] as const){
   const input={...raw,make,model,engineCc:cc,operational:{chassisCode:chassis,semanticEvidence:{engineCc:{status:'exact',value:cc,source:'ajes:stats:example:ENG_V',rawValues:[String(cc)]}},raw:{sourcePower:power,sourceFuel:''}}};
   const result=applyJapanFactoryFuel(input);
   assert.equal(result.fuel,'petrol');assert.equal(result.powerHp,undefined);
-  assert.throws(()=>japanPreviewParameters(result),/powerHp/);
-  assert.equal(compactJapanPreviewInput(result).parameters,null);
+  if(power.includes(',')){
+   assert.throws(()=>japanPreviewParameters(result),/powerHp/);
+   assert.equal(compactJapanPreviewInput(result).parameters,null);
+  }else{
+   assert.equal(japanPreviewParameters(result).powerHp,Number(power));
+   assert.equal(compactJapanPreviewInput(result).parameters?.powerHp,Number(power));
+  }
   const dto=publicOffer(result);
   assert.equal(dto.id,result.id);assert.equal(dto.fuel,'petrol');assert.equal(dto.engineCc,cc);
   assert.equal(dto.powerHp,undefined);assert.equal(result.operational.raw.sourcePower,power);
@@ -21,13 +26,13 @@ test('Every, Alto and Fielder keep known fields without producing incomplete cal
   const input={...raw,make,model,engineCc:660,operational:{chassisCode:chassis,raw:{sourceFuel:''}}};assert.equal(applyJapanFactoryFuel(input),input);
  }
 });
-test('factory fuel reaches card DTO while supplier horsepower remains non-authoritative',()=>{
+test('factory fuel and supplier hp reach the preview while verified specification fields stay separate',()=>{
  const offer=applyJapanFactoryFuel(raw);assert.equal(offer.fuel,'petrol');assert.equal(raw.fuel,undefined);assert.equal(offer.powerHp,undefined);
- const dto=publicOffer(offer);assert.equal(japanPowerEstimateLabel(dto),'');assert.equal(ajesPowerEstimateHp(dto as any),undefined);assert.equal((dto as any).operational,undefined);
+ const dto=publicOffer(offer);assert.equal(japanPowerEstimateLabel(dto),'');assert.equal(ajesPowerEstimateHp(dto as any),90);assert.equal((dto as any).operational,undefined);
  assert.equal(dto.fuel,'petrol');assert.equal(dto.engineCc,900);assert.equal(dto.powerHp,undefined);
- assert.throws(()=>japanPreviewParameters(offer),/powerHp/);
- assert.throws(()=>japanPreviewParameters(dto as any),/powerHp/);
- assert.equal(compactJapanPreviewInput(offer).parameters,null);
+ assert.equal(japanPreviewParameters(offer).powerHp,90);
+ assert.equal(japanPreviewParameters(dto as any).powerHp,90);
+ assert.equal(compactJapanPreviewInput(offer).parameters?.powerHp,90);
 });
 test('manual horsepower completes calculation input without modifying the source card',()=>{
  const offer=applyJapanFactoryFuel(raw),before=JSON.stringify(offer);
@@ -69,7 +74,7 @@ test('reviewed Nissan and Passat fuel uses exact chassis and volume, not family 
 });
 
 test('a retained Alto price cannot supply missing horsepower to a new calculation',()=>{
- const offer:any={...raw,make:'SUZUKI',model:'ALTO',year:2023,engineCc:660,operational:{chassisCode:'3BA-HA37S',semanticEvidence:{engineCc:{status:'exact',value:660,source:'ajes:stats:example:ENG_V',rawValues:['660']}},raw:{sourcePower:'46',sourceFuel:''}}};
+ const offer:any={...raw,make:'SUZUKI',model:'ALTO',year:2023,engineCc:660,operational:{chassisCode:'3BA-HA37S',semanticEvidence:{engineCc:{status:'exact',value:660,source:'ajes:stats:example:ENG_V',rawValues:['660']}},raw:{sourcePower:'',sourceFuel:''}}};
  const priced={...applyJapanFactoryFuel(offer),japanDeliveredPreview:{totalRub:509539,estimated:true}};
  assert.throws(()=>japanPreviewParameters(priced),/powerHp/);
  assert.equal(compactJapanPreviewInput(priced).parameters,null);

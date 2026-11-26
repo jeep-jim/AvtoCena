@@ -1,6 +1,6 @@
 import test,{mock} from 'node:test';
 import assert from 'node:assert/strict';
-import {parseJapanSourcePower,japanSupplierPower,japanSupplierPowerLabel,japanUnknownPower,japanPowerFilterSummary,japanPowerFilterNotice} from '../apps/web/lib/catalog/japan-source-power';
+import {parseJapanSourcePower,japanSupplierPower,japanSupplierPreviewPower,japanSupplierPowerLabel,japanUnknownPower,japanPowerFilterSummary,japanPowerFilterNotice} from '../apps/web/lib/catalog/japan-source-power';
 import {ajesResultFilter} from '../apps/web/lib/catalog/ajes-result-filter';
 import {ajesPowerEstimateHp} from '../apps/web/lib/catalog/ajes-power-estimate';
 import {ajesCatalogQuery,ajesLot,ajesQuery,ajesSourceCacheSql} from '../apps/web/lib/catalog/ajes-query';
@@ -8,6 +8,9 @@ import {ajesOffer} from '../apps/web/lib/catalog/ajes-offer';
 import {createAjesClient} from '../apps/web/lib/catalog/ajes-client';
 import {publicOffer} from '../apps/web/lib/catalog/storage';
 import {offerParameterDraft} from '../apps/web/lib/catalog/offer-parameter-draft';
+import {japanPreviewParameters} from '../apps/web/lib/catalog/japan-preview-parameters';
+import {validateCustomerParameters} from '../apps/web/lib/catalog/customer-parameters';
+import {powerUnitPatch} from '../apps/web/lib/catalog/power-parameter-draft';
 import {readFilteredAjesPage} from '../apps/web/lib/catalog/ajes-filtered-page';
 import {applyJapanOwnerSpecifications} from '../apps/web/lib/catalog/japan-owner-specifications';
 import {build} from 'esbuild';
@@ -182,16 +185,18 @@ test('Japan power selection uses local facts first, scalar supplier hp second an
  assert.deepEqual(japanPowerFilterSummary([ownerDto]),{shown:1,localPower:1,supplierPower:0,unknownPower:0});
 });
 
-test('public supplier hp and unknown state survive projection without changing prices or calculation power',()=>{
+test('public supplier hp survives projection without changing prices or verified specifications',()=>{
  for(const fuel of ['P','H','E']){
   const input=offer('150','public-'+fuel,fuel),before=JSON.stringify(input);
   const output=publicOffer(input) as any;
-  assert.deepEqual(output.japanSupplierPower,{offerId:input.id,hp:150,unit:'hp',source:'ajes_pw'});
+  assert.deepEqual(output.japanSupplierPower,{offerId:input.id,hp:150,unit:'hp',source:'ajes_pw',...(fuel==='P'?{combustionPreviewEligible:true}:{})});
   assert.equal(japanSupplierPowerLabel(output),'150 л.с. · поставщик');
   for(const key of ['powerHp','powerKw','power30MinKw','utilizationPowerKw','operational','sourceId'])assert.equal(output[key],undefined,key);
   assert.equal(output.totalRub,null);assert.equal(output.catalogPricingMode,'seller');
-  assert.equal(ajesPowerEstimateHp(input),undefined);assert.equal(ajesPowerEstimateHp(output),undefined);
-  assert.equal(offerParameterDraft(input).powerHp,'');assert.equal(offerParameterDraft(input).power30MinKw,'');
+  const expected=fuel==='P'?150:undefined;
+  assert.equal(ajesPowerEstimateHp(input),expected);assert.equal(ajesPowerEstimateHp(output),expected);
+  assert.equal(offerParameterDraft(input).powerHp,expected?'150':'');assert.equal(offerParameterDraft(input).power30MinKw,'');
+  assert.equal(offerParameterDraft(output).powerHp,expected?'150':'');assert.equal(offerParameterDraft(output).icePowerKw,'');
   assert.equal(JSON.stringify(input),before);
   assert.equal(ajesResultFilter({market:'japan',powerTo:160}).matches(output),true);
   assert.equal(japanSupplierPower({...output,id:'ajes-stats-other'}),undefined);
@@ -206,6 +211,94 @@ test('public supplier hp and unknown state survive projection without changing p
  assert.deepEqual(summary,{shown:3,localPower:1,supplierPower:1,unknownPower:1});
  assert.match(japanPowerFilterNotice(summary),/Мощность не указана: 1/);
  assert.match(japanPowerFilterNotice(summary),/не подтверждает право/);
+});
+
+test('the list preview and editable detail use the same scalar supplier hp with local and manual priority',()=>{
+ for(const power of [49,52,97])for(const fuel of ['P','D','L','C']){
+  const raw=offer(power,`preview-${power}-${fuel}`,fuel),before=JSON.stringify(raw),dto=publicOffer(raw) as any;
+  for(const input of [raw,dto]){
+   assert.deepEqual(japanSupplierPreviewPower(input),{offerId:raw.id,hp:power,unit:'hp',source:'ajes_pw',combustionPreviewEligible:true});
+   const preview=japanPreviewParameters(input),draft=offerParameterDraft(input),detail=validateCustomerParameters(draft);
+   assert.equal(preview.powerHp,power);assert.equal(detail.powerHp,power);
+   assert.ok(Math.abs(Number(preview.powerKw)-Number(detail.powerKw))<1e-8);assert.equal(detail.power30MinKw,undefined);assert.equal(detail.icePowerKw,undefined);
+   const manual=validateCustomerParameters({...draft,...powerUnitPatch('powerHp','130',draft)});
+   assert.equal(manual.powerHp,130);assert.equal(manual.powerKw,130*0.73549875);
+  }
+  assert.equal(JSON.stringify(raw),before);
+ }
+ const base=offer(150),local={...base,powerHp:180,powerDataConfidence:'source_exact',operational:{...base.operational,semanticEvidence:{...base.operational?.semanticEvidence,powerHp:{status:'exact',value:180,source:'fixture:local_manual'}}},japanPowerEstimate:{offerId:base.id,values:[150],requiresConfirmation:true}};
+ assert.equal(ajesPowerEstimateHp(local),180);
+ assert.equal(japanPreviewParameters(local).powerHp,180);assert.equal(offerParameterDraft(local).powerHp,'180');
+ const kwOnly={...base,powerKw:130,powerDataConfidence:'source_exact',operational:{...base.operational,semanticEvidence:{...base.operational?.semanticEvidence,powerKw:{status:'exact',value:130,source:'fixture:local_manual'}}}};
+ for(const input of [kwOnly,publicOffer(kwOnly)]){
+  assert.equal(japanSupplierPreviewPower(input),undefined);
+  const draft=offerParameterDraft(input as any);
+  assert.equal(draft.powerKw,'130');assert.equal(Number(draft.powerHp),Number((130/0.73549875).toFixed(8)));
+ }
+ const iceOnly={...base,icePowerKw:130};
+ assert.equal(japanSupplierPreviewPower(iceOnly),undefined);
+ assert.equal(Number(offerParameterDraft(iceOnly).powerHp),Number((130/0.73549875).toFixed(8)));
+ const owner={...offer(200),make:'HONDA',model:'STEPWGN',fuel:'petrol',powertrainKind:'combustion'};
+ assert.equal(japanPreviewParameters(owner).powerHp,150);assert.equal(offerParameterDraft(owner as any).powerHp,'150');
+});
+
+test('unknown, ambiguous, foreign and electrified supplier power cannot seed a combustion calculation',()=>{
+ for(const value of ['',0,'150,180','160.5','160 hp',2501]){
+  const input=offer(value);
+  assert.equal(japanSupplierPreviewPower(input),undefined);assert.equal(offerParameterDraft(input).powerHp,'');
+  assert.throws(()=>japanPreviewParameters(input));
+ }
+ assert.equal(japanSupplierPreviewPower({...offer(150),fuel:undefined}),undefined);
+ for(const fuel of ['H','HE','E']){
+  const input=offer(150,`electrified-${fuel}`,fuel);
+  for(const projected of [input,publicOffer(input)]){
+   assert.equal(japanSupplierPreviewPower(projected),undefined);
+   assert.equal(offerParameterDraft(projected as any).powerHp,'');
+   assert.equal(offerParameterDraft(projected as any).power30MinKw,'');
+   assert.equal(offerParameterDraft(projected as any).icePowerKw,'');
+   assert.throws(()=>japanPreviewParameters(projected as any));
+  }
+ }
+ for(const patch of [{powertrainKind:'other_hybrid'},{powertrainKind:'series_hybrid'},{model:'NOTE e-POWER'},{trim:'HYBRID'},{market:'korea'},{sourceId:'other'},{id:'foreign-offer'}]){
+  assert.equal(japanSupplierPreviewPower({...offer(150),...patch}),undefined);
+ }
+ const electric={...offer(150,'known-electric','E'),powerHp:150};
+ assert.equal(offerParameterDraft(electric).power30MinKw,'');assert.throws(()=>japanPreviewParameters(electric));
+});
+
+test('projection retains full-record preview vetoes and old compact supplier facts cannot invent eligibility',()=>{
+ const base=offer(150);
+ const vetoes=[
+  {sourceTitle:'TOYOTA TEST HYBRID'},
+  {encyclopediaIdentity:{rawModel:'TEST HYBRID'}},
+  {fuelDefaultBlocked:true},
+  {semanticEvidence:{...base.operational?.semanticEvidence,fuel:{status:'conflict'}}},
+  {semanticEvidence:{...base.operational?.semanticEvidence,powertrainKind:{status:'ambiguous'}}},
+ ];
+ for(const veto of vetoes){
+  const input={...base,operational:{...base.operational,...veto}} as any,before=JSON.stringify(input);
+  const dto=publicOffer(input) as any;
+  assert.equal(dto.operational,undefined);assert.equal(dto.japanSupplierPower.hp,150);
+  assert.equal(dto.japanSupplierPower.combustionPreviewEligible,undefined);
+  for(const candidate of [input,dto,publicOffer(dto)]){
+   assert.equal(japanSupplierPreviewPower(candidate),undefined);
+   assert.throws(()=>japanPreviewParameters(candidate as any));
+   const draft=offerParameterDraft(candidate as any);
+   assert.equal(draft.powerHp,'');assert.equal(draft.power30MinKw,'');assert.equal(draft.icePowerKw,'');
+  }
+  assert.equal(offerParameterDraft(input,dto).powerHp,'','the detail full-record/DTO pair keeps the same veto');
+  assert.equal(JSON.stringify(input),before);
+ }
+ const fresh=publicOffer(base) as any;
+ const legacy={...fresh,japanSupplierPower:{offerId:base.id,hp:150,unit:'hp',source:'ajes_pw'}};
+ for(const candidate of [legacy,publicOffer(legacy)]){
+  assert.equal(japanSupplierPowerLabel(candidate),'150 л.с. · поставщик');
+  assert.equal(japanSupplierPreviewPower(candidate),undefined);assert.equal(offerParameterDraft(candidate as any).powerHp,'');
+ }
+ assert.equal(offerParameterDraft(base,legacy).powerHp,'150','the actual full record may still supply its own eligible input');
+ const defaultFuel=offer(150,'owner-default',''),defaultDto=publicOffer(defaultFuel) as any;
+ assert.equal(defaultDto.fuel,'petrol');assert.equal(defaultDto.japanSupplierPower.combustionPreviewEligible,true);
+ assert.equal(japanPreviewParameters(defaultFuel).powerHp,150);assert.equal(offerParameterDraft(defaultFuel,defaultDto).powerHp,'150');
 });
 
 test('power and ordinary queries share only the equivalent raw source selection',()=>{
