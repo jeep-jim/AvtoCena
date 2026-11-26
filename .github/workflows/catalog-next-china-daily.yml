@@ -1,9 +1,11 @@
 # Production: data-only update of accepted China generation; no application rebuild.
 # Daily at 21:00 Krasnoyarsk (UTC+7), source scope Che168 only.
+# Catch-up checks use the same source-window due guard before preparation.
 name: China independent daily - accepted source and retained image
 on:
   schedule:
     - cron: '0 14 * * *'
+    - cron: '17 0,3,6,9,12,15,18,21 * * *'
   push:
     branches: [main]
     paths: [.github/market-runs/catalog-next-china-daily.json]

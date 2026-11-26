@@ -11,6 +11,7 @@ import {verifyReadonlyInvocation} from '../lib/readonly-marker-invocation.mjs';
 
 const ROOT = fileURLToPath(new URL('../../', import.meta.url));
 const SHA = /^[a-f0-9]{40}$/;
+const DAILY_SCHEDULES = Object.freeze(['0 14 * * *', '17 0,3,6,9,12,15,18,21 * * *']);
 export const CHINA_DAILY_JOB_TIMEOUT_MINUTES = 360;
 const need = (value, code) => { if (!value) throw Error('china_daily_entry_' + code); };
 const safeCode = error => /^china_[a-z0-9_]{1,150}$/.test(error?.message ?? '') ? error.message : 'china_daily_entry_failed';
@@ -27,8 +28,8 @@ export async function verifyChinaDailyInvocation({root = ROOT, environment = pro
   need(environment.GITHUB_REPOSITORY === 'jeep-jim/AvtoCena' && environment.GITHUB_REPOSITORY_ID === '1289722938'
     && environment.GITHUB_REF === 'refs/heads/main'
     && environment.GITHUB_WORKFLOW_REF === 'jeep-jim/AvtoCena/.github/workflows/catalog-next-china-daily.yml@refs/heads/main', 'workflow');
+  need(environment.GITHUB_RUN_ATTEMPT === '1', 'attempt');
   need(SHA.test(environment.GITHUB_SHA ?? '') && /^[1-9]\d{0,19}$/.test(environment.GITHUB_RUN_ID ?? '')
-    && /^[1-9]\d{0,5}$/.test(environment.GITHUB_RUN_ATTEMPT ?? '')
     && ['workflow_dispatch', 'schedule', 'push'].includes(environment.GITHUB_EVENT_NAME), 'event');
   const sourceSha = git(['rev-parse', '--verify', 'HEAD']).trim();
   need(sourceSha === environment.GITHUB_SHA, 'controller_identity');
@@ -41,7 +42,7 @@ export async function verifyChinaDailyInvocation({root = ROOT, environment = pro
   }
   if (environment.GITHUB_EVENT_NAME === 'workflow_dispatch') need(environment.EXPECTED_CONTROLLER_SHA === sourceSha
     && event?.inputs?.controller_sha === sourceSha, 'manual_revision');
-  else need(event?.schedule === '0 14 * * *', 'schedule');
+  else need(DAILY_SCHEDULES.includes(event?.schedule), 'schedule');
   return Object.freeze({version: 1, event: environment.GITHUB_EVENT_NAME, sourceSha,
     approvedSourceSha: sourceSha, markerPath: null});
 }

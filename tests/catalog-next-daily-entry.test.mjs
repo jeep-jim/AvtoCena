@@ -9,6 +9,7 @@ import {execFileSync} from 'node:child_process';
 import {verifyChinaDailyInvocation, checkoutChinaDailyRuntimes, runChinaDailyEntry,
   readChinaDailyDeadline, readChinaDailyPlans, selectChinaDailyServingPlan,
   CHINA_DAILY_JOB_TIMEOUT_MINUTES} from '../scripts/catalog-next/daily-entry.mjs';
+import {runChinaDailyCycle} from '../scripts/catalog-next/daily-controller.mjs';
 
 const root = process.cwd(), sha = 'a'.repeat(40), hash = value => createHash('sha256').update(value).digest('hex');
 const ordered = value => Array.isArray(value) ? value.map(ordered) : value && typeof value === 'object'
@@ -19,17 +20,27 @@ const env = event => ({GITHUB_REPOSITORY: 'jeep-jim/AvtoCena', GITHUB_REPOSITORY
   GITHUB_EVENT_NAME: event, EXPECTED_CONTROLLER_SHA: sha});
 const git = args => { if (args[0] === 'rev-parse') return sha + '\n'; assert.equal(args[0], 'diff'); return ''; };
 
-test('actual daily invocation accepts only the bound main workflow, real dispatch SHA or the approved schedule', async () => {
+test('actual daily invocation accepts only the bound main workflow, real dispatch SHA or exact primary and catch-up schedules', async () => {
   const manual = await verifyChinaDailyInvocation({environment: env('workflow_dispatch'), git, event: {inputs: {controller_sha: sha}}});
   assert.equal(manual.sourceSha, sha); assert.equal(manual.event, 'workflow_dispatch'); assert.equal(manual.markerPath, null);
-  const scheduled = await verifyChinaDailyInvocation({environment: env('schedule'), git, event: {schedule: '0 14 * * *'}});
-  assert.equal(scheduled.event, 'schedule'); assert.equal(scheduled.sourceSha, sha);
+  for (const schedule of ['0 14 * * *', '17 0,3,6,9,12,15,18,21 * * *']) {
+    const scheduled = await verifyChinaDailyInvocation({environment: env('schedule'), git, event: {schedule}});
+    assert.equal(scheduled.event, 'schedule'); assert.equal(scheduled.sourceSha, sha);
+    for (const changed of [{GITHUB_REPOSITORY: 'other/AvtoCena'}, {GITHUB_REPOSITORY_ID: '1'},
+      {GITHUB_REF: 'refs/heads/other'}, {GITHUB_WORKFLOW_REF: 'jeep-jim/AvtoCena/.github/workflows/other.yml@refs/heads/main'},
+      {GITHUB_RUN_ATTEMPT: '2'}, {GITHUB_RUN_ATTEMPT: '0'}, {GITHUB_RUN_ATTEMPT: undefined}])
+      await assert.rejects(verifyChinaDailyInvocation({environment: {...env('schedule'), ...changed}, git, event: {schedule}}),
+        /china_daily_entry_(workflow|attempt)/);
+  }
   for (const changed of [{GITHUB_REPOSITORY_ID: '1'}, {GITHUB_REF: 'refs/heads/other'}, {GITHUB_SHA: 'b'.repeat(40)},
     {GITHUB_WORKFLOW_REF: 'jeep-jim/AvtoCena/.github/workflows/unreviewed.yml@refs/heads/main'}, {GITHUB_EVENT_NAME: 'workflow_run'}])
     await assert.rejects(verifyChinaDailyInvocation({environment: {...env('workflow_dispatch'), ...changed}, git,
       event: {inputs: {controller_sha: sha}}}), /china_daily_entry_/);
   await assert.rejects(verifyChinaDailyInvocation({environment: env('workflow_dispatch'), git, event: {inputs: {controller_sha: 'b'.repeat(40)}}}), /manual_revision/);
-  await assert.rejects(verifyChinaDailyInvocation({environment: env('schedule'), git, event: {schedule: '* * * * *'}}), /schedule/);
+  for (const schedule of ['* * * * *', '17 * * * *', '0 15 * * *', '17 0,3,6,9,12,15,18,21 * * * ', undefined, ['0 14 * * *']])
+    await assert.rejects(verifyChinaDailyInvocation({environment: env('schedule'), git, event: {schedule}}), /schedule/);
+  await assert.rejects(verifyChinaDailyInvocation({environment: {...env('workflow_dispatch'), GITHUB_RUN_ATTEMPT: '2'}, git,
+    event: {inputs: {controller_sha: sha}}}), /china_daily_entry_attempt/);
   await assert.rejects(verifyChinaDailyInvocation({environment: env('schedule'), git: () => { throw Error('dirty checkout'); },
     event: {schedule: '0 14 * * *'}}), /dirty checkout/);
 });
@@ -57,7 +68,7 @@ test('real push event must be the exact daily marker-only commit on its approved
     await assert.rejects(verifyChinaDailyInvocation({root: repository, environment}), /readonly_invocation_push_transition/);
   }
   await fs.writeFile(eventPath, JSON.stringify(event));
-  await assert.rejects(verifyChinaDailyInvocation({root: repository, environment: {...environment, GITHUB_RUN_ATTEMPT: '2'}}), /ref_or_attempt/);
+  await assert.rejects(verifyChinaDailyInvocation({root: repository, environment: {...environment, GITHUB_RUN_ATTEMPT: '2'}}), /china_daily_entry_attempt/);
   await fs.writeFile(path.join(repository, 'controller.mjs'), 'export const fixture = false;\n');
   run(['add', '.']); run(['commit', '--amend', '--no-edit']);
   const changedHead = run(['rev-parse', 'HEAD']); await fs.writeFile(eventPath, JSON.stringify({...event, after: changedHead}));
@@ -131,11 +142,11 @@ test('the reviewed code plan adds one exact checkout and cannot infer a revision
   await assert.rejects(readChinaDailyPlans(f.control), /plans/);
 });
 
-function accepted(f) {
-  const nonce = 'b'.repeat(32), at = '2026-11-24T10:00:00Z';
+function accepted(f, {sourceObservedAt = '2026-11-24T09:00:00Z', acceptedAt = '2026-11-24T10:00:00Z'} = {}) {
+  const nonce = 'b'.repeat(32), at = acceptedAt;
   const ref = {market: 'china', generationId: 'gen_china_100_1', owner: {runId: '100', attempt: '1', revision: sha},
     receiptSha256: '1'.repeat(64), sourceDescriptorSha256: '2'.repeat(64), generationManifestSha256: '3'.repeat(64),
-    sourceCursor: 100, sourceObservedAt: '2026-11-24T09:00:00Z', runtimeSha: f.servingPlan.runtimeSha,
+    sourceCursor: 100, sourceObservedAt, runtimeSha: f.servingPlan.runtimeSha,
     pricingRuntimeSha: f.pricingPlan.runtimeSha, imageId: 'sha256:' + '4'.repeat(64)};
   // Test-only representation of a receipt read from an authenticated host.
   const receipt = Buffer.from(JSON.stringify({version: 1, kind: 'china-host-acceptance-v1', release: ref.runtimeSha,
@@ -149,6 +160,69 @@ function accepted(f) {
     commit: {nonce, intentSha256: '9'.repeat(64), previousETag: null, previousStateSha256: null, acceptedAt: at}};
   return {found: true, etag: '"native-accepted"', sha256: hash(JSON.stringify(ordered(value))), value};
 }
+
+test('primary and catch-up events skip preparation in a fresh source window and still prepare in the next window', async t => {
+  const f = await fixture(t, {withCodePlan: true}), initial = accepted(f, {
+    sourceObservedAt: '2026-11-25T14:05:00.000Z', acceptedAt: '2026-11-25T14:10:00.000Z'});
+  const empty = () => ({found: false, etag: null, sha256: null, value: null});
+  const objects = new Map([['accepted', initial]]), writes = [];
+  let sequence = 0, clock, schedule, preparations = 0;
+  const storage = {
+    async assertPrivateBucket() { return {verified: true}; },
+    async read(name) { assert.ok(['accepted', 'intent', 'lease'].includes(name)); return structuredClone(objects.get(name) ?? empty()); },
+    async compareAndSwap(name, previous, value) {
+      assert.equal(name, 'lease', 'fresh checks cannot replace accepted data or reserve a publication');
+      const prior = objects.get(name) ?? empty();
+      assert.equal(prior.etag, previous.etag); assert.equal(prior.found, previous.found);
+      writes.push(name);
+      objects.set(name, {found: true, etag: '"schedule-' + ++sequence + '"',
+        sha256: hash(JSON.stringify(ordered(value))), value: structuredClone(value)});
+    },
+  };
+  const capabilities = {
+    verifyInvocation: ({environment}) => verifyChinaDailyInvocation({environment, git, event: {schedule}}),
+    verifyBaselines: () => {}, createStorage: () => storage,
+    runtimeGit: directory => args => { assert.equal(directory, f.runtimes.pricingRoot);
+      return args[0] === 'diff' ? '' : args[1] === 'HEAD' ? f.pricingPlan.runtimeSha : f.pricingPlan.runtimeTree; },
+    verifyCompatibility: async input => assert.equal(input.runtimeRoot, f.runtimes.servingRoot),
+    createRelease: input => {
+      assert.equal(input.servingPlan.runtimeSha, initial.value.current.runtimeSha, 'an unaccepted code plan cannot select the daily image');
+      return {stageRelease: async () => assert.fail('no stage before preparation'),
+        recoverRelease: async () => assert.fail('no host recovery for stable accepted state'),
+        retireHost: async () => assert.fail('no retirement without publication')};
+    },
+    readDeadline: async () => null,
+    collectRetired: async input => { assert.equal(input.mode, 'enqueue-only');
+      return {completed: true, market: 'china', status: 'no_pending'}; },
+    runCycle: input => {
+      assert.equal(input.trigger, 'schedule');
+      return runChinaDailyCycle({...input, now: () => clock, scheduleHeartbeat: () => () => {},
+        prepare: async () => { preparations++; throw Error('china_prepare_fixture_stop_before_source'); }});
+    },
+  };
+  const invoke = () => runChinaDailyEntry({root: f.control, environment: {...env('schedule'),
+    RUNNER_TEMP: f.temporary, JSON_STORAGE_DRIVER: 'object'}, capabilities});
+  for (const [cron, at] of [
+    ['0 14 * * *', '2026-11-25T14:11:00.000Z'],
+    ...['2026-11-25T15:17:00.000Z', '2026-11-25T18:17:00.000Z', '2026-11-25T21:17:00.000Z',
+      '2026-11-26T00:17:00.000Z', '2026-11-26T03:17:00.000Z', '2026-11-26T06:17:00.000Z',
+      '2026-11-26T09:17:00.000Z', '2026-11-26T12:17:00.000Z']
+      .map(at => ['17 0,3,6,9,12,15,18,21 * * *', at]),
+  ]) {
+    schedule = cron; clock = at;
+    const result = await invoke();
+    assert.equal(result.status, 'not_due'); assert.equal(result.sourcePrepared, false);
+    assert.equal(result.published, false); assert.equal(result.applicationBuilds, 0);
+    assert.equal(result.leaseReleased, true); assert.equal(preparations, 0, 'source preparation is never entered while not due');
+    assert.deepEqual(await storage.read('accepted'), initial);
+  }
+  assert.equal(writes.length, 18, 'each fresh check only acquires and releases its lease');
+  clock = '2026-11-26T15:17:00.000Z';
+  await assert.rejects(invoke(), error => error.message === 'china_prepare_fixture_stop_before_source'
+    && error.report.published === false && error.report.leaseReleased === true);
+  assert.equal(preparations, 1, 'the catch-up schedule reaches preparation once the next source window is due');
+  assert.deepEqual(await storage.read('accepted'), initial);
+});
 
 test('recovery of a code publication selects the new reviewed adapter before the single subsequent daily stage', async t => {
   const f = await fixture(t, {withCodePlan: true}), initial = accepted(f), recovered = accepted({...f, servingPlan: f.codePlan});
@@ -252,15 +326,18 @@ test('production entry binds accepted state, passes pricing root to preparation 
   assert.deepEqual(called, [], 'no bootstrap, preparation, release or GC without accepted state');
 });
 
-test('the production daily workflow has the exact nightly schedule, no image build and aggregate-only artifacts', async () => {
+test('the production daily workflow has exact primary and catch-up schedules, one writer, no image build and aggregate-only artifacts', async () => {
   const text = await fs.readFile(path.join(root, '.github/workflows/catalog-next-china-daily.yml'), 'utf8');
   assert.match(text, /^name: China independent daily/m);
   assert.match(text, /^\s+if: github\.repository_id == '1289722938'/m);
   assert.match(text, /^\s+workflow_dispatch:/m); assert.match(text, /^\s+push:/m);
   assert.match(text, /paths: \[\.github\/market-runs\/catalog-next-china-daily\.json\]/);
-  assert.match(text, /^\s+schedule:/m); assert.match(text, /cron: '0 14 \* \* \*'/);
+  assert.match(text, /^\s+schedule:/m);
+  assert.deepEqual([...text.matchAll(/^\s+- cron: '([^']+)'$/gm)].map(match => match[1]),
+    ['0 14 * * *', '17 0,3,6,9,12,15,18,21 * * *']);
   assert.doesNotMatch(text, /^\s+workflow_run:/m);
   assert.match(text, /contents: read/); assert.match(text, /cancel-in-progress: false/);
+  assert.match(text, /group: catalog-next-china/); assert.match(text, /github\.run_attempt == '1'/);
   assert.match(text, /daily-entry\.mjs --checkout/); assert.match(text, /daily-entry\.mjs --run/);
   assert.doesNotMatch(text, /docker|build-release-image|image\.tar|catalog-refresh-market|catalog-prepare-owned-china/i);
   assert.match(text, /AUTO_API_CHE168_KEY: \$\{\{ secrets\.AUTO_API_CHE168_KEY \}\}/);
