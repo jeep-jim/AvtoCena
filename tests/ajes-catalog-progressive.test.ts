@@ -47,11 +47,9 @@ test('ready cards do not wait for optional brand/model directories; exact select
   const lateRoot=await mod.exports.AjesCatalog({params:{market:'japan',powerTo:'160',city:'Новокузнецк'}});
   assert.equal(calls,0,'late count does not precede ready cards');
   const lateNodes=walk(lateRoot),late=lateNodes.find(n=>n.type?.name==='AjesIndependentCount');assert.ok(late);
-  const notice=lateNodes.find(n=>n.props?.['data-japan-power-summary-page']===1);assert.ok(notice);
-  const noticeText=notice.props.children.join('');
-  assert.match(noticeText,/Страница 1:/);assert.match(noticeText,/Мощность по данным поставщика: 1/);
-  assert.match(noticeText,/Мощность не указана: 1/);assert.match(noticeText,/Отбор не подтверждает право/);
-  assert.ok(lateNodes.some(n=>n.props?.initialCount===3),'summary refers to the actual three rendered cards');
+  assert.equal(lateNodes.some(n=>n.props?.['data-japan-power-summary-page']!==undefined),false,'the removed page warning must not be rendered');
+  assert.ok(lateNodes.some(n=>n.props?.initialCount===3),'all three actual cards, including unknown power, remain visible');
+  assert.ok(lateNodes.some(n=>n.props?.initialCards?.some?.((card:any)=>card.props.offer.japanPowerUnknown===true)));
   countResult=Promise.resolve({total:42});
   const counterNodes=walk(await late.type(late.props));
   assert.ok(counterNodes.some(n=>n.props?.text==='42'&&n.props?.total===42),'late aggregate includes the numeric pagination value');

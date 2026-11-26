@@ -5,11 +5,11 @@ import {createRequire} from 'node:module';
 import {DetailReadCache} from '../apps/web/lib/catalog/detail-read-cache';
 const require=createRequire(import.meta.url);
 test('ready Japanese cards return while the independent count is still pending',async()=>{
- const state={counts:0,lists:0};(globalThis as any).__countFixture=state;
+ const state={counts:0,lists:0,queries:[] as any[]};(globalThis as any).__countFixture=state;
  const stubs:Record<string,string>={
   'server-only':'', 'next/headers':"export const headers=async()=>new Map([['x-real-ip','127.0.0.1']]);",
   './ajes-runtime':"export const ajesClient={read:async()=>{globalThis.__countFixture.counts++;return new Promise(()=>{});}};",
-  './ajes-public':`export const cappedAjesQuery=async q=>q;export const readAjesPublic=async q=>{globalThis.__countFixture.lists++;return {page:q.page||1,pageSize:24,received:24,items:Array.from({length:q.page===2?23:24},(_,i)=>({id:q.table+'-'+(q.page||1)+'-'+i})),observedAt:'now'};};`,
+  './ajes-public':`export const cappedAjesQuery=async q=>q;export const readAjesPublic=async q=>{globalThis.__countFixture.lists++;globalThis.__countFixture.queries.push(q);return {page:q.page||1,pageSize:24,received:24,items:Array.from({length:q.page===2?23:24},(_,i)=>({id:q.table+'-'+(q.page||1)+'-'+i})),observedAt:'now'};};`,
   './ajes-query':"export const ajesCatalogQuery=p=>({table:'stats',page:Number(p.page||1),pageSize:24});export class AjesFilterUnavailable extends Error{};export class AjesInputError extends Error{};",
   './ajes-client':"export const readAjesModelDirectory=async()=>({models:[]});export const readAjesMakeDirectory=async()=>({makes:[]});export class AjesUnavailable extends Error{};",
   './ajes-result-filter':"export const ajesResultFilter=()=>({active:false,priceFilter:false,matches:()=>true});",
@@ -25,17 +25,21 @@ test('ready Japanese cards return while the independent count is still pending',
   for(const market of ['japan']){
    let timer:ReturnType<typeof setTimeout>;
    const page:any=await Promise.race([mod.exports.readAjesCatalogPage({market,drive:'awd',city:'Новокузнецк'}),new Promise((_,reject)=>{timer=setTimeout(()=>reject(Error('ready cards blocked by count')),300);})]).finally(()=>clearTimeout(timer!));
-   assert.equal(page.items.length,24);assert.equal(page.total,null);assert.equal(page.hasMore,true);assert.equal(page.items[0].id,'stats-1-0');assert.equal(page.nextCursor,undefined,'unfiltered source pages keep numbered offsets');
+   assert.equal(page.items.length,24);assert.equal(page.total,null);assert.equal(page.hasMore,true);assert.equal(page.items[0].id,'stats-1-0');assert.match(page.nextCursor,/^j1\.2\.0\.2\.[a-f0-9]{64}\.-$/,'ordinary pages expose their actual continuation');
   }
   for(const market of ['japan']){
    const second=await mod.exports.readAjesCatalogPage({market,page:'2'},undefined,{includeCount:false});
-   const third=await mod.exports.readAjesCatalogPage({market,page:'3'},undefined,{includeCount:false});
-   assert.equal(second.items.length,23,'a removed row must not borrow from the next numbered page');
+   const third=await mod.exports.readAjesCatalogPage({market,page:'3',after:second.nextCursor},undefined,{includeCount:false});
+   assert.equal(second.items.length,24,'a locally removed row is replaced through the same 24-row source contract');
    assert.equal(third.items.length,24);
-   assert.equal(second.nextCursor,undefined);assert.equal(third.nextCursor,undefined);
-   assert.equal(new Set([...second.items,...third.items].map(x=>x.id)).size,47);
+   assert.match(second.nextCursor,/^j1\.3\.1\.3\./);assert.match(third.nextCursor,/^j1\.4\.1\.4\./);
+   assert.equal(second.items.at(-1).id,'stats-3-0');assert.equal(third.items[0].id,'stats-3-1');
+   assert.equal(new Set([...second.items,...third.items].map(x=>x.id)).size,48);
   }
-  assert.equal(state.counts,1);assert.equal(state.lists,3,'each numbered page reads only its own source offset');
+  assert.equal(state.counts,1);assert.equal(state.lists,5,'only explicitly consumed source pages are read');
+  assert.deepEqual(state.queries.map(q=>q.page),[1,2,3,3,4]);
+  assert.ok(state.queries.every(q=>q.pageSize===24));
+  assert.ok(state.queries.every(q=>JSON.stringify({...q,page:1})===JSON.stringify({...state.queries[0],page:1})),'refill changes only the source page, never the supplier selection');
  }finally{delete (globalThis as any).__countFixture;}
 });
 

@@ -19,7 +19,7 @@ import {readAjesPublic,cappedAjesQuery} from './ajes-public';
 import {ajesCatalogQuery} from './ajes-query';
 export {ajesCatalogQuery,AjesFilterUnavailable} from './ajes-query';
 import {publicOffer} from './storage';
-import {exactAjesCount,type AjesCountSummary} from './ajes-count-display';
+import type {AjesCountSummary} from './ajes-count-display';
 
 const sourceMakes=cache(async(table:any)=>{
  assertAjesJapanTable(table);
@@ -100,37 +100,27 @@ export async function readAjesCatalogPage(params:Record<string,unknown>,measure?
   measure?.('pricing',performance.now()-pricingStarted);
   return {...page,items:priced.filter(v=>v&&filter.matches(v))};
  };
- const firstPromise=params.after?null:read(query.page||1);
- // Unfiltered source pages keep their own offsets. Do not borrow rows from the
- // next page: numbered navigation must never repeat borrowed listings.
- // Post-calculation filters still require the explicit continuation below.
- if(!filter.active&&!params.after){
-  const page=await (firstPromise??read(query.page||1));
-  const total=readyCount as AjesCountSummary|null;
-  return {...page,filteredByPage:false,total:page.partial?null:exactAjesCount(total)??null,countSummary:total,hasMore:!page.partial&&page.received===page.pageSize,items:(query.sort&&query.sort!=="updatedAt"?sortCatalogRows(page.items,query.sort,String(params.city||"")):page.items).map((v:any)=>publicOffer(v)),generationId:page.observedAt,nextCursor:undefined,scanLimited:false,interrupted:false};
- }
- if(filter.powerFilter&&!filter.priceFilter&&!params.after){
-  // Power discovery reuses the requested source page. Filling a removed row
-  // from the next page would delay fresh cars behind an unrelated source read.
-  // Numbered navigation requests that next offset explicitly; old cursors and
-  // delivered-price selection keep the continuation reader below.
-  const page=await (firstPromise??read(query.page||1));
-  const hasMore=!page.partial&&page.received===page.pageSize;
-  const items=(query.sort&&query.sort!=="updatedAt"?sortCatalogRows(page.items,query.sort,String(params.city||"")):page.items).map((v:any)=>publicOffer(v));
-  const exact=(query.page||1)===1&&!hasMore&&!page.partial&&!page.stale?items.length:null;
-  const countSummary=exact!==null?{total:exact,upperBound:false,stale:false,observedAt:page.observedAt}:null;
-  return {...page,filteredByPage:true,total:exact,countSummary,hasMore,items,powerFilterSummary:japanPowerFilterSummary(items),generationId:page.observedAt,nextCursor:undefined,scanLimited:false,interrupted:false};
- }
- const initialPage=await firstPromise;
+ // Preserve the existing 24-row supplier query. Fill only this requested
+ // visible page after local admission/filtering, then expose the exact cursor
+ // in both numbered navigation and append.
+ const cursorQuery=JSON.stringify({
+  source:Object.fromEntries(Object.entries(query).filter(([key])=>key!=='page').sort(([a],[b])=>a.localeCompare(b))),
+  local:Object.fromEntries(['body','bodyType','budget','budgetFrom','budgetTo','hasPrice','powerFrom','powerTo','city'].map(key=>[key,String(params[key]??'')])),
+ });
+ const initial=params.after?undefined:await read(query.page||1);
  const total=readyCount as AjesCountSummary|null;
- // Reuse the first read only when it is the requested continuation's source page.
- let first:Awaited<ReturnType<typeof read>>|undefined=initialPage??undefined;
- const page=await readFilteredAjesPage({startedAt,page:query.page||1,pageSize:query.pageSize||24,after:params.after,sourceTotal:total&&!total.stale?total.total:undefined,
-  read:async sourcePage=>{if(firstPromise&&sourcePage===(query.page||1))return first!;const value=await read(sourcePage);first??=value;return value;}});
+ let first:Awaited<ReturnType<typeof read>>|undefined=initial;
+ const page=await readFilteredAjesPage<Awaited<ReturnType<typeof read>>['items'][number]>({startedAt,page:query.page||1,pageSize:query.pageSize||24,after:params.after,
+  minimumReads:2,cursorKey:cursorQuery,itemKey:offer=>offer.id,
+  // Read the optional count only after its own request has completed. It is
+  // never a prerequisite for a visible page or its next continuation.
+  sourceTotal:total&&!total.stale?total.total:undefined,
+  read:async sourcePage=>{if(initial&&sourcePage===(query.page||1))return initial;const value=await read(sourcePage);first??=value;return value;}});
+ const observedAt=page.observedAt??first!.observedAt;
  const exact=(query.page||1)===1&&!params.after&&!page.hasMore&&!page.partial&&!page.stale?page.items.length:null;
- const countSummary=exact!==null?{total:exact,upperBound:false,stale:false,observedAt:first!.observedAt}:total;
+ const countSummary=exact!==null?{total:exact,upperBound:false,stale:false,observedAt}:total;
  const items=(query.sort&&query.sort!=="updatedAt"?sortCatalogRows(page.items,query.sort,String(params.city||"")):page.items).map((v:any)=>publicOffer(v));
- return {...first,...page,page:query.page||1,filteredByPage:filter.active,total:exact,countSummary,...(filter.powerFilter?{powerFilterSummary:japanPowerFilterSummary(items)}:{}),items,generationId:first!.observedAt};
+ return {...first,...page,page:query.page||1,observedAt,filteredByPage:filter.active,total:exact,countSummary,...(filter.powerFilter?{powerFilterSummary:japanPowerFilterSummary(items)}:{}),items,generationId:observedAt};
 }
 /** Add once to totals built from the separate local inventory. A failure is not zero inventory. */
 export async function withAjesCount<T extends {total:number;marketCounts?:Record<string,number>;independentChina?:boolean}>(value:T,params:Record<string,unknown>={}):Promise<T & {countIncomplete?:boolean;marketCountInfo:Record<string,AjesCountSummary|null>}>{
