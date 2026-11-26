@@ -8,7 +8,7 @@ import {gunzipSync} from 'node:zlib';
 import {DetailReadCache} from './detail-read-cache';
 import {ajesQuery,ajesLot,ajesSourceCacheSql,AjesInputError,type AjesTable,type AjesQuery} from './ajes-query';
 import {AjesUnavailable,assertAjesJapanTable} from './ajes-access-policy';
-import {beginAjesReadEvidence,finishAjesReadEvidence,ajesReadQueryIdentity,ajesReadReason,ajesCooldownOrigin,type AjesReadEvidence,type AjesCooldownOrigin} from './ajes-read-evidence';
+import {beginAjesReadEvidence,finishAjesReadEvidence,ajesReadQueryIdentity,ajesReadReason,ajesCooldownOrigin,copyAjesResponseEvidence,AJES_RESPONSE_COLUMNS,AJES_RESPONSE_FUNCTIONS,type AjesReadEvidence,type AjesCooldownOrigin,type AjesResponseEvidence} from './ajes-read-evidence';
 
 export {AjesUnavailable} from './ajes-access-policy';
 // Release supplier admission before consulting historical
@@ -22,6 +22,85 @@ class AjesSavedRecovery {
 // It also stays outside visitor recovery admission: two empty lists must not
 // block each other's count-failure recovery while occupying both queues.
 class AjesEmptyValidation extends AjesSavedRecovery {}
+
+function responsePrefixClass(prefix:Uint8Array,mime:AjesResponseEvidence['mime']):Pick<AjesResponseEvidence,'bodyClass'|'identifier'> {
+ if(!prefix.length)return {bodyClass:'empty'};
+ let text:string;try{text=new TextDecoder('utf-8',{fatal:true}).decode(prefix);}catch{return {bodyClass:'binary_unclassified'};}
+ if(/[\x00-\x08\x0b\x0c\x0e-\x1f]/.test(text))return {bodyClass:'binary_unclassified'};
+ const refusal=text.match(/^\s*(bot|ban)\d*(?:\s|$)/i);
+ if(refusal)return {bodyClass:refusal[1].toLowerCase()==='bot'?'bot_refusal':'ban_refusal'};
+ const columnMatches=[...text.matchAll(/\bUnknown column\s+(['"`])([^'"`\r\n]{1,128})\1(?=\s|$)/gi)].map(match=>match[2].toLowerCase());
+ if(columnMatches.length||/\bSQLSTATE\[42S22\]/i.test(text)){
+  const names=[...new Set(columnMatches)],identifier=names.length===1&&(AJES_RESPONSE_COLUMNS as readonly string[]).includes(names[0])?names[0] as typeof AJES_RESPONSE_COLUMNS[number]:undefined;
+  return {bodyClass:'sql_unknown_column',...(identifier?{identifier}:{})};
+ }
+ const functionPatterns=[/\bFUNCTION\s+(['"`]?)([^\s'"`]{1,128})\1\s+does not exist\b/gi,
+  /\b(?:unknown|unsupported) function\s+(['"`])([^'"`\r\n]{1,128})\1(?=\s|$)/gi,
+  /\bno such function:\s*(['"`]?)([^\s'"`]{1,128})\1(?=\s|$)/gi];
+ const functionMatches=functionPatterns.flatMap(pattern=>[...text.matchAll(pattern)].map(match=>match[2].toLowerCase()));
+ if(functionMatches.length){
+  const names=[...new Set(functionMatches)],identifier=names.length===1&&(AJES_RESPONSE_FUNCTIONS as readonly string[]).includes(names[0])?names[0] as typeof AJES_RESPONSE_FUNCTIONS[number]:undefined;
+  return {bodyClass:'sql_unsupported_function',...(identifier?{identifier}:{})};
+ }
+ if(/\byou have an error in your SQL syntax\b|\bSQLSTATE\[42000\]:\s*Syntax error or access violation:\s*1064\b|\bsyntax error at or near\s+['"]/i.test(text))return {bodyClass:'sql_syntax'};
+ return {bodyClass:mime==='json'||/^\s*[\[{]/.test(text)?'json_unclassified':mime==='html'||/^\s*(?:<!doctype\s+html|<html\b)/i.test(text)?'html_unclassified':'text_unclassified'};
+}
+
+/** Observe only the failed response already obtained by this request. The
+ * retained prefix, read count and elapsed time are independently bounded.
+ * Cancellation is best-effort and never awaited: even a broken stream cleanup
+ * cannot replace or delay the original HTTP failure indefinitely. */
+export async function readAjesNon2xxResponseEvidence(response:Response,signal:AbortSignal,sourceDeadline=Infinity):Promise<AjesResponseEvidence|undefined> {
+ const observationDeadline=performance.now()+250,deadline=Math.min(observationDeadline,sourceDeadline),prefix=new Uint8Array(4096);
+ // Check the original clock budget directly too: a hot microtask stream can
+ // otherwise delay delivery of the existing source abort timer.
+ const deadlineStatus=sourceDeadline<=observationDeadline?'aborted':'timeout';
+ let bytesRead=0,reads=0,mime:AjesResponseEvidence['mime']='missing',encoding:AjesResponseEvidence['encoding']='missing';
+ let readStatus:AjesResponseEvidence['readStatus']='read_error',truncated=true,reader:ReadableStreamDefaultReader<Uint8Array>|undefined;
+ let timer:ReturnType<typeof setTimeout>|undefined,stopped:'timeout'|'aborted'|undefined,resolveStop!:(value:{stop:'timeout'|'aborted'})=>void;
+ const stoppedRead=new Promise<{stop:'timeout'|'aborted'}>(resolve=>{resolveStop=resolve;});
+ const stop=(value:'timeout'|'aborted')=>{if(!stopped){stopped=value;resolveStop({stop:value});}};
+ const abort=()=>stop('aborted');
+ try{
+  const type=response.headers.get('content-type')?.split(';',1)[0].trim().toLowerCase();
+  mime=!type?'missing':type==='application/json'||/^application\/[a-z0-9.+-]+\+json$/.test(type)?'json':type==='text/html'?'html':type.startsWith('text/')?'text':'other';
+  const declaredEncoding=response.headers.get('content-encoding')?.trim().toLowerCase();
+  encoding=!declaredEncoding?'missing':declaredEncoding==='identity'?'identity':declaredEncoding==='gzip'?'gzip':'other';
+  signal.addEventListener('abort',abort,{once:true});
+  if(signal.aborted)abort();
+  timer=setTimeout(()=>stop(deadlineStatus),Math.max(0,deadline-performance.now()));
+  reader=response.body?.getReader();
+  if(stopped)readStatus=stopped;
+  else if(!reader){readStatus='no_body';truncated=false;}
+  else while(true){
+   if(stopped||performance.now()>=deadline){readStatus=stopped||deadlineStatus;break;}
+   if(reads++>=4096){readStatus='chunk_limit';break;}
+   const next=await Promise.race([reader.read().then(value=>({value}),()=>({error:true as const})),stoppedRead]);
+   if('stop' in next){readStatus=next.stop;break;}
+   if(stopped||performance.now()>=deadline){readStatus=stopped||deadlineStatus;break;}
+   if('error' in next){readStatus=signal.aborted?'aborted':'read_error';break;}
+   if(next.value.done){readStatus='complete';truncated=false;break;}
+   const chunk=next.value.value;if(!(chunk instanceof Uint8Array)){readStatus='read_error';break;}
+   const length=Math.min(prefix.length-bytesRead,chunk.byteLength);
+   prefix.set(chunk.subarray(0,length),bytesRead);bytesRead+=length;
+   if(bytesRead===prefix.length){readStatus='limit';break;}
+  }
+ }catch{readStatus=signal.aborted?'aborted':'read_error';}
+ finally{
+  if(timer!==undefined)clearTimeout(timer);
+  signal.removeEventListener('abort',abort);
+  if(reader){
+   if(readStatus!=='complete')try{void reader.cancel().catch(()=>{});}catch{}
+   try{reader.releaseLock();}catch{}
+  }else try{void response.body?.cancel().catch(()=>{});}catch{}
+ }
+ try{
+  const observed=responsePrefixClass(prefix.subarray(0,bytesRead),mime);
+  // A prefix cannot prove that an identifier ends beyond its retained boundary.
+  if(truncated)delete observed.identifier;
+  return copyAjesResponseEvidence({version:1,mime,encoding,...observed,bytesRead,truncated,readStatus});
+ }catch{return undefined;}
+}
 const sourceTtlMs=30*60*1000;
 const sqlHash=(sql:string)=>createHash('sha256').update(sql).digest('hex');
 const needsEmptyProof=(value:any)=>value?.page===1&&Array.isArray(value.makes)&&value.makes.length===0
@@ -271,6 +350,7 @@ export function createAjesClient(deps:Dependencies) {
         // Power is a local selection over the same requested raw page. It uses
         // the ordinary source deadline, not a shorter deadline that discards
         // otherwise valid responses and unnecessarily falls back to old rows.
+        const sourceDeadline=performance.now()+20000;
         const timer=setTimeout(()=>controller.abort(),20000);
         try {
           const cooldown=coolingRecord(quotaKey)||coolingRecord('visitor:'+clientIp)||coolingRecord(visitorKey);
@@ -281,7 +361,12 @@ export function createAjesClient(deps:Dependencies) {
           const response=await (deps.fetcher??fetch)(url,{signal:controller.signal,redirect:'error',cache:'no-store'});
           httpStatus=response.status;
           if(evidence?.attempt)evidence.attempt.httpStatus=httpStatus;
-          if(!response.ok)throw new AjesUnavailable(response.status===414?'query_too_large':`http_${response.status}`);
+          if(!response.ok){
+            // Keep HTTP status, recovery and cooldown semantics unchanged.
+            // A diagnostic failure must never replace the original refusal.
+            try{const observed=await readAjesNon2xxResponseEvidence(response,controller.signal,sourceDeadline);if(observed&&evidence?.attempt)evidence.attempt.responseEvidence=observed;}catch{}
+            throw new AjesUnavailable(response.status===414?'query_too_large':`http_${response.status}`);
+          }
           if(Number(response.headers.get('content-length'))>2*1024*1024)throw new AjesUnavailable('response_too_large');
           const reader=response.body?.getReader();
           if(!reader)throw new AjesUnavailable('empty_response');

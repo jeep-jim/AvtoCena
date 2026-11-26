@@ -7,7 +7,15 @@ type Disposition=typeof AJES_READ_DISPOSITIONS[number];
 type Reason=typeof AJES_READ_REASONS[number]|`http_${number}`;
 type QueryIdentity={table:'stats'|'main';kind:Kind;page:number;pageSize:number;canonicalQuerySha256:string;wireQuerySha256:string};
 type EmptyIdentity={table:null;kind:null;page:null;pageSize:null;canonicalQuerySha256:null;wireQuerySha256:null};
-type Attempt={startedAt:string;finishedAt:string;httpStatus:number|null};
+export const AJES_RESPONSE_COLUMNS=['id','year','auction_type','status','finish','marka_name','model_name','grade','pw','auction_date','time','kpp','priv','kuzov','color','eng_v','mileage','rate','serial','lot'] as const;
+export const AJES_RESPONSE_FUNCTIONS=['concat_ws','length','trim','count'] as const;
+const responseMimes=['json','html','text','other','missing'] as const;
+const responseEncodings=['identity','gzip','other','missing'] as const;
+const responseClasses=['empty','bot_refusal','ban_refusal','sql_syntax','sql_unknown_column','sql_unsupported_function','json_unclassified','html_unclassified','text_unclassified','binary_unclassified','unclassified'] as const;
+const responseStatuses=['complete','limit','chunk_limit','timeout','aborted','read_error','no_body'] as const;
+export type AjesResponseEvidence={version:1;mime:typeof responseMimes[number];encoding:typeof responseEncodings[number];bodyClass:typeof responseClasses[number];
+ bytesRead:number;truncated:boolean;readStatus:typeof responseStatuses[number];identifier?:typeof AJES_RESPONSE_COLUMNS[number]|typeof AJES_RESPONSE_FUNCTIONS[number]};
+type Attempt={startedAt:string;finishedAt:string;httpStatus:number|null;responseEvidence?:AjesResponseEvidence};
 export type AjesCooldownOrigin=QueryIdentity&{runtimeSha:string|null;attemptStartedAt:string;attemptFinishedAt:string;httpStatus:number|null;reason:Reason};
 export type AjesSourceReadReceipt=(QueryIdentity|EmptyIdentity)&{
  version:1;readId:string;runtimeSha:string|null;readStartedAt:string;readFinishedAt:string;
@@ -19,6 +27,29 @@ const sha=(value:unknown,size:number)=>typeof value==='string'&&new RegExp(`^[a-
 const runtimeSha=()=>sha(process.env.AVTOCENA_RELEASE_SHA,40)?process.env.AVTOCENA_RELEASE_SHA!:null;
 const iso=(value:unknown):value is string=>typeof value==='string'&&/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/.test(value)&&Number.isFinite(Date.parse(value))&&new Date(value).toISOString()===value;
 const status=(value:unknown)=>value===null||Number.isInteger(value)&&Number(value)>=100&&Number(value)<=599;
+/** These categories describe observed response markers, never a proven cause.
+ * Snapshot data properties once: even a hostile getter must not reach output. */
+export function copyAjesResponseEvidence(value:unknown):AjesResponseEvidence|undefined {
+ try{
+  if(!value||typeof value!=='object'||Array.isArray(value))return;
+  const required=['version','mime','encoding','bodyClass','bytesRead','truncated','readStatus'];
+  const descriptors=Object.getOwnPropertyDescriptors(value),names=Reflect.ownKeys(descriptors);
+  if(required.some(key=>!Object.hasOwn(descriptors,key))||names.some(key=>typeof key!=='string'||!required.includes(key)&&key!=='identifier')
+   ||names.some(key=>!Object.hasOwn(descriptors[key as string],'value')))return;
+  const v=Object.fromEntries(names.map(key=>[key,descriptors[key as string].value]));
+  if(v.version!==1||!(responseMimes as readonly unknown[]).includes(v.mime)||!(responseEncodings as readonly unknown[]).includes(v.encoding)
+   ||!(responseClasses as readonly unknown[]).includes(v.bodyClass)||!(responseStatuses as readonly unknown[]).includes(v.readStatus)
+   ||!Number.isSafeInteger(v.bytesRead)||v.bytesRead<0||v.bytesRead>4096||typeof v.truncated!=='boolean')return;
+  if(v.readStatus==='limit'&&(v.bytesRead!==4096||v.truncated!==true)
+   ||v.readStatus==='complete'&&v.truncated!==false
+   ||v.readStatus==='no_body'&&(v.bytesRead!==0||v.truncated!==false||v.bodyClass!=='empty')
+   ||['chunk_limit','timeout','aborted','read_error'].includes(v.readStatus)&&v.truncated!==true)return;
+  if(v.identifier!==undefined&&(v.truncated||!(v.bodyClass==='sql_unknown_column'?(AJES_RESPONSE_COLUMNS as readonly unknown[]).includes(v.identifier)
+   :v.bodyClass==='sql_unsupported_function'&&(AJES_RESPONSE_FUNCTIONS as readonly unknown[]).includes(v.identifier))))return;
+  return {version:1,mime:v.mime,encoding:v.encoding,bodyClass:v.bodyClass,bytesRead:v.bytesRead,truncated:v.truncated,readStatus:v.readStatus,
+   ...(v.identifier===undefined?{}:{identifier:v.identifier})};
+ }catch{return undefined;}
+}
 export function ajesReadReason(value:unknown):Reason|null {
  return typeof value==='string'&&((AJES_READ_REASONS as readonly string[]).includes(value)||/^http_[1-5]\d{2}$/.test(value))?value as Reason:null;
 }
@@ -49,6 +80,11 @@ export function copyAjesSourceReadReceipt(value:unknown):AjesSourceReadReceipt|u
   const a=v.sourceAttempt;
   if(!a||!iso(a.startedAt)||!iso(a.finishedAt)||a.startedAt<v.readStartedAt||a.finishedAt<a.startedAt||a.finishedAt>v.readFinishedAt||!status(a.httpStatus))return;
   sourceAttempt={startedAt:a.startedAt,finishedAt:a.finishedAt,httpStatus:a.httpStatus};
+  if(a.responseEvidence!==undefined){
+   if(a.httpStatus===null||a.httpStatus>=200&&a.httpStatus<=299)return;
+   const responseEvidence=copyAjesResponseEvidence(a.responseEvidence);if(!responseEvidence)return;
+   sourceAttempt.responseEvidence=responseEvidence;
+  }
  }else if(v.sourceAttempt!==null)return;
  if(v.disposition==='shared_or_cached'?v.sourceAttempted!==null:['source','source_recovery'].includes(v.disposition)?v.sourceAttempted!==true:v.disposition!=='unavailable'&&v.sourceAttempted!==false)return;
  const origin=v.cooldownOrigin===undefined?undefined:copyOrigin(v.cooldownOrigin);
@@ -66,7 +102,7 @@ export function ajesSourceReadReceiptFromError(error:unknown){
 export type AjesReadEvidence={
  readId:string;runtimeSha:string|null;readStartedAt:string;query:QueryIdentity|EmptyIdentity;
  disposition?:Disposition;enteredSourceCache?:boolean;loaderStarted?:boolean;recovery?:boolean;emptyValidation?:true;
- reason:Reason|null;attempt:{startedAt:string;finishedAt:string|null;httpStatus:number|null}|null;cooldownOrigin?:AjesCooldownOrigin;
+ reason:Reason|null;attempt:{startedAt:string;finishedAt:string|null;httpStatus:number|null;responseEvidence?:AjesResponseEvidence}|null;cooldownOrigin?:AjesCooldownOrigin;
 };
 export function beginAjesReadEvidence():AjesReadEvidence {
  return {readId:randomUUID(),runtimeSha:runtimeSha(),readStartedAt:new Date().toISOString(),query:{table:null,kind:null,page:null,pageSize:null,canonicalQuerySha256:null,wireQuerySha256:null},reason:null,attempt:null};

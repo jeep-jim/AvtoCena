@@ -1,10 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
-import {createAjesClient,AjesUnavailable} from '../apps/web/lib/catalog/ajes-client';
+import {getEventListeners} from 'node:events';
+import {createAjesClient,AjesUnavailable,readAjesNon2xxResponseEvidence} from '../apps/web/lib/catalog/ajes-client';
 import {ajesQuery,ajesSourceCacheSql} from '../apps/web/lib/catalog/ajes-query';
 import {DetailReadCache} from '../apps/web/lib/catalog/detail-read-cache';
-import {copyAjesSourceReadReceipt,ajesSourceReadReceiptFromError} from '../apps/web/lib/catalog/ajes-read-evidence';
+import {copyAjesSourceReadReceipt,ajesSourceReadReceiptFromError,copyAjesResponseEvidence} from '../apps/web/lib/catalog/ajes-read-evidence';
 
 const ip='203.0.113.71',otherIp='203.0.113.72',release='f'.repeat(40);
 const row={ID:'fixture001',MARKA_NAME:'TOYOTA',MODEL_NAME:'COROLLA',YEAR:'2023',AUCTION_TYPE:'2',STATUS:'Sold',FINISH:'100000',PW:'150',TIME:'P'};
@@ -132,4 +133,146 @@ test('receipt copying strips foreign fields and rejects malformed evidence witho
  for(const patch of [{readId:'arbitrary'},{runtimeSha:'secret'},{wireQuerySha256:'not a hash'},{reason:'arbitrary private error'},{pageSize:49},{readFinishedAt:'invalid'},{sourceAttempted:false},{sourceAttempt:{...valid.sourceAttempt,httpStatus:999}},{cooldownOrigin:{sql:'private'}}])assert.equal(copyAjesSourceReadReceipt({...valid,...patch}),undefined);
  const hostile=Object.defineProperty({},'version',{get(){throw Error('private getter');}});
  assert.equal(copyAjesSourceReadReceipt(hostile),undefined);assert.equal(ajesSourceReadReceiptFromError(Object.defineProperty({},'sourceReadReceipt',{get(){throw Error('private getter');}})),undefined);
+});
+
+test('non-2xx evidence keeps only observed finite markers and exact allowlisted identifiers',async()=>{
+ const secret='private-password-fixture';
+ const cases:[string,string,string|undefined][]=[
+  [`bot2 ${secret}`,'bot_refusal',undefined],
+  [`ban7 ${secret}`,'ban_refusal',undefined],
+  [`Unknown column 'GRADE' in 'where clause' ${secret}`,'sql_unknown_column','grade'],
+  ["Unknown column 'PW' in 'where clause'",'sql_unknown_column','pw'],
+  [`Unknown column '${secret}' in 'where clause'`,'sql_unknown_column',undefined],
+  ["Unknown column 'stats.grade' in 'where clause'",'sql_unknown_column',undefined],
+  ["Unknown column 'grade' in 'where clause'; Unknown column 'pw' in 'field list'",'sql_unknown_column',undefined],
+  [`Unknown column 'grade' in 'where clause'; Unknown column '${secret}' in 'field list'`,'sql_unknown_column',undefined],
+  [`SQLSTATE[42000]: Syntax error or access violation: 1064 ${secret}`,'sql_syntax',undefined],
+  [`FUNCTION concat_ws does not exist ${secret}`,'sql_unsupported_function','concat_ws'],
+  ['no such function: trim','sql_unsupported_function','trim'],
+  [`Unknown function '${secret}'`,'sql_unsupported_function',undefined],
+  [`FUNCTION concat_ws does not exist; Unknown function '${secret}'`,'sql_unsupported_function',undefined],
+  [`{"error":"${secret}"}`,'json_unclassified',undefined],
+  [`<html><body>${secret}</body></html>`,'html_unclassified',undefined],
+  [secret,'text_unclassified',undefined],
+ ];
+ for(const [body,bodyClass,identifier] of cases){
+  let fetches=0,reserves=0;const client=createAjesClient({...base,reserve:async()=>{reserves++;},fetcher:async()=>{fetches++;return new Response(body,{status:500,headers:{'content-type':'text/plain; charset='+secret,'content-encoding':'identity'}});}});
+  let failure:unknown;try{await client.read(query,ip);}catch(error){failure=error;}
+  assert.ok(failure instanceof AjesUnavailable);assert.equal(failure.reason,'http_500');
+  const source=ajesSourceReadReceiptFromError(failure)!;assert.ok(source);assert.equal(source.sourceAttempted,true);assert.equal(source.reason,'http_500');
+  const observed=source.sourceAttempt?.responseEvidence;assert.ok(observed);
+  assert.deepEqual(observed,{version:1,mime:'text',encoding:'identity',bodyClass,bytesRead:Buffer.byteLength(body),truncated:false,readStatus:'complete',...(identifier?{identifier}:{})});
+  const raw=JSON.stringify(source);for(const privateValue of [secret,ip,'http://','select ','where clause','SQLSTATE'])assert.equal(raw.includes(privateValue),false,privateValue);
+  assert.equal(fetches,1);assert.equal(reserves,1);
+ }
+});
+
+test('HTTP 500 with a refusal marker preserves exact-query cooldown, stale recovery and all source counts',async()=>{
+ let fetches=0,reserves=0;const diagnostics:any[]=[],persisted:any[]=[];
+ const saved=snapshot(),client=createAjesClient({...base,readQuery:async()=>saved,reserve:async()=>{reserves++;},
+  saveQuery:async(_sql,value)=>{persisted.push(value);},saveRequestFailure:async value=>{diagnostics.push(value);},
+  fetcher:async()=>{fetches++;return new Response('bot2 private-password-fixture',{status:500});}});
+ const first=await client.read(query,ip),a=receipt(first);
+ assert.equal(first.stale,true);assert.deepEqual(first.items,saved.items);assert.equal(first.observedAt,saved.observedAt);
+ assert.equal(a.reason,'http_500');assert.equal(a.disposition,'source_recovery');assert.equal(a.sourceAttempt?.responseEvidence?.bodyClass,'bot_refusal');
+ const second=receipt(await client.read(query,ip));assert.equal(second.reason,'http_500');assert.equal(second.sourceAttempt,null);
+ assert.equal(second.disposition,'cooldown_recovery');assert.equal((second.cooldownOrigin as any)?.responseEvidence,undefined);
+ await assert.rejects(client.read({...query,page:2},ip),/http_500/);assert.equal(fetches,2,'HTTP500 remains query-local, not a visitor-wide bot cooldown');assert.equal(reserves,2);
+ await tick();assert.equal(persisted.length,0);assert.ok(diagnostics.length);
+ for(const value of diagnostics){assert.equal(value.providerCode,null);assert.equal(value.outcome,'http_500');assert.equal(JSON.stringify(value).includes('private-password-fixture'),false);assert.equal(Object.hasOwn(value,'responseEvidence'),false);}
+});
+
+test('large error chunks retain only 4096 prefix bytes and cancel without waiting for cleanup',async()=>{
+ let cancelCalls=0,pulls=0;
+ const stream=new ReadableStream<Uint8Array>({pull(controller){pulls++;controller.enqueue(Buffer.from('x'.repeat(4096)+"Unknown column 'grade' private-password-fixture"));},cancel(){cancelCalls++;return new Promise<void>(()=>{});}});
+ const response=new Response(stream,{status:500,headers:{'content-type':'text/plain'}}),control=new AbortController();
+ const observed=await readAjesNon2xxResponseEvidence(response,control.signal);
+ assert.deepEqual(observed,{version:1,mime:'text',encoding:'missing',bodyClass:'text_unclassified',bytesRead:4096,truncated:true,readStatus:'limit'});
+ assert.equal(cancelCalls,1);assert.ok(pulls<=2,'one consumed chunk plus the native stream queue at most');assert.equal(stream.locked,false);
+ assert.equal(getEventListeners(control.signal,'abort').length,0);
+ const marker=new Response(new ReadableStream({start(controller){controller.enqueue(Buffer.from("Unknown column 'grade' "+'x'.repeat(4096)));},cancel(){}}),{status:500});
+ const truncated=await readAjesNon2xxResponseEvidence(marker,new AbortController().signal);
+ assert.equal(truncated?.bodyClass,'sql_unknown_column');assert.equal(truncated?.identifier,undefined,'an incomplete prefix never certifies an identifier');
+});
+
+test('a stalled error body and a stalled cancel remain within the one observation timeout',async t=>{
+ const set=globalThis.setTimeout,delays:number[]=[];
+ t.mock.method(globalThis,'setTimeout',((callback:any,delay?:number,...args:any[])=>{delays.push(Number(delay));return set(callback,delay,...args);}) as typeof setTimeout);
+ let cancelled=0;const stream=new ReadableStream<Uint8Array>({start(controller){controller.enqueue(Buffer.from('prefix'));},cancel(){cancelled++;return new Promise<void>(()=>{});}});
+ const control=new AbortController(),started=performance.now();
+ const observed=await readAjesNon2xxResponseEvidence(new Response(stream,{status:500}),control.signal);
+ assert.equal(observed?.readStatus,'timeout');assert.equal(observed?.truncated,true);assert.equal(observed?.bytesRead,6);
+ assert.equal(cancelled,1);assert.equal(stream.locked,false);assert.equal(getEventListeners(control.signal,'abort').length,0);
+ assert.equal(delays.length,1);assert.ok(delays[0]>=0&&delays[0]<=250);assert.ok(performance.now()-started<1500,'a never-settling cancel is not awaited');
+});
+
+test('endless immediately available empty chunks cannot starve the diagnostic deadline',async()=>{
+ let pulls=0,cancelled=0;
+ const stream=new ReadableStream<Uint8Array>({pull(controller){pulls++;controller.enqueue(new Uint8Array());},cancel(){cancelled++;}});
+ const control=new AbortController(),started=performance.now(),observed=await readAjesNon2xxResponseEvidence(new Response(stream,{status:500}),control.signal);
+ assert.ok(observed&&['chunk_limit','timeout'].includes(observed.readStatus));assert.equal(observed.bytesRead,0);assert.equal(observed.truncated,true);
+ assert.ok(pulls<=4097);assert.equal(cancelled,1);assert.equal(stream.locked,false);assert.equal(getEventListeners(control.signal,'abort').length,0);
+ assert.ok(performance.now()-started<1500);
+});
+
+test('the original monotonic deadline also bounds a hot stream before its abort event is delivered',async()=>{
+ let cancelled=0,pulls=0;const control=new AbortController();
+ const stream=new ReadableStream<Uint8Array>({pull(controller){pulls++;controller.enqueue(new Uint8Array());},cancel(){cancelled++;return new Promise<void>(()=>{});}});
+ const originalDeadline=performance.now()+3;
+ const value=await readAjesNon2xxResponseEvidence(new Response(stream,{status:500}),control.signal,originalDeadline);
+ assert.equal(control.signal.aborted,false,'the deadline does not depend on a timer delivering an abort event');
+ assert.equal(value?.readStatus,'aborted');assert.equal(value?.truncated,true);assert.equal(value?.bytesRead,0);
+ assert.equal(cancelled,1);assert.ok(pulls<=4097);assert.equal(stream.locked,false);assert.equal(getEventListeners(control.signal,'abort').length,0);
+});
+
+test('the original abort signal stops observation before or during a pending body read',async()=>{
+ for(const already of [true,false]){
+  const control=new AbortController();let cancelled=0,pulls=0;
+  const stream=new ReadableStream<Uint8Array>({pull(){pulls++;},cancel(){cancelled++;return new Promise<void>(()=>{});}});
+  if(already)control.abort();
+  const observed=readAjesNon2xxResponseEvidence(new Response(stream,{status:500}),control.signal);
+  if(!already)control.abort();
+  const value=await observed;assert.equal(value?.readStatus,'aborted');assert.equal(value?.truncated,true);assert.equal(value?.bytesRead,0);
+  assert.equal(cancelled,1);assert.ok(pulls<=1);assert.equal(stream.locked,false);assert.equal(getEventListeners(control.signal,'abort').length,0);
+ }
+});
+
+test('stream and header errors remain observational and never replace the original HTTP failure',async()=>{
+ for(const status of [400,500])for(const failureKind of ['body','headers']){
+  let fetches=0,reserves=0;
+  const stream=new ReadableStream<Uint8Array>({pull(controller){controller.error(Error('private-password-fixture'));}});
+  const response=new Response(stream,{status});
+  if(failureKind==='headers')Object.defineProperty(response,'headers',{get(){throw Error('private-password-fixture');}});
+  const client=createAjesClient({...base,reserve:async()=>{reserves++;},fetcher:async()=>{fetches++;return response;}});
+  let failure:unknown;try{await client.read(query,ip);}catch(error){failure=error;}
+  assert.ok(failure instanceof AjesUnavailable);assert.equal(failure.reason,`http_${status}`);
+  const read=ajesSourceReadReceiptFromError(failure)!;assert.ok(read);assert.equal(read.sourceAttempt?.httpStatus,status);
+  assert.equal(read.sourceAttempt?.responseEvidence?.readStatus,'read_error');assert.equal(JSON.stringify(read).includes('private-password-fixture'),false);
+  assert.equal(fetches,1);assert.equal(reserves,1);assert.equal(stream.locked,false);
+ }
+});
+
+test('response evidence handles absent and binary bodies without inventing a textual reason',async()=>{
+ const noBody=await readAjesNon2xxResponseEvidence(new Response(null,{status:500}),new AbortController().signal);
+ assert.deepEqual(noBody,{version:1,mime:'missing',encoding:'missing',bodyClass:'empty',bytesRead:0,truncated:false,readStatus:'no_body'});
+ const binary=await readAjesNon2xxResponseEvidence(new Response(new Uint8Array([255,0,1]),{status:500,headers:{'content-type':'application/octet-stream','content-encoding':'br'}}),new AbortController().signal);
+ assert.deepEqual(binary,{version:1,mime:'other',encoding:'other',bodyClass:'binary_unclassified',bytesRead:3,truncated:false,readStatus:'complete'});
+});
+
+test('nested response evidence rejects private extras, getters, wrong bindings and impossible bounds',async()=>{
+ let failure:unknown;try{await createAjesClient({...base,fetcher:async()=>new Response("Unknown column 'grade' in 'where clause'",{status:500})}).read(query,ip);}catch(error){failure=error;}
+ const valid=ajesSourceReadReceiptFromError(failure)!,observed=valid.sourceAttempt!.responseEvidence!;assert.ok(observed);
+ for(const patch of [{body:'private-password-fixture'},{bodyHash:'a'.repeat(64)},{bytesRead:4097},{bytesRead:-1},{bytesRead:1.5},{readStatus:'limit'},
+  {truncated:true},{readStatus:'timeout'},{readStatus:'chunk_limit'},{identifier:'private-password-fixture'},{identifier:'concat_ws'},{bodyClass:'sql_syntax'},
+  {readStatus:'limit',bytesRead:4096,truncated:true},
+  {mime:'text/private-password-fixture'},{encoding:'private-password-fixture'},{version:2}]){
+  assert.equal(copyAjesResponseEvidence({...observed,...patch}),undefined);
+ }
+ assert.equal(copyAjesResponseEvidence(null),undefined);assert.equal(copyAjesResponseEvidence({...observed,identifier:undefined})?.identifier,undefined);
+ for(const httpStatus of [null,200,204,299])assert.equal(copyAjesSourceReadReceipt({...valid,sourceAttempt:{...valid.sourceAttempt,httpStatus}}),undefined);
+ assert.equal(copyAjesSourceReadReceipt({...valid,sourceAttempt:{...valid.sourceAttempt,responseEvidence:null}}),undefined);
+ let getterCalls=0;const hostile={...observed};Object.defineProperty(hostile,'mime',{enumerable:true,get(){getterCalls++;return getterCalls===1?'text':'private-password-fixture';}});
+ assert.equal(copyAjesResponseEvidence(hostile),undefined);assert.equal(getterCalls,0);
+ Object.defineProperty(hostile,'mime',{enumerable:true,configurable:true,get(){throw Error('private-password-fixture');}});
+ assert.equal(copyAjesResponseEvidence(hostile),undefined);
 });
