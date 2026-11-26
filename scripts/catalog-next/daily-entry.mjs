@@ -4,7 +4,7 @@ import {execFileSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
 import {verifyFrozenSpeedBaselines} from '../verify-frozen-speed-baselines.mjs';
 import {verifyServingCompatibility} from './serving-compatibility.mjs';
-import {createChinaStateStorage, createChinaState, validateChinaGenerationReference} from './china-state.mjs';
+import {createChinaStateStorage, createChinaState, validateChinaGenerationReference, inspectChinaPublicationState} from './china-state.mjs';
 import {createChinaDailyRelease} from './daily-release.mjs';
 import {runChinaDailyCycle} from './daily-controller.mjs';
 import {verifyReadonlyInvocation} from '../lib/readonly-marker-invocation.mjs';
@@ -176,8 +176,18 @@ export async function runChinaDailyEntry({root = ROOT, environment = process.env
         return (await releaseFor(candidate.runtimeSha)).recoverRelease(args);
       },
       async retireHost(args) {
-        const retained = validateChinaGenerationReference(args.acceptedPublication?.accepted?.value?.current, {requireAccepted: true});
-        return (await releaseFor(retained.runtimeSha)).retireHost(args);
+        need(typeof args?.readState === 'function' && typeof args?.assertAuthority === 'function', 'retirement_authority');
+        await args.assertAuthority();
+        const current = await args.readState();
+        await args.assertAuthority();
+        need(inspectChinaPublicationState(current).status === 'resolved', 'retirement_state');
+        const retained = validateChinaGenerationReference(current.accepted.value?.current, {requireAccepted: true});
+        need(retained.pricingRuntimeSha === pricingPlan.runtimeSha, 'accepted_runtime');
+        const adapter = await releaseFor(retained.runtimeSha);
+        await args.assertAuthority();
+        // Historical permission stays intact; only the host adapter is selected
+        // from the fresh protected state, never from an obsolete serving plan.
+        return adapter.retireHost(args);
       },
     };
     let deadlineAt = null;

@@ -10,6 +10,8 @@ import {verifyChinaDailyInvocation, checkoutChinaDailyRuntimes, runChinaDailyEnt
   readChinaDailyDeadline, readChinaDailyPlans, selectChinaDailyServingPlan,
   CHINA_DAILY_JOB_TIMEOUT_MINUTES} from '../scripts/catalog-next/daily-entry.mjs';
 import {runChinaDailyCycle} from '../scripts/catalog-next/daily-controller.mjs';
+import {inspectChinaPublicationState} from '../scripts/catalog-next/china-state.mjs';
+import {validateChinaGenerationRetirementWitness} from '../scripts/catalog-next/china-generation-gc.mjs';
 
 const root = process.cwd(), sha = 'a'.repeat(40), hash = value => createHash('sha256').update(value).digest('hex');
 const ordered = value => Array.isArray(value) ? value.map(ordered) : value && typeof value === 'object'
@@ -142,11 +144,12 @@ test('the reviewed code plan adds one exact checkout and cannot infer a revision
   await assert.rejects(readChinaDailyPlans(f.control), /plans/);
 });
 
-function accepted(f, {sourceObservedAt = '2026-11-24T09:00:00Z', acceptedAt = '2026-11-24T10:00:00Z'} = {}) {
+function accepted(f, {sourceObservedAt = '2026-11-24T09:00:00Z', acceptedAt = '2026-11-24T10:00:00Z',
+  generation = 100, runtimeSha = f.servingPlan.runtimeSha} = {}) {
   const nonce = 'b'.repeat(32), at = acceptedAt;
-  const ref = {market: 'china', generationId: 'gen_china_100_1', owner: {runId: '100', attempt: '1', revision: sha},
+  const ref = {market: 'china', generationId: `gen_china_${generation}_1`, owner: {runId: String(generation), attempt: '1', revision: sha},
     receiptSha256: '1'.repeat(64), sourceDescriptorSha256: '2'.repeat(64), generationManifestSha256: '3'.repeat(64),
-    sourceCursor: 100, sourceObservedAt, runtimeSha: f.servingPlan.runtimeSha,
+    sourceCursor: 100, sourceObservedAt, runtimeSha,
     pricingRuntimeSha: f.pricingPlan.runtimeSha, imageId: 'sha256:' + '4'.repeat(64)};
   // Test-only representation of a receipt read from an authenticated host.
   const receipt = Buffer.from(JSON.stringify({version: 1, kind: 'china-host-acceptance-v1', release: ref.runtimeSha,
@@ -159,6 +162,24 @@ function accepted(f, {sourceObservedAt = '2026-11-24T09:00:00Z', acceptedAt = '2
     current: {...ref, proof: {kind: 'china-accepted-proof-v1', hostReceiptBase64: receipt.toString('base64'), hostReceiptSha256: hash(receipt)}},
     commit: {nonce, intentSha256: '9'.repeat(64), previousETag: null, previousStateSha256: null, acceptedAt: at}};
   return {found: true, etag: '"native-accepted"', sha256: hash(JSON.stringify(ordered(value))), value};
+}
+
+function resolvedPublication(input, previous = {found: false, etag: null, sha256: null, value: null}) {
+  const {proof, ...candidate} = input.value.current;
+  const pending = {version: 1, kind: 'china-publication-intent-v1', market: 'china',
+    revision: (previous.value?.revision ?? 0) + 1, nonce: input.value.commit.nonce, owner: candidate.owner,
+    createdAt: input.value.commit.acceptedAt, candidate, previous, status: 'pending', resolution: null};
+  const value = {...input.value, revision: (previous.value?.revision ?? 0) + 2, rollback: previous.value?.current ?? null,
+    commit: {...input.value.commit, intentSha256: hash(JSON.stringify(ordered(pending))),
+      previousETag: previous.etag, previousStateSha256: previous.sha256}};
+  const observation = {found: true, etag: '"accepted-' + candidate.owner.runId + '"',
+    sha256: hash(JSON.stringify(ordered(value))), value};
+  const intentValue = {...pending, status: 'committed', resolution: {kind: 'accepted', at: value.commit.acceptedAt,
+    acceptedETag: observation.etag, acceptedSha256: observation.sha256, hostReceiptSha256: proof.hostReceiptSha256}};
+  const publication = {accepted: observation, intent: {found: true, etag: '"intent-' + candidate.owner.runId + '"',
+    sha256: hash(JSON.stringify(ordered(intentValue))), value: intentValue}};
+  assert.equal(inspectChinaPublicationState(publication).status, 'resolved');
+  return publication;
 }
 
 test('primary and catch-up events skip preparation in a fresh source window and still prepare in the next window', async t => {
@@ -276,10 +297,90 @@ test('recovery of a code publication selects the new reviewed adapter before the
     RUNNER_TEMP: f.temporary, JSON_STORAGE_DRIVER: 'object'}, capabilities}), /accepted_runtime/);
 });
 
+async function historicalRetirementFixture(t, historicalRuntime) {
+  const f = await fixture(t, {withCodePlan: true}), creations = [], events = [];
+  let historical;
+  for (const generation of [100, 101, 102]) historical = resolvedPublication(
+    accepted(f, {generation, runtimeSha: historicalRuntime}), historical?.accepted);
+  const witness = {previousAccepted: historical.intent.value.previous, acceptedPublication: historical};
+  assert.equal(validateChinaGenerationRetirementWitness(witness).reference.generationId, 'gen_china_100_1');
+  const fresh = resolvedPublication(accepted(f, {generation: 103}), historical.accepted);
+  const state = {current: fresh, assertions: 0, reads: 0, retired: 0, refuseAuthorityAt: 0};
+  const args = {...witness,
+    async readState() { state.reads++; events.push('fresh-state'); return state.current; },
+    async assertAuthority() {
+      state.assertions++; events.push('authority');
+      if (state.refuseAuthorityAt === state.assertions) throw Error('china_daily_state_changed');
+    }};
+  const before = structuredClone(witness), checkoutCalls = structuredClone(f.calls);
+  const capabilities = {
+    verifyInvocation: async () => ({version: 1, event: 'workflow_dispatch', sourceSha: sha}), verifyBaselines: () => {},
+    runtimeGit: directory => argv => { assert.equal(directory, f.runtimes.pricingRoot);
+      return argv[0] === 'diff' ? '' : argv[1] === 'HEAD' ? f.pricingPlan.runtimeSha : f.pricingPlan.runtimeTree; },
+    verifyCompatibility: async input => { assert.equal(input.servingPlan.runtimeSha, f.servingPlan.runtimeSha); },
+    createStorage: () => ({assertPrivateBucket: async () => ({verified: true}), read: async name => {
+      assert.equal(name, 'accepted'); return fresh.accepted;
+    }, compareAndSwap: async () => assert.fail('adapter selection must not write publication state')}),
+    readDeadline: async () => '2026-11-24T18:00:00.000Z',
+    createRelease: input => {
+      creations.push(input.servingPlan.runtimeSha);
+      return {stageRelease: async () => assert.fail('retirement cannot stage or build'),
+        recoverRelease: async () => assert.fail('retirement cannot recover a publication'),
+        async retireHost(received) {
+          state.retired++; events.push('retire'); assert.equal(received, args);
+          assert.equal(received.previousAccepted, witness.previousAccepted);
+          assert.equal(received.acceptedPublication, historical);
+          assert.deepEqual({previousAccepted: received.previousAccepted, acceptedPublication: received.acceptedPublication}, before);
+          assert.equal(input.servingPlan.runtimeSha, fresh.accepted.value.current.runtimeSha);
+          return {completed: true, retiredContainers: 0, filesDeleted: 0, freedBytes: 0};
+        }};
+    },
+    runCycle: async input => {
+      const result = await input.retirePreviousHost(args);
+      assert.equal(result.completed, true);
+      return {kind: 'china-daily-cycle-v1', completed: true, market: 'china', published: false, status: 'fixture_retired'};
+    },
+  };
+  const invoke = () => runChinaDailyEntry({root: f.control, environment: {...env('workflow_dispatch'),
+    RUNNER_TEMP: f.temporary, JSON_STORAGE_DRIVER: 'object'}, capabilities});
+  return {...f, fresh, state, creations, events, args, witness, before, checkoutCalls, invoke};
+}
+
+for (const historicalRuntime of ['36c7ea726e7f070d10dbc65afc6538f13c0c1a24', 'd536c1547c4d82a339ed68ced7d8503f09b6810b']) {
+  test('host retirement selects fresh accepted runtime while preserving historical ' + historicalRuntime.slice(0, 7) + ' permission', async t => {
+    const f = await historicalRetirementFixture(t, historicalRuntime);
+    assert(![f.servingPlan.runtimeSha, f.codePlan.runtimeSha].includes(historicalRuntime));
+    assert.equal((await f.invoke()).status, 'fixture_retired');
+    assert.equal(f.state.retired, 1); assert.equal(f.state.reads, 1); assert.equal(f.state.assertions, 3);
+    assert.deepEqual(f.events, ['authority', 'fresh-state', 'authority', 'authority', 'retire']);
+    assert.deepEqual(f.creations, [f.servingPlan.runtimeSha]); assert.deepEqual(f.calls, f.checkoutCalls);
+    assert.deepEqual(f.witness, f.before);
+  });
+}
+
+test('retirement refuses changed authority, unsupported current runtime or unresolved fresh state without a host action', async t => {
+  for (const kind of ['authority_before_read', 'authority_after_read', 'authority_before_host', 'unsupported', 'unresolved']) {
+    const f = await historicalRetirementFixture(t, '36c7ea726e7f070d10dbc65afc6538f13c0c1a24');
+    if (kind.startsWith('authority_')) f.state.refuseAuthorityAt = {
+      authority_before_read: 1, authority_after_read: 2, authority_before_host: 3,
+    }[kind];
+    else if (kind === 'unsupported') f.state.current = resolvedPublication(accepted(f, {generation: 104, runtimeSha: 'e'.repeat(40)}), f.fresh.accepted);
+    else {
+      const pending = {...f.fresh.intent.value, status: 'pending', resolution: null};
+      f.state.current = {...f.fresh, intent: {...f.fresh.intent, value: pending, sha256: hash(JSON.stringify(ordered(pending)))}};
+      assert.equal(inspectChinaPublicationState(f.state.current).status, 'accepted_needs_finalization');
+    }
+    await assert.rejects(f.invoke(), kind.startsWith('authority_') ? /china_daily_state_changed/
+      : kind === 'unsupported' ? /china_daily_entry_accepted_runtime/ : /china_daily_entry_retirement_state/);
+    assert.equal(f.state.retired, 0); assert.deepEqual(f.creations, [f.servingPlan.runtimeSha]);
+    assert.deepEqual(f.calls, f.checkoutCalls); assert.deepEqual(f.witness, f.before);
+  }
+});
+
 test('production entry binds accepted state, passes pricing root to preparation and serving root only to release, and filters progress logs', async t => {
   const f = await fixture(t), observation = accepted(f), logs = [], called = [];
   const hostArgs = {previousAccepted: observation, acceptedPublication: {accepted: observation, intent: 'exact-test-intent'},
-    readState: async () => ({accepted: observation, intent: 'exact-test-intent'}), assertAuthority: async () => {}};
+    readState: async () => resolvedPublication(observation), assertAuthority: async () => {}};
   const storage = {assertPrivateBucket: async () => ({verified: true}), read: async name => { assert.equal(name, 'accepted'); return observation; },
     compareAndSwap: async () => assert.fail('the entry cannot write state outside its cycle')};
   const capabilities = {
