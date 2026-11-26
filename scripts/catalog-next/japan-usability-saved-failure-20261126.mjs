@@ -58,8 +58,8 @@ try {
 }
 
 if(process.argv[1]&&fileURLToPath(import.meta.url)===process.argv[1]){
- const workflow='jeep-jim/AvtoCena/.github/workflows/japan-usability-saved-failure-20261126.yml@refs/heads/main';
- if(process.argv.length!==3||process.argv[2]!=='--run'||process.env.GITHUB_ACTIONS!=='true'||process.env.GITHUB_REPOSITORY_ID!=='1289722938'||process.env.GITHUB_REF!=='refs/heads/main'||process.env.GITHUB_RUN_ATTEMPT!=='1'||process.env.GITHUB_WORKFLOW_REF!==workflow||!['push','workflow_dispatch'].includes(process.env.GITHUB_EVENT_NAME)){
+ const workflows=new Set(['japan-usability-saved-failure-20261126.yml','catalog-next-china-photo-release.yml'].map(name=>'jeep-jim/AvtoCena/.github/workflows/'+name+'@refs/heads/main'));
+ if(process.argv.length!==3||process.argv[2]!=='--run'||process.env.GITHUB_ACTIONS!=='true'||process.env.GITHUB_REPOSITORY_ID!=='1289722938'||process.env.GITHUB_REF!=='refs/heads/main'||process.env.GITHUB_RUN_ATTEMPT!=='1'||!workflows.has(process.env.GITHUB_WORKFLOW_REF)||!['push','workflow_dispatch'].includes(process.env.GITHUB_EVENT_NAME)){
   console.log(JSON.stringify({readStatus:'invocation_rejected'}));process.exitCode=1;
  }else{const report=await inspectSavedFailure();console.log(JSON.stringify(report));if(report.readStatus||report.records.some(row=>!['ok','missing'].includes(row.readStatus)))process.exitCode=1;}
 }
