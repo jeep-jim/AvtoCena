@@ -73,17 +73,17 @@ test('a malformed historical proof cannot turn an unverified empty into a recove
 });
 
 test('a newly verified zero retires older visitor recovery even when the count deadline expires first',async t=>{
- const realNow=Date.now.bind(Date);let advance=0,calls=0;
- t.mock.method(Date,'now',()=>realNow()+advance);
+ const start=Date.now();let calls=0;
+ t.mock.timers.enable({apis:['Date'],now:start});
  const sql=ajesQuery({}).sql,countSql=ajesQuery({aggregate:'count'}).sql;
- const values=new Map<string,any>([[sql,snapshot()],[countSql,countSnapshot({observedAt:new Date(realNow()-30*60000+1000).toISOString()})]]);
+ const values=new Map<string,any>([[sql,snapshot()],[countSql,countSnapshot({observedAt:new Date(start-30*60000+1000).toISOString()})]]);
  const client=createAjesClient({...base,readQuery:async key=>values.get(key)??null,saveQuery:async(key,value)=>{values.set(key,value);},fetcher:async url=>{
   calls++;assert.equal(isCount(sqlOf(url)),false,'the still-fresh exact count is already available');
   return new URL(String(url)).searchParams.get('ip')==='203.0.113.2'?Response.json([]):new Response('unavailable',{status:503});
  }});
  assert.equal((await client.read({},ip)).items[0].id,'retained');
  assert.deepEqual((await client.read({},'203.0.113.2')).items,[]);await tick();
- advance=2000;
+ t.mock.timers.setTime(start+2000);
  await assert.rejects(client.read({},ip),/http_503/,'expired fresh zero must not expose pre-zero visitor-cached cars');
  assert.equal(calls,2,'the original visitor cooldown is not bypassed for another request');
 });
@@ -121,15 +121,15 @@ test('a concurrent earlier nonempty memory response cannot hide a later verified
 });
 
 test('a newer successful nonempty observation lifts the zero barrier and remains recoverable',async t=>{
- const realNow=Date.now.bind(Date);let advance=0,phase=0;
- t.mock.method(Date,'now',()=>realNow()+advance);
+ const start=Date.now();let phase=0;
+ t.mock.timers.enable({apis:['Date'],now:start});
  const sql=ajesQuery({}).sql,countSql=ajesQuery({aggregate:'count'}).sql;
- const values=new Map<string,any>([[countSql,countSnapshot({observedAt:new Date(realNow()-30*60000+1000).toISOString()})]]);
+ const values=new Map<string,any>([[countSql,countSnapshot({observedAt:new Date(start-30*60000+1000).toISOString()})]]);
  const client=createAjesClient({...base,readQuery:async key=>values.get(key)??null,saveQuery:async(key,value)=>{values.set(key,value);},fetcher:async()=>phase===0?Response.json([]):phase===1?Response.json([row]):new Response('unavailable',{status:503})});
- assert.deepEqual((await client.read({},ip)).items,[]);await tick();advance=2000;phase=1;
+ assert.deepEqual((await client.read({},ip)).items,[]);await tick();t.mock.timers.setTime(start+2000);phase=1;
  const newer=await client.read({},ip);assert.equal(newer.items[0].id,row.ID);assert.equal(newer.stale,false);await tick();
  assert.equal((await client.read({},'203.0.113.2')).items[0].id,row.ID);
- advance=32*60000;phase=2;
+ t.mock.timers.setTime(start+32*60000);phase=2;
  const recovered=await client.read({},'203.0.113.3');assert.equal(recovered.items[0].id,row.ID);assert.equal(recovered.stale,true);assert.equal((await values.get(sql)).items[0].id,row.ID);
 });
 
@@ -217,14 +217,14 @@ test('proof is bound to the query, page and both source observations',async()=>{
 });
 
 test('a new empty page cannot extend an older count observation beyond its source deadline',async t=>{
- const realNow=Date.now.bind(Date);let advance=0,phase=0,lists=0,counts=0;
- t.mock.method(Date,'now',()=>realNow()+advance);
- const oldCount=countSnapshot({observedAt:new Date(realNow()-29*60000).toISOString()});
+ const start=Date.now();let phase=0,lists=0,counts=0;
+ t.mock.timers.enable({apis:['Date'],now:start});
+ const oldCount=countSnapshot({observedAt:new Date(start-29*60000).toISOString()});
  const client=createAjesClient({...base,readQuery:async sql=>isCount(sql)?oldCount:null,fetcher:async url=>{
   if(isCount(sqlOf(url))){counts++;return new Response('bot fixture');}lists++;return Response.json(phase?[row]:[]);
  }});
  const first=await client.read({},ip);assert.deepEqual(first.items,[]);assert.equal(lists,1);assert.equal(counts,0);
- advance=2*60000;phase=1;
+ t.mock.timers.setTime(start+2*60000);phase=1;
  const later=await client.read({},ip);assert.equal(later.items[0].id,row.ID);assert.equal(lists,2,'the older count deadline must expire the verified empty memory entry');
 });
 
