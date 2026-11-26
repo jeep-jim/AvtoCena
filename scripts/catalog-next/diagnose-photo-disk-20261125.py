@@ -23,6 +23,8 @@ import math
 import os
 from pathlib import Path
 import re
+import select
+import shlex
 import socket
 import stat
 import subprocess
@@ -486,6 +488,7 @@ def photo_events(plan, since, until):
         raw = response.read(1024 * 1024 + 1)
         speed_need(response.status == 200 and len(raw) <= 1024 * 1024, 'events_response')
         rows = []
+        candidate_ids = set()
         for line in raw.splitlines():
             value = json.loads(line)
             attributes = value.get('Actor', {}).get('Attributes', {})
@@ -493,6 +496,10 @@ def photo_events(plan, since, until):
             speed_need(value.get('Type') == 'container' and action in actions and type(when) is int and since <= when <= until
                        and attributes.get('avtocena.china.nonce') == plan['nonce']
                        and attributes.get('org.opencontainers.image.revision') == plan['runtimeSha'], 'event_scope')
+            candidate_id = value.get('Actor', {}).get('ID')
+            speed_need(isinstance(candidate_id, str) and re.fullmatch(r'[a-f0-9]{64}', candidate_id), 'event_identity')
+            candidate_ids.add(candidate_id)
+            speed_need(len(candidate_ids) == 1, 'event_identity')
             exit_code = attributes.get('exitCode')
             speed_need(exit_code is None or isinstance(exit_code, str) and re.fullmatch(r'-?\d{1,8}', exit_code), 'event_exit')
             row = {'action': action, 'time': when, 'exitCode': int(exit_code) if exit_code is not None else None,
@@ -506,11 +513,283 @@ def photo_events(plan, since, until):
                 row['timeNano'] = str(nano)
             rows.append(row)
             speed_need(len(rows) <= 512, 'event_count')
-        return {'available': True, 'reason': None if rows else 'empty', 'rows': rows}
+        return {'available': True, 'reason': None if rows else 'empty', 'rows': rows}, next(iter(candidate_ids), None)
     except Exception:
-        return {'available': False, 'reason': 'unavailable', 'rows': []}
+        return {'available': False, 'reason': 'unavailable', 'rows': []}, None
     finally:
         connection.close()
+
+
+def photo_retained_launch(rollback, ingress, health):
+    """Current retained configuration is reconstruction evidence, not an old snapshot."""
+    identity = rollback.get('retainedContainerId')
+    photo_need(isinstance(identity, str) and re.fullmatch(r'[a-f0-9]{64}', identity), 'retained_identity')
+    connection = PhotoDocker('localhost', timeout=15)
+    try:
+        connection.request('GET', '/containers/' + identity + '/json')
+        response = connection.getresponse()
+        raw = response.read(512 * 1024 + 1)
+        photo_need(response.status == 200 and len(raw) <= 512 * 1024, 'retained_response')
+        value = json.loads(raw)
+    finally:
+        connection.close()
+    config, state = value.get('Config', {}), value.get('State', {})
+    entries = config.get('Env')
+    photo_need(isinstance(entries, list) and len(entries) <= 512
+               and all(isinstance(entry, str) and '=' in entry and len(entry) <= 16384 for entry in entries), 'retained_environment')
+    names = ['AVTOCENA_RELEASE_SHA', 'NEXT_MANUAL_SIG_HANDLE', 'NEXT_CPU_PROF', '__NEXT_PRIVATE_CPU_PROFILE', 'NODE_OPTIONS']
+    selected = {name: [entry.split('=', 1)[1] for entry in entries if entry.split('=', 1)[0] == name] for name in names}
+    photo_need(all(len(values) <= 1 for values in selected.values()), 'retained_environment')
+    env = {name: values[0] for name, values in selected.items() if values}
+    port = re.findall(rb'(?m)^\s*proxy_pass http://127\.0\.0\.1:(\d+);\s*$', ingress)
+    photo_need(len(port) == 1 and value.get('Id') == identity and value.get('Image') == rollback.get('retainedImageId')
+               and state.get('Running') is True and type(state.get('Pid')) is int and 0 < state['Pid'] <= 2147483647
+               and isinstance(state.get('StartedAt'), str) and re.fullmatch(r'\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(?:\.\d{1,9})?Z', state['StartedAt'])
+               and env.get('AVTOCENA_RELEASE_SHA') == health['releaseSha'] == RUNTIMES[1]
+               and any(str(binding.get('HostPort', '')) == port[0].decode()
+                       for bindings in (value.get('HostConfig', {}).get('PortBindings') or {}).values()
+                       for binding in (bindings or [])), 'retained_binding')
+    entrypoint, command = config.get('Entrypoint'), config.get('Cmd')
+    photo_need(all(args is None or isinstance(args, list) and len(args) <= 64
+                   and all(isinstance(arg, str) and len(arg) <= 8192 for arg in args) for args in (entrypoint, command)), 'retained_argv')
+    safe_entry = entrypoint in (None, [], ['docker-entrypoint.sh'], ['/usr/local/bin/docker-entrypoint.sh'])
+    safe_command = command in (['node', 'apps/web/server.js'], ['node', '/app/apps/web/server.js'])
+    first = [Path(args[0]).name for args in (entrypoint, command) if args]
+    argv_class = 'node_standalone' if safe_entry and safe_command else 'shell_wrapper' if any(
+        arg in {'sh', 'bash', 'ash', 'dash'} for arg in first) else 'package_manager_wrapper' if any(
+        arg in {'npm', 'npx', 'yarn', 'pnpm'} for arg in first) else 'node_other' if 'node' in first else 'other'
+    digest = lambda args: hashlib.sha256(json.dumps(args, ensure_ascii=False, separators=(',', ':')).encode()).hexdigest()
+    options = {'present': 'NODE_OPTIONS' in env, 'parseSucceeded': True, 'preloadPresent': False}
+    try:
+        tokens = shlex.split(env.get('NODE_OPTIONS', ''))
+        options['preloadPresent'] = any(token in {'-r', '--require', '--import', '--loader', '--experimental-loader'}
+            or token.startswith(('--require=', '--import=', '--loader=', '--experimental-loader='))
+            or token.startswith('-r') and not token.startswith('--') and len(token) > 2 for token in tokens)
+    except ValueError:
+        options.update(parseSucceeded=False, preloadPresent=None)
+    summary = {'evidenceKind': 'current_retained_reconstruction', 'historicalCandidateSnapshot': False,
+               'argvClass': argv_class, 'matchesExpectedStandalone': safe_entry and safe_command,
+               'entrypointSha256': digest(entrypoint), 'cmdSha256': digest(command),
+               'environmentFlags': {name: {'present': name in env, 'truthy': bool(env.get(name, ''))}
+                   for name in ('NEXT_MANUAL_SIG_HANDLE', 'NEXT_CPU_PROF', '__NEXT_PRIVATE_CPU_PROFILE')},
+               'nodeOptions': options}
+    if safe_entry and safe_command:
+        summary['knownSafeArgv'] = {'entrypoint': entrypoint, 'cmd': command}
+    return summary, (identity, value['Image'], state['Pid'], state['StartedAt'])
+
+
+def photo_journal_rows(raw, candidate_id, source, since, until):
+    """Count fixed observations only; matchedLines means bound, in-window rows.
+
+    unclassifiedLines is a subset of matchedLines. One line can contain both a
+    homepage marker and a fixed storage code, so category counts may overlap.
+    """
+    if (type(raw) is not bytes or type(candidate_id) is not str
+            or re.fullmatch(r'[a-f0-9]{64}', candidate_id) is None
+            or source not in ('container', 'services')
+            or type(since) is not int or type(until) is not int
+            or not 0 <= since < until or until - since > 300):
+        raise ValueError('photo_journal_arguments')
+    lines = raw.splitlines()
+    if len(lines) > 2048:
+        raise ValueError('photo_journal_line_limit')
+    result = {'linesRead': len(lines), 'matchedLines': 0, 'rejectedLines': 0,
+              'unclassifiedLines': 0, 'categories': {}, 'taskExits': []}
+    home = {'home_specials_failed', 'home_dealer_failed', 'home_initial_catalog_failed',
+            'home_green_pricing_unavailable', 'home_initial_pricing_failed'}
+    aj_reasons = {'client_ip_missing', 'not_configured', 'invalid_response', 'visitor_restricted',
+                  'request_failed', 'request_timeout', 'connect_timeout', 'response_too_large',
+                  'empty_response', 'identity_mismatch', 'quota_invalid', 'quota_exhausted',
+                  'quota_busy', 'local_busy', 'query_too_large', 'operation_failed'}
+    storage = {'object_storage_response_timeout', 'object_storage_read_deadline',
+               'object_storage_response_limit'}
+    stream = {'failed to pipe response': 'next_pipe_response_failed',
+              'failed to write chunk to response': 'next_write_chunk_failed'}
+    shim = {'shim disconnected': 'containerd_shim_disconnected',
+            'cleaning up after shim disconnected': 'containerd_shim_cleanup',
+            'failed to clean up after shim disconnected': 'containerd_shim_cleanup_failed'}
+    full_id = re.compile(r'(?<![a-fA-F0-9])' + candidate_id + r'(?![a-fA-F0-9])')
+
+    def unique(pairs):
+        value = {}
+        for key, item in pairs:
+            if key in value:
+                raise ValueError('photo_journal_duplicate_key')
+            value[key] = item
+        return value
+
+    def parsed_json(value):
+        return json.loads(value, object_pairs_hook=unique)
+
+    def service_fields(message, payload):
+        if isinstance(payload, dict):
+            return payload
+        fields = {}
+        # Consume each complete logfmt value, including quoted private errors;
+        # never reinterpret an id= fragment inside a quoted error as a field.
+        pattern = re.compile(r'([A-Za-z][A-Za-z0-9_-]*)=("(?:\\.|[^"\\])*"|[^"\s]+)')
+        position = 0
+        while position < len(message):
+            while position < len(message) and message[position] in ' \t':
+                position += 1
+            if position == len(message):
+                break
+            match = pattern.match(message, position)
+            if match is None or match.end() < len(message) and message[match.end()] not in ' \t':
+                raise ValueError('photo_journal_logfmt')
+            position = match.end()
+            key, value = match.groups()
+            if key not in ('msg', 'id', 'container', 'container_id', 'topic', 'type'):
+                continue
+            if key in fields:
+                raise ValueError('photo_journal_duplicate_field')
+            fields[key] = parsed_json(value) if value.startswith('"') else value
+        return fields
+
+    for line in lines:
+        try:
+            entry = parsed_json(line)
+            if not isinstance(entry, dict):
+                raise ValueError('photo_journal_row')
+            stamp, message = entry.get('__REALTIME_TIMESTAMP'), entry.get('MESSAGE')
+            if (type(stamp) is not str or re.fullmatch(r'[0-9]{1,20}', stamp) is None
+                    or not since * 1_000_000 <= int(stamp) <= until * 1_000_000
+                    or type(message) is not str or len(message.encode('utf8')) > 16 * 1024):
+                raise ValueError('photo_journal_row')
+            if source == 'container':
+                if entry.get('CONTAINER_ID_FULL') != candidate_id:
+                    raise ValueError('photo_journal_identity')
+            elif (entry.get('_SYSTEMD_UNIT') not in ('docker.service', 'containerd.service')
+                    or full_id.search(message) is None):
+                raise ValueError('photo_journal_identity')
+        except (ValueError, TypeError, UnicodeError, OverflowError, RecursionError):
+            result['rejectedLines'] += 1
+            continue
+        result['matchedLines'] += 1
+        categories = set()
+        if source == 'container':
+            # Only terminal colour escapes are removed. Never output the line.
+            clean = re.sub(r'\x1b\[[0-9;]*m', '', message)
+            for marker in home:
+                if re.match(re.escape(marker) + r'(?:[ \t]|$)', clean):
+                    categories.add(marker)
+            aj = re.fullmatch(r'AJES_PUBLIC_FAILURE[ \t]+([a-z_]+)[ \t]*', clean)
+            if aj and aj.group(1) in aj_reasons:
+                categories.add('ajes_public_failure_' + aj.group(1))
+            # Known storage messages may be nested in a homepage catch message.
+            # Stop at the fixed code: paths, URLs and error tails are discarded.
+            prefix = (r'^[ \t]*(?:(?:' + '|'.join(sorted(home))
+                      + r')[ \t]+)?(?:⨯[ \t]*)?(?:\[cause\]:[ \t]*)?(?:Error:[ \t]*)?')
+            for code in storage:
+                if re.match(prefix + r'(?:object_storage_(?:GET|HEAD)_unreachable:)?'
+                            + re.escape(code) + r'(?::|[ \t]|$)', clean):
+                    categories.add(code)
+            for message_text, code in stream.items():
+                if re.match(prefix + re.escape(message_text) + r'(?:[ \t]*\{|[ \t]*$)', clean):
+                    categories.add(code)
+        else:
+            payload = None
+            try:
+                if message.lstrip().startswith('{'):
+                    payload = parsed_json(message)
+                fields = service_fields(message, payload)
+                if fields.get('id') == candidate_id and fields.get('msg') in shim:
+                    categories.add(shim[fields['msg']])
+                if (fields.get('container') == candidate_id and fields.get('msg') == 'received task-delete event from containerd'
+                        and fields.get('topic') == '/tasks/delete'
+                        and fields.get('type') in ('*events.TaskDelete', 'containerd.events.TaskDelete')):
+                    categories.add('containerd_task_delete')
+                # A type name in a logfmt message is not a TaskExit payload.
+                event = payload.get('event') if isinstance(payload, dict) else None
+                if (isinstance(payload, dict) and payload.get('topic') == '/tasks/exit'
+                        and isinstance(event, dict) and event.get('container_id') == candidate_id
+                        and event.get('id') == candidate_id):
+                    pid, status = event.get('pid'), event.get('exit_status')
+                    hints = [payload[key] for key in ('type', '@type') if key in payload]
+                    hints += [event[key] for key in ('type', '@type') if key in event]
+                    if (all(hint in ('TaskExit', '*events.TaskExit', 'containerd.events.TaskExit') for hint in hints)
+                            and type(pid) is int and 1 <= pid <= 4294967295
+                            and type(status) is int and 0 <= status <= 4294967295):
+                        categories.add('containerd_task_exit')
+                        result['taskExits'].append({'timeMicroseconds': str(int(stamp)), 'pid': pid, 'status': status,
+                            'initTaskIdMatchesCandidate': True, 'pidSource': 'task_exit_payload'})
+            except (ValueError, TypeError, UnicodeError, OverflowError, RecursionError):
+                categories.clear()
+        if not categories:
+            result['unclassifiedLines'] += 1
+        for category in categories:
+            result['categories'][category] = result['categories'].get(category, 0) + 1
+    return result
+
+
+def photo_journal_capture(arguments, maximum, deadline):
+    """Bound the diagnostic child itself; never invoke a shell or print stderr."""
+    process = None
+    raw = bytearray()
+    reason = None
+    try:
+        process = subprocess.Popen(['/usr/bin/journalctl', *arguments], stdin=subprocess.DEVNULL,
+                                   stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
+        while True:
+            remaining = deadline - time.monotonic()
+            if remaining <= 0:
+                reason = 'timeout'
+                break
+            readable, _, _ = select.select([process.stdout], [], [], remaining)
+            if not readable:
+                reason = 'timeout'
+                break
+            chunk = os.read(process.stdout.fileno(), min(16384, maximum + 1 - len(raw)))
+            if not chunk:
+                break
+            raw.extend(chunk)
+            if len(raw) > maximum:
+                reason = 'byte_limit'
+                break
+        if reason is not None:
+            process.kill()
+        code = process.wait(timeout=max(0.05, min(1, deadline - time.monotonic())))
+        return bytes(raw[:maximum]), {'available': code == 0 and reason is None, 'reason': reason or (None if code == 0 else 'unavailable')}
+    except Exception:
+        return b'', {'available': False, 'reason': 'unavailable'}
+    finally:
+        if process is not None:
+            if process.poll() is None:
+                process.kill()
+                try:
+                    process.wait(timeout=0.2)
+                except subprocess.TimeoutExpired:
+                    pass
+            process.stdout.close()
+
+
+def photo_journals(candidate_id, since, until):
+    if candidate_id is None:
+        return {'status': 'candidate_identity_unavailable', 'causeDetermined': False, 'sources': {}}
+    photo_need(re.fullmatch(r'[a-f0-9]{64}', candidate_id) and 0 < until - since <= 300, 'journal_binding')
+    utc = lambda stamp: datetime.datetime.fromtimestamp(stamp, datetime.timezone.utc).strftime('%Y-%m-%d %H:%M:%S UTC')
+    common = ['--no-pager', '--output=json', '--output-fields=MESSAGE,__REALTIME_TIMESTAMP,CONTAINER_ID_FULL,_SYSTEMD_UNIT',
+              '--since=' + utc(since), '--until=' + utc(until), '--lines=2048']
+    queries = {'container': ['CONTAINER_ID_FULL=' + candidate_id],
+               'services': ['--unit=docker.service', '--unit=containerd.service', '--grep=' + candidate_id]}
+    remaining_bytes, remaining_lines = 512 * 1024, 2048
+    deadline = time.monotonic() + 15
+    sources = {}
+    for source, query in queries.items():
+        if remaining_bytes <= 0 or remaining_lines <= 0 or time.monotonic() >= deadline:
+            sources[source] = {'available': False, 'reason': 'capture_limit'}
+            continue
+        raw, capture = photo_journal_capture([*common, *query], remaining_bytes, deadline)
+        parts = raw.splitlines(keepends=True)
+        bounded = b''.join(parts[:remaining_lines])
+        limited = len(parts) >= remaining_lines or capture['reason'] in {'timeout', 'byte_limit'}
+        remaining_bytes -= len(raw)
+        remaining_lines -= min(len(parts), remaining_lines)
+        observation = photo_journal_rows(bounded, candidate_id, source, since, until)
+        sources[source] = {**capture, 'bytesRead': len(raw), 'limited': limited, **observation}
+    recognized = any(value.get('categories') or value.get('taskExits') for value in sources.values())
+    return {'status': 'recognized_observations' if recognized else 'no_retained_failure_evidence',
+            'causeDetermined': False, 'sources': sources}
 
 
 def photo_attempt_only():
@@ -576,24 +855,35 @@ def photo_attempt_only():
                    <= datetime.datetime(2026, 11, 25, 19, 51, tzinfo=datetime.timezone.utc).timestamp(), 'attempt_time')
         since = int(speed_written) - 60
         until = min(int(speed_written) + 240, int(rollback_time) + 2)
+        PHASE = 'photo_retained_reconstruction'
+        launch, retained_identity = photo_retained_launch(rollback, ingress, before_health)
         PHASE = 'photo_saved_observations'
         startup = photo_saved_observation(directory, 'STARTUP.json', plan)
         timing = photo_saved_observation(directory, 'HOME_PHASE_TIMING.json', plan)
         PHASE = 'photo_events'
-        events = photo_events(plan, since, until)
+        events, candidate_id = photo_events(plan, since, until)
+        PHASE = 'photo_journal'
+        journal = photo_journals(candidate_id, since, until)
         PHASE = 'photo_health_after'
         photo_need(bounded_bytes(CONFIG, 1024 * 1024) == ingress and photo_health(ingress) == before_health, 'retained_changed')
+        after_launch, after_identity = photo_retained_launch(rollback, ingress, before_health)
+        photo_need(after_launch == launch and after_identity == retained_identity, 'retained_changed')
         for name, (raw, before) in snapshots.items():
             after_raw, after = bounded_snapshot(directory / name, 256 * 1024)
             photo_need(raw == after_raw and all(getattr(before, field) == getattr(after, field)
                        for field in ('st_dev', 'st_ino', 'st_size', 'st_mtime_ns', 'st_ctime_ns')), 'proof_changed')
+        PHASE = 'photo_capacity'
+        usage = os.statvfs('/')
         report.update(status='observed', runtimeSha=plan['runtimeSha'], controllerSha=plan['controllerSha'],
+                      measuredAt=datetime.datetime.now(datetime.timezone.utc).isoformat().replace('+00:00', 'Z'),
+                      diskFreeBytes=usage.f_bavail * usage.f_frsize, diskTotalBytes=usage.f_blocks * usage.f_frsize,
                       generationId=plan['generationId'], attemptHash=hashlib.sha256(plan['nonce'].encode()).hexdigest()[:16],
                       proofSha256=dict(PHOTO_ATTEMPT_PROOFS), sourceSha256=dict(PHOTO_SPEED_SOURCES),
                       retainedHealthBoundBeforeAfter=True, retainedHealth=before_health,
                       savedSpeedResultWrittenAt=datetime.datetime.fromtimestamp(speed_written, datetime.timezone.utc).isoformat().replace('+00:00', 'Z'),
                       savedSpeedResultWrittenTimeNano=str(speed_written_ns),
                       rolledBackAt=rolled_back_at, startup=startup, homePhaseTiming=timing,
+                      retainedLaunch=launch, historicalJournal=journal,
                       events={'since': since, 'until': until, 'historyIsFinite': True, 'emptyDoesNotExcludeFailure': True,
                               'exit137DoesNotProveOom': True, 'postFailureTerminalEventsMayBeCleanup': True, **events})
         print(json.dumps(report, separators=(',', ':')))
