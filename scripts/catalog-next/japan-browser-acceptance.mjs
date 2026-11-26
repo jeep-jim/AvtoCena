@@ -36,6 +36,21 @@ export function verifyJapanPage(payload,status,now=Date.now()){
   total:Number.isSafeInteger(payload.total)?payload.total:null,hasMore:payload.hasMore===true};
 }
 
+/** Preserve only public response aggregates before validation can reject them.
+ * An interrupted continuation must remain diagnosable without publishing rows,
+ * supplier URLs, visitor data or arbitrary upstream error text. */
+export function japanResponseObservation(payload,status){
+ const natural=value=>Number.isSafeInteger(value)&&value>=0?value:null;
+ const boolean=value=>typeof value==='boolean'?value:null;
+ const sourceDate=payload?.observedAt||payload?.generationId;
+ const observed=typeof sourceDate==='string'?Date.parse(sourceDate):NaN;
+ return {status:Number.isInteger(status)&&status>=100&&status<=599?status:null,
+  ok:boolean(payload?.ok),shown:Array.isArray(payload?.items)?payload.items.length:null,
+  received:natural(payload?.received),observedAt:Number.isFinite(observed)?new Date(observed).toISOString():null,
+  stale:boolean(payload?.stale),partial:boolean(payload?.partial),interrupted:boolean(payload?.interrupted),
+  scanLimited:boolean(payload?.scanLimited),hasMore:boolean(payload?.hasMore),total:natural(payload?.total)};
+}
+
 export function verifyJapanWarmPage(first,second){
  need((first.observedAt||first.generationId)===(second.observedAt||second.generationId)
   &&JSON.stringify(first.items.map(row=>row.id))===JSON.stringify(second.items.map(row=>row.id)),'warm_changed');
@@ -132,10 +147,12 @@ export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,out
   browser=await chromium.launch({headless:true,executablePath:chromeBin,args:['--no-sandbox']});
   context=await browser.newContext({viewport:{width:1280,height:900},serviceWorkers:'block',locale:'ru-RU'});
   await installReadFence(context,report);await health();
-  const plain=[];report.checks.freshness={observations:[]};
+  const plain=[];report.checks.freshness={observations:[]};report.checks.responses=[];
   for(let index=0;index<2;index++){
    stage=index?'plain_warm':'plain_first';report.explicitJapanApiRequests++;
-   const response=await readJson(context,PLAIN),observation=verifyJapanPage(response.data,response.status);
+   const response=await readJson(context,PLAIN);
+   report.checks.responses.push({stage,...japanResponseObservation(response.data,response.status),durationMs:response.durationMs});
+   const observation=verifyJapanPage(response.data,response.status);
    report.checks.freshness.observations.push({...observation,durationMs:response.durationMs,
     sourceObservedDuringRequest:Date.parse(observation.observedAt)>=response.requestedAt-1000});
    plain.push(response.data);
@@ -143,6 +160,7 @@ export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,out
   Object.assign(report.checks.freshness,verifyJapanWarmPage(...plain));report.japanFreshnessPassed=true;
   stage='power_api';report.explicitJapanApiRequests++;
   const power=await readJson(context,POWER);
+  report.checks.responses.push({stage,...japanResponseObservation(power.data,power.status),durationMs:power.durationMs});
   report.checks.power={...verifyJapanPage(power.data,power.status),...verifyJapanPowerPage(power.data),durationMs:power.durationMs};
   report.japanPowerApiPassed=true;
   stage='power_ui';const page=await context.newPage();currentPage=page;

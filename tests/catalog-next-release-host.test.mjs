@@ -203,6 +203,42 @@ with tempfile.TemporaryDirectory(prefix='china-host-test-') as directory:
             assert failure['serverSpeed']['samples'] == [sample] and failure['serverSpeed']['exitCode'] == 1
             assert failure['serverSpeed']['sha256'] == m.file_sha(host.directory / 'server-speed-result.json')
         else: assert 'serverSpeed' not in failure
+    elif case in ('close_rollback', 'close_foreign_ingress'):
+        checked(); host.switch()
+        recovery = save_recovery_plan()
+        if case == 'close_foreign_ingress':
+            foreign = original.replace(b':3000', b':3999')
+            m.CONFIG.write_bytes(foreign)
+        messages, cleanup_calls, closed_locks = [], [], []
+        cleanup = host.cleanup
+        def cleanup_once():
+            cleanup_calls.append(True)
+            return cleanup()
+        host.cleanup = cleanup_once
+        def emit(value):
+            if value.get('id') == 2 and case == 'close_rollback':
+                # The real controller can start recover as soon as this reply
+                # arrives. It must already see the durable rollback witness.
+                assert m.read_outcome(recovery)['status'] == 'rolled_back', 'close replied before durable rollback'
+                assert host.candidate is None and m.CONFIG.read_bytes() == original
+            messages.append(value)
+        m.emit = emit; m.Host = lambda plan: host
+        m.signal.signal = lambda *args: None; m.signal.setitimer = lambda *args: None
+        real_close = m.os.close
+        m.os.close = lambda descriptor: closed_locks.append(descriptor) if descriptor == 999 else real_close(descriptor)
+        sys.stdin = types.SimpleNamespace(buffer=io.BytesIO(b'{"id":1,"method":"init","params":{"plan":{}}}\n{"id":2,"method":"close"}\n'))
+        if case == 'close_rollback':
+            m.main()
+            assert messages[-1] == {'kind':'result','id':2,'value':{'closed':True,'accepted':False}}
+            assert cleanup_calls == [True] and closed_locks == [999]
+            assert list(containers) == [retained['Id']] and retained == retained_before
+        else:
+            refused(m.main, 'rollback_ingress_changed')
+            assert not any(row.get('value', {}).get('closed') for row in messages)
+            assert messages[-1]['code'] == 'china_host_rollback_ingress_changed'
+            assert m.CONFIG.read_bytes() == foreign and host.candidate in containers
+            assert not (host.directory / 'ROLLED_BACK.json').exists() and retained == retained_before
+            assert closed_locks == [999]
     elif case == 'rollback':
         checked()
         assert host.switch()['switched']
@@ -393,6 +429,8 @@ for (const [name, description] of [
   ['speed', 'enforces the accepted baseline within China scope and refuses a failed speed process'],
   ['speed_failure_evidence', 'returns only sanitized server-speed failure evidence and still removes its failed candidate'],
   ['speed_failure_bad_evidence', 'keeps the original speed failure and rollback when diagnostic verification fails'],
+  ['close_rollback', 'acknowledges an unaccepted close only after durable rollback and releases its lock once'],
+  ['close_foreign_ingress', 'cannot acknowledge close or claim rollback when another ingress replaced its cut'],
   ['rollback', 'rolls ingress back before removing only its own candidate'],
   ['failed_reload', 'restores the original backend after a switch reload failure'],
   ['foreign_ingress', 'never overwrites changed foreign ingress or stops its possible live backend'],

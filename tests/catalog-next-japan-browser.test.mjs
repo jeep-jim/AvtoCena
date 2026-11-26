@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {japanReleaseBinding,verifyJapanPage,verifyJapanWarmPage,verifyJapanPowerPage,japanVerificationRequestScope,installReadFence}
+import {japanReleaseBinding,verifyJapanPage,verifyJapanWarmPage,verifyJapanPowerPage,japanVerificationRequestScope,installReadFence,japanResponseObservation}
  from '../scripts/catalog-next/japan-browser-acceptance.mjs';
 
 const now=Date.parse('2026-11-26T05:00:00Z'),release='a'.repeat(40),nonce='b'.repeat(32),manifest='c'.repeat(64);
@@ -32,6 +32,25 @@ test('warm proof does not manufacture a new observation or silently change rows'
  const a=page();assert.deepEqual(verifyJapanWarmPage(a,copy(a)),{sameObservation:true,sameRows:true});
  assert.throws(()=>verifyJapanWarmPage(a,{...copy(a),observedAt:new Date(now).toISOString()}),/warm_changed/);
  assert.throws(()=>verifyJapanWarmPage(a,{...copy(a),items:[unknown]}),/warm_changed/);
+});
+
+test('a rejected partial response preserves typed flags and counts without disclosing rows or upstream details',()=>{
+ const value={...page(),partial:true,interrupted:true,scanLimited:true,received:24,
+  supplierUrl:'https://private.example/?token=secret',visitorIp:'private',error:{raw:'private failure'}};
+ const observed=japanResponseObservation(value,200);
+ assert.deepEqual(observed,{status:200,ok:true,shown:3,received:24,observedAt:value.observedAt,
+  stale:false,partial:true,interrupted:true,scanLimited:true,hasMore:true,total:null});
+ assert.throws(()=>verifyJapanPage(value,200,now),/japan_browser_unavailable_or_stale/);
+ assert.equal(JSON.stringify(observed).includes('private'),false);
+ assert.equal(JSON.stringify(observed).includes('ajes-stats-'),false);
+});
+
+test('missing or wrongly typed response metadata is recorded as unknown, never a fabricated false or zero',()=>{
+ const empty={status:null,ok:null,shown:null,received:null,observedAt:null,
+  stale:null,partial:null,interrupted:null,scanLimited:null,hasMore:null,total:null};
+ assert.deepEqual(japanResponseObservation(null,undefined),empty);
+ assert.deepEqual(japanResponseObservation({ok:'true',items:{},received:'24',observedAt:'invalid',
+  stale:'false',partial:0,interrupted:'false',scanLimited:1,hasMore:'true',total:-1},'200'),empty);
 });
 
 test('integer supplier hp, local precedence and unknown labels preserve honest filtering',()=>{

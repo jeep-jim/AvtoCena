@@ -3009,6 +3009,7 @@ def main():
     signal.signal(signal.SIGHUP, lambda *_: (_ for _ in ()).throw(ReleaseError('china_host_disconnected')))
     signal.signal(signal.SIGALRM, lambda *_: (_ for _ in ()).throw(ReleaseError('china_host_browser_deadline')))
     host = None
+    host_cleanup_completed = False
     resolved_cleanup = None
     recovered = maintenance = diagnosed = pruned = witness_pruned = False
     emit({'kind': 'ready', 'protocol': 1})
@@ -3101,8 +3102,14 @@ def main():
                 elif method == 'retire':
                     value = host.retire(params)
                 elif method == 'close':
-                    need(host.accepted, 'close_unaccepted')
-                    emit({'kind': 'result', 'id': identity, 'value': {'closed': True, 'accepted': True}})
+                    # The controller reconciles immediately after this reply.
+                    # Finish rollback and persist its witness before allowing
+                    # it to close SSH or read the durable outcome. This reply
+                    # is not acceptance evidence; recover still verifies the
+                    # exact nonce, retained deployment and rollback receipt.
+                    host.cleanup()
+                    host_cleanup_completed = True
+                    emit({'kind': 'result', 'id': identity, 'value': {'closed': True, 'accepted': host.accepted}})
                     return
                 else:
                     raise ReleaseError('china_host_unknown_method')
@@ -3139,7 +3146,8 @@ def main():
             resolved_cleanup.close()
         if host:
             try:
-                host.cleanup()
+                if not host_cleanup_completed:
+                    host.cleanup()
             finally:
                 if host.lock is not None:
                     os.close(host.lock)

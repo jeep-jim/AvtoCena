@@ -1,0 +1,101 @@
+{
+  "workflowRunId": 45763002572,
+  "workflowRunUrl": "https://github.com/jeep-jim/AvtoCena/actions/runs/45763002572",
+  "controllerSha": "82bd91f32e8c261361b64caab799414202fe0501",
+  "imageId": "sha256:fb1678ee498af616d06869da66c94dad41331c49c859294343d3b28e576d6d6b",
+  "release": {
+    "version": 1,
+    "kind": "china-code-cycle-v1",
+    "market": "china",
+    "completed": false,
+    "published": false,
+    "status": "needs_reconciliation",
+    "runtimeSha": "9c2a2bb55aec0a1d68d12b9744dff164b9dda053",
+    "retainedRuntime": "d536c1547c4d82a339ed68ced7d8503f09b6810b",
+    "sourceRequests": 0,
+    "generationRestores": 0,
+    "priceCalculations": 0,
+    "generationWrites": 0,
+    "encyclopediaWrites": 0,
+    "otherMarketWrites": 0,
+    "deletions": 0,
+    "retentionPreserved": true,
+    "errorCode": "china_daily_release_japan_browser_failed",
+    "finishedAt": "2026-11-26T06:03:12.995Z",
+    "leaseReleased": true
+  },
+  "japanBrowser": {
+    "version": 1,
+    "kind": "catalog-japan-browser-v1",
+    "codeScope": "catalog-japan-recovery-v1",
+    "release": "9c2a2bb55aec0a1d68d12b9744dff164b9dda053",
+    "nonce": "4ff3d35468b21b4f8a19bae2578f6182",
+    "checkedAt": "2026-11-26T06:03:06.835Z",
+    "passed": false,
+    "japanFreshnessPassed": true,
+    "japanPowerApiPassed": false,
+    "japanUiPassed": false,
+    "japanVisibilityPassed": false,
+    "readOnlyBrowserFence": true,
+    "productionMutations": 0,
+    "directSupplierApiRequests": 0,
+    "supplierImageRequests": 0,
+    "explicitJapanApiRequests": 3,
+    "checks": {
+      "freshness": {
+        "observations": [
+          {
+            "status": 200,
+            "shown": 23,
+            "received": 24,
+            "observedAt": "2026-11-26T06:02:33.366Z",
+            "ageSeconds": 34.603,
+            "stale": false,
+            "partial": false,
+            "total": null,
+            "hasMore": true,
+            "durationMs": 342,
+            "sourceObservedDuringRequest": false
+          },
+          {
+            "status": 200,
+            "shown": 23,
+            "received": 24,
+            "observedAt": "2026-11-26T06:02:33.366Z",
+            "ageSeconds": 34.813,
+            "stale": false,
+            "partial": false,
+            "total": 660813,
+            "hasMore": true,
+            "durationMs": 210,
+            "sourceObservedDuringRequest": false
+          }
+        ],
+        "sameObservation": true,
+        "sameRows": true
+      }
+    },
+    "screenshots": [],
+    "generationManifestSha256": "6711203fb59a70c99cda3c725eb4ee70654142b1871b0784516209d2903c0b8d",
+    "oracleSha256": "90e100fd59e32ec8fc28da8c1e6e0abd99b7a468d286a8f6ea53afa74e706e8d",
+    "blockedRequests": {
+      "mutation": 0,
+      "external": 0,
+      "private": 0,
+      "redirect": 0
+    },
+    "error": {
+      "stage": "power_api",
+      "code": "japan_browser_unavailable_or_stale",
+      "timeout": false
+    }
+  },
+  "postFailurePublicHealth": {
+    "checkedAtUtc": "2026-11-26T06:05:40.094142+00:00",
+    "status": 200,
+    "releaseSha": "d536c1547c4d82a339ed68ced7d8503f09b6810b",
+    "calculationVersion": "4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90"
+  },
+  "privateStateReconciliation": "not_yet_observed",
+  "powerFailureFlags": "The first report rejected the power response before retaining its individual flags; the exact combination was not captured."
+}

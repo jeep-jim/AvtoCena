@@ -1,0 +1,158 @@
+{
+  "workflowRunId": 45762849245,
+  "workflowRunUrl": "https://github.com/jeep-jim/AvtoCena/actions/runs/45762849245",
+  "version": 1,
+  "kind": "unused-aj-images-cleanup-20261126",
+  "controllerSha": "24433c81140e7eb09d9c2934434044138e4fcdea",
+  "completed": true,
+  "steps": [
+    {
+      "kind": "unused-aj-image-removed-v1",
+      "index": 0,
+      "imageId": "sha256:6c10441c7b9b4a8a0a9f0eef75de1d8bbc7f6bbef889935a40b65cd18d67150e",
+      "diskFreeBytesBefore": 52929482752,
+      "diskFreeBytesAfter": 54121476096,
+      "measuredFreeBytesChange": 1191993344
+    },
+    {
+      "kind": "unused-aj-image-removed-v1",
+      "index": 1,
+      "imageId": "sha256:d8e03f29c649c75878e7602bcc2afdc4c71bd38e93ebb86434090b0c4f754a32",
+      "diskFreeBytesBefore": 54121476096,
+      "diskFreeBytesAfter": 55313477632,
+      "measuredFreeBytesChange": 1192001536
+    }
+  ],
+  "leaseRelease": "released",
+  "planSha256": "792a14430b346b7cfc89eadd6465684b1ba2c9027abf9bce82b460feb203efbd",
+  "plan": {
+    "kind": "unused-aj-images-prepared-v1",
+    "targets": [
+      {
+        "id": "sha256:6c10441c7b9b4a8a0a9f0eef75de1d8bbc7f6bbef889935a40b65cd18d67150e",
+        "runtimeSha": "53af59971f25c7cda6358ee18242ee5e5232eede",
+        "created": "2026-11-24T03:47:42.052576261Z",
+        "sizeBytes": 258813151,
+        "tags": [
+          "avtocena-aj-japan:53af59971f25c7cda6358ee18242ee5e5232eede"
+        ],
+        "digestCount": 1,
+        "digests": [
+          "avtocena-aj-japan@sha256:6c10441c7b9b4a8a0a9f0eef75de1d8bbc7f6bbef889935a40b65cd18d67150e"
+        ]
+      },
+      {
+        "id": "sha256:d8e03f29c649c75878e7602bcc2afdc4c71bd38e93ebb86434090b0c4f754a32",
+        "runtimeSha": "fe289d7e3b6c4c4f1aaff7d5e56b329802d5cd7b",
+        "created": "2026-11-24T04:37:06.909472043Z",
+        "sizeBytes": 258817013,
+        "tags": [
+          "avtocena-aj-japan:fe289d7e3b6c4c4f1aaff7d5e56b329802d5cd7b"
+        ],
+        "digestCount": 1,
+        "digests": [
+          "avtocena-aj-japan@sha256:d8e03f29c649c75878e7602bcc2afdc4c71bd38e93ebb86434090b0c4f754a32"
+        ]
+      }
+    ],
+    "imagesPlanned": 2,
+    "containersPreserved": 4,
+    "diskFreeBytesBefore": 52929482752,
+    "planSha256": "792a14430b346b7cfc89eadd6465684b1ba2c9027abf9bce82b460feb203efbd",
+    "privateStateWrites": 0
+  },
+  "result": {
+    "kind": "unused-aj-images-result-v1",
+    "completed": true,
+    "imagesRemoved": [
+      "sha256:6c10441c7b9b4a8a0a9f0eef75de1d8bbc7f6bbef889935a40b65cd18d67150e",
+      "sha256:d8e03f29c649c75878e7602bcc2afdc4c71bd38e93ebb86434090b0c4f754a32"
+    ],
+    "diskFreeBytesBefore": 52929482752,
+    "diskFreeBytesAfter": 55313473536,
+    "measuredFreeBytesChange": 2383990784,
+    "containersPreserved": 4,
+    "diskBefore": {
+      "totalBytes": 102916472832,
+      "availableBytes": 52929482752,
+      "freeBytes": 52946259968
+    },
+    "diskAfter": {
+      "totalBytes": 102916472832,
+      "availableBytes": 55313473536,
+      "freeBytes": 55330250752
+    },
+    "memoryBefore": {
+      "MemTotal": 16763207680,
+      "MemFree": 4731813888,
+      "MemAvailable": 7645990912,
+      "Buffers": 437469184,
+      "Cached": 2621329408,
+      "SwapTotal": 0,
+      "SwapFree": 0,
+      "Dirty": 147456,
+      "Shmem": 326860800,
+      "Slab": 746950656,
+      "SReclaimable": 535441408,
+      "SUnreclaim": 211509248
+    },
+    "memoryAfter": {
+      "MemTotal": 16763207680,
+      "MemFree": 4748165120,
+      "MemAvailable": 7642357760,
+      "Buffers": 445366272,
+      "Cached": 2621702144,
+      "SwapTotal": 0,
+      "SwapFree": 0,
+      "Dirty": 159744,
+      "Shmem": 326860800,
+      "Slab": 716263424,
+      "SReclaimable": 507187200,
+      "SUnreclaim": 209076224
+    },
+    "imagesRemaining": [
+      "sha256:4a055ba772496c7de89594acbbc1c1bc02ac2d2b20050cfad7f637d1f5646dfd",
+      "sha256:7294634293906ae2bb95dd42625111894ef4a736115245a9c1097fbe59c213ba",
+      "sha256:93ed4336bd73431ab98e261c078dd3d62d5e5a802940eefa2e055eb7fad55aac",
+      "sha256:e36c969dc5a21a1654d738a2fe76c4657cd75ad48ffeff4c87845f67035c6f6f",
+      "sha256:f36ebf373120f0a520d2c1af75ff395fba14383e9955c348193eac5e70846009"
+    ],
+    "currentAndRollbackHealthy": true,
+    "retainedContainers": [
+      {
+        "id": "21a7093914645595d2cfcfc26335f8e8dbf155f6906840bbfb72855ed587e1e3",
+        "imageId": "sha256:f36ebf373120f0a520d2c1af75ff395fba14383e9955c348193eac5e70846009",
+        "running": true,
+        "pid": 252385
+      },
+      {
+        "id": "21d2c808c25bad327a6d8ac13891d878aeb67fadce52350dcc6f1433e3f6ca78",
+        "imageId": "sha256:4a055ba772496c7de89594acbbc1c1bc02ac2d2b20050cfad7f637d1f5646dfd",
+        "running": false,
+        "pid": 0
+      },
+      {
+        "id": "2c180485762c286c7e73f983cd0c93a718d9dec5c2f8e442e7ee44c1a51f6729",
+        "imageId": "sha256:7294634293906ae2bb95dd42625111894ef4a736115245a9c1097fbe59c213ba",
+        "running": false,
+        "pid": 0
+      },
+      {
+        "id": "bf233b651cc4c84afae4b59c2f17279ea2db7475bfeef6158ca012315a7f1c23",
+        "imageId": "sha256:f36ebf373120f0a520d2c1af75ff395fba14383e9955c348193eac5e70846009",
+        "running": true,
+        "pid": 296024
+      }
+    ],
+    "measuredAtUtc": "2026-11-26T05:38:42.939169Z",
+    "containersDeleted": 0,
+    "filesDeleted": 0,
+    "volumesDeleted": 0,
+    "acceptedStateWrites": 0,
+    "intentStateWrites": 0,
+    "liveRuntimeSha": "d536c1547c4d82a339ed68ced7d8503f09b6810b",
+    "generationId": "gen_china_45655051136_1",
+    "planSha256": "792a14430b346b7cfc89eadd6465684b1ba2c9027abf9bce82b460feb203efbd"
+  },
+  "finishedAt": "2026-11-26T05:38:45.573Z"
+}
