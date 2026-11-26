@@ -5,7 +5,7 @@ import {build} from 'esbuild';
 import {japanVehicleExcluded,japanVehicleSqlExclusion} from '../apps/web/lib/catalog/japan-vehicle-policy';
 import {ajesLot,ajesQuery,ajesSourceCacheSql} from '../apps/web/lib/catalog/ajes-query';
 import {readPreviousJapanVehiclePolicyRows} from '../apps/web/lib/catalog/ajes-query-cache';
-import {japanPowerSnapshot} from '../apps/web/lib/catalog/japan-power-query';
+import {japanPowerSnapshot} from '../apps/web/lib/catalog/ajes-power-page';
 import {ajesOffer} from '../apps/web/lib/catalog/ajes-offer';
 import {createAjesClient} from '../apps/web/lib/catalog/ajes-client';
 import {findSavedAjesSearch,savedAjesFacets} from '../apps/web/lib/catalog/ajes-saved-search';
