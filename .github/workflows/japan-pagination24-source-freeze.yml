@@ -1,0 +1,32 @@
+name: Verify immutable Japan pagination24 source provenance
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/japan-pagination24-source-freeze.yml
+      - scripts/catalog-next/freeze-japan-pagination24-source.py
+permissions:
+  contents: read
+concurrency:
+  group: japan-pagination24-source-freeze-readonly
+  cancel-in-progress: false
+jobs:
+  verify:
+    if: github.repository_id == '1289722938' && github.ref == 'refs/heads/main' && github.run_attempt == '1'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with: {persist-credentials: false, fetch-depth: 1}
+      - name: Check source verifier syntax
+        run: python3 -I -B -c "import ast,pathlib; ast.parse(pathlib.Path('scripts/catalog-next/freeze-japan-pagination24-source.py').read_text())"
+      - name: Verify exact Git trees, eleven files and binary diff digests
+        run: python3 -I -B scripts/catalog-next/freeze-japan-pagination24-source.py
+      - name: Preserve immutable source proof
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: japan-pagination24-source-freeze
+          path: japan-pagination24-source-freeze.json
+          if-no-files-found: ignore
+          retention-days: 14
