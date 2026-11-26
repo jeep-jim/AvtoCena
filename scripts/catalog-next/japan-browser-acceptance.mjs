@@ -133,6 +133,40 @@ const receiptStatus=value=>value===null||Number.isInteger(value)&&value>=100&&va
 const receiptKeys=(value,required,optional=[])=>value&&typeof value==='object'&&!Array.isArray(value)
  &&required.every(key=>Object.hasOwn(value,key))&&Object.keys(value).every(key=>required.includes(key)||optional.includes(key));
 const queryReceiptKeys=['table','kind','page','pageSize','canonicalQuerySha256','wireQuerySha256'];
+const responseEvidenceKeys=['version','mime','encoding','bodyClass','bytesRead','truncated','readStatus'];
+const responseEvidenceMimes=new Set(['json','html','text','other','missing']);
+const responseEvidenceEncodings=new Set(['identity','gzip','other','missing']);
+const responseEvidenceClasses=new Set(['empty','bot_refusal','ban_refusal','sql_syntax','sql_unknown_column',
+ 'sql_unsupported_function','json_unclassified','html_unclassified','text_unclassified','binary_unclassified','unclassified']);
+const responseEvidenceReadStatuses=new Set(['complete','limit','chunk_limit','timeout','aborted','read_error','no_body']);
+const responseEvidenceColumns=new Set(['id','year','auction_type','status','finish','marka_name','model_name','grade',
+ 'auction_date','time','kpp','priv','kuzov','color','eng_v','pw','mileage','rate','serial','lot']);
+const responseEvidenceFunctions=new Set(['concat_ws','length','trim','count']);
+/** The prefix itself is private. This optional observation contains only fixed
+ * classes and the count of retained prefix bytes, never body text or its hash. */
+function copyResponseEvidence(value,httpStatus){
+ if(!Number.isInteger(httpStatus)||httpStatus<100||httpStatus>599||httpStatus>=200&&httpStatus<=299
+  ||!receiptKeys(value,responseEvidenceKeys,['identifier']))return null;
+ // Snapshot only data properties. An accessor must not pass an enum check and
+ // then return private text when copied into the artifact.
+ const fields={};
+ for(const key of [...responseEvidenceKeys,...(Object.hasOwn(value,'identifier')?['identifier']:[])]){
+  const descriptor=Object.getOwnPropertyDescriptor(value,key);
+  if(!descriptor||!Object.hasOwn(descriptor,'value'))return null;
+  if(key!=='identifier'||descriptor.value!==undefined)fields[key]=descriptor.value;
+ }
+ if(fields.version!==1||!responseEvidenceMimes.has(fields.mime)||!responseEvidenceEncodings.has(fields.encoding)
+  ||!responseEvidenceClasses.has(fields.bodyClass)||!Number.isSafeInteger(fields.bytesRead)||fields.bytesRead<0||fields.bytesRead>4096
+  ||typeof fields.truncated!=='boolean'||!responseEvidenceReadStatuses.has(fields.readStatus))return null;
+ if(fields.readStatus==='limit'&&(fields.bytesRead!==4096||fields.truncated!==true)
+  ||fields.readStatus==='complete'&&fields.truncated!==false
+  ||fields.readStatus==='no_body'&&(fields.bytesRead!==0||fields.truncated!==false||fields.bodyClass!=='empty')
+  ||['chunk_limit','timeout','aborted','read_error'].includes(fields.readStatus)&&fields.truncated!==true)return null;
+ if(Object.hasOwn(fields,'identifier')&&(fields.truncated===true
+  ||!(fields.bodyClass==='sql_unknown_column'&&responseEvidenceColumns.has(fields.identifier)
+   ||fields.bodyClass==='sql_unsupported_function'&&responseEvidenceFunctions.has(fields.identifier))))return null;
+ return fields;
+}
 function receiptQuery(value,nullable=true){
  if(nullable&&queryReceiptKeys.every(key=>value[key]===null))return true;
  const size=value.kind==='list'?Number.isInteger(value.pageSize)&&value.pageSize>=1&&value.pageSize<=48
@@ -154,10 +188,14 @@ function copySourceReadReceipt(value){
  let sourceAttempt=null;
  if(value.sourceAttempted===true){
   const attempt=value.sourceAttempt;
-  if(!receiptKeys(attempt,['startedAt','finishedAt','httpStatus'])||!receiptDate(attempt.startedAt)||!receiptDate(attempt.finishedAt)
+  if(!receiptKeys(attempt,['startedAt','finishedAt','httpStatus'],['responseEvidence'])||!receiptDate(attempt.startedAt)||!receiptDate(attempt.finishedAt)
    ||attempt.startedAt>attempt.finishedAt||attempt.startedAt<value.readStartedAt||attempt.finishedAt>value.readFinishedAt
    ||!receiptStatus(attempt.httpStatus))return null;
   sourceAttempt={startedAt:attempt.startedAt,finishedAt:attempt.finishedAt,httpStatus:attempt.httpStatus};
+  if(attempt.responseEvidence!==undefined){
+   const evidence=copyResponseEvidence(attempt.responseEvidence,attempt.httpStatus);if(!evidence)return null;
+   sourceAttempt.responseEvidence=evidence;
+  }
  }else if(value.sourceAttempt!==null)return null;
  let cooldownOrigin;
  if(Object.hasOwn(value,'cooldownOrigin')){

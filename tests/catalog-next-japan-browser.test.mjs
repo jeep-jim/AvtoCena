@@ -26,6 +26,12 @@ function receiptPayload(receipts=[sourceReceipt()]){
  return {catalogReadReceipt:{version:1,readId:receiptId(999),runtimeSha:release,readStartedAt:iso(now-600),
   readFinishedAt:iso(now),sourceReadCalls:receipts.length},sourceReadReceipts:receipts,sourceReadReceiptsLimited:false};
 }
+const responseEvidence=()=>({version:1,mime:'html',encoding:'identity',bodyClass:'sql_unknown_column',
+ bytesRead:167,truncated:false,readStatus:'complete'});
+function non2xxReceipt(evidence=responseEvidence()){
+ const receipt=sourceReceipt();receipt.reason='http_500';receipt.sourceAttempt.httpStatus=500;
+ receipt.sourceAttempt.responseEvidence=evidence;return receipt;
+}
 
 test('Japan verification is bound to the new source, nonce and existing China generation',()=>{
  const oracle={version:1,runtimeSha:release,expectedGeneration:'gen_china_45655051136_1',generationManifestSha256:manifest};
@@ -123,6 +129,88 @@ test('empty validation marks a separate COUNT failure without relabelling the re
  }
 });
 
+test('bounded non2xx response classes survive as a detached observation while the original failure remains',()=>{
+ const samples=[responseEvidence(),...['ban_refusal','sql_syntax','sql_unsupported_function'].map(bodyClass=>({...responseEvidence(),bodyClass})),
+  {...responseEvidence(),mime:'json',encoding:'gzip',bodyClass:'json_unclassified'},
+  {...responseEvidence(),mime:'text',encoding:'missing',bodyClass:'bot_refusal'},
+  {...responseEvidence(),mime:'other',encoding:'other',bodyClass:'binary_unclassified',bytesRead:4096,truncated:true,readStatus:'limit'},
+  {...responseEvidence(),mime:'missing',bodyClass:'empty',bytesRead:0,readStatus:'no_body'},
+  ...['chunk_limit','timeout','aborted','read_error'].map(readStatus=>({...responseEvidence(),bodyClass:'unclassified',bytesRead:0,truncated:true,readStatus}))];
+ for(const evidence of samples){
+  const receipt=non2xxReceipt(evidence),result=japanSourceReadEvidence(receiptPayload([receipt]),release);
+  assert.equal(result.status,'recorded');assert.equal(result.sourceReadReceiptsLimited,false);assert.deepEqual(result.omissions,[]);
+  const observed=result.sourceReadReceipts[0];
+  assert.equal(observed.reason,'http_500');assert.equal(observed.disposition,'source_recovery');assert.equal(observed.sourceAttempted,true);
+  assert.equal(observed.sourceAttempt.httpStatus,500);assert.deepEqual(observed.sourceAttempt.responseEvidence,evidence);
+  assert.notEqual(observed.sourceAttempt.responseEvidence,evidence);
+  evidence.bytesRead=1;assert.notEqual(observed.sourceAttempt.responseEvidence.bytesRead,evidence.bytesRead);
+ }
+ const absent=non2xxReceipt();absent.sourceAttempt.responseEvidence=undefined;
+ assert.equal(Object.hasOwn(japanSourceReadEvidence(receiptPayload([absent]),release).sourceReadReceipts[0].sourceAttempt,'responseEvidence'),false);
+});
+
+test('malformed or private response evidence is omitted rather than reflected or treated as successful source data',()=>{
+ const secret='private-response-diagnostic-secret';
+ const changes=[v=>v.version=2,v=>v.mime=secret,v=>v.encoding=secret,v=>v.bodyClass=secret,v=>v.readStatus=secret,
+  v=>v.bytesRead=-1,v=>v.bytesRead=4097,v=>v.bytesRead=0.5,v=>v.bytesRead=Infinity,v=>v.bytesRead=NaN,v=>v.bytesRead='167',
+  v=>v.truncated=1,v=>v.truncated=true,v=>v.readStatus='limit',v=>v.readStatus='chunk_limit',v=>v.readStatus='no_body',v=>v.readStatus='timeout',
+  v=>v.body=secret,v=>v.bodySha256=secret,v=>v.url='https://source.invalid/?key='+secret,
+  v=>v.rawHeaders={authorization:secret},v=>v.message=secret];
+ for(const change of changes){
+  const evidence=responseEvidence();change(evidence);
+  const result=japanSourceReadEvidence(receiptPayload([non2xxReceipt(evidence)]),release);
+  assert.equal(result.status,'partial');assert.deepEqual(result.sourceReadReceipts,[]);
+  assert.equal(result.omittedReceipts,1);assert.deepEqual(result.omissions,['source_receipt_malformed']);
+  assert.equal(JSON.stringify(result).includes(secret),false);
+ }
+ for(const value of [null,[],secret,42]){
+  const result=japanSourceReadEvidence(receiptPayload([non2xxReceipt(value)]),release);
+  assert.deepEqual(result.sourceReadReceipts,[]);assert.deepEqual(result.omissions,['source_receipt_malformed']);
+ }
+ for(const httpStatus of [null,200,204,299]){
+  const receipt=non2xxReceipt();receipt.sourceAttempt.httpStatus=httpStatus;
+  assert.deepEqual(japanSourceReadEvidence(receiptPayload([receipt]),release).sourceReadReceipts,[]);
+ }
+ for(const changesValue of [false,true]){
+  let reads=0;const evidence=responseEvidence();
+  Object.defineProperty(evidence,'bodyClass',{get(){reads++;if(!changesValue)throw Error(secret);return reads===1?'sql_unknown_column':secret;}});
+  const poisoned=japanSourceReadEvidence(receiptPayload([non2xxReceipt(evidence)]),release);
+  assert.deepEqual(poisoned.omissions,['source_receipt_malformed']);assert.equal(JSON.stringify(poisoned).includes(secret),false);
+  assert.equal(reads,0);
+ }
+ const historical=sourceReceipt();historical.disposition='cooldown_recovery';historical.sourceAttempted=false;historical.sourceAttempt=null;
+ historical.cooldownOrigin={runtimeSha:release,table:'stats',kind:'list',page:1,pageSize:48,canonicalQuerySha256:'d'.repeat(64),
+  wireQuerySha256:'e'.repeat(64),attemptStartedAt:iso(now-1000),attemptFinishedAt:iso(now-900),httpStatus:500,reason:'http_500',
+  responseEvidence:responseEvidence()};
+ assert.deepEqual(japanSourceReadEvidence(receiptPayload([historical]),release).sourceReadReceipts,[]);
+});
+
+test('an observed SQL identifier is limited to a public enum and its matching error class',()=>{
+ for(const [bodyClass,identifiers] of [
+  ['sql_unknown_column',['id','year','auction_type','status','finish','marka_name','model_name','grade','auction_date','time','kpp','priv','kuzov','color','eng_v','pw','mileage','rate','serial','lot']],
+  ['sql_unsupported_function',['concat_ws','length','trim','count']]])for(const identifier of identifiers){
+  const evidence={...responseEvidence(),bodyClass,identifier};
+  const observed=japanSourceReadEvidence(receiptPayload([non2xxReceipt(evidence)]),release);
+  assert.equal(observed.status,'recorded');assert.equal(observed.sourceReadReceipts[0].sourceAttempt.responseEvidence.identifier,identifier);
+ }
+ for(const evidence of [
+  {...responseEvidence(),identifier:'private_identifier_secret'}, {...responseEvidence(),identifier:'db.grade'},
+  {...responseEvidence(),identifier:'GRADE'}, {...responseEvidence(),identifier:['grade']}, {...responseEvidence(),identifier:null},
+  {...responseEvidence(),identifier:'grade',truncated:true,readStatus:'limit',bytesRead:4096},
+  {...responseEvidence(),identifier:'concat_ws'}, {...responseEvidence(),bodyClass:'sql_unsupported_function',identifier:'grade'},
+  {...responseEvidence(),bodyClass:'sql_syntax',identifier:'grade'}, {...responseEvidence(),bodyClass:'text_unclassified',identifier:'count'}]){
+  const result=japanSourceReadEvidence(receiptPayload([non2xxReceipt(evidence)]),release);
+  assert.deepEqual(result.sourceReadReceipts,[]);assert.deepEqual(result.omissions,['source_receipt_malformed']);
+  assert.equal(JSON.stringify(result).includes('private_identifier_secret'),false);
+ }
+ const absent={...responseEvidence(),identifier:undefined};
+ assert.equal(Object.hasOwn(japanSourceReadEvidence(receiptPayload([non2xxReceipt(absent)]),release)
+  .sourceReadReceipts[0].sourceAttempt.responseEvidence,'identifier'),false);
+ const accessor=responseEvidence();Object.defineProperty(accessor,'identifier',{enumerable:true,get(){throw Error('private_identifier_secret');}});
+ const rejected=japanSourceReadEvidence(receiptPayload([non2xxReceipt(accessor)]),release);
+ assert.deepEqual(rejected.omissions,['source_receipt_malformed']);assert.equal(JSON.stringify(rejected).includes('private_identifier_secret'),false);
+});
+
 test('unknown schema, private fields and malformed receipt values never reach the report',()=>{
  for(const change of [r=>r.version=2,r=>r.readId='visitor-secret',r=>r.runtimeSha='runtime-secret',
   r=>r.reason='private-provider-secret',r=>r.endpoint='https://supplier-secret/?password=credential-secret',
@@ -182,7 +270,8 @@ test('the real reporter writes request times and sanitized receipt before its st
  const directory=await fs.mkdtemp(path.join(os.tmpdir(),'japan-receipt-report-'));
  const oraclePath=path.join(directory,'oracle.json'),outputFile=path.join(directory,'report.json'),fixtureKey='receipt-'+randomUUID();
  const calls=[],closed=[];
- const payload={...page(),...receiptPayload(),stale:true,partial:true,scanLimited:true,received:48,
+ const evidence={...responseEvidence(),identifier:'grade'};
+ const payload={...page(),...receiptPayload([non2xxReceipt(evidence)]),stale:true,partial:true,scanLimited:true,received:48,
   supplierUrl:'https://source-secret/?password=source-secret',visitorIp:'203.0.113.8'};
  const context={route:async()=>{},close:async()=>{closed.push('context');},request:{get:async(url,options)=>{
   calls.push({url,options});t.mock.timers.tick(17);
@@ -201,6 +290,9 @@ test('the real reporter writes request times and sanitized receipt before its st
   const observed=saved.checks.responses[0];
   assert.equal(observed.requestedAt,iso(now+20));assert.equal(observed.receivedAt,iso(now+40));assert.equal(observed.durationMs,20);
   assert.equal(observed.sourceReadEvidence.sourceReadReceipts[0].wireQuerySha256,'e'.repeat(64));
+  assert.equal(observed.sourceReadEvidence.sourceReadReceipts[0].reason,'http_500');
+  assert.equal(observed.sourceReadEvidence.sourceReadReceipts[0].sourceAttempt.httpStatus,500);
+  assert.deepEqual(observed.sourceReadEvidence.sourceReadReceipts[0].sourceAttempt.responseEvidence,evidence);
   assert.equal(observed.stale,true);assert.equal(observed.scanLimited,true);assert.equal(saved.explicitJapanApiRequests,1);
   assert.equal(calls.length,2);assert.ok(calls[0].url.endsWith('/api/health'));assert.ok(calls[1].url.includes('/api/catalog/search?'));
   for(const call of calls)assert.deepEqual(call.options,{timeout:45000,maxRedirects:0,headers:{'Cache-Control':'no-cache'}});
