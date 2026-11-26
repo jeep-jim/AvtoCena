@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Read exact stopped-container writable metadata and sanitized launch structure; never start or delete."""
 import base64
+import codecs
 import datetime as dt
 import fcntl
 import hashlib
@@ -149,42 +150,112 @@ def health(ingress):
         connection.close()
 
 
+def json_array_records(response, metadata_limit=128 * 1024 * 1024):
+    # Docker changes can contain many cache paths. Decode one object at a time,
+    # retaining no file paths after their category/sample has been selected.
+    decoder = json.JSONDecoder()
+    utf8 = codecs.getincrementaldecoder('utf8')()
+    buffer, consumed, eof = '', 0, False
+    def more():
+        nonlocal buffer, consumed, eof
+        chunk = response.read(65536)
+        consumed += len(chunk)
+        need(consumed <= metadata_limit, 'diff_metadata_bound')
+        eof = not chunk
+        buffer += utf8.decode(chunk, final=eof)
+    def whitespace():
+        nonlocal buffer
+        buffer = buffer.lstrip()
+        while not buffer and not eof:
+            more()
+            buffer = buffer.lstrip()
+    whitespace()
+    need(buffer.startswith('['), 'diff_array')
+    buffer = buffer[1:]
+    count, need_value = 0, True
+    while True:
+        whitespace()
+        need(buffer or not eof, 'diff_truncated')
+        if buffer.startswith(']'):
+            need(need_value or count > 0, 'diff_array')
+            buffer = buffer[1:]
+            while not eof:
+                more()
+                need(not buffer.strip(), 'diff_trailing')
+                buffer = ''
+            need(not buffer.strip(), 'diff_trailing')
+            return
+        if not need_value:
+            need(buffer.startswith(','), 'diff_separator')
+            buffer = buffer[1:]
+            whitespace()
+            need(not buffer.startswith(']'), 'diff_trailing_comma')
+        while True:
+            try:
+                value, end = decoder.raw_decode(buffer)
+                break
+            except json.JSONDecodeError:
+                need(not eof and len(buffer) <= 16384, 'diff_object')
+                more()
+        buffer = buffer[end:]
+        count += 1
+        need(count <= 1000000, 'diff_records_bound')
+        yield value
+        need_value = False
+
+
+def stream_changes(identity):
+    need(re.fullmatch(r'[a-f0-9]{64}', identity), 'diff_identity')
+    connection = DockerConnection()
+    try:
+        connection.request('GET', '/containers/' + identity + '/changes')
+        response = connection.getresponse()
+        need(response.status == 200, 'diff_response')
+        yield from json_array_records(response)
+    finally:
+        connection.close()
+
+
 def classify(row, deadline):
     identity = row['Id']
-    diffs = api('GET', '/containers/' + identity + '/changes')
-    need(isinstance(diffs, list) and len(diffs) <= 16000, 'diff_bound')
-    counts = {}
-    sizes = {}
+    counts, sizes, samples, sample_counts = {}, {}, [], {}
     largest = []
-    inspected = 0
-    missing = 0
-    for change in diffs:
+    inspected = missing = total = expected = 0
+    for change in stream_changes(identity):
         path = change.get('Path')
         kind = change.get('Kind')
         need(isinstance(path, str) and path.startswith('/') and len(path) <= 4096 and '\x00' not in path and
              '..' not in path.split('/') and kind in (0, 1, 2), 'diff_shape')
         group = category(path)
+        total += 1
         counts.setdefault(group, {'changed': 0, 'added': 0, 'deleted': 0})[['changed', 'added', 'deleted'][kind]] += 1
         if kind == 2:
             continue
-        if time.monotonic() >= deadline or inspected >= 2000:
-            continue
+        expected += 1
+        # The FULL metadata stream is classified. HEAD calls sample up to 32
+        # paths per category, so a busy cache cannot hide application-data paths.
+        if sample_counts.get(group, 0) < 32:
+            samples.append((path, group))
+            sample_counts[group] = sample_counts.get(group, 0) + 1
+    for path, group in samples:
+        if time.monotonic() >= deadline:
+            break
         value = api('HEAD', '/containers/' + identity + '/archive?path=' + quote(path, safe=''))
         inspected += 1
         if value is None:
             missing += 1
             continue
-        # Docker emits Go FileMode: the high twelve bits encode non-regular types.
         if value['mode'] & 0xFFF00000:
             continue
         sizes[group] = sizes.get(group, 0) + value['size']
         largest.append({'category': group, 'bytes': value['size'], 'pathSha256': sha(path.encode())})
-    expected = sum(change['Kind'] != 2 for change in diffs)
     return {'id': identity, 'imageId': row['Image'], 'writableBytes': row.get('SizeRw'),
-            'configurationSha256': fingerprint(row), 'changeCount': len(diffs), 'changeCategories': counts,
-            'regularChangedFileBytes': sizes, 'metadataReads': inspected, 'metadataMissing': missing,
+            'configurationSha256': fingerprint(row), 'changeCount': total, 'changesComplete': True,
+            'changeCategories': counts, 'sampledRegularChangedFileBytes': sizes, 'metadataScope': 'category_sample',
+            'metadataReads': inspected, 'metadataMissing': missing, 'metadataSamplePlanned': len(samples),
+            'metadataSampleComplete': inspected == len(samples) and missing == 0,
             'metadataComplete': inspected == expected and missing == 0,
-            'largestRegularChangedFiles': sorted(largest, key=lambda value: value['bytes'], reverse=True)[:12]}
+            'largestSampledRegularChangedFiles': sorted(largest, key=lambda value: value['bytes'], reverse=True)[:12]}
 
 
 def main():

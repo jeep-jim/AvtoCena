@@ -1,0 +1,43 @@
+name: Inspect exact stopped writable layers (read only)
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/regcloud-stopped-layers-20261126.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: catalog-next-stopped-layers-readonly
+  cancel-in-progress: false
+jobs:
+  inspect:
+    if: github.repository_id == '1289722938' && github.ref == 'refs/heads/main' && github.run_attempt == '1'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 7
+    environment: regcloud-staging
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: Check metadata-only reads and safe launch projection
+        run: python3 tests/regcloud-stopped-layers-20261126.test.py
+      - name: Read stopped writable metadata and sanitized launch arguments
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+        run: |
+          set -euo pipefail
+          umask 077
+          printf '%s\n' 'fd37f98aab3eeb16f131fcd4033adbb56f7e9616208c2f1ab5ef7a446caa4e4c  docs/operations/regcloud-staging-known-hosts' | sha256sum --check --status
+          key_file=$(mktemp)
+          trap 'rm -f "$key_file"' EXIT
+          printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
+          unset SSH_PRIVATE_KEY
+          ssh -F /dev/null -T -i "$key_file" -o BatchMode=yes -o IdentitiesOnly=yes -o ForwardAgent=no -o ClearAllForwardings=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=yes -o GlobalKnownHostsFile=/dev/null -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts" root@151.248.113.177 '/usr/bin/env -i PATH=/usr/bin:/bin /usr/bin/python3 -I -B -' < scripts/regcloud-stopped-layers-20261126.py | tee server-stopped-layers.json
+      - name: Save bounded public resource report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: server-stopped-layers-readonly
+          path: server-stopped-layers.json
+          if-no-files-found: ignore
+          retention-days: 14

@@ -1,5 +1,6 @@
 import importlib.util
 import json
+import io
 from pathlib import Path
 import unittest
 from unittest import mock
@@ -35,19 +36,33 @@ class MetadataTests(unittest.TestCase):
                 return [{'Path': '/app/data/private-owner-name.json', 'Kind': 1}, {'Path': '/tmp/old', 'Kind': 2}]
             self.assertEqual(method, 'HEAD')
             return {'size': 42, 'mode': 0o600}
-        with mock.patch.object(module, 'api', fake):
+        with mock.patch.object(module, 'api', fake), mock.patch.object(module, 'stream_changes', return_value=iter([{'Path': '/app/data/private-owner-name.json', 'Kind': 1}, {'Path': '/tmp/old', 'Kind': 2}])):
             result = module.classify(row, float('inf'))
         self.assertTrue(result['metadataComplete'])
-        self.assertEqual(result['regularChangedFileBytes'], {'application_data': 42})
+        self.assertEqual(result['sampledRegularChangedFileBytes'], {'application_data': 42})
         self.assertNotIn('private-owner-name', json.dumps(result))
-        self.assertEqual([method for method, path in calls], ['GET', 'HEAD'])
+        self.assertEqual([method for method, path in calls], ['HEAD'])
 
     def test_expired_metadata_deadline_reports_incomplete(self):
         row = {'Id': 'a' * 64, 'Image': 'sha256:' + 'b' * 64}
-        with mock.patch.object(module, 'api', return_value=[{'Path': '/app/data/x', 'Kind': 1}]):
+        with mock.patch.object(module, 'stream_changes', return_value=iter([{'Path': '/app/data/x', 'Kind': 1}])):
             result = module.classify(row, 0)
         self.assertFalse(result['metadataComplete'])
         self.assertEqual(result['metadataReads'], 0)
+
+    def test_large_metadata_is_streamed_without_losing_late_application_data(self):
+        rows = [{'Path': '/app/.next/cache/images/' + str(i), 'Kind': 1} for i in range(50000)]
+        rows.append({'Path': '/app/data/private-owner-name.json', 'Kind': 1})
+        raw = json.dumps(rows).encode()
+        self.assertGreater(len(raw), 2 * 1024 * 1024)
+        result = list(module.json_array_records(io.BytesIO(raw)))
+        self.assertEqual(len(result), len(rows))
+        self.assertEqual(result[-1], rows[-1])
+
+    def test_stream_refuses_truncation_extra_data_and_trailing_comma(self):
+        for raw in (b'[{"Path":"/tmp/x","Kind":1}', b'[] private', b'[{},]'):
+            with self.subTest(raw=raw), self.assertRaises(RuntimeError):
+                list(module.json_array_records(io.BytesIO(raw)))
 
     def test_archive_get_and_mutations_are_refused(self):
         with self.assertRaises(RuntimeError):
