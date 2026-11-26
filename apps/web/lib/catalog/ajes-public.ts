@@ -15,6 +15,7 @@ import {applyCatalogEditorial,editorialHidden,readCatalogEditorial} from './edit
 import {catalogInventoryAgeDecision,catalogVehicleExcluded} from './inventory-admission';
 import {japanVehicleExcluded} from './japan-vehicle-policy';
 import type {JapanPowerQueryContext,JapanPowerSnapshot} from './japan-power-query';
+import {copyAjesSourceReadReceipt} from './ajes-read-evidence';
 export async function cappedAjesQuery(query:AjesQuery):Promise<AjesQuery>{
  assertAjesJapanTable(query.table);
  return query;
@@ -52,8 +53,11 @@ export async function readAjesPublic(query:AjesQuery,options:{editorial?:boolean
   if(options.editorial!==false&&editorialHidden(offer,index))return null;
   return applyJapanOwnerSpecifications(options.editorial===false?offer:applyCatalogEditorial(offer,index));
  }));
- const {sourceEvidence: _privateEvidence,sourceEvidenceById: _privateListEvidence,emptyPageEvidence: _privateEmptyEvidence,...publicResult}=result;
- return {...publicResult,sourceFingerprint,items:items.filter(offer=>offer&&catalogInventoryAgeDecision(offer).eligible&&!catalogVehicleExcluded(offer)&&!japanVehicleExcluded(offer))};
+ const {sourceEvidence: _privateEvidence,sourceEvidenceById: _privateListEvidence,emptyPageEvidence: _privateEmptyEvidence,
+  sourceReadReceipt: rawReceipt,sourceReadReceipts: _savedReceipts,catalogReadReceipt: _savedCatalogReceipt,
+  sourceReadReceiptsLimited: _savedReceiptsLimited,...publicResult}=result;
+ const sourceReadReceipt=copyAjesSourceReadReceipt(rawReceipt);
+ return {...publicResult,sourceFingerprint,...(sourceReadReceipt?{sourceReadReceipt}:{}),items:items.filter(offer=>offer&&catalogInventoryAgeDecision(offer).eligible&&!catalogVehicleExcluded(offer)&&!japanVehicleExcluded(offer))};
 }
 export async function getAjesOffer(id:string,options:{editorial?:boolean}={}){
  const match=id.match(/^ajes-stats-([A-Za-z0-9_-]{1,64})$/);

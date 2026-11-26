@@ -139,7 +139,13 @@ export function createAjesPowerPager(config:{now?:()=>number;maxSessions?:number
        if(!recoverable(error)||!page.items.length)throw error;
        page.partial=true;page.interrupted=true;break;
       }
-      if(!page.first){const {items:_sourceItems,...metadata}=result;page.first=metadata;}page.firstKey??=`${phase}.${sourcePage}`;
+      if(!page.first){
+       // Cursor metadata is durable; read/attempt evidence belongs only to the
+       // current catalogue invocation and must never be replayed from it.
+       const {items:_sourceItems,sourceReadReceipt:_sourceReceipt,sourceReadReceipts:_sourceReceipts,
+        catalogReadReceipt:_catalogReceipt,sourceReadReceiptsLimited:_receiptsLimited,...metadata}=result;
+       page.first=metadata;
+      }page.firstKey??=`${phase}.${sourcePage}`;
       page.received+=result.received;
       page.partial ||= Boolean(result.partial);page.stale ||= Boolean(result.stale);
       let next=skip;

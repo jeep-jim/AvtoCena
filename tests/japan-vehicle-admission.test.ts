@@ -168,6 +168,18 @@ test('public list and detail apply policy before currency work and after local e
   fixture.enrichment={'ajes-stats-passenger001':{bodyType:'van',vehicleCategory:'M1',grossVehicleWeightKg:3500}};
   const admitted=await mod.exports.getAjesOffer('ajes-stats-'+row.ID);
   assert.equal(admitted.id,'ajes-stats-'+row.ID);assert.equal(admitted.sourcePrice,100000);assert.equal(admitted.operational.raw.sourcePower,'152');
+  const at=observedAt(),receipt={version:1,readId:'11111111-1111-4111-8111-111111111111',runtimeSha:'a'.repeat(40),
+   readStartedAt:at,readFinishedAt:at,table:'stats',kind:'list',page:1,pageSize:24,
+   canonicalQuerySha256:'b'.repeat(64),wireQuerySha256:'c'.repeat(64),disposition:'memory_cache',
+   sourceAttempted:false,reason:null,sourceAttempt:null};
+  fixture.result=snapshot([lot],{sourceReadReceipt:receipt,sourceReadReceipts:[{private:'PRIVATE_ARRAY'}],catalogReadReceipt:{private:'PRIVATE_WRAPPER'},sourceReadReceiptsLimited:true});
+  const safe=await mod.exports.readAjesPublic({});
+  assert.deepEqual(safe.sourceReadReceipt,receipt);assert.notEqual(safe.sourceReadReceipt,receipt);
+  for(const key of ['sourceReadReceipts','catalogReadReceipt','sourceReadReceiptsLimited'])assert.equal(key in safe,false,key);
+  fixture.result.sourceReadReceipt={clientIp:'PRIVATE_IP',sql:'PRIVATE_SQL',endpoint:'PRIVATE_ENDPOINT'};
+  const invalid=await mod.exports.readAjesPublic({});
+  assert.equal('sourceReadReceipt' in invalid,false);assert.equal(JSON.stringify(invalid).includes('PRIVATE_'),false);
+  assert.equal(invalid.sourceFingerprint,safe.sourceFingerprint,'attempt metadata never changes the source rows fingerprint');
  }finally{delete (globalThis as any).__japanVehiclePolicyFixture;}
 });
 

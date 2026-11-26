@@ -27,13 +27,25 @@ function offer(power:unknown,id='power-fixture',fuel='P'){
 
 const sourceObservedAt=new Date(Date.now()-1000).toISOString();
 const sourcePage=(query:any,items:any[],received=items.length,flags:Record<string,unknown>={})=>({items,page:query.page||1,pageSize:query.pageSize||24,received,sourceFingerprint:createHash('sha256').update(JSON.stringify(items)).digest('hex'),partial:false,stale:false,observedAt:sourceObservedAt,...flags});
+const sourceReceipt=(query:any,sequence:number,patch:Record<string,unknown>={})=>({version:1,
+ readId:`00000000-0000-4000-8000-${String(sequence).padStart(12,'0')}`,runtimeSha:'a'.repeat(40),
+ readStartedAt:new Date(Date.now()).toISOString(),readFinishedAt:new Date(Date.now()).toISOString(),
+ table:'stats',kind:'list',page:query.page||1,pageSize:query.pageSize||24,
+ canonicalQuerySha256:'b'.repeat(64),wireQuerySha256:'c'.repeat(64),disposition:'memory_cache',
+ sourceAttempted:false,reason:null,sourceAttempt:null,...patch});
 async function catalogPowerFixture(read:(query:any)=>unknown|Promise<unknown>){
  const state={queries:[] as any[],counts:0,priced:[] as string[][],editorial:{revision:'fixture',entries:{}},priceHook:undefined as undefined|(()=>void),query:ajesCatalogQuery,filter:ajesResultFilter,project:publicOffer,read:async(query:any,options:any)=>{const request={...query,phase:options?.powerContext?.phase};state.queries.push(request);return read(request);}};
  (globalThis as any).__japanPowerPageFixture=state;
  const stubs:Record<string,string>={
   'server-only':'','next/headers':"export const headers=async()=>new Map([['x-real-ip','127.0.0.1']]);",
   './ajes-runtime':"export const ajesClient={read:async()=>{globalThis.__japanPowerPageFixture.counts++;throw Error('unexpected source aggregate');}};",
-  './ajes-public':'export const cappedAjesQuery=async q=>q;export const readAjesPublic=(q,o)=>globalThis.__japanPowerPageFixture.read(q,o);',
+  './ajes-public':`import {AjesUnavailable} from './apps/web/lib/catalog/ajes-access-policy.ts';
+   export const cappedAjesQuery=async q=>q;export const readAjesPublic=async(q,o)=>{
+    try{return await globalThis.__japanPowerPageFixture.read(q,o);}catch(error){
+     if(!error?.reason)throw error;const failure=new AjesUnavailable(error.reason);
+     Object.defineProperty(failure,'sourceReadReceipt',{value:error.sourceReadReceipt});throw failure;
+    }
+   };`,
   './ajes-query':'export const ajesCatalogQuery=p=>globalThis.__japanPowerPageFixture.query(p);export class AjesFilterUnavailable extends Error{};export class AjesInputError extends Error{constructor(){super("ajes_invalid_query");}};',
   '../encyclopedia/calculation-index':'export const readCalculationIndex=()=>null;',
   './editorial':'export const readCatalogEditorial=async()=>globalThis.__japanPowerPageFixture.editorial;',
@@ -47,12 +59,92 @@ async function catalogPowerFixture(read:(query:any)=>unknown|Promise<unknown>){
  };
  const bundle=await build({entryPoints:['apps/web/lib/catalog/ajes-catalog.ts'],bundle:true,platform:'node',format:'cjs',write:false,external:['react'],plugins:[{name:'power-page-fixture',setup(builder){
   builder.onResolve({filter:/.*/},args=>args.path in stubs?{path:args.path,namespace:'power-page-fixture'}:undefined);
-  builder.onLoad({filter:/.*/,namespace:'power-page-fixture'},args=>({contents:stubs[args.path]}));
+  builder.onLoad({filter:/.*/,namespace:'power-page-fixture'},args=>({contents:stubs[args.path],resolveDir:process.cwd()}));
  }}]});
  const module={exports:{} as any},require=createRequire(import.meta.url);
  new Function('require','module','exports',bundle.outputFiles[0].text)((id:string)=>id==='react'?{cache:(fn:any)=>fn}:require(id),module,module.exports);
  return {state,read:module.exports.readAjesCatalogPage,close:()=>{delete (globalThis as any).__japanPowerPageFixture;}};
 }
+
+test('catalogue receipts belong to the current read, including cached cursor pages and stale retries',async()=>{
+ const previousRuntime=process.env.AVTOCENA_RELEASE_SHA;process.env.AVTOCENA_RELEASE_SHA='a'.repeat(40);
+ let clock=Date.now(),sequence=0,stale=true;
+ const mockedClock=mock.method(Date,'now',()=>clock);
+ const fixture=await catalogPowerFixture(query=>sourcePage(query,Array.from({length:48},(_,i)=>offer(150,`receipt-${i}`)),48,
+  {stale,sourceReadReceipt:sourceReceipt(query,++sequence),sourceReadReceipts:[{private:'OLD_RECEIPT'}],catalogReadReceipt:{private:'OLD_WRAPPER'}}));
+ try{
+  const params={market:'japan',powerTo:'160'};
+  const first=await fixture.read(params,undefined,{includeCount:false});
+  assert.equal(first.stale,true);assert.ok(first.retryCursor);
+  stale=false;clock+=1000;
+  const retry=await fixture.read({...params,after:first.retryCursor},undefined,{includeCount:false});
+  clock+=1000;
+  const cached=await fixture.read(params,undefined,{includeCount:false});
+  clock+=1000;
+  const second=await fixture.read({...params,page:'2',after:cached.nextCursor},undefined,{includeCount:false});
+  for(const [index,result] of [first,retry,cached,second].entries()){
+   const receipt=result.catalogReadReceipt;
+   assert.equal(receipt.version,1);assert.match(receipt.readId,/^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/);
+   assert.equal(receipt.runtimeSha,'a'.repeat(40));assert.equal(receipt.sourceReadCalls,1);
+   assert.equal(receipt.readStartedAt,receipt.readFinishedAt);
+   assert.equal(result.sourceReadReceipts.length,1);assert.equal(result.sourceReadReceipts[0].readId,sourceReceipt({},index+1).readId);
+   assert.equal(result.sourceReadReceipts[0].sourceAttempted,false);assert.equal(result.sourceReadReceipts[0].disposition,'memory_cache');
+   assert.equal(result.sourceReadReceiptsLimited,false);assert.equal('sourceReadReceipt' in result,false);
+   assert.equal(JSON.stringify(result).includes('OLD_'),false);
+  }
+  assert.equal(new Set([first,retry,cached,second].map(value=>value.catalogReadReceipt.readId)).size,4);
+  assert.equal(new Set([first,retry,cached,second].map(value=>value.catalogReadReceipt.readStartedAt)).size,4);
+  assert.equal(retry.partial,false);assert.equal(cached.partial,false);assert.equal(second.items.length,24);
+  assert.equal(first.sourceRevision,second.sourceRevision,'read identity never changes the source/cursor fingerprint');
+  assert.equal(new Set([...cached.items,...second.items].map((item:any)=>item.id)).size,48);
+  assert.equal(fixture.state.counts,0,'optional COUNT is not list evidence');assert.equal(sequence,4);
+ }finally{fixture.close();mockedClock.mock.restore();if(previousRuntime===undefined)delete process.env.AVTOCENA_RELEASE_SHA;else process.env.AVTOCENA_RELEASE_SHA=previousRuntime;}
+});
+
+test('catalogue evidence is bounded to actual source reads and marks missing or unsafe receipts',async()=>{
+ for(const unsafe of [false,true]){
+  let sequence=0;
+  const fixture=await catalogPowerFixture(query=>sourcePage(query,[],48,{sourceReadReceipt:unsafe?
+   {private:'PRIVATE_RECEIPT',sql:'PRIVATE_SQL',clientIp:'PRIVATE_IP'}:sourceReceipt(query,++sequence)}));
+  try{
+   const result=await fixture.read({market:'japan',powerTo:'160'},undefined,{includeCount:false});
+   assert.equal(result.catalogReadReceipt.sourceReadCalls,8);assert.equal(fixture.state.queries.length,8);
+   assert.equal(result.sourceReadReceipts.length,unsafe?0:8);assert.equal(result.sourceReadReceiptsLimited,unsafe);
+   assert.equal(JSON.stringify(result).includes('PRIVATE_'),false);assert.equal(result.partial,true);assert.ok(result.retryCursor);
+  }finally{fixture.close();}
+ }
+});
+
+test('a caught continuation failure is attributed to its current read and is not replayed on retry',async()=>{
+ let sequence=0,failing=true;
+ const fixture=await catalogPowerFixture(query=>{
+  const receipt=sourceReceipt(query,++sequence);
+  if(query.page===2&&failing)throw {reason:'request_timeout',sourceReadReceipt:{...receipt,disposition:'unavailable',reason:'request_timeout',sourceAttempted:true,
+   sourceAttempt:{startedAt:receipt.readStartedAt,finishedAt:receipt.readFinishedAt,httpStatus:null}}};
+  return sourcePage(query,Array.from({length:query.page===1?23:48},(_,i)=>offer(150,`failure-${query.page}-${i}`)),48,{sourceReadReceipt:receipt});
+ });
+ try{
+  const params={market:'japan',powerTo:'160'},first=await fixture.read(params);
+  assert.equal(first.items.length,23);assert.equal(first.interrupted,true);assert.equal(first.catalogReadReceipt.sourceReadCalls,2);
+  assert.equal(first.sourceReadReceiptsLimited,false);assert.deepEqual(first.sourceReadReceipts.map((r:any)=>[r.page,r.reason,r.sourceAttempted]),[[1,null,false],[2,'request_timeout',true]]);
+  failing=false;const retry=await fixture.read({...params,after:first.retryCursor});
+  assert.equal(retry.items.length,24);assert.equal(retry.interrupted,false);assert.equal(retry.partial,false);
+  assert.equal(retry.catalogReadReceipt.sourceReadCalls,2);assert.equal(retry.sourceReadReceiptsLimited,false);
+  assert.deepEqual(retry.sourceReadReceipts.map((r:any)=>r.readId),[sourceReceipt({},3).readId,sourceReceipt({},4).readId]);
+  assert.ok(retry.sourceReadReceipts.every((r:any)=>r.reason===null));
+ }finally{fixture.close();}
+});
+
+test('an optional COUNT failure is not reported as the list source failure',async()=>{
+ const fixture=await catalogPowerFixture(query=>sourcePage(query,Array.from({length:48},(_,i)=>offer(150,`count-${i}`)),48,
+  {sourceReadReceipt:sourceReceipt(query,1)}));
+ try{
+  const result=await fixture.read({market:'japan'});
+  assert.equal(fixture.state.counts,1);assert.equal(result.catalogReadReceipt.sourceReadCalls,1);
+  assert.deepEqual(result.sourceReadReceipts.map((r:any)=>[r.kind,r.reason]),[['list',null]]);
+  assert.equal(result.sourceReadReceiptsLimited,false);assert.equal(result.partial,false);assert.equal(result.items.length,24);
+ }finally{fixture.close();}
+});
 
 test('power selection fills 24 known cars from bounded source portions before exposing unknown',async()=>{
  const fixture=await catalogPowerFixture(query=>sourcePage(query,query.page===1?

@@ -7,6 +7,18 @@ const initialTime=Date.parse('2026-11-26T11:00:00Z');
 const rows=(prefix:string,count:number,start=0)=>Array.from({length:count},(_,i)=>({id:prefix+(start+i)}));
 const source=(items:{id:string}[],received=items.length,flags:any={})=>({items,received,sourceFingerprint:createHash('sha256').update(JSON.stringify(items)).digest('hex'),observedAt:new Date(initialTime).toISOString(),...flags});
 const base={query:{market:'japan',powerTo:160,city:'Новокузнецк'},revision:'index+editorial-1',page:1,pageSize:24};
+test('cursor metadata never retains or replays read receipts from a source page',async()=>{
+ const pager=createAjesPowerPager({now:()=>initialTime});let calls=0;
+ const read=async()=>source(rows('K',48),48,{sourceReadReceipt:{readId:`attempt-${++calls}`},
+  sourceReadReceipts:[{private:'PRIVATE_SAVED_RECEIPT'}],catalogReadReceipt:{private:'PRIVATE_SAVED_READ'},sourceReadReceiptsLimited:true});
+ const first=await pager.read({...base,read}),cached=await pager.read({...base,read}),second=await pager.read({...base,page:2,after:first.nextCursor,read});
+ for(const page of [first,cached,second]){
+  for(const field of ['sourceReadReceipt','sourceReadReceipts','catalogReadReceipt','sourceReadReceiptsLimited'])assert.equal(field in page,false,field);
+  assert.equal(JSON.stringify(page).includes('PRIVATE_'),false);
+ }
+ assert.equal(calls,3);assert.equal(first.sourceRevision,second.sourceRevision);
+ assert.equal(new Set([...first.items,...second.items].map(row=>row.id)).size,48);
+});
 test('two source phases put every known result before unknowns across full visible pages',async()=>{
  const pager=createAjesPowerPager({now:()=>initialTime}),calls:string[]=[];
  const read=async(phase:'known'|'unknown',page:number,size:number)=>{calls.push(`${phase}.${page}`);assert.equal(size,48);return phase==='known'?source(rows('K',page===1?45:7,page===1?0:45),page===1?48:7):source(rows('U',48,(page-1)*48),48);};

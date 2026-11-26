@@ -23,6 +23,8 @@ import {ajesCatalogQuery} from './ajes-query';
 export {ajesCatalogQuery,AjesFilterUnavailable} from './ajes-query';
 import {publicOffer} from './storage';
 import {exactAjesCount,type AjesCountSummary} from './ajes-count-display';
+import {randomUUID} from 'node:crypto';
+import {copyAjesSourceReadReceipt,ajesSourceReadReceiptFromError,type AjesSourceReadReceipt} from './ajes-read-evidence';
 
 const sourceMakes=cache(async(table:any)=>{
  assertAjesJapanTable(table);
@@ -72,6 +74,20 @@ export async function readAjesDirectory(params:Record<string,unknown>={}){
  return directories.get(key,async()=>readAjesModelDirectory(ajesClient,await cappedAjesQuery(q),ip),ip+'\0'+key) as Promise<Awaited<ReturnType<typeof readAjesModelDirectory>>>;
 }
 export async function readAjesCatalogPage(params:Record<string,unknown>,measure?:(stage:string,ms:number)=>void,options:{includeCount?:boolean}={}){
+ const readId=randomUUID(),readStartedAt=new Date(Date.now()).toISOString();
+ const runtimeSha=/^[a-f0-9]{40}$/.test(process.env.AVTOCENA_RELEASE_SHA||'')?process.env.AVTOCENA_RELEASE_SHA!:null;
+ const sourceReadReceipts:AjesSourceReadReceipt[]=[];
+ let sourceReadCalls=0,sourceReadReceiptsLimited=false;
+ const collectReceipt=(value:unknown)=>{
+  const receipt=copyAjesSourceReadReceipt(value);
+  if(receipt&&sourceReadReceipts.length<8)sourceReadReceipts.push(receipt);
+  else sourceReadReceiptsLimited=true;
+ };
+ // A receipt describes this invocation, never the first source page retained
+ // by a cursor. Optional aggregate refresh is outside the list's evidence.
+ const readEvidence=()=>({catalogReadReceipt:{version:1 as const,readId,runtimeSha,readStartedAt,
+  readFinishedAt:new Date(Date.now()).toISOString(),sourceReadCalls:Math.min(8,sourceReadCalls)},
+  sourceReadReceipts,sourceReadReceiptsLimited:sourceReadReceiptsLimited||sourceReadCalls>8});
  assertAjesJapanMarket(params.market);
  const resolveStarted=performance.now();
  const filter=ajesResultFilter(params);
@@ -87,12 +103,17 @@ export async function readAjesCatalogPage(params:Record<string,unknown>,measure?
  if(options.includeCount!==false&&(query.page||1)===1&&!params.after&&!filter.powerFilter)void readAjesCountSummary(JSON.stringify(params)).then(value=>{readyCount=value;}).catch(()=>{}).finally(()=>measure?.('count',performance.now()-countStarted));
  const snapshot=japanPowerSnapshot(readCalculationIndex(),await readCatalogEditorial());
  const read=async(sourcePage:number,powerContext?:JapanPowerQueryContext,pageSize=query.pageSize)=>{
-  const received=await readAjesPublic({...query,page:sourcePage,pageSize},{measure,powerContext,snapshot});
+  sourceReadCalls++;
+  const received=await readAjesPublic({...query,page:sourcePage,pageSize},{measure,powerContext,snapshot}).then(value=>{
+   collectReceipt(value.sourceReadReceipt);return value;
+  },error=>{collectReceipt(ajesSourceReadReceiptFromError(error));throw error;});
+  const {sourceReadReceipt: _sourceReceipt,sourceReadReceipts: _savedReceipts,catalogReadReceipt: _savedCatalogReceipt,
+   sourceReadReceiptsLimited: _savedReceiptsLimited,...source}=received;
   if(modelDirectoryUnavailable&&!received.items.length)throw new AjesUnavailable('directory_unavailable');
   // Apply local/manual and supplier discovery filters before delivered-price previews.
   // Non-matching cars never enter the expensive customs/management pipeline.
   const candidates=filter.powerFilter?received.items.filter(v=>filter.matchesPower(v)&&(!powerContext||(powerContext.phase==='unknown')===japanUnknownPower(v))):received.items;
-  const page={...received,items:candidates,...(modelDirectoryUnavailable?{partial:true}:{})};
+  const page={...source,items:candidates,...(modelDirectoryUnavailable?{partial:true}:{})};
   const pricingStarted=performance.now();
   let priced=page.items;
   if(filter.priceFilter)priced=await applyActiveBusinessPricingBatch(page.items);
@@ -115,13 +136,13 @@ export async function readAjesCatalogPage(params:Record<string,unknown>,measure?
   const items=ordered.map((v:any)=>publicOffer(v));
   const exact=page.page===1&&!page.hasMore&&!page.partial&&!page.stale?items.length:null;
   const countSummary=exact!==null?{total:exact,upperBound:false,stale:false,observedAt:page.observedAt}:null;
-  return {...page,filteredByPage:true,total:exact,countSummary,items,powerFilterSummary:japanPowerFilterSummary(items)};
+  return {...page,filteredByPage:true,total:exact,countSummary,items,powerFilterSummary:japanPowerFilterSummary(items),...readEvidence()};
  }
  const total=readyCount as AjesCountSummary|null;
  const exact=page.page===1&&!page.hasMore&&!page.partial&&!page.stale?page.items.length:null;
  const countSummary=exact!==null?{total:exact,upperBound:false,stale:false,observedAt:page.observedAt}:total;
  const items=(query.sort&&query.sort!=="updatedAt"?sortCatalogRows(page.items,query.sort,String(params.city||"")):page.items).map((v:any)=>publicOffer(v));
- return {...page,filteredByPage:filter.active,total:exact??(!filter.active&&!page.partial?exactAjesCount(total)??null:null),countSummary,items};
+ return {...page,filteredByPage:filter.active,total:exact??(!filter.active&&!page.partial?exactAjesCount(total)??null:null),countSummary,items,...readEvidence()};
 }
 /** Add once to totals built from the separate local inventory. A failure is not zero inventory. */
 export async function withAjesCount<T extends {total:number;marketCounts?:Record<string,number>;independentChina?:boolean}>(value:T,params:Record<string,unknown>={}):Promise<T & {countIncomplete?:boolean;marketCountInfo:Record<string,AjesCountSummary|null>}>{
