@@ -33,6 +33,7 @@ const fixture={queries:[],counts:0,mode:'normal',changed:false,Unavailable:Fixtu
     offerType:'auction',status:'sold',catalogKind:'auction_result',auctionResult:'sold',auctionPriceKind:'hammer',
     make:'TOYOTA',model:'TEST',year:2022,mileageKm:50000,engineCc:1500,fuel:'petrol',drive:'fwd',bodyType:'hatchback',
     sourcePrice:500000,sourceCurrency:'JPY',priceMode:'auction_start',catalogPricingMode:'seller',sellerPriceRub:300000,
+    calculationSnapshot:{currencyRate:{currency:'JPY',sourcePrice:500000,effectiveRate:0.6,rateSource:'cbr',sourcePriceRub:300000}},
     totalRub:null,calculationStatus:'needs_data',images:[],firstSeenAt:'2026-11-26T10:00:00.000Z',updatedAt:'2026-11-26T10:00:00.000Z',
     ...(i%3?{japanSupplierPower:{offerId:id,hp:150,unit:'hp',source:'ajes_pw'}}:{japanPowerUnknown:true}),operational:{}};
   });
