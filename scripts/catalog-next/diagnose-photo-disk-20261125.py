@@ -17,6 +17,7 @@ import fcntl
 import hashlib
 import http.client
 import json
+import math
 import os
 from pathlib import Path
 import re
@@ -32,6 +33,19 @@ RUNTIMES = (
     '38895e53f7f770ee68edb0b8ad53056468b928a5',
     '36d707bcb599e861918df411e40d8947074f0430',
 )
+PHOTO_SPEED_PLAN = {
+    'runtimeSha': RUNTIMES[3],
+    'controllerSha': 'b6ae6d20149362e5d772d08f6ce66dcca3ee9332',
+    'generationId': 'gen_china_45655051136_1',
+    'generationManifestSha256': '6711203fb59a70c99cda3c725eb4ee70654142b1871b0784516209d2903c0b8d',
+    'retainedRuntime': RUNTIMES[1],
+    'mode': 'code-update',
+    'codeScope': 'catalog-photo-recovery-v1',
+}
+PHOTO_SPEED_SOURCES = {
+    'regcloud-performance-gate.py': 'ebd54f9774271f52d3026a153e99d3a96c791db07b79c9c802705e952045366b',
+    'accepted-speed-baseline.json': '32fba449b77e40983803483ea7b6cb4ece09afa997c2ae08dd968c675f528c59',
+}
 FILES = ('GENERATION.json', 'details.sqlite', 'query.sqlite',
          'FILTER_SEMANTICS.json', 'FX_RECEIPT.json', 'RECONCILIATION.json', 'DISPOSITIONS.ndjson')
 PHASE = 'begin'
@@ -178,7 +192,7 @@ def aj_failure_diagnostic(row, port, health, ingress):
     return {'servingBoundBeforeAfter': True, **value}
 
 
-def bounded_proof(path, limit):
+def bounded_bytes(path, limit):
     descriptor = os.open(path, os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK)
     try:
         before = os.fstat(descriptor)
@@ -190,15 +204,20 @@ def bounded_proof(path, limit):
         fields = ('st_dev', 'st_ino', 'st_size', 'st_mtime_ns', 'st_ctime_ns')
         if len(raw) != before.st_size or any(getattr(before, key) != getattr(after, key) for key in fields):
             raise ValueError()
-        value = json.loads(raw)
-        if not isinstance(value, dict):
-            raise ValueError()
-        return value, hashlib.sha256(raw).hexdigest()
+        return raw
     finally:
         os.close(descriptor)
 
 
-def failed_code_cleanup_diagnostic(directory):
+def bounded_proof(path, limit):
+    raw = bounded_bytes(path, limit)
+    value = json.loads(raw)
+    if not isinstance(value, dict):
+        raise ValueError()
+    return value, hashlib.sha256(raw).hexdigest()
+
+
+def failed_code_cleanup_diagnostic(directory, runtime):
     try:
         value, digest = bounded_proof(directory / 'FAILED_CODE_CLEANUP.json', 16 * 1024)
     except FileNotFoundError:
@@ -217,11 +236,122 @@ def failed_code_cleanup_diagnostic(directory):
         return {'present': True, 'valid': True, 'receiptSha256': digest,
                 **{key: value[key] for key in (*numbers, 'completed', 'protectedDeploymentsPreserved')},
                 'bindsAttempt': value.get('nonce') == directory.name == plan.get('nonce') == rollback.get('nonce')
-                    and value.get('runtimeSha') == RUNTIMES[0] == plan.get('runtimeSha') == rollback.get('release'),
+                    and runtime in (RUNTIMES[0], RUNTIMES[3])
+                    and value.get('runtimeSha') == runtime == plan.get('runtimeSha') == rollback.get('release'),
                 'bindsPlan': value.get('planSha256') == plan_digest,
                 'bindsRollback': value.get('rollbackSha256') == rollback_digest}
     except (OSError, ValueError, UnicodeDecodeError):
         return {'present': True, 'valid': False, 'receiptSha256': digest}
+
+
+def speed_need(condition, _reason):
+    if not condition:
+        raise ValueError()
+
+
+def saved_speed_sample(row, paths):
+    """The fixed public-field allowlist from release-host.py; never emit raw logs."""
+    speed_need(isinstance(row, dict), 'diagnosis_speed_sample')
+    phases = {'warm', 'after_ttl', 'after_directory_ttl'}
+    def numbers(names):
+        speed_need(all(type(row.get(name)) in (int, float) and math.isfinite(row[name]) and 0 <= row[name] <= 86400
+                 for name in names), 'diagnosis_speed_number')
+        return {name: row[name] for name in names}
+    def booleans(names):
+        speed_need(all(type(row.get(name)) is bool for name in names), 'diagnosis_speed_boolean')
+        return {name: row[name] for name in names}
+    if row.get('performanceGate') == 'summary':
+        speed_need(row.get('marketScope') == 'china' and
+             all(isinstance(row.get(name), list) and len(row[name]) <= 64 and all(path in paths for path in row[name])
+                 for name in ('routes', 'acceptedBaselineRoutes')) and
+             all(type(row.get(name)) is int and 0 <= row[name] <= 10000 for name in ('samples', 'slowSamples')),
+             'diagnosis_speed_summary')
+        return {'performanceGate': 'summary', 'marketScope': 'china', 'routes': list(row['routes']),
+                'acceptedBaselineRoutes': list(row['acceptedBaselineRoutes']), 'samples': row['samples'], 'slowSamples': row['slowSamples'],
+                **booleans(('functionalPassed', 'performanceAccepted', 'latencyBlocking', 'acceptedBaselineEnforced'))}
+    speed_need(isinstance(row.get('path'), str) and row['path'] in paths, 'diagnosis_speed_route')
+    route = {'path': row['path']}
+    if row.get('performanceRequest') in {'started', 'complete', 'failed'}:
+        result = {**route, 'performanceRequest': row['performanceRequest']}
+        if row['performanceRequest'] != 'started':
+            result.update(numbers(('seconds',)))
+        if row['performanceRequest'] == 'complete':
+            result.update(booleans(('functionalPassed',)))
+        if row['performanceRequest'] == 'failed':
+            errors = {'AssertionError', 'HTTPError', 'URLError', 'TimeoutError', 'JSONDecodeError', 'RemoteDisconnected',
+                      'IncompleteRead', 'ConnectionResetError', 'ConnectionRefusedError', 'ValueError', 'KeyError', 'TypeError',
+                      'OSError', 'SSLError', 'UnicodeDecodeError'}
+            result['errorType'] = row.get('errorType') if row.get('errorType') in errors else 'other'
+        return result
+    if row.get('speedBaseline') in phases:
+        result = {**route, 'speedBaseline': row['speedBaseline'],
+                  **numbers(('referenceSeconds', 'measurementNoiseSeconds', 'ceilingSeconds', 'seconds')),
+                  **booleans(('blocking', 'passed'))}
+        if 'recheckSeconds' in row or 'recheckMedianSeconds' in row:
+            values = row.get('recheckSeconds')
+            speed_need(isinstance(values, list) and len(values) == 3 and
+                 all(type(value) in (int, float) and math.isfinite(value) and 0 <= value <= 86400 for value in values),
+                 'diagnosis_speed_recheck')
+            result.update(recheckSeconds=list(values), **numbers(('recheckMedianSeconds',)))
+        return result
+    if row.get('performanceGate') in phases:
+        return {**route, 'performanceGate': row['performanceGate'], **numbers(('seconds', 'ceiling')),
+                **booleans(('passed', 'functionalPassed', 'latencyBlocking'))}
+    raise ValueError()
+
+
+def saved_speed_diagnosis(directory, runtime):
+    """Read only the saved b6/36/genB result, bound to its copied gate and baseline."""
+    selected = False
+    stage = 'plan_binding'
+    try:
+        plan, plan_digest = bounded_proof(directory / 'PLAN.json', 256 * 1024)
+        selected = runtime == PHOTO_SPEED_PLAN['runtimeSha'] and all(
+            plan.get(key) == value for key, value in PHOTO_SPEED_PLAN.items())
+        if not selected:
+            return {'selected': False}
+        speed_need(re.fullmatch(r'[a-f0-9]{32}', directory.name) and plan.get('nonce') == directory.name
+                   and directory.parent.name == 'china-next' and directory.parent.parent.name == runtime,
+                   'diagnosis_speed_attempt')
+        stage = 'report_file'
+        try:
+            raw = bounded_bytes(directory / 'server-speed-result.json', 256 * 1024)
+        except FileNotFoundError:
+            return {'selected': True, 'valid': True, 'present': False, 'planSha256': plan_digest,
+                    'sha256': None, 'exitCode': None, 'samples': [], 'rejectedSamples': 0}
+        stage = 'source_binding'
+        speed_need(isinstance(plan.get('files'), list) and len(plan['files']) <= 64, 'diagnosis_speed_sources')
+        baseline = None
+        for name, pinned_digest in PHOTO_SPEED_SOURCES.items():
+            matches = [row for row in plan['files'] if isinstance(row, dict) and row.get('name') == name]
+            speed_need(len(matches) == 1, 'diagnosis_speed_source')
+            expected = matches[0]
+            source = bounded_bytes(directory / name, 256 * 1024)
+            speed_need(type(expected.get('bytes')) is int and len(source) == expected['bytes']
+                       and hashlib.sha256(source).hexdigest() == expected.get('sha256') == pinned_digest,
+                       'diagnosis_speed_source')
+            if name == 'accepted-speed-baseline.json':
+                baseline = json.loads(source)
+        paths = {row['path'] for row in baseline['samples']}
+        paths.add('/cars?market=china')
+        stage = 'report_shape'
+        value = json.loads(raw)
+        speed_need(isinstance(value, dict) and set(value) == {'exitCode', 'samples'}
+                   and type(value.get('exitCode')) is int and -255 <= value['exitCode'] <= 255
+                   and isinstance(value.get('samples'), list) and len(value['samples']) <= 512,
+                   'diagnosis_speed_report')
+        samples = []
+        rejected = 0
+        for row in value['samples']:
+            try:
+                samples.append(saved_speed_sample(row, paths))
+            except (TypeError, ValueError, OverflowError):
+                rejected += 1
+        return {'selected': True, 'valid': True, 'present': True, 'planSha256': plan_digest,
+                'sourceSha256': dict(PHOTO_SPEED_SOURCES), 'sha256': hashlib.sha256(raw).hexdigest(),
+                'exitCode': value['exitCode'], 'samples': samples, 'rejectedSamples': rejected}
+    except (OSError, ValueError, TypeError, KeyError, OverflowError):
+        return {'selected': selected, 'valid': False, 'reason': stage}
 
 
 def image_binding_diagnostic():
@@ -378,7 +508,9 @@ def main():
                     'mounted': any(m == str(directory) or m.startswith(str(directory) + '/') or
                                    str(directory).startswith(m + '/') for m in mounted),
                     'files': files,
-                    **({'failedCodeCleanup': failed_code_cleanup_diagnostic(directory)} if runtime == RUNTIMES[0] else {})})
+                    **({'failedCodeCleanup': failed_code_cleanup_diagnostic(directory, runtime)}
+                       if runtime in (RUNTIMES[0], RUNTIMES[3]) else {}),
+                    **({'savedServerSpeed': saved_speed_diagnosis(directory, runtime)} if runtime == RUNTIMES[3] else {})})
         report['runtimes'][runtime] = attempts
     PHASE = 'journal'
     journal = subprocess.run(['/usr/bin/journalctl', '-u', 'docker', '-u', 'containerd',
