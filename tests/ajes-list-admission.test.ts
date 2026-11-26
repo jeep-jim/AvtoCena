@@ -7,7 +7,7 @@ test('slow distinct details cannot occupy both list admission slots',async()=>{
  const held=new Promise<void>(r=>release=r),first=new Promise<void>(r=>started=r);
  const client=createAjesClient({password:()=> 'fixture',assertEnabled:async()=>{},reserve:async()=>{},fetcher:async input=>{
   const sql=new URL(String(input)).searchParams.get('sql')!;active++;peak=Math.max(peak,active);
-  try{if(sql.includes("where id=")){details++;started();await held;}return Response.json([]);}finally{active--;}
+  try{if(sql.includes("where id=")){details++;started();await held;}return Response.json(sql.startsWith('select count(*)')?[{total:0}]:[]);}finally{active--;}
  }});
  const one=client.read({table:'stats',id:'fixture001'},'203.0.113.1');
  await first;

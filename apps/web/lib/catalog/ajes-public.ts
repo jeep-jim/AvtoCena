@@ -41,7 +41,7 @@ export async function readAjesPublic(query:AjesQuery,options:{editorial?:boolean
   if(options.editorial!==false&&editorialHidden(offer,index))return null;
   return applyJapanOwnerSpecifications(options.editorial===false?offer:applyCatalogEditorial(offer,index));
  }));
- const {sourceEvidence: _privateEvidence,sourceEvidenceById: _privateListEvidence,...publicResult}=result;
+ const {sourceEvidence: _privateEvidence,sourceEvidenceById: _privateListEvidence,emptyPageEvidence: _privateEmptyEvidence,...publicResult}=result;
  return {...publicResult,items:items.filter(offer=>offer&&catalogInventoryAgeDecision(offer).eligible&&!catalogVehicleExcluded(offer))};
 }
 export async function getAjesOffer(id:string,options:{editorial?:boolean}={}){

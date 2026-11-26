@@ -1,5 +1,6 @@
 import {ajesFailureSlot,type AjesRequestDiagnostic} from './ajes-request-diagnostic';
 import type {CalculationIndex} from '../encyclopedia/calculation-index';
+import {createHash} from 'node:crypto';
 import {isIP} from 'node:net';
 import {gunzipSync} from 'node:zlib';
 import {DetailReadCache} from './detail-read-cache';
@@ -14,6 +15,26 @@ class AjesSavedRecovery {
   constructor(private readonly load:()=>Promise<any>){}
   read(){return this.pending??=(this.load());}
 }
+// COUNT verification must start after the list releases supplier admission.
+// It also stays outside visitor recovery admission: two empty lists must not
+// block each other's count-failure recovery while occupying both queues.
+class AjesEmptyValidation extends AjesSavedRecovery {}
+const sourceTtlMs=30*60*1000;
+const sqlHash=(sql:string)=>createHash('sha256').update(sql).digest('hex');
+const needsEmptyProof=(value:any)=>value?.schemaVersion===2&&Array.isArray(value.items)&&value.items.length===0&&!(Number.isSafeInteger(value.received)&&value.received>0);
+function verifiedEmptyPage(value:any,sourceSql?:string,countSql?:string,fresh=true){
+  const proof=value?.emptyPageEvidence,now=Date.now();
+  const sourceTime=Date.parse(value?.observedAt||''),countTime=Date.parse(proof?.countObservedAt||'');
+  const sourceAge=now-sourceTime,countAge=now-countTime;
+  return value?.received===0&&value?.rejected===0&&Array.isArray(value.items)&&value.items.length===0
+    &&proof?.version===1&&proof.sourceObservedAt===value.observedAt&&proof.page===value.page&&proof.pageSize===value.pageSize
+    &&Number.isSafeInteger(value.page)&&value.page>=1&&Number.isSafeInteger(value.pageSize)&&value.pageSize>=1
+    &&Number.isSafeInteger(proof.countTotal)&&proof.countTotal>=0&&proof.countTotal<=(value.page-1)*value.pageSize
+    &&/^[a-f0-9]{64}$/.test(proof.sourceQueryHash||'')&&/^[a-f0-9]{64}$/.test(proof.countQueryHash||'')
+    &&(!sourceSql||proof.sourceQueryHash===sqlHash(sourceSql))&&(!countSql||proof.countQueryHash===sqlHash(countSql))
+    &&Number.isFinite(sourceTime)&&Number.isFinite(countTime)&&Math.abs(sourceTime-countTime)<sourceTtlMs
+    &&sourceAge>=0&&countAge>=0&&(!fresh||sourceAge<sourceTtlMs&&countAge<sourceTtlMs);
+}
 type Dependencies={saveRequestFailure?:(value:AjesRequestDiagnostic)=>Promise<unknown>;calculationIndex?:()=>CalculationIndex|null;password:()=>string|undefined|Promise<string|undefined>; assertEnabled:(table?:AjesTable)=>Promise<void>; reserve:(table:AjesTable,kind?:string)=>Promise<void>; fetcher?:typeof fetch; endpoint?:(ip:string)=>string|Promise<string>; saveEvidence?:(table:AjesTable,value:any)=>Promise<void>; saveAggregateEvidence?:(kind:string,value:any)=>Promise<void>; readQuery?:(sql:string)=>Promise<any|null>; readLegacyQuery?:(sql:string)=>Promise<any|null>; saveQuery?:(sql:string,value:any)=>Promise<void>; readDetail?:(table:AjesTable,id:string)=>Promise<any|null>; readSavedSearch?:(input:AjesQuery)=>Promise<any|null>; readListedDetail?:(table:AjesTable,id:string)=>Promise<any|null>; saveDetail?:(table:AjesTable,id:string,value:any)=>Promise<void>};
 export function createAjesClient(deps:Dependencies) {
   // Only fresh successful results can be reused across visitor addresses.
@@ -21,7 +42,7 @@ export function createAjesClient(deps:Dependencies) {
   // Keep the total supplier concurrency at two, including all request kinds.
   // A queued detail may wait for the preceding 45-second read instead of failing
   // at the ordinary five-second queue deadline solely due to serialization.
-  const sourceExpiry=(value:any)=>Date.parse(value?.observedAt||'')+30*60*1000;
+  const sourceExpiry=(value:any)=>Math.min(Date.parse(value?.observedAt||'')+sourceTtlMs,value?.emptyPageEvidence?Date.parse(value.emptyPageEvidence.countObservedAt||'')+sourceTtlMs:Infinity);
   const cache=new DetailReadCache<any>({maxEntries:300,maxBytes:8*1024*1024,ttlMs:30*60*1000,expiresAt:sourceExpiry,concurrency:2,groupConcurrency:{detail:1},groupQueueTimeoutMs:{detail:50_000},shouldCache:value=>!value.stale&&!value.partial});
   // Stored recovery has its own bounded queue. It must neither occupy supplier
   // admission nor promote a visitor's stale result into the shared fresh cache.
@@ -32,7 +53,7 @@ export function createAjesClient(deps:Dependencies) {
   const preparedReads=new DetailReadCache<any>({maxEntries:300,maxBytes:8*1024*1024,ttlMs:30*60*1000,expiresAt:sourceExpiry,concurrency:2,maxQueued:32,queueTimeoutMs:5000,shouldCache:value=>{
     const age=Date.now()-Date.parse(value?.observedAt||'');
     const supported=value?.schemaVersion===2||Array.isArray(value?.makes)||Array.isArray(value?.models)||Array.isArray(value?.colors)||Number.isSafeInteger(value?.total);
-    return supported&&!value.stale&&!value.partial&&age>=0&&age<30*60*1000;
+    return supported&&!value.stale&&!value.partial&&age>=0&&age<sourceTtlMs&&(!needsEmptyProof(value)||verifiedEmptyPage(value));
   }});
   // Memoization avoids repeated object-store reads. Every reuse below
   // still checks observedAt; memory residence never extends freshness.
@@ -49,6 +70,10 @@ export function createAjesClient(deps:Dependencies) {
   // Bounded snapshots of rows the visitor already saw, not fabricated full details.
   const listed=new Map<string,{value:any;bytes:number}>();let listedBytes=0;
   const failures=new Map<string,{reason:string;until:number}>();
+  // Only exact-query proof metadata, with the same 300-entry bound as source
+  // caches. A newer real page lifts the empty barrier, while older visitor or
+  // in-flight recovery snapshots cannot resurrect rows already disproved.
+  const emptyBarriers=new Map<string,{proof:any;supersededAt?:number}>();
   const remember=(value:any)=>{
     for(const lot of value.items||[]){
       const key=lot.table+':'+lot.id,snapshot={schemaVersion:value.schemaVersion,items:[lot],page:1,pageSize:1,observedAt:value.observedAt,partial:true,stale:Boolean(value.stale)};
@@ -59,13 +84,19 @@ export function createAjesClient(deps:Dependencies) {
     return value;
   };
   const cooling=(key:string)=>{const value=failures.get(key);if(value&&value.until>Date.now())return value.reason;failures.delete(key);return null;};
-  return {
-    async read(input:unknown,clientIp:string) {
+    async function read(input:unknown,clientIp:string,compiledQuery?:ReturnType<typeof ajesQuery>):Promise<any> {
       // Retired tables cannot read caches, credentials, quota or the supplier,
       // even when an old link or saved owner setting still requests them.
       assertAjesJapanTable(input&&typeof input==='object'?(input as AjesQuery).table:undefined);
-      const query=ajesQuery(input,deps.calculationIndex?.()||null);
+      const calculationIndex=compiledQuery?null:deps.calculationIndex?.()||null;
+      const query=compiledQuery??ajesQuery(input,calculationIndex);
       const cacheSql=ajesSourceCacheSql(query.sql);
+      const sourceKey=query.kind==='list'?sqlHash(cacheSql):'';
+      // Capture the same local query facts now; a later index refresh must not
+      // change the WHERE used to verify this exact source selection.
+      const countInput=query.kind==='list'?{...(input as AjesQuery),aggregate:'count' as const}:null;
+      const countQuery=countInput?ajesQuery(countInput,calculationIndex):null;
+      const countSql=countQuery?ajesSourceCacheSql(countQuery.sql):'';
       if(!isIP(clientIp)) throw new AjesUnavailable('client_ip_missing');
       await deps.assertEnabled(query.table); // Also applies to cache hits after an owner disables the source.
       const password=await deps.password();
@@ -79,29 +110,69 @@ export function createAjesClient(deps:Dependencies) {
           &&saved.page===query.page&&saved.pageSize===query.pageSize
           &&(query.kind==='count'?Number.isSafeInteger(saved.total)&&saved.total>=0:query.kind==='colors'?Array.isArray(saved.colors):query.kind==='makes'?Array.isArray(saved.makes):query.kind==='models'?Array.isArray(saved.models):saved.items.every((lot:any)=>lot?.table===query.table&&typeof lot.id==='string'))
           &&(query.kind!=='detail'||(saved.items.length===1&&saved.items[0].id===query.id));};
+      const proofTime=(proof:any)=>Math.max(Date.parse(proof.sourceObservedAt),Date.parse(proof.countObservedAt));
+      const barrier=()=>{const value=emptyBarriers.get(sourceKey);if(value&&Date.now()-Date.parse(value.proof.sourceObservedAt)>=7*86400000){emptyBarriers.delete(sourceKey);return undefined;}return value;};
+      const beforeBarrier=(value:any)=>{
+        const known=barrier();if(!known)return false;
+        if(verifiedEmptyPage(value,cacheSql,countSql,false))return Boolean(known.supersededAt)||proofTime(value.emptyPageEvidence)<proofTime(known.proof);
+        return !(Date.parse(value?.observedAt||'')>proofTime(known.proof));
+      };
+      const rememberEmpty=(value:any)=>{
+        if(query.kind!=='list'||!isUsable(value)||value.stale||value.partial||!verifiedEmptyPage(value,cacheSql,countSql,false))return;
+        const proof=value.emptyPageEvidence,known=barrier(),at=proofTime(proof);
+        if(known&&(proofTime(known.proof)>=at||(known.supersededAt??0)>=at))return;
+        const current=cache.peekFresh(cacheSql);
+        if(current?.received>0&&!current.stale&&!current.partial&&Date.parse(current.observedAt)>at)return;
+        emptyBarriers.delete(sourceKey);emptyBarriers.set(sourceKey,{proof});
+        while(emptyBarriers.size>300)emptyBarriers.delete(emptyBarriers.keys().next().value!);
+        cache.invalidate(cacheSql);preparedReads.invalidate(cacheSql);visitorCache.invalidate(visitorKey);
+      };
+      const observeRows=(value:any)=>{
+        const known=barrier(),observedAt=Date.parse(value?.observedAt||'');
+        if(known&&isUsable(value)&&value.received>0&&!value.stale&&!value.partial&&observedAt>proofTime(known.proof)&&(known.supersededAt??0)<observedAt){
+          known.supersededAt=observedAt;preparedReads.invalidate(cacheSql);visitorCache.invalidate(visitorKey);
+          const current=cache.peekFresh(cacheSql);if(current&&beforeBarrier(current))cache.invalidate(cacheSql);
+        }
+      };
+      const latestFresh=()=>{
+        const current=cache.peekFresh(cacheSql);
+        if(current!==undefined){if(!beforeBarrier(current)){observeRows(current);return current;}cache.invalidate(cacheSql);}
+        const known=barrier();if(!known||known.supersededAt)return undefined;
+        const value={schemaVersion:2,items:[],page:query.page,pageSize:query.pageSize,received:0,rejected:0,stale:false,observedAt:known.proof.sourceObservedAt,emptyPageEvidence:known.proof};
+        return verifiedEmptyPage(value,cacheSql,countSql)?value:undefined;
+      };
+      const recoveredList=async(value:any)=>{
+        await deps.assertEnabled(query.table);
+        const latest=latestFresh();if(latest!==undefined)return remember(latest);
+        if(isUsable(value)&&value.items.length&&!beforeBarrier(value))return remember({...value,stale:true});
+        return null;
+      };
       const listFallback=async(saved:any)=>{
+        const current=await recoveredList(saved);if(current)return current;
+        // A proven empty remains a barrier after its freshness expires. A
+        // refusal cannot resurrect pre-zero exact, legacy or partial rows.
+        const known=barrier();if(known&&!known.supersededAt)return null;
         const usable=isUsable(saved);
-        if(usable&&saved.items.length){await deps.assertEnabled(query.table);return remember({...saved,stale:true});}
-        if(!usable&&deps.readLegacyQuery){
+        if((!usable||!saved.items.length)&&deps.readLegacyQuery){
           let fallback:any=null;try{fallback=await deps.readLegacyQuery(query.sql);}catch{}
-          if(isUsable(fallback)&&fallback.items.length){await deps.assertEnabled(query.table);return remember({...fallback,stale:true});}
+          const recovered=await recoveredList(fallback);if(recovered)return recovered;
         }
         if(query.page===1&&deps.readSavedSearch){
           let fallback:any=null;try{fallback=await deps.readSavedSearch(input as AjesQuery);}catch{}
-          if(fallback?.partial&&isUsable(fallback)&&fallback.items.length){await deps.assertEnabled(query.table);return remember({...fallback,stale:true});}
+          if(fallback?.partial){const recovered=await recoveredList(fallback);if(recovered)return recovered;}
         }
         return null;
       };
       // Detail responses keep their separate identity-bound cache path.
       const inspectPrepared=query.kind!=='detail';
-      const inMemory=inspectPrepared?cache.peekFresh(cacheSql):undefined;
+      const inMemory=inspectPrepared?latestFresh():undefined;
       if(inMemory!==undefined)return inMemory;
       // Reuse only this visitor's already recovered result while the original
       // refusal cooldown is active. Looking it up after queue/storage work made
       // the 30-second recovery cache ineffective at protecting repeat visits.
       // peekFresh never renews its deadline; a new shared success above wins.
       const recovered=inspectPrepared?visitorCache.peekFresh(visitorKey):undefined;
-      if(recovered?.stale&&isUsable(recovered)
+      if(recovered?.stale&&isUsable(recovered)&&!beforeBarrier(recovered)
         &&(cooling(quotaKey)||cooling('visitor:'+clientIp)||cooling(visitorKey))){
         await deps.assertEnabled(query.table);
         return recovered;
@@ -109,7 +180,8 @@ export function createAjesClient(deps:Dependencies) {
       const freshPrepared=(value:any)=>{
         const age=Date.now()-Date.parse(value?.observedAt||'');
         const schema=['count','models','makes','colors'].includes(query.kind)||value?.schemaVersion===2;
-        return isUsable(value)&&schema&&!value.stale&&!value.partial&&age<30*60*1000;
+        return isUsable(value)&&schema&&!value.stale&&!value.partial&&age<sourceTtlMs&&!beforeBarrier(value)
+          &&(query.kind!=='list'||!needsEmptyProof(value)||verifiedEmptyPage(value,cacheSql,countSql));
       };
       let prepared:any=null;
       if(inspectPrepared&&deps.readQuery){
@@ -123,24 +195,33 @@ export function createAjesClient(deps:Dependencies) {
           return isUsable(original)&&(!isUsable(canonical)||Date.parse(original.observedAt)>Date.parse(canonical.observedAt))?original:canonical;
         },cacheSql,'prepared').catch(()=>null);
       }
+      rememberEmpty(prepared);observeRows(prepared);
       if(inspectPrepared&&freshPrepared(prepared)){
         await deps.assertEnabled(query.table);
-        return query.kind==='list'?remember({...prepared,stale:false}):{...prepared,stale:false};
+        const latest=latestFresh();if(latest!==undefined)return latest;
+        if(freshPrepared(prepared))return query.kind==='list'?remember({...prepared,stale:false}):{...prepared,stale:false};
       }
       return cache.get(cacheSql,async()=>{
         await deps.assertEnabled(query.table); // Recheck after waiting for concurrency slot.
         // Only successful, user-requested responses are retained; never crawl the database.
         let saved:any=prepared;
         if(!inspectPrepared)try {saved=await deps.readDetail?.(query.table,query.id!);}catch{}
-        const age=Date.now()-Date.parse(saved?.observedAt||'');
         const usable=isUsable(saved);
-        const currentSchema=query.kind==='count'||query.kind==='models'||query.kind==='makes'||query.kind==='colors'||saved?.schemaVersion===2;
-        if(usable&&currentSchema&&!saved.stale&&!saved.partial&&age<30*60*1000)return query.kind==='list'?remember({...saved,stale:false}):{...saved,stale:false};
+        if(freshPrepared(saved))return query.kind==='list'?remember({...saved,stale:false}):{...saved,stale:false};
         const url=new URL(await deps.endpoint?.(clientIp)||'http://87.242.72.57/api/');
         url.search=new URLSearchParams({ip:clientIp,json:'',code:password,sql:query.sql}).toString();
         let requestStarted=false,httpStatus:number|null=null,providerCode:string|null=null;
         const startedAt=new Date().toISOString();
         const controller=new AbortController();
+        const recordFailure=(failure:AjesUnavailable)=>{
+          // Throttle fixed page/kind slots independently; never retain a body.
+          const failureSlot=ajesFailureSlot(query);
+          if(requestStarted&&deps.saveRequestFailure&&Date.now()-(lastFailureSaved.get(failureSlot)??0)>=60000){
+            lastFailureSaved.set(failureSlot,Date.now());
+            const diagnostic:AjesRequestDiagnostic={table:query.table,kind:query.kind,page:query.page,pageSize:query.pageSize,startedAt,finishedAt:new Date().toISOString(),clientIp,sql:query.sql,endpoint:url.origin+url.pathname,httpStatus,providerCode,outcome:failure.reason};
+            if(Buffer.byteLength(JSON.stringify(diagnostic))<=64*1024)persist(()=>deps.saveRequestFailure!(diagnostic));
+          }
+        };
         // Power is a local selection over the same requested raw page. It uses
         // the ordinary source deadline, not a shorter deadline that discards
         // otherwise valid responses and unnecessarily falls back to old rows.
@@ -192,6 +273,39 @@ export function createAjesClient(deps:Dependencies) {
           const items=rows.map(r=>ajesLot(r,query.table,query.kind==='detail')).filter(Boolean);
           const result={schemaVersion:2,stale:false,items,page:query.page,pageSize:query.pageSize,received:rows.length,rejected:rows.length-items.length,observedAt:new Date().toISOString(),
             quota:{counter:quotaNumber(response.headers.get('api-counter')),limit:quotaNumber(response.headers.get('api-limit')),remaining:quotaNumber(response.headers.get('api-rest'))}};
+          if(query.kind==='list'&&rows.length===0){
+            // An empty wire array is not proof of inventory exhaustion. Do not
+            // overwrite useful saved rows or share this as a fresh success.
+            throw new AjesEmptyValidation(async()=>{
+              let failure:AjesUnavailable;
+              try{
+                const count=await read(countInput!,clientIp,countQuery!);
+                const countAge=Date.now()-Date.parse(count?.observedAt||'');
+                if(count.stale||count.partial||count.upperBound||!Number.isSafeInteger(count.total)||count.total<0
+                  ||countAge<0||countAge>=sourceTtlMs||count.total>(query.page-1)*query.pageSize)throw new AjesUnavailable('empty_response');
+                const verified={...result,emptyPageEvidence:{version:1,sourceQueryHash:sqlHash(cacheSql),countQueryHash:sqlHash(countSql),page:query.page,pageSize:query.pageSize,sourceObservedAt:result.observedAt,countObservedAt:count.observedAt,countTotal:count.total}};
+                if(!verifiedEmptyPage(verified,cacheSql,countSql))throw new AjesUnavailable('empty_response');
+                await deps.assertEnabled(query.table);
+                rememberEmpty(verified);
+                // No supplier request here. Its bounded cache stores only the
+                // verified result and expires at the older source observation.
+                return await cache.get(cacheSql,async()=>{
+                  await deps.assertEnabled(query.table);
+                  if(!verifiedEmptyPage(verified,cacheSql,countSql))throw new AjesUnavailable('empty_response');
+                  if(deps.saveQuery)persist(()=>deps.saveQuery!(cacheSql,verified));
+                  return verified;
+                },visitorKey);
+              }catch(error){failure=error instanceof AjesUnavailable?error:new AjesUnavailable('empty_response');}
+              await deps.assertEnabled(query.table);
+              const key=failure.reason==='visitor_restricted'?'visitor:'+clientIp:visitorKey;
+              if(!cooling(key))failures.set(key,{reason:failure.reason,until:Date.now()+(failure.reason==='visitor_restricted'?300000:30000)});
+              while(failures.size>500)failures.delete(failures.keys().next().value!);
+              recordFailure(failure);
+              // The older exact page (or bounded partial recovery) remains
+              // explicitly stale. A failed COUNT must never become zero cars.
+              return visitorCache.get(visitorKey,async()=>{const fallback=await listFallback(saved);if(fallback)return fallback;throw failure;});
+            });
+          }
           if(query.kind==='detail'&&items.length===1){
             const row=rows[0];
             const evidence={id:query.id,observedAt:result.observedAt,fields:Object.keys(row),values:Object.fromEntries(['ENG_V','PW','TIME','FUEL','PRIV','KPP','INFO'].map(key=>[key,row[key]??null]))};
@@ -202,6 +316,7 @@ export function createAjesClient(deps:Dependencies) {
             if(deps.saveEvidence&&Buffer.byteLength(JSON.stringify(evidence))<=64*1024)persist(()=>deps.saveEvidence!(query.table,evidence));
           }
           if(query.kind==='list'){
+            observeRows(result);
             const accepted=new Set(items.map((lot:any)=>lot.id));
             const sourceEvidenceById=Object.fromEntries(rows.filter(row=>accepted.has(row.ID)).map(row=>[row.ID,{id:row.ID,observedAt:result.observedAt,fields:['ENG_V','PW','TIME','FUEL'].filter(key=>Object.prototype.hasOwnProperty.call(row,key)),values:Object.fromEntries(['ENG_V','PW','TIME','FUEL'].map(key=>[key,row[key]??null]))}]));
             if(Buffer.byteLength(JSON.stringify(sourceEvidenceById))<=32*1024)(result as any).sourceEvidenceById=sourceEvidenceById;
@@ -212,6 +327,7 @@ export function createAjesClient(deps:Dependencies) {
 
           return query.kind==='list'?remember(result):result;
         }catch(error){
+          if(error instanceof AjesEmptyValidation)throw error;
           // Never propagate URLs, provider bodies, credentials or nested fetch causes to logs.
           const code=(error as any)?.cause?.code;
           const failure=error instanceof AjesUnavailable?error:new AjesUnavailable(controller.signal.aborted?'request_timeout':code==='UND_ERR_CONNECT_TIMEOUT'?'connect_timeout':'request_failed');
@@ -224,14 +340,7 @@ export function createAjesClient(deps:Dependencies) {
             if(!cooling(key))failures.set(key,{reason:failure.reason,until:Date.now()+(failure.reason==='visitor_restricted'?300000:30000)});
             while(failures.size>500)failures.delete(failures.keys().next().value!);
           }
-          // Throttle fixed page/kind slots independently: a first-page failure
-          // must not suppress continuation evidence. Cooldown is not a request.
-          const failureSlot=ajesFailureSlot(query);
-          if(requestStarted&&deps.saveRequestFailure&&Date.now()-(lastFailureSaved.get(failureSlot)??0)>=60000){
-            lastFailureSaved.set(failureSlot,Date.now());
-            const diagnostic:AjesRequestDiagnostic={table:query.table,kind:query.kind,page:query.page,pageSize:query.pageSize,startedAt,finishedAt:new Date().toISOString(),clientIp,sql:query.sql,endpoint:url.origin+url.pathname,httpStatus,providerCode,outcome:failure.reason};
-            if(Buffer.byteLength(JSON.stringify(diagnostic))<=64*1024)persist(()=>deps.saveRequestFailure!(diagnostic));
-          }
+          recordFailure(failure);
           if(!recoverable)throw failure;
           // Recovery can scan bounded saved pages or read a stored detail. None
           // of that work uses the supplier; holding its two slots here would
@@ -249,6 +358,7 @@ export function createAjesClient(deps:Dependencies) {
           });
         }finally{clearTimeout(timer);}
       },visitorKey,query.kind==='detail'?'detail':'').catch(async error=>{
+        if(error instanceof AjesEmptyValidation)return error.read();
         if(error instanceof AjesSavedRecovery)return visitorCache.get(visitorKey,()=>error.read()).catch(recoveryError=>{
           if(recoveryError instanceof Error&&/^detail_cache_queue_(?:timeout|full)$/.test(recoveryError.message))throw new AjesUnavailable('local_busy');
           throw recoveryError;
@@ -287,9 +397,18 @@ export function createAjesClient(deps:Dependencies) {
           throw new AjesUnavailable('local_busy');
         }
         throw error;
+      }).then(value=>{
+        if(query.kind==='list'){
+          observeRows(value);
+          if(beforeBarrier(value)){
+            const latest=latestFresh();if(latest!==undefined)return latest;
+            throw new AjesUnavailable(cooling(quotaKey)||cooling('visitor:'+clientIp)||cooling(visitorKey)||'empty_response');
+          }
+        }
+        return value;
       });
-    },
-  };
+    }
+  return {read:(input:unknown,clientIp:string)=>read(input,clientIp)};
 }
 function quotaNumber(value:string|null){return value!==null&&/^\d+$/.test(value)?Number(value):null;}
 

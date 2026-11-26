@@ -31,6 +31,11 @@ export class DetailReadCache<T> {
     this.bytes = 0;
   }
 
+  /** Retire one observed response without changing admission or other keys. */
+  invalidate(key: string) {
+    this.remove(key);
+  }
+
   /** Inspect only a still-fresh entry without joining an I/O admission queue. */
   peekFresh(key: string): T | undefined {
     const entry = this.entries.get(key);

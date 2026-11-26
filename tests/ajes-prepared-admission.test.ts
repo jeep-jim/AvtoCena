@@ -3,11 +3,12 @@ import assert from 'node:assert/strict';
 import {createAjesClient} from '../apps/web/lib/catalog/ajes-client';
 import {DetailReadCache} from '../apps/web/lib/catalog/detail-read-cache';
 const tick=()=>new Promise(r=>setTimeout(r,0));
+const row={ID:'fresh001',MARKA_NAME:'TOYOTA',MODEL_NAME:'TEST',YEAR:'2023',AUCTION_TYPE:'2',STATUS:'Sold',FINISH:'100000',START:'100000'};
 const snapshot=(overrides:any={})=>({schemaVersion:2,items:[{id:'saved001',table:'stats'}],page:3,pageSize:24,received:1,rejected:0,stale:false,observedAt:new Date().toISOString(),...overrides});
 test('a fresh exact saved list is delivered while both supplier slots are occupied',async()=>{
   let release!:()=>void,started=0,reserves=0,done=false;
   const held=new Promise<void>(r=>release=r);
-  const client=createAjesClient({password:()=> 'fixture',assertEnabled:async()=>{},reserve:async()=>{reserves++;},readQuery:async sql=>sql.endsWith('limit 48,24')?snapshot():null,fetcher:async()=>{started++;await held;return Response.json([]);}});
+  const client=createAjesClient({password:()=> 'fixture',assertEnabled:async()=>{},reserve:async()=>{reserves++;},readQuery:async sql=>sql.endsWith('limit 48,24')?snapshot():null,fetcher:async()=>{started++;await held;return Response.json([row]);}});
   const pending=[1,2].map(page=>client.read({table:'stats',page},'203.0.113.1'));
   try{
     for(let i=0;i<100&&started<2;i++)await tick();assert.equal(started,2);
@@ -20,7 +21,7 @@ test('a fresh exact saved list is delivered while both supplier slots are occupi
 test('slow storage read does not consume supplier slots; stored inspection coalesces and stays bounded',async()=>{
   let release!:()=>void,active=0,peak=0,reads=0,requests=0;
   const held=new Promise<void>(r=>release=r);
-  const client=createAjesClient({password:()=> 'fixture',assertEnabled:async()=>{},reserve:async()=>{},readQuery:async sql=>{reads++;active++;peak=Math.max(peak,active);if(sql.endsWith('limit 0,24'))await held;active--;return null;},fetcher:async()=>{requests++;return Response.json([]);}});
+  const client=createAjesClient({password:()=> 'fixture',assertEnabled:async()=>{},reserve:async()=>{},readQuery:async sql=>{reads++;active++;peak=Math.max(peak,active);if(sql.endsWith('limit 0,24'))await held;active--;return null;},fetcher:async()=>{requests++;return Response.json([row]);}});
   const a=client.read({table:'stats',page:1},'203.0.113.1'),b=client.read({table:'stats',page:1},'203.0.113.1');
   try{
     for(let i=0;i<100&&active<1;i++)await tick();
@@ -39,8 +40,8 @@ test('prepared pages still obey source switch, visitor IP and configuration',asy
 });
 test('partial, stale, expired, future, wrong-schema and wrong-market saved pages are not promoted to fresh',async()=>{
   for(const overrides of [{partial:true},{stale:true},{schemaVersion:0},{observedAt:new Date(Date.now()-31*60000).toISOString()},{observedAt:new Date(Date.now()+60000).toISOString()},{items:[{id:'saved001',table:'china'}]}]){
-    let requests=0;const client=createAjesClient({password:()=> 'fixture',assertEnabled:async()=>{},reserve:async()=>{},readQuery:async()=>snapshot(overrides),fetcher:async()=>{requests++;return Response.json([]);}});
-    const result=await client.read({table:'stats',page:3},'203.0.113.1');assert.equal(requests,1,JSON.stringify(overrides));assert.deepEqual(result.items,[]);
+    let requests=0;const client=createAjesClient({password:()=> 'fixture',assertEnabled:async()=>{},reserve:async()=>{},readQuery:async()=>snapshot(overrides),fetcher:async()=>{requests++;return Response.json([row]);}});
+    const result=await client.read({table:'stats',page:3},'203.0.113.1');assert.equal(requests,1,JSON.stringify(overrides));assert.equal(result.items[0].id,'fresh001');
   }
 });
 test('peekFresh never starts work or prolongs the freshness deadline',async()=>{
@@ -53,11 +54,11 @@ test('a prepared list is read once across visitors, but its original observation
   let now=Date.parse('2026-11-07T08:00:00Z'),reads=0,requests=0;
   t.mock.method(Date,'now',()=>now);
   const observedAt=new Date(now-29*60000).toISOString();
-  const client=createAjesClient({password:()=> 'fixture',assertEnabled:async()=>{},reserve:async()=>{},readQuery:async()=>{reads++;return snapshot({observedAt});},fetcher:async()=>{requests++;return Response.json([]);}});
+  const client=createAjesClient({password:()=> 'fixture',assertEnabled:async()=>{},reserve:async()=>{},readQuery:async()=>{reads++;return snapshot({observedAt});},fetcher:async()=>{requests++;return Response.json([row]);}});
   for(const ip of ['203.0.113.1','203.0.113.2','203.0.113.3']){
     const page=await client.read({table:'stats',page:3},ip);assert.equal(page.items[0].id,'saved001');assert.equal(page.observedAt,observedAt);
   }
   assert.equal(reads,1,'ready persisted lists must not trigger storage on every request');assert.equal(requests,0);
   now+=2*60000;
-  const page=await client.read({table:'stats',page:3},'203.0.113.4');assert.equal(requests,1,'expired observation cannot become fresh through memoization');assert.deepEqual(page.items,[]);
+  const page=await client.read({table:'stats',page:3},'203.0.113.4');assert.equal(requests,1,'expired observation cannot become fresh through memoization');assert.equal(page.items[0].id,'fresh001');
 });

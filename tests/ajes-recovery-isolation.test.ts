@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createAjesClient} from '../apps/web/lib/catalog/ajes-client';
+const row={ID:'fresh001',MARKA_NAME:'TOYOTA',MODEL_NAME:'TEST',YEAR:'2023',AUCTION_TYPE:'2',STATUS:'Sold',FINISH:'100000',START:'100000'};
 
 test('slow saved recovery for refused Japanese auction and result reads does not occupy supplier admission',async()=>{
  let release!:()=>void,ready!:()=>void,started=0,active=0,peak=0;
@@ -10,7 +11,7 @@ test('slow saved recovery for refused Japanese auction and result reads does not
   readLegacyQuery:async()=>{if(++started===2)ready();await held;return null;},
   fetcher:async url=>{active++;peak=Math.max(peak,active);try{
    const ip=new URL(String(url)).searchParams.get('ip');
-   return ip==='203.0.113.3'?Response.json([]):new Response('bot fixture');
+   return ip==='203.0.113.3'?Response.json([row]):new Response('bot fixture');
   }finally{active--;}}
  });
  const refused=[client.read({table:'main',page:2},'203.0.113.1'),client.read({table:'stats',page:2},'203.0.113.2')];
@@ -20,7 +21,7 @@ test('slow saved recovery for refused Japanese auction and result reads does not
  try {
   const fresh=client.read({table:'main',page:4},'203.0.113.3');
   const result=await Promise.race([fresh,new Promise<never>((_,reject)=>{timer=setTimeout(()=>reject(Error('fresh supplier read blocked by saved recovery')),500);})]);
-  assert.deepEqual(result.items,[]);assert.equal(result.stale,false);
+  assert.equal(result.items[0].id,'fresh001');assert.equal(result.stale,false);
   assert.ok(peak<=2,'supplier concurrency stays bounded');
  }finally{if(timer)clearTimeout(timer);release();await rejected;}
 });
@@ -32,7 +33,7 @@ test('duplicate refused reads share stored recovery without retrying the source 
  const saved={schemaVersion:2,items:[{id:'retained',table:'main'}],page:2,pageSize:24,received:24,observedAt:new Date(Date.now()-3600000).toISOString()};
  const client=createAjesClient({password:()=> 'fixture',assertEnabled:async()=>{},reserve:async()=>{},
   readLegacyQuery:async()=>{reads++;ready();await held;return saved;},
-  fetcher:async url=>{requests++;return new URL(String(url)).searchParams.get('ip')==='203.0.113.2'?Response.json([]):new Response('bot fixture');}
+  fetcher:async url=>{requests++;return new URL(String(url)).searchParams.get('ip')==='203.0.113.2'?Response.json([row]):new Response('bot fixture');}
  });
  const input={table:'main' as const,page:2};
  const pending=[client.read(input,'203.0.113.1'),client.read(input,'203.0.113.1')];
@@ -42,14 +43,14 @@ test('duplicate refused reads share stored recovery without retrying the source 
  assert.equal((await client.read(input,'203.0.113.1')).stale,true);
  assert.equal(requests,1,'refusal cooldown is retained');assert.equal(reads,1,'stored recovery remains visitor-cached');
  const other=await client.read(input,'203.0.113.2');
- assert.equal(other.stale,false);assert.deepEqual(other.items,[]);assert.equal(requests,2);
+ assert.equal(other.stale,false);assert.equal(other.items[0].id,'fresh001');assert.equal(requests,2);
 });
 
 test('independent requests still admit at most two supplier calls',async()=>{
  let release!:()=>void,ready!:()=>void,active=0,peak=0;
  const held=new Promise<void>(r=>{release=r;});const twoStarted=new Promise<void>(r=>{ready=r;});
  const client=createAjesClient({password:()=> 'fixture',assertEnabled:async()=>{},reserve:async()=>{},fetcher:async()=>{
-  active++;peak=Math.max(peak,active);if(active===2)ready();await held;active--;return Response.json([]);
+  active++;peak=Math.max(peak,active);if(active===2)ready();await held;active--;return Response.json([row]);
  }});
  const calls=[1,2,3,4].map(page=>client.read({table:'main',page},'203.0.113.1'));
  await twoStarted;assert.equal(active,2);release();await Promise.all(calls);assert.equal(peak,2);
