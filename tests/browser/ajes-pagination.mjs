@@ -105,11 +105,14 @@ await new Promise(r=>server.listen(0,'127.0.0.1',r));
 const origin='http://127.0.0.1:'+server.address().port;
 const browser=await chromium.launch({headless:true,executablePath:process.env.CHROME_BIN||undefined,args:['--no-sandbox']});
 const report={version:1,kind:'japan-pagination24-browser-v1',passed:false,caseCount:0,widths:[390,1440],checks:{}};
-let blockedExternal=0;
+let blockedExternal=0,activePage,activeWidth,fixturePhase='legacy_initial',activeErrors=[],activeConsole=[];
 try{
  for(const width of [390,1440]){
   const page=await browser.newPage({viewport:{width,height:900}});
-  const errors=[];page.on('pageerror',e=>errors.push(e.message));
+  activePage=page;activeWidth=width;fixturePhase='legacy_initial';
+  const errors=[],consoleErrors=[];activeErrors=errors;activeConsole=consoleErrors;
+  page.on('pageerror',error=>{if(errors.length<8){const text=String(error.stack||error.message).slice(0,1600);errors.push(text);console.error('PAGINATION_FIXTURE_PAGEERROR '+JSON.stringify({width,phase:fixturePhase,message:text}));}});
+  page.on('console',message=>{if(message.type()==='error'&&consoleErrors.length<8){const text=message.text().slice(0,1000);consoleErrors.push(text);console.error('PAGINATION_FIXTURE_CONSOLE '+JSON.stringify({width,phase:fixturePhase,message:text}));}});
   await page.route('**/*',route=>{if(new URL(route.request().url()).origin===origin)return route.continue();blockedExternal++;return route.abort();});
   await page.goto(`http://127.0.0.1:${server.address().port}/`);
   const href=await page.getByRole('link',{name:'Страница 2',exact:true}).getAttribute('href');
@@ -124,10 +127,12 @@ try{
   assert.equal(await page.getByRole('button',{name:'Показать ещё',exact:true}).count(),0);
   assert.equal(await page.locator('[data-catalog-batch]').count(),3);
   assert.deepEqual(errors,[]);
+  fixturePhase='legacy_europe';
   await page.goto(`http://127.0.0.1:${server.address().port}/?market=europe`);
   assert.ok(await page.getByRole('link',{name:'Страница 15',exact:true}).isVisible());
   assert.ok(!(await page.getByRole('link',{name:'Страница 2',exact:true}).getAttribute('href')).includes('after='));
   for(const market of ['korea','japan']){
+   fixturePhase='legacy_late_'+market;
    await page.goto(`http://127.0.0.1:${server.address().port}/?market=${market}&late=1`);
    const total=market==='korea'?89027:615568,last=Math.ceil(total/24);
    assert.equal(await page.getByRole('link',{name:'Страница '+last,exact:true}).count(),0);
@@ -149,13 +154,28 @@ try{
   }
   await runJapanCases(page,width);
   assert.deepEqual(errors,[]);
-  await page.close();
+  await page.close();activePage=undefined;
  }
  assert.equal(fixture.counts,0,'the local Japanese list fixture never invokes an aggregate');
  assert.equal(blockedExternal,0);assert.equal(report.caseCount,8);
  report.checks={refill24:true,numberedContinuation:true,appendNoDuplicatesOrGaps:true,finiteExhaustion:true,unknownPowerPreserved:true,failureHonesty:true,cursorBinding:true,warningRemoved:true,sourcePageSize24:true,neighborPaginationPreserved:true,noExternalRequests:true};
  report.passed=true;
-}catch(error){process.exitCode=1;console.error(error);}
+}catch(error){
+ process.exitCode=1;console.error(error);
+ // Diagnostics describe this locally served fixture only. Keep them separate
+ // from the exact acceptance-report schema and never collect cookies/storage.
+ let timeout,dom=null;
+ try{
+  if(activePage&&!activePage.isClosed())dom=await Promise.race([
+   activePage.evaluate(()=>({readyState:document.readyState,rootPresent:Boolean(document.getElementById('root')),
+    rootHtml:(document.getElementById('root')?.innerHTML||'').slice(0,8192),
+    bodyText:(document.body?.innerText||'').slice(0,2048)})),
+   new Promise(resolve=>{timeout=setTimeout(()=>resolve(null),2000);}),
+  ]);
+ }catch{}finally{clearTimeout(timeout);}
+ console.error('PAGINATION_FIXTURE_FAILURE '+JSON.stringify({phase:fixturePhase,width:activeWidth,
+  pageErrors:activeErrors,consoleErrors:activeConsole,dom}));
+}
 finally{
  await browser.close();await new Promise(r=>server.close(r));delete globalThis.__japanRefillFixture;delete globalThis.__japanRefillPageProps;
  if(process.env.JAPAN_PAGINATION24_REPORT)fs.writeFileSync(process.env.JAPAN_PAGINATION24_REPORT,JSON.stringify(report,null,2)+'\n');
@@ -175,6 +195,7 @@ async function runJapanCases(page,width){
  };
  const expected=[...Array.from({length:23},(_,i)=>'ajes-stats-refill-1-'+i),...Array.from({length:24},(_,i)=>'ajes-stats-refill-2-'+i),'ajes-stats-refill-3-0','ajes-stats-refill-3-1'];
  for(const power of [false,true]){
+  fixturePhase=power?'japan_power':'japan_plain';
   fixture.changed=false;fixture.queries.length=0;responses.length=0;
   const query=new URLSearchParams({fixture:'refill',fuel:'petrol',city:'Новокузнецк',...(power?{powerTo:'160'}:{})});
   await page.goto(origin+'/cars/japan?'+query);await waitCards(24);await warningAbsent();
@@ -210,6 +231,7 @@ async function runJapanCases(page,width){
   assert.ok(sourceQueries.every(q=>q===sourceQueries[0]),'continuation changes only the source page');
   report.caseCount++;
  }
+ fixturePhase='japan_failure_recovery';
  fixture.changed=false;fixture.queries.length=0;responses.length=0;
  await page.goto(origin+'/cars/japan?fixture=refill&case=failure&powerTo=160&fuel=petrol&city='+encodeURIComponent('Новокузнецк'));
  await waitCards(23);await warningAbsent();
@@ -240,6 +262,7 @@ async function runJapanCases(page,width){
  assert.deepEqual(fixture.queries.map(q=>q.page),[1,2,2,2,1,2]);
  report.caseCount++;
 
+ fixturePhase='japan_membership_change';
  fixture.changed=false;fixture.queries.length=0;responses.length=0;
  await page.goto(origin+'/cars/japan?fixture=refill&powerTo=160&fuel=petrol&city='+encodeURIComponent('Новокузнецк'));
  await waitCards(24);
