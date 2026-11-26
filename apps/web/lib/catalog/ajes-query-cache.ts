@@ -15,7 +15,7 @@ export function retainedAjesQueryEntries(saved:any):QueryEntry[]{
   .filter((entry):entry is QueryEntry=>typeof entry?.hash==='string'&&/^[a-f0-9]{64}$/.test(entry.hash)&&entry.value&&typeof entry.value==='object')
   .map(({hash,value})=>({hash,value}));
 }
-const overallCount=ajesQuery({aggregate:'count'}).sql,overallMakes=ajesSourceCacheSql(ajesQuery({aggregate:'makes'}).sql);
+const overallCount=ajesSourceCacheSql(ajesQuery({aggregate:'count'}).sql),overallMakes=ajesSourceCacheSql(ajesQuery({aggregate:'makes'}).sql);
 /** Keep counters out of the list collision pool; always verify the complete SQL hash. */
 export function ajesQueryCacheLocation(sql:string){
  const hash=createHash('sha256').update(sql).digest('hex'),slot=parseInt(hash.slice(0,8),16)%128;

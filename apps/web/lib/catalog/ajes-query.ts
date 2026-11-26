@@ -62,10 +62,10 @@ export function ajesQuery(input: unknown,driveIndex:CalculationIndex|null=null,p
   }
   if (table==='stats') where.push("status='Sold'",'finish>0');
   where.push("marka_name!=''","model_name!=''");
-  // Use the equivalent compact heavy-vehicle predicate on filtered Japan queries
-  // to keep the supplier request small; horsepower itself is resolved locally.
-  const compactJapan=q.aggregate==='makes'||Boolean(q.drive)||q.powerFrom!==undefined||q.powerTo!==undefined;
-  where.push(heavyVehicleSqlExclusion(false,false,compactJapan),motorcycleSqlExclusion());
+  // Lists and aggregates use the same equivalent compact predicate on the wire.
+  // The ordinary first page must fit the supplier URI budget too; retained
+  // query identities keep the original spelling through ajesSourceCacheSql.
+  where.push(heavyVehicleSqlExclusion(false,false,true),motorcycleSqlExclusion());
   where.push(japanMakeSqlExclusion(),japanVehicleSqlExclusion());
   for(const [column,parts] of [['marka_name',makes]] as const){if(parts.length===1)where.push(`${column}='${parts[0]}'`);else if(parts.length)where.push(`${column} in (${parts.map(v=>`'${v}'`).join(',')})`);}
   const modelClauses=[...models.map(v=>`model_name='${v}'`),...families.map(v=>`model_name like '${v} %'`)];

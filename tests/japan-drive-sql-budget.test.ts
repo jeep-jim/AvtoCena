@@ -2,7 +2,8 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {DatabaseSync} from 'node:sqlite';
 import {japanDriveSql} from '../apps/web/lib/catalog/japan-drive';
-import {ajesQuery} from '../apps/web/lib/catalog/ajes-query';
+import {ajesQuery,ajesSourceCacheSql} from '../apps/web/lib/catalog/ajes-query';
+import {ajesQueryCacheLocation} from '../apps/web/lib/catalog/ajes-query-cache';
 import {heavyVehicleFamilies,heavyVehicleSqlExclusion} from '../apps/web/lib/catalog/heavy-vehicle-families';
 import {createAjesClient} from '../apps/web/lib/catalog/ajes-client';
 import {ajesErrorResponse} from '../apps/web/lib/catalog/ajes-error-response';
@@ -64,8 +65,52 @@ test('single drivetrain queries remain well below a standard 8 KB request line',
   const bytes=new URLSearchParams({sql:ajesQuery({drive}).sql}).toString().length;
   assert.ok(bytes<6000,drive+': '+bytes);
  }
- // Unfiltered cached queries retain their exact old truck predicate.
- assert.ok(ajesQuery({}).sql.includes(heavyVehicleSqlExclusion()));
+ // The ordinary wire is compact too; its retained identity keeps the old predicate.
+ assert.ok(ajesQuery({}).sql.includes(heavyVehicleSqlExclusion(false,false,true)));
+ assert.ok(ajesSourceCacheSql(ajesQuery({}).sql).includes(heavyVehicleSqlExclusion()));
+});
+test('ordinary 48-row pages and every aggregate fit the URI budget with one exact source WHERE and retained identity',t=>{
+ t.mock.timers.enable({apis:['Date'],now:Date.parse('2026-11-26T12:00:00.000Z')});
+ const compact=heavyVehicleSqlExclusion(false,false,true),full=heavyVehicleSqlExclusion();
+ const where=(sql:string)=>sql.slice(sql.indexOf(' where ')).split(/ (?:group|order) by /)[0];
+ const filters=[{},
+  {fuel:'petrol'},
+  {make:'TOYOTA',model:'COROLLA',fuel:'petrol',yearFrom:2014,yearTo:2026,engineTo:2000,mileageTo:100000,transmission:'automatic',auctionGrade:'3.5|4',color:'white'},
+  {drive:'awd',fuel:'diesel',yearFrom:2014,engineTo:3000},
+  {chassis:'LA350A',lotNumber:'002910',yearFrom:2008,yearTo:2019},
+ ];
+ for(const table of ['stats','main'] as const)for(const filter of filters)for(const page of [1,2,1000000]){
+  const input={table,...filter,page,pageSize:48},list=ajesQuery(input).sql;
+  assert.match(list,new RegExp(`limit ${(page-1)*48},48$`));
+  for(const aggregate of [undefined,'count','models','makes','colors'] as const){
+   const sql=ajesQuery({...input,aggregate}).sql,bytes=new URLSearchParams({sql}).toString().length;
+   assert.ok(bytes<6000,`${table}/${aggregate||'list'}/${page}: ${bytes}`);
+   assert.ok(sql.includes(compact));assert.equal(sql.includes(full),false);
+   assert.equal(where(sql),where(list),'list, directory and proof COUNT use identical source predicates');
+   assert.equal(ajesSourceCacheSql(sql),sql.replace(compact,full),'only equivalent SQL spelling changes in the retained key');
+  }
+ }
+ const plain=ajesSourceCacheSql(ajesQuery({table:'stats',page:1,pageSize:48}).sql);
+ const count=ajesSourceCacheSql(ajesQuery({table:'stats',aggregate:'count'}).sql);
+ assert.equal(ajesQueryCacheLocation(plain).hash,'f308fb65af396c45aaa85ceb950a364f4af08f1344dbd9e9e8cc173a8ccbbf6a','same plain48 key as the pre-compaction candidate');
+ assert.equal(ajesQueryCacheLocation(plain).key,'catalog/partner-cache/ajes/queries/101.json');
+ assert.equal(ajesQueryCacheLocation(count).hash,'03c3e2e37e562fbc65b734d857e5dfe1296574b1303b802c2ce6439d3e689d0f');
+ assert.equal(ajesQueryCacheLocation(count).key,'catalog/partner-cache/ajes/queries/counts/overall.json');
+ assert.notEqual(ajesQueryCacheLocation(ajesSourceCacheSql(ajesQuery({aggregate:'count',fuel:'petrol'}).sql)).key,ajesQueryCacheLocation(count).key);
+});
+test('compact ordinary requests reuse the existing full-SQL list and COUNT without a supplier read',async()=>{
+ const page={table:'stats' as const,page:1,pageSize:48},count={table:'stats' as const,aggregate:'count' as const};
+ const pageSql=ajesSourceCacheSql(ajesQuery(page).sql),countSql=ajesSourceCacheSql(ajesQuery(count).sql),observedAt=new Date().toISOString();
+ const saved={schemaVersion:2,items:[{id:'retained-plain',table:'stats'}],page:1,pageSize:48,received:48,rejected:0,observedAt,stale:false};
+ const total={items:[],page:1,pageSize:1,received:1,rejected:0,observedAt,stale:false,total:660813};
+ const reads:string[]=[];
+ const client=createAjesClient({password:()=> 'fixture',assertEnabled:async()=>{},
+  reserve:async()=>{assert.fail('a fresh exact saved result must not reserve a supplier request');},
+  fetcher:async()=>{assert.fail('a fresh exact saved result must not fetch the supplier');},
+  readQuery:async sql=>{reads.push(sql);return sql===pageSql?saved:sql===countSql?total:null;}});
+ assert.deepEqual(await client.read(page,'203.0.113.20'),saved);
+ assert.deepEqual(await client.read(count,'203.0.113.20'),total);
+ assert.deepEqual(reads,[pageSql,countSql]);
 });
 test('Japan power lists and counts fit the supplier URI budget without losing owner power rules',()=>{
  for(const table of ['stats','main'] as const)for(const aggregate of [undefined,'count'] as const)for(const power of [{powerTo:160},{powerFrom:100},{powerFrom:100,powerTo:160}]){
@@ -79,7 +124,7 @@ test('Japan power lists and counts fit the supplier URI budget without losing ow
  // Neither Japanese auction table may use supplier PW as a specification filter.
  for(const table of ['stats','main'] as const){
   assert.doesNotMatch(ajesQuery({table,powerTo:160}).sql,/pw\s*(?:>=|<=|>|<)/i);
-  assert.ok(ajesQuery({table}).sql.includes(heavyVehicleSqlExclusion()));
+  assert.ok(ajesSourceCacheSql(ajesQuery({table}).sql).includes(heavyVehicleSqlExclusion()));
  }
  for(const table of ['china','korea'])assert.throws(()=>ajesQuery({table,powerTo:160}),/ajes_invalid_query/);
 });

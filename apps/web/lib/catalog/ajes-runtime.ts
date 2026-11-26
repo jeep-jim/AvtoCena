@@ -8,6 +8,7 @@ import {getJsonStorage} from '../data';
 import {assertCollectionEnabled} from './collection-controls';
 import {DetailReadCache} from './detail-read-cache';
 import {heavyVehicleSqlExclusion} from './heavy-vehicle-families';
+import {ajesSourceCacheSql} from './ajes-query';
 import {createAjesClient} from './ajes-client';
 import {findSavedAjesSearch,savedAjesFacets} from './ajes-saved-search';
 import {reserveAjesRequest} from './ajes-quota';
@@ -49,6 +50,8 @@ export const ajesClient=createAjesClient({
     const read=(key:string)=>readAjesQueryCache(getJsonStorage(),key);
     // Carry only rows across this selection fix, never an inaccurate old count.
     if(!sql.startsWith('select * from'))return null;
+    // Wire compaction must not change any retained exact compatibility key.
+    sql=ajesSourceCacheSql(sql);
     const priorJapanPolicy=await readPreviousJapanVehiclePolicyRows(sql,read);if(priorJapanPolicy)return priorJapanPolicy;
     const priorTrucks=await readPreviousTruckPolicyRows(sql,read);if(priorTrucks)return priorTrucks;
     const previous=sql.replace(heavyVehicleSqlExclusion(),heavyVehicleSqlExclusion(true)).replace("auction_date desc, case when time in ('E','H','HE') then 1 else 0 end asc",'auction_date desc');

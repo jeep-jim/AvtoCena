@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {gzipSync} from 'node:zlib';
-import {ajesQuery,ajesLot,ajesImageUrl} from '../apps/web/lib/catalog/ajes-query';
+import {ajesQuery,ajesSourceCacheSql,ajesLot,ajesImageUrl} from '../apps/web/lib/catalog/ajes-query';
 import {ajesOffer} from '../apps/web/lib/catalog/ajes-offer';
 import {ajesPowerEstimateHp} from '../apps/web/lib/catalog/ajes-power-estimate';
 import {createAjesClient,readAjesModelDirectory} from '../apps/web/lib/catalog/ajes-client';
@@ -86,7 +86,8 @@ test('confirmed heavy families are excluded without fabricating a listing mass',
 test('lists, counts and model directories apply identical heavy-family SQL before pagination',()=>{
  for(const aggregate of [undefined,'count','models'] as const){
   const query=ajesQuery({aggregate});
-  assert.ok(query.sql.includes(heavyVehicleSqlExclusion()));
+  assert.ok(query.sql.includes(heavyVehicleSqlExclusion(false,false,true)));
+  assert.ok(ajesSourceCacheSql(query.sql).includes(heavyVehicleSqlExclusion()));
  }
 });
 
@@ -438,7 +439,7 @@ test('Coaster bus is excluded in pages, counts, and cached offer admission',()=>
   assert.equal(ajesLot({...row,MODEL_NAME:model},'stats',false),null);
   assert.equal(catalogHeavyVehicleExcluded({make:'TOYOTA',model}),true);
  }
- for(const aggregate of [undefined,'count','models'] as const)assert.match(ajesQuery({aggregate}).sql,/marka_name='TOYOTA' and \(model_name='COASTER'/);
+ for(const aggregate of [undefined,'count','models'] as const)assert.match(ajesSourceCacheSql(ajesQuery({aggregate}).sql),/marka_name='TOYOTA' and \(model_name='COASTER'/);
  assert.ok(!heavyVehicleSqlExclusion(true).includes("model_name='COASTER'"));
  assert.ok(ajesLot({...row,MODEL_NAME:'HIACE'},'stats',false));
 });
@@ -659,13 +660,48 @@ test('explicit trucks are excluded across markets, including saved and Dubicars 
 
 test('truck policy change retains old viewed rows only as a partial refresh/failure fallback, never an old count',async()=>{
  const {readPreviousTruckPolicyRows}=await import('../apps/web/lib/catalog/ajes-query-cache');
- const query=ajesQuery({table:'stats'}).sql;
+ const query=ajesSourceCacheSql(ajesQuery({table:'stats'}).sql);
  const previous=query.replace(heavyVehicleSqlExclusion(),heavyVehicleSqlExclusion(false,true));
  const saved={schemaVersion:2,items:[{make:'ISUZU',model:'ELF Key'},{make:'TOYOTA',model:'PRIUS'}]};
  const value=await readPreviousTruckPolicyRows(query,async key=>key===previous?saved:null);
  assert.equal(value.schemaVersion,0);assert.equal(value.partial,true);
  assert.deepEqual(value.items.filter((r:any)=>!catalogHeavyVehicleExcluded(r)),[{make:'TOYOTA',model:'PRIUS'}]);
  let calls=0;assert.equal(await readPreviousTruckPolicyRows(ajesQuery({aggregate:'count'}).sql,async()=>{calls++;return saved;}),null);assert.equal(calls,0);
+});
+
+test('runtime legacy recovery preserves exact canonical policy and age keys after ordinary wire compaction',async()=>{
+ const {build}=await import('esbuild'),{createRequire}=await import('node:module');
+ const {ajesQueryCacheLocation}=await import('../apps/web/lib/catalog/ajes-query-cache');
+ const {japanVehicleSqlExclusion}=await import('../apps/web/lib/catalog/japan-vehicle-policy');
+ const require=createRequire(import.meta.url),files=new Map<string,any>(),reads:string[]=[];
+ (globalThis as any).__ajesRuntimeQueryFixture={readJson:async(key:string)=>{reads.push(key);return files.get(key)??null;}};
+ const stubs:Record<string,string>={
+  'server-only':'',
+  '../encyclopedia/calculation-index':'export const readCalculationIndex=()=>null;',
+  './ajes-request-diagnostic':'export const saveAjesRequestFailure=()=>{throw Error("unexpected persistence");};',
+  './ajes-routing':'export const ajesEndpoint=()=>{throw Error("unexpected endpoint");};',
+  './ajes-settings':'export const ajesPassword=()=>{throw Error("unexpected password");};',
+  '../data':'export const getJsonStorage=()=>globalThis.__ajesRuntimeQueryFixture;',
+  './collection-controls':'export const assertCollectionEnabled=async()=>{};',
+  './detail-read-cache':'export class DetailReadCache {get(){throw Error("unexpected directory scan");}}',
+  './ajes-client':'export const createAjesClient=deps=>({fixtureDeps:deps});',
+  './ajes-saved-search':'export const findSavedAjesSearch=()=>{throw Error("unexpected saved scan");};export const savedAjesFacets=()=>{};',
+  './ajes-quota':'export const reserveAjesRequest=()=>{throw Error("unexpected source reservation");};',
+ };
+ try{
+  const built=await build({entryPoints:['apps/web/lib/catalog/ajes-runtime.ts'],bundle:true,platform:'node',format:'cjs',write:false,tsconfig:'apps/web/tsconfig.json',plugins:[{name:'runtime-exact-cache-fixture',setup(b){b.onResolve({filter:/.*/},args=>args.importer.endsWith('/ajes-runtime.ts')&&args.path in stubs?{path:args.path,namespace:'fixture'}:undefined);b.onLoad({filter:/.*/,namespace:'fixture'},args=>({contents:stubs[args.path]}));}}]});
+  const mod={exports:{} as any};new Function('require','module','exports',built.outputFiles[0].text)(require,mod,mod.exports);
+  const readLegacy=mod.exports.ajesClient.fixtureDeps.readLegacyQuery;
+  const input={table:'stats' as const,page:2,pageSize:48,fuel:'petrol'},wire=ajesQuery(input).sql,canonical=ajesSourceCacheSql(wire);
+  const retained={schemaVersion:2,items:[{id:'exact-retained',table:'stats'}],page:2,pageSize:48,received:48,observedAt:new Date().toISOString()};
+  const priorKeys=[canonical.replace(' and '+japanVehicleSqlExclusion(),''),canonical.replace(heavyVehicleSqlExclusion(),heavyVehicleSqlExclusion(false,true)),canonical.replace('year>=2008','year>=2010')];
+  for(const previous of priorKeys){
+   files.clear();reads.length=0;const location=ajesQueryCacheLocation(previous);files.set(location.key,{hash:location.hash,value:retained});
+   const result=await readLegacy(wire);assert.deepEqual(result.items,retained.items);assert.equal(result.partial,true);assert.equal(result.schemaVersion,0);assert.equal(result.page,2);assert.equal(result.pageSize,48);assert.ok(reads.length<=6);
+   assert.equal(await readLegacy(ajesQuery({...input,pageSize:24}).sql),null,'legacy lookup must not substitute a different source chunk size');
+  }
+  reads.length=0;assert.equal(await readLegacy(ajesQuery({aggregate:'count'}).sql),null);assert.deepEqual(reads,[],'row compatibility cannot transfer metadata');
+ }finally{delete (globalThis as any).__ajesRuntimeQueryFixture;}
 });
 
 

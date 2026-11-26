@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {createAjesClient,AjesUnavailable,readAjesModelDirectory} from '../apps/web/lib/catalog/ajes-client';
 import {DetailReadCache} from '../apps/web/lib/catalog/detail-read-cache';
 import {resolveAjesQueryModels} from '../apps/web/lib/catalog/ajes-model-resolution';
-import {ajesQuery} from '../apps/web/lib/catalog/ajes-query';
+import {ajesQuery,ajesSourceCacheSql} from '../apps/web/lib/catalog/ajes-query';
 import {createHash} from 'node:crypto';
 
 function rejectSupplierQueue(t:any,message:string){
@@ -15,10 +15,11 @@ function rejectSupplierQueue(t:any,message:string){
 
 test('model directory queue failures recover exact saved names without contacting the supplier',async t=>{
  rejectSupplierQueue(t,'detail_cache_queue_full');
- let calls=0;const saved={items:[],models:[{make:'TOYOTA',model:'COROLLA',total:7}],page:1,pageSize:500,received:1,observedAt:new Date(Date.now()-3600000).toISOString()};
- const client=createAjesClient({password:()=> 'fixture',assertEnabled:async()=>{},reserve:async()=>{throw Error('provider forbidden');},readQuery:async sql=>{calls++;assert.equal(sql,ajesQuery({table:'stats',make:'TOYOTA',aggregate:'models',page:1}).sql);return saved;}});
+ const calls:string[]=[],wire=ajesQuery({table:'stats',make:'TOYOTA',aggregate:'models',page:1}).sql,canonical=ajesSourceCacheSql(wire);
+ const saved={items:[],models:[{make:'TOYOTA',model:'COROLLA',total:7}],page:1,pageSize:500,received:1,observedAt:new Date(Date.now()-3600000).toISOString()};
+ const client=createAjesClient({password:()=> 'fixture',assertEnabled:async()=>{},reserve:async()=>{throw Error('provider forbidden');},readQuery:async sql=>{calls.push(sql);if(sql===canonical)return saved;assert.equal(sql,wire);return null;}});
  const result=await readAjesModelDirectory(client,{table:'stats',make:'TOYOTA'},'203.0.113.1');
- assert.deepEqual(result.models,saved.models);assert.equal(result.stale,true);assert.equal(calls,1);assert.equal('stale' in saved,false);
+ assert.deepEqual(result.models,saved.models);assert.equal(result.stale,true);assert.deepEqual(calls,[canonical,wire]);assert.equal('stale' in saved,false);
 });
 test('retained model directory cannot cross expiry, page or source switch',async t=>{
  rejectSupplierQueue(t,'detail_cache_queue_timeout');

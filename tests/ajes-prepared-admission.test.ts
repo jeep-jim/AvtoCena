@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createAjesClient} from '../apps/web/lib/catalog/ajes-client';
 import {DetailReadCache} from '../apps/web/lib/catalog/detail-read-cache';
+import {ajesQuery,ajesSourceCacheSql} from '../apps/web/lib/catalog/ajes-query';
 const tick=()=>new Promise(r=>setTimeout(r,0));
 const row={ID:'fresh001',MARKA_NAME:'TOYOTA',MODEL_NAME:'TEST',YEAR:'2023',AUCTION_TYPE:'2',STATUS:'Sold',FINISH:'100000',START:'100000'};
 const snapshot=(overrides:any={})=>({schemaVersion:2,items:[{id:'saved001',table:'stats'}],page:3,pageSize:24,received:1,rejected:0,stale:false,observedAt:new Date().toISOString(),...overrides});
@@ -19,15 +20,17 @@ test('a fresh exact saved list is delivered while both supplier slots are occupi
   }finally{release();await Promise.allSettled(pending);}
 });
 test('slow storage read does not consume supplier slots; stored inspection coalesces and stays bounded',async()=>{
-  let release!:()=>void,active=0,peak=0,reads=0,requests=0;
+  let release!:()=>void,active=0,peak=0,reads=0,requests=0;const queries:string[]=[];
+  const first=ajesQuery({table:'stats',page:1}).sql,second=ajesQuery({table:'stats',page:2}).sql;
   const held=new Promise<void>(r=>release=r);
-  const client=createAjesClient({password:()=> 'fixture',assertEnabled:async()=>{},reserve:async()=>{},readQuery:async sql=>{reads++;active++;peak=Math.max(peak,active);if(sql.endsWith('limit 0,24'))await held;active--;return null;},fetcher:async()=>{requests++;return Response.json([row]);}});
+  const client=createAjesClient({password:()=> 'fixture',assertEnabled:async()=>{},reserve:async()=>{},readQuery:async sql=>{reads++;queries.push(sql);active++;peak=Math.max(peak,active);if(sql.endsWith('limit 0,24'))await held;active--;return null;},fetcher:async()=>{requests++;return Response.json([row]);}});
   const a=client.read({table:'stats',page:1},'203.0.113.1'),b=client.read({table:'stats',page:1},'203.0.113.1');
   try{
     for(let i=0;i<100&&active<1;i++)await tick();
-    await client.read({table:'stats',page:2},'203.0.113.2');assert.equal(requests,1);assert.equal(reads,2);assert.ok(peak<=2);
+    await client.read({table:'stats',page:2},'203.0.113.2');assert.equal(requests,1);assert.deepEqual(queries,[ajesSourceCacheSql(first),ajesSourceCacheSql(second),second]);assert.ok(peak<=2);
   }finally{release();await Promise.all([a,b]);}
   assert.equal(requests,2,'duplicate requests retain supplier coalescing');
+  assert.deepEqual(queries,[ajesSourceCacheSql(first),ajesSourceCacheSql(second),second,first],'each coalesced query inspects only its canonical key and one previous compact key');
   const before=reads;await client.read({table:'stats',page:1},'203.0.113.3');assert.equal(reads,before,'fresh memory hit performs no storage read');
 });
 test('prepared pages still obey source switch, visitor IP and configuration',async()=>{
