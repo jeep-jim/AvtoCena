@@ -178,6 +178,7 @@ test('a resolved rollback admits a fresh candidate from the same retained runtim
   const nextPlan={...plan,runtimeSha:'c'.repeat(40)},nextImage='sha256:'+'d'.repeat(64),nextNonce='3'.repeat(32);
   const {proof,...retained}=restored.value.current;let stageCalls=0,acceptCalls=0;
   const result=await runChinaCodeCycle({...f.args,plan:nextPlan,imageId:nextImage,owner:owner(2002),nonce:nextNonce,
+    retirePreviousHost:async()=>assert.fail('an aborted intent has no committed host retirement to replay'),
     recoverRelease:async()=>{assert.fail('a resolved rollback must not replay the old host operation');},
     stageCodeRelease:async input=>{
       stageCalls++;await input.assertAuthority();
@@ -201,6 +202,171 @@ test('a resolved rollback admits a fresh candidate from the same retained runtim
   assert.equal(accepted.value.current.generationManifestSha256,retained.generationManifestSha256);
   assert.equal(accepted.value.current.pricingRuntimeSha,retained.pricingRuntimeSha);
   assert.equal(inspectChinaPublicationState({accepted,intent:await f.storage.read('intent')}).status,'resolved');
+});
+
+async function nextCodeArguments(f, {runtime = 'e'.repeat(40), image = 'sha256:' + 'f'.repeat(64),
+  nonce = '4'.repeat(32), failAfterCommit = false, rollbackActivation = false, retirePreviousHost} = {}) {
+  const previous = await f.storage.read('accepted');
+  const nextPlan = {...plan, runtimeSha: runtime, retainedRuntime: previous.value.current.runtimeSha};
+  let hostRollback;
+  return {...f.args, plan: nextPlan, imageId: image, owner: owner(2003), nonce, retirePreviousHost,
+    async stageCodeRelease(input) {
+      f.events.push('stage'); await input.assertAuthority(); assert.deepEqual(input.previous, previous);
+      return {candidate: input.candidate,
+        async activate({intent, assertAuthority}) {
+          f.events.push('activate'); await assertAuthority();
+          if (rollbackActivation) { hostRollback = rollback(intent); throw Error('china_code_fixture_browser_failed'); }
+          return {kind: 'accepted', evidence: acceptance(input.candidate, intent.value.nonce, codeAt,
+            {transition: 'code-update', previousAcceptedETag: previous.etag, previousAcceptedStateSha256: previous.sha256,
+              retainedRuntimeSha: previous.value.current.runtimeSha, retainedImageId: previous.value.current.imageId})};
+        },
+        async afterCommit({assertAuthority}) {
+          f.events.push('afterCommit'); await assertAuthority();
+          if (failAfterCommit) throw Error('china_host_retirement_unknown');
+          return {completed: true, retiredContainers: 0, filesDeleted: 0, freedBytes: 0};
+        },
+        async close() { f.events.push('close'); },
+      };
+    },
+    async recoverRelease() {
+      if (hostRollback) return {kind: 'rolled_back', evidence: hostRollback};
+      assert.fail('a stable preflight must not replay publication');
+    },
+  };
+}
+
+async function sameGenerationFailedCleanup() {
+  const f = await fixture();
+  await runChinaCodeCycle(f.args);
+  const failed = await runChinaCodeCycle(await nextCodeArguments(f, {runtime: 'c'.repeat(40), image: 'sha256:' + 'd'.repeat(64),
+    nonce: '3'.repeat(32), failAfterCommit: true}));
+  assert.equal(failed.status, 'accepted'); assert.equal(failed.hostCleanupPending, true);
+  const publication = {accepted: await f.storage.read('accepted'), intent: await f.storage.read('intent')};
+  assert.equal(publication.intent.value.status, 'committed');
+  assert.equal(publication.intent.value.previous.value.rollback.generationId, publication.accepted.value.current.generationId);
+  assert.equal(publication.accepted.value.rollback.generationId, publication.accepted.value.current.generationId);
+  f.events.length = 0; f.storage.writes.length = 0;
+  return {...f, publication};
+}
+
+async function nextDailyArguments(f, retirePreviousHost) {
+  const previous = await f.storage.read('accepted'), {proof, ...data} = previous.value.current;
+  const dailyOwner = owner(3001), nonce = '5'.repeat(32), next = {...data, generationId: 'gen_china_3001_1', owner: dailyOwner,
+    receiptSha256: hash('gate-daily-receipt'), sourceDescriptorSha256: hash('gate-daily-source'),
+    generationManifestSha256: hash('gate-daily-generation'), sourceCursor: 20, sourceObservedAt: codeAt};
+  return {runtimeRoot: '/test/pricing', runnerTemp: '/test/temp',
+    plan: {version: 1, market: 'china', minimumYear: 2014, runtimeSha: plan.pricingRuntimeSha},
+    invocation: {version: 1, sourceSha: dailyOwner.revision}, owner: dailyOwner, storage: f.storage, nonce,
+    now: () => codeAt, scheduleHeartbeat: () => () => {}, retirePreviousHost,
+    async prepare(input) {
+      f.events.push('prepare'); await input.assertAuthority(); assert.deepEqual(input.sourceSelection.generation, previous.value.current);
+      return {completed: true, published: false, liveCatalogWrites: 0, encyclopediaWrites: 0, calculatorFormulaChanges: 0, deletions: 0,
+        runtime: {runtimeSha: plan.pricingRuntimeSha}, sourceInput: {kind: 'accepted-generation', ...data},
+        source: {supplierLatestVerified: true, sourceCursor: next.sourceCursor, sourceObservedAt: next.sourceObservedAt,
+          sourceDescriptorSha256: next.sourceDescriptorSha256},
+        pricing: {runtimeSha: plan.pricingRuntimeSha, generationId: next.generationId,
+          generationManifestSha256: next.generationManifestSha256, sourceDescriptorSha256: next.sourceDescriptorSha256},
+        privateGeneration: {owner: dailyOwner, generationId: next.generationId, receiptSha256: next.receiptSha256,
+          generationManifestSha256: next.generationManifestSha256, sourceDescriptorSha256: next.sourceDescriptorSha256}};
+    },
+    async stageRelease(input) {
+      f.events.push('stage'); await input.assertAuthority(); assert.deepEqual(input.previous, previous);
+      return {candidate: input.candidate,
+        async activate({assertAuthority}) {
+          f.events.push('activate'); await assertAuthority(); return {kind: 'accepted', evidence: acceptance(next, nonce, codeAt)};
+        }, async close() { f.events.push('close'); }};
+    },
+    async recoverRelease() { assert.fail('a stable preflight must not replay publication'); },
+  };
+}
+
+for (const mode of ['code', 'daily']) {
+  test(mode + ' retries a failed same-generation afterCommit before any new work and keeps its durable intent until success', async () => {
+    const f = await sameGenerationFailedCleanup(), received = [];
+    const failedRetry = async input => {
+      f.events.push('retire'); received.push(input);
+      assert.equal((await f.storage.read('lease')).value.status, 'held'); await input.assertAuthority();
+      assert.deepEqual(input.previousAccepted, f.publication.intent.value.previous);
+      assert.deepEqual(input.acceptedPublication, f.publication);
+      assert.deepEqual(await input.readState(), f.publication);
+      assert.equal(f.storage.writes.filter(row => row.name === 'accepted' || row.name === 'intent').length, 0);
+      throw Error('china_host_retirement_unknown');
+    };
+    const args = mode === 'code' ? await nextCodeArguments(f, {retirePreviousHost: failedRetry}) : await nextDailyArguments(f, failedRetry);
+    const cycle = mode === 'code' ? runChinaCodeCycle : runChinaDailyCycle;
+    await assert.rejects(cycle(args), error => error.message === 'china_host_retirement_unknown' && error.report.published === false);
+    assert.deepEqual(f.events, ['retire']);
+    assert.deepEqual({accepted: await f.storage.read('accepted'), intent: await f.storage.read('intent')}, f.publication);
+    assert.equal(f.storage.writes.filter(row => row.name === 'accepted' || row.name === 'intent').length, 0);
+    assert.equal((await f.storage.read('lease')).value.status, 'released');
+    f.events.length = 0; f.storage.writes.length = 0;
+    args.retirePreviousHost = async input => {
+      f.events.push('retire'); received.push(input); await input.assertAuthority();
+      assert.deepEqual(await input.readState(), f.publication);
+      assert.deepEqual(input.acceptedPublication, received[0].acceptedPublication);
+      assert.deepEqual(input.previousAccepted, received[0].previousAccepted);
+      return {completed: true, retiredContainers: 0, filesDeleted: 7, freedBytes: 1234};
+    };
+    const result = await cycle(args);
+    assert.equal(result.status, 'accepted'); assert.equal(result.published, true);
+    assert.equal(f.events[0], 'retire'); assert(f.events.includes(mode === 'daily' ? 'prepare' : 'stage'));
+    assert.deepEqual(result.hostCleanupBeforeReserve, {completed: true, retiredContainers: 0, filesDeleted: 7, freedBytes: 1234});
+    assert.equal(received.length, 2);
+    assert.notEqual((await f.storage.read('intent')).sha256, f.publication.intent.sha256);
+  });
+
+  test(mode + ' refuses a missing, incomplete or uncertain host gate without source work or intent replacement', async () => {
+    for (const behavior of ['missing', 'incomplete', 'uncertain', 'missing_counts']) {
+      const f = await sameGenerationFailedCleanup();
+      const retirePreviousHost = behavior === 'missing' ? undefined : async () => {
+        f.events.push('retire');
+        if (behavior === 'missing_counts') return {completed: true};
+        return {completed: behavior !== 'incomplete', uncertain: behavior === 'uncertain', retiredContainers: 0, filesDeleted: 0, freedBytes: 0};
+      };
+      const args = mode === 'code' ? await nextCodeArguments(f, {retirePreviousHost}) : await nextDailyArguments(f, retirePreviousHost);
+      await assert.rejects((mode === 'code' ? runChinaCodeCycle : runChinaDailyCycle)(args), /host_retirement_(capability|incomplete)/);
+      assert.deepEqual(f.events, behavior === 'missing' ? [] : ['retire']);
+      assert.deepEqual({accepted: await f.storage.read('accepted'), intent: await f.storage.read('intent')}, f.publication);
+      assert.equal(f.storage.writes.filter(row => row.name === 'accepted' || row.name === 'intent').length, 0);
+    }
+  });
+
+  test(mode + ' does not replay retirement for an aborted intent even when its previous state has a rollback', async () => {
+    const f = await sameGenerationFailedCleanup();
+    const rollbackArgs = await nextCodeArguments(f, {rollbackActivation: true,
+      retirePreviousHost: async () => ({completed: true, retiredContainers: 0, filesDeleted: 0, freedBytes: 0})});
+    await assert.rejects(runChinaCodeCycle(rollbackArgs), error => error.report.status === 'rolled_back');
+    const aborted = await f.storage.read('intent');
+    assert.equal(aborted.value.status, 'aborted'); assert.ok(aborted.value.previous.value.rollback);
+    assert.equal(inspectChinaPublicationState({accepted: await f.storage.read('accepted'), intent: aborted}).status, 'resolved');
+    f.events.length = 0;
+    const retirePreviousHost = async () => assert.fail('the resolved abort must not replay a committed retirement');
+    const args = mode === 'code' ? await nextCodeArguments(f, {nonce: '6'.repeat(32), retirePreviousHost})
+      : await nextDailyArguments(f, retirePreviousHost);
+    const result = await (mode === 'code' ? runChinaCodeCycle : runChinaDailyCycle)(args);
+    assert.equal(result.status, 'accepted'); assert.equal(result.hostCleanupBeforeReserve, undefined);
+    assert.ok(f.events.includes(mode === 'code' ? 'stage' : 'prepare'));
+  });
+}
+
+test('a code publication with no displaced rollback performs no host retry', async () => {
+  const f = await fixture();
+  f.args.retirePreviousHost = async () => assert.fail('there is no obsolete rollback deployment');
+  const result = await runChinaCodeCycle(f.args);
+  assert.equal(result.status, 'accepted'); assert.equal(result.hostCleanupBeforeReserve, undefined);
+});
+
+test('changed fresh authority during host cleanup cannot authorize a subsequent code reservation', async () => {
+  const f = await sameGenerationFailedCleanup();
+  const args = await nextCodeArguments(f, {retirePreviousHost: async input => {
+    await input.assertAuthority();
+    const current = await f.storage.read('accepted');
+    f.storage.force('accepted', {...current.value, revision: current.value.revision + 1});
+    return {completed: true, retiredContainers: 0, filesDeleted: 0, freedBytes: 0};
+  }});
+  await assert.rejects(runChinaCodeCycle(args), /china_code_state_changed/);
+  assert.deepEqual(f.events, []); assert.deepEqual(await f.storage.read('intent'), f.publication.intent);
+  assert.equal(f.storage.writes.filter(row => row.name === 'accepted' || row.name === 'intent').length, 0);
 });
 
 test('code report revalidates injected optional evidence independently without replacing the original failure', async () => {

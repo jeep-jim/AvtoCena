@@ -122,8 +122,11 @@ async function fixture() {
 }
 
 test('daily cycle uses accepted source, reserves before activation and reuses the accepted image', async () => {
-  const f = await fixture(), result = await runChinaDailyCycle(f.args);
+  const f = await fixture();
+  f.args.retirePreviousHost = async () => assert.fail('there is no displaced rollback deployment');
+  const result = await runChinaDailyCycle(f.args);
   assert.equal(result.status, 'accepted'); assert.equal(result.published, true); assert.equal(result.applicationBuilds, 0);
+  assert.equal(result.hostCleanupBeforeReserve, undefined);
   assert.equal(result.acceptedGenerationId, candidate(2).generationId);
   assert.deepEqual(f.events, ['prepare', 'stage', 'activate', 'close']); assert.equal(f.stopped(), true);
   const accepted = await f.storage.read('accepted'), intent = await f.storage.read('intent'), lease = await f.storage.read('lease');
@@ -221,6 +224,33 @@ test('real accepted-state with interrupted intent finalization is repaired befor
   const result = await runChinaDailyCycle({...f.args, owner: owner(3), nonce: 'd'.repeat(32)});
   assert.equal(result.status, 'not_due'); assert.equal(result.recovered, true); assert.equal(result.published, false);
   assert.deepEqual(f.events, []); assert.equal((await f.storage.read('intent')).value.status, 'committed');
+});
+
+test('not_due keeps an eligible committed host witness without retrying retirement or preparing a source', async () => {
+  const f = await fixture(), state = createChinaState({storage: f.storage, now: () => nextAt});
+  for (const id of [2, 3]) {
+    const nonce = String(id).repeat(32);
+    const lease = await state.acquireLease({previous: await state.read('lease'), owner: owner(id), nonce,
+      expiresAt: '2026-11-24T13:00:00.000Z'});
+    const reserved = await state.reserve({lease, previous: await state.read('accepted'),
+      previousIntent: await state.read('intent'), candidate: candidate(id)});
+    await state.commit({lease, ...reserved, evidence: acceptance(candidate(id), nonce, nextAt)});
+    await state.releaseLease({lease});
+  }
+  const publication = {accepted: await state.read('accepted'), intent: await state.read('intent')};
+  assert.equal(publication.intent.value.status, 'committed');
+  assert.ok(publication.intent.value.previous.value.rollback);
+  assert.equal(chinaDailyIsDue(publication.accepted.value.current, nextAt), false);
+  f.storage.writes.length = 0;
+  const result = await runChinaDailyCycle({...f.args, owner: owner(4), nonce: '4'.repeat(32),
+    retirePreviousHost: async () => assert.fail('not_due cannot attempt host cleanup'),
+    prepare: async () => assert.fail('not_due cannot read a source'),
+  });
+  assert.equal(result.status, 'not_due'); assert.equal(result.published, false); assert.equal(result.sourcePrepared, false);
+  assert.equal(result.hostCleanupBeforeReserve, undefined); assert.equal(result.leaseReleased, true);
+  assert.deepEqual(f.events, []);
+  assert.deepEqual({accepted: await state.read('accepted'), intent: await state.read('intent')}, publication);
+  assert.equal(f.storage.writes.filter(row => row.name === 'accepted' || row.name === 'intent').length, 0);
 });
 
 test('heartbeat renews the exact lease observation during preparation and later commit uses its new ETag', async () => {

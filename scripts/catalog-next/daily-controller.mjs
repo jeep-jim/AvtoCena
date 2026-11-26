@@ -17,7 +17,7 @@ const time = value => {
 // The fixed cron is 0 14 * * *: each daily window starts at 21:00 Krasnoyarsk.
 const DAILY_INTERVAL_MS = 24 * 60 * 60 * 1000, DAILY_START_UTC_MS = 14 * 60 * 60 * 1000;
 const dailyWindow = value => Math.floor((time(value) - DAILY_START_UTC_MS) / DAILY_INTERVAL_MS);
-const safeCode = error => /^china_(?:daily|state|prepare|source|generation|private|gc)_[a-z0-9_]{1,120}$/.test(error?.message ?? '')
+const safeCode = error => /^china_(?:daily|state|prepare|source|generation|private|gc|host)_[a-z0-9_]{1,120}$/.test(error?.message ?? '')
   ? error.message : 'china_daily_failed';
 const defaultHeartbeat = (fn, interval) => { const timer = setInterval(fn, interval); timer.unref?.(); return () => clearInterval(timer); };
 
@@ -71,7 +71,7 @@ function preparedReference(prepared, owner, previous, plan) {
  * No receipt implementation is supplied or fabricated here. */
 export async function runChinaDailyCycle({runtimeRoot, plan, invocation, owner, runnerTemp, prepareReportPath,
   trigger = 'schedule', nonce = randomBytes(16).toString('hex'), storage,
-  prepare = prepareChinaGeneration, stageRelease, recoverRelease, afterAccepted, resumeCleanup,
+  prepare = prepareChinaGeneration, stageRelease, recoverRelease, afterAccepted, resumeCleanup, retirePreviousHost,
   now = () => new Date().toISOString(), scheduleHeartbeat = defaultHeartbeat,
   leaseMs = 15 * 60 * 1000, heartbeatMs = 30 * 1000, onProgress = () => {}}) {
   need(invocation?.version === 1 && REVISION.test(invocation.sourceSha ?? '') && owner?.revision === invocation.sourceSha, 'invocation');
@@ -80,7 +80,8 @@ export async function runChinaDailyCycle({runtimeRoot, plan, invocation, owner, 
   need(['schedule', 'manual'].includes(trigger) && /^[a-f0-9]{32}$/.test(nonce)
     && [prepare, stageRelease, recoverRelease, now, scheduleHeartbeat, onProgress].every(value => typeof value === 'function'), 'capabilities');
   need((afterAccepted === undefined || typeof afterAccepted === 'function')
-    && (resumeCleanup === undefined || typeof resumeCleanup === 'function'), 'retention_capability');
+    && (resumeCleanup === undefined || typeof resumeCleanup === 'function')
+    && (retirePreviousHost === undefined || typeof retirePreviousHost === 'function'), 'retention_capability');
   need(Number.isSafeInteger(leaseMs) && Number.isSafeInteger(heartbeatMs) && heartbeatMs > 0 && leaseMs > heartbeatMs * 2, 'lease_timing');
   storage ??= createChinaStateStorage();
   need(typeof storage.assertPrivateBucket === 'function' && (await storage.assertPrivateBucket())?.verified === true, 'privacy');
@@ -189,6 +190,21 @@ export async function runChinaDailyCycle({runtimeRoot, plan, invocation, owner, 
         ? 'needs_reconciliation' : 'paused', errorCode: safeCode(error)};
     }
   }
+  async function preservePreviousHost() {
+    if (expected.intent.value?.status !== 'committed' || !expected.intent.value.previous.value?.rollback) return;
+    need(typeof retirePreviousHost === 'function', 'host_retirement_capability');
+    await assertAuthority();
+    const publication = await readOwnedState();
+    const result = await retirePreviousHost({previousAccepted: publication.intent.value.previous,
+      acceptedPublication: publication, readState: readOwnedState, assertAuthority});
+    await assertAuthority();
+    need(result?.completed === true && (result.uncertain === undefined || result.uncertain === false)
+      && Number.isSafeInteger(result.retiredContainers) && result.retiredContainers >= 0 && result.retiredContainers <= 1
+      && ['filesDeleted', 'freedBytes'].every(key => Number.isSafeInteger(result[key]) && result[key] >= 0),
+    'host_retirement_incomplete');
+    report.hostCleanupBeforeReserve = {completed: true, retiredContainers: result.retiredContainers,
+      filesDeleted: result.filesDeleted, freedBytes: result.freedBytes};
+  }
   const complete = (status, published, current = expected?.accepted?.value?.current) => {
     Object.assign(report, {completed: true, status, published, finishedAt: at()});
     if (current) Object.assign(report, {acceptedGenerationId: current.generationId,
@@ -211,6 +227,7 @@ export async function runChinaDailyCycle({runtimeRoot, plan, invocation, owner, 
     need(current.pricingRuntimeSha === plan.runtimeSha, 'pricing_runtime_changed');
     await resumeRetention();
     if (trigger === 'schedule' && !chinaDailyIsDue(current, at())) return complete('not_due', false);
+    await preservePreviousHost();
     await assertAuthority();
     await onProgress({phase: 'daily_prepare', market: 'china', published: false});
     const prepared = await prepare({runtimeRoot, plan, invocation, owner, runnerTemp, reportPath: prepareReportPath,

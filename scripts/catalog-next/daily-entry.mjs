@@ -187,7 +187,7 @@ export async function runChinaDailyEntry({root = ROOT, environment = process.env
       owner: {runId: environment.GITHUB_RUN_ID, attempt: environment.GITHUB_RUN_ATTEMPT, revision: invocation.sourceSha},
       runnerTemp, prepareReportPath: path.join(root, 'catalog-next-china-daily-generation-report.json'),
       trigger: invocation.event === 'schedule' ? 'schedule' : 'manual', storage,
-      stageRelease: release.stageRelease, recoverRelease: release.recoverRelease, onProgress: progress,
+      stageRelease: release.stageRelease, recoverRelease: release.recoverRelease, retirePreviousHost: release.retireHost, onProgress: progress,
       resumeCleanup: ({readState, assertAuthority}) => use.collectRetired({mode: 'enqueue-only', readState, assertAuthority,
         environment, onProgress: progress}),
       afterAccepted: ({previousAccepted, accepted, intent, readState, assertAuthority}) => use.collectRetired({

@@ -56,7 +56,7 @@ export async function runChinaPhotoCodeEntry({root = ROOT, environment = process
     const report = await runChinaCodeCycle({plan: servingPlan, imageId: image.imageId, invocation,
       owner: {runId: environment.GITHUB_RUN_ID, attempt: environment.GITHUB_RUN_ATTEMPT, revision: invocation.sourceSha},
       storage: createChinaStateStorage({environment}), stageCodeRelease: release.stageCodeRelease,
-      recoverRelease: release.recoverRelease, onProgress: progress,
+      recoverRelease: release.recoverRelease, retirePreviousHost: release.retireHost, onProgress: progress,
       preserveRetention: ({readState, assertAuthority}) => import('./china-generation-gc-queue.mjs').then(module =>
         module.maintainChinaGenerationGcQueue({mode: 'enqueue-only', readState, assertAuthority, environment, onProgress: progress}))});
     await fs.writeFile(reportPath, JSON.stringify(report, null, 2) + '\n', {mode: 0o600}); log(report);

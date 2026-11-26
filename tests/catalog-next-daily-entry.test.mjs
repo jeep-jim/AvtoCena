@@ -278,6 +278,8 @@ test('recovery of a code publication selects the new reviewed adapter before the
 
 test('production entry binds accepted state, passes pricing root to preparation and serving root only to release, and filters progress logs', async t => {
   const f = await fixture(t), observation = accepted(f), logs = [], called = [];
+  const hostArgs = {previousAccepted: observation, acceptedPublication: {accepted: observation, intent: 'exact-test-intent'},
+    readState: async () => ({accepted: observation, intent: 'exact-test-intent'}), assertAuthority: async () => {}};
   const storage = {assertPrivateBucket: async () => ({verified: true}), read: async name => { assert.equal(name, 'accepted'); return observation; },
     compareAndSwap: async () => assert.fail('the entry cannot write state outside its cycle')};
   const capabilities = {
@@ -288,7 +290,10 @@ test('production entry binds accepted state, passes pricing root to preparation 
     createStorage: () => storage,
     createRelease: input => { called.push('release'); assert.equal(input.servingRoot, f.runtimes.servingRoot);
       assert.equal(input.pricingPlan.runtimeSha, f.pricingPlan.runtimeSha);
-      return {stageRelease: async () => {}, recoverRelease: async () => {}, retireHost: async () => {}}; },
+      return {stageRelease: async () => {}, recoverRelease: async () => {}, retireHost: async args => {
+        called.push('host-retire'); assert.deepEqual(args, hostArgs);
+        return {completed: true, retiredContainers: 0, filesDeleted: 0, freedBytes: 0};
+      }}; },
     readDeadline: async () => '2026-11-24T18:00:00.000Z',
     collectRetired: async input => { called.push(input.mode);
       if (input.mode === 'drain') { assert.equal(input.previousAccepted, observation);
@@ -301,13 +306,14 @@ test('production entry binds accepted state, passes pricing root to preparation 
       assert.equal(input.trigger, 'manual'); assert.equal(input.storage, storage);
       input.onProgress({phase: 'test_progress', sourceRows: 123, secret: 'private_supplier_token', sourceRecord: {private: true}});
       await input.resumeCleanup({readState: async () => {}, assertAuthority: async () => {}});
+      assert.deepEqual(await input.retirePreviousHost(hostArgs), {completed: true, retiredContainers: 0, filesDeleted: 0, freedBytes: 0});
       await input.afterAccepted({previousAccepted: observation, accepted: observation, intent: 'exact-test-intent', readState: async () => {}, assertAuthority: async () => {}});
       return {kind: 'china-daily-cycle-v1', completed: true, market: 'china', published: true, status: 'accepted'};
     },
   };
   const result = await runChinaDailyEntry({root: f.control, environment: {...env('workflow_dispatch'),
     RUNNER_TEMP: f.temporary, JSON_STORAGE_DRIVER: 'object'}, capabilities, log: value => logs.push(value)});
-  assert.equal(result.status, 'accepted'); assert.deepEqual(called, ['release', 'cycle', 'enqueue-only', 'drain']);
+  assert.equal(result.status, 'accepted'); assert.deepEqual(called, ['release', 'cycle', 'enqueue-only', 'host-retire', 'drain']);
   assert.equal(result.cleanupDeadlineAt, '2026-11-24T18:00:00.000Z');
   assert.deepEqual(logs[0], {phase: 'test_progress', market: 'china', sourceRows: 123});
   assert.ok(!JSON.stringify(logs).includes('private_supplier_token'));
@@ -317,7 +323,7 @@ test('production entry binds accepted state, passes pricing root to preparation 
   const deferred = await runChinaDailyEntry({root: f.control, environment: {...env('workflow_dispatch'),
     RUNNER_TEMP: f.temporary, JSON_STORAGE_DRIVER: 'object'}, capabilities, log: value => logs.push(value)});
   assert.equal(deferred.status, 'accepted'); assert.equal(deferred.cleanupDeadlineAt, null);
-  assert.deepEqual(called, ['release', 'cycle', 'enqueue-only', 'enqueue-only']);
+  assert.deepEqual(called, ['release', 'cycle', 'enqueue-only', 'host-retire', 'enqueue-only']);
   assert.ok(!JSON.stringify(logs).includes('private-gh-error'));
   capabilities.createStorage = () => ({...storage, read: async () => ({found: false, etag: null, sha256: null, value: null})});
   called.length = 0;

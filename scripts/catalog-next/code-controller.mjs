@@ -12,11 +12,13 @@ const equal = (a, b) => JSON.stringify(ordered(a)) === JSON.stringify(ordered(b)
 const defaultHeartbeat = (fn, interval) => { const timer = setInterval(fn, interval); timer.unref?.(); return () => clearInterval(timer); };
 
 /** Explicit app-only transition. There is no supplier client, prepare callback,
- * generation restore, price calculation, source write or deletion capability.
+ * generation restore, price calculation, source write or private-generation
+ * deletion capability. A proved obsolete host deployment must be retired before
+ * its committed intent can be replaced by another publication.
  * The existing private lease/intent/CAS state and authentic host receipts remain
  * the sole publication authority, including after a lost acceptance response. */
 export async function runChinaCodeCycle({plan, imageId, invocation, owner, storage,
-  stageCodeRelease, recoverRelease, preserveRetention, nonce = randomBytes(16).toString('hex'),
+  stageCodeRelease, recoverRelease, preserveRetention, retirePreviousHost, nonce = randomBytes(16).toString('hex'),
   now = () => new Date().toISOString(), scheduleHeartbeat = defaultHeartbeat,
   leaseMs = 20 * 60 * 1000, heartbeatMs = 30 * 1000, onProgress = () => {}}) {
   need(plan?.version === 1 && plan.market === 'china' && plan.minimumYear === 2014
@@ -26,6 +28,7 @@ export async function runChinaCodeCycle({plan, imageId, invocation, owner, stora
     && owner?.revision === invocation.sourceSha && /^[a-f0-9]{32}$/.test(nonce), 'invocation');
   need([stageCodeRelease, recoverRelease, now, scheduleHeartbeat, onProgress].every(fn => typeof fn === 'function')
     && (preserveRetention === undefined || typeof preserveRetention === 'function')
+    && (retirePreviousHost === undefined || typeof retirePreviousHost === 'function')
     && Number.isSafeInteger(leaseMs) && Number.isSafeInteger(heartbeatMs)
     && heartbeatMs > 0 && leaseMs > heartbeatMs * 2, 'capabilities');
   storage ??= createChinaStateStorage();
@@ -102,6 +105,21 @@ export async function runChinaCodeCycle({plan, imageId, invocation, owner, stora
     if (!staged || closed) return;
     closed = true; await staged.close();
   }
+  async function preservePreviousHost() {
+    if (expected.intent.value?.status !== 'committed' || !expected.intent.value.previous.value?.rollback) return;
+    need(typeof retirePreviousHost === 'function', 'host_retirement_capability');
+    await assertAuthority();
+    const publication = await readOwnedState();
+    const result = await retirePreviousHost({previousAccepted: publication.intent.value.previous,
+      acceptedPublication: publication, readState: readOwnedState, assertAuthority});
+    await assertAuthority();
+    need(result?.completed === true && (result.uncertain === undefined || result.uncertain === false)
+      && Number.isSafeInteger(result.retiredContainers) && result.retiredContainers >= 0 && result.retiredContainers <= 1
+      && ['filesDeleted', 'freedBytes'].every(key => Number.isSafeInteger(result[key]) && result[key] >= 0),
+    'host_retirement_incomplete');
+    report.hostCleanupBeforeReserve = {completed: true, retiredContainers: result.retiredContainers,
+      filesDeleted: result.filesDeleted, freedBytes: result.freedBytes};
+  }
   function complete(status, published) {
     Object.assign(report, {completed: true, status, published, finishedAt: at()});
     const current = expected?.accepted?.value?.current;
@@ -129,6 +147,7 @@ export async function runChinaCodeCycle({plan, imageId, invocation, owner, stora
     const {proof, ...data} = current;
     candidate = {...data, runtimeSha: plan.runtimeSha, imageId};
     validateChinaCodeTransition(candidate, current);
+    await preservePreviousHost();
     if (preserveRetention) {
       await assertAuthority();
       const retention = await preserveRetention({readState: readOwnedState, assertAuthority});
