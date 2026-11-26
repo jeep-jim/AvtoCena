@@ -1,0 +1,27 @@
+name: Inspect fixed China daily 45875678028 artifact
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/china-daily-artifact-readonly-45875678028.yml]
+  workflow_dispatch:
+permissions:
+  actions: read
+  contents: read
+concurrency:
+  group: china-daily-artifact-readonly-45875678028
+  cancel-in-progress: false
+jobs:
+  inspect:
+    if: github.repository_id == '1289722938' && github.repository == 'jeep-jim/AvtoCena' && github.ref == 'refs/heads/main' && github.run_attempt == 1 && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+      - name: Verify exact terminal run and two aggregate JSONs
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        shell: bash
+        run: python3 -I -B scripts/catalog-next/read-china-daily-artifact-45875678028.py
