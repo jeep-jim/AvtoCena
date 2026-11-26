@@ -66,7 +66,14 @@ await build({stdin:{contents:"import React from 'react';\nimport {renderToStatic
  b.onLoad({filter:/.*/,namespace:'japan-source-fixture'},args=>({contents:serverStubs[args.path]}));
  b.onLoad({filter:/.*/,namespace:'japan-ui-fixture'},args=>({contents:uiStubs[args.path],resolveDir:process.cwd()}));
 }}]});
-const require=createRequire(import.meta.url),actual=require(path.resolve(out+'/server.cjs'));
+// The standalone fixture uses installed React outside Next's server renderer.
+// Adapt only request memoization, as the native caller fixtures do; the browser
+// bundle and the actual catalog/filter/pagination modules stay unchanged.
+const require=createRequire(import.meta.url),serverModule={exports:{}};
+const react=require('react');
+const fixtureRequire=id=>id==='react'?{...react,cache:fn=>fn}:require(id);
+new Function('require','module','exports',fs.readFileSync(path.resolve(out+'/server.cjs'),'utf8'))(fixtureRequire,serverModule,serverModule.exports);
+const actual=serverModule.exports;
 const responses=[];
 const server=http.createServer(async(req,res)=>{
  const url=new URL(req.url,'http://fixture');
