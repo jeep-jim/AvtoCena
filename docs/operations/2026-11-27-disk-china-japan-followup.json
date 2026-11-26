@@ -1,0 +1,544 @@
+{
+  "version": 1,
+  "kind": "disk-china-japan-followup-checkpoint-v1",
+  "status": "operational_checkpoint_china_running_crm_ci_passed_not_deployed",
+  "generatedAt": "2026-11-27T02:35:54+07:00",
+  "timezone": "Asia/Krasnoyarsk",
+  "scope": "Operational checkpoint assembled from the preserved observations and exact committed source; running operations have no terminal outcome in this checkpoint",
+  "sourcePolicy": {
+    "cleanupFacts": "Actual terminal cleanup reports override aggregate progress fields",
+    "excludedHistoricalFields": [
+      "progress#/activeUserFollowup20261127/obsoleteD536AllocatedBytes",
+      "progress#/activeUserFollowup20261127/chinaLeaseReleased"
+    ],
+    "currentChinaLeaseReleased": null,
+    "reason": "The progress lease field belongs to an earlier operation; it does not attest running China 45875678028"
+  },
+  "sources": {
+    "followup": {
+      "originalPath": "/tmp/avtocena-japan-followup/disk-china-followup-evidence-draft.json",
+      "snapshotPath": "/tmp/avtocena-japan-followup/final-docs-draft/sources/followup.json",
+      "sha256": "2187daaefa621ef379d88ef22ee3a21b2e53739f10278a852d54b87d8a7b0032",
+      "bytes": 9184
+    },
+    "progress": {
+      "originalPath": "/tmp/avtocena-japan-followup/progress.json",
+      "snapshotPath": "/tmp/avtocena-japan-followup/final-docs-draft/sources/progress.json",
+      "sha256": "c5d74b09838283198e72ce4a53705e3749fb7c1e042eac8718be3b01dd6e6771",
+      "bytes": 19582
+    },
+    "image_cleanup": {
+      "originalPath": "/tmp/avtocena-japan-followup/unused-images-45871243184/result/catalog-next-unused-images-cleanup-20261127-report.json",
+      "snapshotPath": "/tmp/avtocena-japan-followup/final-docs-draft/sources/image_cleanup.json",
+      "sha256": "480c90bc2ac0d665bdb0a047a16fd15f047b91e3eaeca95e7c61c33273f84679",
+      "bytes": 14254
+    },
+    "deployment_cleanup": {
+      "originalPath": "/tmp/avtocena-japan-followup/obsolete-retirement-45875206041/result/catalog-next-obsolete-deployments-20261127-retire-report.json",
+      "snapshotPath": "/tmp/avtocena-japan-followup/final-docs-draft/sources/deployment_cleanup.json",
+      "sha256": "31ee6cb89dda745d975b23ca220d6887b4c28b2f9e3312439eb258ece58ba521",
+      "bytes": 3765
+    },
+    "health_after_images": {
+      "originalPath": "/tmp/avtocena-japan-followup/unused-images-45871243184/independent-health.json",
+      "snapshotPath": "/tmp/avtocena-japan-followup/final-docs-draft/sources/health_after_images.json",
+      "sha256": "ce5bfbcead72d84fdb8da6ddf26730a6f8ce4ac63f8563b2c500a70cfe5e06d1",
+      "bytes": 293
+    },
+    "health_after_deployments": {
+      "originalPath": "/tmp/avtocena-japan-followup/obsolete-retirement-45875206041/independent-health.json",
+      "snapshotPath": "/tmp/avtocena-japan-followup/final-docs-draft/sources/health_after_deployments.json",
+      "sha256": "83e2b6df8f08300db21e6d149ccbb61c8450cbdb72cda79fb86522e3c8605a1c",
+      "bytes": 477
+    },
+    "crm_runtime_freeze": {
+      "originalPath": "/dev/shm/avtocena-crm-china-runtime-freeze.json",
+      "snapshotPath": "/tmp/avtocena-japan-followup/final-docs-draft/sources/crm_runtime_freeze.json",
+      "sha256": "19226b8ad9c5ce64a803233a048ad0908f3d5bc70b02600fa845c393ba2ba3e6",
+      "bytes": 1948
+    },
+    "crm_runtime_source_proof": {
+      "originalPath": "/tmp/avtocena-japan-followup/crm-china-runtime-source-proof.json",
+      "snapshotPath": "/tmp/avtocena-japan-followup/final-docs-draft/sources/crm_runtime_source_proof.json",
+      "sha256": "0af2545214b62252c5b7b03a63965d0431bad367676f952633e1756cf5104e81",
+      "bytes": 4318
+    },
+    "japan_last_browser_report": {
+      "originalPath": "/tmp/avtocena-japan-followup/release-45861459029/result/AvtoCena/AvtoCena/catalog-next-japan-browser-report.json",
+      "snapshotPath": "/tmp/avtocena-japan-followup/final-docs-draft/sources/japan_last_browser_report.json",
+      "sha256": "e6bb218e15a1d347e5422b372f667b1ddca22e76650bb25ca7fffbcd9d28a33d",
+      "bytes": 4383
+    },
+    "crm_controller_freeze": {
+      "originalPath": "/tmp/avtocena-japan-followup/crm-china-controller-freeze.json",
+      "snapshotPath": "/tmp/avtocena-japan-followup/final-docs-draft/sources/crm_controller_freeze.json",
+      "sha256": "f110799bd48d7ed42ef200f4673b8a9177fa2223b5e39ee62bf62dc94ccfd787",
+      "bytes": 4752
+    },
+    "crm_existing_anonymous_boundary": {
+      "originalPath": "/tmp/avtocena-japan-followup/existing-crm-anonymous-boundary.json",
+      "snapshotPath": "/tmp/avtocena-japan-followup/final-docs-draft/sources/crm_existing_anonymous_boundary.json",
+      "sha256": "0396b2abd124218dc2641897aabf787bcc088189ecd0d18f577acbd30b197257",
+      "bytes": 494
+    },
+    "crm_actual_middleware_proof": {
+      "originalPath": "/tmp/avtocena-japan-followup/crm-china-actual-middleware-proof.json",
+      "snapshotPath": "/tmp/avtocena-japan-followup/final-docs-draft/sources/crm_actual_middleware_proof.json",
+      "sha256": "b3ae6a7b0fc43d90aaecc32878b99f5eb2d1545a2cc8dcd16fdbf1b657dd8afd",
+      "bytes": 139
+    },
+    "crm_controller_full_gate": {
+      "originalPath": "/dev/shm/avtocena-crm-china-controller-full-final.tap",
+      "snapshotPath": "/tmp/avtocena-japan-followup/final-docs-draft/sources/crm_controller_full_gate.tap",
+      "sha256": "8465ef0f56abc87af87a16dbe921cdab828f7081e1523a5dbb78f246a7bd2edd",
+      "bytes": 111194
+    },
+    "checkpoint_clock": {
+      "origin": "clock.curr_time tool result",
+      "snapshotPath": "/tmp/avtocena-japan-followup/final-docs-draft/sources/checkpoint_clock.json",
+      "sha256": "48198f45b993ab6e15edd28f9a7365bd0860307f639713248bdaf4ecddb7f090",
+      "bytes": 79
+    },
+    "japan_b25_catalog": {
+      "gitRepository": "/tmp/avtocena-japan-followup/runtime",
+      "commit": "b25a95122199378afc5166ed7ac8882a84ed9fe3",
+      "path": "apps/web/lib/catalog/ajes-catalog.ts",
+      "snapshotPath": "/tmp/avtocena-japan-followup/final-docs-draft/sources/japan_b25_catalog.ts",
+      "sha256": "ee9f2c055438704987350a8c39c3cc7bd474c6b42c7f3b118180e39959358e5c",
+      "bytes": 11896
+    },
+    "japan_077_catalog": {
+      "gitRepository": "/tmp/avtocena-japan-followup/runtime",
+      "commit": "077cbb17626ab0c64e7f06db055fef9252ad21c0",
+      "path": "apps/web/lib/catalog/ajes-catalog.ts",
+      "snapshotPath": "/tmp/avtocena-japan-followup/final-docs-draft/sources/japan_077_catalog.ts",
+      "sha256": "304fed91862af28c46900da845eb3d03a73ad75c784b3dc352c5149f9026fe1d",
+      "bytes": 10925
+    },
+    "japan_b25_power_query": {
+      "gitRepository": "/tmp/avtocena-japan-followup/runtime",
+      "commit": "b25a95122199378afc5166ed7ac8882a84ed9fe3",
+      "path": "apps/web/lib/catalog/japan-power-query.ts",
+      "snapshotPath": "/tmp/avtocena-japan-followup/final-docs-draft/sources/japan_b25_power_query.ts",
+      "sha256": "ac44932643c2ab9b999aab940ec48b478dee529c1f0a98622a6a113ae6c52350",
+      "bytes": 3727
+    },
+    "japan_b25_vehicle_policy": {
+      "gitRepository": "/tmp/avtocena-japan-followup/runtime",
+      "commit": "b25a95122199378afc5166ed7ac8882a84ed9fe3",
+      "path": "apps/web/lib/catalog/japan-vehicle-policy.ts",
+      "snapshotPath": "/tmp/avtocena-japan-followup/final-docs-draft/sources/japan_b25_vehicle_policy.ts",
+      "sha256": "497ca1dc0d0163c534c945fbd0b2b7f4dfeded1ebc5f99d9e7231eda6397bd2f",
+      "bytes": 4723
+    },
+    "japan_b25_result_filter": {
+      "gitRepository": "/tmp/avtocena-japan-followup/runtime",
+      "commit": "b25a95122199378afc5166ed7ac8882a84ed9fe3",
+      "path": "apps/web/lib/catalog/ajes-result-filter.ts",
+      "snapshotPath": "/tmp/avtocena-japan-followup/final-docs-draft/sources/japan_b25_result_filter.ts",
+      "sha256": "c415f6cb843f64e53942a7b4583e62a77146004ef152c55b11554d05d197538b",
+      "bytes": 3932
+    },
+    "crm_ci_github_evidence": {
+      "originalPath": "/tmp/avtocena-japan-followup/ci-45884180305/github-evidence.json",
+      "snapshotPath": "/tmp/avtocena-japan-followup/final-docs-draft/sources/crm_ci_github_evidence.json",
+      "sha256": "b2afcd37490055e21e12df8dc68f364ae892fc6415df9cecb5fdc36186439b3a",
+      "bytes": 613
+    },
+    "crm_ci_browser_artifact": {
+      "originalPath": "/tmp/avtocena-japan-followup/ci-45884180305/artifact.zip",
+      "snapshotPath": "/tmp/avtocena-japan-followup/final-docs-draft/sources/crm_ci_browser_artifact.zip",
+      "sha256": "966ffb4a44896e92095848447f94490b9a38d91109512e56e770b48aa06daad8",
+      "bytes": 429
+    },
+    "crm_ci_browser_report": {
+      "originalPath": "/tmp/avtocena-japan-followup/ci-45884180305/china-crm-collection-controls-report.json",
+      "snapshotPath": "/tmp/avtocena-japan-followup/final-docs-draft/sources/crm_ci_browser_report.json",
+      "sha256": "c3c8137ee16f91f3ad2e1d402f58de1c412c7b362d9a4690b80b957c5f4b3b8f",
+      "bytes": 422
+    }
+  },
+  "publicRuntimeObservation": {
+    "source": "health_after_deployments",
+    "observedAt": "2026-11-27T01:23:13.850163+07:00",
+    "httpStatus": 200,
+    "ok": true,
+    "runtimeSha": "077cbb17626ab0c64e7f06db055fef9252ad21c0",
+    "calculationVersion": "4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90",
+    "liveObservationRepeatedForCheckpoint": false
+  },
+  "disk": {
+    "unusedImages": {
+      "source": "image_cleanup",
+      "run": 45871243184,
+      "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/45871243184",
+      "completed": true,
+      "finishedAt": "2026-11-27T00:53:08.884000+07:00",
+      "imagesRemoved": 8,
+      "measuredAvailableBytesChange": 9535184896,
+      "containersDeleted": 0,
+      "filesDeleted": 0,
+      "volumesDeleted": 0,
+      "acceptedStateWrites": 0,
+      "intentStateWrites": 0,
+      "leaseRelease": "released"
+    },
+    "obsoleteDeployments": {
+      "source": "deployment_cleanup",
+      "run": 45875206041,
+      "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/45875206041",
+      "completed": true,
+      "status": "retired",
+      "finishedAt": "2026-11-27T01:22:34.381000+07:00",
+      "containersRetired": 2,
+      "filesDeleted": 13,
+      "verifiedContentBytesDeleted": 25649982642,
+      "measuredAvailableBytesChange": 25994010624,
+      "remainingContainers": 4,
+      "imagesPreserved": 7,
+      "proofsPreserved": true,
+      "manifestsPreserved": true,
+      "ingressUnchanged": true,
+      "acceptedStateWrites": 0,
+      "intentStateWrites": 0,
+      "generationStorageWrites": 0,
+      "supplierRequests": 0,
+      "leaseRelease": "released"
+    },
+    "arithmetic": {
+      "unit": "GiB",
+      "bytesPerGiB": 1073741824,
+      "measuredChangesBytes": [
+        9535184896,
+        25994010624
+      ],
+      "measuredChangesSumBytes": 35529195520,
+      "measuredChangesSumGiB": 33.089141845703125,
+      "measuredChangesSumGiBRounded3": "33.089",
+      "latestAvailableBytes": 52194742272,
+      "latestAvailableGiB": 48.61014175415039,
+      "latestAvailableGiBRounded3": "48.610"
+    },
+    "latestMeasurementAt": "2026-11-27T01:22:34.381000+07:00",
+    "measurementPrecedesChinaCatchup": true,
+    "currentFreeSpaceAfterChina": null,
+    "contentBytesAreNotMeasuredDiskDelta": true
+  },
+  "publishedControllerFixes": [
+    {
+      "sha": "1c44ff890252dfb42372ed02ce8f1d1f65ce1f0a",
+      "change": "Canonical mount comparison for retirement; other container identity checks preserved",
+      "source": "followup#/permanentFixes/mountOrderComparisonCommit",
+      "url": "https://github.com/jeep-jim/AvtoCena/commit/1c44ff890252dfb42372ed02ce8f1d1f65ce1f0a"
+    },
+    {
+      "sha": "a3654566bad8bb36193b821018ac12504d3ed8f7",
+      "change": "Mandatory predecessor host retirement before reserve/prepare overwrites its witness",
+      "ci": {
+        "run": 45873020973,
+        "status": "success",
+        "controllerTests": 1068,
+        "nativeTests": 504
+      },
+      "source": "followup#/permanentFixes",
+      "url": "https://github.com/jeep-jim/AvtoCena/commit/a3654566bad8bb36193b821018ac12504d3ed8f7"
+    },
+    {
+      "sha": "4a8136e9639e1546e42914b0b70720f8356a576a",
+      "change": "Select the historical retirement adapter from fresh accepted runtime without replacing the original witness",
+      "ci": {
+        "run": 45874380768,
+        "job": 140097649973,
+        "status": "success",
+        "controllerTests": 1071,
+        "nativeTests": 504,
+        "webTypecheck": true,
+        "engineTypecheck": true,
+        "cityFixtures": 4,
+        "brandFixtures": 4
+      },
+      "source": "followup#/permanentFixes",
+      "url": "https://github.com/jeep-jim/AvtoCena/commit/4a8136e9639e1546e42914b0b70720f8356a576a"
+    },
+    {
+      "sha": "604fb804106349a74f607a3ca6e87241d1d7e1a1",
+      "change": "Primary China schedule plus due-window catch-up checks",
+      "ci": {
+        "run": 45869752731,
+        "status": "success"
+      },
+      "source": "followup#/china",
+      "url": "https://github.com/jeep-jim/AvtoCena/commit/604fb804106349a74f607a3ca6e87241d1d7e1a1"
+    }
+  ],
+  "china": {
+    "source": "followup#/china",
+    "run": 45875678028,
+    "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/45875678028",
+    "marker": "6ac99e79457bb7183a263017dbfd4e76e5ad5d1d",
+    "status": "RUNNING",
+    "rawRecordedStatus": "in_progress",
+    "statusRecordedInProgressAt": "2026-11-27T02:31:25.969235+07:00",
+    "terminal": false,
+    "acceptedNewGeneration": null,
+    "finishedAt": null,
+    "leaseReleased": null,
+    "previousAcceptedGeneration": "gen_china_45655051136_1",
+    "primaryScheduleKrasnoyarsk": "21:00 daily",
+    "primaryCronUtc": "0 14 * * *",
+    "catchupCronUtc": "17 0,3,6,9,12,15,18,21 * * *",
+    "catchupChecksKrasnoyarsk": [
+      "01:17",
+      "04:17",
+      "07:17",
+      "10:17",
+      "13:17",
+      "16:17",
+      "19:17",
+      "22:17"
+    ],
+    "catchupChecksDoNotForceNewCollectionAfterAcceptedDueWindow": true,
+    "scheduledCatchupEventObserved": false,
+    "scheduledEventObservationAt": "2026-11-27T01:27:46+07:00",
+    "currentRunInvocation": "manual catch-up marker",
+    "statusSource": "progress#/activeUserFollowup20261127/chinaCatchupStatus",
+    "statusRefreshedForCheckpoint": false
+  },
+  "crm": {
+    "sources": [
+      "progress#/activeUserFollowup20261127/crmFollowup",
+      "crm_runtime_freeze",
+      "crm_runtime_source_proof",
+      "crm_controller_freeze",
+      "crm_existing_anonymous_boundary",
+      "crm_actual_middleware_proof",
+      "crm_controller_full_gate",
+      "crm_ci_github_evidence",
+      "crm_ci_browser_report",
+      "crm_ci_browser_artifact"
+    ],
+    "runtimeSha": "1e289ae2cbf148af1167f51022084bb39c3c639a",
+    "runtimeTree": "43001fc8a2d1d02f65687ea0c066df4cfca3d412",
+    "baseRuntimeSha": "077cbb17626ab0c64e7f06db055fef9252ad21c0",
+    "runtimeBranch": "runtime-crm-china-operations-20261127",
+    "runtimeFiles": 6,
+    "codeScope": "catalog-crm-china-operations-v1",
+    "branchCommitted": true,
+    "deployed": false,
+    "acceptedOnSite": false,
+    "controllerPublicationStatus": "committed_to_main_ci_passed_not_deployed",
+    "pricingProtected": true,
+    "cumulativePricingToServingFiles": 70,
+    "nativeFocusedPassed": 15,
+    "browserPassed": 2,
+    "webTypecheckExitCode": 0,
+    "engineTypecheckExitCode": 0,
+    "displaySourceDateNotAcceptedAt": true,
+    "changes": "China schedule/workflow/reserve labels and owner-only manifest source date/row count; separate branch from accepted077, no b25 Japan changes",
+    "controller": {
+      "sha": "b592b19489bf4d68b223d690705914e9b8f2220d",
+      "tree": "8712935895e4dbb6a5180e58bf096a72e98e9db9",
+      "url": "https://github.com/jeep-jim/AvtoCena/commit/b592b19489bf4d68b223d690705914e9b8f2220d",
+      "committedToMain": true,
+      "changedPaths": 18,
+      "freezeSha256": "f110799bd48d7ed42ef200f4673b8a9177fa2223b5e39ee62bf62dc94ccfd787",
+      "localFullGate": {
+        "passed": 1138,
+        "failed": 0,
+        "source": "crm_controller_full_gate"
+      },
+      "ci": {
+        "source": "crm_ci_github_evidence",
+        "run": 45884180305,
+        "job": 140130654197,
+        "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/45884180305",
+        "jobUrl": "https://github.com/jeep-jim/AvtoCena/actions/runs/45884180305/job/140130654197",
+        "status": "COMPLETED",
+        "conclusion": "success",
+        "terminal": true,
+        "completedAt": "2026-11-27T02:34:21+07:00",
+        "verifiedAt": "2026-11-27T02:35:28.935330+07:00",
+        "controllerSha": "b592b19489bf4d68b223d690705914e9b8f2220d",
+        "runtimeSha": "1e289ae2cbf148af1167f51022084bb39c3c639a",
+        "controllerTestsPassed": 1138,
+        "nativeTestsPassed": 440,
+        "nativeProfile": "accepted077 plus CRM, not b25 usability",
+        "webTypecheckPassed": true,
+        "engineTypecheckPassed": true,
+        "browserCasesPassed": 2,
+        "browserWidths": [
+          1440,
+          390
+        ],
+        "browserChecks": {
+          "readyStatus": true,
+          "statusFailureIsolated": true,
+          "scheduleAndLinks": true,
+          "reserveSourcesPreserved": true,
+          "neighborControlsPreserved": true,
+          "lazyStatusReads": true,
+          "revisionConflictPreserved": true,
+          "noOverflow": true
+        },
+        "actualMiddlewareStepPassed": true,
+        "artifact": {
+          "id": 15148008576,
+          "zipBytes": 429,
+          "zipSha256": "966ffb4a44896e92095848447f94490b9a38d91109512e56e770b48aa06daad8",
+          "reportBytes": 422,
+          "reportSha256": "c3c8137ee16f91f3ad2e1d402f58de1c412c7b362d9a4690b80b957c5f4b3b8f"
+        }
+      }
+    },
+    "accessBoundary": {
+      "liveExistingEndpoint": {
+        "source": "crm_existing_anonymous_boundary",
+        "url": "https://avtocena.com/api/crm/collection-controls",
+        "startedAt": "2026-11-27T02:18:03.963171+07:00",
+        "completedAt": "2026-11-27T02:18:11.833568+07:00",
+        "status": 401,
+        "exactAuthRequiredBody": true,
+        "cacheControl": null,
+        "setCookiePresent": false,
+        "isNewStatusEndpoint": false
+      },
+      "offlineActualCandidateMiddleware": {
+        "source": "crm_actual_middleware_proof",
+        "runtimeSha": "1e289ae2cbf148af1167f51022084bb39c3c639a",
+        "passed": true,
+        "networkRequests": 0,
+        "expectedUnsignedStatus": 401,
+        "expectedBody": {
+          "ok": false,
+          "error": "auth_required"
+        }
+      },
+      "routeUnitContract": {
+        "source": "crm_runtime_freeze",
+        "nonOwnerStatus": 403,
+        "cacheControl": "private, no-store",
+        "evidenceType": "route unit test only; anonymous middleware runs before this route"
+      },
+      "liveNewStatusEndpointVerified": false,
+      "liveOwner200Verified": false,
+      "anonymousNoStoreClaimed": false
+    }
+  },
+  "japan": {
+    "sources": [
+      "followup#/japan",
+      "progress#/currentUsabilityCandidate",
+      "japan_last_browser_report"
+    ],
+    "status": "UNRESOLVED_NOT_FIXED_ON_SITE",
+    "publicRuntimeSha": "077cbb17626ab0c64e7f06db055fef9252ad21c0",
+    "candidateRuntimeSha": "b25a95122199378afc5166ed7ac8882a84ed9fe3",
+    "candidateCurrentlyDeployed": false,
+    "lastFailedRelease": 45861459029,
+    "lastFailedReleaseUrl": "https://github.com/jeep-jim/AvtoCena/actions/runs/45861459029",
+    "lastReleaseStatus": "rolled_back",
+    "lastReleaseFinishedAt": "2026-11-27T00:07:38.005000+07:00",
+    "sourceFailure": {
+      "httpStatus": 500,
+      "responseEvidence": {
+        "version": 1,
+        "mime": "html",
+        "encoding": "missing",
+        "bodyClass": "empty",
+        "bytesRead": 0,
+        "truncated": false,
+        "readStatus": "complete"
+      },
+      "rootCauseEstablished": false
+    },
+    "publicPowerPage": {
+      "observedAt": "2026-11-27T00:54:13.860085+07:00",
+      "httpStatus": 200,
+      "request": {
+        "market": "japan",
+        "powerTo": 160,
+        "page": 1,
+        "pageSize": 24,
+        "city": "Новокузнецк"
+      },
+      "shown": 23,
+      "received": 24,
+      "total": null,
+      "countSummary": null,
+      "stale": true,
+      "sourceObservedAt": "2026-11-26T22:08:45.691000+07:00",
+      "hasMore": true,
+      "powerFilterSummary": {
+        "shown": 23,
+        "localPower": 0,
+        "supplierPower": 18,
+        "unknownPower": 5
+      }
+    },
+    "browserControl": {
+      "observedAt": "2026-11-27T01:42:05.152337+07:00",
+      "shown": 23,
+      "totalLabel": "Количество уточняется",
+      "images": 23,
+      "decodedAfterOrdinaryScrolling": 23,
+      "failed": 0,
+      "pending": 0,
+      "userPhotoFailureReproduced": false,
+      "photoFixDeployed": false,
+      "interpretation": "Control observation only; loaded photos in this session do not prove the user incident fixed"
+    },
+    "wholeResultPowerCount": {
+      "source": "progress#/activeUserFollowup20261127/japanCountAssessment",
+      "codeSources": [
+        "japan_077_catalog",
+        "japan_b25_catalog",
+        "japan_b25_power_query",
+        "japan_b25_vehicle_policy",
+        "japan_b25_result_filter"
+      ],
+      "implemented": false,
+      "persistsAfterHttp500Resolution": true,
+      "b25FreshFirstPageWithContinuationTotal": null,
+      "exactTotalException": "Fresh, nonpartial first page exhausts the entire selection: total=items.length",
+      "sourceCountForPowerRequestedByReadAjesCountSummary": false,
+      "phaseCountsEqualFinalGroups": false,
+      "blockers": [
+        "Source phase predicates are overlapping supersets, not exact final known/unknown membership",
+        "Local index facts do not enumerate all affected AJ IDs and depend on model/year/trim/chassis/consensus",
+        "Final admission includes normalized identity, editorial visibility, body/category/GVWR and, when selected, fuel/drive/color/body and delivered-price filters"
+      ],
+      "exactGlobalCountNeeds": "Equivalent complete final-admission aggregate or a complete current admitted index with source/local revision binding",
+      "safeVisibleCountsOnly": true,
+      "safeVisibleLabel": "На этой странице:23 автомобиля —18 с указанной мощностью до160л.с.,5 без данных о мощности",
+      "safeSummaryFields": [
+        "shown",
+        "localPower",
+        "supplierPower",
+        "unknownPower"
+      ],
+      "doesNotAuthorizeBulkReadOrWeakenGate": true
+    },
+    "blindRetryAuthorizedByCheckpoint": false
+  },
+  "ajDocumentAccess": {
+    "source": "progress#/activeUserFollowup20261127/ajSchemaPermissionQuestion",
+    "requestedAction": "one GET https://ajes.com/api/aj_bids.txt",
+    "requestedGetCount": 1,
+    "automaticReview": "rejected",
+    "permissionQuestionAsked": true,
+    "userToolAnswer": "empty_no_authorization",
+    "requestExecuted": false,
+    "retryExecuted": false,
+    "authorizationGranted": false,
+    "directDiagnosticProviderAccessAuthorized": false,
+    "ordinaryUserRequestsRemainWithinExistingAuthorization": true
+  },
+  "clockSource": "checkpoint_clock",
+  "nextSteps": [
+    "Obtain terminal evidence for China45875678028 and verify its accepted generation and independent public health",
+    "After China is resolved, publish exact CRM runtime1e289 through the normal required release gates using successful CI45884180305/controllerb592b194; verify the actual publication outcome",
+    "Update disk availability only from a real post-China observation",
+    "Keep Japan HTTP500/source compatibility and the missing exact global power count as separate unresolved requirements",
+    "Do not issue the blocked AJ document GET without explicit authorization; do not replace visible counts with a fabricated total"
+  ]
+}
