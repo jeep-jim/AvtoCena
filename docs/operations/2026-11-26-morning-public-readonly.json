@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "kind": "morning-public-observations-v1",
+  "date": "2026-11-26",
+  "timezone": "Asia/Krasnoyarsk",
+  "origin": "https://avtocena.com",
+  "checks": {
+    "health": {
+      "checkedAt": "2026-11-25T23:50:39.665Z",
+      "status": 200,
+      "ok": true,
+      "releaseSha": "d536c1547c4d82a339ed68ced7d8503f09b6810b",
+      "calculationVersion": "4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90"
+    },
+    "chinaSearch": {
+      "checkedAt": "2026-11-26T00:01:50.412Z",
+      "status": 200,
+      "ok": true,
+      "generationId": "gen_china_45655051136_1",
+      "total": 57,
+      "itemCount": 24,
+      "allChina": true,
+      "itemsSha256": "9da62b332e22e5164a5d3892f3bccee78aaeb25862e3aec9780f711a312490b6",
+      "path": "/api/catalog/search?market=china&make=Hyundai&model=Elantra&city=Новокузнецк&budgetFrom=1650000&budgetTo=1750000&yearFrom=2022&yearTo=2023&mileageTo=70000&sort=totalRub&page=1"
+    },
+    "home": {
+      "kind": "morning-public-home-readonly-v1",
+      "startedAt": "2026-11-26T00:23:10.453282Z",
+      "requests": 1,
+      "url": "https://avtocena.com/",
+      "status": 200,
+      "finalUrl": "https://avtocena.com/",
+      "complete": true,
+      "bytes": 908796,
+      "sha256": "381595f738b1348456d9a44b062a59c0bcaf7e60ba6ee5d6cbf77f1f5f38bfeb",
+      "htmlClose": true,
+      "reactStreamError": false,
+      "finishedAt": "2026-11-26T00:23:22.344464Z",
+      "seconds": 11.8913
+    }
+  },
+  "scope": {
+    "ordinaryPublicGetRequests": 3,
+    "directSupplierRequests": 0,
+    "browserAcceptancePerformed": false,
+    "fullCatalogAuditPerformed": false,
+    "applicationPublicationPerformed": false
+  }
+}

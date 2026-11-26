@@ -1,4 +1,4 @@
-# Read saved b6 photo-only server failure and own cleanup evidence without rerunning the gate.
+# Read only exact b6 candidate startup, home phases and bounded historical events.
 name: Inspect failed photo release disk - read only
 on:
   push:
@@ -20,7 +20,7 @@ jobs:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
           persist-credentials: false
-      - name: Read bounded disk, rollback and mount evidence
+      - name: Read exact saved candidate failure evidence
         env:
           SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
         run: |
@@ -31,8 +31,8 @@ jobs:
           trap 'rm -f "$key_file"' EXIT
           printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
           unset SSH_PRIVATE_KEY
-          ssh -F /dev/null -T -i "$key_file" -o BatchMode=yes -o IdentitiesOnly=yes -o ForwardAgent=no -o ClearAllForwardings=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=yes -o GlobalKnownHostsFile=/dev/null -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts" root@151.248.113.177 '/usr/bin/env -i PATH=/usr/bin:/bin /usr/bin/python3 -I -B -' < scripts/catalog-next/diagnose-photo-disk-20261125.py | tee photo-release-disk-report.json
-      - name: Preserve aggregate inventory
+          ssh -F /dev/null -T -i "$key_file" -o BatchMode=yes -o IdentitiesOnly=yes -o ForwardAgent=no -o ClearAllForwardings=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=yes -o GlobalKnownHostsFile=/dev/null -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts" root@151.248.113.177 '/usr/bin/env -i PATH=/usr/bin:/bin /usr/bin/python3 -I -B - --photo-attempt-only' < scripts/catalog-next/diagnose-photo-disk-20261125.py | tee photo-release-disk-report.json
+      - name: Preserve bounded candidate observations
         uses: actions/upload-artifact@v4
         if: always()
         with:

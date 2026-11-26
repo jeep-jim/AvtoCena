@@ -1,6 +1,7 @@
 """Bounded, read-only disk, rollback and retained AJ-failure evidence."""
 import sys
-if sys.argv[1:]:
+PHOTO_ATTEMPT_ONLY = sys.argv[1:] == ['--photo-attempt-only']
+if sys.argv[1:] and not PHOTO_ATTEMPT_ONLY:
     if sys.argv[1:] != ['--capacity-only']:
         raise SystemExit('photo_disk_arguments')
     import datetime, json, os
@@ -13,6 +14,7 @@ if sys.argv[1:]:
     }, separators=(',', ':')), flush=True)
     raise SystemExit(0)
 
+import datetime
 import fcntl
 import hashlib
 import http.client
@@ -24,6 +26,8 @@ import re
 import socket
 import stat
 import subprocess
+import time
+from urllib.parse import urlencode
 
 BASE = Path('/opt/avtocena/releases')
 CONFIG = Path('/etc/nginx/conf.d/avtocena-prepare.conf')
@@ -46,6 +50,13 @@ PHOTO_SPEED_SOURCES = {
     'regcloud-performance-gate.py': 'ebd54f9774271f52d3026a153e99d3a96c791db07b79c9c802705e952045366b',
     'accepted-speed-baseline.json': '32fba449b77e40983803483ea7b6cb4ece09afa997c2ae08dd968c675f528c59',
 }
+PHOTO_ATTEMPT_PROOFS = {
+    'PLAN.json': '1b8455abcd8512467f31bc0e2735922536cee40d933084ae3934ef38515c99dc',
+    'ROLLED_BACK.json': '783809d2dc846fbac6c01699f5419345bb61eca77c6542d304eb283fed0d74e6',
+    'server-speed-result.json': '4d4b236968365be4722537fc3e4e0c06a57f5364fe8470e6f280847fcc0d0187',
+}
+PHOTO_LOCK = Path('/run/lock/avtocena-runtime-change.lock')
+PHOTO_CALCULATION = '4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90'
 FILES = ('GENERATION.json', 'details.sqlite', 'query.sqlite',
          'FILTER_SEMANTICS.json', 'FX_RECEIPT.json', 'RECONCILIATION.json', 'DISPOSITIONS.ndjson')
 PHASE = 'begin'
@@ -192,7 +203,7 @@ def aj_failure_diagnostic(row, port, health, ingress):
     return {'servingBoundBeforeAfter': True, **value}
 
 
-def bounded_bytes(path, limit):
+def bounded_snapshot(path, limit):
     descriptor = os.open(path, os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK)
     try:
         before = os.fstat(descriptor)
@@ -204,9 +215,13 @@ def bounded_bytes(path, limit):
         fields = ('st_dev', 'st_ino', 'st_size', 'st_mtime_ns', 'st_ctime_ns')
         if len(raw) != before.st_size or any(getattr(before, key) != getattr(after, key) for key in fields):
             raise ValueError()
-        return raw
+        return raw, after
     finally:
         os.close(descriptor)
+
+
+def bounded_bytes(path, limit):
+    return bounded_snapshot(path, limit)[0]
 
 
 def bounded_proof(path, limit):
@@ -352,6 +367,228 @@ def saved_speed_diagnosis(directory, runtime):
                 'exitCode': value['exitCode'], 'samples': samples, 'rejectedSamples': rejected}
     except (OSError, ValueError, TypeError, KeyError, OverflowError):
         return {'selected': selected, 'valid': False, 'reason': stage}
+
+
+def photo_need(condition, reason):
+    if not condition:
+        raise RuntimeError('photo_disk_photo_' + reason)
+
+
+def photo_directory(directory):
+    descriptor = os.open(directory, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW)
+    try:
+        info = os.fstat(descriptor)
+        photo_need(stat.S_ISDIR(info.st_mode) and info.st_uid == 0 and not info.st_mode & 0o022
+                   and directory.resolve() == directory, 'directory')
+    finally:
+        os.close(descriptor)
+
+
+def photo_health(ingress):
+    found = re.findall(rb'(?m)^\s*proxy_pass http://127\.0\.0\.1:(\d+);\s*$', ingress)
+    photo_need(len(found) == 1 and 1 <= int(found[0]) <= 65535, 'ingress')
+    connection = http.client.HTTPConnection('127.0.0.1', int(found[0]), timeout=15)
+    try:
+        connection.request('GET', '/api/health', headers={'Host': 'avtocena.com', 'Connection': 'close'})
+        response = connection.getresponse()
+        raw = response.read(100001)
+        photo_need(response.status == 200 and len(raw) <= 100000, 'health')
+        value = json.loads(raw)
+        photo_need(isinstance(value, dict) and value.get('ok') is True
+                   and value.get('releaseSha') == RUNTIMES[1]
+                   and value.get('calculationVersion') == PHOTO_CALCULATION, 'health')
+        return {'status': 200, 'ok': True, 'releaseSha': value['releaseSha'],
+                'calculationVersion': value['calculationVersion']}
+    finally:
+        connection.close()
+
+
+def photo_saved_observation(directory, name, plan):
+    """Existing startup/home schemas, with the verified nonce omitted from output."""
+    try:
+        value, digest = bounded_proof(directory / name, 256 * 1024)
+    except FileNotFoundError:
+        return {'present': False}
+    except (OSError, ValueError, RecursionError):
+        return {'present': True, 'valid': False}
+    try:
+        natural = lambda number: type(number) is int and 0 <= number <= 9007199254740991
+        number = lambda value, maximum: type(value) in (int, float) and math.isfinite(value) and 0 <= value <= maximum
+        if name == 'STARTUP.json':
+            keys = {'version', 'kind', 'ready', 'elapsedSeconds', 'attempts', 'health', 'candidate', 'reason'}
+            speed_need(set(value) == keys and type(value['version']) is int and value['version'] == 1
+                       and value['kind'] == 'china-host-startup-v1' and type(value['ready']) is bool
+                       and number(value['elapsedSeconds'], 3600) and natural(value['attempts']) and value['attempts'] <= 10000
+                       and value['health'] in {'not_checked', 'ok', 'connection_refused', 'timeout', 'invalid_json',
+                           'identity_mismatch', 'http_response', 'connection_error', 'unavailable'}
+                       and value['reason'] in {'ready', 'timeout', 'exited', 'oom', 'restarted', 'inspect_unavailable'}
+                       and value['ready'] == (value['reason'] == 'ready') and (not value['ready'] or value['health'] == 'ok'),
+                       'startup')
+            candidate = value['candidate']
+            speed_need(candidate is None or (isinstance(candidate, dict)
+                       and set(candidate) == {'running', 'status', 'exitCode', 'oomKilled', 'restartCount'}
+                       and type(candidate['running']) is bool and type(candidate['oomKilled']) is bool
+                       and type(candidate['exitCode']) is int and abs(candidate['exitCode']) <= 2147483647
+                       and natural(candidate['restartCount']) and candidate['restartCount'] <= 10000
+                       and candidate['status'] in {'created', 'restarting', 'running', 'removing', 'paused', 'exited', 'dead'}), 'startup')
+            clean = value
+        else:
+            speed_need(name == 'HOME_PHASE_TIMING.json', 'observation')
+            keys = {'version', 'kind', 'runtimeSha', 'nonce', 'logBytes', 'logLines', 'rejectedRows', 'limited', 'rows'}
+            speed_need(set(value) == keys and type(value['version']) is int and value['version'] == 1
+                       and value['kind'] == 'china-home-phase-timing-v1' and value['runtimeSha'] == plan['runtimeSha']
+                       and value['nonce'] == plan['nonce'] and natural(value['logBytes']) and value['logBytes'] <= 512 * 1024
+                       and natural(value['logLines']) and value['logLines'] <= 2048 and natural(value['rejectedRows'])
+                       and type(value['limited']) is bool and isinstance(value['rows'], list) and len(value['rows']) <= 512
+                       and len(value['rows']) + value['rejectedRows'] <= value['logLines'], 'home_timing')
+            phases = {'dealer', 'snapshot', 'counts', 'green', 'greenPricing', 'catalogPricing', 'dealerRail', 'japanRail',
+                      'snapshotContext', 'snapshotBody', 'snapshotPrepared', 'snapshotManifest', 'snapshotOverview',
+                      'snapshotProjection', 'snapshotEditorialPrepared'} | {
+                          'snapshotEditorial:' + market for market in ('china', 'japan', 'korea', 'uae', 'europe', 'georgia')}
+            for row in value['rows']:
+                speed_need(isinstance(row, dict), 'home_row')
+                row_keys = {'trace', 'phase', 'ms', 'ok', 'policyDate', 'completedPolicyDate'}
+                if 'generation' in row:
+                    row_keys.add('generation')
+                    speed_need(isinstance(row['generation'], str)
+                               and re.fullmatch(r'gen_[0-9]{1,20}_[a-z0-9-]{1,80}', row['generation']), 'home_generation')
+                speed_need(set(row) == row_keys and isinstance(row['trace'], str)
+                           and re.fullmatch(r'[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}', row['trace'])
+                           and row['phase'] in phases and number(row['ms'], 86400000) and type(row['ok']) is bool, 'home_row')
+                for key in ('policyDate', 'completedPolicyDate'):
+                    speed_need(isinstance(row[key], str) and re.fullmatch(r'\d{4}-\d\d-\d\d', row[key])
+                               and datetime.date.fromisoformat(row[key]).isoformat() == row[key], 'home_date')
+            clean = {key: entry for key, entry in value.items() if key != 'nonce'}
+        return {'present': True, 'valid': True, 'sha256': digest, 'value': clean}
+    except (ValueError, TypeError, KeyError, OverflowError):
+        return {'present': True, 'valid': False, 'sha256': digest}
+
+
+class PhotoDocker(http.client.HTTPConnection):
+    def connect(self):
+        self.sock = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+        self.sock.settimeout(15)
+        self.sock.connect('/var/run/docker.sock')
+
+
+def photo_events(plan, since, until):
+    """The release-host event allowlist, scoped to this failed attempt only."""
+    actions = {'create', 'start', 'die', 'oom', 'stop', 'kill', 'destroy', 'restart'}
+    filters = {'type': ['container'], 'label': ['avtocena.china.nonce=' + plan['nonce'],
+               'org.opencontainers.image.revision=' + plan['runtimeSha']], 'event': sorted(actions)}
+    connection = PhotoDocker('localhost', timeout=15)
+    try:
+        photo_need(type(since) is int and type(until) is int and 0 < until - since <= 300
+                   and until <= int(time.time()), 'event_window')
+        target = '/events?' + urlencode({'since': since, 'until': until, 'filters': json.dumps(filters)})
+        connection.request('GET', target)
+        response = connection.getresponse()
+        raw = response.read(1024 * 1024 + 1)
+        speed_need(response.status == 200 and len(raw) <= 1024 * 1024, 'events_response')
+        rows = []
+        for line in raw.splitlines():
+            value = json.loads(line)
+            attributes = value.get('Actor', {}).get('Attributes', {})
+            action, when = value.get('Action'), value.get('time')
+            speed_need(value.get('Type') == 'container' and action in actions and type(when) is int and since <= when <= until
+                       and attributes.get('avtocena.china.nonce') == plan['nonce']
+                       and attributes.get('org.opencontainers.image.revision') == plan['runtimeSha'], 'event_scope')
+            exit_code = attributes.get('exitCode')
+            speed_need(exit_code is None or isinstance(exit_code, str) and re.fullmatch(r'-?\d{1,8}', exit_code), 'event_exit')
+            rows.append({'action': action, 'time': when, 'exitCode': int(exit_code) if exit_code is not None else None,
+                         'oom': action == 'oom'})
+            speed_need(len(rows) <= 512, 'event_count')
+        return {'available': True, 'reason': None if rows else 'empty', 'rows': rows}
+    except Exception:
+        return {'available': False, 'reason': 'unavailable', 'rows': []}
+    finally:
+        connection.close()
+
+
+def photo_attempt_only():
+    """One known failed attempt. No inventory, application gate or storage/provider reads."""
+    global PHASE, REPORT
+    report = {'kind': 'photo-release-attempt-readonly-v1'}
+    REPORT = report
+    PHASE = 'photo_lock'
+    descriptor = os.open(PHOTO_LOCK, os.O_RDONLY | os.O_NOFOLLOW)
+    try:
+        try:
+            fcntl.flock(descriptor, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except BlockingIOError:
+            report.update(status='skipped_runtime_busy', runtimeLockBusy=True)
+            print(json.dumps(report, separators=(',', ':')))
+            return
+        report['runtimeLockBusy'] = False
+        PHASE = 'photo_health_before'
+        ingress = bounded_bytes(CONFIG, 1024 * 1024)
+        before_health = photo_health(ingress)
+        PHASE = 'photo_attempt_binding'
+        parent = BASE / RUNTIMES[3] / 'china-next'
+        for directory in (BASE, parent.parent, parent):
+            photo_directory(directory)
+        children = list(parent.iterdir())
+        photo_need(len(children) <= 200, 'directory_bound')
+        attempts = [directory for directory in children if re.fullmatch(r'[a-f0-9]{32}', directory.name)]
+        photo_need(len(attempts) <= 40, 'attempt_bound')
+        matches = []
+        for directory in attempts:
+            photo_directory(directory)
+            try:
+                plan, digest = bounded_proof(directory / 'PLAN.json', 256 * 1024)
+            except FileNotFoundError:
+                continue
+            if digest == PHOTO_ATTEMPT_PROOFS['PLAN.json']:
+                matches.append((directory, plan))
+        photo_need(len(matches) == 1, 'unique_attempt')
+        directory, plan = matches[0]
+        photo_need(plan.get('nonce') == directory.name and all(plan.get(key) == value for key, value in PHOTO_SPEED_PLAN.items()), 'plan_binding')
+        snapshots = {}
+        for name, digest in PHOTO_ATTEMPT_PROOFS.items():
+            raw, info = bounded_snapshot(directory / name, 256 * 1024)
+            photo_need(hashlib.sha256(raw).hexdigest() == digest, 'proof_hash')
+            snapshots[name] = (raw, info)
+        rollback = json.loads(snapshots['ROLLED_BACK.json'][0])
+        photo_need(rollback.get('kind') == 'china-host-rollback-v1' and rollback.get('nonce') == plan['nonce']
+                   and rollback.get('release') == plan['runtimeSha'] and rollback.get('generationManifestSha256') == plan['generationManifestSha256']
+                   and rollback.get('retainedRuntimeSha') == RUNTIMES[1]
+                   and all(rollback.get(key) is True for key in ('retainedRunning', 'candidateRemoved', 'ingressRestored')), 'rollback_binding')
+        speed = saved_speed_diagnosis(directory, RUNTIMES[3])
+        photo_need(speed.get('selected') and speed.get('valid') and speed.get('present') and speed.get('exitCode') == 1
+                   and speed.get('sha256') == PHOTO_ATTEMPT_PROOFS['server-speed-result.json']
+                   and speed.get('planSha256') == PHOTO_ATTEMPT_PROOFS['PLAN.json'], 'speed_binding')
+        speed_written = snapshots['server-speed-result.json'][1].st_mtime_ns / 1_000_000_000
+        rolled_back_at = rollback.get('rolledBackAt')
+        photo_need(isinstance(rolled_back_at, str) and re.fullmatch(r'\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(?:\.\d{1,6})?Z', rolled_back_at), 'rollback_time')
+        rollback_time = datetime.datetime.fromisoformat(rolled_back_at.replace('Z', '+00:00')).timestamp()
+        # The failed request ran for 31 seconds. Include the preceding minute
+        # and at most four minutes after the saved result.
+        photo_need(datetime.datetime(2026, 11, 25, 19, 39, tzinfo=datetime.timezone.utc).timestamp() <= speed_written <= rollback_time
+                   <= datetime.datetime(2026, 11, 25, 19, 51, tzinfo=datetime.timezone.utc).timestamp(), 'attempt_time')
+        since = int(speed_written) - 60
+        until = min(int(speed_written) + 240, int(rollback_time) + 2)
+        PHASE = 'photo_saved_observations'
+        startup = photo_saved_observation(directory, 'STARTUP.json', plan)
+        timing = photo_saved_observation(directory, 'HOME_PHASE_TIMING.json', plan)
+        PHASE = 'photo_events'
+        events = photo_events(plan, since, until)
+        PHASE = 'photo_health_after'
+        photo_need(bounded_bytes(CONFIG, 1024 * 1024) == ingress and photo_health(ingress) == before_health, 'retained_changed')
+        for name, (raw, before) in snapshots.items():
+            after_raw, after = bounded_snapshot(directory / name, 256 * 1024)
+            photo_need(raw == after_raw and all(getattr(before, field) == getattr(after, field)
+                       for field in ('st_dev', 'st_ino', 'st_size', 'st_mtime_ns', 'st_ctime_ns')), 'proof_changed')
+        report.update(status='observed', runtimeSha=plan['runtimeSha'], controllerSha=plan['controllerSha'],
+                      generationId=plan['generationId'], attemptHash=hashlib.sha256(plan['nonce'].encode()).hexdigest()[:16],
+                      proofSha256=dict(PHOTO_ATTEMPT_PROOFS), sourceSha256=dict(PHOTO_SPEED_SOURCES),
+                      retainedHealthBoundBeforeAfter=True, retainedHealth=before_health,
+                      savedSpeedResultWrittenAt=datetime.datetime.fromtimestamp(speed_written, datetime.timezone.utc).isoformat().replace('+00:00', 'Z'),
+                      rolledBackAt=rolled_back_at, startup=startup, homePhaseTiming=timing,
+                      events={'since': since, 'until': until, 'historyIsFinite': True, 'emptyDoesNotExcludeFailure': True,
+                              'exit137DoesNotProveOom': True, 'postFailureTerminalEventsMayBeCleanup': True, **events})
+        print(json.dumps(report, separators=(',', ':')))
+    finally:
+        os.close(descriptor)
 
 
 def image_binding_diagnostic():
@@ -581,9 +818,13 @@ def main():
 
 if __name__ == '__main__':
     try:
-        main()
+        if PHOTO_ATTEMPT_ONLY:
+            photo_attempt_only()
+        else:
+            main()
     except Exception as error:
-        REPORT.update({'kind': 'photo-release-disk-readonly-v1', 'error': 'photo_disk_inventory_failed',
+        REPORT.update({'kind': 'photo-release-attempt-readonly-v1' if PHOTO_ATTEMPT_ONLY else 'photo-release-disk-readonly-v1',
+                       'error': 'photo_disk_inventory_failed',
                        'phase': PHASE, 'errorType': type(error).__name__,
                        'errorNumber': getattr(error, 'errno', None),
                        'safeReason': str(error) if re.fullmatch(r'photo_disk_[a-z_]+', str(error)) else None})

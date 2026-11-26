@@ -1,6 +1,6 @@
 # Текущий шаг
 
-Обновлено: 26.11.2026, 07:14, Asia/Krasnoyarsk. Текущий статус заменяется, история сюда не дописывается.
+Обновлено: 26.11.2026, 07:27, Asia/Krasnoyarsk. Текущий статус заменяется, история сюда не дописывается.
 
 ## Поручение
 
@@ -8,7 +8,7 @@
 
 ## Подтверждено на сайте
 
-- Утренняя проверка 26.11 в 06:50: публичный health HTTP 200, runtime `d536c1547c4d82a339ed68ced7d8503f09b6810b`, calculation version `4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90`.
+- Утренняя проверка 26.11 в 06:50: публичный health HTTP 200, runtime `d536c1547c4d82a339ed68ced7d8503f09b6810b`, calculation version `4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90`. [Утренние public observations](../operations/2026-11-26-morning-public-readonly.json) также фиксируют один GET главной в 07:23: HTTP 200, полный HTML 908 796 байт, без `$RX(`, 11,8913 с из проверяющей среды. Это не browser acceptance и не аудит всех карточек.
 - [China daily №45655051136](https://github.com/jeep-jim/AvtoCena/actions/runs/45655051136) принят 26.11 в 02:24: `completed=true`, `published=true`, `status=accepted`. Текущее поколение `gen_china_45655051136_1`: 279 450 допущенных автомобилей; источник наблюдался 26.11 в 00:34:57, курс/расчёты зафиксированы в 00:36:54. Runtime/image приложения остались прежними; lease освобождён.
 - [Проверка архива №45685336351](https://github.com/jeep-jim/AvtoCena/actions/runs/45685336351) вычислила SHA256 фактических ZIP bytes и прочитала оба отчёта: источник обновлён от принятого `gen_china_45369451603_1`, `supplierLatestVerified=true`, изменения формул/энциклопедии/других рынков и сборки приложения равны нулю. Manifest B: `6711203fb59a70c99cda3c725eb4ee70654142b1871b0784516209d2903c0b8d`.
 - [Диагностика после daily №45685336506](https://github.com/jeep-jim/AvtoCena/actions/runs/45685336506): новая B и предыдущая A приняты и mounted, работают на прежнем image `sha256:f36ebf373120f0a520d2c1af75ff395fba14383e9955c348193eac5e70846009`; host lock свободен. Retention/hostCleanup завершены, `pending=0`; удалений нет, поскольку A сохранена для отката.
@@ -21,7 +21,7 @@
 - [Выпуск №45686183272](https://github.com/jeep-jim/AvtoCena/actions/runs/45686183272), controller `b6ae6d20`, завершился в 02:50 с `china_host_server_speed_failed`: `published=false`, `status=failed`, `leaseReleased=true`, `retentionPreserved=true`. Отказ произошёл до переключения сайта и до live photo browser gate.
 - Новый образ `sha256:2e6693575faf62d893cf546a72c81f02cbfe3ffd02746a74da30ce23bfb98753` и archive roundtrip прошли. Проверка ёмкости перед staging: 27 732 930 560 свободных байт при требовании 16 448 370 076; нехватка места этой попыткой не зафиксирована. Семь файлов B на хосте — 12 607 910 031 байт.
 - [Сохранённая диагностика №45726343372](https://github.com/jeep-jim/AvtoCena/actions/runs/45726343372) проверила exact36/b6/B, PLAN и закреплённые исходники gate/baseline: `/api/health` и `/api/leads` прошли, затем `/` завершился `IncompleteRead` через 31,1338 с; exit code 1, rejectedSamples 0. Причина неполного ответа ещё не установлена. Это функциональный отказ, а не доказанное превышение числового порога. Gate для диагностики не перезапускался.
-- Оба catch-слоя теперь сохраняют только повторно проверенные `serverSpeed`/`homePhaseTiming`; timing связан с runtime/nonce. Исходная ошибка, rollback/lease и функциональные gates сохранены. Локально 643/643 controller/contract теста прошли; CI опубликованного контроллера проверяется отдельно. Это исправление диагностики, не исправление неполного ответа главной.
+- Оба catch-слоя теперь сохраняют только повторно проверенные `serverSpeed`/`homePhaseTiming`; timing связан с runtime/nonce. Исходная ошибка, rollback/lease и функциональные gates сохранены. [CI опубликованного контроллера №45727328117](https://github.com/jeep-jim/AvtoCena/actions/runs/45727328117) прошёл: 643/643 controller/contract, 301/301 тест приложения, typecheck, recovery-clock и все 6 photo browser scenarios; frozen hashes проверены, exact runtime восстановлен. Это исправление диагностики, не исправление неполного ответа главной.
 
 ## Диск
 
@@ -38,7 +38,7 @@
 
 ## Следующий шаг
 
-1. Проверить оставшиеся сохранённые home-phase/процессные свидетельства exact36/b6/B для причины `IncompleteRead` на главной. Не связывать поздние AJ failure records с этой исторической ошибкой без доказательства. Проверить CI опубликованных controller исправлений.
+1. Проверить оставшиеся сохранённые home-phase/процессные свидетельства exact36/b6/B для причины `IncompleteRead` на главной. Не связывать поздние AJ failure records с этой исторической ошибкой без доказательства. CI опубликованных controller исправлений прошёл; следующий шаг определяется сохранёнными свидетельствами отказа.
 2. Исправить установленную причину и завершить photo-only выпуск на текущем принятом B с настоящей браузерной приёмкой и проверкой очистки; source/image/baseline/rollback bindings сохраняются. Не ослаблять приёмку и не повторять выпуск вслепую.
 3. После принятия фото перевязать отдельный Japan release к фактическому retained runtime. Не объявлять свежесть AJ или первое PW рабочими без их приёмки. Затем продолжить остальные рынки по очереди.
 
