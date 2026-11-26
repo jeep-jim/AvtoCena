@@ -1,0 +1,50 @@
+name: Inspect exact failed code publication state - read only
+on:
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/catalog-next-code-outcome-45841493341-readonly.json']
+permissions:
+  contents: read
+concurrency:
+  group: catalog-next-china
+  cancel-in-progress: false
+jobs:
+  inspect:
+    if: github.repository_id == '1289722938' && github.ref == 'refs/heads/main' && github.run_attempt == '1'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    environment: regcloud-staging
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 2
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24.22.3'
+          cache: npm
+      - name: Install reviewed controller dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Verify fixed invocation and read-only refusal cases without credentials
+        run: |
+          node scripts/catalog-next/inspect-code-outcome-45841493341.mjs --verify
+          node --test tests/catalog-next-code-outcome-45841493341.test.mjs tests/catalog-next-china-state.test.mjs tests/catalog-next-release-ssh.test.mjs tests/readonly-marker-invocation.test.mjs tests/release-speed-guard-contract.test.mjs
+      - name: Read only the exact failed intent and authenticated host witness
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+          JSON_STORAGE_DRIVER: object
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_REGION: us-east-1
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+        run: node scripts/catalog-next/inspect-code-outcome-45841493341.mjs --run
+      - name: Preserve only sanitized state and witness evidence
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: catalog-next-code-outcome-45841493341-readonly
+          path: catalog-next-code-outcome-45841493341-readonly-report.json
+          if-no-files-found: ignore
+          retention-days: 14
