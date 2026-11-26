@@ -1,0 +1,79 @@
+{
+  "version": 1,
+  "kind": "japan-recovery-baseline-readonly",
+  "observedDate": "2026-11-26",
+  "timezone": "Asia/Krasnoyarsk",
+  "activeRuntime": "d536c1547c4d82a339ed68ced7d8503f09b6810b",
+  "calculationVersion": "4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90",
+  "supplierSchema": {
+    "url": "https://ajes.com/api/aj_bids.txt",
+    "status": 200,
+    "bytes": 2621,
+    "storageType": "PW varchar(30) NOT NULL DEFAULT ''",
+    "description": "engine power",
+    "unitEvidence": "Owner-provided supplier reply dated 2026-11-25: PW is an integer value in horsepower; no multiple values.",
+    "interpretation": "Accept integer number or digit string in horsepower. Do not infer unit or choose among multiple malformed values."
+  },
+  "requests": [
+    {
+      "url": "https://avtocena.com/api/health",
+      "startedAt": "2026-11-26T04:41:05.728366+00:00",
+      "httpStatus": 200,
+      "durationSeconds": 11.465,
+      "bytes": 217,
+      "responseSha256": "e30857bdd3de6b9512d2be26e4e6c50f6dba2037ac3b86a0ee7e26949030306a"
+    },
+    {
+      "url": "https://avtocena.com/api/catalog/search?market=japan&page=1&pageSize=24&city=%D0%9D%D0%BE%D0%B2%D0%BE%D0%BA%D1%83%D0%B7%D0%BD%D0%B5%D1%86%D0%BA",
+      "startedAt": "2026-11-26T04:41:17.194072+00:00",
+      "httpStatus": 200,
+      "durationSeconds": 5.4484,
+      "bytes": 36150,
+      "responseSha256": "768c580cb908a70a5d71c9e76a7a9358703d5055b727974c69ee35f05c4a3a9b",
+      "received": 24,
+      "returnedItems": 23,
+      "stale": false,
+      "partial": false,
+      "observedAt": "2026-11-26T04:40:43.594Z",
+      "filteredByPage": false,
+      "hasMore": true,
+      "total": null,
+      "scanLimited": false,
+      "reads": null
+    },
+    {
+      "url": "https://avtocena.com/api/catalog/search?market=japan&page=1&pageSize=24&city=%D0%9D%D0%BE%D0%B2%D0%BE%D0%BA%D1%83%D0%B7%D0%BD%D0%B5%D1%86%D0%BA&powerTo=160",
+      "startedAt": "2026-11-26T04:41:22.643962+00:00",
+      "httpStatus": 200,
+      "durationSeconds": 8.5013,
+      "bytes": 339,
+      "responseSha256": "324efef7fdbe550837df2565c71ecf6af143cb67a4ca06c1edb38285d9d91733",
+      "received": 24,
+      "returnedItems": 0,
+      "stale": true,
+      "partial": true,
+      "observedAt": "2026-11-26T04:39:02.341Z",
+      "filteredByPage": true,
+      "hasMore": false,
+      "total": null,
+      "scanLimited": false,
+      "reads": 1
+    }
+  ],
+  "scope": {
+    "publicRequests": 3,
+    "providerDirectRequests": 0,
+    "visitorIpOverride": false,
+    "productionWrites": 0,
+    "providerFullDump": false
+  },
+  "conclusions": [
+    "Active runtime remains d536; calculation version unchanged.",
+    "Ordinary Japan page returns vehicles; powerTo=160 returns zero after 24 received rows.",
+    "The two responses have different source timestamps; no claim that they contain identical supplier rows."
+  ],
+  "limitations": [
+    "One observation per route; not a speed benchmark.",
+    "No source PW values exposed by baseline response; correctness of new mapping requires candidate verification."
+  ]
+}
