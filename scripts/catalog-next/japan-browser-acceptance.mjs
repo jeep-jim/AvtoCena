@@ -64,6 +64,161 @@ export function japanResponseObservation(payload,status){
   scanLimited:boolean(payload?.scanLimited),hasMore:boolean(payload?.hasMore),total:natural(payload?.total)};
 }
 
+/** Diagnostics must not copy opaque validators, proxy names, cookies or
+ * arbitrary extension directives into the public acceptance artifact. */
+export function japanResponseHeaders(headers){
+ const result={},omitted=[];
+ const read=name=>headers&&typeof headers==='object'?headers[name]:undefined;
+ const bounded=value=>typeof value==='string'&&value.length<=512&&!/[\x00-\x1f\x7f]/.test(value);
+ const natural=value=>/^(?:0|[1-9][0-9]{0,9})$/.test(value)&&Number(value)<=2147483647;
+ const cache=read('cache-control');
+ if(cache!==undefined){
+  const allowed=new Set(['public','private','no-cache','no-store','must-revalidate','proxy-revalidate','immutable','no-transform','must-understand']);
+  const numeric=new Set(['max-age','s-maxage','stale-while-revalidate','stale-if-error']);
+  const safe=[];let invalid=!bounded(cache);
+  if(!invalid){
+   const parts=cache.split(',');invalid=parts.length>16;
+   if(!invalid)for(const part of parts){
+    const value=part.trim().toLowerCase(),match=/^([a-z-]+)=([0-9]+)$/.exec(value);
+    if(allowed.has(value))safe.push(value);
+    else if(match&&numeric.has(match[1])&&natural(match[2]))safe.push(match[1]+'='+Number(match[2]));
+    else invalid=true;
+   }
+  }
+  if(safe.length)result.cacheControl=[...new Set(safe)].join(', ');
+  if(invalid)omitted.push('cache-control');
+ }
+ const age=read('age');
+ if(age!==undefined){if(typeof age==='string'&&natural(age))result.ageSeconds=Number(age);else omitted.push('age');}
+ const etag=read('etag');
+ if(etag!==undefined){
+  if(bounded(etag)&&etag.length<=256&&/^(?:W\/)?"[\x21\x23-\x7e]{1,250}"$/.test(etag))
+   result.etag={weak:etag.startsWith('W/'),sha256:sha(etag)};
+  else omitted.push('etag');
+ }
+ const via=read('via');
+ if(via!==undefined){
+  // Keep only protocol versions/count. The received-by token and comments can
+  // contain internal hostnames and are never retained, even when well formed.
+  const parts=bounded(via)?via.split(','):[],protocols=[];
+  let valid=parts.length>0&&parts.length<=8;
+  if(valid)for(const part of parts){
+   const match=/^(?:HTTP\/)?(1\.0|1\.1|2|2\.0|3|3\.0) +[^\s(),]+(?: +\([^()]*\))?$/.exec(part.trim());
+   if(!match){valid=false;break;}protocols.push(match[1]);
+  }
+  if(valid)result.via={hops:parts.length,protocols};else omitted.push('via');
+ }
+ return {...result,omitted};
+}
+
+function japanResponseTransport(response){
+ const date=value=>Number.isSafeInteger(value)&&value>=0&&value<=8640000000000000?new Date(value).toISOString():null;
+ return {requestedAt:date(response.requestedAt),receivedAt:date(response.receivedAt),
+  durationMs:Number.isFinite(response.durationMs)&&response.durationMs>=0?response.durationMs:null,
+  responseHeaders:japanResponseHeaders(response.headers)};
+}
+
+const SOURCE_READ_LIMIT=8;
+const sourceReadReasons=new Set(['client_ip_missing','not_configured','market_not_supported','invalid_query','visitor_restricted',
+ 'request_failed','request_timeout','connect_timeout','response_too_large','query_too_large','empty_response','invalid_response','identity_mismatch',
+ 'quota_invalid','quota_exhausted','quota_busy','local_busy','directory_unavailable','cursor_expired','source_disabled','operation_failed']);
+const sourceReadDispositions=new Set(['source','source_recovery','memory_cache','saved_cache','cooldown_recovery','local_recovery',
+ 'policy_empty','shared_or_cached','rejected','unavailable']);
+const receiptUuid=value=>typeof value==='string'&&/^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/.test(value);
+const receiptHash=(value,length)=>value===null||typeof value==='string'&&new RegExp('^[a-f0-9]{'+length+'}$').test(value);
+const receiptDate=value=>typeof value==='string'&&/^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d\.\d{3}Z$/.test(value)
+ &&Number.isFinite(Date.parse(value))&&new Date(value).toISOString()===value;
+const receiptReason=value=>value===null||typeof value==='string'&&(sourceReadReasons.has(value)||/^http_[1-5][0-9]{2}$/.test(value));
+const receiptStatus=value=>value===null||Number.isInteger(value)&&value>=100&&value<=599;
+const receiptKeys=(value,required,optional=[])=>value&&typeof value==='object'&&!Array.isArray(value)
+ &&required.every(key=>Object.hasOwn(value,key))&&Object.keys(value).every(key=>required.includes(key)||optional.includes(key));
+const queryReceiptKeys=['table','kind','page','pageSize','canonicalQuerySha256','wireQuerySha256'];
+function receiptQuery(value,nullable=true){
+ if(nullable&&queryReceiptKeys.every(key=>value[key]===null))return true;
+ const size=value.kind==='list'?Number.isInteger(value.pageSize)&&value.pageSize>=1&&value.pageSize<=48
+  :['detail','count'].includes(value.kind)?value.pageSize===1:['models','makes','colors'].includes(value.kind)&&value.pageSize===500;
+ return ['stats','main'].includes(value.table)&&size&&Number.isInteger(value.page)&&value.page>=1&&value.page<=1_000_000
+  &&typeof value.canonicalQuerySha256==='string'&&receiptHash(value.canonicalQuerySha256,64)
+  &&typeof value.wireQuerySha256==='string'&&receiptHash(value.wireQuerySha256,64);
+}
+function copySourceReadReceipt(value){
+ const keys=['version','readId','runtimeSha','readStartedAt','readFinishedAt',...queryReceiptKeys,'disposition','sourceAttempted','reason','sourceAttempt'];
+ if(!receiptKeys(value,keys,['cooldownOrigin','emptyValidation'])||value.version!==1||!receiptUuid(value.readId)||!receiptHash(value.runtimeSha,40)
+  ||!receiptDate(value.readStartedAt)||!receiptDate(value.readFinishedAt)||value.readStartedAt>value.readFinishedAt
+  ||!receiptQuery(value)||!sourceReadDispositions.has(value.disposition)||![true,false,null].includes(value.sourceAttempted)
+  ||!receiptReason(value.reason))return null;
+ if(Object.hasOwn(value,'emptyValidation')&&value.emptyValidation!==true)return null;
+ if(['source','source_recovery'].includes(value.disposition)&&value.sourceAttempted!==true
+  ||value.disposition==='shared_or_cached'&&value.sourceAttempted!==null
+  ||!['source','source_recovery','shared_or_cached','unavailable'].includes(value.disposition)&&value.sourceAttempted!==false)return null;
+ let sourceAttempt=null;
+ if(value.sourceAttempted===true){
+  const attempt=value.sourceAttempt;
+  if(!receiptKeys(attempt,['startedAt','finishedAt','httpStatus'])||!receiptDate(attempt.startedAt)||!receiptDate(attempt.finishedAt)
+   ||attempt.startedAt>attempt.finishedAt||attempt.startedAt<value.readStartedAt||attempt.finishedAt>value.readFinishedAt
+   ||!receiptStatus(attempt.httpStatus))return null;
+  sourceAttempt={startedAt:attempt.startedAt,finishedAt:attempt.finishedAt,httpStatus:attempt.httpStatus};
+ }else if(value.sourceAttempt!==null)return null;
+ let cooldownOrigin;
+ if(Object.hasOwn(value,'cooldownOrigin')){
+  const origin=value.cooldownOrigin,originKeys=['runtimeSha',...queryReceiptKeys,'attemptStartedAt','attemptFinishedAt','httpStatus','reason'];
+  if(!receiptKeys(origin,originKeys)||!receiptHash(origin.runtimeSha,40)||!receiptQuery(origin,false)
+   ||!receiptDate(origin.attemptStartedAt)||!receiptDate(origin.attemptFinishedAt)||origin.attemptStartedAt>origin.attemptFinishedAt
+   ||!receiptStatus(origin.httpStatus)||origin.reason===null||!receiptReason(origin.reason))return null;
+  cooldownOrigin=Object.fromEntries(originKeys.map(key=>[key,origin[key]]));
+ }
+ return {...Object.fromEntries(keys.filter(key=>key!=='sourceAttempt').map(key=>[key,value[key]])),sourceAttempt,
+  ...(cooldownOrigin?{cooldownOrigin}:{}),...(value.emptyValidation===true?{emptyValidation:true}:{})};
+}
+
+/** Receipts are observational: malformed/missing evidence is reported as an
+ * omission, never trusted as source success and never used to relax a gate. */
+export function japanSourceReadEvidence(payload,expectedRelease){
+ try{
+ const wrapper=payload?.catalogReadReceipt,raw=payload?.sourceReadReceipts;
+ const omissions=[],result={status:'omitted',catalogReadReceipt:null,runtimeMatchesExpected:null,
+  sourceReadReceipts:[],sourceReadReceiptsLimited:true,omittedReceipts:Array.isArray(raw)?raw.length:null,omissions};
+ const keys=['version','readId','runtimeSha','readStartedAt','readFinishedAt','sourceReadCalls'];
+ if(!receiptKeys(wrapper,keys)||wrapper.version!==1||!receiptUuid(wrapper.readId)||!receiptHash(wrapper.runtimeSha,40)
+  ||!receiptDate(wrapper.readStartedAt)||!receiptDate(wrapper.readFinishedAt)||wrapper.readStartedAt>wrapper.readFinishedAt
+  ||!Number.isInteger(wrapper.sourceReadCalls)||wrapper.sourceReadCalls<0||wrapper.sourceReadCalls>SOURCE_READ_LIMIT){
+  omissions.push(wrapper===undefined?'catalog_receipt_missing':'catalog_receipt_malformed');
+  if(wrapper===undefined&&raw===undefined)result.status='missing';
+  return result;
+ }
+ result.catalogReadReceipt=Object.fromEntries(keys.map(key=>[key,wrapper[key]]));
+ result.runtimeMatchesExpected=typeof wrapper.runtimeSha==='string'&&typeof expectedRelease==='string'&&receiptHash(expectedRelease,40)
+  ?wrapper.runtimeSha===expectedRelease:null;
+ if(!Array.isArray(raw)){omissions.push(raw===undefined?'source_receipts_missing':'source_receipts_malformed');return result;}
+ const identities=new Set();
+ for(const item of raw.slice(0,SOURCE_READ_LIMIT)){
+  const receipt=copySourceReadReceipt(item);
+  if(!receipt){omissions.push('source_receipt_malformed');continue;}
+  if(identities.has(receipt.readId)){omissions.push('source_receipt_duplicate');continue;}
+  identities.add(receipt.readId);result.sourceReadReceipts.push(receipt);
+ }
+ if(raw.length>SOURCE_READ_LIMIT)omissions.push('source_receipt_limit');
+ if(raw.length!==wrapper.sourceReadCalls)omissions.push('source_read_calls_mismatch');
+ if(typeof payload.sourceReadReceiptsLimited!=='boolean')omissions.push('source_receipts_limited_unknown');
+ else if(payload.sourceReadReceiptsLimited)omissions.push('source_receipts_limited');
+ result.omittedReceipts=raw.length-result.sourceReadReceipts.length;
+ result.sourceReadReceiptsLimited=payload.sourceReadReceiptsLimited!==false||omissions.length>0;
+ result.omissions=[...new Set(omissions)];
+ result.status=result.sourceReadReceiptsLimited?'partial':'recorded';
+ return result;
+ }catch{
+  return {status:'omitted',catalogReadReceipt:null,runtimeMatchesExpected:null,sourceReadReceipts:[],
+   sourceReadReceiptsLimited:true,omittedReceipts:null,omissions:['source_evidence_malformed']};
+ }
+}
+
+export function recordJapanResponse(report,stage,response,expectedRelease){
+ const observed={stage,...japanResponseObservation(response.data,response.status),...japanResponseTransport(response),
+  sourceReadEvidence:japanSourceReadEvidence(response.data,expectedRelease)};
+ (report.checks.responses??=[]).push(observed);
+ return observed;
+}
+
 export function verifyJapanWarmPage(first,second){
  need((first.observedAt||first.generationId)===(second.observedAt||second.generationId)
   &&JSON.stringify(first.items.map(row=>row.id))===JSON.stringify(second.items.map(row=>row.id)),'warm_changed');
@@ -293,7 +448,8 @@ async function readJson(context,url){
  need(url==='/api/health'||url===PLAIN||url===POWER||url===PETROL_POWER||url===PETROL_POWER_NEXT||url===BRAND_DIRECTORY||continuation,'api_scope');
  const started=Date.now();
  const response=await context.request.get(ORIGIN+url,{timeout:45_000,maxRedirects:0,headers:{'Cache-Control':'no-cache'}});
- return {status:response.status(),data:await response.json().catch(()=>null),durationMs:Date.now()-started,requestedAt:started};
+ const data=await response.json().catch(()=>null),receivedAt=Date.now();
+ return {status:response.status(),data,headers:response.headers(),durationMs:receivedAt-started,requestedAt:started,receivedAt};
 }
 
 export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,outputFile,playwrightModule,chromeBin,codeScope=SCOPE}){
@@ -316,6 +472,11 @@ export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,out
  };
  const health=async()=>{
   const value=await readJson(context,'/api/health');
+  const observation={stage:report.checks.health?.length?'after':'before',...japanResponseTransport(value),
+   status:value.status,ok:typeof value.data?.ok==='boolean'?value.data.ok:null,
+   releaseSha:typeof value.data?.releaseSha==='string'&&/^[a-f0-9]{40}$/.test(value.data.releaseSha)?value.data.releaseSha:null,
+   calculationVersion:typeof value.data?.calculationVersion==='string'&&/^[a-f0-9]{64}$/.test(value.data.calculationVersion)?value.data.calculationVersion:null};
+  (report.checks.health??=[]).push(observation);
   need(value.status===200&&value.data?.ok===true&&value.data.releaseSha===releaseSha,'release_changed');
   need(value.data.calculationVersion==='4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90','calculation_changed');
  };
@@ -333,7 +494,7 @@ export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,out
   for(let index=0;index<2;index++){
    stage=index?'plain_warm':'plain_first';report.explicitJapanApiRequests++;
    const response=await readJson(context,PLAIN);
-   report.checks.responses.push({stage,...japanResponseObservation(response.data,response.status),durationMs:response.durationMs});
+   recordJapanResponse(report,stage,response,releaseSha);
    const observation=verifyJapanPage(response.data,response.status);
    report.checks.freshness.observations.push({...observation,durationMs:response.durationMs,
     sourceObservedDuringRequest:Date.parse(observation.observedAt)>=response.requestedAt-1000});
@@ -344,13 +505,14 @@ export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,out
    usabilityPages.push(plain[0]);
    stage='brand_directory_api';report.explicitJapanApiRequests++;
    const directory=await readJson(context,BRAND_DIRECTORY);
+   recordJapanResponse(report,stage,directory,releaseSha);
    brandDirectory=verifyJapanBrandDirectory(directory.data,directory.status);
    report.checks.brandDirectory={makes:brandDirectory.makes.length,complete:true,observedAt:brandDirectory.observedAt,
     durationMs:directory.durationMs};
   }
   stage='power_api';report.explicitJapanApiRequests++;
   const power=await readJson(context,POWER);
-  report.checks.responses.push({stage,...japanResponseObservation(power.data,power.status),durationMs:power.durationMs});
+  recordJapanResponse(report,stage,power,releaseSha);
   report.checks.power={...verifyJapanPage(power.data,power.status),...verifyJapanPowerPage(power.data),durationMs:power.durationMs};
   report.japanPowerApiPassed=true;
   if(usability)usabilityPages.push(power.data);
@@ -504,7 +666,7 @@ export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,out
    }
    report.explicitJapanApiRequests++;
    let filtered=await readJson(context,PETROL_POWER);
-   report.checks.responses.push({stage,...japanResponseObservation(filtered.data,filtered.status),durationMs:filtered.durationMs});
+   recordJapanResponse(report,stage,filtered,releaseSha);
    const aggregate={...verifyJapanPage(filtered.data,filtered.status),...verifyJapanPowerPage(filtered.data)};
    const petrolFirst=filtered.data;
    if(usability)usabilityPages.push(petrolFirst);
@@ -530,7 +692,7 @@ export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,out
    const nextUrl=new URL(view.url());
    need(japanPetrolPowerUrl(nextUrl.href,2),'petrol_page_two_query');
    report.explicitJapanApiRequests++;filtered=await readJson(context,usability?japanPetrolPowerPageApi(nextUrl.href):PETROL_POWER_NEXT);
-   report.checks.responses.push({stage,...japanResponseObservation(filtered.data,filtered.status),durationMs:filtered.durationMs});
+   recordJapanResponse(report,stage,filtered,releaseSha);
    const nextAggregate={...verifyJapanPage(filtered.data,filtered.status),...verifyJapanPowerPage(filtered.data,2)};
    need(filtered.data.items.every(row=>row.fuel==='petrol'&&!firstIds.has(row.id)),'petrol_page_two_rows');
    for(const row of filtered.data.items){

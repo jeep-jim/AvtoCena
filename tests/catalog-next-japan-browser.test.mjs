@@ -1,6 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import os from 'node:os';
+import {createHash,randomUUID} from 'node:crypto';
 import {japanReleaseBinding,verifyJapanPage,verifyJapanWarmPage,verifyJapanPowerPage,japanVerificationRequestScope,installReadFence,japanResponseObservation,
+ japanResponseHeaders,japanSourceReadEvidence,recordJapanResponse,runJapanBrowserAcceptance,
  japanCalculationReadGrant,checkedJapanCalculationRead,verifyJapanDeliveredCalculation,japanPetrolPowerUrl,verifyJapanFullPage,verifyJapanKnownPowerOrder,verifyJapanVisibleVehiclePolicy,verifyJapanBrandDirectory,japanPetrolPowerPageApi}
  from '../scripts/catalog-next/japan-browser-acceptance.mjs';
 
@@ -11,6 +16,16 @@ const unknown={id:'ajes-stats-unknown3',market:'japan',japanPowerUnknown:true};
 const copy=value=>structuredClone(value);
 function page(){return {ok:true,stale:false,observedAt:new Date(now-1000).toISOString(),items:copy([local,supplier,unknown]),received:3,
  hasMore:true,total:null,countSummary:{total:600000,upperBound:true},powerFilterSummary:{shown:3,localPower:1,supplierPower:1,unknownPower:1}};}
+const iso=ms=>new Date(ms).toISOString();
+const receiptId=n=>'10000000-0000-4000-8000-'+String(n).padStart(12,'0');
+const sourceReceipt=(n=1)=>({version:1,readId:receiptId(n),runtimeSha:release,
+ readStartedAt:iso(now-500),readFinishedAt:iso(now-100),table:'stats',kind:'list',page:1,pageSize:48,
+ canonicalQuerySha256:'d'.repeat(64),wireQuerySha256:'e'.repeat(64),disposition:'source_recovery',sourceAttempted:true,
+ reason:'empty_response',sourceAttempt:{startedAt:iso(now-400),finishedAt:iso(now-200),httpStatus:200}});
+function receiptPayload(receipts=[sourceReceipt()]){
+ return {catalogReadReceipt:{version:1,readId:receiptId(999),runtimeSha:release,readStartedAt:iso(now-600),
+  readFinishedAt:iso(now),sourceReadCalls:receipts.length},sourceReadReceipts:receipts,sourceReadReceiptsLimited:false};
+}
 
 test('Japan verification is bound to the new source, nonce and existing China generation',()=>{
  const oracle={version:1,runtimeSha:release,expectedGeneration:'gen_china_45655051136_1',generationManifestSha256:manifest};
@@ -52,6 +67,146 @@ test('missing or wrongly typed response metadata is recorded as unknown, never a
  assert.deepEqual(japanResponseObservation(null,undefined),empty);
  assert.deepEqual(japanResponseObservation({ok:'true',items:{},received:'24',observedAt:'invalid',
   stale:'false',partial:0,interrupted:'false',scanLimited:1,hasMore:'true',total:-1},'200'),empty);
+});
+
+test('HTTP diagnostics keep bounded cache directives, opaque ETag fingerprints and proxy protocols only',()=>{
+ const etag='W/"opaque-validator-secret"';
+ const result=japanResponseHeaders({'cache-control':'private, max-age=15, stale-while-revalidate=30, internal-secret=do-not-copy',
+  age:'12',etag,via:'1.1 internal-proxy-secret (internal-comment-secret), 2 edge-secret',
+  'set-cookie':'session-cookie-secret','server':'server-secret','authorization':'credential-secret'});
+ assert.deepEqual(result,{cacheControl:'private, max-age=15, stale-while-revalidate=30',ageSeconds:12,
+  etag:{weak:true,sha256:createHash('sha256').update(etag).digest('hex')},via:{hops:2,protocols:['1.1','2']},omitted:['cache-control']});
+ for(const secret of ['opaque-validator-secret','internal-secret','internal-proxy-secret','internal-comment-secret','edge-secret',
+  'session-cookie-secret','server-secret','credential-secret','set-cookie','authorization'])assert.equal(JSON.stringify(result).includes(secret),false);
+});
+
+test('malformed and oversized headers are omitted without reflecting their contents',()=>{
+ const result=japanResponseHeaders({'cache-control':'public, token=header-secret\r\nSet-Cookie: header-secret',age:'2147483648',
+  etag:'header-secret',via:'1.1 '+ 'header-secret'.repeat(1000),'set-cookie':'header-secret'});
+ assert.deepEqual(result,{omitted:['cache-control','age','etag','via']});
+ assert.deepEqual(japanResponseHeaders({'cache-control':Array(17).fill('public').join(','),age:'-1',etag:'"bad\nsecret"',via:'garbage-secret'}),
+  {omitted:['cache-control','age','etag','via']});
+ assert.deepEqual(japanResponseHeaders(null),{omitted:[]});
+});
+
+test('source evidence retains current reads and a safe historical cooldown origin without relabelling attempts',()=>{
+ const attempted=sourceReceipt(),cached={...sourceReceipt(2),disposition:'saved_cache',sourceAttempted:false,sourceAttempt:null,reason:null};
+ const origin={runtimeSha:'f'.repeat(40),table:'stats',kind:'list',page:1,pageSize:48,
+  canonicalQuerySha256:attempted.canonicalQuerySha256,wireQuerySha256:attempted.wireQuerySha256,
+  attemptStartedAt:iso(now-30000),attemptFinishedAt:iso(now-29000),httpStatus:200,reason:'empty_response'};
+ const cooldown={...cached,readId:receiptId(3),disposition:'cooldown_recovery',reason:'empty_response',cooldownOrigin:origin};
+ const unknown={...cached,readId:receiptId(4),disposition:'shared_or_cached',sourceAttempted:null};
+ const result=japanSourceReadEvidence(receiptPayload([attempted,cached,cooldown,unknown]),release);
+ assert.equal(result.status,'recorded');assert.equal(result.runtimeMatchesExpected,true);assert.equal(result.omittedReceipts,0);
+ assert.deepEqual(result.sourceReadReceipts,[attempted,cached,cooldown,unknown]);
+ assert.deepEqual(result.omissions,[]);assert.equal(result.sourceReadReceiptsLimited,false);
+ assert.equal(japanSourceReadEvidence(receiptPayload(), 'f'.repeat(40)).runtimeMatchesExpected,false);
+ const unavailableRuntime=receiptPayload();unavailableRuntime.catalogReadReceipt.runtimeSha=null;
+ assert.equal(japanSourceReadEvidence(unavailableRuntime,release).runtimeMatchesExpected,null);
+ const tooLarge=sourceReceipt();tooLarge.reason='query_too_large';tooLarge.sourceAttempt.httpStatus=414;
+ assert.equal(japanSourceReadEvidence(receiptPayload([tooLarge]),release).sourceReadReceipts[0].reason,'query_too_large');
+});
+
+test('empty validation marks a separate COUNT failure without relabelling the recorded LIST attempt',()=>{
+ const receipt={...sourceReceipt(),reason:'invalid_response',emptyValidation:true};
+ const result=japanSourceReadEvidence(receiptPayload([receipt]),release);
+ assert.equal(result.status,'recorded');
+ assert.equal(result.sourceReadReceipts[0].emptyValidation,true);
+ assert.equal(result.sourceReadReceipts[0].kind,'list');
+ assert.equal(result.sourceReadReceipts[0].sourceAttempt.httpStatus,200);
+ assert.equal(result.sourceReadReceipts[0].reason,'invalid_response');
+ assert.equal(Object.hasOwn(japanSourceReadEvidence(receiptPayload(),release).sourceReadReceipts[0],'emptyValidation'),false);
+ for(const value of [false,'true',1,null,{private:'empty-validation-secret'}]){
+  const omitted=japanSourceReadEvidence(receiptPayload([{...receipt,emptyValidation:value}]),release);
+  assert.deepEqual(omitted.sourceReadReceipts,[]);assert.deepEqual(omitted.omissions,['source_receipt_malformed']);
+  assert.equal(JSON.stringify(omitted).includes('empty-validation-secret'),false);
+ }
+});
+
+test('unknown schema, private fields and malformed receipt values never reach the report',()=>{
+ for(const change of [r=>r.version=2,r=>r.readId='visitor-secret',r=>r.runtimeSha='runtime-secret',
+  r=>r.reason='private-provider-secret',r=>r.endpoint='https://supplier-secret/?password=credential-secret',
+  r=>r.sourceAttempt.body='supplier-body-secret',r=>r.sourceAttempt.httpStatus='200',
+  r=>r.readStartedAt='2026-11-26',r=>r.sourceAttempt.startedAt=iso(now-1000),r=>r.sourceAttempted=false,
+  r=>r.pageSize=49,r=>r.canonicalQuerySha256='select private-commercial-sql',r=>r.table='china']){
+  const value=sourceReceipt();change(value);
+  const result=japanSourceReadEvidence(receiptPayload([value]),release);
+  assert.equal(result.status,'partial');assert.equal(result.omittedReceipts,1);assert.deepEqual(result.sourceReadReceipts,[]);
+  assert.deepEqual(result.omissions,['source_receipt_malformed']);
+  assert.doesNotMatch(JSON.stringify(result),/visitor-secret|runtime-secret|private-provider-secret|supplier-secret|credential-secret|supplier-body-secret|private-commercial-sql/);
+ }
+ const value=receiptPayload();value.catalogReadReceipt.private='wrapper-secret';
+ const result=japanSourceReadEvidence(value,release);
+ assert.equal(result.catalogReadReceipt,null);assert.deepEqual(result.sourceReadReceipts,[]);
+ assert.deepEqual(result.omissions,['catalog_receipt_malformed']);assert.equal(JSON.stringify(result).includes('wrapper-secret'),false);
+ const cooldown=sourceReceipt();cooldown.disposition='cooldown_recovery';cooldown.sourceAttempted=false;cooldown.sourceAttempt=null;
+ cooldown.cooldownOrigin={runtimeSha:release,table:'stats',kind:'list',page:1,pageSize:48,
+  canonicalQuerySha256:'d'.repeat(64),wireQuerySha256:'e'.repeat(64),attemptStartedAt:iso(now-1000),
+  attemptFinishedAt:iso(now-900),httpStatus:200,reason:'empty_response',clientIp:'203.0.113.7'};
+ const hidden=japanSourceReadEvidence(receiptPayload([cooldown]),release);
+ assert.deepEqual(hidden.sourceReadReceipts,[]);assert.equal(JSON.stringify(hidden).includes('203.0.113.7'),false);
+ const poisoned=sourceReceipt();Object.defineProperty(poisoned,'sourceAttempt',{get(){throw Error('getter-private-secret');}});
+ const safelyOmitted=japanSourceReadEvidence(receiptPayload([poisoned]),release);
+ assert.equal(safelyOmitted.status,'omitted');assert.deepEqual(safelyOmitted.omissions,['source_evidence_malformed']);
+ assert.equal(JSON.stringify(safelyOmitted).includes('getter-private-secret'),false);
+});
+
+test('receipt omission is explicit and at most eight current source observations are retained',()=>{
+ assert.deepEqual(japanSourceReadEvidence({},release),{status:'missing',catalogReadReceipt:null,runtimeMatchesExpected:null,
+  sourceReadReceipts:[],sourceReadReceiptsLimited:true,omittedReceipts:null,omissions:['catalog_receipt_missing']});
+ const receipts=Array.from({length:1000},(_,i)=>sourceReceipt(i+1)),value=receiptPayload(receipts);
+ value.catalogReadReceipt.sourceReadCalls=8;
+ const result=japanSourceReadEvidence(value,release);
+ assert.equal(result.sourceReadReceipts.length,8);assert.equal(result.omittedReceipts,992);assert.equal(result.sourceReadReceiptsLimited,true);
+ assert.deepEqual(result.omissions,['source_receipt_limit','source_read_calls_mismatch']);
+ assert.equal(result.sourceReadReceipts.at(-1).readId,receiptId(8));
+ const duplicate=japanSourceReadEvidence(receiptPayload([sourceReceipt(),sourceReceipt()]),release);
+ assert.equal(duplicate.sourceReadReceipts.length,1);assert.deepEqual(duplicate.omissions,['source_receipt_duplicate']);
+ const absent=receiptPayload();delete absent.sourceReadReceipts;
+ assert.deepEqual(japanSourceReadEvidence(absent,release).omissions,['source_receipts_missing']);
+ const wrongType=receiptPayload();wrongType.sourceReadReceipts='receipt-secret';
+ assert.deepEqual(japanSourceReadEvidence(wrongType,release).omissions,['source_receipts_malformed']);
+});
+
+test('new diagnostic evidence cannot turn a stale page into a passing page',()=>{
+ const payload={...page(),...receiptPayload(),stale:true,partial:true,scanLimited:true},report={checks:{}};
+ recordJapanResponse(report,'plain_first',{data:payload,status:200,requestedAt:now-50,receivedAt:now,
+  durationMs:50,headers:{'cache-control':'private, max-age=15'}},release);
+ assert.equal(report.checks.responses[0].sourceReadEvidence.status,'recorded');
+ assert.equal(report.checks.responses[0].requestedAt,iso(now-50));assert.equal(report.checks.responses[0].receivedAt,iso(now));
+ assert.throws(()=>verifyJapanPage(payload,200,now),/japan_browser_unavailable_or_stale/);
+});
+
+test('the real reporter writes request times and sanitized receipt before its stale failure, without network',async t=>{
+ t.mock.timers.enable({apis:['Date'],now});
+ const directory=await fs.mkdtemp(path.join(os.tmpdir(),'japan-receipt-report-'));
+ const oraclePath=path.join(directory,'oracle.json'),outputFile=path.join(directory,'report.json'),fixtureKey='receipt-'+randomUUID();
+ const calls=[],closed=[];
+ const payload={...page(),...receiptPayload(),stale:true,partial:true,scanLimited:true,received:48,
+  supplierUrl:'https://source-secret/?password=source-secret',visitorIp:'203.0.113.8'};
+ const context={route:async()=>{},close:async()=>{closed.push('context');},request:{get:async(url,options)=>{
+  calls.push({url,options});t.mock.timers.tick(17);
+  return {status:()=>200,headers:()=>({'cache-control':'private, max-age=15',etag:'"validator-secret"',via:'1.1 proxy-secret',
+   'set-cookie':'cookie-secret'}),json:async()=>{t.mock.timers.tick(3);return url.endsWith('/api/health')
+    ?{ok:true,releaseSha:release,calculationVersion:'4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90',private:'health-secret'}:payload;}};
+ }}};
+ globalThis[fixtureKey]={launch:async()=>({newContext:async()=>context,close:async()=>{closed.push('browser');}})};
+ try{
+  await fs.writeFile(oraclePath,JSON.stringify({version:1,runtimeSha:release,expectedGeneration:'gen_china_45655051136_1',generationManifestSha256:manifest}));
+  const playwrightModule='data:text/javascript;base64,'+Buffer.from('export const chromium=globalThis['+JSON.stringify(fixtureKey)+'];').toString('base64');
+  const report=await runJapanBrowserAcceptance({oraclePath,releaseSha:release,nonce,outputFile,playwrightModule,codeScope:'catalog-japan-usability-v1'});
+  assert.equal(report.passed,false);assert.deepEqual(report.error,{stage:'plain_first',code:'japan_browser_unavailable_or_stale',timeout:false});
+  const saved=JSON.parse(await fs.readFile(outputFile,'utf8'));assert.deepEqual(saved,report);
+  assert.equal(saved.checks.health[0].releaseSha,release);assert.equal(saved.checks.health[0].requestedAt,iso(now));
+  const observed=saved.checks.responses[0];
+  assert.equal(observed.requestedAt,iso(now+20));assert.equal(observed.receivedAt,iso(now+40));assert.equal(observed.durationMs,20);
+  assert.equal(observed.sourceReadEvidence.sourceReadReceipts[0].wireQuerySha256,'e'.repeat(64));
+  assert.equal(observed.stale,true);assert.equal(observed.scanLimited,true);assert.equal(saved.explicitJapanApiRequests,1);
+  assert.equal(calls.length,2);assert.ok(calls[0].url.endsWith('/api/health'));assert.ok(calls[1].url.includes('/api/catalog/search?'));
+  for(const call of calls)assert.deepEqual(call.options,{timeout:45000,maxRedirects:0,headers:{'Cache-Control':'no-cache'}});
+  assert.doesNotMatch(JSON.stringify(saved),/source-secret|203\.0\.113\.8|validator-secret|proxy-secret|cookie-secret|health-secret/);
+  assert.deepEqual(closed,['context','browser']);
+ }finally{delete globalThis[fixtureKey];await fs.rm(directory,{recursive:true,force:true});}
 });
 
 test('integer supplier hp, local precedence and unknown labels preserve honest filtering',()=>{

@@ -124,8 +124,8 @@ const usabilityPlan=()=>({codeScope:'catalog-japan-usability-v1',retainedRuntime
 test('Japan usability starts from accepted077 and requires its complete frozen file set',()=>{
  assert.equal(JAPAN_USABILITY_RETAINED_RUNTIME,'077cbb17626ab0c64e7f06db055fef9252ad21c0');
  assert.ok(Object.isFrozen(JAPAN_USABILITY_CODE_PATHS));
- assert.equal(JAPAN_USABILITY_CODE_PATHS.length,41);
- assert.equal(digest(JAPAN_USABILITY_CODE_PATHS),'d8eb5d98b15ab782488f7e1a266abb1096af86e5f5acf5b98be55f6f9989ab6a');
+ assert.equal(JAPAN_USABILITY_CODE_PATHS.length,43);
+ assert.equal(digest(JAPAN_USABILITY_CODE_PATHS),'940e6108c9732fe9695db0bd63e764cd618ab6b99ed1562135412e11225acb59');
  assert.equal(new Set(JAPAN_USABILITY_CODE_PATHS).size,JAPAN_USABILITY_CODE_PATHS.length);
  assert.equal(checkedCatalogCodeScope(usabilityPlan()),'catalog-japan-usability-v1');
  assert.equal(checkedCatalogCodeScope({...usabilityPlan(),runtimeFiles:[...JAPAN_USABILITY_CODE_PATHS].reverse()}),'catalog-japan-usability-v1');

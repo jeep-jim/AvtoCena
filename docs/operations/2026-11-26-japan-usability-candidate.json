@@ -1,0 +1,76 @@
+{
+  "version": 1,
+  "status": "candidate_not_published",
+  "updatedAt": "2026-11-26T14:34:59.977980+00:00",
+  "runtimeSha": "cf932b18644b5317c142ffdeb8f1586526644012",
+  "runtimeTree": "17ac519197d8b91e215d25fc0041a6990088c3f3",
+  "retainedRuntime": "077cbb17626ab0c64e7f06db055fef9252ad21c0",
+  "codeScope": "catalog-japan-usability-v1",
+  "scopePaths": 43,
+  "scopePathsSha256": "940e6108c9732fe9695db0bd63e764cd618ab6b99ed1562135412e11225acb59",
+  "runtimeDiffSha256": "222bd2263e3a98771f9545327a2c3d18f6d8d45201c7c381da94dff334954d18",
+  "protectedPricingPathsUnchanged": true,
+  "localChecks": {
+    "nativePassed": 492,
+    "controllerPassed": 1015,
+    "webTypecheckPassed": true,
+    "engineTypecheckPassed": true,
+    "sourceRestored": true,
+    "compatibilityPatchApplied": false
+  },
+  "ci": {
+    "status": "pending",
+    "priorSource": "af4a87aae663d965c377820bcc101e80b9b16974",
+    "priorRun": 45825628217
+  },
+  "failedReleases": [
+    {
+      "run": 45817857693,
+      "runtime": "7f1231f99129cc071bdba48462d17f6eae78c5ad",
+      "status": "rolled_back",
+      "reason": "plain_first stale/partial",
+      "artifact": 15116774188,
+      "sha256": "dbedcd6a6febadc7557aa4bad28eb4bab129b5c694fabe304807016453b62016"
+    },
+    {
+      "run": 45826537390,
+      "runtime": "fe4439d89ee10d022e3d122963aa9dbb9a3ecfd5",
+      "status": "failed_before_switch",
+      "reason": "shared home HTTP timeout90.3045s; snapshotProjection83142.9ms",
+      "artifact": 15121151581,
+      "sha256": "882f2ed8aaf6deab8687af83612cbf8d94b9012e78b457db9381c295933b2b4e"
+    },
+    {
+      "run": 45830911931,
+      "runtime": "fe4439d89ee10d022e3d122963aa9dbb9a3ecfd5",
+      "marker": "904b9e301592f9ac8cd5f8d1b8416606f5600d04",
+      "status": "rolled_back",
+      "serverChecksPassed": true,
+      "finishedAt": "2026-11-26T14:01:49.492Z",
+      "reason": "plain_first stale/partial",
+      "observedAt": "2026-11-26T11:19:52.952Z",
+      "shown": 24,
+      "received": 48,
+      "durationMs": 1052,
+      "leaseReleased": true,
+      "retentionPreserved": true,
+      "recovered": true,
+      "artifact": 15125360366,
+      "sha256": "439f43d0bc05594f2a7bc6c92a0d114b2ae5b193431bdea0e570c23631bb7003"
+    }
+  ],
+  "sourceFailureCause": "Unresolved: fixed shared failure slots are not correlated to this catalog read; query sizes/hashes differ. Missing record is not proof of no attempt.",
+  "diagnosticChange": {
+    "perInvocationIdentity": true,
+    "runtimeIdentity": true,
+    "canonicalAndWireSqlHashesOnly": true,
+    "privateSqlIpUrlsBodiesExcluded": true,
+    "sourceAttemptOrCacheCooldownQueue": true,
+    "unknownSharedProvenanceNullable": true,
+    "exactEmptyCountValidationMarker": true,
+    "currentSourceReadLimit": 8,
+    "timestampsPreservedBeforeFreshnessCheck": true,
+    "additionalSourceReads": 0,
+    "gatesTtlQuotasChanged": false
+  }
+}
