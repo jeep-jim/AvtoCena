@@ -10,7 +10,7 @@ import {verifyFrozenSpeedBaselines} from '../verify-frozen-speed-baselines.mjs';
 import {verifyServingCompatibility} from './serving-compatibility.mjs';
 import {createPrivateChinaGenerationStorage} from './generation-storage.mjs';
 import {restorePrivateChinaGeneration} from './private-generation.mjs';
-import {openChinaSshSession} from './release-ssh.mjs';
+import {openChinaSshSession, checkedServerSpeedReport, checkedHomePhaseTimingReport} from './release-ssh.mjs';
 import {verifyChinaPhotoCodeRuntime} from './photo-code-scope.mjs';
 import {verifyChinaImageStorageProof} from './build-release-image.mjs';
 import {validateChinaGenerationReference, validateChinaAcceptedState, validateChinaPublicationIntent,
@@ -396,7 +396,13 @@ export function createChinaDailyRelease({root, servingRoot, pricingPlan, serving
       };
     } catch (error) {
       await stop(session); await fs.rm(directory, {recursive: true, force: true});
-      throw Error(/^china_[a-z0-9_]+$/.test(error?.message ?? '') ? error.message : 'china_daily_release_stage_failed');
+      const failure = Error(/^china_[a-z0-9_]+$/.test(error?.message ?? '') ? error.message : 'china_daily_release_stage_failed');
+      // Optional public observations must survive normalization without ever
+      // replacing the gate failure or changing the rollback path.
+      try { if (error?.serverSpeed !== undefined) failure.serverSpeed = checkedServerSpeedReport(error.serverSpeed); } catch {}
+      try { if (error?.homePhaseTiming !== undefined)
+        failure.homePhaseTiming = checkedHomePhaseTimingReport(error.homePhaseTiming, {runtimeSha: candidate.runtimeSha, nonce}); } catch {}
+      throw failure;
     }
   }
 

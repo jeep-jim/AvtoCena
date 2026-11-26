@@ -1,6 +1,7 @@
 import {randomBytes} from 'node:crypto';
 import {createChinaState, createChinaStateStorage, validateChinaCodeTransition,
   validateChinaGenerationReference, inspectChinaPublicationState} from './china-state.mjs';
+import {checkedServerSpeedReport, checkedHomePhaseTimingReport} from './release-ssh.mjs';
 
 const need = (value, code) => { if (!value) throw Error('china_code_' + code); };
 const safeCode = error => /^china_[a-z0-9_]{1,150}$/.test(error?.message ?? '') ? error.message : 'china_code_failed';
@@ -179,6 +180,9 @@ export async function runChinaCodeCycle({plan, imageId, invocation, owner, stora
       } catch { report.status = 'needs_reconciliation'; }
     } else report.status = lease ? 'needs_reconciliation' : 'failed';
     Object.assign(report, {errorCode: originalFailure, finishedAt: at()});
+    try { if (error?.serverSpeed !== undefined) report.serverSpeedFailure = checkedServerSpeedReport(error.serverSpeed); } catch {}
+    try { if (error?.homePhaseTiming !== undefined)
+      report.homePhaseTiming = checkedHomePhaseTimingReport(error.homePhaseTiming, {runtimeSha: plan.runtimeSha, nonce}); } catch {}
     const failure = Error(originalFailure); failure.report = report; throw failure;
   } finally {
     stopHeartbeat?.(); await queue;

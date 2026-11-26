@@ -14,8 +14,9 @@ const time = value => {
   need(typeof value === 'string' && /^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(?:\.\d{1,6})?Z$/.test(value)
     && Number.isFinite(Date.parse(value)), 'clock'); return Date.parse(value);
 };
-const localDate = value => new Intl.DateTimeFormat('en-CA', {timeZone: 'Asia/Krasnoyarsk',
-  year: 'numeric', month: '2-digit', day: '2-digit'}).format(new Date(time(value)));
+// The fixed cron is 0 14 * * *: each daily window starts at 21:00 Krasnoyarsk.
+const DAILY_INTERVAL_MS = 24 * 60 * 60 * 1000, DAILY_START_UTC_MS = 14 * 60 * 60 * 1000;
+const dailyWindow = value => Math.floor((time(value) - DAILY_START_UTC_MS) / DAILY_INTERVAL_MS);
 const safeCode = error => /^china_(?:daily|state|prepare|source|generation|private|gc)_[a-z0-9_]{1,120}$/.test(error?.message ?? '')
   ? error.message : 'china_daily_failed';
 const defaultHeartbeat = (fn, interval) => { const timer = setInterval(fn, interval); timer.unref?.(); return () => clearInterval(timer); };
@@ -24,12 +25,11 @@ export function chinaDailyIsDue(reference, at) {
   const accepted = validateChinaGenerationReference(reference, {requireAccepted: true});
   const proof = JSON.parse(Buffer.from(accepted.proof.hostReceiptBase64, 'base64'));
   need(time(at) >= time(proof.acceptedAt), 'clock_before_acceptance');
-  // Freshness is determined by the SOURCE snapshot, not by the day an older
-  // snapshot happened to be accepted on the website. First accepted China has
-  // a 24 November source and 25 November acceptance, so that evening is due.
-  // The accepted-at guard above still prevents a clock moving behind acceptance.
+  // A source observed after midnight still satisfies the preceding 21:00 window,
+  // but must not suppress the next evening's update. Acceptance of an older
+  // snapshot does not make its source fresh; both clock guards remain mandatory.
   need(time(at) >= time(accepted.sourceObservedAt), 'clock_before_source');
-  return localDate(at) !== localDate(accepted.sourceObservedAt);
+  return dailyWindow(at) !== dailyWindow(accepted.sourceObservedAt);
 }
 
 function preparedReference(prepared, owner, previous, plan) {

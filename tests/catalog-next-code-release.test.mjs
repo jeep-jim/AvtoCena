@@ -7,6 +7,7 @@ import {createHash} from 'node:crypto';
 import {gunzipSync} from 'node:zlib';
 import {createChinaDailyRelease, checkedChinaCodePreflight} from '../scripts/catalog-next/daily-release.mjs';
 import {createChinaState} from '../scripts/catalog-next/china-state.mjs';
+import {runChinaCodeCycle} from '../scripts/catalog-next/code-controller.mjs';
 
 const hash = raw => createHash('sha256').update(raw).digest('hex');
 const ordered = value => Array.isArray(value) ? value.map(ordered) : value && typeof value === 'object'
@@ -118,7 +119,10 @@ async function fixture(t, {combined = false} = {}) {
         return {started: true, release: nextSha, generationId: f.current.generationId};
       }
       if (method === 'functional') return {functionalPassed: true, cases: f.oracle.cases};
-      if (method === 'speed') return {speedPassed: true};
+      if (method === 'speed') {
+        if (flags.speedFailure) throw flags.speedFailure;
+        return {speedPassed: true};
+      }
       if (method === 'switch') return {switched: true, release: nextSha, nonce: hostPlan.nonce};
       if (method === 'browser_evidence') {
         browserBytes = {speed: Buffer.from(args.speedBase64, 'base64'), details: Buffer.from(args.detailsBase64, 'base64')};
@@ -181,15 +185,20 @@ async function fixture(t, {combined = false} = {}) {
   return {...f, directory, imagePath, imageReceipt, imageReceiptRaw, storagePath, storageProof, calls, uploaded, release, flags};
 }
 
-async function reservedStage(f) {
-  const token = 'b'.repeat(32), absent = {found: false, etag: null, sha256: null, value: null};
-  const values = new Map([['accepted', f.previous]]); let serial = 1;
-  const storage = {async assertPrivateBucket() { return {verified: true}; },
+function memoryStorage(previous) {
+  const absent = {found: false, etag: null, sha256: null, value: null};
+  const values = new Map([['accepted', previous]]); let serial = 1;
+  return {async assertPrivateBucket() { return {verified: true}; },
     async read(name) { return copy(values.get(name) ?? absent); },
     async compareAndSwap(name, previous, value) {
       assert.equal((values.get(name) ?? absent).etag, previous.etag);
       values.set(name, {found: true, etag: '"fixture-' + ++serial + '"', sha256: digest(value), value: copy(value)});
     }};
+}
+
+async function reservedStage(f) {
+  const token = 'b'.repeat(32), absent = {found: false, etag: null, sha256: null, value: null};
+  const storage = memoryStorage(f.previous);
   const state = createChinaState({storage, now: () => acceptedAt});
   const lease = await state.acquireLease({previous: absent, owner: f.current.owner, nonce: token, expiresAt: '2026-11-25T10:00:00Z'});
   const stage = await f.release.stageCodeRelease({candidate: f.candidate, previous: f.previous, nonce: token, assertAuthority: async () => {}});
@@ -210,6 +219,60 @@ test('app-only adapter uploads only the new image and checks, retaining all seve
   assert.equal(f.calls.includes('switch'), false, 'stage never changes ingress before a real reservation');
   await stage.close();
 });
+
+for (const mode of ['valid', 'missing', 'private-speed', 'private-timing', 'wrong-runtime', 'wrong-nonce',
+  'speed-getter', 'timing-getter']) {
+  test('failed server gate survives both code release wrappers: ' + mode, async t => {
+    const f = await fixture(t), token = 'b'.repeat(32), storage = memoryStorage(f.previous);
+    const speed = {present: true, sha256: hash('saved speed fixture'), exitCode: 1, rejectedSamples: 0,
+      samples: [{performanceRequest: 'failed', path: '/cars?market=china', seconds: 90, errorType: 'TimeoutError'}]};
+    const timing = {version: 1, kind: 'china-home-phase-timing-v1', runtimeSha: nextSha, nonce: token,
+      logBytes: 256, logLines: 1, rejectedRows: 0, limited: false,
+      rows: [{trace: '12345678-1234-1234-1234-123456789012', phase: 'snapshot', ms: 25.4,
+        ok: true, policyDate: '2026-11-25', completedPolicyDate: '2026-11-25'}]};
+    const sourceError = Object.assign(Error('china_host_server_speed_failed'), {
+      serverSpeed: copy(speed), homePhaseTiming: copy(timing), rawOutput: 'PRIVATE_RAW_OUTPUT'});
+    if (mode === 'missing') { delete sourceError.serverSpeed; delete sourceError.homePhaseTiming; }
+    if (mode === 'private-speed') sourceError.serverSpeed.stderr = 'PRIVATE_STDERR';
+    if (mode === 'private-timing') sourceError.homePhaseTiming.rows[0].raw = 'PRIVATE_LOG';
+    if (mode === 'wrong-runtime') sourceError.homePhaseTiming.runtimeSha = oldSha;
+    if (mode === 'wrong-nonce') sourceError.homePhaseTiming.nonce = nonce;
+    if (mode.endsWith('-getter')) Object.defineProperty(sourceError,
+      mode === 'speed-getter' ? 'serverSpeed' : 'homePhaseTiming', {get() { throw Error('PRIVATE_GETTER'); }});
+    f.flags.speedFailure = sourceError;
+    let stageError, heartbeatStopped = false;
+    const expectedSpeed = ['missing', 'private-speed', 'speed-getter'].includes(mode) ? undefined : speed;
+    const expectedTiming = ['valid', 'private-speed', 'speed-getter'].includes(mode) ? timing : undefined;
+    await assert.rejects(runChinaCodeCycle({
+      plan: {version: 1, market: 'china', minimumYear: 2014, runtimeSha: nextSha,
+        retainedRuntime: oldSha, pricingRuntimeSha: pricingSha},
+      imageId: f.candidate.imageId, invocation: {version: 1, sourceSha: '9'.repeat(40)},
+      owner: {runId: '200', attempt: '1', revision: '9'.repeat(40)}, nonce: token, storage,
+      now: () => acceptedAt, scheduleHeartbeat: () => () => { heartbeatStopped = true; },
+      async stageCodeRelease(input) {
+        try { return await f.release.stageCodeRelease(input); }
+        catch (error) { stageError = error; throw error; }
+      },
+      recoverRelease: async () => assert.fail('a failed stage creates no publication reservation'),
+    }), error => {
+      assert.equal(error.message, sourceError.message); assert.equal(error.report.errorCode, sourceError.message);
+      assert.equal(stageError.message, sourceError.message); assert.notEqual(stageError, sourceError);
+      assert.deepEqual(stageError.serverSpeed, expectedSpeed); assert.deepEqual(stageError.homePhaseTiming, expectedTiming);
+      assert.deepEqual(error.report.serverSpeedFailure, expectedSpeed); assert.deepEqual(error.report.homePhaseTiming, expectedTiming);
+      if (expectedSpeed) assert.notEqual(error.report.serverSpeedFailure.samples, stageError.serverSpeed.samples);
+      if (expectedTiming) assert.notEqual(error.report.homePhaseTiming.rows, stageError.homePhaseTiming.rows);
+      assert.equal(error.report.status, 'failed'); assert.equal(error.report.completed, false);
+      assert.equal(error.report.published, false); assert.equal(error.report.leaseReleased, true);
+      assert.doesNotMatch(JSON.stringify(error.report), /PRIVATE/);
+      return true;
+    });
+    assert.equal(heartbeatStopped, true);
+    assert.deepEqual(await storage.read('accepted'), f.previous); assert.equal((await storage.read('intent')).found, false);
+    assert.deepEqual(f.calls.slice(-2), ['speed', 'abort']);
+    assert.equal(f.calls.includes('switch'), false); assert.equal(f.calls.includes('accept'), false);
+    assert.equal((await fs.readdir(f.directory)).some(name => name.startsWith('china-daily-release-')), false);
+  });
+}
 
 test('code adapter rejects changed image bytes and changed data before starting or switching a candidate', async t => {
   const f = await fixture(t);

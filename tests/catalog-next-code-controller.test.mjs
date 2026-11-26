@@ -169,6 +169,30 @@ test('browser rejection requires authentic rollback proof before restoring the e
   assert.ok((await bad.storage.read('accepted')).value.pending);
 });
 
+test('code report revalidates injected optional evidence independently without replacing the original failure', async () => {
+  for (const invalid of ['serverSpeed', 'homePhaseTiming', 'foreignTiming', 'throwingSpeed']) {
+    const f = await fixture();
+    const speed = {present: true, sha256: hash('saved speed'), exitCode: 1, rejectedSamples: 0,
+      samples: [{performanceRequest: 'failed', path: '/cars?market=china', seconds: 90, errorType: 'TimeoutError'}]};
+    const timing = {version: 1, kind: 'china-home-phase-timing-v1', runtimeSha: plan.runtimeSha, nonce: codeNonce,
+      logBytes: 0, logLines: 0, rejectedRows: 0, limited: false, rows: []};
+    const original = Object.assign(Error('china_host_server_speed_failed'), {serverSpeed: copy(speed), homePhaseTiming: copy(timing)});
+    if (invalid === 'foreignTiming') original.homePhaseTiming.nonce = seedNonce;
+    else if (invalid === 'throwingSpeed') Object.defineProperty(original, 'serverSpeed', {get() { throw Error('PRIVATE_GETTER'); }});
+    else original[invalid].privateOutput = 'PRIVATE';
+    f.afterStage = async () => { throw original; };
+    await assert.rejects(runChinaCodeCycle(f.args), error => {
+      assert.equal(error.message, original.message); assert.equal(error.report.errorCode, original.message);
+      assert.deepEqual(error.report.serverSpeedFailure, ['serverSpeed', 'throwingSpeed'].includes(invalid) ? undefined : speed);
+      assert.deepEqual(error.report.homePhaseTiming, ['homePhaseTiming', 'foreignTiming'].includes(invalid) ? undefined : timing);
+      assert.equal(error.report.status, 'failed'); assert.equal(error.report.leaseReleased, true);
+      assert.doesNotMatch(JSON.stringify(error.report), /PRIVATE/); return true;
+    });
+    assert.deepEqual(await f.storage.read('accepted'), f.first.accepted);
+    assert.deepEqual(f.events, ['preserve', 'stage']); assert.equal(f.stopped, true);
+  }
+});
+
 test('a lost host acceptance response commits the exact durable proof without staging or activating twice', async () => {
   const f = await fixture(); f.activation = 'lost-accept';
   const result = await runChinaCodeCycle(f.args);

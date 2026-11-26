@@ -34,6 +34,11 @@ function acceptance(reference, nonce, at) {
       reportSha256: hash(Buffer.concat([browserSpeedBytes, browserDetailsBytes]))}}));
   return {hostReceiptBase64: raw.toString('base64'), hostReceiptSha256: hash(raw), browserSpeedBytes, browserDetailsBytes};
 }
+function acceptedReference(sourceObservedAt, acceptedAt = sourceObservedAt) {
+  const reference = {...candidate(1), sourceObservedAt}, proof = acceptance(reference, firstNonce, acceptedAt);
+  return {...reference, proof: {kind: 'china-accepted-proof-v1', hostReceiptBase64: proof.hostReceiptBase64,
+    hostReceiptSha256: proof.hostReceiptSha256}};
+}
 function rollback(intent, at) {
   const ref = intent.value.candidate, previous = intent.value.previous.value.current;
   const raw = Buffer.from(JSON.stringify({version: 1, kind: 'china-host-rollback-v1', release: ref.runtimeSha,
@@ -233,27 +238,107 @@ test('heartbeat renews the exact lease observation during preparation and later 
   assert.equal(leases.at(-1).value.epoch, leases.at(-2).value.epoch);
 });
 
-test('daily cadence follows Krasnoyarsk day boundaries and a live foreign lease skips without mutation', async () => {
-  const ref = {...candidate(1), sourceObservedAt: '2026-11-23T17:05:00Z'}, proof = acceptance(ref, firstNonce, '2026-11-23T17:05:00Z');
-  const accepted = {...ref, proof: {kind: 'china-accepted-proof-v1', hostReceiptBase64: proof.hostReceiptBase64,
-    hostReceiptSha256: proof.hostReceiptSha256}};
-  assert.equal(chinaDailyIsDue(accepted, '2026-11-24T16:59:59Z'), false);
-  assert.equal(chinaDailyIsDue(accepted, '2026-11-24T17:00:00Z'), true);
+test('a source refreshed after midnight covers the delayed schedule but is due at the next 21:00 window', () => {
+  const accepted = acceptedReference('2026-11-25T17:34:57.542Z', '2026-11-25T19:24:32.246Z');
+  for (const [at, due] of [
+    ['2026-11-25T19:24:32.246Z', false],
+    ['2026-11-25T22:59:01.000Z', false], // Delayed run: 26 November, 05:59 Krasnoyarsk.
+    ['2026-11-26T13:59:59.999Z', false],
+    ['2026-11-26T14:00:00.000Z', true],
+    ['2026-11-26T14:00:00.001Z', true],
+  ]) assert.equal(chinaDailyIsDue(accepted, at), due, at);
+});
+
+test('source observations on the 21:00 boundary cover that window and local midnight does not start another', () => {
+  const accepted = acceptedReference('2026-11-25T14:00:00.000Z');
+  for (const [at, due] of [
+    ['2026-11-25T14:00:00.000Z', false],
+    ['2026-11-25T14:00:00.001Z', false],
+    ['2026-11-25T16:59:59.999Z', false],
+    ['2026-11-25T17:00:00.000Z', false], // Local midnight remains inside the same window.
+    ['2026-11-26T13:59:59.999Z', false],
+    ['2026-11-26T14:00:00.000Z', true],
+  ]) assert.equal(chinaDailyIsDue(accepted, at), due, at);
+  const beforeBoundary = acceptedReference('2026-11-26T13:59:59.999Z');
+  assert.equal(chinaDailyIsDue(beforeBoundary, '2026-11-26T13:59:59.999Z'), false);
+  assert.equal(chinaDailyIsDue(beforeBoundary, '2026-11-26T14:00:00.000Z'), true);
+});
+
+test('21:00 daily windows continue through month, year and leap-day boundaries', () => {
+  for (const [sourceAt, beforeBoundary, boundary] of [
+    ['2026-11-30T14:05:00Z', '2026-12-01T13:59:59.999Z', '2026-12-01T14:00:00Z'],
+    ['2026-12-31T14:05:00Z', '2027-01-01T13:59:59.999Z', '2027-01-01T14:00:00Z'],
+    ['2027-02-28T14:05:00Z', '2027-03-01T13:59:59.999Z', '2027-03-01T14:00:00Z'],
+    ['2028-02-28T14:05:00Z', '2028-02-29T13:59:59.999Z', '2028-02-29T14:00:00Z'],
+    ['2028-02-29T14:05:00Z', '2028-03-01T13:59:59.999Z', '2028-03-01T14:00:00Z'],
+  ]) {
+    const accepted = acceptedReference(sourceAt);
+    assert.equal(chinaDailyIsDue(accepted, beforeBoundary), false, beforeBoundary);
+    assert.equal(chinaDailyIsDue(accepted, boundary), true, boundary);
+  }
+  assert.equal(chinaDailyIsDue(acceptedReference('2026-11-25T14:00:00Z'), '2026-12-25T14:00:00Z'), true);
+});
+
+test('daily freshness uses the source window rather than acceptance and rejects invalid clock ordering', () => {
   // On first publication the source was still from 24 November, even though
   // acceptance happened at lunchtime on 25 November. The 21:00 local schedule
   // must refresh that older feed rather than misclassify it as already fresh.
-  const olderSource={...candidate(1),sourceObservedAt:'2026-11-24T10:22:41.417Z'};
-  const initialProof=acceptance(olderSource,firstNonce,'2026-11-25T05:38:49.555Z');
-  const justAccepted={...olderSource,proof:{kind:'china-accepted-proof-v1',
-    hostReceiptBase64:initialProof.hostReceiptBase64,hostReceiptSha256:initialProof.hostReceiptSha256}};
+  const justAccepted = acceptedReference('2026-11-24T10:22:41.417Z', '2026-11-25T05:38:49.555Z');
   assert.equal(chinaDailyIsDue(justAccepted,'2026-11-25T14:00:00Z'),true);
   assert.throws(()=>chinaDailyIsDue(justAccepted,'2026-11-24T16:59:59Z'),/clock_before_acceptance/);
+  // A valid accepted receipt cannot precede its source observation: malformed
+  // source chronology is rejected by receipt validation before the due check.
+  const futureSource = acceptedReference('2026-11-26T14:00:00Z', '2026-11-26T13:00:00Z');
+  assert.throws(() => chinaDailyIsDue(futureSource, '2026-11-26T13:30:00Z'), /china_state_host_binding/);
+});
 
+test('a live foreign lease skips daily work without mutation', async () => {
   const f = await fixture(), state = createChinaState({storage: f.storage, now: () => nextAt});
   await state.acquireLease({previous: await state.read('lease'), owner: owner(9), nonce: 'e'.repeat(32), expiresAt: '2026-11-24T13:00:00Z'});
   const count = f.storage.writes.length, result = await runChinaDailyCycle(f.args);
   assert.equal(result.status, 'lease_busy'); assert.equal(result.published, false);
   assert.equal(f.storage.writes.length, count); assert.deepEqual(f.events, []);
+});
+
+test('a fresh scheduled window skips preparation while an explicit manual cycle still publishes through the normal gates', async () => {
+  const f = await fixture();
+  await runChinaDailyCycle(f.args);
+  const prior = await f.storage.read('accepted'), events = [], nonce = 'f'.repeat(32);
+  assert.equal(chinaDailyIsDue(prior.value.current, nextAt), false);
+  const args = {...f.args, owner: owner(4), nonce,
+    async prepare(input) {
+      events.push('prepare');
+      assert.deepEqual(input.sourceSelection.generation, prior.value.current);
+      await input.assertAuthority(); return prepared(input.sourceSelection.generation, 4);
+    },
+    async stageRelease(input) {
+      events.push('stage'); assert.deepEqual(input.candidate, candidate(4));
+      assert.deepEqual(await f.storage.read('accepted'), prior);
+      await input.assertAuthority();
+      return {candidate: input.candidate,
+        async activate({intent, reservation, assertAuthority}) {
+          events.push('activate'); await assertAuthority();
+          assert.equal((await f.storage.read('accepted')).etag, reservation.etag);
+          assert.equal(intent.value.nonce, nonce);
+          return {kind: 'accepted', evidence: acceptance(input.candidate, nonce, nextAt)};
+        },
+        async close() { events.push('close'); },
+      };
+    },
+  };
+  const scheduled = await runChinaDailyCycle({...args, owner: owner(3), nonce: 'e'.repeat(32), trigger: 'schedule'});
+  assert.equal(scheduled.status, 'not_due'); assert.equal(scheduled.published, false);
+  assert.equal(scheduled.sourcePrepared, false); assert.equal(scheduled.leaseReleased, true);
+  assert.deepEqual(events, []); assert.deepEqual(await f.storage.read('accepted'), prior);
+  const manual = await runChinaDailyCycle({...args, trigger: 'manual'});
+  assert.equal(manual.status, 'accepted'); assert.equal(manual.published, true);
+  assert.equal(manual.leaseReleased, true); assert.equal(manual.applicationBuilds, 0);
+  assert.deepEqual(events, ['prepare', 'stage', 'activate', 'close']);
+  const current = (await f.storage.read('accepted')).value;
+  assert.equal(current.current.generationId, candidate(4).generationId);
+  assert.equal(current.current.runtimeSha, prior.value.current.runtimeSha);
+  assert.equal(current.current.imageId, prior.value.current.imageId);
+  assert.deepEqual(current.rollback, prior.value.current);
 });
 
 test('a prepared result with the wrong predecessor or unverified fresh source cannot reach release staging', async () => {
