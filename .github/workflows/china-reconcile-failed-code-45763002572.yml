@@ -1,0 +1,50 @@
+name: Reconcile exact failed Japan code release with durable rollback proof
+on:
+  push:
+    branches: [main]
+    paths: [.github/market-runs/china-reconcile-failed-code-45763002572.json]
+permissions:
+  contents: read
+concurrency:
+  group: catalog-next-china
+  cancel-in-progress: false
+jobs:
+  reconcile:
+    if: github.repository_id == '1289722938' && github.ref == 'refs/heads/main' && github.run_attempt == '1'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    environment: regcloud-staging
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 2
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24.22.3'
+          cache: npm
+      - name: Install reviewed controller dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Verify exact invocation and proof-bound refusal cases without credentials
+        run: |
+          node scripts/catalog-next/reconcile-failed-code-45763002572.mjs --verify
+          node --test tests/catalog-next-reconcile-failed-code-45763002572.test.mjs tests/catalog-next-china-state.test.mjs tests/catalog-next-release-ssh.test.mjs tests/readonly-marker-invocation.test.mjs tests/release-speed-guard-contract.test.mjs
+      - name: Reconcile only existing failed intent against exact durable rollback
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+          JSON_STORAGE_DRIVER: object
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_REGION: us-east-1
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+        run: node scripts/catalog-next/reconcile-failed-code-45763002572.mjs --run
+      - name: Preserve safe reconciliation evidence
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: exact-code-reconciliation
+          path: china-exact-code-reconciliation-45763002572-report.json
+          if-no-files-found: ignore
+          retention-days: 14
