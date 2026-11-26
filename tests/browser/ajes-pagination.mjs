@@ -220,13 +220,16 @@ async function runJapanCases(page,width){
  await page.getByRole('button',{name:'Показать ещё',exact:true}).click();await waitCards(47);
  assert.deepEqual(await cardIds(),expected.slice(0,47),'successful continuation resumes at the failed offset without a duplicate or a gap');
  // The tab has a saved old 23-card visit. A fresh server page with 24 must
- // replace it, not resurrect that visit merely because its query is equal.
+ // replace it in the same mounted component, not resurrect that old visit.
+ const instance=await page.locator('#root [data-catalog-batch]').first().evaluateHandle(element=>element.parentElement);
  await page.evaluate(async()=>{
   const params=new URLSearchParams(location.search);params.set('market','japan');params.set('page','1');params.delete('after');
   const result=await fetch('/api/catalog/search?'+params).then(response=>response.json());
   window.__japanRefillReplace(result);
  });
  await waitCards(24);assert.deepEqual(await cardIds(),expected.slice(0,24),'new initialPageKey excludes the saved 23-card membership');
+ assert.equal(await instance.evaluate(node=>node.isConnected&&node===document.querySelector('#root [data-catalog-batch]').parentElement),true,'same-query replacement must preserve the mounted CatalogLoadMore root');
+ await instance.dispose();
  assert.deepEqual(fixture.queries.map(q=>q.page),[1,2,2,2,1,2]);
  report.caseCount++;
 

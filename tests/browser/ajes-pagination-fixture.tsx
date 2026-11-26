@@ -26,6 +26,6 @@ function Refill(){
   }});
   return()=>{delete (window as any).__japanRefillReplace;};
  },[]);
- return <CatalogSelectionProvider><CatalogLoadMore key={current.props.initialPageKey} {...current.props} initialCards={current.items.map((offer:any)=><CatalogCard key={offer.id} offer={offer} compact dense/>)}/></CatalogSelectionProvider>;
+ return <CatalogSelectionProvider><CatalogLoadMore key={JSON.stringify(current.props.query)} {...current.props} initialCards={current.items.map((offer:any)=><CatalogCard key={offer.id} offer={offer} compact dense/>)}/></CatalogSelectionProvider>;
 }
 createRoot(document.getElementById('root')!).render(refill?<Refill/>:params.has('late')?<LateCount/>:<CatalogLoadMore query={{market,make:'Volkswagen',bodyType:'suv'}} initialPage={1} initialTotal={market==='china'?null:345} initialCount={24} initialCards={<div>Первые 24 автомобиля</div>} initialHasMore initialNextCursor={market==='china'?'6.20':undefined}/>);
