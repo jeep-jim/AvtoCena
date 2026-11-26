@@ -1,4 +1,4 @@
-name: Verify immutable Japan pagination24 source provenance
+name: Verify Japan pagination24 provenance and isolated browser fixture
 on:
   push:
     branches: [main]
@@ -14,7 +14,7 @@ jobs:
   verify:
     if: github.repository_id == '1289722938' && github.ref == 'refs/heads/main' && github.run_attempt == '1'
     runs-on: ubuntu-24.04
-    timeout-minutes: 6
+    timeout-minutes: 12
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with: {persist-credentials: false, fetch-depth: 1}
@@ -22,11 +22,34 @@ jobs:
         run: python3 -I -B -c "import ast,pathlib; ast.parse(pathlib.Path('scripts/catalog-next/freeze-japan-pagination24-source.py').read_text())"
       - name: Verify exact Git trees, eleven files and binary diff digests
         run: python3 -I -B scripts/catalog-next/freeze-japan-pagination24-source.py
-      - name: Preserve immutable source proof
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24.22.3'
+      - name: Run the exact ordinary pagination fixture in an isolated checkout
+        run: |
+          set -euo pipefail
+          FIXTURE_RUNTIME_SHA=$(python3 -c "import json; print(json.load(open('japan-pagination24-source-freeze.json'))['runtimeSha'])")
+          PAGINATION_FIXTURE_ROOT="$RUNNER_TEMP/japan-pagination-fixture-runtime"
+          git worktree add --detach "$PAGINATION_FIXTURE_ROOT" "$FIXTURE_RUNTIME_SHA"
+          cd "$PAGINATION_FIXTURE_ROOT"
+          npm ci --no-audit --no-fund
+          npm install --prefix "$RUNNER_TEMP/pagination-browser" --no-package-lock --ignore-scripts playwright@1.55.0
+          export CHROME_BIN="$(readlink -f "$(command -v google-chrome)")"
+          export PLAYWRIGHT_MODULE="$RUNNER_TEMP/pagination-browser/node_modules/playwright/index.mjs"
+          export JAPAN_PAGINATION24_REPORT="$GITHUB_WORKSPACE/japan-pagination24-browser-report.json"
+          node --import tsx tests/browser/ajes-pagination.mjs
+          cd "$GITHUB_WORKSPACE"
+          node --input-type=module <<'JS'
+          import {readJapanPaginationFixture} from './scripts/catalog-next/japan-pagination-fixture.mjs';
+          await readJapanPaginationFixture(process.cwd() + '/japan-pagination24-browser-report.json');
+          JS
+      - name: Preserve immutable source and fixture evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: japan-pagination24-source-freeze
-          path: japan-pagination24-source-freeze.json
+          name: japan-pagination24-source-and-fixture
+          path: |
+            japan-pagination24-source-freeze.json
+            japan-pagination24-browser-report.json
           if-no-files-found: ignore
           retention-days: 14
