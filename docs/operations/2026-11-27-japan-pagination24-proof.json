@@ -1,0 +1,151 @@
+{
+  "version": 1,
+  "kind": "japan-pagination24-followup-v1",
+  "checkpointAt": "2026-11-27T06:52:52.000+07:00",
+  "status": "code_and_fixtures_verified_not_published",
+  "productionRuntime": "a5ca426eec2663eb17c2df69fe2bfed46e2b8740",
+  "runtime": {
+    "sha": "889c5150803f7973fc371d1d90491bb38cbabf82",
+    "tree": "c9d6371dab51839ace654703509d1272656adf93",
+    "parent": "775973757f5c2c8eb7be408baaa2642c62ad5548",
+    "retained": "a5ca426eec2663eb17c2df69fe2bfed46e2b8740",
+    "diffBytes": 82648,
+    "diffSha256": "425403bdfd8524026973aea633005eb0abfe08eb4c0c2ccb9aaa82be986d415c",
+    "pricingToServingDiffBytes": 531574,
+    "pricingToServingDiffSha256": "a30f081c973883558ef9f5ccf02d94e3296e58f935d7bdb94b90a1d0be95cceb",
+    "scope": "catalog-japan-pagination24-v1",
+    "entries": {
+      "apps/web/components/catalog/AjesCatalog.tsx": {
+        "blob": "246fc6bad8255beeadd261938f33897029f984c2",
+        "bytes": 9077,
+        "sha256": "7634bb543ee702c95840515adf51750819c4126696158001113cd5906038c256"
+      },
+      "apps/web/components/catalog/CatalogLoadMore.tsx": {
+        "blob": "aa203d5b1c167f2d8377aa90cb1430f86133566a",
+        "bytes": 12299,
+        "sha256": "bfa24c5e66eff68aa37dd04c0b8101fb319abda9c225a1058e8068df050f9676"
+      },
+      "apps/web/components/catalog/catalog-load-more-action.tsx": {
+        "blob": "bab94ebc03d42e4357e760961227932f05be30c0",
+        "bytes": 2031,
+        "sha256": "ead6021e05f53398983f02be6dae6a99fd69575f333b56ab1bed2e409173632c"
+      },
+      "apps/web/lib/catalog/ajes-catalog.ts": {
+        "blob": "249fbc8a0b315fdb4bbf11c21abae84f4a906b37",
+        "bytes": 9768,
+        "sha256": "55be846dd5aeaf44ccae4e104be3a9ea18e20ba631dbeb60b3e40bfd23e2d6bc"
+      },
+      "apps/web/lib/catalog/ajes-filtered-page.ts": {
+        "blob": "765d0f67db71d9e3cdafd278103d19ea866398d4",
+        "bytes": 4363,
+        "sha256": "812894700bb688c0ee0235209a6f522b74853bd29d919010d4244d93a8aed8b3"
+      },
+      "tests/ajes-catalog-progressive.test.ts": {
+        "blob": "89057adccef8cb6c5433c6f65fd83a9f586ce676",
+        "bytes": 5959,
+        "sha256": "e36a8034f850d8b5c1400b83defaca0c84981e851f8125b97f281cc56a18c145"
+      },
+      "tests/ajes-count-progressive.test.ts": {
+        "blob": "73127b4123b98a5acd8e4bc9b3c523909cc8d15b",
+        "bytes": 7405,
+        "sha256": "6edd2dddbcbd9ab0a455fb205c8b2eec16e10327b8c131bb4364014e17de7d16"
+      },
+      "tests/ajes-filtered-page.test.ts": {
+        "blob": "2dff6ceee6a86a72eb586e24cb88ce242f5b857a",
+        "bytes": 7652,
+        "sha256": "ebf970fcdb747320b57565d88b5f9ab2106cdc139cbe7cffc9b2596e7b90d973"
+      },
+      "tests/browser/ajes-pagination-fixture.tsx": {
+        "blob": "e6d0e9a33a49a2cf98b372f04b9c9b932144b764",
+        "bytes": 2643,
+        "sha256": "b7adb308e009f8c42f2c26f9063cf4088d737e2784a59ca339747c4e4fda047a"
+      },
+      "tests/browser/ajes-pagination.mjs": {
+        "blob": "1c8d4082e59742bb44202818120c35bffd12b5b8",
+        "bytes": 24485,
+        "sha256": "1c0a3a37c1c2efa6e3623e6187beeff6ca19ccd3691bfbc8181eed8f881b4551"
+      },
+      "tests/japan-source-power.test.ts": {
+        "blob": "f5ef64149c27da60c72f14cb839109119f728262",
+        "bytes": 33508,
+        "sha256": "57067819a4b35a66562d2c2f02862453d200e66b3add39c90673adb8730202f4"
+      }
+    }
+  },
+  "codeScope": {
+    "productionFiles": 5,
+    "nativeTestFiles": 4,
+    "browserFixtureFiles": 2,
+    "sourceQueryPageSize": 24,
+    "globalCountImplemented": false,
+    "globalKnownThenUnknownOrderImplemented": false,
+    "productionChangesAfterInitialRuntime": false
+  },
+  "verification": {
+    "sourceAndBrowserRun": 45911726049,
+    "sourceAndBrowserUrl": "https://github.com/jeep-jim/AvtoCena/actions/runs/45911726049",
+    "browser": {
+      "version": 1,
+      "kind": "japan-pagination24-browser-v1",
+      "passed": true,
+      "caseCount": 8,
+      "widths": [
+        390,
+        1440
+      ],
+      "checks": {
+        "refill24": true,
+        "numberedContinuation": true,
+        "appendNoDuplicatesOrGaps": true,
+        "finiteExhaustion": true,
+        "unknownPowerPreserved": true,
+        "failureHonesty": true,
+        "cursorBinding": true,
+        "warningRemoved": true,
+        "sourcePageSize24": true,
+        "neighborPaginationPreserved": true,
+        "noExternalRequests": true
+      }
+    },
+    "fullCI": {
+      "run": 45912192193,
+      "job": 140222948851,
+      "head": "20d012b535379e02f1c6dd0a200ae44dc62a6b74",
+      "runtime": "889c5150803f7973fc371d1d90491bb38cbabf82",
+      "conclusion": "success",
+      "controllerTests": 1253,
+      "nativeTests": 448,
+      "browser": {
+        "pagination": 8,
+        "photo": 12,
+        "city": 4,
+        "crm": 2
+      },
+      "types": "passed",
+      "productionRequests": 0,
+      "log": {
+        "bytes": 265582,
+        "sha256": "3bc9c3df5834ad0480185a5a3d9d79f64897215d2b572cb22d7149e319ecb539"
+      }
+    },
+    "fullCIUrl": "https://github.com/jeep-jim/AvtoCena/actions/runs/45912192193"
+  },
+  "publication": {
+    "activated": false,
+    "required": "Fresh ordinary Japan UI/API acceptance plus unchanged China, CRM, photo, source and rollback gates."
+  },
+  "diskFollowup": {
+    "status": "draft_under_independent_review",
+    "scope": "One exact terminal app image after accepted successor or proven rollback, under existing lease and both host locks.",
+    "ownedControllerFiles": 14,
+    "productionActivated": false,
+    "preReservationProcessLossCovered": false,
+    "protectedIneligibleImagesNotDeleted": true
+  },
+  "limitations": [
+    "No exact global Japan power count or global known-then-unknown order claim.",
+    "No AJ full mirror, direct diagnostic retry, supplier page-size increase or provider IP substitution.",
+    "Prepared source and browser fixtures do not establish deployed behavior.",
+    "Current prod disk and photo evidence remain the separately dated a5ca postrelease measurement."
+  ]
+}

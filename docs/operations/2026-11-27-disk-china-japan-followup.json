@@ -2,9 +2,9 @@
   "version": 1,
   "kind": "disk-china-japan-followup-checkpoint-v1",
   "status": "partial_remediation_verified_japan_pagination_and_global_count_open",
-  "generatedAt": "2026-11-27T05:08:42.000+07:00",
+  "generatedAt": "2026-11-27T06:52:52.000+07:00",
   "timezone": "Asia/Krasnoyarsk",
-  "scope": "Verified cleanup and China terminal evidence; exact CRM/Japan photo candidate release is running. Japan pagination and global power count remain unresolved.",
+  "scope": "China C and CRM/Japan photo runtime a5ca accepted and checked. Japan pagination24 runtime889c515 passed source/native/type/browser checks but is not yet activated; exact global power count and known-then-unknown order remain unresolved.",
   "sourcePolicy": {
     "cleanupFacts": "Actual terminal cleanup reports override aggregate progress fields",
     "excludedHistoricalFields": [
@@ -480,6 +480,14 @@
       },
       "errorCode": "lease_lost",
       "finishedAt": "2026-11-26T22:07:25.615Z"
+    },
+    "automaticAppImageCleanupDraft": {
+      "status": "draft_under_independent_review",
+      "scope": "One exact terminal app image after accepted successor or proven rollback, under existing lease and both host locks.",
+      "ownedControllerFiles": 14,
+      "productionActivated": false,
+      "preReservationProcessLossCovered": false,
+      "protectedIneligibleImagesNotDeleted": true
     }
   },
   "publishedControllerFixes": [
@@ -1126,7 +1134,7 @@
     ],
     "status": "UNRESOLVED_NOT_FIXED_ON_SITE",
     "publicRuntimeSha": "a5ca426eec2663eb17c2df69fe2bfed46e2b8740",
-    "candidateRuntimeSha": "b25a95122199378afc5166ed7ac8882a84ed9fe3",
+    "candidateRuntimeSha": "889c5150803f7973fc371d1d90491bb38cbabf82",
     "candidateCurrentlyDeployed": false,
     "lastFailedRelease": 45861459029,
     "lastFailedReleaseUrl": "https://github.com/jeep-jim/AvtoCena/actions/runs/45861459029",
@@ -1379,15 +1387,17 @@
       "durationMs": 18830
     },
     "pageFillFollowup": {
-      "status": "preparing_narrow_runtime_patch",
+      "status": "source_and_full_ci_verified_not_activated",
+      "proofFile": "2026-11-27-japan-pagination24-proof.json",
+      "runtimeSha": "889c5150803f7973fc371d1d90491bb38cbabf82",
+      "runtimeTree": "c9d6371dab51839ace654703509d1272656adf93",
       "baseRuntime": "a5ca426eec2663eb17c2df69fe2bfed46e2b8740",
-      "providerQueryChangesAllowed": false,
       "sourcePageSizeRemains": 24,
       "directSupplierDiagnosticRequests": 0,
-      "sourceEvidence": "a5ca ajes-catalog.ts raw-power single-page fast path and existing ajes-filtered-page.ts",
-      "numberedNavigationMustHonorContinuation": true,
+      "fullCiRun": 45912192193,
       "requiresFreshOrdinaryUiVerification": true,
-      "globalCountClaimed": false
+      "globalCountClaimed": false,
+      "globalOrderingClaimed": false
     }
   },
   "ajDocumentAccess": {
@@ -1408,9 +1418,10 @@
     "value": "2026-11-26 22:08:42 UTC"
   },
   "nextSteps": [
-    "Diagnose the GC storage_transport/renewal failure from immutable code; no blind cleanup retry or lease reset. Current C/a5ca remains accepted and lease release is confirmed.",
-    "Complete and test a narrow Japan refill24 runtime on a5ca using the existing source24 and cursor contracts; preserve numbered navigation and all admission/pricing/CRM/photo behavior. Require fresh ordinary-page acceptance before claiming deployment.",
-    "The exact Japan global power count and global known-then-unknown ordering remain unresolved; no bypass of the rejected AJ diagnostic request. Schedule is active but a new cron occurrence remains unverified."
+    "Finish independent review and mandatory tests for the exact terminal app-image cleanup controller; keep all previous source, rollback and release gates.",
+    "Activate the exact tested Japan pagination24 runtime through the existing marker-only release and fresh ordinary UI/API acceptance; report failure/rollback honestly if it cannot pass.",
+    "Read immutable terminal release evidence, measure real server disk and verify public retained China without another supplier diagnostic.",
+    "Japan global power count/order remain unresolved. China cron is enabled but a new scheduled occurrence remains unverified; REG GC remains paused without a blind retry."
   ],
   "environment": {
     "localExecutorAvailable": false,
