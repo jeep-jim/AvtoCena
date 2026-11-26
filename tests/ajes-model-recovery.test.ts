@@ -4,6 +4,7 @@ import {createAjesClient,AjesUnavailable,readAjesModelDirectory} from '../apps/w
 import {DetailReadCache} from '../apps/web/lib/catalog/detail-read-cache';
 import {resolveAjesQueryModels} from '../apps/web/lib/catalog/ajes-model-resolution';
 import {ajesQuery} from '../apps/web/lib/catalog/ajes-query';
+import {createHash} from 'node:crypto';
 
 function rejectSupplierQueue(t:any,message:string){
  const original=DetailReadCache.prototype.get;
@@ -43,14 +44,17 @@ test('directory failure permits an exact list query but marks unresolved familie
 
 test('actual catalog wrapper keeps exact model cards on directory failure and never publishes a false zero',async()=>{
  const {build}=await import('esbuild');const {createRequire}=await import('node:module');const require=createRequire(import.meta.url);
- const state={empty:false,lists:0,counts:0,queries:[] as any[]};(globalThis as any).__modelRecovery=state;
+ const observedAt=new Date().toISOString();
+ const state={empty:false,lists:0,counts:0,queries:[] as any[],list:(q:any)=>{state.lists++;state.queries.push(q);const items=state.empty?[]:[{id:'toyota-exact'}],received=state.empty?0:q.pageSize;return {page:q.page||1,pageSize:q.pageSize,received,items,observedAt,stale:false,sourceFingerprint:createHash('sha256').update(JSON.stringify([observedAt,received,items])).digest('hex')};}};(globalThis as any).__modelRecovery=state;
  const stubs:Record<string,string>={
   'server-only':'','next/headers':"export const headers=async()=>new Map([['x-real-ip','127.0.0.1']]);",
   './ajes-runtime':"export const ajesClient={read:async()=>{globalThis.__modelRecovery.counts++;throw Error('count must not run');}};",
-  './ajes-public':`export const cappedAjesQuery=async q=>q;export const readAjesPublic=async q=>{const s=globalThis.__modelRecovery;s.lists++;s.queries.push(q);return {page:q.page||1,pageSize:24,received:s.empty?0:24,items:s.empty?[]:[{id:'toyota-exact'}],observedAt:'now'};};`,
+  './ajes-public':"export const cappedAjesQuery=async q=>q;export const readAjesPublic=async q=>globalThis.__modelRecovery.list(q);",
   './ajes-query':"export const ajesCatalogQuery=p=>({table:'stats',make:p.make,model:p.model,page:1,pageSize:24});export class AjesFilterUnavailable extends Error{};export class AjesInputError extends Error{};",
   './ajes-client':"export class AjesUnavailable extends Error{constructor(reason){super(reason);this.reason=reason;}};export const readAjesModelDirectory=async()=>{throw new AjesUnavailable('local_busy');};export const readAjesMakeDirectory=async()=>({makes:[]});",
-  './ajes-result-filter':"export const ajesResultFilter=()=>({active:false,priceFilter:false,matches:()=>true});",
+  './ajes-result-filter':"export const ajesResultFilter=()=>({active:false,powerFilter:false,priceFilter:false,matches:()=>true});",
+  './editorial':"export const readCatalogEditorial=async()=>({revision:'model-recovery-fixture',entries:{}});",
+  '../encyclopedia/calculation-index':"export const readCalculationIndex=()=>null;",
   './storage':"export const publicOffer=x=>x;",'./market-page':"export const sortCatalogRows=x=>x;",
   './live-business-pricing':"export const applyActiveBusinessPricingBatch=async x=>x;",
   './collection-controls':"export const assertCollectionEnabled=async()=>{};",
@@ -62,6 +66,7 @@ test('actual catalog wrapper keeps exact model cards on directory failure and ne
   const params={market:'japan',make:'TOYOTA',model:'COROLLA',city:'Новокузнецк'};
   const result=await mod.exports.readAjesCatalogPage(params);
   assert.equal(result.items[0].id,'toyota-exact');assert.equal(result.partial,true);assert.equal(result.total,null);assert.equal(result.countSummary,null);
+  assert.equal(result.hasMore,false);assert.match(result.retryCursor,/^jp1\.[a-f0-9]{32}\.1\.[a-f0-9]{16}$/);assert.equal(state.queries[0].pageSize,48);
   assert.equal(state.queries[0].make,'TOYOTA');assert.equal(state.queries[0].model,'COROLLA');assert.equal(state.counts,0);
   state.empty=true;await assert.rejects(mod.exports.readAjesCatalogPage(params),/directory_unavailable/);
   await assert.rejects(mod.exports.readAjesCountSummary(JSON.stringify(params)),/directory_unavailable/);

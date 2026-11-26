@@ -2,14 +2,15 @@ import type {CalculationIndex} from '../encyclopedia/calculation-index';
 import {pickupSourceCandidateSql} from './pickup-body';
 import {japanDriveSql} from './japan-drive';
 import {auctionSaleRange} from "./auction-sale-period";
-import {japanExcludedMake,japanMakeSqlExclusion} from './japan-vehicle-policy';
+import {japanMakeSqlExclusion,japanVehicleExcluded,japanVehicleSqlExclusion} from './japan-vehicle-policy';
+import {japanPowerCandidateSql,type JapanPowerQueryContext} from './japan-power-query';
 import {assertAjesJapanMarket} from './ajes-access-policy';
-import {motorcycleExcluded,motorcycleSqlExclusion} from './motorcycle-policy';
+import {motorcycleSqlExclusion} from './motorcycle-policy';
 import {vehicleColorAliases} from './vehicle-colors';
 import {parseCatalogSort} from './catalog-sort';
 import {JAPAN_MIN_MODEL_YEAR} from './japan-year-policy';
 import {parseEngineCc} from './engine-input';
-import {heavyVehicleSqlExclusion,knownHeavyVehicleFamily} from './heavy-vehicle-families';
+import {heavyVehicleSqlExclusion} from './heavy-vehicle-families';
 /** Supplier SQL is generated here only; callers cannot supply SQL or column names. */
 export type AjesTable = 'stats' | 'main';
 export class AjesInputError extends Error { constructor() { super('ajes_invalid_query'); } }
@@ -33,7 +34,7 @@ function name(value: unknown) {
   if (typeof value !== 'string' || !/^[\p{L}\p{N} .+()&/-]{1,80}$/u.test(value.trim())) throw new AjesInputError();
   return value.trim().toUpperCase();
 }
-export function ajesQuery(input: unknown,driveIndex:CalculationIndex|null=null) {
+export function ajesQuery(input: unknown,driveIndex:CalculationIndex|null=null,powerContext?:JapanPowerQueryContext) {
   if (!input || typeof input !== 'object' || Array.isArray(input) || Object.keys(input).some(k=>!keys.has(k))) throw new AjesInputError();
   const q = input as AjesQuery;
   const table = q.table ?? 'stats';
@@ -63,9 +64,9 @@ export function ajesQuery(input: unknown,driveIndex:CalculationIndex|null=null) 
   where.push("marka_name!=''","model_name!=''");
   // Use the equivalent compact heavy-vehicle predicate on filtered Japan queries
   // to keep the supplier request small; horsepower itself is resolved locally.
-  const compactJapan=Boolean(q.drive)||q.powerFrom!==undefined||q.powerTo!==undefined;
+  const compactJapan=q.aggregate==='makes'||Boolean(q.drive)||q.powerFrom!==undefined||q.powerTo!==undefined;
   where.push(heavyVehicleSqlExclusion(false,false,compactJapan),motorcycleSqlExclusion());
-  where.push(japanMakeSqlExclusion());
+  where.push(japanMakeSqlExclusion(),japanVehicleSqlExclusion());
   for(const [column,parts] of [['marka_name',makes]] as const){if(parts.length===1)where.push(`${column}='${parts[0]}'`);else if(parts.length)where.push(`${column} in (${parts.map(v=>`'${v}'`).join(',')})`);}
   const modelClauses=[...models.map(v=>`model_name='${v}'`),...families.map(v=>`model_name like '${v} %'`)];
   if(modelClauses.length)where.push('('+modelClauses.join(' or ')+')');
@@ -74,7 +75,13 @@ export function ajesQuery(input: unknown,driveIndex:CalculationIndex|null=null) 
   coded(q.fuel,'time',{petrol:['P'],diesel:['D'],electric:['E'],electrified:['E','H','HE'],hybrid:['H','HE'],lpg:['L'],cng:['C']});
   if(q.fuel?.split('|').includes('petrol')){const fuelClause=where.pop()!;where.push(`(${fuelClause} or time is null or time='')`);}
   coded(q.transmission,'kpp',{automatic:['AT'],manual:['MT'],cvt:['CVT'],dct:['DCT']});
-  if(q.drive)where.push(japanDriveSql(q.drive,driveIndex));
+  if(q.drive){
+    const predicate=japanDriveSql(q.drive,driveIndex);
+    // All three validated choices cover every known drive. Keep this source
+    // set broad instead of repeating the full chassis registry in the URL;
+    // the final enriched filter still excludes cars whose drive is unknown.
+    if(new Set(q.drive.split('|')).size!==3)where.push(predicate);
+  }
   if(q.pickup!==undefined){if(q.pickup!==true)throw new AjesInputError();where.push(pickupSourceCandidateSql(false));}
   if(q.auctionGrade){const grades=values(q.auctionGrade,'|');if(grades.some(v=>! /^(?:[0-6](?:\.5)?|S|R|RA|A|B|C)$/.test(v)))throw new AjesInputError();where.push(`rate in (${grades.map(v=>`'${v}'`).join(',')})`);}
 
@@ -90,11 +97,20 @@ export function ajesQuery(input: unknown,driveIndex:CalculationIndex|null=null) 
   if(q.powerFrom!==undefined||q.powerTo!==undefined){
     const low=integer(q.powerFrom,1,1,2500),high=integer(q.powerTo,2500,1,2500);
     if(low>high)throw new AjesInputError();
-    // PW is integer hp, but source SQL cannot preserve contradictory local/manual
-    // overrides. Keep the raw candidate page shared with the unfiltered query;
-    // apply power and explicit unknown inclusion after local enrichment.
-    // The bounded post-filter below prevents an unbounded scan of supplier pages.
+    // A server-owned phase selects candidates before LIMIT. Local/manual power
+    // still wins after enrichment; no public input can supply a phase or SQL.
+    if(powerContext){
+      const bytes=(predicate:string)=>new URLSearchParams({sql:`select * from stats where ${where.join(' and ')} and ${predicate} order by auction_date desc, mileage desc, year desc, finish desc, id asc limit 47999952,48`}).toString().length;
+      let candidate=japanPowerCandidateSql(q,powerContext);
+      if(bytes(candidate)>6000)candidate=japanPowerCandidateSql(q,powerContext,true);
+      // Never truncate a private donor family/ID list to fit the transport. A
+      // bounded local-known scan is a safe last-resort superset. This decision
+      // depends on WHERE only, so the empty-proof COUNT keeps the identical set.
+      if(powerContext.phase==='known'&&bytes(candidate)>6000)candidate='1=1';
+      where.push(candidate);
+    }
   }
+  else if(powerContext)throw new AjesInputError();
   if(q.aggregate!==undefined&&!['count','models','makes','colors'].includes(q.aggregate))throw new AjesInputError();
   if(q.aggregate==='count')return {table,empty,kind:'count' as const,sql:`select count(*) from ${table} where ${where.join(' and ')}`,page:1,pageSize:1};
   if(q.aggregate==='colors')return {table,empty,kind:'colors' as const,sql:`select color, count(*) from ${table} where ${where.join(' and ')} group by color order by color limit ${(page-1)*500},500`,page,pageSize:500};
@@ -135,13 +151,13 @@ export function ajesLot(row: Record<string, unknown>, table: AjesTable, detail: 
   const id=text('ID'), year=number('YEAR');
   if (!/^[A-Za-z0-9_-]{1,64}$/.test(id) || !text('MARKA_NAME') || !text('MODEL_NAME') || !year || year<JAPAN_MIN_MODEL_YEAR || !Number.isInteger(year) || year>new Date().getUTCFullYear()+1 || number('AUCTION_TYPE')===1) return null;
   const sold=table==='stats' && /^sold$/i.test(text('STATUS'));
-  if(japanExcludedMake(text('MARKA_NAME'))||knownHeavyVehicleFamily(text('MARKA_NAME'),text('MODEL_NAME'))||motorcycleExcluded({make:text('MARKA_NAME'),model:text('MODEL_NAME'),trim:text('GRADE'),bodyType:text('BODY_TYPE'),vehicleCategory:text('VEHICLE_CATEGORY')}))return null;
+  if(japanVehicleExcluded({market:'japan',make:text('MARKA_NAME'),model:text('MODEL_NAME'),trim:text('GRADE'),bodyType:text('BODY_TYPE'),vehicleCategory:text('VEHICLE_CATEGORY')}))return null;
   const finish=number('FINISH');
   if (table==='stats' && (!sold || !finish)) return null;
   const urls=[...new Set(text('IMAGES').split('#').map(u=>ajesImageUrl(u,'original')).filter((u):u is string=>Boolean(u)))];
   return {
     id,table,kind:table==='stats'?'auction_result':'auction',make:text('MARKA_NAME'),model:text('MODEL_NAME'),year,
-    trim:text('GRADE'),color:text('COLOR'),equipment:text('EQUIP'),transmissionCode:text('KPP_TYPE'),auctionTown:text('TOWN'),chassisCode:text('KUZOV'),frameNumber:detail?text('SERIAL'):undefined,
+    trim:text('GRADE'),bodyType:text('BODY_TYPE')||undefined,vehicleCategory:text('VEHICLE_CATEGORY')||undefined,color:text('COLOR'),equipment:text('EQUIP'),transmissionCode:text('KPP_TYPE'),auctionTown:text('TOWN'),chassisCode:text('KUZOV'),frameNumber:detail?text('SERIAL'):undefined,
     mileageKm:number('MILEAGE'),engineCc:number('ENG_V'),auction:text('AUCTION'),lot:text('LOT'),auctionDate:text('AUCTION_DATE'),grade:text('RATE'),
     status:text('STATUS'),currency:'JPY',sourcePrice:null,productionMonth:number('MONTH'),finalPriceJpy:sold?finish:null,startPriceJpy:table==='main'?(number('START')||null):null,
     // Supplier confirmed 2026-10-16: TIME is the fuel field; FUEL is a legacy alias.

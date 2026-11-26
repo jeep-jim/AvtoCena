@@ -31,10 +31,13 @@ test('ready cards do not wait for optional brand/model directories; exact select
   const mod={exports:{} as any};new Function('require','module','exports',built.outputFiles[0].text)(require,mod,mod.exports);
   let timer:ReturnType<typeof setTimeout>;
   const root:any=await Promise.race([mod.exports.AjesCatalog({params:{market:'japan',make:'Toyota',city:'Новокузнецк'}}),new Promise((_,reject)=>{timer=setTimeout(()=>reject(Error('ready cards blocked by directory')),300);})]).finally(()=>clearTimeout(timer!));
-  assert.equal(calls,0,'metadata must begin in a separate streamed boundary, not ahead of list');
+  assert.equal(calls,0,'optional metadata must not precede the list');
   assert.deepEqual(readOptions,{includeCount:false});
   const walk=(node:any):any[]=>!node||typeof node!=='object'?[]:[node,...Object.values(node.props||{}).flatMap(v=>Array.isArray(v)?v.flatMap(walk):walk(v))];
   const nodes=walk(root),filters=nodes.find(n=>n.props?.auctionResults);
+  const layout=nodes.find(n=>n.props?.resultScope==='ajes:japan:false');
+  assert.ok(layout?.props.brandRail,'Japan uses the same single upper brand slot as the other public markets');
+  assert.equal(nodes.filter(n=>n===layout.props.brandRail).length,1,'one brand rail is mounted');
   assert.ok(nodes.some(n=>n.props?.queryKey===JSON.stringify(filters.props.initial)&&n.props?.text==='1'),'ready aggregate is shared under the exact filter query');
   assert.equal(filters.props.initial.city,'Новокузнецк');assert.equal(filters.props.initial.make,'Toyota');
   assert.ok(filters.props.facets.makes.includes('Toyota'));assert.ok(nodes.some(n=>n.props?.initialCount===1));
@@ -47,11 +50,8 @@ test('ready cards do not wait for optional brand/model directories; exact select
   const lateRoot=await mod.exports.AjesCatalog({params:{market:'japan',powerTo:'160',city:'Новокузнецк'}});
   assert.equal(calls,0,'late count does not precede ready cards');
   const lateNodes=walk(lateRoot),late=lateNodes.find(n=>n.type?.name==='AjesIndependentCount');assert.ok(late);
-  const notice=lateNodes.find(n=>n.props?.['data-japan-power-summary-page']===1);assert.ok(notice);
-  const noticeText=notice.props.children.join('');
-  assert.match(noticeText,/Страница 1:/);assert.match(noticeText,/Мощность по данным поставщика: 1/);
-  assert.match(noticeText,/Мощность не указана: 1/);assert.match(noticeText,/Отбор не подтверждает право/);
-  assert.ok(lateNodes.some(n=>n.props?.initialCount===3),'summary refers to the actual three rendered cards');
+  assert.equal(lateNodes.some(n=>n.props?.['data-japan-power-summary-page']!==undefined),false,'power provenance stays on the individual cards');
+  assert.ok(lateNodes.some(n=>n.props?.initialCount===3),'all three eligible cards remain rendered');
   countResult=Promise.resolve({total:42});
   const counterNodes=walk(await late.type(late.props));
   assert.ok(counterNodes.some(n=>n.props?.text==='42'&&n.props?.total===42),'late aggregate includes the numeric pagination value');

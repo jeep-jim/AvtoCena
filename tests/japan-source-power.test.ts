@@ -1,6 +1,6 @@
 import test,{mock} from 'node:test';
 import assert from 'node:assert/strict';
-import {parseJapanSourcePower,japanSupplierPower,japanSupplierPreviewPower,japanSupplierPowerLabel,japanUnknownPower,japanPowerFilterSummary,japanPowerFilterNotice} from '../apps/web/lib/catalog/japan-source-power';
+import {parseJapanSourcePower,japanSupplierPower,japanSupplierPreviewPower,japanSupplierPowerLabel,japanUnknownPower,japanPowerFilterSummary} from '../apps/web/lib/catalog/japan-source-power';
 import {ajesResultFilter} from '../apps/web/lib/catalog/ajes-result-filter';
 import {ajesPowerEstimateHp} from '../apps/web/lib/catalog/ajes-power-estimate';
 import {ajesCatalogQuery,ajesLot,ajesQuery,ajesSourceCacheSql} from '../apps/web/lib/catalog/ajes-query';
@@ -15,6 +15,7 @@ import {readFilteredAjesPage} from '../apps/web/lib/catalog/ajes-filtered-page';
 import {applyJapanOwnerSpecifications} from '../apps/web/lib/catalog/japan-owner-specifications';
 import {build} from 'esbuild';
 import {createRequire} from 'node:module';
+import {createHash} from 'node:crypto';
 import {createElement} from 'react';
 import {renderToStaticMarkup} from 'react-dom/server';
 
@@ -24,19 +25,22 @@ function offer(power:unknown,id='power-fixture',fuel='P'){
  return ajesOffer(ajesLot({...row,ID:id,PW:power,TIME:fuel},'stats',false)!,rate,'2026-11-26T04:00:00Z');
 }
 
-const sourcePage=(query:any,items:any[],received=items.length,flags:Record<string,unknown>={})=>({items,page:query.page||1,pageSize:query.pageSize||24,received,partial:false,stale:false,observedAt:'2026-11-26T06:02:33.366Z',...flags});
+const sourceObservedAt=new Date(Date.now()-1000).toISOString();
+const sourcePage=(query:any,items:any[],received=items.length,flags:Record<string,unknown>={})=>({items,page:query.page||1,pageSize:query.pageSize||24,received,sourceFingerprint:createHash('sha256').update(JSON.stringify(items)).digest('hex'),partial:false,stale:false,observedAt:sourceObservedAt,...flags});
 async function catalogPowerFixture(read:(query:any)=>unknown|Promise<unknown>){
- const state={queries:[] as any[],counts:0,priced:[] as string[][],query:ajesCatalogQuery,filter:ajesResultFilter,project:publicOffer,read:async(query:any)=>{state.queries.push(query);return read(query);}};
+ const state={queries:[] as any[],counts:0,priced:[] as string[][],editorial:{revision:'fixture',entries:{}},priceHook:undefined as undefined|(()=>void),query:ajesCatalogQuery,filter:ajesResultFilter,project:publicOffer,read:async(query:any,options:any)=>{const request={...query,phase:options?.powerContext?.phase};state.queries.push(request);return read(request);}};
  (globalThis as any).__japanPowerPageFixture=state;
  const stubs:Record<string,string>={
   'server-only':'','next/headers':"export const headers=async()=>new Map([['x-real-ip','127.0.0.1']]);",
   './ajes-runtime':"export const ajesClient={read:async()=>{globalThis.__japanPowerPageFixture.counts++;throw Error('unexpected source aggregate');}};",
-  './ajes-public':'export const cappedAjesQuery=async q=>q;export const readAjesPublic=q=>globalThis.__japanPowerPageFixture.read(q);',
-  './ajes-query':'export const ajesCatalogQuery=p=>globalThis.__japanPowerPageFixture.query(p);export class AjesFilterUnavailable extends Error{};export class AjesInputError extends Error{};',
-  './ajes-client':'export const readAjesModelDirectory=async()=>({models:[]});export const readAjesMakeDirectory=async()=>({makes:[]});export class AjesUnavailable extends Error{};',
+  './ajes-public':'export const cappedAjesQuery=async q=>q;export const readAjesPublic=(q,o)=>globalThis.__japanPowerPageFixture.read(q,o);',
+  './ajes-query':'export const ajesCatalogQuery=p=>globalThis.__japanPowerPageFixture.query(p);export class AjesFilterUnavailable extends Error{};export class AjesInputError extends Error{constructor(){super("ajes_invalid_query");}};',
+  '../encyclopedia/calculation-index':'export const readCalculationIndex=()=>null;',
+  './editorial':'export const readCatalogEditorial=async()=>globalThis.__japanPowerPageFixture.editorial;',
+  './ajes-client':'export const readAjesModelDirectory=async()=>({models:[]});export const readAjesMakeDirectory=async()=>({makes:[]});export class AjesUnavailable extends Error{constructor(reason){super("ajes_"+reason);this.reason=reason;}};',
   './ajes-result-filter':'export const ajesResultFilter=p=>globalThis.__japanPowerPageFixture.filter(p);',
   './storage':'export const publicOffer=x=>globalThis.__japanPowerPageFixture.project(x);','./market-page':'export const sortCatalogRows=x=>x;',
-  './live-business-pricing':'export const applyActiveBusinessPricingBatch=async rows=>{globalThis.__japanPowerPageFixture.priced.push(rows.map(row=>row.id));return rows;};',
+  './live-business-pricing':'export const applyActiveBusinessPricingBatch=async rows=>{globalThis.__japanPowerPageFixture.priced.push(rows.map(row=>row.id));globalThis.__japanPowerPageFixture.priceHook?.();return rows;};',
   './collection-controls':'export const assertCollectionEnabled=async()=>{};',
   './japan-preview-parameters':'export const japanPreviewParameters=()=>({});',
   '../encyclopedia/calculation-evidence':'export const hasEncyclopediaCalculationEvidence=()=>false;',
@@ -50,113 +54,97 @@ async function catalogPowerFixture(read:(query:any)=>unknown|Promise<unknown>){
  return {state,read:module.exports.readAjesCatalogPage,close:()=>{delete (globalThis as any).__japanPowerPageFixture;}};
 }
 
-test('power selection returns 23 fresh rows from the requested source page without reading a failing next page',async()=>{
- const fixture=await catalogPowerFixture(query=>{
-  if(query.page!==1)throw Error('next source page unavailable');
-  return sourcePage(query,Array.from({length:23},(_,i)=>offer('',`fresh-${i}`)),24);
- });
+test('power selection fills 24 known cars from bounded source portions before exposing unknown',async()=>{
+ const fixture=await catalogPowerFixture(query=>sourcePage(query,query.page===1?
+  [...Array.from({length:23},(_,i)=>offer(150,`first-${i}`)),offer('','unknown')]:Array.from({length:48},(_,i)=>offer(130,`next-${i}`)),48));
  try{
   const result=await fixture.read({market:'japan',powerTo:'160',city:'Новокузнецк'});
-  assert.deepEqual(fixture.state.queries.map(query=>query.page),[1]);assert.equal(fixture.state.counts,0);
-  assert.equal(result.items.length,23);assert.equal(result.received,24);assert.equal(result.hasMore,true);
-  assert.equal(result.total,null);assert.equal(result.countSummary,null);assert.equal(result.nextCursor,undefined);
-  assert.equal(result.observedAt,'2026-11-26T06:02:33.366Z');assert.equal(result.generationId,result.observedAt);
-  for(const flag of ['partial','stale','scanLimited','interrupted'])assert.equal(result[flag],false,flag);
-  assert.deepEqual(result.powerFilterSummary,{shown:23,localPower:0,supplierPower:0,unknownPower:23});
-  assert.ok(result.items.every((item:any)=>item.japanPowerUnknown===true));
+  assert.deepEqual(fixture.state.queries.map(q=>[q.phase,q.page,q.pageSize]),[['known',1,48],['known',2,48]]);
+  assert.equal(result.items.length,24);assert.equal(result.items.at(-1).id,'ajes-stats-next-0');assert.equal(result.hasMore,true);
+  assert.equal(result.total,null);assert.equal(result.countSummary,null);assert.match(result.nextCursor,/^jp1\./);assert.equal(result.partial,false);
+  assert.deepEqual(result.powerFilterSummary,{shown:24,localPower:0,supplierPower:24,unknownPower:0});assert.equal(fixture.state.counts,0);
  }finally{fixture.close();}
 });
 
-test('power numbered pages preserve source offsets without borrowing or repeating cars',async()=>{
- const fixture=await catalogPowerFixture(query=>sourcePage(query,
-  (query.page===1?Array.from({length:23},()=>undefined):query.page===2?[150,200,'',180]:[120]).map((pw,i)=>offer(pw,`page-${query.page}-${i}`)),query.page===3?1:24));
+test('query-bound numbered pages keep all known cars first and never repeat a borrowed row',async()=>{
+ const fixture=await catalogPowerFixture(query=>query.phase==='unknown'?sourcePage(query,Array.from({length:48},(_,i)=>offer('',`unknown-${i}`)),48):
+  sourcePage(query,Array.from({length:query.page===1?45:7},(_,i)=>offer(150,`known-${(query.page===1?0:45)+i}`)),query.page===1?48:7));
  try{
-  const results=[];
-  for(const page of ['1','2','3'])results.push(await fixture.read({market:'japan',powerTo:'160',page}));
-  assert.deepEqual(fixture.state.queries.map(query=>query.page),[1,2,3]);
-  assert.deepEqual(results.map(result=>result.items.length),[23,2,1]);
-  assert.deepEqual(results.map(result=>result.hasMore),[true,true,false]);
-  assert.ok(results.every(result=>result.nextCursor===undefined&&result.total===null&&result.countSummary===null));
-  const ids=results.flatMap(result=>result.items.map((item:any)=>item.id));assert.equal(new Set(ids).size,26);
-  assert.deepEqual(results[1].items.map((item:any)=>item.id),['ajes-stats-page-2-0','ajes-stats-page-2-2']);
-  assert.equal(fixture.state.counts,0);
+  const params={market:'japan',powerTo:'160'},first=await fixture.read(params),second=await fixture.read({...params,page:'2',after:first.nextCursor}),third=await fixture.read({...params,page:'3',after:second.nextCursor});
+  assert.deepEqual([first,second,third].map(result=>result.items.length),[24,24,24]);
+  assert.ok([...first.items,...second.items].every((item:any)=>item.japanSupplierPower));
+  assert.deepEqual(third.items.slice(0,4).map((item:any)=>item.id),['ajes-stats-known-48','ajes-stats-known-49','ajes-stats-known-50','ajes-stats-known-51']);
+  assert.ok(third.items.slice(4).every((item:any)=>item.japanPowerUnknown));
+  assert.equal(new Set([...first.items,...second.items,...third.items].map((item:any)=>item.id)).size,72);assert.equal(fixture.state.counts,0);
  }finally{fixture.close();}
 });
 
-test('an all-over-limit source page keeps explicit continuation and never reports a zero catalogue total',async()=>{
- const fixture=await catalogPowerFixture(query=>sourcePage(query,Array.from({length:24},(_,i)=>offer(180,`over-${i}`)),24));
+test('sparse conservative known candidates stop at the bound without a false zero or premature unknown phase',async()=>{
+ const fixture=await catalogPowerFixture(query=>sourcePage(query,Array.from({length:48},(_,i)=>offer(180,`over-${query.page}-${i}`)),48));
  try{
   const result=await fixture.read({market:'japan',powerTo:'160'});
-  assert.deepEqual(fixture.state.queries.map(query=>query.page),[1]);assert.deepEqual(result.items,[]);
-  assert.equal(result.hasMore,true);assert.equal(result.nextCursor,undefined);assert.equal(result.total,null);assert.equal(result.countSummary,null);
-  assert.equal(result.scanLimited,false);assert.equal(result.stale,false);
-  assert.deepEqual(result.powerFilterSummary,{shown:0,localPower:0,supplierPower:0,unknownPower:0});
+  assert.equal(fixture.state.queries.length,8);assert.ok(fixture.state.queries.every(q=>q.phase==='known'));assert.deepEqual(result.items,[]);
+  assert.equal(result.partial,true);assert.equal(result.scanLimited,true);assert.equal(result.hasMore,false);assert.match(result.retryCursor,/^jp1\./);
+  assert.equal(result.total,null);assert.equal(result.countSummary,null);
  }finally{fixture.close();}
 });
 
-test('only a fresh exhausted first power page establishes an exact filtered count',async()=>{
+test('only fresh exhaustion of both power phases establishes an exact first-page count',async()=>{
  const fixture=await catalogPowerFixture(query=>sourcePage(query,[150,200,''].map((pw,i)=>offer(pw,`last-${i}`)),3));
  try{
   const result=await fixture.read({market:'japan',powerTo:'160'});
   assert.equal(result.hasMore,false);assert.equal(result.items.length,2);assert.equal(result.total,2);
   assert.deepEqual(result.countSummary,{total:2,upperBound:false,stale:false,observedAt:result.observedAt});
-  assert.deepEqual(result.powerFilterSummary,{shown:2,localPower:0,supplierPower:1,unknownPower:1});
-  assert.equal(result.nextCursor,undefined);assert.equal(fixture.state.queries.length,1);
+  assert.deepEqual(result.powerFilterSummary,{shown:2,localPower:0,supplierPower:1,unknownPower:1});assert.equal(result.nextCursor,null);
+  assert.deepEqual(fixture.state.queries.map(q=>q.phase),['known','unknown']);
  }finally{fixture.close();}
 });
 
-test('source-page power selection preserves stale and partial evidence instead of promoting it to fresh or exact',async()=>{
+test('saved known rows keep stale/partial evidence and cannot move unknown ahead of an unproved source end',async()=>{
  for(const flags of [{stale:true},{partial:true},{partial:true,stale:true}]){
-  const fixture=await catalogPowerFixture(query=>sourcePage(query,[offer('', 'saved')],1,flags));
+  const fixture=await catalogPowerFixture(query=>sourcePage(query,[offer(150,'saved'),offer('','saved-unknown')],2,flags));
   try{
    const result=await fixture.read({market:'japan',powerTo:'160'});
-   assert.equal(result.stale,Boolean(flags.stale));assert.equal(result.partial,Boolean(flags.partial));
-   assert.equal(result.observedAt,'2026-11-26T06:02:33.366Z');assert.equal(result.total,null);assert.equal(result.countSummary,null);
-   assert.equal(result.hasMore,false);assert.equal(result.items.length,1);assert.equal(fixture.state.queries.length,1);
+   assert.equal(result.stale,Boolean(flags.stale));assert.equal(result.partial,true);assert.equal(result.observedAt,sourceObservedAt);
+   assert.equal(result.total,null);assert.equal(result.countSummary,null);assert.equal(result.hasMore,false);assert.equal(result.items.length,1);
+   assert.equal(fixture.state.queries.length,1);assert.equal(fixture.state.queries[0].phase,'known');assert.ok(result.retryCursor);
   }finally{fixture.close();}
  }
 });
 
-test('power combined with body, fuel, drive and color still applies every local condition to the requested page',async()=>{
+test('power combined with body, fuel, drive and color preserves every local condition in both phases',async()=>{
  const matching={bodyType:'sedan',fuel:'petrol',drive:'awd',color:'белый'};
- const rows=[
-  {...offer(150,'combined-known'),...matching},{...offer('','combined-unknown'),...matching},
+ const rows=[{...offer(150,'combined-known'),...matching},{...offer('','combined-unknown'),...matching},
   {...offer(200,'combined-high'),...matching},{...offer('','combined-body'),...matching,bodyType:'suv'},
   {...offer('','combined-fuel'),...matching,fuel:'diesel'},{...offer('','combined-drive'),...matching,drive:'fwd'},
-  {...offer('','combined-color'),...matching,color:'красный'},
- ];
- const fixture=await catalogPowerFixture(query=>sourcePage(query,rows,24));
+  {...offer('','combined-color'),...matching,color:'красный'}];
+ const fixture=await catalogPowerFixture(query=>sourcePage(query,rows,rows.length));
  try{
   const result=await fixture.read({market:'japan',powerTo:'160',...matching,city:'Новокузнецк'});
-  assert.deepEqual(result.items.map((item:any)=>item.id),['ajes-stats-combined-known','ajes-stats-combined-unknown']);
-  assert.equal(fixture.state.queries.length,1);assert.equal(result.hasMore,true);assert.equal(result.total,null);
-  for(const key of ['fuel','drive','color'] as const)assert.equal(fixture.state.queries[0][key],matching[key]);
-  assert.deepEqual(result.powerFilterSummary,{shown:2,localPower:0,supplierPower:1,unknownPower:1});
+  assert.deepEqual(result.items.map((item:any)=>item.id),['ajes-stats-combined-known','ajes-stats-combined-unknown']);assert.equal(result.total,2);
+  assert.equal(fixture.state.queries.length,2);for(const q of fixture.state.queries)for(const key of ['fuel','drive','color'] as const)assert.equal(q[key],matching[key]);
  }finally{fixture.close();}
 });
 
-test('already issued power cursors keep their exact source offset and skip through the existing continuation reader',async()=>{
- const fixture=await catalogPowerFixture(query=>sourcePage(query,Array.from({length:24},(_,i)=>offer('',`cursor-${query.page}-${i}`)),24));
- try{
-  const result=await fixture.read({market:'japan',powerTo:'160',page:'2',after:'2.3'});
-  assert.deepEqual(fixture.state.queries.map(query=>query.page),[2,3]);assert.equal(result.items.length,24);
-  assert.equal(result.items[0].id,'ajes-stats-cursor-2-3');assert.equal(result.items.at(-1).id,'ajes-stats-cursor-3-2');
-  assert.equal(new Set(result.items.map((item:any)=>item.id)).size,24);assert.equal(result.nextCursor,'3.3');
-  assert.equal(result.hasMore,true);assert.equal(result.total,null);
- }finally{fixture.close();}
+test('unbound legacy source-offset cursors are rejected before a source read',async()=>{
+ const fixture=await catalogPowerFixture(()=>{throw Error('unexpected source read');});
+ try{await assert.rejects(fixture.read({market:'japan',powerTo:'160',page:'2',after:'2.3'}),/ajes_invalid_query/);assert.equal(fixture.state.queries.length,0);}finally{fixture.close();}
 });
 
-test('power plus delivered-price filtering retains the existing priced continuation path',async()=>{
+test('power plus delivered-price filtering fills 24 while excluding excess power before pricing',async()=>{
  const pricedOffer=(power:unknown,id:string)=>({...offer(power,id),catalogPricingMode:undefined,totalRub:500000});
- const fixture=await catalogPowerFixture(query=>sourcePage(query,query.page===1?
-  [pricedOffer(150,'price-first'),pricedOffer(200,'price-excluded')]:Array.from({length:24},(_,i)=>pricedOffer(150,`price-next-${i}`)),24));
+ const fixture=await catalogPowerFixture(query=>sourcePage(query,query.page===1?[pricedOffer(150,'price-first'),pricedOffer(200,'price-excluded')]:Array.from({length:48},(_,i)=>pricedOffer(150,`price-next-${i}`)),48));
  try{
   const result=await fixture.read({market:'japan',powerTo:'160',budgetTo:'900000'});
-  assert.deepEqual(fixture.state.queries.map(query=>query.page),[1,2]);assert.equal(result.items.length,24);
-  assert.equal(result.nextCursor,'2.23');assert.equal(result.hasMore,true);assert.equal(result.total,null);
-  assert.deepEqual(fixture.state.priced.map(ids=>ids.length),[1,24]);
-  assert.ok(!fixture.state.priced.flat().includes('ajes-stats-price-excluded'),'known excessive power is removed before price work');
+  assert.deepEqual(fixture.state.queries.map(q=>[q.phase,q.page]),[['known',1],['known',2]]);assert.equal(result.items.length,24);
+  assert.match(result.nextCursor,/^jp1\./);assert.equal(result.hasMore,true);assert.equal(result.total,null);
+  assert.deepEqual(fixture.state.priced.map(ids=>ids.length),[1,48]);assert.ok(!fixture.state.priced.flat().includes('ajes-stats-price-excluded'));
  }finally{fixture.close();}
+});
+
+test('a local revision changed during pricing cannot cross the frozen power phase boundary',async()=>{
+ const fixture=await catalogPowerFixture(query=>sourcePage(query,[{...offer(150,'revision'),catalogPricingMode:undefined,totalRub:500000}],1));
+ try{fixture.state.priceHook=()=>{fixture.state.editorial={revision:'changed',entries:{}};};await assert.rejects(fixture.read({market:'japan',powerTo:'160',budgetTo:'900000'}),/ajes_cursor_expired/);}finally{fixture.close();}
 });
 
 test('supplier integer horsepower accepts number or varchar digits, never selects a comma alternative',()=>{
@@ -209,8 +197,6 @@ test('public supplier hp survives projection without changing prices or verified
  assert.equal(japanUnknownPower(unknown),true);
  const summary=japanPowerFilterSummary([publicOffer({...offer(200),make:'HONDA',model:'STEPWGN',fuel:'petrol',powertrainKind:'combustion'}),publicOffer(offer(120)),unknown]);
  assert.deepEqual(summary,{shown:3,localPower:1,supplierPower:1,unknownPower:1});
- assert.match(japanPowerFilterNotice(summary),/Мощность не указана: 1/);
- assert.match(japanPowerFilterNotice(summary),/не подтверждает право/);
 });
 
 test('the list preview and editable detail use the same scalar supplier hp with local and manual priority',()=>{

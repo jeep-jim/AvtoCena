@@ -1,14 +1,14 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createAjesClient} from '../apps/web/lib/catalog/ajes-client';
-import {ajesQuery} from '../apps/web/lib/catalog/ajes-query';
+import {ajesQuery,ajesSourceCacheSql} from '../apps/web/lib/catalog/ajes-query';
 const tick=()=>new Promise<void>(resolve=>setTimeout(resolve,0));
 const ip='203.0.113.10';
 const snapshot=(aggregate:string,at=Date.now())=>({items:[],page:1,pageSize:aggregate==='count'?1:500,received:1,rejected:0,observedAt:new Date(at).toISOString(),stale:false,
  ...(aggregate==='makes'?{makes:[{make:'TOYOTA',total:24}]}:aggregate==='models'?{models:[{make:'TOYOTA',model:'COROLLA',total:24}]}:aggregate==='colors'?{colors:[{color:'WHITE',total:24}]}:{total:24})});
 for(const aggregate of ['makes','models','colors','count'] as const)test(`ready ${aggregate} never waits for the occupied supplier queue`,async()=>{
  let release!:()=>void,started=0,reads=0,done=false;const held=new Promise<void>(r=>release=r);
- const sql=ajesQuery({table:'stats',aggregate}).sql;
+ const sql=ajesSourceCacheSql(ajesQuery({table:'stats',aggregate}).sql);
  const client=createAjesClient({password:()=> 'fixture',assertEnabled:async()=>{},reserve:async()=>{},readQuery:async key=>{reads++;return key===sql?snapshot(aggregate):null;},fetcher:async()=>{started++;await held;return Response.json([]);}});
  const busy=[1,2].map(page=>client.read({table:'stats',page},ip));
  try{
@@ -23,7 +23,7 @@ for(const aggregate of ['makes','models','colors','count'] as const)test(`ready 
 for(const aggregate of ['makes','models','colors','count'] as const)test(`${aggregate} preparation retains the observation deadline and source checks`,async t=>{
  let now=Date.parse('2026-11-07T12:00:00Z'),requests=0,disabled=false; t.mock.method(Date,'now',()=>now);
  const saved=snapshot(aggregate,now-29*60000);
- const client=createAjesClient({password:()=> 'fixture',assertEnabled:async()=>{if(disabled)throw Error('owner_disabled');},reserve:async()=>{},readQuery:async()=>saved,fetcher:async()=>{requests++;return Response.json(aggregate==='count'?[{total:25}]:[]);}});
+ const client=createAjesClient({password:()=> 'fixture',assertEnabled:async()=>{if(disabled)throw Error('owner_disabled');},reserve:async()=>{},readQuery:async()=>saved,fetcher:async()=>{requests++;return Response.json(aggregate==='count'?[{total:25}]:aggregate==='makes'?[{MARKA_NAME:'LEXUS',TAG1:'25'}]:[]);}});
  assert.equal((await client.read({table:'stats',aggregate},ip)).observedAt,saved.observedAt);assert.equal(requests,0);
  disabled=true;await assert.rejects(client.read({table:'stats',aggregate},ip),/owner_disabled/);disabled=false;
  now+=2*60000;await client.read({table:'stats',aggregate},ip);assert.equal(requests,1,'memoization must not renew the 30-minute observation window');

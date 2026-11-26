@@ -1,10 +1,11 @@
 /** Fixed public messages only; never surface supplier bodies or request URLs. */
 export class CatalogPageRequestError extends Error {
-  constructor(public readonly kind: 'timeout' | 'unavailable' | 'invalid') {
+  constructor(public readonly kind: 'timeout' | 'unavailable' | 'invalid' | 'expired') {
     super(`catalog_page_${kind}`);
   }
 }
 export function catalogPageErrorMessage(error: unknown) {
+  if(error instanceof CatalogPageRequestError&&error.kind==='expired')return 'Эту страницу нужно обновить. Вернитесь к началу подборки.';
   if (error instanceof CatalogPageRequestError && error.kind === 'timeout')
     return 'Загрузка заняла слишком много времени. Нажмите «Показать ещё», чтобы повторить — уже загруженные автомобили сохранены.';
   return 'Не удалось загрузить следующую подборку. Нажмите «Показать ещё», чтобы повторить — уже загруженные автомобили сохранены.';

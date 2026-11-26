@@ -1,5 +1,7 @@
 import {ajesFailureSlot,type AjesRequestDiagnostic} from './ajes-request-diagnostic';
 import type {CalculationIndex} from '../encyclopedia/calculation-index';
+import type {JapanPowerQueryContext} from './japan-power-query';
+import {japanVehicleExcluded} from './japan-vehicle-policy';
 import {createHash} from 'node:crypto';
 import {isIP} from 'node:net';
 import {gunzipSync} from 'node:zlib';
@@ -21,12 +23,14 @@ class AjesSavedRecovery {
 class AjesEmptyValidation extends AjesSavedRecovery {}
 const sourceTtlMs=30*60*1000;
 const sqlHash=(sql:string)=>createHash('sha256').update(sql).digest('hex');
-const needsEmptyProof=(value:any)=>value?.schemaVersion===2&&Array.isArray(value.items)&&value.items.length===0&&!(Number.isSafeInteger(value.received)&&value.received>0);
+const needsEmptyProof=(value:any)=>value?.page===1&&Array.isArray(value.makes)&&value.makes.length===0
+  ||value?.schemaVersion===2&&Array.isArray(value.items)&&value.items.length===0&&!(Number.isSafeInteger(value.received)&&value.received>0);
 function verifiedEmptyPage(value:any,sourceSql?:string,countSql?:string,fresh=true){
   const proof=value?.emptyPageEvidence,now=Date.now();
   const sourceTime=Date.parse(value?.observedAt||''),countTime=Date.parse(proof?.countObservedAt||'');
   const sourceAge=now-sourceTime,countAge=now-countTime;
   return value?.received===0&&value?.rejected===0&&Array.isArray(value.items)&&value.items.length===0
+    &&(value.makes===undefined||Array.isArray(value.makes)&&value.makes.length===0&&value.page===1)
     &&proof?.version===1&&proof.sourceObservedAt===value.observedAt&&proof.page===value.page&&proof.pageSize===value.pageSize
     &&Number.isSafeInteger(value.page)&&value.page>=1&&Number.isSafeInteger(value.pageSize)&&value.pageSize>=1
     &&Number.isSafeInteger(proof.countTotal)&&proof.countTotal>=0&&proof.countTotal<=(value.page-1)*value.pageSize
@@ -84,18 +88,21 @@ export function createAjesClient(deps:Dependencies) {
     return value;
   };
   const cooling=(key:string)=>{const value=failures.get(key);if(value&&value.until>Date.now())return value.reason;failures.delete(key);return null;};
-    async function read(input:unknown,clientIp:string,compiledQuery?:ReturnType<typeof ajesQuery>):Promise<any> {
+    async function read(input:unknown,clientIp:string,compiledQuery?:ReturnType<typeof ajesQuery>,powerContext?:JapanPowerQueryContext):Promise<any> {
       // Retired tables cannot read caches, credentials, quota or the supplier,
       // even when an old link or saved owner setting still requests them.
       assertAjesJapanTable(input&&typeof input==='object'?(input as AjesQuery).table:undefined);
-      const calculationIndex=compiledQuery?null:deps.calculationIndex?.()||null;
-      const query=compiledQuery??ajesQuery(input,calculationIndex);
+      const calculationIndex=powerContext?powerContext.snapshot.index:compiledQuery?null:deps.calculationIndex?.()||null;
+      const query=compiledQuery??ajesQuery(input,calculationIndex,powerContext);
       const cacheSql=ajesSourceCacheSql(query.sql);
-      const sourceKey=query.kind==='list'?sqlHash(cacheSql):'';
+      // An empty first make page also requires inventory COUNT0. Later make
+      // offsets count groups, so offer COUNT must never validate those offsets.
+      const verifyEmpty=query.kind==='list'||query.kind==='makes'&&query.page===1;
+      const sourceKey=verifyEmpty?sqlHash(cacheSql):'';
       // Capture the same local query facts now; a later index refresh must not
       // change the WHERE used to verify this exact source selection.
-      const countInput=query.kind==='list'?{...(input as AjesQuery),aggregate:'count' as const}:null;
-      const countQuery=countInput?ajesQuery(countInput,calculationIndex):null;
+      const countInput=verifyEmpty?{...(input as AjesQuery),aggregate:'count' as const}:null;
+      const countQuery=countInput?ajesQuery(countInput,calculationIndex,powerContext):null;
       const countSql=countQuery?ajesSourceCacheSql(countQuery.sql):'';
       if(!isIP(clientIp)) throw new AjesUnavailable('client_ip_missing');
       await deps.assertEnabled(query.table); // Also applies to cache hits after an owner disables the source.
@@ -118,7 +125,7 @@ export function createAjesClient(deps:Dependencies) {
         return !(Date.parse(value?.observedAt||'')>proofTime(known.proof));
       };
       const rememberEmpty=(value:any)=>{
-        if(query.kind!=='list'||!isUsable(value)||value.stale||value.partial||!verifiedEmptyPage(value,cacheSql,countSql,false))return;
+        if(!verifyEmpty||!isUsable(value)||value.stale||value.partial||!verifiedEmptyPage(value,cacheSql,countSql,false))return;
         const proof=value.emptyPageEvidence,known=barrier(),at=proofTime(proof);
         if(known&&(proofTime(known.proof)>=at||(known.supersededAt??0)>=at))return;
         const current=cache.peekFresh(cacheSql);
@@ -138,13 +145,13 @@ export function createAjesClient(deps:Dependencies) {
         const current=cache.peekFresh(cacheSql);
         if(current!==undefined){if(!beforeBarrier(current)){observeRows(current);return current;}cache.invalidate(cacheSql);}
         const known=barrier();if(!known||known.supersededAt)return undefined;
-        const value={schemaVersion:2,items:[],page:query.page,pageSize:query.pageSize,received:0,rejected:0,stale:false,observedAt:known.proof.sourceObservedAt,emptyPageEvidence:known.proof};
+        const value={...(query.kind==='makes'?{makes:[]}:{schemaVersion:2}),items:[],page:query.page,pageSize:query.pageSize,received:0,rejected:0,stale:false,observedAt:known.proof.sourceObservedAt,emptyPageEvidence:known.proof};
         return verifiedEmptyPage(value,cacheSql,countSql)?value:undefined;
       };
       const recoveredList=async(value:any)=>{
         await deps.assertEnabled(query.table);
         const latest=latestFresh();if(latest!==undefined)return remember(latest);
-        if(isUsable(value)&&value.items.length&&!beforeBarrier(value))return remember({...value,stale:true});
+        if(isUsable(value)&&(query.kind==='makes'?value.makes.length:value.items.length)&&!beforeBarrier(value))return remember({...value,stale:true});
         return null;
       };
       const listFallback=async(saved:any)=>{
@@ -181,7 +188,7 @@ export function createAjesClient(deps:Dependencies) {
         const age=Date.now()-Date.parse(value?.observedAt||'');
         const schema=['count','models','makes','colors'].includes(query.kind)||value?.schemaVersion===2;
         return isUsable(value)&&schema&&!value.stale&&!value.partial&&age<sourceTtlMs&&!beforeBarrier(value)
-          &&(query.kind!=='list'||!needsEmptyProof(value)||verifiedEmptyPage(value,cacheSql,countSql));
+          &&(!verifyEmpty||!needsEmptyProof(value)||verifiedEmptyPage(value,cacheSql,countSql));
       };
       let prepared:any=null;
       if(inspectPrepared&&deps.readQuery){
@@ -222,6 +229,35 @@ export function createAjesClient(deps:Dependencies) {
             if(Buffer.byteLength(JSON.stringify(diagnostic))<=64*1024)persist(()=>deps.saveRequestFailure!(diagnostic));
           }
         };
+        const deferEmpty=(result:any)=>new AjesEmptyValidation(async()=>{
+          let failure:AjesUnavailable;
+          try{
+            const count=await read(countInput!,clientIp,countQuery!,powerContext);
+            const countAge=Date.now()-Date.parse(count?.observedAt||'');
+            if(count.stale||count.partial||count.upperBound||!Number.isSafeInteger(count.total)||count.total<0
+              ||countAge<0||countAge>=sourceTtlMs||count.total>(query.page-1)*query.pageSize)throw new AjesUnavailable('empty_response');
+            const verified={...result,emptyPageEvidence:{version:1,sourceQueryHash:sqlHash(cacheSql),countQueryHash:sqlHash(countSql),page:query.page,pageSize:query.pageSize,sourceObservedAt:result.observedAt,countObservedAt:count.observedAt,countTotal:count.total}};
+            if(!verifiedEmptyPage(verified,cacheSql,countSql))throw new AjesUnavailable('empty_response');
+            await deps.assertEnabled(query.table);
+            rememberEmpty(verified);
+            // No supplier request here. Its bounded cache stores only the
+            // verified result and expires at the older source observation.
+            return await cache.get(cacheSql,async()=>{
+              await deps.assertEnabled(query.table);
+              if(!verifiedEmptyPage(verified,cacheSql,countSql))throw new AjesUnavailable('empty_response');
+              if(deps.saveQuery)persist(()=>deps.saveQuery!(cacheSql,verified));
+              return verified;
+            },visitorKey);
+          }catch(error){failure=error instanceof AjesUnavailable?error:new AjesUnavailable('empty_response');}
+          await deps.assertEnabled(query.table);
+          const key=failure.reason==='visitor_restricted'?'visitor:'+clientIp:visitorKey;
+          if(!cooling(key))failures.set(key,{reason:failure.reason,until:Date.now()+(failure.reason==='visitor_restricted'?300000:30000)});
+          while(failures.size>500)failures.delete(failures.keys().next().value!);
+          recordFailure(failure);
+          // A failed COUNT preserves the previous useful exact response,
+          // explicitly stale. It cannot replace it with zero cars or makes.
+          return visitorCache.get(visitorKey,async()=>{const fallback=query.kind==='list'?await listFallback(saved):await recoveredList(saved);if(fallback)return fallback;throw failure;});
+        });
         // Power is a local selection over the same requested raw page. It uses
         // the ordinary source deadline, not a shorter deadline that discards
         // otherwise valid responses and unnecessarily falls back to old rows.
@@ -267,6 +303,8 @@ export function createAjesClient(deps:Dependencies) {
             if(makes?.some(m=>!m.make))throw new AjesUnavailable('invalid_response');
             const colors=query.kind==='colors'?rows.map(r=>({color:String(r.COLOR??r.color??'').trim(),total:totalOf(r)})).filter(r=>r.color):undefined;
             const result={items:[],models,makes,colors,total:query.kind==='count'?totalOf(rows[0]):undefined,page:query.page,pageSize:query.pageSize,received:rows.length,rejected:0,stale:false,observedAt:new Date().toISOString()};
+            if(query.kind==='makes'&&query.page===1&&rows.length===0)throw deferEmpty(result);
+            if(query.kind==='makes')observeRows(result);
             if(deps.saveQuery)persist(()=>deps.saveQuery!(cacheSql,result));
             return result;
           }
@@ -276,35 +314,7 @@ export function createAjesClient(deps:Dependencies) {
           if(query.kind==='list'&&rows.length===0){
             // An empty wire array is not proof of inventory exhaustion. Do not
             // overwrite useful saved rows or share this as a fresh success.
-            throw new AjesEmptyValidation(async()=>{
-              let failure:AjesUnavailable;
-              try{
-                const count=await read(countInput!,clientIp,countQuery!);
-                const countAge=Date.now()-Date.parse(count?.observedAt||'');
-                if(count.stale||count.partial||count.upperBound||!Number.isSafeInteger(count.total)||count.total<0
-                  ||countAge<0||countAge>=sourceTtlMs||count.total>(query.page-1)*query.pageSize)throw new AjesUnavailable('empty_response');
-                const verified={...result,emptyPageEvidence:{version:1,sourceQueryHash:sqlHash(cacheSql),countQueryHash:sqlHash(countSql),page:query.page,pageSize:query.pageSize,sourceObservedAt:result.observedAt,countObservedAt:count.observedAt,countTotal:count.total}};
-                if(!verifiedEmptyPage(verified,cacheSql,countSql))throw new AjesUnavailable('empty_response');
-                await deps.assertEnabled(query.table);
-                rememberEmpty(verified);
-                // No supplier request here. Its bounded cache stores only the
-                // verified result and expires at the older source observation.
-                return await cache.get(cacheSql,async()=>{
-                  await deps.assertEnabled(query.table);
-                  if(!verifiedEmptyPage(verified,cacheSql,countSql))throw new AjesUnavailable('empty_response');
-                  if(deps.saveQuery)persist(()=>deps.saveQuery!(cacheSql,verified));
-                  return verified;
-                },visitorKey);
-              }catch(error){failure=error instanceof AjesUnavailable?error:new AjesUnavailable('empty_response');}
-              await deps.assertEnabled(query.table);
-              const key=failure.reason==='visitor_restricted'?'visitor:'+clientIp:visitorKey;
-              if(!cooling(key))failures.set(key,{reason:failure.reason,until:Date.now()+(failure.reason==='visitor_restricted'?300000:30000)});
-              while(failures.size>500)failures.delete(failures.keys().next().value!);
-              recordFailure(failure);
-              // The older exact page (or bounded partial recovery) remains
-              // explicitly stale. A failed COUNT must never become zero cars.
-              return visitorCache.get(visitorKey,async()=>{const fallback=await listFallback(saved);if(fallback)return fallback;throw failure;});
-            });
+            throw deferEmpty(result);
           }
           if(query.kind==='detail'&&items.length===1){
             const row=rows[0];
@@ -353,6 +363,7 @@ export function createAjesClient(deps:Dependencies) {
               if(fallbackAge>=0&&fallbackAge<7*86400000&&fallback?.items?.length===1&&fallback.items[0].id===query.id&&fallback.items[0].table===query.table){await deps.assertEnabled(query.table);return {...fallback,partial:true,stale:true};}
             }
             if(query.kind==='list'){const fallback=await listFallback(saved);if(fallback)return fallback;}
+            if(query.kind==='makes'&&query.page===1){const fallback=await recoveredList(saved);if(fallback)return fallback;throw failure;}
             if(query.kind!=='list'&&usable&&(saved.items.length>0||query.kind==='count'||query.kind==='models'||query.kind==='makes'||query.kind==='colors')){await deps.assertEnabled(query.table);return {...saved,stale:true};}
             throw failure;
           });
@@ -392,13 +403,14 @@ export function createAjesClient(deps:Dependencies) {
             // Retained directory pages are names, not a fresh inventory count.
             await deps.assertEnabled(query.table);
             const saved=prepared;
-            if(isUsable(saved)){await deps.assertEnabled(query.table);return {...saved,stale:true};}
+            if(query.kind==='makes'&&query.page===1){const fallback=await recoveredList(saved);if(fallback)return fallback;}
+            else if(isUsable(saved)){await deps.assertEnabled(query.table);return {...saved,stale:true};}
           }
           throw new AjesUnavailable('local_busy');
         }
         throw error;
       }).then(value=>{
-        if(query.kind==='list'){
+        if(verifyEmpty){
           observeRows(value);
           if(beforeBarrier(value)){
             const latest=latestFresh();if(latest!==undefined)return latest;
@@ -408,7 +420,11 @@ export function createAjesClient(deps:Dependencies) {
         return value;
       });
     }
-  return {read:(input:unknown,clientIp:string)=>read(input,clientIp)};
+  return {read:async(input:unknown,clientIp:string,powerContext?:JapanPowerQueryContext)=>{
+    const result=await read(input,clientIp,undefined,powerContext);
+    const items=result.items.filter((lot:any)=>!japanVehicleExcluded(lot));
+    return items.length===result.items.length?result:{...result,items};
+  }};
 }
 function quotaNumber(value:string|null){return value!==null&&/^\d+$/.test(value)?Number(value):null;}
 
@@ -435,9 +451,10 @@ export async function readAjesMakeDirectory(client:ReturnType<typeof createAjesC
  const makes:Array<{make:string;total:number}>=[],seen=new Set<string>();let observedAt='',stale=false;
  for(let page=1;page<=10;page++){
   const result=await client.read({...input,aggregate:'makes',page},ip);
-  observedAt=observedAt||result.observedAt;stale=stale||Boolean(result.stale);
+  if(result.partial||!Array.isArray(result.makes)||!Number.isSafeInteger(result.received)||result.received<0||result.received>500||result.makes.length!==result.received)throw new AjesUnavailable('directory_incomplete');
+  observedAt=!observedAt||result.observedAt<observedAt?result.observedAt:observedAt;stale=stale||Boolean(result.stale);
   for(const row of result.makes||[]){const key=row.make.toUpperCase();if(seen.has(key))throw new AjesUnavailable('directory_page_repeated');seen.add(key);makes.push(row);}
-  if(result.received<500)return {makes,observedAt,stale};
+  if(result.received<500)return {makes,observedAt,stale,complete:true as const};
  }
  throw new AjesUnavailable('directory_too_large');
 }

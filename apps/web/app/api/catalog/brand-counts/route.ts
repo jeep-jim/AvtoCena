@@ -9,6 +9,7 @@ import { filterGreenCorner, greenCornerNeedsFullPricing } from "@/lib/catalog/gr
 import { NextResponse } from "next/server";
 import { readCatalogBrandCounts } from "@/lib/catalog/storage";
 import type { CatalogSearchParams } from "@/lib/catalog/types";
+import {canonicalCatalogBrand} from '@/lib/catalog/brands';
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -47,10 +48,13 @@ export async function GET(request: Request) {
   }
   if(await usesAjesMarket(url.searchParams.get('market'),url.searchParams.get('source'))){
     try{
-      const params={...Object.fromEntries(url.searchParams),make:undefined,model:undefined};
+      // The Japan navigation directory is the whole admitted market. Current
+      // filters remain in navigation links, not in this list of available makes.
+      const directory=url.searchParams.get('directory')==='1';
+      const params=directory?{market:'japan'}:{...Object.fromEntries(url.searchParams),make:undefined,model:undefined};
       const result=await readAjesMakes(JSON.stringify(params)),counts:Record<string,number>={},modelCounts:Record<string,number>={};
       for(const row of result.makes)counts[row.make]=row.total;
-      return NextResponse.json({generationId:result.observedAt,counts,modelCounts},{headers:{'Cache-Control':'private, max-age=30, stale-while-revalidate=60'}});
+      return NextResponse.json({generationId:result.observedAt,counts,modelCounts,...(directory?{makes:[...new Set(result.makes.filter(row=>row.total>0).map(row=>canonicalCatalogBrand(row.make)))].sort((a,b)=>a.localeCompare(b,'ru')),directoryComplete:result.complete,stale:result.stale}:{})},{headers:{'Cache-Control':'private, max-age=30, stale-while-revalidate=60'}});
     }catch{return NextResponse.json({error:'japan_counts_unavailable'},{status:503});}
   }
   const params: CatalogSearchParams = {

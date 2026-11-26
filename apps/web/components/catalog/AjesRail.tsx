@@ -8,10 +8,8 @@ import {AjesFilterUnavailable} from '@/lib/catalog/ajes-query';
 import {readAjesCatalogPage,readAjesCountSummary} from '@/lib/catalog/ajes-catalog';
 import {ajesCountText,exactAjesCount} from '@/lib/catalog/ajes-count-display';
 import {assertCollectionEnabled,CollectionDisabledError} from '@/lib/catalog/collection-controls';
-import {publicOffer} from '@/lib/catalog/storage';
 import {CatalogCard} from './CatalogCard';
 import {JapanRailFrame,japanRailHref,japanSavedPreviewText} from './JapanRailFrame';
-import {japanPowerFilterSummary,japanPowerFilterNotice} from '@/lib/catalog/japan-source-power';
 
 function railQuery(market:'japan'|'china'|'korea',params:Record<string,string|string[]|undefined>){assertAjesJapanMarket(market);return {...params,market,page:'1',pageSize:'24'};}
 export async function readAjesRailCount(market:'japan'|'china'|'korea',params:Record<string,string|string[]|undefined>){
@@ -46,13 +44,11 @@ export async function AjesRail({market='japan',params={},prepared}:{market?:'jap
  const {disabled,items,count,unavailable,unsupported,partial,stale,filteredByPage,hasMore,observedAt}=await (prepared||readAjesRailData(market,params));
  if(disabled)return null;
  const total=exactAjesCount(count);
- const powerNotice=params.powerFrom||params.powerTo?japanPowerFilterNotice(japanPowerFilterSummary(items)):'';
  return <JapanRailFrame params={params} status={unavailable||unsupported?'unavailable':items.length?'ready':'empty'} count={count?<MarketResultCount total={total??undefined}>{ajesCountText(count)}</MarketResultCount>:<Suspense fallback={<MarketResultCount>{ajesCountText(null)}</MarketResultCount>}><RailCount market={market} params={params}/></Suspense>}>
   <CatalogSectionLoading/>
-  {powerNotice?<p role="status" className="mb-3 text-sm text-[var(--ac-muted)]">{powerNotice}</p>:null}
   {String(params.sort||'').split(',').some(term=>term.startsWith('totalRub'))&&<p className="mb-3 text-sm text-[var(--ac-muted)]">По рассчитанной цене в загруженной подборке.</p>}
   {(partial||stale)&&items.length>0?<p role="status" className="mb-3 text-sm text-[var(--ac-muted)]">{stale?japanSavedPreviewText(observedAt):'Показана доступная часть подборки.'} <Link href={href} className="underline">Открыть каталог</Link></p>:null}
-  {unsupported?<p role="status" className="text-sm text-[var(--ac-muted)]">Не удалось применить выбранные условия. <Link href={href} className="underline">Открыть каталог</Link></p>:unavailable?<p role="status" className="rounded-xl border border-[var(--ac-border)] p-4 text-sm">Не удалось загрузить автомобили. <Link href={href} className="underline">Открыть каталог</Link></p>:items.length?<div className={MARKET_RAIL_CLASS}>{items.map(offer=><div key={offer!.id} className="min-w-0"><CatalogCard offer={publicOffer(offer!)} compact dense/></div>)}</div>:<p role="status" className="text-sm text-[var(--ac-muted)]">{filteredByPage||partial||hasMore||stale?'В загруженной подборке совпадений нет.':total===0?'По выбранным параметрам автомобили не найдены.':'В этой подборке автомобили пока не отображаются.'} <Link href={href} className="underline">Продолжить поиск</Link></p>}
+  {unsupported?<p role="status" className="text-sm text-[var(--ac-muted)]">Не удалось применить выбранные условия. <Link href={href} className="underline">Открыть каталог</Link></p>:unavailable?<p role="status" className="rounded-xl border border-[var(--ac-border)] p-4 text-sm">Не удалось загрузить автомобили. <Link href={href} className="underline">Открыть каталог</Link></p>:items.length?<div className={MARKET_RAIL_CLASS}>{items.map(offer=><div key={offer!.id} className="min-w-0"><CatalogCard offer={offer!} compact dense/></div>)}</div>:<p role="status" className="text-sm text-[var(--ac-muted)]">{filteredByPage||partial||hasMore||stale?'В загруженной подборке совпадений нет.':total===0?'По выбранным параметрам автомобили не найдены.':'В этой подборке автомобили пока не отображаются.'} <Link href={href} className="underline">Продолжить поиск</Link></p>}
  </JapanRailFrame>;
 }
 

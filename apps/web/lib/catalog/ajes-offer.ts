@@ -11,7 +11,9 @@ export function ajesOffer(lot:NonNullable<ReturnType<typeof ajesLot>>,rate:Curre
  const sellerPriceRub=Math.round(lot.finalPriceJpy*rate.effectiveRate);
  return {id:`ajes-stats-${lot.id}`,sourceId:'ajes_japan_feed',sourceOfferId:lot.id,market:'japan',offerType:'auction',status:'sold',catalogKind:'auction_result',auctionResult:'sold',auctionPriceKind:'published_result',
  make:ajesText(lot.make),model:ajesText(lot.model),trim:ajesText(lot.trim),year:lot.year,mileageKm:lot.mileageKm??undefined,engineCc:lot.engineCc||undefined,
- fuel,bodyType:catalogBodyType({make:lot.make,model:lot.model,trim:lot.trim,year:lot.year})||undefined,sourceTitle:[lot.make,lot.model,lot.trim].filter(Boolean).join(' '),
+ fuel,bodyType:catalogBodyType({make:lot.make,model:lot.model,trim:lot.trim,year:lot.year,bodyType:lot.bodyType})||undefined,
+ vehicleCategory:/^(?:M1|N1)$/.test(ajesText(lot.vehicleCategory).toUpperCase())?ajesText(lot.vehicleCategory).toUpperCase() as 'M1'|'N1':undefined,
+ sourceTitle:[lot.make,lot.model,lot.trim].filter(Boolean).join(' '),
  powertrainKind:ajesText(lot.sourceFuel).toUpperCase()==='HE'?'series_hybrid':ajesText(lot.sourceFuel).toUpperCase()==='E'?'electric':undefined,
  transmission:({AT:'automatic',MT:'manual',CVT:'cvt',DCT:'dct'} as Record<string,string>)[ajesText(lot.sourceTransmission).toUpperCase()],
  drive:({FF:'fwd',FR:'rwd',FWD:'fwd',RWD:'rwd',AWD:'awd','4WD':'awd',FULLTIME4WD:'awd'} as Record<string,string>)[ajesText(lot.sourceDrive).toUpperCase()],

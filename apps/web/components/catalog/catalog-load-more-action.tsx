@@ -13,7 +13,7 @@ export async function loadMoreCatalog(query: CatalogSearchParams, page: number, 
   let result;
   try {
     const response = await fetch(`/api/catalog/search?${params}`, {signal});
-    if (!response.ok) throw new CatalogPageRequestError('unavailable');
+    if (!response.ok){const failure=await response.json().catch(()=>null);throw new CatalogPageRequestError(failure?.reason==='cursor_expired'?'expired':'unavailable');}
     result = await response.json();
   } catch(error) {
     if(signal.aborted)throw new CatalogPageRequestError('timeout');
@@ -21,5 +21,5 @@ export async function loadMoreCatalog(query: CatalogSearchParams, page: number, 
   }
   if (result.page !== page || !Array.isArray(result.items) || !(Number.isSafeInteger(result.total)||result.total===null)) throw new CatalogPageRequestError("invalid");
   if(query.market==='china'&&query.preparedCut&&(result.generationId!==query.preparedCut||result.items.some((row:any)=>row?.market!=='china'||row.preparedChinaSelection?.generationId!==query.preparedCut)))throw new CatalogPageRequestError('unavailable');
-  return {incomplete:Boolean(result.partial||result.stale),cards: result.items.map((offer: any) => <CatalogCard key={offer.id} offer={offer} compact dense />), ids: result.items.map((offer: any) => offer.id), total: result.total, page, generationId: result.generationId, nextCursor: typeof result.nextCursor === "string" ? result.nextCursor : result.nextCursor === null ? null : undefined, hasMore: typeof result.hasMore === "boolean" ? result.hasMore : undefined};
+  return {incomplete:Boolean(result.partial||result.stale),retryCursor:typeof result.retryCursor==='string'?result.retryCursor:undefined,previousCursor:typeof result.previousCursor==='string'?result.previousCursor:undefined,cards: result.items.map((offer: any) => <CatalogCard key={offer.id} offer={offer} compact dense />), ids: result.items.map((offer: any) => offer.id), total: result.total, page, generationId: result.generationId, nextCursor: typeof result.nextCursor === "string" ? result.nextCursor : result.nextCursor === null ? null : undefined, hasMore: typeof result.hasMore === "boolean" ? result.hasMore : undefined};
 }

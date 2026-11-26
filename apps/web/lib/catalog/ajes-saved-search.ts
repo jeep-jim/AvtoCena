@@ -1,6 +1,6 @@
 import {JAPAN_MIN_MODEL_YEAR} from './japan-year-policy';
 import {ajesQuery,type AjesQuery} from './ajes-query';
-import {knownHeavyVehicleFamily} from './heavy-vehicle-families';
+import {japanVehicleExcluded} from './japan-vehicle-policy';
 import {enrichJapanDrive} from './japan-drive';
 import type {CalculationIndex} from '../encyclopedia/calculation-index';
 
@@ -19,7 +19,7 @@ export function findSavedAjesSearch(input:AjesQuery,snapshots:Record<string,any>
  const matches=Object.values(snapshots).filter(saved=>{
   const age=now-Date.parse(saved?.observedAt||''),lot=saved?.items?.[0];
   return age>=0&&age<7*86400000&&lot?.table==='stats'&&/^[A-Za-z0-9_-]{1,64}$/.test(lot.id||'')&&lot.make&&lot.model&&lot.year>=JAPAN_MIN_MODEL_YEAR&&lot.year<=new Date(now).getUTCFullYear()+1
-   &&/^sold$/i.test(lot.status||'')&&lot.finalPriceJpy>0&&!knownHeavyVehicleFamily(lot.make,lot.model)
+   &&/^sold$/i.test(lot.status||'')&&lot.finalPriceJpy>0&&!japanVehicleExcluded(lot)
    &&(!makes||makes.includes(normalized(lot.make)))
    &&(!models&&!families||Boolean(models?.includes(normalized(lot.model)))||Boolean(families?.some(model=>normalized(lot.model).startsWith(model+' '))))
    &&(!drives||drives.includes(enrichJapanDrive({drive:undefined as string|undefined,market:'japan',make:lot.make,model:lot.model,year:lot.year,trim:lot.trim,chassisCode:lot.chassisCode,operational:{raw:{sourceDrive:lot.sourceDrive}}},driveIndex).drive||''))
@@ -42,7 +42,7 @@ export function savedAjesFacets(snapshots:Record<string,any>,now=Date.now()){
  const models=new Map<string,{make:string;model:string}>();
  for(const saved of Object.values(snapshots)){
   const lot=saved?.items?.[0],age=now-Date.parse(saved?.observedAt||'');
-  if(!(age>=0&&age<7*86400000)||lot?.table!=='stats'||!lot.make||!lot.model||! /^[A-Za-z0-9_-]{1,64}$/.test(lot.id||'')||!Number.isInteger(lot.year)||lot.year<JAPAN_MIN_MODEL_YEAR||lot.year>new Date(now).getUTCFullYear()+1||!/^sold$/i.test(lot.status||'')||!(lot.finalPriceJpy>0)||knownHeavyVehicleFamily(lot.make,lot.model))continue;
+  if(!(age>=0&&age<7*86400000)||lot?.table!=='stats'||!lot.make||!lot.model||! /^[A-Za-z0-9_-]{1,64}$/.test(lot.id||'')||!Number.isInteger(lot.year)||lot.year<JAPAN_MIN_MODEL_YEAR||lot.year>new Date(now).getUTCFullYear()+1||!/^sold$/i.test(lot.status||'')||!(lot.finalPriceJpy>0)||japanVehicleExcluded(lot))continue;
   models.set(JSON.stringify([lot.make,lot.model]),{make:lot.make,model:lot.model});
  }
  return {makes:[...new Set([...models.values()].map(m=>m.make))].sort(),models:[...models.values()]};

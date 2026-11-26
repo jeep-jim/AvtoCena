@@ -14,31 +14,31 @@ import {CatalogLoadMore} from './CatalogLoadMore';
 import {BrandLogoRail} from './BrandLogoRail';
 import {JapanSectionTabs} from './JapanSectionTabs';
 import {CatalogMarketFlag} from './CatalogMarketFlag';
-import {readAjesCatalogPage,readAjesCountSummary,readAjesMakes,AjesFilterUnavailable} from '@/lib/catalog/ajes-catalog';
+import {readAjesCatalogPage,readAjesCountSummary,AjesFilterUnavailable} from '@/lib/catalog/ajes-catalog';
 import {AjesInputError} from '@/lib/catalog/ajes-query';
 import {AjesUnavailable} from '@/lib/catalog/ajes-client';
 import {ajesCountText,exactAjesCount,ajesPaginationCountText} from '@/lib/catalog/ajes-count-display';
-import {japanPowerFilterSummary,japanPowerFilterNotice} from '@/lib/catalog/japan-source-power';
 type Params=Record<string,string|string[]|undefined>;
 export async function AjesCatalog({params,embedded=false,dealer}:{params:Params;embedded?:boolean;dealer?:DealerBrowsingContext|null}){
  const initial=Object.fromEntries(Object.entries(params).map(([k,v])=>[k,Array.isArray(v)?v[0]||'':v||'']));assertAjesJapanMarket(initial.market);const market='japan';const label='Япония';initial.market=market;if(!initial.make&&initial.brand)initial.make=initial.brand;
- let result:Awaited<ReturnType<typeof readAjesCatalogPage>>|undefined,error='';
+ let result:Awaited<ReturnType<typeof readAjesCatalogPage>>|undefined,error='',cursorExpired=false;
  // The independent streamed count below starts after the visible page. Two
  // concurrent category visits must not fill both supplier slots with counts.
- try{result=await readAjesCatalogPage(initial,undefined,{includeCount:false});}catch(e){error=e instanceof AjesFilterUnavailable?'Это условие поиска пока не поддерживается для выбранного рынка. Снимите его; уточнить параметры и рассчитать доставку можно в карточке.':e instanceof AjesInputError?'Проверьте условия и диапазоны поиска.':e instanceof AjesUnavailable&&e.reason==='visitor_restricted'?'Источник отклонил подключение. Сохранённых результатов этого поиска пока нет. Попробуйте позже.':'Не удалось обновить автомобили. Попробуйте позже.';}
+ try{result=await readAjesCatalogPage(initial,undefined,{includeCount:false});}catch(e){cursorExpired=e instanceof AjesUnavailable&&e.reason==='cursor_expired';error=cursorExpired?'Эту страницу нужно обновить. Вернитесь к началу подборки.':e instanceof AjesFilterUnavailable?'Это условие поиска пока не поддерживается для выбранного рынка. Снимите его; уточнить параметры и рассчитать доставку можно в карточке.':e instanceof AjesInputError?'Проверьте условия и диапазоны поиска.':e instanceof AjesUnavailable&&e.reason==='visitor_restricted'?'Источник отклонил подключение. Сохранённых результатов этого поиска пока нет. Попробуйте позже.':'Не удалось обновить автомобили. Попробуйте позже.';}
+ const restartParams=new URLSearchParams(initial);restartParams.delete('after');restartParams.delete('page');
  // Complete brand/model directories are optional navigation metadata. The
  // controls already fetch them on opening; never hold visible cards behind them.
  const sourceTotal=result?.countSummary;
- const powerNotice=result&&(initial.powerFrom||initial.powerTo)?japanPowerFilterNotice(japanPowerFilterSummary(result.items)):'';
  const displayTotal=exactAjesCount(sourceTotal);
  const models=[...new Map<string,{make:string;model:string;total:number}>((result?.items||[]).map((item:any)=>[`${item.make}|${item.model}`,{make:String(item.make),model:String(item.model),total:0}])).values()];
  const makes=[...new Set([...models.map(m=>m.make),...(initial.make||'').split(',').filter(Boolean)])];
  const facets={makes,models,markets:[market],bodyTypes:[],fuels:['petrol','diesel','hybrid','electric','lpg'],transmissions:['automatic','manual','cvt','dct'],drives:['fwd','rwd','awd']};
+ const brandRail=<BrandLogoRail initial={initial} brands={makes} resultCount={displayTotal??undefined}/>;
  const Container=embedded?'div':'main';
  return <Container className={`ac-catalog-page ac-page-copy ac-ajes-catalog ${embedded?'dealer-shared-catalog':'min-h-screen text-[var(--ac-text)]'}`}>
  {!embedded&&<PublicHeader backHref="/" backLabel="На главную"/>}
  <section className={embedded?'ac-catalog-shell w-full py-5':'ac-catalog-shell mx-auto w-full max-w-[1500px] px-4 py-6 md:px-8 md:py-10'}>
- <CatalogSidebar dealerLayout={embedded} resultScope={`ajes:${market}:${embedded}`} resultError={error||undefined} filters={<CatalogFilters initial={initial} facets={facets} resultCount={displayTotal??undefined} auctionResults/>} header={<div className={embedded?"ac-dealer-catalog-title":"contents"}>
+ <CatalogSidebar dealerLayout={embedded} brandRail={embedded?undefined:brandRail} resultScope={`ajes:${market}:${embedded}`} resultError={error||undefined} filters={<CatalogFilters initial={initial} facets={facets} resultCount={displayTotal??undefined} auctionResults/>} header={<div className={embedded?"ac-dealer-catalog-title":"contents"}>
 
 
  {!embedded&&<nav aria-label="Хлебные крошки" className="ac-catalog-breadcrumbs mb-4 flex items-center gap-2 text-xs font-black text-[var(--ac-muted)]"><Link href="/">Главная</Link><span>/</span><Link href="/cars">Каталог</Link><span>/</span><span aria-current="page">{label}</span></nav>}
@@ -50,29 +50,21 @@ export async function AjesCatalog({params,embedded=false,dealer}:{params:Params;
  </p>}
  </div>
  </div>}>
- <Suspense fallback={<BrandLogoRail initial={initial} brands={makes.filter(make=>!initial.make||initial.make.split(',').some(value=>value.toLowerCase()===make.toLowerCase()))} resultCount={displayTotal??undefined}/>}>
-  <AjesBrandRail initial={initial} fallbackBrands={makes} resultCount={displayTotal??undefined}/>
- </Suspense>
+ {embedded?brandRail:null}
  <div className="mb-4 mt-8 flex flex-wrap items-center justify-between gap-3 md:mt-9">
  <h2 className="flex flex-wrap items-center gap-2 text-[26px] font-black tracking-[-0.04em] md:text-4xl"><CatalogMarketFlag market={market} className="h-5 w-7 md:h-6 md:w-9"/><span>{label}</span><Suspense fallback={<MarketResultCount>{ajesCountText(sourceTotal)}</MarketResultCount>}>{sourceTotal?<><CatalogResultCountUpdate queryKey={JSON.stringify(initial)} text={ajesCountText(sourceTotal)} total={exactAjesCount(sourceTotal)}/><MarketResultCount total={displayTotal??undefined}>{ajesCountText(sourceTotal)}</MarketResultCount></>:<AjesIndependentCount initial={initial}/>}</Suspense></h2>
  {market==='japan'&&<JapanSectionTabs active="auction" params={initial}/>}
  </div>
+ {cursorExpired&&<Link href={`/cars?${restartParams}`} className="text-sm font-bold underline">Открыть первую страницу</Link>}
  {result&&<div>
- {powerNotice?<p role="status" data-japan-power-summary-page={result.page} className="mb-3 text-sm text-[var(--ac-muted)]">Страница {result.page}: {powerNotice}</p>:null}
  {String(initial.sort||'').split(',').some(term=>term.startsWith('totalRub'))&&<p className="mb-3 text-sm text-[var(--ac-muted)]">По рассчитанной цене в загруженной подборке. На следующих страницах могут быть более дешёвые автомобили.</p>}
  {!result.items.length&&!result.hasMore&&!result.partial&&!result.stale&&<p role="status" className="rounded-2xl bg-[var(--ac-surface)] p-6 text-sm text-[var(--ac-muted)]">По выбранным параметрам автомобили не найдены. Попробуйте изменить условия поиска.</p>}
- <CatalogLoadMore resultQueryKey={JSON.stringify(initial)} key={JSON.stringify(initial)} query={{...initial,market} as any} initialPage={result.page} initialTotal={result.total} initialCount={result.items.length} initialCards={result.items.map((offer:any)=><CatalogCard key={offer.id} offer={offer} compact dense/>)} initialIncomplete={Boolean(result.partial||result.stale)} initialHasMore={result.hasMore} initialNextCursor={result.nextCursor} resultCountLabel={ajesPaginationCountText(sourceTotal)}/>
+ <CatalogLoadMore resultQueryKey={JSON.stringify(initial)} key={JSON.stringify(initial)} query={{...initial,market} as any} initialPage={result.page} initialTotal={result.total} initialCount={result.items.length} initialCards={result.items.map((offer:any)=><CatalogCard key={offer.id} offer={offer} compact dense/>)} initialIncomplete={Boolean(result.partial||result.stale)} initialHasMore={result.hasMore} initialNextCursor={result.nextCursor} initialRetryCursor={'retryCursor' in result?result.retryCursor:undefined} initialPreviousCursor={result.previousCursor} resultCountLabel={ajesPaginationCountText(sourceTotal)}/>
  </div>}
 </CatalogSidebar>
  </section>
  <style dangerouslySetInnerHTML={{__html:'html body .ac-catalog-page.ac-ajes-catalog{background:var(--ac-page-bg)!important;background-image:none!important}'}}/>
  </Container>;
-}
-
-async function AjesBrandRail({initial,fallbackBrands,resultCount}:{initial:Record<string,string>;fallbackBrands:string[];resultCount?:number}){
- const directory=await readAjesMakes(JSON.stringify(initial)).catch(()=>null);
- const brands=directory?directory.makes.filter(row=>row.total>0).map(row=>row.make):fallbackBrands;
- return <BrandLogoRail initial={initial} brands={brands.filter(make=>!initial.make||initial.make.split(',').some(value=>value.toLowerCase()===make.toLowerCase()))} resultCount={resultCount}/>;
 }
 
 async function AjesIndependentCount({initial}:{initial:Record<string,string>}){

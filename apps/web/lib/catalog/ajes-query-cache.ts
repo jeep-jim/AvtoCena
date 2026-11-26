@@ -1,6 +1,7 @@
 import {createHash} from 'node:crypto';
 import {heavyVehicleSqlExclusion} from './heavy-vehicle-families';
-import {ajesQuery} from './ajes-query';
+import {ajesQuery,ajesSourceCacheSql} from './ajes-query';
+import {japanVehicleSqlExclusion} from './japan-vehicle-policy';
 
 type Store={readJson:(key:string,fallback:null)=>Promise<any>;writeJson:(key:string,value:any)=>Promise<unknown>};
 const root='catalog/partner-cache/ajes/queries';
@@ -14,14 +15,14 @@ export function retainedAjesQueryEntries(saved:any):QueryEntry[]{
   .filter((entry):entry is QueryEntry=>typeof entry?.hash==='string'&&/^[a-f0-9]{64}$/.test(entry.hash)&&entry.value&&typeof entry.value==='object')
   .map(({hash,value})=>({hash,value}));
 }
-const overallCount=ajesQuery({aggregate:'count'}).sql,overallMakes=ajesQuery({aggregate:'makes'}).sql;
+const overallCount=ajesQuery({aggregate:'count'}).sql,overallMakes=ajesSourceCacheSql(ajesQuery({aggregate:'makes'}).sql);
 /** Keep counters out of the list collision pool; always verify the complete SQL hash. */
 export function ajesQueryCacheLocation(sql:string){
  const hash=createHash('sha256').update(sql).digest('hex'),slot=parseInt(hash.slice(0,8),16)%128;
  const legacy=`${root}/${slot}.json`;
  const key=sql.startsWith('select count(*) from')
   ?`${root}/counts/${sql===overallCount?'overall':slot}.json`
-  :sql.startsWith('select marka_name,')?`${root}/directories/${sql===overallMakes?'makes-overall':(sql.includes('model_name, count(*)')?'models':'makes')+'-'+slot}.json`:legacy;
+  :sql.startsWith('select marka_name,')?`${root}/directories/${ajesSourceCacheSql(sql)===overallMakes?'makes-overall':(sql.includes('model_name, count(*)')?'models':'makes')+'-'+slot}.json`:legacy;
  return {hash,key,legacy};
 }
 export async function readAjesQueryCache(storage:Store,sql:string){
@@ -79,4 +80,18 @@ export async function readPreviousTruckPolicyRows(sql:string,read:(sql:string)=>
   if(value)return {...value,schemaVersion:0,partial:true};
  }
  return null;
+}
+
+/** Read one exact requested page across the new Japan admission predicate.
+ * Phase selection, order and LIMIT are unchanged; no metadata is carried over.
+ * The client reapplies current admission to these explicitly partial old rows.
+ */
+export async function readPreviousJapanVehiclePolicyRows(sql:string,read:(sql:string)=>Promise<any|null>){
+ if(!sql.startsWith('select * from'))return null;
+ const canonical=ajesSourceCacheSql(sql),clause=' and '+japanVehicleSqlExclusion();
+ if(!canonical.includes(clause))return null;
+ const previous=canonical.replace(clause,''),saved=await read(previous);
+ if(!Array.isArray(saved?.items)||!saved.items.length)return null;
+ const {total,countSummary,emptyPageEvidence,...rows}=saved;
+ return {...rows,schemaVersion:0,partial:true};
 }

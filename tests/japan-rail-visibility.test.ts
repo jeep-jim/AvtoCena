@@ -88,7 +88,7 @@ test('the streamed Japanese fallback has the same accessible title and preserves
  assert.match(markup,/Количество уточняется/);assert.doesNotMatch(markup,/data-catalog-market-count="0"/);
 });
 
-test('a Japanese power preview distinguishes visible supplier and unknown power without a false exact count',async t=>{
+test('a Japanese power preview keeps the cards and an honest count without a catalogue warning paragraph',async t=>{
  const {state,api,html}=await fixture(t);
  state.page={...state.page,items:[
   {id:'ajes-stats-known',market:'japan',sourceId:'ajes_japan_feed',japanSupplierPower:{offerId:'ajes-stats-known',hp:160,unit:'hp',source:'ajes_pw'}},
@@ -97,8 +97,8 @@ test('a Japanese power preview distinguishes visible supplier and unknown power 
  state.count={...state.count,total:0,upperBound:true};
  const markup=await html(await api.AjesRail({params:{powerTo:'160'}}));
  assert.match(markup,/data-japan-auction-rail="true"/);assert.match(markup,/data-status="ready"/);
- assert.match(markup,/Мощность по данным поставщика: 1/);assert.match(markup,/Мощность не указана: 1/);
- assert.match(markup,/Отбор не подтверждает право/);assert.match(markup,/Количество уточняется/);
+ assert.doesNotMatch(markup,/Мощность по данным поставщика:|Отбор не подтверждает право|эти автомобили оставлены в подборке/);
+ assert.match(markup,/Количество уточняется/);
  assert.doesNotMatch(markup,/data-catalog-market-count="0"/);
  assert.equal((markup.match(/data-car-id=/g)||[]).length,2);
 });

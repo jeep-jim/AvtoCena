@@ -30,3 +30,13 @@ test('cold page can finish after 30 seconds; timeout remains bounded; errors nev
   await assert.rejects(load({market:'korea'},6),(e:any)=>e.kind==='invalid');
  }finally{globalThis.fetch=fetchOriginal;AbortSignal.timeout=timeoutOriginal;t.mock.timers.reset();}
 });
+test('Japan continuation passes previous/retry tokens and identifies expired snapshots without hiding errors',async()=>{
+ const load=await action(),previous=globalThis.fetch;let requested='';
+ try{
+  globalThis.fetch=(async(input:any)=>{requested=String(input);return Response.json({page:3,total:null,items:[{id:'same-page'}],partial:true,hasMore:false,nextCursor:null,retryCursor:'retry-3',previousCursor:'previous-2'});}) as typeof fetch;
+  const result=await load({market:'japan',powerTo:160,city:'Новокузнецк'},3,'bound-3');
+  assert.equal(new URL(requested,'https://example.test').searchParams.get('after'),'bound-3');assert.equal(result.previousCursor,'previous-2');assert.equal(result.retryCursor,'retry-3');assert.equal(result.incomplete,true);
+  globalThis.fetch=(async()=>Response.json({ok:false,reason:'cursor_expired'},{status:503})) as typeof fetch;
+  await assert.rejects(load({market:'japan'},3,'bound-3'),(error:any)=>error.kind==='expired');
+ }finally{globalThis.fetch=previous;}
+});

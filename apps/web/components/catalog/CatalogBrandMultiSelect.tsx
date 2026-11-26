@@ -5,12 +5,16 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { BrandLogoVisual } from "@/components/catalog/BrandLogoRail";
 
 import {CATALOG_BRANDS,catalogBrandMatches} from "@/lib/catalog/brands";
+import {isJapanBrandDirectoryContext,loadJapanBrandDirectory,subscribeJapanBrandDirectory,type JapanBrandDirectory} from "@/lib/catalog/japan-brand-directory";
 
 type Option = { value: string; label: string };
 type BrandStats = {
   generationId?: string;
   counts: Record<string, number>;
   modelCounts: Record<string, number>;
+  makes?:string[];
+  directoryComplete?:boolean;
+  stale?:boolean;
 };
 
 const EMPTY_STATS: BrandStats = { counts: {}, modelCounts: {} };
@@ -77,6 +81,9 @@ export function CatalogBrandMultiSelect({
   const [query, setQuery] = useState("");
   const [stats, setStats] = useState<BrandStats>(EMPTY_STATS);
   const [statsUnavailable,setStatsUnavailable]=useState(false);
+  const [statsLoading,setStatsLoading]=useState(false);
+  const [directoryRetry,setDirectoryRetry]=useState(0);
+  const japanDirectoryMode=isJapanBrandDirectoryContext(contextQuery);
   const root = useRef<HTMLDivElement>(null);
   const selected = useMemo(() => splitMakes(value), [value]);
   const selectedKey = selected.length === 1 ? selected[0].toLocaleLowerCase("ru-RU") : "";
@@ -84,12 +91,16 @@ export function CatalogBrandMultiSelect({
   useEffect(() => {
     if (!open) return;
     let cancelled = false;
-    setStats(EMPTY_STATS);setStatsUnavailable(false);
-    loadBrandStats(contextQuery)
-      .then((next) => { if (!cancelled) setStats(next); })
-      .catch(() => { if (!cancelled) {setStats(EMPTY_STATS);setStatsUnavailable(true);} });
-    return () => { cancelled = true; };
-  }, [contextQuery, open]);
+    if(!japanDirectoryMode)setStats(EMPTY_STATS);
+    setStatsUnavailable(false);setStatsLoading(true);
+    const directoryStats=(directory:JapanBrandDirectory)=>({generationId:directory.observedAt,counts:{},modelCounts:{},makes:directory.makes,directoryComplete:true,stale:directory.stale});
+    const unsubscribe=japanDirectoryMode?subscribeJapanBrandDirectory(directory=>{if(!cancelled){setStats(directoryStats(directory));setStatsUnavailable(false);setStatsLoading(false);}}):undefined;
+    const loading=japanDirectoryMode?loadJapanBrandDirectory().then(directoryStats):loadBrandStats(contextQuery);
+    loading
+      .then((next) => { if (!cancelled) {setStats(next);setStatsLoading(false);} })
+      .catch(() => { if (!cancelled) {if(!japanDirectoryMode)setStats(EMPTY_STATS);setStatsUnavailable(true);setStatsLoading(false);} });
+    return () => { cancelled = true;unsubscribe?.(); };
+  }, [contextQuery, open,japanDirectoryMode,directoryRetry]);
 
   useEffect(() => {
     if (!open) return;
@@ -115,12 +126,12 @@ export function CatalogBrandMultiSelect({
 
   const brands = useMemo(() => {
     const optionLabels = new Map(options.filter((option) => option.value).map((option) => [option.value.toLocaleLowerCase("ru-RU"), option.label]));
-    const liveMakes = Object.keys(stats.counts).filter((make) => Number(stats.counts[make] || 0) > 0);
+    const liveMakes = japanDirectoryMode?stats.makes||[]:Object.keys(stats.counts).filter((make) => Number(stats.counts[make] || 0) > 0);
     const needle = query.trim().toLocaleLowerCase("ru-RU");
     // Known brand names remain searchable during an inventory metadata outage;
     // they carry no invented availability/count. Green stock remains source-only.
-    const known=statsUnavailable&&needle.length>=2&&new URLSearchParams(contextQuery).get('stock')!=='green'?CATALOG_BRANDS.map(brand=>brand.name):[];
-    const source = [...liveMakes, ...options.map((option) => option.value), ...selected, ...known];
+    const known=!japanDirectoryMode&&statsUnavailable&&needle.length>=2&&new URLSearchParams(contextQuery).get('stock')!=='green'?CATALOG_BRANDS.map(brand=>brand.name):[];
+    const source = [...liveMakes, ...(japanDirectoryMode&&stats.directoryComplete?[]:options.map((option) => option.value)), ...selected, ...known];
     const seen = new Map<string, Option>();
     for (const make of source.map(clean).filter(Boolean)) {
       const key = make.toLocaleLowerCase("ru-RU");
@@ -129,7 +140,7 @@ export function CatalogBrandMultiSelect({
     return [...seen.values()]
       .filter((option) => catalogBrandMatches(option.label,needle))
       .sort((left, right) => Number(selected.some(v=>v.toLocaleLowerCase("ru-RU")===right.value.toLocaleLowerCase("ru-RU")))-Number(selected.some(v=>v.toLocaleLowerCase("ru-RU")===left.value.toLocaleLowerCase("ru-RU"))) || left.label.localeCompare(right.label, "ru"));
-  }, [options, query, selected, stats.counts,statsUnavailable,contextQuery]);
+  }, [options, query, selected, stats,statsUnavailable,contextQuery,japanDirectoryMode]);
 
   const choose = (make: string) => {
     setOpen(false);
@@ -148,7 +159,7 @@ export function CatalogBrandMultiSelect({
     <button type="button" onClick={() => setOpen((current) => !current)} className="ac-filter-control flex h-13 w-full items-center justify-between gap-2 rounded-[15px] px-4 text-left text-sm font-black" aria-expanded={open} aria-label="Выбрать марки автомобилей">
       <span className="flex min-w-0 items-center gap-2"><span className="truncate">{triggerLabel}</span></span><Chevron open={open} />
     </button>
-    {open ? <div className="ac-filter-dropdown absolute left-0 right-0 top-[calc(100%+7px)] overflow-hidden rounded-2xl p-2">
+    {open ? <div className="ac-filter-dropdown absolute left-0 right-0 top-[calc(100%+7px)] overflow-hidden rounded-2xl p-2" data-japan-brand-directory={japanDirectoryMode?'filter':undefined} data-status={japanDirectoryMode?statsLoading?'loading':statsUnavailable?'error':stats.directoryComplete?'ready':'loading':undefined} data-directory-complete={japanDirectoryMode?String(stats.directoryComplete===true):undefined}>
       <p className="px-3 py-2 text-xs text-[var(--ac-muted)]">Можно выбрать несколько марок</p>
       <div className="mb-1.5">
         <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Найти марку" className="ac-filter-search h-10 w-full rounded-xl px-3 text-sm font-bold outline-none" />
@@ -160,11 +171,14 @@ export function CatalogBrandMultiSelect({
           const modelCount = Number(stats.modelCounts[option.value] || 0);
           return <button key={option.value} type="button" data-facet-value={option.value} onPointerDown={(event) => event.preventDefault()} onClick={() => choose(option.value)} className={`ac-filter-option flex min-h-12 w-full items-center gap-2 rounded-xl px-2.5 py-1.5 text-left ${active ? "is-brand-selected" : ""}`} aria-pressed={active}>
             <BrandLogoVisual brand={option.value} className="h-8 w-12 shrink-0" />
-            <span className="min-w-0 flex-1 truncate text-sm font-black">{option.label}<span className="ml-1.5 text-[11px] font-bold text-[var(--ac-muted)]">· {modelCount ? modelCountLabel(modelCount) : "…"}</span></span>
+            <span className="min-w-0 flex-1 truncate text-sm font-black">{option.label}{!japanDirectoryMode?<span className="ml-1.5 text-[11px] font-bold text-[var(--ac-muted)]">· {modelCount ? modelCountLabel(modelCount) : "…"}</span>:null}</span>
             <span className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-[12px] font-black transition ${active ? "text-red-500" : "border border-[var(--ac-border)] text-transparent"}`}>✓</span>
           </button>;
         })}
-        {!brands.length ? <div className="px-3 py-5 text-center text-sm font-bold text-[var(--ac-muted)]">Марка не найдена</div> : null}
+        {japanDirectoryMode&&statsLoading?<p role="status" className="px-3 py-2 text-sm text-[var(--ac-muted)]">Загружаем все марки…</p>:null}
+        {japanDirectoryMode&&statsUnavailable?<p role="status" className="px-3 py-2 text-sm text-[var(--ac-muted)]">Не удалось загрузить все марки. <button type="button" className="font-bold text-red-500" onClick={()=>setDirectoryRetry(value=>value+1)}>Повторить</button></p>:null}
+        {japanDirectoryMode&&!statsLoading&&!statsUnavailable&&stats.stale?<p role="status" className="px-3 py-2 text-sm text-[var(--ac-muted)]">Список марок пока не обновлён.</p>:null}
+        {!brands.length&&(!japanDirectoryMode||!statsLoading&&!statsUnavailable&&stats.directoryComplete) ? <div className="px-3 py-5 text-center text-sm font-bold text-[var(--ac-muted)]">{japanDirectoryMode&&!query.trim()?'Марки пока не представлены':'Марка не найдена'}</div> : null}
       </div>
     </div> : null}
   </div>;

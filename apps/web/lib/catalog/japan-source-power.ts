@@ -82,11 +82,3 @@ export function japanPowerFilterSummary(items:readonly any[]):JapanPowerFilterSu
  }
  return {shown:items.length,localPower,supplierPower,unknownPower};
 }
-
-export function japanPowerFilterNotice(summary:JapanPowerFilterSummary):string {
- const parts:string[]=[];
- if(summary.supplierPower)parts.push(`Мощность по данным поставщика: ${summary.supplierPower}.`);
- if(summary.unknownPower)parts.push(`Мощность не указана: ${summary.unknownPower} — эти автомобили оставлены в подборке.`);
- if(summary.supplierPower||summary.unknownPower)parts.push('Отбор не подтверждает право на льготный утилизационный сбор.');
- return parts.join(' ');
-}

@@ -10,6 +10,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useRef, useState, useSyncExternalStore, type MouseEvent } from "react";
 import {subscribeBrandTheme,readBrandTheme,serverBrandTheme} from "./brand-theme-store";
 import { CATALOG_BRANDS, canonicalCatalogBrand, catalogBrandSlug, catalogBrandPresentation } from "@/lib/catalog/brands";
+import {isJapanBrandDirectoryContext,loadJapanBrandDirectory,subscribeJapanBrandDirectory,type JapanBrandDirectory} from "@/lib/catalog/japan-brand-directory";
 
 const BRAND_COUNT_FORMATTER = new Intl.NumberFormat("ru-RU");
 const BRAND_COUNT_CACHE_MS = 30_000;
@@ -119,7 +120,7 @@ function BrandDirectoryTile({
   >
     <BrandLogoVisual brand={brand} className="h-9 w-[64px] shrink-0" />
     <span className="min-w-0 flex-1 truncate text-sm font-black text-[var(--ac-text)] md:text-[15px]">
-      {brand}<span className="font-bold text-[var(--ac-muted)]"> · {countLabel}</span>
+      {brand}{countLabel?<span className="font-bold text-[var(--ac-muted)]"> · {countLabel}</span>:null}
     </span>
     {selected ? <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-red-500 text-[12px] font-black text-white" style={{ color: "#fff", WebkitTextFillColor: "#fff" }} aria-label="Выбрано">✓</span> : null}
   </Link>;
@@ -149,10 +150,14 @@ function BrandLogoRailContent({
   const router = useRouter();
   const searchParams = useSearchParams();
   const searchParamsText = brandContextQuery(searchParams.toString(),initial);
+  const japanDirectoryMode=isJapanBrandDirectoryContext(searchParamsText);
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [brandCounts, setBrandCounts] = useState<Record<string, number>>({});
   const [countStatus, setCountStatus] = useState<"idle" | "loading" | "ready" | "error">("idle");
+  const [japanDirectory,setJapanDirectory]=useState<JapanBrandDirectory|null>(null);
+  const [japanDirectoryStatus,setJapanDirectoryStatus]=useState<'loading'|'ready'|'error'>('loading');
+  const [directoryRetry,setDirectoryRetry]=useState(0);
   const railRef = useRef<HTMLDivElement>(null);
   const drag = useRef<{ pointerId: number; startX: number; startScrollLeft: number; moved: boolean } | null>(null);
   const suppressClick = useRef(false);
@@ -166,9 +171,9 @@ function BrandLogoRailContent({
     return [...map.values()].sort(compareBrands);
   }, [brands]);
   const knownBrands = useMemo(() => new Map(
-    [...CATALOG_BRANDS.map((brand) => brand.name), ...suppliedBrands]
+    [...CATALOG_BRANDS.map((brand) => brand.name), ...suppliedBrands,...(japanDirectory?.makes||[])]
       .map((brand) => [brand.toLocaleLowerCase("en-US"), brand] as const),
-  ), [suppliedBrands]);
+  ), [suppliedBrands,japanDirectory]);
   const selectedBrands = useMemo(() => {
     if (homeBrandDirectory) return [] as string[];
     const context = new URLSearchParams(searchParamsText);
@@ -202,6 +207,7 @@ function BrandLogoRailContent({
     return result;
   }, [brandCounts, knownBrands]);
   const activeBrands = useMemo(() => {
+    if(japanDirectoryMode)return [...(japanDirectory?.makes||suppliedBrands)].sort(compareBrands);
     if (!homeBrandDirectory || directoryMode) return suppliedBrands;
     // Once live counts arrive, they become the source of truth on both /cars and
     // the homepage. This removes old knowledge-only brands with no live cars.
@@ -218,7 +224,7 @@ function BrandLogoRailContent({
       if (known) map.set(known.toLocaleLowerCase("en-US"), known);
     }
     return [...map.values()].sort(compareBrands);
-  }, [brands, countStatus, directoryMode, homeBrandDirectory, knownBrands, normalizedCounts, suppliedBrands]);
+  }, [brands, countStatus, directoryMode, homeBrandDirectory, knownBrands, normalizedCounts, suppliedBrands,japanDirectoryMode,japanDirectory]);
   const orderedBrands = activeBrands;
   const filtered = useMemo(() => {
     const normalized = query.trim().toLocaleLowerCase("ru-RU");
@@ -226,8 +232,18 @@ function BrandLogoRailContent({
   }, [activeBrands, query]);
   const railBrands = showSearch && query.trim() ? filtered : orderedBrands;
 
+  useEffect(()=>{
+    if(!japanDirectoryMode)return;
+    let cancelled=false;setJapanDirectoryStatus('loading');
+    const ready=(value:JapanBrandDirectory)=>{if(!cancelled){setJapanDirectory(value);setJapanDirectoryStatus('ready');}};
+    const unsubscribe=subscribeJapanBrandDirectory(ready);
+    loadJapanBrandDirectory().then(ready)
+      .catch(()=>{if(!cancelled)setJapanDirectoryStatus('error');});
+    return()=>{cancelled=true;unsubscribe();};
+  },[japanDirectoryMode,directoryRetry]);
 
   useEffect(() => {
+    if(japanDirectoryMode)return;
     if(!homeBrandDirectory&&!open)return;
     let cancelled = false;
     setCountStatus("loading");
@@ -243,7 +259,7 @@ function BrandLogoRailContent({
         setCountStatus("error");
       });
     return () => { cancelled = true; };
-  }, [countQuery,homeBrandDirectory,open]);
+  }, [countQuery,homeBrandDirectory,open,japanDirectoryMode]);
 
   useEffect(() => {
     const rail = railRef.current;
@@ -290,6 +306,8 @@ function BrandLogoRailContent({
   };
 
   const countLabelForBrand = (brand: string) => {
+    // Full-market names do not assert a count under local power/price filters.
+    if(japanDirectoryMode)return "";
     if (countStatus === "loading" || countStatus === "idle") return "…";
     if (countStatus === "error") return "—";
     const count = normalizedCounts.get(brand.toLocaleLowerCase("en-US"))?.count || 0;
@@ -325,6 +343,13 @@ function BrandLogoRailContent({
     window.setTimeout(() => { suppressClick.current = false; }, 0);
   };
 
+  const directoryNotice=japanDirectoryMode?(japanDirectoryStatus==='loading'
+    ?<span role="status" className="px-3 py-2 text-sm text-[var(--ac-muted)]">Загружаем все марки…</span>
+    :japanDirectoryStatus==='error'?<div role="status" className="px-3 py-2 text-sm text-[var(--ac-muted)]">Не удалось загрузить все марки. <button type="button" className="font-bold text-red-500" onClick={()=>setDirectoryRetry(value=>value+1)}>Повторить</button></div>
+    :japanDirectory?.stale?<span role="status" className="px-3 py-2 text-sm text-[var(--ac-muted)]">Список марок пока не обновлён.</span>:null):null;
+  const emptyDirectoryText=japanDirectoryMode&&!query.trim()?"Марки пока не представлены":"Марка не найдена";
+  const canShowEmpty=!japanDirectoryMode||japanDirectoryStatus==='ready';
+
   return <>
     {showSearch ? <label className="mt-5 flex h-14 w-full items-center gap-3 rounded-2xl bg-[var(--ac-surface)] px-4 text-[var(--ac-muted)] focus-within:ring-2 focus-within:ring-red-500/35">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8" stroke="currentColor" strokeWidth="1.9" /><path d="m16 16 4.3 4.3" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" /></svg>
@@ -338,7 +363,7 @@ function BrandLogoRailContent({
       />
       {query ? <button type="button" onClick={() => setQuery("")} className="flex h-8 w-8 items-center justify-center rounded-full bg-[var(--ac-surface-2)] text-lg font-bold" aria-label="Очистить поиск">×</button> : null}
     </label> : null}
-    <section className="ac-brand-rail relative mt-5 rounded-[1.6rem] p-3 pr-12 md:p-4 md:pr-16" aria-label="Марки автомобилей">
+    <section className="ac-brand-rail relative mt-5 rounded-[1.6rem] p-3 pr-12 md:p-4 md:pr-16" aria-label="Марки автомобилей" data-japan-brand-directory={japanDirectoryMode?'rail':undefined} data-status={japanDirectoryMode?japanDirectoryStatus:undefined} data-directory-complete={japanDirectoryMode&&japanDirectoryStatus==='ready'?String(japanDirectory?.complete===true):undefined}>
       <div
         ref={railRef}
         className="ac-hide-scrollbar flex min-w-0 cursor-grab touch-auto items-center gap-1 overflow-x-auto overscroll-x-contain scroll-smooth pb-1 [&.is-dragging]:cursor-grabbing [&.is-dragging]:scroll-auto"
@@ -354,13 +379,14 @@ function BrandLogoRailContent({
         }}
       >
         {railBrands.map((brand) => <BrandTile key={brand.toLocaleLowerCase("en-US")} brand={brand} href={hrefForBrand(brand)} onClick={handleBrandClick(brand)} />)}
-        {!railBrands.length ? <div className="px-4 py-6 text-sm font-bold text-[var(--ac-muted)]">Марка не найдена</div> : null}
+        {!railBrands.length&&canShowEmpty ? <div className="px-4 py-6 text-sm font-bold text-[var(--ac-muted)]">{emptyDirectoryText}</div> : null}
+        {directoryNotice}
       </div>
       <button type="button" onClick={() => setOpen(true)} className="absolute right-2 top-1/2 flex h-12 w-9 -translate-y-1/2 items-center justify-center rounded-xl bg-[var(--ac-surface-2)] text-xl font-black text-red-500" aria-label="Показать все марки">›</button>
     </section>
 
     {open ? <PublicSheet title="Все марки автомобилей" onClose={close} showHeader={false} maxWidth={1152}>
-      <div className="ac-brand-rail ac-hide-scrollbar max-h-[92dvh] w-full max-w-6xl overflow-y-auto rounded-[1.8rem] p-4 md:p-7" onClick={(event) => event.stopPropagation()}>
+      <div className="ac-brand-rail ac-hide-scrollbar max-h-[92dvh] w-full max-w-6xl overflow-y-auto rounded-[1.8rem] p-4 md:p-7" onClick={(event) => event.stopPropagation()} data-japan-brand-directory={japanDirectoryMode?'all':undefined} data-status={japanDirectoryMode?japanDirectoryStatus:undefined}>
         <div className="sticky -top-4 z-10 bg-[var(--ac-surface)] pb-4 pt-1 md:-top-7 md:pt-2">
           <div className="flex items-center justify-between gap-4"><h2 className="text-2xl font-black md:text-4xl">Все марки</h2><div className="flex items-center gap-3">{!homeBrandDirectory && selectedBrands.length ? <button type="button" onClick={clearSelectedBrands} className="mr-7 min-h-10 rounded-xl border border-red-500/45 px-4 text-sm font-black text-red-500 md:mr-14">Очистить</button> : null}<button type="button" onClick={close} className="flex h-11 w-11 items-center justify-center rounded-xl bg-[var(--ac-surface-2)] text-2xl font-black">×</button></div></div>
           <input value={query} onChange={(event) => setQuery(event.target.value)} autoFocus placeholder="Найти марку" className="ac-filter-search mt-4 h-12 w-full rounded-2xl px-4 text-sm font-bold outline-none" />
@@ -368,7 +394,8 @@ function BrandLogoRailContent({
         <div className="grid grid-cols-1 gap-1 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-3 lg:gap-y-1.5">
           {filtered.map((brand) => <BrandDirectoryTile key={brand} brand={brand} href={hrefForBrand(brand)} countLabel={countLabelForBrand(brand)} selected={!homeBrandDirectory && selectedBrandKeys.has(brand.toLocaleLowerCase("en-US"))} onPointerEnter={homeBrandDirectory ? () => router.prefetch(hrefForBrand(brand)) : undefined} onClick={handleBrandClick(brand, true)} />)}
         </div>
-        {!filtered.length ? <div className="py-12 text-center font-bold text-[var(--ac-muted)]">Марка не найдена</div> : null}
+        {!filtered.length&&canShowEmpty ? <div className="py-12 text-center font-bold text-[var(--ac-muted)]">{emptyDirectoryText}</div> : null}
+        {directoryNotice}
       </div>
     </PublicSheet> : null}
   </>;
