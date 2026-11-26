@@ -168,6 +168,7 @@ test('a changed accepted ETag during preparation prevents staging and is never r
 
 test('actual host rollback after activation failure restores the old pointer, without fabricating success', async () => {
   const f = await fixture(); let pending;
+  f.args.retireTerminalAppImage = async () => assert.fail('a data-generation rollback cannot delete its reused application image');
   f.args.stageRelease = async ({candidate: ref}) => ({candidate: ref,
     async activate({intent}) { pending = intent; f.events.push('activate'); throw Error('connection_lost'); },
     async close() { f.events.push('close'); },
@@ -244,10 +245,12 @@ test('not_due keeps an eligible committed host witness without retrying retireme
   f.storage.writes.length = 0;
   const result = await runChinaDailyCycle({...f.args, owner: owner(4), nonce: '4'.repeat(32),
     retirePreviousHost: async () => assert.fail('not_due cannot attempt host cleanup'),
+    retireTerminalAppImage: async () => assert.fail('not_due cannot attempt app-image cleanup'),
     prepare: async () => assert.fail('not_due cannot read a source'),
   });
   assert.equal(result.status, 'not_due'); assert.equal(result.published, false); assert.equal(result.sourcePrepared, false);
   assert.equal(result.hostCleanupBeforeReserve, undefined); assert.equal(result.leaseReleased, true);
+  assert.equal(result.appImageCleanup, undefined); assert.equal(result.appImageCleanupBeforeReserve, undefined);
   assert.deepEqual(f.events, []);
   assert.deepEqual({accepted: await state.read('accepted'), intent: await state.read('intent')}, publication);
   assert.equal(f.storage.writes.filter(row => row.name === 'accepted' || row.name === 'intent').length, 0);
@@ -429,4 +432,84 @@ test('preparation records the old cleanup witness first but cleanup transport fa
   assert.deepEqual(result.retention, {status: 'complete', completed: true, witnessRemembered: true,
     collected: 1, pending: 0, filesDeleted: 2, freedBytes: 512});
   assert.ok(!JSON.stringify(result).includes('private-cleanup'));
+});
+
+async function dailyImageCleanupFixture() {
+  const f = await fixture(); await runChinaDailyCycle(f.args);
+  const previous = await f.storage.read('accepted'), nonce = 'c'.repeat(32);
+  f.events.length = 0; f.storage.writes.length = 0;
+  f.args = {...f.args, owner: owner(3), nonce, trigger: 'manual',
+    async prepare(input) {
+      f.events.push('prepare'); await input.assertAuthority(); assert.deepEqual(input.sourceSelection.generation, previous.value.current);
+      return prepared(input.sourceSelection.generation, 3);
+    },
+    async stageRelease(input) {
+      f.events.push('stage'); await input.assertAuthority(); assert.deepEqual(input.candidate, candidate(3));
+      return {candidate: input.candidate,
+        async activate({assertAuthority}) { f.events.push('activate'); await assertAuthority();
+          return {kind: 'accepted', evidence: acceptance(input.candidate, nonce, nextAt)}; },
+        async afterCommit({assertAuthority}) { f.events.push('retire'); await assertAuthority();
+          return {completed: true, retiredContainers: 1, filesDeleted: 2, freedBytes: 256}; },
+        async close() { f.events.push('close'); },
+      };
+    }};
+  return {...f, previous};
+}
+function protectedImageReport(publication) {
+  const target = publication.intent.value.previous.value.rollback;
+  return {version: 1, kind: 'china-terminal-app-image-cleanup-v1', completed: true, status: 'protected', uncertain: false,
+    imagesRemoved: 0, runtimeSha: target.runtimeSha, imageId: target.imageId, witnessSha256: digest(publication),
+    diskFreeBytesBefore: 4096, diskFreeBytesAfter: 4096, measuredFreeBytesChange: 0, reason: 'current_or_rollback'};
+}
+
+test('daily terminal image phase uses its committed witness after closing the host and protects the reused image', async () => {
+  const f = await dailyImageCleanupFixture(); let calls = 0;
+  f.args.retireTerminalAppImage = async input => {
+    calls++; f.events.push('image'); assert.equal(f.events.at(-2), 'close');
+    assert.equal((await f.storage.read('lease')).value.status, 'held'); await input.assertAuthority();
+    assert.deepEqual(await input.readState(), input.publication);
+    assert.equal(inspectChinaPublicationState(input.publication).status, 'resolved');
+    const target = input.publication.intent.value.previous.value.rollback;
+    assert.equal(target.imageId, input.publication.accepted.value.current.imageId);
+    assert.equal(target.imageId, input.publication.accepted.value.rollback.imageId);
+    return protectedImageReport(input.publication);
+  };
+  f.args.afterAccepted = async ({assertAuthority}) => {
+    f.events.push('retention'); await assertAuthority();
+    return {market: 'china', completed: true, status: 'complete', deletedObjects: 0};
+  };
+  const result = await runChinaDailyCycle(f.args);
+  assert.equal(result.status, 'accepted'); assert.equal(result.published, true); assert.equal(calls, 1);
+  assert.deepEqual(f.events, ['prepare', 'stage', 'activate', 'retire', 'close', 'image', 'retention']);
+  assert.equal(result.appImageCleanup.status, 'protected'); assert.equal(result.appImageCleanup.imagesRemoved, 0);
+  assert.equal(result.appImageCleanupPending, undefined); assert.equal(result.leaseReleased, true);
+  assert.equal(result.applicationBuilds, 0); assert.equal(result.encyclopediaWrites, 0); assert.equal(result.otherMarketWrites, 0);
+  assert.equal(result.deletions, 0);
+});
+
+test('daily acceptance and private retention survive a separate image cleanup failure or uncertain primary close', async () => {
+  for (const failure of ['cleanup', 'close']) {
+    const f = await dailyImageCleanupFixture(); let calls = 0, retained = 0;
+    const stage = f.args.stageRelease;
+    if (failure === 'close') f.args.stageRelease = async input => ({...await stage(input),
+      async close() { throw Error('private-close-output'); }});
+    f.args.retireTerminalAppImage = async () => { calls++; throw Error('private-image-output'); };
+    f.args.afterAccepted = async ({assertAuthority}) => { retained++; await assertAuthority();
+      return {market: 'china', completed: true, status: 'complete', deletedObjects: 0}; };
+    const result = await runChinaDailyCycle(f.args);
+    assert.equal(result.status, 'accepted'); assert.equal(result.published, true); assert.equal(result.completed, true);
+    assert.equal(result.appImageCleanupPending, true); assert.equal(result.appImageCleanup.completed, false);
+    assert.equal(result.appImageCleanup.status, 'pending'); assert.equal(result.leaseReleased, true);
+    assert.equal(retained, 1); assert.equal(calls, failure === 'close' ? 0 : 1);
+    assert.equal(JSON.stringify(result).includes('private-'), false);
+    assert.equal((await f.storage.read('accepted')).value.current.generationId, candidate(3).generationId);
+  }
+});
+
+test('daily initial publication with no displaced rollback has no application-image cleanup call', async () => {
+  const f = await fixture();
+  f.args.retireTerminalAppImage = async () => assert.fail('no eligible terminal image witness');
+  const result = await runChinaDailyCycle(f.args);
+  assert.equal(result.status, 'accepted'); assert.equal(result.appImageCleanup, undefined);
+  assert.equal(result.appImageCleanupBeforeReserve, undefined);
 });

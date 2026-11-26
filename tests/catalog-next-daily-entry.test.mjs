@@ -210,7 +210,8 @@ test('primary and catch-up events skip preparation in a fresh source window and 
       assert.equal(input.servingPlan.runtimeSha, initial.value.current.runtimeSha, 'an unaccepted code plan cannot select the daily image');
       return {stageRelease: async () => assert.fail('no stage before preparation'),
         recoverRelease: async () => assert.fail('no host recovery for stable accepted state'),
-        retireHost: async () => assert.fail('no retirement without publication')};
+        retireHost: async () => assert.fail('no retirement without publication'),
+        retireTerminalAppImage: async () => assert.fail('not_due cannot retire any application image')};
     },
     readDeadline: async () => null,
     collectRetired: async input => { assert.equal(input.mode, 'enqueue-only');
@@ -273,6 +274,7 @@ test('recovery of a code publication selects the new reviewed adapter before the
           events.push('stage-new'); return {candidate: args.candidate};
         },
         retireHost: async () => assert.fail('no retirement requested'),
+        retireTerminalAppImage: async () => assert.fail('no terminal image cleanup requested'),
       };
     },
     runCycle: async input => {
@@ -297,16 +299,17 @@ test('recovery of a code publication selects the new reviewed adapter before the
     RUNNER_TEMP: f.temporary, JSON_STORAGE_DRIVER: 'object'}, capabilities}), /accepted_runtime/);
 });
 
-async function historicalRetirementFixture(t, historicalRuntime) {
+async function historicalRetirementFixture(t, historicalRuntime, {imageCleanup = false} = {}) {
   const f = await fixture(t, {withCodePlan: true}), creations = [], events = [];
   let historical;
   for (const generation of [100, 101, 102]) historical = resolvedPublication(
     accepted(f, {generation, runtimeSha: historicalRuntime}), historical?.accepted);
   const witness = {previousAccepted: historical.intent.value.previous, acceptedPublication: historical};
   assert.equal(validateChinaGenerationRetirementWitness(witness).reference.generationId, 'gen_china_100_1');
-  const fresh = resolvedPublication(accepted(f, {generation: 103}), historical.accepted);
+  const fresh = resolvedPublication(accepted(f, {generation: 103,
+    ...(imageCleanup ? {runtimeSha: f.codePlan.runtimeSha} : {})}), historical.accepted);
   const state = {current: fresh, assertions: 0, reads: 0, retired: 0, refuseAuthorityAt: 0};
-  const args = {...witness,
+  const args = {...(imageCleanup ? {publication: fresh} : witness),
     async readState() { state.reads++; events.push('fresh-state'); return state.current; },
     async assertAuthority() {
       state.assertions++; events.push('authority');
@@ -317,7 +320,7 @@ async function historicalRetirementFixture(t, historicalRuntime) {
     verifyInvocation: async () => ({version: 1, event: 'workflow_dispatch', sourceSha: sha}), verifyBaselines: () => {},
     runtimeGit: directory => argv => { assert.equal(directory, f.runtimes.pricingRoot);
       return argv[0] === 'diff' ? '' : argv[1] === 'HEAD' ? f.pricingPlan.runtimeSha : f.pricingPlan.runtimeTree; },
-    verifyCompatibility: async input => { assert.equal(input.servingPlan.runtimeSha, f.servingPlan.runtimeSha); },
+    verifyCompatibility: async input => { assert.equal(input.servingPlan.runtimeSha, fresh.accepted.value.current.runtimeSha); },
     createStorage: () => ({assertPrivateBucket: async () => ({verified: true}), read: async name => {
       assert.equal(name, 'accepted'); return fresh.accepted;
     }, compareAndSwap: async () => assert.fail('adapter selection must not write publication state')}),
@@ -333,10 +336,22 @@ async function historicalRetirementFixture(t, historicalRuntime) {
           assert.deepEqual({previousAccepted: received.previousAccepted, acceptedPublication: received.acceptedPublication}, before);
           assert.equal(input.servingPlan.runtimeSha, fresh.accepted.value.current.runtimeSha);
           return {completed: true, retiredContainers: 0, filesDeleted: 0, freedBytes: 0};
+        },
+        async retireTerminalAppImage(received) {
+          state.retired++; events.push('image-retire'); assert.equal(received, args);
+          assert.equal(received.publication, fresh);
+          assert.equal(input.servingPlan.runtimeSha, fresh.accepted.value.current.runtimeSha);
+          assert.equal(received.publication.intent.value.previous.value.rollback.runtimeSha, historicalRuntime);
+          const target = received.publication.intent.value.previous.value.rollback;
+          return {version: 1, kind: 'china-terminal-app-image-cleanup-v1', completed: true,
+            status: 'already_absent', uncertain: false, imagesRemoved: 0,
+            runtimeSha: target.runtimeSha, imageId: target.imageId,
+            witnessSha256: hash(JSON.stringify(ordered(received.publication))),
+            diskFreeBytesBefore: 4096, diskFreeBytesAfter: 4096, measuredFreeBytesChange: 0, reason: 'already_absent'};
         }};
     },
     runCycle: async input => {
-      const result = await input.retirePreviousHost(args);
+      const result = await input[imageCleanup ? 'retireTerminalAppImage' : 'retirePreviousHost'](args);
       assert.equal(result.completed, true);
       return {kind: 'china-daily-cycle-v1', completed: true, market: 'china', published: false, status: 'fixture_retired'};
     },
@@ -391,7 +406,8 @@ test('production entry binds accepted state, passes pricing root to preparation 
     createStorage: () => storage,
     createRelease: input => { called.push('release'); assert.equal(input.servingRoot, f.runtimes.servingRoot);
       assert.equal(input.pricingPlan.runtimeSha, f.pricingPlan.runtimeSha);
-      return {stageRelease: async () => {}, recoverRelease: async () => {}, retireHost: async args => {
+      return {stageRelease: async () => {}, recoverRelease: async () => {},
+        retireTerminalAppImage: async () => assert.fail('no image cleanup requested by this entry fixture'), retireHost: async args => {
         called.push('host-retire'); assert.deepEqual(args, hostArgs);
         return {completed: true, retiredContainers: 0, filesDeleted: 0, freedBytes: 0};
       }}; },
@@ -453,4 +469,35 @@ test('the production daily workflow has exact primary and catch-up schedules, on
   assert.match(artifact, /catalog-next-china-daily-generation-report\.json/);
   assert.doesNotMatch(artifact, /RUNNER_TEMP|sqlite|SOURCE|ACCEPTED|receiptBase64|\*\*/);
   assert.ok((await fs.stat(path.join(root, '.github/workflows/catalog-next-china-daily.yml'))).isFile());
+});
+
+test('terminal image cleanup selects the fresh accepted code adapter and keeps an obsolete runtime only inside the witness', async t => {
+  const historicalRuntime = 'd536c1547c4d82a339ed68ced7d8503f09b6810b';
+  const f = await historicalRetirementFixture(t, historicalRuntime, {imageCleanup: true});
+  assert(![f.servingPlan.runtimeSha, f.codePlan.runtimeSha].includes(historicalRuntime));
+  assert.equal((await f.invoke()).status, 'fixture_retired'); assert.equal(f.state.retired, 1);
+  assert.equal(f.state.reads, 1); assert.equal(f.state.assertions, 3);
+  assert.deepEqual(f.events, ['authority', 'fresh-state', 'authority', 'authority', 'image-retire']);
+  assert.deepEqual(f.creations, [f.codePlan.runtimeSha]); assert.deepEqual(f.calls, f.checkoutCalls);
+  assert.equal(f.args.publication, f.fresh); assert.equal(Object.hasOwn(f.args, 'target'), false);
+  assert.deepEqual(f.witness, f.before);
+});
+
+test('terminal image entry refuses changed authority, unreviewed current runtime and unresolved state before a host action', async t => {
+  for (const kind of ['authority_before_read', 'authority_after_read', 'authority_before_host', 'unsupported', 'unresolved']) {
+    const f = await historicalRetirementFixture(t, 'd536c1547c4d82a339ed68ced7d8503f09b6810b', {imageCleanup: true});
+    if (kind.startsWith('authority_')) f.state.refuseAuthorityAt = {
+      authority_before_read: 1, authority_after_read: 2, authority_before_host: 3,
+    }[kind];
+    else if (kind === 'unsupported') f.state.current = resolvedPublication(
+      accepted(f, {generation: 104, runtimeSha: 'e'.repeat(40)}), f.fresh.accepted);
+    else {
+      const pending = {...f.fresh.intent.value, status: 'pending', resolution: null};
+      f.state.current = {...f.fresh, intent: {...f.fresh.intent, value: pending, sha256: hash(JSON.stringify(ordered(pending)))}};
+    }
+    await assert.rejects(f.invoke(), kind.startsWith('authority_') ? /china_daily_state_changed/
+      : kind === 'unsupported' ? /china_daily_entry_accepted_runtime/ : /china_daily_entry_app_image_cleanup_state/);
+    assert.equal(f.state.retired, 0); assert.deepEqual(f.creations, [f.codePlan.runtimeSha]);
+    assert.deepEqual(f.calls, f.checkoutCalls); assert.equal(f.args.publication, f.fresh);
+  }
 });

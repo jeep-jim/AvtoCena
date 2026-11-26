@@ -5,7 +5,7 @@ import path from 'node:path';
 import os from 'node:os';
 import {EventEmitter} from 'node:events';
 import {PassThrough, Writable} from 'node:stream';
-import {ChinaSshSession} from '../scripts/catalog-next/release-ssh.mjs';
+import {ChinaSshSession, checkedTerminalAppImageCleanupReport, terminalAppImageCleanupPending} from '../scripts/catalog-next/release-ssh.mjs';
 
 function childWithInput(t, write) {
   const child = new EventEmitter();
@@ -83,4 +83,61 @@ test('a pipe error rejects the pending write with a safe code', {timeout: 2000},
   child.stdin.destroy(Error('private transport diagnostic must not escape'));
   await rejected;
   assert.equal(child.stdin.listenerCount('drain'), 0);
+});
+
+function imageResult(overrides = {}) {
+  return {version: 1, kind: 'china-terminal-app-image-cleanup-v1', completed: true, status: 'removed',
+    uncertain: false, imagesRemoved: 1, runtimeSha: 'a'.repeat(40), imageId: 'sha256:' + 'b'.repeat(64),
+    witnessSha256: 'c'.repeat(64), diskFreeBytesBefore: 100, diskFreeBytesAfter: 175,
+    measuredFreeBytesChange: 75, reason: 'exact_terminal_image', ...overrides};
+}
+
+test('terminal image success copier requires completed evidence and measures df independently of image size', () => {
+  const valid = imageResult();
+  assert.deepEqual(checkedTerminalAppImageCleanupReport(valid), valid);
+  assert.equal(Object.isFrozen(checkedTerminalAppImageCleanupReport(valid)), true);
+  for (const patch of [{completed: false}, {uncertain: true}, {status: 'pending'}, {imagesRemoved: 0},
+    {diskFreeBytesBefore: -1}, {diskFreeBytesAfter: Number.MAX_SAFE_INTEGER + 1}, {measuredFreeBytesChange: 1},
+    {reason: 'raw private diagnostic'}, {witnessSha256: 'not-a-hash'}, {runtimeSha: null}, {sql: 'private'}]) {
+    assert.throws(() => checkedTerminalAppImageCleanupReport({...valid, ...patch}), /china_ssh_app_image_report/);
+  }
+  for (const reason of ['current_or_rollback', 'container_reference', 'pinned_image', 'retained_bootstrap', 'ineligible_image']) {
+    assert.equal(checkedTerminalAppImageCleanupReport(imageResult({status: 'protected', imagesRemoved: 0, reason})).reason, reason);
+  }
+  assert.equal(checkedTerminalAppImageCleanupReport(imageResult({diskFreeBytesAfter: 70, measuredFreeBytesChange: -30})).imagesRemoved, 1);
+  let reads = 0;
+  const accessor = {...valid}; Object.defineProperty(accessor, 'reason', {enumerable: true, get() { reads++; return 'exact_terminal_image'; }});
+  assert.throws(() => checkedTerminalAppImageCleanupReport(accessor)); assert.equal(reads, 0);
+});
+
+test('terminal image pending projection is bounded and does not invoke or echo remote getters/messages', () => {
+  const pending = {version: 1, kind: 'china-terminal-app-image-cleanup-v1', completed: false,
+    status: 'pending', uncertain: true, errorCode: 'delete_not_confirmed'};
+  assert.deepEqual(terminalAppImageCleanupPending({appImageCleanup: pending}), pending);
+  const fallback = terminalAppImageCleanupPending(Error('private source URL and token'));
+  assert.equal(fallback.errorCode, 'operation_failed'); assert.equal(fallback.uncertain, true);
+  let reads = 0;
+  const accessor = Object.defineProperty({}, 'appImageCleanup', {get() { reads++; throw Error('private'); }});
+  assert.deepEqual(terminalAppImageCleanupPending(accessor), fallback); assert.equal(reads, 0);
+  for (const value of [null, {...pending, extra: 'private'}, {...pending, completed: true}, {...pending, errorCode: 'private-url'}]) {
+    assert.deepEqual(terminalAppImageCleanupPending({appImageCleanup: value}), fallback);
+  }
+});
+
+test('the exact terminal-image RPC preserves only its safe pending receipt on a failed DELETE', async t => {
+  const pending = {version: 1, kind: 'china-terminal-app-image-cleanup-v1', completed: false,
+    status: 'pending', uncertain: true, errorCode: 'delete_not_confirmed'};
+  const {child, session} = childWithInput(t, (raw, _encoding, callback) => {
+    const request = JSON.parse(raw);
+    assert.equal(request.method, 'retire_terminal_app_image');
+    queueMicrotask(() => {
+      child.stdout.write(JSON.stringify({kind: 'error', id: request.id, code: 'china_host_app_image_delete_reply',
+        appImageCleanup: pending, unrelated: 'private'}) + '\n');
+      callback();
+    });
+  });
+  await assert.rejects(session.call('retire_terminal_app_image', {action: 'remove'}), error => {
+    assert.equal(error.message, 'china_host_app_image_delete_reply');
+    assert.deepEqual(error.appImageCleanup, pending); assert.equal(Object.hasOwn(error, 'unrelated'), false); return true;
+  });
 });

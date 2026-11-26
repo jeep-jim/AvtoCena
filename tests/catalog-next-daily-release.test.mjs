@@ -126,6 +126,18 @@ async function fixture(t) {
         assert.equal(params.acceptedStateSha256, accepted.sha256); assert.deepEqual(params.acceptedState, accepted.value);
         assert.equal(accepted.value.pending, null); return {retiredContainers: 0, filesDeleted: 0, freedBytes: 0, directoriesDeleted: 0, imagesDeleted: 0};
       }
+      if (method === 'retire_terminal_app_image') {
+        assert.equal(params.action, 'prepare', 'same runtime data rotation must not send image removal');
+        assert.deepEqual(params.currentState, params.publication);
+        const target = params.publication.intent.value.previous.value.rollback;
+        assert.equal(target.imageId, old.imageId); assert.equal(target.runtimeSha, old.runtimeSha);
+        assert.equal(hash(params.policySource), params.policySourceSha256);
+        return {version: 1, kind: 'china-terminal-app-image-cleanup-v1',
+          completed: !flags.incompleteImageResult, status: 'protected', uncertain: false,
+          imagesRemoved: 0, runtimeSha: target.runtimeSha, imageId: target.imageId,
+          witnessSha256: digest(params.publication), diskFreeBytesBefore: 200, diskFreeBytesAfter: 200,
+          measuredFreeBytesChange: 0, reason: 'current_or_rollback'};
+      }
       if (method === 'retire_recovery') {
         const accepted = await storage.read('accepted'), intent = await storage.read('intent');
         assert.deepEqual(params.previousAccepted, first.accepted);
@@ -155,7 +167,7 @@ async function fixture(t) {
           retainedRunning: true, ingressRestored: true, candidateRemoved: true}));
         outcome = {status: 'rolled_back', hostRollbackBase64: raw.toString('base64'), hostRollbackSha256: hash(raw)};
       }
-      return {closed: true};
+      return {closed: true, readOnly: false};
     },
   });
   const servingRoot = path.join(directory, 'actual-serving-checkout'); await fs.mkdir(servingRoot);
@@ -265,4 +277,44 @@ test('queued retirement uses exact original witnesses and fresh protected state 
   f.flags.retirementFails = true;
   await assert.rejects(f.release.retireHost(input), /china_host_retirement_unknown/);
   assert.equal((await f.storage.read('accepted')).value.current.generationId, f.candidate.generationId);
+});
+
+async function thirdDailyPublication(f) {
+  await runChinaDailyCycle(f.args);
+  const state = createChinaState({storage: f.storage, now: () => now});
+  const previous = await f.storage.read('accepted'), previousIntent = await f.storage.read('intent');
+  const token = 'c'.repeat(32);
+  const lease = await state.acquireLease({previous: await f.storage.read('lease'), owner: owner(102),
+    nonce: token, expiresAt: '2026-11-24T13:00:00Z'});
+  const candidate = {...f.candidate, owner: owner(102), generationId: 'gen_china_102_1', sourceCursor: 300,
+    receiptSha256: hash('third receipt'), generationManifestSha256: hash('third generation'),
+    sourceDescriptorSha256: hash('third source')};
+  const reservation = await state.reserve({lease, previous, previousIntent, candidate});
+  const publication = await state.commit({lease, ...reservation, evidence: fixtureEvidence(candidate, token, now)});
+  return publication;
+}
+
+test('daily image phase protects a reused current image and performs no source restore, build, generation write or DELETE', async t => {
+  const f = await fixture(t), publication = await thirdDailyPublication(f);
+  const before = {calls: f.calls.length, reads: f.reads.length, writes: f.writes.length, children: f.childCalls.length};
+  const result = await f.release.retireTerminalAppImage({publication,
+    readState: async () => ({accepted: await f.storage.read('accepted'), intent: await f.storage.read('intent')}),
+    assertAuthority: async () => {}});
+  assert.equal(result.status, 'protected'); assert.equal(result.reason, 'current_or_rollback');
+  assert.equal(result.imagesRemoved, 0); assert.equal(result.measuredFreeBytesChange, 0);
+  assert.deepEqual(f.calls.slice(before.calls), ['retire_terminal_app_image', 'close']);
+  assert.equal(f.reads.length, before.reads); assert.equal(f.writes.length, before.writes); assert.equal(f.childCalls.length, before.children);
+  assert.deepEqual({accepted: await f.storage.read('accepted'), intent: await f.storage.read('intent')}, publication);
+});
+
+test('daily image adapter refuses completed=false and preserves the resolved witness for a later required retry', async t => {
+  const f = await fixture(t), publication = await thirdDailyPublication(f);
+  f.flags.incompleteImageResult = true;
+  const start = f.calls.length;
+  await assert.rejects(f.release.retireTerminalAppImage({publication, readState: async () => copy(publication),
+    assertAuthority: async () => {}}), error => {
+      assert.equal(error.appImageCleanup.completed, false); assert.equal(error.appImageCleanup.errorCode, 'proof_invalid'); return true;
+    });
+  assert.deepEqual(f.calls.slice(start), ['retire_terminal_app_image', 'abort']);
+  assert.deepEqual({accepted: await f.storage.read('accepted'), intent: await f.storage.read('intent')}, publication);
 });

@@ -10,7 +10,8 @@ import {verifyFrozenSpeedBaselines} from '../verify-frozen-speed-baselines.mjs';
 import {verifyServingCompatibility} from './serving-compatibility.mjs';
 import {createPrivateChinaGenerationStorage} from './generation-storage.mjs';
 import {restorePrivateChinaGeneration} from './private-generation.mjs';
-import {openChinaSshSession, checkedServerSpeedReport, checkedHomePhaseTimingReport} from './release-ssh.mjs';
+import {openChinaSshSession, checkedServerSpeedReport, checkedHomePhaseTimingReport,
+  checkedTerminalAppImageCleanupReport, terminalAppImageCleanupPending} from './release-ssh.mjs';
 import {verifyChinaPhotoCodeRuntime} from './photo-code-scope.mjs';
 import {verifyChinaImageStorageProof} from './build-release-image.mjs';
 import {CRM_CHINA_CODE_SCOPE, CRM_CHINA_PROTECTED_EXCEPTIONS} from './crm-china-code-scope.mjs';
@@ -554,6 +555,89 @@ export function createChinaDailyRelease({root, servingRoot, pricingPlan, serving
       return {completed: true, retiredContainers: result.retiredContainers, filesDeleted: result.filesDeleted, freedBytes: result.freedBytes};
     } finally { await stop(session); await fs.rm(directory, {recursive: true, force: true}); }
   }
+
+  /** Separate from container/private-file retirement. Only the resolved private
+   * publication authorizes a target; a caller cannot supply an image ID. */
+  async function retireTerminalAppImage({publication, readState, assertAuthority}) {
+    let directory, session, phase = 'proof', removalRequested = false;
+    try {
+      need(typeof readState === 'function' && typeof assertAuthority === 'function', 'app_image_authority');
+      publication = structuredClone({accepted: publication?.accepted, intent: publication?.intent});
+      need(inspectChinaPublicationState(publication).status === 'resolved', 'app_image_publication');
+      const intent = publication.intent.value;
+      const target = intent?.status === 'committed' ? intent.previous.value?.rollback
+        : intent?.status === 'aborted' && intent.transition === 'code-update'
+          && intent.resolution?.kind === 'rolled_back' ? intent.candidate : null;
+      const witnessSha256 = digest(publication);
+      const authority = async () => {
+        phase = 'authority';
+        await assertAuthority();
+        const value = await readState();
+        await assertAuthority();
+        const currentState = {accepted: value?.accepted, intent: value?.intent};
+        need(inspectChinaPublicationState(currentState).status === 'resolved'
+          && equal(currentState, publication), 'app_image_authority_changed');
+        return currentState;
+      };
+      const checkedResult = value => {
+        phase = 'proof';
+        const result = checkedTerminalAppImageCleanupReport(value);
+        need(result.witnessSha256 === witnessSha256
+          && (target ? result.status !== 'not_applicable' && result.runtimeSha === target.runtimeSha && result.imageId === target.imageId
+            : result.status === 'not_applicable'), 'app_image_result_binding');
+        return result;
+      };
+      await authority();
+      phase = 'proof';
+      // Reuse the reviewed absolute pins without invoking its legacy cleanup.
+      // The host independently pins these exact source bytes before import.
+      const filename = path.join(root, 'scripts/regcloud-release-retention.py');
+      const before = await fs.lstat(filename);
+      need(before.isFile() && !before.isSymbolicLink() && before.nlink === 1 && before.size > 0
+        && before.size <= 64 * 1024, 'app_image_policy');
+      const raw = await fs.readFile(filename);
+      need(raw.length === before.size && sameFile(before, await fs.lstat(filename)), 'app_image_policy_changed');
+      directory = await fs.mkdtemp(path.join(await fs.realpath(runnerTemp), 'china-terminal-app-image-'));
+      phase = 'transport';
+      session = await use.openSession({root, directory, privateKey});
+      const currentState = await authority();
+      phase = 'transport';
+      let value = await session.call('retire_terminal_app_image', {action: 'prepare', publication, currentState,
+        policySource: raw.toString('utf8'), policySourceSha256: hash(raw)});
+      if (value?.kind === 'china-terminal-app-image-prepared-v1') {
+        phase = 'proof';
+        need(value.version === 1 && Object.keys(value).sort().join(',') ===
+          ['version', 'kind', 'runtimeSha', 'imageId', 'witnessSha256'].sort().join(',')
+          && target && value.runtimeSha === target.runtimeSha && value.imageId === target.imageId
+          && value.witnessSha256 === witnessSha256, 'app_image_prepare_binding');
+        const refreshed = await authority();
+        phase = 'transport';
+        removalRequested = true;
+        value = await session.call('retire_terminal_app_image', {action: 'remove', publication, currentState: refreshed});
+      }
+      const result = checkedResult(value);
+      await authority();
+      phase = 'close';
+      const closed = await session.close();
+      need(closed?.closed === true && closed?.readOnly === false, 'app_image_close');
+      session = null;
+      await authority();
+      return result;
+    } catch (cause) {
+      const error = Error('china_daily_release_app_image_cleanup_failed');
+      const descriptor = cause && Object.getOwnPropertyDescriptor(cause, 'appImageCleanup');
+      error.appImageCleanup = descriptor && Object.hasOwn(descriptor, 'value')
+        ? terminalAppImageCleanupPending(cause)
+        : Object.freeze({version: 1, kind: 'china-terminal-app-image-cleanup-v1', completed: false,
+          status: 'pending', uncertain: removalRequested || phase === 'close',
+          errorCode: phase === 'authority' ? 'authority_unavailable'
+            : ['transport', 'close'].includes(phase) ? 'transport_unknown' : 'proof_invalid'});
+      throw error;
+    } finally {
+      await stop(session);
+      if (directory) await fs.rm(directory, {recursive: true, force: true});
+    }
+  }
   return Object.freeze({stageRelease: args => stage('generation-update', args),
-    stageCodeRelease: args => stage('code-update', args), recoverRelease, retireHost});
+    stageCodeRelease: args => stage('code-update', args), recoverRelease, retireHost, retireTerminalAppImage});
 }

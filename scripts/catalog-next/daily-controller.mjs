@@ -3,6 +3,7 @@ import {prepareChinaGeneration} from './prepare-generation.mjs';
 import {chinaGenerationRoot} from './generation-storage.mjs';
 import {createChinaStateStorage, createChinaState, validateChinaGenerationReference,
   inspectChinaPublicationState, protectedChinaGenerations} from './china-state.mjs';
+import {checkedTerminalAppImageCleanupReport, terminalAppImageCleanupPending} from './release-ssh.mjs';
 
 const HASH = /^[a-f0-9]{64}$/, REVISION = /^[a-f0-9]{40}$/;
 const need = (value, code) => { if (!value) throw Error('china_daily_' + code); };
@@ -71,7 +72,7 @@ function preparedReference(prepared, owner, previous, plan) {
  * No receipt implementation is supplied or fabricated here. */
 export async function runChinaDailyCycle({runtimeRoot, plan, invocation, owner, runnerTemp, prepareReportPath,
   trigger = 'schedule', nonce = randomBytes(16).toString('hex'), storage,
-  prepare = prepareChinaGeneration, stageRelease, recoverRelease, afterAccepted, resumeCleanup, retirePreviousHost,
+  prepare = prepareChinaGeneration, stageRelease, recoverRelease, afterAccepted, resumeCleanup, retirePreviousHost, retireTerminalAppImage,
   now = () => new Date().toISOString(), scheduleHeartbeat = defaultHeartbeat,
   leaseMs = 15 * 60 * 1000, heartbeatMs = 30 * 1000, onProgress = () => {}}) {
   need(invocation?.version === 1 && REVISION.test(invocation.sourceSha ?? '') && owner?.revision === invocation.sourceSha, 'invocation');
@@ -81,14 +82,15 @@ export async function runChinaDailyCycle({runtimeRoot, plan, invocation, owner, 
     && [prepare, stageRelease, recoverRelease, now, scheduleHeartbeat, onProgress].every(value => typeof value === 'function'), 'capabilities');
   need((afterAccepted === undefined || typeof afterAccepted === 'function')
     && (resumeCleanup === undefined || typeof resumeCleanup === 'function')
-    && (retirePreviousHost === undefined || typeof retirePreviousHost === 'function'), 'retention_capability');
+    && (retirePreviousHost === undefined || typeof retirePreviousHost === 'function')
+    && (retireTerminalAppImage === undefined || typeof retireTerminalAppImage === 'function'), 'retention_capability');
   need(Number.isSafeInteger(leaseMs) && Number.isSafeInteger(heartbeatMs) && heartbeatMs > 0 && leaseMs > heartbeatMs * 2, 'lease_timing');
   storage ??= createChinaStateStorage();
   need(typeof storage.assertPrivateBucket === 'function' && (await storage.assertPrivateBucket())?.verified === true, 'privacy');
   const state = createChinaState({storage, now});
   const report = {version: 1, kind: 'china-daily-cycle-v1', market: 'china', completed: false, published: false,
     status: 'starting', recovered: false, sourcePrepared: false, applicationBuilds: 0, encyclopediaWrites: 0, otherMarketWrites: 0, deletions: 0};
-  let lease, expected, staged, closed = false, stopHeartbeat, authorityFailure, queue = Promise.resolve();
+  let lease, expected, staged, closed = false, closeConfirmed = false, stopHeartbeat, authorityFailure, queue = Promise.resolve();
   const retentionAttempted = new Set();
   const serial = work => { const operation = queue.then(work); queue = operation.catch(() => {}); return operation; };
   const at = () => { const value = now(); time(value); return value; };
@@ -115,7 +117,7 @@ export async function runChinaDailyCycle({runtimeRoot, plan, invocation, owner, 
   });
   async function closeStage() {
     if (!staged || closed) return;
-    closed = true; await staged.close();
+    closed = true; await staged.close(); closeConfirmed = true;
   }
   async function transition(work) {
     return serial(async () => { await verifyLease(); const result = await work(); expected = result; return result; });
@@ -205,6 +207,32 @@ export async function runChinaDailyCycle({runtimeRoot, plan, invocation, owner, 
     report.hostCleanupBeforeReserve = {completed: true, retiredContainers: result.retiredContainers,
       filesDeleted: result.filesDeleted, freedBytes: result.freedBytes};
   }
+  async function cleanupTerminalAppImage(required = false) {
+    const intent = expected?.intent?.value;
+    const eligible = intent?.status === 'committed' && Boolean(intent.previous?.value?.rollback)
+      || intent?.status === 'aborted' && intent.transition === 'code-update' && intent.resolution?.kind === 'rolled_back';
+    if (!eligible) return;
+    const field = required ? 'appImageCleanupBeforeReserve' : 'appImageCleanup';
+    try {
+      // A new host session must never contend with an uncertain primary session.
+      need(!staged || closeConfirmed, 'app_image_cleanup_session_open');
+      need(typeof retireTerminalAppImage === 'function', 'app_image_cleanup_capability');
+      await assertAuthority();
+      const publication = await readOwnedState();
+      need(inspectChinaPublicationState(publication).status === 'resolved', 'app_image_cleanup_state');
+      await onProgress({phase: 'app_image_cleanup', market: 'china'});
+      const result = checkedTerminalAppImageCleanupReport(await retireTerminalAppImage({
+        publication, readState: readOwnedState, assertAuthority}));
+      await assertAuthority();
+      report[field] = result;
+    } catch (error) {
+      report[field] = terminalAppImageCleanupPending(error);
+      report.appImageCleanupPending = true;
+      // The durable terminal witness cannot be replaced until its image cleanup
+      // has a known outcome. A finished publication itself remains accepted.
+      if (required) throw Error('china_daily_app_image_cleanup_pending');
+    }
+  }
   const complete = (status, published, current = expected?.accepted?.value?.current) => {
     Object.assign(report, {completed: true, status, published, finishedAt: at()});
     if (current) Object.assign(report, {acceptedGenerationId: current.generationId,
@@ -228,6 +256,7 @@ export async function runChinaDailyCycle({runtimeRoot, plan, invocation, owner, 
     await resumeRetention();
     if (trigger === 'schedule' && !chinaDailyIsDue(current, at())) return complete('not_due', false);
     await preservePreviousHost();
+    await cleanupTerminalAppImage(true);
     await assertAuthority();
     await onProgress({phase: 'daily_prepare', market: 'china', published: false});
     const prepared = await prepare({runtimeRoot, plan, invocation, owner, runnerTemp, reportPath: prepareReportPath,
@@ -260,6 +289,7 @@ export async function runChinaDailyCycle({runtimeRoot, plan, invocation, owner, 
       } catch { report.hostCleanupPending = true; }
     }
     await closeStage();
+    await cleanupTerminalAppImage();
     await retainAccepted(committed);
     return complete('accepted', true);
   } catch (error) {
@@ -271,9 +301,11 @@ export async function runChinaDailyCycle({runtimeRoot, plan, invocation, owner, 
         if (result.kind === 'accepted' || result.kind === 'stable' && report.preparedGenerationId
           && result.accepted.value?.current?.generationId === report.preparedGenerationId
           && result.accepted.value.commit?.nonce === nonce) {
+          await cleanupTerminalAppImage();
           await retainAccepted(result);
           report.recovered = true; return complete('accepted', true);
         }
+        if (result.kind === 'rolled_back') await cleanupTerminalAppImage();
         report.status = result.kind === 'unresolved' ? 'needs_reconciliation'
           : result.kind === 'rolled_back' ? 'rolled_back' : 'failed';
         report.protectedGenerations = protectedChinaGenerations(result).references.length;

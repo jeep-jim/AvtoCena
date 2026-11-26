@@ -1,7 +1,8 @@
 import {randomBytes} from 'node:crypto';
 import {createChinaState, createChinaStateStorage, validateChinaCodeTransition,
   validateChinaGenerationReference, inspectChinaPublicationState} from './china-state.mjs';
-import {checkedServerSpeedReport, checkedHomePhaseTimingReport} from './release-ssh.mjs';
+import {checkedServerSpeedReport, checkedHomePhaseTimingReport,
+  checkedTerminalAppImageCleanupReport, terminalAppImageCleanupPending} from './release-ssh.mjs';
 
 const need = (value, code) => { if (!value) throw Error('china_code_' + code); };
 const safeCode = error => /^china_[a-z0-9_]{1,150}$/.test(error?.message ?? '') ? error.message : 'china_code_failed';
@@ -18,7 +19,8 @@ const defaultHeartbeat = (fn, interval) => { const timer = setInterval(fn, inter
  * The existing private lease/intent/CAS state and authentic host receipts remain
  * the sole publication authority, including after a lost acceptance response. */
 export async function runChinaCodeCycle({plan, imageId, invocation, owner, storage,
-  stageCodeRelease, recoverRelease, preserveRetention, retirePreviousHost, nonce = randomBytes(16).toString('hex'),
+  stageCodeRelease, recoverRelease, preserveRetention, retirePreviousHost, retireTerminalAppImage,
+  nonce = randomBytes(16).toString('hex'),
   now = () => new Date().toISOString(), scheduleHeartbeat = defaultHeartbeat,
   leaseMs = 20 * 60 * 1000, heartbeatMs = 30 * 1000, onProgress = () => {}}) {
   need(plan?.version === 1 && plan.market === 'china' && plan.minimumYear === 2014
@@ -29,6 +31,7 @@ export async function runChinaCodeCycle({plan, imageId, invocation, owner, stora
   need([stageCodeRelease, recoverRelease, now, scheduleHeartbeat, onProgress].every(fn => typeof fn === 'function')
     && (preserveRetention === undefined || typeof preserveRetention === 'function')
     && (retirePreviousHost === undefined || typeof retirePreviousHost === 'function')
+    && (retireTerminalAppImage === undefined || typeof retireTerminalAppImage === 'function')
     && Number.isSafeInteger(leaseMs) && Number.isSafeInteger(heartbeatMs)
     && heartbeatMs > 0 && leaseMs > heartbeatMs * 2, 'capabilities');
   storage ??= createChinaStateStorage();
@@ -38,7 +41,7 @@ export async function runChinaCodeCycle({plan, imageId, invocation, owner, stora
     published: false, status: 'starting', runtimeSha: plan.runtimeSha, retainedRuntime: plan.retainedRuntime,
     sourceRequests: 0, generationRestores: 0, priceCalculations: 0, generationWrites: 0,
     encyclopediaWrites: 0, otherMarketWrites: 0, deletions: 0};
-  let lease, expected, staged, stopHeartbeat, authorityFailure, candidate, closed = false, queue = Promise.resolve();
+  let lease, expected, staged, stopHeartbeat, authorityFailure, candidate, closed = false, closeConfirmed = false, queue = Promise.resolve();
   const at = () => {
     const value = now();
     need(typeof value === 'string' && /^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(?:\.\d{1,6})?Z$/.test(value)
@@ -103,7 +106,7 @@ export async function runChinaCodeCycle({plan, imageId, invocation, owner, stora
   }
   async function closeStage() {
     if (!staged || closed) return;
-    closed = true; await staged.close();
+    closed = true; await staged.close(); closeConfirmed = true;
   }
   async function preservePreviousHost() {
     if (expected.intent.value?.status !== 'committed' || !expected.intent.value.previous.value?.rollback) return;
@@ -119,6 +122,32 @@ export async function runChinaCodeCycle({plan, imageId, invocation, owner, stora
     'host_retirement_incomplete');
     report.hostCleanupBeforeReserve = {completed: true, retiredContainers: result.retiredContainers,
       filesDeleted: result.filesDeleted, freedBytes: result.freedBytes};
+  }
+  async function cleanupTerminalAppImage(required = false) {
+    const intent = expected?.intent?.value;
+    const eligible = intent?.status === 'committed' && Boolean(intent.previous?.value?.rollback)
+      || intent?.status === 'aborted' && intent.transition === 'code-update' && intent.resolution?.kind === 'rolled_back';
+    if (!eligible) return;
+    const field = required ? 'appImageCleanupBeforeReserve' : 'appImageCleanup';
+    try {
+      // A new host session must never contend with an uncertain primary session.
+      need(!staged || closeConfirmed, 'app_image_cleanup_session_open');
+      need(typeof retireTerminalAppImage === 'function', 'app_image_cleanup_capability');
+      await assertAuthority();
+      const publication = await readOwnedState();
+      need(inspectChinaPublicationState(publication).status === 'resolved', 'app_image_cleanup_state');
+      await onProgress({phase: 'app_image_cleanup', market: 'china'});
+      const result = checkedTerminalAppImageCleanupReport(await retireTerminalAppImage({
+        publication, readState: readOwnedState, assertAuthority}));
+      await assertAuthority();
+      report[field] = result;
+    } catch (error) {
+      report[field] = terminalAppImageCleanupPending(error);
+      report.appImageCleanupPending = true;
+      // The durable terminal witness cannot be replaced until its image cleanup
+      // has a known outcome. A finished publication itself remains accepted.
+      if (required) throw Error('china_code_app_image_cleanup_pending');
+    }
   }
   function complete(status, published) {
     Object.assign(report, {completed: true, status, published, finishedAt: at()});
@@ -148,6 +177,7 @@ export async function runChinaCodeCycle({plan, imageId, invocation, owner, stora
     candidate = {...data, runtimeSha: plan.runtimeSha, imageId};
     validateChinaCodeTransition(candidate, current);
     await preservePreviousHost();
+    await cleanupTerminalAppImage(true);
     if (preserveRetention) {
       await assertAuthority();
       const retention = await preserveRetention({readState: readOwnedState, assertAuthority});
@@ -183,6 +213,7 @@ export async function runChinaCodeCycle({plan, imageId, invocation, owner, stora
       } catch { report.hostCleanupPending = true; }
     }
     await closeStage();
+    await cleanupTerminalAppImage();
     return complete('accepted', true);
   } catch (error) {
     const originalFailure = safeCode(error);
@@ -192,8 +223,10 @@ export async function runChinaCodeCycle({plan, imageId, invocation, owner, stora
         const outcome = await reconcile();
         const {proof: _proof, ...observedCandidate} = outcome.accepted.value?.current ?? {};
         if (candidate && equal(observedCandidate, candidate) && outcome.accepted.value.commit?.nonce === nonce) {
+          await cleanupTerminalAppImage();
           report.recovered = true; return complete('accepted', true);
         }
+        if (outcome.kind === 'rolled_back') await cleanupTerminalAppImage();
         report.status = outcome.kind === 'unresolved' ? 'needs_reconciliation'
           : outcome.kind === 'rolled_back' ? 'rolled_back' : 'failed';
       } catch { report.status = 'needs_reconciliation'; }

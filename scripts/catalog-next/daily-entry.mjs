@@ -162,7 +162,7 @@ export async function runChinaDailyEntry({root = ROOT, environment = process.env
       await use.verifyCompatibility({runtimeRoot: servingRoot, servingPlan, pricingPlan});
       const release = use.createRelease({root, servingRoot, pricingPlan, servingPlan, controllerSha: invocation.sourceSha,
         runnerTemp, environment, onProgress: progress});
-      need(['stageRelease', 'recoverRelease', 'retireHost'].every(key => typeof release?.[key] === 'function'), 'retirement_hook');
+      need(['stageRelease', 'recoverRelease', 'retireHost', 'retireTerminalAppImage'].every(key => typeof release?.[key] === 'function'), 'retirement_hook');
       releases.set(runtimeSha, release); return release;
     }
     await releaseFor(reference.runtimeSha);
@@ -189,6 +189,20 @@ export async function runChinaDailyEntry({root = ROOT, environment = process.env
         // from the fresh protected state, never from an obsolete serving plan.
         return adapter.retireHost(args);
       },
+      async retireTerminalAppImage(args) {
+        need(typeof args?.readState === 'function' && typeof args?.assertAuthority === 'function', 'app_image_cleanup_authority');
+        await args.assertAuthority();
+        const current = await args.readState();
+        await args.assertAuthority();
+        need(inspectChinaPublicationState(current).status === 'resolved', 'app_image_cleanup_state');
+        const retained = validateChinaGenerationReference(current.accepted.value?.current, {requireAccepted: true});
+        need(retained.pricingRuntimeSha === pricingPlan.runtimeSha, 'accepted_runtime');
+        const adapter = await releaseFor(retained.runtimeSha);
+        await args.assertAuthority();
+        // The current reviewed adapter receives the original terminal witness;
+        // an obsolete or rolled-back image never selects a new runtime checkout.
+        return adapter.retireTerminalAppImage(args);
+      },
     };
     let deadlineAt = null;
     try { deadlineAt = await use.readDeadline({environment}); }
@@ -197,7 +211,8 @@ export async function runChinaDailyEntry({root = ROOT, environment = process.env
       owner: {runId: environment.GITHUB_RUN_ID, attempt: environment.GITHUB_RUN_ATTEMPT, revision: invocation.sourceSha},
       runnerTemp, prepareReportPath: path.join(root, 'catalog-next-china-daily-generation-report.json'),
       trigger: invocation.event === 'schedule' ? 'schedule' : 'manual', storage,
-      stageRelease: release.stageRelease, recoverRelease: release.recoverRelease, retirePreviousHost: release.retireHost, onProgress: progress,
+      stageRelease: release.stageRelease, recoverRelease: release.recoverRelease, retirePreviousHost: release.retireHost,
+      retireTerminalAppImage: release.retireTerminalAppImage, onProgress: progress,
       resumeCleanup: ({readState, assertAuthority}) => use.collectRetired({mode: 'enqueue-only', readState, assertAuthority,
         environment, onProgress: progress}),
       afterAccepted: ({previousAccepted, accepted, intent, readState, assertAuthority}) => use.collectRetired({

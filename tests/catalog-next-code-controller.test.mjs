@@ -64,6 +64,21 @@ function memoryStorage() {
       sha256: hash(JSON.stringify(ordered(value))), value: copy(value)}); },
   };
 }
+
+function terminalImageReport(publication, {status = 'already_absent', reason = 'already_absent'} = {}) {
+  const intent = publication.intent.value, target = intent.status === 'committed'
+    ? intent.previous.value.rollback : intent.candidate;
+  const removed = status === 'removed' ? 1 : 0, before = 4096, after = before + removed * 1024;
+  return {version: 1, kind: 'china-terminal-app-image-cleanup-v1', completed: true, status, uncertain: false,
+    imagesRemoved: removed, runtimeSha: target.runtimeSha, imageId: target.imageId,
+    witnessSha256: hash(JSON.stringify(ordered(publication))), diskFreeBytesBefore: before,
+    diskFreeBytesAfter: after, measuredFreeBytesChange: after - before, reason};
+}
+async function absentTerminalImage({publication, readState, assertAuthority}) {
+  await assertAuthority(); assert.deepEqual(await readState(), publication);
+  return terminalImageReport(publication);
+}
+
 async function fixture() {
   const storage = memoryStorage(), state = createChinaState({storage, now: () => seedAt});
   const lease = await state.acquireLease({previous: empty(), owner: owner(1001), nonce: seedNonce, expiresAt: '2026-11-25T10:30:00Z'});
@@ -73,6 +88,7 @@ async function fixture() {
   const f = {storage, first, events: [], hostOutcome: null, activation: 'accept', afterStage: null, stopped: false};
   f.args = {plan, imageId, invocation: {version: 1, sourceSha: owner(2001).revision}, owner: owner(2001), storage, nonce: codeNonce,
     now: () => codeAt, scheduleHeartbeat() { return () => { f.stopped = true; }; },
+    retireTerminalAppImage: absentTerminalImage,
     async preserveRetention({readState, assertAuthority}) {
       f.events.push('preserve'); await assertAuthority();
       assert.equal(inspectChinaPublicationState(await readState()).status, 'resolved');
@@ -133,7 +149,7 @@ test('code acceptance keeps the exact generation, then the real daily cycle reta
   const daily = await runChinaDailyCycle({runtimeRoot: '/test/pricing', runnerTemp: '/test/temp',
     plan: {version: 1, market: 'china', minimumYear: 2014, runtimeSha: plan.pricingRuntimeSha},
     invocation: {version: 1, sourceSha: dailyOwner.revision}, owner: dailyOwner, storage: f.storage, nonce: dailyNonce,
-    now: () => codeAt, scheduleHeartbeat: () => () => {},
+    now: () => codeAt, scheduleHeartbeat: () => () => {}, retireTerminalAppImage: absentTerminalImage,
     async prepare(input) {
       preparations++; await input.assertAuthority(); assert.deepEqual(input.sourceSelection.generation, updated.value.current);
       return {completed: true, published: false, liveCatalogWrites: 0, encyclopediaWrites: 0, calculatorFormulaChanges: 0, deletions: 0,
@@ -257,7 +273,7 @@ async function nextDailyArguments(f, retirePreviousHost) {
   return {runtimeRoot: '/test/pricing', runnerTemp: '/test/temp',
     plan: {version: 1, market: 'china', minimumYear: 2014, runtimeSha: plan.pricingRuntimeSha},
     invocation: {version: 1, sourceSha: dailyOwner.revision}, owner: dailyOwner, storage: f.storage, nonce,
-    now: () => codeAt, scheduleHeartbeat: () => () => {}, retirePreviousHost,
+    now: () => codeAt, scheduleHeartbeat: () => () => {}, retirePreviousHost, retireTerminalAppImage: absentTerminalImage,
     async prepare(input) {
       f.events.push('prepare'); await input.assertAuthority(); assert.deepEqual(input.sourceSelection.generation, previous.value.current);
       return {completed: true, published: false, liveCatalogWrites: 0, encyclopediaWrites: 0, calculatorFormulaChanges: 0, deletions: 0,
@@ -456,5 +472,183 @@ test('a repeated code cycle accepts only the same exact image and does not publi
   const result = await runChinaCodeCycle({...f.args, nonce: '5'.repeat(32)});
   assert.equal(result.status, 'already_accepted'); assert.equal(result.published, false); assert.deepEqual(f.events, []);
   await assert.rejects(runChinaCodeCycle({...f.args, nonce: '6'.repeat(32), imageId: 'sha256:' + 'c'.repeat(64)}), /accepted_image_changed/);
+  assert.deepEqual(f.events, []);
+});
+
+test('terminal accepted code image cleanup follows host retirement and session close under the same lease', async () => {
+  const f = await fixture(); await runChinaCodeCycle(f.args); f.events.length = 0; let calls = 0, observed;
+  const args = await nextCodeArguments(f);
+  args.retireTerminalAppImage = async input => {
+    calls++; f.events.push('image'); observed = input.publication;
+    assert.deepEqual(Object.keys(input).sort(), ['assertAuthority', 'publication', 'readState']);
+    assert.equal(f.events.at(-2), 'close'); assert(f.events.indexOf('afterCommit') < f.events.indexOf('close'));
+    assert.equal((await f.storage.read('lease')).value.status, 'held'); await input.assertAuthority();
+    assert.deepEqual(await input.readState(), observed);
+    assert.equal(observed.intent.value.status, 'committed');
+    assert.deepEqual(observed.intent.value.previous.value.rollback, f.first.accepted.value.current);
+    return terminalImageReport(observed, {status: 'removed', reason: 'exact_terminal_image'});
+  };
+  const result = await runChinaCodeCycle(args);
+  assert.equal(calls, 1); assert.equal(result.status, 'accepted'); assert.equal(result.published, true);
+  assert.equal(result.appImageCleanup.imagesRemoved, 1); assert.equal(result.appImageCleanup.completed, true);
+  assert.equal(result.appImageCleanup.witnessSha256, hash(JSON.stringify(ordered(observed))));
+  assert.equal(result.appImageCleanupPending, undefined); assert.equal(result.leaseReleased, true);
+  for (const key of ['sourceRequests', 'generationRestores', 'priceCalculations', 'generationWrites',
+    'encyclopediaWrites', 'otherMarketWrites', 'deletions']) assert.equal(result[key], 0);
+});
+
+test('confirmed code rollback cleans only its candidate and preserves the original browser failure', async () => {
+  const f = await fixture(); f.activation = 'rollback'; let calls = 0;
+  f.args.retireTerminalAppImage = async input => {
+    calls++; assert.equal(f.events.includes('close'), true); assert.equal(f.events.at(-1), 'recover');
+    assert.equal((await f.storage.read('lease')).value.status, 'held'); await input.assertAuthority();
+    assert.equal(input.publication.intent.value.resolution.kind, 'rolled_back');
+    assert.equal(input.publication.intent.value.transition, 'code-update');
+    assert.equal(input.publication.intent.value.candidate.runtimeSha, plan.runtimeSha);
+    assert.equal(input.publication.accepted.value.current.runtimeSha, plan.retainedRuntime);
+    return terminalImageReport(input.publication, {status: 'removed', reason: 'exact_terminal_image'});
+  };
+  await assert.rejects(runChinaCodeCycle(f.args), error => {
+    assert.equal(error.message, 'china_code_browser_failed'); assert.equal(error.report.status, 'rolled_back');
+    assert.equal(error.report.appImageCleanup.imageId, imageId); assert.equal(error.report.appImageCleanup.imagesRemoved, 1);
+    assert.equal(error.report.leaseReleased, true); assert.equal(error.report.published, false); return true;
+  });
+  assert.equal(calls, 1); assert.deepEqual((await f.storage.read('accepted')).value.current, f.first.accepted.value.current);
+});
+
+test('uncertain terminal image cleanup is bounded pending evidence and cannot replace the rollback error', async () => {
+  const f = await fixture(); f.activation = 'rollback'; let calls = 0;
+  f.args.retireTerminalAppImage = async () => {
+    calls++; const error = Error('private-docker-output credential=secret');
+    error.report = {status: 'accepted', private: 'secret'};
+    error.appImageCleanup = {version: 1, kind: 'china-terminal-app-image-cleanup-v1',
+      completed: false, status: 'pending', uncertain: true, errorCode: 'delete_not_confirmed'};
+    throw error;
+  };
+  await assert.rejects(runChinaCodeCycle(f.args), error => {
+    assert.equal(error.message, 'china_code_browser_failed'); assert.equal(error.report.status, 'rolled_back');
+    assert.equal(error.report.appImageCleanupPending, true);
+    assert.deepEqual(error.report.appImageCleanup, {version: 1, kind: 'china-terminal-app-image-cleanup-v1',
+      completed: false, status: 'pending', uncertain: true, errorCode: 'delete_not_confirmed'});
+    assert.equal(JSON.stringify(error.report).includes('secret'), false);
+    assert.equal(error.report.leaseReleased, true); return true;
+  });
+  assert.equal(calls, 1); assert.equal((await f.storage.read('intent')).value.resolution.kind, 'rolled_back');
+});
+
+test('accepted code remains accepted when image cleanup fails and an uncertain close cannot open another host session', async () => {
+  for (const failure of ['cleanup', 'close']) {
+    const f = await fixture(); await runChinaCodeCycle(f.args); f.events.length = 0;
+    const args = await nextCodeArguments(f), stage = args.stageCodeRelease; let calls = 0;
+    if (failure === 'close') args.stageCodeRelease = async input => ({...await stage(input),
+      async close() { f.events.push('close-unknown'); throw Error('private-close-error'); }});
+    args.retireTerminalAppImage = async () => { calls++; throw Error('private-cleanup-error'); };
+    const result = await runChinaCodeCycle(args);
+    assert.equal(result.status, 'accepted'); assert.equal(result.published, true); assert.equal(result.completed, true);
+    assert.equal(result.appImageCleanupPending, true); assert.equal(result.appImageCleanup.completed, false);
+    assert.equal(calls, failure === 'cleanup' ? 1 : 0); assert.equal(result.leaseReleased, true);
+    assert.equal(JSON.stringify(result).includes('private-'), false);
+    assert.equal((await f.storage.read('accepted')).value.current.runtimeSha, args.plan.runtimeSha);
+  }
+});
+
+for (const mode of ['code', 'daily']) {
+  test(mode + ' cannot replace the terminal image witness until cleanup retry succeeds', async () => {
+    const f = await sameGenerationFailedCleanup(), retire = async () => {
+      f.events.push('retire'); return {completed: true, retiredContainers: 0, filesDeleted: 0, freedBytes: 0};
+    };
+    const args = mode === 'code' ? await nextCodeArguments(f, {retirePreviousHost: retire}) : await nextDailyArguments(f, retire);
+    const cycle = mode === 'code' ? runChinaCodeCycle : runChinaDailyCycle; let attempts = 0;
+    args.retireTerminalAppImage = async input => {
+      attempts++; f.events.push('image'); await input.assertAuthority();
+      assert.deepEqual(input.publication, f.publication); assert.deepEqual(await input.readState(), f.publication);
+      assert.equal(f.storage.writes.filter(row => row.name === 'accepted' || row.name === 'intent').length, 0);
+      throw Error('private-image-cleanup-uncertain');
+    };
+    await assert.rejects(cycle(args), error => {
+      assert.equal(error.message, 'china_' + mode + '_app_image_cleanup_pending');
+      assert.equal(error.report.published, false); assert.equal(error.report.appImageCleanupPending, true);
+      assert.equal(error.report.appImageCleanupBeforeReserve.completed, false);
+      assert.equal(JSON.stringify(error.report).includes('private-'), false); return true;
+    });
+    assert.equal(attempts, 1); assert.deepEqual(f.events, ['retire', 'image']);
+    assert.deepEqual({accepted: await f.storage.read('accepted'), intent: await f.storage.read('intent')}, f.publication);
+    assert.equal(f.storage.writes.filter(row => row.name === 'accepted' || row.name === 'intent').length, 0);
+    assert.equal((await f.storage.read('lease')).value.status, 'released');
+    f.events.length = 0;
+    args.retireTerminalAppImage = async input => {
+      attempts++; f.events.push('image'); await input.assertAuthority();
+      return terminalImageReport(input.publication);
+    };
+    const result = await cycle(args);
+    assert.equal(result.status, 'accepted'); assert.equal(result.appImageCleanupBeforeReserve.completed, true);
+    assert.deepEqual(f.events.slice(0, 2), ['retire', 'image']);
+    assert(f.events.indexOf('image') < f.events.indexOf(mode === 'code' ? 'stage' : 'prepare'));
+    assert.notEqual((await f.storage.read('intent')).sha256, f.publication.intent.sha256);
+    assert.equal(result.appImageCleanupPending, undefined);
+  });
+
+  test(mode + ' refuses a missing or malformed image result before source preparation or reservation', async () => {
+    for (const malformed of [false, true]) {
+      const f = await sameGenerationFailedCleanup();
+      const retire = async () => ({completed: true, retiredContainers: 0, filesDeleted: 0, freedBytes: 0});
+      const args = mode === 'code' ? await nextCodeArguments(f, {retirePreviousHost: retire}) : await nextDailyArguments(f, retire);
+      args.retireTerminalAppImage = malformed ? async input => ({...terminalImageReport(input.publication),
+        imagesRemoved: 2, privateUrl: 'private://must-not-escape'}) : undefined;
+      await assert.rejects((mode === 'code' ? runChinaCodeCycle : runChinaDailyCycle)(args), error => {
+        assert.equal(error.report.appImageCleanupPending, true); assert.equal(error.report.published, false);
+        assert.equal(JSON.stringify(error.report).includes('private://'), false); return true;
+      });
+      assert.equal(f.events.includes('prepare') || f.events.includes('stage'), false);
+      assert.deepEqual({accepted: await f.storage.read('accepted'), intent: await f.storage.read('intent')}, f.publication);
+      assert.equal(f.storage.writes.filter(row => row.name === 'accepted' || row.name === 'intent').length, 0);
+    }
+  });
+}
+
+test('changed authority during image cleanup prevents a subsequent code stage or witness replacement', async () => {
+  const f = await sameGenerationFailedCleanup();
+  const args = await nextCodeArguments(f, {retirePreviousHost: async () => ({completed: true, retiredContainers: 0, filesDeleted: 0, freedBytes: 0})});
+  args.retireTerminalAppImage = async input => {
+    await input.assertAuthority();
+    const old = await f.storage.read('accepted'); f.storage.force('accepted', {...old.value, revision: old.value.revision + 1});
+    return terminalImageReport(input.publication);
+  };
+  await assert.rejects(runChinaCodeCycle(args), error => error.report.appImageCleanupPending === true && error.report.published === false);
+  assert.equal(f.events.includes('stage'), false); assert.deepEqual(await f.storage.read('intent'), f.publication.intent);
+  assert.equal(f.storage.writes.filter(row => row.name === 'accepted' || row.name === 'intent').length, 0);
+});
+
+test('a durable never-reserved abort cannot authorize image cleanup even with an older rollback', async () => {
+  const f = await sameGenerationFailedCleanup(), state = createChinaState({storage: f.storage, now: () => codeAt});
+  const lease = await state.acquireLease({previous: await state.read('lease'), owner: owner(2009), nonce: '9'.repeat(32),
+    expiresAt: '2026-11-25T11:30:00.000Z'});
+  const {proof, ...current} = f.publication.accepted.value.current;
+  f.storage.beforeWrite = (name, previous, value) => { if (name === 'accepted' && value.pending) throw Error('fixture_before_reservation'); };
+  await assert.rejects(state.reserve({lease, previous: f.publication.accepted, previousIntent: f.publication.intent,
+    candidate: {...current, runtimeSha: '7'.repeat(40), imageId: 'sha256:' + '8'.repeat(64)}, transition: 'code-update'}), /write_not_committed/);
+  f.storage.beforeWrite = null; await state.releaseLease({lease});
+  const args = await nextCodeArguments(f);
+  args.retirePreviousHost = async () => assert.fail('an abandoned unreserved intent is not a committed retirement');
+  args.retireTerminalAppImage = async () => assert.fail('never_reserved has no terminal image cleanup permission');
+  args.stageCodeRelease = async () => { throw Error('china_code_fixture_stop_before_reserve'); };
+  await assert.rejects(runChinaCodeCycle(args), /china_code_fixture_stop_before_reserve/);
+  assert.equal((await f.storage.read('intent')).value.resolution.kind, 'never_reserved');
+});
+
+test('already accepted, no displaced rollback and unresolved outcomes do not call image cleanup', async () => {
+  const first = await fixture();
+  first.args.retireTerminalAppImage = async () => assert.fail('initial accepted publication has no obsolete app image');
+  assert.equal((await runChinaCodeCycle(first.args)).status, 'accepted');
+  for (const activation of ['unknown', 'bad-rollback']) {
+    const f = await fixture(); f.activation = activation;
+    f.args.retireTerminalAppImage = async () => assert.fail('unconfirmed host outcome cannot clean an image');
+    await assert.rejects(runChinaCodeCycle(f.args), error => error.report.status === 'needs_reconciliation');
+  }
+  const f = await sameGenerationFailedCleanup();
+  const result = await runChinaCodeCycle({...f.args, plan: {...plan, runtimeSha: 'c'.repeat(40), retainedRuntime: plan.runtimeSha},
+    imageId: 'sha256:' + 'd'.repeat(64),
+    retireTerminalAppImage: async () => assert.fail('already_accepted preserves its terminal witness without a cleanup call')});
+  assert.equal(result.status, 'already_accepted'); assert.equal(result.appImageCleanup, undefined);
   assert.deepEqual(f.events, []);
 });

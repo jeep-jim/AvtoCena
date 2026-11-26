@@ -82,7 +82,7 @@ async function fixture(t, {combined = false, japan = false,completion=false, crm
   const f = sample(retainedRuntime), directory = await fs.mkdtemp(path.join(os.tmpdir(), 'china-photo-stage-'));
   t.after(() => fs.rm(directory, {recursive: true, force: true}));
   const root = path.join(directory, 'controller');
-  for (const name of ['scripts/regcloud-performance-gate.py', 'docs/operations/2026-11-11-accepted-speed-baseline.json',
+  for (const name of ['scripts/regcloud-release-retention.py', 'scripts/regcloud-performance-gate.py', 'docs/operations/2026-11-11-accepted-speed-baseline.json',
     'docs/operations/2026-11-11-accepted-browser-speed-baseline.json']) {
     await fs.mkdir(path.dirname(path.join(root, name)), {recursive: true});
     await fs.copyFile(path.join(process.cwd(), name), path.join(root, name));
@@ -127,6 +127,27 @@ async function fixture(t, {combined = false, japan = false,completion=false, crm
   const session = {exited: Promise.resolve(), abort() { calls.push('abort'); },
     async call(method, args) {
       calls.push(method);
+      if (method === 'retire_terminal_app_image') {
+        assert.deepEqual(args.currentState, args.publication);
+        assert.equal(Object.hasOwn(args, 'imageId'), false);
+        const target = args.publication.intent.value.candidate;
+        const bound = {runtimeSha: target.runtimeSha, imageId: target.imageId, witnessSha256: digest(args.publication)};
+        if (args.action === 'prepare') {
+          assert.equal(hash(args.policySource), args.policySourceSha256);
+          assert.match(args.policySource, /def pinned_image/);
+          if (flags.imagePrepare) flags.imagePrepare();
+          if (flags.imageAbsent) return {version: 1, kind: 'china-terminal-app-image-cleanup-v1', completed: true,
+            status: 'already_absent', uncertain: false, imagesRemoved: 0, ...bound,
+            diskFreeBytesBefore: 100, diskFreeBytesAfter: 100, measuredFreeBytesChange: 0, reason: 'already_absent'};
+          return {version: 1, kind: 'china-terminal-app-image-prepared-v1', ...bound,
+            ...(flags.imageWrongTarget ? {imageId: 'sha256:' + 'f'.repeat(64)} : {})};
+        }
+        assert.equal(args.action, 'remove'); flags.imageDeletes = (flags.imageDeletes ?? 0) + 1;
+        if (flags.imageLostDelete) throw Error('china_ssh_closed');
+        return {version: 1, kind: 'china-terminal-app-image-cleanup-v1', completed: true, status: 'removed',
+          uncertain: false, imagesRemoved: 1, ...bound, diskFreeBytesBefore: 100, diskFreeBytesAfter: 175,
+          measuredFreeBytesChange: 75, reason: 'exact_terminal_image'};
+      }
       if (method === 'code_preflight') { assert.deepEqual(args.previousAccepted, f.previous); return f.preflight; }
       if (method === 'init') {
         hostPlan = args.plan;
@@ -183,7 +204,7 @@ async function fixture(t, {combined = false, japan = false,completion=false, crm
       assert.equal(hash(raw), descriptor.sha256); assert.equal(raw.length, descriptor.bytes); uploaded.set(name, raw);
       return {verified: true, file: name, bytes: raw.length};
     },
-    async close() { calls.push('close'); },
+    async close() { calls.push('close'); return {closed: true, readOnly: false}; },
   };
   const release = createChinaDailyRelease({root, servingRoot: directory, pricingPlan, servingPlan,
     controllerSha: '9'.repeat(40), runnerTemp: directory, environment: {SSH_PRIVATE_KEY: 'synthetic fixture'}, capabilities: {
@@ -743,4 +764,71 @@ test('pagination24 cannot accept an omitted live warning-removal proof',async t=
   f.flags.changeReport=report=>{delete report.japanCatalogWarningRemovedPassed;};
   await assert.rejects(stage.activate(input),/china_daily_release_japan_browser_binding/);
   assert.ok(!f.calls.includes('accept')&&!f.calls.includes('browser_evidence'));await stage.close();
+});
+
+async function exactFailedCodePublication(f) {
+  const absent = {found: false, etag: null, sha256: null, value: null}, token = 'c'.repeat(32);
+  const storage = memoryStorage(f.previous), state = createChinaState({storage, now: () => acceptedAt});
+  const lease = await state.acquireLease({previous: absent, owner: f.current.owner, nonce: token, expiresAt: '2026-11-25T10:00:00Z'});
+  const reserved = await state.reserve({lease, previous: f.previous, previousIntent: absent, candidate: f.candidate, transition: 'code-update'});
+  const ref = f.candidate, raw = Buffer.from(JSON.stringify({version: 1, kind: 'china-host-rollback-v1',
+    nonce: token, release: ref.runtimeSha, pricingRuntimeSha: ref.pricingRuntimeSha, generationId: ref.generationId,
+    generationManifestSha256: ref.generationManifestSha256, privateGenerationReceiptSha256: ref.receiptSha256,
+    sourceDescriptorSha256: ref.sourceDescriptorSha256, imageId: ref.imageId,
+    previousAcceptedETag: f.previous.etag, previousAcceptedStateSha256: f.previous.sha256, rolledBackAt: acceptedAt,
+    retainedContainerId: '8'.repeat(64), retainedRuntimeSha: f.current.runtimeSha, retainedImageId: f.current.imageId,
+    retainedRunning: true, ingressRestored: true, candidateRemoved: true}));
+  const publication = await state.abortReserved({lease, ...reserved, evidence: {
+    hostRollbackBase64: raw.toString('base64'), hostRollbackSha256: hash(raw)}});
+  return {publication, storage, state, lease};
+}
+
+test('terminal app-image adapter refreshes exact resolved authority between prepare and one removal without source/build calls', async t => {
+  const f = await fixture(t), {publication, storage, state, lease} = await exactFailedCodePublication(f);
+  const saved = copy(publication); let reads = 0, assertions = 0, actualLease = lease;
+  const result = await f.release.retireTerminalAppImage({publication,
+    readState: async () => { reads++; return {accepted: await storage.read('accepted'), intent: await storage.read('intent')}; },
+    assertAuthority: async () => {
+      assertions++;
+      if (assertions === 5) actualLease = await state.renewLease({lease: actualLease, expiresAt: '2026-11-25T11:00:00Z'});
+    }});
+  assert.equal(result.completed, true); assert.equal(result.imagesRemoved, 1); assert.equal(result.measuredFreeBytesChange, 75);
+  assert.equal(result.runtimeSha, f.candidate.runtimeSha); assert.equal(result.witnessSha256, digest(publication));
+  assert.equal(reads, 5); assert.equal(assertions, 10); assert.equal(f.flags.imageDeletes, 1);
+  assert.deepEqual(f.calls, ['retire_terminal_app_image', 'retire_terminal_app_image', 'close']);
+  assert.deepEqual(publication, saved); assert.notEqual(actualLease.etag, lease.etag);
+  assert.deepEqual({accepted: await storage.read('accepted'), intent: await storage.read('intent')}, publication);
+  assert.equal(f.uploaded.size, 0);
+});
+
+for (const failure of ['authority_changed', 'wrong_target'])
+test('terminal image adapter refuses ' + failure + ' before removal and keeps the terminal witness', async t => {
+  const f = await fixture(t), {publication, storage} = await exactFailedCodePublication(f);
+  let changed = false;
+  f.flags.imageWrongTarget = failure === 'wrong_target';
+  f.flags.imagePrepare = () => { changed = failure === 'authority_changed'; };
+  await assert.rejects(f.release.retireTerminalAppImage({publication,
+    readState: async () => changed ? {...publication, accepted: {...publication.accepted, etag: '"changed"'}} : copy(publication),
+    assertAuthority: async () => {}}), error => {
+      assert.equal(error.appImageCleanup.completed, false); assert.equal(error.appImageCleanup.uncertain, false);
+      assert.equal(error.appImageCleanup.errorCode, failure === 'wrong_target' ? 'proof_invalid' : 'authority_unavailable'); return true;
+    });
+  assert.equal(f.flags.imageDeletes ?? 0, 0); assert.equal(f.calls.includes('close'), false);
+  assert.deepEqual(await storage.read('intent'), publication.intent);
+});
+
+test('lost terminal-image DELETE reply remains pending; exact retry can confirm absence without a second removal', async t => {
+  const f = await fixture(t), {publication, storage} = await exactFailedCodePublication(f);
+  const input = {publication, readState: async () => copy(publication), assertAuthority: async () => {}};
+  f.flags.imageLostDelete = true;
+  await assert.rejects(f.release.retireTerminalAppImage(input), error => {
+    assert.deepEqual(error.appImageCleanup, {version: 1, kind: 'china-terminal-app-image-cleanup-v1',
+      completed: false, status: 'pending', uncertain: true, errorCode: 'transport_unknown'}); return true;
+  });
+  assert.equal(f.flags.imageDeletes, 1); assert.deepEqual(await storage.read('intent'), publication.intent);
+  f.flags.imageAbsent = true; f.flags.imageLostDelete = false;
+  const result = await f.release.retireTerminalAppImage(input);
+  assert.equal(result.status, 'already_absent'); assert.equal(result.imagesRemoved, 0);
+  assert.equal(result.measuredFreeBytesChange, 0); assert.equal(f.flags.imageDeletes, 1);
+  assert.deepEqual(await storage.read('intent'), publication.intent);
 });

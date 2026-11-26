@@ -1435,6 +1435,367 @@ def retire_recovery(params):
         os.close(lock)
 
 
+
+# This is a separate terminal-image phase. Existing retire/file-cleanup methods
+# retain their imagesDeleted == 0 contract, and no legacy pruning entry is called.
+APP_IMAGE_RETENTION_POLICY_SHA256 = 'e04ffcae01be1216df266866e4492d723c9f7c0289c597d2639b198d87f32366'
+
+
+def app_image_references(value, trail=(), depth=0):
+    """Keep operational and historical references distinguishable; do not erase
+    every image mentioned by a terminal intent or by an encoded receipt."""
+    need(depth <= 24, 'app_image_reference_depth')
+    found = []
+    if isinstance(value, dict):
+        for encoded, hashed, name in (
+                ('hostReceiptBase64', 'hostReceiptSha256', 'hostReceipt'),
+                ('hostRollbackBase64', 'hostRollbackSha256', 'hostRollback')):
+            if encoded in value:
+                raw, decoded = decode_report(value[encoded])
+                need(len(raw) <= 256 * 1024 and sha(raw) == value.get(hashed), 'app_image_reference_hash')
+                found.extend(app_image_references(decoded, trail + (name,), depth + 1))
+        for key, child in value.items():
+            if key in ('imageId', 'retainedImageId'):
+                need(isinstance(child, str) and re.fullmatch(r'sha256:[a-f0-9]{64}', child), 'app_image_reference')
+                found.append((trail + (key,), child))
+            elif isinstance(child, (dict, list)):
+                found.extend(app_image_references(child, trail + (key,), depth + 1))
+    elif isinstance(value, list):
+        for index, child in enumerate(value):
+            found.extend(app_image_references(child, trail + (str(index),), depth + 1))
+    return found
+
+
+class TerminalAppImageCleanup:
+    """One image authorized by a resolved committed/rolled-back publication.
+    Prepare/remove share both host locks; the controller refreshes its private
+    authority between calls. No caller-supplied image target is accepted."""
+
+    def __init__(self, params):
+        self.locks, self.proofs = [], []
+        self.finished = self.inflight = False
+        self.terminal = None
+        self.target = self.target_directory = self.target_nonce = None
+        try:
+            need(isinstance(params, dict) and set(params) == {'action', 'publication', 'currentState',
+                 'policySource', 'policySourceSha256'} and params['action'] == 'prepare', 'app_image_prepare')
+            self.publication = copy.deepcopy(params['publication'])
+            self.witness_sha = canonical_sha(self.publication)
+            state, intent = self.authority(params)
+            source = params['policySource']
+            need(isinstance(source, str) and 0 < len(source.encode()) <= 64 * 1024 and
+                 params['policySourceSha256'] == sha(source.encode()) == APP_IMAGE_RETENTION_POLICY_SHA256,
+                 'app_image_policy')
+            # The immutable reviewed module's __main__ entry never executes.
+            policy = importlib.util.module_from_spec(importlib.util.spec_from_loader('app_image_pins', loader=None))
+            exec(compile(source, '<reviewed-retention-pins>', 'exec'), policy.__dict__)
+            need(callable(getattr(policy, 'pinned_image', None)), 'app_image_policy')
+            self.policy = policy
+            for name in ('avtocena-staging-prepare', 'avtocena-runtime-change'):
+                fd = os.open('/run/lock/' + name + '.lock', os.O_RDONLY | os.O_NOFOLLOW | os.O_CLOEXEC)
+                self.locks.append(fd)
+                info = os.fstat(fd)
+                need(stat.S_ISREG(info.st_mode) and info.st_uid == 0 and info.st_nlink == 1, 'app_image_lock')
+                fcntl.flock(fd, fcntl.LOCK_EX | fcntl.LOCK_NB)
+            self.state, self.intent = state, intent
+            self.before = self.free()
+            self.select_target()
+            if self.target is None:
+                self.terminal = self.result('not_applicable', 'no_terminal_image')
+                return
+            self.pin_protected()
+            self.containers_before = self.containers()
+            self.container_hashes = {key: protected_identity(row) for key, row in self.containers_before.items()}
+            self.images_before = self.images()
+            self.ingress = CONFIG.read_bytes()
+            self.assert_protected()
+            protected_ids = {reference['imageId'] for reference in (state['current'], state.get('rollback')) if reference}
+            if self.target['imageId'] in protected_ids:
+                self.terminal = self.result('protected', 'current_or_rollback')
+                return
+            if self.target['runtimeSha'] == RETAINED:
+                self.terminal = self.result('protected', 'retained_bootstrap')
+                return
+            if any(row.get('Image') == self.target['imageId'] for row in self.containers_before.values()):
+                self.terminal = self.result('protected', 'container_reference')
+                return
+            self.check_references()
+            self.require_retired_files()
+            image = self.inspect_target()
+            if image is None:
+                need(self.target['imageId'] not in self.images_before, 'app_image_absence')
+                self.terminal = self.result('already_absent', 'already_absent')
+                return
+            need(isinstance(image, dict) and image.get('Id') == self.target['imageId'] and
+                 self.target['imageId'] in self.images_before, 'app_image_image_identity')
+            if self.policy.pinned_image(image):
+                self.terminal = self.result('protected', 'pinned_image')
+                return
+            if not self.eligible_image(image):
+                self.terminal = self.result('protected', 'ineligible_image')
+                return
+            self.validate_image(image)
+            self.image_hash = canonical_sha(image)
+            self.fence()
+        except BaseException:
+            self.close()
+            raise
+
+    def authority(self, params):
+        need(params.get('publication') == self.publication and params.get('currentState') == self.publication,
+             'app_image_authority_changed')
+        # The private lease is fenced by the controller, not pinned here: its
+        # own successful renewals must not invalidate an accepted/intent fence.
+        return checked_publication_view(params['currentState'])
+
+    def pin(self, filename):
+        regular(filename, 256 * 1024)
+        raw = filename.read_bytes()
+        need(len(raw) <= 256 * 1024, 'app_image_proof_size')
+        value = json.loads(raw)
+        need(isinstance(value, dict), 'app_image_proof')
+        self.proofs.append((filename, sha(raw)))
+        return value, raw
+
+    def select_target(self):
+        state, intent = self.state, self.intent
+        if intent is None:
+            return
+        if intent['status'] == 'committed':
+            previous = checked_accepted_observation(intent['previous'])
+            need(state['revision'] == previous['revision'] + 2 and state.get('rollback') == previous['current'],
+                 'app_image_successor')
+            target = previous.get('rollback')
+            if target is None:
+                return
+            # This exact predecessor is the same target as retire_reference.
+            receipt = verified_history(target)
+            directory, _ = reference_plan(target, receipt)
+            self.target = {'runtimeSha': target['runtimeSha'], 'imageId': target['imageId']}
+            self.target_nonce, self.target_directory = receipt['nonce'], directory
+            self.target_plan, _ = self.pin(directory / 'PLAN.json')
+            self.pin(directory / 'ACCEPTED.json')
+            generation_reference(target, receipt['nonce'])
+            self.pin(directory / 'generation' / 'GENERATION.json')
+            verified_history(state['current'], intent['previous'])
+            self.mode = 'retired_predecessor'
+            return
+        if intent.get('transition') != 'code-update' or intent.get('resolution', {}).get('kind') != 'rolled_back':
+            return
+        previous = checked_accepted_observation(intent['previous'])
+        need(state == {**previous, 'revision': previous['revision'] + 2, 'pending': None},
+             'app_image_rollback_state')
+        candidate = intent.get('candidate')
+        need(isinstance(candidate, dict) and re.fullmatch(r'[a-f0-9]{40}', candidate.get('runtimeSha', '')) and
+             re.fullmatch(r'sha256:[a-f0-9]{64}', candidate.get('imageId', '')) and
+             same_generation_data(candidate, previous['current']), 'app_image_candidate')
+        directory = BASE / candidate['runtimeSha'] / 'china-next' / intent['nonce']
+        for parent in (BASE, directory.parent.parent, directory.parent, directory, directory / 'generation'):
+            private_directory(parent)
+        plan, plan_raw = self.pin(directory / 'PLAN.json')
+        validate_plan(plan)
+        need(code_update(plan) and plan.get('runtimeSha') == candidate['runtimeSha'] and
+             plan.get('imageId') == candidate['imageId'] and plan.get('nonce') == intent['nonce'] and
+             plan.get('previousAcceptedState') == previous and
+             plan.get('previousAcceptedETag') == intent['previous']['etag'] and
+             plan.get('previousAcceptedStateSha256') == intent['previous']['sha256'] and
+             all(plan.get(key) == candidate[key] for key in
+                 ('pricingRuntimeSha', 'generationId', 'generationManifestSha256', 'sourceDescriptorSha256')) and
+             plan.get('privateGenerationReceiptSha256') == candidate['receiptSha256'], 'app_image_failed_plan')
+        self.require_absent(directory / 'ACCEPTED.json', 'app_image_failed_accepted')
+        outcome = read_outcome({'runtimeSha': candidate['runtimeSha'], 'nonce': intent['nonce']}, verify_current=False)
+        proof = intent['resolution'].get('rollbackProof')
+        need(outcome.get('status') == 'rolled_back' and isinstance(proof, dict) and
+             outcome.get('hostRollbackBase64') == proof.get('hostRollbackBase64') and
+             outcome.get('hostRollbackSha256') == proof.get('hostRollbackSha256'), 'app_image_rollback_proof')
+        rollback, rollback_raw = self.pin(directory / 'ROLLED_BACK.json')
+        cleanup, _ = self.pin(directory / 'FAILED_CODE_CLEANUP.json')
+        need(sha(rollback_raw) == proof['hostRollbackSha256'] and
+             rollback.get('retainedRuntimeSha') == previous['current']['runtimeSha'] and
+             rollback.get('retainedImageId') == previous['current']['imageId'] and
+             all(rollback.get(key) is True for key in ('retainedRunning', 'candidateRemoved', 'ingressRestored')),
+             'app_image_rollback_proof')
+        need(cleanup.get('version') == 1 and cleanup.get('kind') == 'china-failed-code-bulk-cleanup-v1' and
+             cleanup.get('runtimeSha') == candidate['runtimeSha'] and cleanup.get('nonce') == intent['nonce'] and
+             cleanup.get('planSha256') == sha(plan_raw) and cleanup.get('rollbackSha256') == sha(rollback_raw) and
+             cleanup.get('completed') is True and cleanup.get('protectedDeploymentsPreserved') is True and
+             type(cleanup.get('imagesDeleted')) is int and cleanup['imagesDeleted'] == 0 and
+             type(cleanup.get('directoriesDeleted')) is int and cleanup['directoriesDeleted'] == 0,
+             'app_image_bulk_cleanup')
+        self.target = {'runtimeSha': candidate['runtimeSha'], 'imageId': candidate['imageId']}
+        self.target_nonce, self.target_directory, self.target_plan = intent['nonce'], directory, plan
+        self.mode = 'confirmed_rollback'
+
+    def pin_protected(self):
+        self.protected = []
+        for reference in (self.state['current'], self.state.get('rollback')):
+            if reference is None:
+                continue
+            receipt = verified_history(reference)
+            directory, _ = reference_plan(reference, receipt)
+            generation_reference(reference, receipt['nonce'])
+            for name in ('PLAN.json', 'ACCEPTED.json'):
+                self.pin(directory / name)
+            self.pin(directory / 'generation' / 'GENERATION.json')
+            self.protected.append((reference, receipt['nonce']))
+
+    @staticmethod
+    def require_absent(filename, code):
+        try:
+            filename.lstat()
+        except FileNotFoundError:
+            return
+        need(False, code)
+
+    def require_retired_files(self):
+        # A stopped or foreign container is an absolute image reference; no
+        # container/file is removed by this phase, even when an old bulk remains.
+        need(not any(row.get('Config', {}).get('Labels', {}).get('avtocena.china.nonce') == self.target_nonce
+                     for row in self.containers().values()), 'app_image_retirement_incomplete')
+        for descriptor in self.target_plan['files']:
+            if descriptor['name'] in HOST_BULK_FILES:
+                filename = (self.target_directory if descriptor['name'] == 'image.tar'
+                            else self.target_directory / 'generation') / descriptor['name']
+                self.require_absent(filename, 'app_image_retirement_incomplete')
+        if self.mode == 'confirmed_rollback':
+            self.require_absent(self.target_directory / 'ACCEPTED.json', 'app_image_failed_accepted')
+
+    def check_references(self):
+        for trail, image in app_image_references(self.publication):
+            if image != self.target['imageId']:
+                continue
+            if self.mode == 'retired_predecessor':
+                allowed = trail[:5] == ('intent', 'value', 'previous', 'value', 'rollback') or trail in (
+                    ('accepted', 'value', 'rollback', 'proof', 'hostReceipt', 'retainedImageId'),
+                    ('intent', 'value', 'previous', 'value', 'current', 'proof', 'hostReceipt', 'retainedImageId'))
+            else:
+                allowed = trail == ('intent', 'value', 'candidate', 'imageId') or trail == (
+                    'intent', 'value', 'resolution', 'rollbackProof', 'hostRollback', 'imageId')
+            need(allowed, 'app_image_other_reference')
+
+    @staticmethod
+    def free():
+        usage = os.statvfs(BASE)
+        return usage.f_bavail * usage.f_frsize
+
+    @staticmethod
+    def containers():
+        rows = docker('GET', '/containers/json?all=1')
+        need(isinstance(rows, list), 'app_image_containers')
+        result = {}
+        for item in rows:
+            need(isinstance(item, dict) and isinstance(item.get('Id'), str) and
+                 re.fullmatch(r'[a-f0-9]{64}', item['Id']) and item['Id'] not in result, 'app_image_container_identity')
+            row = docker('GET', '/containers/' + item['Id'] + '/json')
+            need(row.get('Id') == item['Id'] and isinstance(row.get('Image'), str) and
+                 re.fullmatch(r'sha256:[a-f0-9]{64}', row['Image']), 'app_image_container_identity')
+            result[item['Id']] = row
+        return result
+
+    @staticmethod
+    def images():
+        rows = docker('GET', '/images/json?all=1')
+        need(isinstance(rows, list), 'app_image_images')
+        ids = [row.get('Id') for row in rows if isinstance(row, dict)]
+        need(len(ids) == len(rows) and all(isinstance(value, str) and re.fullmatch(r'sha256:[a-f0-9]{64}', value)
+             for value in ids) and len(set(ids)) == len(ids), 'app_image_image_identity')
+        return set(ids)
+
+    def inspect_target(self):
+        try:
+            return docker('GET', '/images/' + self.target['imageId'] + '/json')
+        except ReleaseError as error:
+            if str(error) == 'china_host_docker_http_404':
+                return None
+            raise
+
+    def eligible_image(self, image):
+        config = image.get('Config')
+        labels = config.get('Labels') if isinstance(config, dict) else None
+        if not isinstance(labels, dict):
+            return False
+        tags, digests = image.get('RepoTags') or [], image.get('RepoDigests') or []
+        return (image.get('Os') == 'linux' and image.get('Architecture') == 'amd64' and
+                labels.get('org.opencontainers.image.revision') == self.target['runtimeSha'] and
+                labels.get('org.opencontainers.image.source') == 'https://github.com/jeep-jim/AvtoCena' and
+                labels.get('avtocena.application') == 'web' and
+                isinstance(tags, list) and len(tags) == 1 and isinstance(tags[0], str) and
+                re.fullmatch(r'avtocena-china-runtime:' + self.target['runtimeSha'] + r'-[a-f0-9]{12}', tags[0]) is not None and
+                digests == ['avtocena-china-runtime@' + self.target['imageId']])
+
+    def validate_image(self, image):
+        need(image.get('Id') == self.target['imageId'] and self.eligible_image(image), 'app_image_owner')
+        need(not self.policy.pinned_image(image), 'app_image_pinned')
+
+    def assert_protected(self):
+        need(CONFIG.read_bytes() == self.ingress, 'app_image_ingress_changed')
+        for reference, nonce in self.protected:
+            rows = [row for row in self.containers().values()
+                    if row.get('Config', {}).get('Labels', {}).get('avtocena.china.nonce') == nonce]
+            need(len(rows) == 1, 'app_image_protected_container')
+            check_mounted_reference(rows[0], reference, nonce)
+        verify_live_reference(self.state['current'], self.protected[0][1])
+        for filename, digest in self.proofs:
+            regular(filename, 256 * 1024)
+            need(file_sha(filename) == digest, 'app_image_proof_changed')
+
+    def fence(self, *, removed=False):
+        self.assert_protected()
+        rows = self.containers()
+        need({key: protected_identity(row) for key, row in rows.items()} == self.container_hashes,
+             'app_image_container_changed')
+        expected = self.images_before - ({self.target['imageId']} if removed else set())
+        need(self.images() == expected, 'app_image_image_set_changed')
+        self.check_references()
+        self.require_retired_files()
+        image = self.inspect_target()
+        if removed:
+            need(image is None, 'app_image_delete_not_confirmed')
+        else:
+            need(image is not None and canonical_sha(image) == self.image_hash, 'app_image_changed')
+            self.validate_image(image)
+        return rows
+
+    def result(self, status, reason):
+        after = self.free()
+        self.finished = True
+        return {'version': 1, 'kind': 'china-terminal-app-image-cleanup-v1', 'completed': True,
+                'status': status, 'uncertain': False, 'imagesRemoved': 1 if status == 'removed' else 0,
+                'runtimeSha': self.target['runtimeSha'] if self.target else None,
+                'imageId': self.target['imageId'] if self.target else None,
+                'witnessSha256': self.witness_sha, 'diskFreeBytesBefore': self.before, 'diskFreeBytesAfter': after,
+                'measuredFreeBytesChange': after - self.before, 'reason': reason}
+
+    def prepared(self):
+        if self.terminal is not None:
+            return self.terminal
+        return {'version': 1, 'kind': 'china-terminal-app-image-prepared-v1',
+                **self.target, 'witnessSha256': self.witness_sha}
+
+    def remove(self, params):
+        need(not self.finished and isinstance(params, dict) and set(params) == {'action', 'publication', 'currentState'}
+             and params['action'] == 'remove', 'app_image_sequence')
+        self.authority(params)
+        self.fence()
+        self.before = self.free()
+        self.inflight = True
+        result = docker('DELETE', '/images/' + self.target['imageId'] + '?force=false&noprune=true')
+        need(isinstance(result, list), 'app_image_delete_reply')
+        self.fence(removed=True)
+        self.inflight = False
+        return self.result('removed', 'exact_terminal_image')
+
+    def pending(self):
+        return {'version': 1, 'kind': 'china-terminal-app-image-cleanup-v1', 'completed': False,
+                'status': 'pending', 'uncertain': self.inflight,
+                'errorCode': 'delete_not_confirmed' if self.inflight else 'proof_invalid'}
+
+    def close(self):
+        for fd in reversed(self.locks):
+            os.close(fd)
+        self.locks = []
+
+
 def reuse_lock():
     lock = os.open('/run/lock/avtocena-runtime-change.lock', os.O_RDONLY | os.O_NOFOLLOW | os.O_CLOEXEC)
     try:
@@ -3224,6 +3585,7 @@ def main():
     host = None
     host_cleanup_completed = False
     resolved_cleanup = None
+    image_cleanup = None
     recovered = maintenance = diagnosed = pruned = witness_pruned = False
     emit({'kind': 'ready', 'protocol': 1})
     try:
@@ -3241,6 +3603,7 @@ def main():
             identity, method = call['id'], call['method']
             need(type(identity) is int and identity > 0, 'protocol_id')
             need(not diagnosed or method in {'diagnose', 'close'}, 'diagnosis_read_only')
+            need(image_cleanup is None or method in {'retire_terminal_app_image', 'close'}, 'app_image_protocol_scope')
             need(not pruned or method in {'prune_failed_uploads', 'close'}, 'prune_protocol_scope')
             need(not witness_pruned or method in {'prune_failed_witness', 'close'}, 'witness_protocol_scope')
             need(resolved_cleanup is None or method in {'prune_resolved_failed_uploads', 'close'}, 'resolved_protocol_scope')
@@ -3260,6 +3623,15 @@ def main():
             elif method == 'retire_recovery':
                 need(host is None, 'recovery_after_init')
                 value = retire_recovery(params)
+                recovered = maintenance = True
+            elif method == 'retire_terminal_app_image':
+                need(host is None and resolved_cleanup is None and not (diagnosed or pruned or witness_pruned), 'app_image_protocol_scope')
+                if image_cleanup is None:
+                    need(not recovered, 'app_image_protocol_scope')
+                    image_cleanup = TerminalAppImageCleanup(params)
+                    value = image_cleanup.prepared()
+                else:
+                    value = image_cleanup.remove(params)
                 recovered = maintenance = True
             elif method == 'prune_failed_uploads':
                 need(host is None, 'prune_after_init')
@@ -3284,6 +3656,7 @@ def main():
             elif method == 'close' and host is None:
                 need(recovered, 'close_uninitialized')
                 need(resolved_cleanup is None or resolved_cleanup.finished, 'resolved_close_incomplete')
+                need(image_cleanup is None or image_cleanup.finished, 'app_image_close_incomplete')
                 emit({'kind': 'result', 'id': identity, 'value': {'closed': True, 'readOnly': not maintenance}})
                 return
             elif method == 'resume_init':
@@ -3336,6 +3709,10 @@ def main():
         code = str(error) if isinstance(error, ReleaseError) else 'china_host_operation_failed'
         try:
             reply = {'kind': 'error', 'id': locals().get('identity'), 'code': code}
+            if locals().get('method') == 'retire_terminal_app_image':
+                reply['appImageCleanup'] = image_cleanup.pending() if image_cleanup is not None else {
+                    'version': 1, 'kind': 'china-terminal-app-image-cleanup-v1', 'completed': False,
+                    'status': 'pending', 'uncertain': False, 'errorCode': 'proof_invalid'}
             if host is not None and hasattr(host, 'startup_report'):
                 reply['startup'] = host.startup_report
             if isinstance(error, ReleaseError) and hasattr(error, 'retained_fence'):
@@ -3355,6 +3732,8 @@ def main():
             pass
         raise
     finally:
+        if image_cleanup is not None:
+            image_cleanup.close()
         if resolved_cleanup is not None:
             resolved_cleanup.close()
         if host:

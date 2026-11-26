@@ -8,7 +8,60 @@ import {createHash} from 'node:crypto';
 const need = (value, code) => assert(value, 'china_ssh_' + code);
 const hash = raw => createHash('sha256').update(raw).digest('hex');
 const quote = value => "'" + value.replaceAll("'", "'\\''") + "'";
-const methods = new Set(['init', 'code_preflight', 'resume_init', 'upload', 'start', 'functional', 'speed', 'switch', 'browser_evidence', 'accept', 'recover', 'diagnose', 'retire', 'retire_recovery', 'prune_failed_uploads', 'prune_failed_witness', 'prune_resolved_failed_uploads', 'close']);
+const methods = new Set(['init', 'code_preflight', 'resume_init', 'upload', 'start', 'functional', 'speed', 'switch', 'browser_evidence', 'accept', 'recover', 'diagnose', 'retire', 'retire_recovery', 'retire_terminal_app_image', 'prune_failed_uploads', 'prune_failed_witness', 'prune_resolved_failed_uploads', 'close']);
+
+const APP_IMAGE_CLEANUP_KIND = 'china-terminal-app-image-cleanup-v1';
+const APP_IMAGE_REASONS = Object.freeze({
+  removed: ['exact_terminal_image'], already_absent: ['already_absent'],
+  protected: ['current_or_rollback', 'container_reference', 'pinned_image', 'retained_bootstrap', 'ineligible_image'],
+  not_applicable: ['no_terminal_image'],
+});
+const APP_IMAGE_PENDING_CODES = new Set(['operation_failed', 'authority_unavailable',
+  'transport_unknown', 'proof_invalid', 'delete_not_confirmed']);
+function imageCleanupData(value, keys) {
+  need(value !== null && typeof value === 'object' && !Array.isArray(value), 'app_image_report');
+  const descriptors = Object.getOwnPropertyDescriptors(value), names = Reflect.ownKeys(descriptors);
+  need(names.length === keys.length && names.every(key => typeof key === 'string' && keys.includes(key)), 'app_image_report');
+  const result = {};
+  for (const key of keys) {
+    need(descriptors[key] && Object.hasOwn(descriptors[key], 'value'), 'app_image_report');
+    result[key] = descriptors[key].value;
+  }
+  return result;
+}
+export function checkedTerminalAppImageCleanupReport(value) {
+  const result = imageCleanupData(value, ['version', 'kind', 'completed', 'status', 'uncertain', 'imagesRemoved',
+    'runtimeSha', 'imageId', 'witnessSha256', 'diskFreeBytesBefore', 'diskFreeBytesAfter', 'measuredFreeBytesChange', 'reason']);
+  need(result.version === 1 && result.kind === APP_IMAGE_CLEANUP_KIND && result.completed === true
+    && result.uncertain === false && typeof result.status === 'string' && typeof result.reason === 'string'
+    && Object.hasOwn(APP_IMAGE_REASONS, result.status)
+    && APP_IMAGE_REASONS[result.status].includes(result.reason)
+    && result.imagesRemoved === (result.status === 'removed' ? 1 : 0)
+    && typeof result.witnessSha256 === 'string' && /^[a-f0-9]{64}$/.test(result.witnessSha256)
+    && ['diskFreeBytesBefore', 'diskFreeBytesAfter'].every(key => Number.isSafeInteger(result[key]) && result[key] >= 0)
+    && Number.isSafeInteger(result.measuredFreeBytesChange)
+    && result.measuredFreeBytesChange === result.diskFreeBytesAfter - result.diskFreeBytesBefore, 'app_image_report');
+  need(result.status === 'not_applicable'
+    ? result.runtimeSha === null && result.imageId === null
+    : typeof result.runtimeSha === 'string' && /^[a-f0-9]{40}$/.test(result.runtimeSha)
+      && typeof result.imageId === 'string' && /^sha256:[a-f0-9]{64}$/.test(result.imageId), 'app_image_report');
+  return Object.freeze(result);
+}
+/** Optional diagnostics never copy arbitrary remote error text or invoke getters. */
+export function terminalAppImageCleanupPending(error) {
+  const fallback = Object.freeze({version: 1, kind: APP_IMAGE_CLEANUP_KIND, completed: false,
+    status: 'pending', uncertain: true, errorCode: 'operation_failed'});
+  try {
+    const descriptor = Object.getOwnPropertyDescriptor(error ?? {}, 'appImageCleanup');
+    if (!descriptor || !Object.hasOwn(descriptor, 'value')) return fallback;
+    const result = imageCleanupData(descriptor.value,
+      ['version', 'kind', 'completed', 'status', 'uncertain', 'errorCode']);
+    if (result.version !== 1 || result.kind !== APP_IMAGE_CLEANUP_KIND || result.completed !== false
+      || result.status !== 'pending' || typeof result.uncertain !== 'boolean'
+      || !APP_IMAGE_PENDING_CODES.has(result.errorCode)) return fallback;
+    return Object.freeze(result);
+  } catch { return fallback; }
+}
 
 export function checkedStartupReport(value) {
   const keys = ['version', 'kind', 'ready', 'elapsedSeconds', 'attempts', 'health', 'candidate', 'reason'];
@@ -216,6 +269,7 @@ export class ChinaSshSession {
       const error = Error(/^china_host_[a-z0-9_]+$/.test(value.code ?? '') ? value.code : 'china_ssh_remote_error');
       if (startup !== undefined) error.startup = startup;
       if (retainedFence !== undefined) error.retainedFence = retainedFence;
+      if (row.method === 'retire_terminal_app_image') error.appImageCleanup = terminalAppImageCleanupPending(value);
       if (value.serverSpeed !== undefined) {
         // Optional evidence can be omitted when malformed. Keep the original
         // authenticated gate failure so rollback/recovery behavior is unchanged.
