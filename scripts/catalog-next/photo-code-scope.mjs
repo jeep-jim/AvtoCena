@@ -2,6 +2,7 @@ import {verifyChinaImageRuntime} from './build-release-image.mjs';
 import {verifyServingCompatibility} from './serving-compatibility.mjs';
 import {CRM_CHINA_CODE_SCOPE, CRM_CHINA_CODE_PATHS, CRM_CHINA_RETAINED_RUNTIME} from './crm-china-code-scope.mjs';
 import {CRM_JAPAN_PHOTO_CODE_SCOPE, CRM_JAPAN_PHOTO_CODE_PATHS, CRM_JAPAN_PHOTO_RETAINED_RUNTIME} from './crm-japan-photo-code-scope.mjs';
+import {JAPAN_PAGINATION_CODE_SCOPE, JAPAN_PAGINATION_CODE_PATHS, JAPAN_PAGINATION_RETAINED_RUNTIME} from './japan-pagination-code-scope.mjs';
 
 export const CHINA_PHOTO_CODE_PATHS = Object.freeze([
   'apps/web/components/catalog/CatalogCover.tsx',
@@ -162,7 +163,8 @@ export function checkedCatalogCodeScope(plan) {
     : scope === 'catalog-japan-completion-v2' ? JAPAN_COMPLETION_V2_CODE_PATHS
     : scope === 'catalog-japan-usability-v1' ? JAPAN_USABILITY_CODE_PATHS
     : scope === CRM_CHINA_CODE_SCOPE ? CRM_CHINA_CODE_PATHS
-    : scope === CRM_JAPAN_PHOTO_CODE_SCOPE ? CRM_JAPAN_PHOTO_CODE_PATHS : null;
+    : scope === CRM_JAPAN_PHOTO_CODE_SCOPE ? CRM_JAPAN_PHOTO_CODE_PATHS
+    : scope === JAPAN_PAGINATION_CODE_SCOPE ? JAPAN_PAGINATION_CODE_PATHS : null;
   need(paths && Array.isArray(plan.runtimeFiles) && plan.runtimeFiles.length === paths.length
     && paths.every(name => plan.runtimeFiles.includes(name)), 'files');
   need(scope !== 'catalog-japan-recovery-v1' || plan.retainedRuntime === JAPAN_RECOVERY_RETAINED_RUNTIME, 'retained_runtime');
@@ -171,6 +173,7 @@ export function checkedCatalogCodeScope(plan) {
   need(scope !== 'catalog-japan-usability-v1' || plan.retainedRuntime === JAPAN_USABILITY_RETAINED_RUNTIME, 'retained_runtime');
   need(scope !== CRM_CHINA_CODE_SCOPE || plan.retainedRuntime === CRM_CHINA_RETAINED_RUNTIME, 'retained_runtime');
   need(scope !== CRM_JAPAN_PHOTO_CODE_SCOPE || plan.retainedRuntime === CRM_JAPAN_PHOTO_RETAINED_RUNTIME, 'retained_runtime');
+  need(scope !== JAPAN_PAGINATION_CODE_SCOPE || plan.retainedRuntime === JAPAN_PAGINATION_RETAINED_RUNTIME, 'retained_runtime');
   return scope;
 }
 

@@ -68,6 +68,21 @@ CRM_JAPAN_PHOTO_CODE_FILES = CRM_CHINA_CODE_FILES | {
     'tests/browser/catalog-photo-retry-fixture.tsx',
     'tests/browser/catalog-photo-retry.mjs',
 }
+JAPAN_PAGINATION_CODE_SCOPE = 'catalog-japan-pagination24-v1'
+JAPAN_PAGINATION_RETAINED = 'a5ca426eec2663eb17c2df69fe2bfed46e2b8740'
+JAPAN_PAGINATION_CODE_FILES = {
+    "apps/web/components/catalog/AjesCatalog.tsx",
+    "apps/web/components/catalog/CatalogLoadMore.tsx",
+    "apps/web/components/catalog/catalog-load-more-action.tsx",
+    "apps/web/lib/catalog/ajes-catalog.ts",
+    "apps/web/lib/catalog/ajes-filtered-page.ts",
+    "tests/ajes-catalog-progressive.test.ts",
+    "tests/ajes-count-progressive.test.ts",
+    "tests/ajes-filtered-page.test.ts",
+    "tests/browser/ajes-pagination-fixture.tsx",
+    "tests/browser/ajes-pagination.mjs",
+    "tests/japan-source-power.test.ts"
+}
 PHOTO_JAPAN_CODE_FILES = PHOTO_CODE_FILES | {
     'apps/web/app/(public)/api/catalog/search/route.ts',
     'apps/web/app/(public)/cars/offer/[id]/page.tsx',
@@ -204,7 +219,8 @@ CODE_SCOPE_FILES = {PHOTO_CODE_SCOPE: PHOTO_CODE_FILES, PHOTO_JAPAN_CODE_SCOPE: 
                     JAPAN_COMPLETION_V2_CODE_SCOPE: JAPAN_COMPLETION_V2_CODE_FILES,
                     JAPAN_USABILITY_CODE_SCOPE: JAPAN_USABILITY_CODE_FILES,
                     CRM_CHINA_CODE_SCOPE: CRM_CHINA_CODE_FILES,
-                    CRM_JAPAN_PHOTO_CODE_SCOPE: CRM_JAPAN_PHOTO_CODE_FILES}
+                    CRM_JAPAN_PHOTO_CODE_SCOPE: CRM_JAPAN_PHOTO_CODE_FILES,
+                    JAPAN_PAGINATION_CODE_SCOPE: JAPAN_PAGINATION_CODE_FILES}
 GENERATION_MOUNT = '/run/avtocena-china-generation'
 HOST_BULK_FILES = {'details.sqlite', 'query.sqlite', 'DISPOSITIONS.ndjson', 'FILTER_SEMANTICS.json',
                    'FX_RECEIPT.json', 'RECONCILIATION.json', 'image.tar'}
@@ -668,6 +684,8 @@ def validate_plan(plan):
             need(scope not in (CRM_CHINA_CODE_SCOPE, CRM_JAPAN_PHOTO_CODE_SCOPE)
                  or plan.get('retainedRuntime') == CRM_CHINA_RETAINED,
                  'code_crm_predecessor')
+            need(scope != JAPAN_PAGINATION_CODE_SCOPE or plan.get('retainedRuntime') == JAPAN_PAGINATION_RETAINED,
+                 'code_pagination_predecessor')
             need(all(isinstance(plan.get(key), str) and re.fullmatch(r'[a-f0-9]{64}', plan[key])
                      for key in ('codeSourcePlanSha256', 'codeSourceOracleSha256')), 'code_source_binding')
     else:
@@ -2428,6 +2446,8 @@ class Host:
              type(image.get('imageUnpackedBytes')) is int and image['imageUnpackedBytes'] > 0, 'code_image_receipt')
         if scope in (CRM_CHINA_CODE_SCOPE, CRM_JAPAN_PHOTO_CODE_SCOPE):
             need(image.get('protectedPathExceptions') == CRM_CHINA_PROTECTED_EXCEPTIONS, 'code_crm_image_scope')
+        if scope == JAPAN_PAGINATION_CODE_SCOPE:
+            need('protectedPathExceptions' not in image, 'code_pagination_image_scope')
         storage = checked_code_image_storage_proof(self.plan, image)
         # Uploaded archives already occupy disk. Reserve the complete packed
         # content and actual unpacked snapshots measured in the isolated daemon.
@@ -2874,7 +2894,7 @@ class Host:
              details.get('release') == self.plan['runtimeSha'] and details.get('nonce') == self.plan['nonce'] and
              details.get('generationManifestSha256') == self.plan['generationManifestSha256'] and
              details.get('precedingSpeedReportSha256') == sha(speed_raw), 'browser_evidence_binding')
-        if code_update(self.plan) and code_scope(self.plan) in (CRM_CHINA_CODE_SCOPE, CRM_JAPAN_PHOTO_CODE_SCOPE):
+        if code_update(self.plan) and code_scope(self.plan) in (CRM_CHINA_CODE_SCOPE, CRM_JAPAN_PHOTO_CODE_SCOPE, JAPAN_PAGINATION_CODE_SCOPE):
             need(isinstance(details.get('crmChinaReportBase64'), str) and
                  isinstance(details.get('crmChinaReportSha256'), str) and
                  re.fullmatch(r'[a-f0-9]{64}', details['crmChinaReportSha256']), 'crm_browser_binding')
@@ -2907,7 +2927,7 @@ class Host:
                  type(crm.get('unauthorizedStatus')) is int and crm['unauthorizedStatus'] == 401 and
                  all(type(crm.get(key)) is int and crm[key] == 0 for key in
                      ('productionMutations', 'directSupplierRequests', 'signedInRequests')), 'crm_browser_binding')
-            if code_scope(self.plan) == CRM_JAPAN_PHOTO_CODE_SCOPE:
+            if code_scope(self.plan) in (CRM_JAPAN_PHOTO_CODE_SCOPE, JAPAN_PAGINATION_CODE_SCOPE):
                 need(isinstance(details.get('japanPhotoRetryReportBase64'), str) and
                      isinstance(details.get('japanPhotoRetryReportSha256'), str) and
                      re.fullmatch(r'[a-f0-9]{64}', details['japanPhotoRetryReportSha256']), 'japan_photo_retry_binding')
@@ -2917,7 +2937,7 @@ class Host:
                                     'fixtureBase64', 'fixtureSha256', 'passed', 'directSupplierRequests', 'productionMutations'} and
                      type(retry.get('version')) is int and retry['version'] == 1 and
                      retry.get('kind') == 'japan-photo-retry-proof-v1' and
-                     retry.get('codeScope') == CRM_JAPAN_PHOTO_CODE_SCOPE and
+                     retry.get('codeScope') == code_scope(self.plan) and
                      retry.get('release') == self.plan['runtimeSha'] and retry.get('nonce') == self.plan['nonce'] and
                      retry.get('oracleSha256') == oracle_sha and retry.get('passed') is True and
                      all(type(retry.get(key)) is int and retry[key] == 0 for key in
@@ -2974,7 +2994,7 @@ class Host:
                  all(photo.get(key) is True for key in ('passed', 'chinaPhotoPassed', 'japanFreshnessPassed',
                                                        'japanPowerApiPassed', 'japanUiPassed')),
                  'photo_japan_browser_binding')
-        if code_update(self.plan) and code_scope(self.plan) in (JAPAN_CODE_SCOPE, JAPAN_COMPLETION_CODE_SCOPE, JAPAN_COMPLETION_V2_CODE_SCOPE, JAPAN_USABILITY_CODE_SCOPE):
+        if code_update(self.plan) and code_scope(self.plan) in (JAPAN_CODE_SCOPE, JAPAN_COMPLETION_CODE_SCOPE, JAPAN_COMPLETION_V2_CODE_SCOPE, JAPAN_USABILITY_CODE_SCOPE, JAPAN_PAGINATION_CODE_SCOPE):
             # This session's nonce and the live browser deadline above bind
             # freshness without assuming the runner and host clocks are equal.
             need(isinstance(details.get('japanReportBase64'), str) and
@@ -2992,7 +3012,7 @@ class Host:
                                                        'japanUiPassed', 'japanVisibilityPassed', 'readOnlyBrowserFence')) and
                  all(type(japan.get(key)) is int and japan[key] == 0 for key in
                      ('productionMutations', 'directSupplierApiRequests')), 'japan_browser_binding')
-            if code_scope(self.plan) in (JAPAN_COMPLETION_CODE_SCOPE, JAPAN_COMPLETION_V2_CODE_SCOPE, JAPAN_USABILITY_CODE_SCOPE):
+            if code_scope(self.plan) in (JAPAN_COMPLETION_CODE_SCOPE, JAPAN_COMPLETION_V2_CODE_SCOPE, JAPAN_USABILITY_CODE_SCOPE, JAPAN_PAGINATION_CODE_SCOPE):
                 need(all(japan.get(key) is True for key in ('japanPetrolPowerUiPassed', 'japanDetailPowerInputPassed',
                                                           'japanDeliveredCalculationPassed')) and
                      type(japan.get('japanPreviewCalculationRequests')) is int and
@@ -3000,6 +3020,9 @@ class Host:
             if code_scope(self.plan) == JAPAN_USABILITY_CODE_SCOPE:
                 need(all(japan.get(key) is True for key in ('japanBrandDirectoryPassed', 'japanFullPagesPassed',
                      'japanKnownPowerOrderPassed', 'japanVehiclePolicyPassed', 'japanQuietCatalogPassed')), 'japan_browser_binding')
+            if code_scope(self.plan) == JAPAN_PAGINATION_CODE_SCOPE:
+                need(all(japan.get(key) is True for key in ('japanFullPagesPassed', 'japanPagination24Passed', 'japanCatalogWarningRemovedPassed')),
+                     'japan_browser_binding')
         for name, raw in [('BROWSER_SPEED.json', speed_raw), ('BROWSER_DETAILS.json', details_raw)]:
             new_file(self.directory / name, raw)
             need(file_sha(self.directory / name) == sha(raw), 'browser_evidence_readback')

@@ -9,6 +9,7 @@ import {verifyCrmChinaManifest, checkedCrmChinaManifestProof, verifyCrmChinaUnau
   from '../scripts/catalog-next/crm-china-status-proof.mjs';
 import {CRM_CHINA_CODE_SCOPE} from '../scripts/catalog-next/crm-china-code-scope.mjs';
 import {CRM_JAPAN_PHOTO_CODE_SCOPE} from '../scripts/catalog-next/crm-japan-photo-code-scope.mjs';
+import {JAPAN_PAGINATION_CODE_SCOPE} from '../scripts/catalog-next/japan-pagination-code-scope.mjs';
 
 const hash = raw => createHash('sha256').update(raw).digest('hex');
 async function fixture(t, helperResult) {
@@ -182,4 +183,14 @@ test('CI fixture evidence requires completed desktop and mobile cases plus every
   for (const changed of [{passed: false}, {caseCount: 1}, {widths: [1440]}, {checks: {...checks, lazyStatusReads: false}},
     {checks: {...checks, fake: true}}, {raw: 'private'}])
     assert.throws(() => checkedCrmChinaBrowserFixture({...good, ...changed}), /china_crm_status_browser_fixture/);
+});
+
+test('pagination24 inherits CRM evidence only with its exact new scope and current bindings',()=>{
+  const {expected,evidence}=evidenceFixture(),report={...evidence,codeScope:JAPAN_PAGINATION_CODE_SCOPE};
+  assert.equal(checkedCrmChinaEvidence(report,{...expected,codeScope:JAPAN_PAGINATION_CODE_SCOPE}),report);
+  assert.throws(()=>checkedCrmChinaEvidence(report,expected),/china_crm_status_evidence/);
+  assert.throws(()=>checkedCrmChinaEvidence(evidence,{...expected,codeScope:JAPAN_PAGINATION_CODE_SCOPE}),/china_crm_status_evidence/);
+  for(const patch of [{sourceObservedAt:'2026-11-26T18:00:01.000Z'},{rows:1},{unauthorizedStatus:200},
+    {middlewareBoundaryPassed:false},{signedInRequests:1}])
+    assert.throws(()=>checkedCrmChinaEvidence({...report,...patch},{...expected,codeScope:JAPAN_PAGINATION_CODE_SCOPE}),/china_crm_status_evidence/);
 });

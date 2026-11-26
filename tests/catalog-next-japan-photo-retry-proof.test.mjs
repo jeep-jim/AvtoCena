@@ -5,6 +5,7 @@ import os from 'node:os';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
 import {CRM_JAPAN_PHOTO_CODE_SCOPE} from '../scripts/catalog-next/crm-japan-photo-code-scope.mjs';
+import {JAPAN_PAGINATION_CODE_SCOPE} from '../scripts/catalog-next/japan-pagination-code-scope.mjs';
 import {checkedJapanPhotoRetryBrowserFixture, readJapanPhotoRetryFixture, checkedJapanPhotoRetryEvidence,
   JAPAN_PHOTO_RETRY_FIXTURE_MAX_BYTES} from '../scripts/catalog-next/japan-photo-retry-proof.mjs';
 
@@ -134,4 +135,14 @@ test('artifact identity changing during the bounded read cannot be promoted into
   };
   try { await assert.rejects(readJapanPhotoRetryFixture(file), /japan_photo_retry_proof_fixture_changed/); }
   finally { fs.open = open; }
+});
+
+test('pagination24 inherits the same exact photo fixture without relabeling an old release proof',()=>{
+  const report={...evidence(),codeScope:JAPAN_PAGINATION_CODE_SCOPE},expected={...context(),codeScope:JAPAN_PAGINATION_CODE_SCOPE};
+  assert.deepEqual(checkedJapanPhotoRetryEvidence(report,expected),report);
+  refused(()=>checkedJapanPhotoRetryEvidence(report,context()));
+  refused(()=>checkedJapanPhotoRetryEvidence(evidence(),expected));
+  for(const patch of [{fixtureSha256:'0'.repeat(64)},{release:'9'.repeat(40)},{nonce:'a'.repeat(32)},
+    {checkedAt:'2026-11-26T19:59:59.000Z'},{directSupplierRequests:1}])
+    refused(()=>checkedJapanPhotoRetryEvidence({...report,...patch},expected));
 });

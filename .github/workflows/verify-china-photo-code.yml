@@ -6,6 +6,7 @@ on:
       - .github/workflows/verify-china-photo-code.yml
       - .github/workflows/catalog-next-china-photo-release.yml
       - .github/operations/catalog-next/china-code-serving-plan.json
+      - .github/operations/catalog-next/china-serving-plan.json
       - .github/operations/catalog-next/runtime-test-compatibility.patch
       - scripts/catalog-next/code-*.mjs
       - scripts/catalog-next/photo-code-scope.mjs
@@ -13,6 +14,8 @@ on:
       - scripts/catalog-next/crm-china-status-proof.mjs
       - scripts/catalog-next/crm-japan-photo-code-scope.mjs
       - scripts/catalog-next/japan-photo-retry-proof.mjs
+      - scripts/catalog-next/japan-pagination-code-scope.mjs
+      - scripts/catalog-next/japan-pagination-fixture.mjs
       - scripts/catalog-next/check-photo-runtime-tests.mjs
       - scripts/catalog-next/check-runtime-tests.mjs
       - scripts/catalog-next/photo-japan-browser-acceptance.mjs
@@ -74,7 +77,7 @@ jobs:
           fs.appendFileSync(process.env.GITHUB_OUTPUT, 'scope=' + checkedCatalogCodeScope(plan) + '\n');
           JS
       - name: Prepare Chromium for the required runtime browser fixture
-        if: steps.photo_scope.outputs.scope == 'catalog-photo-recovery-v1' || steps.photo_scope.outputs.scope == 'catalog-photo-japan-power-v1' || steps.photo_scope.outputs.scope == 'catalog-japan-completion-v1' || steps.photo_scope.outputs.scope == 'catalog-japan-completion-v2' || steps.photo_scope.outputs.scope == 'catalog-japan-usability-v1' || steps.photo_scope.outputs.scope == 'catalog-crm-china-operations-v1' || steps.photo_scope.outputs.scope == 'catalog-crm-japan-photo-retry-v1'
+        if: steps.photo_scope.outputs.scope == 'catalog-photo-recovery-v1' || steps.photo_scope.outputs.scope == 'catalog-photo-japan-power-v1' || steps.photo_scope.outputs.scope == 'catalog-japan-completion-v1' || steps.photo_scope.outputs.scope == 'catalog-japan-completion-v2' || steps.photo_scope.outputs.scope == 'catalog-japan-usability-v1' || steps.photo_scope.outputs.scope == 'catalog-crm-china-operations-v1' || steps.photo_scope.outputs.scope == 'catalog-crm-japan-photo-retry-v1' || steps.photo_scope.outputs.scope == 'catalog-japan-pagination24-v1'
         run: |
           npm install --prefix "$RUNNER_TEMP/photo-browser" --no-package-lock --ignore-scripts playwright@1.55.0
           node --input-type=module <<'JS'
@@ -99,13 +102,13 @@ jobs:
           if [[ "$CATALOG_CODE_SCOPE" == 'catalog-photo-recovery-v1' || "$CATALOG_CODE_SCOPE" == 'catalog-photo-japan-power-v1' ]]; then
             node --import tsx tests/browser/catalog-photo-recovery.mjs
           fi
-          if [[ "$CATALOG_CODE_SCOPE" == 'catalog-japan-completion-v1' || "$CATALOG_CODE_SCOPE" == 'catalog-japan-completion-v2' || "$CATALOG_CODE_SCOPE" == 'catalog-japan-usability-v1' ]]; then
+          if [[ "$CATALOG_CODE_SCOPE" == 'catalog-japan-completion-v1' || "$CATALOG_CODE_SCOPE" == 'catalog-japan-completion-v2' || "$CATALOG_CODE_SCOPE" == 'catalog-japan-usability-v1' || "$CATALOG_CODE_SCOPE" == 'catalog-japan-pagination24-v1' ]]; then
             JAPAN_CITY_REPORT="$RUNNER_TEMP/japan-catalog-city-report.json" node tests/browser/japan-catalog-city.mjs
           fi
           if [[ "$CATALOG_CODE_SCOPE" == 'catalog-japan-usability-v1' ]]; then
             JAPAN_BRAND_REPORT="$RUNNER_TEMP/japan-brand-directory-report.json" node tests/browser/japan-brand-directory.mjs
           fi
-          if [[ "$CATALOG_CODE_SCOPE" == 'catalog-crm-china-operations-v1' || "$CATALOG_CODE_SCOPE" == 'catalog-crm-japan-photo-retry-v1' ]]; then
+          if [[ "$CATALOG_CODE_SCOPE" == 'catalog-crm-china-operations-v1' || "$CATALOG_CODE_SCOPE" == 'catalog-crm-japan-photo-retry-v1' || "$CATALOG_CODE_SCOPE" == 'catalog-japan-pagination24-v1' ]]; then
             COLLECTION_CONTROLS_REPORT="$RUNNER_TEMP/china-crm-collection-controls-report.json" node --import tsx tests/browser/collection-controls.mjs
             cd "$GITHUB_WORKSPACE"
             node --import tsx --import ./tests/helpers/offline-fetch.mjs --input-type=module <<'JS'
@@ -116,7 +119,7 @@ jobs:
           await verifyCrmChinaMiddleware(process.env.RUNNER_TEMP + '/china-serving-runtime-' + plan.runtimeSha);
           JS
           fi
-          if [[ "$CATALOG_CODE_SCOPE" == 'catalog-crm-japan-photo-retry-v1' ]]; then
+          if [[ "$CATALOG_CODE_SCOPE" == 'catalog-crm-japan-photo-retry-v1' || "$CATALOG_CODE_SCOPE" == 'catalog-japan-pagination24-v1' ]]; then
             cd "$RUNNER_TEMP/china-serving-runtime-$PHOTO_SHA"
             JAPAN_PHOTO_RETRY_REPORT="$RUNNER_TEMP/japan-photo-retry-browser-report.json" node --import tsx tests/browser/catalog-photo-retry.mjs
             cd "$GITHUB_WORKSPACE"
@@ -125,8 +128,28 @@ jobs:
           await readJapanPhotoRetryFixture(process.env.RUNNER_TEMP + '/japan-photo-retry-browser-report.json');
           JS
           fi
+      - name: Verify ordinary Japan page filling on the exact candidate before host contact
+        if: steps.photo_scope.outputs.scope == 'catalog-japan-pagination24-v1'
+        run: |
+          set -euo pipefail
+          PAGINATION_SHA=$(node -p "JSON.parse(require('fs').readFileSync('.github/operations/catalog-next/china-code-serving-plan.json')).runtimeSha")
+          cd "$RUNNER_TEMP/china-serving-runtime-$PAGINATION_SHA"
+          JAPAN_PAGINATION24_REPORT="$RUNNER_TEMP/japan-pagination24-browser-report.json" node --import tsx tests/browser/ajes-pagination.mjs
+          cd "$GITHUB_WORKSPACE"
+          node --input-type=module <<'JS'
+          import {readJapanPaginationFixture} from './scripts/catalog-next/japan-pagination-fixture.mjs';
+          await readJapanPaginationFixture(process.env.RUNNER_TEMP + '/japan-pagination24-browser-report.json');
+          JS
+      - name: Preserve Japan page-fill and continuation fixture evidence
+        if: always() && steps.photo_scope.outputs.scope == 'catalog-japan-pagination24-v1'
+        uses: actions/upload-artifact@v4
+        with:
+          name: japan-pagination24-fixture
+          path: ${{ runner.temp }}/japan-pagination24-browser-report.json
+          if-no-files-found: warn
+          retention-days: 7
       - name: Preserve China CRM controls fixture evidence
-        if: always() && (steps.photo_scope.outputs.scope == 'catalog-crm-china-operations-v1' || steps.photo_scope.outputs.scope == 'catalog-crm-japan-photo-retry-v1')
+        if: always() && (steps.photo_scope.outputs.scope == 'catalog-crm-china-operations-v1' || steps.photo_scope.outputs.scope == 'catalog-crm-japan-photo-retry-v1' || steps.photo_scope.outputs.scope == 'catalog-japan-pagination24-v1')
         uses: actions/upload-artifact@v4
         with:
           name: china-crm-collection-controls-fixture
@@ -134,7 +157,7 @@ jobs:
           if-no-files-found: warn
           retention-days: 7
       - name: Preserve bounded Japan image recovery fixture evidence
-        if: always() && steps.photo_scope.outputs.scope == 'catalog-crm-japan-photo-retry-v1'
+        if: always() && (steps.photo_scope.outputs.scope == 'catalog-crm-japan-photo-retry-v1' || steps.photo_scope.outputs.scope == 'catalog-japan-pagination24-v1')
         uses: actions/upload-artifact@v4
         with:
           name: japan-photo-retry-fixture
@@ -150,7 +173,7 @@ jobs:
           if-no-files-found: warn
           retention-days: 7
       - name: Preserve Japan city hydration and filter evidence
-        if: always() && (steps.photo_scope.outputs.scope == 'catalog-japan-completion-v1' || steps.photo_scope.outputs.scope == 'catalog-japan-completion-v2' || steps.photo_scope.outputs.scope == 'catalog-japan-usability-v1')
+        if: always() && (steps.photo_scope.outputs.scope == 'catalog-japan-completion-v1' || steps.photo_scope.outputs.scope == 'catalog-japan-completion-v2' || steps.photo_scope.outputs.scope == 'catalog-japan-usability-v1' || steps.photo_scope.outputs.scope == 'catalog-japan-pagination24-v1')
         uses: actions/upload-artifact@v4
         with:
           name: japan-catalog-city-fixture

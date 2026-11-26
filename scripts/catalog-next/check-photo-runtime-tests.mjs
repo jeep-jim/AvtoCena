@@ -8,6 +8,7 @@ import {checkChinaRuntimeTests, CHINA_RUNTIME_TEST_FILES, verifyRuntimeTestsChec
   from './check-runtime-tests.mjs';
 import {CRM_CHINA_CODE_SCOPE, CRM_CHINA_CODE_PATHS} from './crm-china-code-scope.mjs';
 import {CRM_JAPAN_PHOTO_CODE_SCOPE} from './crm-japan-photo-code-scope.mjs';
+import {JAPAN_PAGINATION_CODE_SCOPE, JAPAN_PAGINATION_CODE_PATHS} from './japan-pagination-code-scope.mjs';
 
 const ROOT = fileURLToPath(new URL('../../', import.meta.url));
 const PHOTO_SCOPE = 'catalog-photo-recovery-v1', COMBINED_SCOPE = 'catalog-photo-japan-power-v1';
@@ -90,6 +91,11 @@ export const CRM_CHINA_TEST_FILES = Object.freeze([...new Set([
   'tests/catalog-collection-controls.test.ts',
 ])].sort());
 
+export const JAPAN_PAGINATION_TEST_FILES = Object.freeze([...new Set([
+  ...CRM_CHINA_TEST_FILES,
+  ...JAPAN_PAGINATION_CODE_PATHS.filter(name => /^tests\/[^/]+\.test\.ts$/.test(name)),
+])].sort());
+
 async function selectedFiles(runtimeRoot, codeScope) {
   let tracked;
   try {
@@ -106,7 +112,8 @@ async function selectedFiles(runtimeRoot, codeScope) {
     need(power.length > 0 && required.every(name => power.includes(name)), 'power_tests_missing');
   }
   const files = [...new Set([...PHOTO_COMMON_TEST_FILES, ...aj,
-    ...(codeScope === CRM_JAPAN_PHOTO_CODE_SCOPE ? CRM_CHINA_TEST_FILES
+    ...(codeScope === JAPAN_PAGINATION_CODE_SCOPE ? JAPAN_PAGINATION_TEST_FILES
+      : codeScope === CRM_JAPAN_PHOTO_CODE_SCOPE ? CRM_CHINA_TEST_FILES
       : codeScope === CRM_CHINA_CODE_SCOPE ? CRM_CHINA_TEST_FILES
       : codeScope === JAPAN_USABILITY_SCOPE ? JAPAN_USABILITY_TEST_FILES
       : codeScope === JAPAN_COMPLETION_V2_SCOPE ? JAPAN_COMPLETION_V2_TEST_FILES
@@ -128,7 +135,7 @@ async function selectedFiles(runtimeRoot, codeScope) {
  * the exact offline runner, source identity checks, and a nonzero-exit gate. */
 export async function checkPhotoRuntimeTests({runtimeRoot, plan, patchPath,
   runTests = runNativeTests, onProgress = () => {}}) {
-  need([PHOTO_SCOPE, COMBINED_SCOPE, JAPAN_SCOPE, JAPAN_COMPLETION_SCOPE, JAPAN_COMPLETION_V2_SCOPE, JAPAN_USABILITY_SCOPE, CRM_CHINA_CODE_SCOPE, CRM_JAPAN_PHOTO_CODE_SCOPE].includes(plan?.codeScope), 'scope');
+  need([PHOTO_SCOPE, COMBINED_SCOPE, JAPAN_SCOPE, JAPAN_COMPLETION_SCOPE, JAPAN_COMPLETION_V2_SCOPE, JAPAN_USABILITY_SCOPE, CRM_CHINA_CODE_SCOPE, CRM_JAPAN_PHOTO_CODE_SCOPE, JAPAN_PAGINATION_CODE_SCOPE].includes(plan?.codeScope), 'scope');
   const codeScope = checkedCatalogCodeScope(plan);
   need(typeof runTests === 'function' && typeof onProgress === 'function', 'callbacks');
   runtimeRoot = await fs.realpath(runtimeRoot);

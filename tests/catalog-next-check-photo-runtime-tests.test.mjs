@@ -4,9 +4,10 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import os from 'node:os';
 import {execFileSync} from 'node:child_process';
-import {checkPhotoRuntimeTests, PHOTO_COMMON_TEST_FILES, JAPAN_RECOVERY_TEST_FILES,JAPAN_COMPLETION_TEST_FILES,JAPAN_COMPLETION_V2_TEST_FILES,JAPAN_USABILITY_TEST_FILES,CRM_CHINA_TEST_FILES} from '../scripts/catalog-next/check-photo-runtime-tests.mjs';
+import {checkPhotoRuntimeTests, PHOTO_COMMON_TEST_FILES, JAPAN_RECOVERY_TEST_FILES,JAPAN_COMPLETION_TEST_FILES,JAPAN_COMPLETION_V2_TEST_FILES,JAPAN_USABILITY_TEST_FILES,CRM_CHINA_TEST_FILES,JAPAN_PAGINATION_TEST_FILES} from '../scripts/catalog-next/check-photo-runtime-tests.mjs';
 import {CRM_CHINA_CODE_SCOPE, CRM_CHINA_CODE_PATHS, CRM_CHINA_RETAINED_RUNTIME} from '../scripts/catalog-next/crm-china-code-scope.mjs';
 import {CRM_JAPAN_PHOTO_CODE_SCOPE, CRM_JAPAN_PHOTO_CODE_PATHS} from '../scripts/catalog-next/crm-japan-photo-code-scope.mjs';
+import {JAPAN_PAGINATION_CODE_SCOPE,JAPAN_PAGINATION_CODE_PATHS,JAPAN_PAGINATION_RETAINED_RUNTIME} from '../scripts/catalog-next/japan-pagination-code-scope.mjs';
 import {CHINA_RUNTIME_TEST_FILES} from '../scripts/catalog-next/check-runtime-tests.mjs';
 import {CHINA_PHOTO_CODE_PATHS, CHINA_PHOTO_JAPAN_CODE_PATHS, JAPAN_RECOVERY_CODE_PATHS,
   JAPAN_RECOVERY_RETAINED_RUNTIME,JAPAN_COMPLETION_CODE_PATHS,JAPAN_COMPLETION_RETAINED_RUNTIME,JAPAN_COMPLETION_V2_CODE_PATHS,JAPAN_USABILITY_CODE_PATHS,JAPAN_USABILITY_RETAINED_RUNTIME} from '../scripts/catalog-next/photo-code-scope.mjs';
@@ -236,4 +237,29 @@ test('usability source cannot omit its reviewed native regression '+missing,asyn
  f.git(['rm','--',missing]);f.commit();f.refreshPlan();let calls=0;
  await assert.rejects(checkPhotoRuntimeTests({...f,runTests:async()=>{calls++;return 0;}}),/china_photo_runtime_tests_test_missing/);
  assert.equal(calls,0);
+});
+
+for(const outcome of ['success','failure','missing_refill','missing_crm','missing_photo'])
+test('pagination24 retains all a5ca native guards and makes changed tests mandatory: '+outcome,async t=>{
+  const f=await fixture(t,'catalog-japan-completion-v2');
+  for(const filename of JAPAN_PAGINATION_TEST_FILES){
+    await fs.mkdir(path.dirname(path.join(f.runtimeRoot,filename)),{recursive:true});
+    try{await fs.writeFile(path.join(f.runtimeRoot,filename),'export const fixtureValue = 1;\n',{flag:'wx'});}
+    catch(error){if(error.code!=='EEXIST')throw error;}
+  }
+  f.git(['add','.']);f.commit();f.refreshPlan();
+  Object.assign(f.plan,{codeScope:JAPAN_PAGINATION_CODE_SCOPE,retainedRuntime:JAPAN_PAGINATION_RETAINED_RUNTIME,runtimeFiles:[...JAPAN_PAGINATION_CODE_PATHS]});
+  const missing={missing_refill:'tests/ajes-filtered-page.test.ts',missing_crm:'tests/china-catalog-status.test.ts',missing_photo:'tests/catalog-photo-retry.test.ts'}[outcome];
+  if(missing){f.git(['rm',missing]);f.commit();f.refreshPlan();}
+  let calls=0;
+  const operation=()=>checkPhotoRuntimeTests({...f,patchPath:path.join(f.directory,'must-not-open'),runTests:async({files})=>{
+    calls++;assert.deepEqual(files,[...new Set([...JAPAN_PAGINATION_TEST_FILES,...aj])].sort());
+    for(const filename of CRM_CHINA_TEST_FILES)assert.ok(files.includes(filename));
+    for(const filename of JAPAN_PAGINATION_CODE_PATHS.filter(name=>/^tests\/[^/]+\.test\.ts$/.test(name)))assert.ok(files.includes(filename));
+    assert.ok(!files.includes('tests/ajes-power-page.test.ts'));
+    return outcome==='failure'?1:0;
+  }});
+  if(outcome==='success')assert.equal((await operation()).compatibilityPatchApplied,false);
+  else await assert.rejects(operation(),outcome==='failure'?/china_photo_runtime_tests_failed/:/china_photo_runtime_tests_test_missing/);
+  assert.equal(calls,missing?0:1);
 });

@@ -2,6 +2,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
+import {JAPAN_PAGINATION_CODE_SCOPE} from './japan-pagination-code-scope.mjs';
 
 const ROOT=fileURLToPath(new URL('../../',import.meta.url));
 const ORIGIN='https://avtocena.com';
@@ -347,6 +348,55 @@ export function japanPetrolPowerPageApi(value){
  return '/api/catalog/search?'+query;
 }
 
+
+/** Only the new 24-row profile follows its emitted query/page-bound j1 cursor.
+ * The existing usability jp1 parser remains unchanged and separate. */
+export function checkedJapanPaginationCursor(value,visiblePage){
+ need(typeof value==='string'&&value.length<=160&&Number.isSafeInteger(visiblePage)&&visiblePage>=2&&visiblePage<=1_000_000,'pagination_cursor');
+ const match=/^j1\.([1-9]\d{0,6})\.(0|[1-9]\d?)\.([1-9]\d{0,6})\.([a-f0-9]{64})\.(-|[a-f0-9]{64})$/.exec(value);
+ need(match&&Number(match[1])<=1_000_000&&Number(match[2])<24&&Number(match[3])===visiblePage
+  &&(Number(match[2])===0?match[5]==='-':match[5]!=='-'),'pagination_cursor');
+ return {sourcePage:Number(match[1]),acceptedSkip:Number(match[2]),visiblePage,cursorSha256:sha(value)};
+}
+export function japanPaginationPageApi(value,{kind,expectedCursor}={}){
+ need(['plain','power','petrol_power'].includes(kind),'pagination_kind');
+ let source;try{source=new URL(value,ORIGIN);}catch{need(false,'pagination_query');}
+ const power=kind!=='plain',petrol=kind==='petrol_power';
+ need(source.origin===ORIGIN&&!source.username&&!source.password&&!source.hash
+  &&(source.pathname==='/cars/japan'||source.pathname==='/cars'&&source.searchParams.get('market')==='japan')
+  &&(!source.searchParams.has('market')||source.searchParams.get('market')==='japan')
+  &&source.searchParams.get('city')===CITY&&source.searchParams.get('page')==='2'
+  &&(!source.searchParams.has('pageSize')||source.searchParams.get('pageSize')==='24')
+  &&(power?source.searchParams.get('powerTo')==='160':!source.searchParams.has('powerTo'))
+  &&(petrol?source.searchParams.get('fuel')==='petrol':!source.searchParams.has('fuel'))
+  &&(!source.searchParams.has('view')||['grid','list'].includes(source.searchParams.get('view')))
+  &&[...source.searchParams.keys()].every(key=>['market','fuel','city','powerTo','page','pageSize','after','view'].includes(key))
+  &&[...new Set(source.searchParams.keys())].every(key=>source.searchParams.getAll(key).length===1),'pagination_query');
+ const after=source.searchParams.get('after');
+ checkedJapanPaginationCursor(after,2);
+ if(expectedCursor!==undefined)need(after===expectedCursor,'pagination_emitted_cursor');
+ const query=new URLSearchParams(QUERY);query.set('page','2');
+ if(power)query.set('powerTo','160');if(petrol)query.set('fuel','petrol');
+ query.set('after',after);return '/api/catalog/search?'+query;
+}
+export function verifyJapanPaginationPair(first,next,{observedUrl,kind,firstStatus,nextStatus,now=Date.now()}={}){
+ const firstObservation=verifyJapanPage(first,firstStatus,now),nextObservation=verifyJapanPage(next,nextStatus,now);
+ need(first.page===1&&next.page===2&&first.pageSize===24&&next.pageSize===24&&first.hasMore===true
+  &&typeof next.hasMore==='boolean','pagination_page');
+ need(first.total===null&&next.total===null,'pagination_count');
+ const firstPage=verifyJapanFullPage(first),secondPage=verifyJapanFullPage(next);
+ japanPaginationPageApi(observedUrl,{kind,expectedCursor:first.nextCursor});
+ const cursor=checkedJapanPaginationCursor(first.nextCursor,2);
+ if(next.hasMore)checkedJapanPaginationCursor(next.nextCursor,3);
+ else need(next.nextCursor===null,'pagination_exhausted_cursor');
+ const firstIds=new Set(first.items.map(row=>row.id));
+ need(next.items.every(row=>!firstIds.has(row.id)),'pagination_duplicate');
+ if(kind!=='plain'){verifyJapanPowerPage(first);verifyJapanPowerPage(next,2);}
+ if(kind==='petrol_power')need([...first.items,...next.items].every(row=>row.fuel==='petrol'),'pagination_fuel');
+ return {first:{...firstObservation,...firstPage},next:{...nextObservation,...secondPage},
+  cursorSha256:cursor.cursorSha256,followedEmittedCursor:true,distinctRows:true,visiblePages:2};
+}
+
 export function japanVerificationRequestScope(url,method,resourceType){
  if(!['GET','HEAD'].includes(method))return 'mutation';
  let value,pathname;try{value=new URL(url);pathname=decodeURIComponent(value.pathname);}catch{return 'external';}
@@ -474,13 +524,13 @@ export async function installReadFence(context,report,{getCalculationGrant}={}){
  report.readOnlyBrowserFence=true;
 }
 
-async function readJson(context,url){
+async function readJson(context,url,{paginationKind}={}){
  let continuation=false;
  if(url.startsWith('/api/catalog/search?')){
   const query=new URL(url,ORIGIN).searchParams;
   if(query.has('after')){
    const pageUrl=new URL('/cars/japan',ORIGIN);pageUrl.search=query.toString();
-   continuation=japanPetrolPowerPageApi(pageUrl.href)===url;
+   continuation=(paginationKind?japanPaginationPageApi(pageUrl.href,{kind:paginationKind}):japanPetrolPowerPageApi(pageUrl.href))===url;
   }
  }
  need(url==='/api/health'||url===PLAIN||url===POWER||url===PETROL_POWER||url===PETROL_POWER_NEXT||url===BRAND_DIRECTORY||continuation,'api_scope');
@@ -491,7 +541,8 @@ async function readJson(context,url){
 }
 
 export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,outputFile,playwrightModule,chromeBin,codeScope=SCOPE}){
- const completion=[COMPLETION_SCOPE,COMPLETION_V2_SCOPE,USABILITY_SCOPE].includes(codeScope);
+ const pagination=codeScope===JAPAN_PAGINATION_CODE_SCOPE;
+ const completion=[COMPLETION_SCOPE,COMPLETION_V2_SCOPE,USABILITY_SCOPE,JAPAN_PAGINATION_CODE_SCOPE].includes(codeScope);
  const usability=codeScope===USABILITY_SCOPE;
  const report={version:1,kind:'catalog-japan-browser-v1',codeScope,release:releaseSha,nonce,
   checkedAt:new Date().toISOString(),passed:false,japanFreshnessPassed:false,japanPowerApiPassed:false,
@@ -500,6 +551,7 @@ export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,out
  if(completion)Object.assign(report,{japanPetrolPowerUiPassed:false,japanDetailPowerInputPassed:false,
   japanDeliveredCalculationPassed:false,japanPreviewCalculationRequests:0});
  if(usability)Object.assign(report,Object.fromEntries(USABILITY_GATES.map(key=>[key,false])));
+ if(pagination)Object.assign(report,{japanFullPagesPassed:false,japanPagination24Passed:false,japanCatalogWarningRemovedPassed:false});
  let browser,context,currentPage,calculationGrant=null,brandDirectory=null,stage='preconditions';
  const usabilityPages=[],quietChecks=[];
  const capture=async(page,name)=>{
@@ -519,7 +571,7 @@ export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,out
   need(value.data.calculationVersion==='4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90','calculation_changed');
  };
  try{
-  need([SCOPE,COMPLETION_SCOPE,COMPLETION_V2_SCOPE,USABILITY_SCOPE].includes(codeScope),'code_scope');
+  need([SCOPE,COMPLETION_SCOPE,COMPLETION_V2_SCOPE,USABILITY_SCOPE,JAPAN_PAGINATION_CODE_SCOPE].includes(codeScope),'code_scope');
   need(path.isAbsolute(outputFile),'output');
   try{await fs.access(outputFile);need(false,'report_exists');}catch(error){if(error?.code!=='ENOENT')throw error;}
   const raw=await fs.readFile(oraclePath),binding=japanReleaseBinding(JSON.parse(raw),releaseSha,nonce);
@@ -528,6 +580,37 @@ export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,out
   browser=await chromium.launch({headless:true,executablePath:chromeBin,args:['--no-sandbox']});
   context=await browser.newContext({viewport:{width:1280,height:900},serviceWorkers:'block',locale:'ru-RU'});
   await installReadFence(context,report,completion?{getCalculationGrant:()=>calculationGrant}:{});await health();
+  const checkPaginationWarning=async catalog=>{
+   need(await catalog.locator('[data-japan-power-summary-page]').count()===0
+    &&!/(?:Отбор не подтверждает право|Мощность по данным поставщика:\s*\d)/u.test(await catalog.innerText()),'catalog_warning');
+  };
+  const checkPaginationUi=async(view,first,kind)=>{
+   need(pagination,'pagination_scope');
+   const catalog=view.locator('main.ac-ajes-catalog'),cards=catalog.locator(CARD);
+   await cards.nth(first.items.length-1).waitFor({state:'attached',timeout:60_000});
+   need(await cards.count()===first.items.length,'pagination_ui_first_count');
+   for(const row of first.items){const card=cards.filter({has:view.locator('a[href*="'+row.id+'"]')});
+    await card.waitFor({state:'attached',timeout:30_000});need(await card.count()===1,'pagination_ui_first_identity');}
+   need(new URL(view.url()).searchParams.get('city')===CITY,'pagination_ui_city');
+   await checkPaginationWarning(catalog);
+   const next=catalog.locator('nav.ac-pagination a[aria-label="Страница 2"]');
+   need(await next.count()===1,'pagination_ui_next_link');
+   const href=await next.getAttribute('href');
+   japanPaginationPageApi(href,{kind,expectedCursor:first.nextCursor});
+   await next.click();await view.waitForURL(url=>url.searchParams.get('page')==='2',{timeout:60_000});
+   const observedUrl=view.url(),api=japanPaginationPageApi(observedUrl,{kind,expectedCursor:first.nextCursor});
+   report.explicitJapanApiRequests++;
+   const result=await readJson(context,api,{paginationKind:kind});
+   recordJapanResponse(report,stage,result,releaseSha);
+   const proof=verifyJapanPaginationPair(first,result.data,{observedUrl,kind,firstStatus:200,nextStatus:result.status});
+   await cards.nth(result.data.items.length-1).waitFor({state:'attached',timeout:60_000});
+   need(await cards.count()===result.data.items.length,'pagination_ui_next_count');
+   for(const row of result.data.items){const card=cards.filter({has:view.locator('a[href*="'+row.id+'"]')});
+    await card.waitFor({state:'attached',timeout:30_000});need(await card.count()===1,'pagination_ui_next_identity');}
+   need(await cards.count()===result.data.items.length,'pagination_ui_next_count');
+   await checkPaginationWarning(catalog);
+   return {...proof,navigatedThroughLink:true,uiMatchesApi:true,cityPreserved:true,warningRemoved:true};
+  };
   const plain=[];report.checks.freshness={observations:[]};report.checks.responses=[];
   for(let index=0;index<2;index++){
    stage=index?'plain_warm':'plain_first';report.explicitJapanApiRequests++;
@@ -553,6 +636,18 @@ export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,out
   recordJapanResponse(report,stage,power,releaseSha);
   report.checks.power={...verifyJapanPage(power.data,power.status),...verifyJapanPowerPage(power.data),durationMs:power.durationMs};
   report.japanPowerApiPassed=true;
+  if(pagination){
+   verifyJapanFullPage(plain[0]);verifyJapanFullPage(power.data);
+   report.checks.pagination24={};stage='pagination_plain_page_two';
+   const ordinary=await context.newPage();currentPage=ordinary;let errors=0;ordinary.on('pageerror',()=>{errors++;});
+   await ordinary.setViewportSize({width:390,height:900});
+   const query=new URLSearchParams(QUERY);query.delete('market');
+   const response=await ordinary.goto(ORIGIN+'/cars/japan?'+query,{waitUntil:'domcontentloaded',timeout:90_000});
+   need(response?.status()===200,'pagination_plain_http');
+   report.checks.pagination24.plain=await checkPaginationUi(ordinary,plain[0],'plain');
+   need(errors===0,'pagination_plain_javascript');
+   await capture(ordinary,'japan-plain-page-two-mobile');await ordinary.close();currentPage=null;
+  }
   if(usability)usabilityPages.push(power.data);
   stage='power_ui';const page=await context.newPage();currentPage=page;
   let pageErrors=0;page.on('pageerror',()=>{pageErrors++;});
@@ -616,6 +711,11 @@ export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,out
   need(detailUrl.origin===ORIGIN&&detailUrl.pathname.startsWith('/cars/offer/')&&detailUrl.pathname.includes(detailRow.id),'detail_link');
   await page.setViewportSize({width:390,height:900});await cards.first().scrollIntoViewIfNeeded();
   await capture(page,'japan-power-mobile');need(pageErrors===0,'page_errors');
+  if(pagination){
+   stage='pagination_power_page_two';
+   report.checks.pagination24.power=await checkPaginationUi(page,power.data,'power');
+   need(pageErrors===0,'pagination_power_javascript');await capture(page,'japan-power-page-two-mobile');
+  }
   stage='power_detail';
   const detailResponse=await page.goto(detailUrl.href,{waitUntil:'domcontentloaded',timeout:90_000});
   need(detailResponse?.status()===200,'detail_http');
@@ -723,13 +823,16 @@ export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,out
    report.checks.petrolPowerUi={...aggregate,city:CITY,previousCity:'Москва',cityPreserved:true,
     toggledThroughUi:true,cards:await visibleCards.count(),durationMs:Date.now()-started,pageErrors:errors};
    await visibleCards.first().scrollIntoViewIfNeeded();await capture(view,'japan-petrol-power-city-mobile');
+   if(pagination)await checkPaginationWarning(catalog);
    stage='completion_petrol_power_page_two';
    const firstIds=new Set(filtered.data.items.map(row=>row.id));
    const next=catalog.locator('nav.ac-pagination a[aria-label="Страница 2"]');
    await next.click();await view.waitForURL(url=>url.searchParams.get('page')==='2',{timeout:60_000});
    const nextUrl=new URL(view.url());
    need(japanPetrolPowerUrl(nextUrl.href,2),'petrol_page_two_query');
-   report.explicitJapanApiRequests++;filtered=await readJson(context,usability?japanPetrolPowerPageApi(nextUrl.href):PETROL_POWER_NEXT);
+   const pageTwoApi=pagination?japanPaginationPageApi(nextUrl.href,{kind:'petrol_power',expectedCursor:petrolFirst.nextCursor})
+    :usability?japanPetrolPowerPageApi(nextUrl.href):PETROL_POWER_NEXT;
+   report.explicitJapanApiRequests++;filtered=await readJson(context,pageTwoApi,pagination?{paginationKind:'petrol_power'}:{});
    recordJapanResponse(report,stage,filtered,releaseSha);
    const nextAggregate={...verifyJapanPage(filtered.data,filtered.status),...verifyJapanPowerPage(filtered.data,2)};
    need(filtered.data.items.every(row=>row.fuel==='petrol'&&!firstIds.has(row.id)),'petrol_page_two_rows');
@@ -740,6 +843,16 @@ export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,out
    need(await visibleCards.count()===filtered.data.items.length,'petrol_page_two_count');
    report.checks.petrolPowerUi.pageTwo={...nextAggregate,cityPreserved:true,distinctRows:true,navigatedThroughLink:true};
    report.japanPetrolPowerUiPassed=true;
+   if(pagination){
+    await checkPaginationWarning(catalog);
+    report.checks.pagination24.petrolPower={...verifyJapanPaginationPair(petrolFirst,filtered.data,
+     {observedUrl:nextUrl.href,kind:'petrol_power',firstStatus:200,nextStatus:filtered.status}),
+     navigatedThroughLink:true,uiMatchesApi:true,cityPreserved:true,warningRemoved:true};
+    need(['plain','power','petrolPower'].every(key=>report.checks.pagination24[key]?.followedEmittedCursor===true
+     &&report.checks.pagination24[key]?.uiMatchesApi===true),'pagination_evidence');
+    report.japanFullPagesPassed=true;report.japanPagination24Passed=true;
+    report.japanCatalogWarningRemovedPassed=['plain','power','petrolPower'].every(key=>report.checks.pagination24[key]?.warningRemoved===true);
+   }
    if(usability){
     usabilityPages.push(filtered.data);
     report.checks.fullPages=usabilityPages.map(verifyJapanFullPage);
@@ -816,7 +929,7 @@ export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,out
   stage='release_after';await health();
   report.passed=['japanFreshnessPassed','japanPowerApiPassed','japanUiPassed','japanVisibilityPassed','readOnlyBrowserFence',
    ...(completion?['japanPetrolPowerUiPassed','japanDetailPowerInputPassed','japanDeliveredCalculationPassed']:[]),
-   ...(usability?USABILITY_GATES:[])].every(key=>report[key]===true);
+   ...(usability?USABILITY_GATES:[]),...(pagination?['japanFullPagesPassed','japanPagination24Passed','japanCatalogWarningRemovedPassed']:[])].every(key=>report[key]===true);
  }catch(error){
   report.error={stage,code:/^japan_browser_[a-z_]+$/.test(error?.message||'')?error.message:'japan_browser_check_failed',timeout:error?.name==='TimeoutError'};
   if(currentPage&&/^[a-f0-9]{32}$/.test(nonce||''))await capture(currentPage,'failure').catch(()=>{});

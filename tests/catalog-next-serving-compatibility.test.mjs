@@ -9,6 +9,7 @@ import {verifyServingCompatibility} from '../scripts/catalog-next/serving-compat
 import {JAPAN_RECOVERY_CODE_PATHS,JAPAN_COMPLETION_CODE_PATHS,JAPAN_COMPLETION_V2_CODE_PATHS,JAPAN_USABILITY_CODE_PATHS} from '../scripts/catalog-next/photo-code-scope.mjs';
 import {CRM_CHINA_CODE_SCOPE, CRM_CHINA_CODE_PATHS} from '../scripts/catalog-next/crm-china-code-scope.mjs';
 import {CRM_JAPAN_PHOTO_CODE_SCOPE, CRM_JAPAN_PHOTO_CODE_PATHS} from '../scripts/catalog-next/crm-japan-photo-code-scope.mjs';
+import {JAPAN_PAGINATION_CODE_SCOPE,JAPAN_PAGINATION_CODE_PATHS} from '../scripts/catalog-next/japan-pagination-code-scope.mjs';
 
 const hash = raw => createHash('sha256').update(raw).digest('hex');
 async function fixture(t) {
@@ -268,4 +269,22 @@ test('Japan usability admits its exact cumulative serving changes without wideni
   await assert.rejects(verifyServingCompatibility({...f,servingPlan:{...f.servingPlan(),codeScope}}),/china_serving_change_scope/);
  await f.write('apps/web/lib/catalog/ajes-unreviewed-reader.ts','unreviewed adjacent change\n');f.commit();
  await assert.rejects(verifyServingCompatibility({...f,servingPlan:{...f.servingPlan(),codeScope:'catalog-japan-usability-v1'}}),/china_serving_change_scope/);
+});
+
+test('pagination24 cumulative compatibility starts at accepted a5ca without admitting b25 files',async t=>{
+  const f=await fixture(t);
+  for(const filename of [...new Set([...JAPAN_COMPLETION_V2_CODE_PATHS,...CRM_JAPAN_PHOTO_CODE_PATHS,...JAPAN_PAGINATION_CODE_PATHS])])
+    await f.write(filename,'reviewed cumulative bytes\n');
+  f.commit();
+  const proof=await verifyServingCompatibility({...f,servingPlan:{...f.servingPlan(),codeScope:JAPAN_PAGINATION_CODE_SCOPE}});
+  assert.equal(proof.protectedPricingPathsUnchanged,true);
+  for(const codeScope of [CRM_CHINA_CODE_SCOPE,CRM_JAPAN_PHOTO_CODE_SCOPE,'catalog-japan-usability-v1','catalog-japan-completion-v2'])
+    await assert.rejects(verifyServingCompatibility({...f,servingPlan:{...f.servingPlan(),codeScope}}),/china_serving_change_scope/);
+  for(const filename of ['apps/web/lib/catalog/ajes-power-page.ts','apps/web/lib/catalog/japan-power-query.ts',
+    'apps/web/lib/catalog/ajes-read-evidence.ts','apps/web/lib/catalog/japan-vehicle-policy.ts',
+    'apps/web/lib/auth.ts','apps/web/app/(crm)/api/crm/team/route.ts','apps/web/lib/catalog/rates.ts']){
+    await f.write(filename,'unreviewed bytes\n');f.commit();
+    await assert.rejects(verifyServingCompatibility({...f,servingPlan:{...f.servingPlan(),codeScope:JAPAN_PAGINATION_CODE_SCOPE}}),/china_serving_change_scope/);
+    f.git(['reset','--hard','HEAD~1']);
+  }
 });

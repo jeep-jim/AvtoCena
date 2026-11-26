@@ -4,6 +4,7 @@ import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
 import {CRM_CHINA_CODE_SCOPE, CRM_CHINA_CODE_PATHS} from './crm-china-code-scope.mjs';
 import {CRM_JAPAN_PHOTO_CODE_SCOPE, CRM_JAPAN_PHOTO_CODE_PATHS} from './crm-japan-photo-code-scope.mjs';
+import {JAPAN_PAGINATION_CODE_SCOPE, JAPAN_PAGINATION_CODE_PATHS} from './japan-pagination-code-scope.mjs';
 
 const need = (value, code) => assert(value, 'china_serving_' + code);
 const hash = raw => createHash('sha256').update(raw).digest('hex');
@@ -166,6 +167,9 @@ const allowedJapanUsability = new Set([...allowedJapanCompletionV2,
 // paths becomes an allowance for this private CRM status/display correction.
 const allowedCrmChina = new Set([...allowedJapanCompletionV2, ...CRM_CHINA_CODE_PATHS]);
 const allowedCrmJapanPhoto = new Set([...allowedJapanCompletionV2, ...CRM_JAPAN_PHOTO_CODE_PATHS]);
+// The accepted a5ca ancestry plus this exact refill delta. No usability SQL,
+// client, power-phase, vehicle-policy or diagnostic path is added implicitly.
+const allowedJapanPagination = new Set([...allowedCrmJapanPhoto, ...JAPAN_PAGINATION_CODE_PATHS]);
 const typeOnlyPath = 'apps/web/lib/catalog/offer-page-data.ts';
 export const CHINA_PROTECTED_PRICING_PATHS = Object.freeze([
   'packages', 'data', 'scripts/catalog-next', 'apps/web/lib/encyclopedia',
@@ -190,7 +194,8 @@ export async function verifyServingCompatibility({runtimeRoot, servingPlan, pric
     && /^[a-f0-9]{64}$/.test(servingPlan.pricingToServingDiffSha256 ?? ''), 'plan_binding');
   const files = servingPlan.pricingToServingFiles;
   need(Array.isArray(files) && new Set(files).size === files.length && files.every(name =>
-    typeof name === 'string' && (servingPlan.codeScope === CRM_JAPAN_PHOTO_CODE_SCOPE ? allowedCrmJapanPhoto.has(name)
+    typeof name === 'string' && (servingPlan.codeScope === JAPAN_PAGINATION_CODE_SCOPE ? allowedJapanPagination.has(name)
+      : servingPlan.codeScope === CRM_JAPAN_PHOTO_CODE_SCOPE ? allowedCrmJapanPhoto.has(name)
       : servingPlan.codeScope === CRM_CHINA_CODE_SCOPE ? allowedCrmChina.has(name)
       : servingPlan.codeScope === 'catalog-japan-usability-v1' ? allowedJapanUsability.has(name)
       : servingPlan.codeScope === 'catalog-japan-completion-v2' ? allowedJapanCompletionV2.has(name)

@@ -3,6 +3,7 @@ import {constants} from 'node:fs';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
 import {CRM_JAPAN_PHOTO_CODE_SCOPE} from './crm-japan-photo-code-scope.mjs';
+import {JAPAN_PAGINATION_CODE_SCOPE} from './japan-pagination-code-scope.mjs';
 
 export const JAPAN_PHOTO_RETRY_FIXTURE_MAX_BYTES = 16 * 1024;
 export const JAPAN_PHOTO_RETRY_PROOF_MAX_BYTES = 32 * 1024;
@@ -93,7 +94,7 @@ export function checkedJapanPhotoRetryEvidence(report, {candidate, nonce, oracle
   startedAt, now = Date.now()} = {}) {
   const value = ownData(report, EVIDENCE_KEYS, 'evidence');
   const expectedRelease = Object.getOwnPropertyDescriptor(candidate ?? {}, 'runtimeSha')?.value;
-  need(codeScope === CRM_JAPAN_PHOTO_CODE_SCOPE && RUNTIME.test(expectedRelease ?? '')
+  need([CRM_JAPAN_PHOTO_CODE_SCOPE, JAPAN_PAGINATION_CODE_SCOPE].includes(codeScope) && RUNTIME.test(expectedRelease ?? '')
     && NONCE.test(nonce ?? '') && SHA.test(oracleSha256 ?? '')
     && Number.isSafeInteger(startedAt) && startedAt >= 0 && Number.isSafeInteger(now) && now >= startedAt, 'binding');
   need(value.version === 1 && value.kind === 'japan-photo-retry-proof-v1' && value.codeScope === codeScope
