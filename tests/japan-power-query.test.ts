@@ -1,8 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {DatabaseSync} from 'node:sqlite';
+import {builtinModules} from 'node:module';
+import {build} from 'esbuild';
 import {ajesQuery,ajesLot} from '../apps/web/lib/catalog/ajes-query';
-import {japanPowerCandidateSql,japanPowerSnapshot} from '../apps/web/lib/catalog/japan-power-query';
+import {japanPowerCandidateSql} from '../apps/web/lib/catalog/japan-power-query';
+import {japanPowerSnapshot} from '../apps/web/lib/catalog/ajes-power-page';
 import {createAjesClient} from '../apps/web/lib/catalog/ajes-client';
 import {ajesResultFilter} from '../apps/web/lib/catalog/ajes-result-filter';
 import {enrichJapanDrive} from '../apps/web/lib/catalog/japan-drive';
@@ -12,6 +15,17 @@ const fact=(model:string,year=2020)=>({modelId:model,variantId:model,revision:'f
 const index:CalculationIndex={version:1,digest:'index-1',manifestDigest:'fixture',createdAt:'2026-11-26',models:{'honda:fit':[fact('FIT')],'toyota:corolla':[fact('COROLLA')]}};
 const editorial:any={revision:'editorial-1',entries:{'ajes-stats-manual':{id:'ajes-stats-manual',sourceId:'ajes_japan_feed',sourceOfferId:'manual',market:'japan',status:'visible',specifications:{powerHp:130}}}};
 const snapshot=japanPowerSnapshot(index,editorial);
+test('actual photo galleries remain browser-bundleable without server snapshot dependencies',async()=>{
+ assert.equal(snapshot.revision,'9967105b7a5377e44d2bde8066012c2f5fb22d4914415e9697cf13ec6f62e636','snapshot identity is unchanged by its server-only relocation');
+ const entries=['apps/web/components/catalog/PhotoBrowser.tsx','apps/web/components/catalog/VehicleGallery.tsx'];
+ const built=await build({entryPoints:entries,outdir:'/tmp/avtocena-browser-bundle-guard',bundle:true,platform:'browser',format:'esm',write:false,jsx:'automatic',tsconfig:'apps/web/tsconfig.json',metafile:true,logLevel:'silent'});
+ for(const path of entries)assert.ok(built.metafile.inputs[path],path);
+ assert.ok(built.metafile.inputs['apps/web/lib/catalog/ajes-query.ts']);
+ assert.equal(Object.keys(built.metafile.inputs).some(path=>path.endsWith('/ajes-power-page.ts')),false);
+ const imports=[...Object.values(built.metafile.inputs),...Object.values(built.metafile.outputs)].flatMap(entry=>entry.imports);
+ assert.deepEqual(imports.filter(entry=>entry.path.startsWith('node:')||builtinModules.includes(entry.path)),[],'browser graph must contain no Node builtins, including external imports');
+ assert.equal(built.outputFiles.filter(file=>file.path.endsWith('.js')).length,2);
+});
 function select(phase:'known'|'unknown',values:{id:string;pw?:unknown;model?:string;year?:number}[],compact=false){
  const db=new DatabaseSync(':memory:');db.function('regexp',(pattern,value)=>value===null?null:Number(new RegExp(String(pattern),'i').test(String(value))));
  db.exec('create table cars(id text,pw text,model_name text,year integer)');

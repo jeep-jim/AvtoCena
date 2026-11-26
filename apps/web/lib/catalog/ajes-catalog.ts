@@ -1,8 +1,8 @@
 import {assertAjesJapanMarket,assertAjesJapanTable} from './ajes-access-policy';
 import {sortCatalogRows} from './market-page';
 import {japanPreviewParameters} from './japan-preview-parameters';
-import {readPowerAjesPage} from './ajes-power-page';
-import {japanPowerSnapshot,type JapanPowerQueryContext} from './japan-power-query';
+import {readPowerAjesPage,japanPowerSnapshot} from './ajes-power-page';
+import type {JapanPowerQueryContext} from './japan-power-query';
 import {readCalculationIndex} from '../encyclopedia/calculation-index';
 import {readCatalogEditorial} from './editorial';
 import {resolveAjesMakeNames} from './ajes-make-resolution';

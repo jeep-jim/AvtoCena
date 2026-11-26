@@ -1,7 +1,14 @@
 import {createHash,randomBytes} from 'node:crypto';
 import {AjesUnavailable} from './ajes-access-policy';
 import {AjesInputError} from './ajes-query';
-import type {JapanPowerPhase} from './japan-power-query';
+import type {JapanPowerPhase,JapanPowerSnapshot} from './japan-power-query';
+
+// Snapshot identity belongs to the server continuation reader. The SQL/image
+// helper is also imported by browser galleries and must remain browser-safe.
+export function japanPowerSnapshot(index:JapanPowerSnapshot['index'],editorial:JapanPowerSnapshot['editorial']):JapanPowerSnapshot{
+ const revision=createHash('sha256').update(JSON.stringify(['japan-power-order-v1',index?.digest||'none',editorial.revision])).digest('hex');
+ return {index,editorial,revision};
+}
 
 type Row={id:string};
 type SourcePage<T>={items:T[];received:number;observedAt:string;sourceFingerprint:string;partial?:boolean;stale?:boolean;[key:string]:any};

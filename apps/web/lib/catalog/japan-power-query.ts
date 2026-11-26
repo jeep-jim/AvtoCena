@@ -1,14 +1,9 @@
-import {createHash} from 'node:crypto';
 import type {CalculationIndex} from '../encyclopedia/calculation-index';
 import type {CatalogEditorialIndex} from './editorial';
 
 export type JapanPowerPhase='known'|'unknown';
 export type JapanPowerSnapshot={index:CalculationIndex|null;editorial:CatalogEditorialIndex;revision:string};
 export type JapanPowerQueryContext={phase:JapanPowerPhase;snapshot:JapanPowerSnapshot};
-export function japanPowerSnapshot(index:CalculationIndex|null,editorial:CatalogEditorialIndex):JapanPowerSnapshot{
- const revision=createHash('sha256').update(JSON.stringify(['japan-power-order-v1',index?.digest||'none',editorial.revision])).digest('hex');
- return {index,editorial,revision};
-}
 // These are candidate predicates, never specifications. The existing local
 // matcher makes the final decision after all editorial/owner values are applied.
 const simplePower="(pw regexp '^[ ]*[0-9]+[ ]*$' and length(trim(pw))<=30 and (pw+0)>0 and (pw+0)<=9007199254740991)";
