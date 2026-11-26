@@ -67,7 +67,7 @@ jobs:
           daemon-config: |
             {"features":{"containerd-snapshotter":true}}
       - name: Build the verified source and check its image roundtrip
-        if: steps.photo_scope.outputs.scope == 'catalog-photo-recovery-v1' || steps.photo_scope.outputs.scope == 'catalog-japan-recovery-v1' || steps.photo_scope.outputs.scope == 'catalog-japan-completion-v1' || steps.photo_scope.outputs.scope == 'catalog-japan-completion-v2'
+        if: steps.photo_scope.outputs.scope == 'catalog-photo-recovery-v1' || steps.photo_scope.outputs.scope == 'catalog-japan-recovery-v1' || steps.photo_scope.outputs.scope == 'catalog-japan-completion-v1' || steps.photo_scope.outputs.scope == 'catalog-japan-completion-v2' || steps.photo_scope.outputs.scope == 'catalog-japan-usability-v1'
         env:
           CHINA_BUILD_DOCKER_HOST: ${{ steps.photo_docker.outputs.sock }}
         run: node scripts/run-node-with-resources.mjs --import tsx scripts/catalog-next/code-entry.mjs --build

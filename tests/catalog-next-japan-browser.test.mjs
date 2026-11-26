@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {japanReleaseBinding,verifyJapanPage,verifyJapanWarmPage,verifyJapanPowerPage,japanVerificationRequestScope,installReadFence,japanResponseObservation,
- japanCalculationReadGrant,checkedJapanCalculationRead,verifyJapanDeliveredCalculation,japanPetrolPowerUrl}
+ japanCalculationReadGrant,checkedJapanCalculationRead,verifyJapanDeliveredCalculation,japanPetrolPowerUrl,verifyJapanFullPage,verifyJapanKnownPowerOrder,verifyJapanVisibleVehiclePolicy,verifyJapanBrandDirectory,japanPetrolPowerPageApi}
  from '../scripts/catalog-next/japan-browser-acceptance.mjs';
 
 const now=Date.parse('2026-11-26T05:00:00Z'),release='a'.repeat(40),nonce='b'.repeat(32),manifest='c'.repeat(64);
@@ -274,4 +274,57 @@ test('a real delivered result requires the same invoice, complete customs, selec
   const changed=copy(value);mutate(changed);assert.throws(()=>verifyJapanDeliveredCalculation(changed,200,grant));
  }
  assert.throws(()=>verifyJapanDeliveredCalculation(value,400,grant),/japan_browser_calculation_response/);
+});
+
+
+test('usability acceptance requires a full visible page when continuation exists',()=>{
+ const full={items:Array.from({length:24},(_,i)=>({...local,id:'ajes-stats-full'+i})),hasMore:true};
+ assert.equal(verifyJapanFullPage(full).fullOrExhausted,true);
+ assert.throws(()=>verifyJapanFullPage({...full,items:full.items.slice(0,23)}),/short_page_with_more/);
+ assert.equal(verifyJapanFullPage({...full,items:[local],hasMore:false}).shown,1);
+ for(const flag of ['partial','interrupted','scanLimited'])assert.throws(()=>verifyJapanFullPage({...full,[flag]:true}),/usability_partial/);
+});
+
+test('usability ordering spans the page boundary and rejects repeated or interleaved rows',()=>{
+ const first={items:[local,supplier]},second={items:[unknown]};
+ assert.deepEqual(verifyJapanKnownPowerOrder([first,second]),{pages:2,known:2,unknown:1,knownBeforeUnknown:true,distinctRows:true});
+ assert.throws(()=>verifyJapanKnownPowerOrder([{items:[local,unknown]},{items:[supplier]}]),/known_after_unknown/);
+ assert.throws(()=>verifyJapanKnownPowerOrder([first,{items:[local]}]),/power_order_duplicate/);
+ assert.throws(()=>verifyJapanKnownPowerOrder([{items:[{id:'ajes-stats-unlabelled'}]}]),/power_order_unlabelled/);
+});
+
+test('visible vehicle acceptance excludes explicit buses, trucks and heavy categories without excluding ordinary vans',()=>{
+ const allowed=[{...local,model:'HIACE VAN',bodyType:'minivan',vehicleCategory:'M1'},
+  {...supplier,model:'HIJET VAN',vehicleCategory:'N1',grossVehicleWeightKg:3500}];
+ assert.deepEqual(verifyJapanVisibleVehiclePolicy([{items:allowed}]),{checked:2,excludedVehiclesVisible:0});
+ for(const changed of [{bodyType:'bus'},{bodyType:'truck'},{bodyType:'special'},
+  {vehicleCategory:'M2'},{vehicleCategory:'M3'},{vehicleCategory:'N2'},
+  {grossVehicleWeightKg:3501},{model:'COASTER GX'},{model:'CIVILIAN BUS'}])
+  assert.throws(()=>verifyJapanVisibleVehiclePolicy([{items:[{...local,...changed}]}]),/excluded_vehicle_visible/);
+});
+
+
+test('complete fresh Japan directory must exceed the reported seven page-local makes',()=>{
+ const payload={directoryComplete:true,stale:false,generationId:new Date(now-1000).toISOString(),
+  makes:['Toyota','Honda','Nissan','Mazda','Suzuki','Subaru','Daihatsu','Mitsubishi','Lexus']};
+ const result=verifyJapanBrandDirectory(payload,200,now);
+ assert.equal(result.complete,true);assert.equal(result.makes.length,9);
+ for(const bad of [{...payload,makes:payload.makes.slice(0,7)},{...payload,makes:[...payload.makes,'Toyota']},
+  {...payload,makes:[...payload.makes,'<invalid>']},{...payload,directoryComplete:false},{...payload,stale:true},
+  {...payload,generationId:new Date(now-30*60_000).toISOString()}])
+  assert.throws(()=>verifyJapanBrandDirectory(bad,200,now),/japan_browser_brand_directory/);
+ assert.throws(()=>verifyJapanBrandDirectory(payload,503,now),/japan_browser_brand_directory/);
+});
+
+test('the live second page reuses only the cursor on the clicked Japan petrol power link',()=>{
+ const cursor='jp1.'+'a'.repeat(32)+'.2.'+'b'.repeat(16);
+ const query=new URLSearchParams({fuel:'petrol',city:'Новокузнецк',powerTo:'160',page:'2',after:cursor});
+ const source='https://avtocena.com/cars/japan?'+query;
+ const result=new URL(japanPetrolPowerPageApi(source),'https://avtocena.com');
+ assert.equal(result.pathname,'/api/catalog/search');assert.equal(result.searchParams.get('after'),cursor);
+ assert.equal(result.searchParams.get('pageSize'),'24');assert.equal(result.searchParams.get('market'),'japan');
+ for(const bad of [source.replace('avtocena.com','example.invalid'),source+'&fuel=petrol',source+'&url=https://example.invalid',
+  source.replace(cursor,cursor.replace('.2.','.3.')),source.replace('powerTo=160','powerTo=260'),source+'#fragment',
+  source.replace('&after='+cursor,''),source.replace('avtocena.com','user:secret@avtocena.com')])
+  assert.throws(()=>japanPetrolPowerPageApi(bad),/japan_browser_continuation/);
 });

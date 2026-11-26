@@ -8,6 +8,7 @@ import {gunzipSync} from 'node:zlib';
 import {createChinaDailyRelease, checkedChinaCodePreflight} from '../scripts/catalog-next/daily-release.mjs';
 import {createChinaState} from '../scripts/catalog-next/china-state.mjs';
 import {runChinaCodeCycle} from '../scripts/catalog-next/code-controller.mjs';
+import {checkedCatalogCodeScope,JAPAN_USABILITY_RETAINED_RUNTIME,JAPAN_USABILITY_CODE_PATHS} from '../scripts/catalog-next/photo-code-scope.mjs';
 
 const hash = raw => createHash('sha256').update(raw).digest('hex');
 const ordered = value => Array.isArray(value) ? value.map(ordered) : value && typeof value === 'object'
@@ -15,26 +16,28 @@ const ordered = value => Array.isArray(value) ? value.map(ordered) : value && ty
 const digest = value => hash(JSON.stringify(ordered(value))), copy = value => JSON.parse(JSON.stringify(value));
 const oldSha = '1'.repeat(40), nextSha = '2'.repeat(40), pricingSha = '3'.repeat(40);
 const nonce = 'a'.repeat(32), acceptedAt = '2026-11-25T08:00:00Z';
-function sample() {
+const usabilityScope='catalog-japan-usability-v1';
+const usabilityFlags=['japanBrandDirectoryPassed','japanFullPagesPassed','japanKnownPowerOrderPassed','japanVehiclePolicyPassed','japanQuietCatalogPassed'];
+function sample(retainedRuntime=oldSha) {
   const manifestRaw = Buffer.from(JSON.stringify({kind: 'china-local-generation-v1', market: 'china',
     generationId: 'gen_china_100_1', runtimeSha: pricingSha, prepared: true, rows: 283188,
     source: {supplierLatestVerified: true, cursor: 100, sourceObservedAt: '2026-11-24T11:00:00Z'}}));
-  const current = {market: 'china', generationId: 'gen_china_100_1', owner: {runId: '100', attempt: '1', revision: oldSha},
+  const current = {market: 'china', generationId: 'gen_china_100_1', owner: {runId: '100', attempt: '1', revision: retainedRuntime},
     receiptSha256: hash('receipt'), sourceDescriptorSha256: hash('source'), generationManifestSha256: hash(manifestRaw),
-    sourceCursor: 100, sourceObservedAt: '2026-11-24T11:00:00Z', runtimeSha: oldSha, pricingRuntimeSha: pricingSha,
+    sourceCursor: 100, sourceObservedAt: '2026-11-24T11:00:00Z', runtimeSha: retainedRuntime, pricingRuntimeSha: pricingSha,
     imageId: 'sha256:' + '4'.repeat(64)};
   const receipt = Buffer.from(JSON.stringify({version: 1, kind: 'china-host-acceptance-v1', release: current.runtimeSha,
     pricingRuntimeSha: current.pricingRuntimeSha, generationId: current.generationId, imageId: current.imageId,
     generationManifestSha256: current.generationManifestSha256, privateGenerationReceiptSha256: current.receiptSha256,
     sourceDescriptorSha256: current.sourceDescriptorSha256, sourceCursor: current.sourceCursor,
     sourceObservedAt: current.sourceObservedAt, nonce, acceptedAt, retainedContainerId: '7'.repeat(64),
-    browser: {release: oldSha, nonce, passed: true, functionalPassed: true, speedPassed: true,
+    browser: {release: retainedRuntime, nonce, passed: true, functionalPassed: true, speedPassed: true,
       reportSha256: hash('browser'), speedReportSha256: hash('speed'), detailsReportSha256: hash('details')}}));
   current.proof = {kind: 'china-accepted-proof-v1', hostReceiptBase64: receipt.toString('base64'), hostReceiptSha256: hash(receipt)};
   const state = {version: 1, kind: 'china-accepted-state-v1', market: 'china', revision: 1, current, rollback: null, pending: null,
     commit: {nonce, intentSha256: hash('intent'), previousETag: null, previousStateSha256: null, acceptedAt}};
   const previous = {found: true, etag: '"accepted-1"', sha256: digest(state), value: state};
-  const oracle = {version: 1, kind: 'local-native-reader-http-expectations-v1', runtimeSha: oldSha,
+  const oracle = {version: 1, kind: 'local-native-reader-http-expectations-v1', runtimeSha: retainedRuntime,
     pricingRuntimeSha: pricingSha, expectedGeneration: current.generationId, generationManifestSha256: current.generationManifestSha256,
     syntheticExpectations: true, httpVerified: false, cases: Array.from({length: 12}, (_, i) => ({name: 'case-' + i,
       path: '/api/catalog/search?market=china&page=' + (i + 1), total: 60, ids: ['8'.repeat(24)], totalRub: [1650154]}))};
@@ -69,7 +72,8 @@ test('authenticated photo preflight preserves every frozen expected value and ch
 
 async function fixture(t, {combined = false, japan = false,completion=false} = {}) {
   japan=Boolean(japan||completion);
-  const f = sample(), directory = await fs.mkdtemp(path.join(os.tmpdir(), 'china-photo-stage-'));
+  const usability=completion===usabilityScope,retainedRuntime=usability?JAPAN_USABILITY_RETAINED_RUNTIME:oldSha;
+  const f = sample(retainedRuntime), directory = await fs.mkdtemp(path.join(os.tmpdir(), 'china-photo-stage-'));
   t.after(() => fs.rm(directory, {recursive: true, force: true}));
   const root = path.join(directory, 'controller');
   for (const name of ['scripts/regcloud-performance-gate.py', 'docs/operations/2026-11-11-accepted-speed-baseline.json',
@@ -80,13 +84,14 @@ async function fixture(t, {combined = false, japan = false,completion=false} = {
   const imageDirectory = path.join(directory, 'china-release-build'); await fs.mkdir(imageDirectory);
   const image = Buffer.from('synthetic roundtrip image'), imagePath = path.join(imageDirectory, 'image.tar');
   await fs.writeFile(imagePath, image);
-  const servingPlan = {version: 1, market: 'china', runtimeSha: nextSha, retainedRuntime: oldSha,
+  const servingPlan = {version: 1, market: 'china', runtimeSha: nextSha, retainedRuntime,
     runtimeTree: '6'.repeat(40), runtimeDiffSha256: hash('photo diff'), pricingRuntimeSha: pricingSha,
+    ...(usability?{runtimeFiles:[...JAPAN_USABILITY_CODE_PATHS]}:{}),
     ...(japan ? {codeScope: completion?(typeof completion==='string'?completion:'catalog-japan-completion-v1'):'catalog-japan-recovery-v1'} : combined ? {codeScope: 'catalog-photo-japan-power-v1'} : {})};
   const pricingPlan = {version: 1, market: 'china', runtimeSha: pricingSha};
   const imageReceipt = {version: 1,
     kind: 'china-runtime-image-v1', runtimeSha: nextSha, runtimeTree: servingPlan.runtimeTree,
-    retainedRuntime: oldSha, runtimeDiffSha256: servingPlan.runtimeDiffSha256, pricingRuntimeSha: pricingSha,
+    retainedRuntime, runtimeDiffSha256: servingPlan.runtimeDiffSha256, pricingRuntimeSha: pricingSha,
     imageId: f.candidate.imageId, bytes: image.length, imageUnpackedBytes: 100, sha256: hash(image), archiveRoundTripVerified: true,
     privateDataIncluded: false, protectedPathsUnchanged: true, servingCompatibility: {protectedPricingPathsUnchanged: true},
     configSha256: hash('configuration'), rootFsSha256: hash('rootfs'), platform: 'linux/amd64',
@@ -109,7 +114,7 @@ async function fixture(t, {combined = false, japan = false,completion=false} = {
       if (method === 'init') {
         hostPlan = args.plan;
         assert.equal(hostPlan.mode, 'code-update'); assert.equal(hostPlan.files.length, 12);
-        assert.equal(hostPlan.generationId, f.current.generationId); assert.equal(hostPlan.retainedRuntime, oldSha);
+        assert.equal(hostPlan.generationId, f.current.generationId); assert.equal(hostPlan.retainedRuntime, retainedRuntime);
         assert.equal(hostPlan.codeSourcePlanSha256, f.preflight.previousPlanSha256);
         assert.equal(hostPlan.codeSourceOracleSha256, f.preflight.previousOracleSha256);
         assert.deepEqual(hostPlan.codeImageStorageProof, storageProof);
@@ -137,7 +142,7 @@ async function fixture(t, {combined = false, japan = false,completion=false} = {
         const old = JSON.parse(Buffer.from(f.current.proof.hostReceiptBase64, 'base64'));
         const raw = Buffer.from(JSON.stringify({...old, release: nextSha, imageId: f.candidate.imageId, nonce: hostPlan.nonce,
           transition: 'code-update', previousAcceptedETag: f.previous.etag, previousAcceptedStateSha256: f.previous.sha256,
-          retainedRuntimeSha: oldSha, retainedImageId: f.current.imageId, browser: args.verdict}));
+          retainedRuntimeSha: retainedRuntime, retainedImageId: f.current.imageId, browser: args.verdict}));
         return {accepted: true, hostReceiptBase64: raw.toString('base64'), hostReceiptSha256: hash(raw)};
       }
       assert.fail('unexpected method ' + method);
@@ -152,7 +157,7 @@ async function fixture(t, {combined = false, japan = false,completion=false} = {
   const release = createChinaDailyRelease({root, servingRoot: directory, pricingPlan, servingPlan,
     controllerSha: '9'.repeat(40), runnerTemp: directory, environment: {SSH_PRIVATE_KEY: 'synthetic fixture'}, capabilities: {
       verifyBaselines() {}, async verifyCompatibility() { return {runtimeSha: nextSha, pricingRuntimeSha: pricingSha, protectedPricingPathsUnchanged: true}; },
-      async verifyCodeCompatibility() { return {retainedRuntime: oldSha, frozenHttpOracleReusable: true}; },
+      async verifyCodeCompatibility() { if(usability)checkedCatalogCodeScope(servingPlan);return {retainedRuntime, frozenHttpOracleReusable: true}; },
       generationStorage() { assert.fail('app-only update must never restore private generation'); },
       async runChild(args) {
         const name = path.basename(args.script); calls.push(name);
@@ -178,7 +183,8 @@ async function fixture(t, {combined = false, japan = false,completion=false} = {
             passed: true, japanFreshnessPassed: true, japanPowerApiPassed: true, japanUiPassed: true, japanVisibilityPassed: true,
             readOnlyBrowserFence: true, productionMutations: 0, directSupplierApiRequests: 0, explicitJapanApiRequests: completion?5:3,
             ...(completion?{japanPetrolPowerUiPassed:true,japanDetailPowerInputPassed:true,
-              japanDeliveredCalculationPassed:true,japanPreviewCalculationRequests:1}:{})};
+              japanDeliveredCalculationPassed:true,japanPreviewCalculationRequests:1}:{}),
+            ...(usability?Object.fromEntries(usabilityFlags.map(flag=>[flag,true])):{})};
           if (flags.failedReport) Object.assign(report, {passed: false, japanVisibilityPassed: false,
             error: {stage: 'catalog_visibility', code: 'japan_browser_overview_http', timeout: false}});
           if (flags.changeReport) flags.changeReport(report);
@@ -201,9 +207,9 @@ async function fixture(t, {combined = false, japan = false,completion=false} = {
         }
         return 0;
       },
-      async openSession() { return session; }, async checkControl() {}, async health(value) { assert.ok([oldSha, nextSha].includes(value)); },
+      async openSession() { return session; }, async checkControl() {}, async health(value) { assert.ok([retainedRuntime, nextSha].includes(value)); },
     }});
-  return {...f, directory, imagePath, imageReceipt, imageReceiptRaw, storagePath, storageProof, calls, uploaded, release, flags};
+  return {...f, directory, imagePath, imageReceipt, imageReceiptRaw, storagePath, storageProof, servingPlan, calls, uploaded, release, flags};
 }
 
 function memoryStorage(previous) {
@@ -492,7 +498,7 @@ test('Japan recovery cannot switch when the existing China functional gate fails
   assert.equal(f.calls.at(-1), 'abort');
 });
 
-for(const scope of ['catalog-japan-completion-v1','catalog-japan-completion-v2']){
+for(const scope of ['catalog-japan-completion-v1','catalog-japan-completion-v2',usabilityScope]){
 test(scope+' requires its live UI/detail/calculation evidence after unchanged China gates',async t=>{
   const f=await fixture(t,{completion:scope}),{stage,input}=await reservedStage(f);
   const result=await stage.activate(input);assert.equal(result.kind,'accepted');
@@ -502,6 +508,10 @@ test(scope+' requires its live UI/detail/calculation evidence after unchanged Ch
   const details=JSON.parse(result.evidence.browserDetailsBytes),report=JSON.parse(Buffer.from(details.japanReportBase64,'base64'));
   assert.equal(report.codeScope,scope);assert.equal(report.japanPreviewCalculationRequests,1);
   assert.equal(report.productionMutations,0);assert.equal(report.japanDeliveredCalculationPassed,true);
+  if(scope===usabilityScope){
+    assert.equal(f.current.runtimeSha,JAPAN_USABILITY_RETAINED_RUNTIME);
+    for(const flag of usabilityFlags)assert.equal(report[flag],true);
+  }
   assert.deepEqual(JSON.parse(f.uploaded.get('acceptance.json')),{...f.oracle,runtimeSha:nextSha});
   await stage.close();
 });
@@ -527,3 +537,43 @@ test(scope+' cannot bypass retained China '+flag,async t=>{
   assert.equal(f.calls.includes('japan-browser-acceptance.mjs'),false);assert.equal(f.calls.includes('accept'),false);
 });
 }
+
+const usabilityRequiredFlags=['passed','japanFreshnessPassed','japanPowerApiPassed','japanUiPassed','japanVisibilityPassed',
+  'readOnlyBrowserFence','japanPetrolPowerUiPassed','japanDetailPowerInputPassed','japanDeliveredCalculationPassed',...usabilityFlags];
+for(const field of usabilityRequiredFlags)for(const value of [undefined,false,1,'true'])
+test(usabilityScope+' requires an exact true boolean for '+field+'='+JSON.stringify(value),async t=>{
+  const f=await fixture(t,{completion:usabilityScope});f.flags.changeReport=report=>{
+    if(value===undefined)delete report[field];else report[field]=value;
+  };
+  const {stage,input}=await reservedStage(f);
+  await assert.rejects(stage.activate(input),/china_daily_release_japan_browser_binding/);
+  assert.equal(f.calls.includes('browser_evidence'),false);assert.equal(f.calls.includes('accept'),false);await stage.close();
+});
+
+for(const [field,value] of [
+  ['codeScope','catalog-japan-completion-v2'],['version',2],['kind','wrong-kind'],['release',oldSha],['nonce','f'.repeat(32)],
+  ['generationManifestSha256',hash('other manifest')],['oracleSha256',hash('other oracle')],
+  ['checkedAt','2000-01-01T00:00:00Z'],['checkedAt','2999-01-01T00:00:00Z'],
+  ['productionMutations',undefined],['productionMutations',false],['directSupplierApiRequests',undefined],['directSupplierApiRequests',false],
+])test(usabilityScope+' retains exact report binding for '+field+'='+value,async t=>{
+  const f=await fixture(t,{completion:usabilityScope});f.flags.changeReport=report=>{report[field]=value;};
+  const {stage,input}=await reservedStage(f);
+  await assert.rejects(stage.activate(input),/china_daily_release_japan_browser_binding/);
+  assert.equal(f.calls.includes('browser_evidence'),false);assert.equal(f.calls.includes('accept'),false);await stage.close();
+});
+
+test(usabilityScope+' cannot be staged against a different retained runtime',async t=>{
+  const f=await fixture(t,{completion:usabilityScope});
+  assert.throws(()=>checkedCatalogCodeScope({...f.servingPlan,retainedRuntime:oldSha}),/china_photo_scope_retained_runtime/);
+  f.servingPlan.retainedRuntime=oldSha;
+  await assert.rejects(reservedStage(f),/china_daily_release_code_/);
+  assert.equal(f.calls.includes('init'),false);assert.equal(f.calls.includes('switch'),false);assert.equal(f.calls.includes('accept'),false);
+});
+
+for(const failure of ['gateExit','missingReport','oversizedReport'])
+test(usabilityScope+' rejects '+failure+' before host evidence',async t=>{
+  const f=await fixture(t,{completion:usabilityScope});
+  if(failure==='oversizedReport')f.flags.changeReport=report=>{report.padding='x'.repeat(128*1024);};else f.flags[failure]=1;
+  const {stage,input}=await reservedStage(f);await assert.rejects(stage.activate(input));
+  assert.equal(f.calls.includes('browser_evidence'),false);assert.equal(f.calls.includes('accept'),false);await stage.close();
+});

@@ -8,6 +8,8 @@ const ORIGIN='https://avtocena.com';
 const SCOPE='catalog-japan-recovery-v1';
 const COMPLETION_SCOPE='catalog-japan-completion-v1';
 const COMPLETION_V2_SCOPE='catalog-japan-completion-v2';
+const USABILITY_SCOPE='catalog-japan-usability-v1';
+const USABILITY_GATES=['japanBrandDirectoryPassed','japanFullPagesPassed','japanKnownPowerOrderPassed','japanVehiclePolicyPassed','japanQuietCatalogPassed'];
 const CARD='article.ac-catalog-card,article.ac-catalog-list-row';
 const CITY='Новокузнецк';
 const QUERY=new URLSearchParams({market:'japan',page:'1',pageSize:'24',city:CITY});
@@ -15,6 +17,7 @@ const PLAIN='/api/catalog/search?'+QUERY;
 const POWER=PLAIN+'&powerTo=160';
 const PETROL_POWER=POWER+'&fuel=petrol';
 const PETROL_POWER_NEXT=PETROL_POWER.replace('page=1&','page=2&');
+const BRAND_DIRECTORY='/api/catalog/brand-counts?market=japan&directory=1';
 const sha=value=>createHash('sha256').update(value).digest('hex');
 const need=(value,code)=>{if(!value)throw Error('japan_browser_'+code);};
 const positive=value=>typeof value==='number'&&Number.isFinite(value)&&value>0;
@@ -85,6 +88,70 @@ export function verifyJapanPowerPage(payload,pageNumber=1){
  if(payload.hasMore||pageNumber>1)need(payload.total===null&&(!payload.countSummary||payload.countSummary.upperBound===true),'false_exact_count');
  else need(payload.total===payload.items.length&&payload.countSummary?.total===payload.items.length&&payload.countSummary?.upperBound===false,'exhausted_count');
  return {...expected,unknownRetainedAndLabelled:true,countHonest:true};
+}
+
+/** New usability checks supplement the accepted calculation/freshness gates.
+ * They inspect the actual observed pages; exhaustive source/lane/admission
+ * transitions are covered by the required native suite, not a live bulk scan. */
+export function verifyJapanFullPage(payload){
+ need(Array.isArray(payload?.items)&&payload.items.length>0&&payload.items.length<=24,'usability_rows');
+ need(payload.hasMore!==true||payload.items.length===24,'short_page_with_more');
+ need(!payload.partial&&!payload.interrupted&&!payload.scanLimited,'usability_partial');
+ return {shown:payload.items.length,hasMore:payload.hasMore===true,fullOrExhausted:true};
+}
+
+export function verifyJapanKnownPowerOrder(pages){
+ need(Array.isArray(pages)&&pages.length>0,'power_order_pages');
+ let unknownStarted=false,known=0,unknown=0;const identities=new Set();
+ for(const page of pages)for(const row of page.items){
+  need(!identities.has(row.id),'power_order_duplicate');identities.add(row.id);
+  if(row.japanPowerUnknown===true){unknownStarted=true;unknown++;}
+  else {need(positive(row.powerHp)||positive(row.japanSupplierPower?.hp),'power_order_unlabelled');
+   need(!unknownStarted,'known_after_unknown');known++;}
+ }
+ need(known>0,'power_order_no_known_sample');
+ return {pages:pages.length,known,unknown,knownBeforeUnknown:true,distinctRows:true};
+}
+
+export function verifyJapanVisibleVehiclePolicy(pages){
+ let checked=0;
+ for(const page of pages)for(const row of page.items){
+  const body=String(row.bodyType||'').toLowerCase().trim();
+  const category=String(row.vehicleCategory||'').toUpperCase().trim();
+  const model=String(row.model||'').toUpperCase().replace(/[^A-Z0-9]+/g,' ');
+  need(!['bus','minibus','truck','special','special_equipment'].includes(body)
+   &&!['M2','M3','N2','N3'].includes(category)
+   &&!(positive(row.grossVehicleWeightKg)&&row.grossVehicleWeightKg>3500)
+   &&!/(?:^| )(?:COASTER|CIVILIAN|ROSA|CANTER|ELF|SUPER GREAT)(?: |$)/.test(model),'excluded_vehicle_visible');
+  checked++;
+ }
+ need(checked>0,'vehicle_policy_no_sample');return {checked,excludedVehiclesVisible:0};
+}
+
+export function verifyJapanBrandDirectory(payload,status,now=Date.now()){
+ const observed=Date.parse(payload?.generationId||'');
+ need(status===200&&payload?.directoryComplete===true&&payload.stale===false
+  &&Number.isFinite(observed)&&observed<=now+60_000&&now-observed<30*60_000,'brand_directory_unavailable');
+ need(Array.isArray(payload.makes)&&payload.makes.length>7
+  &&payload.makes.every(name=>typeof name==='string'&&name.trim()===name&&name.length>0&&name.length<=80&&!/[\u0000-\u001f<>]/.test(name)),
+  'brand_directory_rows');
+ const makes=[...payload.makes].sort((a,b)=>a.localeCompare(b,'ru'));
+ need(new Set(makes.map(name=>name.toLocaleLowerCase('en-US'))).size===makes.length,'brand_directory_duplicate');
+ return {makes,observedAt:new Date(observed).toISOString(),complete:true};
+}
+
+/** The continuation comes from the clicked public link, never from a new scan
+ * or an invented source offset. Only this exact requested second-page query is
+ * admitted by the explicit API reader. */
+export function japanPetrolPowerPageApi(value){
+ need(japanPetrolPowerUrl(value,2),'continuation_query');
+ const source=new URL(value,ORIGIN),after=source.searchParams.get('after');
+ need(!source.username&&!source.password&&!source.hash,'continuation_scope');
+ need(/^jp1\.[a-f0-9]{32}\.2\.[a-f0-9]{16}$/.test(after||''),'continuation_cursor');
+ need([...source.searchParams.keys()].every(key=>['market','fuel','city','powerTo','page','pageSize','after','view'].includes(key))
+  &&[...new Set(source.searchParams.keys())].every(key=>source.searchParams.getAll(key).length===1),'continuation_scope');
+ const query=new URLSearchParams(QUERY);query.set('page','2');query.set('powerTo','160');query.set('fuel','petrol');query.set('after',after);
+ return '/api/catalog/search?'+query;
 }
 
 export function japanVerificationRequestScope(url,method,resourceType){
@@ -215,21 +282,32 @@ export async function installReadFence(context,report,{getCalculationGrant}={}){
 }
 
 async function readJson(context,url){
- need(url==='/api/health'||url===PLAIN||url===POWER||url===PETROL_POWER||url===PETROL_POWER_NEXT,'api_scope');
+ let continuation=false;
+ if(url.startsWith('/api/catalog/search?')){
+  const query=new URL(url,ORIGIN).searchParams;
+  if(query.has('after')){
+   const pageUrl=new URL('/cars/japan',ORIGIN);pageUrl.search=query.toString();
+   continuation=japanPetrolPowerPageApi(pageUrl.href)===url;
+  }
+ }
+ need(url==='/api/health'||url===PLAIN||url===POWER||url===PETROL_POWER||url===PETROL_POWER_NEXT||url===BRAND_DIRECTORY||continuation,'api_scope');
  const started=Date.now();
  const response=await context.request.get(ORIGIN+url,{timeout:45_000,maxRedirects:0,headers:{'Cache-Control':'no-cache'}});
  return {status:response.status(),data:await response.json().catch(()=>null),durationMs:Date.now()-started,requestedAt:started};
 }
 
 export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,outputFile,playwrightModule,chromeBin,codeScope=SCOPE}){
- const completion=[COMPLETION_SCOPE,COMPLETION_V2_SCOPE].includes(codeScope);
+ const completion=[COMPLETION_SCOPE,COMPLETION_V2_SCOPE,USABILITY_SCOPE].includes(codeScope);
+ const usability=codeScope===USABILITY_SCOPE;
  const report={version:1,kind:'catalog-japan-browser-v1',codeScope,release:releaseSha,nonce,
   checkedAt:new Date().toISOString(),passed:false,japanFreshnessPassed:false,japanPowerApiPassed:false,
   japanUiPassed:false,japanVisibilityPassed:false,readOnlyBrowserFence:false,
   productionMutations:0,directSupplierApiRequests:0,supplierImageRequests:0,explicitJapanApiRequests:0,checks:{},screenshots:[]};
  if(completion)Object.assign(report,{japanPetrolPowerUiPassed:false,japanDetailPowerInputPassed:false,
   japanDeliveredCalculationPassed:false,japanPreviewCalculationRequests:0});
- let browser,context,currentPage,calculationGrant=null,stage='preconditions';
+ if(usability)Object.assign(report,Object.fromEntries(USABILITY_GATES.map(key=>[key,false])));
+ let browser,context,currentPage,calculationGrant=null,brandDirectory=null,stage='preconditions';
+ const usabilityPages=[],quietChecks=[];
  const capture=async(page,name)=>{
   const relative=path.join('artifacts/catalog-japan-live',nonce,name+'.png');
   const file=path.join(ROOT,relative);await fs.mkdir(path.dirname(file),{recursive:true});
@@ -242,7 +320,7 @@ export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,out
   need(value.data.calculationVersion==='4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90','calculation_changed');
  };
  try{
-  need([SCOPE,COMPLETION_SCOPE,COMPLETION_V2_SCOPE].includes(codeScope),'code_scope');
+  need([SCOPE,COMPLETION_SCOPE,COMPLETION_V2_SCOPE,USABILITY_SCOPE].includes(codeScope),'code_scope');
   need(path.isAbsolute(outputFile),'output');
   try{await fs.access(outputFile);need(false,'report_exists');}catch(error){if(error?.code!=='ENOENT')throw error;}
   const raw=await fs.readFile(oraclePath),binding=japanReleaseBinding(JSON.parse(raw),releaseSha,nonce);
@@ -262,11 +340,20 @@ export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,out
    plain.push(response.data);
   }
   Object.assign(report.checks.freshness,verifyJapanWarmPage(...plain));report.japanFreshnessPassed=true;
+  if(usability){
+   usabilityPages.push(plain[0]);
+   stage='brand_directory_api';report.explicitJapanApiRequests++;
+   const directory=await readJson(context,BRAND_DIRECTORY);
+   brandDirectory=verifyJapanBrandDirectory(directory.data,directory.status);
+   report.checks.brandDirectory={makes:brandDirectory.makes.length,complete:true,observedAt:brandDirectory.observedAt,
+    durationMs:directory.durationMs};
+  }
   stage='power_api';report.explicitJapanApiRequests++;
   const power=await readJson(context,POWER);
   report.checks.responses.push({stage,...japanResponseObservation(power.data,power.status),durationMs:power.durationMs});
   report.checks.power={...verifyJapanPage(power.data,power.status),...verifyJapanPowerPage(power.data),durationMs:power.durationMs};
   report.japanPowerApiPassed=true;
+  if(usability)usabilityPages.push(power.data);
   stage='power_ui';const page=await context.newPage();currentPage=page;
   let pageErrors=0;page.on('pageerror',()=>{pageErrors++;});
   const pageQuery=new URLSearchParams(QUERY);pageQuery.delete('market');pageQuery.set('powerTo','160');
@@ -288,6 +375,20 @@ export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,out
    }
   }
   need(await main.getByText('Показаны сохранённые автомобили. Полный список пока недоступен.',{exact:true}).count()===0,'ui_stale');
+  if(usability){
+   stage='brand_directory_rail';
+   const rail=main.locator('[data-japan-brand-directory="rail"][data-status="ready"][data-directory-complete="true"]');
+   await rail.waitFor({state:'visible',timeout:60_000});
+   const names=await rail.locator('a[title^="Автомобили "]').evaluateAll(nodes=>nodes.map(node=>(node.getAttribute('title')||'').slice('Автомобили '.length,-' под заказ'.length)).sort((a,b)=>a.localeCompare(b,'ru')));
+   need(JSON.stringify(names)===JSON.stringify(brandDirectory.makes),'brand_rail_names');
+   need(await main.getByText('Марка не найдена',{exact:true}).count()===0,'brand_rail_false_empty');
+   const railBox=await rail.boundingBox(),firstCard=await cards.first().boundingBox();
+   need(railBox&&firstCard&&railBox.y+railBox.height<=firstCard.y,'brand_rail_layout');
+   report.checks.brandDirectory.railMakes=names.length;report.checks.brandDirectory.aboveCars=true;
+   need(await main.locator('[data-japan-power-summary-page]').count()===0
+    &&!/(?:Отбор не подтверждает право|Мощность по данным поставщика:\s*\d)/u.test(await main.innerText()),'catalog_warning');
+   quietChecks.push({path:'/cars/japan',view:'grid',warningAbsent:true});
+  }
   report.checks.ui={cards:await cards.count(),supplierVisible,unknownVisible,durationMs:Date.now()-start,city:CITY,
    powerTo:160,pageErrors};
   await capture(page,'japan-power-desktop');
@@ -377,6 +478,18 @@ export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,out
    const cityButton=dialog.locator('.ac-catalog-city-filter button').first();
    await cityButton.waitFor({state:'visible',timeout:15_000});
    need((await cityButton.innerText()).trim()===CITY&&new URL(view.url()).searchParams.get('city')===CITY,'city_hydration');
+   if(usability){
+    stage='brand_directory_filter';
+    const trigger=dialog.getByRole('button',{name:'Выбрать марки автомобилей',exact:true});
+    await trigger.click();
+    const directory=dialog.locator('[data-japan-brand-directory="filter"][data-status="ready"][data-directory-complete="true"]');
+    await directory.waitFor({state:'visible',timeout:60_000});
+    const names=await directory.locator('button[data-facet-value]').evaluateAll(nodes=>nodes.map(node=>node.getAttribute('data-facet-value')).filter(Boolean).sort((a,b)=>a.localeCompare(b,'ru')));
+    need(JSON.stringify(names)===JSON.stringify(brandDirectory.makes),'brand_filter_names');
+    report.checks.brandDirectory.filterMakes=names.length;report.checks.brandDirectory.sameCompleteDirectory=true;
+    report.japanBrandDirectoryPassed=true;
+    await capture(view,'japan-complete-brand-filter-mobile');await trigger.click();
+   }
    stage='completion_petrol_power_toggle';
    const powerToggle=dialog.locator('input[type="checkbox"][name="powerTo"][value="160"]');
    need(!(await powerToggle.isChecked()),'petrol_initial_toggle');
@@ -393,6 +506,8 @@ export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,out
    let filtered=await readJson(context,PETROL_POWER);
    report.checks.responses.push({stage,...japanResponseObservation(filtered.data,filtered.status),durationMs:filtered.durationMs});
    const aggregate={...verifyJapanPage(filtered.data,filtered.status),...verifyJapanPowerPage(filtered.data)};
+   const petrolFirst=filtered.data;
+   if(usability)usabilityPages.push(petrolFirst);
    need(filtered.data.items.every(row=>row.fuel==='petrol'),'petrol_api_fuel');
    const visibleCards=catalog.locator(CARD);
    await visibleCards.nth(filtered.data.items.length-1).waitFor({state:'visible',timeout:60_000});
@@ -414,7 +529,7 @@ export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,out
    await next.click();await view.waitForURL(url=>url.searchParams.get('page')==='2',{timeout:60_000});
    const nextUrl=new URL(view.url());
    need(japanPetrolPowerUrl(nextUrl.href,2),'petrol_page_two_query');
-   report.explicitJapanApiRequests++;filtered=await readJson(context,PETROL_POWER_NEXT);
+   report.explicitJapanApiRequests++;filtered=await readJson(context,usability?japanPetrolPowerPageApi(nextUrl.href):PETROL_POWER_NEXT);
    report.checks.responses.push({stage,...japanResponseObservation(filtered.data,filtered.status),durationMs:filtered.durationMs});
    const nextAggregate={...verifyJapanPage(filtered.data,filtered.status),...verifyJapanPowerPage(filtered.data,2)};
    need(filtered.data.items.every(row=>row.fuel==='petrol'&&!firstIds.has(row.id)),'petrol_page_two_rows');
@@ -425,6 +540,19 @@ export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,out
    need(await visibleCards.count()===filtered.data.items.length,'petrol_page_two_count');
    report.checks.petrolPowerUi.pageTwo={...nextAggregate,cityPreserved:true,distinctRows:true,navigatedThroughLink:true};
    report.japanPetrolPowerUiPassed=true;
+   if(usability){
+    usabilityPages.push(filtered.data);
+    report.checks.fullPages=usabilityPages.map(verifyJapanFullPage);
+    report.japanFullPagesPassed=true;
+    report.checks.knownPowerOrder=verifyJapanKnownPowerOrder([petrolFirst,filtered.data]);
+    report.japanKnownPowerOrderPassed=true;
+    report.checks.vehiclePolicy=verifyJapanVisibleVehiclePolicy(usabilityPages);
+    report.japanVehiclePolicyPassed=true;
+    need(await catalog.locator('[data-japan-power-summary-page]').count()===0
+     &&!/(?:Отбор не подтверждает право|Мощность по данным поставщика:\s*\d)/u.test(await catalog.innerText()),'catalog_warning');
+    quietChecks.push({path:'/cars/japan',view:'mobile-page-two',warningAbsent:true});
+    report.checks.quietCatalog={checks:quietChecks};report.japanQuietCatalogPassed=true;
+   }
    await visibleCards.first().scrollIntoViewIfNeeded();await capture(view,'japan-petrol-power-page-two-mobile');
    const row=filtered.data.items.find(item=>item.japanSupplierPower?.combustionPreviewEligible===true
     &&!positive(item.powerHp)&&!positive(item.powerKw)&&!item.japanPowerUnknown
@@ -487,7 +615,8 @@ export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,out
   }
   stage='release_after';await health();
   report.passed=['japanFreshnessPassed','japanPowerApiPassed','japanUiPassed','japanVisibilityPassed','readOnlyBrowserFence',
-   ...(completion?['japanPetrolPowerUiPassed','japanDetailPowerInputPassed','japanDeliveredCalculationPassed']:[])].every(key=>report[key]===true);
+   ...(completion?['japanPetrolPowerUiPassed','japanDetailPowerInputPassed','japanDeliveredCalculationPassed']:[]),
+   ...(usability?USABILITY_GATES:[])].every(key=>report[key]===true);
  }catch(error){
   report.error={stage,code:/^japan_browser_[a-z_]+$/.test(error?.message||'')?error.message:'japan_browser_check_failed',timeout:error?.name==='TimeoutError'};
   if(currentPage&&/^[a-f0-9]{32}$/.test(nonce||''))await capture(currentPage,'failure').catch(()=>{});

@@ -103,6 +103,45 @@ export const JAPAN_COMPLETION_V2_CODE_PATHS = Object.freeze([...JAPAN_COMPLETION
   'tests/ajes-recovery-isolation.test.ts',
   'tests/ajes-list-admission.test.ts',
 ]);
+export const JAPAN_USABILITY_RETAINED_RUNTIME = '077cbb17626ab0c64e7f06db055fef9252ad21c0';
+export const JAPAN_USABILITY_CODE_PATHS = Object.freeze([
+  "apps/web/app/api/catalog/brand-counts/route.ts",
+  "apps/web/components/catalog/AjesCatalog.tsx",
+  "apps/web/components/catalog/AjesRail.tsx",
+  "apps/web/components/catalog/BrandLogoRail.tsx",
+  "apps/web/components/catalog/CatalogBrandMultiSelect.tsx",
+  "apps/web/components/catalog/CatalogLoadMore.tsx",
+  "apps/web/components/catalog/catalog-load-more-action.tsx",
+  "apps/web/components/catalog/page-request-error.ts",
+  "apps/web/components/home/HomeJapanFilteredRail.tsx",
+  "apps/web/lib/catalog/ajes-catalog.ts",
+  "apps/web/lib/catalog/ajes-client.ts",
+  "apps/web/lib/catalog/ajes-error-response.ts",
+  "apps/web/lib/catalog/ajes-offer.ts",
+  "apps/web/lib/catalog/ajes-power-page.ts",
+  "apps/web/lib/catalog/ajes-public.ts",
+  "apps/web/lib/catalog/ajes-query-cache.ts",
+  "apps/web/lib/catalog/ajes-query.ts",
+  "apps/web/lib/catalog/ajes-runtime.ts",
+  "apps/web/lib/catalog/ajes-saved-search.ts",
+  "apps/web/lib/catalog/japan-brand-directory.ts",
+  "apps/web/lib/catalog/japan-power-query.ts",
+  "apps/web/lib/catalog/japan-source-power.ts",
+  "apps/web/lib/catalog/japan-vehicle-policy.ts",
+  "tests/ajes-catalog-progressive.test.ts",
+  "tests/ajes-count-progressive.test.ts",
+  "tests/ajes-model-recovery.test.ts",
+  "tests/ajes-power-page.test.ts",
+  "tests/ajes-ready-metadata.test.ts",
+  "tests/browser/japan-brand-directory-fixture.tsx",
+  "tests/browser/japan-brand-directory.mjs",
+  "tests/catalog-page-request.test.ts",
+  "tests/japan-brand-directory.test.ts",
+  "tests/japan-power-query.test.ts",
+  "tests/japan-rail-visibility.test.ts",
+  "tests/japan-source-power.test.ts",
+  "tests/japan-vehicle-admission.test.ts",
+]);
 const need = (value, code) => { if (!value) throw Error('china_photo_scope_' + code); };
 
 export function checkedCatalogCodeScope(plan) {
@@ -111,12 +150,14 @@ export function checkedCatalogCodeScope(plan) {
     : scope === 'catalog-photo-japan-power-v1' ? CHINA_PHOTO_JAPAN_CODE_PATHS
     : scope === 'catalog-japan-recovery-v1' ? JAPAN_RECOVERY_CODE_PATHS
     : scope === 'catalog-japan-completion-v1' ? JAPAN_COMPLETION_CODE_PATHS
-    : scope === 'catalog-japan-completion-v2' ? JAPAN_COMPLETION_V2_CODE_PATHS : null;
+    : scope === 'catalog-japan-completion-v2' ? JAPAN_COMPLETION_V2_CODE_PATHS
+    : scope === 'catalog-japan-usability-v1' ? JAPAN_USABILITY_CODE_PATHS : null;
   need(paths && Array.isArray(plan.runtimeFiles) && plan.runtimeFiles.length === paths.length
     && paths.every(name => plan.runtimeFiles.includes(name)), 'files');
   need(scope !== 'catalog-japan-recovery-v1' || plan.retainedRuntime === JAPAN_RECOVERY_RETAINED_RUNTIME, 'retained_runtime');
   need(scope !== 'catalog-japan-completion-v1' || plan.retainedRuntime === JAPAN_COMPLETION_RETAINED_RUNTIME, 'retained_runtime');
   need(scope !== 'catalog-japan-completion-v2' || plan.retainedRuntime === JAPAN_COMPLETION_V2_RETAINED_RUNTIME, 'retained_runtime');
+  need(scope !== 'catalog-japan-usability-v1' || plan.retainedRuntime === JAPAN_USABILITY_RETAINED_RUNTIME, 'retained_runtime');
   return scope;
 }
 

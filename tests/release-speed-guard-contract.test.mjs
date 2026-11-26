@@ -209,13 +209,14 @@ test('scope CI retains China and Japan native assertions while both old photo pr
  assert.ok(workflow.indexOf(checks)<workflow.indexOf('cd "$RUNNER_TEMP/china-serving-runtime-$PHOTO_SHA"'));
  const helper=fs.readFileSync(path.join(root,'scripts/catalog-next/check-photo-runtime-tests.mjs'),'utf8');
  const runner=fs.readFileSync(path.join(root,'scripts/catalog-next/check-runtime-tests.mjs'),'utf8');
- assert.match(helper,/need\(\[PHOTO_SCOPE, COMBINED_SCOPE, JAPAN_SCOPE, JAPAN_COMPLETION_SCOPE, JAPAN_COMPLETION_V2_SCOPE\]\.includes\(plan\?\.codeScope\), 'scope'\)/);
+ assert.match(helper,/need\(\[PHOTO_SCOPE, COMBINED_SCOPE, JAPAN_SCOPE, JAPAN_COMPLETION_SCOPE, JAPAN_COMPLETION_V2_SCOPE, JAPAN_USABILITY_SCOPE\]\.includes\(plan\?\.codeScope\), 'scope'\)/);
  assert.match(helper,/checkedCatalogCodeScope\(plan\)/);
  assert.match(helper,/verifyRuntimeTestsCheckout\(runtimeRoot, plan\)/);
  assert.match(helper,/codeScope === PHOTO_SCOPE \? CHINA_RUNTIME_TEST_FILES : power/);
  assert.match(helper,/codeScope === JAPAN_SCOPE \? JAPAN_RECOVERY_TEST_FILES/);
  assert.match(helper,/codeScope === JAPAN_COMPLETION_SCOPE \? JAPAN_COMPLETION_TEST_FILES/);
  assert.match(helper,/codeScope === JAPAN_COMPLETION_V2_SCOPE \? JAPAN_COMPLETION_V2_TEST_FILES/);
+ assert.match(helper,/codeScope === JAPAN_USABILITY_SCOPE \? JAPAN_USABILITY_TEST_FILES/);
  assert.match(helper,/'tests\/selection-city-persistence\.test\.ts'/);
  assert.match(helper,/JAPAN_RECOVERY_CODE_PATHS\.filter\(name => name\.startsWith\('tests\/'\)\)/);
  assert.match(helper,/power\.length > 0 && required\.every\(name => power\.includes\(name\)\)/);
@@ -250,9 +251,13 @@ test('scope CI retains China and Japan native assertions while both old photo pr
  assert.match(nativeStep,/CATALOG_CODE_SCOPE: \$\{\{ steps\.photo_scope\.outputs\.scope \}\}/);
  assert.ok(nativeStep.includes('fi\n          '+checks),'native assertions execute outside the photo-only fixture branch');
  assert.match(steps.find(step=>step.includes('npm install --prefix')),/if: steps\.photo_scope\.outputs\.scope == 'catalog-photo-recovery-v1' \|\| steps\.photo_scope\.outputs\.scope == 'catalog-photo-japan-power-v1' \|\| steps\.photo_scope\.outputs\.scope == 'catalog-japan-completion-v1' \|\| steps\.photo_scope\.outputs\.scope == 'catalog-japan-completion-v2'/);
- assert.match(nativeStep,/if \[\[ "\$CATALOG_CODE_SCOPE" == 'catalog-japan-completion-v1' \|\| "\$CATALOG_CODE_SCOPE" == 'catalog-japan-completion-v2' \]\]; then\s+JAPAN_CITY_REPORT="\$RUNNER_TEMP\/japan-catalog-city-report\.json" node tests\/browser\/japan-catalog-city\.mjs\s+fi/);
+ assert.match(nativeStep,/if \[\[ "\$CATALOG_CODE_SCOPE" == 'catalog-japan-completion-v1' \|\| "\$CATALOG_CODE_SCOPE" == 'catalog-japan-completion-v2' \|\| "\$CATALOG_CODE_SCOPE" == 'catalog-japan-usability-v1' \]\]; then\s+JAPAN_CITY_REPORT="\$RUNNER_TEMP\/japan-catalog-city-report\.json" node tests\/browser\/japan-catalog-city\.mjs\s+fi/);
  const cityArtifact=steps.find(step=>step.includes('name: japan-catalog-city-fixture'));
- assert.match(cityArtifact,/if: always\(\) && \(steps\.photo_scope\.outputs\.scope == 'catalog-japan-completion-v1' \|\| steps\.photo_scope\.outputs\.scope == 'catalog-japan-completion-v2'\)/);
+ assert.match(cityArtifact,/if: always\(\) && \(steps\.photo_scope\.outputs\.scope == 'catalog-japan-completion-v1' \|\| steps\.photo_scope\.outputs\.scope == 'catalog-japan-completion-v2' \|\| steps\.photo_scope\.outputs\.scope == 'catalog-japan-usability-v1'\)/);
+ assert.match(nativeStep,/if \[\[ "\$CATALOG_CODE_SCOPE" == 'catalog-japan-usability-v1' \]\]; then\s+JAPAN_BRAND_REPORT="\$RUNNER_TEMP\/japan-brand-directory-report\.json" node tests\/browser\/japan-brand-directory\.mjs\s+fi/);
+ const brandArtifact=steps.find(step=>step.includes('name: japan-brand-directory-fixture'));
+ assert.match(brandArtifact,/if: always\(\) && steps\.photo_scope\.outputs\.scope == 'catalog-japan-usability-v1'/);
+ assert.match(brandArtifact,/japan-brand-directory-report\.json/);
  assert.ok(workflow.indexOf('node tests/browser/photo-japan-recovery-clock.mjs')<workflow.indexOf(checks));
  assert.ok(workflow.indexOf('npm run typecheck')>workflow.indexOf(checks));
  assert.ok(workflow.indexOf('node --import tsx tests/browser/catalog-photo-recovery.mjs')>workflow.indexOf('npm run typecheck'));
@@ -266,9 +271,11 @@ test('Japan recovery and its exact successor build fresh source and preserve sep
  assert.match(build,/catalog-japan-recovery-v1/);
  assert.match(build,/catalog-japan-completion-v1/);
  assert.match(build,/catalog-japan-completion-v2/);
+ assert.match(build,/catalog-japan-usability-v1/);
  assert.doesNotMatch(restoration,/catalog-japan-recovery-v1/);
  assert.doesNotMatch(restoration,/catalog-japan-completion-v1/);
  assert.doesNotMatch(restoration,/catalog-japan-completion-v2/);
+ assert.doesNotMatch(restoration,/catalog-japan-usability-v1/);
  const upload=steps.find(step=>step.includes('actions/upload-artifact'));
  assert.match(upload,/if: always\(\)/);
  for(const filename of ['catalog-next-japan-browser-report.json','artifacts/catalog-japan-live/**',
@@ -276,7 +283,7 @@ test('Japan recovery and its exact successor build fresh source and preserve sep
   'catalog-next-photo-japan-browser-report.json','artifacts/catalog-photo-japan-live/**'])
   assert.ok(upload.includes(filename),'preserved independent scope artifact: '+filename);
  const adapter=fs.readFileSync(path.join(root,'scripts/catalog-next/daily-release.mjs'),'utf8');
- const japan=adapter.indexOf("if (codeUpdate && ['catalog-japan-recovery-v1', 'catalog-japan-completion-v1', 'catalog-japan-completion-v2'].includes(plan.codeScope))");
+ const japan=adapter.indexOf("if (codeUpdate && ['catalog-japan-recovery-v1', 'catalog-japan-completion-v1', 'catalog-japan-completion-v2', 'catalog-japan-usability-v1'].includes(plan.codeScope))");
  const gate=adapter.indexOf('scripts/catalog-next/japan-browser-acceptance.mjs',japan);
  const evidence=adapter.indexOf("session.call('browser_evidence'",gate);
  const accept=adapter.indexOf("session.call('accept'",evidence);
@@ -293,13 +300,13 @@ test('Japan recovery and its exact successor build fresh source and preserve sep
  assert.match(branch,/'japanVisibilityPassed', 'readOnlyBrowserFence'/);
  assert.match(branch,/\['productionMutations', 'directSupplierApiRequests'\]\.every\(key => japan\[key\] === 0\)/);
  assert.match(branch,/CATALOG_CODE_SCOPE: plan\.codeScope/);
- assert.match(branch,/\['catalog-japan-completion-v1', 'catalog-japan-completion-v2'\]\.includes\(plan\.codeScope\)/);
+ assert.match(branch,/\['catalog-japan-completion-v1', 'catalog-japan-completion-v2', 'catalog-japan-usability-v1'\]\.includes\(plan\.codeScope\)/);
  for(const field of ['japanPetrolPowerUiPassed','japanDetailPowerInputPassed','japanDeliveredCalculationPassed','japanPreviewCalculationRequests'])
   assert.ok(branch.includes(field),'completion requires '+field);
  assert.doesNotMatch(branch,/photo-japan-browser-acceptance|--photo-only/);
  const host=fs.readFileSync(path.join(root,'scripts/catalog-next/release-host.py'),'utf8');
- assert.match(host,/code_update\(self\.plan\) and code_scope\(self\.plan\) in \(JAPAN_CODE_SCOPE, JAPAN_COMPLETION_CODE_SCOPE, JAPAN_COMPLETION_V2_CODE_SCOPE\)/);
- assert.match(host,/if code_scope\(self\.plan\) in \(JAPAN_COMPLETION_CODE_SCOPE, JAPAN_COMPLETION_V2_CODE_SCOPE\):/);
+ assert.match(host,/code_update\(self\.plan\) and code_scope\(self\.plan\) in \(JAPAN_CODE_SCOPE, JAPAN_COMPLETION_CODE_SCOPE, JAPAN_COMPLETION_V2_CODE_SCOPE, JAPAN_USABILITY_CODE_SCOPE\)/);
+ assert.match(host,/if code_scope\(self\.plan\) in \(JAPAN_COMPLETION_CODE_SCOPE, JAPAN_COMPLETION_V2_CODE_SCOPE, JAPAN_USABILITY_CODE_SCOPE\):/);
  assert.match(host,/sha\(japan_raw\) == details\['japanReportSha256'\]/);
  assert.match(host,/japan\.get\('kind'\) == 'catalog-japan-browser-v1'/);
  assert.match(host,/'japanUiPassed', 'japanVisibilityPassed', 'readOnlyBrowserFence'/);
@@ -307,8 +314,15 @@ test('Japan recovery and its exact successor build fresh source and preserve sep
  assert.match(host,/1 <= japan\['japanPreviewCalculationRequests'\] <= 2/);
  const browser=fs.readFileSync(path.join(root,'scripts/catalog-next/japan-browser-acceptance.mjs'),'utf8');
  assert.match(browser,/const COMPLETION_V2_SCOPE='catalog-japan-completion-v2'/);
- assert.match(browser,/const completion=\[COMPLETION_SCOPE,COMPLETION_V2_SCOPE\]\.includes\(codeScope\)/);
- assert.match(browser,/need\(\[SCOPE,COMPLETION_SCOPE,COMPLETION_V2_SCOPE\]\.includes\(codeScope\),'code_scope'\)/);
+ assert.match(browser,/const completion=\[COMPLETION_SCOPE,COMPLETION_V2_SCOPE,USABILITY_SCOPE\]\.includes\(codeScope\)/);
+ assert.match(browser,/need\(\[SCOPE,COMPLETION_SCOPE,COMPLETION_V2_SCOPE,USABILITY_SCOPE\]\.includes\(codeScope\),'code_scope'\)/);
+ for(const field of ['japanBrandDirectoryPassed','japanFullPagesPassed','japanKnownPowerOrderPassed','japanVehiclePolicyPassed','japanQuietCatalogPassed']){
+  assert.ok(branch.includes(field),'adapter requires '+field);assert.ok(host.includes(field),'host requires '+field);
+  assert.ok(browser.includes(field),'browser records '+field);
+ }
+ assert.match(branch,/plan\.codeScope === 'catalog-japan-usability-v1'/);
+ assert.match(host,/code_scope\(self\.plan\) == JAPAN_USABILITY_CODE_SCOPE/);
+ assert.match(browser,/usability\?japanPetrolPowerPageApi\(nextUrl\.href\):PETROL_POWER_NEXT/);
 });
 test('the pinned AJ removal preserves frozen gates and requires its exact scope and nonce handshake',()=>{
  const [workflow,entry]=[...customActivators][0],filename=path.join(workflowDirectory,workflow);

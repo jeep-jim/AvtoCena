@@ -3,7 +3,7 @@ import path from 'node:path';
 import {execFileSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
 import {checkedCatalogCodeScope, CHINA_PHOTO_JAPAN_CODE_PATHS, JAPAN_RECOVERY_CODE_PATHS,
-  JAPAN_COMPLETION_CODE_PATHS, JAPAN_COMPLETION_V2_CODE_PATHS} from './photo-code-scope.mjs';
+  JAPAN_COMPLETION_CODE_PATHS, JAPAN_COMPLETION_V2_CODE_PATHS, JAPAN_USABILITY_CODE_PATHS} from './photo-code-scope.mjs';
 import {checkChinaRuntimeTests, CHINA_RUNTIME_TEST_FILES, verifyRuntimeTestsCheckout, runNativeTests}
   from './check-runtime-tests.mjs';
 
@@ -12,6 +12,7 @@ const PHOTO_SCOPE = 'catalog-photo-recovery-v1', COMBINED_SCOPE = 'catalog-photo
 const JAPAN_SCOPE = 'catalog-japan-recovery-v1';
 const JAPAN_COMPLETION_SCOPE = 'catalog-japan-completion-v1';
 const JAPAN_COMPLETION_V2_SCOPE = 'catalog-japan-completion-v2';
+const JAPAN_USABILITY_SCOPE = 'catalog-japan-usability-v1';
 const need = (condition, code) => { if (!condition) throw Error('china_photo_runtime_tests_' + code); };
 // This is the previous photo CI common suite. AJ and PW globs below expand
 // against the exact source tree, and no caller can replace the selected files.
@@ -77,6 +78,11 @@ export const JAPAN_COMPLETION_V2_TEST_FILES = Object.freeze([...new Set([
   ...JAPAN_COMPLETION_V2_CODE_PATHS.filter(name => /^tests\/[^/]+\.test\.ts$/.test(name)),
 ])].sort());
 
+export const JAPAN_USABILITY_TEST_FILES = Object.freeze([...new Set([
+  ...JAPAN_COMPLETION_V2_TEST_FILES,
+  ...JAPAN_USABILITY_CODE_PATHS.filter(name => /^tests\/[^/]+\.test\.ts$/.test(name)),
+])].sort());
+
 async function selectedFiles(runtimeRoot, codeScope) {
   let tracked;
   try {
@@ -93,7 +99,8 @@ async function selectedFiles(runtimeRoot, codeScope) {
     need(power.length > 0 && required.every(name => power.includes(name)), 'power_tests_missing');
   }
   const files = [...new Set([...PHOTO_COMMON_TEST_FILES, ...aj,
-    ...(codeScope === JAPAN_COMPLETION_V2_SCOPE ? JAPAN_COMPLETION_V2_TEST_FILES
+    ...(codeScope === JAPAN_USABILITY_SCOPE ? JAPAN_USABILITY_TEST_FILES
+      : codeScope === JAPAN_COMPLETION_V2_SCOPE ? JAPAN_COMPLETION_V2_TEST_FILES
       : codeScope === JAPAN_COMPLETION_SCOPE ? JAPAN_COMPLETION_TEST_FILES
       : codeScope === JAPAN_SCOPE ? JAPAN_RECOVERY_TEST_FILES
       : codeScope === PHOTO_SCOPE ? CHINA_RUNTIME_TEST_FILES : power)])].sort();
@@ -112,7 +119,7 @@ async function selectedFiles(runtimeRoot, codeScope) {
  * the exact offline runner, source identity checks, and a nonzero-exit gate. */
 export async function checkPhotoRuntimeTests({runtimeRoot, plan, patchPath,
   runTests = runNativeTests, onProgress = () => {}}) {
-  need([PHOTO_SCOPE, COMBINED_SCOPE, JAPAN_SCOPE, JAPAN_COMPLETION_SCOPE, JAPAN_COMPLETION_V2_SCOPE].includes(plan?.codeScope), 'scope');
+  need([PHOTO_SCOPE, COMBINED_SCOPE, JAPAN_SCOPE, JAPAN_COMPLETION_SCOPE, JAPAN_COMPLETION_V2_SCOPE, JAPAN_USABILITY_SCOPE].includes(plan?.codeScope), 'scope');
   const codeScope = checkedCatalogCodeScope(plan);
   need(typeof runTests === 'function' && typeof onProgress === 'function', 'callbacks');
   runtimeRoot = await fs.realpath(runtimeRoot);

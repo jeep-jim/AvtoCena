@@ -45,6 +45,8 @@ JAPAN_CODE_SCOPE = 'catalog-japan-recovery-v1'
 JAPAN_COMPLETION_CODE_SCOPE = 'catalog-japan-completion-v1'
 JAPAN_COMPLETION_RETAINED = '36c7ea726e7f070d10dbc65afc6538f13c0c1a24'
 JAPAN_COMPLETION_V2_CODE_SCOPE = 'catalog-japan-completion-v2'
+JAPAN_USABILITY_CODE_SCOPE = 'catalog-japan-usability-v1'
+JAPAN_USABILITY_RETAINED = '077cbb17626ab0c64e7f06db055fef9252ad21c0'
 PHOTO_JAPAN_CODE_FILES = PHOTO_CODE_FILES | {
     'apps/web/app/(public)/api/catalog/search/route.ts',
     'apps/web/app/(public)/cars/offer/[id]/page.tsx',
@@ -131,9 +133,48 @@ JAPAN_COMPLETION_V2_CODE_FILES = JAPAN_COMPLETION_CODE_FILES | {
     'tests/ajes-recovery-isolation.test.ts',
     'tests/ajes-list-admission.test.ts',
 }
+JAPAN_USABILITY_CODE_FILES = {
+  "apps/web/app/api/catalog/brand-counts/route.ts",
+  "apps/web/components/catalog/AjesCatalog.tsx",
+  "apps/web/components/catalog/AjesRail.tsx",
+  "apps/web/components/catalog/BrandLogoRail.tsx",
+  "apps/web/components/catalog/CatalogBrandMultiSelect.tsx",
+  "apps/web/components/catalog/CatalogLoadMore.tsx",
+  "apps/web/components/catalog/catalog-load-more-action.tsx",
+  "apps/web/components/catalog/page-request-error.ts",
+  "apps/web/components/home/HomeJapanFilteredRail.tsx",
+  "apps/web/lib/catalog/ajes-catalog.ts",
+  "apps/web/lib/catalog/ajes-client.ts",
+  "apps/web/lib/catalog/ajes-error-response.ts",
+  "apps/web/lib/catalog/ajes-offer.ts",
+  "apps/web/lib/catalog/ajes-power-page.ts",
+  "apps/web/lib/catalog/ajes-public.ts",
+  "apps/web/lib/catalog/ajes-query-cache.ts",
+  "apps/web/lib/catalog/ajes-query.ts",
+  "apps/web/lib/catalog/ajes-runtime.ts",
+  "apps/web/lib/catalog/ajes-saved-search.ts",
+  "apps/web/lib/catalog/japan-brand-directory.ts",
+  "apps/web/lib/catalog/japan-power-query.ts",
+  "apps/web/lib/catalog/japan-source-power.ts",
+  "apps/web/lib/catalog/japan-vehicle-policy.ts",
+  "tests/ajes-catalog-progressive.test.ts",
+  "tests/ajes-count-progressive.test.ts",
+  "tests/ajes-model-recovery.test.ts",
+  "tests/ajes-power-page.test.ts",
+  "tests/ajes-ready-metadata.test.ts",
+  "tests/browser/japan-brand-directory-fixture.tsx",
+  "tests/browser/japan-brand-directory.mjs",
+  "tests/catalog-page-request.test.ts",
+  "tests/japan-brand-directory.test.ts",
+  "tests/japan-power-query.test.ts",
+  "tests/japan-rail-visibility.test.ts",
+  "tests/japan-source-power.test.ts",
+  "tests/japan-vehicle-admission.test.ts",
+}
 CODE_SCOPE_FILES = {PHOTO_CODE_SCOPE: PHOTO_CODE_FILES, PHOTO_JAPAN_CODE_SCOPE: PHOTO_JAPAN_CODE_FILES,
                     JAPAN_CODE_SCOPE: JAPAN_CODE_FILES, JAPAN_COMPLETION_CODE_SCOPE: JAPAN_COMPLETION_CODE_FILES,
-                    JAPAN_COMPLETION_V2_CODE_SCOPE: JAPAN_COMPLETION_V2_CODE_FILES}
+                    JAPAN_COMPLETION_V2_CODE_SCOPE: JAPAN_COMPLETION_V2_CODE_FILES,
+                    JAPAN_USABILITY_CODE_SCOPE: JAPAN_USABILITY_CODE_FILES}
 GENERATION_MOUNT = '/run/avtocena-china-generation'
 HOST_BULK_FILES = {'details.sqlite', 'query.sqlite', 'DISPOSITIONS.ndjson', 'FILTER_SEMANTICS.json',
                    'FX_RECEIPT.json', 'RECONCILIATION.json', 'image.tar'}
@@ -592,6 +633,8 @@ def validate_plan(plan):
             need(scope not in (JAPAN_COMPLETION_CODE_SCOPE, JAPAN_COMPLETION_V2_CODE_SCOPE)
                  or plan.get('retainedRuntime') == JAPAN_COMPLETION_RETAINED,
                  'code_completion_predecessor')
+            need(scope != JAPAN_USABILITY_CODE_SCOPE or plan.get('retainedRuntime') == JAPAN_USABILITY_RETAINED,
+                 'code_usability_predecessor')
             need(all(isinstance(plan.get(key), str) and re.fullmatch(r'[a-f0-9]{64}', plan[key])
                      for key in ('codeSourcePlanSha256', 'codeSourceOracleSha256')), 'code_source_binding')
     else:
@@ -2822,7 +2865,7 @@ class Host:
                  all(photo.get(key) is True for key in ('passed', 'chinaPhotoPassed', 'japanFreshnessPassed',
                                                        'japanPowerApiPassed', 'japanUiPassed')),
                  'photo_japan_browser_binding')
-        if code_update(self.plan) and code_scope(self.plan) in (JAPAN_CODE_SCOPE, JAPAN_COMPLETION_CODE_SCOPE, JAPAN_COMPLETION_V2_CODE_SCOPE):
+        if code_update(self.plan) and code_scope(self.plan) in (JAPAN_CODE_SCOPE, JAPAN_COMPLETION_CODE_SCOPE, JAPAN_COMPLETION_V2_CODE_SCOPE, JAPAN_USABILITY_CODE_SCOPE):
             # This session's nonce and the live browser deadline above bind
             # freshness without assuming the runner and host clocks are equal.
             need(isinstance(details.get('japanReportBase64'), str) and
@@ -2840,11 +2883,14 @@ class Host:
                                                        'japanUiPassed', 'japanVisibilityPassed', 'readOnlyBrowserFence')) and
                  all(type(japan.get(key)) is int and japan[key] == 0 for key in
                      ('productionMutations', 'directSupplierApiRequests')), 'japan_browser_binding')
-            if code_scope(self.plan) in (JAPAN_COMPLETION_CODE_SCOPE, JAPAN_COMPLETION_V2_CODE_SCOPE):
+            if code_scope(self.plan) in (JAPAN_COMPLETION_CODE_SCOPE, JAPAN_COMPLETION_V2_CODE_SCOPE, JAPAN_USABILITY_CODE_SCOPE):
                 need(all(japan.get(key) is True for key in ('japanPetrolPowerUiPassed', 'japanDetailPowerInputPassed',
                                                           'japanDeliveredCalculationPassed')) and
                      type(japan.get('japanPreviewCalculationRequests')) is int and
                      1 <= japan['japanPreviewCalculationRequests'] <= 2, 'japan_browser_binding')
+            if code_scope(self.plan) == JAPAN_USABILITY_CODE_SCOPE:
+                need(all(japan.get(key) is True for key in ('japanBrandDirectoryPassed', 'japanFullPagesPassed',
+                     'japanKnownPowerOrderPassed', 'japanVehiclePolicyPassed', 'japanQuietCatalogPassed')), 'japan_browser_binding')
         for name, raw in [('BROWSER_SPEED.json', speed_raw), ('BROWSER_DETAILS.json', details_raw)]:
             new_file(self.directory / name, raw)
             need(file_sha(self.directory / name) == sha(raw), 'browser_evidence_readback')

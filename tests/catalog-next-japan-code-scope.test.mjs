@@ -4,7 +4,8 @@ import {createHash} from 'node:crypto';
 import {checkedCatalogCodeScope, CHINA_PHOTO_CODE_PATHS, CHINA_PHOTO_JAPAN_CODE_PATHS,
   JAPAN_RECOVERY_CODE_PATHS, JAPAN_RECOVERY_RETAINED_RUNTIME,
   JAPAN_COMPLETION_CODE_PATHS, JAPAN_COMPLETION_RETAINED_RUNTIME,
-  JAPAN_COMPLETION_V2_CODE_PATHS, JAPAN_COMPLETION_V2_RETAINED_RUNTIME} from '../scripts/catalog-next/photo-code-scope.mjs';
+  JAPAN_COMPLETION_V2_CODE_PATHS, JAPAN_COMPLETION_V2_RETAINED_RUNTIME,
+  JAPAN_USABILITY_CODE_PATHS, JAPAN_USABILITY_RETAINED_RUNTIME} from '../scripts/catalog-next/photo-code-scope.mjs';
 
 const digest = files => createHash('sha256').update(JSON.stringify(files)).digest('hex');
 const japanPlan = () => ({codeScope: 'catalog-japan-recovery-v1',
@@ -115,4 +116,30 @@ test('completion v2 cannot adopt the rejected runtime or relabel either exact co
   for(const codeScope of ['catalog-japan-completion-v1','catalog-japan-recovery-v1','catalog-photo-recovery-v1',
     'catalog-photo-japan-power-v1','catalog-japan-completion-v3'])
     assert.throws(()=>checkedCatalogCodeScope({...completionV2Plan(),codeScope}),/china_photo_scope_files/);
+});
+
+
+const usabilityPlan=()=>({codeScope:'catalog-japan-usability-v1',retainedRuntime:JAPAN_USABILITY_RETAINED_RUNTIME,
+ runtimeFiles:[...JAPAN_USABILITY_CODE_PATHS]});
+test('Japan usability starts from accepted077 and requires its complete frozen file set',()=>{
+ assert.equal(JAPAN_USABILITY_RETAINED_RUNTIME,'077cbb17626ab0c64e7f06db055fef9252ad21c0');
+ assert.ok(Object.isFrozen(JAPAN_USABILITY_CODE_PATHS));
+ assert.equal(JAPAN_USABILITY_CODE_PATHS.length,36);
+ assert.equal(digest(JAPAN_USABILITY_CODE_PATHS),'061929d08155ac4cf49b209d117ba34be44e8723fe9d80b2be80e80bf3bb9ede');
+ assert.equal(new Set(JAPAN_USABILITY_CODE_PATHS).size,JAPAN_USABILITY_CODE_PATHS.length);
+ assert.equal(checkedCatalogCodeScope(usabilityPlan()),'catalog-japan-usability-v1');
+ assert.equal(checkedCatalogCodeScope({...usabilityPlan(),runtimeFiles:[...JAPAN_USABILITY_CODE_PATHS].reverse()}),'catalog-japan-usability-v1');
+});
+
+test('usability cannot reuse rejected or older predecessors, partial paths or an unrelated modification',()=>{
+ for(const retainedRuntime of [undefined,'',JAPAN_COMPLETION_V2_RETAINED_RUNTIME,JAPAN_RECOVERY_RETAINED_RUNTIME,
+  '8cc5f755f0792c0dcd5517ec2df3295d5c0b2b1a','0'.repeat(40)])
+  assert.throws(()=>checkedCatalogCodeScope({...usabilityPlan(),retainedRuntime}),/china_photo_scope_retained_runtime/);
+ for(const runtimeFiles of [JAPAN_COMPLETION_V2_CODE_PATHS,JAPAN_RECOVERY_CODE_PATHS,
+  JAPAN_USABILITY_CODE_PATHS.slice(1),[...JAPAN_USABILITY_CODE_PATHS,'apps/web/lib/catalog/customs-pricing.ts'],
+  [...JAPAN_USABILITY_CODE_PATHS.slice(1),JAPAN_USABILITY_CODE_PATHS[1]]])
+  assert.throws(()=>checkedCatalogCodeScope({...usabilityPlan(),runtimeFiles}),/china_photo_scope_files/);
+ for(const codeScope of ['catalog-japan-completion-v2','catalog-japan-completion-v1','catalog-japan-recovery-v1',
+  'catalog-photo-recovery-v1','catalog-photo-japan-power-v1','catalog-japan-usability-v2'])
+  assert.throws(()=>checkedCatalogCodeScope({...usabilityPlan(),codeScope}),/china_photo_scope_files/);
 });

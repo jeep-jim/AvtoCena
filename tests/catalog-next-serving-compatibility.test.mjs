@@ -6,7 +6,7 @@ import os from 'node:os';
 import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
 import {verifyServingCompatibility} from '../scripts/catalog-next/serving-compatibility.mjs';
-import {JAPAN_RECOVERY_CODE_PATHS,JAPAN_COMPLETION_CODE_PATHS,JAPAN_COMPLETION_V2_CODE_PATHS} from '../scripts/catalog-next/photo-code-scope.mjs';
+import {JAPAN_RECOVERY_CODE_PATHS,JAPAN_COMPLETION_CODE_PATHS,JAPAN_COMPLETION_V2_CODE_PATHS,JAPAN_USABILITY_CODE_PATHS} from '../scripts/catalog-next/photo-code-scope.mjs';
 
 const hash = raw => createHash('sha256').update(raw).digest('hex');
 async function fixture(t) {
@@ -108,7 +108,7 @@ test('Japan completion permits only its reviewed additions to the retained servi
     await assert.rejects(verifyServingCompatibility({...f,servingPlan:{...f.servingPlan(),codeScope}}),/china_serving_change_scope/);
 });
 
-for(const scope of ['catalog-japan-completion-v1','catalog-japan-completion-v2'])
+for(const scope of ['catalog-japan-completion-v1','catalog-japan-completion-v2','catalog-japan-usability-v1'])
 test(scope+' retains protected pricing and refuses a neighbouring unreviewed change',async t=>{
   const f=await fixture(t);
   for(const filename of ['apps/web/lib/catalog/customs-pricing.ts','apps/web/lib/catalog/live-business-pricing.ts',
@@ -233,4 +233,17 @@ test('the offer reader exception accepts type annotations only and binds the ide
     'export const offer = async (id: string) => ({id, changedRuntimeBehavior: true});\n');
   f.commit();
   await assert.rejects(verifyServingCompatibility({...f, servingPlan: f.servingPlan()}), /type_only_runtime_changed/);
+});
+
+
+test('Japan usability admits its exact cumulative serving changes without widening accepted predecessors',async t=>{
+ const f=await fixture(t),files=[...new Set([...JAPAN_RECOVERY_CODE_PATHS,...JAPAN_COMPLETION_V2_CODE_PATHS,...JAPAN_USABILITY_CODE_PATHS])].sort();
+ for(const filename of files)await f.write(filename,'reviewed Japan catalog usability successor\n');
+ f.commit();
+ const proof=await verifyServingCompatibility({...f,servingPlan:{...f.servingPlan(),codeScope:'catalog-japan-usability-v1'}});
+ assert.deepEqual(proof.pricingToServingFiles,files);assert.equal(proof.protectedPricingPathsUnchanged,true);
+ for(const codeScope of ['catalog-japan-completion-v2','catalog-japan-completion-v1','catalog-japan-recovery-v1','catalog-photo-recovery-v1','catalog-photo-japan-power-v1'])
+  await assert.rejects(verifyServingCompatibility({...f,servingPlan:{...f.servingPlan(),codeScope}}),/china_serving_change_scope/);
+ await f.write('apps/web/lib/catalog/ajes-unreviewed-reader.ts','unreviewed adjacent change\n');f.commit();
+ await assert.rejects(verifyServingCompatibility({...f,servingPlan:{...f.servingPlan(),codeScope:'catalog-japan-usability-v1'}}),/china_serving_change_scope/);
 });

@@ -115,6 +115,44 @@ const allowedJapanCompletionV2 = new Set([...allowedJapanCompletion,
   'tests/ajes-recovery-isolation.test.ts',
   'tests/ajes-list-admission.test.ts',
 ]);
+const allowedJapanUsability = new Set([...allowedJapanCompletionV2,
+  "apps/web/app/api/catalog/brand-counts/route.ts",
+  "apps/web/components/catalog/AjesCatalog.tsx",
+  "apps/web/components/catalog/AjesRail.tsx",
+  "apps/web/components/catalog/BrandLogoRail.tsx",
+  "apps/web/components/catalog/CatalogBrandMultiSelect.tsx",
+  "apps/web/components/catalog/CatalogLoadMore.tsx",
+  "apps/web/components/catalog/catalog-load-more-action.tsx",
+  "apps/web/components/catalog/page-request-error.ts",
+  "apps/web/components/home/HomeJapanFilteredRail.tsx",
+  "apps/web/lib/catalog/ajes-catalog.ts",
+  "apps/web/lib/catalog/ajes-client.ts",
+  "apps/web/lib/catalog/ajes-error-response.ts",
+  "apps/web/lib/catalog/ajes-offer.ts",
+  "apps/web/lib/catalog/ajes-power-page.ts",
+  "apps/web/lib/catalog/ajes-public.ts",
+  "apps/web/lib/catalog/ajes-query-cache.ts",
+  "apps/web/lib/catalog/ajes-query.ts",
+  "apps/web/lib/catalog/ajes-runtime.ts",
+  "apps/web/lib/catalog/ajes-saved-search.ts",
+  "apps/web/lib/catalog/japan-brand-directory.ts",
+  "apps/web/lib/catalog/japan-power-query.ts",
+  "apps/web/lib/catalog/japan-source-power.ts",
+  "apps/web/lib/catalog/japan-vehicle-policy.ts",
+  "tests/ajes-catalog-progressive.test.ts",
+  "tests/ajes-count-progressive.test.ts",
+  "tests/ajes-model-recovery.test.ts",
+  "tests/ajes-power-page.test.ts",
+  "tests/ajes-ready-metadata.test.ts",
+  "tests/browser/japan-brand-directory-fixture.tsx",
+  "tests/browser/japan-brand-directory.mjs",
+  "tests/catalog-page-request.test.ts",
+  "tests/japan-brand-directory.test.ts",
+  "tests/japan-power-query.test.ts",
+  "tests/japan-rail-visibility.test.ts",
+  "tests/japan-source-power.test.ts",
+  "tests/japan-vehicle-admission.test.ts",
+]);
 const typeOnlyPath = 'apps/web/lib/catalog/offer-page-data.ts';
 export const CHINA_PROTECTED_PRICING_PATHS = Object.freeze([
   'packages', 'data', 'scripts/catalog-next', 'apps/web/lib/encyclopedia',
@@ -139,7 +177,8 @@ export async function verifyServingCompatibility({runtimeRoot, servingPlan, pric
     && /^[a-f0-9]{64}$/.test(servingPlan.pricingToServingDiffSha256 ?? ''), 'plan_binding');
   const files = servingPlan.pricingToServingFiles;
   need(Array.isArray(files) && new Set(files).size === files.length && files.every(name =>
-    typeof name === 'string' && (servingPlan.codeScope === 'catalog-japan-completion-v2' ? allowedJapanCompletionV2.has(name)
+    typeof name === 'string' && (servingPlan.codeScope === 'catalog-japan-usability-v1' ? allowedJapanUsability.has(name)
+      : servingPlan.codeScope === 'catalog-japan-completion-v2' ? allowedJapanCompletionV2.has(name)
       : servingPlan.codeScope === 'catalog-japan-completion-v1' ? allowedJapanCompletion.has(name)
       : servingPlan.codeScope === 'catalog-japan-recovery-v1' ? allowedJapanRecovery.has(name)
       : allowedProduction.has(name) || allowedBrowserTests.has(name) || name === typeOnlyPath
