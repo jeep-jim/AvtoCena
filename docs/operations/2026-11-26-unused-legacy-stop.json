@@ -1,0 +1,194 @@
+{
+  "version": 1,
+  "kind": "legacy-stop-20261126",
+  "controllerSha": "a2c5bc30deaf0174cb6771f42d321e90b8ce87a7",
+  "completed": true,
+  "steps": [
+    {
+      "kind": "legacy-container-stopped-v1",
+      "index": 0,
+      "containerId": "2c180485762c286c7e73f983cd0c93a718d9dec5c2f8e442e7ee44c1a51f6729",
+      "memoryAfter": {
+        "MemTotal": 16763207680,
+        "MemAvailable": 7274643456,
+        "MemFree": 3686989824,
+        "Buffers": 179937280,
+        "Cached": 2522841088,
+        "SReclaimable": 1565036544,
+        "Slab": 1859854336,
+        "SUnreclaim": 294817792,
+        "Shmem": 326967296,
+        "Dirty": 53248,
+        "SwapTotal": 0,
+        "SwapFree": 0
+      },
+      "diskAfter": {
+        "totalBytes": 102916472832,
+        "availableBytes": 25382379520,
+        "freeBytes": 25399156736
+      },
+      "currentAndRollbackHealthy": true
+    },
+    {
+      "kind": "legacy-container-stopped-v1",
+      "index": 1,
+      "containerId": "21d2c808c25bad327a6d8ac13891d878aeb67fadce52350dcc6f1433e3f6ca78",
+      "memoryAfter": {
+        "MemTotal": 16763207680,
+        "MemAvailable": 7571976192,
+        "MemFree": 3972997120,
+        "Buffers": 180002816,
+        "Cached": 2534187008,
+        "SReclaimable": 1564831744,
+        "Slab": 1859289088,
+        "SUnreclaim": 294457344,
+        "Shmem": 326860800,
+        "Dirty": 77824,
+        "SwapTotal": 0,
+        "SwapFree": 0
+      },
+      "diskAfter": {
+        "totalBytes": 102916472832,
+        "availableBytes": 25382379520,
+        "freeBytes": 25399156736
+      },
+      "currentAndRollbackHealthy": true
+    }
+  ],
+  "leaseRelease": "released",
+  "planSha256": "a829ae3ed1f8a96ab23e48e7b2939113372ed43b1e90e04fff5f625fe47fd9c5",
+  "plan": {
+    "kind": "legacy-stop-prepared-v1",
+    "planSha256": "a829ae3ed1f8a96ab23e48e7b2939113372ed43b1e90e04fff5f625fe47fd9c5",
+    "targets": [
+      {
+        "id": "2c180485762c286c7e73f983cd0c93a718d9dec5c2f8e442e7ee44c1a51f6729",
+        "runtimeSha": "56d6b94fea70457e0ce2b0820596da9972846b90",
+        "role": "aj-system-japan-only",
+        "imageId": "sha256:7294634293906ae2bb95dd42625111894ef4a736115245a9c1097fbe59c213ba",
+        "port": 3003,
+        "configurationSha256": "dbe0d4e79898a99112eef83749ed3d07644bfc66e3cb2b2f82598840a46b2af7"
+      },
+      {
+        "id": "21d2c808c25bad327a6d8ac13891d878aeb67fadce52350dcc6f1433e3f6ca78",
+        "runtimeSha": "83ff17075e9188dcf227c8752dc064248d5f42e0",
+        "role": "production",
+        "imageId": "sha256:4a055ba772496c7de89594acbbc1c1bc02ac2d2b20050cfad7f637d1f5646dfd",
+        "port": 3001,
+        "configurationSha256": "9c7abfb0d9f66dee1866f70c601a98d08b8ec930d6c2960aa3790031235d7a42"
+      }
+    ],
+    "containersPlanned": 2,
+    "containersPreserved": 12,
+    "memoryBefore": {
+      "MemTotal": 16763207680,
+      "MemAvailable": 4036526080,
+      "MemFree": 469106688,
+      "Buffers": 179605504,
+      "Cached": 2503086080,
+      "SReclaimable": 1565036544,
+      "Slab": 1860255744,
+      "SUnreclaim": 295219200,
+      "Shmem": 327057408,
+      "Dirty": 40960,
+      "SwapTotal": 0,
+      "SwapFree": 0
+    },
+    "targetMemoryBefore": {
+      "2c180485762c286c7e73f983cd0c93a718d9dec5c2f8e442e7ee44c1a51f6729": {
+        "status": "ok",
+        "currentBytes": 3212165120,
+        "swapBytes": 0,
+        "statBytes": {
+          "anon": 3107328000,
+          "file": 0,
+          "shmem": 0,
+          "file_mapped": 0,
+          "inactive_file": 0,
+          "active_file": 0,
+          "kernel": 104837120,
+          "slab": 28958696,
+          "slab_reclaimable": 24385968
+        }
+      },
+      "21d2c808c25bad327a6d8ac13891d878aeb67fadce52350dcc6f1433e3f6ca78": {
+        "status": "ok",
+        "currentBytes": 258887680,
+        "swapBytes": 0,
+        "statBytes": {
+          "anon": 230522880,
+          "file": 16392192,
+          "shmem": 0,
+          "file_mapped": 2707456,
+          "inactive_file": 16334848,
+          "active_file": 57344,
+          "kernel": 11972608,
+          "slab": 4747360,
+          "slab_reclaimable": 4012296
+        }
+      }
+    },
+    "currentGeneration": "gen_china_45655051136_1",
+    "rollbackGeneration": "gen_china_45369451603_1"
+  },
+  "result": {
+    "kind": "legacy-stop-result-v1",
+    "completed": true,
+    "stoppedContainerIds": [
+      "2c180485762c286c7e73f983cd0c93a718d9dec5c2f8e442e7ee44c1a51f6729",
+      "21d2c808c25bad327a6d8ac13891d878aeb67fadce52350dcc6f1433e3f6ca78"
+    ],
+    "planSha256": "a829ae3ed1f8a96ab23e48e7b2939113372ed43b1e90e04fff5f625fe47fd9c5",
+    "memoryBefore": {
+      "MemTotal": 16763207680,
+      "MemAvailable": 4036526080,
+      "MemFree": 469106688,
+      "Buffers": 179605504,
+      "Cached": 2503086080,
+      "SReclaimable": 1565036544,
+      "Slab": 1860255744,
+      "SUnreclaim": 295219200,
+      "Shmem": 327057408,
+      "Dirty": 40960,
+      "SwapTotal": 0,
+      "SwapFree": 0
+    },
+    "memoryAfter": {
+      "MemTotal": 16763207680,
+      "MemAvailable": 7590604800,
+      "MemFree": 3991621632,
+      "Buffers": 180002816,
+      "Cached": 2534211584,
+      "SReclaimable": 1564831744,
+      "Slab": 1859289088,
+      "SUnreclaim": 294457344,
+      "Shmem": 326860800,
+      "Dirty": 110592,
+      "SwapTotal": 0,
+      "SwapFree": 0
+    },
+    "availableMemoryChangeBytes": 3554078720,
+    "diskBefore": {
+      "totalBytes": 102916472832,
+      "availableBytes": 25382379520,
+      "freeBytes": 25399156736
+    },
+    "diskAfter": {
+      "totalBytes": 102916472832,
+      "availableBytes": 25382371328,
+      "freeBytes": 25399148544
+    },
+    "liveRuntimeSha": "d536c1547c4d82a339ed68ced7d8503f09b6810b",
+    "generationId": "gen_china_45655051136_1",
+    "rollbackGenerationId": "gen_china_45369451603_1",
+    "currentAndRollbackHealthy": true,
+    "containersPreserved": 12,
+    "containersDeleted": 0,
+    "imagesDeleted": 0,
+    "filesDeleted": 0,
+    "memoryLimitsChanged": 0,
+    "acceptedStateWrites": 0,
+    "intentStateWrites": 0
+  },
+  "finishedAt": "2026-11-26T05:00:16.464Z"
+}

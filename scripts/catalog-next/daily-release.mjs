@@ -354,6 +354,34 @@ export function createChinaDailyRelease({root, servingRoot, pricingPlan, serving
             need(detailsRaw.length <= 256 * 1024, 'browser_details_size');
             await fs.writeFile(detailsPath, detailsRaw, {mode: 0o600});
           }
+          if (codeUpdate && plan.codeScope === 'catalog-japan-recovery-v1') {
+            await activeGuard(); await progress('code_japan_browser');
+            const japanOutput = path.join(browserDirectory, 'japan-browser-report.json'), japanStartedAt = Date.now();
+            const japanExit = await use.runChild({root, script: path.join(root, 'scripts/catalog-next/japan-browser-acceptance.mjs'),
+              args: [], cwd: browserDirectory, env: {...browserEnv, ORACLE_PATH: oraclePath,
+                EXPECTED_RELEASE_SHA: candidate.runtimeSha, VERIFICATION_NONCE: nonce, OUTPUT: japanOutput}});
+            let japanRaw;
+            try { japanRaw = await fs.readFile(japanOutput); }
+            catch (error) { need(japanExit === 0, 'japan_browser_failed'); throw error; }
+            need(japanRaw.length <= 128 * 1024, 'japan_browser_binding');
+            const japan = JSON.parse(japanRaw), checkedAt = Date.parse(japan.checkedAt);
+            need(japan.version === 1 && japan.kind === 'catalog-japan-browser-v1' && japan.codeScope === plan.codeScope
+              && japan.release === candidate.runtimeSha && japan.nonce === nonce
+              && japan.generationManifestSha256 === candidate.generationManifestSha256
+              && japan.oracleSha256 === hash(await fs.readFile(oraclePath))
+              && Number.isFinite(checkedAt) && checkedAt >= japanStartedAt && checkedAt <= Date.now(), 'japan_browser_binding');
+            // Keep the exact bound report after staging cleanup, including a
+            // failed gate's diagnostic report. Copying it never grants acceptance.
+            await fs.writeFile(path.join(root, 'catalog-next-japan-browser-report.json'), japanRaw, {flag: 'wx', mode: 0o600});
+            need(japanExit === 0, 'japan_browser_failed');
+            need(['passed', 'japanFreshnessPassed', 'japanPowerApiPassed', 'japanUiPassed', 'japanVisibilityPassed', 'readOnlyBrowserFence']
+                .every(key => japan[key] === true)
+              && ['productionMutations', 'directSupplierRequests'].every(key => japan[key] === 0), 'japan_browser_binding');
+            detailsRaw = Buffer.from(JSON.stringify({...details, japanReportBase64: japanRaw.toString('base64'),
+              japanReportSha256: hash(japanRaw)}) + '\n');
+            need(detailsRaw.length <= 256 * 1024, 'browser_details_size');
+            await fs.writeFile(detailsPath, detailsRaw, {mode: 0o600});
+          }
           await activeGuard(); await use.health(candidate.runtimeSha);
           const saved = await session.call('browser_evidence', {speedBase64: speedRaw.toString('base64'), detailsBase64: detailsRaw.toString('base64')});
           need(saved?.saved === true && saved.speedReportSha256 === hash(speedRaw) && saved.detailsReportSha256 === hash(detailsRaw), 'browser_persistence');

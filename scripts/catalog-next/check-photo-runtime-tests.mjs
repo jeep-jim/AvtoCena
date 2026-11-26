@@ -2,12 +2,13 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import {execFileSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
-import {checkedCatalogCodeScope, CHINA_PHOTO_JAPAN_CODE_PATHS} from './photo-code-scope.mjs';
+import {checkedCatalogCodeScope, CHINA_PHOTO_JAPAN_CODE_PATHS, JAPAN_RECOVERY_CODE_PATHS} from './photo-code-scope.mjs';
 import {checkChinaRuntimeTests, CHINA_RUNTIME_TEST_FILES, verifyRuntimeTestsCheckout, runNativeTests}
   from './check-runtime-tests.mjs';
 
 const ROOT = fileURLToPath(new URL('../../', import.meta.url));
 const PHOTO_SCOPE = 'catalog-photo-recovery-v1', COMBINED_SCOPE = 'catalog-photo-japan-power-v1';
+const JAPAN_SCOPE = 'catalog-japan-recovery-v1';
 const need = (condition, code) => { if (!condition) throw Error('china_photo_runtime_tests_' + code); };
 // This is the previous photo CI common suite. AJ and PW globs below expand
 // against the exact source tree, and no caller can replace the selected files.
@@ -18,6 +19,51 @@ export const PHOTO_COMMON_TEST_FILES = Object.freeze([
   'tests/catalog-japan-filter-rail.test.ts',
   'tests/catalog-market-page-boundary.test.ts',
 ]);
+// Retain every accepted China assertion, every changed Japan test, and the
+// adjacent native AJ/drive/power/source suite reviewed for this recovery. The
+// committed source already fixes the old fixtures; a compatibility patch is
+// neither opened nor applied for this profile.
+export const JAPAN_RECOVERY_TEST_FILES = Object.freeze([...new Set([
+  ...CHINA_RUNTIME_TEST_FILES,
+  ...PHOTO_COMMON_TEST_FILES,
+  ...JAPAN_RECOVERY_CODE_PATHS.filter(name => name.startsWith('tests/')),
+  'tests/ajes-catalog-progressive.test.ts',
+  'tests/ajes-count-display.test.ts',
+  'tests/ajes-count-progressive.test.ts',
+  'tests/ajes-detail-queue-recovery.test.ts',
+  'tests/ajes-filtered-page.test.ts',
+  'tests/ajes-japan-feed.test.ts',
+  'tests/ajes-japan-only.test.ts',
+  'tests/ajes-list-admission.test.ts',
+  'tests/ajes-market-preview.test.ts',
+  'tests/ajes-model-loader.test.ts',
+  'tests/ajes-model-recovery.test.ts',
+  'tests/ajes-page-cache-recovery.test.ts',
+  'tests/ajes-page-failure-evidence.test.ts',
+  'tests/ajes-persistence-isolation.test.ts',
+  'tests/ajes-prepared-admission.test.ts',
+  'tests/ajes-queue-fallback.test.ts',
+  'tests/ajes-queue-unavailable.test.ts',
+  'tests/ajes-rail-late-count.test.ts',
+  'tests/ajes-ready-metadata.test.ts',
+  'tests/ajes-recovery-isolation.test.ts',
+  'tests/ajes-retired-tables.test.ts',
+  'tests/catalog-detail-read-cache.test.ts',
+  'tests/japan-auction-statistics-source.test.ts',
+  'tests/japan-carvector-jpauc-exact-scale.test.ts',
+  'tests/japan-chassis-drive.test.ts',
+  'tests/japan-default-fuel.test.ts',
+  'tests/japan-delivered-preview.test.ts',
+  'tests/japan-drive-saved-search.test.ts',
+  'tests/japan-drive-sql-budget.test.ts',
+  'tests/japan-drive.test.ts',
+  'tests/japan-owner-exclusions.test.ts',
+  'tests/japan-preview-consistency.test.ts',
+  'tests/japan-sheet-restriction-display.test.ts',
+  'tests/japan-source-power.test.ts',
+  'tests/japan-stepwgn-owner-power.test.ts',
+  'tests/japan-ui-completion.test.ts',
+])].sort());
 
 async function selectedFiles(runtimeRoot, codeScope) {
   let tracked;
@@ -35,7 +81,8 @@ async function selectedFiles(runtimeRoot, codeScope) {
     need(power.length > 0 && required.every(name => power.includes(name)), 'power_tests_missing');
   }
   const files = [...new Set([...PHOTO_COMMON_TEST_FILES, ...aj,
-    ...(codeScope === PHOTO_SCOPE ? CHINA_RUNTIME_TEST_FILES : power)])].sort();
+    ...(codeScope === JAPAN_SCOPE ? JAPAN_RECOVERY_TEST_FILES
+      : codeScope === PHOTO_SCOPE ? CHINA_RUNTIME_TEST_FILES : power)])].sort();
   for (const filename of files) {
     need(sourceFiles.has(filename), 'test_missing');
     const stat = await fs.lstat(path.join(runtimeRoot, filename));
@@ -46,11 +93,12 @@ async function selectedFiles(runtimeRoot, codeScope) {
 
 /** Photo-only keeps its accepted Japan code and therefore its reviewed legacy
  * test-fixture patch. The combined source already contains those fixture fixes
- * and must run every PW assertion without that patch. Both profiles retain
+ * and must run every PW assertion without that patch. Japan recovery runs the
+ * native retained China and Japan suites without a patch. All profiles retain
  * the exact offline runner, source identity checks, and a nonzero-exit gate. */
 export async function checkPhotoRuntimeTests({runtimeRoot, plan, patchPath,
   runTests = runNativeTests, onProgress = () => {}}) {
-  need([PHOTO_SCOPE, COMBINED_SCOPE].includes(plan?.codeScope), 'scope');
+  need([PHOTO_SCOPE, COMBINED_SCOPE, JAPAN_SCOPE].includes(plan?.codeScope), 'scope');
   const codeScope = checkedCatalogCodeScope(plan);
   need(typeof runTests === 'function' && typeof onProgress === 'function', 'callbacks');
   runtimeRoot = await fs.realpath(runtimeRoot);

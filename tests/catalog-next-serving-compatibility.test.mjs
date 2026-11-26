@@ -6,6 +6,7 @@ import os from 'node:os';
 import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
 import {verifyServingCompatibility} from '../scripts/catalog-next/serving-compatibility.mjs';
+import {JAPAN_RECOVERY_CODE_PATHS} from '../scripts/catalog-next/photo-code-scope.mjs';
 
 const hash = raw => createHash('sha256').update(raw).digest('hex');
 async function fixture(t) {
@@ -61,6 +62,48 @@ test('an exact descendant may change only the reviewed serving readers and targe
     'apps/web/lib/catalog/storage.ts', 'tests/catalog-next-home.test.ts']);
   assert.equal(proof.pricingRuntimeSha, f.pricingPlan.runtimeSha);
   assert.equal(proof.protectedPricingPathsUnchanged, true);
+});
+
+test('Japan recovery permits its exact reviewed application/tests and retained China reader delta', async t => {
+  const f = await fixture(t);
+  const files = [...new Set([...JAPAN_RECOVERY_CODE_PATHS,
+    'apps/web/app/api/catalog/home/route.ts', 'apps/web/components/catalog/CatalogFilters.tsx',
+    'apps/web/components/catalog/CatalogPrice.tsx', 'apps/web/components/catalog/InlineOfferParameters.tsx',
+    'apps/web/lib/catalog/china-city-query.mjs', 'apps/web/lib/catalog/china-local-reader.ts',
+    'apps/web/lib/catalog/home-phase-timing.ts', 'apps/web/lib/catalog/offer-page-data.ts',
+    'apps/web/lib/catalog/prepared-china-detail-city.ts', 'apps/web/lib/dealers/public-showcase.ts',
+    'apps/web/lib/location/selected-city.ts', 'tests/browser/catalog-range-commit-fixture.tsx',
+    'tests/browser/catalog-range-commit.mjs', 'tests/catalog-next-home-phase-timing.test.ts',
+    'tests/catalog-next-local-reader.test.ts', 'tests/catalog-next-query-index.test.ts'])].sort();
+  assert.equal(files.length, 53);
+  for (const name of files) await f.write(name, name === 'apps/web/lib/catalog/offer-page-data.ts'
+    ? 'import type {Offer} from "./types";\nexport const offer = async (id: string): Promise<Offer> => ({id});\n'
+    : 'reviewed Japan recovery and retained China behavior\n');
+  f.commit();
+  const proof = await verifyServingCompatibility({...f, servingPlan: {...f.servingPlan(), codeScope: 'catalog-japan-recovery-v1'}});
+  assert.deepEqual(proof.pricingToServingFiles, files);
+  assert.equal(proof.protectedPricingPathsUnchanged, true);
+  assert.equal(proof.typeOnlyChecks.length, 1, 'the retained annotation still requires identical emitted JavaScript');
+});
+
+test('Japan recovery never admits another application or test path through a broad allowance', async t => {
+  const f = await fixture(t);
+  for (const filename of ['apps/web/components/home/UnreviewedJapanRail.tsx', 'tests/japan-unreviewed.test.ts',
+    'tests/catalog-next-home.test.ts', 'apps/web/components/catalog/JapanSourcePowerNotice.tsx',
+    'tests/japan-pw-first.test.ts', 'tests/browser/catalog-photo-recovery.mjs', 'apps/web/lib/catalog/rates.ts']) {
+    await f.write(filename, 'unreviewed delta\n'); f.commit();
+    await assert.rejects(verifyServingCompatibility({...f,
+      servingPlan: {...f.servingPlan(), codeScope: 'catalog-japan-recovery-v1'}}), /china_serving_change_scope/);
+    f.git(['reset', '--hard', f.pricingPlan.runtimeSha]);
+  }
+});
+
+test('the new Japan allowlist does not broaden either older photo profile', async t => {
+  const f = await fixture(t);
+  await f.write('apps/web/components/catalog/JapanRailFrame.tsx', 'Japan recovery only\n'); f.commit();
+  for (const codeScope of ['catalog-photo-recovery-v1', 'catalog-photo-japan-power-v1']) {
+    await assert.rejects(verifyServingCompatibility({...f, servingPlan: {...f.servingPlan(), codeScope}}), /china_serving_change_scope/);
+  }
 });
 
 test('canonical serving bytes verify across short and full Git abbreviations without changing source', async t => {

@@ -149,11 +149,11 @@ test('code-only photo activation preserves the independent China fence and compl
  assert.ok(firstHostKey>contracts && restoration>firstHostKey && activation>restoration,
   'the exact archived image is restored only after contracts and before normal publication');
  assert.ok(sourceVerification>contracts && build>sourceVerification && build<firstHostKey && activation>build,
-  'the photo-only source is built and roundtripped before host contact');
+  'the reviewed photo-only or Japan source is built and roundtripped before host contact');
  const steps=workflow.split(/(?=^      - )/m);
  const buildStep=steps.find(step=>step.includes('scripts/catalog-next/code-entry.mjs --build'));
  const restoreStep=steps.find(step=>step.includes('scripts/catalog-next/restore-photo-image.mjs --run'));
- assert.match(buildStep,/if: steps\.photo_scope\.outputs\.scope == 'catalog-photo-recovery-v1'/);
+ assert.match(buildStep,/if: steps\.photo_scope\.outputs\.scope == 'catalog-photo-recovery-v1' \|\| steps\.photo_scope\.outputs\.scope == 'catalog-japan-recovery-v1'/);
  assert.match(restoreStep,/if: steps\.photo_scope\.outputs\.scope == 'catalog-photo-japan-power-v1'/);
  assert.match(buildStep,/CHINA_BUILD_DOCKER_HOST: \$\{\{ steps\.photo_docker\.outputs\.sock \}\}/);
  assert.doesNotMatch(buildStep,/SSH_PRIVATE_KEY|restore-photo-image/);
@@ -202,17 +202,19 @@ test('code-only photo activation preserves the independent China fence and compl
  assert.doesNotMatch(cycle,/prepareChinaGeneration|restorePrivateChinaGeneration|refreshChinaSource/);
 });
 
-test('photo CI always tests shared and China behavior while the combined profile still requires every PW test',()=>{
+test('scope CI retains China and Japan native assertions while both old photo profiles keep their browser fixtures',()=>{
  const workflow=fs.readFileSync(path.join(workflowDirectory,'verify-china-photo-code.yml'),'utf8');
  const checks='node --import tsx scripts/catalog-next/check-photo-runtime-tests.mjs "$RUNNER_TEMP/china-serving-runtime-$PHOTO_SHA"';
  assert.equal(workflow.split(checks).length-1,1,'the controller helper must execute once before changing directories');
  assert.ok(workflow.indexOf(checks)<workflow.indexOf('cd "$RUNNER_TEMP/china-serving-runtime-$PHOTO_SHA"'));
  const helper=fs.readFileSync(path.join(root,'scripts/catalog-next/check-photo-runtime-tests.mjs'),'utf8');
  const runner=fs.readFileSync(path.join(root,'scripts/catalog-next/check-runtime-tests.mjs'),'utf8');
- assert.match(helper,/need\(\[PHOTO_SCOPE, COMBINED_SCOPE\]\.includes\(plan\?\.codeScope\), 'scope'\)/);
+ assert.match(helper,/need\(\[PHOTO_SCOPE, COMBINED_SCOPE, JAPAN_SCOPE\]\.includes\(plan\?\.codeScope\), 'scope'\)/);
  assert.match(helper,/checkedCatalogCodeScope\(plan\)/);
  assert.match(helper,/verifyRuntimeTestsCheckout\(runtimeRoot, plan\)/);
  assert.match(helper,/codeScope === PHOTO_SCOPE \? CHINA_RUNTIME_TEST_FILES : power/);
+ assert.match(helper,/codeScope === JAPAN_SCOPE \? JAPAN_RECOVERY_TEST_FILES/);
+ assert.match(helper,/JAPAN_RECOVERY_CODE_PATHS\.filter\(name => name\.startsWith\('tests\/'\)\)/);
  assert.match(helper,/power\.length > 0 && required\.every\(name => power\.includes\(name\)\)/);
  assert.match(helper,/aj\.length > 0/);
  assert.match(helper,/'ls-tree', '-r', '--name-only', '-z', 'HEAD', '--', 'tests'/);
@@ -231,11 +233,61 @@ test('photo CI always tests shared and China behavior while the combined profile
  assert.match(runner,/'--test', '--test-concurrency=1', \.\.\.files/);
  assert.match(runner,/finally[\s\S]*git\(runtimeRoot, \['restore', '--source=HEAD', '--worktree', '--', \.\.\.paths\]\)/);
  for(const filename of ['scripts/catalog-next/check-photo-runtime-tests.mjs','scripts/catalog-next/check-runtime-tests.mjs',
+  'scripts/catalog-next/japan-browser-acceptance.mjs', 'tests/catalog-next-japan-*.test.mjs',
+  'tests/catalog-next-serving-compatibility.test.mjs', 'tests/release-speed-guard-contract.test.mjs',
   '.github/operations/catalog-next/runtime-test-compatibility.patch','tests/catalog-next-check-photo-runtime-tests.test.mjs'])
   assert.ok(workflow.split('permissions:')[0].includes(filename),'CI must observe '+filename);
+ const steps=workflow.split(/(?=^      - )/m);
+ const selector=steps.find(step=>step.includes('id: photo_scope'));
+ assert.match(selector,/checkedCatalogCodeScope\(plan\)/);
+ assert.ok(workflow.indexOf(selector)>workflow.indexOf('scripts/catalog-next/code-entry.mjs --verify'));
+ const nativeStep=steps.find(step=>step.includes(checks));
+ const photoGuard='if [[ "$CATALOG_CODE_SCOPE" == \'catalog-photo-recovery-v1\' || "$CATALOG_CODE_SCOPE" == \'catalog-photo-japan-power-v1\' ]]; then';
+ assert.equal(nativeStep.split(photoGuard).length-1,2,'only the two old photo scopes run the clock and fault browser fixtures');
+ assert.match(nativeStep,/CATALOG_CODE_SCOPE: \$\{\{ steps\.photo_scope\.outputs\.scope \}\}/);
+ assert.ok(nativeStep.includes('fi\n          '+checks),'native assertions execute outside the photo-only fixture branch');
+ assert.match(steps.find(step=>step.includes('npm install --prefix')),/if: steps\.photo_scope\.outputs\.scope != 'catalog-japan-recovery-v1'/);
  assert.ok(workflow.indexOf('node tests/browser/photo-japan-recovery-clock.mjs')<workflow.indexOf(checks));
  assert.ok(workflow.indexOf('npm run typecheck')>workflow.indexOf(checks));
  assert.ok(workflow.indexOf('node --import tsx tests/browser/catalog-photo-recovery.mjs')>workflow.indexOf('npm run typecheck'));
+});
+
+test('Japan recovery builds fresh source and preserves its separate bound browser evidence',()=>{
+ const workflow=fs.readFileSync(path.join(workflowDirectory,'catalog-next-china-photo-release.yml'),'utf8');
+ const steps=workflow.split(/(?=^      - )/m);
+ const build=steps.find(step=>step.includes('scripts/catalog-next/code-entry.mjs --build'));
+ const restoration=steps.find(step=>step.includes('scripts/catalog-next/restore-photo-image.mjs --run'));
+ assert.match(build,/catalog-japan-recovery-v1/);
+ assert.doesNotMatch(restoration,/catalog-japan-recovery-v1/);
+ const upload=steps.find(step=>step.includes('actions/upload-artifact'));
+ assert.match(upload,/if: always\(\)/);
+ for(const filename of ['catalog-next-japan-browser-report.json','artifacts/catalog-japan-live/**',
+  'catalog-next-photo-browser-report.json','artifacts/catalog-photo-live/**',
+  'catalog-next-photo-japan-browser-report.json','artifacts/catalog-photo-japan-live/**'])
+  assert.ok(upload.includes(filename),'preserved independent scope artifact: '+filename);
+ const adapter=fs.readFileSync(path.join(root,'scripts/catalog-next/daily-release.mjs'),'utf8');
+ const japan=adapter.indexOf("if (codeUpdate && plan.codeScope === 'catalog-japan-recovery-v1')");
+ const gate=adapter.indexOf('scripts/catalog-next/japan-browser-acceptance.mjs',japan);
+ const evidence=adapter.indexOf("session.call('browser_evidence'",gate);
+ const accept=adapter.indexOf("session.call('accept'",evidence);
+ assert.ok(japan>=0 && gate>japan && evidence>gate && accept>evidence);
+ const branch=adapter.slice(japan,evidence);
+ assert.match(branch,/japan\.kind === 'catalog-japan-browser-v1' && japan\.codeScope === plan\.codeScope/);
+ assert.match(branch,/japan\.release === candidate\.runtimeSha && japan\.nonce === nonce/);
+ assert.match(branch,/japan\.generationManifestSha256 === candidate\.generationManifestSha256/);
+ assert.match(branch,/japan\.oracleSha256 === hash\(await fs\.readFile\(oraclePath\)\)/);
+ assert.match(branch,/checkedAt >= japanStartedAt && checkedAt <= Date\.now\(\)/);
+ assert.match(branch,/catalog-next-japan-browser-report\.json'\), japanRaw, \{flag: 'wx', mode: 0o600\}/);
+ assert.match(branch,/japanReportBase64: japanRaw\.toString\('base64'\)/);
+ assert.match(branch,/japanReportSha256: hash\(japanRaw\)/);
+ assert.match(branch,/'japanVisibilityPassed', 'readOnlyBrowserFence'/);
+ assert.match(branch,/\['productionMutations', 'directSupplierRequests'\]\.every\(key => japan\[key\] === 0\)/);
+ assert.doesNotMatch(branch,/photo-japan-browser-acceptance|--photo-only/);
+ const host=fs.readFileSync(path.join(root,'scripts/catalog-next/release-host.py'),'utf8');
+ assert.match(host,/code_update\(self\.plan\) and code_scope\(self\.plan\) == JAPAN_CODE_SCOPE/);
+ assert.match(host,/sha\(japan_raw\) == details\['japanReportSha256'\]/);
+ assert.match(host,/japan\.get\('kind'\) == 'catalog-japan-browser-v1'/);
+ assert.match(host,/'japanUiPassed', 'japanVisibilityPassed', 'readOnlyBrowserFence'/);
 });
 test('the pinned AJ removal preserves frozen gates and requires its exact scope and nonce handshake',()=>{
  const [workflow,entry]=[...customActivators][0],filename=path.join(workflowDirectory,workflow);

@@ -40,6 +40,64 @@ const allowedBrowserTests = new Set(['tests/browser/catalog-range-commit.mjs',
   'tests/catalog-market-page-boundary.test.ts',
   'tests/japan-pw-first.test.ts',
   'tests/japan-pw-results.test.ts']);
+// This profile includes the accepted China reader changes between the frozen
+// pricing ancestor and d536, then the reviewed Japan delta. No path glob grants
+// permission to add another application file or test to that compatibility proof.
+const allowedJapanRecovery = new Set([
+  'apps/web/app/(public)/cars/offer/[id]/page.tsx',
+  'apps/web/app/(public)/page.tsx',
+  'apps/web/app/api/catalog/home/route.ts',
+  'apps/web/components/catalog/AjesCatalog.tsx',
+  'apps/web/components/catalog/AjesRail.tsx',
+  'apps/web/components/catalog/CatalogCard.tsx',
+  'apps/web/components/catalog/CatalogContent.tsx',
+  'apps/web/components/catalog/CatalogFilters.tsx',
+  'apps/web/components/catalog/CatalogPrice.tsx',
+  'apps/web/components/catalog/InlineOfferParameters.tsx',
+  'apps/web/components/catalog/JapanRailFrame.tsx',
+  'apps/web/components/home/HomeJapanFilteredRail.tsx',
+  'apps/web/components/home/HomePageClient.tsx',
+  'apps/web/lib/catalog/ajes-catalog.ts',
+  'apps/web/lib/catalog/ajes-client.ts',
+  'apps/web/lib/catalog/ajes-error-response.ts',
+  'apps/web/lib/catalog/ajes-query.ts',
+  'apps/web/lib/catalog/ajes-result-filter.ts',
+  'apps/web/lib/catalog/china-city-query.mjs',
+  'apps/web/lib/catalog/china-local-reader.ts',
+  'apps/web/lib/catalog/detail-read-cache.ts',
+  'apps/web/lib/catalog/home-phase-timing.ts',
+  'apps/web/lib/catalog/japan-source-power.ts',
+  'apps/web/lib/catalog/offer-page-data.ts',
+  'apps/web/lib/catalog/prepared-china-detail-city.ts',
+  'apps/web/lib/catalog/storage.ts',
+  'apps/web/lib/catalog/types.ts',
+  'apps/web/lib/dealers/public-showcase.ts',
+  'apps/web/lib/location/selected-city.ts',
+  'tests/ajes-catalog-progressive.test.ts',
+  'tests/ajes-count-display.test.ts',
+  'tests/ajes-disabled-response.test.ts',
+  'tests/ajes-japan-feed.test.ts',
+  'tests/ajes-japan-only.test.ts',
+  'tests/ajes-rail-late-count.test.ts',
+  'tests/browser/catalog-range-commit-fixture.tsx',
+  'tests/browser/catalog-range-commit.mjs',
+  'tests/catalog-current-read-model-empty-market-policy.test.ts',
+  'tests/catalog-editable-power-scenario.test.ts',
+  'tests/catalog-market-page-boundary.test.ts',
+  'tests/catalog-market-page-city.test.ts',
+  'tests/catalog-next-home-isolation.test.ts',
+  'tests/catalog-next-home-parallel.test.ts',
+  'tests/catalog-next-home-phase-timing.test.ts',
+  'tests/catalog-next-local-reader.test.ts',
+  'tests/catalog-next-query-index.test.ts',
+  'tests/home-editorial-empty.test.ts',
+  'tests/home-initial-catalog.test.ts',
+  'tests/home-japan-preview.test.ts',
+  'tests/japan-rail-visibility.test.ts',
+  'tests/japan-source-power.test.ts',
+  'tests/offer-navigation-performance.test.ts',
+  'tests/public-page-recovery.test.ts',
+]);
 const typeOnlyPath = 'apps/web/lib/catalog/offer-page-data.ts';
 export const CHINA_PROTECTED_PRICING_PATHS = Object.freeze([
   'packages', 'data', 'scripts/catalog-next', 'apps/web/lib/encyclopedia',
@@ -64,8 +122,9 @@ export async function verifyServingCompatibility({runtimeRoot, servingPlan, pric
     && /^[a-f0-9]{64}$/.test(servingPlan.pricingToServingDiffSha256 ?? ''), 'plan_binding');
   const files = servingPlan.pricingToServingFiles;
   need(Array.isArray(files) && new Set(files).size === files.length && files.every(name =>
-    typeof name === 'string' && (allowedProduction.has(name) || allowedBrowserTests.has(name) || name === typeOnlyPath
-      || /^tests\/catalog-next-[a-z0-9-]+\.test\.ts$/.test(name))), 'change_scope');
+    typeof name === 'string' && (servingPlan.codeScope === 'catalog-japan-recovery-v1' ? allowedJapanRecovery.has(name)
+      : allowedProduction.has(name) || allowedBrowserTests.has(name) || name === typeOnlyPath
+        || /^tests\/catalog-next-[a-z0-9-]+\.test\.ts$/.test(name))), 'change_scope');
   runtimeRoot = await fs.realpath(runtimeRoot);
   const git = args => {
     try {

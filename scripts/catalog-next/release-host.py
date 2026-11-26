@@ -41,6 +41,7 @@ PHOTO_CODE_FILES = {'apps/web/components/catalog/CatalogCover.tsx', 'apps/web/co
                     'tests/browser/catalog-photo-recovery-fixture.tsx', 'tests/browser/catalog-photo-recovery.mjs'}
 PHOTO_CODE_SCOPE = 'catalog-photo-recovery-v1'
 PHOTO_JAPAN_CODE_SCOPE = 'catalog-photo-japan-power-v1'
+JAPAN_CODE_SCOPE = 'catalog-japan-recovery-v1'
 PHOTO_JAPAN_CODE_FILES = PHOTO_CODE_FILES | {
     'apps/web/app/(public)/api/catalog/search/route.ts',
     'apps/web/app/(public)/cars/offer/[id]/page.tsx',
@@ -65,7 +66,47 @@ PHOTO_JAPAN_CODE_FILES = PHOTO_CODE_FILES | {
     'tests/japan-pw-first.test.ts',
     'tests/japan-pw-results.test.ts',
 }
-CODE_SCOPE_FILES = {PHOTO_CODE_SCOPE: PHOTO_CODE_FILES, PHOTO_JAPAN_CODE_SCOPE: PHOTO_JAPAN_CODE_FILES}
+JAPAN_CODE_FILES = {
+    'apps/web/app/(public)/cars/offer/[id]/page.tsx',
+    'apps/web/app/(public)/page.tsx',
+    'apps/web/components/catalog/AjesCatalog.tsx',
+    'apps/web/components/catalog/AjesRail.tsx',
+    'apps/web/components/catalog/CatalogCard.tsx',
+    'apps/web/components/catalog/CatalogContent.tsx',
+    'apps/web/components/catalog/JapanRailFrame.tsx',
+    'apps/web/components/home/HomeJapanFilteredRail.tsx',
+    'apps/web/components/home/HomePageClient.tsx',
+    'apps/web/lib/catalog/ajes-catalog.ts',
+    'apps/web/lib/catalog/ajes-client.ts',
+    'apps/web/lib/catalog/ajes-error-response.ts',
+    'apps/web/lib/catalog/ajes-query.ts',
+    'apps/web/lib/catalog/ajes-result-filter.ts',
+    'apps/web/lib/catalog/detail-read-cache.ts',
+    'apps/web/lib/catalog/japan-source-power.ts',
+    'apps/web/lib/catalog/storage.ts',
+    'apps/web/lib/catalog/types.ts',
+    'tests/ajes-catalog-progressive.test.ts',
+    'tests/ajes-count-display.test.ts',
+    'tests/ajes-disabled-response.test.ts',
+    'tests/ajes-japan-feed.test.ts',
+    'tests/ajes-japan-only.test.ts',
+    'tests/ajes-rail-late-count.test.ts',
+    'tests/catalog-current-read-model-empty-market-policy.test.ts',
+    'tests/catalog-editable-power-scenario.test.ts',
+    'tests/catalog-market-page-boundary.test.ts',
+    'tests/catalog-market-page-city.test.ts',
+    'tests/catalog-next-home-isolation.test.ts',
+    'tests/catalog-next-home-parallel.test.ts',
+    'tests/home-editorial-empty.test.ts',
+    'tests/home-initial-catalog.test.ts',
+    'tests/home-japan-preview.test.ts',
+    'tests/japan-rail-visibility.test.ts',
+    'tests/japan-source-power.test.ts',
+    'tests/offer-navigation-performance.test.ts',
+    'tests/public-page-recovery.test.ts',
+}
+CODE_SCOPE_FILES = {PHOTO_CODE_SCOPE: PHOTO_CODE_FILES, PHOTO_JAPAN_CODE_SCOPE: PHOTO_JAPAN_CODE_FILES,
+                    JAPAN_CODE_SCOPE: JAPAN_CODE_FILES}
 GENERATION_MOUNT = '/run/avtocena-china-generation'
 HOST_BULK_FILES = {'details.sqlite', 'query.sqlite', 'DISPOSITIONS.ndjson', 'FILTER_SEMANTICS.json',
                    'FX_RECEIPT.json', 'RECONCILIATION.json', 'image.tar'}
@@ -2751,6 +2792,24 @@ class Host:
                  all(photo.get(key) is True for key in ('passed', 'chinaPhotoPassed', 'japanFreshnessPassed',
                                                        'japanPowerApiPassed', 'japanUiPassed')),
                  'photo_japan_browser_binding')
+        if code_update(self.plan) and code_scope(self.plan) == JAPAN_CODE_SCOPE:
+            # This session's nonce and the live browser deadline above bind
+            # freshness without assuming the runner and host clocks are equal.
+            need(isinstance(details.get('japanReportBase64'), str) and
+                 isinstance(details.get('japanReportSha256'), str) and
+                 re.fullmatch(r'[a-f0-9]{64}', details['japanReportSha256']), 'japan_browser_binding')
+            japan_raw, japan = decode_report(details['japanReportBase64'])
+            oracle_sha = next(row['sha256'] for row in self.plan['files'] if row['name'] == 'acceptance.json')
+            need(len(japan_raw) <= 128 * 1024 and sha(japan_raw) == details['japanReportSha256'] and
+                 type(japan.get('version')) is int and japan['version'] == 1 and japan.get('kind') == 'catalog-japan-browser-v1' and
+                 japan.get('codeScope') == JAPAN_CODE_SCOPE and
+                 japan.get('release') == self.plan['runtimeSha'] and japan.get('nonce') == self.plan['nonce'] and
+                 japan.get('generationManifestSha256') == self.plan['generationManifestSha256'] and
+                 japan.get('oracleSha256') == oracle_sha and
+                 all(japan.get(key) is True for key in ('passed', 'japanFreshnessPassed', 'japanPowerApiPassed',
+                                                       'japanUiPassed', 'japanVisibilityPassed', 'readOnlyBrowserFence')) and
+                 all(type(japan.get(key)) is int and japan[key] == 0 for key in
+                     ('productionMutations', 'directSupplierRequests')), 'japan_browser_binding')
         for name, raw in [('BROWSER_SPEED.json', speed_raw), ('BROWSER_DETAILS.json', details_raw)]:
             new_file(self.directory / name, raw)
             need(file_sha(self.directory / name) == sha(raw), 'browser_evidence_readback')

@@ -12,6 +12,7 @@ on:
       - scripts/catalog-next/check-photo-runtime-tests.mjs
       - scripts/catalog-next/check-runtime-tests.mjs
       - scripts/catalog-next/photo-japan-browser-acceptance.mjs
+      - scripts/catalog-next/japan-browser-acceptance.mjs
       - scripts/catalog-next/build-release-image.mjs
       - scripts/catalog-next/restore-photo-image.mjs
       - scripts/catalog-next/daily-release.mjs
@@ -25,6 +26,9 @@ on:
       - tests/catalog-next-check-photo-runtime-tests.test.mjs
       - tests/catalog-next-check-runtime-tests.test.mjs
       - tests/catalog-next-restore-photo-image.test.mjs
+      - tests/catalog-next-japan-*.test.mjs
+      - tests/catalog-next-serving-compatibility.test.mjs
+      - tests/release-speed-guard-contract.test.mjs
       - tests/browser/photo-japan-recovery-clock.mjs
 permissions:
   contents: read
@@ -50,11 +54,21 @@ jobs:
         run: |
           node scripts/verify-frozen-speed-baselines.mjs
           node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/catalog-next-*.test.mjs tests/release-speed-guard-contract.test.mjs
-      - name: Checkout and verify the exact isolated photo candidate
+      - name: Checkout and verify the exact isolated code candidate
         run: |
           node --import tsx scripts/catalog-next/code-entry.mjs --checkout
           node --import tsx scripts/catalog-next/code-entry.mjs --verify
+      - name: Select the verified code scope for its required checks
+        id: photo_scope
+        run: |
+          node --input-type=module <<'JS'
+          import fs from 'node:fs';
+          import {checkedCatalogCodeScope} from './scripts/catalog-next/photo-code-scope.mjs';
+          const plan = JSON.parse(fs.readFileSync('.github/operations/catalog-next/china-code-serving-plan.json', 'utf8'));
+          fs.appendFileSync(process.env.GITHUB_OUTPUT, 'scope=' + checkedCatalogCodeScope(plan) + '\n');
+          JS
       - name: Prepare Chromium for the actual photo failure and recovery fixture
+        if: steps.photo_scope.outputs.scope != 'catalog-japan-recovery-v1'
         run: |
           npm install --prefix "$RUNNER_TEMP/photo-browser" --no-package-lock --ignore-scripts playwright@1.55.0
           node --input-type=module <<'JS'
@@ -63,18 +77,24 @@ jobs:
           const chrome=execFileSync('which',['google-chrome'],{encoding:'utf8'}).trim();
           fs.appendFileSync(process.env.GITHUB_ENV,'CHROME_BIN='+fs.realpathSync(chrome)+'\nPLAYWRIGHT_MODULE='+process.env.RUNNER_TEMP+'/photo-browser/node_modules/playwright/index.mjs\n');
           JS
-      - name: Test real photo components and the reviewed market scope
+      - name: Test the native runtime and every required check for its reviewed scope
+        env:
+          CATALOG_CODE_SCOPE: ${{ steps.photo_scope.outputs.scope }}
         run: |
           set -euo pipefail
           PHOTO_SHA=$(node -p "JSON.parse(require('fs').readFileSync('.github/operations/catalog-next/china-code-serving-plan.json')).runtimeSha")
-          PHOTO_RUNTIME_ROOT="$RUNNER_TEMP/china-serving-runtime-$PHOTO_SHA" node tests/browser/photo-japan-recovery-clock.mjs
+          if [[ "$CATALOG_CODE_SCOPE" == 'catalog-photo-recovery-v1' || "$CATALOG_CODE_SCOPE" == 'catalog-photo-japan-power-v1' ]]; then
+            PHOTO_RUNTIME_ROOT="$RUNNER_TEMP/china-serving-runtime-$PHOTO_SHA" node tests/browser/photo-japan-recovery-clock.mjs
+          fi
           node --import tsx scripts/catalog-next/check-photo-runtime-tests.mjs "$RUNNER_TEMP/china-serving-runtime-$PHOTO_SHA"
           cd "$RUNNER_TEMP/china-serving-runtime-$PHOTO_SHA"
           npm run typecheck
           git restore --source=HEAD --worktree -- apps/web/tsconfig.tsbuildinfo
-          node --import tsx tests/browser/catalog-photo-recovery.mjs
+          if [[ "$CATALOG_CODE_SCOPE" == 'catalog-photo-recovery-v1' || "$CATALOG_CODE_SCOPE" == 'catalog-photo-japan-power-v1' ]]; then
+            node --import tsx tests/browser/catalog-photo-recovery.mjs
+          fi
       - name: Preserve the browser recovery evidence
-        if: always()
+        if: always() && steps.photo_scope.outputs.scope != 'catalog-japan-recovery-v1'
         uses: actions/upload-artifact@v4
         with:
           name: china-photo-recovery-fixture

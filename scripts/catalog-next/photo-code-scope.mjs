@@ -33,20 +33,63 @@ export const CHINA_PHOTO_JAPAN_CODE_PATHS = Object.freeze([...new Set([...CHINA_
   'tests/japan-pw-first.test.ts',
   'tests/japan-pw-results.test.ts',
 ])]);
+export const JAPAN_RECOVERY_RETAINED_RUNTIME = 'd536c1547c4d82a339ed68ced7d8503f09b6810b';
+export const JAPAN_RECOVERY_CODE_PATHS = Object.freeze([
+  'apps/web/app/(public)/cars/offer/[id]/page.tsx',
+  'apps/web/app/(public)/page.tsx',
+  'apps/web/components/catalog/AjesCatalog.tsx',
+  'apps/web/components/catalog/AjesRail.tsx',
+  'apps/web/components/catalog/CatalogCard.tsx',
+  'apps/web/components/catalog/CatalogContent.tsx',
+  'apps/web/components/catalog/JapanRailFrame.tsx',
+  'apps/web/components/home/HomeJapanFilteredRail.tsx',
+  'apps/web/components/home/HomePageClient.tsx',
+  'apps/web/lib/catalog/ajes-catalog.ts',
+  'apps/web/lib/catalog/ajes-client.ts',
+  'apps/web/lib/catalog/ajes-error-response.ts',
+  'apps/web/lib/catalog/ajes-query.ts',
+  'apps/web/lib/catalog/ajes-result-filter.ts',
+  'apps/web/lib/catalog/detail-read-cache.ts',
+  'apps/web/lib/catalog/japan-source-power.ts',
+  'apps/web/lib/catalog/storage.ts',
+  'apps/web/lib/catalog/types.ts',
+  'tests/ajes-catalog-progressive.test.ts',
+  'tests/ajes-count-display.test.ts',
+  'tests/ajes-disabled-response.test.ts',
+  'tests/ajes-japan-feed.test.ts',
+  'tests/ajes-japan-only.test.ts',
+  'tests/ajes-rail-late-count.test.ts',
+  'tests/catalog-current-read-model-empty-market-policy.test.ts',
+  'tests/catalog-editable-power-scenario.test.ts',
+  'tests/catalog-market-page-boundary.test.ts',
+  'tests/catalog-market-page-city.test.ts',
+  'tests/catalog-next-home-isolation.test.ts',
+  'tests/catalog-next-home-parallel.test.ts',
+  'tests/home-editorial-empty.test.ts',
+  'tests/home-initial-catalog.test.ts',
+  'tests/home-japan-preview.test.ts',
+  'tests/japan-rail-visibility.test.ts',
+  'tests/japan-source-power.test.ts',
+  'tests/offer-navigation-performance.test.ts',
+  'tests/public-page-recovery.test.ts',
+]);
 const need = (value, code) => { if (!value) throw Error('china_photo_scope_' + code); };
 
 export function checkedCatalogCodeScope(plan) {
   const scope = plan?.codeScope ?? 'catalog-photo-recovery-v1';
   const paths = scope === 'catalog-photo-recovery-v1' ? CHINA_PHOTO_CODE_PATHS
-    : scope === 'catalog-photo-japan-power-v1' ? CHINA_PHOTO_JAPAN_CODE_PATHS : null;
+    : scope === 'catalog-photo-japan-power-v1' ? CHINA_PHOTO_JAPAN_CODE_PATHS
+    : scope === 'catalog-japan-recovery-v1' ? JAPAN_RECOVERY_CODE_PATHS : null;
   need(paths && Array.isArray(plan.runtimeFiles) && plan.runtimeFiles.length === paths.length
     && paths.every(name => plan.runtimeFiles.includes(name)), 'files');
+  need(scope !== 'catalog-japan-recovery-v1' || plan.retainedRuntime === JAPAN_RECOVERY_RETAINED_RUNTIME, 'retained_runtime');
   return scope;
 }
 
 /** A frozen China HTTP oracle may be reused only for one reviewed fixed delta.
  * China query/index/pricing, generation, proxy and server configuration are
- * excluded. The combined profile changes only Japan branches in shared readers.
+ * excluded. Japan profiles change only Japan branches in shared readers; the
+ * recovery profile starts from the accepted d536 runtime and is built afresh.
  * Both actual markets still pass their HTTP/browser acceptance before commit. */
 export async function verifyChinaPhotoCodeRuntime({runtimeRoot, servingPlan, pricingPlan}) {
   const codeScope = checkedCatalogCodeScope(servingPlan);

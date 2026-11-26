@@ -1,0 +1,147 @@
+{
+  "version": 1,
+  "kind": "unused-images-cleanup-20261126",
+  "controllerSha": "4f922692c6cf0d772a2c19255abe70157c9d3a25",
+  "completed": true,
+  "steps": [
+    {
+      "kind": "unused-image-removed-v1",
+      "index": 0,
+      "imageId": "sha256:0a1d136f6b292f9d027354fe8db3c14e12079e689e3f7b5773a7b014860213ea",
+      "diskFreeBytesBefore": 25376419840,
+      "diskFreeBytesAfter": 26569187328,
+      "measuredFreeBytesChange": 1192767488
+    },
+    {
+      "kind": "unused-image-removed-v1",
+      "index": 1,
+      "imageId": "sha256:2e6693575faf62d893cf546a72c81f02cbfe3ffd02746a74da30ce23bfb98753",
+      "diskFreeBytesBefore": 26569183232,
+      "diskFreeBytesAfter": 27763023872,
+      "measuredFreeBytesChange": 1193840640
+    },
+    {
+      "kind": "unused-image-removed-v1",
+      "index": 2,
+      "imageId": "sha256:7b400c45db84145dd591043af255d7bbf41583189eda91fbe268b64b3d427e65",
+      "diskFreeBytesBefore": 27763023872,
+      "diskFreeBytesAfter": 28956647424,
+      "measuredFreeBytesChange": 1193623552
+    },
+    {
+      "kind": "unused-image-removed-v1",
+      "index": 3,
+      "imageId": "sha256:c60e2b5cb94c4023681aecb74401b30c40582afad4c2ebce00389942501c25ac",
+      "diskFreeBytesBefore": 28956647424,
+      "diskFreeBytesAfter": 29152845824,
+      "measuredFreeBytesChange": 196198400
+    }
+  ],
+  "leaseRelease": "released",
+  "planSha256": "b5e8fe871625fff98ed633fed17c6a5cfdf6b24cc867fffba94a3cae97866b39",
+  "plan": {
+    "kind": "unused-images-prepared-v1",
+    "targets": [
+      {
+        "id": "sha256:0a1d136f6b292f9d027354fe8db3c14e12079e689e3f7b5773a7b014860213ea",
+        "runtimeSha": "1518035b9e6b717cd364ae8d13e63d0127899112",
+        "created": "2026-11-24T19:19:45.159037575Z",
+        "sizeBytes": 258504898,
+        "tags": [
+          "avtocena-china-runtime:1518035b9e6b717cd364ae8d13e63d0127899112-2ccda6dfff61"
+        ],
+        "digestCount": 1,
+        "digests": [
+          "avtocena-china-runtime@sha256:0a1d136f6b292f9d027354fe8db3c14e12079e689e3f7b5773a7b014860213ea"
+        ]
+      },
+      {
+        "id": "sha256:2e6693575faf62d893cf546a72c81f02cbfe3ffd02746a74da30ce23bfb98753",
+        "runtimeSha": "36d707bcb599e861918df411e40d8947074f0430",
+        "created": "2026-11-25T19:38:24.100731673Z",
+        "sizeBytes": 258503868,
+        "tags": [
+          "avtocena-china-runtime:36d707bcb599e861918df411e40d8947074f0430-1ba2c0080f30"
+        ],
+        "digestCount": 1,
+        "digests": [
+          "avtocena-china-runtime@sha256:2e6693575faf62d893cf546a72c81f02cbfe3ffd02746a74da30ce23bfb98753"
+        ]
+      },
+      {
+        "id": "sha256:7b400c45db84145dd591043af255d7bbf41583189eda91fbe268b64b3d427e65",
+        "runtimeSha": "4302f59a0312f35a64fc3cb9c5b25f9463fa9294",
+        "created": "2026-11-25T12:20:38.926399807Z",
+        "sizeBytes": 258506545,
+        "tags": [
+          "avtocena-china-runtime:4302f59a0312f35a64fc3cb9c5b25f9463fa9294-ccc99139f158"
+        ],
+        "digestCount": 1,
+        "digests": [
+          "avtocena-china-runtime@sha256:7b400c45db84145dd591043af255d7bbf41583189eda91fbe268b64b3d427e65"
+        ]
+      },
+      {
+        "id": "sha256:c60e2b5cb94c4023681aecb74401b30c40582afad4c2ebce00389942501c25ac",
+        "runtimeSha": "4302f59a0312f35a64fc3cb9c5b25f9463fa9294",
+        "created": "2026-11-25T13:23:19.465588516Z",
+        "sizeBytes": 258502101,
+        "tags": [
+          "avtocena-china-runtime:4302f59a0312f35a64fc3cb9c5b25f9463fa9294-a58a2b6b819b"
+        ],
+        "digestCount": 1,
+        "digests": [
+          "avtocena-china-runtime@sha256:c60e2b5cb94c4023681aecb74401b30c40582afad4c2ebce00389942501c25ac"
+        ]
+      }
+    ],
+    "imagesPlanned": 4,
+    "containersPreserved": 12,
+    "diskFreeBytesBefore": 25376423936,
+    "planSha256": "b5e8fe871625fff98ed633fed17c6a5cfdf6b24cc867fffba94a3cae97866b39",
+    "privateStateWrites": 0,
+    "closedCandidateProof": {
+      "runtimeSha": "36d707bcb599e861918df411e40d8947074f0430",
+      "imageId": "sha256:2e6693575faf62d893cf546a72c81f02cbfe3ffd02746a74da30ce23bfb98753",
+      "proofSha256": {
+        "PLAN.json": "1b8455abcd8512467f31bc0e2735922536cee40d933084ae3934ef38515c99dc",
+        "ROLLED_BACK.json": "783809d2dc846fbac6c01699f5419345bb61eca77c6542d304eb283fed0d74e6",
+        "FAILED_CODE_CLEANUP.json": "4488f9fc79ce54859d92a952f73426973e9e3df7555e0ba3daee5b126570f2da"
+      }
+    },
+    "closedCandidateStateBinding": {
+      "previousRevision": 18,
+      "currentRevision": 18,
+      "currentEqualsPrevious": true,
+      "exactRolledBackState": false,
+      "matchingResolvedRollbackIntent": false,
+      "imageReferencedByAuthority": false,
+      "currentValueSha256": "9c19bb3b1c3a46c2b4d52c4c55237edfc448ef74c7bc19d67cf58f4fd33bbaba",
+      "previousValueSha256": "9c19bb3b1c3a46c2b4d52c4c55237edfc448ef74c7bc19d67cf58f4fd33bbaba",
+      "mode": "pre_reservation_exact_state"
+    }
+  },
+  "result": {
+    "kind": "unused-images-result-v1",
+    "completed": true,
+    "imagesRemoved": [
+      "sha256:0a1d136f6b292f9d027354fe8db3c14e12079e689e3f7b5773a7b014860213ea",
+      "sha256:2e6693575faf62d893cf546a72c81f02cbfe3ffd02746a74da30ce23bfb98753",
+      "sha256:7b400c45db84145dd591043af255d7bbf41583189eda91fbe268b64b3d427e65",
+      "sha256:c60e2b5cb94c4023681aecb74401b30c40582afad4c2ebce00389942501c25ac"
+    ],
+    "diskFreeBytesBefore": 25376423936,
+    "diskFreeBytesAfter": 29152845824,
+    "measuredFreeBytesChange": 3776421888,
+    "containersPreserved": 12,
+    "containersDeleted": 0,
+    "filesDeleted": 0,
+    "volumesDeleted": 0,
+    "acceptedStateWrites": 0,
+    "intentStateWrites": 0,
+    "liveRuntimeSha": "d536c1547c4d82a339ed68ced7d8503f09b6810b",
+    "generationId": "gen_china_45655051136_1",
+    "planSha256": "b5e8fe871625fff98ed633fed17c6a5cfdf6b24cc867fffba94a3cae97866b39"
+  },
+  "finishedAt": "2026-11-26T05:12:28.291Z"
+}

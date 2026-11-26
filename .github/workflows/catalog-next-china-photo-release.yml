@@ -66,8 +66,8 @@ jobs:
           runtime-basedir: ${{ runner.temp }}/photo-docker
           daemon-config: |
             {"features":{"containerd-snapshotter":true}}
-      - name: Build the verified photo-only source and check its image roundtrip
-        if: steps.photo_scope.outputs.scope == 'catalog-photo-recovery-v1'
+      - name: Build the verified source and check its image roundtrip
+        if: steps.photo_scope.outputs.scope == 'catalog-photo-recovery-v1' || steps.photo_scope.outputs.scope == 'catalog-japan-recovery-v1'
         env:
           CHINA_BUILD_DOCKER_HOST: ${{ steps.photo_docker.outputs.sock }}
         run: node scripts/run-node-with-resources.mjs --import tsx scripts/catalog-next/code-entry.mjs --build
@@ -99,6 +99,8 @@ jobs:
             artifacts/catalog-photo-live/**
             catalog-next-photo-japan-browser-report.json
             artifacts/catalog-photo-japan-live/**
+            catalog-next-japan-browser-report.json
+            artifacts/catalog-japan-live/**
             ${{ runner.temp }}/china-release-build/image-receipt.json
             ${{ runner.temp }}/china-release-build/image-storage-proof.json
             ${{ runner.temp }}/china-release-build/image-restoration-report.json
