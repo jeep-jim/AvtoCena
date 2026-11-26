@@ -6,7 +6,7 @@ import os from 'node:os';
 import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
 import {verifyServingCompatibility} from '../scripts/catalog-next/serving-compatibility.mjs';
-import {JAPAN_RECOVERY_CODE_PATHS} from '../scripts/catalog-next/photo-code-scope.mjs';
+import {JAPAN_RECOVERY_CODE_PATHS,JAPAN_COMPLETION_CODE_PATHS} from '../scripts/catalog-next/photo-code-scope.mjs';
 
 const hash = raw => createHash('sha256').update(raw).digest('hex');
 async function fixture(t) {
@@ -95,6 +95,26 @@ test('Japan recovery never admits another application or test path through a bro
     await assert.rejects(verifyServingCompatibility({...f,
       servingPlan: {...f.servingPlan(), codeScope: 'catalog-japan-recovery-v1'}}), /china_serving_change_scope/);
     f.git(['reset', '--hard', f.pricingPlan.runtimeSha]);
+  }
+});
+
+test('Japan completion permits only its reviewed additions to the retained serving delta',async t=>{
+  const f=await fixture(t),files=[...new Set([...JAPAN_RECOVERY_CODE_PATHS,...JAPAN_COMPLETION_CODE_PATHS])].sort();
+  for(const filename of files)await f.write(filename,'reviewed Japan successor\n');
+  f.commit();
+  const proof=await verifyServingCompatibility({...f,servingPlan:{...f.servingPlan(),codeScope:'catalog-japan-completion-v1'}});
+  assert.deepEqual(proof.pricingToServingFiles,files);assert.equal(proof.protectedPricingPathsUnchanged,true);
+  for(const codeScope of ['catalog-japan-recovery-v1','catalog-photo-recovery-v1','catalog-photo-japan-power-v1'])
+    await assert.rejects(verifyServingCompatibility({...f,servingPlan:{...f.servingPlan(),codeScope}}),/china_serving_change_scope/);
+});
+
+test('Japan completion retains protected pricing and refuses a neighbouring unreviewed change',async t=>{
+  const f=await fixture(t);
+  for(const filename of ['apps/web/lib/catalog/customs-pricing.ts','apps/web/lib/catalog/live-business-pricing.ts',
+    'apps/web/lib/catalog/city-delivery.ts','apps/web/lib/encyclopedia/calculation-index.ts','tests/japan-unreviewed.test.ts']){
+    await f.write(filename,'unreviewed delta\n');f.commit();
+    await assert.rejects(verifyServingCompatibility({...f,servingPlan:{...f.servingPlan(),codeScope:'catalog-japan-completion-v1'}}),/china_serving_change_scope/);
+    f.git(['reset','--hard',f.pricingPlan.runtimeSha]);
   }
 });
 

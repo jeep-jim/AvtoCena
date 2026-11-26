@@ -98,6 +98,16 @@ const allowedJapanRecovery = new Set([
   'tests/offer-navigation-performance.test.ts',
   'tests/public-page-recovery.test.ts',
 ]);
+// Exact additional paths reviewed for the successor of 36c7. The old profile
+// and protected China pricing bytes keep their existing contract.
+const allowedJapanCompletion = new Set([...allowedJapanRecovery,
+  'apps/web/lib/catalog/ajes-power-estimate.ts',
+  'tests/browser/japan-catalog-city-fixture.tsx',
+  'tests/browser/japan-catalog-city.mjs',
+  'tests/japan-catalog-city.test.ts',
+  'tests/japan-delivered-preview.test.ts',
+  'tests/japan-preview-consistency.test.ts',
+]);
 const typeOnlyPath = 'apps/web/lib/catalog/offer-page-data.ts';
 export const CHINA_PROTECTED_PRICING_PATHS = Object.freeze([
   'packages', 'data', 'scripts/catalog-next', 'apps/web/lib/encyclopedia',
@@ -122,7 +132,8 @@ export async function verifyServingCompatibility({runtimeRoot, servingPlan, pric
     && /^[a-f0-9]{64}$/.test(servingPlan.pricingToServingDiffSha256 ?? ''), 'plan_binding');
   const files = servingPlan.pricingToServingFiles;
   need(Array.isArray(files) && new Set(files).size === files.length && files.every(name =>
-    typeof name === 'string' && (servingPlan.codeScope === 'catalog-japan-recovery-v1' ? allowedJapanRecovery.has(name)
+    typeof name === 'string' && (servingPlan.codeScope === 'catalog-japan-completion-v1' ? allowedJapanCompletion.has(name)
+      : servingPlan.codeScope === 'catalog-japan-recovery-v1' ? allowedJapanRecovery.has(name)
       : allowedProduction.has(name) || allowedBrowserTests.has(name) || name === typeOnlyPath
         || /^tests\/catalog-next-[a-z0-9-]+\.test\.ts$/.test(name))), 'change_scope');
   runtimeRoot = await fs.realpath(runtimeRoot);

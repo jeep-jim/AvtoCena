@@ -1,0 +1,121 @@
+{
+  "version": 1,
+  "status": "candidate_verified_locally_not_published",
+  "recordedAt": "2026-11-26T09:04:05.476587+00:00",
+  "request": "Япония: сохранить мощность из ленты в форме карточки, рассчитывать при достаточных данных, проверить фильтр до 160 л.с. с бензином и городом.",
+  "runtime": {
+    "retainedRuntime": "36c7ea726e7f070d10dbc65afc6538f13c0c1a24",
+    "runtimeSha": "8cc5f755f0792c0dcd5517ec2df3295d5c0b2b1a",
+    "runtimeTree": "7e82c186be3d6b47c8e4adeeced1d17f18cf0e31",
+    "runtimeDiffSha256": "0197f1ae9140809a8b842312ff00a05c2e5622f9120445a8d46a8cccd78f99a4",
+    "runtimeFiles": [
+      "apps/web/components/catalog/CatalogFilters.tsx",
+      "apps/web/components/catalog/InlineOfferParameters.tsx",
+      "apps/web/lib/catalog/ajes-power-estimate.ts",
+      "apps/web/lib/catalog/japan-source-power.ts",
+      "apps/web/lib/location/selected-city.ts",
+      "tests/ajes-catalog-progressive.test.ts",
+      "tests/browser/japan-catalog-city-fixture.tsx",
+      "tests/browser/japan-catalog-city.mjs",
+      "tests/japan-catalog-city.test.ts",
+      "tests/japan-delivered-preview.test.ts",
+      "tests/japan-preview-consistency.test.ts",
+      "tests/japan-source-power.test.ts"
+    ],
+    "pricingRuntimeSha": "64c6338e0db23c8999096bceefbf113c0136fe15",
+    "pricingRuntimeTree": "d2fc1f171316bfb0dc76f09e90409d4d7336f6b3",
+    "pricingToServingDiffSha256": "0b93d646a10e59d1964b3a5644ba0b68a973080ca28efeccc6f0ec04cf65fdad",
+    "codeScope": "catalog-japan-completion-v1"
+  },
+  "checks": {
+    "nativeTests": {
+      "passed": 405,
+      "failed": 0,
+      "offline": true
+    },
+    "typecheck": {
+      "webExitCode": 0,
+      "engineExitCode": 0
+    },
+    "controllerTests": {
+      "passed": 828,
+      "failed": 0
+    },
+    "frozenSpeedBaselinesUnchanged": true,
+    "protectedPricingPathsUnchanged": true,
+    "typeOnlyChecks": [
+      {
+        "file": "apps/web/lib/catalog/offer-page-data.ts",
+        "emittedJavaScriptSha256": "7f8de1db3eae1862ad10a23a334a714fd2b6eb842abbabed98f687147e333a0f",
+        "compilerVersion": "5.9.3"
+      }
+    ],
+    "cityBrowserFixture": {
+      "passed": true,
+      "scope": "Actual CatalogFilters SSR/hydration and interactions; local fixture transport; no supplier calls or public acceptance",
+      "cases": [
+        {
+          "width": 390,
+          "route": "/cars/japan?fuel=petrol&city=Новокузнецк",
+          "ssrCity": "Новокузнецк",
+          "hydratedCity": "Новокузнецк",
+          "filterCity": "Новокузнецк",
+          "manualCity": "Казань",
+          "navigationCount": 3,
+          "passed": true
+        },
+        {
+          "width": 390,
+          "route": "/cars?market=japan&fuel=petrol&city=Новокузнецк",
+          "ssrCity": "Новокузнецк",
+          "hydratedCity": "Новокузнецк",
+          "filterCity": "Новокузнецк",
+          "manualCity": "Казань",
+          "navigationCount": 3,
+          "passed": true
+        },
+        {
+          "width": 1280,
+          "route": "/cars/japan?fuel=petrol&city=Новокузнецк",
+          "ssrCity": "Новокузнецк",
+          "hydratedCity": "Новокузнецк",
+          "filterCity": "Новокузнецк",
+          "manualCity": "Казань",
+          "navigationCount": 3,
+          "passed": true
+        },
+        {
+          "width": 1280,
+          "route": "/cars?market=japan&fuel=petrol&city=Новокузнецк",
+          "ssrCity": "Новокузнецк",
+          "hydratedCity": "Новокузнецк",
+          "filterCity": "Новокузнецк",
+          "manualCity": "Казань",
+          "navigationCount": 3,
+          "passed": true
+        }
+      ]
+    }
+  },
+  "pricingRegressionCases": [
+    {
+      "id": "ajes-stats-0fHPtlRkE77JQwQ",
+      "powerHp": 49
+    },
+    {
+      "id": "ajes-stats-0fmZ9YT7pC8NDfg",
+      "powerHp": 52
+    },
+    {
+      "id": "ajes-stats-0ffhxNHCTiXpqfv",
+      "powerHp": 97
+    }
+  ],
+  "pricingRegressionMethod": "Existing calculator with offline test rates/settings. Same full-record/public-DTO draft; list and detail totals match, including Novokuznetsk. This is not a live production price observation.",
+  "projectionRegression": "Operational-only hybrid markers remain display-only through public DTO and detail draft; unmarked old DTO cannot invent combustion eligibility. Independently rechecked at the immutable runtime SHA.",
+  "pending": [
+    "reviewed controller CI",
+    "fresh image build and publication",
+    "live petrol/power toggle, page two, city inheritance and delivered calculation gates"
+  ]
+}

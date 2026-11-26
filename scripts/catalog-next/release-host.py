@@ -42,6 +42,8 @@ PHOTO_CODE_FILES = {'apps/web/components/catalog/CatalogCover.tsx', 'apps/web/co
 PHOTO_CODE_SCOPE = 'catalog-photo-recovery-v1'
 PHOTO_JAPAN_CODE_SCOPE = 'catalog-photo-japan-power-v1'
 JAPAN_CODE_SCOPE = 'catalog-japan-recovery-v1'
+JAPAN_COMPLETION_CODE_SCOPE = 'catalog-japan-completion-v1'
+JAPAN_COMPLETION_RETAINED = '36c7ea726e7f070d10dbc65afc6538f13c0c1a24'
 PHOTO_JAPAN_CODE_FILES = PHOTO_CODE_FILES | {
     'apps/web/app/(public)/api/catalog/search/route.ts',
     'apps/web/app/(public)/cars/offer/[id]/page.tsx',
@@ -105,8 +107,22 @@ JAPAN_CODE_FILES = {
     'tests/offer-navigation-performance.test.ts',
     'tests/public-page-recovery.test.ts',
 }
+JAPAN_COMPLETION_CODE_FILES = {
+    'apps/web/components/catalog/CatalogFilters.tsx',
+    'apps/web/components/catalog/InlineOfferParameters.tsx',
+    'apps/web/lib/catalog/ajes-power-estimate.ts',
+    'apps/web/lib/catalog/japan-source-power.ts',
+    'apps/web/lib/location/selected-city.ts',
+    'tests/ajes-catalog-progressive.test.ts',
+    'tests/browser/japan-catalog-city-fixture.tsx',
+    'tests/browser/japan-catalog-city.mjs',
+    'tests/japan-catalog-city.test.ts',
+    'tests/japan-delivered-preview.test.ts',
+    'tests/japan-preview-consistency.test.ts',
+    'tests/japan-source-power.test.ts',
+}
 CODE_SCOPE_FILES = {PHOTO_CODE_SCOPE: PHOTO_CODE_FILES, PHOTO_JAPAN_CODE_SCOPE: PHOTO_JAPAN_CODE_FILES,
-                    JAPAN_CODE_SCOPE: JAPAN_CODE_FILES}
+                    JAPAN_CODE_SCOPE: JAPAN_CODE_FILES, JAPAN_COMPLETION_CODE_SCOPE: JAPAN_COMPLETION_CODE_FILES}
 GENERATION_MOUNT = '/run/avtocena-china-generation'
 HOST_BULK_FILES = {'details.sqlite', 'query.sqlite', 'DISPOSITIONS.ndjson', 'FILTER_SEMANTICS.json',
                    'FX_RECEIPT.json', 'RECONCILIATION.json', 'image.tar'}
@@ -561,7 +577,9 @@ def validate_plan(plan):
     if accepted_update(plan):
         accepted_predecessor(plan)
         if code_update(plan):
-            code_scope(plan)
+            scope = code_scope(plan)
+            need(scope != JAPAN_COMPLETION_CODE_SCOPE or plan.get('retainedRuntime') == JAPAN_COMPLETION_RETAINED,
+                 'code_completion_predecessor')
             need(all(isinstance(plan.get(key), str) and re.fullmatch(r'[a-f0-9]{64}', plan[key])
                      for key in ('codeSourcePlanSha256', 'codeSourceOracleSha256')), 'code_source_binding')
     else:
@@ -2792,7 +2810,7 @@ class Host:
                  all(photo.get(key) is True for key in ('passed', 'chinaPhotoPassed', 'japanFreshnessPassed',
                                                        'japanPowerApiPassed', 'japanUiPassed')),
                  'photo_japan_browser_binding')
-        if code_update(self.plan) and code_scope(self.plan) == JAPAN_CODE_SCOPE:
+        if code_update(self.plan) and code_scope(self.plan) in (JAPAN_CODE_SCOPE, JAPAN_COMPLETION_CODE_SCOPE):
             # This session's nonce and the live browser deadline above bind
             # freshness without assuming the runner and host clocks are equal.
             need(isinstance(details.get('japanReportBase64'), str) and
@@ -2802,7 +2820,7 @@ class Host:
             oracle_sha = next(row['sha256'] for row in self.plan['files'] if row['name'] == 'acceptance.json')
             need(len(japan_raw) <= 128 * 1024 and sha(japan_raw) == details['japanReportSha256'] and
                  type(japan.get('version')) is int and japan['version'] == 1 and japan.get('kind') == 'catalog-japan-browser-v1' and
-                 japan.get('codeScope') == JAPAN_CODE_SCOPE and
+                 japan.get('codeScope') == code_scope(self.plan) and
                  japan.get('release') == self.plan['runtimeSha'] and japan.get('nonce') == self.plan['nonce'] and
                  japan.get('generationManifestSha256') == self.plan['generationManifestSha256'] and
                  japan.get('oracleSha256') == oracle_sha and
@@ -2810,6 +2828,11 @@ class Host:
                                                        'japanUiPassed', 'japanVisibilityPassed', 'readOnlyBrowserFence')) and
                  all(type(japan.get(key)) is int and japan[key] == 0 for key in
                      ('productionMutations', 'directSupplierApiRequests')), 'japan_browser_binding')
+            if code_scope(self.plan) == JAPAN_COMPLETION_CODE_SCOPE:
+                need(all(japan.get(key) is True for key in ('japanPetrolPowerUiPassed', 'japanDetailPowerInputPassed',
+                                                          'japanDeliveredCalculationPassed')) and
+                     type(japan.get('japanPreviewCalculationRequests')) is int and
+                     1 <= japan['japanPreviewCalculationRequests'] <= 2, 'japan_browser_binding')
         for name, raw in [('BROWSER_SPEED.json', speed_raw), ('BROWSER_DETAILS.json', details_raw)]:
             new_file(self.directory / name, raw)
             need(file_sha(self.directory / name) == sha(raw), 'browser_evidence_readback')

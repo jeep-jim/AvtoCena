@@ -354,12 +354,13 @@ export function createChinaDailyRelease({root, servingRoot, pricingPlan, serving
             need(detailsRaw.length <= 256 * 1024, 'browser_details_size');
             await fs.writeFile(detailsPath, detailsRaw, {mode: 0o600});
           }
-          if (codeUpdate && plan.codeScope === 'catalog-japan-recovery-v1') {
+          if (codeUpdate && ['catalog-japan-recovery-v1', 'catalog-japan-completion-v1'].includes(plan.codeScope)) {
             await activeGuard(); await progress('code_japan_browser');
             const japanOutput = path.join(browserDirectory, 'japan-browser-report.json'), japanStartedAt = Date.now();
             const japanExit = await use.runChild({root, script: path.join(root, 'scripts/catalog-next/japan-browser-acceptance.mjs'),
               args: [], cwd: browserDirectory, env: {...browserEnv, ORACLE_PATH: oraclePath,
-                EXPECTED_RELEASE_SHA: candidate.runtimeSha, VERIFICATION_NONCE: nonce, OUTPUT: japanOutput}});
+                EXPECTED_RELEASE_SHA: candidate.runtimeSha, VERIFICATION_NONCE: nonce, OUTPUT: japanOutput,
+                CATALOG_CODE_SCOPE: plan.codeScope}});
             let japanRaw;
             try { japanRaw = await fs.readFile(japanOutput); }
             catch (error) { need(japanExit === 0, 'japan_browser_failed'); throw error; }
@@ -377,6 +378,11 @@ export function createChinaDailyRelease({root, servingRoot, pricingPlan, serving
             need(['passed', 'japanFreshnessPassed', 'japanPowerApiPassed', 'japanUiPassed', 'japanVisibilityPassed', 'readOnlyBrowserFence']
                 .every(key => japan[key] === true)
               && ['productionMutations', 'directSupplierApiRequests'].every(key => japan[key] === 0), 'japan_browser_binding');
+            if (plan.codeScope === 'catalog-japan-completion-v1') need(
+              ['japanPetrolPowerUiPassed', 'japanDetailPowerInputPassed', 'japanDeliveredCalculationPassed']
+                .every(key => japan[key] === true)
+              && Number.isSafeInteger(japan.japanPreviewCalculationRequests) && japan.japanPreviewCalculationRequests >= 1
+              && japan.japanPreviewCalculationRequests <= 2, 'japan_browser_binding');
             detailsRaw = Buffer.from(JSON.stringify({...details, japanReportBase64: japanRaw.toString('base64'),
               japanReportSha256: hash(japanRaw)}) + '\n');
             need(detailsRaw.length <= 256 * 1024, 'browser_details_size');

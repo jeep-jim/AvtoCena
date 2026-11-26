@@ -73,16 +73,35 @@ export const JAPAN_RECOVERY_CODE_PATHS = Object.freeze([
   'tests/offer-navigation-performance.test.ts',
   'tests/public-page-recovery.test.ts',
 ]);
+export const JAPAN_COMPLETION_RETAINED_RUNTIME = '36c7ea726e7f070d10dbc65afc6538f13c0c1a24';
+// A separate exact successor of the accepted Japan recovery. Keep the earlier
+// profile immutable: its receipts and rollback proof still bind that old delta.
+export const JAPAN_COMPLETION_CODE_PATHS = Object.freeze([
+  'apps/web/components/catalog/CatalogFilters.tsx',
+  'apps/web/components/catalog/InlineOfferParameters.tsx',
+  'apps/web/lib/catalog/ajes-power-estimate.ts',
+  'apps/web/lib/catalog/japan-source-power.ts',
+  'apps/web/lib/location/selected-city.ts',
+  'tests/ajes-catalog-progressive.test.ts',
+  'tests/browser/japan-catalog-city-fixture.tsx',
+  'tests/browser/japan-catalog-city.mjs',
+  'tests/japan-catalog-city.test.ts',
+  'tests/japan-delivered-preview.test.ts',
+  'tests/japan-preview-consistency.test.ts',
+  'tests/japan-source-power.test.ts',
+]);
 const need = (value, code) => { if (!value) throw Error('china_photo_scope_' + code); };
 
 export function checkedCatalogCodeScope(plan) {
   const scope = plan?.codeScope ?? 'catalog-photo-recovery-v1';
   const paths = scope === 'catalog-photo-recovery-v1' ? CHINA_PHOTO_CODE_PATHS
     : scope === 'catalog-photo-japan-power-v1' ? CHINA_PHOTO_JAPAN_CODE_PATHS
-    : scope === 'catalog-japan-recovery-v1' ? JAPAN_RECOVERY_CODE_PATHS : null;
+    : scope === 'catalog-japan-recovery-v1' ? JAPAN_RECOVERY_CODE_PATHS
+    : scope === 'catalog-japan-completion-v1' ? JAPAN_COMPLETION_CODE_PATHS : null;
   need(paths && Array.isArray(plan.runtimeFiles) && plan.runtimeFiles.length === paths.length
     && paths.every(name => plan.runtimeFiles.includes(name)), 'files');
   need(scope !== 'catalog-japan-recovery-v1' || plan.retainedRuntime === JAPAN_RECOVERY_RETAINED_RUNTIME, 'retained_runtime');
+  need(scope !== 'catalog-japan-completion-v1' || plan.retainedRuntime === JAPAN_COMPLETION_RETAINED_RUNTIME, 'retained_runtime');
   return scope;
 }
 
