@@ -94,7 +94,15 @@ async function run() {
         })]);
         need(!row.done && row.value.length <= 65536, 'reply_missing');
         const value = JSON.parse(row.value); settled = value.uncertain !== true;
-        if (value.errorCode) throw Error(safe({message: value.errorCode}));
+        if (value.errorCode) {
+          const d = value.closedCandidateStateCheck;
+          if (d && ['previousRevision','currentRevision'].every(key => Number.isSafeInteger(d[key]) && d[key] >= 0)
+            && ['currentEqualsPrevious','exactRolledBackState','matchingResolvedRollbackIntent','imageReferencedByAuthority'].every(key => typeof d[key] === 'boolean')
+            && ['currentValueSha256','previousValueSha256'].every(key => /^[a-f0-9]{64}$/.test(d[key])))
+            report.closedCandidateStateCheck = Object.fromEntries(['previousRevision','currentRevision','currentEqualsPrevious',
+              'exactRolledBackState','matchingResolvedRollbackIntent','imageReferencedByAuthority','currentValueSha256','previousValueSha256'].map(key => [key,d[key]]));
+          throw Error(safe({message: value.errorCode}));
+        }
         return value;
       } finally { clearTimeout(timer); }
     };

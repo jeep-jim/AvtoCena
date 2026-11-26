@@ -79,10 +79,18 @@ class CleanupTests(unittest.TestCase):
             value.proof_files = []
             value.h = types.SimpleNamespace(BASE=base, private_directory=lambda _: None,
               file_sha=lambda path: checks[path.name], diagnosis_json=lambda path: (values[path.name], path.name.encode()))
-            with mock.patch.object(m, 'sha', side_effect=lambda raw: checks[raw.decode()]):
+            with mock.patch.object(m, 'sha', side_effect=lambda raw: checks.get(raw.decode(), m.hashlib.sha256(raw).hexdigest())):
                 value.release_completed_candidate_reference(state)
                 self.assertEqual(value.protected, {current_image})
+                self.assertEqual(value.closed_candidate_state_binding['mode'], 'reserved_exact_rollback')
+                value.authority['publicationState']['intent']['value'] = None
+                value.release_completed_candidate_reference(previous)
+                self.assertEqual(value.closed_candidate_state_binding['mode'], 'pre_reservation_exact_state')
+                with self.assertRaisesRegex(RuntimeError, 'closed_candidate_state'):
+                    value.release_completed_candidate_reference({**previous, 'revision': 13})
                 value.protected.add(target['id'])
+                with self.assertRaisesRegex(RuntimeError, 'closed_candidate_state'):
+                    value.release_completed_candidate_reference(previous)
                 cleanup['completed'] = False
                 with self.assertRaises(RuntimeError):
                     value.release_completed_candidate_reference(state)

@@ -243,9 +243,7 @@ class Cleanup:
         need(not (directory / 'ACCEPTED.json').exists() and plan.get('runtimeSha') == runtime and plan.get('imageId') == image
              and plan.get('generationId') == GENERATION and plan.get('generationManifestSha256') == MANIFEST
              and plan.get('nonce') == directory.name == rollback.get('nonce') == cleanup.get('nonce')
-             and isinstance(plan.get('previousAcceptedState'), dict)
-             and state == {**plan['previousAcceptedState'], 'revision': plan['previousAcceptedState']['revision'] + 2, 'pending': None},
-             'closed_candidate_plan')
+             and isinstance(plan.get('previousAcceptedState'), dict), 'closed_candidate_plan')
         need(rollback.get('kind') == 'china-host-rollback-v1' and rollback.get('release') == runtime
              and rollback.get('imageId') == image and rollback.get('retainedRuntimeSha') == CURRENT
              and rollback.get('retainedImageId') == state['current']['imageId']
@@ -255,14 +253,27 @@ class Cleanup:
              and cleanup.get('planSha256') == expected['PLAN.json'] and cleanup.get('rollbackSha256') == expected['ROLLED_BACK.json'],
              'closed_candidate_cleanup')
         intent = self.authority['publicationState']['intent'].get('value')
-        if intent and intent.get('candidate', {}).get('imageId') == image:
-            resolution = intent.get('resolution') or {}
-            need(intent.get('status') == 'aborted' and intent.get('nonce') == plan['nonce']
-                 and intent.get('previous', {}).get('value') == plan['previousAcceptedState']
-                 and intent.get('previous', {}).get('etag') == plan['previousAcceptedETag']
-                 and intent.get('previous', {}).get('sha256') == plan['previousAcceptedStateSha256']
-                 and resolution.get('kind') == 'rolled_back'
-                 and resolution.get('rollbackProof', {}).get('hostRollbackSha256') == expected['ROLLED_BACK.json'], 'closed_candidate_intent')
+        previous = plan['previousAcceptedState']
+        unreserved = state == previous and image not in self.protected
+        resolution = (intent or {}).get('resolution') or {}
+        rollback_state = state == {**previous, 'revision': previous['revision'] + 2, 'pending': None}
+        matching_intent = bool(intent and intent.get('candidate', {}).get('imageId') == image
+            and intent.get('status') == 'aborted' and intent.get('nonce') == plan['nonce']
+            and intent.get('previous', {}).get('value') == previous
+            and intent.get('previous', {}).get('etag') == plan['previousAcceptedETag']
+            and intent.get('previous', {}).get('sha256') == plan['previousAcceptedStateSha256']
+            and resolution.get('kind') == 'rolled_back'
+            and resolution.get('rollbackProof', {}).get('hostRollbackSha256') == expected['ROLLED_BACK.json'])
+        diagnostic = {'previousRevision': previous['revision'], 'currentRevision': state['revision'],
+          'currentEqualsPrevious': state == previous, 'exactRolledBackState': rollback_state,
+          'matchingResolvedRollbackIntent': matching_intent, 'imageReferencedByAuthority': image in self.protected,
+          'currentValueSha256': fingerprint(state), 'previousValueSha256': fingerprint(previous)}
+        if not (unreserved or (rollback_state and matching_intent)):
+            error = RuntimeError('unused_images_closed_candidate_state')
+            error.safeDiagnostics = diagnostic
+            raise error
+        self.closed_candidate_state_binding = {**diagnostic,
+          'mode': 'pre_reservation_exact_state' if unreserved else 'reserved_exact_rollback'}
         need(image not in referenced_images(state), 'closed_candidate_accepted')
         self.protected.discard(image)
         self.closed_candidate_proof = {'runtimeSha': runtime, 'imageId': image, 'proofSha256': expected}
@@ -285,7 +296,7 @@ class Cleanup:
     def prepared(self):
         return {'kind': 'unused-images-prepared-v1', 'targets': TARGETS, 'imagesPlanned': len(TARGETS),
                 'containersPreserved': len(self.original_containers), 'diskFreeBytesBefore': self.before,
-                'planSha256': fingerprint(TARGETS), 'privateStateWrites': 0, 'closedCandidateProof': self.closed_candidate_proof}
+                'planSha256': fingerprint(TARGETS), 'privateStateWrites': 0, 'closedCandidateProof': self.closed_candidate_proof, 'closedCandidateStateBinding': self.closed_candidate_state_binding}
 
     def step(self, message):
         need(set(message) == {'action', 'index', 'authority'} and message['action'] == 'remove'
@@ -359,7 +370,8 @@ def main():
     except BaseException as error:
         code = str(error)
         emit({'errorCode': code if re.fullmatch(r'(?:unused_images|china_host)_[a-z0-9_]{1,140}', code)
-              else 'unused_images_host_failed', 'uncertain': bool(cleanup and cleanup.inflight)})
+              else 'unused_images_host_failed', 'uncertain': bool(cleanup and cleanup.inflight),
+              'closedCandidateStateCheck': getattr(error, 'safeDiagnostics', None)})
         raise SystemExit(1)
     finally:
         if cleanup is not None:
