@@ -1,0 +1,74 @@
+name: Resume bounded retired China REG generations
+on:
+  push:
+    branches: [main]
+    paths:
+      - scripts/catalog-next/resume-china-reg-retention-45875678028.mjs
+      - tests/catalog-next-china-reg-retention-resume.test.mjs
+      - .github/workflows/china-reg-retention-resume-45875678028.yml
+      - .github/market-runs/china-reg-retention-resume-45875678028.json
+permissions:
+  contents: read
+  actions: read
+jobs:
+  verify:
+    if: github.repository_id == '1289722938' && github.ref == 'refs/heads/main' && github.run_attempt == '1'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with: {fetch-depth: 2, persist-credentials: false}
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with: {node-version: '24.22.3', cache: npm}
+      - run: npm ci --no-audit --no-fund
+      - name: Check maintenance syntax and every existing offline controller gate
+        run: |
+          node --check scripts/catalog-next/resume-china-reg-retention-45875678028.mjs
+          node scripts/verify-frozen-speed-baselines.mjs
+          node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/catalog-next-*.test.mjs tests/release-speed-guard-contract.test.mjs
+  resume-retention:
+    needs: verify
+    concurrency:
+      group: catalog-next-china
+      cancel-in-progress: false
+    if: >-
+      github.repository_id == '1289722938'
+      && github.ref == 'refs/heads/main'
+      && github.run_attempt == '1'
+      && github.event_name == 'push'
+      && github.event.head_commit.message == 'Resume only retired China REG generations after accepted 45875678028'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    environment: regcloud-staging
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with: {fetch-depth: 2, persist-credentials: false}
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with: {node-version: '24.22.3', cache: npm}
+      - run: npm ci --no-audit --no-fund
+      - name: Verify exact reviewed marker before credentials
+        run: |
+          node --import tsx --input-type=module <<'JS'
+          import {verifyInvocation} from './scripts/catalog-next/resume-china-reg-retention-45875678028.mjs';
+          verifyInvocation();
+          JS
+      - name: Resume only existing retired A and B tasks under China lease
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+          JSON_STORAGE_DRIVER: object
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_REGION: us-east-1
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+        run: node --import tsx scripts/catalog-next/resume-china-reg-retention-45875678028.mjs --run
+      - name: Preserve bounded aggregate outcome
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: china-reg-retention-resume-45875678028-report
+          path: china-reg-retention-resume-45875678028-report.json
+          if-no-files-found: ignore
+          retention-days: 14
