@@ -1,0 +1,35 @@
+name: Inspect China GitHub schedule metadata (read only)
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/china-schedule-metadata-readonly-20261127.yml
+      - scripts/catalog-next/inspect-china-schedule-metadata-20261127.py
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: china-schedule-metadata-readonly
+  cancel-in-progress: false
+jobs:
+  inspect:
+    if: github.repository_id == '1289722938' && github.ref == 'refs/heads/main' && github.run_attempt == '1'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with: {persist-credentials: false}
+      - name: Check the metadata reader syntax without running requests
+        run: python3 -I -B -c "import ast,pathlib; ast.parse(pathlib.Path('scripts/catalog-next/inspect-china-schedule-metadata-20261127.py').read_text())"
+      - name: Read the fixed repository, workflow state and scheduled run metadata
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: python3 -I -B scripts/catalog-next/inspect-china-schedule-metadata-20261127.py
+      - name: Preserve bounded GitHub metadata only
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: china-schedule-metadata-readonly
+          path: china-schedule-metadata-20261127.json
+          if-no-files-found: ignore
+          retention-days: 14
