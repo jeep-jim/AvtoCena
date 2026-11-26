@@ -61,22 +61,34 @@ export function verifyJapanPowerPage(payload){
  return {...expected,unknownRetainedAndLabelled:true,countHonest:true};
 }
 
-export function japanVerificationRequestScope(url,method){
+export function japanVerificationRequestScope(url,method,resourceType){
  if(!['GET','HEAD'].includes(method))return 'mutation';
  let value,pathname;try{value=new URL(url);pathname=decodeURIComponent(value.pathname);}catch{return 'external';}
- if(value.origin!==ORIGIN||value.username||value.password)return 'external';
+ if(value.username||value.password)return 'external';
+ if(value.origin!==ORIGIN){
+  // Japan photos are intentionally direct. Permit only the same immutable image
+  // URL shapes accepted by ajesImageUrl, never supplier APIs or external scripts.
+  const authority=/^https:\/\/([^/?#]*)/i.exec(url)?.[1];
+  if(resourceType==='image'&&value.protocol==='https:'&&authority?.toLowerCase()===value.hostname
+   &&!value.port&&!value.search&&!value.hash&&!/[?#]/.test(url)
+   &&/^(?:7\.tru\.ru|7\.ajes\.com|8\.ajes\.com|9\.ajes\.com)$/.test(value.hostname)
+   &&/^\/imgs?\/[A-Za-z0-9_-]+(?:&(?:h|w)=\d+)*$/.test(value.pathname))return 'supplier_image';
+  return 'external';
+ }
  if(/[\\\x00-\x1f\x7f]/.test(pathname)||/^(?:\/crm|\/admin|\/api\/(?:crm|admin|internal))(?:\/|$)/.test(pathname))return 'private';
  return 'allowed';
 }
 
-async function installReadFence(context,report){
+export async function installReadFence(context,report){
  report.blockedRequests={mutation:0,external:0,private:0,redirect:0};
+ report.supplierImageRequests=0;
  await context.route('**/*',async route=>{
-  const request=route.request(),scope=japanVerificationRequestScope(request.url(),request.method());
-  if(scope!=='allowed'){report.blockedRequests[scope]++;await route.abort('blockedbyclient');return;}
+  const request=route.request(),scope=japanVerificationRequestScope(request.url(),request.method(),request.resourceType());
+  if(scope!=='allowed'&&scope!=='supplier_image'){report.blockedRequests[scope]++;await route.abort('blockedbyclient');return;}
   let response;
   try{
    // The read fence must not impose a shorter deadline than the page check.
+   if(scope==='supplier_image')report.supplierImageRequests++;
    response=await route.fetch({maxRedirects:0,timeout:90_000});
    if(response.status()>=300&&response.status()<400&&response.status()!==304){
     report.blockedRequests.redirect++;await route.abort('blockedbyclient');
@@ -98,7 +110,7 @@ export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,out
  const report={version:1,kind:'catalog-japan-browser-v1',codeScope:SCOPE,release:releaseSha,nonce,
   checkedAt:new Date().toISOString(),passed:false,japanFreshnessPassed:false,japanPowerApiPassed:false,
   japanUiPassed:false,japanVisibilityPassed:false,readOnlyBrowserFence:false,
-  productionMutations:0,directSupplierRequests:0,explicitJapanApiRequests:0,checks:{},screenshots:[]};
+  productionMutations:0,directSupplierApiRequests:0,supplierImageRequests:0,explicitJapanApiRequests:0,checks:{},screenshots:[]};
  let browser,context,currentPage,stage='preconditions';
  const capture=async(page,name)=>{
   const relative=path.join('artifacts/catalog-japan-live',nonce,name+'.png');

@@ -68,7 +68,7 @@ with tempfile.TemporaryDirectory() as temp:
     'checkedAt':m.datetime.datetime.now(m.datetime.timezone.utc).isoformat(),
     'generationManifestSha256':manifest_sha,'oracleSha256':next(d['sha256'] for d in plan['files'] if d['name']=='acceptance.json'),
     'passed':True,'japanFreshnessPassed':True,'japanPowerApiPassed':True,'japanUiPassed':True,'japanVisibilityPassed':True,
-    'readOnlyBrowserFence':True,'productionMutations':0,'directSupplierRequests':0,'explicitJapanApiRequests':3})
+    'readOnlyBrowserFence':True,'productionMutations':0,'directSupplierApiRequests':0,'explicitJapanApiRequests':3})
    details.update(japanReportBase64=base64.b64encode(japan).decode(),japanReportSha256=m.sha(japan))
   elif runtime==new and plan.get('codeScope')==m.PHOTO_JAPAN_CODE_SCOPE:
    photo=m.json_bytes({'version':1,'kind':'china-photo-japan-browser-v1','release':runtime,'nonce':nonce,
@@ -331,7 +331,7 @@ with tempfile.TemporaryDirectory() as temp:
    ('passed','chinaPhotoPassed','japanFreshnessPassed','japanPowerApiPassed','japanUiPassed') if combined else ('passed','chinaPhotoPassed'))
   scope_fields=[] if combined else [('codeScope',m.PHOTO_JAPAN_CODE_SCOPE),('kind','china-photo-japan-browser-v1'),
    ('readOnlyBrowserFence',False)]+[(key,value) for key in
-    (('productionMutations','directSupplierRequests') if japan else ('productionMutations','directSupplierRequests','explicitJapanApiRequests','japanUiNavigations'))
+    (('productionMutations','directSupplierApiRequests') if japan else ('productionMutations','directSupplierRequests','explicitJapanApiRequests','japanUiNavigations'))
     for value in (1,None,False)]
   if japan:scope_fields.append(('version',True))
   for field,value in [('version',2),('kind','wrong-kind'),('release',old),('nonce',old_nonce),

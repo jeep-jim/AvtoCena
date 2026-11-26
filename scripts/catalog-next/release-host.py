@@ -2809,7 +2809,7 @@ class Host:
                  all(japan.get(key) is True for key in ('passed', 'japanFreshnessPassed', 'japanPowerApiPassed',
                                                        'japanUiPassed', 'japanVisibilityPassed', 'readOnlyBrowserFence')) and
                  all(type(japan.get(key)) is int and japan[key] == 0 for key in
-                     ('productionMutations', 'directSupplierRequests')), 'japan_browser_binding')
+                     ('productionMutations', 'directSupplierApiRequests')), 'japan_browser_binding')
         for name, raw in [('BROWSER_SPEED.json', speed_raw), ('BROWSER_DETAILS.json', details_raw)]:
             new_file(self.directory / name, raw)
             need(file_sha(self.directory / name) == sha(raw), 'browser_evidence_readback')

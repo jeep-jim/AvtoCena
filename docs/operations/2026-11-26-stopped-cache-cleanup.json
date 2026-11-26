@@ -1,0 +1,1152 @@
+{
+  "version": 1,
+  "kind": "stopped-cache-cleanup-20261126",
+  "controllerSha": "81afef3a08bfea937b816b62e886fcfefdbf1fbc",
+  "completed": true,
+  "steps": [
+    {
+      "kind": "stopped-cache-container-removed-v1",
+      "index": 0,
+      "containerId": "52e44ba2810796f9a12ac83984d9571f71ac1290d852206d2a259ad44da02a8d",
+      "writableBytes": 1000214528,
+      "diskBefore": {
+        "totalBytes": 102916472832,
+        "availableBytes": 29150183424,
+        "freeBytes": 29166960640
+      },
+      "diskAfter": {
+        "totalBytes": 102916472832,
+        "availableBytes": 30167269376,
+        "freeBytes": 30184046592
+      },
+      "measuredFreeBytesChange": 1017085952,
+      "currentAndRollbackHealthy": true,
+      "allImagesAndVolumesPreserved": true
+    },
+    {
+      "kind": "stopped-cache-container-removed-v1",
+      "index": 1,
+      "containerId": "e30facd9dc08d28b6e7d8b4423842b027e9b975befcf5bf52de09f29da60d6a7",
+      "writableBytes": 21073920,
+      "diskBefore": {
+        "totalBytes": 102916472832,
+        "availableBytes": 30167248896,
+        "freeBytes": 30184026112
+      },
+      "diskAfter": {
+        "totalBytes": 102916472832,
+        "availableBytes": 30188609536,
+        "freeBytes": 30205386752
+      },
+      "measuredFreeBytesChange": 21360640,
+      "currentAndRollbackHealthy": true,
+      "allImagesAndVolumesPreserved": true
+    },
+    {
+      "kind": "stopped-cache-container-removed-v1",
+      "index": 2,
+      "containerId": "bccda9177f15d4fa6f511109409e408bd93160b791d6dd15f7d66b66f1497dc9",
+      "writableBytes": 3756032,
+      "diskBefore": {
+        "totalBytes": 102916472832,
+        "availableBytes": 30188597248,
+        "freeBytes": 30205374464
+      },
+      "diskAfter": {
+        "totalBytes": 102916472832,
+        "availableBytes": 30192459776,
+        "freeBytes": 30209236992
+      },
+      "measuredFreeBytesChange": 3862528,
+      "currentAndRollbackHealthy": true,
+      "allImagesAndVolumesPreserved": true
+    },
+    {
+      "kind": "stopped-cache-container-removed-v1",
+      "index": 3,
+      "containerId": "08275f6ff0ee8e9c4b024baae6d7091ae5a266f285ec5b32ef0a0095a61bb854",
+      "writableBytes": 3981312,
+      "diskBefore": {
+        "totalBytes": 102916472832,
+        "availableBytes": 30192427008,
+        "freeBytes": 30209204224
+      },
+      "diskAfter": {
+        "totalBytes": 102916472832,
+        "availableBytes": 30196482048,
+        "freeBytes": 30213259264
+      },
+      "measuredFreeBytesChange": 4055040,
+      "currentAndRollbackHealthy": true,
+      "allImagesAndVolumesPreserved": true
+    },
+    {
+      "kind": "stopped-cache-container-removed-v1",
+      "index": 4,
+      "containerId": "c63cde7396b895212ed6fe4abbee686caceea9952705758366cae235786de393",
+      "writableBytes": 7606272,
+      "diskBefore": {
+        "totalBytes": 102916472832,
+        "availableBytes": 30196482048,
+        "freeBytes": 30213259264
+      },
+      "diskAfter": {
+        "totalBytes": 102916472832,
+        "availableBytes": 30204215296,
+        "freeBytes": 30220992512
+      },
+      "measuredFreeBytesChange": 7733248,
+      "currentAndRollbackHealthy": true,
+      "allImagesAndVolumesPreserved": true
+    },
+    {
+      "kind": "stopped-cache-container-removed-v1",
+      "index": 5,
+      "containerId": "9bba3f06c0684c7eaba7b15e73fa19b9e71cefd538f08e264792e70a280bc430",
+      "writableBytes": 5850570752,
+      "diskBefore": {
+        "totalBytes": 102916472832,
+        "availableBytes": 30204203008,
+        "freeBytes": 30220980224
+      },
+      "diskAfter": {
+        "totalBytes": 102916472832,
+        "availableBytes": 36084453376,
+        "freeBytes": 36101230592
+      },
+      "measuredFreeBytesChange": 5880250368,
+      "currentAndRollbackHealthy": true,
+      "allImagesAndVolumesPreserved": true
+    },
+    {
+      "kind": "stopped-cache-container-removed-v1",
+      "index": 6,
+      "containerId": "c083829568964b058e1a90ea517ceb10df44f6a937a98ee6700d7b5b5976afcf",
+      "writableBytes": 1020809216,
+      "diskBefore": {
+        "totalBytes": 102916472832,
+        "availableBytes": 36084428800,
+        "freeBytes": 36101206016
+      },
+      "diskAfter": {
+        "totalBytes": 102916472832,
+        "availableBytes": 37128400896,
+        "freeBytes": 37145178112
+      },
+      "measuredFreeBytesChange": 1043972096,
+      "currentAndRollbackHealthy": true,
+      "allImagesAndVolumesPreserved": true
+    },
+    {
+      "kind": "stopped-cache-container-removed-v1",
+      "index": 7,
+      "containerId": "f664adabeed0686ab2feb491fc73495b54420f86c857acc987ec9fed8d2ec01f",
+      "writableBytes": 5065990144,
+      "diskBefore": {
+        "totalBytes": 102916472832,
+        "availableBytes": 37128392704,
+        "freeBytes": 37145169920
+      },
+      "diskAfter": {
+        "totalBytes": 102916472832,
+        "availableBytes": 42216263680,
+        "freeBytes": 42233040896
+      },
+      "measuredFreeBytesChange": 5087870976,
+      "currentAndRollbackHealthy": true,
+      "allImagesAndVolumesPreserved": true
+    }
+  ],
+  "leaseRelease": "released",
+  "planSha256": "90251794c082ac329ba027e3835160f6056a996c1a7af29bc96f56457b981908",
+  "plan": {
+    "kind": "stopped-cache-cleanup-prepared-v1",
+    "planSha256": "90251794c082ac329ba027e3835160f6056a996c1a7af29bc96f56457b981908",
+    "targets": [
+      {
+        "id": "52e44ba2810796f9a12ac83984d9571f71ac1290d852206d2a259ad44da02a8d",
+        "imageId": "sha256:8a7326fc17de9a28ae66a4915e68038ac089ba4cdf2954bd7fcbd7cbda46ccf8",
+        "configurationSha256": "8987aca675b81ffe0d8e1ca7cc921fcf94ab8992a01f66f62c9a64dfe96cf1a6",
+        "writableBytes": 1000214528,
+        "changeCount": 71458,
+        "runtimeSha": "22867cbcfaee27b2e8917b6bf880e44827f67b60",
+        "noncacheCount": 8
+      },
+      {
+        "id": "e30facd9dc08d28b6e7d8b4423842b027e9b975befcf5bf52de09f29da60d6a7",
+        "imageId": "sha256:0bfe542a991a69aaa4f416726a221e4e845986cc15c98a414e24ea7cff462984",
+        "configurationSha256": "2b9a1b4a5c1f871387af9f381b5f788198dccb5b7a46b33993ef98768eb6d7e5",
+        "writableBytes": 21073920,
+        "changeCount": 1580,
+        "runtimeSha": "85296f6b8797aaa93227b69da7e9e9e928e8f9b5",
+        "noncacheCount": 8
+      },
+      {
+        "id": "bccda9177f15d4fa6f511109409e408bd93160b791d6dd15f7d66b66f1497dc9",
+        "imageId": "sha256:a47629b77de4ff0a8b7338289a14372ae74fa95a9b8de61df11453f7c5e387fc",
+        "configurationSha256": "e4601ef38f9af0714cd3a57561044be06f86bc46e7ddb4816992ee285d8af2b9",
+        "writableBytes": 3756032,
+        "changeCount": 619,
+        "runtimeSha": "f45efaf2b172af41d14987fb642e8e6b6df78cdd",
+        "noncacheCount": 7
+      },
+      {
+        "id": "08275f6ff0ee8e9c4b024baae6d7091ae5a266f285ec5b32ef0a0095a61bb854",
+        "imageId": "sha256:54eae297dad0feabf2def829482700547576f20fcf5d3f0d00aef1c4a4c09dcb",
+        "configurationSha256": "72a3b22e3ee196a4d3138c6716072cae7c312aede12a7d54e27806f569e52ddb",
+        "writableBytes": 3981312,
+        "changeCount": 664,
+        "runtimeSha": "7f9165125edc773221da8e17a5ed39f3592db31c",
+        "noncacheCount": 7
+      },
+      {
+        "id": "c63cde7396b895212ed6fe4abbee686caceea9952705758366cae235786de393",
+        "imageId": "sha256:93ed4336bd73431ab98e261c078dd3d62d5e5a802940eefa2e055eb7fad55aac",
+        "configurationSha256": "5443903c4e707d973b7b183f2be38af609b4b3300c7e1d0a772cd7db5398a290",
+        "writableBytes": 7606272,
+        "changeCount": 881,
+        "runtimeSha": "e4f2781ed52f12f53430118bea51ef150608ccfe",
+        "noncacheCount": 7
+      },
+      {
+        "id": "9bba3f06c0684c7eaba7b15e73fa19b9e71cefd538f08e264792e70a280bc430",
+        "imageId": "sha256:e36c969dc5a21a1654d738a2fe76c4657cd75ad48ffeff4c87845f67035c6f6f",
+        "configurationSha256": "0b3416be62936d38124da0858d955aa104d91e9c30c0fc3cfdd6414975809ce2",
+        "writableBytes": 5850570752,
+        "changeCount": 298666,
+        "runtimeSha": "a182cd21b21ecf612b63613d263e5bdd817ea4c0",
+        "noncacheCount": 7
+      },
+      {
+        "id": "c083829568964b058e1a90ea517ceb10df44f6a937a98ee6700d7b5b5976afcf",
+        "imageId": "sha256:c04fbe5c188d56e10ece7860509ab622b46d732b01e7a86dcec9c3db966f3bc8",
+        "configurationSha256": "3ed8868420f462026d97ecdd8fa8d3ea04ef06749c74aa52aac9a7fa7b013af0",
+        "writableBytes": 1020809216,
+        "changeCount": 51161,
+        "runtimeSha": "17a686182574097b5ade22b37ef8b485e2b53844",
+        "noncacheCount": 7
+      },
+      {
+        "id": "f664adabeed0686ab2feb491fc73495b54420f86c857acc987ec9fed8d2ec01f",
+        "imageId": "sha256:2110809abc3a3bad1589f62e8c79122f26ca61cda79b33c265fd4872040db98f",
+        "configurationSha256": "92edc8a0ad8c6f61f57db6064b49d2f76158849b6e0c99bf6ac29a5c9ed19a2f",
+        "writableBytes": 5065990144,
+        "changeCount": 249389,
+        "runtimeSha": "463fd22559a2f9c5acd60f8f5e4b269689215c84",
+        "noncacheCount": 7
+      }
+    ],
+    "containersPlanned": 8,
+    "containersRetained": 4,
+    "imagesPreserved": 13,
+    "volumesPreserved": 0,
+    "cacheOnlyProofs": [
+      {
+        "containerId": "52e44ba2810796f9a12ac83984d9571f71ac1290d852206d2a259ad44da02a8d",
+        "imageId": "sha256:8a7326fc17de9a28ae66a4915e68038ac089ba4cdf2954bd7fcbd7cbda46ccf8",
+        "writableBytes": 1000214528,
+        "changeCount": 71458,
+        "changesComplete": true,
+        "cacheChangeCount": 71450,
+        "noncacheMetadataComplete": true,
+        "noncacheMetadata": [
+          {
+            "pathSha256": "f53b52ad6d21cceb72dfa78fb67614fe14f110c58e68412b01508d6a485501c3",
+            "changeKind": 0,
+            "exists": true,
+            "path": "/app",
+            "mode": 2147484141,
+            "size": 4096
+          },
+          {
+            "pathSha256": "8af8bdb03f7dc5e4d1fca3316e420f422b1da0c062ff8ba98b41927161490ae8",
+            "changeKind": 0,
+            "exists": true,
+            "path": "/app/apps",
+            "mode": 2147484141,
+            "size": 4096
+          },
+          {
+            "pathSha256": "3e68f9626a3221c69df7377f7b13399329f416e0f196dc998da83811d37ab586",
+            "changeKind": 0,
+            "exists": true,
+            "path": "/app/apps/web",
+            "mode": 2147484141,
+            "size": 4096
+          },
+          {
+            "pathSha256": "8f43f5cce235d73a8452520e744e5624e4be365682f15efd8b59ca168923dd69",
+            "changeKind": 0,
+            "exists": true,
+            "path": "/app/apps/web/.next",
+            "mode": 2147484141,
+            "size": 4096
+          },
+          {
+            "pathSha256": "23bcad549e3dcd206f1c53ae2cdb91043f0557c4e12f807fa0dbf2b5fdbd4b60",
+            "changeKind": 1,
+            "exists": true,
+            "path": "/app/apps/web/.next/cache",
+            "mode": 2147484141,
+            "size": 4096
+          },
+          {
+            "pathSha256": "b3d46fe883f343fe8d86cceea5141710f5cf97ab3b21a0d813982e1155d4c717",
+            "changeKind": 0,
+            "exists": true,
+            "path": "/run",
+            "mode": 2147484141,
+            "size": 4096
+          },
+          {
+            "pathSha256": "a602c8fe4fdb2dbda9c8a7eab4f00feb1a8768704baa7b90fbc78e656efcd944",
+            "changeKind": 1,
+            "exists": true,
+            "path": "/run/avtocena-china-switch",
+            "mode": 2147484096,
+            "size": 4096
+          },
+          {
+            "pathSha256": "c667f9186fd30064c38c369a5562c07ac734b48ed671acf20bca5e790c6e4737",
+            "changeKind": 1,
+            "exists": true,
+            "path": "/run/avtocena-metrics",
+            "mode": 2147484141,
+            "size": 4096
+          }
+        ],
+        "changesSha256": "2765a24e13022e7129c330ca0bb19746a485ebe16298af6c79a461e6d2b700d1",
+        "noncacheMetadataSha256": "fee1c03bef984de113a0e2755184a9eaf99242dcb791d51ddadeaa9acebb8d51"
+      },
+      {
+        "containerId": "e30facd9dc08d28b6e7d8b4423842b027e9b975befcf5bf52de09f29da60d6a7",
+        "imageId": "sha256:0bfe542a991a69aaa4f416726a221e4e845986cc15c98a414e24ea7cff462984",
+        "writableBytes": 21073920,
+        "changeCount": 1580,
+        "changesComplete": true,
+        "cacheChangeCount": 1572,
+        "noncacheMetadataComplete": true,
+        "noncacheMetadata": [
+          {
+            "pathSha256": "f53b52ad6d21cceb72dfa78fb67614fe14f110c58e68412b01508d6a485501c3",
+            "changeKind": 0,
+            "exists": true,
+            "path": "/app",
+            "mode": 2147484141,
+            "size": 4096
+          },
+          {
+            "pathSha256": "8af8bdb03f7dc5e4d1fca3316e420f422b1da0c062ff8ba98b41927161490ae8",
+            "changeKind": 0,
+            "exists": true,
+            "path": "/app/apps",
+            "mode": 2147484141,
+            "size": 4096
+          },
+          {
+            "pathSha256": "3e68f9626a3221c69df7377f7b13399329f416e0f196dc998da83811d37ab586",
+            "changeKind": 0,
+            "exists": true,
+            "path": "/app/apps/web",
+            "mode": 2147484141,
+            "size": 4096
+          },
+          {
+            "pathSha256": "8f43f5cce235d73a8452520e744e5624e4be365682f15efd8b59ca168923dd69",
+            "changeKind": 0,
+            "exists": true,
+            "path": "/app/apps/web/.next",
+            "mode": 2147484141,
+            "size": 4096
+          },
+          {
+            "pathSha256": "23bcad549e3dcd206f1c53ae2cdb91043f0557c4e12f807fa0dbf2b5fdbd4b60",
+            "changeKind": 1,
+            "exists": true,
+            "path": "/app/apps/web/.next/cache",
+            "mode": 2147484141,
+            "size": 4096
+          },
+          {
+            "pathSha256": "b3d46fe883f343fe8d86cceea5141710f5cf97ab3b21a0d813982e1155d4c717",
+            "changeKind": 0,
+            "exists": true,
+            "path": "/run",
+            "mode": 2147484141,
+            "size": 4096
+          },
+          {
+            "pathSha256": "a602c8fe4fdb2dbda9c8a7eab4f00feb1a8768704baa7b90fbc78e656efcd944",
+            "changeKind": 1,
+            "exists": true,
+            "path": "/run/avtocena-china-switch",
+            "mode": 2147484096,
+            "size": 4096
+          },
+          {
+            "pathSha256": "c667f9186fd30064c38c369a5562c07ac734b48ed671acf20bca5e790c6e4737",
+            "changeKind": 1,
+            "exists": true,
+            "path": "/run/avtocena-metrics",
+            "mode": 2147484141,
+            "size": 4096
+          }
+        ],
+        "changesSha256": "da43f9e44d231f3e3e7981c1a5e13a03d6790c2b6d59b9398e2467d0a227bdaf",
+        "noncacheMetadataSha256": "fee1c03bef984de113a0e2755184a9eaf99242dcb791d51ddadeaa9acebb8d51"
+      },
+      {
+        "containerId": "bccda9177f15d4fa6f511109409e408bd93160b791d6dd15f7d66b66f1497dc9",
+        "imageId": "sha256:a47629b77de4ff0a8b7338289a14372ae74fa95a9b8de61df11453f7c5e387fc",
+        "writableBytes": 3756032,
+        "changeCount": 619,
+        "changesComplete": true,
+        "cacheChangeCount": 612,
+        "noncacheMetadataComplete": true,
+        "noncacheMetadata": [
+          {
+            "pathSha256": "f53b52ad6d21cceb72dfa78fb67614fe14f110c58e68412b01508d6a485501c3",
+            "changeKind": 0,
+            "exists": true,
+            "path": "/app",
+            "mode": 2147484141,
+            "size": 4096
+          },
+          {
+            "pathSha256": "8af8bdb03f7dc5e4d1fca3316e420f422b1da0c062ff8ba98b41927161490ae8",
+            "changeKind": 0,
+            "exists": true,
+            "path": "/app/apps",
+            "mode": 2147484141,
+            "size": 4096
+          },
+          {
+            "pathSha256": "3e68f9626a3221c69df7377f7b13399329f416e0f196dc998da83811d37ab586",
+            "changeKind": 0,
+            "exists": true,
+            "path": "/app/apps/web",
+            "mode": 2147484141,
+            "size": 4096
+          },
+          {
+            "pathSha256": "8f43f5cce235d73a8452520e744e5624e4be365682f15efd8b59ca168923dd69",
+            "changeKind": 0,
+            "exists": true,
+            "path": "/app/apps/web/.next",
+            "mode": 2147484141,
+            "size": 4096
+          },
+          {
+            "pathSha256": "23bcad549e3dcd206f1c53ae2cdb91043f0557c4e12f807fa0dbf2b5fdbd4b60",
+            "changeKind": 1,
+            "exists": true,
+            "path": "/app/apps/web/.next/cache",
+            "mode": 2147484141,
+            "size": 4096
+          },
+          {
+            "pathSha256": "b3d46fe883f343fe8d86cceea5141710f5cf97ab3b21a0d813982e1155d4c717",
+            "changeKind": 0,
+            "exists": true,
+            "path": "/run",
+            "mode": 2147484141,
+            "size": 4096
+          },
+          {
+            "pathSha256": "c667f9186fd30064c38c369a5562c07ac734b48ed671acf20bca5e790c6e4737",
+            "changeKind": 1,
+            "exists": true,
+            "path": "/run/avtocena-metrics",
+            "mode": 2147484141,
+            "size": 4096
+          }
+        ],
+        "changesSha256": "3188b5c5fb14bbd0e355a2fce159820413af37a8947921b4255496642ed289f7",
+        "noncacheMetadataSha256": "2c5899b7325d40fc5b928a7b645a8dbba17a97ca44a13a21770f2ffd4211c84c"
+      },
+      {
+        "containerId": "08275f6ff0ee8e9c4b024baae6d7091ae5a266f285ec5b32ef0a0095a61bb854",
+        "imageId": "sha256:54eae297dad0feabf2def829482700547576f20fcf5d3f0d00aef1c4a4c09dcb",
+        "writableBytes": 3981312,
+        "changeCount": 664,
+        "changesComplete": true,
+        "cacheChangeCount": 657,
+        "noncacheMetadataComplete": true,
+        "noncacheMetadata": [
+          {
+            "pathSha256": "f53b52ad6d21cceb72dfa78fb67614fe14f110c58e68412b01508d6a485501c3",
+            "changeKind": 0,
+            "exists": true,
+            "path": "/app",
+            "mode": 2147484141,
+            "size": 4096
+          },
+          {
+            "pathSha256": "8af8bdb03f7dc5e4d1fca3316e420f422b1da0c062ff8ba98b41927161490ae8",
+            "changeKind": 0,
+            "exists": true,
+            "path": "/app/apps",
+            "mode": 2147484141,
+            "size": 4096
+          },
+          {
+            "pathSha256": "3e68f9626a3221c69df7377f7b13399329f416e0f196dc998da83811d37ab586",
+            "changeKind": 0,
+            "exists": true,
+            "path": "/app/apps/web",
+            "mode": 2147484141,
+            "size": 4096
+          },
+          {
+            "pathSha256": "8f43f5cce235d73a8452520e744e5624e4be365682f15efd8b59ca168923dd69",
+            "changeKind": 0,
+            "exists": true,
+            "path": "/app/apps/web/.next",
+            "mode": 2147484141,
+            "size": 4096
+          },
+          {
+            "pathSha256": "23bcad549e3dcd206f1c53ae2cdb91043f0557c4e12f807fa0dbf2b5fdbd4b60",
+            "changeKind": 1,
+            "exists": true,
+            "path": "/app/apps/web/.next/cache",
+            "mode": 2147484141,
+            "size": 4096
+          },
+          {
+            "pathSha256": "b3d46fe883f343fe8d86cceea5141710f5cf97ab3b21a0d813982e1155d4c717",
+            "changeKind": 0,
+            "exists": true,
+            "path": "/run",
+            "mode": 2147484141,
+            "size": 4096
+          },
+          {
+            "pathSha256": "c667f9186fd30064c38c369a5562c07ac734b48ed671acf20bca5e790c6e4737",
+            "changeKind": 1,
+            "exists": true,
+            "path": "/run/avtocena-metrics",
+            "mode": 2147484141,
+            "size": 4096
+          }
+        ],
+        "changesSha256": "5c962e58b7154274bfc1fec6ad672cc466896946f86089dc8be94cc0b4d4fe9e",
+        "noncacheMetadataSha256": "2c5899b7325d40fc5b928a7b645a8dbba17a97ca44a13a21770f2ffd4211c84c"
+      },
+      {
+        "containerId": "c63cde7396b895212ed6fe4abbee686caceea9952705758366cae235786de393",
+        "imageId": "sha256:93ed4336bd73431ab98e261c078dd3d62d5e5a802940eefa2e055eb7fad55aac",
+        "writableBytes": 7606272,
+        "changeCount": 881,
+        "changesComplete": true,
+        "cacheChangeCount": 874,
+        "noncacheMetadataComplete": true,
+        "noncacheMetadata": [
+          {
+            "pathSha256": "f53b52ad6d21cceb72dfa78fb67614fe14f110c58e68412b01508d6a485501c3",
+            "changeKind": 0,
+            "exists": true,
+            "path": "/app",
+            "mode": 2147484141,
+            "size": 4096
+          },
+          {
+            "pathSha256": "8af8bdb03f7dc5e4d1fca3316e420f422b1da0c062ff8ba98b41927161490ae8",
+            "changeKind": 0,
+            "exists": true,
+            "path": "/app/apps",
+            "mode": 2147484141,
+            "size": 4096
+          },
+          {
+            "pathSha256": "3e68f9626a3221c69df7377f7b13399329f416e0f196dc998da83811d37ab586",
+            "changeKind": 0,
+            "exists": true,
+            "path": "/app/apps/web",
+            "mode": 2147484141,
+            "size": 4096
+          },
+          {
+            "pathSha256": "8f43f5cce235d73a8452520e744e5624e4be365682f15efd8b59ca168923dd69",
+            "changeKind": 0,
+            "exists": true,
+            "path": "/app/apps/web/.next",
+            "mode": 2147484141,
+            "size": 4096
+          },
+          {
+            "pathSha256": "23bcad549e3dcd206f1c53ae2cdb91043f0557c4e12f807fa0dbf2b5fdbd4b60",
+            "changeKind": 1,
+            "exists": true,
+            "path": "/app/apps/web/.next/cache",
+            "mode": 2147484141,
+            "size": 4096
+          },
+          {
+            "pathSha256": "b3d46fe883f343fe8d86cceea5141710f5cf97ab3b21a0d813982e1155d4c717",
+            "changeKind": 0,
+            "exists": true,
+            "path": "/run",
+            "mode": 2147484141,
+            "size": 4096
+          },
+          {
+            "pathSha256": "c667f9186fd30064c38c369a5562c07ac734b48ed671acf20bca5e790c6e4737",
+            "changeKind": 1,
+            "exists": true,
+            "path": "/run/avtocena-metrics",
+            "mode": 2147484141,
+            "size": 4096
+          }
+        ],
+        "changesSha256": "9a950715673028f644e063592027d2b969d652028d791ef01ac19345940d29a0",
+        "noncacheMetadataSha256": "2c5899b7325d40fc5b928a7b645a8dbba17a97ca44a13a21770f2ffd4211c84c"
+      },
+      {
+        "containerId": "9bba3f06c0684c7eaba7b15e73fa19b9e71cefd538f08e264792e70a280bc430",
+        "imageId": "sha256:e36c969dc5a21a1654d738a2fe76c4657cd75ad48ffeff4c87845f67035c6f6f",
+        "writableBytes": 5850570752,
+        "changeCount": 298666,
+        "changesComplete": true,
+        "cacheChangeCount": 298659,
+        "noncacheMetadataComplete": true,
+        "noncacheMetadata": [
+          {
+            "pathSha256": "f53b52ad6d21cceb72dfa78fb67614fe14f110c58e68412b01508d6a485501c3",
+            "changeKind": 0,
+            "exists": true,
+            "path": "/app",
+            "mode": 2147484141,
+            "size": 4096
+          },
+          {
+            "pathSha256": "8af8bdb03f7dc5e4d1fca3316e420f422b1da0c062ff8ba98b41927161490ae8",
+            "changeKind": 0,
+            "exists": true,
+            "path": "/app/apps",
+            "mode": 2147484141,
+            "size": 4096
+          },
+          {
+            "pathSha256": "3e68f9626a3221c69df7377f7b13399329f416e0f196dc998da83811d37ab586",
+            "changeKind": 0,
+            "exists": true,
+            "path": "/app/apps/web",
+            "mode": 2147484141,
+            "size": 4096
+          },
+          {
+            "pathSha256": "8f43f5cce235d73a8452520e744e5624e4be365682f15efd8b59ca168923dd69",
+            "changeKind": 0,
+            "exists": true,
+            "path": "/app/apps/web/.next",
+            "mode": 2147484141,
+            "size": 4096
+          },
+          {
+            "pathSha256": "23bcad549e3dcd206f1c53ae2cdb91043f0557c4e12f807fa0dbf2b5fdbd4b60",
+            "changeKind": 1,
+            "exists": true,
+            "path": "/app/apps/web/.next/cache",
+            "mode": 2147484141,
+            "size": 4096
+          },
+          {
+            "pathSha256": "b3d46fe883f343fe8d86cceea5141710f5cf97ab3b21a0d813982e1155d4c717",
+            "changeKind": 0,
+            "exists": true,
+            "path": "/run",
+            "mode": 2147484141,
+            "size": 4096
+          },
+          {
+            "pathSha256": "c667f9186fd30064c38c369a5562c07ac734b48ed671acf20bca5e790c6e4737",
+            "changeKind": 1,
+            "exists": true,
+            "path": "/run/avtocena-metrics",
+            "mode": 2147484141,
+            "size": 4096
+          }
+        ],
+        "changesSha256": "ce9f3fb5a1ebd0b32cb00777cb66cb684e11fe76df23621ee950c0ee4b90b068",
+        "noncacheMetadataSha256": "2c5899b7325d40fc5b928a7b645a8dbba17a97ca44a13a21770f2ffd4211c84c"
+      },
+      {
+        "containerId": "c083829568964b058e1a90ea517ceb10df44f6a937a98ee6700d7b5b5976afcf",
+        "imageId": "sha256:c04fbe5c188d56e10ece7860509ab622b46d732b01e7a86dcec9c3db966f3bc8",
+        "writableBytes": 1020809216,
+        "changeCount": 51161,
+        "changesComplete": true,
+        "cacheChangeCount": 51154,
+        "noncacheMetadataComplete": true,
+        "noncacheMetadata": [
+          {
+            "pathSha256": "f53b52ad6d21cceb72dfa78fb67614fe14f110c58e68412b01508d6a485501c3",
+            "changeKind": 0,
+            "exists": true,
+            "path": "/app",
+            "mode": 2147484141,
+            "size": 4096
+          },
+          {
+            "pathSha256": "8af8bdb03f7dc5e4d1fca3316e420f422b1da0c062ff8ba98b41927161490ae8",
+            "changeKind": 0,
+            "exists": true,
+            "path": "/app/apps",
+            "mode": 2147484141,
+            "size": 4096
+          },
+          {
+            "pathSha256": "3e68f9626a3221c69df7377f7b13399329f416e0f196dc998da83811d37ab586",
+            "changeKind": 0,
+            "exists": true,
+            "path": "/app/apps/web",
+            "mode": 2147484141,
+            "size": 4096
+          },
+          {
+            "pathSha256": "8f43f5cce235d73a8452520e744e5624e4be365682f15efd8b59ca168923dd69",
+            "changeKind": 0,
+            "exists": true,
+            "path": "/app/apps/web/.next",
+            "mode": 2147484141,
+            "size": 4096
+          },
+          {
+            "pathSha256": "23bcad549e3dcd206f1c53ae2cdb91043f0557c4e12f807fa0dbf2b5fdbd4b60",
+            "changeKind": 1,
+            "exists": true,
+            "path": "/app/apps/web/.next/cache",
+            "mode": 2147484141,
+            "size": 4096
+          },
+          {
+            "pathSha256": "b3d46fe883f343fe8d86cceea5141710f5cf97ab3b21a0d813982e1155d4c717",
+            "changeKind": 0,
+            "exists": true,
+            "path": "/run",
+            "mode": 2147484141,
+            "size": 4096
+          },
+          {
+            "pathSha256": "c667f9186fd30064c38c369a5562c07ac734b48ed671acf20bca5e790c6e4737",
+            "changeKind": 1,
+            "exists": true,
+            "path": "/run/avtocena-metrics",
+            "mode": 2147484141,
+            "size": 4096
+          }
+        ],
+        "changesSha256": "df81d6530c1fb23fb3174a7632ce465f0c848308416f79778ad108138e9a3c17",
+        "noncacheMetadataSha256": "2c5899b7325d40fc5b928a7b645a8dbba17a97ca44a13a21770f2ffd4211c84c"
+      },
+      {
+        "containerId": "f664adabeed0686ab2feb491fc73495b54420f86c857acc987ec9fed8d2ec01f",
+        "imageId": "sha256:2110809abc3a3bad1589f62e8c79122f26ca61cda79b33c265fd4872040db98f",
+        "writableBytes": 5065990144,
+        "changeCount": 249389,
+        "changesComplete": true,
+        "cacheChangeCount": 249382,
+        "noncacheMetadataComplete": true,
+        "noncacheMetadata": [
+          {
+            "pathSha256": "f53b52ad6d21cceb72dfa78fb67614fe14f110c58e68412b01508d6a485501c3",
+            "changeKind": 0,
+            "exists": true,
+            "path": "/app",
+            "mode": 2147484141,
+            "size": 4096
+          },
+          {
+            "pathSha256": "8af8bdb03f7dc5e4d1fca3316e420f422b1da0c062ff8ba98b41927161490ae8",
+            "changeKind": 0,
+            "exists": true,
+            "path": "/app/apps",
+            "mode": 2147484141,
+            "size": 4096
+          },
+          {
+            "pathSha256": "3e68f9626a3221c69df7377f7b13399329f416e0f196dc998da83811d37ab586",
+            "changeKind": 0,
+            "exists": true,
+            "path": "/app/apps/web",
+            "mode": 2147484141,
+            "size": 4096
+          },
+          {
+            "pathSha256": "8f43f5cce235d73a8452520e744e5624e4be365682f15efd8b59ca168923dd69",
+            "changeKind": 0,
+            "exists": true,
+            "path": "/app/apps/web/.next",
+            "mode": 2147484141,
+            "size": 4096
+          },
+          {
+            "pathSha256": "23bcad549e3dcd206f1c53ae2cdb91043f0557c4e12f807fa0dbf2b5fdbd4b60",
+            "changeKind": 1,
+            "exists": true,
+            "path": "/app/apps/web/.next/cache",
+            "mode": 2147484141,
+            "size": 4096
+          },
+          {
+            "pathSha256": "b3d46fe883f343fe8d86cceea5141710f5cf97ab3b21a0d813982e1155d4c717",
+            "changeKind": 0,
+            "exists": true,
+            "path": "/run",
+            "mode": 2147484141,
+            "size": 4096
+          },
+          {
+            "pathSha256": "c667f9186fd30064c38c369a5562c07ac734b48ed671acf20bca5e790c6e4737",
+            "changeKind": 1,
+            "exists": true,
+            "path": "/run/avtocena-metrics",
+            "mode": 2147484141,
+            "size": 4096
+          }
+        ],
+        "changesSha256": "9789eb2e8c03b0b4c2dbcfe7c6ffe0f1c2d273882814831c3ea450622e731286",
+        "noncacheMetadataSha256": "2c5899b7325d40fc5b928a7b645a8dbba17a97ca44a13a21770f2ffd4211c84c"
+      }
+    ],
+    "plannedWritableBytes": 12974002176,
+    "diskBefore": {
+      "totalBytes": 102916472832,
+      "availableBytes": 29150257152,
+      "freeBytes": 29167034368
+    },
+    "currentGeneration": "gen_china_45655051136_1",
+    "rollbackGeneration": "gen_china_45369451603_1"
+  },
+  "result": {
+    "kind": "stopped-cache-cleanup-result-v1",
+    "completed": true,
+    "removedContainerIds": [
+      "52e44ba2810796f9a12ac83984d9571f71ac1290d852206d2a259ad44da02a8d",
+      "e30facd9dc08d28b6e7d8b4423842b027e9b975befcf5bf52de09f29da60d6a7",
+      "bccda9177f15d4fa6f511109409e408bd93160b791d6dd15f7d66b66f1497dc9",
+      "08275f6ff0ee8e9c4b024baae6d7091ae5a266f285ec5b32ef0a0095a61bb854",
+      "c63cde7396b895212ed6fe4abbee686caceea9952705758366cae235786de393",
+      "9bba3f06c0684c7eaba7b15e73fa19b9e71cefd538f08e264792e70a280bc430",
+      "c083829568964b058e1a90ea517ceb10df44f6a937a98ee6700d7b5b5976afcf",
+      "f664adabeed0686ab2feb491fc73495b54420f86c857acc987ec9fed8d2ec01f"
+    ],
+    "planSha256": "90251794c082ac329ba027e3835160f6056a996c1a7af29bc96f56457b981908",
+    "diskBefore": {
+      "totalBytes": 102916472832,
+      "availableBytes": 29150257152,
+      "freeBytes": 29167034368
+    },
+    "diskAfter": {
+      "totalBytes": 102916472832,
+      "availableBytes": 42216263680,
+      "freeBytes": 42233040896
+    },
+    "measuredFreeBytesChange": 13066006528,
+    "memoryBefore": {
+      "MemTotal": 16763207680,
+      "MemAvailable": 7528660992,
+      "MemFree": 3829551104,
+      "Buffers": 242638848,
+      "Cached": 2600321024,
+      "SReclaimable": 1536221184,
+      "Slab": 1828945920,
+      "SUnreclaim": 292724736,
+      "Shmem": 326877184,
+      "Dirty": 77824,
+      "SwapTotal": 0,
+      "SwapFree": 0
+    },
+    "memoryAfter": {
+      "MemTotal": 16763207680,
+      "MemAvailable": 7527276544,
+      "MemFree": 4531879936,
+      "Buffers": 427401216,
+      "Cached": 2603360256,
+      "SReclaimable": 644689920,
+      "Slab": 864858112,
+      "SUnreclaim": 220168192,
+      "Shmem": 326860800,
+      "Dirty": 90992640,
+      "SwapTotal": 0,
+      "SwapFree": 0
+    },
+    "liveRuntimeSha": "d536c1547c4d82a339ed68ced7d8503f09b6810b",
+    "generationId": "gen_china_45655051136_1",
+    "rollbackGenerationId": "gen_china_45369451603_1",
+    "currentAndRollbackHealthy": true,
+    "containersRetained": [
+      "21a7093914645595d2cfcfc26335f8e8dbf155f6906840bbfb72855ed587e1e3",
+      "21d2c808c25bad327a6d8ac13891d878aeb67fadce52350dcc6f1433e3f6ca78",
+      "2c180485762c286c7e73f983cd0c93a718d9dec5c2f8e442e7ee44c1a51f6729",
+      "bf233b651cc4c84afae4b59c2f17279ea2db7475bfeef6158ca012315a7f1c23"
+    ],
+    "imagesPreserved": 13,
+    "volumesPreserved": 0,
+    "images": [
+      {
+        "id": "sha256:0bfe542a991a69aaa4f416726a221e4e845986cc15c98a414e24ea7cff462984",
+        "runtimeSha": "85296f6b8797aaa93227b69da7e9e9e928e8f9b5",
+        "sizeBytes": 270357382,
+        "created": "2026-11-20T09:06:59.403273852Z",
+        "applicationOwnerLabel": false,
+        "sourceOwnerLabel": false,
+        "repoTags": [
+          "avtocena-regcloud:85296f6b8797aaa93227b69da7e9e9e928e8f9b5"
+        ],
+        "repoDigests": [
+          "avtocena-regcloud@sha256:0bfe542a991a69aaa4f416726a221e4e845986cc15c98a414e24ea7cff462984"
+        ],
+        "tagCount": 1,
+        "digestCount": 1,
+        "tagsSha256": "cb2f5d1cdd38a4874e7f6e42712fb0d1d10df90fad0b859643e8aaafb62ab9d2",
+        "digestsSha256": "dcdbfab259c9af508fd21b3ed4ef953521fd8242f4cfa6c41ff669ef2250e9f3",
+        "referencedBy": [],
+        "retainedBaselinePin": false
+      },
+      {
+        "id": "sha256:2110809abc3a3bad1589f62e8c79122f26ca61cda79b33c265fd4872040db98f",
+        "runtimeSha": "463fd22559a2f9c5acd60f8f5e4b269689215c84",
+        "sizeBytes": 270241578,
+        "created": "2026-11-08T02:06:00.485738176Z",
+        "applicationOwnerLabel": false,
+        "sourceOwnerLabel": false,
+        "repoTags": [
+          "avtocena-regcloud:463fd22559a2f9c5acd60f8f5e4b269689215c84"
+        ],
+        "repoDigests": [
+          "avtocena-regcloud@sha256:2110809abc3a3bad1589f62e8c79122f26ca61cda79b33c265fd4872040db98f"
+        ],
+        "tagCount": 1,
+        "digestCount": 1,
+        "tagsSha256": "a615dc49498043882df5380ff3a8f8d0fddc5431599672f55a88825492dbdcd2",
+        "digestsSha256": "c144393cbbcb32da2028db188d3ccb67ec8efb82d5c11e9db81729cdb445de0c",
+        "referencedBy": [],
+        "retainedBaselinePin": false
+      },
+      {
+        "id": "sha256:4a055ba772496c7de89594acbbc1c1bc02ac2d2b20050cfad7f637d1f5646dfd",
+        "runtimeSha": "83ff17075e9188dcf227c8752dc064248d5f42e0",
+        "sizeBytes": 1394056623,
+        "created": "2026-11-16T06:03:39.817622644Z",
+        "applicationOwnerLabel": false,
+        "sourceOwnerLabel": false,
+        "repoTags": [
+          "avtocena-regcloud:83ff17075e9188dcf227c8752dc064248d5f42e0"
+        ],
+        "repoDigests": [
+          "avtocena-regcloud@sha256:4a055ba772496c7de89594acbbc1c1bc02ac2d2b20050cfad7f637d1f5646dfd"
+        ],
+        "tagCount": 1,
+        "digestCount": 1,
+        "tagsSha256": "08d99940b1e0cf1153e46ef6455fdccbd6456e73e8391dae61c5540a6792c934",
+        "digestsSha256": "cfd506cfc872ade1dc271ad2aa5d447c182185dbe6b155a773a507b2aef5312b",
+        "referencedBy": [
+          "21d2c808c25bad327a6d8ac13891d878aeb67fadce52350dcc6f1433e3f6ca78"
+        ],
+        "retainedBaselinePin": false
+      },
+      {
+        "id": "sha256:54eae297dad0feabf2def829482700547576f20fcf5d3f0d00aef1c4a4c09dcb",
+        "runtimeSha": "7f9165125edc773221da8e17a5ed39f3592db31c",
+        "sizeBytes": 1394114995,
+        "created": "2026-11-16T10:13:25.078343907Z",
+        "applicationOwnerLabel": false,
+        "sourceOwnerLabel": false,
+        "repoTags": [
+          "avtocena-regcloud:7f9165125edc773221da8e17a5ed39f3592db31c"
+        ],
+        "repoDigests": [
+          "avtocena-regcloud@sha256:54eae297dad0feabf2def829482700547576f20fcf5d3f0d00aef1c4a4c09dcb"
+        ],
+        "tagCount": 1,
+        "digestCount": 1,
+        "tagsSha256": "d37a6f0be6605d5469957af02ed30ef36c301b64b7a490855ff362698b6ba2bd",
+        "digestsSha256": "b48e8ee1015392a417abf7b7a285ffac96d9854794d3ad336bca01fa2e027ee9",
+        "referencedBy": [],
+        "retainedBaselinePin": false
+      },
+      {
+        "id": "sha256:6c10441c7b9b4a8a0a9f0eef75de1d8bbc7f6bbef889935a40b65cd18d67150e",
+        "runtimeSha": "53af59971f25c7cda6358ee18242ee5e5232eede",
+        "sizeBytes": 258813151,
+        "created": "2026-11-24T03:47:42.052576261Z",
+        "applicationOwnerLabel": true,
+        "sourceOwnerLabel": true,
+        "repoTags": [],
+        "repoDigests": [],
+        "tagCount": 1,
+        "digestCount": 1,
+        "tagsSha256": "daae9ebac70231f61a5c8ed44ced04aa42aa14e1311b9a049fb324579f0ea937",
+        "digestsSha256": "041cc18e3fb1127e394208fff112e86494272170d663a480056bde3b1e9fb744",
+        "referencedBy": [],
+        "retainedBaselinePin": false
+      },
+      {
+        "id": "sha256:7294634293906ae2bb95dd42625111894ef4a736115245a9c1097fbe59c213ba",
+        "runtimeSha": "56d6b94fea70457e0ce2b0820596da9972846b90",
+        "sizeBytes": 258779543,
+        "created": "2026-11-24T06:25:31.506794636Z",
+        "applicationOwnerLabel": true,
+        "sourceOwnerLabel": true,
+        "repoTags": [],
+        "repoDigests": [],
+        "tagCount": 1,
+        "digestCount": 1,
+        "tagsSha256": "9960218c0c50ba1adfd83884d3056561a5e8d51b4c5c098fdbde3ce167380196",
+        "digestsSha256": "0cf3c21d58256a0fc08443ad1668feff03c7ddc3abf636b1b27f1241ec900474",
+        "referencedBy": [
+          "2c180485762c286c7e73f983cd0c93a718d9dec5c2f8e442e7ee44c1a51f6729"
+        ],
+        "retainedBaselinePin": false
+      },
+      {
+        "id": "sha256:8a7326fc17de9a28ae66a4915e68038ac089ba4cdf2954bd7fcbd7cbda46ccf8",
+        "runtimeSha": "22867cbcfaee27b2e8917b6bf880e44827f67b60",
+        "sizeBytes": 270355678,
+        "created": "2026-11-20T11:44:40.733942543Z",
+        "applicationOwnerLabel": false,
+        "sourceOwnerLabel": false,
+        "repoTags": [
+          "avtocena-regcloud:22867cbcfaee27b2e8917b6bf880e44827f67b60"
+        ],
+        "repoDigests": [
+          "avtocena-regcloud@sha256:8a7326fc17de9a28ae66a4915e68038ac089ba4cdf2954bd7fcbd7cbda46ccf8"
+        ],
+        "tagCount": 1,
+        "digestCount": 1,
+        "tagsSha256": "cd29bb44526f7df41e5ac18bcf1c79e474834bd3aee36eacf7f23d9078c2a800",
+        "digestsSha256": "efeb836f2a9d21db96f7b68ccfa0d469d05b8672de33e0c2442e5edd0ee97217",
+        "referencedBy": [],
+        "retainedBaselinePin": false
+      },
+      {
+        "id": "sha256:93ed4336bd73431ab98e261c078dd3d62d5e5a802940eefa2e055eb7fad55aac",
+        "runtimeSha": "e4f2781ed52f12f53430118bea51ef150608ccfe",
+        "sizeBytes": 1394111409,
+        "created": "2026-11-16T09:05:13.425196949Z",
+        "applicationOwnerLabel": false,
+        "sourceOwnerLabel": false,
+        "repoTags": [
+          "avtocena-regcloud:e4f2781ed52f12f53430118bea51ef150608ccfe"
+        ],
+        "repoDigests": [
+          "avtocena-regcloud@sha256:93ed4336bd73431ab98e261c078dd3d62d5e5a802940eefa2e055eb7fad55aac"
+        ],
+        "tagCount": 1,
+        "digestCount": 1,
+        "tagsSha256": "28f0254854b05be95788ec3897911275fcfd6ff3c869e6a349a15e04032583ad",
+        "digestsSha256": "d1815c50162113616b35896beae393f57eeab71480a2ee268a330438c1afdb62",
+        "referencedBy": [],
+        "retainedBaselinePin": true
+      },
+      {
+        "id": "sha256:a47629b77de4ff0a8b7338289a14372ae74fa95a9b8de61df11453f7c5e387fc",
+        "runtimeSha": "f45efaf2b172af41d14987fb642e8e6b6df78cdd",
+        "sizeBytes": 1394119194,
+        "created": "2026-11-17T07:59:38.869035488Z",
+        "applicationOwnerLabel": true,
+        "sourceOwnerLabel": true,
+        "repoTags": [
+          "avtocena-regcloud:f45efaf2b172af41d14987fb642e8e6b6df78cdd"
+        ],
+        "repoDigests": [
+          "avtocena-regcloud@sha256:a47629b77de4ff0a8b7338289a14372ae74fa95a9b8de61df11453f7c5e387fc"
+        ],
+        "tagCount": 1,
+        "digestCount": 1,
+        "tagsSha256": "1afa6ab3eea88349ef419f50144465a53322a434c63a79e340ff0b2fa0ab0691",
+        "digestsSha256": "73a96be84cf5393f2a7e0acc76314194583a67b5d1b8ab12de9f200faa46c6f9",
+        "referencedBy": [],
+        "retainedBaselinePin": false
+      },
+      {
+        "id": "sha256:c04fbe5c188d56e10ece7860509ab622b46d732b01e7a86dcec9c3db966f3bc8",
+        "runtimeSha": "17a686182574097b5ade22b37ef8b485e2b53844",
+        "sizeBytes": 270242944,
+        "created": "2026-11-11T02:40:14.311441812Z",
+        "applicationOwnerLabel": false,
+        "sourceOwnerLabel": false,
+        "repoTags": [
+          "avtocena-regcloud:17a686182574097b5ade22b37ef8b485e2b53844"
+        ],
+        "repoDigests": [
+          "avtocena-regcloud@sha256:c04fbe5c188d56e10ece7860509ab622b46d732b01e7a86dcec9c3db966f3bc8"
+        ],
+        "tagCount": 1,
+        "digestCount": 1,
+        "tagsSha256": "a63ef9e5bc6c51d0a8eaa1fb0b98af79d5a15253cab5e81237be715d7e1014e1",
+        "digestsSha256": "f0f63c8ee86563b511ddb9832e1ee660248d297d2c980ae34a25edf8df397fdf",
+        "referencedBy": [],
+        "retainedBaselinePin": false
+      },
+      {
+        "id": "sha256:d8e03f29c649c75878e7602bcc2afdc4c71bd38e93ebb86434090b0c4f754a32",
+        "runtimeSha": "fe289d7e3b6c4c4f1aaff7d5e56b329802d5cd7b",
+        "sizeBytes": 258817013,
+        "created": "2026-11-24T04:37:06.909472043Z",
+        "applicationOwnerLabel": true,
+        "sourceOwnerLabel": true,
+        "repoTags": [],
+        "repoDigests": [],
+        "tagCount": 1,
+        "digestCount": 1,
+        "tagsSha256": "e1abdfa2211247b95b78cc12a233c42bb987c9741ba1b6621d74173ed05fcc09",
+        "digestsSha256": "8a38f32f42acb7c6bcdc636cbaeb27b0962f80f030af7d1cb12937239ba6775b",
+        "referencedBy": [],
+        "retainedBaselinePin": false
+      },
+      {
+        "id": "sha256:e36c969dc5a21a1654d738a2fe76c4657cd75ad48ffeff4c87845f67035c6f6f",
+        "runtimeSha": "a182cd21b21ecf612b63613d263e5bdd817ea4c0",
+        "sizeBytes": 270293495,
+        "created": "2026-11-11T07:34:04.798102084Z",
+        "applicationOwnerLabel": false,
+        "sourceOwnerLabel": false,
+        "repoTags": [
+          "avtocena-regcloud:a182cd21b21ecf612b63613d263e5bdd817ea4c0"
+        ],
+        "repoDigests": [
+          "avtocena-regcloud@sha256:e36c969dc5a21a1654d738a2fe76c4657cd75ad48ffeff4c87845f67035c6f6f"
+        ],
+        "tagCount": 1,
+        "digestCount": 1,
+        "tagsSha256": "c2381f0f0722c5b97ae5e8198ffe879a12af58810f39bda498350f988851db4a",
+        "digestsSha256": "6fcd9cbdf44e840ee3685ce2236df32d4e98daad4e31614cba6ba12ed8449cfd",
+        "referencedBy": [],
+        "retainedBaselinePin": true
+      },
+      {
+        "id": "sha256:f36ebf373120f0a520d2c1af75ff395fba14383e9955c348193eac5e70846009",
+        "runtimeSha": "d536c1547c4d82a339ed68ced7d8503f09b6810b",
+        "sizeBytes": 258499964,
+        "created": "2026-11-25T04:59:43.47058456Z",
+        "applicationOwnerLabel": true,
+        "sourceOwnerLabel": true,
+        "repoTags": [
+          "avtocena-china-runtime:d536c1547c4d82a339ed68ced7d8503f09b6810b-8c7e4eba1024"
+        ],
+        "repoDigests": [
+          "avtocena-china-runtime@sha256:f36ebf373120f0a520d2c1af75ff395fba14383e9955c348193eac5e70846009"
+        ],
+        "tagCount": 1,
+        "digestCount": 1,
+        "tagsSha256": "6bc5fbfe249218c4ee3ee53a2fa22bcadadd9c3ccb369f9e23efbc43211b1985",
+        "digestsSha256": "8ae482c167a9daa22d75b10852610c434087d2df6e866f23ecee57dcf02a5881",
+        "referencedBy": [
+          "21a7093914645595d2cfcfc26335f8e8dbf155f6906840bbfb72855ed587e1e3",
+          "bf233b651cc4c84afae4b59c2f17279ea2db7475bfeef6158ca012315a7f1c23"
+        ],
+        "retainedBaselinePin": false
+      }
+    ],
+    "imagesDeleted": 0,
+    "hostFilesDeleted": 0,
+    "volumesDeleted": 0,
+    "memoryLimitsChanged": 0,
+    "acceptedStateWrites": 0,
+    "intentStateWrites": 0
+  },
+  "finishedAt": "2026-11-26T05:25:57.507Z"
+}

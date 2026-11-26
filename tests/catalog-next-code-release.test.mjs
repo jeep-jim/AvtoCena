@@ -174,7 +174,7 @@ async function fixture(t, {combined = false, japan = false} = {}) {
             nonce: flags.wrongNonce ? 'f'.repeat(32) : hostPlan.nonce, checkedAt: new Date().toISOString(),
             generationManifestSha256: f.candidate.generationManifestSha256, oracleSha256: hash(await fs.readFile(args.env.ORACLE_PATH)),
             passed: true, japanFreshnessPassed: true, japanPowerApiPassed: true, japanUiPassed: true, japanVisibilityPassed: true,
-            readOnlyBrowserFence: true, productionMutations: 0, directSupplierRequests: 0, explicitJapanApiRequests: 3};
+            readOnlyBrowserFence: true, productionMutations: 0, directSupplierApiRequests: 0, explicitJapanApiRequests: 3};
           if (flags.failedReport) Object.assign(report, {passed: false, japanVisibilityPassed: false,
             error: {stage: 'catalog_visibility', code: 'japan_browser_overview_http', timeout: false}});
           if (flags.changeReport) flags.changeReport(report);
@@ -460,7 +460,7 @@ for (const [field, value] of [
   ['checkedAt', acceptedAt], ['checkedAt', '2999-01-01T00:00:00.000Z'], ['checkedAt', undefined],
   ...['passed', 'japanFreshnessPassed', 'japanPowerApiPassed', 'japanUiPassed', 'japanVisibilityPassed', 'readOnlyBrowserFence']
     .map(field => [field, false]),
-  ['productionMutations', 1], ['directSupplierRequests', 1], ['productionMutations', false], ['directSupplierRequests', undefined],
+  ['productionMutations', 1], ['directSupplierApiRequests', 1], ['productionMutations', false], ['directSupplierApiRequests', undefined],
 ]) test('Japan recovery rejects invalid ' + field + '=' + value + ' before accepting evidence', async t => {
   const f = await fixture(t, {japan: true}); f.flags.changeReport = report => { report[field] = value; };
   const {stage, input} = await reservedStage(f);

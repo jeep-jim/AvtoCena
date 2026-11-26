@@ -281,7 +281,7 @@ test('Japan recovery builds fresh source and preserves its separate bound browse
  assert.match(branch,/japanReportBase64: japanRaw\.toString\('base64'\)/);
  assert.match(branch,/japanReportSha256: hash\(japanRaw\)/);
  assert.match(branch,/'japanVisibilityPassed', 'readOnlyBrowserFence'/);
- assert.match(branch,/\['productionMutations', 'directSupplierRequests'\]\.every\(key => japan\[key\] === 0\)/);
+ assert.match(branch,/\['productionMutations', 'directSupplierApiRequests'\]\.every\(key => japan\[key\] === 0\)/);
  assert.doesNotMatch(branch,/photo-japan-browser-acceptance|--photo-only/);
  const host=fs.readFileSync(path.join(root,'scripts/catalog-next/release-host.py'),'utf8');
  assert.match(host,/code_update\(self\.plan\) and code_scope\(self\.plan\) == JAPAN_CODE_SCOPE/);

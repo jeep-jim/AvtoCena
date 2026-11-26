@@ -376,7 +376,7 @@ export function createChinaDailyRelease({root, servingRoot, pricingPlan, serving
             need(japanExit === 0, 'japan_browser_failed');
             need(['passed', 'japanFreshnessPassed', 'japanPowerApiPassed', 'japanUiPassed', 'japanVisibilityPassed', 'readOnlyBrowserFence']
                 .every(key => japan[key] === true)
-              && ['productionMutations', 'directSupplierRequests'].every(key => japan[key] === 0), 'japan_browser_binding');
+              && ['productionMutations', 'directSupplierApiRequests'].every(key => japan[key] === 0), 'japan_browser_binding');
             detailsRaw = Buffer.from(JSON.stringify({...details, japanReportBase64: japanRaw.toString('base64'),
               japanReportSha256: hash(japanRaw)}) + '\n');
             need(detailsRaw.length <= 256 * 1024, 'browser_details_size');
