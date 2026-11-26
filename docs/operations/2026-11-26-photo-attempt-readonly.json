@@ -1,0 +1,302 @@
+{
+  "version": 1,
+  "kind": "photo-attempt-historical-observations-v1",
+  "evidenceRun": "https://github.com/jeep-jim/AvtoCena/actions/runs/45732403938",
+  "recordedAt": "2026-11-26T00:57:53.3873895Z",
+  "report": {
+    "kind": "photo-release-attempt-readonly-v1",
+    "runtimeLockBusy": false,
+    "status": "observed",
+    "runtimeSha": "36d707bcb599e861918df411e40d8947074f0430",
+    "controllerSha": "b6ae6d20149362e5d772d08f6ce66dcca3ee9332",
+    "measuredAt": "2026-11-26T00:57:53.295396Z",
+    "diskFreeBytes": 26478452736,
+    "diskTotalBytes": 102916472832,
+    "generationId": "gen_china_45655051136_1",
+    "attemptHash": "2ebacfe67f5b5ad6",
+    "proofSha256": {
+      "PLAN.json": "1b8455abcd8512467f31bc0e2735922536cee40d933084ae3934ef38515c99dc",
+      "ROLLED_BACK.json": "783809d2dc846fbac6c01699f5419345bb61eca77c6542d304eb283fed0d74e6",
+      "server-speed-result.json": "4d4b236968365be4722537fc3e4e0c06a57f5364fe8470e6f280847fcc0d0187"
+    },
+    "sourceSha256": {
+      "regcloud-performance-gate.py": "ebd54f9774271f52d3026a153e99d3a96c791db07b79c9c802705e952045366b",
+      "accepted-speed-baseline.json": "32fba449b77e40983803483ea7b6cb4ece09afa997c2ae08dd968c675f528c59"
+    },
+    "retainedHealthBoundBeforeAfter": true,
+    "retainedHealth": {
+      "status": 200,
+      "ok": true,
+      "releaseSha": "d536c1547c4d82a339ed68ced7d8503f09b6810b",
+      "calculationVersion": "4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90"
+    },
+    "savedSpeedResultWrittenAt": "2026-11-25T19:50:19.423540Z",
+    "savedSpeedResultWrittenTimeNano": "1795636219423540279",
+    "rolledBackAt": "2026-11-25T19:50:20.146394Z",
+    "startup": {
+      "present": true,
+      "valid": true,
+      "sha256": "b38718603869f51891f6f92a99602dc03f40a681698f96ee8ce9e7be608845bc",
+      "value": {
+        "version": 1,
+        "kind": "china-host-startup-v1",
+        "ready": true,
+        "elapsedSeconds": 528.0845,
+        "attempts": 89,
+        "health": "ok",
+        "candidate": {
+          "running": true,
+          "status": "running",
+          "exitCode": 0,
+          "oomKilled": false,
+          "restartCount": 0
+        },
+        "reason": "ready"
+      }
+    },
+    "homePhaseTiming": {
+      "present": true,
+      "valid": true,
+      "sha256": "bd68a65b34bd725e31f520ab08780a52e8afcd56b09781cb0de67dbc5150334b",
+      "value": {
+        "version": 1,
+        "kind": "china-home-phase-timing-v1",
+        "runtimeSha": "36d707bcb599e861918df411e40d8947074f0430",
+        "logBytes": 1883,
+        "logLines": 15,
+        "rejectedRows": 0,
+        "limited": false,
+        "rows": [
+          {
+            "trace": "3e72e127-6c94-4620-ac16-56ff10e16c45",
+            "phase": "snapshotEditorial:china",
+            "ms": 210.6,
+            "ok": true,
+            "policyDate": "2026-11-26",
+            "completedPolicyDate": "2026-11-26"
+          },
+          {
+            "trace": "3e72e127-6c94-4620-ac16-56ff10e16c45",
+            "phase": "snapshotManifest",
+            "ms": 85.6,
+            "ok": true,
+            "policyDate": "2026-11-26",
+            "completedPolicyDate": "2026-11-26"
+          },
+          {
+            "trace": "d71e2360-d245-45a9-bcbc-0ffb27d9456f",
+            "phase": "green",
+            "ms": 438.7,
+            "ok": true,
+            "policyDate": "2026-11-26",
+            "completedPolicyDate": "2026-11-26"
+          },
+          {
+            "trace": "d71e2360-d245-45a9-bcbc-0ffb27d9456f",
+            "phase": "dealer",
+            "ms": 3294.7,
+            "ok": true,
+            "policyDate": "2026-11-26",
+            "completedPolicyDate": "2026-11-26"
+          },
+          {
+            "trace": "3e72e127-6c94-4620-ac16-56ff10e16c45",
+            "phase": "snapshotOverview",
+            "ms": 3027.8,
+            "ok": true,
+            "policyDate": "2026-11-26",
+            "completedPolicyDate": "2026-11-26",
+            "generation": "gen_1795428982165_8c56770d"
+          },
+          {
+            "trace": "d71e2360-d245-45a9-bcbc-0ffb27d9456f",
+            "phase": "greenPricing",
+            "ms": 3713,
+            "ok": true,
+            "policyDate": "2026-11-26",
+            "completedPolicyDate": "2026-11-26"
+          }
+        ]
+      }
+    },
+    "retainedLaunch": {
+      "evidenceKind": "current_retained_reconstruction",
+      "historicalCandidateSnapshot": false,
+      "argvClass": "node_other",
+      "matchesExpectedStandalone": false,
+      "entrypointSha256": "76d4a23e369c37b9ded0bc76896b360ce2abbc87e24c4fe01766f3751b597774",
+      "cmdSha256": "18af02283c0d1ec4727f1613c7ccb8d02c5010693f8974715930ed2a962769db",
+      "environmentFlags": {
+        "NEXT_MANUAL_SIG_HANDLE": {
+          "present": false,
+          "truthy": false
+        },
+        "NEXT_CPU_PROF": {
+          "present": false,
+          "truthy": false
+        },
+        "__NEXT_PRIVATE_CPU_PROFILE": {
+          "present": false,
+          "truthy": false
+        }
+      },
+      "nodeOptions": {
+        "present": false,
+        "parseSucceeded": true,
+        "preloadPresent": false
+      }
+    },
+    "historicalJournal": {
+      "status": "recognized_observations",
+      "causeDetermined": false,
+      "sources": {
+        "container": {
+          "available": true,
+          "reason": null,
+          "bytesRead": 0,
+          "limited": false,
+          "linesRead": 0,
+          "matchedLines": 0,
+          "rejectedLines": 0,
+          "unclassifiedLines": 0,
+          "categories": {},
+          "taskExits": []
+        },
+        "services": {
+          "available": true,
+          "reason": null,
+          "bytesRead": 1666,
+          "limited": false,
+          "linesRead": 3,
+          "matchedLines": 3,
+          "rejectedLines": 0,
+          "unclassifiedLines": 1,
+          "categories": {
+            "containerd_shim_cleanup": 1,
+            "containerd_shim_disconnected": 1
+          },
+          "taskExits": []
+        }
+      }
+    },
+    "events": {
+      "since": 1795636159,
+      "until": 1795636222,
+      "historyIsFinite": true,
+      "emptyDoesNotExcludeFailure": true,
+      "exit137DoesNotProveOom": true,
+      "postFailureTerminalEventsMayBeCleanup": true,
+      "available": true,
+      "reason": null,
+      "rows": [
+        {
+          "action": "die",
+          "time": 1795636219,
+          "exitCode": 0,
+          "oom": false,
+          "timeNano": "1795636219197740560"
+        },
+        {
+          "action": "destroy",
+          "time": 1795636219,
+          "exitCode": null,
+          "oom": false,
+          "timeNano": "1795636219456967528"
+        }
+      ]
+    }
+  },
+  "ordering": {
+    "savedGateResultTimeNano": "1795636219423540279",
+    "events": [
+      {
+        "action": "die",
+        "timeNano": "1795636219197740560",
+        "deltaFromSavedGateResultNanoseconds": "-225799719"
+      },
+      {
+        "action": "destroy",
+        "timeNano": "1795636219456967528",
+        "deltaFromSavedGateResultNanoseconds": "33427249"
+      }
+    ],
+    "httpFailureTimestampSaved": false,
+    "reasonForContainerExitEstablished": false
+  },
+  "verifiedCurrentEntrypoint": {
+    "argv": [
+      "node"
+    ],
+    "method": "SHA256 of compact JSON equals observed entrypointSha256",
+    "sha256": "76d4a23e369c37b9ded0bc76896b360ce2abbc87e24c4fe01766f3751b597774",
+    "cmdUnresolved": true
+  },
+  "capacity": {
+    "unitBytes": 1073741824,
+    "freeGiB": 24.65998077392578,
+    "totalGiB": 95.84843444824219,
+    "usedPercent": 74.27190030188538
+  },
+  "savedFailureAndCleanup": {
+    "evidenceRun": "https://github.com/jeep-jim/AvtoCena/actions/runs/45726343372",
+    "savedServerSpeed": {
+      "selected": true,
+      "valid": true,
+      "present": true,
+      "planSha256": "1b8455abcd8512467f31bc0e2735922536cee40d933084ae3934ef38515c99dc",
+      "sourceSha256": {
+        "regcloud-performance-gate.py": "ebd54f9774271f52d3026a153e99d3a96c791db07b79c9c802705e952045366b",
+        "accepted-speed-baseline.json": "32fba449b77e40983803483ea7b6cb4ece09afa997c2ae08dd968c675f528c59"
+      },
+      "sha256": "4d4b236968365be4722537fc3e4e0c06a57f5364fe8470e6f280847fcc0d0187",
+      "exitCode": 1,
+      "samples": [
+        {
+          "path": "/api/health",
+          "performanceRequest": "started"
+        },
+        {
+          "path": "/api/health",
+          "performanceRequest": "complete",
+          "seconds": 0.0131,
+          "functionalPassed": true
+        },
+        {
+          "path": "/api/leads",
+          "performanceRequest": "started"
+        },
+        {
+          "path": "/api/leads",
+          "performanceRequest": "complete",
+          "seconds": 0.0146,
+          "functionalPassed": true
+        },
+        {
+          "path": "/",
+          "performanceRequest": "started"
+        },
+        {
+          "path": "/",
+          "performanceRequest": "failed",
+          "seconds": 31.1338,
+          "errorType": "IncompleteRead"
+        }
+      ],
+      "rejectedSamples": 0
+    },
+    "failedCodeCleanup": {
+      "present": true,
+      "valid": true,
+      "receiptSha256": "4488f9fc79ce54859d92a952f73426973e9e3df7555e0ba3daee5b126570f2da",
+      "filesDeleted": 7,
+      "logicalBytesDeleted": 12866426075,
+      "imagesDeleted": 0,
+      "directoriesDeleted": 0,
+      "completed": true,
+      "protectedDeploymentsPreserved": true,
+      "bindsAttempt": true,
+      "bindsPlan": true,
+      "bindsRollback": true
+    }
+  }
+}
