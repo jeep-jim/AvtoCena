@@ -296,7 +296,7 @@ test('workflow gates all offline controller tests before secrets and has no sour
   assert(!verify.includes('secrets.'));assert(!verify.includes('environment: regcloud-staging'));
   assert(!/AUTO_API|refresh_complete_source|prepare-generation|--checkout|npm run build|docker build|stageRelease|activate/.test(text));
   assert.match(text,/fetch-depth: 2/);assert.match(text,/node --import tsx scripts\/catalog-next\/resume-china-reg-retention-45875678028\.mjs --run/);
-  assert(!text.slice(0,text.indexOf('jobs:')).includes('catalog-next-china'));
+  assert.doesNotMatch(text.slice(0,text.indexOf('jobs:')), /^concurrency:/m);
   const production=text.slice(text.indexOf('  resume-retention:'));
   assert.match(production,/concurrency:\n\s+group: catalog-next-china/);
 });
