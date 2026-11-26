@@ -248,8 +248,8 @@ def cgroup_memory(row):
 
 def local_history(rows):
     summaries = []
-    children = list(ROOT.iterdir())
-    need(len(children) <= 256, 'release_count')
+    children = [path for path in ROOT.iterdir() if SHA.fullmatch(path.name) and not path.is_symlink() and path.is_dir()]
+    need(len(children) <= 4096, 'release_count')
     for release in children:
         if not SHA.fullmatch(release.name) or release.is_symlink() or not release.is_dir():
             continue

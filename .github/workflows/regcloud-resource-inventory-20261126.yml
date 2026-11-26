@@ -13,14 +13,16 @@ jobs:
   inspect:
     if: github.repository_id == '1289722938' && github.ref == 'refs/heads/main' && github.run_attempt == '1'
     runs-on: ubuntu-24.04
-    timeout-minutes: 7
+    timeout-minutes: 10
     environment: regcloud-staging
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
           persist-credentials: false
       - name: Check private-field projection and bounded read guards
-        run: python3 tests/regcloud-resource-inventory-20261126.test.py
+        run: |
+          python3 tests/regcloud-resource-inventory-20261126.test.py
+          python3 tests/regcloud-stopped-layers-20261126.test.py
       - name: Inspect RAM and disk ownership without changing containers or data
         env:
           SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
@@ -33,11 +35,14 @@ jobs:
           printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
           unset SSH_PRIVATE_KEY
           ssh -F /dev/null -T -i "$key_file" -o BatchMode=yes -o IdentitiesOnly=yes -o ForwardAgent=no -o ClearAllForwardings=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=yes -o GlobalKnownHostsFile=/dev/null -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts" root@151.248.113.177 '/usr/bin/env -i PATH=/usr/bin:/bin /usr/bin/python3 -I -B -' < scripts/regcloud-resource-inventory-20261126.py | tee server-resource-inventory.json
+          ssh -F /dev/null -T -i "$key_file" -o BatchMode=yes -o IdentitiesOnly=yes -o ForwardAgent=no -o ClearAllForwardings=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=yes -o GlobalKnownHostsFile=/dev/null -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts" root@151.248.113.177 '/usr/bin/env -i PATH=/usr/bin:/bin /usr/bin/python3 -I -B -' < scripts/regcloud-stopped-layers-20261126.py | tee server-stopped-layers.json
       - name: Save bounded public resource report
         uses: actions/upload-artifact@v4
         if: always()
         with:
           name: server-resource-inventory-readonly
-          path: server-resource-inventory.json
+          path: |
+            server-resource-inventory.json
+            server-stopped-layers.json
           if-no-files-found: ignore
           retention-days: 14
