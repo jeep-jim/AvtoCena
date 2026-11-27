@@ -5,7 +5,7 @@ import {createHash} from 'node:crypto';
 import {isIP} from 'node:net';
 import {gunzipSync} from 'node:zlib';
 import {DetailReadCache} from './detail-read-cache';
-import {ajesQuery,ajesLot,ajesSourceCacheSql,type AjesTable,type AjesQuery} from './ajes-query';
+import {ajesQuery,ajesLot,ajesText,ajesSourceCacheSql,type AjesTable,type AjesQuery} from './ajes-query';
 import {AjesUnavailable,assertAjesJapanTable} from './ajes-access-policy';
 
 export {AjesUnavailable} from './ajes-access-policy';
@@ -22,6 +22,27 @@ class AjesSavedRecovery {
 class AjesEmptyValidation extends AjesSavedRecovery {}
 const sourceTtlMs=30*60*1000;
 const sqlHash=(sql:string)=>createHash('sha256').update(sql).digest('hex');
+/** Observe an already rejected LIST, never admit or retain its rows. The same
+ * ID text normalization and finite alphabet as ajesLot make adjacent-window
+ * hashes comparable; they do not establish that WHERE/OFFSET was honoured.
+ */
+function rejectedListWindow(rows:unknown[],windowSize:number):AjesResponseValidation['listWindow'] {
+ if(!Number.isSafeInteger(windowSize)||windowSize<1||windowSize>48||rows.length>96||rows.length<2*windowSize)return undefined;
+ const ids:string[]=[];
+ for(const row of rows){
+  if(!row||typeof row!=='object'||Array.isArray(row))continue;
+  const prototype=Object.getPrototypeOf(row);
+  if(prototype!==Object.prototype&&prototype!==null)continue;
+  const field=Object.getOwnPropertyDescriptor(row,'ID');
+  if(!field||!Object.prototype.hasOwnProperty.call(field,'value'))continue;
+  const id=ajesText(field.value);
+  if(/^[A-Za-z0-9_-]{1,64}$/.test(id))ids.push(id);
+ }
+ const counts={windowSize,identityRowCount:ids.length,uniqueIdCount:new Set(ids).size};
+ if(counts.identityRowCount!==rows.length||counts.uniqueIdCount!==rows.length)return counts;
+ const hash=(values:string[])=>createHash('sha256').update(JSON.stringify(values)).digest('hex');
+ return {...counts,fingerprints:{orderedIdsSha256:hash(ids),firstWindowSha256:hash(ids.slice(0,windowSize)),nextWindowSha256:hash(ids.slice(windowSize,2*windowSize))}};
+}
 const needsEmptyProof=(value:any)=>value?.schemaVersion===2&&Array.isArray(value.items)&&value.items.length===0&&!(Number.isSafeInteger(value.received)&&value.received>0);
 function verifiedEmptyPage(value:any,sourceSql?:string,countSql?:string,fresh=true){
   const proof=value?.emptyPageEvidence,now=Date.now();
@@ -217,7 +238,7 @@ export function createAjesClient(deps:Dependencies) {
         let requestStarted=false,httpStatus:number|null=null,providerCode:string|null=null;
         const startedAt=new Date().toISOString();
         const controller=new AbortController();
-        const responseFacts:Pick<AjesResponseValidation,'wireBytes'|'decodedBytes'|'rootKind'|'rowCount'>={};
+        const responseFacts:Pick<AjesResponseValidation,'wireBytes'|'decodedBytes'|'rootKind'|'rowCount'|'listWindow'>={};
         let responseValidation:AjesResponseValidation|undefined;
         const invalidResponse=(phase:AjesResponseValidation['phase'],code:AjesResponseValidation['code'])=>{
           responseValidation=sanitizeAjesResponseValidation({version:1,phase,code,...responseFacts});
@@ -274,7 +295,13 @@ export function createAjesClient(deps:Dependencies) {
             if(deps.saveAggregateEvidence)persist(()=>deps.saveAggregateEvidence!(query.kind,aggregateEvidence));
           }
           if(!Array.isArray(rows))throw invalidResponse('page_shape','root_not_array');
-          if(rows.length>query.pageSize)throw invalidResponse('page_shape','row_limit_exceeded');
+          if(rows.length>query.pageSize){
+            if(query.kind==='list'){
+              const listWindow=rejectedListWindow(rows,query.pageSize);
+              if(listWindow)responseFacts.listWindow=listWindow;
+            }
+            throw invalidResponse('page_shape','row_limit_exceeded');
+          }
           if(rows.some(r=>!r||typeof r!=='object'||Array.isArray(r)))throw invalidResponse('page_shape','row_not_object');
           if(query.kind==='detail'&&rows.some(r=>r.ID!==query.id))throw new AjesUnavailable('identity_mismatch');
           if(query.kind==='count'||query.kind==='models'||query.kind==='makes'||query.kind==='colors'){
