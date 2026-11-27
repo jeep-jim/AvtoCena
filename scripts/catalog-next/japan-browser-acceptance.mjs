@@ -625,6 +625,29 @@ export function verifyJapanDeliveredCalculation(value,status,grant){
   deliveryRub:value.deliveryQuote.amountRub,customsReady:true,requiresConfirmation:true};
 }
 
+/** Only a read-only canonical navigation of the literal legacy Mazda/3
+ * bookmark may follow a same-origin redirect. All supplier, mutation,
+ * private, foreign and unrelated 3xx responses remain blocked. */
+export function japanLegacyMazdaReadRedirect({from, to, method, resourceType, status}) {
+ if(method!=='GET'||resourceType!=='document'||![301,302,307,308].includes(status)
+  ||typeof to!=='string'||!to||/[\\\x00-\x1f\x7f]/.test(to))return false;
+ try {
+  const source=new URL(from),target=new URL(to,source);
+  const valid=(url,initial)=>{
+   if(url.origin!==ORIGIN||url.username||url.password||url.hash||url.pathname!=='/cars/japan')return false;
+   const params=url.searchParams,keys=[...params.keys()];
+   if(keys.length<3||keys.length>4||new Set(keys).size!==keys.length
+    ||keys.some(key=>!['make','model','city','market'].includes(key))
+    ||params.get('make')!=='Mazda'||params.get('city')!==CITY
+    ||params.has('market')&&params.get('market')!=='japan')return false;
+   if(initial)return keys.length===3&&params.get('model')==='3'&&!params.has('market');
+   const model=String(params.get('model')||'').toUpperCase().normalize('NFKC').trim();
+   return model==='3'||/^MAZDA[ -]?3(?:$|[^0-9])/.test(model);
+  };
+  return valid(source,true)&&valid(target,false)&&source.href!==target.href;
+ }catch{return false;}
+}
+
 export async function installReadFence(context,report,{getCalculationGrant}={}){
  report.blockedRequests={mutation:0,external:0,private:0,redirect:0};
  report.supplierImageRequests=0;
@@ -649,7 +672,11 @@ export async function installReadFence(context,report,{getCalculationGrant}={}){
    }
    response=await route.fetch({maxRedirects:0,timeout:90_000});
    if(response.status()>=300&&response.status()<400&&response.status()!==304){
-    report.blockedRequests.redirect++;await route.abort('blockedbyclient');
+    const location=response.headers()['location'];
+    if(scope==='allowed'&&japanLegacyMazdaReadRedirect({from:request.url(),to:location,
+      method:request.method(),resourceType:request.resourceType(),status:response.status()})){
+     await route.fulfill({response});
+    }else{report.blockedRequests.redirect++;await route.abort('blockedbyclient');}
    }else{
     if(scope==='calculation_read'){
      const raw=await response.body();need(raw.length<=128*1024,'calculation_response_size');
