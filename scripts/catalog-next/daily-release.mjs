@@ -133,6 +133,13 @@ export function createChinaDailyRelease({root, servingRoot, pricingPlan, serving
     verifyCodeCompatibility: verifyChinaPhotoCodeRuntime,
     generationStorage: owner => createPrivateChinaGenerationStorage({owner, environment}),
     openSession: openChinaSshSession, runChild, health, verifyCrmAccess: verifyCrmChinaUnauthorizedAccess,
+    async inspectSavedActiveStabilityFailure({env}) {
+      const {inspectSavedActiveStabilityFailure} = await import('./japan-usability-saved-failure-20261126.mjs');
+      return inspectSavedActiveStabilityFailure({env: {
+        REGCLOUD_S3_ACCESS_KEY_ID: env.YC_OBJECT_STORAGE_ACCESS_KEY_ID,
+        REGCLOUD_S3_SECRET_ACCESS_KEY: env.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY,
+      }});
+    },
     async checkControl() {
       need(environment.JSON_STORAGE_DRIVER === 'object', 'storage_driver');
       const [{getJsonStorage}, {assertChinaFeedControl}] = await Promise.all([
@@ -435,45 +442,67 @@ export function createChinaDailyRelease({root, servingRoot, pricingPlan, serving
           if (codeUpdate && ['catalog-japan-recovery-v1', 'catalog-japan-completion-v1', 'catalog-japan-completion-v2', 'catalog-japan-usability-v1', JAPAN_PAGINATION_CODE_SCOPE, JAPAN_STABILITY_CODE_SCOPE].includes(plan.codeScope)) {
             await activeGuard(); await progress('code_japan_browser');
             const japanOutput = path.join(browserDirectory, 'japan-browser-report.json'), japanStartedAt = Date.now();
-            const japanExit = await use.runChild({root, script: path.join(root, 'scripts/catalog-next/japan-browser-acceptance.mjs'),
-              args: [], cwd: browserDirectory, env: {...browserEnv, ORACLE_PATH: oraclePath,
-                EXPECTED_RELEASE_SHA: candidate.runtimeSha, VERIFICATION_NONCE: nonce, OUTPUT: japanOutput,
-                CATALOG_CODE_SCOPE: plan.codeScope}});
-            let japanRaw;
-            try { japanRaw = await fs.readFile(japanOutput); }
-            catch (error) { need(japanExit === 0, 'japan_browser_failed'); throw error; }
-            need(japanRaw.length <= 128 * 1024, 'japan_browser_binding');
-            const japan = JSON.parse(japanRaw), checkedAt = Date.parse(japan.checkedAt);
-            need(japan.version === 1 && japan.kind === 'catalog-japan-browser-v1' && japan.codeScope === plan.codeScope
-              && japan.release === candidate.runtimeSha && japan.nonce === nonce
-              && japan.generationManifestSha256 === candidate.generationManifestSha256
-              && japan.oracleSha256 === hash(await fs.readFile(oraclePath))
-              && Number.isFinite(checkedAt) && checkedAt >= japanStartedAt && checkedAt <= Date.now(), 'japan_browser_binding');
-            // Keep the exact bound report after staging cleanup, including a
-            // failed gate's diagnostic report. Copying it never grants acceptance.
-            await fs.writeFile(path.join(root, 'catalog-next-japan-browser-report.json'), japanRaw, {flag: 'wx', mode: 0o600});
-            need(japanExit === 0, 'japan_browser_failed');
-            need(['passed', 'japanFreshnessPassed', 'japanPowerApiPassed', 'japanUiPassed', 'japanVisibilityPassed', 'readOnlyBrowserFence']
-                .every(key => japan[key] === true)
-              && ['productionMutations', 'directSupplierApiRequests'].every(key => japan[key] === 0), 'japan_browser_binding');
-            if (['catalog-japan-completion-v1', 'catalog-japan-completion-v2', 'catalog-japan-usability-v1', JAPAN_PAGINATION_CODE_SCOPE, JAPAN_STABILITY_CODE_SCOPE].includes(plan.codeScope)) need(
-              ['japanPetrolPowerUiPassed', 'japanDetailPowerInputPassed', 'japanDeliveredCalculationPassed']
-                .every(key => japan[key] === true)
-              && Number.isSafeInteger(japan.japanPreviewCalculationRequests) && japan.japanPreviewCalculationRequests >= 1
-              && japan.japanPreviewCalculationRequests <= 2, 'japan_browser_binding');
-            if (plan.codeScope === 'catalog-japan-usability-v1') need(
-              ['japanBrandDirectoryPassed','japanFullPagesPassed','japanKnownPowerOrderPassed','japanVehiclePolicyPassed','japanQuietCatalogPassed']
+            let failedJapanStage;
+            try {
+              const japanExit = await use.runChild({root, script: path.join(root, 'scripts/catalog-next/japan-browser-acceptance.mjs'),
+                args: [], cwd: browserDirectory, env: {...browserEnv, ORACLE_PATH: oraclePath,
+                  EXPECTED_RELEASE_SHA: candidate.runtimeSha, VERIFICATION_NONCE: nonce, OUTPUT: japanOutput,
+                  CATALOG_CODE_SCOPE: plan.codeScope}});
+              let japanRaw;
+              try { japanRaw = await fs.readFile(japanOutput); }
+              catch (error) { need(japanExit === 0, 'japan_browser_failed'); throw error; }
+              need(japanRaw.length <= 128 * 1024, 'japan_browser_binding');
+              const japan = JSON.parse(japanRaw), checkedAt = Date.parse(japan.checkedAt);
+              need(japan.version === 1 && japan.kind === 'catalog-japan-browser-v1' && japan.codeScope === plan.codeScope
+                && japan.release === candidate.runtimeSha && japan.nonce === nonce
+                && japan.generationManifestSha256 === candidate.generationManifestSha256
+                && japan.oracleSha256 === hash(await fs.readFile(oraclePath))
+                && Number.isFinite(checkedAt) && checkedAt >= japanStartedAt && checkedAt <= Date.now(), 'japan_browser_binding');
+              // Keep the exact bound report after staging cleanup, including a
+              // failed gate's diagnostic report. Copying it never grants acceptance.
+              await fs.writeFile(path.join(root, 'catalog-next-japan-browser-report.json'), japanRaw, {flag: 'wx', mode: 0o600});
+              if (japan.passed === false && typeof japan.error?.stage === 'string'
+                && /^[a-z][a-z0-9_]{0,79}$/.test(japan.error.stage))
+                failedJapanStage = japan.error.stage;
+              need(japanExit === 0, 'japan_browser_failed');
+              need(['passed', 'japanFreshnessPassed', 'japanPowerApiPassed', 'japanUiPassed', 'japanVisibilityPassed', 'readOnlyBrowserFence']
+                  .every(key => japan[key] === true)
+                && ['productionMutations', 'directSupplierApiRequests'].every(key => japan[key] === 0), 'japan_browser_binding');
+              if (['catalog-japan-completion-v1', 'catalog-japan-completion-v2', 'catalog-japan-usability-v1', JAPAN_PAGINATION_CODE_SCOPE, JAPAN_STABILITY_CODE_SCOPE].includes(plan.codeScope)) need(
+                ['japanPetrolPowerUiPassed', 'japanDetailPowerInputPassed', 'japanDeliveredCalculationPassed']
+                  .every(key => japan[key] === true)
+                && Number.isSafeInteger(japan.japanPreviewCalculationRequests) && japan.japanPreviewCalculationRequests >= 1
+                && japan.japanPreviewCalculationRequests <= 2, 'japan_browser_binding');
+              if (plan.codeScope === 'catalog-japan-usability-v1') need(
+                ['japanBrandDirectoryPassed','japanFullPagesPassed','japanKnownPowerOrderPassed','japanVehiclePolicyPassed','japanQuietCatalogPassed']
+                  .every(key => japan[key] === true), 'japan_browser_binding');
+              if (paginationCodeUpdate) need(['japanFullPagesPassed', 'japanPagination24Passed', 'japanCatalogWarningRemovedPassed']
                 .every(key => japan[key] === true), 'japan_browser_binding');
-            if (paginationCodeUpdate) need(['japanFullPagesPassed', 'japanPagination24Passed', 'japanCatalogWarningRemovedPassed']
-              .every(key => japan[key] === true), 'japan_browser_binding');
-            if (stabilityCodeUpdate) need(['japanModelSelectionPassed', 'japanCombinedFiltersPassed',
-              'japanRelatedCardsPassed', 'japanVehiclePolicyPassed'].every(key => japan[key] === true), 'japan_browser_binding');
-            // Preserve the already bound CRM/photo evidence when this profile
-            // additionally verifies Japan's ordinary 24-row continuation.
-            detailsRaw = Buffer.from(JSON.stringify({...JSON.parse(detailsRaw), japanReportBase64: japanRaw.toString('base64'),
-              japanReportSha256: hash(japanRaw)}) + '\n');
-            need(detailsRaw.length <= 256 * 1024, 'browser_details_size');
-            await fs.writeFile(detailsPath, detailsRaw, {mode: 0o600});
+              if (stabilityCodeUpdate) need(['japanModelSelectionPassed', 'japanCombinedFiltersPassed',
+                'japanRelatedCardsPassed', 'japanVehiclePolicyPassed'].every(key => japan[key] === true), 'japan_browser_binding');
+              // Preserve the already bound CRM/photo evidence when this profile
+              // additionally verifies Japan's ordinary 24-row continuation.
+              detailsRaw = Buffer.from(JSON.stringify({...JSON.parse(detailsRaw), japanReportBase64: japanRaw.toString('base64'),
+                japanReportSha256: hash(japanRaw)}) + '\n');
+              need(detailsRaw.length <= 256 * 1024, 'browser_details_size');
+              await fs.writeFile(detailsPath, detailsRaw, {mode: 0o600});
+            } catch (error) {
+              if (stabilityCodeUpdate && failedJapanStage !== undefined) {
+                // Read only the five bounded saved slots while this candidate
+                // still serves. Rollback may overwrite them with older code.
+                // Diagnostics cannot replace the original gate failure.
+                try {
+                  const saved = await use.inspectSavedActiveStabilityFailure({env: environment});
+                  const raw = Buffer.from(JSON.stringify({...saved, capture: {version: 1, stage: 'before_rollback',
+                    runtimeSha: servingPlan.runtimeSha, controllerSha, nonce, failedStage: failedJapanStage,
+                    capturedAt: new Date().toISOString()}}, null, 2) + '\n');
+                  need(raw.length <= 32 * 1024, 'japan_failure_snapshot_size');
+                  await fs.writeFile(path.join(root, 'catalog-next-japan-source-failure-report.json'), raw,
+                    {mode: 0o600, flag: 'wx', signal: AbortSignal.timeout(1000)});
+                } catch {}
+              }
+              throw error;
+            }
           }
           await activeGuard(); await use.health(candidate.runtimeSha);
           const saved = await session.call('browser_evidence', {speedBase64: speedRaw.toString('base64'), detailsBase64: detailsRaw.toString('base64')});

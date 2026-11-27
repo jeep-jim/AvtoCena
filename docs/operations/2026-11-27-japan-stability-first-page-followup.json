@@ -1,7 +1,7 @@
 {
   "version": 1,
   "kind": "japan-stability-first-page-followup-v1",
-  "checkpointAt": "2026-11-27T08:08:12.136Z",
+  "checkpointAt": "2026-11-27T08:28:16.899Z",
   "ci": {
     "runId": "45958595440",
     "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/45958595440",
@@ -289,9 +289,9 @@
     "secondPageWireSha256": "f368b3edba33f245754f7c58a85473de35d87025afba14ddc8a86f4fa9db23c2",
     "savedPageThreeBelongsToPrevious733Run": true,
     "savedListOneCountLatestAttribution": "These records start after plain_first finished and have different SQL hashes. No responseValidation block is present. They do not diagnose the original first page request.",
-    "savedPageTwoWasRead": false,
+    "savedPageTwoWasRead": true,
     "nextExistingFixedObject": "integrations/ajes/catalog-failure-pages/stats-list-2.json",
-    "nextReadScope": "One fixed existing object, bounded GET, sanitize metadata only; no supplier request, history, listing, SSH or writes.",
+    "nextReadScope": "The one fixed existing page2 GET is complete. It did not recover the original failure.",
     "overwriteByRollbackRuntime": "Possible, not confirmed from the current artifact.",
     "earlierReadPath": "The mandatory China browser visits the shared /cars?powerTo=160 page. Its Japan rail can read the same source pages and currently omits sourceReceipts in its output. The standalone AjesCatalog SSR annotation does not cover that rail.",
     "diagnosticPersistenceLimit": "Private failure writes remain best-effort through a bounded queue. The artifact does not prove a write failure or overwrite."
@@ -310,7 +310,7 @@
     "bindingCurrentlySatisfied": false,
     "historicalGenerationWitnessesPreserved": true
   },
-  "nextStep": "Read only the existing saved source page2 failure, match exact hash and time, and use any valid validation phase as evidence. Keep parser, supplier request, freshness and acceptance unchanged until a supported repair is established. Maintenance remains deferred.",
+  "nextStep": "Publish the reviewed controller-only active capture; require its exact green CI; then run the existing c6cf candidate through unchanged live acceptance with a new marker. This is an instrumented diagnostic retry, not proof the supplier failure was fixed. Preserve the exact original failure phase before rollback, then implement only a supported repair. Maintenance remains deferred until acceptance.",
   "prohibitions": [
     "No direct supplier diagnostic retry",
     "No visitor IP substitution",
@@ -328,6 +328,88 @@
     "deadlineMs": 20000,
     "offlineTargetedTestsPassed": 30,
     "offlineControllerTestsPassed": 1405,
-    "executed": false
+    "executed": true
+  },
+  "savedPageTwoAudit": {
+    "runId": "45963448133",
+    "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/45963448133",
+    "conclusion": "success",
+    "artifactId": 15182311205,
+    "archiveSha256": "6ae9c47865edc18a6c40bd94768b44cf8b6feb39223eb7e56c33c3e02923025e",
+    "report": {
+      "version": 1,
+      "kind": "japan-page-two-saved-failure-v1",
+      "records": [
+        {
+          "slot": "stats-list-2",
+          "readStatus": "ok",
+          "startedAt": "2026-11-27T08:06:35.720Z",
+          "finishedAt": "2026-11-27T08:06:36.046Z",
+          "kind": "list",
+          "outcome": "invalid_response",
+          "page": 2,
+          "pageSize": 24,
+          "httpStatus": 200,
+          "providerCode": null,
+          "sqlSha256": "8301073a6a0a58a479bd4cbea69007a6b5e919d9d9ec59cda61d818599ed2d46",
+          "sqlBytes": 5479
+        }
+      ],
+      "supplierRequests": 0,
+      "writes": 0,
+      "attribution": "saved_outer_request_metadata_only",
+      "historyReads": 0,
+      "controllerSha": "6b4f50ea0a4ed6ae85f73eb746d861c83232e61d",
+      "approvedControllerSha": "0427384e26f8f3b50b35ff5e4802cb0f3c7852f9",
+      "runId": "45963448133",
+      "attempt": "1",
+      "checkedAt": "2026-11-27T08:09:32.286Z"
+    },
+    "matchesInitialPageTwoWireHash": false,
+    "responseValidationPresent": false,
+    "interpretation": "The saved record is a later request at08:06:35Z with another hash, not the original c6cf cooldown failure. No original phase can be recovered from this record."
+  },
+  "pageTwoReaderControllerCi": {
+    "runId": "45963386121",
+    "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/45963386121",
+    "controllerSha": "0427384e26f8f3b50b35ff5e4802cb0f3c7852f9",
+    "conclusion": "success",
+    "attempt": 1,
+    "finishedAt": "2026-11-27T08:13:07Z"
+  },
+  "preparedActiveCapture": {
+    "controllerOnly": true,
+    "runtimeSha": "c6cfb54cc7c9e2b9d30dcdbb7af9cb604b3aa323",
+    "runtimeTree": "5910c0ea5aa53abb73dd80f1790882dd839256f6",
+    "runtimeChanged": false,
+    "supplierRequestsAdded": 0,
+    "storageWritesAdded": 0,
+    "scope": "catalog-japan-stability-v1",
+    "trigger": "Only an existing fully bound failed Japan browser report with passed=false and finite error.stage; before original throw, stage close and recovery.",
+    "slots": [
+      "stats-list-1",
+      "stats-list-2",
+      "stats-list-3",
+      "stats-count",
+      "stats-latest"
+    ],
+    "sharedReadDeadlineMs": 5000,
+    "bodyBytes": 65536,
+    "totalReadBytes": 131072,
+    "artifactBytes": 32768,
+    "localWriteDeadlineMs": 1000,
+    "artifactMode": "0600/exclusive-create",
+    "originalErrorAndRollbackPreserved": true,
+    "credentialMapping": "Publish-step YC_OBJECT_STORAGE_ACCESS_KEY_ID/SECRET_ACCESS_KEY are aliases of the existing REG secrets and explicitly mapped into the fixed reader.",
+    "preservation": "Failure step validates local snapshot/runtime/controller/nonce/stage/time before redirection; a valid partial snapshot is kept byte-for-byte with0 furtherGET. Failed validation uses the prior4GET fallback.",
+    "tests": {
+      "helperAndLegacy": 38,
+      "realAdapterControllerStateIntegration": 16,
+      "fullController": 1429,
+      "failed": 0,
+      "independentReadonlyReview": "no blockers"
+    },
+    "liveExecuted": false,
+    "acceptanceCriteriaChanged": false
   }
 }

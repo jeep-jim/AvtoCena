@@ -149,6 +149,9 @@ jobs:
           REGCLOUD_S3_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
         run: |
           if [[ "$CATALOG_CODE_SCOPE" == 'catalog-japan-stability-v1' ]]; then
+            if node scripts/catalog-next/japan-usability-saved-failure-20261126.mjs --verify-active-stability-report; then
+              exit 0
+            fi
             node scripts/catalog-next/japan-usability-saved-failure-20261126.mjs --run-stability > catalog-next-japan-source-failure-report.json
           else
             node scripts/catalog-next/japan-usability-saved-failure-20261126.mjs --run > catalog-next-japan-source-failure-report.json

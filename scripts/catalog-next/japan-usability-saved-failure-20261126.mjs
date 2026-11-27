@@ -1,12 +1,16 @@
 // Fixed saved failure objects only. No application imports, supplier calls or writes.
 import {fileURLToPath} from 'node:url';
 import {createHash,createHmac} from 'node:crypto';
+import fs from 'node:fs/promises';
+import {constants as fileConstants} from 'node:fs';
+import path from 'node:path';
 import {verifyReadonlyInvocation} from '../lib/readonly-marker-invocation.mjs';
 const ROOT=fileURLToPath(new URL('../../',import.meta.url));
 const releaseKeys=[['stats-list-1','integrations/ajes/catalog-failure-pages/stats-list-1.json'],['stats-count','integrations/ajes/catalog-failure-pages/stats-count.json'],['stats-latest','integrations/ajes/catalog-failure-stats.json']];
 const pageThreeKeys=[['stats-list-3','integrations/ajes/catalog-failure-pages/stats-list-3.json']];
 const pageTwoKeys=[['stats-list-2','integrations/ajes/catalog-failure-pages/stats-list-2.json']];
 const stabilityKeys=[...pageThreeKeys,...releaseKeys];
+const activeStabilityKeys=[releaseKeys[0],...pageTwoKeys,...pageThreeKeys,...releaseKeys.slice(1)];
 const validationCodes={decode:['gzip_invalid','json_invalid'],page_shape:['root_not_array','row_limit_exceeded','row_not_object'],
  aggregate_shape:['total_invalid','count_row_count','make_name_missing'],empty_confirmation:['count_unavailable','count_unverified']};
 const validationKeys=new Set(['version','phase','code','wireBytes','decodedBytes','rootKind','rowCount','originCode']);
@@ -53,7 +57,11 @@ export async function inspectSavedStabilityFailure(options){
  const report=await inspectFixedSavedFailure(stabilityKeys,options);
  return {...report,kind:'japan-stability-saved-failure-v1',attribution:'saved_outer_request_metadata_only',historyReads:0};
 }
-async function inspectFixedSavedFailure(keys,{env=process.env,fetcher=globalThis.fetch}={}){
+export async function inspectSavedActiveStabilityFailure(options){
+ const report=await inspectFixedSavedFailure(activeStabilityKeys,options,5000);
+ return {...report,kind:'japan-stability-saved-failure-v1',attribution:'saved_outer_request_metadata_only',historyReads:0};
+}
+async function inspectFixedSavedFailure(keys,{env=process.env,fetcher=globalThis.fetch}={},deadlineMs=20000){
 const hash=x=>createHash('sha256').update(x).digest('hex');
 const hmac=(key,value)=>createHmac('sha256',key).update(value).digest();
 const int=(x,min,max)=>Number.isSafeInteger(x)&&x>=min&&x<=max?x:null;
@@ -77,7 +85,7 @@ try {
  const bucket='avtocena-staging-8120751',access=env.REGCLOUD_S3_ACCESS_KEY_ID||'',secret=env.REGCLOUD_S3_SECRET_ACCESS_KEY||'';
  const region='us-east-1',prefix='migration-staging/full-20261011';
  if(!/^[a-z0-9][a-z0-9.-]{1,61}[a-z0-9]$/.test(bucket)||!access||!secret||prefix.split('/').some(x=>x==='.'||x==='..'))throw Error();
- const signal=AbortSignal.timeout(20000);
+ const signal=AbortSignal.timeout(deadlineMs);
  for(const [slot,key] of keys){
   if(signal.aborted){records.push({slot,readStatus:'deadline'});continue;}
   if(total>=128*1024){records.push({slot,readStatus:'byte_limit'});continue;}
@@ -111,6 +119,85 @@ try {
 } catch {return {version:1,kind:'japan-usability-saved-failure-v1',readStatus:'configuration_unavailable',records:[],supplierRequests:0,writes:0};}
 }
 
+const activeReportNeed=value=>{if(!value)throw Error('japan_active_stability_report_invalid');};
+const exactObject=(value,required,optional=[])=>value&&typeof value==='object'&&!Array.isArray(value)
+ &&required.every(key=>Object.hasOwn(value,key))&&Object.keys(value).every(key=>required.includes(key)||optional.includes(key));
+const isoTime=value=>typeof value==='string'&&/^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d\.\d{3}Z$/.test(value)&&Number.isFinite(Date.parse(value));
+const boundedInteger=(value,min,max)=>Number.isSafeInteger(value)&&value>=min&&value<=max;
+const nullable=(value,check)=>value===null||check(value);
+async function readLocalBoundedJson(filename,limit){
+ const file=await fs.open(filename,fileConstants.O_RDONLY|fileConstants.O_NOFOLLOW);
+ try{
+  const stat=await file.stat();activeReportNeed(stat.isFile()&&stat.size>0&&stat.size<=limit);
+  const bytes=Buffer.alloc(limit+1);let total=0;
+  while(total<bytes.length){const {bytesRead}=await file.read(bytes,total,bytes.length-total,null);if(!bytesRead)break;total+=bytesRead;}
+  activeReportNeed(total>0&&total<=limit);
+  const text=new TextDecoder('utf-8',{fatal:true}).decode(bytes.subarray(0,total));
+  return {value:JSON.parse(text),text};
+ }finally{await file.close();}
+}
+function checkedActiveRecord(record,slot){
+ activeReportNeed(record?.slot===slot);
+ if(record.readStatus!=='ok'){
+  activeReportNeed(exactObject(record,['slot','readStatus'])
+   &&['missing','unavailable','deadline','byte_limit'].includes(record.readStatus));
+  return;
+ }
+ activeReportNeed(exactObject(record,['slot','readStatus','startedAt','finishedAt','kind','outcome','page','pageSize',
+  'httpStatus','providerCode','sqlSha256','sqlBytes'],['responseValidation']));
+ activeReportNeed(nullable(record.startedAt,isoTime)&&nullable(record.finishedAt,isoTime)
+  &&nullable(record.kind,value=>['list','detail','count','models','makes','colors'].includes(value))
+  &&nullable(record.outcome,value=>typeof value==='string'&&/^(?:http_[1-5]\d{2}|visitor_restricted|request_failed|request_timeout|connect_timeout|quota_exhausted|quota_busy|local_busy|invalid_response|empty_response|query_too_large|response_too_large|identity_mismatch)$/.test(value))
+  &&nullable(record.page,value=>boundedInteger(value,1,1000000))
+  &&nullable(record.pageSize,value=>boundedInteger(value,1,500))
+  &&nullable(record.httpStatus,value=>boundedInteger(value,100,599))
+  &&nullable(record.providerCode,value=>typeof value==='string'&&/^(?:bot|ban)\d{0,13}$/.test(value))
+  &&nullable(record.sqlSha256,value=>typeof value==='string'&&/^[a-f0-9]{64}$/.test(value))
+  &&nullable(record.sqlBytes,value=>boundedInteger(value,0,64*1024))
+  &&(record.sqlSha256===null)===(record.sqlBytes===null));
+ if(Object.hasOwn(record,'responseValidation'))activeReportNeed(sanitizeSavedResponseValidation(record.responseValidation)!==undefined);
+}
+
+/** Verify the already written local snapshot only. The checker has no storage
+ * capability, does not rewrite the file and cannot trigger another source read. */
+export async function verifySavedActiveStabilityReport({root=ROOT,environment=process.env}={}){
+ const [saved,planFile,browserFile]=await Promise.all([
+  readLocalBoundedJson(path.join(root,'catalog-next-japan-source-failure-report.json'),32*1024),
+  readLocalBoundedJson(path.join(root,'.github/operations/catalog-next/china-code-serving-plan.json'),128*1024),
+  readLocalBoundedJson(path.join(root,'catalog-next-japan-browser-report.json'),1024*1024),
+ ]);
+ const report=saved.value,plan=planFile.value,browser=browserFile.value;
+ // Only our compact or two-space JSON encoding is accepted. This also rejects
+ // duplicate keys whose overwritten raw value could otherwise escape validation.
+ activeReportNeed([JSON.stringify(report),JSON.stringify(report,null,2)].some(text=>saved.text===text||saved.text===text+'\n'));
+ activeReportNeed(exactObject(report,['version','kind','records','supplierRequests','writes','attribution','historyReads','capture'],['readStatus'])
+  &&report.version===1&&report.kind==='japan-stability-saved-failure-v1'
+  &&report.attribution==='saved_outer_request_metadata_only'
+  &&report.supplierRequests===0&&report.writes===0&&report.historyReads===0&&Array.isArray(report.records));
+ if(Object.hasOwn(report,'readStatus'))activeReportNeed(report.readStatus==='configuration_unavailable'&&report.records.length===0);
+ else{
+  activeReportNeed(report.records.length===activeStabilityKeys.length);
+  report.records.forEach((record,index)=>checkedActiveRecord(record,activeStabilityKeys[index][0]));
+ }
+ const capture=report.capture;
+ activeReportNeed(exactObject(capture,['version','stage','runtimeSha','controllerSha','nonce','failedStage','capturedAt'])
+  &&capture.version===1&&capture.stage==='before_rollback'
+  &&typeof capture.runtimeSha==='string'&&/^[a-f0-9]{40}$/.test(capture.runtimeSha)
+  &&typeof capture.controllerSha==='string'&&/^[a-f0-9]{40}$/.test(capture.controllerSha)
+  &&typeof capture.nonce==='string'&&/^[a-f0-9]{32}$/.test(capture.nonce)
+  &&typeof capture.failedStage==='string'&&/^[a-z][a-z0-9_]{0,79}$/.test(capture.failedStage)
+  &&isoTime(capture.capturedAt)&&capture.controllerSha===environment.GITHUB_SHA);
+ activeReportNeed(plan?.version===1&&plan.market==='china'&&plan.codeScope==='catalog-japan-stability-v1'
+  &&plan.runtimeSha===capture.runtimeSha&&browser?.version===1&&browser.kind==='catalog-japan-browser-v1'
+  &&browser.codeScope==='catalog-japan-stability-v1'&&browser.passed===false
+  &&browser.release===capture.runtimeSha&&browser.nonce===capture.nonce
+  &&browser.error?.stage===capture.failedStage&&isoTime(browser.checkedAt)
+  &&Date.parse(capture.capturedAt)>=Date.parse(browser.checkedAt));
+ return {version:1,kind:'japan-active-stability-report-verification-v1',verified:true,
+  runtimeSha:capture.runtimeSha,controllerSha:capture.controllerSha,nonce:capture.nonce,
+  failedStage:capture.failedStage,capturedAt:capture.capturedAt};
+}
+
 export function verifySavedPageTwoInvocation({root=ROOT,environment=process.env}={}){
  if(environment.GITHUB_ACTIONS!=='true'
   ||environment.GITHUB_WORKFLOW_REF!=='jeep-jim/AvtoCena/.github/workflows/japan-page-two-saved-failure.yml@refs/heads/main'
@@ -141,7 +228,12 @@ export function verifySavedStabilityFailureInvocation({environment=process.env}=
 }
 
 if(process.argv[1]&&fileURLToPath(import.meta.url)===process.argv[1]){
- if(process.argv.length===3&&['--verify-page-two','--run-page-two'].includes(process.argv[2])){
+ if(process.argv.length===3&&process.argv[2]==='--verify-active-stability-report'){
+  try{
+   verifySavedStabilityFailureInvocation();
+   console.log(JSON.stringify(await verifySavedActiveStabilityReport()));
+  }catch{console.log(JSON.stringify({version:1,kind:'japan-active-stability-report-verification-v1',verified:false}));process.exitCode=1;}
+ }else if(process.argv.length===3&&['--verify-page-two','--run-page-two'].includes(process.argv[2])){
   try{
    const invocation=verifySavedPageTwoInvocation();
    if(process.argv[2]==='--verify-page-two')console.log(JSON.stringify({kind:'japan-page-two-invocation-v1',verified:true,sourceSha:invocation.sourceSha,supplierRequests:0,writes:0}));
