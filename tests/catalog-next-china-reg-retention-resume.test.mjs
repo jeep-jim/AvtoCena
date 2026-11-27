@@ -5,12 +5,17 @@ import os from 'node:os';
 import path from 'node:path';
 import {execFileSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
+import {EventEmitter} from 'node:events';
+import {PassThrough, Writable} from 'node:stream';
+import {readFileSync, statSync} from 'node:fs';
+import {createChinaDailyRelease} from '../scripts/catalog-next/daily-release.mjs';
+import {openChinaSshSession} from '../scripts/catalog-next/release-ssh.mjs';
 import {createChinaState, inspectChinaPublicationState} from '../scripts/catalog-next/china-state.mjs';
 import {maintainChinaGenerationGcQueue} from '../scripts/catalog-next/china-generation-gc-queue.mjs';
 import {createChinaGenerationGcStorage} from '../scripts/catalog-next/china-generation-gc.mjs';
 import {hash, copy, ordered, empty} from './helpers/catalog-next-gc-fixture.mjs';
 import {PINS, MARKER, WORKFLOW, OPERATION, verifyInvocation, verifyState, leaseOnlyStorage, verifyTask,
-  scopedQueueStorage, aggregateGc, readDeadline, runRetention}
+  scopedQueueStorage, aggregateGc, readDeadline, runRetention, createRetireOnly}
   from '../scripts/catalog-next/resume-china-reg-retention-45875678028.mjs';
 
 const ROOT = fileURLToPath(new URL('../',import.meta.url));
@@ -42,7 +47,7 @@ function queueStore() {
     replace:value=>{queue=save(value);}
   };
 }
-async function fixture({codeAccepted=true,japanAccepted=codeAccepted,japanRuntime=PINS.expectedRuntime}={}) {
+async function fixture({codeAccepted=true,japanAccepted=codeAccepted,japanRuntime=PINS.expectedRuntime,includeA=false}={}) {
   const values=new Map(), writes=[], calls=[], reports=[];
   let sequence=0, setup=true, clock=Date.parse('2026-11-27T00:00:00.000Z'), callback;
   const storage={
@@ -87,6 +92,8 @@ async function fixture({codeAccepted=true,japanAccepted=codeAccepted,japanRuntim
       browserSpeedBytes:speed,browserDetailsBytes:detail}});
     await state.releaseLease({lease});
   }
+  if(includeA) await publish({...b,generationId:PINS.a,owner:{runId:'45369451603',attempt:'1',revision:'d'.repeat(40)},
+    receiptSha256:hash('original-A-receipt'),generationManifestSha256:'a'.repeat(64)});
   await publish(b); await publish(c);
   const beforeCode={accepted:await state.read('accepted'),intent:await state.read('intent')};
   const q=queueStore();
@@ -155,6 +162,67 @@ test('exact marker-only invocation is required; foreign workflow/repository/ref/
     assert.throws(()=>verifyInvocation({root,environment:{...env,...patch}}));
   await fs.writeFile(path.join(root,'controller.txt'),'unreviewed');
   assert.throws(()=>verifyInvocation({root,environment:env}));
+});
+
+test('one run retires A then B after native SSH consumes the environment credential; another run cannot reuse it',async t=>{
+  assert.equal(Object.hasOwn(process.env,'SSH_PRIVATE_KEY'),false,'offline test must not receive a real credential');
+  const runnerTemp=await fs.mkdtemp(path.join(os.tmpdir(),'reg-retirement-credential-'));
+  t.after(async()=>{delete process.env.SSH_PRIVATE_KEY;await fs.rm(runnerTemp,{recursive:true,force:true});});
+  const f=await fixture({includeA:true}),calls=[],keyHashes=[];let factories=0,authorityChecks=0,stateReads=0;
+  const initialKey='synthetic-offline-ssh-first',nextKey='synthetic-offline-ssh-next';
+  function spawnImpl(command,args,options) {
+    assert.equal(command,'/usr/bin/ssh');assert.deepEqual(options.env,{PATH:'/usr/bin:/bin',LANG:'C.UTF-8'});
+    const keyPath=args[args.indexOf('-i')+1];assert.equal(statSync(keyPath).mode&0o777,0o600);
+    keyHashes.push(hash(readFileSync(keyPath)));
+    const child=new EventEmitter();child.stdout=new PassThrough();child.stderr=new PassThrough();let boot=false,closed=false;
+    const close=()=>{if(!closed){closed=true;queueMicrotask(()=>child.emit('close',0,null));}};
+    child.kill=()=>{close();return true;};
+    child.stdin=new Writable({write(raw,_encoding,done){
+      if(!boot){boot=true;queueMicrotask(()=>{child.stdout.write('{"kind":"ready","protocol":1}\n');done();});return;}
+      const request=JSON.parse(raw);assert(['retire_recovery','close'].includes(request.method));
+      let value={closed:true};
+      if(request.method==='retire_recovery'){
+        assert.deepEqual(request.params.currentState,f.expected);
+        calls.push(request.params.previousAccepted.value.rollback.generationId);
+        value={retiredContainers:0,directoriesDeleted:0,imagesDeleted:0,filesDeleted:0,freedBytes:0};
+      }
+      queueMicrotask(()=>{child.stdout.write(JSON.stringify({kind:'result',id:request.id,value})+'\n');done();});
+    },final(done){done();close();}});
+    return child;
+  }
+  const createRelease=options=>{
+    factories++;
+    return createChinaDailyRelease({...options,capabilities:{openSession:args=>openChinaSshSession({...args,spawnImpl})}});
+  };
+  const makeHandler=()=>createRetireOnly({createRelease});
+  const handler=makeHandler();assert.equal(factories,0,'adapter creation must stay lazy');
+  const saved=JSON.parse([...f.q.tasks.values()][0].data);
+  const tasks=[{previousAccepted:f.beforeCode.intent.value.previous,acceptedPublication:f.beforeCode},
+    {previousAccepted:saved.previousAccepted,acceptedPublication:saved.acceptedPublication}];
+  const invoke=(retire,task)=>retire({root:ROOT,runnerTemp,environment:process.env,
+    invocation:{sourceSha:'a'.repeat(40)},current:f.expected.accepted.value.current,
+    args:{...task,readState:async()=>{stateReads++;return copy(f.expected);},assertAuthority:async()=>{authorityChecks++;}}});
+  process.env.SSH_PRIVATE_KEY=initialKey;
+  await invoke(handler,tasks[0]);
+  assert.equal(Object.hasOwn(process.env,'SSH_PRIVATE_KEY'),false,'native SSH must consume ambient credential');
+  assert.deepEqual(await fs.readdir(runnerTemp),[],'native session and key files must be removed');
+  await invoke(handler,tasks[1]);
+  assert.equal(factories,1);assert.deepEqual(calls,[PINS.a,PINS.b]);
+  assert.equal(stateReads,2);assert.equal(authorityChecks,6,'each task keeps fresh authority checks');
+  assert.deepEqual(keyHashes,[hash(initialKey+'\n'),hash(initialKey+'\n')]);
+  assert.equal(Object.hasOwn(process.env,'SSH_PRIVATE_KEY'),false);
+  assert.deepEqual(await fs.readdir(runnerTemp),[]);
+
+  const missing=makeHandler();assert.equal(factories,1);
+  await assert.rejects(invoke(missing,tasks[1]),/china_ssh_key_missing/);
+  assert.equal(factories,2);assert.equal(keyHashes.length,2,'new run cannot borrow the prior captured key');
+  process.env.SSH_PRIVATE_KEY=nextKey;
+  const next=makeHandler();await invoke(next,tasks[1]);
+  assert.equal(factories,3);assert.equal(keyHashes.at(-1),hash(nextKey+'\n'));
+  assert.equal(Object.hasOwn(process.env,'SSH_PRIVATE_KEY'),false);
+  assert.deepEqual(await fs.readdir(runnerTemp),[]);
+  assert.deepEqual(await f.storage.read('accepted'),f.expected.accepted);
+  assert.deepEqual(await f.storage.read('intent'),f.expected.intent);
 });
 
 test('lease-only storage rejects publication CAS and foreign read names before transport',()=>{

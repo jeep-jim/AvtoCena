@@ -235,24 +235,29 @@ export async function readDeadline({environment = process.env, fetcher = globalT
   return new Date(deadline).toISOString();
 }
 
-async function retireOnly({root, runnerTemp, environment, invocation, current, args}) {
-  const plans = await readChinaDailyPlans(root), servingPlan = selectChinaDailyServingPlan(plans, current.runtimeSha);
-  need(plans.pricingPlan.runtimeSha === PINS.pricing
-    && servingPlan.runtimeSha === PINS.expectedRuntime, 'plans');
-  // Only the existing host-retirement callback is retained. Its implementation
-  // uses authenticated retire_recovery and actual saved host proofs; it does
-  // not access servingRoot, run a build, restore source, reserve or activate.
-  // The controller root satisfies the factory's unused directory argument.
-  const release = createChinaDailyRelease({root, servingRoot:root, runnerTemp, environment,
-    controllerSha:invocation.sourceSha, pricingPlan:plans.pricingPlan, servingPlan});
-  return release.retireHost(args);
+export function createRetireOnly({createRelease = createChinaDailyRelease} = {}) {
+  need(typeof createRelease === 'function', 'arguments');
+  let release;
+  return async ({root, runnerTemp, environment, invocation, current, args}) => {
+    const plans = await readChinaDailyPlans(root), servingPlan = selectChinaDailyServingPlan(plans, current.runtimeSha);
+    need(plans.pricingPlan.runtimeSha === PINS.pricing
+      && servingPlan.runtimeSha === PINS.expectedRuntime, 'plans');
+    // Only the existing host-retirement callback is retained. Its implementation
+    // uses authenticated retire_recovery and actual saved host proofs; it does
+    // not access servingRoot, run a build, restore source, reserve or activate.
+    // Each run retains the factory's captured key after SSH consumes the ambient
+    // credential; retireHost still checks fresh state and authority for each task.
+    release ??= createRelease({root, servingRoot:root, runnerTemp, environment,
+      controllerSha:invocation.sourceSha, pricingPlan:plans.pricingPlan, servingPlan});
+    return release.retireHost(args);
+  };
 }
 const heartbeat = (fn, interval) => { const timer = setInterval(fn, interval); timer.unref?.(); return () => clearInterval(timer); };
 export async function runRetention({root = ROOT, environment = process.env, capabilities = {},
   now = () => new Date().toISOString(), scheduleHeartbeat = heartbeat, fetcher = globalThis.fetch} = {}) {
   const defaults = {verifyInvocation, createStorage: args => createChinaStateStorage(args),
     createQueueStorage: args => createChinaGenerationGcQueueStorage(args),
-    collectQueue: maintainChinaGenerationGcQueue, readDeadline, retireHost: retireOnly,
+    collectQueue: maintainChinaGenerationGcQueue, readDeadline, retireHost: createRetireOnly(),
     writeReport: report => fs.writeFile(path.join(root, REPORT), JSON.stringify(report, null, 2) + '\n', {mode:0o600})};
   need(capabilities && Object.keys(capabilities).every(key => Object.hasOwn(defaults,key) && typeof capabilities[key] === 'function')
     && typeof now === 'function' && typeof scheduleHeartbeat === 'function' && typeof fetcher === 'function', 'arguments');
