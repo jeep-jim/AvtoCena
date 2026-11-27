@@ -231,7 +231,10 @@ export async function checkJapanStabilityBrandControl({view, controls, rail, vis
     await action();
     const response = await pending, receivedAt = Date.now();
     need(response.url() === ORIGIN + JAPAN_STABILITY_BRANDS_API, 'brand_directory_query');
-    const data = await response.json().catch(() => null), status = response.status();
+    const status = response.status();
+    // Failed HTTP metadata cannot contribute source names or completeness.
+    // Its body may remain unread by the UI; observing it must not block Retry.
+    const data = status === 200 ? await response.json().catch(() => null) : null;
     const attempt = {...japanStabilityBrandDirectoryShape(data, status), attempt: progress.attempts.length + 1};
     progress.attempts.push(attempt);
     await onResponse({data, status, headers: response.headers(), requestedAt, receivedAt, durationMs: receivedAt - requestedAt});

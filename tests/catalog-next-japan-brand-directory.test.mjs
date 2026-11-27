@@ -104,15 +104,19 @@ test('rail rejects a page slice, invented makes, alias-only navigation, missing 
 
 function controlFixture({status = 200, stale = false, values = sourceValues, responseUrl = ORIGIN + JAPAN_STABILITY_BRANDS_API,
   state = 'ready', railState = 'ready', railLinks = links(), source = payload(), notice = false, movePage = false,
-  recovery, railRecovery, hiddenChanged = false, fallbackRows = visibleRows, mobile = false} = {}) {
+  recovery, railRecovery, hiddenChanged = false, fallbackRows = visibleRows, mobile = false, json} = {}) {
   let open = false, waiting, url = pageUrl, index = 0, currentRailState = railState, currentRailLinks = railLinks;
-  const sequence = [{status, stale, values, state, source, notice}, recovery].filter(Boolean);
+  const sequence = [{status, stale, values, state, source, notice, json}, recovery].filter(Boolean);
   const current = () => sequence[Math.min(index, sequence.length - 1)];
-  const calls = {clicks: 0, requests: 0, observed: [], captures: 0, waits: [], dropdownRetries: 0, railRetries: 0};
+  const calls = {clicks: 0, requests: 0, observed: [], captures: 0, waits: [], dropdownRetries: 0, railRetries: 0, bodyStatuses: []};
   const request = () => {
     const row = current(); calls.requests++;
     const response = {url: () => responseUrl, request: () => ({method: () => 'GET'}), status: () => row.status ?? 200,
-      json: async () => ({...(row.source ?? payload()), stale: row.stale ?? false, generationId: new Date(Date.now() - 1000).toISOString()}),
+      json: async () => {
+        calls.bodyStatuses.push(row.status ?? 200);
+        return row.json ? row.json()
+          : {...(row.source ?? payload()), stale: row.stale ?? false, generationId: new Date(Date.now() - 1000).toISOString()};
+      },
       headers: () => ({'content-type': 'application/json'})};
     assert(waiting, 'listen before action'); assert(waiting.predicate(response)); waiting.resolve(response);
   };
@@ -220,6 +224,38 @@ test('unavailable dropdown gets exactly one real retry, then requires the full f
   assert.equal(f.progress.dropdownFallback.fallbackOnly, true);
   assert.equal(f.progress.attempts[0].entryCount, 0); assert.equal(f.progress.attempts[0].validation, 'brand_directory_rows');
   assert.equal(f.progress.attempts[1].validation, 'fresh_complete'); assert.equal(f.progress.phase, 'complete');
+});
+
+test('failed HTTP metadata never reads a pending error body and still requires fresh complete data from its one retry', async () => {
+  const pendingBody = () => new Promise(() => {});
+  const f = controlFixture({status: 503, state: 'unavailable', values: fallbackValues,
+    json: pendingBody, recovery: recovered()});
+  const result = await withJapanDirectoryFixtureDeadline(() => f.run(), 100);
+  assert.deepEqual(f.calls.bodyStatuses, [200]);
+  assert.equal(f.calls.requests, 2); assert.equal(f.calls.dropdownRetries, 1);
+  assert.equal(f.calls.observed[0].status, 503); assert.equal(f.calls.observed[0].data, null);
+  assert.equal(f.progress.attempts[0].countsType, 'missing');
+  assert.equal(f.progress.attempts[0].validation, 'brand_directory_unavailable');
+  assert.equal(f.progress.dropdownFallback.completeSourceCovered, false);
+  assert.equal(f.progress.attempts[1].validation, 'fresh_complete');
+  assert.equal(result.proof.completeSourceCovered, true); assert.equal(result.proof.fallbackOnly, false);
+  assert.deepEqual(result.directory.makes, sourceValues);
+});
+
+test('skipping failed HTTP bodies never certifies a failed or incomplete retry as a full directory', async () => {
+  for (const recovery of [
+    {...recovered(), status: 503, json: () => new Promise(() => {})},
+    {...recovered(), source: {...payload(), counts: {}}},
+    {...recovered(), stale: true},
+  ]) {
+    const f = controlFixture({status: 503, state: 'unavailable', values: fallbackValues,
+      json: () => new Promise(() => {}), recovery});
+    await assert.rejects(withJapanDirectoryFixtureDeadline(() => f.run(), 100), /brand_directory_(unavailable|rows)/);
+    assert.deepEqual(f.calls.bodyStatuses, recovery.status === 503 ? [] : [200]);
+    assert.equal(f.calls.requests, 2); assert.equal(f.calls.dropdownRetries, 1);
+    assert.equal(f.calls.captures, 0); assert.equal(f.progress.dropdownFallback.completeSourceCovered, false);
+    assert.notEqual(f.progress.attempts[1].validation, 'fresh_complete');
+  }
 });
 
 test('desktop rail retry happens after the verified dropdown closes and never asks it for another response', async () => {

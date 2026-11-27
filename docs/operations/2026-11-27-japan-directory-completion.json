@@ -114,7 +114,7 @@
     "frozenSpeedBaselines": "unchanged; observed timing is nonblocking for the exact58/59 owner-authorized profiles"
   },
   "publication": {
-    "status": "in_progress",
+    "status": "cancelled_before_build_and_host",
     "runId": 46040340638,
     "runNumber": 31,
     "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/46040340638",
@@ -124,13 +124,26 @@
     "runtimeTree": "4e2c36e461416d6db7d0f52753c9a933d626dd5c",
     "acceptancePolicy": "japan-functional-observed-timing-v1",
     "lastConfirmedAcceptedRuntime": "a5ca426eec2663eb17c2df69fe2bfed46e2b8740",
-    "liveAcceptance": "pending; no accepted runtime claim until actual terminal receipt",
+    "liveAcceptance": "not reached; retry fixture was cancelled before build/host",
     "latestObservedStage": "prehost_real_directory_retry_fixture",
     "buildStarted": false,
     "hostContactStarted": false,
     "statusObservedAt": "2026-11-27T17:30:34Z",
-    "fixtureOutcome": "not completed; exact error not yet captured",
-    "fixtureStartedAt": "2026-11-27T17:19:00Z"
+    "fixtureOutcome": "cancelled without a JSON/stdout retry result; exact blocked action cannot be established from old run",
+    "fixtureStartedAt": "2026-11-27T17:19:00Z",
+    "conclusion": "cancelled",
+    "terminalObservedAt": "2026-11-27T17:42:35.610Z",
+    "artifactId": 15221297762,
+    "artifactBytes": 2009,
+    "artifactSha256": "74d4def35463e28f1cb1ee77c47a19a04414189d2cd91c4501bef432dc904226",
+    "artifactContents": [
+      "legacy redirect fixture report",
+      "model controls readiness fixture report"
+    ],
+    "retryFixtureReportPresent": false,
+    "aggregateReleaseReportPresent": false,
+    "imageReceiptPresent": false,
+    "liveReportPresent": false
   },
   "maintenance": {
     "status": "prepared_not_active",
@@ -157,7 +170,7 @@
       "activationRequires": "actual accepted release30 and a stable verified current/rollback observation"
     },
     "release31Preparation": {
-      "status": "parked_while_release31_preflight_remains_unfinished_not_published_or_activated",
+      "status": "parked_after_prehost_cancellation_not_published_or_activated",
       "coreCommit": "c5ea8981275a6eed4d0dfe822005835b4ab66e28",
       "observerCommit": "dd2734b44b784cb92cbf0d34feff9d6a64304d93",
       "targetRunId": 46040340638,
@@ -196,7 +209,7 @@
     }
   ],
   "remaining": [
-    "Resolve the actual hosted retry-fixture failure or lifecycle stall before image build and host contact; native557 verification remains pending.",
+    "Publish the reviewed HTTP error-body fix; require actual 3/3 Chromium Retry cases before the next release, then complete hosted native557 and live Japan acceptance.",
     "Complete own live Japan functional acceptance with retained data and rollback protection; observed latency is not a release veto.",
     "Retarget and activate authorized maintenance against the actually accepted run and observed current/rollback pair."
   ],
@@ -257,21 +270,41 @@
     "photoRetryFixture": "passed"
   },
   "hostedVerification": {
-    "status": "in_progress",
-    "runId": 46040261112,
-    "runNumber": 62,
-    "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/46040261112",
-    "controllerSha": "cb293d98fca55acc4ec2a027c2fae71899d6d69c",
+    "status": "completed",
+    "runId": 46043784741,
+    "runNumber": 63,
+    "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/46043784741",
+    "controllerSha": "2ae99fa1e672c3e9a35a428b6253a376bfd9fb0b",
     "runtimeSha": "b9e9122b75f4e588088d0241476b18df7f047d96",
     "acceptancePolicy": "japan-functional-observed-timing-v1",
-    "conclusion": null,
+    "conclusion": "failure",
     "requiredNativeTests": 557,
-    "retryBrowserFixture": "pending",
-    "legacyBrowserFixture": "step_passed",
-    "modelReadinessBrowserFixture": "step_passed",
-    "latestObservedStage": "real_directory_retry_fixture",
+    "retryBrowserFixture": "failed",
+    "controllerTests": 1613,
+    "controllerPassed": 1613,
+    "controllerFailed": 0,
+    "legacyBrowserCases": 8,
+    "modelReadinessBrowserCases": 2,
+    "retryBrowserCasesPassed": 1,
+    "retryBrowserCasesRequired": 3,
     "nativeSuiteReached": false,
-    "fixtureStartedAt": "2026-11-27T17:17:20Z"
+    "retryArtifactId": 15221623529,
+    "retryArtifactBytes": 45369,
+    "retryArtifactSha256": "4eb2ab668321240478444b1cc9155f1b0c40344a67e08f04d6415186fe350b12",
+    "retryReportSha256": "57343dafd10d9ce15ba44b23d6fd666a207d1678bed6fac88c4292cb046eb8e8",
+    "retryScreenshotSha256": "21a7c9ff7189dbc79c4f797146241f1b42a256ddc2c91401361e64383acfd219",
+    "artifactCrcVerified": true,
+    "retryFailure": {
+      "case": "desktop_dropdown_and_ssr_rail_recover_with_controls_remount",
+      "phase": "helper_metadata_initial",
+      "code": "japan_directory_retry_fixture_deadline",
+      "mobileCasePassed": true,
+      "preCleanupAttempts": 0,
+      "postCleanupFirstAttemptStatus": 503,
+      "desktopDom": "hydrated, non-busy, brand expanded, unavailable dropdown with one source fallback and Retry; rail unavailable; one card",
+      "preciseUnderlyingBrowserTransportCause": "not established",
+      "controllerCodeLocation": "unbounded response.json before attempt record; non-200 bodies are not used by the validator or permitted fallback names"
+    }
   },
   "latestOwnerDirection": {
     "date": "2026-11-27",
@@ -874,6 +907,29 @@
       "legacyRedirectBrowserCases": 8,
       "modelControlsReadyBrowserFixture": "passed",
       "modelControlsReadyBrowserCases": 2
+    },
+    {
+      "status": "completed",
+      "runId": 46040261112,
+      "runNumber": 62,
+      "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/46040261112",
+      "controllerSha": "cb293d98fca55acc4ec2a027c2fae71899d6d69c",
+      "runtimeSha": "b9e9122b75f4e588088d0241476b18df7f047d96",
+      "acceptancePolicy": "japan-functional-observed-timing-v1",
+      "conclusion": "cancelled",
+      "requiredNativeTests": 557,
+      "retryBrowserFixture": "cancelled_without_report",
+      "legacyBrowserFixture": "step_passed",
+      "modelReadinessBrowserFixture": "step_passed",
+      "latestObservedStage": "real_directory_retry_fixture",
+      "nativeSuiteReached": false,
+      "fixtureStartedAt": "2026-11-27T17:17:20Z",
+      "controllerTests": 1596,
+      "controllerPassed": 1596,
+      "controllerFailed": 0,
+      "legacyBrowserCases": 8,
+      "modelReadinessBrowserCases": 2,
+      "terminalObservedAt": "2026-11-27T17:42:41.102Z"
     }
   ],
   "controllerModelControlsRepair": {
@@ -1077,7 +1133,7 @@
     "controllerSha": "cb293d98fca55acc4ec2a027c2fae71899d6d69c",
     "lifecycleFinding": "The fixture emits its report only after context/browser/server cleanup; this can withhold failure evidence if cleanup does not settle. Exact blocked action in runs31/62 is not yet proven.",
     "fixtureLifecycleRepair": {
-      "status": "prepared_reviewed_for_hosted_verification",
+      "status": "published_hosted_verification_in_progress",
       "localReviewedCommit": "73c06b684b6de1e5cbc8969562044fadcba854ba",
       "focusedTestsPassed": 20,
       "focusedTestsFailed": 0,
@@ -1096,11 +1152,28 @@
       ],
       "productionRuntimeUnchanged": "b9e9122b75f4e588088d0241476b18df7f047d96",
       "productionHelperAndFunctionalAssertions": "unchanged",
-      "hostedRetryOutcome": "pending; original blocked action not yet established"
+      "hostedRetryOutcome": "pending; original blocked action not yet established",
+      "controllerSha": "2ae99fa1e672c3e9a35a428b6253a376bfd9fb0b",
+      "runId": 46043784741
+    },
+    "httpErrorBodyFix": {
+      "status": "prepared_reviewed_for_hosted_verification",
+      "localReviewedCommit": "e0814436b200bb810671abfbd36618510503221b",
+      "changedPaths": [
+        "scripts/catalog-next/japan-stability-browser.mjs",
+        "tests/catalog-next-japan-brand-directory.test.mjs"
+      ],
+      "behavior": "Read HTTP status first; parse the body only for 200. An error status permits the unchanged honest fallback and one actual UI Retry; success still requires a fresh complete 200 response and exact UI proofs.",
+      "regressionsBeforeFix": 2,
+      "targetedTestsPassed": 22,
+      "targetedTestsFailed": 0,
+      "independentReview": "passed",
+      "runtimeUnchanged": "b9e9122b75f4e588088d0241476b18df7f047d96",
+      "hostedThreeCases": "pending"
     }
   },
   "stalledPreflightCancellation": {
-    "status": "prepared_for_separate_marker_activation",
+    "status": "completed_both_exact_runs_cancelled",
     "localReviewedCommit": "df6c4385d2e19a6ec6a1cd57d6393a2c0a3c79e2",
     "targets": [
       {
@@ -1123,6 +1196,82 @@
     "forceCancellationUsed": false,
     "atomicCancellationClaimed": false,
     "hostOrStorageAccess": false,
-    "markerCreated": false
+    "markerCreated": true,
+    "controllerSha": "2ae99fa1e672c3e9a35a428b6253a376bfd9fb0b",
+    "markerSha": "473877a4b9cbf952f2f1f1016449a74c9ee15550",
+    "runId": 46043860513,
+    "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/46043860513",
+    "artifactId": 15220873605,
+    "artifactSha256": "3fd1658ef3549ed494d136a7a4d0fef9a349c2c152f14aa178360589ac647c51",
+    "reportSha256": "0719f002180834823ee9c3a79a0f793165a44005a7326a81ce825e58d9e19b54",
+    "artifactCrcVerified": true,
+    "report": {
+      "version": 1,
+      "kind": "japan-stalled-preflight-cancellation-v1",
+      "githubRunCancellationOnly": true,
+      "forceCancellationUsed": false,
+      "atomicCancellationClaimed": false,
+      "targets": [
+        {
+          "runId": "46040340638",
+          "headSha": "400da6f50fa12606c7625e0382a0441fa4eb5381",
+          "jobId": "140646157850",
+          "attempt": 1,
+          "cancelRequested": true,
+          "cancelAccepted": true,
+          "terminalVerified": true,
+          "preflightObservations": [
+            {
+              "gateNumber": 10,
+              "laterStepsPending": true,
+              "stepsSha256": "c708726b3f217c0c0d7cfa137aaea8fae91d5ecf1cc4ae554ced20e6f529b812",
+              "observedAt": "2026-11-27T17:42:16.064Z"
+            },
+            {
+              "gateNumber": 10,
+              "laterStepsPending": true,
+              "stepsSha256": "c708726b3f217c0c0d7cfa137aaea8fae91d5ecf1cc4ae554ced20e6f529b812",
+              "observedAt": "2026-11-27T17:42:16.502Z"
+            }
+          ],
+          "status": "terminal_observed",
+          "cancelHttpStatus": 202,
+          "terminalStatus": "completed",
+          "terminalConclusion": "cancelled",
+          "terminalObservedAt": "2026-11-27T17:42:35.610Z"
+        },
+        {
+          "runId": "46040261112",
+          "headSha": "cb293d98fca55acc4ec2a027c2fae71899d6d69c",
+          "jobId": "140645894844",
+          "attempt": 1,
+          "cancelRequested": true,
+          "cancelAccepted": true,
+          "terminalVerified": true,
+          "preflightObservations": [
+            {
+              "gateNumber": 11,
+              "laterStepsPending": true,
+              "stepsSha256": "f762e4a061468b7fe2010f76c13d52cfb96b78108d1903350bba616d8f6ea47c",
+              "observedAt": "2026-11-27T17:42:17.799Z"
+            },
+            {
+              "gateNumber": 11,
+              "laterStepsPending": true,
+              "stepsSha256": "f762e4a061468b7fe2010f76c13d52cfb96b78108d1903350bba616d8f6ea47c",
+              "observedAt": "2026-11-27T17:42:18.357Z"
+            }
+          ],
+          "status": "terminal_observed",
+          "cancelHttpStatus": 202,
+          "terminalStatus": "completed",
+          "terminalConclusion": "cancelled",
+          "terminalObservedAt": "2026-11-27T17:42:41.102Z"
+        }
+      ],
+      "completed": true,
+      "observedAt": "2026-11-27T17:42:41.103Z",
+      "controllerSha": "473877a4b9cbf952f2f1f1016449a74c9ee15550"
+    }
   }
 }
