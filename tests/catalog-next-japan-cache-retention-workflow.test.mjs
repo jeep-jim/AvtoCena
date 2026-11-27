@@ -72,4 +72,9 @@ test('operator guide keeps the marker as an invalid template and distinguishes c
   assert(guide.includes('не удаляет рабочие объекты кэша'));
   assert(guide.includes('Расписания для этих workflow нет'));
   assert(guide.includes('неактуальные версии bucket и диск сервера учитываются отдельно'));
+  assert(guide.includes('conditionalHeaderFormat: "bare"'));
+  for (const field of ['stalePutStatus', 'updatedObjectPreservedAfterStalePut', 'currentObjectConditionalPutVerified',
+    'staleDeleteStatus', 'matchingDeleteStatus']) assert(guide.includes(field));
+  assert(guide.includes('1536 байт'));
+  assert(guide.includes('8ecfe55a9e8db47c564bcea75faff6c797d65d3a'));
 });

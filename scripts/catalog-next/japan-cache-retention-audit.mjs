@@ -301,6 +301,14 @@ export function createJapanCacheAuditStorage({mode, owner, environment = process
       need(second.etag !== first.etag, 'canary_etag_unchanged');
       return second;
     },
+    async staleCanaryPut(first, second) {
+      need(created && puts === 2 && versioning.state === 'never_enabled'
+        && known.get(1) === first && known.get(2) === second && first.etag !== second.etag, 'canary_stale_put_scope');
+      puts++;
+      const result = await request('PUT', key, {}, bodies[0], {'content-type': 'application/json', 'x-amz-acl': 'private',
+        'if-match': first.etag.slice(1, -1)}, 4096);
+      return {status: result.status, unexpectedVersioning: result.versionId !== null && result.versionId !== 'null'};
+    },
     async readCanary(value) {
       need(created && known.get(value?.sequence) === value, 'canary_read_scope');
       const query = versioning.state === 'enabled' ? (need(value.versionId && versions.get(value.versionId) === value, 'canary_version_fence'), {versionId: value.versionId}) : {};
@@ -313,11 +321,13 @@ export function createJapanCacheAuditStorage({mode, owner, environment = process
       return {found: true};
     },
     async deleteCanary(value, condition) {
-      need(created && puts === 2 && known.get(value?.sequence) === value
+      need(created && puts === (versioning.state === 'never_enabled' ? 3 : 2) && known.get(value?.sequence) === value
         && [known.get(1)?.etag, known.get(2)?.etag].includes(condition) && etag(condition), 'canary_delete_scope');
       const query = versioning.state === 'enabled' ? (need(value.versionId && versions.get(value.versionId) === value, 'canary_version_fence'), {versionId: value.versionId}) : {};
       need(versioning.state === 'enabled' || versioning.state === 'never_enabled', 'canary_version_fence');
-      const result = await request('DELETE', key, query, undefined, {'if-match': condition}, 4096);
+      // This reviewed probe tests one explicit bare wire format. The known
+      // read-back ETags remain quoted; there is no alternate-format retry.
+      const result = await request('DELETE', key, query, undefined, {'if-match': condition.slice(1, -1)}, 4096);
       return {status: result.status, unexpectedVersioning: result.deleteMarker === 'true'
         || versioning.state === 'never_enabled' && immutableVersion(result.versionId)
         || versioning.state === 'enabled' && result.versionId !== null && result.versionId !== value.versionId};
@@ -384,26 +394,44 @@ export async function runJapanCacheRetention({mode, invocation, environment = pr
       }
       report.inspections = inspection; report.status = 'bounded_audit_complete'; report.completed = true;
     } else {
-      const canary = {syntheticKey: io.syntheticKey, conditionalHeaderFormat: 'quoted',
+      const canary = {syntheticKey: io.syntheticKey, conditionalHeaderFormat: 'bare',
         target: report.storage.versioning.state === 'enabled' ? 'immutable_version' : 'current_object',
         tested: false, staleConditionRejected: false, updatedObjectPreserved: false, matchingConditionDeleted: false,
+        stalePutStatus: null, updatedObjectPreservedAfterStalePut: false, currentObjectConditionalPutVerified: false,
+        staleDeleteStatus: null, matchingDeleteStatus: null,
         supportedForTestedTarget: false, currentObjectConditionalDeleteVerified: false, knownVersionsRemoved: 0, versioningChanged: false,
         residuePossible: false, maximumPayloadBytesWritten: 0, outcome: 'not_tested'};
       report.canary = canary;
       if (report.storage.versioning.state === 'suspended' || report.storage.versioning.mfaDelete === 'enabled') {
         canary.outcome = 'version_fence_unavailable'; report.status = 'capability_not_verified'; report.completed = true;
       } else {
-        canary.residuePossible = true; canary.maximumPayloadBytesWritten = 2 * LIMITS.canaryBytes;
+        canary.residuePossible = true;
+        canary.maximumPayloadBytesWritten = (report.storage.versioning.state === 'never_enabled' ? 3 : 2) * LIMITS.canaryBytes;
         const first = await io.createCanary(), second = await io.updateCanary(first);
         canary.versioningChanged = !await io.versioningUnchanged();
         need(!canary.versioningChanged, 'canary_version_changed');
+        // A third PUT is bounded to the same two tiny payloads. Do not test a
+        // stale current-object PUT on a versioned bucket: a backend ignoring
+        // its condition could create a third version outside the known pair.
+        if (report.storage.versioning.state === 'never_enabled') {
+          const stalePut = await io.staleCanaryPut(first, second);
+          canary.stalePutStatus = stalePut.status;
+          canary.versioningChanged = stalePut.unexpectedVersioning;
+          need(!canary.versioningChanged, 'canary_version_changed');
+          const preserved = await io.readCanary(second);
+          canary.updatedObjectPreservedAfterStalePut = preserved.found;
+          need([409, 412].includes(stalePut.status) && preserved.found, 'canary_stale_put_unverified');
+          canary.currentObjectConditionalPutVerified = true;
+        }
         const stale = await io.deleteCanary(second, first.etag); canary.tested = true;
+        canary.staleDeleteStatus = stale.status;
         canary.versioningChanged = stale.unexpectedVersioning;
         need(!canary.versioningChanged, 'canary_version_changed');
         canary.staleConditionRejected = [409, 412].includes(stale.status);
         const preserved = await io.readCanary(second); canary.updatedObjectPreserved = preserved.found;
         if (canary.staleConditionRejected && preserved.found) {
           const current = await io.deleteCanary(second, second.etag);
+          canary.matchingDeleteStatus = current.status;
           canary.versioningChanged ||= current.unexpectedVersioning;
           const after = await io.readCanary(second);
           canary.matchingConditionDeleted = [200, 204].includes(current.status) && !after.found;
@@ -413,7 +441,7 @@ export async function runJapanCacheRetention({mode, invocation, environment = pr
         } else canary.outcome = !preserved.found ? 'stale_precondition_not_enforced' : 'stale_condition_not_verified';
         if (report.storage.versioning.state === 'enabled') {
           // Only versions already read back as this run's synthetic payloads.
-          // No null-version, bare DELETE, version listing or fallback deletion.
+          // No null-version, unversioned DELETE, version listing or fallback deletion.
           let allRemoved = true;
           for (const version of io.knownCanaryVersions()) {
             try {
@@ -429,6 +457,7 @@ export async function runJapanCacheRetention({mode, invocation, environment = pr
         canary.versioningChanged ||= !await io.versioningUnchanged();
         if (canary.versioningChanged) {
           canary.supportedForTestedTarget = false; canary.currentObjectConditionalDeleteVerified = false;
+          canary.currentObjectConditionalPutVerified = false;
           canary.residuePossible = true; canary.outcome = 'versioning_changed';
         }
         report.status = canary.supportedForTestedTarget ? 'capability_observed' : 'capability_not_verified'; report.completed = true;
@@ -440,6 +469,7 @@ export async function runJapanCacheRetention({mode, invocation, environment = pr
       // A failed closing settings check is not a complete capability proof.
       report.canary.supportedForTestedTarget = false;
       report.canary.currentObjectConditionalDeleteVerified = false;
+      report.canary.currentObjectConditionalPutVerified = false;
       report.canary.residuePossible ||= Boolean(io?.stats().syntheticPuts);
       report.canary.versioningChanged ||= report.errorCode === 'japan_cache_audit_canary_version_changed';
       report.canary.outcome = report.canary.versioningChanged ? 'versioning_changed' : 'probe_incomplete';

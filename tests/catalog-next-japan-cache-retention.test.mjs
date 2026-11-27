@@ -31,7 +31,8 @@ function listXml(prefix, objects, cursor = null, next = null) {
 function fakeStorage({versioning = 'never_enabled', lifecycle = null, ignoreDeleteCondition = false,
   rejectDelete = false, missingVersionHeader = false, versioningDrift = false, changedCache = false,
   transportError = false, invalidAcl = false, unexpectedVersionHeader = false, versioningErrorAtRead = null,
-  versioningDriftAtRead = 2, staleRejectedStatus = 412} = {}) {
+  versioningDriftAtRead = 2, staleRejectedStatus = 412, ignorePutCondition = false, stalePutRejectedStatus = 412,
+  loseUpdatedAfterStalePut = false, unexpectedVersionHeaderOnStalePut = false} = {}) {
   const calls = [], cache = new Map(), synthetic = new Map(); let sequence = 0, settingsReads = 0;
   const seed = (key, value, at = old) => {
     const body = Buffer.from(JSON.stringify(value)); cache.set(key, {key, body, etag: '"' + sha(body) + '"', at});
@@ -40,7 +41,8 @@ function fakeStorage({versioning = 'never_enabled', lifecycle = null, ignoreDele
     const url = new URL(input), method = options.method, headers = new Headers(options.headers);
     assert.equal(url.origin, TARGET.endpoint); assert.equal(options.redirect, 'error'); assert.equal(options.cache, 'no-store');
     assert.equal(headers.get('accept-encoding'), 'identity');
-    calls.push({method, path: decodeURIComponent(url.pathname), query: Object.fromEntries(url.searchParams), headers});
+    calls.push({method, path: decodeURIComponent(url.pathname), query: Object.fromEntries(url.searchParams), headers,
+      ...(method === 'PUT' ? {body: Buffer.from(options.body)} : {})});
     if (transportError) throw Error('private-canary-secret SQL SELECT visitorIp=203.0.113.17 https://private.example/feed');
     const bucket = '/' + TARGET.bucket;
     if (url.pathname === bucket) {
@@ -81,7 +83,13 @@ function fakeStorage({versioning = 'never_enabled', lifecycle = null, ignoreDele
       if (headers.has('if-none-match')) {
         assert.equal(headers.get('if-none-match'), '*'); if (current) return response(error('PreconditionFailed'), 412);
       } else {
-        assert(current); assert.equal(headers.get('if-match'), current.etag.slice(1, -1), 'existing REG PUT wire convention');
+        assert(current); assert.match(headers.get('if-match'), /^[a-f0-9]{64}$/, 'the actual PUT wire header is bare');
+        if (!ignorePutCondition && headers.get('if-match') !== current.etag.slice(1, -1)) {
+          if (unexpectedVersionHeaderOnStalePut)
+            return response(error('PreconditionFailed'), stalePutRejectedStatus, {'x-amz-version-id': 'late-version'});
+          if (loseUpdatedAfterStalePut) synthetic.set(key, []);
+          return response(error('PreconditionFailed'), stalePutRejectedStatus);
+        }
       }
       const body = Buffer.from(options.body); assert(body.length <= LIMITS.canaryBytes);
       const row = {body, etag: '"' + sha(body) + '"', versionId: versioning === 'enabled' || unexpectedVersionHeader ? 'v' + ++sequence : null};
@@ -94,10 +102,11 @@ function fakeStorage({versioning = 'never_enabled', lifecycle = null, ignoreDele
         ...(!missingVersionHeader && current.versionId ? {'x-amz-version-id': current.versionId} : {})});
     }
     assert.equal(method, 'DELETE'); assert(headers.get('authorization').includes('if-match'));
+    assert.match(headers.get('if-match'), /^[a-f0-9]{64}$/, 'the actual DELETE wire header is bare, never quoted or absent');
     if (versioning === 'enabled' || unexpectedVersionHeader) assert(versionId, 'versioned canaries never use bare DELETE');
     if (rejectDelete) return response(error('NotImplemented'), 501);
     if (!current) return response('', 204);
-    if (!ignoreDeleteCondition && headers.get('if-match') !== current.etag) return response(error('PreconditionFailed'), staleRejectedStatus);
+    if (!ignoreDeleteCondition && headers.get('if-match') !== current.etag.slice(1, -1)) return response(error('PreconditionFailed'), staleRejectedStatus);
     synthetic.set(key, versions.filter(row => row !== current));
     return response('', 204, current.versionId ? {'x-amz-version-id': current.versionId} : {});
   };
@@ -197,9 +206,20 @@ test('audit capability rejects forged/unlisted/fresh body reads and has no cache
 test('unversioned synthetic canary proves stale rejection and current deletion on its own nonce only', async () => {
   const fake = fakeStorage(); const report = await run('canary', fake);
   assert.equal(report.completed, true); assert.equal(report.canary.supportedForTestedTarget, true);
+  assert.equal(report.canary.conditionalHeaderFormat, 'bare');
+  assert.equal(report.canary.stalePutStatus, 412); assert.equal(report.canary.updatedObjectPreservedAfterStalePut, true);
+  assert.equal(report.canary.currentObjectConditionalPutVerified, true);
+  assert.equal(report.canary.staleDeleteStatus, 412); assert.equal(report.canary.matchingDeleteStatus, 204);
   assert.equal(report.canary.currentObjectConditionalDeleteVerified, true); assert.equal(report.canary.residuePossible, false);
-  assert.equal(report.requests.syntheticPuts, 2); assert.equal(report.requests.syntheticDeletes, 2);
+  assert.equal(report.requests.syntheticPuts, 3); assert.equal(report.requests.syntheticDeletes, 2);
+  assert.equal(report.canary.maximumPayloadBytesWritten, 3 * LIMITS.canaryBytes);
   assert.equal(report.requests.bodyInspections, 0); assert.equal(report.requests.metadataPages, 0);
+  const puts = fake.calls.filter(row => row.method === 'PUT'), deletes = fake.calls.filter(row => row.method === 'DELETE');
+  assert.equal(new Set(puts.map(row => sha(row.body))).size, 2, 'the stale PUT reuses the first tiny body');
+  assert(puts[2].body.equals(puts[0].body));
+  assert.equal(puts[1].headers.get('if-match'), sha(puts[0].body));
+  assert.equal(puts[2].headers.get('if-match'), sha(puts[0].body));
+  assert.deepEqual(deletes.map(row => row.headers.get('if-match')), [sha(puts[0].body), sha(puts[1].body)]);
   assert(fake.calls.filter(row => ['PUT', 'DELETE'].includes(row.method)).every(row => row.path.includes('/catalog/operations/ajes-cache-retention-canary/v1/12345/1/')));
   assert.equal([...fake.synthetic.values()].flat().length, 0);
 });
@@ -208,6 +228,8 @@ test('ignored stale precondition is unsupported, never followed by a real-cache 
   const fake = fakeStorage({ignoreDeleteCondition: true}); const report = await run('canary', fake);
   assert.equal(report.completed, true); assert.equal(report.canary.supportedForTestedTarget, false);
   assert.equal(report.canary.outcome, 'stale_precondition_not_enforced'); assert.equal(report.requests.syntheticDeletes, 1);
+  assert.equal(report.canary.currentObjectConditionalPutVerified, true, 'PUT evidence remains separate from failed DELETE evidence');
+  assert.equal(report.canary.staleDeleteStatus, 204); assert.equal(report.canary.matchingDeleteStatus, null);
   assert.equal(report.cacheMutations, 0);
 });
 
@@ -215,7 +237,37 @@ test('unsupported conditional deletion leaves only bounded synthetic residue and
   const fake = fakeStorage({rejectDelete: true}); const report = await run('canary', fake);
   assert.equal(report.canary.supportedForTestedTarget, false); assert.equal(report.canary.residuePossible, true);
   assert.equal(report.requests.syntheticDeletes, 1); assert.equal([...fake.synthetic.values()].flat().length, 1);
+  assert.equal(report.canary.currentObjectConditionalPutVerified, true);
+  assert.equal(report.canary.staleDeleteStatus, 501); assert.equal(report.canary.matchingDeleteStatus, null);
   assert(fake.calls.filter(row => row.method === 'DELETE').every(row => row.headers.has('if-match')));
+});
+
+test('ignored stale PUT stops before any DELETE and records the bounded synthetic residue', async () => {
+  const fake = fakeStorage({ignorePutCondition: true}), report = await run('canary', fake);
+  assert.equal(report.completed, false); assert.equal(report.canary.stalePutStatus, 200);
+  assert.equal(report.canary.updatedObjectPreservedAfterStalePut, false);
+  assert.equal(report.canary.currentObjectConditionalPutVerified, false);
+  assert.equal(report.canary.staleDeleteStatus, null); assert.equal(report.canary.matchingDeleteStatus, null);
+  assert.equal(report.requests.syntheticPuts, 3); assert.equal(report.requests.syntheticDeletes, 0);
+  assert.equal(report.canary.residuePossible, true); assert.equal(report.cacheMutations, 0);
+  assert.equal([...fake.synthetic.values()].flat().length, 1);
+});
+
+test('a stale PUT rejection alone cannot authorize DELETE without preserved updated-body readback', async () => {
+  const fake = fakeStorage({loseUpdatedAfterStalePut: true}), report = await run('canary', fake);
+  assert.equal(report.completed, false); assert.equal(report.canary.stalePutStatus, 412);
+  assert.equal(report.canary.updatedObjectPreservedAfterStalePut, false);
+  assert.equal(report.canary.currentObjectConditionalPutVerified, false);
+  assert.equal(report.requests.syntheticDeletes, 0); assert.equal(report.canary.staleDeleteStatus, null);
+});
+
+test('a version header appearing at the third PUT preserves its status and stops before DELETE', async () => {
+  const report = await run('canary', fakeStorage({unexpectedVersionHeaderOnStalePut: true}));
+  assert.equal(report.completed, false); assert.equal(report.canary.stalePutStatus, 412);
+  assert.equal(report.canary.versioningChanged, true); assert.equal(report.canary.residuePossible, true);
+  assert.equal(report.canary.currentObjectConditionalPutVerified, false);
+  assert.equal(report.requests.syntheticPuts, 3); assert.equal(report.requests.syntheticDeletes, 0);
+  assert.equal(report.canary.staleDeleteStatus, null); assert.equal(report.canary.matchingDeleteStatus, null);
 });
 
 test('enabled versioning uses only read-back non-null version IDs and reports scope separately', async () => {
@@ -223,6 +275,9 @@ test('enabled versioning uses only read-back non-null version IDs and reports sc
   assert.equal(report.completed, true); assert.equal(report.canary.target, 'immutable_version');
   assert.equal(report.canary.supportedForTestedTarget, true); assert.equal(report.canary.currentObjectConditionalDeleteVerified, false);
   assert.equal(report.canary.knownVersionsRemoved, 2); assert.equal(report.canary.residuePossible, false);
+  assert.equal(report.requests.syntheticPuts, 2); assert.equal(report.canary.stalePutStatus, null);
+  assert.equal(report.canary.currentObjectConditionalPutVerified, false);
+  assert.equal(report.canary.staleDeleteStatus, 412); assert.equal(report.canary.matchingDeleteStatus, 204);
   assert(fake.calls.filter(row => row.method === 'DELETE').every(row => ['v1', 'v2'].includes(row.query.versionId)));
   assert.equal([...fake.synthetic.values()].flat().length, 0);
 });
@@ -231,6 +286,8 @@ test('suspended bucket creates nothing; missing version IDs stop before DELETE a
   const suspended = fakeStorage({versioning: 'suspended'}), skipped = await run('canary', suspended);
   assert.equal(skipped.completed, true); assert.equal(skipped.canary.outcome, 'version_fence_unavailable');
   assert.equal(skipped.requests.syntheticPuts, 0); assert.equal(skipped.requests.syntheticDeletes, 0);
+  assert.equal(skipped.canary.stalePutStatus, null); assert.equal(skipped.canary.staleDeleteStatus, null);
+  assert.equal(skipped.canary.matchingDeleteStatus, null);
   const broken = fakeStorage({versioning: 'enabled', missingVersionHeader: true}), failed = await run('canary', broken);
   assert.equal(failed.completed, false); assert.equal(failed.canary.residuePossible, true);
   assert.equal(failed.requests.syntheticDeletes, 0); assert.equal(failed.errorCode, 'japan_cache_audit_canary_version_changed');
@@ -243,6 +300,7 @@ test('versioning drift invalidates a conditional-current-delete conclusion and r
   assert.equal(report.requests.syntheticDeletes, 0);
   const late = await run('canary', fakeStorage({versioningDrift: true, versioningDriftAtRead: 3}));
   assert.equal(late.canary.currentObjectConditionalDeleteVerified, false); assert.equal(late.canary.residuePossible, true);
+  assert.equal(late.canary.currentObjectConditionalPutVerified, false);
   assert.equal(late.canary.outcome, 'versioning_changed');
 });
 
@@ -257,13 +315,16 @@ test('a lost closing versioning response cannot leave successful capability flag
   const report = await run('canary', fakeStorage({versioningErrorAtRead: 3}));
   assert.equal(report.completed, false); assert.equal(report.canary.matchingConditionDeleted, true);
   assert.equal(report.canary.supportedForTestedTarget, false); assert.equal(report.canary.currentObjectConditionalDeleteVerified, false);
+  assert.equal(report.canary.currentObjectConditionalPutVerified, false);
   assert.equal(report.canary.residuePossible, true); assert.equal(report.canary.outcome, 'probe_incomplete');
   assert.equal(JSON.stringify(report).includes('PRIVATE'), false);
 });
 
 test('409 qualifies only when readback proves the updated synthetic object survived', async () => {
-  const report = await run('canary', fakeStorage({staleRejectedStatus: 409}));
+  const report = await run('canary', fakeStorage({staleRejectedStatus: 409, stalePutRejectedStatus: 409}));
   assert.equal(report.canary.supportedForTestedTarget, true);
+  assert.equal(report.canary.stalePutStatus, 409); assert.equal(report.canary.currentObjectConditionalPutVerified, true);
+  assert.equal(report.canary.staleDeleteStatus, 409); assert.equal(report.canary.matchingDeleteStatus, 204);
   assert.equal(report.canary.staleConditionRejected, true); assert.equal(report.canary.updatedObjectPreserved, true);
 });
 

@@ -1,0 +1,599 @@
+{
+  "version": 1,
+  "kind": "japan-stability-rollback-v1",
+  "status": "rolled_back_source_http_500_followup_source_733_ready_quoted_delete_capability_not_verified",
+  "checkpointAt": "2026-11-27T06:07:29.643Z",
+  "timezone": "Asia/Krasnoyarsk",
+  "release": {
+    "run": 45945260193,
+    "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/45945260193",
+    "candidate": "92b520d7a63b3be0078c14fb0384133818a52e23",
+    "retained": "a5ca426eec2663eb17c2df69fe2bfed46e2b8740",
+    "codeScope": "catalog-japan-stability-v1",
+    "accepted": false,
+    "reportArtifact": {
+      "name": "catalog-next-china-photo-release-report.json",
+      "bytes": 1811,
+      "sha256": "fb6b2a2f069160923444d95d7ade46585f1ba1f9b133deba9085db6d4afc2137"
+    },
+    "browserArtifact": {
+      "name": "catalog-next-japan-browser-report.json",
+      "bytes": 3747,
+      "sha256": "866e24c5952df10c292fe6c5e4cab043811e864f4f41e076609cdcfd59eafcb0"
+    },
+    "report": {
+      "version": 1,
+      "kind": "china-code-cycle-v1",
+      "market": "china",
+      "completed": false,
+      "published": false,
+      "status": "rolled_back",
+      "runtimeSha": "92b520d7a63b3be0078c14fb0384133818a52e23",
+      "retainedRuntime": "a5ca426eec2663eb17c2df69fe2bfed46e2b8740",
+      "sourceRequests": 0,
+      "generationRestores": 0,
+      "priceCalculations": 0,
+      "generationWrites": 0,
+      "encyclopediaWrites": 0,
+      "otherMarketWrites": 0,
+      "deletions": 0,
+      "appImageCleanupBeforeReserve": {
+        "version": 1,
+        "kind": "china-terminal-app-image-cleanup-v1",
+        "completed": true,
+        "status": "already_absent",
+        "uncertain": false,
+        "imagesRemoved": 0,
+        "runtimeSha": "889c5150803f7973fc371d1d90491bb38cbabf82",
+        "imageId": "sha256:f220217289e20f819e5825b897e2c22394adc01d612f73b54c9fef9bff1eef66",
+        "witnessSha256": "a1ac36a0b738215a70f2726bf45133e0bf3752a0bd01f5e4fe79a0a355f62b18",
+        "diskFreeBytesBefore": 51146612736,
+        "diskFreeBytesAfter": 51146612736,
+        "measuredFreeBytesChange": 0,
+        "reason": "already_absent"
+      },
+      "retentionPreserved": true,
+      "recovered": true,
+      "appImageCleanup": {
+        "version": 1,
+        "kind": "china-terminal-app-image-cleanup-v1",
+        "completed": true,
+        "status": "removed",
+        "uncertain": false,
+        "imagesRemoved": 1,
+        "runtimeSha": "92b520d7a63b3be0078c14fb0384133818a52e23",
+        "imageId": "sha256:53038af9e4b592d24d4b90a9d9acb0be856b2296baa54e2252da982971f38304",
+        "witnessSha256": "2afe68075928be50c899173c7ed2c901bb2445404ac7347c6c178f9f02a884d4",
+        "diskFreeBytesBefore": 49950507008,
+        "diskFreeBytesAfter": 51142254592,
+        "measuredFreeBytesChange": 1191747584,
+        "reason": "exact_terminal_image"
+      },
+      "errorCode": "china_daily_release_japan_browser_failed",
+      "finishedAt": "2026-11-27T05:46:18.483Z",
+      "leaseReleased": true
+    }
+  },
+  "actualFailure": {
+    "error": {
+      "stage": "plain_first",
+      "code": "japan_browser_unavailable_or_stale",
+      "timeout": false
+    },
+    "firstHealth": {
+      "stage": "before",
+      "requestedAt": "2026-11-27T05:45:26.098Z",
+      "receivedAt": "2026-11-27T05:45:26.751Z",
+      "durationMs": 653,
+      "responseHeaders": {
+        "omitted": []
+      },
+      "status": 200,
+      "ok": true,
+      "releaseSha": "92b520d7a63b3be0078c14fb0384133818a52e23",
+      "calculationVersion": "4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90"
+    },
+    "response": {
+      "stage": "plain_first",
+      "status": 200,
+      "ok": true,
+      "shown": 22,
+      "received": 24,
+      "observedAt": "2026-11-27T05:20:14.690Z",
+      "stale": true,
+      "partial": true,
+      "interrupted": false,
+      "scanLimited": false,
+      "hasMore": false,
+      "total": null,
+      "requestedAt": "2026-11-27T05:45:26.752Z",
+      "receivedAt": "2026-11-27T05:45:27.855Z",
+      "durationMs": 1103,
+      "responseHeaders": {
+        "cacheControl": "private, max-age=15, stale-while-revalidate=30",
+        "omitted": []
+      },
+      "sourceReadEvidence": {
+        "status": "missing",
+        "catalogReadReceipt": null,
+        "runtimeMatchesExpected": null,
+        "sourceReadReceipts": [],
+        "sourceReadReceiptsLimited": true,
+        "omittedReceipts": null,
+        "omissions": [
+          "catalog_receipt_missing"
+        ]
+      },
+      "pageReadEvidence": {
+        "status": "recorded",
+        "receipts": [
+          {
+            "version": 1,
+            "queryHash": "f2295e1764a0e8049475c136f267b7ed76e7aed28c7db686a1fc5c7b2d99fd73",
+            "table": "stats",
+            "kind": "list",
+            "page": 1,
+            "pageSize": 24,
+            "requestId": "25ce2819-c670-43e2-a8c7-fb5e733a18b1",
+            "startedAt": "2026-11-27T05:45:26.858Z",
+            "finishedAt": "2026-11-27T05:45:27.541Z",
+            "stage": "supplier",
+            "supplierAttempted": true,
+            "outcome": "stale",
+            "reason": "http_500",
+            "observedAt": "2026-11-27T05:20:14.690Z"
+          }
+        ],
+        "received": 1,
+        "omitted": 0,
+        "limited": false
+      }
+    },
+    "oldestContributingObservationAgeSeconds": 1513.165,
+    "sameRequestSupplierHttp500Established": true,
+    "pageReceiptRecorded": true,
+    "catalogReceiptMissing": true,
+    "underlyingHttp500Cause": null,
+    "sourceSqlCompatibilityCauseEstablished": false,
+    "laterLiveAcceptanceGatesNotReached": true,
+    "acceptanceSucceeded": false,
+    "readOnlyBrowserFence": true,
+    "productionMutations": 0,
+    "directSupplierApiRequests": 0,
+    "explicitJapanApiRequests": 1,
+    "supplierImageRequests": 0,
+    "japanPreviewCalculationRequests": 0,
+    "explanation": "The first ordinary Japan response returned HTTP 200 with 22 shown from 24 received, stale=true and partial=true. Its page receipt records an attempted supplier read of stats/list page 1, size 24, ending in http_500 inside this exact API request window. The separate catalog receipt is missing. The receipt does not identify the internal cause of the HTTP 500."
+  },
+  "candidateCi": {
+    "run": 45944734653,
+    "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/45944734653",
+    "conclusion": "success",
+    "runtime": "92b520d7a63b3be0078c14fb0384133818a52e23",
+    "controllerPassed": 1339,
+    "nativePassed": 475,
+    "browserFixturesPassed": true,
+    "productionAcceptanceProvedByCi": false
+  },
+  "preReleaseReadOnlyInventory": {
+    "run": 45943335063,
+    "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/45943335063",
+    "artifact": {
+      "name": "server-resource-inventory-readonly.zip",
+      "bytes": 22634,
+      "sha256": "7ed3613e4e30663e5bfc73a4cea24276ac86caf39ba2b290f3b77fda507bfa2a"
+    },
+    "entries": {
+      "server-resource-inventory.json": {
+        "bytes": 94333,
+        "sha256": "8180f607d86204022fea904d36273730af006a9cac8236c9642da2c8f4b4b9db"
+      },
+      "public-post-release-verification.json": {
+        "bytes": 518,
+        "sha256": "35bd7de15442129fcffa918aa383178e0ec9dcb8dd18d48f63e72b0792a16722"
+      },
+      "china-schedule-metadata-20261127.json": {
+        "bytes": 1271,
+        "sha256": "0516f6e8cd6e57554c7936e68d8d38b1b1b7a754fe8d625e8beccdbf1c01eb15"
+      }
+    },
+    "timing": "Before the 92b release; not a new post-rollback inventory.",
+    "host": {
+      "kind": "regcloud-resource-inventory-20261126-v1",
+      "status": "observed",
+      "measuredAtUtc": "2026-11-27T05:02:15.083940Z",
+      "mutations": 0,
+      "providerRequests": 0,
+      "health": {
+        "port": 3005,
+        "status": 200,
+        "ok": true,
+        "releaseSha": "a5ca426eec2663eb17c2df69fe2bfed46e2b8740",
+        "calculationVersion": "4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90"
+      },
+      "healthAndContainersUnchanged": true,
+      "containerStabilityDifferences": [],
+      "diskBefore": {
+        "totalBytes": 102916472832,
+        "availableBytes": 51153801216,
+        "freeBytes": 51170578432
+      },
+      "diskAfter": {
+        "totalBytes": 102916472832,
+        "availableBytes": 51153801216,
+        "freeBytes": 51170578432
+      }
+    },
+    "public": {
+      "calculationVersion": "4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90",
+      "crmAnonymousBodyMatched": true,
+      "crmAnonymousStatus": 401,
+      "crmSetCookieAbsent": true,
+      "directSupplierRequests": 0,
+      "generationId": "gen_china_45875678028_1",
+      "kind": "avtocena-public-post-release-check-v1",
+      "observedAt": "2026-11-27T05:02:22Z",
+      "passed": true,
+      "powerTo160Total": 70059,
+      "productionMutations": 0,
+      "readOnly": true,
+      "requests": 4,
+      "runtimeSha": "a5ca426eec2663eb17c2df69fe2bfed46e2b8740",
+      "signedInRequests": 0,
+      "total": 281310,
+      "version": 1
+    },
+    "scheduleMetadata": {
+      "defaultBranch": "main",
+      "directSupplierRequests": 0,
+      "githubMutations": 0,
+      "kind": "china-schedule-metadata-readonly-v1",
+      "listedRunLimit": 20,
+      "matchingScheduleRunTotal": 3,
+      "observedAt": "2026-11-27T05:02:23Z",
+      "productionMutations": 0,
+      "productionRequests": 0,
+      "recentScheduleRuns": [
+        {
+          "conclusion": "success",
+          "created_at": "2026-11-27T01:43:22Z",
+          "head_sha": "41047c20dac226ae84a6fc2d539627087773f49a",
+          "id": 45924186669,
+          "status": "completed",
+          "updated_at": "2026-11-27T01:46:14Z"
+        },
+        {
+          "conclusion": "success",
+          "created_at": "2026-11-26T22:51:54Z",
+          "head_sha": "374863c80ad26f71a7e570e081e9300078854e4b",
+          "id": 45907437719,
+          "status": "completed",
+          "updated_at": "2026-11-26T22:54:44Z"
+        },
+        {
+          "conclusion": "success",
+          "created_at": "2026-11-25T22:59:01Z",
+          "head_sha": "b6ae6d20149362e5d772d08f6ce66dcca3ee9332",
+          "id": 45717710874,
+          "status": "completed",
+          "updated_at": "2026-11-25T23:02:01Z"
+        }
+      ],
+      "repositoryArchived": false,
+      "repositoryDisabled": false,
+      "repositoryId": 1289722938,
+      "requests": 3,
+      "scheduleExpressionsUtc": [
+        "0 14 * * *",
+        "17 0,3,6,9,12,15,18,21 * * *"
+      ],
+      "schedulerCauseEstablished": false,
+      "status": "observed",
+      "version": 1,
+      "workflowId": 429950403,
+      "workflowPath": ".github/workflows/catalog-next-china-daily.yml",
+      "workflowSourceSha256": "10c568f34e7a7de9d1447d934f2ac86063e1f16895959e96187aaba9d4a0d520",
+      "workflowState": "active"
+    }
+  },
+  "chinaAcceptedReference": {
+    "run": 45875678028,
+    "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/45875678028",
+    "generationId": "gen_china_45875678028_1",
+    "sourceObservedAt": "2026-11-26T19:04:39.089Z",
+    "sourceCursor": 13340204,
+    "generationManifestSha256": "58263ea4dc5642c9ff6f544830e9d3536ba702fb729a7a8c33b049b70b737038",
+    "pricingRuntime": "64c6338e0db23c8999096bceefbf113c0136fe15",
+    "calculationVersion": "4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90",
+    "total": 281310,
+    "priced": 179612,
+    "sellerOnly": 101698,
+    "unpriced": 0,
+    "preparedPriceRows": 9283230,
+    "cities": 33,
+    "powerTo160Total": 70059,
+    "powerTo160CountAppliesOnlyToChina": true,
+    "newImportPerformedByJapanRelease": false,
+    "historicalProof": "docs/operations/2026-11-27-disk-china-japan-followup.json"
+  },
+  "maintenance": {
+    "controller": "f6693cd38c7b7f342b55b8046dd86db9d6ba9916",
+    "publishedToMain": true,
+    "changedFiles": 11,
+    "retentionFollowupSource": "764053a07a72714b6642b75aef373a8bb4e38fe0",
+    "ci": {
+      "run": 45948428767,
+      "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/45948428767",
+      "conclusion": "success",
+      "finishedAt": "2026-11-27T05:57:28Z",
+      "controllerPassed": 1373,
+      "nativePassed": 475
+    },
+    "separateLocalVerification": {
+      "passed": 1379,
+      "additionalCasesRelativeToCiController": 6,
+      "isCiControllerTestCount": false
+    },
+    "notDuePendingDrain": {
+      "implemented": true,
+      "productionExecutionConfirmed": false,
+      "eligibleState": "resolved inspection, committed accepted intent, successful remembered preflight and positive pending queue",
+      "sameLeaseCasAndDeletionFences": true,
+      "boundedCleanupDeadline": true,
+      "feedScheduleRuntimeAndPricingChanged": false,
+      "rollbackDoesNotProveDrainExecuted": true
+    },
+    "lastConfirmedGenerationGc": {
+      "run": 45901649316,
+      "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/45901649316",
+      "status": "paused",
+      "failureCodes": [
+        "storage_transport",
+        "lease_lost"
+      ],
+      "leaseReleased": true,
+      "pendingABTasks": 2,
+      "newGenerationDeletionsConfirmed": false,
+      "historicalProof": "docs/operations/2026-11-27-disk-china-japan-followup.json"
+    }
+  },
+  "japanCacheAudit": {
+    "run": 45948685870,
+    "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/45948685870",
+    "artifact": {
+      "name": "japan-cache-retention-audit-report.json",
+      "bytes": 1521,
+      "sha256": "69791006a9038601f4a29ae58eeadb2e6febabaa5095eb8c28e9da498d88683a"
+    },
+    "report": {
+      "version": 1,
+      "kind": "japan-cache-retention-audit-v1",
+      "mode": "audit",
+      "controllerSha": "c5d385c500897f1cb60ceab5e44337e8cb0037cb",
+      "approvedControllerSha": "f6693cd38c7b7f342b55b8046dd86db9d6ba9916",
+      "runId": "45948685870",
+      "attempt": "1",
+      "startedAt": "2026-11-27T05:56:18.242Z",
+      "finishedAt": "2026-11-27T05:56:28.491Z",
+      "completed": true,
+      "status": "bounded_audit_complete",
+      "cacheMutations": 0,
+      "directSupplierRequests": 0,
+      "rawPayloadsPersisted": false,
+      "cacheDeletionEnabled": false,
+      "versionHistoryInventoried": false,
+      "hostDiskMeasured": false,
+      "storage": {
+        "privateBucketVerified": true,
+        "versioning": {
+          "state": "never_enabled",
+          "mfaDelete": "not_reported"
+        },
+        "lifecycle": {
+          "state": "absent",
+          "totalRules": 0,
+          "matchingRules": 0,
+          "rules": [],
+          "limited": false
+        }
+      },
+      "inventory": [
+        {
+          "group": "stats",
+          "objects": 200,
+          "bytes": 909304,
+          "metadataOlderThanSevenDays": 131,
+          "olderBytes": 591139,
+          "unrecognizedKeys": 0,
+          "oversizedInspectionCandidates": 0,
+          "complete": false
+        },
+        {
+          "group": "main",
+          "objects": 0,
+          "bytes": 0,
+          "metadataOlderThanSevenDays": 0,
+          "olderBytes": 0,
+          "unrecognizedKeys": 0,
+          "oversizedInspectionCandidates": 0,
+          "complete": true
+        },
+        {
+          "group": "queries",
+          "objects": 200,
+          "bytes": 2492305,
+          "metadataOlderThanSevenDays": 1,
+          "olderBytes": 208,
+          "unrecognizedKeys": 0,
+          "oversizedInspectionCandidates": 0,
+          "complete": false
+        }
+      ],
+      "inspections": {
+        "attempted": 8,
+        "changedDuringRead": 0,
+        "snapshots": 8,
+        "expired": 8,
+        "retained": 0,
+        "invalid": 0,
+        "eligibleListedObjects": 132,
+        "limited": true
+      },
+      "canary": null,
+      "requests": {
+        "requests": 17,
+        "responseBytes": 156416,
+        "metadataPages": 5,
+        "bodyInspections": 8,
+        "syntheticPuts": 0,
+        "syntheticDeletes": 0
+      }
+    },
+    "wholeCacheSizeEstimated": false,
+    "hostDiskUsageEstimatedFromSample": false,
+    "productionCacheCleanupEnabled": false
+  },
+  "japanCacheCanary": {
+    "run": 45948906947,
+    "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/45948906947",
+    "artifact": {
+      "name": "japan-cache-retention-canary-report.json",
+      "bytes": 1433,
+      "sha256": "7f279dd0addfdad889ccb30396429eb06a4d800ec8806ece83728df8bdc8d524"
+    },
+    "report": {
+      "version": 1,
+      "kind": "japan-cache-retention-canary-v1",
+      "mode": "canary",
+      "controllerSha": "8ecfe55a9e8db47c564bcea75faff6c797d65d3a",
+      "approvedControllerSha": "c5d385c500897f1cb60ceab5e44337e8cb0037cb",
+      "runId": "45948906947",
+      "attempt": "1",
+      "startedAt": "2026-11-27T05:58:39.212Z",
+      "finishedAt": "2026-11-27T05:58:42.845Z",
+      "completed": true,
+      "status": "capability_not_verified",
+      "cacheMutations": 0,
+      "directSupplierRequests": 0,
+      "rawPayloadsPersisted": false,
+      "cacheDeletionEnabled": false,
+      "versionHistoryInventoried": false,
+      "hostDiskMeasured": false,
+      "storage": {
+        "privateBucketVerified": true,
+        "versioning": {
+          "state": "never_enabled",
+          "mfaDelete": "not_reported"
+        },
+        "lifecycle": {
+          "state": "absent",
+          "totalRules": 0,
+          "matchingRules": 0,
+          "rules": [],
+          "limited": false
+        }
+      },
+      "inventory": [],
+      "inspections": null,
+      "canary": {
+        "syntheticKey": "catalog/operations/ajes-cache-retention-canary/v1/45948906947/1/45f55079dd38fd9ae7fcb8f8095c307efd30de74b89b17bb.json",
+        "conditionalHeaderFormat": "quoted",
+        "target": "current_object",
+        "tested": true,
+        "staleConditionRejected": false,
+        "updatedObjectPreserved": false,
+        "matchingConditionDeleted": false,
+        "supportedForTestedTarget": false,
+        "currentObjectConditionalDeleteVerified": false,
+        "knownVersionsRemoved": 0,
+        "versioningChanged": false,
+        "residuePossible": false,
+        "maximumPayloadBytesWritten": 1024,
+        "outcome": "stale_precondition_not_enforced"
+      },
+      "requests": {
+        "requests": 12,
+        "responseBytes": 2086,
+        "metadataPages": 0,
+        "bodyInspections": 0,
+        "syntheticPuts": 2,
+        "syntheticDeletes": 1
+      }
+    },
+    "matchingDeleteAttempted": false,
+    "workingCacheChanged": false,
+    "productionCacheCleanupEnabled": false,
+    "scope": "Quoted If-Match header on one run-owned synthetic current object outside the working AJ cache.",
+    "observedOutcome": "stale_precondition_not_enforced",
+    "residuePossible": false,
+    "conditionalPutCasSupportConfirmed": false,
+    "conclusionAppliesToBareHeader": false
+  },
+  "preservedConstraints": {
+    "targetMarket": "japan",
+    "otherMarketsRemainUnchanged": true,
+    "chinaAcceptedDataAndPricingPreserved": true,
+    "encyclopediaManualValuesIdsCrmUsersDealersAndAuthorizationPreserved": true,
+    "crmAnonymousStatusLastObserved": 401,
+    "crmAnonymousSetCookieAbsent": true,
+    "crmOwnerAuthenticatedHttp200Verified": false,
+    "ajAccess": "Ordinary user requests and previously authorized bounded cache only; no DUMP, mirror, mass crawl, IP substitution or new direct supplier diagnostics.",
+    "exactGlobalJapanPowerCountImplemented": false,
+    "globalKnownBeforeUnknownImplemented": false,
+    "globalJapanTotalVerified": false,
+    "currentAndVerifiedRollbackProtected": true,
+    "leaseTtlResetPermitted": false,
+    "forceOrBroadPrunePermitted": false
+  },
+  "nextStep": {
+    "status": "followup_733_source_published_targeted_tests_passed_new_ci_pending",
+    "action": "Prepare the controller plan pinned to exact candidate 733, pass new CI, then perform bounded fresh ordinary-path acceptance. Separately review the prepared bare-header probe and determine a safe AJ-cache cleanup executor; the completed quoted-header probe does not enable working cache cleanup.",
+    "blindRepeatOfSameRelease": false,
+    "http500RootCauseClaimed": false,
+    "freshnessCompletenessAndRollbackGatesMayBeWeakened": false
+  },
+  "historicalWitnesses": [
+    "docs/operations/2026-11-27-japan-pagination24-rollback.json",
+    "docs/operations/2026-11-27-japan-pagination24-proof.json",
+    "docs/operations/2026-11-27-disk-china-japan-followup.json"
+  ],
+  "limitations": [
+    "The release report proves rollback to a5ca; the independent full host/public inventory retained here predates the 92b attempt.",
+    "The exact page receipt establishes this request's supplier http_500, not an unsupported SQL operator or any other internal supplier cause.",
+    "A 200 API response, 22 shown cards or hasMore=false on a partial stale fallback does not prove a complete live catalog.",
+    "The response observedAt is the oldest contributing observation; it does not by itself explain why fallback was marked stale.",
+    "No live success for the later Japan filter, model, related-card, pagination, UI or calculation gates is established.",
+    "Image cleanup bytes are an observed free-space delta from this failed attempt, not an additional reduction of historical disk accumulation or the logical image size.",
+    "The REG audit is a bounded sample of current objects; it inventories neither all AJ keys nor object-version history nor server disk.",
+    "Eight inspected expired bodies do not establish that every listed or unlisted cache object is expired.",
+    "Audit and quoted canary changed no working cache objects. The quoted stale DELETE did not preserve the updated synthetic object; matching DELETE was not attempted and residuePossible=false. Production not_due retention remains unconfirmed.",
+    "The local 1379-case maintenance verification and the 1373-case CI controller suite are separate sets; six additional local cases explain the difference.",
+    "The quoted-header canary outcome does not establish bare-header DELETE behavior or CAS PUT support. The separate bare probe is in preparation and not accepted.",
+    "Candidate 733 has published source, 139 passing targeted tests and a passing typecheck; its new CI and production acceptance have not yet run at this checkpoint.",
+    "The source compatibility change is not evidence that any specific SQL operator caused the prior supplier HTTP 500."
+  ],
+  "followupCandidate": {
+    "runtime": "73321a180c16d1d432559d572a2ac2b7fdf5cc2b",
+    "runtimeTree": "1284b355244f89389a674203d3d97eee183f12d2",
+    "url": "https://github.com/jeep-jim/AvtoCena/commit/73321a180c16d1d432559d572a2ac2b7fdf5cc2b",
+    "sourcePublishedToRemote": true,
+    "changedFiles": 7,
+    "scope": "Japan-local compact source query form for queries without an explicit drive filter.",
+    "wireForm": "Grouped equality and LIKE expressions for non-drive queries.",
+    "canonicalHashesRetainedFrom": "92b520d7a63b3be0078c14fb0384133818a52e23",
+    "explicitDrivePreviousCompactFormRetained": true,
+    "targetedTestsPassed": 139,
+    "typecheckPassed": true,
+    "newCiStartedAtCheckpoint": false,
+    "productionAcceptanceConfirmed": false,
+    "priorHttp500RootCauseEstablished": false,
+    "fullOfflineNativeTestsPassed": 2986,
+    "fullOfflineNativeTestsFailed": 0,
+    "fullOfflineNativeLog": "Local /tmp/japan-query-compat-native.log; exact remote candidate source is linked above."
+  },
+  "japanCacheBareProbe": {
+    "status": "preparing_in_separate_branch_not_accepted",
+    "accepted": false,
+    "resultAvailableAtCheckpoint": false
+  }
+}
