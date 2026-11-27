@@ -17,7 +17,7 @@ import {verifyChinaImageStorageProof} from './build-release-image.mjs';
 import {CRM_CHINA_CODE_SCOPE, CRM_CHINA_PROTECTED_EXCEPTIONS} from './crm-china-code-scope.mjs';
 import {CRM_JAPAN_PHOTO_CODE_SCOPE} from './crm-japan-photo-code-scope.mjs';
 import {JAPAN_PAGINATION_CODE_SCOPE} from './japan-pagination-code-scope.mjs';
-import {JAPAN_STABILITY_CODE_SCOPE, japanPowerOrderRequired, japanSourceNamesRequired} from './japan-stability-code-scope.mjs';
+import {JAPAN_STABILITY_CODE_SCOPE, japanPowerOrderRequired, japanSourceNamesRequired, japanBrandDirectoryRequired} from './japan-stability-code-scope.mjs';
 import {checkedCrmChinaManifestProof, checkedCrmChinaEvidence, verifyCrmChinaUnauthorizedAccess} from './crm-china-status-proof.mjs';
 import {readJapanPhotoRetryFixture, checkedJapanPhotoRetryEvidence} from './japan-photo-retry-proof.mjs';
 import {readJapanPaginationFixture} from './japan-pagination-fixture.mjs';
@@ -193,7 +193,7 @@ export function createChinaDailyRelease({root, servingRoot, pricingPlan, serving
       if (paginationCodeUpdate) await readJapanPaginationFixture(path.join(temporary, 'japan-pagination24-browser-report.json'),
         {requirePowerOrder: japanPowerOrderRequired(servingPlan)});
       if (stabilityCodeUpdate) await readJapanFilterDirectoryFixture(path.join(temporary, 'japan-filter-directory-browser-report.json'),
-        {requireSourceNames: japanSourceNamesRequired(servingPlan)});
+        {requireSourceNames: japanSourceNamesRequired(servingPlan), requireVisibleFallback: japanBrandDirectoryRequired(servingPlan)});
       const photoRetryFixture = photoRetryCodeUpdate
         ? await readJapanPhotoRetryFixture(path.join(temporary, 'japan-photo-retry-browser-report.json')) : null;
       const oraclePath = path.join(directory, 'acceptance.json');
@@ -450,7 +450,8 @@ export function createChinaDailyRelease({root, servingRoot, pricingPlan, serving
                 args: [], cwd: browserDirectory, env: {...browserEnv, ORACLE_PATH: oraclePath,
                   EXPECTED_RELEASE_SHA: candidate.runtimeSha, VERIFICATION_NONCE: nonce, OUTPUT: japanOutput,
                   CATALOG_CODE_SCOPE: plan.codeScope,
-                  CATALOG_JAPAN_POWER_ORDER_REQUIRED: japanPowerOrderRequired(servingPlan) ? '1' : '0'}});
+                  CATALOG_JAPAN_POWER_ORDER_REQUIRED: japanPowerOrderRequired(servingPlan) ? '1' : '0',
+                  CATALOG_JAPAN_BRAND_DIRECTORY_REQUIRED: japanBrandDirectoryRequired(servingPlan) ? '1' : '0'}});
               let japanRaw;
               try { japanRaw = await fs.readFile(japanOutput); }
               catch (error) { need(japanExit === 0, 'japan_browser_failed'); throw error; }
@@ -484,6 +485,7 @@ export function createChinaDailyRelease({root, servingRoot, pricingPlan, serving
               if (stabilityCodeUpdate) need(['japanModelSelectionPassed', 'japanCombinedFiltersPassed',
                 'japanRelatedCardsPassed', 'japanVehiclePolicyPassed'].every(key => japan[key] === true), 'japan_browser_binding');
               if (japanPowerOrderRequired(servingPlan)) need(japan.japanPowerOrderPassed === true, 'japan_browser_binding');
+              if (japanBrandDirectoryRequired(servingPlan)) need(japan.japanBrandDirectoryPassed === true, 'japan_browser_binding');
               // Preserve the already bound CRM/photo evidence when this profile
               // additionally verifies Japan's ordinary 24-row continuation.
               detailsRaw = Buffer.from(JSON.stringify({...JSON.parse(detailsRaw), japanReportBase64: japanRaw.toString('base64'),

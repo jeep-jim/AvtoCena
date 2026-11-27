@@ -134,6 +134,10 @@ JAPAN_STABILITY_UI_CODE_FILES = JAPAN_STABILITY_CODE_FILES | {
 JAPAN_STABILITY_POWER_CODE_FILES = JAPAN_STABILITY_UI_CODE_FILES | {
     'apps/web/lib/catalog/ajes-public.ts',
 }
+JAPAN_STABILITY_RAILS_CODE_FILES = JAPAN_STABILITY_POWER_CODE_FILES | {
+    'apps/web/components/catalog/AjesRail.tsx',
+    'apps/web/components/home/HomeJapanFilteredRail.tsx',
+}
 JAPAN_PAGINATION_CODE_FILES = {
     "apps/web/components/catalog/AjesCatalog.tsx",
     "apps/web/components/catalog/CatalogLoadMore.tsx",
@@ -2863,6 +2867,11 @@ class Host:
         scope = code_scope(self.plan)
         required_code_files = CODE_SCOPE_FILES[scope]
         if (scope == JAPAN_STABILITY_CODE_SCOPE and isinstance(image.get('runtimeFiles'), list) and
+                any(name in image['runtimeFiles'] for name in (
+                    'apps/web/components/catalog/AjesRail.tsx',
+                    'apps/web/components/home/HomeJapanFilteredRail.tsx'))):
+            required_code_files = JAPAN_STABILITY_RAILS_CODE_FILES
+        elif (scope == JAPAN_STABILITY_CODE_SCOPE and isinstance(image.get('runtimeFiles'), list) and
                 'apps/web/lib/catalog/ajes-public.ts' in image['runtimeFiles']):
             required_code_files = JAPAN_STABILITY_POWER_CODE_FILES
         elif (scope == JAPAN_STABILITY_CODE_SCOPE and isinstance(image.get('runtimeFiles'), list) and
@@ -3472,10 +3481,13 @@ class Host:
                 runtime_files = json.loads(image_raw).get('runtimeFiles')
                 need(isinstance(runtime_files, list) and all(isinstance(name, str) for name in runtime_files) and
                      len(runtime_files) == len(set(runtime_files)) and set(runtime_files) in
-                     (JAPAN_STABILITY_CODE_FILES, JAPAN_STABILITY_UI_CODE_FILES, JAPAN_STABILITY_POWER_CODE_FILES),
+                     (JAPAN_STABILITY_CODE_FILES, JAPAN_STABILITY_UI_CODE_FILES, JAPAN_STABILITY_POWER_CODE_FILES,
+                      JAPAN_STABILITY_RAILS_CODE_FILES),
                      'code_image_receipt')
-                if set(runtime_files) == JAPAN_STABILITY_POWER_CODE_FILES:
+                if set(runtime_files) in (JAPAN_STABILITY_POWER_CODE_FILES, JAPAN_STABILITY_RAILS_CODE_FILES):
                     need(japan.get('japanPowerOrderPassed') is True, 'japan_browser_binding')
+                if set(runtime_files) == JAPAN_STABILITY_RAILS_CODE_FILES:
+                    need(japan.get('japanBrandDirectoryPassed') is True, 'japan_browser_binding')
         for name, raw in [('BROWSER_SPEED.json', speed_raw), ('BROWSER_DETAILS.json', details_raw)]:
             new_file(self.directory / name, raw)
             need(file_sha(self.directory / name) == sha(raw), 'browser_evidence_readback')

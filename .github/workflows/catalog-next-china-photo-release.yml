@@ -122,10 +122,10 @@ jobs:
           node --input-type=module <<'JS'
           import fs from 'node:fs/promises';
           import {readJapanFilterDirectoryFixture} from './scripts/catalog-next/japan-filter-directory-proof.mjs';
-          import {japanSourceNamesRequired} from './scripts/catalog-next/japan-stability-code-scope.mjs';
+          import {japanSourceNamesRequired, japanBrandDirectoryRequired} from './scripts/catalog-next/japan-stability-code-scope.mjs';
           const plan = JSON.parse(await fs.readFile('.github/operations/catalog-next/china-code-serving-plan.json', 'utf8'));
           await readJapanFilterDirectoryFixture(process.env.RUNNER_TEMP + '/japan-filter-directory-browser-report.json',
-            {requireSourceNames: japanSourceNamesRequired(plan)});
+            {requireSourceNames: japanSourceNamesRequired(plan), requireVisibleFallback: japanBrandDirectoryRequired(plan)});
           JS
       - name: Build the verified source and check its image roundtrip
         if: steps.photo_scope.outputs.scope == 'catalog-photo-recovery-v1' || steps.photo_scope.outputs.scope == 'catalog-japan-recovery-v1' || steps.photo_scope.outputs.scope == 'catalog-japan-completion-v1' || steps.photo_scope.outputs.scope == 'catalog-japan-completion-v2' || steps.photo_scope.outputs.scope == 'catalog-japan-usability-v1' || steps.photo_scope.outputs.scope == 'catalog-crm-china-operations-v1' || steps.photo_scope.outputs.scope == 'catalog-crm-japan-photo-retry-v1' || steps.photo_scope.outputs.scope == 'catalog-japan-pagination24-v1' || steps.photo_scope.outputs.scope == 'catalog-japan-stability-v1'

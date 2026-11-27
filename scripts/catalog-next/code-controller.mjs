@@ -1,6 +1,6 @@
 import {randomBytes} from 'node:crypto';
 import {createChinaState, createChinaStateStorage, validateChinaCodeTransition,
-  validateChinaGenerationReference, inspectChinaPublicationState} from './china-state.mjs';
+  validateChinaGenerationReference, inspectChinaPublicationState, checkedChinaStateStorageFailure} from './china-state.mjs';
 import {checkedServerSpeedReport, checkedHomePhaseTimingReport,
   checkedTerminalAppImageCleanupReport, terminalAppImageCleanupPending} from './release-ssh.mjs';
 
@@ -52,7 +52,7 @@ export async function runChinaCodeCycle({plan, imageId, invocation, owner, stora
     const [accepted, intent] = await Promise.all([state.read('accepted'), state.read('intent')]); return {accepted, intent};
   };
   async function verifyLease() {
-    if (authorityFailure) throw Error(authorityFailure);
+    if (authorityFailure) throw authorityFailure;
     const current = await state.read('lease'), clock = Date.parse(at());
     need(lease && sameObservation(current, lease) && current.value.status === 'held'
       && Date.parse(current.value.expiresAt) > clock, 'lease_lost');
@@ -162,7 +162,11 @@ export async function runChinaCodeCycle({plan, imageId, invocation, owner, stora
     if (previousLease.value?.status === 'held' && Date.parse(previousLease.value.expiresAt) > clock)
       return complete('lease_busy', false);
     lease = await state.acquireLease({previous: previousLease, owner, nonce, expiresAt: new Date(clock + leaseMs).toISOString()});
-    stopHeartbeat = scheduleHeartbeat(() => { void assertLeaseOnly().catch(error => { authorityFailure ??= safeCode(error); }); }, heartbeatMs);
+    stopHeartbeat = scheduleHeartbeat(() => { void assertLeaseOnly().catch(error => {
+      if (authorityFailure) return;
+      authorityFailure = Error(safeCode(error));
+      try { authorityFailure.stateStorageFailure = checkedChinaStateStorageFailure(error?.stateStorageFailure); } catch {}
+    }); }, heartbeatMs);
     need(typeof stopHeartbeat === 'function', 'heartbeat');
     const recovered = await reconcile();
     need(recovered.kind !== 'unresolved', 'pending_host_outcome');
@@ -232,6 +236,7 @@ export async function runChinaCodeCycle({plan, imageId, invocation, owner, stora
       } catch { report.status = 'needs_reconciliation'; }
     } else report.status = lease ? 'needs_reconciliation' : 'failed';
     Object.assign(report, {errorCode: originalFailure, finishedAt: at()});
+    try { report.stateStorageFailure = checkedChinaStateStorageFailure(error?.stateStorageFailure); } catch {}
     try { if (error?.serverSpeed !== undefined) report.serverSpeedFailure = checkedServerSpeedReport(error.serverSpeed); } catch {}
     try { if (error?.homePhaseTiming !== undefined)
       report.homePhaseTiming = checkedHomePhaseTimingReport(error.homePhaseTiming, {runtimeSha: plan.runtimeSha, nonce}); } catch {}

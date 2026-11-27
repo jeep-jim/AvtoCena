@@ -1,0 +1,72 @@
+{
+  "version": 1,
+  "kind": "japan-directory-completion-followup",
+  "checkpointDate": "2026-11-27",
+  "timezone": "Asia/Krasnoyarsk",
+  "precedingRelease": {
+    "runId": 46002408371,
+    "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/46002408371",
+    "controllerSha": "d1ad4c7a7ef6bb15049aad986f24ebce77497323",
+    "runtimeSha": "b61a0f913b94fe92e4b3660a24c3c14edb99cc3d",
+    "conclusion": "failure",
+    "errorCode": "china_state_storage_transport",
+    "finishedAt": "2026-11-27T13:02:43.941Z",
+    "published": false,
+    "retentionPreserved": true,
+    "leaseReleased": true,
+    "artifactId": 15199476834,
+    "artifactBytes": 7224,
+    "artifactSha256": "44c2cc5aeb2aa6fc2218a21da545914c44309352f3eb095dd2350b3fb9522865",
+    "exactNetworkCause": "not captured by preceding transport; not inferred"
+  },
+  "candidate": {
+    "runtimeSha": "7388711061b1a7820baaee1aa8e0b20294157b9e",
+    "runtimeTree": "041887db58d2ca4667a0d54b14e2587a9589effd",
+    "retainedRuntime": "a5ca426eec2663eb17c2df69fe2bfed46e2b8740",
+    "runtimeDiffSha256": "b086175a36e1ebba923c0be2af265c3f06782fe6222062a884af2be1804592db",
+    "pricingRuntimeSha": "64c6338e0db23c8999096bceefbf113c0136fe15",
+    "pricingToServingDiffSha256": "cdb3c0c7e27d27c3f71ed5fb8c9606aafb8e24ae073c6686b8a57a3c55d0416e"
+  },
+  "scope": {
+    "runtimeFileCount": 55,
+    "pricingFileCount": 112,
+    "additionalRuntimePaths": [
+      "apps/web/components/catalog/AjesRail.tsx",
+      "apps/web/components/home/HomeJapanFilteredRail.tsx"
+    ],
+    "protectedPricingPathsUnchanged": true,
+    "frozenHttpOracleReusable": true
+  },
+  "changes": [
+    "Preserve visible Japan supplier makes and retry on empty, all-zero, stale or failed directory metadata; no static makes fallback.",
+    "Remove the remaining long power summary from general-catalog and filtered-home Japan rails; preserve individual card facts and saved-result status.",
+    "Require complete current source counts against actual desktop and mobile controls; source aliases and filter context retained.",
+    "Require the eighteen-case visible-brand fallback fixture and exact boolean live directory verdict on both controller and host for the exact fifty-five-file profile.",
+    "Code publication alone opts into one bounded transient GET retry; conditional PUT remains single-attempt with existing exact readback and CAS."
+  ],
+  "localVerification": {
+    "sourceTargetedTests": 48,
+    "sourceTypecheck": "passed",
+    "sourceBrowserFixture": "bundles and syntax pass; browser binary unavailable locally; eighteen cases required in hosted CI",
+    "controllerScopeAndHostTests": 456,
+    "controllerTransportTests": 54,
+    "controllerBrandBrowserTests": 82,
+    "fullControllerSuite": {
+      "tests": 1550,
+      "passed": 1550,
+      "failed": 0,
+      "durationMs": 54460.151495
+    },
+    "exactSourceAndPricingProof": "passed",
+    "frozenSpeedBaselines": "passed"
+  },
+  "publication": {
+    "status": "not_started",
+    "acceptedRuntimeStill": "a5ca426eec2663eb17c2df69fe2bfed46e2b8740",
+    "liveAcceptance": "pending"
+  },
+  "maintenance": {
+    "status": "prepared_not_active",
+    "activationRequires": "Accepted final runtime and exact rebinding of both current and rollback references; existing deletion and CAS safeguards remain."
+  }
+}

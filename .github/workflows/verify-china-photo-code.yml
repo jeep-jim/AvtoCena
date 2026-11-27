@@ -159,10 +159,10 @@ jobs:
           node --input-type=module <<'JS'
           import fs from 'node:fs/promises';
           import {readJapanFilterDirectoryFixture} from './scripts/catalog-next/japan-filter-directory-proof.mjs';
-          import {japanSourceNamesRequired} from './scripts/catalog-next/japan-stability-code-scope.mjs';
+          import {japanSourceNamesRequired, japanBrandDirectoryRequired} from './scripts/catalog-next/japan-stability-code-scope.mjs';
           const plan = JSON.parse(await fs.readFile('.github/operations/catalog-next/china-code-serving-plan.json', 'utf8'));
           await readJapanFilterDirectoryFixture(process.env.RUNNER_TEMP + '/japan-filter-directory-browser-report.json',
-            {requireSourceNames: japanSourceNamesRequired(plan)});
+            {requireSourceNames: japanSourceNamesRequired(plan), requireVisibleFallback: japanBrandDirectoryRequired(plan)});
           JS
       - name: Preserve Japan source directory and retry fixture evidence
         if: always() && steps.photo_scope.outputs.scope == 'catalog-japan-stability-v1'

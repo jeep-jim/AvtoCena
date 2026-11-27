@@ -2,7 +2,8 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {CHINA_STATE_KEYS, createChinaStateStorage, createChinaState, validateChinaGenerationReference,
-  validateChinaAcceptedState, validateChinaCodeTransition, inspectChinaPublicationState, protectedChinaGenerations} from '../scripts/catalog-next/china-state.mjs';
+  validateChinaAcceptedState, validateChinaCodeTransition, inspectChinaPublicationState, protectedChinaGenerations,
+  checkedChinaStateStorageFailure} from '../scripts/catalog-next/china-state.mjs';
 
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 const ordered = value => Array.isArray(value) ? value.map(ordered) : value && typeof value === 'object'
@@ -421,4 +422,138 @@ test('native REG conflicts, ACL drift and transport errors remain safe and do no
   fake.corruptAcl = true;
   await assert.rejects(transport.read('lease'), /object_acl/);
   await assert.rejects(transport.assertPrivateBucket(), /privacy_changed/);
+});
+
+const networkFailure = (code = 'ECONNRESET') => Object.assign(new TypeError('private endpoint credential=test-secret'),
+  {cause: {code, message: 'private cause test-secret'}});
+
+test('other state-storage callers keep the original one-attempt read behavior by default', async () => {
+  let attempts = 0;
+  const transport = createChinaStateStorage({environment, pause: async () => assert.fail('retry not enabled'),
+    fetcher: async () => { attempts++; throw networkFailure(); }});
+  await assert.rejects(transport.assertPrivateBucket(), error => error.stateStorageFailure.attempts === 1);
+  assert.equal(attempts, 1);
+});
+
+test('a transient state GET is retried once with a fresh signature and no weakened read validation', async () => {
+  const fake = transportFixture(), attempts = [], pauses = []; let time = Date.parse(now), armed = false;
+  const transport = createChinaStateStorage({environment, retryTransientReads: true, clock: () => time,
+    pause: async ms => { pauses.push(ms); time += ms; },
+    fetcher: async (url, options) => {
+      if (armed && options.method === 'GET' && new URL(url).pathname.endsWith('/lease.json') && !new URL(url).search) {
+        attempts.push({url, options});
+        if (attempts.length === 1) { time += 30_000; throw networkFailure('UND_ERR_SOCKET'); }
+      }
+      return fake.fetcher(url, options);
+    }});
+  await transport.assertPrivateBucket();
+  const state = createChinaState({storage: transport, now: () => new Date(time).toISOString()});
+  const lease = await state.acquireLease({previous: empty(), owner: holder, nonce, expiresAt: expiry});
+  armed = true;
+  assert.deepEqual(await state.read('lease'), lease);
+  assert.equal(attempts.length, 2); assert.deepEqual(pauses, [250]);
+  assert.equal(attempts[0].url, attempts[1].url);
+  assert.notEqual(attempts[0].options.headers['x-amz-date'], attempts[1].options.headers['x-amz-date']);
+  assert.ok(attempts.every(item => item.options.redirect === 'error' && item.options.body === undefined));
+  assert.equal(fake.calls.filter(item => item.options.method === 'PUT').length, 1);
+});
+
+test('GET retries stop at two attempts or the total deadline and retain only bounded failure facts', async () => {
+  for (const consumeBudget of [false, true]) {
+    let time = Date.parse(now), attempts = 0, pauses = 0;
+    const transport = createChinaStateStorage({environment, retryTransientReads: true, clock: () => time,
+      pause: async ms => { pauses++; time += ms; }, fetcher: async () => {
+        attempts++; if (consumeBudget) time += 45_000; throw networkFailure('ETIMEDOUT');
+      }});
+    await assert.rejects(transport.assertPrivateBucket(), error => {
+      assert.equal(error.message, 'china_state_storage_transport');
+      assert.deepEqual(error.stateStorageFailure, {version: 1, kind: 'china-state-storage-failure-v1',
+        method: 'GET', target: 'bucket', part: 'acl', phase: 'headers', attempts: consumeBudget ? 1 : 2, cause: 'ETIMEDOUT'});
+      assert.equal(JSON.stringify(error).includes('test-secret'), false); return true;
+    });
+    assert.equal(attempts, consumeBudget ? 1 : 2); assert.equal(pauses, consumeBudget ? 0 : 1);
+  }
+});
+
+test('unknown failures, redirects, HTTP rejection and invalid ACLs are never retried', async () => {
+  for (const behavior of ['unknown', 'redirect', 'forbidden', 'unavailable', 'acl']) {
+    let attempts = 0;
+    const transport = createChinaStateStorage({environment, retryTransientReads: true, pause: async () => assert.fail('not retryable'),
+      fetcher: async () => {
+        attempts++;
+        if (behavior === 'unknown') throw Error('private test-secret');
+        if (behavior === 'redirect') throw Object.assign(new TypeError('fetch failed'), {cause: Error('unexpected redirect')});
+        if (behavior === 'acl') return new Response('<private>test-secret</private>');
+        return new Response('test-secret', {status: behavior === 'forbidden' ? 403 : 503});
+      }});
+    await assert.rejects(transport.assertPrivateBucket(), error => {
+      assert.equal(String(error).includes('test-secret'), false); return true;
+    });
+    assert.equal(attempts, 1, behavior);
+  }
+});
+
+test('a truncated transient GET discards partial bytes before revalidating the complete response', async () => {
+  const fake = transportFixture(); let armed = false, attempts = 0;
+  const transport = createChinaStateStorage({environment, retryTransientReads: true, pause: async () => {}, fetcher: async (url, options) => {
+    if (armed && options.method === 'GET' && !new URL(url).search) {
+      attempts++;
+      if (attempts === 1) return {status: 200, headers: new Headers(), body: (async function* () {
+        yield Buffer.from('partial private test-secret'); throw networkFailure('UND_ERR_BODY_TIMEOUT');
+      })()};
+    }
+    return fake.fetcher(url, options);
+  }});
+  await transport.assertPrivateBucket(); const state = createChinaState({storage: transport, now: () => now});
+  const lease = await state.acquireLease({previous: empty(), owner: holder, nonce, expiresAt: expiry});
+  armed = true;
+  assert.deepEqual(await state.read('lease'), lease); assert.equal(attempts, 2);
+});
+
+test('even an allowlisted transient lost PUT reply gets one write and exact readback, never a replay', async () => {
+  const fake = transportFixture(); let puts = 0;
+  const transport = createChinaStateStorage({environment, retryTransientReads: true, pause: async () => assert.fail('PUT must not retry'),
+    fetcher: async (url, options) => {
+      const response = await fake.fetcher(url, options);
+      if (options.method === 'PUT') { puts++; throw networkFailure('ECONNRESET'); }
+      return response;
+    }});
+  await transport.assertPrivateBucket(); const state = createChinaState({storage: transport, now: () => now});
+  const lease = await state.acquireLease({previous: empty(), owner: holder, nonce, expiresAt: expiry});
+  assert.equal(lease.value.status, 'held'); assert.equal(puts, 1);
+  assert.equal(fake.calls.filter(item => item.options.method === 'PUT').length, 1);
+});
+
+test('a successful retry cannot rebase a changed ETag or revive an expired lease', async () => {
+  for (const change of ['etag', 'expiry']) {
+    const fake = transportFixture(); let time = Date.parse(now), armed = false, failed = false;
+    const transport = createChinaStateStorage({environment, retryTransientReads: true, clock: () => time, pause: async ms => { time += ms; },
+      fetcher: async (url, options) => {
+        if (armed && !failed && options.method === 'GET' && !new URL(url).search) {
+          failed = true;
+          if (change === 'etag') {
+            const value = JSON.parse(fake.data.get('lease').bytes);
+            fake.data.set('lease', {bytes: bytes({...value, epoch: value.epoch + 1, nonce: 'a'.repeat(32)}), etag: '"foreign"'});
+          } else time += 2_000;
+          throw networkFailure();
+        }
+        return fake.fetcher(url, options);
+      }});
+    await transport.assertPrivateBucket();
+    const state = createChinaState({storage: transport, now: () => new Date(time).toISOString()});
+    const lease = await state.acquireLease({previous: empty(), owner: holder, nonce,
+      expiresAt: new Date(time + 1_000).toISOString()});
+    armed = true;
+    await assert.rejects(state.renewLease({lease, expiresAt: expiry}), change === 'etag' ? /conflict/ : /lease_not_active/);
+    assert.equal(fake.calls.filter(item => item.options.method === 'PUT').length, 1);
+  }
+});
+
+test('failure evidence rejects extra fields, unknown operations, PUT retries and private values', () => {
+  const base = {version: 1, kind: 'china-state-storage-failure-v1', method: 'GET', target: 'lease',
+    part: 'document', phase: 'headers', attempts: 2, cause: 'ECONNRESET'};
+  assert.deepEqual(checkedChinaStateStorageFailure(base), base);
+  for (const change of [{url: 'private://secret'}, {method: 'DELETE'}, {target: 'catalog/raw/private'}, {cause: 'secret'},
+    {attempts: 3}, {method: 'PUT'}, {part: 'policy'}])
+    assert.throws(() => checkedChinaStateStorageFailure({...base, ...change}), /storage_failure_evidence/);
 });

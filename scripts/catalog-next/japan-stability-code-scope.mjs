@@ -74,8 +74,16 @@ export const JAPAN_STABILITY_POWER_CODE_PATHS = Object.freeze([
   ...JAPAN_STABILITY_UI_CODE_PATHS,
   'apps/web/lib/catalog/ajes-public.ts',
 ].sort());
+/** The final visible-directory repair also removes the long summary from
+ * Japan's general-catalog and home rails. Both views are an exact successor,
+ * with the stronger live directory and fallback-fixture proofs mandatory. */
+export const JAPAN_STABILITY_RAILS_CODE_PATHS = Object.freeze([
+  ...JAPAN_STABILITY_POWER_CODE_PATHS,
+  'apps/web/components/catalog/AjesRail.tsx',
+  'apps/web/components/home/HomeJapanFilteredRail.tsx',
+].sort());
 const reviewedProfiles = Object.freeze([JAPAN_STABILITY_CODE_PATHS, JAPAN_STABILITY_UI_CODE_PATHS,
-  JAPAN_STABILITY_POWER_CODE_PATHS]);
+  JAPAN_STABILITY_POWER_CODE_PATHS, JAPAN_STABILITY_RAILS_CODE_PATHS]);
 
 export function japanStabilityCodePaths(plan) {
   const files = plan?.runtimeFiles;
@@ -94,7 +102,13 @@ export function isExactJapanStabilityScope(plan) {
 export function japanPowerOrderRequired(plan) {
   if (plan?.codeScope !== JAPAN_STABILITY_CODE_SCOPE) return false;
   if (!isExactJapanStabilityScope(plan)) throw Error('japan_stability_power_order_scope');
-  return japanStabilityCodePaths(plan) === JAPAN_STABILITY_POWER_CODE_PATHS;
+  return [JAPAN_STABILITY_POWER_CODE_PATHS, JAPAN_STABILITY_RAILS_CODE_PATHS].includes(japanStabilityCodePaths(plan));
+}
+
+export function japanBrandDirectoryRequired(plan) {
+  if (plan?.codeScope !== JAPAN_STABILITY_CODE_SCOPE) return false;
+  if (!isExactJapanStabilityScope(plan)) throw Error('japan_stability_brand_directory_scope');
+  return japanStabilityCodePaths(plan) === JAPAN_STABILITY_RAILS_CODE_PATHS;
 }
 
 export function japanSourceNamesRequired(plan) {

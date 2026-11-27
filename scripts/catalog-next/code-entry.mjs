@@ -7,7 +7,7 @@ import {checkoutChinaDailyRuntimes} from './daily-entry.mjs';
 import {buildChinaReleaseImage} from './build-release-image.mjs';
 import {verifyChinaPhotoCodeRuntime} from './photo-code-scope.mjs';
 import {createChinaDailyRelease} from './daily-release.mjs';
-import {createChinaStateStorage} from './china-state.mjs';
+import {createChinaStateStorage, checkedChinaStateStorageFailure} from './china-state.mjs';
 import {runChinaCodeCycle} from './code-controller.mjs';
 
 const ROOT = fileURLToPath(new URL('../../', import.meta.url));
@@ -55,7 +55,7 @@ export async function runChinaPhotoCodeEntry({root = ROOT, environment = process
   try {
     const report = await runChinaCodeCycle({plan: servingPlan, imageId: image.imageId, invocation,
       owner: {runId: environment.GITHUB_RUN_ID, attempt: environment.GITHUB_RUN_ATTEMPT, revision: invocation.sourceSha},
-      storage: createChinaStateStorage({environment}), stageCodeRelease: release.stageCodeRelease,
+      storage: createChinaStateStorage({environment, retryTransientReads: true}), stageCodeRelease: release.stageCodeRelease,
       recoverRelease: release.recoverRelease, retirePreviousHost: release.retireHost,
       retireTerminalAppImage: release.retireTerminalAppImage, onProgress: progress,
       preserveRetention: ({readState, assertAuthority}) => import('./china-generation-gc-queue.mjs').then(module =>
@@ -66,6 +66,7 @@ export async function runChinaPhotoCodeEntry({root = ROOT, environment = process
   } catch (error) {
     const report = error?.report ?? {version: 1, kind: 'china-code-cycle-v1', market: 'china', completed: false,
       published: false, status: 'failed', errorCode: safeCode(error)};
+    try { report.stateStorageFailure = checkedChinaStateStorageFailure(error?.stateStorageFailure); } catch {}
     await fs.writeFile(reportPath, JSON.stringify(report, null, 2) + '\n', {mode: 0o600}); log(report);
     throw Error(safeCode(error));
   }

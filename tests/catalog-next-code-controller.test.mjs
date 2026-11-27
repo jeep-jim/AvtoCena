@@ -448,6 +448,42 @@ test('retention preservation failure prevents staging and does not overwrite the
   }
 });
 
+test('a pre-stage state read failure preserves safe operation evidence, including a heartbeat failure, without publishing', async () => {
+  for (const throughHeartbeat of [false, true]) for (const validEvidence of [false, true]) {
+    const f = await fixture(), originalRead = f.storage.read.bind(f.storage), preserve = f.args.preserveRetention;
+    const facts = {version: 1, kind: 'china-state-storage-failure-v1', method: 'GET', target: 'lease',
+      part: 'document', phase: 'headers', attempts: 2, cause: 'UND_ERR_SOCKET'};
+    let armed = false, heartbeat;
+    f.args.scheduleHeartbeat = callback => { heartbeat = callback; return () => { f.stopped = true; }; };
+    f.storage.read = async name => {
+      if (armed && name === 'lease') {
+        armed = false;
+        const error = Error('china_state_storage_transport');
+        error.cause = Error('private body credential=test-secret');
+        error.stateStorageFailure = {...facts, ...(validEvidence ? {} : {url: 'private://test-secret'})};
+        throw error;
+      }
+      return originalRead(name);
+    };
+    f.args.preserveRetention = async input => {
+      const result = await preserve(input); armed = true;
+      if (throughHeartbeat) { heartbeat(); await new Promise(resolve => setImmediate(resolve)); }
+      return result;
+    };
+    await assert.rejects(runChinaCodeCycle(f.args), error => {
+      assert.equal(error.message, 'china_state_storage_transport');
+      assert.equal(error.report.published, false); assert.equal(error.report.retentionPreserved, true);
+      assert.equal(error.report.leaseReleased, true);
+      assert.deepEqual(error.report.stateStorageFailure, validEvidence ? facts : undefined);
+      assert.equal(JSON.stringify(error.report).includes('test-secret'), false); return true;
+    });
+    assert.deepEqual(f.events, ['preserve']); assert.equal(f.stopped, true);
+    assert.deepEqual(await f.storage.read('accepted'), f.first.accepted);
+    assert.deepEqual(await f.storage.read('intent'), f.first.intent);
+    assert.equal(f.storage.writes.filter(row => row.name === 'accepted' || row.name === 'intent').length, 0);
+  }
+});
+
 test('a state change after staging or a stale conditional commit is never rebased over a foreign writer', async () => {
   const beforeReserve = await fixture();
   beforeReserve.afterStage = async () => beforeReserve.storage.force('accepted', {...beforeReserve.first.accepted.value, revision: 90});

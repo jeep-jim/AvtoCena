@@ -4,7 +4,8 @@ import {createHash} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
 import {JAPAN_PAGINATION_CODE_SCOPE} from './japan-pagination-code-scope.mjs';
 import {JAPAN_STABILITY_CODE_SCOPE} from './japan-stability-code-scope.mjs';
-import {JAPAN_STABILITY_GATES, JAPAN_LEGACY_MAZDA_THREE_PAGES, japanStabilityApiAllowed, runJapanStabilityBrowser} from './japan-stability-browser.mjs';
+import {JAPAN_STABILITY_GATES, JAPAN_LEGACY_MAZDA_THREE_PAGES, japanStabilityApiAllowed, runJapanStabilityBrowser,
+ checkJapanStabilityBrandControl} from './japan-stability-browser.mjs';
 
 const ROOT=fileURLToPath(new URL('../../',import.meta.url));
 const ORIGIN='https://avtocena.com';
@@ -26,6 +27,10 @@ const need=(value,code)=>{if(!value)throw Error('japan_browser_'+code);};
 const positive=value=>typeof value==='number'&&Number.isFinite(value)&&value>0;
 export function japanPowerOrderRequirement(value){
  need(value===undefined||value==='0'||value==='1','power_order_option');
+ return value==='1';
+}
+export function japanBrandDirectoryRequirement(value){
+ need(value===undefined||value==='0'||value==='1','brand_directory_option');
  return value==='1';
 }
 export function japanPetrolPowerUrl(value,pageNumber=1){
@@ -720,7 +725,7 @@ async function readJson(context,url,{paginationKind,stability=false,requirePower
  return {status:response.status(),data,headers:response.headers(),durationMs:receivedAt-started,requestedAt:started,receivedAt};
 }
 
-export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,outputFile,playwrightModule,chromeBin,codeScope=SCOPE,requirePowerOrder=false}){
+export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,outputFile,playwrightModule,chromeBin,codeScope=SCOPE,requirePowerOrder=false,requireBrandDirectory=false}){
  const stability=codeScope===JAPAN_STABILITY_CODE_SCOPE;
  const pagination=codeScope===JAPAN_PAGINATION_CODE_SCOPE||stability;
  const completion=[COMPLETION_SCOPE,COMPLETION_V2_SCOPE,USABILITY_SCOPE,JAPAN_PAGINATION_CODE_SCOPE,JAPAN_STABILITY_CODE_SCOPE].includes(codeScope);
@@ -735,7 +740,8 @@ export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,out
  if(pagination)Object.assign(report,{japanFullPagesPassed:false,japanPagination24Passed:false,japanCatalogWarningRemovedPassed:false});
  if(stability)Object.assign(report,Object.fromEntries(JAPAN_STABILITY_GATES.map(key=>[key,false])));
  if(requirePowerOrder===true)report.japanPowerOrderPassed=false;
- let browser,context,currentPage,calculationGrant=null,brandDirectory=null,stage='preconditions';
+ if(requireBrandDirectory===true)Object.assign(report,{japanBrandDirectoryPassed:false,japanBrandDirectoryUiRequests:0});
+ let browser,context,currentPage,calculationGrant=null,brandDirectory=null,stabilityBrandDirectory=null,stage='preconditions';
  const usabilityPages=[],quietChecks=[];
  const capture=async(page,name)=>{
   const relative=path.join('artifacts/catalog-japan-live',nonce,name+'.png');
@@ -756,6 +762,7 @@ export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,out
  try{
   need([SCOPE,COMPLETION_SCOPE,COMPLETION_V2_SCOPE,USABILITY_SCOPE,JAPAN_PAGINATION_CODE_SCOPE,JAPAN_STABILITY_CODE_SCOPE].includes(codeScope),'code_scope');
   need(typeof requirePowerOrder==='boolean'&&(!requirePowerOrder||stability),'power_order_option');
+  need(typeof requireBrandDirectory==='boolean'&&(!requireBrandDirectory||stability),'brand_directory_option');
   need(path.isAbsolute(outputFile),'output');
   try{await fs.access(outputFile);need(false,'report_exists');}catch(error){if(error?.code!=='ENOENT')throw error;}
   const raw=await fs.readFile(oraclePath),binding=japanReleaseBinding(JSON.parse(raw),releaseSha,nonce);
@@ -858,6 +865,15 @@ export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,out
    }
   }
   need(await main.getByText('Показаны сохранённые автомобили. Полный список пока недоступен.',{exact:true}).count()===0,'ui_stale');
+  if(requireBrandDirectory){
+   stage='stability_brand_directory_desktop';
+   const checked=await checkJapanStabilityBrandControl({view:page,controls:main,
+    rail:main.locator('section.ac-brand-rail[aria-label="Марки автомобилей"]'),visibleRows:power.data.items,
+    capture:view=>capture(view,'japan-complete-source-brands-desktop'),
+    onResponse:value=>{report.japanBrandDirectoryUiRequests++;recordJapanResponse(report,stage,value,releaseSha);}});
+   stabilityBrandDirectory=checked.directory;
+   report.checks.brandDirectory={contract:'source-counts-v1',desktop:checked.proof};
+  }
   if(usability){
    stage='brand_directory_rail';
    const rail=main.locator('[data-japan-brand-directory="rail"][data-status="ready"][data-directory-complete="true"]');
@@ -966,6 +982,16 @@ export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,out
    const cityButton=dialog.locator('.ac-catalog-city-filter button').first();
    await cityButton.waitFor({state:'visible',timeout:15_000});
    need((await cityButton.innerText()).trim()===CITY&&new URL(view.url()).searchParams.get('city')===CITY,'city_hydration');
+   if(requireBrandDirectory){
+    stage='stability_brand_directory_mobile';
+    const checked=await checkJapanStabilityBrandControl({view,controls:dialog,expectedDirectory:stabilityBrandDirectory,
+     capture:view=>capture(view,'japan-complete-source-brands-mobile'),
+     onResponse:value=>{report.japanBrandDirectoryUiRequests++;recordJapanResponse(report,stage,value,releaseSha);}});
+    report.checks.brandDirectory.mobile=checked.proof;
+    report.checks.brandDirectory.sameSourceDirectory=true;
+    need(report.japanBrandDirectoryUiRequests===2,'brand_directory_request_count');
+    report.japanBrandDirectoryPassed=true;
+   }
    if(usability){
     stage='brand_directory_filter';
     const trigger=dialog.getByRole('button',{name:'Выбрать марки автомобилей',exact:true});
@@ -1134,7 +1160,8 @@ export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,out
   report.passed=['japanFreshnessPassed','japanPowerApiPassed','japanUiPassed','japanVisibilityPassed','readOnlyBrowserFence',
    ...(completion?['japanPetrolPowerUiPassed','japanDetailPowerInputPassed','japanDeliveredCalculationPassed']:[]),
    ...(usability?USABILITY_GATES:[]),...(pagination?['japanFullPagesPassed','japanPagination24Passed','japanCatalogWarningRemovedPassed']:[]),
-   ...(stability?JAPAN_STABILITY_GATES:[]),...(requirePowerOrder?['japanPowerOrderPassed']:[])].every(key=>report[key]===true);
+   ...(stability?JAPAN_STABILITY_GATES:[]),...(requirePowerOrder?['japanPowerOrderPassed']:[]),
+   ...(requireBrandDirectory?['japanBrandDirectoryPassed']:[])].every(key=>report[key]===true);
  }catch(error){
   report.error={stage,code:/^japan_browser_[a-z_]+$/.test(error?.message||'')?error.message:'japan_browser_check_failed',timeout:error?.name==='TimeoutError'};
   if(currentPage&&/^[a-f0-9]{32}$/.test(nonce||''))await capture(currentPage,'failure').catch(()=>{});
@@ -1151,7 +1178,8 @@ if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.ur
   const report=await runJapanBrowserAcceptance({oraclePath:process.env.ORACLE_PATH,releaseSha:process.env.EXPECTED_RELEASE_SHA,
    nonce:process.env.VERIFICATION_NONCE,outputFile:path.resolve(process.env.OUTPUT||path.join(ROOT,'catalog-next-japan-browser-report.json')),
    playwrightModule:process.env.PLAYWRIGHT_MODULE,chromeBin:process.env.CHROME_BIN,codeScope:process.env.CATALOG_CODE_SCOPE||SCOPE,
-   requirePowerOrder:japanPowerOrderRequirement(process.env.CATALOG_JAPAN_POWER_ORDER_REQUIRED)});
+   requirePowerOrder:japanPowerOrderRequirement(process.env.CATALOG_JAPAN_POWER_ORDER_REQUIRED),
+   requireBrandDirectory:japanBrandDirectoryRequirement(process.env.CATALOG_JAPAN_BRAND_DIRECTORY_REQUIRED)});
   console.log('JAPAN_BROWSER '+JSON.stringify(report));if(!report.passed)process.exitCode=1;
  }catch{console.error('japan_browser_report_failed');process.exitCode=1;}
 }

@@ -17,6 +17,7 @@ const sourceModelMatches = (source, selected) => compact(source) === compact(sel
 export const JAPAN_STABILITY_GATES = Object.freeze(['japanModelSelectionPassed', 'japanCombinedFiltersPassed',
   'japanRelatedCardsPassed', 'japanVehiclePolicyPassed']);
 export const JAPAN_STABILITY_MODELS_API = '/api/catalog/source-models?market=japan&make=Mazda';
+export const JAPAN_STABILITY_BRANDS_API = '/api/catalog/brand-counts?market=japan';
 export const JAPAN_LEGACY_MAZDA_THREE_PAGES = Object.freeze({
   literal: ORIGIN + '/cars/japan?' + new URLSearchParams({make: 'Mazda', model: '3', city: CITY}),
   canonical: ORIGIN + '/cars/japan/Mazda/3?' + new URLSearchParams({city: CITY}),
@@ -37,6 +38,143 @@ export function japanStabilityChinaFamilyPage(generationId) {
   need(/^gen_china_[0-9]+_[0-9]+$/.test(generationId), 'china_generation');
   return ORIGIN + '/cars/china/Mercedes-Benz/B-Class?'
     + new URLSearchParams({city: CITY, preparedCut: generationId});
+}
+
+const cleanMake = value => value.replace(/\s+/g, ' ').trim();
+const makeKey = value => cleanMake(value).toLocaleLowerCase('ru-RU');
+const sortedValues = values => [...values].sort();
+const sameValues = (left, right) => JSON.stringify(sortedValues(left)) === JSON.stringify(sortedValues(right));
+const distinctMakes = values => [...new Map(values.map(value => [makeKey(value), cleanMake(value)])).values()];
+
+/** The current public metadata contract has counts, not the retired
+ * directoryComplete/makes fields. Empty or stale counts cannot certify a
+ * complete directory even if visible-card fallbacks are still useful. */
+export function checkedJapanStabilityBrandDirectory(payload, status, now = Date.now()) {
+  const observed = Date.parse(payload?.generationId || '');
+  need(status === 200 && payload?.stale === false && !payload.partial && !payload.interrupted && !payload.scanLimited
+    && Number.isFinite(observed) && observed <= now + 60_000 && now - observed < 30 * 60_000,
+  'brand_directory_unavailable');
+  need(payload.counts && typeof payload.counts === 'object' && !Array.isArray(payload.counts), 'brand_directory_rows');
+  const entries = Object.entries(payload.counts);
+  need(entries.length > 0 && entries.every(([make, count]) => name(make)
+    && Number.isSafeInteger(count) && count >= 0), 'brand_directory_rows');
+  const makes = entries.filter(([, count]) => count > 0).map(([make]) => make);
+  need(makes.length > 0, 'brand_directory_empty');
+  return {makes, observedAt: new Date(observed).toISOString(),
+    sourceNamesSha256: hash(JSON.stringify(sortedValues(makes)))};
+}
+
+export function verifyJapanStabilityBrandOptions(directory, values, state) {
+  need(state === 'ready', 'brand_filter_unavailable');
+  need(Array.isArray(values) && values.every(name), 'brand_filter_rows');
+  const keys = values.map(makeKey), expected = distinctMakes(directory.makes).map(makeKey);
+  need(keys.length > 0 && new Set(keys).size === keys.length && sameValues(keys, expected), 'brand_filter_names');
+  return {sourceMakes: directory.makes.length, filterMakes: keys.length,
+    sourceNamesSha256: directory.sourceNamesSha256, observedAt: directory.observedAt,
+    completeSourceCovered: true, fallbackOnly: false};
+}
+
+function railMakeValues(href, pageUrl) {
+  let target, current;
+  try { target = new URL(href, ORIGIN); current = new URL(pageUrl); }
+  catch { need(false, 'brand_rail_link'); }
+  const route = /^\/cars\/japan(?:\/([^/]+))?$/.exec(target.pathname);
+  let pathMake;
+  try { pathMake = route?.[1] === undefined ? undefined : decodeURIComponent(route[1]); }
+  catch { need(false, 'brand_rail_link'); }
+  need(target.origin === ORIGIN && !target.username && !target.password && !target.hash
+    && current.origin === ORIGIN && current.pathname === '/cars/japan'
+    && !current.searchParams.has('make') && !current.searchParams.has('model')
+    && route && (pathMake === undefined || name(pathMake) && !/[\/\\\u0000-\u001f]/.test(pathMake))
+    && [...new Set(target.searchParams.keys())].every(key => target.searchParams.getAll(key).length === 1)
+    && !(pathMake && target.searchParams.has('make')), 'brand_rail_link');
+  const raw = pathMake || target.searchParams.get('make');
+  need(typeof raw === 'string' && raw.length > 0, 'brand_rail_link');
+  const values = raw.split(',');
+  need(values.every(name) && new Set(values).size === values.length, 'brand_rail_link');
+  const actual = new URLSearchParams(target.search), expected = new URLSearchParams(current.search);
+  actual.delete('make');
+  for (const key of ['market', 'make', 'brand', 'page', 'after']) expected.delete(key);
+  need(sameValues([...actual].map(entry => JSON.stringify(entry)), [...expected].map(entry => JSON.stringify(entry))),
+    'brand_rail_context');
+  return values;
+}
+
+/** Display aliases may group source names, but every link must retain all of
+ * its actual source spellings. Extra rail makes require a verified visible
+ * Japan card; those fallbacks never stand in for the complete counts response. */
+export function verifyJapanStabilityBrandRail(directory, links, visibleRows, pageUrl, state, canonicalMake) {
+  need(state === 'ready', 'brand_rail_unavailable');
+  need(typeof canonicalMake === 'function', 'brand_rail_presentation');
+  need(Array.isArray(visibleRows) && visibleRows.length > 0 && visibleRows.every(row => auctionRow(row) && name(row.make)),
+    'brand_rail_visible_source');
+  const visibleMakes = visibleRows.map(row => row.make), groups = new Map();
+  for (const make of [...directory.makes, ...visibleMakes]) {
+    const label = canonicalMake(make), key = label.toLocaleLowerCase('en-US');
+    const group = groups.get(key) || {label, makes: new Set()};
+    group.makes.add(make); groups.set(key, group);
+  }
+  need(Array.isArray(links) && links.length === groups.size && links.length > 0, 'brand_rail_names');
+  const seen = new Set();
+  for (const link of links) {
+    const label = typeof link?.title === 'string' && /^Автомобили (.+) под заказ$/u.exec(link.title)?.[1];
+    need(name(label), 'brand_rail_names');
+    const key = label.toLocaleLowerCase('en-US'), group = groups.get(key);
+    need(group && group.label === label && !seen.has(key), 'brand_rail_names'); seen.add(key);
+    need(sameValues(railMakeValues(link.href, pageUrl), [...group.makes]), 'brand_rail_source_names');
+  }
+  const source = new Set(directory.makes);
+  return {railMakes: groups.size, completeSourceCovered: true,
+    visibleFallbackMakes: new Set(visibleMakes.filter(make => !source.has(make))).size, fallbackOnly: false,
+    sourceLinksMatched: true, filterContextPreserved: true};
+}
+
+/** Observe the one request made by opening the real control. There is no
+ * separate metadata fetch or source scan, and no selection is changed. */
+export async function checkJapanStabilityBrandControl({view, controls, rail, visibleRows,
+  expectedDirectory, onResponse = () => {}, capture = async () => {}}) {
+  const before = view.url(), trigger = controls.locator('button[aria-label="Выбрать марки автомобилей"]:visible');
+  need(await trigger.count() === 1 && await trigger.getAttribute('aria-expanded') === 'false', 'brand_control');
+  const requestedAt = Date.now();
+  const pending = view.waitForResponse(response => {
+    try { const url = new URL(response.url()); return response.request().method() === 'GET' && url.origin === ORIGIN
+      && url.pathname === '/api/catalog/brand-counts'; } catch { return false; }
+  }, {timeout: 45_000});
+  pending.catch(() => {});
+  await trigger.click();
+  const response = await pending, receivedAt = Date.now();
+  need(response.url() === ORIGIN + JAPAN_STABILITY_BRANDS_API, 'brand_directory_query');
+  const data = await response.json().catch(() => null), status = response.status();
+  onResponse({data, status, headers: response.headers(), requestedAt, receivedAt, durationMs: receivedAt - requestedAt});
+  const directory = checkedJapanStabilityBrandDirectory(data, status);
+  if (expectedDirectory) need(sameValues(directory.makes, expectedDirectory.makes), 'brand_directory_changed');
+  const dropdown = trigger.locator('..').locator('.ac-filter-dropdown');
+  await dropdown.waitFor({state: 'visible', timeout: 15_000});
+  await trigger.locator('..').locator('.ac-filter-dropdown[data-japan-source-directory-state="ready"]')
+    .waitFor({state: 'visible', timeout: 15_000});
+  const values = await dropdown.locator('button[data-facet-value]').evaluateAll(nodes => nodes.map(node => node.getAttribute('data-facet-value')));
+  const proof = verifyJapanStabilityBrandOptions(directory, values, await dropdown.getAttribute('data-japan-source-directory-state'));
+  need(await dropdown.getByText('Марка не найдена', {exact: true}).count() === 0
+    && await dropdown.getByRole('button', {name: 'Не удалось загрузить марки. Повторить', exact: true}).count() === 0,
+  'brand_filter_unavailable');
+  await capture(view);
+  await trigger.click();
+  need(view.url() === before && await trigger.getAttribute('aria-expanded') === 'false', 'brand_control_changed');
+  if (rail) {
+    await rail.waitFor({state: 'visible', timeout: 60_000});
+    await view.locator('main.ac-ajes-catalog section.ac-brand-rail[data-japan-source-directory-state="ready"]')
+      .waitFor({state: 'visible', timeout: 60_000});
+    const links = await rail.locator('a[title^="Автомобили "]').evaluateAll(nodes => nodes.map(node =>
+      ({title: node.getAttribute('title'), href: node.getAttribute('href')})));
+    // Load the unchanged display-only mapping only for this stronger scope.
+    const {canonicalCatalogBrand} = await import('../../apps/web/lib/catalog/brands.ts');
+    Object.assign(proof, verifyJapanStabilityBrandRail(directory, links, visibleRows, before,
+      await rail.getAttribute('data-japan-source-directory-state'), canonicalCatalogBrand));
+    const bounds = await rail.boundingBox(), firstCard = await view.locator('main.ac-ajes-catalog').locator(CARD).first().boundingBox();
+    need(bounds && firstCard && bounds.y + bounds.height <= firstCard.y, 'brand_rail_layout');
+    proof.aboveCars = true;
+  }
+  return {directory, proof: {...proof, selectedThroughUi: true, metadataRequests: 1, selectionUnchanged: true}};
 }
 
 export function japanStabilitySearchApi(kind, model) {

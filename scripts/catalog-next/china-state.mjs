@@ -212,9 +212,42 @@ function validate(name, value) {
   fail('key');
 }
 
-/** REG capability with exactly three private keys. It has no lists, deletes,
- * unconditional PUT, retry, generic prefix or access to a neighbour's state. */
-export function createChinaStateStorage({environment = process.env, fetcher = fetch} = {}) {
+const TRANSIENT_READ_CAUSES = new Set(['TIME_LIMIT', 'ECONNRESET', 'ETIMEDOUT', 'EAI_AGAIN',
+  'ECONNREFUSED', 'ENETUNREACH', 'EHOSTUNREACH', 'UND_ERR_CONNECT_TIMEOUT',
+  'UND_ERR_HEADERS_TIMEOUT', 'UND_ERR_BODY_TIMEOUT', 'UND_ERR_SOCKET']);
+const READ_ATTEMPTS = 2, REQUEST_TIMEOUT_MS = 30_000, READ_BUDGET_MS = 45_000, READ_RETRY_DELAY_MS = 250;
+
+/** Only typed, bounded transport facts may accompany a public release report.
+ * URLs, credentials, response bodies and exception text never enter evidence. */
+export function checkedChinaStateStorageFailure(value) {
+  need(keys(value, ['version', 'kind', 'method', 'target', 'part', 'phase', 'attempts', 'cause'])
+    && value.version === 1 && value.kind === 'china-state-storage-failure-v1'
+    && ['GET', 'PUT'].includes(value.method)
+    && ['bucket', 'accepted', 'intent', 'lease'].includes(value.target)
+    && ['acl', 'policy', 'document'].includes(value.part)
+    && ['headers', 'body'].includes(value.phase)
+    && Number.isSafeInteger(value.attempts) && value.attempts >= 1
+    && value.attempts <= (value.method === 'GET' ? READ_ATTEMPTS : 1)
+    && (value.cause === 'UNKNOWN' || TRANSIENT_READ_CAUSES.has(value.cause)), 'storage_failure_evidence');
+  need(value.method !== 'PUT' || value.target !== 'bucket' && value.part === 'document', 'storage_failure_evidence');
+  need(value.part !== 'policy' || value.target === 'bucket', 'storage_failure_evidence');
+  return immutable(clone(value));
+}
+
+function transportCause(error, signal) {
+  if (signal.aborted && signal.reason?.name === 'TimeoutError' || error?.name === 'TimeoutError') return 'TIME_LIMIT';
+  const code = error?.cause?.code ?? error?.code;
+  return TRANSIENT_READ_CAUSES.has(code) ? code : 'UNKNOWN';
+}
+
+/** REG capability with exactly three private keys. There are no lists, deletes,
+ * unconditional or retried PUTs, generic prefixes or neighbour-state access.
+ * Only a transient GET transport failure gets one bounded, freshly signed retry.
+ * A lost PUT reply remains the state machine's exact-readback responsibility. */
+export function createChinaStateStorage({environment = process.env, fetcher = fetch,
+  retryTransientReads = false, clock = Date.now, pause = ms => new Promise(resolve => setTimeout(resolve, ms))} = {}) {
+  need(typeof fetcher === 'function' && typeof retryTransientReads === 'boolean'
+    && typeof clock === 'function' && typeof pause === 'function', 'storage_capability');
   for (const [key, value] of Object.entries({YC_OBJECT_STORAGE_ENDPOINT: 'https://s3.regru.cloud',
     YC_OBJECT_STORAGE_REGION: 'us-east-1', YC_OBJECT_STORAGE_BUCKET: 'avtocena-staging-8120751',
     YC_OBJECT_STORAGE_PREFIX: 'migration-staging/full-20261011/'})) need(environment[key] === value, 'storage_configuration');
@@ -226,17 +259,42 @@ export function createChinaStateStorage({environment = process.env, fetcher = fe
   const request = async (method, name, query = {}, body, headers = {}) => {
     need(name === null || Object.hasOwn(CHINA_STATE_KEYS, name), 'key');
     const target = '/avtocena-staging-8120751' + (name === null ? '' : '/migration-staging/full-20261011/' + CHINA_STATE_KEYS[name]);
-    const signed = signRawGcS3Request({method, host: 's3.regru.cloud', path: target, query, body: body ?? '', headers,
-      region: 'us-east-1', accessKeyId, secretAccessKey, at: Date.now()});
-    let response;
-    try { response = await fetcher('https://s3.regru.cloud' + signed.canonicalPath + (signed.canonicalQuery ? '?' + signed.canonicalQuery : ''),
-      {method, headers: signed.headers, body, redirect: 'error', signal: AbortSignal.timeout(30000)}); }
-    catch { fail('storage_transport'); }
-    const parts = []; let size = 0;
-    try { for await (const part of response.body ?? []) {
-      size += part.byteLength; need(size <= LIMIT, 'storage_response_size'); parts.push(Buffer.from(part));
-    }} catch { fail('storage_response_incomplete'); }
-    return {status: response.status, data: Buffer.concat(parts, size), etag: response.headers.get('etag')};
+    const maxAttempts = method === 'GET' && retryTransientReads ? READ_ATTEMPTS : 1;
+    const deadline = clock() + (maxAttempts > 1 ? READ_BUDGET_MS : REQUEST_TIMEOUT_MS);
+    for (let attempts = 1; ; attempts++) {
+      const at = clock(), remaining = deadline - at;
+      need(Number.isSafeInteger(at) && remaining > 0, 'storage_clock');
+      const signed = signRawGcS3Request({method, host: 's3.regru.cloud', path: target, query, body: body ?? '', headers,
+        region: 'us-east-1', accessKeyId, secretAccessKey, at});
+      const signal = AbortSignal.timeout(Math.min(REQUEST_TIMEOUT_MS, remaining));
+      let phase = 'headers', responseStatus;
+      try {
+        const response = await fetcher('https://s3.regru.cloud' + signed.canonicalPath + (signed.canonicalQuery ? '?' + signed.canonicalQuery : ''),
+          {method, headers: signed.headers, body, redirect: 'error', signal});
+        responseStatus = response.status;
+        phase = 'body';
+        const parts = []; let size = 0;
+        for await (const part of response.body ?? []) {
+          size += part.byteLength; need(size <= LIMIT, 'storage_response_size'); parts.push(Buffer.from(part));
+        }
+        return {status: response.status, data: Buffer.concat(parts, size), etag: response.headers.get('etag')};
+      } catch (error) {
+        const cause = transportCause(error, signal);
+        const failure = Error('china_state_' + (phase === 'headers' ? 'storage_transport' : 'storage_response_incomplete'));
+        failure.stateStorageFailure = checkedChinaStateStorageFailure({version: 1, kind: 'china-state-storage-failure-v1',
+          method, target: name ?? 'bucket', part: Object.hasOwn(query, 'acl') ? 'acl'
+            : Object.hasOwn(query, 'policy') ? 'policy' : 'document', phase, attempts, cause});
+        // HTTP/ACL/schema failures are checked outside this transport catch and
+        // cannot be retried. An unknown exception (including blocked redirects)
+        // also fails closed. Every successful read still undergoes exact CAS,
+        // privacy, document and lease-expiry validation in its original caller.
+        if (method !== 'GET' || attempts >= maxAttempts || !TRANSIENT_READ_CAUSES.has(cause)
+          || responseStatus !== undefined && ![200, 404].includes(responseStatus)
+          || deadline - clock() <= READ_RETRY_DELAY_MS) throw failure;
+        await pause(READ_RETRY_DELAY_MS);
+        if (clock() >= deadline) throw failure;
+      }
+    }
   };
   async function assertPrivateBucket() {
     const acl = await request('GET', null, {acl: ''}); need(acl.status === 200, 'bucket_acl');
