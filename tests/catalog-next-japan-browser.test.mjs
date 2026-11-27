@@ -415,7 +415,7 @@ test('blocked requests never reach fetch or inflate the supplier image counter',
 
 test('only the literal legacy Japan Mazda/3 bookmark may follow a safe same-origin document redirect',async()=>{
  const origin='https://avtocena.com/cars/japan?'+new URLSearchParams({make:'Mazda',model:'3',city:'Новокузнецк'});
- const canonical=origin.replace('model=3','model=MAZDA3');
+ const canonical='https://avtocena.com/cars/japan/Mazda/3?'+new URLSearchParams({city:'Новокузнецк'});
  for(const status of [301,302,307,308]){
   assert.equal(japanLegacyMazdaReadRedirect({from:origin,to:canonical,method:'GET',resourceType:'document',status}),true);
   const {calls,report}=await fencedRequest({url:origin,method:'GET',resourceType:'document',status,location:canonical});
@@ -425,6 +425,10 @@ test('only the literal legacy Japan Mazda/3 bookmark may follow a safe same-orig
  for(const target of [
   'https://supplier.example/cars/japan?make=Mazda&model=MAZDA3&city='+encodeURIComponent('Новокузнецк'),
   'https://avtocena.com/api/internal/probe',
+  canonical+'&market=japan',
+  canonical.replace('/Mazda/3?','/Mazda/AXELA?'),
+  canonical.replace('/Mazda/3?','/Toyota/3?'),
+  canonical.replace('city=','city=Wrong-'),
   'https://avtocena.com/cars/japan?make=Mazda&model=AXELA&city='+encodeURIComponent('Новокузнецк'),
   'https://avtocena.com/cars/japan?make=Toyota&model=MAZDA3&city='+encodeURIComponent('Новокузнецк'),
   'https://avtocena.com/cars/japan?make=Mazda&model=MAZDA30&city='+encodeURIComponent('Новокузнецк'),
