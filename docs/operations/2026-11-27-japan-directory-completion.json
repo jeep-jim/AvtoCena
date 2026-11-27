@@ -88,7 +88,7 @@
     },
     "allSelectedNativeTestFilesVerified": true,
     "fullSingleInvocationPassed": false,
-    "hostedFullNativeSuite": "pending",
+    "hostedFullNativeSuite": "Verify64 passed 557/557 in one clean hosted invocation; the preceding local incomplete invocation is preserved above.",
     "sourceTypecheck": "passed",
     "exactSourceAndPricingProof": "passed",
     "exactProof": {
@@ -114,43 +114,153 @@
     "frozenSpeedBaselines": "unchanged; observed timing is nonblocking for the exact58/59 owner-authorized profiles"
   },
   "publication": {
-    "status": "cancelled_before_build_and_host",
-    "runId": 46040340638,
-    "runNumber": 31,
-    "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/46040340638",
-    "releaseCommit": "400da6f50fa12606c7625e0382a0441fa4eb5381",
-    "approvedControllerSha": "cb293d98fca55acc4ec2a027c2fae71899d6d69c",
+    "status": "rolled_back",
+    "runId": 46046207658,
+    "runNumber": 32,
+    "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/46046207658",
+    "releaseCommit": "aa0d0c0b15c3d0e7fc913c8fa3fb08ecab4af679",
+    "approvedControllerSha": "ced75a511f9009d48faaed3f16e9f83cc947f024",
     "runtimeSha": "b9e9122b75f4e588088d0241476b18df7f047d96",
     "runtimeTree": "4e2c36e461416d6db7d0f52753c9a933d626dd5c",
     "acceptancePolicy": "japan-functional-observed-timing-v1",
     "lastConfirmedAcceptedRuntime": "a5ca426eec2663eb17c2df69fe2bfed46e2b8740",
-    "liveAcceptance": "not reached; retry fixture was cancelled before build/host",
-    "latestObservedStage": "prehost_real_directory_retry_fixture",
-    "buildStarted": false,
-    "hostContactStarted": false,
-    "statusObservedAt": "2026-11-27T17:30:34Z",
-    "fixtureOutcome": "cancelled without a JSON/stdout retry result; exact blocked action cannot be established from old run",
-    "fixtureStartedAt": "2026-11-27T17:19:00Z",
-    "conclusion": "cancelled",
-    "terminalObservedAt": "2026-11-27T17:42:35.610Z",
-    "artifactId": 15221297762,
-    "artifactBytes": 2009,
-    "artifactSha256": "74d4def35463e28f1cb1ee77c47a19a04414189d2cd91c4501bef432dc904226",
-    "artifactContents": [
-      "legacy redirect fixture report",
-      "model controls readiness fixture report"
+    "liveAcceptance": "failed at model option uniqueness before selecting a model",
+    "latestObservedStage": "terminal_rollback_confirmed",
+    "statusObservedAt": "2026-11-27T18:21:40Z",
+    "allPrebuildFixtures": "passed",
+    "retryBrowserCasesPassed": 3,
+    "buildAndIsolatedImageRoundtrip": "passed",
+    "conclusion": "failure",
+    "finishedAt": "2026-11-27T18:20:08.763Z",
+    "published": false,
+    "recovered": true,
+    "retentionPreserved": true,
+    "leaseReleased": true,
+    "errorCode": "china_daily_release_japan_browser_failed",
+    "browserError": {
+      "stage": "stability_model_selection",
+      "code": "japan_browser_stability_model_duplicate",
+      "timeout": false
+    },
+    "modelSelectionProgress": {
+      "phase": "model_options",
+      "readyChecks": 2,
+      "brandExpanded": true,
+      "brandUrlMatched": true,
+      "modelOptions": 9
+    },
+    "artifactId": 15222913542,
+    "artifactBytes": 8300413,
+    "artifactSha256": "11ffa9c2b18e2e0cbdbcea37a4903525ae687db064978ea3afbabebb6bd19927",
+    "artifactCrcVerified": true,
+    "aggregateReportSha256": "6ee5da5db289dedb30d957d3b737ef9d7d49f53becfc8eb2ce40e3fb75c2c76e",
+    "browserReportSha256": "27051b809fe44219e829e919d4fc8ed6b1934bbef124c5f4c2ca4fd3cacb52ac",
+    "failureScreenshotSha256": "09d64d634cb7d2caa6066edcc3476a07ca215356791e02456624623f423c78b6",
+    "screenshotsVerified": 17,
+    "imageReceiptSha256": "b9a0b83bd1c8de516db1c65c32c308f11ec2c38be5ab8fbb18c1427965787509",
+    "serverTiming": {
+      "version": 1,
+      "kind": "japan-server-timing-observation-v1",
+      "release": "b9e9122b75f4e588088d0241476b18df7f047d96",
+      "nonce": "814f043959411a524891b97784c4cf24",
+      "timingPolicy": "japan-functional-observed-timing-v1",
+      "speedGateRequired": false,
+      "speedPassed": null,
+      "timingObserved": true,
+      "broadServerBenchmarkExecuted": false,
+      "healthSeconds": 0.0036,
+      "baselineSha256": "32fba449b77e40983803483ea7b6cb4ece09afa997c2ae08dd968c675f528c59"
+    },
+    "appImageCleanup": {
+      "version": 1,
+      "kind": "china-terminal-app-image-cleanup-v1",
+      "completed": true,
+      "status": "removed",
+      "uncertain": false,
+      "imagesRemoved": 1,
+      "runtimeSha": "b9e9122b75f4e588088d0241476b18df7f047d96",
+      "imageId": "sha256:e6e4830a57d280c782e78e8625598ea17787ad3a9d830f7c8113fae7b49e1ac6",
+      "witnessSha256": "5272eea6fddd57084d93f43b6f935167b2be89d76d6b9ddbf7ca456b47236f77",
+      "diskFreeBytesBefore": 46345293824,
+      "diskFreeBytesAfter": 47537057792,
+      "measuredFreeBytesChange": 1191763968,
+      "reason": "exact_terminal_image"
+    },
+    "livePassed": {
+      "japanFreshnessPassed": true,
+      "japanPowerApiPassed": true,
+      "japanUiPassed": true,
+      "japanVisibilityPassed": true,
+      "japanPetrolPowerUiPassed": true,
+      "japanDetailPowerInputPassed": true,
+      "japanDeliveredCalculationPassed": true,
+      "japanFullPagesPassed": true,
+      "japanPagination24Passed": true,
+      "japanCatalogWarningRemovedPassed": true,
+      "japanModelSelectionPassed": false,
+      "japanCombinedFiltersPassed": false,
+      "japanRelatedCardsPassed": false,
+      "japanVehiclePolicyPassed": false,
+      "japanPowerOrderPassed": true,
+      "japanBrandDirectoryPassed": true
+    },
+    "legacyModelSelection": {
+      "status": 200,
+      "shown": 24,
+      "received": 24,
+      "observedAt": "2026-11-27T18:19:00.940Z",
+      "ageSeconds": 1.878,
+      "stale": false,
+      "partial": false,
+      "total": null,
+      "hasMore": true,
+      "make": "Mazda",
+      "model": "3",
+      "resolvedFamily": "MAZDA3",
+      "sourceFamilyModels": 1,
+      "rowModelsMatched": true,
+      "literalBookmarkChecked": true,
+      "canonicalRedirect": {
+        "status": 308,
+        "redirects": 1,
+        "sameOrigin": true,
+        "exactTarget": true,
+        "mainFrame": true
+      },
+      "uiMatchesApi": true,
+      "cityPreserved": true,
+      "pageErrors": 0
+    },
+    "fullSourceBrands": {
+      "desktop": 44,
+      "mobile": 44,
+      "fresh": true,
+      "metadataReadsPerControl": 1,
+      "retryUsed": false
+    },
+    "productionMutations": 0,
+    "directSupplierApiRequests": 0,
+    "uncompletedJourneys": [
+      "model selection",
+      "combined filters",
+      "related cards",
+      "vehicle policy"
     ],
-    "retryFixtureReportPresent": false,
-    "aggregateReleaseReportPresent": false,
-    "imageReceiptPresent": false,
-    "liveReportPresent": false
+    "actualRawModelOptions": "not captured; nine options reported but exact conflicting pair is not asserted",
+    "terminalPhases": {
+      "candidateCheckedAt": "2026-11-27T18:16:59.842Z",
+      "activationAt": "2026-11-27T18:17:06.010Z",
+      "japanBrowserAt": "2026-11-27T18:17:10.053Z",
+      "cleanupAt": "2026-11-27T18:19:45.290Z"
+    },
+    "terminalObservedAt": "2026-11-27T18:21:40Z"
   },
   "maintenance": {
-    "status": "prepared_not_active",
+    "status": "prepared_not_active_after_release32_rollback",
     "activationRequires": "An actually accepted new runtime, then a fresh exact current/rollback observation; do not run any observer bound to rolled-back releases.",
-    "preparedCoreCommit": "8e793ed69bea753ab3c8ee35f6b2cd92324ab004",
-    "preparedObserverCommit": "0c7135c5c6e360194dc7eb9e7a9706c818652580",
-    "observerTargetRunId": 46025367220,
+    "preparedCoreCommit": "a343764fad4ef6d444bdd6a8b62842ac2f370c02",
+    "preparedObserverCommit": "5df222eb1377a02b1bbd08b2ab21ecbd11702b86",
+    "observerTargetRunId": 46046207658,
     "retargetTests": 20,
     "retargetPassed": 20,
     "independentRetargetReview": "passed",
@@ -183,6 +293,31 @@
       "regPinsUnchanged": true,
       "markerCreated": false,
       "activationRequires": "Actual accepted release31, then stable verified current and rollback observation; observer remains GET-only."
+    },
+    "release29Preparation": {
+      "status": "parked_after_release29_rollback_not_published_or_activated",
+      "coreCommit": "8e793ed69bea753ab3c8ee35f6b2cd92324ab004",
+      "observerCommit": "0c7135c5c6e360194dc7eb9e7a9706c818652580",
+      "targetRunId": 46025367220,
+      "targetedTestsPassed": 20,
+      "independentReview": "passed"
+    },
+    "release32Preparation": {
+      "status": "parked_after_release32_rollback_not_published_or_activated",
+      "coreCommit": "a343764fad4ef6d444bdd6a8b62842ac2f370c02",
+      "observerCommit": "5df222eb1377a02b1bbd08b2ab21ecbd11702b86",
+      "tree": "af733313259d819f88ad757c3c03ff5aaa7a2684",
+      "targetRunId": 46046207658,
+      "targetAttempt": 1,
+      "targetRevision": "aa0d0c0b15c3d0e7fc913c8fa3fb08ecab4af679",
+      "runtimeSha": "b9e9122b75f4e588088d0241476b18df7f047d96",
+      "targetedTestsPassed": 20,
+      "targetedTestsFailed": 0,
+      "independentReview": "passed against the exact core and observer commits",
+      "coreUnchanged": true,
+      "regPinsUnchanged": true,
+      "markerCreated": false,
+      "activationRequires": "Actual accepted release32, then stable verified current and rollback observation; observer remains GET-only."
     }
   },
   "verificationAttempts": [
@@ -209,9 +344,9 @@
     }
   ],
   "remaining": [
-    "Publish the reviewed HTTP error-body fix; require actual 3/3 Chromium Retry cases before the next release, then complete hosted native557 and live Japan acceptance.",
+    "Publish the reviewed exact model-option identity controller correction and complete the four actual runtime browser cases in hosted verification.",
     "Complete own live Japan functional acceptance with retained data and rollback protection; observed latency is not a release veto.",
-    "Retarget and activate authorized maintenance against the actually accepted run and observed current/rollback pair."
+    "Retarget maintenance to the actually accepted run, observe actual current/rollback, rebind the two authorized REG runtime pins, finish retention lease-free, then activate guarded AJ compaction and verify its actual report."
   ],
   "precedingCandidate": {
     "runtimeSha": "a4f23e648d3de2a8a23c9a16942a286b91bb39b4",
@@ -271,40 +406,67 @@
   },
   "hostedVerification": {
     "status": "completed",
-    "runId": 46043784741,
-    "runNumber": 63,
-    "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/46043784741",
-    "controllerSha": "2ae99fa1e672c3e9a35a428b6253a376bfd9fb0b",
+    "runId": 46045571108,
+    "runNumber": 64,
+    "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/46045571108",
+    "controllerSha": "ced75a511f9009d48faaed3f16e9f83cc947f024",
     "runtimeSha": "b9e9122b75f4e588088d0241476b18df7f047d96",
+    "runtimeTree": "4e2c36e461416d6db7d0f52753c9a933d626dd5c",
     "acceptancePolicy": "japan-functional-observed-timing-v1",
-    "conclusion": "failure",
-    "requiredNativeTests": 557,
-    "retryBrowserFixture": "failed",
-    "controllerTests": 1613,
-    "controllerPassed": 1613,
+    "conclusion": "success",
+    "controllerTests": 1615,
+    "controllerPassed": 1615,
     "controllerFailed": 0,
+    "nativeTests": 557,
+    "nativePassed": 557,
+    "nativeFailed": 0,
+    "nativeSuiteReached": true,
+    "webTypecheck": "passed",
+    "engineTypecheck": "passed",
     "legacyBrowserCases": 8,
     "modelReadinessBrowserCases": 2,
-    "retryBrowserCasesPassed": 1,
+    "retryBrowserFixture": "passed",
+    "retryBrowserCasesPassed": 3,
     "retryBrowserCasesRequired": 3,
-    "nativeSuiteReached": false,
-    "retryArtifactId": 15221623529,
-    "retryArtifactBytes": 45369,
-    "retryArtifactSha256": "4eb2ab668321240478444b1cc9155f1b0c40344a67e08f04d6415186fe350b12",
-    "retryReportSha256": "57343dafd10d9ce15ba44b23d6fd666a207d1678bed6fac88c4292cb046eb8e8",
-    "retryScreenshotSha256": "21a7c9ff7189dbc79c4f797146241f1b42a256ddc2c91401361e64383acfd219",
+    "allOtherRequiredFixtures": "passed",
+    "retryArtifactId": 15222955812,
+    "retryArtifactBytes": 2263,
+    "retryArtifactSha256": "81022975f9bfdbf80d481a254ce3e43703d0776254b0e17162edffb42e3267a6",
+    "retryReportBytes": 9104,
+    "retryReportSha256": "01b6518cea8f9acde03000e449fcf7811ab373fde7ba02190431a020c5bc9ffd",
     "artifactCrcVerified": true,
-    "retryFailure": {
-      "case": "desktop_dropdown_and_ssr_rail_recover_with_controls_remount",
-      "phase": "helper_metadata_initial",
-      "code": "japan_directory_retry_fixture_deadline",
-      "mobileCasePassed": true,
-      "preCleanupAttempts": 0,
-      "postCleanupFirstAttemptStatus": 503,
-      "desktopDom": "hydrated, non-busy, brand expanded, unavailable dropdown with one source fallback and Retry; rail unavailable; one card",
-      "preciseUnderlyingBrowserTransportCause": "not established",
-      "controllerCodeLocation": "unbounded response.json before attempt record; non-200 bodies are not used by the validator or permitted fallback names"
-    }
+    "controllerHelperSha256": "6f634ab01b0299d06d99182c75de0b15922ed16c85f14ed7fda276a58ed09ce1",
+    "retryCases": [
+      {
+        "name": "mobile_empty_directory_recovers_once",
+        "passed": true,
+        "actualMobileDialog": true,
+        "metadataRequests": 2,
+        "railRefreshRequests": 0
+      },
+      {
+        "name": "desktop_dropdown_and_ssr_rail_recover_with_controls_remount",
+        "passed": true,
+        "metadataRequests": 2,
+        "railRefreshRequests": 1,
+        "controlsRemounted": true,
+        "cachedSuccessReusedAfterRemount": true
+      },
+      {
+        "name": "persistent_empty_directory_refused_after_one_retry",
+        "passed": true,
+        "metadataRequests": 2,
+        "railRefreshRequests": 0,
+        "refusalCode": "japan_browser_stability_brand_directory_rows"
+      }
+    ],
+    "fallbackAcceptedAsComplete": false,
+    "selectionUnchanged": true,
+    "cityPreserved": true,
+    "productionRequests": 0,
+    "supplierRequests": 0,
+    "forbiddenTransportAttempts": 0,
+    "runUpdatedAt": "2026-11-27T18:01:26Z"
   },
   "latestOwnerDirection": {
     "date": "2026-11-27",
@@ -784,6 +946,38 @@
         ],
         "newModelJourneyReached": false
       }
+    },
+    {
+      "status": "cancelled_before_build_and_host",
+      "runId": 46040340638,
+      "runNumber": 31,
+      "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/46040340638",
+      "releaseCommit": "400da6f50fa12606c7625e0382a0441fa4eb5381",
+      "approvedControllerSha": "cb293d98fca55acc4ec2a027c2fae71899d6d69c",
+      "runtimeSha": "b9e9122b75f4e588088d0241476b18df7f047d96",
+      "runtimeTree": "4e2c36e461416d6db7d0f52753c9a933d626dd5c",
+      "acceptancePolicy": "japan-functional-observed-timing-v1",
+      "lastConfirmedAcceptedRuntime": "a5ca426eec2663eb17c2df69fe2bfed46e2b8740",
+      "liveAcceptance": "not reached; retry fixture was cancelled before build/host",
+      "latestObservedStage": "prehost_real_directory_retry_fixture",
+      "buildStarted": false,
+      "hostContactStarted": false,
+      "statusObservedAt": "2026-11-27T17:30:34Z",
+      "fixtureOutcome": "cancelled without a JSON/stdout retry result; exact blocked action cannot be established from old run",
+      "fixtureStartedAt": "2026-11-27T17:19:00Z",
+      "conclusion": "cancelled",
+      "terminalObservedAt": "2026-11-27T17:42:35.610Z",
+      "artifactId": 15221297762,
+      "artifactBytes": 2009,
+      "artifactSha256": "74d4def35463e28f1cb1ee77c47a19a04414189d2cd91c4501bef432dc904226",
+      "artifactContents": [
+        "legacy redirect fixture report",
+        "model controls readiness fixture report"
+      ],
+      "retryFixtureReportPresent": false,
+      "aggregateReleaseReportPresent": false,
+      "imageReceiptPresent": false,
+      "liveReportPresent": false
     }
   ],
   "controllerNavigationRepair": {
@@ -930,6 +1124,43 @@
       "legacyBrowserCases": 8,
       "modelReadinessBrowserCases": 2,
       "terminalObservedAt": "2026-11-27T17:42:41.102Z"
+    },
+    {
+      "status": "completed",
+      "runId": 46043784741,
+      "runNumber": 63,
+      "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/46043784741",
+      "controllerSha": "2ae99fa1e672c3e9a35a428b6253a376bfd9fb0b",
+      "runtimeSha": "b9e9122b75f4e588088d0241476b18df7f047d96",
+      "acceptancePolicy": "japan-functional-observed-timing-v1",
+      "conclusion": "failure",
+      "requiredNativeTests": 557,
+      "retryBrowserFixture": "failed",
+      "controllerTests": 1613,
+      "controllerPassed": 1613,
+      "controllerFailed": 0,
+      "legacyBrowserCases": 8,
+      "modelReadinessBrowserCases": 2,
+      "retryBrowserCasesPassed": 1,
+      "retryBrowserCasesRequired": 3,
+      "nativeSuiteReached": false,
+      "retryArtifactId": 15221623529,
+      "retryArtifactBytes": 45369,
+      "retryArtifactSha256": "4eb2ab668321240478444b1cc9155f1b0c40344a67e08f04d6415186fe350b12",
+      "retryReportSha256": "57343dafd10d9ce15ba44b23d6fd666a207d1678bed6fac88c4292cb046eb8e8",
+      "retryScreenshotSha256": "21a7c9ff7189dbc79c4f797146241f1b42a256ddc2c91401361e64383acfd219",
+      "artifactCrcVerified": true,
+      "retryFailure": {
+        "case": "desktop_dropdown_and_ssr_rail_recover_with_controls_remount",
+        "phase": "helper_metadata_initial",
+        "code": "japan_directory_retry_fixture_deadline",
+        "mobileCasePassed": true,
+        "preCleanupAttempts": 0,
+        "postCleanupFirstAttemptStatus": 503,
+        "desktopDom": "hydrated, non-busy, brand expanded, unavailable dropdown with one source fallback and Retry; rail unavailable; one card",
+        "preciseUnderlyingBrowserTransportCause": "not established",
+        "controllerCodeLocation": "unbounded response.json before attempt record; non-200 bodies are not used by the validator or permitted fallback names"
+      }
     }
   ],
   "controllerModelControlsRepair": {
@@ -1095,7 +1326,7 @@
     }
   ],
   "sourceDirectoryRecovery": {
-    "status": "published_source_hosted_acceptance_pending",
+    "status": "published_source_verified_hosted_and_live_directory_release_rolled_back_later_at_model_selection",
     "runtimeSha": "b9e9122b75f4e588088d0241476b18df7f047d96",
     "productionFileBlob": "90c9a3efa0ccdea6952bba3ed0e04389ed8a2201",
     "independentReproduction": "On d635, an injected first empty aggregate was stored fresh and reused by the same client and a new client despite recovered source.",
@@ -1112,7 +1343,7 @@
   "controllerDirectoryRetryRepair": {
     "localReviewedCommit": "03d9852214beca23b434da14ecd739a89dc639c8",
     "scopeReviewedCommit": "d6c30e07c28cddf79b66da7db1b67a8274bbff51",
-    "status": "hosted_fixture_not_completed_prehost_diagnostics_being_corrected",
+    "status": "hosted_verified_all_three_cases",
     "requiredActualBrowserCases": 3,
     "cases": [
       "actual_mobile_empty_then_retry",
@@ -1130,10 +1361,10 @@
     "proof": "Fresh complete counts, source aliases, visible names, card identity, URL/city/selections and read-only fence remain mandatory; fallback never completes acceptance.",
     "hostedFixture": "required before build and host contact in both release and verification workflows",
     "diagnostics": "Safe bounded status/counts shape/hash/validation enums; no raw payload or source names",
-    "controllerSha": "cb293d98fca55acc4ec2a027c2fae71899d6d69c",
+    "controllerSha": "ced75a511f9009d48faaed3f16e9f83cc947f024",
     "lifecycleFinding": "The fixture emits its report only after context/browser/server cleanup; this can withhold failure evidence if cleanup does not settle. Exact blocked action in runs31/62 is not yet proven.",
     "fixtureLifecycleRepair": {
-      "status": "published_hosted_verification_in_progress",
+      "status": "published_and_hosted_verified_with_http_error_body_fix",
       "localReviewedCommit": "73c06b684b6de1e5cbc8969562044fadcba854ba",
       "focusedTestsPassed": 20,
       "focusedTestsFailed": 0,
@@ -1152,12 +1383,14 @@
       ],
       "productionRuntimeUnchanged": "b9e9122b75f4e588088d0241476b18df7f047d96",
       "productionHelperAndFunctionalAssertions": "unchanged",
-      "hostedRetryOutcome": "pending; original blocked action not yet established",
+      "hostedRetryOutcome": "Verify64 passed 3/3; Verify63 diagnostic failure preserved in previousHostedVerifications",
       "controllerSha": "2ae99fa1e672c3e9a35a428b6253a376bfd9fb0b",
-      "runId": 46043784741
+      "runId": 46043784741,
+      "verifiedRunId": 46045571108,
+      "verifiedControllerSha": "ced75a511f9009d48faaed3f16e9f83cc947f024"
     },
     "httpErrorBodyFix": {
-      "status": "prepared_reviewed_for_hosted_verification",
+      "status": "published_hosted_verified",
       "localReviewedCommit": "e0814436b200bb810671abfbd36618510503221b",
       "changedPaths": [
         "scripts/catalog-next/japan-stability-browser.mjs",
@@ -1169,7 +1402,9 @@
       "targetedTestsFailed": 0,
       "independentReview": "passed",
       "runtimeUnchanged": "b9e9122b75f4e588088d0241476b18df7f047d96",
-      "hostedThreeCases": "pending"
+      "hostedThreeCases": "passed 3/3 in Verify64 and in release32 prebuild fixture",
+      "controllerSha": "ced75a511f9009d48faaed3f16e9f83cc947f024",
+      "verifiedRunId": 46045571108
     }
   },
   "stalledPreflightCancellation": {
@@ -1273,5 +1508,57 @@
       "observedAt": "2026-11-27T17:42:41.103Z",
       "controllerSha": "473877a4b9cbf952f2f1f1016449a74c9ee15550"
     }
+  },
+  "controllerModelOptionRepair": {
+    "status": "prepared_reviewed_for_hosted_verification",
+    "runtimeSha": "b9e9122b75f4e588088d0241476b18df7f047d96",
+    "runtimeContract": "japanSourceModelOptions preserves unique exact [make,model] tuples, including literal supplier make and model spelling variants.",
+    "controllerMismatch": "selectJapanStabilityModel rejects repeated normalized(model) without make; selected_option_identity also matches model alone.",
+    "actualComponentReproduction": {
+      "tuples": [
+        [
+          "MAZDA",
+          "CAROL"
+        ],
+        [
+          "Mazda",
+          "CAROL"
+        ],
+        [
+          "MAZDA",
+          "MAZDA2"
+        ],
+        [
+          "Mazda",
+          "Mazda2"
+        ]
+      ],
+      "oldControllerError": "japan_browser_stability_model_duplicate"
+    },
+    "evidenceQualification": "Reproduced against the exact B9 exported component function. The exact nine live tuples were not captured and are not claimed reconstructed.",
+    "localReviewedCommit": "2d4c39ca74787ae3256bbfdafb380866c4a78d37",
+    "changedPaths": [
+      "scripts/catalog-next/japan-stability-browser.mjs",
+      "tests/browser/japan-model-controls-ready.mjs",
+      "tests/catalog-next-japan-model-controls-ready.test.mjs"
+    ],
+    "exactTupleRegressionsRedBeforeFix": 3,
+    "affectedTestsPassed": 66,
+    "affectedTestsFailed": 0,
+    "modelReadinessTestsPassed": 22,
+    "independentReview": "passed against the full three-path change",
+    "behavior": "Preserve exact raw make/model tuple identity; refuse a real repeated tuple and non-source options; count and click the exact attribute-bound option so an async metadata reorder cannot redirect the click. Keep exact canonical URL, city and hidden/visible model checks.",
+    "diagnostics": "Bounded pair/name counts and tuple hash, without raw source names.",
+    "requiredActualBrowserCases": 4,
+    "browserCases": [
+      "delayed_hydration_preserved_controls",
+      "delayed_hydration_remounted_controls",
+      "exact_source_make_and_model_variants",
+      "exact_tuple_after_metadata_extension_and_reorder"
+    ],
+    "localBrowserFixturePreparation": "Syntax/diff and local bundle/SSR passed on d635 after byte equality of all six fixture component files to exact B9. No local actual Chromium pass is claimed.",
+    "hostedFourCases": "pending",
+    "runtimeUnchanged": "b9e9122b75f4e588088d0241476b18df7f047d96",
+    "workflowsAndAcceptancePolicy": "unchanged"
   }
 }

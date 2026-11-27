@@ -24,6 +24,62 @@ const SOURCE_FILES = ['apps/web/components/catalog/CatalogFilters.tsx',
   'apps/web/components/catalog/CatalogSelectionContext.tsx', 'apps/web/lib/catalog/catalog-routes.ts',
   'tests/browser/japan-catalog-city-fixture.tsx'];
 const MODELS = {version: 1, brands: [], models: [['MAZDA', 'MAZDA3 FASTBACK', [], 12]], stale: false};
+const SOURCE_VARIANTS = [{make: 'MAZDA', model: 'CAROL'}, {make: 'Mazda', model: 'CAROL'},
+  {make: 'MAZDA', model: 'MAZDA2'}, {make: 'Mazda', model: 'Mazda2'}];
+const VARIANT_MODELS = {...MODELS, models: [['MAZDA', 'CAROL', [], 12], ['MAZDA', 'MAZDA2', [], 8]]};
+const EXTENDED_MODELS = {...VARIANT_MODELS, models: [['MAZDA', 'AXELA', [], 6], ...VARIANT_MODELS.models]};
+const MODEL_OPTION_SELECTOR = 'button[data-model-value]:visible';
+const tupleKey = value => JSON.stringify([value.make, value.model]);
+
+export function withSourceModelRows(fixture) {
+  const replacements = [
+    ['JapanCityFixture({initial:serverInitial}:{initial:Record<string,string>})',
+      'JapanCityFixture({initial:serverInitial,sourceModelRows=[]}:{initial:Record<string,string>;sourceModelRows?:Array<{make:string;model:string}>})'],
+    ['facets={{makes:[],models:[],', 'facets={{makes:[],models:sourceModelRows,'],
+    ['<JapanCityFixture initial={(window as any).__japanCityInitial}/>',
+      '<JapanCityFixture initial={(window as any).__japanCityInitial} sourceModelRows={(window as any).__japanSourceModelRows||[]}/>'],
+  ];
+  for (const [before, after] of replacements) {
+    need(fixture.split(before).length === 2, 'source_rows_fixture_contract'); fixture = fixture.replace(before, after);
+  }
+  return fixture;
+}
+
+/** Delay only the return of one real DOM snapshot while a real, held metadata
+ * response extends the actual component. Every locator and click remains a
+ * Playwright operation; no option DOM or event handler is replaced. */
+function viewWithLateModelMetadata(page, state) {
+  return new Proxy(page, {get(target, property) {
+    if (property !== 'locator') { const value = Reflect.get(target, property, target); return typeof value === 'function' ? value.bind(target) : value; }
+    return (...args) => {
+      const locator = target.locator(...args);
+      if (args[0] !== MODEL_OPTION_SELECTOR) return locator;
+      return new Proxy(locator, {get(real, key) {
+        if (key !== 'evaluateAll') { const value = Reflect.get(real, key, real); return typeof value === 'function' ? value.bind(real) : value; }
+        return async (...readArgs) => {
+          const snapshot = await real.evaluateAll(...readArgs);
+          if (state.snapshotReleased) return snapshot;
+          state.snapshotReleased = true;
+          need(Array.isArray(snapshot) && snapshot.length === SOURCE_VARIANTS.length
+            && new Set(snapshot.map(tupleKey)).size === SOURCE_VARIANTS.length, 'source_variant_snapshot');
+          const originalIndex = snapshot.findIndex(row => tupleKey(row) === tupleKey(state.expected));
+          need(originalIndex >= 0 && !snapshot.some(row => row.model === 'AXELA'), 'initial_selected_tuple');
+          state.releaseModels();
+          await page.locator('button[data-model-value="AXELA"][data-model-make="MAZDA"]:visible')
+            .waitFor({state: 'visible', timeout: 5000});
+          const current = await page.locator(MODEL_OPTION_SELECTOR).evaluateAll(nodes => nodes.map(node =>
+            ({model: node.getAttribute('data-model-value'), make: node.getAttribute('data-model-make')})));
+          const currentIndex = current.findIndex(row => tupleKey(row) === tupleKey(state.expected));
+          need(current.length > snapshot.length && currentIndex >= 0 && currentIndex !== originalIndex
+            && tupleKey(current[originalIndex]) !== tupleKey(state.expected), 'metadata_changed_option_index');
+          state.reorder = {snapshotCount: snapshot.length, currentCount: current.length,
+            originalIndex, currentIndex, originalTupleAtOldIndex: tupleKey(current[originalIndex]) === tupleKey(state.expected)};
+          return snapshot;
+        };
+      }});
+    };
+  }});
+}
 
 /** The controller supplies only transport and lifecycle assertions. Every
  * component is bundled from the independently verified runtime checkout. */
@@ -69,10 +125,10 @@ export async function prepareJapanModelControlsFixture(runtimeRoot, plan, {extra
   try {
     await build({...common, stdin: {contents: "import 'fixture:runtime-controls';", resolveDir: runtimeRoot, loader: 'js'},
       platform: 'browser', format: 'iife', outfile: path.join(temporary, 'fixture.js')});
-    await build({...common, stdin: {contents: `import React from 'react';import {renderToString} from 'react-dom/server';import {JapanCityFixture} from 'fixture:runtime-controls';export const render=initial=>renderToString(React.createElement(JapanCityFixture,{initial}));`, resolveDir: runtimeRoot, loader: 'tsx'},
+    await build({...common, stdin: {contents: `import React from 'react';import {renderToString} from 'react-dom/server';import {JapanCityFixture} from 'fixture:runtime-controls';export const render=(initial,fixtureProps={})=>renderToString(React.createElement(JapanCityFixture,{initial,...fixtureProps}));`, resolveDir: runtimeRoot, loader: 'tsx'},
       platform: 'node', format: 'cjs', outfile: path.join(temporary, 'server.cjs')});
     const {render} = require(path.join(temporary, 'server.cjs'));
-    const renderMarkup = initial => render(initial).replace(/(<style[^>]*>)([\s\S]*?)(<\/style>)/g,
+    const renderMarkup = (initial, fixtureProps = {}) => render(initial, fixtureProps).replace(/(<style[^>]*>)([\s\S]*?)(<\/style>)/g,
       (_all, open, css, close) => open + css.replace(/&gt;/g, '>').replace(/&lt;/g, '<').replace(/&quot;/g, '"').replace(/&#x27;/g, "'").replace(/&amp;/g, '&') + close);
     const markup = renderMarkup({market: 'japan', city: CITY});
     need(markup.includes('aria-label="Расширенные фильтры"') && markup.includes('aria-busy="true"'), 'actual_ssr_marker');
@@ -92,7 +148,7 @@ async function main() {
   try {
     need(process.argv.length === 2, 'arguments');
     const plan = JSON.parse(await fs.readFile(path.join(ROOT, '.github/operations/catalog-next/china-code-serving-plan.json'), 'utf8'));
-    fixture = await prepareJapanModelControlsFixture(process.env.PHOTO_RUNTIME_ROOT, plan);
+    fixture = await prepareJapanModelControlsFixture(process.env.PHOTO_RUNTIME_ROOT, plan, {transformFixture: withSourceModelRows});
     Object.assign(report, {runtimeSha: plan.runtimeSha, runtimeTree: plan.runtimeTree, componentSha256: fixture.sources,
       controllerHelperSha256: hash(await fs.readFile(path.join(ROOT, 'scripts/catalog-next/japan-stability-browser.mjs')))});
     need(path.isAbsolute(process.env.PLAYWRIGHT_MODULE || '') && path.isAbsolute(process.env.CHROME_BIN || ''), 'browser_environment');
@@ -111,16 +167,22 @@ async function main() {
           need(url.searchParams.get('market') === 'japan' && !url.searchParams.has('stock'), 'metadata_scope');
           response.setHeader('Content-Type', 'application/json');
           if (url.pathname === '/api/catalog/brand-counts') {
-            active.brandRequests++; response.end(JSON.stringify({generationId: new Date().toISOString(), counts: {MAZDA: 12, NISSAN: 2}, modelCounts: {MAZDA: 1}, stale: false})); return;
+            active.brandRequests++; response.end(JSON.stringify({generationId: new Date().toISOString(), counts: {MAZDA: 12, NISSAN: 2}, modelCounts: {MAZDA: active.models.models.length}, stale: false})); return;
           }
           need(url.pathname === '/api/catalog/source-models' && (!url.searchParams.has('make') || url.searchParams.get('make').toUpperCase() === 'MAZDA'), 'model_metadata_scope');
-          active.modelRequests++; response.end(JSON.stringify(MODELS)); return;
+          const state = active; state.modelRequests++;
+          if (state.extendMetadata) await state.modelsAllowed;
+          response.end(JSON.stringify(state.models)); return;
         }
         need(url.href === INITIAL_URL && active, 'document_scope');
         response.writeHead(200, {'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store'});
         response.end('<!doctype html><html><head><meta charset="utf-8"><link rel="icon" href="data:,"><link rel="stylesheet" href="/fixture.css"></head><body><div class="ac-catalog-sidebar" id="root">'
-          + fixture.markup + '</div><script>window.__japanCityInitial=' + JSON.stringify({market: 'japan', city: CITY})
-          + ';window.__japanModelRemount=' + JSON.stringify(active.remount) + '</script><script async src="/fixture.js"></script></body></html>');
+          + fixture.renderMarkup({market: 'japan', city: CITY}, {sourceModelRows: active.sourceRows})
+          + '</div><script>window.__japanCityInitial=' + JSON.stringify({market: 'japan', city: CITY})
+          + ';window.__japanSourceModelRows=' + JSON.stringify(active.sourceRows)
+          + ';window.__japanModelRemount=' + JSON.stringify(active.remount)
+          + ';window.__japanModelClicks=[];document.addEventListener("click",event=>{const node=event.target.closest?.("button[data-model-value]");if(node)window.__japanModelClicks.push({make:node.getAttribute("data-model-make"),model:node.getAttribute("data-model-value")});},true);'
+          + '</script><script async src="/fixture.js"></script></body></html>');
       } catch { report.forbiddenTransportAttempts++; response.writeHead(400); response.end(); }
     });
     await new Promise((resolve, reject) => { server.once('error', reject); server.listen(0, '127.0.0.1', resolve); });
@@ -128,9 +190,19 @@ async function main() {
     const {chromium} = await import(process.env.PLAYWRIGHT_MODULE);
     browser = await chromium.launch({headless: true, executablePath: process.env.CHROME_BIN, args: ['--no-sandbox', '--disable-background-networking']});
     const version = browser.version(); report.browserVersion = /^\d+(?:\.\d+){1,4}$/.test(version) ? version : null;
-    for (const remount of [false, true]) {
-      activeCase = remount ? 'delayed_hydration_remounted_controls' : 'delayed_hydration_preserved_controls';
-      const state = active = {remount, brandRequests: 0, modelRequests: 0, scriptHeld: false};
+    const scenarios = [
+      {name: 'delayed_hydration_preserved_controls', remount: false, models: MODELS},
+      {name: 'delayed_hydration_remounted_controls', remount: true, models: MODELS},
+      {name: 'exact_source_make_and_model_variants', remount: false, models: VARIANT_MODELS, sourceRows: SOURCE_VARIANTS},
+      {name: 'exact_tuple_after_metadata_extension_and_reorder', remount: true, models: EXTENDED_MODELS,
+        sourceRows: SOURCE_VARIANTS, extendMetadata: true},
+    ];
+    for (const scenario of scenarios) {
+      activeCase = scenario.name;
+      const {remount} = scenario;
+      const state = active = {...scenario, sourceRows: scenario.sourceRows || [], brandRequests: 0, modelRequests: 0,
+        scriptHeld: false, expected: {make: 'MAZDA', model: scenario.sourceRows ? 'CAROL' : 'MAZDA3 FASTBACK'}};
+      state.modelsAllowed = new Promise(resolve => { state.releaseModels = resolve; });
       let releaseScript; const scriptAllowed = new Promise(resolve => { releaseScript = resolve; });
       const context = await browser.newContext({viewport: {width: 1440, height: 1000}, locale: 'ru-RU', serviceWorkers: 'block'});
       const page = await context.newPage(), pageErrors = [];
@@ -162,20 +234,28 @@ async function main() {
         need(await brand.getAttribute('aria-expanded') === 'false' && await form.locator('.ac-filter-dropdown').count() === 0
           && state.brandRequests === 0 && page.url() === INITIAL_URL, 'early_click_lost');
         let settled = false;
-        const selection = selectJapanStabilityModelThroughUi({view: page, directory: checkedJapanStabilityDirectory(MODELS, 200), progress})
+        const selection = selectJapanStabilityModelThroughUi({view: state.extendMetadata ? viewWithLateModelMetadata(page, state) : page,
+          directory: checkedJapanStabilityDirectory(state.models, 200), progress})
           .then(value => { settled = true; return {value}; }, error => { settled = true; return {error}; });
         await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
         need(!settled && progress.phase === 'initial_controls_ready' && (progress.readyChecks ?? 0) === 0
           && await marker.isDisabled() && state.brandRequests === 0, 'helper_waits_for_hydration');
         releaseScript();
         const outcome = await selection; if (outcome.error) throw outcome.error;
-        need(outcome.value.sourceMake === 'MAZDA' && outcome.value.selected.model === 'MAZDA3 FASTBACK', 'source_selection');
+        need(outcome.value.sourceMake === 'MAZDA' && tupleKey(outcome.value.selected) === tupleKey(state.expected), 'source_selection');
+        const clicked = await page.evaluate(() => window.__japanModelClicks);
+        need(clicked.length === 1 && tupleKey(clicked[0]) === tupleKey(state.expected), 'exact_source_tuple_clicked');
+        if (scenario.sourceRows) need(progress.modelOptions === 4 && progress.modelDistinctPairs === 4
+          && progress.modelDistinctNormalizedNames === 2, 'literal_variants_preserved');
+        if (state.extendMetadata) need(state.snapshotReleased && state.reorder?.currentCount > state.reorder?.snapshotCount
+          && state.reorder?.originalIndex !== state.reorder?.currentIndex && state.reorder?.originalTupleAtOldIndex === false,
+          'late_metadata_reordered_before_click');
         need(progress.readyChecks === 3 && progress.brandExpanded === true && progress.brandUrlMatched === true
           && progress.modelUrlMatched === true && progress.selectedValueMatched === true && progress.phase === 'selection_complete', 'completed_real_journey');
         need(progress.modelPopupClose === (remount ? 'already_closed_after_navigation' : 'clicked_close'), 'popup_lifecycle');
         need(await form.locator('input[name="make"]').inputValue() === 'MAZDA'
-          && await form.locator('input[name="model"]').inputValue() === 'MAZDA3 FASTBACK'
-          && await form.locator('input[aria-label="Модель автомобиля"]:visible').inputValue() === 'MAZDA3 FASTBACK'
+          && await form.locator('input[name="model"]').inputValue() === state.expected.model
+          && await form.locator('input[aria-label="Модель автомобиля"]:visible').inputValue() === state.expected.model
           && new URL(page.url()).searchParams.get('city') === CITY, 'final_form_identity');
         need(pageErrors.length === 0 && (await page.evaluate(() => window.__japanCityFixture.errors.length)) === 0
           && report.forbiddenTransportAttempts === 0 && state.brandRequests >= 1 && state.brandRequests <= 4
@@ -183,10 +263,13 @@ async function main() {
         report.cases.push({name: activeCase, passed: true, width: 1440, actualRuntimeComponents: true,
           domContentLoadedBeforeHydration: true, earlyBrandClickLost: true, hiddenReadinessMarker: true,
           helperWaitedForInteractiveEffect: true, exactSourceModelAndCity: true,
+          exactRawTupleClicked: true, sourceCaseVariantsPresent: Boolean(scenario.sourceRows),
+          metadataExtendedAfterSnapshot: Boolean(state.extendMetadata), reorderedBeforeClick: Boolean(state.reorder),
+          ...(state.reorder ? {reorder: state.reorder} : {}),
           brandRequests: state.brandRequests, modelRequests: state.modelRequests, progress: {...progress}});
-      } finally { releaseScript(); await context.close(); active = null; }
+      } finally { releaseScript(); state.releaseModels(); await context.close(); active = null; }
     }
-    delete report.activeProgress; report.passed = report.cases.length === 2;
+    delete report.activeProgress; report.passed = report.cases.length === scenarios.length;
   } catch (error) {
     report.error = {case: activeCase,
       code: /^japan_(?:controls_fixture|browser_stability)_[a-z_]+$/.test(error?.message || '') ? error.message : japanNavigationErrorCode(error)};

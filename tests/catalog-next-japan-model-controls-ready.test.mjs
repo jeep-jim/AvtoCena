@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
-import {selectJapanStabilityModelThroughUi, waitForJapanStabilityControls}
+import {selectJapanStabilityModel, selectJapanStabilityModelThroughUi, waitForJapanStabilityControls}
   from '../scripts/catalog-next/japan-stability-browser.mjs';
 
 const CITY = 'Новокузнецк';
@@ -14,8 +14,9 @@ const deferred = () => { let resolve; const promise = new Promise(done => { reso
 function journey({remount = false, ready = {}, failAt, sourceMake = 'MAZDA',
   options = [{make: 'MAZDA', model: MODEL}, {make: 'MAZDA', model: 'AXELA'}],
   wrongModelUrl = false, wrongSelectedValue = false, duplicateExact = false,
-  popupState = undefined} = {}) {
-  const progress = {}, events = [];
+  popupState = undefined, reorderAfterSnapshot = false} = {}) {
+  const progress = {}, events = [], clicked = [];
+  let optionRows = options;
   let url = 'https://avtocena.com/cars/japan?' + new URLSearchParams({city: CITY});
   let brandExpanded = false, modelExpanded = false, selectedValue = '', modelUrl = false;
   const enter = async value => {
@@ -23,6 +24,12 @@ function journey({remount = false, ready = {}, failAt, sourceMake = 'MAZDA',
     if (value === failAt) { const error = Error('fixture timeout'); error.name = 'TimeoutError'; throw error; }
   };
   const node = value => ({getAttribute: key => key === 'data-model-value' ? value.model : value.make});
+  const choose = async row => {
+    await enter('model:select'); clicked.push(row); selectedValue = row.model;
+    url = 'https://avtocena.com/cars/japan/' + encodeURIComponent(sourceMake) + '/'
+      + encodeURIComponent(wrongModelUrl ? 'OTHER' : selectedValue) + '?' + new URLSearchParams({city: CITY});
+    modelUrl = true; if (remount) modelExpanded = false;
+  };
   const locator = selector => {
     if (selector === 'form.ac-catalog-filter-panel:visible'
       || selector === 'form.ac-catalog-filter-panel:visible[aria-busy="false"]') return {
@@ -77,19 +84,24 @@ function journey({remount = false, ready = {}, failAt, sourceMake = 'MAZDA',
         first() { return {async waitFor(config) {
           assert.deepEqual(config, {state: 'visible', timeout: 60_000}); await enter('model:options');
         }}; },
-        async evaluateAll(fn, arg) { return fn(options.map(node), arg); },
+        async evaluateAll(fn, arg) {
+          const result = fn(optionRows.map(node), arg);
+          if (reorderAfterSnapshot) optionRows = [...optionRows].reverse();
+          return result;
+        },
         filter({hasText}) { return {async evaluateAll(fn, arg) {
-          const matches = options.filter(row => row.model.includes(hasText));
+          const matches = optionRows.filter(row => row.model.includes(hasText));
           return fn((duplicateExact ? [...matches, ...matches] : matches).map(node), arg);
         }}; },
-        nth(index) { return {async click() {
-          await enter('model:select'); selectedValue = options[index].model;
-          url = 'https://avtocena.com/cars/japan/' + encodeURIComponent(sourceMake) + '/'
-            + encodeURIComponent(wrongModelUrl ? 'OTHER' : selectedValue) + '?' + new URLSearchParams({city: CITY});
-          modelUrl = true; if (remount) modelExpanded = false;
-        }}; },
+        nth(index) { return {click: () => choose(optionRows[index])}; },
       };
       return all;
+    }
+    const exact = /^button\[data-model-value=("(?:\\.|[^"\\])*")\]\[data-model-make=("(?:\\.|[^"\\])*")\]:visible$/.exec(selector);
+    if (exact) {
+      const matching = () => optionRows.filter(row => row.model === JSON.parse(exact[1]) && row.make === JSON.parse(exact[2]));
+      return {count: async () => matching().length * (duplicateExact ? 2 : 1),
+        click: async () => { assert.equal(matching().length, 1); await choose(matching()[0]); }};
     }
     assert.fail('unexpected locator: ' + selector);
   };
@@ -102,8 +114,34 @@ function journey({remount = false, ready = {}, failAt, sourceMake = 'MAZDA',
     await enter(modelUrl ? 'model:url' : 'brand:url');
     assert(predicate(new URL(url)), 'exact canonical URL must match');
   }};
-  return {view, progress, events, run: () => selectJapanStabilityModelThroughUi({view, directory, progress})};
+  return {view, progress, events, clicked, run: () => selectJapanStabilityModelThroughUi({view, directory, progress})};
 }
+
+test('raw make and model spellings retain distinct source identities while exact duplicate tuples are refused', () => {
+  const options = [{make: 'MAZDA', model: MODEL}, {make: 'Mazda', model: MODEL},
+    {make: 'MAZDA', model: 'Mazda3 Fastback'}];
+  const selected = selectJapanStabilityModel(directory, options);
+  assert(options.some(row => row.make === selected.make && row.model === selected.model));
+  assert.throws(() => selectJapanStabilityModel(directory, [...options, {...options[0]}]), /model_duplicate/);
+  assert.throws(() => selectJapanStabilityModel(directory, [...options, {make: 'Mazda', model: '3'}]), /model_not_in_source/);
+});
+
+test('model UI identity includes the exact source make even when its model text occurs under another raw make', async () => {
+  const f = journey({options: [{make: 'MAZDA', model: MODEL}, {make: 'Mazda', model: MODEL}]});
+  const result = await f.run();
+  assert.deepEqual(result.selected, {make: 'MAZDA', model: MODEL});
+  assert.deepEqual(f.clicked, [result.selected]);
+  assert.equal(f.progress.modelOptions, 2); assert.equal(f.progress.modelDistinctPairs, 2);
+  assert.equal(f.progress.modelDistinctNormalizedNames, 1);
+  assert.match(f.progress.modelOptionPairsSha256, /^[a-f0-9]{64}$/);
+});
+
+test('supplier option reordering after the snapshot cannot redirect the exact source tuple click', async () => {
+  const f = journey({reorderAfterSnapshot: true});
+  const result = await f.run();
+  assert.deepEqual(f.clicked, [{make: 'MAZDA', model: MODEL}]);
+  assert.deepEqual(result.selected, f.clicked[0]); assert.equal(f.progress.selectedValueMatched, true);
+});
 
 test('visible SSR controls cannot receive the first brand click before hidden hydration marker is ready', async () => {
   const entered = deferred(), hydrated = deferred();

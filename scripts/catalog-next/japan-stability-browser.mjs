@@ -10,6 +10,7 @@ const name = value => typeof value === 'string' && value.trim() === value && val
 const normalized = value => String(value).normalize('NFKC').toUpperCase().replace(/\s+/g, ' ').trim();
 const compact = value => normalized(value).replace(/[^\p{L}\p{N}]+/gu, '');
 const sameMake = (value, expected) => name(value) && compact(value) === compact(expected);
+const modelOptionIdentity = row => JSON.stringify([row.make, row.model]);
 const sourceModelMatches = (source, selected) => compact(source) === compact(selected)
   || normalized(source).startsWith(normalized(selected) + ' ')
   || normalized(source).startsWith(normalized(selected) + '(');
@@ -357,7 +358,9 @@ export function selectJapanStabilityModel(directory, options) {
   need(Array.isArray(directory) && directory.length > 0 && Array.isArray(options) && options.length > 0, 'model_options');
   for (const option of options) need(sameMake(option.make, 'Mazda') && name(option.model)
     && directory.some(row => sourceModelMatches(row.model, option.model)), 'model_not_in_source');
-  need(new Set(options.map(row => normalized(row.model))).size === options.length, 'model_duplicate');
+  // The runtime preserves literal source make/model pairs, including distinct
+  // source spellings of one brand. Only a repeated exact pair is a duplicate.
+  need(new Set(options.map(modelOptionIdentity)).size === options.length, 'model_duplicate');
   // These priorities choose only an option actually rendered from this source.
   // They never turn an encyclopedia alias such as "3" into MAZDA3 or AXELA.
   const priority = value => ['MAZDA3', 'AXELA', 'DEMIO', 'CX5', 'CX3'].findIndex(prefix => compact(value).startsWith(prefix));
@@ -537,12 +540,15 @@ export async function selectJapanStabilityModelThroughUi({view, directory, progr
   const options = await view.locator('button[data-model-value]:visible').evaluateAll(nodes => nodes.map(node =>
     ({model: node.getAttribute('data-model-value'), make: node.getAttribute('data-model-make')})));
   progress.modelOptions = options.length;
+  progress.modelDistinctPairs = new Set(options.map(modelOptionIdentity)).size;
+  progress.modelDistinctNormalizedNames = new Set(options.map(row => normalized(row.model))).size;
+  progress.modelOptionPairsSha256 = hash(JSON.stringify(options.map(modelOptionIdentity).sort()));
   const selected = selectJapanStabilityModel(directory, options);
-  const option = view.locator('button[data-model-value]:visible').filter({hasText: selected.model});
-  const exact = await option.evaluateAll((nodes, model) => nodes.map(node => node.getAttribute('data-model-value')).filter(value => value === model), selected.model);
-  need(exact.length === 1, 'selected_option_identity');
-  const optionIndex = options.findIndex(row => row.model === selected.model && row.make === selected.make);
-  progress.phase = 'model_select'; await view.locator('button[data-model-value]:visible').nth(optionIndex).click();
+  const option = view.locator(`button[data-model-value=${JSON.stringify(selected.model)}][data-model-make=${JSON.stringify(selected.make)}]:visible`);
+  need(await option.count() === 1, 'selected_option_identity');
+  // Resolve this exact pair again at click time: an arriving source directory
+  // may insert or reorder options after the validated snapshot was collected.
+  progress.phase = 'model_select'; await option.click();
   progress.phase = 'model_url';
   await view.waitForURL(url => japanStabilitySelectionUrl(url.href, sourceMake, selected.model), {timeout: 60_000});
   progress.modelUrlMatched = true;
