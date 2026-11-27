@@ -184,8 +184,9 @@ export async function runJapanLegacyMazdaThreeBrowser({context, directory, read,
   verifyFullPage(result.data);
   const proof = verifyJapanLegacyMazdaThreeRows(result.data, directory);
   const url = new URL(view.url());
-  need(url.origin === ORIGIN && url.pathname === '/cars/japan'
-    && [...query].every(([key, value]) => url.searchParams.get(key) === value), 'legacy_mazda_three_url');
+  const canonicalUrl = ORIGIN + '/cars/japan/Mazda/3?' + new URLSearchParams({city: CITY});
+  const oldUrl = ORIGIN + '/cars/japan?' + query;
+  need(url.href === canonicalUrl || url.href === oldUrl, 'legacy_mazda_three_url');
   await visibleCardsMatch(view, view.locator('main.ac-ajes-catalog'), result.data.items);
   need(errors === 0, 'legacy_mazda_three_javascript');
   await capture(view, 'japan-legacy-mazda-three-desktop');
