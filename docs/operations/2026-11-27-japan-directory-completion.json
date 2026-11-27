@@ -345,7 +345,7 @@
     "exactRuntimeAndPricingBindings": "passed against the published 4e62111 serving plan, exact 59/113 paths and protected pricing"
   },
   "maintenance": {
-    "status": "japan_accepted_aj_initialized_host_lifetime_fix_reviewed_one_reg_task_remaining",
+    "status": "accepted_japan_and_finite_reg_retention_complete_aj_periodic_mode_initialized",
     "activationRequires": "An actually accepted new runtime, then a fresh exact current/rollback observation; do not run any observer bound to rolled-back releases.",
     "preparedCoreCommit": "4ef96d162f57d315edc7a1335f9c4af0708e0611",
     "preparedObserverCommit": "e2275bbfd81cff4a23f124aa5e0983aaa72bfec1",
@@ -507,7 +507,7 @@
       }
     },
     "regRuntimeRebind": {
-      "status": "published_and_activated",
+      "status": "published_and_completed",
       "localReviewedCommit": "ca58f9cf15068ff5e87c0b8312672e5bb34966e5",
       "baseSha": "b524388fcab60a205afad89787371a783fd4c4fb",
       "changedFile": "scripts/catalog-next/resume-china-reg-retention-45875678028.mjs",
@@ -730,6 +730,76 @@
           "finishedAt": "2026-11-27T20:39:52.587Z"
         },
         "evidenceLimits": "The first queued task completed and was pruned; its original 1948 objects are all checked. 1921 were already absent and 27 were deleted in this run. Exactly one task remains, stopped before its collection at host_retirement. The aggregate exposes only operation_failed and does not preserve the underlying SSH/host code; it does not establish which generation was processed. Do not add the 1921 absent objects as new deletions to run9 counters."
+      },
+      {
+        "runId": 46067152151,
+        "runNumber": 12,
+        "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/46067152151",
+        "event": "push",
+        "attempt": 1,
+        "markerSha": "b3b137684daf3acd2bf59d84625efee9f3789560",
+        "approvedSourceSha": "d62f827cee9bc2ecb7971386dbbbdd8032e61320",
+        "conclusion": "success",
+        "mandatoryOfflineVerification": "success",
+        "rootIndependentlyFetchedTerminalRun": true,
+        "artifactId": 15232511075,
+        "artifactBytes": 812,
+        "artifactSha256": "09e79a45b5b83833d9fff058802d37c67e690b34e8744e0352bada482b775f7a",
+        "reportBytes": 1359,
+        "reportSha256": "41a928873b09039b9cf1d95aca6ffc25bf216c72b96f53a9440b2840a8291940",
+        "artifactCrcVerified": true,
+        "independentLocalReportReview": "passed",
+        "report": {
+          "version": 1,
+          "kind": "china-reg-retention-resume-v1",
+          "market": "china",
+          "completed": true,
+          "status": "complete",
+          "currentGenerationId": "gen_china_45875678028_1",
+          "allowedGenerations": [
+            "gen_china_45369451603_1",
+            "gen_china_45655051136_1"
+          ],
+          "supplierRequests": 0,
+          "sourcePreparations": 0,
+          "applicationBuilds": 0,
+          "publicationReservations": 0,
+          "acceptedStateWrites": 0,
+          "intentStateWrites": 0,
+          "leaseAcquired": true,
+          "leaseReleased": true,
+          "startedAt": "2026-11-27T21:00:00.645Z",
+          "controllerSha": "b3b137684daf3acd2bf59d84625efee9f3789560",
+          "deadlineAt": "2026-11-27T21:27:32.000Z",
+          "currentRuntimeSha": "b9e9122b75f4e588088d0241476b18df7f047d96",
+          "acceptedRevision": 64,
+          "retention": {
+            "completed": true,
+            "status": "complete",
+            "pending": 0,
+            "enqueued": 0,
+            "collected": 1,
+            "pruned": 1,
+            "deletedObjects": 1911,
+            "deletedBytes": 3205484967,
+            "alreadyAbsentObjects": 0,
+            "hostCleanupsCompleted": 1,
+            "retiredContainers": 0,
+            "filesDeleted": 0,
+            "freedBytes": 0,
+            "stage": "complete",
+            "collectionProgress": {
+              "stage": "complete",
+              "plannedObjects": 1911,
+              "capturedObjects": 1911,
+              "checkedObjects": 1911,
+              "tombstonesWritten": 1,
+              "retirementRecordVerified": true
+            }
+          },
+          "finishedAt": "2026-11-27T21:20:29.939Z"
+        },
+        "evidenceLimits": "1911 acknowledged deletions and 3205484967 bytes refer only to this final REG run. Host filesDeleted/freedBytes/retiredContainers are zero. Unknown outcomes from run9 are not added to acknowledged counts. Empty scoped queue is confirmed; this is not a claim about unrelated Docker images or a complete AJ cache inventory."
       }
     ],
     "japanCacheCompaction": {
@@ -815,16 +885,16 @@
       "fullScanComplete": false,
       "evidenceLimits": "Successful bounded pass only; 100 objects listed and 33 payloads inspected, so total remaining or expired inventory is unknown. 93,574 bytes is verified logical payload reduction, not measured host disk free. Zero working cache object keys deleted; one DELETE was limited to the synthetic canary.",
       "scheduleObservation": {
-        "observedAt": "2026-11-27T20:49:19Z",
+        "observedAt": "2026-11-27T21:22:03Z",
         "latestReturnedScheduledRunCreatedAt": "2026-11-27T20:08:57Z",
         "scheduledRunsInspected": 30,
         "actualAjScheduledContinuationObserved": false,
         "forcedScheduleOrManualContinuation": false,
-        "qualification": "The one-off returned schedule list had no AJ continuation after the configured20:43cron. This is an observation of absence at that time, not a claim that the schedule failed or that it will not run later."
+        "qualification": "The final one-off returned schedule list contained no AJ continuation; the latest returned scheduled run was20:08:57UTC. The hourly cron is configured in the published workflow, but actual scheduled checkpoint resume has not been observed. No failure or full-scan completion is inferred from that absence."
       }
     },
     "regBoundedCollectionRepair": {
-      "status": "published_and_activated_first_live_pass_partial",
+      "status": "published_and_live_validated_scoped_queue_empty",
       "localReviewedCommit": "c9a4bf89358c9a80aa3d5d171cbdd3c42e0e64ab",
       "baseSha": "70ca0ebbf4987bdb86b02ffa106a10f19f8ed5a4",
       "collectionPolicy": "reg-retention-bounded-v1",
@@ -875,24 +945,21 @@
       "firstRunId": 46060902907
     },
     "regLatestActivation": {
-      "runId": 46064292305,
-      "runNumber": 10,
-      "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/46064292305",
+      "runId": 46067152151,
+      "runNumber": 12,
+      "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/46067152151",
       "event": "push",
       "attempt": 1,
-      "markerSha": "90a69a28219651c521622cf87cfb69040e7f9a35",
-      "approvedSourceSha": "4639dd34dddf18f31621e3dfa3e25c953187137c",
-      "controllerUnchanged": true,
+      "markerSha": "b3b137684daf3acd2bf59d84625efee9f3789560",
+      "approvedSourceSha": "d62f827cee9bc2ecb7971386dbbbdd8032e61320",
       "status": "completed",
-      "purpose": "Reconcile actual object presence after run9 outcome_unknown and finish the two existing retired generation tasks.",
-      "conclusion": "failure",
-      "retentionStatus": "paused",
-      "errorCode": "operation_failed",
-      "pending": 1,
+      "conclusion": "success",
+      "retentionStatus": "complete",
+      "pending": 0,
       "leaseReleased": true
     },
     "regHostCredentialLifetimeRepair": {
-      "status": "reviewed_ready_for_separate_activation",
+      "status": "published_remaining_task_completed",
       "sourceSha": "90a69a28219651c521622cf87cfb69040e7f9a35",
       "finding": "Production runRetention uses environment=process.env. retireOnly creates a new createChinaDailyRelease for each task. That factory captures environment.SSH_PRIVATE_KEY; the first actual openChinaSshSession removes process.env.SSH_PRIVATE_KEY after writing its temporary key. Therefore a second task constructs a factory without the credential and cannot open its SSH session.",
       "evidenceQualification": "This deterministic source lifecycle defect agrees with the observed first task completion followed by host_retirement failure. REG10 did not preserve the underlying failure code, so the log alone does not identify china_ssh_key_missing.",
@@ -932,8 +999,14 @@
         "workflow/deadline",
         "activation marker"
       ],
-      "localFixturePreparation": "Two missing sparse-checkout blobs were materialized from exact HEAD: scripts/regcloud-performance-gate.py and scripts/regcloud-release-retention.py. No tracked fixture changes."
-    }
+      "localFixturePreparation": "Two missing sparse-checkout blobs were materialized from exact HEAD: scripts/regcloud-performance-gate.py and scripts/regcloud-release-retention.py. No tracked fixture changes.",
+      "publishedControllerSha": "d62f827cee9bc2ecb7971386dbbbdd8032e61320",
+      "markerSha": "b3b137684daf3acd2bf59d84625efee9f3789560",
+      "liveRunId": 46067152151,
+      "liveHostCleanupsCompleted": 1
+    },
+    "activationRequirementsSatisfied": true,
+    "finishedAt": "2026-11-27T21:20:29.939Z"
   },
   "verificationAttempts": [
     {
@@ -958,10 +1031,7 @@
       "publication": "not started"
     }
   ],
-  "remaining": [
-    "Activate the reviewed per-run host credential lifetime correction via a separate marker, finish the one remaining authorized REG task, and verify terminal completion and lease release. Japan33 is already accepted.",
-    "AJ periodic bounded continuation is initialized and has a verified saved checkpoint. A full cache scan or physical host disk clearance is not claimed."
-  ],
+  "remaining": [],
   "precedingCandidate": {
     "runtimeSha": "a4f23e648d3de2a8a23c9a16942a286b91bb39b4",
     "runtimeTree": "f2475e05a226afac310fef42fb10c162b3d5753d",
@@ -2502,5 +2572,22 @@
     "liveDistinctNormalizedNames": 8,
     "liveSelectedModel": "6",
     "liveCityAndUiApiIdentity": "passed"
+  },
+  "completion": {
+    "status": "japan_release_and_finite_retention_complete",
+    "acceptedJapanRunId": 46051339049,
+    "acceptedRuntimeSha": "b9e9122b75f4e588088d0241476b18df7f047d96",
+    "acceptancePolicy": "japan-functional-observed-timing-v1",
+    "speedGateRequired": false,
+    "speedPassed": null,
+    "functionalFlagsPassed": 16,
+    "regFinalRunId": 46067152151,
+    "regPendingTasks": 0,
+    "regLeaseReleased": true,
+    "regFinishedAt": "2026-11-27T21:20:29.939Z",
+    "ajInitialBoundedPassVerified": true,
+    "ajFullScanCompleted": false,
+    "ajScheduledContinuationObserved": false,
+    "remainingImplementationTasks": 0
   }
 }
