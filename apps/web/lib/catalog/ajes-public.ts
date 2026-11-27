@@ -1,7 +1,7 @@
 import {applyJapanOwnerSpecifications} from './japan-owner-specifications';
 import {enrichJapanDrive} from './japan-drive';
 import {applyJapanFactoryFuel} from '../encyclopedia/japan-fuel-reference';
-import {applyEncyclopediaCalculation,readCalculationIndex} from '../encyclopedia/calculation-index';
+import {applyEncyclopediaCalculation,readCalculationIndex,type CalculationIndex} from '../encyclopedia/calculation-index';
 import 'server-only';
 import {assertAjesJapanTable} from './ajes-access-policy';
 import {headers} from 'next/headers';
@@ -10,13 +10,21 @@ import {AjesUnavailable} from './ajes-client';
 import {ajesOffer} from './ajes-offer';
 import {convertToRub} from './rates';
 import type {ajesLot,AjesQuery} from './ajes-query';
-import {applyCatalogEditorial,editorialHidden,readCatalogEditorial} from './editorial';
+import {applyCatalogEditorial,editorialHidden,readCatalogEditorial,type CatalogEditorialIndex} from './editorial';
 import {catalogInventoryAgeDecision,catalogVehicleExcluded} from './inventory-admission';
 export async function cappedAjesQuery(query:AjesQuery):Promise<AjesQuery>{
  assertAjesJapanTable(query.table);
  return query;
 }
-export async function readAjesPublic(query:AjesQuery,options:{editorial?:boolean;measure?:(stage:string,ms:number)=>void}={}){
+export type AjesPublicEvidenceSnapshot=Readonly<{editorial:CatalogEditorialIndex;calculationIndex:CalculationIndex|null}>;
+/** Use the same five-second reader as the existing pricing path. The caller
+ * rechecks its epoch around pricing; a fresh-only read would bypass that cache
+ * and allow pricing to reapply a different editorial revision.
+ */
+export async function readAjesPublicEvidenceSnapshot():Promise<AjesPublicEvidenceSnapshot>{
+ return Object.freeze({editorial:await readCatalogEditorial(),calculationIndex:readCalculationIndex()});
+}
+export async function readAjesPublic(query:AjesQuery,options:{editorial?:boolean;evidenceSnapshot?:AjesPublicEvidenceSnapshot;measure?:(stage:string,ms:number)=>void}={}){
  query=await cappedAjesQuery(query);
  const ip=(await headers()).get('x-real-ip')||'';
  const sourceStart=performance.now();
@@ -28,7 +36,9 @@ export async function readAjesPublic(query:AjesQuery,options:{editorial?:boolean
   throw error;
  });
  options.measure?.('supplier-read',performance.now()-sourceStart);
- const indexStart=performance.now();const index=await readCatalogEditorial();options.measure?.('editorial-read',performance.now()-indexStart);
+ const indexStart=performance.now();const index=options.evidenceSnapshot?.editorial??await readCatalogEditorial();
+ const calculationIndex=options.evidenceSnapshot?options.evidenceSnapshot.calculationIndex:readCalculationIndex();
+ options.measure?.('editorial-read',performance.now()-indexStart);
  const items=await Promise.all(result.items.map(async(lot:NonNullable<ReturnType<typeof ajesLot>>)=>{
   const enrichStart=performance.now();
   const rate=await convertToRub(lot.finalPriceJpy||lot.sourcePrice,lot.currency as 'JPY'|'KRW'|'CNY');
@@ -36,7 +46,7 @@ export async function readAjesPublic(query:AjesQuery,options:{editorial?:boolean
   let offer=ajesOffer(lot,rate,result.observedAt);
   // Exact local release facts also cover auction records. No supplier/detail
   // request or legacy approximate matching is needed for this lookup.
-  offer=applyJapanFactoryFuel(applyEncyclopediaCalculation(enrichJapanDrive(offer,readCalculationIndex())));
+  offer=applyJapanFactoryFuel(applyEncyclopediaCalculation(enrichJapanDrive(offer,calculationIndex),calculationIndex));
   options.measure?.('enrichment-sum',performance.now()-enrichStart);
   if(options.editorial!==false&&editorialHidden(offer,index))return null;
   return applyJapanOwnerSpecifications(options.editorial===false?offer:applyCatalogEditorial(offer,index));

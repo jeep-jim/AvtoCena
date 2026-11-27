@@ -9,7 +9,7 @@ import {useCatalogResultCount} from './CatalogSelectionContext';
 import {CatalogPagination} from "./CatalogPagination";
 
 import { loadMoreGreenCorner } from "./green-corner-load-more-action";
-import { loadMoreCatalog } from "./catalog-load-more-action";
+import { loadMoreCatalog, JapanCatalogRefreshRequired } from "./catalog-load-more-action";
 import type { CatalogSearchParams } from "@/lib/catalog/types";
 
 type Batch = {incomplete?:boolean;cursor?:string; nextCursor?:string|null;hasMore?:boolean;page: number; cards: ReactNode; count: number};
@@ -32,6 +32,7 @@ export function CatalogLoadMore({query, initialPage, initialTotal, initialCount,
   const [total, setTotal] = useState(initialTotal);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
+  const [refreshRequired,setRefreshRequired]=useState(false);
   const prepared = useRef<{key:string;page:number;at:number;promise:ReturnType<typeof loadMoreCatalog> | ReturnType<typeof loadMoreGreenCorner>} | null>(null);
   const activeKey = useRef(key);
   activeKey.current = key;
@@ -43,6 +44,7 @@ export function CatalogLoadMore({query, initialPage, initialTotal, initialCount,
 
   useLayoutEffect(() => {
     mounted.current = true;
+    setRefreshRequired(false);
     const saved = visits.get(key);
     if (saved && Date.now() - saved.savedAt < TTL && saved.total === initialTotal) {
       setBatches(saved.batches); setTotal(saved.total);
@@ -121,7 +123,7 @@ export function CatalogLoadMore({query, initialPage, initialTotal, initialCount,
     return ()=>window.clearTimeout(timer);
   },[key,page,more]);
   async function load(retry=false) {
-    if (lock.current) return;
+    if (lock.current||refreshRequired) return;
     lock.current = true; setBusy(true); setError("");
     try {
       const last=batches.at(-1)!;
@@ -131,7 +133,12 @@ export function CatalogLoadMore({query, initialPage, initialTotal, initialCount,
       setBatches(current => [...(retry?current.slice(0,-1):current), {incomplete:"incomplete" in result&&Boolean(result.incomplete),cursor:retry?last.cursor:nextCursor??undefined, nextCursor:"nextCursor" in result && typeof result.nextCursor === "string" ? result.nextCursor : "nextCursor" in result && result.nextCursor === null ? null : undefined, page: result.page, cards: result.cards, count: result.ids.length, hasMore:"hasMore" in result && typeof result.hasMore === "boolean" ? result.hasMore : undefined}]);
       setTotal(result.total);
     } catch (error) {
-      if (mounted.current && activeKey.current===key) setError(catalogPageErrorMessage(error));
+      if (mounted.current && activeKey.current===key) {
+        if(query.market==='japan'&&error instanceof JapanCatalogRefreshRequired){
+          setRefreshRequired(true);prepared.current=null;
+          setError('Данные подбора обновились. Откройте первую страницу — выбранные фильтры сохранены.');
+        }else setError(catalogPageErrorMessage(error));
+      }
     } finally {lock.current = false; if (mounted.current && activeKey.current===key) setBusy(false);}
   }
   return <div ref={list}>
@@ -140,8 +147,8 @@ export function CatalogLoadMore({query, initialPage, initialTotal, initialCount,
       <p role="status" aria-live="polite" className="text-xs font-bold text-[var(--ac-muted)]">Показано {count.toLocaleString("ru-RU")} {knownTotal!==null?`из ${knownTotal.toLocaleString("ru-RU")}`:""}</p>
       {knownTotal===null&&resultCountLabel&&<p className="text-xs font-bold text-[var(--ac-muted)]">{resultCountLabel}</p>}
       {query.market==='japan'&&incomplete&&more&&<p role="status" className="max-w-md text-center text-sm text-[var(--ac-muted)]">Показана часть автомобилей. Полный список пока недоступен.</p>}
-      {pageCount > 1 ? <CatalogPagination page={page} pageCount={pageCount} links={numberedPages.map(number=>({page:number,href:pageHref(number)}))} previousHref={page>1&&(!cursorPaging||page===2||batches.some(batch=>batch.page===page-1))?pageHref(page-1):undefined} nextHref={page<pageCount?pageHref(page+1):undefined}/> : null}
-      {more ? <a href={pageHref(page+1)} data-no-route-loader="true" role="button" aria-disabled={busy} aria-busy={busy} aria-label={busy ? "Загружаем варианты" : "Показать ещё"} onClick={event => {if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return; event.preventDefault(); void load();}} onKeyDown={event => {if (event.key === " ") {event.preventDefault(); void load();}}} className={`ac-catalog-more ${green ? "ac-green-button" : ""} min-h-12 w-full md:w-[calc((100%_-_24px)/3*2_+_12px)] xl:w-[calc((100%_-_12px)/2)] rounded-2xl bg-red-500 px-8 py-3 text-center text-sm font-black text-white transition hover:bg-red-600 ${busy ? "cursor-wait" : ""}`} style={{color:"#fff"}}>{busy ? <><span className="ac-catalog-more__candy" aria-hidden="true"/><span className="ac-catalog-more__label">Загружаем варианты</span></> : "Показать ещё"}</a> : incomplete ? <div className="max-w-md text-center text-sm text-[var(--ac-muted)]"><p role="status">Показаны сохранённые автомобили. Полный список пока недоступен.</p><button type="button" data-no-route-loader="true" disabled={busy} aria-busy={busy} onClick={()=>void load(true)} className="ac-catalog-more relative mt-3 rounded-2xl bg-red-500 px-8 py-3 font-black text-white">{busy?<><span className="ac-catalog-more__candy" aria-hidden="true"/><span className="ac-catalog-more__label">Обновляем список</span></>:"Повторить"}</button></div> : <p className="text-sm text-[var(--ac-muted)]">{"Вы посмотрели все доступные предложения"}</p>}
+      {!refreshRequired&&pageCount > 1 ? <CatalogPagination page={page} pageCount={pageCount} links={numberedPages.map(number=>({page:number,href:pageHref(number)}))} previousHref={page>1&&(!cursorPaging||page===2||batches.some(batch=>batch.page===page-1))?pageHref(page-1):undefined} nextHref={page<pageCount?pageHref(page+1):undefined}/> : null}
+      {refreshRequired?null:more ? <a href={pageHref(page+1)} data-no-route-loader="true" role="button" aria-disabled={busy} aria-busy={busy} aria-label={busy ? "Загружаем варианты" : "Показать ещё"} onClick={event => {if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return; event.preventDefault(); void load();}} onKeyDown={event => {if (event.key === " ") {event.preventDefault(); void load();}}} className={`ac-catalog-more ${green ? "ac-green-button" : ""} min-h-12 w-full md:w-[calc((100%_-_24px)/3*2_+_12px)] xl:w-[calc((100%_-_12px)/2)] rounded-2xl bg-red-500 px-8 py-3 text-center text-sm font-black text-white transition hover:bg-red-600 ${busy ? "cursor-wait" : ""}`} style={{color:"#fff"}}>{busy ? <><span className="ac-catalog-more__candy" aria-hidden="true"/><span className="ac-catalog-more__label">Загружаем варианты</span></> : "Показать ещё"}</a> : incomplete ? <div className="max-w-md text-center text-sm text-[var(--ac-muted)]"><p role="status">Показаны сохранённые автомобили. Полный список пока недоступен.</p><button type="button" data-no-route-loader="true" disabled={busy} aria-busy={busy} onClick={()=>void load(true)} className="ac-catalog-more relative mt-3 rounded-2xl bg-red-500 px-8 py-3 font-black text-white">{busy?<><span className="ac-catalog-more__candy" aria-hidden="true"/><span className="ac-catalog-more__label">Обновляем список</span></>:"Повторить"}</button></div> : <p className="text-sm text-[var(--ac-muted)]">{"Вы посмотрели все доступные предложения"}</p>}
       {error ? <div className="max-w-md text-center text-sm text-[var(--ac-text)]"><p role="alert">{error}</p>{query.market==='japan'&&cursorPaging&&<Link href={pageHref(1)} prefetch={false} className="mt-2 inline-block font-bold underline">Открыть первую страницу</Link>}</div> : null}
     </div>
   </div>;

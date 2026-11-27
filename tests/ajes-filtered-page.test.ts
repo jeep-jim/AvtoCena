@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {readFilteredAjesPage} from '../apps/web/lib/catalog/ajes-filtered-page';
+import {readFilteredAjesPage,readPowerOrderedAjesPage,ajesPowerEvidenceEpoch,assertAjesPowerCursorEpoch} from '../apps/web/lib/catalog/ajes-filtered-page';
+import {AjesCursorRefreshRequired} from '../apps/web/lib/catalog/ajes-query';
 
 test('fills 24 matching cars instead of four and resumes without omissions or repeats',async()=>{
  const calls:number[]=[];
@@ -93,4 +94,139 @@ test('a mixed page retains the oldest source observation and every stale/partial
  assert.equal(result.observedAt,'2026-11-26T11:00:00.000Z');
  assert.equal(result.stale,true);assert.equal(result.partial,true);assert.equal(result.hasMore,false);
  assert.equal(result.items.length,24);assert.equal(result.nextCursor,null);
+});
+
+const epoch=ajesPowerEvidenceEpoch({runtimeSha:'1'.repeat(40),editorialRevision:'editorial-1',calculationDigest:null});
+const observedAt='2026-11-27T10:00:00.000Z';
+type PowerRow={id:string;known:boolean};
+const powerRows=(page:number,count:number)=>Array.from({length:count},(_,i)=>({id:page+'/'+i,known:i%3!==0}));
+const powerOptions={pageSize:24,evidenceEpoch:epoch,cursorKey:'japan|petrol|160|Новокузнецк',
+ itemKey:(row:PowerRow)=>row.id,known:(row:PowerRow)=>row.known,now:()=>0};
+
+test('power traversal emits every known row before every unknown row with one bounded budget and exact cursors',async()=>{
+ const pages=[powerRows(1,24),powerRows(2,24),powerRows(3,5)],calls:{page:number;phase:string}[]=[];
+ const read=async(page:number,phase:string)=>{calls.push({page,phase});const items=pages[page-1]||[];return {items,received:items.length,observedAt};};
+ const all=pages.flat(),expected=[...all.filter(row=>row.known),...all.filter(row=>!row.known)];
+ const results=[];let after:string|null|undefined;
+ for(let page=1;page<10;page++){
+  const before=calls.length,result=await readPowerOrderedAjesPage({...powerOptions,page,after:after??undefined,read});
+  assert(calls.length-before<=8);results.push(result);after=result.nextCursor;
+  if(!result.hasMore)break;
+ }
+ const actual=results.flatMap(result=>result.items);
+ assert.deepEqual(actual,expected);assert.equal(new Set(actual.map(row=>row.id)).size,53);
+ assert.deepEqual(results.map(result=>result.items.length),[24,24,5]);
+ assert.match(results[0].nextCursor!,/^j2\.k\./);assert.match(results[1].nextCursor!,/^j2\.u\./);
+ assert.equal(results.at(-1)!.nextCursor,null);
+ const firstUnknownRead=calls.findIndex(call=>call.phase==='u');
+ assert(calls.slice(0,firstUnknownRead).some(call=>call.page===3));
+});
+
+test('eight empty known source pages preserve an explicit continuation and never expose unknown early',async()=>{
+ const calls:{page:number;phase:string}[]=[];
+ const read=async(page:number,phase:string)=>{
+  calls.push({page,phase});const items=page<=8?powerRows(page,24).map(row=>({...row,known:false})):
+   page===9?powerRows(page,24).map(row=>({...row,known:true})):[];
+  return {items,received:items.length,observedAt};
+ };
+ const first=await readPowerOrderedAjesPage({...powerOptions,page:1,read});
+ assert.equal(first.items.length,0);assert.equal(first.reads,8);assert(first.hasMore&&first.scanLimited);
+ assert.match(first.nextCursor!,/^j2\.k\.9\.0\.2\./);assert(calls.every(call=>call.phase==='k'));
+ const second=await readPowerOrderedAjesPage({...powerOptions,page:2,after:first.nextCursor!,read});
+ assert.equal(second.items.length,24);assert(second.items.every(row=>row.known));
+ const third=await readPowerOrderedAjesPage({...powerOptions,page:3,after:second.nextCursor!,read});
+ assert.equal(third.items.length,24);assert(third.items.every(row=>!row.known));
+ assert.deepEqual(calls.slice(-2),[{page:10,phase:'k'},{page:1,phase:'u'}]);
+});
+
+test('a phase boundary shares the eight-read cap and the original time budget',async()=>{
+ let clock=0;
+ const calls:{page:number;phase:string}[]=[];
+ const read=async(page:number,phase:string)=>{
+  calls.push({page,phase});clock+=100;
+  const items=page<7?powerRows(page,24).map(row=>({...row,known:false})):[];
+  return {items,received:items.length,observedAt};
+ };
+ const result=await readPowerOrderedAjesPage({...powerOptions,page:1,pageSize:24,read,now:()=>clock});
+ assert.equal(result.reads,8);assert.equal(result.items.length,24);assert.deepEqual(calls.at(-1),{page:1,phase:'u'});
+ clock=0;calls.length=0;
+ const slow=await readPowerOrderedAjesPage({...powerOptions,page:1,now:()=>clock,read:async(page,phase)=>{
+  calls.push({page,phase});clock+=9000;return {items:[{id:'only',known:false}],received:1,observedAt};
+ }});
+ assert.equal(slow.reads,1);assert.equal(slow.items.length,0);assert.match(slow.nextCursor!,/^j2\.u\.1\.0\.2\./);
+ const minimum=await readPowerOrderedAjesPage({...powerOptions,page:1,minimumReads:2,now:()=>clock,read:async()=>{
+  clock+=9000;return {items:[],received:24,observedAt};
+ }});
+ assert.equal(minimum.reads,2);
+});
+
+test('stale, partial and missing-observation ends never authorize the unknown phase',async()=>{
+ for(const flags of [{stale:true},{partial:true},{observedAt:undefined}]){
+  const calls:string[]=[];
+  const result=await readPowerOrderedAjesPage({...powerOptions,page:1,read:async(_page,phase)=>{
+   calls.push(phase);return {items:[{id:'known',known:true},{id:'unknown',known:false}],received:2,observedAt,...flags};
+  }});
+  assert.deepEqual(calls,['k']);assert.deepEqual(result.items.map(row=>row.id),['known']);
+  assert(result.hasMore);assert.match(result.nextCursor!,/^j2\.k\.1\.1\.2\./);
+ }
+});
+
+test('a stale full known page is rechecked at consumed24 before advancing, without a duplicate',async()=>{
+ const rows=powerRows(1,24).map(row=>({...row,known:true}));let stale=true;
+ const calls:{page:number;phase:string}[]=[];
+ const read=async(page:number,phase:string)=>{calls.push({page,phase});return {items:page===1?rows:[],received:page===1?24:0,observedAt,stale};};
+ const first=await readPowerOrderedAjesPage({...powerOptions,page:1,read});
+ assert.equal(first.items.length,24);assert.match(first.nextCursor!,/^j2\.k\.1\.24\.2\./);
+ stale=false;
+ const last=await readPowerOrderedAjesPage({...powerOptions,page:2,after:first.nextCursor!,read});
+ assert.equal(last.items.length,0);assert.equal(last.hasMore,false);
+ assert.deepEqual(calls,[{page:1,phase:'k'},{page:1,phase:'k'},{page:2,phase:'k'},{page:1,phase:'u'},{page:2,phase:'u'}]);
+});
+
+test('a later source failure resumes the exact known offset and cannot switch phase',async()=>{
+ const {AjesUnavailable}=await import('../apps/web/lib/catalog/ajes-client');
+ let fail=true;const calls:number[]=[];
+ const read=async(page:number)=>{
+  calls.push(page);if(page===2&&fail)throw new AjesUnavailable('request_timeout');
+  return {items:page===1?[{id:'one',known:true}]:[],received:page===1?24:0,observedAt};
+ };
+ const first=await readPowerOrderedAjesPage({...powerOptions,page:1,read});
+ assert.deepEqual(first.items,[{id:'one',known:true}]);assert(first.partial&&first.interrupted);
+ assert.match(first.nextCursor!,/^j2\.k\.2\.0\.2\./);
+ fail=false;const last=await readPowerOrderedAjesPage({...powerOptions,page:2,after:first.nextCursor!,read});
+ assert.equal(last.hasMore,false);assert.deepEqual(last.items,[]);assert.deepEqual(calls,[1,2,2,1,2]);
+});
+
+test('power cursors bind query, epoch and visible page; legacy positions request a reset before source reads',async()=>{
+ let calls=0;
+ const read=async()=>{calls++;return {items:powerRows(1,24),received:24,observedAt};};
+ const first=await readPowerOrderedAjesPage({...powerOptions,page:1,read});const before=calls;
+ for(const patch of [{evidenceEpoch:'f'.repeat(64)},{cursorKey:'another-city'},{page:3},
+  {after:'2.3'},{after:'j1.2.1.2.'+'a'.repeat(64)+'.'+'b'.repeat(64)},{after:undefined}])
+  await assert.rejects(readPowerOrderedAjesPage({...powerOptions,page:2,after:first.nextCursor!,read,...patch}),AjesCursorRefreshRequired);
+ assert.equal(calls,before);
+ const oversized=first.nextCursor!.split('.');oversized[3]='25';
+ assert.throws(()=>assertAjesPowerCursorEpoch({page:2,pageSize:24,evidenceEpoch:epoch,after:oversized.join('.')}),AjesCursorRefreshRequired);
+});
+
+test('local evidence identity changes the hashed epoch without exposing private revision text',()=>{
+ const value={runtimeSha:'1'.repeat(40),editorialRevision:'private-editorial-revision',calculationDigest:'a'.repeat(64)};
+ const original=ajesPowerEvidenceEpoch(value);assert.match(original,/^[a-f0-9]{64}$/);
+ for(const patch of [{runtimeSha:'2'.repeat(40)},{editorialRevision:'next-revision'},{calculationDigest:'b'.repeat(64)},{calculationDigest:null}])
+  assert.notEqual(ajesPowerEvidenceEpoch({...value,...patch}),original);
+ for(const patch of [{runtimeSha:''},{editorialRevision:''},{calculationDigest:'bad'}])
+  assert.throws(()=>ajesPowerEvidenceEpoch({...value,...patch}),/not_configured/);
+});
+
+test('changed consumed membership requests refresh instead of silently moving the phase boundary',async()=>{
+ let changed=false,calls=0;
+ const read=async(page:number)=>{
+  calls++;const rows=powerRows(page,24).map(row=>({...row,known:true}));
+  const items=page===1?rows.slice(0,23):changed?[...rows].reverse():rows;
+  return {items,received:24,observedAt};
+ };
+ const first=await readPowerOrderedAjesPage({...powerOptions,page:1,read});assert.match(first.nextCursor!,/^j2\.k\.2\.1\.2\./);
+ changed=true;const before=calls;
+ await assert.rejects(readPowerOrderedAjesPage({...powerOptions,page:2,after:first.nextCursor!,read}),AjesCursorRefreshRequired);
+ assert.equal(calls,before+1);
 });

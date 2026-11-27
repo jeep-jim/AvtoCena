@@ -107,6 +107,8 @@ try{
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
   assert.deepEqual(errors,[]);
   report.cases.push({width,name:'brand-directory-failure-and-retry',passed:true});
+  await page.keyboard.press('Escape');
+  await page.getByPlaceholder('Найти марку').waitFor({state:'hidden'});
   await page.getByRole('button',{name:'Сбросить',exact:true}).click();
   await page.getByRole('button',{name:'Выбрать марки автомобилей'}).click();await page.getByPlaceholder('Найти марку').fill('Land Rover');
   await page.locator('[data-facet-value="LANDROVER"]').click();

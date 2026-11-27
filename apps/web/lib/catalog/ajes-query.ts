@@ -14,6 +14,8 @@ import {heavyVehicleSqlExclusion,knownHeavyVehicleFamily} from './heavy-vehicle-
 /** Supplier SQL is generated here only; callers cannot supply SQL or column names. */
 export type AjesTable = 'stats' | 'main';
 export class AjesInputError extends Error { constructor() { super('ajes_invalid_query'); } }
+/** A prior power-order cursor cannot be safely continued under new evidence. */
+export class AjesCursorRefreshRequired extends AjesInputError {}
 export type AjesQuery = {pickup?:boolean;salePeriod?:string; table?: AjesTable; aggregate?: 'count'|'models'|'makes'|'colors'; sort?: string; color?:string; fuel?:string; transmission?:string; drive?:string; auctionGrade?:string; id?: string; make?: string; model?: string; modelFamilies?:string; chassis?:string; frameNumber?:string; lotNumber?:string; sourcePriceTo?:number; powerFrom?:number; powerTo?:number; yearFrom?: number; yearTo?: number; mileageFrom?:number; mileageTo?: number; engineFrom?:number; engineTo?:number; page?: number; pageSize?: number};
 const keys = new Set(['pickup','salePeriod','aggregate','sort','color','fuel','transmission','drive','auctionGrade','table','id','make','model','modelFamilies','chassis','frameNumber','lotNumber','sourcePriceTo','powerFrom','powerTo','yearFrom','yearTo','mileageFrom','mileageTo','engineFrom','engineTo','page','pageSize']);
 /** These fixed predicates select the same raw rows. Sharing their cache identity

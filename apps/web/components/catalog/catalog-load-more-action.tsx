@@ -2,6 +2,10 @@ import {CatalogPageRequestError,CATALOG_PAGE_REQUEST_TIMEOUT_MS} from "./page-re
 import { CatalogCard } from "./CatalogCard";
 import type { CatalogSearchParams } from "@/lib/catalog/types";
 
+export class JapanCatalogRefreshRequired extends Error {
+  constructor(){super('japan_cursor_refresh_required');}
+}
+
 // Pagination is a public read, not a mutation. GET avoids the Server Action
 // queue and the page/layout render that accompanies an action response.
 export async function loadMoreCatalog(query: CatalogSearchParams, page: number, after?:string|null) {
@@ -13,6 +17,10 @@ export async function loadMoreCatalog(query: CatalogSearchParams, page: number, 
   let result;
   try {
     const response = await fetch(`/api/catalog/search?${params}`, {signal});
+    if(query.market==='japan'&&response.status===409){
+      const failure=await response.json().catch(()=>null);
+      if(failure?.error==='japan_cursor_refresh_required')throw new JapanCatalogRefreshRequired();
+    }
     if (!response.ok) throw new CatalogPageRequestError('unavailable');
     result = await response.json();
   } catch(error) {

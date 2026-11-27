@@ -1,12 +1,14 @@
 import {assertAjesJapanMarket,assertAjesJapanTable} from './ajes-access-policy';
 import {sortCatalogRows} from './market-page';
 import {japanPreviewParameters} from './japan-preview-parameters';
-import {readFilteredAjesPage} from './ajes-filtered-page';
+import {readFilteredAjesPage,readPowerOrderedAjesPage,ajesPowerEvidenceEpoch,assertAjesPowerCursorEpoch} from './ajes-filtered-page';
 import {resolveAjesMakeNames} from './ajes-make-resolution';
 import 'server-only';
 import {resolveAjesQueryModels} from './ajes-model-resolution';
 import {ajesResultFilter} from './ajes-result-filter';
-import {japanPowerFilterSummary} from './japan-source-power';
+import {japanPowerFilterSummary,japanUnknownPower,japanLocalPowerHp,japanSupplierPower} from './japan-source-power';
+import {safePublicPricing} from './safe-public-pricing';
+import {withCatalogEditorialSnapshot} from './editorial';
 import {applyActiveBusinessPricingBatch} from './live-business-pricing';
 import {hasEncyclopediaCalculationEvidence} from '../encyclopedia/calculation-evidence';
 import {assertCollectionEnabled} from './collection-controls';
@@ -15,8 +17,8 @@ import {cache} from 'react';
 import {DetailReadCache} from './detail-read-cache';
 import {ajesClient} from './ajes-runtime';
 import {AjesUnavailable,readAjesModelDirectory,readAjesMakeDirectory} from './ajes-client';
-import {readAjesPublic,cappedAjesQuery} from './ajes-public';
-import {ajesCatalogQuery} from './ajes-query';
+import {readAjesPublic,cappedAjesQuery,readAjesPublicEvidenceSnapshot} from './ajes-public';
+import {ajesCatalogQuery,AjesCursorRefreshRequired} from './ajes-query';
 export {ajesCatalogQuery,AjesFilterUnavailable} from './ajes-query';
 import {publicOffer} from './storage';
 import type {AjesCountSummary} from './ajes-count-display';
@@ -96,6 +98,20 @@ export async function readAjesCatalogPage(params:Record<string,unknown>,measure?
  assertAjesJapanMarket(params.market);
  const resolveStarted=performance.now();
  const filter=ajesResultFilter(params);
+ const evidenceSnapshot=filter.powerFilter?await readAjesPublicEvidenceSnapshot():undefined;
+ const evidenceEpoch=evidenceSnapshot?ajesPowerEvidenceEpoch({runtimeSha:process.env.AVTOCENA_RELEASE_SHA,
+  editorialRevision:evidenceSnapshot.editorial.revision,calculationDigest:evidenceSnapshot.calculationIndex?.digest??null}):undefined;
+ if(evidenceEpoch){
+  const requested=ajesCatalogQuery(params);
+  assertAjesPowerCursorEpoch({page:requested.page||1,pageSize:requested.pageSize||24,after:params.after,evidenceEpoch});
+ }
+ const checkEvidence=async()=>{
+  if(!evidenceEpoch)return;
+  const current=await readAjesPublicEvidenceSnapshot();
+  if(ajesPowerEvidenceEpoch({runtimeSha:process.env.AVTOCENA_RELEASE_SHA,editorialRevision:current.editorial.revision,
+   calculationDigest:current.calculationIndex?.digest??null})!==evidenceEpoch)throw new AjesCursorRefreshRequired();
+ };
+ const powerIdentity=(offer:any)=>JSON.stringify([japanLocalPowerHp(offer)??null,japanSupplierPower(offer)?.hp??null,japanUnknownPower(offer)]);
  const {query,modelDirectoryUnavailable,makeDirectoryUnavailable}=await resolvedCatalogQuery(JSON.stringify(params));
  const directoryUnavailable=modelDirectoryUnavailable||makeDirectoryUnavailable;
  measure?.('query-resolution',performance.now()-resolveStarted);
@@ -109,8 +125,9 @@ export async function readAjesCatalogPage(params:Record<string,unknown>,measure?
  // requested list in the same two-slot supplier queue. The independent count
  // endpoint/header owns aggregate refresh; continuations need only their rows.
  if(options.includeCount!==false&&(query.page||1)===1&&!params.after&&!filter.powerFilter)void readAjesCountSummary(JSON.stringify(params)).then(value=>{readyCount=value;}).catch(()=>{}).finally(()=>measure?.('count',performance.now()-countStarted));
- const read=async(sourcePage:number)=>{
-  const received=await readAjesPublic({...query,page:sourcePage},{measure}).catch(error=>{
+ const read=async(sourcePage:number,phase?:'k'|'u')=>{
+  await checkEvidence();
+  const received=await readAjesPublic({...query,page:sourcePage},{measure,...(evidenceSnapshot?{evidenceSnapshot}:{})}).catch(error=>{
    if(error?.sourceReceipt)sourceReceipts.push(error.sourceReceipt);
    throw error;
   });
@@ -118,8 +135,13 @@ export async function readAjesCatalogPage(params:Record<string,unknown>,measure?
   if(directoryUnavailable&&!received.items.length)throw Object.assign(new AjesUnavailable('directory_unavailable'),received.sourceReceipt?{sourceReceipt:received.sourceReceipt}:{});
   // Apply local/manual and supplier discovery filters before delivered-price previews.
   // Non-matching cars never enter the expensive customs/management pipeline.
-  const candidates=filter.powerFilter?received.items.filter(filter.matchesPower):received.items;
+  // Classify the same safe power that the public projection can display. A
+  // rejected legacy/local value must not enter K and turn unknown afterwards.
+  const normalized=filter.powerFilter?received.items.map(offer=>safePublicPricing(offer)):received.items;
+  const candidates=filter.powerFilter?normalized.filter(offer=>filter.matchesPower(offer)
+   &&(!phase||japanUnknownPower(offer)===(phase==='u'))):received.items;
   const page={...received,items:candidates,...(directoryUnavailable?{partial:true}:{})};
+  const powerBefore=evidenceSnapshot?new Map(page.items.map(offer=>[offer.id,powerIdentity(offer)])):null;
   const pricingStarted=performance.now();
   let priced=page.items;
   if(filter.priceFilter)priced=await applyActiveBusinessPricingBatch(page.items);
@@ -129,6 +151,10 @@ export async function readAjesCatalogPage(params:Record<string,unknown>,measure?
    const matched=page.items.filter(v=>{if(v.powerHp!=null&&hasEncyclopediaCalculationEvidence(v))return true;try{const parameters=japanPreviewParameters(v);return parameters.powerHp!=null||parameters.vehicleCategory==='N1';}catch{return false;}});
    if(matched.length){const updated=new Map((await applyActiveBusinessPricingBatch(matched)).map(v=>[v.id,v]));priced=page.items.map(v=>updated.get(v.id)||v);}
   }
+  await checkEvidence();
+  if(powerBefore)priced=priced.map(offer=>safePublicPricing(offer));
+  if(powerBefore&&(priced.length!==page.items.length||priced.some(offer=>!offer||powerBefore.get(offer.id)!==powerIdentity(offer))))
+   throw new AjesCursorRefreshRequired();
   measure?.('pricing',performance.now()-pricingStarted);
   return {...page,items:priced.filter(v=>v&&filter.matches(v))};
  };
@@ -139,19 +165,34 @@ export async function readAjesCatalogPage(params:Record<string,unknown>,measure?
   source:Object.fromEntries(Object.entries(query).filter(([key])=>key!=='page').sort(([a],[b])=>a.localeCompare(b))),
   local:Object.fromEntries(['body','bodyType','budget','budgetFrom','budgetTo','hasPrice','powerFrom','powerTo','city'].map(key=>[key,String(params[key]??'')])),
  });
- const initial=params.after?undefined:await read(query.page||1);
+ const initial=filter.powerFilter||params.after?undefined:await read(query.page||1);
  const total=readyCount as AjesCountSummary|null;
  let first:Awaited<ReturnType<typeof read>>|undefined=initial;
- const page=await readFilteredAjesPage<Awaited<ReturnType<typeof read>>['items'][number]>({startedAt,page:query.page||1,pageSize:query.pageSize||24,after:params.after,
+ const readPage=async(sourcePage:number,phase?:'k'|'u')=>{if(initial&&sourcePage===(query.page||1))return initial;const value=await read(sourcePage,phase);first??=value;return value;};
+ const page=filter.powerFilter?await readPowerOrderedAjesPage<Awaited<ReturnType<typeof read>>['items'][number]>({
+  startedAt,page:query.page||1,pageSize:query.pageSize||24,after:params.after,evidenceEpoch:evidenceEpoch!,
+  minimumReads:2,cursorKey:cursorQuery,itemKey:offer=>offer.id,known:offer=>!japanUnknownPower(offer),read:readPage,
+ }):await readFilteredAjesPage<Awaited<ReturnType<typeof read>>['items'][number]>({startedAt,page:query.page||1,pageSize:query.pageSize||24,after:params.after,
   minimumReads:2,cursorKey:cursorQuery,itemKey:offer=>offer.id,
   // Read the optional count only after its own request has completed. It is
   // never a prerequisite for a visible page or its next continuation.
   sourceTotal:total&&!total.stale?total.total:undefined,
-  read:async sourcePage=>{if(initial&&sourcePage===(query.page||1))return initial;const value=await read(sourcePage);first??=value;return value;}});
+  read:readPage});
  const observedAt=page.observedAt??first!.observedAt;
  const exact=(query.page||1)===1&&!params.after&&!page.hasMore&&!page.partial&&!page.stale?page.items.length:null;
  const countSummary=exact!==null?{total:exact,upperBound:false,stale:false,observedAt}:total;
- const items=(query.sort&&query.sort!=="updatedAt"?sortCatalogRows(page.items,query.sort,String(params.city||"")):page.items).map((v:any)=>publicOffer(v));
+ // Preserve the selected batch sort separately within K and U. Sorting a
+ // mixed boundary page together would put cheap unknown cars before known K.
+ let ordered=page.items;
+ if(query.sort&&query.sort!=="updatedAt"){
+  const sort=(rows:typeof page.items)=>sortCatalogRows(rows,query.sort!,String(params.city||""));
+  ordered=filter.powerFilter?[...sort(page.items.filter(offer=>!japanUnknownPower(offer))),...sort(page.items.filter(japanUnknownPower))]:sort(page.items);
+ }
+ const items=evidenceSnapshot?await withCatalogEditorialSnapshot(evidenceSnapshot.editorial,async()=>ordered.map((offer:any)=>{
+  const projected=publicOffer(offer);
+  if(powerIdentity(projected)!==powerIdentity(offer))throw new AjesCursorRefreshRequired();
+  return projected;
+ })):ordered.map((offer:any)=>publicOffer(offer));
  return {...first,...page,page:query.page||1,observedAt,filteredByPage:filter.active,total:exact,countSummary,...(filter.powerFilter?{powerFilterSummary:japanPowerFilterSummary(items)}:{}),items,generationId:observedAt,sourceReceipts};
 }
 /** Add once to totals built from the separate local inventory. A failure is not zero inventory. */

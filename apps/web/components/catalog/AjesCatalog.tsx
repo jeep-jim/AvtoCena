@@ -15,17 +15,17 @@ import {BrandLogoRail} from './BrandLogoRail';
 import {JapanSectionTabs} from './JapanSectionTabs';
 import {CatalogMarketFlag} from './CatalogMarketFlag';
 import {readAjesCatalogPage,readAjesCountSummary,readAjesMakes,AjesFilterUnavailable} from '@/lib/catalog/ajes-catalog';
-import {AjesInputError} from '@/lib/catalog/ajes-query';
+import {AjesInputError,AjesCursorRefreshRequired} from '@/lib/catalog/ajes-query';
 import {AjesUnavailable} from '@/lib/catalog/ajes-client';
 import {ajesSsrReadEvidence} from '@/lib/catalog/ajes-ssr-read-evidence';
 import {ajesCountText,exactAjesCount,ajesPaginationCountText} from '@/lib/catalog/ajes-count-display';
 type Params=Record<string,string|string[]|undefined>;
 export async function AjesCatalog({params,embedded=false,dealer}:{params:Params;embedded?:boolean;dealer?:DealerBrowsingContext|null}){
  const initial=Object.fromEntries(Object.entries(params).map(([k,v])=>[k,Array.isArray(v)?v[0]||'':v||'']));assertAjesJapanMarket(initial.market);const market='japan';const label='Япония';initial.market=market;if(!initial.make&&initial.brand)initial.make=initial.brand;
- let result:Awaited<ReturnType<typeof readAjesCatalogPage>>|undefined,error='',failedReceipt:unknown;
+ let result:Awaited<ReturnType<typeof readAjesCatalogPage>>|undefined,error='',failedReceipt:unknown,refreshRequired=false;
  // The independent streamed count below starts after the visible page. Two
  // concurrent category visits must not fill both supplier slots with counts.
- try{result=await readAjesCatalogPage(initial,undefined,{includeCount:false});}catch(e){if(e instanceof AjesUnavailable)failedReceipt=Object.getOwnPropertyDescriptor(e,'sourceReceipt')?.value;error=e instanceof AjesFilterUnavailable?'Это условие поиска пока не поддерживается для выбранного рынка. Снимите его; уточнить параметры и рассчитать доставку можно в карточке.':e instanceof AjesInputError?'Проверьте условия и диапазоны поиска.':e instanceof AjesUnavailable&&e.reason==='visitor_restricted'?'Источник отклонил подключение. Сохранённых результатов этого поиска пока нет. Попробуйте позже.':'Не удалось обновить автомобили. Попробуйте позже.';}
+ try{result=await readAjesCatalogPage(initial,undefined,{includeCount:false});}catch(e){if(e instanceof AjesUnavailable)failedReceipt=Object.getOwnPropertyDescriptor(e,'sourceReceipt')?.value;refreshRequired=e instanceof AjesCursorRefreshRequired;error=refreshRequired?'Данные подбора обновились. Откройте первую страницу — выбранные фильтры сохранены.':e instanceof AjesFilterUnavailable?'Это условие поиска пока не поддерживается для выбранного рынка. Снимите его; уточнить параметры и рассчитать доставку можно в карточке.':e instanceof AjesInputError?'Проверьте условия и диапазоны поиска.':e instanceof AjesUnavailable&&e.reason==='visitor_restricted'?'Источник отклонил подключение. Сохранённых результатов этого поиска пока нет. Попробуйте позже.':'Не удалось обновить автомобили. Попробуйте позже.';}
  // Complete brand/model directories are optional navigation metadata. The
  // controls already fetch them on opening; never hold visible cards behind them.
  const sourceTotal=result?.countSummary;
@@ -60,7 +60,7 @@ export async function AjesCatalog({params,embedded=false,dealer}:{params:Params;
  <h2 className="flex flex-wrap items-center gap-2 text-[26px] font-black tracking-[-0.04em] md:text-4xl"><CatalogMarketFlag market={market} className="h-5 w-7 md:h-6 md:w-9"/><span>{label}</span><Suspense fallback={displayTotal!==undefined?<MarketResultCount total={displayTotal}>{ajesCountText(sourceTotal)}</MarketResultCount>:null}>{sourceTotal?<><CatalogResultCountUpdate queryKey={JSON.stringify(initial)} text={displayTotal!==undefined?ajesCountText(sourceTotal):''} total={displayTotal}/>{displayTotal!==undefined&&<MarketResultCount total={displayTotal}>{ajesCountText(sourceTotal)}</MarketResultCount>}</>:<AjesIndependentCount initial={initial}/>}</Suspense></h2>
  {market==='japan'&&<JapanSectionTabs active="auction" params={initial}/>}
  </div>
- {!result&&error&&initial.after&&<Link href={restartHref} className="mb-3 inline-block text-sm font-bold underline">Открыть первую страницу</Link>}
+ {!result&&error&&(refreshRequired||initial.after||Number(initial.page)>1)&&<Link href={restartHref} className="mb-3 inline-block text-sm font-bold underline">Открыть первую страницу</Link>}
  {result&&<div>
  {String(initial.sort||'').split(',').some(term=>term.startsWith('totalRub'))&&<p className="mb-3 text-sm text-[var(--ac-muted)]">По рассчитанной цене в загруженной подборке. На следующих страницах могут быть более дешёвые автомобили.</p>}
  {!result.items.length&&!result.hasMore&&!result.partial&&!result.stale&&!result.interrupted&&!result.scanLimited&&<p role="status" className="rounded-2xl bg-[var(--ac-surface)] p-6 text-sm text-[var(--ac-muted)]">По выбранным параметрам автомобили не найдены. Попробуйте изменить условия поиска.</p>}

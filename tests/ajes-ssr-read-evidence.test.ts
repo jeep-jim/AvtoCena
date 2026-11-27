@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {createRequire} from 'node:module';
 import {build} from 'esbuild';
+import {AjesCursorRefreshRequired} from '../apps/web/lib/catalog/ajes-query';
 import {ajesSsrReadEvidence,AJES_SSR_READ_EVIDENCE_BYTES,AJES_SSR_READ_EVIDENCE_LIMIT,
   AJES_SSR_READ_EVIDENCE_ATTRIBUTE} from '../apps/web/lib/catalog/ajes-ssr-read-evidence';
 
@@ -73,13 +74,13 @@ test('invalid binding and malformed finite fields produce no forged receipt',()=
 
 test('actual AjesCatalog renders only the annotation on Japan main and retains initial failure receipts',async()=>{
   class Unavailable extends Error {reason:string;constructor(reason:string){super(reason);this.reason=reason;}}
-  const state:{value:any;error?:unknown;reads:number;Unavailable:typeof Unavailable}={value:null,reads:0,Unavailable};
+  const state:{value:any;error?:unknown;reads:number;Unavailable:typeof Unavailable;Refresh:typeof AjesCursorRefreshRequired}={value:null,reads:0,Unavailable,Refresh:AjesCursorRefreshRequired};
   (globalThis as any).__japanSsrEvidenceFixture=state;
   const require=createRequire(import.meta.url);
   const mocks:Record<string,string>={
     'ajes-catalog':"export class AjesFilterUnavailable extends Error{};export const readAjesCatalogPage=async()=>{const s=globalThis.__japanSsrEvidenceFixture;s.reads++;if(s.error)throw s.error;return s.value;};export const readAjesCountSummary=async()=>null;export const readAjesMakes=async()=>({makes:[]});",
     'ajes-client':"export const AjesUnavailable=globalThis.__japanSsrEvidenceFixture.Unavailable;",
-    'ajes-query':'export class AjesInputError extends Error{};',
+    'ajes-query':'export class AjesInputError extends Error{};export const AjesCursorRefreshRequired=globalThis.__japanSsrEvidenceFixture.Refresh;',
     'DealerBrowsingContext':'export const DealerLink=()=>null;',
     'CatalogSelectionContext':'export const CatalogResultCountUpdate=()=>null;',
     'catalog-routes':"export const catalogSearchHeading=()=> 'Япония';",
@@ -108,5 +109,18 @@ test('actual AjesCatalog renders only the annotation on Japan main and retains i
     state.error=Error('PRIVATE_EXCEPTION');
     assert.deepEqual(parse((await module.exports.AjesCatalog({params})).props[AJES_SSR_READ_EVIDENCE_ATTRIBUTE]).receipts,[]);
     assert.equal(state.reads,4,'projection introduces no source, count or directory read');
+    state.error=new AjesCursorRefreshRequired();
+    for(const pagination of [{page:'1'},{page:'2',after:'obsolete-cursor'}]){
+      const reset=await module.exports.AjesCatalog({params:{market:'japan',city:'Новокузнецк',fuel:'petrol',powerTo:'160',...pagination}});
+      const nodes:any[]=[];const visit=(value:any)=>{if(Array.isArray(value))value.forEach(visit);else if(value&&typeof value==='object'){nodes.push(value);visit(value.props?.children);}};visit(reset);
+      const restart=nodes.find(node=>node.props?.children==='Открыть первую страницу');assert.ok(restart,'a mid-read epoch change on page one also has a real restart link');
+      const url=new URL(restart.props.href,'https://fixture.test');
+      assert.equal(url.pathname,'/cars');assert.equal(url.searchParams.get('market'),'japan');
+      assert.equal(url.searchParams.get('city'),'Новокузнецк');assert.equal(url.searchParams.get('fuel'),'petrol');assert.equal(url.searchParams.get('powerTo'),'160');
+      assert.equal(url.searchParams.has('after'),false);assert.equal(url.searchParams.has('page'),false);
+      assert.ok(nodes.some(node=>node.props?.resultError?.includes('выбранные фильтры сохранены')));
+      assert.deepEqual(parse(reset.props[AJES_SSR_READ_EVIDENCE_ATTRIBUTE]).receipts,[]);
+    }
+    assert.equal(state.reads,6,'refresh UI adds no supplementary source read');
   }finally{delete (globalThis as any).__japanSsrEvidenceFixture;}
 });

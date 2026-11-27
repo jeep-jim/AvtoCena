@@ -19,7 +19,7 @@ test('ready cards do not wait for optional brand/model directories; exact select
     if(args.path.endsWith('/catalog-routes'))return {contents:readFileSync('apps/web/lib/catalog/catalog-routes.ts','utf8'),loader:'ts'};
     if(args.path.endsWith('/ajes-catalog'))return {contents:`export const {readAjesCatalogPage,readAjesMakes,readAjesDirectory,readAjesCountSummary}=globalThis.__ajesTest;export class AjesFilterUnavailable extends Error {}`};
     if(args.path.endsWith('/ajes-client'))return {contents:'export class AjesUnavailable extends Error {}'};
-    if(args.path.endsWith('/ajes-query'))return {contents:'export class AjesInputError extends Error {}'};
+    if(args.path.endsWith('/ajes-query'))return {contents:'export class AjesInputError extends Error {};export class AjesCursorRefreshRequired extends AjesInputError {}'};
     if(args.path.endsWith('/ajes-count-display'))return {contents:'export const exactAjesCount=s=>s?.total;export const ajesCountText=s=>String(s?.total??"unknown");export const ajesPaginationCountText=ajesCountText;'};
     if(args.path.endsWith('/japan-source-power'))return {contents:readFileSync('apps/web/lib/catalog/japan-source-power.ts','utf8'),loader:'ts'};
     if(args.path.endsWith('/powertrain-safety'))return {contents:readFileSync('apps/web/lib/catalog/powertrain-safety.ts','utf8'),loader:'ts'};

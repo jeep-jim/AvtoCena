@@ -56,8 +56,8 @@ test('actual catalog wrapper keeps exact model cards on directory failure and ne
  const stubs:Record<string,string>={
   'server-only':'','next/headers':"export const headers=async()=>new Map([['x-real-ip','127.0.0.1']]);",
   './ajes-runtime':"export const ajesClient={read:async()=>{globalThis.__modelRecovery.counts++;throw Error('count must not run');}};",
-  './ajes-public':`export const cappedAjesQuery=async q=>q;export const readAjesPublic=async q=>{const s=globalThis.__modelRecovery;s.lists++;s.queries.push(q);return {page:q.page||1,pageSize:24,received:s.empty?0:24,items:s.empty?[]:[{id:'toyota-exact'}],observedAt:'now'};};`,
-  './ajes-query':"export const ajesCatalogQuery=p=>({table:'stats',make:p.make,model:p.model,page:1,pageSize:24});export class AjesFilterUnavailable extends Error{};export class AjesInputError extends Error{};",
+  './ajes-public':`export const readAjesPublicEvidenceSnapshot=()=>{throw Error("unexpected power snapshot");};export const cappedAjesQuery=async q=>q;export const readAjesPublic=async q=>{const s=globalThis.__modelRecovery;s.lists++;s.queries.push(q);return {page:q.page||1,pageSize:24,received:s.empty?0:24,items:s.empty?[]:[{id:'toyota-exact'}],observedAt:'now'};};`,
+  './ajes-query':"export const ajesCatalogQuery=p=>({table:'stats',make:p.make,model:p.model,page:1,pageSize:24});export class AjesFilterUnavailable extends Error{};export class AjesInputError extends Error{};export class AjesCursorRefreshRequired extends AjesInputError{};",
   './ajes-client':"export class AjesUnavailable extends Error{constructor(reason){super(reason);this.reason=reason;}};export const readAjesModelDirectory=async()=>{throw new AjesUnavailable('local_busy');};export const readAjesMakeDirectory=async()=>({makes:[]});",
   './ajes-result-filter':"export const ajesResultFilter=()=>({active:false,priceFilter:false,matches:()=>true});",
   './storage':"export const publicOffer=x=>x;",'./market-page':"export const sortCatalogRows=x=>x;",
@@ -214,7 +214,7 @@ async function realPath(t:any,names=matched,modelDirectoryStale=false,source:{ma
  const mocks:Record<string,string>={
   'server-only':'','next/headers':'export const headers=async()=>new Map([["x-real-ip","203.0.113.1"]]);',
   'ajes-runtime':'export const ajesClient={read:q=>globalThis.__legacyMazda.read(q)};',
-  'ajes-public':'export const cappedAjesQuery=async q=>q;export const readAjesPublic=q=>globalThis.__legacyMazda.read(q);',
+  'ajes-public':'export const readAjesPublicEvidenceSnapshot=()=>{throw Error("unexpected power snapshot");};export const cappedAjesQuery=async q=>q;export const readAjesPublic=q=>globalThis.__legacyMazda.read(q);',
   storage:'export const publicOffer=row=>globalThis.__legacyMazda.project(row);export const getUnavailableOffer=async()=>null;export const searchOffers=async query=>{globalThis.__legacyMazda.neighborQueries.push(query);return {items:[],total:0};};',
   'collection-controls':'export const assertCollectionEnabled=async()=>{};',
   'market-page':'export const sortCatalogRows=x=>x;',
