@@ -13,6 +13,7 @@ const ROOT = fileURLToPath(new URL('../../', import.meta.url));
 const SHA = /^[a-f0-9]{40}$/;
 const DAILY_SCHEDULES = Object.freeze(['0 14 * * *', '17 0,3,6,9,12,15,18,21 * * *']);
 export const CHINA_DAILY_JOB_TIMEOUT_MINUTES = 360;
+const NOT_DUE_CLEANUP_JOB_MINUTES = 30, CLEANUP_FINALIZE_RESERVE_MS = 2 * 60 * 1000;
 const need = (value, code) => { if (!value) throw Error('china_daily_entry_' + code); };
 const safeCode = error => /^china_[a-z0-9_]{1,150}$/.test(error?.message ?? '') ? error.message : 'china_daily_entry_failed';
 const gitAt = root => args => {
@@ -68,6 +69,17 @@ export async function readChinaDailyDeadline({environment = process.env, fetcher
   need(job.name === 'refresh' && String(job.run_id) === environment.GITHUB_RUN_ID && job.head_sha === environment.GITHUB_SHA
     && job.status === 'in_progress' && job.conclusion === null && Number.isFinite(started) && started <= now(), 'deadline_job');
   return new Date(started + CHINA_DAILY_JOB_TIMEOUT_MINUTES * 60000).toISOString();
+}
+
+/** A fresh-source check only starts cleanup work within the same 30-minute
+ * window as the dedicated retention job, leaving two minutes for finalization.
+ * Derive it from the authenticated job start, never from this script's start.
+ * Existing in-flight operations still reconcile their outcome normally. */
+export function chinaNotDueCleanupDeadline(jobDeadlineAt) {
+  need(typeof jobDeadlineAt === 'string' && /^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(?:\.\d{1,6})?Z$/.test(jobDeadlineAt)
+    && Number.isFinite(Date.parse(jobDeadlineAt)), 'cleanup_deadline');
+  const started = Date.parse(jobDeadlineAt) - CHINA_DAILY_JOB_TIMEOUT_MINUTES * 60000;
+  return new Date(started + NOT_DUE_CLEANUP_JOB_MINUTES * 60000 - CLEANUP_FINALIZE_RESERVE_MS).toISOString();
 }
 
 export async function readChinaDailyPlans(root = ROOT) {
@@ -207,6 +219,7 @@ export async function runChinaDailyEntry({root = ROOT, environment = process.env
     let deadlineAt = null;
     try { deadlineAt = await use.readDeadline({environment}); }
     catch { progress({phase: 'daily_cleanup_deadline_unavailable'}); }
+    const notDueDeadlineAt = deadlineAt ? chinaNotDueCleanupDeadline(deadlineAt) : null;
     const report = await use.runCycle({runtimeRoot: pricingRoot, plan: pricingPlan, invocation,
       owner: {runId: environment.GITHUB_RUN_ID, attempt: environment.GITHUB_RUN_ATTEMPT, revision: invocation.sourceSha},
       runnerTemp, prepareReportPath: path.join(root, 'catalog-next-china-daily-generation-report.json'),
@@ -215,11 +228,16 @@ export async function runChinaDailyEntry({root = ROOT, environment = process.env
       retireTerminalAppImage: release.retireTerminalAppImage, onProgress: progress,
       resumeCleanup: ({readState, assertAuthority}) => use.collectRetired({mode: 'enqueue-only', readState, assertAuthority,
         environment, onProgress: progress}),
-      afterAccepted: ({previousAccepted, accepted, intent, readState, assertAuthority}) => use.collectRetired({
-        mode: deadlineAt ? 'drain' : 'enqueue-only', ...(deadlineAt ? {deadlineAt} : {}), previousAccepted,
-        acceptedPublication: {accepted, intent}, readState, assertAuthority, environment,
-        beforeCollect: release.retireHost, onProgress: progress})});
-    report.cleanupDeadlineAt = deadlineAt;
+      afterAccepted: ({previousAccepted, accepted, intent, readState, assertAuthority, cleanupReason}) => {
+        const cleanupDeadlineAt = cleanupReason === 'not_due' ? notDueDeadlineAt : deadlineAt;
+        if (cleanupReason === 'not_due' && !cleanupDeadlineAt) return {
+          market: 'china', completed: false, status: 'deferred', errorCode: 'china_daily_cleanup_deadline_unavailable'};
+        return use.collectRetired({mode: cleanupDeadlineAt ? 'drain' : 'enqueue-only',
+          ...(cleanupDeadlineAt ? {deadlineAt: cleanupDeadlineAt} : {}), previousAccepted,
+          acceptedPublication: {accepted, intent}, readState, assertAuthority, environment,
+          beforeCollect: release.retireHost, onProgress: progress});
+      }});
+    report.cleanupDeadlineAt = report.status === 'not_due' ? notDueDeadlineAt : deadlineAt;
     await fs.writeFile(reportPath, JSON.stringify(report, null, 2) + '\n', {mode: 0o600}); log(report); return report;
   } catch (error) {
     const report = error?.report?.kind === 'china-daily-cycle-v1' ? error.report : {version: 1, kind: 'china-daily-cycle-v1',

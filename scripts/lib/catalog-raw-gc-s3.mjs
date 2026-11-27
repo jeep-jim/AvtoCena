@@ -20,8 +20,7 @@ const compare=(a,b)=>a<b?-1:a>b?1:0;
 /** Pure SigV4 calculation; no network. The transport below supplies only its
  * pinned REG host. This is intentionally independent of data.ts's private
  * request method, which retries mutations and buffers unbounded bodies. */
-export function signRawGcS3Request({method,host,path,query={},body='',headers:extra={},region,accessKeyId,secretAccessKey,at}) {
-  assert.ok(['GET','HEAD','PUT','POST'].includes(method),'raw_gc_s3_method');
+function signS3Bytes({method,host,path,query={},body='',headers:extra={},region,accessKeyId,secretAccessKey,at}) {
   const amzDate=new Date(at).toISOString().replace(/[:-]|\.\d{3}/g,''),date=amzDate.slice(0,8);
   const canonicalPath=path.split('/').map(encode).join('/');
   const canonicalQuery=Object.entries(query).map(([key,value])=>[encode(key),encode(value)])
@@ -40,6 +39,19 @@ export function signRawGcS3Request({method,host,path,query={},body='',headers:ex
   const signature=createHmac('sha256',key).update(stringToSign).digest('hex');
   headers.authorization='AWS4-HMAC-SHA256 Credential='+accessKeyId+'/'+scope+', SignedHeaders='+signedHeaders+', Signature='+signature;
   return {headers,canonicalPath,canonicalQuery,canonicalRequestSha256:hash(canonicalRequest),signature};
+}
+
+export function signRawGcS3Request(options) {
+  assert.ok(['GET','HEAD','PUT','POST'].includes(options?.method),'raw_gc_s3_method');
+  return signS3Bytes(options);
+}
+
+/** Pure signing only; no transport or authority to delete a cache object.
+ * Existing GC callers retain their original method fence above. The dedicated
+ * capability probe separately binds every DELETE to its run-owned canary. */
+export function signSyntheticS3DeleteRequest(options) {
+  assert.equal(options?.method,'DELETE','synthetic_s3_delete_method');
+  return signS3Bytes(options);
 }
 
 function config(environment) {

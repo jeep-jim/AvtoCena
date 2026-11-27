@@ -7,11 +7,12 @@ import os from 'node:os';
 import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
 import {verifyChinaDailyInvocation, checkoutChinaDailyRuntimes, runChinaDailyEntry,
-  readChinaDailyDeadline, readChinaDailyPlans, selectChinaDailyServingPlan,
+  readChinaDailyDeadline, chinaNotDueCleanupDeadline, readChinaDailyPlans, selectChinaDailyServingPlan,
   CHINA_DAILY_JOB_TIMEOUT_MINUTES} from '../scripts/catalog-next/daily-entry.mjs';
 import {runChinaDailyCycle} from '../scripts/catalog-next/daily-controller.mjs';
 import {inspectChinaPublicationState} from '../scripts/catalog-next/china-state.mjs';
 import {validateChinaGenerationRetirementWitness} from '../scripts/catalog-next/china-generation-gc.mjs';
+import {maintainChinaGenerationGcQueue} from '../scripts/catalog-next/china-generation-gc-queue.mjs';
 
 const root = process.cwd(), sha = 'a'.repeat(40), hash = value => createHash('sha256').update(value).digest('hex');
 const ordered = value => Array.isArray(value) ? value.map(ordered) : value && typeof value === 'object'
@@ -94,6 +95,13 @@ test('cleanup deadline comes from the exact real job start and metadata errors d
   await assert.rejects(readChinaDailyDeadline({...args, fetcher: async () => { throw Error('private-token-must-not-escape'); }}),
     error => error.message === 'china_daily_entry_deadline_transport');
   await assert.rejects(readChinaDailyDeadline({...args, fetcher: async () => new Response('{}', {status: 403})}), /deadline_status/);
+});
+
+test('not_due cleanup uses the real job start plus 28 minutes, including date boundaries', () => {
+  assert.equal(chinaNotDueCleanupDeadline('2026-11-24T14:00:00.000Z'), '2026-11-24T08:28:00.000Z');
+  assert.equal(chinaNotDueCleanupDeadline('2027-01-01T05:50:00.000Z'), '2027-01-01T00:18:00.000Z');
+  for (const value of [null, 'private-invalid-value', '2026-11-24T14:00:00+00:00', '2026-99-24T14:00:00Z'])
+    assert.throws(() => chinaNotDueCleanupDeadline(value), /china_daily_entry_cleanup_deadline/);
 });
 
 async function fixture(t, {withCodePlan = false} = {}) {
@@ -181,6 +189,82 @@ function resolvedPublication(input, previous = {found: false, etag: null, sha256
   assert.equal(inspectChinaPublicationState(publication).status, 'resolved');
   return publication;
 }
+
+test('not_due entry bounds pending cleanup, defers missing metadata and stops expired cleanup before host or queue access', async t => {
+  const f = await fixture(t), trace = [], logs = [];
+  let publication, clock = '2026-11-24T12:05:00.000Z', deadlineAvailable = true, sequence = 0, deadlineReads = 0;
+  for (const generation of [101, 102, 103]) publication = resolvedPublication(accepted(f, {generation,
+    sourceObservedAt: '2026-11-24T11:00:00.000Z', acceptedAt: '2026-11-24T12:00:00.000Z'}), publication?.accepted);
+  const objects = new Map(Object.entries(publication)), writes = [];
+  const absent = () => ({found: false, etag: null, sha256: null, value: null});
+  const storage = {
+    assertPrivateBucket: async () => ({verified: true}),
+    read: async name => structuredClone(objects.get(name) ?? absent()),
+    async compareAndSwap(name, previous, value) {
+      assert.equal(name, 'lease', 'cleanup cannot replace an accepted publication');
+      const prior = objects.get(name) ?? absent(); assert.equal(prior.etag, previous.etag); assert.equal(prior.sha256, previous.sha256);
+      writes.push(name); objects.set(name, {found: true, etag: '"not-due-' + ++sequence + '"',
+        sha256: hash(JSON.stringify(ordered(value))), value: structuredClone(value)});
+    },
+  };
+  const capabilities = {
+    verifyInvocation: () => ({version: 1, event: 'schedule', sourceSha: sha}), verifyBaselines: () => {}, createStorage: () => storage,
+    runtimeGit: directory => args => { assert.equal(directory, f.runtimes.pricingRoot);
+      return args[0] === 'diff' ? '' : args[1] === 'HEAD' ? f.pricingPlan.runtimeSha : f.pricingPlan.runtimeTree; },
+    verifyCompatibility: async input => assert.equal(input.runtimeRoot, f.runtimes.servingRoot),
+    createRelease: () => ({
+      stageRelease: async () => assert.fail('not_due cannot stage a publication'),
+      recoverRelease: async () => assert.fail('the fixture is already resolved'),
+      retireTerminalAppImage: async () => assert.fail('not_due cannot retire an application image'),
+      retireHost: async input => {
+        trace.push('host'); await input.assertAuthority();
+        assert.deepEqual(await input.readState(), publication);
+        return {completed: true, retiredContainers: 0, filesDeleted: 0, freedBytes: 0};
+      },
+    }),
+    readDeadline: async () => {
+      deadlineReads++;
+      if (!deadlineAvailable) throw Error('private-github-metadata-error');
+      return '2026-11-24T18:00:00.000Z';
+    },
+    collectRetired: async input => {
+      trace.push(input.mode);
+      if (input.mode === 'enqueue-only') return {market: 'china', completed: true, status: 'remembered',
+        witnessRemembered: true, pending: 1};
+      assert.equal(input.deadlineAt, '2026-11-24T12:28:00.000Z');
+      assert.deepEqual(input.acceptedPublication, publication); assert.equal(typeof input.beforeCollect, 'function');
+      if (clock === '2026-11-24T12:28:00.000Z') return maintainChinaGenerationGcQueue({...input, now: () => clock,
+        queueStorage: Object.fromEntries(['assertPrivateBucket', 'readQueue', 'compareAndSwapQueue', 'readTask', 'createTask', 'deleteTask']
+          .map(name => [name, () => assert.fail('expired cleanup must not access queue storage')]))});
+      await input.beforeCollect({previousAccepted: input.previousAccepted, acceptedPublication: input.acceptedPublication,
+        readState: input.readState, assertAuthority: input.assertAuthority});
+      return {market: 'china', completed: true, status: 'complete', pending: 0, deletedObjects: 0};
+    },
+    runCycle: input => runChinaDailyCycle({...input, now: () => clock, scheduleHeartbeat: () => () => {},
+      prepare: async () => assert.fail('pending cleanup cannot prepare the supplier source')}),
+  };
+  const invoke = () => runChinaDailyEntry({root: f.control, environment: {...env('schedule'),
+    RUNNER_TEMP: f.temporary, JSON_STORAGE_DRIVER: 'object'}, capabilities, log: value => logs.push(value)});
+  const drained = await invoke();
+  assert.equal(drained.status, 'not_due'); assert.equal(drained.retention.completed, true);
+  assert.equal(drained.cleanupDeadlineAt, '2026-11-24T12:28:00.000Z'); assert.deepEqual(trace, ['enqueue-only', 'drain', 'host']);
+  deadlineAvailable = false; clock = '2026-11-24T12:06:00.000Z'; trace.length = 0;
+  const deferred = await invoke();
+  assert.equal(deferred.status, 'not_due'); assert.equal(deferred.cleanupDeadlineAt, null);
+  assert.deepEqual(deferred.retention, {status: 'deferred', completed: false, errorCode: 'china_daily_cleanup_deadline_unavailable'});
+  assert.equal(deferred.retentionResume.pending, 1); assert.deepEqual(trace, ['enqueue-only']);
+  deadlineAvailable = true; clock = '2026-11-24T12:28:00.000Z'; trace.length = 0;
+  const expired = await invoke();
+  assert.equal(expired.status, 'not_due'); assert.equal(expired.retention.status, 'deadline');
+  assert.equal(expired.retention.completed, false); assert.equal(expired.retentionResume.pending, 1);
+  assert.deepEqual(trace, ['enqueue-only', 'drain']); assert.equal(deadlineReads, 3, 'each run reads job metadata only once');
+  for (const result of [drained, deferred, expired]) {
+    assert.equal(result.published, false); assert.equal(result.sourcePrepared, false); assert.equal(result.leaseReleased, true);
+  }
+  assert.equal(writes.length, 6); assert(writes.every(name => name === 'lease'));
+  assert.deepEqual({accepted: await storage.read('accepted'), intent: await storage.read('intent')}, publication);
+  assert(!JSON.stringify(logs).includes('private-github-metadata-error'));
+});
 
 test('primary and catch-up events skip preparation in a fresh source window and still prepare in the next window', async t => {
   const f = await fixture(t, {withCodePlan: true}), initial = accepted(f, {
