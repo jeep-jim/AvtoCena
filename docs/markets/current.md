@@ -26,13 +26,13 @@ Checkpoint: **28.11.2026, Asia/Krasnoyarsk**. Япония опубликова�
 
 ## Следующие действия
 
-1. Опубликовать reviewed maintenance33 и выполнить read-only observer для фактической принятой пары current/rollback.
-2. По этой паре обновить только два REG runtime pins; закончить retention с освобождённым lease.
-3. Активировать guarded AJ compaction и проверить её фактический отчёт.
+1. Опубликовать reviewed REG pin binding к actual B9/a5 и запустить отдельный marker; закончить retention с освобождённым lease.
+2. Активировать guarded AJ compaction и проверить её фактический отчёт.
 
 ## Хранение и границы
 
-- Maintenance33 готов и независимо проверен: core **`4ef96d16`**, observer **`e2275bbf`**, **20/20** targeted tests. Exact owner `46051339049 / attempt1 / a697a7b1 / B9`. Девять core paths побайтово прежние. Код пока локальный, markers отсутствуют, REG pins **c6/a5** не изменены; actual pair ещё не наблюдалась отдельным observer.
+- Maintenance33 опубликован controller **`a854d70b`**; [read-only observer](https://github.com/jeep-jim/AvtoCena/actions/runs/46054235990) **SUCCESS**. Exact owner33/1/a697/B9, state stable/resolved/committed, lease released; actual current **B9**, rollback **a5**, оба на **gen_china_45875678028_1** и прежнем pricing. State mutations0. Artifact hash/CRC и current bindings к accepted release33 сверены.
+- REG binding **`ca58f9cf`**: изменена только `expectedRuntime` c6→B9; `expectedRollbackRuntime` уже совпадал сactuala5. Все исторические pins сохранены, **19/19** focused tests и independent review PASS. REG retention и AJ compaction ещё не активированы; отдельные markers следующие.
 - Исторические A/B/C witnesses не переписывать. Рабочий AJ DELETE запрещён; compaction использует conditional PUT и уменьшает logical payload, не доказывает физическое освобождение host disk. Ни один observer не применять к откатившемуся или отменённому выпуску.
 - AJ — только Япония: реальные запросы посетителей и ограниченный кэш, без дампа/зеркала; fresh30мин, stale fallback строго <7суток с исходной датой. Pricing **`64c6338e0db23c8999096bceefbf113c0136fe15`**, формулы, энциклопедия и редакторские сведения сохраняются.
 - [Подробные bindings, история попыток, ограничения доказательств и хэши артефактов](../operations/2026-11-27-japan-directory-completion.json). Observers29–32 не запускать; accepted owner теперь33.

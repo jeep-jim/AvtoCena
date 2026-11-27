@@ -27,7 +27,7 @@ export const PINS = Object.freeze({
   codeRuntime: 'a5ca426eec2663eb17c2df69fe2bfed46e2b8740',
   // Historical witnesses retain the runtimes above. A new maintenance run
   // additionally requires this exact accepted current/rollback pair.
-  expectedRuntime: 'c6cfb54cc7c9e2b9d30dcdbb7af9cb604b3aa323',
+  expectedRuntime: 'b9e9122b75f4e588088d0241476b18df7f047d96',
   expectedRollbackRuntime: 'a5ca426eec2663eb17c2df69fe2bfed46e2b8740',
   a: 'gen_china_45369451603_1', aTask: '5852cac7f4860548c075e3d761cb1d18e178867d6e4c34f305fdb22839276b69',
   b: 'gen_china_45655051136_1',

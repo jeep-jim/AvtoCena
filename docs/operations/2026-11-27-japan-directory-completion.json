@@ -345,7 +345,7 @@
     "exactRuntimeAndPricingBindings": "passed against the published 4e62111 serving plan, exact 59/113 paths and protected pricing"
   },
   "maintenance": {
-    "status": "accepted_release33_prepared_for_readonly_pair_observation",
+    "status": "actual_pair_verified_reg_pins_reviewed_ready_for_activation",
     "activationRequires": "An actually accepted new runtime, then a fresh exact current/rollback observation; do not run any observer bound to rolled-back releases.",
     "preparedCoreCommit": "4ef96d162f57d315edc7a1335f9c4af0708e0611",
     "preparedObserverCommit": "e2275bbfd81cff4a23f124aa5e0983aaa72bfec1",
@@ -409,7 +409,7 @@
       "activationRequires": "Actual accepted release32, then stable verified current and rollback observation; observer remains GET-only."
     },
     "release33Preparation": {
-      "status": "reviewed_ready_after_accepted_release33_not_yet_published_or_activated",
+      "status": "published_observer_completed",
       "coreCommit": "4ef96d162f57d315edc7a1335f9c4af0708e0611",
       "observerCommit": "e2275bbfd81cff4a23f124aa5e0983aaa72bfec1",
       "tree": "21a503f559bd1aa29fd44ecf3554ff53bf81330a",
@@ -422,8 +422,107 @@
       "independentReview": "passed against the exact core and observer commits",
       "coreUnchanged": true,
       "regPinsUnchanged": true,
-      "markerCreated": false,
+      "markerCreated": true,
       "activationRequires": "Actual accepted release33, then stable verified current and rollback observation; observer remains GET-only."
+    },
+    "publishedControllerSha": "a854d70ba4536889ea89b6ebf95aee9731b11af5",
+    "acceptedPairObservation": {
+      "runId": 46054235990,
+      "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/46054235990",
+      "markerSha": "b524388fcab60a205afad89787371a783fd4c4fb",
+      "approvedSourceSha": "a854d70ba4536889ea89b6ebf95aee9731b11af5",
+      "conclusion": "success",
+      "artifactId": 15225423127,
+      "artifactBytes": 1326,
+      "artifactSha256": "5da0eab826d1d6e86deba46f1a4bf0939b2f0f2b56859d132d73ead2ef44212a",
+      "reportBytes": 2930,
+      "reportSha256": "c1431d7353036d0260378adae835915edc3daf87c99076dc398723506ccabf5e",
+      "artifactCrcVerified": true,
+      "report": {
+        "version": 1,
+        "kind": "japan-accepted-pair-readonly-v1",
+        "target": {
+          "runId": "46051339049",
+          "attempt": "1",
+          "revision": "a697a7b1c78a4d362134c2c3ab84dc0be5809a4d",
+          "runtimeSha": "b9e9122b75f4e588088d0241476b18df7f047d96",
+          "acceptancePolicy": "japan-functional-observed-timing-v1"
+        },
+        "observedAt": "2026-11-27T19:06:25.670Z",
+        "status": "verified_current_and_rollback",
+        "verified": true,
+        "readOnly": true,
+        "stateMutations": 0,
+        "deletionPermitted": false,
+        "stableObservation": true,
+        "publicationStatus": "resolved",
+        "intentStatus": "committed",
+        "acceptancePolicy": "japan-functional-observed-timing-v1",
+        "speedGateRequired": false,
+        "speedPassed": null,
+        "leaseStatus": "released",
+        "acceptedAt": "2026-11-27T18:59:33.807840Z",
+        "stateSha256": {
+          "accepted": "dfaec2db204c53e49a6ea232fdcddee99ee53071da9386d57ea1e6bf2e779485",
+          "intent": "09a6bbb98162b2de778e9243c75d18638dd75ddf81595f1b65eb1ca580a3285f",
+          "lease": "60fcfac92900d86be6dc889fe8ca0ea205ee2703a1b5d0d0fdcd0e6b76c7477e"
+        },
+        "current": {
+          "market": "china",
+          "generationId": "gen_china_45875678028_1",
+          "owner": {
+            "attempt": "1",
+            "revision": "6ac99e79457bb7183a263017dbfd4e76e5ad5d1d",
+            "runId": "45875678028"
+          },
+          "runtimeSha": "b9e9122b75f4e588088d0241476b18df7f047d96",
+          "pricingRuntimeSha": "64c6338e0db23c8999096bceefbf113c0136fe15",
+          "imageId": "sha256:7b97f99ee72af7b50944c98a94a670bcb347b9779794d78b34fdc92279460216",
+          "receiptSha256": "fb887cb058f90c0c79308fa8d42801c622f96d7f26d3e97addf53f135a071793",
+          "sourceDescriptorSha256": "c6c69df61ccabfbc187f8e76bc0d2b47aa5f3561362cefcaa547e9f457acb5e9",
+          "generationManifestSha256": "58263ea4dc5642c9ff6f544830e9d3536ba702fb729a7a8c33b049b70b737038",
+          "sourceCursor": 13340204,
+          "sourceObservedAt": "2026-11-26T19:04:39.089Z",
+          "hostReceiptSha256": "b9cb16c1e4ac083c4ef38bc0c76fb3e1fd37d5ae2a055d46beeeb11aff0e3b9e"
+        },
+        "rollback": {
+          "market": "china",
+          "generationId": "gen_china_45875678028_1",
+          "owner": {
+            "attempt": "1",
+            "revision": "6ac99e79457bb7183a263017dbfd4e76e5ad5d1d",
+            "runId": "45875678028"
+          },
+          "runtimeSha": "a5ca426eec2663eb17c2df69fe2bfed46e2b8740",
+          "pricingRuntimeSha": "64c6338e0db23c8999096bceefbf113c0136fe15",
+          "imageId": "sha256:7fabcde790be0cb6d2549b646178d39ddc235c9fb1def8b66df48f7296d81647",
+          "receiptSha256": "fb887cb058f90c0c79308fa8d42801c622f96d7f26d3e97addf53f135a071793",
+          "sourceDescriptorSha256": "c6c69df61ccabfbc187f8e76bc0d2b47aa5f3561362cefcaa547e9f457acb5e9",
+          "generationManifestSha256": "58263ea4dc5642c9ff6f544830e9d3536ba702fb729a7a8c33b049b70b737038",
+          "sourceCursor": 13340204,
+          "sourceObservedAt": "2026-11-26T19:04:39.089Z",
+          "hostReceiptSha256": "77bc0900ae04e1360e7524e5b275459d507d650b83da239f16a979c117190524"
+        },
+        "controllerSha": "b524388fcab60a205afad89787371a783fd4c4fb"
+      }
+    },
+    "regRuntimeRebind": {
+      "status": "reviewed_ready_for_separate_activation",
+      "localReviewedCommit": "ca58f9cf15068ff5e87c0b8312672e5bb34966e5",
+      "baseSha": "b524388fcab60a205afad89787371a783fd4c4fb",
+      "changedFile": "scripts/catalog-next/resume-china-reg-retention-45875678028.mjs",
+      "changedFields": [
+        "expectedRuntime"
+      ],
+      "previousExpectedRuntime": "c6cfb54cc7c9e2b9d30dcdbb7af9cb604b3aa323",
+      "expectedRuntime": "b9e9122b75f4e588088d0241476b18df7f047d96",
+      "expectedRollbackRuntime": "a5ca426eec2663eb17c2df69fe2bfed46e2b8740",
+      "actualRollbackAlreadyMatched": true,
+      "allHistoricalPinsUnchanged": true,
+      "targetedTestsPassed": 19,
+      "targetedTestsFailed": 0,
+      "independentReview": "passed against actual observer report and exact one-line commit",
+      "localFixturePreparation": "Exact HEAD calculation-version.mjs materialized in the sparse checkout; no tracked fixture change."
     }
   },
   "verificationAttempts": [
@@ -450,8 +549,7 @@
     }
   ],
   "remaining": [
-    "Publish reviewed maintenance33 and run its read-only observer for the real accepted current/rollback pair.",
-    "Rebind only the two authorized REG retention runtime pins from that observation, run retention to terminal and lease-free.",
+    "Publish the reviewed actual-pair REG runtime pin binding and activate its marker-only retention operation; verify terminal result and released lease.",
     "Activate guarded Japan cache compaction and verify the actual result."
   ],
   "precedingCandidate": {
