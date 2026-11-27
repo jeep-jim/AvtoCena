@@ -1,16 +1,16 @@
 # Текущий шаг
 
-Checkpoint: **28.11.2026, Asia/Krasnoyarsk**. Работа продолжается только по Японии и затронутому общему пути главной.
+Checkpoint: **28.11.2026, Asia/Krasnoyarsk**. Япония опубликована; завершается уже разрешённое обслуживание хранения.
 
-## Фактический статус
+## Принятая публикация
 
-- [Выпуск №32](https://github.com/jeep-jim/AvtoCena/actions/runs/46046207658) **rolled_back** в 18:20:08.763 UTC. Trigger `aa0d0c0b15c3d0e7fc913c8fa3fb08ecab4af679`, controller `ced75a511f9009d48faaed3f16e9f83cc947f024`. Собственная live-проверка остановилась на `stability_model_selection / japan_browser_stability_model_duplicate`, timeout=false. Восстановление, retention и освобождение lease подтверждены; exact failed image удалён.
-- Runtime **`b9e9122b75f4e588088d0241476b18df7f047d96`**, tree `4e2c36e461416d6db7d0f52753c9a933d626dd5c`. Exact source/pricing proof прошёл: **59 runtime / 113 pricing paths**, защищённые pricing paths не изменены, frozen HTTP oracle применим.
-- [Verify №64](https://github.com/jeep-jim/AvtoCena/actions/runs/46045571108) **SUCCESS** на этом controller/runtime: **1615/1615 controller**, **557/557 native** в одном чистом hosted запуске, web/engine typecheck и все обязательные fixtures PASS.
-- Реальный Chromium Retry fixture **3/3 PASS**: mobile empty→Retry→полный свежий источник; desktop HTTP503→dropdown Retry и независимый rail Retry/remount→полный источник; повторно пустой ответ строго отвергнут. Legacy **8/8**, model readiness **2/2**. Все эти gates прошли также в самом выпуске32 до build/host.
-- Live32 подтвердил свежие **44/44** марки desktop/mobile, страницы **24+24**, мощность/город/расчёт/detail/видимость и legacy Mazda3 **308→200**, точные API/UI/city. Hydration и brand navigation прошли; отказ при проверке9 model options до выбора модели. Сырые9pairs не сохранены. Combined/related/vehicle проверки не завершены.
-- На exact B9 компоненте воспроизведено несовпадение: UI сохраняет точные пары raw make/model, а controller считает дублем normalized(model) без make. Исправление **`2d4c39ca`** готово: exact tuple uniqueness и strict attribute-bound click при async reorder; настоящий одинаковый tuple и non-source вариант отвергаются. **66/66** affected tests PASS, independent review PASS; hosted **4** actual browser cases ещё ожидаются. Runtime B9 не изменён. Это воспроизведение контракта, а не восстановленные9livepairs.
-- Последняя подтверждённая принятая версия пока **`a5ca426eec2663eb17c2df69fe2bfed46e2b8740`**, Китай C. До terminal accepted отчёта runtime B9 не считать установленным.
+- [Выпуск №33](https://github.com/jeep-jim/AvtoCena/actions/runs/46051339049) **SUCCESS / accepted**, завершён **28.11.2026 02:00:16 Asia/Krasnoyarsk**. `completed=true`, `published=true`, `retentionPreserved=true`, `leaseReleased=true`. Trigger `a697a7b1c78a4d362134c2c3ab84dc0be5809a4d`, controller `4e62111a5598a7d77304d697a02e8a014d93b798`.
+- Действующий runtime **`b9e9122b75f4e588088d0241476b18df7f047d96`**, tree `4e2c36e461416d6db7d0f52753c9a933d626dd5c`, image `sha256:7b97f99ee72af7b50944c98a94a670bcb347b9779794d78b34fdc92279460216`. Exact **59 runtime / 113 pricing paths**, защищённый pricing неизменен; принят Китай **`gen_china_45875678028_1`**.
+- **Все16 Japan functional flags и общий passed=true.** Live подтверждены fresh44/44 марки desktop/mobile, страницы24+24 и pagination, мощность/order, город, detail/input/расчёт, видимость и удаление длинного warning, legacy Mazda3, настоящий выбор модели, combined filters, related cards и vehicle policy.
+- Model journey:9exact pairs/8normalized names, выбранная Mazda6 из источника,24fresh rows, точные UI/API/город. Combined: grade5+automatic+petrol+power160. Related:4карточки —3freshJapan и1validatedgreenstock; source IDs совпали. Vehicle policy:96строк проверены, запрещённых видимых0.
+- [Verify №65](https://github.com/jeep-jim/AvtoCena/actions/runs/46050444852): **1618/1618 controller**, **557/557 native**, web/engine typecheck и все обязательные fixtures PASS. Real Chromium legacy8, model/source identity4 и Retry3 также прошли в самом выпуске33. Artifact digest/CRC,19screenshots и image/source/nonce/manifest bindings проверены.
+- Время только наблюдается: **`speedGateRequired=false`, `speedPassed=null`**, `latencyThresholdApplied=false`, broad server benchmark не выполнялся. Read-only browser fence сохранён, production mutations0 и direct supplier API requests0.
+- Host cleanup подтвердил1retired container и удаление exact old077c image; measured free-byte change **1,190,977,536B** относится только к этому образу. Общая очистка всех возможных старых Docker images этим не утверждается.
 
 ## Действующее поручение и включённые исправления
 
@@ -22,15 +22,17 @@ Checkpoint: **28.11.2026, Asia/Krasnoyarsk**. Работа продолжает�
 - Shared-home fallback изолирован по рынкам при отсутствующем/stale/incomplete overview. Не возвращать obsolete all-alias и общий скоростной барьер.
 - Controller исправляет ожидание hydration, legacy canonical navigation и HTTP-error body: JSON читается только для200, все свежие source/UI proofs сохранены. Fixture сохраняет диагностику до cleanup. Exact authored fixes и проверки зафиксированы в подробном отчёте.
 
+
+
 ## Следующие действия
 
-1. Опубликовать reviewed controller `2d4c39ca`, подтвердить4actual browser cases в hosted verification, затем довести следующий выпуск до фактической собственной live acceptance Японии.
-2. После принятия перенести подготовленный observer на фактически принятый выпуск, опубликовать обслуживание и прочитать реальную пару current/rollback.
-3. По этой паре обновить только два REG runtime pins; закончить retention с освобождённым lease, затем активировать guarded AJ compaction и проверить её фактический отчёт.
+1. Опубликовать reviewed maintenance33 и выполнить read-only observer для фактической принятой пары current/rollback.
+2. По этой паре обновить только два REG runtime pins; закончить retention с освобождённым lease.
+3. Активировать guarded AJ compaction и проверить её фактический отчёт.
 
 ## Хранение и границы
 
-- Maintenance32 подготовлен и независимо проверен: core **`a343764f`**, observer **`5df222eb`**, **20/20** targeted tests. Exact owner `46046207658 / attempt1 / aa0d0c0b / B9`; старый owner31 с тем же runtime отвергается. Девять core paths побайтово прежние. После rollback32 код остаётся локальным; observer32 не запускать. Markers отсутствуют, REG pins **c6/a5** не изменены.
+- Maintenance33 готов и независимо проверен: core **`4ef96d16`**, observer **`e2275bbf`**, **20/20** targeted tests. Exact owner `46051339049 / attempt1 / a697a7b1 / B9`. Девять core paths побайтово прежние. Код пока локальный, markers отсутствуют, REG pins **c6/a5** не изменены; actual pair ещё не наблюдалась отдельным observer.
 - Исторические A/B/C witnesses не переписывать. Рабочий AJ DELETE запрещён; compaction использует conditional PUT и уменьшает logical payload, не доказывает физическое освобождение host disk. Ни один observer не применять к откатившемуся или отменённому выпуску.
-- AJ — только Япония: реальные запросы посетителей и ограниченный кэш, без дампа/зеркала; fresh30мин, stale fallback строго <7суток с исходной датой. Принятый Китай **`gen_china_45875678028_1`**, pricing **`64c6338e0db23c8999096bceefbf113c0136fe15`**, формулы, энциклопедия и редакторские сведения сохраняются.
-- [Подробные bindings, история попыток, ограничения доказательств и хэши артефактов](../operations/2026-11-27-japan-directory-completion.json). Отмена31/Verify62 произошла до build/host; Verify63 диагностировал error-body ожидание, исправленное и проверенное в64. Их результаты не переписываются.
+- AJ — только Япония: реальные запросы посетителей и ограниченный кэш, без дампа/зеркала; fresh30мин, stale fallback строго <7суток с исходной датой. Pricing **`64c6338e0db23c8999096bceefbf113c0136fe15`**, формулы, энциклопедия и редакторские сведения сохраняются.
+- [Подробные bindings, история попыток, ограничения доказательств и хэши артефактов](../operations/2026-11-27-japan-directory-completion.json). Observers29–32 не запускать; accepted owner теперь33.

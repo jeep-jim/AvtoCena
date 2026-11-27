@@ -5,11 +5,11 @@ import os from 'node:os';
 import path from 'node:path';
 import {execFileSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
-import {createChinaState} from '../scripts/catalog-next/china-state.mjs';
+import {createChinaState, inspectChinaPublicationState} from '../scripts/catalog-next/china-state.mjs';
 import {maintainChinaGenerationGcQueue} from '../scripts/catalog-next/china-generation-gc-queue.mjs';
 import {createChinaGenerationGcStorage} from '../scripts/catalog-next/china-generation-gc.mjs';
 import {hash, copy, ordered, empty} from './helpers/catalog-next-gc-fixture.mjs';
-import {PINS, MARKER, WORKFLOW, OPERATION, verifyInvocation, leaseOnlyStorage, verifyTask,
+import {PINS, MARKER, WORKFLOW, OPERATION, verifyInvocation, verifyState, leaseOnlyStorage, verifyTask,
   scopedQueueStorage, aggregateGc, readDeadline, runRetention}
   from '../scripts/catalog-next/resume-china-reg-retention-45875678028.mjs';
 
@@ -42,7 +42,7 @@ function queueStore() {
     replace:value=>{queue=save(value);}
   };
 }
-async function fixture({codeAccepted=true}={}) {
+async function fixture({codeAccepted=true,japanAccepted=codeAccepted,japanRuntime=PINS.expectedRuntime}={}) {
   const values=new Map(), writes=[], calls=[], reports=[];
   let sequence=0, setup=true, clock=Date.parse('2026-11-27T00:00:00.000Z'), callback;
   const storage={
@@ -79,7 +79,8 @@ async function fixture({codeAccepted=true}={}) {
       browser:{release:candidate.runtimeSha,nonce,passed:true,functionalPassed:true,speedPassed:true,
         speedReportSha256:hash(speed),detailsReportSha256:hash(detail),reportSha256:hash(Buffer.concat([speed,detail]))}};
     if(code) Object.assign(receipt,{transition:'code-update',previousAcceptedETag:staged.intent.value.previous.etag,
-      previousAcceptedStateSha256:staged.intent.value.previous.sha256,retainedRuntimeSha:PINS.retainedRuntime,
+      previousAcceptedStateSha256:staged.intent.value.previous.sha256,
+      retainedRuntimeSha:staged.intent.value.previous.value.current.runtimeSha,
       retainedImageId:staged.intent.value.previous.value.current.imageId});
     const raw=Buffer.from(JSON.stringify(receipt));
     await state.commit({lease,...staged,evidence:{hostReceiptBase64:raw.toString('base64'),hostReceiptSha256:hash(raw),
@@ -88,10 +89,20 @@ async function fixture({codeAccepted=true}={}) {
   }
   await publish(b); await publish(c);
   const beforeCode={accepted:await state.read('accepted'),intent:await state.read('intent')};
-  if(codeAccepted) await publish({...c,runtimeSha:PINS.codeRuntime,imageId:'sha256:'+'6'.repeat(64)},true);
+  const q=queueStore();
+  if(codeAccepted) {
+    await publish({...c,runtimeSha:PINS.codeRuntime,imageId:'sha256:'+'6'.repeat(64)},true);
+    // Preserve B using its authentic a5ca publication witness before the next
+    // code acceptance moves the rollback from 077 to a5ca.
+    const historical={accepted:await state.read('accepted'),intent:await state.read('intent')};
+    const remembered=await maintainChinaGenerationGcQueue({mode:'enqueue-only',queueStorage:q,
+      readState:async()=>historical,assertAuthority:async()=>{},now});
+    assert.equal(remembered.completed,true);assert.equal(remembered.pending,1);
+  }
+  if(japanAccepted) await publish({...c,runtimeSha:japanRuntime,imageId:'sha256:'+'8'.repeat(64)},true);
   const expected={accepted:await state.read('accepted'),intent:await state.read('intent')};
-  setup=false; writes.length=0;
-  const q=queueStore(), environment={GITHUB_RUN_ID:'45900000001',GITHUB_RUN_ATTEMPT:'1',GITHUB_SHA:'a'.repeat(40),RUNNER_TEMP:'/tmp'};
+  setup=false; writes.length=0;q.calls.length=0;
+  const environment={GITHUB_RUN_ID:'45900000001',GITHUB_RUN_ATTEMPT:'1',GITHUB_SHA:'a'.repeat(40),RUNNER_TEMP:'/tmp'};
   const f={storage,state,values,writes,calls,reports,q,environment,expected,beforeCode,now,
     advance:milliseconds=>{clock+=milliseconds;},
     heartbeat:async()=>{callback?.(); await Promise.resolve();},
@@ -183,10 +194,45 @@ test('actual state CAS and actual GC queue drain B after code acceptance; repeat
     assert.equal(first[key],0);
 });
 
-test('accepted077 C with protected rollback B performs no host or collector mutation',async()=>{
+test('old accepted077 C with protected rollback B is outside this exact maintenance profile',async()=>{
   const f=await fixture({codeAccepted:false}),report=await runRetention(f.options());
-  assert.equal(report.completed,true);assert.equal(report.retention.collected,0);assert.equal(report.retention.pending,0);
-  assert.deepEqual(f.calls,[]);assert.equal(report.currentRuntimeSha,PINS.retainedRuntime);
+  assert.equal(report.completed,false);assert.equal(report.errorCode,'current_binding');assert.equal(report.leaseReleased,true);
+  assert.deepEqual(f.calls,[]);assert.equal(f.q.calls.length,0);
+});
+
+test('the retained runtime alone and a candidate with the historical rollback cannot authorize cleanup',async()=>{
+  for(const options of [{japanAccepted:false},{codeAccepted:false,japanAccepted:true}]){
+    const f=await fixture(options),before=f.q.current(),report=await runRetention(f.options());
+    assert.equal(report.completed,false);assert.equal(report.leaseReleased,true);
+    assert.equal(report.errorCode,options.codeAccepted===false?'rollback_binding':'current_binding');
+    assert.deepEqual(f.calls,[]);assert.equal(f.q.calls.length,0);assert.deepEqual(f.q.current(),before);
+  }
+});
+
+test('a valid previous Japan runtime with the expected rollback is rejected before host or GC work',async()=>{
+  const previousRuntime='73321a180c16d1d432559d572a2ac2b7fdf5cc2b';
+  assert.notEqual(previousRuntime,PINS.expectedRuntime);
+  // Build an authentic accepted pair through reserve/commit and its matching
+  // host proofs. Editing runtimeSha on an existing receipt would only test a
+  // corrupt proof, not rejection of a valid but unapproved runtime.
+  const f=await fixture({japanRuntime:previousRuntime});
+  assert.equal(inspectChinaPublicationState(f.expected).status,'resolved');
+  assert.equal(f.expected.intent.value.status,'committed');
+  assert.equal(f.expected.accepted.value.pending,null);
+  assert.equal(f.expected.accepted.value.current.runtimeSha,previousRuntime);
+  assert.equal(f.expected.accepted.value.rollback.runtimeSha,PINS.expectedRollbackRuntime);
+  const stateBefore=copy([...f.values]),queueBefore=f.q.current(),tasksBefore=JSON.stringify([...f.q.tasks]);
+  assert.throws(()=>verifyState(f.expected),/china_retention_resume_current_binding/);
+  assert.deepEqual([...f.values],stateBefore);assert.deepEqual(f.writes,[]);
+  assert.deepEqual(f.calls,[]);assert.equal(f.q.calls.length,0);
+  const report=await runRetention(f.options({createQueueStorage:()=>{assert.fail('must reject before opening the GC queue');}}));
+  assert.equal(report.completed,false);assert.equal(report.errorCode,'current_binding');
+  assert.equal(report.leaseAcquired,true);assert.equal(report.leaseReleased,true);
+  assert.deepEqual(f.writes,['lease','lease']);
+  assert.deepEqual(await f.storage.read('accepted'),f.expected.accepted);
+  assert.deepEqual(await f.storage.read('intent'),f.expected.intent);
+  assert.deepEqual(f.calls,[]);assert.equal(f.q.calls.length,0);
+  assert.deepEqual(f.q.current(),queueBefore);assert.equal(JSON.stringify([...f.q.tasks]),tasksBefore);
 });
 
 test('foreign queue item fails before host/collector and leaves the exact queue intact',async()=>{
