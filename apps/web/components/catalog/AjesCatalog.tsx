@@ -17,14 +17,15 @@ import {CatalogMarketFlag} from './CatalogMarketFlag';
 import {readAjesCatalogPage,readAjesCountSummary,readAjesMakes,AjesFilterUnavailable} from '@/lib/catalog/ajes-catalog';
 import {AjesInputError} from '@/lib/catalog/ajes-query';
 import {AjesUnavailable} from '@/lib/catalog/ajes-client';
+import {ajesSsrReadEvidence} from '@/lib/catalog/ajes-ssr-read-evidence';
 import {ajesCountText,exactAjesCount,ajesPaginationCountText} from '@/lib/catalog/ajes-count-display';
 type Params=Record<string,string|string[]|undefined>;
 export async function AjesCatalog({params,embedded=false,dealer}:{params:Params;embedded?:boolean;dealer?:DealerBrowsingContext|null}){
  const initial=Object.fromEntries(Object.entries(params).map(([k,v])=>[k,Array.isArray(v)?v[0]||'':v||'']));assertAjesJapanMarket(initial.market);const market='japan';const label='Япония';initial.market=market;if(!initial.make&&initial.brand)initial.make=initial.brand;
- let result:Awaited<ReturnType<typeof readAjesCatalogPage>>|undefined,error='';
+ let result:Awaited<ReturnType<typeof readAjesCatalogPage>>|undefined,error='',failedReceipt:unknown;
  // The independent streamed count below starts after the visible page. Two
  // concurrent category visits must not fill both supplier slots with counts.
- try{result=await readAjesCatalogPage(initial,undefined,{includeCount:false});}catch(e){error=e instanceof AjesFilterUnavailable?'Это условие поиска пока не поддерживается для выбранного рынка. Снимите его; уточнить параметры и рассчитать доставку можно в карточке.':e instanceof AjesInputError?'Проверьте условия и диапазоны поиска.':e instanceof AjesUnavailable&&e.reason==='visitor_restricted'?'Источник отклонил подключение. Сохранённых результатов этого поиска пока нет. Попробуйте позже.':'Не удалось обновить автомобили. Попробуйте позже.';}
+ try{result=await readAjesCatalogPage(initial,undefined,{includeCount:false});}catch(e){if(e instanceof AjesUnavailable)failedReceipt=Object.getOwnPropertyDescriptor(e,'sourceReceipt')?.value;error=e instanceof AjesFilterUnavailable?'Это условие поиска пока не поддерживается для выбранного рынка. Снимите его; уточнить параметры и рассчитать доставку можно в карточке.':e instanceof AjesInputError?'Проверьте условия и диапазоны поиска.':e instanceof AjesUnavailable&&e.reason==='visitor_restricted'?'Источник отклонил подключение. Сохранённых результатов этого поиска пока нет. Попробуйте позже.':'Не удалось обновить автомобили. Попробуйте позже.';}
  // Complete brand/model directories are optional navigation metadata. The
  // controls already fetch them on opening; never hold visible cards behind them.
  const sourceTotal=result?.countSummary;
@@ -35,7 +36,9 @@ export async function AjesCatalog({params,embedded=false,dealer}:{params:Params;
  const restartParams=new URLSearchParams(Object.entries(initial).filter(([key,value])=>key!=='after'&&key!=='page'&&value!==''));
  const restartHref='/cars?'+restartParams;
  const Container=embedded?'div':'main';
- return <Container className={`ac-catalog-page ac-page-copy ac-ajes-catalog ${embedded?'dealer-shared-catalog':'min-h-screen text-[var(--ac-text)]'}`}>
+ const readEvidence=embedded?undefined:ajesSsrReadEvidence(result?.page??(initial.page||1),initial.after,
+  result?.sourceReceipts??(failedReceipt?[failedReceipt]:[]));
+ return <Container data-japan-source-receipts={readEvidence} className={`ac-catalog-page ac-page-copy ac-ajes-catalog ${embedded?'dealer-shared-catalog':'min-h-screen text-[var(--ac-text)]'}`}>
  {!embedded&&<PublicHeader backHref="/" backLabel="На главную"/>}
  <section className={embedded?'ac-catalog-shell w-full py-5':'ac-catalog-shell mx-auto w-full max-w-[1500px] px-4 py-6 md:px-8 md:py-10'}>
  <CatalogSidebar dealerLayout={embedded} resultScope={`ajes:${market}:${embedded}`} resultError={error||undefined} filters={<CatalogFilters initial={initial} facets={facets} resultCount={displayTotal??undefined} auctionResults/>} header={<div className={embedded?"ac-dealer-catalog-title":"contents"}>

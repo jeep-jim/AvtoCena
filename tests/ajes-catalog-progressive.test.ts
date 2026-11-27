@@ -11,8 +11,10 @@ test('ready cards do not wait for optional brand/model directories; exact select
  (globalThis as any).__ajesTest={readAjesCatalogPage:async(_q:any,_measure:any,options:any)=>{readOptions=options;return {countSummary:readyCount,page:1,total:items.length,items,hasMore:false};},readAjesMakes:()=>{calls++;return never;},readAjesDirectory:()=>{calls++;return never;},readAjesCountSummary:(key:string)=>{calls++;countKey=key;return countResult;}};
  try{
   const built=await build({entryPoints:['apps/web/components/catalog/AjesCatalog.tsx'],bundle:true,platform:'node',format:'cjs',write:false,jsx:'automatic',external:['react','react/jsx-runtime'],plugins:[{name:'dependencies',setup(b){
-   b.onResolve({filter:/.*/},args=>args.kind==='entry-point'||args.path==='react'||args.path==='react/jsx-runtime'?undefined:{path:args.path,namespace:'fixture'});
+   b.onResolve({filter:/.*/},args=>args.path==='node:crypto'?{path:args.path,external:true}:args.kind==='entry-point'||args.path==='react'||args.path==='react/jsx-runtime'?undefined:{path:args.path,namespace:'fixture'});
    b.onLoad({filter:/.*/,namespace:'fixture'},args=>{
+    if(args.path.endsWith('/ajes-ssr-read-evidence'))return {contents:readFileSync('apps/web/lib/catalog/ajes-ssr-read-evidence.ts','utf8'),loader:'ts'};
+    if(args.path.endsWith('/ajes-read-receipt'))return {contents:readFileSync('apps/web/lib/catalog/ajes-read-receipt.ts','utf8'),loader:'ts'};
     if(args.path.endsWith('/ajes-access-policy'))return {contents:readFileSync('apps/web/lib/catalog/ajes-access-policy.ts','utf8'),loader:'ts'};
     if(args.path.endsWith('/catalog-routes'))return {contents:readFileSync('apps/web/lib/catalog/catalog-routes.ts','utf8'),loader:'ts'};
     if(args.path.endsWith('/ajes-catalog'))return {contents:`export const {readAjesCatalogPage,readAjesMakes,readAjesDirectory,readAjesCountSummary}=globalThis.__ajesTest;export class AjesFilterUnavailable extends Error {}`};

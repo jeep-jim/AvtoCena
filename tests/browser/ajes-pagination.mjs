@@ -4,6 +4,7 @@ import http from 'node:http';
 import {build} from 'esbuild';
 import path from 'node:path';
 import {createRequire} from 'node:module';
+import {createHash} from 'node:crypto';
 const {chromium}=await import(process.env.PLAYWRIGHT_MODULE||'playwright');
 const out='artifacts/ajes-pagination';fs.mkdirSync(out,{recursive:true});
 // Next replaces public browser environment references in production.
@@ -21,11 +22,16 @@ await build({entryPoints:['tests/browser/ajes-pagination-fixture.tsx'],bundle:tr
 // Actual Japanese catalog caller/helper and server component, with only local
 // source/pricing/metadata transports. No provider or production request is made.
 class FixtureUnavailable extends Error {constructor(reason){super(reason);this.reason=reason;}}
-const fixture={queries:[],counts:0,mode:'normal',changed:false,Unavailable:FixtureUnavailable,
+const fixture={queries:[],counts:0,sequence:0,mode:'normal',changed:false,Unavailable:FixtureUnavailable,
  read:async query=>{
   fixture.queries.push({...query});
   assert.equal(query.pageSize,24,'every local source read preserves the 24-row provider contract');
-  if(fixture.mode==='failure'&&query.page===2)throw new FixtureUnavailable('request_timeout');
+  const sourceReceipt={version:1,requestId:'12345678-1234-4234-8234-'+String(++fixture.sequence).padStart(12,'0'),
+   queryHash:createHash('sha256').update(JSON.stringify(query)).digest('hex'),table:'stats',kind:'list',page:query.page,pageSize:24,
+   startedAt:'2026-11-26T10:00:00.000Z',finishedAt:'2026-11-26T10:00:00.001Z',stage:'supplier',supplierAttempted:true,
+   outcome:'fresh',observedAt:'2026-11-26T10:00:00.000Z'};
+  if(fixture.mode==='failure'&&query.page===2)throw Object.assign(new FixtureUnavailable('request_timeout'),
+   {sourceReceipt:{...sourceReceipt,outcome:'unavailable',reason:'request_timeout'}});
   const count=query.page===1?23:query.page===2?24:query.page===3?2:0;
   const items=Array.from({length:count},(_,index)=>{
    const i=fixture.changed&&query.page===2?count-1-index:index,id='ajes-stats-refill-'+query.page+'-'+i;
@@ -37,7 +43,7 @@ const fixture={queries:[],counts:0,mode:'normal',changed:false,Unavailable:Fixtu
     totalRub:null,calculationStatus:'needs_data',images:[],firstSeenAt:'2026-11-26T10:00:00.000Z',updatedAt:'2026-11-26T10:00:00.000Z',
     ...(i%3?{japanSupplierPower:{offerId:id,hp:150,unit:'hp',source:'ajes_pw'}}:{japanPowerUnknown:true}),operational:{}};
   });
-  return {items,page:query.page,pageSize:24,received:query.page<3?24:count,partial:false,stale:false,observedAt:'2026-11-26T10:00:00.000Z'};
+  return {items,page:query.page,pageSize:24,received:query.page<3?24:count,partial:false,stale:false,observedAt:'2026-11-26T10:00:00.000Z',sourceReceipt};
  }};
 globalThis.__japanRefillFixture=fixture;
 const serverStubs={
@@ -196,12 +202,22 @@ async function runJapanCases(page,width){
   assert.equal(await page.getByText(/Отбор не подтверждает/).count(),0);
   assert.equal(await page.getByText(/Страница 1: Мощность/).count(),0);
  };
+ const ssrEvidence=async(pageNumber,after='')=>{
+  const raw=await page.locator('main.ac-ajes-catalog').getAttribute('data-japan-source-receipts');
+  assert.equal(typeof raw,'string');assert(Buffer.byteLength(raw)<=8192);
+  const value=JSON.parse(raw);assert.equal(value.version,1);assert.equal(value.page,pageNumber);
+  assert.equal(value.afterSha256,createHash('sha256').update(after).digest('hex'));
+  assert.equal(value.omitted,0);assert(value.receipts.length<=8);
+  assert(value.receipts.every(row=>row.stage==='supplier'&&row.supplierAttempted===true));
+  return value;
+ };
  const expected=[...Array.from({length:23},(_,i)=>'ajes-stats-refill-1-'+i),...Array.from({length:24},(_,i)=>'ajes-stats-refill-2-'+i),'ajes-stats-refill-3-0','ajes-stats-refill-3-1'];
  for(const power of [false,true]){
   fixturePhase=power?'japan_power':'japan_plain';
   fixture.changed=false;fixture.queries.length=0;responses.length=0;
   const query=new URLSearchParams({fixture:'refill',fuel:'petrol',city:'Новокузнецк',...(power?{powerTo:'160'}:{})});
   await page.goto(origin+'/cars/japan?'+query);await waitCards(24);await warningAbsent();
+  assert.deepEqual((await ssrEvidence(1)).receipts.map(row=>row.page),[1,2]);
   const first=await cardIds();assert.deepEqual(first,expected.slice(0,24));
   assert.ok(await page.locator('#root [data-japan-power-unknown]').count()>0,'actual cards retain their unknown-power labels');
   assert.deepEqual(fixture.queries.map(q=>q.page),[1,2]);
@@ -212,6 +228,7 @@ async function runJapanCases(page,width){
   assert.equal(nextUrl.searchParams.get('powerTo'),power?'160':null);
   await page.getByRole('link',{name:'Страница 2',exact:true}).click();await waitCards(24);await warningAbsent();
   assert.equal(new URL(page.url()).searchParams.get('after'),cursor);
+  assert.deepEqual((await ssrEvidence(2,cursor)).receipts.map(row=>row.page),[2,3]);
   const second=await cardIds();assert.deepEqual(second,expected.slice(24,48));
   assert.equal(new Set([...first,...second]).size,48);
   const secondNextHref=await page.getByRole('link',{name:'Страница 3',exact:true}).getAttribute('href');
@@ -238,6 +255,10 @@ async function runJapanCases(page,width){
  fixture.changed=false;fixture.queries.length=0;responses.length=0;
  await page.goto(origin+'/cars/japan?fixture=refill&case=failure&powerTo=160&fuel=petrol&city='+encodeURIComponent('Новокузнецк'));
  await waitCards(23);await warningAbsent();
+ const failureEvidence=await ssrEvidence(1);
+ assert.equal(failureEvidence.receipts.at(-1).page,2);
+ assert.equal(failureEvidence.receipts.at(-1).outcome,'unavailable');
+ assert.equal(failureEvidence.receipts.at(-1).reason,'request_timeout');
  await page.getByText('Показана часть автомобилей. Полный список пока недоступен.',{exact:true}).waitFor();
  const before=await cardIds();
  await page.evaluate(()=>window.dispatchEvent(new Event('pagehide')));

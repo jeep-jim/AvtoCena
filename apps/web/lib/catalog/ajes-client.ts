@@ -1,5 +1,5 @@
-import {ajesFailureSlot,type AjesRequestDiagnostic} from './ajes-request-diagnostic';
-import {startAjesReadTrace,finishAjesReadReceipt,type AjesReadTrace} from './ajes-read-receipt';
+import {ajesFailureSlot,sanitizeAjesResponseValidation,type AjesRequestDiagnostic,type AjesResponseValidation} from './ajes-request-diagnostic';
+import {startAjesReadTrace,finishAjesReadReceipt,ajesPublicFailureReason,type AjesReadTrace} from './ajes-read-receipt';
 import type {CalculationIndex} from '../encyclopedia/calculation-index';
 import {createHash} from 'node:crypto';
 import {isIP} from 'node:net';
@@ -217,12 +217,18 @@ export function createAjesClient(deps:Dependencies) {
         let requestStarted=false,httpStatus:number|null=null,providerCode:string|null=null;
         const startedAt=new Date().toISOString();
         const controller=new AbortController();
+        const responseFacts:Pick<AjesResponseValidation,'wireBytes'|'decodedBytes'|'rootKind'|'rowCount'>={};
+        let responseValidation:AjesResponseValidation|undefined;
+        const invalidResponse=(phase:AjesResponseValidation['phase'],code:AjesResponseValidation['code'])=>{
+          responseValidation=sanitizeAjesResponseValidation({version:1,phase,code,...responseFacts});
+          return new AjesUnavailable('invalid_response');
+        };
         const recordFailure=(failure:AjesUnavailable)=>{
           // Throttle fixed page/kind slots independently; never retain a body.
           const failureSlot=ajesFailureSlot(query);
           if(requestStarted&&deps.saveRequestFailure&&Date.now()-(lastFailureSaved.get(failureSlot)??0)>=60000){
             lastFailureSaved.set(failureSlot,Date.now());
-            const diagnostic:AjesRequestDiagnostic={table:query.table,kind:query.kind,page:query.page,pageSize:query.pageSize,startedAt,finishedAt:new Date().toISOString(),clientIp,sql:query.sql,endpoint:url.origin+url.pathname,httpStatus,providerCode,outcome:failure.reason};
+            const diagnostic:AjesRequestDiagnostic={table:query.table,kind:query.kind,page:query.page,pageSize:query.pageSize,startedAt,finishedAt:new Date().toISOString(),clientIp,sql:query.sql,endpoint:url.origin+url.pathname,httpStatus,providerCode,outcome:failure.reason,...(responseValidation?{responseValidation}:{})};
             if(Buffer.byteLength(JSON.stringify(diagnostic))<=64*1024)persist(()=>deps.saveRequestFailure!(diagnostic));
           }
         };
@@ -245,31 +251,38 @@ export function createAjesClient(deps:Dependencies) {
           const chunks:Uint8Array[]=[];let bytes=0;
           while(true){const {done,value}=await reader.read();if(done)break;bytes+=value.length;if(bytes>2*1024*1024){await reader.cancel();throw new AjesUnavailable('response_too_large');}chunks.push(value);}
           let rows:unknown;
+          let decodeCode:'gzip_invalid'|'json_invalid'='gzip_invalid';
           try{
             const body=Buffer.concat(chunks);
+            responseFacts.wireBytes=body.length;
             // Node fetch usually decompresses Content-Encoding automatically. The
             // provider can also return a gzip body without that header: inspect magic.
             const decoded=body[0]===0x1f&&body[1]===0x8b?gunzipSync(body,{maxOutputLength:2*1024*1024}):body;
+            responseFacts.decodedBytes=decoded.length;decodeCode='json_invalid';
             // The provider returns a short plaintext bot refusal containing the
             // API password for some visitor addresses. Classify it without ever
             // retaining/logging its contents or replacing the visitor address.
             const refusal=decoded.length<=256?decoded.toString('utf8').match(/^\s*((?:bot|ban)\d*)(?:\s|$)/i):null;
             if(refusal){providerCode=refusal[1].length<=16?refusal[1].toLowerCase():null;throw new AjesUnavailable('visitor_restricted');}
             rows=JSON.parse(decoded.toString('utf8'));
-          }catch(error){if(error instanceof AjesUnavailable)throw error;throw new AjesUnavailable('invalid_response');}
+          }catch(error){if(error instanceof AjesUnavailable)throw error;throw invalidResponse('decode',decodeCode);}
+          responseFacts.rootKind=rows===null?'null':Array.isArray(rows)?'array':typeof rows as AjesResponseValidation['rootKind'];
+          if(Array.isArray(rows))responseFacts.rowCount=rows.length;
           if(query.kind==='count'||query.kind==='models'||query.kind==='makes'||query.kind==='colors'){
             const first=Array.isArray(rows)?rows[0]:rows;
             const aggregateEvidence={observedAt:new Date().toISOString(),array:Array.isArray(rows),length:Array.isArray(rows)?rows.length:null,fields:first&&typeof first==='object'?Object.keys(first).slice(0,30):[],numeric:first&&typeof first==='object'?Object.fromEntries(Object.entries(first).filter(([k,v])=>/^(?:total|count(?:\(\*\))?|tag[012])$/i.test(k)&&/^\d+$/.test(String(v)))):{}};
             if(deps.saveAggregateEvidence)persist(()=>deps.saveAggregateEvidence!(query.kind,aggregateEvidence));
           }
-          if(!Array.isArray(rows)||rows.length>query.pageSize||rows.some(r=>!r||typeof r!=='object'||Array.isArray(r)))throw new AjesUnavailable('invalid_response');
+          if(!Array.isArray(rows))throw invalidResponse('page_shape','root_not_array');
+          if(rows.length>query.pageSize)throw invalidResponse('page_shape','row_limit_exceeded');
+          if(rows.some(r=>!r||typeof r!=='object'||Array.isArray(r)))throw invalidResponse('page_shape','row_not_object');
           if(query.kind==='detail'&&rows.some(r=>r.ID!==query.id))throw new AjesUnavailable('identity_mismatch');
           if(query.kind==='count'||query.kind==='models'||query.kind==='makes'||query.kind==='colors'){
-            const totalOf=(r:any)=>{const match=Object.entries(r).find(([key])=>['total','count(*)','count',query.kind==='count'?'tag0':(query.kind==='makes'||query.kind==='colors')?'tag1':'tag2'].includes(key.toLowerCase().replace(/\s/g,'')));const value=match?.[1];if(!/^\d+$/.test(String(value))||!Number.isSafeInteger(Number(value)))throw new AjesUnavailable('invalid_response');return Number(value);};
-            if(query.kind==='count'&&rows.length!==1)throw new AjesUnavailable('invalid_response');
+            const totalOf=(r:any)=>{const match=Object.entries(r).find(([key])=>['total','count(*)','count',query.kind==='count'?'tag0':(query.kind==='makes'||query.kind==='colors')?'tag1':'tag2'].includes(key.toLowerCase().replace(/\s/g,'')));const value=match?.[1];if(!/^\d+$/.test(String(value))||!Number.isSafeInteger(Number(value)))throw invalidResponse('aggregate_shape','total_invalid');return Number(value);};
+            if(query.kind==='count'&&rows.length!==1)throw invalidResponse('aggregate_shape','count_row_count');
             const models=query.kind==='models'?rows.map(r=>({make:String(r.MARKA_NAME??r.marka_name??'').trim(),model:String(r.MODEL_NAME??r.model_name??'').trim(),total:totalOf(r)})).filter(r=>r.make&&r.model):undefined;
             const makes=query.kind==='makes'?rows.map(r=>({make:String(r.MARKA_NAME??r.marka_name??'').trim(),total:totalOf(r)})):undefined;
-            if(makes?.some(m=>!m.make))throw new AjesUnavailable('invalid_response');
+            if(makes?.some(m=>!m.make))throw invalidResponse('aggregate_shape','make_name_missing');
             const colors=query.kind==='colors'?rows.map(r=>({color:String(r.COLOR??r.color??'').trim(),total:totalOf(r)})).filter(r=>r.color):undefined;
             const result={items:[],models,makes,colors,total:query.kind==='count'?totalOf(rows[0]):undefined,page:query.page,pageSize:query.pageSize,received:rows.length,rejected:0,stale:false,observedAt:new Date().toISOString()};
             if(deps.saveQuery)persist(()=>deps.saveQuery!(cacheSql,result));
@@ -284,8 +297,10 @@ export function createAjesClient(deps:Dependencies) {
             throw new AjesEmptyValidation(async()=>{
               if(trace)trace.stage='empty_verification';
               let failure:AjesUnavailable;
+              let countReturned=false;
               try{
                 const count=await read(countInput!,clientIp,countQuery!);
+                countReturned=true;
                 const countAge=Date.now()-Date.parse(count?.observedAt||'');
                 if(count.stale||count.partial||count.upperBound||!Number.isSafeInteger(count.total)||count.total<0
                   ||countAge<0||countAge>=sourceTtlMs||count.total>(query.page-1)*query.pageSize)throw new AjesUnavailable('empty_response');
@@ -301,7 +316,9 @@ export function createAjesClient(deps:Dependencies) {
                   if(deps.saveQuery)persist(()=>deps.saveQuery!(cacheSql,verified));
                   return verified;
                 },visitorKey);
-              }catch(error){failure=error instanceof AjesUnavailable?error:new AjesUnavailable('empty_response');if(trace)trace.reason=failure.reason;}
+              }catch(error){failure=error instanceof AjesUnavailable?error:new AjesUnavailable('empty_response');if(trace)trace.reason=failure.reason;
+                responseValidation=sanitizeAjesResponseValidation({version:1,phase:'empty_confirmation',code:countReturned?'count_unverified':'count_unavailable',
+                  ...responseFacts,originCode:ajesPublicFailureReason(failure.reason)});}
               await deps.assertEnabled(query.table);
               const key=failure.reason==='visitor_restricted'?'visitor:'+clientIp:visitorKey;
               if(!cooling(key))failures.set(key,{reason:failure.reason,until:Date.now()+(failure.reason==='visitor_restricted'?300000:30000)});
