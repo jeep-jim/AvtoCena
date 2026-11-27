@@ -16,7 +16,7 @@ async function resolved(node:any):Promise<any> {
  return createElement(element.type,props);
 }
 async function fixture(t:any){
- const state={control:'enabled',pageReads:[] as any[],countReads:[] as any[],
+ const state={control:'enabled',pageReads:[] as any[],countReads:[] as any[],cardOffers:[] as any[],
   page:{items:[] as any[],countSummary:null as any,received:0,pageSize:24,hasMore:false,partial:false,stale:false,filteredByPage:false,observedAt:'2026-11-26T04:30:00Z'},
   count:{total:660813,upperBound:false,stale:false,observedAt:'2026-11-26T04:30:00Z'}};
  (globalThis as any).__japanRailVisibility=state;t.after(()=>{delete (globalThis as any).__japanRailVisibility;});
@@ -26,7 +26,7 @@ async function fixture(t:any){
   'ajes-query':`export class AjesFilterUnavailable extends Error{}`,
   'storage':'export const publicOffer=x=>x;',
   'DealerBrowsingContext':`import {createElement} from 'react';export const DealerLink=props=>createElement('a',props);`,
-  'CatalogCard':`import {createElement} from 'react';export const CatalogCard=({offer})=>createElement('article',{'data-car-id':offer.id},offer.id);`,
+  'CatalogCard':`import {createElement} from 'react';export const CatalogCard=({offer})=>{globalThis.__japanRailVisibility.cardOffers.push(offer);return createElement('article',{'data-car-id':offer.id},offer.id);};`,
   'CatalogMarketFlag':`import {createElement} from 'react';export const CatalogMarketFlag=()=>createElement('span',{'aria-hidden':true},'🇯🇵');`,
  };
  const out=await build({stdin:{contents:'export * from "./apps/web/components/catalog/AjesRail";export * from "./apps/web/components/catalog/JapanRailFrame";',resolveDir:process.cwd()},bundle:true,platform:'node',format:'cjs',jsx:'automatic',write:false,packages:'external',loader:{'.css':'empty'},plugins:[{name:'japan-rail-fixture',setup(b){
@@ -88,17 +88,26 @@ test('the streamed Japanese fallback has the same accessible title and preserves
  assert.match(markup,/Количество уточняется/);assert.doesNotMatch(markup,/data-catalog-market-count="0"/);
 });
 
-test('a Japanese power preview distinguishes visible supplier and unknown power without a false exact count',async t=>{
+test('a quiet Japanese power rail preserves supplier and unknown card evidence without a false exact count',async t=>{
  const {state,api,html}=await fixture(t);
- state.page={...state.page,items:[
+ const offers=[
   {id:'ajes-stats-known',market:'japan',sourceId:'ajes_japan_feed',japanSupplierPower:{offerId:'ajes-stats-known',hp:160,unit:'hp',source:'ajes_pw'}},
-  {id:'ajes-stats-unknown',market:'japan',sourceId:'ajes_japan_feed'},
- ],filteredByPage:true,hasMore:true};
+  {id:'ajes-stats-unknown',market:'japan',sourceId:'ajes_japan_feed',japanPowerUnknown:true},
+ ];
+ const expected=structuredClone(offers);
+ state.page={...state.page,items:offers,filteredByPage:true,hasMore:true};
  state.count={...state.count,total:0,upperBound:true};
  const markup=await html(await api.AjesRail({params:{powerTo:'160'}}));
  assert.match(markup,/data-japan-auction-rail="true"/);assert.match(markup,/data-status="ready"/);
- assert.match(markup,/Мощность по данным поставщика: 1/);assert.match(markup,/Мощность не указана: 1/);
- assert.match(markup,/Отбор не подтверждает право/);assert.match(markup,/Количество уточняется/);
+ assert.doesNotMatch(markup,/Мощность по данным поставщика:/);assert.doesNotMatch(markup,/Мощность не указана:/);
+ assert.doesNotMatch(markup,/Отбор не подтверждает право/);assert.match(markup,/Количество уточняется/);
  assert.doesNotMatch(markup,/data-catalog-market-count="0"/);
  assert.equal((markup.match(/data-car-id=/g)||[]).length,2);
+ assert.deepEqual(state.cardOffers,expected);
+ assert.deepEqual(state.page.items,expected,'the rail must not mutate the original power evidence');
+ assert.deepEqual(state.cardOffers[0].japanSupplierPower,{offerId:'ajes-stats-known',hp:160,unit:'hp',source:'ajes_pw'});
+ assert.equal(state.cardOffers[1].japanPowerUnknown,true);
+ assert.equal(Object.hasOwn(state.cardOffers[1],'japanSupplierPower'),false);
+ for(const offer of state.cardOffers)for(const field of ['powerHp','powerKw'])
+  assert.equal(Object.hasOwn(offer,field),false,'the rail must not invent or promote '+field);
 });
