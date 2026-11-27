@@ -23,10 +23,11 @@ for(const aggregate of ['makes','models','colors','count'] as const)test(`ready 
 for(const aggregate of ['makes','models','colors','count'] as const)test(`${aggregate} preparation retains the observation deadline and source checks`,async t=>{
  let now=Date.parse('2026-11-07T12:00:00Z'),requests=0,disabled=false; t.mock.method(Date,'now',()=>now);
  const saved=snapshot(aggregate,now-29*60000);
- const client=createAjesClient({password:()=> 'fixture',assertEnabled:async()=>{if(disabled)throw Error('owner_disabled');},reserve:async()=>{},readQuery:async()=>saved,fetcher:async()=>{requests++;return Response.json(aggregate==='count'?[{total:25}]:[]);}});
+ const client=createAjesClient({password:()=> 'fixture',assertEnabled:async()=>{if(disabled)throw Error('owner_disabled');},reserve:async()=>{},readQuery:async()=>saved,fetcher:async()=>{requests++;return Response.json(aggregate==='count'?[{total:25}]:aggregate==='makes'?[{MARKA_NAME:'TOYOTA',TAG1:'25'}]:aggregate==='models'?[{MARKA_NAME:'TOYOTA',MODEL_NAME:'COROLLA',TAG2:'25'}]:[]);}});
  assert.equal((await client.read({table:'stats',aggregate},ip)).observedAt,saved.observedAt);assert.equal(requests,0);
  disabled=true;await assert.rejects(client.read({table:'stats',aggregate},ip),/owner_disabled/);disabled=false;
- now+=2*60000;await client.read({table:'stats',aggregate},ip);assert.equal(requests,1,'memoization must not renew the 30-minute observation window');
+ now+=2*60000;const refreshed=await client.read({table:'stats',aggregate},ip);assert.equal(requests,1,'memoization must not renew the 30-minute observation window');
+ if(aggregate==='makes'||aggregate==='models')assert.equal(refreshed[aggregate][0].total,25,'expiry serves the newly observed directory');
 });
 test('same-visitor recovery during cooldown does no new storage or supplier work and remains stale',async t=>{
  let now=Date.parse('2026-11-07T12:00:00Z'),reads=0,requests=0,disabled=false,password='fixture';t.mock.method(Date,'now',()=>now);

@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {build} from 'esbuild';
 import {createRequire} from 'node:module';
-import {createAjesClient} from '../apps/web/lib/catalog/ajes-client';
+import {createAjesClient,readAjesMakeDirectory,readAjesModelDirectory} from '../apps/web/lib/catalog/ajes-client';
 import {ajesQuery,ajesSourceCacheSql,type AjesQuery} from '../apps/web/lib/catalog/ajes-query';
 import {readAjesQueryCache,saveAjesQueryCache} from '../apps/web/lib/catalog/ajes-query-cache';
 import {compileModelFacts,checksum,type CalculationIndex} from '../apps/web/lib/encyclopedia/calculation-index';
@@ -21,6 +21,154 @@ function store(){
  const storage={readJson:async(key:string)=>objects.get(key)??null,writeJson:async(key:string,value:any)=>{objects.set(key,structuredClone(value));}};
  return {storage,readQuery:(sql:string)=>readAjesQueryCache(storage,sql),saveQuery:(sql:string,value:any)=>saveAjesQueryCache(storage,sql,value)};
 }
+
+const directoryRows=(kind:'makes'|'models')=>kind==='makes'?[{MARKA_NAME:'MAZDA',TAG1:'12'}]:[{MARKA_NAME:'MAZDA',MODEL_NAME:'MAZDA3 FASTBACK',TAG2:'12'}];
+const directoryInput=(kind:'makes'|'models')=>({table:'stats' as const,aggregate:kind,...(kind==='models'?{make:'MAZDA'}:{})});
+const directorySnapshot=(kind:'makes'|'models',patch:any={})=>({items:[],[kind]:[],page:1,pageSize:500,received:0,rejected:0,stale:false,observedAt:new Date().toISOString(),...patch});
+const readDirectory=(client:ReturnType<typeof createAjesClient>,kind:'makes'|'models')=>kind==='makes'
+ ?readAjesMakeDirectory(client,directoryInput(kind),ip):readAjesModelDirectory(client,directoryInput(kind),ip);
+
+for(const kind of ['makes','models'] as const){
+ test(`old fresh-looking empty ${kind} is neither authoritative nor shared with an in-flight retry`,async()=>{
+  const stored=store(),input=directoryInput(kind),sql=ajesSourceCacheSql(ajesQuery(input).sql);
+  await stored.saveQuery(sql,directorySnapshot(kind));
+  let calls=0,release!:()=>void,started!:()=>void;
+  const held=new Promise<void>(r=>release=r),sourceStarted=new Promise<void>(r=>started=r);
+  const client=createAjesClient({...base,...stored,fetcher:async()=>{calls++;started();await held;return Response.json(directoryRows(kind));}});
+  const first=readDirectory(client,kind),retry=readDirectory(client,kind);
+  try{
+   await deadline(sourceStarted,'legacy empty directory prevented the real source read');
+   release();const [a,b]=await Promise.all([first,retry]);
+   assert.equal(a.stale,false);assert.equal(b.stale,false);assert.equal(a[kind].length,1);assert.deepEqual(b[kind],a[kind]);assert.equal(calls,1);
+   await tick();assert.equal((await stored.readQuery(sql))[kind].length,1);
+   assert.equal((await readDirectory(client,kind))[kind].length,1);assert.equal(calls,1,'valid source names keep ordinary shared caching');
+  }finally{release();await Promise.allSettled([first,retry]);}
+ });
+
+ test(`unconfirmed empty ${kind} preserves useful saved names and one ordinary retry can recover`,async()=>{
+  const stored=store(),input=directoryInput(kind),sql=ajesSourceCacheSql(ajesQuery(input).sql);
+  const names=kind==='makes'?[{make:'MAZDA',total:12}]:[{make:'MAZDA',model:'MAZDA3 FASTBACK',total:12}];
+  const saved=directorySnapshot(kind,{[kind]:names,received:1,observedAt:new Date(Date.now()-31*60000).toISOString()});
+  await stored.saveQuery(sql,saved);
+  let directories=0,counts=0;
+  const client=createAjesClient({...base,...stored,fetcher:async url=>{
+   if(isCount(sqlOf(url))){counts++;return Response.json([{total:12}]);}
+   directories++;return Response.json(directories===1?[]:directoryRows(kind));
+  }});
+  const failed=await readDirectory(client,kind);assert.equal(failed.stale,true);assert.deepEqual(failed[kind],names);
+  await tick();assert.deepEqual(await stored.readQuery(sql),saved,'unconfirmed [] cannot overwrite useful requested names');
+  assert.equal(directories,1);assert.equal(counts,1,'no automatic directory retry');
+  const recovered=await readDirectory(client,kind);assert.equal(recovered.stale,false);assert.deepEqual(recovered[kind],names);
+  assert.equal(directories,2);assert.equal(counts,1,'metadata contradiction does not add a LIST failure cooldown');
+ });
+
+ test(`an unavailable COUNT cannot persist a fresh empty ${kind} or prevent a later positive directory`,async()=>{
+  const stored=store(),sql=ajesSourceCacheSql(ajesQuery(directoryInput(kind)).sql);
+  let directories=0,counts=0;
+  const client=createAjesClient({...base,...stored,fetcher:async url=>{
+   if(isCount(sqlOf(url))){counts++;return Response.json([]);}
+   directories++;return Response.json(directories===1?[]:directoryRows(kind));
+  }});
+  await assert.rejects(readDirectory(client,kind),/invalid_response/);await tick();assert.equal(await stored.readQuery(sql),null);
+  const recovered=await readDirectory(client,kind);assert.equal(recovered.stale,false);assert.equal(recovered[kind].length,1);
+  assert.equal(directories,2);assert.equal(counts,1);
+ });
+
+ test(`verified first-page zero ${kind} is bound to its exact query and survives restart without another source request`,async()=>{
+  const stored=store(),input=directoryInput(kind),sql=ajesSourceCacheSql(ajesQuery(input).sql),requests:string[]=[];
+  const client=createAjesClient({...base,...stored,fetcher:async url=>{const query=sqlOf(url);requests.push(query);return Response.json(isCount(query)?[{total:0}]:[]);}});
+  const zero=await client.read(input,ip);assert.deepEqual(zero[kind],[]);assert.equal(zero.stale,false);
+  assert.equal(zero.emptyPageEvidence?.kind,kind);assert.equal(zero.emptyPageEvidence.countTotal,0);
+  assert.deepEqual(requests,[ajesQuery(input).sql,ajesQuery({...input,aggregate:'count'}).sql]);await tick();
+  const restarted=createAjesClient({...base,...stored,reserve:async()=>{throw Error('verified zero must use the exact stored proof');}});
+  assert.equal((await restarted.read(input,ip)).observedAt,zero.observedAt);
+  for(const patch of [{kind:kind==='makes'?'models':'makes'},{sourceQueryHash:'0'.repeat(64)},{countQueryHash:'0'.repeat(64)},{page:2},{pageSize:24},{countTotal:1},{sourceObservedAt:'2000-01-01'},{countObservedAt:'2000-01-01'}]){
+   let calls=0;
+   const invalid={...zero,emptyPageEvidence:{...zero.emptyPageEvidence,...patch}};
+   const current=createAjesClient({...base,readQuery:async key=>key===sql?invalid:null,fetcher:async()=>{calls++;return Response.json(directoryRows(kind));}});
+   assert.equal((await current.read(input,ip))[kind].length,1);assert.equal(calls,1,JSON.stringify(patch));
+  }
+ });
+
+ test(`zero ${kind} confirmation rejects stale, partial, upper-bound and future COUNT observations`,async()=>{
+  const input=directoryInput(kind),countSql=ajesSourceCacheSql(ajesQuery({...input,aggregate:'count'}).sql);
+  for(const patch of [{stale:true},{partial:true},{upperBound:true},{observedAt:new Date(Date.now()+60000).toISOString()}]){
+   const client=createAjesClient({...base,readQuery:async sql=>sql===countSql?countSnapshot(patch):null,
+    fetcher:async url=>isCount(sqlOf(url))?new Response('unavailable',{status:503}):Response.json([])});
+   await assert.rejects(readDirectory(client,kind),/empty_response|http_503/);
+  }
+ });
+
+ test(`empty ${kind} cannot bypass a real supplier visitor refusal on retry`,async()=>{
+  let calls=0;const client=createAjesClient({...base,fetcher:async url=>{calls++;return isCount(sqlOf(url))?new Response('bot fixture'):Response.json([]);}});
+  await assert.rejects(readDirectory(client,kind),/visitor_restricted/);
+  await assert.rejects(readDirectory(client,kind),/visitor_restricted/);
+  assert.equal(calls,2,'original visitor guard remains in force for both directory and COUNT');
+ });
+
+ test(`a delayed verified zero ${kind} cannot erase a newer positive source observation`,async t=>{
+  const start=Date.now();t.mock.timers.enable({apis:['Date'],now:start});
+  const stored=store(),input=directoryInput(kind),sql=ajesSourceCacheSql(ajesQuery(input).sql);
+  let release!:()=>void,started!:()=>void,holdOwner=false;
+  const held=new Promise<void>(r=>release=r),zeroReady=new Promise<void>(r=>started=r);
+  const client=createAjesClient({...base,...stored,assertEnabled:async()=>{if(holdOwner){holdOwner=false;started();await held;}},fetcher:async url=>{
+   if(isCount(sqlOf(url))){holdOwner=true;return Response.json([{total:0}]);}
+   return Response.json(new URL(String(url)).searchParams.get('ip')===ip?[]:directoryRows(kind));
+  }});
+  const zero=client.read(input,ip);
+  try{
+   await deadline(zeroReady,'zero verification did not reach owner check');t.mock.timers.setTime(start+1000);
+   const positive=await client.read(input,'203.0.113.2');assert.equal(positive[kind].length,1);
+   release();const recovered=await zero;assert.equal(recovered[kind].length,1);assert.equal(recovered.observedAt,positive.observedAt);
+   await tick();assert.equal((await stored.readQuery(sql))[kind].length,1);
+   assert.equal((await client.read(input,ip))[kind].length,1);
+  }finally{release();await Promise.allSettled([zero]);}
+ });
+
+ test(`an already-started zero ${kind} write cannot finish after the newer positive write`,async t=>{
+  const start=Date.now();t.mock.timers.enable({apis:['Date'],now:start});
+  const stored=store(),input=directoryInput(kind),sql=ajesSourceCacheSql(ajesQuery(input).sql);
+  let releasePositive!:()=>void,positiveStarted!:()=>void,releaseZeroWrite!:()=>void,zeroWriteStarted!:()=>void;
+  const heldPositive=new Promise<void>(r=>releasePositive=r),positiveRequest=new Promise<void>(r=>positiveStarted=r);
+  const heldZeroWrite=new Promise<void>(r=>releaseZeroWrite=r),writingZero=new Promise<void>(r=>zeroWriteStarted=r);
+  const client=createAjesClient({...base,...stored,saveQuery:async(key,value)=>{
+   if(key===sql&&value[kind]?.length===0){zeroWriteStarted();await heldZeroWrite;}
+   await stored.saveQuery(key,value);
+  },fetcher:async url=>{
+   if(isCount(sqlOf(url)))return Response.json([{total:0}]);
+   if(new URL(String(url)).searchParams.get('ip')==='203.0.113.2'){positiveStarted();await heldPositive;return Response.json(directoryRows(kind));}
+   return Response.json([]);
+  }});
+  const positive=client.read(input,'203.0.113.2');
+  try{
+   await deadline(positiveRequest,'positive read did not start');
+   const zero=await client.read(input,ip);assert.equal(zero[kind].length,0);await deadline(writingZero,'zero write did not start');
+   t.mock.timers.setTime(start+1000);releasePositive();assert.equal((await positive)[kind].length,1);await tick();
+   releaseZeroWrite();await tick();await tick();
+   assert.equal((await stored.readQuery(sql))[kind].length,1,'persisted directory must retain the newer source observation');
+   assert.equal((await client.read(input,ip))[kind].length,1);
+  }finally{releasePositive();releaseZeroWrite();await Promise.allSettled([positive]);}
+ });
+}
+
+test('two empty source directories release supplier admission before exact COUNT checks',async()=>{
+ let release!:()=>void,started!:()=>void,counts=0,active=0,peak=0;
+ const held=new Promise<void>(r=>release=r),bothCounts=new Promise<void>(r=>started=r);
+ const client=createAjesClient({...base,fetcher:async url=>{
+  active++;peak=Math.max(peak,active);
+  try{if(isCount(sqlOf(url))){if(++counts===2)started();await held;return Response.json([{total:0}]);}return Response.json([]);}
+  finally{active--;}
+ }});
+ const pending=(['makes','models'] as const).map(kind=>client.read(directoryInput(kind),ip));
+ try{await deadline(bothCounts,'empty directories retained supplier admission');release();const values=await Promise.all(pending);assert.ok(values.every(value=>value.emptyPageEvidence.countTotal===0));assert.equal(peak,2);}
+ finally{release();await Promise.allSettled(pending);}
+});
+
+test('directory tail pages remain ordinary bounded pagination, not first-page zero claims',async()=>{
+ let calls=0;const client=createAjesClient({...base,fetcher:async url=>{calls++;assert.equal(isCount(sqlOf(url)),false);return Response.json([]);}});
+ for(const aggregate of ['makes','models'] as const){const value=await client.read({aggregate,page:2},ip);assert.deepEqual(value[aggregate],[]);assert.equal(value.emptyPageEvidence,undefined);}
+ assert.equal(calls,2);
+});
 
 test('an unconfirmed empty wire page preserves useful exact rows and never writes a fresh empty cache',async()=>{
  const stored=store(),input={table:'stats' as const},sql=ajesQuery(input).sql,saved=snapshot();

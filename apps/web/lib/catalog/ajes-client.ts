@@ -57,15 +57,37 @@ function verifiedEmptyPage(value:any,sourceSql?:string,countSql?:string,fresh=tr
     &&Number.isFinite(sourceTime)&&Number.isFinite(countTime)&&Math.abs(sourceTime-countTime)<sourceTtlMs
     &&sourceAge>=0&&countAge>=0&&(!fresh||sourceAge<sourceTtlMs&&countAge<sourceTtlMs);
 }
+const emptyDirectoryKind=(value:any):'makes'|'models'|undefined=>value?.page===1
+  ?Array.isArray(value?.makes)&&value.makes.length===0?'makes'
+  :Array.isArray(value?.models)&&value.models.length===0?'models':undefined:undefined;
+/** An empty first directory page cannot establish zero inventory by itself.
+ * Its exact COUNT proof uses the same source deadline as an empty list page. */
+function verifiedEmptyDirectory(value:any,sourceSql?:string,countSql?:string,fresh=true){
+  const kind=emptyDirectoryKind(value);
+  return Boolean(kind)&&value.pageSize===500&&value.emptyPageEvidence?.kind===kind
+    &&value.emptyPageEvidence.countTotal===0&&verifiedEmptyPage(value,sourceSql,countSql,fresh);
+}
+const directoryObservationTime=(value:any)=>Math.max(Date.parse(value?.observedAt||''),
+  value?.emptyPageEvidence?.kind?Date.parse(value.emptyPageEvidence.countObservedAt||''):0);
 type Dependencies={saveRequestFailure?:(value:AjesRequestDiagnostic)=>Promise<unknown>;calculationIndex?:()=>CalculationIndex|null;password:()=>string|undefined|Promise<string|undefined>; assertEnabled:(table?:AjesTable)=>Promise<void>; reserve:(table:AjesTable,kind?:string)=>Promise<void>; fetcher?:typeof fetch; endpoint?:(ip:string)=>string|Promise<string>; saveEvidence?:(table:AjesTable,value:any)=>Promise<void>; saveAggregateEvidence?:(kind:string,value:any)=>Promise<void>; readQuery?:(sql:string)=>Promise<any|null>; readLegacyQuery?:(sql:string)=>Promise<any|null>; saveQuery?:(sql:string,value:any)=>Promise<void>; readDetail?:(table:AjesTable,id:string)=>Promise<any|null>; readSavedSearch?:(input:AjesQuery)=>Promise<any|null>; readListedDetail?:(table:AjesTable,id:string)=>Promise<any|null>; saveDetail?:(table:AjesTable,id:string,value:any)=>Promise<void>};
 export function createAjesClient(deps:Dependencies) {
+  // Scalar ordering only; actual payload ownership remains with the bounded
+  // caches. A delayed zero must not replace an already observed newer result.
+  const directoryOrder=new Map<string,number>(),directoryBindings=new WeakMap<object,{key:string;at:number}>();
+  const trackDirectory=(key:string,value:any)=>{
+    const at=directoryObservationTime(value);directoryBindings.set(value,{key,at});
+    if(at>=(directoryOrder.get(key)??-Infinity)){directoryOrder.delete(key);directoryOrder.set(key,at);}
+    while(directoryOrder.size>300)directoryOrder.delete(directoryOrder.keys().next().value!);
+    return value;
+  };
+  const currentDirectory=(value:any)=>{const binding=directoryBindings.get(value);return !binding||(directoryOrder.get(binding.key)??binding.at)<=binding.at;};
   // Only fresh successful results can be reused across visitor addresses.
   // A slow detail may use one slot; lists and filter directories retain the other.
   // Keep the total supplier concurrency at two, including all request kinds.
   // A queued detail may wait for the preceding 45-second read instead of failing
   // at the ordinary five-second queue deadline solely due to serialization.
   const sourceExpiry=(value:any)=>Math.min(Date.parse(value?.observedAt||'')+sourceTtlMs,value?.emptyPageEvidence?Date.parse(value.emptyPageEvidence.countObservedAt||'')+sourceTtlMs:Infinity);
-  const cache=new DetailReadCache<any>({maxEntries:300,maxBytes:8*1024*1024,ttlMs:30*60*1000,expiresAt:sourceExpiry,concurrency:2,groupConcurrency:{detail:1},groupQueueTimeoutMs:{detail:50_000},shouldCache:value=>!value.stale&&!value.partial});
+  const cache=new DetailReadCache<any>({maxEntries:300,maxBytes:8*1024*1024,ttlMs:30*60*1000,expiresAt:sourceExpiry,concurrency:2,groupConcurrency:{detail:1},groupQueueTimeoutMs:{detail:50_000},shouldCache:value=>!value.stale&&!value.partial&&currentDirectory(value)&&(!emptyDirectoryKind(value)||verifiedEmptyDirectory(value))});
   // Stored recovery has its own bounded queue. It must neither occupy supplier
   // admission nor promote a visitor's stale result into the shared fresh cache.
   // Inspect exact already requested lists and metadata, never detail responses.
@@ -75,7 +97,8 @@ export function createAjesClient(deps:Dependencies) {
   const preparedReads=new DetailReadCache<any>({maxEntries:300,maxBytes:8*1024*1024,ttlMs:30*60*1000,expiresAt:sourceExpiry,concurrency:2,maxQueued:32,queueTimeoutMs:5000,shouldCache:value=>{
     const age=Date.now()-Date.parse(value?.observedAt||'');
     const supported=value?.schemaVersion===2||Array.isArray(value?.makes)||Array.isArray(value?.models)||Array.isArray(value?.colors)||Number.isSafeInteger(value?.total);
-    return supported&&!value.stale&&!value.partial&&age>=0&&age<sourceTtlMs&&(!needsEmptyProof(value)||verifiedEmptyPage(value));
+    return supported&&!value.stale&&!value.partial&&age>=0&&age<sourceTtlMs&&(!needsEmptyProof(value)||verifiedEmptyPage(value))
+      &&(!emptyDirectoryKind(value)||verifiedEmptyDirectory(value));
   }});
   // Memoization avoids repeated object-store reads. Every reuse below
   // still checks observedAt; memory residence never extends freshness.
@@ -83,10 +106,10 @@ export function createAjesClient(deps:Dependencies) {
   // Persistence is a best-effort cache of requested responses, not the supplier
   // transaction. A slow storage write must not delay ready cars or hold the two
   // supplier slots. Bound both concurrent writes and retained waiting payloads.
-  const persistence=new DetailReadCache<null>({maxEntries:1,maxBytes:1,ttlMs:0,concurrency:2,maxQueued:16,queueTimeoutMs:5000,shouldCache:()=>false});
+  const persistence=new DetailReadCache<null>({maxEntries:1,maxBytes:1,ttlMs:0,concurrency:2,groupConcurrency:{directory:1},maxQueued:16,queueTimeoutMs:5000,shouldCache:()=>false});
   let persistenceSequence=0,persistenceWarningAt=0;
   const lastFailureSaved=new Map<string,number>();
-  const persist=(save:()=>Promise<unknown>)=>{void persistence.get(String(++persistenceSequence),async()=>{await save();return null;}).catch(()=>{
+  const persist=(save:()=>Promise<unknown>,group='')=>{const key=String(++persistenceSequence);void persistence.get(key,async()=>{await save();return null;},key,group).catch(()=>{
     if(Date.now()-persistenceWarningAt>=60000){persistenceWarningAt=Date.now();console.warn('AJES_PERSISTENCE_UNAVAILABLE');}
   });};
   // Bounded snapshots of rows the visitor already saw, not fabricated full details.
@@ -117,9 +140,13 @@ export function createAjesClient(deps:Dependencies) {
       const sourceKey=query.kind==='list'?sqlHash(cacheSql):'';
       // Capture the same local query facts now; a later index refresh must not
       // change the WHERE used to verify this exact source selection.
-      const countInput=query.kind==='list'?{...(input as AjesQuery),aggregate:'count' as const}:null;
+      const firstDirectory=(query.kind==='makes'||query.kind==='models')&&query.page===1;
+      const countInput=query.kind==='list'||firstDirectory?{...(input as AjesQuery),aggregate:'count' as const}:null;
       const countQuery=countInput?ajesQuery(countInput,calculationIndex):null;
       const countSql=countQuery?ajesSourceCacheSql(countQuery.sql):'';
+      const unprovedDirectory=(value:any,fresh=true)=>firstDirectory&&emptyDirectoryKind(value)
+        &&(value.emptyPageEvidence?.kind!==query.kind||!verifiedEmptyDirectory(value,cacheSql,countSql,fresh));
+      const olderDirectory=(value:any)=>firstDirectory&&directoryObservationTime(value)<(directoryOrder.get(cacheSql)??-Infinity);
       if(!isIP(clientIp)) throw new AjesUnavailable('client_ip_missing');
       await deps.assertEnabled(query.table); // Also applies to cache hits after an owner disables the source.
       const password=await deps.password();
@@ -132,7 +159,17 @@ export function createAjesClient(deps:Dependencies) {
       const isUsable=(saved:any)=>{const age=Date.now()-Date.parse(saved?.observedAt||'');return age>=0&&age<7*24*60*60*1000&&Array.isArray(saved?.items)&&saved.items.length<=query.pageSize
           &&saved.page===query.page&&saved.pageSize===query.pageSize
           &&(query.kind==='count'?Number.isSafeInteger(saved.total)&&saved.total>=0:query.kind==='colors'?Array.isArray(saved.colors):query.kind==='makes'?Array.isArray(saved.makes):query.kind==='models'?Array.isArray(saved.models):saved.items.every((lot:any)=>lot?.table===query.table&&typeof lot.id==='string'))
-          &&(query.kind!=='detail'||(saved.items.length===1&&saved.items[0].id===query.id));};
+          &&(query.kind!=='detail'||(saved.items.length===1&&saved.items[0].id===query.id))
+          &&!unprovedDirectory(saved,false);};
+      const newerDirectory=(value:any)=>firstDirectory?[cache.peekFresh(cacheSql),preparedReads.peekFresh(cacheSql)]
+        .filter(current=>isUsable(current)&&!current.stale&&!current.partial&&current[query.kind]?.length>0
+          &&directoryObservationTime(current)>directoryObservationTime(value))
+        .sort((a,b)=>directoryObservationTime(b)-directoryObservationTime(a))[0]:undefined;
+      const persistDirectory=(value:any)=>persist(async()=>{
+        // Serial directory writes also cover a PUT that was already in flight
+        // when a newer successful source response arrived.
+        if(currentDirectory(value)&&!olderDirectory(value))await deps.saveQuery!(cacheSql,value);
+      },'directory');
       const proofTime=(proof:any)=>Math.max(Date.parse(proof.sourceObservedAt),Date.parse(proof.countObservedAt));
       const barrier=()=>{const value=emptyBarriers.get(sourceKey);if(value&&Date.now()-Date.parse(value.proof.sourceObservedAt)>=7*86400000){emptyBarriers.delete(sourceKey);return undefined;}return value;};
       const beforeBarrier=(value:any)=>{
@@ -159,7 +196,7 @@ export function createAjesClient(deps:Dependencies) {
       };
       const latestFresh=()=>{
         const current=cache.peekFresh(cacheSql);
-        if(current!==undefined){if(!beforeBarrier(current)){observeRows(current);return current;}cache.invalidate(cacheSql);}
+        if(current!==undefined){if(!beforeBarrier(current)&&!unprovedDirectory(current)&&!olderDirectory(current)){observeRows(current);return current;}cache.invalidate(cacheSql);}
         const known=barrier();if(!known||known.supersededAt)return undefined;
         const value={schemaVersion:2,items:[],page:query.page,pageSize:query.pageSize,received:0,rejected:0,stale:false,observedAt:known.proof.sourceObservedAt,emptyPageEvidence:known.proof};
         return verifiedEmptyPage(value,cacheSql,countSql)?value:undefined;
@@ -204,7 +241,7 @@ export function createAjesClient(deps:Dependencies) {
       const freshPrepared=(value:any)=>{
         const age=Date.now()-Date.parse(value?.observedAt||'');
         const schema=['count','models','makes','colors'].includes(query.kind)||value?.schemaVersion===2;
-        return isUsable(value)&&schema&&!value.stale&&!value.partial&&age<sourceTtlMs&&!beforeBarrier(value)
+        return isUsable(value)&&schema&&!value.stale&&!value.partial&&age<sourceTtlMs&&!beforeBarrier(value)&&!unprovedDirectory(value)&&!olderDirectory(value)
           &&(query.kind!=='list'||!needsEmptyProof(value)||verifiedEmptyPage(value,cacheSql,countSql));
       };
       let prepared:any=null;
@@ -224,7 +261,7 @@ export function createAjesClient(deps:Dependencies) {
       if(inspectPrepared&&freshPrepared(prepared)){
         await deps.assertEnabled(query.table);
         const latest=latestFresh();if(latest!==undefined)return latest;
-        if(freshPrepared(prepared))return query.kind==='list'?remember({...prepared,stale:false}):{...prepared,stale:false};
+        if(freshPrepared(prepared)){const value={...prepared,stale:false};return query.kind==='list'?remember(value):firstDirectory?trackDirectory(cacheSql,value):value;}
       }
       return cache.get(cacheSql,async()=>{
         await deps.assertEnabled(query.table); // Recheck after waiting for concurrency slot.
@@ -232,7 +269,7 @@ export function createAjesClient(deps:Dependencies) {
         let saved:any=prepared;
         if(!inspectPrepared)try {saved=await deps.readDetail?.(query.table,query.id!);}catch{}
         const usable=isUsable(saved);
-        if(freshPrepared(saved))return query.kind==='list'?remember({...saved,stale:false}):{...saved,stale:false};
+        if(freshPrepared(saved)){const value={...saved,stale:false};return query.kind==='list'?remember(value):firstDirectory?trackDirectory(cacheSql,value):value;}
         const url=new URL(await deps.endpoint?.(clientIp)||'http://87.242.72.57/api/');
         url.search=new URLSearchParams({ip:clientIp,json:'',code:password,sql:query.sql}).toString();
         let requestStarted=false,httpStatus:number|null=null,providerCode:string|null=null;
@@ -312,7 +349,53 @@ export function createAjesClient(deps:Dependencies) {
             if(makes?.some(m=>!m.make))throw invalidResponse('aggregate_shape','make_name_missing');
             const colors=query.kind==='colors'?rows.map(r=>({color:String(r.COLOR??r.color??'').trim(),total:totalOf(r)})).filter(r=>r.color):undefined;
             const result={items:[],models,makes,colors,total:query.kind==='count'?totalOf(rows[0]):undefined,page:query.page,pageSize:query.pageSize,received:rows.length,rejected:0,stale:false,observedAt:new Date().toISOString()};
-            if(deps.saveQuery)persist(()=>deps.saveQuery!(cacheSql,result));
+            if(firstDirectory&&rows.length===0){
+              // Release supplier admission before the independent COUNT. An
+              // unconfirmed [] must neither erase useful names nor poison a
+              // later explicit UI retry through shared or persisted caches.
+              throw new AjesEmptyValidation(async()=>{
+                if(trace)trace.stage='empty_verification';
+                let failure:AjesUnavailable,countReturned=false;
+                try{
+                  const count=await read(countInput!,clientIp,countQuery!);countReturned=true;
+                  const countAge=Date.now()-Date.parse(count?.observedAt||'');
+                  if(count.stale||count.partial||count.upperBound||count.total!==0
+                    ||countAge<0||countAge>=sourceTtlMs)throw new AjesUnavailable('empty_response');
+                  const verified={...result,emptyPageEvidence:{version:1,kind:query.kind,sourceQueryHash:sqlHash(cacheSql),countQueryHash:sqlHash(countSql),page:query.page,pageSize:query.pageSize,sourceObservedAt:result.observedAt,countObservedAt:count.observedAt,countTotal:0}};
+                  if(!verifiedEmptyDirectory(verified,cacheSql,countSql))throw new AjesUnavailable('empty_response');
+                  trackDirectory(cacheSql,verified);
+                  await deps.assertEnabled(query.table);
+                  const newer=newerDirectory(verified);if(newer)return newer;
+                  if(!currentDirectory(verified))throw new AjesUnavailable('empty_response');
+                  cache.invalidate(cacheSql);preparedReads.invalidate(cacheSql);visitorCache.invalidate(visitorKey);
+                  const accepted=await cache.get(cacheSql,async()=>{
+                    await deps.assertEnabled(query.table);
+                    const newer=newerDirectory(verified);if(newer)return newer;
+                    if(!currentDirectory(verified))throw new AjesUnavailable('empty_response');
+                    if(!verifiedEmptyDirectory(verified,cacheSql,countSql))throw new AjesUnavailable('empty_response');
+                    if(deps.saveQuery)persistDirectory(verified);
+                    return verified;
+                  },visitorKey);
+                  const current=newerDirectory(accepted);if(current)return current;
+                  if(!currentDirectory(accepted))throw new AjesUnavailable('empty_response');
+                  return accepted;
+                }catch(error){
+                  failure=error instanceof AjesUnavailable?error:new AjesUnavailable('empty_response');
+                  if(trace)trace.reason=failure.reason;
+                  responseValidation=sanitizeAjesResponseValidation({version:1,phase:'empty_confirmation',code:countReturned?'count_unverified':'count_unavailable',
+                    ...responseFacts,originCode:ajesPublicFailureReason(failure.reason)});
+                }
+                recordFailure(failure);await deps.assertEnabled(query.table);
+                // Actual COUNT/provider refusals retain their existing guards.
+                // Metadata contradiction adds no LIST-specific cooldown: one
+                // ordinary visitor retry may recover a new positive directory.
+                const current=latestFresh();if(current!==undefined)return current;
+                if(isUsable(saved)&&saved[query.kind]?.length>0)return {...saved,stale:true};
+                throw failure;
+              });
+            }
+            if(firstDirectory)trackDirectory(cacheSql,result);
+            if(deps.saveQuery){if(firstDirectory)persistDirectory(result);else persist(()=>deps.saveQuery!(cacheSql,result));}
             return result;
           }
           const items=rows.map(r=>ajesLot(r,query.table,query.kind==='detail')).filter(Boolean);
