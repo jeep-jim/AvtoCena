@@ -5,8 +5,8 @@ import os from 'node:os';
 import path from 'node:path';
 import {spawnSync} from 'node:child_process';
 import {matchesCatalogModel} from '../apps/web/lib/catalog/model-filter.ts';
-import {JAPAN_STABILITY_CODE_SCOPE, JAPAN_STABILITY_CODE_PATHS, JAPAN_STABILITY_RETAINED_RUNTIME,
-  isExactJapanStabilityScope} from '../scripts/catalog-next/japan-stability-code-scope.mjs';
+import {JAPAN_STABILITY_CODE_SCOPE, JAPAN_STABILITY_CODE_PATHS, JAPAN_STABILITY_UI_CODE_PATHS, JAPAN_STABILITY_RETAINED_RUNTIME,
+  japanStabilityCodePaths, isExactJapanStabilityScope} from '../scripts/catalog-next/japan-stability-code-scope.mjs';
 import {JAPAN_PAGINATION_CODE_PATHS} from '../scripts/catalog-next/japan-pagination-code-scope.mjs';
 import {checkedCatalogCodeScope} from '../scripts/catalog-next/photo-code-scope.mjs';
 import {verifyChinaImageRuntime} from '../scripts/catalog-next/build-release-image.mjs';
@@ -53,6 +53,35 @@ test('stability image admission rejects foreign runtime scope before git or a bu
       runtimeDiffSha256: '3'.repeat(64), ...patch};
     await assert.rejects(verifyChinaImageRuntime({runtimeRoot: os.tmpdir(), plan: candidate,
       execute: () => assert.fail('invalid stability scope must fail before git')}), /china_image_(?:runtime_file_list|stability_scope)/);
+  }
+});
+
+test('Japan source-name and preview repairs admit only the complete UI successor and retain the prior exact profile', async () => {
+  const card='apps/web/components/catalog/CatalogCard.tsx';
+  assert(Object.isFrozen(JAPAN_STABILITY_UI_CODE_PATHS));
+  assert.equal(JAPAN_STABILITY_CODE_PATHS.length,49);
+  assert.equal(JAPAN_STABILITY_UI_CODE_PATHS.length,52);
+  assert.deepEqual(JAPAN_STABILITY_UI_CODE_PATHS.filter(name=>!JAPAN_STABILITY_CODE_PATHS.includes(name)),[
+    'apps/web/components/catalog/BrandLogoRail.tsx',card,'apps/web/components/catalog/CatalogContent.tsx']);
+  const candidate={...plan(),runtimeFiles:[...JAPAN_STABILITY_UI_CODE_PATHS]};
+  assert(isExactJapanStabilityScope(candidate));
+  assert.equal(checkedCatalogCodeScope(candidate),JAPAN_STABILITY_CODE_SCOPE);
+  assert.equal(japanStabilityCodePaths(candidate),JAPAN_STABILITY_UI_CODE_PATHS);
+  assert.equal(japanStabilityCodePaths(plan()),JAPAN_STABILITY_CODE_PATHS);
+  const python=spawnSync('python3',['-I','-B','-c',
+    "import importlib.util,json; s=importlib.util.spec_from_file_location('h','scripts/catalog-next/release-host.py'); m=importlib.util.module_from_spec(s); s.loader.exec_module(m); print(json.dumps(sorted(m.JAPAN_STABILITY_UI_CODE_FILES)))"],{encoding:'utf8'});
+  assert.equal(python.status,0,python.stderr);
+  assert.deepEqual(JSON.parse(python.stdout),[...JAPAN_STABILITY_UI_CODE_PATHS]);
+  for(const filename of JAPAN_STABILITY_UI_CODE_PATHS)
+    assert.equal(isExactJapanStabilityScope({...candidate,runtimeFiles:candidate.runtimeFiles.filter(name=>name!==filename)}),false,filename);
+  for(const patch of [{retainedRuntime:'0'.repeat(40)},
+    {runtimeFiles:[...candidate.runtimeFiles,'packages/engine/src/index.ts']},
+    {runtimeFiles:[...candidate.runtimeFiles,card]},
+    {runtimeFiles:candidate.runtimeFiles.map(name=>name===card?'apps/web/components/catalog/Unreviewed.tsx':name)}]){
+    const bad={...candidate,version:1,market:'china',runtimeSha:'1'.repeat(40),runtimeTree:'2'.repeat(40),runtimeDiffSha256:'3'.repeat(64),...patch};
+    assert.equal(isExactJapanStabilityScope(bad),false);
+    await assert.rejects(verifyChinaImageRuntime({runtimeRoot:os.tmpdir(),plan:bad,
+      execute:()=>assert.fail('invalid UI successor must fail before git')}),/china_image_(?:runtime_file_list|stability_scope)/);
   }
 });
 

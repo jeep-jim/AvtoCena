@@ -14,6 +14,8 @@ def refused(fn,code):
  else:raise AssertionError('required rejection: '+code)
 def forbidden(*a,**k):raise AssertionError('external I/O forbidden')
 case=sys.argv[2]
+stability_ui=case.startswith('stability_ui_')
+if stability_ui:case=case.replace('stability_ui_','stability_',1)
 stability=case.startswith('stability_')
 if stability:case=case.replace('stability_','pagination_',1)
 pagination=case.startswith('pagination_')
@@ -22,7 +24,7 @@ crm_photo=case.startswith('crm_photo_') or pagination
 if crm_photo and not pagination:case=case.replace('crm_photo_','crm_',1)
 crm=case.startswith('crm_')
 crm_scope=m.JAPAN_STABILITY_CODE_SCOPE if stability else m.JAPAN_PAGINATION_CODE_SCOPE if pagination else m.CRM_JAPAN_PHOTO_CODE_SCOPE if crm_photo else m.CRM_CHINA_CODE_SCOPE
-crm_files=m.JAPAN_STABILITY_CODE_FILES if stability else m.JAPAN_PAGINATION_CODE_FILES if pagination else m.CRM_JAPAN_PHOTO_CODE_FILES if crm_photo else m.CRM_CHINA_CODE_FILES
+crm_files=m.JAPAN_STABILITY_UI_CODE_FILES if stability_ui else m.JAPAN_STABILITY_CODE_FILES if stability else m.JAPAN_PAGINATION_CODE_FILES if pagination else m.CRM_JAPAN_PHOTO_CODE_FILES if crm_photo else m.CRM_CHINA_CODE_FILES
 usability=case.startswith('usability_')
 if usability:case=case.replace('usability_','completion_',1)
 completion_v2=case.startswith('completion_v2_')
@@ -567,6 +569,7 @@ for(const name of ['scope','preflight','copy','oracle_tamper','descriptor_tamper
   'crm_photo_accept','crm_photo_rollback','crm_photo_next_daily','crm_photo_predecessor','crm_photo_extra','crm_photo_missing','crm_photo_duplicate','crm_photo_relabel','crm_photo_unbound','crm_photo_exceptions','crm_photo_browser_rejections','crm_photo_retry_rejections',
   'pagination_accept','pagination_rollback','pagination_next_daily','pagination_predecessor','pagination_extra','pagination_missing','pagination_duplicate','pagination_relabel','pagination_unbound','pagination_exceptions','pagination_browser_rejections','pagination_retry_rejections','pagination_japan_rejections',
   'stability_accept','stability_rollback','stability_next_daily','stability_predecessor','stability_extra','stability_missing','stability_duplicate','stability_relabel','stability_unbound','stability_exceptions','stability_browser_rejections','stability_retry_rejections','stability_japan_rejections',
+  'stability_ui_accept','stability_ui_rollback','stability_ui_next_daily','stability_ui_predecessor','stability_ui_extra','stability_ui_missing','stability_ui_duplicate','stability_ui_relabel','stability_ui_unbound','stability_ui_exceptions','stability_ui_browser_rejections','stability_ui_retry_rejections','stability_ui_japan_rejections',
   'cleanup_mount','cleanup_parent_mount','cleanup_file_tamper','cleanup_plan_tamper','cleanup_rollback_tamper','cleanup_accepted_symlink','cleanup_idempotent','cleanup_copy_failure','cleanup_load_failure','post_copy_disk_space','storage_required','storage_image','storage_archive','storage_receipt','storage_zero','storage_source','storage_unpacked_space','storage_receipt_identity']) {
   test('China code-only host: '+name,()=>{
     const result=spawnSync('python3',['-I','-B','-c',harness,hostFile,name],{encoding:'utf8',timeout:20000});

@@ -1,0 +1,353 @@
+{
+  "version": 1,
+  "kind": "japan-stability-power-ui-followup-v1",
+  "checkpointAt": "2026-11-27T17:16:22+07:00",
+  "run": {
+    "id": 45975983853,
+    "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/45975983853",
+    "approvedControllerSha": "cc56bb7232c86dd5f25b89f6240cd9b77129a5b3",
+    "markerSha": "19cd1ea64ddeb1734db3b3fbc8a420ad73ed1971",
+    "jobId": 140427699461,
+    "jobConclusion": "failure",
+    "jobCompletedAt": "2026-11-27T10:09:04Z"
+  },
+  "ci": {
+    "runId": 45975142401,
+    "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/45975142401",
+    "headSha": "cc56bb7232c86dd5f25b89f6240cd9b77129a5b3",
+    "conclusion": "success",
+    "controllerTestsPassed": 1435,
+    "selectedNativeTestsPassed": 505,
+    "typecheckPassed": true,
+    "requiredBrowserFixturesPassed": true,
+    "evidence": "Root-verified Actions result, also recorded in the preceding dd1 candidate proof"
+  },
+  "artifacts": {
+    "id": 15188741537,
+    "name": "china-photo-code-release-result",
+    "archiveBytes": 874756,
+    "archiveSha256": "6bfc563c99d54a3bb64b035a3ab0ab36df9cf3613c244a460a69742f05e19a2e",
+    "matchesActionsDigest": true,
+    "reports": {
+      "catalog-next-china-photo-release-report.json": {
+        "bytes": 1811,
+        "sha256": "4216b71cf23d835fcfecf32827d0419dd3de72272533e0b61d23746cf4659917"
+      },
+      "catalog-next-japan-browser-report.json": {
+        "bytes": 15619,
+        "sha256": "cc555b6e096fa13a6f551c26fdeeafd11c388517b334ce565008760ba7e09d4f"
+      },
+      "catalog-next-japan-source-failure-report.json": {
+        "bytes": 3923,
+        "sha256": "590a4e93993666ee1d9d196a1ff440e4b31bced2243723948f77c6c0ece971e4"
+      }
+    }
+  },
+  "terminal": {
+    "status": "rolled_back",
+    "completed": false,
+    "published": false,
+    "runtimeSha": "dd1fcaf2b2628c8e85ec7b81658eb01d0c468c34",
+    "retainedRuntime": "a5ca426eec2663eb17c2df69fe2bfed46e2b8740",
+    "recovered": true,
+    "retentionPreserved": true,
+    "leaseReleased": true,
+    "errorCode": "china_daily_release_japan_browser_failed",
+    "finishedAt": "2026-11-27T10:08:54.270Z"
+  },
+  "browser": {
+    "release": "dd1fcaf2b2628c8e85ec7b81658eb01d0c468c34",
+    "checkedAt": "2026-11-27T10:07:25.739Z",
+    "passed": false,
+    "error": {
+      "stage": "power_ui",
+      "code": "japan_browser_check_failed",
+      "timeout": true
+    },
+    "japanFreshnessPassed": true,
+    "japanPowerApiPassed": true,
+    "japanPagination24Passed": false,
+    "plainPagination": {
+      "first": {
+        "status": 200,
+        "shown": 24,
+        "received": 24,
+        "observedAt": "2026-11-27T10:06:44.275Z",
+        "ageSeconds": 53.124,
+        "stale": false,
+        "partial": false,
+        "total": null,
+        "hasMore": true,
+        "fullOrExhausted": true
+      },
+      "next": {
+        "status": 200,
+        "shown": 24,
+        "received": 24,
+        "observedAt": "2026-11-27T10:06:48.321Z",
+        "ageSeconds": 49.078,
+        "stale": false,
+        "partial": false,
+        "total": null,
+        "hasMore": true,
+        "fullOrExhausted": true
+      },
+      "cursorSha256": "910386538e9e69d53c43c816410faa71e42ea5b713c8eb8e703fafd74f7aa08f",
+      "followedEmittedCursor": true,
+      "distinctRows": true,
+      "visiblePages": 2,
+      "navigatedThroughLink": true,
+      "uiMatchesApi": true,
+      "cityPreserved": true,
+      "warningRemoved": true
+    },
+    "freshSsrSourcePageThreeReceipt": {
+      "version": 1,
+      "requestId": "0b055714-8211-4a8e-8e92-18a88bd933a5",
+      "queryHash": "aee6a316fe78f521f28c7ad9d23f72d95303ba0aa5363c20132532dc1e64c3d4",
+      "table": "stats",
+      "kind": "list",
+      "page": 3,
+      "pageSize": 24,
+      "startedAt": "2026-11-27T10:07:30.900Z",
+      "finishedAt": "2026-11-27T10:07:34.687Z",
+      "stage": "supplier",
+      "supplierAttempted": true,
+      "outcome": "fresh",
+      "observedAt": "2026-11-27T10:07:34.686Z"
+    },
+    "allJapanUiAccepted": false
+  },
+  "snapshot": {
+    "capture": {
+      "version": 1,
+      "stage": "before_rollback",
+      "runtimeSha": "dd1fcaf2b2628c8e85ec7b81658eb01d0c468c34",
+      "controllerSha": "19cd1ea64ddeb1734db3b3fbc8a420ad73ed1971",
+      "nonce": "fc819156a7e85f773234976c67bcf13e",
+      "failedStage": "power_ui",
+      "capturedAt": "2026-11-27T10:08:12.979Z"
+    },
+    "localExactMarkerCheckerVerified": true,
+    "fixedSlots": [
+      "stats-list-1",
+      "stats-list-2",
+      "stats-list-3",
+      "stats-count",
+      "stats-latest"
+    ],
+    "supplierRequests": 0,
+    "writes": 0,
+    "historyReads": 0,
+    "attribution": "saved_outer_request_metadata_only",
+    "currentList": {
+      "slot": "stats-list-1",
+      "readStatus": "ok",
+      "startedAt": "2026-11-27T10:07:36.659Z",
+      "finishedAt": "2026-11-27T10:07:37.297Z",
+      "kind": "list",
+      "outcome": "invalid_response",
+      "page": 1,
+      "pageSize": 24,
+      "httpStatus": 200,
+      "providerCode": null,
+      "sqlSha256": "78005994c90034ae5715663601279c39865a746d273c61302ee1b28a3ba4ff7f",
+      "sqlBytes": 3584,
+      "responseValidation": {
+        "version": 1,
+        "phase": "empty_confirmation",
+        "code": "count_unavailable",
+        "wireBytes": 2,
+        "decodedBytes": 2,
+        "rowCount": 0,
+        "rootKind": "array",
+        "originCode": "invalid_response"
+      }
+    },
+    "currentCount": {
+      "slot": "stats-count",
+      "readStatus": "ok",
+      "startedAt": "2026-11-27T10:07:37.071Z",
+      "finishedAt": "2026-11-27T10:07:37.296Z",
+      "kind": "count",
+      "outcome": "invalid_response",
+      "page": 1,
+      "pageSize": 1,
+      "httpStatus": 200,
+      "providerCode": null,
+      "sqlSha256": "29e5830d4ab2d8e1f571647ead7a0c2f9d30d6c280cae5410648037bcfb82747",
+      "sqlBytes": 3545,
+      "responseValidation": {
+        "version": 1,
+        "phase": "aggregate_shape",
+        "code": "count_row_count",
+        "wireBytes": 2,
+        "decodedBytes": 2,
+        "rowCount": 0,
+        "rootKind": "array"
+      }
+    },
+    "latestEqualsListExceptSlot": true,
+    "historicalRecords": [
+      {
+        "slot": "stats-list-2",
+        "startedAt": "2026-11-27T09:02:27.722Z",
+        "finishedAt": "2026-11-27T09:02:31.369Z",
+        "sqlSha256": "f368b3edba33f245754f7c58a85473de35d87025afba14ddc8a86f4fa9db23c2",
+        "unchangedFromRun45967172175": true
+      },
+      {
+        "slot": "stats-list-3",
+        "startedAt": "2026-11-27T09:03:31.704Z",
+        "finishedAt": "2026-11-27T09:03:35.514Z",
+        "sqlSha256": "aee6a316fe78f521f28c7ad9d23f72d95303ba0aa5363c20132532dc1e64c3d4",
+        "unchangedFromRun45967172175": true
+      }
+    ],
+    "listWindowRecordCount": 0,
+    "captureBeforeTerminalMs": 41291,
+    "sqlAttribution": {
+      "verifiedOfflineAt": "2026-11-27T10:26:46Z",
+      "runtimeSha": "dd1fcaf2b2628c8e85ec7b81658eb01d0c468c34",
+      "functions": [
+        "ajesCatalogQuery",
+        "ajesQuery"
+      ],
+      "query": {
+        "market": "japan",
+        "make": "LAND ROVER",
+        "page": 1,
+        "pageSize": 24
+      },
+      "listSha256": "78005994c90034ae5715663601279c39865a746d273c61302ee1b28a3ba4ff7f",
+      "countSha256": "29e5830d4ab2d8e1f571647ead7a0c2f9d30d6c280cae5410648037bcfb82747",
+      "listSqlBytes": 3584,
+      "countSqlBytes": 3545,
+      "sourceRequests": 0,
+      "limits": "Exact SQL hash match identifies the make predicate, not the initiating HTTP route or the power_ui failure; local-only power and city inputs cannot be inferred from SQL."
+    }
+  },
+  "disk": {
+    "appImageCleanupBeforeReserve": {
+      "version": 1,
+      "kind": "china-terminal-app-image-cleanup-v1",
+      "completed": true,
+      "status": "already_absent",
+      "uncertain": false,
+      "imagesRemoved": 0,
+      "runtimeSha": "c6cfb54cc7c9e2b9d30dcdbb7af9cb604b3aa323",
+      "imageId": "sha256:446415f037e546b0d7694d14dce28b8576a63971858f6c340902a8036980f005",
+      "witnessSha256": "b1dade71c549091ad661fabd36e2c32614b86fd6e3e749e4e576a7231086e2ae",
+      "diskFreeBytesBefore": 50814984192,
+      "diskFreeBytesAfter": 50814984192,
+      "measuredFreeBytesChange": 0,
+      "reason": "already_absent"
+    },
+    "appImageCleanup": {
+      "version": 1,
+      "kind": "china-terminal-app-image-cleanup-v1",
+      "completed": true,
+      "status": "removed",
+      "uncertain": false,
+      "imagesRemoved": 1,
+      "runtimeSha": "dd1fcaf2b2628c8e85ec7b81658eb01d0c468c34",
+      "imageId": "sha256:784caabd3b2fc41dfd157bdfb02ed5303c5cadf985008db4facb19cb59554a0b",
+      "witnessSha256": "dfbbbf163e15f23548016bdc3583d3ecb2bfefbb765fb9e2941aa2f2afdb08da",
+      "diskFreeBytesBefore": 49618575360,
+      "diskFreeBytesAfter": 50810343424,
+      "measuredFreeBytesChange": 1191768064,
+      "reason": "exact_terminal_image"
+    },
+    "freeGiB": 47.32081985473633,
+    "freedGiB": 1.1099205017089844,
+    "conversionDivisorBytes": 1073741824,
+    "deltaReconciled": true,
+    "newFullInventory": false
+  },
+  "china": {
+    "retainedGenerationId": "gen_china_45875678028_1",
+    "manifestSha256": "58263ea4dc5642c9ff6f544830e9d3536ba702fb729a7a8c33b049b70b737038",
+    "calculationVersion": "4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90",
+    "releaseCounters": {
+      "sourceRequests": 0,
+      "generationRestores": 0,
+      "priceCalculations": 0,
+      "generationWrites": 0,
+      "encyclopediaWrites": 0,
+      "otherMarketWrites": 0,
+      "deletions": 0
+    },
+    "counterScope": "Release counters exclude ordinary Japan SSR reads and separately reported app-image cleanup"
+  },
+  "historicalContract": {
+    "sourceSha": "d41d47e4172719e9d0f83f706923fbf78168dcb3",
+    "sourceTimestamp": "2026-11-10T11:14:04Z",
+    "queryPath": "apps/web/lib/catalog/ajes-query.ts",
+    "clientPath": "apps/web/lib/catalog/ajes-client.ts",
+    "queryUrl": "https://github.com/jeep-jim/AvtoCena/blob/d41d47e4172719e9d0f83f706923fbf78168dcb3/apps/web/lib/catalog/ajes-query.ts",
+    "clientUrl": "https://github.com/jeep-jim/AvtoCena/blob/d41d47e4172719e9d0f83f706923fbf78168dcb3/apps/web/lib/catalog/ajes-client.ts",
+    "defaultPageSize": 24,
+    "maximumPageSize": 48,
+    "queryTailUsesLimit": true,
+    "rowsAboveQueryPageSizeRejectedAsInvalidResponse": true,
+    "evidence": "Root inspected these exact GitHub source blobs through the connector; this local followup did not repeat the network reads"
+  },
+  "nextLocalRepair": {
+    "files": [
+      "apps/web/components/catalog/CatalogCard.tsx",
+      "tests/japan-source-power.test.ts"
+    ],
+    "defect": "Japan provenance helpers receive offerWithSavedPreview after preview powerHp/powerKw overlay, suppressing original supplier/unknown attributes.",
+    "localRealPathCasesReproduced": 8,
+    "liveTimeoutRowCaptured": false,
+    "status": "two-file fix locally implemented and independently reviewed; not deployed or accepted",
+    "maintenance": "Prepared d248 remains unactivated; rebind both runtime links after final acceptance",
+    "evidence": "Catalog-agent real-path regression and typecheck; root inspected and applied the exact two-file patch without changing pricing or source requests.",
+    "targetedTests": {
+      "passed": 34,
+      "failed": 0
+    },
+    "typecheckPassed": true,
+    "patchSha256": "ca4be601697debae3f986a8a9d92f650386be8a0df5f94474c0e5fa16a256ba4",
+    "regression": "New supplier/unknown with saved preview regression failed before the fix; manual/owner and no-preview/non-Japan controls passed."
+  },
+  "limits": [
+    "Plain pagination succeeded in this attempt; the complete Japan pagination/UI/filter/detail/calculation acceptance did not finish.",
+    "No new listWindow proof was captured. Saved page-two and page-three row-limit records are unchanged historical records, not the new power_ui failure.",
+    "Current empty-list and empty-count metadata do not by themselves identify the timed-out UI selector or prove absence of cars.",
+    "A successful source page-three receipt and old 24-row guard do not establish a universal native page size or OFFSET behavior for prior oversized responses.",
+    "The local preview/provenance defect is reproduced, but the specific live row at timeout was not captured.",
+    "No new server, supplier or storage requests and no accepted/intent/lease reread were performed by this audit."
+  ],
+  "sourceNameRepair": {
+    "status": "implemented, reviewed and tested; included in immutable 4f25 source candidate, not production accepted",
+    "defect": "Japan source make values are converted to canonical display names by CatalogContent, BrandLogoRail and VehicleModelSearch; a make-directory failure can leave that changed value in the source query and accept a false zero.",
+    "evidence": "Offline synthetic one-row SQLite cases with real normalization and ajesQuery/readAjesResolvedPublic/readAjesCountSummary, no live source calls.",
+    "cases": [
+      {
+        "source": "LANDROVER",
+        "display": "Land Rover",
+        "freshDirectoryRows": 1,
+        "unavailableDirectoryRows": 0,
+        "rawQueryRows": 1
+      },
+      {
+        "source": "BENZ",
+        "display": "Mercedes-Benz",
+        "freshDirectoryRows": 1,
+        "unavailableDirectoryRows": 0,
+        "rawQueryRows": 1
+      },
+      {
+        "source": "LAND ROVER",
+        "display": "Land Rover",
+        "freshDirectoryRows": 1,
+        "unavailableDirectoryRows": 1,
+        "rawQueryRows": 1
+      }
+    ],
+    "limits": "Synthetic source spellings do not establish the current provider directory or the cause of the saved Land Rover empty response.",
+    "targetedPassed": 44,
+    "typecheckPassed": true
+  }
+}

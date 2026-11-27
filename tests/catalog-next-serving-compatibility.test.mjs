@@ -10,6 +10,8 @@ import {JAPAN_RECOVERY_CODE_PATHS,JAPAN_COMPLETION_CODE_PATHS,JAPAN_COMPLETION_V
 import {CRM_CHINA_CODE_SCOPE, CRM_CHINA_CODE_PATHS} from '../scripts/catalog-next/crm-china-code-scope.mjs';
 import {CRM_JAPAN_PHOTO_CODE_SCOPE, CRM_JAPAN_PHOTO_CODE_PATHS} from '../scripts/catalog-next/crm-japan-photo-code-scope.mjs';
 import {JAPAN_PAGINATION_CODE_SCOPE,JAPAN_PAGINATION_CODE_PATHS} from '../scripts/catalog-next/japan-pagination-code-scope.mjs';
+import {JAPAN_STABILITY_CODE_SCOPE,JAPAN_STABILITY_CODE_PATHS,JAPAN_STABILITY_UI_CODE_PATHS,
+  JAPAN_STABILITY_RETAINED_RUNTIME} from '../scripts/catalog-next/japan-stability-code-scope.mjs';
 
 const hash = raw => createHash('sha256').update(raw).digest('hex');
 async function fixture(t) {
@@ -285,6 +287,33 @@ test('pagination24 cumulative compatibility starts at accepted a5ca without admi
     'apps/web/lib/auth.ts','apps/web/app/(crm)/api/crm/team/route.ts','apps/web/lib/catalog/rates.ts']){
     await f.write(filename,'unreviewed bytes\n');f.commit();
     await assert.rejects(verifyServingCompatibility({...f,servingPlan:{...f.servingPlan(),codeScope:JAPAN_PAGINATION_CODE_SCOPE}}),/china_serving_change_scope/);
+    f.git(['reset','--hard','HEAD~1']);
+  }
+});
+
+test('Japan UI compatibility admits BrandLogoRail only with the exact reviewed successor',async t=>{
+  const f=await fixture(t);
+  const files=['apps/web/components/catalog/BrandLogoRail.tsx',
+    'apps/web/components/catalog/CatalogCard.tsx','apps/web/components/catalog/CatalogContent.tsx'];
+  for(const filename of files)await f.write(filename,'reviewed Japan source identity and preview provenance\n');
+  f.commit();
+  const plan=()=>({...f.servingPlan(),codeScope:JAPAN_STABILITY_CODE_SCOPE,
+    retainedRuntime:JAPAN_STABILITY_RETAINED_RUNTIME,runtimeFiles:[...JAPAN_STABILITY_UI_CODE_PATHS]});
+  const proof=await verifyServingCompatibility({...f,servingPlan:plan()});
+  assert.deepEqual(proof.pricingToServingFiles,files);
+  assert.equal(proof.protectedPricingPathsUnchanged,true);
+  await assert.rejects(verifyServingCompatibility({...f,servingPlan:{...plan(),
+    runtimeFiles:[...JAPAN_STABILITY_CODE_PATHS]}}),/china_serving_change_scope/);
+  for(const codeScope of [CRM_JAPAN_PHOTO_CODE_SCOPE,JAPAN_PAGINATION_CODE_SCOPE])
+    await assert.rejects(verifyServingCompatibility({...f,servingPlan:{...plan(),codeScope}}),/china_serving_change_scope/);
+  for(const runtimeFiles of [JAPAN_STABILITY_UI_CODE_PATHS.slice(1),
+    [...JAPAN_STABILITY_UI_CODE_PATHS,files[0]],
+    [...JAPAN_STABILITY_UI_CODE_PATHS,'apps/web/components/catalog/Unreviewed.tsx']])
+    await assert.rejects(verifyServingCompatibility({...f,servingPlan:{...plan(),runtimeFiles}}),/china_serving_stability_scope/);
+  for(const filename of ['apps/web/lib/catalog/ajes-power-page.ts','apps/web/lib/catalog/rates.ts',
+    'apps/web/lib/encyclopedia/calculation-index.ts','apps/web/components/catalog/Unreviewed.tsx']){
+    await f.write(filename,'unreviewed adjacent or protected bytes\n');f.commit();
+    await assert.rejects(verifyServingCompatibility({...f,servingPlan:plan()}),/china_serving_change_scope/);
     f.git(['reset','--hard','HEAD~1']);
   }
 });

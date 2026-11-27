@@ -59,12 +59,27 @@ export const JAPAN_STABILITY_CODE_PATHS = Object.freeze([
   'tests/related-offer-selection.test.ts',
 ]);
 
+/** The UI correction preserves Japan source names and the power provenance
+ * shown with a saved calculation preview. Preserve the original exact 49-file
+ * profile for its existing receipts; the successor adds three reviewed views. */
+export const JAPAN_STABILITY_UI_CODE_PATHS = Object.freeze([
+  ...JAPAN_STABILITY_CODE_PATHS,
+  'apps/web/components/catalog/BrandLogoRail.tsx',
+  'apps/web/components/catalog/CatalogCard.tsx',
+  'apps/web/components/catalog/CatalogContent.tsx',
+].sort());
+const reviewedProfiles = Object.freeze([JAPAN_STABILITY_CODE_PATHS, JAPAN_STABILITY_UI_CODE_PATHS]);
+
+export function japanStabilityCodePaths(plan) {
+  const files = plan?.runtimeFiles;
+  if (!Array.isArray(files) || new Set(files).size !== files.length) return null;
+  return reviewedProfiles.find(paths => files.length === paths.length && paths.every(name => files.includes(name))) ?? null;
+}
+
 export function isExactJapanStabilityScope(plan) {
   return JAPAN_STABILITY_CODE_PATHS.length > 0
     && JAPAN_PAGINATION_CODE_PATHS.every(name => JAPAN_STABILITY_CODE_PATHS.includes(name))
     && plan?.codeScope === JAPAN_STABILITY_CODE_SCOPE
     && plan.retainedRuntime === JAPAN_STABILITY_RETAINED_RUNTIME
-    && Array.isArray(plan.runtimeFiles) && plan.runtimeFiles.length === JAPAN_STABILITY_CODE_PATHS.length
-    && new Set(plan.runtimeFiles).size === plan.runtimeFiles.length
-    && JAPAN_STABILITY_CODE_PATHS.every(name => plan.runtimeFiles.includes(name));
+    && japanStabilityCodePaths(plan) !== null;
 }

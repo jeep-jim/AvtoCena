@@ -1,0 +1,76 @@
+{
+  "version": 1,
+  "date": "2026-11-27",
+  "timeZone": "Asia/Krasnoyarsk",
+  "status": "prepared_not_accepted",
+  "priorProductionEvidence": "docs/operations/2026-11-27-japan-stability-power-ui-followup.json",
+  "retainedRuntime": "a5ca426eec2663eb17c2df69fe2bfed46e2b8740",
+  "retainedGeneration": "gen_china_45875678028_1",
+  "candidate": {
+    "runtimeSha": "4f25c50513941085a4beaaff8be570a80f3b8b12",
+    "runtimeTree": "75a82ba77ee4b2500038f750fdc99be26803d266",
+    "runtimeDiffSha256": "19633c971a90329ec25324acd7d8f2f10475dc3f8019c4b16b18c09cb5a4b750",
+    "pricingToServingDiffSha256": "fe5aa7066b66929f4c38932b82bfc9843628292551eaf6dc4051d1da548bf8f2",
+    "parent": "dd1fcaf2b2628c8e85ec7b81658eb01d0c468c34",
+    "runtimeFileCount": 52,
+    "pricingToServingFileCount": 112,
+    "codeScope": "catalog-japan-stability-v1"
+  },
+  "repairs": {
+    "powerPreview": "CatalogCard classifies Japan supplier/unknown provenance on the original offer when a saved calculation overlay is present; grid and list retain factual labels; ordinary normalization and other markets retain behavior.",
+    "sourceSelection": "Japanese source make/model values survive rail links, CatalogContent dispatch, model click and typed/Enter selection; non-Japan and Green paths retain prior normalization.",
+    "directoryFailure": "Missing/stale make directory cannot establish zero inventory. Useful rows remain partial; counts and empty unresolved searches fail honestly.",
+    "brandRail": "Loading/ready/unavailable are separate; stale/missing metadata retains observed visible makes and exposes router.refresh retry."
+  },
+  "validation": {
+    "powerPreviewTargeted": {
+      "passed": 34,
+      "failed": 0,
+      "typecheck": "passed",
+      "patchSha256": "ca4be601697debae3f986a8a9d92f650386be8a0df5f94474c0e5fa16a256ba4"
+    },
+    "sourceSelectionTargeted": {
+      "passed": 44,
+      "failed": 0,
+      "typecheck": "passed",
+      "patchSha256": "4bf813bcb81b9980dfed5cd65c8aa5aa041c9840c1653e28878b9329d23ec5bd",
+      "browserScriptSyntax": "passed",
+      "browserExecution": "requires hosted CI"
+    },
+    "controllerTargeted": {
+      "passed": 179,
+      "failed": 0,
+      "logSha256": "cb89fbddf140ef8dc3dbc0f27bec27740c4410c65ea11504f2b89cf46643e535"
+    },
+    "independentReview": "source and controller reviewed independently; no unresolved blocker in this diff",
+    "treeRoundtripVerified": true,
+    "protectedPricingVerification": "passed exact runtime52/pricing112, immutable SHA/tree/full binary diff and protected-path checks",
+    "controllerFull": {
+      "passed": 1450,
+      "failed": 0,
+      "skipped": 0,
+      "logSha256": "71deb51a92acc2e435d9860393e66c4365821c6631a93bef7c19f6435709688b",
+      "manifestRuntime": "4f25c50513941085a4beaaff8be570a80f3b8b12",
+      "frozenBaselines": "passed"
+    }
+  },
+  "controllerScope": {
+    "previousFileCount": 49,
+    "successorFileCount": 52,
+    "addedPaths": [
+      "apps/web/components/catalog/BrandLogoRail.tsx",
+      "apps/web/components/catalog/CatalogCard.tsx",
+      "apps/web/components/catalog/CatalogContent.tsx"
+    ],
+    "oldProfilePreserved": true,
+    "foreignMissingDuplicatePathsRejected": true,
+    "protectedExceptionsUnchanged": true
+  },
+  "remaining": [
+    "Hosted exact-source CI and real browser fixture must pass.",
+    "Full production Japan acceptance has not passed; a5ca and China C remain retained.",
+    "Global effective-known before unknown order is being implemented separately using bounded visitor-driven phases; this UI candidate does not implement it.",
+    "Legacy Mazda/3 live coverage is being added; its local real-path recovery is already included.",
+    "Prepared maintenance is inactive until final acceptance and actual current/rollback rebind."
+  ]
+}

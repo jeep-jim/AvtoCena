@@ -124,6 +124,13 @@ JAPAN_STABILITY_CODE_FILES = {
     'tests/japan-vehicle-policy.test.ts',
     'tests/related-offer-selection.test.ts',
 }
+# Keep the previous exact profile readable. Japan source-name and provenance
+# repairs add three views; runtime SHA/tree/diff stay independently pinned.
+JAPAN_STABILITY_UI_CODE_FILES = JAPAN_STABILITY_CODE_FILES | {
+    'apps/web/components/catalog/BrandLogoRail.tsx',
+    'apps/web/components/catalog/CatalogCard.tsx',
+    'apps/web/components/catalog/CatalogContent.tsx',
+}
 JAPAN_PAGINATION_CODE_FILES = {
     "apps/web/components/catalog/AjesCatalog.tsx",
     "apps/web/components/catalog/CatalogLoadMore.tsx",
@@ -2852,6 +2859,9 @@ class Host:
         image = json.loads(image_raw)
         scope = code_scope(self.plan)
         required_code_files = CODE_SCOPE_FILES[scope]
+        if (scope == JAPAN_STABILITY_CODE_SCOPE and isinstance(image.get('runtimeFiles'), list) and
+                'apps/web/components/catalog/CatalogCard.tsx' in image['runtimeFiles']):
+            required_code_files = JAPAN_STABILITY_UI_CODE_FILES
         need(image.get('version') == 1 and image.get('kind') == 'china-runtime-image-v1' and image.get('market') == 'china' and
              all(image.get(key) == self.plan[key] for key in ('runtimeSha', 'pricingRuntimeSha', 'runtimeTree',
                                                             'runtimeDiffSha256', 'retainedRuntime', 'imageId')) and
