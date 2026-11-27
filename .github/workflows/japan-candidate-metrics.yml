@@ -1,0 +1,32 @@
+name: Japan candidate read-only source metrics
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/japan-candidate-metrics.yml
+permissions:
+  contents: read
+jobs:
+  metrics:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Verify reviewable Japan source and record hashes
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch --no-tags origin refs/heads/fix/japan-catalog-brand-fallback-20261127
+          CANDIDATE=74489d8534029c3324f0c896bf84cb25abf9d31f
+          RETAINED=a5ca426eec2663eb17c2df69fe2bfed46e2b8740
+          PRICING=64c6338e0db23c8999096bceefbf113c0136fe15
+          git cat-file -e "$CANDIDATE^{commit}"
+          printf 'JAPAN_CANDIDATE_RUNTIME=%s\n' "$CANDIDATE"
+          printf 'JAPAN_CANDIDATE_TREE=%s\n' "$(git rev-parse "$CANDIDATE^{tree}")"
+          printf 'JAPAN_RETAINED_DIFF_SHA256=%s\n' "$(git diff --binary --full-index --no-ext-diff --no-renames "$RETAINED" "$CANDIDATE" | sha256sum | cut -d' ' -f1)"
+          printf 'JAPAN_PRICING_DIFF_SHA256=%s\n' "$(git diff --binary --full-index --no-ext-diff --no-renames "$PRICING" "$CANDIDATE" | sha256sum | cut -d' ' -f1)"
+          printf 'JAPAN_RUNTIME_FILE_COUNT=%s\n' "$(git diff --name-only --no-renames "$RETAINED" "$CANDIDATE" | wc -l | tr -d ' ')"
+          printf 'JAPAN_PRICING_FILE_COUNT=%s\n' "$(git diff --name-only --no-renames "$PRICING" "$CANDIDATE" | wc -l | tr -d ' ')"
