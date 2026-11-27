@@ -351,7 +351,18 @@ test('power toggle reuses the same fresh raw page without another supplier reque
  const ordinary=await client.read({table:'stats'},'127.0.0.1');
  const filtered=await client.read({table:'stats',powerTo:160},'127.0.0.1');
  const otherPower=await client.read({table:'stats',powerTo:100},'127.0.0.1');
- assert.equal(reads,1);assert.deepEqual(filtered,ordinary);assert.deepEqual(otherPower,ordinary);
+ const {sourceReceipt:ordinaryReceipt,...ordinaryPage}=ordinary;
+ const {sourceReceipt:filteredReceipt,...filteredPage}=filtered;
+ const {sourceReceipt:otherReceipt,...otherPage}=otherPower;
+ assert.equal(reads,1);assert.deepEqual(filteredPage,ordinaryPage);assert.deepEqual(otherPage,ordinaryPage);
+ assert.ok(ordinaryReceipt&&filteredReceipt&&otherReceipt);
+ assert.equal(new Set([ordinaryReceipt.requestId,filteredReceipt.requestId,otherReceipt.requestId]).size,3);
+ assert.equal(ordinaryReceipt.supplierAttempted,true);
+ for(const receipt of [filteredReceipt,otherReceipt]){
+  assert.equal(receipt.supplierAttempted,false);
+  assert.equal(receipt.queryHash,ordinaryReceipt.queryHash);
+  assert.equal(receipt.observedAt,ordinaryReceipt.observedAt);
+ }
  assert.equal(filtered.items[0].sourcePower,'150');assert.equal(filtered.items[1].sourcePower,'');
 });
 
