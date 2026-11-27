@@ -10,7 +10,7 @@ import {verifyServingCompatibility} from './serving-compatibility.mjs';
 import {CRM_CHINA_CODE_SCOPE, CRM_CHINA_PROTECTED_EXCEPTIONS, isExactCrmChinaScope} from './crm-china-code-scope.mjs';
 import {CRM_JAPAN_PHOTO_CODE_SCOPE, isExactCrmJapanPhotoScope} from './crm-japan-photo-code-scope.mjs';
 import {JAPAN_PAGINATION_CODE_SCOPE, isExactJapanPaginationScope} from './japan-pagination-code-scope.mjs';
-import {JAPAN_STABILITY_CODE_SCOPE, isExactJapanStabilityScope} from './japan-stability-code-scope.mjs';
+import {JAPAN_STABILITY_CODE_SCOPE, isExactJapanStabilityScope, japanObservedTimingRequired} from './japan-stability-code-scope.mjs';
 
 const root = fileURLToPath(new URL('../../', import.meta.url));
 const need = (condition, code) => assert(condition, 'china_image_' + code);
@@ -80,6 +80,8 @@ export async function verifyChinaImageRuntime({runtimeRoot, plan, execute = exec
   need(!crm || isExactCrmChinaScope(plan) || isExactCrmJapanPhotoScope(plan), 'crm_scope');
   need(plan.codeScope !== JAPAN_PAGINATION_CODE_SCOPE || isExactJapanPaginationScope(plan), 'pagination_scope');
   need(plan.codeScope !== JAPAN_STABILITY_CODE_SCOPE || isExactJapanStabilityScope(plan), 'stability_scope');
+  need(plan.acceptancePolicy === undefined || (plan.codeScope === JAPAN_STABILITY_CODE_SCOPE
+    && japanObservedTimingRequired(plan)), 'acceptance_policy');
   const sourceRoot = await fs.realpath(runtimeRoot);
   const git = args => execute('/usr/bin/git', ['--no-optional-locks', ...args],
     {cwd: sourceRoot, maximum: 32 * 1024 ** 2});
@@ -101,6 +103,7 @@ export async function verifyChinaImageRuntime({runtimeRoot, plan, execute = exec
   return {runtimeSha: plan.runtimeSha, runtimeTree: plan.runtimeTree,
     retainedRuntime: plan.retainedRuntime, runtimeDiffSha256: plan.runtimeDiffSha256,
     runtimeFiles: changed, protectedPathsUnchanged: true,
+    ...(plan.acceptancePolicy === undefined ? {} : {acceptancePolicy: plan.acceptancePolicy}),
     ...(crm ? {protectedPathExceptions: [...CRM_CHINA_PROTECTED_EXCEPTIONS]} : {})};
 }
 

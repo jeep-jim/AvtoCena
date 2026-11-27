@@ -161,6 +161,31 @@ with tempfile.TemporaryDirectory(prefix='china-host-test-') as directory:
         oracle()
         assert host.functional()['functionalPassed'] is True and host.functional_passed
         assert m.CONFIG.read_bytes() == original
+    elif case == 'observed_japan_timing':
+        host.plan.update(mode='code-update', codeScope=m.JAPAN_STABILITY_CODE_SCOPE,
+                         acceptancePolicy=m.JAPAN_OBSERVED_TIMING_POLICY, retainedRuntime=m.RETAINED)
+        host.timing_observed = False
+        refused(host.switch, 'switch_before_checks')
+        refused(host.speed, 'timing_before_functional')
+        host.functional_passed = True
+        clock = [0]
+        def tick():
+            clock[0] += 123.45
+            return clock[0]
+        m.time.monotonic = tick
+        report = host.speed()
+        assert report['timingPolicy'] == m.JAPAN_OBSERVED_TIMING_POLICY
+        assert report['speedPassed'] is None and report['speedGateRequired'] is False
+        assert report['healthSeconds'] == 123.45 and report['broadServerBenchmarkExecuted'] is False
+        assert host.timing_observed and not host.speed_passed
+        assert json.loads((host.directory / 'SERVER_TIMING.json').read_bytes()) == report
+        # subprocess.run is still forbidden: unrelated benchmarks never ran.
+        assert host.switch()['switched'] and live['port'] == 3004
+        # Bulk cleanup has its separate full-plan fixture; here verify the
+        # actual ingress/container rollback reaches that unchanged capability.
+        host.cleanup_failed_code_files = lambda: operations.append(('failed-code-bulk-cleanup',))
+        host.cleanup()
+        assert live['port'] == 3000 and not host.candidate and ('failed-code-bulk-cleanup',) in operations
     elif case == 'speed':
         invoked = []
         def speed_command(args, **kwargs):
@@ -427,6 +452,7 @@ for (const [name, description] of [
   ['gates', 'requires actual functional and speed gates before switch, and a switch before acceptance'],
   ['functional', 'requires complete oracle coverage, exact card identities and exact prices'],
   ['speed', 'enforces the accepted baseline within China scope and refuses a failed speed process'],
+  ['observed_japan_timing', 'keeps exact Japan timings observational and still requires functional checks and rollback'],
   ['speed_failure_evidence', 'returns only sanitized server-speed failure evidence and still removes its failed candidate'],
   ['speed_failure_bad_evidence', 'keeps the original speed failure and rollback when diagnostic verification fails'],
   ['close_rollback', 'acknowledges an unaccepted close only after durable rollback and releases its lock once'],

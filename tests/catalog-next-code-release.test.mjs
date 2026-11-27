@@ -13,7 +13,8 @@ import {CRM_CHINA_CODE_SCOPE, CRM_CHINA_CODE_PATHS, CRM_CHINA_RETAINED_RUNTIME, 
   from '../scripts/catalog-next/crm-china-code-scope.mjs';
 import {CRM_JAPAN_PHOTO_CODE_SCOPE, CRM_JAPAN_PHOTO_CODE_PATHS} from '../scripts/catalog-next/crm-japan-photo-code-scope.mjs';
 import {JAPAN_PAGINATION_CODE_SCOPE, JAPAN_PAGINATION_CODE_PATHS, JAPAN_PAGINATION_RETAINED_RUNTIME} from '../scripts/catalog-next/japan-pagination-code-scope.mjs';
-import {JAPAN_STABILITY_CODE_SCOPE, JAPAN_STABILITY_CODE_PATHS, JAPAN_STABILITY_UI_CODE_PATHS, JAPAN_STABILITY_POWER_CODE_PATHS, JAPAN_STABILITY_RAILS_CODE_PATHS, JAPAN_STABILITY_RETAINED_RUNTIME} from '../scripts/catalog-next/japan-stability-code-scope.mjs';
+import {JAPAN_STABILITY_CODE_SCOPE, JAPAN_STABILITY_CODE_PATHS, JAPAN_STABILITY_UI_CODE_PATHS, JAPAN_STABILITY_POWER_CODE_PATHS, JAPAN_STABILITY_RAILS_CODE_PATHS, JAPAN_STABILITY_RETAINED_RUNTIME,
+  JAPAN_STABILITY_HOME_CODE_PATHS, JAPAN_OBSERVED_TIMING_POLICY} from '../scripts/catalog-next/japan-stability-code-scope.mjs';
 import {JAPAN_STABILITY_GATES} from '../scripts/catalog-next/japan-stability-browser.mjs';
 
 const hash = raw => createHash('sha256').update(raw).digest('hex');
@@ -76,7 +77,8 @@ test('authenticated photo preflight preserves every frozen expected value and ch
   assert.throws(() => checkedChinaCodePreflight(f.preflight, {...f.current, sourceCursor: 101}, nextSha));
 });
 
-async function fixture(t, {combined = false, japan = false,completion=false, crm=false, crmPhoto=false, pagination=false, stability=false, ui=false, powerOrder=false, brandDirectory=false} = {}) {
+async function fixture(t, {combined = false, japan = false,completion=false, crm=false, crmPhoto=false, pagination=false, stability=false, ui=false, powerOrder=false, brandDirectory=false, observedTiming=false} = {}) {
+  brandDirectory=brandDirectory||observedTiming;
   powerOrder=powerOrder||brandDirectory;
   stability=stability||ui||powerOrder;
   pagination=pagination||stability;
@@ -116,6 +118,7 @@ async function fixture(t, {combined = false, japan = false,completion=false, crm
     ...(stability?{runtimeFiles:[...(brandDirectory?JAPAN_STABILITY_RAILS_CODE_PATHS:powerOrder?JAPAN_STABILITY_POWER_CODE_PATHS:ui?JAPAN_STABILITY_UI_CODE_PATHS:JAPAN_STABILITY_CODE_PATHS)],codeScope:JAPAN_STABILITY_CODE_SCOPE}:pagination?{runtimeFiles:[...JAPAN_PAGINATION_CODE_PATHS],codeScope:JAPAN_PAGINATION_CODE_SCOPE}:crm?{runtimeFiles:[...(crmPhoto?CRM_JAPAN_PHOTO_CODE_PATHS:CRM_CHINA_CODE_PATHS)], codeScope:crmPhoto?CRM_JAPAN_PHOTO_CODE_SCOPE:CRM_CHINA_CODE_SCOPE}:
       japan ? {codeScope: completion?(typeof completion==='string'?completion:'catalog-japan-completion-v1'):'catalog-japan-recovery-v1'} : combined ? {codeScope: 'catalog-photo-japan-power-v1'} : {})};
   const pricingPlan = {version: 1, market: 'china', runtimeSha: pricingSha};
+  if (observedTiming) Object.assign(servingPlan, {runtimeFiles: [...JAPAN_STABILITY_HOME_CODE_PATHS], acceptancePolicy: JAPAN_OBSERVED_TIMING_POLICY});
   const imageReceipt = {version: 1,
     kind: 'china-runtime-image-v1', runtimeSha: nextSha, runtimeTree: servingPlan.runtimeTree,
     retainedRuntime, runtimeDiffSha256: servingPlan.runtimeDiffSha256, pricingRuntimeSha: pricingSha,
@@ -124,6 +127,7 @@ async function fixture(t, {combined = false, japan = false,completion=false, crm
     configSha256: hash('configuration'), rootFsSha256: hash('rootfs'), platform: 'linux/amd64',
     builder: {version: '29.1.3', driver: 'overlayfs', driverType: 'io.containerd.snapshotter.v1'},
     ...(combined || japan || crm ? {codeScope: servingPlan.codeScope} : {}),
+    ...(observedTiming ? {acceptancePolicy: JAPAN_OBSERVED_TIMING_POLICY} : {}),
     ...(crm && !pagination ? {protectedPathExceptions: [...CRM_CHINA_PROTECTED_EXCEPTIONS]} : {})};
   const imageReceiptRaw = JSON.stringify(imageReceipt);
   await fs.writeFile(path.join(imageDirectory, 'image-receipt.json'), imageReceiptRaw);
@@ -176,14 +180,18 @@ async function fixture(t, {combined = false, japan = false,completion=false, crm
       if (method === 'functional') return {functionalPassed: !flags.functionalFailure, cases: f.oracle.cases};
       if (method === 'speed') {
         if (flags.speedFailure) throw flags.speedFailure;
+        if (observedTiming) return {version: 1, kind: 'japan-server-timing-observation-v1', release: nextSha, nonce: hostPlan.nonce,
+          timingPolicy: JAPAN_OBSERVED_TIMING_POLICY, speedGateRequired: false, speedPassed: null, timingObserved: true,
+          broadServerBenchmarkExecuted: false, healthSeconds: 123.45,
+          baselineSha256: '32fba449b77e40983803483ea7b6cb4ece09afa997c2ae08dd968c675f528c59'};
         return {speedPassed: true};
       }
       if (method === 'switch') return {switched: true, release: nextSha, nonce: hostPlan.nonce};
       if (method === 'browser_evidence') {
         browserBytes = {speed: Buffer.from(args.speedBase64, 'base64'), details: Buffer.from(args.detailsBase64, 'base64')};
         const details = JSON.parse(browserBytes.details), raw = Buffer.from(
-          crm ? details.crmChinaReportBase64 : japan ? details.japanReportBase64 : combined ? details.photoJapanReportBase64 : details.photoReportBase64, 'base64');
-        assert.equal(hash(raw), crm ? details.crmChinaReportSha256 : japan ? details.japanReportSha256 : combined ? details.photoJapanReportSha256 : details.photoReportSha256);
+          crm && !observedTiming ? details.crmChinaReportBase64 : japan ? details.japanReportBase64 : combined ? details.photoJapanReportBase64 : details.photoReportBase64, 'base64');
+        assert.equal(hash(raw), crm && !observedTiming ? details.crmChinaReportSha256 : japan ? details.japanReportSha256 : combined ? details.photoJapanReportSha256 : details.photoReportSha256);
         assert.equal(JSON.parse(raw).nonce, hostPlan.nonce);
         if (crmPhoto) {
           const photoRaw = Buffer.from(details.japanPhotoRetryReportBase64, 'base64');
@@ -208,6 +216,7 @@ async function fixture(t, {combined = false, japan = false,completion=false, crm
         const old = JSON.parse(Buffer.from(f.current.proof.hostReceiptBase64, 'base64'));
         const raw = Buffer.from(JSON.stringify({...old, release: nextSha, imageId: f.candidate.imageId, nonce: hostPlan.nonce,
           transition: 'code-update', previousAcceptedETag: f.previous.etag, previousAcceptedStateSha256: f.previous.sha256,
+          ...(observedTiming ? {acceptancePolicy: JAPAN_OBSERVED_TIMING_POLICY, codeScope: JAPAN_STABILITY_CODE_SCOPE} : {}),
           retainedRuntimeSha: retainedRuntime, retainedImageId: f.current.imageId, browser: args.verdict}));
         return {accepted: true, hostReceiptBase64: raw.toString('base64'), hostReceiptSha256: hash(raw)};
       }
@@ -251,6 +260,9 @@ async function fixture(t, {combined = false, japan = false,completion=false, crm
           assert.equal(args.env.CATALOG_CODE_SCOPE,servingPlan.codeScope);
           assert.equal(args.env.CATALOG_JAPAN_POWER_ORDER_REQUIRED,powerOrder?'1':'0');
           assert.equal(args.env.CATALOG_JAPAN_BRAND_DIRECTORY_REQUIRED,brandDirectory?'1':'0');
+          assert.equal(args.env.CATALOG_JAPAN_TIMING_POLICY, observedTiming ? JAPAN_OBSERVED_TIMING_POLICY : undefined);
+          assert.equal(Object.hasOwn(args.env, 'CATALOG_JAPAN_TIMING_POLICY'), observedTiming,
+            'older profiles omit the optional timing policy rather than sending an invalid empty value');
           assert.equal(args.env.EXPECTED_RELEASE_SHA, nextSha); assert.equal(args.env.VERIFICATION_NONCE, hostPlan.nonce);
           assert.ok(!Object.hasOwn(args.env, 'SSH_PRIVATE_KEY'));
           assert.equal(path.dirname(args.env.OUTPUT), args.cwd, 'the report belongs to this unique browser session');
@@ -260,6 +272,8 @@ async function fixture(t, {combined = false, japan = false,completion=false, crm
             generationManifestSha256: f.candidate.generationManifestSha256, oracleSha256: hash(await fs.readFile(args.env.ORACLE_PATH)),
             passed: true, japanFreshnessPassed: true, japanPowerApiPassed: true, japanUiPassed: true, japanVisibilityPassed: true,
             readOnlyBrowserFence: true, productionMutations: 0, directSupplierApiRequests: 0, explicitJapanApiRequests: completion?5:3,
+            ...(observedTiming ? {timingPolicy: JAPAN_OBSERVED_TIMING_POLICY, speedGateRequired: false, speedPassed: null, timingObserved: true,
+              timings: {version: 1, unit: 'ms', latencyThresholdApplied: false, samples: [{phase: 'own-ui', durationMs: 120000}]}} : {}),
             ...(completion?{japanPetrolPowerUiPassed:true,japanDetailPowerInputPassed:true,
               japanDeliveredCalculationPassed:true,japanPreviewCalculationRequests:1}:{}),
             ...(usability?Object.fromEntries(usabilityFlags.map(flag=>[flag,true])):{}),
@@ -321,6 +335,40 @@ async function reservedStage(f) {
   const reserved = await state.reserve({lease, previous: f.previous, previousIntent: absent, candidate: f.candidate, transition: 'code-update'});
   return {stage, input: {...reserved, assertAuthority: async () => {}}};
 }
+
+test('exact Japan policy accepts own functional evidence with honest slow timing observations and skips unrelated browser benchmarks', async t => {
+  const f = await fixture(t, {observedTiming: true}), storage = memoryStorage(f.previous);
+  f.flags.chinaBrowserFailure = true;
+  f.flags.accessFailure = true;
+  const report = await runChinaCodeCycle({plan: {...f.servingPlan, minimumYear: 2014}, imageId: f.candidate.imageId,
+    invocation: {version: 1, sourceSha: '9'.repeat(40)}, owner: {runId: '200', attempt: '1', revision: '9'.repeat(40)},
+    nonce: 'b'.repeat(32), storage, now: () => acceptedAt, scheduleHeartbeat: () => () => {},
+    stageCodeRelease: f.release.stageCodeRelease, recoverRelease: async () => assert.fail('no unresolved publication')});
+  assert.equal(report.completed, true); assert.equal(report.status, 'accepted');
+  assert.equal(report.speedGateRequired, false); assert.equal(report.speedPassed, null); assert.equal(report.timingObserved, true);
+  assert.equal(report.serverTiming.healthSeconds, 123.45);
+  assert(!f.calls.includes('owner-filter-speed-live.mjs')); assert(!f.calls.includes('browser-acceptance.mjs'));
+  assert(!f.calls.includes('crm_access_boundary')); assert(f.calls.includes('japan-browser-acceptance.mjs'));
+  assert(f.calls.indexOf('functional') < f.calls.indexOf('switch'));
+  const accepted = await storage.read('accepted'), intent = await storage.read('intent');
+  assert.equal(intent.value.status, 'committed'); assert.equal(accepted.value.current.runtimeSha, nextSha);
+  assert.deepEqual(accepted.value.rollback, f.current);
+  const receipt = JSON.parse(Buffer.from(accepted.value.current.proof.hostReceiptBase64, 'base64'));
+  assert.equal(receipt.acceptancePolicy, JAPAN_OBSERVED_TIMING_POLICY);
+  assert.equal(receipt.browser.speedPassed, null); assert.equal(receipt.browser.speedGateRequired, false);
+});
+
+test('observational Japan timing never excuses a failed own-market functional gate or invented timing evidence', async t => {
+  for (const mutation of [report => { report.japanCombinedFiltersPassed = false; },
+    report => { report.japanPowerOrderPassed = false; }, report => { report.japanBrandDirectoryPassed = false; },
+    report => { report.speedPassed = true; }, report => { report.speedGateRequired = true; },
+    report => { report.timingObserved = false; }]) {
+    const f = await fixture(t, {observedTiming: true}), {stage, input} = await reservedStage(f);
+    f.flags.changeReport = mutation;
+    await assert.rejects(stage.activate(input), /japan_(?:browser|timing)_binding/);
+    assert(!f.calls.includes('accept')); await stage.close();
+  }
+});
 
 test('app-only adapter uploads only the new image and checks, retaining all seven source files on the host', async t => {
   const f = await fixture(t);

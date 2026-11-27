@@ -1,8 +1,9 @@
 import {randomBytes} from 'node:crypto';
 import {createChinaState, createChinaStateStorage, validateChinaCodeTransition,
   validateChinaGenerationReference, inspectChinaPublicationState, checkedChinaStateStorageFailure} from './china-state.mjs';
-import {checkedServerSpeedReport, checkedHomePhaseTimingReport,
+import {checkedServerSpeedReport, checkedHomePhaseTimingReport, checkedJapanServerTimingObservation,
   checkedTerminalAppImageCleanupReport, terminalAppImageCleanupPending} from './release-ssh.mjs';
+import {JAPAN_OBSERVED_TIMING_POLICY, japanObservedTimingRequired} from './japan-stability-code-scope.mjs';
 
 const need = (value, code) => { if (!value) throw Error('china_code_' + code); };
 const safeCode = error => /^china_[a-z0-9_]{1,150}$/.test(error?.message ?? '') ? error.message : 'china_code_failed';
@@ -41,6 +42,9 @@ export async function runChinaCodeCycle({plan, imageId, invocation, owner, stora
     published: false, status: 'starting', runtimeSha: plan.runtimeSha, retainedRuntime: plan.retainedRuntime,
     sourceRequests: 0, generationRestores: 0, priceCalculations: 0, generationWrites: 0,
     encyclopediaWrites: 0, otherMarketWrites: 0, deletions: 0};
+  const observedJapanTiming = japanObservedTimingRequired(plan);
+  if (observedJapanTiming) Object.assign(report, {acceptancePolicy: JAPAN_OBSERVED_TIMING_POLICY,
+    speedGateRequired: false, speedPassed: null, timingObserved: false});
   let lease, expected, staged, stopHeartbeat, authorityFailure, candidate, closed = false, closeConfirmed = false, queue = Promise.resolve();
   const at = () => {
     const value = now();
@@ -196,6 +200,10 @@ export async function runChinaCodeCycle({plan, imageId, invocation, owner, stora
     staged = await stageCodeRelease({candidate, previous: expected.accepted, nonce, assertAuthority});
     need(staged && typeof staged.activate === 'function' && typeof staged.close === 'function'
       && equal(validateChinaGenerationReference(staged.candidate), candidate), 'staged_binding');
+    if (observedJapanTiming) {
+      report.serverTiming = checkedJapanServerTimingObservation(staged.serverTiming, {runtimeSha: candidate.runtimeSha, nonce});
+      report.timingObserved = true;
+    }
     await assertAuthority();
     const reservation = await transition(async () => {
       const result = await state.reserve({lease, previous: expected.accepted, previousIntent: expected.intent,

@@ -139,6 +139,10 @@ JAPAN_STABILITY_RAILS_CODE_FILES = JAPAN_STABILITY_POWER_CODE_FILES | {
     'apps/web/components/home/HomeJapanFilteredRail.tsx',
     'tests/japan-rail-visibility.test.ts',
 }
+JAPAN_OBSERVED_TIMING_POLICY = 'japan-functional-observed-timing-v1'
+JAPAN_STABILITY_HOME_CODE_FILES = JAPAN_STABILITY_RAILS_CODE_FILES | {
+    'apps/web/lib/catalog/storage.ts', 'tests/catalog-next-home-isolation.test.ts',
+}
 JAPAN_PAGINATION_CODE_FILES = {
     "apps/web/components/catalog/AjesCatalog.tsx",
     "apps/web/components/catalog/CatalogLoadMore.tsx",
@@ -629,6 +633,17 @@ def code_scope(plan):
     return scope
 
 
+def japan_observed_timing(plan):
+    return code_update(plan) and code_scope(plan) == JAPAN_STABILITY_CODE_SCOPE and \
+        plan.get('acceptancePolicy') == JAPAN_OBSERVED_TIMING_POLICY
+
+
+def observed_timing_fields(value):
+    return value.get('timingPolicy') == JAPAN_OBSERVED_TIMING_POLICY and \
+        value.get('speedGateRequired') is False and 'speedPassed' in value and \
+        value['speedPassed'] is None and value.get('timingObserved') is True
+
+
 def accepted_update(plan):
     return generation_update(plan) or code_update(plan)
 
@@ -718,6 +733,8 @@ def accepted_predecessor(plan):
 
 def validate_plan(plan):
     need(plan.get('mode') in (None, 'generation-update', 'code-update'), 'plan_mode')
+    if 'acceptancePolicy' in plan:
+        need(japan_observed_timing(plan), 'timing_policy_scope')
     need(plan.get('version') == 1 and plan.get('market') == 'china' and
          (accepted_update(plan) or plan.get('retainedRuntime') == RETAINED) and
          plan.get('servingCalculationVersion') == CALCULATION, 'plan_scope')
@@ -2826,6 +2843,7 @@ class Host:
         self.accepted = False
         self.functional_passed = False
         self.speed_passed = False
+        self.timing_observed = False
         self.verdict_deadline = None
         self.lock = None
         self.original = self.proposed = None
@@ -2869,6 +2887,10 @@ class Host:
         required_code_files = CODE_SCOPE_FILES[scope]
         if (scope == JAPAN_STABILITY_CODE_SCOPE and isinstance(image.get('runtimeFiles'), list) and
                 any(name in image['runtimeFiles'] for name in (
+                    'apps/web/lib/catalog/storage.ts', 'tests/catalog-next-home-isolation.test.ts'))):
+            required_code_files = JAPAN_STABILITY_HOME_CODE_FILES
+        elif (scope == JAPAN_STABILITY_CODE_SCOPE and isinstance(image.get('runtimeFiles'), list) and
+                any(name in image['runtimeFiles'] for name in (
                     'apps/web/components/catalog/AjesRail.tsx',
                     'apps/web/components/home/HomeJapanFilteredRail.tsx'))):
             required_code_files = JAPAN_STABILITY_RAILS_CODE_FILES
@@ -2890,6 +2912,9 @@ class Host:
              all(isinstance(name, str) for name in image['runtimeFiles']) and
              set(image['runtimeFiles']) == required_code_files and
              type(image.get('imageUnpackedBytes')) is int and image['imageUnpackedBytes'] > 0, 'code_image_receipt')
+        need(japan_observed_timing(self.plan) == (required_code_files == JAPAN_STABILITY_HOME_CODE_FILES),
+             'timing_policy_image_scope')
+        need(image.get('acceptancePolicy') == self.plan.get('acceptancePolicy'), 'timing_policy_image_binding')
         if scope in (CRM_CHINA_CODE_SCOPE, CRM_JAPAN_PHOTO_CODE_SCOPE):
             need(image.get('protectedPathExceptions') == CRM_CHINA_PROTECTED_EXCEPTIONS, 'code_crm_image_scope')
         if scope in (JAPAN_PAGINATION_CODE_SCOPE, JAPAN_STABILITY_CODE_SCOPE):
@@ -3218,6 +3243,22 @@ class Host:
 
     def speed(self):
         self.verify_candidate()
+        if japan_observed_timing(self.plan):
+            # Owner-authorized Japan policy: measure actual health, without
+            # replaying unrelated home/China latency benchmarks. Readiness and
+            # the immutable retained-data oracle remain functional gates.
+            need(self.functional_passed, 'timing_before_functional')
+            started = time.monotonic()
+            health(self.port, self.plan['runtimeSha'])
+            report = {'version': 1, 'kind': 'japan-server-timing-observation-v1',
+                      'release': self.plan['runtimeSha'], 'nonce': self.plan['nonce'],
+                      'timingPolicy': JAPAN_OBSERVED_TIMING_POLICY, 'speedGateRequired': False,
+                      'speedPassed': None, 'timingObserved': True, 'broadServerBenchmarkExecuted': False,
+                      'healthSeconds': round(time.monotonic() - started, 4),
+                      'baselineSha256': '32fba449b77e40983803483ea7b6cb4ece09afa997c2ae08dd968c675f528c59'}
+            new_file(self.directory / 'SERVER_TIMING.json', json_bytes(report))
+            self.timing_observed = True
+            return report
         # Reuse the unchanged accepted baseline and its complete warm/expired
         # response checks, scoped to China and shared integrity routes.
         env = {'PATH': '/usr/bin:/bin', 'AVTOCENA_RELEASE_MARKETS': 'china', 'AVTOCENA_SPEED_BASELINE_MODE': 'enforce',
@@ -3256,7 +3297,10 @@ class Host:
         command(['/usr/bin/systemctl', 'reload', 'nginx'])
 
     def switch(self):
-        need(self.functional_passed and self.speed_passed and not self.switched and not self.accepted, 'switch_before_checks')
+        if japan_observed_timing(self.plan):
+            need(self.functional_passed and self.timing_observed and not self.switched and not self.accepted, 'switch_before_checks')
+        else:
+            need(self.functional_passed and self.speed_passed and not self.switched and not self.accepted, 'switch_before_checks')
         self.verify_candidate()
         needle = b'proxy_pass http://127.0.0.1:' + str(self.old_port).encode() + b';'
         need(self.original.count(needle) == 1, 'ingress_replace_scope')
@@ -3269,11 +3313,15 @@ class Host:
         return {'switched': True, 'nonce': self.plan['nonce'], 'release': self.plan['runtimeSha']}
 
     def accept(self, verdict):
-        need(self.switched and self.functional_passed and self.speed_passed and not self.accepted, 'accept_before_switch')
+        if japan_observed_timing(self.plan):
+            need(self.switched and self.functional_passed and self.timing_observed and not self.accepted, 'accept_before_switch')
+        else:
+            need(self.switched and self.functional_passed and self.speed_passed and not self.accepted, 'accept_before_switch')
         need(self.verdict_deadline is not None and time.monotonic() <= self.verdict_deadline, 'browser_deadline')
         self.verify_candidate()
         need(verdict.get('release') == self.plan['runtimeSha'] and verdict.get('nonce') == self.plan['nonce'] and
-             verdict.get('passed') is True and verdict.get('functionalPassed') is True and verdict.get('speedPassed') is True and
+             verdict.get('passed') is True and verdict.get('functionalPassed') is True and
+             (observed_timing_fields(verdict) if japan_observed_timing(self.plan) else verdict.get('speedPassed') is True) and
              all(re.fullmatch(r'[a-f0-9]{64}', verdict.get(key, '')) for key in
                  ('reportSha256', 'speedReportSha256', 'detailsReportSha256')), 'browser_verdict')
         reports = []
@@ -3300,6 +3348,8 @@ class Host:
             proof.update(transition='code-update', previousAcceptedETag=self.plan['previousAcceptedETag'],
                          previousAcceptedStateSha256=self.plan['previousAcceptedStateSha256'],
                          retainedRuntimeSha=retained_runtime(self.plan), retainedImageId=self.retained['Image'])
+        if japan_observed_timing(self.plan):
+            proof.update(acceptancePolicy=JAPAN_OBSERVED_TIMING_POLICY, codeScope=JAPAN_STABILITY_CODE_SCOPE)
         encoded = json_bytes(proof)
         # The durable receipt is the commit point, including when SSH closes
         # immediately after the atomic rename. No partial terminal receipt is
@@ -3334,13 +3384,24 @@ class Host:
         self.verify_candidate()
         speed_raw, speed = decode_report(params.get('speedBase64'))
         details_raw, details = decode_report(params.get('detailsBase64'))
-        need(speed.get('release') == self.plan['runtimeSha'] and speed.get('passed') is True and
-             speed.get('browserPassed') is True and speed.get('speedGuard', {}).get('passed') is True and
-             details.get('kind') == 'china-browser-details-v1' and details.get('passed') is True and
+        observed = japan_observed_timing(self.plan)
+        timing_bound = (observed_timing_fields(speed) and speed.get('kind') == 'catalog-japan-browser-v1'
+                        and speed.get('nonce') == self.plan['nonce']) if observed else \
+            (speed.get('browserPassed') is True and speed.get('speedGuard', {}).get('passed') is True)
+        need(speed.get('release') == self.plan['runtimeSha'] and speed.get('passed') is True and timing_bound and
+             details.get('kind') == ('japan-code-browser-details-v1' if observed else 'china-browser-details-v1') and
+             details.get('passed') is True and
              details.get('release') == self.plan['runtimeSha'] and details.get('nonce') == self.plan['nonce'] and
              details.get('generationManifestSha256') == self.plan['generationManifestSha256'] and
              details.get('precedingSpeedReportSha256') == sha(speed_raw), 'browser_evidence_binding')
-        if code_update(self.plan) and code_scope(self.plan) in (CRM_CHINA_CODE_SCOPE, CRM_JAPAN_PHOTO_CODE_SCOPE, JAPAN_PAGINATION_CODE_SCOPE, JAPAN_STABILITY_CODE_SCOPE):
+        if observed:
+            need(observed_timing_fields(details) and details.get('retainedChinaOraclePassed') is True
+                 and details.get('unrelatedBrowserBenchmarksExecuted') is False,
+                 'japan_observed_timing_binding')
+            regular(self.directory / 'SERVER_TIMING.json', 16 * 1024)
+            need(details.get('serverTiming') == json.loads((self.directory / 'SERVER_TIMING.json').read_bytes()),
+                 'japan_server_timing_binding')
+        if not observed and code_update(self.plan) and code_scope(self.plan) in (CRM_CHINA_CODE_SCOPE, CRM_JAPAN_PHOTO_CODE_SCOPE, JAPAN_PAGINATION_CODE_SCOPE, JAPAN_STABILITY_CODE_SCOPE):
             need(isinstance(details.get('crmChinaReportBase64'), str) and
                  isinstance(details.get('crmChinaReportSha256'), str) and
                  re.fullmatch(r'[a-f0-9]{64}', details['crmChinaReportSha256']), 'crm_browser_binding')
@@ -3373,43 +3434,44 @@ class Host:
                  type(crm.get('unauthorizedStatus')) is int and crm['unauthorizedStatus'] == 401 and
                  all(type(crm.get(key)) is int and crm[key] == 0 for key in
                      ('productionMutations', 'directSupplierRequests', 'signedInRequests')), 'crm_browser_binding')
-            if code_scope(self.plan) in (CRM_JAPAN_PHOTO_CODE_SCOPE, JAPAN_PAGINATION_CODE_SCOPE, JAPAN_STABILITY_CODE_SCOPE):
-                need(isinstance(details.get('japanPhotoRetryReportBase64'), str) and
-                     isinstance(details.get('japanPhotoRetryReportSha256'), str) and
-                     re.fullmatch(r'[a-f0-9]{64}', details['japanPhotoRetryReportSha256']), 'japan_photo_retry_binding')
-                retry_raw, retry = decode_report(details['japanPhotoRetryReportBase64'])
-                need(0 < len(retry_raw) <= 32 * 1024 and sha(retry_raw) == details['japanPhotoRetryReportSha256'] and
-                     set(retry) == {'version', 'kind', 'codeScope', 'release', 'nonce', 'checkedAt', 'oracleSha256',
-                                    'fixtureBase64', 'fixtureSha256', 'passed', 'directSupplierRequests', 'productionMutations'} and
-                     type(retry.get('version')) is int and retry['version'] == 1 and
-                     retry.get('kind') == 'japan-photo-retry-proof-v1' and
-                     retry.get('codeScope') == code_scope(self.plan) and
-                     retry.get('release') == self.plan['runtimeSha'] and retry.get('nonce') == self.plan['nonce'] and
-                     retry.get('oracleSha256') == oracle_sha and retry.get('passed') is True and
-                     all(type(retry.get(key)) is int and retry[key] == 0 for key in
-                         ('directSupplierRequests', 'productionMutations')) and
-                     isinstance(retry.get('checkedAt'), str) and
-                     re.fullmatch(r'\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d\.\d{3}Z', retry['checkedAt']) and
-                     isinstance(retry.get('fixtureSha256'), str) and
-                     re.fullmatch(r'[a-f0-9]{64}', retry['fixtureSha256']), 'japan_photo_retry_binding')
-                try:
-                    timestamp = datetime.datetime.fromisoformat(retry['checkedAt'].replace('Z', '+00:00'))
-                    need(timestamp.isoformat(timespec='milliseconds').replace('+00:00', 'Z') == retry['checkedAt'],
-                         'japan_photo_retry_date')
-                except (ValueError, TypeError):
-                    need(False, 'japan_photo_retry_date')
-                fixture_raw, fixture = decode_report(retry.get('fixtureBase64'))
-                checks = {'transientRecovery', 'persistentFailureBound', 'sourceChangeCancellation',
-                          'unmountCancellation', 'exactUrl', 'noExternalRequests',
-                          'protectedPhotoPreserved', 'lazyLoadRecovery'}
-                need(0 < len(fixture_raw) <= 16 * 1024 and sha(fixture_raw) == retry['fixtureSha256'] and
-                     set(fixture) == {'version', 'kind', 'passed', 'widths', 'caseCount', 'checks'} and
-                     type(fixture.get('version')) is int and fixture['version'] == 1 and
-                     fixture.get('kind') == 'japan-photo-retry-browser-v1' and fixture.get('passed') is True and
-                     fixture.get('widths') == [1440, 390] and
-                     type(fixture.get('caseCount')) is int and fixture['caseCount'] == 12 and
-                     isinstance(fixture.get('checks'), dict) and set(fixture['checks']) == checks and
-                     all(fixture['checks'][key] is True for key in checks), 'japan_photo_retry_fixture')
+        if code_update(self.plan) and code_scope(self.plan) in (CRM_JAPAN_PHOTO_CODE_SCOPE, JAPAN_PAGINATION_CODE_SCOPE, JAPAN_STABILITY_CODE_SCOPE):
+            oracle_sha = next(row['sha256'] for row in self.plan['files'] if row['name'] == 'acceptance.json')
+            need(isinstance(details.get('japanPhotoRetryReportBase64'), str) and
+                 isinstance(details.get('japanPhotoRetryReportSha256'), str) and
+                 re.fullmatch(r'[a-f0-9]{64}', details['japanPhotoRetryReportSha256']), 'japan_photo_retry_binding')
+            retry_raw, retry = decode_report(details['japanPhotoRetryReportBase64'])
+            need(0 < len(retry_raw) <= 32 * 1024 and sha(retry_raw) == details['japanPhotoRetryReportSha256'] and
+                 set(retry) == {'version', 'kind', 'codeScope', 'release', 'nonce', 'checkedAt', 'oracleSha256',
+                                'fixtureBase64', 'fixtureSha256', 'passed', 'directSupplierRequests', 'productionMutations'} and
+                 type(retry.get('version')) is int and retry['version'] == 1 and
+                 retry.get('kind') == 'japan-photo-retry-proof-v1' and
+                 retry.get('codeScope') == code_scope(self.plan) and
+                 retry.get('release') == self.plan['runtimeSha'] and retry.get('nonce') == self.plan['nonce'] and
+                 retry.get('oracleSha256') == oracle_sha and retry.get('passed') is True and
+                 all(type(retry.get(key)) is int and retry[key] == 0 for key in
+                     ('directSupplierRequests', 'productionMutations')) and
+                 isinstance(retry.get('checkedAt'), str) and
+                 re.fullmatch(r'\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d\.\d{3}Z', retry['checkedAt']) and
+                 isinstance(retry.get('fixtureSha256'), str) and
+                 re.fullmatch(r'[a-f0-9]{64}', retry['fixtureSha256']), 'japan_photo_retry_binding')
+            try:
+                timestamp = datetime.datetime.fromisoformat(retry['checkedAt'].replace('Z', '+00:00'))
+                need(timestamp.isoformat(timespec='milliseconds').replace('+00:00', 'Z') == retry['checkedAt'],
+                     'japan_photo_retry_date')
+            except (ValueError, TypeError):
+                need(False, 'japan_photo_retry_date')
+            fixture_raw, fixture = decode_report(retry.get('fixtureBase64'))
+            checks = {'transientRecovery', 'persistentFailureBound', 'sourceChangeCancellation',
+                      'unmountCancellation', 'exactUrl', 'noExternalRequests',
+                      'protectedPhotoPreserved', 'lazyLoadRecovery'}
+            need(0 < len(fixture_raw) <= 16 * 1024 and sha(fixture_raw) == retry['fixtureSha256'] and
+                 set(fixture) == {'version', 'kind', 'passed', 'widths', 'caseCount', 'checks'} and
+                 type(fixture.get('version')) is int and fixture['version'] == 1 and
+                 fixture.get('kind') == 'japan-photo-retry-browser-v1' and fixture.get('passed') is True and
+                 fixture.get('widths') == [1440, 390] and
+                 type(fixture.get('caseCount')) is int and fixture['caseCount'] == 12 and
+                 isinstance(fixture.get('checks'), dict) and set(fixture['checks']) == checks and
+                 all(fixture['checks'][key] is True for key in checks), 'japan_photo_retry_fixture')
         if code_update(self.plan) and code_scope(self.plan) == PHOTO_CODE_SCOPE:
             need(isinstance(details.get('photoReportBase64'), str) and
                  isinstance(details.get('photoReportSha256'), str) and
@@ -3458,6 +3520,8 @@ class Host:
                                                        'japanUiPassed', 'japanVisibilityPassed', 'readOnlyBrowserFence')) and
                  all(type(japan.get(key)) is int and japan[key] == 0 for key in
                      ('productionMutations', 'directSupplierApiRequests')), 'japan_browser_binding')
+            if observed:
+                need(japan_raw == speed_raw and observed_timing_fields(japan), 'japan_observed_timing_binding')
             if code_scope(self.plan) in (JAPAN_COMPLETION_CODE_SCOPE, JAPAN_COMPLETION_V2_CODE_SCOPE, JAPAN_USABILITY_CODE_SCOPE, JAPAN_PAGINATION_CODE_SCOPE, JAPAN_STABILITY_CODE_SCOPE):
                 need(all(japan.get(key) is True for key in ('japanPetrolPowerUiPassed', 'japanDetailPowerInputPassed',
                                                           'japanDeliveredCalculationPassed')) and
@@ -3483,11 +3547,12 @@ class Host:
                 need(isinstance(runtime_files, list) and all(isinstance(name, str) for name in runtime_files) and
                      len(runtime_files) == len(set(runtime_files)) and set(runtime_files) in
                      (JAPAN_STABILITY_CODE_FILES, JAPAN_STABILITY_UI_CODE_FILES, JAPAN_STABILITY_POWER_CODE_FILES,
-                      JAPAN_STABILITY_RAILS_CODE_FILES),
+                      JAPAN_STABILITY_RAILS_CODE_FILES, JAPAN_STABILITY_HOME_CODE_FILES),
                      'code_image_receipt')
-                if set(runtime_files) in (JAPAN_STABILITY_POWER_CODE_FILES, JAPAN_STABILITY_RAILS_CODE_FILES):
+                need(observed == (set(runtime_files) == JAPAN_STABILITY_HOME_CODE_FILES), 'timing_policy_image_scope')
+                if set(runtime_files) in (JAPAN_STABILITY_POWER_CODE_FILES, JAPAN_STABILITY_RAILS_CODE_FILES, JAPAN_STABILITY_HOME_CODE_FILES):
                     need(japan.get('japanPowerOrderPassed') is True, 'japan_browser_binding')
-                if set(runtime_files) == JAPAN_STABILITY_RAILS_CODE_FILES:
+                if set(runtime_files) in (JAPAN_STABILITY_RAILS_CODE_FILES, JAPAN_STABILITY_HOME_CODE_FILES):
                     need(japan.get('japanBrandDirectoryPassed') is True, 'japan_browser_binding')
         for name, raw in [('BROWSER_SPEED.json', speed_raw), ('BROWSER_DETAILS.json', details_raw)]:
             new_file(self.directory / name, raw)

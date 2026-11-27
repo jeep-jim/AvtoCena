@@ -20,20 +20,23 @@
     "exactNetworkCause": "not captured by preceding transport; not inferred"
   },
   "candidate": {
-    "runtimeSha": "a4f23e648d3de2a8a23c9a16942a286b91bb39b4",
-    "runtimeTree": "f2475e05a226afac310fef42fb10c162b3d5753d",
+    "runtimeSha": "d6357672787a73c8e62e6f895f3c4cac5dc77211",
+    "runtimeTree": "0ac828876e7e43b952e342a4f499563c54f3fc41",
     "retainedRuntime": "a5ca426eec2663eb17c2df69fe2bfed46e2b8740",
-    "runtimeDiffSha256": "cf5294e47f02b0e8eab3329be83a5524341f0db223a52f838985bb7b3deefaa8",
+    "runtimeDiffSha256": "05783233326377b7ea983d19039ab03b3b298db63c3337baf47162cf8d026cf9",
     "pricingRuntimeSha": "64c6338e0db23c8999096bceefbf113c0136fe15",
-    "pricingToServingDiffSha256": "5d1c139c838a5fc3f02ffc3c842e64569d8914fde19577a42a1e1066f8077d31"
+    "pricingToServingDiffSha256": "15eafbbdac7fc664e2308c9688dbfc2de264763a785eef80241e0c525ef2f571",
+    "acceptancePolicy": "japan-functional-observed-timing-v1"
   },
   "scope": {
-    "runtimeFileCount": 56,
+    "runtimeFileCount": 58,
     "pricingFileCount": 112,
     "additionalRuntimePaths": [
       "apps/web/components/catalog/AjesRail.tsx",
       "apps/web/components/home/HomeJapanFilteredRail.tsx",
-      "tests/japan-rail-visibility.test.ts"
+      "tests/japan-rail-visibility.test.ts",
+      "apps/web/lib/catalog/storage.ts",
+      "tests/catalog-next-home-isolation.test.ts"
     ],
     "protectedPricingPathsUnchanged": true,
     "frozenHttpOracleReusable": true
@@ -44,36 +47,188 @@
     "Require complete current source counts against actual desktop and mobile controls; source aliases and filter context retained.",
     "Require the eighteen-case visible-brand fallback fixture and exact boolean live directory verdict on both controller and host for the exact fifty-six-file profile.",
     "Code publication alone opts into one bounded transient GET retry; conditional PUT remains single-attempt with existing exact readback and CAS.",
-    "Update the existing preview assertion to require no long paragraph while proving original supplier/unknown card facts, power filter and honest count remain; production code unchanged from prior candidate."
+    "Update the existing preview assertion to require no long paragraph while proving original supplier/unknown card facts, power filter and honest count remain; production code unchanged from prior candidate.",
+    "Independent home fallback reads existing retained per-market projections instead of obsolete all-market alias; captured-generation binding and existing admission/counts/order/prices retained.",
+    "Owner-directed exact58 policy replaces shared speed/foreign browser veto with Japan own functional acceptance and truthful nonblocking timing observations."
   ],
   "localVerification": {
-    "sourceTargetedTests": 48,
-    "sourceTypecheck": "passed",
-    "sourceBrowserFixture": "bundles and syntax pass; browser binary unavailable locally; eighteen cases required in hosted CI",
-    "controllerScopeAndHostTests": 456,
-    "controllerTransportTests": 54,
-    "controllerBrandBrowserTests": 82,
-    "fullControllerSuite": {
-      "runtimeFileCount": 56,
-      "tests": 1550,
-      "pass": 1550,
-      "fail": 0,
-      "duration_ms": 54615.56438
+    "runtimeSha": "d6357672787a73c8e62e6f895f3c4cac5dc77211",
+    "homeIsolationRegressionBeforeFix": {
+      "tests": 3,
+      "failed": 3
     },
-    "exactSourceAndPricingProof": "passed",
-    "frozenSpeedBaselines": "passed",
+    "homeIsolationTargeted": {
+      "passed": 36,
+      "failed": 0
+    },
     "nativeFullSuite": {
       "fileCount": 69,
-      "tests": 534,
-      "pass": 534,
+      "tests": 539,
+      "pass": 539,
       "fail": 0,
-      "duration_ms": 20074.938551
-    }
+      "duration_ms": 17798.257269
+    },
+    "sourceTypecheck": "passed",
+    "exactSourceAndPricingProof": "passed",
+    "policyScopeTests": {
+      "passed": 7,
+      "failed": 0
+    },
+    "japanBrowserAndObservedTimingTests": {
+      "passed": 86,
+      "failed": 0
+    },
+    "combinedControllerSuite": {
+      "allRequiredTestFilesVerified": true,
+      "passingTests": 1561,
+      "initialBatchPassing": 1542,
+      "initialTestFileLoadFailures": 2,
+      "cause": "Sparse local checkout omitted an unchanged reference JSON imported by two test modules.",
+      "resolvedModuleTestsPassed": 19,
+      "resolvedModuleTestsFailed": 0,
+      "unresolvedFailures": 0,
+      "fullSingleInvocation": false,
+      "initialDurationMs": 55651.837784,
+      "resolvedModulesDurationMs": 1261.986326
+    },
+    "controllerHostPolicyTargeted": {
+      "passed": 387,
+      "failed": 0,
+      "independentReview": "passed; includes historical profiles, future China generation-update, exact receipts, functional failures and rollback"
+    },
+    "frozenSpeedBaselines": "hashes unchanged; timings are observations for the owner-authorized exact58 profile"
   },
   "publication": {
-    "status": "not_started",
-    "acceptedRuntimeStill": "a5ca426eec2663eb17c2df69fe2bfed46e2b8740",
-    "liveAcceptance": "pending"
+    "status": "failed",
+    "runId": 46010255614,
+    "runNumber": 27,
+    "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/46010255614",
+    "releaseCommit": "0a044170d174206ea34e36ef53e9f12e13dbd642",
+    "approvedControllerSha": "dbc7c00c86cd9c9829300dec1f2182b3b8e2a372",
+    "lastConfirmedAcceptedRuntime": "a5ca426eec2663eb17c2df69fe2bfed46e2b8740",
+    "liveAcceptance": "not reached; candidate failed loopback server speed before reserve and public switch",
+    "conclusion": "failure",
+    "completed": false,
+    "published": false,
+    "errorCode": "china_host_server_speed_failed",
+    "finishedAt": "2026-11-27T14:06:12.149Z",
+    "retentionPreserved": true,
+    "leaseReleased": true,
+    "imageId": "sha256:349216b80a83a258f9f60fb8b52efb9d0e9d5f7003ef281bf7b02840f25e02a9",
+    "artifactId": 15203574699,
+    "artifactBytes": 7841,
+    "artifactSha256": "ffbe8ffa1b7794550988b3306127a21c7dee2409bf1b6899dc638d7307eac99e",
+    "reportSha256": "145925559618c3c48651a9296dffce305cc662a4a90a086efe12a1ccf80f4014",
+    "serverSpeedFailure": {
+      "present": true,
+      "sha256": "7a0200976536456406c6fc79fb3478cb887e63be433e2ad6d1de3ad960dffe54",
+      "exitCode": 1,
+      "samples": [
+        {
+          "path": "/api/health",
+          "performanceRequest": "started"
+        },
+        {
+          "path": "/api/health",
+          "performanceRequest": "complete",
+          "seconds": 0.0115,
+          "functionalPassed": true
+        },
+        {
+          "path": "/api/leads",
+          "performanceRequest": "started"
+        },
+        {
+          "path": "/api/leads",
+          "performanceRequest": "complete",
+          "seconds": 0.0113,
+          "functionalPassed": true
+        },
+        {
+          "path": "/",
+          "performanceRequest": "started"
+        },
+        {
+          "path": "/",
+          "performanceRequest": "failed",
+          "seconds": 90.2564,
+          "errorType": "TimeoutError"
+        }
+      ],
+      "rejectedSamples": 0
+    },
+    "homePhaseRows": [
+      {
+        "trace": "9d913e8d-aa19-42a4-8ccf-0c72d504dcf2",
+        "phase": "snapshotEditorial:china",
+        "ms": 6.4,
+        "ok": true,
+        "policyDate": "2026-11-27",
+        "completedPolicyDate": "2026-11-27"
+      },
+      {
+        "trace": "9d913e8d-aa19-42a4-8ccf-0c72d504dcf2",
+        "phase": "snapshotManifest",
+        "ms": 66.3,
+        "ok": true,
+        "policyDate": "2026-11-27",
+        "completedPolicyDate": "2026-11-27"
+      },
+      {
+        "trace": "9d913e8d-aa19-42a4-8ccf-0c72d504dcf2",
+        "phase": "snapshotOverview",
+        "ms": 237.7,
+        "ok": true,
+        "policyDate": "2026-11-27",
+        "completedPolicyDate": "2026-11-27",
+        "generation": "gen_1795428982165_8c56770d"
+      },
+      {
+        "trace": "f9bc6efb-266c-49e9-a4d4-8380e81bddc8",
+        "phase": "green",
+        "ms": 10004.6,
+        "ok": false,
+        "policyDate": "2026-11-27",
+        "completedPolicyDate": "2026-11-27"
+      },
+      {
+        "trace": "f9bc6efb-266c-49e9-a4d4-8380e81bddc8",
+        "phase": "greenPricing",
+        "ms": 0.2,
+        "ok": true,
+        "policyDate": "2026-11-27",
+        "completedPolicyDate": "2026-11-27"
+      },
+      {
+        "trace": "f9bc6efb-266c-49e9-a4d4-8380e81bddc8",
+        "phase": "dealer",
+        "ms": 10102,
+        "ok": false,
+        "policyDate": "2026-11-27",
+        "completedPolicyDate": "2026-11-27"
+      },
+      {
+        "trace": "9d913e8d-aa19-42a4-8ccf-0c72d504dcf2",
+        "phase": "snapshotProjection",
+        "ms": 81270,
+        "ok": true,
+        "policyDate": "2026-11-27",
+        "completedPolicyDate": "2026-11-27",
+        "generation": "gen_1795428982165_8c56770d"
+      },
+      {
+        "trace": "9d913e8d-aa19-42a4-8ccf-0c72d504dcf2",
+        "phase": "snapshotPrepared",
+        "ms": 84921.5,
+        "ok": true,
+        "policyDate": "2026-11-27",
+        "completedPolicyDate": "2026-11-27",
+        "generation": "gen_1795428982165_8c56770d"
+      }
+    ],
+    "failedCandidateCleanup": "expected by host finally but no completed cleanup receipt in artifact; image deletion not performed by that path",
+    "runtimeSha": "a4f23e648d3de2a8a23c9a16942a286b91bb39b4",
+    "runtimeTree": "f2475e05a226afac310fef42fb10c162b3d5753d"
   },
   "maintenance": {
     "status": "prepared_not_active",
@@ -101,5 +256,80 @@
       "browserFixtures": "not reached",
       "publication": "not started"
     }
-  ]
+  ],
+  "remaining": [
+    "Finish integrated controller/host policy and exact source verification, then publish the complete Japan candidate.",
+    "Require real Japan functional browser acceptance and accepted state; elapsed timings are not a release veto.",
+    "Complete already prepared maintenance only after actual accepted current/rollback; failed release27 observer remains inactive."
+  ],
+  "precedingCandidate": {
+    "runtimeSha": "a4f23e648d3de2a8a23c9a16942a286b91bb39b4",
+    "runtimeTree": "f2475e05a226afac310fef42fb10c162b3d5753d",
+    "retainedRuntime": "a5ca426eec2663eb17c2df69fe2bfed46e2b8740",
+    "runtimeDiffSha256": "cf5294e47f02b0e8eab3329be83a5524341f0db223a52f838985bb7b3deefaa8",
+    "pricingRuntimeSha": "64c6338e0db23c8999096bceefbf113c0136fe15",
+    "pricingToServingDiffSha256": "5d1c139c838a5fc3f02ffc3c842e64569d8914fde19577a42a1e1066f8077d31"
+  },
+  "precedingLocalVerification": {
+    "sourceTargetedTests": 48,
+    "sourceTypecheck": "passed",
+    "sourceBrowserFixture": "bundles and syntax pass; browser binary unavailable locally; eighteen cases required in hosted CI",
+    "controllerScopeAndHostTests": 456,
+    "controllerTransportTests": 54,
+    "controllerBrandBrowserTests": 82,
+    "fullControllerSuite": {
+      "runtimeFileCount": 56,
+      "tests": 1550,
+      "pass": 1550,
+      "fail": 0,
+      "duration_ms": 54615.56438
+    },
+    "exactSourceAndPricingProof": "passed",
+    "frozenSpeedBaselines": "passed",
+    "nativeFullSuite": {
+      "fileCount": 69,
+      "tests": 534,
+      "pass": 534,
+      "fail": 0,
+      "duration_ms": 20074.938551
+    }
+  },
+  "precedingHostedVerification": {
+    "runId": 46009412568,
+    "runNumber": 58,
+    "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/46009412568",
+    "controllerSha": "dbc7c00c86cd9c9829300dec1f2182b3b8e2a372",
+    "runtimeSha": "a4f23e648d3de2a8a23c9a16942a286b91bb39b4",
+    "conclusion": "success",
+    "completedAt": "2026-11-27T13:47:43Z",
+    "controllerTests": 1551,
+    "controllerPassed": 1551,
+    "nativeTests": 534,
+    "nativePassed": 534,
+    "typecheck": "passed",
+    "directoryFixtureCases": 18,
+    "directoryFixtureWidths": [
+      390,
+      1440
+    ],
+    "directoryFixture": "all passed including fresh-empty/stale/error visible fallback and retry",
+    "paginationAndPowerOrderFixture": "passed",
+    "cityHydrationFixture": "passed",
+    "crmControlsFixture": "passed",
+    "photoRetryFixture": "passed"
+  },
+  "hostedVerification": {
+    "status": "pending",
+    "runtimeSha": "d6357672787a73c8e62e6f895f3c4cac5dc77211",
+    "acceptancePolicy": "japan-functional-observed-timing-v1"
+  },
+  "latestOwnerDirection": {
+    "date": "2026-11-27",
+    "context": "After release27 shared homepage speed failure",
+    "instruction": "Elapsed-time norms and foreign-market speed must not block Japan, including its code release. Complete the requested release; timing observations remain factual, Japan functional correctness and retained data stay required.",
+    "implementationPolicy": "japan-functional-observed-timing-v1",
+    "speedGateRequired": false,
+    "speedPassed": null,
+    "metadataDiagnostic": "stopped without publication or execution"
+  }
 }

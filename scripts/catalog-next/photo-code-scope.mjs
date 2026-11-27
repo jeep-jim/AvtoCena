@@ -3,7 +3,8 @@ import {verifyServingCompatibility} from './serving-compatibility.mjs';
 import {CRM_CHINA_CODE_SCOPE, CRM_CHINA_CODE_PATHS, CRM_CHINA_RETAINED_RUNTIME} from './crm-china-code-scope.mjs';
 import {CRM_JAPAN_PHOTO_CODE_SCOPE, CRM_JAPAN_PHOTO_CODE_PATHS, CRM_JAPAN_PHOTO_RETAINED_RUNTIME} from './crm-japan-photo-code-scope.mjs';
 import {JAPAN_PAGINATION_CODE_SCOPE, JAPAN_PAGINATION_CODE_PATHS, JAPAN_PAGINATION_RETAINED_RUNTIME} from './japan-pagination-code-scope.mjs';
-import {JAPAN_STABILITY_CODE_SCOPE, japanStabilityCodePaths, isExactJapanStabilityScope} from './japan-stability-code-scope.mjs';
+import {JAPAN_STABILITY_CODE_SCOPE, japanStabilityCodePaths, isExactJapanStabilityScope,
+  japanObservedTimingRequired} from './japan-stability-code-scope.mjs';
 
 export const CHINA_PHOTO_CODE_PATHS = Object.freeze([
   'apps/web/components/catalog/CatalogCover.tsx',
@@ -177,6 +178,8 @@ export function checkedCatalogCodeScope(plan) {
   need(scope !== CRM_JAPAN_PHOTO_CODE_SCOPE || plan.retainedRuntime === CRM_JAPAN_PHOTO_RETAINED_RUNTIME, 'retained_runtime');
   need(scope !== JAPAN_PAGINATION_CODE_SCOPE || plan.retainedRuntime === JAPAN_PAGINATION_RETAINED_RUNTIME, 'retained_runtime');
   need(scope !== JAPAN_STABILITY_CODE_SCOPE || isExactJapanStabilityScope(plan), 'stability_scope');
+  need(plan.acceptancePolicy === undefined || (scope === JAPAN_STABILITY_CODE_SCOPE
+    && japanObservedTimingRequired(plan)), 'acceptance_policy');
   return scope;
 }
 
@@ -184,7 +187,8 @@ export function checkedCatalogCodeScope(plan) {
  * China query/index/pricing, generation, proxy and server configuration are
  * excluded. Japan profiles change only Japan branches in shared readers; the
  * recovery profile starts from the accepted d536 runtime and is built afresh.
- * Both actual markets still pass their HTTP/browser acceptance before commit. */
+ * Preserved China bytes retain their frozen HTTP oracle. The explicit Japan
+ * successor uses its own functional browser acceptance and observed timing. */
 export async function verifyChinaPhotoCodeRuntime({runtimeRoot, servingPlan, pricingPlan}) {
   const codeScope = checkedCatalogCodeScope(servingPlan);
   const source = await verifyChinaImageRuntime({runtimeRoot, plan: servingPlan});

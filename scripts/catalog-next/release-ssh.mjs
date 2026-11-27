@@ -98,6 +98,22 @@ export function checkedRetainedFenceReport(value) {
   return value;
 }
 
+/** Copy only the nonce-bound health observation, without a latency threshold. */
+export function checkedJapanServerTimingObservation(value, binding) {
+  const expected = ['version', 'kind', 'release', 'nonce', 'timingPolicy', 'speedGateRequired', 'speedPassed',
+    'timingObserved', 'broadServerBenchmarkExecuted', 'healthSeconds', 'baselineSha256'];
+  need(value && typeof value === 'object' && !Array.isArray(value)
+    && Object.keys(value).length === expected.length && expected.every(key => Object.hasOwn(value, key))
+    && value.version === 1 && value.kind === 'japan-server-timing-observation-v1'
+    && value.timingPolicy === 'japan-functional-observed-timing-v1' && value.speedGateRequired === false
+    && value.speedPassed === null && value.timingObserved === true && value.broadServerBenchmarkExecuted === false
+    && /^[a-f0-9]{40}$/.test(value.release ?? '') && /^[a-f0-9]{32}$/.test(value.nonce ?? '')
+    && Number.isFinite(value.healthSeconds) && value.healthSeconds >= 0
+    && value.baselineSha256 === '32fba449b77e40983803483ea7b6cb4ece09afa997c2ae08dd968c675f528c59'
+    && (!binding || value.release === binding.runtimeSha && value.nonce === binding.nonce), 'japan_timing_observation');
+  return Object.freeze(Object.fromEntries(expected.map(key => [key, value[key]])));
+}
+
 /** Only the public paths in the frozen server baseline, plus the scoped China
  * route, may cross the SSH/report boundary. No raw output or exception text. */
 export function checkedServerSpeedReport(value) {

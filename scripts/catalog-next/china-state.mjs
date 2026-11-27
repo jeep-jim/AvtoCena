@@ -1,6 +1,7 @@
 import {createHash} from 'node:crypto';
 import {signRawGcS3Request} from '../lib/catalog-raw-gc-s3.mjs';
 import {privateOwnerAcl, nonGrantingPolicy} from './private-storage.mjs';
+import {JAPAN_OBSERVED_TIMING_POLICY, JAPAN_STABILITY_CODE_SCOPE} from './japan-stability-code-scope.mjs';
 
 export const CHINA_STATE_KEYS = Object.freeze(Object.fromEntries(['accepted', 'intent', 'lease']
   .map(name => [name, `catalog/market-rebuild/v1/china/${name}.json`])));
@@ -22,6 +23,8 @@ const encoded = value => Buffer.from(JSON.stringify(ordered(value)));
 const digest = value => hash(encoded(value));
 const equal = (a, b) => digest(a) === digest(b);
 const clone = value => JSON.parse(JSON.stringify(value));
+const observedTiming = value => value?.timingPolicy === JAPAN_OBSERVED_TIMING_POLICY
+  && value.speedGateRequired === false && value.speedPassed === null && value.timingObserved === true;
 function immutable(value) {
   if (value && typeof value === 'object') { Object.values(value).forEach(immutable); Object.freeze(value); }
   return value;
@@ -52,8 +55,11 @@ function hostProof(value, reference) {
     && Date.parse(receipt.acceptedAt) >= Date.parse(reference.sourceObservedAt)
     && HASH.test(receipt.retainedContainerId ?? ''), 'host_binding');
   const browser = receipt.browser;
+  const japanPolicy = receipt.acceptancePolicy === JAPAN_OBSERVED_TIMING_POLICY;
+  if (Object.hasOwn(receipt, 'acceptancePolicy')) need(japanPolicy && receipt.transition === 'code-update'
+    && receipt.codeScope === JAPAN_STABILITY_CODE_SCOPE, 'timing_policy_scope');
   need(browser?.release === receipt.release && browser.nonce === receipt.nonce && browser.passed === true
-    && browser.functionalPassed === true && browser.speedPassed === true
+    && browser.functionalPassed === true && (japanPolicy ? observedTiming(browser) : browser.speedPassed === true)
     && ['reportSha256', 'speedReportSha256', 'detailsReportSha256'].every(key => HASH.test(browser[key] ?? '')), 'browser_binding');
   if (Object.hasOwn(receipt, 'transition')) {
     need(receipt.transition === 'code-update' && etag(receipt.previousAcceptedETag)
@@ -407,11 +413,31 @@ function acceptanceProof(candidate, intent, evidence) {
   need(hash(evidence.browserSpeedBytes) === receipt.browser.speedReportSha256
     && hash(evidence.browserDetailsBytes) === receipt.browser.detailsReportSha256
     && hash(Buffer.concat([evidence.browserSpeedBytes, evidence.browserDetailsBytes])) === receipt.browser.reportSha256, 'report_hashes');
-  need(speed.release === candidate.runtimeSha && speed.passed === true && speed.browserPassed === true && speed.speedGuard?.passed === true,
-    'speed_report_binding');
-  need(details.kind === 'china-browser-details-v1' && details.passed === true && details.release === candidate.runtimeSha
+  const japanPolicy = receipt.acceptancePolicy === JAPAN_OBSERVED_TIMING_POLICY;
+  need(speed.release === candidate.runtimeSha && speed.passed === true && (japanPolicy
+    ? speed.kind === 'catalog-japan-browser-v1' && speed.codeScope === JAPAN_STABILITY_CODE_SCOPE
+      && speed.nonce === intent.nonce && speed.generationManifestSha256 === candidate.generationManifestSha256
+      && observedTiming(speed)
+    : speed.browserPassed === true && speed.speedGuard?.passed === true), 'speed_report_binding');
+  need(details.kind === (japanPolicy ? 'japan-code-browser-details-v1' : 'china-browser-details-v1')
+    && details.passed === true && details.release === candidate.runtimeSha
     && details.nonce === intent.nonce && details.generationManifestSha256 === candidate.generationManifestSha256
     && details.precedingSpeedReportSha256 === receipt.browser.speedReportSha256, 'details_report_binding');
+  if (japanPolicy) {
+    need(observedTiming(details) && details.retainedChinaOraclePassed === true
+      && details.unrelatedBrowserBenchmarksExecuted === false && HASH.test(details.oracleSha256 ?? '')
+      && speed.oracleSha256 === details.oracleSha256
+      && details.japanReportBase64 === evidence.browserSpeedBytes.toString('base64')
+      && details.japanReportSha256 === receipt.browser.speedReportSha256, 'japan_timing_report_binding');
+    need(['japanFreshnessPassed', 'japanPowerApiPassed', 'japanUiPassed', 'japanVisibilityPassed', 'readOnlyBrowserFence',
+      'japanPetrolPowerUiPassed', 'japanDetailPowerInputPassed', 'japanDeliveredCalculationPassed', 'japanFullPagesPassed',
+      'japanPagination24Passed', 'japanCatalogWarningRemovedPassed', 'japanModelSelectionPassed', 'japanCombinedFiltersPassed',
+      'japanRelatedCardsPassed', 'japanVehiclePolicyPassed', 'japanPowerOrderPassed', 'japanBrandDirectoryPassed']
+      .every(key => speed[key] === true)
+      && speed.productionMutations === 0 && speed.directSupplierApiRequests === 0
+      && Number.isSafeInteger(speed.japanPreviewCalculationRequests)
+      && speed.japanPreviewCalculationRequests >= 1 && speed.japanPreviewCalculationRequests <= 2, 'japan_functional_binding');
+  }
   return {proof, receipt};
 }
 

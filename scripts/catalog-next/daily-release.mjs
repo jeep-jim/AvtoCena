@@ -10,14 +10,15 @@ import {verifyFrozenSpeedBaselines} from '../verify-frozen-speed-baselines.mjs';
 import {verifyServingCompatibility} from './serving-compatibility.mjs';
 import {createPrivateChinaGenerationStorage} from './generation-storage.mjs';
 import {restorePrivateChinaGeneration} from './private-generation.mjs';
-import {openChinaSshSession, checkedServerSpeedReport, checkedHomePhaseTimingReport,
+import {openChinaSshSession, checkedServerSpeedReport, checkedHomePhaseTimingReport, checkedJapanServerTimingObservation,
   checkedTerminalAppImageCleanupReport, terminalAppImageCleanupPending} from './release-ssh.mjs';
 import {verifyChinaPhotoCodeRuntime} from './photo-code-scope.mjs';
 import {verifyChinaImageStorageProof} from './build-release-image.mjs';
 import {CRM_CHINA_CODE_SCOPE, CRM_CHINA_PROTECTED_EXCEPTIONS} from './crm-china-code-scope.mjs';
 import {CRM_JAPAN_PHOTO_CODE_SCOPE} from './crm-japan-photo-code-scope.mjs';
 import {JAPAN_PAGINATION_CODE_SCOPE} from './japan-pagination-code-scope.mjs';
-import {JAPAN_STABILITY_CODE_SCOPE, japanPowerOrderRequired, japanSourceNamesRequired, japanBrandDirectoryRequired} from './japan-stability-code-scope.mjs';
+import {JAPAN_STABILITY_CODE_SCOPE, japanPowerOrderRequired, japanSourceNamesRequired, japanBrandDirectoryRequired,
+  JAPAN_OBSERVED_TIMING_POLICY, japanObservedTimingRequired} from './japan-stability-code-scope.mjs';
 import {checkedCrmChinaManifestProof, checkedCrmChinaEvidence, verifyCrmChinaUnauthorizedAccess} from './crm-china-status-proof.mjs';
 import {readJapanPhotoRetryFixture, checkedJapanPhotoRetryEvidence} from './japan-photo-retry-proof.mjs';
 import {readJapanPaginationFixture} from './japan-pagination-fixture.mjs';
@@ -162,6 +163,7 @@ export function createChinaDailyRelease({root, servingRoot, pricingPlan, serving
 
   async function stage(mode, {candidate, previous, nonce, assertAuthority}) {
     const codeUpdate = mode === 'code-update';
+    const observedJapanTiming = codeUpdate && japanObservedTimingRequired(servingPlan);
     const stabilityCodeUpdate = codeUpdate && servingPlan.codeScope === JAPAN_STABILITY_CODE_SCOPE;
     const paginationCodeUpdate = codeUpdate && (servingPlan.codeScope === JAPAN_PAGINATION_CODE_SCOPE || stabilityCodeUpdate);
     const photoRetryCodeUpdate = codeUpdate && (servingPlan.codeScope === CRM_JAPAN_PHOTO_CODE_SCOPE || paginationCodeUpdate);
@@ -231,6 +233,7 @@ export function createChinaDailyRelease({root, servingRoot, pricingPlan, serving
           && imageReceipt.runtimeSha === candidate.runtimeSha && imageReceipt.runtimeTree === servingPlan.runtimeTree
           && imageReceipt.retainedRuntime === prior.current.runtimeSha && imageReceipt.runtimeDiffSha256 === servingPlan.runtimeDiffSha256
           && imageReceipt.pricingRuntimeSha === candidate.pricingRuntimeSha && imageReceipt.imageId === candidate.imageId
+          && imageReceipt.acceptancePolicy === servingPlan.acceptancePolicy
           && imageReceipt.sha256 === image.sha256 && imageReceipt.bytes === image.bytes
           && Number.isSafeInteger(imageReceipt.imageUnpackedBytes) && imageReceipt.imageUnpackedBytes > 0
           && imageReceipt.archiveRoundTripVerified === true && imageReceipt.privateDataIncluded === false
@@ -305,7 +308,8 @@ export function createChinaDailyRelease({root, servingRoot, pricingPlan, serving
         files: [...(codePreflight?.generationFiles ?? []), ...packed.map(file => file.descriptor)],
         ...(codeUpdate ? {codeSourcePlanSha256: codePreflight.previousPlanSha256,
           codeSourceOracleSha256: codePreflight.previousOracleSha256,
-          codeScope: servingPlan.codeScope ?? 'catalog-photo-recovery-v1', codeImageStorageProof} : {})};
+          codeScope: servingPlan.codeScope ?? 'catalog-photo-recovery-v1', codeImageStorageProof,
+          ...(observedJapanTiming ? {acceptancePolicy: JAPAN_OBSERVED_TIMING_POLICY} : {})} : {})};
       await guard(); session ??= await use.openSession({root, directory, privateKey});
       const initialized = await session.call('init', {plan});
       if (!codeUpdate) {
@@ -325,9 +329,11 @@ export function createChinaDailyRelease({root, servingRoot, pricingPlan, serving
       await guard(); const started = await session.call('start');
       need(started?.started === true && started.release === candidate.runtimeSha && started.generationId === candidate.generationId, 'start');
       const functional = await session.call('functional'); need(functional?.functionalPassed === true && functional.cases?.length >= 8, 'functional');
-      await guard(); const speed = await session.call('speed'); need(speed?.speedPassed === true, 'server_speed');
+      await guard(); const speed = await session.call('speed');
+      const serverTiming = observedJapanTiming ? checkedJapanServerTimingObservation(speed, {runtimeSha: candidate.runtimeSha, nonce}) : null;
+      if (!observedJapanTiming) need(speed?.speedPassed === true, 'server_speed');
       await guard(); await progress('daily_candidate_checked');
-      return {candidate,
+      return {candidate, ...(observedJapanTiming ? {serverTiming} : {}),
         async activate({intent, reservation, assertAuthority: activeAuthority}) {
           need(!activated && !closed && typeof activeAuthority === 'function', 'activation_state');
           validateChinaPublicationIntent(intent?.value);
@@ -345,27 +351,43 @@ export function createChinaDailyRelease({root, servingRoot, pricingPlan, serving
           await fs.copyFile(path.join(root, 'docs/operations/2026-11-11-accepted-browser-speed-baseline.json'),
             path.join(browserDirectory, 'docs/operations/2026-11-11-accepted-browser-speed-baseline.json'));
           const marker = path.join(browserDirectory, 'marker.json');
-          await fs.writeFile(marker, JSON.stringify({release: candidate.runtimeSha, phase: 'independent-china-daily',
-            verifyPartnerBudgets: false, enforceSpeed: true}), {mode: 0o600, flag: 'wx'});
+          await fs.writeFile(marker, JSON.stringify({release: candidate.runtimeSha,
+            phase: observedJapanTiming ? 'independent-japan-functional' : 'independent-china-daily',
+            verifyPartnerBudgets: false, enforceSpeed: !observedJapanTiming,
+            ...(observedJapanTiming ? {timingPolicy: JAPAN_OBSERVED_TIMING_POLICY} : {})}), {mode: 0o600, flag: 'wx'});
           const browserEnv = {...childEnv(), CHROME_BIN: environment.CHROME_BIN, PLAYWRIGHT_MODULE: environment.PLAYWRIGHT_MODULE,
             OWNER_FILTER_BROWSER_MARKER: marker};
+          const speedPath = path.join(browserDirectory, 'owner-filter-browser-report.json');
+          const detailsPath = path.join(browserDirectory, 'china-browser-details-report.json');
+          let speedRaw, detailsRaw, details;
+          if (!observedJapanTiming) {
           need(await use.runChild({root, script: path.join(root, 'tests/browser/owner-filter-speed-live.mjs'), args: [], env: browserEnv,
             cwd: browserDirectory}) === 0, 'browser_speed_failed');
-          const speedPath = path.join(browserDirectory, 'owner-filter-browser-report.json'), speedRaw = await fs.readFile(speedPath);
+          speedRaw = await fs.readFile(speedPath);
           const browser = JSON.parse(speedRaw);
           need(speedRaw.length <= 256 * 1024 && browser.release === candidate.runtimeSha && browser.passed === true
             && browser.browserPassed === true && browser.speedGuard?.passed === true, 'browser_speed_binding');
-          await activeGuard(); const detailsPath = path.join(browserDirectory, 'china-browser-details-report.json');
+          await activeGuard();
           need(await use.runChild({root, script: path.join(root, 'scripts/catalog-next/browser-acceptance.mjs'), args: [], cwd: browserDirectory,
             env: {...browserEnv, ORACLE_PATH: oraclePath, CHINA_RELEASE_SHA: candidate.runtimeSha, VERIFICATION_NONCE: nonce,
               OWNER_FILTER_BROWSER_REPORT: speedPath, CHINA_BROWSER_DETAILS_OUTPUT: detailsPath}}) === 0, 'browser_details_failed');
-          let detailsRaw = await fs.readFile(detailsPath);
-          const details = JSON.parse(detailsRaw);
+          detailsRaw = await fs.readFile(detailsPath);
+          details = JSON.parse(detailsRaw);
           need(detailsRaw.length <= 256 * 1024 && details.kind === 'china-browser-details-v1' && details.passed === true
             && details.release === candidate.runtimeSha && details.nonce === nonce
             && details.generationManifestSha256 === candidate.generationManifestSha256
             && details.precedingSpeedReportSha256 === hash(speedRaw), 'browser_details_binding');
-          if (crmCodeUpdate) {
+          } else {
+            // The own-market report will be the actual timing evidence. No
+            // successful broad browser benchmark is invented for this policy.
+            details = {version: 1, kind: 'japan-code-browser-details-v1', passed: false,
+              release: candidate.runtimeSha, nonce, generationManifestSha256: candidate.generationManifestSha256,
+              timingPolicy: JAPAN_OBSERVED_TIMING_POLICY, speedGateRequired: false, speedPassed: null,
+              timingObserved: false, retainedChinaOraclePassed: true, unrelatedBrowserBenchmarksExecuted: false,
+              oracleSha256: hash(await fs.readFile(oraclePath)), serverTiming};
+            detailsRaw = Buffer.from(JSON.stringify(details) + '\n');
+          }
+          if (crmCodeUpdate && !observedJapanTiming) {
             const crmStartedAt = Date.now();
             await activeGuard(); await verifyRuntime(); await use.health(candidate.runtimeSha);
             await progress('code_crm_access_boundary');
@@ -385,19 +407,21 @@ export function createChinaDailyRelease({root, servingRoot, pricingPlan, serving
             await fs.writeFile(path.join(root, 'catalog-next-crm-china-operations-report.json'), crmRaw, {mode: 0o600, flag: 'wx'});
             const extraDetails = {...details, crmChinaReportBase64: crmRaw.toString('base64'),
               crmChinaReportSha256: hash(crmRaw)};
-            if (photoRetryCodeUpdate) {
-              const photoStartedAt = Date.now(), oracleSha256 = hash(await fs.readFile(oraclePath));
-              const photo = checkedJapanPhotoRetryEvidence({version: 1, kind: 'japan-photo-retry-proof-v1',
-                codeScope: servingPlan.codeScope, release: candidate.runtimeSha, nonce, checkedAt: new Date().toISOString(),
-                oracleSha256, fixtureBase64: photoRetryFixture.toString('base64'), fixtureSha256: hash(photoRetryFixture),
-                passed: true, directSupplierRequests: 0, productionMutations: 0},
-              {candidate, nonce, oracleSha256, codeScope: servingPlan.codeScope, startedAt: photoStartedAt});
-              const photoRaw = Buffer.from(JSON.stringify(photo) + '\n');
-              await fs.writeFile(path.join(root, 'catalog-next-japan-photo-retry-report.json'), photoRaw, {mode: 0o600, flag: 'wx'});
-              extraDetails.japanPhotoRetryReportBase64 = photoRaw.toString('base64');
-              extraDetails.japanPhotoRetryReportSha256 = hash(photoRaw);
-            }
             detailsRaw = Buffer.from(JSON.stringify(extraDetails) + '\n');
+            need(detailsRaw.length <= 256 * 1024, 'browser_details_size');
+            await fs.writeFile(detailsPath, detailsRaw, {mode: 0o600});
+          }
+          if (photoRetryCodeUpdate) {
+            const photoStartedAt = Date.now(), oracleSha256 = hash(await fs.readFile(oraclePath));
+            const photo = checkedJapanPhotoRetryEvidence({version: 1, kind: 'japan-photo-retry-proof-v1',
+              codeScope: servingPlan.codeScope, release: candidate.runtimeSha, nonce, checkedAt: new Date().toISOString(),
+              oracleSha256, fixtureBase64: photoRetryFixture.toString('base64'), fixtureSha256: hash(photoRetryFixture),
+              passed: true, directSupplierRequests: 0, productionMutations: 0},
+            {candidate, nonce, oracleSha256, codeScope: servingPlan.codeScope, startedAt: photoStartedAt});
+            const photoRaw = Buffer.from(JSON.stringify(photo) + '\n');
+            await fs.writeFile(path.join(root, 'catalog-next-japan-photo-retry-report.json'), photoRaw, {mode: 0o600, flag: 'wx'});
+            detailsRaw = Buffer.from(JSON.stringify({...JSON.parse(detailsRaw),
+              japanPhotoRetryReportBase64: photoRaw.toString('base64'), japanPhotoRetryReportSha256: hash(photoRaw)}) + '\n');
             need(detailsRaw.length <= 256 * 1024, 'browser_details_size');
             await fs.writeFile(detailsPath, detailsRaw, {mode: 0o600});
           }
@@ -450,6 +474,7 @@ export function createChinaDailyRelease({root, servingRoot, pricingPlan, serving
                 args: [], cwd: browserDirectory, env: {...browserEnv, ORACLE_PATH: oraclePath,
                   EXPECTED_RELEASE_SHA: candidate.runtimeSha, VERIFICATION_NONCE: nonce, OUTPUT: japanOutput,
                   CATALOG_CODE_SCOPE: plan.codeScope,
+                  ...(observedJapanTiming ? {CATALOG_JAPAN_TIMING_POLICY: JAPAN_OBSERVED_TIMING_POLICY} : {}),
                   CATALOG_JAPAN_POWER_ORDER_REQUIRED: japanPowerOrderRequired(servingPlan) ? '1' : '0',
                   CATALOG_JAPAN_BRAND_DIRECTORY_REQUIRED: japanBrandDirectoryRequired(servingPlan) ? '1' : '0'}});
               let japanRaw;
@@ -486,10 +511,16 @@ export function createChinaDailyRelease({root, servingRoot, pricingPlan, serving
                 'japanRelatedCardsPassed', 'japanVehiclePolicyPassed'].every(key => japan[key] === true), 'japan_browser_binding');
               if (japanPowerOrderRequired(servingPlan)) need(japan.japanPowerOrderPassed === true, 'japan_browser_binding');
               if (japanBrandDirectoryRequired(servingPlan)) need(japan.japanBrandDirectoryPassed === true, 'japan_browser_binding');
+              if (observedJapanTiming) {
+                need(japan.timingPolicy === JAPAN_OBSERVED_TIMING_POLICY && japan.speedGateRequired === false
+                  && japan.speedPassed === null && japan.timingObserved === true, 'japan_timing_binding');
+                speedRaw = japanRaw;
+              }
               // Preserve the already bound CRM/photo evidence when this profile
               // additionally verifies Japan's ordinary 24-row continuation.
               detailsRaw = Buffer.from(JSON.stringify({...JSON.parse(detailsRaw), japanReportBase64: japanRaw.toString('base64'),
-                japanReportSha256: hash(japanRaw)}) + '\n');
+                japanReportSha256: hash(japanRaw),
+                ...(observedJapanTiming ? {passed: true, timingObserved: true, precedingSpeedReportSha256: hash(speedRaw)} : {})}) + '\n');
               need(detailsRaw.length <= 256 * 1024, 'browser_details_size');
               await fs.writeFile(detailsPath, detailsRaw, {mode: 0o600});
             } catch (error) {
@@ -514,7 +545,9 @@ export function createChinaDailyRelease({root, servingRoot, pricingPlan, serving
           const saved = await session.call('browser_evidence', {speedBase64: speedRaw.toString('base64'), detailsBase64: detailsRaw.toString('base64')});
           need(saved?.saved === true && saved.speedReportSha256 === hash(speedRaw) && saved.detailsReportSha256 === hash(detailsRaw), 'browser_persistence');
           const outcome = await session.call('accept', {verdict: {release: candidate.runtimeSha, nonce, passed: true,
-            functionalPassed: true, speedPassed: true, reportSha256: hash(Buffer.concat([speedRaw, detailsRaw])),
+            functionalPassed: true, speedPassed: observedJapanTiming ? null : true,
+            ...(observedJapanTiming ? {timingPolicy: JAPAN_OBSERVED_TIMING_POLICY, speedGateRequired: false, timingObserved: true} : {}),
+            reportSha256: hash(Buffer.concat([speedRaw, detailsRaw])),
             speedReportSha256: hash(speedRaw), detailsReportSha256: hash(detailsRaw)}});
           need(outcome?.accepted === true && HASH.test(outcome.hostReceiptSha256 ?? '')
             && hash(decode(outcome.hostReceiptBase64)) === outcome.hostReceiptSha256, 'host_acceptance');

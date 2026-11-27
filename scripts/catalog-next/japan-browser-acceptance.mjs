@@ -22,6 +22,7 @@ const POWER=PLAIN+'&powerTo=160';
 const PETROL_POWER=POWER+'&fuel=petrol';
 const PETROL_POWER_NEXT=PETROL_POWER.replace('page=1&','page=2&');
 const BRAND_DIRECTORY='/api/catalog/brand-counts?market=japan&directory=1';
+export const JAPAN_OBSERVED_TIMING_POLICY='japan-functional-observed-timing-v1';
 const sha=value=>createHash('sha256').update(value).digest('hex');
 const need=(value,code)=>{if(!value)throw Error('japan_browser_'+code);};
 const positive=value=>typeof value==='number'&&Number.isFinite(value)&&value>0;
@@ -32,6 +33,43 @@ export function japanPowerOrderRequirement(value){
 export function japanBrandDirectoryRequirement(value){
  need(value===undefined||value==='0'||value==='1','brand_directory_option');
  return value==='1';
+}
+export function japanTimingPolicy(value){
+ need(value===undefined||value===JAPAN_OBSERVED_TIMING_POLICY,'timing_policy');
+ return value;
+}
+
+/** Timing observations describe completed or attempted functional journeys.
+ * They never change the content verdict or claim a speed test passed. */
+export function collectJapanObservedTimings(report){
+ if(report.timingPolicy!==JAPAN_OBSERVED_TIMING_POLICY)return report;
+ const samples=[];
+ const observe=(phase,value)=>{
+  if(!value||typeof value!=='object')return;
+  const measured=Number.isFinite(value.durationMs)&&value.durationMs>=0;
+  samples.push({phase,durationMs:measured?value.durationMs:null,measurement:measured?'observed':'unavailable'});
+ };
+ for(const row of report.checks?.health||[])
+  if(['before','after'].includes(row?.stage))observe('health_'+row.stage,row);
+ for(const row of report.checks?.responses||[])
+  if(typeof row?.stage==='string'&&/^[a-z][a-z0-9_]{0,79}$/.test(row.stage))observe(row.stage,row);
+ for(const key of ['ui','petrolPowerUi'])observe(key,report.checks?.[key]);
+ for(const row of report.checks?.visibility||[])
+  if(row?.path==='/'||row?.path==='/cars')observe(row.path==='/'?'home_visibility':'catalog_visibility',row);
+ report.timings={version:1,unit:'ms',scope:'japan-functional-journeys',latencyThresholdApplied:false,samples};
+ report.timingObserved=samples.length>0;
+ report.speedGateRequired=false;report.speedPassed=null;
+ return report;
+}
+
+/** A mixed overview may keep streaming unrelated sections. Under the Japan
+ * policy, inspect the actual Japan rail after the response commits instead of
+ * awaiting completion of every section's document lifecycle. */
+export async function navigateJapanOverview(view,pathname,timingPolicy){
+ need(pathname==='/'||pathname==='/cars','overview_path');
+ japanTimingPolicy(timingPolicy);
+ return view.goto(ORIGIN+pathname+'?'+new URLSearchParams({city:CITY}),
+  {waitUntil:timingPolicy===JAPAN_OBSERVED_TIMING_POLICY?'commit':'domcontentloaded',timeout:90_000});
 }
 export function japanPetrolPowerUrl(value,pageNumber=1){
  let url;try{url=new URL(value,ORIGIN);}catch{return false;}
@@ -725,7 +763,7 @@ async function readJson(context,url,{paginationKind,stability=false,requirePower
  return {status:response.status(),data,headers:response.headers(),durationMs:receivedAt-started,requestedAt:started,receivedAt};
 }
 
-export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,outputFile,playwrightModule,chromeBin,codeScope=SCOPE,requirePowerOrder=false,requireBrandDirectory=false}){
+export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,outputFile,playwrightModule,chromeBin,codeScope=SCOPE,requirePowerOrder=false,requireBrandDirectory=false,timingPolicy}){
  const stability=codeScope===JAPAN_STABILITY_CODE_SCOPE;
  const pagination=codeScope===JAPAN_PAGINATION_CODE_SCOPE||stability;
  const completion=[COMPLETION_SCOPE,COMPLETION_V2_SCOPE,USABILITY_SCOPE,JAPAN_PAGINATION_CODE_SCOPE,JAPAN_STABILITY_CODE_SCOPE].includes(codeScope);
@@ -741,6 +779,8 @@ export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,out
  if(stability)Object.assign(report,Object.fromEntries(JAPAN_STABILITY_GATES.map(key=>[key,false])));
  if(requirePowerOrder===true)report.japanPowerOrderPassed=false;
  if(requireBrandDirectory===true)Object.assign(report,{japanBrandDirectoryPassed:false,japanBrandDirectoryUiRequests:0});
+ if(timingPolicy===JAPAN_OBSERVED_TIMING_POLICY)Object.assign(report,
+  {timingPolicy,speedGateRequired:false,speedPassed:null,timingObserved:false});
  let browser,context,currentPage,calculationGrant=null,brandDirectory=null,stabilityBrandDirectory=null,stage='preconditions';
  const usabilityPages=[],quietChecks=[];
  const capture=async(page,name)=>{
@@ -763,6 +803,8 @@ export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,out
   need([SCOPE,COMPLETION_SCOPE,COMPLETION_V2_SCOPE,USABILITY_SCOPE,JAPAN_PAGINATION_CODE_SCOPE,JAPAN_STABILITY_CODE_SCOPE].includes(codeScope),'code_scope');
   need(typeof requirePowerOrder==='boolean'&&(!requirePowerOrder||stability),'power_order_option');
   need(typeof requireBrandDirectory==='boolean'&&(!requireBrandDirectory||stability),'brand_directory_option');
+  japanTimingPolicy(timingPolicy);
+  need(timingPolicy===undefined||stability&&requirePowerOrder&&requireBrandDirectory,'timing_policy_scope');
   need(path.isAbsolute(outputFile),'output');
   try{await fs.access(outputFile);need(false,'report_exists');}catch(error){if(error?.code!=='ENOENT')throw error;}
   const raw=await fs.readFile(oraclePath),binding=japanReleaseBinding(JSON.parse(raw),releaseSha,nonce);
@@ -940,7 +982,7 @@ export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,out
   for(const pathname of ['/','/cars']){
    stage=pathname==='/'?'home_visibility':'catalog_visibility';
    const view=await context.newPage();currentPage=view;let errors=0;view.on('pageerror',()=>{errors++;});
-   const began=Date.now(),result=await view.goto(ORIGIN+pathname+'?'+new URLSearchParams({city:CITY}),{waitUntil:'domcontentloaded',timeout:90_000});
+   const began=Date.now(),result=await navigateJapanOverview(view,pathname,timingPolicy);
    need(result?.status()===200,'overview_http');
    const rail=view.locator('[data-japan-auction-rail="true"][data-status="ready"]');
    await rail.locator('h2').filter({hasText:'Япония'}).waitFor({state:'visible',timeout:60_000});
@@ -1167,6 +1209,7 @@ export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,out
   if(currentPage&&/^[a-f0-9]{32}$/.test(nonce||''))await capture(currentPage,'failure').catch(()=>{});
  }finally{
   if(context)await context.close().catch(()=>{});if(browser)await browser.close().catch(()=>{});
+  collectJapanObservedTimings(report);
   await fs.writeFile(outputFile,JSON.stringify(report,null,2)+'\n',{flag:'wx',mode:0o600});
  }
  return report;
@@ -1179,7 +1222,8 @@ if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.ur
    nonce:process.env.VERIFICATION_NONCE,outputFile:path.resolve(process.env.OUTPUT||path.join(ROOT,'catalog-next-japan-browser-report.json')),
    playwrightModule:process.env.PLAYWRIGHT_MODULE,chromeBin:process.env.CHROME_BIN,codeScope:process.env.CATALOG_CODE_SCOPE||SCOPE,
    requirePowerOrder:japanPowerOrderRequirement(process.env.CATALOG_JAPAN_POWER_ORDER_REQUIRED),
-   requireBrandDirectory:japanBrandDirectoryRequirement(process.env.CATALOG_JAPAN_BRAND_DIRECTORY_REQUIRED)});
+   requireBrandDirectory:japanBrandDirectoryRequirement(process.env.CATALOG_JAPAN_BRAND_DIRECTORY_REQUIRED),
+   timingPolicy:japanTimingPolicy(process.env.CATALOG_JAPAN_TIMING_POLICY)});
   console.log('JAPAN_BROWSER '+JSON.stringify(report));if(!report.passed)process.exitCode=1;
  }catch{console.error('japan_browser_report_failed');process.exitCode=1;}
 }
