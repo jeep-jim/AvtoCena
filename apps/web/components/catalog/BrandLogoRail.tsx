@@ -7,7 +7,7 @@ import {dealerBrowsingHref} from "@/lib/dealers/browsing-context";
 import Link from "next/link";
 import {brandContextQuery,brandSelectionQuery} from "@/lib/catalog/brand-navigation";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useMemo, useRef, useState, useSyncExternalStore, type MouseEvent } from "react";
+import { useEffect, useMemo, useRef, useState, useSyncExternalStore, useTransition, type MouseEvent } from "react";
 import {subscribeBrandTheme,readBrandTheme,serverBrandTheme} from "./brand-theme-store";
 import { CATALOG_BRANDS, canonicalCatalogBrand, catalogBrandSlug, catalogBrandPresentation } from "@/lib/catalog/brands";
 
@@ -137,18 +137,49 @@ function BrandLogoRailContent({
   initial = {},
   directoryMode = false,
   showSearch = false,
+  sourceDirectoryState,
 }: {
   brands: string[];
   resultCount?: number;
   initial?: Record<string,string>;
   directoryMode?: boolean;
   showSearch?: boolean;
+  sourceDirectoryState?:'loading'|'ready'|'unavailable';
 }) {
   const dealer=useDealerBrowsing();
   const pathname = usePathname();
   const router = useRouter();
+  const [retrying,retryDirectory]=useTransition();
   const searchParams = useSearchParams();
   const searchParamsText = brandContextQuery(searchParams.toString(),initial);
+  const contextParams=new URLSearchParams(searchParamsText);
+  const japaneseAuctions=contextParams.get('market')==='japan'&&contextParams.get('stock')!=='green';
+  const japanDirectoryState=retrying?'loading':sourceDirectoryState||'unavailable';
+  const directoryNotice=japaneseAuctions&&japanDirectoryState!=='ready'
+    ?japanDirectoryState==='loading'
+      ?<div role="status" className="px-4 py-6 text-sm font-bold text-[var(--ac-muted)]">Загружаем марки…</div>
+      :<button type="button" className="min-h-11 px-4 py-3 text-sm font-bold" onClick={()=>retryDirectory(()=>router.refresh())}>Не удалось загрузить марки. Повторить</button>
+    :null;
+  // Keep the familiar label while links retain every supplied spelling. Current
+  // selections also survive a directory outage without becoming display aliases.
+  const sourceMakesByBrand=useMemo(()=>{
+    const values=new Map<string,string[]>();
+    for(const name of brands){
+      const source=name.trim();if(!source)continue;
+      const key=canonicalCatalogBrand(source).toLocaleLowerCase('en-US');
+      const previous=values.get(key)||[];if(!previous.includes(source))values.set(key,[...previous,source]);
+    }
+    const observed=new Set(values.keys()),context=new URLSearchParams(searchParamsText);
+    for(const name of (context.get('make')||context.get('brand')||'').split(',')){
+      const source=name.trim();if(!source)continue;
+      const key=canonicalCatalogBrand(source).toLocaleLowerCase('en-US');if(observed.has(key))continue;
+      const previous=values.get(key)||[];if(!previous.includes(source))values.set(key,[...previous,source]);
+    }
+    return values;
+  },[brands,searchParamsText]);
+  const selectionValues=(names:string[])=>japaneseAuctions
+    ?[...new Set(names.flatMap(name=>sourceMakesByBrand.get(canonicalCatalogBrand(name).toLocaleLowerCase('en-US'))||[name]))]
+    :names;
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [brandCounts, setBrandCounts] = useState<Record<string, number>>({});
@@ -265,7 +296,7 @@ function BrandLogoRailContent({
   };
 
   const setCatalogBrands = (nextBrands: string[]) => {
-    const queryString = brandSelectionQuery(searchParamsText,nextBrands);
+    const queryString = brandSelectionQuery(searchParamsText,selectionValues(nextBrands));
     router.replace(dealerBrowsingHref(queryString ? `/cars?${queryString}` : "/cars",dealer), { scroll: false });
   };
 
@@ -273,7 +304,7 @@ function BrandLogoRailContent({
 
   const hrefForBrand = (brand: string) => homeBrandDirectory
     ? `/cars/brand/${catalogBrandSlug(brand)}`
-    : dealerBrowsingHref(`/cars?${brandSelectionQuery(searchParamsText,selectedBrandKeys.has(brand.toLocaleLowerCase("en-US"))?selectedBrands.filter(item=>item.toLocaleLowerCase("en-US")!==brand.toLocaleLowerCase("en-US")):[...selectedBrands,brand])}`,dealer);
+    : dealerBrowsingHref(`/cars?${brandSelectionQuery(searchParamsText,selectionValues(selectedBrandKeys.has(brand.toLocaleLowerCase("en-US"))?selectedBrands.filter(item=>item.toLocaleLowerCase("en-US")!==brand.toLocaleLowerCase("en-US")):[...selectedBrands,brand]))}`,dealer);
 
   const handleBrandClick = (brand: string, closeAfter = false) => (event: MouseEvent<HTMLAnchorElement>) => {
     if (homeBrandDirectory) {
@@ -354,8 +385,9 @@ function BrandLogoRailContent({
         }}
       >
         {railBrands.map((brand) => <BrandTile key={brand.toLocaleLowerCase("en-US")} brand={brand} href={hrefForBrand(brand)} onClick={handleBrandClick(brand)} />)}
-        {!railBrands.length ? <div className="px-4 py-6 text-sm font-bold text-[var(--ac-muted)]">Марка не найдена</div> : null}
+        {!railBrands.length&&!directoryNotice ? <div className="px-4 py-6 text-sm font-bold text-[var(--ac-muted)]">Марка не найдена</div> : null}
       </div>
+      {directoryNotice}
       <button type="button" onClick={() => setOpen(true)} className="absolute right-2 top-1/2 flex h-12 w-9 -translate-y-1/2 items-center justify-center rounded-xl bg-[var(--ac-surface-2)] text-xl font-black text-red-500" aria-label="Показать все марки">›</button>
     </section>
 
@@ -368,7 +400,7 @@ function BrandLogoRailContent({
         <div className="grid grid-cols-1 gap-1 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-3 lg:gap-y-1.5">
           {filtered.map((brand) => <BrandDirectoryTile key={brand} brand={brand} href={hrefForBrand(brand)} countLabel={countLabelForBrand(brand)} selected={!homeBrandDirectory && selectedBrandKeys.has(brand.toLocaleLowerCase("en-US"))} onPointerEnter={homeBrandDirectory ? () => router.prefetch(hrefForBrand(brand)) : undefined} onClick={handleBrandClick(brand, true)} />)}
         </div>
-        {!filtered.length ? <div className="py-12 text-center font-bold text-[var(--ac-muted)]">Марка не найдена</div> : null}
+        {directoryNotice||(!filtered.length ? <div className="py-12 text-center font-bold text-[var(--ac-muted)]">Марка не найдена</div> : null)}
       </div>
     </PublicSheet> : null}
   </>;

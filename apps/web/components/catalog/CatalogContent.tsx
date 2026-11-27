@@ -98,7 +98,10 @@ export async function CatalogContent(props:CatalogContentProps){
 function catalogResultScope(params:Record<string,string|string[]|undefined>,dealer:DealerBrowsingContext|null){return JSON.stringify([dealer?.id||'public',Boolean(dealer?.preview),first(params.market),first(params.stock)]);}
 
 async function ReadCatalogContent({params={},dealer=null,embedded=false}:{params?:Record<string,string|string[]|undefined>;dealer?:DealerBrowsingContext|null;embedded?:boolean}) {
-  params={...params,...(params.make?{make:catalogBrandFilter(first(params.make))}:{}),...(params.brand?{brand:catalogBrandFilter(first(params.brand))}:{})};
+  // Japanese controls carry the supplier's names. A display alias must not
+  // replace that exact selection before the optional source directory resolves it.
+  const japaneseAuctions=first(params.market)==='japan'&&first(params.stock)!=='green';
+  params=japaneseAuctions?{...params}:{...params,...(params.make?{make:catalogBrandFilter(first(params.make))}:{}),...(params.brand?{brand:catalogBrandFilter(first(params.brand))}:{})};
   if(['ajes','existing'].includes(first(params.source))&&(first(params.market)==='china'||first(params.market)==='korea'))delete params.source;
   if(first(params.stock)==="green"&&(!dealer||dealer.markets.includes("japan")))return <GreenCornerCatalog params={{...Object.fromEntries(Object.entries(params).map(([k,v])=>[k,first(v)])),dealer:dealer?.id}} embedded={embedded}/>;
   const allowedMarkets=dealer?marketOrder.filter(m=>dealer.markets.includes(m.id)):marketOrder;

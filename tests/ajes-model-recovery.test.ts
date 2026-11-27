@@ -11,6 +11,7 @@ import {ajesOffer} from '../apps/web/lib/catalog/ajes-offer';
 import {publicOffer} from '../apps/web/lib/catalog/storage';
 import {EncyclopediaIdentityResolver} from '../apps/web/lib/catalog/encyclopedia-identity';
 import {readEncyclopediaIdentityResolver} from '../apps/web/lib/catalog/encyclopedia-identity-data';
+import {canonicalCatalogBrand} from '../apps/web/lib/catalog/brands';
 
 function rejectSupplierQueue(t:any,message:string){
  const original=DetailReadCache.prototype.get;
@@ -183,22 +184,24 @@ test('too many literal source spellings cannot masquerade as a complete normaliz
  }
 });
 
-function database(names:string[]){
+function database(names:string[],make='MAZDA'){
  const db=new DatabaseSync(':memory:');
  db.exec('create table stats(id text,year integer,auction_type integer,status text,finish integer,marka_name text,model_name text,rate text,kpp text,time text,auction_date text,images text)');
  const add=db.prepare('insert into stats values(?,?,?,?,?,?,?,?,?,?,?,?)');
- names.forEach((name,index)=>add.run('legacy-'+index,2021,2,'Sold',120000,'MAZDA',name,'5','AT','P','2026-11-27',
+ names.forEach((name,index)=>add.run('legacy-'+index,2021,2,'Sold',120000,make,name,'5','AT','P','2026-11-27',
   'https://7.tru.ru/imgs/fixtureABC&h=50'));
  return db;
 }
 
-async function realPath(t:any,names=matched,modelDirectoryStale=false){
- const db=database(names);t.after(()=>db.close());
+async function realPath(t:any,names=matched,modelDirectoryStale=false,source:{make?:string;directory?:'fresh'|'stale'|'unavailable'}={}){
+ const db=database(names,source.make);t.after(()=>db.close());
  const state={queries:[] as any[],neighborQueries:[] as any[],project:publicOffer,current:{id:'china-legacy',market:'china',make:'Mazda',model:'3'},
   read:async(q:any)=>{
    state.queries.push(structuredClone(q));
-   const query=ajesQuery(q),rows=db.prepare(query.sql).all(),observedAt=new Date().toISOString();
-   const common={page:query.page,pageSize:query.pageSize,received:rows.length,stale:query.kind==='models'&&modelDirectoryStale,partial:false,observedAt};
+   const query=ajesQuery(q);
+   if(query.kind==='makes'&&source.directory==='unavailable')throw new AjesUnavailable('local_busy');
+   const rows=db.prepare(query.sql).all(),observedAt=new Date().toISOString();
+   const common={page:query.page,pageSize:query.pageSize,received:rows.length,stale:query.kind==='models'&&modelDirectoryStale||query.kind==='makes'&&source.directory==='stale',partial:false,observedAt};
    if(query.kind==='makes')return {...common,items:[],makes:rows.map(row=>({make:row.marka_name,total:Number(row['count(*)'])}))};
    if(query.kind==='models')return {...common,items:[],models:rows.map(row=>({make:row.marka_name,model:row.model_name,total:Number(row['count(*)'])}))};
    if(query.kind==='count')return {...common,items:[],total:Number(Object.values(rows[0])[0])};
@@ -231,8 +234,54 @@ async function realPath(t:any,names=matched,modelDirectoryStale=false){
   }}]});
  const require=createRequire(import.meta.url),mod={exports:{} as any};
  new Function('require','module','exports',out.outputFiles[0].text)((id:string)=>id==='react'?{cache:(fn:any)=>fn}:require(id),mod,mod.exports);
- return {api:mod.exports,state};
+ return {api:mod.exports,state,db};
 }
+
+test('raw Japanese make selections and legacy display aliases reach the same exact source rows when the directory is available',async t=>{
+ for(const make of ['LANDROVER','LAND ROVER','BENZ']){
+  const {api,state}=await realPath(t,['SOURCE MODEL'],false,{make});
+  for(const selected of [make,canonicalCatalogBrand(make)]){
+   const params={market:'japan',make:selected,model:'SOURCE MODEL'};
+   const page=await api.readAjesCatalogPage(params,undefined,{includeCount:false});
+   assert.equal(page.items.length,1);assert.equal(page.partial,false);assert.equal(page.total,1);
+   assert.equal((await api.readAjesResolvedPublic(params)).items.length,1);
+   assert.equal((await api.readAjesCountSummary(JSON.stringify(params))).total,1);
+   const lists=state.queries.filter(q=>!q.aggregate);assert.ok(lists.every(q=>q.make===make));
+  }
+ }
+});
+
+test('an unavailable or stale make directory preserves exact rows but cannot attest a zero or complete alias selection',async t=>{
+ for(const directory of ['unavailable','stale'] as const){
+  const {api,state}=await realPath(t,['SOURCE MODEL'],false,{make:'BENZ',directory});
+  const raw={market:'japan',make:'BENZ',model:'SOURCE MODEL'};
+  const page=await api.readAjesCatalogPage(raw,undefined,{includeCount:false});
+  assert.equal(page.items.length,1);assert.equal(page.partial,true);assert.equal(page.total,null);
+  assert.equal((await api.readAjesResolvedPublic(raw)).partial,true);
+  const models=await api.readAjesDirectory(raw);assert.equal(models.stale,true);
+  assert.deepEqual(models.models.map((row:any)=>[row.make,row.model]),[['BENZ','SOURCE MODEL']]);
+  await assert.rejects(api.readAjesCountSummary(JSON.stringify(raw)),/directory_unavailable/);
+  assert.equal(state.queries.some(q=>q.aggregate==='count'),false,'an unresolved directory must not issue or publish a misleading COUNT');
+  const legacy={market:'japan',make:'Mercedes-Benz'};
+  if(directory==='unavailable'){
+   await assert.rejects(api.readAjesCatalogPage(legacy,undefined,{includeCount:false}),/directory_unavailable/);
+   await assert.rejects(api.readAjesResolvedPublic(legacy),/directory_unavailable/);
+  }else{
+   const saved=await api.readAjesResolvedPublic(legacy);assert.equal(saved.items.length,1);assert.equal(saved.partial,true);
+  }
+  await assert.rejects(api.readAjesCountSummary(JSON.stringify(legacy)),/directory_unavailable/);
+ }
+});
+
+test('multi-make Japanese source values retain both raw aliases on a directory outage without widening the query',async t=>{
+ const {api,state,db}=await realPath(t,['SOURCE MODEL'],false,{make:'BENZ',directory:'unavailable'});
+ db.prepare('insert into stats values(?,?,?,?,?,?,?,?,?,?,?,?)').run('land-rover',2021,2,'Sold',120000,'LANDROVER','SOURCE MODEL','5','AT','P','2026-11-27','https://7.tru.ru/imgs/fixtureABC&h=50');
+ const params={market:'japan',make:'BENZ,LANDROVER'};
+ const result=await api.readAjesCatalogPage(params,undefined,{includeCount:false});
+ assert.equal(result.items.length,2);assert.equal(result.partial,true);assert.equal(result.total,null);
+ assert.ok(state.queries.filter(q=>!q.aggregate).every(q=>q.make==='BENZ,LANDROVER'));
+ assert.deepEqual(new Set(result.items.map((row:any)=>row.make)),new Set(['BENZ','LANDROVER']));
+});
 
 test('the old Mazda/3 URL resolves through real catalog, count and cross-market recommendation paths',async t=>{
  const {api,state}=await realPath(t,[...matched,...excluded]);

@@ -419,14 +419,16 @@ test('filtered continuation preserves matching and unknown cars without inventin
  assert.deepEqual(japanPowerFilterSummary(partial.items),{shown:2,localPower:0,supplierPower:1,unknownPower:1});
 });
 
-test('actual grid and list cards cannot hide unknown PW behind an obsolete compact estimate',async()=>{
+async function japanPowerCardFixture(){
+ const prices:any[]=[];
+ (globalThis as any).__japanPowerCardPrices=prices;
  const mocks:Record<string,string>={
   CatalogSelectionContext:'export const useCatalogView=()=>globalThis.__japanPowerCardView;',
   DealerBrowsingContext:'export const useDealerBrowsing=()=>null;',
-  useSavedCalculationPreview:'export const useSavedCalculationPreview=()=>undefined;',
+  useSavedCalculationPreview:'export const useSavedCalculationPreview=offer=>offer.savedCalculationPreview;',
   FavoriteToggle:'export const FavoriteToggle=()=>null;',
   CatalogCover:'export const CatalogCover=()=>null;',
-  CatalogPrice:'export const CatalogPrice=()=>null;',
+  CatalogPrice:'export const CatalogPrice=({offer})=>{globalThis.__japanPowerCardPrices.push(offer);return null;};',
   IntentPrefetchLink:'export const IntentPrefetchLink=({children})=>children;',
   'RecyclingPower.module.css':'export default {};',
  };
@@ -435,17 +437,97 @@ test('actual grid and list cards cannot hide unknown PW behind an obsolete compa
   builder.onLoad({filter:/.*/,namespace:'card-context'},args=>({contents:mocks[args.path],loader:'js'}));
  }}]});
  const module={exports:{} as any};new Function('require','module','exports',bundle.outputFiles[0].text)(createRequire(import.meta.url),module,module.exports);
+ return {prices,render(offer:any,view:string){
+  (globalThis as any).__japanPowerCardView=view;
+  return renderToStaticMarkup(createElement(module.exports.CatalogCard,{offer,compact:true,dense:true}));
+ },close(){delete (globalThis as any).__japanPowerCardView;delete (globalThis as any).__japanPowerCardPrices;}};
+}
+
+test('actual grid and list cards cannot hide unknown PW behind an obsolete compact estimate',async()=>{
+ const fixture=await japanPowerCardFixture();
  const raw=offer('79,98','legacy-estimate');
  const unknown=publicOffer({...raw,japanPowerEstimate:{offerId:raw.id,values:[79,98],requiresConfirmation:true}} as any);
  assert.equal(unknown.japanPowerUnknown,true);
  try{
   for(const view of ['grid','list']){
-   (globalThis as any).__japanPowerCardView=view;
-   const html=renderToStaticMarkup(createElement(module.exports.CatalogCard,{offer:unknown}));
+   const html=fixture.render(unknown,view);
    assert.match(html,/data-japan-power-unknown="true"/);assert.match(html,/Мощность не указана/);
    assert.doesNotMatch(html,/79 \/ 98|79 л\.с\.|98 л\.с\./);
-   const supplied=renderToStaticMarkup(createElement(module.exports.CatalogCard,{offer:publicOffer(offer(150))}));
+   const supplied=fixture.render(publicOffer(offer(150)),view);
    assert.match(supplied,/data-japan-supplier-power="true"/);assert.match(supplied,/150 л\.с\. · поставщик/);
   }
- }finally{delete (globalThis as any).__japanPowerCardView;}
+ }finally{fixture.close();}
+});
+
+test('saved calculation previews preserve original Japan supplier and unknown labels in actual grid and list cards',async()=>{
+ const fixture=await japanPowerCardFixture();
+ const preview={version:'card-preview-fixture',totalRub:700014,deliveryCity:'',parameters:{powerHp:58,powerKw:42.66,fuel:'petrol',engineCc:660}};
+ try{
+  for(const power of [58,150,''])for(const view of ['grid','list']){
+   const source=publicOffer(offer(power,`preview-provenance-${power||'unknown'}`));
+   assert.equal(source.powerHp,undefined);
+   const input={...source,savedCalculationPreview:preview},before=structuredClone(input);
+   // The same source row must keep its discovery provenance before and after
+   // a saved scenario arrives through the existing client preview hook.
+   for(const value of [source,input]){
+    const html=fixture.render(value,view);
+    if(power){
+     assert.match(html,/data-japan-supplier-power="true"/);
+     assert.ok(html.includes(`${power} л.с. · поставщик`));
+     assert.doesNotMatch(html,/data-japan-power-unknown/);
+    }else{
+     assert.match(html,/data-japan-power-unknown="true"/);
+     assert.match(html,/Мощность не указана/);
+     assert.doesNotMatch(html,/data-japan-supplier-power|58 л\.с\./);
+    }
+    assert.doesNotMatch(html,/42,66 кВт/,'a scenario is not the supplier power measurement');
+   }
+   const displayed=fixture.prices.at(-1);
+   assert.equal(displayed.totalRub,preview.totalRub);
+   assert.equal(displayed.powerHp,58);assert.equal(displayed.powerKw,42.66);
+   assert.deepEqual(displayed.savedCalculationPreview,preview,'the price/calculation overlay is unchanged');
+   assert.deepEqual(input,before,'rendering does not rewrite the source row or saved parameters');
+  }
+ }finally{fixture.close();}
+});
+
+test('Japan authoritative local and owner power still outrank supplier facts while saved prices retain their parameters',async()=>{
+ const fixture=await japanPowerCardFixture();
+ const preview={version:'manual-preview-fixture',totalRub:810000,deliveryCity:'',parameters:{powerHp:58,powerKw:42.66}};
+ const local=publicOffer({...offer(150,'manual-local'),powerHp:180,powerKw:132.39,powerDataSource:'manual',powerDataConfidence:'verified'} as any);
+ const owner=publicOffer(applyJapanOwnerSpecifications({...offer(200,'owner-local'),make:'HONDA',model:'STEPWGN',fuel:'petrol',powertrainKind:'combustion'}));
+ try{
+  for(const [source,hp] of [[local,180],[owner,150]] as const)for(const view of ['grid','list']){
+   assert.equal(source.powerHp,hp);assert.equal(source.japanSupplierPower,undefined);assert.equal(source.japanPowerUnknown,undefined);
+   assert.equal(ajesResultFilter({market:'japan',powerTo:160}).matches(source),hp<=160);
+   const plain=fixture.render(source,view);
+   assert.ok(plain.includes(`${hp} л.с.`));assert.doesNotMatch(plain,/data-japan-supplier-power|data-japan-power-unknown/);
+   const input={...source,savedCalculationPreview:preview},before=structuredClone(input);
+   const html=fixture.render(input,view);
+   assert.doesNotMatch(html,/data-japan-supplier-power|data-japan-power-unknown/);
+   assert.equal(ajesResultFilter({market:'japan',powerTo:160}).matches(input),hp<=160,'a saved scenario does not change authoritative selection');
+   assert.equal(fixture.prices.at(-1).totalRub,preview.totalRub);
+   assert.deepEqual(fixture.prices.at(-1).savedCalculationPreview,preview);
+   assert.deepEqual(input,before);
+  }
+ }finally{fixture.close();}
+});
+
+test('Japan cards without previews retain existing local normalization and non-Japan preview rendering is unchanged',async()=>{
+ const fixture=await japanPowerCardFixture();
+ const source={...publicOffer(offer('','local-normalization')),catalogPricingMode:undefined,totalRub:900000,powerKw:110,
+  cardProjectionVersion:3,publicVisibleRub:900000,publicSpecificationVerified:true,calculationStatus:'estimated',operational:{raw:{powerKw:110}}};
+ const foreign={...publicOffer(offer(150,'foreign-preview')),market:'china',powerHp:122,powerKw:89.73,
+  savedCalculationPreview:{version:'foreign-preview-fixture',totalRub:910000,deliveryCity:'',parameters:{powerHp:58,powerKw:42.66}}};
+ try{
+  for(const view of ['grid','list']){
+   const html=fixture.render(source,view);
+   assert.match(html,/149,56 л\.с\./);assert.doesNotMatch(html,/data-japan-supplier-power|data-japan-power-unknown/);
+   assert.equal(fixture.prices.at(-1).powerHp,149.56);assert.equal(fixture.prices.at(-1).powerKw,110);
+   const foreignHtml=fixture.render(foreign,view);
+   assert.match(foreignHtml,/58 л\.с\./);assert.doesNotMatch(foreignHtml,/data-japan-supplier-power|data-japan-power-unknown/);
+   assert.equal(fixture.prices.at(-1).totalRub,910000);
+   assert.deepEqual(fixture.prices.at(-1).savedCalculationPreview,foreign.savedCalculationPreview);
+  }
+ }finally{fixture.close();}
 });

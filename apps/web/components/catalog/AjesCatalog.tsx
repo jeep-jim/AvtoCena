@@ -53,7 +53,7 @@ export async function AjesCatalog({params,embedded=false,dealer}:{params:Params;
  </p>}
  </div>
  </div>}>
- <Suspense fallback={<BrandLogoRail initial={initial} brands={makes.filter(make=>!initial.make||initial.make.split(',').some(value=>value.toLowerCase()===make.toLowerCase()))} resultCount={displayTotal??undefined}/>}>
+ <Suspense fallback={<BrandLogoRail initial={initial} brands={makes.filter(make=>!initial.make||initial.make.split(',').some(value=>value.toLowerCase()===make.toLowerCase()))} resultCount={displayTotal??undefined} sourceDirectoryState="loading"/>}>
   <AjesBrandRail initial={initial} fallbackBrands={makes} resultCount={displayTotal??undefined}/>
  </Suspense>
  <div className="mb-4 mt-8 flex flex-wrap items-center justify-between gap-3 md:mt-9">
@@ -74,8 +74,9 @@ export async function AjesCatalog({params,embedded=false,dealer}:{params:Params;
 
 async function AjesBrandRail({initial,fallbackBrands,resultCount}:{initial:Record<string,string>;fallbackBrands:string[];resultCount?:number}){
  const directory=await readAjesMakes(JSON.stringify(initial)).catch(()=>null);
- const brands=directory?directory.makes.filter(row=>row.total>0).map(row=>row.make):fallbackBrands;
- return <BrandLogoRail initial={initial} brands={brands.filter(make=>!initial.make||initial.make.split(',').some(value=>value.toLowerCase()===make.toLowerCase()))} resultCount={resultCount}/>;
+ const available=directory?.makes.filter(row=>row.total>0).map(row=>row.make)||[];
+ const brands=!directory||directory.stale?[...new Set([...available,...fallbackBrands])]:available;
+ return <BrandLogoRail initial={initial} brands={brands.filter(make=>!initial.make||initial.make.split(',').some(value=>value.toLowerCase()===make.toLowerCase()))} resultCount={resultCount} sourceDirectoryState={!directory||directory.stale?'unavailable':'ready'}/>;
 }
 
 async function AjesIndependentCount({initial}:{initial:Record<string,string>}){

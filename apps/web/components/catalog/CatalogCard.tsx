@@ -76,8 +76,12 @@ export function CatalogCard({ offer, compact = false, dense = false, eagerPrefet
   const o = { ...presented, marketLabel: catalogMarketLabel(normalizedOffer.market), images: rankedImages };
   const powerDisplay = catalogPowerDisplay(normalizedOffer);
   const powerScenario = readCatalogPowerScenario(normalizedOffer);
-  const supplierPowerLabel = japanSupplierPowerLabel(normalizedOffer);
-  const unknownJapanPower = japanUnknownPower(normalizedOffer);
+  // A saved price scenario is not new auction evidence. Keep discovery labels
+  // bound to the original offer; the ordinary normalization path stays intact.
+  const powerEvidenceOffer = savedPreview ? offer : normalizedOffer;
+  const supplierPowerLabel = japanSupplierPowerLabel(powerEvidenceOffer);
+  const unknownJapanPower = japanUnknownPower(powerEvidenceOffer);
+  const japanDiscoveryPowerLabel = supplierPowerLabel || (unknownJapanPower ? "Мощность не указана" : "");
   const japanPowerLabel = supplierPowerLabel || (unknownJapanPower ? "" : japanPowerEstimateLabel(normalizedOffer));
   const powerInfo = powerScenario ? null : recyclingPowerInfo(normalizedOffer);
   const powertrainKind = String(normalizedOffer.powertrainKind || "").toLowerCase();
@@ -127,7 +131,7 @@ export function CatalogCard({ offer, compact = false, dense = false, eagerPrefet
       <IntentPrefetchLink href={href} eager={eagerPrefetch} className="ac-list-photo">{imageUrl?<CatalogCover src={imageUrl} alt={o.title} eager={eagerPrefetch}/>:<span>Нет фото</span>}</IntentPrefetchLink>
       <div className="ac-list-identity"><IntentPrefetchLink href={href} eager={eagerPrefetch}><strong>{o.title}</strong></IntentPrefetchLink><span>{retro?"Ретро · ":""}{priceLabel} · {o.marketLabel}</span>{normalizedOffer.auctionName&&<small title={String(normalizedOffer.auctionName)}>Аукцион · {String(normalizedOffer.auctionName)}</small>}</div>
       <div className="ac-list-body"><span>{normalizedOffer.market==="japan"&&!isGreenCornerOffer(offer)?`Лот ${o.lotNumber||"уточняется"}`:o.transmissionLabel==="уточняется"?"КПП уточняется":o.transmissionLabel}</span>{(o.operational?.chassisCode||o.chassisCode)?<ChassisCopy code={String(o.operational?.chassisCode||o.chassisCode)}/>:<small>{o.bodyLabel&&o.bodyLabel!=="уточняется"?o.bodyLabel:"Кузов уточняется"}</small>}</div>
-      <div className="ac-list-engine"><span>{engineLabel}</span><small data-japan-supplier-power={supplierPowerLabel?"true":undefined} data-japan-power-unknown={unknownJapanPower||undefined}>{powerScenario?`${Math.round(powerScenario.horsepower)} л.с. · уточнить`:o.powerHp?`${Number(o.powerHp).toLocaleString("ru-RU")} л.с.`:japanPowerLabel||(unknownJapanPower?"Мощность не указана":powerDisplay?.thirtyMinuteLabel||"Мощность уточняется")}</small><small>{o.driveLabel==="уточняется"?"Привод уточняется":o.driveLabel}</small></div>
+      <div className="ac-list-engine"><span>{engineLabel}</span><small data-japan-supplier-power={supplierPowerLabel?"true":undefined} data-japan-power-unknown={unknownJapanPower||undefined}>{japanDiscoveryPowerLabel||(powerScenario?`${Math.round(powerScenario.horsepower)} л.с. · уточнить`:o.powerHp?`${Number(o.powerHp).toLocaleString("ru-RU")} л.с.`:japanPowerLabel||powerDisplay?.thirtyMinuteLabel||"Мощность уточняется")}</small><small>{o.driveLabel==="уточняется"?"Привод уточняется":o.driveLabel}</small></div>
       <div className="ac-list-mileage"><span>{Number.isFinite(o.mileageKm)?`${Number(o.mileageKm).toLocaleString("ru-RU")} км`:"Пробег уточняется"}</span></div>
       <div className="ac-list-price">{selectionRequired?<strong>Выбрать модификацию</strong>:<CatalogPrice showSaleDate offer={displayOffer} label="" dense priceClassName="text-[18px]"/>}</div>
     </div><FavoriteToggle offerId={o.id} compact snapshot={snapshot} className="ac-list-favorite"/>
@@ -153,14 +157,15 @@ export function CatalogCard({ offer, compact = false, dense = false, eagerPrefet
             {normalizedOffer.market === "japan" && o.driveLabel && o.driveLabel !== "уточняется" ? <span className={tagClass} data-japan-drive={o.drive} title="Привод">{o.driveLabel}</span> : null}
             {o.mileageKm ? <span className={tagClass}><MileageIcon dense={dense} /><span>{new Intl.NumberFormat("ru-RU").format(o.mileageKm)} км</span></span> : null}
             <span className={tagClass}><EngineIcon dense={dense} fuel={!previewEngineCc && !isElectric} electric={isElectric} /><span>{engineLabel}</span></span>
-            {powerScenario
+            {japanDiscoveryPowerLabel
+              ? <span className={tagClass} data-japan-supplier-power={supplierPowerLabel?"true":undefined} data-japan-power-unknown={unknownJapanPower||undefined} title={supplierPowerLabel?"Мощность в л.с. по данным поставщика; расчётная мощность проверяется отдельно":undefined}><PowerIcon dense={dense}/><span>{japanDiscoveryPowerLabel}</span></span>
+              : powerScenario
               ? <span className={`${tagClass} border border-amber-400/35 bg-amber-400/10 text-amber-100`} title="Предварительная мощность — можно изменить в карточке автомобиля"><PowerIcon dense={dense} /><span>{Math.round(powerScenario.horsepower)} л.с. · уточнить</span></span>
               : isElectrified && o.powerKw
               ? <span className={tagClass}><PowerIcon dense={dense} /><RecyclingPowerLabel hpLabel={o.powerHp ? `${Number(o.powerHp).toLocaleString("ru-RU", {maximumFractionDigits:2})} л.с.` : ""} info={null} kw={o.powerKw} showKw /></span>
               : o.powerHp
               ? <span className={`${tagClass} ${powerInfo?.borderline ? powerStyles.warningChip : ""}`} title={powerInfo?.reason} data-recycling-power-chip={powerInfo?.borderline || undefined}><PowerIcon dense={dense} /><RecyclingPowerLabel hpLabel={`${Number(o.powerHp).toLocaleString("ru-RU", {maximumFractionDigits:2})} л.с.`} info={powerInfo} kw={o.powerKw} showKw={Boolean(o.powerKw)} /></span>
               : japanPowerLabel ? <span className={tagClass} data-japan-supplier-power={supplierPowerLabel?"true":undefined} title={supplierPowerLabel?"Мощность в л.с. по данным поставщика; расчётная мощность проверяется отдельно":"Предварительные данные мощности; проверьте по документам"}><PowerIcon dense={dense}/><span>{japanPowerLabel}</span></span>
-              : unknownJapanPower ? <span className={tagClass} data-japan-power-unknown><PowerIcon dense={dense} /><span>Мощность не указана</span></span>
               : !isElectrified ? <span className={tagClass}><PowerIcon dense={dense} /><span>Мощность уточняется</span></span> : null}
             {powerDisplay ? <span className={tagClass} title={powerDisplay.sourceLabel}><ThirtyMinuteIcon dense={dense} /><span>{powerDisplay.thirtyMinuteLabel}</span></span> : null}
             {powerDisplay?.utilizationLabel ? <span className={tagClass} title="Мощность, по которой рассчитывается утилизационный сбор"><ThirtyMinuteIcon dense={dense} /><span>{powerDisplay.utilizationLabel}</span></span> : null}

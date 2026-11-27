@@ -43,12 +43,13 @@ try{
    if(!url.pathname.startsWith('/api/')&&!url.pathname.includes('model-directory.')){await route.continue();return;}
    requests.push(url.pathname+url.search);
    if(url.pathname==='/api/catalog/brand-counts'){
-    await route.fulfill(brandFailure?{status:503,json:{error:'japan_counts_unavailable'}}:{json:brandInvalid?{generationId:'invalid'}:{generationId:'fixture',counts:{MAZDA:12,TOYOTA:24},modelCounts:{},stale:brandStale}});return;
+    await route.fulfill(brandFailure?{status:503,json:{error:'japan_counts_unavailable'}}:{json:brandInvalid?{generationId:'invalid'}:{generationId:'fixture',counts:{MAZDA:12,TOYOTA:24,LANDROVER:1,BENZ:1,'MERCEDES BENZ':1},modelCounts:{},stale:brandStale}});return;
    }
    if(url.pathname==='/api/catalog/source-models'){
     assert.equal(url.searchParams.get('market'),'japan');
     const make=url.searchParams.get('make');
-    const models=make==='MAZDA'?[['MAZDA','MAZDA3 FASTBACK',[],12]]:make==='TOYOTA'?[['TOYOTA','COROLLA 2WD',[],24]]:[];
+    const raw=[['MAZDA','MAZDA3 FASTBACK',[],12],['TOYOTA','COROLLA 2WD',[],24],['LANDROVER','RANGE  ROVER',[],1],['BENZ','B-CLASS',[],1],['MERCEDES BENZ','B-CLASS',[],1]];
+    const models=make?raw.filter(row=>make.split(',').includes(row[0])):raw;
     await route.fulfill(modelFailure?{status:503,json:{error:'directory_unavailable'}}:{json:{version:1,brands:[],models}});return;
    }
    // These tempting general/stock names must never be queried for auctions.
@@ -70,7 +71,7 @@ try{
   await page.locator('[data-facet-value="TOYOTA"]').click();
   assert.equal(await page.getByLabel('Выбрано').textContent(),'TOYOTA / ');
   await (await openModels(page)).fill('');
-  await page.locator('[data-model-value="COROLLA"]').waitFor();
+  await page.locator('[data-model-value="COROLLA 2WD"]').waitFor();
   assert.equal(await page.locator('[data-model-value="MAZDA3 FASTBACK"]').count(),0);
   await closeModels(page);
   report.cases.push({width,name:'make-change-clears-old-models',passed:true});
@@ -106,6 +107,21 @@ try{
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
   assert.deepEqual(errors,[]);
   report.cases.push({width,name:'brand-directory-failure-and-retry',passed:true});
+  await page.getByRole('button',{name:'Сбросить',exact:true}).click();
+  await page.getByRole('button',{name:'Выбрать марки автомобилей'}).click();await page.getByPlaceholder('Найти марку').fill('Land Rover');
+  await page.locator('[data-facet-value="LANDROVER"]').click();
+  await (await openModels(page)).fill('');
+  await page.locator('[data-model-value="RANGE  ROVER"][data-model-make="LANDROVER"]').click();await closeModels(page);
+  assert.equal(await page.getByLabel('Выбрано').textContent(),'LANDROVER / RANGE  ROVER');
+  report.cases.push({width,name:'raw-source-selection',passed:true});
+  await page.getByRole('button',{name:'Сбросить',exact:true}).click();
+  const typed=await openModels(page);await typed.fill('B-CLASS');
+  await page.locator('[data-model-value="B-CLASS"][data-model-make="BENZ"]').waitFor();
+  await page.locator('[data-model-value="B-CLASS"][data-model-make="MERCEDES BENZ"]').waitFor();
+  await typed.press('Enter');
+  assert.equal(await page.getByLabel('Выбрано').textContent(),'BENZ,MERCEDES BENZ / B-CLASS');
+  assert.equal(requests.some(url=>url.includes('scope=inventory')||url.includes('model-directory.')||url.includes('stock=green')),false);
+  assert.deepEqual(errors,[]);report.cases.push({width,name:'typed-source-make-aliases',passed:true});
   await context.close();
  }
  report.passed=true;

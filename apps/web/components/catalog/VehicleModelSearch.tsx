@@ -28,6 +28,27 @@ function compact(value: unknown) {
   return clean(value).toLocaleLowerCase("ru-RU").replace(/ё/g, "е").replace(/[^\p{L}\p{N}]+/gu, "");
 }
 
+/** Auction options retain source names; display grouping cannot replace SQL values. */
+export function japanSourceModelOptions(rows:ModelSuggestion[]){
+  const exact=new Map<string,ModelSuggestion&{aliases:string[]}>();
+  for(const row of rows){
+    const key=JSON.stringify([row.make,row.model]),previous=exact.get(key);
+    exact.set(key,{...(previous||row),aliases:[...new Set([...(previous?.aliases||[]),...(row.aliases||[])])]});
+  }
+  return [...exact.values()];
+}
+
+export function japanTypedModelMake(selection:string,items:ModelSuggestion[]){
+  const makes=new Set<string>(),brands=new Set<string>();
+  for(const model of selection.split('|').filter(Boolean)){
+    const literal=items.filter(item=>item.model===model);
+    const matches=literal.length?literal:items.filter(item=>[item.model,...(item.aliases||[])].some(name=>compact(name)===compact(model)));
+    if(!matches.length)return '';
+    for(const row of matches){makes.add(row.make);brands.add(canonicalCatalogBrand(row.make));}
+  }
+  return brands.size===1&&makes.size<=20?[...makes].join(','):'';
+}
+
 function ensureCatalogFilterLayoutPolish() {
   const styleId = "ac-catalog-filter-layout-dependent-polish";
   if (!document.getElementById(styleId)) {
@@ -192,7 +213,7 @@ export function VehicleModelSearch({
   const items=useMemo(()=>{
     // A Japanese auction option must come from this source's directory or an
     // actual visible auction row. Encyclopedia/stock names are not availability.
-    if(japaneseAuctions)return groupFilterModels(mergeModelSuggestions(supplierSearches.flatMap(search=>search(searchQuery,make)),sourceSearch?.(searchQuery,make)||[],searchQuery));
+    if(japaneseAuctions)return japanSourceModelOptions([...supplierSearches.flatMap(search=>search(searchQuery,make)),...(sourceSearch?.(searchQuery,make)||[])]);
     const local=sourceSearch?mergeModelSuggestions(inventory?.(searchQuery,make)||[],mergeModelSuggestions(sourceSearch(searchQuery,make),sourceOnly?[]:directory?.(searchQuery,make)||[],searchQuery),searchQuery):contextual?mergeModelSuggestions(inventory?.(searchQuery,make)||[],directory?.(searchQuery,make)||[],searchQuery):remoteItems.map(item=>({...item,aliases:item.aliases||[]}));
     const merged=mergeModelSuggestions([...supplierSearches.flatMap(search=>search(searchQuery,make)),...(stockDirectory?.(searchQuery,make)||[])],local,searchQuery);
     return contextual?groupFilterModels(merged):merged;
@@ -223,7 +244,7 @@ export function VehicleModelSearch({
   useEffect(() => {
     if (multiple && document.activeElement !== input.current && document.activeElement !== dialogInput.current && !(mobile&&open)) setQuery(value.split("|").filter(Boolean).join(", "));
   }, [value, multiple, mobile, open]);
-  const selectedModels = value.split("|").map(clean).filter(Boolean);
+  const selectedModels = value.split("|").map(name=>japaneseAuctions?name.trim():clean(name)).filter(Boolean);
 
   useEffect(() => {
     if (!open) return;
@@ -309,9 +330,10 @@ export function VehicleModelSearch({
   }, [sourceItems, canSearch, make, open, searchQuery, contextual]);
 
   const exact = useMemo(() => {
+    if(japaneseAuctions){const literal=items.find(item=>item.model===searchQuery.trim());if(literal)return literal;}
     const requested = compact(searchQuery);
     return items.find((item) => compact(item.model) === requested || (item.aliases || []).some((alias) => compact(alias) === requested));
-  }, [items, searchQuery]);
+  }, [items, searchQuery,japaneseAuctions]);
 
   const applySelection = (item: ModelSuggestion) => {
     if (multiple) {
@@ -351,9 +373,12 @@ export function VehicleModelSearch({
   };
 
   const applyTypedModel = () => {
-    const typed=typedModelSelection(query, items, multiple, contextual);
+    const typed=japaneseAuctions?[...new Set((multiple?query.split(','):[query]).map(name=>{
+      const literal=items.find(item=>item.model===name.trim());
+      return literal?.model||typedModelSelection(name,items,false,contextual);
+    }).filter(Boolean))].join(multiple?'|':''):typedModelSelection(query, items, multiple, contextual);
     const next=mobile&&multiple?[...new Set([...selectedModels,...typed.split("|").filter(Boolean)])].join("|"):typed;
-    if(!make){const inferred=typedModelMake(next,items);if(inferred)onMakeChange?.(inferred);}
+    if(!make){const inferred=japaneseAuctions?japanTypedModelMake(next,items):typedModelMake(next,items);if(inferred)onMakeChange?.(inferred);}
     onValueChange?.(next);
     setQuery(multiple ? next.split("|").join(", ") : next);
     setOpen(false);
@@ -420,7 +445,7 @@ export function VehicleModelSearch({
         event.preventDefault();
         if (multiple) { applyTypedModel(); return; }
         if (exact) choose(exact, true);
-        else { setOpen(false); input.current?.blur(); submitRef.current?.({make, model:clean(query)}); }
+        else { setOpen(false); input.current?.blur(); submitRef.current?.({make, model:japaneseAuctions?query.trim():clean(query)}); }
       }}
       className={inputClassName}
       required={required}

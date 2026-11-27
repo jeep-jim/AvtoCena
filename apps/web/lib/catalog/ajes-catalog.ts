@@ -27,14 +27,21 @@ const sourceMakes=cache(async(table:any)=>{
  return readAjesMakeDirectory(ajesClient,await cappedAjesQuery({table}),(await headers()).get('x-real-ip')||'');
 });
 async function resolveMake(query:ReturnType<typeof ajesCatalogQuery>){
- if(query.make){try{const directory=await sourceMakes(query.table);query.make=resolveAjesMakeNames(query.make,directory.makes);}catch{/* Preserve direct queries and their saved results when the directory is unavailable. */}}
- return query;
+ if(!query.make)return {query,makeDirectoryUnavailable:false};
+ try{
+  const directory=await sourceMakes(query.table);
+  return {query:{...query,make:resolveAjesMakeNames(query.make,directory.makes)},makeDirectoryUnavailable:Boolean(directory.stale)};
+ }catch{
+  // An exact source selection can still return useful saved/live rows. A legacy
+  // display alias cannot establish zero inventory when its directory is missing.
+  return {query,makeDirectoryUnavailable:true};
+ }
 }
 const resolvedCatalogQuery=cache(async(key:string)=>{
  const params=JSON.parse(key);
  assertAjesJapanMarket(params.market);
- const query=await resolveMake(ajesCatalogQuery(params));
- return resolveAjesQueryModels(query,()=>readAjesDirectory({market:params.market,make:query.make}));
+ const {query,makeDirectoryUnavailable}=await resolveMake(ajesCatalogQuery(params));
+ return {...await resolveAjesQueryModels(query,()=>readAjesDirectory({market:params.market,make:query.make})),makeDirectoryUnavailable};
 });
 export const readAjesCountSummary=cache(async(key='{}'):Promise<AjesCountSummary>=>{
  const params=JSON.parse(key);
@@ -46,7 +53,7 @@ export const readAjesCountSummary=cache(async(key='{}'):Promise<AjesCountSummary
   return {total:0,stale:false,observedAt:new Date().toISOString(),upperBound:true};
  }
  const resolved=await resolvedCatalogQuery(key);
- if(resolved.modelDirectoryUnavailable)throw new AjesUnavailable('directory_unavailable');
+ if(resolved.modelDirectoryUnavailable||resolved.makeDirectoryUnavailable)throw new AjesUnavailable('directory_unavailable');
  const q={...resolved.query};delete q.page;delete q.pageSize;delete q.sort;
  const result=await ajesClient.read(await cappedAjesQuery({...q,aggregate:'count'}),(await headers()).get('x-real-ip')||'');
  if(!Number.isSafeInteger(result.total)||result.total<0)throw Error('ajes_count_invalid');
@@ -59,31 +66,38 @@ export const readAjesCount=cache(async(key='{}'):Promise<number> => (await readA
 const directories=new DetailReadCache<any>({maxEntries:16,maxBytes:4*1024*1024,ttlMs:30*60000,concurrency:2,shouldCache:value=>!value.stale});
 export const readAjesMakes=cache(async(key='{}')=>{
  const params=JSON.parse(key);assertAjesJapanMarket(params.market);
- const q=await resolveMake(ajesCatalogQuery(params));delete q.page;delete q.pageSize;delete q.sort;
- return readAjesMakeDirectory(ajesClient,await cappedAjesQuery(q),(await headers()).get('x-real-ip')||'');
+ const {query:q,makeDirectoryUnavailable}=await resolveMake(ajesCatalogQuery(params));delete q.page;delete q.pageSize;delete q.sort;
+ const result=await readAjesMakeDirectory(ajesClient,await cappedAjesQuery(q),(await headers()).get('x-real-ip')||'');
+ return makeDirectoryUnavailable?{...result,stale:true}:result;
 });
 export async function readAjesDirectory(params:Record<string,unknown>={}){
  assertAjesJapanMarket(params.market);
- const q=await resolveMake(ajesCatalogQuery(params));delete q.page;delete q.pageSize;delete q.sort;
+ const {query:q,makeDirectoryUnavailable}=await resolveMake(ajesCatalogQuery(params));delete q.page;delete q.pageSize;delete q.sort;
  await assertCollectionEnabled('ajes_japan_feed');
  const ip=(await headers()).get('x-real-ip')||'',key=JSON.stringify(q);
- return directories.get(key,async()=>readAjesModelDirectory(ajesClient,await cappedAjesQuery(q),ip),ip+'\0'+key) as Promise<Awaited<ReturnType<typeof readAjesModelDirectory>>>;
+ const result=await directories.get(key,async()=>{
+  const result=await readAjesModelDirectory(ajesClient,await cappedAjesQuery(q),ip);
+  return makeDirectoryUnavailable?{...result,stale:true}:result;
+ },ip+'\0'+key) as Awaited<ReturnType<typeof readAjesModelDirectory>>;
+ return makeDirectoryUnavailable?{...result,stale:true}:result;
 }
 /** Related Japanese offers use the same source names as the catalogue. Keep
  * the full records here so admission/pricing can run before public projection.
  */
 export async function readAjesResolvedPublic(params:Record<string,unknown>,options:Parameters<typeof readAjesPublic>[1]={}){
  assertAjesJapanMarket(params.market);
- const {query,modelDirectoryUnavailable}=await resolvedCatalogQuery(JSON.stringify(params));
+ const {query,modelDirectoryUnavailable,makeDirectoryUnavailable}=await resolvedCatalogQuery(JSON.stringify(params));
+ const directoryUnavailable=modelDirectoryUnavailable||makeDirectoryUnavailable;
  const result=await readAjesPublic(query,options);
- if(modelDirectoryUnavailable&&!result.items.length)throw Object.assign(new AjesUnavailable('directory_unavailable'),result.sourceReceipt?{sourceReceipt:result.sourceReceipt}:{});
- return {...result,...(modelDirectoryUnavailable?{partial:true}:{})};
+ if(directoryUnavailable&&!result.items.length)throw Object.assign(new AjesUnavailable('directory_unavailable'),result.sourceReceipt?{sourceReceipt:result.sourceReceipt}:{});
+ return {...result,...(directoryUnavailable?{partial:true}:{})};
 }
 export async function readAjesCatalogPage(params:Record<string,unknown>,measure?:(stage:string,ms:number)=>void,options:{includeCount?:boolean}={}){
  assertAjesJapanMarket(params.market);
  const resolveStarted=performance.now();
  const filter=ajesResultFilter(params);
- const {query,modelDirectoryUnavailable}=await resolvedCatalogQuery(JSON.stringify(params));
+ const {query,modelDirectoryUnavailable,makeDirectoryUnavailable}=await resolvedCatalogQuery(JSON.stringify(params));
+ const directoryUnavailable=modelDirectoryUnavailable||makeDirectoryUnavailable;
  measure?.('query-resolution',performance.now()-resolveStarted);
  const startedAt=Date.now();
  const countStarted=performance.now();
@@ -101,11 +115,11 @@ export async function readAjesCatalogPage(params:Record<string,unknown>,measure?
    throw error;
   });
   if(received.sourceReceipt)sourceReceipts.push(received.sourceReceipt);
-  if(modelDirectoryUnavailable&&!received.items.length)throw Object.assign(new AjesUnavailable('directory_unavailable'),received.sourceReceipt?{sourceReceipt:received.sourceReceipt}:{});
+  if(directoryUnavailable&&!received.items.length)throw Object.assign(new AjesUnavailable('directory_unavailable'),received.sourceReceipt?{sourceReceipt:received.sourceReceipt}:{});
   // Apply local/manual and supplier discovery filters before delivered-price previews.
   // Non-matching cars never enter the expensive customs/management pipeline.
   const candidates=filter.powerFilter?received.items.filter(filter.matchesPower):received.items;
-  const page={...received,items:candidates,...(modelDirectoryUnavailable?{partial:true}:{})};
+  const page={...received,items:candidates,...(directoryUnavailable?{partial:true}:{})};
   const pricingStarted=performance.now();
   let priced=page.items;
   if(filter.priceFilter)priced=await applyActiveBusinessPricingBatch(page.items);
