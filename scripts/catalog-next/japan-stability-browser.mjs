@@ -17,6 +17,27 @@ const sourceModelMatches = (source, selected) => compact(source) === compact(sel
 export const JAPAN_STABILITY_GATES = Object.freeze(['japanModelSelectionPassed', 'japanCombinedFiltersPassed',
   'japanRelatedCardsPassed', 'japanVehiclePolicyPassed']);
 export const JAPAN_STABILITY_MODELS_API = '/api/catalog/source-models?market=japan&make=Mazda';
+export const JAPAN_LEGACY_MAZDA_THREE_PAGES = Object.freeze({
+  literal: ORIGIN + '/cars/japan?' + new URLSearchParams({make: 'Mazda', model: '3', city: CITY}),
+  canonical: ORIGIN + '/cars/japan/Mazda/3?' + new URLSearchParams({city: CITY}),
+});
+
+/** The controls preserve the selected source spellings in the canonical path. */
+export function japanStabilitySelectionUrl(value, make, model) {
+  if (!name(make) || model !== undefined && !name(model)) return false;
+  try {
+    const url = new URL(value);
+    const expected = ORIGIN + '/cars/japan/' + encodeURIComponent(make)
+      + (model === undefined ? '' : '/' + encodeURIComponent(model)) + '?' + new URLSearchParams({city: CITY});
+    return url.href === expected;
+  } catch { return false; }
+}
+
+export function japanStabilityChinaFamilyPage(generationId) {
+  need(/^gen_china_[0-9]+_[0-9]+$/.test(generationId), 'china_generation');
+  return ORIGIN + '/cars/china/Mercedes-Benz/B-Class?'
+    + new URLSearchParams({city: CITY, preparedCut: generationId});
+}
 
 export function japanStabilitySearchApi(kind, model) {
   need(['model', 'combined', 'related'].includes(kind), 'query_kind');
@@ -108,6 +129,10 @@ export function verifyJapanStabilityCombinedRows(payload) {
 }
 
 const auctionRow = row => row?.market === 'japan' && /^ajes-stats-[A-Za-z0-9_-]{1,64}$/.test(row.id || '');
+// AJ retains its raw make. These two exact spellings are explicit aliases of
+// Mercedes-Benz in runtime brands.ts; no other brand or family is inferred.
+const relatedMercedesMake = value => sameMake(value, 'Mercedes-Benz')
+  || name(value) && /^(?:benz|mercedes)$/i.test(value);
 // filterGreenCorner calls matchesCatalogModel: Mercedes discovery compares the
 // complete B-Class tokens and permits a trailing trim, not another class or
 // a partial token such as B-Classical. Mercedes has no discovery-name rewrite.
@@ -151,7 +176,7 @@ export function verifyJapanStabilityRelated(payload, status, currentId) {
   const rows = groups[0].items;
   need(rows.some(auctionRow) && rows.every(row => (auctionRow(row) || validJapanStabilityGreenStock(row)
     && greenFamilyMatches(row.model,payload.familyModel))
-    && sameMake(row.make, 'Mercedes-Benz') && name(row.model))
+    && relatedMercedesMake(row.make) && name(row.model))
     && new Set(rows.map(row => row.id)).size === rows.length, 'related_rows');
   return rows;
 }
@@ -170,42 +195,37 @@ async function visibleCardsMatch(page, root, items) {
 }
 
 export async function runJapanLegacyMazdaThreeBrowser({context, directory, read, capture, onStage, onPage,
-  verifyPage, verifyFullPage}) {
+  verifyPage, verifyFullPage, navigateLegacyMazdaThree}) {
   onStage('stability_legacy_mazda_three');
   const view = await context.newPage(); onPage(view); let errors = 0;
   view.on('pageerror', () => { errors++; });
   await view.setViewportSize({width: 1440, height: 1000});
-  const query = new URLSearchParams({make: 'Mazda', model: '3', city: CITY});
-  const response = await view.goto(ORIGIN + '/cars/japan?' + query,
-    {waitUntil: 'domcontentloaded', timeout: 90_000});
+  const {response, redirectProof} = await navigateLegacyMazdaThree(view);
   need(response?.status() === 200, 'legacy_mazda_three_page_http');
+  need(view.url() === JAPAN_LEGACY_MAZDA_THREE_PAGES.canonical, 'legacy_mazda_three_url');
   const result = await read(japanStabilitySearchApi('model', '3'));
   const observation = verifyPage(result.data, result.status);
   verifyFullPage(result.data);
   const proof = verifyJapanLegacyMazdaThreeRows(result.data, directory);
-  const url = new URL(view.url());
-  const canonicalUrl = ORIGIN + '/cars/japan/Mazda/3?' + new URLSearchParams({city: CITY});
-  const oldUrl = ORIGIN + '/cars/japan?' + query;
-  need(url.href === canonicalUrl || url.href === oldUrl, 'legacy_mazda_three_url');
   await visibleCardsMatch(view, view.locator('main.ac-ajes-catalog'), result.data.items);
   need(errors === 0, 'legacy_mazda_three_javascript');
   await capture(view, 'japan-legacy-mazda-three-desktop');
   await view.close(); onPage(null);
   return {page: result.data, proof: {...observation, ...proof, literalBookmarkChecked: true,
-    uiMatchesApi: true, cityPreserved: true, pageErrors: errors}};
+    canonicalRedirect: redirectProof, uiMatchesApi: true, cityPreserved: true, pageErrors: errors}};
 }
 
 /** Ordinary, bounded public journeys supplement the unchanged Japan freshness,
  * power, pagination, price and neighbor-preservation acceptance. */
 export async function runJapanStabilityBrowser({context, report, generationId, read, capture, onStage, onPage,
-  verifyPage, verifyFullPage, verifyPowerPage, verifyVehiclePolicy}) {
+  verifyPage, verifyFullPage, verifyPowerPage, verifyVehiclePolicy, navigateLegacyMazdaThree}) {
   const pages = [];
   onStage('stability_source_models');
   const directoryResponse = await read(JAPAN_STABILITY_MODELS_API);
   const directory = checkedJapanStabilityDirectory(directoryResponse.data, directoryResponse.status);
 
   const legacy = await runJapanLegacyMazdaThreeBrowser({context, directory, read, capture, onStage, onPage,
-    verifyPage, verifyFullPage});
+    verifyPage, verifyFullPage, navigateLegacyMazdaThree});
   pages.push(legacy.page); report.checks.legacyModelSelection = legacy.proof;
 
   onStage('stability_model_selection');
@@ -217,8 +237,11 @@ export async function runJapanStabilityBrowser({context, report, generationId, r
   need(response?.status() === 200, 'model_page_http');
   const brand = view.locator('button[aria-label="Выбрать марки автомобилей"]:visible');
   await brand.click();
-  await view.locator('button[data-facet-value="Mazda" i]:visible').click();
-  await view.waitForURL(url => sameMake(url.searchParams.get('make'), 'Mazda'), {timeout: 60_000});
+  const brandOption = view.locator('button[data-facet-value="Mazda" i]:visible');
+  const sourceMake = await brandOption.getAttribute('data-facet-value');
+  need(sameMake(sourceMake, 'Mazda'), 'make_option_identity');
+  await brandOption.click();
+  await view.waitForURL(url => japanStabilitySelectionUrl(url.href, sourceMake), {timeout: 60_000});
   if (await brand.getAttribute('aria-expanded') === 'true') await brand.click();
   const input = view.locator('input[aria-label="Модель автомобиля"]:visible');
   await input.click();
@@ -232,8 +255,7 @@ export async function runJapanStabilityBrowser({context, report, generationId, r
   const optionIndex = options.findIndex(row => row.model === selected.model && row.make === selected.make);
   await view.locator('button[data-model-value]:visible').nth(optionIndex).click();
   await view.getByRole('button', {name: 'Закрыть список моделей', exact: true}).click();
-  await view.waitForURL(url => sameMake(url.searchParams.get('make'), 'Mazda')
-    && url.searchParams.get('model') === selected.model, {timeout: 60_000});
+  await view.waitForURL(url => japanStabilitySelectionUrl(url.href, sourceMake, selected.model), {timeout: 60_000});
   need(new URL(view.url()).searchParams.get('city') === CITY, 'model_city');
   const modelResponse = await read(japanStabilitySearchApi('model', selected.model));
   const modelObservation = verifyPage(modelResponse.data, modelResponse.status);
@@ -273,12 +295,12 @@ export async function runJapanStabilityBrowser({context, report, generationId, r
   await view.close(); onPage(null);
 
   onStage('stability_other_market_detail');
-  need(/^gen_china_[0-9]+_[0-9]+$/.test(generationId), 'china_generation');
+  const chinaPage = japanStabilityChinaFamilyPage(generationId);
   view = await context.newPage(); onPage(view); errors = 0; view.on('pageerror', () => { errors++; });
   await view.setViewportSize({width: 1440, height: 1000});
-  response = await view.goto(ORIGIN + '/cars/china?' + new URLSearchParams({make: 'Mercedes-Benz', model: 'B-Class',
-    city: CITY, preparedCut: generationId}), {waitUntil: 'domcontentloaded', timeout: 90_000});
+  response = await view.goto(chinaPage, {waitUntil: 'domcontentloaded', timeout: 90_000});
   need(response?.status() === 200, 'china_page_http');
+  need(view.url() === chinaPage, 'china_url');
   const sourceCard = view.locator(CARD).filter({hasText: /B-Class/i}).first();
   await sourceCard.waitFor({state: 'visible', timeout: 60_000});
   const link = sourceCard.locator('a[href*="/cars/offer/"]').first();

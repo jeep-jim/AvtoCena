@@ -1,0 +1,1656 @@
+{
+  "version": 1,
+  "kind": "japan-stability-canonical-followup",
+  "checkpointDate": "2026-11-27",
+  "timezone": "Asia/Krasnoyarsk",
+  "acceptedCi": {
+    "controllerSha": "193fc667908a4b4aca5274688a6ae9584fc79f95",
+    "runId": 45991063903,
+    "jobId": 140478710004,
+    "runtimeSha": "9a8b2f1d2a3c78bdf00fd820f1d080de32980f15",
+    "runtimeTree": "92bcf677f01008338997de8e46c5a00c10dc2094",
+    "controllerPassed": 1495,
+    "nativePassed": 532,
+    "typecheck": "passed",
+    "pagination": {
+      "version": 2,
+      "kind": "japan-pagination24-browser-v2",
+      "passed": true,
+      "caseCount": 12,
+      "widths": [
+        390,
+        1440
+      ],
+      "checks": {
+        "refill24": true,
+        "numberedContinuation": true,
+        "appendNoDuplicatesOrGaps": true,
+        "finiteExhaustion": true,
+        "unknownPowerPreserved": true,
+        "failureHonesty": true,
+        "cursorBinding": true,
+        "warningRemoved": true,
+        "sourcePageSize24": true,
+        "neighborPaginationPreserved": true,
+        "noExternalRequests": true,
+        "knownBeforeUnknown": true,
+        "boundedKnownContinuation": true,
+        "evidenceEpochReset": true
+      }
+    },
+    "directory": {
+      "passed": true,
+      "scope": "Actual Japan brand/model controls with bounded local source fixtures; no production or supplier calls",
+      "cases": [
+        {
+          "width": 390,
+          "name": "source-options-only",
+          "passed": true
+        },
+        {
+          "width": 390,
+          "name": "make-change-clears-old-models",
+          "passed": true
+        },
+        {
+          "width": 390,
+          "name": "model-directory-failure-and-retry",
+          "passed": true
+        },
+        {
+          "width": 390,
+          "name": "brand-directory-failure-and-retry",
+          "passed": true
+        },
+        {
+          "width": 390,
+          "name": "raw-source-selection",
+          "passed": true
+        },
+        {
+          "width": 390,
+          "name": "typed-source-make-aliases",
+          "passed": true
+        },
+        {
+          "width": 1440,
+          "name": "source-options-only",
+          "passed": true
+        },
+        {
+          "width": 1440,
+          "name": "make-change-clears-old-models",
+          "passed": true
+        },
+        {
+          "width": 1440,
+          "name": "model-directory-failure-and-retry",
+          "passed": true
+        },
+        {
+          "width": 1440,
+          "name": "brand-directory-failure-and-retry",
+          "passed": true
+        },
+        {
+          "width": 1440,
+          "name": "raw-source-selection",
+          "passed": true
+        },
+        {
+          "width": 1440,
+          "name": "typed-source-make-aliases",
+          "passed": true
+        }
+      ]
+    },
+    "modelSuggestionsPassed": true,
+    "compatibilityPatchApplied": false
+  },
+  "release": {
+    "runId": 45992050062,
+    "jobId": 140482044218,
+    "approvedController": "193fc667908a4b4aca5274688a6ae9584fc79f95",
+    "marker": "9d33ca89c9ed8ff0b1a4ff86a922a69b8c6aa900",
+    "conclusion": "failure",
+    "jobCompletedAt": "2026-11-27T12:06:10Z",
+    "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/45992050062"
+  },
+  "artifact": {
+    "id": 15195533231,
+    "name": "china-photo-code-release-result",
+    "bytes": 7623145,
+    "sha256": "b3bb8ce40a6c92491a36f160958db0c7b8bfcc7309ada9e77989da2de144d833",
+    "zipSizeHashAndCrcVerified": true,
+    "reports": {
+      "catalog-next-japan-browser-report.json": {
+        "sha256": "f0910430f047662047cb14c7c186f7f8757f88b9c29e9b0c19e003b356a9318a",
+        "bytes": 37320,
+        "report": {
+          "version": 1,
+          "kind": "catalog-japan-browser-v1",
+          "codeScope": "catalog-japan-stability-v1",
+          "release": "9a8b2f1d2a3c78bdf00fd820f1d080de32980f15",
+          "nonce": "6a0e0289cae823506b8e95f1dbff3922",
+          "checkedAt": "2026-11-27T12:03:45.296Z",
+          "passed": false,
+          "japanFreshnessPassed": true,
+          "japanPowerApiPassed": true,
+          "japanUiPassed": true,
+          "japanVisibilityPassed": true,
+          "readOnlyBrowserFence": true,
+          "productionMutations": 0,
+          "directSupplierApiRequests": 0,
+          "supplierImageRequests": 228,
+          "explicitJapanApiRequests": 8,
+          "checks": {
+            "health": [
+              {
+                "stage": "before",
+                "requestedAt": "2026-11-27T12:03:45.826Z",
+                "receivedAt": "2026-11-27T12:03:46.626Z",
+                "durationMs": 800,
+                "responseHeaders": {
+                  "omitted": []
+                },
+                "status": 200,
+                "ok": true,
+                "releaseSha": "9a8b2f1d2a3c78bdf00fd820f1d080de32980f15",
+                "calculationVersion": "4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90"
+              }
+            ],
+            "freshness": {
+              "observations": [
+                {
+                  "status": 200,
+                  "shown": 24,
+                  "received": 24,
+                  "observedAt": "2026-11-27T12:03:01.180Z",
+                  "ageSeconds": 46.156,
+                  "stale": false,
+                  "partial": false,
+                  "total": null,
+                  "hasMore": true,
+                  "durationMs": 707,
+                  "sourceObservedDuringRequest": false
+                },
+                {
+                  "status": 200,
+                  "shown": 24,
+                  "received": 24,
+                  "observedAt": "2026-11-27T12:03:01.180Z",
+                  "ageSeconds": 46.557,
+                  "stale": false,
+                  "partial": false,
+                  "total": null,
+                  "hasMore": true,
+                  "durationMs": 400,
+                  "sourceObservedDuringRequest": false
+                }
+              ],
+              "sameObservation": true,
+              "sameRows": true
+            },
+            "responses": [
+              {
+                "stage": "plain_first",
+                "status": 200,
+                "ok": true,
+                "shown": 24,
+                "received": 24,
+                "observedAt": "2026-11-27T12:03:01.180Z",
+                "stale": false,
+                "partial": false,
+                "interrupted": false,
+                "scanLimited": false,
+                "hasMore": true,
+                "total": null,
+                "requestedAt": "2026-11-27T12:03:46.627Z",
+                "receivedAt": "2026-11-27T12:03:47.334Z",
+                "durationMs": 707,
+                "responseHeaders": {
+                  "cacheControl": "private, max-age=15, stale-while-revalidate=30",
+                  "omitted": []
+                },
+                "sourceReadEvidence": {
+                  "status": "missing",
+                  "catalogReadReceipt": null,
+                  "runtimeMatchesExpected": null,
+                  "sourceReadReceipts": [],
+                  "sourceReadReceiptsLimited": true,
+                  "omittedReceipts": null,
+                  "omissions": [
+                    "catalog_receipt_missing"
+                  ]
+                },
+                "pageReadEvidence": {
+                  "status": "recorded",
+                  "receipts": [
+                    {
+                      "version": 1,
+                      "queryHash": "7f7b34136741cb10d915f31a7c897911d2cc043923aa38faa40a2af6c8bf7398",
+                      "table": "stats",
+                      "kind": "list",
+                      "page": 1,
+                      "pageSize": 24,
+                      "requestId": "84411aad-0ac5-40ef-aa4d-300918817b85",
+                      "startedAt": "2026-11-27T12:03:46.734Z",
+                      "finishedAt": "2026-11-27T12:03:46.798Z",
+                      "stage": "access",
+                      "supplierAttempted": false,
+                      "outcome": "fresh",
+                      "observedAt": "2026-11-27T12:03:01.180Z"
+                    },
+                    {
+                      "version": 1,
+                      "queryHash": "f368b3edba33f245754f7c58a85473de35d87025afba14ddc8a86f4fa9db23c2",
+                      "table": "stats",
+                      "kind": "list",
+                      "page": 2,
+                      "pageSize": 24,
+                      "requestId": "869a62f5-2ad5-4140-a78f-a58c9285d4b4",
+                      "startedAt": "2026-11-27T12:03:46.804Z",
+                      "finishedAt": "2026-11-27T12:03:46.863Z",
+                      "stage": "access",
+                      "supplierAttempted": false,
+                      "outcome": "fresh",
+                      "observedAt": "2026-11-27T12:03:05.515Z"
+                    }
+                  ],
+                  "received": 2,
+                  "omitted": 0,
+                  "limited": false
+                }
+              },
+              {
+                "stage": "plain_warm",
+                "status": 200,
+                "ok": true,
+                "shown": 24,
+                "received": 24,
+                "observedAt": "2026-11-27T12:03:01.180Z",
+                "stale": false,
+                "partial": false,
+                "interrupted": false,
+                "scanLimited": false,
+                "hasMore": true,
+                "total": null,
+                "requestedAt": "2026-11-27T12:03:47.336Z",
+                "receivedAt": "2026-11-27T12:03:47.736Z",
+                "durationMs": 400,
+                "responseHeaders": {
+                  "cacheControl": "private, max-age=15, stale-while-revalidate=30",
+                  "omitted": []
+                },
+                "sourceReadEvidence": {
+                  "status": "missing",
+                  "catalogReadReceipt": null,
+                  "runtimeMatchesExpected": null,
+                  "sourceReadReceipts": [],
+                  "sourceReadReceiptsLimited": true,
+                  "omittedReceipts": null,
+                  "omissions": [
+                    "catalog_receipt_missing"
+                  ]
+                },
+                "pageReadEvidence": {
+                  "status": "recorded",
+                  "receipts": [
+                    {
+                      "version": 1,
+                      "queryHash": "7f7b34136741cb10d915f31a7c897911d2cc043923aa38faa40a2af6c8bf7398",
+                      "table": "stats",
+                      "kind": "list",
+                      "page": 1,
+                      "pageSize": 24,
+                      "requestId": "841f81a8-8d3b-4750-8b7d-7292faeff88a",
+                      "startedAt": "2026-11-27T12:03:47.503Z",
+                      "finishedAt": "2026-11-27T12:03:47.574Z",
+                      "stage": "access",
+                      "supplierAttempted": false,
+                      "outcome": "fresh",
+                      "observedAt": "2026-11-27T12:03:01.180Z"
+                    },
+                    {
+                      "version": 1,
+                      "queryHash": "f368b3edba33f245754f7c58a85473de35d87025afba14ddc8a86f4fa9db23c2",
+                      "table": "stats",
+                      "kind": "list",
+                      "page": 2,
+                      "pageSize": 24,
+                      "requestId": "cb7d7543-c50c-42ff-8b6e-52045864816a",
+                      "startedAt": "2026-11-27T12:03:47.579Z",
+                      "finishedAt": "2026-11-27T12:03:47.642Z",
+                      "stage": "access",
+                      "supplierAttempted": false,
+                      "outcome": "fresh",
+                      "observedAt": "2026-11-27T12:03:05.515Z"
+                    }
+                  ],
+                  "received": 2,
+                  "omitted": 0,
+                  "limited": false
+                }
+              },
+              {
+                "stage": "power_api",
+                "status": 200,
+                "ok": true,
+                "shown": 24,
+                "received": 24,
+                "observedAt": "2026-11-27T12:03:01.180Z",
+                "stale": false,
+                "partial": false,
+                "interrupted": false,
+                "scanLimited": false,
+                "hasMore": true,
+                "total": null,
+                "requestedAt": "2026-11-27T12:03:47.737Z",
+                "receivedAt": "2026-11-27T12:03:48.016Z",
+                "durationMs": 279,
+                "responseHeaders": {
+                  "cacheControl": "private, max-age=15, stale-while-revalidate=30",
+                  "omitted": []
+                },
+                "sourceReadEvidence": {
+                  "status": "missing",
+                  "catalogReadReceipt": null,
+                  "runtimeMatchesExpected": null,
+                  "sourceReadReceipts": [],
+                  "sourceReadReceiptsLimited": true,
+                  "omittedReceipts": null,
+                  "omissions": [
+                    "catalog_receipt_missing"
+                  ]
+                },
+                "pageReadEvidence": {
+                  "status": "recorded",
+                  "receipts": [
+                    {
+                      "version": 1,
+                      "queryHash": "7f7b34136741cb10d915f31a7c897911d2cc043923aa38faa40a2af6c8bf7398",
+                      "table": "stats",
+                      "kind": "list",
+                      "page": 1,
+                      "pageSize": 24,
+                      "requestId": "80e9b714-60ec-4302-8521-57349b8c76ae",
+                      "startedAt": "2026-11-27T12:03:47.835Z",
+                      "finishedAt": "2026-11-27T12:03:47.894Z",
+                      "stage": "access",
+                      "supplierAttempted": false,
+                      "outcome": "fresh",
+                      "observedAt": "2026-11-27T12:03:01.180Z"
+                    },
+                    {
+                      "version": 1,
+                      "queryHash": "f368b3edba33f245754f7c58a85473de35d87025afba14ddc8a86f4fa9db23c2",
+                      "table": "stats",
+                      "kind": "list",
+                      "page": 2,
+                      "pageSize": 24,
+                      "requestId": "91b129f9-3b3f-4464-b53d-0aaf12bf004b",
+                      "startedAt": "2026-11-27T12:03:47.900Z",
+                      "finishedAt": "2026-11-27T12:03:47.920Z",
+                      "stage": "access",
+                      "supplierAttempted": false,
+                      "outcome": "fresh",
+                      "observedAt": "2026-11-27T12:03:05.515Z"
+                    }
+                  ],
+                  "received": 2,
+                  "omitted": 0,
+                  "limited": false
+                }
+              },
+              {
+                "stage": "pagination_plain_page_two",
+                "status": 200,
+                "ok": true,
+                "shown": 24,
+                "received": 24,
+                "observedAt": "2026-11-27T12:03:05.515Z",
+                "stale": false,
+                "partial": false,
+                "interrupted": false,
+                "scanLimited": false,
+                "hasMore": true,
+                "total": null,
+                "requestedAt": "2026-11-27T12:03:57.876Z",
+                "receivedAt": "2026-11-27T12:03:58.601Z",
+                "durationMs": 725,
+                "responseHeaders": {
+                  "cacheControl": "private, max-age=15, stale-while-revalidate=30",
+                  "omitted": []
+                },
+                "sourceReadEvidence": {
+                  "status": "missing",
+                  "catalogReadReceipt": null,
+                  "runtimeMatchesExpected": null,
+                  "sourceReadReceipts": [],
+                  "sourceReadReceiptsLimited": true,
+                  "omittedReceipts": null,
+                  "omissions": [
+                    "catalog_receipt_missing"
+                  ]
+                },
+                "pageReadEvidence": {
+                  "status": "recorded",
+                  "receipts": [
+                    {
+                      "version": 1,
+                      "queryHash": "f368b3edba33f245754f7c58a85473de35d87025afba14ddc8a86f4fa9db23c2",
+                      "table": "stats",
+                      "kind": "list",
+                      "page": 2,
+                      "pageSize": 24,
+                      "requestId": "549b144b-803d-4995-85d0-4ffc0bcab345",
+                      "startedAt": "2026-11-27T12:03:57.979Z",
+                      "finishedAt": "2026-11-27T12:03:58.042Z",
+                      "stage": "access",
+                      "supplierAttempted": false,
+                      "outcome": "fresh",
+                      "observedAt": "2026-11-27T12:03:05.515Z"
+                    },
+                    {
+                      "version": 1,
+                      "queryHash": "aee6a316fe78f521f28c7ad9d23f72d95303ba0aa5363c20132532dc1e64c3d4",
+                      "table": "stats",
+                      "kind": "list",
+                      "page": 3,
+                      "pageSize": 24,
+                      "requestId": "780b5a7f-8d0a-4d83-8bfe-24b2a7303b03",
+                      "startedAt": "2026-11-27T12:03:58.048Z",
+                      "finishedAt": "2026-11-27T12:03:58.152Z",
+                      "stage": "access",
+                      "supplierAttempted": false,
+                      "outcome": "fresh",
+                      "observedAt": "2026-11-27T12:03:55.565Z"
+                    }
+                  ],
+                  "received": 2,
+                  "omitted": 0,
+                  "limited": false
+                }
+              },
+              {
+                "stage": "pagination_power_page_two",
+                "status": 200,
+                "ok": true,
+                "shown": 24,
+                "received": 24,
+                "observedAt": "2026-11-27T12:03:05.515Z",
+                "stale": false,
+                "partial": false,
+                "interrupted": false,
+                "scanLimited": false,
+                "hasMore": true,
+                "total": null,
+                "requestedAt": "2026-11-27T12:04:09.584Z",
+                "receivedAt": "2026-11-27T12:04:10.310Z",
+                "durationMs": 726,
+                "responseHeaders": {
+                  "cacheControl": "private, max-age=15, stale-while-revalidate=30",
+                  "omitted": []
+                },
+                "sourceReadEvidence": {
+                  "status": "missing",
+                  "catalogReadReceipt": null,
+                  "runtimeMatchesExpected": null,
+                  "sourceReadReceipts": [],
+                  "sourceReadReceiptsLimited": true,
+                  "omittedReceipts": null,
+                  "omissions": [
+                    "catalog_receipt_missing"
+                  ]
+                },
+                "pageReadEvidence": {
+                  "status": "recorded",
+                  "receipts": [
+                    {
+                      "version": 1,
+                      "queryHash": "f368b3edba33f245754f7c58a85473de35d87025afba14ddc8a86f4fa9db23c2",
+                      "table": "stats",
+                      "kind": "list",
+                      "page": 2,
+                      "pageSize": 24,
+                      "requestId": "b8e2fd44-2527-4b76-8eaf-c2388acc292d",
+                      "startedAt": "2026-11-27T12:04:09.686Z",
+                      "finishedAt": "2026-11-27T12:04:09.704Z",
+                      "stage": "access",
+                      "supplierAttempted": false,
+                      "outcome": "fresh",
+                      "observedAt": "2026-11-27T12:03:05.515Z"
+                    },
+                    {
+                      "version": 1,
+                      "queryHash": "aee6a316fe78f521f28c7ad9d23f72d95303ba0aa5363c20132532dc1e64c3d4",
+                      "table": "stats",
+                      "kind": "list",
+                      "page": 3,
+                      "pageSize": 24,
+                      "requestId": "08b1da5e-2436-4eff-8e51-024bdf541d34",
+                      "startedAt": "2026-11-27T12:04:09.709Z",
+                      "finishedAt": "2026-11-27T12:04:09.770Z",
+                      "stage": "access",
+                      "supplierAttempted": false,
+                      "outcome": "fresh",
+                      "observedAt": "2026-11-27T12:03:55.565Z"
+                    },
+                    {
+                      "version": 1,
+                      "queryHash": "bfee32e2dd377f7f6f714ce86a15d81fc4b2cc819c17449f686a4a075c3d7c18",
+                      "table": "stats",
+                      "kind": "list",
+                      "page": 4,
+                      "pageSize": 24,
+                      "requestId": "d2d02b89-ab1f-4f5a-805d-4caa534f7d37",
+                      "startedAt": "2026-11-27T12:04:09.775Z",
+                      "finishedAt": "2026-11-27T12:04:09.838Z",
+                      "stage": "access",
+                      "supplierAttempted": false,
+                      "outcome": "fresh",
+                      "observedAt": "2026-11-27T12:04:08.906Z"
+                    }
+                  ],
+                  "received": 3,
+                  "omitted": 0,
+                  "limited": false
+                }
+              },
+              {
+                "stage": "completion_petrol_power_toggle",
+                "status": 200,
+                "ok": true,
+                "shown": 24,
+                "received": 24,
+                "observedAt": "2026-11-27T12:04:33.641Z",
+                "stale": false,
+                "partial": false,
+                "interrupted": false,
+                "scanLimited": false,
+                "hasMore": true,
+                "total": null,
+                "requestedAt": "2026-11-27T12:04:49.208Z",
+                "receivedAt": "2026-11-27T12:04:49.992Z",
+                "durationMs": 784,
+                "responseHeaders": {
+                  "cacheControl": "private, max-age=15, stale-while-revalidate=30",
+                  "omitted": []
+                },
+                "sourceReadEvidence": {
+                  "status": "missing",
+                  "catalogReadReceipt": null,
+                  "runtimeMatchesExpected": null,
+                  "sourceReadReceipts": [],
+                  "sourceReadReceiptsLimited": true,
+                  "omittedReceipts": null,
+                  "omissions": [
+                    "catalog_receipt_missing"
+                  ]
+                },
+                "pageReadEvidence": {
+                  "status": "recorded",
+                  "receipts": [
+                    {
+                      "version": 1,
+                      "queryHash": "476a0f495076cb25f7d5ba3029b4c6e0b3e0860e8483deb66b60181ec33928c9",
+                      "table": "stats",
+                      "kind": "list",
+                      "page": 1,
+                      "pageSize": 24,
+                      "requestId": "1f207ed2-ce9f-4fa8-990e-7d60732a0abb",
+                      "startedAt": "2026-11-27T12:04:49.312Z",
+                      "finishedAt": "2026-11-27T12:04:49.331Z",
+                      "stage": "access",
+                      "supplierAttempted": false,
+                      "outcome": "fresh",
+                      "observedAt": "2026-11-27T12:04:33.641Z"
+                    },
+                    {
+                      "version": 1,
+                      "queryHash": "49e7d5c7d454e65bf92fd3d89e7b21d163ce96df5f1fb97fdc64b62589e04526",
+                      "table": "stats",
+                      "kind": "list",
+                      "page": 2,
+                      "pageSize": 24,
+                      "requestId": "0134c5d8-83ec-4206-9016-48a51bc457e3",
+                      "startedAt": "2026-11-27T12:04:49.360Z",
+                      "finishedAt": "2026-11-27T12:04:49.469Z",
+                      "stage": "access",
+                      "supplierAttempted": false,
+                      "outcome": "fresh",
+                      "observedAt": "2026-11-27T12:04:37.653Z"
+                    },
+                    {
+                      "version": 1,
+                      "queryHash": "3df4b5dedc619a942b84870b7342d5c1b1aaf40340e87da670afa9ff48afc82e",
+                      "table": "stats",
+                      "kind": "list",
+                      "page": 3,
+                      "pageSize": 24,
+                      "requestId": "1321151c-144f-4057-a631-7486df59ffd4",
+                      "startedAt": "2026-11-27T12:04:49.475Z",
+                      "finishedAt": "2026-11-27T12:04:49.536Z",
+                      "stage": "access",
+                      "supplierAttempted": false,
+                      "outcome": "fresh",
+                      "observedAt": "2026-11-27T12:04:48.524Z"
+                    }
+                  ],
+                  "received": 3,
+                  "omitted": 0,
+                  "limited": false
+                }
+              },
+              {
+                "stage": "completion_petrol_power_page_two",
+                "status": 200,
+                "ok": true,
+                "shown": 24,
+                "received": 24,
+                "observedAt": "2026-11-27T12:04:48.524Z",
+                "stale": false,
+                "partial": false,
+                "interrupted": false,
+                "scanLimited": false,
+                "hasMore": true,
+                "total": null,
+                "requestedAt": "2026-11-27T12:04:59.840Z",
+                "receivedAt": "2026-11-27T12:05:00.707Z",
+                "durationMs": 867,
+                "responseHeaders": {
+                  "cacheControl": "private, max-age=15, stale-while-revalidate=30",
+                  "omitted": []
+                },
+                "sourceReadEvidence": {
+                  "status": "missing",
+                  "catalogReadReceipt": null,
+                  "runtimeMatchesExpected": null,
+                  "sourceReadReceipts": [],
+                  "sourceReadReceiptsLimited": true,
+                  "omittedReceipts": null,
+                  "omissions": [
+                    "catalog_receipt_missing"
+                  ]
+                },
+                "pageReadEvidence": {
+                  "status": "recorded",
+                  "receipts": [
+                    {
+                      "version": 1,
+                      "queryHash": "3df4b5dedc619a942b84870b7342d5c1b1aaf40340e87da670afa9ff48afc82e",
+                      "table": "stats",
+                      "kind": "list",
+                      "page": 3,
+                      "pageSize": 24,
+                      "requestId": "fb4bbf40-ed4e-4795-9cd8-67da320ec864",
+                      "startedAt": "2026-11-27T12:04:59.968Z",
+                      "finishedAt": "2026-11-27T12:05:00.079Z",
+                      "stage": "access",
+                      "supplierAttempted": false,
+                      "outcome": "fresh",
+                      "observedAt": "2026-11-27T12:04:48.524Z"
+                    },
+                    {
+                      "version": 1,
+                      "queryHash": "5737db6b0e3784cb4334b07cd5653b6ac2d248ce757407a2b9e1a06200398eba",
+                      "table": "stats",
+                      "kind": "list",
+                      "page": 4,
+                      "pageSize": 24,
+                      "requestId": "e27ffa7d-4edd-4fda-8c52-f9f9e6aa5470",
+                      "startedAt": "2026-11-27T12:05:00.083Z",
+                      "finishedAt": "2026-11-27T12:05:00.144Z",
+                      "stage": "access",
+                      "supplierAttempted": false,
+                      "outcome": "fresh",
+                      "observedAt": "2026-11-27T12:04:54.443Z"
+                    },
+                    {
+                      "version": 1,
+                      "queryHash": "d4685996e9aafca6ec85f41edb2edaa53d9dc330994e6337c524b8cad12c0025",
+                      "table": "stats",
+                      "kind": "list",
+                      "page": 5,
+                      "pageSize": 24,
+                      "requestId": "2d4fd545-337a-409b-9b71-d388fcdd7cb9",
+                      "startedAt": "2026-11-27T12:05:00.149Z",
+                      "finishedAt": "2026-11-27T12:05:00.211Z",
+                      "stage": "access",
+                      "supplierAttempted": false,
+                      "outcome": "fresh",
+                      "observedAt": "2026-11-27T12:04:58.581Z"
+                    }
+                  ],
+                  "received": 3,
+                  "omitted": 0,
+                  "limited": false
+                }
+              },
+              {
+                "stage": "stability_source_models",
+                "status": 200,
+                "ok": null,
+                "shown": null,
+                "received": null,
+                "observedAt": null,
+                "stale": false,
+                "partial": null,
+                "interrupted": null,
+                "scanLimited": null,
+                "hasMore": null,
+                "total": null,
+                "requestedAt": "2026-11-27T12:05:03.951Z",
+                "receivedAt": "2026-11-27T12:05:04.519Z",
+                "durationMs": 568,
+                "responseHeaders": {
+                  "cacheControl": "no-store",
+                  "omitted": []
+                },
+                "sourceReadEvidence": {
+                  "status": "missing",
+                  "catalogReadReceipt": null,
+                  "runtimeMatchesExpected": null,
+                  "sourceReadReceipts": [],
+                  "sourceReadReceiptsLimited": true,
+                  "omittedReceipts": null,
+                  "omissions": [
+                    "catalog_receipt_missing"
+                  ]
+                },
+                "pageReadEvidence": {
+                  "status": "missing",
+                  "receipts": [],
+                  "received": 0,
+                  "omitted": 0,
+                  "limited": false
+                }
+              }
+            ],
+            "power": {
+              "status": 200,
+              "shown": 24,
+              "received": 24,
+              "observedAt": "2026-11-27T12:03:01.180Z",
+              "ageSeconds": 46.836,
+              "stale": false,
+              "partial": false,
+              "total": null,
+              "hasMore": true,
+              "localPower": 0,
+              "supplierPower": 24,
+              "unknownPower": 0,
+              "unknownRetainedAndLabelled": true,
+              "countHonest": true,
+              "durationMs": 279
+            },
+            "pagination24": {
+              "plain": {
+                "first": {
+                  "status": 200,
+                  "shown": 24,
+                  "received": 24,
+                  "observedAt": "2026-11-27T12:03:01.180Z",
+                  "ageSeconds": 57.421,
+                  "stale": false,
+                  "partial": false,
+                  "total": null,
+                  "hasMore": true,
+                  "fullOrExhausted": true
+                },
+                "next": {
+                  "status": 200,
+                  "shown": 24,
+                  "received": 24,
+                  "observedAt": "2026-11-27T12:03:05.515Z",
+                  "ageSeconds": 53.086,
+                  "stale": false,
+                  "partial": false,
+                  "total": null,
+                  "hasMore": true,
+                  "fullOrExhausted": true
+                },
+                "cursorSha256": "910386538e9e69d53c43c816410faa71e42ea5b713c8eb8e703fafd74f7aa08f",
+                "followedEmittedCursor": true,
+                "distinctRows": true,
+                "visiblePages": 2,
+                "navigatedThroughLink": true,
+                "uiMatchesApi": true,
+                "cityPreserved": true,
+                "warningRemoved": true
+              },
+              "power": {
+                "first": {
+                  "status": 200,
+                  "shown": 24,
+                  "received": 24,
+                  "observedAt": "2026-11-27T12:03:01.180Z",
+                  "ageSeconds": 69.131,
+                  "stale": false,
+                  "partial": false,
+                  "total": null,
+                  "hasMore": true,
+                  "fullOrExhausted": true
+                },
+                "next": {
+                  "status": 200,
+                  "shown": 24,
+                  "received": 24,
+                  "observedAt": "2026-11-27T12:03:05.515Z",
+                  "ageSeconds": 64.796,
+                  "stale": false,
+                  "partial": false,
+                  "total": null,
+                  "hasMore": true,
+                  "fullOrExhausted": true
+                },
+                "cursorSha256": "e740b76ab00d8a1393a73916f0dd71737b57bc53e714193263f370b7949a7585",
+                "followedEmittedCursor": true,
+                "distinctRows": true,
+                "visiblePages": 2,
+                "powerOrder": {
+                  "pages": 2,
+                  "known": 48,
+                  "unknown": 0,
+                  "knownBeforeUnknown": true,
+                  "distinctRows": true,
+                  "cursorVersion": "j2"
+                },
+                "navigatedThroughLink": true,
+                "uiMatchesApi": true,
+                "cityPreserved": true,
+                "warningRemoved": true
+              },
+              "petrolPower": {
+                "first": {
+                  "status": 200,
+                  "shown": 24,
+                  "received": 24,
+                  "observedAt": "2026-11-27T12:04:33.641Z",
+                  "ageSeconds": 27.224,
+                  "stale": false,
+                  "partial": false,
+                  "total": null,
+                  "hasMore": true,
+                  "fullOrExhausted": true
+                },
+                "next": {
+                  "status": 200,
+                  "shown": 24,
+                  "received": 24,
+                  "observedAt": "2026-11-27T12:04:48.524Z",
+                  "ageSeconds": 12.341,
+                  "stale": false,
+                  "partial": false,
+                  "total": null,
+                  "hasMore": true,
+                  "fullOrExhausted": true
+                },
+                "cursorSha256": "2f9c8d042fbe9028d8f21f2fe247c1aab459bde0a7e2b651bfdc8539507bc638",
+                "followedEmittedCursor": true,
+                "distinctRows": true,
+                "visiblePages": 2,
+                "powerOrder": {
+                  "pages": 2,
+                  "known": 48,
+                  "unknown": 0,
+                  "knownBeforeUnknown": true,
+                  "distinctRows": true,
+                  "cursorVersion": "j2"
+                },
+                "navigatedThroughLink": true,
+                "uiMatchesApi": true,
+                "cityPreserved": true,
+                "warningRemoved": true
+              }
+            },
+            "ssrPageReadEvidence": [
+              {
+                "stage": "pagination_plain_page_two",
+                "kind": "plain",
+                "page": 2,
+                "afterSha256": "910386538e9e69d53c43c816410faa71e42ea5b713c8eb8e703fafd74f7aa08f",
+                "bindingMatched": true,
+                "status": "recorded",
+                "receipts": [
+                  {
+                    "version": 1,
+                    "requestId": "d438652a-cae3-4830-a78c-19f178bcc966",
+                    "queryHash": "f368b3edba33f245754f7c58a85473de35d87025afba14ddc8a86f4fa9db23c2",
+                    "table": "stats",
+                    "kind": "list",
+                    "page": 2,
+                    "pageSize": 24,
+                    "startedAt": "2026-11-27T12:03:50.787Z",
+                    "finishedAt": "2026-11-27T12:03:50.915Z",
+                    "stage": "access",
+                    "supplierAttempted": false,
+                    "outcome": "fresh",
+                    "observedAt": "2026-11-27T12:03:05.515Z"
+                  },
+                  {
+                    "version": 1,
+                    "requestId": "a41869ef-b006-4593-b726-f5da2e421c20",
+                    "queryHash": "aee6a316fe78f521f28c7ad9d23f72d95303ba0aa5363c20132532dc1e64c3d4",
+                    "table": "stats",
+                    "kind": "list",
+                    "page": 3,
+                    "pageSize": 24,
+                    "startedAt": "2026-11-27T12:03:51.001Z",
+                    "finishedAt": "2026-11-27T12:03:55.566Z",
+                    "stage": "supplier",
+                    "supplierAttempted": true,
+                    "outcome": "fresh",
+                    "observedAt": "2026-11-27T12:03:55.565Z"
+                  }
+                ],
+                "received": 2,
+                "omitted": 0,
+                "limited": false,
+                "omissions": []
+              },
+              {
+                "stage": "pagination_power_page_two",
+                "kind": "power",
+                "page": 2,
+                "afterSha256": "e740b76ab00d8a1393a73916f0dd71737b57bc53e714193263f370b7949a7585",
+                "bindingMatched": true,
+                "status": "recorded",
+                "receipts": [
+                  {
+                    "version": 1,
+                    "requestId": "632b9343-3564-4f17-a51b-abbafedb23ac",
+                    "queryHash": "f368b3edba33f245754f7c58a85473de35d87025afba14ddc8a86f4fa9db23c2",
+                    "table": "stats",
+                    "kind": "list",
+                    "page": 2,
+                    "pageSize": 24,
+                    "startedAt": "2026-11-27T12:04:04.678Z",
+                    "finishedAt": "2026-11-27T12:04:04.736Z",
+                    "stage": "access",
+                    "supplierAttempted": false,
+                    "outcome": "fresh",
+                    "observedAt": "2026-11-27T12:03:05.515Z"
+                  },
+                  {
+                    "version": 1,
+                    "requestId": "71d36fe2-0d54-4120-bbdb-8694a6fa907d",
+                    "queryHash": "aee6a316fe78f521f28c7ad9d23f72d95303ba0aa5363c20132532dc1e64c3d4",
+                    "table": "stats",
+                    "kind": "list",
+                    "page": 3,
+                    "pageSize": 24,
+                    "startedAt": "2026-11-27T12:04:04.742Z",
+                    "finishedAt": "2026-11-27T12:04:04.805Z",
+                    "stage": "access",
+                    "supplierAttempted": false,
+                    "outcome": "fresh",
+                    "observedAt": "2026-11-27T12:03:55.565Z"
+                  },
+                  {
+                    "version": 1,
+                    "requestId": "317bdedb-6ee7-4278-96c4-a6e244fa8161",
+                    "queryHash": "bfee32e2dd377f7f6f714ce86a15d81fc4b2cc819c17449f686a4a075c3d7c18",
+                    "table": "stats",
+                    "kind": "list",
+                    "page": 4,
+                    "pageSize": 24,
+                    "startedAt": "2026-11-27T12:04:04.810Z",
+                    "finishedAt": "2026-11-27T12:04:08.907Z",
+                    "stage": "supplier",
+                    "supplierAttempted": true,
+                    "outcome": "fresh",
+                    "observedAt": "2026-11-27T12:04:08.906Z"
+                  }
+                ],
+                "received": 3,
+                "omitted": 0,
+                "limited": false,
+                "omissions": []
+              },
+              {
+                "stage": "completion_petrol_power_page_two",
+                "kind": "petrol_power",
+                "page": 2,
+                "afterSha256": "2f9c8d042fbe9028d8f21f2fe247c1aab459bde0a7e2b651bfdc8539507bc638",
+                "bindingMatched": true,
+                "status": "recorded",
+                "receipts": [
+                  {
+                    "version": 1,
+                    "requestId": "1ecafc94-f43f-4f64-a349-e3b149a4f109",
+                    "queryHash": "3df4b5dedc619a942b84870b7342d5c1b1aaf40340e87da670afa9ff48afc82e",
+                    "table": "stats",
+                    "kind": "list",
+                    "page": 3,
+                    "pageSize": 24,
+                    "startedAt": "2026-11-27T12:04:50.559Z",
+                    "finishedAt": "2026-11-27T12:04:50.622Z",
+                    "stage": "access",
+                    "supplierAttempted": false,
+                    "outcome": "fresh",
+                    "observedAt": "2026-11-27T12:04:48.524Z"
+                  },
+                  {
+                    "version": 1,
+                    "requestId": "bf3d793f-fac6-4b72-bc28-1d61c4aafe17",
+                    "queryHash": "5737db6b0e3784cb4334b07cd5653b6ac2d248ce757407a2b9e1a06200398eba",
+                    "table": "stats",
+                    "kind": "list",
+                    "page": 4,
+                    "pageSize": 24,
+                    "startedAt": "2026-11-27T12:04:50.626Z",
+                    "finishedAt": "2026-11-27T12:04:54.444Z",
+                    "stage": "supplier",
+                    "supplierAttempted": true,
+                    "outcome": "fresh",
+                    "observedAt": "2026-11-27T12:04:54.443Z"
+                  },
+                  {
+                    "version": 1,
+                    "requestId": "c1dcbf0d-06a2-4670-9399-76020d6021c8",
+                    "queryHash": "d4685996e9aafca6ec85f41edb2edaa53d9dc330994e6337c524b8cad12c0025",
+                    "table": "stats",
+                    "kind": "list",
+                    "page": 5,
+                    "pageSize": 24,
+                    "startedAt": "2026-11-27T12:04:54.600Z",
+                    "finishedAt": "2026-11-27T12:04:58.582Z",
+                    "stage": "supplier",
+                    "supplierAttempted": true,
+                    "outcome": "fresh",
+                    "observedAt": "2026-11-27T12:04:58.581Z"
+                  }
+                ],
+                "received": 3,
+                "omitted": 0,
+                "limited": false,
+                "omissions": []
+              }
+            ],
+            "ui": {
+              "cards": 24,
+              "supplierVisible": 24,
+              "unknownVisible": 0,
+              "durationMs": 3093,
+              "city": "Новокузнецк",
+              "powerTo": 160,
+              "pageErrors": 0,
+              "listCards": 24,
+              "detailOpened": true,
+              "detailSourceKind": "supplier"
+            },
+            "visibility": [
+              {
+                "path": "/",
+                "headingVisible": true,
+                "cards": 6,
+                "linkCityMatched": true,
+                "durationMs": 10380,
+                "pageErrors": 0
+              },
+              {
+                "path": "/cars",
+                "headingVisible": true,
+                "cards": 6,
+                "linkCityMatched": true,
+                "durationMs": 4067,
+                "pageErrors": 0
+              }
+            ],
+            "petrolPowerUi": {
+              "status": 200,
+              "shown": 24,
+              "received": 24,
+              "observedAt": "2026-11-27T12:04:33.641Z",
+              "ageSeconds": 16.351,
+              "stale": false,
+              "partial": false,
+              "total": null,
+              "hasMore": true,
+              "localPower": 0,
+              "supplierPower": 24,
+              "unknownPower": 0,
+              "unknownRetainedAndLabelled": true,
+              "countHonest": true,
+              "city": "Новокузнецк",
+              "previousCity": "Москва",
+              "cityPreserved": true,
+              "toggledThroughUi": true,
+              "cards": 24,
+              "durationMs": 22524,
+              "pageErrors": 0,
+              "pageTwo": {
+                "status": 200,
+                "shown": 24,
+                "received": 24,
+                "observedAt": "2026-11-27T12:04:48.524Z",
+                "ageSeconds": 12.184,
+                "stale": false,
+                "partial": false,
+                "total": null,
+                "hasMore": true,
+                "localPower": 0,
+                "supplierPower": 24,
+                "unknownPower": 0,
+                "unknownRetainedAndLabelled": true,
+                "countHonest": true,
+                "cityPreserved": true,
+                "distinctRows": true,
+                "navigatedThroughLink": true
+              }
+            },
+            "detailPower": {
+              "offerIdentitySha256": "558407254c981d473b17264c490255be49d0434026ace3f1617a39e5446d70ec",
+              "sourcePowerHp": 102,
+              "inputPowerHp": 102,
+              "sameOffer": true,
+              "city": "Новокузнецк"
+            },
+            "deliveredCalculation": {
+              "status": 200,
+              "totalRub": 1009045,
+              "carRub": 92857,
+              "city": "Новокузнецк",
+              "deliveryRub": 120000,
+              "customsReady": true,
+              "requiresConfirmation": true,
+              "requestPowerHp": 102,
+              "visibleRub": 1009045,
+              "listVisibleRub": 1009045,
+              "sourcePowerHp": 102,
+              "ephemeral": true,
+              "saved": false
+            }
+          },
+          "screenshots": [
+            {
+              "path": "artifacts/catalog-japan-live/6a0e0289cae823506b8e95f1dbff3922/japan-plain-page-two-mobile.png",
+              "sha256": "e6962fea04e4966a4e9ffc098dfe9481d16024643fb3b8c31132fd7986ebdf7a"
+            },
+            {
+              "path": "artifacts/catalog-japan-live/6a0e0289cae823506b8e95f1dbff3922/japan-power-desktop.png",
+              "sha256": "14c9da68cdc169bee982d64ef79477142f75652e385e41961610ca6bab2f2aff"
+            },
+            {
+              "path": "artifacts/catalog-japan-live/6a0e0289cae823506b8e95f1dbff3922/japan-power-list.png",
+              "sha256": "4ca3f4acdb85ef91fc3cd6a73775c067a77d5dde8e959742901769aba98de62c"
+            },
+            {
+              "path": "artifacts/catalog-japan-live/6a0e0289cae823506b8e95f1dbff3922/japan-power-mobile.png",
+              "sha256": "b81fae3623133e53bfc87e40ca2d5fe49c283f0509c0936a602dca38dbab9553"
+            },
+            {
+              "path": "artifacts/catalog-japan-live/6a0e0289cae823506b8e95f1dbff3922/japan-power-page-two-mobile.png",
+              "sha256": "edfd92245f9dd058ee50caa33d96cf4b61162cbb427fa9941841b6394c450994"
+            },
+            {
+              "path": "artifacts/catalog-japan-live/6a0e0289cae823506b8e95f1dbff3922/japan-detail-mobile.png",
+              "sha256": "96463f5e38488242d0ad875ae9622ccca61bd52a41e636fb6cd2096dbe1859ae"
+            },
+            {
+              "path": "artifacts/catalog-japan-live/6a0e0289cae823506b8e95f1dbff3922/japan-home-desktop.png",
+              "sha256": "3268b5b46fdd6442d8d1b89c2930a3339f574484c9dad6d4568711e99dedcd25"
+            },
+            {
+              "path": "artifacts/catalog-japan-live/6a0e0289cae823506b8e95f1dbff3922/japan-home-mobile.png",
+              "sha256": "54c73794f769f61caddbe77e7dee9c1f9d888154b9c2842ed0c1fcc5f6ed337a"
+            },
+            {
+              "path": "artifacts/catalog-japan-live/6a0e0289cae823506b8e95f1dbff3922/japan-catalog-desktop.png",
+              "sha256": "7b009438f6df96fc449c3b4e51d1b84eadfd4a65c2d7c37515141e936f7e943a"
+            },
+            {
+              "path": "artifacts/catalog-japan-live/6a0e0289cae823506b8e95f1dbff3922/japan-catalog-mobile.png",
+              "sha256": "bc266b55ea90f6e6ce7866b6ecaad922be77a6a39a66aa7fe76027f35547d75c"
+            },
+            {
+              "path": "artifacts/catalog-japan-live/6a0e0289cae823506b8e95f1dbff3922/japan-petrol-power-city-mobile.png",
+              "sha256": "445e940166658648c38ecaf394b469f8900073aaca14f7006200efcbf26e4947"
+            },
+            {
+              "path": "artifacts/catalog-japan-live/6a0e0289cae823506b8e95f1dbff3922/japan-petrol-power-page-two-mobile.png",
+              "sha256": "379c43c8a8259ea284330c129f2897aa024859fc23c0467a94b8b4f4cd533467"
+            },
+            {
+              "path": "artifacts/catalog-japan-live/6a0e0289cae823506b8e95f1dbff3922/japan-petrol-delivered-detail-mobile.png",
+              "sha256": "1346017a2afe0a3fbf02791f4a92b8a5b900f681c01b9d1dee974f53324dcc8c"
+            },
+            {
+              "path": "artifacts/catalog-japan-live/6a0e0289cae823506b8e95f1dbff3922/failure.png",
+              "sha256": "dad911a668357e705b0d9ed5f1a79df8dafc3f07d1361cc0685cd84371adb80e"
+            }
+          ],
+          "japanPetrolPowerUiPassed": true,
+          "japanDetailPowerInputPassed": true,
+          "japanDeliveredCalculationPassed": true,
+          "japanPreviewCalculationRequests": 1,
+          "japanFullPagesPassed": true,
+          "japanPagination24Passed": true,
+          "japanCatalogWarningRemovedPassed": true,
+          "japanModelSelectionPassed": false,
+          "japanCombinedFiltersPassed": false,
+          "japanRelatedCardsPassed": false,
+          "japanVehiclePolicyPassed": false,
+          "japanPowerOrderPassed": true,
+          "generationManifestSha256": "58263ea4dc5642c9ff6f544830e9d3536ba702fb729a7a8c33b049b70b737038",
+          "oracleSha256": "749a90981af484123ccfc7efe403cb5e9a90f3df4295124eedc368e3f550d876",
+          "blockedRequests": {
+            "mutation": 0,
+            "external": 22,
+            "private": 0,
+            "redirect": 229
+          },
+          "error": {
+            "stage": "stability_legacy_mazda_three",
+            "code": "japan_browser_check_failed",
+            "timeout": false
+          }
+        }
+      },
+      "catalog-next-japan-source-failure-report.json": {
+        "sha256": "7d717a7b7fd5486a500cc2cf50f4861edc7f5886b6b1e4c3a62bc630f3f9d2b9",
+        "bytes": 3943,
+        "report": {
+          "version": 1,
+          "kind": "japan-stability-saved-failure-v1",
+          "records": [
+            {
+              "slot": "stats-list-1",
+              "readStatus": "ok",
+              "startedAt": "2026-11-27T12:04:24.566Z",
+              "finishedAt": "2026-11-27T12:04:25.274Z",
+              "kind": "list",
+              "outcome": "invalid_response",
+              "page": 1,
+              "pageSize": 24,
+              "httpStatus": 200,
+              "providerCode": null,
+              "sqlSha256": "3762a5f85db4bdf599845c346fa668d65da36131f669b0a0dd832418ed0edb7b",
+              "sqlBytes": 3586,
+              "responseValidation": {
+                "version": 1,
+                "phase": "empty_confirmation",
+                "code": "count_unavailable",
+                "wireBytes": 2,
+                "decodedBytes": 2,
+                "rowCount": 0,
+                "rootKind": "array",
+                "originCode": "invalid_response"
+              }
+            },
+            {
+              "slot": "stats-list-2",
+              "readStatus": "ok",
+              "startedAt": "2026-11-27T09:02:27.722Z",
+              "finishedAt": "2026-11-27T09:02:31.369Z",
+              "kind": "list",
+              "outcome": "invalid_response",
+              "page": 2,
+              "pageSize": 24,
+              "httpStatus": 200,
+              "providerCode": null,
+              "sqlSha256": "f368b3edba33f245754f7c58a85473de35d87025afba14ddc8a86f4fa9db23c2",
+              "sqlBytes": 3557,
+              "responseValidation": {
+                "version": 1,
+                "phase": "page_shape",
+                "code": "row_limit_exceeded",
+                "wireBytes": 35358,
+                "decodedBytes": 35358,
+                "rowCount": 50,
+                "rootKind": "array"
+              }
+            },
+            {
+              "slot": "stats-list-3",
+              "readStatus": "ok",
+              "startedAt": "2026-11-27T09:03:31.704Z",
+              "finishedAt": "2026-11-27T09:03:35.514Z",
+              "kind": "list",
+              "outcome": "invalid_response",
+              "page": 3,
+              "pageSize": 24,
+              "httpStatus": 200,
+              "providerCode": null,
+              "sqlSha256": "aee6a316fe78f521f28c7ad9d23f72d95303ba0aa5363c20132532dc1e64c3d4",
+              "sqlBytes": 3557,
+              "responseValidation": {
+                "version": 1,
+                "phase": "page_shape",
+                "code": "row_limit_exceeded",
+                "wireBytes": 35560,
+                "decodedBytes": 35560,
+                "rowCount": 50,
+                "rootKind": "array"
+              }
+            },
+            {
+              "slot": "stats-count",
+              "readStatus": "ok",
+              "startedAt": "2026-11-27T12:04:25.111Z",
+              "finishedAt": "2026-11-27T12:04:25.273Z",
+              "kind": "count",
+              "outcome": "invalid_response",
+              "page": 1,
+              "pageSize": 1,
+              "httpStatus": 200,
+              "providerCode": null,
+              "sqlSha256": "94899c231e4ce6863c2b8e2e69cecb9024da9dd1446ce2b73802cf84be05a31d",
+              "sqlBytes": 3547,
+              "responseValidation": {
+                "version": 1,
+                "phase": "aggregate_shape",
+                "code": "count_row_count",
+                "wireBytes": 2,
+                "decodedBytes": 2,
+                "rowCount": 0,
+                "rootKind": "array"
+              }
+            },
+            {
+              "slot": "stats-latest",
+              "readStatus": "ok",
+              "startedAt": "2026-11-27T12:04:24.566Z",
+              "finishedAt": "2026-11-27T12:04:25.274Z",
+              "kind": "list",
+              "outcome": "invalid_response",
+              "page": 1,
+              "pageSize": 24,
+              "httpStatus": 200,
+              "providerCode": null,
+              "sqlSha256": "3762a5f85db4bdf599845c346fa668d65da36131f669b0a0dd832418ed0edb7b",
+              "sqlBytes": 3586,
+              "responseValidation": {
+                "version": 1,
+                "phase": "empty_confirmation",
+                "code": "count_unavailable",
+                "wireBytes": 2,
+                "decodedBytes": 2,
+                "rowCount": 0,
+                "rootKind": "array",
+                "originCode": "invalid_response"
+              }
+            }
+          ],
+          "supplierRequests": 0,
+          "writes": 0,
+          "attribution": "saved_outer_request_metadata_only",
+          "historyReads": 0,
+          "capture": {
+            "version": 1,
+            "stage": "before_rollback",
+            "runtimeSha": "9a8b2f1d2a3c78bdf00fd820f1d080de32980f15",
+            "controllerSha": "9d33ca89c9ed8ff0b1a4ff86a922a69b8c6aa900",
+            "nonce": "6a0e0289cae823506b8e95f1dbff3922",
+            "failedStage": "stability_legacy_mazda_three",
+            "capturedAt": "2026-11-27T12:05:06.949Z"
+          }
+        }
+      },
+      "catalog-next-china-photo-release-report.json": {
+        "sha256": "4f78433fccddd813ba4cb3a2602975b0d8837c2c795dff4e50559aaa1d5dc5f9",
+        "bytes": 1811,
+        "report": {
+          "version": 1,
+          "kind": "china-code-cycle-v1",
+          "market": "china",
+          "completed": false,
+          "published": false,
+          "status": "rolled_back",
+          "runtimeSha": "9a8b2f1d2a3c78bdf00fd820f1d080de32980f15",
+          "retainedRuntime": "a5ca426eec2663eb17c2df69fe2bfed46e2b8740",
+          "sourceRequests": 0,
+          "generationRestores": 0,
+          "priceCalculations": 0,
+          "generationWrites": 0,
+          "encyclopediaWrites": 0,
+          "otherMarketWrites": 0,
+          "deletions": 0,
+          "appImageCleanupBeforeReserve": {
+            "version": 1,
+            "kind": "china-terminal-app-image-cleanup-v1",
+            "completed": true,
+            "status": "already_absent",
+            "uncertain": false,
+            "imagesRemoved": 0,
+            "runtimeSha": "dd1fcaf2b2628c8e85ec7b81658eb01d0c468c34",
+            "imageId": "sha256:784caabd3b2fc41dfd157bdfb02ed5303c5cadf985008db4facb19cb59554a0b",
+            "witnessSha256": "dfbbbf163e15f23548016bdc3583d3ecb2bfefbb765fb9e2941aa2f2afdb08da",
+            "diskFreeBytesBefore": 50276429824,
+            "diskFreeBytesAfter": 50276429824,
+            "measuredFreeBytesChange": 0,
+            "reason": "already_absent"
+          },
+          "retentionPreserved": true,
+          "recovered": true,
+          "appImageCleanup": {
+            "version": 1,
+            "kind": "china-terminal-app-image-cleanup-v1",
+            "completed": true,
+            "status": "removed",
+            "uncertain": false,
+            "imagesRemoved": 1,
+            "runtimeSha": "9a8b2f1d2a3c78bdf00fd820f1d080de32980f15",
+            "imageId": "sha256:74bc64c169d39334714ac65316abb09922e7f7bdf8e1861235c58930486ec7c2",
+            "witnessSha256": "d87029a0fbbc1b73a551e10e99c8b497551dc7dd21ced61a175d828dcca09052",
+            "diskFreeBytesBefore": 49081712640,
+            "diskFreeBytesAfter": 50273484800,
+            "measuredFreeBytesChange": 1191772160,
+            "reason": "exact_terminal_image"
+          },
+          "errorCode": "china_daily_release_japan_browser_failed",
+          "finishedAt": "2026-11-27T12:05:57.856Z",
+          "leaseReleased": true
+        }
+      }
+    }
+  },
+  "navigationFinding": {
+    "observedFailure": {
+      "stage": "stability_legacy_mazda_three",
+      "code": "japan_browser_check_failed",
+      "timeout": false,
+      "legacyApiResponseRecorded": false,
+      "screenshot": "Chrome ERR_BLOCKED_BY_CLIENT",
+      "screenshotSha256": "dad911a668357e705b0d9ed5f1a79df8dafc3f07d1361cc0685cd84371adb80e"
+    },
+    "localRuntimeProof": {
+      "source": "apps/web/lib/catalog/catalog-routes.ts and apps/web/middleware.ts at exact runtime9a",
+      "method": "actual pure canonicalCatalogHref and catalogRouteParams under offline-fetch",
+      "literalPath": "/cars/japan?make=Mazda&model=3&city=Новокузнецк",
+      "canonicalPath": "/cars/japan/Mazda/3?city=Новокузнецк",
+      "middlewareStatus": 308,
+      "canonicalIdempotent": true,
+      "sameMarketMakeModelCity": true,
+      "sourceRequests": 0
+    },
+    "controllerMismatch": "The current read fence aborts every redirect before the legacy API read. Its final URL check also expects the noncanonical query form. The literal page request itself is allowed by the existing request scope.",
+    "evidenceLimit": "The failed browser artifact does not record the actual legacy response status or Location. The canonical308 behavior is established by the exact runtime code and its pure function, not an invented captured header.",
+    "otherLocallyConfirmedMismatches": [
+      "Brand/model UI navigation uses canonical paths, while two controller waits inspect query make/model.",
+      "The China B-Class setup query also has a canonical308; its direct canonical URL preserves city and preparedCut."
+    ],
+    "requiredPreservation": [
+      "Existing literal model=3 API request and source-backed MAZDA3 family checks",
+      "Fresh/fullness/UI identity/calculation/combined/related gates",
+      "All general redirect, private, supplier and mutation restrictions"
+    ]
+  },
+  "sourceSnapshotLimits": {
+    "newSavedErrorsFinishedAt": "2026-11-27T12:04:25.274Z",
+    "modelDirectoryReadStartedAt": "2026-11-27T12:05:03.951Z",
+    "newHashesNotInBrowserRequestBoundReceipts": true,
+    "legacyAttributionEstablished": false,
+    "page2Page3OverflowRecordsAreHistorical": true
+  },
+  "maintenance": {
+    "activated": false,
+    "pinsUnchanged": "c6cf/current and a5ca/rollback; runtime9a was not accepted",
+    "reportOnlyFollowup": "Local REG report now exposes actual rollbackRuntimeSha only after verifyState;19 targeted checks passed. No maintenance source or marker published."
+  },
+  "controllerFollowup": {
+    "status": "reconciled_candidate_prepared",
+    "publication": null,
+    "ci": null,
+    "changedCodePaths": [
+      "scripts/catalog-next/japan-browser-acceptance.mjs",
+      "scripts/catalog-next/japan-stability-browser.mjs",
+      "tests/catalog-next-japan-browser.test.mjs",
+      "tests/catalog-next-japan-stability.test.mjs"
+    ],
+    "patchSha256": "eb1ed6082a6541fba6f15200e3fc6123208e1427814121396589781fd1b32401",
+    "validation": {
+      "focusedPassed": 75,
+      "casePreservationStabilityPassed": 22,
+      "finalControllerPassed": 1501,
+      "finalControllerFailed": 0,
+      "frozenBaselines": "passed",
+      "syntax": "passed",
+      "diffCheck": "passed",
+      "fullControllerLogSha256": "5cd552731ecafa8faa927db28a2f96c3a3c535da7516ecbd2da38a45c2a55632",
+      "independentSecurityReview": "no blockers in base patch; final increment preserves selected raw make",
+      "browserNotYetExecutedForThisController": true,
+      "finalControllerBase": "9d33ca89c9ed8ff0b1a4ff86a922a69b8c6aa900",
+      "reconciledControllerGate": "passed",
+      "reconciledControllerBase": "fd6ba2f8c791bb001f35d63397b216916edcd9d6",
+      "reconciledControllerPassed": 1501,
+      "reconciledControllerFailed": 0,
+      "reconciledControllerLogSha256": "118594931704b99b707d6aa455d9218bbbea4e312e5da0c8c355ca1a2f4aaaa6"
+    },
+    "navigation": "One exact literal Mazda/3 main-frame GET308 is verified and deliberately aborted. One explicit canonical navigation then passes the original maxRedirects0 fence. All subsequent redirects remain blocked.",
+    "preserved": "Same model=3 API read, MAZDA3 source family, freshness, fullness, UI/API identity, calculation, combined and related gates; runtime9a unchanged.",
+    "sourceMakePreserved": "Model selection keeps the already selected raw make, including its case, rather than replacing it with the model directory row make.",
+    "mercedesAliases": {
+      "addedForRelatedRows": [
+        "BENZ",
+        "MERCEDES"
+      ],
+      "evidence": "Existing exact runtime canonicalCatalogBrand aliases, verified offline; no claim that these spellings appeared in the failed live run."
+    },
+    "runtimeParityBlobs": {
+      "catalog-routes.ts": "c916e7dfc2dfc8fd1fb4e6df05b34a4e9eb9b560",
+      "browsing-context.ts": "f94f01ac261f4a60167ed38326627b4a643b9e64",
+      "brands.ts": "e6066fc01e54a21e8c622e6e248b87e34b39848f"
+    }
+  },
+  "failedReleaseRuntime": {
+    "sha": "9a8b2f1d2a3c78bdf00fd820f1d080de32980f15",
+    "tree": "92bcf677f01008338997de8e46c5a00c10dc2094",
+    "unchangedForControllerFollowup": true
+  },
+  "concurrentMainIntegration": {
+    "observedHead": "fd6ba2f8c791bb001f35d63397b216916edcd9d6",
+    "approvedController": "a81677f76f7eee5ad62caf6d48f9da54986622b4",
+    "sourceCommits": [
+      "74489d8534029c3324f0c896bf84cb25abf9d31f",
+      "0f624d72525567d9593af5a813f5e878814193b2"
+    ],
+    "productionDiffFrom9a": {
+      "paths": [
+        "apps/web/components/catalog/AjesCatalog.tsx",
+        "apps/web/components/catalog/CatalogFilters.tsx"
+      ],
+      "insertions": 14,
+      "deletions": 3,
+      "preserved": true,
+      "purpose": "Read Japan brand navigation from the whole source inventory and preserve visible makes when metadata is unavailable."
+    },
+    "runtimeCi": {
+      "runId": 45998553705,
+      "jobId": 140504888239,
+      "conclusion": "failure",
+      "controllerPassed": 1496,
+      "nativePassed": 531,
+      "nativeFailed": 1,
+      "nativeTotal": 532,
+      "failedFile": "tests/japan-model-directory-metadata.test.ts",
+      "failedLine": 160,
+      "actual": [
+        "BENZ"
+      ],
+      "expected": [],
+      "typecheckAndBrowserStepsNotExecuted": true
+    },
+    "release": {
+      "runId": 45998598682,
+      "jobId": 140504190429,
+      "status": "completed",
+      "outcome": "failed_before_activation",
+      "hostStageStartedAt": "2026-11-27T12:34:25Z",
+      "conclusion": "failure",
+      "finishedAt": "2026-11-27T12:43:11.410Z",
+      "errorCode": "china_state_storage_transport",
+      "lastRecordedPhase": "code_capacity_checked",
+      "lastRecordedPhaseAt": "2026-11-27T12:35:58.535Z",
+      "activationAndBrowserNotReached": true,
+      "retentionPreserved": true,
+      "leaseReleased": true,
+      "artifact": {
+        "id": 15197514209,
+        "bytes": 7237,
+        "sha256": "e0199e08e2e9906e5a087750dcd285037244947d2e66a44afbe368762ee3ae35",
+        "zipSizeHashAndCrcVerified": true,
+        "reportSha256": "25de4061d65c75066782dd5a85b485e582d55cc10a31ea1ca79155edd83fc944"
+      },
+      "report": {
+        "version": 1,
+        "kind": "china-code-cycle-v1",
+        "market": "china",
+        "completed": false,
+        "published": false,
+        "status": "failed",
+        "runtimeSha": "0f624d72525567d9593af5a813f5e878814193b2",
+        "retainedRuntime": "a5ca426eec2663eb17c2df69fe2bfed46e2b8740",
+        "sourceRequests": 0,
+        "generationRestores": 0,
+        "priceCalculations": 0,
+        "generationWrites": 0,
+        "encyclopediaWrites": 0,
+        "otherMarketWrites": 0,
+        "deletions": 0,
+        "appImageCleanupBeforeReserve": {
+          "version": 1,
+          "kind": "china-terminal-app-image-cleanup-v1",
+          "completed": true,
+          "status": "already_absent",
+          "uncertain": false,
+          "imagesRemoved": 0,
+          "runtimeSha": "9a8b2f1d2a3c78bdf00fd820f1d080de32980f15",
+          "imageId": "sha256:74bc64c169d39334714ac65316abb09922e7f7bdf8e1861235c58930486ec7c2",
+          "witnessSha256": "d87029a0fbbc1b73a551e10e99c8b497551dc7dd21ced61a175d828dcca09052",
+          "diskFreeBytesBefore": 50268479488,
+          "diskFreeBytesAfter": 50268479488,
+          "measuredFreeBytesChange": 0,
+          "reason": "already_absent"
+        },
+        "retentionPreserved": true,
+        "errorCode": "china_state_storage_transport",
+        "finishedAt": "2026-11-27T12:43:11.410Z",
+        "leaseReleased": true
+      }
+    },
+    "reconciliation": "The exact concurrent source changes and metrics workflow are preserved. The reviewed complete controller navigation replaces the partial overlapping redirect handling; known path-based waits and bounded explicit second navigation are retained."
+  },
+  "nextCandidate": {
+    "runtimeSha": "b61a0f913b94fe92e4b3660a24c3c14edb99cc3d",
+    "runtimeTree": "af79d636d7d3629731f9b3cfde669351f0c83616",
+    "parent": "0f624d72525567d9593af5a813f5e878814193b2",
+    "branch": "fix/japan-canonical-verified-20261127",
+    "changedFromParent": [
+      "tests/japan-model-directory-metadata.test.ts"
+    ],
+    "productionCodeIdenticalToParent": true,
+    "targetedNativePassed": 7,
+    "targetedNativeLogSha256": "45b7a02000ea71b79941c743878bc949f6b672dfac08552ad75c7a50c52aeab8",
+    "testContract": "Actual SSR rail retains visible BENZ and marks empty/zero-only/stale/failed metadata unavailable. Positive metadata retains a deduplicated union. Captured directory reads contain only market/city, while the vehicle query and URL keep all filters.",
+    "runtimeDiffSha256": "324140812f639eb1a65a9fec8aac6f25fc6854ca7d6546d5581459de32635812",
+    "runtimePathCount": 53,
+    "pricingToServingDiffSha256": "278280eebd68ef663ae86875e49ec8a1735892695202e38fd70aef6283d85af4",
+    "pricingPathCount": 112,
+    "protectedPricingPathsUnchanged": true,
+    "exactSourceVerificationSha256": "15ebdc2e752268bd39d3230ea4e9c827e6fb4cf85edcf3bdb40f4b384b56b22d",
+    "controllerCi": "not_started",
+    "productionActivation": "not_requested"
+  }
+}

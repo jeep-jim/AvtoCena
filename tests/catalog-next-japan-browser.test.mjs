@@ -5,9 +5,10 @@ import path from 'node:path';
 import os from 'node:os';
 import {createHash,randomUUID} from 'node:crypto';
 import {japanReleaseBinding,verifyJapanPage,verifyJapanWarmPage,verifyJapanPowerPage,japanVerificationRequestScope,installReadFence,japanResponseObservation,
- japanLegacyMazdaReadRedirect,japanResponseHeaders,japanSourceReadEvidence,recordJapanResponse,runJapanBrowserAcceptance,
+ japanResponseHeaders,japanSourceReadEvidence,recordJapanResponse,runJapanBrowserAcceptance,
  japanCalculationReadGrant,checkedJapanCalculationRead,verifyJapanDeliveredCalculation,japanPetrolPowerUrl,verifyJapanFullPage,verifyJapanKnownPowerOrder,verifyJapanVisibleVehiclePolicy,verifyJapanBrandDirectory,japanPetrolPowerPageApi}
  from '../scripts/catalog-next/japan-browser-acceptance.mjs';
+import {JAPAN_LEGACY_MAZDA_THREE_PAGES} from '../scripts/catalog-next/japan-stability-browser.mjs';
 
 const now=Date.parse('2026-11-26T05:00:00Z'),release='a'.repeat(40),nonce='b'.repeat(32),manifest='c'.repeat(64);
 const local={id:'ajes-stats-local1',market:'japan',powerHp:150};
@@ -372,13 +373,13 @@ test('an image resource cannot disguise an AJ API, another host, credentials, po
  ])assert.equal(japanVerificationRequestScope(url,'GET','image'),'external',url);
 });
 
-async function fencedRequest({url,method='GET',resourceType='image',status=200,location,grant,body,headers,frameUrl,responseData={}}){
+async function fencedRequest({url,method='GET',resourceType='image',status=200,grant,body,headers,frameUrl,responseData={}}){
  let handler;
  const report={productionMutations:0,directSupplierApiRequests:0};
  await installReadFence({route:async(pattern,callback)=>{assert.equal(pattern,'**/*');handler=callback;}},report,
   grant?{getCalculationGrant:()=>grant}:{});
  const calls={fetch:0,fulfill:0,dispose:0,aborts:[],options:undefined};
- const response={status:()=>status,headers:()=>location?{location}:{},body:async()=>Buffer.from(JSON.stringify(responseData)),dispose:async()=>{calls.dispose++;}};
+ const response={status:()=>status,body:async()=>Buffer.from(JSON.stringify(responseData)),dispose:async()=>{calls.dispose++;}};
  await handler({request:()=>({url:()=>url,method:()=>method,resourceType:()=>resourceType,postData:()=>body,
    headers:()=>headers,frame:()=>({url:()=>frameUrl})}),
   fetch:async options=>{calls.fetch++;calls.options=options;return response;},
@@ -413,37 +414,6 @@ test('blocked requests never reach fetch or inflate the supplier image counter',
  }
 });
 
-test('only the literal legacy Japan Mazda/3 bookmark may follow a safe same-origin document redirect',async()=>{
- const origin='https://avtocena.com/cars/japan?'+new URLSearchParams({make:'Mazda',model:'3',city:'Новокузнецк'});
- const canonical='https://avtocena.com/cars/japan/Mazda/3?'+new URLSearchParams({city:'Новокузнецк'});
- for(const status of [301,302,307,308]){
-  assert.equal(japanLegacyMazdaReadRedirect({from:origin,to:canonical,method:'GET',resourceType:'document',status}),true);
-  const {calls,report}=await fencedRequest({url:origin,method:'GET',resourceType:'document',status,location:canonical});
-  assert.equal(calls.fetch,1);assert.equal(calls.fulfill,1);
-  assert.deepEqual(calls.aborts,[]);assert.equal(report.blockedRequests.redirect,0);
- }
- for(const target of [
-  'https://supplier.example/cars/japan?make=Mazda&model=MAZDA3&city='+encodeURIComponent('Новокузнецк'),
-  'https://avtocena.com/api/internal/probe',
-  canonical+'&market=japan',
-  canonical.replace('/Mazda/3?','/Mazda/AXELA?'),
-  canonical.replace('/Mazda/3?','/Toyota/3?'),
-  canonical.replace('city=','city=Wrong-'),
-  'https://avtocena.com/cars/japan?make=Mazda&model=AXELA&city='+encodeURIComponent('Новокузнецк'),
-  'https://avtocena.com/cars/japan?make=Toyota&model=MAZDA3&city='+encodeURIComponent('Новокузнецк'),
-  'https://avtocena.com/cars/japan?make=Mazda&model=MAZDA30&city='+encodeURIComponent('Новокузнецк'),
-  'https://avtocena.com/cars/japan?make=Mazda&model=MAZDA3&city=Moscow',
-  canonical+'&source=ajes',
- ]) {
-  assert.equal(japanLegacyMazdaReadRedirect({from:origin,to:target,method:'GET',resourceType:'document',status:302}),false,target);
-  const {calls,report}=await fencedRequest({url:origin,method:'GET',resourceType:'document',status:302,location:target});
-  assert.equal(calls.fulfill,0);assert.deepEqual(calls.aborts,['blockedbyclient']);
-  assert.equal(report.blockedRequests.redirect,1);
- }
- for(const patch of [{method:'POST'},{resourceType:'image'},{status:303},{from:canonical},{to:undefined}])
-  assert.equal(japanLegacyMazdaReadRedirect({from:origin,to:canonical,method:'GET',resourceType:'document',status:302,...patch}),false);
-});
-
 test('a permitted supplier image cannot redirect into any API, foreign origin or private page',async()=>{
  for(const status of [301,302,303,307,308]){
   const {report,calls}=await fencedRequest({url:'https://7.ajes.com/img/abc',status});
@@ -451,6 +421,124 @@ test('a permitted supplier image cannot redirect into any API, foreign origin or
   assert.equal(calls.dispose,1);assert.deepEqual(calls.aborts,['blockedbyclient']);
   assert.equal(report.supplierImageRequests,1);assert.equal(report.blockedRequests.redirect,1);
   assert.equal(report.directSupplierApiRequests,0);
+ }
+});
+
+async function legacyRedirectFence(options={}){
+ let handler,stage=options.stage??true;
+ const calls={navigate:[],fetch:[],fulfill:0,aborts:[],dispose:0};
+ const report={codeScope:options.codeScope??'catalog-japan-stability-v1'};
+ const context={route:async(_pattern,callback)=>{handler=callback;}},frame={};
+ const dispatch=async(url,first)=>{
+  const response={status:()=>first?(options.status??308):(options.nextStatus??200),
+   headers:()=>({location:first?('location' in options?options.location:JAPAN_LEGACY_MAZDA_THREE_PAGES.canonical)
+    :options.nextLocation??JAPAN_LEGACY_MAZDA_THREE_PAGES.literal}),dispose:async()=>{calls.dispose++;}};
+  let aborted,fulfilled;
+  await handler({request:()=>({url:()=>first?(options.source??url):url,
+    method:()=>first?(options.method??'GET'):'GET',resourceType:()=>first?(options.resourceType??'document'):'document',
+    isNavigationRequest:()=>options.navigation??true,redirectedFrom:()=>options.redirectedFrom??null,
+    frame:()=>options.wrongFrame?{}:frame}),
+   fetch:async settings=>{calls.fetch.push({url,settings});return response;},
+   fulfill:async input=>{assert.equal(input.response,response);calls.fulfill++;fulfilled=response;},
+   abort:async code=>{calls.aborts.push(code);aborted=code;}});
+  if(first&&options.changeStage)stage=false;
+  if(options.gotoError)throw Error(options.gotoError);
+  if(aborted)throw Error('page.goto: net::ERR_BLOCKED_BY_CLIENT');
+  return fulfilled;
+ };
+ const page={context:()=>options.wrongContext?{}:context,mainFrame:()=>frame,
+  goto:async(url,settings)=>{calls.navigate.push({url,settings});return dispatch(url,calls.navigate.length===1);}};
+ const fence=await installReadFence(context,report,{isLegacyMazdaThreeStage:()=>stage});
+ return {run:()=>fence.navigateLegacyMazdaThree(page),ungranted:()=>dispatch(JAPAN_LEGACY_MAZDA_THREE_PAGES.literal,true),calls,report};
+}
+
+test('only the exact granted legacy document 308 is followed once through two separately fenced GETs',async()=>{
+ for(const location of [JAPAN_LEGACY_MAZDA_THREE_PAGES.canonical,
+  JAPAN_LEGACY_MAZDA_THREE_PAGES.canonical.slice('https://avtocena.com'.length)]){
+  const fixture=await legacyRedirectFence({location});const result=await fixture.run();
+  assert.equal(result.response.status(),200);
+  assert.deepEqual(result.redirectProof,{status:308,redirects:1,sameOrigin:true,exactTarget:true,mainFrame:true});
+  assert.deepEqual(fixture.calls.navigate,Object.values(JAPAN_LEGACY_MAZDA_THREE_PAGES).map(url=>
+   ({url,settings:{waitUntil:'domcontentloaded',timeout:90_000}})));
+  assert.deepEqual(fixture.calls.fetch,Object.values(JAPAN_LEGACY_MAZDA_THREE_PAGES).map(url=>
+   ({url,settings:{maxRedirects:0,timeout:90_000}})));
+  assert.equal(fixture.calls.fulfill,1);assert.equal(fixture.calls.dispose,2);
+  assert.deepEqual(fixture.calls.aborts,['blockedbyclient']);
+  assert.deepEqual(fixture.report.blockedRequests,{mutation:0,external:0,private:0,redirect:0});
+  await assert.rejects(fixture.run(),/legacy_redirect_context/);
+  assert.equal(fixture.calls.navigate.length,2);
+  await assert.rejects(fixture.ungranted(),/ERR_BLOCKED_BY_CLIENT/);
+  assert.equal(fixture.report.blockedRequests.redirect,1);
+ }
+});
+
+test('legacy redirect grants reject other scopes, stages, frames, methods and request types',async()=>{
+ for(const options of [
+  {codeScope:'catalog-japan-pagination24-v1'},{codeScope:'catalog-japan-usability-v1'},
+  {stage:false},{wrongContext:true},{changeStage:true},
+  {wrongFrame:true},{navigation:false},{redirectedFrom:{}},
+  ...['HEAD','POST','PUT','DELETE'].map(method=>({method})),
+  ...['fetch','xhr','image','script'].map(resourceType=>({resourceType})),
+ ]){
+  const fixture=await legacyRedirectFence(options);
+  await assert.rejects(fixture.run(),/legacy_redirect_context|ERR_BLOCKED_BY_CLIENT/);
+  assert(fixture.calls.navigate.length<=1,JSON.stringify(options));
+  assert(fixture.calls.fetch.length<=1,JSON.stringify(options));
+  assert.equal(fixture.calls.fulfill,0);
+ }
+ const idle=await legacyRedirectFence();
+ await assert.rejects(idle.ungranted(),/ERR_BLOCKED_BY_CLIENT/);
+ assert.equal(idle.report.blockedRequests.redirect,1);
+});
+
+test('legacy navigation rejects every nonexact source or target and every other redirect status',async()=>{
+ const {literal,canonical}=JAPAN_LEGACY_MAZDA_THREE_PAGES;
+ const changed=value=>[
+  value+'#',value+'#fragment',value+'&private=1',value+'&city=Новокузнецк',
+  value.replace('avtocena.com','supplier.example'),value.replace('avtocena.com','7.ajes.com'),
+  value.replace('https://','https://user:secret@'),value.replace('/cars/japan','/api/admin/japan'),
+  value.replace('/cars/japan','/cars/../cars/japan'),value.replace('/cars/japan','/cars\\japan'),
+  value.replace('/cars/japan','/cars/\njapan'),value.replace('https://avtocena.com','https://avtocena.com:443'),
+  value.replace('city=','city=Other&oldcity='),
+ ];
+ for(const options of [
+  ...changed(literal).map(source=>({source})),
+  {source:literal.replace('make=Mazda','make=MAZDA')},{source:literal.replace('model=3','model=AXELA')},
+  {source:literal.replace('model=3&','')},{source:literal+'&model=3'},
+  ...changed(canonical).map(location=>({location})),
+  {location:canonical.replace('/Mazda/3','/MAZDA/3')},{location:canonical.replace('/Mazda/3','/Mazda/AXELA')},
+  {location:canonical+'&model=3'},{location:literal},{location:''},{location:undefined},
+  ...[301,302,303,307].map(status=>({status})),
+ ]){
+  const fixture=await legacyRedirectFence(options);
+  await assert.rejects(fixture.run(),/ERR_BLOCKED_BY_CLIENT/,JSON.stringify(options));
+  assert.equal(fixture.calls.navigate.length,1);assert(fixture.calls.fetch.length<=1);
+  assert.equal(fixture.calls.fulfill,0);
+  assert.equal(fixture.report.checks?.legacyCanonicalRedirect,undefined);
+ }
+ for(const status of [200,304,404]){
+  const fixture=await legacyRedirectFence({status});
+  await assert.rejects(fixture.run(),/legacy_redirect_missing/);
+  assert.equal(fixture.calls.navigate.length,1);
+ }
+});
+
+test('a canonical second hop never redirects again and unrelated navigation errors never trigger fallback',async()=>{
+ for(const nextStatus of [301,302,303,307,308])for(const nextLocation of [
+  JAPAN_LEGACY_MAZDA_THREE_PAGES.literal,JAPAN_LEGACY_MAZDA_THREE_PAGES.canonical,
+  'https://avtocena.com/api/admin/settings','https://7.ajes.com/api/',
+ ]){
+  const fixture=await legacyRedirectFence({nextStatus,nextLocation});
+  await assert.rejects(fixture.run(),/ERR_BLOCKED_BY_CLIENT/);
+  assert.equal(fixture.calls.navigate.length,2);assert.equal(fixture.calls.fetch.length,2);
+  assert(fixture.calls.fetch.every(row=>row.settings.maxRedirects===0));
+  assert.equal(fixture.calls.fulfill,0);assert.equal(fixture.report.blockedRequests.redirect,1);
+ }
+ for(const options of [{status:200,gotoError:'page.goto: net::ERR_BLOCKED_BY_CLIENT'},
+  {gotoError:'page.goto: net::ERR_FAILED'},{gotoError:'Timeout 90000ms exceeded'}]){
+  const fixture=await legacyRedirectFence(options);
+  await assert.rejects(fixture.run());
+  assert.equal(fixture.calls.navigate.length,1);
  }
 });
 

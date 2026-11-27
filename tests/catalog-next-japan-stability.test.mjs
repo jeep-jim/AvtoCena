@@ -5,6 +5,9 @@ import os from 'node:os';
 import path from 'node:path';
 import {spawnSync} from 'node:child_process';
 import {matchesCatalogModel} from '../apps/web/lib/catalog/model-filter.ts';
+import {canonicalCatalogHref, catalogRouteParams} from '../apps/web/lib/catalog/catalog-routes.ts';
+import {dealerBrowsingHref} from '../apps/web/lib/dealers/browsing-context.ts';
+import {canonicalCatalogBrand} from '../apps/web/lib/catalog/brands.ts';
 import {JAPAN_STABILITY_CODE_SCOPE, JAPAN_STABILITY_CODE_PATHS, JAPAN_STABILITY_UI_CODE_PATHS,
   JAPAN_STABILITY_POWER_CODE_PATHS, JAPAN_STABILITY_RETAINED_RUNTIME,
   japanStabilityCodePaths, japanPowerOrderRequired, japanSourceNamesRequired, isExactJapanStabilityScope} from '../scripts/catalog-next/japan-stability-code-scope.mjs';
@@ -15,10 +18,11 @@ import {JAPAN_PAGINATION_TEST_FILES, JAPAN_STABILITY_TEST_FILES} from '../script
 import {japanStabilityApiAllowed, japanStabilitySearchApi, JAPAN_STABILITY_MODELS_API,
   checkedJapanStabilityDirectory, selectJapanStabilityModel, verifyJapanStabilityModelRows,
   verifyJapanStabilityCombinedRows, verifyJapanStabilityRelated, validJapanStabilityGreenStock,
-  verifyJapanLegacyMazdaThreeRows, runJapanLegacyMazdaThreeBrowser} from '../scripts/catalog-next/japan-stability-browser.mjs';
+  verifyJapanLegacyMazdaThreeRows, runJapanLegacyMazdaThreeBrowser, JAPAN_LEGACY_MAZDA_THREE_PAGES,
+  japanStabilitySelectionUrl, japanStabilityChinaFamilyPage} from '../scripts/catalog-next/japan-stability-browser.mjs';
 import {checkedJapanFilterDirectoryFixture, readJapanFilterDirectoryFixture} from '../scripts/catalog-next/japan-filter-directory-proof.mjs';
 import {verifyJapanPage, verifyJapanPowerPage, verifyJapanVisibleVehiclePolicy, japanPageReadEvidence,
-  recordJapanResponse, verifyJapanFullPage} from '../scripts/catalog-next/japan-browser-acceptance.mjs';
+  recordJapanResponse, verifyJapanFullPage, installReadFence} from '../scripts/catalog-next/japan-browser-acceptance.mjs';
 
 const plan = () => ({codeScope: JAPAN_STABILITY_CODE_SCOPE, retainedRuntime: JAPAN_STABILITY_RETAINED_RUNTIME,
   runtimeFiles: [...JAPAN_STABILITY_CODE_PATHS]});
@@ -194,15 +198,53 @@ test('the literal Mazda/3 regression requires an observed MAZDA3 family and neve
     [{model: 'AXELA', total: 5}, {model: 'DEMIO', total: 24}]), /legacy_mazda_three_source_missing/);
 });
 
+test('stability page bindings match the actual canonical route and control dispatcher without changing source names', () => {
+  const {literal, canonical} = JAPAN_LEGACY_MAZDA_THREE_PAGES;
+  assert.equal('https://avtocena.com' + canonicalCatalogHref(literal.slice('https://avtocena.com'.length)), canonical);
+  assert.equal('https://avtocena.com' + canonicalCatalogHref(canonical.slice('https://avtocena.com'.length)), canonical);
+  assert.deepEqual(catalogRouteParams(new URL(canonical).pathname), {market: 'japan', make: 'Mazda', model: '3'});
+  for (const [make, model] of [['MAZDA', undefined], ['MAZDA', 'MAZDA3 FASTBACK'], ['Mazda', 'MAZDA  3 SEDAN']]) {
+    const query = new URLSearchParams({make, ...(model === undefined ? {} : {model}), city: 'Новокузнецк'});
+    const selected = 'https://avtocena.com' + dealerBrowsingHref('/cars/japan?' + query, null, 'Новокузнецк');
+    assert(japanStabilitySelectionUrl(selected, make, model));
+    for (const wrong of [selected + '&make=' + make, selected + '&city=Новокузнецк', selected + '#',
+      selected.replace('avtocena.com', 'other.example'), selected.replace('/japan/', '/china/'),
+      selected.replace('/' + make, '/' + (make === 'MAZDA' ? 'Mazda' : 'MAZDA')),
+      'https://avtocena.com/cars/japan?' + query])
+      assert.equal(japanStabilitySelectionUrl(wrong, make, model), false, wrong);
+  }
+  // Multiple selection changes only model when the filter already has a make.
+  // The source model row may spell that same make differently.
+  const sourceMake = 'Mazda';
+  const selected = selectJapanStabilityModel([{model: 'MAZDA3 FASTBACK', total: 24}],
+    [{make: 'MAZDA', model: 'MAZDA3 FASTBACK'}]);
+  const retainedMakeUrl = 'https://avtocena.com' + dealerBrowsingHref('/cars/japan?'
+    + new URLSearchParams({make: sourceMake, model: selected.model, city: 'Новокузнецк'}), null, 'Новокузнецк');
+  assert(japanStabilitySelectionUrl(retainedMakeUrl, sourceMake, selected.model));
+  assert.equal(japanStabilitySelectionUrl(retainedMakeUrl, selected.make, selected.model), false);
+  assert.deepEqual(catalogRouteParams(new URL(retainedMakeUrl).pathname),
+    {market: 'japan', make: 'Mazda', model: 'MAZDA3 FASTBACK'});
+  const generationId = 'gen_china_45875678028_1';
+  const oldChina = '/cars/china?' + new URLSearchParams({make: 'Mercedes-Benz', model: 'B-Class',
+    city: 'Новокузнецк', preparedCut: generationId});
+  const china = japanStabilityChinaFamilyPage(generationId);
+  assert.equal(china, 'https://avtocena.com' + canonicalCatalogHref(oldChina));
+  assert.equal(china, 'https://avtocena.com' + canonicalCatalogHref(new URL(china).pathname + new URL(china).search));
+  assert.equal(new URL(china).searchParams.get('preparedCut'), generationId);
+  assert.deepEqual(catalogRouteParams(new URL(china).pathname), {market: 'china', make: 'Mercedes-Benz', model: 'B-Class'});
+  assert.throws(() => japanStabilityChinaFamilyPage('other'), /china_generation/);
+});
+
 const legacyNow = Date.parse('2026-11-27T03:00:00Z');
 const legacyPage = () => ({ok: true, stale: false, partial: false, observedAt: new Date(legacyNow - 1000).toISOString(),
   hasMore: true, received: 24, items: Array.from({length: 24}, (_, index) => ({id: 'ajes-stats-M' + index,
     market: 'japan', make: 'MAZDA', model: 'MAZDA3 FASTBACK'}))});
 
 function legacyJourney({payload = legacyPage(), status = 200, pageStatus = 200, source = directory(),
-  uiIds = payload.items.map(row => row.id), javascriptError = false} = {}) {
-  const calls = {navigate: [], read: [], stages: [], pages: [], captures: [], viewports: [], closed: 0, created: 0};
-  let url, onError;
+  uiIds = payload.items.map(row => row.id), javascriptError = false, finalUrl} = {}) {
+  const calls = {navigate: [], read: [], stages: [], pages: [], captures: [], viewports: [], fetch: [], aborts: [], closed: 0, created: 0};
+  let url, onError, handler, stage;
+  const frame = {}, report = {codeScope: JAPAN_STABILITY_CODE_SCOPE};
   const cards = {
     nth: index => ({waitFor: async () => assert(index >= 0)}),
     count: async () => uiIds.length,
@@ -217,27 +259,49 @@ function legacyJourney({payload = legacyPage(), status = 200, pageStatus = 200, 
   const view = {
     on: (event, callback) => { assert.equal(event, 'pageerror'); onError = callback; },
     setViewportSize: async value => { calls.viewports.push(value); },
-    goto: async (value, options) => { calls.navigate.push({value, options}); url = value;
-      if (javascriptError) onError(); return {status: () => pageStatus}; },
+    goto: async (value, options) => {
+      calls.navigate.push({value, options}); url = value;
+      const first = calls.navigate.length === 1;
+      const response = {status: () => first ? 308 : pageStatus,
+        headers: () => first ? {location: JAPAN_LEGACY_MAZDA_THREE_PAGES.canonical} : {}, dispose: async () => {}};
+      let aborted, fulfilled;
+      await handler({request: () => ({url: () => value, method: () => 'GET', resourceType: () => 'document',
+        isNavigationRequest: () => true, redirectedFrom: () => null, frame: () => frame}),
+        fetch: async settings => { calls.fetch.push({value, settings}); return response; },
+        abort: async code => { aborted = code; calls.aborts.push(code); },
+        fulfill: async input => { assert.equal(input.response, response); fulfilled = response; }});
+      if (aborted) throw Error('page.goto: net::ERR_BLOCKED_BY_CLIENT');
+      if (javascriptError) onError();
+      if (finalUrl) url = finalUrl;
+      return fulfilled;
+    },
     url: () => url,
+    context: () => context, mainFrame: () => frame,
     locator: selector => selector === 'main.ac-ajes-catalog' ? root : {selector},
     close: async () => { calls.closed++; },
   };
-  const run = () => runJapanLegacyMazdaThreeBrowser({
-    context: {newPage: async () => { calls.created++; return view; }}, directory: source,
+  const context = {newPage: async () => { calls.created++; return view; }, route: async (_, callback) => { handler = callback; }};
+  const run = async () => {
+    const fence = await installReadFence(context, report, {isLegacyMazdaThreeStage: () => stage === 'stability_legacy_mazda_three'});
+    return runJapanLegacyMazdaThreeBrowser({
+    context, directory: source, navigateLegacyMazdaThree: fence.navigateLegacyMazdaThree,
     read: async value => { calls.read.push(value); assert(japanStabilityApiAllowed(value)); return {data: payload, status}; },
     capture: async (page, name) => { assert.equal(page, view); calls.captures.push(name); },
-    onStage: stage => { calls.stages.push(stage); }, onPage: page => { calls.pages.push(page); },
+    onStage: value => { stage = value; calls.stages.push(value); }, onPage: page => { calls.pages.push(page); },
     verifyPage: (value, code) => verifyJapanPage(value, code, legacyNow), verifyFullPage: verifyJapanFullPage,
-  });
-  return {run, calls, view};
+  }); };
+  return {run, calls, view, report};
 }
 
 test('the legacy journey navigates the literal bookmark and performs exactly one existing allowed model=3 API read', async () => {
-  const {run, calls, view} = legacyJourney();
+  const {run, calls, view, report} = legacyJourney();
   const result = await run();
-  assert.deepEqual(calls.navigate, [{value: 'https://avtocena.com/cars/japan?' + new URLSearchParams({
-    make: 'Mazda', model: '3', city: 'Новокузнецк'}), options: {waitUntil: 'domcontentloaded', timeout: 90_000}}]);
+  assert.deepEqual(calls.navigate, Object.values(JAPAN_LEGACY_MAZDA_THREE_PAGES).map(value =>
+    ({value, options: {waitUntil: 'domcontentloaded', timeout: 90_000}})));
+  assert.deepEqual(calls.fetch, Object.values(JAPAN_LEGACY_MAZDA_THREE_PAGES).map(value =>
+    ({value, settings: {maxRedirects: 0, timeout: 90_000}})));
+  assert.deepEqual(calls.aborts, ['blockedbyclient']);
+  assert.deepEqual(report.blockedRequests, {mutation: 0, external: 0, private: 0, redirect: 0});
   assert.deepEqual(calls.read, [japanStabilitySearchApi('model', '3')]);
   assert.deepEqual(calls.stages, ['stability_legacy_mazda_three']);
   assert.deepEqual(calls.captures, ['japan-legacy-mazda-three-desktop']);
@@ -247,6 +311,8 @@ test('the legacy journey navigates the literal bookmark and performs exactly one
   assert.equal(result.proof.shown, 24); assert.equal(result.proof.stale, false);
   assert.equal(result.proof.literalBookmarkChecked, true); assert.equal(result.proof.uiMatchesApi, true);
   assert.equal(result.proof.cityPreserved, true); assert.equal(result.proof.resolvedFamily, 'MAZDA3');
+  assert.deepEqual(result.proof.canonicalRedirect, {status: 308, redirects: 1, sameOrigin: true, exactTarget: true, mainFrame: true});
+  assert.deepEqual(report.checks.legacyCanonicalRedirect, result.proof.canonicalRedirect);
 });
 
 test('the literal journey keeps fresh/fullness/status and UI identity gates and fails honestly without MAZDA3', async () => {
@@ -264,12 +330,15 @@ test('the literal journey keeps fresh/fullness/status and UI identity gates and 
   ];
   for (const [options, error] of cases) {
     const {run, calls} = legacyJourney(options); await assert.rejects(run(), error);
-    assert.equal(calls.navigate.length, 1); assert.deepEqual(calls.read, [japanStabilitySearchApi('model', '3')]);
+    assert.equal(calls.navigate.length, 2); assert.deepEqual(calls.read, [japanStabilitySearchApi('model', '3')]);
     assert.equal(calls.captures.length, 0); assert.equal(calls.closed, 0);
   }
   const rejectedHttp = legacyJourney({pageStatus: 503});
   await assert.rejects(rejectedHttp.run(), /legacy_mazda_three_page_http/);
   assert.deepEqual(rejectedHttp.calls.read, []);
+  const wrongUrl = legacyJourney({finalUrl: JAPAN_LEGACY_MAZDA_THREE_PAGES.canonical + '&make=Other'});
+  await assert.rejects(wrongUrl.run(), /legacy_mazda_three_url/);
+  assert.deepEqual(wrongUrl.calls.read, []);
 });
 
 test('grade, fuel and transmission regression checks reject substituted or unfiltered cars', () => {
@@ -287,6 +356,26 @@ test('Japan recommendations require actual auction cards and the observed China 
   assert.throws(() => verifyJapanStabilityRelated(payload, 200, 'other'), /related_response/);
   for (const items of [[], [{...row, market: 'china'}], [row, row], [{...row, id: 'green-1'}]])
     assert.throws(() => verifyJapanStabilityRelated({...payload, crossMarketGroups: [{market: 'japan', items}]}, 200, 'china1'));
+});
+
+test('Japan related cards accept the exact raw Mercedes aliases already admitted by the runtime brand map', () => {
+  const row = {id: 'ajes-stats-A1', market: 'japan', make: 'BENZ', model: 'B180'};
+  const payload = {kind: 'related', current: {id: 'china1', market: 'china'}, make: 'Mercedes-Benz', familyModel: 'B-Class'};
+  const check = make => verifyJapanStabilityRelated({...payload,
+    crossMarketGroups: [{market: 'japan', items: [{...row, make}]}]}, 200, 'china1');
+  for (const make of ['BENZ', 'Benz', 'benz', 'MERCEDES', 'Mercedes', 'MERCEDES-BENZ', 'Mercedes Benz', 'MERCEDESBENZ']) {
+    assert.equal(canonicalCatalogBrand(make), 'Mercedes-Benz');
+    assert.equal(check(make)[0].make, make);
+  }
+  for (const make of ['Toyota', 'BMW', 'Mazda', 'Mercedes-Maybach', 'BENZ TRUCK', 'BENZ Toyota', 'MERCEDESX']) {
+    assert.notEqual(canonicalCatalogBrand(make), 'Mercedes-Benz');
+    assert.throws(() => check(make), /related_rows/);
+  }
+  for (const change of [{id: 'foreign-1'}, {market: 'china'}])
+    assert.throws(() => verifyJapanStabilityRelated({...payload,
+      crossMarketGroups: [{market: 'japan', items: [{...row, ...change}]}]}, 200, 'china1'), /related_rows/);
+  assert.throws(() => verifyJapanStabilityRelated({...payload, familyModel: 'C-Class',
+    crossMarketGroups: [{market: 'japan', items: [row]}]}, 200, 'china1'), /related_response/);
 });
 
 test('fresh auction cards can share the Japan rail with source-bound Green stock invoice cards', () => {
