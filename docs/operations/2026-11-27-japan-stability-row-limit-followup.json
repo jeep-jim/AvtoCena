@@ -1,0 +1,280 @@
+{
+  "version": 1,
+  "kind": "japan-stability-pre-rollback-failure-proof-v1",
+  "checkpointAt": "2026-11-27T16:11:42+07:00",
+  "run": {
+    "id": 45967172175,
+    "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/45967172175",
+    "controllerSourceSha": "4c7eb29893550866dbb96059c489edc2c1cc2aa1",
+    "markerSha": "4c0d510fa5aafa0241498c392b9e5abda60e0d8a"
+  },
+  "artifacts": {
+    "archive": {
+      "fileName": "japan-release-45967172175.zip",
+      "bytes": 832066,
+      "sha256": "9286f4934512edc8e8199a485aef16ffcb67b7cc2dd29af9f7d0548d95402684"
+    },
+    "reports": {
+      "catalog-next-china-photo-release-report.json": {
+        "bytes": 1811,
+        "sha256": "b07ff49f82e527b3352ce48f5806e5e20fd8417c979345230ae18773a8fd566d",
+        "matchesArchive": true
+      },
+      "catalog-next-japan-browser-report.json": {
+        "bytes": 14524,
+        "sha256": "0af297df896bb19a9c1e971d39d65ec97ef7a838fb9b2aab3f7822eeb7334464",
+        "matchesArchive": true
+      },
+      "catalog-next-japan-source-failure-report.json": {
+        "bytes": 3626,
+        "sha256": "2d7c3ae9033e57401a80478234a53c1bd2b819416b8b152b845e0a6718a8f156",
+        "matchesArchive": true
+      }
+    }
+  },
+  "terminal": {
+    "status": "rolled_back",
+    "completed": false,
+    "published": false,
+    "runtimeSha": "c6cfb54cc7c9e2b9d30dcdbb7af9cb604b3aa323",
+    "retainedRuntime": "a5ca426eec2663eb17c2df69fe2bfed46e2b8740",
+    "recovered": true,
+    "retentionPreserved": true,
+    "leaseReleased": true,
+    "errorCode": "china_daily_release_japan_browser_failed",
+    "finishedAt": "2026-11-27T09:04:26.879Z"
+  },
+  "china": {
+    "retainedGenerationId": "gen_china_45875678028_1",
+    "manifestSha256": "58263ea4dc5642c9ff6f544830e9d3536ba702fb729a7a8c33b049b70b737038",
+    "calculationVersion": "4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90",
+    "releaseCounters": {
+      "sourceRequests": 0,
+      "generationRestores": 0,
+      "priceCalculations": 0,
+      "generationWrites": 0,
+      "encyclopediaWrites": 0,
+      "otherMarketWrites": 0,
+      "deletions": 0
+    },
+    "counterScope": "release counters exclude ordinary Japan SSR reads and separately reported app-image cleanup"
+  },
+  "browser": {
+    "checkedAt": "2026-11-27T09:03:23.983Z",
+    "passed": false,
+    "japanFreshnessPassed": true,
+    "japanPowerApiPassed": true,
+    "error": {
+      "stage": "pagination_plain_page_two",
+      "code": "japan_browser_unavailable_or_stale",
+      "timeout": false
+    },
+    "freshInitialResponses": [
+      {
+        "stage": "plain_first",
+        "status": 200,
+        "shown": 24,
+        "stale": false,
+        "partial": false,
+        "observedAt": "2026-11-27T09:03:05.181Z",
+        "requestedAt": "2026-11-27T09:03:26.217Z",
+        "receivedAt": "2026-11-27T09:03:27.002Z"
+      },
+      {
+        "stage": "plain_warm",
+        "status": 200,
+        "shown": 24,
+        "stale": false,
+        "partial": false,
+        "observedAt": "2026-11-27T09:03:05.181Z",
+        "requestedAt": "2026-11-27T09:03:27.003Z",
+        "receivedAt": "2026-11-27T09:03:27.317Z"
+      },
+      {
+        "stage": "power_api",
+        "status": 200,
+        "shown": 24,
+        "stale": false,
+        "partial": false,
+        "observedAt": "2026-11-27T09:03:05.181Z",
+        "requestedAt": "2026-11-27T09:03:27.317Z",
+        "receivedAt": "2026-11-27T09:03:27.662Z"
+      }
+    ],
+    "failedApiResponse": {
+      "stage": "pagination_plain_page_two",
+      "status": 200,
+      "shown": 24,
+      "stale": true,
+      "partial": true,
+      "hasMore": false,
+      "observedAt": "2026-11-27T01:56:14.520Z",
+      "requestedAt": "2026-11-27T09:03:36.169Z",
+      "receivedAt": "2026-11-27T09:03:36.985Z"
+    },
+    "failedApiSourcePageThreeReceipt": {
+      "version": 1,
+      "queryHash": "aee6a316fe78f521f28c7ad9d23f72d95303ba0aa5363c20132532dc1e64c3d4",
+      "table": "stats",
+      "kind": "list",
+      "page": 3,
+      "pageSize": 24,
+      "requestId": "a370ca23-4cd5-43b7-81a4-662a99c60d30",
+      "startedAt": "2026-11-27T09:03:36.371Z",
+      "finishedAt": "2026-11-27T09:03:36.470Z",
+      "stage": "cooldown",
+      "supplierAttempted": false,
+      "outcome": "stale",
+      "reason": "invalid_response",
+      "observedAt": "2026-11-27T01:56:14.520Z"
+    }
+  },
+  "snapshot": {
+    "capture": {
+      "version": 1,
+      "stage": "before_rollback",
+      "runtimeSha": "c6cfb54cc7c9e2b9d30dcdbb7af9cb604b3aa323",
+      "controllerSha": "4c0d510fa5aafa0241498c392b9e5abda60e0d8a",
+      "nonce": "b06ebf61dc270b9d4ff8c3f083e1d7d4",
+      "failedStage": "pagination_plain_page_two",
+      "capturedAt": "2026-11-27T09:03:39.137Z"
+    },
+    "localProductionChecker": {
+      "function": "verifySavedActiveStabilityReport",
+      "verified": true,
+      "inputs": "unchanged browser and source-failure reports plus the exact controller serving plan",
+      "supplierRequests": 0
+    },
+    "slots": [
+      "stats-list-1",
+      "stats-list-2",
+      "stats-list-3",
+      "stats-count",
+      "stats-latest"
+    ],
+    "supplierRequests": 0,
+    "writes": 0,
+    "historyReads": 0,
+    "attribution": "saved_outer_request_metadata_only",
+    "pageThree": {
+      "slot": "stats-list-3",
+      "readStatus": "ok",
+      "startedAt": "2026-11-27T09:03:31.704Z",
+      "finishedAt": "2026-11-27T09:03:35.514Z",
+      "kind": "list",
+      "outcome": "invalid_response",
+      "page": 3,
+      "pageSize": 24,
+      "httpStatus": 200,
+      "providerCode": null,
+      "sqlSha256": "aee6a316fe78f521f28c7ad9d23f72d95303ba0aa5363c20132532dc1e64c3d4",
+      "sqlBytes": 3557,
+      "responseValidation": {
+        "version": 1,
+        "phase": "page_shape",
+        "code": "row_limit_exceeded",
+        "wireBytes": 35560,
+        "decodedBytes": 35560,
+        "rowCount": 50,
+        "rootKind": "array"
+      }
+    },
+    "ssrPageThreeReceipt": {
+      "version": 1,
+      "requestId": "9ddbb85a-1b45-4e9e-be5e-c3b5764e6760",
+      "queryHash": "aee6a316fe78f521f28c7ad9d23f72d95303ba0aa5363c20132532dc1e64c3d4",
+      "table": "stats",
+      "kind": "list",
+      "page": 3,
+      "pageSize": 24,
+      "startedAt": "2026-11-27T09:03:31.498Z",
+      "finishedAt": "2026-11-27T09:03:35.534Z",
+      "stage": "supplier",
+      "supplierAttempted": true,
+      "outcome": "stale",
+      "reason": "invalid_response",
+      "observedAt": "2026-11-27T01:56:14.520Z"
+    },
+    "correlation": {
+      "sameQueryHash": true,
+      "sameKindPageAndPageSize": true,
+      "sourceWindowContainedInSsr": true,
+      "captureAfterBrowserCheckedAt": true,
+      "captureBeforeTerminalMs": 47742
+    }
+  },
+  "disk": {
+    "appImageCleanupBeforeReserve": {
+      "version": 1,
+      "kind": "china-terminal-app-image-cleanup-v1",
+      "completed": true,
+      "status": "already_absent",
+      "uncertain": false,
+      "imagesRemoved": 0,
+      "runtimeSha": "c6cfb54cc7c9e2b9d30dcdbb7af9cb604b3aa323",
+      "imageId": "sha256:a3afe6045f5a0cb0a3ca699c4f0f3f747d4e55017782eef09febdb3e3e20e249",
+      "witnessSha256": "5dce0f6f8bbf3712f75440109daeb9a0b85ef81ef71ef3f9336f3fd775a93f7e",
+      "diskFreeBytesBefore": 51106779136,
+      "diskFreeBytesAfter": 51106779136,
+      "measuredFreeBytesChange": 0,
+      "reason": "already_absent"
+    },
+    "appImageCleanup": {
+      "version": 1,
+      "kind": "china-terminal-app-image-cleanup-v1",
+      "completed": true,
+      "status": "removed",
+      "uncertain": false,
+      "imagesRemoved": 1,
+      "runtimeSha": "c6cfb54cc7c9e2b9d30dcdbb7af9cb604b3aa323",
+      "imageId": "sha256:446415f037e546b0d7694d14dce28b8576a63971858f6c340902a8036980f005",
+      "witnessSha256": "b1dade71c549091ad661fabd36e2c32614b86fd6e3e749e4e576a7231086e2ae",
+      "diskFreeBytesBefore": 49909489664,
+      "diskFreeBytesAfter": 51101253632,
+      "measuredFreeBytesChange": 1191763968,
+      "reason": "exact_terminal_image"
+    },
+    "freeGiB": 47.59175109863281,
+    "freedGiB": 1.1099166870117188,
+    "conversionDivisorBytes": 1073741824,
+    "deltaReconciled": true,
+    "newFullInventory": false
+  },
+  "next": {
+    "sourceFix": "Native-size50 and WHERE/OFFSET behavior are not established. Prepare strictly bounded private ordered-ID window fingerprints from existing oversized LIST responses, without new supplier calls, bodies/IDs/SQL/IP in reports, or relaxed acceptance; then fix the demonstrated contract.",
+    "legacyMazda3": {
+      "runtimeSha": "bdc3d6d9bd2d98004b59bab5df33056d4ffe7981",
+      "runtimeTree": "c37e32ed3c1e1246f821bdc4d708584fcf526640",
+      "parent": "c6cfb54cc7c9e2b9d30dcdbb7af9cb604b3aa323",
+      "branch": "fix/japan-stability-20261127",
+      "changedPaths": [
+        "apps/web/lib/catalog/ajes-model-resolution.ts",
+        "tests/ajes-model-recovery.test.ts"
+      ],
+      "targetedTestsPassed": 41,
+      "typecheck": "passed",
+      "publishedToSourceBranch": true,
+      "productionAccepted": false,
+      "finalPatchSha256": "ac6b28589ec24b8c8ca0e12d11b45793cf1f367dd0970999b10db50699766d8a"
+    },
+    "maintenance": "Prepared d248 remains unactivated; rebind both current and rollback runtimes to the final accepted pair before the reviewed maintenance markers.",
+    "controllerCi": {
+      "sha": "4c7eb29893550866dbb96059c489edc2c1cc2aa1",
+      "runId": "45965958192",
+      "conclusion": "success",
+      "controllerTests": 1429,
+      "selectedNativeTests": 488,
+      "typecheck": "passed",
+      "mandatoryBrowserFixtures": "passed",
+      "completedAt": "2026-11-27T08:33:14Z"
+    }
+  },
+  "limits": [
+    "Private failure metadata has no requestId or runtimeSha; page-three attribution uses the bound capture, matching hash/page/kind/size and its source interval inside the SSR receipt.",
+    "Saved page-one and page-two row_limit_exceeded records precede the fresh API checks; they are not the supplier responses of those API calls.",
+    "The count slot has another query hash and does not establish a nested-count failure for this SSR read.",
+    "The observed row-limit failure is established; the mechanism that produced 50 rows is not established here.",
+    "This local review made no supplier, server, storage or Actions requests and did not independently reread accepted, intent or lease.",
+    "Japan acceptance failed; other UI, filters, related-card and calculation checks were not completed."
+  ]
+}
