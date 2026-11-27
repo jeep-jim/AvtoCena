@@ -5,7 +5,7 @@ import path from 'node:path';
 import os from 'node:os';
 import {createHash,randomUUID} from 'node:crypto';
 import {japanReleaseBinding,verifyJapanPage,verifyJapanWarmPage,verifyJapanPowerPage,japanVerificationRequestScope,installReadFence,japanResponseObservation,
- japanResponseHeaders,japanSourceReadEvidence,recordJapanResponse,runJapanBrowserAcceptance,
+ japanLegacyMazdaReadRedirect,japanResponseHeaders,japanSourceReadEvidence,recordJapanResponse,runJapanBrowserAcceptance,
  japanCalculationReadGrant,checkedJapanCalculationRead,verifyJapanDeliveredCalculation,japanPetrolPowerUrl,verifyJapanFullPage,verifyJapanKnownPowerOrder,verifyJapanVisibleVehiclePolicy,verifyJapanBrandDirectory,japanPetrolPowerPageApi}
  from '../scripts/catalog-next/japan-browser-acceptance.mjs';
 
@@ -372,13 +372,13 @@ test('an image resource cannot disguise an AJ API, another host, credentials, po
  ])assert.equal(japanVerificationRequestScope(url,'GET','image'),'external',url);
 });
 
-async function fencedRequest({url,method='GET',resourceType='image',status=200,grant,body,headers,frameUrl,responseData={}}){
+async function fencedRequest({url,method='GET',resourceType='image',status=200,location,grant,body,headers,frameUrl,responseData={}}){
  let handler;
  const report={productionMutations:0,directSupplierApiRequests:0};
  await installReadFence({route:async(pattern,callback)=>{assert.equal(pattern,'**/*');handler=callback;}},report,
   grant?{getCalculationGrant:()=>grant}:{});
  const calls={fetch:0,fulfill:0,dispose:0,aborts:[],options:undefined};
- const response={status:()=>status,body:async()=>Buffer.from(JSON.stringify(responseData)),dispose:async()=>{calls.dispose++;}};
+ const response={status:()=>status,headers:()=>location?{location}:{},body:async()=>Buffer.from(JSON.stringify(responseData)),dispose:async()=>{calls.dispose++;}};
  await handler({request:()=>({url:()=>url,method:()=>method,resourceType:()=>resourceType,postData:()=>body,
    headers:()=>headers,frame:()=>({url:()=>frameUrl})}),
   fetch:async options=>{calls.fetch++;calls.options=options;return response;},
@@ -411,6 +411,33 @@ test('blocked requests never reach fetch or inflate the supplier image counter',
   assert.equal(report.supplierImageRequests,0);assert.equal(report.directSupplierApiRequests,0);
   assert.equal(report.blockedRequests[input.scope],1);assert.deepEqual(calls.aborts,['blockedbyclient']);
  }
+});
+
+test('only the literal legacy Japan Mazda/3 bookmark may follow a safe same-origin document redirect',async()=>{
+ const origin='https://avtocena.com/cars/japan?'+new URLSearchParams({make:'Mazda',model:'3',city:'Новокузнецк'});
+ const canonical=origin.replace('model=3','model=MAZDA3');
+ for(const status of [301,302,307,308]){
+  assert.equal(japanLegacyMazdaReadRedirect({from:origin,to:canonical,method:'GET',resourceType:'document',status}),true);
+  const {calls,report}=await fencedRequest({url:origin,method:'GET',resourceType:'document',status,location:canonical});
+  assert.equal(calls.fetch,1);assert.equal(calls.fulfill,1);
+  assert.deepEqual(calls.aborts,[]);assert.equal(report.blockedRequests.redirect,0);
+ }
+ for(const target of [
+  'https://supplier.example/cars/japan?make=Mazda&model=MAZDA3&city='+encodeURIComponent('Новокузнецк'),
+  'https://avtocena.com/api/internal/probe',
+  'https://avtocena.com/cars/japan?make=Mazda&model=AXELA&city='+encodeURIComponent('Новокузнецк'),
+  'https://avtocena.com/cars/japan?make=Toyota&model=MAZDA3&city='+encodeURIComponent('Новокузнецк'),
+  'https://avtocena.com/cars/japan?make=Mazda&model=MAZDA30&city='+encodeURIComponent('Новокузнецк'),
+  'https://avtocena.com/cars/japan?make=Mazda&model=MAZDA3&city=Moscow',
+  canonical+'&source=ajes',
+ ]) {
+  assert.equal(japanLegacyMazdaReadRedirect({from:origin,to:target,method:'GET',resourceType:'document',status:302}),false,target);
+  const {calls,report}=await fencedRequest({url:origin,method:'GET',resourceType:'document',status:302,location:target});
+  assert.equal(calls.fulfill,0);assert.deepEqual(calls.aborts,['blockedbyclient']);
+  assert.equal(report.blockedRequests.redirect,1);
+ }
+ for(const patch of [{method:'POST'},{resourceType:'image'},{status:303},{from:canonical},{to:undefined}])
+  assert.equal(japanLegacyMazdaReadRedirect({from:origin,to:canonical,method:'GET',resourceType:'document',status:302,...patch}),false);
 });
 
 test('a permitted supplier image cannot redirect into any API, foreign origin or private page',async()=>{
