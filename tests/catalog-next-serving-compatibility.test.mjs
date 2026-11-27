@@ -11,7 +11,8 @@ import {CRM_CHINA_CODE_SCOPE, CRM_CHINA_CODE_PATHS} from '../scripts/catalog-nex
 import {CRM_JAPAN_PHOTO_CODE_SCOPE, CRM_JAPAN_PHOTO_CODE_PATHS} from '../scripts/catalog-next/crm-japan-photo-code-scope.mjs';
 import {JAPAN_PAGINATION_CODE_SCOPE,JAPAN_PAGINATION_CODE_PATHS} from '../scripts/catalog-next/japan-pagination-code-scope.mjs';
 import {JAPAN_STABILITY_CODE_SCOPE,JAPAN_STABILITY_CODE_PATHS,JAPAN_STABILITY_UI_CODE_PATHS,
-  JAPAN_STABILITY_RETAINED_RUNTIME} from '../scripts/catalog-next/japan-stability-code-scope.mjs';
+  JAPAN_STABILITY_RETAINED_RUNTIME,JAPAN_STABILITY_HOME_CODE_PATHS,JAPAN_STABILITY_METADATA_CODE_PATHS,
+  JAPAN_OBSERVED_TIMING_POLICY} from '../scripts/catalog-next/japan-stability-code-scope.mjs';
 
 const hash = raw => createHash('sha256').update(raw).digest('hex');
 async function fixture(t) {
@@ -50,6 +51,18 @@ test('the identical serving/pricing runtime is valid with an exact empty diff', 
   assert.equal(proof.pricingToServingDiffSha256, hash(''));
   assert.deepEqual(proof.pricingToServingFiles, []);
   assert.equal(proof.protectedPricingPathsUnchanged, true);
+});
+
+test('metadata TTL regression is a pricing-compatible path only in the exact 59-file successor', async t => {
+  const f = await fixture(t);
+  await f.write('tests/ajes-ready-metadata.test.ts', 'positive source TTL fixture\n'); f.commit();
+  const plan = {...f.servingPlan(), codeScope: JAPAN_STABILITY_CODE_SCOPE, retainedRuntime: JAPAN_STABILITY_RETAINED_RUNTIME,
+    runtimeFiles: [...JAPAN_STABILITY_METADATA_CODE_PATHS], acceptancePolicy: JAPAN_OBSERVED_TIMING_POLICY};
+  const proof = await verifyServingCompatibility({...f, servingPlan: plan});
+  assert.deepEqual(proof.pricingToServingFiles, ['tests/ajes-ready-metadata.test.ts']);
+  assert.equal(proof.protectedPricingPathsUnchanged, true);
+  await assert.rejects(verifyServingCompatibility({...f,
+    servingPlan: {...plan, runtimeFiles: [...JAPAN_STABILITY_HOME_CODE_PATHS]}}), /china_serving_change_scope/);
 });
 
 for (const [scope, paths] of [[CRM_CHINA_CODE_SCOPE, CRM_CHINA_CODE_PATHS], [CRM_JAPAN_PHOTO_CODE_SCOPE, CRM_JAPAN_PHOTO_CODE_PATHS]])

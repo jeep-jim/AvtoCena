@@ -67,6 +67,12 @@ jobs:
           set -euo pipefail
           MODEL_SHA=$(node -p "JSON.parse(require('fs').readFileSync('.github/operations/catalog-next/china-code-serving-plan.json')).runtimeSha")
           PHOTO_RUNTIME_ROOT="$RUNNER_TEMP/china-serving-runtime-$MODEL_SHA" JAPAN_MODEL_CONTROLS_READY_REPORT="$RUNNER_TEMP/japan-model-controls-ready-browser-report.json" node tests/browser/japan-model-controls-ready.mjs
+      - name: Verify bounded Japan directory retries on the exact runtime before host contact
+        if: steps.photo_scope.outputs.scope == 'catalog-japan-stability-v1'
+        run: |
+          set -euo pipefail
+          DIRECTORY_SHA=$(node -p "JSON.parse(require('fs').readFileSync('.github/operations/catalog-next/china-code-serving-plan.json')).runtimeSha")
+          PHOTO_RUNTIME_ROOT="$RUNNER_TEMP/china-serving-runtime-$DIRECTORY_SHA" JAPAN_BRAND_DIRECTORY_RETRY_REPORT="$RUNNER_TEMP/japan-brand-directory-retry-browser-report.json" node --import tsx tests/browser/japan-brand-directory-retry.mjs
       - name: Match the proven production Docker image store
         id: photo_docker
         uses: docker/setup-docker-action@7ec28a010822b4626af4874f9448a4b05ac6f3e5
@@ -188,6 +194,7 @@ jobs:
             ${{ runner.temp }}/japan-filter-directory-browser-report.json
             ${{ runner.temp }}/japan-legacy-redirect-browser-report.json
             ${{ runner.temp }}/japan-model-controls-ready-browser-report.json
+            ${{ runner.temp }}/japan-brand-directory-retry-browser-report.json
             ${{ runner.temp }}/japan-catalog-city-report.json
             catalog-next-photo-browser-report.json
             artifacts/catalog-photo-live/**

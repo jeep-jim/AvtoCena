@@ -8,7 +8,9 @@ import {canonicalCatalogHref} from '../apps/web/lib/catalog/catalog-routes.ts';
 import {brandSelectionQuery} from '../apps/web/lib/catalog/brand-navigation.ts';
 import {canonicalCatalogBrand} from '../apps/web/lib/catalog/brands.ts';
 import {JAPAN_STABILITY_BRANDS_API, checkedJapanStabilityBrandDirectory,
-  verifyJapanStabilityBrandOptions, verifyJapanStabilityBrandRail as verifyRail, checkJapanStabilityBrandControl}
+  verifyJapanStabilityBrandOptions, verifyJapanStabilityBrandRail as verifyRail, checkJapanStabilityBrandControl,
+  japanStabilityBrandDirectoryShape, verifyJapanStabilityBrandFallback, verifyJapanStabilityBrandRailFallback,
+  verifyJapanStabilityBrandRequestCount}
   from '../scripts/catalog-next/japan-stability-browser.mjs';
 import {japanBrandDirectoryRequirement, runJapanBrowserAcceptance} from '../scripts/catalog-next/japan-browser-acceptance.mjs';
 
@@ -99,30 +101,65 @@ test('rail rejects a page slice, invented makes, alias-only navigation, missing 
 });
 
 function controlFixture({status = 200, stale = false, values = sourceValues, responseUrl = ORIGIN + JAPAN_STABILITY_BRANDS_API,
-  state = 'ready', railState = 'ready', railLinks = links(), source = payload(), notice = false, movePage = false} = {}) {
-  let open = false, waiting, url = pageUrl;
-  const calls = {clicks: 0, requests: 0, observed: [], captures: 0, waits: []};
-  const response = {url: () => responseUrl, request: () => ({method: () => 'GET'}), status: () => status,
-    json: async () => ({...source, stale, generationId: new Date(Date.now() - 1000).toISOString()}), headers: () => ({'content-type': 'application/json'})};
-  const ready = value => ({waitFor: async options => { calls.waits.push(options); assert.equal(value, 'ready', 'directory readiness'); }});
+  state = 'ready', railState = 'ready', railLinks = links(), source = payload(), notice = false, movePage = false,
+  recovery, railRecovery, hiddenChanged = false, fallbackRows = visibleRows, mobile = false} = {}) {
+  let open = false, waiting, url = pageUrl, index = 0, currentRailState = railState, currentRailLinks = railLinks;
+  const sequence = [{status, stale, values, state, source, notice}, recovery].filter(Boolean);
+  const current = () => sequence[Math.min(index, sequence.length - 1)];
+  const calls = {clicks: 0, requests: 0, observed: [], captures: 0, waits: [], dropdownRetries: 0, railRetries: 0};
+  const request = () => {
+    const row = current(); calls.requests++;
+    const response = {url: () => responseUrl, request: () => ({method: () => 'GET'}), status: () => row.status ?? 200,
+      json: async () => ({...(row.source ?? payload()), stale: row.stale ?? false, generationId: new Date(Date.now() - 1000).toISOString()}),
+      headers: () => ({'content-type': 'application/json'})};
+    assert(waiting, 'listen before action'); assert(waiting.predicate(response)); waiting.resolve(response);
+  };
+  const waitState = (actual, expected) => ({waitFor: async options => {
+    calls.waits.push(options); assert(expected.includes(actual()), 'directory readiness');
+  }});
+  const retry = {count: async () => Number(current().state === 'unavailable'), isVisible: async () => open && current().state === 'unavailable',
+    click: async () => { calls.dropdownRetries++; index++; request(); }};
   const dropdown = {waitFor: async () => assert(open),
-    getAttribute: async key => { assert.equal(key, 'data-japan-source-directory-state'); return state; },
+    getAttribute: async key => { assert.equal(key, 'data-japan-source-directory-state'); return current().state; },
     locator: selector => { assert.equal(selector, 'button[data-facet-value]'); return {
-      evaluateAll: async fn => fn(values.map(value => ({getAttribute: () => value}))) }; },
-    getByText: () => ({count: async () => Number(notice)}), getByRole: () => ({count: async () => Number(notice)})};
-  const parent = {locator: selector => selector === '.ac-filter-dropdown' ? dropdown : ready(state)};
-  const trigger = {count: async () => 1, getAttribute: async () => String(open), locator: selector => { assert.equal(selector, '..'); return parent; },
-    click: async () => { calls.clicks++; open = !open; if (open) { calls.requests++; assert(waiting, 'listen before opening');
-      assert(waiting.predicate(response)); waiting.resolve(response); } if (movePage) url += '&make=TOYOTA'; }};
+      evaluateAll: async fn => fn((current().values ?? sourceValues).map(value => ({getAttribute: () => value}))) }; },
+    getByText: () => ({count: async () => Number(Boolean(current().notice))}), getByRole: () => retry};
+  const parent = {locator: selector => selector === '.ac-filter-dropdown' ? dropdown
+    : waitState(() => current().state, [selector.includes('"unavailable"') ? 'unavailable' : 'ready'])};
+  const form = {getAttribute: async key => { assert.equal(key, 'role'); return mobile ? 'dialog' : null; },
+    waitFor: async () => {}, locator: selector => selector.includes('Расширенные фильтры')
+    ? {waitFor: async options => assert.equal(options.state, 'attached')}
+    : {evaluateAll: async fn => { assert.equal(selector, 'input[type="hidden"][name]'); return fn([
+      {name: 'make', value: hiddenChanged && calls.railRetries ? 'MAZDA' : ''}, {name: 'model', value: ''}]); }}};
+  const trigger = {count: async () => 1, getAttribute: async () => String(open), locator: selector => {
+      assert(['..', 'xpath=ancestor::form[1]'].includes(selector)); return selector === '..' ? parent : form;
+    }, click: async () => { calls.clicks++; open = !open; if (open) request(); if (movePage) url += '&make=TOYOTA'; }};
   const controls = {locator: selector => { assert.equal(selector, 'button[aria-label="Выбрать марки автомобилей"]:visible'); return trigger; }};
-  const rail = {waitFor: async () => {}, getAttribute: async () => railState, boundingBox: async () => ({y: 100, height: 80}),
+  const rail = {waitFor: async () => {}, getAttribute: async () => currentRailState, boundingBox: async () => ({y: 100, height: 80}),
+    getByRole: () => ({count: async () => Number(currentRailState === 'unavailable' && Boolean(railRecovery)),
+      isVisible: async () => currentRailState === 'unavailable', click: async () => {
+        assert.equal(open, false, 'finish and close dropdown before rail remount'); calls.railRetries++;
+        currentRailState = railRecovery.state; currentRailLinks = railRecovery.links;
+      }}),
     locator: selector => { assert.equal(selector, 'a[title^="Автомобили "]'); return {
-      evaluateAll: async fn => fn(railLinks.map(row => ({getAttribute: key => row[key]}))) }; }};
+      evaluateAll: async fn => fn(currentRailLinks.map(row => ({getAttribute: key => row[key]}))) }; }};
+  const cards = {nth: index => ({waitFor: async () => assert(index < fallbackRows.length)}),
+    count: async () => fallbackRows.length, first: () => ({boundingBox: async () => ({y: 200, height: 100})}),
+    filter: ({has}) => ({waitFor: async () => {}, count: async () => Number(fallbackRows.some(row => has.selector.includes(row.id)))})};
+  const catalog = {locator: selector => { assert.equal(selector, 'article.ac-catalog-card,article.ac-catalog-list-row'); return cards; },
+    getByText: () => ({count: async () => 0})};
   const view = {url: () => url, waitForResponse: (predicate, options) => {
     assert.equal(options.timeout, 45_000); return new Promise(resolve => { waiting = {predicate, resolve}; }); },
-    locator: selector => selector.includes('section.ac-brand-rail') ? ready(railState) : {
-      locator: () => ({first: () => ({boundingBox: async () => ({y: 200, height: 100})})}) }};
-  return {calls, run: extra => checkJapanStabilityBrandControl({view, controls, rail, visibleRows,
+    locator: selector => {
+      if (selector.startsWith('form.')) return form;
+      if (selector.startsWith('form[role=')) return {waitFor: async options => assert.equal(options.state, 'visible')};
+      if (selector.includes('section.ac-brand-rail')) return waitState(() => currentRailState,
+        selector.includes('"unavailable"') ? ['ready', 'unavailable'] : ['ready']);
+      if (selector.startsWith('a[href*=')) return {selector};
+      assert.equal(selector, 'main.ac-ajes-catalog'); return catalog;
+    }};
+  const progress = {};
+  return {calls, progress, run: extra => checkJapanStabilityBrandControl({view, controls, rail, visibleRows, progress,
     onResponse: value => calls.observed.push(value), capture: async page => { assert.equal(page, view); assert(open); calls.captures++; }, ...extra})};
 }
 
@@ -147,6 +184,134 @@ test('live control cannot pass after filtered metadata, stale/empty source, fall
   }
   const fixture = controlFixture();
   await assert.rejects(fixture.run({rail: undefined, expectedDirectory: {...directory(), makes: ['TOYOTA']}}), /brand_directory_changed/);
+});
+
+const recovered = () => ({status: 200, stale: false, source: payload(), values: sourceValues, state: 'ready'});
+const fallbackValues = ['TOYOTA', 'HONDA'];
+const fallbackLinks = () => [link('Toyota', ['TOYOTA']), link('Honda', ['HONDA'])];
+
+test('metadata shapes distinguish empty, malformed and unavailable counts without returning their values', () => {
+  for (const [counts, countsType, entryCount, positiveCount, invalidCount] of [
+    [undefined, 'missing', null, null, null], [null, 'null', null, null, null],
+    [[], 'array', null, null, null], [{}, 'object', 0, 0, 0],
+    [{TOYOTA: 24, HONDA: 0}, 'object', 2, 1, 0],
+    [{private_name: 'private_value', HONDA: -1, TOYOTA: 1.5}, 'object', 3, 0, 3],
+  ]) {
+    const shape = japanStabilityBrandDirectoryShape({counts, stale: false}, 200);
+    assert.deepEqual({...shape, countsSha256: null}, {status: 200, stale: false, countsType, entryCount,
+      positiveCount, invalidCount, countsSha256: null});
+    if (counts !== undefined) assert.match(shape.countsSha256, /^[a-f0-9]{64}$/);
+    assert(!/private_name|private_value|TOYOTA/.test(JSON.stringify(shape)));
+  }
+  assert.equal(japanStabilityBrandDirectoryShape(null, 503).stale, null);
+});
+
+test('unavailable dropdown gets exactly one real retry, then requires the full fresh source', async () => {
+  const f = controlFixture({source: {...payload(), counts: {}}, state: 'unavailable', values: fallbackValues,
+    recovery: recovered()});
+  const result = await f.run();
+  assert.equal(f.calls.requests, 2); assert.equal(f.calls.dropdownRetries, 1); assert.equal(f.calls.clicks, 2);
+  assert.equal(f.calls.observed.length, 2); assert.equal(f.calls.captures, 1);
+  assert.equal(result.proof.completeSourceCovered, true); assert.equal(result.proof.fallbackOnly, false);
+  assert.equal(result.proof.metadataRequests, 2); assert.equal(result.proof.dropdownRetryUsed, true);
+  assert.equal(f.progress.dropdownFallback.completeSourceCovered, false);
+  assert.equal(f.progress.dropdownFallback.fallbackOnly, true);
+  assert.equal(f.progress.attempts[0].entryCount, 0); assert.equal(f.progress.attempts[0].validation, 'brand_directory_rows');
+  assert.equal(f.progress.attempts[1].validation, 'fresh_complete'); assert.equal(f.progress.phase, 'complete');
+});
+
+test('desktop rail retry happens after the verified dropdown closes and never asks it for another response', async () => {
+  const f = controlFixture({status: 503, state: 'unavailable', values: fallbackValues,
+    recovery: recovered(), railState: 'unavailable', railLinks: fallbackLinks(),
+    railRecovery: {state: 'ready', links: links()}});
+  const result = await f.run();
+  assert.equal(f.calls.requests, 2); assert.equal(f.calls.dropdownRetries, 1); assert.equal(f.calls.railRetries, 1);
+  assert.equal(f.calls.clicks, 2); assert.equal(result.proof.railRetryUsed, true);
+  assert.equal(result.proof.sourceLinksMatched, true); assert.equal(result.proof.selectionUnchanged, true);
+  assert.equal(f.progress.railFallback.completeSourceCovered, false); assert.equal(f.progress.controlsKind, 'desktop');
+});
+
+test('mobile recovery stays bound to the prior complete directory and its current visible rows', async () => {
+  const f = controlFixture({mobile: true, source: {...payload(), counts: {}}, state: 'unavailable',
+    values: fallbackValues, recovery: recovered()});
+  const result = await f.run({rail: undefined, expectedDirectory: directory()});
+  assert.equal(result.proof.completeSourceCovered, true); assert.equal(result.proof.railRetryUsed, false);
+  assert.equal(f.progress.controlsKind, 'mobile'); assert.equal(f.calls.requests, 2);
+});
+
+test('persistent unavailable source refuses after two observed responses and never certifies fallback', async () => {
+  const f = controlFixture({source: {...payload(), counts: {}}, state: 'unavailable', values: fallbackValues});
+  await assert.rejects(f.run(), /brand_directory_rows/);
+  assert.equal(f.calls.requests, 2); assert.equal(f.calls.dropdownRetries, 1); assert.equal(f.calls.railRetries, 0);
+  assert.equal(f.calls.captures, 0); assert.equal(f.progress.attempts.length, 2);
+  assert.equal(f.progress.phase, 'metadata_retry'); assert.equal(f.progress.dropdownFallback.completeSourceCovered, false);
+});
+
+test('invented fallback names, missing visible makes or absent matching cards cannot trigger a retry', async () => {
+  for (const patch of [{values: [...fallbackValues, 'FORD']}, {values: ['TOYOTA']},
+    {fallbackRows: [{...visibleRows[0], id: 'ajes-stats-other'}, visibleRows[1]]}]) {
+    const f = controlFixture({source: {...payload(), counts: {}}, state: 'unavailable', values: fallbackValues,
+      recovery: recovered(), ...patch});
+    await assert.rejects(f.run());
+    assert.equal(f.calls.requests, 1); assert.equal(f.calls.dropdownRetries, 0);
+  }
+  assert.throws(() => verifyJapanStabilityBrandFallback(fallbackValues, [{id: 'foreign', market: 'china', make: 'TOYOTA'}], {}, 200),
+    /brand_fallback_visible_source/);
+});
+
+test('a recovered response cannot replace complete UI names with fallback or alter hidden selections', async () => {
+  for (const recovery of [{...recovered(), state: 'unavailable', values: fallbackValues},
+    {...recovered(), values: sourceValues.slice(1)}]) {
+    const f = controlFixture({source: {...payload(), counts: {}}, state: 'unavailable', values: fallbackValues, recovery});
+    await assert.rejects(f.run()); assert.equal(f.calls.requests, 2); assert.equal(f.calls.dropdownRetries, 1);
+  }
+  const changed = controlFixture({railState: 'unavailable', railLinks: fallbackLinks(),
+    railRecovery: {state: 'ready', links: links()}, hiddenChanged: true});
+  await assert.rejects(changed.run(), /brand_control_changed/);
+});
+
+test('a rail may retain an actually observed stale source make until refresh, without calling it complete', async () => {
+  const f = controlFixture({stale: true, source: {...payload(), counts: {SUZUKI: 2}}, state: 'unavailable',
+    values: [...fallbackValues, 'SUZUKI'], recovery: recovered(), railState: 'unavailable',
+    railLinks: [...fallbackLinks(), link('Suzuki', ['SUZUKI'])], railRecovery: {state: 'ready', links: links()}});
+  const result = await f.run();
+  assert.equal(f.progress.attempts[0].stale, true); assert.equal(f.progress.railFallback.fallbackMakes, 3);
+  assert.equal(f.progress.railFallback.completeSourceCovered, false); assert.equal(result.proof.completeSourceCovered, true);
+  assert(!result.directory.makes.includes('SUZUKI'));
+  for (const initial of [undefined, {status: 503, data: {stale: true, counts: {SUZUKI: 2}}},
+    {status: 200, data: {...payload(), stale: true, counts: {SUZUKI: '2'}}}]) {
+    assert.throws(() => verifyJapanStabilityBrandRailFallback([...fallbackLinks(), link('Suzuki', ['SUZUKI'])],
+      visibleRows, directory(), pageUrl, canonicalCatalogBrand, initial), /brand_rail_fallback_source_names/);
+  }
+});
+
+test('request accounting accepts only one or two actual metadata responses per complete control', () => {
+  const proof = requests => ({completeSourceCovered: true, fallbackOnly: false, metadataRequests: requests,
+    dropdownRetryUsed: requests === 2, railRetryUsed: false});
+  for (const pair of [[1, 1], [1, 2], [2, 1], [2, 2]])
+    assert.equal(verifyJapanStabilityBrandRequestCount(pair[0] + pair[1], pair.map(proof)), pair[0] + pair[1]);
+  for (const [actual, pair] of [[1, [proof(1), proof(1)]], [5, [proof(2), proof(3)]],
+    [4, [proof(1), proof(2)]], [3, [proof(1), {...proof(2), dropdownRetryUsed: false}]],
+    [2, [proof(1), {...proof(1), completeSourceCovered: false}]]])
+    assert.throws(() => verifyJapanStabilityBrandRequestCount(actual, pair), /brand_directory_request_count/);
+});
+
+test('both workflows require actual directory retry fixtures on verified runtime before host contact', async () => {
+  for (const name of ['verify-china-photo-code.yml', 'catalog-next-china-photo-release.yml']) {
+    const raw = await fs.readFile(new URL('../.github/workflows/' + name, import.meta.url), 'utf8');
+    const steps = raw.split(/\n      - /), index = steps.findIndex(step => step.startsWith('name: Verify bounded Japan directory retries'));
+    assert(index > 0, name); const fixture = steps[index];
+    assert.match(fixture, /if: steps\.photo_scope\.outputs\.scope == 'catalog-japan-stability-v1'/);
+    assert.match(fixture, /PHOTO_RUNTIME_ROOT="\$RUNNER_TEMP\/china-serving-runtime-\$DIRECTORY_SHA"/);
+    assert.match(fixture, /JAPAN_BRAND_DIRECTORY_RETRY_REPORT="\$RUNNER_TEMP\/japan-brand-directory-retry-browser-report\.json" node --import tsx tests\/browser\/japan-brand-directory-retry\.mjs/);
+    assert.doesNotMatch(fixture, /continue-on-error|\|\| true/);
+    assert(steps.slice(0, index).some(step => step.includes('scripts/catalog-next/code-entry.mjs --verify')));
+    assert(steps.slice(0, index).some(step => step.includes('playwright@1.55.0')));
+    const after = name.startsWith('verify-') ? 'Test the native runtime' : 'Publish the code with existing China bytes';
+    assert(steps.findIndex(step => step.startsWith('name: ' + after)) > index);
+    assert(steps.slice(index + 1).some(step => step.includes('actions/upload-artifact@v4')
+      && step.includes('japan-brand-directory-retry-browser-report.json')));
+  }
 });
 
 test('brand requirement environment is exact and cannot be requested in an older browser scope', async t => {

@@ -27,12 +27,13 @@ const MODELS = {version: 1, brands: [], models: [['MAZDA', 'MAZDA3 FASTBACK', []
 
 /** The controller supplies only transport and lifecycle assertions. Every
  * component is bundled from the independently verified runtime checkout. */
-export async function prepareJapanModelControlsFixture(runtimeRoot, plan) {
+export async function prepareJapanModelControlsFixture(runtimeRoot, plan, {extraSourceFiles = [],
+  transformFixture = value => value, extraCss = ''} = {}) {
   need(path.isAbsolute(runtimeRoot || '') && runtimeRoot !== ROOT.replace(/\/$/, ''), 'runtime_root');
   const git = args => execFileSync('git', ['-C', runtimeRoot, ...args], {encoding: 'utf8', timeout: 30_000}).trim();
   need(git(['rev-parse', 'HEAD']) === plan.runtimeSha && git(['rev-parse', 'HEAD^{tree}']) === plan.runtimeTree, 'runtime_binding');
   const sources = {};
-  for (const file of SOURCE_FILES) {
+  for (const file of [...SOURCE_FILES, ...extraSourceFiles]) {
     const raw = await fs.readFile(path.join(runtimeRoot, file));
     const committed = execFileSync('git', ['-C', runtimeRoot, 'show', plan.runtimeSha + ':' + file], {timeout: 30_000});
     need(raw.equals(committed), 'runtime_component_changed'); sources[file] = hash(raw);
@@ -50,6 +51,7 @@ export async function prepareJapanModelControlsFixture(runtimeRoot, plan) {
   once("const acknowledge=()=>setInitial({...Object.fromEntries(new URLSearchParams(location.search)),...catalogRouteParams(location.pathname)});",
     "const acknowledge=()=>{setInitial({...Object.fromEntries(new URLSearchParams(location.search)),...catalogRouteParams(location.pathname)});if((window as any).__japanModelRemount)setRouteKey(location.pathname);};");
   once('<CatalogFilters initial={initial}', '<CatalogFilters key={routeKey} initial={initial}');
+  fixture = transformFixture(fixture);
   const temporary = await fs.mkdtemp(path.join(os.tmpdir(), 'japan-model-controls-'));
   const transport = {name: 'verified-runtime-controls-transport', setup(builder) {
     builder.onResolve({filter: /^fixture:runtime-controls$/}, () => ({path: 'controls', namespace: 'runtime-fixture'}));
@@ -57,7 +59,7 @@ export async function prepareJapanModelControlsFixture(runtimeRoot, plan) {
     builder.onResolve({filter: /^next\/(navigation|link)$/}, args => ({path: args.path, namespace: 'next-fixture'}));
     builder.onLoad({filter: /.*/, namespace: 'next-fixture'}, args => ({loader: 'js', resolveDir: runtimeRoot,
       contents: args.path.endsWith('navigation')
-        ? `const router={push(href){window.__japanCityFixture.navigate(href)},replace(href){history.replaceState(null,'',href)}};export const useRouter=()=>router;export const usePathname=()=>typeof location==='undefined'?null:location.pathname;export const useSearchParams=()=>new URLSearchParams(typeof location==='undefined'?'':location.search);`
+        ? `const router={push(href){window.__japanCityFixture.navigate(href)},replace(href){history.replaceState(null,'',href)},refresh(){return window.__japanCityFixture.refresh?.()}};export const useRouter=()=>router;export const usePathname=()=>typeof location==='undefined'?null:location.pathname;export const useSearchParams=()=>new URLSearchParams(typeof location==='undefined'?'':location.search);`
         : `import React from 'react';export default function Link({children,prefetch,...props}){return React.createElement('a',props,children)}`,
     }));
   }};
@@ -70,13 +72,14 @@ export async function prepareJapanModelControlsFixture(runtimeRoot, plan) {
     await build({...common, stdin: {contents: `import React from 'react';import {renderToString} from 'react-dom/server';import {JapanCityFixture} from 'fixture:runtime-controls';export const render=initial=>renderToString(React.createElement(JapanCityFixture,{initial}));`, resolveDir: runtimeRoot, loader: 'tsx'},
       platform: 'node', format: 'cjs', outfile: path.join(temporary, 'server.cjs')});
     const {render} = require(path.join(temporary, 'server.cjs'));
-    const markup = render({market: 'japan', city: CITY}).replace(/(<style[^>]*>)([\s\S]*?)(<\/style>)/g,
+    const renderMarkup = initial => render(initial).replace(/(<style[^>]*>)([\s\S]*?)(<\/style>)/g,
       (_all, open, css, close) => open + css.replace(/&gt;/g, '>').replace(/&lt;/g, '<').replace(/&quot;/g, '"').replace(/&#x27;/g, "'").replace(/&amp;/g, '&') + close);
+    const markup = renderMarkup({market: 'japan', city: CITY});
     need(markup.includes('aria-label="Расширенные фильтры"') && markup.includes('aria-busy="true"'), 'actual_ssr_marker');
-    const css = await postcss([tailwindcss({content: SOURCE_FILES.slice(0, 3).map(file => path.join(runtimeRoot, file))})])
+    const css = await postcss([tailwindcss({content: [...SOURCE_FILES.slice(0, 3), ...extraSourceFiles].map(file => path.join(runtimeRoot, file))})])
       .process('@tailwind base;@tailwind components;@tailwind utilities;', {from: undefined});
-    return {temporary, sources, markup, javascript: await fs.readFile(path.join(temporary, 'fixture.js')),
-      css: css.css + '.ac-catalog-filter-panel{display:block!important;width:360px;padding:12px}.ac-catalog-filter-panel>div.grid{display:flex;flex-direction:column;gap:10px}.ac-catalog-sidebar .ac-filter-settings{display:none!important}.ac-filter-more-button{display:none!important}.ac-filter-dropdown{background:white}.ac-catalog-sidebar{width:400px}'};
+    return {temporary, sources, markup, renderMarkup, javascript: await fs.readFile(path.join(temporary, 'fixture.js')),
+      css: css.css + '.ac-catalog-filter-panel{display:block!important;width:360px;padding:12px}.ac-catalog-filter-panel>div.grid{display:flex;flex-direction:column;gap:10px}.ac-catalog-sidebar .ac-filter-settings{display:none!important}.ac-filter-more-button{display:none!important}.ac-filter-dropdown{background:white}.ac-catalog-sidebar{width:400px}' + extraCss};
   } catch (error) { await fs.rm(temporary, {recursive: true, force: true}); throw error; }
 }
 

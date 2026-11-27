@@ -44,6 +44,7 @@ on:
       - tests/browser/photo-japan-recovery-clock.mjs
       - tests/browser/japan-legacy-redirect.mjs
       - tests/browser/japan-model-controls-ready.mjs
+      - tests/browser/japan-brand-directory-retry.mjs
 permissions:
   contents: read
 concurrency:
@@ -100,6 +101,12 @@ jobs:
           set -euo pipefail
           MODEL_SHA=$(node -p "JSON.parse(require('fs').readFileSync('.github/operations/catalog-next/china-code-serving-plan.json')).runtimeSha")
           PHOTO_RUNTIME_ROOT="$RUNNER_TEMP/china-serving-runtime-$MODEL_SHA" JAPAN_MODEL_CONTROLS_READY_REPORT="$RUNNER_TEMP/japan-model-controls-ready-browser-report.json" node tests/browser/japan-model-controls-ready.mjs
+      - name: Verify bounded Japan directory retries on the exact runtime before host contact
+        if: steps.photo_scope.outputs.scope == 'catalog-japan-stability-v1'
+        run: |
+          set -euo pipefail
+          DIRECTORY_SHA=$(node -p "JSON.parse(require('fs').readFileSync('.github/operations/catalog-next/china-code-serving-plan.json')).runtimeSha")
+          PHOTO_RUNTIME_ROOT="$RUNNER_TEMP/china-serving-runtime-$DIRECTORY_SHA" JAPAN_BRAND_DIRECTORY_RETRY_REPORT="$RUNNER_TEMP/japan-brand-directory-retry-browser-report.json" node --import tsx tests/browser/japan-brand-directory-retry.mjs
       - name: Test the native runtime and every required check for its reviewed scope
         env:
           CATALOG_CODE_SCOPE: ${{ steps.photo_scope.outputs.scope }}
@@ -197,6 +204,14 @@ jobs:
         with:
           name: japan-filter-directory-fixture
           path: ${{ runner.temp }}/japan-filter-directory-browser-report.json
+          if-no-files-found: warn
+          retention-days: 7
+      - name: Preserve bounded Japan directory retry browser evidence
+        if: always() && steps.photo_scope.outputs.scope == 'catalog-japan-stability-v1'
+        uses: actions/upload-artifact@v4
+        with:
+          name: japan-brand-directory-retry-fixture
+          path: ${{ runner.temp }}/japan-brand-directory-retry-browser-report.json
           if-no-files-found: warn
           retention-days: 7
       - name: Preserve Japan page-fill and continuation fixture evidence

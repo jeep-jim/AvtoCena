@@ -129,52 +129,186 @@ export function verifyJapanStabilityBrandRail(directory, links, visibleRows, pag
     sourceLinksMatched: true, filterContextPreserved: true};
 }
 
-/** Observe the one request made by opening the real control. There is no
- * separate metadata fetch or source scan, and no selection is changed. */
+/** Safe metadata diagnostics distinguish an unavailable directory from malformed
+ * rows without recording source names, payload bodies or private headers. */
+export function japanStabilityBrandDirectoryShape(payload, status) {
+  const counts = payload?.counts;
+  const countsType = counts === undefined ? 'missing' : counts === null ? 'null'
+    : Array.isArray(counts) ? 'array' : typeof counts;
+  const entries = countsType === 'object' ? Object.entries(counts) : null;
+  return {status: Number.isInteger(status) && status >= 100 && status <= 599 ? status : null,
+    stale: typeof payload?.stale === 'boolean' ? payload.stale : null, countsType,
+    entryCount: entries?.length ?? null,
+    positiveCount: entries ? entries.filter(([, count]) => Number.isSafeInteger(count) && count > 0).length : null,
+    invalidCount: entries ? entries.filter(([make, count]) => !name(make) || !Number.isSafeInteger(count) || count < 0).length : null,
+    countsSha256: counts === undefined ? null : hash(JSON.stringify(counts))};
+}
+
+function fallbackSourceMakes(visibleRows, payload, status) {
+  need(Array.isArray(visibleRows) && visibleRows.length > 0
+    && visibleRows.every(row => auctionRow(row) && name(row.make)), 'brand_fallback_visible_source');
+  const counts = payload?.counts;
+  const entries = status === 200 && counts && typeof counts === 'object' && !Array.isArray(counts)
+    ? Object.entries(counts) : [];
+  // Valid stale metadata may supply names, but never a complete/fresh verdict.
+  // Malformed or failed metadata is discarded by the actual component.
+  const source = entries.every(([make, count]) => name(make) && Number.isSafeInteger(count) && count >= 0)
+    ? entries.filter(([, count]) => count > 0).map(([make]) => make) : [];
+  return distinctMakes([...visibleRows.map(row => row.make), ...source]);
+}
+
+export function verifyJapanStabilityBrandFallback(values, visibleRows, payload, status) {
+  const allowed = fallbackSourceMakes(visibleRows, payload, status).map(makeKey);
+  need(Array.isArray(values) && values.length > 0 && values.every(name), 'brand_fallback_rows');
+  const keys = values.map(makeKey);
+  need(new Set(keys).size === keys.length && keys.every(value => allowed.includes(value))
+    && visibleRows.every(row => keys.includes(makeKey(row.make))), 'brand_fallback_source_names');
+  return {sourceFallbackVerified: true, fallbackMakes: keys.length,
+    sourceNamesSha256: hash(JSON.stringify(sortedValues(values))), completeSourceCovered: false, fallbackOnly: true};
+}
+
+export function verifyJapanStabilityBrandRailFallback(links, visibleRows, directory, pageUrl, canonicalMake, initialObservation) {
+  need(typeof canonicalMake === 'function' && Array.isArray(directory?.makes), 'brand_rail_presentation');
+  const allowed = fallbackSourceMakes(visibleRows, null, 0);
+  const first = initialObservation?.data, observed = Date.parse(first?.generationId || '');
+  const stale = initialObservation?.status === 200 && first?.stale === true && Number.isFinite(observed)
+    && observed <= Date.now() + 60_000 ? fallbackSourceMakes(visibleRows, first, 200) : [];
+  const source = new Set([...allowed, ...directory.makes, ...stale]), seen = new Set(), covered = new Set();
+  need(Array.isArray(links) && links.length > 0, 'brand_rail_fallback_rows');
+  for (const link of links) {
+    const label = typeof link?.title === 'string' && /^Автомобили (.+) под заказ$/u.exec(link.title)?.[1];
+    need(name(label) && !seen.has(label), 'brand_rail_fallback_names'); seen.add(label);
+    for (const make of railMakeValues(link.href, pageUrl)) {
+      need(source.has(make) && canonicalMake(make) === label, 'brand_rail_fallback_source_names'); covered.add(make);
+    }
+  }
+  need(allowed.every(make => covered.has(make)), 'brand_rail_fallback_visible_source');
+  return {sourceFallbackVerified: true, fallbackMakes: covered.size, fallbackRails: links.length,
+    sourceNamesSha256: hash(JSON.stringify(sortedValues([...covered]))), completeSourceCovered: false, fallbackOnly: true};
+}
+
+export function verifyJapanStabilityBrandRequestCount(actual, proofs) {
+  need(Array.isArray(proofs) && proofs.length === 2 && proofs.every(proof =>
+    proof?.completeSourceCovered === true && proof.fallbackOnly === false
+    && [1, 2].includes(proof.metadataRequests) && typeof proof.railRetryUsed === 'boolean'
+    && proof.dropdownRetryUsed === (proof.metadataRequests === 2))
+    && Number.isSafeInteger(actual) && actual >= 2 && actual <= 4
+    && actual === proofs.reduce((total, proof) => total + proof.metadataRequests, 0), 'brand_directory_request_count');
+  return actual;
+}
+
+/** Observe real control requests only. An honest unavailable source UI permits
+ * one actual Retry; success still requires the original fresh complete source
+ * and exact option/rail identity checks. There is no explicit metadata fetch. */
 export async function checkJapanStabilityBrandControl({view, controls, rail, visibleRows,
-  expectedDirectory, onResponse = () => {}, capture = async () => {}}) {
+  expectedDirectory, onResponse = () => {}, capture = async () => {}, progress = {}}) {
+  Object.assign(progress, {phase: 'opening', attempts: [], dropdownRetries: 0, railRetries: 0});
   const before = view.url(), trigger = controls.locator('button[aria-label="Выбрать марки автомобилей"]:visible');
-  need(await trigger.count() === 1 && await trigger.getAttribute('aria-expanded') === 'false', 'brand_control');
-  const requestedAt = Date.now();
-  const pending = view.waitForResponse(response => {
-    try { const url = new URL(response.url()); return response.request().method() === 'GET' && url.origin === ORIGIN
-      && url.pathname === '/api/catalog/brand-counts'; } catch { return false; }
-  }, {timeout: 45_000});
-  pending.catch(() => {});
-  await trigger.click();
-  const response = await pending, receivedAt = Date.now();
-  need(response.url() === ORIGIN + JAPAN_STABILITY_BRANDS_API, 'brand_directory_query');
-  const data = await response.json().catch(() => null), status = response.status();
-  onResponse({data, status, headers: response.headers(), requestedAt, receivedAt, durationMs: receivedAt - requestedAt});
-  const directory = checkedJapanStabilityBrandDirectory(data, status);
+  need(new URL(before).searchParams.get('city') === CITY && await trigger.count() === 1
+    && await trigger.getAttribute('aria-expanded') === 'false', 'brand_control');
+  progress.phase = 'controls_ready';
+  const form = trigger.locator('xpath=ancestor::form[1]');
+  progress.controlsKind = await form.getAttribute('role') === 'dialog' ? 'mobile' : 'desktop';
+  if (progress.controlsKind === 'desktop') await waitForJapanStabilityControls(view);
+  else await view.locator('form[role="dialog"][aria-label="Фильтры каталога"][aria-busy="false"]')
+    .waitFor({state: 'visible', timeout: 15_000});
+  const selectedInputs = () => form.locator('input[type="hidden"][name]').evaluateAll(nodes => nodes.map(node =>
+    [node.name, node.value]).sort((left, right) => left[0].localeCompare(right[0]) || left[1].localeCompare(right[1])));
+  const selectedBefore = await selectedInputs();
+  progress.selectionSha256 = hash(JSON.stringify(selectedBefore));
+  const parent = trigger.locator('..'), dropdown = parent.locator('.ac-filter-dropdown');
+  const unavailable = parent.locator('.ac-filter-dropdown[data-japan-source-directory-state="unavailable"]');
+  const retryName = 'Не удалось загрузить марки. Повторить';
+  async function observe(action) {
+    need(progress.attempts.length < 2, 'brand_directory_request_count');
+    progress.phase = progress.attempts.length ? 'metadata_retry' : 'metadata_initial';
+    const requestedAt = Date.now();
+    const pending = view.waitForResponse(response => {
+      try { const url = new URL(response.url()); return response.request().method() === 'GET' && url.origin === ORIGIN
+        && url.pathname === '/api/catalog/brand-counts'; } catch { return false; }
+    }, {timeout: 45_000});
+    pending.catch(() => {});
+    await action();
+    const response = await pending, receivedAt = Date.now();
+    need(response.url() === ORIGIN + JAPAN_STABILITY_BRANDS_API, 'brand_directory_query');
+    const data = await response.json().catch(() => null), status = response.status();
+    const attempt = {...japanStabilityBrandDirectoryShape(data, status), attempt: progress.attempts.length + 1};
+    progress.attempts.push(attempt);
+    await onResponse({data, status, headers: response.headers(), requestedAt, receivedAt, durationMs: receivedAt - requestedAt});
+    try { const directory = checkedJapanStabilityBrandDirectory(data, status); attempt.validation = 'fresh_complete'; return {data, status, directory}; }
+    catch (error) {
+      need(/^japan_browser_stability_brand_directory_(?:unavailable|rows|empty)$/.test(error?.message || ''), 'brand_directory_validation');
+      attempt.validation = error.message.slice('japan_browser_stability_'.length);
+      return {data, status, error};
+    }
+  }
+  let observed = await observe(() => trigger.click());
+  const initialObservation = observed;
+  if (observed.error) {
+    progress.phase = 'dropdown_unavailable';
+    await unavailable.waitFor({state: 'visible', timeout: 15_000});
+    const retry = dropdown.getByRole('button', {name: retryName, exact: true});
+    need(await retry.count() === 1 && await retry.isVisible()
+      && await dropdown.getByText('Марка не найдена', {exact: true}).count() === 0, 'brand_fallback_notice');
+    const values = await dropdown.locator('button[data-facet-value]').evaluateAll(nodes => nodes.map(node => node.getAttribute('data-facet-value')));
+    const fallback = verifyJapanStabilityBrandFallback(values, visibleRows, observed.data, observed.status);
+    await visibleCardsMatch(view, view.locator('main.ac-ajes-catalog'), visibleRows);
+    progress.dropdownFallback = fallback;
+    progress.dropdownRetries = 1;
+    observed = await observe(() => retry.click());
+    if (observed.error) throw observed.error;
+  }
+  const {directory} = observed;
   if (expectedDirectory) need(sameValues(directory.makes, expectedDirectory.makes), 'brand_directory_changed');
-  const dropdown = trigger.locator('..').locator('.ac-filter-dropdown');
+  progress.phase = 'dropdown_ready';
   await dropdown.waitFor({state: 'visible', timeout: 15_000});
-  await trigger.locator('..').locator('.ac-filter-dropdown[data-japan-source-directory-state="ready"]')
+  await parent.locator('.ac-filter-dropdown[data-japan-source-directory-state="ready"]')
     .waitFor({state: 'visible', timeout: 15_000});
   const values = await dropdown.locator('button[data-facet-value]').evaluateAll(nodes => nodes.map(node => node.getAttribute('data-facet-value')));
   const proof = verifyJapanStabilityBrandOptions(directory, values, await dropdown.getAttribute('data-japan-source-directory-state'));
   need(await dropdown.getByText('Марка не найдена', {exact: true}).count() === 0
-    && await dropdown.getByRole('button', {name: 'Не удалось загрузить марки. Повторить', exact: true}).count() === 0,
-  'brand_filter_unavailable');
-  await capture(view);
+    && await dropdown.getByRole('button', {name: retryName, exact: true}).count() === 0, 'brand_filter_unavailable');
+  progress.phase = 'dropdown_capture'; await capture(view);
   await trigger.click();
   need(view.url() === before && await trigger.getAttribute('aria-expanded') === 'false', 'brand_control_changed');
   if (rail) {
+    progress.phase = 'rail_state';
     await rail.waitFor({state: 'visible', timeout: 60_000});
-    await view.locator('main.ac-ajes-catalog section.ac-brand-rail[data-japan-source-directory-state="ready"]')
-      .waitFor({state: 'visible', timeout: 60_000});
-    const links = await rail.locator('a[title^="Автомобили "]').evaluateAll(nodes => nodes.map(node =>
+    const railSelector = 'main.ac-ajes-catalog section.ac-brand-rail';
+    await view.locator(railSelector + '[data-japan-source-directory-state="ready"],'
+      + railSelector + '[data-japan-source-directory-state="unavailable"]').waitFor({state: 'visible', timeout: 60_000});
+    const readLinks = () => rail.locator('a[title^="Автомобили "]').evaluateAll(nodes => nodes.map(node =>
       ({title: node.getAttribute('title'), href: node.getAttribute('href')})));
-    // Load the unchanged display-only mapping only for this stronger scope.
     const {canonicalCatalogBrand} = await import('../../apps/web/lib/catalog/brands.ts');
-    Object.assign(proof, verifyJapanStabilityBrandRail(directory, links, visibleRows, before,
+    if (await rail.getAttribute('data-japan-source-directory-state') === 'unavailable') {
+      progress.phase = 'rail_unavailable';
+      const retry = rail.getByRole('button', {name: retryName, exact: true});
+      need(await retry.count() === 1 && await retry.isVisible(), 'brand_rail_fallback_notice');
+      await visibleCardsMatch(view, view.locator('main.ac-ajes-catalog'), visibleRows);
+      progress.railFallback = verifyJapanStabilityBrandRailFallback(await readLinks(), visibleRows, directory, before,
+        canonicalCatalogBrand, initialObservation);
+      progress.phase = 'rail_retry'; progress.railRetries = 1; await retry.click();
+    }
+    progress.phase = 'rail_ready';
+    await view.locator(railSelector + '[data-japan-source-directory-state="ready"]')
+      .waitFor({state: 'visible', timeout: 60_000});
+    Object.assign(proof, verifyJapanStabilityBrandRail(directory, await readLinks(), visibleRows, before,
       await rail.getAttribute('data-japan-source-directory-state'), canonicalCatalogBrand));
+    if (progress.railRetries) {
+      // router.refresh may remount the controls; do not open them again or wait
+      // for a metadata request that the component's fresh cache need not make.
+      await waitForJapanStabilityControls(view);
+      await visibleCardsMatch(view, view.locator('main.ac-ajes-catalog'), visibleRows);
+    }
     const bounds = await rail.boundingBox(), firstCard = await view.locator('main.ac-ajes-catalog').locator(CARD).first().boundingBox();
     need(bounds && firstCard && bounds.y + bounds.height <= firstCard.y, 'brand_rail_layout');
     proof.aboveCars = true;
   }
-  return {directory, proof: {...proof, selectedThroughUi: true, metadataRequests: 1, selectionUnchanged: true}};
+  need(view.url() === before && await trigger.getAttribute('aria-expanded') === 'false'
+    && JSON.stringify(await selectedInputs()) === JSON.stringify(selectedBefore), 'brand_control_changed');
+  progress.phase = 'complete';
+  return {directory, proof: {...proof, selectedThroughUi: true, metadataRequests: progress.attempts.length,
+    dropdownRetryUsed: progress.dropdownRetries === 1, railRetryUsed: progress.railRetries === 1, selectionUnchanged: true}};
 }
 
 export function japanStabilitySearchApi(kind, model) {

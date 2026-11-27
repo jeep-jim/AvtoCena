@@ -5,7 +5,7 @@ import {fileURLToPath} from 'node:url';
 import {JAPAN_PAGINATION_CODE_SCOPE} from './japan-pagination-code-scope.mjs';
 import {JAPAN_STABILITY_CODE_SCOPE} from './japan-stability-code-scope.mjs';
 import {JAPAN_STABILITY_GATES, JAPAN_LEGACY_MAZDA_THREE_PAGES, japanStabilityApiAllowed, runJapanStabilityBrowser,
- checkJapanStabilityBrandControl} from './japan-stability-browser.mjs';
+ checkJapanStabilityBrandControl,verifyJapanStabilityBrandRequestCount} from './japan-stability-browser.mjs';
 
 const ROOT=fileURLToPath(new URL('../../',import.meta.url));
 const ORIGIN='https://avtocena.com';
@@ -963,12 +963,14 @@ export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,out
   need(await main.getByText('Показаны сохранённые автомобили. Полный список пока недоступен.',{exact:true}).count()===0,'ui_stale');
   if(requireBrandDirectory){
    stage='stability_brand_directory_desktop';
+   report.checks.brandDirectory={contract:'source-counts-v1',desktopProgress:{}};
    const checked=await checkJapanStabilityBrandControl({view:page,controls:main,
     rail:main.locator('section.ac-brand-rail[aria-label="Марки автомобилей"]'),visibleRows:power.data.items,
+    progress:report.checks.brandDirectory.desktopProgress,
     capture:view=>capture(view,'japan-complete-source-brands-desktop'),
     onResponse:value=>{report.japanBrandDirectoryUiRequests++;recordJapanResponse(report,stage,value,releaseSha);}});
    stabilityBrandDirectory=checked.directory;
-   report.checks.brandDirectory={contract:'source-counts-v1',desktop:checked.proof};
+   report.checks.brandDirectory.desktop=checked.proof;
   }
   if(usability){
    stage='brand_directory_rail';
@@ -1078,16 +1080,6 @@ export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,out
    const cityButton=dialog.locator('.ac-catalog-city-filter button').first();
    await cityButton.waitFor({state:'visible',timeout:15_000});
    need((await cityButton.innerText()).trim()===CITY&&new URL(view.url()).searchParams.get('city')===CITY,'city_hydration');
-   if(requireBrandDirectory){
-    stage='stability_brand_directory_mobile';
-    const checked=await checkJapanStabilityBrandControl({view,controls:dialog,expectedDirectory:stabilityBrandDirectory,
-     capture:view=>capture(view,'japan-complete-source-brands-mobile'),
-     onResponse:value=>{report.japanBrandDirectoryUiRequests++;recordJapanResponse(report,stage,value,releaseSha);}});
-    report.checks.brandDirectory.mobile=checked.proof;
-    report.checks.brandDirectory.sameSourceDirectory=true;
-    need(report.japanBrandDirectoryUiRequests===2,'brand_directory_request_count');
-    report.japanBrandDirectoryPassed=true;
-   }
    if(usability){
     stage='brand_directory_filter';
     const trigger=dialog.getByRole('button',{name:'Выбрать марки автомобилей',exact:true});
@@ -1133,6 +1125,24 @@ export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,out
    report.checks.petrolPowerUi={...aggregate,city:CITY,previousCity:'Москва',cityPreserved:true,
     toggledThroughUi:true,cards:await visibleCards.count(),durationMs:Date.now()-started,pageErrors:errors};
    await visibleCards.first().scrollIntoViewIfNeeded();await capture(view,'japan-petrol-power-city-mobile');
+   if(requireBrandDirectory){
+    // These are the existing fresh API rows whose identities have just been
+    // matched to this exact page; no additional source read certifies fallback.
+    stage='stability_brand_directory_mobile';
+    await view.getByRole('button',{name:'Открыть фильтры',exact:true}).click();
+    await dialog.waitFor({state:'visible',timeout:15_000});
+    report.checks.brandDirectory.mobileProgress={};
+    const checked=await checkJapanStabilityBrandControl({view,controls:dialog,visibleRows:filtered.data.items,
+     expectedDirectory:stabilityBrandDirectory,progress:report.checks.brandDirectory.mobileProgress,
+     capture:view=>capture(view,'japan-complete-source-brands-mobile'),
+     onResponse:value=>{report.japanBrandDirectoryUiRequests++;recordJapanResponse(report,stage,value,releaseSha);}});
+    report.checks.brandDirectory.mobile=checked.proof;
+    report.checks.brandDirectory.sameSourceDirectory=true;
+    verifyJapanStabilityBrandRequestCount(report.japanBrandDirectoryUiRequests,
+     [report.checks.brandDirectory.desktop,checked.proof]);
+    report.japanBrandDirectoryPassed=true;
+    await dialog.getByRole('button',{name:'Свернуть фильтры',exact:true}).click();
+   }
    if(pagination)await checkPaginationWarning(catalog);
    stage='completion_petrol_power_page_two';
    const firstIds=new Set(filtered.data.items.map(row=>row.id));

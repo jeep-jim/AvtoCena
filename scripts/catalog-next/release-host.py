@@ -143,6 +143,9 @@ JAPAN_OBSERVED_TIMING_POLICY = 'japan-functional-observed-timing-v1'
 JAPAN_STABILITY_HOME_CODE_FILES = JAPAN_STABILITY_RAILS_CODE_FILES | {
     'apps/web/lib/catalog/storage.ts', 'tests/catalog-next-home-isolation.test.ts',
 }
+JAPAN_STABILITY_METADATA_CODE_FILES = JAPAN_STABILITY_HOME_CODE_FILES | {
+    'tests/ajes-ready-metadata.test.ts',
+}
 JAPAN_PAGINATION_CODE_FILES = {
     "apps/web/components/catalog/AjesCatalog.tsx",
     "apps/web/components/catalog/CatalogLoadMore.tsx",
@@ -636,6 +639,20 @@ def code_scope(plan):
 def japan_observed_timing(plan):
     return code_update(plan) and code_scope(plan) == JAPAN_STABILITY_CODE_SCOPE and \
         plan.get('acceptancePolicy') == JAPAN_OBSERVED_TIMING_POLICY
+
+
+
+def checked_japan_stability_image_files(files, observed):
+    """Both image admission phases use the same exact historical profiles."""
+    need(isinstance(files, list) and all(isinstance(name, str) for name in files)
+         and len(files) == len(set(files)), 'code_image_receipt')
+    profiles = (JAPAN_STABILITY_CODE_FILES, JAPAN_STABILITY_UI_CODE_FILES, JAPAN_STABILITY_POWER_CODE_FILES,
+                JAPAN_STABILITY_RAILS_CODE_FILES, JAPAN_STABILITY_HOME_CODE_FILES, JAPAN_STABILITY_METADATA_CODE_FILES)
+    selected = next((profile for profile in profiles if set(files) == profile), None)
+    need(selected is not None, 'code_image_receipt')
+    need(type(observed) is bool and observed == (selected in
+         (JAPAN_STABILITY_HOME_CODE_FILES, JAPAN_STABILITY_METADATA_CODE_FILES)), 'timing_policy_image_scope')
+    return selected
 
 
 def observed_timing_fields(value):
@@ -2885,21 +2902,8 @@ class Host:
         image = json.loads(image_raw)
         scope = code_scope(self.plan)
         required_code_files = CODE_SCOPE_FILES[scope]
-        if (scope == JAPAN_STABILITY_CODE_SCOPE and isinstance(image.get('runtimeFiles'), list) and
-                any(name in image['runtimeFiles'] for name in (
-                    'apps/web/lib/catalog/storage.ts', 'tests/catalog-next-home-isolation.test.ts'))):
-            required_code_files = JAPAN_STABILITY_HOME_CODE_FILES
-        elif (scope == JAPAN_STABILITY_CODE_SCOPE and isinstance(image.get('runtimeFiles'), list) and
-                any(name in image['runtimeFiles'] for name in (
-                    'apps/web/components/catalog/AjesRail.tsx',
-                    'apps/web/components/home/HomeJapanFilteredRail.tsx'))):
-            required_code_files = JAPAN_STABILITY_RAILS_CODE_FILES
-        elif (scope == JAPAN_STABILITY_CODE_SCOPE and isinstance(image.get('runtimeFiles'), list) and
-                'apps/web/lib/catalog/ajes-public.ts' in image['runtimeFiles']):
-            required_code_files = JAPAN_STABILITY_POWER_CODE_FILES
-        elif (scope == JAPAN_STABILITY_CODE_SCOPE and isinstance(image.get('runtimeFiles'), list) and
-                'apps/web/components/catalog/CatalogCard.tsx' in image['runtimeFiles']):
-            required_code_files = JAPAN_STABILITY_UI_CODE_FILES
+        if scope == JAPAN_STABILITY_CODE_SCOPE:
+            required_code_files = checked_japan_stability_image_files(image.get('runtimeFiles'), japan_observed_timing(self.plan))
         need(image.get('version') == 1 and image.get('kind') == 'china-runtime-image-v1' and image.get('market') == 'china' and
              all(image.get(key) == self.plan[key] for key in ('runtimeSha', 'pricingRuntimeSha', 'runtimeTree',
                                                             'runtimeDiffSha256', 'retainedRuntime', 'imageId')) and
@@ -2912,8 +2916,6 @@ class Host:
              all(isinstance(name, str) for name in image['runtimeFiles']) and
              set(image['runtimeFiles']) == required_code_files and
              type(image.get('imageUnpackedBytes')) is int and image['imageUnpackedBytes'] > 0, 'code_image_receipt')
-        need(japan_observed_timing(self.plan) == (required_code_files == JAPAN_STABILITY_HOME_CODE_FILES),
-             'timing_policy_image_scope')
         need(image.get('acceptancePolicy') == self.plan.get('acceptancePolicy'), 'timing_policy_image_binding')
         if scope in (CRM_CHINA_CODE_SCOPE, CRM_JAPAN_PHOTO_CODE_SCOPE):
             need(image.get('protectedPathExceptions') == CRM_CHINA_PROTECTED_EXCEPTIONS, 'code_crm_image_scope')
@@ -3544,15 +3546,12 @@ class Host:
                 need(len(image_raw) == image_descriptor['bytes'] and sha(image_raw) == image_descriptor['sha256'],
                      'code_image_receipt_hash')
                 runtime_files = json.loads(image_raw).get('runtimeFiles')
-                need(isinstance(runtime_files, list) and all(isinstance(name, str) for name in runtime_files) and
-                     len(runtime_files) == len(set(runtime_files)) and set(runtime_files) in
-                     (JAPAN_STABILITY_CODE_FILES, JAPAN_STABILITY_UI_CODE_FILES, JAPAN_STABILITY_POWER_CODE_FILES,
-                      JAPAN_STABILITY_RAILS_CODE_FILES, JAPAN_STABILITY_HOME_CODE_FILES),
-                     'code_image_receipt')
-                need(observed == (set(runtime_files) == JAPAN_STABILITY_HOME_CODE_FILES), 'timing_policy_image_scope')
-                if set(runtime_files) in (JAPAN_STABILITY_POWER_CODE_FILES, JAPAN_STABILITY_RAILS_CODE_FILES, JAPAN_STABILITY_HOME_CODE_FILES):
+                runtime_profile = checked_japan_stability_image_files(runtime_files, observed)
+                if runtime_profile in (JAPAN_STABILITY_POWER_CODE_FILES, JAPAN_STABILITY_RAILS_CODE_FILES,
+                                       JAPAN_STABILITY_HOME_CODE_FILES, JAPAN_STABILITY_METADATA_CODE_FILES):
                     need(japan.get('japanPowerOrderPassed') is True, 'japan_browser_binding')
-                if set(runtime_files) in (JAPAN_STABILITY_RAILS_CODE_FILES, JAPAN_STABILITY_HOME_CODE_FILES):
+                if runtime_profile in (JAPAN_STABILITY_RAILS_CODE_FILES, JAPAN_STABILITY_HOME_CODE_FILES,
+                                       JAPAN_STABILITY_METADATA_CODE_FILES):
                     need(japan.get('japanBrandDirectoryPassed') is True, 'japan_browser_binding')
         for name, raw in [('BROWSER_SPEED.json', speed_raw), ('BROWSER_DETAILS.json', details_raw)]:
             new_file(self.directory / name, raw)

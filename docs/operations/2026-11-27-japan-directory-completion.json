@@ -1,7 +1,7 @@
 {
   "version": 1,
   "kind": "japan-directory-completion-followup",
-  "checkpointDate": "2026-11-27",
+  "checkpointDate": "2026-11-28",
   "timezone": "Asia/Krasnoyarsk",
   "precedingRelease": {
     "runId": 46002408371,
@@ -20,17 +20,17 @@
     "exactNetworkCause": "not captured by preceding transport; not inferred"
   },
   "candidate": {
-    "runtimeSha": "d6357672787a73c8e62e6f895f3c4cac5dc77211",
-    "runtimeTree": "0ac828876e7e43b952e342a4f499563c54f3fc41",
+    "runtimeSha": "b9e9122b75f4e588088d0241476b18df7f047d96",
+    "runtimeTree": "4e2c36e461416d6db7d0f52753c9a933d626dd5c",
     "retainedRuntime": "a5ca426eec2663eb17c2df69fe2bfed46e2b8740",
-    "runtimeDiffSha256": "05783233326377b7ea983d19039ab03b3b298db63c3337baf47162cf8d026cf9",
+    "runtimeDiffSha256": "2cd9864d2589ef2dac2936a2fc50abad66df47e152f8910f232dab33d2ecf74d",
     "pricingRuntimeSha": "64c6338e0db23c8999096bceefbf113c0136fe15",
-    "pricingToServingDiffSha256": "15eafbbdac7fc664e2308c9688dbfc2de264763a785eef80241e0c525ef2f571",
+    "pricingToServingDiffSha256": "30915317661ce036c9296337f78d60cdabc7d3bf6decc94288e97a20297f2e4f",
     "acceptancePolicy": "japan-functional-observed-timing-v1"
   },
   "scope": {
-    "runtimeFileCount": 58,
-    "pricingFileCount": 112,
+    "runtimeFileCount": 59,
+    "pricingFileCount": 113,
     "additionalRuntimePaths": [
       "apps/web/components/catalog/AjesRail.tsx",
       "apps/web/components/home/HomeJapanFilteredRail.tsx",
@@ -39,7 +39,10 @@
       "tests/catalog-next-home-isolation.test.ts"
     ],
     "protectedPricingPathsUnchanged": true,
-    "frozenHttpOracleReusable": true
+    "frozenHttpOracleReusable": true,
+    "successorAdditionalRuntimePaths": [
+      "tests/ajes-ready-metadata.test.ts"
+    ]
   },
   "changes": [
     "Preserve visible Japan supplier makes and retry on empty, all-zero, stale or failed directory metadata; no static makes fallback.",
@@ -49,85 +52,122 @@
     "Code publication alone opts into one bounded transient GET retry; conditional PUT remains single-attempt with existing exact readback and CAS.",
     "Update the existing preview assertion to require no long paragraph while proving original supplier/unknown card facts, power filter and honest count remain; production code unchanged from prior candidate.",
     "Independent home fallback reads existing retained per-market projections instead of obsolete all-market alias; captured-generation binding and existing admission/counts/order/prices retained.",
-    "Owner-directed exact58 policy replaces shared speed/foreign browser veto with Japan own functional acceptance and truthful nonblocking timing observations."
+    "Owner-directed exact58 policy replaces shared speed/foreign browser veto with Japan own functional acceptance and truthful nonblocking timing observations.",
+    "Reject unconfirmed first-page empty makes/models metadata; exact fresh COUNT=0 proof required, with original query/count observations and SQL binding.",
+    "Protect newer positive directory observations against a delayed confirmed zero, in memory and through the existing bounded serialized persistence queue.",
+    "Permit one actual dropdown retry and one independent unavailable-rail refresh before the unchanged complete fresh directory proof; fallbacks never claim full source coverage.",
+    "Bind the reviewed successor to exactly HOME58 plus tests/ajes-ready-metadata.test.ts, preserving the historical58 receipts and observed timing policy."
   ],
   "localVerification": {
-    "runtimeSha": "d6357672787a73c8e62e6f895f3c4cac5dc77211",
-    "homeIsolationRegressionBeforeFix": {
-      "tests": 3,
-      "failed": 3
+    "runtimeSha": "b9e9122b75f4e588088d0241476b18df7f047d96",
+    "localReviewedSourceCommit": "077e9f965c4a96703a695e7b9346cda7d1e0c39f",
+    "sourceTreeMatchesPublished": true,
+    "emptyDirectoryRegressionsBeforeFix": {
+      "newFailures": 13
     },
-    "homeIsolationTargeted": {
-      "passed": 36,
+    "intermediateConcurrencyRegressions": {
+      "failed": 4
+    },
+    "affectedSourceTests": {
+      "passed": 38,
       "failed": 0
     },
     "nativeFullSuite": {
       "fileCount": 69,
-      "tests": 539,
-      "pass": 539,
-      "fail": 0,
-      "duration_ms": 17798.257269
+      "tests": 557,
+      "passed": 546,
+      "failed": 11,
+      "cause": "Sparse checkout omitted unchanged reference JSON needed by two test files."
     },
+    "resolvedModuleTests": {
+      "files": 2,
+      "passed": 25,
+      "failed": 0,
+      "includesAllPriorFailures": true,
+      "fixtures": "16 exact HEAD JSON blobs temporarily materialized then removed"
+    },
+    "allSelectedNativeTestFilesVerified": true,
+    "fullSingleInvocationPassed": false,
+    "hostedFullNativeSuite": "pending",
     "sourceTypecheck": "passed",
     "exactSourceAndPricingProof": "passed",
-    "policyScopeTests": {
-      "passed": 7,
+    "exactProof": {
+      "runtimeSha": "b9e9122b75f4e588088d0241476b18df7f047d96",
+      "runtimeTree": "4e2c36e461416d6db7d0f52753c9a933d626dd5c",
+      "retainedRuntime": "a5ca426eec2663eb17c2df69fe2bfed46e2b8740",
+      "runtimeDiffSha256": "2cd9864d2589ef2dac2936a2fc50abad66df47e152f8910f232dab33d2ecf74d",
+      "pricingRuntimeSha": "64c6338e0db23c8999096bceefbf113c0136fe15",
+      "pricingToServingDiffSha256": "30915317661ce036c9296337f78d60cdabc7d3bf6decc94288e97a20297f2e4f",
+      "protectedPricingPathsUnchanged": true,
+      "frozenHttpOracleReusable": true
+    },
+    "controllerRetryTests": {
+      "passed": 105,
       "failed": 0
     },
-    "japanBrowserAndObservedTimingTests": {
-      "passed": 86,
+    "exact59ScopeAndHostTests": {
+      "passed": 81,
       "failed": 0
     },
-    "combinedControllerSuite": {
-      "allRequiredTestFilesVerified": true,
-      "passingTests": 1561,
-      "initialBatchPassing": 1542,
-      "initialTestFileLoadFailures": 2,
-      "cause": "Sparse local checkout omitted an unchanged reference JSON imported by two test modules.",
-      "resolvedModuleTestsPassed": 19,
-      "resolvedModuleTestsFailed": 0,
-      "unresolvedFailures": 0,
-      "fullSingleInvocation": false,
-      "initialDurationMs": 55651.837784,
-      "resolvedModulesDurationMs": 1261.986326
-    },
-    "controllerHostPolicyTargeted": {
-      "passed": 387,
-      "failed": 0,
-      "independentReview": "passed; includes historical profiles, future China generation-update, exact receipts, functional failures and rollback"
-    },
-    "frozenSpeedBaselines": "hashes unchanged; timings are observations for the owner-authorized exact58 profile"
+    "independentSourceControllerAndScopeReview": "passed",
+    "localActualChromiumRetryFixture": "not run; no usable local Chromium; mandatory hosted gate before build and host",
+    "frozenSpeedBaselines": "unchanged; observed timing is nonblocking for the exact58/59 owner-authorized profiles"
   },
   "publication": {
     "status": "rolled_back",
-    "runId": 46025367220,
-    "runNumber": 29,
-    "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/46025367220",
-    "releaseCommit": "ee8ac769f295b1e9c32b925bfbaec8f692312603",
-    "approvedControllerSha": "ab96176c183b2cfb4a87a2944ca763c30f1cb54b",
+    "runId": 46032025653,
+    "runNumber": 30,
+    "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/46032025653",
+    "releaseCommit": "1c7d35ef02071847badfb9001f630fc5da66dbdc",
+    "approvedControllerSha": "9828aa3dc398d265103e95700296e60f0235895e",
     "runtimeSha": "d6357672787a73c8e62e6f895f3c4cac5dc77211",
     "runtimeTree": "0ac828876e7e43b952e342a4f499563c54f3fc41",
     "acceptancePolicy": "japan-functional-observed-timing-v1",
     "lastConfirmedAcceptedRuntime": "a5ca426eec2663eb17c2df69fe2bfed46e2b8740",
-    "liveAcceptance": "incomplete; legacy model passed live, subsequent UI model selection timed out before make selected; rollback completed",
+    "liveAcceptance": "incomplete; brand directory unavailable before model journey; rollback completed",
+    "speedGateRequired": false,
+    "speedPassed": null,
+    "version": 1,
+    "kind": "china-code-cycle-v1",
+    "market": "china",
     "completed": false,
     "published": false,
     "retainedRuntime": "a5ca426eec2663eb17c2df69fe2bfed46e2b8740",
-    "speedGateRequired": false,
-    "speedPassed": null,
+    "sourceRequests": 0,
+    "generationRestores": 0,
+    "priceCalculations": 0,
+    "generationWrites": 0,
+    "encyclopediaWrites": 0,
+    "otherMarketWrites": 0,
+    "deletions": 0,
     "timingObserved": true,
+    "appImageCleanupBeforeReserve": {
+      "version": 1,
+      "kind": "china-terminal-app-image-cleanup-v1",
+      "completed": true,
+      "status": "already_absent",
+      "uncertain": false,
+      "imagesRemoved": 0,
+      "runtimeSha": "d6357672787a73c8e62e6f895f3c4cac5dc77211",
+      "imageId": "sha256:113bee34bc65205d4f58dbf9e54632f9e87465b119f14700165781b313754d4a",
+      "witnessSha256": "c308ba14650e6c5ccc265f989197496bf7c202afc863dd9f06ab9d4ef8822236",
+      "diskFreeBytesBefore": 47562633216,
+      "diskFreeBytesAfter": 47562633216,
+      "measuredFreeBytesChange": 0,
+      "reason": "already_absent"
+    },
     "retentionPreserved": true,
     "serverTiming": {
       "version": 1,
       "kind": "japan-server-timing-observation-v1",
       "release": "d6357672787a73c8e62e6f895f3c4cac5dc77211",
-      "nonce": "ff30da36fa2bd5b629631534fcf74557",
+      "nonce": "30c5a540cad07c2ae06cc7ecaa9efa5c",
       "timingPolicy": "japan-functional-observed-timing-v1",
       "speedGateRequired": false,
       "speedPassed": null,
       "timingObserved": true,
       "broadServerBenchmarkExecuted": false,
-      "healthSeconds": 0.0037,
+      "healthSeconds": 0.0041,
       "baselineSha256": "32fba449b77e40983803483ea7b6cb4ece09afa997c2ae08dd968c675f528c59"
     },
     "recovered": true,
@@ -139,101 +179,84 @@
       "uncertain": false,
       "imagesRemoved": 1,
       "runtimeSha": "d6357672787a73c8e62e6f895f3c4cac5dc77211",
-      "imageId": "sha256:113bee34bc65205d4f58dbf9e54632f9e87465b119f14700165781b313754d4a",
-      "witnessSha256": "c308ba14650e6c5ccc265f989197496bf7c202afc863dd9f06ab9d4ef8822236",
-      "diskFreeBytesBefore": 46376820736,
-      "diskFreeBytesAfter": 47568584704,
-      "measuredFreeBytesChange": 1191763968,
+      "imageId": "sha256:b5788893f4961330d24937fab4f399e6fdf37a7f4f1141d851ba8f6217374ba5",
+      "witnessSha256": "e2533d5b4978899281ec14f54ede592856eee84b3aeca34cc7986f5dacf0ed83",
+      "diskFreeBytesBefore": 46368235520,
+      "diskFreeBytesAfter": 47560007680,
+      "measuredFreeBytesChange": 1191772160,
       "reason": "exact_terminal_image"
     },
     "errorCode": "china_daily_release_japan_browser_failed",
-    "finishedAt": "2026-11-27T15:51:52.976Z",
+    "finishedAt": "2026-11-27T16:40:44.621Z",
     "leaseReleased": true,
     "conclusion": "failure",
-    "artifactId": 15213715731,
-    "artifactBytes": 9355095,
-    "artifactSha256": "17f4f0dad4981f2f0d412b8db39fb6398afe0483a23295e6554b8f31c0cc7b27",
-    "reportSha256": "556f4b423923f418e9b72f1b805107f388e7d6872a995173e7d0459cac259504",
-    "liveReportSha256": "0b5397a8b99b13f918003ef2d9bbac46bd6a6471ad639e1cea5b1e02493c6fa9",
+    "artifactId": 15215977778,
+    "artifactBytes": 884529,
+    "artifactSha256": "256ca5587b91bae458e0150a9b960ac5d6d84d26baab497b08d230828ba4ae72",
+    "reportSha256": "4e6d65e398d8c47042554709bd64264e3c69e1138c7d89e80ad4c5687daaf817",
+    "liveReportSha256": "6fc91e499357e9acc516e54f865929f037e4c032643e4d0673125ecc5a8b0555",
     "liveError": {
-      "stage": "stability_model_selection",
-      "code": "japan_browser_check_failed",
-      "timeout": true,
-      "navigationCode": "timeout"
+      "stage": "stability_brand_directory_desktop",
+      "code": "japan_browser_stability_brand_directory_rows",
+      "timeout": false
     },
     "liveGateResults": {
       "japanFreshnessPassed": true,
       "japanPowerApiPassed": true,
-      "japanUiPassed": true,
-      "japanVisibilityPassed": true,
-      "japanPetrolPowerUiPassed": true,
-      "japanDetailPowerInputPassed": true,
-      "japanDeliveredCalculationPassed": true,
-      "japanFullPagesPassed": true,
-      "japanPagination24Passed": true,
-      "japanCatalogWarningRemovedPassed": true,
+      "japanUiPassed": false,
+      "japanVisibilityPassed": false,
+      "japanPetrolPowerUiPassed": false,
+      "japanDetailPowerInputPassed": false,
+      "japanDeliveredCalculationPassed": false,
+      "japanFullPagesPassed": false,
+      "japanPagination24Passed": false,
+      "japanCatalogWarningRemovedPassed": false,
       "japanModelSelectionPassed": false,
       "japanCombinedFiltersPassed": false,
       "japanRelatedCardsPassed": false,
       "japanVehiclePolicyPassed": false,
-      "japanPowerOrderPassed": true,
-      "japanBrandDirectoryPassed": true
+      "japanPowerOrderPassed": false,
+      "japanBrandDirectoryPassed": false
     },
-    "legacyNavigation": {
-      "phase": "complete",
-      "probeClosed": true,
-      "canonicalStatus": 200,
-      "canonicalUrlExact": true,
-      "canonicalMainFrameCommitted": true,
-      "canonicalRedirectBlocked": false,
-      "lastMainFrame": "canonical"
-    },
-    "legacyModelSelection": {
-      "status": 200,
-      "shown": 24,
-      "received": 24,
-      "observedAt": "2026-11-27T15:50:34.800Z",
-      "ageSeconds": 1.429,
+    "directoryFailureEvidence": {
+      "httpStatus": 200,
       "stale": false,
-      "partial": false,
-      "total": null,
-      "hasMore": true,
-      "make": "Mazda",
-      "model": "3",
-      "resolvedFamily": "MAZDA3",
-      "sourceFamilyModels": 1,
-      "rowModelsMatched": true,
-      "literalBookmarkChecked": true,
-      "canonicalRedirect": {
-        "status": 308,
-        "redirects": 1,
-        "sameOrigin": true,
-        "exactTarget": true,
-        "mainFrame": true
-      },
-      "uiMatchesApi": true,
-      "cityPreserved": true,
-      "pageErrors": 0
-    },
-    "modelSelectionFailureEvidence": {
-      "screenshot": "plain Japan page, brand menu closed, make/model unselected,24 cards",
-      "lastLegacyApiReceivedAt": "2026-11-27T15:50:36.229Z",
-      "savedFailureCaptureAt": "2026-11-27T15:51:12.685Z",
-      "exactFailedAction": "not recorded",
-      "existingReadinessContract": "CatalogFilters interactive=false during SSR; existing hidden advanced button disabled/aria-busy until useEffect makes it interactive",
-      "missingControllerWait": "immediate brand.click after domcontentloaded without observing readiness or requiring popup expanded before option lookup",
-      "causeQualification": "lost early click is consistent with evidence; raw action not captured"
+      "observedAt": "2026-11-27T16:39:34.187Z",
+      "receivedAt": "2026-11-27T16:39:49.917Z",
+      "rawCounts": "not captured; empty or invalid entries are not distinguished",
+      "visibleFallbackMakes": 6,
+      "retryUiVisible": true,
+      "freshPages": [
+        24,
+        24
+      ],
+      "newModelJourneyReached": false
     }
   },
   "maintenance": {
     "status": "prepared_not_active",
-    "activationRequires": "Accepted final runtime and exact rebinding of both current and rollback references; existing deletion and CAS safeguards remain.",
+    "activationRequires": "An actually accepted new runtime, then a fresh exact current/rollback observation; do not run any observer bound to rolled-back releases.",
     "preparedCoreCommit": "8e793ed69bea753ab3c8ee35f6b2cd92324ab004",
     "preparedObserverCommit": "0c7135c5c6e360194dc7eb9e7a9706c818652580",
     "observerTargetRunId": 46025367220,
     "retargetTests": 20,
     "retargetPassed": 20,
-    "independentRetargetReview": "passed"
+    "independentRetargetReview": "passed",
+    "release30Preparation": {
+      "status": "parked_after_release30_rollback_not_published_or_activated",
+      "coreCommit": "bd58bf1840c0a088ef4d93c68260ef9bb0c4810b",
+      "observerCommit": "d298a700365c134fccf6004db311e69f6612e0da",
+      "targetRunId": 46032025653,
+      "targetAttempt": 1,
+      "targetRevision": "1c7d35ef02071847badfb9001f630fc5da66dbdc",
+      "runtimeSha": "d6357672787a73c8e62e6f895f3c4cac5dc77211",
+      "targetedTestsPassed": 20,
+      "independentReview": "passed",
+      "coreUnchanged": true,
+      "regPinsUnchanged": true,
+      "markerCreated": false,
+      "activationRequires": "actual accepted release30 and a stable verified current/rollback observation"
+    }
   },
   "verificationAttempts": [
     {
@@ -259,9 +282,9 @@
     }
   ],
   "remaining": [
-    "Publish the reviewed controller readiness repair and require its real browser fixture before host contact.",
-    "Require actual complete Japan functional browser acceptance and accepted state; observed elapsed timings are not a release veto.",
-    "Complete prepared maintenance only after actual accepted current/rollback; failed release observers remain inactive."
+    "Publish the reviewed B9 controller and marker, then verify actual mandatory Chromium retry cases and clean hosted557 native suite.",
+    "Complete own live Japan functional acceptance with retained data and rollback protection; observed latency is not a release veto.",
+    "Retarget and activate authorized maintenance against the actually accepted run and observed current/rollback pair."
   ],
   "precedingCandidate": {
     "runtimeSha": "a4f23e648d3de2a8a23c9a16942a286b91bb39b4",
@@ -321,16 +344,16 @@
   },
   "hostedVerification": {
     "status": "completed",
-    "runId": 46025187067,
-    "runNumber": 60,
-    "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/46025187067",
-    "controllerSha": "ab96176c183b2cfb4a87a2944ca763c30f1cb54b",
+    "runId": 46031918122,
+    "runNumber": 61,
+    "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/46031918122",
+    "controllerSha": "9828aa3dc398d265103e95700296e60f0235895e",
     "runtimeSha": "d6357672787a73c8e62e6f895f3c4cac5dc77211",
     "acceptancePolicy": "japan-functional-observed-timing-v1",
     "conclusion": "success",
-    "completedAt": "2026-11-27T15:33:00Z",
-    "controllerTests": 1563,
-    "controllerPassed": 1563,
+    "completedAt": "2026-11-27T16:19:26Z",
+    "controllerTests": 1582,
+    "controllerPassed": 1582,
     "controllerFailed": 0,
     "nativeTests": 539,
     "nativePassed": 539,
@@ -342,7 +365,9 @@
     "crmControlsOfflineFixture": "passed",
     "photoRetryFixture": "passed",
     "legacyRedirectBrowserFixture": "passed",
-    "legacyRedirectBrowserCases": 8
+    "legacyRedirectBrowserCases": 8,
+    "modelControlsReadyBrowserFixture": "passed",
+    "modelControlsReadyBrowserCases": 2
   },
   "latestOwnerDirection": {
     "date": "2026-11-27",
@@ -575,6 +600,133 @@
       },
       "browserNavigationCause": "not captured; first redirect verified, next canonical navigation failed before its response/status/API checks; raw exception unavailable",
       "livePhotoEvidence": "some saved screenshots show broken images under the browser fence; fixture recovery proof does not establish live supplier image loading"
+    },
+    {
+      "status": "rolled_back",
+      "runId": 46025367220,
+      "runNumber": 29,
+      "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/46025367220",
+      "releaseCommit": "ee8ac769f295b1e9c32b925bfbaec8f692312603",
+      "approvedControllerSha": "ab96176c183b2cfb4a87a2944ca763c30f1cb54b",
+      "runtimeSha": "d6357672787a73c8e62e6f895f3c4cac5dc77211",
+      "runtimeTree": "0ac828876e7e43b952e342a4f499563c54f3fc41",
+      "acceptancePolicy": "japan-functional-observed-timing-v1",
+      "lastConfirmedAcceptedRuntime": "a5ca426eec2663eb17c2df69fe2bfed46e2b8740",
+      "liveAcceptance": "incomplete; legacy model passed live, subsequent UI model selection timed out before make selected; rollback completed",
+      "completed": false,
+      "published": false,
+      "retainedRuntime": "a5ca426eec2663eb17c2df69fe2bfed46e2b8740",
+      "speedGateRequired": false,
+      "speedPassed": null,
+      "timingObserved": true,
+      "retentionPreserved": true,
+      "serverTiming": {
+        "version": 1,
+        "kind": "japan-server-timing-observation-v1",
+        "release": "d6357672787a73c8e62e6f895f3c4cac5dc77211",
+        "nonce": "ff30da36fa2bd5b629631534fcf74557",
+        "timingPolicy": "japan-functional-observed-timing-v1",
+        "speedGateRequired": false,
+        "speedPassed": null,
+        "timingObserved": true,
+        "broadServerBenchmarkExecuted": false,
+        "healthSeconds": 0.0037,
+        "baselineSha256": "32fba449b77e40983803483ea7b6cb4ece09afa997c2ae08dd968c675f528c59"
+      },
+      "recovered": true,
+      "appImageCleanup": {
+        "version": 1,
+        "kind": "china-terminal-app-image-cleanup-v1",
+        "completed": true,
+        "status": "removed",
+        "uncertain": false,
+        "imagesRemoved": 1,
+        "runtimeSha": "d6357672787a73c8e62e6f895f3c4cac5dc77211",
+        "imageId": "sha256:113bee34bc65205d4f58dbf9e54632f9e87465b119f14700165781b313754d4a",
+        "witnessSha256": "c308ba14650e6c5ccc265f989197496bf7c202afc863dd9f06ab9d4ef8822236",
+        "diskFreeBytesBefore": 46376820736,
+        "diskFreeBytesAfter": 47568584704,
+        "measuredFreeBytesChange": 1191763968,
+        "reason": "exact_terminal_image"
+      },
+      "errorCode": "china_daily_release_japan_browser_failed",
+      "finishedAt": "2026-11-27T15:51:52.976Z",
+      "leaseReleased": true,
+      "conclusion": "failure",
+      "artifactId": 15213715731,
+      "artifactBytes": 9355095,
+      "artifactSha256": "17f4f0dad4981f2f0d412b8db39fb6398afe0483a23295e6554b8f31c0cc7b27",
+      "reportSha256": "556f4b423923f418e9b72f1b805107f388e7d6872a995173e7d0459cac259504",
+      "liveReportSha256": "0b5397a8b99b13f918003ef2d9bbac46bd6a6471ad639e1cea5b1e02493c6fa9",
+      "liveError": {
+        "stage": "stability_model_selection",
+        "code": "japan_browser_check_failed",
+        "timeout": true,
+        "navigationCode": "timeout"
+      },
+      "liveGateResults": {
+        "japanFreshnessPassed": true,
+        "japanPowerApiPassed": true,
+        "japanUiPassed": true,
+        "japanVisibilityPassed": true,
+        "japanPetrolPowerUiPassed": true,
+        "japanDetailPowerInputPassed": true,
+        "japanDeliveredCalculationPassed": true,
+        "japanFullPagesPassed": true,
+        "japanPagination24Passed": true,
+        "japanCatalogWarningRemovedPassed": true,
+        "japanModelSelectionPassed": false,
+        "japanCombinedFiltersPassed": false,
+        "japanRelatedCardsPassed": false,
+        "japanVehiclePolicyPassed": false,
+        "japanPowerOrderPassed": true,
+        "japanBrandDirectoryPassed": true
+      },
+      "legacyNavigation": {
+        "phase": "complete",
+        "probeClosed": true,
+        "canonicalStatus": 200,
+        "canonicalUrlExact": true,
+        "canonicalMainFrameCommitted": true,
+        "canonicalRedirectBlocked": false,
+        "lastMainFrame": "canonical"
+      },
+      "legacyModelSelection": {
+        "status": 200,
+        "shown": 24,
+        "received": 24,
+        "observedAt": "2026-11-27T15:50:34.800Z",
+        "ageSeconds": 1.429,
+        "stale": false,
+        "partial": false,
+        "total": null,
+        "hasMore": true,
+        "make": "Mazda",
+        "model": "3",
+        "resolvedFamily": "MAZDA3",
+        "sourceFamilyModels": 1,
+        "rowModelsMatched": true,
+        "literalBookmarkChecked": true,
+        "canonicalRedirect": {
+          "status": 308,
+          "redirects": 1,
+          "sameOrigin": true,
+          "exactTarget": true,
+          "mainFrame": true
+        },
+        "uiMatchesApi": true,
+        "cityPreserved": true,
+        "pageErrors": 0
+      },
+      "modelSelectionFailureEvidence": {
+        "screenshot": "plain Japan page, brand menu closed, make/model unselected,24 cards",
+        "lastLegacyApiReceivedAt": "2026-11-27T15:50:36.229Z",
+        "savedFailureCaptureAt": "2026-11-27T15:51:12.685Z",
+        "exactFailedAction": "not recorded",
+        "existingReadinessContract": "CatalogFilters interactive=false during SSR; existing hidden advanced button disabled/aria-busy until useEffect makes it interactive",
+        "missingControllerWait": "immediate brand.click after domcontentloaded without observing readiness or requiring popup expanded before option lookup",
+        "causeQualification": "lost early click is consistent with evidence; raw action not captured"
+      }
     }
   ],
   "controllerNavigationRepair": {
@@ -646,10 +798,35 @@
       "cityHydrationFixture": "passed",
       "crmControlsOfflineFixture": "passed",
       "photoRetryFixture": "passed"
+    },
+    {
+      "status": "completed",
+      "runId": 46025187067,
+      "runNumber": 60,
+      "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/46025187067",
+      "controllerSha": "ab96176c183b2cfb4a87a2944ca763c30f1cb54b",
+      "runtimeSha": "d6357672787a73c8e62e6f895f3c4cac5dc77211",
+      "acceptancePolicy": "japan-functional-observed-timing-v1",
+      "conclusion": "success",
+      "completedAt": "2026-11-27T15:33:00Z",
+      "controllerTests": 1563,
+      "controllerPassed": 1563,
+      "controllerFailed": 0,
+      "nativeTests": 539,
+      "nativePassed": 539,
+      "nativeFailed": 0,
+      "typecheck": "passed",
+      "directoryFixture": "passed",
+      "paginationAndPowerOrderFixture": "passed",
+      "cityHydrationFixture": "passed",
+      "crmControlsOfflineFixture": "passed",
+      "photoRetryFixture": "passed",
+      "legacyRedirectBrowserFixture": "passed",
+      "legacyRedirectBrowserCases": 8
     }
   ],
   "controllerModelControlsRepair": {
-    "status": "prepared_for_hosted_browser_gate",
+    "status": "hosted_fixture_passed_live_pending",
     "runtimeUnchanged": "d6357672787a73c8e62e6f895f3c4cac5dc77211",
     "localReviewedCommit": "163d8933dff88e7aa4dd833cd7eb0fb2fab65d00",
     "changes": [
@@ -671,12 +848,180 @@
       "independentExactCommitReview": "passed"
     },
     "hostedBrowserFixture": {
-      "status": "pending",
+      "status": "passed",
       "requiredCases": 2,
+      "caseCount": 2,
       "requiredBefore": "build_and_host_contact",
-      "localChromiumExecution": "not_run_browser_unavailable"
+      "runId": 46031918122,
+      "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/46031918122",
+      "completedAt": "2026-11-27T16:19:26Z",
+      "playwrightVersion": "1.55.0",
+      "browserVersion": "158.0.8127.36",
+      "controllerHelperSha256": "eb928663eff4be4889020e03ba0d954a65610572ce393c13f77a7dd4c0ff5654",
+      "componentSha256": {
+        "apps/web/components/catalog/CatalogFilters.tsx": "57167840d5dece642ae18b1cb77a5ae97e3054579b7cbac1a2f593a9473ab923",
+        "apps/web/components/catalog/CatalogBrandMultiSelect.tsx": "fb7502eb3f3a921e3d4aac7ade43f847dfdde712bc7dfbcedbdfee2331a64fb0",
+        "apps/web/components/catalog/VehicleModelSearch.tsx": "004292266702550e66290746e1565574b9f6b66f1c4f3ef48dc031053f7d7413",
+        "apps/web/components/catalog/CatalogSelectionContext.tsx": "78a9f80d4756aa85bf02005d667f72850eb34d33861553e9d612555905508b65",
+        "apps/web/lib/catalog/catalog-routes.ts": "301e9720f16ae2a09c5627ab01c9a3d8f197f7e0fbeaab9105bffb427eb41994",
+        "tests/browser/japan-catalog-city-fixture.tsx": "f6d0f664b8cbc42cf7d752d67f2c401568fb7a40d5c38ca79f976aef88c82d37"
+      },
+      "reportSha256": "db0a6e664a6cb301b30c20817298532d4573c4624668a11d8526e62d8df5aa0b",
+      "productionRequests": 0,
+      "supplierRequests": 0,
+      "forbiddenTransportAttempts": 0,
+      "release30FixtureStep": "passed",
+      "cases": [
+        {
+          "name": "delayed_hydration_preserved_controls",
+          "passed": true,
+          "width": 1440,
+          "actualRuntimeComponents": true,
+          "domContentLoadedBeforeHydration": true,
+          "earlyBrandClickLost": true,
+          "hiddenReadinessMarker": true,
+          "helperWaitedForInteractiveEffect": true,
+          "exactSourceModelAndCity": true,
+          "brandRequests": 1,
+          "modelRequests": 1,
+          "progress": {
+            "phase": "selection_complete",
+            "readyChecks": 3,
+            "brandExpanded": true,
+            "brandUrlMatched": true,
+            "modelOptions": 1,
+            "modelUrlMatched": true,
+            "modelPopupOpenAfterNavigation": true,
+            "modelPopupClose": "clicked_close",
+            "selectedValueMatched": true
+          }
+        },
+        {
+          "name": "delayed_hydration_remounted_controls",
+          "passed": true,
+          "width": 1440,
+          "actualRuntimeComponents": true,
+          "domContentLoadedBeforeHydration": true,
+          "earlyBrandClickLost": true,
+          "hiddenReadinessMarker": true,
+          "helperWaitedForInteractiveEffect": true,
+          "exactSourceModelAndCity": true,
+          "brandRequests": 1,
+          "modelRequests": 1,
+          "progress": {
+            "phase": "selection_complete",
+            "readyChecks": 3,
+            "brandExpanded": true,
+            "brandUrlMatched": true,
+            "modelOptions": 1,
+            "modelUrlMatched": true,
+            "modelPopupOpenAfterNavigation": false,
+            "modelPopupClose": "already_closed_after_navigation",
+            "selectedValueMatched": true
+          }
+        }
+      ]
     },
     "speedGateRequired": false,
-    "speedPassed": null
+    "speedPassed": null,
+    "controllerSha": "9828aa3dc398d265103e95700296e60f0235895e",
+    "liveStatus": "not_reached_in_release30; exact runtime real-browser lifecycle cases passed before host contact"
+  },
+  "candidateHistory": [
+    {
+      "runtimeSha": "d6357672787a73c8e62e6f895f3c4cac5dc77211",
+      "runtimeTree": "0ac828876e7e43b952e342a4f499563c54f3fc41",
+      "retainedRuntime": "a5ca426eec2663eb17c2df69fe2bfed46e2b8740",
+      "runtimeDiffSha256": "05783233326377b7ea983d19039ab03b3b298db63c3337baf47162cf8d026cf9",
+      "pricingRuntimeSha": "64c6338e0db23c8999096bceefbf113c0136fe15",
+      "pricingToServingDiffSha256": "15eafbbdac7fc664e2308c9688dbfc2de264763a785eef80241e0c525ef2f571",
+      "acceptancePolicy": "japan-functional-observed-timing-v1"
+    }
+  ],
+  "previousLocalVerifications": [
+    {
+      "runtimeSha": "d6357672787a73c8e62e6f895f3c4cac5dc77211",
+      "homeIsolationRegressionBeforeFix": {
+        "tests": 3,
+        "failed": 3
+      },
+      "homeIsolationTargeted": {
+        "passed": 36,
+        "failed": 0
+      },
+      "nativeFullSuite": {
+        "fileCount": 69,
+        "tests": 539,
+        "pass": 539,
+        "fail": 0,
+        "duration_ms": 17798.257269
+      },
+      "sourceTypecheck": "passed",
+      "exactSourceAndPricingProof": "passed",
+      "policyScopeTests": {
+        "passed": 7,
+        "failed": 0
+      },
+      "japanBrowserAndObservedTimingTests": {
+        "passed": 86,
+        "failed": 0
+      },
+      "combinedControllerSuite": {
+        "allRequiredTestFilesVerified": true,
+        "passingTests": 1561,
+        "initialBatchPassing": 1542,
+        "initialTestFileLoadFailures": 2,
+        "cause": "Sparse local checkout omitted an unchanged reference JSON imported by two test modules.",
+        "resolvedModuleTestsPassed": 19,
+        "resolvedModuleTestsFailed": 0,
+        "unresolvedFailures": 0,
+        "fullSingleInvocation": false,
+        "initialDurationMs": 55651.837784,
+        "resolvedModulesDurationMs": 1261.986326
+      },
+      "controllerHostPolicyTargeted": {
+        "passed": 387,
+        "failed": 0,
+        "independentReview": "passed; includes historical profiles, future China generation-update, exact receipts, functional failures and rollback"
+      },
+      "frozenSpeedBaselines": "hashes unchanged; timings are observations for the owner-authorized exact58 profile"
+    }
+  ],
+  "sourceDirectoryRecovery": {
+    "status": "published_source_hosted_acceptance_pending",
+    "runtimeSha": "b9e9122b75f4e588088d0241476b18df7f047d96",
+    "productionFileBlob": "90c9a3efa0ccdea6952bba3ed0e04389ed8a2201",
+    "independentReproduction": "On d635, an injected first empty aggregate was stored fresh and reused by the same client and a new client despite recovered source.",
+    "release30CauseQualification": "Actual brand-counts raw body was not captured; the exact wire empty in that run is not claimed as proven.",
+    "preserved": [
+      "Global TTL",
+      "LIST policy",
+      "source admission protections",
+      "pricing formulas",
+      "other-market behavior"
+    ],
+    "lateZeroOrdering": "Bounded scalar ordering plus existing serialized directory persistence queue; no distributed transaction claim"
+  },
+  "controllerDirectoryRetryRepair": {
+    "localReviewedCommit": "03d9852214beca23b434da14ecd739a89dc639c8",
+    "scopeReviewedCommit": "d6c30e07c28cddf79b66da7db1b67a8274bbff51",
+    "status": "integrated_hosted_fixture_pending",
+    "requiredActualBrowserCases": 3,
+    "cases": [
+      "actual_mobile_empty_then_retry",
+      "desktop_error_then_dropdown_and_rail_retry",
+      "persistent_empty_refused"
+    ],
+    "limits": {
+      "dropdownRetryPerControl": 1,
+      "railRetryPerControl": 1,
+      "metadataResponsesPerControl": [
+        1,
+        2
+      ]
+    },
+    "proof": "Fresh complete counts, source aliases, visible names, card identity, URL/city/selections and read-only fence remain mandatory; fallback never completes acceptance.",
+    "hostedFixture": "required before build and host contact in both release and verification workflows",
+    "diagnostics": "Safe bounded status/counts shape/hash/validation enums; no raw payload or source names"
   }
 }

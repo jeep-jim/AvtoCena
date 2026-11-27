@@ -85,15 +85,22 @@ export const JAPAN_STABILITY_RAILS_CODE_PATHS = Object.freeze([
 ].sort());
 /** The owner-directed independent release keeps timing as observations and
  * removes the retained home's dependency on the obsolete aggregate reader.
- * This policy is authorized only for this exact successor, never old receipts. */
+ * This policy is authorized only for reviewed successors, never old receipts. */
 export const JAPAN_OBSERVED_TIMING_POLICY = 'japan-functional-observed-timing-v1';
 export const JAPAN_STABILITY_HOME_CODE_PATHS = Object.freeze([
   ...JAPAN_STABILITY_RAILS_CODE_PATHS,
   'apps/web/lib/catalog/storage.ts',
   'tests/catalog-next-home-isolation.test.ts',
 ].sort());
+/** Metadata recovery also updates the existing TTL regression's positive
+ * source fixture. Preserve the exact 58-file profile and its receipts. */
+export const JAPAN_STABILITY_METADATA_CODE_PATHS = Object.freeze([
+  ...JAPAN_STABILITY_HOME_CODE_PATHS,
+  'tests/ajes-ready-metadata.test.ts',
+].sort());
 const reviewedProfiles = Object.freeze([JAPAN_STABILITY_CODE_PATHS, JAPAN_STABILITY_UI_CODE_PATHS,
-  JAPAN_STABILITY_POWER_CODE_PATHS, JAPAN_STABILITY_RAILS_CODE_PATHS, JAPAN_STABILITY_HOME_CODE_PATHS]);
+  JAPAN_STABILITY_POWER_CODE_PATHS, JAPAN_STABILITY_RAILS_CODE_PATHS, JAPAN_STABILITY_HOME_CODE_PATHS,
+  JAPAN_STABILITY_METADATA_CODE_PATHS]);
 
 export function japanStabilityCodePaths(plan) {
   const files = plan?.runtimeFiles;
@@ -108,7 +115,7 @@ export function isExactJapanStabilityScope(plan) {
     && plan?.codeScope === JAPAN_STABILITY_CODE_SCOPE
     && plan.retainedRuntime === JAPAN_STABILITY_RETAINED_RUNTIME
     && paths !== null
-    && (paths === JAPAN_STABILITY_HOME_CODE_PATHS
+    && ([JAPAN_STABILITY_HOME_CODE_PATHS, JAPAN_STABILITY_METADATA_CODE_PATHS].includes(paths)
       ? plan.acceptancePolicy === JAPAN_OBSERVED_TIMING_POLICY
       : plan.acceptancePolicy === undefined);
 }
@@ -116,20 +123,21 @@ export function isExactJapanStabilityScope(plan) {
 export function japanObservedTimingRequired(plan) {
   if (plan?.codeScope !== JAPAN_STABILITY_CODE_SCOPE) return false;
   if (!isExactJapanStabilityScope(plan)) throw Error('japan_stability_observed_timing_scope');
-  return japanStabilityCodePaths(plan) === JAPAN_STABILITY_HOME_CODE_PATHS;
+  return [JAPAN_STABILITY_HOME_CODE_PATHS, JAPAN_STABILITY_METADATA_CODE_PATHS].includes(japanStabilityCodePaths(plan));
 }
 
 export function japanPowerOrderRequired(plan) {
   if (plan?.codeScope !== JAPAN_STABILITY_CODE_SCOPE) return false;
   if (!isExactJapanStabilityScope(plan)) throw Error('japan_stability_power_order_scope');
   return [JAPAN_STABILITY_POWER_CODE_PATHS, JAPAN_STABILITY_RAILS_CODE_PATHS,
-    JAPAN_STABILITY_HOME_CODE_PATHS].includes(japanStabilityCodePaths(plan));
+    JAPAN_STABILITY_HOME_CODE_PATHS, JAPAN_STABILITY_METADATA_CODE_PATHS].includes(japanStabilityCodePaths(plan));
 }
 
 export function japanBrandDirectoryRequired(plan) {
   if (plan?.codeScope !== JAPAN_STABILITY_CODE_SCOPE) return false;
   if (!isExactJapanStabilityScope(plan)) throw Error('japan_stability_brand_directory_scope');
-  return [JAPAN_STABILITY_RAILS_CODE_PATHS, JAPAN_STABILITY_HOME_CODE_PATHS].includes(japanStabilityCodePaths(plan));
+  return [JAPAN_STABILITY_RAILS_CODE_PATHS, JAPAN_STABILITY_HOME_CODE_PATHS,
+    JAPAN_STABILITY_METADATA_CODE_PATHS].includes(japanStabilityCodePaths(plan));
 }
 
 export function japanSourceNamesRequired(plan) {
