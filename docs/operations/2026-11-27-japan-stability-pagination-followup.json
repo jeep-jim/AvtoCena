@@ -1,0 +1,639 @@
+{
+  "version": 1,
+  "kind": "japan-stability-pagination-followup-v1",
+  "checkpointAt": "2026-11-27T06:57:37.947Z",
+  "scope": "Japan stability, exact candidate rollback, bounded cache maintenance preparation",
+  "ci": {
+    "runId": "45950280165",
+    "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/45950280165",
+    "controllerSha": "230edafb509b8d8e4c2bc934170a747f1fd7130a",
+    "conclusion": "success",
+    "attempt": 1,
+    "controllerTestsPassed": 1376,
+    "selectedNativeTestsPassed": 479,
+    "fullLocalNativeTestsPassed": 2986,
+    "finishedAt": "2026-11-27T06:16:10Z"
+  },
+  "release": {
+    "runId": "45950918377",
+    "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/45950918377",
+    "controllerSha": "1b4ee25bd591a4254f46ee7551d140453f2ade34",
+    "runtimeSha": "73321a180c16d1d432559d572a2ac2b7fdf5cc2b",
+    "runtimeTree": "1284b355244f89389a674203d3d97eee183f12d2",
+    "artifactId": 15177946550,
+    "archiveSha256": "1bcb0b2c3085e8f8a545e4973b33b05b7f47dc0c079e5436b6a99d3d924db7df",
+    "terminalReport": {
+      "version": 1,
+      "kind": "china-code-cycle-v1",
+      "market": "china",
+      "completed": false,
+      "published": false,
+      "status": "rolled_back",
+      "runtimeSha": "73321a180c16d1d432559d572a2ac2b7fdf5cc2b",
+      "retainedRuntime": "a5ca426eec2663eb17c2df69fe2bfed46e2b8740",
+      "sourceRequests": 0,
+      "generationRestores": 0,
+      "priceCalculations": 0,
+      "generationWrites": 0,
+      "encyclopediaWrites": 0,
+      "otherMarketWrites": 0,
+      "deletions": 0,
+      "appImageCleanupBeforeReserve": {
+        "version": 1,
+        "kind": "china-terminal-app-image-cleanup-v1",
+        "completed": true,
+        "status": "already_absent",
+        "uncertain": false,
+        "imagesRemoved": 0,
+        "runtimeSha": "92b520d7a63b3be0078c14fb0384133818a52e23",
+        "imageId": "sha256:53038af9e4b592d24d4b90a9d9acb0be856b2296baa54e2252da982971f38304",
+        "witnessSha256": "2afe68075928be50c899173c7ed2c901bb2445404ac7347c6c178f9f02a884d4",
+        "diskFreeBytesBefore": 51131805696,
+        "diskFreeBytesAfter": 51131805696,
+        "measuredFreeBytesChange": 0,
+        "reason": "already_absent"
+      },
+      "retentionPreserved": true,
+      "recovered": true,
+      "appImageCleanup": {
+        "version": 1,
+        "kind": "china-terminal-app-image-cleanup-v1",
+        "completed": true,
+        "status": "removed",
+        "uncertain": false,
+        "imagesRemoved": 1,
+        "runtimeSha": "73321a180c16d1d432559d572a2ac2b7fdf5cc2b",
+        "imageId": "sha256:76c916ce694647aae0b65ad656017faf9fd5c49cf542fe4d19c8e63a42def8a9",
+        "witnessSha256": "dd1998fc9bd5fb262bafa622a420fa3a4ab75f1604fb2aa3ce654dbe2f48fe24",
+        "diskFreeBytesBefore": 49937162240,
+        "diskFreeBytesAfter": 51128909824,
+        "measuredFreeBytesChange": 1191747584,
+        "reason": "exact_terminal_image"
+      },
+      "errorCode": "china_daily_release_japan_browser_failed",
+      "finishedAt": "2026-11-27T06:43:36.116Z",
+      "leaseReleased": true
+    },
+    "browserReport": {
+      "version": 1,
+      "kind": "catalog-japan-browser-v1",
+      "codeScope": "catalog-japan-stability-v1",
+      "release": "73321a180c16d1d432559d572a2ac2b7fdf5cc2b",
+      "nonce": "83212826ff53807629be1669b2969128",
+      "checkedAt": "2026-11-27T06:42:41.473Z",
+      "passed": false,
+      "japanFreshnessPassed": true,
+      "japanPowerApiPassed": true,
+      "japanUiPassed": false,
+      "japanVisibilityPassed": false,
+      "readOnlyBrowserFence": true,
+      "productionMutations": 0,
+      "directSupplierApiRequests": 0,
+      "supplierImageRequests": 44,
+      "explicitJapanApiRequests": 4,
+      "checks": {
+        "health": [
+          {
+            "stage": "before",
+            "requestedAt": "2026-11-27T06:42:42.019Z",
+            "receivedAt": "2026-11-27T06:42:42.613Z",
+            "durationMs": 594,
+            "responseHeaders": {
+              "omitted": []
+            },
+            "status": 200,
+            "ok": true,
+            "releaseSha": "73321a180c16d1d432559d572a2ac2b7fdf5cc2b",
+            "calculationVersion": "4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90"
+          }
+        ],
+        "freshness": {
+          "observations": [
+            {
+              "status": 200,
+              "shown": 24,
+              "received": 24,
+              "observedAt": "2026-11-27T06:41:42.382Z",
+              "ageSeconds": 60.881,
+              "stale": false,
+              "partial": false,
+              "total": null,
+              "hasMore": true,
+              "durationMs": 648,
+              "sourceObservedDuringRequest": false
+            },
+            {
+              "status": 200,
+              "shown": 24,
+              "received": 24,
+              "observedAt": "2026-11-27T06:41:42.382Z",
+              "ageSeconds": 61.636,
+              "stale": false,
+              "partial": false,
+              "total": null,
+              "hasMore": true,
+              "durationMs": 755,
+              "sourceObservedDuringRequest": false
+            }
+          ],
+          "sameObservation": true,
+          "sameRows": true
+        },
+        "responses": [
+          {
+            "stage": "plain_first",
+            "status": 200,
+            "ok": true,
+            "shown": 24,
+            "received": 24,
+            "observedAt": "2026-11-27T06:41:42.382Z",
+            "stale": false,
+            "partial": false,
+            "interrupted": false,
+            "scanLimited": false,
+            "hasMore": true,
+            "total": null,
+            "requestedAt": "2026-11-27T06:42:42.613Z",
+            "receivedAt": "2026-11-27T06:42:43.261Z",
+            "durationMs": 648,
+            "responseHeaders": {
+              "cacheControl": "private, max-age=15, stale-while-revalidate=30",
+              "omitted": []
+            },
+            "sourceReadEvidence": {
+              "status": "missing",
+              "catalogReadReceipt": null,
+              "runtimeMatchesExpected": null,
+              "sourceReadReceipts": [],
+              "sourceReadReceiptsLimited": true,
+              "omittedReceipts": null,
+              "omissions": [
+                "catalog_receipt_missing"
+              ]
+            },
+            "pageReadEvidence": {
+              "status": "recorded",
+              "receipts": [
+                {
+                  "version": 1,
+                  "queryHash": "7f7b34136741cb10d915f31a7c897911d2cc043923aa38faa40a2af6c8bf7398",
+                  "table": "stats",
+                  "kind": "list",
+                  "page": 1,
+                  "pageSize": 24,
+                  "requestId": "201ce80e-4601-4ecf-8897-8d7fb3af5ead",
+                  "startedAt": "2026-11-27T06:42:42.688Z",
+                  "finishedAt": "2026-11-27T06:42:42.813Z",
+                  "stage": "access",
+                  "supplierAttempted": false,
+                  "outcome": "fresh",
+                  "observedAt": "2026-11-27T06:41:42.382Z"
+                },
+                {
+                  "version": 1,
+                  "queryHash": "f368b3edba33f245754f7c58a85473de35d87025afba14ddc8a86f4fa9db23c2",
+                  "table": "stats",
+                  "kind": "list",
+                  "page": 2,
+                  "pageSize": 24,
+                  "requestId": "7d10b2fe-a0b2-45b3-b285-ed7ebe17ff61",
+                  "startedAt": "2026-11-27T06:42:42.839Z",
+                  "finishedAt": "2026-11-27T06:42:42.897Z",
+                  "stage": "access",
+                  "supplierAttempted": false,
+                  "outcome": "fresh",
+                  "observedAt": "2026-11-27T06:41:51.662Z"
+                }
+              ],
+              "received": 2,
+              "omitted": 0,
+              "limited": false
+            }
+          },
+          {
+            "stage": "plain_warm",
+            "status": 200,
+            "ok": true,
+            "shown": 24,
+            "received": 24,
+            "observedAt": "2026-11-27T06:41:42.382Z",
+            "stale": false,
+            "partial": false,
+            "interrupted": false,
+            "scanLimited": false,
+            "hasMore": true,
+            "total": null,
+            "requestedAt": "2026-11-27T06:42:43.263Z",
+            "receivedAt": "2026-11-27T06:42:44.018Z",
+            "durationMs": 755,
+            "responseHeaders": {
+              "cacheControl": "private, max-age=15, stale-while-revalidate=30",
+              "omitted": []
+            },
+            "sourceReadEvidence": {
+              "status": "missing",
+              "catalogReadReceipt": null,
+              "runtimeMatchesExpected": null,
+              "sourceReadReceipts": [],
+              "sourceReadReceiptsLimited": true,
+              "omittedReceipts": null,
+              "omissions": [
+                "catalog_receipt_missing"
+              ]
+            },
+            "pageReadEvidence": {
+              "status": "recorded",
+              "receipts": [
+                {
+                  "version": 1,
+                  "queryHash": "7f7b34136741cb10d915f31a7c897911d2cc043923aa38faa40a2af6c8bf7398",
+                  "table": "stats",
+                  "kind": "list",
+                  "page": 1,
+                  "pageSize": 24,
+                  "requestId": "72a0c1bb-0fae-4ce8-a3bf-4356d32e15ce",
+                  "startedAt": "2026-11-27T06:42:43.665Z",
+                  "finishedAt": "2026-11-27T06:42:43.728Z",
+                  "stage": "access",
+                  "supplierAttempted": false,
+                  "outcome": "fresh",
+                  "observedAt": "2026-11-27T06:41:42.382Z"
+                },
+                {
+                  "version": 1,
+                  "queryHash": "f368b3edba33f245754f7c58a85473de35d87025afba14ddc8a86f4fa9db23c2",
+                  "table": "stats",
+                  "kind": "list",
+                  "page": 2,
+                  "pageSize": 24,
+                  "requestId": "f2ae52fe-269a-4fe4-a5c3-5d79aac32681",
+                  "startedAt": "2026-11-27T06:42:43.734Z",
+                  "finishedAt": "2026-11-27T06:42:43.794Z",
+                  "stage": "access",
+                  "supplierAttempted": false,
+                  "outcome": "fresh",
+                  "observedAt": "2026-11-27T06:41:51.662Z"
+                }
+              ],
+              "received": 2,
+              "omitted": 0,
+              "limited": false
+            }
+          },
+          {
+            "stage": "power_api",
+            "status": 200,
+            "ok": true,
+            "shown": 24,
+            "received": 24,
+            "observedAt": "2026-11-27T06:41:42.382Z",
+            "stale": false,
+            "partial": false,
+            "interrupted": false,
+            "scanLimited": false,
+            "hasMore": true,
+            "total": null,
+            "requestedAt": "2026-11-27T06:42:44.018Z",
+            "receivedAt": "2026-11-27T06:42:44.258Z",
+            "durationMs": 240,
+            "responseHeaders": {
+              "cacheControl": "private, max-age=15, stale-while-revalidate=30",
+              "omitted": []
+            },
+            "sourceReadEvidence": {
+              "status": "missing",
+              "catalogReadReceipt": null,
+              "runtimeMatchesExpected": null,
+              "sourceReadReceipts": [],
+              "sourceReadReceiptsLimited": true,
+              "omittedReceipts": null,
+              "omissions": [
+                "catalog_receipt_missing"
+              ]
+            },
+            "pageReadEvidence": {
+              "status": "recorded",
+              "receipts": [
+                {
+                  "version": 1,
+                  "queryHash": "7f7b34136741cb10d915f31a7c897911d2cc043923aa38faa40a2af6c8bf7398",
+                  "table": "stats",
+                  "kind": "list",
+                  "page": 1,
+                  "pageSize": 24,
+                  "requestId": "f1380e9a-7856-4c3c-8fe9-2364b6a0dc98",
+                  "startedAt": "2026-11-27T06:42:44.093Z",
+                  "finishedAt": "2026-11-27T06:42:44.112Z",
+                  "stage": "access",
+                  "supplierAttempted": false,
+                  "outcome": "fresh",
+                  "observedAt": "2026-11-27T06:41:42.382Z"
+                },
+                {
+                  "version": 1,
+                  "queryHash": "f368b3edba33f245754f7c58a85473de35d87025afba14ddc8a86f4fa9db23c2",
+                  "table": "stats",
+                  "kind": "list",
+                  "page": 2,
+                  "pageSize": 24,
+                  "requestId": "803db668-81b4-4bd2-862f-f43736c6dee8",
+                  "startedAt": "2026-11-27T06:42:44.117Z",
+                  "finishedAt": "2026-11-27T06:42:44.176Z",
+                  "stage": "access",
+                  "supplierAttempted": false,
+                  "outcome": "fresh",
+                  "observedAt": "2026-11-27T06:41:51.662Z"
+                }
+              ],
+              "received": 2,
+              "omitted": 0,
+              "limited": false
+            }
+          },
+          {
+            "stage": "pagination_plain_page_two",
+            "status": 200,
+            "ok": true,
+            "shown": 24,
+            "received": 24,
+            "observedAt": "2026-11-27T01:56:14.520Z",
+            "stale": true,
+            "partial": true,
+            "interrupted": false,
+            "scanLimited": false,
+            "hasMore": false,
+            "total": null,
+            "requestedAt": "2026-11-27T06:42:55.234Z",
+            "receivedAt": "2026-11-27T06:42:55.516Z",
+            "durationMs": 282,
+            "responseHeaders": {
+              "cacheControl": "private, max-age=15, stale-while-revalidate=30",
+              "omitted": []
+            },
+            "sourceReadEvidence": {
+              "status": "missing",
+              "catalogReadReceipt": null,
+              "runtimeMatchesExpected": null,
+              "sourceReadReceipts": [],
+              "sourceReadReceiptsLimited": true,
+              "omittedReceipts": null,
+              "omissions": [
+                "catalog_receipt_missing"
+              ]
+            },
+            "pageReadEvidence": {
+              "status": "recorded",
+              "receipts": [
+                {
+                  "version": 1,
+                  "queryHash": "f368b3edba33f245754f7c58a85473de35d87025afba14ddc8a86f4fa9db23c2",
+                  "table": "stats",
+                  "kind": "list",
+                  "page": 2,
+                  "pageSize": 24,
+                  "requestId": "80deeef7-ccaf-49b2-9160-ce89e97251ea",
+                  "startedAt": "2026-11-27T06:42:55.310Z",
+                  "finishedAt": "2026-11-27T06:42:55.371Z",
+                  "stage": "access",
+                  "supplierAttempted": false,
+                  "outcome": "fresh",
+                  "observedAt": "2026-11-27T06:41:51.662Z"
+                },
+                {
+                  "version": 1,
+                  "queryHash": "aee6a316fe78f521f28c7ad9d23f72d95303ba0aa5363c20132532dc1e64c3d4",
+                  "table": "stats",
+                  "kind": "list",
+                  "page": 3,
+                  "pageSize": 24,
+                  "requestId": "5d68afb7-9d02-4da6-8f13-604d50777026",
+                  "startedAt": "2026-11-27T06:42:55.377Z",
+                  "finishedAt": "2026-11-27T06:42:55.436Z",
+                  "stage": "cooldown",
+                  "supplierAttempted": false,
+                  "outcome": "stale",
+                  "reason": "invalid_response",
+                  "observedAt": "2026-11-27T01:56:14.520Z"
+                }
+              ],
+              "received": 2,
+              "omitted": 0,
+              "limited": false
+            }
+          }
+        ],
+        "power": {
+          "status": 200,
+          "shown": 24,
+          "received": 24,
+          "observedAt": "2026-11-27T06:41:42.382Z",
+          "ageSeconds": 61.876,
+          "stale": false,
+          "partial": false,
+          "total": null,
+          "hasMore": true,
+          "localPower": 0,
+          "supplierPower": 15,
+          "unknownPower": 9,
+          "unknownRetainedAndLabelled": true,
+          "countHonest": true,
+          "durationMs": 240
+        },
+        "pagination24": {}
+      },
+      "screenshots": [
+        {
+          "path": "artifacts/catalog-japan-live/83212826ff53807629be1669b2969128/failure.png",
+          "sha256": "84f857c8956f36931383b9d0f6d2a0fd8513be579a7f9e23a1451adc9828e4c3"
+        }
+      ],
+      "japanPetrolPowerUiPassed": false,
+      "japanDetailPowerInputPassed": false,
+      "japanDeliveredCalculationPassed": false,
+      "japanPreviewCalculationRequests": 0,
+      "japanFullPagesPassed": false,
+      "japanPagination24Passed": false,
+      "japanCatalogWarningRemovedPassed": false,
+      "japanModelSelectionPassed": false,
+      "japanCombinedFiltersPassed": false,
+      "japanRelatedCardsPassed": false,
+      "japanVehiclePolicyPassed": false,
+      "generationManifestSha256": "58263ea4dc5642c9ff6f544830e9d3536ba702fb729a7a8c33b049b70b737038",
+      "oracleSha256": "4643f36c9c3be86b4d70c8b1b249c724b5d0f85ba3fa2c0ba2ce7abe6b8e6a75",
+      "blockedRequests": {
+        "mutation": 0,
+        "external": 0,
+        "private": 0,
+        "redirect": 0
+      },
+      "error": {
+        "stage": "pagination_plain_page_two",
+        "code": "japan_browser_unavailable_or_stale",
+        "timeout": false
+      }
+    },
+    "savedFailureReport": {
+      "version": 1,
+      "kind": "japan-usability-saved-failure-v1",
+      "records": [
+        {
+          "slot": "stats-list-1",
+          "readStatus": "ok",
+          "startedAt": "2026-11-27T06:42:57.581Z",
+          "finishedAt": "2026-11-27T06:42:58.393Z",
+          "kind": "list",
+          "outcome": "invalid_response",
+          "page": 1,
+          "pageSize": 24,
+          "httpStatus": 200,
+          "providerCode": null,
+          "sqlSha256": "31090ddda6e6fc688270ef137f1ea22455b62f803eaa032007cde957e8129d8c",
+          "sqlBytes": 5477
+        },
+        {
+          "slot": "stats-count",
+          "readStatus": "ok",
+          "startedAt": "2026-11-27T06:42:58.083Z",
+          "finishedAt": "2026-11-27T06:42:58.392Z",
+          "kind": "count",
+          "outcome": "invalid_response",
+          "page": 1,
+          "pageSize": 1,
+          "httpStatus": 200,
+          "providerCode": null,
+          "sqlSha256": "6767bd0146e376d9b059e7f4a3d1435264f9a94f5915bfa5cb025404987c81a3",
+          "sqlBytes": 5438
+        },
+        {
+          "slot": "stats-latest",
+          "readStatus": "ok",
+          "startedAt": "2026-11-27T06:42:57.581Z",
+          "finishedAt": "2026-11-27T06:42:58.393Z",
+          "kind": "list",
+          "outcome": "invalid_response",
+          "page": 1,
+          "pageSize": 24,
+          "httpStatus": 200,
+          "providerCode": null,
+          "sqlSha256": "31090ddda6e6fc688270ef137f1ea22455b62f803eaa032007cde957e8129d8c",
+          "sqlBytes": 5477
+        }
+      ],
+      "supplierRequests": 0,
+      "writes": 0
+    }
+  },
+  "interpretation": {
+    "plainAndPowerFirstPageFreshFull": true,
+    "uiPageTwoAccepted": false,
+    "initialSourcePageThreeFailureCaptured": false,
+    "confirmedFailure": "The explicit API read after UI navigation reused source-page-3 visitor cooldown invalid_response and an older partial fallback; the original failed supplier request is not in the browser report.",
+    "sourcePageThreeWireSha256": "aee6a316fe78f521f28c7ad9d23f72d95303ba0aa5363c20132532dc1e64c3d4",
+    "sourcePageThreeCanonicalSha256": "9ecac0a545c5e01cccc72ee6c0a752efb59baf3b4396d980c5a3d6bced916a39",
+    "sourcePageThreeCacheSlot": 37,
+    "savedFailureCorrelation": "The saved list-1/count/latest records are later and have different SQL hashes. Their HTTP 200 does not prove the original page-3 HTTP status or response shape.",
+    "rootCauseKnown": false,
+    "remainingLiveGates": "UI pagination, model selection, combined filters, related Japan cards, vehicle policy and delivered calculation were not reached/passed.",
+    "sameReleaseBlindRetryPerformed": false
+  },
+  "cacheBareCanary": {
+    "runId": "45950312191",
+    "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/45950312191",
+    "report": {
+      "version": 1,
+      "kind": "japan-cache-retention-canary-v1",
+      "mode": "canary",
+      "controllerSha": "16a8d204c74ef20acf52a36a51c5b44d6076ca8c",
+      "approvedControllerSha": "230edafb509b8d8e4c2bc934170a747f1fd7130a",
+      "runId": "45950312191",
+      "attempt": "1",
+      "startedAt": "2026-11-27T06:12:17.531Z",
+      "finishedAt": "2026-11-27T06:12:21.345Z",
+      "completed": true,
+      "status": "capability_not_verified",
+      "cacheMutations": 0,
+      "directSupplierRequests": 0,
+      "rawPayloadsPersisted": false,
+      "cacheDeletionEnabled": false,
+      "versionHistoryInventoried": false,
+      "hostDiskMeasured": false,
+      "storage": {
+        "privateBucketVerified": true,
+        "versioning": {
+          "state": "never_enabled",
+          "mfaDelete": "not_reported"
+        },
+        "lifecycle": {
+          "state": "absent",
+          "totalRules": 0,
+          "matchingRules": 0,
+          "rules": [],
+          "limited": false
+        }
+      },
+      "inventory": [],
+      "inspections": null,
+      "requests": {
+        "requests": 14,
+        "responseBytes": 2510,
+        "metadataPages": 0,
+        "bodyInspections": 0,
+        "syntheticPuts": 3,
+        "syntheticDeletes": 1
+      }
+    },
+    "canary": {
+      "conditionalHeaderFormat": "bare",
+      "target": "current_object",
+      "tested": true,
+      "staleConditionRejected": false,
+      "updatedObjectPreserved": false,
+      "matchingConditionDeleted": false,
+      "stalePutStatus": 412,
+      "updatedObjectPreservedAfterStalePut": true,
+      "currentObjectConditionalPutVerified": true,
+      "staleDeleteStatus": 204,
+      "matchingDeleteStatus": null,
+      "supportedForTestedTarget": false,
+      "currentObjectConditionalDeleteVerified": false,
+      "knownVersionsRemoved": 0,
+      "versioningChanged": false,
+      "residuePossible": false,
+      "maximumPayloadBytesWritten": 1536,
+      "outcome": "stale_precondition_not_enforced"
+    }
+  },
+  "preparedMaintenance": {
+    "japanPayloadCompaction": {
+      "branch": "fix/japan-cache-compaction-20261127",
+      "commit": "ff60846176d2e72e4751f295135204bc96e6b7fe",
+      "tree": "dbba2083adca1b8eb303a56af3eb7fb101b17592",
+      "targetedTestsPassed": 44,
+      "files": 7,
+      "activated": false,
+      "productionCacheMutations": 0,
+      "method": "conditional PUT only; current and rollback acceptance, fixed prefixes, original observedAt, guarded CAS and bounded cursor",
+      "physicalStorageReclamationVerified": false
+    },
+    "regGenerationResume": {
+      "branch": "fix/japan-reg-resume-20261127",
+      "commit": "5b2812d8d3ab2f867bab3753606c5113130adbff",
+      "testsPassed": 18,
+      "activated": false,
+      "requiresRuntime": "73321a180c16d1d432559d572a2ac2b7fdf5cc2b",
+      "requirementCurrentlySatisfied": false,
+      "pendingKnownGenerations": [
+        "gen_china_45369451603_1",
+        "gen_china_45655051136_1"
+      ]
+    }
+  },
+  "nextStep": "Read only the existing saved stats-list-3 failure metadata, bind SQL hash and time; distinguish decode/page-shape/empty-count-validation and capture the already performed SSR receipt without extra supplier calls. Preserve all acceptance criteria.",
+  "prohibitions": [
+    "No direct supplier diagnostic retry",
+    "No visitor IP substitution",
+    "No stale-to-fresh relabeling",
+    "No deletion of current or rollback generations",
+    "No cache DELETE using unsupported preconditions"
+  ]
+}

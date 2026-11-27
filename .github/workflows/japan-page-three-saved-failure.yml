@@ -1,0 +1,55 @@
+name: Inspect only the saved Japan source page three failure
+on:
+  push:
+    branches: [main]
+    paths: [.github/market-runs/japan-page-three-saved-failure.json]
+  workflow_dispatch:
+    inputs:
+      expected_controller_sha:
+        description: Exact reviewed main controller SHA
+        required: true
+        type: string
+permissions:
+  contents: read
+concurrency:
+  group: japan-usability-saved-failure-readonly
+  cancel-in-progress: false
+jobs:
+  inspect:
+    if: github.repository_id == '1289722938' && github.ref == 'refs/heads/main' && github.run_attempt == '1'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    environment: regcloud-staging
+    env:
+      EXPECTED_CONTROLLER_SHA: ${{ inputs.expected_controller_sha }}
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 2
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24.22.3'
+      - name: Verify the exact source and offline fixed-slot reader before credentials
+        run: |
+          set -euo pipefail
+          node scripts/verify-frozen-speed-baselines.mjs
+          node --check scripts/catalog-next/japan-usability-saved-failure-20261126.mjs
+          node scripts/catalog-next/japan-usability-saved-failure-20261126.mjs --verify-page-three
+          node --import ./tests/helpers/offline-fetch.mjs --test tests/catalog-next-japan-page-three-saved-failure.test.mjs tests/readonly-marker-invocation.test.mjs
+      - name: Read only the existing saved stats list page three object
+        env:
+          REGCLOUD_S3_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          REGCLOUD_S3_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+        run: |
+          set -euo pipefail
+          umask 077
+          node scripts/catalog-next/japan-usability-saved-failure-20261126.mjs --run-page-three > japan-page-three-saved-failure-report.json
+      - name: Preserve sanitized outer-request metadata only
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: japan-page-three-saved-failure
+          path: japan-page-three-saved-failure-report.json
+          if-no-files-found: ignore
+          retention-days: 14
