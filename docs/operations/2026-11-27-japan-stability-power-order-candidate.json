@@ -2,7 +2,7 @@
   "version": 1,
   "date": "2026-11-27",
   "timeZone": "Asia/Krasnoyarsk",
-  "status": "prepared_for_exact_ci_not_accepted",
+  "status": "ci_failed_fixture_input_not_published",
   "priorUiEvidence": "docs/operations/2026-11-27-japan-stability-ui-candidate.json",
   "priorProductionEvidence": "docs/operations/2026-11-27-japan-stability-power-ui-followup.json",
   "retainedRuntime": "a5ca426eec2663eb17c2df69fe2bfed46e2b8740",
@@ -98,5 +98,47 @@
     "The cursor does not promise an immutable snapshot of source pages not yet read.",
     "Existing five-second editorial caching remains; the change does not promise instantaneous observation of external edits.",
     "Maintenance must be rebound to the actually accepted current/rollback pair before activation."
-  ]
+  ],
+  "hostedCi": {
+    "controllerSha": "291e9eec35572723b72a1ddc92e98dc63e31a713",
+    "controllerTree": "847d3555d2d2cda3c1fb69a1a6780dd0a3532275",
+    "runId": 45989112729,
+    "jobId": 140472135539,
+    "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/45989112729",
+    "conclusion": "failure",
+    "completedAt": "2026-11-27T11:21:23Z",
+    "controllerPassed": 1495,
+    "nativePassed": 532,
+    "typecheck": "passed",
+    "sourceAndProtectedPathsVerified": true,
+    "passedBrowserFixtures": {
+      "cityCases": 4,
+      "collectionControlWidths": [
+        390,
+        1440
+      ],
+      "photoRetryCases": 12
+    },
+    "failure": {
+      "fixture": "tests/browser/ajes-pagination.mjs",
+      "phase": "japan_power",
+      "viewportWidth": 390,
+      "caseCount": 1,
+      "reason": "The real caller emitted 24 items, but the actual card returned null for the synthetic power rows after the existing price safety projection. Plain pagination passed.",
+      "browserErrors": [],
+      "sourceDirectoryExecuted": false
+    },
+    "localReproduction": {
+      "plainInputRows": 24,
+      "plainCardElements": 24,
+      "powerInputRows": 24,
+      "powerCardElements": 0,
+      "jsonRoundtripPreservedRows": true,
+      "defect": "Synthetic engineCc=1500 had no source evidence and the currency rate had no date. The existing safety path rejected unclassified engine displacement and could not retain a bound seller price. The real production reader supplies source engine evidence and a dated conversion; the fixture publicOffer identity stub had previously hidden this mismatch.",
+      "pricingProtectionWeakened": false,
+      "reportSha256": "cbd074dd4f96de731ce6f2a1b5ff5293a8bbe3f4541faa8ff91d3060717afe53"
+    },
+    "publicationMarkerCreated": false,
+    "productionWrites": 0
+  }
 }

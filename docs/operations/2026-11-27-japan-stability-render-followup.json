@@ -1,0 +1,72 @@
+{
+  "version": 1,
+  "date": "2026-11-27",
+  "timeZone": "Asia/Krasnoyarsk",
+  "status": "prepared_for_exact_ci_not_accepted",
+  "priorCandidateEvidence": "docs/operations/2026-11-27-japan-stability-power-order-candidate.json",
+  "retainedRuntime": "a5ca426eec2663eb17c2df69fe2bfed46e2b8740",
+  "retainedGeneration": "gen_china_45875678028_1",
+  "candidate": {
+    "runtimeSha": "9a8b2f1d2a3c78bdf00fd820f1d080de32980f15",
+    "runtimeTree": "92bcf677f01008338997de8e46c5a00c10dc2094",
+    "parent": "8ae17e1c6f0e262f0f663186930911f422784d1d",
+    "runtimeDiffSha256": "78b5d6d5dc7383f43ba837ad3b0ebf53d0aa1355e3ffa9370c3b44e27cb536a9",
+    "pricingToServingDiffSha256": "f2e90e435302f2c6bc63e8df5b4ee8d21023181c79c1cf59f9fa7bb73230071d",
+    "runtimeFileCount": 53,
+    "pricingToServingFileCount": 112,
+    "codeScope": "catalog-japan-stability-v1"
+  },
+  "deltaFromParent": {
+    "paths": [
+      "tests/browser/ajes-pagination.mjs"
+    ],
+    "productionCodeChanged": false,
+    "protectedPricingChanged": false,
+    "assertionsRemoved": false,
+    "repair": "Synthetic source records now carry a dated CBR conversion and explicit ENG_V/TIME evidence, matching the real reader boundary. The actual card safety gate remains unchanged.",
+    "addedProof": "Before Chromium, known and unknown results from the actual caller must render one real CatalogCard each, retain ID and power labels, and render identically after JSON transport."
+  },
+  "localValidation": {
+    "before": {
+      "powerInputRows": 24,
+      "powerCardElements": 0,
+      "jsonRowsPreserved": true,
+      "sha256": "cbd074dd4f96de731ce6f2a1b5ff5293a8bbe3f4541faa8ff91d3060717afe53"
+    },
+    "after": {
+      "plainInputRows": 24,
+      "plainCardElements": 24,
+      "powerInputRows": 24,
+      "powerCardElements": 24,
+      "jsonHtmlIdentical": true,
+      "sha256": "abdba793013170f0a59abfa4f854ec244275ef307d98c62601c4b2eecfcb8659"
+    },
+    "actualCallerCases": 5,
+    "bundles": "passed",
+    "syntax": "passed",
+    "diffCheck": "passed",
+    "compileLogSha256": "265ad403d7bfac3cdef96d7f97504a94ddcad121cb7d2e1acc165d69ae97f5a3",
+    "exactSourceVerification": {
+      "status": "passed",
+      "runtimeFileCount": 53,
+      "pricingToServingFileCount": 112,
+      "protectedPricingPathsUnchanged": true,
+      "sha256": "72935d3f13c416bb206a72b67e3a827d95158a4f290fdd8baa7eb8c8984b0869"
+    },
+    "treeRoundtripVerified": true
+  },
+  "priorHostedCi": {
+    "runId": 45989112729,
+    "controllerSha": "291e9eec35572723b72a1ddc92e98dc63e31a713",
+    "runtimeSha": "8ae17e1c6f0e262f0f663186930911f422784d1d",
+    "controllerPassed": 1495,
+    "nativePassed": 532,
+    "typecheck": "passed",
+    "conclusion": "failure in the now-corrected synthetic power card data; no production marker"
+  },
+  "remaining": [
+    "Fresh exact-source CI must run all actual browser fixtures, including source directory/model selection.",
+    "Production acceptance, literal Mazda/3, combined filters, recommendations, complete 24-card pagination and delivered calculation have not yet passed as a complete release.",
+    "Activate prepared maintenance only after the actual accepted current/rollback pair is verified."
+  ]
+}

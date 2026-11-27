@@ -1,17 +1,17 @@
 # Текущий шаг
 
-Checkpoint: **27.11.2026, Asia/Krasnoyarsk**. Объединённый Japan-кандидат **8ae17e1c6f0e262f0f663186930911f422784d1d** собран и привязан к точному профилю53; **1495 controller checks PASS**, source/tree/protected-pricing verification PASS. Настоящие browser fixtures ещё должны пройти hosted CI. [Исходник и проверки](../operations/2026-11-27-japan-stability-power-order-candidate.json). Предыдущий UI CI45985181516 остановился на переходе теста под открытым dropdown; исправление включено в8ae17. Последний production run45975983853 завершён **rolled_back в17:08:54,270**. На рабочем сайте сохранены **a5ca** и принятый Китай C. Полное исправление Японии ещё не принято; подготовленная REG/AJ очистка не активирована.
+Checkpoint: **27.11.2026, Asia/Krasnoyarsk**. Japan-кандидат **9a8b2f1d2a3c78bdf00fd820f1d080de32980f15** подготовлен для нового exact CI. От8ae17 изменён только browser fixture; production code прежний. [Причина CI-сбоя и проверка исправления](../operations/2026-11-27-japan-stability-render-followup.json). Предыдущий CI45989112729 подтвердил1495controller/532native/typecheck, но остановился на некорректных synthetic power rows:24элемента→0карточек. После датированного курса и source evidence реальный Card показывает24/24 до и послеJSON. Это ещё не результат Chromium или production. На рабочем сайте сохранены **a5ca** и Китай C; последний production run45975983853 завершён rolled_back. REG/AJ очистка не активирована.
 
 Первичное доказательство: [dd1fc: plain pagination, power UI, snapshot и rollback](../operations/2026-11-27-japan-stability-power-ui-followup.json). Подготовка и CI: [кандидат dd1fc](../operations/2026-11-27-japan-stability-window-candidate.json). Предыдущие 50 строк: [c6cf row-limit](../operations/2026-11-27-japan-stability-row-limit-followup.json). Исторические доказательства не переписываются.
 
 
-## Объединённый кандидат: ожидается exact CI
+## Объединённый кандидат8ae17 и исправление browser fixture9a8b2
 
 - Runtime **8ae17e1c6f0e262f0f663186930911f422784d1d**, tree **60e7f4a875b28ebdc61788e338a66b53762e4501**, parent4f25; actual runtime53/pricing112. Новым путём к UI52 стал только `ajes-public.ts`, чтобы передавать единый snapshot характеристик. Защищённые pricing/editorial/calculation файлы не изменены.
 - Мощность: bounded K→U, общий лимит8 обычных source reads, прежний start-time budget/minimumReads2. Свежий полный конец K необходим до U. Неизвестная мощность сохраняется; неполный промежуточный поиск не объявляется пустым каталогом. SQL и штатная проверка пустого ответа прежние.
 - `j2` связывает фазу, query, evidence epoch и membership; stale/partial остаётся на точном offset. При смене evidence — явный reset с сохранением фильтров/города и готовых карточек. Plain j1 сохранён. Сортировка применяется отдельно внутри K/U.
 - Закрыты реальные review counterexamples: pricing с иной cached editorial revision и превращение неподтверждённых100л.с. в unknown при public projection. Регрессии используют настоящий DetailReadCache/TTL и safePublicPricing.
-- Локально:367 native PASS, final typecheck PASS; root после объединения54 native/5 SSR PASS;1495 bound-controller PASS. Browser v2:12cases/14checks,390/1440; обе сборки и5actual-caller cases PASS, Chromium ожидается в CI.
+- Локально:367 native PASS, final typecheck PASS; root после объединения54 native/5 SSR PASS;1495 bound-controller PASS. Browser v2:12cases/14checks,390/1440; обе сборки и5actual-caller cases PASS, CI45989112729 прошёл1495controller/532native/typecheck, но выявил неполные synthetic source facts в power fixture;9a8b2 исправляет только fixture. Новый Chromium-прогон обязателен.
 - Exact53 требует stronger offline proof и `japanPowerOrderPassed` в live runner и host;52/53 требуют12source-name cases. Добавлен bounded literal Mazda/3 journey. Новых прямых supplier queries или полного сканирования нет.
 - UI CI45985181516:1450controller/516native/typecheck и прежние browser fixtures PASS; новый directory fixture остановился на Reset, перекрытом открытым brand dropdown. Обычный Escape+hidden wait включён в8ae17; model-suggestions в том неуспешном run не выполнялся. Marker для4f25 не создавался.
 

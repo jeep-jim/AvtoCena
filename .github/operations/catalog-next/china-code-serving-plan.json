@@ -3,9 +3,9 @@
   "market": "china",
   "minimumYear": 2014,
   "retainedRuntime": "a5ca426eec2663eb17c2df69fe2bfed46e2b8740",
-  "runtimeSha": "8ae17e1c6f0e262f0f663186930911f422784d1d",
-  "runtimeTree": "60e7f4a875b28ebdc61788e338a66b53762e4501",
-  "runtimeDiffSha256": "230a9939088fccbbf49521d8e5f6a6fe600018a1bc12eefab57068ca83b962cd",
+  "runtimeSha": "9a8b2f1d2a3c78bdf00fd820f1d080de32980f15",
+  "runtimeTree": "92bcf677f01008338997de8e46c5a00c10dc2094",
+  "runtimeDiffSha256": "78b5d6d5dc7383f43ba837ad3b0ebf53d0aa1355e3ffa9370c3b44e27cb536a9",
   "runtimeFiles": [
     "apps/web/app/api/catalog/brand-counts/route.ts",
     "apps/web/app/api/catalog/recommendations/data.ts",
@@ -75,7 +75,7 @@
   },
   "pricingRuntimeSha": "64c6338e0db23c8999096bceefbf113c0136fe15",
   "pricingRuntimeTree": "d2fc1f171316bfb0dc76f09e90409d4d7336f6b3",
-  "pricingToServingDiffSha256": "e3fc6e9bb6dc559e07746f8191f28fa2d18f64522e8539f9eac5e7ca399d9c99",
+  "pricingToServingDiffSha256": "f2e90e435302f2c6bc63e8df5b4ee8d21023181c79c1cf59f9fa7bb73230071d",
   "pricingToServingFiles": [
     "apps/web/app/(crm)/api/crm/china-catalog-status/route.ts",
     "apps/web/app/(public)/cars/offer/[id]/page.tsx",
