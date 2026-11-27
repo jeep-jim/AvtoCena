@@ -672,7 +672,7 @@ export async function installReadFence(context,report,{getCalculationGrant}={}){
    }
    response=await route.fetch({maxRedirects:0,timeout:90_000});
    if(response.status()>=300&&response.status()<400&&response.status()!==304){
-    const location=response.headers()['location'];
+    const location=response.headers?.()['location'];
     if(scope==='allowed'&&japanLegacyMazdaReadRedirect({from:request.url(),to:location,
       method:request.method(),resourceType:request.resourceType(),status:response.status()})){
      await route.fulfill({response});
