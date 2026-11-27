@@ -2,7 +2,7 @@
   "version": 1,
   "date": "2026-11-27",
   "timeZone": "Asia/Krasnoyarsk",
-  "status": "source_saved_controller_ci_pending_not_deployed",
+  "status": "release_in_progress_not_accepted",
   "priorProductionEvidence": "docs/operations/2026-11-27-japan-stability-row-limit-followup.json",
   "retainedRuntime": "a5ca426eec2663eb17c2df69fe2bfed46e2b8740",
   "retainedGeneration": "gen_china_45875678028_1",
@@ -95,5 +95,35 @@
     "No public acceptance or completion claim; all existing gates and automatic rollback remain."
   ],
   "maintenance": "Prepared but not activated. Rebind both runtime references only after final accepted state, then exact CI and serial activation.",
-  "next": "Exact controller CI, fresh production queue check, separate marker activation, normal bounded browser acceptance with existing before-rollback capture."
+  "next": "Wait for current bounded production browser acceptance and saved source observation; diagnose only from exact bound reports. No new source query, guard change or cleanup activation is implied.",
+  "hostedCi": {
+    "runId": "45975142401",
+    "jobId": "140424891218",
+    "controllerSha": "cc56bb7232c86dd5f25b89f6240cd9b77129a5b3",
+    "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/45975142401",
+    "conclusion": "success",
+    "completedAt": "2026-11-27T09:41:57Z",
+    "controllerPassed": 1435,
+    "nativePassed": 505,
+    "nativeCompatibilityPatchApplied": false,
+    "typecheck": "passed",
+    "requiredBrowserFixtures": "passed",
+    "rootReadTerminalLogs": true
+  },
+  "release": {
+    "runId": "45975983853",
+    "controllerMarkerSha": "19cd1ea64ddeb1734db3b3fbc8a420ad73ed1971",
+    "approvedSourceSha": "cc56bb7232c86dd5f25b89f6240cd9b77129a5b3",
+    "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/45975983853",
+    "createdAt": "2026-11-27T09:42:46Z",
+    "observedAt": "2026-11-27T09:43:10Z",
+    "observedStatus": "in_progress",
+    "accepted": false
+  },
+  "queueBeforeActivation": {
+    "observedAt": "2026-11-27T09:42:19Z",
+    "inProgress": 0,
+    "relevantQueued": 0,
+    "unrelatedHistoricalQueued": 5
+  }
 }
