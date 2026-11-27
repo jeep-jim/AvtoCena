@@ -20,19 +20,20 @@
     "exactNetworkCause": "not captured by preceding transport; not inferred"
   },
   "candidate": {
-    "runtimeSha": "7388711061b1a7820baaee1aa8e0b20294157b9e",
-    "runtimeTree": "041887db58d2ca4667a0d54b14e2587a9589effd",
+    "runtimeSha": "a4f23e648d3de2a8a23c9a16942a286b91bb39b4",
+    "runtimeTree": "f2475e05a226afac310fef42fb10c162b3d5753d",
     "retainedRuntime": "a5ca426eec2663eb17c2df69fe2bfed46e2b8740",
-    "runtimeDiffSha256": "b086175a36e1ebba923c0be2af265c3f06782fe6222062a884af2be1804592db",
+    "runtimeDiffSha256": "cf5294e47f02b0e8eab3329be83a5524341f0db223a52f838985bb7b3deefaa8",
     "pricingRuntimeSha": "64c6338e0db23c8999096bceefbf113c0136fe15",
-    "pricingToServingDiffSha256": "cdb3c0c7e27d27c3f71ed5fb8c9606aafb8e24ae073c6686b8a57a3c55d0416e"
+    "pricingToServingDiffSha256": "5d1c139c838a5fc3f02ffc3c842e64569d8914fde19577a42a1e1066f8077d31"
   },
   "scope": {
-    "runtimeFileCount": 55,
+    "runtimeFileCount": 56,
     "pricingFileCount": 112,
     "additionalRuntimePaths": [
       "apps/web/components/catalog/AjesRail.tsx",
-      "apps/web/components/home/HomeJapanFilteredRail.tsx"
+      "apps/web/components/home/HomeJapanFilteredRail.tsx",
+      "tests/japan-rail-visibility.test.ts"
     ],
     "protectedPricingPathsUnchanged": true,
     "frozenHttpOracleReusable": true
@@ -41,8 +42,9 @@
     "Preserve visible Japan supplier makes and retry on empty, all-zero, stale or failed directory metadata; no static makes fallback.",
     "Remove the remaining long power summary from general-catalog and filtered-home Japan rails; preserve individual card facts and saved-result status.",
     "Require complete current source counts against actual desktop and mobile controls; source aliases and filter context retained.",
-    "Require the eighteen-case visible-brand fallback fixture and exact boolean live directory verdict on both controller and host for the exact fifty-five-file profile.",
-    "Code publication alone opts into one bounded transient GET retry; conditional PUT remains single-attempt with existing exact readback and CAS."
+    "Require the eighteen-case visible-brand fallback fixture and exact boolean live directory verdict on both controller and host for the exact fifty-six-file profile.",
+    "Code publication alone opts into one bounded transient GET retry; conditional PUT remains single-attempt with existing exact readback and CAS.",
+    "Update the existing preview assertion to require no long paragraph while proving original supplier/unknown card facts, power filter and honest count remain; production code unchanged from prior candidate."
   ],
   "localVerification": {
     "sourceTargetedTests": 48,
@@ -52,13 +54,21 @@
     "controllerTransportTests": 54,
     "controllerBrandBrowserTests": 82,
     "fullControllerSuite": {
+      "runtimeFileCount": 56,
       "tests": 1550,
-      "passed": 1550,
-      "failed": 0,
-      "durationMs": 54460.151495
+      "pass": 1550,
+      "fail": 0,
+      "duration_ms": 54615.56438
     },
     "exactSourceAndPricingProof": "passed",
-    "frozenSpeedBaselines": "passed"
+    "frozenSpeedBaselines": "passed",
+    "nativeFullSuite": {
+      "fileCount": 69,
+      "tests": 534,
+      "pass": 534,
+      "fail": 0,
+      "duration_ms": 20074.938551
+    }
   },
   "publication": {
     "status": "not_started",
@@ -68,5 +78,28 @@
   "maintenance": {
     "status": "prepared_not_active",
     "activationRequires": "Accepted final runtime and exact rebinding of both current and rollback references; existing deletion and CAS safeguards remain."
-  }
+  },
+  "verificationAttempts": [
+    {
+      "runId": 46006834086,
+      "controllerSha": "427e11c87b4c0fb8a13277e10a6916d646191a32",
+      "candidate": {
+        "runtimeSha": "7388711061b1a7820baaee1aa8e0b20294157b9e",
+        "runtimeTree": "041887db58d2ca4667a0d54b14e2587a9589effd",
+        "retainedRuntime": "a5ca426eec2663eb17c2df69fe2bfed46e2b8740",
+        "runtimeDiffSha256": "b086175a36e1ebba923c0be2af265c3f06782fe6222062a884af2be1804592db",
+        "pricingRuntimeSha": "64c6338e0db23c8999096bceefbf113c0136fe15",
+        "pricingToServingDiffSha256": "cdb3c0c7e27d27c3f71ed5fb8c9606aafb8e24ae073c6686b8a57a3c55d0416e"
+      },
+      "runtimeFileCount": 55,
+      "controllerTestsPassed": 1550,
+      "nativeTests": 534,
+      "nativePassed": 533,
+      "nativeFailed": 1,
+      "failure": "The old japan-rail-visibility assertion still required the deliberately removed paragraph.",
+      "typecheck": "not reached",
+      "browserFixtures": "not reached",
+      "publication": "not started"
+    }
+  ]
 }

@@ -137,6 +137,7 @@ JAPAN_STABILITY_POWER_CODE_FILES = JAPAN_STABILITY_UI_CODE_FILES | {
 JAPAN_STABILITY_RAILS_CODE_FILES = JAPAN_STABILITY_POWER_CODE_FILES | {
     'apps/web/components/catalog/AjesRail.tsx',
     'apps/web/components/home/HomeJapanFilteredRail.tsx',
+    'tests/japan-rail-visibility.test.ts',
 }
 JAPAN_PAGINATION_CODE_FILES = {
     "apps/web/components/catalog/AjesCatalog.tsx",

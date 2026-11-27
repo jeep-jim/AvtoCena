@@ -21,9 +21,10 @@ const fixture = names => ({passed: true,
 
 test('complete Japan UI pins only its two reviewed rail views and preserves the existing profiles', () => {
   assert(Object.isFrozen(JAPAN_STABILITY_RAILS_CODE_PATHS));
-  assert.equal(JAPAN_STABILITY_RAILS_CODE_PATHS.length, 55);
+  assert.equal(JAPAN_STABILITY_RAILS_CODE_PATHS.length, 56);
   assert.deepEqual(JAPAN_STABILITY_RAILS_CODE_PATHS.filter(name => !JAPAN_STABILITY_POWER_CODE_PATHS.includes(name)), [
-    'apps/web/components/catalog/AjesRail.tsx', 'apps/web/components/home/HomeJapanFilteredRail.tsx']);
+    'apps/web/components/catalog/AjesRail.tsx', 'apps/web/components/home/HomeJapanFilteredRail.tsx',
+    'tests/japan-rail-visibility.test.ts']);
   assert.equal(checkedCatalogCodeScope(plan()), JAPAN_STABILITY_CODE_SCOPE);
   assert.equal(japanStabilityCodePaths(plan()), JAPAN_STABILITY_RAILS_CODE_PATHS);
   assert.equal(japanPowerOrderRequired(plan()), true);

@@ -81,6 +81,7 @@ export const JAPAN_STABILITY_RAILS_CODE_PATHS = Object.freeze([
   ...JAPAN_STABILITY_POWER_CODE_PATHS,
   'apps/web/components/catalog/AjesRail.tsx',
   'apps/web/components/home/HomeJapanFilteredRail.tsx',
+  'tests/japan-rail-visibility.test.ts',
 ].sort());
 const reviewedProfiles = Object.freeze([JAPAN_STABILITY_CODE_PATHS, JAPAN_STABILITY_UI_CODE_PATHS,
   JAPAN_STABILITY_POWER_CODE_PATHS, JAPAN_STABILITY_RAILS_CODE_PATHS]);
