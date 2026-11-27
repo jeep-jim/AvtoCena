@@ -4,6 +4,7 @@ import {createRequire} from 'node:module';
 import {build} from 'esbuild';
 import {createElement,isValidElement} from 'react';
 import {renderToStaticMarkup} from 'react-dom/server';
+import {japanSupplierPowerLabel,japanUnknownPower} from '../apps/web/lib/catalog/japan-source-power';
 
 const require=createRequire(import.meta.url);
 async function resolved(node:any):Promise<any> {
@@ -16,7 +17,7 @@ async function resolved(node:any):Promise<any> {
  return createElement(element.type,props);
 }
 async function fixture(t:any){
- const state={control:'enabled',pageReads:[] as any[],countReads:[] as any[],
+ const state={control:'enabled',pageReads:[] as any[],countReads:[] as any[],cardOffers:[] as any[],
   page:{items:[] as any[],countSummary:null as any,received:0,pageSize:24,hasMore:false,partial:false,stale:false,filteredByPage:false,observedAt:'2026-11-26T04:30:00Z'},
   count:{total:660813,upperBound:false,stale:false,observedAt:'2026-11-26T04:30:00Z'}};
  (globalThis as any).__japanRailVisibility=state;t.after(()=>{delete (globalThis as any).__japanRailVisibility;});
@@ -26,7 +27,7 @@ async function fixture(t:any){
   'ajes-query':`export class AjesFilterUnavailable extends Error{}`,
   'storage':'export const publicOffer=x=>x;',
   'DealerBrowsingContext':`import {createElement} from 'react';export const DealerLink=props=>createElement('a',props);`,
-  'CatalogCard':`import {createElement} from 'react';export const CatalogCard=({offer})=>createElement('article',{'data-car-id':offer.id},offer.id);`,
+  'CatalogCard':`import {createElement} from 'react';export const CatalogCard=({offer})=>{globalThis.__japanRailVisibility.cardOffers.push(offer);return createElement('article',{'data-car-id':offer.id},offer.id);};`,
   'CatalogMarketFlag':`import {createElement} from 'react';export const CatalogMarketFlag=()=>createElement('span',{'aria-hidden':true},'🇯🇵');`,
  };
  const out=await build({stdin:{contents:'export * from "./apps/web/components/catalog/AjesRail";export * from "./apps/web/components/catalog/JapanRailFrame";',resolveDir:process.cwd()},bundle:true,platform:'node',format:'cjs',jsx:'automatic',write:false,packages:'external',loader:{'.css':'empty'},plugins:[{name:'japan-rail-fixture',setup(b){
@@ -88,17 +89,24 @@ test('the streamed Japanese fallback has the same accessible title and preserves
  assert.match(markup,/Количество уточняется/);assert.doesNotMatch(markup,/data-catalog-market-count="0"/);
 });
 
-test('a Japanese power preview distinguishes visible supplier and unknown power without a false exact count',async t=>{
+test('a Japanese power preview preserves supplier and unknown card facts without a long summary or false exact count',async t=>{
  const {state,api,html}=await fixture(t);
  state.page={...state.page,items:[
   {id:'ajes-stats-known',market:'japan',sourceId:'ajes_japan_feed',japanSupplierPower:{offerId:'ajes-stats-known',hp:160,unit:'hp',source:'ajes_pw'}},
   {id:'ajes-stats-unknown',market:'japan',sourceId:'ajes_japan_feed'},
  ],filteredByPage:true,hasMore:true};
  state.count={...state.count,total:0,upperBound:true};
+ const original=structuredClone(state.page.items);
  const markup=await html(await api.AjesRail({params:{powerTo:'160'}}));
  assert.match(markup,/data-japan-auction-rail="true"/);assert.match(markup,/data-status="ready"/);
- assert.match(markup,/Мощность по данным поставщика: 1/);assert.match(markup,/Мощность не указана: 1/);
- assert.match(markup,/Отбор не подтверждает право/);assert.match(markup,/Количество уточняется/);
+ assert.doesNotMatch(markup,/Мощность по данным поставщика:|Мощность не указана:|Отбор не подтверждает право/);
+ assert.match(markup,/Количество уточняется/);
  assert.doesNotMatch(markup,/data-catalog-market-count="0"/);
  assert.equal((markup.match(/data-car-id=/g)||[]).length,2);
+ assert.deepEqual(state.cardOffers,original,'the rail passes each known/unknown source fact unchanged to its card');
+ assert.equal(japanSupplierPowerLabel(state.cardOffers[0]),'160 л.с. · поставщик');
+ assert.equal(japanUnknownPower(state.cardOffers[0]),false);
+ assert.equal(japanSupplierPowerLabel(state.cardOffers[1]),'');assert.equal(japanUnknownPower(state.cardOffers[1]),true);
+ assert.deepEqual(state.page.items,original,'rendering cannot fill missing power or rewrite the supplier fact');
+ assert.equal(state.pageReads[0].q.powerTo,'160');assert.equal(state.countReads[0].powerTo,'160');
 });
