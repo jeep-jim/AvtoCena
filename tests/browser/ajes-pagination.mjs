@@ -45,10 +45,14 @@ const fixture={queries:[],counts:0,sequence:0,mode:'normal',changed:false,editor
     offerType:'auction',status:'sold',catalogKind:'auction_result',auctionResult:'sold',auctionPriceKind:'hammer',
     make:'TOYOTA',model:'TEST',year:2022,mileageKm:50000,engineCc:1500,fuel:'petrol',drive:'fwd',bodyType:'hatchback',
     sourcePrice:500000,sourceCurrency:'JPY',priceMode:'auction_start',catalogPricingMode:'seller',sellerPriceRub:300000,
-    calculationSnapshot:{currencyRate:{currency:'JPY',sourcePrice:500000,effectiveRate:0.6,rateSource:'cbr',sourcePriceRub:300000}},
+    calculationSnapshot:{currencyRate:{currency:'JPY',sourcePrice:500000,effectiveRate:0.6,rateSource:'cbr',rateDate:'2026-11-26',sourcePriceRub:300000}},
     totalRub:null,calculationStatus:'needs_data',images:[],firstSeenAt:'2026-11-26T10:00:00.000Z',updatedAt:'2026-11-26T10:00:00.000Z',
     ...(localUpdated?{powerHp:150,powerDataSource:'manual',powerDataConfidence:'verified',publicSpecificationVerified:true}:(emptyKnown?query.page===9:i%3)
-     ?{japanSupplierPower:{offerId:id,hp:150,unit:'hp',source:'ajes_pw'}}:{japanPowerUnknown:true}),operational:{}};
+     ?{japanSupplierPower:{offerId:id,hp:150,unit:'hp',source:'ajes_pw'}}:{japanPowerUnknown:true}),
+    operational:{semanticEvidence:{
+     engineCc:{status:'exact',value:1500,source:'ajes:stats:refill-'+query.page+'-'+i+':ENG_V',rawValues:['1500']},
+     fuel:{status:'exact',value:'petrol',source:'ajes:stats:refill-'+query.page+'-'+i+':TIME',rawValues:['P']},
+    }}};
   });
   return {items,page:query.page,pageSize:24,received:emptyKnown?count:query.page<3?24:count,partial:false,stale:false,observedAt:'2026-11-26T10:00:00.000Z',sourceReceipt};
  }};
@@ -73,14 +77,28 @@ const uiStubs={
  CatalogSelectionContext:"export const CatalogResultCountUpdate=()=>null;",
 };
 for(const name of ['PublicHeader','CatalogCard','CatalogFilters','BrandLogoRail','JapanSectionTabs','CatalogMarketFlag','MarketResultCount','CatalogCountLabel'])uiStubs[name]='export const '+name+'=()=>null;';
-await build({stdin:{contents:"import React from 'react';\nimport {renderToStaticMarkup} from 'react-dom/server';\nimport {AjesCatalog} from './apps/web/components/catalog/AjesCatalog';\nimport {readAjesCatalogPage} from './apps/web/lib/catalog/ajes-catalog';\nexport {AjesInputError} from './apps/web/lib/catalog/ajes-query';\nexport {ajesErrorResponse} from './apps/web/lib/catalog/ajes-error-response';\nfunction withoutOptionalAsync(node){\n if(Array.isArray(node))return node.map(withoutOptionalAsync);\n if(!React.isValidElement(node))return node;\n if(typeof node.type==='function'&&node.type.constructor.name==='AsyncFunction')return null;\n const props={...node.props};\n for(const key of ['children','header','filters'])if(key in props)props[key]=withoutOptionalAsync(props[key]);\n return React.cloneElement(node,props);\n}\nexport async function render(params){\n globalThis.__japanRefillPageProps=undefined;\n const html=renderToStaticMarkup(withoutOptionalAsync(await AjesCatalog({params})));\n const {initialCards,...props}=globalThis.__japanRefillPageProps;\n return {html,initial:{props,items:initialCards.map(card=>card.props.offer)}};\n}\nexport const read=params=>readAjesCatalogPage(params,undefined,{includeCount:false});\n",resolveDir:process.cwd(),loader:'tsx'},bundle:true,platform:'node',format:'cjs',jsx:'automatic',tsconfig:'apps/web/tsconfig.json',define:{'process.env.AVTOCENA_RELEASE_SHA':JSON.stringify('1'.repeat(40))},outfile:out+'/server.cjs',external:['react','react/jsx-runtime','react-dom/server'],plugins:[{name:'local-japan-caller',setup(b){
+// Exercise the real card admission and power labels at the JSON boundary.
+// Only ancillary controls and browser contexts are inert during static render.
+const cardStubs={
+ CatalogSelectionContext:'export const useCatalogView=()=>"grid";',
+ DealerBrowsingContext:'export const useDealerBrowsing=()=>null;',
+ useSavedCalculationPreview:'export const useSavedCalculationPreview=()=>undefined;',
+ FavoriteToggle:'export const FavoriteToggle=()=>null;',
+ CatalogCover:'export const CatalogCover=()=>null;',
+ CatalogPrice:'export const CatalogPrice=()=>null;',
+ IntentPrefetchLink:'import React from "react";export const IntentPrefetchLink=({children,eager,...props})=>React.createElement("a",props,children);',
+ 'RecyclingPower.module.css':'export default {};',
+};
+await build({stdin:{contents:"import React from 'react';\nimport {renderToStaticMarkup} from 'react-dom/server';\nimport {AjesCatalog} from './apps/web/components/catalog/AjesCatalog';\nimport {CatalogCard as ActualCatalogCard} from './apps/web/components/catalog/CatalogCard';\nexport function renderCard(offer){return renderToStaticMarkup(React.createElement(ActualCatalogCard,{offer,compact:true,dense:true}));}\nimport {readAjesCatalogPage} from './apps/web/lib/catalog/ajes-catalog';\nexport {AjesInputError} from './apps/web/lib/catalog/ajes-query';\nexport {ajesErrorResponse} from './apps/web/lib/catalog/ajes-error-response';\nfunction withoutOptionalAsync(node){\n if(Array.isArray(node))return node.map(withoutOptionalAsync);\n if(!React.isValidElement(node))return node;\n if(typeof node.type==='function'&&node.type.constructor.name==='AsyncFunction')return null;\n const props={...node.props};\n for(const key of ['children','header','filters'])if(key in props)props[key]=withoutOptionalAsync(props[key]);\n return React.cloneElement(node,props);\n}\nexport async function render(params){\n globalThis.__japanRefillPageProps=undefined;\n const html=renderToStaticMarkup(withoutOptionalAsync(await AjesCatalog({params})));\n const {initialCards,...props}=globalThis.__japanRefillPageProps;\n return {html,initial:{props,items:initialCards.map(card=>card.props.offer)}};\n}\nexport const read=params=>readAjesCatalogPage(params,undefined,{includeCount:false});\n",resolveDir:process.cwd(),loader:'tsx'},bundle:true,platform:'node',format:'cjs',jsx:'automatic',tsconfig:'apps/web/tsconfig.json',define:{'process.env.AVTOCENA_RELEASE_SHA':JSON.stringify('1'.repeat(40))},outfile:out+'/server.cjs',external:['react','react/jsx-runtime','react-dom/server'],plugins:[{name:'local-japan-caller',setup(b){
  b.onResolve({filter:/.*/},args=>{
   const name=args.path.split('/').pop();
   if(args.importer.endsWith('/AjesCatalog.tsx')&&name in uiStubs)return {path:name,namespace:'japan-ui-fixture'};
+  if(name in cardStubs)return {path:name,namespace:'japan-card-fixture'};
   if(args.path in serverStubs)return {path:args.path,namespace:'japan-source-fixture'};
  });
  b.onLoad({filter:/.*/,namespace:'japan-source-fixture'},args=>({contents:serverStubs[args.path]}));
  b.onLoad({filter:/.*/,namespace:'japan-ui-fixture'},args=>({contents:uiStubs[args.path],resolveDir:process.cwd()}));
+ b.onLoad({filter:/.*/,namespace:'japan-card-fixture'},args=>({contents:cardStubs[args.path],resolveDir:process.cwd()}));
 }}]});
 // The standalone fixture uses installed React outside Next's server renderer.
 // Adapt only request memoization, as the native caller fixtures do; the browser
@@ -90,6 +108,21 @@ const react=require('react');
 const fixtureRequire=id=>id==='react'?{...react,cache:fn=>fn}:require(id);
 new Function('require','module','exports',fs.readFileSync(path.resolve(out+'/server.cjs'),'utf8'))(fixtureRequire,serverModule,serverModule.exports);
 const actual=serverModule.exports;
+const boundaryQuery={market:'japan',fixture:'refill',fuel:'petrol',city:'Новокузнецк',powerTo:'160'};
+const boundaryFirst=await actual.render(boundaryQuery);
+const boundaryNext=await actual.read({...boundaryQuery,page:'2',after:boundaryFirst.initial.props.initialNextCursor});
+const boundarySamples=[boundaryFirst.initial.items.find(row=>row.japanSupplierPower),boundaryNext.items.find(row=>row.japanPowerUnknown)];
+assert.equal(boundaryFirst.initial.items.length,boundaryFirst.initial.props.initialCount);
+for(const [index,offer] of boundarySamples.entries()){
+ assert(offer,'the card boundary must sample an actual known and unknown result');
+ const transported=JSON.parse(JSON.stringify(offer));assert.equal(transported.id,offer.id);
+ const html=actual.renderCard(offer);assert.equal(actual.renderCard(transported),html,'JSON transport preserves the actual rendered card');
+ assert.equal((html.match(/<article\b/g)||[]).length,1,'a counted offer must render an actual card');
+ assert(html.includes(offer.id));
+ assert.match(html,index===0?/data-japan-supplier-power="true"/:/data-japan-power-unknown="true"/);
+}
+console.log('PAGINATION_FIXTURE_RENDER_BOUNDARY '+JSON.stringify({passed:true,rows:2,known:1,unknown:1,jsonTransport:true}));
+fixture.queries.length=0;
 const responses=[];
 const server=http.createServer(async(req,res)=>{
  const url=new URL(req.url,'http://fixture');
