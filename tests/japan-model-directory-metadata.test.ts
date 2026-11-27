@@ -141,26 +141,49 @@ test('the actual catalog dispatch preserves Japanese source params before AJ, le
  }finally{delete (globalThis as any).__japanSourceUi;}
 });
 
-test('the streamed Japan rail retains visible source makes on stale or failed metadata without claiming completeness',async()=>{
+test('the streamed Japan rail keeps visible makes and reads whole inventory without claiming empty completeness',async()=>{
  const file='apps/web/components/catalog/AjesCatalog.tsx',text=readFileSync(file,'utf8'),stubs:Record<string,string>={};
  const real=new Set(['react','@/lib/catalog/ajes-access-policy','@/lib/catalog/ajes-count-display','@/lib/catalog/ajes-ssr-read-evidence']);
  for(const match of text.matchAll(/import\s+(?:type\s+)?\{([^}]+)\}\s+from\s+["']([^"']+)["']/g)){
   if(real.has(match[2]))continue;
   stubs[match[2]]=match[1].split(',').map(name=>name.trim().split(/\s+as\s+/)[0]).filter(Boolean).map(name=>`export function ${name}(){}`).join('\n');
  }
- stubs['@/lib/catalog/ajes-catalog']="export const readAjesCatalogPage=async()=>({page:1,items:[{id:'fixture',make:'BENZ',model:'B-CLASS'}],sourceReceipts:[]});export const readAjesCountSummary=async()=>null;export class AjesFilterUnavailable extends Error{};export const readAjesMakes=async()=>{const s=globalThis.__japanRailMetadata;if(s.failure)throw Error('directory unavailable');return s.result;};";
- (globalThis as any).__japanRailMetadata={result:{makes:[],stale:true}};
+ stubs['@/lib/catalog/ajes-catalog']="export const readAjesCatalogPage=async query=>{globalThis.__japanRailMetadata.catalogReads.push({...query});return {page:1,items:[{id:'fixture',make:'BENZ',model:'B-CLASS'}],sourceReceipts:[]};};export const readAjesCountSummary=async()=>null;export class AjesFilterUnavailable extends Error{};export const readAjesMakes=async query=>{const s=globalThis.__japanRailMetadata;s.makeReads.push(JSON.parse(query));if(s.failure)throw Error('directory unavailable');return s.result;};";
+ const state={result:{makes:[] as Array<{make:string;total:number}>,stale:true},failure:false,makeReads:[] as Array<Record<string,string>>,catalogReads:[] as Array<Record<string,string>>};
+ (globalThis as any).__japanRailMetadata=state;
  const find=(node:any,name:string):any=>{if(!node||typeof node!=='object')return;if(node.type?.name===name)return node;for(const value of Object.values(Array.isArray(node)?node:node.props||{})){const match=find(value,name);if(match)return match;}};
  try{
-  const {AjesCatalog}=await component(file,stubs),tree=await AjesCatalog({params:{market:'japan'}});
+  const params={market:'japan',city:'Новокузнецк',powerTo:'160',auctionGrade:'5',fuel:'petrol',transmission:'automatic'};
+  const {AjesCatalog}=await component(file,stubs),tree=await AjesCatalog({params});
   assert.equal(find(tree,'BrandLogoRail').props.sourceDirectoryState,'loading');
+  assert.deepEqual(find(tree,'BrandLogoRail').props.brands,['BENZ']);
+  assert.deepEqual(state.catalogReads,[params],'the actual vehicle query retains every selected filter');
   const rail=find(tree,'AjesBrandRail');assert.ok(rail);
-  for(const result of [{makes:[],stale:true},{makes:[{make:'LANDROVER',total:1}],stale:true},{makes:[],stale:false}]){
-   (globalThis as any).__japanRailMetadata={result};const rendered=await rail.type(rail.props);
-   assert.deepEqual(rendered.props.brands,result.stale?[...result.makes.map(row=>row.make),'BENZ']:[]);
-   assert.equal(rendered.props.sourceDirectoryState,result.stale?'unavailable':'ready');
+  for(const fixture of [
+   {result:{makes:[],stale:true},brands:['BENZ'],status:'unavailable'},
+   {result:{makes:[{make:'LANDROVER',total:1}],stale:true},brands:['LANDROVER','BENZ'],status:'unavailable'},
+   {result:{makes:[],stale:false},brands:['BENZ'],status:'unavailable'},
+   {result:{makes:[{make:'TOYOTA',total:0}],stale:false},brands:['BENZ'],status:'unavailable'},
+   {result:{makes:[{make:'LANDROVER',total:1}],stale:false},brands:['LANDROVER','BENZ'],status:'ready'},
+   {result:{makes:[{make:'LANDROVER',total:1},{make:'BENZ',total:2},{make:'TOYOTA',total:0}],stale:false},brands:['LANDROVER','BENZ'],status:'ready'},
+  ]){
+   state.result=fixture.result;const reads=state.makeReads.length,rendered=await rail.type(rail.props);
+   assert.deepEqual(rendered.props.brands,fixture.brands);
+   assert.equal(rendered.props.sourceDirectoryState,fixture.status);
+   assert.equal(state.makeReads.length,reads+1,'one directory read per streamed rail');
+   assert.deepEqual(state.makeReads.at(-1),{market:'japan',city:params.city},'navigation reads whole Japan inventory and retains the city');
   }
-  (globalThis as any).__japanRailMetadata={failure:true};const failed=await rail.type(rail.props);
+  state.failure=true;const failed=await rail.type(rail.props);
   assert.deepEqual(failed.props.brands,['BENZ']);assert.equal(failed.props.sourceDirectoryState,'unavailable');
+  state.failure=false;state.result={makes:[{make:'LANDROVER',total:1}],stale:false};
+  const selected={...params,make:'BENZ',model:'B-CLASS',page:'2',sort:'year:desc'};
+  const selectedTree=await AjesCatalog({params:selected}),selectedRail=find(selectedTree,'AjesBrandRail');
+  const rendered=await selectedRail.type(selectedRail.props);
+  assert.deepEqual(state.catalogReads.at(-1),selected,'make/model/page selection still reaches the vehicle reader');
+  assert.deepEqual(state.makeReads.at(-1),{market:'japan',city:params.city},'make/model/page selection does not narrow navigation metadata');
+  assert.deepEqual(rendered.props.brands,['BENZ'],'the selected visible source make survives an independently populated directory');
+  assert.equal(rendered.props.sourceDirectoryState,'ready');
+  assert.deepEqual(rendered.props.initial,selected,'navigation metadata cannot rewrite selected URL values');
+  assert.equal(state.catalogReads.length,2);assert.equal(state.makeReads.length,8);
  }finally{delete (globalThis as any).__japanRailMetadata;}
 });
