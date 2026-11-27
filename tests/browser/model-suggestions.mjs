@@ -41,7 +41,7 @@ try{for(const width of [390,1440]){
  await page.screenshot({path:`${out}/${width}-inventory.png`});
  console.log(JSON.stringify({width,directoryRequests,inventoryRequests,inputToSuggestionMs:timings}));await context.close();
 }
- // Empty source facets plus a failed supplier directory must keep the model picker useful.
+ // Empty Korean facets still use the local directory without contacting Japan's supplier.
  for(const width of [390,1440]){
   const context=await browser.newContext({viewport:{width,height:900}}),page=await context.newPage();let attempts=0;
   await page.route('**/api/catalog/source-models?**',route=>{attempts++;return route.fulfill({status:503,json:{error:'directory_unavailable'}});});
@@ -49,7 +49,8 @@ try{for(const width of [390,1440]){
   await page.getByRole('button',{name:'Hyundai',exact:true}).click();
   await modelInput(page).fill('ix 35');
   const option=page.getByRole('button').filter({has:page.getByText('ix35',{exact:true})});await option.waitFor();
-  await page.getByRole('button',{name:'Не удалось загрузить все модели. Повторить'}).waitFor();
+  assert.equal(attempts,0,'Korea must not query the Japanese supplier directory');
+  assert.equal(await page.getByRole('button',{name:'Не удалось загрузить все модели. Повторить'}).count(),0);
   await page.getByRole('button',{name:'Закрыть список моделей',exact:true}).click();
   assert.match(await page.getByLabel('Выбрано').textContent(),/Hyundai \/ ix35/);
   await page.getByRole('button',{name:'Сбросить',exact:true}).click();
@@ -57,8 +58,8 @@ try{for(const width of [390,1440]){
   await page.getByRole('button',{name:'Закрыть список моделей',exact:true}).click();
   assert.match(await page.getByLabel('Выбрано').textContent(),/Hyundai \/ ix35/,'typed exact model also selects its unambiguous make');
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
-  await page.screenshot({path:`${out}/${width}-korea-directory-failure.png`});
-  console.log(JSON.stringify({width,koreaDirectoryFallback:true,supplierAttempts:attempts}));await context.close();
+  await page.screenshot({path:`${out}/${width}-korea-local-directory.png`});
+  console.log(JSON.stringify({width,koreaIndependentDirectory:true,supplierAttempts:attempts}));await context.close();
  }
  // The common picker must recover on every public market, with several makes,
  // and a make change must not retain the previous brand's model selection.
