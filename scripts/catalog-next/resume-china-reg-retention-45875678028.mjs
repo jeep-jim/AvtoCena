@@ -25,6 +25,10 @@ export const PINS = Object.freeze({
   pricing: '64c6338e0db23c8999096bceefbf113c0136fe15',
   retainedRuntime: '077cbb17626ab0c64e7f06db055fef9252ad21c0',
   codeRuntime: 'a5ca426eec2663eb17c2df69fe2bfed46e2b8740',
+  // Historical witnesses retain the runtimes above. A new maintenance run
+  // additionally requires this exact accepted current/rollback pair.
+  expectedRuntime: '73321a180c16d1d432559d572a2ac2b7fdf5cc2b',
+  expectedRollbackRuntime: 'a5ca426eec2663eb17c2df69fe2bfed46e2b8740',
   a: 'gen_china_45369451603_1', aTask: '5852cac7f4860548c075e3d761cb1d18e178867d6e4c34f305fdb22839276b69',
   b: 'gen_china_45655051136_1',
   bOwner: Object.freeze({runId: '45655051136', attempt: '1', revision: '5e6f1de8203352cbbb2d8296b2a2cb01e1273f47'}),
@@ -131,14 +135,13 @@ export function verifyState(view) {
     && current.receiptSha256 === PINS.currentReceipt && current.generationManifestSha256 === PINS.currentManifest
     && current.sourceDescriptorSha256 === PINS.currentDescriptor && current.sourceObservedAt === PINS.currentSourceDate
     && current.sourceCursor === PINS.currentCursor && current.pricingRuntimeSha === PINS.pricing
-    && [PINS.retainedRuntime, PINS.codeRuntime].includes(current.runtimeSha), 'current_binding');
+    && current.runtimeSha === PINS.expectedRuntime, 'current_binding');
   const rollback = validateChinaGenerationReference(view.accepted.value.rollback, {requireAccepted: true});
-  need([PINS.b, PINS.current].includes(rollback.generationId) && rollback.runtimeSha === PINS.retainedRuntime
-    && rollback.pricingRuntimeSha === PINS.pricing, 'rollback_binding');
-  if (rollback.generationId === PINS.current)
-    need(rollback.receiptSha256 === PINS.currentReceipt && rollback.generationManifestSha256 === PINS.currentManifest
-      && same(rollback.owner, PINS.currentOwner), 'rollback_binding');
-  else need(same(rollback.owner, PINS.bOwner) && rollback.receiptSha256 === PINS.bReceipt, 'rollback_binding');
+  need(rollback.generationId === PINS.current && rollback.runtimeSha === PINS.expectedRollbackRuntime
+    && rollback.pricingRuntimeSha === PINS.pricing && rollback.receiptSha256 === PINS.currentReceipt
+    && rollback.generationManifestSha256 === PINS.currentManifest && same(rollback.owner, PINS.currentOwner)
+    && rollback.sourceDescriptorSha256 === PINS.currentDescriptor
+    && rollback.sourceObservedAt === PINS.currentSourceDate && rollback.sourceCursor === PINS.currentCursor, 'rollback_binding');
   return current;
 }
 function target(value, id) {
@@ -229,7 +232,7 @@ export async function readDeadline({environment = process.env, fetcher = globalT
 async function retireOnly({root, runnerTemp, environment, invocation, current, args}) {
   const plans = await readChinaDailyPlans(root), servingPlan = selectChinaDailyServingPlan(plans, current.runtimeSha);
   need(plans.pricingPlan.runtimeSha === PINS.pricing
-    && [PINS.retainedRuntime, PINS.codeRuntime].includes(servingPlan.runtimeSha), 'plans');
+    && servingPlan.runtimeSha === PINS.expectedRuntime, 'plans');
   // Only the existing host-retirement callback is retained. Its implementation
   // uses authenticated retire_recovery and actual saved host proofs; it does
   // not access servingRoot, run a build, restore source, reserve or activate.

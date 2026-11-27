@@ -42,7 +42,7 @@ function queueStore() {
     replace:value=>{queue=save(value);}
   };
 }
-async function fixture({codeAccepted=true}={}) {
+async function fixture({codeAccepted=true,japanAccepted=codeAccepted}={}) {
   const values=new Map(), writes=[], calls=[], reports=[];
   let sequence=0, setup=true, clock=Date.parse('2026-11-27T00:00:00.000Z'), callback;
   const storage={
@@ -79,7 +79,8 @@ async function fixture({codeAccepted=true}={}) {
       browser:{release:candidate.runtimeSha,nonce,passed:true,functionalPassed:true,speedPassed:true,
         speedReportSha256:hash(speed),detailsReportSha256:hash(detail),reportSha256:hash(Buffer.concat([speed,detail]))}};
     if(code) Object.assign(receipt,{transition:'code-update',previousAcceptedETag:staged.intent.value.previous.etag,
-      previousAcceptedStateSha256:staged.intent.value.previous.sha256,retainedRuntimeSha:PINS.retainedRuntime,
+      previousAcceptedStateSha256:staged.intent.value.previous.sha256,
+      retainedRuntimeSha:staged.intent.value.previous.value.current.runtimeSha,
       retainedImageId:staged.intent.value.previous.value.current.imageId});
     const raw=Buffer.from(JSON.stringify(receipt));
     await state.commit({lease,...staged,evidence:{hostReceiptBase64:raw.toString('base64'),hostReceiptSha256:hash(raw),
@@ -88,10 +89,20 @@ async function fixture({codeAccepted=true}={}) {
   }
   await publish(b); await publish(c);
   const beforeCode={accepted:await state.read('accepted'),intent:await state.read('intent')};
-  if(codeAccepted) await publish({...c,runtimeSha:PINS.codeRuntime,imageId:'sha256:'+'6'.repeat(64)},true);
+  const q=queueStore();
+  if(codeAccepted) {
+    await publish({...c,runtimeSha:PINS.codeRuntime,imageId:'sha256:'+'6'.repeat(64)},true);
+    // Preserve B using its authentic a5ca publication witness before the next
+    // code acceptance moves the rollback from 077 to a5ca.
+    const historical={accepted:await state.read('accepted'),intent:await state.read('intent')};
+    const remembered=await maintainChinaGenerationGcQueue({mode:'enqueue-only',queueStorage:q,
+      readState:async()=>historical,assertAuthority:async()=>{},now});
+    assert.equal(remembered.completed,true);assert.equal(remembered.pending,1);
+  }
+  if(japanAccepted) await publish({...c,runtimeSha:PINS.expectedRuntime,imageId:'sha256:'+'8'.repeat(64)},true);
   const expected={accepted:await state.read('accepted'),intent:await state.read('intent')};
-  setup=false; writes.length=0;
-  const q=queueStore(), environment={GITHUB_RUN_ID:'45900000001',GITHUB_RUN_ATTEMPT:'1',GITHUB_SHA:'a'.repeat(40),RUNNER_TEMP:'/tmp'};
+  setup=false; writes.length=0;q.calls.length=0;
+  const environment={GITHUB_RUN_ID:'45900000001',GITHUB_RUN_ATTEMPT:'1',GITHUB_SHA:'a'.repeat(40),RUNNER_TEMP:'/tmp'};
   const f={storage,state,values,writes,calls,reports,q,environment,expected,beforeCode,now,
     advance:milliseconds=>{clock+=milliseconds;},
     heartbeat:async()=>{callback?.(); await Promise.resolve();},
@@ -183,10 +194,19 @@ test('actual state CAS and actual GC queue drain B after code acceptance; repeat
     assert.equal(first[key],0);
 });
 
-test('accepted077 C with protected rollback B performs no host or collector mutation',async()=>{
+test('old accepted077 C with protected rollback B is outside this exact maintenance profile',async()=>{
   const f=await fixture({codeAccepted:false}),report=await runRetention(f.options());
-  assert.equal(report.completed,true);assert.equal(report.retention.collected,0);assert.equal(report.retention.pending,0);
-  assert.deepEqual(f.calls,[]);assert.equal(report.currentRuntimeSha,PINS.retainedRuntime);
+  assert.equal(report.completed,false);assert.equal(report.errorCode,'current_binding');assert.equal(report.leaseReleased,true);
+  assert.deepEqual(f.calls,[]);assert.equal(f.q.calls.length,0);
+});
+
+test('a5ca alone and a mixed 733-to-077 pair cannot authorize queue or host cleanup',async()=>{
+  for(const options of [{japanAccepted:false},{codeAccepted:false,japanAccepted:true}]){
+    const f=await fixture(options),before=f.q.current(),report=await runRetention(f.options());
+    assert.equal(report.completed,false);assert.equal(report.leaseReleased,true);
+    assert.equal(report.errorCode,options.codeAccepted===false?'rollback_binding':'current_binding');
+    assert.deepEqual(f.calls,[]);assert.equal(f.q.calls.length,0);assert.deepEqual(f.q.current(),before);
+  }
 });
 
 test('foreign queue item fails before host/collector and leaves the exact queue intact',async()=>{
