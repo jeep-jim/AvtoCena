@@ -6,6 +6,8 @@ import {privateOwnerAcl, nonGrantingPolicy} from './private-storage.mjs';
 import {signRawGcS3Request, parseRawGcS3Delete} from '../lib/catalog-raw-gc-s3.mjs';
 
 const PART = 8 * 1024 * 1024, DESCRIPTOR_LIMIT = 1024 * 1024, RETIREMENT_LIMIT = 24 * 1024 * 1024;
+export const REG_RETENTION_COLLECTION_POLICY = 'reg-retention-bounded-v1';
+const READ_CONCURRENCY = 8, PART_BATCH = 64;
 const HASH = /^[a-f0-9]{64}$/;
 const requiredFiles = ['DISPOSITIONS.ndjson', 'FILTER_SEMANTICS.json', 'FX_RECEIPT.json', 'GENERATION.json',
   'RECONCILIATION.json', 'RUNTIME_CONTEXT.json', 'SOURCE.json', 'details.sqlite', 'query.sqlite', 'source.sqlite'];
@@ -22,6 +24,45 @@ const rootOf = reference => chinaGenerationRoot(reference.owner);
 const sameRoot = (left, right) => left.generationId === right.generationId || rootOf(left) === rootOf(right);
 const safeCode = error => /^china_(?:gc|state|daily|generation_storage|private)_[a-z0-9_]{1,120}$/.test(error?.message ?? '')
   ? error.message : 'china_gc_failed';
+
+function collectionMode(policy) {
+  need(policy === undefined || policy === REG_RETENTION_COLLECTION_POLICY, 'collection_policy');
+  return policy === REG_RETENTION_COLLECTION_POLICY;
+}
+function readAdmission(bounded, deadlineAt, now) {
+  if (!bounded) return () => {};
+  const deadline = Date.parse(deadlineAt);
+  need(typeof deadlineAt === 'string' && /^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(?:\.\d{1,6})?Z$/.test(deadlineAt)
+    && Number.isFinite(deadline) && typeof now === 'function', 'deadline_value');
+  return () => { need(Date.parse(now()) < deadline, 'deadline'); };
+}
+// Only independent reads use this pool. A failure stops admission, and every
+// already started read settles before the caller can release authority or write.
+async function boundedReads(values, read, admit) {
+  const result = new Array(values.length); let next = 0, failure;
+  const worker = async () => {
+    while (!failure && next < values.length) {
+      const index = next++;
+      try { admit(); result[index] = await read(values[index], index); }
+      catch (error) { failure ??= error; }
+    }
+  };
+  await Promise.all(Array.from({length: Math.min(READ_CONCURRENCY, values.length)}, worker));
+  if (failure) throw failure;
+  return result;
+}
+
+export function checkedGcProgress(value) {
+  need(value && ['starting', 'privacy', 'retirement_read', 'capture', 'seal', 'delete_completion', 'delete_parts', 'finalize', 'complete']
+    .includes(value.stage) && ['plannedObjects', 'capturedObjects', 'checkedObjects', 'tombstonesWritten']
+    .every(key => Number.isSafeInteger(value[key]) && value[key] >= 0)
+    && value.capturedObjects <= value.plannedObjects && value.checkedObjects <= value.plannedObjects
+    && value.tombstonesWritten <= 1 && typeof value.retirementRecordVerified === 'boolean', 'progress');
+  // Explicit projection: no object keys, ETags, receipts or error bodies escape.
+  return {stage: value.stage, plannedObjects: value.plannedObjects, capturedObjects: value.capturedObjects,
+    checkedObjects: value.checkedObjects, tombstonesWritten: value.tombstonesWritten,
+    retirementRecordVerified: value.retirementRecordVerified};
+}
 
 function parse(bytes, maximum, code) {
   need(Buffer.isBuffer(bytes) && bytes.length > 0 && bytes.length <= maximum, code);
@@ -207,12 +248,18 @@ function checkedRetirement(bytes, reference, previousAccepted, acceptedPublicati
  * A partial run can resume only from its original immutable retirement record.
  */
 export async function collectRetiredChinaGeneration({previousAccepted, acceptedPublication, readState, assertAuthority, storage,
-  environment = process.env, fetcher = globalThis.fetch, now = () => new Date().toISOString(), onProgress = () => {}}) {
+  environment = process.env, fetcher = globalThis.fetch, now = () => new Date().toISOString(), onProgress = () => {},
+  collectionPolicy, deadlineAt}) {
   need([readState, assertAuthority, now, onProgress].every(value => typeof value === 'function'), 'capabilities');
+  const bounded = collectionMode(collectionPolicy), admit = readAdmission(bounded, deadlineAt, now);
   const reference = previousReference(previousAccepted);
   const report = {version: 1, kind: 'china-generation-gc-v1', market: 'china', completed: false, status: 'starting',
     deletedObjects: 0, deletedBytes: 0, alreadyAbsentObjects: 0, tombstonesWritten: 0,
     otherMarketWrites: 0, encyclopediaWrites: 0, liveCatalogWrites: 0};
+  if (bounded) report.progress = {stage: 'starting', plannedObjects: 0, capturedObjects: 0,
+    checkedObjects: 0, tombstonesWritten: 0, retirementRecordVerified: false};
+  const stage = value => { if (bounded) report.progress.stage = value; };
+  const checked = () => { if (bounded) report.progress.checkedObjects = report.deletedObjects + report.alreadyAbsentObjects; };
   if (!reference) return {...report, completed: true, status: 'no_previous_rollback'};
   const witness = acceptedPublication
     ? validateChinaGenerationRetirementWitness({previousAccepted, acceptedPublication}) : null;
@@ -235,12 +282,16 @@ export async function collectRetiredChinaGeneration({previousAccepted, acceptedP
   }
   try {
     await fence();
-    storage ??= createChinaGenerationGcStorage({owner: reference.owner, assertAuthority: fence, environment, fetcher});
+    storage ??= createChinaGenerationGcStorage({owner: reference.owner, assertAuthority: fence, environment, fetcher,
+      ...(bounded ? {collectionPolicy, deadlineAt, now} : {})});
     need(typeof storage.assertPrivateBucket === 'function' && typeof storage.getBinary === 'function'
       && typeof storage.headObject === 'function' && typeof storage.putRetirement === 'function'
       && (typeof storage.deleteIfMatch === 'function'
         || storage.deletionMode === 'fenced-immutable-reg-v1' && typeof storage.deleteExact === 'function'), 'storage_capability');
+    need(!bounded || storage.deletionMode === 'fenced-immutable-reg-v1' && typeof storage.deleteExactBatch === 'function', 'storage_batch_capability');
+    stage('privacy');
     need((await storage.assertPrivateBucket())?.verified === true, 'privacy');
+    stage('retirement_read');
     let existing = objectMetadata(await storage.getBinary(retirementKey), 'retirement_read'), retirement;
     if (existing.found) {
       binary(existing, RETIREMENT_LIMIT, 'retirement_read');
@@ -255,19 +306,25 @@ export async function collectRetiredChinaGeneration({previousAccepted, acceptedP
       const generation = await readDescriptor(storage, receipt, 'GENERATION.json');
       descriptorBinding(receipt, reference, source.bytes, generation.bytes);
       const observed = new Map([[completionKey, complete.etag], ...source.etags, ...generation.etags]);
-      const captured = [];
-      for (const object of objects) {
+      if (bounded) report.progress.plannedObjects = objects.length;
+      stage('capture');
+      const capture = async object => {
         const actual = objectMetadata(await storage.headObject(object.key), 'object_head');
         need(actual.found && actual.size === object.size && (!observed.has(object.key)
           || actual.etag === observed.get(object.key)), 'object_changed');
-        captured.push({...object, etag: actual.etag});
-      }
+        if (bounded) report.progress.capturedObjects++;
+        return {...object, etag: actual.etag};
+      };
+      const captured = [];
+      if (bounded) captured.push(...await boundedReads(objects, capture, admit));
+      else for (const object of objects) captured.push(await capture(object));
       retirement = {version: 1, kind: 'china-private-generation-retirement-v1', market: 'china', root,
         policy: 'remove-completion-before-parts-v1', reference, previousAccepted,
         acceptedPublication: publication, createdAt: now(), receiptBase64: complete.data.toString('base64'),
         sourceBase64: source.bytes.toString('base64'), generationBase64: generation.bytes.toString('base64'), objects: captured};
       const bytes = Buffer.from(JSON.stringify(retirement));
       checkedRetirement(bytes, reference, previousAccepted, witness?.acceptedPublication);
+      stage('seal');
       await fence(); need((await storage.assertPrivateBucket())?.verified === true, 'privacy');
       let creationError;
       try { await storage.putRetirement(retirementKey, bytes, {ifNoneMatch: '*'}); }
@@ -280,7 +337,9 @@ export async function collectRetiredChinaGeneration({previousAccepted, acceptedP
     }
     retirementSeal = {etag: existing.etag, size: existing.size};
     report.retirementSha256 = hash(existing.data); report.plannedObjects = retirement.objects.length;
-    for (const object of retirement.objects) {
+    if (bounded) Object.assign(report.progress, {plannedObjects: retirement.objects.length,
+      tombstonesWritten: report.tombstonesWritten, retirementRecordVerified: true});
+    const collectOne = async object => {
       await fence();
       const before = objectMetadata(await storage.headObject(object.key), 'object_head');
       if (!before.found) report.alreadyAbsentObjects++;
@@ -292,19 +351,68 @@ export async function collectRetiredChinaGeneration({previousAccepted, acceptedP
           result = typeof storage.deleteIfMatch === 'function'
             ? await storage.deleteIfMatch(object.key, {ifMatch: before.etag})
             : await storage.deleteExact(object, {expectedETag: before.etag});
+          if (bounded) {
+            need(result?.settled === true && result.deleted === true, 'delete_not_acknowledged');
+            need(!objectMetadata(await storage.headObject(object.key), 'delete_head').found, 'delete_not_absent');
+          }
         } catch (error) {
-          report.status = 'needs_reconciliation'; report.uncertainKey = object.key;
+          report.status = 'needs_reconciliation';
+          if (!bounded) report.uncertainKey = object.key;
           throw Error('china_gc_delete_outcome_unknown');
         }
-        need(result?.settled === true && result.deleted === true, 'delete_not_acknowledged');
-        need(!objectMetadata(await storage.headObject(object.key), 'delete_head').found, 'delete_not_absent');
+        if (!bounded) {
+          need(result?.settled === true && result.deleted === true, 'delete_not_acknowledged');
+          need(!objectMetadata(await storage.headObject(object.key), 'delete_head').found, 'delete_not_absent');
+        }
         report.deletedObjects++; report.deletedBytes += object.size;
       }
       if (object.key === completionKey) { completionFenced = true; report.completionFenceRemoved = true; }
+      checked();
       await onProgress({phase: 'china_retired_generation_gc', generationId: reference.generationId,
         checkedObjects: report.deletedObjects + report.alreadyAbsentObjects, totalObjects: report.plannedObjects});
+    };
+    if (!bounded) for (const object of retirement.objects) await collectOne(object);
+    else {
+      // Never mix the restore entry fence into a part batch. Its singleton
+      // request and confirmed absence finish before admitting any part deletion.
+      stage('delete_completion'); await collectOne(retirement.objects[0]);
+      need(completionFenced, 'completion_not_fenced');
+      stage('delete_parts');
+      for (let offset = 1; offset < retirement.objects.length; offset += PART_BATCH) {
+        await fence();
+        const batch = retirement.objects.slice(offset, offset + PART_BATCH);
+        const before = await boundedReads(batch, async object => {
+          const actual = objectMetadata(await storage.headObject(object.key), 'object_head');
+          if (actual.found) need(actual.etag === object.etag && actual.size === object.size, 'object_changed');
+          return actual;
+        }, admit);
+        const present = batch.filter((_object, index) => before[index].found);
+        report.alreadyAbsentObjects += batch.length - present.length; checked();
+        if (present.length) {
+          await fence();
+          try {
+            // The native capability rechecks every exact part and then invokes
+            // this same live/seal/completion fence immediately before one POST.
+            const result = await storage.deleteExactBatch(present);
+            const keys = new Set(present.map(object => object.key));
+            need(result?.settled === true && Array.isArray(result.results) && result.results.length === keys.size
+              && new Set(result.results.map(row => row.key)).size === keys.size
+              && result.results.every(row => keys.has(row.key) && row.status === 'deleted'), 'delete_not_acknowledged');
+            await boundedReads(present, async object => {
+              need(!objectMetadata(await storage.headObject(object.key), 'delete_head').found, 'delete_not_absent');
+              report.deletedObjects++; report.deletedBytes += object.size; checked();
+            }, admit);
+          } catch {
+            report.status = 'needs_reconciliation'; throw Error('china_gc_delete_outcome_unknown');
+          }
+        }
+        await onProgress({phase: 'china_retired_generation_gc', generationId: reference.generationId,
+          checkedObjects: report.deletedObjects + report.alreadyAbsentObjects, totalObjects: report.plannedObjects});
+      }
     }
+    stage('finalize');
     await fence(); need((await storage.assertPrivateBucket())?.verified === true, 'privacy');
+    stage('complete');
     report.completed = true; report.status = 'complete'; report.finishedAt = now();
     return report;
   } catch (error) {
@@ -320,7 +428,9 @@ export async function collectRetiredChinaGeneration({previousAccepted, acceptedP
  * AWS If-Match support proves REG support. A verified conditional transport can
  * instead supply deleteIfMatch to the executor, which passes the real ETag.
  */
-export function createChinaGenerationGcStorage({owner, assertAuthority, environment = process.env, fetcher = globalThis.fetch}) {
+export function createChinaGenerationGcStorage({owner, assertAuthority, environment = process.env, fetcher = globalThis.fetch,
+  collectionPolicy, deadlineAt, now = () => new Date().toISOString()}) {
+  const bounded = collectionMode(collectionPolicy), admit = readAdmission(bounded, deadlineAt, now);
   const root = chinaGenerationRoot(owner), retirementKey = root + '/RETIREMENT.json';
   need(typeof assertAuthority === 'function' && typeof fetcher === 'function', 'transport_capability');
   const config = {YC_OBJECT_STORAGE_ENDPOINT: 'https://s3.regru.cloud', YC_OBJECT_STORAGE_REGION: 'us-east-1',
@@ -335,6 +445,7 @@ export function createChinaGenerationGcStorage({owner, assertAuthority, environm
       && /^[0-9]+-[a-f0-9]{64}$/.test(key.slice((root + '/files/' + name + '/').length)));
   let privacy;
   async function request(method, key, query = {}, body, headers = {}, maximum = 64 * 1024) {
+    admit();
     need(key === null || valid(key), 'storage_key');
     const physical = '/avtocena-staging-8120751' + (key === null ? '' : '/migration-staging/full-20261011/' + key);
     const signed = signRawGcS3Request({method, host: 's3.regru.cloud', path: physical, query, body: body ?? '', headers,
@@ -401,6 +512,26 @@ export function createChinaGenerationGcStorage({owner, assertAuthority, environm
     need(parsed.settled === true && parsed.results.length === 1 && parsed.results[0].status === 'deleted', 'delete_rejected');
     return {settled: true, deleted: true};
   }
+  async function deleteExactBatch(objects) {
+    need(bounded && privacy && Array.isArray(objects) && objects.length > 0 && objects.length <= PART_BATCH
+      && objects.every(object => valid(object?.key) && object.key.startsWith(root + '/files/') && etag(object.etag)
+        && positive(object.size) && HASH.test(object.sha256 ?? '') && object.key.endsWith('-' + object.sha256))
+      && new Set(objects.map(object => object.key)).size === objects.length, 'delete_batch_scope');
+    await boundedReads(objects, async object => {
+      const current = await headObject(object.key);
+      need(current.found && current.etag === object.etag && current.size === object.size, 'object_changed');
+    }, admit);
+    await assertAuthority();
+    const body = '<?xml version="1.0" encoding="UTF-8"?><Delete><Quiet>false</Quiet>' + objects.map(object =>
+      '<Object><Key>migration-staging/full-20261011/' + object.key + '</Key></Object>').join('') + '</Delete>';
+    const result = await request('POST', null, {delete: ''}, body,
+      {'content-type': 'application/xml', 'content-md5': createHash('md5').update(body).digest('base64')});
+    need(result.status === 200, 'delete_response');
+    const parsed = parseRawGcS3Delete(result.data.toString(), objects);
+    need(parsed.settled === true && parsed.results.length === objects.length
+      && parsed.results.every(row => row.status === 'deleted'), 'delete_rejected');
+    return parsed;
+  }
   return Object.freeze({root, deletionMode: 'fenced-immutable-reg-v1', assertPrivateBucket,
-    getBinary, headObject, putRetirement, deleteExact});
+    getBinary, headObject, putRetirement, deleteExact, ...(bounded ? {deleteExactBatch} : {})});
 }

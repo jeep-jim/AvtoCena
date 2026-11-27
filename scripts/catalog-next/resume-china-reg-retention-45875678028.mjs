@@ -6,6 +6,7 @@ import {verifyReadonlyInvocation} from '../lib/readonly-marker-invocation.mjs';
 import {createChinaStateStorage, createChinaState, inspectChinaPublicationState,
   protectedChinaGenerations, validateChinaGenerationReference} from './china-state.mjs';
 import {createChinaGenerationGcQueueStorage, maintainChinaGenerationGcQueue} from './china-generation-gc-queue.mjs';
+import {REG_RETENTION_COLLECTION_POLICY, checkedGcProgress} from './china-generation-gc.mjs';
 import {readChinaDailyPlans, selectChinaDailyServingPlan} from './daily-entry.mjs';
 import {createChinaDailyRelease} from './daily-release.mjs';
 
@@ -53,7 +54,7 @@ export function safeError(error) {
   if (message.startsWith(prefix) && localCodes.has(message.slice(prefix.length))) return message.slice(prefix.length);
   if (message === 'china_gc_storage_transport') return 'storage_transport';
   if (message === 'china_gc_storage_incomplete') return 'storage_incomplete';
-  if (message === 'china_gc_queue_deadline') return 'deadline';
+  if (['china_gc_queue_deadline', 'china_gc_deadline'].includes(message)) return 'deadline';
   if (message === 'china_state_lease_held') return 'lease_busy';
   if (['china_state_lease_changed','china_state_lease_not_active','china_state_lease_expired'].includes(message)) return 'lease_lost';
   if (['china_gc_delete_outcome_unknown','china_gc_queue_task_delete_outcome_unknown'].includes(message)) return 'outcome_unknown';
@@ -201,6 +202,11 @@ export function aggregateGc(value) {
     need(integer(value[key]), 'result'); output[key] = value[key];
   }
   if (value.errorCode !== undefined) output.errorCode = safeError({message:value.errorCode});
+  if (value.stage !== undefined) {
+    need(['authority','queue','host_retirement','collection_admission','collection','queue_checkpoint','prune','complete'].includes(value.stage), 'result');
+    output.stage = value.stage;
+  }
+  if (value.collectionProgress !== undefined) output.collectionProgress = checkedGcProgress(value.collectionProgress);
   return output;
 }
 
@@ -312,6 +318,7 @@ export async function runRetention({root = ROOT, environment = process.env, capa
     await assertAuthority();
     const queueStorage = scopedQueueStorage(await use.createQueueStorage({assertAuthority,environment,fetcher:gcFetcher}));
     const result = await use.collectQueue({mode:'drain',deadlineAt,readState,assertAuthority,queueStorage,environment,now:at,fetcher:gcFetcher,
+      collectionPolicy:REG_RETENTION_COLLECTION_POLICY,
       beforeCollect: async args => {
         const reference = verifyTask(args.task);
         await args.assertAuthority(); const view = await readState();

@@ -345,7 +345,7 @@
     "exactRuntimeAndPricingBindings": "passed against the published 4e62111 serving plan, exact 59/113 paths and protected pricing"
   },
   "maintenance": {
-    "status": "actual_pair_verified_reg_pins_reviewed_ready_for_activation",
+    "status": "japan_accepted_aj_initialized_reg_bounded_repair_reviewed_ready",
     "activationRequires": "An actually accepted new runtime, then a fresh exact current/rollback observation; do not run any observer bound to rolled-back releases.",
     "preparedCoreCommit": "4ef96d162f57d315edc7a1335f9c4af0708e0611",
     "preparedObserverCommit": "e2275bbfd81cff4a23f124aa5e0983aaa72bfec1",
@@ -507,7 +507,7 @@
       }
     },
     "regRuntimeRebind": {
-      "status": "reviewed_ready_for_separate_activation",
+      "status": "published_and_activated",
       "localReviewedCommit": "ca58f9cf15068ff5e87c0b8312672e5bb34966e5",
       "baseSha": "b524388fcab60a205afad89787371a783fd4c4fb",
       "changedFile": "scripts/catalog-next/resume-china-reg-retention-45875678028.mjs",
@@ -522,7 +522,203 @@
       "targetedTestsPassed": 19,
       "targetedTestsFailed": 0,
       "independentReview": "passed against actual observer report and exact one-line commit",
-      "localFixturePreparation": "Exact HEAD calculation-version.mjs materialized in the sparse checkout; no tracked fixture change."
+      "localFixturePreparation": "Exact HEAD calculation-version.mjs materialized in the sparse checkout; no tracked fixture change.",
+      "publishedControllerSha": "37cfed01e47b4372b11e487c133b452fe6666c71",
+      "markerSha": "9a60e4d0f1b745f645625c14c2cb62578dda856f"
+    },
+    "regRetentionAttempts": [
+      {
+        "runId": 46054984917,
+        "runNumber": 7,
+        "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/46054984917",
+        "event": "push",
+        "attempt": 1,
+        "markerSha": "9a60e4d0f1b745f645625c14c2cb62578dda856f",
+        "approvedSourceSha": "37cfed01e47b4372b11e487c133b452fe6666c71",
+        "conclusion": "failure",
+        "artifactId": 15227771187,
+        "artifactBytes": 753,
+        "artifactSha256": "68c40f8fb13d9030bd6711c809e22c0a5af749e67cc6ab95d8ee812d419b620b",
+        "reportBytes": 1156,
+        "reportSha256": "1607e961b4565604a66627e716b91c4bcb0d0bf6972c2e3990e3dd2a8dae6d5d",
+        "artifactCrcVerified": true,
+        "independentLocalReportReview": "passed",
+        "report": {
+          "version": 1,
+          "kind": "china-reg-retention-resume-v1",
+          "market": "china",
+          "completed": false,
+          "status": "paused",
+          "currentGenerationId": "gen_china_45875678028_1",
+          "allowedGenerations": [
+            "gen_china_45369451603_1",
+            "gen_china_45655051136_1"
+          ],
+          "supplierRequests": 0,
+          "sourcePreparations": 0,
+          "applicationBuilds": 0,
+          "publicationReservations": 0,
+          "acceptedStateWrites": 0,
+          "intentStateWrites": 0,
+          "leaseAcquired": true,
+          "leaseReleased": true,
+          "startedAt": "2026-11-27T19:13:58.256Z",
+          "controllerSha": "9a60e4d0f1b745f645625c14c2cb62578dda856f",
+          "deadlineAt": "2026-11-27T19:41:22.000Z",
+          "currentRuntimeSha": "b9e9122b75f4e588088d0241476b18df7f047d96",
+          "acceptedRevision": 64,
+          "retention": {
+            "completed": false,
+            "status": "deadline",
+            "pending": 2,
+            "enqueued": 0,
+            "collected": 0,
+            "pruned": 0,
+            "deletedObjects": 0,
+            "deletedBytes": 0,
+            "alreadyAbsentObjects": 0,
+            "hostCleanupsCompleted": 1,
+            "retiredContainers": 0,
+            "filesDeleted": 0,
+            "freedBytes": 0,
+            "errorCode": "deadline"
+          },
+          "errorCode": "deadline",
+          "finishedAt": "2026-11-27T19:42:14.640Z"
+        },
+        "evidenceLimits": "The aggregate proves two pending tasks and no acknowledged object deletions in this run. It does not reveal the capture phase, durable RETIREMENT record presence, or exact object count. Do not infer task progress from elapsed time or hostCleanupsCompleted."
+      }
+    ],
+    "japanCacheCompaction": {
+      "runId": 46058750705,
+      "runNumber": 1,
+      "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/46058750705",
+      "event": "push",
+      "attempt": 1,
+      "markerSha": "70ca0ebbf4987bdb86b02ffa106a10f19f8ed5a4",
+      "approvedSourceSha": "9a60e4d0f1b745f645625c14c2cb62578dda856f",
+      "conclusion": "success",
+      "artifactId": 15227831843,
+      "artifactBytes": 898,
+      "artifactSha256": "74b8b5a4737df5e3c7ebb8b2132199560e09b117eac26402e6243a69a800a561",
+      "reportBytes": 1399,
+      "reportSha256": "c6fbd7a5c5cfbab1f7fe8e885d9569392b92cd31eda99628d114981796a17e13",
+      "artifactCrcVerified": true,
+      "independentLocalReportReview": "passed",
+      "report": {
+        "version": 1,
+        "kind": "japan-cache-compaction-v1",
+        "controllerSha": "70ca0ebbf4987bdb86b02ffa106a10f19f8ed5a4",
+        "runId": "46058750705",
+        "attempt": "1",
+        "startedAt": "2026-11-27T19:44:29.887Z",
+        "status": "bounded_partial",
+        "completed": true,
+        "partial": true,
+        "scanCycleCompleted": false,
+        "fullInventorySnapshot": false,
+        "payloadsCompacted": 22,
+        "expiredEntriesRemoved": 22,
+        "logicalPayloadBytesReduced": 93574,
+        "reconciledWrites": 0,
+        "unconfirmedWrites": 0,
+        "concurrentChanges": 0,
+        "inspectedPayloads": 33,
+        "metadataPages": 1,
+        "listedObjects": 100,
+        "skippedUnknownKeys": 0,
+        "skippedUnknownPayloads": 0,
+        "skippedRetained": 11,
+        "skippedNull": 0,
+        "inspectionFailures": 0,
+        "objectKeysDeleted": 0,
+        "hostDiskMeasured": false,
+        "sourceRequests": 0,
+        "rawPayloadsPersistedInReports": false,
+        "checkpointSaved": true,
+        "resumed": false,
+        "storage": {
+          "privateBucketVerified": true,
+          "versioning": "never_enabled"
+        },
+        "capability": {
+          "currentObjectConditionalPutVerified": true,
+          "currentObjectConditionalDeleteVerified": false,
+          "conditionalHeaderFormat": "bare",
+          "versioningChanged": false,
+          "residuePossible": false
+        },
+        "publication": {
+          "status": "resolved_committed",
+          "currentAndRollbackVerified": true,
+          "observationsBound": true,
+          "leaseHeld": false,
+          "stateMutations": 0
+        },
+        "reason": "bounded_run",
+        "requests": {
+          "requests": 472,
+          "responseBytes": 767173,
+          "requestBytes": 37668,
+          "cachePutAttempts": 22,
+          "checkpointPutAttempts": 7,
+          "syntheticPutAttempts": 3,
+          "syntheticDeleteAttempts": 1
+        },
+        "finishedAt": "2026-11-27T19:46:11.320Z"
+      },
+      "status": "initialized_successful_bounded_pass_with_checkpoint",
+      "schedule": "43 * * * * UTC",
+      "fullScanComplete": false,
+      "evidenceLimits": "Successful bounded pass only; 100 objects listed and 33 payloads inspected, so total remaining or expired inventory is unknown. 93,574 bytes is verified logical payload reduction, not measured host disk free. Zero working cache object keys deleted; one DELETE was limited to the synthetic canary."
+    },
+    "regBoundedCollectionRepair": {
+      "status": "reviewed_ready_for_separate_marker_activation",
+      "localReviewedCommit": "c9a4bf89358c9a80aa3d5d171cbdd3c42e0e64ab",
+      "baseSha": "70ca0ebbf4987bdb86b02ffa106a10f19f8ed5a4",
+      "collectionPolicy": "reg-retention-bounded-v1",
+      "sourceModulesChanged": 3,
+      "testFilesChanged": 2,
+      "redBaseline": {
+        "failed": 2,
+        "passed": 1,
+        "findings": [
+          "Existing capture had maximum concurrency1 rather than the requested bounded8.",
+          "Unknown collection policy was ignored.",
+          "Default daily singleton path passed."
+        ]
+      },
+      "focusedVerification": {
+        "passed": 71,
+        "failed": 0,
+        "boundedRegCases": 23,
+        "existingCollectorCases": 12,
+        "existingQueueCases": 15,
+        "resumeCases": 21
+      },
+      "independentReview": "passed against exact five-file commit; root reviewed the frozen core diff separately",
+      "behavior": {
+        "optInOnlyInPinnedResume": true,
+        "defaultDailyUnchanged": true,
+        "readConcurrency": 8,
+        "maximumPartsPerSequentialPost": 64,
+        "completionDeletedSeparatelyFirst": true,
+        "confirmedCompletionAbsenceBeforeParts": true,
+        "fullRetirementSealBeforeDeletion": true,
+        "freshPerObjectAclEtagSizeChecks": true,
+        "currentRollbackLeaseSealAndCompletionFenceBeforeEachPost": true,
+        "allStartedReadsDrained": true,
+        "ambiguousAckOrReadbackStopsWithoutRetry": true,
+        "sanitizedPhaseAndCountDiagnostics": true
+      },
+      "unchanged": [
+        "Japan B9 runtime",
+        "generation A/B/C historical witnesses and pins",
+        "current B9 and rollback a5",
+        "pricing and other markets",
+        "workflow and execution deadline"
+      ],
+      "evidenceLimits": "REG7 aggregate does not prove which internal phase consumed its deadline. The repaired serial path is confirmed by source and deterministic regression; production batch completion still requires a terminal live report."
     }
   },
   "verificationAttempts": [
@@ -549,8 +745,8 @@
     }
   ],
   "remaining": [
-    "Publish the reviewed actual-pair REG runtime pin binding and activate its marker-only retention operation; verify terminal result and released lease.",
-    "Activate guarded Japan cache compaction and verify the actual result."
+    "Activate the reviewed opt-in REG collection repair via a separate marker and verify actual terminal completion of the two authorized retired generation tasks, with lease released. The accepted Japan release is already complete.",
+    "AJ periodic bounded continuation is initialized and has a verified saved checkpoint. A full cache scan or physical host disk clearance is not claimed."
   ],
   "precedingCandidate": {
     "runtimeSha": "a4f23e648d3de2a8a23c9a16942a286b91bb39b4",

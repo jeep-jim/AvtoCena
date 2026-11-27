@@ -1,7 +1,8 @@
 import {createHash} from 'node:crypto';
 import {protectedChinaGenerations} from './china-state.mjs';
 import {chinaGenerationRoot} from './generation-storage.mjs';
-import {collectRetiredChinaGeneration, validateChinaGenerationRetirementWitness} from './china-generation-gc.mjs';
+import {collectRetiredChinaGeneration, validateChinaGenerationRetirementWitness,
+  REG_RETENTION_COLLECTION_POLICY, checkedGcProgress} from './china-generation-gc.mjs';
 import {privateOwnerAcl, nonGrantingPolicy} from './private-storage.mjs';
 import {signRawGcS3Request, parseRawGcS3Delete} from '../lib/catalog-raw-gc-s3.mjs';
 
@@ -119,13 +120,15 @@ function resolvedView(view) {
  * Errors are retention results only: this function never revokes acceptance. */
 export async function maintainChinaGenerationGcQueue({mode, previousAccepted, acceptedPublication, readState, assertAuthority,
   queueStorage, generationStorage, beforeCollect, collect = collectRetiredChinaGeneration, deadlineAt,
-  environment = process.env, fetcher = globalThis.fetch, now = () => new Date().toISOString(), onProgress = () => {}}) {
+  environment = process.env, fetcher = globalThis.fetch, now = () => new Date().toISOString(), onProgress = () => {}, collectionPolicy}) {
   const report = {version: 1, kind: 'china-generation-gc-queue-report-v1', market: 'china', mode,
     completed: false, status: 'starting', enqueued: 0, collected: 0, pruned: 0, pending: null,
     witnessRemembered: acceptedPublication === undefined ? null : false,
     deletedObjects: 0, deletedBytes: 0, alreadyAbsentObjects: 0, errors: [],
     hostCleanupsCompleted: 0, retiredContainers: 0, filesDeleted: 0, freedBytes: 0,
     otherMarketWrites: 0, encyclopediaWrites: 0, liveCatalogWrites: 0};
+  const bounded = collectionPolicy === REG_RETENTION_COLLECTION_POLICY;
+  const stage = value => { if (bounded) report.stage = value; };
   let expectedState, queue;
   const deadline = deadlineAt === undefined ? null : Date.parse(deadlineAt);
   const errorSummary = error => ({code: safeCode(error),
@@ -206,18 +209,19 @@ export async function maintainChinaGenerationGcQueue({mode, previousAccepted, ac
     await writeQueue(nextQueue(queue.value.items.filter(row => row.id !== item.id))); report.pruned++;
   }
   try {
+    need(collectionPolicy === undefined || bounded, 'collection_policy');
     need(['enqueue-only', 'drain'].includes(mode) && [readState, assertAuthority, collect, now, onProgress]
       .every(value => typeof value === 'function') && (beforeCollect === undefined || typeof beforeCollect === 'function'), 'capabilities');
     need(deadlineAt === undefined || typeof deadlineAt === 'string' && /^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(?:\.\d{1,6})?Z$/.test(deadlineAt)
       && Number.isFinite(deadline), 'deadline_value');
     need((previousAccepted === undefined) === (acceptedPublication === undefined), 'witness_arguments');
-    await fence();
+    stage('authority'); await fence();
     if (expectedState.intent.value?.status === 'committed') report.witnessRemembered = false;
     queueStorage ??= createChinaGenerationGcQueueStorage({assertAuthority: fence, environment, fetcher});
     need(['assertPrivateBucket', 'readQueue', 'compareAndSwapQueue', 'readTask', 'createTask', 'deleteTask']
       .every(name => typeof queueStorage[name] === 'function'), 'storage_capability');
     need((await queueStorage.assertPrivateBucket())?.verified === true, 'privacy');
-    queue = observation(await queueStorage.readQueue());
+    stage('queue'); queue = observation(await queueStorage.readQueue());
     if (acceptedPublication) await remember(previousAccepted, acceptedPublication);
     else if (expectedState.intent.found && expectedState.intent.value.status === 'committed')
       await remember(expectedState.intent.value.previous, expectedState);
@@ -241,6 +245,7 @@ export async function maintainChinaGenerationGcQueue({mode, previousAccepted, ac
           // The caller retires any old native container before private parts.
           // A failed or uncertain host cleanup leaves the same durable task.
           if (beforeCollect) {
+            stage('host_retirement');
             const host = await beforeCollect({task, previousAccepted: task.previousAccepted, acceptedPublication: task.acceptedPublication,
               readState, assertAuthority: candidateFence});
             need(host?.completed === true, 'host_cleanup_incomplete'); report.hostCleanupsCompleted++;
@@ -250,26 +255,32 @@ export async function maintainChinaGenerationGcQueue({mode, previousAccepted, ac
                 if (report[key] !== null) report[key] += host[key]; }
             }
           }
+          stage('collection_admission');
           await candidateFence();
+          stage('collection');
           const result = await collect({previousAccepted: task.previousAccepted, acceptedPublication: task.acceptedPublication,
-            readState, assertAuthority: candidateFence, storage: generationStorage, environment, fetcher, now, onProgress});
+            readState, assertAuthority: candidateFence, storage: generationStorage, environment, fetcher, now, onProgress,
+            ...(bounded ? {collectionPolicy, deadlineAt} : {})});
+          if (bounded && result?.progress) report.collectionProgress = checkedGcProgress(result.progress);
           need(result?.completed === true && result.generationId === item.generationId && HASH.test(result.retirementSha256 ?? ''),
             'collection_incomplete');
           for (const name of ['deletedObjects', 'deletedBytes', 'alreadyAbsentObjects']) {
             need(Number.isSafeInteger(result[name]) && result[name] >= 0, 'collection_report'); report[name] += result[name];
           }
           item = {...item, phase: 'collected', retirementSha256: result.retirementSha256};
+          stage('queue_checkpoint');
           await writeQueue(nextQueue(queue.value.items.map(row => row.id === item.id ? item : row))); report.collected++;
         }
-        await prune(item);
+        stage('prune'); await prune(item);
         await onProgress({phase: 'china_generation_gc_queue', collected: report.collected, pruned: report.pruned,
           pending: queue.value.items.length});
       }
     }
-    report.completed = true; report.status = mode === 'enqueue-only' ? 'remembered' : 'complete';
+    stage('complete'); report.completed = true; report.status = mode === 'enqueue-only' ? 'remembered' : 'complete';
   } catch (error) {
     const summary = errorSummary(error); report.errors.push(summary); report.errorCode = summary.code;
-    report.status = summary.code === 'china_gc_queue_deadline' ? 'deadline' : summary.outcome;
+    report.status = ['china_gc_queue_deadline', 'china_gc_deadline'].includes(summary.code) ? 'deadline' : summary.outcome;
+    if (bounded && error?.report?.progress) report.collectionProgress = checkedGcProgress(error.report.progress);
     // Counts from an interrupted collector remain true observations, not proof
     // that the item completed. Unknown keys/proof bytes never enter this report.
     for (const name of ['deletedObjects', 'deletedBytes', 'alreadyAbsentObjects'])

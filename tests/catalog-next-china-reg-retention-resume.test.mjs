@@ -386,6 +386,41 @@ test('deadline stops before collector while renewed owned lease is released in f
   assert.equal((await f.storage.read('lease')).value.status,'released');
 });
 
+test('maintenance alone opts into bounded GC and preserves sanitized interrupted progress with the durable task',async()=>{
+  const f=await fixture(),before=f.q.current();
+  f.collector=async args=>{
+    assert.equal(args.collectionPolicy,'reg-retention-bounded-v1');
+    assert.equal(args.deadlineAt,new Date(Date.parse(f.now())+20*60000).toISOString());
+    await args.assertAuthority();
+    const error=Error('china_gc_deadline');
+    error.report={status:'paused',deletedObjects:0,deletedBytes:0,alreadyAbsentObjects:0,
+      progress:{stage:'capture',plannedObjects:1938,capturedObjects:731,checkedObjects:0,
+        retirementRecordVerified:false,tombstonesWritten:0,rawKey:'private-key-must-not-escape'}};
+    throw error;
+  };
+  const report=await runRetention(f.options());
+  assert.equal(report.completed,false);assert.equal(report.retention.status,'deadline');assert.equal(report.errorCode,'deadline');
+  assert.equal(report.retention.stage,'collection');assert.equal(report.retention.pending,1);
+  assert.deepEqual(report.retention.collectionProgress,{stage:'capture',plannedObjects:1938,capturedObjects:731,checkedObjects:0,
+    retirementRecordVerified:false,tombstonesWritten:0});
+  assert.equal(report.leaseReleased,true);assert.deepEqual(f.q.current(),before);
+  assert.deepEqual(await f.storage.read('accepted'),f.expected.accepted);
+  assert.deepEqual(await f.storage.read('intent'),f.expected.intent);
+  assert(!JSON.stringify(report).includes('private-key-must-not-escape'));
+});
+
+test('retention aggregate rejects untrusted progress stages and impossible counts',()=>{
+  const base={version:1,kind:'china-generation-gc-queue-report-v1',market:'china',mode:'drain',completed:false,status:'paused',pending:1,
+    enqueued:0,collected:0,pruned:0,deletedObjects:0,deletedBytes:0,alreadyAbsentObjects:0,hostCleanupsCompleted:0,
+    retiredContainers:0,filesDeleted:0,freedBytes:0,otherMarketWrites:0,encyclopediaWrites:0,liveCatalogWrites:0,
+    stage:'collection',collectionProgress:{stage:'capture',plannedObjects:2,capturedObjects:1,checkedObjects:0,
+      retirementRecordVerified:false,tombstonesWritten:0}};
+  assert.throws(()=>aggregateGc({...base,stage:'private-object-key'}),/result/);
+  for(const change of [{stage:'private-object-key'},{capturedObjects:3},{checkedObjects:3},{tombstonesWritten:2},
+    {retirementRecordVerified:'true'},{plannedObjects:-1}])
+    assert.throws(()=>aggregateGc({...base,collectionProgress:{...base.collectionProgress,...change}}),/progress/);
+});
+
 test('an existing held lease is a clean refusal with no queue or host access',async()=>{
   const f=await fixture();
   const held=await f.state.acquireLease({previous:await f.state.read('lease'),owner:{runId:'9999',attempt:'1',revision:'f'.repeat(40)},

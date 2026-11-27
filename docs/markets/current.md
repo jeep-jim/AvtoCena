@@ -26,13 +26,16 @@ Checkpoint: **28.11.2026, Asia/Krasnoyarsk**. Япония опубликова�
 
 ## Следующие действия
 
-1. Опубликовать reviewed REG pin binding к actual B9/a5 и запустить отдельный marker; закончить retention с освобождённым lease.
-2. Активировать guarded AJ compaction и проверить её фактический отчёт.
+1. Активировать reviewed исправление REG **`c9a4bf89`** отдельным marker и подтвердить завершение двух уже разрешённых задач A/B с освобождённым lease. Действующая публикация Японии от этого не зависит.
+2. AJ compaction уже активирована, первый ограниченный проход успешен, checkpoint сохранён. Дальнейшие проходы предусмотрены действующим расписанием `43 * * * * UTC`; полный обход пока не подтверждён.
 
 ## Хранение и границы
 
 - Maintenance33 опубликован controller **`a854d70b`**; [read-only observer](https://github.com/jeep-jim/AvtoCena/actions/runs/46054235990) **SUCCESS**. Exact owner33/1/a697/B9, state stable/resolved/committed, lease released; actual current **B9**, rollback **a5**, оба на **gen_china_45875678028_1** и прежнем pricing. State mutations0. Artifact hash/CRC и current bindings к accepted release33 сверены.
-- REG binding **`ca58f9cf`**: изменена только `expectedRuntime` c6→B9; `expectedRollbackRuntime` уже совпадал сactuala5. Все исторические pins сохранены, **19/19** focused tests и independent review PASS. REG retention и AJ compaction ещё не активированы; отдельные markers следующие.
+- REG binding **`ca58f9cf`** опубликован в **`37cfed01`**: изменена только `expectedRuntime` c6→B9; rollback уже совпадал с actual a5. Все исторические pins сохранены, **19/19** focused tests и independent review PASS.
+- [REG №7](https://github.com/jeep-jim/AvtoCena/actions/runs/46054984917), marker **`9a60e4d0`**: `paused/deadline`, `completed=false`, `pending=2`, `deletedObjects=0`, `leaseReleased=true`. Один host cleanup завершён, но удаление файлов и освобождение места в этом проходе не подтверждены. Current B9 / generation C сохранены; accepted/intent writes — 0. Агрегат не раскрывает фазу capture и наличие durable RETIREMENT, поэтому слепой повтор не выполняется.
+- REG **`c9a4bf89`**: opt-in `reg-retention-bounded-v1` только для pinned resume. Read-only capture ограничен 8 workers; части удаляются последовательными точными группами ≤64 после отдельного удаления completion и подтверждения его отсутствия. Все ACL/ETag/size, current/rollback/lease/seal fences сохранены; неопределённый ACK/readback останавливает работу без повторного POST. Default daily и runtime не меняются. RED 2 FAIL / 1 PASS → **71/71 PASS**; independent exact-commit review PASS. Новый live результат пока ожидается.
+- [AJ №1](https://github.com/jeep-jim/AvtoCena/actions/runs/46058750705), marker **`70ca0ebb`**: **SUCCESS**, `completed=true`, `bounded_partial`, `scanCycleCompleted=false`, checkpoint сохранён. Проверены 33 payloads, 22 просроченных записи уплотнены, 11 сохранены; logical payload уменьшен на **93,574 B**. Ошибок, неподтверждённых записей и concurrent changes — 0. Working cache object DELETE — 0; supplier/source requests — 0. Это успешный ограниченный проход, а не полный снимок всего кэша или измеренное освобождение host disk.
 - Исторические A/B/C witnesses не переписывать. Рабочий AJ DELETE запрещён; compaction использует conditional PUT и уменьшает logical payload, не доказывает физическое освобождение host disk. Ни один observer не применять к откатившемуся или отменённому выпуску.
 - AJ — только Япония: реальные запросы посетителей и ограниченный кэш, без дампа/зеркала; fresh30мин, stale fallback строго <7суток с исходной датой. Pricing **`64c6338e0db23c8999096bceefbf113c0136fe15`**, формулы, энциклопедия и редакторские сведения сохраняются.
 - [Подробные bindings, история попыток, ограничения доказательств и хэши артефактов](../operations/2026-11-27-japan-directory-completion.json). Observers29–32 не запускать; accepted owner теперь33.
