@@ -2,7 +2,7 @@ import type {CalculationIndex} from '../encyclopedia/calculation-index';
 import {pickupSourceCandidateSql} from './pickup-body';
 import {japanDriveSql} from './japan-drive';
 import {auctionSaleRange} from "./auction-sale-period";
-import {japanMakeSqlExclusion,japanVehicleTypeExcluded,japanVehicleFamilySqlExclusion} from './japan-vehicle-policy';
+import {japanMakeSqlExclusion,japanVehicleTypeExcluded,japanVehicleFamilySqlExclusion,japanVehicleFamilyCacheSqlExclusion,japanHeavyVehicleSqlExclusion} from './japan-vehicle-policy';
 import {assertAjesJapanMarket} from './ajes-access-policy';
 import {motorcycleExcluded,motorcycleSqlExclusion} from './motorcycle-policy';
 import {vehicleColorAliases} from './vehicle-colors';
@@ -21,7 +21,9 @@ const keys = new Set(['pickup','salePeriod','aggregate','sort','color','fuel','t
  * Keep the actual compact SQL on the wire for the existing URI-size boundary.
  */
 export function ajesSourceCacheSql(sql:string):string {
- return sql.replace(heavyVehicleSqlExclusion(false,false,true),heavyVehicleSqlExclusion());
+ return sql.replace(japanHeavyVehicleSqlExclusion(),heavyVehicleSqlExclusion())
+  .replace(heavyVehicleSqlExclusion(false,false,true),heavyVehicleSqlExclusion())
+  .replace(japanVehicleFamilySqlExclusion(),japanVehicleFamilyCacheSqlExclusion());
 }
 function integer(value: unknown, fallback: number, min: number, max: number) {
   if (value === undefined) return fallback;
@@ -62,10 +64,12 @@ export function ajesQuery(input: unknown,driveIndex:CalculationIndex|null=null) 
   }
   if (table==='stats') where.push("status='Sold'",'finish>0');
   where.push("marka_name!=''","model_name!=''");
-  // Directories and plain/model searches share the same supplier URI boundary
-  // as drive/power selections. Send the equivalent compact predicate for every
-  // query; ajesSourceCacheSql preserves the existing stored response identity.
-  where.push(heavyVehicleSqlExclusion(false,false,true),motorcycleSqlExclusion());
+  // Restore the older =/LIKE grammar for plain/model/filter directories while
+  // grouping identical families to stay below the existing URI budget. This
+  // does not establish a supplier-wide REGEXP restriction. Explicit drive keeps
+  // its existing compact form: its unchanged drive clause also uses REGEXP and
+  // expanding both predicates would exceed the existing 6000-byte guard.
+  where.push(q.drive?heavyVehicleSqlExclusion(false,false,true):japanHeavyVehicleSqlExclusion(),motorcycleSqlExclusion());
   where.push(japanMakeSqlExclusion(),japanVehicleFamilySqlExclusion());
   for(const [column,parts] of [['marka_name',makes]] as const){if(parts.length===1)where.push(`${column}='${parts[0]}'`);else if(parts.length)where.push(`${column} in (${parts.map(v=>`'${v}'`).join(',')})`);}
   const modelClauses=[...models.map(v=>`model_name='${v}'`),...families.map(v=>`model_name like '${v} %'`)];

@@ -4,6 +4,7 @@ import {DatabaseSync} from 'node:sqlite';
 import {japanDriveSql} from '../apps/web/lib/catalog/japan-drive';
 import {ajesQuery,ajesSourceCacheSql} from '../apps/web/lib/catalog/ajes-query';
 import {heavyVehicleFamilies,heavyVehicleSqlExclusion} from '../apps/web/lib/catalog/heavy-vehicle-families';
+import {japanHeavyVehicleSqlExclusion} from '../apps/web/lib/catalog/japan-vehicle-policy';
 import {createAjesClient} from '../apps/web/lib/catalog/ajes-client';
 import {ajesErrorResponse} from '../apps/web/lib/catalog/ajes-error-response';
 import {japanChassisDriveRows,lookupJapanChassisDrive} from '../apps/web/lib/encyclopedia/japan-chassis-drive';
@@ -72,14 +73,14 @@ test('Japan power lists and counts fit the supplier URI budget without losing ow
   const sql=ajesQuery({table,aggregate,...power}).sql;
   const bytes=new URLSearchParams({sql}).toString().length;
   assert.ok(bytes<6000,`${table}/${aggregate}: ${bytes}`);
-  assert.ok(sql.includes(heavyVehicleSqlExclusion(false,false,true)));
+  assert.ok(sql.includes(japanHeavyVehicleSqlExclusion()));
   assert.match(stepwgnOwnerSql(),/RP\[58\]/);
   assert.doesNotMatch(sql,/pw\s*(?:>=|<=|>|<)/i);
  }
  // Neither Japanese auction table may use supplier PW as a specification filter.
  for(const table of ['stats','main'] as const){
   assert.doesNotMatch(ajesQuery({table,powerTo:160}).sql,/pw\s*(?:>=|<=|>|<)/i);
-  assert.ok(ajesQuery({table}).sql.includes(heavyVehicleSqlExclusion(false,false,true)));
+  assert.ok(ajesQuery({table}).sql.includes(japanHeavyVehicleSqlExclusion()));
  }
  for(const table of ['china','korea'])assert.throws(()=>ajesQuery({table,powerTo:160}),/ajes_invalid_query/);
 });

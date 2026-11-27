@@ -1,6 +1,6 @@
 import {createHash} from 'node:crypto';
 import {heavyVehicleSqlExclusion} from './heavy-vehicle-families';
-import {japanVehicleFamilySqlExclusion} from './japan-vehicle-policy';
+import {japanVehicleFamilyCacheSqlExclusion} from './japan-vehicle-policy';
 import {ajesQuery,ajesSourceCacheSql} from './ajes-query';
 
 type Store={readJson:(key:string,fallback:null)=>Promise<any>;writeJson:(key:string,value:any)=>Promise<unknown>};
@@ -73,8 +73,8 @@ export async function readExpandedJapanRows(sql:string,previous:string,read:(sql
  * the former COUNT and directory no longer describe the current selection. */
 export async function readPreviousJapanPolicyRows(sql:string,read:(sql:string)=>Promise<any|null>){
  if(!sql.startsWith('select * from'))return null;
- const previous=sql.replace(' and '+japanVehicleFamilySqlExclusion(),'');
- if(previous===sql)return null;
+ const canonical=ajesSourceCacheSql(sql),previous=canonical.replace(' and '+japanVehicleFamilyCacheSqlExclusion(),'');
+ if(previous===canonical)return null;
  const compact=previous.replace(heavyVehicleSqlExclusion(),heavyVehicleSqlExclusion(false,false,true));
  for(const key of new Set([previous,compact])){
   const saved=await read(key);

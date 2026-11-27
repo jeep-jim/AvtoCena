@@ -13,7 +13,6 @@ test('Japanese truck and bus families match in SQL and retained-card admission w
  ];
  const db=new DatabaseSync(':memory:');
  try{
-  db.function('regexp',(pattern,value)=>Number(new RegExp(String(pattern),'i').test(String(value))));
   db.exec('create table cars(id integer,marka_name text,model_name text)');
   const insert=db.prepare('insert into cars values(?,?,?)');rows.forEach(([make,model],i)=>insert.run(i,make,model));
   const admitted=db.prepare('select id from cars where '+japanVehicleFamilySqlExclusion()+' order by id').all().map(row=>row.id);

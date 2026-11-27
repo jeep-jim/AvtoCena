@@ -11,6 +11,7 @@ import {defaultCollectionControls,collectionEnabled} from '../apps/web/lib/catal
 import {validateCollectionControls} from '../apps/web/lib/catalog/collection-controls';
 import {catalogHeavyVehicleExcluded} from '../apps/web/lib/catalog/inventory-admission';
 import {heavyVehicleSqlExclusion} from '../apps/web/lib/catalog/heavy-vehicle-families';
+import {japanHeavyVehicleSqlExclusion} from '../apps/web/lib/catalog/japan-vehicle-policy';
 const row={ID:'test123',MARKA_NAME:'TOYOTA',MODEL_NAME:'TEST',YEAR:'2023',AUCTION_TYPE:'2',STATUS:'Sold',FINISH:'935000',START:'100000',PW:'49',PRIV:'FF,FULLTIME4WD',IMAGES:'https://7.tru.ru/imgs/testABC&h=50'};
 
 test('AJES power filter preserves local priority and rejects unbound source values',async()=>{
@@ -86,7 +87,7 @@ test('confirmed heavy families are excluded without fabricating a listing mass',
 test('lists, counts and model directories apply identical heavy-family SQL before pagination',()=>{
  for(const aggregate of [undefined,'count','models'] as const){
   const query=ajesQuery({aggregate});
-  assert.ok(query.sql.includes(heavyVehicleSqlExclusion(false,false,true)));
+  assert.ok(query.sql.includes(japanHeavyVehicleSqlExclusion()));
  }
 });
 
