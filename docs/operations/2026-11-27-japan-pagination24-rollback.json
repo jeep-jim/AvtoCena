@@ -1,0 +1,705 @@
+{
+  "version": 1,
+  "kind": "japan-pagination24-rollback-v1",
+  "status": "rolled_back_stale_response_and_retained_runtime_verified",
+  "observedAt": "2026-11-27T00:32:13Z",
+  "release": {
+    "run": 45914646851,
+    "job": 140230849641,
+    "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/45914646851",
+    "head": "dbc3b715c235e413426b7d7cb600b22fba76b4ee",
+    "controller": "6b1c87cba54be732229728542dedcd50fdfc3ab3",
+    "candidate": "889c5150803f7973fc371d1d90491bb38cbabf82",
+    "retained": "a5ca426eec2663eb17c2df69fe2bfed46e2b8740",
+    "conclusion": "failure",
+    "report": {
+      "version": 1,
+      "kind": "china-code-cycle-v1",
+      "market": "china",
+      "completed": false,
+      "published": false,
+      "status": "rolled_back",
+      "runtimeSha": "889c5150803f7973fc371d1d90491bb38cbabf82",
+      "retainedRuntime": "a5ca426eec2663eb17c2df69fe2bfed46e2b8740",
+      "sourceRequests": 0,
+      "generationRestores": 0,
+      "priceCalculations": 0,
+      "generationWrites": 0,
+      "encyclopediaWrites": 0,
+      "otherMarketWrites": 0,
+      "deletions": 0,
+      "hostCleanupBeforeReserve": {
+        "completed": true,
+        "retiredContainers": 0,
+        "filesDeleted": 0,
+        "freedBytes": 0
+      },
+      "appImageCleanupBeforeReserve": {
+        "version": 1,
+        "kind": "china-terminal-app-image-cleanup-v1",
+        "completed": true,
+        "status": "protected",
+        "uncertain": false,
+        "imagesRemoved": 0,
+        "runtimeSha": "077cbb17626ab0c64e7f06db055fef9252ad21c0",
+        "imageId": "sha256:6d64802f85263a3a1806aec8e469a459874e5b7737142f484a70d0e9f6c96f73",
+        "witnessSha256": "17016a5f4cc0df9fe4ee04b78eb23d6318d4ec68e97faa6deaad6c86f4e872da",
+        "diskFreeBytesBefore": 51199201280,
+        "diskFreeBytesAfter": 51199201280,
+        "measuredFreeBytesChange": 0,
+        "reason": "current_or_rollback"
+      },
+      "retentionPreserved": true,
+      "recovered": true,
+      "appImageCleanup": {
+        "version": 1,
+        "kind": "china-terminal-app-image-cleanup-v1",
+        "completed": true,
+        "status": "removed",
+        "uncertain": false,
+        "imagesRemoved": 1,
+        "runtimeSha": "889c5150803f7973fc371d1d90491bb38cbabf82",
+        "imageId": "sha256:f220217289e20f819e5825b897e2c22394adc01d612f73b54c9fef9bff1eef66",
+        "witnessSha256": "a1ac36a0b738215a70f2726bf45133e0bf3752a0bd01f5e4fe79a0a355f62b18",
+        "diskFreeBytesBefore": 50002915328,
+        "diskFreeBytesAfter": 51194601472,
+        "measuredFreeBytesChange": 1191686144,
+        "reason": "exact_terminal_image"
+      },
+      "errorCode": "china_daily_release_japan_browser_failed",
+      "finishedAt": "2026-11-27T00:32:02.861Z",
+      "leaseReleased": true
+    },
+    "artifact": {
+      "id": 15162023947,
+      "name": "china-photo-code-release-result",
+      "bytes": 9165,
+      "sha256": "41075cfeb2f726c316cba0330e82f74e1b63988e72385bbeb98a03e8e4bf29c0"
+    },
+    "log": {
+      "bytes": 283095,
+      "sha256": "91effb4e104a2fab995201697b7da07e60823443bd73c93a571ecf124daa1876"
+    }
+  },
+  "ci": {
+    "run": 45914166772,
+    "job": 140229292644,
+    "head": "6b1c87cba54be732229728542dedcd50fdfc3ab3",
+    "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/45914166772",
+    "conclusion": "success",
+    "controller": {
+      "tests": 1301,
+      "passed": 1301,
+      "failed": 0,
+      "cancelled": 0,
+      "skipped": 0
+    },
+    "native": {
+      "tests": 448,
+      "passed": 448,
+      "failed": 0,
+      "cancelled": 0,
+      "skipped": 0
+    },
+    "hostImageCases": 23,
+    "types": {
+      "web": 0,
+      "engine": 0
+    },
+    "browser": {
+      "city": 4,
+      "crm": 2,
+      "photo": 12,
+      "pagination": 8
+    },
+    "runtime": "889c5150803f7973fc371d1d90491bb38cbabf82",
+    "runtimeTree": "c9d6371dab51839ace654703509d1272656adf93",
+    "log": {
+      "bytes": 271084,
+      "sha256": "3c235d866f5d621cd4e8acd8dc3630d4909bffe9768f45f96080b867c57235e5",
+      "retrievedOnceBy": "japan_filter_diagnosis"
+    },
+    "rootVerifiedRequiredJobSteps": true,
+    "allRequiredStepsPassed": true,
+    "skippedNotApplicableSteps": [
+      14,
+      16
+    ],
+    "productionMarkerInCI": false
+  },
+  "chinaScheduledRun": {
+    "run": 45907437719,
+    "job": 140207456693,
+    "event": "schedule",
+    "head": "374863c80ad26f71a7e570e081e9300078854e4b",
+    "createdAt": "2026-11-26T22:51:54Z",
+    "finishedAt": "2026-11-26T22:54:39.851Z",
+    "status": "not_due",
+    "published": false,
+    "sourcePrepared": false,
+    "applicationBuilds": 0,
+    "leaseReleased": true,
+    "acceptedGenerationId": "gen_china_45875678028_1",
+    "sourceObservedAt": "2026-11-26T19:04:39.089Z",
+    "sourceCursor": 13340204,
+    "logBytes": 177334,
+    "logSha256": "c5500593c4e9c9b950a46443b3ff2f181c263bfef5f2fb7f41aef3c2d7b32f2b",
+    "artifact": {
+      "id": 15158462348,
+      "bytes": 611,
+      "sha256": "c73cd3fdba1f66fb7266137fff63b628cf581b709f9e7086682b56f071397a36"
+    },
+    "exactCron": null,
+    "servingRuntime": null,
+    "sourceRequests": null
+  },
+  "currentLiveJapanRefill": false,
+  "exactGlobalJapanPowerCountImplemented": false,
+  "globalKnownBeforeUnknownImplemented": false,
+  "postRollbackPublicVerification": {
+    "calculationVersion": "4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90",
+    "crmAnonymousBodyMatched": true,
+    "crmAnonymousStatus": 401,
+    "crmSetCookieAbsent": true,
+    "directSupplierRequests": 0,
+    "generationId": "gen_china_45875678028_1",
+    "kind": "avtocena-public-post-release-check-v1",
+    "observedAt": "2026-11-27T00:50:49Z",
+    "passed": true,
+    "powerTo160Total": 70059,
+    "productionMutations": 0,
+    "readOnly": true,
+    "requests": 4,
+    "runtimeSha": "a5ca426eec2663eb17c2df69fe2bfed46e2b8740",
+    "signedInRequests": 0,
+    "total": 281310,
+    "version": 1
+  },
+  "postRollbackResourceInventory": {
+    "kind": "regcloud-resource-inventory-20261126-v1",
+    "status": "observed",
+    "measuredAtUtc": "2026-11-27T00:50:41.413052Z",
+    "mutations": 0,
+    "providerRequests": 0,
+    "health": {
+      "port": 3005,
+      "status": 200,
+      "ok": true,
+      "releaseSha": "a5ca426eec2663eb17c2df69fe2bfed46e2b8740",
+      "calculationVersion": "4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90"
+    },
+    "healthAndContainersUnchanged": true,
+    "containerStabilityDifferences": [],
+    "containerCount": 4,
+    "diskBefore": {
+      "totalBytes": 102916472832,
+      "availableBytes": 51191853056,
+      "freeBytes": 51208630272
+    },
+    "diskAfter": {
+      "totalBytes": 102916472832,
+      "availableBytes": 51191820288,
+      "freeBytes": 51208597504
+    },
+    "computed": {
+      "totalGiB": 95.84843444824219,
+      "availableGiB": 47.67609786987305,
+      "freeGiB": 47.69172286987305,
+      "usedBytes": 51707875328,
+      "usedGiB": 48.15671157836914,
+      "usedPercent": 50.24256458186972,
+      "availableDiffSinceOld": -42864640,
+      "japanOldestObservationAgeSeconds": 49654.39
+    },
+    "storageBytes": {
+      "/opt/avtocena/releases": 28227444736,
+      "/var/lib/docker": 34332672,
+      "/var/lib/containerd": 14622257152,
+      "/var/log": 642502656,
+      "/tmp": 557056
+    },
+    "currentReleaseBytes": 12939190272,
+    "retainedReleaseBytes": 12680761344,
+    "candidateRemainingAllocatedBytes": 159744,
+    "memoryTotalBytes": 16763207680,
+    "memoryAvailableBytes": 8087502848
+  },
+  "failedJapanArtifactProjection": {
+    "version": 1,
+    "kind": "japan-pagination24-failed-release-inspection-v1",
+    "status": "verified_failed_release",
+    "runId": 45914646851,
+    "headSha": "dbc3b715c235e413426b7d7cb600b22fba76b4ee",
+    "runConclusion": "failure",
+    "runAttempt": 1,
+    "artifactId": 15162023947,
+    "artifactSha256": "41075cfeb2f726c316cba0330e82f74e1b63988e72385bbeb98a03e8e4bf29c0",
+    "archiveBytes": 9165,
+    "archiveFileCount": 11,
+    "entrySha256": {
+      "catalog-next-crm-china-operations-report.json": "8d18a1a802ce6f0527977c5c8725b6ea92d7d6d84c8592355ad84e3fa7d3228c",
+      "catalog-next-china-photo-release-report.json": "3400326a8693c44ba9a0fe4f9a92eecb9e853af8b94722f8b981f4650e858af6",
+      "china-crm-collection-controls-report.json": "c3c8137ee16f91f3ad2e1d402f58de1c412c7b362d9a4690b80b957c5f4b3b8f",
+      "catalog-next-japan-photo-retry-report.json": "77cebb6dd16df3a2db19f2f08a4fa0b949db6a39cfd43890c942fac5979e1f1a",
+      "japan-photo-retry-browser-report.json": "5e25916224f7825b364f20b20ed4d26628baf03dcd20afa2084840fc464d7921",
+      "japan-pagination24-browser-report.json": "764b82f1399940b3eb71c82f29ccfd48a2f7ae334f3fd3bf7f7240b1882486f9",
+      "japan-catalog-city-report.json": "e7ff5e2189a4aef8a3f32501c93e0852192ec1f82e7153d9d47f9656f4b3a8c2",
+      "catalog-next-japan-browser-report.json": "807224322a8d8e0ac1565071f6abe2954c1b444b913b510293c7812794cd18ee",
+      "catalog-next-japan-source-failure-report.json": "60c8a1cb56608748ca2a78509cf71352cb502fbaf83d45ea496c8a94c8e92ce7",
+      "image-receipt.json": "b8100221a85b936a62ccdc41733e17da116d2ccc4ceb7b8e0714fbd8c06e1e17",
+      "image-storage-proof.json": "6dfe8aa8509b84981944c6a391494dd292ee46859f2de716d32e624fdf491926"
+    },
+    "entryBytes": {
+      "catalog-next-crm-china-operations-report.json": 879,
+      "catalog-next-china-photo-release-report.json": 1942,
+      "china-crm-collection-controls-report.json": 422,
+      "catalog-next-japan-photo-retry-report.json": 1030,
+      "japan-photo-retry-browser-report.json": 412,
+      "japan-pagination24-browser-report.json": 498,
+      "japan-catalog-city-report.json": 1486,
+      "catalog-next-japan-browser-report.json": 2767,
+      "catalog-next-japan-source-failure-report.json": 1052,
+      "image-receipt.json": 6803,
+      "image-storage-proof.json": 1064
+    },
+    "optionalRecognizedEntries": [
+      "catalog-next-crm-china-operations-report.json",
+      "catalog-next-japan-photo-retry-report.json",
+      "china-crm-collection-controls-report.json",
+      "image-storage-proof.json",
+      "japan-catalog-city-report.json",
+      "japan-pagination24-browser-report.json",
+      "japan-photo-retry-browser-report.json"
+    ],
+    "optionalContentsProjected": false,
+    "ignoredEntryCount": 0,
+    "requests": 4,
+    "directSupplierRequests": 0,
+    "publicSiteRequests": 0,
+    "hostRequests": 0,
+    "productionMutations": 0,
+    "cycle": {
+      "completed": false,
+      "published": false,
+      "leaseReleased": true,
+      "retentionPreserved": true,
+      "recovered": true,
+      "sourceRequests": 0,
+      "generationRestores": 0,
+      "priceCalculations": 0,
+      "generationWrites": 0,
+      "encyclopediaWrites": 0,
+      "otherMarketWrites": 0,
+      "deletions": 0,
+      "runtimeSha": "889c5150803f7973fc371d1d90491bb38cbabf82",
+      "retainedRuntime": "a5ca426eec2663eb17c2df69fe2bfed46e2b8740",
+      "finishedAt": "2026-11-27T00:32:02.861Z",
+      "status": "rolled_back",
+      "errorCode": "china_daily_release_japan_browser_failed",
+      "hostCleanupBeforeReserve": {
+        "completed": true,
+        "retiredContainers": 0,
+        "filesDeleted": 0,
+        "freedBytes": 0
+      },
+      "appImageCleanup": {
+        "version": 1,
+        "kind": "china-terminal-app-image-cleanup-v1",
+        "completed": true,
+        "status": "removed",
+        "uncertain": false,
+        "imagesRemoved": 1,
+        "runtimeSha": "889c5150803f7973fc371d1d90491bb38cbabf82",
+        "imageId": "sha256:f220217289e20f819e5825b897e2c22394adc01d612f73b54c9fef9bff1eef66",
+        "witnessSha256": "a1ac36a0b738215a70f2726bf45133e0bf3752a0bd01f5e4fe79a0a355f62b18",
+        "diskFreeBytesBefore": 50002915328,
+        "diskFreeBytesAfter": 51194601472,
+        "measuredFreeBytesChange": 1191686144,
+        "reason": "exact_terminal_image"
+      },
+      "appImageCleanupBeforeReserve": {
+        "version": 1,
+        "kind": "china-terminal-app-image-cleanup-v1",
+        "completed": true,
+        "status": "protected",
+        "uncertain": false,
+        "imagesRemoved": 0,
+        "runtimeSha": "077cbb17626ab0c64e7f06db055fef9252ad21c0",
+        "imageId": "sha256:6d64802f85263a3a1806aec8e469a459874e5b7737142f484a70d0e9f6c96f73",
+        "witnessSha256": "17016a5f4cc0df9fe4ee04b78eb23d6318d4ec68e97faa6deaad6c86f4e872da",
+        "diskFreeBytesBefore": 51199201280,
+        "diskFreeBytesAfter": 51199201280,
+        "measuredFreeBytesChange": 0,
+        "reason": "current_or_rollback"
+      }
+    },
+    "japan": {
+      "passed": false,
+      "japanFreshnessPassed": false,
+      "japanPowerApiPassed": false,
+      "japanUiPassed": false,
+      "japanVisibilityPassed": false,
+      "readOnlyBrowserFence": true,
+      "japanPetrolPowerUiPassed": false,
+      "japanDetailPowerInputPassed": false,
+      "japanDeliveredCalculationPassed": false,
+      "japanFullPagesPassed": false,
+      "japanPagination24Passed": false,
+      "japanCatalogWarningRemovedPassed": false,
+      "productionMutations": 0,
+      "directSupplierApiRequests": 0,
+      "supplierImageRequests": 0,
+      "explicitJapanApiRequests": 1,
+      "japanPreviewCalculationRequests": 0,
+      "checkedAt": "2026-11-27T00:31:18.921Z",
+      "nonce": "b31bd9eab8707a76b61382e311428eb6",
+      "generationManifestSha256": "58263ea4dc5642c9ff6f544830e9d3536ba702fb729a7a8c33b049b70b737038",
+      "oracleSha256": "2337e9d04502050c5b28bf47ee59caa4219731a88689f72f33465097dbcd72be",
+      "version": 1,
+      "kind": "catalog-japan-browser-v1",
+      "codeScope": "catalog-japan-pagination24-v1",
+      "release": "889c5150803f7973fc371d1d90491bb38cbabf82",
+      "error": {
+        "stage": "plain_first",
+        "code": "japan_browser_unavailable_or_stale",
+        "timeout": false
+      },
+      "responses": [
+        {
+          "stage": "plain_first",
+          "status": 200,
+          "ok": true,
+          "stale": true,
+          "partial": false,
+          "interrupted": false,
+          "scanLimited": false,
+          "hasMore": true,
+          "shown": 24,
+          "received": 24,
+          "total": null,
+          "observedAt": "2026-11-26T10:43:51.525Z",
+          "requestedAt": "2026-11-27T00:31:19.746Z",
+          "receivedAt": "2026-11-27T00:31:25.915Z",
+          "durationMs": 6169,
+          "responseHeaders": {
+            "cacheControl": "private, max-age=15, stale-while-revalidate=30",
+            "omitted": []
+          },
+          "sourceReadEvidence": {
+            "status": "missing",
+            "sourceReadReceipts": [],
+            "receiptDetailsOmitted": 0,
+            "runtimeMatchesExpected": null,
+            "sourceReadReceiptsLimited": true,
+            "omittedReceipts": null,
+            "omissions": [
+              "catalog_receipt_missing"
+            ]
+          }
+        }
+      ],
+      "earlierResponsesOmitted": 0,
+      "health": [
+        {
+          "stage": "before",
+          "status": 200,
+          "ok": true,
+          "releaseSha": "889c5150803f7973fc371d1d90491bb38cbabf82",
+          "calculationVersion": "4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90",
+          "requestedAt": "2026-11-27T00:31:19.296Z",
+          "receivedAt": "2026-11-27T00:31:19.746Z",
+          "durationMs": 450,
+          "responseHeaders": {
+            "omitted": []
+          }
+        }
+      ],
+      "globalJapanTotalVerified": false,
+      "acceptanceSucceeded": false
+    },
+    "savedSourceFailure": {
+      "version": 1,
+      "kind": "japan-usability-saved-failure-v1",
+      "records": [
+        {
+          "slot": "stats-list-1",
+          "readStatus": "ok",
+          "startedAt": "2026-11-27T00:32:00.737Z",
+          "finishedAt": "2026-11-27T00:32:01.001Z",
+          "kind": "list",
+          "outcome": "empty_response",
+          "page": 1,
+          "pageSize": 24,
+          "httpStatus": 200,
+          "sqlSha256": "0f361610bb7136f670b0854a7c2e4644dad205f5f7c13874bc06cbf8cd4acc4b",
+          "sqlBytes": 5476,
+          "providerKind": null
+        },
+        {
+          "slot": "stats-count",
+          "readStatus": "ok",
+          "startedAt": "2026-11-27T00:25:23.714Z",
+          "finishedAt": "2026-11-27T00:25:23.882Z",
+          "kind": "count",
+          "outcome": "invalid_response",
+          "page": 1,
+          "pageSize": 1,
+          "httpStatus": 200,
+          "sqlSha256": "11d57cd22189222f88803d81715c92000b5285918d983a0d9463e82ca10cebe4",
+          "sqlBytes": 5437,
+          "providerKind": null
+        },
+        {
+          "slot": "stats-latest",
+          "readStatus": "ok",
+          "startedAt": "2026-11-27T00:32:00.737Z",
+          "finishedAt": "2026-11-27T00:32:01.001Z",
+          "kind": "list",
+          "outcome": "empty_response",
+          "page": 1,
+          "pageSize": 24,
+          "httpStatus": 200,
+          "sqlSha256": "0f361610bb7136f670b0854a7c2e4644dad205f5f7c13874bc06cbf8cd4acc4b",
+          "sqlBytes": 5476,
+          "providerKind": null
+        }
+      ],
+      "supplierRequests": 0,
+      "writes": 0,
+      "sameRequestCorrelationVerified": false
+    },
+    "image": {
+      "runtimeSha": "889c5150803f7973fc371d1d90491bb38cbabf82",
+      "runtimeTree": "c9d6371dab51839ace654703509d1272656adf93",
+      "imageId": "sha256:f220217289e20f819e5825b897e2c22394adc01d612f73b54c9fef9bff1eef66",
+      "archiveRoundTripVerified": true
+    },
+    "checks": {
+      "exactRunAndArtifact": true,
+      "rolledBackCycle": true,
+      "candidateNotAccepted": true,
+      "retainedRuntimeBinding": true,
+      "leaseReleased": true,
+      "failedJapanReport": true,
+      "imageBinding": true,
+      "terminalImageRemoved": true,
+      "globalJapanTotalVerified": false,
+      "savedFailureSameRequestVerified": false
+    },
+    "limitations": {
+      "currentPublicRuntimeNotProbed": true,
+      "privateStateNotRead": true,
+      "savedFailuresAreLatestSharedObjects": true,
+      "receiptAbsenceDoesNotProveNoSourceAttempt": true,
+      "sourceFailureCauseNotInferred": true,
+      "cleanupBytesAreObservedDeltaNotImageLogicalSize": true
+    }
+  },
+  "limitations": [
+    "The live site was verified on retained a5ca after rollback. Candidate889 is not accepted and its refill change is not live.",
+    "The first failed API response had 24 rows; this was an unfiltered ordinary page and does not prove the requested power <= 160 page or continuation is fixed.",
+    "observedAt is the oldest contributing source observation; received 24 is not a proof that only one source page was read.",
+    "Saved failure records are outside the exact API request window and have a different SQL fingerprint from the expected unfiltered query. They do not establish the cause of this request's stale fallback.",
+    "The former b25 supplier HTTP500 is historical and is not attributed to this release.",
+    "Rollback recovered 1191686144 measured bytes from this attempt's candidate image, not a new net reduction of old disk accumulation.",
+    "The automatic China run was not_due, not a new automatic import. Exact cron expression for the event and the cause of the original missed time remain unproved.",
+    "REG GC remains paused with uncertain network outcome; no blind retry or lease/TTL reset was performed.",
+    "Global Japan power count and global known-before-unknown order remain unimplemented. AJ documentation request was rejected by automatic review and has not been repeated."
+  ],
+  "checkpointAt": "2026-11-27T07:56:47.000+07:00",
+  "postRollbackVerification": {
+    "run": 45919061523,
+    "job": 140245160654,
+    "head": "bcf04bbd4f1b17d65ad917bee7bd427b9a84f266",
+    "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/45919061523",
+    "conclusion": "success",
+    "allRequiredStepsPassed": true,
+    "log": {
+      "bytes": 122688,
+      "sha256": "2ef722ad59537174c0c6495f7f30792a85158842e207bb4993384c740754cb11"
+    },
+    "artifact": {
+      "id": 15163636867,
+      "name": "server-resource-inventory-readonly",
+      "bytes": 25713,
+      "sha256": "b36847d2de90db80bc53ae4cba15130eea323888fc6edc7f0824b79be9c594bc"
+    }
+  },
+  "scheduleMetadata": {
+    "defaultBranch": "main",
+    "directSupplierRequests": 0,
+    "githubMutations": 0,
+    "kind": "china-schedule-metadata-readonly-v1",
+    "listedRunLimit": 20,
+    "matchingScheduleRunTotal": 2,
+    "observedAt": "2026-11-27T00:50:50Z",
+    "productionMutations": 0,
+    "productionRequests": 0,
+    "recentScheduleRuns": [
+      {
+        "conclusion": "success",
+        "created_at": "2026-11-26T22:51:54Z",
+        "head_sha": "374863c80ad26f71a7e570e081e9300078854e4b",
+        "id": 45907437719,
+        "status": "completed",
+        "updated_at": "2026-11-26T22:54:44Z"
+      },
+      {
+        "conclusion": "success",
+        "created_at": "2026-11-25T22:59:01Z",
+        "head_sha": "b6ae6d20149362e5d772d08f6ce66dcca3ee9332",
+        "id": 45717710874,
+        "status": "completed",
+        "updated_at": "2026-11-25T23:02:01Z"
+      }
+    ],
+    "repositoryArchived": false,
+    "repositoryDisabled": false,
+    "repositoryId": 1289722938,
+    "requests": 3,
+    "scheduleExpressionsUtc": [
+      "0 14 * * *",
+      "17 0,3,6,9,12,15,18,21 * * *"
+    ],
+    "schedulerCauseEstablished": false,
+    "status": "observed",
+    "version": 1,
+    "workflowId": 429950403,
+    "workflowPath": ".github/workflows/catalog-next-china-daily.yml",
+    "workflowSourceSha256": "10c568f34e7a7de9d1447d934f2ac86063e1f16895959e96187aaba9d4a0d520",
+    "workflowState": "active"
+  },
+  "actualFailure": {
+    "stage": "plain_first",
+    "errorCode": "japan_browser_unavailable_or_stale",
+    "timeout": false,
+    "response": {
+      "stage": "plain_first",
+      "status": 200,
+      "ok": true,
+      "stale": true,
+      "partial": false,
+      "interrupted": false,
+      "scanLimited": false,
+      "hasMore": true,
+      "shown": 24,
+      "received": 24,
+      "total": null,
+      "observedAt": "2026-11-26T10:43:51.525Z",
+      "requestedAt": "2026-11-27T00:31:19.746Z",
+      "receivedAt": "2026-11-27T00:31:25.915Z",
+      "durationMs": 6169,
+      "responseHeaders": {
+        "cacheControl": "private, max-age=15, stale-while-revalidate=30",
+        "omitted": []
+      },
+      "sourceReadEvidence": {
+        "status": "missing",
+        "sourceReadReceipts": [],
+        "receiptDetailsOmitted": 0,
+        "runtimeMatchesExpected": null,
+        "sourceReadReceiptsLimited": true,
+        "omittedReceipts": null,
+        "omissions": [
+          "catalog_receipt_missing"
+        ]
+      }
+    },
+    "oldestObservationAgeSeconds": 49654.39,
+    "specificSourcePageUnknown": true,
+    "sameRequestSupplierFailureEstablished": false,
+    "oldB25Http500NotReused": true,
+    "powerUiPaginationAndCalculationGatesNotReached": true,
+    "explanation": "The first ordinary Japan response had 24 rows but stale=true. Its oldest observation was 49654.390 seconds old when received. This response failed freshness before power/UI/pagination/calculation checks. No same-request supplier failure is established."
+  },
+  "previousOrdinaryJapanPhotoObservation": {
+    "version": 1,
+    "kind": "japan-public-photo-observation-v1",
+    "observationCompleted": true,
+    "expectedRuntimeSha": "a5ca426eec2663eb17c2df69fe2bfed46e2b8740",
+    "runtimeCheckedHere": false,
+    "page": "/cars/japan",
+    "powerTo": 160,
+    "city": "Новокузнецк",
+    "width": 390,
+    "startedAt": "2026-11-26T21:58:04.372Z",
+    "initial": {
+      "cards": 23,
+      "loaded": 0,
+      "pending": 23,
+      "failedOrAwaitingRetry": 0,
+      "temporaryPlaceholders": 0,
+      "missingSourcePlaceholders": 0,
+      "unrecognized": 0,
+      "lazyImages": 23,
+      "retryMarkedImages": 0,
+      "naturalWidthMin": null,
+      "naturalWidthMax": null,
+      "naturalHeightMin": null,
+      "naturalHeightMax": null,
+      "otherBatches": 0,
+      "marketCounterText": "Количество уточняется",
+      "marketCounterAttribute": null,
+      "shownCounterText": "Показано 23"
+    },
+    "final": {
+      "cards": 23,
+      "loaded": 23,
+      "pending": 0,
+      "failedOrAwaitingRetry": 0,
+      "temporaryPlaceholders": 0,
+      "missingSourcePlaceholders": 0,
+      "unrecognized": 0,
+      "lazyImages": 23,
+      "retryMarkedImages": 0,
+      "naturalWidthMin": 320,
+      "naturalWidthMax": 320,
+      "naturalHeightMin": 240,
+      "naturalHeightMax": 240,
+      "otherBatches": 0,
+      "marketCounterText": "Количество уточняется",
+      "marketCounterAttribute": null,
+      "shownCounterText": "Показано 23"
+    },
+    "scrolledCards": 23,
+    "allCardImagesLoaded": true,
+    "globalCountVerified": false,
+    "freshnessVerified": false,
+    "network": {
+      "allowedRequests": 83,
+      "firstPageSearchGets": 0,
+      "firstPageCountGets": 0,
+      "blockedWrites": 0,
+      "blockedPrefetch": 5,
+      "blockedOtherPages": 0,
+      "blockedOwnerRoutes": 0,
+      "blockedExternalNonAssets": 0,
+      "blockedWebSockets": 0,
+      "routeErrors": 0
+    },
+    "finishedAt": "2026-11-26T21:58:23.202Z",
+    "durationMs": 18830
+  },
+  "sourceOnlyFollowup": {
+    "changedCode": false,
+    "productionAttempt": false,
+    "ordinaryQueryEstimatedFormSqlBytes": 6822,
+    "compactQueryEstimatedFormSqlBytes": 1517,
+    "existingDrivePowerBudgetBytes": 6000,
+    "remoteUriCauseEstablished": false,
+    "compactRequiresCacheIdentityPreservation": true,
+    "decision": "No new release based only on this hypothesis; source receipts or equivalent request-bound evidence are needed.",
+    "ordinaryCountEstimatedFormSqlBytes": 6783,
+    "compactCountEstimatedFormSqlBytes": 1478,
+    "expectedPlainWireSqlBytes": 5452,
+    "expectedPlainWireSqlSha256": "5b858d8b44e64d62c1d2d4b3e9407eed16a37356855ff7ca7862989a4510d408",
+    "savedDifferentSqlBytes": 5476,
+    "savedDifferenceCauseEstablished": false,
+    "sourceLinks": [
+      "https://github.com/jeep-jim/AvtoCena/blob/889c5150803f7973fc371d1d90491bb38cbabf82/apps/web/lib/catalog/ajes-query.ts",
+      "https://github.com/jeep-jim/AvtoCena/blob/889c5150803f7973fc371d1d90491bb38cbabf82/apps/web/lib/catalog/ajes-client.ts",
+      "https://github.com/jeep-jim/AvtoCena/blob/889c5150803f7973fc371d1d90491bb38cbabf82/tests/japan-drive-sql-budget.test.ts"
+    ],
+    "sameRequestDiagnosisNotAvailable": true
+  }
+}

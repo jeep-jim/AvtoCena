@@ -1,10 +1,10 @@
 {
   "version": 1,
   "kind": "disk-china-japan-followup-checkpoint-v1",
-  "status": "partial_remediation_verified_japan_pagination_and_global_count_open",
-  "generatedAt": "2026-11-27T06:52:52.000+07:00",
+  "status": "partial_remediation_verified_japan_pagination_rolled_back_and_global_count_open",
+  "generatedAt": "2026-11-27T07:56:47.000+07:00",
   "timezone": "Asia/Krasnoyarsk",
-  "scope": "China C and CRM/Japan photo runtime a5ca accepted and checked. Japan pagination24 runtime889c515 passed source/native/type/browser checks but is not yet activated; exact global power count and known-then-unknown order remain unresolved.",
+  "scope": "China C and CRM/Japan photo runtime a5ca accepted and verified after rollback. Disk is 50.243% used. Japan pagination24 runtime 889 passed offline checks but failed live freshness and was rolled back; exact global power count and global known-before-unknown order remain open.",
   "sourcePolicy": {
     "cleanupFacts": "Actual terminal cleanup reports override aggregate progress fields",
     "excludedHistoricalFields": [
@@ -311,11 +311,26 @@
         }
       ],
       "artifactZipDownloadedByRoot": false
+    },
+    "japan_pagination24_rollback": {
+      "path": "docs/operations/2026-11-27-japan-pagination24-rollback.json",
+      "run": 45914646851,
+      "inspectionRun": 45919061523
+    },
+    "post_rollback_inspection": {
+      "run": 45919061523,
+      "job": 140245160654,
+      "head": "bcf04bbd4f1b17d65ad917bee7bd427b9a84f266",
+      "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/45919061523",
+      "log": {
+        "bytes": 122688,
+        "sha256": "2ef722ad59537174c0c6495f7f30792a85158842e207bb4993384c740754cb11"
+      }
     }
   },
   "publicRuntimeObservation": {
-    "source": "post_release_verification",
-    "observedAt": "2026-11-26T21:57:57Z",
+    "source": "post_rollback_inspection",
+    "observedAt": "2026-11-27T00:50:49Z",
     "httpStatus": 200,
     "ok": true,
     "runtimeSha": "a5ca426eec2663eb17c2df69fe2bfed46e2b8740",
@@ -374,19 +389,20 @@
       "latestAvailableGiB": 48.61014175415039,
       "latestAvailableGiBRounded3": "48.610"
     },
-    "latestMeasurementAt": "2026-11-26T21:57:47.488168Z",
+    "latestMeasurementAt": "2026-11-27T00:50:41.413052Z",
     "measurementPrecedesChinaCatchup": false,
     "currentFreeSpaceAfterChina": {
-      "source": "post_release_verification",
-      "measuredAtUtc": "2026-11-26T21:57:47.488168Z",
+      "source": "post_rollback_inspection",
+      "measuredAtUtc": "2026-11-27T00:50:41.413052Z",
       "totalBytes": 102916472832,
-      "availableBytes": 51234684928,
-      "freeBytes": 51251462144,
-      "usedBytes": 51665010688,
-      "availableGiB": 47.71601867675781,
-      "usedPercent": 50.20091465079408,
+      "availableBytes": 51191820288,
+      "freeBytes": 51208597504,
+      "usedBytes": 51707875328,
+      "availableGiB": 47.67609786987305,
+      "usedPercent": 50.24256458186972,
       "measurementAlsoFollowsAppAcceptance": true,
-      "measurementPrecedesCleanupOnlyResume": true
+      "measurementFollowsFailedJapanRollback": true,
+      "measurementPrecedesCleanupOnlyResume": false
     },
     "contentBytesAreNotMeasuredDiskDelta": true,
     "hostCleanupAfterChina": {
@@ -413,7 +429,7 @@
     },
     "objectStorageRetentionNote": "Cleanup-only run paused on storage_transport and an outer lease_lost code. Lease release was confirmed; no accepted/intent writes or host file deletion. Object deletion is not confirmed by the zero aggregates under an indeterminate transport result. Two exact retired tasks remain resumable through existing tombstones. No blind retry.",
     "postReleaseInventory": {
-      "source": "post_release_verification",
+      "source": "post_rollback_inspection",
       "status": "observed",
       "mutations": 0,
       "providerRequests": 0,
@@ -427,15 +443,15 @@
         "calculationVersion": "4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90"
       },
       "storageBytes": {
-        "/opt/avtocena/releases": 28227284992,
-        "/var/lib/docker": 33808384,
-        "/var/lib/containerd": 14581895168,
-        "/var/log": 640671744,
+        "/opt/avtocena/releases": 28227444736,
+        "/var/lib/docker": 34332672,
+        "/var/lib/containerd": 14622257152,
+        "/var/log": 642502656,
         "/tmp": 557056
       },
       "containerCount": 4,
       "memoryTotalBytes": 16763207680,
-      "memoryAvailableBytes": 8402243584
+      "memoryAvailableBytes": 8087502848
     },
     "cleanupOnlyResume": {
       "source": "gc_resume_terminal",
@@ -481,14 +497,32 @@
       "errorCode": "lease_lost",
       "finishedAt": "2026-11-26T22:07:25.615Z"
     },
-    "automaticAppImageCleanupDraft": {
-      "status": "draft_under_independent_review",
-      "scope": "One exact terminal app image after accepted successor or proven rollback, under existing lease and both host locks.",
+    "automaticAppImageCleanup": {
+      "status": "published_controller_and_actual_rollback_cleanup_verified",
+      "controller": "6b1c87cba54be732229728542dedcd50fdfc3ab3",
+      "scope": "One exact terminal app image after accepted successor or proven rollback, under the existing lease and both host locks.",
       "ownedControllerFiles": 14,
-      "productionActivated": false,
+      "productionActivated": true,
       "preReservationProcessLossCovered": false,
-      "protectedIneligibleImagesNotDeleted": true
-    }
+      "protectedIneligibleImagesNotDeleted": true,
+      "ciRun": 45914166772,
+      "actualCleanup": {
+        "version": 1,
+        "kind": "china-terminal-app-image-cleanup-v1",
+        "completed": true,
+        "status": "removed",
+        "uncertain": false,
+        "imagesRemoved": 1,
+        "runtimeSha": "889c5150803f7973fc371d1d90491bb38cbabf82",
+        "imageId": "sha256:f220217289e20f819e5825b897e2c22394adc01d612f73b54c9fef9bff1eef66",
+        "witnessSha256": "a1ac36a0b738215a70f2726bf45133e0bf3752a0bd01f5e4fe79a0a355f62b18",
+        "diskFreeBytesBefore": 50002915328,
+        "diskFreeBytesAfter": 51194601472,
+        "measuredFreeBytesChange": 1191686144,
+        "reason": "exact_terminal_image"
+      }
+    },
+    "latestFailedCandidateImageRecoveryIsNotAddedToOldNetCleanup": true
   },
   "publishedControllerFixes": [
     {
@@ -564,8 +598,8 @@
       "22:17"
     ],
     "catchupChecksDoNotForceNewCollectionAfterAcceptedDueWindow": true,
-    "scheduledCatchupEventObserved": false,
-    "scheduledEventObservationAt": "2026-11-26T22:04:38Z",
+    "scheduledCatchupEventObserved": null,
+    "scheduledEventObservationAt": "2026-11-27T00:50:50Z",
     "currentRunInvocation": "manual catch-up marker",
     "statusSource": "china_catchup_terminal_log + china_catchup_artifact_inspection",
     "statusRefreshedForCheckpoint": true,
@@ -809,17 +843,25 @@
       "version": 1
     },
     "scheduleMetadata": {
-      "source": "china_schedule_metadata",
+      "source": "post_rollback_inspection",
       "defaultBranch": "main",
       "directSupplierRequests": 0,
       "githubMutations": 0,
       "kind": "china-schedule-metadata-readonly-v1",
       "listedRunLimit": 20,
-      "matchingScheduleRunTotal": 1,
-      "observedAt": "2026-11-26T22:04:38Z",
+      "matchingScheduleRunTotal": 2,
+      "observedAt": "2026-11-27T00:50:50Z",
       "productionMutations": 0,
       "productionRequests": 0,
       "recentScheduleRuns": [
+        {
+          "conclusion": "success",
+          "created_at": "2026-11-26T22:51:54Z",
+          "head_sha": "374863c80ad26f71a7e570e081e9300078854e4b",
+          "id": 45907437719,
+          "status": "completed",
+          "updated_at": "2026-11-26T22:54:44Z"
+        },
         {
           "conclusion": "success",
           "created_at": "2026-11-25T22:59:01Z",
@@ -845,7 +887,53 @@
       "workflowSourceSha256": "10c568f34e7a7de9d1447d934f2ac86063e1f16895959e96187aaba9d4a0d520",
       "workflowState": "active"
     },
-    "scheduleRepairReliabilityEstablished": false
+    "scheduleRepairReliabilityEstablished": false,
+    "scheduledEventObserved": true,
+    "latestVerifiedScheduledRun": {
+      "run": 45907437719,
+      "job": 140207456693,
+      "event": "schedule",
+      "head": "374863c80ad26f71a7e570e081e9300078854e4b",
+      "createdAt": "2026-11-26T22:51:54Z",
+      "finishedAt": "2026-11-26T22:54:39.851Z",
+      "status": "not_due",
+      "published": false,
+      "sourcePrepared": false,
+      "applicationBuilds": 0,
+      "leaseReleased": true,
+      "acceptedGenerationId": "gen_china_45875678028_1",
+      "sourceObservedAt": "2026-11-26T19:04:39.089Z",
+      "sourceCursor": 13340204,
+      "logBytes": 177334,
+      "logSha256": "c5500593c4e9c9b950a46443b3ff2f181c263bfef5f2fb7f41aef3c2d7b32f2b",
+      "artifact": {
+        "id": 15158462348,
+        "bytes": 611,
+        "sha256": "c73cd3fdba1f66fb7266137fff63b628cf581b709f9e7086682b56f071397a36"
+      },
+      "exactCron": null,
+      "servingRuntime": null,
+      "sourceRequests": null
+    },
+    "postRollbackPublicVerification": {
+      "calculationVersion": "4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90",
+      "crmAnonymousBodyMatched": true,
+      "crmAnonymousStatus": 401,
+      "crmSetCookieAbsent": true,
+      "directSupplierRequests": 0,
+      "generationId": "gen_china_45875678028_1",
+      "kind": "avtocena-public-post-release-check-v1",
+      "observedAt": "2026-11-27T00:50:49Z",
+      "passed": true,
+      "powerTo160Total": 70059,
+      "productionMutations": 0,
+      "readOnly": true,
+      "requests": 4,
+      "runtimeSha": "a5ca426eec2663eb17c2df69fe2bfed46e2b8740",
+      "signedInRequests": 0,
+      "total": 281310,
+      "version": 1
+    }
   },
   "crm": {
     "status": "deployed_and_accepted_with_public_unsigned_boundary_verified",
@@ -1132,26 +1220,95 @@
       "progress#/currentUsabilityCandidate",
       "japan_last_browser_report"
     ],
-    "status": "UNRESOLVED_NOT_FIXED_ON_SITE",
+    "status": "UNRESOLVED_LIVE_REFILL_RELEASE_ROLLED_BACK",
     "publicRuntimeSha": "a5ca426eec2663eb17c2df69fe2bfed46e2b8740",
     "candidateRuntimeSha": "889c5150803f7973fc371d1d90491bb38cbabf82",
     "candidateCurrentlyDeployed": false,
-    "lastFailedRelease": 45861459029,
-    "lastFailedReleaseUrl": "https://github.com/jeep-jim/AvtoCena/actions/runs/45861459029",
+    "lastFailedRelease": 45914646851,
+    "lastFailedReleaseUrl": "https://github.com/jeep-jim/AvtoCena/actions/runs/45914646851",
     "lastReleaseStatus": "rolled_back",
-    "lastReleaseFinishedAt": "2026-11-27T00:07:38.005000+07:00",
+    "lastReleaseFinishedAt": "2026-11-27T00:32:02.861Z",
     "sourceFailure": {
-      "httpStatus": 500,
-      "responseEvidence": {
-        "version": 1,
-        "mime": "html",
-        "encoding": "missing",
-        "bodyClass": "empty",
-        "bytesRead": 0,
-        "truncated": false,
-        "readStatus": "complete"
+      "rootCauseEstablished": false,
+      "sameRequestSupplierFailureEstablished": false,
+      "browserErrorCode": "japan_browser_unavailable_or_stale",
+      "browserStage": "plain_first",
+      "response": {
+        "stage": "plain_first",
+        "status": 200,
+        "ok": true,
+        "stale": true,
+        "partial": false,
+        "interrupted": false,
+        "scanLimited": false,
+        "hasMore": true,
+        "shown": 24,
+        "received": 24,
+        "total": null,
+        "observedAt": "2026-11-26T10:43:51.525Z",
+        "requestedAt": "2026-11-27T00:31:19.746Z",
+        "receivedAt": "2026-11-27T00:31:25.915Z",
+        "durationMs": 6169,
+        "responseHeaders": {
+          "cacheControl": "private, max-age=15, stale-while-revalidate=30",
+          "omitted": []
+        },
+        "sourceReadEvidence": {
+          "status": "missing",
+          "sourceReadReceipts": [],
+          "receiptDetailsOmitted": 0,
+          "runtimeMatchesExpected": null,
+          "sourceReadReceiptsLimited": true,
+          "omittedReceipts": null,
+          "omissions": [
+            "catalog_receipt_missing"
+          ]
+        }
       },
-      "rootCauseEstablished": false
+      "savedSharedRecords": [
+        {
+          "slot": "stats-list-1",
+          "readStatus": "ok",
+          "startedAt": "2026-11-27T00:32:00.737Z",
+          "finishedAt": "2026-11-27T00:32:01.001Z",
+          "kind": "list",
+          "outcome": "empty_response",
+          "page": 1,
+          "pageSize": 24,
+          "httpStatus": 200,
+          "sqlSha256": "0f361610bb7136f670b0854a7c2e4644dad205f5f7c13874bc06cbf8cd4acc4b",
+          "sqlBytes": 5476,
+          "providerKind": null
+        },
+        {
+          "slot": "stats-count",
+          "readStatus": "ok",
+          "startedAt": "2026-11-27T00:25:23.714Z",
+          "finishedAt": "2026-11-27T00:25:23.882Z",
+          "kind": "count",
+          "outcome": "invalid_response",
+          "page": 1,
+          "pageSize": 1,
+          "httpStatus": 200,
+          "sqlSha256": "11d57cd22189222f88803d81715c92000b5285918d983a0d9463e82ca10cebe4",
+          "sqlBytes": 5437,
+          "providerKind": null
+        },
+        {
+          "slot": "stats-latest",
+          "readStatus": "ok",
+          "startedAt": "2026-11-27T00:32:00.737Z",
+          "finishedAt": "2026-11-27T00:32:01.001Z",
+          "kind": "list",
+          "outcome": "empty_response",
+          "page": 1,
+          "pageSize": 24,
+          "httpStatus": 200,
+          "sqlSha256": "0f361610bb7136f670b0854a7c2e4644dad205f5f7c13874bc06cbf8cd4acc4b",
+          "sqlBytes": 5476,
+          "providerKind": null
+        }
+      ]
     },
     "publicPowerPage": {
       "observedAt": "2026-11-27T00:54:13.860085+07:00",
@@ -1387,7 +1544,7 @@
       "durationMs": 18830
     },
     "pageFillFollowup": {
-      "status": "source_and_full_ci_verified_not_activated",
+      "status": "source_and_full_ci_verified_live_rolled_back_stale",
       "proofFile": "2026-11-27-japan-pagination24-proof.json",
       "runtimeSha": "889c5150803f7973fc371d1d90491bb38cbabf82",
       "runtimeTree": "c9d6371dab51839ace654703509d1272656adf93",
@@ -1397,7 +1554,30 @@
       "fullCiRun": 45912192193,
       "requiresFreshOrdinaryUiVerification": true,
       "globalCountClaimed": false,
-      "globalOrderingClaimed": false
+      "globalOrderingClaimed": false,
+      "latestFullCiRun": 45914166772,
+      "lastReleaseRun": 45914646851,
+      "postRollbackVerificationRun": 45919061523,
+      "failureProofFile": "2026-11-27-japan-pagination24-rollback.json"
+    },
+    "historicalB25Failure": {
+      "run": 45861459029,
+      "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/45861459029",
+      "status": "rolled_back",
+      "finishedAt": "2026-11-27T00:07:38.005000+07:00",
+      "sourceFailure": {
+        "httpStatus": 500,
+        "responseEvidence": {
+          "version": 1,
+          "mime": "html",
+          "encoding": "missing",
+          "bodyClass": "empty",
+          "bytesRead": 0,
+          "truncated": false,
+          "readStatus": "complete"
+        },
+        "rootCauseEstablished": false
+      }
     }
   },
   "ajDocumentAccess": {
@@ -1415,13 +1595,14 @@
   },
   "clockSource": {
     "tool": "clock.curr_time",
-    "value": "2026-11-26 22:08:42 UTC"
+    "value": "2026-11-27T00:56:47Z"
   },
   "nextSteps": [
-    "Finish independent review and mandatory tests for the exact terminal app-image cleanup controller; keep all previous source, rollback and release gates.",
-    "Activate the exact tested Japan pagination24 runtime through the existing marker-only release and fresh ordinary UI/API acceptance; report failure/rollback honestly if it cannot pass.",
-    "Read immutable terminal release evidence, measure real server disk and verify public retained China without another supplier diagnostic.",
-    "Japan global power count/order remain unresolved. China cron is enabled but a new scheduled occurrence remains unverified; REG GC remains paused without a blind retry."
+    "Keep a5ca and China C accepted; preserve the current and rollback versions. Terminal image cleanup has passed offline checks and a real rollback.",
+    "Do not repeat Japan runtime889 publication blindly or relax freshness. The failed response was stale; no same-request supplier cause is established.",
+    "Obtain authorized AJ schema/capabilities and request-bound source evidence for exact global count and reliable live acceptance. The earlier automatically rejected documentation GET has not been retried.",
+    "Global Japan power count and global known-before-unknown order remain open; China has a confirmed automatic not_due check but exact primary timing reliability remains unproved.",
+    "REG GC stays paused; do not reset lease/TTL or retry an uncertain deletion without reconciliation."
   ],
   "environment": {
     "localExecutorAvailable": false,

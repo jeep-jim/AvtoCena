@@ -1,8 +1,8 @@
 {
   "version": 1,
   "kind": "japan-pagination24-followup-v1",
-  "checkpointAt": "2026-11-27T06:52:52.000+07:00",
-  "status": "code_and_fixtures_verified_not_published",
+  "checkpointAt": "2026-11-27T07:56:47.000+07:00",
+  "status": "live_release_rolled_back_stale_response",
   "productionRuntime": "a5ca426eec2663eb17c2df69fe2bfed46e2b8740",
   "runtime": {
     "sha": "889c5150803f7973fc371d1d90491bb38cbabf82",
@@ -128,24 +128,105 @@
         "sha256": "3bc9c3df5834ad0480185a5a3d9d79f64897215d2b572cb22d7149e319ecb539"
       }
     },
-    "fullCIUrl": "https://github.com/jeep-jim/AvtoCena/actions/runs/45912192193"
+    "fullCIUrl": "https://github.com/jeep-jim/AvtoCena/actions/runs/45912192193",
+    "latestFullCI": {
+      "run": 45914166772,
+      "job": 140229292644,
+      "head": "6b1c87cba54be732229728542dedcd50fdfc3ab3",
+      "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/45914166772",
+      "conclusion": "success",
+      "controller": {
+        "tests": 1301,
+        "passed": 1301,
+        "failed": 0,
+        "cancelled": 0,
+        "skipped": 0
+      },
+      "native": {
+        "tests": 448,
+        "passed": 448,
+        "failed": 0,
+        "cancelled": 0,
+        "skipped": 0
+      },
+      "hostImageCases": 23,
+      "types": {
+        "web": 0,
+        "engine": 0
+      },
+      "browser": {
+        "city": 4,
+        "crm": 2,
+        "photo": 12,
+        "pagination": 8
+      },
+      "runtime": "889c5150803f7973fc371d1d90491bb38cbabf82",
+      "runtimeTree": "c9d6371dab51839ace654703509d1272656adf93",
+      "log": {
+        "bytes": 271084,
+        "sha256": "3c235d866f5d621cd4e8acd8dc3630d4909bffe9768f45f96080b867c57235e5",
+        "retrievedOnceBy": "japan_filter_diagnosis"
+      },
+      "rootVerifiedRequiredJobSteps": true,
+      "allRequiredStepsPassed": true,
+      "skippedNotApplicableSteps": [
+        14,
+        16
+      ],
+      "productionMarkerInCI": false
+    }
   },
   "publication": {
-    "activated": false,
-    "required": "Fresh ordinary Japan UI/API acceptance plus unchanged China, CRM, photo, source and rollback gates."
+    "activated": true,
+    "accepted": false,
+    "conclusion": "failure",
+    "run": 45914646851,
+    "job": 140230849641,
+    "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/45914646851",
+    "head": "dbc3b715c235e413426b7d7cb600b22fba76b4ee",
+    "controller": "6b1c87cba54be732229728542dedcd50fdfc3ab3",
+    "status": "rolled_back",
+    "finishedAt": "2026-11-27T00:32:02.861Z",
+    "published": false,
+    "retainedRuntime": "a5ca426eec2663eb17c2df69fe2bfed46e2b8740",
+    "leaseReleased": true,
+    "errorCode": "china_daily_release_japan_browser_failed",
+    "japanStage": "plain_first",
+    "japanErrorCode": "japan_browser_unavailable_or_stale",
+    "failureProofFile": "2026-11-27-japan-pagination24-rollback.json",
+    "postRollbackPublicVerificationRun": 45919061523
   },
   "diskFollowup": {
-    "status": "draft_under_independent_review",
-    "scope": "One exact terminal app image after accepted successor or proven rollback, under existing lease and both host locks.",
+    "status": "published_controller_and_actual_rollback_cleanup_verified",
+    "controller": "6b1c87cba54be732229728542dedcd50fdfc3ab3",
+    "scope": "One exact terminal app image after accepted successor or proven rollback, under the existing lease and both host locks.",
     "ownedControllerFiles": 14,
-    "productionActivated": false,
+    "productionActivated": true,
     "preReservationProcessLossCovered": false,
-    "protectedIneligibleImagesNotDeleted": true
+    "protectedIneligibleImagesNotDeleted": true,
+    "ciRun": 45914166772,
+    "actualCleanup": {
+      "version": 1,
+      "kind": "china-terminal-app-image-cleanup-v1",
+      "completed": true,
+      "status": "removed",
+      "uncertain": false,
+      "imagesRemoved": 1,
+      "runtimeSha": "889c5150803f7973fc371d1d90491bb38cbabf82",
+      "imageId": "sha256:f220217289e20f819e5825b897e2c22394adc01d612f73b54c9fef9bff1eef66",
+      "witnessSha256": "a1ac36a0b738215a70f2726bf45133e0bf3752a0bd01f5e4fe79a0a355f62b18",
+      "diskFreeBytesBefore": 50002915328,
+      "diskFreeBytesAfter": 51194601472,
+      "measuredFreeBytesChange": 1191686144,
+      "reason": "exact_terminal_image"
+    }
   },
   "limitations": [
-    "No exact global Japan power count or global known-then-unknown order claim.",
-    "No AJ full mirror, direct diagnostic retry, supplier page-size increase or provider IP substitution.",
-    "Prepared source and browser fixtures do not establish deployed behavior.",
-    "Current prod disk and photo evidence remain the separately dated a5ca postrelease measurement."
+    "No exact global Japan power count or global known-then-unknown order is implemented.",
+    "No AJ full mirror, direct diagnostic retry, supplier page-size increase or provider IP substitution was performed.",
+    "The source and fixture checks passed, but live release failed before power/UI/pagination/calculation checks. Candidate 889 is not the current serving runtime.",
+    "Unfiltered plain_first had 24 rows but stale=true; this is not proof of the user's power-filter page or continuation.",
+    "Saved supplier errors are not correlated to the failed API request and do not establish its root cause.",
+    "Postrollback disk/runtime/China/anonymous CRM were checked at 2026-11-27T00:50UTC. The last ordinary Japan photo check remains separately dated 2026-11-26T21:58UTC."
   ]
 }
