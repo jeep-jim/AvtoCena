@@ -5,7 +5,7 @@ import path from 'node:path';
 import os from 'node:os';
 import {createHash,randomUUID} from 'node:crypto';
 import {japanReleaseBinding,verifyJapanPage,verifyJapanWarmPage,verifyJapanPowerPage,japanVerificationRequestScope,installReadFence,japanResponseObservation,
- japanResponseHeaders,japanSourceReadEvidence,recordJapanResponse,runJapanBrowserAcceptance,
+ japanResponseHeaders,japanSourceReadEvidence,recordJapanResponse,runJapanBrowserAcceptance,japanNavigationErrorCode,
  japanCalculationReadGrant,checkedJapanCalculationRead,verifyJapanDeliveredCalculation,japanPetrolPowerUrl,verifyJapanFullPage,verifyJapanKnownPowerOrder,verifyJapanVisibleVehiclePolicy,verifyJapanBrandDirectory,japanPetrolPowerPageApi}
  from '../scripts/catalog-next/japan-browser-acceptance.mjs';
 import {JAPAN_LEGACY_MAZDA_THREE_PAGES} from '../scripts/catalog-next/japan-stability-browser.mjs';
@@ -425,10 +425,11 @@ test('a permitted supplier image cannot redirect into any API, foreign origin or
 });
 
 async function legacyRedirectFence(options={}){
- let handler,stage=options.stage??true;
- const calls={navigate:[],fetch:[],fulfill:0,aborts:[],dispose:0};
+ let handler,stage=options.stage??true,destinationUrl=options.destinationUrl??'about:blank';
+ const calls={navigate:[],fetch:[],fulfill:0,aborts:[],dispose:0,probeClosed:0};
  const report={codeScope:options.codeScope??'catalog-japan-stability-v1'};
- const context={route:async(_pattern,callback)=>{handler=callback;}},frame={};
+ const frame={},probeFrame={};let probeAborted=false;
+ const context={route:async(_pattern,callback)=>{handler=callback;},newPage:async()=>probe};
  const dispatch=async(url,first)=>{
   const response={status:()=>first?(options.status??308):(options.nextStatus??200),
    headers:()=>({location:first?('location' in options?options.location:JAPAN_LEGACY_MAZDA_THREE_PAGES.canonical)
@@ -437,19 +438,29 @@ async function legacyRedirectFence(options={}){
   await handler({request:()=>({url:()=>first?(options.source??url):url,
     method:()=>first?(options.method??'GET'):'GET',resourceType:()=>first?(options.resourceType??'document'):'document',
     isNavigationRequest:()=>options.navigation??true,redirectedFrom:()=>options.redirectedFrom??null,
-    frame:()=>options.wrongFrame?{}:frame}),
+    frame:()=>options.wrongFrame?{}:first?probeFrame:frame}),
    fetch:async settings=>{calls.fetch.push({url,settings});return response;},
    fulfill:async input=>{assert.equal(input.response,response);calls.fulfill++;fulfilled=response;},
-   abort:async code=>{calls.aborts.push(code);aborted=code;}});
+   abort:async code=>{calls.aborts.push(code);aborted=code;if(first)probeAborted=true;}});
   if(first&&options.changeStage)stage=false;
   if(options.gotoError)throw Error(options.gotoError);
+  if(!first&&options.canonicalError)throw Error(options.canonicalError);
   if(aborted)throw Error('page.goto: net::ERR_BLOCKED_BY_CLIENT');
   return fulfilled;
  };
- const page={context:()=>options.wrongContext?{}:context,mainFrame:()=>frame,
-  goto:async(url,settings)=>{calls.navigate.push({url,settings});return dispatch(url,calls.navigate.length===1);}};
+ const probe={context:()=>context,mainFrame:()=>probeFrame,
+  goto:async(url,settings)=>{
+   if(probeAborted)throw Error('page.goto: Navigation is interrupted by another navigation to chrome-error://chromewebdata/');
+   calls.navigate.push({url,settings});return dispatch(url,true);
+  },close:async()=>{calls.probeClosed++;if(options.closeError)throw Error('probe close failed');}};
+ const page={context:()=>options.wrongContext?{}:context,mainFrame:()=>frame,url:()=>destinationUrl,
+  goto:async(url,settings)=>{
+   assert.equal(calls.probeClosed,1,'aborted probe is closed before the untouched destination navigates');
+   calls.navigate.push({url,settings});destinationUrl=url;return dispatch(url,false);
+  }};
  const fence=await installReadFence(context,report,{isLegacyMazdaThreeStage:()=>stage});
- return {run:()=>fence.navigateLegacyMazdaThree(page),ungranted:()=>dispatch(JAPAN_LEGACY_MAZDA_THREE_PAGES.literal,true),calls,report};
+ return {run:()=>fence.navigateLegacyMazdaThree(page),ungranted:()=>dispatch(JAPAN_LEGACY_MAZDA_THREE_PAGES.literal,true),
+  probe, calls,report};
 }
 
 test('only the exact granted legacy document 308 is followed once through two separately fenced GETs',async()=>{
@@ -465,6 +476,10 @@ test('only the exact granted legacy document 308 is followed once through two se
   assert.equal(fixture.calls.fulfill,1);assert.equal(fixture.calls.dispose,2);
   assert.deepEqual(fixture.calls.aborts,['blockedbyclient']);
   assert.deepEqual(fixture.report.blockedRequests,{mutation:0,external:0,private:0,redirect:0});
+  assert.equal(fixture.calls.probeClosed,1);
+  assert.equal(fixture.report.checks.legacyNavigation.probeClosed,true);
+  assert.equal(fixture.report.checks.legacyNavigation.canonicalStatus,200);
+  assert.equal(fixture.report.checks.legacyNavigation.canonicalUrlExact,true);
   await assert.rejects(fixture.run(),/legacy_redirect_context/);
   assert.equal(fixture.calls.navigate.length,2);
   await assert.rejects(fixture.ungranted(),/ERR_BLOCKED_BY_CLIENT/);
@@ -475,7 +490,7 @@ test('only the exact granted legacy document 308 is followed once through two se
 test('legacy redirect grants reject other scopes, stages, frames, methods and request types',async()=>{
  for(const options of [
   {codeScope:'catalog-japan-pagination24-v1'},{codeScope:'catalog-japan-usability-v1'},
-  {stage:false},{wrongContext:true},{changeStage:true},
+  {stage:false},{wrongContext:true},{changeStage:true},{destinationUrl:JAPAN_LEGACY_MAZDA_THREE_PAGES.canonical},
   {wrongFrame:true},{navigation:false},{redirectedFrom:{}},
   ...['HEAD','POST','PUT','DELETE'].map(method=>({method})),
   ...['fetch','xhr','image','script'].map(resourceType=>({resourceType})),
@@ -540,6 +555,38 @@ test('a canonical second hop never redirects again and unrelated navigation erro
   await assert.rejects(fixture.run());
   assert.equal(fixture.calls.navigate.length,1);
  }
+});
+
+test('an intentionally aborted probe cannot interrupt the untouched canonical page, and close failure cannot advance',async()=>{
+ const f=await legacyRedirectFence();await f.run();
+ // This synthetic browser models the delayed error-page navigation that makes
+ // a second goto on the already-aborted page unsafe. The destination succeeds.
+ await assert.rejects(f.probe.goto(JAPAN_LEGACY_MAZDA_THREE_PAGES.canonical,{}),/interrupted by another navigation/);
+ assert.equal(f.calls.navigate.length,2);assert.equal(f.report.checks.legacyNavigation.phase,'complete');
+ const failedClose=await legacyRedirectFence({closeError:true});
+ await assert.rejects(failedClose.run(),/probe close failed/);
+ assert.equal(failedClose.calls.navigate.length,1);assert.equal(failedClose.calls.fetch.length,1);
+ assert.equal(failedClose.report.checks?.legacyCanonicalRedirect,undefined);
+});
+
+test('failed canonical goto keeps its bound HTTP status and only allowlisted navigation diagnostics',async()=>{
+ const f=await legacyRedirectFence({canonicalError:'page.goto: net::ERR_ABORTED at https://private.example/?secret=PRIVATE'});
+ await assert.rejects(f.run(),/ERR_ABORTED/);
+ const observed=f.report.checks.legacyNavigation;
+ assert.equal(observed.phase,'canonical_navigation');assert.equal(observed.probeClosed,true);
+ assert.equal(observed.canonicalStatus,200);assert.equal(observed.canonicalRedirectBlocked,false);
+ assert.equal(observed.failureCode,'ERR_ABORTED');
+ assert(!/private|secret|PRIVATE|https?:/.test(JSON.stringify(observed)));
+ const redirect=await legacyRedirectFence({nextStatus:307});await assert.rejects(redirect.run());
+ assert.equal(redirect.report.checks.legacyNavigation.canonicalStatus,307);
+ assert.equal(redirect.report.checks.legacyNavigation.canonicalRedirectBlocked,true);
+ for(const [error,expected] of [[{name:'TimeoutError'},'timeout'],
+  [Error('page.goto: net::ERR_HTTP2_PROTOCOL_ERROR at PRIVATE'),'ERR_HTTP2_PROTOCOL_ERROR'],
+  [Error('Navigation to PRIVATE is interrupted by another navigation to SECRET'),'navigation_interrupted'],
+  [Error('Target page, context or browser has been closed'),'target_closed'],
+  [Error('net::ERR_PRIVATE_SECRET at PRIVATE'),'unknown'],[Error('PRIVATE BODY'),'unknown']])
+  assert.equal(japanNavigationErrorCode(error),expected);
+ assert.equal(japanNavigationErrorCode({get message(){throw Error('PRIVATE')}}),'unknown');
 });
 
 const calculationRow=()=>({...copy(supplier),japanSupplierPower:{...copy(supplier.japanSupplierPower),combustionPreviewEligible:true},

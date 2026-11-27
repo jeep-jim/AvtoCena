@@ -668,8 +668,24 @@ export function verifyJapanDeliveredCalculation(value,status,grant){
   deliveryRub:value.deliveryQuote.amountRub,customsReady:true,requiresConfirmation:true};
 }
 
+/** Never publish Playwright exception text, which can contain private URLs. */
+export function japanNavigationErrorCode(error){
+ try{
+  if(error?.name==='TimeoutError')return 'timeout';
+  const message=typeof error?.message==='string'?error.message:'';
+  const allowed=new Set(['ERR_ABORTED','ERR_FAILED','ERR_BLOCKED_BY_CLIENT','ERR_CONNECTION_RESET',
+   'ERR_CONNECTION_CLOSED','ERR_CONNECTION_REFUSED','ERR_EMPTY_RESPONSE','ERR_INCOMPLETE_CHUNKED_ENCODING',
+   'ERR_HTTP2_PROTOCOL_ERROR','ERR_TIMED_OUT','ERR_NAME_NOT_RESOLVED','ERR_CERT_AUTHORITY_INVALID']);
+  const code=/\bnet::(ERR_[A-Z0-9_]+)\b/.exec(message)?.[1];
+  if(allowed.has(code))return code;
+  if(message.includes('is interrupted by another navigation'))return 'navigation_interrupted';
+  if(message.includes('Target page, context or browser has been closed'))return 'target_closed';
+ }catch{}
+ return 'unknown';
+}
+
 export async function installReadFence(context,report,{getCalculationGrant,isLegacyMazdaThreeStage}={}){
- let legacyNavigation=null,legacyNavigationUsed=false;
+ let legacyNavigation=null,legacyNavigationUsed=false,legacyObservation=null,legacyDestinationFrame=null;
  const legacyStage=()=>report.codeScope===JAPAN_STABILITY_CODE_SCOPE&&isLegacyMazdaThreeStage?.()===true;
  const grantedLegacyRedirect=(request,response)=>{
   if(!legacyNavigation||legacyNavigation.abort||!legacyStage()||response.status()!==308
@@ -706,6 +722,12 @@ export async function installReadFence(context,report,{getCalculationGrant,isLeg
     report.japanPreviewCalculationRequests++;
    }
    response=await route.fetch({maxRedirects:0,timeout:90_000});
+   if(legacyObservation&&request.url()===JAPAN_LEGACY_MAZDA_THREE_PAGES.canonical
+    &&request.resourceType()==='document'&&request.isNavigationRequest()===true&&request.frame()===legacyDestinationFrame){
+    const status=response.status();
+    legacyObservation.canonicalStatus=Number.isInteger(status)&&status>=100&&status<=599?status:null;
+    legacyObservation.canonicalRedirectBlocked=status>=300&&status<400&&status!==304;
+   }
    if(response.status()>=300&&response.status()<400&&response.status()!==304){
     if(scope==='allowed'&&grantedLegacyRedirect(request,response)){
      // Playwright need not re-route a redirected request. Stop the verified
@@ -720,29 +742,61 @@ export async function installReadFence(context,report,{getCalculationGrant,isLeg
     }
     await route.fulfill({response});
    }
-  }catch{await route.abort('failed').catch(()=>{});}
+  }catch(error){
+   if(legacyObservation&&request.resourceType()==='document'
+    &&Object.values(JAPAN_LEGACY_MAZDA_THREE_PAGES).includes(request.url()))
+    legacyObservation.fenceFailureCode=japanNavigationErrorCode(error);
+   await route.abort('failed').catch(()=>{});
+  }
   finally{if(response)await response.dispose().catch(()=>{});}
  });
  report.readOnlyBrowserFence=true;
  return {navigateLegacyMazdaThree:async page=>{
-  need(legacyStage()&&!legacyNavigationUsed&&page.context()===context,'legacy_redirect_context');
+  need(legacyStage()&&!legacyNavigationUsed&&page.context()===context&&page.url()==='about:blank','legacy_redirect_context');
   legacyNavigationUsed=true;
-  const active={page,frame:page.mainFrame(),abort:null};legacyNavigation=active;
-  let failed;
-  try{await page.goto(JAPAN_LEGACY_MAZDA_THREE_PAGES.literal,{waitUntil:'domcontentloaded',timeout:90_000});}
-  catch(error){failed=error;}
-  finally{legacyNavigation=null;}
-  if(!active.abort||!failed||!/\bnet::ERR_BLOCKED_BY_CLIENT\b/.test(failed.message||'')){
-   if(failed)throw failed;
-   need(false,'legacy_redirect_missing');
+  const observation={phase:'probe_navigation',probeClosed:false,canonicalStatus:null,
+   canonicalUrlExact:null,canonicalMainFrameCommitted:false};
+  (report.checks??={}).legacyNavigation=observation;legacyObservation=observation;
+  const destinationFrame=page.mainFrame();legacyDestinationFrame=destinationFrame;let probe;
+  const committed=frame=>{
+   if(frame===destinationFrame){
+    const url=frame.url(),exact=url===JAPAN_LEGACY_MAZDA_THREE_PAGES.canonical;
+    observation.canonicalMainFrameCommitted ||= exact;
+    observation.lastMainFrame=exact?'canonical':url==='about:blank'?'blank'
+     :url.startsWith('chrome-error:')?'browser_error':'other';
+   }
+  };
+  page.on?.('framenavigated',committed);
+  try{
+   probe=await context.newPage();
+   need(probe!==page&&probe.context()===context,'legacy_redirect_context');
+   const active={page:probe,frame:probe.mainFrame(),abort:null};legacyNavigation=active;
+   let failed;
+   try{await probe.goto(JAPAN_LEGACY_MAZDA_THREE_PAGES.literal,{waitUntil:'domcontentloaded',timeout:90_000});}
+   catch(error){failed=error;}
+   finally{legacyNavigation=null;}
+   if(!active.abort||!failed||!/\bnet::ERR_BLOCKED_BY_CLIENT\b/.test(failed.message||'')){
+    if(failed)throw failed;
+    need(false,'legacy_redirect_missing');
+   }
+   await active.abort;
+   observation.phase='probe_close';await probe.close();observation.probeClosed=true;probe=null;
+   need(legacyStage()&&page.context()===context&&page.mainFrame()===destinationFrame&&page.url()==='about:blank',
+    'legacy_redirect_context');
+   const redirectProof={status:308,redirects:1,sameOrigin:true,exactTarget:true,mainFrame:true};
+   report.checks.legacyCanonicalRedirect=redirectProof;
+   // A failed navigation may still commit Chromium's error page. Closing its
+   // separate page is the barrier; the destination has never been aborted.
+   observation.phase='canonical_navigation';
+   const response=await page.goto(JAPAN_LEGACY_MAZDA_THREE_PAGES.canonical,{waitUntil:'domcontentloaded',timeout:90_000});
+   const status=response?.status();observation.canonicalStatus=Number.isInteger(status)&&status>=100&&status<=599?status:null;
+   observation.canonicalUrlExact=page.url()===JAPAN_LEGACY_MAZDA_THREE_PAGES.canonical;
+   observation.phase='complete';return {response,redirectProof};
+  }catch(error){observation.failureCode=japanNavigationErrorCode(error);throw error;}
+  finally{
+   legacyNavigation=null;legacyObservation=null;legacyDestinationFrame=null;page.off?.('framenavigated',committed);
+   if(probe)await probe.close().catch(()=>{});
   }
-  await active.abort;
-  need(legacyStage()&&page.context()===context&&page.mainFrame()===active.frame,'legacy_redirect_context');
-  const redirectProof={status:308,redirects:1,sameOrigin:true,exactTarget:true,mainFrame:true};
-  (report.checks??={}).legacyCanonicalRedirect=redirectProof;
-  // No grant is active here. Any second 3xx is blocked, including a loop.
-  const response=await page.goto(JAPAN_LEGACY_MAZDA_THREE_PAGES.canonical,{waitUntil:'domcontentloaded',timeout:90_000});
-  return {response,redirectProof};
  }};
 }
 
@@ -1205,7 +1259,9 @@ export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,out
    ...(stability?JAPAN_STABILITY_GATES:[]),...(requirePowerOrder?['japanPowerOrderPassed']:[]),
    ...(requireBrandDirectory?['japanBrandDirectoryPassed']:[])].every(key=>report[key]===true);
  }catch(error){
-  report.error={stage,code:/^japan_browser_[a-z_]+$/.test(error?.message||'')?error.message:'japan_browser_check_failed',timeout:error?.name==='TimeoutError'};
+  const navigationCode=japanNavigationErrorCode(error);
+  report.error={stage,code:/^japan_browser_[a-z_]+$/.test(error?.message||'')?error.message:'japan_browser_check_failed',
+   timeout:error?.name==='TimeoutError',...(navigationCode==='unknown'?{}:{navigationCode})};
   if(currentPage&&/^[a-f0-9]{32}$/.test(nonce||''))await capture(currentPage,'failure').catch(()=>{});
  }finally{
   if(context)await context.close().catch(()=>{});if(browser)await browser.close().catch(()=>{});

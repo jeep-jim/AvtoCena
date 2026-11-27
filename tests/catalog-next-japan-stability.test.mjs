@@ -243,8 +243,8 @@ const legacyPage = () => ({ok: true, stale: false, partial: false, observedAt: n
 function legacyJourney({payload = legacyPage(), status = 200, pageStatus = 200, source = directory(),
   uiIds = payload.items.map(row => row.id), javascriptError = false, finalUrl} = {}) {
   const calls = {navigate: [], read: [], stages: [], pages: [], captures: [], viewports: [], fetch: [], aborts: [], closed: 0, created: 0};
-  let url, onError, handler, stage;
-  const frame = {}, report = {codeScope: JAPAN_STABILITY_CODE_SCOPE};
+  let url='about:blank', onError, onNavigation, handler, stage;
+  const frame = {url: () => url}, probeFrame = {}, report = {codeScope: JAPAN_STABILITY_CODE_SCOPE};
   const cards = {
     nth: index => ({waitFor: async () => assert(index >= 0)}),
     count: async () => uiIds.length,
@@ -256,31 +256,38 @@ function legacyJourney({payload = legacyPage(), status = 200, pageStatus = 200, 
     assert.equal(text, 'Не удалось загрузить эту страницу'); assert.deepEqual(options, {exact: true});
     return {count: async () => 0};
   }};
-  const view = {
-    on: (event, callback) => { assert.equal(event, 'pageerror'); onError = callback; },
-    setViewportSize: async value => { calls.viewports.push(value); },
-    goto: async (value, options) => {
-      calls.navigate.push({value, options}); url = value;
-      const first = calls.navigate.length === 1;
+  const navigate = async (value, options, first) => {
+      calls.navigate.push({value, options});
+      if (!first) { assert.equal(calls.closed, 1); url = value; }
       const response = {status: () => first ? 308 : pageStatus,
         headers: () => first ? {location: JAPAN_LEGACY_MAZDA_THREE_PAGES.canonical} : {}, dispose: async () => {}};
       let aborted, fulfilled;
       await handler({request: () => ({url: () => value, method: () => 'GET', resourceType: () => 'document',
-        isNavigationRequest: () => true, redirectedFrom: () => null, frame: () => frame}),
+        isNavigationRequest: () => true, redirectedFrom: () => null, frame: () => first ? probeFrame : frame}),
         fetch: async settings => { calls.fetch.push({value, settings}); return response; },
         abort: async code => { aborted = code; calls.aborts.push(code); },
         fulfill: async input => { assert.equal(input.response, response); fulfilled = response; }});
       if (aborted) throw Error('page.goto: net::ERR_BLOCKED_BY_CLIENT');
-      if (javascriptError) onError();
-      if (finalUrl) url = finalUrl;
+      if (!first && javascriptError) onError();
+      if (!first && finalUrl) url = finalUrl;
+      if (!first) onNavigation?.(frame);
       return fulfilled;
-    },
+  };
+  const view = {
+    on: (event, callback) => { if (event === 'pageerror') onError = callback;
+      else { assert.equal(event, 'framenavigated'); onNavigation = callback; } },
+    off: (event, callback) => { assert.equal(event, 'framenavigated'); assert.equal(onNavigation, callback); onNavigation = undefined; },
+    setViewportSize: async value => { calls.viewports.push(value); },
+    goto: (value, options) => navigate(value, options, false),
     url: () => url,
     context: () => context, mainFrame: () => frame,
     locator: selector => selector === 'main.ac-ajes-catalog' ? root : {selector},
     close: async () => { calls.closed++; },
   };
-  const context = {newPage: async () => { calls.created++; return view; }, route: async (_, callback) => { handler = callback; }};
+  const probe = {context: () => context, mainFrame: () => probeFrame,
+    goto: (value, options) => navigate(value, options, true), close: async () => { calls.closed++; }};
+  const context = {newPage: async () => { calls.created++; return calls.created === 1 ? view : probe; },
+    route: async (_, callback) => { handler = callback; }};
   const run = async () => {
     const fence = await installReadFence(context, report, {isLegacyMazdaThreeStage: () => stage === 'stability_legacy_mazda_three'});
     return runJapanLegacyMazdaThreeBrowser({
@@ -306,7 +313,7 @@ test('the legacy journey navigates the literal bookmark and performs exactly one
   assert.deepEqual(calls.stages, ['stability_legacy_mazda_three']);
   assert.deepEqual(calls.captures, ['japan-legacy-mazda-three-desktop']);
   assert.deepEqual(calls.viewports, [{width: 1440, height: 1000}]);
-  assert.deepEqual(calls.pages, [view, null]); assert.equal(calls.created, 1); assert.equal(calls.closed, 1);
+  assert.deepEqual(calls.pages, [view, null]); assert.equal(calls.created, 2); assert.equal(calls.closed, 2);
   assert.deepEqual(result.page, legacyPage());
   assert.equal(result.proof.shown, 24); assert.equal(result.proof.stale, false);
   assert.equal(result.proof.literalBookmarkChecked, true); assert.equal(result.proof.uiMatchesApi, true);
@@ -331,7 +338,7 @@ test('the literal journey keeps fresh/fullness/status and UI identity gates and 
   for (const [options, error] of cases) {
     const {run, calls} = legacyJourney(options); await assert.rejects(run(), error);
     assert.equal(calls.navigate.length, 2); assert.deepEqual(calls.read, [japanStabilitySearchApi('model', '3')]);
-    assert.equal(calls.captures.length, 0); assert.equal(calls.closed, 0);
+    assert.equal(calls.captures.length, 0); assert.equal(calls.closed, 1);
   }
   const rejectedHttp = legacyJourney({pageStatus: 503});
   await assert.rejects(rejectedHttp.run(), /legacy_mazda_three_page_http/);

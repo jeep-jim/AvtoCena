@@ -42,6 +42,7 @@ on:
       - tests/catalog-next-serving-compatibility.test.mjs
       - tests/release-speed-guard-contract.test.mjs
       - tests/browser/photo-japan-recovery-clock.mjs
+      - tests/browser/japan-legacy-redirect.mjs
 permissions:
   contents: read
 concurrency:
@@ -89,6 +90,9 @@ jobs:
           const chrome=execFileSync('which',['google-chrome'],{encoding:'utf8'}).trim();
           fs.appendFileSync(process.env.GITHUB_ENV,'CHROME_BIN='+fs.realpathSync(chrome)+'\nPLAYWRIGHT_MODULE='+process.env.RUNNER_TEMP+'/photo-browser/node_modules/playwright/index.mjs\n');
           JS
+      - name: Verify the Japan legacy redirect with real Chromium before host contact
+        if: steps.photo_scope.outputs.scope == 'catalog-japan-stability-v1'
+        run: JAPAN_LEGACY_REDIRECT_REPORT="$RUNNER_TEMP/japan-legacy-redirect-browser-report.json" node tests/browser/japan-legacy-redirect.mjs
       - name: Test the native runtime and every required check for its reviewed scope
         env:
           CATALOG_CODE_SCOPE: ${{ steps.photo_scope.outputs.scope }}
@@ -164,6 +168,14 @@ jobs:
           await readJapanFilterDirectoryFixture(process.env.RUNNER_TEMP + '/japan-filter-directory-browser-report.json',
             {requireSourceNames: japanSourceNamesRequired(plan), requireVisibleFallback: japanBrandDirectoryRequired(plan)});
           JS
+      - name: Preserve Japan legacy redirect browser evidence
+        if: always() && steps.photo_scope.outputs.scope == 'catalog-japan-stability-v1'
+        uses: actions/upload-artifact@v4
+        with:
+          name: japan-legacy-redirect-fixture
+          path: ${{ runner.temp }}/japan-legacy-redirect-browser-report.json
+          if-no-files-found: warn
+          retention-days: 7
       - name: Preserve Japan source directory and retry fixture evidence
         if: always() && steps.photo_scope.outputs.scope == 'catalog-japan-stability-v1'
         uses: actions/upload-artifact@v4

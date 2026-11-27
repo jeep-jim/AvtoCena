@@ -4,6 +4,9 @@ Checkpoint: **27.11.2026, Asia/Krasnoyarsk**. Работа продолжает�
 
 ## Фактическая публикация
 
+- [Выпуск №28](https://github.com/jeep-jim/AvtoCena/actions/runs/46018937645) для **d6357672** завершился **rolled_back**: retention сохранён, восстановление подтверждено, lease освобождён. Политика **japan-functional-observed-timing-v1** реально применена; broad server benchmark не выполнялся, speedPassed=null. [Exact CI №59](https://github.com/jeep-jim/AvtoCena/actions/runs/46017976636): **1561/1561 controller**, **539/539 native**, typecheck и все browser fixtures PASS.
+- Собственная live-проверка №28 подтвердила свежесть, UI/API, 44 марки на mobile/desktop, страницы 24+24, порядок мощности, petrol+city, редактирование мощности/расчёт, видимость Японии на главной и в каталоге. Остановка — **stability_legacy_mazda_three**, generic browser error, timeout=false. Первый точный 308 redirect подтверждён; следующий canonical navigation завершился ошибкой до legacy API. Raw exception не сохранён, конкретная причина ещё не доказана. Model/combined/related/vehicle gates не завершены.
+- Failed candidate image №28 удалён по exact terminal proof: один образ, измеренное изменение свободного места **1,191,768,064 B**. Это доказательство относится только к образу d635 этого запуска.
 - Последняя подтверждённая принятая версия — **a5ca426eec2663eb17c2df69fe2bfed46e2b8740**, Китай C.
 - [Выпуск №27](https://github.com/jeep-jim/AvtoCena/actions/runs/46010255614), controller **0a044170**, runtime **a4f23e648d3de2a8a23c9a16942a286b91bb39b4**, завершился ошибкой **china_host_server_speed_failed**. Retention сохранён, lease освобождён.
 - Candidate остановлен на loopback speed gate **до reserve/activate/switch**. Новая публичная browser acceptance не запускалась. Это следует из точного порядка controller/host, а не только из published=false.
@@ -27,12 +30,13 @@ Checkpoint: **27.11.2026, Asia/Krasnoyarsk**. Работа продолжает�
 ## Активный следующий шаг
 
 - Лишняя зависимость home fallback от общего all projection устранена двумя source-файлами; generation binding, подсчёт, порядок и цены сохранены. Измеренного ускорения production не заявлять.
-- Controller/host policy собрана и независимо reviewed: 387 адресных проверок, browser policy 86, exact scope helpers 7. Все обязательные локальные controller test files проверены: 1542 + 19 после восстановления отсутствующего reference JSON в sparse checkout, нерешённых ошибок нет. Следующий шаг: exact hosted CI → один выпуск → собственная функциональная live acceptance Японии.
+- Controller/host policy собрана и независимо reviewed: 387 адресных проверок, browser policy 86, exact scope helpers 7. Все обязательные локальные controller test files проверены: 1542 + 19 после восстановления отсутствующего reference JSON в sparse checkout, нерешённых ошибок нет. Exact hosted CI №59 прошёл. После rollback №28 проверяется конкретный browser navigation на legacy Mazda 3; изменение runtime без доказанного source-дефекта не требуется.
+- Controller repair подготовлен: отдельная probe-page для первого проверенного 308, её завершённое закрытие перед canonical navigation на нетронутой странице. **388/388** адресных controller-проверок и independent review PASS. В обоих workflows обязательны **8 real Chromium loopback cases до build/host**; hosted browser результат ещё ожидается. Source d635 и functional gates не менялись, причина исходного исключения №28 не объявляется доказанной.
 - Не возвращать общий скоростной барьер, не запускать новые metadata/performance исследования как условие выпуска. До принятого результата новый source не считается установленным.
 
 ## Хранение и сохранённые границы
 
 - AJ — только Япония: реальные запросы посетителей и разрешённый ограниченный кэш, без дампа/зеркала. PW трактуется как целое л.с. по уточнению 26.11; неизвестная мощность явно обозначается.
 - Принятые данные Китая **gen_china_45875678028_1**, pricing **64c6338e0db23c8999096bceefbf113c0136fe15**, формулы, энциклопедия и редакторские сведения сохраняются.
-- Maintenance перенесён на 0a в локальные **c56dc2cf** и **3c58d239**, проверен 63/63 и 16/16 тестами, независимо reviewed. **Не опубликован и не активирован.** Observer 3c привязан к не принятому №27; выдавать его за successful accepted proof нельзя.
+- Maintenance перенесён на a490 в локальные **2331d9de** и **0aceced7**, проверен **76/76**, независимо reviewed. **Не опубликован и не активирован.** Observers №27/28 привязаны к не принятым выпускам; использовать их для разрешения обслуживания нельзя.
 - До автоочистки нужны принятый новый runtime и свежая фактическая пара current/rollback. Исторические A/B/C witnesses не переписывать; рабочий AJ DELETE запрещён. Compaction уменьшает logical payload через conditional PUT, не доказывает физическое освобождение host disk.

@@ -99,136 +99,94 @@
     "frozenSpeedBaselines": "hashes unchanged; timings are observations for the owner-authorized exact58 profile"
   },
   "publication": {
-    "status": "failed",
-    "runId": 46010255614,
-    "runNumber": 27,
-    "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/46010255614",
-    "releaseCommit": "0a044170d174206ea34e36ef53e9f12e13dbd642",
-    "approvedControllerSha": "dbc7c00c86cd9c9829300dec1f2182b3b8e2a372",
+    "status": "rolled_back",
+    "runId": 46018937645,
+    "runNumber": 28,
+    "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/46018937645",
+    "releaseCommit": "a4901bc73add6f8a8c51205349753cb2ee6ea33d",
+    "approvedControllerSha": "ef5f452a94b97cfbfb8e7d2fb4044e3e26318852",
+    "runtimeSha": "d6357672787a73c8e62e6f895f3c4cac5dc77211",
+    "runtimeTree": "0ac828876e7e43b952e342a4f499563c54f3fc41",
+    "acceptancePolicy": "japan-functional-observed-timing-v1",
     "lastConfirmedAcceptedRuntime": "a5ca426eec2663eb17c2df69fe2bfed46e2b8740",
-    "liveAcceptance": "not reached; candidate failed loopback server speed before reserve and public switch",
-    "conclusion": "failure",
+    "liveAcceptance": "incomplete; legacy canonical navigation failed before its model API read; rollback completed",
     "completed": false,
     "published": false,
-    "errorCode": "china_host_server_speed_failed",
-    "finishedAt": "2026-11-27T14:06:12.149Z",
+    "retainedRuntime": "a5ca426eec2663eb17c2df69fe2bfed46e2b8740",
+    "speedGateRequired": false,
+    "speedPassed": null,
+    "timingObserved": true,
     "retentionPreserved": true,
-    "leaseReleased": true,
-    "imageId": "sha256:349216b80a83a258f9f60fb8b52efb9d0e9d5f7003ef281bf7b02840f25e02a9",
-    "artifactId": 15203574699,
-    "artifactBytes": 7841,
-    "artifactSha256": "ffbe8ffa1b7794550988b3306127a21c7dee2409bf1b6899dc638d7307eac99e",
-    "reportSha256": "145925559618c3c48651a9296dffce305cc662a4a90a086efe12a1ccf80f4014",
-    "serverSpeedFailure": {
-      "present": true,
-      "sha256": "7a0200976536456406c6fc79fb3478cb887e63be433e2ad6d1de3ad960dffe54",
-      "exitCode": 1,
-      "samples": [
-        {
-          "path": "/api/health",
-          "performanceRequest": "started"
-        },
-        {
-          "path": "/api/health",
-          "performanceRequest": "complete",
-          "seconds": 0.0115,
-          "functionalPassed": true
-        },
-        {
-          "path": "/api/leads",
-          "performanceRequest": "started"
-        },
-        {
-          "path": "/api/leads",
-          "performanceRequest": "complete",
-          "seconds": 0.0113,
-          "functionalPassed": true
-        },
-        {
-          "path": "/",
-          "performanceRequest": "started"
-        },
-        {
-          "path": "/",
-          "performanceRequest": "failed",
-          "seconds": 90.2564,
-          "errorType": "TimeoutError"
-        }
-      ],
-      "rejectedSamples": 0
+    "serverTiming": {
+      "version": 1,
+      "kind": "japan-server-timing-observation-v1",
+      "release": "d6357672787a73c8e62e6f895f3c4cac5dc77211",
+      "nonce": "7a37d3bcd70720a18fe4e9c043e6eb4b",
+      "timingPolicy": "japan-functional-observed-timing-v1",
+      "speedGateRequired": false,
+      "speedPassed": null,
+      "timingObserved": true,
+      "broadServerBenchmarkExecuted": false,
+      "healthSeconds": 0.0043,
+      "baselineSha256": "32fba449b77e40983803483ea7b6cb4ece09afa997c2ae08dd968c675f528c59"
     },
-    "homePhaseRows": [
-      {
-        "trace": "9d913e8d-aa19-42a4-8ccf-0c72d504dcf2",
-        "phase": "snapshotEditorial:china",
-        "ms": 6.4,
-        "ok": true,
-        "policyDate": "2026-11-27",
-        "completedPolicyDate": "2026-11-27"
-      },
-      {
-        "trace": "9d913e8d-aa19-42a4-8ccf-0c72d504dcf2",
-        "phase": "snapshotManifest",
-        "ms": 66.3,
-        "ok": true,
-        "policyDate": "2026-11-27",
-        "completedPolicyDate": "2026-11-27"
-      },
-      {
-        "trace": "9d913e8d-aa19-42a4-8ccf-0c72d504dcf2",
-        "phase": "snapshotOverview",
-        "ms": 237.7,
-        "ok": true,
-        "policyDate": "2026-11-27",
-        "completedPolicyDate": "2026-11-27",
-        "generation": "gen_1795428982165_8c56770d"
-      },
-      {
-        "trace": "f9bc6efb-266c-49e9-a4d4-8380e81bddc8",
-        "phase": "green",
-        "ms": 10004.6,
-        "ok": false,
-        "policyDate": "2026-11-27",
-        "completedPolicyDate": "2026-11-27"
-      },
-      {
-        "trace": "f9bc6efb-266c-49e9-a4d4-8380e81bddc8",
-        "phase": "greenPricing",
-        "ms": 0.2,
-        "ok": true,
-        "policyDate": "2026-11-27",
-        "completedPolicyDate": "2026-11-27"
-      },
-      {
-        "trace": "f9bc6efb-266c-49e9-a4d4-8380e81bddc8",
-        "phase": "dealer",
-        "ms": 10102,
-        "ok": false,
-        "policyDate": "2026-11-27",
-        "completedPolicyDate": "2026-11-27"
-      },
-      {
-        "trace": "9d913e8d-aa19-42a4-8ccf-0c72d504dcf2",
-        "phase": "snapshotProjection",
-        "ms": 81270,
-        "ok": true,
-        "policyDate": "2026-11-27",
-        "completedPolicyDate": "2026-11-27",
-        "generation": "gen_1795428982165_8c56770d"
-      },
-      {
-        "trace": "9d913e8d-aa19-42a4-8ccf-0c72d504dcf2",
-        "phase": "snapshotPrepared",
-        "ms": 84921.5,
-        "ok": true,
-        "policyDate": "2026-11-27",
-        "completedPolicyDate": "2026-11-27",
-        "generation": "gen_1795428982165_8c56770d"
-      }
-    ],
-    "failedCandidateCleanup": "expected by host finally but no completed cleanup receipt in artifact; image deletion not performed by that path",
-    "runtimeSha": "a4f23e648d3de2a8a23c9a16942a286b91bb39b4",
-    "runtimeTree": "f2475e05a226afac310fef42fb10c162b3d5753d"
+    "recovered": true,
+    "appImageCleanup": {
+      "version": 1,
+      "kind": "china-terminal-app-image-cleanup-v1",
+      "completed": true,
+      "status": "removed",
+      "uncertain": false,
+      "imagesRemoved": 1,
+      "runtimeSha": "d6357672787a73c8e62e6f895f3c4cac5dc77211",
+      "imageId": "sha256:604431a6bb135952a15cf9aa7eb7b9affbbe113d62fd633badfc78e0886bee0b",
+      "witnessSha256": "5eecc2c2ff9e6b31c77bbf27b99bb46e45d957742b60d9e245a7694f8bbfb2ba",
+      "diskFreeBytesBefore": 46385594368,
+      "diskFreeBytesAfter": 47577362432,
+      "measuredFreeBytesChange": 1191768064,
+      "reason": "exact_terminal_image"
+    },
+    "errorCode": "china_daily_release_japan_browser_failed",
+    "finishedAt": "2026-11-27T15:08:59.026Z",
+    "leaseReleased": true,
+    "conclusion": "failure",
+    "artifactId": 15208109649,
+    "artifactBytes": 7504423,
+    "artifactSha256": "e7973258dc09466434fef508901f5d53fb84a335508c050d93aac8885bb827e3",
+    "reportSha256": "8c44d36f950a3fe35243c88371e5dd20c42dafc01de4a98680747cd216118190",
+    "liveReportSha256": "28c0eecffa7e6e300efe0bd7bf8740b39b33dfe737f3aa26a916e5c536ea6882",
+    "liveError": {
+      "stage": "stability_legacy_mazda_three",
+      "code": "japan_browser_check_failed",
+      "timeout": false
+    },
+    "liveGateResults": {
+      "japanFreshnessPassed": true,
+      "japanPowerApiPassed": true,
+      "japanUiPassed": true,
+      "japanVisibilityPassed": true,
+      "japanPetrolPowerUiPassed": true,
+      "japanDetailPowerInputPassed": true,
+      "japanDeliveredCalculationPassed": true,
+      "japanFullPagesPassed": true,
+      "japanPagination24Passed": true,
+      "japanCatalogWarningRemovedPassed": true,
+      "japanModelSelectionPassed": false,
+      "japanCombinedFiltersPassed": false,
+      "japanRelatedCardsPassed": false,
+      "japanVehiclePolicyPassed": false,
+      "japanPowerOrderPassed": true,
+      "japanBrandDirectoryPassed": true
+    },
+    "legacyCanonicalRedirect": {
+      "status": 308,
+      "redirects": 1,
+      "sameOrigin": true,
+      "exactTarget": true,
+      "mainFrame": true
+    },
+    "browserNavigationCause": "not captured; first redirect verified, next canonical navigation failed before its response/status/API checks; raw exception unavailable",
+    "livePhotoEvidence": "some saved screenshots show broken images under the browser fence; fixture recovery proof does not establish live supplier image loading"
   },
   "maintenance": {
     "status": "prepared_not_active",
@@ -319,9 +277,27 @@
     "photoRetryFixture": "passed"
   },
   "hostedVerification": {
-    "status": "pending",
+    "runId": 46017976636,
+    "runNumber": 59,
+    "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/46017976636",
+    "controllerSha": "ef5f452a94b97cfbfb8e7d2fb4044e3e26318852",
     "runtimeSha": "d6357672787a73c8e62e6f895f3c4cac5dc77211",
-    "acceptancePolicy": "japan-functional-observed-timing-v1"
+    "acceptancePolicy": "japan-functional-observed-timing-v1",
+    "conclusion": "success",
+    "completedAt": "2026-11-27T14:44:56Z",
+    "controllerTests": 1561,
+    "controllerPassed": 1561,
+    "controllerFailed": 0,
+    "nativeTests": 539,
+    "nativePassed": 539,
+    "nativeFailed": 0,
+    "typecheck": "passed",
+    "directoryFixtureCases": 18,
+    "directoryFixture": "passed",
+    "paginationAndPowerOrderFixture": "passed",
+    "cityHydrationFixture": "passed",
+    "crmControlsOfflineFixture": "passed",
+    "photoRetryFixture": "passed"
   },
   "latestOwnerDirection": {
     "date": "2026-11-27",
@@ -331,5 +307,166 @@
     "speedGateRequired": false,
     "speedPassed": null,
     "metadataDiagnostic": "stopped without publication or execution"
+  },
+  "publicationAttempts": [
+    {
+      "status": "failed",
+      "runId": 46010255614,
+      "runNumber": 27,
+      "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/46010255614",
+      "releaseCommit": "0a044170d174206ea34e36ef53e9f12e13dbd642",
+      "approvedControllerSha": "dbc7c00c86cd9c9829300dec1f2182b3b8e2a372",
+      "lastConfirmedAcceptedRuntime": "a5ca426eec2663eb17c2df69fe2bfed46e2b8740",
+      "liveAcceptance": "not reached; candidate failed loopback server speed before reserve and public switch",
+      "conclusion": "failure",
+      "completed": false,
+      "published": false,
+      "errorCode": "china_host_server_speed_failed",
+      "finishedAt": "2026-11-27T14:06:12.149Z",
+      "retentionPreserved": true,
+      "leaseReleased": true,
+      "imageId": "sha256:349216b80a83a258f9f60fb8b52efb9d0e9d5f7003ef281bf7b02840f25e02a9",
+      "artifactId": 15203574699,
+      "artifactBytes": 7841,
+      "artifactSha256": "ffbe8ffa1b7794550988b3306127a21c7dee2409bf1b6899dc638d7307eac99e",
+      "reportSha256": "145925559618c3c48651a9296dffce305cc662a4a90a086efe12a1ccf80f4014",
+      "serverSpeedFailure": {
+        "present": true,
+        "sha256": "7a0200976536456406c6fc79fb3478cb887e63be433e2ad6d1de3ad960dffe54",
+        "exitCode": 1,
+        "samples": [
+          {
+            "path": "/api/health",
+            "performanceRequest": "started"
+          },
+          {
+            "path": "/api/health",
+            "performanceRequest": "complete",
+            "seconds": 0.0115,
+            "functionalPassed": true
+          },
+          {
+            "path": "/api/leads",
+            "performanceRequest": "started"
+          },
+          {
+            "path": "/api/leads",
+            "performanceRequest": "complete",
+            "seconds": 0.0113,
+            "functionalPassed": true
+          },
+          {
+            "path": "/",
+            "performanceRequest": "started"
+          },
+          {
+            "path": "/",
+            "performanceRequest": "failed",
+            "seconds": 90.2564,
+            "errorType": "TimeoutError"
+          }
+        ],
+        "rejectedSamples": 0
+      },
+      "homePhaseRows": [
+        {
+          "trace": "9d913e8d-aa19-42a4-8ccf-0c72d504dcf2",
+          "phase": "snapshotEditorial:china",
+          "ms": 6.4,
+          "ok": true,
+          "policyDate": "2026-11-27",
+          "completedPolicyDate": "2026-11-27"
+        },
+        {
+          "trace": "9d913e8d-aa19-42a4-8ccf-0c72d504dcf2",
+          "phase": "snapshotManifest",
+          "ms": 66.3,
+          "ok": true,
+          "policyDate": "2026-11-27",
+          "completedPolicyDate": "2026-11-27"
+        },
+        {
+          "trace": "9d913e8d-aa19-42a4-8ccf-0c72d504dcf2",
+          "phase": "snapshotOverview",
+          "ms": 237.7,
+          "ok": true,
+          "policyDate": "2026-11-27",
+          "completedPolicyDate": "2026-11-27",
+          "generation": "gen_1795428982165_8c56770d"
+        },
+        {
+          "trace": "f9bc6efb-266c-49e9-a4d4-8380e81bddc8",
+          "phase": "green",
+          "ms": 10004.6,
+          "ok": false,
+          "policyDate": "2026-11-27",
+          "completedPolicyDate": "2026-11-27"
+        },
+        {
+          "trace": "f9bc6efb-266c-49e9-a4d4-8380e81bddc8",
+          "phase": "greenPricing",
+          "ms": 0.2,
+          "ok": true,
+          "policyDate": "2026-11-27",
+          "completedPolicyDate": "2026-11-27"
+        },
+        {
+          "trace": "f9bc6efb-266c-49e9-a4d4-8380e81bddc8",
+          "phase": "dealer",
+          "ms": 10102,
+          "ok": false,
+          "policyDate": "2026-11-27",
+          "completedPolicyDate": "2026-11-27"
+        },
+        {
+          "trace": "9d913e8d-aa19-42a4-8ccf-0c72d504dcf2",
+          "phase": "snapshotProjection",
+          "ms": 81270,
+          "ok": true,
+          "policyDate": "2026-11-27",
+          "completedPolicyDate": "2026-11-27",
+          "generation": "gen_1795428982165_8c56770d"
+        },
+        {
+          "trace": "9d913e8d-aa19-42a4-8ccf-0c72d504dcf2",
+          "phase": "snapshotPrepared",
+          "ms": 84921.5,
+          "ok": true,
+          "policyDate": "2026-11-27",
+          "completedPolicyDate": "2026-11-27",
+          "generation": "gen_1795428982165_8c56770d"
+        }
+      ],
+      "failedCandidateCleanup": "expected by host finally but no completed cleanup receipt in artifact; image deletion not performed by that path",
+      "runtimeSha": "a4f23e648d3de2a8a23c9a16942a286b91bb39b4",
+      "runtimeTree": "f2475e05a226afac310fef42fb10c162b3d5753d"
+    }
+  ],
+  "controllerNavigationRepair": {
+    "status": "prepared",
+    "runtimeUnchanged": "d6357672787a73c8e62e6f895f3c4cac5dc77211",
+    "localReviewedCommit": "ae32ee3ce25c947334ecc6a1bc5998af953b77ff",
+    "changes": [
+      "Verify the exact literal 308 on a separate browser probe page",
+      "Await probe closure before the canonical navigation on an untouched destination page",
+      "Retain only fixed navigation error enums, canonical response status and frame/URL booleans",
+      "Run eight real Chromium loopback cases before build and host in both verification and release workflows"
+    ],
+    "functionalGates": "unchanged; exact source/Location/main-frame 308, canonical HTTP200/URL, source model API and visible card identity remain mandatory",
+    "causeOfRelease28": "raw browser exception unavailable; the original failure mechanism is not claimed as proven",
+    "localChecks": {
+      "passed": 388,
+      "failed": 0,
+      "browserAndTiming": 47,
+      "stability": 22,
+      "releaseFailureAndContracts": 319,
+      "fixtureSyntaxAndYaml": "passed",
+      "independentReview": "passed"
+    },
+    "hostedBrowserFixture": {
+      "cases": 8,
+      "status": "pending",
+      "productionRequests": 0
+    }
   }
 }
