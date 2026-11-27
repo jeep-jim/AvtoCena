@@ -73,10 +73,17 @@ export async function AjesCatalog({params,embedded=false,dealer}:{params:Params;
 }
 
 async function AjesBrandRail({initial,fallbackBrands,resultCount}:{initial:Record<string,string>;fallbackBrands:string[];resultCount?:number}){
- const directory=await readAjesMakes(JSON.stringify(initial)).catch(()=>null);
+ // The brand rail describes the complete Japan auction inventory, not the
+ // currently selected power/model/grade slice. Otherwise valid 24-card power
+ // pages can receive an empty makes directory and erase all navigation.
+ const directoryQuery=JSON.stringify({market:'japan',...(initial.city?{city:initial.city}:{})});
+ const directory=await readAjesMakes(directoryQuery).catch(()=>null);
  const available=directory?.makes.filter(row=>row.total>0).map(row=>row.make)||[];
- const brands=!directory||directory.stale?[...new Set([...available,...fallbackBrands])]:available;
- return <BrandLogoRail initial={initial} brands={brands.filter(make=>!initial.make||initial.make.split(',').some(value=>value.toLowerCase()===make.toLowerCase()))} resultCount={resultCount} sourceDirectoryState={!directory||directory.stale?'unavailable':'ready'}/>;
+ // A zero-make directory contradicts visible Japan cards. Keep their verified
+ // source identities even when the directory is temporarily empty/unavailable.
+ const brands=[...new Set([...available,...fallbackBrands])];
+ const complete=Boolean(directory&&!directory.stale&&available.length>0);
+ return <BrandLogoRail initial={initial} brands={brands.filter(make=>!initial.make||initial.make.split(',').some(value=>value.toLowerCase()===make.toLowerCase()))} resultCount={resultCount} sourceDirectoryState={complete?'ready':'unavailable'}/>;
 }
 
 async function AjesIndependentCount({initial}:{initial:Record<string,string>}){
