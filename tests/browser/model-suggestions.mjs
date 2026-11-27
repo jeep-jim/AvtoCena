@@ -9,7 +9,7 @@ const out='artifacts/model-suggestions';fs.mkdirSync(out,{recursive:true});
 const meta=JSON.parse(fs.readFileSync('apps/web/lib/catalog/model-search-asset.json'));
 await build({entryPoints:['tests/browser/model-suggestions-fixture.tsx'],bundle:true,format:'iife',platform:'browser',jsx:'automatic',outfile:`${out}/app.js`,tsconfig:'apps/web/tsconfig.json',define:{'process.env.NODE_ENV':'"production"'},plugins:[{name:'brand-logo-fixture',setup(b){b.onResolve({filter:/BrandLogoRail$/},()=>({path:'logo',namespace:'fixture'}));b.onLoad({filter:/.*/,namespace:'fixture'},()=>({contents:'export const BrandLogoVisual=()=>null;'}));}}]});
 const css=await postcss([tailwindcss({content:['apps/web/components/catalog/VehicleModelSearch.tsx','apps/web/components/catalog/CatalogBrandMultiSelect.tsx']})]).process('@tailwind base;@tailwind components;@tailwind utilities;',{from:undefined});fs.writeFileSync(`${out}/app.css`,css.css);
-const server=http.createServer((req,res)=>{if(req.url.startsWith('/api/catalog/source-models?')){res.setHeader('Content-Type','application/json');res.end(JSON.stringify({version:1,brands:[],models:[]}));return;}if(req.url==='/api/catalog/models?scope=inventory'){res.setHeader('Content-Type','application/json');res.end(JSON.stringify({version:1,brands:[],models:[['Haval','M6',[],1],['Haval','F7',[],1],['Great Wall','Poer',[],1],['Isuzu','RE-MAX Ruimai',[],1]]}));return;}if(req.url===meta.asset){res.setHeader('Content-Type','application/json');res.end(fs.readFileSync('apps/web/public'+meta.asset));return;}if(req.url==='/app.js'||req.url==='/app.css'){res.setHeader('Content-Type',req.url.endsWith('.js')?'application/javascript':'text/css');res.end(fs.readFileSync(out+req.url));return;}res.setHeader('Content-Type','text/html; charset=utf-8');res.end('<html><head><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="/app.css"></head><body><div id="root"></div><script src="/app.js"></script></body></html>');});
+const server=http.createServer((req,res)=>{if(req.url.startsWith('/api/catalog/source-models?')){res.setHeader('Content-Type','application/json');res.end(JSON.stringify({version:1,brands:[],models:[]}));return;}if(req.url.startsWith('/api/catalog/models?')){const params=new URL(req.url,'http://fixture').searchParams;assert.equal(params.get('scope'),'inventory');const rows=[['Haval','M6',[],1],['Haval','F7',[],1],['Great Wall','Poer',[],1],['Isuzu','RE-MAX Ruimai',[],1]];const makes=(params.get('make')||'').split(',').filter(Boolean);res.setHeader('Content-Type','application/json');res.end(JSON.stringify({version:1,brands:[],models:params.get('market')==='green'?[]:rows.filter(row=>!makes.length||makes.includes(row[0]))}));return;}if(req.url===meta.asset){res.setHeader('Content-Type','application/json');res.end(fs.readFileSync('apps/web/public'+meta.asset));return;}if(req.url==='/app.js'||req.url==='/app.css'){res.setHeader('Content-Type',req.url.endsWith('.js')?'application/javascript':'text/css');res.end(fs.readFileSync(out+req.url));return;}res.setHeader('Content-Type','text/html; charset=utf-8');res.end('<html><head><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="/app.css"></head><body><div id="root"></div><script src="/app.js"></script></body></html>');});
 await new Promise(r=>server.listen(0,'127.0.0.1',r));const browser=await chromium.launch({headless:true,executablePath:process.env.CHROME_BIN||undefined,args:['--no-sandbox']});
 const modelInput=page=>({fill:async text=>{
  const trigger=page.getByRole('searchbox',{name:'Модель автомобиля',exact:true});
@@ -21,14 +21,14 @@ const modelInput=page=>({fill:async text=>{
 }});
 const closeMobile=async page=>{if(await page.getByRole('dialog',{name:'Выбор моделей'}).isVisible())await page.getByRole('button',{name:'Закрыть список моделей',exact:true}).click();};
 try{for(const width of [390,1440]){
- const context=await browser.newContext({viewport:{width,height:900}}),page=await context.newPage();let directoryRequests=0,inventoryRequests=0;
- page.on('request',request=>{if(request.url().includes('/model-directory.'))directoryRequests++;if(request.url().includes('/api/catalog/models?scope=inventory'))inventoryRequests++;});
+ const context=await browser.newContext({viewport:{width,height:900}}),page=await context.newPage();let directoryRequests=0;const inventoryRequests=new Map();
+ page.on('request',request=>{if(request.url().includes('/model-directory.'))directoryRequests++;if(request.url().includes('/api/catalog/models?scope=inventory')){const url=new URL(request.url());const key=url.pathname+url.search;inventoryRequests.set(key,(inventoryRequests.get(key)||0)+1);}});
  await page.goto(`http://127.0.0.1:${server.address().port}`);const input=modelInput(page);
  await input.fill('Corolla Z');const family=page.getByRole('button').filter({has:page.getByText('Corolla',{exact:true})});await family.waitFor();assert.match(await family.textContent(),/Похожая модель/);const cross=page.getByRole('button').filter({has:page.getByText('Corolla Cross',{exact:true})});
  await input.fill('Королла Z');await family.waitFor();await input.fill('Королла Кросс');await cross.waitFor();await page.screenshot({path:`${out}/${width}.png`});await cross.click();assert.match(await page.getByLabel('Выбрано').textContent(),/Toyota \/ Corolla Cross/);
  await closeMobile(page);await page.getByRole('heading',{name:'Поиск модели'}).click();await page.getByRole('button',{name:'Сбросить',exact:true}).click();await input.fill('Corolla Cross');await page.getByRole('button').filter({has:page.getByText('Corolla Cross',{exact:true})}).waitFor();
  const timings=[];for(const q of ['Cor','Corolla Z','Королла Кросс','Corolla']){const at=performance.now();await input.fill(q);await page.getByRole('button',{name:/Corolla/}).first().waitFor();timings.push(performance.now()-at);}
- assert.equal(directoryRequests,1);assert.equal(inventoryRequests,1);assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
+ assert.equal(directoryRequests,1);assert.equal(inventoryRequests.get('/api/catalog/models?scope=inventory'),1);assert.equal([...inventoryRequests.values()].every(count=>count===1),true,'each make/market directory is downloaded once');assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
  await closeMobile(page);await page.getByRole('heading',{name:'Поиск модели'}).click();await page.getByRole('button',{name:'Сбросить',exact:true}).click();
  for(const q of ['M6','Haval M6','Poer','RE-MAX']){
   await input.fill(q);const model=q.includes('M6')?'M6 Haval':q==='Poer'?'Poer Great Wall':'RE-MAX Ruimai Isuzu';
@@ -37,9 +37,9 @@ try{for(const width of [390,1440]){
  await input.fill('Haval M6');await page.getByRole('button',{name:'M6 Haval',exact:true}).click();
  assert.match(await page.getByLabel('Выбрано').textContent(),/Haval \/ M6/);
  await page.getByText('Ищем модель…',{exact:true}).waitFor({state:'hidden'});
- assert.equal(inventoryRequests,1,'typing and reopening share the inventory download');
+ assert.equal([...inventoryRequests.values()].every(count=>count===1),true,'typing and reopening share each make/market inventory download');
  await page.screenshot({path:`${out}/${width}-inventory.png`});
- console.log(JSON.stringify({width,directoryRequests,inventoryRequests,inputToSuggestionMs:timings}));await context.close();
+ console.log(JSON.stringify({width,directoryRequests,inventoryRequests:Object.fromEntries(inventoryRequests),inputToSuggestionMs:timings}));await context.close();
 }
  // Empty Korean facets still use the local directory without contacting Japan's supplier.
  for(const width of [390,1440]){
