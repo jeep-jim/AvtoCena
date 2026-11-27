@@ -187,3 +187,89 @@ test('the streamed Japan rail keeps visible makes and reads whole inventory with
   assert.equal(state.catalogReads.length,2);assert.equal(state.makeReads.length,8);
  }finally{delete (globalThis as any).__japanRailMetadata;}
 });
+
+test('Japan overview and filtered homepage rails omit the long power summary while preserving cards and saved-result status',async()=>{
+ const params={market:'japan',city:'Новокузнецк',powerTo:'160'};
+ const items=[
+  {id:'ajes-stats-known',market:'japan',japanSupplierPower:{offerId:'ajes-stats-known',hp:150,unit:'hp',source:'ajes_pw'}},
+  {id:'ajes-stats-unknown',market:'japan',japanPowerUnknown:true},
+ ];
+ const count={total:2,upperBound:false,stale:false,observedAt:'2026-11-27T12:00:00.000Z'};
+ const state={createElement,cards:[] as any[],loaded:{key:JSON.stringify(params),disabled:false,items,count,stale:true,partial:true,hasMore:true,observedAt:count.observedAt},hook:0};
+ (globalThis as any).__japanRailCopy=state;
+ const card="import {createElement} from 'react';export function CatalogCard({offer}){globalThis.__japanRailCopy.cards.push(offer);return createElement('article',{'data-offer-id':offer.id});}";
+ const frame="import {createElement} from 'react';export const JapanRailFrame=({children})=>createElement('section',null,children);export const japanRailHref=()=>'/cars?market=japan&powerTo=160';export const japanSavedPreviewText=()=> 'Сохранённая подборка';";
+ const loading="export const CatalogSectionLoading=()=>null;";
+ const marketCount="export const MarketResultCount=({children})=>children;";
+ const shared={
+  '@/components/dealers/DealerBrowsingContext':"import {createElement} from 'react';export const DealerLink=({children,...props})=>createElement('a',props,children);",
+  '@/lib/catalog/ajes-catalog':"export const readAjesCatalogPage=()=>{throw Error('unexpected source read');};export const readAjesCountSummary=()=>{throw Error('unexpected count read');};",
+  '@/lib/catalog/collection-controls':"export const assertCollectionEnabled=()=>{throw Error('unexpected collection read');};export class CollectionDisabledError extends Error{};",
+  '@/lib/catalog/storage':"export const publicOffer=offer=>offer;",
+  './CatalogCard':card,'@/components/catalog/CatalogCard':card,
+  './JapanRailFrame':frame,'@/components/catalog/JapanRailFrame':frame,
+  './CatalogLoading':loading,'@/components/catalog/CatalogLoading':loading,
+  './MarketResultCount':marketCount,'@/components/catalog/MarketResultCount':marketCount,
+ };
+ try{
+  const {AjesRail}=await component('apps/web/components/catalog/AjesRail.tsx',shared);
+  const overview=await AjesRail({params,prepared:Promise.resolve({...state.loaded,unavailable:false,unsupported:false,filteredByPage:true})});
+  const overviewHtml=renderToStaticMarkup(overview);
+  assert.doesNotMatch(overviewHtml,/Мощность по данным поставщика:|Мощность не указана:|Отбор не подтверждает право/);
+  assert.match(overviewHtml,/Сохранённая подборка/);assert.deepEqual(state.cards,items);
+  state.cards=[];
+  const {HomeJapanFilteredRail}=await component('apps/web/components/home/HomeJapanFilteredRail.tsx',{
+   ...shared,
+   react:"export const createElement=(...args)=>globalThis.__japanRailCopy.createElement(...args);export const useEffect=()=>{};export const useState=()=>{const s=globalThis.__japanRailCopy;return [[s.loaded,'ready',0][s.hook++],()=>{}];};",
+  });
+  const homeHtml=renderToStaticMarkup(HomeJapanFilteredRail({params}));
+  assert.doesNotMatch(homeHtml,/Мощность по данным поставщика:|Мощность не указана:|Отбор не подтверждает право/);
+  assert.match(homeHtml,/Сохранённая подборка/);assert.deepEqual(state.cards,items,'individual card power facts pass through unchanged');
+ }finally{delete (globalThis as any).__japanRailCopy;}
+});
+
+test('the actual Japan brand selector preserves visible source makes on empty, stale and failed metadata and retries instead of reusing it',async t=>{
+ const hooks={slots:[] as any[],cursor:0,effects:[] as any[],effectCursor:0,pending:[] as Array<()=>void>};
+ (globalThis as any).__japanBrandHooks=hooks;
+ const documentBefore=Object.getOwnPropertyDescriptor(globalThis,'document'),windowBefore=Object.getOwnPropertyDescriptor(globalThis,'window');
+ const events={addEventListener(){},removeEventListener(){}};
+ Object.defineProperty(globalThis,'document',{configurable:true,value:events});Object.defineProperty(globalThis,'window',{configurable:true,value:events});
+ t.after(()=>{
+  for(const effect of hooks.effects)effect?.cleanup?.();delete (globalThis as any).__japanBrandHooks;
+  for(const [key,descriptor] of [['document',documentBefore],['window',windowBefore]] as const){if(descriptor)Object.defineProperty(globalThis,key,descriptor);else delete (globalThis as any)[key];}
+ });
+ let reads=0,status=200,expectedQuery='market=japan',payload:any={counts:{},modelCounts:{},stale:false};
+ t.mock.method(globalThis,'fetch',async input=>{assert.equal(String(input),'/api/catalog/brand-counts?'+expectedQuery);reads++;return Response.json(payload,{status});});
+ const {CatalogBrandMultiSelect}=await component('apps/web/components/catalog/CatalogBrandMultiSelect.tsx',{
+  '@/components/catalog/BrandLogoRail':"export const BrandLogoVisual=()=>null;",
+  react:"export const useMemo=fn=>fn();export const useRef=value=>({current:value});export const useState=initial=>{const s=globalThis.__japanBrandHooks,i=s.cursor++;if(!(i in s.slots))s.slots[i]=typeof initial==='function'?initial():initial;return [s.slots[i],value=>{s.slots[i]=typeof value==='function'?value(s.slots[i]):value;}];};export const useEffect=(fn,deps)=>{const s=globalThis.__japanBrandHooks,i=s.effectCursor++,previous=s.effects[i];if(!previous||JSON.stringify(previous.deps)!==JSON.stringify(deps))s.pending.push(()=>{previous?.cleanup?.();s.effects[i]={deps,cleanup:fn()};});};",
+ });
+ const props={value:'',options:[{value:'NISSAN',label:'NISSAN'}],contextQuery:'market=japan',onChange:()=>{}};
+ const render=()=>{hooks.cursor=0;hooks.effectCursor=0;return CatalogBrandMultiSelect(props);};
+ const settle=async()=>{render();for(const run of hooks.pending.splice(0))run();await new Promise(resolve=>setImmediate(resolve));return render();};
+ const nodes=(node:any):any[]=>!node||typeof node!=='object'?[]:Array.isArray(node)?node.flatMap(nodes):[node,...nodes(node.props?.children)];
+ const trigger=(tree:any)=>nodes(tree).find(node=>node.props?.['aria-label']==='Выбрать марки автомобилей');
+ const retry=(tree:any)=>nodes(tree).find(node=>node.type==='button'&&node.props.children==='Не удалось загрузить марки. Повторить');
+ const names=(tree:any)=>nodes(tree).flatMap(node=>node.props?.['data-facet-value']?[node.props['data-facet-value']]:[]);
+ const directoryState=(tree:any)=>nodes(tree).find(node=>node.props?.['data-japan-source-directory-state'])?.props['data-japan-source-directory-state'];
+ let tree=render();trigger(tree).props.onClick();tree=await settle();
+ assert.deepEqual(names(tree),['NISSAN']);assert.equal(directoryState(tree),'unavailable');assert.ok(retry(tree));assert.equal(reads,1);
+ for(const next of [
+  {status:200,payload:{counts:{TOYOTA:0},modelCounts:{},stale:false},names:['NISSAN']},
+  {status:200,payload:{counts:{TOYOTA:2},modelCounts:{},stale:true},names:['NISSAN','TOYOTA']},
+  {status:503,payload:{error:'japan_counts_unavailable'},names:['NISSAN']},
+ ]){
+  status=next.status;payload=next.payload;const before=reads;
+  retry(tree).props.onClick();tree=await settle();
+  assert.equal(reads,before+1);assert.deepEqual(names(tree),next.names);assert.equal(directoryState(tree),'unavailable');assert.ok(retry(tree));
+ }
+ status=200;payload={counts:{BENZ:2},modelCounts:{},stale:false};const before=reads;
+ retry(tree).props.onClick();tree=await settle();
+ assert.equal(reads,before+1);assert.deepEqual(names(tree),['BENZ']);assert.equal(directoryState(tree),'ready');assert.equal(retry(tree),undefined);
+ trigger(tree).props.onClick();tree=await settle();trigger(tree).props.onClick();tree=await settle();
+ assert.equal(reads,before+1,'a complete positive directory keeps the existing cache');assert.deepEqual(names(tree),['BENZ']);
+ for(const contextQuery of ['market=china','market=japan&stock=green']){
+  expectedQuery=contextQuery;props.contextQuery=contextQuery;payload={counts:{},modelCounts:{}};tree=await settle();
+  assert.deepEqual(names(tree),['NISSAN']);assert.equal(retry(tree),undefined);assert.equal(directoryState(tree),undefined,'neighbor controls do not acquire Japan metadata state');
+ }
+});

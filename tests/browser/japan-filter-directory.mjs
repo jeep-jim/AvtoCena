@@ -10,7 +10,13 @@ import tailwindcss from 'tailwindcss';
 const require=createRequire(import.meta.url);
 const {chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright');
 const temporary=fs.mkdtempSync(path.join(os.tmpdir(),'japan-filter-directory-'));
-await build({entryPoints:['tests/browser/model-suggestions-fixture.tsx'],bundle:true,format:'iife',platform:'browser',jsx:'automatic',outfile:path.join(temporary,'app.js'),tsconfig:'apps/web/tsconfig.json',define:{'process.env.NODE_ENV':'"production"'},plugins:[{name:'fixture-logo',setup(b){
+// Reuse the real-controls fixture and supply one observed page make for the
+// metadata-outage cases. No production selection or loading logic is replaced.
+const fixturePath='tests/browser/model-suggestions-fixture.tsx';
+const originalFixture=fs.readFileSync(fixturePath,'utf8');
+assert.equal(originalFixture.split('options={[]}').length,2);
+const fixture=originalFixture.replace('options={[]}',`options={params.get('facets')==='visible'?[{value:'NISSAN',label:'NISSAN'}]:[]}`);
+await build({stdin:{contents:fixture,sourcefile:path.resolve(fixturePath),resolveDir:path.resolve('tests/browser'),loader:'tsx'},bundle:true,format:'iife',platform:'browser',jsx:'automatic',outfile:path.join(temporary,'app.js'),tsconfig:'apps/web/tsconfig.json',define:{'process.env.NODE_ENV':'"production"'},plugins:[{name:'fixture-logo',setup(b){
  b.onResolve({filter:/BrandLogoRail$/},()=>({path:'logo',namespace:'fixture'}));
  b.onLoad({filter:/.*/,namespace:'fixture'},()=>({contents:'export const BrandLogoVisual=()=>null;'}));
 }}]});
@@ -35,7 +41,7 @@ try{
  browser=await chromium.launch({executablePath:process.env.CHROME_BIN||(fs.existsSync('/usr/bin/chromium')?'/usr/bin/chromium':undefined),args:['--no-sandbox']});
  for(const width of [390,1440]){
   const context=await browser.newContext({viewport:{width,height:1000},locale:'ru-RU',serviceWorkers:'block'}),page=await context.newPage();
-  const requests=[],errors=[];let modelFailure=false,brandFailure=false,brandInvalid=false,brandStale=false;
+  const requests=[],errors=[];let modelFailure=false,brandFailure=false,brandInvalid=false,brandStale=false,brandEmpty=false;
   page.on('pageerror',error=>errors.push(error.message));
   await page.route('**/*',async route=>{
    const url=new URL(route.request().url());
@@ -43,7 +49,7 @@ try{
    if(!url.pathname.startsWith('/api/')&&!url.pathname.includes('model-directory.')){await route.continue();return;}
    requests.push(url.pathname+url.search);
    if(url.pathname==='/api/catalog/brand-counts'){
-    await route.fulfill(brandFailure?{status:503,json:{error:'japan_counts_unavailable'}}:{json:brandInvalid?{generationId:'invalid'}:{generationId:'fixture',counts:{MAZDA:12,TOYOTA:24,LANDROVER:1,BENZ:1,'MERCEDES BENZ':1},modelCounts:{},stale:brandStale}});return;
+    await route.fulfill(brandFailure?{status:503,json:{error:'japan_counts_unavailable'}}:{json:brandInvalid?{generationId:'invalid'}:{generationId:'fixture',counts:brandEmpty===true?{}:brandEmpty==='zero'?{TOYOTA:0}:{MAZDA:12,TOYOTA:24,LANDROVER:1,BENZ:1,'MERCEDES BENZ':1},modelCounts:{},stale:brandStale}});return;
    }
    if(url.pathname==='/api/catalog/source-models'){
     assert.equal(url.searchParams.get('market'),'japan');
@@ -104,6 +110,39 @@ try{
   await page.getByRole('button',{name:'Не удалось загрузить марки. Повторить'}).click();await freshResponse;
   await page.locator('[data-facet-value="MAZDA"]').waitFor();
   await page.getByRole('button',{name:'Не удалось загрузить марки. Повторить'}).waitFor({state:'hidden'});
+  // Visible source makes survive both a failed directory and a formally fresh
+  // empty result. Retrying either one must issue exactly one fresh request.
+  brandFailure=true;await page.goto(origin+'/?market=japan&facets=visible');
+  await page.getByRole('button',{name:'Выбрать марки автомобилей'}).click();
+  const retryBrands=page.getByRole('button',{name:'Не удалось загрузить марки. Повторить'});
+  await retryBrands.waitFor();
+  assert.deepEqual(await page.locator('[data-facet-value]').evaluateAll(nodes=>nodes.map(node=>node.getAttribute('data-facet-value'))),['NISSAN']);
+  const brandReads=()=>requests.filter(url=>url.startsWith('/api/catalog/brand-counts')).length;
+  const retryBrandResponse=async()=>{
+   const before=brandReads(),response=page.waitForResponse(response=>response.url().includes('/api/catalog/brand-counts'));
+   await retryBrands.click();await (await response).finished();
+   assert.equal(brandReads(),before+1,'an explicit retry cannot reuse failed, stale or empty metadata');
+  };
+  brandFailure=false;brandStale=true;await retryBrandResponse();
+  await page.locator('[data-facet-value="MAZDA"]').waitFor();
+  await page.locator('[data-facet-value="NISSAN"]').waitFor();await retryBrands.waitFor();
+  brandStale=false;
+  for(const empty of [true,'zero']){
+   brandEmpty=empty;await retryBrandResponse();
+   await retryBrands.waitFor({timeout:5000});
+   await page.waitForFunction(()=>document.querySelectorAll('[data-facet-value]').length===1&&document.querySelector('[data-facet-value="NISSAN"]'));
+   assert.equal(await page.getByText('Марка не найдена',{exact:true}).count(),0,'source cards contradict a fresh empty directory');
+  }
+  brandEmpty=false;await retryBrandResponse();
+  await page.locator('[data-facet-value="MAZDA"]').waitFor();
+  await retryBrands.waitFor({state:'hidden'});
+  assert.equal(await page.locator('[data-facet-value="NISSAN"]').count(),0,'a complete positive directory again owns the available choices');
+  const warmReads=brandReads();await page.keyboard.press('Escape');
+  await page.getByPlaceholder('Найти марку').waitFor({state:'hidden'});
+  await page.getByRole('button',{name:'Выбрать марки автомобилей'}).click();
+  await page.locator('[data-facet-value="MAZDA"]').waitFor();
+  assert.equal(brandReads(),warmReads,'successful nonempty metadata keeps its existing short reuse window');
+  for(const name of ['brand-directory-fresh-empty-visible-and-retry','brand-directory-stale-visible-and-retry','brand-directory-error-visible-and-retry'])report.cases.push({width,name,passed:true});
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
   assert.deepEqual(errors,[]);
   report.cases.push({width,name:'brand-directory-failure-and-retry',passed:true});

@@ -7,7 +7,6 @@ import {JapanRailFrame,japanRailHref,japanSavedPreviewText,type JapanRailParams}
 import {MarketResultCount} from '@/components/catalog/MarketResultCount';
 import {MARKET_RAIL_CLASS} from '@/components/catalog/market-rail-layout';
 import {ajesCountText,exactAjesCount,type AjesCountSummary} from '@/lib/catalog/ajes-count-display';
-import {japanPowerFilterSummary,japanPowerFilterNotice} from '@/lib/catalog/japan-source-power';
 
 type Preview={disabled:boolean;items:any[];count:AjesCountSummary|null;stale:boolean;partial:boolean;hasMore:boolean;observedAt?:string};
 
@@ -42,11 +41,9 @@ export function HomeJapanFilteredRail({params}:{params:JapanRailParams}) {
  const count=current?loaded.count:null;
  const pending=status==='loading'||(!current&&status!=='error');
  const href=japanRailHref(params);
- const powerNotice=current&&(params.powerFrom||params.powerTo)?japanPowerFilterNotice(japanPowerFilterSummary(loaded.items)):'';
  if(current&&loaded.disabled)return null;
  return <JapanRailFrame params={params} busy={pending} status={pending?'loading':status==='error'?'unavailable':loaded?.items.length?'ready':'empty'} count={<MarketResultCount total={exactAjesCount(count)}>{ajesCountText(count)}</MarketResultCount>}>
   {pending?<CatalogSectionLoading active/>:null}
-  {powerNotice?<p role="status" className="mb-3 text-sm text-[var(--ac-muted)]">{powerNotice}</p>:null}
   {loaded&&!current?<p role="status" className="mb-3 text-sm text-[var(--ac-muted)]">Пока показана предыдущая подборка. Новые условия ещё не применены.</p>:null}
   {status==='error'?<p role="status" className="mb-3 rounded-xl border border-[var(--ac-border)] p-4 text-sm">Не удалось обновить автомобили. <button type="button" className="underline" onClick={()=>setAttempt(value=>value+1)}>Повторить</button> · <Link href={href} className="underline">Открыть каталог</Link></p>:null}
   {current&&(loaded.stale||loaded.partial)?<p role="status" className="mb-3 text-sm text-[var(--ac-muted)]">{loaded.stale?japanSavedPreviewText(loaded.observedAt):'Показана доступная часть подборки.'}</p>:null}

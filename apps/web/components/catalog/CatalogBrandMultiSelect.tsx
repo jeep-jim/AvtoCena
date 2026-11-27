@@ -41,7 +41,10 @@ function loadBrandStats(query: string) {
       if(japan&&(!payload?.counts||typeof payload.counts!=='object'||Array.isArray(payload.counts)
         ||payload.stale!==undefined&&typeof payload.stale!=='boolean'
         ||Object.entries(payload.counts).some(([make,count])=>!make.trim()||!Number.isSafeInteger(count)||Number(count)<0)))throw Error('japan_brand_directory_invalid');
-      if(japan&&payload.stale===true&&REQUESTS.get(key)?.promise===promise)REQUESTS.delete(key);
+      // Empty metadata can contradict source makes already visible on the page.
+      // Do not reuse that response when the visitor explicitly retries it.
+      if(japan&&(payload.stale===true||!Object.values(payload.counts).some(count=>Number(count)>0))
+        &&REQUESTS.get(key)?.promise===promise)REQUESTS.delete(key);
       return {
         generationId: String(payload?.generationId || ""),
         ...(japan?{stale:payload.stale===true}:{}),
@@ -89,6 +92,7 @@ export function CatalogBrandMultiSelect({
   const [retry,setRetry]=useState(0);
   const sourceParams=new URLSearchParams(contextQuery);
   const japaneseAuctions=sourceParams.get('market')==='japan'&&sourceParams.get('stock')!=='green';
+  const hasVisibleSourceOptions=japaneseAuctions&&options.some(option=>clean(option.value));
   const root = useRef<HTMLDivElement>(null);
   const selected = useMemo(() => splitMakes(value), [value]);
   const selectedKey = selected.length === 1 ? selected[0].toLocaleLowerCase("ru-RU") : "";
@@ -98,11 +102,14 @@ export function CatalogBrandMultiSelect({
     let cancelled = false;
     setStats(EMPTY_STATS);setStatsUnavailable(false);setStatsLoading(true);setStatsLoaded(false);
     loadBrandStats(contextQuery)
-      .then((next) => { if (!cancelled) {setStats(next);setStatsLoaded(!next.stale);if(next.stale)setStatsUnavailable(true);} })
+      .then((next) => { if (!cancelled) {
+        const unavailable=Boolean(next.stale)||(hasVisibleSourceOptions&&!Object.values(next.counts).some(count=>count>0));
+        setStats(next);setStatsLoaded(!unavailable);setStatsUnavailable(unavailable);
+      } })
       .catch(() => { if (!cancelled) {setStats(EMPTY_STATS);setStatsUnavailable(true);} })
       .finally(()=>{if(!cancelled)setStatsLoading(false);});
     return () => { cancelled = true; };
-  }, [contextQuery, open,retry]);
+  }, [contextQuery, open,retry,hasVisibleSourceOptions]);
 
   useEffect(() => {
     if (!open) return;
@@ -161,7 +168,7 @@ export function CatalogBrandMultiSelect({
     <button type="button" onClick={() => setOpen((current) => !current)} className="ac-filter-control flex h-13 w-full items-center justify-between gap-2 rounded-[15px] px-4 text-left text-sm font-black" aria-expanded={open} aria-label="Выбрать марки автомобилей">
       <span className="flex min-w-0 items-center gap-2"><span className="truncate">{triggerLabel}</span></span><Chevron open={open} />
     </button>
-    {open ? <div className="ac-filter-dropdown absolute left-0 right-0 top-[calc(100%+7px)] overflow-hidden rounded-2xl p-2">
+    {open ? <div data-japan-source-directory-state={japaneseAuctions?(statsLoading?'loading':statsUnavailable?'unavailable':statsLoaded?'ready':'loading'):undefined} className="ac-filter-dropdown absolute left-0 right-0 top-[calc(100%+7px)] overflow-hidden rounded-2xl p-2">
       <p className="px-3 py-2 text-xs text-[var(--ac-muted)]">Можно выбрать несколько марок</p>
       <div className="mb-1.5">
         <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Найти марку" className="ac-filter-search h-10 w-full rounded-xl px-3 text-sm font-bold outline-none" />

@@ -369,7 +369,7 @@ function BrandLogoRailContent({
       />
       {query ? <button type="button" onClick={() => setQuery("")} className="flex h-8 w-8 items-center justify-center rounded-full bg-[var(--ac-surface-2)] text-lg font-bold" aria-label="Очистить поиск">×</button> : null}
     </label> : null}
-    <section className="ac-brand-rail relative mt-5 rounded-[1.6rem] p-3 pr-12 md:p-4 md:pr-16" aria-label="Марки автомобилей">
+    <section data-japan-source-directory-state={japaneseAuctions?japanDirectoryState:undefined} className="ac-brand-rail relative mt-5 rounded-[1.6rem] p-3 pr-12 md:p-4 md:pr-16" aria-label="Марки автомобилей">
       <div
         ref={railRef}
         className="ac-hide-scrollbar flex min-w-0 cursor-grab touch-auto items-center gap-1 overflow-x-auto overscroll-x-contain scroll-smooth pb-1 [&.is-dragging]:cursor-grabbing [&.is-dragging]:scroll-auto"
