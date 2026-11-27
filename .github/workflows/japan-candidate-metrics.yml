@@ -20,7 +20,7 @@ jobs:
         run: |
           set -euo pipefail
           git fetch --no-tags origin refs/heads/fix/japan-catalog-brand-fallback-20261127
-          CANDIDATE=74489d8534029c3324f0c896bf84cb25abf9d31f
+          CANDIDATE=0f624d72525567d9593af5a813f5e878814193b2
           RETAINED=a5ca426eec2663eb17c2df69fe2bfed46e2b8740
           PRICING=64c6338e0db23c8999096bceefbf113c0136fe15
           git cat-file -e "$CANDIDATE^{commit}"
