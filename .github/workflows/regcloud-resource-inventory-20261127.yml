@@ -22,13 +22,13 @@ jobs:
           persist-credentials: false
       - name: Check private-field projection and bounded read guards
         run: python3 tests/regcloud-resource-inventory-20261126.test.py
-      - name: Verify exact accepted release evidence from its GitHub artifact
+      - name: Inspect the exact rolled-back Japan release artifact
         env:
           GITHUB_TOKEN: ${{ github.token }}
         shell: bash
         run: |
           set -euo pipefail
-          python3 -I -B scripts/catalog-next/inspect-crm-japan-photo-release-45897728809.py | tee release-artifact-inspection.json
+          python3 -I -B scripts/catalog-next/inspect-japan-pagination-failure-45914646851.py | tee release-artifact-inspection.json
       - name: Inspect RAM and disk ownership without changing containers or data
         env:
           SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
@@ -41,28 +41,12 @@ jobs:
           printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
           unset SSH_PRIVATE_KEY
           ssh -F /dev/null -T -i "$key_file" -o BatchMode=yes -o IdentitiesOnly=yes -o ForwardAgent=no -o ClearAllForwardings=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=yes -o GlobalKnownHostsFile=/dev/null -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts" root@151.248.113.177 '/usr/bin/env -i PATH=/usr/bin:/bin /usr/bin/python3 -I -B -' < scripts/regcloud-resource-inventory-20261126.py | tee server-resource-inventory.json
-      - name: Verify the accepted public runtime and China cut without signing in
+      - name: Verify the retained public runtime and China cut after rollback
         run: python3 -I -B scripts/public-post-release-verification-20261127.py
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
-        with:
-          node-version: '24.22.3'
-      - name: Prepare the ordinary public browser observation
-        run: |
-          npm install --prefix "$RUNNER_TEMP/post-release-browser" --no-package-lock --ignore-scripts playwright@1.55.0
-          node --input-type=module <<'JS'
-          import fs from 'node:fs';
-          import {execFileSync} from 'node:child_process';
-          const chrome=execFileSync('which',['google-chrome'],{encoding:'utf8'}).trim();
-          fs.appendFileSync(process.env.GITHUB_ENV,'CHROME_BIN='+fs.realpathSync(chrome)+'\nPLAYWRIGHT_MODULE='+process.env.RUNNER_TEMP+'/post-release-browser/node_modules/playwright/index.mjs\n');
-          JS
-      - name: Observe one ordinary Japan page at 390 px
-        timeout-minutes: 4
-        shell: bash
-        run: |
-          set -euo pipefail
-          test -n "${CHROME_BIN:-}"
-          test -n "${PLAYWRIGHT_MODULE:-}"
-          node scripts/catalog-next/observe-japan-photos-a5ca.mjs | tee japan-public-photo-observation.json
+      - name: Inspect the China schedule and recent scheduled runs
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: python3 -I -B scripts/catalog-next/inspect-china-schedule-metadata-20261127.py
       - name: Save bounded public resource report
         uses: actions/upload-artifact@v4
         if: always()
@@ -72,6 +56,6 @@ jobs:
             server-resource-inventory.json
             public-post-release-verification.json
             release-artifact-inspection.json
-            japan-public-photo-observation.json
+            china-schedule-metadata-20261127.json
           if-no-files-found: ignore
           retention-days: 14
