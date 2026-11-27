@@ -464,6 +464,10 @@ export function CatalogFilters({ initial, facets, resultCount, auctionResults=fa
   const makeOptions = useMemo<Option[]>(() => [{ value: "", label: "Любая марка" }, ...[...new Set<string>([...(activeFacets?.makes || []), ...selectedMakes].map(clean).filter(Boolean))].sort((a, b) => label(a).localeCompare(label(b), "ru")).map((value) => ({ value, label: label(value) }))], [activeFacets, selectedMakes]);
   const marketOptions = dealer ? markets.filter(m=>!m.value||dealer.markets.includes((m.value==="green"?"japan":m.value) as any)) : markets;
   const brandStatsContext = useMemo(() => {
+    // Japan make/model navigation must describe source inventory, not the
+    // currently filtered 24-card slice. A powerTo=160 selection can have
+    // cards while source COUNT/makes for that narrowed query returns zero.
+    if(draft.market==='japan'&&draft.stock!=='green')return new URLSearchParams({market:'japan'}).toString();
     const contextDraft: FilterDraft = { ...draft, make: "", model: "" };
     const params=new URLSearchParams(catalogQuery(contextDraft, '', 'asc'));if(initial.source&&draft.market===initial.market)params.set('source',initial.source);return params.toString();
   }, [draft]);
