@@ -43,6 +43,7 @@ on:
       - tests/release-speed-guard-contract.test.mjs
       - tests/browser/photo-japan-recovery-clock.mjs
       - tests/browser/japan-legacy-redirect.mjs
+      - tests/browser/japan-model-controls-ready.mjs
 permissions:
   contents: read
 concurrency:
@@ -93,6 +94,12 @@ jobs:
       - name: Verify the Japan legacy redirect with real Chromium before host contact
         if: steps.photo_scope.outputs.scope == 'catalog-japan-stability-v1'
         run: JAPAN_LEGACY_REDIRECT_REPORT="$RUNNER_TEMP/japan-legacy-redirect-browser-report.json" node tests/browser/japan-legacy-redirect.mjs
+      - name: Verify hydrated Japan model controls on the exact runtime before host contact
+        if: steps.photo_scope.outputs.scope == 'catalog-japan-stability-v1'
+        run: |
+          set -euo pipefail
+          MODEL_SHA=$(node -p "JSON.parse(require('fs').readFileSync('.github/operations/catalog-next/china-code-serving-plan.json')).runtimeSha")
+          PHOTO_RUNTIME_ROOT="$RUNNER_TEMP/china-serving-runtime-$MODEL_SHA" JAPAN_MODEL_CONTROLS_READY_REPORT="$RUNNER_TEMP/japan-model-controls-ready-browser-report.json" node tests/browser/japan-model-controls-ready.mjs
       - name: Test the native runtime and every required check for its reviewed scope
         env:
           CATALOG_CODE_SCOPE: ${{ steps.photo_scope.outputs.scope }}
@@ -174,6 +181,14 @@ jobs:
         with:
           name: japan-legacy-redirect-fixture
           path: ${{ runner.temp }}/japan-legacy-redirect-browser-report.json
+          if-no-files-found: warn
+          retention-days: 7
+      - name: Preserve Japan model controls readiness browser evidence
+        if: always() && steps.photo_scope.outputs.scope == 'catalog-japan-stability-v1'
+        uses: actions/upload-artifact@v4
+        with:
+          name: japan-model-controls-ready-fixture
+          path: ${{ runner.temp }}/japan-model-controls-ready-browser-report.json
           if-no-files-found: warn
           retention-days: 7
       - name: Preserve Japan source directory and retry fixture evidence

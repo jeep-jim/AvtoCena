@@ -353,6 +353,85 @@ export async function runJapanLegacyMazdaThreeBrowser({context, directory, read,
     canonicalRedirect: redirectProof, uiMatchesApi: true, cityPreserved: true, pageErrors: errors}};
 }
 
+/** CatalogFilters already exposes this hydration contract: its settings button
+ * is disabled/aria-busy in SSR until the component's interactive effect runs.
+ * The sidebar deliberately hides that button; only the enclosing form must be
+ * visible. Its own aria-busy additionally waits for the selected URL's props. */
+export async function waitForJapanStabilityControls(view, progress = {}, phase = 'controls_ready') {
+  need(['controls_ready', 'initial_controls_ready', 'after_brand_controls_ready', 'after_model_controls_ready'].includes(phase), 'model_progress_phase');
+  progress.phase = phase;
+  const form = view.locator('form.ac-catalog-filter-panel:visible');
+  await form.waitFor({state: 'visible', timeout: 30_000});
+  await form.locator('button[aria-label="Расширенные фильтры"]:enabled[aria-busy="false"]')
+    .waitFor({state: 'attached', timeout: 30_000});
+  await view.locator('form.ac-catalog-filter-panel:visible[aria-busy="false"]')
+    .waitFor({state: 'visible', timeout: 30_000});
+  progress.readyChecks = (progress.readyChecks ?? 0) + 1;
+  return form;
+}
+
+/** One real brand/model selection; no sleep, retry or extra source request. */
+export async function selectJapanStabilityModelThroughUi({view, directory, progress = {}}) {
+  const controls = await waitForJapanStabilityControls(view, progress, 'initial_controls_ready');
+  const brand = controls.locator('button[aria-label="Выбрать марки автомобилей"]:visible');
+  progress.phase = 'brand_open'; await brand.click();
+  progress.phase = 'brand_expanded';
+  await controls.locator('button[aria-label="Выбрать марки автомобилей"][aria-expanded="true"]')
+    .waitFor({state: 'visible', timeout: 30_000});
+  progress.brandExpanded = true;
+  progress.phase = 'brand_option';
+  const brandOption = view.locator('button[data-facet-value="Mazda" i]:visible');
+  const sourceMake = await brandOption.getAttribute('data-facet-value');
+  need(sameMake(sourceMake, 'Mazda'), 'make_option_identity');
+  progress.phase = 'brand_select'; await brandOption.click();
+  progress.phase = 'brand_url';
+  await view.waitForURL(url => japanStabilitySelectionUrl(url.href, sourceMake), {timeout: 60_000});
+  progress.brandUrlMatched = true;
+  await waitForJapanStabilityControls(view, progress, 'after_brand_controls_ready');
+  progress.phase = 'brand_close';
+  if (await brand.getAttribute('aria-expanded') === 'true') await brand.click();
+  await controls.locator('button[aria-label="Выбрать марки автомобилей"][aria-expanded="false"]')
+    .waitFor({state: 'visible', timeout: 30_000});
+  progress.phase = 'model_open';
+  const input = controls.locator('input[aria-label="Модель автомобиля"]:visible');
+  await input.click();
+  progress.phase = 'model_options';
+  await view.locator('button[data-model-value]:visible').first().waitFor({state: 'visible', timeout: 60_000});
+  const options = await view.locator('button[data-model-value]:visible').evaluateAll(nodes => nodes.map(node =>
+    ({model: node.getAttribute('data-model-value'), make: node.getAttribute('data-model-make')})));
+  progress.modelOptions = options.length;
+  const selected = selectJapanStabilityModel(directory, options);
+  const option = view.locator('button[data-model-value]:visible').filter({hasText: selected.model});
+  const exact = await option.evaluateAll((nodes, model) => nodes.map(node => node.getAttribute('data-model-value')).filter(value => value === model), selected.model);
+  need(exact.length === 1, 'selected_option_identity');
+  const optionIndex = options.findIndex(row => row.model === selected.model && row.make === selected.make);
+  progress.phase = 'model_select'; await view.locator('button[data-model-value]:visible').nth(optionIndex).click();
+  progress.phase = 'model_url';
+  await view.waitForURL(url => japanStabilitySelectionUrl(url.href, sourceMake, selected.model), {timeout: 60_000});
+  progress.modelUrlMatched = true;
+  const selectedControls = await waitForJapanStabilityControls(view, progress, 'after_model_controls_ready');
+  progress.phase = 'model_close';
+  const selectedInput = selectedControls.locator('input[aria-label="Модель автомобиля"]:visible');
+  const expanded = await selectedInput.getAttribute('aria-expanded');
+  need(expanded === 'true' || expanded === 'false', 'model_popup_state');
+  progress.modelPopupOpenAfterNavigation = expanded === 'true';
+  // A canonical make→model transition can remount the Next leaf and close the
+  // popup itself. In the preserved-component case use its real close control.
+  if (expanded === 'true') {
+    await selectedControls.getByRole('button', {name: 'Закрыть список моделей', exact: true}).click();
+    progress.modelPopupClose = 'clicked_close';
+  } else progress.modelPopupClose = 'already_closed_after_navigation';
+  await selectedControls.locator('input[aria-label="Модель автомобиля"][aria-expanded="false"]')
+    .waitFor({state: 'visible', timeout: 30_000});
+  progress.phase = 'model_selected_value';
+  need(await selectedControls.locator('input[type="hidden"][name="model"]').inputValue() === selected.model
+    && await selectedInput.inputValue() === selected.model, 'model_selected_value');
+  need(japanStabilitySelectionUrl(view.url(), sourceMake, selected.model), 'model_selection_preserved');
+  need(new URL(view.url()).searchParams.get('city') === CITY, 'model_city');
+  progress.selectedValueMatched = true; progress.phase = 'selection_complete';
+  return {sourceMake, selected};
+}
+
 /** Ordinary, bounded public journeys supplement the unchanged Japan freshness,
  * power, pagination, price and neighbor-preservation acceptance. */
 export async function runJapanStabilityBrowser({context, report, generationId, read, capture, onStage, onPage,
@@ -367,46 +446,30 @@ export async function runJapanStabilityBrowser({context, report, generationId, r
   pages.push(legacy.page); report.checks.legacyModelSelection = legacy.proof;
 
   onStage('stability_model_selection');
+  const modelProgress = report.checks.modelSelectionProgress = {phase: 'page_navigation', readyChecks: 0};
   let view = await context.newPage(); onPage(view); let errors = 0;
   view.on('pageerror', () => { errors++; });
   await view.setViewportSize({width: 1440, height: 1000});
   let response = await view.goto(ORIGIN + '/cars/japan?' + new URLSearchParams({city: CITY}),
     {waitUntil: 'domcontentloaded', timeout: 90_000});
   need(response?.status() === 200, 'model_page_http');
-  const brand = view.locator('button[aria-label="Выбрать марки автомобилей"]:visible');
-  await brand.click();
-  const brandOption = view.locator('button[data-facet-value="Mazda" i]:visible');
-  const sourceMake = await brandOption.getAttribute('data-facet-value');
-  need(sameMake(sourceMake, 'Mazda'), 'make_option_identity');
-  await brandOption.click();
-  await view.waitForURL(url => japanStabilitySelectionUrl(url.href, sourceMake), {timeout: 60_000});
-  if (await brand.getAttribute('aria-expanded') === 'true') await brand.click();
-  const input = view.locator('input[aria-label="Модель автомобиля"]:visible');
-  await input.click();
-  await view.locator('button[data-model-value]:visible').first().waitFor({state: 'visible', timeout: 60_000});
-  const options = await view.locator('button[data-model-value]:visible').evaluateAll(nodes => nodes.map(node =>
-    ({model: node.getAttribute('data-model-value'), make: node.getAttribute('data-model-make')})));
-  const selected = selectJapanStabilityModel(directory, options);
-  const option = view.locator('button[data-model-value]:visible').filter({hasText: selected.model});
-  const exact = await option.evaluateAll((nodes, model) => nodes.map(node => node.getAttribute('data-model-value')).filter(value => value === model), selected.model);
-  need(exact.length === 1, 'selected_option_identity');
-  const optionIndex = options.findIndex(row => row.model === selected.model && row.make === selected.make);
-  await view.locator('button[data-model-value]:visible').nth(optionIndex).click();
-  await view.getByRole('button', {name: 'Закрыть список моделей', exact: true}).click();
-  await view.waitForURL(url => japanStabilitySelectionUrl(url.href, sourceMake, selected.model), {timeout: 60_000});
-  need(new URL(view.url()).searchParams.get('city') === CITY, 'model_city');
+  const {selected} = await selectJapanStabilityModelThroughUi({view, directory, progress: modelProgress});
+  modelProgress.phase = 'model_api';
   const modelResponse = await read(japanStabilitySearchApi('model', selected.model));
   const modelObservation = verifyPage(modelResponse.data, modelResponse.status);
   verifyFullPage(modelResponse.data);
   const modelProof = verifyJapanStabilityModelRows(modelResponse.data, selected, directory);
   pages.push(modelResponse.data);
   let catalog = view.locator('main.ac-ajes-catalog');
+  modelProgress.phase = 'model_ui_rows';
   await visibleCardsMatch(view, catalog, modelResponse.data.items);
   need(errors === 0, 'model_javascript');
   report.checks.modelSelection = {...modelObservation, ...modelProof, directoryModels: directory.length,
     selectedThroughUi: true, uiMatchesApi: true, cityPreserved: true, pageErrors: errors};
   report.japanModelSelectionPassed = true;
+  modelProgress.phase = 'model_capture';
   await capture(view, 'japan-source-model-selection-desktop');
+  modelProgress.phase = 'complete';
   await view.close(); onPage(null);
 
   onStage('stability_combined_filters');
