@@ -50,6 +50,13 @@ function mockReads(t:any,storage:any,values:Record<string,any>){
  });
  return reads;
 }
+function retainedProjection(){
+ return {...row('eur'),id:'e'.repeat(24),market:'europe',year:2023,
+  cardProjectionVersion:3,cardImageUrl:'https://example.test/retained.jpg',
+  totalRub:1234567,publicVisibleRub:1234567,publicSpecificationVerified:true,
+  sourcePrice:12000,sourceCurrency:'EUR',calculationSnapshot:{currencyRate:{currency:'EUR',
+   sourcePrice:12000,effectiveRate:95,rateSource:'cbr',rateDate:'2026-11-24'}}};
+}
 
 for(const unavailable of ['manifest','editorial'])test(`native home survives unavailable shared ${unavailable} without inventing foreign zero counts`,async t=>{
  const f=await setup(t);
@@ -76,6 +83,91 @@ test('native home does not require old China overview and retains confirmed fore
  assert.equal(result.total,14);
  assert.deepEqual(reads.sort(),Object.keys(retained.values).sort());
  assert.equal(f.reads().networkCalls,0);
+});
+
+for(const overviewState of ['missing','expired','incomplete'])test(`native home recovers ${overviewState} overview from retained markets without the old all-market projection`,async t=>{
+ const f=await setup(t), europe=retainedProjection();
+ const retained=retainedFixture([europe]),generationId=retained.manifest.generationId;
+ if(overviewState==='expired')retained.overview.policyDate='2000-01-01';
+ if(overviewState==='incomplete')retained.overview.markets.europe.sourceTotal=2;
+ const before=JSON.stringify(europe),reads:string[]=[];
+ t.mock.method(f.storage,'readJsonWithMeta',async(key:string,fallback:any)=>{
+  reads.push(key);
+  if(key==='catalog/manifest.json')return {found:true,value:retained.manifest};
+  if(key==='catalog-editorial/current.json')return {found:true,value:retained.values[key]};
+  if(key==='catalog/public/facets.json')return {found:true,value:{generationId}};
+  if(key.includes('/overview'))return overviewState==='missing'?{found:false,value:fallback}:{found:true,value:retained.overview};
+  const market=/^catalog\/public\/projection\/([a-z]+)\.json$/.exec(key)?.[1];
+  if(market&&market!=='all'&&market!=='china')return {found:true,value:{generationId,items:market==='europe'?[europe]:[]}};
+  // The old shared alias can contain every legacy China row/part. Failure or
+  // slow delivery there must not block already available retained markets.
+  throw Error('unrelated_aggregate_must_not_be_read');
+ });
+ const result=await readHomeCatalogSnapshot(10);
+ assert.equal(result.countIncomplete,false);assert.deepEqual(result.unavailableMarkets,[]);
+ assert.equal(result.marketCounts.china,13);assert.equal(result.marketCounts.europe,1);
+ assert.equal(result.items.find(item=>item.id===europe.id)?.totalRub,1234567);
+ assert.equal(result.items.filter(item=>item.market==='china').length,10);assert.equal(result.total,14);
+ assert.equal(reads.some(key=>/\/projection\/(all|china)\.json$/.test(key)),false);
+ assert.equal(reads.filter(key=>/\/projection\/[a-z]+\.json$/.test(key)).length,5);
+ assert.deepEqual(await readHomeCatalogSnapshot(10),result,'a warm read preserves exact cards and counts');
+ assert.equal(reads.filter(key=>/\/projection\/[a-z]+\.json$/.test(key)).length,5,'a warm read reuses the existing market caches');
+ assert.equal(JSON.stringify(europe),before,'recovery preserves source dates, price evidence and card facts');
+ assert.equal(f.reads().networkCalls,0);assert.equal(f.reads().storageWrites,0);
+});
+
+test('native home rejects a mixed-generation market alias and recovers only manifest-pinned retained cards',async t=>{
+ const f=await setup(t),europe=retainedProjection(),retained=retainedFixture([europe]);
+ const generationId=retained.manifest.generationId,root=`catalog/generations/${generationId}/indexes/`,reads:string[]=[];
+ const future={...europe,id:'unpublished-future',totalRub:9999999,publicVisibleRub:9999999};
+ t.mock.method(f.storage,'readJsonWithMeta',async(key:string,fallback:any)=>{
+  reads.push(key);
+  if(key==='catalog/manifest.json')return {found:true,value:retained.manifest};
+  if(key==='catalog-editorial/current.json')return {found:true,value:retained.values[key]};
+  if(key==='catalog/public/facets.json')return {found:true,value:{generationId}};
+  if(key.includes('/overview'))return {found:false,value:fallback};
+  const current=/^catalog\/public\/projection\/([a-z]+)\.json$/.exec(key)?.[1];
+  if(current&&current!=='all'&&current!=='china')return {found:true,value:{
+   generationId:current==='europe'?'gen_unpublished':generationId,items:current==='europe'?[future]:[]}};
+  if(key===root+'offers-by-id.json')return {found:true,value:{byId:{[europe.id]:{market:'europe',chunk:'0'}}}};
+  if(key===root+'order-updatedAt.json')return {found:true,value:{ids:[europe.id]}};
+  const pinned=key.startsWith(root)?/^(market|projection)\/([a-z]+)\.json$/.exec(key.slice(root.length)):null;
+  if(pinned&&pinned[2]!=='china')return {found:true,value:pinned[1]==='market'
+   ?{ids:pinned[2]==='europe'?[europe.id]:[]}:{generationId,items:pinned[2]==='europe'?[europe]:[]}};
+  throw Error('unexpected_retained_recovery_read');
+ });
+ const result=await readHomeCatalogSnapshot(10);
+ assert.equal(result.countIncomplete,false);assert.equal(result.total,14);
+ assert.equal(result.marketCounts.china,13);assert.equal(result.marketCounts.europe,1);
+ assert.equal(result.items.find(item=>item.id===europe.id)?.totalRub,europe.totalRub);
+ assert(!result.items.some(item=>item.id===future.id));
+ assert(reads.includes(root+'projection/europe.json'),'the accepted generation supplies the recovered card');
+ assert(!reads.some(key=>/\/projection\/(all|china)\.json$/.test(key)));
+ assert.equal(f.reads().networkCalls,0);assert.equal(f.reads().storageWrites,0);
+});
+
+test('home without an independent China cut preserves its existing aggregate projection path',async t=>{
+ const f=await setup(t),europe=retainedProjection(),china={...europe,id:'legacy-china',market:'china'};
+ const retained=retainedFixture([europe]),generationId=retained.manifest.generationId,reads:string[]=[];
+ retained.manifest.markets.china.count=1;
+ keys.forEach(key=>delete process.env[key]);await resetLocalChinaReaderForTests();
+ const oldRegcloud=process.env.AVTOCENA_CHINA_REGCLOUD_RUNTIME;delete process.env.AVTOCENA_CHINA_REGCLOUD_RUNTIME;
+ t.after(()=>{if(oldRegcloud===undefined)delete process.env.AVTOCENA_CHINA_REGCLOUD_RUNTIME;else process.env.AVTOCENA_CHINA_REGCLOUD_RUNTIME=oldRegcloud;});
+ t.mock.method(f.storage,'readJsonWithMeta',async(key:string,fallback:any)=>{
+  reads.push(key);
+  if(key==='catalog/manifest.json')return {found:true,value:retained.manifest};
+  if(key==='catalog-editorial/current.json')return {found:true,value:retained.values[key]};
+  if(key==='catalog/public/facets.json')return {found:true,value:{generationId}};
+  if(key.includes('/overview'))return {found:false,value:fallback};
+  if(key==='catalog/public/projection/all.json')return {found:true,value:{generationId,items:[china,europe]}};
+  throw Error('unexpected_legacy_home_read');
+ });
+ const result=await readHomeCatalogSnapshot(10);
+ assert.equal(result.independentChina,false);assert.equal(result.total,2);
+ assert.equal(result.marketCounts.china,1);assert.equal(result.marketCounts.europe,1);
+ assert.deepEqual(result.items.map(item=>[item.id,item.totalRub]).sort(),[[china.id,china.totalRub],[europe.id,europe.totalRub]].sort());
+ assert.deepEqual(reads.filter(key=>key.includes('/projection/')),['catalog/public/projection/all.json']);
+ assert.equal(f.reads().networkCalls,0);assert.equal(f.reads().storageWrites,0);
 });
 
 test('failed hidden-market refresh preserves other confirmed markets and never exposes hidden cards',async t=>{

@@ -2941,7 +2941,15 @@ async function readHomeCatalogSnapshotOriginal(perMarket: number, timing: Return
       total: Object.values(marketCounts).reduce((sum, count) => sum + count, 0),
       items: markets.flatMap(market => overview.markets[market].items.slice(0, limit)).sort(compareCatalogDisplayOrder)};
   }
-  const currentProjection = await timing.measure("snapshotProjection",()=>readCurrentSearchProjection(CURRENT_ALL_MARKETS_PROJECTION));
+  const currentProjection = await timing.measure("snapshotProjection",async()=>{
+    if(!omitLegacyChinaAggregate())return readCurrentSearchProjection(CURRENT_ALL_MARKETS_PROJECTION);
+    // The retained markets must not await the obsolete all-market alias and
+    // every one of its China parts. Reuse their existing readers, one at a
+    // time, and keep the same generation check before selecting home cards.
+    const projections=await mapWithConcurrency(markets,1,market=>readCurrentSearchProjection(market));
+    return {generationId:projections.every(value=>value.generationId===manifest.generationId)?manifest.generationId:"",
+      items:projections.flatMap(value=>value.items||[])};
+  });
   if (currentProjection.generationId === manifest.generationId) {
     const rawProjectionRows = (currentProjection.items || []).filter(row => legacyAggregateMarketAllowed(row.market));
     // Current read models are replaced independently from the immutable public
