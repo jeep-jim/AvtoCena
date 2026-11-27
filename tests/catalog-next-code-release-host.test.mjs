@@ -14,13 +14,15 @@ def refused(fn,code):
  else:raise AssertionError('required rejection: '+code)
 def forbidden(*a,**k):raise AssertionError('external I/O forbidden')
 case=sys.argv[2]
+stability=case.startswith('stability_')
+if stability:case=case.replace('stability_','pagination_',1)
 pagination=case.startswith('pagination_')
 if pagination:case=case.replace('pagination_','crm_',1)
 crm_photo=case.startswith('crm_photo_') or pagination
 if crm_photo and not pagination:case=case.replace('crm_photo_','crm_',1)
 crm=case.startswith('crm_')
-crm_scope=m.JAPAN_PAGINATION_CODE_SCOPE if pagination else m.CRM_JAPAN_PHOTO_CODE_SCOPE if crm_photo else m.CRM_CHINA_CODE_SCOPE
-crm_files=m.JAPAN_PAGINATION_CODE_FILES if pagination else m.CRM_JAPAN_PHOTO_CODE_FILES if crm_photo else m.CRM_CHINA_CODE_FILES
+crm_scope=m.JAPAN_STABILITY_CODE_SCOPE if stability else m.JAPAN_PAGINATION_CODE_SCOPE if pagination else m.CRM_JAPAN_PHOTO_CODE_SCOPE if crm_photo else m.CRM_CHINA_CODE_SCOPE
+crm_files=m.JAPAN_STABILITY_CODE_FILES if stability else m.JAPAN_PAGINATION_CODE_FILES if pagination else m.CRM_JAPAN_PHOTO_CODE_FILES if crm_photo else m.CRM_CHINA_CODE_FILES
 usability=case.startswith('usability_')
 if usability:case=case.replace('usability_','completion_',1)
 completion_v2=case.startswith('completion_v2_')
@@ -29,8 +31,9 @@ completion_scope=m.JAPAN_USABILITY_CODE_SCOPE if usability else m.JAPAN_COMPLETI
 completion_files=m.JAPAN_USABILITY_CODE_FILES if usability else m.JAPAN_COMPLETION_V2_CODE_FILES if completion_v2 else m.JAPAN_COMPLETION_CODE_FILES
 completion_retained=m.JAPAN_USABILITY_RETAINED if usability else m.JAPAN_COMPLETION_RETAINED
 usability_flags=('japanBrandDirectoryPassed','japanFullPagesPassed','japanKnownPowerOrderPassed','japanVehiclePolicyPassed','japanQuietCatalogPassed')
+stability_flags=('japanModelSelectionPassed','japanCombinedFiltersPassed','japanRelatedCardsPassed','japanVehiclePolicyPassed')
 old,new,pricing=completion_retained if case.startswith('completion_') and case!='completion_predecessor' else 'a'*40,'b'*40,'c'*40
-if crm and case!='crm_predecessor':old=m.JAPAN_PAGINATION_RETAINED if pagination else m.CRM_CHINA_RETAINED
+if crm and case!='crm_predecessor':old=m.JAPAN_STABILITY_RETAINED if stability else m.JAPAN_PAGINATION_RETAINED if pagination else m.CRM_CHINA_RETAINED
 old_image,new_image='sha256:'+'1'*64,'sha256:'+'2'*64
 old_nonce,new_nonce='3'*32,'4'*32
 old_id,new_id='5'*64,'6'*64
@@ -79,7 +82,7 @@ with tempfile.TemporaryDirectory() as temp:
  def reports(runtime,nonce):
   speed=m.json_bytes({'release':runtime,'passed':True,'browserPassed':True,'speedGuard':{'passed':True}})
   details={'kind':'china-browser-details-v1','release':runtime,'nonce':nonce,'passed':True,'generationManifestSha256':manifest_sha,'precedingSpeedReportSha256':m.sha(speed)}
-  if runtime==new and plan.get('codeScope') in (m.CRM_CHINA_CODE_SCOPE,m.CRM_JAPAN_PHOTO_CODE_SCOPE,m.JAPAN_PAGINATION_CODE_SCOPE):
+  if runtime==new and plan.get('codeScope') in (m.CRM_CHINA_CODE_SCOPE,m.CRM_JAPAN_PHOTO_CODE_SCOPE,m.JAPAN_PAGINATION_CODE_SCOPE,m.JAPAN_STABILITY_CODE_SCOPE):
    crm_report=m.json_bytes({'version':1,'kind':'china-crm-operations-proof-v1','codeScope':plan['codeScope'],
     'release':runtime,'nonce':nonce,'checkedAt':'2026-11-26T19:00:00.000Z','pricingRuntimeSha':pricing,
     'generationManifestSha256':manifest_sha,'generationId':generation['generationId'],'sourceObservedAt':generation['source']['sourceObservedAt'],
@@ -105,7 +108,8 @@ with tempfile.TemporaryDirectory() as temp:
      'passed':True,'japanFreshnessPassed':True,'japanPowerApiPassed':True,'japanUiPassed':True,'japanVisibilityPassed':True,
      'readOnlyBrowserFence':True,'productionMutations':0,'directSupplierApiRequests':0,
      'japanPetrolPowerUiPassed':True,'japanDetailPowerInputPassed':True,'japanDeliveredCalculationPassed':True,
-     'japanPreviewCalculationRequests':1,'japanFullPagesPassed':True,'japanPagination24Passed':True,'japanCatalogWarningRemovedPassed':True})
+     'japanPreviewCalculationRequests':1,'japanFullPagesPassed':True,'japanPagination24Passed':True,'japanCatalogWarningRemovedPassed':True,
+     **({key:True for key in stability_flags} if stability else {})})
     details.update(japanReportBase64=base64.b64encode(japan).decode(),japanReportSha256=m.sha(japan))
   elif runtime==new and plan.get('codeScope') in (m.JAPAN_CODE_SCOPE,m.JAPAN_COMPLETION_CODE_SCOPE,m.JAPAN_COMPLETION_V2_CODE_SCOPE,m.JAPAN_USABILITY_CODE_SCOPE):
    japan=m.json_bytes({'version':1,'kind':'catalog-japan-browser-v1','codeScope':plan['codeScope'],'release':runtime,'nonce':nonce,
@@ -157,6 +161,7 @@ with tempfile.TemporaryDirectory() as temp:
   image_receipt.update(codeScope=crm_scope,runtimeFiles=sorted(crm_files))
   if pagination:
    assert len(m.JAPAN_PAGINATION_CODE_FILES)==11 and old==m.JAPAN_PAGINATION_RETAINED or case=='crm_predecessor'
+   if stability:assert m.JAPAN_STABILITY_CODE_FILES>m.JAPAN_PAGINATION_CODE_FILES
   else:image_receipt['protectedPathExceptions']=copy.deepcopy(m.CRM_CHINA_PROTECTED_EXCEPTIONS)
  elif case.startswith('completion_'):
   assert len(m.JAPAN_COMPLETION_CODE_FILES)==12 and m.JAPAN_COMPLETION_CODE_SCOPE=='catalog-japan-completion-v1'
@@ -188,7 +193,7 @@ with tempfile.TemporaryDirectory() as temp:
  if case=='completion_predecessor':
   refused(lambda:m.validate_plan(plan),'code_usability_predecessor' if usability else 'code_completion_predecessor');print('ok');sys.exit(0)
  if case=='crm_predecessor':
-  refused(lambda:m.validate_plan(plan),'code_pagination_predecessor' if pagination else 'code_crm_predecessor');print('ok');sys.exit(0)
+  refused(lambda:m.validate_plan(plan),'code_stability_predecessor' if stability else 'code_pagination_predecessor' if pagination else 'code_crm_predecessor');print('ok');sys.exit(0)
  m.validate_plan(plan)
  def make_container(identity,runtime,image,nonce,directory,port):
   mounts=[{'Type':'bind','Source':str(enc),'Destination':'/app/data/knowledge/encyclopedia/calculation-v1.json','RW':False,'Mode':'ro'},
@@ -462,6 +467,7 @@ with tempfile.TemporaryDirectory() as temp:
   if completion:required_flags+=('japanPetrolPowerUiPassed','japanDetailPowerInputPassed','japanDeliveredCalculationPassed')
   if usability:required_flags+=usability_flags
   if pagination:required_flags+=('japanFullPagesPassed','japanPagination24Passed','japanCatalogWarningRemovedPassed')
+  if stability:required_flags+=stability_flags
   scope_fields=[] if combined else [('codeScope',m.PHOTO_JAPAN_CODE_SCOPE),('kind','china-photo-japan-browser-v1'),
    ('readOnlyBrowserFence',False)]+[(key,value) for key in
     (('productionMutations','directSupplierApiRequests') if japan else ('productionMutations','directSupplierRequests','explicitJapanApiRequests','japanUiNavigations'))
@@ -560,6 +566,7 @@ for(const name of ['scope','preflight','copy','oracle_tamper','descriptor_tamper
   'crm_accept','crm_rollback','crm_next_daily','crm_predecessor','crm_extra','crm_missing','crm_duplicate','crm_relabel','crm_unbound','crm_exceptions','crm_browser_rejections',
   'crm_photo_accept','crm_photo_rollback','crm_photo_next_daily','crm_photo_predecessor','crm_photo_extra','crm_photo_missing','crm_photo_duplicate','crm_photo_relabel','crm_photo_unbound','crm_photo_exceptions','crm_photo_browser_rejections','crm_photo_retry_rejections',
   'pagination_accept','pagination_rollback','pagination_next_daily','pagination_predecessor','pagination_extra','pagination_missing','pagination_duplicate','pagination_relabel','pagination_unbound','pagination_exceptions','pagination_browser_rejections','pagination_retry_rejections','pagination_japan_rejections',
+  'stability_accept','stability_rollback','stability_next_daily','stability_predecessor','stability_extra','stability_missing','stability_duplicate','stability_relabel','stability_unbound','stability_exceptions','stability_browser_rejections','stability_retry_rejections','stability_japan_rejections',
   'cleanup_mount','cleanup_parent_mount','cleanup_file_tamper','cleanup_plan_tamper','cleanup_rollback_tamper','cleanup_accepted_symlink','cleanup_idempotent','cleanup_copy_failure','cleanup_load_failure','post_copy_disk_space','storage_required','storage_image','storage_archive','storage_receipt','storage_zero','storage_source','storage_unpacked_space','storage_receipt_identity']) {
   test('China code-only host: '+name,()=>{
     const result=spawnSync('python3',['-I','-B','-c',harness,hostFile,name],{encoding:'utf8',timeout:20000});

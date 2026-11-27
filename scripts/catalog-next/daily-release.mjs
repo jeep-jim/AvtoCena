@@ -17,9 +17,11 @@ import {verifyChinaImageStorageProof} from './build-release-image.mjs';
 import {CRM_CHINA_CODE_SCOPE, CRM_CHINA_PROTECTED_EXCEPTIONS} from './crm-china-code-scope.mjs';
 import {CRM_JAPAN_PHOTO_CODE_SCOPE} from './crm-japan-photo-code-scope.mjs';
 import {JAPAN_PAGINATION_CODE_SCOPE} from './japan-pagination-code-scope.mjs';
+import {JAPAN_STABILITY_CODE_SCOPE} from './japan-stability-code-scope.mjs';
 import {checkedCrmChinaManifestProof, checkedCrmChinaEvidence, verifyCrmChinaUnauthorizedAccess} from './crm-china-status-proof.mjs';
 import {readJapanPhotoRetryFixture, checkedJapanPhotoRetryEvidence} from './japan-photo-retry-proof.mjs';
 import {readJapanPaginationFixture} from './japan-pagination-fixture.mjs';
+import {readJapanFilterDirectoryFixture} from './japan-filter-directory-proof.mjs';
 import {validateChinaGenerationReference, validateChinaAcceptedState, validateChinaPublicationIntent,
   validateChinaCodeTransition, inspectChinaPublicationState} from './china-state.mjs';
 
@@ -153,7 +155,8 @@ export function createChinaDailyRelease({root, servingRoot, pricingPlan, serving
 
   async function stage(mode, {candidate, previous, nonce, assertAuthority}) {
     const codeUpdate = mode === 'code-update';
-    const paginationCodeUpdate = codeUpdate && servingPlan.codeScope === JAPAN_PAGINATION_CODE_SCOPE;
+    const stabilityCodeUpdate = codeUpdate && servingPlan.codeScope === JAPAN_STABILITY_CODE_SCOPE;
+    const paginationCodeUpdate = codeUpdate && (servingPlan.codeScope === JAPAN_PAGINATION_CODE_SCOPE || stabilityCodeUpdate);
     const photoRetryCodeUpdate = codeUpdate && (servingPlan.codeScope === CRM_JAPAN_PHOTO_CODE_SCOPE || paginationCodeUpdate);
     const crmCodeUpdate = codeUpdate && (servingPlan.codeScope === CRM_CHINA_CODE_SCOPE || photoRetryCodeUpdate);
     const crmProtectedException = codeUpdate && [CRM_CHINA_CODE_SCOPE, CRM_JAPAN_PHOTO_CODE_SCOPE].includes(servingPlan.codeScope);
@@ -181,6 +184,7 @@ export function createChinaDailyRelease({root, servingRoot, pricingPlan, serving
       // The frozen candidate's offline browser fixture ran before its image
       // build. Missing/failed evidence stops this exact scope before host contact.
       if (paginationCodeUpdate) await readJapanPaginationFixture(path.join(temporary, 'japan-pagination24-browser-report.json'));
+      if (stabilityCodeUpdate) await readJapanFilterDirectoryFixture(path.join(temporary, 'japan-filter-directory-browser-report.json'));
       const photoRetryFixture = photoRetryCodeUpdate
         ? await readJapanPhotoRetryFixture(path.join(temporary, 'japan-photo-retry-browser-report.json')) : null;
       const oraclePath = path.join(directory, 'acceptance.json');
@@ -428,7 +432,7 @@ export function createChinaDailyRelease({root, servingRoot, pricingPlan, serving
             need(detailsRaw.length <= 256 * 1024, 'browser_details_size');
             await fs.writeFile(detailsPath, detailsRaw, {mode: 0o600});
           }
-          if (codeUpdate && ['catalog-japan-recovery-v1', 'catalog-japan-completion-v1', 'catalog-japan-completion-v2', 'catalog-japan-usability-v1', JAPAN_PAGINATION_CODE_SCOPE].includes(plan.codeScope)) {
+          if (codeUpdate && ['catalog-japan-recovery-v1', 'catalog-japan-completion-v1', 'catalog-japan-completion-v2', 'catalog-japan-usability-v1', JAPAN_PAGINATION_CODE_SCOPE, JAPAN_STABILITY_CODE_SCOPE].includes(plan.codeScope)) {
             await activeGuard(); await progress('code_japan_browser');
             const japanOutput = path.join(browserDirectory, 'japan-browser-report.json'), japanStartedAt = Date.now();
             const japanExit = await use.runChild({root, script: path.join(root, 'scripts/catalog-next/japan-browser-acceptance.mjs'),
@@ -452,7 +456,7 @@ export function createChinaDailyRelease({root, servingRoot, pricingPlan, serving
             need(['passed', 'japanFreshnessPassed', 'japanPowerApiPassed', 'japanUiPassed', 'japanVisibilityPassed', 'readOnlyBrowserFence']
                 .every(key => japan[key] === true)
               && ['productionMutations', 'directSupplierApiRequests'].every(key => japan[key] === 0), 'japan_browser_binding');
-            if (['catalog-japan-completion-v1', 'catalog-japan-completion-v2', 'catalog-japan-usability-v1', JAPAN_PAGINATION_CODE_SCOPE].includes(plan.codeScope)) need(
+            if (['catalog-japan-completion-v1', 'catalog-japan-completion-v2', 'catalog-japan-usability-v1', JAPAN_PAGINATION_CODE_SCOPE, JAPAN_STABILITY_CODE_SCOPE].includes(plan.codeScope)) need(
               ['japanPetrolPowerUiPassed', 'japanDetailPowerInputPassed', 'japanDeliveredCalculationPassed']
                 .every(key => japan[key] === true)
               && Number.isSafeInteger(japan.japanPreviewCalculationRequests) && japan.japanPreviewCalculationRequests >= 1
@@ -462,6 +466,8 @@ export function createChinaDailyRelease({root, servingRoot, pricingPlan, serving
                 .every(key => japan[key] === true), 'japan_browser_binding');
             if (paginationCodeUpdate) need(['japanFullPagesPassed', 'japanPagination24Passed', 'japanCatalogWarningRemovedPassed']
               .every(key => japan[key] === true), 'japan_browser_binding');
+            if (stabilityCodeUpdate) need(['japanModelSelectionPassed', 'japanCombinedFiltersPassed',
+              'japanRelatedCardsPassed', 'japanVehiclePolicyPassed'].every(key => japan[key] === true), 'japan_browser_binding');
             // Preserve the already bound CRM/photo evidence when this profile
             // additionally verifies Japan's ordinary 24-row continuation.
             detailsRaw = Buffer.from(JSON.stringify({...JSON.parse(detailsRaw), japanReportBase64: japanRaw.toString('base64'),

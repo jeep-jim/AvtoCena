@@ -3,6 +3,8 @@ import path from 'node:path';
 import {createHash} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
 import {JAPAN_PAGINATION_CODE_SCOPE} from './japan-pagination-code-scope.mjs';
+import {JAPAN_STABILITY_CODE_SCOPE} from './japan-stability-code-scope.mjs';
+import {JAPAN_STABILITY_GATES, japanStabilityApiAllowed, runJapanStabilityBrowser} from './japan-stability-browser.mjs';
 
 const ROOT=fileURLToPath(new URL('../../',import.meta.url));
 const ORIGIN='https://avtocena.com';
@@ -253,9 +255,53 @@ export function japanSourceReadEvidence(payload,expectedRelease){
 
 export function recordJapanResponse(report,stage,response,expectedRelease){
  const observed={stage,...japanResponseObservation(response.data,response.status),...japanResponseTransport(response),
-  sourceReadEvidence:japanSourceReadEvidence(response.data,expectedRelease)};
+  sourceReadEvidence:japanSourceReadEvidence(response.data,expectedRelease),
+  pageReadEvidence:japanPageReadEvidence(response.data)};
  (report.checks.responses??=[]).push(observed);
  return observed;
+}
+
+/** The current query client emits one finite receipt per actual source page,
+ * including a later refill failure. Retain only its public schema. When a
+ * response has unusually many reads, keep the beginning and ending (including
+ * the final failure), explicitly mark the omission, and never claim freshness
+ * or source success merely because a receipt exists. */
+export function japanPageReadEvidence(payload){
+ const required=['version','requestId','queryHash','table','kind','page','pageSize','startedAt','finishedAt',
+  'stage','supplierAttempted','outcome'];
+ const optional=['reason','observedAt'];
+ const reasons=new Set([...sourceReadReasons,'directory_too_large','directory_page_repeated']);
+ const iso=value=>typeof value==='string'&&/^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(?:\.\d{3})?Z$/.test(value)
+  &&Number.isFinite(Date.parse(value));
+ const safeReason=value=>typeof value==='string'&&(reasons.has(value)||/^http_[45]\d\d$/.test(value));
+ const topReason=Object.getOwnPropertyDescriptor(payload??{},'reason')?.value;
+ const reason=safeReason(topReason)?{reason:topReason}:{};
+ const empty={status:'missing',receipts:[],received:0,omitted:0,limited:false,...reason};
+ try{
+  const raw=Array.isArray(payload?.sourceReceipts)?payload.sourceReceipts:payload?.sourceReceipt!==undefined?[payload.sourceReceipt]:[];
+  if(!raw.length)return empty;
+  const selected=raw.length>16?[...raw.slice(0,8),...raw.slice(-8)]:raw;
+  const receipts=[],seen=new Set();
+  for(const original of selected){
+   if(!original||typeof original!=='object'||Array.isArray(original))continue;
+   const descriptors=Object.getOwnPropertyDescriptors(original),keys=Reflect.ownKeys(descriptors);
+   if(!required.every(key=>Object.hasOwn(descriptors[key]??{},'value'))
+    ||keys.some(key=>typeof key!=='string'||![...required,...optional].includes(key)||!Object.hasOwn(descriptors[key],'value')))continue;
+   const row=Object.fromEntries(keys.map(key=>[key,descriptors[key].value]));
+   if(row.version!==1||!receiptUuid(row.requestId)||!receiptHash(row.queryHash,64)||typeof row.queryHash!=='string'
+    ||!['stats','main'].includes(row.table)||!['list','detail','count','models','makes','colors'].includes(row.kind)
+    ||!Number.isSafeInteger(row.page)||row.page<1||row.page>1_000_000
+    ||!Number.isSafeInteger(row.pageSize)||row.pageSize<1||row.pageSize>500
+    ||!iso(row.startedAt)||!iso(row.finishedAt)||Date.parse(row.startedAt)>Date.parse(row.finishedAt)
+    ||!['query','access','storage','supplier','empty_verification','cooldown','queue'].includes(row.stage)
+    ||typeof row.supplierAttempted!=='boolean'||!['fresh','stale','partial','unavailable'].includes(row.outcome)
+    ||Object.hasOwn(row,'reason')&&!safeReason(row.reason)||Object.hasOwn(row,'observedAt')&&!iso(row.observedAt)
+    ||seen.has(row.requestId))continue;
+   seen.add(row.requestId);receipts.push(row);
+  }
+  const omitted=raw.length-receipts.length;
+  return {status:omitted?'partial':'recorded',receipts,received:raw.length,omitted,limited:omitted>0,...reason};
+ }catch{return {...empty,status:'omitted',limited:true};}
 }
 
 export function verifyJapanWarmPage(first,second){
@@ -316,7 +362,10 @@ export function verifyJapanVisibleVehiclePolicy(pages){
   need(!['bus','minibus','truck','special','special_equipment'].includes(body)
    &&!['M2','M3','N2','N3'].includes(category)
    &&!(positive(row.grossVehicleWeightKg)&&row.grossVehicleWeightKg>3500)
-   &&!/(?:^| )(?:COASTER|CIVILIAN|ROSA|CANTER|ELF|SUPER GREAT)(?: |$)/.test(model),'excluded_vehicle_visible');
+   &&!/(?:^| )(?:COASTER|CIVILIAN|ROSA|CANTER|ELF|SUPER GREAT)(?: |$)/.test(model)
+   &&!(String(row.make||'').normalize('NFKC').trim().toUpperCase()==='MAZDA'
+     &&/^TITAN(?:$|[ /-])/.test(String(row.model||'').normalize('NFKC').trim().toUpperCase().replace(/\s+/g,' '))),
+   'excluded_vehicle_visible');
   checked++;
  }
  need(checked>0,'vehicle_policy_no_sample');return {checked,excludedVehiclesVisible:0};
@@ -524,7 +573,7 @@ export async function installReadFence(context,report,{getCalculationGrant}={}){
  report.readOnlyBrowserFence=true;
 }
 
-async function readJson(context,url,{paginationKind}={}){
+async function readJson(context,url,{paginationKind,stability=false}={}){
  let continuation=false;
  if(url.startsWith('/api/catalog/search?')){
   const query=new URL(url,ORIGIN).searchParams;
@@ -533,7 +582,8 @@ async function readJson(context,url,{paginationKind}={}){
    continuation=(paginationKind?japanPaginationPageApi(pageUrl.href,{kind:paginationKind}):japanPetrolPowerPageApi(pageUrl.href))===url;
   }
  }
- need(url==='/api/health'||url===PLAIN||url===POWER||url===PETROL_POWER||url===PETROL_POWER_NEXT||url===BRAND_DIRECTORY||continuation,'api_scope');
+ need(url==='/api/health'||url===PLAIN||url===POWER||url===PETROL_POWER||url===PETROL_POWER_NEXT||url===BRAND_DIRECTORY||continuation
+  ||stability&&japanStabilityApiAllowed(url),'api_scope');
  const started=Date.now();
  const response=await context.request.get(ORIGIN+url,{timeout:45_000,maxRedirects:0,headers:{'Cache-Control':'no-cache'}});
  const data=await response.json().catch(()=>null),receivedAt=Date.now();
@@ -541,8 +591,9 @@ async function readJson(context,url,{paginationKind}={}){
 }
 
 export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,outputFile,playwrightModule,chromeBin,codeScope=SCOPE}){
- const pagination=codeScope===JAPAN_PAGINATION_CODE_SCOPE;
- const completion=[COMPLETION_SCOPE,COMPLETION_V2_SCOPE,USABILITY_SCOPE,JAPAN_PAGINATION_CODE_SCOPE].includes(codeScope);
+ const stability=codeScope===JAPAN_STABILITY_CODE_SCOPE;
+ const pagination=codeScope===JAPAN_PAGINATION_CODE_SCOPE||stability;
+ const completion=[COMPLETION_SCOPE,COMPLETION_V2_SCOPE,USABILITY_SCOPE,JAPAN_PAGINATION_CODE_SCOPE,JAPAN_STABILITY_CODE_SCOPE].includes(codeScope);
  const usability=codeScope===USABILITY_SCOPE;
  const report={version:1,kind:'catalog-japan-browser-v1',codeScope,release:releaseSha,nonce,
   checkedAt:new Date().toISOString(),passed:false,japanFreshnessPassed:false,japanPowerApiPassed:false,
@@ -552,6 +603,7 @@ export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,out
   japanDeliveredCalculationPassed:false,japanPreviewCalculationRequests:0});
  if(usability)Object.assign(report,Object.fromEntries(USABILITY_GATES.map(key=>[key,false])));
  if(pagination)Object.assign(report,{japanFullPagesPassed:false,japanPagination24Passed:false,japanCatalogWarningRemovedPassed:false});
+ if(stability)Object.assign(report,Object.fromEntries(JAPAN_STABILITY_GATES.map(key=>[key,false])));
  let browser,context,currentPage,calculationGrant=null,brandDirectory=null,stage='preconditions';
  const usabilityPages=[],quietChecks=[];
  const capture=async(page,name)=>{
@@ -571,7 +623,7 @@ export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,out
   need(value.data.calculationVersion==='4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90','calculation_changed');
  };
  try{
-  need([SCOPE,COMPLETION_SCOPE,COMPLETION_V2_SCOPE,USABILITY_SCOPE,JAPAN_PAGINATION_CODE_SCOPE].includes(codeScope),'code_scope');
+  need([SCOPE,COMPLETION_SCOPE,COMPLETION_V2_SCOPE,USABILITY_SCOPE,JAPAN_PAGINATION_CODE_SCOPE,JAPAN_STABILITY_CODE_SCOPE].includes(codeScope),'code_scope');
   need(path.isAbsolute(outputFile),'output');
   try{await fs.access(outputFile);need(false,'report_exists');}catch(error){if(error?.code!=='ENOENT')throw error;}
   const raw=await fs.readFile(oraclePath),binding=japanReleaseBinding(JSON.parse(raw),releaseSha,nonce);
@@ -926,10 +978,20 @@ export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,out
    await panel.scrollIntoViewIfNeeded();await capture(view,'japan-petrol-delivered-detail-mobile');
    calculationGrant=null;await view.close();currentPage=null;
   }
+  if(stability){
+   verifyJapanVisibleVehiclePolicy([plain[0],power.data]);
+   await runJapanStabilityBrowser({context,report,generationId:binding.generationId,capture,
+    onStage:value=>{stage=value;},onPage:value=>{currentPage=value;},
+    read:async url=>{report.explicitJapanApiRequests++;const value=await readJson(context,url,{stability:true});
+     recordJapanResponse(report,stage,value,releaseSha);return value;},
+    verifyPage:verifyJapanPage,verifyFullPage:verifyJapanFullPage,verifyPowerPage:verifyJapanPowerPage,
+    verifyVehiclePolicy:verifyJapanVisibleVehiclePolicy});
+  }
   stage='release_after';await health();
   report.passed=['japanFreshnessPassed','japanPowerApiPassed','japanUiPassed','japanVisibilityPassed','readOnlyBrowserFence',
    ...(completion?['japanPetrolPowerUiPassed','japanDetailPowerInputPassed','japanDeliveredCalculationPassed']:[]),
-   ...(usability?USABILITY_GATES:[]),...(pagination?['japanFullPagesPassed','japanPagination24Passed','japanCatalogWarningRemovedPassed']:[])].every(key=>report[key]===true);
+   ...(usability?USABILITY_GATES:[]),...(pagination?['japanFullPagesPassed','japanPagination24Passed','japanCatalogWarningRemovedPassed']:[]),
+   ...(stability?JAPAN_STABILITY_GATES:[])].every(key=>report[key]===true);
  }catch(error){
   report.error={stage,code:/^japan_browser_[a-z_]+$/.test(error?.message||'')?error.message:'japan_browser_check_failed',timeout:error?.name==='TimeoutError'};
   if(currentPage&&/^[a-f0-9]{32}$/.test(nonce||''))await capture(currentPage,'failure').catch(()=>{});

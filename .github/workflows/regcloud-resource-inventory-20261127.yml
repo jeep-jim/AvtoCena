@@ -21,14 +21,9 @@ jobs:
         with:
           persist-credentials: false
       - name: Check private-field projection and bounded read guards
-        run: python3 tests/regcloud-resource-inventory-20261126.test.py
-      - name: Inspect the exact rolled-back Japan release artifact
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-        shell: bash
         run: |
-          set -euo pipefail
-          python3 -I -B scripts/catalog-next/inspect-japan-pagination-failure-45914646851.py | tee release-artifact-inspection.json
+          python3 tests/regcloud-resource-inventory-20261126.test.py
+          python3 tests/public-post-release-verification-20261127.test.py
       - name: Inspect RAM and disk ownership without changing containers or data
         env:
           SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
@@ -41,8 +36,8 @@ jobs:
           printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
           unset SSH_PRIVATE_KEY
           ssh -F /dev/null -T -i "$key_file" -o BatchMode=yes -o IdentitiesOnly=yes -o ForwardAgent=no -o ClearAllForwardings=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=yes -o GlobalKnownHostsFile=/dev/null -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts" root@151.248.113.177 '/usr/bin/env -i PATH=/usr/bin:/bin /usr/bin/python3 -I -B -' < scripts/regcloud-resource-inventory-20261126.py | tee server-resource-inventory.json
-      - name: Verify the retained public runtime and China cut after rollback
-        run: python3 -I -B scripts/public-post-release-verification-20261127.py
+      - name: Compare the observed reviewed runtime and unchanged accepted China cut
+        run: python3 -I -B scripts/public-post-release-verification-20261127.py --inventory server-resource-inventory.json
       - name: Inspect the China schedule and recent scheduled runs
         env:
           GITHUB_TOKEN: ${{ github.token }}
@@ -55,7 +50,6 @@ jobs:
           path: |
             server-resource-inventory.json
             public-post-release-verification.json
-            release-artifact-inspection.json
             china-schedule-metadata-20261127.json
           if-no-files-found: ignore
           retention-days: 14

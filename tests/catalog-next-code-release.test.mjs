@@ -13,6 +13,8 @@ import {CRM_CHINA_CODE_SCOPE, CRM_CHINA_CODE_PATHS, CRM_CHINA_RETAINED_RUNTIME, 
   from '../scripts/catalog-next/crm-china-code-scope.mjs';
 import {CRM_JAPAN_PHOTO_CODE_SCOPE, CRM_JAPAN_PHOTO_CODE_PATHS} from '../scripts/catalog-next/crm-japan-photo-code-scope.mjs';
 import {JAPAN_PAGINATION_CODE_SCOPE, JAPAN_PAGINATION_CODE_PATHS, JAPAN_PAGINATION_RETAINED_RUNTIME} from '../scripts/catalog-next/japan-pagination-code-scope.mjs';
+import {JAPAN_STABILITY_CODE_SCOPE, JAPAN_STABILITY_CODE_PATHS, JAPAN_STABILITY_RETAINED_RUNTIME} from '../scripts/catalog-next/japan-stability-code-scope.mjs';
+import {JAPAN_STABILITY_GATES} from '../scripts/catalog-next/japan-stability-browser.mjs';
 
 const hash = raw => createHash('sha256').update(raw).digest('hex');
 const ordered = value => Array.isArray(value) ? value.map(ordered) : value && typeof value === 'object'
@@ -74,11 +76,12 @@ test('authenticated photo preflight preserves every frozen expected value and ch
   assert.throws(() => checkedChinaCodePreflight(f.preflight, {...f.current, sourceCursor: 101}, nextSha));
 });
 
-async function fixture(t, {combined = false, japan = false,completion=false, crm=false, crmPhoto=false, pagination=false} = {}) {
+async function fixture(t, {combined = false, japan = false,completion=false, crm=false, crmPhoto=false, pagination=false, stability=false} = {}) {
+  pagination=pagination||stability;
   crmPhoto=crmPhoto||pagination;completion=completion||pagination;
   crm=crm||crmPhoto;
   japan=Boolean(japan||completion);
-  const usability=completion===usabilityScope,retainedRuntime=pagination?JAPAN_PAGINATION_RETAINED_RUNTIME:crm?CRM_CHINA_RETAINED_RUNTIME:usability?JAPAN_USABILITY_RETAINED_RUNTIME:oldSha;
+  const usability=completion===usabilityScope,retainedRuntime=stability?JAPAN_STABILITY_RETAINED_RUNTIME:pagination?JAPAN_PAGINATION_RETAINED_RUNTIME:crm?CRM_CHINA_RETAINED_RUNTIME:usability?JAPAN_USABILITY_RETAINED_RUNTIME:oldSha;
   const f = sample(retainedRuntime), directory = await fs.mkdtemp(path.join(os.tmpdir(), 'china-photo-stage-'));
   t.after(() => fs.rm(directory, {recursive: true, force: true}));
   const root = path.join(directory, 'controller');
@@ -97,12 +100,17 @@ async function fixture(t, {combined = false, japan = false,completion=false, crm
   if(pagination)await fs.writeFile(paginationFixturePath,JSON.stringify({version:1,kind:'japan-pagination24-browser-v1',passed:true,
     caseCount:8,widths:[390,1440],checks:Object.fromEntries(['refill24','numberedContinuation','appendNoDuplicatesOrGaps','finiteExhaustion',
       'unknownPowerPreserved','failureHonesty','cursorBinding','warningRemoved','sourcePageSize24','neighborPaginationPreserved','noExternalRequests'].map(key=>[key,true]))}));
+  const directoryFixturePath=path.join(directory,'japan-filter-directory-browser-report.json');
+  if(stability)await fs.writeFile(directoryFixturePath,JSON.stringify({passed:true,
+    scope:'Actual Japan brand/model controls with bounded local source fixtures; no production or supplier calls',
+    cases:[390,1440].flatMap(width=>['source-options-only','make-change-clears-old-models',
+      'model-directory-failure-and-retry','brand-directory-failure-and-retry'].map(name=>({width,name,passed:true})))}));
   const image = Buffer.from('synthetic roundtrip image'), imagePath = path.join(imageDirectory, 'image.tar');
   await fs.writeFile(imagePath, image);
   const servingPlan = {version: 1, market: 'china', runtimeSha: nextSha, retainedRuntime,
     runtimeTree: '6'.repeat(40), runtimeDiffSha256: hash('photo diff'), pricingRuntimeSha: pricingSha,
     ...(usability?{runtimeFiles:[...JAPAN_USABILITY_CODE_PATHS]}:{}),
-    ...(pagination?{runtimeFiles:[...JAPAN_PAGINATION_CODE_PATHS],codeScope:JAPAN_PAGINATION_CODE_SCOPE}:crm?{runtimeFiles:[...(crmPhoto?CRM_JAPAN_PHOTO_CODE_PATHS:CRM_CHINA_CODE_PATHS)], codeScope:crmPhoto?CRM_JAPAN_PHOTO_CODE_SCOPE:CRM_CHINA_CODE_SCOPE}:
+    ...(stability?{runtimeFiles:[...JAPAN_STABILITY_CODE_PATHS],codeScope:JAPAN_STABILITY_CODE_SCOPE}:pagination?{runtimeFiles:[...JAPAN_PAGINATION_CODE_PATHS],codeScope:JAPAN_PAGINATION_CODE_SCOPE}:crm?{runtimeFiles:[...(crmPhoto?CRM_JAPAN_PHOTO_CODE_PATHS:CRM_CHINA_CODE_PATHS)], codeScope:crmPhoto?CRM_JAPAN_PHOTO_CODE_SCOPE:CRM_CHINA_CODE_SCOPE}:
       japan ? {codeScope: completion?(typeof completion==='string'?completion:'catalog-japan-completion-v1'):'catalog-japan-recovery-v1'} : combined ? {codeScope: 'catalog-photo-japan-power-v1'} : {})};
   const pricingPlan = {version: 1, market: 'china', runtimeSha: pricingSha};
   const imageReceipt = {version: 1,
@@ -179,14 +187,15 @@ async function fixture(t, {combined = false, japan = false,completion=false, crm
           const photo = JSON.parse(photoRaw);
           assert.equal(hash(photoRaw), details.japanPhotoRetryReportSha256);
           assert.equal(photo.nonce, hostPlan.nonce); assert.equal(photo.release, hostPlan.runtimeSha);
-          assert.equal(photo.codeScope, pagination?JAPAN_PAGINATION_CODE_SCOPE:CRM_JAPAN_PHOTO_CODE_SCOPE);
+          assert.equal(photo.codeScope, stability?JAPAN_STABILITY_CODE_SCOPE:pagination?JAPAN_PAGINATION_CODE_SCOPE:CRM_JAPAN_PHOTO_CODE_SCOPE);
           assert.deepEqual(Buffer.from(photo.fixtureBase64, 'base64'), await fs.readFile(photoFixturePath));
         }
         if(pagination){
           const japanRaw=Buffer.from(details.japanReportBase64,'base64'),japanReport=JSON.parse(japanRaw);
           assert.equal(hash(japanRaw),details.japanReportSha256);
-          assert.equal(japanReport.codeScope,JAPAN_PAGINATION_CODE_SCOPE);
+          assert.equal(japanReport.codeScope,stability?JAPAN_STABILITY_CODE_SCOPE:JAPAN_PAGINATION_CODE_SCOPE);
           assert.equal(japanReport.japanPagination24Passed,true);assert.equal(japanReport.japanFullPagesPassed,true);
+          if(stability)for(const key of JAPAN_STABILITY_GATES)assert.equal(japanReport[key],true);
         }
         return {saved: true, speedReportSha256: hash(browserBytes.speed), detailsReportSha256: hash(browserBytes.details)};
       }
@@ -247,7 +256,8 @@ async function fixture(t, {combined = false, japan = false,completion=false, crm
             ...(completion?{japanPetrolPowerUiPassed:true,japanDetailPowerInputPassed:true,
               japanDeliveredCalculationPassed:true,japanPreviewCalculationRequests:1}:{}),
             ...(usability?Object.fromEntries(usabilityFlags.map(flag=>[flag,true])):{}),
-            ...(pagination?{japanFullPagesPassed:true,japanPagination24Passed:true,japanCatalogWarningRemovedPassed:true}:{})};
+            ...(pagination?{japanFullPagesPassed:true,japanPagination24Passed:true,japanCatalogWarningRemovedPassed:true}:{}),
+            ...(stability?Object.fromEntries(JAPAN_STABILITY_GATES.map(key=>[key,true])):{})};
           if (flags.failedReport) Object.assign(report, {passed: false, japanVisibilityPassed: false,
             error: {stage: 'catalog_visibility', code: 'japan_browser_overview_http', timeout: false}});
           if (flags.changeReport) flags.changeReport(report);
@@ -279,7 +289,7 @@ async function fixture(t, {combined = false, japan = false,completion=false, crm
       },
       async openSession() { return session; }, async checkControl() {}, async health(value) { assert.ok([retainedRuntime, nextSha].includes(value)); },
     }});
-  return {...f, directory, imagePath, imageReceipt, imageReceiptRaw, storagePath, storageProof, servingPlan, calls, uploaded, release, flags, photoFixturePath, paginationFixturePath};
+  return {...f, directory, imagePath, imageReceipt, imageReceiptRaw, storagePath, storageProof, servingPlan, calls, uploaded, release, flags, photoFixturePath, paginationFixturePath, directoryFixturePath};
 }
 
 function memoryStorage(previous) {
@@ -764,6 +774,49 @@ test('pagination24 cannot accept an omitted live warning-removal proof',async t=
   f.flags.changeReport=report=>{delete report.japanCatalogWarningRemovedPassed;};
   await assert.rejects(stage.activate(input),/china_daily_release_japan_browser_binding/);
   assert.ok(!f.calls.includes('accept')&&!f.calls.includes('browser_evidence'));await stage.close();
+});
+
+test('stability publication composes unchanged China, CRM, photo, pagination and all new live proofs',async t=>{
+  const f=await fixture(t,{stability:true}),{stage,input}=await reservedStage(f);
+  assert.equal(f.servingPlan.retainedRuntime,JAPAN_STABILITY_RETAINED_RUNTIME);
+  assert.equal(Object.hasOwn(f.imageReceipt,'protectedPathExceptions'),false);
+  const outcome=await stage.activate(input);assert.equal(outcome.kind,'accepted');
+  const details=JSON.parse(outcome.evidence.browserDetailsBytes);
+  for(const key of ['crmChina','japanPhotoRetry','japan']){
+    const raw=Buffer.from(details[key+'ReportBase64'],'base64'),report=JSON.parse(raw);
+    assert.equal(hash(raw),details[key+'ReportSha256']);assert.equal(report.codeScope,JAPAN_STABILITY_CODE_SCOPE);
+    assert.equal(report.nonce,'b'.repeat(32));assert.equal(report.release,nextSha);
+    if(key==='japan')for(const flag of [...JAPAN_STABILITY_GATES,'japanFreshnessPassed','japanFullPagesPassed',
+      'japanPagination24Passed','japanCatalogWarningRemovedPassed','japanDeliveredCalculationPassed'])assert.equal(report[flag],true);
+  }
+  assert.deepEqual(JSON.parse(f.uploaded.get('acceptance.json')),{...f.oracle,runtimeSha:nextSha});
+  assert.ok(f.calls.indexOf('speed')<f.calls.indexOf('switch'));
+  assert.ok(f.calls.indexOf('crm_access_boundary')<f.calls.indexOf('japan-browser-acceptance.mjs'));
+  assert.ok(f.calls.indexOf('japan-browser-acceptance.mjs')<f.calls.indexOf('browser_evidence'));
+  assert.ok(f.calls.indexOf('browser_evidence')<f.calls.indexOf('accept'));
+  assert.ok(!f.calls.includes('acceptance-oracle.mjs'));await stage.close();
+});
+
+for(const flag of JAPAN_STABILITY_GATES)for(const missing of [false,true])
+test('stability refuses '+(missing?'missing':'failed')+' '+flag+' before host acceptance',async t=>{
+  const f=await fixture(t,{stability:true}),{stage,input}=await reservedStage(f);
+  f.flags.changeReport=report=>{if(missing)delete report[flag];else report[flag]=false;};
+  await assert.rejects(stage.activate(input),/china_daily_release_japan_browser_binding/);
+  assert.ok(!f.calls.includes('accept')&&!f.calls.includes('browser_evidence'));await stage.close();
+});
+
+for(const failure of ['missing','failed','duplicate'])
+test('stability requires its actual source-directory fixture before any host contact: '+failure,async t=>{
+  const f=await fixture(t,{stability:true});
+  if(failure==='missing')await fs.unlink(f.directoryFixturePath);
+  else{
+    const report=JSON.parse(await fs.readFile(f.directoryFixturePath));
+    if(failure==='failed')report.cases[0].passed=false;else report.cases[1]=report.cases[0];
+    await fs.writeFile(f.directoryFixturePath,JSON.stringify(report));
+  }
+  await assert.rejects(f.release.stageCodeRelease({candidate:f.candidate,previous:f.previous,nonce:'b'.repeat(32),assertAuthority:async()=>{}}),
+    /^Error: china_daily_release_stage_failed$/);
+  assert.ok(!f.calls.includes('code_preflight')&&!f.calls.includes('init')&&!f.calls.includes('switch'));
 });
 
 async function exactFailedCodePublication(f) {

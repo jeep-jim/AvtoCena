@@ -9,6 +9,7 @@ import {JAPAN_PAGINATION_CODE_SCOPE, JAPAN_PAGINATION_RETAINED_RUNTIME,
   JAPAN_PAGINATION_CODE_PATHS, isExactJapanPaginationScope}
   from '../scripts/catalog-next/japan-pagination-code-scope.mjs';
 import {checkedCatalogCodeScope} from '../scripts/catalog-next/photo-code-scope.mjs';
+import {JAPAN_STABILITY_CODE_SCOPE, isExactJapanStabilityScope} from '../scripts/catalog-next/japan-stability-code-scope.mjs';
 
 const plan = () => ({codeScope:JAPAN_PAGINATION_CODE_SCOPE,
   retainedRuntime:JAPAN_PAGINATION_RETAINED_RUNTIME, runtimeFiles:[...JAPAN_PAGINATION_CODE_PATHS]});
@@ -93,8 +94,11 @@ test('reviewed daily plans keep accepted a5ca selectable before and after the ne
   assert.equal(base.runtimeDiffSha256,'6a67b1680bc1f145d39164bbe269029a2450cf4f1284ffd2676616412f146466');
   assert.equal(base.pricingToServingDiffSha256,'1b1b0e9e122de2a1f6c95865ac46b43c26e7535a131c40df4fbfb91ea0fc669c');
   assert.equal(selectChinaDailyServingPlan(plans,base.runtimeSha),base);
-  const successor=plans.servingPlans.find(value=>value.codeScope===JAPAN_PAGINATION_CODE_SCOPE);
-  assert.ok(isExactJapanPaginationScope(successor));
+  const successors=plans.servingPlans.filter(value=>value!==base);
+  assert.equal(successors.length,1);
+  const successor=successors[0];
+  assert.ok(successor.codeScope===JAPAN_STABILITY_CODE_SCOPE
+    ?isExactJapanStabilityScope(successor):isExactJapanPaginationScope(successor));
   assert.equal(selectChinaDailyServingPlan(plans,successor.runtimeSha),successor);
   assert.deepEqual(successor.source,base.source);assert.deepEqual(successor.encyclopedia,base.encyclopedia);
   assert.equal(successor.pricingRuntimeSha,base.pricingRuntimeSha);

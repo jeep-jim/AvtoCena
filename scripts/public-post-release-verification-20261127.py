@@ -1,7 +1,11 @@
 """Read-only verification of the exact accepted public runtime and China cut."""
 import datetime
 import json
+import os
+from pathlib import Path
+import re
 import signal
+import stat
 import sys
 import urllib.error
 import urllib.request
@@ -10,6 +14,7 @@ RUNTIME = "a5ca426eec2663eb17c2df69fe2bfed46e2b8740"
 GENERATION = "gen_china_45875678028_1"
 TOTAL = 281310
 CALCULATION = "4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90"
+ROOT = Path(__file__).resolve().parents[1]
 
 class NoRedirect(urllib.request.HTTPRedirectHandler):
     def redirect_request(self, req, fp, code, msg, headers, newurl):
@@ -21,6 +26,62 @@ def require(value, code):
 
 def timeout(_signum, _frame):
     raise ValueError("public_verification_deadline")
+
+def checked_resource_runtime(value, reviewed, now=None):
+    """A resource observation does not grant publication authority. It only
+    selects one already reviewed source pin for this independent public check.
+    China generation, formula, totals and anonymous-access checks stay exact.
+    """
+    now = now or datetime.datetime.now(datetime.timezone.utc)
+    require(type(value) is dict and value.get("kind") == "regcloud-resource-inventory-20261126-v1"
+        and value.get("status") == "observed" and value.get("healthAndContainersUnchanged") is True
+        and value.get("runtimeLockHeld") is True
+        and type(value.get("mutations")) is int and value["mutations"] == 0
+        and type(value.get("providerRequests")) is int and value["providerRequests"] == 0,
+        "public_verification_inventory")
+    try:
+        observed = datetime.datetime.fromisoformat(value.get("measuredAtUtc", "").replace("Z", "+00:00"))
+        age = (now - observed).total_seconds()
+    except (ValueError, TypeError):
+        raise ValueError("public_verification_inventory_time") from None
+    require(-60 <= age < 15 * 60, "public_verification_inventory_time")
+    health = value.get("health") or {}
+    runtime = health.get("releaseSha")
+    require(type(runtime) is str and re.fullmatch(r"[a-f0-9]{40}", runtime)
+        and runtime in reviewed and health.get("status") == 200 and health.get("ok") is True
+        and health.get("calculationVersion") == CALCULATION, "public_verification_inventory_runtime")
+    serving = [row for row in value.get("containers", []) if type(row) is dict
+        and row.get("id") == value.get("servingContainerId")]
+    require(len(serving) == 1 and serving[0].get("running") is True
+        and serving[0].get("runtimeSha") == runtime, "public_verification_inventory_container")
+    return runtime
+
+def runtime_from_inventory(filename):
+    require(filename == "server-resource-inventory.json", "public_verification_inventory_path")
+    descriptor = os.open(filename, os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK)
+    try:
+        before = os.fstat(descriptor)
+        require(stat.S_ISREG(before.st_mode) and before.st_nlink == 1 and 0 < before.st_size <= 2 * 1024 * 1024,
+            "public_verification_inventory_file")
+        raw = b""
+        while len(raw) <= 2 * 1024 * 1024:
+            part = os.read(descriptor, min(65536, 2 * 1024 * 1024 + 1 - len(raw)))
+            if not part:
+                break
+            raw += part
+        after = os.fstat(descriptor)
+        require(len(raw) == before.st_size and (before.st_dev, before.st_ino, before.st_size, before.st_mtime_ns) ==
+            (after.st_dev, after.st_ino, after.st_size, after.st_mtime_ns), "public_verification_inventory_changed")
+    finally:
+        os.close(descriptor)
+    reviewed = []
+    for name in ("china-serving-plan.json", "china-code-serving-plan.json"):
+        with (ROOT / ".github/operations/catalog-next" / name).open(encoding="utf-8") as source:
+            plan = json.load(source)
+        require(plan.get("version") == 1 and plan.get("market") == "china"
+            and re.fullmatch(r"[a-f0-9]{40}", plan.get("runtimeSha", "")), "public_verification_reviewed_plan")
+        reviewed.append(plan["runtimeSha"])
+    return checked_resource_runtime(json.loads(raw), reviewed)
 
 def get(path, status=200):
     request = urllib.request.Request("https://avtocena.com" + path,
@@ -64,9 +125,11 @@ def main():
         "passed": False, "readOnly": True, "productionMutations": 0,
         "directSupplierRequests": 0, "signedInRequests": 0}
     try:
+        require(sys.argv[1:] in ([], ["--inventory", "server-resource-inventory.json"]), "public_verification_arguments")
+        runtime = runtime_from_inventory(sys.argv[2]) if len(sys.argv) == 3 else RUNTIME
         health, _ = get("/api/health")
         require(health.get("ok") is True and health.get("service") == "avtocena-web"
-            and health.get("releaseSha") == RUNTIME
+            and health.get("releaseSha") == runtime
             and health.get("calculationVersion") == CALCULATION, "public_verification_runtime")
         total = count()
         require(total == TOTAL, "public_verification_total")
@@ -74,7 +137,7 @@ def main():
         access, headers = get("/api/crm/china-catalog-status", 401)
         require(access == {"ok": False, "error": "auth_required"}
             and not headers.get_all("Set-Cookie"), "public_verification_crm_boundary")
-        report.update({"passed": True, "requests": 4, "runtimeSha": RUNTIME,
+        report.update({"passed": True, "requests": 4, "runtimeSha": runtime,
             "calculationVersion": CALCULATION, "generationId": GENERATION,
             "total": total, "powerTo160Total": power_total,
             "crmAnonymousStatus": 401, "crmAnonymousBodyMatched": True,

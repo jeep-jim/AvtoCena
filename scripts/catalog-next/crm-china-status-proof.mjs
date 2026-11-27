@@ -6,6 +6,7 @@ import {createRequire} from 'node:module';
 import {CRM_CHINA_CODE_SCOPE} from './crm-china-code-scope.mjs';
 import {CRM_JAPAN_PHOTO_CODE_SCOPE} from './crm-japan-photo-code-scope.mjs';
 import {JAPAN_PAGINATION_CODE_SCOPE} from './japan-pagination-code-scope.mjs';
+import {JAPAN_STABILITY_CODE_SCOPE} from './japan-stability-code-scope.mjs';
 
 const need = (condition, code) => { if (!condition) throw Error('china_crm_status_' + code); };
 const hash = bytes => createHash('sha256').update(bytes).digest('hex');
@@ -162,7 +163,7 @@ const EVIDENCE_KEYS = ['version', 'kind', 'codeScope', 'release', 'nonce', 'chec
 export function checkedCrmChinaEvidence(value, {candidate, nonce, oracleSha256, rows, startedAt,
   codeScope = CRM_CHINA_CODE_SCOPE, now = Date.now()}) {
   need(exactKeys(value, EVIDENCE_KEYS) && value.version === 1 && value.kind === 'china-crm-operations-proof-v1'
-    && [CRM_CHINA_CODE_SCOPE, CRM_JAPAN_PHOTO_CODE_SCOPE, JAPAN_PAGINATION_CODE_SCOPE].includes(codeScope)
+    && [CRM_CHINA_CODE_SCOPE, CRM_JAPAN_PHOTO_CODE_SCOPE, JAPAN_PAGINATION_CODE_SCOPE, JAPAN_STABILITY_CODE_SCOPE].includes(codeScope)
     && value.codeScope === codeScope && value.release === candidate.runtimeSha && value.nonce === nonce
     && value.pricingRuntimeSha === candidate.pricingRuntimeSha && value.generationId === candidate.generationId
     && value.generationManifestSha256 === candidate.generationManifestSha256

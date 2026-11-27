@@ -5,6 +5,7 @@ import {execFileSync} from 'node:child_process';
 import {CRM_CHINA_CODE_SCOPE, CRM_CHINA_CODE_PATHS} from './crm-china-code-scope.mjs';
 import {CRM_JAPAN_PHOTO_CODE_SCOPE, CRM_JAPAN_PHOTO_CODE_PATHS} from './crm-japan-photo-code-scope.mjs';
 import {JAPAN_PAGINATION_CODE_SCOPE, JAPAN_PAGINATION_CODE_PATHS} from './japan-pagination-code-scope.mjs';
+import {JAPAN_STABILITY_CODE_SCOPE, JAPAN_STABILITY_CODE_PATHS, isExactJapanStabilityScope} from './japan-stability-code-scope.mjs';
 
 const need = (value, code) => assert(value, 'china_serving_' + code);
 const hash = raw => createHash('sha256').update(raw).digest('hex');
@@ -170,6 +171,7 @@ const allowedCrmJapanPhoto = new Set([...allowedJapanCompletionV2, ...CRM_JAPAN_
 // The accepted a5ca ancestry plus this exact refill delta. No usability SQL,
 // client, power-phase, vehicle-policy or diagnostic path is added implicitly.
 const allowedJapanPagination = new Set([...allowedCrmJapanPhoto, ...JAPAN_PAGINATION_CODE_PATHS]);
+const allowedJapanStability = new Set([...allowedCrmJapanPhoto, ...JAPAN_STABILITY_CODE_PATHS]);
 const typeOnlyPath = 'apps/web/lib/catalog/offer-page-data.ts';
 export const CHINA_PROTECTED_PRICING_PATHS = Object.freeze([
   'packages', 'data', 'scripts/catalog-next', 'apps/web/lib/encyclopedia',
@@ -192,9 +194,11 @@ export async function verifyServingCompatibility({runtimeRoot, servingPlan, pric
     && servingPlan.pricingRuntimeSha === pricingPlan.runtimeSha
     && servingPlan.pricingRuntimeTree === pricingPlan.runtimeTree
     && /^[a-f0-9]{64}$/.test(servingPlan.pricingToServingDiffSha256 ?? ''), 'plan_binding');
+  need(servingPlan.codeScope !== JAPAN_STABILITY_CODE_SCOPE || isExactJapanStabilityScope(servingPlan), 'stability_scope');
   const files = servingPlan.pricingToServingFiles;
   need(Array.isArray(files) && new Set(files).size === files.length && files.every(name =>
-    typeof name === 'string' && (servingPlan.codeScope === JAPAN_PAGINATION_CODE_SCOPE ? allowedJapanPagination.has(name)
+    typeof name === 'string' && (servingPlan.codeScope === JAPAN_STABILITY_CODE_SCOPE ? allowedJapanStability.has(name)
+      : servingPlan.codeScope === JAPAN_PAGINATION_CODE_SCOPE ? allowedJapanPagination.has(name)
       : servingPlan.codeScope === CRM_JAPAN_PHOTO_CODE_SCOPE ? allowedCrmJapanPhoto.has(name)
       : servingPlan.codeScope === CRM_CHINA_CODE_SCOPE ? allowedCrmChina.has(name)
       : servingPlan.codeScope === 'catalog-japan-usability-v1' ? allowedJapanUsability.has(name)

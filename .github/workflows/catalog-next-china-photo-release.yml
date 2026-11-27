@@ -67,7 +67,7 @@ jobs:
           daemon-config: |
             {"features":{"containerd-snapshotter":true}}
       - name: Verify China CRM controls on the exact candidate before building
-        if: steps.photo_scope.outputs.scope == 'catalog-crm-china-operations-v1' || steps.photo_scope.outputs.scope == 'catalog-crm-japan-photo-retry-v1' || steps.photo_scope.outputs.scope == 'catalog-japan-pagination24-v1'
+        if: steps.photo_scope.outputs.scope == 'catalog-crm-china-operations-v1' || steps.photo_scope.outputs.scope == 'catalog-crm-japan-photo-retry-v1' || steps.photo_scope.outputs.scope == 'catalog-japan-pagination24-v1' || steps.photo_scope.outputs.scope == 'catalog-japan-stability-v1'
         run: |
           set -euo pipefail
           CRM_SHA=$(node -p "JSON.parse(require('fs').readFileSync('.github/operations/catalog-next/china-code-serving-plan.json')).runtimeSha")
@@ -82,7 +82,7 @@ jobs:
           await verifyCrmChinaMiddleware(process.env.RUNNER_TEMP + '/china-serving-runtime-' + plan.runtimeSha);
           JS
       - name: Verify bounded Japan image recovery on the exact candidate before building
-        if: steps.photo_scope.outputs.scope == 'catalog-crm-japan-photo-retry-v1' || steps.photo_scope.outputs.scope == 'catalog-japan-pagination24-v1'
+        if: steps.photo_scope.outputs.scope == 'catalog-crm-japan-photo-retry-v1' || steps.photo_scope.outputs.scope == 'catalog-japan-pagination24-v1' || steps.photo_scope.outputs.scope == 'catalog-japan-stability-v1'
         run: |
           set -euo pipefail
           PHOTO_SHA=$(node -p "JSON.parse(require('fs').readFileSync('.github/operations/catalog-next/china-code-serving-plan.json')).runtimeSha")
@@ -94,7 +94,7 @@ jobs:
           await readJapanPhotoRetryFixture(process.env.RUNNER_TEMP + '/japan-photo-retry-browser-report.json');
           JS
       - name: Verify ordinary Japan page filling on the exact candidate before host contact
-        if: steps.photo_scope.outputs.scope == 'catalog-japan-pagination24-v1'
+        if: steps.photo_scope.outputs.scope == 'catalog-japan-pagination24-v1' || steps.photo_scope.outputs.scope == 'catalog-japan-stability-v1'
         run: |
           set -euo pipefail
           PAGINATION_SHA=$(node -p "JSON.parse(require('fs').readFileSync('.github/operations/catalog-next/china-code-serving-plan.json')).runtimeSha")
@@ -106,8 +106,21 @@ jobs:
           import {readJapanPaginationFixture} from './scripts/catalog-next/japan-pagination-fixture.mjs';
           await readJapanPaginationFixture(process.env.RUNNER_TEMP + '/japan-pagination24-browser-report.json');
           JS
+      - name: Verify Japan supplier-only brand and model controls on the exact candidate
+        if: steps.photo_scope.outputs.scope == 'catalog-japan-stability-v1'
+        run: |
+          set -euo pipefail
+          STABILITY_SHA=$(node -p "JSON.parse(require('fs').readFileSync('.github/operations/catalog-next/china-code-serving-plan.json')).runtimeSha")
+          cd "$RUNNER_TEMP/china-serving-runtime-$STABILITY_SHA"
+          JAPAN_FILTER_DIRECTORY_REPORT="$RUNNER_TEMP/japan-filter-directory-browser-report.json" node --import tsx tests/browser/japan-filter-directory.mjs
+          node --import tsx tests/browser/model-suggestions.mjs
+          cd "$GITHUB_WORKSPACE"
+          node --input-type=module <<'JS'
+          import {readJapanFilterDirectoryFixture} from './scripts/catalog-next/japan-filter-directory-proof.mjs';
+          await readJapanFilterDirectoryFixture(process.env.RUNNER_TEMP + '/japan-filter-directory-browser-report.json');
+          JS
       - name: Build the verified source and check its image roundtrip
-        if: steps.photo_scope.outputs.scope == 'catalog-photo-recovery-v1' || steps.photo_scope.outputs.scope == 'catalog-japan-recovery-v1' || steps.photo_scope.outputs.scope == 'catalog-japan-completion-v1' || steps.photo_scope.outputs.scope == 'catalog-japan-completion-v2' || steps.photo_scope.outputs.scope == 'catalog-japan-usability-v1' || steps.photo_scope.outputs.scope == 'catalog-crm-china-operations-v1' || steps.photo_scope.outputs.scope == 'catalog-crm-japan-photo-retry-v1' || steps.photo_scope.outputs.scope == 'catalog-japan-pagination24-v1'
+        if: steps.photo_scope.outputs.scope == 'catalog-photo-recovery-v1' || steps.photo_scope.outputs.scope == 'catalog-japan-recovery-v1' || steps.photo_scope.outputs.scope == 'catalog-japan-completion-v1' || steps.photo_scope.outputs.scope == 'catalog-japan-completion-v2' || steps.photo_scope.outputs.scope == 'catalog-japan-usability-v1' || steps.photo_scope.outputs.scope == 'catalog-crm-china-operations-v1' || steps.photo_scope.outputs.scope == 'catalog-crm-japan-photo-retry-v1' || steps.photo_scope.outputs.scope == 'catalog-japan-pagination24-v1' || steps.photo_scope.outputs.scope == 'catalog-japan-stability-v1'
         env:
           CHINA_BUILD_DOCKER_HOST: ${{ steps.photo_docker.outputs.sock }}
         run: node scripts/run-node-with-resources.mjs --import tsx scripts/catalog-next/code-entry.mjs --build
@@ -147,6 +160,7 @@ jobs:
             ${{ runner.temp }}/china-crm-collection-controls-report.json
             ${{ runner.temp }}/japan-photo-retry-browser-report.json
             ${{ runner.temp }}/japan-pagination24-browser-report.json
+            ${{ runner.temp }}/japan-filter-directory-browser-report.json
             ${{ runner.temp }}/japan-catalog-city-report.json
             catalog-next-photo-browser-report.json
             artifacts/catalog-photo-live/**
