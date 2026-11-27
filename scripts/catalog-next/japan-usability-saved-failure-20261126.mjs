@@ -5,6 +5,7 @@ import {verifyReadonlyInvocation} from '../lib/readonly-marker-invocation.mjs';
 const ROOT=fileURLToPath(new URL('../../',import.meta.url));
 const releaseKeys=[['stats-list-1','integrations/ajes/catalog-failure-pages/stats-list-1.json'],['stats-count','integrations/ajes/catalog-failure-pages/stats-count.json'],['stats-latest','integrations/ajes/catalog-failure-stats.json']];
 const pageThreeKeys=[['stats-list-3','integrations/ajes/catalog-failure-pages/stats-list-3.json']];
+const pageTwoKeys=[['stats-list-2','integrations/ajes/catalog-failure-pages/stats-list-2.json']];
 const stabilityKeys=[...pageThreeKeys,...releaseKeys];
 const validationCodes={decode:['gzip_invalid','json_invalid'],page_shape:['root_not_array','row_limit_exceeded','row_not_object'],
  aggregate_shape:['total_invalid','count_row_count','make_name_missing'],empty_confirmation:['count_unavailable','count_unverified']};
@@ -38,6 +39,10 @@ export function sanitizeSavedResponseValidation(value){
  return result;
 }
 export const inspectSavedFailure=options=>inspectFixedSavedFailure(releaseKeys,options);
+export async function inspectSavedPageTwoFailure(options){
+ const report=await inspectFixedSavedFailure(pageTwoKeys,options);
+ return {...report,kind:'japan-page-two-saved-failure-v1',attribution:'saved_outer_request_metadata_only',historyReads:0};
+}
 export async function inspectSavedPageThreeFailure(options){
  const report=await inspectFixedSavedFailure(pageThreeKeys,options);
  return {...report,kind:'japan-page-three-saved-failure-v1',attribution:'saved_outer_request_metadata_only',historyReads:0};
@@ -106,6 +111,16 @@ try {
 } catch {return {version:1,kind:'japan-usability-saved-failure-v1',readStatus:'configuration_unavailable',records:[],supplierRequests:0,writes:0};}
 }
 
+export function verifySavedPageTwoInvocation({root=ROOT,environment=process.env}={}){
+ if(environment.GITHUB_ACTIONS!=='true'
+  ||environment.GITHUB_WORKFLOW_REF!=='jeep-jim/AvtoCena/.github/workflows/japan-page-two-saved-failure.yml@refs/heads/main'
+  ||environment.GITHUB_JOB!=='inspect'||!/^[1-9][0-9]{0,19}$/.test(environment.GITHUB_RUN_ID??''))
+  throw Error('japan_page_two_invocation_rejected');
+ const invocation=verifyReadonlyInvocation({root,env:environment,
+  markerPath:'.github/market-runs/japan-page-two-saved-failure.json',operation:'japan-page-two-saved-failure-v1'});
+ return {...invocation,runId:environment.GITHUB_RUN_ID,attempt:'1'};
+}
+
 export function verifySavedPageThreeInvocation({root=ROOT,environment=process.env}={}){
  if(environment.GITHUB_ACTIONS!=='true'
   ||environment.GITHUB_WORKFLOW_REF!=='jeep-jim/AvtoCena/.github/workflows/japan-page-three-saved-failure.yml@refs/heads/main'
@@ -126,7 +141,18 @@ export function verifySavedStabilityFailureInvocation({environment=process.env}=
 }
 
 if(process.argv[1]&&fileURLToPath(import.meta.url)===process.argv[1]){
- if(process.argv.length===3&&process.argv[2]==='--run-stability'){
+ if(process.argv.length===3&&['--verify-page-two','--run-page-two'].includes(process.argv[2])){
+  try{
+   const invocation=verifySavedPageTwoInvocation();
+   if(process.argv[2]==='--verify-page-two')console.log(JSON.stringify({kind:'japan-page-two-invocation-v1',verified:true,sourceSha:invocation.sourceSha,supplierRequests:0,writes:0}));
+   else{
+    const report={...await inspectSavedPageTwoFailure(),controllerSha:invocation.sourceSha,
+     approvedControllerSha:invocation.approvedSourceSha,runId:invocation.runId,attempt:invocation.attempt,checkedAt:new Date().toISOString()};
+    console.log(JSON.stringify(report));
+    if(report.readStatus||report.records.some(row=>!['ok','missing'].includes(row.readStatus)))process.exitCode=1;
+   }
+  }catch{console.log(JSON.stringify({readStatus:'invocation_rejected',supplierRequests:0,writes:0}));process.exitCode=1;}
+ }else if(process.argv.length===3&&process.argv[2]==='--run-stability'){
   try{
    verifySavedStabilityFailureInvocation();
    const report=await inspectSavedStabilityFailure();

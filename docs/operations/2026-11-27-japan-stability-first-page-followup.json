@@ -1,0 +1,333 @@
+{
+  "version": 1,
+  "kind": "japan-stability-first-page-followup-v1",
+  "checkpointAt": "2026-11-27T08:08:12.136Z",
+  "ci": {
+    "runId": "45958595440",
+    "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/45958595440",
+    "controllerSha": "3baa481a77f574f663478cd54daef0d5c2b045eb",
+    "conclusion": "success",
+    "attempt": 1,
+    "finishedAt": "2026-11-27T07:32:03Z",
+    "controllerTestsPassed": 1398,
+    "selectedNativeTestsPassed": 488,
+    "requiredBrowserFixturesPassed": true,
+    "fullModelSuggestionsPassed": true
+  },
+  "release": {
+    "runId": "45959235889",
+    "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/45959235889",
+    "controllerSha": "d6f063e58e5fe4d8778086fd24edfa69f65f3767",
+    "runtimeSha": "c6cfb54cc7c9e2b9d30dcdbb7af9cb604b3aa323",
+    "runtimeTree": "5910c0ea5aa53abb73dd80f1790882dd839256f6",
+    "artifactId": 15181515635,
+    "archiveBytes": 10469,
+    "archiveSha256": "9e9a4954876ed9dfb0424d05c890477777a3f00c38c44fdfaf4ded140c9c9132",
+    "terminalReport": {
+      "version": 1,
+      "kind": "china-code-cycle-v1",
+      "market": "china",
+      "completed": false,
+      "published": false,
+      "status": "rolled_back",
+      "runtimeSha": "c6cfb54cc7c9e2b9d30dcdbb7af9cb604b3aa323",
+      "retainedRuntime": "a5ca426eec2663eb17c2df69fe2bfed46e2b8740",
+      "sourceRequests": 0,
+      "generationRestores": 0,
+      "priceCalculations": 0,
+      "generationWrites": 0,
+      "encyclopediaWrites": 0,
+      "otherMarketWrites": 0,
+      "deletions": 0,
+      "appImageCleanupBeforeReserve": {
+        "version": 1,
+        "kind": "china-terminal-app-image-cleanup-v1",
+        "completed": true,
+        "status": "already_absent",
+        "uncertain": false,
+        "imagesRemoved": 0,
+        "runtimeSha": "73321a180c16d1d432559d572a2ac2b7fdf5cc2b",
+        "imageId": "sha256:76c916ce694647aae0b65ad656017faf9fd5c49cf542fe4d19c8e63a42def8a9",
+        "witnessSha256": "dd1998fc9bd5fb262bafa622a420fa3a4ab75f1604fb2aa3ce654dbe2f48fe24",
+        "diskFreeBytesBefore": 51120566272,
+        "diskFreeBytesAfter": 51120566272,
+        "measuredFreeBytesChange": 0,
+        "reason": "already_absent"
+      },
+      "retentionPreserved": true,
+      "recovered": true,
+      "appImageCleanup": {
+        "version": 1,
+        "kind": "china-terminal-app-image-cleanup-v1",
+        "completed": true,
+        "status": "removed",
+        "uncertain": false,
+        "imagesRemoved": 1,
+        "runtimeSha": "c6cfb54cc7c9e2b9d30dcdbb7af9cb604b3aa323",
+        "imageId": "sha256:a3afe6045f5a0cb0a3ca699c4f0f3f747d4e55017782eef09febdb3e3e20e249",
+        "witnessSha256": "5dce0f6f8bbf3712f75440109daeb9a0b85ef81ef71ef3f9336f3fd775a93f7e",
+        "diskFreeBytesBefore": 49924087808,
+        "diskFreeBytesAfter": 51115851776,
+        "measuredFreeBytesChange": 1191763968,
+        "reason": "exact_terminal_image"
+      },
+      "errorCode": "china_daily_release_japan_browser_failed",
+      "finishedAt": "2026-11-27T07:58:43.790Z",
+      "leaseReleased": true
+    },
+    "browserReport": {
+      "version": 1,
+      "kind": "catalog-japan-browser-v1",
+      "codeScope": "catalog-japan-stability-v1",
+      "release": "c6cfb54cc7c9e2b9d30dcdbb7af9cb604b3aa323",
+      "nonce": "ab0f7f09b62daccf4af7e760066397c5",
+      "checkedAt": "2026-11-27T07:57:54.681Z",
+      "passed": false,
+      "japanFreshnessPassed": false,
+      "japanPowerApiPassed": false,
+      "japanUiPassed": false,
+      "japanVisibilityPassed": false,
+      "readOnlyBrowserFence": true,
+      "productionMutations": 0,
+      "directSupplierApiRequests": 0,
+      "supplierImageRequests": 0,
+      "explicitJapanApiRequests": 1,
+      "checks": {
+        "health": [
+          {
+            "stage": "before",
+            "requestedAt": "2026-11-27T07:57:55.052Z",
+            "receivedAt": "2026-11-27T07:57:55.679Z",
+            "durationMs": 627,
+            "responseHeaders": {
+              "omitted": []
+            },
+            "status": 200,
+            "ok": true,
+            "releaseSha": "c6cfb54cc7c9e2b9d30dcdbb7af9cb604b3aa323",
+            "calculationVersion": "4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90"
+          }
+        ],
+        "freshness": {
+          "observations": []
+        },
+        "responses": [
+          {
+            "stage": "plain_first",
+            "status": 200,
+            "ok": true,
+            "shown": 24,
+            "received": 24,
+            "observedAt": "2026-11-27T06:41:42.382Z",
+            "stale": true,
+            "partial": false,
+            "interrupted": false,
+            "scanLimited": false,
+            "hasMore": true,
+            "total": null,
+            "requestedAt": "2026-11-27T07:57:55.680Z",
+            "receivedAt": "2026-11-27T07:57:56.572Z",
+            "durationMs": 892,
+            "responseHeaders": {
+              "cacheControl": "private, max-age=15, stale-while-revalidate=30",
+              "omitted": []
+            },
+            "sourceReadEvidence": {
+              "status": "missing",
+              "catalogReadReceipt": null,
+              "runtimeMatchesExpected": null,
+              "sourceReadReceipts": [],
+              "sourceReadReceiptsLimited": true,
+              "omittedReceipts": null,
+              "omissions": [
+                "catalog_receipt_missing"
+              ]
+            },
+            "pageReadEvidence": {
+              "status": "recorded",
+              "receipts": [
+                {
+                  "version": 1,
+                  "queryHash": "7f7b34136741cb10d915f31a7c897911d2cc043923aa38faa40a2af6c8bf7398",
+                  "table": "stats",
+                  "kind": "list",
+                  "page": 1,
+                  "pageSize": 24,
+                  "requestId": "191980ef-3d64-4613-b932-6c5d40acfaf7",
+                  "startedAt": "2026-11-27T07:57:55.791Z",
+                  "finishedAt": "2026-11-27T07:57:55.988Z",
+                  "stage": "cooldown",
+                  "supplierAttempted": false,
+                  "outcome": "stale",
+                  "reason": "invalid_response",
+                  "observedAt": "2026-11-27T06:41:42.382Z"
+                },
+                {
+                  "version": 1,
+                  "queryHash": "f368b3edba33f245754f7c58a85473de35d87025afba14ddc8a86f4fa9db23c2",
+                  "table": "stats",
+                  "kind": "list",
+                  "page": 2,
+                  "pageSize": 24,
+                  "requestId": "fa883932-9f69-4667-88f1-8b8a22d32651",
+                  "startedAt": "2026-11-27T07:57:55.995Z",
+                  "finishedAt": "2026-11-27T07:57:56.060Z",
+                  "stage": "cooldown",
+                  "supplierAttempted": false,
+                  "outcome": "stale",
+                  "reason": "invalid_response",
+                  "observedAt": "2026-11-27T06:41:51.662Z"
+                }
+              ],
+              "received": 2,
+              "omitted": 0,
+              "limited": false
+            }
+          }
+        ]
+      },
+      "screenshots": [],
+      "japanPetrolPowerUiPassed": false,
+      "japanDetailPowerInputPassed": false,
+      "japanDeliveredCalculationPassed": false,
+      "japanPreviewCalculationRequests": 0,
+      "japanFullPagesPassed": false,
+      "japanPagination24Passed": false,
+      "japanCatalogWarningRemovedPassed": false,
+      "japanModelSelectionPassed": false,
+      "japanCombinedFiltersPassed": false,
+      "japanRelatedCardsPassed": false,
+      "japanVehiclePolicyPassed": false,
+      "generationManifestSha256": "58263ea4dc5642c9ff6f544830e9d3536ba702fb729a7a8c33b049b70b737038",
+      "oracleSha256": "e186302958766db61e383db9175664bbe2af067674d58720b55753d6d8349328",
+      "blockedRequests": {
+        "mutation": 0,
+        "external": 0,
+        "private": 0,
+        "redirect": 0
+      },
+      "error": {
+        "stage": "plain_first",
+        "code": "japan_browser_unavailable_or_stale",
+        "timeout": false
+      }
+    },
+    "savedFailureReport": {
+      "version": 1,
+      "kind": "japan-stability-saved-failure-v1",
+      "records": [
+        {
+          "slot": "stats-list-3",
+          "readStatus": "ok",
+          "startedAt": "2026-11-27T06:42:48.352Z",
+          "finishedAt": "2026-11-27T06:42:52.313Z",
+          "kind": "list",
+          "outcome": "invalid_response",
+          "page": 3,
+          "pageSize": 24,
+          "httpStatus": 200,
+          "providerCode": null,
+          "sqlSha256": "aee6a316fe78f521f28c7ad9d23f72d95303ba0aa5363c20132532dc1e64c3d4",
+          "sqlBytes": 3557
+        },
+        {
+          "slot": "stats-list-1",
+          "readStatus": "ok",
+          "startedAt": "2026-11-27T07:57:57.827Z",
+          "finishedAt": "2026-11-27T07:57:58.405Z",
+          "kind": "list",
+          "outcome": "invalid_response",
+          "page": 1,
+          "pageSize": 24,
+          "httpStatus": 200,
+          "providerCode": null,
+          "sqlSha256": "08379755d53080e9eaf2b0d10218a1d52e225f22bfea200857eb9d7b8db30d85",
+          "sqlBytes": 5475
+        },
+        {
+          "slot": "stats-count",
+          "readStatus": "ok",
+          "startedAt": "2026-11-27T07:57:58.184Z",
+          "finishedAt": "2026-11-27T07:57:58.404Z",
+          "kind": "count",
+          "outcome": "invalid_response",
+          "page": 1,
+          "pageSize": 1,
+          "httpStatus": 200,
+          "providerCode": null,
+          "sqlSha256": "415a06f05b3bb5602460a94995dbffbdbfc215f03129f71671825f8f360992b3",
+          "sqlBytes": 5436
+        },
+        {
+          "slot": "stats-latest",
+          "readStatus": "ok",
+          "startedAt": "2026-11-27T07:57:57.827Z",
+          "finishedAt": "2026-11-27T07:57:58.405Z",
+          "kind": "list",
+          "outcome": "invalid_response",
+          "page": 1,
+          "pageSize": 24,
+          "httpStatus": 200,
+          "providerCode": null,
+          "sqlSha256": "08379755d53080e9eaf2b0d10218a1d52e225f22bfea200857eb9d7b8db30d85",
+          "sqlBytes": 5475
+        }
+      ],
+      "supplierRequests": 0,
+      "writes": 0,
+      "attribution": "saved_outer_request_metadata_only",
+      "historyReads": 0
+    }
+  },
+  "interpretation": {
+    "rootCauseKnown": false,
+    "japanAccepted": false,
+    "stage": "plain_first",
+    "firstBrowserReadSupplierAttempted": false,
+    "confirmed": "The first explicit Japan browser API read returned24 old cached cards, stale=true. Its page1/page2 source receipts were cooldown invalid_response. The browser stopped before any Japan UI navigation.",
+    "firstPageWireSha256": "7f7b34136741cb10d915f31a7c897911d2cc043923aa38faa40a2af6c8bf7398",
+    "secondPageWireSha256": "f368b3edba33f245754f7c58a85473de35d87025afba14ddc8a86f4fa9db23c2",
+    "savedPageThreeBelongsToPrevious733Run": true,
+    "savedListOneCountLatestAttribution": "These records start after plain_first finished and have different SQL hashes. No responseValidation block is present. They do not diagnose the original first page request.",
+    "savedPageTwoWasRead": false,
+    "nextExistingFixedObject": "integrations/ajes/catalog-failure-pages/stats-list-2.json",
+    "nextReadScope": "One fixed existing object, bounded GET, sanitize metadata only; no supplier request, history, listing, SSH or writes.",
+    "overwriteByRollbackRuntime": "Possible, not confirmed from the current artifact.",
+    "earlierReadPath": "The mandatory China browser visits the shared /cars?powerTo=160 page. Its Japan rail can read the same source pages and currently omits sourceReceipts in its output. The standalone AjesCatalog SSR annotation does not cover that rail.",
+    "diagnosticPersistenceLimit": "Private failure writes remain best-effort through a bounded queue. The artifact does not prove a write failure or overwrite."
+  },
+  "preparedMaintenance": {
+    "branch": "fix/japan-maintenance-c6cf-20261127",
+    "commit": "d24819f6d55377e3f67040f896e2e8e9ffb8cfd8",
+    "tree": "45baf08d36a430fd1ad06bf011aec72385ef8c27",
+    "files": 9,
+    "targetedTestsPassed": 63,
+    "controllerTestsPassed": 1438,
+    "activated": false,
+    "productionCacheMutations": 0,
+    "expectedRuntime": "c6cfb54cc7c9e2b9d30dcdbb7af9cb604b3aa323",
+    "expectedRollbackRuntime": "a5ca426eec2663eb17c2df69fe2bfed46e2b8740",
+    "bindingCurrentlySatisfied": false,
+    "historicalGenerationWitnessesPreserved": true
+  },
+  "nextStep": "Read only the existing saved source page2 failure, match exact hash and time, and use any valid validation phase as evidence. Keep parser, supplier request, freshness and acceptance unchanged until a supported repair is established. Maintenance remains deferred.",
+  "prohibitions": [
+    "No direct supplier diagnostic retry",
+    "No visitor IP substitution",
+    "No stale-to-fresh relabeling",
+    "No unsupported cache DELETE",
+    "No current/rollback cleanup"
+  ],
+  "preparedPageTwoReader": {
+    "mode": "--run-page-two",
+    "fixedObjects": 1,
+    "supplierRequests": 0,
+    "writes": 0,
+    "historyReads": 0,
+    "maximumBodyBytes": 65536,
+    "deadlineMs": 20000,
+    "offlineTargetedTestsPassed": 30,
+    "offlineControllerTestsPassed": 1405,
+    "executed": false
+  }
+}
