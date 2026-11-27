@@ -3,6 +3,9 @@ import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {createChinaState, CHINA_STATE_KEYS, inspectChinaPublicationState} from '../scripts/catalog-next/china-state.mjs';
 import {runChinaDailyCycle, chinaDailyIsDue} from '../scripts/catalog-next/daily-controller.mjs';
+import {maintainChinaGenerationGcQueue} from '../scripts/catalog-next/china-generation-gc-queue.mjs';
+import {fixture as generationFixture, candidate as generationCandidate, pricingSha}
+  from './helpers/catalog-next-gc-fixture.mjs';
 
 const hash = value => createHash('sha256').update(value).digest('hex');
 const ordered = value => Array.isArray(value) ? value.map(ordered) : value && typeof value === 'object'
@@ -227,7 +230,7 @@ test('real accepted-state with interrupted intent finalization is repaired befor
   assert.deepEqual(f.events, []); assert.equal((await f.storage.read('intent')).value.status, 'committed');
 });
 
-test('not_due keeps an eligible committed host witness without retrying retirement or preparing a source', async () => {
+test('not_due keeps the committed witness and never enters pre-reserve host or image cleanup or source preparation', async () => {
   const f = await fixture(), state = createChinaState({storage: f.storage, now: () => nextAt});
   for (const id of [2, 3]) {
     const nonce = String(id).repeat(32);
@@ -254,6 +257,166 @@ test('not_due keeps an eligible committed host witness without retrying retireme
   assert.deepEqual(f.events, []);
   assert.deepEqual({accepted: await state.read('accepted'), intent: await state.read('intent')}, publication);
   assert.equal(f.storage.writes.filter(row => row.name === 'accepted' || row.name === 'intent').length, 0);
+});
+
+function pendingQueueStorage() {
+  let queue = empty(), sequence = 0;
+  const tasks = new Map();
+  const encode = value => Buffer.from(JSON.stringify(ordered(value)));
+  return {
+    tasks,
+    assertPrivateBucket: async () => ({verified: true}),
+    readQueue: async () => copy(queue),
+    async compareAndSwapQueue(previous, value) {
+      assert.equal(previous.etag, queue.etag); assert.equal(previous.sha256, queue.sha256);
+      queue = {found: true, etag: '"queue-' + ++sequence + '"', sha256: hash(encode(value)), value: copy(value)};
+    },
+    async readTask(id) {
+      const value = tasks.get(id);
+      return value ? {found: true, etag: value.etag, data: Buffer.from(value.data), size: value.data.length} : {found: false};
+    },
+    async createTask(id, data, condition) {
+      assert.deepEqual(condition, {ifNoneMatch: '*'}); assert(!tasks.has(id));
+      tasks.set(id, {etag: '"task-' + ++sequence + '"', data: Buffer.from(data)});
+    },
+    async deleteTask(id, condition) {
+      const value = tasks.get(id); assert(value);
+      assert.equal(condition.expectedETag, value.etag); assert.equal(condition.expectedSha256, hash(value.data));
+      tasks.delete(id); return {settled: true, deleted: true};
+    },
+    current: () => copy(queue),
+  };
+}
+
+async function pendingRetentionFixture(t) {
+  const generation = await generationFixture(t), storage = memoryStorage(), queueStorage = pendingQueueStorage();
+  let clock = nextAt, runs = 0, publications = 0;
+  const state = createChinaState({storage, now: () => clock});
+  async function publish(reference) {
+    const nonce = String(++publications).repeat(32), lease = await state.acquireLease({previous: await state.read('lease'),
+      owner: owner(900 + publications), nonce, expiresAt: new Date(Date.parse(clock) + 3600000).toISOString()});
+    const result = await state.commit({lease, ...await state.reserve({lease, previous: await state.read('accepted'),
+      previousIntent: await state.read('intent'), candidate: reference}), evidence: acceptance(reference, nonce, clock)});
+    await state.releaseLease({lease}); return result;
+  }
+  const references = [generation.reference, ...[1002, 1003].map(id => ({...generationCandidate(id),
+    sourceObservedAt: '2026-11-24T11:00:00.000Z'}))];
+  for (const reference of references) await publish(reference);
+  const publication = {accepted: await state.read('accepted'), intent: await state.read('intent')};
+  assert.equal(chinaDailyIsDue(publication.accepted.value.current, clock), false);
+  const f = {generation, storage, state, queueStorage, references, publication, publish, drains: 0, hosts: 0,
+    advance: milliseconds => { clock = new Date(Date.parse(clock) + milliseconds).toISOString(); }};
+  const collect = input => maintainChinaGenerationGcQueue({...input, queueStorage, generationStorage: generation.storage,
+    now: () => clock, beforeCollect: async input => {
+      await input.assertAuthority(); f.hosts++;
+      assert.equal((await state.read('lease')).value.status, 'held');
+      return {completed: true, retiredContainers: 0, filesDeleted: 0, freedBytes: 0};
+    }});
+  f.args = {runtimeRoot: '/unused-local-fixture', runnerTemp: '/unused-local-fixture', plan: {...plan, runtimeSha: pricingSha},
+    invocation: {version: 1, sourceSha: owner(1).revision}, storage, now: () => clock, scheduleHeartbeat: () => () => {},
+    prepare: async () => assert.fail('pending retention must not read the supplier'),
+    stageRelease: async () => assert.fail('pending retention must not stage a publication'),
+    recoverRelease: async () => assert.fail('the accepted fixture is already resolved'),
+    retirePreviousHost: async () => assert.fail('not_due must not enter pre-reserve host retirement'),
+    retireTerminalAppImage: async () => assert.fail('not_due must not enter application-image cleanup'),
+    resumeCleanup: input => collect({...input, mode: 'enqueue-only'}),
+    afterAccepted: ({previousAccepted, accepted, intent, cleanupReason, ...input}) => {
+      f.drains++; assert.equal(cleanupReason, 'not_due');
+      return collect({...input, previousAccepted, acceptedPublication: {accepted, intent}, mode: 'drain',
+        deadlineAt: new Date(Date.parse(clock) + 20 * 60000).toISOString()});
+    },
+  };
+  f.run = extra => runChinaDailyCycle({...f.args, owner: owner(200 + ++runs), nonce: String(runs).repeat(32), ...extra});
+  storage.writes.length = 0;
+  return f;
+}
+
+test('not_due resumes an uncertain real queue deletion on the next run and preserves current, rollback and unrelated data', async t => {
+  const f = await pendingRetentionFixture(t), protectedObjects = f.generation.protectedKeys
+    .map(key => { const value = f.generation.storage.objects.get(key); return [key, {...value, data: Buffer.from(value.data)}]; });
+  let loseResponse = true;
+  f.generation.storage.afterDelete = async () => { if (loseResponse) { loseResponse = false; throw Error('lost response'); } };
+  const first = await f.run();
+  assert.equal(first.status, 'not_due'); assert.equal(first.published, false); assert.equal(first.sourcePrepared, false);
+  assert.equal(first.retention.status, 'needs_reconciliation'); assert.equal(first.retention.pending, 1);
+  assert.equal(first.retention.completed, false); assert.equal(first.leaseReleased, true); assert.equal(f.drains, 1);
+  const originalTask = f.queueStorage.current().value.items[0].id;
+  assert(f.queueStorage.tasks.has(originalTask)); assert.equal(first.deletions, 0);
+  assert.equal(f.generation.storage.calls.filter(row => row.method === 'delete').length, 1);
+  f.advance(60000);
+  const second = await f.run();
+  assert.equal(second.status, 'not_due'); assert.equal(second.published, false); assert.equal(second.sourcePrepared, false);
+  assert.equal(second.retention.completed, true); assert.equal(second.retention.pending, 0);
+  assert.equal(second.retention.alreadyAbsentObjects, 1); assert(second.retention.deletedObjects > 0);
+  assert.equal(second.deletions, second.retention.deletedObjects); assert.equal(second.leaseReleased, true);
+  assert.equal(f.drains, 2); assert.equal(f.queueStorage.tasks.size, 0);
+  assert.equal(f.generation.storage.calls.filter(row => row.method === 'delete' && row.key === f.generation.completeKey).length, 1);
+  assert.deepEqual(f.generation.protectedKeys.map(key => [key, f.generation.storage.objects.get(key)]), protectedObjects);
+  assert.deepEqual({accepted: await f.state.read('accepted'), intent: await f.state.read('intent')}, f.publication);
+  assert(f.storage.writes.every(row => row.name === 'lease'));
+  const reads = f.generation.storage.calls.length, hosts = f.hosts;
+  const third = await f.run();
+  assert.equal(third.retentionResume.pending, 0); assert.equal(third.retention, undefined);
+  assert.equal(f.drains, 2); assert.equal(f.hosts, hosts); assert.equal(f.generation.storage.calls.length, reads);
+});
+
+test('not_due never retires a queued generation that became current or rollback again', async t => {
+  for (const protection of ['current', 'rollback']) {
+    const f = await pendingRetentionFixture(t);
+    await f.run({afterAccepted: undefined});
+    const originalTask = f.queueStorage.current().value.items[0].id;
+    await f.publish(f.references[0]);
+    if (protection === 'rollback') await f.publish(f.references[1]);
+    const before = {accepted: await f.state.read('accepted'), intent: await f.state.read('intent')};
+    assert.equal(before.accepted.value[protection].generationId, f.references[0].generationId);
+    const objects = new Map([...f.generation.storage.objects].map(([key, value]) => [key, {...value, data: Buffer.from(value.data)}]));
+    f.storage.writes.length = 0;
+    const result = await f.run();
+    assert.equal(result.status, 'not_due'); assert.equal(result.retention.completed, false);
+    assert.equal(result.retention.errorCode, 'china_gc_queue_generation_protected');
+    assert.equal(f.hosts, 0); assert.equal(result.deletions, 0); assert(f.queueStorage.tasks.has(originalTask));
+    assert.deepEqual(f.generation.storage.objects, objects);
+    assert.deepEqual({accepted: await f.state.read('accepted'), intent: await f.state.read('intent')}, before);
+    assert(f.storage.writes.every(row => row.name === 'lease')); assert.equal(result.leaseReleased, true);
+  }
+});
+
+test('not_due stops real collection when accepted-state or lease authority changes after the retirement fence', async t => {
+  for (const changed of ['accepted', 'lease']) {
+    const f = await pendingRetentionFixture(t);
+    f.generation.storage.afterRetirement = async () => {
+      const observation = await f.storage.read(changed);
+      f.storage.force(changed, changed === 'accepted' ? observation.value : {
+        ...observation.value, epoch: observation.value.epoch + 1, owner: owner(999), nonce: 'e'.repeat(32)});
+    };
+    const result = await f.run();
+    assert.equal(result.status, 'not_due'); assert.equal(result.retention.completed, false);
+    assert.match(result.retention.errorCode, /state_changed|lease_lost/);
+    assert.equal(result.retention.pending, 1); assert.equal(result.deletions, 0);
+    assert.equal(f.generation.storage.calls.filter(row => row.method === 'delete').length, 0);
+    assert.equal(f.queueStorage.tasks.size, 1); assert.equal(f.drains, 1);
+    if (changed === 'lease') {
+      assert.equal(result.leaseReleasePending, true);
+      assert.equal((await f.storage.read('lease')).value.owner.runId, owner(999).runId);
+      assert.equal((await f.storage.read('lease')).value.status, 'held');
+    } else assert.equal(result.leaseReleased, true);
+  }
+});
+
+test('not_due skips cleanup when the queue is empty, unknown or its witness preflight failed', async () => {
+  for (const retained of [
+    {completed: true, status: 'remembered', witnessRemembered: true, pending: 0},
+    {completed: false, status: 'paused', witnessRemembered: false, pending: 2, errorCode: 'china_gc_queue_storage_transport'},
+    {completed: true, status: 'remembered', witnessRemembered: false, pending: 2},
+    {completed: true, status: 'remembered', witnessRemembered: true},
+  ]) {
+    const f = await fixture(); f.clock(firstAt);
+    const result = await runChinaDailyCycle({...f.args,
+      resumeCleanup: async () => ({market: 'china', ...retained}),
+      afterAccepted: async () => assert.fail('unconfirmed or empty queue must not start cleanup')});
+    assert.equal(result.status, 'not_due'); assert.equal(result.retention, undefined);
+    assert.equal(result.sourcePrepared, false); assert.equal(result.leaseReleased, true); assert.deepEqual(f.events, []);
+  }
 });
 
 test('heartbeat renews the exact lease observation during preparation and later commit uses its new ETag', async () => {

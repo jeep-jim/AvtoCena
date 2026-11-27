@@ -152,7 +152,7 @@ export async function runChinaDailyCycle({runtimeRoot, plan, invocation, owner, 
     }
     report.recovered = true; return {kind: outcome.kind, ...done};
   }
-  async function retainAccepted(view) {
+  async function retainAccepted(view, cleanupReason) {
     if (!afterAccepted || !view.accepted.value?.current || view.intent.value?.status !== 'committed') return;
     const generation = view.accepted.value.current.generationId;
     if (retentionAttempted.has(generation)) return;
@@ -160,7 +160,8 @@ export async function runChinaDailyCycle({runtimeRoot, plan, invocation, owner, 
     try {
       await assertAuthority();
       const value = await afterAccepted({previousAccepted: view.intent.value.previous,
-        accepted: view.accepted, intent: view.intent, readState: readOwnedState, assertAuthority});
+        accepted: view.accepted, intent: view.intent, readState: readOwnedState, assertAuthority,
+        ...(cleanupReason === 'not_due' ? {cleanupReason} : {})});
       report.retention = retentionSummary(value);
       report.deletions += report.retention.deletedObjects ?? 0;
     } catch (error) {
@@ -254,7 +255,18 @@ export async function runChinaDailyCycle({runtimeRoot, plan, invocation, owner, 
     validateChinaGenerationReference(current, {requireAccepted: true});
     need(current.pricingRuntimeSha === plan.runtimeSha, 'pricing_runtime_changed');
     await resumeRetention();
-    if (trigger === 'schedule' && !chinaDailyIsDue(current, at())) return complete('not_due', false);
+    if (trigger === 'schedule' && !chinaDailyIsDue(current, at())) {
+      const remembered = report.retentionResume;
+      // A fresh source can still have retired generations pending from an
+      // earlier accepted publication. Resume that exact queue once, only after
+      // this run has confirmed its durable witness; never retry a failed
+      // preflight or enter preparation/reservation just to perform cleanup.
+      if (remembered?.completed === true && remembered.witnessRemembered === true
+        && Number.isSafeInteger(remembered.pending) && remembered.pending > 0
+        && inspectChinaPublicationState(expected).status === 'resolved'
+        && expected.intent.value?.status === 'committed') await retainAccepted(expected, 'not_due');
+      return complete('not_due', false);
+    }
     await preservePreviousHost();
     await cleanupTerminalAppImage(true);
     await assertAuthority();
