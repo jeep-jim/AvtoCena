@@ -213,6 +213,79 @@ test('unknown response-validation fields, raw reasons, accessor values and inval
  assert.equal(JSON.stringify(report).includes('PRIVATE_RESPONSE'),false);
 });
 
+const windowValidation=()=>({version:1,phase:'page_shape',code:'row_limit_exceeded',rootKind:'array',rowCount:50,
+ listWindow:{windowSize:24,identityRowCount:50,uniqueIdCount:50,fingerprints:{
+  orderedIdsSha256:'a'.repeat(64),firstWindowSha256:'b'.repeat(64),nextWindowSha256:'c'.repeat(64)}}});
+
+test('private ordered-ID window metadata preserves bounded hashes or incomplete identity counters and supports old records',async()=>{
+ const samples=[windowValidation(),
+  {...windowValidation(),rowCount:96,listWindow:{windowSize:48,identityRowCount:96,uniqueIdCount:96}},
+  {...windowValidation(),rowCount:2,listWindow:{windowSize:1,identityRowCount:0,uniqueIdCount:0}},
+  {...windowValidation(),listWindow:{windowSize:24,identityRowCount:49,uniqueIdCount:48}}];
+ for(const value of samples)assert.deepEqual(sanitizeSavedResponseValidation(value),value);
+ const plain=windowValidation(),nullPrototype=Object.assign(Object.create(null),plain);
+ nullPrototype.listWindow=Object.assign(Object.create(null),plain.listWindow);
+ nullPrototype.listWindow.fingerprints=Object.assign(Object.create(null),plain.listWindow.fingerprints);
+ assert.deepEqual(sanitizeSavedResponseValidation(nullPrototype),plain);
+ const report=await inspectSavedPageThreeFailure({env,fetcher:async()=>new Response(JSON.stringify({
+  ...source,responseValidation:plain}),{status:200})});
+ assert.deepEqual(report.records[0].responseValidation,plain);
+ for(const forbidden of ['COMMERCIAL_DATA','PRIVATE_BODY','PRIVATE_QUERY','203.0.113.17'])
+  assert.equal(JSON.stringify(report).includes(forbidden),false);
+ const old={...plain};delete old.listWindow;
+ assert.deepEqual(sanitizeSavedResponseValidation(old),old);
+});
+
+test('ordered-ID metadata rejects unknown fields, malformed hashes, invalid counters and unsafe objects at every level',()=>{
+ const changes=[
+  x=>{x.phase='decode';x.code='json_invalid';},x=>{x.code='row_not_object';},
+  x=>{x.rootKind='object';},x=>{delete x.rowCount;},x=>{x.rowCount=97;},x=>{x.rowCount=47;},
+  x=>{x.listWindow=null;},x=>{x.listWindow=[];},x=>{x.listWindow.windowSize=0;},
+  x=>{x.listWindow.windowSize=49;},x=>{x.listWindow.windowSize=1.5;},x=>{x.listWindow.windowSize='24';},
+  x=>{delete x.listWindow.windowSize;},x=>{delete x.listWindow.identityRowCount;},x=>{delete x.listWindow.uniqueIdCount;},
+  x=>{x.listWindow.identityRowCount=51;},x=>{x.listWindow.identityRowCount=-1;},
+  x=>{x.listWindow.identityRowCount=1.5;},x=>{x.listWindow.uniqueIdCount=-1;},
+  x=>{x.listWindow.uniqueIdCount=51;},x=>{x.listWindow.uniqueIdCount='50';},
+  x=>{x.listWindow.identityRowCount=49;x.listWindow.uniqueIdCount=49;},x=>{x.listWindow.uniqueIdCount=49;},
+  x=>{x.listWindow.ids=['PRIVATE_ID'];},x=>{x.listWindow.offsetVerified=true;},
+  x=>{x.listWindow.fingerprints=null;},x=>{x.listWindow.fingerprints=[];},
+  x=>{delete x.listWindow.fingerprints.orderedIdsSha256;},
+  x=>{x.listWindow.fingerprints.firstWindowSha256='B'.repeat(64);},
+  x=>{x.listWindow.fingerprints.nextWindowSha256='c'.repeat(63);},
+  x=>{x.listWindow.fingerprints.nextWindowSha256='c'.repeat(65);},
+  x=>{x.listWindow.fingerprints.orderedIdsSha256=['a'.repeat(64)];},
+  x=>{x.listWindow.fingerprints.firstId='PRIVATE_ID';},
+ ];
+ for(const change of changes){const value=windowValidation();change(value);assert.equal(sanitizeSavedResponseValidation(value),undefined);}
+ for(const locate of [x=>x,x=>x.listWindow,x=>x.listWindow.fingerprints]){
+  for(const mode of ['unknown','symbol','accessor','prototype']){
+   const value=windowValidation(),target=locate(value);let getterCalls=0;
+   if(mode==='unknown')target.raw='PRIVATE_VALUE';
+   if(mode==='symbol')target[Symbol('PRIVATE_KEY')]=1;
+   if(mode==='accessor')Object.defineProperty(target,Object.keys(target)[0],{get(){getterCalls++;throw Error('must not read');}});
+   if(mode==='prototype')Object.setPrototypeOf(target,{private:'PRIVATE_PROTOTYPE'});
+   assert.equal(sanitizeSavedResponseValidation(value),undefined);assert.equal(getterCalls,0);
+  }
+ }
+ for(const trap of ['ownKeys','getPrototypeOf']){
+  const value=windowValidation();value.listWindow=new Proxy(value.listWindow,{[trap](){throw Error('PRIVATE_PROXY');}});
+  assert.equal(sanitizeSavedResponseValidation(value),undefined);
+ }
+});
+
+test('collector omits the entire optional validation when ordered-ID proof is malformed or not bound to a LIST page size',async()=>{
+ const cases=[{kind:'count'},{kind:'detail'},{pageSize:25},
+  {responseValidation:{...windowValidation(),listWindow:{...windowValidation().listWindow,ids:['PRIVATE_ID']}}}];
+ for(const changes of cases){
+  let calls=0;const report=await inspectSavedPageThreeFailure({env,fetcher:async()=>{
+   calls++;return new Response(JSON.stringify({...source,responseValidation:windowValidation(),...changes}));
+  }});
+  assert.equal(calls,1);assert.equal(report.records[0].readStatus,'ok');
+  assert.equal(Object.hasOwn(report.records[0],'responseValidation'),false);
+  assert.equal(JSON.stringify(report).includes('PRIVATE_ID'),false);
+ }
+});
+
 test('missing and unavailable slots are bounded terminal reads without a retry or fallback to another slot',async()=>{
  for(const [status,wanted] of [[404,'missing'],[403,'unavailable'],[500,'unavailable']]){
   let calls=0,cancelled=0;

@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
+import {createHash} from 'node:crypto';
 import {spawnSync} from 'node:child_process';
 import {pathToFileURL} from 'node:url';
 import {inspectSavedActiveStabilityFailure,inspectSavedFailure,verifySavedActiveStabilityReport}
@@ -22,6 +23,14 @@ const source={kind:'list',page:1,pageSize:24,startedAt:'2026-11-27T08:00:00.000Z
  finishedAt:'2026-11-27T08:00:01.000Z',httpStatus:200,outcome:'invalid_response',providerCode:null,
  sql:'SELECT PRIVATE_QUERY',clientIp:'203.0.113.17',endpoint:'https://private.example/feed',body:'PRIVATE_BODY'};
 const validation={version:1,phase:'page_shape',code:'row_limit_exceeded',rootKind:'array',rowCount:25,wireBytes:2048};
+function windowValidation({offset=0,rowCount=50,windowSize=24}={}){
+ const ids=Array.from({length:rowCount},(_,index)=>'PRIVATE_TEST_ID_'+(offset+index));
+ const hash=value=>createHash('sha256').update(JSON.stringify(value)).digest('hex');
+ return {version:1,phase:'page_shape',code:'row_limit_exceeded',rootKind:'array',rowCount,
+  wireBytes:2097152,decodedBytes:2097152,listWindow:{windowSize,identityRowCount:rowCount,uniqueIdCount:rowCount,
+   fingerprints:{orderedIdsSha256:hash(ids),firstWindowSha256:hash(ids.slice(0,windowSize)),
+    nextWindowSha256:hash(ids.slice(windowSize,2*windowSize))}}};
+}
 function partialReport(){return {version:1,kind:'japan-stability-saved-failure-v1',records:[
  {slot:slots[0],readStatus:'ok',startedAt:source.startedAt,finishedAt:source.finishedAt,kind:'list',outcome:'invalid_response',
   page:1,pageSize:24,httpStatus:200,providerCode:null,sqlSha256:'d'.repeat(64),sqlBytes:3556,responseValidation:validation},
@@ -102,6 +111,64 @@ test('a correctly bound partial active report is verified locally without creden
  await f.write(config);assert.equal((await f.verify()).verified,true);
 });
 
+test('active snapshots preserve matched and mismatched ordered-ID windows as observations without asserting OFFSET success',async t=>{
+ const f=await fixture(t);let networkCalls=0;
+ t.mock.method(globalThis,'fetch',async()=>{networkCalls++;throw Error('must not fetch');});
+ for(const nextOffset of [24,0]){
+  const observations=[windowValidation(),windowValidation({offset:nextOffset})],calls=[];
+  const collected=await inspectSavedActiveStabilityFailure({env,fetcher:async(input,options)=>{
+   calls.push(new URL(input).pathname);assert.equal(options.method,'GET');
+   return calls.length<=2?new Response(JSON.stringify({...source,page:calls.length,
+    responseValidation:observations[calls.length-1]})):new Response(null,{status:404});
+  }});
+  assert.deepEqual(calls,keys.map(key=>prefix+key));
+  const left=collected.records[0].responseValidation.listWindow,right=collected.records[1].responseValidation.listWindow;
+  assert.deepEqual(left,observations[0].listWindow);assert.deepEqual(right,observations[1].listWindow);
+  assert.equal(left.fingerprints.nextWindowSha256===right.fingerprints.firstWindowSha256,nextOffset===24);
+  assert.deepEqual(Object.keys(left).sort(),['fingerprints','identityRowCount','uniqueIdCount','windowSize']);
+  const report={...collected,capture:partialReport().capture};await f.write(report);
+  const before=await fs.readFile(path.join(f.root,reportName));
+  assert.equal((await f.verify()).verified,true);
+  assert.deepEqual(await fs.readFile(path.join(f.root,reportName)),before);
+  assert.equal(before.includes('PRIVATE_TEST_ID_'),false);
+  assert.equal(before.includes('offsetVerified'),false);
+ }
+ assert.equal(networkCalls,0);
+});
+
+test('five maximal bounded ordered-ID proofs fit the unchanged 32 KiB artifact limit and counters-only evidence remains valid',async t=>{
+ const f=await fixture(t),proof=windowValidation({rowCount:96,windowSize:48});let calls=0;
+ const collected=await inspectSavedActiveStabilityFailure({env,fetcher:async()=>{
+  calls++;return new Response(JSON.stringify({...source,pageSize:48,responseValidation:proof}));
+ }});
+ assert.equal(calls,5);assert.equal(collected.records.length,5);
+ assert(collected.records.every(record=>record.readStatus==='ok'&&record.pageSize===48));
+ for(const record of collected.records)assert.deepEqual(record.responseValidation,proof);
+ const report={...collected,capture:partialReport().capture};await f.write(report);
+ assert(Buffer.byteLength(JSON.stringify(report,null,2)+'\n')<=32*1024);
+ assert.equal((await f.verify()).verified,true);
+ const counters=partialReport();counters.records[0].responseValidation={...windowValidation(),
+  listWindow:{windowSize:24,identityRowCount:49,uniqueIdCount:48}};
+ await f.write(counters);assert.equal((await f.verify()).verified,true);
+ await f.write();assert.equal((await f.verify()).verified,true);
+});
+
+test('active verifier rejects malformed ordered-ID metadata and outer LIST/page-size mismatches',async t=>{
+ const f=await fixture(t);
+ const changes=[x=>{x.kind='count';},x=>{x.kind='detail';},x=>{x.pageSize=25;},
+  x=>{x.responseValidation.listWindow.ids=['PRIVATE_ID'];},
+  x=>{x.responseValidation.listWindow.offsetVerified=true;},
+  x=>{x.responseValidation.listWindow.fingerprints.body='PRIVATE_BODY';},
+  x=>{x.responseValidation.listWindow.fingerprints.firstWindowSha256='b'.repeat(63);},
+  x=>{x.responseValidation.listWindow.fingerprints.nextWindowSha256='C'.repeat(64);},
+  x=>{x.responseValidation.listWindow.uniqueIdCount=49;},
+  x=>{x.responseValidation.rowCount=97;},x=>{x.responseValidation.listWindow.windowSize=49;}];
+ for(const change of changes){
+  const report=partialReport();report.records[0].responseValidation=windowValidation();change(report.records[0]);
+  await f.write(report);await assert.rejects(f.verify);
+ }
+});
+
 test('active report verification rejects wrong runtime/controller/nonce/stage/time and malformed or successful browser bindings',async t=>{
  const f=await fixture(t);
  const changes=[
@@ -171,6 +238,11 @@ test('the actual workflow shell preserves a valid active file byte-for-byte and 
  const before=await fs.readFile(path.join(f.root,reportName));
  const preserved=run();assert(preserved.stdout.includes('"verified":true'));
  assert.deepEqual(await fs.readFile(path.join(f.root,reportName)),before);
+ await assert.rejects(fs.readFile(calls),{code:'ENOENT'});
+ const ordered=partialReport();ordered.records[0].responseValidation=windowValidation();await f.write(ordered);
+ const orderedBefore=await fs.readFile(path.join(f.root,reportName));
+ assert(run().stdout.includes('"verified":true'));
+ assert.deepEqual(await fs.readFile(path.join(f.root,reportName)),orderedBefore);
  await assert.rejects(fs.readFile(calls),{code:'ENOENT'});
  const wrong=structuredClone(partialReport());wrong.capture.nonce='1'.repeat(32);await f.write(wrong);
  const fallback=run();assert(fallback.stdout.includes('"verified":false'));

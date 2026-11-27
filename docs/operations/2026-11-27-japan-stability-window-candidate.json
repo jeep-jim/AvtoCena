@@ -1,0 +1,99 @@
+{
+  "version": 1,
+  "date": "2026-11-27",
+  "timeZone": "Asia/Krasnoyarsk",
+  "status": "source_saved_controller_ci_pending_not_deployed",
+  "priorProductionEvidence": "docs/operations/2026-11-27-japan-stability-row-limit-followup.json",
+  "retainedRuntime": "a5ca426eec2663eb17c2df69fe2bfed46e2b8740",
+  "retainedGeneration": "gen_china_45875678028_1",
+  "candidate": {
+    "sha": "dd1fcaf2b2628c8e85ec7b81658eb01d0c468c34",
+    "tree": "1520812fbdd3a217b8c104224c36aeec4cec9e1a",
+    "parent": "bdc3d6d9bd2d98004b59bab5df33056d4ffe7981",
+    "scope": "catalog-japan-stability-v1",
+    "runtimeDiffSha256": "b2b442f27045882ebc1de4dbffdb3bd85002a470a68f83f4e88813f792347364",
+    "runtimeFileCount": 49,
+    "pricingToServingDiffSha256": "943a448b75404a3f1adaba5cf01a6dff4959036d91aae6bdc50b07016bb4968a",
+    "pricingToServingFileCount": 111,
+    "pricingRuntimeSha": "64c6338e0db23c8999096bceefbf113c0136fe15"
+  },
+  "mazdaRepair": {
+    "sourceSha": "bdc3d6d9bd2d98004b59bab5df33056d4ffe7981",
+    "testPass": 41,
+    "typecheck": "passed",
+    "behavior": "Japan legacy Mazda/3 resolves only unambiguous safe V2 canonical names intersected with real source directory; stale/ambiguous/overflow paths remain incomplete."
+  },
+  "observation": {
+    "only": "already rejected LIST row_limit_exceeded",
+    "maxRows": 96,
+    "windowSizeMax": 48,
+    "minimumRows": "2 * requested windowSize",
+    "counters": [
+      "windowSize",
+      "identityRowCount",
+      "uniqueIdCount"
+    ],
+    "optionalFingerprints": [
+      "orderedIdsSha256",
+      "firstWindowSha256",
+      "nextWindowSha256"
+    ],
+    "hashEncoding": "SHA256(UTF-8 JSON.stringify(ordered ajesText-normalized ID array))",
+    "hashRanges": [
+      "all returned IDs",
+      "[0,windowSize)",
+      "[windowSize,2*windowSize)"
+    ],
+    "fingerprintPrecondition": "Every normalized ID passes existing finite ID alphabet and is unique",
+    "rawIdsInReport": false,
+    "bodyInReport": false,
+    "queryOrVisitorInNewBlock": false,
+    "additionalSupplierRequests": 0,
+    "admissionChanged": false,
+    "cacheOrFreshnessChanged": false,
+    "sourceQueryChanged": false
+  },
+  "runtimeValidation": {
+    "targetedPass": 17,
+    "typecheck": "passed",
+    "diffCheck": "passed",
+    "changes": [
+      "apps/web/lib/catalog/ajes-client.ts",
+      "apps/web/lib/catalog/ajes-request-diagnostic.ts",
+      "tests/ajes-read-receipt.test.ts"
+    ]
+  },
+  "collectorValidation": {
+    "targetedPass": 44,
+    "runtimeSanitizerParityPass": 22,
+    "syntax": "passed",
+    "diffCheck": "passed",
+    "fullController": {
+      "passed": 1435,
+      "failed": 0,
+      "skipped": 0,
+      "durationSeconds": 20.89,
+      "logSha256": "6fd2e7c10f107d985de3d817ba2d5d617a44b26331e95ce681b0f2b7ab07b2e1",
+      "frozenBaselines": "passed"
+    },
+    "changes": [
+      "scripts/catalog-next/japan-usability-saved-failure-20261126.mjs",
+      "tests/catalog-next-japan-active-saved-failure.test.mjs",
+      "tests/catalog-next-japan-page-three-saved-failure.test.mjs"
+    ],
+    "fixedGets": 5,
+    "deadlineMs": 5000,
+    "maxReadBytes": 131072,
+    "maxBodyBytes": 65536,
+    "maxArtifactBytes": 32768,
+    "supplierRequests": 0,
+    "productionWrites": 0
+  },
+  "interpretationLimits": [
+    "No proof that supplier has a native50 contract.",
+    "Window hash equality only observes matching ordered IDs at captured times; it does not validate all WHERE clauses or future source stability.",
+    "No public acceptance or completion claim; all existing gates and automatic rollback remain."
+  ],
+  "maintenance": "Prepared but not activated. Rebind both runtime references only after final accepted state, then exact CI and serial activation.",
+  "next": "Exact controller CI, fresh production queue check, separate marker activation, normal bounded browser acceptance with existing before-rollback capture."
+}

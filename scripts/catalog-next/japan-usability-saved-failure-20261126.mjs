@@ -13,16 +13,43 @@ const stabilityKeys=[...pageThreeKeys,...releaseKeys];
 const activeStabilityKeys=[releaseKeys[0],...pageTwoKeys,...pageThreeKeys,...releaseKeys.slice(1)];
 const validationCodes={decode:['gzip_invalid','json_invalid'],page_shape:['root_not_array','row_limit_exceeded','row_not_object'],
  aggregate_shape:['total_invalid','count_row_count','make_name_missing'],empty_confirmation:['count_unavailable','count_unverified']};
-const validationKeys=new Set(['version','phase','code','wireBytes','decodedBytes','rootKind','rowCount','originCode']);
+const validationKeys=new Set(['version','phase','code','wireBytes','decodedBytes','rootKind','rowCount','originCode','listWindow']);
+const listWindowKeys=new Set(['windowSize','identityRowCount','uniqueIdCount','fingerprints']);
+const fingerprintKeys=new Set(['orderedIdsSha256','firstWindowSha256','nextWindowSha256']);
 const failureReasons=new Set(['client_ip_missing','visitor_restricted','not_configured','request_failed','request_timeout','connect_timeout',
  'quota_exhausted','quota_busy','quota_invalid','invalid_response','empty_response','response_too_large','identity_mismatch','query_too_large',
  'directory_unavailable','directory_too_large','directory_page_repeated','local_busy','market_not_supported','operation_failed']);
-export function sanitizeSavedResponseValidation(value){
+function plainOwnData(value,allowedKeys){
  if(!value||typeof value!=='object'||Array.isArray(value))return undefined;
- let descriptors;try{descriptors=Object.getOwnPropertyDescriptors(value);}catch{return undefined;}
+ let descriptors;try{
+  const prototype=Object.getPrototypeOf(value);
+  if(prototype!==Object.prototype&&prototype!==null)return undefined;
+  descriptors=Object.getOwnPropertyDescriptors(value);
+ }catch{return undefined;}
  const keys=Reflect.ownKeys(descriptors);
- if(keys.some(key=>!validationKeys.has(key)||!Object.hasOwn(descriptors[key],'value')))return undefined;
- const raw=Object.fromEntries(keys.map(key=>[key,descriptors[key].value]));
+ if(keys.some(key=>!allowedKeys.has(key)||!Object.hasOwn(descriptors[key],'value')))return undefined;
+ return Object.fromEntries(keys.map(key=>[key,descriptors[key].value]));
+}
+function sanitizeSavedListWindow(value,validation){
+ const raw=plainOwnData(value,listWindowKeys);
+ if(!raw||validation.phase!=='page_shape'||validation.code!=='row_limit_exceeded'
+  ||validation.rootKind!=='array'||!Number.isSafeInteger(validation.rowCount)||validation.rowCount>96
+  ||!Number.isSafeInteger(raw.windowSize)||raw.windowSize<1||raw.windowSize>48
+  ||validation.rowCount<2*raw.windowSize
+  ||!Number.isSafeInteger(raw.identityRowCount)||raw.identityRowCount<0||raw.identityRowCount>validation.rowCount
+  ||!Number.isSafeInteger(raw.uniqueIdCount)||raw.uniqueIdCount<0||raw.uniqueIdCount>raw.identityRowCount)return undefined;
+ const result={windowSize:raw.windowSize,identityRowCount:raw.identityRowCount,uniqueIdCount:raw.uniqueIdCount};
+ if(Object.hasOwn(raw,'fingerprints')){
+  const fingerprints=plainOwnData(raw.fingerprints,fingerprintKeys);
+  if(!fingerprints||raw.identityRowCount!==validation.rowCount||raw.uniqueIdCount!==validation.rowCount
+   ||[...fingerprintKeys].some(key=>typeof fingerprints[key]!=='string'||!/^[a-f0-9]{64}$/.test(fingerprints[key])))return undefined;
+  result.fingerprints=Object.fromEntries([...fingerprintKeys].map(key=>[key,fingerprints[key]]));
+ }
+ return result;
+}
+export function sanitizeSavedResponseValidation(value){
+ const raw=plainOwnData(value,validationKeys);
+ if(!raw)return undefined;
  if(raw.version!==1||typeof raw.phase!=='string'||typeof raw.code!=='string'
   ||!Object.hasOwn(validationCodes,raw.phase)||!validationCodes[raw.phase].includes(raw.code))return undefined;
  const result={version:1,phase:raw.phase,code:raw.code};
@@ -40,6 +67,16 @@ export function sanitizeSavedResponseValidation(value){
    ||!failureReasons.has(raw.originCode)&&!/^http_[45]\d\d$/.test(raw.originCode))return undefined;
   result.originCode=raw.originCode;
  }else if(Object.hasOwn(raw,'originCode'))return undefined;
+ if(Object.hasOwn(raw,'listWindow')){
+  const listWindow=sanitizeSavedListWindow(raw.listWindow,raw);
+  if(!listWindow)return undefined;
+  result.listWindow=listWindow;
+ }
+ return result;
+}
+function savedResponseValidationForRecord(value,record){
+ const result=sanitizeSavedResponseValidation(value);
+ if(result?.listWindow&&(record?.kind!=='list'||record?.pageSize!==result.listWindow.windowSize))return undefined;
  return result;
 }
 export const inspectSavedFailure=options=>inspectFixedSavedFailure(releaseKeys,options);
@@ -68,7 +105,7 @@ const int=(x,min,max)=>Number.isSafeInteger(x)&&x>=min&&x<=max?x:null;
 const timestamp=x=>typeof x==='string'&&/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/.test(x)&&Number.isFinite(Date.parse(x))?x:null;
 const outcomes=/^(?:http_[1-5]\d{2}|visitor_restricted|request_failed|request_timeout|connect_timeout|quota_exhausted|quota_busy|local_busy|invalid_response|empty_response|query_too_large|response_too_large|identity_mismatch)$/;
 const sanitize=value=>{
-const responseValidation=sanitizeSavedResponseValidation(value?.responseValidation);
+const responseValidation=savedResponseValidationForRecord(value?.responseValidation,value);
 return {startedAt:timestamp(value?.startedAt),finishedAt:timestamp(value?.finishedAt),
  kind:['list','detail','count','models','makes','colors'].includes(value?.kind)?value.kind:null,
  outcome:typeof value?.outcome==='string'&&outcomes.test(value.outcome)?value.outcome:null,
@@ -155,7 +192,7 @@ function checkedActiveRecord(record,slot){
   &&nullable(record.sqlSha256,value=>typeof value==='string'&&/^[a-f0-9]{64}$/.test(value))
   &&nullable(record.sqlBytes,value=>boundedInteger(value,0,64*1024))
   &&(record.sqlSha256===null)===(record.sqlBytes===null));
- if(Object.hasOwn(record,'responseValidation'))activeReportNeed(sanitizeSavedResponseValidation(record.responseValidation)!==undefined);
+ if(Object.hasOwn(record,'responseValidation'))activeReportNeed(savedResponseValidationForRecord(record.responseValidation,record)!==undefined);
 }
 
 /** Verify the already written local snapshot only. The checker has no storage
