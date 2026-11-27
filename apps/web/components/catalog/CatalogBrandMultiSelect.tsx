@@ -9,6 +9,7 @@ import {CATALOG_BRANDS,catalogBrandMatches} from "@/lib/catalog/brands";
 type Option = { value: string; label: string };
 type BrandStats = {
   generationId?: string;
+  stale?:boolean;
   counts: Record<string, number>;
   modelCounts: Record<string, number>;
 };
@@ -36,8 +37,14 @@ function loadBrandStats(query: string) {
     .then(async (response) => {
       if (!response.ok) throw new Error(`catalog_brand_stats_http_${response.status}`);
       const payload = await response.json();
+      const params=new URLSearchParams(query),japan=params.get('market')==='japan'&&params.get('stock')!=='green';
+      if(japan&&(!payload?.counts||typeof payload.counts!=='object'||Array.isArray(payload.counts)
+        ||payload.stale!==undefined&&typeof payload.stale!=='boolean'
+        ||Object.entries(payload.counts).some(([make,count])=>!make.trim()||!Number.isSafeInteger(count)||Number(count)<0)))throw Error('japan_brand_directory_invalid');
+      if(japan&&payload.stale===true&&REQUESTS.get(key)?.promise===promise)REQUESTS.delete(key);
       return {
         generationId: String(payload?.generationId || ""),
+        ...(japan?{stale:payload.stale===true}:{}),
         counts: payload?.counts && typeof payload.counts === "object" ? payload.counts : {},
         modelCounts: payload?.modelCounts && typeof payload.modelCounts === "object" ? payload.modelCounts : {},
       } as BrandStats;
@@ -77,6 +84,11 @@ export function CatalogBrandMultiSelect({
   const [query, setQuery] = useState("");
   const [stats, setStats] = useState<BrandStats>(EMPTY_STATS);
   const [statsUnavailable,setStatsUnavailable]=useState(false);
+  const [statsLoading,setStatsLoading]=useState(false);
+  const [statsLoaded,setStatsLoaded]=useState(false);
+  const [retry,setRetry]=useState(0);
+  const sourceParams=new URLSearchParams(contextQuery);
+  const japaneseAuctions=sourceParams.get('market')==='japan'&&sourceParams.get('stock')!=='green';
   const root = useRef<HTMLDivElement>(null);
   const selected = useMemo(() => splitMakes(value), [value]);
   const selectedKey = selected.length === 1 ? selected[0].toLocaleLowerCase("ru-RU") : "";
@@ -84,12 +96,13 @@ export function CatalogBrandMultiSelect({
   useEffect(() => {
     if (!open) return;
     let cancelled = false;
-    setStats(EMPTY_STATS);setStatsUnavailable(false);
+    setStats(EMPTY_STATS);setStatsUnavailable(false);setStatsLoading(true);setStatsLoaded(false);
     loadBrandStats(contextQuery)
-      .then((next) => { if (!cancelled) setStats(next); })
-      .catch(() => { if (!cancelled) {setStats(EMPTY_STATS);setStatsUnavailable(true);} });
+      .then((next) => { if (!cancelled) {setStats(next);setStatsLoaded(!next.stale);if(next.stale)setStatsUnavailable(true);} })
+      .catch(() => { if (!cancelled) {setStats(EMPTY_STATS);setStatsUnavailable(true);} })
+      .finally(()=>{if(!cancelled)setStatsLoading(false);});
     return () => { cancelled = true; };
-  }, [contextQuery, open]);
+  }, [contextQuery, open,retry]);
 
   useEffect(() => {
     if (!open) return;
@@ -119,8 +132,8 @@ export function CatalogBrandMultiSelect({
     const needle = query.trim().toLocaleLowerCase("ru-RU");
     // Known brand names remain searchable during an inventory metadata outage;
     // they carry no invented availability/count. Green stock remains source-only.
-    const known=statsUnavailable&&needle.length>=2&&new URLSearchParams(contextQuery).get('stock')!=='green'?CATALOG_BRANDS.map(brand=>brand.name):[];
-    const source = [...liveMakes, ...options.map((option) => option.value), ...selected, ...known];
+    const known=!japaneseAuctions&&statsUnavailable&&needle.length>=2&&new URLSearchParams(contextQuery).get('stock')!=='green'?CATALOG_BRANDS.map(brand=>brand.name):[];
+    const source = [...liveMakes, ...(japaneseAuctions&&statsLoaded?[]:options.map((option) => option.value)), ...selected, ...known];
     const seen = new Map<string, Option>();
     for (const make of source.map(clean).filter(Boolean)) {
       const key = make.toLocaleLowerCase("ru-RU");
@@ -129,7 +142,7 @@ export function CatalogBrandMultiSelect({
     return [...seen.values()]
       .filter((option) => catalogBrandMatches(option.label,needle))
       .sort((left, right) => Number(selected.some(v=>v.toLocaleLowerCase("ru-RU")===right.value.toLocaleLowerCase("ru-RU")))-Number(selected.some(v=>v.toLocaleLowerCase("ru-RU")===left.value.toLocaleLowerCase("ru-RU"))) || left.label.localeCompare(right.label, "ru"));
-  }, [options, query, selected, stats.counts,statsUnavailable,contextQuery]);
+  }, [options, query, selected, stats.counts,statsUnavailable,statsLoaded,japaneseAuctions,contextQuery]);
 
   const choose = (make: string) => {
     setOpen(false);
@@ -164,7 +177,9 @@ export function CatalogBrandMultiSelect({
             <span className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-[12px] font-black transition ${active ? "text-red-500" : "border border-[var(--ac-border)] text-transparent"}`}>✓</span>
           </button>;
         })}
-        {!brands.length ? <div className="px-3 py-5 text-center text-sm font-bold text-[var(--ac-muted)]">Марка не найдена</div> : null}
+        {japaneseAuctions&&statsUnavailable?<button type="button" className="min-h-11 w-full px-3 py-4 text-sm font-bold" onClick={()=>setRetry(value=>value+1)}>Не удалось загрузить марки. Повторить</button>:null}
+        {!brands.length&&japaneseAuctions&&statsLoading?<div className="px-3 py-5 text-center text-sm font-bold text-[var(--ac-muted)]">Загружаем марки…</div>:null}
+        {!brands.length&&(!japaneseAuctions||!statsLoading&&!statsUnavailable) ? <div className="px-3 py-5 text-center text-sm font-bold text-[var(--ac-muted)]">Марка не найдена</div> : null}
       </div>
     </div> : null}
   </div>;

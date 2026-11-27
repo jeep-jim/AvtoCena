@@ -48,6 +48,8 @@ test('ready cards do not wait for optional brand/model directories; exact select
   assert.equal(calls,0,'late count does not precede ready cards');
   const lateNodes=walk(lateRoot),late=lateNodes.find(n=>n.type?.name==='AjesIndependentCount');assert.ok(late);
   assert.equal(lateNodes.some(n=>n.props?.['data-japan-power-summary-page']!==undefined),false,'the removed page warning must not be rendered');
+  assert.equal(lateNodes.some(n=>n.props?.children==='unknown'),false,'no uncertain count label is rendered above the actual cars');
+  assert.equal(lateNodes.find(n=>n.props?.initialCount===3)?.props.resultCountLabel,undefined,'no uncertain count label is passed to the footer');
   assert.ok(lateNodes.some(n=>n.props?.initialCount===3),'all three actual cards, including unknown power, remain visible');
   assert.ok(lateNodes.some(n=>n.props?.initialCards?.some?.((card:any)=>card.props.offer.japanPowerUnknown===true)));
   countResult=Promise.resolve({total:42});

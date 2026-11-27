@@ -43,7 +43,7 @@ export async function resolveAjesQueryModels<T extends {table?:string;model?:str
   const next={...query};delete next.model;Object.assign(next,selection);
   return {query:next,modelDirectoryUnavailable:false};
  }catch(error){
-  const recoverable=error instanceof AjesUnavailable&&['local_busy','visitor_restricted','request_timeout','connect_timeout','request_failed','invalid_response','directory_too_large','directory_page_repeated'].includes(error.reason)
+  const recoverable=error instanceof AjesUnavailable&&(/^(?:http_(?:429|5\d\d)|local_busy|visitor_restricted|request_timeout|connect_timeout|request_failed|quota_exhausted|quota_busy|invalid_response|empty_response|response_too_large|query_too_large|directory_too_large|directory_page_repeated)$/.test(error.reason))
    ||error instanceof Error&&/^detail_cache_queue_(?:timeout|full)$/.test(error.message);
   if(!recoverable)throw error;
   return {query,modelDirectoryUnavailable:true};

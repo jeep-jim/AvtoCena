@@ -44,7 +44,7 @@ export async function AjesCatalog({params,embedded=false,dealer}:{params:Params;
  {!embedded&&<nav aria-label="Хлебные крошки" className="ac-catalog-breadcrumbs mb-4 flex items-center gap-2 text-xs font-black text-[var(--ac-muted)]"><Link href="/">Главная</Link><span>/</span><Link href="/cars">Каталог</Link><span>/</span><span aria-current="page">{label}</span></nav>}
  <div className={embedded?"ac-dealer-catalog-title-line":"contents"}>
  <h1 className="text-[30px] font-black leading-none tracking-[-0.04em] sm:text-4xl md:text-6xl">{embedded?"Авто под заказ":catalogSearchHeading(initial)}</h1>
- {embedded&&<p className="ac-catalog-result-count hidden md:flex items-center gap-2 text-[var(--ac-muted)]" role="status">
+ {embedded&&displayTotal!==undefined&&<p className="ac-catalog-result-count hidden md:flex items-center gap-2 text-[var(--ac-muted)]" role="status">
   <span className="ac-pulse-dot ac-pulse-dot--status shrink-0" aria-hidden="true"><span/></span>
   <CatalogCountLabel total={displayTotal??0} countIncomplete={displayTotal===undefined}/>
  </p>}
@@ -54,14 +54,14 @@ export async function AjesCatalog({params,embedded=false,dealer}:{params:Params;
   <AjesBrandRail initial={initial} fallbackBrands={makes} resultCount={displayTotal??undefined}/>
  </Suspense>
  <div className="mb-4 mt-8 flex flex-wrap items-center justify-between gap-3 md:mt-9">
- <h2 className="flex flex-wrap items-center gap-2 text-[26px] font-black tracking-[-0.04em] md:text-4xl"><CatalogMarketFlag market={market} className="h-5 w-7 md:h-6 md:w-9"/><span>{label}</span><Suspense fallback={<MarketResultCount>{ajesCountText(sourceTotal)}</MarketResultCount>}>{sourceTotal?<><CatalogResultCountUpdate queryKey={JSON.stringify(initial)} text={ajesCountText(sourceTotal)} total={exactAjesCount(sourceTotal)}/><MarketResultCount total={displayTotal??undefined}>{ajesCountText(sourceTotal)}</MarketResultCount></>:<AjesIndependentCount initial={initial}/>}</Suspense></h2>
+ <h2 className="flex flex-wrap items-center gap-2 text-[26px] font-black tracking-[-0.04em] md:text-4xl"><CatalogMarketFlag market={market} className="h-5 w-7 md:h-6 md:w-9"/><span>{label}</span><Suspense fallback={displayTotal!==undefined?<MarketResultCount total={displayTotal}>{ajesCountText(sourceTotal)}</MarketResultCount>:null}>{sourceTotal?<><CatalogResultCountUpdate queryKey={JSON.stringify(initial)} text={displayTotal!==undefined?ajesCountText(sourceTotal):''} total={displayTotal}/>{displayTotal!==undefined&&<MarketResultCount total={displayTotal}>{ajesCountText(sourceTotal)}</MarketResultCount>}</>:<AjesIndependentCount initial={initial}/>}</Suspense></h2>
  {market==='japan'&&<JapanSectionTabs active="auction" params={initial}/>}
  </div>
  {!result&&error&&initial.after&&<Link href={restartHref} className="mb-3 inline-block text-sm font-bold underline">Открыть первую страницу</Link>}
  {result&&<div>
  {String(initial.sort||'').split(',').some(term=>term.startsWith('totalRub'))&&<p className="mb-3 text-sm text-[var(--ac-muted)]">По рассчитанной цене в загруженной подборке. На следующих страницах могут быть более дешёвые автомобили.</p>}
  {!result.items.length&&!result.hasMore&&!result.partial&&!result.stale&&!result.interrupted&&!result.scanLimited&&<p role="status" className="rounded-2xl bg-[var(--ac-surface)] p-6 text-sm text-[var(--ac-muted)]">По выбранным параметрам автомобили не найдены. Попробуйте изменить условия поиска.</p>}
- <CatalogLoadMore resultQueryKey={JSON.stringify(initial)} key={JSON.stringify(initial)} query={{...initial,market} as any} initialPage={result.page} initialTotal={result.total} initialCount={result.items.length} initialCards={result.items.map((offer:any)=><CatalogCard key={offer.id} offer={offer} compact dense/>)} initialPageKey={JSON.stringify([result.generationId,result.items.map(offer=>offer.id),result.nextCursor])} initialIncomplete={Boolean(result.partial||result.stale||result.interrupted||result.scanLimited)} initialHasMore={result.hasMore} initialNextCursor={result.nextCursor} resultCountLabel={ajesPaginationCountText(sourceTotal)}/>
+ <CatalogLoadMore resultQueryKey={JSON.stringify(initial)} key={JSON.stringify(initial)} query={{...initial,market} as any} initialPage={result.page} initialTotal={result.total} initialCount={result.items.length} initialCards={result.items.map((offer:any)=><CatalogCard key={offer.id} offer={offer} compact dense/>)} initialPageKey={JSON.stringify([result.generationId,result.items.map(offer=>offer.id),result.nextCursor])} initialIncomplete={Boolean(result.partial||result.stale||result.interrupted||result.scanLimited)} initialHasMore={result.hasMore} initialNextCursor={result.nextCursor} resultCountLabel={displayTotal!==undefined?ajesPaginationCountText(sourceTotal):undefined}/>
  </div>}
 </CatalogSidebar>
  </section>
@@ -77,5 +77,6 @@ async function AjesBrandRail({initial,fallbackBrands,resultCount}:{initial:Recor
 
 async function AjesIndependentCount({initial}:{initial:Record<string,string>}){
  const summary=await readAjesCountSummary(JSON.stringify(initial)).catch(()=>null);
- return <><CatalogResultCountUpdate queryKey={JSON.stringify(initial)} text={ajesCountText(summary)} total={exactAjesCount(summary)}/><MarketResultCount total={exactAjesCount(summary)??undefined}>{ajesCountText(summary)}</MarketResultCount></>;
+ const total=exactAjesCount(summary);
+ return <><CatalogResultCountUpdate queryKey={JSON.stringify(initial)} text={total!==undefined?ajesCountText(summary):''} total={total}/>{total!==undefined&&<MarketResultCount total={total}>{ajesCountText(summary)}</MarketResultCount>}</>;
 }

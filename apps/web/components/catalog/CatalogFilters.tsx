@@ -352,8 +352,8 @@ export function CatalogFilters({ initial, facets, resultCount, auctionResults=fa
   const formKey = useMemo(() => JSON.stringify(initial), [initial]);
   const streamedCount=useCatalogResultCount();
   const countText=typeof resultCount==="number"?resultCount.toLocaleString("ru-RU"):streamedCount?.queryKey===formKey?streamedCount.text:"Количество уточняется";
-  const countKnown=countText!=="Количество уточняется";
-  const countLabel=countKnown?`Найдено ${countText.includes(" ·")?countText.replace(" ·"," машин ·"):`${countText} машин`}`:countText;
+  const countKnown=countText!=="Количество уточняется"&&(!auctionResults||Boolean(countText));
+  const countLabel=countKnown?`Найдено ${countText.includes(" ·")?countText.replace(" ·"," машин ·"):`${countText} машин`}`:auctionResults?"Автомобили из Японии":countText;
   const [draft, setDraft] = useState<FilterDraft>(() => draftFromInitial(initial));
   const initialSortState = useMemo(() => initialSort(initial.sort || ""), [initial.sort]);
   const [sortKey, setSortKey] = useState<SortKey>(initialSortState.key);

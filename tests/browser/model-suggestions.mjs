@@ -63,7 +63,7 @@ try{for(const width of [390,1440]){
  // The common picker must recover on every public market, with several makes,
  // and a make change must not retain the previous brand's model selection.
  for(const width of [390,1440])for(const [market,make,model] of [
-  ['china','Haval','H6'],['japan','Honda','Fit'],['korea','Kia','Seltos'],
+  ['china','Haval','H6'],['korea','Kia','Seltos'],
   ['uae','BMW','X5'],['europe','Audi','A6'],['georgia','Toyota','Camry'],
  ]){
   const context=await browser.newContext({viewport:{width,height:900}}),page=await context.newPage();

@@ -25,7 +25,7 @@ test('slow storage read does not consume supplier slots; stored inspection coale
   const a=client.read({table:'stats',page:1},'203.0.113.1'),b=client.read({table:'stats',page:1},'203.0.113.1');
   try{
     for(let i=0;i<100&&active<1;i++)await tick();
-    await client.read({table:'stats',page:2},'203.0.113.2');assert.equal(requests,1);assert.equal(reads,2);assert.ok(peak<=2);
+    await client.read({table:'stats',page:2},'203.0.113.2');assert.equal(requests,1);assert.equal(reads,3,'one held canonical lookup and two bounded compatible keys for page two');assert.ok(peak<=2);
   }finally{release();await Promise.all([a,b]);}
   assert.equal(requests,2,'duplicate requests retain supplier coalescing');
   const before=reads;await client.read({table:'stats',page:1},'203.0.113.3');assert.equal(reads,before,'fresh memory hit performs no storage read');

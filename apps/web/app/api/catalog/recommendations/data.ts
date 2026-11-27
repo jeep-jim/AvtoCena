@@ -1,18 +1,26 @@
 import 'server-only';
 import {getOfferDetailRecord} from '@/lib/catalog/offer-page-data';
 import {getUnavailableOffer,publicOffer,searchOffers} from '@/lib/catalog/storage';
-import {readAjesPublic} from '@/lib/catalog/ajes-public';
-import {readAjesCount} from '@/lib/catalog/ajes-catalog';
+import {readAjesCountSummary,readAjesResolvedPublic} from '@/lib/catalog/ajes-catalog';
+import {exactAjesCount} from '@/lib/catalog/ajes-count-display';
 import {readRelatedModelFamily} from '@/lib/catalog/related-model-family';
 import {selectRelatedOfferGroups,isRenderableRelatedOffer} from '@/lib/catalog/related-offer-selection';
 import {readGreenCorner,publicGreenOffer} from '@/lib/catalog/green-corner';
 import {filterGreenCorner} from '@/lib/catalog/green-corner-search';
 import {isGreenCornerOffer} from '@/lib/catalog/green-corner-contract';
+import {japanRecommendationCardVisible} from '@/lib/catalog/related-card-visibility';
 import {applyActiveBusinessPricingBatch} from '@/lib/catalog/live-business-pricing';
 import {priceCandidatesUntil} from '@/lib/catalog/price-candidates';
 import {presentCatalogOffer} from '@/lib/catalog/presentation';
 import {PUBLIC_CATALOG_MARKETS} from '@/lib/catalog/runtime-config';
 import type {RelatedRecommendations,AlternativeRecommendations} from '@/components/catalog/recommendation-types';
+
+// Green Corner's public DTO retains its stock identity, which also binds its
+// ATB invoice conversion. The generic DTO removes sourceId and breaks that
+// existing price contract, leaving an empty recommendation rail in the browser.
+export const publicRecommendationOffer=(offer:Parameters<typeof publicOffer>[0])=>isGreenCornerOffer(offer)?publicGreenOffer(offer):publicOffer(offer);
+const recommendationRenderable=(offer:any)=>isRenderableRelatedOffer(offer)
+  && (offer.market!=='japan'||japanRecommendationCardVisible(publicRecommendationOffer(offer)));
 
 // Preserve the existing search, admission, pricing and grouping rules. Only
 // request their UI when visible; limit each request to two concurrent searches.
@@ -37,9 +45,10 @@ export async function loadRelatedRecommendations({id,markets}:{id:string;markets
   const empty=()=>({items:[],total:0 as number|null});
   const safeSearch=async(params:Parameters<typeof searchOffers>[0])=>{
     try {
-      return params.market==='japan'
-        ? await readAjesPublic({table:'stats',make:params.make,model:params.model?(/^ajes-stats-/.test(current.id)?String(current.model):params.model):undefined,pageSize:24}).then(result=>({items:result.items,total:null}))
-        : await searchOffers(params,48,'related');
+      if(params.market!=='japan')return await searchOffers(params,48,'related');
+      const result=await readAjesResolvedPublic({...params,market:'japan',pageSize:24});
+      if(result.partial||result.stale)partial=true;
+      return {items:result.items,total:null};
     } catch {partial=true;return {items:[],total:null};}
   };
   const results=await bounded([
@@ -55,17 +64,18 @@ export async function loadRelatedRecommendations({id,markets}:{id:string;markets
   const groups=await selectRelatedOfferGroups({
     current,modelRows:modelResult.items,marketRows:marketResult.items,crossResults,
     greenModels,greenRows:(green?.items||[]).map(publicGreenOffer),
-    price:applyActiveBusinessPricingBatch,renderable:isRenderableRelatedOffer,
+    price:applyActiveBusinessPricingBatch,renderable:recommendationRenderable,
   });
-  const japanTotal=current.market==='japan'?await readAjesCount(JSON.stringify({market:'japan'})).catch(()=>{partial=true;return null;}):null;
+  const japanCount=current.market==='japan'?await readAjesCountSummary(JSON.stringify({market:'japan'})).catch(()=>{partial=true;return null;}):null;
+  const japanTotal=exactAjesCount(japanCount)??null;
   const marketTotal=current.market==='japan'?(japanTotal===null?null:japanTotal+(green?.items.length||0))
     :marketResult.total===null?null:Math.max(0,Number(marketResult.total||0));
   return {kind:'related',current:{id:current.id,market:current.market},make,familyModel,
     greenCurrent:isGreenCornerOffer(current),modelTitle:[presented.makeLabel,familyModel||presented.modelLabel].filter(Boolean).join(' '),
     marketLabel:String(presented.marketLabel||current.market||'рынка'),marketTotal,
-    stockModels:groups.stockModels.map(publicOffer),sameModel:groups.sameModel.map(publicOffer),
-    crossMarketGroups:groups.crossMarketGroups.map(group=>({market:group.market,items:group.items.map(publicOffer)})),
-    marketRows:groups.marketRows.map(publicOffer),partial};
+    stockModels:groups.stockModels.map(publicRecommendationOffer),sameModel:groups.sameModel.map(publicRecommendationOffer),
+    crossMarketGroups:groups.crossMarketGroups.map(group=>({market:group.market,items:group.items.map(publicRecommendationOffer)})),
+    marketRows:groups.marketRows.map(publicRecommendationOffer),partial};
 }
 
 export async function loadAlternativeRecommendations({id,markets}:{id:string;markets?:string[]}):Promise<AlternativeRecommendations> {
@@ -76,7 +86,7 @@ export async function loadAlternativeRecommendations({id,markets}:{id:string;mar
     catch{partial=true;return [];}
   };
   const price=async(rows:any[])=>{
-    try{return await priceCandidatesUntil(rows,applyActiveBusinessPricingBatch,isRenderableRelatedOffer,accepted=>accepted.length>=8);}
+    try{return await priceCandidatesUntil(rows,applyActiveBusinessPricingBatch,recommendationRenderable,accepted=>accepted.length>=8);}
     catch{partial=true;return [];}
   };
   let rows=offer?.make?await price(await search(offer.make)):[];
@@ -87,5 +97,5 @@ export async function loadAlternativeRecommendations({id,markets}:{id:string;mar
     rows=await price(candidates);
   }
   const unique=[...new Map(rows.map(row=>[row.id,row])).values()].slice(0,8);
-  return {kind:'alternatives',title:sameMake?`Другие автомобили ${offer?.make}`:'Посмотрите автомобили на других рынках',items:unique.map(publicOffer),partial};
+  return {kind:'alternatives',title:sameMake?`Другие автомобили ${offer?.make}`:'Посмотрите автомобили на других рынках',items:unique.map(publicRecommendationOffer),partial};
 }

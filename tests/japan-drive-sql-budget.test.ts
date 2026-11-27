@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {DatabaseSync} from 'node:sqlite';
 import {japanDriveSql} from '../apps/web/lib/catalog/japan-drive';
-import {ajesQuery} from '../apps/web/lib/catalog/ajes-query';
+import {ajesQuery,ajesSourceCacheSql} from '../apps/web/lib/catalog/ajes-query';
 import {heavyVehicleFamilies,heavyVehicleSqlExclusion} from '../apps/web/lib/catalog/heavy-vehicle-families';
 import {createAjesClient} from '../apps/web/lib/catalog/ajes-client';
 import {ajesErrorResponse} from '../apps/web/lib/catalog/ajes-error-response';
@@ -64,8 +64,8 @@ test('single drivetrain queries remain well below a standard 8 KB request line',
   const bytes=new URLSearchParams({sql:ajesQuery({drive}).sql}).toString().length;
   assert.ok(bytes<6000,drive+': '+bytes);
  }
- // Unfiltered cached queries retain their exact old truck predicate.
- assert.ok(ajesQuery({}).sql.includes(heavyVehicleSqlExclusion()));
+ // Wire compaction must not change the stored identity of equivalent queries.
+ assert.ok(ajesSourceCacheSql(ajesQuery({}).sql).includes(heavyVehicleSqlExclusion()));
 });
 test('Japan power lists and counts fit the supplier URI budget without losing owner power rules',()=>{
  for(const table of ['stats','main'] as const)for(const aggregate of [undefined,'count'] as const)for(const power of [{powerTo:160},{powerFrom:100},{powerFrom:100,powerTo:160}]){
@@ -79,14 +79,17 @@ test('Japan power lists and counts fit the supplier URI budget without losing ow
  // Neither Japanese auction table may use supplier PW as a specification filter.
  for(const table of ['stats','main'] as const){
   assert.doesNotMatch(ajesQuery({table,powerTo:160}).sql,/pw\s*(?:>=|<=|>|<)/i);
-  assert.ok(ajesQuery({table}).sql.includes(heavyVehicleSqlExclusion()));
+  assert.ok(ajesQuery({table}).sql.includes(heavyVehicleSqlExclusion(false,false,true)));
  }
  for(const table of ['china','korea'])assert.throws(()=>ajesQuery({table,powerTo:160}),/ajes_invalid_query/);
 });
 test('supplier URI limit is classified without leaking its response or credentials',async()=>{
  const client=createAjesClient({password:()=> 'private-fixture',assertEnabled:async()=>{},reserve:async()=>{},fetcher:async()=>new Response('private provider body',{status:414})});
  let failure:unknown;try{await client.read({drive:'awd'},'127.0.0.1');}catch(error){failure=error;}
- assert.deepEqual(ajesErrorResponse(failure),{status:503,body:{ok:false,error:'japan_search_unavailable',reason:'query_too_large'}});
+ const response=ajesErrorResponse(failure),{sourceReceipt,...body}=response.body;
+ assert.deepEqual({status:response.status,body},{status:503,body:{ok:false,error:'japan_search_unavailable',reason:'query_too_large'}});
+ assert.equal(sourceReceipt?.outcome,'unavailable');assert.equal(sourceReceipt?.supplierAttempted,true);
+ assert.doesNotMatch(JSON.stringify(response),/private-fixture|private provider body/);
 });
 
 test('all saved chassis groups agree between displayed drive and SQL before LIMIT/count',()=>{

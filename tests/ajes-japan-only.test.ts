@@ -187,7 +187,7 @@ test('Korea recommendations and market count use the published catalog instead o
    '@/lib/catalog/offer-page-data':'export const getOfferDetailRecord=async()=>({id:"paid-kia",market:"korea",make:"Kia",model:"Morning"});',
    '@/lib/catalog/storage':'export const publicOffer=x=>x;export const getUnavailableOffer=async()=>null;export const searchOffers=async q=>{globalThis.__ajRetiredRecommendations.push(q);return {items:[{id:"other-kia",market:"korea",make:"Kia",model:"Morning"}],total:46};};',
    '@/lib/catalog/ajes-public':'export const readAjesPublic=()=>{throw Error("must not use AJ");};',
-   '@/lib/catalog/ajes-catalog':'export const readAjesCount=()=>{throw Error("must not count AJ");};',
+   '@/lib/catalog/ajes-catalog':'export const readAjesCountSummary=()=>{throw Error("must not count AJ");};export const readAjesResolvedPublic=()=>{throw Error("must not use AJ");};',
    '@/lib/catalog/related-model-family':'export const readRelatedModelFamily=async()=>"Morning";',
    '@/lib/catalog/related-offer-selection':'export const isRenderableRelatedOffer=()=>true;export const selectRelatedOfferGroups=async p=>({stockModels:[],sameModel:p.modelRows,marketRows:p.marketRows,crossMarketGroups:[]});',
    '@/lib/catalog/green-corner':'export const readGreenCorner=()=>{throw Error("unselected Japan");};export const publicGreenOffer=x=>x;',

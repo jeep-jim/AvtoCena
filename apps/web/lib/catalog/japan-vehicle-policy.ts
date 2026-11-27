@@ -4,3 +4,28 @@
 const excluded=['FRUEHAUF','GM','HINO','HITACHI','KOMATSU','OTHERS','SUMITOMO','TADANO','TCM','TRAILER'];
 export const japanExcludedMake=(make:unknown)=>excluded.includes(String(make||'').normalize('NFKC').trim().toUpperCase());
 export const japanMakeSqlExclusion=()=>`marka_name not in (${excluded.map(v=>"'"+v+"'").join(',')})`;
+
+// These Japanese commercial families are absent from the shared legacy list.
+// Keep this addition local to Japan instead of changing another market's policy.
+// Mazda: https://www.mazda.co.jp/cars/commercial/titan/
+// Nissan: https://global.nissannews.com/ja-JP/channels/civilian
+const japanCommercialFamilies=[{make:'MAZDA',model:'TITAN'},{make:'NISSAN',model:'CIVILIAN'}] as const;
+const normalized=(value:unknown)=>String(value||'').normalize('NFKC').trim().toUpperCase().replace(/\s+/g,' ');
+export function japanVehicleFamilyExcluded(make:unknown,model:unknown){
+ const brand=normalized(make),name=normalized(model);
+ return japanCommercialFamilies.some(family=>brand===family.make&&(name===family.model||[' ','-','/'].some(separator=>name.startsWith(family.model+separator))));
+}
+export const japanVehicleFamilySqlExclusion=()=>`not (${japanCommercialFamilies.map(({make,model})=>`(marka_name='${make}' and model_name regexp '^${model}($|[ /-])')`).join(' or ')})`;
+
+/** Explicit bus/class evidence only: passenger minivans and a generic VAN remain. */
+export function japanVehicleTypeExcluded(offer:any,boundBody=''){
+ if(offer?.market!=='japan')return false;
+ if(japanExcludedMake(offer.make)||japanVehicleFamilyExcluded(offer.make,offer.model))return true;
+ const category=normalized(offer.vehicleCategory);
+ if(/^(?:N[23]|M[23])G?$/.test(category))return true;
+ const body=[offer.bodyType,boundBody].join(' ');
+ const text=[offer.model,offer.trim,body].join(' ');
+ // COACH can be a passenger-car trim (for example COACH EDITION), so accept
+ // it as a bus only in an explicit body classification.
+ return /\bcoach\b/i.test(body)||/\b(?:bus|minibus|microbus)\b|автобус|(?:^|[\s/()-])(?:マイクロ)?バス(?:$|[\s/()-])/i.test(text);
+}

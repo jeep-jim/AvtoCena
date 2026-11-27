@@ -1,6 +1,7 @@
 import {createHash} from 'node:crypto';
 import {heavyVehicleSqlExclusion} from './heavy-vehicle-families';
-import {ajesQuery} from './ajes-query';
+import {japanVehicleFamilySqlExclusion} from './japan-vehicle-policy';
+import {ajesQuery,ajesSourceCacheSql} from './ajes-query';
 
 type Store={readJson:(key:string,fallback:null)=>Promise<any>;writeJson:(key:string,value:any)=>Promise<unknown>};
 const root='catalog/partner-cache/ajes/queries';
@@ -14,7 +15,7 @@ export function retainedAjesQueryEntries(saved:any):QueryEntry[]{
   .filter((entry):entry is QueryEntry=>typeof entry?.hash==='string'&&/^[a-f0-9]{64}$/.test(entry.hash)&&entry.value&&typeof entry.value==='object')
   .map(({hash,value})=>({hash,value}));
 }
-const overallCount=ajesQuery({aggregate:'count'}).sql,overallMakes=ajesQuery({aggregate:'makes'}).sql;
+const overallCount=ajesSourceCacheSql(ajesQuery({aggregate:'count'}).sql),overallMakes=ajesSourceCacheSql(ajesQuery({aggregate:'makes'}).sql);
 /** Keep counters out of the list collision pool; always verify the complete SQL hash. */
 export function ajesQueryCacheLocation(sql:string){
  const hash=createHash('sha256').update(sql).digest('hex'),slot=parseInt(hash.slice(0,8),16)%128;
@@ -64,6 +65,21 @@ export async function readExpandedJapanRows(sql:string,previous:string,read:(sql
  if(!sql.startsWith('select * from')||!sql.includes('year>=2008'))return null;
  const candidates=[sql,previous].map(s=>s.replace('year>=2008','year>=2010'));
  for(const key of new Set(candidates)){const value=await read(key);if(value)return {...value,partial:true};}
+ return null;
+}
+
+/** New Japan admission rules may reuse previously viewed rows only as an
+ * incomplete failure fallback. Enrichment applies current admission again;
+ * the former COUNT and directory no longer describe the current selection. */
+export async function readPreviousJapanPolicyRows(sql:string,read:(sql:string)=>Promise<any|null>){
+ if(!sql.startsWith('select * from'))return null;
+ const previous=sql.replace(' and '+japanVehicleFamilySqlExclusion(),'');
+ if(previous===sql)return null;
+ const compact=previous.replace(heavyVehicleSqlExclusion(),heavyVehicleSqlExclusion(false,false,true));
+ for(const key of new Set([previous,compact])){
+  const saved=await read(key);
+  if(saved)return {...saved,schemaVersion:0,partial:true};
+ }
  return null;
 }
 

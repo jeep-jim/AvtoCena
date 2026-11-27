@@ -2,13 +2,14 @@ import type {CalculationIndex} from '../encyclopedia/calculation-index';
 import {pickupSourceCandidateSql} from './pickup-body';
 import {japanDriveSql} from './japan-drive';
 import {auctionSaleRange} from "./auction-sale-period";
-import {japanExcludedMake,japanMakeSqlExclusion} from './japan-vehicle-policy';
+import {japanMakeSqlExclusion,japanVehicleTypeExcluded,japanVehicleFamilySqlExclusion} from './japan-vehicle-policy';
 import {assertAjesJapanMarket} from './ajes-access-policy';
 import {motorcycleExcluded,motorcycleSqlExclusion} from './motorcycle-policy';
 import {vehicleColorAliases} from './vehicle-colors';
 import {parseCatalogSort} from './catalog-sort';
 import {JAPAN_MIN_MODEL_YEAR} from './japan-year-policy';
 import {parseEngineCc} from './engine-input';
+import {auctionGradeLabel} from './japan-export-restriction';
 import {heavyVehicleSqlExclusion,knownHeavyVehicleFamily} from './heavy-vehicle-families';
 /** Supplier SQL is generated here only; callers cannot supply SQL or column names. */
 export type AjesTable = 'stats' | 'main';
@@ -61,11 +62,11 @@ export function ajesQuery(input: unknown,driveIndex:CalculationIndex|null=null) 
   }
   if (table==='stats') where.push("status='Sold'",'finish>0');
   where.push("marka_name!=''","model_name!=''");
-  // Use the equivalent compact heavy-vehicle predicate on filtered Japan queries
-  // to keep the supplier request small; horsepower itself is resolved locally.
-  const compactJapan=Boolean(q.drive)||q.powerFrom!==undefined||q.powerTo!==undefined;
-  where.push(heavyVehicleSqlExclusion(false,false,compactJapan),motorcycleSqlExclusion());
-  where.push(japanMakeSqlExclusion());
+  // Directories and plain/model searches share the same supplier URI boundary
+  // as drive/power selections. Send the equivalent compact predicate for every
+  // query; ajesSourceCacheSql preserves the existing stored response identity.
+  where.push(heavyVehicleSqlExclusion(false,false,true),motorcycleSqlExclusion());
+  where.push(japanMakeSqlExclusion(),japanVehicleFamilySqlExclusion());
   for(const [column,parts] of [['marka_name',makes]] as const){if(parts.length===1)where.push(`${column}='${parts[0]}'`);else if(parts.length)where.push(`${column} in (${parts.map(v=>`'${v}'`).join(',')})`);}
   const modelClauses=[...models.map(v=>`model_name='${v}'`),...families.map(v=>`model_name like '${v} %'`)];
   if(modelClauses.length)where.push('('+modelClauses.join(' or ')+')');
@@ -76,7 +77,14 @@ export function ajesQuery(input: unknown,driveIndex:CalculationIndex|null=null) 
   coded(q.transmission,'kpp',{automatic:['AT'],manual:['MT'],cvt:['CVT'],dct:['DCT']});
   if(q.drive)where.push(japanDriveSql(q.drive,driveIndex));
   if(q.pickup!==undefined){if(q.pickup!==true)throw new AjesInputError();where.push(pickupSourceCandidateSql(false));}
-  if(q.auctionGrade){const grades=values(q.auctionGrade,'|');if(grades.some(v=>! /^(?:[0-6](?:\.5)?|S|R|RA|A|B|C)$/.test(v)))throw new AjesInputError();where.push(`rate in (${grades.map(v=>`'${v}'`).join(',')})`);}
+  if(q.auctionGrade){
+    if(typeof q.auctionGrade!=='string')throw new AjesInputError();
+    const selected=q.auctionGrade.split('|'),grades=selected.map(auctionGradeLabel);
+    // Use the same finite source-grade alphabet as the picker, including stars
+    // and legacy decimal commas, without relaxing make/model SQL validation.
+    if(selected.length>20||grades.some(grade=>!grade))throw new AjesInputError();
+    where.push(`rate in (${[...new Set(grades)].map(grade=>`'${grade}'`).join(',')})`);
+  }
 
   if(q.chassis!==undefined)where.push(`kuzov='${name(q.chassis)}'`);
   if(q.frameNumber!==undefined)where.push(`serial='${name(q.frameNumber)}'`);
@@ -135,7 +143,8 @@ export function ajesLot(row: Record<string, unknown>, table: AjesTable, detail: 
   const id=text('ID'), year=number('YEAR');
   if (!/^[A-Za-z0-9_-]{1,64}$/.test(id) || !text('MARKA_NAME') || !text('MODEL_NAME') || !year || year<JAPAN_MIN_MODEL_YEAR || !Number.isInteger(year) || year>new Date().getUTCFullYear()+1 || number('AUCTION_TYPE')===1) return null;
   const sold=table==='stats' && /^sold$/i.test(text('STATUS'));
-  if(japanExcludedMake(text('MARKA_NAME'))||knownHeavyVehicleFamily(text('MARKA_NAME'),text('MODEL_NAME'))||motorcycleExcluded({make:text('MARKA_NAME'),model:text('MODEL_NAME'),trim:text('GRADE'),bodyType:text('BODY_TYPE'),vehicleCategory:text('VEHICLE_CATEGORY')}))return null;
+  const vehicle={market:'japan',make:text('MARKA_NAME'),model:text('MODEL_NAME'),trim:text('GRADE'),bodyType:text('BODY_TYPE'),vehicleCategory:text('VEHICLE_CATEGORY')};
+  if(japanVehicleTypeExcluded(vehicle)||knownHeavyVehicleFamily(vehicle.make,vehicle.model)||motorcycleExcluded(vehicle))return null;
   const finish=number('FINISH');
   if (table==='stats' && (!sold || !finish)) return null;
   const urls=[...new Set(text('IMAGES').split('#').map(u=>ajesImageUrl(u,'original')).filter((u):u is string=>Boolean(u)))];

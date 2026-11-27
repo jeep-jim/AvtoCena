@@ -185,13 +185,18 @@ export function VehicleModelSearch({
   const [directoryError,setDirectoryError]=useState(false),[retry,setRetry]=useState(0);
   const searchQuery = multiple ? query.split(",").at(-1)?.trim() || "" : query;
   const sourceStock=new URLSearchParams(contextQuery||'').get('stock')||'';
-  const sourceOnly=Boolean(sourceItems)&&sourceStock==='green';
+  const sourceMarket=new URLSearchParams(contextQuery||'').get('market')||'';
+  const japaneseAuctions=contextual&&sourceMarket==='japan'&&sourceStock!=='green';
+  const sourceOnly=japaneseAuctions||Boolean(sourceItems)&&sourceStock==='green';
   const sourceSearch=useMemo(()=>sourceItems?createModelSuggestionSearch({version:1,brands:[],models:sourceItems.map(item=>[item.make,item.model,item.aliases||[],1])}):null,[sourceItems]);
   const items=useMemo(()=>{
+    // A Japanese auction option must come from this source's directory or an
+    // actual visible auction row. Encyclopedia/stock names are not availability.
+    if(japaneseAuctions)return groupFilterModels(mergeModelSuggestions(supplierSearches.flatMap(search=>search(searchQuery,make)),sourceSearch?.(searchQuery,make)||[],searchQuery));
     const local=sourceSearch?mergeModelSuggestions(inventory?.(searchQuery,make)||[],mergeModelSuggestions(sourceSearch(searchQuery,make),sourceOnly?[]:directory?.(searchQuery,make)||[],searchQuery),searchQuery):contextual?mergeModelSuggestions(inventory?.(searchQuery,make)||[],directory?.(searchQuery,make)||[],searchQuery):remoteItems.map(item=>({...item,aliases:item.aliases||[]}));
     const merged=mergeModelSuggestions([...supplierSearches.flatMap(search=>search(searchQuery,make)),...(stockDirectory?.(searchQuery,make)||[])],local,searchQuery);
     return contextual?groupFilterModels(merged):merged;
-  },[sourceSearch,sourceOnly,contextual,inventory,directory,searchQuery,make,remoteItems,supplierSearches,stockDirectory]);
+  },[sourceSearch,sourceOnly,japaneseAuctions,contextual,inventory,directory,searchQuery,make,remoteItems,supplierSearches,stockDirectory]);
   useEffect(()=>setVisibleCount(60),[searchQuery,make]);
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -236,7 +241,6 @@ export function VehicleModelSearch({
     };
   }, [open,mobile]);
 
-  const sourceMarket=new URLSearchParams(contextQuery||'').get('market')||'';
   useEffect(()=>{
     setSupplierSearches([]);setSupplierError(false);setSupplierLoading(0);
     if(!contextual||!open||sourceStock==='green')return;
@@ -244,7 +248,7 @@ export function VehicleModelSearch({
     let cancelled=false;setSupplierLoading(markets.length);
     // Each directory can extend the picker immediately, independently of peers.
     for(const market of markets)loadModelSuggestions(true,{market,make}).then(search=>{
-      if(!cancelled)setSupplierSearches(current=>[...current,search]);
+      if(!cancelled){setSupplierSearches(current=>[...current,search]);if(search.stale)setSupplierError(true);}
     }).catch(()=>{if(!cancelled)setSupplierError(true);}).finally(()=>{if(!cancelled)setSupplierLoading(count=>Math.max(0,count-1));});
     return()=>{cancelled=true;};
   },[Boolean(sourceItems),contextual,sourceMarket,sourceStock,make,open,retry]);
@@ -257,22 +261,22 @@ export function VehicleModelSearch({
   },[sourceOnly,contextual,open,directory,retry]);
 
   useEffect(()=>{
-    if(sourceItems||!contextual||!open)return;
+    if(japaneseAuctions||sourceItems||!contextual||!open)return;
     let cancelled=false;setInventoryLoading(true);setInventoryError(false);
     loadModelSuggestions(true,undefined,make,sourceMarket).then(search=>{if(!cancelled){setInventoryLoading(false);setInventory(()=>search);}})
       .catch(()=>{if(!cancelled)setInventoryError(true);})
       .finally(()=>{if(!cancelled)setInventoryLoading(false);});
     return()=>{cancelled=true;};
-  },[sourceItems,contextual,open,retry,make,sourceMarket]);
+  },[japaneseAuctions,sourceItems,contextual,open,retry,make,sourceMarket]);
   useEffect(()=>{
-    if(sourceItems||!contextual||!open||sourceMarket&&!sourceMarket.split('|').some(market=>market==='japan'||market==='green'))return;
+    if(japaneseAuctions||sourceItems||!contextual||!open||sourceMarket&&!sourceMarket.split('|').some(market=>market==='japan'||market==='green'))return;
     let cancelled=false;
     loadModelSuggestions(true,undefined,make,'green').then(search=>{if(!cancelled)setStockDirectory(()=>search);})
       .catch(()=>{if(!cancelled)setInventoryError(true);});
     return()=>{cancelled=true;};
-  },[sourceItems,contextual,open,retry,make,sourceMarket]);
-  const searching = loading || (contextual && ((!directory&&!directoryError&&!sourceOnly) || inventoryLoading || supplierLoading>0));
-  const suggestionError = directoryError || inventoryError || supplierError;
+  },[japaneseAuctions,sourceItems,contextual,open,retry,make,sourceMarket]);
+  const searching = japaneseAuctions?supplierLoading>0:loading || (contextual && ((!directory&&!directoryError&&!sourceOnly) || inventoryLoading || supplierLoading>0));
+  const suggestionError = japaneseAuctions?supplierError:directoryError || inventoryError || supplierError;
 
   const multipleMakes = String(make || "").split(",").map(clean).filter(Boolean).length > 1;
   const canSearch = Boolean(!clean(searchQuery) || clean(make) || compact(searchQuery).length >= 2);
@@ -373,6 +377,8 @@ export function VehicleModelSearch({
         {canSearch && items.length ? items.slice(0,visibleCount).map((item) => <button
           key={item.id || `${item.make}:${item.model}`}
           type="button"
+          data-model-value={item.model}
+          data-model-make={item.make}
           onPointerDown={(event) => event.preventDefault()}
           onClick={() => choose(item)}
           aria-pressed={multiple ? selectedModels.includes(item.model) : undefined}

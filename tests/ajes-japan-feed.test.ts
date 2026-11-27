@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {gzipSync} from 'node:zlib';
-import {ajesQuery,ajesLot,ajesImageUrl} from '../apps/web/lib/catalog/ajes-query';
+import {ajesQuery,ajesLot,ajesImageUrl,ajesSourceCacheSql} from '../apps/web/lib/catalog/ajes-query';
 import {ajesOffer} from '../apps/web/lib/catalog/ajes-offer';
 import {ajesPowerEstimateHp} from '../apps/web/lib/catalog/ajes-power-estimate';
 import {createAjesClient,readAjesModelDirectory} from '../apps/web/lib/catalog/ajes-client';
@@ -86,7 +86,7 @@ test('confirmed heavy families are excluded without fabricating a listing mass',
 test('lists, counts and model directories apply identical heavy-family SQL before pagination',()=>{
  for(const aggregate of [undefined,'count','models'] as const){
   const query=ajesQuery({aggregate});
-  assert.ok(query.sql.includes(heavyVehicleSqlExclusion()));
+  assert.ok(query.sql.includes(heavyVehicleSqlExclusion(false,false,true)));
  }
 });
 
@@ -114,7 +114,8 @@ test('duplicate user requests coalesce; cache hits still obey source switch',asy
   let enabled=true,calls=0,reserved=0;
   const client=createAjesClient({password:()=> 'test-secret',assertEnabled:async()=>{if(!enabled)throw Error('disabled');},reserve:async()=>{reserved++;},fetcher:async(url,options)=>{calls++;assert.equal(options?.redirect,'error');assert.equal(new URL(String(url)).searchParams.get('ip'),'127.0.0.1');return new Response(JSON.stringify([row]),{headers:{'API-Rest':'19990'}});}});
   const [a,b]=await Promise.all([client.read({},'127.0.0.1'),client.read({},'127.0.0.1')]);
-  assert.deepEqual(a,b);assert.equal(calls,1);assert.equal(reserved,1);assert.equal(a.quota.remaining,19990);assert.ok(!JSON.stringify(a).includes('test-secret'));
+  const {sourceReceipt:aReceipt,...aData}=a,{sourceReceipt:bReceipt,...bData}=b;
+  assert.deepEqual(aData,bData);assert.notEqual(aReceipt.requestId,bReceipt.requestId);assert.equal(calls,1);assert.equal(reserved,1);assert.equal(a.quota.remaining,19990);assert.ok(!JSON.stringify(a).includes('test-secret'));
   enabled=false;await assert.rejects(client.read({},'127.0.0.1'),/disabled/);assert.equal(calls,1);
 });
 test('provider failures never expose its URL/body/secret and are not cached as no results',async()=>{
@@ -438,7 +439,7 @@ test('Coaster bus is excluded in pages, counts, and cached offer admission',()=>
   assert.equal(ajesLot({...row,MODEL_NAME:model},'stats',false),null);
   assert.equal(catalogHeavyVehicleExcluded({make:'TOYOTA',model}),true);
  }
- for(const aggregate of [undefined,'count','models'] as const)assert.match(ajesQuery({aggregate}).sql,/marka_name='TOYOTA' and \(model_name='COASTER'/);
+ for(const aggregate of [undefined,'count','models'] as const)assert.match(ajesSourceCacheSql(ajesQuery({aggregate}).sql),/marka_name='TOYOTA' and \(model_name='COASTER'/);
  assert.ok(!heavyVehicleSqlExclusion(true).includes("model_name='COASTER'"));
  assert.ok(ajesLot({...row,MODEL_NAME:'HIACE'},'stats',false));
 });
@@ -510,7 +511,7 @@ test('list hash collisions cannot evict saved counts; legacy counts require iden
  const {ajesQueryCacheLocation,readAjesQueryCache,saveAjesQueryCache}=await import('../apps/web/lib/catalog/ajes-query-cache');
  const files=new Map<string,any>();
  const storage={readJson:async(key:string)=>files.get(key)||null,writeJson:async(key:string,value:any)=>{files.set(key,value);}};
- const count=ajesQuery({aggregate:'count'}).sql,where=ajesQueryCacheLocation(count);
+ const count=ajesSourceCacheSql(ajesQuery({aggregate:'count'}).sql),where=ajesQueryCacheLocation(count);
  const snapshot={total:578,items:[],observedAt:new Date().toISOString()};
  // Existing exact-SQL counts migrate on read without accepting old selection rules.
  files.set(where.legacy,{hash:where.hash,value:snapshot});
@@ -575,7 +576,7 @@ test('brand directory is complete independently of a 24-car page and protects it
  const directory=await readAjesMakeDirectory(client,{},'127.0.0.1');
  assert.equal(directory.makes.length,7);assert.equal(calls,1);assert.equal(directory.makes[6].total,12);
  const files=new Map<string,any>(),store={readJson:async(k:string)=>files.get(k)||null,writeJson:async(k:string,v:any)=>{files.set(k,v);}};
- const sql=ajesQuery({aggregate:'makes'}).sql;
+ const sql=ajesSourceCacheSql(ajesQuery({aggregate:'makes'}).sql);
  await saveAjesQueryCache(store,sql,{items:[],makes:directory.makes});
  for(let i=0;i<256;i++)await saveAjesQueryCache(store,ajesQuery({lotNumber:String(i)}).sql,{items:[]});
  assert.equal((await readAjesQueryCache(store,sql)).makes.length,7);
@@ -659,7 +660,7 @@ test('explicit trucks are excluded across markets, including saved and Dubicars 
 
 test('truck policy change retains old viewed rows only as a partial refresh/failure fallback, never an old count',async()=>{
  const {readPreviousTruckPolicyRows}=await import('../apps/web/lib/catalog/ajes-query-cache');
- const query=ajesQuery({table:'stats'}).sql;
+ const query=ajesSourceCacheSql(ajesQuery({table:'stats'}).sql);
  const previous=query.replace(heavyVehicleSqlExclusion(),heavyVehicleSqlExclusion(false,true));
  const saved={schemaVersion:2,items:[{make:'ISUZU',model:'ELF Key'},{make:'TOYOTA',model:'PRIUS'}]};
  const value=await readPreviousTruckPolicyRows(query,async key=>key===previous?saved:null);

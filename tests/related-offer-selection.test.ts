@@ -31,9 +31,9 @@ test('deferred recommendations read trusted source identity and expose only publ
  assert.match(page,/offerId=\{offer.id\}/);
  assert.match(related,/const current=await getOfferDetailRecord\(id\)/);
  assert.match(related,/greenCurrent:isGreenCornerOffer\(current\)/);
- for(const field of ['stockModels','sameModel','marketRows'])assert.ok(related.includes(field+':groups.'+field+'.map(publicOffer)'));
- assert.match(related,/items:group.items.map\(publicOffer\)/);
- assert.match(related,/items:unique.map\(publicOffer\)/);
+ for(const field of ['stockModels','sameModel','marketRows'])assert.ok(related.includes(field+':groups.'+field+'.map(publicRecommendationOffer)'));
+ assert.match(related,/items:group.items.map\(publicRecommendationOffer\)/);
+ assert.match(related,/items:unique.map\(publicRecommendationOffer\)/);
 });
 
 test('published stock DTOs without private provenance remain eligible in recommendations',async()=>{

@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createAjesClient,AjesUnavailable} from '../apps/web/lib/catalog/ajes-client';
 import {DetailReadCache} from '../apps/web/lib/catalog/detail-read-cache';
-import {ajesQuery} from '../apps/web/lib/catalog/ajes-query';
+import {ajesQuery,ajesSourceCacheSql} from '../apps/web/lib/catalog/ajes-query';
 import {findSavedAjesSearch} from '../apps/web/lib/catalog/ajes-saved-search';
 const input={table:'stats' as const,make:'TOYOTA',model:'COROLLA'};
 const snapshot=()=>({schemaVersion:2,items:[{id:'fixture001',table:'stats',make:'TOYOTA',model:'COROLLA',year:2024,finalPriceJpy:1700000,status:'Sold'}],page:1,pageSize:24,received:1,rejected:0,observedAt:new Date(Date.now()-3600000).toISOString()});
@@ -17,13 +17,14 @@ function rejectSupplierQueue(t:any,message:string){
 for(const message of ['detail_cache_queue_timeout','detail_cache_queue_full'])test(`${message} recovers exact saved SQL without supplier work or shared fresh promotion`,async t=>{
  const queue=rejectSupplierQueue(t,message);
  const saved=snapshot(),before=structuredClone(saved);let reads=0,fetches=0,reserves=0;
- const client=createAjesClient({password:()=> 'fixture',assertEnabled:async()=>{},reserve:async()=>{reserves++;},fetcher:async()=>{fetches++;throw Error('unexpected');},readQuery:async sql=>{assert.equal(sql,ajesQuery(input).sql);reads++;return saved;}});
+ const client=createAjesClient({password:()=> 'fixture',assertEnabled:async()=>{},reserve:async()=>{reserves++;},fetcher:async()=>{fetches++;throw Error('unexpected');},readQuery:async sql=>{assert.equal(ajesSourceCacheSql(sql),ajesSourceCacheSql(ajesQuery(input).sql));reads++;return saved;}});
  const result=await client.read(input,'203.0.113.1');
- assert.deepEqual(result,{...saved,stale:true});assert.deepEqual(saved,before);assert.equal(reads,1);assert.equal(fetches,0);assert.equal(reserves,0);
+ const {sourceReceipt,...data}=result;
+ assert.deepEqual(data,{...saved,stale:true});assert.equal(sourceReceipt.reason,'local_busy');assert.equal(sourceReceipt.supplierAttempted,false);assert.deepEqual(saved,before);assert.equal(reads,2);assert.equal(fetches,0);assert.equal(reserves,0);
  queue.mock.restore();
  let next=0;
  const noCache=t.mock.method(DetailReadCache.prototype,'get',(_key:any,load:any)=>{next++;return load();});
- await client.read(input,'203.0.113.2');assert.ok(next>0);assert.equal(reads,2);noCache.mock.restore();
+ await client.read(input,'203.0.113.2');assert.ok(next>0);assert.equal(reads,4);noCache.mock.restore();
 });
 test('queue recovery rejects expired, future, wrong-market, wrong-page and empty snapshots',async t=>{
  rejectSupplierQueue(t,'detail_cache_queue_full');

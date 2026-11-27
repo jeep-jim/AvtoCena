@@ -50,7 +50,7 @@ export async function GET(request: Request) {
       const params={...Object.fromEntries(url.searchParams),make:undefined,model:undefined};
       const result=await readAjesMakes(JSON.stringify(params)),counts:Record<string,number>={},modelCounts:Record<string,number>={};
       for(const row of result.makes)counts[row.make]=row.total;
-      return NextResponse.json({generationId:result.observedAt,counts,modelCounts},{headers:{'Cache-Control':'private, max-age=30, stale-while-revalidate=60'}});
+      return NextResponse.json({generationId:result.observedAt,counts,modelCounts,stale:Boolean(result.stale)},{headers:{'Cache-Control':result.stale?'no-store':'private, max-age=30, stale-while-revalidate=60'}});
     }catch{return NextResponse.json({error:'japan_counts_unavailable'},{status:503});}
   }
   const params: CatalogSearchParams = {

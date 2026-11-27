@@ -2,6 +2,8 @@ import {NextResponse} from 'next/server';
 import {readAjesDirectory} from '@/lib/catalog/ajes-catalog';
 import {AjesUnavailable} from '@/lib/catalog/ajes-client';
 import {AjesInputError} from '@/lib/catalog/ajes-query';
+import {ajesPublicFailureReason,publicAjesReadReceipt} from '@/lib/catalog/ajes-read-receipt';
+import {japanVehicleTypeExcluded} from '@/lib/catalog/japan-vehicle-policy';
 export const dynamic='force-dynamic';
 export async function GET(request:Request){
  const p=new URL(request.url).searchParams,market=p.get('market');
@@ -9,11 +11,12 @@ export async function GET(request:Request){
  if(market!=='japan')return NextResponse.json({error:'source_retired'},{status:410,headers:{'Cache-Control':'no-store'}});
  try{
   const result=await readAjesDirectory({market,make:p.get('make')||undefined});
-  return NextResponse.json({version:1,brands:[],models:result.models.map(row=>[row.make,row.model,[],row.total]),stale:result.stale},{headers:{'Cache-Control':'no-store'}});
+  const models=result.models.filter(row=>row.total>0&&!japanVehicleTypeExcluded({market:'japan',make:row.make,model:row.model}));
+  return NextResponse.json({version:1,brands:[],models:models.map(row=>[row.make,row.model,[],row.total]),stale:result.stale},{headers:{'Cache-Control':'no-store'}});
  }catch(error){
-  const allowed=new Set(['visitor_restricted','client_ip_missing','not_configured','invalid_response','request_failed','request_timeout','connect_timeout','directory_too_large','directory_page_repeated']);
-  const reason=error instanceof AjesUnavailable&&allowed.has(error.reason)?error.reason:error instanceof AjesInputError?'invalid_query':'operation_failed';
+  const reason=error instanceof AjesUnavailable?ajesPublicFailureReason(error.reason):error instanceof AjesInputError?'invalid_query':'operation_failed';
+  const sourceReceipt=error instanceof AjesUnavailable?publicAjesReadReceipt((error as any).sourceReceipt):undefined;
   console.warn('AJES_DIRECTORY_FAILURE',reason);
-  return NextResponse.json({error:'directory_unavailable',reason},{status:error instanceof AjesInputError?400:503});
+  return NextResponse.json({error:'directory_unavailable',reason,...(sourceReceipt?{sourceReceipt}:{})},{status:error instanceof AjesInputError?400:503,headers:{'Cache-Control':'no-store'}});
  }
 }

@@ -44,7 +44,7 @@ test('old fresh-looking empty cache without proof is refreshed and may recover l
 });
 
 test('validated exact zero replaces prior rows and survives restart without another source read',async()=>{
- const stored=store(),input={table:'stats' as const,make:'TOYOTA'},sql=ajesQuery(input).sql;
+ const stored=store(),input={table:'stats' as const,make:'TOYOTA'},sql=ajesSourceCacheSql(ajesQuery(input).sql);
  await stored.saveQuery(sql,snapshot());
  const requests:string[]=[];
  const client=createAjesClient({...base,...stored,fetcher:async url=>{const sql=sqlOf(url);requests.push(sql);return Response.json(isCount(sql)?[{total:0}]:[]);}});
@@ -116,14 +116,14 @@ test('a concurrent earlier nonempty memory response cannot hide a later verified
  try{
   await deadline(bothStarted,'two visitor lists did not start');releaseA();assert.equal((await a).items[0].id,row.ID);
   releaseB();const zero=await b;assert.deepEqual(zero.items,[]);assert.equal(zero.emptyPageEvidence.countTotal,0);
-  await tick();assert.deepEqual((await stored.readQuery(ajesQuery({}).sql)).items,[]);assert.deepEqual((await client.read({},ip)).items,[]);
+  await tick();assert.deepEqual((await stored.readQuery(ajesSourceCacheSql(ajesQuery({}).sql))).items,[]);assert.deepEqual((await client.read({},ip)).items,[]);
  }finally{releaseA();releaseB();await Promise.allSettled([a,b]);}
 });
 
 test('a newer successful nonempty observation lifts the zero barrier and remains recoverable',async t=>{
  const start=Date.now();let phase=0;
  t.mock.timers.enable({apis:['Date'],now:start});
- const sql=ajesQuery({}).sql,countSql=ajesQuery({aggregate:'count'}).sql;
+ const sql=ajesSourceCacheSql(ajesQuery({}).sql),countSql=ajesSourceCacheSql(ajesQuery({aggregate:'count'}).sql);
  const values=new Map<string,any>([[countSql,countSnapshot({observedAt:new Date(start-30*60000+1000).toISOString()})]]);
  const client=createAjesClient({...base,readQuery:async key=>values.get(key)??null,saveQuery:async(key,value)=>{values.set(key,value);},fetcher:async()=>phase===0?Response.json([]):phase===1?Response.json([row]):new Response('unavailable',{status:503})});
  assert.deepEqual((await client.read({},ip)).items,[]);await tick();t.mock.timers.setTime(start+2000);phase=1;

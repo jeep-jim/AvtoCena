@@ -12,14 +12,16 @@ for(const table of ['stats','main'] as const)for(const message of ['detail_cache
  blockSupplier(t,message);const saved=snapshot(table),before=structuredClone(saved);let reads=0;
  const client=createAjesClient({password:()=> 'fixture',assertEnabled:async()=>{},reserve:async()=>{throw Error('supplier reserve forbidden');},fetcher:async()=>{throw Error('supplier fetch forbidden');},readDetail:async(m,id)=>{assert.equal(m,table);assert.equal(id,'fixture001');reads++;return saved;}});
  const result=await client.read({table,id:'fixture001'},'203.0.113.1');
- assert.deepEqual(result,{...saved,stale:true});assert.deepEqual(saved,before);
+ const {sourceReceipt,...data}=result;
+ assert.deepEqual(data,{...saved,stale:true});assert.equal(sourceReceipt.reason,'local_busy');assert.equal(sourceReceipt.supplierAttempted,false);assert.deepEqual(saved,before);
  await client.read({table,id:'fixture001'},'203.0.113.1');assert.equal(reads,1);
  await client.read({table,id:'fixture001'},'203.0.113.2');assert.equal(reads,2);
 });
 test('invalid full detail falls through to exact listed record; partial remains explicit',async t=>{
  blockSupplier(t,'detail_cache_queue_full');const saved=snapshot('stats');
  const client=createAjesClient({password:()=> 'fixture',assertEnabled:async()=>{},reserve:async()=>{throw Error('no supplier');},readDetail:async()=>({...saved,items:[{id:'wrong',table:'stats'}]}),readListedDetail:async()=>saved});
- assert.deepEqual(await client.read({table:'stats',id:'fixture001'},'203.0.113.1'),{...saved,stale:true,partial:true});
+ const {sourceReceipt,...data}=await client.read({table:'stats',id:'fixture001'},'203.0.113.1');
+ assert.deepEqual(data,{...saved,stale:true,partial:true});assert.equal(sourceReceipt.outcome,'stale');
 });
 test('recovery rejects wrong identity, market, page, shape, future and expired snapshots',async t=>{
  blockSupplier(t,'detail_cache_queue_timeout');const s=snapshot('stats');

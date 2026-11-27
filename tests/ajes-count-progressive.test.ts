@@ -5,10 +5,10 @@ import {createRequire} from 'node:module';
 import {DetailReadCache} from '../apps/web/lib/catalog/detail-read-cache';
 const require=createRequire(import.meta.url);
 test('ready Japanese cards return while the independent count is still pending',async()=>{
- const state={counts:0,lists:0,queries:[] as any[]};(globalThis as any).__countFixture=state;
+ const state={counts:0,lists:0,queries:[] as any[],countResult:null as any};(globalThis as any).__countFixture=state;
  const stubs:Record<string,string>={
   'server-only':'', 'next/headers':"export const headers=async()=>new Map([['x-real-ip','127.0.0.1']]);",
-  './ajes-runtime':"export const ajesClient={read:async()=>{globalThis.__countFixture.counts++;return new Promise(()=>{});}};",
+  './ajes-runtime':"export const ajesClient={read:async()=>{const state=globalThis.__countFixture;state.counts++;return state.countResult??new Promise(()=>{});}};",
   './ajes-public':`export const cappedAjesQuery=async q=>q;export const readAjesPublic=async q=>{globalThis.__countFixture.lists++;globalThis.__countFixture.queries.push(q);return {page:q.page||1,pageSize:24,received:24,items:Array.from({length:q.page===2?23:24},(_,i)=>({id:q.table+'-'+(q.page||1)+'-'+i})),observedAt:'now'};};`,
   './ajes-query':"export const ajesCatalogQuery=p=>({table:'stats',page:Number(p.page||1),pageSize:24});export class AjesFilterUnavailable extends Error{};export class AjesInputError extends Error{};",
   './ajes-client':"export const readAjesModelDirectory=async()=>({models:[]});export const readAjesMakeDirectory=async()=>({makes:[]});export class AjesUnavailable extends Error{};",
@@ -40,6 +40,11 @@ test('ready Japanese cards return while the independent count is still pending',
   assert.deepEqual(state.queries.map(q=>q.page),[1,2,3,3,4]);
   assert.ok(state.queries.every(q=>q.pageSize===24));
   assert.ok(state.queries.every(q=>JSON.stringify({...q,page:1})===JSON.stringify({...state.queries[0],page:1})),'refill changes only the source page, never the supplier selection');
+  state.countResult={total:42,stale:false,observedAt:'2026-11-27T06:00:00Z'};
+  const rawCount=await mod.exports.readAjesCountSummary(JSON.stringify({market:'japan'}));
+  assert.equal(rawCount.total,42);assert.equal(rawCount.upperBound,true,'source COUNT does not apply every local vehicle admission rule');
+  state.countResult={...state.countResult,total:0};
+  assert.equal((await mod.exports.readAjesCountSummary(JSON.stringify({market:'japan'}))).upperBound,false,'zero source candidates is an exact empty result');
  }finally{delete (globalThis as any).__countFixture;}
 });
 

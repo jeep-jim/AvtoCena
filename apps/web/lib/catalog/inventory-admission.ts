@@ -3,6 +3,7 @@ import {motorcycleExcluded} from './motorcycle-policy';
 import {isAllDubicarsOffer} from './dubicars-owner-policy';
 import {JAPAN_MIN_MODEL_YEAR} from './japan-year-policy';
 import {knownHeavyVehicleFamily} from './heavy-vehicle-families';
+import {japanVehicleTypeExcluded} from './japan-vehicle-policy';
 /** Inventory policy approved 06.10.2026. Dates retain the source's precision. */
 export function catalogInventoryDate(offer: any): string | undefined {
  const op=offer.operational||{},raw=op.raw||{},e=op.semanticEvidence?.productionDate;
@@ -55,6 +56,7 @@ export function catalogHeavyVehicleExcluded(offer:any){
   ?(snapshot.groups||[]).flatMap((group:any)=>(group.items||[])
     .filter((item:any)=>/^(?:级别|车身结构|车辆类型|тип кузова|класс автомобиля|body type|vehicle type)$/i.test(String(item.name||'').trim()))
     .map((item:any)=>String(item.value||''))).join(' '):'';
+ if(japanVehicleTypeExcluded(offer,boundBody))return true;
  const text=[offer.make,offer.model,offer.trim,offer.bodyType,boundBody].join(' ');
  if(/forklift|excavator|bulldozer|tractor|machinery|погрузчик|экскаватор|трактор|工程机械/i.test(text))return true;
  const category=String(offer.vehicleCategory||'').toUpperCase();
@@ -65,6 +67,7 @@ export function catalogHeavyVehicleExcluded(offer:any){
  if(!pickup&&(/\b(?:truck|lorry)\b|грузов|货车|卡车|轻卡|微卡/i.test(text)||/^N[23]G?$/.test(category)))return true;
  if(isAllDubicarsOffer(offer))return false;
  const mass=Number(catalogGrossVehicleWeightKg(offer));
+ if(offer.market==='japan'&&Number.isFinite(mass)&&mass>3500)return true;
  if(/^(?:N[23]|M3)G?$/.test(category))return true;
  return commercial&&Number.isFinite(mass)&&mass>3500;
 }

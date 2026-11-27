@@ -2,7 +2,7 @@ import {readCalculationIndex} from '../encyclopedia/calculation-index';
 import {saveAjesRequestFailure} from './ajes-request-diagnostic';
 import 'server-only';
 import {ajesEndpoint} from './ajes-routing';
-import {readAjesQueryCache,readPreviousTruckPolicyRows,readExpandedJapanRows,saveAjesQueryCache,retainedAjesQueryEntries} from './ajes-query-cache';
+import {readAjesQueryCache,readPreviousJapanPolicyRows,readPreviousTruckPolicyRows,readExpandedJapanRows,saveAjesQueryCache,retainedAjesQueryEntries} from './ajes-query-cache';
 import {ajesPassword} from './ajes-settings';
 import {getJsonStorage} from '../data';
 import {assertCollectionEnabled} from './collection-controls';
@@ -49,6 +49,7 @@ export const ajesClient=createAjesClient({
     const read=(key:string)=>readAjesQueryCache(getJsonStorage(),key);
     // Carry only rows across this selection fix, never an inaccurate old count.
     if(!sql.startsWith('select * from'))return null;
+    const priorJapan=await readPreviousJapanPolicyRows(sql,read);if(priorJapan)return priorJapan;
     const priorTrucks=await readPreviousTruckPolicyRows(sql,read);if(priorTrucks)return priorTrucks;
     const previous=sql.replace(heavyVehicleSqlExclusion(),heavyVehicleSqlExclusion(true)).replace("auction_date desc, case when time in ('E','H','HE') then 1 else 0 end asc",'auction_date desc');
     let saved=previous!==sql?await read(previous):null;

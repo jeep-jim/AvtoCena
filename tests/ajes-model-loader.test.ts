@@ -25,6 +25,29 @@ test('empty supplier directory is a valid result, with no browser HTTP cache',as
  try{const search=await loadModelSuggestions(false,{market:'japan',make:'EMPTY'});assert.deepEqual(search('anything','EMPTY'),[]);assert.equal(calls,1);}finally{globalThis.fetch=original;}
 });
 
+test('stale supplier metadata preserves callable names and permits an immediate explicit retry',async()=>{
+ const original=globalThis.fetch;let calls=0;
+ globalThis.fetch=async()=>{calls++;return Response.json({version:1,brands:[],models:[['TEST_STALE_METADATA',calls===1?'SAVED NAME':'FRESH NAME',[],3]],stale:calls===1});};
+ try{
+  const source={market:'japan',make:'TEST_STALE_METADATA'};
+  const [saved,shared]=await Promise.all([loadModelSuggestions(true,source),loadModelSuggestions(true,source)]);
+  assert.equal(calls,1);assert.equal(saved,shared);assert.equal(saved.stale,true);assert.equal(saved('','TEST_STALE_METADATA')[0].model,'SAVED NAME');
+  const fresh=await loadModelSuggestions(true,source);
+  assert.equal(calls,2);assert.equal(fresh.stale,false);assert.equal(fresh('','TEST_STALE_METADATA')[0].model,'FRESH NAME');
+  assert.equal(await loadModelSuggestions(true,source),fresh);assert.equal(calls,2,'fresh metadata retains the existing shared cache');
+ }finally{globalThis.fetch=original;}
+});
+
+test('malformed source stale metadata cannot silently become a fresh cached directory',async()=>{
+ const original=globalThis.fetch;let calls=0;
+ globalThis.fetch=async()=>Response.json({version:1,brands:[],models:[],stale:++calls===1?'false':false});
+ try{
+  const source={market:'japan',make:'TEST_BAD_STALE_METADATA'};
+  await assert.rejects(loadModelSuggestions(true,source),/invalid_directory/);
+  const fresh=await loadModelSuggestions(true,source);assert.equal(fresh.stale,false);assert.deepEqual(fresh('anything'),[]);assert.equal(calls,2);
+ }finally{globalThis.fetch=original;}
+});
+
 test('canonical brands resolve to actual source names, including all Mercedes aliases',async()=>{
  const {resolveAjesMakeNames}=await import('../apps/web/lib/catalog/ajes-make-resolution');
  const names=[{make:'BENZ'},{make:'MERCEDES BENZ'},{make:'BMW'}];

@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {createAjesClient,AjesUnavailable,readAjesModelDirectory} from '../apps/web/lib/catalog/ajes-client';
 import {DetailReadCache} from '../apps/web/lib/catalog/detail-read-cache';
 import {resolveAjesQueryModels} from '../apps/web/lib/catalog/ajes-model-resolution';
-import {ajesQuery} from '../apps/web/lib/catalog/ajes-query';
+import {ajesQuery,ajesSourceCacheSql} from '../apps/web/lib/catalog/ajes-query';
 
 function rejectSupplierQueue(t:any,message:string){
  const original=DetailReadCache.prototype.get;
@@ -15,9 +15,9 @@ function rejectSupplierQueue(t:any,message:string){
 test('model directory queue failures recover exact saved names without contacting the supplier',async t=>{
  rejectSupplierQueue(t,'detail_cache_queue_full');
  let calls=0;const saved={items:[],models:[{make:'TOYOTA',model:'COROLLA',total:7}],page:1,pageSize:500,received:1,observedAt:new Date(Date.now()-3600000).toISOString()};
- const client=createAjesClient({password:()=> 'fixture',assertEnabled:async()=>{},reserve:async()=>{throw Error('provider forbidden');},readQuery:async sql=>{calls++;assert.equal(sql,ajesQuery({table:'stats',make:'TOYOTA',aggregate:'models',page:1}).sql);return saved;}});
+ const client=createAjesClient({password:()=> 'fixture',assertEnabled:async()=>{},reserve:async()=>{throw Error('provider forbidden');},readQuery:async sql=>{calls++;assert.equal(ajesSourceCacheSql(sql),ajesSourceCacheSql(ajesQuery({table:'stats',make:'TOYOTA',aggregate:'models',page:1}).sql));return saved;}});
  const result=await readAjesModelDirectory(client,{table:'stats',make:'TOYOTA'},'203.0.113.1');
- assert.deepEqual(result.models,saved.models);assert.equal(result.stale,true);assert.equal(calls,1);assert.equal('stale' in saved,false);
+ assert.deepEqual(result.models,saved.models);assert.equal(result.stale,true);assert.equal(calls,2);assert.equal('stale' in saved,false);
 });
 test('retained model directory cannot cross expiry, page or source switch',async t=>{
  rejectSupplierQueue(t,'detail_cache_queue_timeout');
@@ -31,13 +31,14 @@ test('retained model directory cannot cross expiry, page or source switch',async
 });
 test('directory failure permits an exact list query but marks unresolved families incomplete',async()=>{
  const input={table:'stats',make:'TOYOTA',model:'COROLLA',page:1};
- for(const error of [new AjesUnavailable('visitor_restricted'),new AjesUnavailable('local_busy'),Error('detail_cache_queue_timeout')]){
+ const recoverable=['visitor_restricted','local_busy','request_failed','request_timeout','connect_timeout','quota_busy','quota_exhausted','invalid_response','empty_response','response_too_large','query_too_large','http_429','http_500','http_503','directory_too_large','directory_page_repeated'];
+ for(const error of [...recoverable.map(reason=>new AjesUnavailable(reason)),Error('detail_cache_queue_timeout'),Error('detail_cache_queue_full')]){
   const result=await resolveAjesQueryModels(input,async()=>{throw error;});
   assert.deepEqual(result,{query:input,modelDirectoryUnavailable:true});assert.equal(input.model,'COROLLA');
  }
  const result=await resolveAjesQueryModels(input,async()=>({models:[{model:'COROLLA'},{model:'COROLLA CROSS'},{model:'CAMRY'}]}));
  assert.equal(result.query.model,'COROLLA|COROLLA CROSS');assert.equal(result.modelDirectoryUnavailable,false);
- for(const error of [new Error('source_disabled'),new Error('programming failure'),new AjesUnavailable('not_configured')])await assert.rejects(resolveAjesQueryModels(input,async()=>{throw error;}),e=>e===error);
+ for(const error of [new Error('source_disabled'),new Error('programming failure'),...['not_configured','client_ip_missing','quota_invalid','identity_mismatch','http_400','http_401','http_404'].map(reason=>new AjesUnavailable(reason))])await assert.rejects(resolveAjesQueryModels(input,async()=>{throw error;}),e=>e===error);
 });
 
 
