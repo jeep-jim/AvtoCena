@@ -2,7 +2,7 @@
   "version": 1,
   "date": "2026-11-27",
   "timeZone": "Asia/Krasnoyarsk",
-  "status": "prepared_not_accepted",
+  "status": "ci_failed_fixture_transition_not_published",
   "priorProductionEvidence": "docs/operations/2026-11-27-japan-stability-power-ui-followup.json",
   "retainedRuntime": "a5ca426eec2663eb17c2df69fe2bfed46e2b8740",
   "retainedGeneration": "gen_china_45875678028_1",
@@ -67,10 +67,37 @@
     "protectedExceptionsUnchanged": true
   },
   "remaining": [
-    "Hosted exact-source CI and real browser fixture must pass.",
+    "The combined successor must pass fresh exact-source CI with actual browser fixtures.",
     "Full production Japan acceptance has not passed; a5ca and China C remain retained.",
-    "Global effective-known before unknown order is being implemented separately using bounded visitor-driven phases; this UI candidate does not implement it.",
-    "Legacy Mazda/3 live coverage is being added; its local real-path recovery is already included.",
+    "Global effective-known before unknown order is implemented in the separate successor with bounded visitor-driven phases; this UI candidate does not implement it.",
+    "Literal legacy Mazda/3 live coverage is added in the successor controller.",
     "Prepared maintenance is inactive until final acceptance and actual current/rollback rebind."
-  ]
+  ],
+  "hostedCi": {
+    "controllerSha": "233723b16b22a8accbd164ddc516b4723d5bcbe1",
+    "controllerTree": "d34a13ccaa2c7ecc0a0422afc7d6df41e5956405",
+    "runId": 45985181516,
+    "jobId": 140458850758,
+    "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/45985181516",
+    "conclusion": "failure",
+    "completedAt": "2026-11-27T10:53:16Z",
+    "controllerPassed": 1450,
+    "nativePassed": 516,
+    "typecheck": "passed",
+    "sourceAndProtectedPathsVerified": true,
+    "compatibilityPatchApplied": false,
+    "previousBrowserFixtures": "collection controls, photo retry, city and pagination v1 passed",
+    "failure": {
+      "fixture": "tests/browser/japan-filter-directory.mjs",
+      "viewportWidth": 390,
+      "line": 110,
+      "reason": "The open brand dropdown intercepted the following reset-button click after its successful retry case.",
+      "beforeFailure": "Four existing mobile source-directory cases completed.",
+      "modelSuggestionsExecuted": false
+    },
+    "repair": "The successor closes the dropdown with Escape and waits for its search input to hide before the ordinary reset click; it does not force the click.",
+    "publicationMarkerCreated": false,
+    "productionWrites": 0,
+    "reportIntegrationRepair": "The controller now requires the complete twelve-case source-name report for exact UI52 and Power53 profiles; legacy49 still accepts its original eight cases."
+  }
 }

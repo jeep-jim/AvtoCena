@@ -1,0 +1,102 @@
+{
+  "version": 1,
+  "date": "2026-11-27",
+  "timeZone": "Asia/Krasnoyarsk",
+  "status": "prepared_for_exact_ci_not_accepted",
+  "priorUiEvidence": "docs/operations/2026-11-27-japan-stability-ui-candidate.json",
+  "priorProductionEvidence": "docs/operations/2026-11-27-japan-stability-power-ui-followup.json",
+  "retainedRuntime": "a5ca426eec2663eb17c2df69fe2bfed46e2b8740",
+  "retainedGeneration": "gen_china_45875678028_1",
+  "candidate": {
+    "runtimeSha": "8ae17e1c6f0e262f0f663186930911f422784d1d",
+    "runtimeTree": "60e7f4a875b28ebdc61788e338a66b53762e4501",
+    "parent": "4f25c50513941085a4beaaff8be570a80f3b8b12",
+    "runtimeDiffSha256": "230a9939088fccbbf49521d8e5f6a6fe600018a1bc12eefab57068ca83b962cd",
+    "pricingToServingDiffSha256": "e3fc6e9bb6dc559e07746f8191f28fa2d18f64522e8539f9eac5e7ca399d9c99",
+    "runtimeFileCount": 53,
+    "pricingToServingFileCount": 112,
+    "codeScope": "catalog-japan-stability-v1"
+  },
+  "changes": {
+    "inherited": "Preserves source-only make/model selection, legacy Mazda/3 recovery, related Japan cards, 24-row refill, warning removal and original card power provenance from the prior isolated candidate.",
+    "powerOrder": "The same source query is traversed in bounded K then U phases. Effective safe local/manual/owner power takes precedence; remaining supplier power keeps its provenance. Unknown power starts only after fresh complete K exhaustion.",
+    "bounds": "At most eight ordinary LIST reads per visitor request across both phases, sharing the prior start-time budget and minimumReads=2. This is not a hard eight-second response deadline. Supplier SQL, page size, deadline and empty-result confirmation are unchanged; no extra explicit COUNT or catalogue mirror is introduced.",
+    "cursor": "j2 binds phase, source page, consumed membership, query, next visible page and a hash of runtime/editorial/index evidence. Plain j1 remains unchanged. Legacy power cursors and changed evidence receive a fixed refresh response; filters and city are retained.",
+    "evidence": "The snapshot uses the same cached editorial reader as pricing. Epoch is checked before source reads and after pricing. Safe public power is classified before grouping and checked after pricing and final projection under the captured editorial context.",
+    "sorting": "Existing selected sorting is applied separately to known and unknown groups on each loaded page. This does not promise a global delivered-price sort.",
+    "uiRecovery": "Ready cards survive a continuation reset; stale pagination is hidden and the first-page link preserves filters/city. The same link is available if evidence changes during initial SSR.",
+    "directoryFixture": "The actual brand dropdown is closed with Escape before reset; no forced click is used."
+  },
+  "controller": {
+    "profiles": [
+      49,
+      52,
+      53
+    ],
+    "newRuntimePath": "apps/web/lib/catalog/ajes-public.ts",
+    "protectedExceptionsAdded": [],
+    "requiredPowerFixture": {
+      "version": 2,
+      "kind": "japan-pagination24-browser-v2",
+      "caseCount": 12,
+      "checks": 14,
+      "widths": [
+        390,
+        1440
+      ]
+    },
+    "sourceNames": "Exact UI52 and Power53 require all twelve actual directory cases. Historical49 retains its eight cases.",
+    "livePower": "Exact53 requires j2 for both power and petrol/power page pairs, emitted cursor binding, phase/query/epoch progression and known-before-unknown order on those two observed pages. Both runner and host require japanPowerOrderPassed=true.",
+    "legacyUrl": "One existing bounded visitor read and a real navigation verify literal make=Mazda&model=3&city=Новокузнецк against the fresh MAZDA3 source family. Other Mazda families cannot satisfy this gate."
+  },
+  "validation": {
+    "nativeOwner": {
+      "passed": 367,
+      "failed": 0,
+      "logSha256": "ad912c53f5e78dc784c059016e906564892ac8929b635140b576b17fe3771cf2"
+    },
+    "mergedNative": {
+      "passed": 54,
+      "failed": 0,
+      "logSha256": "52215062ce79fccf5966a607259a8b03099571a104d9552365500daf9a9722e0"
+    },
+    "mergedSsr": {
+      "passed": 5,
+      "failed": 0,
+      "logSha256": "0b5e34ce0e342852f078786bdcbee69b3dca4d30bc70f4915efda7af2d0444df"
+    },
+    "finalTypecheck": {
+      "status": "passed",
+      "logSha256": "c73e4ebb872da2155f03e93dce17a67f34841b7217647e5cd4eb238698b94290"
+    },
+    "browserFixturePreparation": {
+      "bundles": "passed",
+      "actualCallerCases": 5,
+      "chromium": "requires exact hosted CI"
+    },
+    "controllerFull": {
+      "passed": 1495,
+      "failed": 0,
+      "skipped": 0,
+      "manifestRuntime": "8ae17e1c6f0e262f0f663186930911f422784d1d",
+      "logSha256": "d553627f25e7839b3dbda928d1ff6158232c91b1b29ca0219b7a91b6393be8d6"
+    },
+    "frozenSpeedBaselines": "passed",
+    "treeRoundtripVerified": true,
+    "sourceVerification": {
+      "status": "passed",
+      "protectedPricingPathsUnchanged": true,
+      "runtimeFileCount": 53,
+      "pricingToServingFileCount": 112,
+      "reportSha256": "620ab2313913c0c50b0a980af7651b632f7e12b99dffde7390f859bc3ca1839b"
+    },
+    "independentReviews": "Runtime snapshot, safe projection, partitioned sorting, source-name fixture, exact profiles and live proof wiring were independently reviewed; no remaining concrete blocker in the reviewed diff."
+  },
+  "limits": [
+    "No production acceptance or cleanup activation is claimed by this preparation record.",
+    "The live order check covers two observed pages; full phase exhaustion, empty bounded K, append and epoch reset are exercised by the required offline browser fixture.",
+    "The cursor does not promise an immutable snapshot of source pages not yet read.",
+    "Existing five-second editorial caching remains; the change does not promise instantaneous observation of external edits.",
+    "Maintenance must be rebound to the actually accepted current/rollback pair before activation."
+  ]
+}

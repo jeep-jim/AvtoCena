@@ -140,8 +140,12 @@ jobs:
           JAPAN_PAGINATION24_REPORT="$RUNNER_TEMP/japan-pagination24-browser-report.json" node --import tsx tests/browser/ajes-pagination.mjs
           cd "$GITHUB_WORKSPACE"
           node --input-type=module <<'JS'
+          import fs from 'node:fs/promises';
           import {readJapanPaginationFixture} from './scripts/catalog-next/japan-pagination-fixture.mjs';
-          await readJapanPaginationFixture(process.env.RUNNER_TEMP + '/japan-pagination24-browser-report.json');
+          import {japanPowerOrderRequired} from './scripts/catalog-next/japan-stability-code-scope.mjs';
+          const plan = JSON.parse(await fs.readFile('.github/operations/catalog-next/china-code-serving-plan.json', 'utf8'));
+          await readJapanPaginationFixture(process.env.RUNNER_TEMP + '/japan-pagination24-browser-report.json',
+            {requirePowerOrder: japanPowerOrderRequired(plan)});
           JS
       - name: Verify Japan supplier-only brand and model controls on the exact candidate
         if: steps.photo_scope.outputs.scope == 'catalog-japan-stability-v1'
@@ -153,8 +157,12 @@ jobs:
           node --import tsx tests/browser/model-suggestions.mjs
           cd "$GITHUB_WORKSPACE"
           node --input-type=module <<'JS'
+          import fs from 'node:fs/promises';
           import {readJapanFilterDirectoryFixture} from './scripts/catalog-next/japan-filter-directory-proof.mjs';
-          await readJapanFilterDirectoryFixture(process.env.RUNNER_TEMP + '/japan-filter-directory-browser-report.json');
+          import {japanSourceNamesRequired} from './scripts/catalog-next/japan-stability-code-scope.mjs';
+          const plan = JSON.parse(await fs.readFile('.github/operations/catalog-next/china-code-serving-plan.json', 'utf8'));
+          await readJapanFilterDirectoryFixture(process.env.RUNNER_TEMP + '/japan-filter-directory-browser-report.json',
+            {requireSourceNames: japanSourceNamesRequired(plan)});
           JS
       - name: Preserve Japan source directory and retry fixture evidence
         if: always() && steps.photo_scope.outputs.scope == 'catalog-japan-stability-v1'

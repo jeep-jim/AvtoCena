@@ -10,6 +10,8 @@ const fixture = () => ({version:1,kind:'japan-pagination24-browser-v1',passed:tr
   checks:Object.fromEntries(['refill24','numberedContinuation','appendNoDuplicatesOrGaps','finiteExhaustion',
     'unknownPowerPreserved','failureHonesty','cursorBinding','warningRemoved','sourcePageSize24',
     'neighborPaginationPreserved','noExternalRequests'].map(key=>[key,true]))});
+const powerFixture = () => ({...fixture(),version:2,kind:'japan-pagination24-browser-v2',caseCount:12,
+  checks:{...fixture().checks,knownBeforeUnknown:true,boundedKnownContinuation:true,evidenceEpochReset:true}});
 const refused = fn => assert.throws(fn,/^Error: japan_pagination_fixture_[a-z_]+$/);
 async function directory(t) {
   const dir=await fs.mkdtemp(path.join(os.tmpdir(),'japan-pagination-fixture-'));
@@ -35,11 +37,37 @@ test('untrusted getters and private extras cannot be invoked or copied',()=>{
   assert.equal(reads,0);
 });
 
+test('power order requires the complete v2 evidence without changing historical v1',()=>{
+  assert.deepEqual(checkedJapanPaginationBrowserFixture(powerFixture(),{requirePowerOrder:true}),powerFixture());
+  assert.deepEqual(checkedJapanPaginationBrowserFixture(powerFixture()),powerFixture());
+  assert.deepEqual(checkedJapanPaginationBrowserFixture(fixture()),fixture());
+  refused(()=>checkedJapanPaginationBrowserFixture(fixture(),{requirePowerOrder:true}));
+  for(const change of [{version:1},{kind:'japan-pagination24-browser-v1'},{caseCount:8},{caseCount:11},{passed:false}])
+    refused(()=>checkedJapanPaginationBrowserFixture({...powerFixture(),...change},{requirePowerOrder:true}));
+  for(const key of Object.keys(powerFixture().checks))for(const value of [false,undefined,1,'true'])
+    refused(()=>checkedJapanPaginationBrowserFixture({...powerFixture(),checks:{...powerFixture().checks,[key]:value}},{requirePowerOrder:true}));
+  refused(()=>checkedJapanPaginationBrowserFixture({...powerFixture(),checks:{...powerFixture().checks,extra:true}}));
+  let reads=0;const report=powerFixture();
+  Object.defineProperty(report.checks,'evidenceEpochReset',{enumerable:true,get(){reads++;return true;}});
+  refused(()=>checkedJapanPaginationBrowserFixture(report,{requirePowerOrder:true}));
+  assert.equal(reads,0);
+});
+
 test('reader preserves exact bounded fixture bytes',async t=>{
   const dir=await directory(t),file=path.join(dir,'report.json'),raw=Buffer.from(JSON.stringify(fixture(),null,2)+'\n');
   await fs.writeFile(file,raw);assert.deepEqual(await readJapanPaginationFixture(file),raw);
   const padded=Buffer.concat([raw,Buffer.alloc(JAPAN_PAGINATION_FIXTURE_MAX_BYTES-raw.length,32)]);
   await fs.writeFile(file,padded);assert.deepEqual(await readJapanPaginationFixture(file),padded);
+});
+
+test('the bounded file reader enforces the required power version before publication',async t=>{
+  const dir=await directory(t),file=path.join(dir,'report.json');
+  await fs.writeFile(file,JSON.stringify(fixture()));
+  await assert.rejects(readJapanPaginationFixture(file,{requirePowerOrder:true}),/power_order_required/);
+  const raw=Buffer.from(JSON.stringify(powerFixture()));await fs.writeFile(file,raw);
+  assert.deepEqual(await readJapanPaginationFixture(file,{requirePowerOrder:true}),raw);
+  await fs.writeFile(file,JSON.stringify({...powerFixture(),checks:{...powerFixture().checks,knownBeforeUnknown:false}}));
+  await assert.rejects(readJapanPaginationFixture(file,{requirePowerOrder:true}),/fixture_checks/);
 });
 
 test('missing, oversized, malformed and incomplete fixture reports cannot reach host publication',async t=>{

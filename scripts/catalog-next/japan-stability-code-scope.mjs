@@ -68,7 +68,14 @@ export const JAPAN_STABILITY_UI_CODE_PATHS = Object.freeze([
   'apps/web/components/catalog/CatalogCard.tsx',
   'apps/web/components/catalog/CatalogContent.tsx',
 ].sort());
-const reviewedProfiles = Object.freeze([JAPAN_STABILITY_CODE_PATHS, JAPAN_STABILITY_UI_CODE_PATHS]);
+/** The ordered power walk supplies one immutable evidence snapshot to the
+ * ordinary Japan reader; no protected editor or calculation source changes. */
+export const JAPAN_STABILITY_POWER_CODE_PATHS = Object.freeze([
+  ...JAPAN_STABILITY_UI_CODE_PATHS,
+  'apps/web/lib/catalog/ajes-public.ts',
+].sort());
+const reviewedProfiles = Object.freeze([JAPAN_STABILITY_CODE_PATHS, JAPAN_STABILITY_UI_CODE_PATHS,
+  JAPAN_STABILITY_POWER_CODE_PATHS]);
 
 export function japanStabilityCodePaths(plan) {
   const files = plan?.runtimeFiles;
@@ -82,4 +89,16 @@ export function isExactJapanStabilityScope(plan) {
     && plan?.codeScope === JAPAN_STABILITY_CODE_SCOPE
     && plan.retainedRuntime === JAPAN_STABILITY_RETAINED_RUNTIME
     && japanStabilityCodePaths(plan) !== null;
+}
+
+export function japanPowerOrderRequired(plan) {
+  if (plan?.codeScope !== JAPAN_STABILITY_CODE_SCOPE) return false;
+  if (!isExactJapanStabilityScope(plan)) throw Error('japan_stability_power_order_scope');
+  return japanStabilityCodePaths(plan) === JAPAN_STABILITY_POWER_CODE_PATHS;
+}
+
+export function japanSourceNamesRequired(plan) {
+  if (plan?.codeScope !== JAPAN_STABILITY_CODE_SCOPE) return false;
+  if (!isExactJapanStabilityScope(plan)) throw Error('japan_stability_source_names_scope');
+  return japanStabilityCodePaths(plan) !== JAPAN_STABILITY_CODE_PATHS;
 }

@@ -439,7 +439,8 @@ test('pagination24 retains CRM/photo gates and requires offline and live ordinar
  const fixture='JAPAN_PAGINATION24_REPORT="$RUNNER_TEMP/japan-pagination24-browser-report.json" node --import tsx tests/browser/ajes-pagination.mjs';
  for(const workflow of [verify,publish]){
   assert.ok(workflow.includes(fixture));
-  assert.ok(workflow.includes("readJapanPaginationFixture(process.env.RUNNER_TEMP + '/japan-pagination24-browser-report.json')"));
+  assert.ok(workflow.includes("readJapanPaginationFixture(process.env.RUNNER_TEMP + '/japan-pagination24-browser-report.json',"));
+  assert.ok(workflow.includes('requirePowerOrder: japanPowerOrderRequired(plan)'));
   const steps=workflow.split(/(?=^      - )/m),pageStep=steps.find(step=>step.includes(fixture));
   assert.match(pageStep,/if: steps\.photo_scope\.outputs\.scope == 'catalog-japan-pagination24-v1'/);
   for(const existing of ['tests/browser/collection-controls.mjs','tests/browser/catalog-photo-retry.mjs']){

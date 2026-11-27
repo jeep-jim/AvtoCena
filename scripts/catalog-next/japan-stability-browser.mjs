@@ -79,6 +79,28 @@ export function verifyJapanStabilityModelRows(payload, selection, directory) {
   return {make: 'Mazda', model: selection.model, shown: payload.items.length, sourceOptionsOnly: true, rowModelsMatched: true};
 }
 
+const legacyMazdaThreeFamily = value => {
+  const requested = 'MAZDA3'; let prefix = '';
+  for (const word of normalized(value).replace(/[^\p{L}\p{N}]+/gu, ' ').trim().split(/\s+/)) {
+    prefix += word;
+    if (prefix === requested || prefix.startsWith(requested) && /^[A-Z]+$/.test(prefix.slice(requested.length))) return true;
+    if (!requested.startsWith(prefix)) return false;
+  }
+  return false;
+};
+
+/** The old Mazda/3 bookmark must resolve to an observed MAZDA3 family. Another
+ * selectable Mazda model cannot prove this alias, nor can an empty/error page. */
+export function verifyJapanLegacyMazdaThreeRows(payload, directory) {
+  const family = directory.filter(row => name(row.model) && legacyMazdaThreeFamily(row.model));
+  need(family.length > 0, 'legacy_mazda_three_source_missing');
+  need(Array.isArray(payload?.items) && payload.items.length > 0 && payload.items.every(row =>
+    sameMake(row.make, 'Mazda') && name(row.model) && legacyMazdaThreeFamily(row.model)
+    && family.some(source => compact(source.model) === compact(row.model))), 'legacy_mazda_three_mismatch');
+  return {make: 'Mazda', model: '3', resolvedFamily: 'MAZDA3', shown: payload.items.length,
+    sourceFamilyModels: family.length, rowModelsMatched: true};
+}
+
 export function verifyJapanStabilityCombinedRows(payload) {
   need(payload.items.every(row => row.fuel === 'petrol' && row.transmission === 'automatic'
     && String(row.auctionGrade).trim() === '5'), 'combined_filter_mismatch');
@@ -147,6 +169,31 @@ async function visibleCardsMatch(page, root, items) {
   return cards;
 }
 
+export async function runJapanLegacyMazdaThreeBrowser({context, directory, read, capture, onStage, onPage,
+  verifyPage, verifyFullPage}) {
+  onStage('stability_legacy_mazda_three');
+  const view = await context.newPage(); onPage(view); let errors = 0;
+  view.on('pageerror', () => { errors++; });
+  await view.setViewportSize({width: 1440, height: 1000});
+  const query = new URLSearchParams({make: 'Mazda', model: '3', city: CITY});
+  const response = await view.goto(ORIGIN + '/cars/japan?' + query,
+    {waitUntil: 'domcontentloaded', timeout: 90_000});
+  need(response?.status() === 200, 'legacy_mazda_three_page_http');
+  const result = await read(japanStabilitySearchApi('model', '3'));
+  const observation = verifyPage(result.data, result.status);
+  verifyFullPage(result.data);
+  const proof = verifyJapanLegacyMazdaThreeRows(result.data, directory);
+  const url = new URL(view.url());
+  need(url.origin === ORIGIN && url.pathname === '/cars/japan'
+    && [...query].every(([key, value]) => url.searchParams.get(key) === value), 'legacy_mazda_three_url');
+  await visibleCardsMatch(view, view.locator('main.ac-ajes-catalog'), result.data.items);
+  need(errors === 0, 'legacy_mazda_three_javascript');
+  await capture(view, 'japan-legacy-mazda-three-desktop');
+  await view.close(); onPage(null);
+  return {page: result.data, proof: {...observation, ...proof, literalBookmarkChecked: true,
+    uiMatchesApi: true, cityPreserved: true, pageErrors: errors}};
+}
+
 /** Ordinary, bounded public journeys supplement the unchanged Japan freshness,
  * power, pagination, price and neighbor-preservation acceptance. */
 export async function runJapanStabilityBrowser({context, report, generationId, read, capture, onStage, onPage,
@@ -155,6 +202,10 @@ export async function runJapanStabilityBrowser({context, report, generationId, r
   onStage('stability_source_models');
   const directoryResponse = await read(JAPAN_STABILITY_MODELS_API);
   const directory = checkedJapanStabilityDirectory(directoryResponse.data, directoryResponse.status);
+
+  const legacy = await runJapanLegacyMazdaThreeBrowser({context, directory, read, capture, onStage, onPage,
+    verifyPage, verifyFullPage});
+  pages.push(legacy.page); report.checks.legacyModelSelection = legacy.proof;
 
   onStage('stability_model_selection');
   let view = await context.newPage(); onPage(view); let errors = 0;

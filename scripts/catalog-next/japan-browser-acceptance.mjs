@@ -24,6 +24,10 @@ const BRAND_DIRECTORY='/api/catalog/brand-counts?market=japan&directory=1';
 const sha=value=>createHash('sha256').update(value).digest('hex');
 const need=(value,code)=>{if(!value)throw Error('japan_browser_'+code);};
 const positive=value=>typeof value==='number'&&Number.isFinite(value)&&value>0;
+export function japanPowerOrderRequirement(value){
+ need(value===undefined||value==='0'||value==='1','power_order_option');
+ return value==='1';
+}
 export function japanPetrolPowerUrl(value,pageNumber=1){
  let url;try{url=new URL(value,ORIGIN);}catch{return false;}
  return url.origin===ORIGIN&&(url.pathname==='/cars/japan'||url.pathname==='/cars'&&url.searchParams.get('market')==='japan')
@@ -451,17 +455,27 @@ export function japanPetrolPowerPageApi(value){
 }
 
 
-/** Only the new 24-row profile follows its emitted query/page-bound j1 cursor.
- * The existing usability jp1 parser remains unchanged and separate. */
-export function checkedJapanPaginationCursor(value,visiblePage){
+/** Historical 24-row profiles retain j1. Only the reviewed power-order
+ * profile requires j2 for power queries; plain and usability jp1 stay separate. */
+export function checkedJapanPaginationCursor(value,visiblePage,{requirePowerOrder=false}={}){
+ need(typeof requirePowerOrder==='boolean','power_order_option');
+ if(requirePowerOrder){
+  need(typeof value==='string'&&value.length<=320&&Number.isSafeInteger(visiblePage)&&visiblePage>=2&&visiblePage<=1_000_000,'pagination_cursor');
+  const match=/^j2\.([ku])\.([1-9]\d{0,6})\.(0|[1-9]\d?)\.([1-9]\d{0,6})\.([a-f0-9]{64})\.([a-f0-9]{64})\.(-|[a-f0-9]{64})$/.exec(value);
+  need(match&&Number(match[2])<=1_000_000&&Number(match[3])<=24&&Number(match[4])===visiblePage
+   &&(Number(match[3])===0?match[7]==='-':match[7]!=='-'),'pagination_cursor');
+  return {phase:match[1],sourcePage:Number(match[2]),acceptedSkip:Number(match[3]),visiblePage,
+   queryHash:match[5],epochHash:match[6],membershipHash:match[7],cursorSha256:sha(value)};
+ }
  need(typeof value==='string'&&value.length<=160&&Number.isSafeInteger(visiblePage)&&visiblePage>=2&&visiblePage<=1_000_000,'pagination_cursor');
  const match=/^j1\.([1-9]\d{0,6})\.(0|[1-9]\d?)\.([1-9]\d{0,6})\.([a-f0-9]{64})\.(-|[a-f0-9]{64})$/.exec(value);
  need(match&&Number(match[1])<=1_000_000&&Number(match[2])<24&&Number(match[3])===visiblePage
   &&(Number(match[2])===0?match[5]==='-':match[5]!=='-'),'pagination_cursor');
  return {sourcePage:Number(match[1]),acceptedSkip:Number(match[2]),visiblePage,cursorSha256:sha(value)};
 }
-export function japanPaginationPageApi(value,{kind,expectedCursor}={}){
+export function japanPaginationPageApi(value,{kind,expectedCursor,requirePowerOrder=false}={}){
  need(['plain','power','petrol_power'].includes(kind),'pagination_kind');
+ need(typeof requirePowerOrder==='boolean','power_order_option');
  let source;try{source=new URL(value,ORIGIN);}catch{need(false,'pagination_query');}
  const power=kind!=='plain',petrol=kind==='petrol_power';
  need(source.origin===ORIGIN&&!source.username&&!source.password&&!source.hash
@@ -475,28 +489,51 @@ export function japanPaginationPageApi(value,{kind,expectedCursor}={}){
   &&[...source.searchParams.keys()].every(key=>['market','fuel','city','powerTo','page','pageSize','after','view'].includes(key))
   &&[...new Set(source.searchParams.keys())].every(key=>source.searchParams.getAll(key).length===1),'pagination_query');
  const after=source.searchParams.get('after');
- checkedJapanPaginationCursor(after,2);
+ checkedJapanPaginationCursor(after,2,{requirePowerOrder:requirePowerOrder&&power});
  if(expectedCursor!==undefined)need(after===expectedCursor,'pagination_emitted_cursor');
  const query=new URLSearchParams(QUERY);query.set('page','2');
  if(power)query.set('powerTo','160');if(petrol)query.set('fuel','petrol');
  query.set('after',after);return '/api/catalog/search?'+query;
 }
-export function verifyJapanPaginationPair(first,next,{observedUrl,kind,firstStatus,nextStatus,now=Date.now()}={}){
+export function verifyJapanPaginationPair(first,next,{observedUrl,kind,firstStatus,nextStatus,now=Date.now(),requirePowerOrder=false}={}){
+ need(typeof requirePowerOrder==='boolean','power_order_option');
  const firstObservation=verifyJapanPage(first,firstStatus,now),nextObservation=verifyJapanPage(next,nextStatus,now);
  need(first.page===1&&next.page===2&&first.pageSize===24&&next.pageSize===24&&first.hasMore===true
   &&typeof next.hasMore==='boolean','pagination_page');
  need(first.total===null&&next.total===null,'pagination_count');
  const firstPage=verifyJapanFullPage(first),secondPage=verifyJapanFullPage(next);
- japanPaginationPageApi(observedUrl,{kind,expectedCursor:first.nextCursor});
- const cursor=checkedJapanPaginationCursor(first.nextCursor,2);
- if(next.hasMore)checkedJapanPaginationCursor(next.nextCursor,3);
+ japanPaginationPageApi(observedUrl,{kind,expectedCursor:first.nextCursor,requirePowerOrder});
+ const orderedPower=requirePowerOrder&&kind!=='plain';
+ const cursor=checkedJapanPaginationCursor(first.nextCursor,2,{requirePowerOrder:orderedPower});
+ let following;
+ if(next.hasMore)following=checkedJapanPaginationCursor(next.nextCursor,3,{requirePowerOrder:orderedPower});
  else need(next.nextCursor===null,'pagination_exhausted_cursor');
  const firstIds=new Set(first.items.map(row=>row.id));
  need(next.items.every(row=>!firstIds.has(row.id)),'pagination_duplicate');
  if(kind!=='plain'){verifyJapanPowerPage(first);verifyJapanPowerPage(next,2);}
  if(kind==='petrol_power')need([...first.items,...next.items].every(row=>row.fuel==='petrol'),'pagination_fuel');
+ let powerOrder;
+ if(orderedPower){
+  const order=verifyJapanKnownPowerOrder([first,next]);
+  const firstUnknown=first.items.some(row=>row.japanPowerUnknown===true),nextUnknown=next.items.some(row=>row.japanPowerUnknown===true);
+  need(cursor.phase!=='k'||!firstUnknown,'power_cursor_phase');
+  need(cursor.phase!=='u'||next.items.every(row=>row.japanPowerUnknown===true),'power_cursor_phase');
+  // Switching exactly at a full known page starts U at its first source row.
+  if(cursor.phase==='u'&&!firstUnknown)need(cursor.sourcePage===1&&cursor.acceptedSkip===0,'power_cursor_phase');
+  if(following){
+   need(following.queryHash===cursor.queryHash&&following.epochHash===cursor.epochHash,'power_cursor_binding');
+   need(cursor.phase!=='u'||following.phase==='u','power_cursor_phase');
+   need(following.phase!=='k'||!nextUnknown,'power_cursor_phase');
+   if(cursor.phase===following.phase){
+    need(following.sourcePage>cursor.sourcePage||following.sourcePage===cursor.sourcePage&&following.acceptedSkip>cursor.acceptedSkip,'power_cursor_progress');
+    if(following.sourcePage===cursor.sourcePage)need(following.membershipHash===cursor.membershipHash,'power_cursor_membership');
+   }else if(!nextUnknown)need(following.sourcePage===1&&following.acceptedSkip===0,'power_cursor_phase');
+  }
+  // This describes the two observed pages, not an unbounded catalogue scan.
+  powerOrder={...order,cursorVersion:'j2'};
+ }
  return {first:{...firstObservation,...firstPage},next:{...nextObservation,...secondPage},
-  cursorSha256:cursor.cursorSha256,followedEmittedCursor:true,distinctRows:true,visiblePages:2};
+  cursorSha256:cursor.cursorSha256,followedEmittedCursor:true,distinctRows:true,visiblePages:2,...(powerOrder?{powerOrder}:{})};
 }
 
 export function japanVerificationRequestScope(url,method,resourceType){
@@ -626,13 +663,13 @@ export async function installReadFence(context,report,{getCalculationGrant}={}){
  report.readOnlyBrowserFence=true;
 }
 
-async function readJson(context,url,{paginationKind,stability=false}={}){
+async function readJson(context,url,{paginationKind,stability=false,requirePowerOrder=false}={}){
  let continuation=false;
  if(url.startsWith('/api/catalog/search?')){
   const query=new URL(url,ORIGIN).searchParams;
   if(query.has('after')){
    const pageUrl=new URL('/cars/japan',ORIGIN);pageUrl.search=query.toString();
-   continuation=(paginationKind?japanPaginationPageApi(pageUrl.href,{kind:paginationKind}):japanPetrolPowerPageApi(pageUrl.href))===url;
+   continuation=(paginationKind?japanPaginationPageApi(pageUrl.href,{kind:paginationKind,requirePowerOrder}):japanPetrolPowerPageApi(pageUrl.href))===url;
   }
  }
  need(url==='/api/health'||url===PLAIN||url===POWER||url===PETROL_POWER||url===PETROL_POWER_NEXT||url===BRAND_DIRECTORY||continuation
@@ -643,7 +680,7 @@ async function readJson(context,url,{paginationKind,stability=false}={}){
  return {status:response.status(),data,headers:response.headers(),durationMs:receivedAt-started,requestedAt:started,receivedAt};
 }
 
-export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,outputFile,playwrightModule,chromeBin,codeScope=SCOPE}){
+export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,outputFile,playwrightModule,chromeBin,codeScope=SCOPE,requirePowerOrder=false}){
  const stability=codeScope===JAPAN_STABILITY_CODE_SCOPE;
  const pagination=codeScope===JAPAN_PAGINATION_CODE_SCOPE||stability;
  const completion=[COMPLETION_SCOPE,COMPLETION_V2_SCOPE,USABILITY_SCOPE,JAPAN_PAGINATION_CODE_SCOPE,JAPAN_STABILITY_CODE_SCOPE].includes(codeScope);
@@ -657,6 +694,7 @@ export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,out
  if(usability)Object.assign(report,Object.fromEntries(USABILITY_GATES.map(key=>[key,false])));
  if(pagination)Object.assign(report,{japanFullPagesPassed:false,japanPagination24Passed:false,japanCatalogWarningRemovedPassed:false});
  if(stability)Object.assign(report,Object.fromEntries(JAPAN_STABILITY_GATES.map(key=>[key,false])));
+ if(requirePowerOrder===true)report.japanPowerOrderPassed=false;
  let browser,context,currentPage,calculationGrant=null,brandDirectory=null,stage='preconditions';
  const usabilityPages=[],quietChecks=[];
  const capture=async(page,name)=>{
@@ -677,6 +715,7 @@ export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,out
  };
  try{
   need([SCOPE,COMPLETION_SCOPE,COMPLETION_V2_SCOPE,USABILITY_SCOPE,JAPAN_PAGINATION_CODE_SCOPE,JAPAN_STABILITY_CODE_SCOPE].includes(codeScope),'code_scope');
+  need(typeof requirePowerOrder==='boolean'&&(!requirePowerOrder||stability),'power_order_option');
   need(path.isAbsolute(outputFile),'output');
   try{await fs.access(outputFile);need(false,'report_exists');}catch(error){if(error?.code!=='ENOENT')throw error;}
   const raw=await fs.readFile(oraclePath),binding=japanReleaseBinding(JSON.parse(raw),releaseSha,nonce);
@@ -701,15 +740,15 @@ export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,out
    const next=catalog.locator('nav.ac-pagination a[aria-label="Страница 2"]');
    need(await next.count()===1,'pagination_ui_next_link');
    const href=await next.getAttribute('href');
-   japanPaginationPageApi(href,{kind,expectedCursor:first.nextCursor});
+   japanPaginationPageApi(href,{kind,expectedCursor:first.nextCursor,requirePowerOrder});
    await next.click();await view.waitForURL(url=>url.searchParams.get('page')==='2',{timeout:60_000});
-   const observedUrl=view.url(),api=japanPaginationPageApi(observedUrl,{kind,expectedCursor:first.nextCursor});
+   const observedUrl=view.url(),api=japanPaginationPageApi(observedUrl,{kind,expectedCursor:first.nextCursor,requirePowerOrder});
    if(stability)(report.checks.ssrPageReadEvidence??=[]).push({stage,kind,
     ...await readJapanSsrPageEvidence(view,{page:2,after:new URL(observedUrl).searchParams.get('after')||''})});
    report.explicitJapanApiRequests++;
-   const result=await readJson(context,api,{paginationKind:kind});
+   const result=await readJson(context,api,{paginationKind:kind,requirePowerOrder});
    recordJapanResponse(report,stage,result,releaseSha);
-   const proof=verifyJapanPaginationPair(first,result.data,{observedUrl,kind,firstStatus:200,nextStatus:result.status});
+   const proof=verifyJapanPaginationPair(first,result.data,{observedUrl,kind,firstStatus:200,nextStatus:result.status,requirePowerOrder});
    await cards.nth(result.data.items.length-1).waitFor({state:'attached',timeout:60_000});
    need(await cards.count()===result.data.items.length,'pagination_ui_next_count');
    for(const row of result.data.items){const card=cards.filter({has:view.locator('a[href*="'+row.id+'"]')});
@@ -937,11 +976,11 @@ export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,out
    await next.click();await view.waitForURL(url=>url.searchParams.get('page')==='2',{timeout:60_000});
    const nextUrl=new URL(view.url());
    need(japanPetrolPowerUrl(nextUrl.href,2),'petrol_page_two_query');
-   const pageTwoApi=pagination?japanPaginationPageApi(nextUrl.href,{kind:'petrol_power',expectedCursor:petrolFirst.nextCursor})
+   const pageTwoApi=pagination?japanPaginationPageApi(nextUrl.href,{kind:'petrol_power',expectedCursor:petrolFirst.nextCursor,requirePowerOrder})
     :usability?japanPetrolPowerPageApi(nextUrl.href):PETROL_POWER_NEXT;
    if(stability)(report.checks.ssrPageReadEvidence??=[]).push({stage,kind:'petrol_power',
     ...await readJapanSsrPageEvidence(view,{page:2,after:nextUrl.searchParams.get('after')||''})});
-   report.explicitJapanApiRequests++;filtered=await readJson(context,pageTwoApi,pagination?{paginationKind:'petrol_power'}:{});
+   report.explicitJapanApiRequests++;filtered=await readJson(context,pageTwoApi,pagination?{paginationKind:'petrol_power',requirePowerOrder}:{});
    recordJapanResponse(report,stage,filtered,releaseSha);
    const nextAggregate={...verifyJapanPage(filtered.data,filtered.status),...verifyJapanPowerPage(filtered.data,2)};
    need(filtered.data.items.every(row=>row.fuel==='petrol'&&!firstIds.has(row.id)),'petrol_page_two_rows');
@@ -955,12 +994,17 @@ export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,out
    if(pagination){
     await checkPaginationWarning(catalog);
     report.checks.pagination24.petrolPower={...verifyJapanPaginationPair(petrolFirst,filtered.data,
-     {observedUrl:nextUrl.href,kind:'petrol_power',firstStatus:200,nextStatus:filtered.status}),
+     {observedUrl:nextUrl.href,kind:'petrol_power',firstStatus:200,nextStatus:filtered.status,requirePowerOrder}),
      navigatedThroughLink:true,uiMatchesApi:true,cityPreserved:true,warningRemoved:true};
     need(['plain','power','petrolPower'].every(key=>report.checks.pagination24[key]?.followedEmittedCursor===true
      &&report.checks.pagination24[key]?.uiMatchesApi===true),'pagination_evidence');
     report.japanFullPagesPassed=true;report.japanPagination24Passed=true;
     report.japanCatalogWarningRemovedPassed=['plain','power','petrolPower'].every(key=>report.checks.pagination24[key]?.warningRemoved===true);
+    if(requirePowerOrder){
+     need(['power','petrolPower'].every(key=>report.checks.pagination24[key]?.powerOrder?.cursorVersion==='j2'
+      &&report.checks.pagination24[key]?.powerOrder?.knownBeforeUnknown===true),'power_order_evidence');
+     report.japanPowerOrderPassed=true;
+    }
    }
    if(usability){
     usabilityPages.push(filtered.data);
@@ -1048,7 +1092,7 @@ export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,out
   report.passed=['japanFreshnessPassed','japanPowerApiPassed','japanUiPassed','japanVisibilityPassed','readOnlyBrowserFence',
    ...(completion?['japanPetrolPowerUiPassed','japanDetailPowerInputPassed','japanDeliveredCalculationPassed']:[]),
    ...(usability?USABILITY_GATES:[]),...(pagination?['japanFullPagesPassed','japanPagination24Passed','japanCatalogWarningRemovedPassed']:[]),
-   ...(stability?JAPAN_STABILITY_GATES:[])].every(key=>report[key]===true);
+   ...(stability?JAPAN_STABILITY_GATES:[]),...(requirePowerOrder?['japanPowerOrderPassed']:[])].every(key=>report[key]===true);
  }catch(error){
   report.error={stage,code:/^japan_browser_[a-z_]+$/.test(error?.message||'')?error.message:'japan_browser_check_failed',timeout:error?.name==='TimeoutError'};
   if(currentPage&&/^[a-f0-9]{32}$/.test(nonce||''))await capture(currentPage,'failure').catch(()=>{});
@@ -1064,7 +1108,8 @@ if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.ur
   need(process.argv.length===2,'arguments');
   const report=await runJapanBrowserAcceptance({oraclePath:process.env.ORACLE_PATH,releaseSha:process.env.EXPECTED_RELEASE_SHA,
    nonce:process.env.VERIFICATION_NONCE,outputFile:path.resolve(process.env.OUTPUT||path.join(ROOT,'catalog-next-japan-browser-report.json')),
-   playwrightModule:process.env.PLAYWRIGHT_MODULE,chromeBin:process.env.CHROME_BIN,codeScope:process.env.CATALOG_CODE_SCOPE||SCOPE});
+   playwrightModule:process.env.PLAYWRIGHT_MODULE,chromeBin:process.env.CHROME_BIN,codeScope:process.env.CATALOG_CODE_SCOPE||SCOPE,
+   requirePowerOrder:japanPowerOrderRequirement(process.env.CATALOG_JAPAN_POWER_ORDER_REQUIRED)});
   console.log('JAPAN_BROWSER '+JSON.stringify(report));if(!report.passed)process.exitCode=1;
  }catch{console.error('japan_browser_report_failed');process.exitCode=1;}
 }

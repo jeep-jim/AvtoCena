@@ -8,6 +8,7 @@ const FIXTURE_KEYS = ['version', 'kind', 'passed', 'widths', 'caseCount', 'check
 const CHECKS = ['refill24', 'numberedContinuation', 'appendNoDuplicatesOrGaps', 'finiteExhaustion',
   'unknownPowerPreserved', 'failureHonesty', 'cursorBinding', 'warningRemoved', 'sourcePageSize24',
   'neighborPaginationPreserved', 'noExternalRequests'];
+const POWER_CHECKS = [...CHECKS, 'knownBeforeUnknown', 'boundedKnownContinuation', 'evidenceEpochReset'];
 
 // Snapshot only own data properties. Accessors, symbols and extra fields must
 // never be invoked or echoed into a public or host-bound report.
@@ -26,24 +27,27 @@ function ownData(value, keys, code, array = false) {
   } catch { throw Error('japan_pagination_fixture_' + code); }
 }
 
-export function checkedJapanPaginationBrowserFixture(report) {
+export function checkedJapanPaginationBrowserFixture(report, {requirePowerOrder = false} = {}) {
   const value = ownData(report, FIXTURE_KEYS, 'fixture');
-  need(value.version === 1 && value.kind === 'japan-pagination24-browser-v1' && value.passed === true
-    && value.caseCount === 8, 'fixture');
+  const power = value.version === 2;
+  need(typeof requirePowerOrder === 'boolean' && (!requirePowerOrder || power), 'power_order_required');
+  need(value.version === (power ? 2 : 1) && value.kind === (power ? 'japan-pagination24-browser-v2' : 'japan-pagination24-browser-v1')
+    && value.passed === true && value.caseCount === (power ? 12 : 8), 'fixture');
   const widths = ownData(value.widths, ['0', '1', 'length'], 'fixture_widths', true);
   need(widths.length === 2 && widths[0] === 390 && widths[1] === 1440, 'fixture_widths');
-  const checks = ownData(value.checks, CHECKS, 'fixture_checks');
-  need(CHECKS.every(key => checks[key] === true), 'fixture_checks');
-  return Object.freeze({version: 1, kind: value.kind, passed: true, widths: Object.freeze([390, 1440]),
-    caseCount: 8, checks: Object.freeze(checks)});
+  const requiredChecks = power ? POWER_CHECKS : CHECKS;
+  const checks = ownData(value.checks, requiredChecks, 'fixture_checks');
+  need(requiredChecks.every(key => checks[key] === true), 'fixture_checks');
+  return Object.freeze({version: value.version, kind: value.kind, passed: true, widths: Object.freeze([390, 1440]),
+    caseCount: value.caseCount, checks: Object.freeze(checks)});
 }
 
-function checkedFixtureBytes(raw) {
+function checkedFixtureBytes(raw, options) {
   need(Buffer.isBuffer(raw) && raw.length > 0 && raw.length <= JAPAN_PAGINATION_FIXTURE_MAX_BYTES, 'fixture_size');
   let parsed;
   try { parsed = JSON.parse(new TextDecoder('utf-8', {fatal: true}).decode(raw)); }
   catch { throw Error('japan_pagination_fixture_fixture_json'); }
-  return checkedJapanPaginationBrowserFixture(parsed);
+  return checkedJapanPaginationBrowserFixture(parsed, options);
 }
 
 const regular = value => value.isFile() && !value.isSymbolicLink() && value.nlink === 1n
@@ -53,7 +57,7 @@ const unchanged = (left, right) => identity(left).every((value, index) => value 
 
 /** One local artifact, bounded by its original size and a fixed read buffer.
  * It is not accepted through a symlink, hard link, replaced path or changed fd. */
-export async function readJapanPaginationFixture(filename) {
+export async function readJapanPaginationFixture(filename, options) {
   let handle;
   try {
     need(typeof filename === 'string' && path.isAbsolute(filename) && path.resolve(filename) === filename, 'fixture_path');
@@ -75,7 +79,7 @@ export async function readJapanPaginationFixture(filename) {
     need(regular(after) && regular(current) && unchanged(before, after) && unchanged(before, current)
       && await fs.realpath(filename) === filename, 'fixture_changed');
     const raw = Buffer.from(buffer.subarray(0, length));
-    checkedFixtureBytes(raw);
+    checkedFixtureBytes(raw, options);
     return raw;
   } catch (error) {
     if (/^japan_pagination_fixture_[a-z_]+$/.test(error?.message ?? '')) throw error;

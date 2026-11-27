@@ -5,18 +5,20 @@ import os from 'node:os';
 import path from 'node:path';
 import {spawnSync} from 'node:child_process';
 import {matchesCatalogModel} from '../apps/web/lib/catalog/model-filter.ts';
-import {JAPAN_STABILITY_CODE_SCOPE, JAPAN_STABILITY_CODE_PATHS, JAPAN_STABILITY_UI_CODE_PATHS, JAPAN_STABILITY_RETAINED_RUNTIME,
-  japanStabilityCodePaths, isExactJapanStabilityScope} from '../scripts/catalog-next/japan-stability-code-scope.mjs';
+import {JAPAN_STABILITY_CODE_SCOPE, JAPAN_STABILITY_CODE_PATHS, JAPAN_STABILITY_UI_CODE_PATHS,
+  JAPAN_STABILITY_POWER_CODE_PATHS, JAPAN_STABILITY_RETAINED_RUNTIME,
+  japanStabilityCodePaths, japanPowerOrderRequired, japanSourceNamesRequired, isExactJapanStabilityScope} from '../scripts/catalog-next/japan-stability-code-scope.mjs';
 import {JAPAN_PAGINATION_CODE_PATHS} from '../scripts/catalog-next/japan-pagination-code-scope.mjs';
 import {checkedCatalogCodeScope} from '../scripts/catalog-next/photo-code-scope.mjs';
 import {verifyChinaImageRuntime} from '../scripts/catalog-next/build-release-image.mjs';
 import {JAPAN_PAGINATION_TEST_FILES, JAPAN_STABILITY_TEST_FILES} from '../scripts/catalog-next/check-photo-runtime-tests.mjs';
 import {japanStabilityApiAllowed, japanStabilitySearchApi, JAPAN_STABILITY_MODELS_API,
   checkedJapanStabilityDirectory, selectJapanStabilityModel, verifyJapanStabilityModelRows,
-  verifyJapanStabilityCombinedRows, verifyJapanStabilityRelated, validJapanStabilityGreenStock} from '../scripts/catalog-next/japan-stability-browser.mjs';
+  verifyJapanStabilityCombinedRows, verifyJapanStabilityRelated, validJapanStabilityGreenStock,
+  verifyJapanLegacyMazdaThreeRows, runJapanLegacyMazdaThreeBrowser} from '../scripts/catalog-next/japan-stability-browser.mjs';
 import {checkedJapanFilterDirectoryFixture, readJapanFilterDirectoryFixture} from '../scripts/catalog-next/japan-filter-directory-proof.mjs';
 import {verifyJapanPage, verifyJapanPowerPage, verifyJapanVisibleVehiclePolicy, japanPageReadEvidence,
-  recordJapanResponse} from '../scripts/catalog-next/japan-browser-acceptance.mjs';
+  recordJapanResponse, verifyJapanFullPage} from '../scripts/catalog-next/japan-browser-acceptance.mjs';
 
 const plan = () => ({codeScope: JAPAN_STABILITY_CODE_SCOPE, retainedRuntime: JAPAN_STABILITY_RETAINED_RUNTIME,
   runtimeFiles: [...JAPAN_STABILITY_CODE_PATHS]});
@@ -68,6 +70,9 @@ test('Japan source-name and preview repairs admit only the complete UI successor
   assert.equal(checkedCatalogCodeScope(candidate),JAPAN_STABILITY_CODE_SCOPE);
   assert.equal(japanStabilityCodePaths(candidate),JAPAN_STABILITY_UI_CODE_PATHS);
   assert.equal(japanStabilityCodePaths(plan()),JAPAN_STABILITY_CODE_PATHS);
+  assert.equal(japanSourceNamesRequired(candidate),true);
+  assert.equal(japanSourceNamesRequired(plan()),false);
+  assert.equal(japanSourceNamesRequired({codeScope:'catalog-japan-pagination24-v1'}),false);
   const python=spawnSync('python3',['-I','-B','-c',
     "import importlib.util,json; s=importlib.util.spec_from_file_location('h','scripts/catalog-next/release-host.py'); m=importlib.util.module_from_spec(s); s.loader.exec_module(m); print(json.dumps(sorted(m.JAPAN_STABILITY_UI_CODE_FILES)))"],{encoding:'utf8'});
   assert.equal(python.status,0,python.stderr);
@@ -80,8 +85,40 @@ test('Japan source-name and preview repairs admit only the complete UI successor
     {runtimeFiles:candidate.runtimeFiles.map(name=>name===card?'apps/web/components/catalog/Unreviewed.tsx':name)}]){
     const bad={...candidate,version:1,market:'china',runtimeSha:'1'.repeat(40),runtimeTree:'2'.repeat(40),runtimeDiffSha256:'3'.repeat(64),...patch};
     assert.equal(isExactJapanStabilityScope(bad),false);
+    assert.throws(()=>japanSourceNamesRequired(bad),/source_names_scope/);
     await assert.rejects(verifyChinaImageRuntime({runtimeRoot:os.tmpdir(),plan:bad,
       execute:()=>assert.fail('invalid UI successor must fail before git')}),/china_image_(?:runtime_file_list|stability_scope)/);
+  }
+});
+
+test('ordered Japan power admits only its full snapshot-reader successor and requires its stronger fixture', async () => {
+  const reader='apps/web/lib/catalog/ajes-public.ts';
+  assert(Object.isFrozen(JAPAN_STABILITY_POWER_CODE_PATHS));
+  assert.equal(JAPAN_STABILITY_POWER_CODE_PATHS.length,53);
+  assert.deepEqual(JAPAN_STABILITY_POWER_CODE_PATHS.filter(name=>!JAPAN_STABILITY_UI_CODE_PATHS.includes(name)),[reader]);
+  const candidate={...plan(),runtimeFiles:[...JAPAN_STABILITY_POWER_CODE_PATHS]};
+  assert.equal(japanStabilityCodePaths(candidate),JAPAN_STABILITY_POWER_CODE_PATHS);
+  assert.equal(checkedCatalogCodeScope(candidate),JAPAN_STABILITY_CODE_SCOPE);
+  assert.equal(japanPowerOrderRequired(candidate),true);
+  assert.equal(japanSourceNamesRequired(candidate),true);
+  for(const runtimeFiles of [JAPAN_STABILITY_CODE_PATHS,JAPAN_STABILITY_UI_CODE_PATHS])
+    assert.equal(japanPowerOrderRequired({...plan(),runtimeFiles:[...runtimeFiles]}),false);
+  assert.equal(japanPowerOrderRequired({codeScope:'catalog-japan-pagination24-v1'}),false);
+  const python=spawnSync('python3',['-I','-B','-c',
+    "import importlib.util,json; s=importlib.util.spec_from_file_location('h','scripts/catalog-next/release-host.py'); m=importlib.util.module_from_spec(s); s.loader.exec_module(m); print(json.dumps(sorted(m.JAPAN_STABILITY_POWER_CODE_FILES)))"],{encoding:'utf8'});
+  assert.equal(python.status,0,python.stderr);
+  assert.deepEqual(JSON.parse(python.stdout),[...JAPAN_STABILITY_POWER_CODE_PATHS]);
+  const invalid=[{retainedRuntime:'0'.repeat(40)},
+    ...JAPAN_STABILITY_UI_CODE_PATHS.map(file=>({runtimeFiles:candidate.runtimeFiles.filter(name=>name!==file)})),
+    {runtimeFiles:[...candidate.runtimeFiles,reader]},
+    {runtimeFiles:[...candidate.runtimeFiles,'apps/web/lib/catalog/live-business-pricing.ts']}];
+  for(const change of invalid){
+    const bad={...candidate,version:1,market:'china',runtimeSha:'1'.repeat(40),runtimeTree:'2'.repeat(40),runtimeDiffSha256:'3'.repeat(64),...change};
+    assert.equal(isExactJapanStabilityScope(bad),false);
+    assert.throws(()=>japanPowerOrderRequired(bad),/power_order_scope/);
+    assert.throws(()=>japanSourceNamesRequired(bad),/source_names_scope/);
+    await assert.rejects(verifyChinaImageRuntime({runtimeRoot:os.tmpdir(),plan:bad,
+      execute:()=>assert.fail('invalid power successor must fail before git')}),/china_image_(?:runtime_file_list|stability_scope)/);
   }
 });
 
@@ -93,6 +130,7 @@ test('stability CI and publication retain required fixtures on the exact runtime
   const verification=await fs.readFile('.github/workflows/verify-china-photo-code.yml','utf8');
   const publication=await fs.readFile('.github/workflows/catalog-next-china-photo-release.yml','utf8');
   for(const text of [verification,publication]){
+    assert(text.includes('requirePowerOrder: japanPowerOrderRequired(plan)'));
     const steps=text.split('\n      - name: ');
     const directory=steps.find(value=>value.startsWith('Verify Japan supplier-only brand and model controls'));
     assert(directory);
@@ -100,7 +138,8 @@ test('stability CI and publication retain required fixtures on the exact runtime
     assert(directory.includes('cd "$RUNNER_TEMP/china-serving-runtime-$STABILITY_SHA"'));
     assert(directory.includes('JAPAN_FILTER_DIRECTORY_REPORT="$RUNNER_TEMP/japan-filter-directory-browser-report.json" node --import tsx tests/browser/japan-filter-directory.mjs'));
     assert(directory.includes('node --import tsx tests/browser/model-suggestions.mjs'));
-    assert(directory.includes("await readJapanFilterDirectoryFixture(process.env.RUNNER_TEMP + '/japan-filter-directory-browser-report.json')"));
+    assert(directory.includes("await readJapanFilterDirectoryFixture(process.env.RUNNER_TEMP + '/japan-filter-directory-browser-report.json',"));
+    assert(directory.includes('requireSourceNames: japanSourceNamesRequired(plan)'));
     assert(!directory.includes('continue-on-error')&&!directory.includes('|| true'));
     for(const fixture of ['tests/browser/collection-controls.mjs','tests/browser/catalog-photo-retry.mjs',
       'tests/browser/japan-catalog-city.mjs','tests/browser/ajes-pagination.mjs']){
@@ -117,7 +156,7 @@ test('stability CI and publication retain required fixtures on the exact runtime
 
 test('additional public API reads are only the three bounded visitor scenarios', () => {
   for (const value of [JAPAN_STABILITY_MODELS_API, japanStabilitySearchApi('model', 'MAZDA3 FASTBACK'),
-    japanStabilitySearchApi('combined'), japanStabilitySearchApi('related', 'B-Class')]) {
+    japanStabilitySearchApi('model', '3'), japanStabilitySearchApi('combined'), japanStabilitySearchApi('related', 'B-Class')]) {
     assert(japanStabilityApiAllowed(value));
     for (const suffix of ['&page=2', '&stock=green', '&model=Other', '&after=anything', '#private'])
       assert.equal(japanStabilityApiAllowed(value + suffix), false);
@@ -135,6 +174,102 @@ test('a selectable model must be anchored to the actual Japan directory, not a g
   const selected = {make: 'Mazda', model: 'AXELA'};
   assert.equal(verifyJapanStabilityModelRows({items: [{make: 'MAZDA', model: 'AXELA 2WD'}]}, selected, rows).rowModelsMatched, true);
   assert.throws(() => verifyJapanStabilityModelRows({items: [{make: 'MAZDA', model: 'MAZDA3 FASTBACK'}]}, selected, rows), /model_filter_mismatch/);
+});
+
+test('the literal Mazda/3 regression requires an observed MAZDA3 family and never substitutes AXELA or DEMIO', () => {
+  const models = ['MAZDA3 FASTBACK', 'MAZDA 3 SEDAN', 'MAZDA3MPS'];
+  const rows = models.map(model => ({model, total: 24}));
+  const items = models.map(model => ({make: 'MAZDA', model}));
+  assert.deepEqual(verifyJapanLegacyMazdaThreeRows({items}, rows), {make: 'Mazda', model: '3',
+    resolvedFamily: 'MAZDA3', shown: 3, sourceFamilyModels: 3, rowModelsMatched: true});
+  for (const model of [...models, 'MAZDA3', 'MAZDA 3', 'MAZDA3 (SEDAN)', 'MAZDA30', 'AXELA', 'CX-3', 'DEMIO', '3']) {
+    const check = () => verifyJapanLegacyMazdaThreeRows({items: [{make: 'MAZDA', model}]}, [{model, total: 1}]);
+    if (matchesCatalogModel(model, 'MAZDA3', 'Mazda')) assert.doesNotThrow(check, model);
+    else assert.throws(check, /legacy_mazda_three_source_missing/, model);
+  }
+  for (const items of [[], [{make: 'Toyota', model: models[0]}], [{make: 'MAZDA', model: 'MAZDA3 UNKNOWN'}],
+    [{make: 'MAZDA', model: 'AXELA'}], [{make: 'MAZDA', model: 'CX-3'}], [{make: 'MAZDA', model: 'DEMIO'}]])
+    assert.throws(() => verifyJapanLegacyMazdaThreeRows({items}, rows), /legacy_mazda_three_mismatch/);
+  assert.throws(() => verifyJapanLegacyMazdaThreeRows({items: [{make: 'MAZDA', model: 'DEMIO'}]},
+    [{model: 'AXELA', total: 5}, {model: 'DEMIO', total: 24}]), /legacy_mazda_three_source_missing/);
+});
+
+const legacyNow = Date.parse('2026-11-27T03:00:00Z');
+const legacyPage = () => ({ok: true, stale: false, partial: false, observedAt: new Date(legacyNow - 1000).toISOString(),
+  hasMore: true, received: 24, items: Array.from({length: 24}, (_, index) => ({id: 'ajes-stats-M' + index,
+    market: 'japan', make: 'MAZDA', model: 'MAZDA3 FASTBACK'}))});
+
+function legacyJourney({payload = legacyPage(), status = 200, pageStatus = 200, source = directory(),
+  uiIds = payload.items.map(row => row.id), javascriptError = false} = {}) {
+  const calls = {navigate: [], read: [], stages: [], pages: [], captures: [], viewports: [], closed: 0, created: 0};
+  let url, onError;
+  const cards = {
+    nth: index => ({waitFor: async () => assert(index >= 0)}),
+    count: async () => uiIds.length,
+    filter: ({has}) => ({waitFor: async () => {}, count: async () => uiIds.filter(id => has.selector === 'a[href*="' + id + '"]').length}),
+  };
+  const root = {locator: selector => {
+    assert.equal(selector, 'article.ac-catalog-card,article.ac-catalog-list-row'); return cards;
+  }, getByText: (text, options) => {
+    assert.equal(text, 'Не удалось загрузить эту страницу'); assert.deepEqual(options, {exact: true});
+    return {count: async () => 0};
+  }};
+  const view = {
+    on: (event, callback) => { assert.equal(event, 'pageerror'); onError = callback; },
+    setViewportSize: async value => { calls.viewports.push(value); },
+    goto: async (value, options) => { calls.navigate.push({value, options}); url = value;
+      if (javascriptError) onError(); return {status: () => pageStatus}; },
+    url: () => url,
+    locator: selector => selector === 'main.ac-ajes-catalog' ? root : {selector},
+    close: async () => { calls.closed++; },
+  };
+  const run = () => runJapanLegacyMazdaThreeBrowser({
+    context: {newPage: async () => { calls.created++; return view; }}, directory: source,
+    read: async value => { calls.read.push(value); assert(japanStabilityApiAllowed(value)); return {data: payload, status}; },
+    capture: async (page, name) => { assert.equal(page, view); calls.captures.push(name); },
+    onStage: stage => { calls.stages.push(stage); }, onPage: page => { calls.pages.push(page); },
+    verifyPage: (value, code) => verifyJapanPage(value, code, legacyNow), verifyFullPage: verifyJapanFullPage,
+  });
+  return {run, calls, view};
+}
+
+test('the legacy journey navigates the literal bookmark and performs exactly one existing allowed model=3 API read', async () => {
+  const {run, calls, view} = legacyJourney();
+  const result = await run();
+  assert.deepEqual(calls.navigate, [{value: 'https://avtocena.com/cars/japan?' + new URLSearchParams({
+    make: 'Mazda', model: '3', city: 'Новокузнецк'}), options: {waitUntil: 'domcontentloaded', timeout: 90_000}}]);
+  assert.deepEqual(calls.read, [japanStabilitySearchApi('model', '3')]);
+  assert.deepEqual(calls.stages, ['stability_legacy_mazda_three']);
+  assert.deepEqual(calls.captures, ['japan-legacy-mazda-three-desktop']);
+  assert.deepEqual(calls.viewports, [{width: 1440, height: 1000}]);
+  assert.deepEqual(calls.pages, [view, null]); assert.equal(calls.created, 1); assert.equal(calls.closed, 1);
+  assert.deepEqual(result.page, legacyPage());
+  assert.equal(result.proof.shown, 24); assert.equal(result.proof.stale, false);
+  assert.equal(result.proof.literalBookmarkChecked, true); assert.equal(result.proof.uiMatchesApi, true);
+  assert.equal(result.proof.cityPreserved, true); assert.equal(result.proof.resolvedFamily, 'MAZDA3');
+});
+
+test('the literal journey keeps fresh/fullness/status and UI identity gates and fails honestly without MAZDA3', async () => {
+  const fresh = legacyPage();
+  const cases = [
+    [{payload: {...fresh, stale: true}}, /unavailable_or_stale/],
+    [{payload: {...fresh, partial: true}}, /unavailable_or_stale/],
+    [{status: 503}, /japan_browser_http/],
+    [{payload: {...fresh, items: [], hasMore: false}}, /japan_browser_rows/],
+    [{payload: {...fresh, items: fresh.items.slice(0, 23)}}, /short_page_with_more/],
+    [{payload: {...fresh, items: fresh.items.map(row => ({...row, model: 'AXELA'}))}}, /legacy_mazda_three_mismatch/],
+    [{source: [{model: 'DEMIO', total: 24}]}, /legacy_mazda_three_source_missing/],
+    [{uiIds: fresh.items.map((row, index) => index ? row.id : 'ajes-stats-Wrong')}, /ui_identity/],
+    [{javascriptError: true}, /legacy_mazda_three_javascript/],
+  ];
+  for (const [options, error] of cases) {
+    const {run, calls} = legacyJourney(options); await assert.rejects(run(), error);
+    assert.equal(calls.navigate.length, 1); assert.deepEqual(calls.read, [japanStabilitySearchApi('model', '3')]);
+    assert.equal(calls.captures.length, 0); assert.equal(calls.closed, 0);
+  }
+  const rejectedHttp = legacyJourney({pageStatus: 503});
+  await assert.rejects(rejectedHttp.run(), /legacy_mazda_three_page_http/);
+  assert.deepEqual(rejectedHttp.calls.read, []);
 });
 
 test('grade, fuel and transmission regression checks reject substituted or unfiltered cars', () => {
@@ -232,6 +367,11 @@ const fixture = () => ({passed: true,
   cases: [390, 1440].flatMap(width => ['source-options-only', 'make-change-clears-old-models',
     'model-directory-failure-and-retry', 'brand-directory-failure-and-retry'].map(name => ({width, name, passed: true})))});
 
+const sourceNamesFixture = () => ({...fixture(), cases: [390, 1440].flatMap(width => [
+  'source-options-only', 'make-change-clears-old-models', 'model-directory-failure-and-retry',
+  'brand-directory-failure-and-retry', 'raw-source-selection', 'typed-source-make-aliases',
+].map(name => ({width, name, passed: true})))});
+
 test('the required source-directory fixture needs all eight actual control cases, with no duplicate or missing case', () => {
   assert.deepEqual(checkedJapanFilterDirectoryFixture(fixture()), fixture());
   const duplicate = fixture(); duplicate.cases[1] = duplicate.cases[0];
@@ -239,6 +379,39 @@ test('the required source-directory fixture needs all eight actual control cases
   for (const value of [duplicate, failed, {...fixture(), cases: fixture().cases.slice(1)},
     {...fixture(), passed: false}, {...fixture(), error: 'private detail'}])
     assert.throws(() => checkedJapanFilterDirectoryFixture(value));
+});
+
+test('source-name successors require all twelve actual control cases without accepting the legacy proof', () => {
+  const names = sourceNamesFixture();
+  assert.deepEqual(checkedJapanFilterDirectoryFixture(names, {requireSourceNames: true}), names);
+  assert.deepEqual(checkedJapanFilterDirectoryFixture(names), names);
+  assert.throws(() => checkedJapanFilterDirectoryFixture(fixture(), {requireSourceNames: true}), /source_names_required/);
+  for (const value of [null, 1, 'true']) {
+    assert.throws(() => checkedJapanFilterDirectoryFixture(names, {requireSourceNames: value}));
+  }
+  const duplicate = sourceNamesFixture(); duplicate.cases[11] = duplicate.cases[0];
+  const failed = sourceNamesFixture(); failed.cases[4].passed = false;
+  const unknown = sourceNamesFixture(); unknown.cases[5].name = 'raw-source-looking-text';
+  const wrongWidth = sourceNamesFixture(); wrongWidth.cases[4].width = 391;
+  const stringWidth = sourceNamesFixture(); stringWidth.cases[4].width = '390';
+  for (const value of [duplicate, failed, unknown, wrongWidth, stringWidth,
+    {...names, cases: names.cases.slice(0, 11)}, {...names, cases: [...names.cases, names.cases[0]]}])
+    assert.throws(() => checkedJapanFilterDirectoryFixture(value, {requireSourceNames: true}));
+  let invoked = 0;
+  const accessor = sourceNamesFixture();
+  Object.defineProperty(accessor.cases[4], 'name', {enumerable: true, get() { invoked++; return 'raw-source-selection'; }});
+  assert.throws(() => checkedJapanFilterDirectoryFixture(accessor, {requireSourceNames: true}));
+  assert.equal(invoked, 0);
+});
+
+test('source-name fixture file validation cannot downgrade the required browser evidence', async t => {
+  const directory = await fs.mkdtemp(path.join(os.tmpdir(), 'japan-source-name-proof-'));
+  t.after(() => fs.rm(directory, {recursive: true, force: true}));
+  const filename = path.join(directory, 'fixture.json');
+  await fs.writeFile(filename, JSON.stringify(fixture()));
+  await assert.rejects(readJapanFilterDirectoryFixture(filename, {requireSourceNames: true}), /source_names_required/);
+  await fs.writeFile(filename, JSON.stringify(sourceNamesFixture()));
+  assert.deepEqual(JSON.parse(await readJapanFilterDirectoryFixture(filename, {requireSourceNames: true})), sourceNamesFixture());
 });
 
 test('fixture proof refuses links, oversized JSON and a failed browser run', async t => {

@@ -13,7 +13,7 @@ import {CRM_CHINA_CODE_SCOPE, CRM_CHINA_CODE_PATHS, CRM_CHINA_RETAINED_RUNTIME, 
   from '../scripts/catalog-next/crm-china-code-scope.mjs';
 import {CRM_JAPAN_PHOTO_CODE_SCOPE, CRM_JAPAN_PHOTO_CODE_PATHS} from '../scripts/catalog-next/crm-japan-photo-code-scope.mjs';
 import {JAPAN_PAGINATION_CODE_SCOPE, JAPAN_PAGINATION_CODE_PATHS, JAPAN_PAGINATION_RETAINED_RUNTIME} from '../scripts/catalog-next/japan-pagination-code-scope.mjs';
-import {JAPAN_STABILITY_CODE_SCOPE, JAPAN_STABILITY_CODE_PATHS, JAPAN_STABILITY_RETAINED_RUNTIME} from '../scripts/catalog-next/japan-stability-code-scope.mjs';
+import {JAPAN_STABILITY_CODE_SCOPE, JAPAN_STABILITY_CODE_PATHS, JAPAN_STABILITY_UI_CODE_PATHS, JAPAN_STABILITY_POWER_CODE_PATHS, JAPAN_STABILITY_RETAINED_RUNTIME} from '../scripts/catalog-next/japan-stability-code-scope.mjs';
 import {JAPAN_STABILITY_GATES} from '../scripts/catalog-next/japan-stability-browser.mjs';
 
 const hash = raw => createHash('sha256').update(raw).digest('hex');
@@ -76,7 +76,8 @@ test('authenticated photo preflight preserves every frozen expected value and ch
   assert.throws(() => checkedChinaCodePreflight(f.preflight, {...f.current, sourceCursor: 101}, nextSha));
 });
 
-async function fixture(t, {combined = false, japan = false,completion=false, crm=false, crmPhoto=false, pagination=false, stability=false} = {}) {
+async function fixture(t, {combined = false, japan = false,completion=false, crm=false, crmPhoto=false, pagination=false, stability=false, ui=false, powerOrder=false} = {}) {
+  stability=stability||ui||powerOrder;
   pagination=pagination||stability;
   crmPhoto=crmPhoto||pagination;completion=completion||pagination;
   crm=crm||crmPhoto;
@@ -97,20 +98,20 @@ async function fixture(t, {combined = false, japan = false,completion=false, crm
       'transientRecovery', 'persistentFailureBound', 'sourceChangeCancellation', 'unmountCancellation',
       'exactUrl', 'noExternalRequests', 'protectedPhotoPreserved', 'lazyLoadRecovery'].map(key => [key, true]))}));
   const paginationFixturePath=path.join(directory,'japan-pagination24-browser-report.json');
-  if(pagination)await fs.writeFile(paginationFixturePath,JSON.stringify({version:1,kind:'japan-pagination24-browser-v1',passed:true,
-    caseCount:8,widths:[390,1440],checks:Object.fromEntries(['refill24','numberedContinuation','appendNoDuplicatesOrGaps','finiteExhaustion',
-      'unknownPowerPreserved','failureHonesty','cursorBinding','warningRemoved','sourcePageSize24','neighborPaginationPreserved','noExternalRequests'].map(key=>[key,true]))}));
+  if(pagination)await fs.writeFile(paginationFixturePath,JSON.stringify({version:powerOrder?2:1,kind:powerOrder?'japan-pagination24-browser-v2':'japan-pagination24-browser-v1',passed:true,
+    caseCount:powerOrder?12:8,widths:[390,1440],checks:Object.fromEntries(['refill24','numberedContinuation','appendNoDuplicatesOrGaps','finiteExhaustion',
+      'unknownPowerPreserved','failureHonesty','cursorBinding','warningRemoved','sourcePageSize24','neighborPaginationPreserved','noExternalRequests',...(powerOrder?['knownBeforeUnknown','boundedKnownContinuation','evidenceEpochReset']:[])].map(key=>[key,true]))}));
   const directoryFixturePath=path.join(directory,'japan-filter-directory-browser-report.json');
   if(stability)await fs.writeFile(directoryFixturePath,JSON.stringify({passed:true,
     scope:'Actual Japan brand/model controls with bounded local source fixtures; no production or supplier calls',
     cases:[390,1440].flatMap(width=>['source-options-only','make-change-clears-old-models',
-      'model-directory-failure-and-retry','brand-directory-failure-and-retry'].map(name=>({width,name,passed:true})))}));
+      'model-directory-failure-and-retry','brand-directory-failure-and-retry',...((ui||powerOrder)?['raw-source-selection','typed-source-make-aliases']:[])].map(name=>({width,name,passed:true})))}));
   const image = Buffer.from('synthetic roundtrip image'), imagePath = path.join(imageDirectory, 'image.tar');
   await fs.writeFile(imagePath, image);
   const servingPlan = {version: 1, market: 'china', runtimeSha: nextSha, retainedRuntime,
     runtimeTree: '6'.repeat(40), runtimeDiffSha256: hash('photo diff'), pricingRuntimeSha: pricingSha,
     ...(usability?{runtimeFiles:[...JAPAN_USABILITY_CODE_PATHS]}:{}),
-    ...(stability?{runtimeFiles:[...JAPAN_STABILITY_CODE_PATHS],codeScope:JAPAN_STABILITY_CODE_SCOPE}:pagination?{runtimeFiles:[...JAPAN_PAGINATION_CODE_PATHS],codeScope:JAPAN_PAGINATION_CODE_SCOPE}:crm?{runtimeFiles:[...(crmPhoto?CRM_JAPAN_PHOTO_CODE_PATHS:CRM_CHINA_CODE_PATHS)], codeScope:crmPhoto?CRM_JAPAN_PHOTO_CODE_SCOPE:CRM_CHINA_CODE_SCOPE}:
+    ...(stability?{runtimeFiles:[...(powerOrder?JAPAN_STABILITY_POWER_CODE_PATHS:ui?JAPAN_STABILITY_UI_CODE_PATHS:JAPAN_STABILITY_CODE_PATHS)],codeScope:JAPAN_STABILITY_CODE_SCOPE}:pagination?{runtimeFiles:[...JAPAN_PAGINATION_CODE_PATHS],codeScope:JAPAN_PAGINATION_CODE_SCOPE}:crm?{runtimeFiles:[...(crmPhoto?CRM_JAPAN_PHOTO_CODE_PATHS:CRM_CHINA_CODE_PATHS)], codeScope:crmPhoto?CRM_JAPAN_PHOTO_CODE_SCOPE:CRM_CHINA_CODE_SCOPE}:
       japan ? {codeScope: completion?(typeof completion==='string'?completion:'catalog-japan-completion-v1'):'catalog-japan-recovery-v1'} : combined ? {codeScope: 'catalog-photo-japan-power-v1'} : {})};
   const pricingPlan = {version: 1, market: 'china', runtimeSha: pricingSha};
   const imageReceipt = {version: 1,
@@ -196,6 +197,7 @@ async function fixture(t, {combined = false, japan = false,completion=false, crm
           assert.equal(japanReport.codeScope,stability?JAPAN_STABILITY_CODE_SCOPE:JAPAN_PAGINATION_CODE_SCOPE);
           assert.equal(japanReport.japanPagination24Passed,true);assert.equal(japanReport.japanFullPagesPassed,true);
           if(stability)for(const key of JAPAN_STABILITY_GATES)assert.equal(japanReport[key],true);
+          if(powerOrder)assert.equal(japanReport.japanPowerOrderPassed,true);
         }
         return {saved: true, speedReportSha256: hash(browserBytes.speed), detailsReportSha256: hash(browserBytes.details)};
       }
@@ -244,6 +246,7 @@ async function fixture(t, {combined = false, japan = false,completion=false, crm
         } else if (name === 'japan-browser-acceptance.mjs') {
           assert.equal(japan, true); assert.deepEqual(args.args, []);
           assert.equal(args.env.CATALOG_CODE_SCOPE,servingPlan.codeScope);
+          assert.equal(args.env.CATALOG_JAPAN_POWER_ORDER_REQUIRED,powerOrder?'1':'0');
           assert.equal(args.env.EXPECTED_RELEASE_SHA, nextSha); assert.equal(args.env.VERIFICATION_NONCE, hostPlan.nonce);
           assert.ok(!Object.hasOwn(args.env, 'SSH_PRIVATE_KEY'));
           assert.equal(path.dirname(args.env.OUTPUT), args.cwd, 'the report belongs to this unique browser session');
@@ -257,6 +260,7 @@ async function fixture(t, {combined = false, japan = false,completion=false, crm
               japanDeliveredCalculationPassed:true,japanPreviewCalculationRequests:1}:{}),
             ...(usability?Object.fromEntries(usabilityFlags.map(flag=>[flag,true])):{}),
             ...(pagination?{japanFullPagesPassed:true,japanPagination24Passed:true,japanCatalogWarningRemovedPassed:true}:{}),
+            ...(powerOrder?{japanPowerOrderPassed:true}:{}),
             ...(stability?Object.fromEntries(JAPAN_STABILITY_GATES.map(key=>[key,true])):{})};
           if (flags.failedReport) Object.assign(report, {passed: false, japanVisibilityPassed: false,
             error: {stage: 'catalog_visibility', code: 'japan_browser_overview_http', timeout: false}});
@@ -835,6 +839,51 @@ async function exactFailedCodePublication(f) {
     hostRollbackBase64: raw.toString('base64'), hostRollbackSha256: hash(raw)}});
   return {publication, storage, state, lease};
 }
+
+for(const profile of ['ui','powerOrder'])
+test('the exact '+profile+' successor requires its complete browser evidence before host contact',async t=>{
+  const f=await fixture(t,{[profile]:true});
+  const {stage,input}=await reservedStage(f);
+  const outcome=await stage.activate(input);
+  assert.equal(outcome.kind,'accepted');
+  assert.ok(f.calls.includes('code_preflight')&&f.calls.includes('accept'));
+  await stage.close();
+});
+
+for(const value of [undefined,false,1,'true'])
+test('ordered power cannot borrow a live proof without its exact boolean order verdict: '+String(value),async t=>{
+  const f=await fixture(t,{powerOrder:true}),{stage,input}=await reservedStage(f);
+  f.flags.changeReport=report=>{if(value===undefined)delete report.japanPowerOrderPassed;else report.japanPowerOrderPassed=value;};
+  await assert.rejects(stage.activate(input),/china_daily_release_japan_browser_binding/);
+  assert.ok(!f.calls.includes('accept')&&!f.calls.includes('browser_evidence'));await stage.close();
+});
+
+for(const failure of ['legacy','failed-order','failed-budget','failed-reset','short'])
+test('ordered power cannot publish with missing or incomplete v2 proof: '+failure,async t=>{
+  const f=await fixture(t,{powerOrder:true});
+  const proof=JSON.parse(await fs.readFile(f.paginationFixturePath));
+  if(failure==='legacy'){
+    proof.version=1;proof.kind='japan-pagination24-browser-v1';proof.caseCount=8;
+    for(const name of ['knownBeforeUnknown','boundedKnownContinuation','evidenceEpochReset'])delete proof.checks[name];
+  }else if(failure==='short')proof.caseCount=11;
+  else proof.checks[{'failed-order':'knownBeforeUnknown','failed-budget':'boundedKnownContinuation','failed-reset':'evidenceEpochReset'}[failure]]=false;
+  await fs.writeFile(f.paginationFixturePath,JSON.stringify(proof));
+  await assert.rejects(f.release.stageCodeRelease({candidate:f.candidate,previous:f.previous,nonce:'b'.repeat(32),assertAuthority:async()=>{}}),
+    /^Error: china_daily_release_stage_failed$/);
+  assert.ok(!f.calls.includes('code_preflight')&&!f.calls.includes('init')&&!f.calls.includes('switch'));
+});
+
+for(const profile of ['ui','powerOrder'])for(const failure of ['legacy','failed','duplicate'])
+test(profile+' refuses a downgraded or incomplete raw source-name fixture: '+failure,async t=>{
+  const f=await fixture(t,{[profile]:true}),proof=JSON.parse(await fs.readFile(f.directoryFixturePath));
+  if(failure==='legacy')proof.cases=proof.cases.filter(row=>!['raw-source-selection','typed-source-make-aliases'].includes(row.name));
+  else if(failure==='failed')proof.cases.find(row=>row.name==='raw-source-selection').passed=false;
+  else proof.cases[proof.cases.length-1]=proof.cases[0];
+  await fs.writeFile(f.directoryFixturePath,JSON.stringify(proof));
+  await assert.rejects(f.release.stageCodeRelease({candidate:f.candidate,previous:f.previous,nonce:'b'.repeat(32),assertAuthority:async()=>{}}),
+    /^Error: china_daily_release_stage_failed$/);
+  assert.ok(!f.calls.includes('code_preflight')&&!f.calls.includes('init')&&!f.calls.includes('switch'));
+});
 
 test('terminal app-image adapter refreshes exact resolved authority between prepare and one removal without source/build calls', async t => {
   const f = await fixture(t), {publication, storage, state, lease} = await exactFailedCodePublication(f);

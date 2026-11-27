@@ -131,6 +131,9 @@ JAPAN_STABILITY_UI_CODE_FILES = JAPAN_STABILITY_CODE_FILES | {
     'apps/web/components/catalog/CatalogCard.tsx',
     'apps/web/components/catalog/CatalogContent.tsx',
 }
+JAPAN_STABILITY_POWER_CODE_FILES = JAPAN_STABILITY_UI_CODE_FILES | {
+    'apps/web/lib/catalog/ajes-public.ts',
+}
 JAPAN_PAGINATION_CODE_FILES = {
     "apps/web/components/catalog/AjesCatalog.tsx",
     "apps/web/components/catalog/CatalogLoadMore.tsx",
@@ -2860,6 +2863,9 @@ class Host:
         scope = code_scope(self.plan)
         required_code_files = CODE_SCOPE_FILES[scope]
         if (scope == JAPAN_STABILITY_CODE_SCOPE and isinstance(image.get('runtimeFiles'), list) and
+                'apps/web/lib/catalog/ajes-public.ts' in image['runtimeFiles']):
+            required_code_files = JAPAN_STABILITY_POWER_CODE_FILES
+        elif (scope == JAPAN_STABILITY_CODE_SCOPE and isinstance(image.get('runtimeFiles'), list) and
                 'apps/web/components/catalog/CatalogCard.tsx' in image['runtimeFiles']):
             required_code_files = JAPAN_STABILITY_UI_CODE_FILES
         need(image.get('version') == 1 and image.get('kind') == 'china-runtime-image-v1' and image.get('market') == 'china' and
@@ -3456,6 +3462,20 @@ class Host:
             if code_scope(self.plan) == JAPAN_STABILITY_CODE_SCOPE:
                 need(all(japan.get(key) is True for key in ('japanModelSelectionPassed', 'japanCombinedFiltersPassed',
                      'japanRelatedCardsPassed', 'japanVehiclePolicyPassed')), 'japan_browser_binding')
+                # Bind the stronger live cursor/order proof to this exact
+                # already-verified image manifest, never to a report's claim.
+                image_descriptor = next(row for row in self.plan['files'] if row['name'] == 'image-receipt.json')
+                regular(self.directory / 'image-receipt.json', 256 * 1024)
+                image_raw = (self.directory / 'image-receipt.json').read_bytes()
+                need(len(image_raw) == image_descriptor['bytes'] and sha(image_raw) == image_descriptor['sha256'],
+                     'code_image_receipt_hash')
+                runtime_files = json.loads(image_raw).get('runtimeFiles')
+                need(isinstance(runtime_files, list) and all(isinstance(name, str) for name in runtime_files) and
+                     len(runtime_files) == len(set(runtime_files)) and set(runtime_files) in
+                     (JAPAN_STABILITY_CODE_FILES, JAPAN_STABILITY_UI_CODE_FILES, JAPAN_STABILITY_POWER_CODE_FILES),
+                     'code_image_receipt')
+                if set(runtime_files) == JAPAN_STABILITY_POWER_CODE_FILES:
+                    need(japan.get('japanPowerOrderPassed') is True, 'japan_browser_binding')
         for name, raw in [('BROWSER_SPEED.json', speed_raw), ('BROWSER_DETAILS.json', details_raw)]:
             new_file(self.directory / name, raw)
             need(file_sha(self.directory / name) == sha(raw), 'browser_evidence_readback')
