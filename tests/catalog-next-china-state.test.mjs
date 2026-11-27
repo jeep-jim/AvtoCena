@@ -552,8 +552,32 @@ test('a successful retry cannot rebase a changed ETag or revive an expired lease
 test('failure evidence rejects extra fields, unknown operations, PUT retries and private values', () => {
   const base = {version: 1, kind: 'china-state-storage-failure-v1', method: 'GET', target: 'lease',
     part: 'document', phase: 'headers', attempts: 2, cause: 'ECONNRESET'};
-  assert.deepEqual(checkedChinaStateStorageFailure(base), base);
+  for (const input of [base, Object.assign(Object.create(null), base)]) {
+    const result = checkedChinaStateStorageFailure(input);
+    assert.deepEqual(result, base); assert.notEqual(result, input); assert.equal(Object.isFrozen(result), true);
+  }
   for (const change of [{url: 'private://secret'}, {method: 'DELETE'}, {target: 'catalog/raw/private'}, {cause: 'secret'},
     {attempts: 3}, {method: 'PUT'}, {part: 'policy'}])
     assert.throws(() => checkedChinaStateStorageFailure({...base, ...change}), /storage_failure_evidence/);
+});
+
+test('failure evidence rejects hidden hooks, accessors and prototypes without exporting their contents', () => {
+  const base = {version: 1, kind: 'china-state-storage-failure-v1', method: 'GET', target: 'accepted',
+    part: 'document', phase: 'headers', attempts: 1, cause: 'ECONNRESET'};
+  let invoked = 0;
+  const toJSON = () => { invoked++; return {privateField: 'test-secret'}; };
+  const invalid = [
+    Object.assign(Object.create({toJSON}), base),
+    Object.defineProperty({...base}, 'toJSON', {value: toJSON}),
+    Object.defineProperty({...base}, 'cause', {get() { invoked++; return 'ECONNRESET'; }}),
+    Object.defineProperty({...base}, 'privateField', {value: 'test-secret'}),
+    {...base, [Symbol('privateField')]: 'test-secret'},
+    new Proxy(base, {getPrototypeOf() { throw Error('test-secret'); }}),
+    new Proxy(base, {getOwnPropertyDescriptor() { throw Error('test-secret'); }}),
+  ];
+  for (const value of invalid) assert.throws(() => checkedChinaStateStorageFailure(value), error => {
+    assert.equal(error.message, 'china_state_storage_failure_evidence');
+    assert.equal(JSON.stringify(error).includes('test-secret'), false); return true;
+  });
+  assert.equal(invoked, 0);
 });

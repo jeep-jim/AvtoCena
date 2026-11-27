@@ -220,18 +220,29 @@ const READ_ATTEMPTS = 2, REQUEST_TIMEOUT_MS = 30_000, READ_BUDGET_MS = 45_000, R
 /** Only typed, bounded transport facts may accompany a public release report.
  * URLs, credentials, response bodies and exception text never enter evidence. */
 export function checkedChinaStateStorageFailure(value) {
-  need(keys(value, ['version', 'kind', 'method', 'target', 'part', 'phase', 'attempts', 'cause'])
-    && value.version === 1 && value.kind === 'china-state-storage-failure-v1'
-    && ['GET', 'PUT'].includes(value.method)
-    && ['bucket', 'accepted', 'intent', 'lease'].includes(value.target)
-    && ['acl', 'policy', 'document'].includes(value.part)
-    && ['headers', 'body'].includes(value.phase)
-    && Number.isSafeInteger(value.attempts) && value.attempts >= 1
-    && value.attempts <= (value.method === 'GET' ? READ_ATTEMPTS : 1)
-    && (value.cause === 'UNKNOWN' || TRANSIENT_READ_CAUSES.has(value.cause)), 'storage_failure_evidence');
-  need(value.method !== 'PUT' || value.target !== 'bucket' && value.part === 'document', 'storage_failure_evidence');
-  need(value.part !== 'policy' || value.target === 'bucket', 'storage_failure_evidence');
-  return immutable(clone(value));
+  const fields = ['version', 'kind', 'method', 'target', 'part', 'phase', 'attempts', 'cause'];
+  let prototype, descriptors;
+  try {
+    prototype = Object.getPrototypeOf(value);
+    descriptors = Object.getOwnPropertyDescriptors(value);
+  } catch { fail('storage_failure_evidence'); }
+  need((prototype === Object.prototype || prototype === null)
+    && Reflect.ownKeys(descriptors).length === fields.length
+    && fields.every(key => Object.hasOwn(descriptors, key) && Object.hasOwn(descriptors[key], 'value')),
+  'storage_failure_evidence');
+  // Capture own data once; never invoke getters or toJSON while projecting a failure.
+  const result = Object.fromEntries(fields.map(key => [key, descriptors[key].value]));
+  need(result.version === 1 && result.kind === 'china-state-storage-failure-v1'
+    && ['GET', 'PUT'].includes(result.method)
+    && ['bucket', 'accepted', 'intent', 'lease'].includes(result.target)
+    && ['acl', 'policy', 'document'].includes(result.part)
+    && ['headers', 'body'].includes(result.phase)
+    && Number.isSafeInteger(result.attempts) && result.attempts >= 1
+    && result.attempts <= (result.method === 'GET' ? READ_ATTEMPTS : 1)
+    && (result.cause === 'UNKNOWN' || TRANSIENT_READ_CAUSES.has(result.cause)), 'storage_failure_evidence');
+  need(result.method !== 'PUT' || result.target !== 'bucket' && result.part === 'document', 'storage_failure_evidence');
+  need(result.part !== 'policy' || result.target === 'bucket', 'storage_failure_evidence');
+  return Object.freeze(result);
 }
 
 function transportCause(error, signal) {

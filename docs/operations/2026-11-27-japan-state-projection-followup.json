@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "kind": "japan-state-diagnostic-projection-followup",
+  "checkpointDate": "2026-11-27",
+  "timezone": "Asia/Krasnoyarsk",
+  "baseControllerSha": "2c4b0a4667cb2b21a657e667dbbd84e6fe9d9812",
+  "runtime": {
+    "sha": "a4f23e648d3de2a8a23c9a16942a286b91bb39b4",
+    "tree": "f2475e05a226afac310fef42fb10c162b3d5753d",
+    "retainedSha": "a5ca426eec2663eb17c2df69fe2bfed46e2b8740",
+    "runtimeFileCount": 56,
+    "pricingFileCount": 112,
+    "changedByThisFollowup": false,
+    "independentExactScopeReview": "passed; power order, source names, live brand directory, eighteen-case directory fixture and host bindings remain mandatory"
+  },
+  "changes": {
+    "productionFunction": "scripts/catalog-next/china-state.mjs: checkedChinaStateStorageFailure",
+    "behavior": "Validate exact own data descriptors on a plain or null-prototype input, then construct a fresh frozen object from eight checked primitive fields; never stringify or clone the input.",
+    "negativeCoverage": [
+      "inherited toJSON",
+      "hidden toJSON",
+      "getter",
+      "hidden extra field",
+      "symbol field",
+      "prototype trap error",
+      "descriptor trap error"
+    ],
+    "preservedBehavior": "Code publication opt-in to two transient GET attempts within 45 seconds; PUT single attempt; CAS, writeOnce, lease checks and daily/retention defaults unchanged."
+  },
+  "verification": {
+    "stateFocused": {
+      "passed": 26,
+      "failed": 0
+    },
+    "independentProjectionReview": "passed",
+    "fullControllerSuite": {
+      "tests": 1551,
+      "passed": 1551,
+      "failed": 0,
+      "durationMs": 25928.106812,
+      "logSha256": "467f97f9f0de8fbd1f0d126b6915bb0fdbff930f4d1571a80875133621271746"
+    },
+    "exactSourceAndPricingProof": {
+      "status": "passed",
+      "proofSha256": "72371ad6834e6efdf8b2328c4d23c53ce214d17afac9801cb83b5487e37d0f6d"
+    },
+    "frozenSpeedBaselines": "passed",
+    "hostedCi": "pending"
+  },
+  "publication": {
+    "status": "not_started",
+    "lastVerifiedAcceptedRuntime": "a5ca426eec2663eb17c2df69fe2bfed46e2b8740",
+    "liveAcceptance": "pending"
+  },
+  "maintenance": {
+    "status": "prepared_not_active",
+    "requires": "Actual accepted runtime and rollback evidence before exact rebinding and activation."
+  }
+}

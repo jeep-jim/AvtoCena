@@ -18,12 +18,14 @@ Checkpoint: **27.11.2026, Asia/Krasnoyarsk**. Работа продолжает�
 - Обязательны 18 browser fixture случаев и новая live-сверка полного справочника с dropdown/каруселью на desktop и dropdown на mobile. Пустой/stale справочник и fallback не доказывают полноту.
 - Упорядоченная мощность, страницы 24+24, город, модели, составные фильтры, рекомендации, типы транспорта, source identity и rollback остаются обязательными.
 - Для выпуска кода добавлен ограниченный повтор transient GET состояния REG; PUT не повторяется. Независимое ежедневное обновление Китая не включает этот retry.
+- Дополнительно закрыта диагностическая проекция: только восемь проверенных собственных примитивных полей, без вызова входных getter/toJSON. Политика двух попыток GET в общем бюджете 45 секунд, однократный PUT, CAS и lease проверки сохранены. [Проверяемый состав изменения](../operations/2026-11-27-japan-state-projection-followup.json).
 
 ## Проверки и следующий шаг
 
 - 48 source targeted checks и typecheck прошли. CI56 затем обнаружил одно устаревшее ожидание удалённого абзаца (533/534). Исправлен только test; теперь полный native suite: **534/534 PASS**,69files. Production code совпадает с предыдущим738-кандидатом.
 - Проверки controller/host нового профиля:456; transport:54; brand/browser:82 — прошли. Полный controller gate для точного56profile: **1550/1550 PASS**, failed=0.
 - Exact source/pricing proof и frozen speed baseline hashes прошли. Формулы, энциклопедия и коммерческие данные не менялись.
+- Для дополнительной проекции focused state suite: **26/26 PASS**, независимый review — PASS. Полный объединённый controller gate: **1551/1551 PASS**; exact source/pricing proof и frozen speed hashes — PASS. Hosted CI этого controller и live acceptance ещё обязательны перед признанием выпуска принятым.
 - Локально отсутствует исполняемый Chromium. Выполнение 18 реальных browser fixture случаев обязательно в hosted CI до выпуска; сборка fixture не выдаётся за браузерную приёмку.
 - Следующий шаг: полный controller gate → exact hosted CI → один выпуск → bound live acceptance и подтверждение принятой версии. До этого кандидат не называется установленным.
 
