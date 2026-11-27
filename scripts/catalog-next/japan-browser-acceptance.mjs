@@ -304,6 +304,59 @@ export function japanPageReadEvidence(payload){
  }catch{return {...empty,status:'omitted',limited:true};}
 }
 
+const SSR_EVIDENCE_ATTRIBUTE='data-japan-source-receipts';
+const SSR_EVIDENCE_BYTES=8192,SSR_EVIDENCE_LIMIT=8;
+function ssrBinding({page,after=''}){
+ return Number.isSafeInteger(page)&&page>=1&&page<=1_000_000&&typeof after==='string'&&after.length<=512
+  ?{page,afterSha256:sha(after)}:null;
+}
+
+/** The inert annotation is evidence from an already performed SSR read. It is
+ * never a replacement for the catalog, freshness or visible-card gates. */
+export function japanSsrPageReadEvidence(raw,expected){
+ const binding=ssrBinding(expected??{});
+ const missing=code=>({status:code==='annotation_missing'?'missing':'omitted',
+  page:binding?.page??null,afterSha256:binding?.afterSha256??null,bindingMatched:false,
+  receipts:[],received:0,omitted:0,limited:true,omissions:[code]});
+ if(!binding)return missing('binding_invalid');
+ if(raw===null||raw===undefined)return missing('annotation_missing');
+ if(typeof raw!=='string'||Buffer.byteLength(raw)>SSR_EVIDENCE_BYTES)return missing('annotation_size_or_type');
+ let value;try{value=JSON.parse(raw);}catch{return missing('annotation_malformed');}
+ if(!receiptKeys(value,['version','page','afterSha256','receipts','omitted'])||value.version!==1
+  ||!Number.isSafeInteger(value.page)||value.page<1||value.page>1_000_000
+  ||typeof value.afterSha256!=='string'||!/^[a-f0-9]{64}$/.test(value.afterSha256)
+  ||!Array.isArray(value.receipts)||value.receipts.length>SSR_EVIDENCE_LIMIT
+  ||!Number.isSafeInteger(value.omitted)||value.omitted<0||value.omitted>1_000_000)return missing('annotation_malformed');
+ if(value.page!==binding.page||value.afterSha256!==binding.afterSha256)return missing('binding_mismatch');
+ const projected=japanPageReadEvidence({sourceReceipts:value.receipts}),omitted=value.omitted+projected.omitted;
+ return {...binding,bindingMatched:true,status:omitted?'partial':projected.status,
+  receipts:projected.receipts,received:value.receipts.length+value.omitted,omitted,limited:omitted>0,
+  omissions:projected.omitted?['receipt_omitted']:[]};
+}
+
+/** Wait for the actual new main element, not merely a changed URL. Read only
+ * its bounded attribute; do not collect a DOM/response dump or add a request.
+ * Missing observational metadata is explicit and does not alter acceptance.
+ */
+export async function readJapanSsrPageEvidence(view,expected){
+ const binding=ssrBinding(expected??{});
+ if(!binding)return japanSsrPageReadEvidence(undefined,expected);
+ let handle;
+ try{
+  handle=await view.waitForFunction(({attribute,maximum,page,afterSha256})=>{
+   const nodes=document.querySelectorAll('main.ac-ajes-catalog');
+   if(nodes.length!==1)return false;
+   const raw=nodes[0].getAttribute(attribute);
+   if(typeof raw!=='string'||raw.length>maximum)return false;
+   try{const value=JSON.parse(raw);return value?.version===1&&value.page===page&&value.afterSha256===afterSha256?raw:false;}
+   catch{return false;}
+  },{attribute:SSR_EVIDENCE_ATTRIBUTE,maximum:SSR_EVIDENCE_BYTES,...binding},{timeout:5000});
+  return japanSsrPageReadEvidence(await handle.jsonValue(),expected);
+ }catch{
+  return {...japanSsrPageReadEvidence(undefined,expected),omissions:['bound_dom_not_observed']};
+ }finally{if(handle)await handle.dispose().catch(()=>{});}
+}
+
 export function verifyJapanWarmPage(first,second){
  need((first.observedAt||first.generationId)===(second.observedAt||second.generationId)
   &&JSON.stringify(first.items.map(row=>row.id))===JSON.stringify(second.items.map(row=>row.id)),'warm_changed');
@@ -651,6 +704,8 @@ export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,out
    japanPaginationPageApi(href,{kind,expectedCursor:first.nextCursor});
    await next.click();await view.waitForURL(url=>url.searchParams.get('page')==='2',{timeout:60_000});
    const observedUrl=view.url(),api=japanPaginationPageApi(observedUrl,{kind,expectedCursor:first.nextCursor});
+   if(stability)(report.checks.ssrPageReadEvidence??=[]).push({stage,kind,
+    ...await readJapanSsrPageEvidence(view,{page:2,after:new URL(observedUrl).searchParams.get('after')||''})});
    report.explicitJapanApiRequests++;
    const result=await readJson(context,api,{paginationKind:kind});
    recordJapanResponse(report,stage,result,releaseSha);
@@ -884,6 +939,8 @@ export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,out
    need(japanPetrolPowerUrl(nextUrl.href,2),'petrol_page_two_query');
    const pageTwoApi=pagination?japanPaginationPageApi(nextUrl.href,{kind:'petrol_power',expectedCursor:petrolFirst.nextCursor})
     :usability?japanPetrolPowerPageApi(nextUrl.href):PETROL_POWER_NEXT;
+   if(stability)(report.checks.ssrPageReadEvidence??=[]).push({stage,kind:'petrol_power',
+    ...await readJapanSsrPageEvidence(view,{page:2,after:nextUrl.searchParams.get('after')||''})});
    report.explicitJapanApiRequests++;filtered=await readJson(context,pageTwoApi,pagination?{paginationKind:'petrol_power'}:{});
    recordJapanResponse(report,stage,filtered,releaseSha);
    const nextAggregate={...verifyJapanPage(filtered.data,filtered.status),...verifyJapanPowerPage(filtered.data,2)};

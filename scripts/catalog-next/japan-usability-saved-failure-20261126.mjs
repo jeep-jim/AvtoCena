@@ -5,6 +5,7 @@ import {verifyReadonlyInvocation} from '../lib/readonly-marker-invocation.mjs';
 const ROOT=fileURLToPath(new URL('../../',import.meta.url));
 const releaseKeys=[['stats-list-1','integrations/ajes/catalog-failure-pages/stats-list-1.json'],['stats-count','integrations/ajes/catalog-failure-pages/stats-count.json'],['stats-latest','integrations/ajes/catalog-failure-stats.json']];
 const pageThreeKeys=[['stats-list-3','integrations/ajes/catalog-failure-pages/stats-list-3.json']];
+const stabilityKeys=[...pageThreeKeys,...releaseKeys];
 const validationCodes={decode:['gzip_invalid','json_invalid'],page_shape:['root_not_array','row_limit_exceeded','row_not_object'],
  aggregate_shape:['total_invalid','count_row_count','make_name_missing'],empty_confirmation:['count_unavailable','count_unverified']};
 const validationKeys=new Set(['version','phase','code','wireBytes','decodedBytes','rootKind','rowCount','originCode']);
@@ -40,6 +41,12 @@ export const inspectSavedFailure=options=>inspectFixedSavedFailure(releaseKeys,o
 export async function inspectSavedPageThreeFailure(options){
  const report=await inspectFixedSavedFailure(pageThreeKeys,options);
  return {...report,kind:'japan-page-three-saved-failure-v1',attribution:'saved_outer_request_metadata_only',historyReads:0};
+}
+export async function inspectSavedStabilityFailure(options){
+ // Read the volatile page-three slot first, sharing one deadline and byte budget
+ // with the three existing release slots. There is no second read or fallback.
+ const report=await inspectFixedSavedFailure(stabilityKeys,options);
+ return {...report,kind:'japan-stability-saved-failure-v1',attribution:'saved_outer_request_metadata_only',historyReads:0};
 }
 async function inspectFixedSavedFailure(keys,{env=process.env,fetcher=globalThis.fetch}={}){
 const hash=x=>createHash('sha256').update(x).digest('hex');
@@ -109,8 +116,24 @@ export function verifySavedPageThreeInvocation({root=ROOT,environment=process.en
  return {...invocation,runId:environment.GITHUB_RUN_ID,attempt:'1'};
 }
 
+export function verifySavedStabilityFailureInvocation({environment=process.env}={}){
+ if(environment.GITHUB_ACTIONS!=='true'||environment.GITHUB_REPOSITORY_ID!=='1289722938'
+  ||environment.GITHUB_REF!=='refs/heads/main'||environment.GITHUB_RUN_ATTEMPT!=='1'
+  ||environment.GITHUB_WORKFLOW_REF!=='jeep-jim/AvtoCena/.github/workflows/catalog-next-china-photo-release.yml@refs/heads/main'
+  ||environment.GITHUB_JOB!=='release'||!['push','workflow_dispatch'].includes(environment.GITHUB_EVENT_NAME)
+  ||environment.CATALOG_CODE_SCOPE!=='catalog-japan-stability-v1')
+  throw Error('japan_stability_saved_failure_invocation_rejected');
+}
+
 if(process.argv[1]&&fileURLToPath(import.meta.url)===process.argv[1]){
- if(process.argv.length===3&&['--verify-page-three','--run-page-three'].includes(process.argv[2])){
+ if(process.argv.length===3&&process.argv[2]==='--run-stability'){
+  try{
+   verifySavedStabilityFailureInvocation();
+   const report=await inspectSavedStabilityFailure();
+   console.log(JSON.stringify(report));
+   if(report.readStatus||report.records.some(row=>!['ok','missing'].includes(row.readStatus)))process.exitCode=1;
+  }catch{console.log(JSON.stringify({readStatus:'invocation_rejected',supplierRequests:0,writes:0}));process.exitCode=1;}
+ }else if(process.argv.length===3&&['--verify-page-three','--run-page-three'].includes(process.argv[2])){
   try{
    const invocation=verifySavedPageThreeInvocation();
    if(process.argv[2]==='--verify-page-three')console.log(JSON.stringify({kind:'japan-page-three-invocation-v1',verified:true,sourceSha:invocation.sourceSha,supplierRequests:0,writes:0}));

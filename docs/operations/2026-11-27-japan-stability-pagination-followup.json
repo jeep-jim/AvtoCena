@@ -1,7 +1,7 @@
 {
   "version": 1,
   "kind": "japan-stability-pagination-followup-v1",
-  "checkpointAt": "2026-11-27T06:57:37.947Z",
+  "checkpointAt": "2026-11-27T07:27:06.778Z",
   "scope": "Japan stability, exact candidate rollback, bounded cache maintenance preparation",
   "ci": {
     "runId": "45950280165",
@@ -526,7 +526,7 @@
   "interpretation": {
     "plainAndPowerFirstPageFreshFull": true,
     "uiPageTwoAccepted": false,
-    "initialSourcePageThreeFailureCaptured": false,
+    "initialSourcePageThreeFailureCaptured": true,
     "confirmedFailure": "The explicit API read after UI navigation reused source-page-3 visitor cooldown invalid_response and an older partial fallback; the original failed supplier request is not in the browser report.",
     "sourcePageThreeWireSha256": "aee6a316fe78f521f28c7ad9d23f72d95303ba0aa5363c20132532dc1e64c3d4",
     "sourcePageThreeCanonicalSha256": "9ecac0a545c5e01cccc72ee6c0a752efb59baf3b4396d980c5a3d6bced916a39",
@@ -534,7 +534,8 @@
     "savedFailureCorrelation": "The saved list-1/count/latest records are later and have different SQL hashes. Their HTTP 200 does not prove the original page-3 HTTP status or response shape.",
     "rootCauseKnown": false,
     "remainingLiveGates": "UI pagination, model selection, combined filters, related Japan cards, vehicle policy and delivered calculation were not reached/passed.",
-    "sameReleaseBlindRetryPerformed": false
+    "sameReleaseBlindRetryPerformed": false,
+    "initialFailureLimits": "Saved outer request HTTP200/outcome/hash/time captured; decode/page-shape/nested COUNT still indistinguishable. Original SSR receipt not captured by733."
   },
   "cacheBareCanary": {
     "runId": "45950312191",
@@ -628,12 +629,101 @@
       ]
     }
   },
-  "nextStep": "Read only the existing saved stats-list-3 failure metadata, bind SQL hash and time; distinguish decode/page-shape/empty-count-validation and capture the already performed SSR receipt without extra supplier calls. Preserve all acceptance criteria.",
+  "nextStep": "Complete combined controller offline gate, publish exact c6cf serving plan, require green exact-controller CI, then activate the separately bound unchanged live acceptance. Diagnose any actual failure using captured original SSR receipt and bounded saved validation phase. Cleanup activation remains deferred until acceptance.",
   "prohibitions": [
     "No direct supplier diagnostic retry",
     "No visitor IP substitution",
     "No stale-to-fresh relabeling",
     "No deletion of current or rollback generations",
     "No cache DELETE using unsupported preconditions"
-  ]
+  ],
+  "savedPageThreeAudit": {
+    "runId": "45955871473",
+    "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/45955871473",
+    "conclusion": "success",
+    "artifactId": 15177979527,
+    "archiveSha256": "b6c4a1f258bbf08cf493746a5b37a652244f4eebb8f3f972d62bed67e8e2c8b8",
+    "report": {
+      "version": 1,
+      "kind": "japan-page-three-saved-failure-v1",
+      "records": [
+        {
+          "slot": "stats-list-3",
+          "readStatus": "ok",
+          "startedAt": "2026-11-27T06:42:48.352Z",
+          "finishedAt": "2026-11-27T06:42:52.313Z",
+          "kind": "list",
+          "outcome": "invalid_response",
+          "page": 3,
+          "pageSize": 24,
+          "httpStatus": 200,
+          "providerCode": null,
+          "sqlSha256": "aee6a316fe78f521f28c7ad9d23f72d95303ba0aa5363c20132532dc1e64c3d4",
+          "sqlBytes": 3557
+        }
+      ],
+      "supplierRequests": 0,
+      "writes": 0,
+      "attribution": "saved_outer_request_metadata_only",
+      "historyReads": 0,
+      "controllerSha": "3054bd048860f3e9e6ae090bfffc3949085de4c1",
+      "approvedControllerSha": "d4d96d3ebaba557ff602f933d90ffd171fd1d2a6",
+      "runId": "45955871473",
+      "attempt": "1",
+      "checkedAt": "2026-11-27T07:04:03.423Z"
+    },
+    "exactWireHashMatches": true,
+    "savedFailureFinishedBeforeCooldownMs": 3064,
+    "responseValidationPresent": false
+  },
+  "followupControllerCi": {
+    "runId": "45955776751",
+    "controllerSha": "d4d96d3ebaba557ff602f933d90ffd171fd1d2a6",
+    "conclusion": "success",
+    "attempt": 1,
+    "controllerTestsPassed": 1386,
+    "selectedNativeTestsPassed": 479,
+    "finishedAt": "2026-11-27T07:07:10Z"
+  },
+  "diagnosticCandidate": {
+    "runtimeSha": "c6cfb54cc7c9e2b9d30dcdbb7af9cb604b3aa323",
+    "runtimeTree": "5910c0ea5aa53abb73dd80f1790882dd839256f6",
+    "parentRuntime": "73321a180c16d1d432559d572a2ac2b7fdf5cc2b",
+    "changedPathsFrom733": 8,
+    "scope": "catalog-japan-stability-v1",
+    "runtimePaths": 49,
+    "pricingToServingPaths": 111,
+    "runtimeDiffSha256": "44c1e79044f5a03ca2e20982cf416307a139238c93314a3dbe5757ed320b8ea8",
+    "pricingToServingDiffSha256": "d61ad73fe84de5aa84cb00dd23feb61fef421177f20a1a6b89f651c3be979fb8",
+    "runtimeChanges": "Bounded private response validation phase and counters; bounded SSR source receipts bound to page and cursor hash. No source SQL, retry, cooldown, freshness, parser acceptance, admission or pricing change from733.",
+    "controllerChanges": "Capture existing SSR receipt before API page-two continuation. On stability release failure, read saved slots page3, page1, count, latest in that order within the unchanged shared20s/128KiB/64KiB-per-body budget. No supplier diagnostic request.",
+    "validation": {
+      "fullLocalNative": {
+        "tests": 2995,
+        "passed": 2994,
+        "failed": 1,
+        "soleFailure": "The generic progressive test fixture generated invalid JavaScript for the new helper import."
+      },
+      "fixtureCorrection": "Import the actual SSR receipt helper, receipt validator and native crypto in the progressive fixture; retain the same assertions and300ms bound.",
+      "targetedAfterCorrection": {
+        "tests": 6,
+        "passed": 6,
+        "failed": 0
+      },
+      "fullSuiteRerunAfterCorrection": false,
+      "typescript": "passed",
+      "liveAcceptance": "not_started",
+      "combinedController": {
+        "tests": 1398,
+        "passed": 1398,
+        "failed": 0,
+        "frozenSpeedBaselines": "passed",
+        "log": "/tmp/japan-c6cf-controller-native-verified.log"
+      },
+      "localControllerEnvironment": "Initial sparse checkout omitted two required static JSON imports; exact checked-in static reference files restored,19 affected tests then full1398 controller tests passed. Source/test assertions unchanged."
+    },
+    "published": false,
+    "accepted": false,
+    "independentLocalPlanScopeReview": "passed"
+  }
 }

@@ -144,10 +144,15 @@ jobs:
       - name: Preserve bounded saved Japan failure metadata after an unsuccessful publication
         if: failure()
         env:
+          CATALOG_CODE_SCOPE: ${{ steps.photo_scope.outputs.scope }}
           REGCLOUD_S3_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
           REGCLOUD_S3_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
         run: |
-          node scripts/catalog-next/japan-usability-saved-failure-20261126.mjs --run > catalog-next-japan-source-failure-report.json
+          if [[ "$CATALOG_CODE_SCOPE" == 'catalog-japan-stability-v1' ]]; then
+            node scripts/catalog-next/japan-usability-saved-failure-20261126.mjs --run-stability > catalog-next-japan-source-failure-report.json
+          else
+            node scripts/catalog-next/japan-usability-saved-failure-20261126.mjs --run > catalog-next-japan-source-failure-report.json
+          fi
       - name: Preserve aggregate publication and image proof
         if: always()
         uses: actions/upload-artifact@v4

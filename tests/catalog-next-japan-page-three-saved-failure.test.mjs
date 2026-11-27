@@ -4,8 +4,10 @@ import {createHash} from 'node:crypto';
 import fs from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
-import {execFileSync} from 'node:child_process';
-import {inspectSavedFailure,inspectSavedPageThreeFailure,verifySavedPageThreeInvocation,sanitizeSavedResponseValidation}
+import {execFileSync,spawnSync} from 'node:child_process';
+import {fileURLToPath} from 'node:url';
+import {inspectSavedFailure,inspectSavedPageThreeFailure,inspectSavedStabilityFailure,verifySavedPageThreeInvocation,
+ verifySavedStabilityFailureInvocation,sanitizeSavedResponseValidation}
  from '../scripts/catalog-next/japan-usability-saved-failure-20261126.mjs';
 
 const env={REGCLOUD_S3_ACCESS_KEY_ID:'UNITTEST',REGCLOUD_S3_SECRET_ACCESS_KEY:'PRIVATE_SECRET'};
@@ -49,6 +51,116 @@ test('the existing release collector retains its three original slots and origin
  assert.equal(report.kind,'japan-usability-saved-failure-v1');
  assert.deepEqual(report.records.map(row=>row.slot),['stats-list-1','stats-count','stats-latest']);
  assert(report.records.every(row=>row.readStatus==='missing'));
+});
+
+test('stability release reads only page three, page one, count and latest in that order with safe optional validation',async()=>{
+ const calls=[],signals=[];
+ const validation={version:1,phase:'page_shape',code:'row_limit_exceeded',rootKind:'array',rowCount:25,decodedBytes:1024};
+ const report=await inspectSavedStabilityFailure({env,keys:['catalog/CRM/private.json'],fetcher:async(input,options)=>{
+  const url=new URL(input);calls.push(url.pathname);signals.push(options.signal);
+  assert.equal(url.origin,origin);assert.equal(url.search,'');assert.equal(options.method,'GET');
+  assert.equal(options.redirect,'error');assert(options.signal instanceof AbortSignal);
+  assert.match(options.headers.authorization,/^AWS4-HMAC-SHA256 Credential=UNITTEST\//);
+  return new Response(JSON.stringify({...source,...(calls.length===1?{responseValidation:validation}:
+   calls.length===2?{responseValidation:{...validation,body:'PRIVATE_RESPONSE'}}:{})}),{status:200});
+ }});
+ assert.deepEqual(calls,[pageThree,prefix+'integrations/ajes/catalog-failure-pages/stats-list-1.json',
+  prefix+'integrations/ajes/catalog-failure-pages/stats-count.json',prefix+'integrations/ajes/catalog-failure-stats.json']);
+ assert(signals.every(signal=>signal===signals[0]));
+ assert.equal(report.kind,'japan-stability-saved-failure-v1');
+ assert.equal(report.attribution,'saved_outer_request_metadata_only');
+ assert.equal(report.supplierRequests,0);assert.equal(report.writes,0);assert.equal(report.historyReads,0);
+ assert.deepEqual(report.records.map(row=>row.slot),['stats-list-3','stats-list-1','stats-count','stats-latest']);
+ assert(report.records.every(row=>row.readStatus==='ok'));
+ assert.deepEqual(report.records[0].responseValidation,validation);
+ assert(report.records.slice(1).every(row=>!Object.hasOwn(row,'responseValidation')));
+ for(const privateValue of ['PRIVATE_SECRET','PRIVATE_QUERY','203.0.113.17','private.example','PRIVATE_BODY','COMMERCIAL_DATA','PRIVATE_RESPONSE'])
+  assert.equal(JSON.stringify(report).includes(privateValue),false);
+});
+
+test('stability slots share the existing 128 KiB budget and do not reset it after page three',async()=>{
+ const body=JSON.stringify(source).padEnd(64*1024,' ');
+ let calls=0;
+ const report=await inspectSavedStabilityFailure({env,fetcher:async()=>{
+  calls++;return new Response(body,{status:200,headers:{'content-length':String(Buffer.byteLength(body))}});
+ }});
+ assert.equal(calls,2);
+ assert.deepEqual(report.records.map(row=>[row.slot,row.readStatus]),[
+  ['stats-list-3','ok'],['stats-list-1','ok'],['stats-count','byte_limit'],['stats-latest','byte_limit']]);
+});
+
+test('stability page-three collection preserves the 64 KiB body cap before reading an oversized response',async()=>{
+ let calls=0,cancelled=0;
+ const report=await inspectSavedStabilityFailure({env,fetcher:async()=>{
+  calls++;
+  return calls===1?{status:200,headers:new Headers({'content-length':'65537'}),
+   body:{cancel:async()=>{cancelled++;},getReader(){throw Error('must not read');}}}:new Response(null,{status:404});
+ }});
+ assert.equal(calls,4);assert.equal(cancelled,1);
+ assert.deepEqual(report.records.map(row=>row.readStatus),['byte_limit','missing','missing','missing']);
+});
+
+test('all stability reads share one unchanged 20-second deadline without retrying skipped slots',async t=>{
+ const controller=new AbortController(),deadlines=[],signals=[];
+ t.mock.method(AbortSignal,'timeout',milliseconds=>{deadlines.push(milliseconds);return controller.signal;});
+ const report=await inspectSavedStabilityFailure({env,fetcher:async(input,options)=>{
+  signals.push(options.signal);
+  if(signals.length===2)controller.abort();
+  return new Response(null,{status:404});
+ }});
+ assert.deepEqual(deadlines,[20000]);assert.equal(signals.length,2);
+ assert(signals.every(signal=>signal===controller.signal));
+ assert.deepEqual(report.records.map(row=>row.readStatus),['missing','missing','deadline','deadline']);
+});
+
+const stabilityEnvironment={...env,GITHUB_ACTIONS:'true',GITHUB_REPOSITORY_ID:'1289722938',
+ GITHUB_REF:'refs/heads/main',GITHUB_RUN_ATTEMPT:'1',GITHUB_JOB:'release',GITHUB_EVENT_NAME:'push',
+ GITHUB_WORKFLOW_REF:'jeep-jim/AvtoCena/.github/workflows/catalog-next-china-photo-release.yml@refs/heads/main',
+ CATALOG_CODE_SCOPE:'catalog-japan-stability-v1'};
+
+test('the stability CLI gate permits only the exact release workflow, release job and verified stability scope',()=>{
+ assert.doesNotThrow(()=>verifySavedStabilityFailureInvocation({environment:stabilityEnvironment}));
+ assert.doesNotThrow(()=>verifySavedStabilityFailureInvocation({environment:{...stabilityEnvironment,GITHUB_EVENT_NAME:'workflow_dispatch'}}));
+ for(const change of [{GITHUB_ACTIONS:'false'},{GITHUB_REPOSITORY_ID:'1'},{GITHUB_REF:'refs/heads/other'},
+  {GITHUB_RUN_ATTEMPT:'2'},{GITHUB_JOB:'inspect'},{GITHUB_EVENT_NAME:'pull_request'},
+  {CATALOG_CODE_SCOPE:'catalog-japan-pagination24-v1'},{CATALOG_CODE_SCOPE:undefined},
+  {GITHUB_WORKFLOW_REF:stabilityEnvironment.GITHUB_WORKFLOW_REF.replace('catalog-next-china-photo-release','japan-page-three-saved-failure')},
+  {GITHUB_WORKFLOW_REF:stabilityEnvironment.GITHUB_WORKFLOW_REF.replace('@refs/heads/main','@refs/heads/other')}])
+  assert.throws(()=>verifySavedStabilityFailureInvocation({environment:{...stabilityEnvironment,...change}}),
+   /japan_stability_saved_failure_invocation_rejected/);
+});
+
+test('the existing run CLI keeps its old three-slot behavior while the stability CLI is separately gated',()=>{
+ const script=fileURLToPath(new URL('../scripts/catalog-next/japan-usability-saved-failure-20261126.mjs',import.meta.url));
+ const mock='data:text/javascript,'+encodeURIComponent('globalThis.fetch=async()=>new Response(null,{status:404});');
+ const invoke=(mode,changes={})=>{
+  const result=spawnSync(process.execPath,['--import',mock,script,mode],{
+   env:{...process.env,...stabilityEnvironment,...changes},encoding:'utf8',timeout:5000});
+  assert.equal(result.error,undefined);assert.equal(result.stderr,'');
+  return {status:result.status,report:JSON.parse(result.stdout)};
+ };
+ const old=invoke('--run',{CATALOG_CODE_SCOPE:'catalog-japan-pagination24-v1'});
+ assert.equal(old.status,0);assert.equal(old.report.kind,'japan-usability-saved-failure-v1');
+ assert.deepEqual(old.report.records.map(row=>row.slot),['stats-list-1','stats-count','stats-latest']);
+ const stability=invoke('--run-stability');
+ assert.equal(stability.status,0);assert.equal(stability.report.kind,'japan-stability-saved-failure-v1');
+ assert.deepEqual(stability.report.records.map(row=>row.slot),['stats-list-3','stats-list-1','stats-count','stats-latest']);
+ const denied=invoke('--run-stability',{CATALOG_CODE_SCOPE:'catalog-japan-pagination24-v1'});
+ assert.equal(denied.status,1);assert.deepEqual(denied.report,{readStatus:'invocation_rejected',supplierRequests:0,writes:0});
+});
+
+test('release failure hook selects page-three-first capture only for stability and preserves the aggregate artifact',async()=>{
+ const workflow=await fs.readFile(new URL('../.github/workflows/catalog-next-china-photo-release.yml',import.meta.url),'utf8');
+ const hook=workflow.split('      - name: Preserve bounded saved Japan failure metadata after an unsuccessful publication\n')[1]?.split('\n      - name: ')[0];
+ assert(hook);assert(hook.includes('if: failure()'));
+ assert(hook.includes('CATALOG_CODE_SCOPE: ${{ steps.photo_scope.outputs.scope }}'));
+ assert(hook.includes('if [[ "$CATALOG_CODE_SCOPE" == \'catalog-japan-stability-v1\' ]]; then'));
+ assert(hook.includes('--run-stability > catalog-next-japan-source-failure-report.json\n          else\n'));
+ assert(hook.includes('--run > catalog-next-japan-source-failure-report.json\n          fi'));
+ const commands=hook.split('        run: |\n')[1];
+ for(const forbidden of ['${{','ssh ','curl ','history','list-objects','continue-on-error','|| true'])
+  assert.equal(commands.includes(forbidden),false,forbidden);
+ assert(workflow.includes('            catalog-next-japan-source-failure-report.json\n'));
 });
 
 test('invalid metadata cannot leak arbitrary outcomes, provider values or fabricated numeric counts',async()=>{
