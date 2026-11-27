@@ -1,0 +1,38 @@
+name: Cancel only the two stalled Japan preflight runs
+on:
+  push:
+    branches: [main]
+    paths: [.github/market-runs/japan-stalled-preflight-46040340638-cancel.json]
+permissions:
+  contents: read
+  actions: write
+concurrency:
+  group: japan-stalled-preflight-46040340638-cancel
+  cancel-in-progress: false
+jobs:
+  cancel:
+    if: github.repository_id == '1289722938' && github.ref == 'refs/heads/main' && github.run_attempt == '1'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 2
+          persist-credentials: false
+      - name: Verify the separate marker and exact cancellation refusal cases
+        run: |
+          set -euo pipefail
+          node scripts/catalog-next/cancel-japan-stalled-preflight-46040340638.mjs --verify
+          node --import ./tests/helpers/offline-fetch.mjs --test --test-concurrency=1 tests/catalog-next-japan-stalled-preflight-cancel.test.mjs tests/readonly-marker-invocation.test.mjs
+      - name: Recheck both exact preflight jobs and request ordinary cancellation
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: node scripts/catalog-next/cancel-japan-stalled-preflight-46040340638.mjs --cancel
+      - name: Preserve only sanitized cancellation observations
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: japan-stalled-preflight-46040340638-cancellation
+          path: japan-stalled-preflight-46040340638-cancel-report.json
+          if-no-files-found: ignore
+          retention-days: 14

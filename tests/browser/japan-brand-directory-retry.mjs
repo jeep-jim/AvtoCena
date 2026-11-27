@@ -30,6 +30,94 @@ const SCENARIOS = [
     first: 'empty', rail: false, recover: false},
 ];
 
+// These deadlines bound this loopback fixture and its cleanup. They are not
+// application timing criteria and do not change the live acceptance helper.
+const OPERATION_MS = 15_000, CASE_MS = 120_000, CLEANUP_MS = 5000;
+export async function withJapanDirectoryFixtureDeadline(action, timeoutMs) {
+  let timer;
+  try {
+    return await Promise.race([Promise.resolve().then(action), new Promise((_, reject) => {
+      timer = setTimeout(() => {
+        const error = Error('japan_directory_retry_fixture_deadline');
+        error.name = 'TimeoutError'; reject(error);
+      }, timeoutMs);
+    })]);
+  } finally { clearTimeout(timer); }
+}
+
+/** Keep the useful Playwright action log without selectors, URLs or text. */
+export function japanDirectoryFixtureError(error) {
+  const message = typeof error?.message === 'string' ? error.message : '';
+  const action = /^(locator\.(?:click|waitFor|evaluate|evaluateAll|getAttribute)|page\.(?:goto|evaluate|screenshot)):/.exec(message)?.[1] || 'unknown';
+  const tokens = [
+    ['waiting_for_locator', /waiting for (?:locator|getByRole|getByText)/],
+    ['element_not_visible', /element is not visible/],
+    ['element_not_enabled', /element is not enabled/],
+    ['element_not_stable', /element is not stable/],
+    ['element_detached', /element (?:was|is) detached|not attached to the DOM/],
+    ['pointer_intercepted', /intercepts pointer events/],
+    ['click_attempted', /attempting click action/],
+    ['click_retried', /retrying click action/],
+    ['scrolling_into_view', /scrolling into view/],
+    ['waiting_for_navigation', /waiting for.*navigation|waiting for scheduled navigations/],
+  ];
+  return {code: /^japan_(?:directory_retry_fixture|browser_stability)_[a-z_]+$/.test(message)
+    ? message : japanNavigationErrorCode(error), timeout: error?.name === 'TimeoutError', action,
+    actionLog: tokens.filter(([, pattern]) => pattern.test(message)).map(([token]) => token)};
+}
+
+export async function cleanupJapanDirectoryFixture({report, phase, action, persist, timeoutMs = CLEANUP_MS}) {
+  // Preserve the original failure even when Chromium cannot finish closing.
+  await persist();
+  try { await withJapanDirectoryFixtureDeadline(action, timeoutMs); }
+  catch (error) {
+    report.passed = false;
+    (report.cleanupErrors ??= []).push({phase, ...japanDirectoryFixtureError(error)});
+  }
+  await persist();
+}
+
+async function captureFailure(page, error, phase, screenshotPath) {
+  const diagnostic = {phase, ...japanDirectoryFixtureError(error), dom: null, screenshot: 'not_requested'};
+  try {
+    diagnostic.dom = await withJapanDirectoryFixtureDeadline(() => page.evaluate(() => {
+      const visible = node => Boolean(node && node.getClientRects().length
+        && getComputedStyle(node).visibility !== 'hidden' && getComputedStyle(node).display !== 'none');
+      const state = node => ['loading', 'ready', 'unavailable'].includes(node?.getAttribute('data-japan-source-directory-state'))
+        ? node.getAttribute('data-japan-source-directory-state') : null;
+      const retry = node => [...(node?.querySelectorAll('button') || [])]
+        .filter(button => button.textContent.trim() === 'Не удалось загрузить марки. Повторить' && visible(button)).length;
+      return {
+        controls: [...document.querySelectorAll('form.ac-catalog-filter-panel,form[role="dialog"][aria-label="Фильтры каталога"]')]
+          .map(form => {
+            const marker = form.querySelector('button[aria-label="Расширенные фильтры"]');
+            const trigger = form.querySelector('button[aria-label="Выбрать марки автомобилей"]');
+            const dropdown = form.querySelector('.ac-filter-dropdown');
+            return {kind: form.getAttribute('role') === 'dialog' ? 'mobile' : 'desktop', visible: visible(form),
+              busy: form.getAttribute('aria-busy') === 'true',
+              hydrationMarker: marker ? {disabled: marker.disabled, busy: marker.getAttribute('aria-busy') === 'true'} : null,
+              brand: trigger ? {visible: visible(trigger), disabled: trigger.disabled,
+                expanded: trigger.getAttribute('aria-expanded') === 'true'} : null,
+              dropdown: dropdown ? {visible: visible(dropdown), state: state(dropdown),
+                options: dropdown.querySelectorAll('button[data-facet-value]').length, retryButtons: retry(dropdown)} : null};
+          }),
+        rails: [...document.querySelectorAll('main.ac-ajes-catalog section.ac-brand-rail')]
+          .map(rail => ({visible: visible(rail), state: state(rail), retryButtons: retry(rail)})),
+        visibleCards: [...document.querySelectorAll('main.ac-ajes-catalog article.ac-catalog-card')].filter(visible).length,
+      };
+    }), CLEANUP_MS);
+  } catch (failure) { diagnostic.domError = japanDirectoryFixtureError(failure); }
+  if (screenshotPath) {
+    try {
+      await fs.mkdir(path.dirname(screenshotPath), {recursive: true});
+      await withJapanDirectoryFixtureDeadline(() => page.screenshot({path: screenshotPath, fullPage: true,
+        timeout: CLEANUP_MS, animations: 'disabled'}), CLEANUP_MS);
+      diagnostic.screenshot = 'saved';
+    } catch (failure) { diagnostic.screenshot = 'failed'; diagnostic.screenshotError = japanDirectoryFixtureError(failure); }
+  }
+  return diagnostic;
+}
+
 /** Reuse the exact-runtime SSR fixture, adding only local server-prop delivery
  * for Next router.refresh. The real BrandLogoRail and CatalogFilters own their
  * states, Retry buttons and caches. A refresh remounts the controls, as a server
@@ -74,11 +162,33 @@ async function main() {
     scope: 'Verified runtime controls and rail with actual controller retry helper; local metadata and router.refresh server-prop adapter',
     runtimeSha: null, runtimeTree: null, playwrightVersion: null, browserVersion: null,
     productionRequests: 0, supplierRequests: 0, forbiddenTransportAttempts: 0, cases: []};
-  let fixture, browser, server, active, activeCase = 'setup';
+  let fixture, browser, server, active, activeCase = 'setup', activePhase = 'setup', reportCreated = false;
+  const persist = async () => {
+    report.caseCount = report.cases.length;
+    if (process.env.JAPAN_BRAND_DIRECTORY_RETRY_REPORT) {
+      const destination = path.resolve(process.env.JAPAN_BRAND_DIRECTORY_RETRY_REPORT);
+      await fs.mkdir(path.dirname(destination), {recursive: true});
+      await fs.writeFile(destination, JSON.stringify(report, null, 2) + '\n',
+        {flag: reportCreated ? 'w' : 'wx', mode: 0o600});
+      reportCreated = true;
+    }
+  };
+  const checkpoint = phase => {
+    activePhase = phase; report.activePhase = phase;
+    console.log('JAPAN_BRAND_DIRECTORY_RETRY_PROGRESS', JSON.stringify({case: activeCase, phase,
+      metadataRequests: active?.metadataRequests ?? 0, railRequests: active?.railRequests ?? 0}));
+  };
+  const cleanup = async (phase, action) => {
+    checkpoint(phase);
+    await cleanupJapanDirectoryFixture({report, phase, action, persist});
+    if (report.cleanupErrors) process.exitCode = 1;
+  };
   try {
+    checkpoint('setup');
     need(process.argv.length === 2, 'arguments');
     const plan = JSON.parse(await fs.readFile(path.join(ROOT, '.github/operations/catalog-next/china-code-serving-plan.json'), 'utf8'));
-    fixture = await prepareJapanBrandDirectoryRetryFixture(process.env.PHOTO_RUNTIME_ROOT, plan);
+    checkpoint('prepare_runtime');
+    fixture = await withJapanDirectoryFixtureDeadline(() => prepareJapanBrandDirectoryRetryFixture(process.env.PHOTO_RUNTIME_ROOT, plan), 60_000);
     Object.assign(report, {runtimeSha: plan.runtimeSha, runtimeTree: plan.runtimeTree, componentSha256: fixture.sources,
       controllerHelperSha256: hash(await fs.readFile(path.join(ROOT, 'scripts/catalog-next/japan-stability-browser.mjs')))});
     need(path.isAbsolute(process.env.PLAYWRIGHT_MODULE || '') && path.isAbsolute(process.env.CHROME_BIN || ''), 'browser_environment');
@@ -119,19 +229,34 @@ async function main() {
           + '</script><script defer src="/fixture.js"></script></body></html>');
       } catch { report.forbiddenTransportAttempts++; response.writeHead(400); response.end(); }
     });
-    await new Promise((resolve, reject) => { server.once('error', reject); server.listen(0, '127.0.0.1', resolve); });
+    checkpoint('start_loopback');
+    await withJapanDirectoryFixtureDeadline(() => new Promise((resolve, reject) => {
+      server.once('error', reject); server.listen(0, '127.0.0.1', resolve);
+    }), OPERATION_MS);
     const loopback = 'http://127.0.0.1:' + server.address().port;
     const {chromium} = await import(process.env.PLAYWRIGHT_MODULE);
-    browser = await chromium.launch({headless: true, executablePath: process.env.CHROME_BIN, args: ['--no-sandbox', '--disable-background-networking']});
+    checkpoint('launch_browser');
+    browser = await chromium.launch({headless: true, executablePath: process.env.CHROME_BIN, timeout: 30_000,
+      args: ['--no-sandbox', '--disable-background-networking']});
     const version = browser.version(); report.browserVersion = /^\d+(?:\.\d+){1,4}$/.test(version) ? version : null;
     for (const scenario of SCENARIOS) {
       activeCase = scenario.name;
       const state = active = {scenario, metadataRequests: 0, railRequests: 0, fallbackObservations: 0};
-      const context = await browser.newContext({viewport: {width: scenario.width, height: 1000}, locale: 'ru-RU', serviceWorkers: 'block'});
-      const page = await context.newPage(), errors = [], progress = {};
+      checkpoint('create_context');
+      const context = await withJapanDirectoryFixtureDeadline(() => browser.newContext({viewport: {width: scenario.width, height: 1000},
+        locale: 'ru-RU', serviceWorkers: 'block'}), OPERATION_MS);
+      context.setDefaultTimeout(OPERATION_MS); context.setDefaultNavigationTimeout(OPERATION_MS);
+      checkpoint('create_page');
+      const page = await withJapanDirectoryFixtureDeadline(() => context.newPage(), OPERATION_MS), errors = [];
+      const progress = new Proxy({}, {set(target, key, value) {
+        Reflect.set(target, key, value);
+        if (key === 'phase') checkpoint('helper_' + value);
+        return true;
+      }});
       report.activeProgress = progress;
       page.on('pageerror', error => errors.push(japanNavigationErrorCode(error)));
-      await context.route('**/*', async route => {
+      checkpoint('install_loopback_route');
+      await withJapanDirectoryFixtureDeadline(() => context.route('**/*', async route => {
         const request = route.request(), url = new URL(request.url());
         const allowed = url.origin === ORIGIN && request.method() === 'GET' && (url.href === INITIAL_URL
           || ['/fixture.js', '/fixture.css', '/api/catalog/brand-counts', '/fixture-rail'].includes(url.pathname)
@@ -143,12 +268,15 @@ async function main() {
           need([200, 503].includes(response.status()), 'loopback_response'); await route.fulfill({response});
         } catch { await route.abort('failed').catch(() => {}); }
         finally { if (response) await response.dispose().catch(() => {}); }
-      });
+      }), OPERATION_MS);
       try {
+        await withJapanDirectoryFixtureDeadline(async () => {
+        checkpoint('navigate_document');
         await page.goto(INITIAL_URL, {waitUntil: 'domcontentloaded', timeout: 15_000});
         const mobile = scenario.width < 1024;
         let controls;
         if (mobile) {
+          checkpoint('open_mobile_controls');
           const open = page.locator('button.ac-filter-more-button:enabled[aria-busy="false"]:visible');
           await open.waitFor({state: 'visible', timeout: 5000});
           need(!await page.locator('form.ac-catalog-filter-panel').isVisible(), 'mobile_desktop_form_hidden');
@@ -157,7 +285,8 @@ async function main() {
           await page.locator('form[role="dialog"][aria-label="Фильтры каталога"][aria-busy="false"]')
             .waitFor({state: 'visible', timeout: 5000});
           need(await controls.evaluate(form => form.tagName === 'FORM'), 'actual_mobile_dialog');
-        } else controls = await waitForJapanStabilityControls(page);
+        } else { checkpoint('wait_desktop_controls'); controls = await waitForJapanStabilityControls(page); }
+        checkpoint('initial_selection');
         const before = await controls.evaluate(form => JSON.stringify([...new FormData(form)].sort()));
         await controls.evaluate(form => { window.__fixtureOriginalControls = form; });
         const rail = scenario.rail ? page.locator('main.ac-ajes-catalog section.ac-brand-rail') : undefined;
@@ -167,6 +296,7 @@ async function main() {
         }
         let outcome, rejected;
         try {
+          checkpoint('check_directory');
           outcome = await checkJapanStabilityBrandControl({view: page, controls, rail, visibleRows: VISIBLE_ROWS, progress,
             onResponse: async ({data, status}) => {
               const dropdown = controls.locator('.ac-filter-dropdown[data-japan-source-directory-state]');
@@ -180,8 +310,9 @@ async function main() {
               }
             }});
         } catch (error) { rejected = error; }
+        if (scenario.recover && rejected) throw rejected;
+        checkpoint('verify_directory_result');
         if (scenario.recover) {
-          if (rejected) throw rejected;
           need(outcome.proof.completeSourceCovered === true && outcome.proof.fallbackOnly === false
             && outcome.proof.selectionUnchanged === true && outcome.proof.metadataRequests === 2
             && outcome.proof.dropdownRetryUsed === true && outcome.proof.railRetryUsed === scenario.rail
@@ -195,6 +326,7 @@ async function main() {
             // opening again or waiting for a third metadata response.
             const remounted = await waitForJapanStabilityControls(page);
             const trigger = remounted.locator('button[aria-label="Выбрать марки автомобилей"]:visible');
+            checkpoint('reopen_warm_directory');
             await trigger.click();
             const warm = remounted.locator('.ac-filter-dropdown[data-japan-source-directory-state="ready"]');
             await warm.waitFor({state: 'visible', timeout: 5000});
@@ -218,6 +350,7 @@ async function main() {
           && progress.railFallback.completeSourceCovered === false && progress.railFallback.fallbackOnly === true,
         'rail_fallback_never_certifies_completeness');
         const afterControls = mobile ? controls : await waitForJapanStabilityControls(page);
+        checkpoint('verify_unchanged_selection');
         if (mobile) await page.locator('form[role="dialog"][aria-label="Фильтры каталога"][aria-busy="false"]')
           .waitFor({state: 'visible', timeout: 5000});
         need(page.url() === INITIAL_URL && before === await afterControls.evaluate(form => JSON.stringify([...new FormData(form)].sort())), 'selection_and_city_unchanged');
@@ -226,6 +359,7 @@ async function main() {
           && errors.length === 0 && await page.evaluate(() => window.__japanCityFixture.errors.length) === 0
           && report.forbiddenTransportAttempts === 0, 'bounded_clean_journey');
         if (mobile) {
+          checkpoint('close_mobile_controls');
           await controls.getByRole('button', {name: 'Свернуть фильтры', exact: true}).click();
           await controls.waitFor({state: 'hidden', timeout: 5000});
           need(page.url() === INITIAL_URL, 'mobile_close_preserves_selection');
@@ -239,25 +373,43 @@ async function main() {
           controlsRemounted: scenario.rail, cachedSuccessReusedAfterRemount: scenario.rail,
           fallbackObservations: state.fallbackObservations,
           ...(outcome ? {proof: outcome.proof} : {refusalCode: rejected.message}), progress});
-      } finally { await context.close(); active = null; }
+        checkpoint('case_complete');
+        }, CASE_MS);
+      } catch (error) {
+        const destination = process.env.JAPAN_BRAND_DIRECTORY_RETRY_REPORT;
+        report.failure = await captureFailure(page, error, activePhase,
+          destination ? path.resolve(destination).replace(/\.json$/, '') + '-failure.png' : null);
+        report.failure.helperPhase = progress.phase ?? null;
+        report.error = {case: activeCase, phase: report.failure.phase, ...japanDirectoryFixtureError(error)};
+        console.log('JAPAN_BRAND_DIRECTORY_RETRY_FAILURE', JSON.stringify({case: activeCase,
+          ...report.failure, progress}));
+        throw error;
+      } finally { await cleanup('close_context', () => context.close()); active = null; }
+      if (report.cleanupErrors) break;
     }
-    delete report.activeProgress; report.passed = report.cases.length === SCENARIOS.length;
+    delete report.activeProgress; report.passed = report.cases.length === SCENARIOS.length && !report.cleanupErrors;
   } catch (error) {
-    report.error = {case: activeCase,
-      code: /^japan_(?:directory_retry_fixture|browser_stability)_[a-z_]+$/.test(error?.message || '') ? error.message : japanNavigationErrorCode(error)};
+    report.error = {case: activeCase, phase: report.failure?.phase ?? activePhase, ...japanDirectoryFixtureError(error)};
     process.exitCode = 1;
   } finally {
-    if (browser) await browser.close().catch(() => {});
-    if (server?.listening) { server.closeAllConnections(); await new Promise(resolve => server.close(resolve)); }
-    if (fixture) await fs.rm(fixture.temporary, {recursive: true, force: true});
-    report.caseCount = report.cases.length;
-    if (process.env.JAPAN_BRAND_DIRECTORY_RETRY_REPORT) {
-      const destination = path.resolve(process.env.JAPAN_BRAND_DIRECTORY_RETRY_REPORT);
-      await fs.mkdir(path.dirname(destination), {recursive: true});
-      await fs.writeFile(destination, JSON.stringify(report, null, 2) + '\n', {flag: 'wx', mode: 0o600});
-    }
+    if (browser) await cleanup('close_browser', () => browser.close());
+    if (server?.listening) await cleanup('close_loopback', () => {
+      server.closeAllConnections(); return new Promise(resolve => server.close(resolve));
+    });
+    if (fixture) await cleanup('remove_temporary_fixture', () => fs.rm(fixture.temporary, {recursive: true, force: true}));
+    await persist();
     console.log('JAPAN_BRAND_DIRECTORY_RETRY_BROWSER', JSON.stringify(report));
   }
+  return report;
 }
 
-if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) await main();
+if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  const report = await main();
+  // An unfinished bundle/browser operation can retain a transport even when
+  // its resource was never assigned. Flush the saved failure summary, then
+  // terminate only this standalone fixture, never an importing test process.
+  if (!report.passed) {
+    await withJapanDirectoryFixtureDeadline(() => new Promise(resolve => process.stdout.write('', resolve)), CLEANUP_MS).catch(() => {});
+    process.exit(1);
+  }
+}

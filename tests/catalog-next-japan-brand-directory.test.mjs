@@ -13,6 +13,8 @@ import {JAPAN_STABILITY_BRANDS_API, checkedJapanStabilityBrandDirectory,
   verifyJapanStabilityBrandRequestCount}
   from '../scripts/catalog-next/japan-stability-browser.mjs';
 import {japanBrandDirectoryRequirement, runJapanBrowserAcceptance} from '../scripts/catalog-next/japan-browser-acceptance.mjs';
+import {withJapanDirectoryFixtureDeadline, japanDirectoryFixtureError, cleanupJapanDirectoryFixture}
+  from './browser/japan-brand-directory-retry.mjs';
 
 const ORIGIN = 'https://avtocena.com', now = Date.parse('2026-11-27T13:00:00Z');
 const payload = () => ({generationId: new Date(now - 1000).toISOString(), stale: false,
@@ -310,8 +312,53 @@ test('both workflows require actual directory retry fixtures on verified runtime
     const after = name.startsWith('verify-') ? 'Test the native runtime' : 'Publish the code with existing China bytes';
     assert(steps.findIndex(step => step.startsWith('name: ' + after)) > index);
     assert(steps.slice(index + 1).some(step => step.includes('actions/upload-artifact@v4')
-      && step.includes('japan-brand-directory-retry-browser-report.json')));
+      && step.includes('japan-brand-directory-retry-browser-report.json')
+      && step.includes('japan-brand-directory-retry-browser-report-failure.png')));
   }
+});
+
+test('fixture deadlines fail a pending operation and preserve completed results and original errors', async () => {
+  assert.equal(await withJapanDirectoryFixtureDeadline(async () => 24, 100), 24);
+  const original = Error('controlled_operation_failure');
+  await assert.rejects(withJapanDirectoryFixtureDeadline(() => { throw original; }, 100), error => error === original);
+  await assert.rejects(withJapanDirectoryFixtureDeadline(() => new Promise(() => {}), 5),
+    error => error.name === 'TimeoutError' && error.message === 'japan_directory_retry_fixture_deadline');
+});
+
+test('never-settling fixture cleanup retains its original failure report and cannot turn it into a pass', async t => {
+  const temporary = await fs.mkdtemp(path.join(os.tmpdir(), 'japan-retry-cleanup-'));
+  t.after(() => fs.rm(temporary, {recursive: true, force: true}));
+  const file = path.join(temporary, 'report.json');
+  const report = {passed: false, error: {phase: 'helper_metadata_initial', code: 'timeout'},
+    failure: {screenshot: 'saved', actionLog: ['pointer_intercepted']}};
+  let writes = 0, closeStarted = false;
+  await cleanupJapanDirectoryFixture({report, phase: 'close_context', timeoutMs: 5,
+    persist: async () => { writes++; await fs.writeFile(file, JSON.stringify(report)); },
+    action: async () => {
+      closeStarted = true;
+      assert.equal(writes, 1);
+      assert.deepEqual(JSON.parse(await fs.readFile(file, 'utf8')), report);
+      await new Promise(() => {});
+    }});
+  const saved = JSON.parse(await fs.readFile(file, 'utf8'));
+  assert.equal(closeStarted, true); assert.equal(writes, 2); assert.equal(saved.passed, false);
+  assert.deepEqual(saved.error, {phase: 'helper_metadata_initial', code: 'timeout'});
+  assert.deepEqual(saved.failure, {screenshot: 'saved', actionLog: ['pointer_intercepted']});
+  assert.equal(saved.cleanupErrors[0].phase, 'close_context');
+  assert.equal(saved.cleanupErrors[0].code, 'japan_directory_retry_fixture_deadline');
+  assert.equal(saved.cleanupErrors[0].timeout, true);
+});
+
+test('fixture action diagnostics retain only known enums without exception URLs, selectors or text', () => {
+  const error = Error('locator.click: Timeout 15000ms exceeded.\nCall log:\n'
+    + 'waiting for locator("[data-secret=private-value]") at https://private.example/secret?token=abc\n'
+    + 'attempting click action\nelement is not visible\nprivate-overlay intercepts pointer events\nretrying click action');
+  error.name = 'TimeoutError';
+  assert.deepEqual(japanDirectoryFixtureError(error), {code: 'timeout', timeout: true, action: 'locator.click',
+    actionLog: ['waiting_for_locator', 'element_not_visible', 'pointer_intercepted', 'click_attempted', 'click_retried']});
+  assert.doesNotMatch(JSON.stringify(japanDirectoryFixtureError(error)), /private|secret|token|abc|https/);
+  assert.deepEqual(japanDirectoryFixtureError(Error('unknown-private-value')), {
+    code: 'unknown', timeout: false, action: 'unknown', actionLog: []});
 });
 
 test('brand requirement environment is exact and cannot be requested in an older browser scope', async t => {

@@ -195,6 +195,7 @@ jobs:
             ${{ runner.temp }}/japan-legacy-redirect-browser-report.json
             ${{ runner.temp }}/japan-model-controls-ready-browser-report.json
             ${{ runner.temp }}/japan-brand-directory-retry-browser-report.json
+            ${{ runner.temp }}/japan-brand-directory-retry-browser-report-failure.png
             ${{ runner.temp }}/japan-catalog-city-report.json
             catalog-next-photo-browser-report.json
             artifacts/catalog-photo-live/**
