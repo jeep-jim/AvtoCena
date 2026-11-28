@@ -1,4 +1,5 @@
 import {JAPAN_PAGINATION_CODE_PATHS} from './japan-pagination-code-scope.mjs';
+import {createHash} from 'node:crypto';
 
 /** Exact Japan-only delta from accepted a5ca to the reviewed source plan.
  * The source plan separately pins the complete SHA, tree and binary diff hash.
@@ -202,10 +203,39 @@ export const JAPAN_STABILITY_MODEL_CURSOR_CODE_PATHS = Object.freeze([
   'tests/ajes-model-recovery.test.ts',
   'tests/japan-model-directory-metadata.test.ts',
 ]);
+/** The next exact delta restores source order and independent visible counts.
+ * Its predecessor is the accepted cursor repair; historical profiles stay exact. */
+export const JAPAN_STABILITY_SOURCE_PRICE_ORDER_RETAINED_RUNTIME = '5b1e513dc9af3735e3b757c6fe7da763aa92837e';
+export const JAPAN_STABILITY_SOURCE_PRICE_ORDER_RETAINED_IMAGE = 'sha256:164288e7d6f3836982d440e255727a7bcfa566b2c98acd54f31e0e0f724540d6';
+export const JAPAN_STABILITY_SOURCE_PRICE_ORDER_CODE_PATHS = Object.freeze([
+  'apps/web/components/catalog/AjesCatalog.tsx',
+  'apps/web/components/catalog/AjesRail.tsx',
+  'apps/web/components/catalog/CatalogCard.tsx',
+  'apps/web/components/catalog/CatalogSortSelect.tsx',
+  'apps/web/components/catalog/JapanCatalogCount.tsx',
+  'apps/web/components/catalog/japan-count-request.ts',
+  'apps/web/components/home/HomeJapanFilteredRail.tsx',
+  'apps/web/lib/catalog/ajes-catalog.ts',
+  'apps/web/lib/catalog/ajes-count-display.ts',
+  'apps/web/lib/catalog/ajes-query.ts',
+  'apps/web/lib/catalog/catalog-sort.ts',
+  'apps/web/lib/catalog/japan-source-power-query.ts',
+  'tests/ajes-catalog-count-continuation.test.ts',
+  'tests/ajes-catalog-progressive.test.ts',
+  'tests/ajes-count-display.test.ts',
+  'tests/ajes-model-cursor-continuity.test.ts',
+  'tests/ajes-source-count-display.test.ts',
+  'tests/home-japan-preview.test.ts',
+  'tests/japan-auction-sort-label.test.ts',
+  'tests/japan-count-lifecycle.test.ts',
+  'tests/japan-rail-visibility.test.ts',
+  'tests/japan-source-power-query.test.ts',
+  'tests/japan-source-power.test.ts',
+]);
 const reviewedProfiles = Object.freeze([JAPAN_STABILITY_CODE_PATHS, JAPAN_STABILITY_UI_CODE_PATHS,
   JAPAN_STABILITY_POWER_CODE_PATHS, JAPAN_STABILITY_RAILS_CODE_PATHS, JAPAN_STABILITY_HOME_CODE_PATHS,
   JAPAN_STABILITY_METADATA_CODE_PATHS, JAPAN_STABILITY_PRICE_SORT_CODE_PATHS, JAPAN_STABILITY_EXACT_COUNT_CODE_PATHS,
-  JAPAN_STABILITY_SOURCE_COUNT_CODE_PATHS, JAPAN_STABILITY_MODEL_CURSOR_CODE_PATHS]);
+  JAPAN_STABILITY_SOURCE_COUNT_CODE_PATHS, JAPAN_STABILITY_MODEL_CURSOR_CODE_PATHS, JAPAN_STABILITY_SOURCE_PRICE_ORDER_CODE_PATHS]);
 
 export function japanStabilityCodePaths(plan) {
   const files = plan?.runtimeFiles;
@@ -218,17 +248,19 @@ export function isExactJapanStabilityScope(plan) {
   return JAPAN_STABILITY_CODE_PATHS.length > 0
     && JAPAN_PAGINATION_CODE_PATHS.every(name => JAPAN_STABILITY_CODE_PATHS.includes(name))
     && plan?.codeScope === JAPAN_STABILITY_CODE_SCOPE
-    && plan.retainedRuntime === (paths === JAPAN_STABILITY_MODEL_CURSOR_CODE_PATHS
+    && plan.retainedRuntime === (paths === JAPAN_STABILITY_SOURCE_PRICE_ORDER_CODE_PATHS
+      ? JAPAN_STABILITY_SOURCE_PRICE_ORDER_RETAINED_RUNTIME : paths === JAPAN_STABILITY_MODEL_CURSOR_CODE_PATHS
       ? JAPAN_STABILITY_MODEL_CURSOR_RETAINED_RUNTIME : paths === JAPAN_STABILITY_SOURCE_COUNT_CODE_PATHS
       ? JAPAN_STABILITY_SOURCE_COUNT_RETAINED_RUNTIME : paths === JAPAN_STABILITY_EXACT_COUNT_CODE_PATHS
       ? JAPAN_STABILITY_EXACT_COUNT_RETAINED_RUNTIME : paths === JAPAN_STABILITY_PRICE_SORT_CODE_PATHS
         ? JAPAN_STABILITY_PRICE_SORT_RETAINED_RUNTIME : JAPAN_STABILITY_RETAINED_RUNTIME)
     && paths !== null
     && ([JAPAN_STABILITY_HOME_CODE_PATHS, JAPAN_STABILITY_METADATA_CODE_PATHS, JAPAN_STABILITY_PRICE_SORT_CODE_PATHS,
-      JAPAN_STABILITY_EXACT_COUNT_CODE_PATHS, JAPAN_STABILITY_SOURCE_COUNT_CODE_PATHS, JAPAN_STABILITY_MODEL_CURSOR_CODE_PATHS].includes(paths)
+      JAPAN_STABILITY_EXACT_COUNT_CODE_PATHS, JAPAN_STABILITY_SOURCE_COUNT_CODE_PATHS, JAPAN_STABILITY_MODEL_CURSOR_CODE_PATHS,
+      JAPAN_STABILITY_SOURCE_PRICE_ORDER_CODE_PATHS].includes(paths)
       ? plan.acceptancePolicy === JAPAN_OBSERVED_TIMING_POLICY
       : plan.acceptancePolicy === undefined)
-    && ([JAPAN_STABILITY_SOURCE_COUNT_CODE_PATHS, JAPAN_STABILITY_MODEL_CURSOR_CODE_PATHS].includes(paths) ? plan.countAcceptance === JAPAN_SOURCE_COUNT_POLICY
+    && ([JAPAN_STABILITY_SOURCE_COUNT_CODE_PATHS, JAPAN_STABILITY_MODEL_CURSOR_CODE_PATHS, JAPAN_STABILITY_SOURCE_PRICE_ORDER_CODE_PATHS].includes(paths) ? plan.countAcceptance === JAPAN_SOURCE_COUNT_POLICY
       : plan.countAcceptance === undefined || (paths === JAPAN_STABILITY_EXACT_COUNT_CODE_PATHS
         && plan.countAcceptance === JAPAN_SOURCE_BOUNDED_INCREMENTAL_POLICY));
 }
@@ -238,7 +270,8 @@ export function japanObservedTimingRequired(plan) {
   if (!isExactJapanStabilityScope(plan)) throw Error('japan_stability_observed_timing_scope');
   return [JAPAN_STABILITY_HOME_CODE_PATHS, JAPAN_STABILITY_METADATA_CODE_PATHS,
     JAPAN_STABILITY_PRICE_SORT_CODE_PATHS, JAPAN_STABILITY_EXACT_COUNT_CODE_PATHS,
-    JAPAN_STABILITY_SOURCE_COUNT_CODE_PATHS, JAPAN_STABILITY_MODEL_CURSOR_CODE_PATHS].includes(japanStabilityCodePaths(plan));
+    JAPAN_STABILITY_SOURCE_COUNT_CODE_PATHS, JAPAN_STABILITY_MODEL_CURSOR_CODE_PATHS,
+    JAPAN_STABILITY_SOURCE_PRICE_ORDER_CODE_PATHS].includes(japanStabilityCodePaths(plan));
 }
 
 export function japanPowerOrderRequired(plan) {
@@ -247,7 +280,8 @@ export function japanPowerOrderRequired(plan) {
   return [JAPAN_STABILITY_POWER_CODE_PATHS, JAPAN_STABILITY_RAILS_CODE_PATHS,
     JAPAN_STABILITY_HOME_CODE_PATHS, JAPAN_STABILITY_METADATA_CODE_PATHS,
     JAPAN_STABILITY_PRICE_SORT_CODE_PATHS, JAPAN_STABILITY_EXACT_COUNT_CODE_PATHS,
-    JAPAN_STABILITY_SOURCE_COUNT_CODE_PATHS, JAPAN_STABILITY_MODEL_CURSOR_CODE_PATHS].includes(japanStabilityCodePaths(plan));
+    JAPAN_STABILITY_SOURCE_COUNT_CODE_PATHS, JAPAN_STABILITY_MODEL_CURSOR_CODE_PATHS,
+    JAPAN_STABILITY_SOURCE_PRICE_ORDER_CODE_PATHS].includes(japanStabilityCodePaths(plan));
 }
 
 export function japanBrandDirectoryRequired(plan) {
@@ -255,14 +289,16 @@ export function japanBrandDirectoryRequired(plan) {
   if (!isExactJapanStabilityScope(plan)) throw Error('japan_stability_brand_directory_scope');
   return [JAPAN_STABILITY_RAILS_CODE_PATHS, JAPAN_STABILITY_HOME_CODE_PATHS,
     JAPAN_STABILITY_METADATA_CODE_PATHS, JAPAN_STABILITY_PRICE_SORT_CODE_PATHS, JAPAN_STABILITY_EXACT_COUNT_CODE_PATHS,
-    JAPAN_STABILITY_SOURCE_COUNT_CODE_PATHS, JAPAN_STABILITY_MODEL_CURSOR_CODE_PATHS].includes(japanStabilityCodePaths(plan));
+    JAPAN_STABILITY_SOURCE_COUNT_CODE_PATHS, JAPAN_STABILITY_MODEL_CURSOR_CODE_PATHS,
+    JAPAN_STABILITY_SOURCE_PRICE_ORDER_CODE_PATHS].includes(japanStabilityCodePaths(plan));
 }
 
 export function japanPriceSortRequired(plan) {
   if (plan?.codeScope !== JAPAN_STABILITY_CODE_SCOPE) return false;
   if (!isExactJapanStabilityScope(plan)) throw Error('japan_stability_price_sort_scope');
   return [JAPAN_STABILITY_PRICE_SORT_CODE_PATHS, JAPAN_STABILITY_EXACT_COUNT_CODE_PATHS,
-    JAPAN_STABILITY_SOURCE_COUNT_CODE_PATHS, JAPAN_STABILITY_MODEL_CURSOR_CODE_PATHS].includes(japanStabilityCodePaths(plan));
+    JAPAN_STABILITY_SOURCE_COUNT_CODE_PATHS, JAPAN_STABILITY_MODEL_CURSOR_CODE_PATHS,
+    JAPAN_STABILITY_SOURCE_PRICE_ORDER_CODE_PATHS].includes(japanStabilityCodePaths(plan));
 }
 
 export function japanExactCountRequired(plan) {
@@ -285,7 +321,7 @@ export function japanLiteralFamilyRequired(plan) {
   if (plan?.codeScope !== JAPAN_STABILITY_CODE_SCOPE) return false;
   if (!isExactJapanStabilityScope(plan)) throw Error('japan_stability_literal_family_scope');
   return [JAPAN_STABILITY_EXACT_COUNT_CODE_PATHS, JAPAN_STABILITY_SOURCE_COUNT_CODE_PATHS,
-    JAPAN_STABILITY_MODEL_CURSOR_CODE_PATHS].includes(japanStabilityCodePaths(plan));
+    JAPAN_STABILITY_MODEL_CURSOR_CODE_PATHS, JAPAN_STABILITY_SOURCE_PRICE_ORDER_CODE_PATHS].includes(japanStabilityCodePaths(plan));
 }
 
 export function japanSourceBoundedAcceptancePassed(report) {
@@ -295,13 +331,20 @@ export function japanSourceBoundedAcceptancePassed(report) {
 export function japanSourceCountRequired(plan) {
   if (plan?.codeScope !== JAPAN_STABILITY_CODE_SCOPE) return false;
   if (!isExactJapanStabilityScope(plan)) throw Error('japan_stability_source_count_scope');
-  return [JAPAN_STABILITY_SOURCE_COUNT_CODE_PATHS, JAPAN_STABILITY_MODEL_CURSOR_CODE_PATHS].includes(japanStabilityCodePaths(plan));
+  return [JAPAN_STABILITY_SOURCE_COUNT_CODE_PATHS, JAPAN_STABILITY_MODEL_CURSOR_CODE_PATHS,
+    JAPAN_STABILITY_SOURCE_PRICE_ORDER_CODE_PATHS].includes(japanStabilityCodePaths(plan));
 }
 
 export function japanA4Power160ContinuationRequired(plan) {
   if (plan?.codeScope !== JAPAN_STABILITY_CODE_SCOPE) return false;
   if (!isExactJapanStabilityScope(plan)) throw Error('japan_stability_a4_power160_continuation_scope');
-  return japanStabilityCodePaths(plan) === JAPAN_STABILITY_MODEL_CURSOR_CODE_PATHS;
+  return [JAPAN_STABILITY_MODEL_CURSOR_CODE_PATHS, JAPAN_STABILITY_SOURCE_PRICE_ORDER_CODE_PATHS].includes(japanStabilityCodePaths(plan));
+}
+
+export function japanSourcePriceOrderRequired(plan) {
+  if (plan?.codeScope !== JAPAN_STABILITY_CODE_SCOPE) return false;
+  if (!isExactJapanStabilityScope(plan)) throw Error('japan_stability_source_price_order_scope');
+  return japanStabilityCodePaths(plan) === JAPAN_STABILITY_SOURCE_PRICE_ORDER_CODE_PATHS;
 }
 
 /** The marker is a code-transition contract, never a daily generation policy. */
@@ -354,14 +397,14 @@ function sourceCountCursor(value) {
 
 /** Candidate counts are accepted only with their own source and UI evidence.
  * Data freshness is separate from request duration; elapsed speed is not a gate. */
-export function japanSourceCountAcceptancePassed(report) {
+export function japanSourceCountAcceptancePassed(report, {auctionDatabaseLabel = false} = {}) {
   const proof = report?.checks?.sourceCount, summary = proof?.summary, source = summary?.sourceCountProof;
   const ui = proof?.ui, pagination = proof?.pagination;
   const checkedAt = Date.parse(report?.checkedAt), observedAt = Date.parse(summary?.observedAt);
   const integer = value => Number.isSafeInteger(value) && value >= 0;
   const hash64 = value => typeof value === 'string' && /^[a-f0-9]{64}$/.test(value);
   const totalText = integer(summary?.total) ? String(summary.total).replace(/\B(?=(\d{3})+(?!\d))/g, ' ') : undefined;
-  return report?.countAcceptance === JAPAN_SOURCE_COUNT_POLICY && japanModelCoverageAcceptancePassed(report)
+  return typeof auctionDatabaseLabel === 'boolean' && report?.countAcceptance === JAPAN_SOURCE_COUNT_POLICY && japanModelCoverageAcceptancePassed(report)
     && report.japanSourceCountRequired === true && report.japanSourceCountPassed === true
     && proof?.contract === 'japan-source-count-browser-v1'
     && integer(summary?.total) && summary.total > 0 && summary.stale === false
@@ -382,7 +425,7 @@ export function japanSourceCountAcceptancePassed(report) {
     && ui.observedAt === summary.observedAt && integer(ui.loadedCount) && ui.loadedCount >= 1 && ui.loadedCount <= 24
     && ui.sourceTotal >= ui.loadedCount
     && typeof ui.label === 'string' && ui.label.replace(/[\u00a0\u202f]/g, ' ')
-      === (source.sourceScopeComplete ? 'Найдено до ' : 'В источнике: ') + totalText
+      === (auctionDatabaseLabel ? 'В базе аукционов: ' : source.sourceScopeComplete ? 'Найдено до ' : 'В источнике: ') + totalText
     && pagination?.sameFilter === true && sourceCountCursor(pagination.cursorBeforeCount)
     && pagination.cursorAfterCount === pagination.cursorBeforeCount
     && pagination.continuationCursor === pagination.cursorBeforeCount && pagination.continuationFollowed === true
@@ -395,8 +438,8 @@ export function japanSourceCountAcceptancePassed(report) {
 /** A filtered continuation is separate from an exhaustive selection proof.
  * The bounded reader may honestly report partial pages while both ordinary
  * appends must return fresh, useful rows under the selected public filters. */
-export function japanA4Power160ContinuationAcceptancePassed(report) {
-  if (!japanSourceCountAcceptancePassed(report)) return false;
+export function japanA4Power160ContinuationAcceptancePassed(report, options) {
+  if (!japanSourceCountAcceptancePassed(report, options)) return false;
   const proof = report?.checks?.a4Power160Continuation;
   const checkedAt = Date.parse(report?.checkedAt);
   const hash64 = value => typeof value === 'string' && /^[a-f0-9]{64}$/.test(value);
@@ -448,11 +491,78 @@ export function japanA4Power160ContinuationAcceptancePassed(report) {
     && proof.fullSelectionExhaustionClaimed === false && proof.liveExhaustiveScan === false && proof.pageErrors === 0;
 }
 
+/** The successor proves the raw supplier price order over the actual combined
+ * 48 rows, in both directions. It never rebrands delivered RUB as that order. */
+export function japanSourcePriceOrderAcceptancePassed(report) {
+  const proof = report?.checks?.priceSort, checkedAt = Date.parse(report?.checkedAt);
+  const hash64 = value => typeof value === 'string' && /^[a-f0-9]{64}$/.test(value);
+  const hash = value => createHash('sha256').update(value).digest('hex');
+  const positive = value => typeof value === 'number' && Number.isFinite(value) && value > 0;
+  const fresh = value => Number.isFinite(Date.parse(value)) && Date.parse(value) <= checkedAt
+    && checkedAt - Date.parse(value) < 30 * 60_000;
+  const label = total => 'В базе аукционов: ' + String(total).replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+  const uiPassed = (ui, summary, loaded) => ui?.status === (summary.sourceScopeComplete ? 'bounded' : 'source')
+    && ui.sourceTotal === summary.total && ui.sourceTotal >= loaded && ui.loadedCount === loaded
+    && ui.requestedQueryHash === summary.sourceCountProof.requestedQueryHash && ui.observedAt === summary.observedAt
+    && typeof ui.label === 'string' && ui.label.replace(/[\u00a0\u202f]/g, ' ') === label(summary.total);
+  const countPassed = (value, power) => {
+    const summary = value?.summary, source = summary?.sourceCountProof;
+    const request = {city: 'Новокузнецк', market: 'japan', ...(power ? {powerTo: '160'} : {})};
+    return value?.selection === (power ? 'power160' : 'plain') && value.independentCount === true
+      && value.queryHashVerified === true && value.admittedTotal === null
+      && Number.isSafeInteger(summary?.total) && summary.total >= 24 && summary.stale === false && fresh(summary.observedAt)
+      && summary.upperBound === true && summary.precision === 'source-upper-bound' && summary.selectionScope === 'source-candidates'
+      && typeof summary.sourceScopeComplete === 'boolean'
+      && !['countProof', 'knownTotal', 'unknownTotal'].some(key => Object.hasOwn(summary, key))
+      && source?.version === 1 && source.kind === 'japan-source-count' && source.predicateVersion === 'japan-source-candidates-v1'
+      && source.requestedQueryHash === hash(JSON.stringify(request))
+      && hash64(source.sourceQueryHash) && hash64(source.evidenceEpoch)
+      && source.sourceTotal === summary.total && source.sourceObservedAt === summary.observedAt
+      && source.sourceScopeComplete === summary.sourceScopeComplete && typeof source.directoryComplete === 'boolean'
+      && (!source.sourceScopeComplete || source.directoryComplete) && uiPassed(value.ui, summary, 24);
+  };
+  const pagePassed = (page, ssr) => page?.kind === (ssr ? 'rendered-ssr' : 'append-api')
+    && page.shown === 24 && page.sourceReceiptsFresh === true && fresh(page.observedAt)
+    && Number.isSafeInteger(page.sourcePages) && page.sourcePages >= 1 && page.sourcePages <= 8
+    && hash64(page.receiptsSha256) && (ssr ? page.page === 1 && page.afterSha256 === hash('') && page.ssrBindingMatched === true
+      : page.status === 200 && page.stale === false && page.partial === false && page.total === null);
+  if (!Number.isFinite(checkedAt) || report?.countAcceptance !== JAPAN_SOURCE_COUNT_POLICY
+    || report.japanSourcePriceOrderRequired !== true || report.japanSourcePriceOrderPassed !== true
+    || report.japanPriceSortRequired !== true || report.japanPriceSortPassed !== true || report.japanCountDisplayPassed !== true
+    || proof?.contract !== 'japan-source-price-order-browser-v1' || proof.selectedThroughUi !== true
+    || proof.city !== 'Новокузнецк' || proof.powerTo !== 160 || proof.priceBasis !== 'source_FINISH_JPY'
+    || proof.priceOrderScope !== 'source_order_across_append' || proof.sourcePriceOrderAcrossPages !== true
+    || proof.globalDeliveredPriceOrderClaimed !== false || proof.powerLanesReordered !== false
+    || proof.explicitApiReads !== 2 || proof.ordinaryAppendRequests !== 2 || proof.liveExhaustiveScan !== false || proof.pageErrors !== 0
+    || proof.countSourceQueryChangesWithPower !== true
+    || !Array.isArray(proof.counts) || proof.counts.length !== 2 || !countPassed(proof.counts[0], false) || !countPassed(proof.counts[1], true)
+    || proof.counts[0].summary.sourceCountProof.sourceQueryHash === proof.counts[1].summary.sourceCountProof.sourceQueryHash
+    || JSON.stringify(proof.directions) !== JSON.stringify(['totalRubDesc', 'totalRub'])
+    || !Array.isArray(proof.checks) || proof.checks.length !== 2) return false;
+  const summary = proof.counts[1].summary;
+  return proof.checks.every((check, index) => check?.sort === proof.directions[index] && check.status === 200
+    && check.loadedBefore === 24 && check.added === 24 && check.loadedAfter === 48 && check.shown === 48 && check.duplicateIds === 0
+    && ['oldIdsPreserved', 'orderPreserved', 'sourcePricesMatchApi', 'sourcePriceOrder', 'sameFilter', 'followedEmittedCursor']
+      .every(key => check[key] === true)
+    && typeof check.cursor === 'string' && check.cursor.startsWith('j1.') && sourceCountCursor(check.cursor)
+    && check.continuationCursor === check.cursor && pagePassed(check.firstPage, true) && pagePassed(check.nextPage, false)
+    && ['beforeIdsSha256', 'addedIdsSha256', 'afterIdsSha256', 'idsSha256', 'sourcePricesSha256'].every(key => hash64(check[key]))
+    && check.idsSha256 === check.afterIdsSha256 && Array.isArray(check.sourcePrices) && check.sourcePrices.length === 48
+    && check.sourcePrices.every((price, position) => positive(price) && (position === 0
+      || (index === 0 ? check.sourcePrices[position - 1] >= price : check.sourcePrices[position - 1] <= price)))
+    && uiPassed(check.initialCount, summary, 24) && uiPassed(check.finalCount, summary, 48))
+    && proof.checks[0].cursor !== proof.checks[1].cursor;
+}
+
 /** Compatibility with the fixed pricing ancestor includes accepted B9 bytes,
  * while each new image's own runtime diff is only its reviewed delta. */
 export function japanStabilityCompatibilityPaths(plan) {
   if (!isExactJapanStabilityScope(plan)) throw Error('japan_stability_compatibility_scope');
   const paths = japanStabilityCodePaths(plan);
+  if (paths === JAPAN_STABILITY_SOURCE_PRICE_ORDER_CODE_PATHS)
+    return [...new Set([...JAPAN_STABILITY_METADATA_CODE_PATHS, ...JAPAN_STABILITY_PRICE_SORT_CODE_PATHS,
+      ...JAPAN_STABILITY_EXACT_COUNT_CODE_PATHS, ...JAPAN_STABILITY_SOURCE_COUNT_CODE_PATHS,
+      ...JAPAN_STABILITY_MODEL_CURSOR_CODE_PATHS, ...paths])].sort();
   if (paths === JAPAN_STABILITY_MODEL_CURSOR_CODE_PATHS)
     return [...new Set([...JAPAN_STABILITY_METADATA_CODE_PATHS, ...JAPAN_STABILITY_PRICE_SORT_CODE_PATHS,
       ...JAPAN_STABILITY_EXACT_COUNT_CODE_PATHS, ...JAPAN_STABILITY_SOURCE_COUNT_CODE_PATHS, ...paths])].sort();

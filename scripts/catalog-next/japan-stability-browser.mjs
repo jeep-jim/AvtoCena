@@ -1,5 +1,6 @@
 import {createHash} from 'node:crypto';
 import {runJapanPriceSortBrowser} from './japan-price-sort-browser.mjs';
+import {runJapanSourcePriceOrderBrowser} from './japan-source-price-order-browser.mjs';
 
 const ORIGIN = 'https://avtocena.com';
 const CITY = 'Новокузнецк';
@@ -579,11 +580,14 @@ export async function selectJapanStabilityModelThroughUi({view, directory, progr
 /** Ordinary, bounded public journeys supplement the unchanged Japan freshness,
  * power, pagination, price and neighbor-preservation acceptance. */
 export async function runJapanStabilityBrowser({context, report, generationId, read, capture, onStage, onPage,
-  verifyPage, verifyFullPage, verifyPowerPage, verifyVehiclePolicy, navigateLegacyMazdaThree, requirePriceSort = false, requireExactCount = false, countAcceptance}) {
+  verifyPage, verifyFullPage, verifyPowerPage, verifyVehiclePolicy, navigateLegacyMazdaThree, requirePriceSort = false, requireExactCount = false, countAcceptance,
+  requireSourcePriceOrder = false, pageReadEvidence, readSsrPageEvidence, observeResponse}) {
   need(typeof requirePriceSort === 'boolean', 'price_sort_option');
+  need(typeof requireSourcePriceOrder === 'boolean' && (!requireSourcePriceOrder || requirePriceSort), 'source_price_option');
   const pages = [];
-  if (requirePriceSort) pages.push(...await runJapanPriceSortBrowser({context, report, read, capture, onStage, onPage, requireExactCount, countAcceptance,
-    verifyPage, verifyFullPage, verifyPowerPage, verifyVehiclePolicy}));
+  if (requirePriceSort) pages.push(...await (requireSourcePriceOrder ? runJapanSourcePriceOrderBrowser : runJapanPriceSortBrowser)(
+    {context, report, read, capture, onStage, onPage, requireExactCount, countAcceptance,
+      verifyPage, verifyFullPage, verifyPowerPage, verifyVehiclePolicy, pageReadEvidence, readSsrPageEvidence, observeResponse}));
   onStage('stability_source_models');
   const directoryResponse = await read(JAPAN_STABILITY_MODELS_API);
   const directory = checkedJapanStabilityDirectory(directoryResponse.data, directoryResponse.status);

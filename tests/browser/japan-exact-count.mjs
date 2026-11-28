@@ -21,7 +21,8 @@ import {runJapanExactCountBrowser, runJapanModelCoverageBrowser, japanExactCount
 import {JAPAN_SOURCE_COUNT_ACCEPTANCE, japanSourceCountRequirement, runJapanSourceCountBrowser,
   japanA4Power160ContinuationRequirement, runJapanA4Power160ContinuationBrowser}
   from '../../scripts/catalog-next/japan-source-count-browser.mjs';
-import {japanA4Power160ContinuationRequired} from '../../scripts/catalog-next/japan-stability-code-scope.mjs';
+import {japanA4Power160ContinuationRequired, japanSourcePriceOrderRequired} from '../../scripts/catalog-next/japan-stability-code-scope.mjs';
+import {japanSourcePriceOrderRequirement} from '../../scripts/catalog-next/japan-source-price-order-browser.mjs';
 
 const ROOT = fileURLToPath(new URL('../../', import.meta.url));
 const ORIGIN = 'https://avtocena.com', CITY = 'Новокузнецк';
@@ -497,10 +498,15 @@ async function main() {
     const requirePowerContinuation=japanA4Power160ContinuationRequirement(process.env.CATALOG_JAPAN_A4_POWER160_CONTINUATION_REQUIRED);
     need(requirePowerContinuation===japanA4Power160ContinuationRequired(plan)
       &&(!requirePowerContinuation||requireSourceCount),'power_continuation_profile');
+    const requireSourcePriceOrder=japanSourcePriceOrderRequirement(process.env.CATALOG_JAPAN_SOURCE_PRICE_ORDER_REQUIRED);
+    need(requireSourcePriceOrder===japanSourcePriceOrderRequired(plan)
+      &&(!requireSourcePriceOrder||requireSourceCount&&requirePowerContinuation),'source_price_order_profile');
+    if(requireSourcePriceOrder)report.japanSourcePriceOrderRequired=true;
     fixture=await prepare(process.env.PHOTO_RUNTIME_ROOT,plan,{powerContinuation:requirePowerContinuation});
     const helperFiles=['scripts/catalog-next/japan-exact-count-browser.mjs','scripts/catalog-next/japan-price-sort-browser.mjs',
       'scripts/catalog-next/japan-source-count-browser.mjs',
-      'scripts/catalog-next/japan-browser-acceptance.mjs'];
+      'scripts/catalog-next/japan-browser-acceptance.mjs',
+      ...(requireSourcePriceOrder?['scripts/catalog-next/japan-source-price-order-browser.mjs']:[])];
     Object.assign(report,{runtimeSha:plan.runtimeSha,runtimeTree:plan.runtimeTree,componentSha256:fixture.sources,styles:fixture.styles,
       helperSha256:Object.fromEntries(await Promise.all(helperFiles.map(async file=>[file,hash(await fs.readFile(path.join(ROOT,file)))])))});
     need(path.isAbsolute(process.env.PLAYWRIGHT_MODULE||'')&&path.isAbsolute(process.env.CHROME_BIN||''),'browser_environment');
@@ -544,7 +550,7 @@ async function main() {
           verifyPage:verifyJapanPage,verifyFullPage:verifyJapanFullPage,verifyPowerPage:verifyJapanPowerPage,
           pageReadEvidence:japanPageReadEvidence,readSsrPageEvidence:readJapanSsrPageEvidence,
           verifyVehiclePolicy:verifyJapanVisibleVehiclePolicy};
-        const pages=await runJapanPriceSortBrowser({...callbacks,requireExactCount:true});
+        const pages=await runJapanPriceSortBrowser({...callbacks,requireExactCount:true,sourcePriceOrder:requireSourcePriceOrder});
         need(result.japanPriceSortPassed&&result.japanCountDisplayPassed,'price_journey');
         const page=currentPage,prior=[...pages[2].items,...pages[3].items];
         result.stage='fixture_failed_append';state.failAppend=true;
@@ -556,7 +562,7 @@ async function main() {
         need(retained.loaded===48&&retained.exactProof.total===73,'failed_append_count');
         const oldKey=await page.evaluate(()=>JSON.stringify(window.__japanExactCount.current.initial));
         state.failAppend=false;state.holdNext=true;result.stage='fixture_pending_sort';
-        const selection=selectJapanPriceSort(page,'totalRubDesc',{}).then(()=>({ok:true}),error=>({error}));
+        const selection=selectJapanPriceSort(page,'totalRubDesc',{},{sourcePriceOrder:requireSourcePriceOrder}).then(()=>({ok:true}),error=>({error}));
         await page.waitForFunction(()=>document.querySelector('form.ac-catalog-filter-panel[aria-busy="true"]'),undefined,{timeout:5000});
         need(await page.locator('[data-japan-loaded-count="48"] [data-catalog-market-count="73"]').count()===1
           &&await page.locator('main.ac-ajes-catalog article').count()===48,'pending_count');
@@ -633,13 +639,16 @@ async function main() {
           const sourceReport={countAcceptance:JAPAN_SOURCE_COUNT_ACCEPTANCE,japanSourceCountRequired:true,
             japanSourceCountPassed:false,japanModelCoverageRequired:true,japanModelCoveragePassed:false,
             japanExactCountRequired:false,japanExactCountPassed:null,checks:{},screenshots:[],
+            ...(requireSourcePriceOrder?{japanSourcePriceOrderRequired:true}:{}),
             ...(requirePowerContinuation?{japanA4Power160ContinuationRequired:true,japanA4Power160ContinuationPassed:false}:{})};
           result.sourceCountReport=sourceReport;
-          const sourcePages=await runJapanSourceCountBrowser({...callbacks,report:sourceReport,verifyVisible:verifyJapanPriceSortVisible});
+          const sourcePages=await runJapanSourceCountBrowser({...callbacks,report:sourceReport,verifyVisible:verifyJapanPriceSortVisible,
+            auctionDatabaseLabel:requireSourcePriceOrder});
           need(sourceReport.japanSourceCountPassed===true&&sourceReport.japanModelCoveragePassed===true
             &&sourcePages.every(value=>value.total===null&&value.countSummary===null)
             &&sourceReport.checks.sourceCount.pagination.loadedAfter===48,'source_count_journey');
           sourceCountAcceptance={passed:true,countAcceptance:sourceReport.countAcceptance,
+            ...(requireSourcePriceOrder?{japanSourcePriceOrderRequired:true}:{}),
             sourceCount:sourceReport.checks.sourceCount,modelCoverage:sourceReport.checks.modelCoverage};
           if(requirePowerContinuation){
             need(sourceReport.japanA4Power160ContinuationPassed===true&&state.controlledPowerTransitions.length===2,
@@ -689,8 +698,9 @@ async function main() {
         await pending.waitFor({state:'visible',timeout:30_000});
         const pendingText=(await pending.innerText()).replace(/[\u00a0\u202f]/g,' ').trim();
         need(await pending.locator('[data-catalog-market-count]').count()===0
-          &&(pendingText==='Показано 24 · общий итог уточняется'
-            ||!requireSourceCount&&pendingText==='Количество уточняется'),'recovery_initial_unknown');
+          &&(requireSourcePriceOrder?pendingText==='Количество уточняется'
+            :pendingText==='Показано 24 · общий итог уточняется'
+              ||!requireSourceCount&&pendingText==='Количество уточняется'),'recovery_initial_unknown');
         const recoveryFirst=fixtureResult(recoveryQuery,state.now);
         const recoveryNext=fixtureResult({...recoveryQuery,page:'2',after:recoveryFirst.nextCursor},state.now);
         const recoveryAppend=recovery.waitForResponse(response=>new URL(response.url()).pathname==='/api/catalog/search'

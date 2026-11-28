@@ -6,16 +6,18 @@ import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
 import {createRequire} from 'node:module';
 import {fileURLToPath} from 'node:url';
-import {build} from 'esbuild';
-import postcss from 'postcss';
-import tailwindcss from 'tailwindcss';
 import {runJapanPriceSortBrowser, selectJapanPriceSort, verifyJapanPriceSortVisible}
   from '../../scripts/catalog-next/japan-price-sort-browser.mjs';
-import {verifyJapanPage, verifyJapanFullPage, verifyJapanPowerPage, verifyJapanVisibleVehiclePolicy}
+import {verifyJapanPage, verifyJapanFullPage, verifyJapanPowerPage, verifyJapanVisibleVehiclePolicy,
+  japanPageReadEvidence, readJapanSsrPageEvidence}
   from '../../scripts/catalog-next/japan-browser-acceptance.mjs';
 import {JAPAN_SOURCE_BOUNDED_INCREMENTAL_POLICY, JAPAN_SOURCE_COUNT_POLICY,
-  japanSourceBoundedIncrementalRequired, japanSourceCountRequired}
+  japanSourceBoundedIncrementalRequired, japanSourceCountRequired, japanSourcePriceOrderRequired,
+  japanSourcePriceOrderAcceptancePassed}
   from '../../scripts/catalog-next/japan-stability-code-scope.mjs';
+import {japanExactCountQueryHash} from '../../scripts/catalog-next/japan-exact-count-browser.mjs';
+import {runJapanSourcePriceOrderBrowser, japanSourcePriceOrderRequirement, japanSourcePriceCountApi}
+  from '../../scripts/catalog-next/japan-source-price-order-browser.mjs';
 
 const ROOT = fileURLToPath(new URL('../../', import.meta.url));
 const ORIGIN = 'https://avtocena.com', CITY = 'Новокузнецк';
@@ -51,20 +53,22 @@ import {CatalogCard} from 'runtime:CatalogCard';
 import {JapanCatalogCount} from 'runtime:JapanCatalogCount';
 import {CatalogSidebar} from 'runtime:CatalogSidebar';
 import {CatalogResultCountUpdate} from 'runtime:CatalogSelectionContext';
-export function PriceSortFixture({initial,result,remount=false}){
+export function PriceSortFixture({initial,result,remount=false,sourcePriceOrder=false}){
  const [current,setCurrent]=useState({initial,result}),[late,setLate]=useState(null);
  const query=current.initial,rows=current.result.items,key=JSON.stringify(query);
  useEffect(()=>{
   const fixture=window.__japanPriceSort;
   fixture.replace=(next)=>setCurrent(next);fixture.late=(next)=>setLate(next);fixture.ready=true;
  },[]);
- return <main className="ac-catalog-page ac-page-copy ac-ajes-catalog min-h-screen text-[var(--ac-text)]">
+ return <main className="ac-catalog-page ac-page-copy ac-ajes-catalog min-h-screen text-[var(--ac-text)]"
+  data-japan-source-receipts={sourcePriceOrder?JSON.stringify(current.result.ssrEvidence):undefined}>
   <section className="ac-catalog-shell mx-auto w-full max-w-[1500px] px-4 py-6 md:px-8 md:py-10">
    <CatalogSidebar resultScope="ajes:japan:false"
     header={<h1 className="text-[30px] font-black leading-none tracking-[-0.04em] sm:text-4xl md:text-6xl">Авто из Японии под заказ</h1>}
     filters={<CatalogFilters key={remount?key:'preserved'} initial={query} auctionResults facets={{makes:[],models:[],bodyTypes:[],transmissions:[],fuels:['petrol'],drives:[]}}/>}>
    {late&&<CatalogResultCountUpdate {...late}/>}
-   <h2>Япония <JapanCatalogCount queryKey={key} summary={current.result.countSummary} initialCount={rows.length}/></h2>
+   <h2>Япония <JapanCatalogCount queryKey={key} summary={current.result.countSummary} initialCount={rows.length}
+    request={sourcePriceOrder?query:undefined}/></h2>
    <CatalogLoadMore key={key} query={query} resultQueryKey={key} initialPage={current.result.page}
     initialTotal={current.result.total} initialCount={rows.length} initialHasMore={current.result.hasMore}
     initialNextCursor={current.result.nextCursor} initialPageKey={JSON.stringify([key,rows.map(row=>row.id)])}
@@ -89,6 +93,8 @@ if(typeof window!=='undefined'){
 
 export async function prepare(runtimeRoot, plan) {
   need(path.isAbsolute(runtimeRoot || '') && runtimeRoot !== ROOT.replace(/\/$/, ''), 'runtime_root');
+  const [{build}, {default: postcss}, {default: tailwindcss}] = await Promise.all([
+    import('esbuild'), import('postcss'), import('tailwindcss')]);
   const git = args => execFileSync('git', ['-C', runtimeRoot, ...args], {encoding: 'utf8', timeout: 30_000}).trim();
   need(git(['rev-parse', 'HEAD']) === plan.runtimeSha && git(['rev-parse', 'HEAD^{tree}']) === plan.runtimeTree, 'runtime_binding');
   const sources = {};
@@ -174,6 +180,45 @@ export function fixtureResult(query, now) {
     powerFilterSummary:{shown:24,localPower:0,supplierPower:24,unknownPower:0}};
 }
 
+/** The controlled successor transport has one source-price sequence across
+ * pages. Its RUB estimates deliberately disagree and unknown power interleaves,
+ * so the old page-local/lane sort cannot accidentally satisfy the new proof. */
+export function sourcePriceFixtureResult(query, now) {
+  const base = fixtureResult(query, now), power = query.powerTo === '160';
+  if (query.countOnly === '1') {
+    const total = power ? 800 : 1000;
+    return {ok: true, total: null, items: [], countIncomplete: true,
+      countSummary: {total, stale: false, observedAt: now, upperBound: true, precision: 'source-upper-bound',
+        selectionScope: 'source-candidates', sourceScopeComplete: true,
+        sourceCountProof: {version: 1, kind: 'japan-source-count', predicateVersion: 'japan-source-candidates-v1',
+          requestedQueryHash: japanExactCountQueryHash(query), sourceQueryHash: hash('controlled source PW:' + power),
+          evidenceEpoch: hash('controlled source price epoch'), sourceTotal: total, sourceObservedAt: now,
+          sourceScopeComplete: true, directoryComplete: true}}};
+  }
+  const page = Number(query.page || 1), sort = query.sort || '';
+  let items = base.items;
+  if (sort) items = Array.from({length: 24}, (_, index) => {
+    const rank = sort === 'totalRubDesc' ? 72 - ((page - 1) * 24 + index) : (page - 1) * 24 + index + 1;
+    const id = 'ajes-stats-sort-' + (Math.floor((rank - 1) / 24) + 1) + '-' + ((rank - 1) % 24);
+    const price = rank * 10000 + 0.25, row = {...base.items[index], id,
+      japanAuctionPriceJpy: price, japanCatalogPriceOrder: 'auction',
+      operational: {...base.items[index].operational, raw: {finalPriceJpy: price}}};
+    if (rank % 5 === 0) { delete row.japanSupplierPower; row.japanPowerUnknown = true; }
+    else row.japanSupplierPower = {...row.japanSupplierPower, offerId: id};
+    return row;
+  });
+  const queryHash = hash(JSON.stringify([sort, CITY, query.powerTo || '']));
+  const receipt = {version: 1, requestId: '00000000-0000-4000-8000-' + String(page).padStart(12, '0'),
+    queryHash, table: 'stats', kind: 'list', page, pageSize: 24, startedAt: now, finishedAt: now,
+    stage: 'storage', supplierAttempted: false, outcome: 'fresh', observedAt: now};
+  return {...base, items, reads: 1, sourceReceipts: [receipt],
+    nextCursor: sort ? 'j1.' + (page + 1) + '.0.' + (page + 1) + '.' + queryHash + '.-' : base.nextCursor,
+    powerFilterSummary: {shown: 24, localPower: 0,
+      supplierPower: items.filter(row => row.japanSupplierPower).length,
+      unknownPower: items.filter(row => row.japanPowerUnknown).length},
+    ssrEvidence: {version: 1, page, afterSha256: hash(query.after || ''), receipts: [receipt], omitted: 0}};
+}
+
 /** Model coverage is shared by two explicit profiles. Their count contracts
  * stay distinct, and neither environment flag can relabel another plan. */
 export function checkedJapanPriceSortFixtureCountAcceptance(plan, {modelCoverageRequired, sourceCountRequired} = {}) {
@@ -196,10 +241,19 @@ async function main() {
     const countAcceptance = checkedJapanPriceSortFixtureCountAcceptance(plan,
       {modelCoverageRequired: process.env.CATALOG_JAPAN_MODEL_COVERAGE_REQUIRED,
         sourceCountRequired: process.env.CATALOG_JAPAN_SOURCE_COUNT_REQUIRED});
+    const sourcePriceOrder = japanSourcePriceOrderRequirement(process.env.CATALOG_JAPAN_SOURCE_PRICE_ORDER_REQUIRED);
+    need(sourcePriceOrder === japanSourcePriceOrderRequired(plan)
+      && (!sourcePriceOrder || countAcceptance === JAPAN_SOURCE_COUNT_POLICY), 'source_price_plan');
     if (countAcceptance !== undefined) report.countAcceptance = countAcceptance;
+    if (sourcePriceOrder) {
+      report.japanSourcePriceOrderRequired = true;
+      report.scope = 'Exact runtime components; controlled source JPY order across append, independent bounded counts and unchanged RUB estimates';
+    }
+    const resultFor = sourcePriceOrder ? sourcePriceFixtureResult : fixtureResult;
     fixture = await prepare(process.env.PHOTO_RUNTIME_ROOT, plan);
     Object.assign(report,{runtimeSha:plan.runtimeSha,runtimeTree:plan.runtimeTree,componentSha256:fixture.sources,styles:fixture.styles,
       controllerHelperSha256:hash(await fs.readFile(path.join(ROOT,'scripts/catalog-next/japan-price-sort-browser.mjs')))});
+    if (sourcePriceOrder) report.sourcePriceHelperSha256 = hash(await fs.readFile(path.join(ROOT,'scripts/catalog-next/japan-source-price-order-browser.mjs')));
     need(path.isAbsolute(process.env.PLAYWRIGHT_MODULE || '') && path.isAbsolute(process.env.CHROME_BIN || ''), 'browser_environment');
     const pkg = JSON.parse(await fs.readFile(path.join(path.dirname(process.env.PLAYWRIGHT_MODULE),'package.json'),'utf8'));
     report.playwrightVersion = pkg.version;
@@ -212,7 +266,7 @@ async function main() {
           const query=Object.fromEntries(url.searchParams);active.requests.push({...query});
           if(active.failAppend && Number(query.page)===3){response.writeHead(503,{'Content-Type':'application/json'});response.end('{"ok":false}');return;}
           if(active.holdNext && query.sort==='totalRubDesc' && Number(query.page)===1){active.held=true;await active.releaseWait;}
-          response.writeHead(200,{'Content-Type':'application/json','Cache-Control':'no-store'});response.end(JSON.stringify(fixtureResult(query,active.now)));return;
+          response.writeHead(200,{'Content-Type':'application/json','Cache-Control':'no-store'});response.end(JSON.stringify(resultFor(query,active.now)));return;
         }
         if(url.pathname==='/api/catalog/brand-counts'){
           response.writeHead(200,{'Content-Type':'application/json'});response.end(JSON.stringify({counts:{TOYOTA:100},modelCounts:{TOYOTA:1},stale:false,generationId:active.now}));return;
@@ -237,7 +291,7 @@ async function main() {
           return;
         }
         need(url.pathname==='/cars/japan' && url.searchParams.size===1 && url.searchParams.get('city')===CITY,'document_scope');
-        const initial={city:CITY,market:'japan'},result=fixtureResult(initial,active.now),props={initial,result,remount:active.remount};
+        const initial={city:CITY,market:'japan'},result=resultFor(initial,active.now),props={initial,result,remount:active.remount,sourcePriceOrder};
         response.writeHead(200,{'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-store'});
         response.end('<!doctype html><html><head><meta charset="utf-8"><link rel="icon" href="data:,"><link rel="stylesheet" href="/fixture.css"></head><body><div id="root">'
           +fixture.renderMarkup(props)+'</div><script>window.__japanPriceSortInitial='+JSON.stringify(props).replace(/</g,'\\u003c')
@@ -253,7 +307,8 @@ async function main() {
       active={remount,now:new Date().toISOString(),requests:[],failAppend:false,holdNext:false,held:false};
       active.releaseWait=new Promise(resolve=>{active.release=resolve;});
       const state=active,context=await browser.newContext({viewport:{width:1440,height:1000},locale:'ru-RU',serviceWorkers:'block'});
-      const errors=[],result={checks:{},screenshots:[]};let currentPage;
+      const errors=[],result={checks:{},screenshots:[],...(sourcePriceOrder?
+        {countAcceptance,japanSourcePriceOrderRequired:true,japanPriceSortRequired:true}:{})};let currentPage;
       await context.route('**/*',async route=>{
         const request=route.request(),url=new URL(request.url());
         const allowed=request.method()==='GET'&&url.origin===ORIGIN&&(url.pathname==='/cars/japan'
@@ -272,44 +327,52 @@ async function main() {
           const realClose=currentPage.close.bind(currentPage);currentPage.fixtureClose=realClose;
           return new Proxy(currentPage,{get(target,key){if(key==='close')return async()=>{};const value=Reflect.get(target,key,target);return typeof value==='function'?value.bind(target):value;}});
         }};
-        const pages=await runJapanPriceSortBrowser({context:wrapped,report:result,countAcceptance,
-          read:async api=>{const query=Object.fromEntries(new URL(api,ORIGIN).searchParams);return {status:200,data:fixtureResult(query,state.now)};},
+        const pages=await (sourcePriceOrder?runJapanSourcePriceOrderBrowser:runJapanPriceSortBrowser)({context:wrapped,report:result,countAcceptance,
+          read:async api=>{const query=Object.fromEntries(new URL(api,ORIGIN).searchParams);return {status:200,data:resultFor(query,state.now)};},
           capture:async()=>{},onStage:stage=>{result.stage=stage;},onPage:()=>{},
           verifyPage:verifyJapanPage,verifyFullPage:verifyJapanFullPage,
+          pageReadEvidence:japanPageReadEvidence,readSsrPageEvidence:readJapanSsrPageEvidence,
           verifyPowerPage:verifyJapanPowerPage,verifyVehiclePolicy:verifyJapanVisibleVehiclePolicy});
         need(result.japanPriceSortPassed && result.japanCountDisplayPassed,'complete_journey');
-        const page=currentPage,prior=[...pages[2].items,...pages[3].items];
+        if(sourcePriceOrder){result.checkedAt=new Date().toISOString();need(japanSourcePriceOrderAcceptancePassed(result),'source_price_proof');}
+        const visibleOptions=sort=>({countAcceptance,...(sourcePriceOrder?
+          {auctionDatabaseLabel:true,query:japanSourcePriceCountApi({power:true,countOnly:false})}:{sort})});
+        const page=currentPage,prior=sourcePriceOrder
+          ?[...resultFor({market:'japan',city:CITY,powerTo:'160',sort:'totalRub'},state.now).items,...pages.at(-1).items]
+          :[...pages[2].items,...pages[3].items];
         result.stage='fixture_failed_append_retains_count';
         state.failAppend=true;
         const failed=page.waitForResponse(response=>new URL(response.url()).pathname==='/api/catalog/search'&&new URL(response.url()).searchParams.get('page')==='3');
         await page.locator('main.ac-ajes-catalog').getByRole('button',{name:'Показать ещё',exact:true}).click();
         need((await failed).status()===503,'failed_append_transport');
         await page.locator('main.ac-ajes-catalog [role="alert"]').waitFor({state:'visible',timeout:5000});
-        const retained=await verifyJapanPriceSortVisible(page,prior,{total:null,hasMore:true},{countAcceptance});
+        const retained=await verifyJapanPriceSortVisible(page,prior,{total:null,hasMore:true},visibleOptions());
         need(retained.loaded===48,'failed_append_keeps_count');
         // Hold the next real filter response, proving cards/count persist while
         // the new draft is pending. Then a 24-row query must not inherit 48.
         result.stage='fixture_pending_query_retains_count';
         state.holdNext=true;
-        const selection=selectJapanPriceSort(page,'totalRubDesc',{}).then(()=>({ok:true}),error=>({error}));
+        const selection=selectJapanPriceSort(page,'totalRubDesc',{}, {sourcePriceOrder}).then(()=>({ok:true}),error=>({error}));
         await page.waitForFunction(()=>window.__japanPriceSort.calls.some(href=>new URL(href,location.origin).searchParams.get('sort')==='totalRubDesc')
           &&document.querySelector('form.ac-catalog-filter-panel[aria-busy="true"]'),undefined,{timeout:5000});
         need(await page.locator('[data-japan-loaded-count="48"]').count()===1
           &&await page.locator('main.ac-ajes-catalog article').count()===48,'pending_preserves_cards_count');
         state.release();const selected=await selection;if(selected.error)throw selected.error;
-        const current=fixtureResult({market:'japan',city:CITY,powerTo:'160',sort:'totalRubDesc'},state.now);
-        const reset=await verifyJapanPriceSortVisible(page,current.items,current,{sort:'totalRubDesc',countAcceptance});
+        const current=resultFor({market:'japan',city:CITY,powerTo:'160',sort:'totalRubDesc'},state.now);
+        const reset=await verifyJapanPriceSortVisible(page,current.items,current,visibleOptions('totalRubDesc'));
         need(reset.loaded===24,'query_resets_loaded_count');
         result.stage='fixture_late_old_aggregate';
         await page.evaluate(({key})=>window.__japanPriceSort.late({queryKey:key,text:'999999',total:999999}),
           {key:JSON.stringify({city:CITY,powerTo:'160',sort:'totalRub',market:'japan'})});
         await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
-        const afterLate=await verifyJapanPriceSortVisible(page,current.items,current,{sort:'totalRubDesc',countAcceptance});
+        const afterLate=await verifyJapanPriceSortVisible(page,current.items,current,visibleOptions('totalRubDesc'));
         need(afterLate.loaded===24 && !afterLate.exact,'old_aggregate_ignored');
         need(errors.length===0 && (await page.evaluate(()=>window.__japanPriceSort.errors)).length===0 && !state.serverError,'javascript');
         report.cases.push({name:remount?'remounted_controls':'preserved_controls',passed:true,
           sequence:result.checks.priceSort.directions,powerSelectedThroughUi:true,countChecks:result.checks.countDisplay,
-          displayedCityPriceOrder:true,cityReversesBaseOrder:true,failedAppendKeeps48:true,pendingKeeps48:true,
+          ...(sourcePriceOrder?{sourcePriceOrderAcrossPages:true,rawJpyIncludingFractions:true,
+            unknownPowerInterleaves:true,deliveredRubNotUsedForOrder:true}:{displayedCityPriceOrder:true,cityReversesBaseOrder:true}),
+          failedAppendKeeps48:true,pendingKeeps48:true,
           changedQueryRestartsAt24:true,lateOldAggregateIgnored:true,pageErrors:0,requests:state.requests.length,
           helperChecks:result.checks.priceSort});
       }catch(error){

@@ -173,6 +173,34 @@ JAPAN_STABILITY_MODEL_CURSOR_CODE_FILES = {
     'tests/ajes-model-recovery.test.ts',
     'tests/japan-model-directory-metadata.test.ts',
 }
+JAPAN_STABILITY_SOURCE_PRICE_ORDER_RETAINED = '5b1e513dc9af3735e3b757c6fe7da763aa92837e'
+JAPAN_STABILITY_SOURCE_PRICE_ORDER_RETAINED_IMAGE = 'sha256:164288e7d6f3836982d440e255727a7bcfa566b2c98acd54f31e0e0f724540d6'
+# Exact reviewed successor delta from the accepted model-cursor runtime.
+JAPAN_STABILITY_SOURCE_PRICE_ORDER_CODE_FILES = {
+    'apps/web/components/catalog/AjesCatalog.tsx',
+    'apps/web/components/catalog/AjesRail.tsx',
+    'apps/web/components/catalog/CatalogCard.tsx',
+    'apps/web/components/catalog/CatalogSortSelect.tsx',
+    'apps/web/components/catalog/JapanCatalogCount.tsx',
+    'apps/web/components/catalog/japan-count-request.ts',
+    'apps/web/components/home/HomeJapanFilteredRail.tsx',
+    'apps/web/lib/catalog/ajes-catalog.ts',
+    'apps/web/lib/catalog/ajes-count-display.ts',
+    'apps/web/lib/catalog/ajes-query.ts',
+    'apps/web/lib/catalog/catalog-sort.ts',
+    'apps/web/lib/catalog/japan-source-power-query.ts',
+    'tests/ajes-catalog-count-continuation.test.ts',
+    'tests/ajes-catalog-progressive.test.ts',
+    'tests/ajes-count-display.test.ts',
+    'tests/ajes-model-cursor-continuity.test.ts',
+    'tests/ajes-source-count-display.test.ts',
+    'tests/home-japan-preview.test.ts',
+    'tests/japan-auction-sort-label.test.ts',
+    'tests/japan-count-lifecycle.test.ts',
+    'tests/japan-rail-visibility.test.ts',
+    'tests/japan-source-power-query.test.ts',
+    'tests/japan-source-power.test.ts',
+}
 JAPAN_STABILITY_HOME_CODE_FILES = JAPAN_STABILITY_RAILS_CODE_FILES | {
     'apps/web/lib/catalog/storage.ts', 'tests/catalog-next-home-isolation.test.ts',
 }
@@ -745,10 +773,12 @@ def checked_japan_stability_image_files(files, observed, retained_runtime=JAPAN_
     profiles = (JAPAN_STABILITY_CODE_FILES, JAPAN_STABILITY_UI_CODE_FILES, JAPAN_STABILITY_POWER_CODE_FILES,
                 JAPAN_STABILITY_RAILS_CODE_FILES, JAPAN_STABILITY_HOME_CODE_FILES, JAPAN_STABILITY_METADATA_CODE_FILES,
                 JAPAN_STABILITY_PRICE_SORT_CODE_FILES, JAPAN_STABILITY_EXACT_COUNT_CODE_FILES,
-                JAPAN_STABILITY_SOURCE_COUNT_CODE_FILES, JAPAN_STABILITY_MODEL_CURSOR_CODE_FILES)
+                JAPAN_STABILITY_SOURCE_COUNT_CODE_FILES, JAPAN_STABILITY_MODEL_CURSOR_CODE_FILES,
+                JAPAN_STABILITY_SOURCE_PRICE_ORDER_CODE_FILES)
     selected = next((profile for profile in profiles if profile and set(files) == profile), None)
     need(selected is not None, 'code_image_receipt')
-    need(retained_runtime == (JAPAN_STABILITY_MODEL_CURSOR_RETAINED if selected == JAPAN_STABILITY_MODEL_CURSOR_CODE_FILES
+    need(retained_runtime == (JAPAN_STABILITY_SOURCE_PRICE_ORDER_RETAINED if selected == JAPAN_STABILITY_SOURCE_PRICE_ORDER_CODE_FILES
+                             else JAPAN_STABILITY_MODEL_CURSOR_RETAINED if selected == JAPAN_STABILITY_MODEL_CURSOR_CODE_FILES
                              else JAPAN_STABILITY_SOURCE_COUNT_RETAINED if selected == JAPAN_STABILITY_SOURCE_COUNT_CODE_FILES
                              else JAPAN_STABILITY_EXACT_COUNT_RETAINED if selected == JAPAN_STABILITY_EXACT_COUNT_CODE_FILES
                              else JAPAN_STABILITY_PRICE_SORT_RETAINED if selected == JAPAN_STABILITY_PRICE_SORT_CODE_FILES
@@ -756,8 +786,10 @@ def checked_japan_stability_image_files(files, observed, retained_runtime=JAPAN_
     need(type(observed) is bool and observed == (selected in
          (JAPAN_STABILITY_HOME_CODE_FILES, JAPAN_STABILITY_METADATA_CODE_FILES,
           JAPAN_STABILITY_PRICE_SORT_CODE_FILES, JAPAN_STABILITY_EXACT_COUNT_CODE_FILES,
-          JAPAN_STABILITY_SOURCE_COUNT_CODE_FILES, JAPAN_STABILITY_MODEL_CURSOR_CODE_FILES)), 'timing_policy_image_scope')
-    need((count_acceptance == JAPAN_SOURCE_COUNT_POLICY if selected in (JAPAN_STABILITY_SOURCE_COUNT_CODE_FILES, JAPAN_STABILITY_MODEL_CURSOR_CODE_FILES)
+          JAPAN_STABILITY_SOURCE_COUNT_CODE_FILES, JAPAN_STABILITY_MODEL_CURSOR_CODE_FILES,
+          JAPAN_STABILITY_SOURCE_PRICE_ORDER_CODE_FILES)), 'timing_policy_image_scope')
+    need((count_acceptance == JAPAN_SOURCE_COUNT_POLICY if selected in (JAPAN_STABILITY_SOURCE_COUNT_CODE_FILES,
+          JAPAN_STABILITY_MODEL_CURSOR_CODE_FILES, JAPAN_STABILITY_SOURCE_PRICE_ORDER_CODE_FILES)
           else count_acceptance is None or (selected == JAPAN_STABILITY_EXACT_COUNT_CODE_FILES
           and count_acceptance == JAPAN_SOURCE_BOUNDED_INCREMENTAL_POLICY)), 'count_acceptance_image_scope')
     return selected
@@ -819,8 +851,8 @@ def source_count_cursor(value):
         (int(power[3]) == 0) == (power[7] == '-')
 
 
-def japan_source_count_acceptance_passed(report):
-    if not isinstance(report, dict) or not japan_model_coverage_acceptance_passed(report):
+def japan_source_count_acceptance_passed(report, auction_database_label=False):
+    if type(auction_database_label) is not bool or not isinstance(report, dict) or not japan_model_coverage_acceptance_passed(report):
         return False
     proof = report.get('checks', {}).get('sourceCount')
     if not isinstance(proof, dict):
@@ -863,7 +895,7 @@ def japan_source_count_acceptance_passed(report):
         ui.get('requestedQueryHash') == source['requestedQueryHash'] and ui.get('observedAt') == summary['observedAt'] and \
         integer(ui.get('loadedCount')) and 1 <= ui['loadedCount'] <= 24 and ui['sourceTotal'] >= ui['loadedCount'] and isinstance(ui.get('label'), str) and \
         ui['label'].replace('\u00a0', ' ').replace('\u202f', ' ') == \
-            ('Найдено до ' if source['sourceScopeComplete'] else 'В источнике: ') + total_text and \
+            ('В базе аукционов: ' if auction_database_label else 'Найдено до ' if source['sourceScopeComplete'] else 'В источнике: ') + total_text and \
         pagination.get('sameFilter') is True and source_count_cursor(pagination.get('cursorBeforeCount')) and \
         pagination.get('cursorAfterCount') == pagination['cursorBeforeCount'] and \
         pagination.get('continuationCursor') == pagination['cursorBeforeCount'] and pagination.get('continuationFollowed') is True and \
@@ -873,8 +905,8 @@ def japan_source_count_acceptance_passed(report):
         proof.get('liveExhaustiveScan') is False and type(proof.get('pageErrors')) is int and proof['pageErrors'] == 0
 
 
-def japan_a4_power160_continuation_acceptance_passed(report):
-    if not japan_source_count_acceptance_passed(report):
+def japan_a4_power160_continuation_acceptance_passed(report, auction_database_label=False):
+    if not japan_source_count_acceptance_passed(report, auction_database_label=auction_database_label):
         return False
     proof = report.get('checks', {}).get('a4Power160Continuation')
     if not isinstance(proof, dict):
@@ -956,6 +988,121 @@ def japan_a4_power160_continuation_acceptance_passed(report):
         type(proof.get('firstPageNavigations')) is int and proof['firstPageNavigations'] == 1 and \
         proof.get('fullSelectionExhaustionClaimed') is False and proof.get('liveExhaustiveScan') is False and \
         type(proof.get('pageErrors')) is int and proof['pageErrors'] == 0
+
+
+def japan_source_price_order_acceptance_passed(report):
+    """Bind both ordinary 24-to-48 walks to their raw source-price order.
+
+    This is not a delivered-price census. The sealed whole report binds price
+    arrays and their producer hashes without reserializing fractional numbers.
+    """
+    if not isinstance(report, dict) or not isinstance(report.get('checks'), dict):
+        return False
+    proof = report['checks'].get('priceSort')
+    if not isinstance(proof, dict):
+        return False
+    integer = lambda value: type(value) is int and 0 <= value <= 9007199254740991
+    hash64 = lambda value: isinstance(value, str) and re.fullmatch(r'[a-f0-9]{64}', value) is not None
+    equal_integer = lambda value, expected: type(value) is int and value == expected
+    digest = lambda value: hashlib.sha256(value.encode('utf-8')).hexdigest()
+    try:
+        checked_at = datetime.datetime.fromisoformat(report['checkedAt'].replace('Z', '+00:00'))
+    except (KeyError, TypeError, ValueError, AttributeError):
+        return False
+
+    def positive(value):
+        try:
+            return type(value) in (int, float) and math.isfinite(value) and value > 0
+        except (OverflowError, ValueError):
+            return False
+
+    def fresh(value):
+        try:
+            observed_at = datetime.datetime.fromisoformat(value.replace('Z', '+00:00'))
+            return 0 <= (checked_at - observed_at).total_seconds() < 30 * 60
+        except (TypeError, ValueError, AttributeError):
+            return False
+
+    def ui_passed(ui, summary, loaded):
+        source = summary.get('sourceCountProof')
+        return isinstance(ui, dict) and isinstance(source, dict) and \
+            ui.get('status') == ('bounded' if summary['sourceScopeComplete'] else 'source') and \
+            integer(ui.get('sourceTotal')) and ui['sourceTotal'] == summary['total'] and ui['sourceTotal'] >= loaded and \
+            equal_integer(ui.get('loadedCount'), loaded) and \
+            ui.get('requestedQueryHash') == source['requestedQueryHash'] and ui.get('observedAt') == summary['observedAt'] and \
+            isinstance(ui.get('label'), str) and ui['label'].replace('\u00a0', ' ').replace('\u202f', ' ') == \
+            'В базе аукционов: ' + f"{summary['total']:,}".replace(',', ' ')
+
+    def count_passed(value, power):
+        if not isinstance(value, dict) or not isinstance(value.get('summary'), dict):
+            return False
+        summary = value['summary']
+        source = summary.get('sourceCountProof')
+        if not isinstance(source, dict):
+            return False
+        request = {'city': 'Новокузнецк', 'market': 'japan'}
+        if power:
+            request['powerTo'] = '160'
+        request_hash = digest(json.dumps(request, ensure_ascii=False, separators=(',', ':')))
+        return value.get('selection') == ('power160' if power else 'plain') and value.get('independentCount') is True and \
+            value.get('queryHashVerified') is True and 'admittedTotal' in value and value['admittedTotal'] is None and \
+            integer(summary.get('total')) and summary['total'] >= 24 and summary.get('stale') is False and fresh(summary.get('observedAt')) and \
+            summary.get('upperBound') is True and summary.get('precision') == 'source-upper-bound' and \
+            summary.get('selectionScope') == 'source-candidates' and type(summary.get('sourceScopeComplete')) is bool and \
+            all(key not in summary for key in ('countProof', 'knownTotal', 'unknownTotal')) and \
+            equal_integer(source.get('version'), 1) and source.get('kind') == 'japan-source-count' and \
+            source.get('predicateVersion') == 'japan-source-candidates-v1' and source.get('requestedQueryHash') == request_hash and \
+            hash64(source.get('sourceQueryHash')) and hash64(source.get('evidenceEpoch')) and \
+            integer(source.get('sourceTotal')) and source['sourceTotal'] == summary['total'] and \
+            source.get('sourceObservedAt') == summary['observedAt'] and source.get('sourceScopeComplete') is summary['sourceScopeComplete'] and \
+            type(source.get('directoryComplete')) is bool and (not source['sourceScopeComplete'] or source['directoryComplete']) and \
+            ui_passed(value.get('ui'), summary, 24)
+
+    def page_passed(page, ssr):
+        if not isinstance(page, dict):
+            return False
+        return page.get('kind') == ('rendered-ssr' if ssr else 'append-api') and equal_integer(page.get('shown'), 24) and \
+            page.get('sourceReceiptsFresh') is True and fresh(page.get('observedAt')) and \
+            integer(page.get('sourcePages')) and 1 <= page['sourcePages'] <= 8 and hash64(page.get('receiptsSha256')) and \
+            (equal_integer(page.get('page'), 1) and page.get('afterSha256') == digest('') and page.get('ssrBindingMatched') is True if ssr else
+             equal_integer(page.get('status'), 200) and page.get('stale') is False and page.get('partial') is False and
+             'total' in page and page['total'] is None)
+
+    counts, checks = proof.get('counts'), proof.get('checks')
+    if not (report.get('countAcceptance') == JAPAN_SOURCE_COUNT_POLICY and
+            all(report.get(key) is True for key in ('japanSourcePriceOrderRequired', 'japanSourcePriceOrderPassed',
+                'japanPriceSortRequired', 'japanPriceSortPassed', 'japanCountDisplayPassed')) and
+            proof.get('contract') == 'japan-source-price-order-browser-v1' and proof.get('selectedThroughUi') is True and
+            proof.get('city') == 'Новокузнецк' and equal_integer(proof.get('powerTo'), 160) and
+            proof.get('priceBasis') == 'source_FINISH_JPY' and proof.get('priceOrderScope') == 'source_order_across_append' and
+            proof.get('sourcePriceOrderAcrossPages') is True and proof.get('globalDeliveredPriceOrderClaimed') is False and
+            proof.get('powerLanesReordered') is False and equal_integer(proof.get('explicitApiReads'), 2) and
+            equal_integer(proof.get('ordinaryAppendRequests'), 2) and proof.get('liveExhaustiveScan') is False and
+            equal_integer(proof.get('pageErrors'), 0) and proof.get('countSourceQueryChangesWithPower') is True and
+            isinstance(counts, list) and len(counts) == 2 and count_passed(counts[0], False) and count_passed(counts[1], True) and
+            counts[0]['summary']['sourceCountProof']['sourceQueryHash'] != counts[1]['summary']['sourceCountProof']['sourceQueryHash'] and
+            proof.get('directions') == ['totalRubDesc', 'totalRub'] and isinstance(checks, list) and len(checks) == 2):
+        return False
+    summary = counts[1]['summary']
+    for index, check in enumerate(checks):
+        if not isinstance(check, dict):
+            return False
+        cursor, prices = check.get('cursor'), check.get('sourcePrices')
+        if not (check.get('sort') == proof['directions'][index] and equal_integer(check.get('status'), 200) and
+                all(equal_integer(check.get(key), expected) for key, expected in
+                    (('loadedBefore', 24), ('added', 24), ('loadedAfter', 48), ('shown', 48), ('duplicateIds', 0))) and
+                all(check.get(key) is True for key in ('oldIdsPreserved', 'orderPreserved', 'sourcePricesMatchApi',
+                    'sourcePriceOrder', 'sameFilter', 'followedEmittedCursor')) and
+                isinstance(cursor, str) and cursor.startswith('j1.') and source_count_cursor(cursor) and
+                check.get('continuationCursor') == cursor and page_passed(check.get('firstPage'), True) and page_passed(check.get('nextPage'), False) and
+                all(hash64(check.get(key)) for key in ('beforeIdsSha256', 'addedIdsSha256', 'afterIdsSha256', 'idsSha256', 'sourcePricesSha256')) and
+                check['idsSha256'] == check['afterIdsSha256'] and isinstance(prices, list) and len(prices) == 48 and
+                all(positive(price) for price in prices) and
+                all(prices[position - 1] >= prices[position] if index == 0 else prices[position - 1] <= prices[position]
+                    for position in range(1, len(prices))) and
+                ui_passed(check.get('initialCount'), summary, 24) and ui_passed(check.get('finalCount'), summary, 48)):
+            return False
+    return checks[0]['cursor'] != checks[1]['cursor']
 
 
 def observed_timing_fields(value):
@@ -1059,7 +1206,8 @@ def validate_plan(plan):
         need(japan_observed_timing(plan) and
              ((plan.get('retainedRuntime') == JAPAN_STABILITY_EXACT_COUNT_RETAINED and
                plan['countAcceptance'] == JAPAN_SOURCE_BOUNDED_INCREMENTAL_POLICY) or
-              (plan.get('retainedRuntime') in (JAPAN_STABILITY_SOURCE_COUNT_RETAINED, JAPAN_STABILITY_MODEL_CURSOR_RETAINED) and
+              (plan.get('retainedRuntime') in (JAPAN_STABILITY_SOURCE_COUNT_RETAINED, JAPAN_STABILITY_MODEL_CURSOR_RETAINED,
+                                             JAPAN_STABILITY_SOURCE_PRICE_ORDER_RETAINED) and
                plan['countAcceptance'] == JAPAN_SOURCE_COUNT_POLICY)), 'count_acceptance_scope')
     need(plan.get('version') == 1 and plan.get('market') == 'china' and
          (accepted_update(plan) or plan.get('retainedRuntime') == RETAINED) and
@@ -1090,7 +1238,8 @@ def validate_plan(plan):
         if plan.get('countAcceptance') == JAPAN_SOURCE_COUNT_POLICY:
             need((reference.get('runtimeSha'), reference.get('imageId')) in (
                  (JAPAN_STABILITY_SOURCE_COUNT_RETAINED, JAPAN_STABILITY_SOURCE_COUNT_RETAINED_IMAGE),
-                 (JAPAN_STABILITY_MODEL_CURSOR_RETAINED, JAPAN_STABILITY_MODEL_CURSOR_RETAINED_IMAGE)),
+                 (JAPAN_STABILITY_MODEL_CURSOR_RETAINED, JAPAN_STABILITY_MODEL_CURSOR_RETAINED_IMAGE),
+                 (JAPAN_STABILITY_SOURCE_PRICE_ORDER_RETAINED, JAPAN_STABILITY_SOURCE_PRICE_ORDER_RETAINED_IMAGE)),
                  'source_count_retained_image')
         if code_update(plan):
             scope = code_scope(plan)
@@ -1107,7 +1256,7 @@ def validate_plan(plan):
             need(scope != JAPAN_STABILITY_CODE_SCOPE or
                  (plan.get('retainedRuntime') in (JAPAN_STABILITY_RETAINED, JAPAN_STABILITY_PRICE_SORT_RETAINED,
                                                JAPAN_STABILITY_EXACT_COUNT_RETAINED, JAPAN_STABILITY_SOURCE_COUNT_RETAINED,
-                                               JAPAN_STABILITY_MODEL_CURSOR_RETAINED) and
+                                               JAPAN_STABILITY_MODEL_CURSOR_RETAINED, JAPAN_STABILITY_SOURCE_PRICE_ORDER_RETAINED) and
                   bool(JAPAN_STABILITY_CODE_FILES) and JAPAN_PAGINATION_CODE_FILES <= JAPAN_STABILITY_CODE_FILES),
                  'code_stability_predecessor')
             need(all(isinstance(plan.get(key), str) and re.fullmatch(r'[a-f0-9]{64}', plan[key])
@@ -3878,14 +4027,17 @@ class Host:
                 if runtime_profile in (JAPAN_STABILITY_POWER_CODE_FILES, JAPAN_STABILITY_RAILS_CODE_FILES,
                                        JAPAN_STABILITY_HOME_CODE_FILES, JAPAN_STABILITY_METADATA_CODE_FILES,
                                        JAPAN_STABILITY_PRICE_SORT_CODE_FILES, JAPAN_STABILITY_EXACT_COUNT_CODE_FILES,
-                                       JAPAN_STABILITY_SOURCE_COUNT_CODE_FILES, JAPAN_STABILITY_MODEL_CURSOR_CODE_FILES):
+                                       JAPAN_STABILITY_SOURCE_COUNT_CODE_FILES, JAPAN_STABILITY_MODEL_CURSOR_CODE_FILES,
+                                       JAPAN_STABILITY_SOURCE_PRICE_ORDER_CODE_FILES):
                     need(japan.get('japanPowerOrderPassed') is True, 'japan_browser_binding')
                 if runtime_profile in (JAPAN_STABILITY_RAILS_CODE_FILES, JAPAN_STABILITY_HOME_CODE_FILES,
                                        JAPAN_STABILITY_METADATA_CODE_FILES, JAPAN_STABILITY_PRICE_SORT_CODE_FILES, JAPAN_STABILITY_EXACT_COUNT_CODE_FILES,
-                                       JAPAN_STABILITY_SOURCE_COUNT_CODE_FILES, JAPAN_STABILITY_MODEL_CURSOR_CODE_FILES):
+                                       JAPAN_STABILITY_SOURCE_COUNT_CODE_FILES, JAPAN_STABILITY_MODEL_CURSOR_CODE_FILES,
+                                       JAPAN_STABILITY_SOURCE_PRICE_ORDER_CODE_FILES):
                     need(japan.get('japanBrandDirectoryPassed') is True, 'japan_browser_binding')
                 if runtime_profile in (JAPAN_STABILITY_PRICE_SORT_CODE_FILES, JAPAN_STABILITY_EXACT_COUNT_CODE_FILES,
-                                       JAPAN_STABILITY_SOURCE_COUNT_CODE_FILES, JAPAN_STABILITY_MODEL_CURSOR_CODE_FILES):
+                                       JAPAN_STABILITY_SOURCE_COUNT_CODE_FILES, JAPAN_STABILITY_MODEL_CURSOR_CODE_FILES,
+                                       JAPAN_STABILITY_SOURCE_PRICE_ORDER_CODE_FILES):
                     need(all(japan.get(key) is True for key in ('japanPriceSortRequired', 'japanPriceSortPassed', 'japanCountDisplayPassed')),
                          'japan_browser_binding')
                 if runtime_profile == JAPAN_STABILITY_EXACT_COUNT_CODE_FILES:
@@ -3894,10 +4046,15 @@ class Host:
                     else:
                         need(all(japan.get(key) is True for key in ('japanExactCountRequired', 'japanExactCountPassed', 'japanModelCoveragePassed')),
                              'japan_browser_binding')
-                if runtime_profile in (JAPAN_STABILITY_SOURCE_COUNT_CODE_FILES, JAPAN_STABILITY_MODEL_CURSOR_CODE_FILES):
-                    need(japan_source_count_acceptance_passed(japan), 'japan_browser_binding')
-                if runtime_profile == JAPAN_STABILITY_MODEL_CURSOR_CODE_FILES:
-                    need(japan_a4_power160_continuation_acceptance_passed(japan), 'japan_browser_binding')
+                if runtime_profile in (JAPAN_STABILITY_SOURCE_COUNT_CODE_FILES, JAPAN_STABILITY_MODEL_CURSOR_CODE_FILES,
+                                       JAPAN_STABILITY_SOURCE_PRICE_ORDER_CODE_FILES):
+                    need(japan_source_count_acceptance_passed(japan,
+                         auction_database_label=runtime_profile == JAPAN_STABILITY_SOURCE_PRICE_ORDER_CODE_FILES), 'japan_browser_binding')
+                if runtime_profile in (JAPAN_STABILITY_MODEL_CURSOR_CODE_FILES, JAPAN_STABILITY_SOURCE_PRICE_ORDER_CODE_FILES):
+                    need(japan_a4_power160_continuation_acceptance_passed(japan,
+                         auction_database_label=runtime_profile == JAPAN_STABILITY_SOURCE_PRICE_ORDER_CODE_FILES), 'japan_browser_binding')
+                if runtime_profile == JAPAN_STABILITY_SOURCE_PRICE_ORDER_CODE_FILES:
+                    need(japan_source_price_order_acceptance_passed(japan), 'japan_browser_binding')
         for name, raw in [('BROWSER_SPEED.json', speed_raw), ('BROWSER_DETAILS.json', details_raw)]:
             new_file(self.directory / name, raw)
             need(file_sha(self.directory / name) == sha(raw), 'browser_evidence_readback')

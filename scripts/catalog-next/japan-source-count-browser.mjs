@@ -49,7 +49,7 @@ export function verifyJapanSourceCountSummary(summary, {query, now = Date.now(),
 /** The live UI binding may be checked on every existing visitor journey even
  * when its LIST deliberately omits COUNT. The dedicated journey supplies the
  * independent summary too, requiring equality with its actual source proof. */
-export function verifyJapanSourceCountVisible(observation, {summary, query, loaded, now = Date.now()} = {}) {
+export function verifyJapanSourceCountVisible(observation, {summary, query, loaded, now = Date.now(), auctionDatabaseLabel = false} = {}) {
   const {status, sourceTotal, proofKind, requestedQueryHash, observedAt, exactCount, label} = observation;
   need(['bounded', 'source'].includes(status) && natural(loaded) && loaded > 0
     && Number(observation.loadedCount) === loaded && typeof sourceTotal === 'string' && /^(?:0|[1-9]\d*)$/.test(sourceTotal)
@@ -60,7 +60,9 @@ export function verifyJapanSourceCountVisible(observation, {summary, query, load
   need(typeof observedAt === 'string' && Number.isFinite(observed) && observed <= now
     && now - observed < 30 * 60_000 && query !== undefined
     && requestedQueryHash === japanExactCountQueryHash(query), 'visible_binding');
-  need(normalize(label) === (status === 'bounded' ? 'Найдено до ' : 'В источнике: ') + numberText(Number(sourceTotal)), 'visible_label');
+  need(typeof auctionDatabaseLabel === 'boolean' && normalize(label)
+    === (auctionDatabaseLabel ? 'В базе аукционов: ' : status === 'bounded' ? 'Найдено до ' : 'В источнике: ')
+      + numberText(Number(sourceTotal)), 'visible_label');
   if (summary !== undefined && summary !== null) {
     verifyJapanSourceCountSummary(summary, {query, now, positive: true, fresh: true});
     need(Number(sourceTotal) === summary.total && observedAt === summary.observedAt
@@ -404,11 +406,13 @@ export async function runJapanA4Power160ContinuationBrowser({view, report, captu
 
 /** The new gate is checked on both real control lifecycles. Controlled
  * freshness changes are reported separately from actual live observations. */
-export function checkedJapanA4Power160ContinuationBrowserFixture(report, {runtimeSha, runtimeTree, helperSha256} = {}) {
+export function checkedJapanA4Power160ContinuationBrowserFixture(report, {runtimeSha, runtimeTree, helperSha256, sourcePriceOrderRequired = false} = {}) {
   need(/^[a-f0-9]{40}$/.test(runtimeSha || '') && /^[a-f0-9]{40}$/.test(runtimeTree || '') && digest(helperSha256)
     && report?.version === 1 && report.kind === 'japan-exact-count-browser-v1' && report.passed === true
     && report.runtimeSha === runtimeSha && report.runtimeTree === runtimeTree
-    && report.helperSha256?.['scripts/catalog-next/japan-source-count-browser.mjs'] === helperSha256,
+    && report.helperSha256?.['scripts/catalog-next/japan-source-count-browser.mjs'] === helperSha256
+    && typeof sourcePriceOrderRequired === 'boolean'
+    && (report.japanSourcePriceOrderRequired === true) === sourcePriceOrderRequired,
   'power_continuation_fixture_binding');
   need(report.productionRequests === 0 && report.supplierRequests === 0 && report.forbiddenTransportAttempts === 0
     && report.liveSourceAccepted === false && report.backendCensusAccepted === false
@@ -422,6 +426,7 @@ export function checkedJapanA4Power160ContinuationBrowserFixture(report, {runtim
   for (const row of report.cases) {
     const value = row.a4Power160ContinuationAcceptance, source = row.sourceCountAcceptance;
     need(row.passed === true && row.pageErrors === 0 && value?.passed === true && source?.passed === true
+      && (source.japanSourcePriceOrderRequired === true) === sourcePriceOrderRequired
       && value.controlledBackendContract === 'runtime-resolver-and-power-reader-v1' && japanA4Power160ContinuationAcceptancePassed({
       countAcceptance: source.countAcceptance, checkedAt: value.checkedAt,
       japanSourceCountRequired: true, japanSourceCountPassed: true, japanModelCoverageRequired: true, japanModelCoveragePassed: true,
@@ -429,7 +434,7 @@ export function checkedJapanA4Power160ContinuationBrowserFixture(report, {runtim
       japanA4Power160ContinuationRequired: value.japanA4Power160ContinuationRequired,
       japanA4Power160ContinuationPassed: value.japanA4Power160ContinuationPassed,
       checks: {sourceCount: source.sourceCount, modelCoverage: source.modelCoverage, a4Power160Continuation: value.proof},
-    }), 'power_continuation_fixture_proof');
+    }, {auctionDatabaseLabel: sourcePriceOrderRequired}), 'power_continuation_fixture_proof');
     need(Array.isArray(value.controlledTransitions) && value.controlledTransitions.length === 4
       && JSON.stringify(value.controlledTransitions.map(item => item.from + ':' + item.to).sort())
         === '["fresh:missing","fresh:stale","missing:fresh","stale:fresh"]'
@@ -446,7 +451,7 @@ export function checkedJapanA4Power160ContinuationBrowserFixture(report, {runtim
     contract: JAPAN_A4_POWER160_CONTINUATION_CONTRACT, controlledTransitions: 8, liveSourceAccepted: false};
 }
 
-async function readVisibleSourceCount(view, summary, loaded, query) {
+export async function readVisibleSourceCount(view, summary, loaded, query, {auctionDatabaseLabel = false} = {}) {
   const badge = view.locator('main.ac-ajes-catalog [data-japan-count-status][data-japan-loaded-count="' + loaded + '"]');
   await badge.waitFor({state: 'visible', timeout: 60_000});
   // The independent request does not mutate the page. Wait for its ordinary
@@ -469,7 +474,7 @@ async function readVisibleSourceCount(view, summary, loaded, query) {
     requestedQueryHash: await badge.getAttribute('data-japan-count-query-hash'),
     observedAt: await badge.getAttribute('data-japan-count-observed-at'),
     exactCount: await badge.getAttribute('data-catalog-market-count'), label: await label.innerText()},
-  {summary, loaded, query});
+  {summary, loaded, query, auctionDatabaseLabel});
 }
 
 /** Retain the exact source-directory/card union proof, then exercise one real
@@ -477,14 +482,14 @@ async function readVisibleSourceCount(view, summary, loaded, query) {
  * useful visible rows and transport diagnostics are left in the failure report. */
 export async function runJapanSourceCountBrowser({context, report, read, capture, onStage, onPage,
   verifyPage, verifyFullPage, verifyVehiclePolicy, verifyVisible, verifyPowerPage, pageReadEvidence, readSsrPageEvidence,
-  observeResponse = () => {}}) {
+  observeResponse = () => {}, auctionDatabaseLabel = false}) {
   need(report.countAcceptance === JAPAN_SOURCE_COUNT_ACCEPTANCE && report.japanExactCountRequired === false
     && report.japanExactCountPassed === null && report.japanSourceCountRequired === true, 'profile');
   const modelReport = {checks: report.checks, japanExactCountRequired: false, japanExactCountPassed: null};
   const modelPages = await runJapanModelCoverageBrowser({context, report: modelReport, read, capture, onStage, onPage,
     verifyPage, verifyFullPage, verifyVehiclePolicy,
     verifyVisible: (view, items, payload, options) => verifyVisible(view, items, payload,
-      {...options, countAcceptance: JAPAN_SOURCE_COUNT_ACCEPTANCE})});
+      {...options, countAcceptance: JAPAN_SOURCE_COUNT_ACCEPTANCE, auctionDatabaseLabel})});
   need(modelReport.japanModelCoveragePassed === true, 'model_coverage');
   report.japanModelCoveragePassed = true;
   const progress = report.checks.sourceCountProgress = {phase: 'navigate', explicitApiReads: 0};
@@ -504,7 +509,7 @@ export async function runJapanSourceCountBrowser({context, report, read, capture
   need(first.page === 1 && first.pageSize === 24 && first.hasMore === true
     && first.total === null && first.countSummary === null, 'independent_list');
   await verifyVisible(view, first.items, first,
-    {countAcceptance: JAPAN_SOURCE_COUNT_ACCEPTANCE, query});
+    {countAcceptance: JAPAN_SOURCE_COUNT_ACCEPTANCE, query, auctionDatabaseLabel});
   const more = view.locator('main.ac-ajes-catalog a.ac-catalog-more[role="button"]');
   need(await more.count() === 1, 'append_control');
   const cursorBeforeCount = japanSourceCountContinuation(await more.getAttribute('href'), first.nextCursor);
@@ -513,7 +518,7 @@ export async function runJapanSourceCountBrowser({context, report, read, capture
   need(counted.status === 200 && counted.data?.ok === true && counted.data.total === null
     && counted.data.countIncomplete === true && Array.isArray(counted.data.items) && counted.data.items.length === 0, 'response');
   const summary = verifyJapanSourceCountSummary(counted.data.countSummary, {query, positive: true, fresh: true});
-  const ui = await readVisibleSourceCount(view, summary, first.items.length, query);
+  const ui = await readVisibleSourceCount(view, summary, first.items.length, query, {auctionDatabaseLabel});
   const cursorAfterCount = japanSourceCountContinuation(await more.getAttribute('href'), cursorBeforeCount);
   need(view.url() === documentUrl, 'selection_changed');
   // Keep the independently verified count visible in a failed append report.
@@ -536,7 +541,7 @@ export async function runJapanSourceCountBrowser({context, report, read, capture
   const loaded = [...first.items, ...next.items];
   need(next.items.length > 0 && new Set(loaded.map(row => row.id)).size === loaded.length, 'append_duplicate');
   await verifyVisible(view, loaded, {total: null, countSummary: summary, hasMore: next.hasMore},
-    {countAcceptance: JAPAN_SOURCE_COUNT_ACCEPTANCE, query});
+    {countAcceptance: JAPAN_SOURCE_COUNT_ACCEPTANCE, query, auctionDatabaseLabel});
   need(view.url() === documentUrl && errors === 0 && progress.explicitApiReads === 2, 'complete');
   verifyVehiclePolicy([first, next]);
   report.checks.sourceCount = {contract: 'japan-source-count-browser-v1', summary,

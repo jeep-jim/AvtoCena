@@ -13,7 +13,8 @@ import {JAPAN_STABILITY_CODE_SCOPE, JAPAN_STABILITY_EXACT_COUNT_RETAINED_RUNTIME
   JAPAN_STABILITY_EXACT_COUNT_CODE_PATHS, JAPAN_SOURCE_BOUNDED_INCREMENTAL_POLICY,
   JAPAN_SOURCE_COUNT_POLICY, JAPAN_STABILITY_SOURCE_COUNT_RETAINED_RUNTIME,
   JAPAN_STABILITY_SOURCE_COUNT_CODE_PATHS, JAPAN_STABILITY_MODEL_CURSOR_RETAINED_RUNTIME,
-  JAPAN_STABILITY_MODEL_CURSOR_CODE_PATHS,
+  JAPAN_STABILITY_MODEL_CURSOR_CODE_PATHS, JAPAN_STABILITY_SOURCE_PRICE_ORDER_RETAINED_RUNTIME,
+  JAPAN_STABILITY_SOURCE_PRICE_ORDER_CODE_PATHS, japanSourcePriceOrderRequired,
   isExactJapanStabilityScope, japanPriceSortRequired, japanExactCountRequired,
   japanSourceBoundedIncrementalRequired, japanSourceCountRequired,
   japanLiteralFamilyRequired, japanA4Power160ContinuationRequired} from '../scripts/catalog-next/japan-stability-code-scope.mjs';
@@ -93,13 +94,13 @@ test('pagination image verification keeps every CRM path protected and grants no
     execute:()=>assert.fail('wrong predecessor must fail before git')}),/china_image_pagination_scope/);
 });
 
-test('review plans keep accepted665 selectable until the explicit five-file model-cursor successor is accepted',async()=>{
+test('review plans retain accepted5b1 until the reviewed source-order and count successor is accepted',async()=>{
   const plans=await readChinaDailyPlans(),base=plans.servingPlan;
-  assert.equal(base.runtimeSha,JAPAN_STABILITY_MODEL_CURSOR_RETAINED_RUNTIME);
-  assert.equal(base.retainedRuntime,JAPAN_STABILITY_SOURCE_COUNT_RETAINED_RUNTIME);
-  assert.equal(base.runtimeTree,'ac1bda972ec48470b0a3a2f09a31056bd7accd35');
-  assert.equal(base.runtimeFiles.length,18);
-  assert.deepEqual([...base.runtimeFiles].sort(),[...JAPAN_STABILITY_SOURCE_COUNT_CODE_PATHS].sort());
+  assert.equal(base.runtimeSha,JAPAN_STABILITY_SOURCE_PRICE_ORDER_RETAINED_RUNTIME);
+  assert.equal(base.retainedRuntime,JAPAN_STABILITY_MODEL_CURSOR_RETAINED_RUNTIME);
+  assert.equal(base.runtimeTree,'ac4c70c441c161e22599c27f45dd60cce9dd117b');
+  assert.equal(base.runtimeFiles.length,5);
+  assert.deepEqual([...base.runtimeFiles].sort(),[...JAPAN_STABILITY_MODEL_CURSOR_CODE_PATHS].sort());
   assert.equal(base.codeScope,JAPAN_STABILITY_CODE_SCOPE);
   assert.equal(isExactJapanStabilityScope(base),true);
   assert.equal(base.countAcceptance,JAPAN_SOURCE_COUNT_POLICY);
@@ -107,22 +108,23 @@ test('review plans keep accepted665 selectable until the explicit five-file mode
   assert.equal(japanExactCountRequired(base),false);
   assert.equal(japanSourceBoundedIncrementalRequired(base),false);
   assert.equal(japanSourceCountRequired(base),true);
-  assert.equal(japanA4Power160ContinuationRequired(base),false);
+  assert.equal(japanA4Power160ContinuationRequired(base),true);
+  assert.equal(japanSourcePriceOrderRequired(base),false);
   assert.equal(japanLiteralFamilyRequired(base),true);
   assert.equal(japanExactCountRequired({...base,retainedRuntime:JAPAN_STABILITY_EXACT_COUNT_RETAINED_RUNTIME,
     runtimeFiles:[...JAPAN_STABILITY_EXACT_COUNT_CODE_PATHS],countAcceptance:undefined}),true);
-  assert.equal(base.runtimeDiffSha256,'8067cb118b06547e13cba80321be55bed1a74f6f1bb6faf62071ff3c855a9746');
-  assert.equal(base.pricingToServingDiffSha256,'ed6bcd947d41d99966856a3c0cfea9075c13bdba42dcef2c893ed349bda6cf82');
-  assert.equal(base.pricingToServingFiles.length,132);
+  assert.equal(base.runtimeDiffSha256,'e1da31f4c7070154f25345be61bd366ecdacd426eb7873aa4a4fddd5f543c5be');
+  assert.equal(base.pricingToServingDiffSha256,'5728ee0506775dc4f0d828828cae59837be164592bde27898ed3424a29024b95');
+  assert.equal(base.pricingToServingFiles.length,133);
   assert.equal(selectChinaDailyServingPlan(plans,base.runtimeSha),base);
   const successors=plans.servingPlans.filter(value=>value!==base);
   assert.equal(successors.length,1);
   const successor=successors[0];
   assert.equal(successor.retainedRuntime,base.runtimeSha);
-  assert.equal(successor.runtimeSha,'5b1e513dc9af3735e3b757c6fe7da763aa92837e');
-  assert.equal(successor.runtimeTree,'ac4c70c441c161e22599c27f45dd60cce9dd117b');
-  assert.equal(successor.runtimeFiles.length,5);
-  assert.deepEqual([...successor.runtimeFiles].sort(),[...JAPAN_STABILITY_MODEL_CURSOR_CODE_PATHS].sort());
+  assert.equal(successor.runtimeSha,'69a99f4b77660a7e5d9caec8b07fec4f390509f8');
+  assert.equal(successor.runtimeTree,'36ddbd8f7c91ebb71b83b1a4e064917181f5dd0d');
+  assert.equal(successor.runtimeFiles.length,23);
+  assert.deepEqual([...successor.runtimeFiles].sort(),[...JAPAN_STABILITY_SOURCE_PRICE_ORDER_CODE_PATHS].sort());
   assert.equal(successor.codeScope,JAPAN_STABILITY_CODE_SCOPE);
   assert.equal(isExactJapanStabilityScope(successor),true);
   assert.equal(successor.countAcceptance,JAPAN_SOURCE_COUNT_POLICY);
@@ -131,10 +133,11 @@ test('review plans keep accepted665 selectable until the explicit five-file mode
   assert.equal(japanSourceBoundedIncrementalRequired(successor),false);
   assert.equal(japanSourceCountRequired(successor),true);
   assert.equal(japanA4Power160ContinuationRequired(successor),true);
+  assert.equal(japanSourcePriceOrderRequired(successor),true);
   assert.equal(japanLiteralFamilyRequired(successor),true);
-  assert.equal(successor.runtimeDiffSha256,'e1da31f4c7070154f25345be61bd366ecdacd426eb7873aa4a4fddd5f543c5be');
-  assert.equal(successor.pricingToServingDiffSha256,'5728ee0506775dc4f0d828828cae59837be164592bde27898ed3424a29024b95');
-  assert.equal(successor.pricingToServingFiles.length,133);
+  assert.equal(successor.runtimeDiffSha256,'77f2e5815bd94b472e6847b8c2fb55617fdd653ebc92483d5a8705035f09f3e6');
+  assert.equal(successor.pricingToServingDiffSha256,'2a762bda74d8039b3ae30b7a9fe9d325055e22dbd6fb65c55f0fb9962d1930d8');
+  assert.equal(successor.pricingToServingFiles.length,140);
   for(const countAcceptance of [undefined,JAPAN_SOURCE_BOUNDED_INCREMENTAL_POLICY]){
     const invalid={...successor,countAcceptance};
     assert.equal(isExactJapanStabilityScope(invalid),false);
