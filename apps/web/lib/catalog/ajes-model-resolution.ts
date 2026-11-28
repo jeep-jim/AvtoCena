@@ -16,7 +16,9 @@ export function resolveAjesModelNames(selected:string,models:Array<{model:string
 
 type ModelSelection={model?:string;modelFamilies?:string;resolvedModels?:AjesResolvedModels};
 function modelSelection(exact:string[],families:string[]):ModelSelection {
- exact=[...new Set(exact)];families=[...new Set(families)];
+ // Directory order/case is not selection identity. Use exactly the source SQL
+ // compiler's trim/uppercase rule; preserve internal spaces, hyphens and width.
+ exact=[...new Set(exact.map(sourceQueryName))].sort();families=[...new Set(families.map(sourceQueryName))].sort();
  if(exact.length>20||families.length>20)return {resolvedModels:{exact,families}};
  return {...(exact.length?{model:exact.join('|')}:{}),...(families.length?{modelFamilies:families.join('|')}:{})};
 }
@@ -24,9 +26,8 @@ function modelSelection(exact:string[],families:string[]):ModelSelection {
  * SQL spellings. Keep every uncovered alias exact instead of silently dropping
  * hyphens, attached badges, doubled spaces or full-width source letters.
  */
-export function resolveAjesModelSelection(selected:string,models:Array<{model:string}>,make?:unknown,incomplete=false):ModelSelection {
+export function resolveAjesModelSelection(selected:string,models:Array<{model:string}>,make?:unknown,_incomplete=false):ModelSelection {
  const values=selected.split('|').filter(Boolean),names=resolveAjesModelNames(selected,models,make).split('|').filter(Boolean);
- if(names.length<=20&&!incomplete)return modelSelection(names,[]);
  const prefixes=new Set<string>();
  for(const value of values)for(const name of names){
   if(!matchesCatalogModel(name,value,make))continue;
@@ -36,12 +37,15 @@ export function resolveAjesModelSelection(selected:string,models:Array<{model:st
   }
  }
  const covered=(name:string,prefix:string)=>sourceQueryName(name).startsWith(sourceQueryName(prefix)+' ');
- const candidates=[...prefixes].filter(prefix=>incomplete||names.filter(name=>covered(name,prefix)).length>1);
- // A stale or unavailable directory is not allowed to turn typed A4 into just
- // its one saved A4 AVANT spelling. Retain the literal request and family too.
- if(incomplete)candidates.push(...values);
+ const candidates=[...prefixes].filter(prefix=>names.filter(name=>covered(name,prefix)).length>1);
+ // The typed literal namespace is stable whether the optional directory is
+ // fresh, retained or unavailable. A4 always means A4 plus "A4 ..."; a selected
+ // variant keeps only its own namespace. Observed nonliteral aliases remain
+ // explicit below, so a real alias-scope change still invalidates a cursor.
+ // Metadata freshness remains the caller's separate completeness flag.
+ candidates.push(...values);
  const families=[...new Set(candidates)].filter((prefix,_index,all)=>!all.some(other=>other!==prefix&&covered(prefix,other)));
- const exact=[...new Set([...names,...(incomplete?values:[])])].filter(name=>!families.some(prefix=>covered(name,prefix)));
+ const exact=[...new Set([...names,...values])].filter(name=>!families.some(prefix=>covered(name,prefix)));
  return modelSelection(exact,families);
 }
 
@@ -104,3 +108,4 @@ export async function resolveAjesQueryModels<T extends {table?:string;model?:str
   return {query:next,modelDirectoryUnavailable:true};
  }
 }
+

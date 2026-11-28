@@ -47,7 +47,7 @@ test('directory failure permits an exact list query but marks unresolved familie
   assert.deepEqual(result,{query:{...input,modelFamilies:'COROLLA'},modelDirectoryUnavailable:true});assert.equal(input.model,'COROLLA');
  }
  const result=await resolveAjesQueryModels(input,async()=>({models:[{model:'COROLLA'},{model:'COROLLA CROSS'},{model:'CAMRY'}]}));
- assert.equal(result.query.model,'COROLLA|COROLLA CROSS');assert.equal(result.modelDirectoryUnavailable,false);
+ assert.equal(result.query.model,'COROLLA');assert.equal(result.query.modelFamilies,'COROLLA');assert.equal(result.modelDirectoryUnavailable,false);
  for(const error of [new Error('source_disabled'),new Error('programming failure'),...['not_configured','client_ip_missing','quota_invalid','identity_mismatch','http_400','http_401','http_404'].map(reason=>new AjesUnavailable(reason))])await assert.rejects(resolveAjesQueryModels(input,async()=>{throw error;}),e=>e===error);
 });
 
@@ -99,28 +99,32 @@ test('the existing V2 safe source spelling proves Mazda/3 → MAZDA3, without a 
 test('legacy Mazda/3 selects the complete real MAZDA3 family while excluding CX-3, MPV and AXELA',async()=>{
  const models=[...matched,...excluded],before=structuredClone(legacy);
  const result=await resolveAjesQueryModels(legacy,directory(models));
- assert.deepEqual(result,{query:{...legacy,model:matched.join('|')},modelDirectoryUnavailable:false});
+ assert.equal(result.modelDirectoryUnavailable,false);
+ assert.equal(result.query.make,legacy.make);assert.equal(result.query.page,legacy.page);
  assert.deepEqual(legacy,before,'discovery does not rewrite the caller or any listing');
  assert.deepEqual(models,[...matched,...excluded]);
  const sql=ajesQuery(result.query as any).sql;
- assert.ok(sql.includes(`model_name in (${matched.map(name=>`'${name}'`).join(',')})`));
+ const db=database(models);
+ try{assert.deepEqual(new Set(db.prepare(sql).all().map(row=>row.model_name)),new Set(matched));}finally{db.close();}
  assert.doesNotMatch(sql,/model_name (?:=|in \()[^)]*'(?:CX-3|MPV|AXELA|MAZDA30)'/);
 });
 
 test('legacy resolution preserves source spelling and an existing exact base plus all its variants',async()=>{
  const source=['3','3 MPS','Mazda3','Mazda3 Fastback','MAZDA 3 SEDAN','CX-3','MPV'];
  const result=await resolveAjesQueryModels(legacy,directory(source));
- assert.equal(result.query.model,'3|3 MPS|Mazda3|Mazda3 Fastback|MAZDA 3 SEDAN');
+ const db=database(source.map(name=>name.toUpperCase()));
+ try{assert.deepEqual(new Set(db.prepare(ajesQuery(result.query as any).sql).all().map(row=>row.model_name)),new Set(source.slice(0,5).map(name=>name.toUpperCase())));}finally{db.close();}
+ assert.deepEqual(source,['3','3 MPS','Mazda3','Mazda3 Fastback','MAZDA 3 SEDAN','CX-3','MPV'],'directory display spellings are untouched');
  assert.equal(result.modelDirectoryUnavailable,false);
  const exact=await resolveAjesQueryModels({...legacy,model:'Mazda3 Fastback'},directory(source),forbidIdentity);
- assert.deepEqual(exact.query,{...legacy,model:'Mazda3 Fastback'});
+ assert.deepEqual(exact.query,{...legacy,model:'MAZDA3 FASTBACK',modelFamilies:'MAZDA3 FASTBACK'});
 });
 
 test('a large legacy family retains the real base and more than twenty variants through the existing bounded SQL',async()=>{
  const names=['MAZDA3','MAZDA 3',...Array.from({length:20},(_,i)=>'MAZDA3 VERSION '+i),
   ...Array.from({length:20},(_,i)=>'MAZDA 3 VERSION '+i),'MAZDA3MPS','MAZDA  3 VERSION 1','ＭＡＺＤＡ３ VERSION 1'];
  const result=await resolveAjesQueryModels(legacy,directory([...names,...excluded]));
- assert.equal(result.query.modelFamilies,'MAZDA3|MAZDA 3');assert.equal(result.modelDirectoryUnavailable,false);
+ assert.deepEqual(result.query.modelFamilies?.split('|'),['MAZDA 3','MAZDA3']);assert.equal(result.modelDirectoryUnavailable,false);
  assert.ok(result.query.model!.split('|').length<=20);
  for(const name of ['MAZDA3MPS','MAZDA  3 VERSION 1','ＭＡＺＤＡ３ VERSION 1'])assert.ok(result.query.model!.split('|').includes(name));
  const db=database([...names,...excluded]);
@@ -133,7 +137,9 @@ test('a large legacy family retains the real base and more than twenty variants 
 test('pipe selections preserve their other source model and the legacy-only lookup stays scoped to one Mazda make',async()=>{
  const resolver=await readEncyclopediaIdentityResolver();let reads=0;
  const result=await resolveAjesQueryModels({...legacy,model:'3|CX-3'},directory([...matched,...excluded]),async()=>{reads++;return resolver;});
- assert.equal(reads,1);assert.equal(result.query.model,[...matched,'CX-3'].join('|'));
+ assert.equal(reads,1);
+ const db=database([...matched,...excluded]);
+ try{assert.deepEqual(new Set(db.prepare(ajesQuery(result.query as any).sql).all().map(row=>row.model_name)),new Set([...matched,'CX-3']));}finally{db.close();}
  for(const query of [{...legacy,make:'BMW'},{...legacy,make:'Mazda,Toyota'},
   {...legacy,model:'CX-3'},{...legacy,model:'MAZDA3'},{...legacy,model:'AXELA'}])
   await resolveAjesQueryModels(query,directory([...matched,...excluded]),forbidIdentity);
@@ -141,9 +147,9 @@ test('pipe selections preserve their other source model and the legacy-only look
 });
 
 test('empty or unrelated source directories never invent a MAZDA3 option or substitute AXELA',async()=>{
- assert.deepEqual(await resolveAjesQueryModels(legacy,directory([]),forbidIdentity),{query:legacy,modelDirectoryUnavailable:false});
+ assert.deepEqual(await resolveAjesQueryModels(legacy,directory([]),forbidIdentity),{query:{...legacy,modelFamilies:'3'},modelDirectoryUnavailable:false});
  const unrelated=await resolveAjesQueryModels(legacy,directory(['AXELA','CX-3','MPV']));
- assert.deepEqual(unrelated,{query:legacy,modelDirectoryUnavailable:false});
+ assert.deepEqual(unrelated,{query:{...legacy,modelFamilies:'3'},modelDirectoryUnavailable:false});
 });
 
 test('a stale legacy directory preserves known model names without claiming the family complete or empty',async()=>{
@@ -226,7 +232,7 @@ test('large legacy families use the actual source spelling rather than a normali
  for(const spelling of ['MAZDA  3','ＭＡＺＤＡ３']){
   const names=Array.from({length:21},(_,i)=>spelling+' VERSION '+i);
   const result=await resolveAjesQueryModels(legacy,directory(names));
-  assert.equal(result.modelDirectoryUnavailable,false);assert.equal(result.query.modelFamilies,spelling);
+  assert.equal(result.modelDirectoryUnavailable,false);assert.ok(result.query.modelFamilies?.split('|').includes(spelling),'the actual nonliteral source prefix is retained');
   const db=database([...names,...excluded]);
   try{assert.deepEqual(new Set(db.prepare(ajesQuery(result.query as any).sql).all().map(row=>row.model_name)),new Set(names));}finally{db.close();}
  }
@@ -627,8 +633,8 @@ test('the old Mazda/3 URL resolves through real catalog, count and cross-market 
  assert.deepEqual(new Set(recommendations.crossMarketGroups[0].items.map((row:any)=>row.model)),new Set(matched));
  const resolved=state.queries.filter(query=>query.model);
  assert.ok(resolved.length>=3);assert.ok(resolved.every(query=>query.make==='MAZDA'));
- assert.deepEqual(new Set(resolved[0].model.split('|')),new Set(matched));
- assert.ok(resolved.every(query=>query.model===resolved[0].model),'catalog, COUNT and recommendations must use the same resolved source models');
+ const selection=(query:any)=>JSON.stringify([query.model,query.modelFamilies,query.resolvedModels]);
+ assert.ok(resolved.every(query=>selection(query)===selection(resolved[0])),'catalog, COUNT and recommendations must use the same complete literal/alias predicate');
  assert.ok(resolved.some(query=>query.aggregate==='count'));
  assert.ok(state.neighborQueries.every(query=>query.market==='china'&&(!query.model||query.model==='3')));
  assert.equal(input.model,'3');assert.equal(state.current.model,'3','no stored/current technical identity is rewritten');

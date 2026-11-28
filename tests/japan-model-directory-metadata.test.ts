@@ -177,12 +177,18 @@ test('typed Japan ASCII A4 survives Apply with a full-width exact source option 
  assert.equal(control.state.selected,'A4','normalized suggestion equality cannot rewrite the user family');
  assert.equal(canonicalCatalogHref('/cars?market=japan&make=AUDI&model='+encodeURIComponent(control.state.selected)+'&city=Test'),'/cars/japan/AUDI/A4?city=Test');
  for(const complete of [false,true])assert.equal(picker.api.japanTypedModelSelection('A4',control.sourceItems,true,'AUDI',complete),'A4');
- // Fresh complete directory matching is NFKC-equivalent. The bug matters to
- // request identity and literal fallback when only a saved spelling is known.
- assert.deepEqual(resolveAjesModelSelection('A4',control.sourceItems,'AUDI'),resolveAjesModelSelection('Ａ４',control.sourceItems,'AUDI'));
+ // Both explicit spellings retain every observed source alias. Their literal
+ // namespaces remain distinct when optional directory metadata is unavailable.
  const db=new DatabaseSync(':memory:');t.after(()=>db.close());
  db.exec('create table stats(id text,year integer,auction_type integer,status text,finish integer,marka_name text,model_name text,auction_date text)');
  const insert=db.prepare('insert into stats values(?,?,?,?,?,?,?,?)');
+ [...names,'A45','A4L2','OTHER A4'].forEach((model,index)=>insert.run('known-'+index,2021,2,'Sold',100000,'AUDI',model,'2026-11-28'));
+ for(const typed of ['A4','Ａ４']){
+  const selected=resolveAjesModelSelection(typed,control.sourceItems,'AUDI');
+  const rows=[1,2].flatMap(page=>db.prepare(ajesQuery({make:'AUDI',...selected,page,pageSize:48}).sql).all());
+  assert.deepEqual(new Set(rows.map(row=>row.model_name)),new Set(family),'fresh source aliases are complete and sibling boundaries remain excluded');
+ }
+ db.exec('delete from stats');
  ['A4','A4 AVANT NEW','Ａ４','A40'].forEach((model,index)=>insert.run('typed-'+index,2021,2,'Sold',100000,'AUDI',model,'2026-11-28'));
  const selection=resolveAjesModelSelection(control.state.selected,[{model:'Ａ４'}],'AUDI',true);
  assert.deepEqual(new Set(db.prepare(ajesQuery({make:'AUDI',...selection}).sql).all().map(row=>row.model_name)),new Set(['A4','A4 AVANT NEW','Ａ４']));
