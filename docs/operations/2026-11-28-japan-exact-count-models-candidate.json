@@ -128,7 +128,8 @@
       "All observed source aliases are retained beyond the twenty user-choice limit.",
       "Finite exact aliases compile to equivalent IN predicates; stale retries retain known source options.",
       "Observed make aliases beyond twenty retain the same LIST, raw COUNT, model-directory and saved-recovery scope via a server-only descriptor; 27 source spellings are covered by an executed SQL regression.",
-      "The requested model directory no longer stops after ten aggregate pages; checked progress, repeated rows, stale/refusal stop, oldest observedAt and pre-cache malformed-name rejection preserve its boundary."
+      "The requested model directory no longer stops after ten aggregate pages; checked progress, repeated rows, stale/refusal stop, oldest observedAt and pre-cache malformed-name rejection preserve its boundary.",
+      "Free text A4 survives normalized-equal source spellings on both Apply and Enter; explicit literal source choices remain unchanged. The runtime SQL regression preserves the ASCII branch during stale-directory fallback."
     ],
     "countDisplay": "A confirmed total remains independent of the number of loaded cards; its original thirty-minute freshness deadline and stale observation date are preserved.",
     "sourceCount": "Positive census refuses before GROUP/correction reads and cannot revive from memory or saved scalar slots. Validated rawCOUNT0 remains exact.",
@@ -187,6 +188,15 @@
       ],
       "malformedSuccessCacheWrites": 0,
       "providerCooldownPreserved": true
+    },
+    "typedFamilyFollowup": {
+      "regressionRed": 2,
+      "regressionGreen": 3,
+      "adjacentPassed": 53,
+      "typescriptExitCode": 0,
+      "freshFamilyEquivalent": true,
+      "staleLiteralFallbackPreserved": true,
+      "sourceRequests": 0
     }
   },
   "queryBudget": {
@@ -213,14 +223,14 @@
     "experimentalCombinedCensusSupported": false
   },
   "candidate": {
-    "runtimeSha": "d1bdce86766a1d99658a9ac4b88148aa72f283d6",
-    "runtimeTree": "ef54b8510229c36bc17bd242d9a2d1981bbfa098",
+    "runtimeSha": "81c80dc8cd0b9339ddf9bfc7e63037672d2fc9f5",
+    "runtimeTree": "afe84afb1bdc15d5935552c0e6db796aefbb90bc",
     "parent": "20fd18d12b3f5c7aabef860e1b53da0d505dfd64",
     "runtimeFiles": 46,
-    "runtimeDiffSha256": "8516c348c6aad920f2df073764178d48feefe8d0175c7a3c5feb7e4de8d57f56",
+    "runtimeDiffSha256": "5633426cdb8ea8b3e9e7b3bf74e49752f90ff1bdf4fa9a8a4058adcc9bdc57ec",
     "pricingCompatibilityFiles": 127,
     "branch": "fix/japan-exact-count-models-20261128",
-    "sourceUrl": "https://github.com/jeep-jim/AvtoCena/commit/d1bdce86766a1d99658a9ac4b88148aa72f283d6"
+    "sourceUrl": "https://github.com/jeep-jim/AvtoCena/commit/81c80dc8cd0b9339ddf9bfc7e63037672d2fc9f5"
   },
   "fullVerificationFirstPass": {
     "controller": {
@@ -260,9 +270,41 @@
         "exactCountReportEmitted": false,
         "liveSourceAccepted": false,
         "backendCensusAccepted": false
+      },
+      {
+        "runId": "46110314655",
+        "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/46110314655",
+        "controllerSha": "f86c6b639c3f609fb85a8e4dd7308a9444797512",
+        "runtimeSha": "d1bdce86766a1d99658a9ac4b88148aa72f283d6",
+        "runtimeTree": "ef54b8510229c36bc17bd242d9a2d1981bbfa098",
+        "conclusion": "failure",
+        "passedBeforeFailure": [
+          "controller gates",
+          "exact source and protected compatibility",
+          "legacy redirect browser",
+          "hydrated model controls browser"
+        ],
+        "failure": {
+          "step": 12,
+          "stage": "exact_count_audi_models",
+          "phase": "typed_a4",
+          "enteredModel": "A4",
+          "submittedModel": "Ａ４",
+          "serverError": "japan_exact_count_fixture_data_query",
+          "modelExpansions": 1,
+          "javascriptErrors": 0,
+          "finding": "The Japanese free-text parser substitutes a normalized source exact match before checking the requested family. Fresh complete resolution is family-equivalent, but stale literal fallback loses the ASCII request branch."
+        },
+        "exactCountReportEmitted": true,
+        "artifactId": 15248853287,
+        "artifactZipSha256": "2b6d94c77d0aeb3e1e889d46ac91b9964cb40b11c45462e94b78986338bd8b7a",
+        "artifactJsonSha256": "e659f563ef0471b050e378f76de06d06109462deb38a23033ae6a32d3c74a700",
+        "officialZipDigestVerified": true,
+        "liveSourceAccepted": false,
+        "backendCensusAccepted": false
       }
     ],
-    "status": "full_local_gates_passed_hosted_retry_pending",
+    "status": "typed_family_fixed_full_local_gates_passed_hosted_retry_pending",
     "handlerRepair": {
       "focusedTests": 18,
       "passed": 18,
@@ -279,7 +321,8 @@
       "liveSourceAccepted": false,
       "backendCensusAccepted": false,
       "fixtureSha256": "ffdec9caad5a18c476808d6c8672d996902bf7dda0b4238697d3d61ce85d60cc",
-      "serverTestSha256": "abfb4f0feb060082d9cf7aeddc1e5eff219a9ecdb22992f9e6653889700414e7"
+      "serverTestSha256": "abfb4f0feb060082d9cf7aeddc1e5eff219a9ecdb22992f9e6653889700414e7",
+      "subsequentRunPreservedOriginalException": true
     }
   },
   "atomicCountAudit": {
@@ -330,7 +373,7 @@
     "liveSourceAccepted": false,
     "backendCensusAccepted": false
   },
-  "fullVerificationFinal": {
+  "fullVerificationBeforeTypedFamilyFollowup": {
     "runtimeSha": "d1bdce86766a1d99658a9ac4b88148aa72f283d6",
     "runtimeTree": "ef54b8510229c36bc17bd242d9a2d1981bbfa098",
     "controller": {
@@ -350,6 +393,31 @@
       "logSha256": "6dc40b42364013196680d3865e01650b6fe0ab96fe5c9cd9fe9dc7599682a26b"
     },
     "sourceProofSha256": "e20179705df40e4391e42e93fa03c93a78740bcc6826e0e033d154b9e6a11208",
+    "protectedSourceVerified": true,
+    "browserRun": false,
+    "liveSourceAccepted": false,
+    "backendCensusAccepted": false
+  },
+  "fullVerificationFinal": {
+    "runtimeSha": "81c80dc8cd0b9339ddf9bfc7e63037672d2fc9f5",
+    "runtimeTree": "afe84afb1bdc15d5935552c0e6db796aefbb90bc",
+    "controller": {
+      "tests": 1765,
+      "passed": 1765,
+      "failed": 0,
+      "skipped": 0,
+      "exitCode": 0,
+      "logSha256": "bbc3af5e2238c67f0b684c685cf2fc2896b6fb3d20ad04cdd3d0cb2caa6e99a4"
+    },
+    "native": {
+      "tests": 611,
+      "passed": 611,
+      "failed": 0,
+      "skipped": 0,
+      "exitCode": 0,
+      "logSha256": "ac9ded23a8d15fc380cf1ac9cb0b2fe1b29f50186f6a29f1d78d38cd794797db"
+    },
+    "sourceProofSha256": "ec5fff2af98b712ee0dd68b17c4eabdbfd21c34cfd9bf8d28921261fdc30b28c",
     "protectedSourceVerified": true,
     "browserRun": false,
     "liveSourceAccepted": false,
