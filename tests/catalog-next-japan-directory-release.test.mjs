@@ -73,6 +73,25 @@ test('visible brand preservation and retry require every real browser case on bo
   assert.throws(() => checkedJapanFilterDirectoryFixture(duplicate, {requireVisibleFallback: true}), /cases/);
 });
 
+test('literal Audi family coverage is a distinct mandatory twenty-case gate', () => {
+  const name = 'audi-family-stale-failed-retry-and-explicit-make';
+  const legacy = fixture([...sourceCases, ...fallbackCases]);
+  const valid = fixture([...sourceCases, ...fallbackCases, name]);
+  assert.equal(checkedJapanFilterDirectoryFixture(valid, {requireSourceNames: true,
+    requireVisibleFallback: true, requireLiteralFamily: true}).cases.length, 20);
+  assert.throws(() => checkedJapanFilterDirectoryFixture(legacy, {requireLiteralFamily: true}), /literal_family_required/);
+  for (let index = 0; index < valid.cases.length; index++) {
+    const missing = structuredClone(valid); missing.cases.splice(index, 1);
+    assert.throws(() => checkedJapanFilterDirectoryFixture(missing, {requireLiteralFamily: true}), /fixture/);
+    const wrong = structuredClone(valid); wrong.cases[index].name = 'normalized-audi-family';
+    assert.throws(() => checkedJapanFilterDirectoryFixture(wrong, {requireLiteralFamily: true}), /cases/);
+    const failed = structuredClone(valid); failed.cases[index].passed = false;
+    assert.throws(() => checkedJapanFilterDirectoryFixture(failed, {requireLiteralFamily: true}), /cases/);
+  }
+  const duplicate = structuredClone(valid); duplicate.cases[19] = duplicate.cases[9];
+  assert.throws(() => checkedJapanFilterDirectoryFixture(duplicate, {requireLiteralFamily: true}), /cases/);
+});
+
 test('both workflows require visible fallback proof from the exact selected source before building', async () => {
   for (const filename of ['verify-china-photo-code.yml', 'catalog-next-china-photo-release.yml']) {
     const workflow = await fs.readFile('.github/workflows/' + filename, 'utf8');
