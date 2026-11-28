@@ -1,0 +1,680 @@
+{
+  "version": 1,
+  "kind": "japan-source-count-publication-v1",
+  "date": "2026-11-28",
+  "timezone": "Asia/Krasnoyarsk",
+  "updatedAt": "2026-11-28T10:08:30.584130+00:00",
+  "publicationStatus": "accepted-completed-published",
+  "runtime": {
+    "sha": "66537bb7470645acf995ab8a792a4fadb98ad1e4",
+    "tree": "ac1bda972ec48470b0a3a2f09a31056bd7accd35",
+    "imageId": "sha256:1086ca08d15c553e436796ab9d79df6538a62d4e8f163e81c76f64d22241a9b7",
+    "retainedRuntime": "7f7a316905cd8109352431ed4722108b3449c3ec",
+    "files": 18,
+    "diffSha256": "8067cb118b06547e13cba80321be55bed1a74f6f1bb6faf62071ff3c855a9746",
+    "pricingRuntimeSha": "64c6338e0db23c8999096bceefbf113c0136fe15",
+    "pricingRuntimeTree": "d2fc1f171316bfb0dc76f09e90409d4d7336f6b3",
+    "pricingToServingFiles": 132,
+    "pricingToServingDiffSha256": "ed6bcd947d41d99966856a3c0cfea9075c13bdba42dcef2c893ed349bda6cf82"
+  },
+  "controller": {
+    "sha": "05b5dde9ea8cc3314374676e96ff5c2efc4ac3fb",
+    "tree": "a86f8f90461ec11e01de8ea952ec48a6a9db6bac",
+    "markerSha": "ba0eb8c29d7092988540dc726e15fb0b70a45d7d",
+    "markerTree": "3ac21d88026bfd8b228f432c4049a8c5d952f1e0",
+    "markerParentSha": "05b5dde9ea8cc3314374676e96ff5c2efc4ac3fb"
+  },
+  "acceptancePolicy": "japan-functional-observed-timing-v1",
+  "countAcceptance": "japan-source-count-v1",
+  "acceptanceMeaning": {
+    "visibleSourceCountAndOrdinaryA4AppendAccepted": true,
+    "positiveExactAdmittedCensusClaimed": false,
+    "fullLocallyEnrichedFilterSelectionClaimed": false,
+    "globalDeliveredPriceOrderClaimed": false,
+    "strictHistoricalExactCountProfilePreserved": true,
+    "sourceScopeCompleteMeaning": "Completeness of the source candidate scope; not proof of the final locally filtered admitted selection."
+  },
+  "offline": {
+    "runId": 46131231699,
+    "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/46131231699",
+    "headSha": "05b5dde9ea8cc3314374676e96ff5c2efc4ac3fb",
+    "status": "completed",
+    "conclusion": "success",
+    "controllerTests": {
+      "passed": 1824,
+      "failed": 0,
+      "skipped": 0
+    },
+    "nativeRuntimeTests": {
+      "passed": 647,
+      "failed": 0,
+      "skipped": 0
+    },
+    "typecheckPassed": true,
+    "requiredSteps5Through17Passed": true,
+    "evidenceFile": "verification-excerpt.log",
+    "evidenceSha256": "db38d25cd8433a5932c4ee035b385fbcb735dffeb0b5698a54477d4ef6a3de4b",
+    "fixtureCountsAreNotProductionTotals": true
+  },
+  "production": {
+    "runId": 46131690649,
+    "number": 37,
+    "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/46131690649",
+    "headSha": "ba0eb8c29d7092988540dc726e15fb0b70a45d7d",
+    "workflowStatus": "completed",
+    "workflowConclusion": "success",
+    "terminal": {
+      "version": 1,
+      "kind": "china-code-cycle-v1",
+      "completed": true,
+      "published": true,
+      "status": "accepted",
+      "runtimeSha": "66537bb7470645acf995ab8a792a4fadb98ad1e4",
+      "retainedRuntime": "7f7a316905cd8109352431ed4722108b3449c3ec",
+      "imageId": "sha256:1086ca08d15c553e436796ab9d79df6538a62d4e8f163e81c76f64d22241a9b7",
+      "finishedAt": "2026-11-28T10:01:47.533Z",
+      "leaseReleased": true,
+      "retentionPreserved": true,
+      "acceptedGenerationId": "gen_china_46077223993_1",
+      "generationManifestSha256": "bdc53a25146a9a181c84c3b7fde2d3576ede0147b9e4cc70a4ad0788e1e022b7",
+      "sourceCursor": 13382542,
+      "sourceObservedAt": "2026-11-27T23:34:00.128Z"
+    },
+    "acceptedAtLocal": "2026-11-28T17:01:47.533+07:00",
+    "japanBrowserCheckedAt": "2026-11-28T10:01:10.085Z",
+    "nonce": "2abeabd6dcba8565d6111ef724b56777",
+    "functionalGates": {
+      "passed": true,
+      "japanFreshnessPassed": true,
+      "japanPowerApiPassed": true,
+      "japanUiPassed": true,
+      "japanVisibilityPassed": true,
+      "readOnlyBrowserFence": true,
+      "japanPetrolPowerUiPassed": true,
+      "japanDetailPowerInputPassed": true,
+      "japanDeliveredCalculationPassed": true,
+      "japanFullPagesPassed": true,
+      "japanPagination24Passed": true,
+      "japanCatalogWarningRemovedPassed": true,
+      "japanModelSelectionPassed": true,
+      "japanCombinedFiltersPassed": true,
+      "japanRelatedCardsPassed": true,
+      "japanVehiclePolicyPassed": true,
+      "japanPowerOrderPassed": true,
+      "japanBrandDirectoryPassed": true,
+      "japanPriceSortRequired": true,
+      "japanPriceSortPassed": true,
+      "japanCountDisplayPassed": true,
+      "japanModelCoverageRequired": true,
+      "japanModelCoveragePassed": true,
+      "japanExactCountRequired": false,
+      "japanExactCountPassed": null,
+      "japanSourceCountRequired": true,
+      "japanSourceCountPassed": true,
+      "speedGateRequired": false,
+      "speedPassed": null,
+      "timingObserved": true
+    },
+    "timingObserved": true,
+    "speedGateRequired": false,
+    "speedPassed": null
+  },
+  "liveSourceCount": {
+    "contract": "japan-source-count-browser-v1",
+    "summary": {
+      "total": 592,
+      "stale": false,
+      "observedAt": "2026-11-28T10:01:04.917Z",
+      "upperBound": true,
+      "precision": "source-upper-bound",
+      "selectionScope": "source-candidates",
+      "sourceScopeComplete": true,
+      "sourceCountProof": {
+        "version": 1,
+        "kind": "japan-source-count",
+        "predicateVersion": "japan-source-candidates-v1",
+        "requestedQueryHash": "96813b08ccf039448a0a4ecb5ce0aedc17d21c8952f19815dc71746a81d21652",
+        "sourceQueryHash": "ad043d0299e02288af763c28a3c7fafecaad24954ab5a86557661ebc70c78aa7",
+        "evidenceEpoch": "de3ada509aadd7c0338bd6b053075a801c464f05288e4f7ebace219b1bde24d4",
+        "sourceScopeComplete": true,
+        "directoryComplete": true,
+        "sourceTotal": 592,
+        "sourceObservedAt": "2026-11-28T10:01:04.917Z"
+      }
+    },
+    "queryHashVerified": true,
+    "independentCount": true,
+    "admittedTotal": null,
+    "positiveAdmittedCensusClaimed": false,
+    "ui": {
+      "status": "bounded",
+      "sourceTotal": 592,
+      "requestedQueryHash": "96813b08ccf039448a0a4ecb5ce0aedc17d21c8952f19815dc71746a81d21652",
+      "observedAt": "2026-11-28T10:01:04.917Z",
+      "loadedCount": 24,
+      "label": "Найдено до 592"
+    },
+    "pagination": {
+      "sameFilter": true,
+      "cursorBeforeCount": "j1.2.0.2.78eca34629f0fa2a60e8cd864566fc5fb5797e3d60c2c0b2b26caadf699195b2.-",
+      "cursorAfterCount": "j1.2.0.2.78eca34629f0fa2a60e8cd864566fc5fb5797e3d60c2c0b2b26caadf699195b2.-",
+      "continuationCursor": "j1.2.0.2.78eca34629f0fa2a60e8cd864566fc5fb5797e3d60c2c0b2b26caadf699195b2.-",
+      "continuationFollowed": true,
+      "loadedBefore": 24,
+      "loadedAfter": 48,
+      "duplicateIds": 0,
+      "freshSourcePages": true
+    },
+    "liveExhaustiveScan": false,
+    "pageErrors": 0
+  },
+  "liveA4AppendTransport": {
+    "stage": "source_count_append",
+    "status": 200,
+    "ok": true,
+    "shown": 24,
+    "received": 24,
+    "observedAt": "2026-11-28T10:01:09.033Z",
+    "stale": false,
+    "partial": false,
+    "hasMore": true,
+    "total": null,
+    "requestedAt": "2026-11-28T10:01:08.282Z",
+    "receivedAt": "2026-11-28T10:01:09.417Z",
+    "pageReadEvidence": {
+      "status": "recorded",
+      "receipts": [
+        {
+          "version": 1,
+          "queryHash": "ba692d24be42d91d232d607b267c2f51aed74a5ca35457ce5e29cc0ec2a7fee0",
+          "table": "stats",
+          "kind": "list",
+          "page": 2,
+          "pageSize": 24,
+          "requestId": "2afa8a7f-3b35-45f9-b1c1-10a1462510fc",
+          "startedAt": "2026-11-28T10:01:08.537Z",
+          "finishedAt": "2026-11-28T10:01:09.033Z",
+          "stage": "supplier",
+          "supplierAttempted": true,
+          "outcome": "fresh",
+          "observedAt": "2026-11-28T10:01:09.033Z"
+        }
+      ],
+      "received": 1,
+      "omitted": 0,
+      "limited": false
+    }
+  },
+  "modelCoverage": {
+    "coverageContract": "directory-and-visible-cards-v1",
+    "sourcePairs": 35,
+    "accessiblePairs": 35,
+    "optionPairs": 41,
+    "cardBackedExtraPairs": 6,
+    "visibleCardPairs": 9,
+    "allSourceModelsAccessible": true,
+    "noForeignModels": true,
+    "sourceMatchesUi": true,
+    "allOptionsSourceBacked": true,
+    "uiEqualsDirectory": false,
+    "pairsSha256": "20fbec1216d94ebcb39f00bac3a946219bafce7165bd1de9f4a44cc1c1f73c0b",
+    "optionPairsSha256": "81857e02e7b610e8c23aaf74898c94f4b56ff64efe96c4bbd0f66dfb6be39a6c",
+    "cardBackedExtraPairsSha256": "c75514516c6005e22f5904356623358dda6d573f35e13b4e23c25432ed312c3c",
+    "visibleCardPairsSha256": "a9976d0c71a33dc2cec94707c0445ef3c55b9676f001caaa6aa55335da8b5547",
+    "cardProvenanceSha256": "2899a8e2568b9b583d381eaa53ba6548260ba5b0eeb0d467024b1407f9620524",
+    "typedBase": "A4",
+    "typedFamilyNotNarrowed": true,
+    "liveExhaustiveScan": false
+  },
+  "independentBrowserVerification": {
+    "version": 1,
+    "kind": "japan-source-count-independent-browser-v1",
+    "recordedAtUtc": "2026-11-28 10:04:37 UTC",
+    "runtimePreviouslyObserved": "66537bb7470645acf995ab8a792a4fadb98ad1e4",
+    "observationsBeganDuringPublication": true,
+    "acceptanceConfirmedAtRecording": true,
+    "original": {
+      "url": "https://avtocena.com/cars/japan/Audi/A4?city=%D0%9D%D0%BE%D0%B2%D0%BE%D0%BA%D1%83%D0%B7%D0%BD%D0%B5%D1%86%D0%BA",
+      "uiLabel": "Найдено до 592",
+      "sourceTotal": 592,
+      "sourceObservedAt": "2026-11-28T10:01:04.917Z",
+      "queryHash": "96813b08ccf039448a0a4ecb5ce0aedc17d21c8952f19815dc71746a81d21652",
+      "cardsBeforeAppend": 24,
+      "cardsAfterAppend": 48,
+      "uniqueAfterAppend": 48,
+      "firstPagePreserved": true,
+      "duplicateIds": 0,
+      "appendClicks": 1,
+      "alerts": [],
+      "appendPassed": true,
+      "countMeaning": "source-upper-bound",
+      "exactAdmittedTotal": null
+    },
+    "filtered": {
+      "url": "https://avtocena.com/cars/japan/Audi/A4?powerTo=160&city=%D0%9D%D0%BE%D0%B2%D0%BE%D0%BA%D1%83%D0%B7%D0%BD%D0%B5%D1%86%D0%BA",
+      "action": "enabled the existing powerTo=160 checkbox",
+      "uiLabel": "Найдено до 592",
+      "sourceTotal": 592,
+      "sourceObservedAt": "2026-11-28T10:01:04.917Z",
+      "queryHash": "88e6a65f53e3b5dc8fe9d711e941c8b8c6a04cab7c51d9d4339ce0784ab9b515",
+      "loaded": 12,
+      "visibleOfferLinks": 12,
+      "countVisible": true,
+      "alerts": [],
+      "selectionStatus": "Показана часть автомобилей. Полный список пока недоступен.",
+      "countMeaning": "source-upper-bound",
+      "exactAdmittedTotal": null,
+      "fullSelectionProven": false,
+      "filteredAppendNotAttempted": true
+    },
+    "limitations": [
+      "Browser DOM observations do not themselves establish the source transport status.",
+      "592 is an upper bound from the source, not an exact count after the power filter.",
+      "The power-filter observation shows a partial selection of12; no complete-selection claim."
+    ]
+  },
+  "independentPower160Interpretation": {
+    "initialRecordedAtUtc": "2026-11-28 10:04:37 UTC",
+    "initialVisibleRows": 12,
+    "initialSourceCandidateUpperBound": 592,
+    "initialUiLabel": "Найдено до 592",
+    "initialSelectionStatus": "Показана часть автомобилей. Полный список пока недоступен.",
+    "followUpRecordedAtUtc": "2026-11-28 10:09:48 UTC",
+    "ordinaryAppendAttempts": 2,
+    "firstAppendHttpStatus": 409,
+    "firstAppendRetainedRows": 12,
+    "firstPageRefreshes": 1,
+    "firstPageResetPreservedFilter": true,
+    "afterResetVisibleRows": 3,
+    "afterResetUiLabel": "Показано 3 · общий итог уточняется",
+    "secondAppendUiError": "Данные подбора обновились. Откройте первую страницу — выбранные фильтры сохранены.",
+    "secondAppendHttpStatus": null,
+    "secondAppendHttpStatusIndependentlyCaptured": false,
+    "evidenceEpochUnchanged": true,
+    "exactAdmittedTotal": null,
+    "fullSelectionProven": false,
+    "filteredAppendPassed": false,
+    "supplierTransportStatusKnown": false,
+    "causeKnown": false,
+    "newBotRefusalObserved": false,
+    "attributionLimit": "HTTP409 is observed at the public catalog API. No corresponding supplier-transport diagnostic was captured. The earlier A4 page-two bot refusal is not attributed to this filtered result; the second append HTTP status was not independently captured."
+  },
+  "independentHealthDuringPublication": {
+    "url": "https://avtocena.com/api/health",
+    "observedVia": "cloud-browser rendered JSON",
+    "observedAtUtc": "2026-11-28 09:58:59 UTC",
+    "ok": true,
+    "service": "avtocena-web",
+    "catalogProjectionParts": "scoped-v1",
+    "releaseSha": "66537bb7470645acf995ab8a792a4fadb98ad1e4",
+    "calculationVersion": "4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90",
+    "acceptanceConfirmed": false
+  },
+  "healthInterpretation": "The 09:58:59 health observation showed runtime 66537 and the calculationVersion while publication was in progress; it did not establish acceptance. Acceptance is supported by the later 10:01:47.533 terminal.",
+  "preservation": {
+    "china": {
+      "acceptedGenerationId": "gen_china_46077223993_1",
+      "generationManifestSha256": "bdc53a25146a9a181c84c3b7fde2d3576ede0147b9e4cc70a4ad0788e1e022b7",
+      "sourceCursor": 13382542,
+      "sourceObservedAt": "2026-11-27T23:34:00.128Z"
+    },
+    "sameChinaIdentityAsRelease36": true,
+    "pricingRuntimeSha": "64c6338e0db23c8999096bceefbf113c0136fe15",
+    "pricingRuntimeTree": "d2fc1f171316bfb0dc76f09e90409d4d7336f6b3",
+    "calculationVersion": "4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90",
+    "samePricingAndCalculationAsRelease36": true,
+    "protectedPathsUnchanged": true,
+    "protectedPricingPathsUnchanged": true,
+    "publicationCounters": {
+      "sourceRequests": 0,
+      "generationRestores": 0,
+      "priceCalculations": 0,
+      "generationWrites": 0,
+      "encyclopediaWrites": 0,
+      "otherMarketWrites": 0,
+      "deletions": 0
+    },
+    "browserCounters": {
+      "productionMutations": 0,
+      "directSupplierApiRequests": 0,
+      "explicitJapanApiRequests": 21
+    },
+    "counterScopeNote": "Publication sourceRequests=0 does not mean no provider reads during live Japan acceptance; the recorded A4 page2 receipt has supplierAttempted=true.",
+    "retainedRuntime": "7f7a316905cd8109352431ed4722108b3449c3ec",
+    "retentionPreserved": true,
+    "priorAcceptedImageForRetainedRuntime": "sha256:59b6be6c59c0895b42cf6766fcba0150d862d3dfc7e09ce2e51f6e17ea7177c0",
+    "retainedImageProvenance": "Prior accepted release36 terminal. Release37 artifact does not contain a separate retainedImageId field."
+  },
+  "bindingAudit": {
+    "passed": true,
+    "checks": {
+      "runtimeTreeImageAndRetainedBound": true,
+      "imageReceiptRawBytesBound": true,
+      "archiveAndRuntimeDiffBound": true,
+      "terminalBrowserPhotoNonceBound": true,
+      "browserAndPhotoOracleHashesEqual": true,
+      "generationManifestBound": true,
+      "sourceCountControllerAcceptance": true,
+      "sourceSummaryUiHashDateAndTotalBound": true,
+      "observedCursorsEqual": true,
+      "protectedPathsUnchanged": true,
+      "protectedPricingPathsUnchanged": true,
+      "beforeAfterAndIndependentHealthMatch": true,
+      "actualAppendHttp200AndFreshPage2": true
+    },
+    "runtimeSha": "66537bb7470645acf995ab8a792a4fadb98ad1e4",
+    "runtimeTree": "ac1bda972ec48470b0a3a2f09a31056bd7accd35",
+    "imageId": "sha256:1086ca08d15c553e436796ab9d79df6538a62d4e8f163e81c76f64d22241a9b7",
+    "retainedRuntime": "7f7a316905cd8109352431ed4722108b3449c3ec",
+    "nonce": "2abeabd6dcba8565d6111ef724b56777",
+    "imageReceiptSha256": "fbc0d2c90d63ab081840ad43c355a1e5b3af4bccf52dba798e440af66b25c915",
+    "archiveSha256": "78346101aad22f306b331c24c81cce4147ae50fa0fc51fb5a3a99e363a83bb3a",
+    "browserReportSha256": "bbeadb85f22cc67abcad40d4ee5c461d710774a061897e97d9bd0e9ffde4f947",
+    "terminalReportSha256": "60cd12ca217cf8890d1dea8f22eb0af01c03974467d932cc813f4d2e682d1982",
+    "oracleSha256Reported": "f02d6843a29f54ada1715197b792e812fa72f4e9d5ecdaaca8eae07a52423b2d",
+    "generationManifestSha256": "bdc53a25146a9a181c84c3b7fde2d3576ede0147b9e4cc70a4ad0788e1e022b7",
+    "meaning": "Verified supplied receipt/report hashes and identity bindings plus the normal server acceptance outcome; not an independent rehash of raw acceptance oracle bytes."
+  },
+  "evidenceLimits": {
+    "rawAcceptanceOracleIncludedInArtifact": false,
+    "sealedHostAcceptanceReceiptIncludedInArtifact": false,
+    "oracleRawBytesIndependentlyRehashed": false,
+    "all592RowsTraversed": false,
+    "exactAdmittedTotalKnown": false,
+    "retainedImageIdExplicitlyIncludedInRelease37Artifact": false,
+    "independentPower160SourceTransportObserved": false,
+    "independentPower160CauseEstablished": false,
+    "newBotRefusalObservedForIndependentPower160": false,
+    "independentPower160SecondAppendHttpStatusKnown": false,
+    "filteredContinuationProvenWorking": false
+  },
+  "artifact": {
+    "id": 15257743720,
+    "bytes": 13854921,
+    "sha256": "sha256:6227e0546f141d3cb7a1587ec6e3816178c584ae01896446a17e6a5c2e18e2d5",
+    "verified": true
+  },
+  "evidenceFiles": [
+    {
+      "name": "catalog-next-china-photo-release-report.json",
+      "sha256": "60cd12ca217cf8890d1dea8f22eb0af01c03974467d932cc813f4d2e682d1982"
+    },
+    {
+      "name": "catalog-next-japan-browser-report.json",
+      "sha256": "bbeadb85f22cc67abcad40d4ee5c461d710774a061897e97d9bd0e9ffde4f947"
+    },
+    {
+      "name": "image-receipt.json",
+      "sha256": "fbc0d2c90d63ab081840ad43c355a1e5b3af4bccf52dba798e440af66b25c915"
+    },
+    {
+      "name": "image-storage-proof.json",
+      "sha256": "08c72d5dea139279473f24b0c21db735348dc806eea570511d4b2d799730b8d6"
+    },
+    {
+      "name": "evidence-binding-report.json",
+      "sha256": "e5e9962dac3aa9a4266eeff771de30b045f23389af82031a17955fb878da3c4c"
+    },
+    {
+      "name": "actions-final-status.json",
+      "sha256": "f1a1d34f172afb975f4b80dd898ee062a0c6fdaaa00c19c99c9df95b91742f9b"
+    },
+    {
+      "name": "publication-summary.json",
+      "sha256": "eea7c60a87f86707fa8aaa7bac6222fadc49feb4ff0842769a6ae2c52ad6ace6"
+    },
+    {
+      "name": "source-count-independent-browser-verification.json",
+      "sha256": "dee71aabbc925a80d12e3663b8803cfd34c8ccf8eebfac8b4af42da3de4e9c4e"
+    },
+    {
+      "name": "source-count-independent-health-during-publication.json",
+      "sha256": "db58e669b2769a693e64f57df8a7923a90ccb0218cae12e783c626d256bf7ebd"
+    },
+    {
+      "name": "source-count-a4-power-continuation-regression.json",
+      "sha256": "056ebe5aaa9b0b78ef71214c67b3166ffad16c8257a6a95f31ad10b123343839"
+    }
+  ],
+  "history": {
+    "priorAcceptedPublication": {
+      "report": "2026-11-28-japan-models-publication.json",
+      "runId": 46122149467,
+      "number": 36,
+      "runtimeSha": "7f7a316905cd8109352431ed4722108b3449c3ec",
+      "imageId": "sha256:59b6be6c59c0895b42cf6766fcba0150d862d3dfc7e09ce2e51f6e17ea7177c0",
+      "status": "accepted",
+      "notRewritten": true
+    },
+    "priorA4Page2Refusal": {
+      "diagnosticRunId": 46123949907,
+      "observedAt": "2026-11-28T07:59:01.214Z",
+      "outcome": "visitor_restricted",
+      "providerCode": "bot",
+      "sourceQuerySha256": "ba692d24be42d91d232d607b267c2f51aed74a5ca35457ce5e29cc0ec2a7fee0",
+      "sameSourceQueryHasFreshReceiptInRelease37": true,
+      "newReceiptRequestId": "2afa8a7f-3b35-45f9-b1c1-10a1462510fc",
+      "notAttributedToIndependentPower160": true
+    },
+    "offlineFailureAttempts": [
+      {
+        "runId": 46127848279,
+        "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/46127848279",
+        "controllerSha": "8e67e11107e7b1e7045ea6fd231d48b0b5803ecc",
+        "result": "offline-failure",
+        "controllerTests": {
+          "total": 1823,
+          "passed": 1820,
+          "failed": 3,
+          "skipped": 0
+        },
+        "nativeRuntimeGateReached": false,
+        "failedGate": "Check publication, daily continuity, rollback and unchanged baselines",
+        "causes": [
+          "Two obsolete source-profile workflow assertions",
+          "Extracted SSR read adapter harness omitted requireSourceCount"
+        ],
+        "repairControllerSha": "1abb34397d0bf1bf63a093d1854d83ef8e6b1c9a"
+      },
+      {
+        "runId": 46128227655,
+        "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/46128227655",
+        "controllerSha": "1abb34397d0bf1bf63a093d1854d83ef8e6b1c9a",
+        "result": "offline-failure",
+        "controllerTests": {
+          "total": 1823,
+          "passed": 1823,
+          "failed": 0,
+          "skipped": 0
+        },
+        "nativeRuntimeGateReached": false,
+        "failedGate": "Verify Japan power then price sorting and live count on the exact runtime",
+        "errorCode": "japan_price_sort_fixture_count_acceptance_plan",
+        "browserCasesExecuted": 0,
+        "causes": [
+          "Price-sort fixture had not admitted the explicit source-count plan/environment profile"
+        ],
+        "repairControllerSha": "7c2bb2dc6d0bf873ea14f9262491c97ef8a93485"
+      },
+      {
+        "runId": 46128743296,
+        "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/46128743296",
+        "controllerSha": "7c2bb2dc6d0bf873ea14f9262491c97ef8a93485",
+        "runtimeSha": "8f36bc936cf2c04d6b97b1b69fddd51d9331ee21",
+        "result": "offline-failure",
+        "controllerTests": {
+          "total": 1824,
+          "passed": 1824,
+          "failed": 0,
+          "skipped": 0
+        },
+        "nativeRuntimeTests": {
+          "total": 640,
+          "passed": 637,
+          "failed": 3,
+          "skipped": 0
+        },
+        "requiredBrowserFixturesPassedBeforeNativeFailure": true,
+        "sourceCountFixtureLifecyclesPassed": 2,
+        "controlledRowsAfterAppendPerLifecycle": 48,
+        "typecheckReached": false,
+        "causes": [
+          "Top-level await in source-count test unsupported by hosted CJS transform",
+          "Two legacy count-label expectations in rail visibility test"
+        ],
+        "repairRuntimeSha": "19cb2c767f73f41580f2c182d30f2a6dc91682ef",
+        "productionOrSupplierAcceptanceClaimed": false
+      },
+      {
+        "runId": 46129349259,
+        "controllerSha": "dd11381d428614ce7b9db375c90cf5d6583caeb8",
+        "runtimeSha": "19cb2c767f73f41580f2c182d30f2a6dc91682ef",
+        "failedGate": "typecheck",
+        "typecheckPassed": false,
+        "errorCode": "TS2339",
+        "causes": [
+          "countProof access lacked a union-member guard in ajes-catalog.ts"
+        ],
+        "repairRuntimeSha": "66537bb7470645acf995ab8a792a4fadb98ad1e4",
+        "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/46129349259",
+        "result": "offline-failure",
+        "controllerTests": {
+          "total": 1824,
+          "passed": 1824,
+          "failed": 0,
+          "skipped": 0
+        },
+        "nativeRuntimeTests": {
+          "total": 647,
+          "passed": 647,
+          "failed": 0,
+          "skipped": 0
+        },
+        "productionOrSupplierAcceptanceClaimed": false
+      },
+      {
+        "runId": 46129905234,
+        "controllerSha": "64ec882f7d3e41f34c3eb937f61eea3f287b1407",
+        "runtimeSha": "66537bb7470645acf995ab8a792a4fadb98ad1e4",
+        "failedGate": "pagination browser fixture: evidence epoch reset",
+        "typecheckPassed": true,
+        "causes": [
+          "Old assertion required cursor query hash equality across a changed editorial evidence epoch"
+        ],
+        "repairControllerSha": "c8bd0f8c01fa20b946891483b855e2a5484f2d26",
+        "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/46129905234",
+        "result": "offline-failure",
+        "controllerTests": {
+          "total": 1824,
+          "passed": 1824,
+          "failed": 0,
+          "skipped": 0
+        },
+        "nativeRuntimeTests": {
+          "total": 647,
+          "passed": 647,
+          "failed": 0,
+          "skipped": 0
+        },
+        "productionOrSupplierAcceptanceClaimed": false
+      },
+      {
+        "runId": 46130711307,
+        "controllerSha": "c8bd0f8c01fa20b946891483b855e2a5484f2d26",
+        "runtimeSha": "66537bb7470645acf995ab8a792a4fadb98ad1e4",
+        "failedGate": "pagination browser fixture: canonical market URL comparison",
+        "typecheckPassed": true,
+        "causes": [
+          "Expected query alone included market=japan although the canonical actual URL encodes Japan in /cars/japan"
+        ],
+        "repairControllerSha": "05b5dde9ea8cc3314374676e96ff5c2efc4ac3fb",
+        "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/46130711307",
+        "result": "offline-failure",
+        "controllerTests": {
+          "total": 1824,
+          "passed": 1824,
+          "failed": 0,
+          "skipped": 0
+        },
+        "nativeRuntimeTests": {
+          "total": 647,
+          "passed": 647,
+          "failed": 0,
+          "skipped": 0
+        },
+        "productionOrSupplierAcceptanceClaimed": false
+      }
+    ]
+  },
+  "supplierDocumentation": {
+    "path": "../markets/japan-aj-supplier-contract-2026-11-28.md",
+    "sha256": "029102a3a57c8327f4f34347a25b7dc1d36bff8fe76cf2b85f18087813c24636",
+    "historicalOct17MarketDiscussionDoesNotOverrideNov24OwnerPolicy": true,
+    "currentSourcePolicy": {
+      "AJ System": [
+        "japan"
+      ],
+      "Auto API": [
+        "china",
+        "korea",
+        "uae"
+      ]
+    },
+    "originalScreenshotsOrCredentialsIncluded": false
+  },
+  "completion": {
+    "publicationCompleted": true,
+    "visibleSourceCountRestored": true,
+    "ordinaryA4Page2Verified": true,
+    "independentA4AppendPassed": true,
+    "independentPower160SelectionComplete": false,
+    "fullPositiveAdmittedCensusImplemented": false,
+    "localFilterCompletenessImplemented": false,
+    "globalDeliveredPriceOrderImplemented": false,
+    "allOriginalIssuesClosed": false,
+    "independentPower160AppendPassed": false,
+    "independentPower160ResetRecoveryPassed": false
+  },
+  "remainingWork": [
+    "Investigate and fix the observed Audi/A4 powerTo160 continuation: first append HTTP409, then the same refresh-required UI after an ordinary first-page reset. Bind the diagnosis to these public requests and do not assume a supplier bot refusal.",
+    "Exact admitted totals for the entire selected inventory remain unproven.",
+    "Completeness of locally enriched filters and global delivered-price order remain open.",
+    "No exhaustive traversal of all 592 candidates was performed or authorized by this acceptance."
+  ],
+  "independentBrowserVerificationPhase": "Initial observation recorded at10:04:37 UTC; its no-filtered-append statement describes that earlier phase only. See later independentFilteredContinuationRegression.",
+  "independentFilteredContinuationRegression": {
+    "version": 1,
+    "kind": "japan-a4-power-continuation-regression-v1",
+    "recordedAtUtc": "2026-11-28 10:09:48 UTC",
+    "acceptedReleaseRun": 46131690649,
+    "runtimeSha": "66537bb7470645acf995ab8a792a4fadb98ad1e4",
+    "sourceScope": "Audi A4 / Новокузнецк / powerTo=160",
+    "first": {
+      "url": "https://avtocena.com/cars/japan/Audi/A4?powerTo=160&city=%D0%9D%D0%BE%D0%B2%D0%BE%D0%BA%D1%83%D0%B7%D0%BD%D0%B5%D1%86%D0%BA",
+      "cards": 12,
+      "label": "Найдено до 592",
+      "cursor": "j2.k.3.0.2.d8853530d80def143c839e86392a07eae1425f73308fc4e35d93245ce812ebf5.988d991b330f62f40bcdd370c2aa5124d917508c76d40dfcd19b655fa22e5633.-",
+      "appendHttpStatus": 409,
+      "appendUiError": "Данные подбора обновились. Откройте первую страницу — выбранные фильтры сохранены.",
+      "cardsRetained": 12,
+      "observedFailedRequest": "https://avtocena.com/api/catalog/search?powerTo=160&city=%D0%9D%D0%BE%D0%B2%D0%BE%D0%BA%D1%83%D0%B7%D0%BD%D0%B5%D1%86%D0%BA&market=japan&make=Audi&model=A4&after=j2.k.3.0.2.d8853530d80def143c839e86392a07eae1425f73308fc4e35d93245ce812ebf5.988d991b330f62f40bcdd370c2aa5124d917508c76d40dfcd19b655fa22e5633.-&marketPage=1&page=2"
+    },
+    "ordinaryRefresh": {
+      "action": "clicked the offered first-page link once",
+      "url": "https://avtocena.com/cars/japan/Audi/A4?powerTo=160&city=%D0%9D%D0%BE%D0%B2%D0%BE%D0%BA%D1%83%D0%B7%D0%BD%D0%B5%D1%86%D0%BA&page=1",
+      "cards": 3,
+      "label": "Показано 3 · общий итог уточняется",
+      "cursor": "j2.k.1.3.2.a91eb222ac7db401d0c0a6006fb7e714a1587fbdb50ba7b52b0c585ba3efe51a.988d991b330f62f40bcdd370c2aa5124d917508c76d40dfcd19b655fa22e5633.eb2bf54c1b4518c767e5777966848e19ee0be379503294f800c347db97cf583c",
+      "appendUiError": "Данные подбора обновились. Откройте первую страницу — выбранные фильтры сохранены.",
+      "cardsRetained": 3,
+      "appendHttpStatus": null,
+      "httpStatusNotIndependentlyCaptured": true
+    },
+    "evidenceEpochUnchanged": true,
+    "cause": "under investigation",
+    "supplierDenialObserved": false,
+    "ordinaryAppendAttempts": 2,
+    "firstPageRefreshes": 1,
+    "contrastWithAcceptedProof": "Bare Audi/A4 with city and no power filter passed a separate fresh24→48 append; that does not prove this filtered continuation."
+  }
+}
