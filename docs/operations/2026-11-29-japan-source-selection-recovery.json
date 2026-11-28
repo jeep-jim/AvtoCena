@@ -1,10 +1,10 @@
 {
   "version": 1,
   "kind": "japan-source-selection-recovery-v1",
-  "checkedAt": "2026-11-28T18:45:24.679951+00:00",
-  "status": "prepared_for_ci_and_fail_closed_reconciliation_before_publication",
+  "checkedAt": "2026-11-28T19:38:04.449825+00:00",
+  "status": "selective_manual_id_candidate_ready_for_required_ci",
   "retainedAcceptedRuntime": "5b1e513dc9af3735e3b757c6fe7da763aa92837e",
-  "controllerBase": "26ec8fb92ea4af0839cba50a4e115a30ba1e1665",
+  "controllerBase": "5150b0c47ec4ad7110f899612b05276e6c2bc2cd",
   "runtimeBase": "deee0fefa0c50bab3397acb5232eca4eed47bbe1",
   "failedReleases": [
     {
@@ -478,6 +478,503 @@
         "cause": null
       },
       "savedSupplierSlotsBoundToThisRelease": false
+    },
+    {
+      "number": 45,
+      "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/46178613440",
+      "archiveSha256": "3bbb0523ccb2e7ac00777a642acdcd15a8e99e831b21bf37bb3b2595ea609271",
+      "terminal": {
+        "runtimeSha": "4077283be39bb1b1a9e74e7fb3e15fc96352c79a",
+        "retainedRuntime": "5b1e513dc9af3735e3b757c6fe7da763aa92837e",
+        "completed": false,
+        "published": false,
+        "status": "rolled_back",
+        "finishedAt": "2026-11-28T19:23:05.809Z",
+        "errorCode": "china_daily_release_japan_browser_failed",
+        "recovered": true,
+        "leaseReleased": true,
+        "retentionPreserved": true,
+        "timingObserved": true,
+        "acceptancePolicy": "japan-functional-observed-timing-v1",
+        "sourceRequests": 0,
+        "generationRestores": 0,
+        "priceCalculations": 0,
+        "generationWrites": 0,
+        "encyclopediaWrites": 0,
+        "otherMarketWrites": 0,
+        "deletions": 0
+      },
+      "browser": {
+        "release": "4077283be39bb1b1a9e74e7fb3e15fc96352c79a",
+        "checkedAt": "2026-11-28T19:22:15.741Z",
+        "passed": false,
+        "japanFreshnessPassed": true,
+        "japanPowerApiPassed": true,
+        "japanUiPassed": true,
+        "japanVisibilityPassed": true,
+        "japanPetrolPowerUiPassed": true,
+        "japanDetailPowerInputPassed": true,
+        "japanDeliveredCalculationPassed": true,
+        "japanFullPagesPassed": true,
+        "japanPagination24Passed": true,
+        "japanCatalogWarningRemovedPassed": true,
+        "japanModelSelectionPassed": false,
+        "japanCombinedFiltersPassed": false,
+        "japanRelatedCardsPassed": false,
+        "japanVehiclePolicyPassed": false,
+        "japanPowerOrderPassed": true,
+        "japanBrandDirectoryPassed": true,
+        "japanPriceSortPassed": false,
+        "japanCountDisplayPassed": false,
+        "japanModelCoveragePassed": false,
+        "japanExactCountPassed": null,
+        "japanSourceCountPassed": false,
+        "japanA4Power160ContinuationPassed": false,
+        "japanSourcePriceOrderPassed": false,
+        "japanCrossoverPower160Passed": false,
+        "timingPolicy": "japan-functional-observed-timing-v1",
+        "speedPassed": null,
+        "timingObserved": true,
+        "generationManifestSha256": "bdc53a25146a9a181c84c3b7fde2d3576ede0147b9e4cc70a4ad0788e1e022b7",
+        "error": {
+          "stage": "stability_source_price_desc",
+          "code": "japan_browser_check_failed",
+          "timeout": true,
+          "navigationCode": "timeout"
+        }
+      },
+      "browserReportSha256": "652a948cb450d71b3b8a32e3e1417bc2f93edd02fbc78f5861f22db1bb3450ca",
+      "priceSortProgress": {
+        "phase": "sort_selected",
+        "explicitApiReads": 2,
+        "countStatus": 200,
+        "counts": [
+          {
+            "selection": "plain",
+            "query": "/api/catalog/search?market=japan&page=1&pageSize=24&city=%D0%9D%D0%BE%D0%B2%D0%BE%D0%BA%D1%83%D0%B7%D0%BD%D0%B5%D1%86%D0%BA",
+            "summary": {
+              "total": 654060,
+              "stale": false,
+              "observedAt": "2026-11-28T19:18:44.129Z",
+              "upperBound": true,
+              "precision": "source-upper-bound",
+              "selectionScope": "source-candidates",
+              "sourceScopeComplete": true,
+              "sourceCountProof": {
+                "version": 1,
+                "kind": "japan-source-count",
+                "predicateVersion": "japan-source-candidates-v1",
+                "requestedQueryHash": "4132e59c0ac79c5358b3deeb4a888b3b1f6238f00cf80906335cd44f610d8a77",
+                "sourceQueryHash": "c67f816e676d6615764642df8051e222d615555cc8524f2322d7025a11fd88e0",
+                "evidenceEpoch": "38083430488839072077252f54192e35095531ba2e3a792a319a204ad3171f89",
+                "sourceScopeComplete": true,
+                "directoryComplete": true,
+                "sourceTotal": 654060,
+                "sourceObservedAt": "2026-11-28T19:18:44.129Z"
+              }
+            },
+            "ui": {
+              "status": "bounded",
+              "sourceTotal": 654060,
+              "requestedQueryHash": "4132e59c0ac79c5358b3deeb4a888b3b1f6238f00cf80906335cd44f610d8a77",
+              "observedAt": "2026-11-28T19:18:44.129Z",
+              "loadedCount": 24,
+              "label": "В базе аукционов: 654 060"
+            },
+            "independentCount": true,
+            "queryHashVerified": true,
+            "admittedTotal": null
+          },
+          {
+            "selection": "power160",
+            "query": "/api/catalog/search?market=japan&page=1&pageSize=24&city=%D0%9D%D0%BE%D0%B2%D0%BE%D0%BA%D1%83%D0%B7%D0%BD%D0%B5%D1%86%D0%BA&powerTo=160",
+            "summary": {
+              "total": 654060,
+              "stale": false,
+              "observedAt": "2026-11-28T19:18:44.129Z",
+              "upperBound": true,
+              "precision": "source-upper-bound",
+              "selectionScope": "source-candidates",
+              "sourceScopeComplete": true,
+              "sourceCountProof": {
+                "version": 1,
+                "kind": "japan-source-count",
+                "predicateVersion": "japan-source-candidates-v1",
+                "requestedQueryHash": "32b9b645e708fb18bfc0b65f161f1c2bfc6a8a49bd171bfa4ca63ad898f0c16d",
+                "sourceQueryHash": "c67f816e676d6615764642df8051e222d615555cc8524f2322d7025a11fd88e0",
+                "evidenceEpoch": "38083430488839072077252f54192e35095531ba2e3a792a319a204ad3171f89",
+                "sourceScopeComplete": true,
+                "directoryComplete": true,
+                "sourceTotal": 654060,
+                "sourceObservedAt": "2026-11-28T19:18:44.129Z"
+              }
+            },
+            "ui": {
+              "status": "bounded",
+              "sourceTotal": 654060,
+              "requestedQueryHash": "32b9b645e708fb18bfc0b65f161f1c2bfc6a8a49bd171bfa4ca63ad898f0c16d",
+              "observedAt": "2026-11-28T19:18:44.129Z",
+              "loadedCount": 24,
+              "label": "В базе аукционов: 654 060"
+            },
+            "independentCount": true,
+            "queryHashVerified": true,
+            "admittedTotal": null
+          }
+        ],
+        "readyChecks": 4,
+        "powerSelectedThroughUi": true,
+        "sortsSelectedThroughUi": [
+          "totalRubDesc"
+        ],
+        "firstPageReadiness": [
+          {
+            "sort": "totalRubDesc",
+            "beforeWait": {
+              "checkedAt": "2026-11-28T19:21:15.484Z",
+              "dom": {
+                "status": "recorded",
+                "roots": 1,
+                "shown": 0,
+                "inspected": 0,
+                "selectedSort": "totalRubDesc",
+                "power160Checked": true,
+                "loadedCount": 0,
+                "countStatus": "bounded",
+                "knownPowerCards": 0,
+                "unknownPowerCards": 0,
+                "auctionPriceCards": 0,
+                "incompleteNotice": true,
+                "alerts": 0,
+                "continuation": {
+                  "controls": 1,
+                  "sameOrigin": true,
+                  "sort": "totalRubDesc",
+                  "page": 2,
+                  "cursorPresent": true,
+                  "cursorVersion": "j2",
+                  "powerPhase": "k",
+                  "sourcePage": 9,
+                  "withinPageSkip": 0
+                }
+              },
+              "sourceReadEvidence": {
+                "page": 1,
+                "afterSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "bindingMatched": true,
+                "status": "recorded",
+                "receipts": [
+                  {
+                    "version": 1,
+                    "requestId": "0e14e15f-5c69-4041-87d6-6cf58e355f17",
+                    "queryHash": "259ec36f6270316fdc169d01a3c3e85094f16f2178bcaf1b52575dff4529ac44",
+                    "table": "stats",
+                    "kind": "list",
+                    "page": 1,
+                    "pageSize": 24,
+                    "startedAt": "2026-11-28T19:20:44.109Z",
+                    "finishedAt": "2026-11-28T19:20:48.044Z",
+                    "stage": "supplier",
+                    "supplierAttempted": true,
+                    "outcome": "fresh",
+                    "observedAt": "2026-11-28T19:20:48.043Z"
+                  },
+                  {
+                    "version": 1,
+                    "requestId": "8e74f952-7044-4d93-a991-bdde7a766a01",
+                    "queryHash": "3eddfa00106134be5dde7517dad039bdff8f4e4a36e8bc9ecf26e7c29cbbe70c",
+                    "table": "stats",
+                    "kind": "list",
+                    "page": 2,
+                    "pageSize": 24,
+                    "startedAt": "2026-11-28T19:20:48.047Z",
+                    "finishedAt": "2026-11-28T19:20:52.260Z",
+                    "stage": "supplier",
+                    "supplierAttempted": true,
+                    "outcome": "fresh",
+                    "observedAt": "2026-11-28T19:20:52.259Z"
+                  },
+                  {
+                    "version": 1,
+                    "requestId": "116bc98e-7e95-4215-8dd4-7644f4dd6ef4",
+                    "queryHash": "2b42492da65f08994fa4de0620d428e0bdeb72a9c3d04dc2b8fcb9c7805683c1",
+                    "table": "stats",
+                    "kind": "list",
+                    "page": 3,
+                    "pageSize": 24,
+                    "startedAt": "2026-11-28T19:20:52.264Z",
+                    "finishedAt": "2026-11-28T19:20:56.119Z",
+                    "stage": "supplier",
+                    "supplierAttempted": true,
+                    "outcome": "fresh",
+                    "observedAt": "2026-11-28T19:20:56.118Z"
+                  },
+                  {
+                    "version": 1,
+                    "requestId": "f0a6553d-93af-4f59-8f21-a9d5b35dd9e0",
+                    "queryHash": "90a4ffa0c6483a4bfff01aa0b4d7ab7b26f3ca1ae86d3f54b06c14e6466380ed",
+                    "table": "stats",
+                    "kind": "list",
+                    "page": 4,
+                    "pageSize": 24,
+                    "startedAt": "2026-11-28T19:20:56.145Z",
+                    "finishedAt": "2026-11-28T19:20:59.978Z",
+                    "stage": "supplier",
+                    "supplierAttempted": true,
+                    "outcome": "fresh",
+                    "observedAt": "2026-11-28T19:20:59.977Z"
+                  },
+                  {
+                    "version": 1,
+                    "requestId": "8d0522b0-a7d1-4c85-a6e2-a6f3ca806487",
+                    "queryHash": "649b451eb1d143df0e0f9373d866b849b49a796542b8a12d7665d8ac07c25d9d",
+                    "table": "stats",
+                    "kind": "list",
+                    "page": 5,
+                    "pageSize": 24,
+                    "startedAt": "2026-11-28T19:20:59.981Z",
+                    "finishedAt": "2026-11-28T19:21:03.617Z",
+                    "stage": "supplier",
+                    "supplierAttempted": true,
+                    "outcome": "fresh",
+                    "observedAt": "2026-11-28T19:21:03.615Z"
+                  },
+                  {
+                    "version": 1,
+                    "requestId": "26ef7c7e-dea7-4456-9928-001aaf8f306d",
+                    "queryHash": "5a9b0d0e401f133ebf443ddcc7e91ecd34473570b9a6db74a88deca4e722ad9c",
+                    "table": "stats",
+                    "kind": "list",
+                    "page": 6,
+                    "pageSize": 24,
+                    "startedAt": "2026-11-28T19:21:03.677Z",
+                    "finishedAt": "2026-11-28T19:21:07.454Z",
+                    "stage": "supplier",
+                    "supplierAttempted": true,
+                    "outcome": "fresh",
+                    "observedAt": "2026-11-28T19:21:07.452Z"
+                  },
+                  {
+                    "version": 1,
+                    "requestId": "f31b5417-6d70-4a33-99d6-fb231ab5f952",
+                    "queryHash": "22b53882e5e8c67998766cb7285faea5963c5209ec0ba190350e7bc7b7126297",
+                    "table": "stats",
+                    "kind": "list",
+                    "page": 7,
+                    "pageSize": 24,
+                    "startedAt": "2026-11-28T19:21:07.456Z",
+                    "finishedAt": "2026-11-28T19:21:11.162Z",
+                    "stage": "supplier",
+                    "supplierAttempted": true,
+                    "outcome": "fresh",
+                    "observedAt": "2026-11-28T19:21:11.160Z"
+                  },
+                  {
+                    "version": 1,
+                    "requestId": "328dd37a-0a68-416f-8200-6f66a26c323b",
+                    "queryHash": "c4e836d260a1464d617a001c70e415abf6ec8e4a2f0d3c94df8a44d37adf99ae",
+                    "table": "stats",
+                    "kind": "list",
+                    "page": 8,
+                    "pageSize": 24,
+                    "startedAt": "2026-11-28T19:21:11.166Z",
+                    "finishedAt": "2026-11-28T19:21:15.087Z",
+                    "stage": "supplier",
+                    "supplierAttempted": true,
+                    "outcome": "fresh",
+                    "observedAt": "2026-11-28T19:21:15.086Z"
+                  }
+                ],
+                "received": 8,
+                "omitted": 0,
+                "limited": false,
+                "omissions": []
+              }
+            },
+            "failure": {
+              "timeout": true,
+              "observation": {
+                "checkedAt": "2026-11-28T19:22:15.490Z",
+                "dom": {
+                  "status": "recorded",
+                  "roots": 1,
+                  "shown": 0,
+                  "inspected": 0,
+                  "selectedSort": "totalRubDesc",
+                  "power160Checked": true,
+                  "loadedCount": 0,
+                  "countStatus": "bounded",
+                  "knownPowerCards": 0,
+                  "unknownPowerCards": 0,
+                  "auctionPriceCards": 0,
+                  "incompleteNotice": true,
+                  "alerts": 0,
+                  "continuation": {
+                    "controls": 1,
+                    "sameOrigin": true,
+                    "sort": "totalRubDesc",
+                    "page": 2,
+                    "cursorPresent": true,
+                    "cursorVersion": "j2",
+                    "powerPhase": "k",
+                    "sourcePage": 9,
+                    "withinPageSkip": 0
+                  }
+                },
+                "sourceReadEvidence": {
+                  "page": 1,
+                  "afterSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                  "bindingMatched": true,
+                  "status": "recorded",
+                  "receipts": [
+                    {
+                      "version": 1,
+                      "requestId": "0e14e15f-5c69-4041-87d6-6cf58e355f17",
+                      "queryHash": "259ec36f6270316fdc169d01a3c3e85094f16f2178bcaf1b52575dff4529ac44",
+                      "table": "stats",
+                      "kind": "list",
+                      "page": 1,
+                      "pageSize": 24,
+                      "startedAt": "2026-11-28T19:20:44.109Z",
+                      "finishedAt": "2026-11-28T19:20:48.044Z",
+                      "stage": "supplier",
+                      "supplierAttempted": true,
+                      "outcome": "fresh",
+                      "observedAt": "2026-11-28T19:20:48.043Z"
+                    },
+                    {
+                      "version": 1,
+                      "requestId": "8e74f952-7044-4d93-a991-bdde7a766a01",
+                      "queryHash": "3eddfa00106134be5dde7517dad039bdff8f4e4a36e8bc9ecf26e7c29cbbe70c",
+                      "table": "stats",
+                      "kind": "list",
+                      "page": 2,
+                      "pageSize": 24,
+                      "startedAt": "2026-11-28T19:20:48.047Z",
+                      "finishedAt": "2026-11-28T19:20:52.260Z",
+                      "stage": "supplier",
+                      "supplierAttempted": true,
+                      "outcome": "fresh",
+                      "observedAt": "2026-11-28T19:20:52.259Z"
+                    },
+                    {
+                      "version": 1,
+                      "requestId": "116bc98e-7e95-4215-8dd4-7644f4dd6ef4",
+                      "queryHash": "2b42492da65f08994fa4de0620d428e0bdeb72a9c3d04dc2b8fcb9c7805683c1",
+                      "table": "stats",
+                      "kind": "list",
+                      "page": 3,
+                      "pageSize": 24,
+                      "startedAt": "2026-11-28T19:20:52.264Z",
+                      "finishedAt": "2026-11-28T19:20:56.119Z",
+                      "stage": "supplier",
+                      "supplierAttempted": true,
+                      "outcome": "fresh",
+                      "observedAt": "2026-11-28T19:20:56.118Z"
+                    },
+                    {
+                      "version": 1,
+                      "requestId": "f0a6553d-93af-4f59-8f21-a9d5b35dd9e0",
+                      "queryHash": "90a4ffa0c6483a4bfff01aa0b4d7ab7b26f3ca1ae86d3f54b06c14e6466380ed",
+                      "table": "stats",
+                      "kind": "list",
+                      "page": 4,
+                      "pageSize": 24,
+                      "startedAt": "2026-11-28T19:20:56.145Z",
+                      "finishedAt": "2026-11-28T19:20:59.978Z",
+                      "stage": "supplier",
+                      "supplierAttempted": true,
+                      "outcome": "fresh",
+                      "observedAt": "2026-11-28T19:20:59.977Z"
+                    },
+                    {
+                      "version": 1,
+                      "requestId": "8d0522b0-a7d1-4c85-a6e2-a6f3ca806487",
+                      "queryHash": "649b451eb1d143df0e0f9373d866b849b49a796542b8a12d7665d8ac07c25d9d",
+                      "table": "stats",
+                      "kind": "list",
+                      "page": 5,
+                      "pageSize": 24,
+                      "startedAt": "2026-11-28T19:20:59.981Z",
+                      "finishedAt": "2026-11-28T19:21:03.617Z",
+                      "stage": "supplier",
+                      "supplierAttempted": true,
+                      "outcome": "fresh",
+                      "observedAt": "2026-11-28T19:21:03.615Z"
+                    },
+                    {
+                      "version": 1,
+                      "requestId": "26ef7c7e-dea7-4456-9928-001aaf8f306d",
+                      "queryHash": "5a9b0d0e401f133ebf443ddcc7e91ecd34473570b9a6db74a88deca4e722ad9c",
+                      "table": "stats",
+                      "kind": "list",
+                      "page": 6,
+                      "pageSize": 24,
+                      "startedAt": "2026-11-28T19:21:03.677Z",
+                      "finishedAt": "2026-11-28T19:21:07.454Z",
+                      "stage": "supplier",
+                      "supplierAttempted": true,
+                      "outcome": "fresh",
+                      "observedAt": "2026-11-28T19:21:07.452Z"
+                    },
+                    {
+                      "version": 1,
+                      "requestId": "f31b5417-6d70-4a33-99d6-fb231ab5f952",
+                      "queryHash": "22b53882e5e8c67998766cb7285faea5963c5209ec0ba190350e7bc7b7126297",
+                      "table": "stats",
+                      "kind": "list",
+                      "page": 7,
+                      "pageSize": 24,
+                      "startedAt": "2026-11-28T19:21:07.456Z",
+                      "finishedAt": "2026-11-28T19:21:11.162Z",
+                      "stage": "supplier",
+                      "supplierAttempted": true,
+                      "outcome": "fresh",
+                      "observedAt": "2026-11-28T19:21:11.160Z"
+                    },
+                    {
+                      "version": 1,
+                      "requestId": "328dd37a-0a68-416f-8200-6f66a26c323b",
+                      "queryHash": "c4e836d260a1464d617a001c70e415abf6ec8e4a2f0d3c94df8a44d37adf99ae",
+                      "table": "stats",
+                      "kind": "list",
+                      "page": 8,
+                      "pageSize": 24,
+                      "startedAt": "2026-11-28T19:21:11.166Z",
+                      "finishedAt": "2026-11-28T19:21:15.087Z",
+                      "stage": "supplier",
+                      "supplierAttempted": true,
+                      "outcome": "fresh",
+                      "observedAt": "2026-11-28T19:21:15.086Z"
+                    }
+                  ],
+                  "received": 8,
+                  "omitted": 0,
+                  "limited": false,
+                  "omissions": []
+                }
+              }
+            }
+          }
+        ]
+      },
+      "failureAttribution": {
+        "compiledPowerClause": "(1=1)",
+        "exactRawSqlHashesMatched": 8,
+        "pageOneSqlBytes": 1367,
+        "pageOneSqlSha256": "259ec36f6270316fdc169d01a3c3e85094f16f2178bcaf1b52575dff4529ac44",
+        "supplierReceipts": "eight_fresh",
+        "displayedCards": 0,
+        "continuationPowerPhase": "k",
+        "continuationSourcePage": 9,
+        "specificBroadeningTriggerKnown": false,
+        "possibleBroadeningTriggers": [
+          "nonempty_editorial_ids",
+          "model_or_total_sql_budget_fallback"
+        ],
+        "savedFailureSlotsMatchTheseEightRequests": false,
+        "providerBlockOrHttpFailureNotEstablished": true
+      }
     }
   ],
   "attribution": {
@@ -503,8 +1000,8 @@
     "A new authorization requirement from the supplier"
   ],
   "candidate": {
-    "runtimeSha": "4077283be39bb1b1a9e74e7fb3e15fc96352c79a",
-    "runtimeTree": "0d54154f3628312533c357ed058eb37c5a7e8900",
+    "runtimeSha": "92f3b904fbc6f58059d30b41361bc3867e9cded2",
+    "runtimeTree": "f2fc9914d1d250456d773fb89393fd48f3304837",
     "runtimeFiles": [
       "apps/web/components/catalog/AjesCatalog.tsx",
       "apps/web/components/catalog/AjesRail.tsx",
@@ -551,7 +1048,7 @@
       "tests/japan-source-selection-completeness.test.ts",
       "tests/japan-source-selection.test.ts"
     ],
-    "runtimeDiffSha256": "d7d7512ea2ad051a1fa0f10b2633ffbb2a2f15b69844c33219dab8bd1509437b",
+    "runtimeDiffSha256": "0cdba4c34a1e65f9ff1edfa2a98950ca6fe746be743b5b6bbef3beded12c642c",
     "pricingToServingFiles": [
       "apps/web/app/(crm)/api/crm/china-catalog-status/route.ts",
       "apps/web/app/(public)/api/catalog/search/route.ts",
@@ -706,55 +1203,49 @@
       "tests/public-page-recovery.test.ts",
       "tests/related-offer-selection.test.ts"
     ],
-    "pricingToServingDiffSha256": "afa14e5ea39be9e060b465a3119e46cb8ed14fbee32a1ce3adeb0085af87992a",
+    "pricingToServingDiffSha256": "2385b87a3a8b842f20f356df8a108831ff1f96dbb56977de2834929f663f700e",
     "branch": "fix/japan-selection-recovery-20261128",
     "publishedToBranch": true,
     "installed": false,
     "controllerBranch": "fix/japan-recovery-controller-20261129"
   },
   "localChecks": {
-    "bodyYearRegression": {
-      "failedBeforeFix": 3,
-      "passedAfterFix": 51,
-      "failedAfterFix": 0,
+    "selectiveManualIds": {
+      "targetedPassed": 44,
+      "failed": 0,
+      "productionFilesChanged": 1,
+      "testFilesChanged": 3,
+      "redToGreenFirstPage": true,
       "firstTwoPages": [
         24,
         48
       ],
-      "allKnownThenUnknown": [
-        60,
-        12
+      "unknownAfterKnown": 6,
+      "unicodeRegexModes": [
+        "i",
+        "iu"
       ],
-      "sharedEncyclopediaUnchanged": true
+      "maxReadsPreserved": 8,
+      "sourcePageSizePreserved": 24,
+      "sameListCountWhere": true,
+      "encodedSqlBudget": 6000,
+      "webTypecheckPassed": true,
+      "independentCriticalPassed": 3
     },
     "nativeFullSuite": {
-      "passed": 753,
+      "runtimeSha": "92f3b904fbc6f58059d30b41361bc3867e9cded2",
+      "passed": 754,
       "failed": 0,
       "testFiles": 85,
-      "runtimeSha": "4077283be39bb1b1a9e74e7fb3e15fc96352c79a",
       "runtimeRestored": true
     },
-    "webTypecheck": {
-      "passed": true,
-      "incremental": false
-    },
-    "engineTypecheck": {
-      "passed": true,
-      "validatedAncestor": "07c652aff1c707ac4f33181777e31a49c4022232",
-      "engineFilesChangedSince": false
-    },
-    "controllerAfterEvidenceTransport": {
-      "passed": 1918,
+    "supplierRegexpCompatibilityProven": false,
+    "finalPlanBindings": {
+      "passed": 16,
       "failed": 0
     },
     "protectedPricingPathsUnchanged": true,
-    "frozenHttpOracleReusable": true,
-    "finalAncestryBindings": {
-      "passed": 16,
-      "failed": 0,
-      "treeUnchanged": true,
-      "d322IsAncestor": true
-    }
+    "frozenHttpOracleReusable": true
   },
   "preservedReadonlyInspection": {
     "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/46168726644",
@@ -814,27 +1305,34 @@
     }
   },
   "precedingRelease": {
-    "runtimeSha": "d3226d2de549d250f50ca66663c4b832df6e6de6",
+    "number": 45,
+    "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/46178613440",
+    "runtimeSha": "4077283be39bb1b1a9e74e7fb3e15fc96352c79a",
     "retainedRuntime": "5b1e513dc9af3735e3b757c6fe7da763aa92837e",
-    "status": "needs_reconciliation",
-    "finishedAt": "2026-11-28T18:38:02.656Z",
     "completed": false,
     "published": false,
-    "errorCode": "china_state_storage_transport",
+    "status": "rolled_back",
+    "finishedAt": "2026-11-28T19:23:05.809Z",
+    "errorCode": "china_daily_release_japan_browser_failed",
+    "recovered": true,
     "leaseReleased": true,
     "retentionPreserved": true,
-    "number": 44,
-    "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/46174247885"
+    "timingObserved": true,
+    "acceptancePolicy": "japan-functional-observed-timing-v1",
+    "sourceRequests": 0,
+    "generationRestores": 0,
+    "priceCalculations": 0,
+    "generationWrites": 0,
+    "encyclopediaWrites": 0,
+    "otherMarketWrites": 0,
+    "deletions": 0
   },
   "latestPublicHealth": {
-    "checkedAt": "2026-11-28T18:29:34.142813+00:00",
+    "checkedAt": "2026-11-28T19:23:54.073527+00:00",
     "httpStatus": 200,
     "ok": true,
-    "service": "avtocena-web",
-    "catalogProjectionParts": "scoped-v1",
     "releaseSha": "5b1e513dc9af3735e3b757c6fe7da763aa92837e",
-    "calculationVersion": "4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90",
-    "notAcceptanceOrReconciliationProof": true
+    "calculationVersion": "4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90"
   },
   "previousCombinedCandidateChecks": {
     "runtimeSha": "07c652aff1c707ac4f33181777e31a49c4022232",
@@ -931,8 +1429,7 @@
     }
   },
   "runtimeParents": [
-    "9b9450433e1be1a11e48e876f12faffdfadcf34a",
-    "d3226d2de549d250f50ca66663c4b832df6e6de6"
+    "4077283be39bb1b1a9e74e7fb3e15fc96352c79a"
   ],
   "release44": {
     "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/46174247885",
@@ -948,7 +1445,7 @@
     "liveJapanProofAvailable": false
   },
   "nextPublicationPrerequisites": {
-    "runtimeSha": "4077283be39bb1b1a9e74e7fb3e15fc96352c79a",
+    "runtimeSha": "92f3b904fbc6f58059d30b41361bc3867e9cded2",
     "requiredCi": true,
     "existingCodeControllerReconcileBeforeStage": true,
     "unresolvedStateStopsBeforeNewStage": true,
@@ -959,5 +1456,78 @@
   "controllerMergedParents": [
     "04065c53935fd1975209718fc73ddfb469efcd55",
     "26ec8fb92ea4af0839cba50a4e115a30ba1e1665"
-  ]
+  ],
+  "previous407CandidateChecks": {
+    "runtimeSha": "4077283be39bb1b1a9e74e7fb3e15fc96352c79a",
+    "checks": {
+      "bodyYearRegression": {
+        "failedBeforeFix": 3,
+        "passedAfterFix": 51,
+        "failedAfterFix": 0,
+        "firstTwoPages": [
+          24,
+          48
+        ],
+        "allKnownThenUnknown": [
+          60,
+          12
+        ],
+        "sharedEncyclopediaUnchanged": true
+      },
+      "nativeFullSuite": {
+        "passed": 753,
+        "failed": 0,
+        "testFiles": 85,
+        "runtimeSha": "4077283be39bb1b1a9e74e7fb3e15fc96352c79a",
+        "runtimeRestored": true
+      },
+      "webTypecheck": {
+        "passed": true,
+        "incremental": false
+      },
+      "engineTypecheck": {
+        "passed": true,
+        "validatedAncestor": "07c652aff1c707ac4f33181777e31a49c4022232",
+        "engineFilesChangedSince": false
+      },
+      "controllerAfterEvidenceTransport": {
+        "passed": 1918,
+        "failed": 0
+      },
+      "protectedPricingPathsUnchanged": true,
+      "frozenHttpOracleReusable": true,
+      "finalAncestryBindings": {
+        "passed": 16,
+        "failed": 0,
+        "treeUnchanged": true,
+        "d322IsAncestor": true
+      }
+    },
+    "ci": {
+      "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/46177820144",
+      "controllerSha": "51f350a2a9cb58168f83a11d15d5dd36135adca1",
+      "controllerPassed": 1933,
+      "nativePassed": 753,
+      "conclusion": "success",
+      "liveReleaseAccepted": false
+    }
+  },
+  "selectiveManualIdRecovery": {
+    "predicate": "canonical_id_IN_or_noncanonical_raw_character_REGEXP_or_fixed_Kelvin_long_s_LIKE",
+    "normalizationPreserved": [
+      "entity",
+      "NFKC",
+      "trim"
+    ],
+    "allModelAndBudgetFallbacksUnchanged": true,
+    "syntheticAllAsciiScopeLimits": {
+      "idsLength64LastSelective": 51,
+      "idsLength16LastSelective": 151,
+      "idsLength1to2LastSelective": 346
+    },
+    "actualEditorialSizeNotObserved": true,
+    "newNetworkRequestsOrRetries": 0,
+    "dailyChinaUsesAcceptedRuntimeAndImage": true,
+    "additionalDailyRolloutRequired": false
+  }
 }
