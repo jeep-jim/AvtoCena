@@ -1,0 +1,770 @@
+name: Mouse 6.0.45 HTTPS one-time administration
+on:
+  push:
+    branches: ['ops/mouse645-https-once-20261128']
+    paths: ['.github/workflows/mouse645-https-once-20261128.yml']
+permissions:
+  contents: read
+concurrency:
+  group: mouse645-https-once-20261128
+  cancel-in-progress: false
+jobs:
+  mouse-https:
+    if: >-
+      github.repository == 'jeep-jim/AvtoCena' &&
+      github.ref == 'refs/heads/ops/mouse645-https-once-20261128' &&
+      github.event_name == 'push' &&
+      github.event.head_commit.message == 'Inspect owner-requested Mouse HTTPS access (2026-11-28)'
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    environment: regcloud-staging
+    steps:
+      - name: Inspect existing Mouse HTTPS access
+        shell: bash
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+        run: |
+          set -euo pipefail
+          umask 077
+          key_file=$(mktemp)
+          hosts_file=$(mktemp)
+          payload_file=$(mktemp)
+          trap 'rm -f "$key_file" "$hosts_file" "$payload_file"' EXIT
+          printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
+          unset SSH_PRIVATE_KEY
+          ssh-keygen -y -f "$key_file" >/dev/null
+          printf '%s\n' '151.248.113.177 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAwiP6mOUcqHc5+Xvih7YY0Ikc7TyNsIoLoFTVx1JcSV' > "$hosts_file"
+          cat > "$payload_file" <<'MOUSE_ADMIN_PAYLOAD'
+          set -euo pipefail
+          umask 077
+          test "$(id -u)" = 0
+          test "$(hostname -s)" = cv8120751
+          root_work=$(mktemp -d /root/mouse645-https-payload.XXXXXXXX)
+          cleanup_payload() {
+            rm -f "$root_work/configure-https.py" "$root_work/https-admin-transaction.py"
+            rmdir "$root_work"
+          }
+          trap cleanup_payload EXIT
+          cat > "$root_work/configure-https.py" <<'MOUSE_INSTALLER_PY'
+          #!/usr/bin/env python3
+          """One reviewed administrator action, never invoked by own-user deployment.
+          
+          Only Mouse's existing virtual host is edited. The original is restored if
+          nginx validation or reload fails. This grants no sudo/root access to the
+          osminog user.
+          """
+          import argparse
+          import hashlib
+          import os
+          import re
+          import stat
+          import subprocess
+          from pathlib import Path
+          
+          ZONE = '''# Mouse 6.0.45 service limits
+          limit_req_zone $binary_remote_addr zone=mouse_645_accounts:2m rate=10r/s;
+          limit_req_zone $binary_remote_addr zone=mouse_645_flash:2m rate=10r/s;
+          limit_conn_zone $binary_remote_addr zone=mouse_645_connections:2m;
+          '''
+          LOCATIONS = '''
+              # Mouse 6.0.45: metadata and short encrypted rendezvous only, no file relay.
+              location ^~ /v1/accounts/ {
+                  limit_req zone=mouse_645_accounts burst=20 nodelay;
+                  limit_conn mouse_645_connections 12;
+                  limit_req_status 429;
+                  client_max_body_size 2100k;
+                  client_body_timeout 12s;
+                  proxy_connect_timeout 2s;
+                  proxy_send_timeout 15s;
+                  proxy_read_timeout 15s;
+                  proxy_request_buffering off;
+                  proxy_buffering off;
+                  proxy_http_version 1.1;
+                  proxy_set_header Connection "";
+                  proxy_set_header Host mouse.black;
+                  proxy_set_header X-Forwarded-Proto https;
+                  proxy_set_header X-Real-IP $remote_addr;
+                  proxy_set_header X-Forwarded-For "";
+                  proxy_pass http://127.0.0.1:8788;
+                  access_log off;
+              }
+              location ^~ /v1/rooms {
+                  limit_req zone=mouse_645_flash burst=20 nodelay;
+                  limit_conn mouse_645_connections 12;
+                  limit_req_status 429;
+                  client_max_body_size 160k;
+                  client_body_timeout 12s;
+                  proxy_connect_timeout 2s;
+                  proxy_send_timeout 15s;
+                  proxy_read_timeout 15s;
+                  proxy_request_buffering off;
+                  proxy_buffering off;
+                  proxy_http_version 1.1;
+                  proxy_set_header Connection "";
+                  proxy_set_header Host mouse.black;
+                  proxy_set_header X-Mouse-Client-IP $remote_addr;
+                  proxy_set_header X-Forwarded-For "";
+                  proxy_pass http://127.0.0.1:8787;
+                  access_log off;
+              }
+          '''
+          
+          
+          def candidate(text):
+              assert text.startswith('# Managed by OSMINOG: mouse.black website\n')
+              if '# Mouse 6.0.45 service limits' in text:
+                  assert ZONE in text and LOCATIONS in text
+                  return text
+              assert '/v1/accounts/' not in text and '/v1/rooms' not in text
+              anchor = '    server_name mouse.black;\n'
+              assert text.count(anchor) == 1
+              return text.replace('\n', '\n' + ZONE, 1).replace(anchor, anchor + LOCATIONS, 1)
+          
+          
+          def replace_config(config, content, metadata):
+              """Replace only the Mouse file, retaining its original owner and mode."""
+              temporary = config.with_name(config.name + '.mouse645-next')
+              assert not temporary.exists() and not temporary.is_symlink()
+              created = False
+              try:
+                  with temporary.open('xb') as out:
+                      created = True
+                      os.fchown(out.fileno(), metadata.st_uid, metadata.st_gid)
+                      os.fchmod(out.fileno(), stat.S_IMODE(metadata.st_mode))
+                      out.write(content)
+                      out.flush()
+                      os.fsync(out.fileno())
+                  os.replace(temporary, config)
+                  created = False
+              finally:
+                  if created:
+                      temporary.unlink(missing_ok=True)
+          
+          
+          def apply_config(config, original, changed):
+              """Validate and reload; recover the previous file on either failure."""
+              metadata = config.stat()
+              subprocess.run(['nginx', '-t'], check=True)
+              backup = config.with_name(config.name + '.before-mouse645')
+              if not backup.exists():
+                  with backup.open('xb') as out:
+                      out.write(original)
+                  backup.chmod(0o600)
+              replace_config(config, changed.encode(), metadata)
+              reload_attempted = False
+              try:
+                  subprocess.run(['nginx', '-t'], check=True)
+                  reload_attempted = True
+                  subprocess.run(['systemctl', 'reload', 'nginx'], check=True)
+              except BaseException:
+                  rollback_stage = 'restoring the original Mouse virtual-host file'
+                  try:
+                      replace_config(config, original, metadata)
+                      rollback_stage = 'validating the restored nginx configuration'
+                      subprocess.run(['nginx', '-t'], check=True)
+                      # A failed reload may have already delivered its signal. Reload
+                      # the restored file in that case; a syntax failure sent no signal.
+                      if reload_attempted:
+                          rollback_stage = 'reloading the restored nginx configuration'
+                          subprocess.run(['systemctl', 'reload', 'nginx'], check=True)
+                  except BaseException as rollback_error:
+                      raise RuntimeError('Mouse HTTPS activation failed; rollback failed while '
+                                         + rollback_stage + '. Administrator intervention is required.') from rollback_error
+                  raise
+          
+          
+          def main():
+              parser = argparse.ArgumentParser()
+              parser.add_argument('--expected-sha256', required=True)
+              parser.add_argument('--check-only', action='store_true')
+              args = parser.parse_args()
+              assert re.fullmatch('[0-9a-f]{64}', args.expected_sha256)
+              config = Path('/etc/nginx/conf.d/mouse.black.conf')
+              assert config.is_file() and not config.is_symlink()
+              original = config.read_bytes()
+              assert hashlib.sha256(original).hexdigest() == args.expected_sha256, 'Mouse virtual host changed; review it again.'
+              changed = candidate(original.decode())
+              if args.check_only:
+                  print('MOUSE_645_HTTPS_CHANGE_REVIEWED bytes=' + str(len(changed.encode())))
+                  return
+              assert os.getuid() == 0, 'Apply this reviewed file in the administrator console.'
+              apply_config(config, original, changed)
+              print('MOUSE_645_HTTPS_ROUTES_APPLIED')
+          
+          
+          if __name__ == '__main__':
+              main()
+          
+          MOUSE_INSTALLER_PY
+          cat > "$root_work/https-admin-transaction.py" <<'MOUSE_TRANSACTION_PY'
+          #!/usr/bin/env python3
+          """One-off Mouse HTTPS transaction. Never grants persistent administrative access.
+          
+          Inspect reads the real host under the existing deployment locks. Apply accepts
+          only the reviewed inspect manifest, invokes one pinned installer, and restores
+          only the Mouse virtual host on any subsequent failure. Configuration contents,
+          keys, environment values and unrestricted command output never enter receipts.
+          """
+          import argparse
+          import contextlib
+          import datetime
+          import fcntl
+          import fnmatch
+          import hashlib
+          import http.client
+          import importlib.util
+          import json
+          import os
+          import pwd
+          import re
+          import shlex
+          import shutil
+          import signal
+          import socket
+          import ssl
+          import stat
+          import subprocess
+          import sys
+          import tempfile
+          import time
+          from pathlib import Path
+          
+          sys.dont_write_bytecode = True
+          CONFIG = Path('/etc/nginx/conf.d/mouse.black.conf')
+          ORIGINAL_SHA = '29a0aa79051a08d854c66c5422d7381f2213fca42f2c3fc6dc9da7ff8b69c65e'
+          INSTALLER_SHA = 'd410b2cfca45ae7ccc07c1e142840c21d1bdca98e626dd29d2bcb442c28a1e43'
+          ISSUER = 'MCowBQYDK2VwAyEAO8rQW1FjIamh9U92KeX5nofRoxyyFtr8SgzUs9K4GxA='
+          LOCKS = (Path('/run/lock/avtocena-runtime-change.lock'),
+                   Path('/opt/osminog/website/.deploy.lock'))
+          MOUSE_ARTIFACTS = {str(CONFIG), str(CONFIG) + '.before-mouse645',
+                             str(CONFIG) + '.mouse645-next'}
+          ENV = {'PATH': '/usr/sbin:/usr/bin:/sbin:/bin', 'LANG': 'C', 'LC_ALL': 'C'}
+          TLS_FILES = {'ssl_certificate', 'ssl_certificate_key', 'ssl_trusted_certificate',
+                       'ssl_client_certificate', 'ssl_dhparam', 'ssl_crl',
+                       'proxy_ssl_certificate', 'proxy_ssl_certificate_key',
+                       'proxy_ssl_trusted_certificate', 'proxy_ssl_crl',
+                       'grpc_ssl_certificate', 'grpc_ssl_certificate_key',
+                       'grpc_ssl_trusted_certificate', 'grpc_ssl_crl'}
+          
+          
+          class GuardError(RuntimeError):
+              """Only fixed, non-secret error identifiers may be included in a receipt."""
+          
+          
+          def require(condition, code):
+              if not condition:
+                  raise GuardError(code)
+          
+          
+          def sha(data):
+              return hashlib.sha256(data).hexdigest()
+          
+          
+          def digest(value):
+              return sha(json.dumps(value, sort_keys=True, separators=(',', ':')).encode())
+          
+          
+          def command(args, timeout=12, limit=8 * 1024 * 1024, allowed=(0,)):
+              """No raw command errors are printed; a timeout also kills child commands."""
+              process = subprocess.Popen(args, stdin=subprocess.DEVNULL, stdout=subprocess.PIPE,
+                                         stderr=subprocess.PIPE, env=ENV, start_new_session=True)
+              try:
+                  out, err = process.communicate(timeout=timeout)
+              except BaseException as error:
+                  try:
+                      os.killpg(process.pid, signal.SIGKILL)
+                  except ProcessLookupError:
+                      pass
+                  process.communicate()
+                  if isinstance(error, subprocess.TimeoutExpired):
+                      raise GuardError('command_timeout_' + Path(args[0]).name) from None
+                  raise
+              require(len(out) <= limit and len(err) <= limit, 'command_output_limit')
+              require(process.returncode in allowed, 'command_failed_' + Path(args[0]).name)
+              return out, process.returncode
+          
+          
+          @contextlib.contextmanager
+          def deployment_locks():
+              """Use existing locks without creating or rewriting either project's file."""
+              handles = []
+              try:
+                  for path in LOCKS:
+                      handle = os.open(path, os.O_RDONLY | os.O_CLOEXEC | os.O_NOFOLLOW)
+                      handles.append(handle)
+                      require(stat.S_ISREG(os.fstat(handle).st_mode), 'invalid_deployment_lock')
+                      try:
+                          fcntl.flock(handle, fcntl.LOCK_EX | fcntl.LOCK_NB)
+                      except BlockingIOError:
+                          raise GuardError('another_deployment_holds_lock') from None
+                  yield
+              finally:
+                  for handle in reversed(handles):
+                      os.close(handle)
+          
+          
+          def metadata(path):
+              info = path.lstat()
+              value = {'uid': info.st_uid, 'gid': info.st_gid,
+                       'mode': stat.S_IMODE(info.st_mode)}
+              if stat.S_ISDIR(info.st_mode):
+                  # Replacing Mouse's child legitimately changes its parent timestamps.
+                  value['type'] = 'directory'
+              elif stat.S_ISREG(info.st_mode):
+                  require(info.st_size <= 16 * 1024 * 1024, 'configuration_file_too_large')
+                  with path.open('rb') as stream:
+                      data = stream.read(16 * 1024 * 1024 + 1)
+                  require(len(data) == info.st_size, 'configuration_changed_during_read')
+                  after = path.lstat()
+                  require((info.st_ino, info.st_mtime_ns, info.st_ctime_ns, info.st_size) ==
+                          (after.st_ino, after.st_mtime_ns, after.st_ctime_ns, after.st_size),
+                          'configuration_changed_during_read')
+                  value.update(type='file', size=len(data), sha256=sha(data),
+                               mtimeNs=info.st_mtime_ns, ctimeNs=info.st_ctime_ns)
+              elif stat.S_ISLNK(info.st_mode):
+                  value.update(type='symlink', target=os.readlink(path),
+                               mtimeNs=info.st_mtime_ns, ctimeNs=info.st_ctime_ns)
+              else:
+                  raise GuardError('unexpected_configuration_file_type')
+              return value
+          
+          
+          def file_manifest(includes, tls_paths):
+              files = {}
+          
+              def add(path, descend=False):
+                  path = Path(path)
+                  name = str(path)
+                  if name in MOUSE_ARTIFACTS or name in files:
+                      return
+                  require(path.is_absolute() and '..' not in path.parts, 'unsafe_configuration_path')
+                  require(len(files) < 4096, 'configuration_file_count_limit')
+                  value = metadata(path)
+                  files[name] = value
+                  if value['type'] == 'symlink':
+                      resolved = path.resolve(strict=True)
+                      add(resolved, descend=descend)
+                  elif value['type'] == 'directory' and descend:
+                      for child in sorted(path.iterdir()):
+                          add(child, descend=True)
+          
+              add(Path('/etc/nginx'), descend=True)
+              for path in sorted(set(includes) | set(tls_paths)):
+                  add(Path(path))
+              for path in (Path('/root/.ssh/authorized_keys'), Path('/etc/ssh/sshd_config'),
+                           Path('/etc/sudoers')):
+                  if path.exists() or path.is_symlink():
+                      add(path)
+                  else:
+                      files[str(path)] = {'type': 'absent'}
+              for path in (Path('/etc/ssh/sshd_config.d'), Path('/etc/sudoers.d')):
+                  if path.exists() or path.is_symlink():
+                      add(path, descend=True)
+                  else:
+                      files[str(path)] = {'type': 'absent'}
+              return files
+          
+          
+          def nginx_inputs():
+              raw, _ = command(['nginx', '-T'], timeout=20)
+              text = raw.decode('utf-8')
+              includes = re.findall(r'^# configuration file (.+):\s*$', text, re.M)
+              require('/etc/nginx/nginx.conf' in includes and str(CONFIG) in includes,
+                      'expected_nginx_config_not_included')
+              # Whitespace mode retains complete quoted and absolute path arguments.
+              lexer = shlex.shlex(text, posix=True, punctuation_chars=';{}')
+              lexer.whitespace_split = True
+              tokens = [part for token in lexer for part in
+                        (list(token) if token and set(token) <= set(';{}') else [token])]
+              tls_paths = set()
+              for index, token in enumerate(tokens):
+                  if token == 'include':
+                      require(index + 2 < len(tokens) and tokens[index + 2] == ';',
+                              'unrecognized_include_directive')
+                      pattern = tokens[index + 1]
+                      require('$' not in pattern, 'dynamic_include_requires_review')
+                      if not pattern.startswith('/'):
+                          pattern = str(Path('/etc/nginx') / pattern)
+                      require(not any(fnmatch.fnmatchcase(name, pattern) for name in
+                                      (str(CONFIG) + '.before-mouse645', str(CONFIG) + '.mouse645-next')),
+                              'include_can_load_mouse_transaction_artifacts')
+                      # A broad include of the target directory could load a restore
+                      # scratch file. The usual *.conf suffix cannot match our artifacts.
+                      parent, leaf = str(Path(pattern).parent), Path(pattern).name
+                      require(not fnmatch.fnmatchcase(str(CONFIG.parent), parent) or
+                              leaf.endswith('.conf') or not any(char in leaf for char in '*?['),
+                              'include_can_load_mouse_restore_artifacts')
+                  if token in TLS_FILES:
+                      require(index + 2 < len(tokens) and tokens[index + 2] == ';',
+                              'unrecognized_tls_file_directive')
+                      name = tokens[index + 1]
+                      require(name.startswith('/') and '$' not in name,
+                              'dynamic_or_relative_tls_file_requires_review')
+                      tls_paths.add(name)
+              return sorted(set(includes)), sorted(tls_paths)
+          
+          
+          def process_start(pid):
+              data = Path('/proc/' + str(pid) + '/stat').read_text()
+              fields = data[data.rindex(')') + 2:].split()
+              ticks = int(fields[19])
+              boot = int(next(line.split()[1] for line in Path('/proc/stat').read_text().splitlines()
+                              if line.startswith('btime ')))
+              return {'startTicks': ticks,
+                      'startUnixNs': boot * 1000000000 + ticks * 1000000000 // os.sysconf('SC_CLK_TCK')}
+          
+          
+          def nginx_runtime():
+              raw, _ = command(['systemctl', 'show', 'nginx', '--no-pager',
+                                '--property=MainPID,ActiveState,ActiveEnterTimestampMonotonic'])
+              properties = dict(line.split('=', 1) for line in raw.decode().splitlines() if '=' in line)
+              require(properties.get('ActiveState') == 'active', 'nginx_not_active')
+              pid = int(properties.get('MainPID', '0'))
+              require(pid > 1, 'invalid_nginx_master_pid')
+              line = Path('/proc/' + str(pid) + '/cmdline').read_bytes().replace(b'\0', b' ').decode().strip()
+              prefix = 'nginx: master process '
+              require(line.startswith(prefix), 'unexpected_nginx_master_command')
+              standard = {binary + suffix for binary in ('/usr/sbin/nginx', 'nginx')
+                          for suffix in ('', ' -g daemon on; master_process on;',
+                                         ' -c /etc/nginx/nginx.conf')}
+              require(line[len(prefix):] in standard, 'nonstandard_nginx_config_requires_review')
+              executable = Path('/proc/' + str(pid) + '/exe').resolve(strict=True)
+              installed = Path(shutil.which('nginx', path=ENV['PATH']) or '/missing').resolve(strict=True)
+              require(executable == installed, 'nginx_binary_mismatch')
+              return {'masterPid': pid, 'masterStartTicks': process_start(pid)['startTicks'],
+                      'activeSinceMonotonic': properties.get('ActiveEnterTimestampMonotonic'),
+                      'executableSha256': sha(executable.read_bytes())}
+          
+          
+          def diagnostics(master_pid, includes):
+              workers = []
+              children = Path('/proc/' + str(master_pid) + '/task/' + str(master_pid) + '/children')
+              try:
+                  for token in children.read_text().split():
+                      try:
+                          title = Path('/proc/' + token + '/cmdline').read_bytes()
+                          if title.startswith(b'nginx: worker process'):
+                              workers.append({'pid': int(token), **process_start(int(token))})
+                      except (OSError, ValueError):
+                          continue
+              except OSError:
+                  pass
+              oldest = min((row['startUnixNs'] for row in workers), default=None)
+              times = []
+              for name in includes:
+                  info = Path(name).stat()
+                  times.append({'path': name, 'mtimeNs': info.st_mtime_ns, 'ctimeNs': info.st_ctime_ns,
+                                'newerThanOldestCurrentWorker': oldest is not None and
+                                max(info.st_mtime_ns, info.st_ctime_ns) > oldest})
+              journal = []
+              journal_available = False
+              try:
+                  raw, _ = command(['journalctl', '-u', 'nginx', '--since', '24 hours ago',
+                                    '-n', '80', '-o', 'json', '--no-pager'], timeout=8)
+                  journal_available = True
+                  for line in raw.decode().splitlines():
+                      row = json.loads(line)
+                      message = row.get('MESSAGE', '')
+                      if not isinstance(message, str):
+                          continue
+                      for pattern, event in ((r'(?i)\breloaded\b', 'reloaded'),
+                                             (r'(?i)\breloading\b', 'reloading'),
+                                             (r'(?i)\breconfiguring\b', 'reconfiguring')):
+                          if re.search(pattern, message):
+                              journal.append({'event': event, 'unixMicroseconds': row.get('__REALTIME_TIMESTAMP')})
+                              break
+              except (GuardError, OSError, ValueError):
+                  pass
+              return {'workers': workers, 'includedFileTimes': times,
+                      'recentReloadEvents': journal, 'journalAvailable': journal_available,
+                      'liveConfigurationSnapshotAvailable': False,
+                      'workerTimingIsHeuristicOnly': True}
+          
+          
+          class LocalHTTPS(http.client.HTTPSConnection):
+              def connect(self):
+                  raw = socket.create_connection(('127.0.0.1', 443), timeout=self.timeout)
+                  try:
+                      self.sock = self._context.wrap_socket(raw, server_hostname=self.host)
+                  except BaseException:
+                      raw.close()
+                      raise
+          
+          
+          def local_get(host, path, timeout=4):
+              connection = LocalHTTPS(host, timeout=timeout, context=ssl.create_default_context())
+              try:
+                  connection.request('GET', path, headers={'Host': host, 'Connection': 'close',
+                                                          'User-Agent': 'Mouse645-admin-readiness'})
+                  response = connection.getresponse()
+                  data = response.read(1024 * 1024 + 1)
+                  require(len(data) <= 1024 * 1024, 'http_response_too_large')
+                  require(not response.getheader('Location'), 'unexpected_http_redirect')
+                  try:
+                      parsed = json.loads(data)
+                  except (ValueError, UnicodeError):
+                      parsed = None
+                  return {'status': response.status, 'sha256': sha(data), 'json': parsed}
+              finally:
+                  connection.close()
+          
+          
+          def avtocena_health(timeout=4):
+              response = local_get('avtocena.com', '/api/health', timeout)
+              value = response['json']
+              require(response['status'] == 200 and isinstance(value, dict) and value.get('ok') is True,
+                      'avtocena_health_not_ready')
+              release = value.get('releaseSha')
+              require(isinstance(release, str) and re.fullmatch('[0-9a-f]{40}', release),
+                      'avtocena_release_not_identified')
+              return release
+          
+          
+          def snapshot(with_diagnostics=False):
+              require(os.getuid() == 0 and socket.gethostname().split('.')[0] == 'cv8120751',
+                      'unexpected_administrative_host')
+              info = CONFIG.lstat()
+              require(stat.S_ISREG(info.st_mode) and info.st_size <= 65536, 'unsafe_mouse_config')
+              original = CONFIG.read_bytes()
+              require(len(original) <= 65536 and original.startswith(b'# Managed by OSMINOG: mouse.black website\n'),
+                      'unrecognized_mouse_config')
+              includes, tls_paths = nginx_inputs()
+              runtime = nginx_runtime()
+              template = ('{"id":{{json .Id}},"image":{{json .Image}},"running":{{json .State.Running}},'
+                          '"pid":{{json .State.Pid}},"startedAt":{{json .State.StartedAt}},'
+                          '"restartCount":{{json .RestartCount}}}')
+              raw, _ = command(['docker', 'inspect', '--format', template, 'avtocena-production'])
+              container = json.loads(raw)
+              require(container.get('running') is True and container.get('pid', 0) > 0,
+                      'avtocena_container_not_running')
+              account = pwd.getpwnam('osminog')
+              raw, _ = command(['id', '-nG', 'osminog'])
+              groups = sorted(raw.decode().split())
+              require(account.pw_uid != 0 and groups == ['osminog'], 'osminog_privileges_changed')
+              for path in ('/etc/nginx', '/var/run/docker.sock'):
+                  _, status = command(['runuser', '-u', 'osminog', '--', 'test', '-w', path], allowed=(0, 1))
+                  require(status == 1, 'osminog_has_unexpected_write_privilege')
+              release = avtocena_health()
+              home, marker = local_get('mouse.black', '/'), local_get('mouse.black', '/release.json')
+              require(home['status'] == 200 and marker['status'] == 200 and
+                      isinstance(marker['json'], dict) and marker['json'].get('domain') == 'mouse.black',
+                      'mouse_website_not_ready')
+              protected = {'nginxRuntime': runtime, 'container': container, 'avtocenaReleaseSha': release,
+                           'files': file_manifest(includes, tls_paths),
+                           'nginxIncludes': includes, 'tlsReferencedPaths': tls_paths,
+                           'osminog': {'uid': account.pw_uid, 'gid': account.pw_gid, 'groups': groups},
+                           'mouseWebsite': {'homepageSha256': home['sha256'], 'markerSha256': marker['sha256']}}
+              mouse = {'sha256': sha(original), 'uid': info.st_uid, 'gid': info.st_gid,
+                       'mode': stat.S_IMODE(info.st_mode)}
+              result = {'protected': protected, 'mouse': mouse, '_bytes': original, '_stat': info}
+              if with_diagnostics:
+                  result['diagnostics'] = diagnostics(runtime['masterPid'], includes)
+              return result
+          
+          
+          def manifest(snapshot_value):
+              return digest({'protected': snapshot_value['protected'], 'mouse': snapshot_value['mouse']})
+          
+          
+          def summary(value):
+              protected = value['protected']
+              return {'avtocenaReleaseSha': protected['avtocenaReleaseSha'],
+                      'container': protected['container'], 'nginxRuntime': protected['nginxRuntime'],
+                      'protectedFileCount': len(protected['files']),
+                      'protectedFilesSha256': digest(protected['files']),
+                      'protectedStateSha256': digest(protected),
+                      'osminog': protected['osminog'], 'mouseWebsite': protected['mouseWebsite'],
+                      'mouseVhost': value['mouse']}
+          
+          
+          def checked_installer(path):
+              path = Path(path).absolute()
+              require(path.resolve(strict=True) == path, 'installer_symlink_refused')
+              info, parent = path.stat(), path.parent.stat()
+              require(stat.S_ISREG(info.st_mode) and info.st_uid == 0 and not info.st_mode & 0o022 and
+                      parent.st_uid == 0 and not parent.st_mode & 0o022, 'installer_must_be_root_private')
+              data = path.read_bytes()
+              require(len(data) <= 65536 and sha(data) == INSTALLER_SHA, 'installer_hash_mismatch')
+              module = importlib.util.module_from_spec(importlib.util.spec_from_loader('reviewed_mouse_installer', loader=None))
+              exec(compile(data, str(path), 'exec'), module.__dict__)
+              return path, data, module
+          
+          
+          def compare_after(before, after, expected_mouse):
+              require(before['protected'] == after['protected'], 'protected_state_changed')
+              expected = {**before['mouse'], 'sha256': expected_mouse}
+              require(after['mouse'] == expected, 'mouse_config_or_metadata_mismatch')
+          
+          
+          def wait_ready(before, seconds=20):
+              deadline = time.monotonic() + seconds
+              while time.monotonic() < deadline:
+                  try:
+                      timeout = max(0.1, min(2, (deadline - time.monotonic()) / 4))
+                      identity = local_get('mouse.black', '/v1/accounts/info', timeout)
+                      room = local_get('mouse.black', '/v1/rooms', timeout)
+                      require(identity['status'] == 200 and isinstance(identity['json'], dict) and
+                              identity['json'].get('serverPublicKey') == ISSUER, 'mouse_identity_not_ready')
+                      require(room['status'] == 404 and isinstance(room['json'], dict) and
+                              isinstance(room['json'].get('error'), dict) and
+                              room['json']['error'].get('code') == 'NOT_FOUND', 'mouse_broker_not_ready')
+                      require(avtocena_health(timeout) == before['protected']['avtocenaReleaseSha'],
+                              'avtocena_release_changed')
+                      return {'identityPinnedIssuer': True, 'brokerJsonNotFound': True,
+                              'avtocenaSameHealthyRelease': True}
+                  except (GuardError, OSError, http.client.HTTPException):
+                      if time.monotonic() >= deadline:
+                          break
+                      time.sleep(min(0.5, max(0, deadline - time.monotonic())))
+              raise GuardError('local_https_readiness_timeout')
+          
+          
+          def restore_mouse(before, candidate_sha):
+              """Never clobber another writer; only our candidate/original is eligible."""
+              info = CONFIG.lstat()
+              require(stat.S_ISREG(info.st_mode), 'rollback_mouse_path_changed')
+              require(sha(CONFIG.read_bytes()) in (candidate_sha, before['mouse']['sha256']),
+                      'rollback_refuses_concurrent_mouse_change')
+              fd, name = tempfile.mkstemp(prefix='.mouse645-restore-', dir=CONFIG.parent)
+              try:
+                  with os.fdopen(fd, 'wb') as stream:
+                      os.fchown(stream.fileno(), before['mouse']['uid'], before['mouse']['gid'])
+                      os.fchmod(stream.fileno(), before['mouse']['mode'])
+                      stream.write(before['_bytes'])
+                      stream.flush()
+                      os.fsync(stream.fileno())
+                  os.replace(name, CONFIG)
+                  directory = os.open(CONFIG.parent, os.O_RDONLY | os.O_DIRECTORY)
+                  try:
+                      os.fsync(directory)
+                  finally:
+                      os.close(directory)
+              finally:
+                  Path(name).unlink(missing_ok=True)
+          
+          
+          def apply_transaction(before, installer_data, candidate_bytes, expected_manifest, receipt):
+              require(manifest(before) == expected_manifest, 'reviewed_manifest_changed')
+              require(before['mouse']['sha256'] == ORIGINAL_SHA, 'mouse_original_hash_mismatch')
+              candidate_sha = sha(candidate_bytes)
+              directory = Path(tempfile.mkdtemp(prefix='mouse645-https-', dir='/root'))
+              keep = False
+              try:
+                  backup = directory / 'mouse.black.conf.original'
+                  backup.write_bytes(before['_bytes'])
+                  backup.chmod(0o600)
+                  (directory / 'receipt-baseline.json').write_text(json.dumps(summary(before), sort_keys=True))
+                  script = directory / 'configure-https.py'
+                  script.write_bytes(installer_data)
+                  script.chmod(0o600)
+                  require(sha(script.read_bytes()) == INSTALLER_SHA, 'copied_installer_hash_mismatch')
+                  # Last comparison while holding both locks, before changing any configuration.
+                  compare_after(before, snapshot(), before['mouse']['sha256'])
+                  started = False
+                  try:
+                      started = True
+                      command([sys.executable, '-I', str(script), '--expected-sha256', ORIGINAL_SHA], timeout=50)
+                      receipt['checks'] = wait_ready(before)
+                      after = snapshot()
+                      compare_after(before, after, candidate_sha)
+                      receipt.update(status='APPLIED', after=summary(after),
+                                     resultingManifestSha256=manifest(after), candidateSha256=candidate_sha)
+                      return
+                  except BaseException as error:
+                      receipt['failure'] = {'code': str(error) if isinstance(error, GuardError) else type(error).__name__}
+                      if started:
+                          try:
+                              # HTTP or app failure must not stop restoration of our own
+                              # bytes. A separate file-only guard precedes shared reload.
+                              restore_mouse(before, candidate_sha)
+                              receipt['rollback'] = {'mouseOriginalRestored': True}
+                              protected = before['protected']
+                              current_includes, current_tls = nginx_inputs()
+                              require(current_includes == protected['nginxIncludes'] and
+                                      current_tls == protected['tlsReferencedPaths'],
+                                      'rollback_reload_blocked_by_include_graph_drift')
+                              require(file_manifest(protected['nginxIncludes'], protected['tlsReferencedPaths']) ==
+                                      protected['files'], 'rollback_reload_blocked_by_protected_file_drift')
+                              command(['nginx', '-t'], timeout=10)
+                              command(['systemctl', 'reload', 'nginx'], timeout=15)
+                              deadline = time.monotonic() + 20
+                              while True:
+                                  try:
+                                      recovered = snapshot()
+                                      compare_after(before, recovered, before['mouse']['sha256'])
+                                      break
+                                  except (GuardError, OSError, http.client.HTTPException):
+                                      if time.monotonic() >= deadline:
+                                          raise
+                                      time.sleep(0.5)
+                              receipt.update(status='ROLLED_BACK', after=summary(recovered),
+                                             rollback={'mouseOriginalRestored': True, 'protectedStateUnchanged': True})
+                          except BaseException as rollback_error:
+                              keep = True
+                              receipt.update(status='ROLLBACK_FAILED', backupDirectory=str(directory),
+                                             rollback={**receipt.get('rollback', {}),
+                                                       'code': str(rollback_error) if isinstance(rollback_error, GuardError)
+                                                       else type(rollback_error).__name__})
+                      raise GuardError('activation_did_not_complete') from None
+              finally:
+                  if not keep:
+                      shutil.rmtree(directory)
+          
+          
+          def main():
+              parser = argparse.ArgumentParser(description=__doc__)
+              modes = parser.add_mutually_exclusive_group(required=True)
+              modes.add_argument('--inspect', action='store_true')
+              modes.add_argument('--apply', action='store_true')
+              parser.add_argument('--installer', type=Path, required=True)
+              parser.add_argument('--expected-manifest')
+              args = parser.parse_args()
+              def interrupted(number, frame):
+                  raise GuardError('interrupted_signal_' + str(number))
+              signal.signal(signal.SIGTERM, interrupted)
+              signal.signal(signal.SIGINT, interrupted)
+              signal.signal(signal.SIGHUP, interrupted)
+              receipt = {'schema': 1, 'mode': 'apply' if args.apply else 'inspect',
+                         'checkedAt': datetime.datetime.now(datetime.timezone.utc).isoformat(),
+                         'status': 'BLOCKED', 'installerSha256': INSTALLER_SHA}
+              status = 1
+              try:
+                  require(os.getuid() == 0, 'root_required_for_bounded_inspection')
+                  if args.apply:
+                      require(isinstance(args.expected_manifest, str) and
+                              re.fullmatch('[0-9a-f]{64}', args.expected_manifest), 'expected_manifest_required')
+                  _, installer_data, installer = checked_installer(args.installer)
+                  with deployment_locks():
+                      before = snapshot(with_diagnostics=True)
+                      require(before['mouse']['sha256'] == ORIGINAL_SHA, 'mouse_original_hash_mismatch')
+                      candidate = installer.candidate(before['_bytes'].decode()).encode()
+                      receipt.update(manifestSha256=manifest(before), before=summary(before),
+                                     diagnostics=before['diagnostics'], candidateSha256=sha(candidate),
+                                     existingDeployLocksHeld=True)
+                      if args.inspect:
+                          receipt['status'] = 'INSPECTED'
+                      else:
+                          apply_transaction(before, installer_data, candidate, args.expected_manifest, receipt)
+                      status = 0
+              except BaseException as error:
+                  receipt.setdefault('failure', {'code': str(error) if isinstance(error, GuardError) else type(error).__name__})
+              print(json.dumps(receipt, sort_keys=True))
+              return status
+          
+          
+          if __name__ == '__main__':
+              raise SystemExit(main())
+          MOUSE_TRANSACTION_PY
+          printf '%s  %s\n' 'd410b2cfca45ae7ccc07c1e142840c21d1bdca98e626dd29d2bcb442c28a1e43' "$root_work/configure-https.py" '8fa6cdbc07ed93551e4664c14351bb4261e00c15bff1d91a74e70c161e1f6800' "$root_work/https-admin-transaction.py" | sha256sum --check --status
+          /usr/bin/python3 -I "$root_work/https-admin-transaction.py" --inspect --installer "$root_work/configure-https.py"
+          MOUSE_ADMIN_PAYLOAD
+          bash -n "$payload_file"
+          ssh -i "$key_file" -o IdentitiesOnly=yes -o BatchMode=yes -o ConnectTimeout=12 -o ServerAliveInterval=15 -o ServerAliveCountMax=2 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$hosts_file" root@151.248.113.177 'timeout --signal=TERM --kill-after=60s 360s bash -s' < "$payload_file" | tee "$RUNNER_TEMP/mouse645-admin-receipt.log"
+      - name: Keep sanitized administration receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: mouse645-https-inspect-receipt
+          path: ${{ runner.temp }}/mouse645-admin-receipt.log
+          if-no-files-found: ignore
+          retention-days: 7
