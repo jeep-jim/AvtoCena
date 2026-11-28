@@ -404,7 +404,12 @@ async function runJapanCases(page,width){
  fixture.editorialRevision='fixture-1';fixture.queries.length=0;responses.length=0;
  await page.goto(origin+'/cars/japan?fixture=refill&powerTo=160&fuel=petrol&city='+encodeURIComponent('Новокузнецк'));
  await waitCards(24);const oldRows=await cardIds();assert.deepEqual(oldRows,powerExpected.slice(0,24));
- const oldCursor=new URL(await page.getByRole('link',{name:'Страница 2',exact:true}).getAttribute('href'),origin).searchParams.get('after');
+ const selectedParams=url=>[...url.searchParams].filter(([key])=>key!=='page'&&key!=='after').sort(([a,av],[b,bv])=>a.localeCompare(b)||av.localeCompare(bv));
+ const selectedUrl=new URL(page.url());selectedUrl.searchParams.set('market','japan');
+ const expectedSelection=selectedParams(selectedUrl);
+ const oldNext=new URL(await page.getByRole('link',{name:'Страница 2',exact:true}).getAttribute('href'),origin);
+ assert.deepEqual(selectedParams(oldNext),expectedSelection,'the original continuation preserves every selected query parameter');
+ const oldCursor=oldNext.searchParams.get('after');assert.match(oldCursor,/^j2\.k\./);
  await page.evaluate(()=>window.dispatchEvent(new Event('pagehide')));
  fixture.editorialRevision='fixture-2';
  await page.getByRole('button',{name:'Показать ещё',exact:true}).click();
@@ -420,8 +425,10 @@ async function runJapanCases(page,width){
  const reset=page.getByRole('link',{name:'Открыть первую страницу',exact:true});
  const resetUrl=new URL(await reset.getAttribute('href'),origin);
  assert.equal(resetUrl.searchParams.get('after'),null);assert.equal(resetUrl.searchParams.get('page'),'1');
+ assert.deepEqual(selectedParams(resetUrl),expectedSelection,'the reset link preserves every selected query parameter');
  for(const [key,value] of [['fuel','petrol'],['powerTo','160'],['city','Новокузнецк']])assert.equal(resetUrl.searchParams.get(key),value);
  await reset.click();await waitCards(24);
+ assert.deepEqual(selectedParams(new URL(page.url())),expectedSelection,'the reopened page preserves every selected query parameter');
  await page.waitForFunction(()=>Array.from(document.querySelectorAll('#root article a[href*="/cars/offer/"]')).some(link=>link.href.includes('ajes-stats-refill-1-0')));
  const updatedKnown=id=>known(id)||id==='ajes-stats-refill-1-0';
  const updatedOrder=[...expected.filter(updatedKnown),...expected.filter(id=>!updatedKnown(id))];
@@ -429,7 +436,8 @@ async function runJapanCases(page,width){
  const renewed=new URL(await page.getByRole('link',{name:'Страница 2',exact:true}).getAttribute('href'),origin);
  const newCursor=renewed.searchParams.get('after');assert.match(newCursor,/^j2\.k\./);
  assert.notEqual(newCursor.split('.')[6],oldCursor.split('.')[6],'new evidence must mint a different opaque epoch');
- assert.equal(newCursor.split('.')[5],oldCursor.split('.')[5],'the selected query stays unchanged');
+ assert.notEqual(newCursor.split('.')[5],oldCursor.split('.')[5],'new evidence must rotate the bound cursor query hash');
+ assert.deepEqual(selectedParams(renewed),expectedSelection,'the selected query stays unchanged');
  for(const [key,value] of [['fuel','petrol'],['powerTo','160'],['city','Новокузнецк']])assert.equal(renewed.searchParams.get(key),value);
  assert.deepEqual(fixture.queries.map(query=>query.page),[1,2,1,2]);
  assert.equal(await page.getByRole('alert').count(),0);await warningAbsent();
