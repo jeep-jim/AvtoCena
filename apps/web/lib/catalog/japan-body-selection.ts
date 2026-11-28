@@ -2,6 +2,7 @@ import type {CalculationIndex} from '../encyclopedia/calculation-index';
 import type {CatalogEditorialIndex} from './editorial';
 import {filterSelections} from './filter-selections';
 import {japanSourceBody,japanSourceBodyLabels} from './japan-source-body';
+import {JAPAN_MIN_MODEL_YEAR} from './japan-year-policy';
 
 export type JapanBodyModelCandidate={modelKey:string;make:string;model:string;year:number};
 export type JapanBodyCandidatePlan={
@@ -46,6 +47,10 @@ export function buildJapanBodyCandidatePlan(options:JapanBodyCandidateOptions):J
  for(const [key,facts] of Object.entries(options.index?.models||{}))for(const fact of facts){
   const body=japanSourceBody(fact.values.bodyType);
   if(!body||!selected.includes(body))continue;
+  // The shared encyclopedia legitimately contains older annual facts. They
+  // cannot match this source's year domain and must not invalidate all current
+  // body/power cohorts in the resolver. Keep the shared facts unchanged.
+  if(Number.isInteger(fact.year)&&(fact.year<JAPAN_MIN_MODEL_YEAR||fact.year>2100))continue;
   // The immutable index normally guarantees these. A malformed record cannot
   // become evidence or silently make a restricted source query complete.
   if(!fact.sources.bodyType){unresolved.add('body_evidence_unproven');continue;}

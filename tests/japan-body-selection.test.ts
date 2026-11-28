@@ -1,7 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {checksum,modelKey,type CalculationFact,type CalculationIndex} from '../apps/web/lib/encyclopedia/calculation-index';
+import {checksum,modelKey,compileModelFacts,type CalculationFact,type CalculationIndex} from '../apps/web/lib/encyclopedia/calculation-index';
 import {buildJapanBodyCandidatePlan} from '../apps/web/lib/catalog/japan-body-selection';
+import {buildJapanPowerCandidatePlan,resolveJapanSourceSelection,japanSourceSelectionSql} from '../apps/web/lib/catalog/japan-source-selection';
 import {japanSourceBody,japanSourceBodyLabels} from '../apps/web/lib/catalog/japan-source-body';
 
 const empty={revision:'0',entries:{}};
@@ -35,6 +36,36 @@ test('body planning reads the complete index without a make, model, or year coun
  assert.equal(plan.complete,false);
  assert.deepEqual(plan.unresolved,['body_source_schema_unobserved']);
  assert.equal(plan.sourceBody,undefined);
+});
+
+test('a verified old SUV fact from the common index builder cannot disable the current power/body selection',()=>{
+ const facts=compileModelFacts({id:'fixture/suv',make:'Fixture',model:'SUV',revision:'r1',variants:[1999,2020].map(year=>({
+  id:'suv-'+year,year,trim:'2.0',bodyType:'suv',powerHp:150,status:'verified',sourceUrl:'https://example.com/offline-fixture',
+ }))});
+ assert.deepEqual(facts.map(value=>value.year),[1999,2020],'the country-independent index legitimately retains older annual facts');
+ const source=index(facts),before=JSON.stringify(source);
+ for(const observedSourceFields of [undefined,['BODY_TYPE']]){
+  const body=buildJapanBodyCandidatePlan({selection:'suv',index:source,editorial:empty,observedSourceFields});
+  assert.deepEqual(body.models.map(value=>value.year),[2020]);
+  const power=buildJapanPowerCandidatePlan({powerTo:160,index:source,editorial:empty});
+  const resolved=resolveJapanSourceSelection({body,power,sourceModels:[{make:'FIXTURE',model:'SUV'}],directoryComplete:true});
+  assert(resolved.selection,'an irrelevant old year must not force the broad fallback reader');
+  assert.equal(resolved.complete,Boolean(observedSourceFields));
+  assert.deepEqual(resolved.unresolved,observedSourceFields?[]:['body_source_schema_unobserved']);
+  const sql=japanSourceSelectionSql(resolved.selection,'k');
+  assert.match(sql,/model_name like '%SUV%' and year=2020/);assert.doesNotMatch(sql,/1999/);
+ }
+ assert.equal(JSON.stringify(source),before,'out-of-scope facts remain intact in the shared encyclopedia');
+});
+
+test('body candidate years match the source cohort domain while malformed annual evidence still fails closed',()=>{
+ const source=index([2007,2008,2100,2101].map(year=>fact('Toyota','TEST',year,'suv')));
+ const plan=buildJapanBodyCandidatePlan({selection:'suv',index:source,editorial:empty,observedSourceFields:['BODY_TYPE']});
+ assert.deepEqual(plan.models.map(value=>value.year),[2008,2100]);assert.equal(plan.complete,true);assert.deepEqual(plan.unresolved,[]);
+ const malformed=index([fact('Toyota','TEST',2020.5,'suv'),fact('Toyota','TEST',2020,'suv')]);
+ const invalid=buildJapanBodyCandidatePlan({selection:'suv',index:malformed,editorial:empty,observedSourceFields:['BODY_TYPE']});
+ assert.deepEqual(invalid.models.map(value=>value.year),[2020]);assert.equal(invalid.complete,false);
+ assert.deepEqual(invalid.unresolved,['body_evidence_identity_invalid']);
 });
 
 test('source body support is explicit and does not claim an unknown schema as complete',()=>{
