@@ -25,7 +25,7 @@ await build({entryPoints:['tests/browser/ajes-pagination-fixture.tsx'],bundle:tr
 // Actual Japanese catalog caller/helper and server component, with only local
 // source/pricing/metadata transports. No provider or production request is made.
 class FixtureUnavailable extends Error {constructor(reason){super(reason);this.reason=reason;}}
-const fixture={queries:[],counts:0,sequence:0,mode:'normal',changed:false,editorialRevision:'fixture-1',snapshot:null,Unavailable:FixtureUnavailable,
+const fixture={queries:[],counts:0,independentCounts:0,ssrRenders:0,sequence:0,mode:'normal',changed:false,editorialRevision:'fixture-1',snapshot:null,Unavailable:FixtureUnavailable,
  read:async(query,options={})=>{
   fixture.queries.push({...query});
   if(options.evidenceSnapshot){
@@ -95,11 +95,13 @@ const cardStubs={
 await build({stdin:{contents:"import React from 'react';\nimport {renderToStaticMarkup} from 'react-dom/server';\nimport {AjesCatalog} from './apps/web/components/catalog/AjesCatalog';\nimport {CatalogCard as ActualCatalogCard} from './apps/web/components/catalog/CatalogCard';\nexport function renderCard(offer){return renderToStaticMarkup(React.createElement(ActualCatalogCard,{offer,compact:true,dense:true}));}\nimport {readAjesCatalogPage} from './apps/web/lib/catalog/ajes-catalog';\nexport {AjesInputError} from './apps/web/lib/catalog/ajes-query';\nexport {ajesErrorResponse} from './apps/web/lib/catalog/ajes-error-response';\nfunction withoutOptionalAsync(node){\n if(Array.isArray(node))return node.map(withoutOptionalAsync);\n if(!React.isValidElement(node))return node;\n if(typeof node.type==='function'&&node.type.constructor.name==='AsyncFunction')return null;\n const props={...node.props};\n for(const key of ['children','header','filters'])if(key in props)props[key]=withoutOptionalAsync(props[key]);\n return React.cloneElement(node,props);\n}\nexport async function render(params){\n globalThis.__japanRefillPageProps=undefined;\n const html=renderToStaticMarkup(withoutOptionalAsync(await AjesCatalog({params})));\n const {initialCards,...props}=globalThis.__japanRefillPageProps;\n return {html,initial:{props,items:initialCards.map(card=>card.props.offer)}};\n}\nexport const read=params=>readAjesCatalogPage(params,undefined,{includeCount:false});\n",resolveDir:process.cwd(),loader:'tsx'},bundle:true,platform:'node',format:'cjs',jsx:'automatic',tsconfig:'apps/web/tsconfig.json',define:{'process.env.AVTOCENA_RELEASE_SHA':JSON.stringify('1'.repeat(40))},outfile:out+'/server.cjs',external:['react','react/jsx-runtime','react-dom/server'],plugins:[{name:'local-japan-caller',setup(b){
  b.onResolve({filter:/.*/},args=>{
   const name=args.path.split('/').pop();
+  if(sourcePriceOrderRequired&&args.importer.endsWith('/AjesCatalog.tsx')&&name==='ajes-catalog')return {path:name,namespace:'japan-independent-count-fixture'};
   if(args.importer.endsWith('/AjesCatalog.tsx')&&name in uiStubs)return {path:name,namespace:'japan-ui-fixture'};
   if(name in cardStubs)return {path:name,namespace:'japan-card-fixture'};
   if(args.path in serverStubs)return {path:args.path,namespace:'japan-source-fixture'};
  });
  b.onLoad({filter:/.*/,namespace:'japan-source-fixture'},args=>({contents:serverStubs[args.path]}));
+ b.onLoad({filter:/.*/,namespace:'japan-independent-count-fixture'},()=>({resolveDir:process.cwd(),contents:`export * from ${JSON.stringify(path.resolve('apps/web/lib/catalog/ajes-catalog.ts'))};export const readAjesCountSummary=async()=>{globalThis.__japanRefillFixture.independentCounts++;return null;};`}));
  b.onLoad({filter:/.*/,namespace:'japan-ui-fixture'},args=>({contents:uiStubs[args.path],resolveDir:process.cwd()}));
  b.onLoad({filter:/.*/,namespace:'japan-card-fixture'},args=>({contents:cardStubs[args.path],resolveDir:process.cwd()}));
 }}]});
@@ -111,8 +113,17 @@ const react=require('react');
 const fixtureRequire=id=>id==='react'?{...react,cache:fn=>fn}:require(id);
 new Function('require','module','exports',fs.readFileSync(path.resolve(out+'/server.cjs'),'utf8'))(fixtureRequire,serverModule,serverModule.exports);
 const actual=serverModule.exports;
+async function renderJapanFixture(params){
+ const before=fixture.independentCounts;
+ const value=await actual.render(params);
+ if(sourcePriceOrderRequired){
+  fixture.ssrRenders++;
+  assert.equal(fixture.independentCounts,before+1,'each actual SSR render starts exactly one independent COUNT');
+ }
+ return value;
+}
 const boundaryQuery={market:'japan',fixture:'refill',fuel:'petrol',city:'Новокузнецк',powerTo:'160'};
-const boundaryFirst=await actual.render(boundaryQuery);
+const boundaryFirst=await renderJapanFixture(boundaryQuery);
 const boundaryNext=await actual.read({...boundaryQuery,page:'2',after:boundaryFirst.initial.props.initialNextCursor});
 const boundarySamples=[boundaryFirst.initial.items.find(row=>row.japanSupplierPower),boundaryNext.items.find(row=>row.japanPowerUnknown)];
 assert.equal(boundaryFirst.initial.items.length,boundaryFirst.initial.props.initialCount);
@@ -144,7 +155,7 @@ const server=http.createServer(async(req,res)=>{
   if(params.fixture==='refill'){
    params.market='japan';
    fixture.mode=params.case==='failure'?'failure':params.case==='empty-known'?'empty-known':'normal';
-   const value=await actual.render(params);
+   const value=await renderJapanFixture(params);
    res.setHeader('Content-Type','text/html; charset=utf-8');
    res.end('<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'+value.html+'<script>window.__japanRefillInitial='+JSON.stringify(value.initial).replace(/</g,'\\u003c')+'</script><script src="/app.js"></script>');
    return;
@@ -212,6 +223,10 @@ try{
   await page.close();activePage=undefined;
  }
  assert.equal(fixture.counts,0,'the local Japanese list fixture never invokes an aggregate');
+ if(sourcePriceOrderRequired){
+  assert(fixture.ssrRenders>0);assert.equal(fixture.independentCounts,fixture.ssrRenders);
+  console.log('PAGINATION_FIXTURE_INDEPENDENT_COUNT '+JSON.stringify({ssrRenders:fixture.ssrRenders,independentCounts:fixture.independentCounts,lowLevelAggregates:fixture.counts}));
+ }
  assert.equal(blockedExternal,0);assert.equal(report.caseCount,12);
  report.checks={refill24:true,numberedContinuation:true,appendNoDuplicatesOrGaps:true,finiteExhaustion:true,unknownPowerPreserved:true,failureHonesty:true,cursorBinding:true,warningRemoved:true,sourcePageSize24:true,neighborPaginationPreserved:true,noExternalRequests:true,knownBeforeUnknown:true,boundedKnownContinuation:true,evidenceEpochReset:true};
  report.passed=true;
