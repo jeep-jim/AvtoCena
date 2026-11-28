@@ -141,6 +141,28 @@ JAPAN_STABILITY_RAILS_CODE_FILES = JAPAN_STABILITY_POWER_CODE_FILES | {
 }
 JAPAN_OBSERVED_TIMING_POLICY = 'japan-functional-observed-timing-v1'
 JAPAN_SOURCE_BOUNDED_INCREMENTAL_POLICY = 'japan-source-bounded-incremental-v1'
+JAPAN_SOURCE_COUNT_POLICY = 'japan-source-count-v1'
+JAPAN_STABILITY_SOURCE_COUNT_RETAINED = '7f7a316905cd8109352431ed4722108b3449c3ec'
+JAPAN_STABILITY_SOURCE_COUNT_RETAINED_IMAGE = 'sha256:59b6be6c59c0895b42cf6766fcba0150d862d3dfc7e09ce2e51f6e17ea7177c0'
+JAPAN_STABILITY_SOURCE_COUNT_CODE_FILES = {
+    'apps/web/app/(public)/api/catalog/search/route.ts',
+    'apps/web/components/catalog/CatalogFilters.tsx',
+    'apps/web/components/catalog/CatalogSelectionContext.tsx',
+    'apps/web/components/catalog/JapanCatalogCount.tsx',
+    'apps/web/lib/catalog/ajes-catalog.ts',
+    'apps/web/lib/catalog/ajes-count-display.ts',
+    'apps/web/lib/catalog/ajes-filtered-page.ts',
+    'apps/web/lib/catalog/ajes-source-count.ts',
+    'tests/ajes-catalog-count-continuation.test.ts',
+    'tests/ajes-catalog-progressive.test.ts',
+    'tests/ajes-count-display.test.ts',
+    'tests/ajes-count-progressive.test.ts',
+    'tests/ajes-filtered-page.test.ts',
+    'tests/ajes-model-recovery.test.ts',
+    'tests/ajes-source-count-display.test.ts',
+    'tests/ajes-source-count.test.ts',
+    'tests/japan-source-power.test.ts',
+}
 JAPAN_STABILITY_HOME_CODE_FILES = JAPAN_STABILITY_RAILS_CODE_FILES | {
     'apps/web/lib/catalog/storage.ts', 'tests/catalog-next-home-isolation.test.ts',
 }
@@ -712,27 +734,35 @@ def checked_japan_stability_image_files(files, observed, retained_runtime=JAPAN_
          and len(files) == len(set(files)), 'code_image_receipt')
     profiles = (JAPAN_STABILITY_CODE_FILES, JAPAN_STABILITY_UI_CODE_FILES, JAPAN_STABILITY_POWER_CODE_FILES,
                 JAPAN_STABILITY_RAILS_CODE_FILES, JAPAN_STABILITY_HOME_CODE_FILES, JAPAN_STABILITY_METADATA_CODE_FILES,
-                JAPAN_STABILITY_PRICE_SORT_CODE_FILES, JAPAN_STABILITY_EXACT_COUNT_CODE_FILES)
-    selected = next((profile for profile in profiles if set(files) == profile), None)
+                JAPAN_STABILITY_PRICE_SORT_CODE_FILES, JAPAN_STABILITY_EXACT_COUNT_CODE_FILES,
+                JAPAN_STABILITY_SOURCE_COUNT_CODE_FILES)
+    selected = next((profile for profile in profiles if profile and set(files) == profile), None)
     need(selected is not None, 'code_image_receipt')
-    need(retained_runtime == (JAPAN_STABILITY_EXACT_COUNT_RETAINED if selected == JAPAN_STABILITY_EXACT_COUNT_CODE_FILES
+    need(retained_runtime == (JAPAN_STABILITY_SOURCE_COUNT_RETAINED if selected == JAPAN_STABILITY_SOURCE_COUNT_CODE_FILES
+                             else JAPAN_STABILITY_EXACT_COUNT_RETAINED if selected == JAPAN_STABILITY_EXACT_COUNT_CODE_FILES
                              else JAPAN_STABILITY_PRICE_SORT_RETAINED if selected == JAPAN_STABILITY_PRICE_SORT_CODE_FILES
                              else JAPAN_STABILITY_RETAINED), 'code_stability_predecessor')
     need(type(observed) is bool and observed == (selected in
          (JAPAN_STABILITY_HOME_CODE_FILES, JAPAN_STABILITY_METADATA_CODE_FILES,
-          JAPAN_STABILITY_PRICE_SORT_CODE_FILES, JAPAN_STABILITY_EXACT_COUNT_CODE_FILES)), 'timing_policy_image_scope')
-    need(count_acceptance is None or (selected == JAPAN_STABILITY_EXACT_COUNT_CODE_FILES
-         and count_acceptance == JAPAN_SOURCE_BOUNDED_INCREMENTAL_POLICY), 'count_acceptance_image_scope')
+          JAPAN_STABILITY_PRICE_SORT_CODE_FILES, JAPAN_STABILITY_EXACT_COUNT_CODE_FILES,
+          JAPAN_STABILITY_SOURCE_COUNT_CODE_FILES)), 'timing_policy_image_scope')
+    need((count_acceptance == JAPAN_SOURCE_COUNT_POLICY if selected == JAPAN_STABILITY_SOURCE_COUNT_CODE_FILES
+          else count_acceptance is None or (selected == JAPAN_STABILITY_EXACT_COUNT_CODE_FILES
+          and count_acceptance == JAPAN_SOURCE_BOUNDED_INCREMENTAL_POLICY)), 'count_acceptance_image_scope')
     return selected
 
 
 def japan_source_bounded_acceptance_passed(report):
+    return isinstance(report, dict) and report.get('countAcceptance') == JAPAN_SOURCE_BOUNDED_INCREMENTAL_POLICY and \
+        japan_model_coverage_acceptance_passed(report)
+
+
+def japan_model_coverage_acceptance_passed(report):
     if not isinstance(report, dict):
         return False
     checks = report.get('checks')
     proof = checks.get('modelCoverage') if isinstance(checks, dict) else None
-    return report.get('countAcceptance') == JAPAN_SOURCE_BOUNDED_INCREMENTAL_POLICY and \
-        report.get('japanModelCoverageRequired') is True and report.get('japanModelCoveragePassed') is True and \
+    return report.get('japanModelCoverageRequired') is True and report.get('japanModelCoveragePassed') is True and \
         report.get('japanExactCountRequired') is False and 'japanExactCountPassed' in report and \
         report['japanExactCountPassed'] is None and isinstance(proof, dict) and \
         type(proof.get('sourcePairs')) is int and 0 < proof['sourcePairs'] <= 9007199254740991 and \
@@ -763,6 +793,72 @@ def japan_source_bounded_acceptance_passed(report):
         isinstance(proof.get('selection'), dict) and type(proof['selection'].get('shown')) is int and \
         1 <= proof['selection']['shown'] <= 24 and proof['selection'].get('observedSourceNamesOnly') is True and \
         type(proof.get('explicitApiReads')) is int and proof['explicitApiReads'] == 3 and \
+        proof.get('liveExhaustiveScan') is False and type(proof.get('pageErrors')) is int and proof['pageErrors'] == 0
+
+
+def source_count_cursor(value):
+    if not isinstance(value, str) or len(value) > 320:
+        return False
+    ordinary = re.fullmatch(r'j1\.([1-9]\d{0,6})\.(\d{1,2})\.([1-9]\d{0,6})\.([a-f0-9]{64})\.(-|[a-f0-9]{64})', value)
+    if ordinary:
+        return int(ordinary[1]) <= 1000000 and int(ordinary[2]) <= 23 and int(ordinary[3]) <= 1000000 and \
+            (int(ordinary[2]) == 0) == (ordinary[5] == '-')
+    power = re.fullmatch(r'j2\.([ku])\.([1-9]\d{0,6})\.(\d{1,2})\.([1-9]\d{0,6})\.([a-f0-9]{64})\.([a-f0-9]{64})\.(-|[a-f0-9]{64})', value)
+    return bool(power) and int(power[2]) <= 1000000 and int(power[3]) <= 24 and int(power[4]) <= 1000000 and \
+        (int(power[3]) == 0) == (power[7] == '-')
+
+
+def japan_source_count_acceptance_passed(report):
+    if not isinstance(report, dict) or not japan_model_coverage_acceptance_passed(report):
+        return False
+    proof = report.get('checks', {}).get('sourceCount')
+    if not isinstance(proof, dict):
+        return False
+    summary, ui, pagination = proof.get('summary'), proof.get('ui'), proof.get('pagination')
+    if not all(isinstance(value, dict) for value in (summary, ui, pagination)):
+        return False
+    source = summary.get('sourceCountProof')
+    if not isinstance(source, dict):
+        return False
+    integer = lambda value: type(value) is int and 0 <= value <= 9007199254740991
+    hash64 = lambda value: isinstance(value, str) and re.fullmatch(r'[a-f0-9]{64}', value) is not None
+    try:
+        checked_at = datetime.datetime.fromisoformat(report['checkedAt'].replace('Z', '+00:00'))
+        observed_at = datetime.datetime.fromisoformat(summary['observedAt'].replace('Z', '+00:00'))
+        age = (checked_at - observed_at).total_seconds()
+    except (KeyError, TypeError, ValueError, AttributeError):
+        return False
+    total = summary.get('total')
+    total_text = f'{total:,}'.replace(',', ' ') if integer(total) else None
+    # This is the counter's data freshness contract, not a request speed test.
+    return report.get('countAcceptance') == JAPAN_SOURCE_COUNT_POLICY and \
+        report.get('japanSourceCountRequired') is True and report.get('japanSourceCountPassed') is True and \
+        proof.get('contract') == 'japan-source-count-browser-v1' and integer(total) and total > 0 and \
+        summary.get('stale') is False and summary.get('upperBound') is True and \
+        summary.get('precision') == 'source-upper-bound' and summary.get('selectionScope') == 'source-candidates' and \
+        type(summary.get('sourceScopeComplete')) is bool and \
+        all(key not in summary for key in ('countProof', 'knownTotal', 'unknownTotal')) and \
+        type(source.get('version')) is int and source['version'] == 1 and source.get('kind') == 'japan-source-count' and \
+        source.get('predicateVersion') == 'japan-source-candidates-v1' and \
+        all(hash64(source.get(key)) for key in ('requestedQueryHash', 'sourceQueryHash', 'evidenceEpoch')) and \
+        integer(source.get('sourceTotal')) and source['sourceTotal'] == total and \
+        source.get('sourceObservedAt') == summary['observedAt'] and \
+        source.get('sourceScopeComplete') is summary['sourceScopeComplete'] and type(source.get('directoryComplete')) is bool and \
+        (not source['sourceScopeComplete'] or source['directoryComplete']) and 0 <= age < 30 * 60 and \
+        proof.get('queryHashVerified') is True and proof.get('independentCount') is True and \
+        'admittedTotal' in proof and proof['admittedTotal'] is None and proof.get('positiveAdmittedCensusClaimed') is False and \
+        ui.get('status') == ('bounded' if source['sourceScopeComplete'] else 'source') and \
+        integer(ui.get('sourceTotal')) and ui['sourceTotal'] == total and \
+        ui.get('requestedQueryHash') == source['requestedQueryHash'] and ui.get('observedAt') == summary['observedAt'] and \
+        integer(ui.get('loadedCount')) and 1 <= ui['loadedCount'] <= 24 and ui['sourceTotal'] >= ui['loadedCount'] and isinstance(ui.get('label'), str) and \
+        ui['label'].replace('\u00a0', ' ').replace('\u202f', ' ') == \
+            ('Найдено до ' if source['sourceScopeComplete'] else 'В источнике: ') + total_text and \
+        pagination.get('sameFilter') is True and source_count_cursor(pagination.get('cursorBeforeCount')) and \
+        pagination.get('cursorAfterCount') == pagination['cursorBeforeCount'] and \
+        pagination.get('continuationCursor') == pagination['cursorBeforeCount'] and pagination.get('continuationFollowed') is True and \
+        integer(pagination.get('loadedBefore')) and pagination['loadedBefore'] == ui['loadedCount'] and \
+        integer(pagination.get('loadedAfter')) and pagination['loadedBefore'] < pagination['loadedAfter'] <= pagination['loadedBefore'] + 24 and \
+        type(pagination.get('duplicateIds')) is int and pagination['duplicateIds'] == 0 and pagination.get('freshSourcePages') is True and \
         proof.get('liveExhaustiveScan') is False and type(proof.get('pageErrors')) is int and proof['pageErrors'] == 0
 
 
@@ -864,8 +960,11 @@ def validate_plan(plan):
     if 'acceptancePolicy' in plan:
         need(japan_observed_timing(plan), 'timing_policy_scope')
     if 'countAcceptance' in plan:
-        need(japan_observed_timing(plan) and plan.get('retainedRuntime') == JAPAN_STABILITY_EXACT_COUNT_RETAINED
-             and plan['countAcceptance'] == JAPAN_SOURCE_BOUNDED_INCREMENTAL_POLICY, 'count_acceptance_scope')
+        need(japan_observed_timing(plan) and
+             ((plan.get('retainedRuntime') == JAPAN_STABILITY_EXACT_COUNT_RETAINED and
+               plan['countAcceptance'] == JAPAN_SOURCE_BOUNDED_INCREMENTAL_POLICY) or
+              (plan.get('retainedRuntime') == JAPAN_STABILITY_SOURCE_COUNT_RETAINED and
+               plan['countAcceptance'] == JAPAN_SOURCE_COUNT_POLICY)), 'count_acceptance_scope')
     need(plan.get('version') == 1 and plan.get('market') == 'china' and
          (accepted_update(plan) or plan.get('retainedRuntime') == RETAINED) and
          plan.get('servingCalculationVersion') == CALCULATION, 'plan_scope')
@@ -891,7 +990,10 @@ def validate_plan(plan):
          (isinstance(previous_etag, str) and re.fullmatch(r'"[^"\x00-\x20\x7f]{1,250}"', previous_etag) and
           isinstance(previous_sha, str) and re.fullmatch(r'[a-f0-9]{64}', previous_sha)), 'previous_state')
     if accepted_update(plan):
-        accepted_predecessor(plan)
+        reference, _, _ = accepted_predecessor(plan)
+        if plan.get('countAcceptance') == JAPAN_SOURCE_COUNT_POLICY:
+            need(reference.get('runtimeSha') == JAPAN_STABILITY_SOURCE_COUNT_RETAINED and
+                 reference.get('imageId') == JAPAN_STABILITY_SOURCE_COUNT_RETAINED_IMAGE, 'source_count_retained_image')
         if code_update(plan):
             scope = code_scope(plan)
             need(scope not in (JAPAN_COMPLETION_CODE_SCOPE, JAPAN_COMPLETION_V2_CODE_SCOPE)
@@ -905,7 +1007,8 @@ def validate_plan(plan):
             need(scope != JAPAN_PAGINATION_CODE_SCOPE or plan.get('retainedRuntime') == JAPAN_PAGINATION_RETAINED,
                  'code_pagination_predecessor')
             need(scope != JAPAN_STABILITY_CODE_SCOPE or
-                 (plan.get('retainedRuntime') in (JAPAN_STABILITY_RETAINED, JAPAN_STABILITY_PRICE_SORT_RETAINED, JAPAN_STABILITY_EXACT_COUNT_RETAINED) and
+                 (plan.get('retainedRuntime') in (JAPAN_STABILITY_RETAINED, JAPAN_STABILITY_PRICE_SORT_RETAINED,
+                                               JAPAN_STABILITY_EXACT_COUNT_RETAINED, JAPAN_STABILITY_SOURCE_COUNT_RETAINED) and
                   bool(JAPAN_STABILITY_CODE_FILES) and JAPAN_PAGINATION_CODE_FILES <= JAPAN_STABILITY_CODE_FILES),
                  'code_stability_predecessor')
             need(all(isinstance(plan.get(key), str) and re.fullmatch(r'[a-f0-9]{64}', plan[key])
@@ -3471,8 +3574,8 @@ class Host:
                          retainedRuntimeSha=retained_runtime(self.plan), retainedImageId=self.retained['Image'])
         if japan_observed_timing(self.plan):
             proof.update(acceptancePolicy=JAPAN_OBSERVED_TIMING_POLICY, codeScope=JAPAN_STABILITY_CODE_SCOPE)
-        if self.plan.get('countAcceptance') == JAPAN_SOURCE_BOUNDED_INCREMENTAL_POLICY:
-            proof.update(countAcceptance=JAPAN_SOURCE_BOUNDED_INCREMENTAL_POLICY)
+        if self.plan.get('countAcceptance') in (JAPAN_SOURCE_BOUNDED_INCREMENTAL_POLICY, JAPAN_SOURCE_COUNT_POLICY):
+            proof.update(countAcceptance=self.plan['countAcceptance'])
         encoded = json_bytes(proof)
         # The durable receipt is the commit point, including when SSH closes
         # immediately after the atomic rename. No partial terminal receipt is
@@ -3675,12 +3778,15 @@ class Host:
                     self.plan.get('retainedRuntime'), self.plan.get('countAcceptance'))
                 if runtime_profile in (JAPAN_STABILITY_POWER_CODE_FILES, JAPAN_STABILITY_RAILS_CODE_FILES,
                                        JAPAN_STABILITY_HOME_CODE_FILES, JAPAN_STABILITY_METADATA_CODE_FILES,
-                                       JAPAN_STABILITY_PRICE_SORT_CODE_FILES, JAPAN_STABILITY_EXACT_COUNT_CODE_FILES):
+                                       JAPAN_STABILITY_PRICE_SORT_CODE_FILES, JAPAN_STABILITY_EXACT_COUNT_CODE_FILES,
+                                       JAPAN_STABILITY_SOURCE_COUNT_CODE_FILES):
                     need(japan.get('japanPowerOrderPassed') is True, 'japan_browser_binding')
                 if runtime_profile in (JAPAN_STABILITY_RAILS_CODE_FILES, JAPAN_STABILITY_HOME_CODE_FILES,
-                                       JAPAN_STABILITY_METADATA_CODE_FILES, JAPAN_STABILITY_PRICE_SORT_CODE_FILES, JAPAN_STABILITY_EXACT_COUNT_CODE_FILES):
+                                       JAPAN_STABILITY_METADATA_CODE_FILES, JAPAN_STABILITY_PRICE_SORT_CODE_FILES, JAPAN_STABILITY_EXACT_COUNT_CODE_FILES,
+                                       JAPAN_STABILITY_SOURCE_COUNT_CODE_FILES):
                     need(japan.get('japanBrandDirectoryPassed') is True, 'japan_browser_binding')
-                if runtime_profile in (JAPAN_STABILITY_PRICE_SORT_CODE_FILES, JAPAN_STABILITY_EXACT_COUNT_CODE_FILES):
+                if runtime_profile in (JAPAN_STABILITY_PRICE_SORT_CODE_FILES, JAPAN_STABILITY_EXACT_COUNT_CODE_FILES,
+                                       JAPAN_STABILITY_SOURCE_COUNT_CODE_FILES):
                     need(all(japan.get(key) is True for key in ('japanPriceSortRequired', 'japanPriceSortPassed', 'japanCountDisplayPassed')),
                          'japan_browser_binding')
                 if runtime_profile == JAPAN_STABILITY_EXACT_COUNT_CODE_FILES:
@@ -3689,6 +3795,8 @@ class Host:
                     else:
                         need(all(japan.get(key) is True for key in ('japanExactCountRequired', 'japanExactCountPassed', 'japanModelCoveragePassed')),
                              'japan_browser_binding')
+                if runtime_profile == JAPAN_STABILITY_SOURCE_COUNT_CODE_FILES:
+                    need(japan_source_count_acceptance_passed(japan), 'japan_browser_binding')
         for name, raw in [('BROWSER_SPEED.json', speed_raw), ('BROWSER_DETAILS.json', details_raw)]:
             new_file(self.directory / name, raw)
             need(file_sha(self.directory / name) == sha(raw), 'browser_evidence_readback')

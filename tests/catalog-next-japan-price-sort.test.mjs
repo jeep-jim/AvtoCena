@@ -141,7 +141,8 @@ function visibleCards(hrefs) {
     locator: () => ({count: async () => 0}),
     getAttribute: async name => ({'data-japan-count-status': 'partial', 'data-japan-loaded-count': String(nodes.length)})[name] ?? null,
     innerText: async () => 'Загружено ' + nodes.length + ' · количество уточняется'};
-  const catalog = {locator: selector => selector.startsWith('article.') ? cards : badge,
+  const catalog = {locator: selector => selector.startsWith('article.') ? cards
+    : selector === 'p[role="status"]' ? {filter: () => ({count: async () => 1, isVisible: async () => true})} : badge,
     getByText: text => ({count: async () => text instanceof RegExp ? 1 : 0, isVisible: async () => true})};
   return {locator(selector) {
     if (selector === 'main.ac-ajes-catalog') return catalog;

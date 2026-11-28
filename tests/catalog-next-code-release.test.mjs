@@ -15,8 +15,10 @@ import {CRM_JAPAN_PHOTO_CODE_SCOPE, CRM_JAPAN_PHOTO_CODE_PATHS} from '../scripts
 import {JAPAN_PAGINATION_CODE_SCOPE, JAPAN_PAGINATION_CODE_PATHS, JAPAN_PAGINATION_RETAINED_RUNTIME} from '../scripts/catalog-next/japan-pagination-code-scope.mjs';
 import {JAPAN_STABILITY_CODE_SCOPE, JAPAN_STABILITY_CODE_PATHS, JAPAN_STABILITY_UI_CODE_PATHS, JAPAN_STABILITY_POWER_CODE_PATHS, JAPAN_STABILITY_RAILS_CODE_PATHS, JAPAN_STABILITY_RETAINED_RUNTIME,
   JAPAN_STABILITY_HOME_CODE_PATHS, JAPAN_OBSERVED_TIMING_POLICY, JAPAN_STABILITY_PRICE_SORT_CODE_PATHS, JAPAN_STABILITY_PRICE_SORT_RETAINED_RUNTIME, JAPAN_STABILITY_EXACT_COUNT_CODE_PATHS, JAPAN_STABILITY_EXACT_COUNT_RETAINED_RUNTIME,
-  JAPAN_SOURCE_BOUNDED_INCREMENTAL_POLICY} from '../scripts/catalog-next/japan-stability-code-scope.mjs';
+  JAPAN_SOURCE_BOUNDED_INCREMENTAL_POLICY, JAPAN_SOURCE_COUNT_POLICY, JAPAN_STABILITY_SOURCE_COUNT_CODE_PATHS,
+  JAPAN_STABILITY_SOURCE_COUNT_RETAINED_RUNTIME, JAPAN_STABILITY_SOURCE_COUNT_RETAINED_IMAGE} from '../scripts/catalog-next/japan-stability-code-scope.mjs';
 import {JAPAN_STABILITY_GATES} from '../scripts/catalog-next/japan-stability-browser.mjs';
+import {sourceCountReport} from './helpers/japan-source-count-report-fixture.mjs';
 
 const hash = raw => createHash('sha256').update(raw).digest('hex');
 const ordered = value => Array.isArray(value) ? value.map(ordered) : value && typeof value === 'object'
@@ -26,14 +28,14 @@ const oldSha = '1'.repeat(40), nextSha = '2'.repeat(40), pricingSha = '3'.repeat
 const nonce = 'a'.repeat(32), acceptedAt = '2026-11-25T08:00:00Z';
 const usabilityScope='catalog-japan-usability-v1';
 const usabilityFlags=['japanBrandDirectoryPassed','japanFullPagesPassed','japanKnownPowerOrderPassed','japanVehiclePolicyPassed','japanQuietCatalogPassed'];
-function sample(retainedRuntime=oldSha) {
+function sample(retainedRuntime=oldSha, imageId='sha256:' + '4'.repeat(64)) {
   const manifestRaw = Buffer.from(JSON.stringify({kind: 'china-local-generation-v1', market: 'china',
     generationId: 'gen_china_100_1', runtimeSha: pricingSha, prepared: true, rows: 283188,
     source: {supplierLatestVerified: true, cursor: 100, sourceObservedAt: '2026-11-24T11:00:00Z'}}));
   const current = {market: 'china', generationId: 'gen_china_100_1', owner: {runId: '100', attempt: '1', revision: retainedRuntime},
     receiptSha256: hash('receipt'), sourceDescriptorSha256: hash('source'), generationManifestSha256: hash(manifestRaw),
     sourceCursor: 100, sourceObservedAt: '2026-11-24T11:00:00Z', runtimeSha: retainedRuntime, pricingRuntimeSha: pricingSha,
-    imageId: 'sha256:' + '4'.repeat(64)};
+    imageId};
   const receipt = Buffer.from(JSON.stringify({version: 1, kind: 'china-host-acceptance-v1', release: current.runtimeSha,
     pricingRuntimeSha: current.pricingRuntimeSha, generationId: current.generationId, imageId: current.imageId,
     generationManifestSha256: current.generationManifestSha256, privateGenerationReceiptSha256: current.receiptSha256,
@@ -78,10 +80,11 @@ test('authenticated photo preflight preserves every frozen expected value and ch
   assert.throws(() => checkedChinaCodePreflight(f.preflight, {...f.current, sourceCursor: 101}, nextSha));
 });
 
-async function fixture(t, {combined = false, japan = false,completion=false, crm=false, crmPhoto=false, pagination=false, stability=false, ui=false, powerOrder=false, brandDirectory=false, observedTiming=false, priceSort=false, exactCount=false, incremental=false} = {}) {
-  assert.equal(exactCount && incremental, false, 'strict and incremental acceptance are distinct profiles');
+async function fixture(t, {combined = false, japan = false,completion=false, crm=false, crmPhoto=false, pagination=false, stability=false, ui=false, powerOrder=false, brandDirectory=false, observedTiming=false, priceSort=false, exactCount=false, incremental=false, sourceCount=false} = {}) {
+  assert(Number(exactCount) + Number(incremental) + Number(sourceCount) <= 1, 'count acceptance profiles are distinct');
   const exactProfile = exactCount || incremental;
-  priceSort=priceSort||exactProfile;
+  const countAcceptance = sourceCount ? JAPAN_SOURCE_COUNT_POLICY : incremental ? JAPAN_SOURCE_BOUNDED_INCREMENTAL_POLICY : undefined;
+  priceSort=priceSort||exactProfile||sourceCount;
   observedTiming=observedTiming||priceSort;
   brandDirectory=brandDirectory||observedTiming;
   powerOrder=powerOrder||brandDirectory;
@@ -90,8 +93,8 @@ async function fixture(t, {combined = false, japan = false,completion=false, crm
   crmPhoto=crmPhoto||pagination;completion=completion||pagination;
   crm=crm||crmPhoto;
   japan=Boolean(japan||completion);
-  const usability=completion===usabilityScope,retainedRuntime=exactProfile?JAPAN_STABILITY_EXACT_COUNT_RETAINED_RUNTIME:priceSort?JAPAN_STABILITY_PRICE_SORT_RETAINED_RUNTIME:stability?JAPAN_STABILITY_RETAINED_RUNTIME:pagination?JAPAN_PAGINATION_RETAINED_RUNTIME:crm?CRM_CHINA_RETAINED_RUNTIME:usability?JAPAN_USABILITY_RETAINED_RUNTIME:oldSha;
-  const f = sample(retainedRuntime), directory = await fs.mkdtemp(path.join(os.tmpdir(), 'china-photo-stage-'));
+  const usability=completion===usabilityScope,retainedRuntime=sourceCount?JAPAN_STABILITY_SOURCE_COUNT_RETAINED_RUNTIME:exactProfile?JAPAN_STABILITY_EXACT_COUNT_RETAINED_RUNTIME:priceSort?JAPAN_STABILITY_PRICE_SORT_RETAINED_RUNTIME:stability?JAPAN_STABILITY_RETAINED_RUNTIME:pagination?JAPAN_PAGINATION_RETAINED_RUNTIME:crm?CRM_CHINA_RETAINED_RUNTIME:usability?JAPAN_USABILITY_RETAINED_RUNTIME:oldSha;
+  const f = sample(retainedRuntime, sourceCount ? JAPAN_STABILITY_SOURCE_COUNT_RETAINED_IMAGE : undefined), directory = await fs.mkdtemp(path.join(os.tmpdir(), 'china-photo-stage-'));
   t.after(() => fs.rm(directory, {recursive: true, force: true}));
   const root = path.join(directory, 'controller');
   for (const name of ['scripts/regcloud-release-retention.py', 'scripts/regcloud-performance-gate.py', 'docs/operations/2026-11-11-accepted-speed-baseline.json',
@@ -115,7 +118,7 @@ async function fixture(t, {combined = false, japan = false,completion=false, crm
     cases:[390,1440].flatMap(width=>['source-options-only','make-change-clears-old-models',
       'model-directory-failure-and-retry','brand-directory-failure-and-retry',...((ui||powerOrder)?['raw-source-selection','typed-source-make-aliases']:[]),
       ...(brandDirectory?['brand-directory-fresh-empty-visible-and-retry','brand-directory-stale-visible-and-retry','brand-directory-error-visible-and-retry']:[]),
-      ...(exactProfile?['audi-family-stale-failed-retry-and-explicit-make']:[])].map(name=>({width,name,passed:true})))}));
+      ...((exactProfile||sourceCount)?['audi-family-stale-failed-retry-and-explicit-make']:[])].map(name=>({width,name,passed:true})))}));
   const image = Buffer.from('synthetic roundtrip image'), imagePath = path.join(imageDirectory, 'image.tar');
   await fs.writeFile(imagePath, image);
   const servingPlan = {version: 1, market: 'china', runtimeSha: nextSha, retainedRuntime,
@@ -124,8 +127,8 @@ async function fixture(t, {combined = false, japan = false,completion=false, crm
     ...(stability?{runtimeFiles:[...(brandDirectory?JAPAN_STABILITY_RAILS_CODE_PATHS:powerOrder?JAPAN_STABILITY_POWER_CODE_PATHS:ui?JAPAN_STABILITY_UI_CODE_PATHS:JAPAN_STABILITY_CODE_PATHS)],codeScope:JAPAN_STABILITY_CODE_SCOPE}:pagination?{runtimeFiles:[...JAPAN_PAGINATION_CODE_PATHS],codeScope:JAPAN_PAGINATION_CODE_SCOPE}:crm?{runtimeFiles:[...(crmPhoto?CRM_JAPAN_PHOTO_CODE_PATHS:CRM_CHINA_CODE_PATHS)], codeScope:crmPhoto?CRM_JAPAN_PHOTO_CODE_SCOPE:CRM_CHINA_CODE_SCOPE}:
       japan ? {codeScope: completion?(typeof completion==='string'?completion:'catalog-japan-completion-v1'):'catalog-japan-recovery-v1'} : combined ? {codeScope: 'catalog-photo-japan-power-v1'} : {})};
   const pricingPlan = {version: 1, market: 'china', runtimeSha: pricingSha};
-  if (observedTiming) Object.assign(servingPlan, {runtimeFiles: [...(exactProfile?JAPAN_STABILITY_EXACT_COUNT_CODE_PATHS:priceSort?JAPAN_STABILITY_PRICE_SORT_CODE_PATHS:JAPAN_STABILITY_HOME_CODE_PATHS)], acceptancePolicy: JAPAN_OBSERVED_TIMING_POLICY});
-  if (incremental) servingPlan.countAcceptance = JAPAN_SOURCE_BOUNDED_INCREMENTAL_POLICY;
+  if (observedTiming) Object.assign(servingPlan, {runtimeFiles: [...(sourceCount?JAPAN_STABILITY_SOURCE_COUNT_CODE_PATHS:exactProfile?JAPAN_STABILITY_EXACT_COUNT_CODE_PATHS:priceSort?JAPAN_STABILITY_PRICE_SORT_CODE_PATHS:JAPAN_STABILITY_HOME_CODE_PATHS)], acceptancePolicy: JAPAN_OBSERVED_TIMING_POLICY});
+  if (countAcceptance !== undefined) servingPlan.countAcceptance = countAcceptance;
   const imageReceipt = {version: 1,
     kind: 'china-runtime-image-v1', runtimeSha: nextSha, runtimeTree: servingPlan.runtimeTree,
     retainedRuntime, runtimeDiffSha256: servingPlan.runtimeDiffSha256, pricingRuntimeSha: pricingSha,
@@ -135,7 +138,7 @@ async function fixture(t, {combined = false, japan = false,completion=false, crm
     builder: {version: '29.1.3', driver: 'overlayfs', driverType: 'io.containerd.snapshotter.v1'},
     ...(combined || japan || crm ? {codeScope: servingPlan.codeScope} : {}),
     ...(observedTiming ? {acceptancePolicy: JAPAN_OBSERVED_TIMING_POLICY} : {}),
-    ...(incremental ? {countAcceptance: JAPAN_SOURCE_BOUNDED_INCREMENTAL_POLICY} : {}),
+    ...(countAcceptance === undefined ? {} : {countAcceptance}),
     ...(crm && !pagination ? {protectedPathExceptions: [...CRM_CHINA_PROTECTED_EXCEPTIONS]} : {})};
   const imageReceiptRaw = JSON.stringify(imageReceipt);
   await fs.writeFile(path.join(imageDirectory, 'image-receipt.json'), imageReceiptRaw);
@@ -178,7 +181,7 @@ async function fixture(t, {combined = false, japan = false,completion=false, crm
         assert.equal(hostPlan.generationId, f.current.generationId); assert.equal(hostPlan.retainedRuntime, retainedRuntime);
         assert.equal(hostPlan.codeSourcePlanSha256, f.preflight.previousPlanSha256);
         assert.equal(hostPlan.codeSourceOracleSha256, f.preflight.previousOracleSha256);
-        assert.equal(hostPlan.countAcceptance, incremental ? JAPAN_SOURCE_BOUNDED_INCREMENTAL_POLICY : undefined);
+        assert.equal(hostPlan.countAcceptance, countAcceptance);
         assert.deepEqual(hostPlan.codeImageStorageProof, storageProof);
         return {};
       }
@@ -200,7 +203,7 @@ async function fixture(t, {combined = false, japan = false,completion=false, crm
         browserBytes = {speed: Buffer.from(args.speedBase64, 'base64'), details: Buffer.from(args.detailsBase64, 'base64')};
         const details = JSON.parse(browserBytes.details), raw = Buffer.from(
           crm && !observedTiming ? details.crmChinaReportBase64 : japan ? details.japanReportBase64 : combined ? details.photoJapanReportBase64 : details.photoReportBase64, 'base64');
-        assert.equal(details.countAcceptance, incremental ? JAPAN_SOURCE_BOUNDED_INCREMENTAL_POLICY : undefined);
+        assert.equal(details.countAcceptance, countAcceptance);
         assert.equal(hash(raw), crm && !observedTiming ? details.crmChinaReportSha256 : japan ? details.japanReportSha256 : combined ? details.photoJapanReportSha256 : details.photoReportSha256);
         assert.equal(JSON.parse(raw).nonce, hostPlan.nonce);
         if (crmPhoto) {
@@ -227,7 +230,7 @@ async function fixture(t, {combined = false, japan = false,completion=false, crm
         const raw = Buffer.from(JSON.stringify({...old, release: nextSha, imageId: f.candidate.imageId, nonce: hostPlan.nonce,
           transition: 'code-update', previousAcceptedETag: f.previous.etag, previousAcceptedStateSha256: f.previous.sha256,
           ...(observedTiming ? {acceptancePolicy: JAPAN_OBSERVED_TIMING_POLICY, codeScope: JAPAN_STABILITY_CODE_SCOPE} : {}),
-          ...(incremental ? {countAcceptance: JAPAN_SOURCE_BOUNDED_INCREMENTAL_POLICY} : {}),
+          ...(countAcceptance === undefined ? {} : {countAcceptance}),
           retainedRuntimeSha: retainedRuntime, retainedImageId: f.current.imageId, browser: args.verdict}));
         return {accepted: true, hostReceiptBase64: raw.toString('base64'), hostReceiptSha256: hash(raw)};
       }
@@ -273,7 +276,8 @@ async function fixture(t, {combined = false, japan = false,completion=false, crm
           assert.equal(args.env.CATALOG_JAPAN_BRAND_DIRECTORY_REQUIRED,brandDirectory?'1':'0');
           assert.equal(args.env.CATALOG_JAPAN_PRICE_SORT_REQUIRED,priceSort?'1':'0');
           assert.equal(args.env.CATALOG_JAPAN_EXACT_COUNT_REQUIRED,exactCount?'1':'0');
-          assert.equal(args.env.CATALOG_JAPAN_MODEL_COVERAGE_REQUIRED,incremental?'1':'0');
+          assert.equal(args.env.CATALOG_JAPAN_MODEL_COVERAGE_REQUIRED,incremental||sourceCount?'1':'0');
+          assert.equal(args.env.CATALOG_JAPAN_SOURCE_COUNT_REQUIRED,sourceCount?'1':'0');
           assert.equal(args.env.CATALOG_JAPAN_TIMING_POLICY, observedTiming ? JAPAN_OBSERVED_TIMING_POLICY : undefined);
           assert.equal(Object.hasOwn(args.env, 'CATALOG_JAPAN_TIMING_POLICY'), observedTiming,
             'older profiles omit the optional timing policy rather than sending an invalid empty value');
@@ -307,6 +311,7 @@ async function fixture(t, {combined = false, japan = false,completion=false, crm
                 pairsSha256:hash('source pairs'),directory:{status:200,stale:false,sourcePairs:94,pairsSha256:hash('source pairs'),browserMatchesApi:true},
                 selection:{shown:24,observedSourceNamesOnly:true},countHonest:true,fullPage:true,explicitApiReads:3,
                 liveExhaustiveScan:false,pageErrors:0}}}:{}),
+            ...(sourceCount ? sourceCountReport(new Date().toISOString()) : {}),
             ...(stability?Object.fromEntries(JAPAN_STABILITY_GATES.map(key=>[key,true])):{})};
           if (flags.failedReport) Object.assign(report, {passed: false, japanVisibilityPassed: false,
             error: {stage: 'catalog_visibility', code: 'japan_browser_overview_http', timeout: false}});
@@ -1185,5 +1190,74 @@ test('accepted state independently binds the incremental policy and preserves st
   }
   const committed = await state.commit({lease, intent: input.intent, reservation: input.reservation, evidence: outcome.evidence});
   assert.equal(committed.accepted.value.current.runtimeSha, nextSha);
+  assert.deepEqual(committed.accepted.value.rollback, f.current);
+});
+
+test('source-count successor commits labelled source evidence while retaining accepted7f and every China identity', async t => {
+  const f = await fixture(t, {sourceCount: true}), storage = memoryStorage(f.previous);
+  const report = await runChinaCodeCycle({plan: {...f.servingPlan, minimumYear: 2014}, imageId: f.candidate.imageId,
+    invocation: {version: 1, sourceSha: '9'.repeat(40)}, owner: {runId: '200', attempt: '1', revision: '9'.repeat(40)},
+    nonce: 'b'.repeat(32), storage, now: () => acceptedAt, scheduleHeartbeat: () => () => {},
+    stageCodeRelease: f.release.stageCodeRelease, recoverRelease: async () => assert.fail('no unresolved publication')});
+  assert.equal(report.completed, true); assert.equal(report.status, 'accepted'); assert.equal(report.published, true);
+  assert.equal(report.speedGateRequired, false); assert.equal(report.speedPassed, null);
+  const accepted = (await storage.read('accepted')).value;
+  assert.deepEqual(accepted.rollback, f.current);
+  assert.equal(accepted.rollback.runtimeSha, JAPAN_STABILITY_SOURCE_COUNT_RETAINED_RUNTIME);
+  assert.equal(accepted.rollback.imageId, JAPAN_STABILITY_SOURCE_COUNT_RETAINED_IMAGE);
+  for (const key of ['generationId', 'generationManifestSha256', 'receiptSha256', 'sourceDescriptorSha256',
+    'sourceCursor', 'sourceObservedAt', 'pricingRuntimeSha']) assert.equal(accepted.current[key], f.current[key], key);
+  const receipt = JSON.parse(Buffer.from(accepted.current.proof.hostReceiptBase64, 'base64'));
+  assert.equal(receipt.countAcceptance, JAPAN_SOURCE_COUNT_POLICY);
+  assert.equal(receipt.browser.countAcceptance, JAPAN_SOURCE_COUNT_POLICY);
+  const browser = JSON.parse(await fs.readFile(path.join(f.directory, 'controller/catalog-next-japan-browser-report.json')));
+  assert.equal(browser.japanSourceCountPassed, true); assert.equal(browser.japanExactCountPassed, null);
+  assert.equal(browser.checks.sourceCount.summary.total, 1234);
+  assert.equal(browser.checks.sourceCount.ui.label, 'Найдено до 1\u00a0234');
+  assert.equal(browser.checks.sourceCount.pagination.loadedAfter, 48);
+  assert.equal(browser.japanModelCoveragePassed, true); assert.equal(browser.japanPriceSortPassed, true);
+  assert.equal(browser.timings.samples[0].durationMs, 120000, 'observed duration does not become a performance veto');
+});
+
+for (const [name, change] of [
+  ['invented admitted count', value => { value.checks.sourceCount.admittedTotal = 1234; }],
+  ['missing source proof', value => { delete value.checks.sourceCount.summary.sourceCountProof; }],
+  ['wrong source query', value => { value.checks.sourceCount.summary.sourceCountProof.requestedQueryHash = hash('different'); }],
+  ['false exact label', value => { value.checks.sourceCount.ui.label = 'Найдено 1 234'; }],
+  ['source count below displayed rows', value => {
+    const proof = value.checks.sourceCount;
+    proof.summary.total = proof.summary.sourceCountProof.sourceTotal = proof.ui.sourceTotal = 23;
+    proof.ui.label = 'Найдено до 23';
+  }],
+  ['changed cursor', value => { value.checks.sourceCount.pagination.cursorAfterCount = 'changed'; }],
+  ['failed continuation', value => { value.checks.sourceCount.pagination.continuationFollowed = false; }],
+  ['source refusal', value => { value.japanSourceCountPassed = false; }],
+  ['missing model coverage', value => { delete value.checks.modelCoverage; }],
+  ['failed price sort', value => { value.japanPriceSortPassed = false; }],
+]) test('source-count stage rejects ' + name + ' before host acceptance', async t => {
+  const f = await fixture(t, {sourceCount: true}), {stage, input} = await reservedStage(f);
+  t.after(() => stage.close()); f.flags.changeReport = change;
+  await assert.rejects(stage.activate(input), /china_daily_release_japan_browser_binding/);
+  assert(!f.calls.includes('accept') && !f.calls.includes('browser_evidence'));
+});
+
+test('source-count accepted state independently rejects swapped retained images and resealed unsupported claims', async t => {
+  const f = await fixture(t, {sourceCount: true}), {stage, input, state, storage, lease} = await reservedStage(f);
+  t.after(() => stage.close());
+  const outcome = await stage.activate(input), before = {accepted: await storage.read('accepted'), intent: await storage.read('intent')};
+  for (const [change, expected] of [
+    [({receipt}) => { receipt.retainedImageId = 'sha256:' + '8'.repeat(64); }, /count_acceptance_scope/],
+    [({receipt}) => { receipt.retainedRuntimeSha = JAPAN_STABILITY_EXACT_COUNT_RETAINED_RUNTIME; }, /count_acceptance_scope/],
+    [({speed}) => { speed.japanExactCountPassed = true; }, /japan_source_count_binding/],
+    [({speed}) => { speed.checks.sourceCount.summary.upperBound = false; }, /japan_source_count_binding/],
+    [({speed}) => { speed.checks.sourceCount.pagination.freshSourcePages = false; }, /japan_source_count_binding/],
+    [({speed}) => { speed.checks.modelCoverage.accessiblePairs--; }, /japan_source_count_binding/],
+    [({speed}) => { delete speed.japanPriceSortRequired; }, /japan_price_sort_binding/],
+  ]) {
+    await assert.rejects(state.commit({lease, intent: input.intent, reservation: input.reservation,
+      evidence: resealedJapanEvidence(outcome.evidence, change)}), expected);
+    assert.deepEqual({accepted: await storage.read('accepted'), intent: await storage.read('intent')}, before);
+  }
+  const committed = await state.commit({lease, intent: input.intent, reservation: input.reservation, evidence: outcome.evidence});
   assert.deepEqual(committed.accepted.value.rollback, f.current);
 });

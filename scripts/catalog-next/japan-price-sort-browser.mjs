@@ -1,5 +1,6 @@
 import {createHash} from 'node:crypto';
 import {verifyJapanExactCount, verifyJapanExactCountStable, JAPAN_SOURCE_BOUNDED_COUNT_ACCEPTANCE} from './japan-exact-count-browser.mjs';
+import {JAPAN_SOURCE_COUNT_ACCEPTANCE, verifyJapanSourceCountVisible} from './japan-source-count-browser.mjs';
 
 const ORIGIN = 'https://avtocena.com';
 const CITY = 'Новокузнецк';
@@ -111,25 +112,35 @@ export function verifyJapanPriceSortRows(payload, sort, {visiblePrices} = {}) {
     priceBasis: visiblePrices ? 'displayed_selected_city' : 'supplied_fixture_prices'};
 }
 
-export function verifyJapanPriceSortCount({status, loadedCount, exactCount, text}, {loaded, total = null, hasMore = true, requireExactCount = false, countAcceptance} = {}) {
+export function verifyJapanPriceSortCount(observation, {loaded, total = null, countSummary, hasMore = true, requireExactCount = false, countAcceptance, query} = {}) {
+  const {status, loadedCount, exactCount, text, label = text} = observation;
   need(typeof requireExactCount === 'boolean', 'exact_count_option');
-  need(countAcceptance === undefined || countAcceptance === JAPAN_SOURCE_BOUNDED_COUNT_ACCEPTANCE && !requireExactCount, 'count_acceptance');
+  need(countAcceptance === undefined || [JAPAN_SOURCE_BOUNDED_COUNT_ACCEPTANCE, JAPAN_SOURCE_COUNT_ACCEPTANCE].includes(countAcceptance) && !requireExactCount, 'count_acceptance');
   need(Number.isSafeInteger(loaded) && (requireExactCount ? loaded >= 0 : loaded > 0) && Number(loadedCount) === loaded
     && typeof text === 'string' && text.trim().length > 0, 'count_visible');
   const normalized = text.replace(/[\u00a0\u202f]/g, ' ').replace(/\s+/g, ' ').trim();
+  const normalizedLabel = label.replace(/[\u00a0\u202f]/g, ' ').replace(/\s+/g, ' ').trim();
+  const shown = loaded.toLocaleString('ru-RU').replace(/[\u00a0\u202f]/g, ' ');
+  const explicitUnknown = normalizedLabel === 'Показано ' + shown + ' · общий итог уточняется';
   if (requireExactCount) need(status === 'exact', 'exact_count_required');
+  let sourceCount;
   if (status === 'exact') {
     need(Number.isSafeInteger(total) && total >= loaded && (requireExactCount || hasMore === false)
       && String(total) === exactCount && !/уточняется/i.test(normalized)
-      && (!requireExactCount || !/Загружено/i.test(normalized) && normalized.replace(/\s/g, '') === String(total)), 'false_exact_count');
+      && (!requireExactCount || !/Загружено/i.test(normalized) && [String(total), 'Найдено' + total]
+        .includes(normalizedLabel.replace(/\s/g, ''))), 'false_exact_count');
+  } else if (['bounded', 'source'].includes(status)) {
+    need(countAcceptance === JAPAN_SOURCE_COUNT_ACCEPTANCE && !requireExactCount && total === null, 'false_exact_count');
+    sourceCount = verifyJapanSourceCountVisible({...observation, label}, {summary: countSummary, query, loaded});
   } else {
     need(['partial', 'stale', 'pending'].includes(status) && (exactCount === null || exactCount === undefined)
-      && (countAcceptance === JAPAN_SOURCE_BOUNDED_COUNT_ACCEPTANCE
-        ? total === null && normalized === 'Количество уточняется'
-        : normalized.includes('Загружено ' + loaded.toLocaleString('ru-RU').replace(/\u00a0/g, ' ')))
-      && /количество уточняется/i.test(normalized), 'count_visible');
+      && (countAcceptance === JAPAN_SOURCE_COUNT_ACCEPTANCE ? total === null && explicitUnknown
+        : countAcceptance === JAPAN_SOURCE_BOUNDED_COUNT_ACCEPTANCE
+          ? total === null && (normalized === 'Количество уточняется' || explicitUnknown)
+          : explicitUnknown || normalized.includes('Загружено ' + shown) && /количество уточняется/i.test(normalized)), 'count_visible');
   }
-  return {loaded, status, exact: status === 'exact', visible: true, supplierCountNotPresentedAsExact: true};
+  return {loaded, status, exact: status === 'exact', visible: true, supplierCountNotPresentedAsExact: true,
+    ...(sourceCount ? {sourceCount} : {})};
 }
 
 async function controlsReady(view, progress) {
@@ -213,14 +224,20 @@ export async function verifyJapanPriceSortVisible(view, items, countInput, {sort
   await badge.waitFor({state: 'visible', timeout: 30_000});
   need(await badge.count() === 1, 'count_unique');
   const exact = badge.locator('[data-catalog-market-count]');
+  const label = badge.locator('[data-japan-count-label]');
   const proof = verifyJapanPriceSortCount({status: await badge.getAttribute('data-japan-count-status'),
     loadedCount: await badge.getAttribute('data-japan-loaded-count'),
     exactCount: await badge.getAttribute('data-catalog-market-count')
       ?? (await exact.count() === 1 ? await exact.getAttribute('data-catalog-market-count') : null),
-    text: await badge.innerText()}, {loaded: items.length, ...countInput, requireExactCount, countAcceptance});
+    sourceTotal: await badge.getAttribute('data-japan-source-total'),
+    proofKind: await badge.getAttribute('data-japan-count-proof'),
+    requestedQueryHash: await badge.getAttribute('data-japan-count-query-hash'),
+    observedAt: await badge.getAttribute('data-japan-count-observed-at'),
+    text: await badge.innerText(), ...(await label.count() === 1 ? {label: await label.innerText()} : {})},
+  {loaded: items.length, ...countInput, requireExactCount, countAcceptance, query});
   if (requireExactCount) need(await badge.getAttribute('data-japan-count-proof') === 'japan-admitted-census'
     && await badge.getAttribute('data-japan-count-query-hash') === exactProof.requestedQueryHash, 'visible_count_binding');
-  const footer = catalog.getByText(new RegExp('^Показано\\s+' + items.length + '(?:\\s|$)'));
+  const footer = catalog.locator('p[role="status"]').filter({hasText: new RegExp('^Показано\\s+' + items.length + '(?:\\s|$)')});
   need(await footer.count() === 1 && await footer.isVisible(), 'loaded_count');
   if (requireExactCount) need((await footer.innerText()).replace(/[\s\u00a0\u202f]/g, '')
     === 'Показано' + items.length + 'из' + exactProof.total, 'footer_exact_count');
@@ -247,7 +264,7 @@ export async function verifyJapanPriceSortVisible(view, items, countInput, {sort
 export async function runJapanPriceSortBrowser({context, report, read, capture, onStage, onPage,
   verifyPage, verifyFullPage, verifyPowerPage, verifyVehiclePolicy, requireExactCount = false, countAcceptance}) {
   need(typeof requireExactCount === 'boolean', 'exact_count_option');
-  need(countAcceptance === undefined || countAcceptance === JAPAN_SOURCE_BOUNDED_COUNT_ACCEPTANCE && !requireExactCount, 'count_acceptance');
+  need(countAcceptance === undefined || [JAPAN_SOURCE_BOUNDED_COUNT_ACCEPTANCE, JAPAN_SOURCE_COUNT_ACCEPTANCE].includes(countAcceptance) && !requireExactCount, 'count_acceptance');
   const progress = report.checks.priceSortProgress = {phase: 'page_navigation', readyChecks: 0};
   const pages = [], checks = [];
   onStage('stability_price_sort_power');

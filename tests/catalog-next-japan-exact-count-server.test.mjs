@@ -5,6 +5,7 @@ import {inflateSync} from 'node:zlib';
 import * as exactCountFixture from './browser/japan-exact-count.mjs';
 import {japanExactCountApi} from '../scripts/catalog-next/japan-exact-count-browser.mjs';
 import {japanPriceSortApi} from '../scripts/catalog-next/japan-price-sort-browser.mjs';
+import {japanSourceCountApi, verifyJapanSourceCountSummary} from '../scripts/catalog-next/japan-source-count-browser.mjs';
 
 const city='Новокузнецк';
 const {createExactCountFixtureHandler}=exactCountFixture;
@@ -35,6 +36,28 @@ async function fixtureServer(t,{renderMarkup=()=>'<main>actual handler SSR respo
   });
   return {active,rejections,request};
 }
+
+test('source-count fixture keeps the original titlecase bookmark and count-free lists around one independent candidate count',async t=>{
+  const f=await fixtureServer(t,{renderMarkup:({initial,result,sourceCount})=>{
+    assert.deepEqual(initial,{city,market:'japan',make:'Audi',model:'A4'});
+    assert.equal(sourceCount,true);assert.equal(result.total,null);assert.equal(result.countSummary,null);
+    return '<main>count-free source fixture</main>';
+  }});
+  f.active.sourceCount=true;
+  assert.equal((await f.request('/cars/japan/Audi/A4?'+new URLSearchParams({city}))).status,200);
+  const first=JSON.parse((await f.request(japanSourceCountApi())).body);
+  const counted=JSON.parse((await f.request(japanSourceCountApi({countOnly:true}))).body);
+  assert.equal(counted.total,null);assert.equal(counted.countIncomplete,true);assert.deepEqual(counted.items,[]);
+  assert.equal(verifyJapanSourceCountSummary(counted.countSummary,{query:japanSourceCountApi(),positive:true,fresh:true}).total,83);
+  assert.equal(first.total,null);assert.equal(first.countSummary,null);assert.equal(first.items.length,24);
+  const nextUrl=new URL(japanSourceCountApi(),'https://avtocena.com');
+  nextUrl.searchParams.set('page','2');nextUrl.searchParams.set('after',first.nextCursor);nextUrl.searchParams.set('marketPage','1');
+  const next=JSON.parse((await f.request(nextUrl.pathname+nextUrl.search)).body);
+  assert.equal(next.total,null);assert.equal(next.countSummary,null);assert.equal(next.items.length,24);
+  assert.equal(new Set([...first.items,...next.items].map(row=>row.id)).size,48);
+  assert.equal(JSON.parse((await f.request(japanSourceCountApi())).body).nextCursor,first.nextCursor);
+  assert.deepEqual(f.rejections,[]);assert.equal(f.active.serverError,undefined);
+});
 
 test('the shared handler serves initial SSR and every bounded helper API, including models and hidden budget continuation',async t=>{
   const f=await fixtureServer(t,{renderMarkup:({initial,result})=>{

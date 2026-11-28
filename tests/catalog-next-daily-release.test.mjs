@@ -12,7 +12,8 @@ import {savePrivateChinaGeneration} from '../scripts/catalog-next/private-genera
 import {CHINA_GENERATION_FILES} from '../scripts/catalog-next/generation-storage.mjs';
 import {JAPAN_STABILITY_CODE_SCOPE, JAPAN_STABILITY_EXACT_COUNT_CODE_PATHS,
   JAPAN_STABILITY_EXACT_COUNT_RETAINED_RUNTIME, JAPAN_OBSERVED_TIMING_POLICY,
-  JAPAN_SOURCE_BOUNDED_INCREMENTAL_POLICY, japanSourceBoundedIncrementalRequired}
+  JAPAN_SOURCE_BOUNDED_INCREMENTAL_POLICY, japanSourceBoundedIncrementalRequired, JAPAN_SOURCE_COUNT_POLICY,
+  JAPAN_STABILITY_SOURCE_COUNT_RETAINED_RUNTIME, JAPAN_STABILITY_SOURCE_COUNT_CODE_PATHS, japanSourceCountRequired}
   from '../scripts/catalog-next/japan-stability-code-scope.mjs';
 
 const root = process.cwd(), hash = value => createHash('sha256').update(value).digest('hex');
@@ -251,6 +252,25 @@ test('a daily generation update on the accepted incremental runtime retains the 
   const receipt = JSON.parse(Buffer.from(current.proof.hostReceiptBase64, 'base64'));
   assert.equal(Object.hasOwn(receipt, 'countAcceptance'), false);
   assert.equal(Object.hasOwn(receipt.browser, 'countAcceptance'), false);
+});
+
+test('a daily generation update on an accepted source-count runtime does not acquire a code-transition marker', async t => {
+  const servingPlan = {version: 1, market: 'china', codeScope: JAPAN_STABILITY_CODE_SCOPE,
+    runtimeSha: '8'.repeat(40), runtimeTree: '9'.repeat(40), runtimeDiffSha256: hash('source-count-runtime-fixture'),
+    retainedRuntime: JAPAN_STABILITY_SOURCE_COUNT_RETAINED_RUNTIME, runtimeFiles: [...JAPAN_STABILITY_SOURCE_COUNT_CODE_PATHS],
+    acceptancePolicy: JAPAN_OBSERVED_TIMING_POLICY, countAcceptance: JAPAN_SOURCE_COUNT_POLICY};
+  assert.equal(japanSourceCountRequired(servingPlan), true);
+  const f = await fixture(t, {servingPlan}), result = await runChinaDailyCycle(f.args);
+  assert.equal(result.status, 'accepted'); assert.equal(result.published, true);
+  for (const value of [f.hostPlan(), f.hostVerdict()]) {
+    assert.equal(Object.hasOwn(value, 'countAcceptance'), false);
+    assert.equal(Object.hasOwn(value, 'acceptancePolicy'), false);
+    assert.equal(Object.hasOwn(value, 'timingPolicy'), false);
+  }
+  const current = (await f.storage.read('accepted')).value.current;
+  assert.equal(current.runtimeSha, f.old.runtimeSha); assert.equal(current.generationId, f.candidate.generationId);
+  assert.equal(f.hostPlan().mode, 'generation-update'); assert.equal(f.hostVerdict().speedPassed, true);
+  assert.ok(f.childCalls.every(call => !call.script.endsWith('/japan-browser-acceptance.mjs')));
 });
 
 test('real daily adapter restores exact private bytes, checks serving oracle and frozen gates, then retires after committed pointer', async t => {

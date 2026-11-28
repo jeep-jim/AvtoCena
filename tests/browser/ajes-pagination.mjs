@@ -199,6 +199,9 @@ try{
    assert.deepEqual(await page.evaluate(()=>window.calls.map(x=>x.page)),[2,3]);
    await page.getByRole('button',{name:'Другой фильтр',exact:true}).click();
    await page.getByText('Количество уточняется',{exact:true}).waitFor();
+   const resetLoaded=page.locator('p[role="status"]').filter({hasText:/^Показано\s+24\s*$/});
+   await resetLoaded.waitFor({state:'visible'});
+   assert.equal(await resetLoaded.count(),1,'the unknown new selection must retain its actual 24 displayed rows');
    assert.equal(await page.getByRole('link',{name:'Страница '+last,exact:true}).count(),0,'old-query count must never apply to new filters');
   }
   await runJapanCases(page,width);
@@ -432,3 +435,4 @@ async function runJapanCases(page,width){
  assert.equal(await page.getByRole('alert').count(),0);await warningAbsent();
  fixture.editorialRevision='fixture-1';report.caseCount++;
 }
+

@@ -17,6 +17,8 @@ import {verifyJapanPage, verifyJapanFullPage, verifyJapanPowerPage, verifyJapanV
 import {runJapanExactCountBrowser, runJapanModelCoverageBrowser, japanExactCountQueryHash,
   verifyJapanFiniteSelection, JAPAN_SOURCE_BOUNDED_COUNT_ACCEPTANCE}
   from '../../scripts/catalog-next/japan-exact-count-browser.mjs';
+import {JAPAN_SOURCE_COUNT_ACCEPTANCE, japanSourceCountRequirement, runJapanSourceCountBrowser}
+  from '../../scripts/catalog-next/japan-source-count-browser.mjs';
 
 const ROOT = fileURLToPath(new URL('../../', import.meta.url));
 const ORIGIN = 'https://avtocena.com', CITY = 'Новокузнецк';
@@ -63,6 +65,7 @@ export function ExactCountFixture({initial,result,remount=false}){
  useEffect(()=>{
   const fixture=window.__japanExactCount;
   fixture.replace=(next)=>{fixture.current=next;setCurrent(next);};fixture.current=current;fixture.late=(next)=>setLate(next);fixture.ready=true;
+  if(window.__japanExactCountInitial.sourceCount)void fixture.loadCount(current.initial);
  },[]);
  return <main className="ac-catalog-page ac-page-copy ac-ajes-catalog min-h-screen text-[var(--ac-text)]">
   <section className="ac-catalog-shell mx-auto w-full max-w-[1500px] px-4 py-6 md:px-8 md:py-10">
@@ -82,13 +85,18 @@ export function ExactCountFixture({initial,result,remount=false}){
 }
 if(typeof window!=='undefined'){
  const fixture={calls:[],errors:[],ready:false,sequence:0,delayedModelResponses:0,completedModelDelays:0,
-  cardFallbackOptionsBeforeDirectory:0,replace:()=>{},late:()=>{},async navigate(href){
+  cardFallbackOptionsBeforeDirectory:0,replace:()=>{},late:()=>{},async loadCount(query){
+  const response=await fetch('/api/catalog/search?'+new URLSearchParams({...query,countOnly:'1'}));
+  const result=await response.json();
+  if(response.ok&&result.countSummary)fixture.late({queryKey:JSON.stringify(query),summary:result.countSummary,text:'source'});
+ },async navigate(href){
   const sequence=++fixture.sequence;fixture.calls.push(href);history.pushState(null,'',href);
   const url=new URL(href,location.origin);
   const query={...Object.fromEntries(url.searchParams),...catalogRouteParams(url.pathname),market:'japan'};
   const response=await fetch('/api/catalog/search?'+new URLSearchParams({...query,page:'1',pageSize:'24'}));
   const result=await response.json();
-  if(sequence===fixture.sequence&&response.ok)fixture.replace({initial:query,result});
+  if(sequence===fixture.sequence&&response.ok){fixture.replace({initial:query,result});
+   if(window.__japanExactCountInitial.sourceCount)void fixture.loadCount(query);}
  }};
  window.__japanExactCount=fixture;
  if(window.__japanExactCountInitial.modelCoverage){
@@ -266,6 +274,21 @@ export function modelCoverageFixtureResult(query, now) {
     items: result.items.map(row => row.id === EXACT_FIXTURE_IDS[0] ? {...row, make: 'Audi'} : row)};
 }
 
+/** Independent source COUNT is intentionally broader than admitted cards.
+ * LIST remains count-free, including after the scalar has become available. */
+export function sourceCountFixtureResult(query, now) {
+  const result = modelCoverageFixtureResult(query, now);
+  if (query.countOnly !== '1') return result;
+  const sourceTotal = fixtureRows(now).filter(row => !query.model || familyNames.includes(row.model)).length;
+  const summary = {total: sourceTotal, stale: false, observedAt: now, upperBound: true,
+    precision: 'source-upper-bound', selectionScope: 'source-candidates', sourceScopeComplete: true,
+    sourceCountProof: {version: 1, kind: 'japan-source-count', predicateVersion: 'japan-source-candidates-v1',
+      requestedQueryHash: japanExactCountQueryHash(query), sourceQueryHash: hash('source:' + (query.model || 'all')),
+      evidenceEpoch: hash('source-count-fixture-epoch'), sourceTotal, sourceObservedAt: now,
+      sourceScopeComplete: true, directoryComplete: true}};
+  return {ok: true, total: null, countIncomplete: true, items: [], countSummary: summary};
+}
+
 /** Record only bounded public call-site fields. Every denied attempt still
  * increments the guard, even after the diagnostic sample is full. */
 export function recordForbiddenFixtureRequest(report,{caseName,stage,method,url,resourceType}) {
@@ -301,7 +324,8 @@ export function createExactCountFixtureHandler({fixture,getActive}) {
           if(Number(query.page)>1){const prior=fixtureResult({...query,page:String(Number(query.page)-1)},active.now);need(query.after===prior.nextCursor,'emitted_cursor');}
           if(active.failAppend&&Number(query.page)===3){send(503,{'Content-Type':'application/json'},'{"ok":false}');return;}
           if(active.holdNext&&query.sort==='totalRubDesc'&&Number(query.page)===1){active.held=true;await active.releaseWait;}
-          const result=active.modelCoverage?modelCoverageFixtureResult(query,active.now):fixtureResult(query,active.now);
+          const result=active.sourceCount?sourceCountFixtureResult(query,active.now)
+            :active.modelCoverage?modelCoverageFixtureResult(query,active.now):fixtureResult(query,active.now);
           send(200,{'Content-Type':'application/json','Cache-Control':'no-store'},JSON.stringify(result));return;
         }
         if(url.pathname==='/api/catalog/brand-counts'){
@@ -324,12 +348,14 @@ export function createExactCountFixtureHandler({fixture,getActive}) {
         }
         if(url.pathname.startsWith('/brand-logos/')){send(200,{'Content-Type':'image/png'},LOCAL_BRAND_LOGO_PNG);return;}
         stage='document_scope';
-        need(url.pathname==='/cars/japan'&&url.searchParams.get('city')===CITY
+        const sourceBookmark=active.sourceCount&&url.pathname==='/cars/japan/Audi/A4'&&url.searchParams.size===1;
+        need((url.pathname==='/cars/japan'||sourceBookmark)&&url.searchParams.get('city')===CITY
           &&(url.searchParams.size===1||active.recoverCount&&url.searchParams.size===2&&url.searchParams.get('powerTo')==='160'),'document_scope');
-        const initial={city:CITY,market:'japan',...(active.recoverCount?{powerTo:'160'}:{})};
-        const result=active.modelCoverage?modelCoverageFixtureResult(initial,active.now):fixtureResult(initial,active.now);
+        const initial={city:CITY,market:'japan',...(active.recoverCount?{powerTo:'160'}:{}),...(sourceBookmark?{make:'Audi',model:'A4'}:{})};
+        const result=active.sourceCount?sourceCountFixtureResult(initial,active.now)
+          :active.modelCoverage?modelCoverageFixtureResult(initial,active.now):fixtureResult(initial,active.now);
         if(active.recoverCount){result.total=null;result.countSummary=null;}
-        const props={initial,result,remount:active.remount,modelCoverage:active.modelCoverage===true};
+        const props={initial,result,remount:active.remount,modelCoverage:active.modelCoverage===true,sourceCount:active.sourceCount===true};
         stage='document_render';
         const body='<!doctype html><html><head><meta charset="utf-8"><link rel="icon" href="data:,"><link rel="stylesheet" href="/fixture.css"></head><body><div id="root">'
           +fixture.renderMarkup(props)+'</div><script>window.__japanExactCountInitial='+JSON.stringify(props).replace(/</g,'\\u003c')
@@ -362,8 +388,11 @@ async function main() {
   try {
     need(process.argv.length===2,'arguments');
     const plan=JSON.parse(await fs.readFile(path.join(ROOT,'.github/operations/catalog-next/china-code-serving-plan.json'),'utf8'));
+    const requireSourceCount=japanSourceCountRequirement(process.env.CATALOG_JAPAN_SOURCE_COUNT_REQUIRED);
+    need(requireSourceCount===(plan.countAcceptance===JAPAN_SOURCE_COUNT_ACCEPTANCE),'source_count_profile');
     fixture=await prepare(process.env.PHOTO_RUNTIME_ROOT,plan);
     const helperFiles=['scripts/catalog-next/japan-exact-count-browser.mjs','scripts/catalog-next/japan-price-sort-browser.mjs',
+      'scripts/catalog-next/japan-source-count-browser.mjs',
       'scripts/catalog-next/japan-browser-acceptance.mjs'];
     Object.assign(report,{runtimeSha:plan.runtimeSha,runtimeTree:plan.runtimeTree,componentSha256:fixture.sources,styles:fixture.styles,
       helperSha256:Object.fromEntries(await Promise.all(helperFiles.map(async file=>[file,hash(await fs.readFile(path.join(ROOT,file)))])))});
@@ -382,7 +411,7 @@ async function main() {
       const errors=[],result={checks:{},screenshots:[]};let currentPage;
       await context.route('**/*',async route=>{
         const request=route.request(),url=new URL(request.url());
-        const allowed=request.method()==='GET'&&url.origin===ORIGIN&&(url.pathname==='/cars/japan'
+        const allowed=request.method()==='GET'&&url.origin===ORIGIN&&(url.pathname==='/cars/japan'||state.sourceCount&&url.pathname==='/cars/japan/Audi/A4'
           ||['/fixture.js','/fixture.css','/api/catalog/search','/api/catalog/brand-counts','/api/catalog/source-models','/api/catalog/saved-previews','/api/catalog/rates'].includes(url.pathname)
           ||url.pathname.startsWith('/brand-logos/'));
         if(!allowed){
@@ -402,7 +431,7 @@ async function main() {
         const callbacks={context:wrapped,report:result,read:async api=>{
           const url=new URL(api,ORIGIN);
           const data=url.pathname==='/api/catalog/source-models'?fixtureDirectory(state.now)
-            :(state.modelCoverage?modelCoverageFixtureResult:fixtureResult)(Object.fromEntries(url.searchParams),state.now);
+            :(state.sourceCount?sourceCountFixtureResult:state.modelCoverage?modelCoverageFixtureResult:fixtureResult)(Object.fromEntries(url.searchParams),state.now);
           return {status:200,data};
         },capture:async()=>{},onStage:stage=>{result.stage=stage;},onPage:()=>{},
           verifyPage:verifyJapanPage,verifyFullPage:verifyJapanFullPage,verifyPowerPage:verifyJapanPowerPage,
@@ -488,6 +517,21 @@ async function main() {
           positiveExactCountsSupplied,countsIncomplete,directoryWait,modelCoverage:modelReport.checks.modelCoverage};
         await currentPage.close();state.modelCoverage=false;
 
+        let sourceCountAcceptance;
+        if(requireSourceCount){
+          result.stage='fixture_source_count';state.sourceCount=true;
+          const sourceReport={countAcceptance:JAPAN_SOURCE_COUNT_ACCEPTANCE,japanSourceCountRequired:true,
+            japanSourceCountPassed:false,japanModelCoverageRequired:true,japanModelCoveragePassed:false,
+            japanExactCountRequired:false,japanExactCountPassed:null,checks:{},screenshots:[]};
+          const sourcePages=await runJapanSourceCountBrowser({...callbacks,report:sourceReport,verifyVisible:verifyJapanPriceSortVisible});
+          need(sourceReport.japanSourceCountPassed===true&&sourceReport.japanModelCoveragePassed===true
+            &&sourcePages.every(value=>value.total===null&&value.countSummary===null)
+            &&sourceReport.checks.sourceCount.pagination.loadedAfter===48,'source_count_journey');
+          sourceCountAcceptance={passed:true,countAcceptance:sourceReport.countAcceptance,
+            sourceCount:sourceReport.checks.sourceCount,modelCoverage:sourceReport.checks.modelCoverage};
+          await currentPage.close();state.sourceCount=false;
+        }
+
         // A successful append must repair an initially unknown aggregate in
         // both heading and footer, using the real context and append action.
         result.stage='fixture_append_count_recovery';state.recoverCount=true;
@@ -500,8 +544,10 @@ async function main() {
         await recovery.waitForFunction(()=>window.__japanExactCount?.ready===true);
         const pending=recovery.locator('[data-japan-count-status="partial"][data-japan-loaded-count="24"]');
         await pending.waitFor({state:'visible',timeout:30_000});
+        const pendingText=(await pending.innerText()).replace(/[\u00a0\u202f]/g,' ').trim();
         need(await pending.locator('[data-catalog-market-count]').count()===0
-          &&(await pending.innerText()).trim()==='Количество уточняется','recovery_initial_unknown');
+          &&(pendingText==='Показано 24 · общий итог уточняется'
+            ||!requireSourceCount&&pendingText==='Количество уточняется'),'recovery_initial_unknown');
         const recoveryFirst=fixtureResult(recoveryQuery,state.now);
         const recoveryNext=fixtureResult({...recoveryQuery,page:'2',after:recoveryFirst.nextCursor},state.now);
         const recoveryAppend=recovery.waitForResponse(response=>new URL(response.url()).pathname==='/api/catalog/search'
@@ -541,7 +587,7 @@ async function main() {
           failedAppendKeepsTotal:true,pendingKeepsTotal:true,queryLoadedCountResets:true,lateOldAggregateIgnored:true,
           appendRestoresExactCount:true,lateOtherQueryDoesNotEraseCount:true,
           expiredCountDated:true,expiredCountNotCurrent:true,expiredAppendKeepsCards:true,
-          finite:finiteProof,budgetFinite,modelCoverage:result.checks.modelCoverage,incrementalModelCoverage,exactCount:result.checks.exactCount,
+          finite:finiteProof,budgetFinite,modelCoverage:result.checks.modelCoverage,incrementalModelCoverage,sourceCountAcceptance,exactCount:result.checks.exactCount,
           priceSort:result.checks.priceSort,pageErrors:0,requests:state.requests.length});
       }catch(error){
         report.failure={case:remount?'remounted_controls':'preserved_controls',stage:result.stage,

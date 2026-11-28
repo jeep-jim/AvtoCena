@@ -11,6 +11,9 @@ import {JAPAN_EXACT_COUNT_GATES, JAPAN_MODEL_COVERAGE_GATES, JAPAN_SOURCE_BOUNDE
  japanExactCountRequirement, japanModelCoverageRequirement, japanExactCountApiAllowed, japanModelCoverageApiAllowed,
  verifyJapanExactCount, verifyJapanExactCountStable, runJapanExactCountBrowser, runJapanModelCoverageBrowser} from './japan-exact-count-browser.mjs';
 export {japanExactCountRequirement, japanModelCoverageRequirement} from './japan-exact-count-browser.mjs';
+import {JAPAN_SOURCE_COUNT_ACCEPTANCE, JAPAN_SOURCE_COUNT_GATES, japanSourceCountRequirement,
+ japanSourceCountApiAllowed, verifyJapanSourceCountSummary, runJapanSourceCountBrowser} from './japan-source-count-browser.mjs';
+export {japanSourceCountRequirement} from './japan-source-count-browser.mjs';
 
 const ROOT=fileURLToPath(new URL('../../',import.meta.url));
 const ORIGIN='https://avtocena.com';
@@ -100,7 +103,7 @@ export function japanReleaseBinding(oracle,release,nonce){
  * leaving the complete user selection unknown. Only the finite page receipts
  * distinguish that limitation from a supplier failure or stale fallback. */
 export function verifyJapanSourceScopePage(payload,{query,countAcceptance,now=Date.now()}={}){
- need(countAcceptance===JAPAN_SOURCE_BOUNDED_COUNT_ACCEPTANCE,'source_scope_profile');
+ need([JAPAN_SOURCE_BOUNDED_COUNT_ACCEPTANCE,JAPAN_SOURCE_COUNT_ACCEPTANCE].includes(countAcceptance),'source_scope_profile');
  let url;try{url=new URL(query,ORIGIN);}catch{need(false,'source_scope_query');}
  const params=url.searchParams,page=Number(params.get('page'));
  const combined=query===japanStabilitySearchApi('combined');
@@ -113,7 +116,8 @@ export function verifyJapanSourceScopePage(payload,{query,countAcceptance,now=Da
  if(page===1)need(!params.has('after'),'source_scope_query');
  else checkedJapanPaginationCursor(params.get('after'),page,{requirePowerOrder:true});
  need(payload.partial===true&&payload.selectionIncomplete===false&&payload.stale===false
-  &&payload.interrupted===false&&payload.scanLimited===false&&payload.total===null&&payload.countSummary===null
+  &&payload.interrupted===false&&payload.scanLimited===false&&payload.total===null
+  &&(payload.countSummary===null||countAcceptance===JAPAN_SOURCE_COUNT_ACCEPTANCE&&Boolean(verifyJapanSourceCountSummary(payload.countSummary,{query,now})))
   &&Array.isArray(payload.items)&&payload.items.length>0&&payload.items.length<=24
   &&typeof payload.hasMore==='boolean'&&(!payload.hasMore||payload.items.length===24)
   &&Number.isSafeInteger(payload.reads)&&payload.reads>=1&&payload.reads<=8,'source_scope_partial');
@@ -133,10 +137,10 @@ export function verifyJapanSourceScopePage(payload,{query,countAcceptance,now=Da
 }
 
 export function verifyJapanPage(payload,status,now=Date.now(),{countAcceptance,query}={}){
- need(countAcceptance===undefined||countAcceptance===JAPAN_SOURCE_BOUNDED_COUNT_ACCEPTANCE,'count_acceptance');
+ need(countAcceptance===undefined||[JAPAN_SOURCE_BOUNDED_COUNT_ACCEPTANCE,JAPAN_SOURCE_COUNT_ACCEPTANCE].includes(countAcceptance),'count_acceptance');
  need(status===200&&payload?.ok===true,'http');
  const observed=Date.parse(payload.observedAt||payload.generationId||'');
- const sourceScope=payload.partial===true&&countAcceptance===JAPAN_SOURCE_BOUNDED_COUNT_ACCEPTANCE
+ const sourceScope=payload.partial===true&&[JAPAN_SOURCE_BOUNDED_COUNT_ACCEPTANCE,JAPAN_SOURCE_COUNT_ACCEPTANCE].includes(countAcceptance)
   ?verifyJapanSourceScopePage(payload,{countAcceptance,query,now}):null;
  need(payload.stale===false&&(!payload.partial||sourceScope)&&!payload.interrupted&&!payload.scanLimited,'unavailable_or_stale');
  need(Number.isFinite(observed)&&observed<=now+60_000&&now-observed<30*60_000,'observation_expired');
@@ -462,7 +466,7 @@ export function verifyJapanWarmPage(first,second){
 export function verifyJapanPowerPage(payload,pageNumber=1,{requireExactCount=false,countAcceptance,query}={}){
  need(Number.isSafeInteger(pageNumber)&&pageNumber>=1,'power_page_number');
  need(typeof requireExactCount==='boolean','exact_count_option');
- need(countAcceptance===undefined||countAcceptance===JAPAN_SOURCE_BOUNDED_COUNT_ACCEPTANCE&&!requireExactCount,'count_acceptance');
+ need(countAcceptance===undefined||[JAPAN_SOURCE_BOUNDED_COUNT_ACCEPTANCE,JAPAN_SOURCE_COUNT_ACCEPTANCE].includes(countAcceptance)&&!requireExactCount,'count_acceptance');
  let localPower=0,supplierPower=0,unknownPower=0;
  for(const row of payload.items){
   if(positive(row.powerHp)){
@@ -477,7 +481,7 @@ export function verifyJapanPowerPage(payload,pageNumber=1,{requireExactCount=fal
  need(payload.powerFilterSummary&&Object.entries(expected).every(([key,value])=>payload.powerFilterSummary[key]===value),'power_summary');
  // A supplier count is an upper bound until the local predicate is exhausted.
  if(requireExactCount)verifyJapanExactCount(payload,{query});
- else if(countAcceptance===JAPAN_SOURCE_BOUNDED_COUNT_ACCEPTANCE)
+ else if([JAPAN_SOURCE_BOUNDED_COUNT_ACCEPTANCE,JAPAN_SOURCE_COUNT_ACCEPTANCE].includes(countAcceptance))
   need(payload.total===null&&(!payload.countSummary||payload.countSummary.upperBound===true),'false_exact_count');
  else if(payload.hasMore||pageNumber>1)need(payload.total===null&&(!payload.countSummary||payload.countSummary.upperBound===true),'false_exact_count');
  else need(payload.total===payload.items.length&&payload.countSummary?.total===payload.items.length&&payload.countSummary?.upperBound===false,'exhausted_count');
@@ -488,10 +492,10 @@ export function verifyJapanPowerPage(payload,pageNumber=1,{requireExactCount=fal
  * They inspect the actual observed pages; exhaustive source/lane/admission
  * transitions are covered by the required native suite, not a live bulk scan. */
 export function verifyJapanFullPage(payload,{countAcceptance,query,now=Date.now()}={}){
- need(countAcceptance===undefined||countAcceptance===JAPAN_SOURCE_BOUNDED_COUNT_ACCEPTANCE,'count_acceptance');
+ need(countAcceptance===undefined||[JAPAN_SOURCE_BOUNDED_COUNT_ACCEPTANCE,JAPAN_SOURCE_COUNT_ACCEPTANCE].includes(countAcceptance),'count_acceptance');
  need(Array.isArray(payload?.items)&&payload.items.length>0&&payload.items.length<=24,'usability_rows');
  need(payload.hasMore!==true||payload.items.length===24,'short_page_with_more');
- const sourceScope=payload.partial===true&&countAcceptance===JAPAN_SOURCE_BOUNDED_COUNT_ACCEPTANCE
+ const sourceScope=payload.partial===true&&[JAPAN_SOURCE_BOUNDED_COUNT_ACCEPTANCE,JAPAN_SOURCE_COUNT_ACCEPTANCE].includes(countAcceptance)
   ?verifyJapanSourceScopePage(payload,{countAcceptance,query,now}):null;
  need((!payload.partial||sourceScope)&&!payload.interrupted&&!payload.scanLimited,'usability_partial');
  return {shown:payload.items.length,hasMore:payload.hasMore===true,fullOrExhausted:true,...sourceScope};
@@ -598,7 +602,7 @@ export function japanPaginationPageApi(value,{kind,expectedCursor,requirePowerOr
 export function verifyJapanPaginationPair(first,next,{observedUrl,kind,firstStatus,nextStatus,now=Date.now(),requirePowerOrder=false,requireExactCount=false,countAcceptance}={}){
  need(typeof requirePowerOrder==='boolean','power_order_option');
  need(typeof requireExactCount==='boolean','exact_count_option');
- need(countAcceptance===undefined||countAcceptance===JAPAN_SOURCE_BOUNDED_COUNT_ACCEPTANCE&&!requireExactCount,'count_acceptance');
+ need(countAcceptance===undefined||[JAPAN_SOURCE_BOUNDED_COUNT_ACCEPTANCE,JAPAN_SOURCE_COUNT_ACCEPTANCE].includes(countAcceptance)&&!requireExactCount,'count_acceptance');
  const firstApi=kind==='plain'?PLAIN:kind==='power'?POWER:PETROL_POWER;
  const nextApi=japanPaginationPageApi(observedUrl,{kind,expectedCursor:first.nextCursor,requirePowerOrder});
  const firstOptions={countAcceptance,query:firstApi,now},nextOptions={countAcceptance,query:nextApi,now};
@@ -868,27 +872,28 @@ export async function installReadFence(context,report,{getCalculationGrant,isLeg
  }};
 }
 
-async function readJson(context,url,{paginationKind,stability=false,requirePowerOrder=false,priceSort=false,exactCount=false,modelCoverage=false}={}){
+async function readJson(context,url,{paginationKind,stability=false,requirePowerOrder=false,priceSort=false,exactCount=false,modelCoverage=false,sourceCount=false}={}){
  let continuation=false;
  const priceSortApi=priceSort&&japanPriceSortApiAllowed(url);
  const exactCountApi=exactCount&&japanExactCountApiAllowed(url);
  const modelCoverageApi=modelCoverage&&japanModelCoverageApiAllowed(url);
+ const sourceCountApi=sourceCount&&japanSourceCountApiAllowed(url);
  if(url.startsWith('/api/catalog/search?')){
   const query=new URL(url,ORIGIN).searchParams;
-  if(query.has('after')&&!priceSortApi&&!exactCountApi){
+  if(query.has('after')&&!priceSortApi&&!exactCountApi&&!sourceCountApi){
    const pageUrl=new URL('/cars/japan',ORIGIN);pageUrl.search=query.toString();
    continuation=(paginationKind?japanPaginationPageApi(pageUrl.href,{kind:paginationKind,requirePowerOrder}):japanPetrolPowerPageApi(pageUrl.href))===url;
   }
  }
  need(url==='/api/health'||url===PLAIN||url===POWER||url===PETROL_POWER||url===PETROL_POWER_NEXT||url===BRAND_DIRECTORY||continuation
-  ||stability&&japanStabilityApiAllowed(url)||priceSortApi||exactCountApi||modelCoverageApi,'api_scope');
+  ||stability&&japanStabilityApiAllowed(url)||priceSortApi||exactCountApi||modelCoverageApi||sourceCountApi,'api_scope');
  const started=Date.now();
  const response=await context.request.get(ORIGIN+url,{timeout:45_000,maxRedirects:0,headers:{'Cache-Control':'no-cache'}});
  const data=await response.json().catch(()=>null),receivedAt=Date.now();
  return {status:response.status(),data,headers:response.headers(),durationMs:receivedAt-started,requestedAt:started,receivedAt};
 }
 
-export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,outputFile,playwrightModule,chromeBin,codeScope=SCOPE,requirePowerOrder=false,requireBrandDirectory=false,requirePriceSort=false,requireExactCount=false,requireModelCoverage=false,timingPolicy}){
+export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,outputFile,playwrightModule,chromeBin,codeScope=SCOPE,requirePowerOrder=false,requireBrandDirectory=false,requirePriceSort=false,requireExactCount=false,requireModelCoverage=false,requireSourceCount=false,timingPolicy}){
  const stability=codeScope===JAPAN_STABILITY_CODE_SCOPE;
  const pagination=codeScope===JAPAN_PAGINATION_CODE_SCOPE||stability;
  const completion=[COMPLETION_SCOPE,COMPLETION_V2_SCOPE,USABILITY_SCOPE,JAPAN_PAGINATION_CODE_SCOPE,JAPAN_STABILITY_CODE_SCOPE].includes(codeScope);
@@ -910,12 +915,14 @@ export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,out
   ...Object.fromEntries(JAPAN_EXACT_COUNT_GATES.map(key=>[key,false]))});
  if(requireModelCoverage===true)Object.assign(report,{countAcceptance:JAPAN_SOURCE_BOUNDED_COUNT_ACCEPTANCE,
   japanModelCoverageRequired:true,japanModelCoveragePassed:false,japanExactCountRequired:false,japanExactCountPassed:null});
+ if(requireSourceCount===true)Object.assign(report,{countAcceptance:JAPAN_SOURCE_COUNT_ACCEPTANCE,
+  japanSourceCountRequired:true,japanSourceCountPassed:false});
  if(timingPolicy===JAPAN_OBSERVED_TIMING_POLICY)Object.assign(report,
   {timingPolicy,speedGateRequired:false,speedPassed:null,timingObserved:false});
  let browser,context,currentPage,calculationGrant=null,brandDirectory=null,stabilityBrandDirectory=null,stage='preconditions';
  const usabilityPages=[],quietChecks=[];
  const read=async(url,options={})=>{
-  const value=await readJson(context,url,{...options,exactCount:requireExactCount,modelCoverage:requireModelCoverage});
+  const value=await readJson(context,url,{...options,exactCount:requireExactCount,modelCoverage:requireModelCoverage,sourceCount:requireSourceCount});
   if(requireExactCount&&url.startsWith('/api/catalog/search?')&&value.status===200&&value.data?.ok===true)
    verifyJapanExactCount(value.data,{query:url});
   return value;
@@ -945,6 +952,7 @@ export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,out
   need(typeof requireExactCount==='boolean'&&(!requireExactCount||stability&&requirePowerOrder&&requireBrandDirectory&&requirePriceSort),'exact_count_option');
   need(typeof requireModelCoverage==='boolean'&&(!requireModelCoverage||stability&&requirePowerOrder&&requireBrandDirectory
    &&requirePriceSort&&!requireExactCount&&timingPolicy===JAPAN_OBSERVED_TIMING_POLICY),'model_coverage_option');
+  need(typeof requireSourceCount==='boolean'&&(!requireSourceCount||requireModelCoverage&&!requireExactCount),'source_count_option');
   japanTimingPolicy(timingPolicy);
   need(timingPolicy===undefined||stability&&requirePowerOrder&&requireBrandDirectory,'timing_policy_scope');
   need(path.isAbsolute(outputFile),'output');
@@ -1360,7 +1368,14 @@ export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,out
     recordJapanResponse(report,stage,value,releaseSha);return value;},
    verifyPage:verifyJapanPage,verifyFullPage:verifyJapanFullPage,verifyPowerPage:verifyPower,
    verifyVehiclePolicy:verifyJapanVisibleVehiclePolicy,verifyVisible:verifyJapanPriceSortVisible});
-  if(requireModelCoverage)await runJapanModelCoverageBrowser({context,report,capture,
+  if(requireSourceCount)await runJapanSourceCountBrowser({context,report,capture,
+   onStage:value=>{stage=value;},onPage:value=>{currentPage=value;},
+   read:async url=>{report.explicitJapanApiRequests++;const value=await read(url);
+    recordJapanResponse(report,stage,value,releaseSha);return value;},
+   observeResponse:value=>recordJapanResponse(report,stage,value,releaseSha),
+   verifyPage:verifyJapanPage,verifyFullPage:verifyJapanFullPage,
+   verifyVehiclePolicy:verifyJapanVisibleVehiclePolicy,verifyVisible:verifyJapanPriceSortVisible});
+  else if(requireModelCoverage)await runJapanModelCoverageBrowser({context,report,capture,
    onStage:value=>{stage=value;},onPage:value=>{currentPage=value;},
    read:async url=>{report.explicitJapanApiRequests++;const value=await read(url);
     recordJapanResponse(report,stage,value,releaseSha);return value;},
@@ -1372,7 +1387,8 @@ export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,out
    ...(usability?USABILITY_GATES:[]),...(pagination?['japanFullPagesPassed','japanPagination24Passed','japanCatalogWarningRemovedPassed']:[]),
    ...(stability?JAPAN_STABILITY_GATES:[]),...(requirePowerOrder?['japanPowerOrderPassed']:[]),
    ...(requireBrandDirectory?['japanBrandDirectoryPassed']:[]),...(requirePriceSort?JAPAN_PRICE_SORT_GATES:[]),
-   ...(requireExactCount?JAPAN_EXACT_COUNT_GATES:[]),...(requireModelCoverage?JAPAN_MODEL_COVERAGE_GATES:[])].every(key=>report[key]===true);
+   ...(requireExactCount?JAPAN_EXACT_COUNT_GATES:[]),...(requireModelCoverage?JAPAN_MODEL_COVERAGE_GATES:[]),
+   ...(requireSourceCount?JAPAN_SOURCE_COUNT_GATES:[])].every(key=>report[key]===true);
  }catch(error){
   const navigationCode=japanNavigationErrorCode(error);
   report.error={stage,code:/^japan_browser_[a-z_]+$/.test(error?.message||'')?error.message:'japan_browser_check_failed',
@@ -1380,6 +1396,7 @@ export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,out
   if(currentPage&&/^[a-f0-9]{32}$/.test(nonce||''))await capture(currentPage,'failure').catch(()=>{});
  }finally{
   if(context)await context.close().catch(()=>{});if(browser)await browser.close().catch(()=>{});
+  if(requireSourceCount)report.checkedAt=new Date().toISOString();
   collectJapanObservedTimings(report);
   await fs.writeFile(outputFile,JSON.stringify(report,null,2)+'\n',{flag:'wx',mode:0o600});
  }
@@ -1397,6 +1414,7 @@ if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.ur
    requirePriceSort:japanPriceSortRequirement(process.env.CATALOG_JAPAN_PRICE_SORT_REQUIRED),
    requireExactCount:japanExactCountRequirement(process.env.CATALOG_JAPAN_EXACT_COUNT_REQUIRED),
    requireModelCoverage:japanModelCoverageRequirement(process.env.CATALOG_JAPAN_MODEL_COVERAGE_REQUIRED),
+   requireSourceCount:japanSourceCountRequirement(process.env.CATALOG_JAPAN_SOURCE_COUNT_REQUIRED),
    timingPolicy:japanTimingPolicy(process.env.CATALOG_JAPAN_TIMING_POLICY)});
   console.log('JAPAN_BROWSER '+JSON.stringify(report));if(!report.passed)process.exitCode=1;
  }catch{console.error('japan_browser_report_failed');process.exitCode=1;}

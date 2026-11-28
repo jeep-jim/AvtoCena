@@ -4,7 +4,7 @@ import {CRM_CHINA_CODE_SCOPE, CRM_CHINA_CODE_PATHS, CRM_CHINA_RETAINED_RUNTIME} 
 import {CRM_JAPAN_PHOTO_CODE_SCOPE, CRM_JAPAN_PHOTO_CODE_PATHS, CRM_JAPAN_PHOTO_RETAINED_RUNTIME} from './crm-japan-photo-code-scope.mjs';
 import {JAPAN_PAGINATION_CODE_SCOPE, JAPAN_PAGINATION_CODE_PATHS, JAPAN_PAGINATION_RETAINED_RUNTIME} from './japan-pagination-code-scope.mjs';
 import {JAPAN_STABILITY_CODE_SCOPE, japanStabilityCodePaths, isExactJapanStabilityScope,
-  japanObservedTimingRequired, japanSourceBoundedIncrementalRequired} from './japan-stability-code-scope.mjs';
+  japanObservedTimingRequired, japanCountAcceptance} from './japan-stability-code-scope.mjs';
 
 export const CHINA_PHOTO_CODE_PATHS = Object.freeze([
   'apps/web/components/catalog/CatalogCover.tsx',
@@ -180,7 +180,7 @@ export function checkedCatalogCodeScope(plan) {
   need(scope !== JAPAN_STABILITY_CODE_SCOPE || isExactJapanStabilityScope(plan), 'stability_scope');
   need(plan.acceptancePolicy === undefined || (scope === JAPAN_STABILITY_CODE_SCOPE
     && japanObservedTimingRequired(plan)), 'acceptance_policy');
-  need(plan.countAcceptance === undefined || japanSourceBoundedIncrementalRequired(plan), 'count_acceptance');
+  need(plan.countAcceptance === undefined || japanCountAcceptance(plan) === plan.countAcceptance, 'count_acceptance');
   return scope;
 }
 

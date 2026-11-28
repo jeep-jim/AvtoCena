@@ -9,10 +9,13 @@ import {JAPAN_PAGINATION_CODE_SCOPE, JAPAN_PAGINATION_RETAINED_RUNTIME,
   JAPAN_PAGINATION_CODE_PATHS, isExactJapanPaginationScope}
   from '../scripts/catalog-next/japan-pagination-code-scope.mjs';
 import {checkedCatalogCodeScope} from '../scripts/catalog-next/photo-code-scope.mjs';
-import {JAPAN_STABILITY_CODE_SCOPE, JAPAN_STABILITY_PRICE_SORT_RETAINED_RUNTIME,
-  JAPAN_STABILITY_EXACT_COUNT_RETAINED_RUNTIME,
+import {JAPAN_STABILITY_CODE_SCOPE, JAPAN_STABILITY_EXACT_COUNT_RETAINED_RUNTIME,
+  JAPAN_STABILITY_EXACT_COUNT_CODE_PATHS, JAPAN_SOURCE_BOUNDED_INCREMENTAL_POLICY,
+  JAPAN_SOURCE_COUNT_POLICY, JAPAN_STABILITY_SOURCE_COUNT_RETAINED_RUNTIME,
+  JAPAN_STABILITY_SOURCE_COUNT_CODE_PATHS,
   isExactJapanStabilityScope, japanPriceSortRequired, japanExactCountRequired,
-  japanSourceBoundedIncrementalRequired, japanLiteralFamilyRequired} from '../scripts/catalog-next/japan-stability-code-scope.mjs';
+  japanSourceBoundedIncrementalRequired, japanSourceCountRequired,
+  japanLiteralFamilyRequired} from '../scripts/catalog-next/japan-stability-code-scope.mjs';
 
 const plan = () => ({codeScope:JAPAN_PAGINATION_CODE_SCOPE,
   retainedRuntime:JAPAN_PAGINATION_RETAINED_RUNTIME, runtimeFiles:[...JAPAN_PAGINATION_CODE_PATHS]});
@@ -89,28 +92,51 @@ test('pagination image verification keeps every CRM path protected and grants no
     execute:()=>assert.fail('wrong predecessor must fail before git')}),/china_image_pagination_scope/);
 });
 
-test('review plans keep accepted20fd selectable until the explicit source-model successor is accepted',async()=>{
+test('review plans keep accepted7f selectable until the explicit seventeen-file source-count successor is accepted',async()=>{
   const plans=await readChinaDailyPlans(),base=plans.servingPlan;
-  assert.equal(base.runtimeSha,JAPAN_STABILITY_EXACT_COUNT_RETAINED_RUNTIME);
-  assert.equal(base.retainedRuntime,JAPAN_STABILITY_PRICE_SORT_RETAINED_RUNTIME);
-  assert.equal(base.runtimeTree,'b3257c801b2b26cc84ec8d37380a2d8ec120b431');
+  assert.equal(base.runtimeSha,JAPAN_STABILITY_SOURCE_COUNT_RETAINED_RUNTIME);
+  assert.equal(base.retainedRuntime,JAPAN_STABILITY_EXACT_COUNT_RETAINED_RUNTIME);
+  assert.equal(base.runtimeTree,'5854b591c0ee78e3aaa960f96b9a66b9c5b4175c');
+  assert.equal(base.runtimeFiles.length,46);
+  assert.deepEqual([...base.runtimeFiles].sort(),[...JAPAN_STABILITY_EXACT_COUNT_CODE_PATHS].sort());
   assert.equal(base.codeScope,JAPAN_STABILITY_CODE_SCOPE);
   assert.equal(isExactJapanStabilityScope(base),true);
+  assert.equal(base.countAcceptance,JAPAN_SOURCE_BOUNDED_INCREMENTAL_POLICY);
   assert.equal(japanPriceSortRequired(base),true);
   assert.equal(japanExactCountRequired(base),false);
-  assert.equal(base.runtimeDiffSha256,'8e5a3d15adeec0f78c073e982f30fe1a2278b1e6462d2ec81dad13ac12280515');
-  assert.equal(base.pricingToServingDiffSha256,'9b38b084da8e0396811d32394aefd52894ba07e896f349daab5615a9e33c27a0');
+  assert.equal(japanSourceBoundedIncrementalRequired(base),true);
+  assert.equal(japanSourceCountRequired(base),false);
+  assert.equal(japanLiteralFamilyRequired(base),true);
+  assert.equal(japanExactCountRequired({...base,countAcceptance:undefined}),true);
+  assert.equal(base.runtimeDiffSha256,'a6bd28e6ec1f2462cc5292311e97c2ff15ea8facdf66029ce12adb4deccb8ba9');
+  assert.equal(base.pricingToServingDiffSha256,'6a1d0f7435330c95b08b7ab40643d3f82a5a338af6f8be13e1af499ce530066d');
+  assert.equal(base.pricingToServingFiles.length,127);
   assert.equal(selectChinaDailyServingPlan(plans,base.runtimeSha),base);
   const successors=plans.servingPlans.filter(value=>value!==base);
   assert.equal(successors.length,1);
   const successor=successors[0];
   assert.equal(successor.retainedRuntime,base.runtimeSha);
+  assert.equal(successor.runtimeSha,'8f36bc936cf2c04d6b97b1b69fddd51d9331ee21');
+  assert.equal(successor.runtimeTree,'e1938f1b98b408a8127fa347b10febfb243260ac');
+  assert.equal(successor.runtimeFiles.length,17);
+  assert.deepEqual([...successor.runtimeFiles].sort(),[...JAPAN_STABILITY_SOURCE_COUNT_CODE_PATHS].sort());
+  assert.equal(successor.codeScope,JAPAN_STABILITY_CODE_SCOPE);
   assert.equal(isExactJapanStabilityScope(successor),true);
+  assert.equal(successor.countAcceptance,JAPAN_SOURCE_COUNT_POLICY);
   assert.equal(japanPriceSortRequired(successor),true);
   assert.equal(japanExactCountRequired(successor),false);
-  assert.equal(japanSourceBoundedIncrementalRequired(successor),true);
+  assert.equal(japanSourceBoundedIncrementalRequired(successor),false);
+  assert.equal(japanSourceCountRequired(successor),true);
   assert.equal(japanLiteralFamilyRequired(successor),true);
-  assert.equal(japanExactCountRequired({...successor,countAcceptance:undefined}),true);
+  assert.equal(successor.runtimeDiffSha256,'b6ec72193846872529e4fa802537c2776fb646d0b1e13c3558759fbd66e6b311');
+  assert.equal(successor.pricingToServingDiffSha256,'b62e87c83c71c889775161c3d30a7b85e52a8045e9a804bea8f0b0d42fca7117');
+  assert.equal(successor.pricingToServingFiles.length,132);
+  for(const countAcceptance of [undefined,JAPAN_SOURCE_BOUNDED_INCREMENTAL_POLICY]){
+    const invalid={...successor,countAcceptance};
+    assert.equal(isExactJapanStabilityScope(invalid),false);
+    assert.throws(()=>checkedCatalogCodeScope(invalid));
+    assert.throws(()=>japanExactCountRequired(invalid),/japan_stability_exact_count_scope/);
+  }
   assert.equal(selectChinaDailyServingPlan(plans,successor.runtimeSha),successor);
   assert.deepEqual(successor.source,base.source);assert.deepEqual(successor.encyclopedia,base.encyclopedia);
   assert.equal(successor.pricingRuntimeSha,base.pricingRuntimeSha);

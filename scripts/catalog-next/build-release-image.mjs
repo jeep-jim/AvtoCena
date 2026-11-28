@@ -11,7 +11,7 @@ import {CRM_CHINA_CODE_SCOPE, CRM_CHINA_PROTECTED_EXCEPTIONS, isExactCrmChinaSco
 import {CRM_JAPAN_PHOTO_CODE_SCOPE, isExactCrmJapanPhotoScope} from './crm-japan-photo-code-scope.mjs';
 import {JAPAN_PAGINATION_CODE_SCOPE, isExactJapanPaginationScope} from './japan-pagination-code-scope.mjs';
 import {JAPAN_STABILITY_CODE_SCOPE, isExactJapanStabilityScope, japanObservedTimingRequired,
-  japanSourceBoundedIncrementalRequired} from './japan-stability-code-scope.mjs';
+  japanCountAcceptance} from './japan-stability-code-scope.mjs';
 
 const root = fileURLToPath(new URL('../../', import.meta.url));
 const need = (condition, code) => assert(condition, 'china_image_' + code);
@@ -83,7 +83,7 @@ export async function verifyChinaImageRuntime({runtimeRoot, plan, execute = exec
   need(plan.codeScope !== JAPAN_STABILITY_CODE_SCOPE || isExactJapanStabilityScope(plan), 'stability_scope');
   need(plan.acceptancePolicy === undefined || (plan.codeScope === JAPAN_STABILITY_CODE_SCOPE
     && japanObservedTimingRequired(plan)), 'acceptance_policy');
-  need(plan.countAcceptance === undefined || japanSourceBoundedIncrementalRequired(plan), 'count_acceptance');
+  need(plan.countAcceptance === undefined || japanCountAcceptance(plan) === plan.countAcceptance, 'count_acceptance');
   const sourceRoot = await fs.realpath(runtimeRoot);
   const git = args => execute('/usr/bin/git', ['--no-optional-locks', ...args],
     {cwd: sourceRoot, maximum: 32 * 1024 ** 2});
