@@ -4,7 +4,7 @@ import {createHash} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
 import {JAPAN_PAGINATION_CODE_SCOPE} from './japan-pagination-code-scope.mjs';
 import {JAPAN_STABILITY_CODE_SCOPE} from './japan-stability-code-scope.mjs';
-import {JAPAN_STABILITY_GATES, JAPAN_LEGACY_MAZDA_THREE_PAGES, japanStabilityApiAllowed, runJapanStabilityBrowser,
+import {JAPAN_STABILITY_GATES, JAPAN_LEGACY_MAZDA_THREE_PAGES, japanStabilityApiAllowed, japanStabilitySearchApi, runJapanStabilityBrowser,
  checkJapanStabilityBrandControl,verifyJapanStabilityBrandRequestCount} from './japan-stability-browser.mjs';
 import {JAPAN_PRICE_SORT_GATES, japanPriceSortApiAllowed, verifyJapanPriceSortVisible} from './japan-price-sort-browser.mjs';
 import {JAPAN_EXACT_COUNT_GATES, JAPAN_MODEL_COVERAGE_GATES, JAPAN_SOURCE_BOUNDED_COUNT_ACCEPTANCE,
@@ -95,7 +95,7 @@ export function japanReleaseBinding(oracle,release,nonce){
  return {generationId:oracle.expectedGeneration,generationManifestSha256:oracle.generationManifestSha256};
 }
 
-/** The required petrol journey has a narrower supplier predicate than local
+/** The required petrol and fixed combined journeys have narrower supplier predicates than local
  * enrichment. It can prove fresh complete source pages while deliberately
  * leaving the complete user selection unknown. Only the finite page receipts
  * distinguish that limitation from a supplier failure or stale fallback. */
@@ -103,8 +103,10 @@ export function verifyJapanSourceScopePage(payload,{query,countAcceptance,now=Da
  need(countAcceptance===JAPAN_SOURCE_BOUNDED_COUNT_ACCEPTANCE,'source_scope_profile');
  let url;try{url=new URL(query,ORIGIN);}catch{need(false,'source_scope_query');}
  const params=url.searchParams,page=Number(params.get('page'));
+ const combined=query===japanStabilitySearchApi('combined');
  need(url.origin===ORIGIN&&url.pathname==='/api/catalog/search'&&!url.username&&!url.password&&!url.hash
-  &&[...params.keys()].every(key=>['market','page','pageSize','city','powerTo','fuel','after'].includes(key)&&params.getAll(key).length===1)
+  &&[...params.keys()].every(key=>(combined?['market','page','pageSize','city','powerTo','fuel','auctionGrade','transmission']
+   :['market','page','pageSize','city','powerTo','fuel','after']).includes(key)&&params.getAll(key).length===1)
   &&params.get('market')==='japan'&&params.get('city')===CITY&&params.get('fuel')==='petrol'
   &&params.get('powerTo')==='160'&&params.get('pageSize')==='24'&&[1,2].includes(page)
   &&payload.page===page&&payload.pageSize===24,'source_scope_query');
@@ -1341,12 +1343,15 @@ export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,out
   }
   if(stability){
    verifyJapanVisibleVehiclePolicy([plain[0],power.data]);
+   const stabilityPageOptions=()=>({countAcceptance:report.countAcceptance,
+    query:stage==='stability_combined_filters'?japanStabilitySearchApi('combined'):undefined});
    await runJapanStabilityBrowser({context,report,generationId:binding.generationId,capture,requirePriceSort,requireExactCount,
     countAcceptance:report.countAcceptance,
     onStage:value=>{stage=value;},onPage:value=>{currentPage=value;},
     read:async url=>{report.explicitJapanApiRequests++;const value=await read(url,{stability:true,priceSort:requirePriceSort});
      recordJapanResponse(report,stage,value,releaseSha);return value;},
-    verifyPage:verifyJapanPage,verifyFullPage:verifyJapanFullPage,verifyPowerPage:verifyPower,
+    verifyPage:(payload,status)=>verifyJapanPage(payload,status,Date.now(),stabilityPageOptions()),
+    verifyFullPage:payload=>verifyJapanFullPage(payload,stabilityPageOptions()),verifyPowerPage:verifyPower,
     verifyVehiclePolicy:verifyJapanVisibleVehiclePolicy,navigateLegacyMazdaThree:fence.navigateLegacyMazdaThree});
   }
   if(requireExactCount)await runJapanExactCountBrowser({context,report,capture,

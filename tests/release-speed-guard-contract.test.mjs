@@ -436,13 +436,16 @@ test('CI explicitly executes the release contract that npm test does not include
 test('pagination24 retains CRM/photo gates and requires offline and live ordinary-page proof before acceptance',()=>{
  const read=name=>fs.readFileSync(path.join(root,name),'utf8');
  const verify=read('.github/workflows/verify-china-photo-code.yml'),publish=read('.github/workflows/catalog-next-china-photo-release.yml');
- const fixture='JAPAN_PAGINATION24_REPORT="$RUNNER_TEMP/japan-pagination24-browser-report.json" node --import tsx tests/browser/ajes-pagination.mjs';
+ const fixture='JAPAN_PAGINATION24_REPORT="$RUNNER_TEMP/japan-pagination24-browser-report.json" node --import tsx "$GITHUB_WORKSPACE/tests/browser/ajes-pagination.mjs"';
  for(const workflow of [verify,publish]){
   assert.ok(workflow.includes(fixture));
   assert.ok(workflow.includes("readJapanPaginationFixture(process.env.RUNNER_TEMP + '/japan-pagination24-browser-report.json',"));
   assert.ok(workflow.includes('requirePowerOrder: japanPowerOrderRequired(plan)'));
   const steps=workflow.split(/(?=^      - )/m),pageStep=steps.find(step=>step.includes(fixture));
   assert.match(pageStep,/if: steps\.photo_scope\.outputs\.scope == 'catalog-japan-pagination24-v1'/);
+  const pinnedCwd=pageStep.indexOf('cd "$RUNNER_TEMP/china-serving-runtime-$PAGINATION_SHA"');
+  assert.ok(pinnedCwd>=0&&pinnedCwd<pageStep.indexOf(fixture),
+   'controller fixture imports the application from the pinned runtime working directory');
   for(const existing of ['tests/browser/collection-controls.mjs','tests/browser/catalog-photo-retry.mjs']){
    const step=steps.find(value=>value.includes(existing));assert.ok(step.includes('catalog-japan-pagination24-v1'));
   }

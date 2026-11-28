@@ -560,7 +560,7 @@ export function createChinaDailyRelease({root, servingRoot, pricingPlan, serving
           need(saved?.saved === true && saved.speedReportSha256 === hash(speedRaw) && saved.detailsReportSha256 === hash(detailsRaw), 'browser_persistence');
           const outcome = await session.call('accept', {verdict: {release: candidate.runtimeSha, nonce, passed: true,
             functionalPassed: true, speedPassed: observedJapanTiming ? null : true,
-            ...(japanSourceBoundedIncrementalRequired(servingPlan) ? {countAcceptance: JAPAN_SOURCE_BOUNDED_INCREMENTAL_POLICY} : {}),
+            ...(codeUpdate && japanSourceBoundedIncrementalRequired(servingPlan) ? {countAcceptance: JAPAN_SOURCE_BOUNDED_INCREMENTAL_POLICY} : {}),
             ...(observedJapanTiming ? {timingPolicy: JAPAN_OBSERVED_TIMING_POLICY, speedGateRequired: false, timingObserved: true} : {}),
             reportSha256: hash(Buffer.concat([speedRaw, detailsRaw])),
             speedReportSha256: hash(speedRaw), detailsReportSha256: hash(detailsRaw)}});

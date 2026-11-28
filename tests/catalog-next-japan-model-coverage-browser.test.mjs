@@ -10,6 +10,7 @@ import {JAPAN_OBSERVED_TIMING_POLICY, verifyJapanPage, verifyJapanFullPage, veri
   verifyJapanSourceScopePage, runJapanBrowserAcceptance} from '../scripts/catalog-next/japan-browser-acceptance.mjs';
 import {verifyJapanPriceSortCount} from '../scripts/catalog-next/japan-price-sort-browser.mjs';
 import {JAPAN_STABILITY_CODE_SCOPE} from '../scripts/catalog-next/japan-stability-code-scope.mjs';
+import {japanStabilitySearchApi,verifyJapanStabilityCombinedRows} from '../scripts/catalog-next/japan-stability-browser.mjs';
 
 const now=Date.parse('2026-11-28T12:00:00Z'),observedAt=new Date(now-5000).toISOString();
 const city='Новокузнецк';
@@ -114,6 +115,27 @@ test('source-selection limitation cannot conceal failures, missing receipts, wro
     petrol.replace('page=1','page=2'),'https://other.test'+petrol])
     assert.throws(()=>verifyJapanSourceScopePage(scoped(),{...options,query}));
   assert.throws(()=>verifyJapanSourceScopePage(scoped(),{...options,countAcceptance:undefined}));
+});
+
+test('only the existing exact grade-five petrol automatic power combination may use the same fresh receipt proof',()=>{
+  const query=japanStabilitySearchApi('combined'),options={query,countAcceptance:policy,now};
+  const value={...scoped(),items:scoped().items.map(item=>({...item,auctionGrade:'5',transmission:'automatic'}))};
+  assert.equal(verifyJapanSourceScopePage(value,options).sourcePagesComplete,true);
+  assert.equal(verifyJapanPage(value,200,now,options).selectionComplete,false);
+  assert.equal(verifyJapanFullPage(value,options).fullSelectionExhaustionClaimed,false);
+  assert.equal(verifyJapanPowerPage(value,1,{countAcceptance:policy}).countHonest,true);
+  assert.equal(verifyJapanStabilityCombinedRows(value).shown,24);
+  for(const changed of [
+    query.replace('auctionGrade=5','auctionGrade=4'),query.replace('transmission=automatic','transmission=manual'),
+    query.replace('fuel=petrol','fuel=diesel'),query.replace('powerTo=160','powerTo=170'),
+    query.replace('page=1','page=2'),query.replace('&auctionGrade=5',''),query.replace('&transmission=automatic',''),
+    query+'&after='+encodeURIComponent(cursor),query+'&make=AUDI',query+'&auctionGrade=5',
+  ])assert.throws(()=>verifyJapanSourceScopePage(value,{...options,query:changed}));
+  assert.throws(()=>verifyJapanSourceScopePage({...value,sourceReceipts:[]},options));
+  assert.throws(()=>verifyJapanSourceScopePage({...value,sourceReceipts:[{...receipt(),outcome:'stale'}]},options));
+  assert.throws(()=>verifyJapanSourceScopePage({...value,interrupted:true},options));
+  for(const patch of [{auctionGrade:'4'},{transmission:'manual'},{fuel:'diesel'}])
+    assert.throws(()=>verifyJapanStabilityCombinedRows({...value,items:[{...value.items[0],...patch}]}));
 });
 
 test('missing required preceding gates or conflicting exact mode cannot start incremental acceptance',async t=>{

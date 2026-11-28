@@ -10,6 +10,10 @@ import {runChinaDailyCycle} from '../scripts/catalog-next/daily-controller.mjs';
 import {createChinaState, CHINA_STATE_KEYS} from '../scripts/catalog-next/china-state.mjs';
 import {savePrivateChinaGeneration} from '../scripts/catalog-next/private-generation.mjs';
 import {CHINA_GENERATION_FILES} from '../scripts/catalog-next/generation-storage.mjs';
+import {JAPAN_STABILITY_CODE_SCOPE, JAPAN_STABILITY_EXACT_COUNT_CODE_PATHS,
+  JAPAN_STABILITY_EXACT_COUNT_RETAINED_RUNTIME, JAPAN_OBSERVED_TIMING_POLICY,
+  JAPAN_SOURCE_BOUNDED_INCREMENTAL_POLICY, japanSourceBoundedIncrementalRequired}
+  from '../scripts/catalog-next/japan-stability-code-scope.mjs';
 
 const root = process.cwd(), hash = value => createHash('sha256').update(value).digest('hex');
 const ordered = value => Array.isArray(value) ? value.map(ordered) : value && typeof value === 'object'
@@ -42,11 +46,12 @@ function stateStorage() {
     },
   };
 }
-async function fixture(t) {
+async function fixture(t, {servingPlan: servingPlanOverride} = {}) {
   const directory = await fs.mkdtemp(path.join(os.tmpdir(), 'china-real-daily-'));
   t.after(() => fs.rm(directory, {recursive: true, force: true}));
-  const [pricingPlan, servingPlan] = await Promise.all(['china-plan.json', 'china-serving-plan.json'].map(async name =>
+  const [pricingPlan, defaultServingPlan] = await Promise.all(['china-plan.json', 'china-serving-plan.json'].map(async name =>
     JSON.parse(await fs.readFile(path.join(root, '.github/operations/catalog-next', name)))));
+  const servingPlan = servingPlanOverride ?? defaultServingPlan;
   const old = {market: 'china', generationId: 'gen_china_100_1', owner: owner(100), receiptSha256: hash('old receipt'),
     sourceDescriptorSha256: hash('old source'), generationManifestSha256: hash('old generation'), sourceCursor: 100,
     sourceObservedAt: '2026-11-23T11:00:00Z', runtimeSha: servingPlan.runtimeSha, pricingRuntimeSha: pricingPlan.runtimeSha,
@@ -87,7 +92,7 @@ async function fixture(t) {
       sourceDescriptorSha256: candidate.sourceDescriptorSha256, generationManifestSha256: candidate.generationManifestSha256},
     privateGeneration: {owner: owner(101), generationId: candidate.generationId, receiptSha256: candidate.receiptSha256,
       sourceDescriptorSha256: candidate.sourceDescriptorSha256, generationManifestSha256: candidate.generationManifestSha256}};
-  const calls = [], childCalls = [], uploaded = new Map(); let hostPlan, evidence, outcome, browserBytes;
+  const calls = [], childCalls = [], uploaded = new Map(); let hostPlan, evidence, outcome, browserBytes, hostVerdict;
   const flags = {wrongOracle: false, browserFails: false, loseAccept: false, badDiskAdmission: false};
   const session = () => ({exited: Promise.resolve({code: 0}), abort() { calls.push('abort'); },
     async call(method, params = {}) {
@@ -115,6 +120,10 @@ async function fixture(t) {
         return {saved: true, speedReportSha256: hash(browserBytes.speed), detailsReportSha256: hash(browserBytes.details)};
       }
       if (method === 'accept') {
+        // Match the real host's plan/verdict binding before producing a receipt.
+        assert.equal(params.verdict.countAcceptance, hostPlan.countAcceptance);
+        assert.equal(Object.hasOwn(params.verdict, 'countAcceptance'), Object.hasOwn(hostPlan, 'countAcceptance'));
+        hostVerdict = params.verdict;
         evidence = fixtureEvidence(candidate, nonce, now, browserBytes);
         outcome = {status: 'accepted', hostReceiptBase64: evidence.hostReceiptBase64, hostReceiptSha256: evidence.hostReceiptSha256,
           browserSpeedBase64: evidence.browserSpeedBytes.toString('base64'), browserDetailsBase64: evidence.browserDetailsBytes.toString('base64')};
@@ -212,8 +221,37 @@ async function fixture(t) {
       assert.equal(input.runtimeRoot, path.join(directory, 'different-pricing-checkout'));
       assert.deepEqual(input.sourceSelection.generation, first.accepted.value.current); return prepared;
     }, ...release};
-  return {directory, old, candidate, first, storage, release, args, flags, calls, childCalls, reads, writes, initialWrites, uploaded};
+  return {directory, old, candidate, first, storage, release, args, flags, calls, childCalls, reads, writes, initialWrites, uploaded,
+    servingPlan, hostPlan: () => copy(hostPlan), hostVerdict: () => copy(hostVerdict)};
 }
+
+test('a daily generation update on the accepted incremental runtime retains the ordinary China plan and verdict policy', async t => {
+  const servingPlan = {version: 1, market: 'china', codeScope: JAPAN_STABILITY_CODE_SCOPE,
+    runtimeSha: '7f7a316905cd8109352431ed4722108b3449c3ec', runtimeTree: '5854b591c0ee78e3aaa960f96b9a66b9c5b4175c',
+    runtimeDiffSha256: hash('incremental-runtime-fixture'), retainedRuntime: JAPAN_STABILITY_EXACT_COUNT_RETAINED_RUNTIME,
+    runtimeFiles: [...JAPAN_STABILITY_EXACT_COUNT_CODE_PATHS], acceptancePolicy: JAPAN_OBSERVED_TIMING_POLICY,
+    countAcceptance: JAPAN_SOURCE_BOUNDED_INCREMENTAL_POLICY};
+  assert.equal(japanSourceBoundedIncrementalRequired(servingPlan), true);
+  const f = await fixture(t, {servingPlan}), result = await runChinaDailyCycle(f.args);
+  assert.equal(result.status, 'accepted'); assert.equal(result.published, true);
+  const plan = f.hostPlan(), verdict = f.hostVerdict();
+  assert.equal(plan.mode, 'generation-update'); assert.equal(plan.runtimeSha, servingPlan.runtimeSha);
+  assert.equal(plan.imageId, f.old.imageId); assert.notEqual(plan.generationId, f.old.generationId);
+  for (const value of [plan, verdict]) {
+    assert.equal(Object.hasOwn(value, 'countAcceptance'), false);
+    assert.equal(Object.hasOwn(value, 'acceptancePolicy'), false);
+    assert.equal(Object.hasOwn(value, 'timingPolicy'), false);
+  }
+  assert.equal(verdict.speedPassed, true);
+  assert.equal(f.childCalls.length, 3);
+  assert.ok(f.childCalls.every(call => !call.script.endsWith('/japan-browser-acceptance.mjs')
+    && !Object.hasOwn(call.env, 'CATALOG_JAPAN_MODEL_COVERAGE_REQUIRED')));
+  const current = (await f.storage.read('accepted')).value.current;
+  assert.equal(current.runtimeSha, f.old.runtimeSha); assert.equal(current.generationId, f.candidate.generationId);
+  const receipt = JSON.parse(Buffer.from(current.proof.hostReceiptBase64, 'base64'));
+  assert.equal(Object.hasOwn(receipt, 'countAcceptance'), false);
+  assert.equal(Object.hasOwn(receipt.browser, 'countAcceptance'), false);
+});
 
 test('real daily adapter restores exact private bytes, checks serving oracle and frozen gates, then retires after committed pointer', async t => {
   const f = await fixture(t), result = await runChinaDailyCycle(f.args);
@@ -318,3 +356,4 @@ test('daily image adapter refuses completed=false and preserves the resolved wit
   assert.deepEqual(f.calls.slice(start), ['retire_terminal_app_image', 'abort']);
   assert.deepEqual({accepted: await f.storage.read('accepted'), intent: await f.storage.read('intent')}, publication);
 });
+
