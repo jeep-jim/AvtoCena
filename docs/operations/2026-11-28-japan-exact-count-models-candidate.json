@@ -119,14 +119,16 @@
       "oldIncorrectResult": 0,
       "cause": "Independent corrections for two hidden IDs can subtract the same aggregate membership twice across source states."
     },
-    "sourceContract": "No complete saved stats schema, documented source snapshot/revision or equivalent coherent aggregate has been verified.",
+    "sourceContract": "No complete saved stats schema or equivalent coherent aggregate has been verified. A single aggregate that evaluates the entire admission predicate and local corrections atomically would not need a separate source snapshot token.",
     "priceCounter": "Exact positive delivered-price/budget/hasPrice count is not implemented. MIN/MAX alone cannot establish the number inside a price interval."
   },
   "implementation": {
     "models": [
       "Typed A4 preserves its family, including when only A4 AVANT is suggested.",
       "All observed source aliases are retained beyond the twenty user-choice limit.",
-      "Finite exact aliases compile to equivalent IN predicates; stale retries retain known source options."
+      "Finite exact aliases compile to equivalent IN predicates; stale retries retain known source options.",
+      "Observed make aliases beyond twenty retain the same LIST, raw COUNT, model-directory and saved-recovery scope via a server-only descriptor; 27 source spellings are covered by an executed SQL regression.",
+      "The requested model directory no longer stops after ten aggregate pages; checked progress, repeated rows, stale/refusal stop, oldest observedAt and pre-cache malformed-name rejection preserve its boundary."
     ],
     "countDisplay": "A confirmed total remains independent of the number of loaded cards; its original thirty-minute freshness deadline and stale observation date are preserved.",
     "sourceCount": "Positive census refuses before GROUP/correction reads and cannot revive from memory or saved scalar slots. Validated rawCOUNT0 remains exact.",
@@ -164,6 +166,27 @@
       "backend": 14,
       "uiAndSsr": 36,
       "failed": 0
+    },
+    "makeAliasFollowup": {
+      "regressionRed": 2,
+      "regressionGreen": 2,
+      "modelQueryPassed": 43,
+      "savedSearchPassed": 5,
+      "typescriptExitCode": 0,
+      "sourceRequests": 0
+    },
+    "modelDirectoryFollowup": {
+      "tests": 134,
+      "passed": 134,
+      "failed": 0,
+      "typescriptExitCode": 0,
+      "sourceRequests": 0,
+      "controlledDirectorySizes": [
+        5000,
+        5001
+      ],
+      "malformedSuccessCacheWrites": 0,
+      "providerCooldownPreserved": true
     }
   },
   "queryBudget": {
@@ -190,14 +213,14 @@
     "experimentalCombinedCensusSupported": false
   },
   "candidate": {
-    "runtimeSha": "ece8a56c9a54bd80001ae0799823dcc18dfdf152",
-    "runtimeTree": "08085fb26be722f0df4b3077b478981d6fc6a7ad",
+    "runtimeSha": "d1bdce86766a1d99658a9ac4b88148aa72f283d6",
+    "runtimeTree": "ef54b8510229c36bc17bd242d9a2d1981bbfa098",
     "parent": "20fd18d12b3f5c7aabef860e1b53da0d505dfd64",
-    "runtimeFiles": 44,
-    "runtimeDiffSha256": "5c6bdf0c6185c067a03efcc50ba59fdfac0f218106e9afe2ae8abb910b73bbd6",
-    "pricingCompatibilityFiles": 126,
+    "runtimeFiles": 46,
+    "runtimeDiffSha256": "8516c348c6aad920f2df073764178d48feefe8d0175c7a3c5feb7e4de8d57f56",
+    "pricingCompatibilityFiles": 127,
     "branch": "fix/japan-exact-count-models-20261128",
-    "sourceUrl": "https://github.com/jeep-jim/AvtoCena/commit/ece8a56c9a54bd80001ae0799823dcc18dfdf152"
+    "sourceUrl": "https://github.com/jeep-jim/AvtoCena/commit/d1bdce86766a1d99658a9ac4b88148aa72f283d6"
   },
   "fullVerificationFirstPass": {
     "controller": {
@@ -212,7 +235,77 @@
     },
     "status": "Corrected: test isolation, historical B9 fixture, actual React rendering and one-request SSR adapter checks; final full gates passed."
   },
-  "fullVerificationFinal": {
+  "hostedOfflineVerification": {
+    "attempts": [
+      {
+        "runId": "46108033739",
+        "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/46108033739",
+        "controllerSha": "f382fa8b377e25b45e9c4ca1a5709844ed024210",
+        "runtimeSha": "ece8a56c9a54bd80001ae0799823dcc18dfdf152",
+        "runtimeTree": "08085fb26be722f0df4b3077b478981d6fc6a7ad",
+        "conclusion": "failure",
+        "passedBeforeFailure": [
+          "controller gates",
+          "exact source and protected compatibility",
+          "legacy redirect browser",
+          "hydrated model controls browser"
+        ],
+        "failure": {
+          "step": 12,
+          "kind": "fixture_server",
+          "error": "ERR_HTTP_HEADERS_SENT",
+          "location": "tests/browser/japan-exact-count.mjs:291",
+          "originalException": "Masked by the second writeHead; not established from this job log."
+        },
+        "exactCountReportEmitted": false,
+        "liveSourceAccepted": false,
+        "backendCensusAccepted": false
+      }
+    ],
+    "status": "full_local_gates_passed_hosted_retry_pending",
+    "handlerRepair": {
+      "focusedTests": 18,
+      "passed": 18,
+      "failed": 0,
+      "previousCrashReproduced": true,
+      "firstHostedExceptionStillUnreproduced": true,
+      "runtimeSha": "ece8a56c9a54bd80001ae0799823dcc18dfdf152",
+      "runtimeTree": "08085fb26be722f0df4b3077b478981d6fc6a7ad",
+      "sourceFilesVerified": 159,
+      "helperHttpUrls": 10,
+      "actualAppendRequests": 3,
+      "cardRenderStubOnlyInRequestPreflight": true,
+      "browserRun": false,
+      "liveSourceAccepted": false,
+      "backendCensusAccepted": false,
+      "fixtureSha256": "ffdec9caad5a18c476808d6c8672d996902bf7dda0b4238697d3d61ce85d60cc",
+      "serverTestSha256": "abfb4f0feb060082d9cf7aeddc1e5eff219a9ecdb22992f9e6653889700414e7"
+    }
+  },
+  "atomicCountAudit": {
+    "runtimeSha": "ece8a56c9a54bd80001ae0799823dcc18dfdf152",
+    "separateSnapshotTokenAlwaysRequired": false,
+    "finding": "One source SQL statement can provide an exact observation if the complete admission predicate, relevant local facts and every identity correction are evaluated in that statement. The present positive-source refusal is an implementation boundary, not a proof of impossibility.",
+    "confirmedCapabilities": "Saved successful evidence proves basic COUNT(*), comparisons and LIKE. It does not prove CASE/SUM/DISTINCT/BINARY or a complete admission compiler.",
+    "sourceEvidence": [
+      "docs/operations/2026-11-12-japan-power-source-evidence.json",
+      "scripts/ajes-japan-power-audit.ts"
+    ],
+    "minimalNextImplementation": "Compile non-price admission first for resolved Audi A4, with actual editorial/calculation inputs, singleton identity evidence and context binding. Then expand to the global selection and independently implement delivered-price classes.",
+    "remainingInputs": [
+      "Complete current stats schema and serializer/numeric-domain contract",
+      "Verified singleton aggregate grammar and ID uniqueness or DISTINCT in that same operation",
+      "Current local editorial and encyclopedia admission context",
+      "Complete resolved source aliases"
+    ],
+    "knownLimitations": [
+      "Full positive admitted count is not implemented",
+      "Exact delivered-price/budget/hasPrice count is not implemented",
+      "Unknown-count page filling still has the existing read budget",
+      "Delivered-price order remains local to each loaded batch"
+    ]
+  },
+  "fullVerificationBeforeCompletenessFollowup": {
     "runtimeSha": "ece8a56c9a54bd80001ae0799823dcc18dfdf152",
     "runtimeTree": "08085fb26be722f0df4b3077b478981d6fc6a7ad",
     "controller": {
@@ -232,6 +325,31 @@
       "logSha256": "e49c02fecb12166b93dbb3ce199e08225ac1f98d4766ab9319699651f7c0399c"
     },
     "sourceProofSha256": "d7bff8ac92f0e3c06112200b9975710431b9fbb82150e23d5820b78845020b59",
+    "protectedSourceVerified": true,
+    "browserRun": false,
+    "liveSourceAccepted": false,
+    "backendCensusAccepted": false
+  },
+  "fullVerificationFinal": {
+    "runtimeSha": "d1bdce86766a1d99658a9ac4b88148aa72f283d6",
+    "runtimeTree": "ef54b8510229c36bc17bd242d9a2d1981bbfa098",
+    "controller": {
+      "tests": 1765,
+      "passed": 1765,
+      "failed": 0,
+      "skipped": 0,
+      "exitCode": 0,
+      "logSha256": "5b2178ada93554f9551331e02e808468cfd57c999468e344cb5228039307210f"
+    },
+    "native": {
+      "tests": 608,
+      "passed": 608,
+      "failed": 0,
+      "skipped": 0,
+      "exitCode": 0,
+      "logSha256": "6dc40b42364013196680d3865e01650b6fe0ab96fe5c9cd9fe9dc7599682a26b"
+    },
+    "sourceProofSha256": "e20179705df40e4391e42e93fa03c93a78740bcc6826e0e033d154b9e6a11208",
     "protectedSourceVerified": true,
     "browserRun": false,
     "liveSourceAccepted": false,

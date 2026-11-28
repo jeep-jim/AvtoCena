@@ -234,6 +234,72 @@ export function fixtureResult(query, now) {
       supplierPower:items.filter(row=>!row.japanPowerUnknown).length,unknownPower:items.filter(row=>row.japanPowerUnknown).length}}:{})};
 }
 
+export function createExactCountFixtureHandler({fixture,getActive}) {
+  return async(request,response)=>{
+    const active=getActive();let url,stage='route';
+    // Arguments, including rendered/serialized bodies, are evaluated before
+    // this function commits the success status. A guard/SSR failure stays HTTP400.
+    const send=(status,headers,body)=>{response.writeHead(status,headers);response.end(body);};
+      try {
+        url=new URL(request.url,ORIGIN);
+        if(url.pathname==='/fixture.js'){send(200,{'Content-Type':'application/javascript'},fixture.javascript);return;}
+        if(url.pathname==='/fixture.css'){send(200,{'Content-Type':'text/css'},fixture.css);return;}
+        if(url.pathname==='/api/catalog/search'){
+          stage='search_payload';
+          const query=Object.fromEntries(url.searchParams);active.requests.push({...query});
+          if(Number(query.page)>1){const prior=fixtureResult({...query,page:String(Number(query.page)-1)},active.now);need(query.after===prior.nextCursor,'emitted_cursor');}
+          if(active.failAppend&&Number(query.page)===3){send(503,{'Content-Type':'application/json'},'{"ok":false}');return;}
+          if(active.holdNext&&query.sort==='totalRubDesc'&&Number(query.page)===1){active.held=true;await active.releaseWait;}
+          send(200,{'Content-Type':'application/json','Cache-Control':'no-store'},JSON.stringify(fixtureResult(query,active.now)));return;
+        }
+        if(url.pathname==='/api/catalog/brand-counts'){
+          stage='brand_payload';
+          send(200,{'Content-Type':'application/json'},JSON.stringify({counts:{AUDI:147},modelCounts:{AUDI:fixtureDirectory(active.now).models.length},stale:false,generationId:active.now}));return;
+        }
+        if(url.pathname==='/api/catalog/source-models'){
+          stage='model_payload';
+          need(url.searchParams.get('market')==='japan'&&['AUDI','Audi'].includes(url.searchParams.get('make')),'model_scope');
+          send(200,{'Content-Type':'application/json'},JSON.stringify(fixtureDirectory(active.now)));return;
+        }
+        if(url.pathname==='/api/catalog/saved-previews'){
+          stage='preview_payload';
+          const ids=(url.searchParams.get('ids')||'').split(',');
+          need(ids.length>0&&ids.length<=50&&ids.every(id=>/^ajes-stats-exact-\d{1,3}$/.test(id)),'saved_preview_scope');
+          send(200,{'Content-Type':'application/json'},JSON.stringify({previews:Object.fromEntries(ids.map(id=>[id,null]))}));return;
+        }
+        if(url.pathname==='/api/catalog/rates'){
+          send(200,{'Content-Type':'application/json'},'{"rates":[]}');return;
+        }
+        if(url.pathname.startsWith('/brand-logos/')){send(204,{},undefined);return;}
+        stage='document_scope';
+        need(url.pathname==='/cars/japan'&&url.searchParams.get('city')===CITY
+          &&(url.searchParams.size===1||active.recoverCount&&url.searchParams.size===2&&url.searchParams.get('powerTo')==='160'),'document_scope');
+        const initial={city:CITY,market:'japan',...(active.recoverCount?{powerTo:'160'}:{})};
+        const result=fixtureResult(initial,active.now);
+        if(active.recoverCount){result.total=null;result.countSummary=null;}
+        const props={initial,result,remount:active.remount};
+        stage='document_render';
+        const body='<!doctype html><html><head><meta charset="utf-8"><link rel="icon" href="data:,"><link rel="stylesheet" href="/fixture.css"></head><body><div id="root">'
+          +fixture.renderMarkup(props)+'</div><script>window.__japanExactCountInitial='+JSON.stringify(props).replace(/</g,'\\u003c')
+          +'</script><script async src="/fixture.js"></script></body></html>';
+        send(200,{'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-store'},body);
+      }catch(error){
+        const message=String(error?.message||'unknown_server_error');
+        const code=/^[a-z][a-z0-9_]{0,159}$/.test(message)?message:'unexpected_server_error';
+        const safeKeys=['market','city','make','model','powerTo','sort','page','pageSize','marketPage','budget','budgetTo'];
+        const failure={stage,path:['/cars/japan','/api/catalog/search','/api/catalog/brand-counts','/api/catalog/source-models',
+          '/api/catalog/saved-previews','/api/catalog/rates'].includes(url?.pathname)?url.pathname:'other',code,
+          query:Object.fromEntries([...(url?.searchParams||[])].filter(([key])=>safeKeys.includes(key)).map(([key,value])=>[key,value.slice(0,160)])),
+          ...(url?.searchParams.has('after')?{afterSha256:hash(url.searchParams.get('after'))}:{}),
+          ...(code===message?{}:{message:message.replace(/https?:\/\/[^\s]+/g,'[url]').slice(0,500)})};
+        if(active){active.serverError??=code;active.serverFailure??=failure;}
+        if(response.writableEnded||response.destroyed)return;
+        if(!response.headersSent)response.writeHead(400,{'Content-Type':'application/json'});
+        response.end(JSON.stringify({ok:false,error:code}));
+      }
+  };
+}
+
 async function main() {
   const report={version:1,kind:'japan-exact-count-browser-v1',passed:false,
     scope:'Exact runtime UI components and styles; finite controlled v1 count-proof mocks; no live source or backend census acceptance',
@@ -250,46 +316,7 @@ async function main() {
       helperSha256:Object.fromEntries(await Promise.all(helperFiles.map(async file=>[file,hash(await fs.readFile(path.join(ROOT,file)))])))});
     need(path.isAbsolute(process.env.PLAYWRIGHT_MODULE||'')&&path.isAbsolute(process.env.CHROME_BIN||''),'browser_environment');
     report.playwrightVersion=JSON.parse(await fs.readFile(path.join(path.dirname(process.env.PLAYWRIGHT_MODULE),'package.json'),'utf8')).version;
-    server=http.createServer(async(request,response)=>{
-      try {
-        const url=new URL(request.url,ORIGIN);
-        if(url.pathname==='/fixture.js'){response.writeHead(200,{'Content-Type':'application/javascript'});response.end(fixture.javascript);return;}
-        if(url.pathname==='/fixture.css'){response.writeHead(200,{'Content-Type':'text/css'});response.end(fixture.css);return;}
-        if(url.pathname==='/api/catalog/search'){
-          const query=Object.fromEntries(url.searchParams);active.requests.push({...query});
-          if(Number(query.page)>1){const prior=fixtureResult({...query,page:String(Number(query.page)-1)},active.now);need(query.after===prior.nextCursor,'emitted_cursor');}
-          if(active.failAppend&&Number(query.page)===3){response.writeHead(503,{'Content-Type':'application/json'});response.end('{"ok":false}');return;}
-          if(active.holdNext&&query.sort==='totalRubDesc'&&Number(query.page)===1){active.held=true;await active.releaseWait;}
-          response.writeHead(200,{'Content-Type':'application/json','Cache-Control':'no-store'});response.end(JSON.stringify(fixtureResult(query,active.now)));return;
-        }
-        if(url.pathname==='/api/catalog/brand-counts'){
-          response.writeHead(200,{'Content-Type':'application/json'});response.end(JSON.stringify({counts:{AUDI:147},modelCounts:{AUDI:fixtureDirectory(active.now).models.length},stale:false,generationId:active.now}));return;
-        }
-        if(url.pathname==='/api/catalog/source-models'){
-          need(url.searchParams.get('market')==='japan'&&['AUDI','Audi'].includes(url.searchParams.get('make')),'model_scope');
-          response.writeHead(200,{'Content-Type':'application/json'});response.end(JSON.stringify(fixtureDirectory(active.now)));return;
-        }
-        if(url.pathname==='/api/catalog/saved-previews'){
-          const ids=(url.searchParams.get('ids')||'').split(',');
-          need(ids.length>0&&ids.length<=50&&ids.every(id=>/^ajes-stats-exact-\d{1,3}$/.test(id)),'saved_preview_scope');
-          response.writeHead(200,{'Content-Type':'application/json'});response.end(JSON.stringify({previews:Object.fromEntries(ids.map(id=>[id,null]))}));return;
-        }
-        if(url.pathname==='/api/catalog/rates'){
-          response.writeHead(200,{'Content-Type':'application/json'});response.end('{"rates":[]}');return;
-        }
-        if(url.pathname.startsWith('/brand-logos/')){response.writeHead(204);response.end();return;}
-        need(url.pathname==='/cars/japan'&&url.searchParams.get('city')===CITY
-          &&(url.searchParams.size===1||active.recoverCount&&url.searchParams.size===2&&url.searchParams.get('powerTo')==='160'),'document_scope');
-        const initial={city:CITY,market:'japan',...(active.recoverCount?{powerTo:'160'}:{})};
-        const result=fixtureResult(initial,active.now);
-        if(active.recoverCount){result.total=null;result.countSummary=null;}
-        const props={initial,result,remount:active.remount};
-        response.writeHead(200,{'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-store'});
-        response.end('<!doctype html><html><head><meta charset="utf-8"><link rel="icon" href="data:,"><link rel="stylesheet" href="/fixture.css"></head><body><div id="root">'
-          +fixture.renderMarkup(props)+'</div><script>window.__japanExactCountInitial='+JSON.stringify(props).replace(/</g,'\\u003c')
-          +'</script><script async src="/fixture.js"></script></body></html>');
-      }catch(error){active&&(active.serverError=error.message);response.writeHead(400);response.end();}
-    });
+    server=http.createServer(createExactCountFixtureHandler({fixture,getActive:()=>active}));
     await new Promise((resolve,reject)=>{server.once('error',reject);server.listen(0,'127.0.0.1',resolve);});
     const loopback='http://127.0.0.1:'+server.address().port;
     const {chromium}=await import(process.env.PLAYWRIGHT_MODULE);
@@ -443,7 +470,8 @@ async function main() {
     need(report.cases.length===2&&report.cases.every(row=>row.passed)&&report.forbiddenTransportAttempts===0,'complete');report.passed=true;
   }catch(error){
     const message=String(error?.message||'');report.error={code:/^japan_[a-z_]+$/.test(message)?message:'japan_exact_count_fixture_failed',
-      message:message.length<=8000?message:message.slice(0,6000)+'\n[bounded call log omitted]\n'+message.slice(-2000),messageTruncated:message.length>8000,serverCode:active?.serverError};
+      message:message.length<=8000?message:message.slice(0,6000)+'\n[bounded call log omitted]\n'+message.slice(-2000),messageTruncated:message.length>8000,
+      serverCode:active?.serverError,serverFailure:active?.serverFailure};
     process.exitCode=1;
   }finally{
     if(browser)await browser.close().catch(()=>{});if(server)await new Promise(resolve=>server.close(resolve));
