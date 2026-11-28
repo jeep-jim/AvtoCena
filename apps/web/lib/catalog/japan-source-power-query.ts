@@ -61,8 +61,8 @@ export function japanSourcePowerPredicate(low:number,high:number,index:Calculati
    if(family){models.add(family.toUpperCase());models.add((family+'class').toUpperCase());}
   }
  }
- const valid="(trim(pw) regexp '^[0-9]{1,30}$' and pw+0>0 and pw+0<=9007199254740991)";
- const source=`pw is null or not ${valid} or pw+0 between ${low} and ${high}`;
+ // The AJ supplier returned HTTP 500 for the previous '+' arithmetic spelling.\n // Multiplication preserves the same numeric coercion in the local SQL oracle;\n // a supplier probe is still required before deploying this candidate.\n const valid="(trim(pw) regexp '^[0-9]{1,30}$' and pw*1>0 and pw*1<=9007199254740991)";
+ const source=`pw is null or not ${valid} or pw*1 between ${low} and ${high}`;
  // A broad namespace is intentional: the unchanged owner predicate still
  // decides Honda/nonhybrid identity and the final 150 hp match after LIST.
  // Every normalized owner spelling contains these characters in order. The
