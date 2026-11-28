@@ -1,11 +1,13 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import http from 'node:http';
-import {createExactCountFixtureHandler} from './browser/japan-exact-count.mjs';
+import {inflateSync} from 'node:zlib';
+import * as exactCountFixture from './browser/japan-exact-count.mjs';
 import {japanExactCountApi} from '../scripts/catalog-next/japan-exact-count-browser.mjs';
 import {japanPriceSortApi} from '../scripts/catalog-next/japan-price-sort-browser.mjs';
 
 const city='Новокузнецк';
+const {createExactCountFixtureHandler}=exactCountFixture;
 const api=query=>'/api/catalog/search?'+new URLSearchParams({market:'japan',city,page:'1',pageSize:'24',...query});
 const state=()=>({now:new Date().toISOString(),requests:[],remount:false});
 
@@ -22,7 +24,10 @@ async function fixtureServer(t,{renderMarkup=()=>'<main>actual handler SSR respo
   const request=pathname=>new Promise(resolve=>{
     const req=http.get({host:'127.0.0.1',port:server.address().port,path:pathname},response=>{
       const parts=[];response.on('data',part=>parts.push(part));
-      response.once('end',()=>resolve({status:response.statusCode,body:Buffer.concat(parts).toString('utf8')}));
+      response.once('end',()=>{
+        const bytes=Buffer.concat(parts);
+        resolve({status:response.statusCode,headers:response.headers,bytes,body:bytes.toString('utf8')});
+      });
       response.once('error',error=>resolve({clientError:error.code}));
     });
     req.once('error',error=>resolve({clientError:error.code}));
@@ -74,6 +79,35 @@ test('an invalid API query preserves its original assertion as HTTP400 without a
   assert.equal(f.active.serverFailure.query.market,'china');assert.deepEqual(f.rejections,[]);
 });
 
+test('allowed local brand-logo requests return a decodable PNG instead of an empty image error',async t=>{
+  const f=await fixtureServer(t);
+  for(const theme of ['light','dark']){
+    const response=await f.request('/brand-logos/local/'+theme+'/audi.png');
+    assert.equal(response.status,200,'an empty HTTP204 forces the actual BrandLogoVisual error fallback');
+    assert.equal(response.headers['content-type'],'image/png');
+    const bytes=response.bytes;
+    assert.deepEqual(bytes.subarray(0,8),Buffer.from('89504e470d0a1a0a','hex'));
+    const chunks=[];let offset=8;
+    while(offset<bytes.length){
+      const size=bytes.readUInt32BE(offset),type=bytes.toString('ascii',offset+4,offset+8);
+      assert(offset+12+size<=bytes.length,'PNG chunk must be complete');
+      let crc=0xffffffff;
+      for(const byte of bytes.subarray(offset+4,offset+8+size)){
+        crc^=byte;for(let bit=0;bit<8;bit++)crc=(crc>>>1)^((crc&1)?0xedb88320:0);
+      }
+      assert.equal((crc^0xffffffff)>>>0,bytes.readUInt32BE(offset+8+size),'PNG '+type+' CRC');
+      chunks.push({type,data:bytes.subarray(offset+8,offset+8+size)});offset+=12+size;
+    }
+    assert.equal(offset,bytes.length);assert.deepEqual(chunks.map(chunk=>chunk.type),['IHDR','IDAT','IEND']);
+    const header=chunks[0].data;
+    assert.equal(header.length,13);assert.equal(header.readUInt32BE(0),1);assert.equal(header.readUInt32BE(4),1);
+    assert.deepEqual([...header.subarray(8)],[8,6,0,0,0],'one 8-bit RGBA pixel without interlacing');
+    const scanline=inflateSync(chunks[1].data);
+    assert.equal(scanline.length,5);assert.equal(scanline[0],0,'unfiltered RGBA scanline');
+  }
+  assert.deepEqual(f.rejections,[]);assert.equal(f.active.serverError,undefined);
+});
+
 test('an SSR throw happens before status200 and remains available for the persisted browser failure report',async t=>{
   const f=await fixtureServer(t,{renderMarkup:()=>{throw Error('controlled_renderer_failure');}});
   const response=await f.request('/cars/japan?'+new URLSearchParams({city}));
@@ -93,4 +127,38 @@ test('the error response never writes headers a second time and diagnostics excl
   assert(!JSON.stringify(active.serverFailure).includes('PRIVATE_VALUE'));
   assert(!JSON.stringify(active.serverFailure).includes('private-cursor'));
   assert.equal(active.serverFailure.afterSha256.length,64);
+});
+
+test('blocked transport diagnostics retain bounded public call sites without credentials, query or payload',()=>{
+  assert.equal(typeof exactCountFixture.recordForbiddenFixtureRequest,'function');
+  const report={passed:false,forbiddenTransportAttempts:0};
+  const record=values=>exactCountFixture.recordForbiddenFixtureRequest(report,
+    {caseName:'preserved_controls',stage:'fixture_count_expiry',method:'GET',resourceType:'image',...values});
+  record({url:'https://URL_USER:URL_PASSWORD@cdn.example.test/fonts/public.woff2?token=QUERY_SECRET#FRAGMENT_SECRET',resourceType:'font'});
+  record({url:'https://avtocena.com/api/catalog/brand-logo/audi?theme=light&token=QUERY_SECRET'});
+  record({url:'data:image/svg+xml,PAYLOAD_SECRET'});
+  record({url:'not a URL with INVALID_SECRET'});
+  record({url:'https://cdn.example.test/'+ 'a'.repeat(2000)+'?token=QUERY_SECRET',stage:'x'.repeat(1000),
+    method:'y'.repeat(1000),resourceType:'z'.repeat(1000)});
+  for(let index=0;index<30;index++)record({url:'https://cdn.example.test/image-'+index+'.png?token=QUERY_SECRET'});
+  assert.equal(report.forbiddenTransportAttempts,35,'diagnostic cap must not cap the denying counter');
+  assert.equal(report.passed,false,'recording a blocked call cannot accept a browser fixture');
+  assert.equal(report.forbiddenRequests.length,16);
+  assert.equal(report.forbiddenRequestDiagnosticsOmitted,19);
+  assert.deepEqual(report.forbiddenRequests[0],{case:'preserved_controls',stage:'fixture_count_expiry',method:'GET',
+    originCategory:'external_http',hostname:'cdn.example.test',pathname:'/fonts/public.woff2',resourceType:'font'});
+  assert.equal(report.forbiddenRequests[1].originCategory,'fixture_origin');
+  assert.equal(report.forbiddenRequests[1].pathname,'/api/catalog/brand-logo/audi');
+  assert.equal(report.forbiddenRequests[2].originCategory,'non_http');
+  assert.equal(report.forbiddenRequests[2].pathname,'');
+  assert.equal(report.forbiddenRequests[3].originCategory,'invalid');
+  for(const entry of report.forbiddenRequests){
+    assert(entry.case.length<=40&&entry.stage.length<=120&&entry.method.length<=16
+      &&entry.hostname.length<=253&&entry.pathname.length<=320&&entry.resourceType.length<=32);
+    assert.deepEqual(Object.keys(entry).sort(),['case','stage','method','originCategory','hostname','pathname','resourceType'].sort());
+  }
+  const persisted=JSON.stringify(report);
+  for(const secret of ['URL_USER','URL_PASSWORD','QUERY_SECRET','FRAGMENT_SECRET','PAYLOAD_SECRET','INVALID_SECRET'])
+    assert(!persisted.includes(secret),'diagnostic leaked '+secret);
+  assert(persisted.length<10000,'diagnostic report must remain bounded');
 });

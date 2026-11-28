@@ -19,6 +19,9 @@ import {runJapanExactCountBrowser, japanExactCountQueryHash, verifyJapanFiniteSe
 
 const ROOT = fileURLToPath(new URL('../../', import.meta.url));
 const ORIGIN = 'https://avtocena.com', CITY = 'Новокузнецк';
+// A local, decodable 1x1 RGBA image for the fixture's existing brand-logo paths.
+// An empty HTTP204 is an image error and triggers the real component's API fallback.
+const LOCAL_BRAND_LOGO_PNG = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR4nGNoaGj4DwAFhAKAjM1mJgAAAABJRU5ErkJggg==','base64');
 const need = (value, code) => { if (!value) throw Error('japan_exact_count_fixture_' + code); };
 const hash = value => createHash('sha256').update(value).digest('hex');
 const require = createRequire(import.meta.url);
@@ -234,6 +237,25 @@ export function fixtureResult(query, now) {
       supplierPower:items.filter(row=>!row.japanPowerUnknown).length,unknownPower:items.filter(row=>row.japanPowerUnknown).length}}:{})};
 }
 
+/** Record only bounded public call-site fields. Every denied attempt still
+ * increments the guard, even after the diagnostic sample is full. */
+export function recordForbiddenFixtureRequest(report,{caseName,stage,method,url,resourceType}) {
+  report.forbiddenTransportAttempts++;
+  const entries=report.forbiddenRequests??=[];
+  if(entries.length>=16){report.forbiddenRequestDiagnosticsOmitted=(report.forbiddenRequestDiagnosticsOmitted||0)+1;return;}
+  let originCategory='invalid',hostname='',pathname='';
+  try {
+    const parsed=new URL(url);
+    if(parsed.protocol==='https:'||parsed.protocol==='http:'){
+      originCategory=parsed.origin===ORIGIN?'fixture_origin':'external_http';
+      hostname=parsed.hostname.slice(0,253);pathname=parsed.pathname.slice(0,320);
+    }else originCategory='non_http';
+  }catch{}
+  const bounded=(value,limit)=>String(value||'unknown').replace(/[\u0000-\u001f\u007f]/g,'_').slice(0,limit);
+  entries.push({case:bounded(caseName,40),stage:bounded(stage,120),method:bounded(method,16),
+    originCategory,hostname,pathname,resourceType:bounded(resourceType,32)});
+}
+
 export function createExactCountFixtureHandler({fixture,getActive}) {
   return async(request,response)=>{
     const active=getActive();let url,stage='route';
@@ -270,7 +292,7 @@ export function createExactCountFixtureHandler({fixture,getActive}) {
         if(url.pathname==='/api/catalog/rates'){
           send(200,{'Content-Type':'application/json'},'{"rates":[]}');return;
         }
-        if(url.pathname.startsWith('/brand-logos/')){send(204,{},undefined);return;}
+        if(url.pathname.startsWith('/brand-logos/')){send(200,{'Content-Type':'image/png'},LOCAL_BRAND_LOGO_PNG);return;}
         stage='document_scope';
         need(url.pathname==='/cars/japan'&&url.searchParams.get('city')===CITY
           &&(url.searchParams.size===1||active.recoverCount&&url.searchParams.size===2&&url.searchParams.get('powerTo')==='160'),'document_scope');
@@ -304,7 +326,8 @@ async function main() {
   const report={version:1,kind:'japan-exact-count-browser-v1',passed:false,
     scope:'Exact runtime UI components and styles; finite controlled v1 count-proof mocks; no live source or backend census acceptance',
     countProofContract:'controlled-ui-mock-v1',liveSourceAccepted:false,backendCensusAccepted:false,
-    runtimeSha:null,runtimeTree:null,productionRequests:0,supplierRequests:0,forbiddenTransportAttempts:0,cases:[]};
+    runtimeSha:null,runtimeTree:null,productionRequests:0,supplierRequests:0,forbiddenTransportAttempts:0,
+    forbiddenRequests:[],forbiddenRequestDiagnosticsOmitted:0,cases:[]};
   let fixture,browser,server,active;
   try {
     need(process.argv.length===2,'arguments');
@@ -332,7 +355,11 @@ async function main() {
         const allowed=request.method()==='GET'&&url.origin===ORIGIN&&(url.pathname==='/cars/japan'
           ||['/fixture.js','/fixture.css','/api/catalog/search','/api/catalog/brand-counts','/api/catalog/source-models','/api/catalog/saved-previews','/api/catalog/rates'].includes(url.pathname)
           ||url.pathname.startsWith('/brand-logos/'));
-        if(!allowed){report.forbiddenTransportAttempts++;await route.abort('blockedbyclient');return;}
+        if(!allowed){
+          recordForbiddenFixtureRequest(report,{caseName:remount?'remounted_controls':'preserved_controls',stage:result.stage,
+            method:request.method(),url:url.href,resourceType:request.resourceType()});
+          await route.abort('blockedbyclient');return;
+        }
         let response;
         try{response=await route.fetch({url:loopback+url.pathname+url.search,maxRedirects:0,timeout:30_000});await route.fulfill({response});}
         finally{if(response)await response.dispose().catch(()=>{});}

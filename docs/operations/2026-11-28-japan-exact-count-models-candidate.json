@@ -17,7 +17,7 @@
     "controllerSha": "8de8515900c87633237f2eca816fe81945f286d9",
     "conclusion": "success",
     "artifactSha256": "b711ce9c978072e05ae8fd4defb0a0bba891b5ad9dd2e9b188eaef5a934f1341",
-    "bindingLimitation": "Fixed saved slots do not prove the precise user query.",
+    "bindingLimitation": "LIST/model saved slots do not prove the precise user query. The COUNT SQL hash and byte length were independently reconstructed as ordinary NISSAN COUNT(*); SQL-neutral browser parameters remain unknown.",
     "report": {
       "version": 1,
       "kind": "japan-usability-saved-failure-v1",
@@ -76,6 +76,63 @@
       ],
       "supplierRequests": 0,
       "writes": 0
+    },
+    "countQueryReconstruction": {
+      "version": 1,
+      "kind": "japan-saved-count-sql-reconstruction-v1",
+      "checkedAt": "2026-11-28T05:35:24.233Z",
+      "scope": "Offline reconstruction from local immutable Git objects; no supplier or application requests.",
+      "supplierRequests": 0,
+      "applicationRequests": 0,
+      "sourceObservation": {
+        "startedAt": "2026-11-28T02:58:07.977Z",
+        "outcome": "invalid_response",
+        "validationCode": "count_row_count",
+        "responseArrayLength": 0,
+        "sqlSha256": "5ec493251f475a11bfe2497cc345a4727af03017ca6b3216ecfe8198a02dd453",
+        "sqlBytes": 3541
+      },
+      "results": [
+        {
+          "runtimeSha": "20fd18d12b3f5c7aabef860e1b53da0d505dfd64",
+          "runtimeTree": "b3257c801b2b26cc84ec8d37380a2d8ec120b431",
+          "querySource": "apps/web/lib/catalog/ajes-query.ts",
+          "sourceBlob": "be2d9e17b388404ded53a8a603c12ff28b6ef702",
+          "allRuntimeDependenciesReadFromSameGitRef": true,
+          "pinnedModuleCount": 30,
+          "input": {
+            "make": "NISSAN",
+            "aggregate": "count"
+          },
+          "countIdentity": false,
+          "sqlBytes": 3541,
+          "sqlSha256": "5ec493251f475a11bfe2497cc345a4727af03017ca6b3216ecfe8198a02dd453",
+          "projection": "select count(*)",
+          "savedHashMatches": true
+        },
+        {
+          "runtimeSha": "81c80dc8cd0b9339ddf9bfc7e63037672d2fc9f5",
+          "runtimeTree": "afe84afb1bdc15d5935552c0e6db796aefbb90bc",
+          "querySource": "apps/web/lib/catalog/ajes-query.ts",
+          "sourceBlob": "904e1e723ae8bfbdb8f5e931510769071107ea2c",
+          "allRuntimeDependenciesReadFromSameGitRef": true,
+          "pinnedModuleCount": 30,
+          "input": {
+            "make": "NISSAN",
+            "aggregate": "count"
+          },
+          "countIdentity": false,
+          "sqlBytes": 3541,
+          "sqlSha256": "5ec493251f475a11bfe2497cc345a4727af03017ca6b3216ecfe8198a02dd453",
+          "projection": "select count(*)",
+          "savedHashMatches": true
+        }
+      ],
+      "limitations": [
+        "The hash proves the source SQL make predicate NISSAN, not the exact browser URL or SQL-neutral parameters.",
+        "This observation cannot be attributed to Audi A4 or the new DISTINCT/BINARY projection.",
+        "An empty array does not identify why the supplier omitted the required count row."
+      ]
     }
   },
   "ordinaryBrowserObservation": {
@@ -89,10 +146,11 @@
     "siteIssueId": "66ceeb82-2145-4e07-9ef0-5504503f8121"
   },
   "openRequirements": [
-    "Provide/verify the complete current supplier stats schema, numeric FINISH domain and supported aggregate grammar through an authorized source.",
-    "Use a documented coherent source observation for positive exact counts, with global identity uniqueness and finite local override corrections from that same observation.",
-    "Implement exact delivered-price/budget/hasPrice counting within the provider request/cache policy; no listing-level full walk or mirrored inventory.",
-    "Run the real browser fixture and complete code verification for the frozen review candidate SHA; controlled UI totals are not live source acceptance.",
+    "Verify the minimal current stats field/type/serializer and unique-identity contract needed by the actual admission rules. A separate source snapshot token or SUM/CASE is not intrinsically required for one complete Boolean COUNT statement.",
+    "Implement and prove one atomic positive admitted COUNT with the same resolved source scope and frozen local admission/identity overrides; the existing snapshot reader is project-owned work, not data the user must supply.",
+    "Make source candidate predicates complete for final local color/drive/fuel/pickup and resolve transmission/engine filter semantics. Avoid losing locally corrected matching rows before admission.",
+    "Implement exact delivered-price/budget/hasPrice counting and complete delivered-price ordering within provider request/cache policy; no listing-level full walk or mirrored inventory.",
+    "Complete the frozen review candidate hosted checks. Controlled UI totals are not live source acceptance.",
     "Pass actual Japan source/filter/count/model acceptance before activation."
   ],
   "activation": {
@@ -119,8 +177,9 @@
       "oldIncorrectResult": 0,
       "cause": "Independent corrections for two hidden IDs can subtract the same aggregate membership twice across source states."
     },
-    "sourceContract": "No complete saved stats schema or equivalent coherent aggregate has been verified. A single aggregate that evaluates the entire admission predicate and local corrections atomically would not need a separate source snapshot token.",
-    "priceCounter": "Exact positive delivered-price/budget/hasPrice count is not implemented. MIN/MAX alone cannot establish the number inside a price interval."
+    "sourceContract": "The complete positive admission compiler is not implemented. Minimal source field/domain/identity semantics are unverified; one full Boolean COUNT statement could provide an atomic observation without a separate snapshot token.",
+    "priceCounter": "Exact positive delivered-price/budget/hasPrice count is not implemented. MIN/MAX alone cannot establish the number inside a price interval.",
+    "unsafeSourceSuperset": "Executed controlled examples have raw COUNT0 but one final matching row after local color, drive, pickup or factory-fuel correction. Shared guards now refuse exactness for these source scopes before cache/COUNT/short-LIST inference; complete source-candidate predicates remain unimplemented."
   },
   "implementation": {
     "models": [
@@ -132,11 +191,12 @@
       "Free text A4 survives normalized-equal source spellings on both Apply and Enter; explicit literal source choices remain unchanged. The runtime SQL regression preserves the ASCII branch during stale-directory fallback."
     ],
     "countDisplay": "A confirmed total remains independent of the number of loaded cards; its original thirty-minute freshness deadline and stale observation date are preserved.",
-    "sourceCount": "Positive census refuses before GROUP/correction reads and cannot revive from memory or saved scalar slots. Validated rawCOUNT0 remains exact.",
-    "singleResponseCount": "A fresh complete first LIST with fewer than one raw page, unique admitted IDs and one local evidence snapshot can prove its complete admitted total; power two-pass and multiple source observations cannot.",
+    "sourceCount": "Positive census refuses before GROUP/correction reads and cannot revive from memory or saved scalar slots. Ordinary raw COUNT0 can prove exact zero only in a supported complete candidate scope; unsafe local-override filter dimensions are refused before cache lookup or source COUNT.",
+    "singleResponseCount": "A fresh complete first LIST with fewer than one raw page, unique admitted IDs, complete aliases, a supported complete source candidate scope and one local evidence snapshot can prove its complete admitted total; power two-pass, incomplete scope and multiple source observations cannot.",
     "positiveGlobalCountImplemented": false,
     "positiveDeliveredPriceCountImplemented": false,
-    "progressiveAvailability": "SSR cards remain available independently of the COUNT request; a received full single-LIST summary and later streamed count still reach the header."
+    "progressiveAvailability": "SSR cards remain available independently of the COUNT request; a received full single-LIST summary and later streamed count still reach the header.",
+    "partialDirectoryContinuation": "Fresh complete LIST pages retain visitor-driven continuation within their resolved source SQL despite an incomplete alias directory. Selection remains marked partial with total/countSummary null; actual source partial/stale/refusal boundaries and resolved-query cursor binding remain enforced."
   },
   "localVerification": {
     "backendNative": {
@@ -197,6 +257,60 @@
       "freshFamilyEquivalent": true,
       "staleLiteralFallbackPreserved": true,
       "sourceRequests": 0
+    },
+    "ordinaryZeroCountFollowup": {
+      "red": 2,
+      "focusedPassed": 86,
+      "focusedFailed": 0,
+      "typescriptExitCode": 0,
+      "actualClientWireParserUsed": true,
+      "ordinaryCountWithoutDistinct": true,
+      "proofBoundToExecutedSql": true,
+      "positiveEmptyAndStaleCountsNotExact": true,
+      "sourceListAndGroupReads": 0,
+      "liveSourceAccepted": false
+    },
+    "partialDirectoryContinuationFollowup": {
+      "continuationRedFailed": 5,
+      "continuationCases": 7,
+      "continuationGreenPassed": 7,
+      "shortListFalseExactRedCases": 2,
+      "focusedPassed": 61,
+      "failed": 0,
+      "typescriptExitCode": 0,
+      "actualResolverAndSqliteScopeUsed": true,
+      "actualAppendClientAndReactControlsUsed": true,
+      "controlledPageSizes": [
+        24,
+        24,
+        1
+      ],
+      "controlledDistinctIds": 49,
+      "sourcePartialStaleAndRefusalPreserved": true,
+      "aliasRecoveryInvalidatesCursor": true,
+      "incompleteSelectionTotalIsNull": true,
+      "supplierRequests": 0
+    },
+    "sourceScopeContainmentFollowup": {
+      "focusedPassed": 109,
+      "failed": 0,
+      "typescriptExitCode": 0,
+      "controlledActualFunctionCases": 6,
+      "sourceRequests": 0,
+      "positiveGlobalCountImplemented": false
+    },
+    "outwardScopeStatusFollowup": {
+      "red": 4,
+      "green": 4,
+      "focusedPassed": 63,
+      "failed": 0,
+      "typescriptExitCode": 0,
+      "actualAjesCatalogRendered": true,
+      "unsafeEmptyNotDefinitive": true,
+      "safeEmptyControlPreserved": true,
+      "snapshotAndWalkerUnchanged": true,
+      "independentCodeReviewPassed": true,
+      "sourceRequests": 0
     }
   },
   "queryBudget": {
@@ -223,14 +337,14 @@
     "experimentalCombinedCensusSupported": false
   },
   "candidate": {
-    "runtimeSha": "81c80dc8cd0b9339ddf9bfc7e63037672d2fc9f5",
-    "runtimeTree": "afe84afb1bdc15d5935552c0e6db796aefbb90bc",
+    "runtimeSha": "7f7a316905cd8109352431ed4722108b3449c3ec",
+    "runtimeTree": "5854b591c0ee78e3aaa960f96b9a66b9c5b4175c",
     "parent": "20fd18d12b3f5c7aabef860e1b53da0d505dfd64",
     "runtimeFiles": 46,
-    "runtimeDiffSha256": "5633426cdb8ea8b3e9e7b3bf74e49752f90ff1bdf4fa9a8a4058adcc9bdc57ec",
+    "runtimeDiffSha256": "a6bd28e6ec1f2462cc5292311e97c2ff15ea8facdf66029ce12adb4deccb8ba9",
     "pricingCompatibilityFiles": 127,
     "branch": "fix/japan-exact-count-models-20261128",
-    "sourceUrl": "https://github.com/jeep-jim/AvtoCena/commit/81c80dc8cd0b9339ddf9bfc7e63037672d2fc9f5"
+    "sourceUrl": "https://github.com/jeep-jim/AvtoCena/commit/7f7a316905cd8109352431ed4722108b3449c3ec"
   },
   "fullVerificationFirstPass": {
     "controller": {
@@ -302,9 +416,56 @@
         "officialZipDigestVerified": true,
         "liveSourceAccepted": false,
         "backendCensusAccepted": false
+      },
+      {
+        "runId": "46111482722",
+        "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/46111482722",
+        "controllerSha": "22b2c7f5fccd107de8be7427eb343bed09d325dc",
+        "runtimeSha": "81c80dc8cd0b9339ddf9bfc7e63037672d2fc9f5",
+        "runtimeTree": "afe84afb1bdc15d5935552c0e6db796aefbb90bc",
+        "conclusion": "failure",
+        "passedBeforeFailure": [
+          "controller gates",
+          "exact source and protected compatibility",
+          "legacy redirect browser",
+          "hydrated model controls browser",
+          "both exact-count UI cases"
+        ],
+        "failure": {
+          "step": 12,
+          "kind": "fixture_transport_guard",
+          "error": "japan_exact_count_fixture_complete",
+          "forbiddenTransportAttempts": 2,
+          "blockedUrlsRecorded": false,
+          "finding": "Both full UI cases passed. Two denied background requests correctly failed the final guard; their actual paths were not recorded."
+        },
+        "controlledUiCasesPassed": 2,
+        "controlledModelOptions": 94,
+        "controlledTotal": 73,
+        "controlledPageSizes": [
+          24,
+          24,
+          24,
+          1
+        ],
+        "controlledBudgetTotal": 38,
+        "controlledBudgetPageSizes": [
+          24,
+          14
+        ],
+        "exactCountReportEmitted": true,
+        "artifactId": 15250100102,
+        "artifactZipSha256": "f94a18087764341c14e5f7bcac730a4d7d3d3b921096ed8ff0158c38527544e3",
+        "artifactJsonSha256": "fc62ee82c99ee070081fc8a67809aed7bb892bdedca829f4875792de6d3fda9e",
+        "officialZipDigestVerified": true,
+        "runtimeSourceHashesVerified": 159,
+        "productionRequests": 0,
+        "supplierRequests": 0,
+        "liveSourceAccepted": false,
+        "backendCensusAccepted": false
       }
     ],
-    "status": "typed_family_fixed_full_local_gates_passed_hosted_retry_pending",
+    "status": "final_full_local_gates_passed_hosted_retry_pending",
     "handlerRepair": {
       "focusedTests": 18,
       "passed": 18,
@@ -323,30 +484,191 @@
       "fixtureSha256": "ffdec9caad5a18c476808d6c8672d996902bf7dda0b4238697d3d61ce85d60cc",
       "serverTestSha256": "abfb4f0feb060082d9cf7aeddc1e5eff219a9ecdb22992f9e6653889700414e7",
       "subsequentRunPreservedOriginalException": true
+    },
+    "fixtureTransportRepair": {
+      "kind": "valid_local_png_and_bounded_denied_request_diagnostics",
+      "localImageHttpStatus": 200,
+      "localImageMime": "image/png",
+      "localImageBytes": 70,
+      "loopbackLightDarkTestPassed": true,
+      "pngSignatureCrcDimensionsAndDecodedDataPassed": true,
+      "targetedTests": 20,
+      "passed": 20,
+      "failed": 0,
+      "allowlistUnchanged": true,
+      "deniedAbortPreserved": true,
+      "zeroAttemptGatePreserved": true,
+      "diagnosticRecordLimit": 16,
+      "allDeniedAttemptsStillCounted": true,
+      "queryCredentialsAndPayloadExcluded": true,
+      "previousBlockedPathsUnobserved": true,
+      "candidateCause": "BrandLogoVisual retries the fallback API when local PNG receives an empty HTTP204. The old report did not record the two denied paths, so this chain is not asserted as the proven cause of both attempts.",
+      "fixtureSha256": "0a42b4f61cbb0279df65ca501b47d9b7b56d2e228671c182701adb8382664ed8",
+      "serverTestSha256": "f3d1dd47e6dca95ab67ec6bbb1eb0d733d04d45d7ceb6ca353f993e66dd86382",
+      "liveSourceAccepted": false,
+      "backendCensusAccepted": false
     }
   },
   "atomicCountAudit": {
-    "runtimeSha": "ece8a56c9a54bd80001ae0799823dcc18dfdf152",
-    "separateSnapshotTokenAlwaysRequired": false,
-    "finding": "One source SQL statement can provide an exact observation if the complete admission predicate, relevant local facts and every identity correction are evaluated in that statement. The present positive-source refusal is an implementation boundary, not a proof of impossibility.",
-    "confirmedCapabilities": "Saved successful evidence proves basic COUNT(*), comparisons and LIKE. It does not prove CASE/SUM/DISTINCT/BINARY or a complete admission compiler.",
-    "sourceEvidence": [
-      "docs/operations/2026-11-12-japan-power-source-evidence.json",
-      "scripts/ajes-japan-power-audit.ts"
+    "version": 1,
+    "kind": "japan-atomic-count-where-offline-audit-v1",
+    "runtimeSha": "81c80dc8cd0b9339ddf9bfc7e63037672d2fc9f5",
+    "scope": "Read-only architecture audit of positive count; the separately authorized ordinary-zero patch does not implement positive counts.",
+    "supplierRequests": 0,
+    "applicationRequests": 0,
+    "verdict": {
+      "singleAtomicCountWithFullBooleanWhereIsValidArchitecture": true,
+      "separateSourceSnapshotTokenRequired": false,
+      "sumCaseSubqueryRequiredForNonPriceCount": false,
+      "completePositiveCompilerImplemented": false,
+      "currentRawCountCanBeRelabeledExact": false,
+      "reason": "All row admission and finite identity overrides can be evaluated inside the same WHERE; present raw SQL omits post-read membership predicates and the source text/domain contract is incomplete."
+    },
+    "confirmedGrammar": {
+      "directSavedSourceEvidence": [
+        "COUNT(*)",
+        "numeric comparisons",
+        "AND",
+        "LIKE"
+      ],
+      "existingAcceptedCatalogWhereForms": [
+        "equality and inequality",
+        "IN / NOT IN",
+        "AND / OR / NOT",
+        "LIKE"
+      ],
+      "notEstablishedByInspectedEvidence": [
+        "subqueries",
+        "CASE / SUM",
+        "COUNT(DISTINCT BINARY id)",
+        "equivalence of SQL text comparison to ajesText HTML decoding, NFKC and trimming"
+      ],
+      "regexpNote": "A historic complex REGEXP count returned HTTP500. Its cause was not established; this neither proves universal support nor a blanket REGEXP prohibition.",
+      "sourceEvidence": [
+        "AvtoCena-controller/docs/operations/2026-11-12-japan-power-source-evidence.json",
+        "AvtoCena-controller/scripts/ajes-japan-power-audit.ts"
+      ]
+    },
+    "nonPricePredicateStages": [
+      "Resolved public source scope, year, auction type, Sold and positive finish.",
+      "ajesLot strict identity, canonical numeric parsing, nonempty normalized names and raw make/model/grade/body/category vehicle exclusions.",
+      "Frozen editorial hidden identities and per-identity specification overrides.",
+      "The same frozen encyclopedia matching and final body/GVWR vehicle admission as applyAjesLotAdmission."
     ],
-    "minimalNextImplementation": "Compile non-price admission first for resolved Audi A4, with actual editorial/calculation inputs, singleton identity evidence and context binding. Then expand to the global selection and independently implement delivered-price classes.",
-    "remainingInputs": [
-      "Complete current stats schema and serializer/numeric-domain contract",
-      "Verified singleton aggregate grammar and ID uniqueness or DISTINCT in that same operation",
-      "Current local editorial and encyclopedia admission context",
-      "Complete resolved source aliases"
+    "atomicOverrideForm": "source_scope AND wire_admission AND NOT hidden_identity AND ((NOT overridden_identity AND default_local_admission) OR (id=override_1 AND admission_with_override_1) OR ...)",
+    "compilerRequirementsOwnedByProject": [
+      "Use the existing readAjesPublicEvidenceSnapshot reader; the user must not provide our editorial database.",
+      "Compile the actual snapshot generically, with context digest and a before/after recheck; include every applicable identity override in the same SQL.",
+      "Preserve exact LIST/count resolved make/model scope and NULL/normalization semantics; do not replace token boundaries with substring exclusion.",
+      "For non-price counts compile only admission-relevant local body/GVWR/hidden rules, without power buckets or price formulas.",
+      "Prove compiler equivalence against the real ajesLot/applyAjesLotAdmission evaluator on controlled adversarial rows and local fact fixtures.",
+      "Constant-fold constraints made impossible by a known make/model selection and enforce the existing 6000-byte transport compatibility budget without truncating predicates.",
+      "Bind any accepted total to executed SQL, local evidence version and original source observation; pass the ordinary authorized endpoint acceptance before activation."
     ],
-    "knownLimitations": [
-      "Full positive admitted count is not implemented",
-      "Exact delivered-price/budget/hasPrice count is not implemented",
-      "Unknown-count page filling still has the existing read budget",
-      "Delivered-price order remains local to each loaded batch"
-    ]
+    "minimalExternalContract": [
+      "stats ID domain and row identity uniqueness, or another already-supported atomic unique-vehicle aggregate; COUNT(*) alone otherwise counts rows.",
+      "Types and canonical domains for ID, YEAR, AUCTION_TYPE, STATUS, FINISH, MARKA_NAME, MODEL_NAME and GRADE; in particular numeric coercion and serializer text normalization must agree with the application predicates.",
+      "Whether BODY_TYPE and VEHICLE_CATEGORY exist and can be emitted, their null/omission semantics and values. Documented absence is sufficient to fold them to empty; one LIST page with missing keys is not that proof.",
+      "For local fact matching where relevant: KUZOV, ENG_V, PRIV, KPP, TIME and legacy FUEL presence/domain. Only predicates actually needed by the frozen snapshot need these dimensions.",
+      "A verified way to express the residual text/token predicates in one ordinary aggregate, or a canonical field-domain guarantee that makes existing equality/LIKE predicates exactly equivalent. SUM/CASE/subquery support is not intrinsically required.",
+      "The endpoint must evaluate the compiled COUNT as one source observation. This does not require a separately transported snapshot token."
+    ],
+    "scopeComparison": {
+      "globalJapan": "All raw vehicle exclusions and all applicable local admission families remain. An arbitrary complete Boolean compiler is not yet shown to fit the existing transport budget.",
+      "AudiA4": "Unrelated make and known-heavy-family branches can be folded away, leaving more transport room; raw grade/body/category, strict wire validity, hidden identities and relevant local body/GVWR still cannot be assumed absent.",
+      "firstPracticalTarget": "An ordinary non-power/non-price Audi A4 count after the minimal source field contract and snapshot compiler are validated. This is an implementation target, not an already-supported exact producer.",
+      "fullUserGoal": "Power/local-priority/unknown and delivered-price/budget filters still need their own exact predicates. Success for plain/A4 alone would not finish the full goal."
+    },
+    "controlledOfflineCounterexample": {
+      "notLiveData": true,
+      "sourceScope": {
+        "make": "AUDI",
+        "model": "A4"
+      },
+      "sourceRawSqlCount": 5,
+      "realAdmissionCount": 2,
+      "accepted": [
+        "normal A4",
+        "A4 grade BUSINESS"
+      ],
+      "rejected": [
+        "A4 raw BODY_TYPE coach",
+        "A4 raw VEHICLE_CATEGORY M2",
+        "A4 grade BUS"
+      ],
+      "validation": "Actual ajesQuery WHERE executed in an in-memory SQLite fixture; actual ajesLot and applyAjesLotAdmission evaluated the same five controlled rows with an empty editorial/index snapshot.",
+      "implication": "Even A4 needs the remaining admission clauses. LIKE %BUS% would also wrongly exclude BUSINESS."
+    },
+    "ordinaryZeroIntegration": {
+      "finding": "81c used unverified DISTINCT/BINARY even for zero. The separately authorized patch now uses ordinary COUNT(*) and derives distinct zero only after validated total zero; positive counts still refuse.",
+      "focusedTests": "86/86 PASS",
+      "typecheck": "web tsc exit0",
+      "diffCheck": "PASS",
+      "logs": [
+        "/tmp/japan-ordinary-count-red.log",
+        "/tmp/japan-ordinary-count-focused.log",
+        "/tmp/japan-ordinary-count-tsc.log"
+      ],
+      "savedCountReconstruction": "/workspace/scratch/2e6cb753ec83/japan-count-sql-reconstruction.json",
+      "scopeCaveat": "Removing unverified DISTINCT/BINARY fixes the wire grammar only. Raw zero and a short LIST prove the full requested selection only where source predicates are a proven superset of final matching rows."
+    },
+    "sourceLocations": {
+      "wireAdmission": "AvtoCena-runtime/apps/web/lib/catalog/ajes-query.ts:ajesText,ajesLot,ajesQuery",
+      "localPipeline": "AvtoCena-runtime/apps/web/lib/catalog/ajes-admission.ts:applyAjesLotAdmission",
+      "finalVehicleAdmission": "AvtoCena-runtime/apps/web/lib/catalog/inventory-admission.ts:catalogVehicleExcluded",
+      "rawVehicleRules": [
+        "AvtoCena-runtime/apps/web/lib/catalog/japan-vehicle-policy.ts",
+        "AvtoCena-runtime/apps/web/lib/catalog/motorcycle-policy.ts"
+      ],
+      "localFacts": "AvtoCena-runtime/apps/web/lib/encyclopedia/calculation-index.ts:applyAnnualEncyclopediaCalculation",
+      "identityOverrides": "AvtoCena-runtime/apps/web/lib/catalog/editorial.ts:matchingEditorial,applyCatalogEditorialSpecifications"
+    },
+    "controlledSourceSupersetCounterexamples": {
+      "notLiveData": true,
+      "supplierRequests": 0,
+      "method": "Actual ajesQuery executed on controlled rows in in-memory SQLite, followed by actual ajesLot, applyAjesLotAdmission and ajesResultFilter; no source fetch.",
+      "strictFinalFilterCases": [
+        {
+          "selection": {
+            "color": "red"
+          },
+          "sourceValue": "white",
+          "frozenLocalChange": "editorial color red",
+          "sourceCount": 0,
+          "admittedFinalMatches": 1
+        },
+        {
+          "selection": {
+            "drive": "awd"
+          },
+          "sourceValue": "FF",
+          "frozenLocalChange": "editorial drive awd",
+          "sourceCount": 0,
+          "admittedFinalMatches": 1
+        },
+        {
+          "selection": {
+            "body": "pickup"
+          },
+          "sourceIdentity": "AUDI A4",
+          "frozenLocalChange": "editorial bodyType pickup",
+          "sourceCount": 0,
+          "admittedFinalMatches": 1
+        },
+        {
+          "selection": {
+            "fuel": "diesel"
+          },
+          "sourceIdentity": "VOLKSWAGEN PASSAT / 3CDFH / 1968 cc / empty TIME",
+          "frozenLocalChange": "existing factory-fuel reference diesel",
+          "sourceCount": 0,
+          "admittedFinalMatches": 1
+        }
+      ],
+      "separateTransmissionFinding": "Source KPP MT plus editorial automatic is omitted by automatic source SQL. ajesResultFilter has no transmission postcheck; distinguish this display/filter contract defect from the four explicitly final-value checks above.",
+      "candidateNarrowContainment": "Use one source-superset eligibility guard for zero-count cache/producer and single-LIST exact inference on the demonstrated unsafe pushdown dimensions, while preserving useful cards and continuation. This containment is proposed for root review; not applied by this audit.",
+      "longerTermCorrection": "Compile source candidate exceptions or widen only the affected source predicates, then apply the final filter locally. Share identical candidate scope with count; no unbounded source walk or fabricated exact total."
+    }
   },
   "fullVerificationBeforeCompletenessFollowup": {
     "runtimeSha": "ece8a56c9a54bd80001ae0799823dcc18dfdf152",
@@ -399,15 +721,193 @@
     "backendCensusAccepted": false
   },
   "fullVerificationFinal": {
-    "runtimeSha": "81c80dc8cd0b9339ddf9bfc7e63037672d2fc9f5",
-    "runtimeTree": "afe84afb1bdc15d5935552c0e6db796aefbb90bc",
+    "runtimeSha": "7f7a316905cd8109352431ed4722108b3449c3ec",
+    "runtimeTree": "5854b591c0ee78e3aaa960f96b9a66b9c5b4175c",
     "controller": {
-      "tests": 1765,
-      "passed": 1765,
+      "tests": 1767,
+      "passed": 1767,
       "failed": 0,
       "skipped": 0,
       "exitCode": 0,
-      "logSha256": "bbc3af5e2238c67f0b684c685cf2fc2896b6fb3d20ad04cdd3d0cb2caa6e99a4"
+      "logSha256": "2daae23288655608bc1ba14da1f68afddde30b1cf79183af03aa0233a1735d7c"
+    },
+    "native": {
+      "tests": 627,
+      "passed": 627,
+      "failed": 0,
+      "skipped": 0,
+      "exitCode": 0,
+      "logSha256": "843a5b91c8fec43b817abc90117caf7ae3b6bd3daca947cf8ebd968219a3c7cb"
+    },
+    "sourceProofSha256": "e67c80001fa939fcd28e2469e2dc613125b420cb12df9d0612d1081f881ac718",
+    "protectedSourceVerified": true,
+    "browserRun": false,
+    "liveSourceAccepted": false,
+    "backendCensusAccepted": false
+  },
+  "remainingFilterCompleteness": {
+    "readBudgetIsFunctional": true,
+    "perResponseSourcePages": 8,
+    "perResponseTimeBudgetMs": 8000,
+    "globalInventoryCapClaimed": false,
+    "visitorCursorCanResume": true,
+    "sourceOffsetIsSnapshot": false,
+    "manualSourceCandidateGaps": true,
+    "deliveredPriceGlobalOrderImplemented": false,
+    "liveCounterexamplesClaimed": false,
+    "supplierRequests": 0
+  },
+  "mainObserved": {
+    "sha": "8de8515900c87633237f2eca816fe81945f286d9",
+    "observedAt": "2026-11-28T05:39:16Z",
+    "applicationActivationAttempted": false
+  },
+  "sourceScopeContainment": {
+    "version": 1,
+    "kind": "japan-source-scope-counterexamples-v1",
+    "runtimeBase": "81c80dc8cd0b9339ddf9bfc7e63037672d2fc9f5",
+    "scope": "Controlled offline inputs; actual source SQL executed in SQLite and actual application admission/filter functions. No claim that these exact rows exist at the live supplier.",
+    "supplierRequests": 0,
+    "applicationRequests": 0,
+    "cases": [
+      {
+        "case": "color",
+        "source": "COLOR white",
+        "local": "editorial color red",
+        "selection": {
+          "color": "red"
+        },
+        "postcheck": "matchesCatalogColor",
+        "sqlCount": 0,
+        "admittedRowsAfterActualLocalPipeline": 1,
+        "producerResult": "census_source_scope_unproven"
+      },
+      {
+        "case": "drive",
+        "source": "PRIV FF",
+        "local": "editorial drive awd",
+        "selection": {
+          "drive": "awd"
+        },
+        "postcheck": "matchesFilterSelection drive",
+        "sqlCount": 0,
+        "admittedRowsAfterActualLocalPipeline": 1,
+        "producerResult": "census_source_scope_unproven"
+      },
+      {
+        "case": "pickup",
+        "source": "AUDI A4 / 1.5 AT",
+        "local": "editorial bodyType pickup",
+        "selection": {
+          "body": "pickup"
+        },
+        "postcheck": "catalogBodyType",
+        "sqlCount": 0,
+        "admittedRowsAfterActualLocalPipeline": 1,
+        "producerResult": "census_source_scope_unproven"
+      },
+      {
+        "case": "fuel",
+        "source": "VOLKSWAGEN PASSAT / 3CDFH / 1968 cc / empty TIME",
+        "local": "existing factory fuel reference diesel",
+        "selection": {
+          "fuel": "diesel"
+        },
+        "postcheck": "matchesFilterSelection fuel",
+        "sqlCount": 0,
+        "admittedRowsAfterActualLocalPipeline": 1,
+        "producerResult": "census_source_scope_unproven"
+      },
+      {
+        "case": "transmission",
+        "source": "KPP MT",
+        "local": "editorial transmission automatic",
+        "selection": {
+          "transmission": "automatic"
+        },
+        "postcheck": "Absent; displayed-field criterion completeness remains unproved",
+        "sqlCount": 0,
+        "admittedRowsAfterActualLocalPipeline": 1,
+        "producerResult": "census_source_scope_unproven"
+      },
+      {
+        "case": "engine",
+        "source": "ENG_V 0 / AUDI A4 / 2023 / 1.5 AT",
+        "local": "eligible controlled encyclopedia reference fills engineCc 1490",
+        "selection": {
+          "engineFrom": "1400",
+          "engineTo": "1600"
+        },
+        "postcheck": "Absent; displayed-field criterion completeness remains unproved",
+        "sqlCount": 0,
+        "admittedRowsAfterActualLocalPipeline": 1,
+        "producerResult": "census_source_scope_unproven"
+      }
+    ],
+    "guard": {
+      "name": "ajesSourceScopeSupportsExactCount",
+      "parameter": "actual AjesQuery",
+      "blockedSourceDimensions": [
+        "color",
+        "fuel",
+        "drive",
+        "transmission",
+        "pickup",
+        "engineFrom",
+        "engineTo"
+      ],
+      "placements": [
+        "readAjesCountSummary before directory/cache/COUNT",
+        "readAjesCensusCount before zero proof",
+        "singleObservation before inferring exact count from short LIST"
+      ],
+      "preservedVerifiedZeroScopes": [
+        "plain",
+        "make/model",
+        "power-only",
+        "post-only budget",
+        "post-only body sedan",
+        "hasPrice"
+      ],
+      "positiveSourceCount": "still unavailable; no positive exact proof introduced",
+      "pageBehavior": "useful rows remain available; guard itself does not remove rows or source continuation"
+    },
+    "validation": {
+      "redTests": 2,
+      "redFailures": 2,
+      "focused": {
+        "tests": 109,
+        "pass": 109,
+        "fail": 0
+      },
+      "webTypecheckExit": 0,
+      "diffCheckExit": 0,
+      "logs": [
+        "/tmp/japan-count-superset-red.log",
+        "/tmp/japan-count-superset-focused.log",
+        "/tmp/japan-count-superset-tsc.log"
+      ]
+    },
+    "filesSha256": {
+      "apps/web/lib/catalog/ajes-catalog.ts": "6d075df4229adde8517165581630c8b6ed697e4f478e179e87a43b39117ff22c",
+      "apps/web/lib/catalog/ajes-census.ts": "21b937da0e7c8e87d16f3f36cb1680730ec8454c6380137d411fb998a92bfe91",
+      "tests/ajes-census.test.ts": "a171573a284c96e476ed68ec53c3d89c7d94ccf7561f9e45ea727fb94e73e7f1",
+      "tests/japan-source-power.test.ts": "1cd44c1f62078479e69442303f1e8261f0c3304695e7f58e13a94cea7775b781",
+      "tests/ajes-model-recovery.test.ts": "ae480a4900e26f132b70a60797ad0f4abef1aa8fbac87a0e3d4f5936b71bfb06"
+    },
+    "remainingWork": "The guard prevents false completeness claims. Candidate-superset fixes and complete positive atomic count compilation remain work to finish the full user goal.",
+    "testedTreeBeforeOutwardStatusFollowup": "fd5e5ec019d1cd4a0e8d4036300b500500589ebe"
+  },
+  "fullVerificationBeforeFinalScopeFollowup": {
+    "runtimeSha": "81c80dc8cd0b9339ddf9bfc7e63037672d2fc9f5",
+    "runtimeTree": "afe84afb1bdc15d5935552c0e6db796aefbb90bc",
+    "controller": {
+      "tests": 1767,
+      "passed": 1767,
+      "failed": 0,
+      "skipped": 0,
+      "exitCode": 0,
+      "logSha256": "2daae23288655608bc1ba14da1f68afddde30b1cf79183af03aa0233a1735d7c"
     },
     "native": {
       "tests": 611,

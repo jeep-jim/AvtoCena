@@ -3,9 +3,9 @@
   "market": "china",
   "minimumYear": 2014,
   "retainedRuntime": "20fd18d12b3f5c7aabef860e1b53da0d505dfd64",
-  "runtimeSha": "81c80dc8cd0b9339ddf9bfc7e63037672d2fc9f5",
-  "runtimeTree": "afe84afb1bdc15d5935552c0e6db796aefbb90bc",
-  "runtimeDiffSha256": "5633426cdb8ea8b3e9e7b3bf74e49752f90ff1bdf4fa9a8a4058adcc9bdc57ec",
+  "runtimeSha": "7f7a316905cd8109352431ed4722108b3449c3ec",
+  "runtimeTree": "5854b591c0ee78e3aaa960f96b9a66b9c5b4175c",
+  "runtimeDiffSha256": "a6bd28e6ec1f2462cc5292311e97c2ff15ea8facdf66029ce12adb4deccb8ba9",
   "runtimeFiles": [
     "apps/web/components/catalog/AjesCatalog.tsx",
     "apps/web/components/catalog/AjesRail.tsx",
@@ -68,7 +68,7 @@
   },
   "pricingRuntimeSha": "64c6338e0db23c8999096bceefbf113c0136fe15",
   "pricingRuntimeTree": "d2fc1f171316bfb0dc76f09e90409d4d7336f6b3",
-  "pricingToServingDiffSha256": "bba11adbe477bee4bbd138ac732cf04a086a1b6eda89a14111cbff524e2d21c1",
+  "pricingToServingDiffSha256": "6a1d0f7435330c95b08b7ab40643d3f82a5a338af6f8be13e1af499ce530066d",
   "pricingToServingFiles": [
     "apps/web/app/(crm)/api/crm/china-catalog-status/route.ts",
     "apps/web/app/(public)/cars/offer/[id]/page.tsx",
