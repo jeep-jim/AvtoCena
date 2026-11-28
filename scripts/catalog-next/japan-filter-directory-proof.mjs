@@ -10,6 +10,7 @@ const VISIBLE_FALLBACK_CASES = [...SOURCE_NAME_CASES,
   'brand-directory-fresh-empty-visible-and-retry',
   'brand-directory-stale-visible-and-retry',
   'brand-directory-error-visible-and-retry'];
+const LITERAL_FAMILY_CASES = [...VISIBLE_FALLBACK_CASES, 'audi-family-stale-failed-retry-and-explicit-make'];
 const need = (value, code) => { if (!value) throw Error('japan_filter_directory_' + code); };
 const exact = (value, keys) => {
   if (!value || typeof value !== 'object' || Array.isArray(value)) return false;
@@ -18,14 +19,15 @@ const exact = (value, keys) => {
     && Reflect.ownKeys(fields).every(key => typeof key === 'string' && keys.includes(key));
 };
 
-export function checkedJapanFilterDirectoryFixture(value, {requireSourceNames = false, requireVisibleFallback = false} = {}) {
+export function checkedJapanFilterDirectoryFixture(value, {requireSourceNames = false, requireVisibleFallback = false, requireLiteralFamily = false} = {}) {
   need(exact(value, ['passed', 'scope', 'cases']) && value.passed === true && value.scope === SCOPE
-    && Array.isArray(value.cases) && [8, 12, 18].includes(value.cases.length), 'fixture');
-  const names = value.cases.length >= 12, fallback = value.cases.length === 18;
+    && Array.isArray(value.cases) && [8, 12, 18, 20].includes(value.cases.length), 'fixture');
+  const names = value.cases.length >= 12, fallback = value.cases.length >= 18, literalFamily = value.cases.length === 20;
   need(typeof requireSourceNames === 'boolean' && (!requireSourceNames || names), 'source_names_required');
   need(typeof requireVisibleFallback === 'boolean' && (!requireVisibleFallback || fallback), 'visible_fallback_required');
+  need(typeof requireLiteralFamily === 'boolean' && (!requireLiteralFamily || literalFamily), 'literal_family_required');
   const expected = new Set([390, 1440].flatMap(width =>
-    (fallback ? VISIBLE_FALLBACK_CASES : names ? SOURCE_NAME_CASES : CASES).map(name => width + ':' + name)));
+    (literalFamily ? LITERAL_FAMILY_CASES : fallback ? VISIBLE_FALLBACK_CASES : names ? SOURCE_NAME_CASES : CASES).map(name => width + ':' + name)));
   for (const row of value.cases) {
     need(exact(row, ['width', 'name', 'passed']) && row.passed === true
       && typeof row.width === 'number' && typeof row.name === 'string'
