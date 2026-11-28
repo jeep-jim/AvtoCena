@@ -1,6 +1,8 @@
 import {createHash} from 'node:crypto';
 import {AjesUnavailable} from './ajes-client';
 import {AjesInputError,AjesCursorRefreshRequired} from './ajes-query';
+import {japanSourceSelectionSql} from './japan-source-selection-sql';
+import type {AjesSourceSelection} from './japan-source-selection';
 
 type SourcePage<T> = {items:T[]; received:number; partial?:boolean; stale?:boolean; observedAt?:string};
 const digest=(value:unknown)=>createHash('sha256').update(JSON.stringify(value)).digest('hex');
@@ -14,8 +16,11 @@ export async function readFilteredAjesPage<T>(options:{
  startedAt?:number; page:number; pageSize:number; after?:unknown; sourceTotal?:number;
  read:(page:number)=>Promise<SourcePage<T>>; now?:()=>number;
  minimumReads?:1|2; cursorKey?:string; itemKey?:(item:T)=>string;fillRequestedPage?:boolean;
+ sourceSelection?:AjesSourceSelection;
 }) {
  const {pageSize,read}=options,now=options.now??Date.now,started=options.startedAt??now();
+ const sourceScoped=options.sourceSelection!==undefined;
+ if(sourceScoped)japanSourceSelectionSql(options.sourceSelection!);
  const bound=options.cursorKey!==undefined&&options.itemKey!==undefined;
  const queryHash=bound?digest([pageSize,options.cursorKey]):undefined;
  let sourcePage=options.page,skip=0,expectedMembership:string|undefined;
@@ -42,7 +47,9 @@ export async function readFilteredAjesPage<T>(options:{
  let membership:string|undefined,observedAt:string|undefined,observedTime=Infinity;
  const minimumReads=options.minimumReads===2?2:1;
  // A separately observed count cannot authorize an unbounded source walk.
- while(reads<8&&(reads<minimumReads||now()-started<8000)){
+ // Validated source predicates may fill a slow requested page, but retain the
+ // same eight-read ceiling. A legacy fill boolean cannot extend either bound.
+ while(reads<8&&(sourceScoped||reads<minimumReads||now()-started<8000)){
   let result:SourcePage<T>;
   try{result=await read(sourcePage);}catch(error){
    const recoverable=error instanceof AjesUnavailable&&(/^(?:http_(?:429|5\d\d)|visitor_restricted|quota_exhausted|quota_busy|local_busy|request_failed|request_timeout|connect_timeout|invalid_response|empty_response)$/.test(error.reason));
@@ -102,8 +109,9 @@ export function assertAjesPowerCursorEpoch(options:{page:number;pageSize:number;
   ||match[6]!==options.evidenceEpoch||(Number(match[3])===0)!==(match[7]==='-'))throw new AjesCursorRefreshRequired();
 }
 
-/** Visitor-driven K then U traversal of the unchanged source query. There is
- * one read/start-time budget across both phases; no eager scan or saved mirror.
+/** Visitor-driven K then U traversal. Resolved candidate queries narrow each
+ * phase before LIMIT; the legacy reader keeps its unchanged raw query. Both
+ * phases share one read budget, with no eager scan or saved vehicle mirror.
  * A stale/partial page remains at its exact offset until a fresh read confirms
  * its membership. Only fresh, complete source exhaustion can start U.
  */
@@ -112,9 +120,12 @@ export async function readPowerOrderedAjesPage<T>(options:{
  read:(page:number,phase:PowerPhase)=>Promise<SourcePage<T>>;known:(item:T)=>boolean;itemKey:(item:T)=>string;
  // Legacy count hints cannot skip a phase or extend the shared read budget.
  now?:()=>number;minimumReads?:1|2;fillRequestedPage?:boolean;knownTotal?:number;
+ sourceSelection?:AjesSourceSelection;
 }) {
  assertAjesPowerCursorEpoch(options);
  const {pageSize,read}=options,now=options.now??Date.now,started=options.startedAt??now();
+ const sourceScoped=options.sourceSelection!==undefined;
+ if(sourceScoped)japanSourceSelectionSql(options.sourceSelection!,'k');
  const queryHash=digest([pageSize,options.cursorKey,'japan-known-before-unknown-v1']);
  let phase:PowerPhase='k',sourcePage=1,skip=0,expectedMembership:string|undefined;
  if(options.after){
@@ -127,8 +138,10 @@ export async function readPowerOrderedAjesPage<T>(options:{
  let exhausted=false,partial=false,stale=false,interrupted=false,reads=0;
  let membership:string|undefined,observedAt:string|undefined,observedTime=Infinity;
  const minimumReads=options.minimumReads===2?2:1;
- // Both phases share the same limit, regardless of any count observation.
- while(reads<8&&(reads<minimumReads||now()-started<8000)){
+ // Both phases share the same eight-read limit, regardless of a count. Only a
+ // validated candidate scope can fill despite slow reads; no broad scan gains
+ // extra time merely because its caller passes an old fill/count hint.
+ while(reads<8&&(sourceScoped||reads<minimumReads||now()-started<8000)){
   let result:SourcePage<T>;
   try{result=await read(sourcePage,phase);}catch(error){
    const recoverable=error instanceof AjesUnavailable&&(/^(?:http_(?:429|5\d\d)|visitor_restricted|quota_exhausted|quota_busy|local_busy|request_failed|request_timeout|connect_timeout|invalid_response|empty_response)$/.test(error.reason));

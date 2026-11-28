@@ -25,6 +25,7 @@ import { normalizeVehicleOfferSpecs } from "@/lib/catalog/spec-normalization";
 import { isSellerPricedOffer } from "@/lib/catalog/seller-price-contract";
 import { catalogMarketLabel } from "@/lib/catalog/runtime-config";
 import { catalogPowerDisplay } from "@/lib/catalog/power-display";
+import { catalogBodyType } from "@/lib/catalog/pickup-body";
 import { catalogOfferVisibleRub } from "@/lib/catalog/public-priority";
 import { readCatalogPowerScenario } from "@/lib/catalog/power-scenario";
 import { FavoriteToggle } from "@/components/catalog/FavoriteToggle";
@@ -132,7 +133,7 @@ export function CatalogCard({ offer, compact = false, dense = false, eagerPrefet
   const auctionPrice=auctionPriceJpy===null?null:<div data-japan-auction-price-jpy={auctionPriceJpy} className="mb-2 text-[15px] font-black text-[var(--ac-text)] sm:text-xl"><span className="text-[10px] font-bold text-[var(--ac-muted)] sm:text-xs">Аукцион: </span>{new Intl.NumberFormat('ru-RU',{maximumFractionDigits:2}).format(auctionPriceJpy)} ¥</div>;
 
   if(publicationWithdrawn(offer))return null;
-  if(view==="list") return <article className="ac-catalog-list-row" data-japan-power-phase={japanPowerPhase} data-green-corner={isGreenCornerOffer(offer)?"true":undefined}>
+  if(view==="list") return <article className="ac-catalog-list-row" data-catalog-body-type={catalogBodyType(normalizedOffer)||undefined} data-japan-power-phase={japanPowerPhase} data-green-corner={isGreenCornerOffer(offer)?"true":undefined}>
     <div className="ac-catalog-list-link">
       <IntentPrefetchLink href={href} eager={eagerPrefetch} className="ac-list-photo">{imageUrl?<CatalogCover src={imageUrl} alt={o.title} eager={eagerPrefetch}/>:<span>Нет фото</span>}</IntentPrefetchLink>
       <div className="ac-list-identity"><IntentPrefetchLink href={href} eager={eagerPrefetch}><strong>{o.title}</strong></IntentPrefetchLink><span>{retro?"Ретро · ":""}{priceLabel} · {o.marketLabel}</span>{normalizedOffer.auctionName&&<small title={String(normalizedOffer.auctionName)}>Аукцион · {String(normalizedOffer.auctionName)}</small>}</div>
@@ -143,7 +144,7 @@ export function CatalogCard({ offer, compact = false, dense = false, eagerPrefet
     </div><FavoriteToggle offerId={o.id} compact snapshot={snapshot} className="ac-list-favorite"/>
   </article>;
   return (
-    <article data-japan-power-phase={japanPowerPhase} data-green-corner={isGreenCornerOffer(offer) ? "true" : undefined} className="ac-catalog-card group relative min-w-0 overflow-visible rounded-[1.35rem] bg-white/[0.045]">
+    <article data-catalog-body-type={catalogBodyType(normalizedOffer)||undefined} data-japan-power-phase={japanPowerPhase} data-green-corner={isGreenCornerOffer(offer) ? "true" : undefined} className="ac-catalog-card group relative min-w-0 overflow-visible rounded-[1.35rem] bg-white/[0.045]">
       <IntentPrefetchLink href={href} eager={eagerPrefetch} className="block overflow-hidden rounded-[1.35rem]">
         <div className={`relative overflow-hidden bg-white/[0.04] ${mediaHeight}`}>
           {imageUrl ? <CatalogCover src={imageUrl} alt={o.title} eager={eagerPrefetch} /> : <div className="flex h-full items-center justify-center text-xs font-black text-white/35 sm:text-sm">Фото загружается</div>}

@@ -1,4 +1,5 @@
 import {catalogBodyType} from './pickup-body';
+import {japanSourceBody} from './japan-source-body';
 import {JAPAN_MIN_MODEL_YEAR} from './japan-year-policy';
 import type {VehicleOffer} from './types';
 import type {CurrencyRateSnapshot} from './rates';
@@ -8,10 +9,11 @@ export const ajesOfferId=(id:string)=>/^ajes-stats-[A-Za-z0-9_-]{1,64}$/.test(id
 export function ajesOffer(lot:NonNullable<ReturnType<typeof ajesLot>>,rate:CurrencyRateSnapshot,observedAt:string):VehicleOffer {
  if(lot.table!=='stats'||!lot.finalPriceJpy||lot.year<JAPAN_MIN_MODEL_YEAR||!['cbr','cbr_live'].includes(rate.rateSource)||rate.currency!=='JPY'||rate.sourcePrice!==lot.finalPriceJpy||!(rate.effectiveRate>0))throw Error('ajes_invalid_offer');
  const fuel=({P:'petrol',D:'diesel',E:'electric',H:'hybrid',HE:'hybrid',L:'lpg',C:'cng'} as Record<string,string>)[ajesText(lot.sourceFuel).toUpperCase()];
+ const bodyType=japanSourceBody(lot.sourceBody);
  const sellerPriceRub=Math.round(lot.finalPriceJpy*rate.effectiveRate);
  return {id:`ajes-stats-${lot.id}`,sourceId:'ajes_japan_feed',sourceOfferId:lot.id,market:'japan',offerType:'auction',status:'sold',catalogKind:'auction_result',auctionResult:'sold',auctionPriceKind:'published_result',
  make:ajesText(lot.make),model:ajesText(lot.model),trim:ajesText(lot.trim),year:lot.year,mileageKm:lot.mileageKm??undefined,engineCc:lot.engineCc||undefined,
- fuel,bodyType:catalogBodyType({make:lot.make,model:lot.model,trim:lot.trim,year:lot.year})||undefined,sourceTitle:[lot.make,lot.model,lot.trim].filter(Boolean).join(' '),
+ fuel,bodyType:bodyType||catalogBodyType({make:lot.make,model:lot.model,trim:lot.trim,year:lot.year})||undefined,sourceTitle:[lot.make,lot.model,lot.trim].filter(Boolean).join(' '),
  powertrainKind:ajesText(lot.sourceFuel).toUpperCase()==='HE'?'series_hybrid':ajesText(lot.sourceFuel).toUpperCase()==='E'?'electric':undefined,
  transmission:({AT:'automatic',MT:'manual',CVT:'cvt',DCT:'dct'} as Record<string,string>)[ajesText(lot.sourceTransmission).toUpperCase()],
  drive:({FF:'fwd',FR:'rwd',FWD:'fwd',RWD:'rwd',AWD:'awd','4WD':'awd',FULLTIME4WD:'awd'} as Record<string,string>)[ajesText(lot.sourceDrive).toUpperCase()],
@@ -20,6 +22,6 @@ export function ajesOffer(lot:NonNullable<ReturnType<typeof ajesLot>>,rate:Curre
  calculationSnapshot:{currencyRate:rate,sourcePriceRub:sellerPriceRub,pricingConfidence:'unavailable'},
  images:lot.images.map((img,i)=>({id:`ajes-${lot.id}-${i}`,url:img.role==='auction_sheet'?img.originalUrl:img.url,role:img.role as 'vehicle'|'auction_sheet',objectKey:'',size:0,checksum:'',mimeType:''})),
  firstSeenAt:observedAt,updatedAt:observedAt,
- operational:{chassisCode:lot.chassisCode,auctionTown:lot.auctionTown,sourceEquipment:lot.equipment,sourceTransmissionCode:lot.transmissionCode,semanticEvidence:{...(lot.engineCc&&lot.engineCc>0?{engineCc:{status:'exact',value:lot.engineCc,source:`ajes:${lot.table}:${lot.id}:ENG_V`,rawValues:[String(lot.engineCc)]}}:{}),...(fuel?{fuel:{status:'exact',value:fuel,source:`ajes:${lot.table}:${lot.id}:${lot.sourceFuelField||'FUEL'}`,rawValues:[lot.sourceFuel]}}:{})},publicJapanSoldIdentityVerified:true,publicJapanSoldPriceVerified:true,raw:{auctionResult:true,finalPriceJpy:lot.finalPriceJpy,sourcePower:lot.sourcePower,sourceDrive:lot.sourceDrive,sourceFuel:lot.sourceFuel,sourceFuelField:lot.sourceFuelField,sourceTransmission:lot.sourceTransmission,chassisCode:lot.chassisCode}},
+ operational:{chassisCode:lot.chassisCode,auctionTown:lot.auctionTown,sourceEquipment:lot.equipment,sourceTransmissionCode:lot.transmissionCode,semanticEvidence:{...(lot.engineCc&&lot.engineCc>0?{engineCc:{status:'exact',value:lot.engineCc,source:`ajes:${lot.table}:${lot.id}:ENG_V`,rawValues:[String(lot.engineCc)]}}:{}),...(fuel?{fuel:{status:'exact',value:fuel,source:`ajes:${lot.table}:${lot.id}:${lot.sourceFuelField||'FUEL'}`,rawValues:[lot.sourceFuel]}}:{}),...(bodyType?{bodyType:{status:'exact',value:bodyType,source:`ajes:${lot.table}:${lot.id}:BODY_TYPE`,rawValues:[lot.sourceBody]}}:{})},publicJapanSoldIdentityVerified:true,publicJapanSoldPriceVerified:true,raw:{auctionResult:true,finalPriceJpy:lot.finalPriceJpy,sourcePower:lot.sourcePower,sourceBody:lot.sourceBody,sourceDrive:lot.sourceDrive,sourceFuel:lot.sourceFuel,sourceFuelField:lot.sourceFuelField,sourceTransmission:lot.sourceTransmission,chassisCode:lot.chassisCode}},
  };
 }

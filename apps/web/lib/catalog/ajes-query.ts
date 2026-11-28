@@ -1,5 +1,7 @@
 import type {CalculationIndex} from '../encyclopedia/calculation-index';
 import {pickupSourceCandidateSql} from './pickup-body';
+import {japanSourceSelectionSql} from './japan-source-selection-sql';
+import type {AjesSourceSelection} from './japan-source-selection';
 import {japanDriveSql} from './japan-drive';
 import {auctionSaleRange} from "./auction-sale-period";
 import {japanMakeSqlExclusion,japanVehicleTypeExcluded,japanVehicleFamilySqlExclusion,japanVehicleFamilyCacheSqlExclusion,japanHeavyVehicleSqlExclusion} from './japan-vehicle-policy';
@@ -29,8 +31,8 @@ export type AjesResolvedMakes = {exact:string[]};
 export const AJES_CENSUS_FIELDS = ['MARKA_NAME','MODEL_NAME','YEAR','GRADE','KUZOV','ENG_V','PRIV','KPP','TIME','PW','STATUS','COLOR','BODY_TYPE','VEHICLE_CATEGORY','FUEL'] as const;
 export type AjesCensusField = typeof AJES_CENSUS_FIELDS[number];
 export const AJES_CENSUS_REQUIRED_FIELDS = AJES_CENSUS_FIELDS.slice(0,12);
-export type AjesQuery = {pickup?:boolean;salePeriod?:string; table?: AjesTable; aggregate?: 'count'|'models'|'makes'|'colors'|'census'; countIdentity?:boolean; censusFields?:AjesCensusField[]; correctionId?:string; sort?: string; color?:string; fuel?:string; transmission?:string; drive?:string; auctionGrade?:string; id?: string; make?: string; resolvedMakes?:AjesResolvedMakes; model?: string; modelFamilies?:string; resolvedModels?:AjesResolvedModels; chassis?:string; frameNumber?:string; lotNumber?:string; sourcePriceTo?:number; powerFrom?:number; powerTo?:number; yearFrom?: number; yearTo?: number; mileageFrom?:number; mileageTo?: number; engineFrom?:number; engineTo?:number; page?: number; pageSize?: number};
-const keys = new Set(['pickup','salePeriod','aggregate','countIdentity','censusFields','correctionId','sort','color','fuel','transmission','drive','auctionGrade','table','id','make','resolvedMakes','model','modelFamilies','resolvedModels','chassis','frameNumber','lotNumber','sourcePriceTo','powerFrom','powerTo','yearFrom','yearTo','mileageFrom','mileageTo','engineFrom','engineTo','page','pageSize']);
+export type AjesQuery = {sourceSelection?:AjesSourceSelection;sourcePhase?:'k'|'u';pickup?:boolean;salePeriod?:string; table?: AjesTable; aggregate?: 'count'|'models'|'makes'|'colors'|'census'; countIdentity?:boolean; censusFields?:AjesCensusField[]; correctionId?:string; sort?: string; color?:string; fuel?:string; transmission?:string; drive?:string; auctionGrade?:string; id?: string; make?: string; resolvedMakes?:AjesResolvedMakes; model?: string; modelFamilies?:string; resolvedModels?:AjesResolvedModels; chassis?:string; frameNumber?:string; lotNumber?:string; sourcePriceTo?:number; powerFrom?:number; powerTo?:number; yearFrom?: number; yearTo?: number; mileageFrom?:number; mileageTo?: number; engineFrom?:number; engineTo?:number; page?: number; pageSize?: number};
+const keys = new Set(['sourceSelection','sourcePhase','pickup','salePeriod','aggregate','countIdentity','censusFields','correctionId','sort','color','fuel','transmission','drive','auctionGrade','table','id','make','resolvedMakes','model','modelFamilies','resolvedModels','chassis','frameNumber','lotNumber','sourcePriceTo','powerFrom','powerTo','yearFrom','yearTo','mileageFrom','mileageTo','engineFrom','engineTo','page','pageSize']);
 /** These fixed predicates select the same raw rows. Sharing their cache identity
  * lets local power changes reuse an already requested page without another AJ read.
  * Keep the actual compact SQL on the wire for the existing URI-size boundary.
@@ -100,10 +102,10 @@ export function ajesQuery(input: unknown,driveIndex:CalculationIndex|null=null) 
   where.push("marka_name!=''","model_name!=''");
   // Restore the older =/LIKE grammar for plain/model/filter directories while
   // grouping identical families to stay below the existing URI budget. This
-  // does not establish a supplier-wide REGEXP restriction. Explicit drive keeps
-  // its existing compact form: its unchanged drive clause also uses REGEXP and
-  // expanding both predicates would exceed the 6000-byte URI compatibility budget.
-  where.push(q.drive?heavyVehicleSqlExclusion(false,false,true):japanHeavyVehicleSqlExclusion(),motorcycleSqlExclusion());
+  // does not establish a supplier-wide REGEXP restriction. Drive and the new
+  // internal candidate selections retain the equivalent compact form; their
+  // own predicates already use REGEXP and need room within the URI budget.
+  where.push(q.drive||q.sourceSelection?heavyVehicleSqlExclusion(false,false,true):japanHeavyVehicleSqlExclusion(),motorcycleSqlExclusion());
   where.push(japanMakeSqlExclusion(),japanVehicleFamilySqlExclusion());
   for(const [column,parts] of [['marka_name',makes]] as const){if(parts.length===1)where.push(`${column}='${parts[0]}'`);else if(parts.length)where.push(`${column} in (${parts.map(v=>`'${v}'`).join(',')})`);}
   const exactModels=models.length>1?`model_name in (${models.map(v=>`'${v}'`).join(',')})`:models.length?`model_name='${models[0]}'`:null;
@@ -137,11 +139,18 @@ export function ajesQuery(input: unknown,driveIndex:CalculationIndex|null=null) 
   if(q.powerFrom!==undefined||q.powerTo!==undefined){
     const low=integer(q.powerFrom,1,1,2500),high=integer(q.powerTo,2500,1,2500);
     if(low>high)throw new AjesInputError();
-    // PW is integer hp, but source SQL cannot preserve contradictory local/manual
-    // overrides. Keep the raw candidate page shared with the unfiltered query;
-    // apply power and explicit unknown inclusion after local enrichment.
-    // The bounded post-filter below prevents an unbounded scan of supplier pages.
+    // Raw queries and independent counts retain their established cache scope.
+    // The internal descriptor below includes every resolved local/manual power
+    // candidate as well as supplier PW; final enrichment remains authoritative.
   }
+  // Only an internal, validated descriptor can narrow K/U or body candidates.
+  // Public URL parsing never accepts it. COUNT confirmation inherits the exact
+  // phase predicate; ordinary catalogue totals and directories stay independent.
+  if(q.sourceSelection!==undefined){
+    if(table!=='stats'||q.aggregate!==undefined&&q.aggregate!=='count')throw new AjesInputError();
+    try{where.push(japanSourceSelectionSql(q.sourceSelection,q.sourcePhase));}
+    catch{throw new AjesInputError();}
+  }else if(q.sourcePhase!==undefined)throw new AjesInputError();
   if(q.aggregate!==undefined&&!['count','models','makes','colors','census'].includes(q.aggregate))throw new AjesInputError();
   if(q.censusFields!==undefined&&q.aggregate!=='census')throw new AjesInputError();
   if(q.countIdentity!==undefined&&(q.countIdentity!==true||q.aggregate!=='count'))throw new AjesInputError();
@@ -210,7 +219,7 @@ export function ajesLot(row: Record<string, unknown>, table: AjesTable, detail: 
     // Supplier confirmed 2026-10-16: TIME is the fuel field; FUEL is a legacy alias.
     // PW is integer hp serialized in varchar(30), confirmed by AJ in November 2026.
     // Preserve the wire value; strict discovery parsing must not invent components.
-    sourcePower:text('PW'),sourceDrive:text('PRIV'),sourceTransmission:text('KPP'),sourceFuel:text('TIME')||text('FUEL'),sourceFuelField:text('TIME')?'TIME':text('FUEL')?'FUEL':undefined,
+    sourcePower:text('PW'),sourceBody:text('BODY_TYPE'),sourceDrive:text('PRIV'),sourceTransmission:text('KPP'),sourceFuel:text('TIME')||text('FUEL'),sourceFuelField:text('TIME')?'TIME':text('FUEL')?'FUEL':undefined,
     info:detail?text('INFO'):undefined,
     sourceDate:undefined,
     sourceDetails:undefined,

@@ -5,7 +5,7 @@ import {createHash} from 'node:crypto';
 import {isIP} from 'node:net';
 import {gunzipSync} from 'node:zlib';
 import {DetailReadCache} from './detail-read-cache';
-import {ajesQuery,ajesLot,ajesText,ajesSourceCacheSql,type AjesTable,type AjesQuery} from './ajes-query';
+import {ajesQuery,ajesLot,ajesText,ajesSourceCacheSql,AjesInputError,AJES_CENSUS_FIELDS,type AjesTable,type AjesQuery} from './ajes-query';
 import {AjesUnavailable,assertAjesJapanTable} from './ajes-access-policy';
 
 export {AjesUnavailable} from './ajes-access-policy';
@@ -21,6 +21,7 @@ class AjesSavedRecovery {
 // block each other's count-failure recovery while occupying both queues.
 class AjesEmptyValidation extends AjesSavedRecovery {}
 const sourceTtlMs=30*60*1000;
+const savedSourceFieldNames=new Set<string>(['ID',...AJES_CENSUS_FIELDS,'AUCTION_TYPE','FINISH','START','IMAGES','EQUIP','KPP_TYPE','TOWN','SERIAL','MILEAGE','AUCTION','LOT','AUCTION_DATE','RATE','MONTH','INFO']);
 const sqlHash=(sql:string)=>createHash('sha256').update(sql).digest('hex');
 /** Observe an already rejected LIST, never admit or retain its rows. The same
  * ID text normalization and finite alphabet as ajesLot make adjacent-window
@@ -562,7 +563,48 @@ export function createAjesClient(deps:Dependencies) {
         return value;
       });
     }
-  return {read:async(input:unknown,clientIp:string)=>{
+  /** Inspect only an exact already-requested first LIST page. Schema discovery
+   * never spends supplier quota, obtains credentials or performs an AJ request.
+   * A missing/expired saved page leaves source schema unknown. */
+  async function readSavedSourceFields(input:unknown):Promise<string[]|undefined>{
+    assertAjesJapanTable(input&&typeof input==='object'?(input as AjesQuery).table:undefined);
+    const calculationIndex=deps.calculationIndex?.()||null;
+    const requested=ajesQuery(input,calculationIndex);
+    if(requested.kind!=='list')throw new AjesInputError();
+    // Validate the original input before replacing its page, so this metadata
+    // read cannot silently accept an invalid UI query or a retired table.
+    const query=requested.page===1?requested:ajesQuery({...input as AjesQuery,page:1},calculationIndex);
+    await deps.assertEnabled(query.table);
+    if(query.empty)return undefined;
+    const cacheSql=ajesSourceCacheSql(query.sql);
+    const fields=(value:any):string[]|undefined=>{
+      const age=Date.now()-Date.parse(value?.observedAt||'');
+      if(value?.schemaVersion!==2||value.page!==query.page||value.pageSize!==query.pageSize
+        ||!Number.isFinite(age)||age<0||age>=7*86400000||!Array.isArray(value.sourceFields)
+        ||value.sourceFields.some((field:unknown)=>typeof field!=='string'||!/^[A-Za-z_][A-Za-z0-9_]{0,63}$/.test(field)))return undefined;
+      return [...new Set<string>(value.sourceFields.map((field:string)=>field.toUpperCase()).filter((field:string)=>savedSourceFieldNames.has(field)))].sort();
+    };
+    for(const value of [cache.peekFresh(cacheSql),preparedReads.peekFresh(cacheSql)]){
+      const observed=fields(value);if(observed!==undefined)return observed;
+    }
+    if(!deps.readQuery)return undefined;
+    let saved:any;
+    try{
+      saved=await preparedReads.get(cacheSql,async()=>{
+        await deps.assertEnabled(query.table);
+        const value=await deps.readQuery!(cacheSql);
+        return fields(value)===undefined?null:value;
+      },cacheSql,'prepared');
+    }catch{
+      // Keep the switch authoritative even if it changed while storage was
+      // queued. Storage errors do not trigger a fallback scan or a source read.
+      await deps.assertEnabled(query.table);
+      return undefined;
+    }
+    await deps.assertEnabled(query.table);
+    return fields(saved);
+  }
+  return {readSavedSourceFields,read:async(input:unknown,clientIp:string)=>{
     const trace=startAjesReadTrace();
     try{
       const value=await read(input,clientIp,undefined,trace),sourceReceipt=finishAjesReadReceipt(trace,value);

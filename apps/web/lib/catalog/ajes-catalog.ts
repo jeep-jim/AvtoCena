@@ -22,6 +22,7 @@ import {DetailReadCache} from './detail-read-cache';
 import {ajesClient} from './ajes-runtime';
 import {AjesUnavailable,readAjesModelDirectory,readAjesMakeDirectory} from './ajes-client';
 import {readAjesPublic,cappedAjesQuery,readAjesPublicEvidenceSnapshot} from './ajes-public';
+import {readAjesSourceSelection} from './ajes-source-selection';
 import {ajesCatalogQuery,ajesQuery,AjesCursorRefreshRequired} from './ajes-query';
 export {ajesCatalogQuery,AjesFilterUnavailable} from './ajes-query';
 import {publicOffer} from './storage';
@@ -153,9 +154,11 @@ export async function readAjesCatalogPage(params:Record<string,unknown>,measure?
   if(changed)throw new AjesCursorRefreshRequired();
  };
  const powerIdentity=(offer:any)=>JSON.stringify([japanLocalPowerHp(offer)??null,japanSupplierPower(offer)?.hp??null,japanUnknownPower(offer)]);
- const {query,modelDirectoryUnavailable,makeDirectoryUnavailable}=await resolvedCatalogQuery(JSON.stringify(params));
- const selectionIncomplete=modelDirectoryUnavailable||makeDirectoryUnavailable;
- const sourceScopeUnproven=!ajesSourceScopeSupportsExactCount(query);
+ const {query:resolvedQuery,modelDirectoryUnavailable,makeDirectoryUnavailable}=await resolvedCatalogQuery(JSON.stringify(params));
+ const selectedSource=await readAjesSourceSelection(resolvedQuery,params,evidenceSnapshot);
+ const query=selectedSource.query;
+ const selectionIncomplete=modelDirectoryUnavailable||makeDirectoryUnavailable||selectedSource.selectionIncomplete;
+ const sourceScopeUnproven=!ajesSourceScopeSupportsExactCount(query)||!selectedSource.sourceScopeComplete;
  const sourceQuery=query;
  measure?.('query-resolution',performance.now()-resolveStarted);
  const startedAt=Date.now();
@@ -168,7 +171,7 @@ export async function readAjesCatalogPage(params:Record<string,unknown>,measure?
  measure?.('count',performance.now()-countStarted);
  const read=async(sourcePage:number,phase?:'k'|'u')=>{
   await checkEvidence();
-  const received=await readAjesPublic({...sourceQuery,page:sourcePage},{measure,evidenceSnapshot}).catch(error=>{
+  const received=await readAjesPublic({...sourceQuery,...(sourceQuery.sourceSelection&&phase?{sourcePhase:phase}:{}),page:sourcePage},{measure,evidenceSnapshot}).catch(error=>{
    if(error?.sourceReceipt)sourceReceipts.push(error.sourceReceipt);
    throw error;
   });
@@ -218,9 +221,9 @@ export async function readAjesCatalogPage(params:Record<string,unknown>,measure?
  const readPage=async(sourcePage:number,phase?:'k'|'u')=>{if(initial&&sourcePage===(query.page||1))return initial;const value=await read(sourcePage,phase);first??=value;return value;};
  const page=powerOrdered?await readPowerOrderedAjesPage<Awaited<ReturnType<typeof read>>['items'][number]>({
   startedAt,page:query.page||1,pageSize:query.pageSize||24,after:params.after,evidenceEpoch,
-  minimumReads:2,cursorKey:cursorQuery,itemKey:offer=>offer.id,known:offer=>!japanUnknownPower(offer),read:readPage,
+  minimumReads:2,sourceSelection:query.sourceSelection,cursorKey:cursorQuery,itemKey:offer=>offer.id,known:offer=>!japanUnknownPower(offer),read:readPage,
  }):await readFilteredAjesPage<Awaited<ReturnType<typeof read>>['items'][number]>({startedAt,page:query.page||1,pageSize:query.pageSize||24,after:params.after,
-  minimumReads:2,cursorKey:cursorQuery,itemKey:offer=>offer.id,
+  minimumReads:2,sourceSelection:query.sourceSelection,cursorKey:cursorQuery,itemKey:offer=>offer.id,
   read:readPage});
  const observedAt=page.observedAt??first!.observedAt;
  const completePage=!page.partial&&!page.stale&&!page.interrupted&&!page.scanLimited;

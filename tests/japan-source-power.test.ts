@@ -55,6 +55,7 @@ async function catalogPowerFixture(read:(query:any,options?:any)=>unknown|Promis
   '../data':"export const getJsonStorage=()=>({readJson:async path=>globalThis.__japanPowerPageFixture.savedCount?.(path)??null,writeJson:async(path,value)=>{globalThis.__japanPowerPageFixture.countWrites.push({path,value});}});export const readDataJson=async()=>null;export const mutateDataJson=async()=>{throw Error('unexpected private write');};export const getDataRoot=()=>'/tmp';",
   './rates':"export const convertToRub=async amount=>globalThis.__japanPowerPageFixture.censusRate?.(amount)??null;",
   './ajes-count-pricing-context':`export const captureAjesCountPricingContext=async()=>({run:async work=>work(),price:async rows=>{const s=globalThis.__japanPowerPageFixture;s.priced.push(rows.map(row=>row.id));return s.price?s.price(rows):rows;}});`,
+  './ajes-source-selection':'export const readAjesSourceSelection=async query=>({query,selectionIncomplete:false,sourceScopeComplete:true});',
   './ajes-runtime':"export const ajesClient={read:async query=>{const s=globalThis.__japanPowerPageFixture;s.counts++;if(s.rawRead)return s.rawRead(query);throw Error('unexpected source aggregate');}};",
   './ajes-public':`export const cappedAjesQuery=async q=>q;export const readAjesPublic=(q,o)=>globalThis.__japanPowerPageFixture.read(q,o);
    export const readAjesPublicEvidenceSnapshot=async()=>{const s=globalThis.__japanPowerPageFixture;return s.evidenceReader?s.evidenceReader():Object.freeze({editorial:{revision:s.editorialRevision,entries:{}},calculationIndex:s.calculationDigest?{digest:s.calculationDigest}:null});};`,
@@ -301,6 +302,7 @@ async function cachedPowerEvidenceFixture(){
  (globalThis as any).__japanPowerEvidenceFixture=state;
  const stubs:Record<string,string>={
   'server-only':'','next/headers':'export const headers=async()=>new Map();',
+  './ajes-source-selection':'export const readAjesSourceSelection=async query=>({query,selectionIncomplete:false,sourceScopeComplete:true});',
   './ajes-runtime':'export const ajesClient={read:async()=>{throw Error("unexpected source read");}};',
   '../data':'export const getJsonStorage=()=>{throw Error("unexpected storage read");};export const readDataJson=async path=>{if(path!=="catalog-editorial/current.json")throw Error("unexpected private path");const s=globalThis.__japanPowerEvidenceFixture;s.reads++;return structuredClone(s.stored);};export const mutateDataJson=()=>{throw Error("unexpected private write");};',
   '../encyclopedia/calculation-index':'export const readCalculationIndex=()=>globalThis.__japanPowerEvidenceFixture.index;export const applyEncyclopediaCalculation=x=>x;',

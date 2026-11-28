@@ -57,6 +57,7 @@ test('actual catalog wrapper keeps exact model cards on directory failure and ne
  const state={empty:false,lists:0,counts:0,queries:[] as any[]};(globalThis as any).__modelRecovery=state;
  const stubs:Record<string,string>={
   'server-only':'','next/headers':"export const headers=async()=>new Map([['x-real-ip','127.0.0.1']]);",
+  './ajes-source-selection':'export const readAjesSourceSelection=async query=>({query,selectionIncomplete:false,sourceScopeComplete:true});',
   './ajes-runtime':"export const ajesClient={read:async()=>{globalThis.__modelRecovery.counts++;throw Error('count fixture unavailable');}};",
   './ajes-public':`export const readAjesPublicEvidenceSnapshot=()=>({editorial:{revision:'fixture-model-recovery',entries:{}},calculationIndex:null});export const cappedAjesQuery=async q=>q;export const readAjesPublic=async q=>{const s=globalThis.__modelRecovery;s.lists++;s.queries.push(q);return {page:q.page||1,pageSize:24,received:s.empty?0:24,items:s.empty?[]:Array.from({length:24},(_,i)=>({id:i?'toyota-exact-'+i:'toyota-exact'})),observedAt:new Date().toISOString()};};`,
   './ajes-client':"export class AjesUnavailable extends Error{constructor(reason){super(reason);this.reason=reason;}};export const readAjesModelDirectory=async()=>{throw new AjesUnavailable('local_busy');};export const readAjesMakeDirectory=async()=>({makes:[]});",

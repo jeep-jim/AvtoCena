@@ -23,6 +23,7 @@ function fixture(){
   process:{env:{AVTOCENA_RELEASE_SHA:'a'.repeat(40)}},
   assertAjesJapanMarket:(market:unknown)=>assert.equal(market,'japan'),
   ajesResultFilter:(params:Record<string,unknown>)=>({active:Boolean(params.powerTo||params.budgetTo),powerFilter:Boolean(params.powerTo),priceFilter:Boolean(params.budgetTo),matchesPower:()=>true,matches:()=>true}),
+  readAjesSourceSelection:async(query:any)=>({query,selectionIncomplete:false,sourceScopeComplete:true}),
   readAjesPublicEvidenceSnapshot:async()=>({editorial:{revision:state.revision,entries:{}},calculationIndex:state.calculationDigest?{digest:state.calculationDigest}:null}),
   captureAjesCountPricingContext:async()=>({digest:state.pricingDigest,run:async(work:()=>Promise<any>)=>work(),price:async(items:Row[])=>items}),
   ajesPowerEvidenceEpoch,assertAjesPowerCursorEpoch,ajesCatalogQuery:query,AjesCursorRefreshRequired,

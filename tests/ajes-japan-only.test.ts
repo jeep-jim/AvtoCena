@@ -103,6 +103,7 @@ test('retired AJ search returns 410 before all dependencies; Japanese search and
 
 test('public direct AJ IDs and retired queries stop before saved details, rates or request headers',async()=>{
  const api=await fixture('apps/web/lib/catalog/ajes-public.ts',{
+  './ajes-source-selection':'export const readAjesSourceSelection=async query=>({query,selectionIncomplete:false,sourceScopeComplete:true});',
   './ajes-runtime':'export const ajesClient={read:()=>{throw Error("must not read supplier");}};',
   'next/headers':'export const headers=()=>{throw Error("must not read headers");};',
   './rates':'export const convertToRub=()=>{throw Error("must not read rates");};',
@@ -122,6 +123,7 @@ test('AJ catalog counts, facets and pages reject non-Japan before shortcuts or d
  const api=await fixture('apps/web/lib/catalog/ajes-catalog.ts',{
   'react':'export const cache=x=>x;',
   'next/headers':'export const headers=()=>{throw Error("unexpected headers");};',
+  './ajes-source-selection':'export const readAjesSourceSelection=async query=>({query,selectionIncomplete:false,sourceScopeComplete:true});',
   './ajes-runtime':'export const ajesClient={read:()=>{throw Error("unexpected supplier");}};',
   './ajes-public':'const fail=()=>{throw Error("unexpected public source");};export const readAjesPublic=fail,cappedAjesQuery=fail,readAjesPublicEvidenceSnapshot=fail;',
   './ajes-query':'const fail=()=>{throw Error("unexpected query");};export const ajesCatalogQuery=fail,ajesQuery=fail;export class AjesFilterUnavailable extends Error{};export class AjesInputError extends Error{};export class AjesCursorRefreshRequired extends AjesInputError{};',

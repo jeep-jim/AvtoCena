@@ -83,6 +83,7 @@ function fixture(t:any,size=96){
   return {...await resolve(query,state.directory,names),makeDirectoryUnavailable:false};
  };
  const bindings={
+  readAjesSourceSelection:async(query:any)=>({query,selectionIncomplete:false,sourceScopeComplete:true}),
   process:{env:{AVTOCENA_RELEASE_SHA:'a'.repeat(40)}},assertAjesJapanMarket:(market:unknown)=>assert.equal(market,'japan'),
   ajesResultFilter,readAjesPublicEvidenceSnapshot:async()=>snapshot(),
   captureAjesCountPricingContext:async()=>{throw Error('no price filter in this fixture');},

@@ -18,6 +18,7 @@ test('ready Japanese cards return while the independent count is still pending',
  const state={counts:0,lists:0,queries:[] as any[],countResult:held as any,census,query};(globalThis as any).__countFixture=state;
  const stubs:Record<string,string>={
   'server-only':'', 'next/headers':"export const headers=async()=>new Map([['x-real-ip','127.0.0.1']]);",
+  './ajes-source-selection':'export const readAjesSourceSelection=async query=>({query,selectionIncomplete:false,sourceScopeComplete:true});',
   './ajes-runtime':"export const ajesClient={read:async q=>{if(q.aggregate!=='count'||q.countIdentity!==undefined)throw Error('unexpected source query');const state=globalThis.__countFixture;state.counts++;return state.countResult;}};",
   './ajes-public':`export const readAjesPublicEvidenceSnapshot=()=>({editorial:{revision:'fixture',entries:{}},calculationIndex:null});export const cappedAjesQuery=async q=>q;export const readAjesPublic=async q=>{globalThis.__countFixture.lists++;globalThis.__countFixture.queries.push(q);return {page:q.page||1,pageSize:24,received:24,items:Array.from({length:q.page===2?23:24},(_,i)=>({id:q.table+'-'+(q.page||1)+'-'+i})),observedAt:new Date().toISOString()};};`,
   './ajes-client':"export const readAjesModelDirectory=async()=>({models:[]});export const readAjesMakeDirectory=async()=>({makes:[]});export class AjesUnavailable extends Error{};",
@@ -71,6 +72,7 @@ for(const continuation of [false,true])test(`explicitly count-free ${continuatio
  const state={counts:0,lists:0,census,query,count:()=>queue.get('count'+Math.random(),async()=>{state.counts++;await held;return {total:24};}),list:async(q:any)=>{await new Promise(r=>setTimeout(r,10));return queue.get('list'+q.table+q.page,async()=>{state.lists++;return {page:1,pageSize:24,received:24,items:Array.from({length:24},(_,i)=>({id:q.table+i})),observedAt:new Date().toISOString()};});}};(globalThis as any).__countFixture=state;
  const stubs:Record<string,string>={
   'server-only':'', 'next/headers':"export const headers=async()=>new Map([['x-real-ip','127.0.0.1']]);",
+  './ajes-source-selection':'export const readAjesSourceSelection=async query=>({query,selectionIncomplete:false,sourceScopeComplete:true});',
   './ajes-runtime':"export const ajesClient={read:async()=>{return globalThis.__countFixture.count();}};",
   './ajes-public':`export const readAjesPublicEvidenceSnapshot=()=>({editorial:{revision:'fixture',entries:{}},calculationIndex:null});export const cappedAjesQuery=async q=>q;export const readAjesPublic=q=>globalThis.__countFixture.list(q);`,
   './ajes-client':"export const readAjesModelDirectory=async()=>({models:[]});export const readAjesMakeDirectory=async()=>({makes:[]});export class AjesUnavailable extends Error{};",
