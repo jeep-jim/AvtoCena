@@ -154,7 +154,8 @@ jobs:
           set -euo pipefail
           PAGINATION_SHA=$(node -p "JSON.parse(require('fs').readFileSync('.github/operations/catalog-next/china-code-serving-plan.json')).runtimeSha")
           cd "$RUNNER_TEMP/china-serving-runtime-$PAGINATION_SHA"
-          JAPAN_PAGINATION24_REPORT="$RUNNER_TEMP/japan-pagination24-browser-report.json" node --import tsx tests/browser/ajes-pagination.mjs
+          # Controller fixture supplies guarded stubs; all application imports resolve from the pinned runtime cwd.
+          JAPAN_PAGINATION24_REPORT="$RUNNER_TEMP/japan-pagination24-browser-report.json" node --import tsx "$GITHUB_WORKSPACE/tests/browser/ajes-pagination.mjs"
           cd "$GITHUB_WORKSPACE"
           node --input-type=module <<'JS'
           import fs from 'node:fs/promises';
