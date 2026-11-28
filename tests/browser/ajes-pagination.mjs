@@ -5,6 +5,9 @@ import {build} from 'esbuild';
 import path from 'node:path';
 import {createRequire} from 'node:module';
 import {createHash} from 'node:crypto';
+import {japanSourcePriceOrderRequired} from '../../scripts/catalog-next/japan-stability-code-scope.mjs';
+const sourcePriceOrderRequired=japanSourcePriceOrderRequired(JSON.parse(fs.readFileSync(
+ new URL('../../.github/operations/catalog-next/china-code-serving-plan.json',import.meta.url),'utf8')));
 const {chromium}=await import(process.env.PLAYWRIGHT_MODULE||'playwright');
 const out='artifacts/ajes-pagination';fs.mkdirSync(out,{recursive:true});
 // Next replaces public browser environment references in production.
@@ -300,8 +303,18 @@ async function runJapanCases(page,width){
   // AJ fuel predicates can omit locally corrected matching cars. Exhausted
   // provider pages cannot certify the complete user selection in that scope.
   const result=responses.at(-1);assert.equal(result.data.items.length,1);assert.equal(result.data.hasMore,false);assert.equal(result.data.nextCursor,null);
-  assert.equal(result.data.partial,true,'an unproved fuel source scope must not claim a complete selection');
-  await page.getByText('Показаны сохранённые автомобили. Полный список пока недоступен.',{exact:true}).waitFor();
+  if(sourcePriceOrderRequired){
+   assert.equal(result.data.partial,false,'a fresh source-scoped selection is not a transport failure');
+   assert.equal(result.data.sourceScopeComplete,false,'exhausting a source-scoped selection cannot prove every locally matching car');
+   assert.equal(Boolean(result.data.stale||result.data.interrupted||result.data.scanLimited),false);
+   await page.getByText('Вы просмотрели эту подборку.',{exact:true}).waitFor();
+   assert.equal(await page.getByText(/Полный список пока недоступен|Не удалось обновить автомобили/).count(),0);
+   assert.equal(await page.getByRole('button',{name:'Повторить',exact:true}).count(),0);
+   assert.equal(await page.getByRole('alert').count(),0);
+  }else{
+   assert.equal(result.data.partial,true,'an unproved fuel source scope must not claim a complete selection');
+   await page.getByText('Показаны сохранённые автомобили. Полный список пока недоступен.',{exact:true}).waitFor();
+  }
   assert.equal(await page.getByText('Вы посмотрели все доступные предложения',{exact:true}).count(),0);
   assert.equal(result.data.total,null,'a later finite page is not a fabricated global count');
   assert.deepEqual(fixture.queries.map(q=>q.page),power?[1,2,2,3,1,2,3]:[1,2,2,3,3]);

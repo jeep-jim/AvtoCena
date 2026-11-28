@@ -228,6 +228,7 @@ export const JAPAN_STABILITY_SOURCE_PRICE_ORDER_CODE_PATHS = Object.freeze([
   'tests/ajes-model-recovery.test.ts',
   'tests/ajes-query-stability.test.ts',
   'tests/ajes-source-count-display.test.ts',
+  'tests/browser/ajes-pagination-fixture.tsx',
   'tests/home-japan-preview.test.ts',
   'tests/japan-auction-sort-label.test.ts',
   'tests/japan-count-lifecycle.test.ts',
