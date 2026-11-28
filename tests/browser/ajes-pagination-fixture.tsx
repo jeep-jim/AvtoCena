@@ -23,6 +23,7 @@ function Refill(){
    initialPage:result.page,initialTotal:result.total,initialCount:result.items.length,initialHasMore:result.hasMore,initialNextCursor:result.nextCursor,
    initialPageKey:JSON.stringify([result.generationId,result.items.map((offer:any)=>offer.id),result.nextCursor]),
    initialIncomplete:Boolean(result.partial||result.stale||result.interrupted||result.scanLimited),
+   sourceScopeComplete:result.sourceScopeComplete,
   }});
   return()=>{delete (window as any).__japanRefillReplace;};
  },[]);
