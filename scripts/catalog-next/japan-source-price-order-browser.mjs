@@ -158,6 +158,77 @@ export async function readJapanSourcePriceDomRows(view, expectedCount, sort) {
   return result;
 }
 
+/** Observe only the already rendered UI and its existing bounded SSR receipts.
+ * This diagnostic does not authorize a request or replace any acceptance gate. */
+export async function observeJapanSourcePriceReadiness(view, readSsrPageEvidence) {
+  const unavailable = () => ({status: 'unavailable'});
+  const [dom, sourceReadEvidence] = await Promise.all([
+    Promise.resolve().then(() => view.evaluate(({selector}) => {
+      const roots = document.querySelectorAll('main.ac-ajes-catalog'), root = roots.length === 1 ? roots[0] : null;
+      const cards = [...(root?.querySelectorAll(selector) || [])], inspected = cards.slice(0, 48);
+      const form = document.querySelector('form.ac-catalog-filter-panel');
+      const selected = form?.querySelector('.ac-sidebar-sort input[name="sort"]')?.value;
+      const count = root?.querySelector('[data-japan-loaded-count]');
+      const integer = value => typeof value === 'string' && /^\d{1,7}$/.test(value) ? Number(value) : null;
+      const status = count?.getAttribute('data-japan-count-status');
+      const more = [...(root?.querySelectorAll('a.ac-catalog-more[role="button"]') || [])];
+      let continuation = {controls: more.length};
+      if (more.length === 1) try {
+        const url = new URL(more[0].getAttribute('href'), location.origin), cursor = url.searchParams.get('after');
+        const power = /^j2\.([ku])\.([1-9]\d{0,6})\.(0|[1-9]\d?)\.([1-9]\d{0,6})\.[a-f0-9]{64}\.[a-f0-9]{64}\.(-|[a-f0-9]{64})$/.exec(cursor || '');
+        const boundedPower = power && Number(power[2]) <= 1_000_000 && Number(power[3]) <= 48
+          && Number(power[4]) >= 2 && Number(power[4]) <= 1_000_000
+          && Number(power[4]) === integer(url.searchParams.get('page'))
+          && (Number(power[3]) === 0 ? power[5] === '-' : power[5] !== '-');
+        continuation = {...continuation, sameOrigin: url.origin === location.origin,
+          sort: ['totalRub', 'totalRubDesc'].includes(url.searchParams.get('sort')) ? url.searchParams.get('sort') : null,
+          page: integer(url.searchParams.get('page')), cursorPresent: Boolean(cursor),
+          cursorVersion: /^j[12]\./.test(cursor || '') ? cursor.slice(0, 2) : null,
+          powerPhase: /^j2\.[ku]\./.test(cursor || '') ? cursor[3] : null,
+          sourcePage: boundedPower ? Number(power[2]) : null,
+          withinPageSkip: boundedPower ? Number(power[3]) : null};
+      } catch { continuation.invalid = true; }
+      const incomplete = [...(root?.querySelectorAll('p[role="status"]') || [])].some(node =>
+        ['Показана часть автомобилей. Полный список пока недоступен.',
+          'Показаны сохранённые автомобили. Полный список пока недоступен.']
+          .includes((node.textContent || '').replace(/\s+/g, ' ').trim()));
+      return {status: 'recorded', roots: roots.length, shown: cards.length, inspected: inspected.length,
+        selectedSort: ['totalRub', 'totalRubDesc'].includes(selected) ? selected : null,
+        power160Checked: form?.querySelector('input[name="powerTo"][value="160"]')?.checked === true,
+        loadedCount: integer(count?.getAttribute('data-japan-loaded-count')),
+        countStatus: ['exact', 'stale', 'bounded', 'source', 'partial', 'pending'].includes(status) ? status : null,
+        knownPowerCards: inspected.filter(node => node.getAttribute('data-japan-power-phase') === 'known').length,
+        unknownPowerCards: inspected.filter(node => node.getAttribute('data-japan-power-phase') === 'unknown').length,
+        auctionPriceCards: inspected.filter(node => node.querySelectorAll('[data-japan-auction-price-jpy]').length === 1).length,
+        incompleteNotice: incomplete, alerts: root?.querySelectorAll('[role="alert"]').length ?? 0, continuation};
+    }, {selector: CARD})).catch(unavailable),
+    Promise.resolve().then(() => readSsrPageEvidence(view, {page: 1, after: ''})).catch(unavailable),
+  ]);
+  return {checkedAt: new Date().toISOString(), dom, sourceReadEvidence};
+}
+
+export async function readJapanSourcePriceFirstPage(view, {sort, previousCursor, progress, readSsrPageEvidence}) {
+  const diagnostic = {sort, beforeWait: await observeJapanSourcePriceReadiness(view, readSsrPageEvidence)};
+  progress.firstPageReadiness ??= []; progress.firstPageReadiness.push(diagnostic);
+  try {
+    // The URL/control can update before the result. Keep the existing 24-card,
+    // changed-cursor and DOM-value gates even when the observation is incomplete.
+    await view.waitForFunction(({sort, previousCursor}) => {
+      const root = document.querySelector('main.ac-ajes-catalog');
+      const href = root?.querySelector('a.ac-catalog-more[role="button"]')?.getAttribute('href');
+      try { const query = new URL(href, location.origin).searchParams;
+        return query.get('sort') === sort && query.get('after')?.startsWith('j2.') && query.get('after') !== previousCursor
+          && root.querySelectorAll('article.ac-catalog-card,article.ac-catalog-list-row').length === 24; }
+      catch { return false; }
+    }, {sort, previousCursor}, {timeout: 60_000});
+    return await readJapanSourcePriceDomRows(view, 24, sort);
+  } catch (error) {
+    diagnostic.failure = {timeout: error?.name === 'TimeoutError',
+      observation: await observeJapanSourcePriceReadiness(view, readSsrPageEvidence)};
+    throw error;
+  }
+}
+
 /** Verify the source order in the same bounded visitor journey, preserving
  * known-before-unknown phases. Both directions include their actual page-two
  * response; a price restart inside a phase at the page boundary must fail. */
@@ -201,17 +272,7 @@ export async function runJapanSourcePriceOrderBrowser({context, report, read, ca
     const previousHref = await view.locator('main.ac-ajes-catalog a.ac-catalog-more[role="button"]').getAttribute('href');
     const previousCursor = previousHref ? new URL(previousHref, ORIGIN).searchParams.get('after') : null;
     await selectJapanPriceSort(view, sort, progress, {sourcePriceOrder: true});
-    // The URL/control can update before the result. Wait for the new sort's
-    // emitted phase cursor and its own 24-row first page, not the old cards.
-    await view.waitForFunction(({sort, previousCursor}) => {
-      const root = document.querySelector('main.ac-ajes-catalog');
-      const href = root?.querySelector('a.ac-catalog-more[role="button"]')?.getAttribute('href');
-      try { const query = new URL(href, location.origin).searchParams;
-        return query.get('sort') === sort && query.get('after')?.startsWith('j2.') && query.get('after') !== previousCursor
-        && root.querySelectorAll('article.ac-catalog-card,article.ac-catalog-list-row').length === 24; }
-      catch { return false; }
-    }, {sort, previousCursor}, {timeout: 60_000});
-    const before = await readJapanSourcePriceDomRows(view, 24, sort);
+    const before = await readJapanSourcePriceFirstPage(view, {sort, previousCursor, progress, readSsrPageEvidence});
     verifyJapanSourcePriceRows(before, sort);
     const firstPage = verifyJapanSourcePriceFreshReceipts(await readSsrPageEvidence(view, {page: 1, after: ''}), {ssr: true});
     const catalog = view.locator('main.ac-ajes-catalog'), more = catalog.locator('a.ac-catalog-more[role="button"]');

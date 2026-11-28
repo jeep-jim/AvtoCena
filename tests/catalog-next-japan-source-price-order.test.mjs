@@ -3,14 +3,16 @@ import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {spawnSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
+import {runInNewContext} from 'node:vm';
 import * as scope from '../scripts/catalog-next/japan-stability-code-scope.mjs';
 import {japanSourcePriceOrderRequirement, japanSourcePriceCountApi, japanSourcePriceApiAllowed,
   japanSourcePriceContinuation, verifyJapanSourcePriceRows, verifyJapanSourcePriceDomRows,
-  verifyJapanSourcePriceAppend, verifyJapanSourcePriceFreshReceipts}
+  verifyJapanSourcePriceAppend, verifyJapanSourcePriceFreshReceipts, readJapanSourcePriceFirstPage}
   from '../scripts/catalog-next/japan-source-price-order-browser.mjs';
 import {sourcePriceOrderReport} from './helpers/japan-source-price-order-report-fixture.mjs';
 import {sourceCountReport, a4Power160ContinuationReport} from './helpers/japan-source-count-report-fixture.mjs';
 import {verifyJapanPriceSortCount} from '../scripts/catalog-next/japan-price-sort-browser.mjs';
+import {readJapanSsrPageEvidence} from '../scripts/catalog-next/japan-browser-acceptance.mjs';
 
 const hash = value => createHash('sha256').update(value).digest('hex');
 const root = fileURLToPath(new URL('../', import.meta.url)), CITY = 'Новокузнецк';
@@ -131,6 +133,134 @@ test('source price evidence rejects missing, stale, refused and mismatched SSR r
   for (const patch of [{status: 'missing'}, {bindingMatched: false}, {page: 2}, {limited: true}, {reason: 'visitor_restricted'},
     {receipts: [{...evidence.receipts[0], outcome: 'stale'}]}, {receipts: [{...evidence.receipts[0], reason: 'visitor_restricted'}]}])
     assert.throws(() => verifyJapanSourcePriceFreshReceipts({...evidence, ...patch}, {ssr: true, now}));
+});
+
+function sourcePriceReadinessFixture({sort, shown = 0, scanLimited = false, malformed = false, cursorOverride}) {
+  const now = new Date().toISOString(), calls = {dom: 0, receipts: 0, ready: 0, rows: 0};
+  const timeout = Object.assign(Error('controlled ready timeout'), {name: 'TimeoutError'});
+  const receipts = Array.from({length: scanLimited ? 8 : 1}, (_, index) => ({version: 1,
+    requestId: '12345678-1234-4234-8234-' + String(index + 1).padStart(12, '0'),
+    queryHash: hash('source-sort:' + sort), table: 'stats', kind: 'list', page: index + 1, pageSize: 24,
+    startedAt: now, finishedAt: now, stage: shown || scanLimited ? 'storage' : 'empty_verification',
+    supplierAttempted: !shown && !scanLimited, outcome: shown || scanLimited ? 'fresh' : 'unavailable',
+    ...(shown || scanLimited ? {observedAt: now} : {reason: 'empty_response'})}));
+  const annotation = JSON.stringify({version: 1, page: 1, afterSha256: hash(''), receipts, omitted: 0,
+    ...(malformed ? {private: 'PRIVATE_RESPONSE_AND_URL'} : {})});
+  const values = rows(1, shown, sort === 'totalRubDesc');
+  const cards = values.map(row => ({getAttribute: name => name === 'data-japan-power-phase' ? 'known' : null,
+    querySelectorAll(selector) {
+      if (selector === 'a[href]') return [{getAttribute: () => '/cars/offer/' + row.id}];
+      if (selector === '[data-japan-auction-price-jpy]') return [{
+        getAttribute: () => String(row.priceJpy), textContent: 'Аукцион: ' + row.priceJpy.toLocaleString('ru-RU') + ' ¥'}];
+      if (selector === '[data-japan-power-unknown="true"]') return [];
+      if (selector === '[data-japan-supplier-power="true"]') return [{}];
+      throw Error('unexpected card selector: ' + selector);
+    }}));
+  const next = cursorOverride ?? 'j2.k.' + (scanLimited ? '9' : '2') + '.0.2.' + hash('new sort') + '.' + hash('epoch') + '.-';
+  const more = {getAttribute: () => '/cars?' + new URLSearchParams({market: 'japan', city: CITY,
+    powerTo: '160', sort, page: '2', after: next})};
+  const count = {getAttribute: name => name === 'data-japan-loaded-count' ? String(shown) : 'bounded'};
+  const selected = {value: sort}, power = {checked: true};
+  const form = {querySelector: selector => selector.includes('name="sort"') ? selected : power};
+  const root = {getAttribute: () => annotation,
+    querySelector(selector) {
+      if (selector === 'a.ac-catalog-more[role="button"]') return more;
+      if (selector === '[data-japan-loaded-count]' || selector === '[data-japan-loaded-count="' + shown + '"]') return count;
+      return null;
+    }, querySelectorAll(selector) {
+      if (selector === 'article.ac-catalog-card,article.ac-catalog-list-row') return cards;
+      if (selector === 'a.ac-catalog-more[role="button"]') return [more];
+      if (selector === 'p[role="status"]') return shown ? [] : [{textContent: 'Показана часть автомобилей. Полный список пока недоступен.'}];
+      if (selector === '[role="alert"]') return [];
+      throw Error('unexpected root selector: ' + selector);
+    }};
+  const document = {querySelectorAll: selector => selector === 'main.ac-ajes-catalog' ? [root] : [],
+    querySelector: selector => selector === 'main.ac-ajes-catalog' ? root : selector.includes('name="sort"') ? selected : form};
+  const evaluate = (fn, input) => runInNewContext('(' + fn.toString() + ')(input)',
+    {document, location: {origin: 'https://avtocena.com'}, URL, input});
+  const view = {
+    evaluate: async (fn, input) => { calls.dom++; return structuredClone(evaluate(fn, input)); },
+    waitForFunction: async (fn, input, options) => {
+      const kind = input.attribute ? 'receipts' : input.expectedCount ? 'rows' : 'ready'; calls[kind]++;
+      assert.equal(options.timeout, kind === 'receipts' ? 5000 : 60000);
+      const result = evaluate(fn, input); if (!result) throw timeout;
+      return {jsonValue: async () => result, dispose: async () => {}};
+    },
+    locator: selector => { assert.equal(selector, 'main.ac-ajes-catalog'); return {
+      locator: selector => { assert.equal(selector, 'article.ac-catalog-card,article.ac-catalog-list-row'); return {
+        evaluateAll: async fn => structuredClone(evaluate(fn, cards)),
+      }; },
+    }; },
+    goto: async () => { throw Error('diagnostic must not navigate'); },
+    request: {get: async () => { throw Error('diagnostic must not request'); }},
+  };
+  return {view, values, calls, timeout, receipts};
+}
+
+test('empty and bounded-scan sorted pages retain DOM and SSR evidence while the real 24-card wait still fails', async () => {
+  for (const sort of ['totalRubDesc', 'totalRub']) for (const scanLimited of [false, true]) {
+    const fixture = sourcePriceReadinessFixture({sort, scanLimited}), progress = {phase: 'sort_selected'};
+    await assert.rejects(readJapanSourcePriceFirstPage(fixture.view, {sort, previousCursor: cursor, progress,
+      readSsrPageEvidence: readJapanSsrPageEvidence}), error => error === fixture.timeout);
+    assert.equal(progress.firstPageReadiness.length, 1);
+    const diagnostic = progress.firstPageReadiness[0]; assert.equal(diagnostic.sort, sort);
+    assert.equal(diagnostic.failure.timeout, true);
+    for (const observation of [diagnostic.beforeWait, diagnostic.failure.observation]) {
+      assert.equal(observation.dom.shown, 0); assert.equal(observation.dom.loadedCount, 0);
+      assert.equal(observation.dom.incompleteNotice, true); assert.equal(observation.dom.selectedSort, sort);
+      assert.equal(observation.dom.power160Checked, true); assert.equal(observation.dom.continuation.cursorVersion, 'j2');
+      assert.equal(observation.dom.continuation.sourcePage, scanLimited ? 9 : 2);
+      assert.equal(observation.dom.continuation.withinPageSkip, 0);
+      assert.equal(observation.dom.continuation.page, 2);
+      assert.deepEqual(observation.sourceReadEvidence.receipts, fixture.receipts);
+      assert.equal(observation.sourceReadEvidence.bindingMatched, true);
+    }
+    assert.deepEqual(fixture.calls, {dom: 2, receipts: 2, ready: 1, rows: 0});
+    assert.equal(progress.firstPage, undefined); assert.equal(progress.checks, undefined);
+  }
+});
+
+test('continuation diagnostics expose only bounded numeric positions from a shaped j2 cursor', async () => {
+  for (const bad of [cursor.replace('.2.0.2.', '.1000001.0.2.'), cursor.replace('.2.0.2.', '.2.49.2.'),
+    cursor.replace('.2.0.2.', '.2.1.2.'), 'j2.k.PRIVATE_CURSOR']) {
+    const fixture = sourcePriceReadinessFixture({sort: 'totalRubDesc', cursorOverride: bad}), progress = {};
+    await assert.rejects(readJapanSourcePriceFirstPage(fixture.view, {sort: 'totalRubDesc', previousCursor: cursor,
+      progress, readSsrPageEvidence: readJapanSsrPageEvidence}), error => error === fixture.timeout);
+    const continuation = progress.firstPageReadiness[0].failure.observation.dom.continuation;
+    assert.equal(continuation.sourcePage, null); assert.equal(continuation.withinPageSkip, null);
+    assert.equal(JSON.stringify(progress).includes(bad), false);
+  }
+});
+
+test('readiness observations preserve the existing successful DOM gate and cannot hide or replace its timeout', async () => {
+  const sort = 'totalRub', fixture = sourcePriceReadinessFixture({sort, shown: 24}), progress = {};
+  const before = await readJapanSourcePriceFirstPage(fixture.view, {sort, previousCursor: cursor, progress,
+    readSsrPageEvidence: readJapanSsrPageEvidence});
+  assert.deepEqual(before, plainRows(fixture.values));
+  assert.equal(verifyJapanSourcePriceRows(before, sort).shown, 24);
+  assert.equal(progress.firstPageReadiness[0].failure, undefined);
+  assert.deepEqual(fixture.calls, {dom: 1, receipts: 1, ready: 1, rows: 1});
+  const broken = sourcePriceReadinessFixture({sort}), failed = {};
+  broken.view.evaluate = async () => { throw Error('PRIVATE_BROWSER_ERROR'); };
+  await assert.rejects(readJapanSourcePriceFirstPage(broken.view, {sort, previousCursor: cursor, progress: failed,
+    readSsrPageEvidence: async () => { throw Error('PRIVATE_RECEIPT_ERROR'); }}), error => error === broken.timeout);
+  for (const observation of [failed.firstPageReadiness[0].beforeWait, failed.firstPageReadiness[0].failure.observation]) {
+    assert.deepEqual(observation.dom, {status: 'unavailable'});
+    assert.deepEqual(observation.sourceReadEvidence, {status: 'unavailable'});
+  }
+  assert.equal(JSON.stringify(failed).includes('PRIVATE_'), false);
+});
+
+test('malformed SSR diagnostics stay omitted without leaking their contents or accepting an empty page', async () => {
+  const fixture = sourcePriceReadinessFixture({sort: 'totalRubDesc', malformed: true}), progress = {};
+  await assert.rejects(readJapanSourcePriceFirstPage(fixture.view, {sort: 'totalRubDesc', previousCursor: cursor,
+    progress, readSsrPageEvidence: readJapanSsrPageEvidence}), error => error === fixture.timeout);
+  for (const observation of [progress.firstPageReadiness[0].beforeWait, progress.firstPageReadiness[0].failure.observation]) {
+    assert.equal(observation.sourceReadEvidence.status, 'omitted');
+    assert.equal(observation.sourceReadEvidence.receipts.length, 0);
+    assert.equal(observation.dom.shown, 0);
+  }
+  assert.equal(JSON.stringify(progress).includes('PRIVATE_'), false);
 });
 
 function rejectedReports() {
