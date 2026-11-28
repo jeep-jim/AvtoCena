@@ -13,7 +13,8 @@ import {runJapanPriceSortBrowser, selectJapanPriceSort, verifyJapanPriceSortVisi
   from '../../scripts/catalog-next/japan-price-sort-browser.mjs';
 import {verifyJapanPage, verifyJapanFullPage, verifyJapanPowerPage, verifyJapanVisibleVehiclePolicy}
   from '../../scripts/catalog-next/japan-browser-acceptance.mjs';
-import {JAPAN_SOURCE_BOUNDED_INCREMENTAL_POLICY, japanSourceBoundedIncrementalRequired}
+import {JAPAN_SOURCE_BOUNDED_INCREMENTAL_POLICY, JAPAN_SOURCE_COUNT_POLICY,
+  japanSourceBoundedIncrementalRequired, japanSourceCountRequired}
   from '../../scripts/catalog-next/japan-stability-code-scope.mjs';
 
 const ROOT = fileURLToPath(new URL('../../', import.meta.url));
@@ -173,6 +174,17 @@ export function fixtureResult(query, now) {
     powerFilterSummary:{shown:24,localPower:0,supplierPower:24,unknownPower:0}};
 }
 
+/** Model coverage is shared by two explicit profiles. Their count contracts
+ * stay distinct, and neither environment flag can relabel another plan. */
+export function checkedJapanPriceSortFixtureCountAcceptance(plan, {modelCoverageRequired, sourceCountRequired} = {}) {
+  need([undefined, '0', '1'].includes(modelCoverageRequired)
+    && [undefined, '0', '1'].includes(sourceCountRequired), 'count_acceptance_plan');
+  const sourceBounded = japanSourceBoundedIncrementalRequired(plan), sourceCount = japanSourceCountRequired(plan);
+  need((modelCoverageRequired === '1') === (sourceBounded || sourceCount)
+    && (sourceCountRequired === '1') === sourceCount, 'count_acceptance_plan');
+  return sourceCount ? JAPAN_SOURCE_COUNT_POLICY : sourceBounded ? JAPAN_SOURCE_BOUNDED_INCREMENTAL_POLICY : undefined;
+}
+
 async function main() {
   const report = {version:1,kind:'japan-price-sort-browser-v1',passed:false,
     scope:'Exact runtime filter, count, card and append components; controlled local list transport; selected-city rendered prices',
@@ -181,11 +193,10 @@ async function main() {
   try {
     need(process.argv.length === 2, 'arguments');
     const plan = JSON.parse(await fs.readFile(path.join(ROOT,'.github/operations/catalog-next/china-code-serving-plan.json'),'utf8'));
-    const sourceBounded = process.env.CATALOG_JAPAN_MODEL_COVERAGE_REQUIRED === '1';
-    need([undefined, '0', '1'].includes(process.env.CATALOG_JAPAN_MODEL_COVERAGE_REQUIRED)
-      && sourceBounded === japanSourceBoundedIncrementalRequired(plan), 'count_acceptance_plan');
-    const countAcceptance = sourceBounded ? JAPAN_SOURCE_BOUNDED_INCREMENTAL_POLICY : undefined;
-    if (sourceBounded) report.countAcceptance = countAcceptance;
+    const countAcceptance = checkedJapanPriceSortFixtureCountAcceptance(plan,
+      {modelCoverageRequired: process.env.CATALOG_JAPAN_MODEL_COVERAGE_REQUIRED,
+        sourceCountRequired: process.env.CATALOG_JAPAN_SOURCE_COUNT_REQUIRED});
+    if (countAcceptance !== undefined) report.countAcceptance = countAcceptance;
     fixture = await prepare(process.env.PHOTO_RUNTIME_ROOT, plan);
     Object.assign(report,{runtimeSha:plan.runtimeSha,runtimeTree:plan.runtimeTree,componentSha256:fixture.sources,styles:fixture.styles,
       controllerHelperSha256:hash(await fs.readFile(path.join(ROOT,'scripts/catalog-next/japan-price-sort-browser.mjs')))});
@@ -218,10 +229,10 @@ async function main() {
           response.writeHead(200,{'Content-Type':'application/json'});response.end('{"rates":[]}');return;
         }
         if(url.pathname.startsWith('/brand-logos/')){
-          // The incremental candidate's actual logo fallback must not be
+          // Both source/model profiles' actual logo fallback must not be
           // activated by an invalid empty fixture image. Keep the same local
           // image path; no proxy or external transport is admitted.
-          if(sourceBounded){response.writeHead(200,{'Content-Type':'image/png'});response.end(LOCAL_BRAND_LOGO_PNG);}
+          if(countAcceptance!==undefined){response.writeHead(200,{'Content-Type':'image/png'});response.end(LOCAL_BRAND_LOGO_PNG);}
           else{response.writeHead(204);response.end();}
           return;
         }

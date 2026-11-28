@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {JAPAN_PRICE_SORT_GATES, checkedJapanPriceSortCursor, japanPriceSortApi, japanPriceSortApiAllowed,
   japanPriceSortPageApi, japanPriceSortSelectionUrl, verifyJapanPriceSortRows, verifyJapanPriceSortCount,
   verifyJapanPriceSortVisible, selectJapanPowerBeforePriceSort, selectJapanPriceSort} from '../scripts/catalog-next/japan-price-sort-browser.mjs';
+import * as japanScope from '../scripts/catalog-next/japan-stability-code-scope.mjs';
 
 const CITY = 'Новокузнецк', ORIGIN = 'https://avtocena.com';
 const cursor = (page = 2) => 'j2.k.2.0.' + page + '.' + '1'.repeat(64) + '.' + '2'.repeat(64) + '.-';
@@ -13,6 +14,36 @@ const row = (id, price, unknown = false, extra = {}) => ({id: 'ajes-stats-' + id
   catalogPricingMode: 'seller', sellerPriceRub: 100_000, japanDeliveredPreview: price === null ? null : {totalRub: price},
   ...(unknown ? {japanPowerUnknown: true} : {japanSupplierPower: {hp: 150}}), ...extra});
 const result = items => ({items, hasMore: false});
+
+test('fixture plan flags distinguish source counts from old incremental, strict exact and price-only contracts', async () => {
+  const {checkedJapanPriceSortFixtureCountAcceptance: checked} = await import('./browser/japan-price-sort.mjs');
+  const strict = {codeScope: japanScope.JAPAN_STABILITY_CODE_SCOPE,
+    retainedRuntime: japanScope.JAPAN_STABILITY_EXACT_COUNT_RETAINED_RUNTIME,
+    runtimeFiles: [...japanScope.JAPAN_STABILITY_EXACT_COUNT_CODE_PATHS], acceptancePolicy: japanScope.JAPAN_OBSERVED_TIMING_POLICY};
+  const incremental = {...strict, countAcceptance: japanScope.JAPAN_SOURCE_BOUNDED_INCREMENTAL_POLICY};
+  const source = {...strict, retainedRuntime: japanScope.JAPAN_STABILITY_SOURCE_COUNT_RETAINED_RUNTIME,
+    runtimeFiles: [...japanScope.JAPAN_STABILITY_SOURCE_COUNT_CODE_PATHS], countAcceptance: japanScope.JAPAN_SOURCE_COUNT_POLICY};
+  const priceOnly = {...strict, retainedRuntime: japanScope.JAPAN_STABILITY_PRICE_SORT_RETAINED_RUNTIME,
+    runtimeFiles: [...japanScope.JAPAN_STABILITY_PRICE_SORT_CODE_PATHS]};
+  for (const zero of [undefined, '0']) {
+    assert.equal(checked(strict, {modelCoverageRequired: zero, sourceCountRequired: zero}), undefined);
+    assert.equal(checked(priceOnly, {modelCoverageRequired: zero, sourceCountRequired: zero}), undefined);
+    assert.equal(checked(incremental, {modelCoverageRequired: '1', sourceCountRequired: zero}), japanScope.JAPAN_SOURCE_BOUNDED_INCREMENTAL_POLICY);
+    assert.throws(() => checked(source, {modelCoverageRequired: '1', sourceCountRequired: zero}), /count_acceptance_plan/);
+    assert.throws(() => checked(source, {modelCoverageRequired: zero, sourceCountRequired: '1'}), /count_acceptance_plan/);
+  }
+  assert.equal(checked(source, {modelCoverageRequired: '1', sourceCountRequired: '1'}), japanScope.JAPAN_SOURCE_COUNT_POLICY);
+  for (const plan of [strict, incremental, priceOnly])
+    assert.throws(() => checked(plan, {modelCoverageRequired: '1', sourceCountRequired: '1'}), /count_acceptance_plan/);
+  for (const value of ['', true, false, 1, null, 'true', '2']) {
+    assert.throws(() => checked(source, {modelCoverageRequired: value, sourceCountRequired: '1'}), /count_acceptance_plan/);
+    assert.throws(() => checked(source, {modelCoverageRequired: '1', sourceCountRequired: value}), /count_acceptance_plan/);
+  }
+  for (const plan of [{...strict, countAcceptance: japanScope.JAPAN_SOURCE_COUNT_POLICY},
+    {...source, countAcceptance: japanScope.JAPAN_SOURCE_BOUNDED_INCREMENTAL_POLICY},
+    {...source, retainedRuntime: strict.retainedRuntime}, {...source, runtimeFiles: source.runtimeFiles.slice(1)}])
+    assert.throws(() => checked(plan, {modelCoverageRequired: '1', sourceCountRequired: '1'}), /scope/);
+});
 
 test('the new gates are separate and the exact visitor queries include both real price sort values', () => {
   assert.deepEqual(JAPAN_PRICE_SORT_GATES, ['japanPriceSortPassed', 'japanCountDisplayPassed']);
