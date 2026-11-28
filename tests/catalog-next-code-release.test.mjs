@@ -299,8 +299,12 @@ async function fixture(t, {combined = false, japan = false,completion=false, crm
             ...(incremental?{countAcceptance:JAPAN_SOURCE_BOUNDED_INCREMENTAL_POLICY,
               japanModelCoverageRequired:true,japanModelCoveragePassed:true,japanExactCountRequired:false,japanExactCountPassed:null,
               checks:{modelCoverage:{sourcePairs:94,accessiblePairs:94,allSourceModelsAccessible:true,noForeignModels:true,
+                coverageContract:'directory-and-visible-cards-v1',optionPairs:95,optionPairsSha256:hash('source and visible card pairs'),
+                cardBackedExtraPairs:1,cardBackedExtraPairsSha256:hash('card-backed extra pair'),
+                visibleCardPairs:3,visibleCardPairsSha256:hash('visible card pairs'),cardProvenanceSha256:hash('fresh visible cards'),
+                uiEqualsDirectory:false,allOptionsSourceBacked:true,
                 sourceMatchesUi:true,typedBase:'A4',typedFamilyNotNarrowed:true,modelExpansions:1,sourceFamilyModels:3,make:'AUDI',
-                pairsSha256:hash('source pairs'),directory:{status:200,stale:false,sourcePairs:94,pairsSha256:hash('source pairs')},
+                pairsSha256:hash('source pairs'),directory:{status:200,stale:false,sourcePairs:94,pairsSha256:hash('source pairs'),browserMatchesApi:true},
                 selection:{shown:24,observedSourceNamesOnly:true},countHonest:true,fullPage:true,explicitApiReads:3,
                 liveExhaustiveScan:false,pageErrors:0}}}:{}),
             ...(stability?Object.fromEntries(JAPAN_STABILITY_GATES.map(key=>[key,true])):{})};
@@ -1110,6 +1114,9 @@ test('source-bounded successor commits live model evidence while retaining an ex
   assert.equal(browser.japanPriceSortPassed, true); assert.equal(browser.japanCountDisplayPassed, true);
   assert.equal(browser.checks.modelCoverage.typedFamilyNotNarrowed, true);
   assert.equal(browser.checks.modelCoverage.accessiblePairs, 94);
+  assert.equal(browser.checks.modelCoverage.optionPairs, 95);
+  assert.equal(browser.checks.modelCoverage.cardBackedExtraPairs, 1);
+  assert.equal(browser.checks.modelCoverage.uiEqualsDirectory, false);
   assert.deepEqual(JSON.parse(await fs.readFile(f.directoryFixturePath)).cases.length, 20);
 });
 
@@ -1121,6 +1128,7 @@ for (const [name, change] of [
   ['narrowed typed family', report => { report.checks.modelCoverage.typedFamilyNotNarrowed = false; }],
   ['stale source directory', report => { report.checks.modelCoverage.directory.stale = true; }],
   ['missing source proof', report => { delete report.checks.modelCoverage; }],
+  ['unproved extra model', report => { delete report.checks.modelCoverage.cardProvenanceSha256; }],
   ['failed price sort', report => { report.japanPriceSortPassed = false; }],
   ['failed existing filter gate', report => { report.japanCombinedFiltersPassed = false; }],
 ]) test('source-bounded stage rejects ' + name + ' before host acceptance', async t => {
@@ -1160,6 +1168,10 @@ test('accepted state independently binds the incremental policy and preserves st
     ['false exact claim', ({speed}) => { speed.japanExactCountPassed = true; }, /japan_source_bounded_binding/],
     ['missing live coverage', ({speed}) => { delete speed.checks.modelCoverage; }, /japan_source_bounded_binding/],
     ['source mismatch', ({speed}) => { speed.checks.modelCoverage.directory.pairsSha256 = hash('other source'); }, /japan_source_bounded_binding/],
+    ['missing card provenance', ({speed}) => { delete speed.checks.modelCoverage.cardProvenanceSha256; }, /japan_source_bounded_binding/],
+    ['unbound option count', ({speed}) => { speed.checks.modelCoverage.optionPairs++; }, /japan_source_bounded_binding/],
+    ['false directory equality', ({speed}) => { speed.checks.modelCoverage.uiEqualsDirectory = true; }, /japan_source_bounded_binding/],
+    ['unmatched browser directory', ({speed}) => { speed.checks.modelCoverage.directory.browserMatchesApi = false; }, /japan_source_bounded_binding/],
     ['missing all price proofs', ({speed}) => {
       for (const key of ['japanPriceSortRequired', 'japanPriceSortPassed', 'japanCountDisplayPassed']) delete speed[key];
     }, /japan_price_sort_binding/],

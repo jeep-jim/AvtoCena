@@ -10,18 +10,25 @@ const strictPlan = () => ({codeScope: scope.JAPAN_STABILITY_CODE_SCOPE,
   runtimeFiles: [...scope.JAPAN_STABILITY_EXACT_COUNT_CODE_PATHS],
   acceptancePolicy: scope.JAPAN_OBSERVED_TIMING_POLICY});
 const incrementalPlan = () => ({...strictPlan(), countAcceptance: scope.JAPAN_SOURCE_BOUNDED_INCREMENTAL_POLICY});
-const coverageReport = (sourcePairs = 94) => ({
+const coverageReport = (sourcePairs = 94, cardBackedExtraPairs = 0) => ({
   countAcceptance: scope.JAPAN_SOURCE_BOUNDED_INCREMENTAL_POLICY,
   japanModelCoverageRequired: true, japanModelCoveragePassed: true,
   japanExactCountRequired: false, japanExactCountPassed: null,
   checks: {modelCoverage: {sourcePairs, accessiblePairs: sourcePairs,
+    coverageContract: 'directory-and-visible-cards-v1', optionPairs: sourcePairs + cardBackedExtraPairs,
+    optionPairsSha256: (cardBackedExtraPairs ? 'b' : 'a').repeat(64),
+    cardBackedExtraPairs, cardBackedExtraPairsSha256: 'c'.repeat(64),
+    visibleCardPairs: Math.max(1, cardBackedExtraPairs), visibleCardPairsSha256: 'd'.repeat(64),
+    cardProvenanceSha256: 'e'.repeat(64), uiEqualsDirectory: cardBackedExtraPairs === 0, allOptionsSourceBacked: true,
     allSourceModelsAccessible: true, noForeignModels: true, sourceMatchesUi: true,
     typedBase: 'A4', typedFamilyNotNarrowed: true, pairsSha256: 'a'.repeat(64),
-    modelExpansions: Math.ceil(sourcePairs / 60) - 1, sourceFamilyModels: 1, make: 'AUDI',
-    directory: {status: 200, stale: false, sourcePairs, pairsSha256: 'a'.repeat(64)},
+    modelExpansions: Math.ceil((sourcePairs + cardBackedExtraPairs) / 60) - 1, sourceFamilyModels: 1, make: 'AUDI',
+    directory: {status: 200, stale: false, sourcePairs, pairsSha256: 'a'.repeat(64), browserMatchesApi: true},
     selection: {shown: 24, observedSourceNamesOnly: true},
     countHonest: true, fullPage: true, explicitApiReads: 3, liveExhaustiveScan: false, pageErrors: 0}},
 });
+const acceptedReports = () => [...[1, 59, 60, 61, 94, 121].map(count => coverageReport(count)),
+  ...[[1, 24], [59, 1], [60, 1], [94, 1], [120, 1]].map(([count, extra]) => coverageReport(count, extra))];
 
 function rejectedReports() {
   const result = [];
@@ -35,6 +42,11 @@ function rejectedReports() {
     result.push({...coverageReport(), [key]: value});
   for (const [key, value] of [
     ['sourcePairs', 0], ['sourcePairs', 94.5], ['sourcePairs', Number.MAX_SAFE_INTEGER + 1],
+    ['coverageContract', 'other'], ['cardBackedExtraPairs', -1], ['cardBackedExtraPairs', 25],
+    ['visibleCardPairs', 0], ['visibleCardPairs', 25], ['optionPairs', 93], ['optionPairs', 94.5],
+    ['uiEqualsDirectory', false], ['allOptionsSourceBacked', false],
+    ['optionPairsSha256', 'invalid'], ['optionPairsSha256', 'b'.repeat(64)],
+    ['cardBackedExtraPairsSha256', null], ['visibleCardPairsSha256', null], ['cardProvenanceSha256', null],
     ['accessiblePairs', 93], ['allSourceModelsAccessible', false], ['noForeignModels', false],
     ['sourceMatchesUi', false], ['typedFamilyNotNarrowed', false], ['typedBase', 'A5'], ['make', 'BMW'],
     ['pairsSha256', 'invalid'], ['modelExpansions', 0], ['modelExpansions', 2], ['modelExpansions', -1],
@@ -46,6 +58,7 @@ function rejectedReports() {
   }
   for (const [section, key, value] of [
     ['directory', 'status', 503], ['directory', 'stale', true], ['directory', 'sourcePairs', 93],
+    ['directory', 'browserMatchesApi', false],
     ['directory', 'pairsSha256', 'b'.repeat(64)], ['selection', 'shown', 0], ['selection', 'shown', 25],
     ['selection', 'observedSourceNamesOnly', false],
   ]) {
@@ -54,6 +67,15 @@ function rejectedReports() {
   const small = coverageReport(1); small.checks.modelCoverage.directory.sourcePairs = true; result.push(small);
   const inventedExpansion = coverageReport(60); inventedExpansion.checks.modelCoverage.modelExpansions = 1;
   result.push(inventedExpansion);
+  for (const key of ['coverageContract', 'optionPairs', 'optionPairsSha256', 'cardBackedExtraPairs',
+    'cardBackedExtraPairsSha256', 'visibleCardPairs', 'visibleCardPairsSha256', 'cardProvenanceSha256',
+    'uiEqualsDirectory', 'allOptionsSourceBacked']) {
+    const report = coverageReport(60, 1); delete report.checks.modelCoverage[key]; result.push(report);
+  }
+  for (const [key, value] of [['modelExpansions', 0], ['uiEqualsDirectory', true], ['accessiblePairs', 61],
+    ['optionPairsSha256', 'a'.repeat(64)]]) {
+    const report = coverageReport(60, 1); report.checks.modelCoverage[key] = value; result.push(report);
+  }
   return result;
 }
 
@@ -101,8 +123,7 @@ test('the incremental marker cannot authorize a different profile, predecessor, 
 });
 
 test('coverage-only acceptance requires actual source/UI and literal-family evidence and an honest incomplete census status', () => {
-  for (const sourcePairs of [1, 59, 60, 61, 94, 121])
-    assert.equal(scope.japanSourceBoundedAcceptancePassed(coverageReport(sourcePairs)), true);
+  for (const report of acceptedReports()) assert.equal(scope.japanSourceBoundedAcceptancePassed(report), true);
   for (const report of rejectedReports()) assert.equal(scope.japanSourceBoundedAcceptancePassed(report), false);
   assert.equal(scope.japanSourceBoundedAcceptancePassed({
     ...coverageReport(), countAcceptance: undefined, japanExactCountRequired: true, japanExactCountPassed: true,
@@ -110,7 +131,7 @@ test('coverage-only acceptance requires actual source/UI and literal-family evid
 });
 
 test('Python host admission and evidence validation use the same incremental contract while retaining strict historical profiles', () => {
-  const accepted = [1, 59, 60, 61, 94, 121].map(coverageReport), rejected = rejectedReports();
+  const accepted = acceptedReports(), rejected = rejectedReports();
   const result = spawnSync('python3', ['-I', '-B', '-c', String.raw`
 import importlib.util,json,sys
 s=importlib.util.spec_from_file_location('host','scripts/catalog-next/release-host.py')

@@ -249,17 +249,26 @@ export function japanSourceBoundedAcceptancePassed(report) {
     && report.japanExactCountRequired === false && report.japanExactCountPassed === null
     && Number.isSafeInteger(proof?.sourcePairs) && proof.sourcePairs > 0
     && proof.accessiblePairs === proof.sourcePairs
+    && proof.coverageContract === 'directory-and-visible-cards-v1'
+    && Number.isSafeInteger(proof.cardBackedExtraPairs) && proof.cardBackedExtraPairs >= 0
+    && Number.isSafeInteger(proof.visibleCardPairs) && proof.visibleCardPairs >= 1 && proof.visibleCardPairs <= 24
+    && proof.cardBackedExtraPairs <= proof.visibleCardPairs
+    && Number.isSafeInteger(proof.optionPairs) && proof.optionPairs === proof.sourcePairs + proof.cardBackedExtraPairs
+    && proof.uiEqualsDirectory === (proof.cardBackedExtraPairs === 0) && proof.allOptionsSourceBacked === true
     && ['allSourceModelsAccessible', 'noForeignModels', 'sourceMatchesUi', 'typedFamilyNotNarrowed', 'countHonest', 'fullPage']
       .every(key => proof[key] === true)
     && ['AUDI', 'Audi'].includes(proof.make) && proof.typedBase === 'A4'
-    && /^[a-f0-9]{64}$/.test(proof.pairsSha256 ?? '')
+    && ['pairsSha256', 'optionPairsSha256', 'cardBackedExtraPairsSha256', 'visibleCardPairsSha256', 'cardProvenanceSha256']
+      .every(key => /^[a-f0-9]{64}$/.test(proof[key] ?? ''))
+    && (proof.optionPairsSha256 === proof.pairsSha256) === proof.uiEqualsDirectory
     && Number.isSafeInteger(proof.modelExpansions) && proof.modelExpansions >= 0
-    && (proof.modelExpansions > 0) === (proof.sourcePairs > 60)
-    && proof.modelExpansions <= Math.ceil(proof.sourcePairs / 60) - 1
+    && (proof.modelExpansions > 0) === (proof.optionPairs > 60)
+    && proof.modelExpansions <= Math.ceil(proof.optionPairs / 60) - 1
     && Number.isSafeInteger(proof.sourceFamilyModels) && proof.sourceFamilyModels > 0
     && proof.sourceFamilyModels <= proof.sourcePairs
     && proof.directory?.status === 200 && proof.directory.stale === false
     && proof.directory.sourcePairs === proof.sourcePairs && proof.directory.pairsSha256 === proof.pairsSha256
+    && proof.directory.browserMatchesApi === true
     && Number.isSafeInteger(proof.selection?.shown) && proof.selection.shown >= 1 && proof.selection.shown <= 24
     && proof.selection.observedSourceNamesOnly === true
     && proof.explicitApiReads === 3 && proof.liveExhaustiveScan === false && proof.pageErrors === 0;

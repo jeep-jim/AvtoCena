@@ -241,6 +241,55 @@ export function verifyJapanModelCoverage(directory, options) {
     allSourceModelsAccessible: true, noForeignModels: true, pairsSha256: hash(JSON.stringify(source))};
 }
 
+function checkedJapanSourceModelInputs(directory, visibleCards) {
+  need(Array.isArray(directory) && directory.length > 0
+    && directory.every(row => sourceName(row?.make) && normalized(row.make) === 'AUDI' && sourceName(row.model))
+    && new Set(directory.map(pairKey)).size === directory.length, 'model_source_directory');
+  need(Array.isArray(visibleCards) && visibleCards.length > 0 && visibleCards.length <= 24
+    && visibleCards.every(row => row?.market === 'japan' && /^ajes-stats-[A-Za-z0-9_-]{1,64}$/.test(row.id || '')
+      && sourceName(row.make) && normalized(row.make) === 'AUDI' && sourceName(row.model))
+    && new Set(visibleCards.map(row => row.id)).size === visibleCards.length, 'model_visible_cards');
+  const source = directory.map(pairKey).sort(), cards = [...new Set(visibleCards.map(pairKey))].sort();
+  return {source, cards, allowed: new Set([...source, ...cards]),
+    cardProvenanceSha256: hash(JSON.stringify(visibleCards.map(row => [row.id, row.make, row.model])
+      .sort(([a], [b]) => a.localeCompare(b, 'en'))))};
+}
+
+/** The runtime picker unions the source directory with its already visible
+ * auction cards. Every literal directory pair remains mandatory; another
+ * spelling is permitted only when that exact pair occurs on a verified card.
+ * This does not change the strict directory-equality verifier above. */
+export function verifyJapanSourceModelCoverage(directory, options, visibleCards, progress = {}) {
+  const {source, cards, allowed, cardProvenanceSha256} = checkedJapanSourceModelInputs(directory, visibleCards);
+  need(Array.isArray(options), 'model_options');
+  const valid = options.filter(row => sourceName(row?.make) && sourceName(row.model));
+  const visible = [...new Set(valid.map(pairKey))].sort(), sourceSet = new Set(source), visibleSet = new Set(visible);
+  const missing = source.filter(key => !visibleSet.has(key));
+  const unbacked = visible.filter(key => !allowed.has(key));
+  const extras = visible.filter(key => !sourceSet.has(key));
+  const pairsSha256 = hash(JSON.stringify(source)), optionPairsSha256 = hash(JSON.stringify(visible));
+  const visibleCardPairsSha256 = hash(JSON.stringify(cards));
+  // These bounded public names are failure diagnostics, never an acceptance
+  // proof. Record them before any equality/identity guard can reject the UI.
+  const missingSample = missing.slice(0, 12), unbackedSample = unbacked.slice(0, 12 - missingSample.length);
+  progress.modelOptions = {sourcePairs: source.length, optionPairs: options.length,
+    uniqueOptionPairs: visible.length, visibleCardPairs: cards.length, allowedOptionPairs: allowed.size,
+    invalidOptionPairs: options.length - valid.length, duplicateOptionPairs: valid.length - visible.length,
+    missingDirectoryPairCount: missing.length, unbackedOptionPairCount: unbacked.length,
+    missingDirectoryPairs: missingSample.map(value => JSON.parse(value)),
+    unbackedOptionPairs: unbackedSample.map(value => JSON.parse(value)),
+    diagnosticPairsOmitted: missing.length + unbacked.length - missingSample.length - unbackedSample.length,
+    pairsSha256, optionPairsSha256, visibleCardPairsSha256, cardProvenanceSha256};
+  need(valid.length === options.length && visible.length === options.length, 'model_option_identity');
+  need(missing.length === 0 && unbacked.length === 0, 'model_coverage');
+  return {coverageContract: 'directory-and-visible-cards-v1', sourcePairs: source.length,
+    accessiblePairs: source.length, optionPairs: visible.length, cardBackedExtraPairs: extras.length,
+    visibleCardPairs: cards.length, allSourceModelsAccessible: true, noForeignModels: true,
+    sourceMatchesUi: true, allOptionsSourceBacked: true, uiEqualsDirectory: extras.length === 0,
+    pairsSha256, optionPairsSha256, cardBackedExtraPairsSha256: hash(JSON.stringify(extras)),
+    visibleCardPairsSha256, cardProvenanceSha256};
+}
+
 export function verifyJapanAudiRows(payload, directory) {
   need(Array.isArray(payload?.items) && payload.items.length > 0, 'a4_rows');
   need(payload.items.every(row => normalized(row.make) === 'AUDI' && japanAudiA4Family(row.model)
@@ -383,6 +432,50 @@ export async function collectJapanModelOptions(view, directory, progress = {}) {
   return {rows, proof: verifyJapanModelCoverage(directory, rows)};
 }
 
+/** A response event precedes React applying its directory. Wait for actual
+ * directory pairs (or a bounded expansion exposing them), not a count that
+ * the card-backed fallback may already satisfy. All waits inspect the DOM. */
+export async function collectJapanSourceModelOptions(view, directory, visibleCards, progress = {}, make = 'AUDI') {
+  const inputs = checkedJapanSourceModelInputs(directory, visibleCards);
+  need(['AUDI', 'Audi'].includes(make), 'audi_make');
+  const options = view.locator('button[data-model-value][data-model-make]:visible');
+  const readOptions = () => options.evaluateAll(nodes => nodes.map(node =>
+    ({make: node.getAttribute('data-model-make'), model: node.getAttribute('data-model-value')})));
+  const bound = inputs.allowed.size, maxExpansions = Math.ceil(bound / 60) - 1, deadline = Date.now() + 60_000;
+  try {
+    for (let expansion = 0; expansion <= maxExpansions; expansion++) {
+      const remaining = deadline - Date.now(); need(remaining > 0, 'model_directory_ready');
+      const ready = await view.waitForFunction(({make, source, bound, limit}) => {
+        const visible = node => node.getClientRects().length > 0 && getComputedStyle(node).visibility !== 'hidden';
+        const forms = [...document.querySelectorAll('form.ac-catalog-filter-panel')].filter(visible);
+        if (forms.length !== 1 || forms[0].querySelector('input[name="make"]')?.value !== make) return false;
+        const input = forms[0].querySelector('input[aria-label="Модель автомобиля"]');
+        if (!input || input.value !== '' || input.getAttribute('aria-expanded') !== 'true') return false;
+        const root = input.parentElement;
+        const nodes = [...root.querySelectorAll('button[data-model-value][data-model-make]')].filter(visible);
+        const pairs = new Set(nodes.map(node => JSON.stringify([node.getAttribute('data-model-make'), node.getAttribute('data-model-value')])));
+        const more = [...root.querySelectorAll('button')].filter(node => visible(node) && /^Показать ещё · \d+$/.test(node.textContent.trim()));
+        if (more.length === 0) return nodes.length <= bound && source.every(pair => pairs.has(pair));
+        if (more.length !== 1 || nodes.length !== limit) return false;
+        const remaining = Number(more[0].textContent.trim().match(/\d+$/)[0]);
+        return Number.isSafeInteger(remaining) && remaining > 0
+          && nodes.length + remaining >= source.length && nodes.length + remaining <= bound;
+      }, {make, source: inputs.source, bound, limit: 60 * (expansion + 1)}, {timeout: remaining});
+      await ready.dispose();
+      const more = view.getByRole('button', {name: /^Показать ещё · \d+$/, exact: false});
+      if (await more.count() === 0) break;
+      need(await more.count() === 1 && expansion < maxExpansions, 'model_more_unique');
+      await more.click(); progress.modelExpansions = (progress.modelExpansions || 0) + 1;
+    }
+    const rows = await readOptions(), proof = verifyJapanSourceModelCoverage(directory, rows, visibleCards, progress);
+    progress.directoryOptionsReady = true;
+    return {rows, proof};
+  } catch (error) {
+    try { verifyJapanSourceModelCoverage(directory, await readOptions(), visibleCards, progress); } catch {}
+    throw error;
+  }
+}
+
 /** A normal Audi/A4 visitor journey proves source-name coverage and the
  * selected family's visible first page. It needs no positive census and never
  * follows supplier listings to manufacture a full-selection count. */
@@ -442,8 +535,8 @@ export async function runJapanModelCoverageBrowser({context, report, read, captu
   const modelResponse = await downloaded;
   const browserDirectory = checkedJapanAudiDirectory(await modelResponse.json(), modelResponse.status());
   need(JSON.stringify(directory) === JSON.stringify(browserDirectory), 'directory_changed');
-  const coverage = await collectJapanModelOptions(view, directory, progress);
-  need(directory.length <= 60 || progress.modelExpansions > 0, 'model_expansion');
+  const coverage = await collectJapanSourceModelOptions(view, directory, makePage.items, progress, make);
+  need(coverage.proof.optionPairs <= 60 || progress.modelExpansions > 0, 'model_expansion');
   await capture(view, 'japan-source-models-audi-desktop');
 
   progress.phase = 'typed_a4'; onStage('model_coverage_audi_a4');
@@ -485,12 +578,25 @@ export function checkedJapanModelCoverageBrowserFixture(report, expected) {
       && proof.japanExactCountRequired === false && proof.japanExactCountPassed === null
       && proof.japanModelCoverageRequired === true && proof.japanModelCoveragePassed === true
       && proof.positiveExactCountsSupplied === 0 && proof.countsIncomplete === true, 'model_fixture_profile');
+    need(Number.isSafeInteger(proof.directoryWait?.delayedResponses) && proof.directoryWait.delayedResponses > 0
+      && proof.directoryWait.completedDelays === proof.directoryWait.delayedResponses
+      && Number.isSafeInteger(proof.directoryWait.cardFallbackOptionsBeforeDirectory)
+      && proof.directoryWait.cardFallbackOptionsBeforeDirectory > 0
+      && proof.directoryWait.cardFallbackOptionsBeforeDirectory <= 24, 'model_fixture_directory_wait');
     need(models?.sourcePairs > 60 && models.sourcePairs === models.accessiblePairs
+      && models.coverageContract === 'directory-and-visible-cards-v1'
+      && Number.isSafeInteger(models.sourcePairs) && Number.isSafeInteger(models.optionPairs)
+      && models.optionPairs === models.sourcePairs + models.cardBackedExtraPairs
+      && models.cardBackedExtraPairs === 1 && Number.isSafeInteger(models.visibleCardPairs)
+      && models.visibleCardPairs >= models.cardBackedExtraPairs && models.visibleCardPairs <= 24
+      && models.uiEqualsDirectory === false && models.allOptionsSourceBacked === true
       && models.allSourceModelsAccessible === true && models.noForeignModels === true
-      && models.sourceMatchesUi === true && digest(models.pairsSha256)
+      && models.sourceMatchesUi === true && ['AUDI', 'Audi'].includes(models.make)
+      && ['pairsSha256', 'optionPairsSha256', 'cardBackedExtraPairsSha256', 'visibleCardPairsSha256', 'cardProvenanceSha256']
+        .every(key => digest(models[key])) && models.optionPairsSha256 !== models.pairsSha256
       && models.typedBase === 'A4' && models.typedFamilyNotNarrowed === true
       && Number.isSafeInteger(models.modelExpansions) && models.modelExpansions > 0
-      && models.modelExpansions <= Math.ceil(models.sourcePairs / 60) - 1
+      && models.modelExpansions <= Math.ceil(models.optionPairs / 60) - 1
       && Number.isSafeInteger(models.sourceFamilyModels) && models.sourceFamilyModels > 0
       && models.sourceFamilyModels <= models.sourcePairs
       && models.directory?.status === 200 && models.directory.stale === false

@@ -59,6 +59,7 @@ import {CatalogResultCountUpdate} from 'runtime:CatalogSelectionContext';
 export function ExactCountFixture({initial,result,remount=false}){
  const [current,setCurrent]=useState({initial,result}),[late,setLate]=useState(null);
  const query=current.initial,rows=current.result.items,key=JSON.stringify(query);
+ const models=[...new Map(rows.map(row=>[JSON.stringify([row.make,row.model]),{make:row.make,model:row.model,total:0}])).values()];
  useEffect(()=>{
   const fixture=window.__japanExactCount;
   fixture.replace=(next)=>{fixture.current=next;setCurrent(next);};fixture.current=current;fixture.late=(next)=>setLate(next);fixture.ready=true;
@@ -67,7 +68,7 @@ export function ExactCountFixture({initial,result,remount=false}){
   <section className="ac-catalog-shell mx-auto w-full max-w-[1500px] px-4 py-6 md:px-8 md:py-10">
    <CatalogSidebar resultScope="ajes:japan:false"
     header={<h1 className="text-[30px] font-black leading-none tracking-[-0.04em] sm:text-4xl md:text-6xl">Авто из Японии под заказ</h1>}
-    filters={<CatalogFilters key={remount?key:'preserved'} initial={query} auctionResults facets={{makes:[],models:[],bodyTypes:[],transmissions:[],fuels:['petrol'],drives:[]}}/>}>
+    filters={<CatalogFilters key={remount?key:'preserved'} initial={query} auctionResults facets={{makes:[],models,bodyTypes:[],transmissions:[],fuels:['petrol'],drives:[]}}/>}>
    {late&&<CatalogResultCountUpdate {...late}/>}
    <CatalogResultCountUpdate queryKey={key} summary={current.result.countSummary} total={current.result.total??undefined} text={current.result.total===null?'':String(current.result.total)}/>
    <h2>Япония <JapanCatalogCount queryKey={key} summary={current.result.countSummary} initialCount={rows.length}/></h2>
@@ -80,7 +81,8 @@ export function ExactCountFixture({initial,result,remount=false}){
  </main>;
 }
 if(typeof window!=='undefined'){
- const fixture={calls:[],errors:[],ready:false,sequence:0,replace:()=>{},late:()=>{},async navigate(href){
+ const fixture={calls:[],errors:[],ready:false,sequence:0,delayedModelResponses:0,completedModelDelays:0,
+  cardFallbackOptionsBeforeDirectory:0,replace:()=>{},late:()=>{},async navigate(href){
   const sequence=++fixture.sequence;fixture.calls.push(href);history.pushState(null,'',href);
   const url=new URL(href,location.origin);
   const query={...Object.fromEntries(url.searchParams),...catalogRouteParams(url.pathname),market:'japan'};
@@ -89,6 +91,23 @@ if(typeof window!=='undefined'){
   if(sequence===fixture.sequence&&response.ok)fixture.replace({initial:query,result});
  }};
  window.__japanExactCount=fixture;
+ if(window.__japanExactCountInitial.modelCoverage){
+  const read=window.fetch.bind(window);
+  window.fetch=async(...args)=>{
+   const response=await read(...args);
+   if(new URL(args[0]?.url||String(args[0]),location.origin).pathname==='/api/catalog/source-models'){
+    // Playwright has observed the response, but the real loader has not yet
+    // consumed it. Actual card facets must not satisfy directory readiness.
+    fixture.delayedModelResponses++;
+    await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
+    fixture.cardFallbackOptionsBeforeDirectory=[...document.querySelectorAll('button[data-model-value][data-model-make]')]
+      .filter(node=>node.getClientRects().length>0).length;
+    await new Promise(resolve=>setTimeout(resolve,250));
+    fixture.completedModelDelays++;
+   }
+   return response;
+  };
+ }
  hydrateRoot(document.getElementById('root'),<ExactCountFixture {...window.__japanExactCountInitial}/>,
   {onRecoverableError:error=>fixture.errors.push(String(error))});
 }
@@ -238,6 +257,15 @@ export function fixtureResult(query, now) {
       supplierPower:items.filter(row=>!row.japanPowerUnknown).length,unknownPower:items.filter(row=>row.japanPowerUnknown).length}}:{})};
 }
 
+/** One displayed identity is canonically cased by the public offer path while
+ * the source directory preserves its literal name. Its exact option pair is
+ * therefore backed by a visible card, but is absent from the directory. */
+export function modelCoverageFixtureResult(query, now) {
+  const result = fixtureResult(query, now);
+  return {...result, total: null, countSummary: null,
+    items: result.items.map(row => row.id === EXACT_FIXTURE_IDS[0] ? {...row, make: 'Audi'} : row)};
+}
+
 /** Record only bounded public call-site fields. Every denied attempt still
  * increments the guard, even after the diagnostic sample is full. */
 export function recordForbiddenFixtureRequest(report,{caseName,stage,method,url,resourceType}) {
@@ -273,8 +301,7 @@ export function createExactCountFixtureHandler({fixture,getActive}) {
           if(Number(query.page)>1){const prior=fixtureResult({...query,page:String(Number(query.page)-1)},active.now);need(query.after===prior.nextCursor,'emitted_cursor');}
           if(active.failAppend&&Number(query.page)===3){send(503,{'Content-Type':'application/json'},'{"ok":false}');return;}
           if(active.holdNext&&query.sort==='totalRubDesc'&&Number(query.page)===1){active.held=true;await active.releaseWait;}
-          const result=fixtureResult(query,active.now);
-          if(active.modelCoverage){result.total=null;result.countSummary=null;}
+          const result=active.modelCoverage?modelCoverageFixtureResult(query,active.now):fixtureResult(query,active.now);
           send(200,{'Content-Type':'application/json','Cache-Control':'no-store'},JSON.stringify(result));return;
         }
         if(url.pathname==='/api/catalog/brand-counts'){
@@ -300,9 +327,9 @@ export function createExactCountFixtureHandler({fixture,getActive}) {
         need(url.pathname==='/cars/japan'&&url.searchParams.get('city')===CITY
           &&(url.searchParams.size===1||active.recoverCount&&url.searchParams.size===2&&url.searchParams.get('powerTo')==='160'),'document_scope');
         const initial={city:CITY,market:'japan',...(active.recoverCount?{powerTo:'160'}:{})};
-        const result=fixtureResult(initial,active.now);
-        if(active.recoverCount||active.modelCoverage){result.total=null;result.countSummary=null;}
-        const props={initial,result,remount:active.remount};
+        const result=active.modelCoverage?modelCoverageFixtureResult(initial,active.now):fixtureResult(initial,active.now);
+        if(active.recoverCount){result.total=null;result.countSummary=null;}
+        const props={initial,result,remount:active.remount,modelCoverage:active.modelCoverage===true};
         stage='document_render';
         const body='<!doctype html><html><head><meta charset="utf-8"><link rel="icon" href="data:,"><link rel="stylesheet" href="/fixture.css"></head><body><div id="root">'
           +fixture.renderMarkup(props)+'</div><script>window.__japanExactCountInitial='+JSON.stringify(props).replace(/</g,'\\u003c')
@@ -375,8 +402,7 @@ async function main() {
         const callbacks={context:wrapped,report:result,read:async api=>{
           const url=new URL(api,ORIGIN);
           const data=url.pathname==='/api/catalog/source-models'?fixtureDirectory(state.now)
-            :fixtureResult(Object.fromEntries(url.searchParams),state.now);
-          if(state.modelCoverage&&url.pathname==='/api/catalog/search'){data.total=null;data.countSummary=null;}
+            :(state.modelCoverage?modelCoverageFixtureResult:fixtureResult)(Object.fromEntries(url.searchParams),state.now);
           return {status:200,data};
         },capture:async()=>{},onStage:stage=>{result.stage=stage;},onPage:()=>{},
           verifyPage:verifyJapanPage,verifyFullPage:verifyJapanFullPage,verifyPowerPage:verifyJapanPowerPage,
@@ -445,12 +471,21 @@ async function main() {
         need(modelReport.countAcceptance===JAPAN_SOURCE_BOUNDED_COUNT_ACCEPTANCE
           &&modelReport.japanModelCoveragePassed===true&&modelReport.japanExactCountPassed===null
           &&positiveExactCountsSupplied===0&&countsIncomplete,'incremental_model_journey');
+        const directoryWait=await currentPage.evaluate(()=>({delayedResponses:window.__japanExactCount.delayedModelResponses,
+          completedDelays:window.__japanExactCount.completedModelDelays,
+          cardFallbackOptionsBeforeDirectory:window.__japanExactCount.cardFallbackOptionsBeforeDirectory}));
+        need(directoryWait.delayedResponses>0&&directoryWait.delayedResponses===directoryWait.completedDelays
+          &&directoryWait.cardFallbackOptionsBeforeDirectory>0&&directoryWait.cardFallbackOptionsBeforeDirectory<=24
+          &&modelReport.checks.modelCoverageProgress.directoryOptionsReady===true,'incremental_directory_wait');
+        need(modelReport.checks.modelCoverage.cardBackedExtraPairs===1
+          &&modelReport.checks.modelCoverage.optionPairs===modelReport.checks.modelCoverage.sourcePairs+1
+          &&modelReport.checks.modelCoverage.uiEqualsDirectory===false,'incremental_card_union');
         need((await currentPage.evaluate(()=>window.__japanExactCount.errors)).length===0,'incremental_model_hydration');
         const incrementalModelCoverage={passed:true,countAcceptance:modelReport.countAcceptance,
           japanModelCoverageRequired:modelReport.japanModelCoverageRequired,
           japanModelCoveragePassed:modelReport.japanModelCoveragePassed,
           japanExactCountRequired:modelReport.japanExactCountRequired,japanExactCountPassed:modelReport.japanExactCountPassed,
-          positiveExactCountsSupplied,countsIncomplete,modelCoverage:modelReport.checks.modelCoverage};
+          positiveExactCountsSupplied,countsIncomplete,directoryWait,modelCoverage:modelReport.checks.modelCoverage};
         await currentPage.close();state.modelCoverage=false;
 
         // A successful append must repair an initially unknown aggregate in

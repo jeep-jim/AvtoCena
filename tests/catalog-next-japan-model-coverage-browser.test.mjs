@@ -5,6 +5,7 @@ import os from 'node:os';
 import path from 'node:path';
 import {JAPAN_SOURCE_BOUNDED_COUNT_ACCEPTANCE as policy, japanModelCoverageRequirement,
   japanModelCoverageApi, japanModelCoverageApiAllowed, japanExactCountApi, verifyJapanModelCount,
+  verifyJapanModelCoverage, verifyJapanSourceModelCoverage, collectJapanSourceModelOptions,
   checkedJapanModelCoverageBrowserFixture} from '../scripts/catalog-next/japan-exact-count-browser.mjs';
 import {JAPAN_OBSERVED_TIMING_POLICY, verifyJapanPage, verifyJapanFullPage, verifyJapanPowerPage,
   verifyJapanSourceScopePage, runJapanBrowserAcceptance} from '../scripts/catalog-next/japan-browser-acceptance.mjs';
@@ -25,6 +26,118 @@ const receipt=()=>({version:1,requestId:'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa',q
   table:'stats',kind:'list',page:1,pageSize:24,startedAt:observedAt,finishedAt:observedAt,
   stage:'access',supplierAttempted:false,outcome:'fresh',observedAt});
 const scoped=()=>({...page(),partial:true,sourceReceipts:[receipt()]});
+const modelDirectory=count=>Array.from({length:count},(_,index)=>({make:'AUDI',model:'A4 EDITION '+index,total:1}));
+const modelCard=(pair,index)=>({id:'ajes-stats-model-'+index,market:'japan',make:pair.make,model:pair.model});
+
+test('incremental coverage retains every literal directory pair and separately proves exact card-backed UI extras',()=>{
+  const directory=modelDirectory(94),cards=directory.slice(0,24).map(modelCard);
+  cards[0]={...cards[0],make:'Audi'};
+  const options=[...directory,{make:cards[0].make,model:cards[0].model}],progress={};
+  const proof=verifyJapanSourceModelCoverage(directory,options,cards,progress);
+  assert.equal(proof.coverageContract,'directory-and-visible-cards-v1');
+  assert.equal(proof.sourcePairs,94);assert.equal(proof.accessiblePairs,94);assert.equal(proof.optionPairs,95);
+  assert.equal(proof.cardBackedExtraPairs,1);assert.equal(proof.visibleCardPairs,24);
+  assert.equal(proof.uiEqualsDirectory,false);assert.equal(proof.allOptionsSourceBacked,true);
+  assert.equal(proof.pairsSha256,verifyJapanModelCoverage(directory,directory).pairsSha256);
+  assert.notEqual(proof.pairsSha256,proof.optionPairsSha256);
+  assert.equal(progress.modelOptions.missingDirectoryPairCount,0);
+  assert.equal(progress.modelOptions.unbackedOptionPairCount,0);
+  assert.throws(()=>verifyJapanModelCoverage(directory,options),/model_coverage/,'strict default still requires directory equality');
+  const reversed=verifyJapanSourceModelCoverage([...directory].reverse(),[...options].reverse(),[...cards].reverse());
+  for(const key of ['pairsSha256','optionPairsSha256','cardBackedExtraPairsSha256','visibleCardPairsSha256','cardProvenanceSha256'])
+    assert.equal(reversed[key],proof[key],key+' is independent of display order');
+  const plain=verifyJapanSourceModelCoverage(directory,directory,directory.slice(0,24).map(modelCard));
+  assert.equal(plain.cardBackedExtraPairs,0);assert.equal(plain.uiEqualsDirectory,true);
+  assert.equal(plain.optionPairsSha256,plain.pairsSha256);
+});
+
+test('card-backed spelling cannot replace a source name or admit unrelated or unverified options',()=>{
+  const directory=modelDirectory(30),cards=directory.slice(0,24).map(modelCard);
+  cards[0]={...cards[0],make:'Audi'};
+  const extra={make:cards[0].make,model:cards[0].model};
+  for(const options of [[...directory.slice(1),extra],[...directory,{make:'Audi',model:'A4 invented'}],
+    [...directory,{make:'AUDI',model:'a4 edition 0'}],[...directory,directory[0]],
+    [...directory,{make:'AUDI',model:'<invalid>'}]]){
+    const progress={};assert.throws(()=>verifyJapanSourceModelCoverage(directory,options,cards,progress));
+    assert.equal(progress.modelOptions.sourcePairs,30,'rejection retains source diagnostics');
+  }
+  const progress={};
+  assert.throws(()=>verifyJapanSourceModelCoverage(directory,[...directory.slice(1),extra],cards,progress));
+  assert.deepEqual(progress.modelOptions.missingDirectoryPairs,[['AUDI','A4 EDITION 0']]);
+  for(const changed of [cards.slice(0,0),[...cards,cards[0]],
+    [{...cards[0],market:'china'}],[{...cards[0],make:'TOYOTA'}],[{...cards[0],id:'foreign-1'}],
+    [{...cards[0],model:'bad|name'}],Array.from({length:25},(_,index)=>modelCard(directory[index],index))])
+    assert.throws(()=>verifyJapanSourceModelCoverage(directory,[...directory,extra],changed));
+});
+
+test('coverage failure diagnostics contain only twelve bounded public pair samples plus exact counts and hashes',()=>{
+  const directory=modelDirectory(20),cards=directory.map(modelCard),progress={};
+  const options=Array.from({length:20},(_,index)=>({make:'AUDI',model:'A5 unknown '+index}));
+  options.push({make:'AUDI',model:'<invalid>'});
+  assert.throws(()=>verifyJapanSourceModelCoverage(directory,options,cards,progress));
+  const value=progress.modelOptions;
+  assert.equal(value.missingDirectoryPairCount,20);assert.equal(value.unbackedOptionPairCount,20);
+  assert.equal(value.missingDirectoryPairs.length+value.unbackedOptionPairs.length,12);
+  assert.equal(value.diagnosticPairsOmitted,28);assert.equal(value.invalidOptionPairs,1);
+  assert.equal(JSON.stringify(value).includes('<invalid>'),false);
+  for(const key of ['pairsSha256','optionPairsSha256','visibleCardPairsSha256','cardProvenanceSha256'])
+    assert.match(value[key],/^[a-f0-9]{64}$/);
+});
+
+function delayedModelPicker(directory,cards,{omitSource=false,make='AUDI'}={}){
+  let sourceApplied=false,limit=60,waits=0,cardFallbackRejected=false;
+  const cardPairs=[...new Map(cards.map(row=>[JSON.stringify([row.make,row.model]),{make:row.make,model:row.model}])).values()];
+  const all=[...new Map([...(omitSource?directory.slice(1):directory),...cardPairs]
+    .map(row=>[JSON.stringify([row.make,row.model]),row])).values()];
+  const current=()=>sourceApplied?all.slice(0,limit):cardPairs;
+  const nodes=()=>current().map(row=>({getClientRects:()=>[{}],
+    getAttribute:key=>key==='data-model-make'?row.make:row.model}));
+  const more=()=>sourceApplied&&all.length>limit;
+  const root={querySelectorAll:selector=>selector==='button'?more()?[{getClientRects:()=>[{}],textContent:'Показать ещё · '+(all.length-limit)}]:[]:nodes()};
+  const input={value:'',getAttribute:()=> 'true',parentElement:root};
+  const form={getClientRects:()=>[{}],querySelector:selector=>selector==='input[name="make"]'?{value:make}:input};
+  const view={locator:()=>({evaluateAll:async callback=>callback(nodes())}),
+    getByRole:()=>({count:async()=>Number(more()),click:async()=>{limit+=60;}}),
+    waitForFunction:async(predicate,args)=>{
+      const priorDocument=globalThis.document,priorStyle=globalThis.getComputedStyle;
+      globalThis.document={querySelectorAll:()=>[form]};globalThis.getComputedStyle=()=>({visibility:'visible'});
+      try{
+        waits++;
+        if(!sourceApplied){cardFallbackRejected=predicate(args)===false;sourceApplied=true;}
+        if(!predicate(args))throw Error('mock model directory deadline');
+        return {dispose:async()=>{}};
+      }finally{
+        if(priorDocument===undefined)delete globalThis.document;else globalThis.document=priorDocument;
+        if(priorStyle===undefined)delete globalThis.getComputedStyle;else globalThis.getComputedStyle=priorStyle;
+      }
+    }};
+  return {view,observed:()=>({waits,cardFallbackRejected})};
+}
+
+test('DOM readiness rejects a large card fallback until every mandatory directory pair is applied',async()=>{
+  const directory=modelDirectory(10),cards=Array.from({length:24},(_,index)=>modelCard(
+    index===0?{make:'Audi',model:directory[0].model}:{make:'AUDI',model:'A5 CARD '+index},index));
+  const picker=delayedModelPicker(directory,cards),progress={modelExpansions:0};
+  const result=await collectJapanSourceModelOptions(picker.view,directory,cards,progress);
+  assert.equal(picker.observed().cardFallbackRejected,true,'24 fallback options cannot stand in for ten different source pairs');
+  assert.equal(result.proof.accessiblePairs,10);assert.equal(result.proof.optionPairs,34);
+  assert.equal(progress.directoryOptionsReady,true);assert.equal(progress.modelExpansions,0);
+  const missing=delayedModelPicker(directory,cards,{omitSource:true}),failure={};
+  await assert.rejects(collectJapanSourceModelOptions(missing.view,directory,cards,failure),/directory deadline/);
+  assert.equal(failure.directoryOptionsReady,undefined);assert.equal(failure.modelOptions.missingDirectoryPairCount,1);
+  const wrongMake=delayedModelPicker(directory,cards,{make:'TOYOTA'});
+  await assert.rejects(collectJapanSourceModelOptions(wrongMake.view,directory,cards),/directory deadline/);
+});
+
+test('DOM expansion bound includes verified card extras beyond the next sixty-option boundary',async()=>{
+  const directory=modelDirectory(119),cards=directory.slice(0,24).map(modelCard);
+  cards[0]={...cards[0],make:'Audi'};cards[1]={...cards[1],make:'Audi'};
+  const picker=delayedModelPicker(directory,cards),progress={modelExpansions:0};
+  const result=await collectJapanSourceModelOptions(picker.view,directory,cards,progress);
+  assert.equal(result.proof.sourcePairs,119);assert.equal(result.proof.optionPairs,121);
+  assert.equal(result.proof.cardBackedExtraPairs,2);assert.equal(progress.modelExpansions,2);
+  assert.equal(picker.observed().waits,3);assert.equal(picker.observed().cardFallbackRejected,true);
+});
 
 test('model acceptance parses only explicit 0/1 environment values and admits only three bounded Audi reads',()=>{
   assert.equal(japanModelCoverageRequirement(undefined),false);
@@ -156,7 +269,11 @@ const fixture=()=>({passed:true,productionRequests:0,supplierRequests:0,forbidde
   cases:['preserved_controls','remounted_controls'].map(name=>({name,incrementalModelCoverage:{passed:true,
     countAcceptance:policy,japanModelCoverageRequired:true,japanModelCoveragePassed:true,
     japanExactCountRequired:false,japanExactCountPassed:null,positiveExactCountsSupplied:0,countsIncomplete:true,
+    directoryWait:{delayedResponses:1,completedDelays:1,cardFallbackOptionsBeforeDirectory:24},
     modelCoverage:{sourcePairs:94,accessiblePairs:94,allSourceModelsAccessible:true,noForeignModels:true,
+      make:'AUDI',coverageContract:'directory-and-visible-cards-v1',optionPairs:95,cardBackedExtraPairs:1,
+      visibleCardPairs:24,uiEqualsDirectory:false,allOptionsSourceBacked:true,optionPairsSha256:'e'.repeat(64),
+      cardBackedExtraPairsSha256:'f'.repeat(64),visibleCardPairsSha256:'a'.repeat(64),cardProvenanceSha256:'b'.repeat(64),
       sourceMatchesUi:true,pairsSha256:'d'.repeat(64),typedBase:'A4',typedFamilyNotNarrowed:true,
       modelExpansions:1,sourceFamilyModels:30,directory:{status:200,stale:false,sourcePairs:94,pairsSha256:'d'.repeat(64),browserMatchesApi:true},
       selection:{shown:24,observedSourceNamesOnly:true},fullPage:true,countHonest:true,explicitApiReads:3,
@@ -170,6 +287,13 @@ test('offline model-only fixture proof requires both full UI lifecycle cases and
     p=>{p.modelCoverage.sourceMatchesUi=false;},p=>{p.modelCoverage.accessiblePairs=60;},
     p=>{p.modelCoverage.modelExpansions=0;},p=>{p.modelCoverage.directory.stale=true;},
     p=>{p.modelCoverage.checks[0].count.exact=true;},p=>{p.modelCoverage.checks[1].total=94;},
+    p=>{delete p.modelCoverage.coverageContract;},p=>{p.modelCoverage.optionPairs=94;},
+    p=>{p.modelCoverage.cardBackedExtraPairs=0;},p=>{p.modelCoverage.cardBackedExtraPairs=25;},
+    p=>{p.modelCoverage.visibleCardPairs=0;},p=>{p.modelCoverage.uiEqualsDirectory=true;},
+    p=>{p.modelCoverage.allOptionsSourceBacked=false;},p=>{p.modelCoverage.cardProvenanceSha256='';},
+    p=>{p.modelCoverage.optionPairsSha256=p.modelCoverage.pairsSha256;},
+    p=>{p.modelCoverage.directory.browserMatchesApi=false;},p=>{delete p.directoryWait;},
+    p=>{p.directoryWait.cardFallbackOptionsBeforeDirectory=0;},p=>{p.directoryWait.completedDelays=0;},
   ]){const report=fixture();mutate(report.cases[0].incrementalModelCoverage);assert.throws(()=>checkedJapanModelCoverageBrowserFixture(report));}
   assert.throws(()=>checkedJapanModelCoverageBrowserFixture({...fixture(),cases:fixture().cases.slice(0,1)}));
 });

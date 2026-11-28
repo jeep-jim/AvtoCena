@@ -737,18 +737,29 @@ def japan_source_bounded_acceptance_passed(report):
         report['japanExactCountPassed'] is None and isinstance(proof, dict) and \
         type(proof.get('sourcePairs')) is int and 0 < proof['sourcePairs'] <= 9007199254740991 and \
         type(proof.get('accessiblePairs')) is int and proof['accessiblePairs'] == proof['sourcePairs'] and \
+        proof.get('coverageContract') == 'directory-and-visible-cards-v1' and \
+        type(proof.get('cardBackedExtraPairs')) is int and proof['cardBackedExtraPairs'] >= 0 and \
+        type(proof.get('visibleCardPairs')) is int and 1 <= proof['visibleCardPairs'] <= 24 and \
+        proof['cardBackedExtraPairs'] <= proof['visibleCardPairs'] and \
+        type(proof.get('optionPairs')) is int and 0 < proof['optionPairs'] <= 9007199254740991 and \
+        proof['optionPairs'] == proof['sourcePairs'] + proof['cardBackedExtraPairs'] and \
+        proof.get('uiEqualsDirectory') is (proof['cardBackedExtraPairs'] == 0) and \
+        proof.get('allOptionsSourceBacked') is True and \
         all(proof.get(key) is True for key in ('allSourceModelsAccessible', 'noForeignModels', 'sourceMatchesUi',
             'typedFamilyNotNarrowed', 'countHonest', 'fullPage')) and \
         proof.get('make') in ('AUDI', 'Audi') and proof.get('typedBase') == 'A4' and \
-        isinstance(proof.get('pairsSha256'), str) and re.fullmatch(r'[a-f0-9]{64}', proof['pairsSha256']) is not None and \
+        all(isinstance(proof.get(key), str) and re.fullmatch(r'[a-f0-9]{64}', proof[key]) is not None for key in
+            ('pairsSha256', 'optionPairsSha256', 'cardBackedExtraPairsSha256', 'visibleCardPairsSha256', 'cardProvenanceSha256')) and \
+        (proof['optionPairsSha256'] == proof['pairsSha256']) == proof['uiEqualsDirectory'] and \
         type(proof.get('modelExpansions')) is int and proof['modelExpansions'] >= 0 and \
-        (proof['modelExpansions'] > 0) == (proof['sourcePairs'] > 60) and \
-        proof['modelExpansions'] <= (proof['sourcePairs'] + 59) // 60 - 1 and \
+        (proof['modelExpansions'] > 0) == (proof['optionPairs'] > 60) and \
+        proof['modelExpansions'] <= (proof['optionPairs'] + 59) // 60 - 1 and \
         type(proof.get('sourceFamilyModels')) is int and 0 < proof['sourceFamilyModels'] <= proof['sourcePairs'] and \
         isinstance(proof.get('directory'), dict) and proof['directory'].get('status') == 200 and \
         proof['directory'].get('stale') is False and type(proof['directory'].get('sourcePairs')) is int and \
         proof['directory']['sourcePairs'] == proof['sourcePairs'] and \
         proof['directory'].get('pairsSha256') == proof['pairsSha256'] and \
+        proof['directory'].get('browserMatchesApi') is True and \
         isinstance(proof.get('selection'), dict) and type(proof['selection'].get('shown')) is int and \
         1 <= proof['selection']['shown'] <= 24 and proof['selection'].get('observedSourceNamesOnly') is True and \
         type(proof.get('explicitApiReads')) is int and proof['explicitApiReads'] == 3 and \
