@@ -168,6 +168,7 @@ JAPAN_STABILITY_MODEL_CURSOR_RETAINED = '66537bb7470645acf995ab8a792a4fadb98ad1e
 JAPAN_STABILITY_MODEL_CURSOR_RETAINED_IMAGE = 'sha256:1086ca08d15c553e436796ab9d79df6538a62d4e8f163e81c76f64d22241a9b7'
 JAPAN_STABILITY_MODEL_CURSOR_CODE_FILES = {
     'apps/web/lib/catalog/ajes-model-resolution.ts',
+    'tests/ajes-count-display.test.ts',
     'tests/ajes-model-cursor-continuity.test.ts',
     'tests/ajes-model-recovery.test.ts',
     'tests/japan-model-directory-metadata.test.ts',

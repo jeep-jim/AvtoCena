@@ -93,7 +93,7 @@ test('pagination image verification keeps every CRM path protected and grants no
     execute:()=>assert.fail('wrong predecessor must fail before git')}),/china_image_pagination_scope/);
 });
 
-test('review plans keep accepted665 selectable until the explicit four-file model-cursor successor is accepted',async()=>{
+test('review plans keep accepted665 selectable until the explicit five-file model-cursor successor is accepted',async()=>{
   const plans=await readChinaDailyPlans(),base=plans.servingPlan;
   assert.equal(base.runtimeSha,JAPAN_STABILITY_MODEL_CURSOR_RETAINED_RUNTIME);
   assert.equal(base.retainedRuntime,JAPAN_STABILITY_SOURCE_COUNT_RETAINED_RUNTIME);
@@ -119,9 +119,9 @@ test('review plans keep accepted665 selectable until the explicit four-file mode
   assert.equal(successors.length,1);
   const successor=successors[0];
   assert.equal(successor.retainedRuntime,base.runtimeSha);
-  assert.equal(successor.runtimeSha,'bdf4df6a9dc0c5dbe11533c2749f9a1c89659331');
-  assert.equal(successor.runtimeTree,'cf3eb1faaba681c14404b2ea3c579da898c21cd6');
-  assert.equal(successor.runtimeFiles.length,4);
+  assert.equal(successor.runtimeSha,'5b1e513dc9af3735e3b757c6fe7da763aa92837e');
+  assert.equal(successor.runtimeTree,'ac4c70c441c161e22599c27f45dd60cce9dd117b');
+  assert.equal(successor.runtimeFiles.length,5);
   assert.deepEqual([...successor.runtimeFiles].sort(),[...JAPAN_STABILITY_MODEL_CURSOR_CODE_PATHS].sort());
   assert.equal(successor.codeScope,JAPAN_STABILITY_CODE_SCOPE);
   assert.equal(isExactJapanStabilityScope(successor),true);
@@ -132,8 +132,8 @@ test('review plans keep accepted665 selectable until the explicit four-file mode
   assert.equal(japanSourceCountRequired(successor),true);
   assert.equal(japanA4Power160ContinuationRequired(successor),true);
   assert.equal(japanLiteralFamilyRequired(successor),true);
-  assert.equal(successor.runtimeDiffSha256,'759d0c5bcc8b108f06b041c046047a33ee01ec4af2891aa87d0e5c47ec8e246d');
-  assert.equal(successor.pricingToServingDiffSha256,'0a34f4fb5c88bf2df6412331c2b4c7b71a9f037be49f56259bcce0ab8d06c61d');
+  assert.equal(successor.runtimeDiffSha256,'e1da31f4c7070154f25345be61bd366ecdacd426eb7873aa4a4fddd5f543c5be');
+  assert.equal(successor.pricingToServingDiffSha256,'5728ee0506775dc4f0d828828cae59837be164592bde27898ed3424a29024b95');
   assert.equal(successor.pricingToServingFiles.length,133);
   for(const countAcceptance of [undefined,JAPAN_SOURCE_BOUNDED_INCREMENTAL_POLICY]){
     const invalid={...successor,countAcceptance};

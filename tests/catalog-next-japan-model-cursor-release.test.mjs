@@ -53,9 +53,10 @@ function rejectedReports() {
   return changes.map(change => { const value = a4Power160ContinuationReport(); change(value); return value; });
 }
 
-test('literal-model successor is exactly four paths and retains the accepted source-count runtime', () => {
+test('literal-model successor is exactly five paths and retains the accepted source-count runtime', () => {
   const value = plan();
   assert.deepEqual(value.runtimeFiles, ['apps/web/lib/catalog/ajes-model-resolution.ts',
+    'tests/ajes-count-display.test.ts',
     'tests/ajes-model-cursor-continuity.test.ts', 'tests/ajes-model-recovery.test.ts',
     'tests/japan-model-directory-metadata.test.ts']);
   assert.equal(scope.isExactJapanStabilityScope(value), true);
@@ -76,7 +77,8 @@ test('literal-model successor is exactly four paths and retains the accepted sou
   assert.equal(scope.japanA4Power160ContinuationRequired(historical), false);
   for (const invalid of [
     {...value, retainedRuntime: historical.retainedRuntime}, {...historical, retainedRuntime: value.retainedRuntime},
-    {...value, runtimeFiles: value.runtimeFiles.slice(0, 3)},
+    {...value, runtimeFiles: value.runtimeFiles.slice(0, 4)},
+    {...value, runtimeFiles: value.runtimeFiles.filter(file => file !== 'tests/ajes-count-display.test.ts')},
     {...value, runtimeFiles: [...value.runtimeFiles, 'apps/web/lib/catalog/ajes-query.ts']},
     {...value, runtimeFiles: [...value.runtimeFiles, value.runtimeFiles[0]]},
     {...value, acceptancePolicy: undefined}, {...value, countAcceptance: undefined},
@@ -103,7 +105,7 @@ test('two filtered ordinary appends may be partial but must preserve selection, 
   for (const report of rejectedReports()) assert.equal(scope.japanA4Power160ContinuationAcceptancePassed(report), false);
 });
 
-test('Python host and JS agree on the four-path profile and filtered continuation evidence', () => {
+test('Python host and JS agree on the five-path profile and filtered continuation evidence', () => {
   const reports = [sourceCountReport(), a4Power160ContinuationReport(), ...rejectedReports()];
   const result = spawnSync('python3', ['-B', '-c', `
 import importlib.util,json,sys
@@ -113,6 +115,7 @@ profile=m.JAPAN_STABILITY_MODEL_CURSOR_CODE_FILES
 assert m.checked_japan_stability_image_files(sorted(profile),True,m.JAPAN_STABILITY_MODEL_CURSOR_RETAINED,m.JAPAN_SOURCE_COUNT_POLICY)==profile
 for files,retained in [(profile,m.JAPAN_STABILITY_SOURCE_COUNT_RETAINED),(m.JAPAN_STABILITY_SOURCE_COUNT_CODE_FILES,m.JAPAN_STABILITY_MODEL_CURSOR_RETAINED),
  (profile-{'tests/japan-model-directory-metadata.test.ts'},m.JAPAN_STABILITY_MODEL_CURSOR_RETAINED),
+ (profile-{'tests/ajes-count-display.test.ts'},m.JAPAN_STABILITY_MODEL_CURSOR_RETAINED),
  (profile|{'apps/web/lib/catalog/ajes-query.ts'},m.JAPAN_STABILITY_MODEL_CURSOR_RETAINED)]:
  try:m.checked_japan_stability_image_files(sorted(files),True,retained,m.JAPAN_SOURCE_COUNT_POLICY)
  except Exception:pass
