@@ -15,6 +15,7 @@ import {readFilteredAjesPage,ajesPowerEvidenceEpoch} from '../apps/web/lib/catal
 import {ajesErrorResponse} from '../apps/web/lib/catalog/ajes-error-response';
 import {applyJapanOwnerSpecifications} from '../apps/web/lib/catalog/japan-owner-specifications';
 import {sortCatalogRows} from '../apps/web/lib/catalog/market-page';
+import {priceCardForCity} from '../apps/web/lib/catalog/card-city-delivery';
 import {build} from 'esbuild';
 import {createRequire} from 'node:module';
 import {createElement} from 'react';
@@ -202,9 +203,84 @@ test('the existing delivered-price sort orders each loaded power partition witho
    assert.deepEqual(result.items.map((item:any)=>item.id),expected.map(id=>'ajes-stats-'+id));
    assert.deepEqual(result.items.map(japanUnknownPower),[false,false,true,true]);
    assert.deepEqual(fixture.state.queries.map(query=>query.page),[1,1]);assert.equal(result.hasMore,false);
-   assert.ok(fixture.state.queries.every(query=>query.sort===sort),'the existing source sort contract is unchanged');
+   assert.ok(fixture.state.queries.every(query=>query.sort===undefined),'delivered-price sorting must not reorder the raw auction-price candidates');
   }finally{fixture.close();}
  }
+});
+
+test('power price sorting uses the selected city inside each known/unknown partition',async()=>{
+ const priced=(hp:unknown,id:string,totalRub:number,deliveryRub:number)=>({...offer(hp,id),catalogPricingMode:undefined,totalRub,
+  calculationSnapshot:{deliveryPricingBasis:{subtotalRub:totalRub,deliveryRub,percents:[]}}});
+ const rows=[priced('','unknown-base-cheaper',500000,0),priced(150,'known-base-cheaper',900000,0),
+  priced('','unknown-city-cheaper',550000,100000),priced(120,'known-city-cheaper',950000,100000)];
+ assert.deepEqual(rows.map(row=>priceCardForCity(row,'Новокузнецк').offer.totalRub),[620000,1020000,570000,970000]);
+ for(const sort of ['totalRub','totalRubDesc']){
+  const fixture=await catalogPowerFixture(query=>sourcePage(query,rows,rows.length));
+  try{
+   const result=await fixture.read({market:'japan',powerTo:'160',sort,city:'Новокузнецк'});
+   const expected=sort==='totalRub'?['known-city-cheaper','known-base-cheaper','unknown-city-cheaper','unknown-base-cheaper']:
+    ['known-base-cheaper','known-city-cheaper','unknown-base-cheaper','unknown-city-cheaper'];
+   assert.deepEqual(result.items.map((item:any)=>item.id),expected.map(id=>'ajes-stats-'+id));
+   assert.deepEqual(result.items.map(japanUnknownPower),[false,false,true,true]);
+   assert.equal(result.hasMore,false);assert.equal(result.total,4);
+  }finally{fixture.close();}
+ }
+});
+
+test('power price separation preserves other source sort priorities and does not broaden ordinary or invalid queries',async()=>{
+ for(const [sort,sourceSort] of [['mileage','mileage'],['year','year'],['totalRubDesc,mileage','mileage'],['year,totalRub','year']]){
+  const fixture=await catalogPowerFixture(query=>{ajesQuery(query);return sourcePage(query,[offer(150,'sort-retained')],1);});
+  try{
+   const result=await fixture.read({market:'japan',powerTo:'160',sort});
+   assert.equal(result.items.length,1);
+   assert.ok(fixture.state.queries.every(query=>query.sort===sourceSort));
+  }finally{fixture.close();}
+ }
+ const fixture=await catalogPowerFixture(query=>{ajesQuery(query);return sourcePage(query,[offer(150,'ordinary-sort')],1);});
+ try{
+  await fixture.read({market:'japan',sort:'totalRubDesc'},undefined,{includeCount:false});
+  assert.equal(fixture.state.queries[0].sort,'totalRubDesc','unfiltered source order is unchanged');
+  await assert.rejects(fixture.read({market:'japan',powerTo:'160',sort:'totalRubDesc,totalRub'}),AjesInputError);
+ }finally{fixture.close();}
+});
+
+for(const sort of ['totalRub','totalRubDesc'])test(`power then ${sort} keeps the usable selection instead of scanning an unrelated auction-price prefix`,async()=>{
+ // The most/least expensive auction rows do not pass the power filter. A
+ // delivered-price button must order the same loaded candidates; it cannot
+ // replace them with eight rejected raw FINISH pages and an empty catalogue.
+ const known=Array.from({length:48},(_,i)=>({...offer(150,`price-eligible-${i}`),catalogPricingMode:undefined,
+  sourcePrice:1000000+i,totalRub:900000+(47-i)*1000,auctionDate:`2026-11-${String(28-Math.floor(i/24)).padStart(2,'0')}T12:00:00Z`,
+  calculationSnapshot:{deliveryPricingBasis:{subtotalRub:900000+(47-i)*1000,deliveryRub:10000,percents:[]}}}));
+ const excluded=[100000,4000000].flatMap(base=>Array.from({length:192},(_,i)=>({...offer(300,`price-excluded-${base}-${i}`),
+  catalogPricingMode:undefined,sourcePrice:base+i,totalRub:3000000+i*1000})));
+ const fixture=await catalogPowerFixture(query=>{
+  const sql=ajesQuery(query).sql;
+  const rows=[...known,...excluded];
+  if(/order by finish asc/.test(sql))rows.sort((a,b)=>a.sourcePrice-b.sourcePrice);
+  if(/order by finish desc/.test(sql))rows.sort((a,b)=>b.sourcePrice-a.sourcePrice);
+  const offset=(query.page-1)*query.pageSize;
+  return sourcePage(query,rows.slice(offset,offset+query.pageSize));
+ });
+ try{
+  const params={market:'japan',powerTo:'160',city:'Новокузнецк'};
+  const original=await fixture.read(params);
+  assert.equal(original.items.length,24);
+  const first=await fixture.read({...params,sort});
+  assert.equal(first.items.length,24,'a price-only sort preserves a populated power selection');
+  assert.deepEqual(new Set(first.items.map((item:any)=>item.id)),new Set(original.items.map((item:any)=>item.id)));
+  assert.deepEqual(first.items.map((item:any)=>item.id),(sort==='totalRub'?known.slice(0,24).reverse():known.slice(0,24)).map(item=>item.id));
+  assert.equal(first.hasMore,true);assert.equal(first.scanLimited,false);assert.equal(first.total,null);
+  assert.equal(first.powerFilterSummary.supplierPower,24);assert.equal(first.powerFilterSummary.unknownPower,0);
+  const second=await fixture.read({...params,sort,page:'2',after:first.nextCursor});
+  assert.equal(second.items.length,24);
+  assert.deepEqual(second.items.map((item:any)=>item.id),(sort==='totalRub'?known.slice(24,48).reverse():known.slice(24,48)).map(item=>item.id));
+  assert.equal(new Set([...first.items,...second.items].map(item=>item.id)).size,48,'continuation neither loses nor repeats eligible rows');
+  assert.deepEqual(fixture.state.queries.map(query=>query.page),[1,1,2],'price sorting adds no rejected-prefix crawl');
+  const reads=fixture.state.queries.length;
+  await assert.rejects(fixture.read({...params,sort:sort==='totalRub'?'totalRubDesc':'totalRub',page:'2',after:first.nextCursor}),AjesCursorRefreshRequired);
+  await assert.rejects(fixture.read({...params,sort,city:'Москва',page:'2',after:first.nextCursor}),AjesCursorRefreshRequired);
+  assert.equal(fixture.state.queries.length,reads,'sort and city remain part of the continuation identity');
+ }finally{fixture.close();}
 });
 
 test('a later source refusal preserves 23 available rows as incomplete and retries the exact next source page',async()=>{

@@ -5,7 +5,7 @@ import {useDealerBrowsing} from "@/components/dealers/DealerBrowsingContext";
 import {dealerBrowsingHref} from "@/lib/dealers/browsing-context";
 
 import { useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "react";
-import {useCatalogResultCount} from './CatalogSelectionContext';
+import {CatalogLoadedCountUpdate,useCatalogResultCount} from './CatalogSelectionContext';
 import {CatalogPagination} from "./CatalogPagination";
 
 import { loadMoreGreenCorner } from "./green-corner-load-more-action";
@@ -142,6 +142,7 @@ export function CatalogLoadMore({query, initialPage, initialTotal, initialCount,
     } finally {lock.current = false; if (mounted.current && activeKey.current===key) setBusy(false);}
   }
   return <div ref={list}>
+    {query.market==='japan'&&resultQueryKey&&<CatalogLoadedCountUpdate queryKey={resultQueryKey} count={count}/>}
     {batches.map(batch => <div key={batch.page} data-catalog-batch={batch.page} className="mb-2.5 grid min-w-0 grid-cols-2 gap-2.5 sm:mb-3 sm:gap-3 md:grid-cols-3 xl:grid-cols-4">{batch.cards}</div>)}
     <div className="mx-auto mt-7 flex w-full flex-col items-center gap-3">
       <p role="status" aria-live="polite" className="text-xs font-bold text-[var(--ac-muted)]">Показано {count.toLocaleString("ru-RU")} {knownTotal!==null?`из ${knownTotal.toLocaleString("ru-RU")}`:""}</p>

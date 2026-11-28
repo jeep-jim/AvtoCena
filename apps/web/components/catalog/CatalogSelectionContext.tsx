@@ -66,9 +66,12 @@ export function useCatalogView(){return useContext(Context)?.view || "grid";}
 
 // Keep count updates separate from view/selection consumers (including cards).
 const ResultCountContext=createContext<{value:ResultCount|null;set:(count:ResultCount)=>void}|null>(null);
+type LoadedCount={queryKey:string;count:number};
+const LoadedCountContext=createContext<{value:LoadedCount|null;set:(count:LoadedCount)=>void}|null>(null);
 function ResultCountProvider({children}:{children:ReactNode}){
  const [value,set]=useState<ResultCount|null>(null);
- return <ResultCountContext.Provider value={{value,set}}>{children}</ResultCountContext.Provider>;
+ const [loaded,setLoaded]=useState<LoadedCount|null>(null);
+ return <ResultCountContext.Provider value={{value,set}}><LoadedCountContext.Provider value={{value:loaded,set:setLoaded}}>{children}</LoadedCountContext.Provider></ResultCountContext.Provider>;
 }
 // Share the already streamed server aggregate with the open filter sheet.
 // Query identity prevents retained/older results from becoming the current count.
@@ -78,3 +81,10 @@ export function CatalogResultCountUpdate({queryKey,text,total}:ResultCount){
  return null;
 }
 export function useCatalogResultCount(){return useContext(ResultCountContext)?.value;}
+/** Appended cards are a loaded count, never an independently proven total. */
+export function CatalogLoadedCountUpdate({queryKey,count}:LoadedCount){
+ const set=useContext(LoadedCountContext)?.set;
+ useEffect(()=>{set?.({queryKey,count});},[set,queryKey,count]);
+ return null;
+}
+export function useCatalogLoadedCount(){return useContext(LoadedCountContext)?.value;}

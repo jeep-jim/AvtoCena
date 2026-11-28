@@ -6,9 +6,9 @@ import {createRequire} from 'node:module';
 const require=createRequire(import.meta.url);
 test('ready cards do not wait for optional brand/model directories; exact selected controls survive',async()=>{
  let calls=0;const never=new Promise(()=>{});
- let readyCount:any={total:1},countResult:any=never,readOptions:any,countKey='';
- let items:any[]=[{id:'car1',make:'Toyota',model:'COROLLA'}];
- (globalThis as any).__ajesTest={readAjesCatalogPage:async(_q:any,_measure:any,options:any)=>{readOptions=options;return {countSummary:readyCount,page:1,total:items.length,items,hasMore:false};},readAjesMakes:()=>{calls++;return never;},readAjesDirectory:()=>{calls++;return never;},readAjesCountSummary:(key:string)=>{calls++;countKey=key;return countResult;}};
+ let readyCount:any={total:1,stale:false,upperBound:false,observedAt:'2026-11-28T00:00:00Z'},countResult:any=never,readOptions:any,countKey='';
+ let items:any[]=[{id:'car1',make:'Toyota',model:'COROLLA'}],pageFlags:Record<string,boolean>={};
+ (globalThis as any).__ajesTest={readAjesCatalogPage:async(_q:any,_measure:any,options:any)=>{readOptions=options;return {countSummary:readyCount,page:1,total:items.length,items,hasMore:false,...pageFlags};},readAjesMakes:()=>{calls++;return never;},readAjesDirectory:()=>{calls++;return never;},readAjesCountSummary:(key:string)=>{calls++;countKey=key;return countResult;}};
  try{
   const built=await build({entryPoints:['apps/web/components/catalog/AjesCatalog.tsx'],bundle:true,platform:'node',format:'cjs',write:false,jsx:'automatic',external:['react','react/jsx-runtime'],plugins:[{name:'dependencies',setup(b){
    b.onResolve({filter:/.*/},args=>args.path==='node:crypto'?{path:args.path,external:true}:args.kind==='entry-point'||args.path==='react'||args.path==='react/jsx-runtime'?undefined:{path:args.path,namespace:'fixture'});
@@ -20,7 +20,8 @@ test('ready cards do not wait for optional brand/model directories; exact select
     if(args.path.endsWith('/ajes-catalog'))return {contents:`export const {readAjesCatalogPage,readAjesMakes,readAjesDirectory,readAjesCountSummary}=globalThis.__ajesTest;export class AjesFilterUnavailable extends Error {}`};
     if(args.path.endsWith('/ajes-client'))return {contents:'export class AjesUnavailable extends Error {}'};
     if(args.path.endsWith('/ajes-query'))return {contents:'export class AjesInputError extends Error {};export class AjesCursorRefreshRequired extends AjesInputError {}'};
-    if(args.path.endsWith('/ajes-count-display'))return {contents:'export const exactAjesCount=s=>s?.total;export const ajesCountText=s=>String(s?.total??"unknown");export const ajesPaginationCountText=ajesCountText;'};
+    if(args.path.endsWith('/ajes-count-display'))return {contents:readFileSync('apps/web/lib/catalog/ajes-count-display.ts','utf8'),loader:'ts'};
+    if(args.path.endsWith('/count-format'))return {contents:readFileSync('apps/web/lib/catalog/count-format.ts','utf8'),loader:'ts'};
     if(args.path.endsWith('/japan-source-power'))return {contents:readFileSync('apps/web/lib/catalog/japan-source-power.ts','utf8'),loader:'ts'};
     if(args.path.endsWith('/powertrain-safety'))return {contents:readFileSync('apps/web/lib/catalog/powertrain-safety.ts','utf8'),loader:'ts'};
     if(args.path.endsWith('/japan-owner-specifications'))return {contents:'export const isOwnerStepwgnNonHybrid=()=>false;'};
@@ -50,14 +51,28 @@ test('ready cards do not wait for optional brand/model directories; exact select
   assert.equal(calls,0,'late count does not precede ready cards');
   const lateNodes=walk(lateRoot),late=lateNodes.find(n=>n.type?.name==='AjesIndependentCount');assert.ok(late);
   assert.equal(lateNodes.some(n=>n.props?.['data-japan-power-summary-page']!==undefined),false,'the removed page warning must not be rendered');
-  assert.equal(lateNodes.some(n=>n.props?.children==='unknown'),false,'no uncertain count label is rendered above the actual cars');
+  assert.ok(lateNodes.some(n=>n.type?.name==='JapanCatalogCount'&&n.props.initialCount===3),'the visible partial count includes the three actually loaded cars');
   assert.equal(lateNodes.find(n=>n.props?.initialCount===3)?.props.resultCountLabel,undefined,'no uncertain count label is passed to the footer');
   assert.ok(lateNodes.some(n=>n.props?.initialCount===3),'all three actual cards, including unknown power, remain visible');
   assert.ok(lateNodes.some(n=>n.props?.initialCards?.some?.((card:any)=>card.props.offer.japanPowerUnknown===true)));
-  countResult=Promise.resolve({total:42});
+  countResult=Promise.resolve({total:42,stale:false,upperBound:false,observedAt:'2026-11-28T00:00:00Z'});
   const counterNodes=walk(await late.type(late.props));
   assert.ok(counterNodes.some(n=>n.props?.text==='42'&&n.props?.total===42),'late aggregate includes the numeric pagination value');
   assert.ok(lateNodes.some(n=>n.props?.resultQueryKey===countKey),'pagination and independent aggregate use the identical query identity');
   assert.deepEqual(JSON.parse(countKey),lateNodes.find(n=>n.props?.auctionResults).props.initial);
+  readyCount={total:0,stale:false,upperBound:true,observedAt:'2026-11-28T00:00:00Z'};
+  const partialNodes=walk(await mod.exports.AjesCatalog({params:{market:'japan',powerTo:'160',sort:'totalRubDesc',city:'Новокузнецк'}}));
+  assert.ok(partialNodes.some(n=>n.type?.name==='JapanCatalogCount'&&n.props.initialCount===3&&n.props.summary===readyCount));
+  assert.equal(partialNodes.find(n=>n.props?.auctionResults).props.resultCount,undefined,'upper bound never reaches numeric filter total');
+  items=[];
+  for(const failure of ['partial','stale','interrupted']){
+   pageFlags={hasMore:true,scanLimited:true,[failure]:true};
+   const failedNodes=walk(await mod.exports.AjesCatalog({params:{market:'japan',powerTo:'160',sort:'totalRubDesc',city:'Новокузнецк'}}));
+   assert.match(failedNodes.find(n=>n.props?.resultScope)?.props.resultError,/Не удалось обновить/,'empty failed selection activates retained results and retry');
+  }
+  pageFlags={hasMore:true,scanLimited:true};
+  const scanning=walk(await mod.exports.AjesCatalog({params:{market:'japan',powerTo:'160',sort:'totalRubDesc',city:'Новокузнецк'}}));
+  assert.equal(scanning.find(n=>n.props?.resultScope)?.props.resultError,undefined,'fresh scan continuation is not mislabelled as a source failure');
+  assert.equal(scanning.find(n=>n.type?.name==='CatalogLoadMore')?.props.initialHasMore,true);
  }finally{delete (globalThis as any).__ajesTest;}
 });

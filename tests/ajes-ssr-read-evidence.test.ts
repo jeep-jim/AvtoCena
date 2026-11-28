@@ -82,7 +82,7 @@ test('actual AjesCatalog renders only the annotation on Japan main and retains i
     'ajes-client':"export const AjesUnavailable=globalThis.__japanSsrEvidenceFixture.Unavailable;",
     'ajes-query':'export class AjesInputError extends Error{};export const AjesCursorRefreshRequired=globalThis.__japanSsrEvidenceFixture.Refresh;',
     'DealerBrowsingContext':'export const DealerLink=()=>null;',
-    'CatalogSelectionContext':'export const CatalogResultCountUpdate=()=>null;',
+    'CatalogSelectionContext':'export const CatalogResultCountUpdate=()=>null;export const useCatalogLoadedCount=()=>null;',
     'catalog-routes':"export const catalogSearchHeading=()=> 'Япония';",
   };
   for(const name of ['CatalogSidebar','CatalogLoadMore','PublicHeader','CatalogCard','CatalogFilters','BrandLogoRail',

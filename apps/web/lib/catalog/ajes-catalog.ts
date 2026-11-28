@@ -1,5 +1,6 @@
 import {assertAjesJapanMarket,assertAjesJapanTable} from './ajes-access-policy';
 import {sortCatalogRows} from './market-page';
+import {parseCatalogSort} from './catalog-sort';
 import {japanPreviewParameters} from './japan-preview-parameters';
 import {readFilteredAjesPage,readPowerOrderedAjesPage,ajesPowerEvidenceEpoch,assertAjesPowerCursorEpoch} from './ajes-filtered-page';
 import {resolveAjesMakeNames} from './ajes-make-resolution';
@@ -114,6 +115,15 @@ export async function readAjesCatalogPage(params:Record<string,unknown>,measure?
  const powerIdentity=(offer:any)=>JSON.stringify([japanLocalPowerHp(offer)??null,japanSupplierPower(offer)?.hp??null,japanUnknownPower(offer)]);
  const {query,modelDirectoryUnavailable,makeDirectoryUnavailable}=await resolvedCatalogQuery(JSON.stringify(params));
  const directoryUnavailable=modelDirectoryUnavailable||makeDirectoryUnavailable;
+ // Delivered-price sorting is explicitly local to the loaded selection. Raw
+ // auction FINISH is a different price: sorting that source first can replace
+ // a populated power selection with pages of expensive, over-limit cars.
+ // Keep the same candidate walk and local/manual power evidence; order its
+ // admitted rows by the selected city's delivered price below. Other source
+ // sort terms remain intact, and the cursor still binds the full UI query.
+ const sourceTerms=filter.powerFilter?parseCatalogSort(query.sort):null;
+ const sourceQuery=sourceTerms?.some(term=>term.startsWith('totalRub'))
+  ?{...query,sort:sourceTerms.filter(term=>!term.startsWith('totalRub')).join(',')||undefined}:query;
  measure?.('query-resolution',performance.now()-resolveStarted);
  const startedAt=Date.now();
  const countStarted=performance.now();
@@ -127,7 +137,7 @@ export async function readAjesCatalogPage(params:Record<string,unknown>,measure?
  if(options.includeCount!==false&&(query.page||1)===1&&!params.after&&!filter.powerFilter)void readAjesCountSummary(JSON.stringify(params)).then(value=>{readyCount=value;}).catch(()=>{}).finally(()=>measure?.('count',performance.now()-countStarted));
  const read=async(sourcePage:number,phase?:'k'|'u')=>{
   await checkEvidence();
-  const received=await readAjesPublic({...query,page:sourcePage},{measure,...(evidenceSnapshot?{evidenceSnapshot}:{})}).catch(error=>{
+  const received=await readAjesPublic({...sourceQuery,page:sourcePage},{measure,...(evidenceSnapshot?{evidenceSnapshot}:{})}).catch(error=>{
    if(error?.sourceReceipt)sourceReceipts.push(error.sourceReceipt);
    throw error;
   });

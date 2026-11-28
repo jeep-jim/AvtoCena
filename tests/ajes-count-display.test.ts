@@ -1,6 +1,6 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {ajesCountText,exactAjesCount} from '../apps/web/lib/catalog/ajes-count-display';
+import {ajesCountText,exactAjesCount,ajesVisibleCount} from '../apps/web/lib/catalog/ajes-count-display';
 import {ajesCatalogQuery,ajesQuery} from '../apps/web/lib/catalog/ajes-query';
 
 test('independent counts retain zero, unavailable and stale semantics',()=>{
@@ -14,6 +14,46 @@ test('independent counts retain zero, unavailable and stale semantics',()=>{
  assert.equal(exactAjesCount({...fresh,stale:true}),undefined);
  assert.equal(ajesCountText({...fresh,upperBound:true}),'Количество уточняется');
  assert.equal(exactAjesCount({...fresh,upperBound:true}),undefined);
+});
+test('visible Japan count uses loaded membership while an admitted total is unknown',()=>{
+ const observedAt='2026-11-28T00:00:00Z';
+ const source={total:147867,stale:false,observedAt,upperBound:true};
+ const partial=ajesVisibleCount(source,24);
+ assert.deepEqual(partial,{text:'Загружено 24 · количество уточняется',total:undefined,loadedCount:24,status:'partial'});
+ assert.equal(ajesVisibleCount(source,48).text,'Загружено 48 · количество уточняется');
+ assert.equal(ajesVisibleCount({...source,total:0},24).text,partial.text,'the power-count sentinel is not zero inventory');
+ assert.equal(ajesVisibleCount(null,24).text,partial.text,'ready cards have a count even before optional aggregate resolves');
+ for(const loaded of [undefined,0,-1,NaN,Infinity,2.5]){
+  const count=ajesVisibleCount(null,loaded);
+  assert.equal(count.text,'Количество уточняется');assert.equal(count.total,undefined);
+ }
+ const exact={...source,upperBound:false,total:24};
+ assert.deepEqual(ajesVisibleCount(exact,24),{text:'24',total:24,loadedCount:24,status:'exact'});
+ assert.equal(ajesVisibleCount({...exact,total:0},0).text,'0','only fresh proven exhaustion may display zero');
+ assert.equal(ajesVisibleCount({...exact,total:0},24).total,undefined,'a late contradictory aggregate cannot erase visible cars');
+ assert.equal(ajesVisibleCount({...exact,stale:true},24).total,undefined);
+ assert.equal(ajesVisibleCount({...exact,stale:true},24).status,'stale');
+});
+
+test('real Japan count badge renders exact and partial values without false inventory metadata',async()=>{
+ const {build}=await import('esbuild');
+ const {createRequire}=await import('node:module');
+ const require=createRequire(import.meta.url);
+ const built=await build({entryPoints:['apps/web/components/catalog/JapanCatalogCount.tsx'],bundle:true,platform:'node',format:'cjs',write:false,jsx:'automatic',packages:'external',tsconfig:'apps/web/tsconfig.json'});
+ const mod={exports:{} as any};new Function('require','module','exports',built.outputFiles[0].text)(require,mod,mod.exports);
+ const {createElement}=require('react'),{renderToStaticMarkup}=require('react-dom/server');
+ const render=(summary:any,initialCount?:number)=>renderToStaticMarkup(createElement(mod.exports.JapanCatalogCount,{queryKey:'current-power-sort-query',summary,initialCount}));
+ const upper={total:147867,stale:false,observedAt:'2026-11-28T00:00:00Z',upperBound:true};
+ const partial=render(upper,24);
+ assert.match(partial,/data-japan-loaded-count="24"/);assert.match(partial,/data-japan-count-status="partial"/);
+ assert.match(partial,/Загружено 24 · количество уточняется/);assert.doesNotMatch(partial,/data-catalog-market-count=|147867/);
+ assert.match(render(null,48),/Загружено 48 · количество уточняется/);
+ const unknown=render(null);
+ assert.match(unknown,/Количество уточняется/);assert.doesNotMatch(unknown,/data-japan-loaded-count=|data-catalog-market-count=|Загружено 0/);
+ const exact=render({...upper,total:24,upperBound:false},24);
+ assert.match(exact,/data-japan-count-status="exact"/);assert.match(exact,/data-catalog-market-count="24"/);
+ const stale=render({...upper,total:24,upperBound:false,stale:true},24);
+ assert.match(stale,/data-japan-count-status="stale"/);assert.doesNotMatch(stale,/data-catalog-market-count=/);
 });
 test('power selection never becomes a supplier horsepower SQL predicate',()=>{
  for(const market of ['japan'] as const)for(const aggregate of [undefined,'count','models'] as const){
