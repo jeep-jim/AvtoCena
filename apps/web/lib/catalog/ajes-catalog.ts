@@ -4,6 +4,7 @@ import {readAjesCensusCount,ajesRequestedCountQuery,ajesRequestedCountQueryHash,
 import {createAjesSourceCountSummary,isAjesSourceCountSummary,AJES_SOURCE_COUNT_PREDICATE_VERSION,type AjesSourceCountSummary} from './ajes-source-count';
 import {captureAjesCountPricingContext} from './ajes-count-pricing-context';
 import {parseCatalogSort} from './catalog-sort';
+import {JAPAN_KNOWN_POWER_QUERY_VERSION,japanKnownPowerSelection} from './japan-known-power-query';
 import {japanPreviewParameters} from './japan-preview-parameters';
 import {readFilteredAjesPage,readPowerOrderedAjesPage,ajesPowerEvidenceEpoch,assertAjesPowerCursorEpoch} from './ajes-filtered-page';
 import {resolveAjesMakeSelection} from './ajes-make-resolution';
@@ -157,6 +158,7 @@ export async function readAjesCatalogPage(params:Record<string,unknown>,measure?
  const selectionIncomplete=modelDirectoryUnavailable||makeDirectoryUnavailable;
  const sourceScopeUnproven=!ajesSourceScopeSupportsExactCount(query);
  const sourceQuery=query;
+ const knownPower=sourcePriceOrder&&filter.powerFilter?japanKnownPowerSelection(evidenceSnapshot.editorial):null;
  measure?.('query-resolution',performance.now()-resolveStarted);
  const startedAt=Date.now();
  const countStarted=performance.now();
@@ -168,7 +170,7 @@ export async function readAjesCatalogPage(params:Record<string,unknown>,measure?
  measure?.('count',performance.now()-countStarted);
  const read=async(sourcePage:number,phase?:'k'|'u')=>{
   await checkEvidence();
-  const received=await readAjesPublic({...sourceQuery,page:sourcePage},{measure,evidenceSnapshot}).catch(error=>{
+  const received=await readAjesPublic({...sourceQuery,...(phase==='k'&&knownPower?{knownPower}:{}),page:sourcePage},{measure,evidenceSnapshot}).catch(error=>{
    if(error?.sourceReceipt)sourceReceipts.push(error.sourceReceipt);
    throw error;
   });
@@ -212,6 +214,7 @@ export async function readAjesCatalogPage(params:Record<string,unknown>,measure?
   local:Object.fromEntries(['body','bodyType','budget','budgetFrom','budgetTo','hasPrice','powerFrom','powerTo','city'].map(key=>[key,String(params[key]??'')])),
   evidenceEpoch,
   pricingContext:pricingContext?.digest??null,
+  ...(sourcePriceOrder&&filter.powerFilter?{knownPowerQueryVersion:JAPAN_KNOWN_POWER_QUERY_VERSION}:{}),
  });
  const initial=powerOrdered||params.after?undefined:await read(query.page||1);
  let first:Awaited<ReturnType<typeof read>>|undefined=initial;

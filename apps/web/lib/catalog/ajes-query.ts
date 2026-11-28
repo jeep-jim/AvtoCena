@@ -11,6 +11,7 @@ import {JAPAN_MIN_MODEL_YEAR} from './japan-year-policy';
 import {parseEngineCc} from './engine-input';
 import {auctionGradeLabel} from './japan-export-restriction';
 import {heavyVehicleSqlExclusion,knownHeavyVehicleFamily} from './heavy-vehicle-families';
+import {japanKnownPowerPredicate,type JapanKnownPowerSelection} from './japan-known-power-query';
 /** Supplier SQL is generated here only; callers cannot supply SQL or column names. */
 export type AjesTable = 'stats' | 'main';
 export class AjesInputError extends Error { constructor() { super('ajes_invalid_query'); } }
@@ -29,8 +30,8 @@ export type AjesResolvedMakes = {exact:string[]};
 export const AJES_CENSUS_FIELDS = ['MARKA_NAME','MODEL_NAME','YEAR','GRADE','KUZOV','ENG_V','PRIV','KPP','TIME','PW','STATUS','COLOR','BODY_TYPE','VEHICLE_CATEGORY','FUEL'] as const;
 export type AjesCensusField = typeof AJES_CENSUS_FIELDS[number];
 export const AJES_CENSUS_REQUIRED_FIELDS = AJES_CENSUS_FIELDS.slice(0,12);
-export type AjesQuery = {pickup?:boolean;salePeriod?:string; table?: AjesTable; aggregate?: 'count'|'models'|'makes'|'colors'|'census'; countIdentity?:boolean; censusFields?:AjesCensusField[]; correctionId?:string; sort?: string; color?:string; fuel?:string; transmission?:string; drive?:string; auctionGrade?:string; id?: string; make?: string; resolvedMakes?:AjesResolvedMakes; model?: string; modelFamilies?:string; resolvedModels?:AjesResolvedModels; chassis?:string; frameNumber?:string; lotNumber?:string; sourcePriceTo?:number; powerFrom?:number; powerTo?:number; yearFrom?: number; yearTo?: number; mileageFrom?:number; mileageTo?: number; engineFrom?:number; engineTo?:number; page?: number; pageSize?: number};
-const keys = new Set(['pickup','salePeriod','aggregate','countIdentity','censusFields','correctionId','sort','color','fuel','transmission','drive','auctionGrade','table','id','make','resolvedMakes','model','modelFamilies','resolvedModels','chassis','frameNumber','lotNumber','sourcePriceTo','powerFrom','powerTo','yearFrom','yearTo','mileageFrom','mileageTo','engineFrom','engineTo','page','pageSize']);
+export type AjesQuery = {knownPower?:JapanKnownPowerSelection;pickup?:boolean;salePeriod?:string; table?: AjesTable; aggregate?: 'count'|'models'|'makes'|'colors'|'census'; countIdentity?:boolean; censusFields?:AjesCensusField[]; correctionId?:string; sort?: string; color?:string; fuel?:string; transmission?:string; drive?:string; auctionGrade?:string; id?: string; make?: string; resolvedMakes?:AjesResolvedMakes; model?: string; modelFamilies?:string; resolvedModels?:AjesResolvedModels; chassis?:string; frameNumber?:string; lotNumber?:string; sourcePriceTo?:number; powerFrom?:number; powerTo?:number; yearFrom?: number; yearTo?: number; mileageFrom?:number; mileageTo?: number; engineFrom?:number; engineTo?:number; page?: number; pageSize?: number};
+const keys = new Set(['knownPower','pickup','salePeriod','aggregate','countIdentity','censusFields','correctionId','sort','color','fuel','transmission','drive','auctionGrade','table','id','make','resolvedMakes','model','modelFamilies','resolvedModels','chassis','frameNumber','lotNumber','sourcePriceTo','powerFrom','powerTo','yearFrom','yearTo','mileageFrom','mileageTo','engineFrom','engineTo','page','pageSize']);
 /** These fixed predicates select the same raw rows. Sharing their cache identity
  * lets local power changes reuse an already requested page without another AJ read.
  * Keep the actual compact SQL on the wire for the existing URI-size boundary.
@@ -50,6 +51,11 @@ function name(value: unknown) {
   // Deliberately reject quotes, escapes and SQL punctuation instead of escaping user SQL.
   if (typeof value !== 'string' || !/^[\p{L}\p{N} .+()&/-]{1,80}$/u.test(value.trim())) throw new AjesInputError();
   return value.trim().toUpperCase();
+}
+function sourceOrder(sort:string):string {
+ const terms=parseCatalogSort(sort);if(!terms)throw new AjesInputError();
+ const fields={auctionDateAsc:'auction_date asc',auctionDateDesc:'auction_date desc',mileage:'mileage asc',mileageDesc:'mileage desc',year:'year desc',yearAsc:'year asc',totalRub:'finish asc',totalRubDesc:'finish desc'};
+ return terms.length?terms.map(term=>fields[term]).join(', ')+(terms.some(t=>t.startsWith('auctionDate'))||terms[0].startsWith('mileage')?'':', auction_date desc'):'auction_date desc';
 }
 export function ajesQuery(input: unknown,driveIndex:CalculationIndex|null=null) {
   if (!input || typeof input !== 'object' || Array.isArray(input) || Object.keys(input).some(k=>!keys.has(k))) throw new AjesInputError();
@@ -137,10 +143,22 @@ export function ajesQuery(input: unknown,driveIndex:CalculationIndex|null=null) 
   if(q.powerFrom!==undefined||q.powerTo!==undefined){
     const low=integer(q.powerFrom,1,1,2500),high=integer(q.powerTo,2500,1,2500);
     if(low>high)throw new AjesInputError();
-    // PW is integer hp, but source SQL cannot preserve contradictory local/manual
-    // overrides. Keep the raw candidate page shared with the unfiltered query;
-    // apply power and explicit unknown inclusion after local enrichment.
-    // The bounded post-filter below prevents an unbounded scan of supplier pages.
+    // Ordinary power searches share the original source candidates. Local
+    // admission decides contradictory manual facts and explicit unknown inclusion.
+    // Only the internal price-sort K selector below may narrow that superset.
+  }
+  if(q.knownPower!==undefined){
+    const selection=q.knownPower;
+    if(table!=='stats'||q.powerFrom===undefined&&q.powerTo===undefined
+      ||q.aggregate!==undefined&&q.aggregate!=='count'||!parseCatalogSort(q.sort||'')?.some(term=>term.startsWith('totalRub'))
+      ||!selection||typeof selection!=='object'||Array.isArray(selection)||Object.keys(selection).some(key=>key!=='editorialIds')
+      ||!Array.isArray(selection.editorialIds)||selection.editorialIds.some(id=>typeof id!=='string'||!/^[A-Za-z0-9_-]{1,64}$/.test(id)))throw new AjesInputError();
+    // Use the same worst permitted LIST suffix for every page and its COUNT.
+    // A different budget decision must never change the confirmation WHERE.
+    const longest=`select * from ${table} where ${where.join(' and ')} order by ${sourceOrder(q.sort!)}, id asc limit 47999952,48`;
+    const budget=5600-(new URLSearchParams({sql:longest+' and '}).toString().length-4);
+    const predicate=japanKnownPowerPredicate(q,driveIndex,selection,budget);
+    if(predicate)where.push(predicate);
   }
   if(q.aggregate!==undefined&&!['count','models','makes','colors','census'].includes(q.aggregate))throw new AjesInputError();
   if(q.censusFields!==undefined&&q.aggregate!=='census')throw new AjesInputError();
@@ -162,10 +180,7 @@ export function ajesQuery(input: unknown,driveIndex:CalculationIndex|null=null) 
   if(q.aggregate==='colors')return {table,empty,kind:'colors' as const,sql:`select color, count(*) from ${table} where ${where.join(' and ')} group by color order by color limit ${(page-1)*500},500`,page,pageSize:500};
   if(q.aggregate==='makes')return {table,empty,kind:'makes' as const,sql:`select marka_name, count(*) from ${table} where ${where.join(' and ')} group by marka_name order by marka_name limit ${(page-1)*500},500`,page,pageSize:500};
   if(q.aggregate==='models')return {table,empty,kind:'models' as const,sql:`select marka_name, model_name, count(*) from ${table} where ${where.join(' and ')} group by marka_name, model_name order by marka_name, model_name limit ${(page-1)*500},500`,page,pageSize:500};
-  const sort=q.sort??'updatedAt';
-  const terms=parseCatalogSort(sort);if(!terms)throw new AjesInputError();
-  const fields={auctionDateAsc:'auction_date asc',auctionDateDesc:'auction_date desc',mileage:'mileage asc',mileageDesc:'mileage desc',year:'year desc',yearAsc:'year asc',totalRub:'finish asc',totalRubDesc:'finish desc'};
-  const order=terms.length?terms.map(term=>fields[term]).join(', ')+(terms.some(t=>t.startsWith('auctionDate'))||terms[0].startsWith('mileage')?'':', auction_date desc'):'auction_date desc';
+  const order=sourceOrder(q.sort??'updatedAt');
   return {table,empty,kind:'list' as const,sql:`select * from ${table} where ${where.join(' and ')} order by ${order}, id asc limit ${(page-1)*pageSize},${pageSize}`,page,pageSize,...(q.powerFrom!==undefined?{powerFrom:q.powerFrom}:{}),...(q.powerTo!==undefined?{powerTo:q.powerTo}:{})};
 }
 

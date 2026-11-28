@@ -5,6 +5,7 @@ import {stripTypeScriptTypes} from 'node:module';
 import {readFilteredAjesPage,readPowerOrderedAjesPage,ajesPowerEvidenceEpoch,assertAjesPowerCursorEpoch} from '../apps/web/lib/catalog/ajes-filtered-page';
 import {AjesCursorRefreshRequired} from '../apps/web/lib/catalog/ajes-query';
 import {AjesUnavailable} from '../apps/web/lib/catalog/ajes-client';
+import {JAPAN_KNOWN_POWER_QUERY_VERSION,japanKnownPowerSelection} from '../apps/web/lib/catalog/japan-known-power-query';
 
 type Row={id:string;known:boolean;totalRub?:number;operational?:{raw:{finalPriceJpy:number}}};
 type Page={items:Row[];received:number;observedAt:string;partial?:boolean;stale?:boolean};
@@ -25,7 +26,7 @@ function fixture(){
   ajesResultFilter:(params:Record<string,unknown>)=>({active:Boolean(params.powerTo||params.budgetTo),powerFilter:Boolean(params.powerTo),priceFilter:Boolean(params.budgetTo),matchesPower:()=>true,matches:()=>true}),
   readAjesPublicEvidenceSnapshot:async()=>({editorial:{revision:state.revision,entries:{}},calculationIndex:state.calculationDigest?{digest:state.calculationDigest}:null}),
   captureAjesCountPricingContext:async()=>({digest:state.pricingDigest,run:async(work:()=>Promise<any>)=>work(),price:async(items:Row[])=>items}),
-  ajesPowerEvidenceEpoch,assertAjesPowerCursorEpoch,ajesCatalogQuery:query,AjesCursorRefreshRequired,
+  ajesPowerEvidenceEpoch,assertAjesPowerCursorEpoch,ajesCatalogQuery:query,AjesCursorRefreshRequired,JAPAN_KNOWN_POWER_QUERY_VERSION,japanKnownPowerSelection,
   japanLocalPowerHp:(row:Row)=>row.known?150:undefined,japanSupplierPower:()=>undefined,japanUnknownPower:(row:Row)=>!row.known,
   resolvedCatalogQuery:async(key:string)=>({query:query(JSON.parse(key)),modelDirectoryUnavailable:false,makeDirectoryUnavailable:false}),
   ajesSourceScopeSupportsExactCount:()=>state.scopeComplete,parseCatalogSort:(value?:string)=>value?value.split(','):[],

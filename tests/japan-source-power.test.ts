@@ -23,6 +23,9 @@ import {createRequire} from 'node:module';
 import {createElement} from 'react';
 import {renderToStaticMarkup} from 'react-dom/server';
 import * as census from '../apps/web/lib/catalog/ajes-census';
+import {ajesMysqlOracleSql} from './helpers/ajes-mysql-oracle';
+import {applyAjesLotAdmission} from '../apps/web/lib/catalog/ajes-admission';
+import {safePublicPricing} from '../apps/web/lib/catalog/safe-public-pricing';
 
 const row={ID:'power-fixture',MARKA_NAME:'TOYOTA',MODEL_NAME:'TEST',YEAR:2023,AUCTION_TYPE:2,STATUS:'Sold',FINISH:935000,TIME:'P',PW:'150',ENG_V:1490,IMAGES:''};
 const rate={currency:'JPY',sourcePrice:935000,effectiveRate:0.6,cbrRate:60,nominal:100,rateDate:'2026-11-26',rateSource:'cbr'} as any;
@@ -41,10 +44,10 @@ function sourceOrderedFixture(rows:any[]){
   const id=String(item.sourceOfferId);byId.set(id,item);
   insert.run(id,item.year,2,'Sold',item.operational.raw.finalPriceJpy,item.make,item.model,item.auctionDate||'2026-11-28',String(item.operational.raw.sourcePower??''));
  }
- return {read:(query:any)=>{const selected=db.prepare(ajesQuery(query).sql).all();return sourcePage(query,selected.map(item=>byId.get(String(item.id))),selected.length);},close:()=>db.close()};
+ return {read:(query:any)=>{const selected=db.prepare(ajesMysqlOracleSql(ajesQuery(query).sql)).all();return sourcePage(query,selected.map(item=>byId.get(String(item.id))),selected.length);},close:()=>db.close()};
 }
 async function catalogPowerFixture(read:(query:any,options?:any)=>unknown|Promise<unknown>){
- const state={queries:[] as any[],counts:0,priced:[] as string[][],snapshots:[] as any[],editorialRevision:'fixture-1',calculationDigest:null as string|null,runtimeSha:'1'.repeat(40),
+ const state={queries:[] as any[],counts:0,priced:[] as string[][],snapshots:[] as any[],editorialRevision:'fixture-1',editorialEntries:{} as Record<string,any>,calculationDigest:null as string|null,runtimeSha:'1'.repeat(40),
   evidenceReader:undefined as undefined|(()=>Promise<any>),price:undefined as undefined|((rows:any[])=>Promise<any[]>),rawRead:undefined as undefined|((query:any)=>Promise<any>),censusRate:undefined as undefined|((amount:number)=>any),
   controlledCount:undefined as undefined|((options:any)=>Promise<any>),savedCount:undefined as undefined|((path:string)=>Promise<any>),countWrites:[] as any[],Unavailable:AjesUnavailable,Input:AjesInputError,Refresh:AjesCursorRefreshRequired,
   census,compileQuery:ajesQuery,query:ajesCatalogQuery,filter:ajesResultFilter,project:publicOffer,sort:sortCatalogRows,read:async(query:any,options:any)=>{state.queries.push(query);state.snapshots.push(options?.evidenceSnapshot);return read(query,options);}};
@@ -57,7 +60,7 @@ async function catalogPowerFixture(read:(query:any,options?:any)=>unknown|Promis
   './ajes-count-pricing-context':`export const captureAjesCountPricingContext=async()=>({run:async work=>work(),price:async rows=>{const s=globalThis.__japanPowerPageFixture;s.priced.push(rows.map(row=>row.id));return s.price?s.price(rows):rows;}});`,
   './ajes-runtime':"export const ajesClient={read:async query=>{const s=globalThis.__japanPowerPageFixture;s.counts++;if(s.rawRead)return s.rawRead(query);throw Error('unexpected source aggregate');}};",
   './ajes-public':`export const cappedAjesQuery=async q=>q;export const readAjesPublic=(q,o)=>globalThis.__japanPowerPageFixture.read(q,o);
-   export const readAjesPublicEvidenceSnapshot=async()=>{const s=globalThis.__japanPowerPageFixture;return s.evidenceReader?s.evidenceReader():Object.freeze({editorial:{revision:s.editorialRevision,entries:{}},calculationIndex:s.calculationDigest?{digest:s.calculationDigest}:null});};`,
+   export const readAjesPublicEvidenceSnapshot=async()=>{const s=globalThis.__japanPowerPageFixture;return s.evidenceReader?s.evidenceReader():Object.freeze({editorial:{revision:s.editorialRevision,entries:s.editorialEntries},calculationIndex:s.calculationDigest?{digest:s.calculationDigest}:null});};`,
   './ajes-query':'export const ajesQuery=(...args)=>globalThis.__japanPowerPageFixture.compileQuery(...args);export const ajesCatalogQuery=p=>globalThis.__japanPowerPageFixture.query(p);export class AjesFilterUnavailable extends Error{};export const AjesInputError=globalThis.__japanPowerPageFixture.Input;export const AjesCursorRefreshRequired=globalThis.__japanPowerPageFixture.Refresh;',
   './ajes-client':'export const readAjesModelDirectory=async()=>({models:[]});export const readAjesMakeDirectory=async()=>({makes:[]});export const AjesUnavailable=globalThis.__japanPowerPageFixture.Unavailable;',
   './ajes-result-filter':'export const ajesResultFilter=p=>globalThis.__japanPowerPageFixture.filter(p);',
@@ -486,7 +489,7 @@ test('power source ordering preserves every selected priority and does not broad
 });
 
 for(const sort of ['totalRub','totalRubDesc'])test(`local power and ${sort} preserve known then unknown auction order through 24 to 48 and the phase boundary`,async()=>{
- // The actual broad source SQL includes rejected and unknown rows. Local
+ // Source candidates preserve contrary manual facts and the later broad U query. Local
  // manual evidence can admit contrary PW; delivered estimates intentionally
  // differ from the auction order and cannot reorder an individual page.
  const known=Array.from({length:50},(_,i)=>{const base=offer(i===0?300:150,`price-eligible-${i}`);return {...base,catalogPricingMode:undefined,
@@ -500,6 +503,7 @@ for(const sort of ['totalRub','totalRubDesc'])test(`local power and ${sort} pres
   ...(i===0?{powerHp:300,powerDataSource:'manual',powerDataConfidence:'verified'}:{}),
   catalogPricingMode:undefined,sourcePrice:price+i,totalRub:3000000+i*1000,operational:{...base.operational,raw:{...base.operational!.raw,finalPriceJpy:price+i}}};}));
  const source=sourceOrderedFixture([...known,...unknown,...excluded]),fixture=await catalogPowerFixture(source.read);
+ for(const item of [...known,...excluded])if(item.powerHp)fixture.state.editorialEntries[item.id]=editorialPower(item,item.powerHp);
  try{
   const params={market:'japan',powerTo:'160',city:'Новокузнецк'};
   const original=await fixture.read(params);
@@ -536,6 +540,61 @@ for(const sort of ['totalRub','totalRubDesc'])test(`local power and ${sort} pres
   await assert.rejects(fixture.read({...params,sort,city:'Москва',page:'2',after:first.nextCursor}),AjesCursorRefreshRequired);
   assert.equal(fixture.state.queries.length,reads,'sort and city remain part of the continuation identity');
  }finally{fixture.close();source.close();}
+});
+
+test('known price candidates fill 24 to 48 after the observed 46 unknown and two over-limit source prefix',async()=>{
+ const prefix=Array.from({length:48},(_,i)=>({...row,ID:`000-prefix-${String(i).padStart(2,'0')}`,
+  PW:i<46?['','0','N/A'][i%3]:'400',FINISH:32880000-i*10000}));
+ const later=Array.from({length:48},(_,i)=>({...row,ID:`001-match-${String(i).padStart(2,'0')}`,
+  PW:i===0?'400':String(120+i%30),FINISH:10000000-i*10000}));
+ const last=Array.from({length:5},(_,i)=>({...row,ID:`002-unknown-${i}`,PW:'',FINISH:5000000-i*10000}));
+ const manualId='ajes-stats-'+later[0].ID;
+ const snapshot={editorial:{revision:'sparse-known-1',entries:{[manualId]:{
+  id:manualId,market:'japan',sourceId:'ajes_japan_feed',sourceOfferId:later[0].ID,status:'visible',
+  specifications:{powerHp:150,powerDataSource:'manual',powerDataConfidence:'verified'},
+ }}},calculationIndex:null} as any;
+ const admitted=[...prefix,...later,...last].map(raw=>safePublicPricing(applyAjesLotAdmission(ajesLot(raw,'stats',false)!,
+  {...rate,sourcePrice:raw.FINISH},new Date().toISOString(),snapshot)!));
+ const filter=ajesResultFilter({market:'japan',powerTo:'160'});
+ const known=admitted.filter(item=>filter.matches(item)&&!japanUnknownPower(item));
+ const unknown=admitted.filter(item=>filter.matches(item)&&japanUnknownPower(item));
+ assert.equal(known.length,48);assert.equal(unknown.length,51);
+ const source=sourceOrderedFixture(admitted);
+ let now=Date.now();const clock=mock.method(Date,'now',()=>now);
+ const slow=(query:any)=>{now+=4500;return source.read(query);};
+ // Reproduce the old broad source selection inside the same bounded reader:
+ // two successful reads consume its time budget without a single known match.
+ const broad=await catalogPowerFixture(query=>{const q={...query};delete q.knownPower;return slow(q);});
+ broad.state.editorialEntries=snapshot.editorial.entries;
+ try{
+  const result=await broad.read({market:'japan',powerTo:'160',sort:'totalRubDesc'});
+  assert.equal(result.items.length,0);assert.equal(result.reads,2);assert.equal(result.scanLimited,true);
+  assert.equal(result.partial,false);assert.equal(result.hasMore,true);assert.match(result.nextCursor,/^j2\.k\.3\.0\.2\./);
+ }finally{broad.close();}
+ const fixture=await catalogPowerFixture(slow);fixture.state.editorialEntries=snapshot.editorial.entries;
+ try{
+  const params={market:'japan',powerTo:'160',sort:'totalRubDesc',city:'Новокузнецк'};
+  const first=await fixture.read(params),second=await fixture.read({...params,page:'2',after:first.nextCursor});
+  assert.equal(first.items.length,24);assert.equal(second.items.length,24);
+  assert.equal(first.reads,1);assert.equal(second.reads,1);
+  const all=[...first.items,...second.items];
+  assert.deepEqual(all.map(item=>item.id),known.map(item=>item.id));
+  assert.equal(all[0].id,manualId,'manual150 is retained despite supplier400');
+  assert.equal(new Set(all.map(item=>item.id)).size,48);
+  assert.ok(fixture.state.queries.every(query=>query.knownPower));
+  let after=second.nextCursor,pageNumber=3;
+  while(after){
+   assert.ok(pageNumber<12);const before=fixture.state.queries.length;
+   const page=await fixture.read({...params,page:String(pageNumber++),after});
+   assert.ok(fixture.state.queries.length-before<=8);all.push(...page.items);after=page.nextCursor;
+  }
+  assert.deepEqual(all.map(item=>item.id),[...known,...unknown].map(item=>item.id));
+  assert.equal(new Set(all.map(item=>item.id)).size,99);
+  const firstBroad=fixture.state.queries.findIndex(query=>!query.knownPower);
+  assert.ok(firstBroad>0);assert.ok(fixture.state.queries.slice(firstBroad).every(query=>!query.knownPower));
+  assert.equal(fixture.state.queries[firstBroad].page,1,'U starts from the unchanged broad selection');
+  assert.equal(first.total,null);assert.equal(second.total,null);
+ }finally{fixture.close();source.close();clock.mock.restore();}
 });
 
 test('a later source refusal preserves 23 available rows as incomplete and retries the exact next source page',async()=>{
