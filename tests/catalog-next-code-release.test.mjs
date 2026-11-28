@@ -14,7 +14,7 @@ import {CRM_CHINA_CODE_SCOPE, CRM_CHINA_CODE_PATHS, CRM_CHINA_RETAINED_RUNTIME, 
 import {CRM_JAPAN_PHOTO_CODE_SCOPE, CRM_JAPAN_PHOTO_CODE_PATHS} from '../scripts/catalog-next/crm-japan-photo-code-scope.mjs';
 import {JAPAN_PAGINATION_CODE_SCOPE, JAPAN_PAGINATION_CODE_PATHS, JAPAN_PAGINATION_RETAINED_RUNTIME} from '../scripts/catalog-next/japan-pagination-code-scope.mjs';
 import {JAPAN_STABILITY_CODE_SCOPE, JAPAN_STABILITY_CODE_PATHS, JAPAN_STABILITY_UI_CODE_PATHS, JAPAN_STABILITY_POWER_CODE_PATHS, JAPAN_STABILITY_RAILS_CODE_PATHS, JAPAN_STABILITY_RETAINED_RUNTIME,
-  JAPAN_STABILITY_HOME_CODE_PATHS, JAPAN_OBSERVED_TIMING_POLICY} from '../scripts/catalog-next/japan-stability-code-scope.mjs';
+  JAPAN_STABILITY_HOME_CODE_PATHS, JAPAN_OBSERVED_TIMING_POLICY, JAPAN_STABILITY_PRICE_SORT_CODE_PATHS, JAPAN_STABILITY_PRICE_SORT_RETAINED_RUNTIME} from '../scripts/catalog-next/japan-stability-code-scope.mjs';
 import {JAPAN_STABILITY_GATES} from '../scripts/catalog-next/japan-stability-browser.mjs';
 
 const hash = raw => createHash('sha256').update(raw).digest('hex');
@@ -77,7 +77,8 @@ test('authenticated photo preflight preserves every frozen expected value and ch
   assert.throws(() => checkedChinaCodePreflight(f.preflight, {...f.current, sourceCursor: 101}, nextSha));
 });
 
-async function fixture(t, {combined = false, japan = false,completion=false, crm=false, crmPhoto=false, pagination=false, stability=false, ui=false, powerOrder=false, brandDirectory=false, observedTiming=false} = {}) {
+async function fixture(t, {combined = false, japan = false,completion=false, crm=false, crmPhoto=false, pagination=false, stability=false, ui=false, powerOrder=false, brandDirectory=false, observedTiming=false, priceSort=false} = {}) {
+  observedTiming=observedTiming||priceSort;
   brandDirectory=brandDirectory||observedTiming;
   powerOrder=powerOrder||brandDirectory;
   stability=stability||ui||powerOrder;
@@ -85,7 +86,7 @@ async function fixture(t, {combined = false, japan = false,completion=false, crm
   crmPhoto=crmPhoto||pagination;completion=completion||pagination;
   crm=crm||crmPhoto;
   japan=Boolean(japan||completion);
-  const usability=completion===usabilityScope,retainedRuntime=stability?JAPAN_STABILITY_RETAINED_RUNTIME:pagination?JAPAN_PAGINATION_RETAINED_RUNTIME:crm?CRM_CHINA_RETAINED_RUNTIME:usability?JAPAN_USABILITY_RETAINED_RUNTIME:oldSha;
+  const usability=completion===usabilityScope,retainedRuntime=priceSort?JAPAN_STABILITY_PRICE_SORT_RETAINED_RUNTIME:stability?JAPAN_STABILITY_RETAINED_RUNTIME:pagination?JAPAN_PAGINATION_RETAINED_RUNTIME:crm?CRM_CHINA_RETAINED_RUNTIME:usability?JAPAN_USABILITY_RETAINED_RUNTIME:oldSha;
   const f = sample(retainedRuntime), directory = await fs.mkdtemp(path.join(os.tmpdir(), 'china-photo-stage-'));
   t.after(() => fs.rm(directory, {recursive: true, force: true}));
   const root = path.join(directory, 'controller');
@@ -118,7 +119,7 @@ async function fixture(t, {combined = false, japan = false,completion=false, crm
     ...(stability?{runtimeFiles:[...(brandDirectory?JAPAN_STABILITY_RAILS_CODE_PATHS:powerOrder?JAPAN_STABILITY_POWER_CODE_PATHS:ui?JAPAN_STABILITY_UI_CODE_PATHS:JAPAN_STABILITY_CODE_PATHS)],codeScope:JAPAN_STABILITY_CODE_SCOPE}:pagination?{runtimeFiles:[...JAPAN_PAGINATION_CODE_PATHS],codeScope:JAPAN_PAGINATION_CODE_SCOPE}:crm?{runtimeFiles:[...(crmPhoto?CRM_JAPAN_PHOTO_CODE_PATHS:CRM_CHINA_CODE_PATHS)], codeScope:crmPhoto?CRM_JAPAN_PHOTO_CODE_SCOPE:CRM_CHINA_CODE_SCOPE}:
       japan ? {codeScope: completion?(typeof completion==='string'?completion:'catalog-japan-completion-v1'):'catalog-japan-recovery-v1'} : combined ? {codeScope: 'catalog-photo-japan-power-v1'} : {})};
   const pricingPlan = {version: 1, market: 'china', runtimeSha: pricingSha};
-  if (observedTiming) Object.assign(servingPlan, {runtimeFiles: [...JAPAN_STABILITY_HOME_CODE_PATHS], acceptancePolicy: JAPAN_OBSERVED_TIMING_POLICY});
+  if (observedTiming) Object.assign(servingPlan, {runtimeFiles: [...(priceSort?JAPAN_STABILITY_PRICE_SORT_CODE_PATHS:JAPAN_STABILITY_HOME_CODE_PATHS)], acceptancePolicy: JAPAN_OBSERVED_TIMING_POLICY});
   const imageReceipt = {version: 1,
     kind: 'china-runtime-image-v1', runtimeSha: nextSha, runtimeTree: servingPlan.runtimeTree,
     retainedRuntime, runtimeDiffSha256: servingPlan.runtimeDiffSha256, pricingRuntimeSha: pricingSha,
@@ -260,6 +261,7 @@ async function fixture(t, {combined = false, japan = false,completion=false, crm
           assert.equal(args.env.CATALOG_CODE_SCOPE,servingPlan.codeScope);
           assert.equal(args.env.CATALOG_JAPAN_POWER_ORDER_REQUIRED,powerOrder?'1':'0');
           assert.equal(args.env.CATALOG_JAPAN_BRAND_DIRECTORY_REQUIRED,brandDirectory?'1':'0');
+          assert.equal(args.env.CATALOG_JAPAN_PRICE_SORT_REQUIRED,priceSort?'1':'0');
           assert.equal(args.env.CATALOG_JAPAN_TIMING_POLICY, observedTiming ? JAPAN_OBSERVED_TIMING_POLICY : undefined);
           assert.equal(Object.hasOwn(args.env, 'CATALOG_JAPAN_TIMING_POLICY'), observedTiming,
             'older profiles omit the optional timing policy rather than sending an invalid empty value');
@@ -280,6 +282,7 @@ async function fixture(t, {combined = false, japan = false,completion=false, crm
             ...(pagination?{japanFullPagesPassed:true,japanPagination24Passed:true,japanCatalogWarningRemovedPassed:true}:{}),
             ...(powerOrder?{japanPowerOrderPassed:true}:{}),
             ...(brandDirectory?{japanBrandDirectoryPassed:true}:{}),
+            ...(priceSort?{japanPriceSortRequired:true,japanPriceSortPassed:true,japanCountDisplayPassed:true}:{}),
             ...(stability?Object.fromEntries(JAPAN_STABILITY_GATES.map(key=>[key,true])):{})};
           if (flags.failedReport) Object.assign(report, {passed: false, japanVisibilityPassed: false,
             error: {stage: 'catalog_visibility', code: 'japan_browser_overview_http', timeout: false}});
@@ -368,6 +371,34 @@ test('observational Japan timing never excuses a failed own-market functional ga
     await assert.rejects(stage.activate(input), /japan_(?:browser|timing)_binding/);
     assert(!f.calls.includes('accept')); await stage.close();
   }
+});
+
+for (const priceFlag of ['japanPriceSortRequired', 'japanPriceSortPassed', 'japanCountDisplayPassed'])
+for (const value of [undefined, false, 1, 'true'])
+test('B9 successor stops before host acceptance without boolean ' + priceFlag + ': ' + value, async t => {
+  const f = await fixture(t, {priceSort: true}), {stage, input} = await reservedStage(f);
+  f.flags.changeReport = report => { if (value === undefined) delete report[priceFlag]; else report[priceFlag] = value; };
+  await assert.rejects(stage.activate(input), /china_daily_release_japan_browser_binding/);
+  assert(!f.calls.includes('accept') && !f.calls.includes('browser_evidence'));
+  await stage.close();
+});
+
+test('B9 sort/count successor commits both new functional proofs while preserving accepted data and rollback', async t => {
+  const f = await fixture(t, {priceSort: true}), storage = memoryStorage(f.previous);
+  f.flags.chinaBrowserFailure = true;
+  const report = await runChinaCodeCycle({plan: {...f.servingPlan, minimumYear: 2014}, imageId: f.candidate.imageId,
+    invocation: {version: 1, sourceSha: '9'.repeat(40)}, owner: {runId: '200', attempt: '1', revision: '9'.repeat(40)},
+    nonce: 'b'.repeat(32), storage, now: () => acceptedAt, scheduleHeartbeat: () => () => {},
+    stageCodeRelease: f.release.stageCodeRelease, recoverRelease: async () => assert.fail('no unresolved publication')});
+  assert.equal(report.completed, true); assert.equal(report.status, 'accepted');
+  assert.equal(report.speedGateRequired, false); assert.equal(report.speedPassed, null);
+  const accepted = await storage.read('accepted');
+  assert.equal(accepted.value.current.runtimeSha, nextSha);
+  assert.equal(accepted.value.current.generationId, f.current.generationId);
+  assert.equal(accepted.value.current.pricingRuntimeSha, f.current.pricingRuntimeSha);
+  assert.deepEqual(accepted.value.rollback, f.current);
+  assert.equal(f.current.runtimeSha, JAPAN_STABILITY_PRICE_SORT_RETAINED_RUNTIME);
+  assert(!f.calls.includes('owner-filter-speed-live.mjs'));
 });
 
 test('app-only adapter uploads only the new image and checks, retaining all seven source files on the host', async t => {

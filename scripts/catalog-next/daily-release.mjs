@@ -17,7 +17,7 @@ import {verifyChinaImageStorageProof} from './build-release-image.mjs';
 import {CRM_CHINA_CODE_SCOPE, CRM_CHINA_PROTECTED_EXCEPTIONS} from './crm-china-code-scope.mjs';
 import {CRM_JAPAN_PHOTO_CODE_SCOPE} from './crm-japan-photo-code-scope.mjs';
 import {JAPAN_PAGINATION_CODE_SCOPE} from './japan-pagination-code-scope.mjs';
-import {JAPAN_STABILITY_CODE_SCOPE, japanPowerOrderRequired, japanSourceNamesRequired, japanBrandDirectoryRequired,
+import {JAPAN_STABILITY_CODE_SCOPE, japanPowerOrderRequired, japanSourceNamesRequired, japanBrandDirectoryRequired, japanPriceSortRequired,
   JAPAN_OBSERVED_TIMING_POLICY, japanObservedTimingRequired} from './japan-stability-code-scope.mjs';
 import {checkedCrmChinaManifestProof, checkedCrmChinaEvidence, verifyCrmChinaUnauthorizedAccess} from './crm-china-status-proof.mjs';
 import {readJapanPhotoRetryFixture, checkedJapanPhotoRetryEvidence} from './japan-photo-retry-proof.mjs';
@@ -476,6 +476,7 @@ export function createChinaDailyRelease({root, servingRoot, pricingPlan, serving
                   CATALOG_CODE_SCOPE: plan.codeScope,
                   ...(observedJapanTiming ? {CATALOG_JAPAN_TIMING_POLICY: JAPAN_OBSERVED_TIMING_POLICY} : {}),
                   CATALOG_JAPAN_POWER_ORDER_REQUIRED: japanPowerOrderRequired(servingPlan) ? '1' : '0',
+                  CATALOG_JAPAN_PRICE_SORT_REQUIRED: japanPriceSortRequired(servingPlan) ? '1' : '0',
                   CATALOG_JAPAN_BRAND_DIRECTORY_REQUIRED: japanBrandDirectoryRequired(servingPlan) ? '1' : '0'}});
               let japanRaw;
               try { japanRaw = await fs.readFile(japanOutput); }
@@ -511,6 +512,8 @@ export function createChinaDailyRelease({root, servingRoot, pricingPlan, serving
                 'japanRelatedCardsPassed', 'japanVehiclePolicyPassed'].every(key => japan[key] === true), 'japan_browser_binding');
               if (japanPowerOrderRequired(servingPlan)) need(japan.japanPowerOrderPassed === true, 'japan_browser_binding');
               if (japanBrandDirectoryRequired(servingPlan)) need(japan.japanBrandDirectoryPassed === true, 'japan_browser_binding');
+              if (japanPriceSortRequired(servingPlan)) need(japan.japanPriceSortRequired === true && japan.japanPriceSortPassed === true
+                && japan.japanCountDisplayPassed === true, 'japan_browser_binding');
               if (observedJapanTiming) {
                 need(japan.timingPolicy === JAPAN_OBSERVED_TIMING_POLICY && japan.speedGateRequired === false
                   && japan.speedPassed === null && japan.timingObserved === true, 'japan_timing_binding');

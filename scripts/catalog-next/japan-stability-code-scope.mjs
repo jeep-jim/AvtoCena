@@ -98,9 +98,25 @@ export const JAPAN_STABILITY_METADATA_CODE_PATHS = Object.freeze([
   ...JAPAN_STABILITY_HOME_CODE_PATHS,
   'tests/ajes-ready-metadata.test.ts',
 ].sort());
+/** Price sorting and truthful loaded counts start from the accepted B9 image.
+ * Its earlier 59-file delta remains immutable historical evidence. */
+export const JAPAN_STABILITY_PRICE_SORT_RETAINED_RUNTIME = 'b9e9122b75f4e588088d0241476b18df7f047d96';
+export const JAPAN_STABILITY_PRICE_SORT_CODE_PATHS = Object.freeze([
+  'apps/web/components/catalog/AjesCatalog.tsx',
+  'apps/web/components/catalog/CatalogLoadMore.tsx',
+  'apps/web/components/catalog/CatalogSelectionContext.tsx',
+  'apps/web/components/catalog/JapanCatalogCount.tsx',
+  'apps/web/lib/catalog/ajes-catalog.ts',
+  'apps/web/lib/catalog/ajes-count-display.ts',
+  'tests/ajes-catalog-progressive.test.ts',
+  'tests/ajes-count-display.test.ts',
+  'tests/ajes-ssr-read-evidence.test.ts',
+  'tests/browser/ajes-pagination.mjs',
+  'tests/japan-source-power.test.ts',
+]);
 const reviewedProfiles = Object.freeze([JAPAN_STABILITY_CODE_PATHS, JAPAN_STABILITY_UI_CODE_PATHS,
   JAPAN_STABILITY_POWER_CODE_PATHS, JAPAN_STABILITY_RAILS_CODE_PATHS, JAPAN_STABILITY_HOME_CODE_PATHS,
-  JAPAN_STABILITY_METADATA_CODE_PATHS]);
+  JAPAN_STABILITY_METADATA_CODE_PATHS, JAPAN_STABILITY_PRICE_SORT_CODE_PATHS]);
 
 export function japanStabilityCodePaths(plan) {
   const files = plan?.runtimeFiles;
@@ -113,9 +129,10 @@ export function isExactJapanStabilityScope(plan) {
   return JAPAN_STABILITY_CODE_PATHS.length > 0
     && JAPAN_PAGINATION_CODE_PATHS.every(name => JAPAN_STABILITY_CODE_PATHS.includes(name))
     && plan?.codeScope === JAPAN_STABILITY_CODE_SCOPE
-    && plan.retainedRuntime === JAPAN_STABILITY_RETAINED_RUNTIME
+    && plan.retainedRuntime === (paths === JAPAN_STABILITY_PRICE_SORT_CODE_PATHS
+      ? JAPAN_STABILITY_PRICE_SORT_RETAINED_RUNTIME : JAPAN_STABILITY_RETAINED_RUNTIME)
     && paths !== null
-    && ([JAPAN_STABILITY_HOME_CODE_PATHS, JAPAN_STABILITY_METADATA_CODE_PATHS].includes(paths)
+    && ([JAPAN_STABILITY_HOME_CODE_PATHS, JAPAN_STABILITY_METADATA_CODE_PATHS, JAPAN_STABILITY_PRICE_SORT_CODE_PATHS].includes(paths)
       ? plan.acceptancePolicy === JAPAN_OBSERVED_TIMING_POLICY
       : plan.acceptancePolicy === undefined);
 }
@@ -123,21 +140,38 @@ export function isExactJapanStabilityScope(plan) {
 export function japanObservedTimingRequired(plan) {
   if (plan?.codeScope !== JAPAN_STABILITY_CODE_SCOPE) return false;
   if (!isExactJapanStabilityScope(plan)) throw Error('japan_stability_observed_timing_scope');
-  return [JAPAN_STABILITY_HOME_CODE_PATHS, JAPAN_STABILITY_METADATA_CODE_PATHS].includes(japanStabilityCodePaths(plan));
+  return [JAPAN_STABILITY_HOME_CODE_PATHS, JAPAN_STABILITY_METADATA_CODE_PATHS,
+    JAPAN_STABILITY_PRICE_SORT_CODE_PATHS].includes(japanStabilityCodePaths(plan));
 }
 
 export function japanPowerOrderRequired(plan) {
   if (plan?.codeScope !== JAPAN_STABILITY_CODE_SCOPE) return false;
   if (!isExactJapanStabilityScope(plan)) throw Error('japan_stability_power_order_scope');
   return [JAPAN_STABILITY_POWER_CODE_PATHS, JAPAN_STABILITY_RAILS_CODE_PATHS,
-    JAPAN_STABILITY_HOME_CODE_PATHS, JAPAN_STABILITY_METADATA_CODE_PATHS].includes(japanStabilityCodePaths(plan));
+    JAPAN_STABILITY_HOME_CODE_PATHS, JAPAN_STABILITY_METADATA_CODE_PATHS,
+    JAPAN_STABILITY_PRICE_SORT_CODE_PATHS].includes(japanStabilityCodePaths(plan));
 }
 
 export function japanBrandDirectoryRequired(plan) {
   if (plan?.codeScope !== JAPAN_STABILITY_CODE_SCOPE) return false;
   if (!isExactJapanStabilityScope(plan)) throw Error('japan_stability_brand_directory_scope');
   return [JAPAN_STABILITY_RAILS_CODE_PATHS, JAPAN_STABILITY_HOME_CODE_PATHS,
-    JAPAN_STABILITY_METADATA_CODE_PATHS].includes(japanStabilityCodePaths(plan));
+    JAPAN_STABILITY_METADATA_CODE_PATHS, JAPAN_STABILITY_PRICE_SORT_CODE_PATHS].includes(japanStabilityCodePaths(plan));
+}
+
+export function japanPriceSortRequired(plan) {
+  if (plan?.codeScope !== JAPAN_STABILITY_CODE_SCOPE) return false;
+  if (!isExactJapanStabilityScope(plan)) throw Error('japan_stability_price_sort_scope');
+  return japanStabilityCodePaths(plan) === JAPAN_STABILITY_PRICE_SORT_CODE_PATHS;
+}
+
+/** Compatibility with the fixed pricing ancestor includes accepted B9 bytes,
+ * while the new image's own runtime diff is only its reviewed eleven-file delta. */
+export function japanStabilityCompatibilityPaths(plan) {
+  if (!isExactJapanStabilityScope(plan)) throw Error('japan_stability_compatibility_scope');
+  const paths = japanStabilityCodePaths(plan);
+  return paths === JAPAN_STABILITY_PRICE_SORT_CODE_PATHS
+    ? [...new Set([...JAPAN_STABILITY_METADATA_CODE_PATHS, ...paths])].sort() : paths;
 }
 
 export function japanSourceNamesRequired(plan) {

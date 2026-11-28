@@ -6,6 +6,7 @@ import {JAPAN_PAGINATION_CODE_SCOPE} from './japan-pagination-code-scope.mjs';
 import {JAPAN_STABILITY_CODE_SCOPE} from './japan-stability-code-scope.mjs';
 import {JAPAN_STABILITY_GATES, JAPAN_LEGACY_MAZDA_THREE_PAGES, japanStabilityApiAllowed, runJapanStabilityBrowser,
  checkJapanStabilityBrandControl,verifyJapanStabilityBrandRequestCount} from './japan-stability-browser.mjs';
+import {JAPAN_PRICE_SORT_GATES, japanPriceSortApiAllowed} from './japan-price-sort-browser.mjs';
 
 const ROOT=fileURLToPath(new URL('../../',import.meta.url));
 const ORIGIN='https://avtocena.com';
@@ -32,6 +33,10 @@ export function japanPowerOrderRequirement(value){
 }
 export function japanBrandDirectoryRequirement(value){
  need(value===undefined||value==='0'||value==='1','brand_directory_option');
+ return value==='1';
+}
+export function japanPriceSortRequirement(value){
+ need(value===undefined||value==='0'||value==='1','price_sort_option');
  return value==='1';
 }
 export function japanTimingPolicy(value){
@@ -800,24 +805,25 @@ export async function installReadFence(context,report,{getCalculationGrant,isLeg
  }};
 }
 
-async function readJson(context,url,{paginationKind,stability=false,requirePowerOrder=false}={}){
+async function readJson(context,url,{paginationKind,stability=false,requirePowerOrder=false,priceSort=false}={}){
  let continuation=false;
+ const priceSortApi=priceSort&&japanPriceSortApiAllowed(url);
  if(url.startsWith('/api/catalog/search?')){
   const query=new URL(url,ORIGIN).searchParams;
-  if(query.has('after')){
+  if(query.has('after')&&!priceSortApi){
    const pageUrl=new URL('/cars/japan',ORIGIN);pageUrl.search=query.toString();
    continuation=(paginationKind?japanPaginationPageApi(pageUrl.href,{kind:paginationKind,requirePowerOrder}):japanPetrolPowerPageApi(pageUrl.href))===url;
   }
  }
  need(url==='/api/health'||url===PLAIN||url===POWER||url===PETROL_POWER||url===PETROL_POWER_NEXT||url===BRAND_DIRECTORY||continuation
-  ||stability&&japanStabilityApiAllowed(url),'api_scope');
+  ||stability&&japanStabilityApiAllowed(url)||priceSortApi,'api_scope');
  const started=Date.now();
  const response=await context.request.get(ORIGIN+url,{timeout:45_000,maxRedirects:0,headers:{'Cache-Control':'no-cache'}});
  const data=await response.json().catch(()=>null),receivedAt=Date.now();
  return {status:response.status(),data,headers:response.headers(),durationMs:receivedAt-started,requestedAt:started,receivedAt};
 }
 
-export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,outputFile,playwrightModule,chromeBin,codeScope=SCOPE,requirePowerOrder=false,requireBrandDirectory=false,timingPolicy}){
+export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,outputFile,playwrightModule,chromeBin,codeScope=SCOPE,requirePowerOrder=false,requireBrandDirectory=false,requirePriceSort=false,timingPolicy}){
  const stability=codeScope===JAPAN_STABILITY_CODE_SCOPE;
  const pagination=codeScope===JAPAN_PAGINATION_CODE_SCOPE||stability;
  const completion=[COMPLETION_SCOPE,COMPLETION_V2_SCOPE,USABILITY_SCOPE,JAPAN_PAGINATION_CODE_SCOPE,JAPAN_STABILITY_CODE_SCOPE].includes(codeScope);
@@ -833,6 +839,8 @@ export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,out
  if(stability)Object.assign(report,Object.fromEntries(JAPAN_STABILITY_GATES.map(key=>[key,false])));
  if(requirePowerOrder===true)report.japanPowerOrderPassed=false;
  if(requireBrandDirectory===true)Object.assign(report,{japanBrandDirectoryPassed:false,japanBrandDirectoryUiRequests:0});
+ if(requirePriceSort===true)Object.assign(report,{japanPriceSortRequired:true,
+  ...Object.fromEntries(JAPAN_PRICE_SORT_GATES.map(key=>[key,false]))});
  if(timingPolicy===JAPAN_OBSERVED_TIMING_POLICY)Object.assign(report,
   {timingPolicy,speedGateRequired:false,speedPassed:null,timingObserved:false});
  let browser,context,currentPage,calculationGrant=null,brandDirectory=null,stabilityBrandDirectory=null,stage='preconditions';
@@ -857,6 +865,7 @@ export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,out
   need([SCOPE,COMPLETION_SCOPE,COMPLETION_V2_SCOPE,USABILITY_SCOPE,JAPAN_PAGINATION_CODE_SCOPE,JAPAN_STABILITY_CODE_SCOPE].includes(codeScope),'code_scope');
   need(typeof requirePowerOrder==='boolean'&&(!requirePowerOrder||stability),'power_order_option');
   need(typeof requireBrandDirectory==='boolean'&&(!requireBrandDirectory||stability),'brand_directory_option');
+  need(typeof requirePriceSort==='boolean'&&(!requirePriceSort||stability&&requirePowerOrder&&requireBrandDirectory),'price_sort_option');
   japanTimingPolicy(timingPolicy);
   need(timingPolicy===undefined||stability&&requirePowerOrder&&requireBrandDirectory,'timing_policy_scope');
   need(path.isAbsolute(outputFile),'output');
@@ -1255,9 +1264,9 @@ export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,out
   }
   if(stability){
    verifyJapanVisibleVehiclePolicy([plain[0],power.data]);
-   await runJapanStabilityBrowser({context,report,generationId:binding.generationId,capture,
+   await runJapanStabilityBrowser({context,report,generationId:binding.generationId,capture,requirePriceSort,
     onStage:value=>{stage=value;},onPage:value=>{currentPage=value;},
-    read:async url=>{report.explicitJapanApiRequests++;const value=await readJson(context,url,{stability:true});
+    read:async url=>{report.explicitJapanApiRequests++;const value=await readJson(context,url,{stability:true,priceSort:requirePriceSort});
      recordJapanResponse(report,stage,value,releaseSha);return value;},
     verifyPage:verifyJapanPage,verifyFullPage:verifyJapanFullPage,verifyPowerPage:verifyJapanPowerPage,
     verifyVehiclePolicy:verifyJapanVisibleVehiclePolicy,navigateLegacyMazdaThree:fence.navigateLegacyMazdaThree});
@@ -1267,7 +1276,7 @@ export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,out
    ...(completion?['japanPetrolPowerUiPassed','japanDetailPowerInputPassed','japanDeliveredCalculationPassed']:[]),
    ...(usability?USABILITY_GATES:[]),...(pagination?['japanFullPagesPassed','japanPagination24Passed','japanCatalogWarningRemovedPassed']:[]),
    ...(stability?JAPAN_STABILITY_GATES:[]),...(requirePowerOrder?['japanPowerOrderPassed']:[]),
-   ...(requireBrandDirectory?['japanBrandDirectoryPassed']:[])].every(key=>report[key]===true);
+   ...(requireBrandDirectory?['japanBrandDirectoryPassed']:[]),...(requirePriceSort?JAPAN_PRICE_SORT_GATES:[])].every(key=>report[key]===true);
  }catch(error){
   const navigationCode=japanNavigationErrorCode(error);
   report.error={stage,code:/^japan_browser_[a-z_]+$/.test(error?.message||'')?error.message:'japan_browser_check_failed',
@@ -1289,6 +1298,7 @@ if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.ur
    playwrightModule:process.env.PLAYWRIGHT_MODULE,chromeBin:process.env.CHROME_BIN,codeScope:process.env.CATALOG_CODE_SCOPE||SCOPE,
    requirePowerOrder:japanPowerOrderRequirement(process.env.CATALOG_JAPAN_POWER_ORDER_REQUIRED),
    requireBrandDirectory:japanBrandDirectoryRequirement(process.env.CATALOG_JAPAN_BRAND_DIRECTORY_REQUIRED),
+   requirePriceSort:japanPriceSortRequirement(process.env.CATALOG_JAPAN_PRICE_SORT_REQUIRED),
    timingPolicy:japanTimingPolicy(process.env.CATALOG_JAPAN_TIMING_POLICY)});
   console.log('JAPAN_BROWSER '+JSON.stringify(report));if(!report.passed)process.exitCode=1;
  }catch{console.error('japan_browser_report_failed');process.exitCode=1;}

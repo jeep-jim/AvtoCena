@@ -44,6 +44,8 @@ on:
       - tests/browser/photo-japan-recovery-clock.mjs
       - tests/browser/japan-legacy-redirect.mjs
       - tests/browser/japan-model-controls-ready.mjs
+      - scripts/catalog-next/japan-price-sort-browser.mjs
+      - tests/browser/japan-price-sort.mjs
       - tests/browser/japan-brand-directory-retry.mjs
 permissions:
   contents: read
@@ -79,8 +81,10 @@ jobs:
           node --input-type=module <<'JS'
           import fs from 'node:fs';
           import {checkedCatalogCodeScope} from './scripts/catalog-next/photo-code-scope.mjs';
+          import {japanPriceSortRequired} from './scripts/catalog-next/japan-stability-code-scope.mjs';
           const plan = JSON.parse(fs.readFileSync('.github/operations/catalog-next/china-code-serving-plan.json', 'utf8'));
           fs.appendFileSync(process.env.GITHUB_OUTPUT, 'scope=' + checkedCatalogCodeScope(plan) + '\n');
+          fs.appendFileSync(process.env.GITHUB_OUTPUT, 'price_sort_required=' + japanPriceSortRequired(plan) + '\n');
           JS
       - name: Prepare Chromium for the required runtime browser fixture
         if: steps.photo_scope.outputs.scope == 'catalog-photo-recovery-v1' || steps.photo_scope.outputs.scope == 'catalog-photo-japan-power-v1' || steps.photo_scope.outputs.scope == 'catalog-japan-completion-v1' || steps.photo_scope.outputs.scope == 'catalog-japan-completion-v2' || steps.photo_scope.outputs.scope == 'catalog-japan-usability-v1' || steps.photo_scope.outputs.scope == 'catalog-crm-china-operations-v1' || steps.photo_scope.outputs.scope == 'catalog-crm-japan-photo-retry-v1' || steps.photo_scope.outputs.scope == 'catalog-japan-pagination24-v1' || steps.photo_scope.outputs.scope == 'catalog-japan-stability-v1'
@@ -101,6 +105,12 @@ jobs:
           set -euo pipefail
           MODEL_SHA=$(node -p "JSON.parse(require('fs').readFileSync('.github/operations/catalog-next/china-code-serving-plan.json')).runtimeSha")
           PHOTO_RUNTIME_ROOT="$RUNNER_TEMP/china-serving-runtime-$MODEL_SHA" JAPAN_MODEL_CONTROLS_READY_REPORT="$RUNNER_TEMP/japan-model-controls-ready-browser-report.json" node tests/browser/japan-model-controls-ready.mjs
+      - name: Verify Japan power then price sorting and live count on the exact runtime
+        if: steps.photo_scope.outputs.price_sort_required == 'true'
+        run: |
+          set -euo pipefail
+          SORT_SHA=$(node -p "JSON.parse(require('fs').readFileSync('.github/operations/catalog-next/china-code-serving-plan.json')).runtimeSha")
+          PHOTO_RUNTIME_ROOT="$RUNNER_TEMP/china-serving-runtime-$SORT_SHA" JAPAN_PRICE_SORT_REPORT="$RUNNER_TEMP/japan-price-sort-browser-report.json" node tests/browser/japan-price-sort.mjs
       - name: Verify bounded Japan directory retries on the exact runtime before host contact
         if: steps.photo_scope.outputs.scope == 'catalog-japan-stability-v1'
         run: |
@@ -264,3 +274,11 @@ jobs:
           path: ${{ runner.temp }}/china-serving-runtime-*/artifacts/catalog-photo-recovery/**
           if-no-files-found: warn
           retention-days: 7
+      - name: Preserve Japan price sort and count fixture proof
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: japan-price-sort-fixture
+          path: ${{ runner.temp }}/japan-price-sort-browser-report.json
+          if-no-files-found: ignore
+          retention-days: 14

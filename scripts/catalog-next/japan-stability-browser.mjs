@@ -1,4 +1,5 @@
 import {createHash} from 'node:crypto';
+import {runJapanPriceSortBrowser} from './japan-price-sort-browser.mjs';
 
 const ORIGIN = 'https://avtocena.com';
 const CITY = 'Новокузнецк';
@@ -578,8 +579,11 @@ export async function selectJapanStabilityModelThroughUi({view, directory, progr
 /** Ordinary, bounded public journeys supplement the unchanged Japan freshness,
  * power, pagination, price and neighbor-preservation acceptance. */
 export async function runJapanStabilityBrowser({context, report, generationId, read, capture, onStage, onPage,
-  verifyPage, verifyFullPage, verifyPowerPage, verifyVehiclePolicy, navigateLegacyMazdaThree}) {
+  verifyPage, verifyFullPage, verifyPowerPage, verifyVehiclePolicy, navigateLegacyMazdaThree, requirePriceSort = false}) {
+  need(typeof requirePriceSort === 'boolean', 'price_sort_option');
   const pages = [];
+  if (requirePriceSort) pages.push(...await runJapanPriceSortBrowser({context, report, read, capture, onStage, onPage,
+    verifyPage, verifyFullPage, verifyPowerPage, verifyVehiclePolicy}));
   onStage('stability_source_models');
   const directoryResponse = await read(JAPAN_STABILITY_MODELS_API);
   const directory = checkedJapanStabilityDirectory(directoryResponse.data, directoryResponse.status);

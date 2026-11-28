@@ -5,7 +5,7 @@ import {execFileSync} from 'node:child_process';
 import {CRM_CHINA_CODE_SCOPE, CRM_CHINA_CODE_PATHS} from './crm-china-code-scope.mjs';
 import {CRM_JAPAN_PHOTO_CODE_SCOPE, CRM_JAPAN_PHOTO_CODE_PATHS} from './crm-japan-photo-code-scope.mjs';
 import {JAPAN_PAGINATION_CODE_SCOPE, JAPAN_PAGINATION_CODE_PATHS} from './japan-pagination-code-scope.mjs';
-import {JAPAN_STABILITY_CODE_SCOPE, japanStabilityCodePaths, isExactJapanStabilityScope} from './japan-stability-code-scope.mjs';
+import {JAPAN_STABILITY_CODE_SCOPE, japanStabilityCompatibilityPaths, isExactJapanStabilityScope} from './japan-stability-code-scope.mjs';
 
 const need = (value, code) => assert(value, 'china_serving_' + code);
 const hash = raw => createHash('sha256').update(raw).digest('hex');
@@ -195,7 +195,7 @@ export async function verifyServingCompatibility({runtimeRoot, servingPlan, pric
     && /^[a-f0-9]{64}$/.test(servingPlan.pricingToServingDiffSha256 ?? ''), 'plan_binding');
   need(servingPlan.codeScope !== JAPAN_STABILITY_CODE_SCOPE || isExactJapanStabilityScope(servingPlan), 'stability_scope');
   const allowedJapanStability = servingPlan.codeScope === JAPAN_STABILITY_CODE_SCOPE
-    ? new Set([...allowedCrmJapanPhoto, ...japanStabilityCodePaths(servingPlan)]) : null;
+    ? new Set([...allowedCrmJapanPhoto, ...japanStabilityCompatibilityPaths(servingPlan)]) : null;
   const files = servingPlan.pricingToServingFiles;
   need(Array.isArray(files) && new Set(files).size === files.length && files.every(name =>
     typeof name === 'string' && (servingPlan.codeScope === JAPAN_STABILITY_CODE_SCOPE ? allowedJapanStability.has(name)

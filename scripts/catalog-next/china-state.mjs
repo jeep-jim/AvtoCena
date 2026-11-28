@@ -437,6 +437,9 @@ function acceptanceProof(candidate, intent, evidence) {
       && speed.productionMutations === 0 && speed.directSupplierApiRequests === 0
       && Number.isSafeInteger(speed.japanPreviewCalculationRequests)
       && speed.japanPreviewCalculationRequests >= 1 && speed.japanPreviewCalculationRequests <= 2, 'japan_functional_binding');
+    if (['japanPriceSortRequired', 'japanPriceSortPassed', 'japanCountDisplayPassed'].some(key => Object.hasOwn(speed, key)))
+      need(speed.japanPriceSortRequired === true && speed.japanPriceSortPassed === true
+        && speed.japanCountDisplayPassed === true, 'japan_price_sort_binding');
   }
   return {proof, receipt};
 }

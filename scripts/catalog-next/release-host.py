@@ -146,6 +146,20 @@ JAPAN_STABILITY_HOME_CODE_FILES = JAPAN_STABILITY_RAILS_CODE_FILES | {
 JAPAN_STABILITY_METADATA_CODE_FILES = JAPAN_STABILITY_HOME_CODE_FILES | {
     'tests/ajes-ready-metadata.test.ts',
 }
+JAPAN_STABILITY_PRICE_SORT_RETAINED = 'b9e9122b75f4e588088d0241476b18df7f047d96'
+JAPAN_STABILITY_PRICE_SORT_CODE_FILES = {
+    'apps/web/components/catalog/AjesCatalog.tsx',
+    'apps/web/components/catalog/CatalogLoadMore.tsx',
+    'apps/web/components/catalog/CatalogSelectionContext.tsx',
+    'apps/web/components/catalog/JapanCatalogCount.tsx',
+    'apps/web/lib/catalog/ajes-catalog.ts',
+    'apps/web/lib/catalog/ajes-count-display.ts',
+    'tests/ajes-catalog-progressive.test.ts',
+    'tests/ajes-count-display.test.ts',
+    'tests/ajes-ssr-read-evidence.test.ts',
+    'tests/browser/ajes-pagination.mjs',
+    'tests/japan-source-power.test.ts',
+}
 JAPAN_PAGINATION_CODE_FILES = {
     "apps/web/components/catalog/AjesCatalog.tsx",
     "apps/web/components/catalog/CatalogLoadMore.tsx",
@@ -642,16 +656,20 @@ def japan_observed_timing(plan):
 
 
 
-def checked_japan_stability_image_files(files, observed):
+def checked_japan_stability_image_files(files, observed, retained_runtime=JAPAN_STABILITY_RETAINED):
     """Both image admission phases use the same exact historical profiles."""
     need(isinstance(files, list) and all(isinstance(name, str) for name in files)
          and len(files) == len(set(files)), 'code_image_receipt')
     profiles = (JAPAN_STABILITY_CODE_FILES, JAPAN_STABILITY_UI_CODE_FILES, JAPAN_STABILITY_POWER_CODE_FILES,
-                JAPAN_STABILITY_RAILS_CODE_FILES, JAPAN_STABILITY_HOME_CODE_FILES, JAPAN_STABILITY_METADATA_CODE_FILES)
+                JAPAN_STABILITY_RAILS_CODE_FILES, JAPAN_STABILITY_HOME_CODE_FILES, JAPAN_STABILITY_METADATA_CODE_FILES,
+                JAPAN_STABILITY_PRICE_SORT_CODE_FILES)
     selected = next((profile for profile in profiles if set(files) == profile), None)
     need(selected is not None, 'code_image_receipt')
+    need(retained_runtime == (JAPAN_STABILITY_PRICE_SORT_RETAINED if selected == JAPAN_STABILITY_PRICE_SORT_CODE_FILES
+                             else JAPAN_STABILITY_RETAINED), 'code_stability_predecessor')
     need(type(observed) is bool and observed == (selected in
-         (JAPAN_STABILITY_HOME_CODE_FILES, JAPAN_STABILITY_METADATA_CODE_FILES)), 'timing_policy_image_scope')
+         (JAPAN_STABILITY_HOME_CODE_FILES, JAPAN_STABILITY_METADATA_CODE_FILES,
+          JAPAN_STABILITY_PRICE_SORT_CODE_FILES)), 'timing_policy_image_scope')
     return selected
 
 
@@ -791,7 +809,7 @@ def validate_plan(plan):
             need(scope != JAPAN_PAGINATION_CODE_SCOPE or plan.get('retainedRuntime') == JAPAN_PAGINATION_RETAINED,
                  'code_pagination_predecessor')
             need(scope != JAPAN_STABILITY_CODE_SCOPE or
-                 (plan.get('retainedRuntime') == JAPAN_STABILITY_RETAINED and
+                 (plan.get('retainedRuntime') in (JAPAN_STABILITY_RETAINED, JAPAN_STABILITY_PRICE_SORT_RETAINED) and
                   bool(JAPAN_STABILITY_CODE_FILES) and JAPAN_PAGINATION_CODE_FILES <= JAPAN_STABILITY_CODE_FILES),
                  'code_stability_predecessor')
             need(all(isinstance(plan.get(key), str) and re.fullmatch(r'[a-f0-9]{64}', plan[key])
@@ -2903,7 +2921,8 @@ class Host:
         scope = code_scope(self.plan)
         required_code_files = CODE_SCOPE_FILES[scope]
         if scope == JAPAN_STABILITY_CODE_SCOPE:
-            required_code_files = checked_japan_stability_image_files(image.get('runtimeFiles'), japan_observed_timing(self.plan))
+            required_code_files = checked_japan_stability_image_files(image.get('runtimeFiles'), japan_observed_timing(self.plan),
+                                                                      self.plan.get('retainedRuntime'))
         need(image.get('version') == 1 and image.get('kind') == 'china-runtime-image-v1' and image.get('market') == 'china' and
              all(image.get(key) == self.plan[key] for key in ('runtimeSha', 'pricingRuntimeSha', 'runtimeTree',
                                                             'runtimeDiffSha256', 'retainedRuntime', 'imageId')) and
@@ -3546,13 +3565,17 @@ class Host:
                 need(len(image_raw) == image_descriptor['bytes'] and sha(image_raw) == image_descriptor['sha256'],
                      'code_image_receipt_hash')
                 runtime_files = json.loads(image_raw).get('runtimeFiles')
-                runtime_profile = checked_japan_stability_image_files(runtime_files, observed)
+                runtime_profile = checked_japan_stability_image_files(runtime_files, observed, self.plan.get('retainedRuntime'))
                 if runtime_profile in (JAPAN_STABILITY_POWER_CODE_FILES, JAPAN_STABILITY_RAILS_CODE_FILES,
-                                       JAPAN_STABILITY_HOME_CODE_FILES, JAPAN_STABILITY_METADATA_CODE_FILES):
+                                       JAPAN_STABILITY_HOME_CODE_FILES, JAPAN_STABILITY_METADATA_CODE_FILES,
+                                       JAPAN_STABILITY_PRICE_SORT_CODE_FILES):
                     need(japan.get('japanPowerOrderPassed') is True, 'japan_browser_binding')
                 if runtime_profile in (JAPAN_STABILITY_RAILS_CODE_FILES, JAPAN_STABILITY_HOME_CODE_FILES,
-                                       JAPAN_STABILITY_METADATA_CODE_FILES):
+                                       JAPAN_STABILITY_METADATA_CODE_FILES, JAPAN_STABILITY_PRICE_SORT_CODE_FILES):
                     need(japan.get('japanBrandDirectoryPassed') is True, 'japan_browser_binding')
+                if runtime_profile == JAPAN_STABILITY_PRICE_SORT_CODE_FILES:
+                    need(all(japan.get(key) is True for key in ('japanPriceSortRequired', 'japanPriceSortPassed', 'japanCountDisplayPassed')),
+                         'japan_browser_binding')
         for name, raw in [('BROWSER_SPEED.json', speed_raw), ('BROWSER_DETAILS.json', details_raw)]:
             new_file(self.directory / name, raw)
             need(file_sha(self.directory / name) == sha(raw), 'browser_evidence_readback')

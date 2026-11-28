@@ -9,7 +9,8 @@ import {JAPAN_PAGINATION_CODE_SCOPE, JAPAN_PAGINATION_RETAINED_RUNTIME,
   JAPAN_PAGINATION_CODE_PATHS, isExactJapanPaginationScope}
   from '../scripts/catalog-next/japan-pagination-code-scope.mjs';
 import {checkedCatalogCodeScope} from '../scripts/catalog-next/photo-code-scope.mjs';
-import {JAPAN_STABILITY_CODE_SCOPE, isExactJapanStabilityScope} from '../scripts/catalog-next/japan-stability-code-scope.mjs';
+import {JAPAN_STABILITY_CODE_SCOPE, JAPAN_STABILITY_PRICE_SORT_RETAINED_RUNTIME,
+  isExactJapanStabilityScope, japanPriceSortRequired} from '../scripts/catalog-next/japan-stability-code-scope.mjs';
 
 const plan = () => ({codeScope:JAPAN_PAGINATION_CODE_SCOPE,
   retainedRuntime:JAPAN_PAGINATION_RETAINED_RUNTIME, runtimeFiles:[...JAPAN_PAGINATION_CODE_PATHS]});
@@ -86,19 +87,23 @@ test('pagination image verification keeps every CRM path protected and grants no
     execute:()=>assert.fail('wrong predecessor must fail before git')}),/china_image_pagination_scope/);
 });
 
-test('reviewed daily plans keep accepted a5ca selectable before and after the new code acceptance',async()=>{
+test('reviewed daily plans keep accepted B9 selectable before and after the price-sort successor acceptance',async()=>{
   const plans=await readChinaDailyPlans(),base=plans.servingPlan;
-  assert.equal(base.runtimeSha,JAPAN_PAGINATION_RETAINED_RUNTIME);
-  assert.equal(base.runtimeTree,'5a6d2c7723e9834204eb3896c06271adb2659991');
-  assert.equal(base.codeScope,'catalog-crm-japan-photo-retry-v1');
-  assert.equal(base.runtimeDiffSha256,'6a67b1680bc1f145d39164bbe269029a2450cf4f1284ffd2676616412f146466');
-  assert.equal(base.pricingToServingDiffSha256,'1b1b0e9e122de2a1f6c95865ac46b43c26e7535a131c40df4fbfb91ea0fc669c');
+  assert.equal(base.runtimeSha,JAPAN_STABILITY_PRICE_SORT_RETAINED_RUNTIME);
+  assert.equal(base.retainedRuntime,JAPAN_PAGINATION_RETAINED_RUNTIME);
+  assert.equal(base.runtimeTree,'4e2c36e461416d6db7d0f52753c9a933d626dd5c');
+  assert.equal(base.codeScope,JAPAN_STABILITY_CODE_SCOPE);
+  assert.equal(isExactJapanStabilityScope(base),true);
+  assert.equal(japanPriceSortRequired(base),false);
+  assert.equal(base.runtimeDiffSha256,'2cd9864d2589ef2dac2936a2fc50abad66df47e152f8910f232dab33d2ecf74d');
+  assert.equal(base.pricingToServingDiffSha256,'30915317661ce036c9296337f78d60cdabc7d3bf6decc94288e97a20297f2e4f');
   assert.equal(selectChinaDailyServingPlan(plans,base.runtimeSha),base);
   const successors=plans.servingPlans.filter(value=>value!==base);
   assert.equal(successors.length,1);
   const successor=successors[0];
-  assert.ok(successor.codeScope===JAPAN_STABILITY_CODE_SCOPE
-    ?isExactJapanStabilityScope(successor):isExactJapanPaginationScope(successor));
+  assert.equal(successor.retainedRuntime,base.runtimeSha);
+  assert.equal(isExactJapanStabilityScope(successor),true);
+  assert.equal(japanPriceSortRequired(successor),true);
   assert.equal(selectChinaDailyServingPlan(plans,successor.runtimeSha),successor);
   assert.deepEqual(successor.source,base.source);assert.deepEqual(successor.encyclopedia,base.encyclopedia);
   assert.equal(successor.pricingRuntimeSha,base.pricingRuntimeSha);
