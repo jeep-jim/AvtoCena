@@ -2,7 +2,7 @@
   "version": 1,
   "kind": "japan-power-price-sort-count-release-v1",
   "recordedAt": "2026-11-28T01:15:43.875Z",
-  "status": "source-published-exact-offer-identity-verifier-corrected-awaiting-new-verification",
+  "status": "published-accepted-live-verified",
   "issue": {
     "reportedUrl": "https://avtocena.com/cars/japan?powerTo=160&sort=totalRubDesc&city=%D0%9D%D0%BE%D0%B2%D0%BE%D0%BA%D1%83%D0%B7%D0%BD%D0%B5%D1%86%D0%BA",
     "reproducedPublicly": true,
@@ -218,9 +218,1112 @@
       "japanCountDisplayPassed"
     ],
     "priorFunctionalGatesPreserved": true,
-    "hostedVerify": null,
-    "release": null,
-    "publicPostReleaseProof": null,
+    "hostedVerify": {
+      "runId": 46094827437,
+      "runNumber": 71,
+      "attempt": 1,
+      "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/46094827437",
+      "controllerSha": "c2992bef3dd5c2ffcbf076b61501f8f07b7a2a87",
+      "status": "success",
+      "completedAt": "2026-11-28T01:51:51Z",
+      "runtimeSha": "20fd18d12b3f5c7aabef860e1b53da0d505dfd64",
+      "runtimeTree": "b3257c801b2b26cc84ec8d37380a2d8ec120b431",
+      "tests": [
+        {
+          "tests": 1727,
+          "pass": 1727,
+          "fail": 0,
+          "cancelled": 0,
+          "skipped": 0
+        },
+        {
+          "tests": 563,
+          "pass": 563,
+          "fail": 0,
+          "cancelled": 0,
+          "skipped": 0
+        }
+      ],
+      "steps": [
+        {
+          "name": "Check publication, daily continuity, rollback and unchanged baselines",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5
+        },
+        {
+          "name": "Checkout and verify the exact isolated code candidate",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6
+        },
+        {
+          "name": "Select the verified code scope for its required checks",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7
+        },
+        {
+          "name": "Prepare Chromium for the required runtime browser fixture",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8
+        },
+        {
+          "name": "Verify the Japan legacy redirect with real Chromium before host contact",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9
+        },
+        {
+          "name": "Verify hydrated Japan model controls on the exact runtime before host contact",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10
+        },
+        {
+          "name": "Verify Japan power then price sorting and live count on the exact runtime",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11
+        },
+        {
+          "name": "Verify bounded Japan directory retries on the exact runtime before host contact",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12
+        },
+        {
+          "name": "Test the native runtime and every required check for its reviewed scope",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 13
+        },
+        {
+          "name": "Verify ordinary Japan page filling on the exact candidate before host contact",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 14
+        },
+        {
+          "name": "Verify Japan supplier-only brand and model controls on the exact candidate",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 15
+        }
+      ],
+      "artifacts": [
+        {
+          "id": 15243615049,
+          "name": "japan-brand-directory-retry-fixture",
+          "bytes": 2256,
+          "sha256": "7699aba4271f74377906e3666e5256332b7b27b410fc2372146efdbfa74999ec",
+          "githubDigestMatched": true
+        },
+        {
+          "id": 15243560277,
+          "name": "japan-pagination24-fixture",
+          "bytes": 496,
+          "sha256": "dfa304c8e23e0a1d1bb39db201c0425fc8afc85561029e8a88e218e70cb6ce34",
+          "githubDigestMatched": true
+        },
+        {
+          "id": 15243540264,
+          "name": "japan-model-controls-ready-fixture",
+          "bytes": 1621,
+          "sha256": "7489859d634d2d591d43417573275fa17db6194b61dc6d37d9b6b045ecc9d244",
+          "githubDigestMatched": true
+        },
+        {
+          "id": 15243535340,
+          "name": "japan-price-sort-fixture",
+          "bytes": 9815,
+          "sha256": "974302d731fa8b367909e35d56be5cefd21873066f065fd3a348abc580d36a46",
+          "githubDigestMatched": true
+        },
+        {
+          "id": 15243361909,
+          "name": "japan-filter-directory-fixture",
+          "bytes": 517,
+          "sha256": "ebccc1af3fa71893edcf4084ec0e05cbac4140c4e2047d637f935fe5a36b2485",
+          "githubDigestMatched": true
+        },
+        {
+          "id": 15243347136,
+          "name": "china-crm-collection-controls-fixture",
+          "bytes": 429,
+          "sha256": "ff0402ca9b3e6c729ad31e1132e08e34e029edc09a7d443c78b08d559e618287",
+          "githubDigestMatched": true
+        },
+        {
+          "id": 15243317111,
+          "name": "japan-photo-retry-fixture",
+          "bytes": 420,
+          "sha256": "5bd61da1d12e672e68d197362446248f2285faba5156c89a248a281d31a2cde1",
+          "githubDigestMatched": true
+        },
+        {
+          "id": 15243037550,
+          "name": "japan-catalog-city-fixture",
+          "bytes": 491,
+          "sha256": "1b64c6f1f063e4aec8c8b9b3eacde2e212e3fd7fa1e679c678e9ee317dea6f2e",
+          "githubDigestMatched": true
+        },
+        {
+          "id": 15242384698,
+          "name": "japan-legacy-redirect-fixture",
+          "bytes": 709,
+          "sha256": "87e5a8c43bc60a0f8e795366f32fa01053f4249deb66f583d5e334090fddaf07",
+          "githubDigestMatched": true
+        }
+      ],
+      "fixtureResults": [
+        {
+          "name": "japan-brand-directory-retry-fixture",
+          "passed": true,
+          "caseCount": 3,
+          "runtimeSha": "20fd18d12b3f5c7aabef860e1b53da0d505dfd64"
+        },
+        {
+          "name": "japan-pagination24-fixture",
+          "passed": true,
+          "caseCount": 12,
+          "runtimeSha": null
+        },
+        {
+          "name": "japan-model-controls-ready-fixture",
+          "passed": true,
+          "caseCount": 4,
+          "runtimeSha": "20fd18d12b3f5c7aabef860e1b53da0d505dfd64"
+        },
+        {
+          "name": "japan-price-sort-fixture",
+          "passed": true,
+          "caseCount": 2,
+          "runtimeSha": "20fd18d12b3f5c7aabef860e1b53da0d505dfd64"
+        },
+        {
+          "name": "japan-filter-directory-fixture",
+          "passed": true,
+          "caseCount": 18,
+          "runtimeSha": null
+        },
+        {
+          "name": "china-crm-collection-controls-fixture",
+          "passed": true,
+          "caseCount": 2,
+          "runtimeSha": null
+        },
+        {
+          "name": "japan-photo-retry-fixture",
+          "passed": true,
+          "caseCount": 12,
+          "runtimeSha": null
+        },
+        {
+          "name": "japan-catalog-city-fixture",
+          "passed": true,
+          "caseCount": 4,
+          "runtimeSha": null
+        },
+        {
+          "name": "japan-legacy-redirect-fixture",
+          "passed": true,
+          "caseCount": 8,
+          "runtimeSha": null
+        }
+      ],
+      "priceSortFixture": {
+        "passed": true,
+        "cases": [
+          {
+            "name": "preserved_controls",
+            "passed": true,
+            "sequence": [
+              "totalRubDesc",
+              "totalRub"
+            ],
+            "powerSelectedThroughUi": true,
+            "countChecks": {
+              "loadedCounts": [
+                24,
+                24,
+                24,
+                48
+              ],
+              "visibleAfterEverySelection": true,
+              "appendUpdatesLoadedCount": true,
+              "supplierCountNotPresentedAsExact": true
+            },
+            "displayedCityPriceOrder": true,
+            "cityReversesBaseOrder": true,
+            "failedAppendKeeps48": true,
+            "pendingKeeps48": true,
+            "changedQueryRestartsAt24": true,
+            "lateOldAggregateIgnored": true,
+            "pageErrors": 0,
+            "requests": 6,
+            "helperChecks": {
+              "selectedThroughUi": true,
+              "city": "Новокузнецк",
+              "powerTo": 160,
+              "directions": [
+                "totalRubDesc",
+                "totalRub"
+              ],
+              "explicitApiReads": 4,
+              "pageErrors": 0,
+              "priceOrderScope": "each_loaded_page_and_power_lane",
+              "globalPriceOrderClaimed": false,
+              "checks": [
+                {
+                  "phase": "power",
+                  "status": 200,
+                  "shown": 24,
+                  "received": 24,
+                  "observedAt": "2026-11-28T01:50:03.898Z",
+                  "ageSeconds": 0.75,
+                  "stale": false,
+                  "partial": false,
+                  "total": null,
+                  "hasMore": true,
+                  "count": {
+                    "loaded": 24,
+                    "status": "partial",
+                    "exact": false,
+                    "visible": true,
+                    "supplierCountNotPresentedAsExact": true,
+                    "uiMatchesApi": true,
+                    "rowOrderMatchesApi": true
+                  }
+                },
+                {
+                  "status": 200,
+                  "shown": 24,
+                  "received": 24,
+                  "observedAt": "2026-11-28T01:50:03.898Z",
+                  "ageSeconds": 1.157,
+                  "stale": false,
+                  "partial": false,
+                  "total": null,
+                  "hasMore": true,
+                  "sort": "totalRubDesc",
+                  "knownPower": 24,
+                  "unknownPower": 0,
+                  "deliveredPrices": 24,
+                  "knownBeforeUnknown": true,
+                  "priceOrderWithinLoadedLanes": true,
+                  "globalPriceOrderClaimed": false,
+                  "priceBasis": "displayed_selected_city",
+                  "count": {
+                    "loaded": 24,
+                    "status": "partial",
+                    "exact": false,
+                    "visible": true,
+                    "supplierCountNotPresentedAsExact": true,
+                    "uiMatchesApi": true,
+                    "rowOrderMatchesApi": true,
+                    "priceOrder": {
+                      "sort": "totalRubDesc",
+                      "shown": 24,
+                      "knownPower": 24,
+                      "unknownPower": 0,
+                      "deliveredPrices": 24,
+                      "knownBeforeUnknown": true,
+                      "priceOrderWithinLoadedLanes": true,
+                      "globalPriceOrderClaimed": false,
+                      "priceBasis": "displayed_selected_city"
+                    }
+                  }
+                },
+                {
+                  "status": 200,
+                  "shown": 24,
+                  "received": 24,
+                  "observedAt": "2026-11-28T01:50:03.898Z",
+                  "ageSeconds": 1.541,
+                  "stale": false,
+                  "partial": false,
+                  "total": null,
+                  "hasMore": true,
+                  "sort": "totalRub",
+                  "knownPower": 24,
+                  "unknownPower": 0,
+                  "deliveredPrices": 24,
+                  "knownBeforeUnknown": true,
+                  "priceOrderWithinLoadedLanes": true,
+                  "globalPriceOrderClaimed": false,
+                  "priceBasis": "displayed_selected_city",
+                  "count": {
+                    "loaded": 24,
+                    "status": "partial",
+                    "exact": false,
+                    "visible": true,
+                    "supplierCountNotPresentedAsExact": true,
+                    "uiMatchesApi": true,
+                    "rowOrderMatchesApi": true,
+                    "priceOrder": {
+                      "sort": "totalRub",
+                      "shown": 24,
+                      "knownPower": 24,
+                      "unknownPower": 0,
+                      "deliveredPrices": 24,
+                      "knownBeforeUnknown": true,
+                      "priceOrderWithinLoadedLanes": true,
+                      "globalPriceOrderClaimed": false,
+                      "priceBasis": "displayed_selected_city"
+                    }
+                  }
+                },
+                {
+                  "status": 200,
+                  "shown": 24,
+                  "received": 24,
+                  "observedAt": "2026-11-28T01:50:03.898Z",
+                  "ageSeconds": 1.634,
+                  "stale": false,
+                  "partial": false,
+                  "total": null,
+                  "hasMore": true,
+                  "sort": "totalRub",
+                  "knownPower": 24,
+                  "unknownPower": 0,
+                  "deliveredPrices": 24,
+                  "knownBeforeUnknown": true,
+                  "priceOrderWithinLoadedLanes": true,
+                  "globalPriceOrderClaimed": false,
+                  "priceBasis": "displayed_selected_city",
+                  "phase": "append",
+                  "count": {
+                    "loaded": 48,
+                    "status": "partial",
+                    "exact": false,
+                    "visible": true,
+                    "supplierCountNotPresentedAsExact": true,
+                    "uiMatchesApi": true,
+                    "rowOrderMatchesApi": true,
+                    "priceOrder": {
+                      "sort": "totalRub",
+                      "shown": 24,
+                      "knownPower": 24,
+                      "unknownPower": 0,
+                      "deliveredPrices": 24,
+                      "knownBeforeUnknown": true,
+                      "priceOrderWithinLoadedLanes": true,
+                      "globalPriceOrderClaimed": false,
+                      "priceBasis": "displayed_selected_city"
+                    }
+                  },
+                  "followedEmittedCursor": true,
+                  "distinctRows": true,
+                  "cursorSha256": "eb0393ea9adf9ab3c2bba177534753614a8560197eb231e7cd08ab38abe7aaea",
+                  "loaded": 48
+                }
+              ]
+            }
+          },
+          {
+            "name": "remounted_controls",
+            "passed": true,
+            "sequence": [
+              "totalRubDesc",
+              "totalRub"
+            ],
+            "powerSelectedThroughUi": true,
+            "countChecks": {
+              "loadedCounts": [
+                24,
+                24,
+                24,
+                48
+              ],
+              "visibleAfterEverySelection": true,
+              "appendUpdatesLoadedCount": true,
+              "supplierCountNotPresentedAsExact": true
+            },
+            "displayedCityPriceOrder": true,
+            "cityReversesBaseOrder": true,
+            "failedAppendKeeps48": true,
+            "pendingKeeps48": true,
+            "changedQueryRestartsAt24": true,
+            "lateOldAggregateIgnored": true,
+            "pageErrors": 0,
+            "requests": 6,
+            "helperChecks": {
+              "selectedThroughUi": true,
+              "city": "Новокузнецк",
+              "powerTo": 160,
+              "directions": [
+                "totalRubDesc",
+                "totalRub"
+              ],
+              "explicitApiReads": 4,
+              "pageErrors": 0,
+              "priceOrderScope": "each_loaded_page_and_power_lane",
+              "globalPriceOrderClaimed": false,
+              "checks": [
+                {
+                  "phase": "power",
+                  "status": 200,
+                  "shown": 24,
+                  "received": 24,
+                  "observedAt": "2026-11-28T01:50:06.184Z",
+                  "ageSeconds": 0.59,
+                  "stale": false,
+                  "partial": false,
+                  "total": null,
+                  "hasMore": true,
+                  "count": {
+                    "loaded": 24,
+                    "status": "partial",
+                    "exact": false,
+                    "visible": true,
+                    "supplierCountNotPresentedAsExact": true,
+                    "uiMatchesApi": true,
+                    "rowOrderMatchesApi": true
+                  }
+                },
+                {
+                  "status": 200,
+                  "shown": 24,
+                  "received": 24,
+                  "observedAt": "2026-11-28T01:50:06.184Z",
+                  "ageSeconds": 0.955,
+                  "stale": false,
+                  "partial": false,
+                  "total": null,
+                  "hasMore": true,
+                  "sort": "totalRubDesc",
+                  "knownPower": 24,
+                  "unknownPower": 0,
+                  "deliveredPrices": 24,
+                  "knownBeforeUnknown": true,
+                  "priceOrderWithinLoadedLanes": true,
+                  "globalPriceOrderClaimed": false,
+                  "priceBasis": "displayed_selected_city",
+                  "count": {
+                    "loaded": 24,
+                    "status": "partial",
+                    "exact": false,
+                    "visible": true,
+                    "supplierCountNotPresentedAsExact": true,
+                    "uiMatchesApi": true,
+                    "rowOrderMatchesApi": true,
+                    "priceOrder": {
+                      "sort": "totalRubDesc",
+                      "shown": 24,
+                      "knownPower": 24,
+                      "unknownPower": 0,
+                      "deliveredPrices": 24,
+                      "knownBeforeUnknown": true,
+                      "priceOrderWithinLoadedLanes": true,
+                      "globalPriceOrderClaimed": false,
+                      "priceBasis": "displayed_selected_city"
+                    }
+                  }
+                },
+                {
+                  "status": 200,
+                  "shown": 24,
+                  "received": 24,
+                  "observedAt": "2026-11-28T01:50:06.184Z",
+                  "ageSeconds": 1.319,
+                  "stale": false,
+                  "partial": false,
+                  "total": null,
+                  "hasMore": true,
+                  "sort": "totalRub",
+                  "knownPower": 24,
+                  "unknownPower": 0,
+                  "deliveredPrices": 24,
+                  "knownBeforeUnknown": true,
+                  "priceOrderWithinLoadedLanes": true,
+                  "globalPriceOrderClaimed": false,
+                  "priceBasis": "displayed_selected_city",
+                  "count": {
+                    "loaded": 24,
+                    "status": "partial",
+                    "exact": false,
+                    "visible": true,
+                    "supplierCountNotPresentedAsExact": true,
+                    "uiMatchesApi": true,
+                    "rowOrderMatchesApi": true,
+                    "priceOrder": {
+                      "sort": "totalRub",
+                      "shown": 24,
+                      "knownPower": 24,
+                      "unknownPower": 0,
+                      "deliveredPrices": 24,
+                      "knownBeforeUnknown": true,
+                      "priceOrderWithinLoadedLanes": true,
+                      "globalPriceOrderClaimed": false,
+                      "priceBasis": "displayed_selected_city"
+                    }
+                  }
+                },
+                {
+                  "status": 200,
+                  "shown": 24,
+                  "received": 24,
+                  "observedAt": "2026-11-28T01:50:06.184Z",
+                  "ageSeconds": 1.418,
+                  "stale": false,
+                  "partial": false,
+                  "total": null,
+                  "hasMore": true,
+                  "sort": "totalRub",
+                  "knownPower": 24,
+                  "unknownPower": 0,
+                  "deliveredPrices": 24,
+                  "knownBeforeUnknown": true,
+                  "priceOrderWithinLoadedLanes": true,
+                  "globalPriceOrderClaimed": false,
+                  "priceBasis": "displayed_selected_city",
+                  "phase": "append",
+                  "count": {
+                    "loaded": 48,
+                    "status": "partial",
+                    "exact": false,
+                    "visible": true,
+                    "supplierCountNotPresentedAsExact": true,
+                    "uiMatchesApi": true,
+                    "rowOrderMatchesApi": true,
+                    "priceOrder": {
+                      "sort": "totalRub",
+                      "shown": 24,
+                      "knownPower": 24,
+                      "unknownPower": 0,
+                      "deliveredPrices": 24,
+                      "knownBeforeUnknown": true,
+                      "priceOrderWithinLoadedLanes": true,
+                      "globalPriceOrderClaimed": false,
+                      "priceBasis": "displayed_selected_city"
+                    }
+                  },
+                  "followedEmittedCursor": true,
+                  "distinctRows": true,
+                  "cursorSha256": "eb0393ea9adf9ab3c2bba177534753614a8560197eb231e7cd08ab38abe7aaea",
+                  "loaded": 48
+                }
+              ]
+            }
+          }
+        ],
+        "productionRequests": 0,
+        "supplierRequests": 0,
+        "forbiddenTransportAttempts": 0,
+        "browserVersion": "158.0.8127.36",
+        "playwrightVersion": "1.55.0",
+        "runtimeSourceFilesVerified": 159,
+        "controllerHelperSha256": "96c57d1f0cae2f9281060efbc8635fbefa21400b2d70fe19f1834d0d2690c69f",
+        "styles": {
+          "sourceFiles": [
+            "apps/web/app/select-controls.css",
+            "apps/web/app/globals.css",
+            "apps/web/app/catalog-ui.css",
+            "apps/web/app/public-polish.css",
+            "apps/web/app/public-typography.css",
+            "apps/web/app/flat-ui.css",
+            "apps/web/app/public-regression-fixes.css",
+            "apps/web/app/public-price-sheet-fix.css",
+            "apps/web/app/catalog-filter-compact.css",
+            "apps/web/components/catalog/sticky-catalog-controls.css",
+            "apps/web/components/catalog/MobileCatalogDropdowns.css",
+            "apps/web/components/catalog/RecyclingPower.module.css",
+            "apps/web/components/catalog/catalog-sidebar.css"
+          ],
+          "componentBundleSha256": "537d620ea89a816cd8df55f9ca167618b1131aaf3063e8bb399d87afcdda9446",
+          "servedCssSha256": "2efe6f9df689aa1e40233d3dfb41ee5fa17f456c79089419cb9b7bfb79f10899"
+        },
+        "reportSha256": "227724040c62edf7d371b3712e1b14afe597012bd41269f0330a1a13d55189c3",
+        "independentSourceAndCssHashReviewPassed": true
+      }
+    },
+    "release": {
+      "runId": 46095339210,
+      "runNumber": 34,
+      "attempt": 1,
+      "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/46095339210",
+      "triggerSha": "7f25a16f0faa3559d7239a6579009fb29de09289",
+      "approvedControllerSha": "c2992bef3dd5c2ffcbf076b61501f8f07b7a2a87",
+      "status": "completed",
+      "accepted": true,
+      "publicPostReleaseProof": {
+        "recordedAt": "2026-11-28T02:15:31.082677+00:00",
+        "method": "ordinary browser reload of the user-reported URL after terminal release success",
+        "url": "https://avtocena.com/cars/japan?powerTo=160&sort=totalRubDesc&city=%D0%9D%D0%BE%D0%B2%D0%BE%D0%BA%D1%83%D0%B7%D0%BD%D0%B5%D1%86%D0%BA",
+        "cards": 24,
+        "powerTo160Checked": true,
+        "sortLabel": "Сортировка: Сначала дороже",
+        "countText": "Загружено 24 · количество уточняется",
+        "countLoaded": 24,
+        "countStatus": "partial",
+        "totalClaimedExact": false,
+        "priorPartialFailureWarningVisible": false,
+        "liveTabMarkedDeliverable": true,
+        "runtimeBinding": "Browser UI result is corroborated by the separately nonce/manifest/image-bound accepted release report; no runtime identifier was inferred from page text."
+      },
+      "conclusion": "success",
+      "completed": true,
+      "published": true,
+      "finishedAt": "2026-11-28T02:11:23.754Z",
+      "workflowCompletedAt": "2026-11-28T02:11:33Z",
+      "runtimeSha": "20fd18d12b3f5c7aabef860e1b53da0d505dfd64",
+      "runtimeTree": "b3257c801b2b26cc84ec8d37380a2d8ec120b431",
+      "imageId": "sha256:52a88419257d9002b8b505787f4708b995f1e2d70caafd430cae9796156661b6",
+      "retainedRuntime": "b9e9122b75f4e588088d0241476b18df7f047d96",
+      "acceptedGenerationId": "gen_china_46077223993_1",
+      "generationManifestSha256": "bdc53a25146a9a181c84c3b7fde2d3576ede0147b9e4cc70a4ad0788e1e022b7",
+      "retentionPreserved": true,
+      "leaseReleased": true,
+      "artifact": {
+        "id": 15242823999,
+        "name": "china-photo-code-release-result",
+        "size_in_bytes": 11588567,
+        "digest": "sha256:5ebb24f273915990910a69ac7b5cc355da8bd4304811653ee7e0264496a726f1",
+        "expires_at": "2026-12-12T02:11:24Z",
+        "githubDigestMatched": true
+      },
+      "proofFiles": [
+        {
+          "path": "AvtoCena/AvtoCena/catalog-next-china-photo-release-report.json",
+          "sha256": "49feabd36a0383ae1bb3dfae00d998d05c6ee57403405a53dbef56165038f4a6"
+        },
+        {
+          "path": "AvtoCena/AvtoCena/catalog-next-japan-browser-report.json",
+          "sha256": "1a31afb91fb1b0e495b9dd680b2c0a2e5b04ac3eda7d9828c09d05c8585ba5df"
+        },
+        {
+          "path": "_temp/china-release-build/image-receipt.json",
+          "sha256": "8fa54c9e4847970f343575b137711a4246983c7731b4e400b67c8e52d5a90ace"
+        },
+        {
+          "path": "_temp/china-release-build/image-storage-proof.json",
+          "sha256": "3dc1a0b1ac659f7047fcf0c87ab978caeb25102b92b935090de37c3473801bd2"
+        }
+      ],
+      "cycleReport": {
+        "version": 1,
+        "kind": "china-code-cycle-v1",
+        "market": "china",
+        "completed": true,
+        "published": true,
+        "status": "accepted",
+        "runtimeSha": "20fd18d12b3f5c7aabef860e1b53da0d505dfd64",
+        "retainedRuntime": "b9e9122b75f4e588088d0241476b18df7f047d96",
+        "sourceRequests": 0,
+        "generationRestores": 0,
+        "priceCalculations": 0,
+        "generationWrites": 0,
+        "encyclopediaWrites": 0,
+        "otherMarketWrites": 0,
+        "deletions": 0,
+        "acceptancePolicy": "japan-functional-observed-timing-v1",
+        "speedGateRequired": false,
+        "speedPassed": null,
+        "timingObserved": true,
+        "hostCleanupBeforeReserve": {
+          "completed": true,
+          "retiredContainers": 0,
+          "filesDeleted": 0,
+          "freedBytes": 0
+        },
+        "appImageCleanupBeforeReserve": {
+          "version": 1,
+          "kind": "china-terminal-app-image-cleanup-v1",
+          "completed": true,
+          "status": "already_absent",
+          "uncertain": false,
+          "imagesRemoved": 0,
+          "runtimeSha": "a5ca426eec2663eb17c2df69fe2bfed46e2b8740",
+          "imageId": "sha256:7fabcde790be0cb6d2549b646178d39ddc235c9fb1def8b66df48f7296d81647",
+          "witnessSha256": "333e3c7f0a02cba7a58fc79a4b3500d809a359239eef2350516e1fa36bf9478f",
+          "diskFreeBytesBefore": 48985985024,
+          "diskFreeBytesAfter": 48985985024,
+          "measuredFreeBytesChange": 0,
+          "reason": "already_absent"
+        },
+        "retentionPreserved": true,
+        "serverTiming": {
+          "version": 1,
+          "kind": "japan-server-timing-observation-v1",
+          "release": "20fd18d12b3f5c7aabef860e1b53da0d505dfd64",
+          "nonce": "975035b3a5853aed045c80c6c6a2061d",
+          "timingPolicy": "japan-functional-observed-timing-v1",
+          "speedGateRequired": false,
+          "speedPassed": null,
+          "timingObserved": true,
+          "broadServerBenchmarkExecuted": false,
+          "healthSeconds": 0.0043,
+          "baselineSha256": "32fba449b77e40983803483ea7b6cb4ece09afa997c2ae08dd968c675f528c59"
+        },
+        "hostCleanup": {
+          "completed": true,
+          "retiredContainers": 1
+        },
+        "appImageCleanup": {
+          "version": 1,
+          "kind": "china-terminal-app-image-cleanup-v1",
+          "completed": true,
+          "status": "protected",
+          "uncertain": false,
+          "imagesRemoved": 0,
+          "runtimeSha": "b9e9122b75f4e588088d0241476b18df7f047d96",
+          "imageId": "sha256:7b97f99ee72af7b50944c98a94a670bcb347b9779794d78b34fdc92279460216",
+          "witnessSha256": "57536c2baa1022ae33497c5b52599bf1f0a2b4ee8c69788c5afdbfb465c67a60",
+          "diskFreeBytesBefore": 48000761856,
+          "diskFreeBytesAfter": 48000761856,
+          "measuredFreeBytesChange": 0,
+          "reason": "current_or_rollback"
+        },
+        "finishedAt": "2026-11-28T02:11:23.754Z",
+        "acceptedGenerationId": "gen_china_46077223993_1",
+        "acceptedRuntimeSha": "20fd18d12b3f5c7aabef860e1b53da0d505dfd64",
+        "imageId": "sha256:52a88419257d9002b8b505787f4708b995f1e2d70caafd430cae9796156661b6",
+        "sourceObservedAt": "2026-11-27T23:34:00.128Z",
+        "sourceCursor": 13382542,
+        "generationManifestSha256": "bdc53a25146a9a181c84c3b7fde2d3576ede0147b9e4cc70a4ad0788e1e022b7",
+        "leaseReleased": true
+      },
+      "liveVerification": {
+        "kind": "verified-hosted-japan-price-sort-release",
+        "runId": 46095339210,
+        "runNumber": 34,
+        "attempt": 1,
+        "controllerSha": "7f25a16f0faa3559d7239a6579009fb29de09289",
+        "workflowConclusion": "success",
+        "cycleStatus": "accepted",
+        "runtimeSha": "20fd18d12b3f5c7aabef860e1b53da0d505dfd64",
+        "runtimeTree": "b3257c801b2b26cc84ec8d37380a2d8ec120b431",
+        "imageId": "sha256:52a88419257d9002b8b505787f4708b995f1e2d70caafd430cae9796156661b6",
+        "retainedRuntime": "b9e9122b75f4e588088d0241476b18df7f047d96",
+        "acceptedGenerationId": "gen_china_46077223993_1",
+        "sourceObservedAt": "2026-11-27T23:34:00.128Z",
+        "generationManifestSha256": "bdc53a25146a9a181c84c3b7fde2d3576ede0147b9e4cc70a4ad0788e1e022b7",
+        "cycleNonceBoundToBrowser": true,
+        "priorGates": {
+          "japanFreshnessPassed": true,
+          "japanPowerApiPassed": true,
+          "japanUiPassed": true,
+          "japanVisibilityPassed": true,
+          "japanPetrolPowerUiPassed": true,
+          "japanDetailPowerInputPassed": true,
+          "japanDeliveredCalculationPassed": true,
+          "japanFullPagesPassed": true,
+          "japanPagination24Passed": true,
+          "japanCatalogWarningRemovedPassed": true,
+          "japanModelSelectionPassed": true,
+          "japanCombinedFiltersPassed": true,
+          "japanRelatedCardsPassed": true,
+          "japanVehiclePolicyPassed": true,
+          "japanPowerOrderPassed": true,
+          "japanBrandDirectoryPassed": true
+        },
+        "priceSortRequired": true,
+        "priceSortPassed": true,
+        "countDisplayPassed": true,
+        "priceSort": {
+          "selectedThroughUi": true,
+          "city": "Новокузнецк",
+          "powerTo": 160,
+          "directions": [
+            "totalRubDesc",
+            "totalRub"
+          ],
+          "explicitApiReads": 4,
+          "pageErrors": 0,
+          "priceOrderScope": "each_loaded_page_and_power_lane",
+          "globalPriceOrderClaimed": false,
+          "checks": [
+            {
+              "phase": "power",
+              "status": 200,
+              "shown": 24,
+              "received": 24,
+              "observedAt": "2026-11-28T02:08:43.731Z",
+              "ageSeconds": 92.06,
+              "stale": false,
+              "partial": false,
+              "total": null,
+              "hasMore": true,
+              "count": {
+                "loaded": 24,
+                "status": "partial",
+                "exact": false,
+                "visible": true,
+                "supplierCountNotPresentedAsExact": true,
+                "uiMatchesApi": true,
+                "rowOrderMatchesApi": true
+              }
+            },
+            {
+              "status": 200,
+              "shown": 24,
+              "received": 24,
+              "observedAt": "2026-11-28T02:08:43.731Z",
+              "ageSeconds": 93.618,
+              "stale": false,
+              "partial": false,
+              "total": null,
+              "hasMore": true,
+              "sort": "totalRubDesc",
+              "knownPower": 24,
+              "unknownPower": 0,
+              "deliveredPrices": 21,
+              "knownBeforeUnknown": true,
+              "priceOrderWithinLoadedLanes": true,
+              "globalPriceOrderClaimed": false,
+              "priceBasis": "displayed_selected_city",
+              "count": {
+                "loaded": 24,
+                "status": "partial",
+                "exact": false,
+                "visible": true,
+                "supplierCountNotPresentedAsExact": true,
+                "uiMatchesApi": true,
+                "rowOrderMatchesApi": true,
+                "priceOrder": {
+                  "sort": "totalRubDesc",
+                  "shown": 24,
+                  "knownPower": 24,
+                  "unknownPower": 0,
+                  "deliveredPrices": 21,
+                  "knownBeforeUnknown": true,
+                  "priceOrderWithinLoadedLanes": true,
+                  "globalPriceOrderClaimed": false,
+                  "priceBasis": "displayed_selected_city"
+                }
+              }
+            },
+            {
+              "status": 200,
+              "shown": 24,
+              "received": 24,
+              "observedAt": "2026-11-28T02:08:43.731Z",
+              "ageSeconds": 95.527,
+              "stale": false,
+              "partial": false,
+              "total": null,
+              "hasMore": true,
+              "sort": "totalRub",
+              "knownPower": 24,
+              "unknownPower": 0,
+              "deliveredPrices": 21,
+              "knownBeforeUnknown": true,
+              "priceOrderWithinLoadedLanes": true,
+              "globalPriceOrderClaimed": false,
+              "priceBasis": "displayed_selected_city",
+              "count": {
+                "loaded": 24,
+                "status": "partial",
+                "exact": false,
+                "visible": true,
+                "supplierCountNotPresentedAsExact": true,
+                "uiMatchesApi": true,
+                "rowOrderMatchesApi": true,
+                "priceOrder": {
+                  "sort": "totalRub",
+                  "shown": 24,
+                  "knownPower": 24,
+                  "unknownPower": 0,
+                  "deliveredPrices": 21,
+                  "knownBeforeUnknown": true,
+                  "priceOrderWithinLoadedLanes": true,
+                  "globalPriceOrderClaimed": false,
+                  "priceBasis": "displayed_selected_city"
+                }
+              }
+            },
+            {
+              "status": 200,
+              "shown": 24,
+              "received": 24,
+              "observedAt": "2026-11-28T02:08:52.923Z",
+              "ageSeconds": 87.836,
+              "stale": false,
+              "partial": false,
+              "total": null,
+              "hasMore": true,
+              "sort": "totalRub",
+              "knownPower": 24,
+              "unknownPower": 0,
+              "deliveredPrices": 13,
+              "knownBeforeUnknown": true,
+              "priceOrderWithinLoadedLanes": true,
+              "globalPriceOrderClaimed": false,
+              "priceBasis": "displayed_selected_city",
+              "phase": "append",
+              "count": {
+                "loaded": 48,
+                "status": "partial",
+                "exact": false,
+                "visible": true,
+                "supplierCountNotPresentedAsExact": true,
+                "uiMatchesApi": true,
+                "rowOrderMatchesApi": true,
+                "priceOrder": {
+                  "sort": "totalRub",
+                  "shown": 24,
+                  "knownPower": 24,
+                  "unknownPower": 0,
+                  "deliveredPrices": 13,
+                  "knownBeforeUnknown": true,
+                  "priceOrderWithinLoadedLanes": true,
+                  "globalPriceOrderClaimed": false,
+                  "priceBasis": "displayed_selected_city"
+                }
+              },
+              "followedEmittedCursor": true,
+              "distinctRows": true,
+              "cursorSha256": "dbfb9b198279fe7182c68472b6fbd6b3221290c8c72de5068db2922a8ea1853f",
+              "loaded": 48
+            }
+          ]
+        },
+        "countDisplay": {
+          "loadedCounts": [
+            24,
+            24,
+            24,
+            48
+          ],
+          "visibleAfterEverySelection": true,
+          "appendUpdatesLoadedCount": true,
+          "supplierCountNotPresentedAsExact": true
+        },
+        "speedGateRequired": false,
+        "speedPassed": null,
+        "timingObserved": true,
+        "latencyThresholdApplied": false,
+        "retentionPreserved": true,
+        "leaseReleased": true,
+        "protectedPricingPathsUnchanged": true,
+        "archiveRoundTripVerified": true,
+        "artifactZipSha256": "5ebb24f273915990910a69ac7b5cc355da8bd4304811653ee7e0264496a726f1",
+        "generationNote": "The independently scheduled daily run 46077223993 accepted this generation before release34; its aggregate manifest, source timestamp, cursor and pricing runtime match the accepted code-release cycle and live report. See generationProvenance for evidence and its limits."
+      },
+      "imageReceipt": {
+        "runtimeSha": "20fd18d12b3f5c7aabef860e1b53da0d505dfd64",
+        "runtimeTree": "b3257c801b2b26cc84ec8d37380a2d8ec120b431",
+        "retainedRuntime": "b9e9122b75f4e588088d0241476b18df7f047d96",
+        "runtimeDiffSha256": "8e5a3d15adeec0f78c073e982f30fe1a2278b1e6462d2ec81dad13ac12280515",
+        "imageId": "sha256:52a88419257d9002b8b505787f4708b995f1e2d70caafd430cae9796156661b6",
+        "protectedPathsUnchanged": true,
+        "pricingRuntimeSha": "64c6338e0db23c8999096bceefbf113c0136fe15",
+        "pricingRuntimeTree": "d2fc1f171316bfb0dc76f09e90409d4d7336f6b3",
+        "archiveRoundTripVerified": true
+      },
+      "generationProvenance": {
+        "version": 1,
+        "kind": "existing-hosted-generation-provenance-audit",
+        "passed": true,
+        "origin": {
+          "workflowRunId": 46077223993,
+          "workflowRunNumber": 7,
+          "workflowEvent": "schedule",
+          "workflowConclusion": "success",
+          "controllerSha": "eb9cc622f424498b0b09b7bb78efc7cd643bc398",
+          "finishedAt": "2026-11-28T01:16:38.935Z",
+          "previousGenerationId": "gen_china_45875678028_1",
+          "previousServingRuntime": "b9e9122b75f4e588088d0241476b18df7f047d96",
+          "acceptedGenerationId": "gen_china_46077223993_1",
+          "applicationBuilds": 0,
+          "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/46077223993",
+          "artifact": {
+            "id": 15242205177,
+            "name": "catalog-next-china-daily-report",
+            "size_in_bytes": 3277,
+            "digest": "sha256:d895aa243147f0102e9558cf466ed14b13b92d98b3cccf02a8b7d7bec97b02b3",
+            "expires_at": "2026-12-12T01:16:40Z",
+            "githubDigestMatched": true
+          }
+        },
+        "preservedFields": {
+          "generationId": "gen_china_46077223993_1",
+          "generationManifestSha256": "bdc53a25146a9a181c84c3b7fde2d3576ede0147b9e4cc70a4ad0788e1e022b7",
+          "sourceObservedAt": "2026-11-27T23:34:00.128Z",
+          "sourceCursor": 13382542,
+          "pricingRuntimeSha": "64c6338e0db23c8999096bceefbf113c0136fe15"
+        },
+        "generationReceipt": {
+          "owner": {
+            "runId": "46077223993",
+            "attempt": "1",
+            "revision": "eb9cc622f424498b0b09b7bb78efc7cd643bc398"
+          },
+          "receiptSha256": "8e282277d9e46b1f0ed2a36ea9cc6aa03c21213669f08459c329c5d082ddf65b",
+          "sourceDescriptorSha256": "b40fef73b5b85446226417670c97d8e030e5ae3e53df803dea9f15e3ca936ff5"
+        },
+        "codeRelease": {
+          "workflowRunId": 46095339210,
+          "status": "accepted",
+          "runtimeSha": "20fd18d12b3f5c7aabef860e1b53da0d505dfd64",
+          "retainedRuntime": "b9e9122b75f4e588088d0241476b18df7f047d96",
+          "imageId": "sha256:52a88419257d9002b8b505787f4708b995f1e2d70caafd430cae9796156661b6",
+          "sourceRequests": 0,
+          "generationRestores": 0,
+          "priceCalculations": 0,
+          "generationWrites": 0,
+          "retentionPreserved": true,
+          "leaseReleased": true,
+          "retainedImageProtected": true
+        },
+        "verifiedPublishedMechanism": {
+          "controller": "scripts/catalog-next/code-controller.mjs copies current data and changes only runtimeSha/imageId before validateChinaCodeTransition",
+          "preflight": "scripts/catalog-next/daily-release.mjs checkedChinaCodePreflight binds manifest, oracle and seven file descriptors to the accepted reference",
+          "host": "scripts/catalog-next/release-host.py prepare_code_generation requires same generation descriptors, source identity and copies with hash/readback verification"
+        },
+        "limitations": [
+          "The uploaded code-release artifact does not include an independent before/after accepted.json snapshot or the host PLAN/RECEIPT with individual seven generation-file hashes.",
+          "No private generation/source data was downloaded or independently rehashed; preservation evidence is the matching published aggregate manifest identity, generation/source fields and successful enforced publication checks."
+        ],
+        "evidenceFiles": {
+          "dailyTerminal": {
+            "path": "daily-46077223993-terminal.json",
+            "sha256": "f01fc71c76411b86eb6914e38de8c613324f025b1e7aa824f81f087c23ed7835"
+          },
+          "dailyCycle": {
+            "path": "daily-46077223993-catalog-next-china-daily-report.json",
+            "sha256": "d90dfd5a9f8040bbe365c960fd9401cad9935cf101c905679a497a0b735f8c55"
+          },
+          "dailyGeneration": {
+            "path": "daily-46077223993-catalog-next-china-daily-generation-report.json",
+            "sha256": "fd7f298d2cd09f252608a4093cb6ad12e33d484277dcb01496a2abc7b869db1c"
+          },
+          "releaseCycle": {
+            "path": "release-46095339210/AvtoCena/AvtoCena/catalog-next-china-photo-release-report.json",
+            "sha256": "49feabd36a0383ae1bb3dfae00d998d05c6ee57403405a53dbef56165038f4a6"
+          },
+          "liveBrowser": {
+            "path": "release-46095339210/AvtoCena/AvtoCena/catalog-next-japan-browser-report.json",
+            "sha256": "1a31afb91fb1b0e495b9dd680b2c0a2e5b04ac3eda7d9828c09d05c8585ba5df"
+          },
+          "imageReceipt": {
+            "path": "release-46095339210/_temp/china-release-build/image-receipt.json",
+            "sha256": "8fa54c9e4847970f343575b137711a4246983c7731b4e400b67c8e52d5a90ace"
+          },
+          "imageStorageProof": {
+            "path": "release-46095339210/_temp/china-release-build/image-storage-proof.json",
+            "sha256": "3dc1a0b1ac659f7047fcf0c87ab978caeb25102b92b935090de37c3473801bd2"
+          }
+        }
+      }
+    },
+    "publicPostReleaseProof": {
+      "recordedAt": "2026-11-28T02:15:31.082677+00:00",
+      "method": "ordinary browser reload of the user-reported URL after terminal release success",
+      "url": "https://avtocena.com/cars/japan?powerTo=160&sort=totalRubDesc&city=%D0%9D%D0%BE%D0%B2%D0%BE%D0%BA%D1%83%D0%B7%D0%BD%D0%B5%D1%86%D0%BA",
+      "cards": 24,
+      "powerTo160Checked": true,
+      "sortLabel": "Сортировка: Сначала дороже",
+      "countText": "Загружено 24 · количество уточняется",
+      "countLoaded": 24,
+      "countStatus": "partial",
+      "totalClaimedExact": false,
+      "priorPartialFailureWarningVisible": false,
+      "liveTabMarkedDeliverable": true,
+      "runtimeBinding": "Browser UI result is corroborated by the separately nonce/manifest/image-bound accepted release report; no runtime identifier was inferred from page text."
+    },
     "hostedVerifyAttempts": [
       {
         "runId": 46092317220,
@@ -475,6 +1578,20 @@
           "fixtureExcludedVehiclesVisible": 0
         }
       }
-    ]
-  }
+    ],
+    "inProgressBrowserObservation": {
+      "observedAt": "2026-11-28T02:08:04.345859+00:00",
+      "url": "https://avtocena.com/cars/japan?powerTo=160&sort=totalRubDesc&city=%D0%9D%D0%BE%D0%B2%D0%BE%D0%BA%D1%83%D0%B7%D0%BD%D0%B5%D1%86%D0%BA",
+      "cards": 0,
+      "countBadges": 0,
+      "visibleFooter": "Показано 0",
+      "visibleStatus": "Показана часть автомобилей. Полный список пока недоступен.",
+      "releaseRunId": 46095339210,
+      "releaseTerminalAtObservation": false,
+      "runtimeIdentified": false,
+      "note": "This observation preceded the activation phase in the terminal job log. The post-release ordinary reload shows 24 cards and the query-bound count.",
+      "releaseActivationStartedAt": "2026-11-28T02:08:33Z"
+    }
+  },
+  "updatedAt": "2026-11-28T02:16:31.412058+00:00"
 }
