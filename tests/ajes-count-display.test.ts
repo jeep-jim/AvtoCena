@@ -1,7 +1,25 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
+import {DatabaseSync} from 'node:sqlite';
 import {ajesCountText,exactAjesCount,ajesVisibleCount,latestAjesCountSummary} from '../apps/web/lib/catalog/ajes-count-display';
-import {ajesCatalogQuery,ajesQuery} from '../apps/web/lib/catalog/ajes-query';
+import {ajesCatalogQuery,ajesQuery,type AjesQuery} from '../apps/web/lib/catalog/ajes-query';
+
+function assertModelSqlRows(make:string,selection:Pick<AjesQuery,'model'|'modelFamilies'|'resolvedModels'>,models:readonly string[],expected:readonly string[]){
+ const db=new DatabaseSync(':memory:');
+ try{
+  db.exec('create table stats(id text,year integer,auction_type integer,status text,finish integer,marka_name text,model_name text,auction_date text)');
+  const insert=db.prepare('insert into stats values(?,?,?,?,?,?,?,?)');
+  for(const [index,model] of models.entries()){
+   insert.run('selected-'+index,2021,2,'Sold',100000,make,model,'2026-11-28');
+   insert.run('foreign-'+index,2021,2,'Sold',100000,make==='TOYOTA'?'HONDA':'TOYOTA',model,'2026-11-28');
+  }
+  const query={table:'stats' as const,make,...selection,pageSize:48};
+  const rows=db.prepare(ajesQuery(query).sql).all();
+  assert.deepEqual(rows.map(row=>row.model_name).sort(),[...expected].sort(),'actual LIST SQL preserves selected source models and excludes sibling/prefix matches');
+  assert.ok(rows.every(row=>row.marka_name===make),'matching model names from another make stay excluded');
+  assert.equal(db.prepare(ajesQuery({...query,aggregate:'count'}).sql).get()!['count(*)'],expected.length,'COUNT uses the same complete candidate predicate as LIST');
+ }finally{db.close();}
+}
 
 test('independent counts retain zero, unavailable and stale semantics',t=>{
  t.mock.method(Date,'now',()=>Date.parse('2026-10-18T11:15:00Z'));
@@ -150,12 +168,13 @@ test('loopback release probes never reach supplier or credentials without visito
 
 test('large families keep every source generation and never match A50 or S5',async()=>{
  const {resolveAjesModelSelection}=await import('../apps/web/lib/catalog/ajes-model-resolution');
- const selection=resolveAjesModelSelection('A5|S5 F5',Array.from({length:40},(_,i)=>({model:'A5 G'+i})).concat([{model:'S5 F5'},{model:'A50'}]));
- assert.deepEqual(selection,{model:'S5 F5',modelFamilies:'A5'});
- const sql=ajesQuery({table:'stats',...selection}).sql;
- assert.match(sql,/\(model_name='S5 F5' or model_name like 'A5 %'\)/);
+ const generations=Array.from({length:40},(_,i)=>'A5 G'+i);
+ const selection=resolveAjesModelSelection('A5|S5 F5',[...generations,'S5 F5','A50'].map(model=>({model})));
+ const expected=['A5',...generations,'S5 F5','S5 F5 SPORT'];
+ assertModelSqlRows('AUDI',selection,[...expected,'A50','A500','A5L','OTHER A5','S5','S5 G0','S5 F50','S5 F5X','S50'],expected);
  assert.throws(()=>ajesQuery({table:'stats',modelFamilies:"A5%' OR 1=1"}));
- assert.deepEqual(resolveAjesModelSelection('A5',[{model:'A5'},{model:'A5 F5'}]),{model:'A5|A5 F5'});
+ assertModelSqlRows('AUDI',resolveAjesModelSelection('A5',[{model:'A5'},{model:'A5 F5'}]),
+  ['A5','A5 F5','A5 NEW','A50','A5L','S5','OTHER A5'],['A5','A5 F5','A5 NEW']);
 });
 
 test('power results keep the source 111 hp match and reject empty, malformed and over-limit power',async()=>{
@@ -178,14 +197,19 @@ test('power filter uses only local encyclopedia horsepower, not saved calculatio
 test('Honda selector aliases resolve to actual supplier names without changing other makes',async()=>{
  const {resolveAjesModelSelection}=await import('../apps/web/lib/catalog/ajes-model-resolution');
  const names=[{model:'STEPWGN'},{model:'STEPWGN SPADA'},{model:'N-WGN'}];
- assert.deepEqual(resolveAjesModelSelection('STEP WAGON',names,'HONDA'),{model:'STEPWGN|STEPWGN SPADA'});
- assert.deepEqual(resolveAjesModelSelection('STEP WAGON SPADA',names,'Honda'),{model:'STEPWGN SPADA'});
- assert.deepEqual(resolveAjesModelSelection('STEP WAGON',names,'Other'),{model:'STEP WAGON'});
+ const literal=['STEP WAGON','STEP WAGON SPADA','STEP WAGON SPADA RP3','STEP WAGON SPADAX'];
+ const source=[...literal,'STEPWGN','STEPWGN SPADA','N-WGN','STEP WAGONX','STEPWGNX','OTHER STEP WAGON','STEPWGN SPADA RP3'];
+ assertModelSqlRows('HONDA',resolveAjesModelSelection('STEP WAGON',names,'HONDA'),source,[...literal,'STEPWGN','STEPWGN SPADA']);
+ assertModelSqlRows('HONDA',resolveAjesModelSelection('STEP WAGON SPADA',names,'Honda'),source,['STEP WAGON SPADA','STEP WAGON SPADA RP3','STEPWGN SPADA']);
+ assertModelSqlRows('OTHER',resolveAjesModelSelection('STEP WAGON',names,'Other'),source,literal);
 });
 
 test('exact base Corolla does not hide other Corollas in supplier search',async()=>{
  const {resolveAjesModelSelection}=await import('../apps/web/lib/catalog/ajes-model-resolution');
- assert.deepEqual(resolveAjesModelSelection('Corolla',[{model:'COROLLA'},{model:'COROLLA CROSS'},{model:'COROLLA FIELDER'},{model:'CAMRY'}]),{model:'COROLLA|COROLLA CROSS|COROLLA FIELDER'});
+ const names=['COROLLA','COROLLA CROSS','COROLLA FIELDER','CAMRY'].map(model=>({model}));
+ const source=['COROLLA','COROLLA CROSS','COROLLA FIELDER','COROLLA SPORT','CAMRY','COROLLAX','COROLLA2','COROLLA-CROSS','OTHER COROLLA'];
+ assertModelSqlRows('TOYOTA',resolveAjesModelSelection('Corolla',names),source,['COROLLA','COROLLA CROSS','COROLLA FIELDER','COROLLA SPORT']);
+ assertModelSqlRows('TOYOTA',resolveAjesModelSelection('COROLLA CROSS',names),source,['COROLLA CROSS']);
 });
 
  test('Japan power discovery accepts scalar hp and keeps malformed alternatives visibly unknown',async()=>{
