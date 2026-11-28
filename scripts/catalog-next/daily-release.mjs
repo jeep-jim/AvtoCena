@@ -28,7 +28,7 @@ import {readJapanPhotoRetryFixture, checkedJapanPhotoRetryEvidence} from './japa
 import {readJapanPaginationFixture} from './japan-pagination-fixture.mjs';
 import {readJapanFilterDirectoryFixture} from './japan-filter-directory-proof.mjs';
 import {validateChinaGenerationReference, validateChinaAcceptedState, validateChinaPublicationIntent,
-  validateChinaCodeTransition, inspectChinaPublicationState} from './china-state.mjs';
+  validateChinaCodeTransition, inspectChinaPublicationState, checkedChinaStateStorageFailure} from './china-state.mjs';
 
 const CALCULATION = '4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90';
 const HASH = /^[a-f0-9]{64}$/;
@@ -620,6 +620,7 @@ export function createChinaDailyRelease({root, servingRoot, pricingPlan, serving
       const failure = Error(/^china_[a-z0-9_]+$/.test(error?.message ?? '') ? error.message : 'china_daily_release_stage_failed');
       // Optional public observations must survive normalization without ever
       // replacing the gate failure or changing the rollback path.
+      try { failure.stateStorageFailure = checkedChinaStateStorageFailure(error?.stateStorageFailure); } catch {}
       try { if (error?.serverSpeed !== undefined) failure.serverSpeed = checkedServerSpeedReport(error.serverSpeed); } catch {}
       try { if (error?.homePhaseTiming !== undefined)
         failure.homePhaseTiming = checkedHomePhaseTimingReport(error.homePhaseTiming, {runtimeSha: candidate.runtimeSha, nonce}); } catch {}

@@ -270,7 +270,8 @@ async function fixture(t, {combined = false, japan = false,completion=false, crm
     async close() { calls.push('close'); return {closed: true, readOnly: false}; },
   };
   const release = createChinaDailyRelease({root, servingRoot: directory, pricingPlan, servingPlan,
-    controllerSha: '9'.repeat(40), runnerTemp: directory, environment: {SSH_PRIVATE_KEY: 'synthetic fixture'}, capabilities: {
+    controllerSha: '9'.repeat(40), runnerTemp: directory, environment: {SSH_PRIVATE_KEY: 'synthetic fixture'},
+    onProgress: row => { flags.onProgress?.(row); }, capabilities: {
       verifyBaselines() {}, async verifyCompatibility() { return {runtimeSha: nextSha, pricingRuntimeSha: pricingSha, protectedPricingPathsUnchanged: true}; },
       async verifyCodeCompatibility() { if(usability||crm)checkedCatalogCodeScope(servingPlan);return {retainedRuntime, frozenHttpOracleReusable: true}; },
       generationStorage() { assert.fail('app-only update must never restore private generation'); },
@@ -589,6 +590,63 @@ for (const mode of ['valid', 'missing', 'private-speed', 'private-timing', 'wron
     assert.equal((await fs.readdir(f.directory)).some(name => name.startsWith('china-daily-release-')), false);
   });
 }
+
+for (const mode of ['valid', 'missing', 'private-field', 'bad-cause', 'evidence-getter', 'outer-getter'])
+test('pre-reservation state transport evidence survives the real stage and code-cycle wrappers: ' + mode, async t => {
+  const f = await fixture(t), token = 'b'.repeat(32), backing = memoryStorage(f.previous);
+  const evidence = {version: 1, kind: 'china-state-storage-failure-v1', method: 'GET',
+    target: 'accepted', part: 'document', phase: 'headers', attempts: 2, cause: 'ECONNRESET'};
+  const sourceError = Object.assign(Error('china_state_storage_transport'),
+    {stateStorageFailure: copy(evidence), privateMessage: 'PRIVATE_TRANSPORT_DETAIL'});
+  let getterCalls = 0;
+  if (mode === 'missing') delete sourceError.stateStorageFailure;
+  if (mode === 'private-field') sourceError.stateStorageFailure.url = 'PRIVATE_ENDPOINT';
+  if (mode === 'bad-cause') sourceError.stateStorageFailure.cause = 'PRIVATE_UPSTREAM_CAUSE';
+  if (mode === 'evidence-getter') Object.defineProperty(sourceError.stateStorageFailure, 'cause',
+    {get() { getterCalls++; throw Error('PRIVATE_EVIDENCE_GETTER'); }});
+  if (mode === 'outer-getter') Object.defineProperty(sourceError, 'stateStorageFailure',
+    {get() { getterCalls++; throw Error('PRIVATE_OUTER_GETTER'); }});
+  let capacityChecked = false, injected = false, stageError, heartbeatStopped = false;
+  f.flags.onProgress = row => { if (row.phase === 'code_capacity_checked') capacityChecked = true; };
+  const storage = {...backing, async read(name) {
+    if (capacityChecked && !injected && name === 'accepted') { injected = true; throw sourceError; }
+    return backing.read(name);
+  }};
+  await assert.rejects(runChinaCodeCycle({plan: {...f.servingPlan, minimumYear: 2014},
+    imageId: f.candidate.imageId, invocation: {version: 1, sourceSha: '9'.repeat(40)},
+    owner: {runId: '200', attempt: '1', revision: '9'.repeat(40)}, nonce: token, storage,
+    now: () => acceptedAt, scheduleHeartbeat: () => () => { heartbeatStopped = true; },
+    async stageCodeRelease(input) {
+      try { return await f.release.stageCodeRelease(input); }
+      catch (error) { stageError = error; throw error; }
+    },
+    recoverRelease: async () => assert.fail('pre-reservation failure cannot recover an unreserved host publication'),
+  }), error => {
+    assert.equal(error.message, 'china_state_storage_transport');
+    assert.equal(stageError.message, error.message); assert.notEqual(stageError, sourceError);
+    assert.equal(error.report.errorCode, error.message);
+    const expected = mode === 'valid' ? evidence : undefined;
+    assert.deepEqual(stageError.stateStorageFailure, expected);
+    assert.deepEqual(error.report.stateStorageFailure, expected);
+    if (expected) {
+      assert.notEqual(stageError.stateStorageFailure, sourceError.stateStorageFailure);
+      assert.notEqual(error.report.stateStorageFailure, stageError.stateStorageFailure);
+      assert.equal(Object.isFrozen(stageError.stateStorageFailure), true);
+    } else {
+      assert.equal(Object.hasOwn(stageError, 'stateStorageFailure'), false);
+      assert.equal(Object.hasOwn(error.report, 'stateStorageFailure'), false);
+    }
+    assert.equal(error.report.status, 'failed'); assert.equal(error.report.completed, false);
+    assert.equal(error.report.published, false); assert.equal(error.report.leaseReleased, true);
+    assert.doesNotMatch(JSON.stringify({stageError, report: error.report}), /PRIVATE/);
+    return true;
+  });
+  assert.equal(capacityChecked, true); assert.equal(injected, true); assert.equal(heartbeatStopped, true);
+  assert.equal(getterCalls, mode === 'outer-getter' ? 1 : 0);
+  assert.deepEqual(await backing.read('accepted'), f.previous); assert.equal((await backing.read('intent')).found, false);
+  assert.deepEqual(f.calls, ['code_preflight', 'abort']); assert.equal(f.uploaded.size, 0);
+  assert.equal((await fs.readdir(f.directory)).some(name => name.startsWith('china-daily-release-')), false);
+});
 
 test('code adapter rejects changed image bytes and changed data before starting or switching a candidate', async t => {
   const f = await fixture(t);

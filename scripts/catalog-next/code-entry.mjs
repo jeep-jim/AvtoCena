@@ -43,9 +43,18 @@ export async function runChinaPhotoCodeEntry({root = ROOT, environment = process
   need(image.runtimeSha === servingPlan.runtimeSha && image.runtimeTree === servingPlan.runtimeTree
     && image.archiveRoundTripVerified === true && /^sha256:[a-f0-9]{64}$/.test(image.imageId ?? ''), 'image_binding');
   const progress = row => {
-    if (typeof row?.phase !== 'string' || !/^[a-z0-9_:-]{1,120}$/.test(row.phase)) return;
-    const result = {phase: row.phase, market: 'china'};
-    for (const name of ['generationBytes', 'availableDiskBytes', 'neededBytes'])
+    const phase = row?.phase;
+    if (typeof phase !== 'string' || !/^[a-z0-9_:-]{1,120}$/.test(phase)) return;
+    const result = {phase, market: 'china'};
+    if (phase === 'code_japan_report_observed') {
+      // This precedes report binding. Forward only its complete scalar shape,
+      // including oversize byte counts; never any untrusted report fields.
+      const {bytes, exitCode, sha256} = row;
+      if (Number.isSafeInteger(bytes) && bytes >= 0
+        && (exitCode === null || Number.isSafeInteger(exitCode) && exitCode >= 0 && exitCode <= 255)
+        && typeof sha256 === 'string' && /^[a-f0-9]{64}$/.test(sha256))
+        Object.assign(result, {bytes, exitCode, sha256});
+    } else for (const name of ['generationBytes', 'availableDiskBytes', 'neededBytes'])
       if (Number.isSafeInteger(row[name]) && row[name] >= 0) result[name] = row[name];
     log(result);
   };
