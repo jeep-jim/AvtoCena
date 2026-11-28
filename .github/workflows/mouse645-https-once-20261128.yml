@@ -221,6 +221,7 @@ jobs:
           
           sys.dont_write_bytecode = True
           CONFIG = Path('/etc/nginx/conf.d/mouse.black.conf')
+          AVTOCENA_INGRESS = Path('/etc/nginx/conf.d/avtocena-prepare.conf')
           ORIGINAL_SHA = '29a0aa79051a08d854c66c5422d7381f2213fca42f2c3fc6dc9da7ff8b69c65e'
           INSTALLER_SHA = 'd410b2cfca45ae7ccc07c1e142840c21d1bdca98e626dd29d2bcb442c28a1e43'
           ISSUER = 'MCowBQYDK2VwAyEAO8rQW1FjIamh9U92KeX5nofRoxyyFtr8SgzUs9K4GxA='
@@ -445,8 +446,6 @@ jobs:
                   info = Path(name).stat()
                   times.append({'path': name, 'mtimeNs': info.st_mtime_ns, 'ctimeNs': info.st_ctime_ns,
                                 'newerThanOldestCurrentWorker': oldest is not None and
-                                max(info.st_mtime_ns, info.st_ctime_ns) > oldest})
-              journal = []
           MOUSE_PAYLOAD_PART_1
       - name: Prepare reviewed Mouse payload part 2
         shell: bash
@@ -454,6 +453,8 @@ jobs:
           set -euo pipefail
           umask 077
           cat >> "$RUNNER_TEMP/mouse645-admin-payload.sh" <<'MOUSE_PAYLOAD_PART_2'
+                                max(info.st_mtime_ns, info.st_ctime_ns) > oldest})
+              journal = []
               journal_available = False
               try:
                   raw, _ = command(['journalctl', '-u', 'nginx', '--since', '24 hours ago',
@@ -517,6 +518,91 @@ jobs:
               return release
           
           
+          def upstream_health(port, timeout=4):
+              connection = http.client.HTTPConnection('127.0.0.1', port, timeout=timeout)
+              try:
+                  connection.request('GET', '/api/health', headers={'Host': 'avtocena.com',
+                                     'Accept': 'application/json', 'Connection': 'close'})
+                  response = connection.getresponse()
+                  raw = response.read(65537)
+                  require(response.status == 200 and not response.getheader('Location') and len(raw) <= 65536,
+                          'avtocena_upstream_health_not_ready')
+                  value = json.loads(raw)
+                  require(isinstance(value, dict) and value.get('ok') is True,
+                          'avtocena_upstream_health_not_ready')
+                  release = value.get('releaseSha')
+                  require(isinstance(release, str) and re.fullmatch('[0-9a-f]{40}', release),
+                          'avtocena_upstream_release_not_identified')
+                  return release
+              finally:
+                  connection.close()
+          
+          
+          def serving_container(includes):
+              """Bind the current ingress to one exact Docker process, never a legacy name.
+          
+          The current release controller selects by this same file/loopback port. Read
+          only IDs and bindings for the bounded inventory, then only the selected
+          container's explicit non-secret identity/state/label fields.
+          """
+              require(str(AVTOCENA_INGRESS) in includes, 'avtocena_ingress_not_included')
+              info = AVTOCENA_INGRESS.lstat()
+              require(stat.S_ISREG(info.st_mode) and info.st_size <= 1024 * 1024,
+                      'unsafe_avtocena_ingress')
+              ingress = AVTOCENA_INGRESS.read_bytes()
+              matches = re.findall(rb'(?m)^\s*proxy_pass http://127\.0\.0\.1:(\d+);\s*$', ingress)
+              require(len(matches) == 1 and 3000 <= int(matches[0]) < 4000,
+                      'avtocena_ingress_backend_ambiguous')
+              port = int(matches[0])
+              raw, _ = command(['docker', 'ps', '-a', '--no-trunc', '--format', '{{.ID}}'], limit=32768)
+              identities = raw.decode().split()
+              require(1 <= len(identities) <= 128 and len(set(identities)) == len(identities) and
+                      all(re.fullmatch('[0-9a-f]{64}', value) for value in identities),
+                      'docker_container_inventory_invalid')
+              binding_template = '{"id":{{json .Id}},"portBindings":{{json .HostConfig.PortBindings}}}'
+              raw, _ = command(['docker', 'inspect', '--type', 'container', '--format', binding_template,
+                                *identities], limit=1024 * 1024)
+              rows = [json.loads(line) for line in raw.decode().splitlines() if line.strip()]
+              require(len(rows) == len(identities) and
+                      sorted(row.get('id', '') for row in rows) == sorted(identities),
+                      'docker_container_inventory_changed')
+              owners = []
+              for row in rows:
+                  bindings = row.get('portBindings') or {}
+                  require(isinstance(bindings, dict) and all(value is None or isinstance(value, list)
+                          for value in bindings.values()), 'docker_port_bindings_invalid')
+                  if any(isinstance(binding, dict) and str(binding.get('HostPort', '')) == str(port)
+                         for values in bindings.values() for binding in (values or [])):
+                      owners.append(row)
+              require(len(owners) == 1, 'avtocena_serving_container_ambiguous')
+              owner = owners[0]
+              template = ('{"id":{{json .Id}},"name":{{json .Name}},"image":{{json .Image}},'
+                          '"running":{{json .State.Running}},"pid":{{json .State.Pid}},'
+                          '"startedAt":{{json .State.StartedAt}},"restartCount":{{json .RestartCount}},'
+                          '"portBindings":{{json .HostConfig.PortBindings}},'
+                          '"labels":{"application":{{json (index .Config.Labels "avtocena.application")}},'
+                          '"role":{{json (index .Config.Labels "avtocena.role")}},'
+                          '"revision":{{json (index .Config.Labels "org.opencontainers.image.revision")}}}}')
+              raw, _ = command(['docker', 'inspect', '--type', 'container', '--format', template, owner['id']],
+                               limit=65536)
+              container = json.loads(raw)
+              require(container.get('id') == owner['id'] and container.get('portBindings') == owner['portBindings'],
+                      'avtocena_serving_identity_changed')
+              require(container.get('portBindings') == {'3000/tcp': [{'HostIp': '127.0.0.1', 'HostPort': str(port)}]},
+                      'avtocena_serving_binding_mismatch')
+              require(container.get('running') is True and type(container.get('pid')) is int and container['pid'] > 0,
+                      'avtocena_container_not_running')
+              labels = container.get('labels')
+              require(isinstance(labels, dict) and labels.get('application') == 'web' and
+                      labels.get('role') == 'independent-china' and isinstance(labels.get('revision'), str) and
+                      re.fullmatch('[0-9a-f]{40}', labels['revision']), 'avtocena_serving_labels_mismatch')
+              release = labels['revision']
+              require(avtocena_health() == release, 'avtocena_https_revision_mismatch')
+              require(upstream_health(port) == release, 'avtocena_upstream_revision_mismatch')
+              require(AVTOCENA_INGRESS.read_bytes() == ingress, 'avtocena_ingress_changed_during_read')
+              return container, {'path': str(AVTOCENA_INGRESS), 'port': port, 'sha256': sha(ingress)}, release
+          
+          
           def snapshot(with_diagnostics=False):
               require(os.getuid() == 0 and socket.gethostname().split('.')[0] == 'cv8120751',
                       'unexpected_administrative_host')
@@ -527,13 +613,7 @@ jobs:
                       'unrecognized_mouse_config')
               includes, tls_paths = nginx_inputs()
               runtime = nginx_runtime()
-              template = ('{"id":{{json .Id}},"image":{{json .Image}},"running":{{json .State.Running}},'
-                          '"pid":{{json .State.Pid}},"startedAt":{{json .State.StartedAt}},'
-                          '"restartCount":{{json .RestartCount}}}')
-              raw, _ = command(['docker', 'inspect', '--format', template, 'avtocena-production'])
-              container = json.loads(raw)
-              require(container.get('running') is True and container.get('pid', 0) > 0,
-                      'avtocena_container_not_running')
+              container, ingress, release = serving_container(includes)
               account = pwd.getpwnam('osminog')
               raw, _ = command(['id', '-nG', 'osminog'])
               groups = sorted(raw.decode().split())
@@ -541,16 +621,18 @@ jobs:
               for path in ('/etc/nginx', '/var/run/docker.sock'):
                   _, status = command(['runuser', '-u', 'osminog', '--', 'test', '-w', path], allowed=(0, 1))
                   require(status == 1, 'osminog_has_unexpected_write_privilege')
-              release = avtocena_health()
               home, marker = local_get('mouse.black', '/'), local_get('mouse.black', '/release.json')
               require(home['status'] == 200 and marker['status'] == 200 and
                       isinstance(marker['json'], dict) and marker['json'].get('domain') == 'mouse.black',
                       'mouse_website_not_ready')
               protected = {'nginxRuntime': runtime, 'container': container, 'avtocenaReleaseSha': release,
+                           'avtocenaIngress': ingress,
                            'files': file_manifest(includes, tls_paths),
                            'nginxIncludes': includes, 'tlsReferencedPaths': tls_paths,
                            'osminog': {'uid': account.pw_uid, 'gid': account.pw_gid, 'groups': groups},
                            'mouseWebsite': {'homepageSha256': home['sha256'], 'markerSha256': marker['sha256']}}
+              require(protected['files'][str(AVTOCENA_INGRESS)]['sha256'] == ingress['sha256'],
+                      'avtocena_ingress_changed_during_read')
               mouse = {'sha256': sha(original), 'uid': info.st_uid, 'gid': info.st_gid,
                        'mode': stat.S_IMODE(info.st_mode)}
               result = {'protected': protected, 'mouse': mouse, '_bytes': original, '_stat': info}
@@ -567,6 +649,7 @@ jobs:
               protected = value['protected']
               return {'avtocenaReleaseSha': protected['avtocenaReleaseSha'],
                       'container': protected['container'], 'nginxRuntime': protected['nginxRuntime'],
+                      **({'avtocenaIngress': protected['avtocenaIngress']} if 'avtocenaIngress' in protected else {}),
                       'protectedFileCount': len(protected['files']),
                       'protectedFilesSha256': digest(protected['files']),
                       'protectedStateSha256': digest(protected),
@@ -694,6 +777,13 @@ jobs:
                                       if time.monotonic() >= deadline:
                                           raise
                                       time.sleep(0.5)
+          MOUSE_PAYLOAD_PART_2
+      - name: Prepare reviewed Mouse payload part 3
+        shell: bash
+        run: |
+          set -euo pipefail
+          umask 077
+          cat >> "$RUNNER_TEMP/mouse645-admin-payload.sh" <<'MOUSE_PAYLOAD_PART_3'
                               receipt.update(status='ROLLED_BACK', after=summary(recovered),
                                              rollback={'mouseOriginalRestored': True, 'protectedStateUnchanged': True})
                           except BaseException as rollback_error:
@@ -752,9 +842,9 @@ jobs:
           if __name__ == '__main__':
               raise SystemExit(main())
           MOUSE_TRANSACTION_PY
-          printf '%s  %s\n' 'd410b2cfca45ae7ccc07c1e142840c21d1bdca98e626dd29d2bcb442c28a1e43' "$root_work/configure-https.py" '8fa6cdbc07ed93551e4664c14351bb4261e00c15bff1d91a74e70c161e1f6800' "$root_work/https-admin-transaction.py" | sha256sum --check --status
+          printf '%s  %s\n' 'd410b2cfca45ae7ccc07c1e142840c21d1bdca98e626dd29d2bcb442c28a1e43' "$root_work/configure-https.py" '402834e1a00f6371315453fcfeeb966cc9a659d853fe8f5ba57f7d1ca8b0534d' "$root_work/https-admin-transaction.py" | sha256sum --check --status
           /usr/bin/python3 -I "$root_work/https-admin-transaction.py" --inspect --installer "$root_work/configure-https.py"
-          MOUSE_PAYLOAD_PART_2
+          MOUSE_PAYLOAD_PART_3
       - name: Inspect existing Mouse HTTPS access
         shell: bash
         env:
@@ -766,7 +856,7 @@ jobs:
           hosts_file=$(mktemp)
           payload_file="$RUNNER_TEMP/mouse645-admin-payload.sh"
           trap 'rm -f "$key_file" "$hosts_file" "$payload_file"' EXIT
-          printf '%s  %s\n' '0eef0363a548fc541a179a0500ddc46936e3f3f0fffb8c682aa49a47b85f8022' "$payload_file" | sha256sum --check --status
+          printf '%s  %s\n' '4d70d51861adef7752426cdc548c94e6b122a06abaf9328fb5fd8e780176adcb' "$payload_file" | sha256sum --check --status
           printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
           unset SSH_PRIVATE_KEY
           ssh-keygen -y -f "$key_file" >/dev/null
