@@ -86,7 +86,10 @@ function ResultCountProvider({children}:{children:ReactNode}){
 // Query identity prevents retained/older results from becoming the current count.
 export function CatalogResultCountUpdate({queryKey,text,total,summary}:ResultCount){
  const set=useContext(ResultCountContext)?.set;
- useEffect(()=>{set?.({queryKey,text,total,summary});},[set,queryKey,text,total,summary]);
+ // Expiry can produce an equivalent stale object on each render. Depend on
+ // its value so publishing that state does not form a context update loop.
+ const summaryKey=JSON.stringify(summary??null);
+ useEffect(()=>{set?.({queryKey,text,total,summary});},[set,queryKey,text,total,summaryKey]);
  return null;
 }
 export function useCatalogResultCount(queryKey?:string){const context=useContext(ResultCountContext);return queryKey?context?.byQuery.get(queryKey):context?.value;}
@@ -97,3 +100,4 @@ export function CatalogLoadedCountUpdate({queryKey,count}:LoadedCount){
  return null;
 }
 export function useCatalogLoadedCount(){return useContext(LoadedCountContext)?.value;}
+

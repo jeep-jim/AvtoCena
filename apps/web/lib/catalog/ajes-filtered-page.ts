@@ -10,6 +10,7 @@ const digest=(value:unknown)=>createHash('sha256').update(JSON.stringify(value))
  * they do not claim a snapshot of source pages that have not been read yet.
  */
 export async function readFilteredAjesPage<T>(options:{
+ // Legacy count hints remain accepted, but never control traversal or its budget.
  startedAt?:number; page:number; pageSize:number; after?:unknown; sourceTotal?:number;
  read:(page:number)=>Promise<SourcePage<T>>; now?:()=>number;
  minimumReads?:1|2; cursorKey?:string; itemKey?:(item:T)=>string;fillRequestedPage?:boolean;
@@ -24,8 +25,7 @@ export async function readFilteredAjesPage<T>(options:{
   if(current){
    sourcePage=Number(current[1]);skip=Number(current[2]);
    if(!bound||Number(current[3])!==options.page||current[4]!==queryHash||(skip===0)!==(current[5]==='-')){
-    if(options.fillRequestedPage)throw new AjesCursorRefreshRequired();
-    throw new AjesInputError();
+    throw new AjesCursorRefreshRequired();
    }
    expectedMembership=current[5]==='-'?undefined:current[5];
   }else{
@@ -33,7 +33,6 @@ export async function readFilteredAjesPage<T>(options:{
    // always carry the current query and accepted-membership binding.
    const legacy=/^([1-9]\d{0,6})\.(\d{1,2})$/.exec(after);
    if(!legacy)throw new AjesInputError();
-   if(options.fillRequestedPage)throw new AjesCursorRefreshRequired();
    sourcePage=Number(legacy[1]);skip=Number(legacy[2]);
   }
   if(sourcePage>1_000_000||skip>=pageSize)throw new AjesInputError();
@@ -42,7 +41,8 @@ export async function readFilteredAjesPage<T>(options:{
  let exhausted=false,partial=false,stale=false,reads=0,interrupted=false,halted=false;
  let membership:string|undefined,observedAt:string|undefined,observedTime=Infinity;
  const minimumReads=options.minimumReads===2?2:1;
- while(options.fillRequestedPage||reads<8&&(reads<minimumReads||now()-started<8000)){
+ // A separately observed count cannot authorize an unbounded source walk.
+ while(reads<8&&(reads<minimumReads||now()-started<8000)){
   let result:SourcePage<T>;
   try{result=await read(sourcePage);}catch(error){
    const recoverable=error instanceof AjesUnavailable&&(/^(?:http_(?:429|5\d\d)|visitor_restricted|quota_exhausted|quota_busy|local_busy|request_failed|request_timeout|connect_timeout|invalid_response|empty_response)$/.test(error.reason));
@@ -60,11 +60,11 @@ export async function readFilteredAjesPage<T>(options:{
   partial ||= Boolean(result.partial);stale ||= Boolean(result.stale);
   const available=result.items.slice(skip),take=Math.min(pageSize-items.length,available.length);
   items.push(...available.slice(0,take));skip+=take;
-  const atEnd=result.received<pageSize||(!result.stale&&options.sourceTotal!==undefined&&sourcePage*pageSize>=options.sourceTotal);
+  const atEnd=result.received<pageSize;
   if(skip>=result.items.length){sourcePage++;skip=0;membership=undefined;exhausted=atEnd;}
   // A partial fallback cannot establish a subsequent source offset or a true
   // end. The UI retries the current visible batch instead of crawling it.
-  if(result.partial||options.fillRequestedPage&&result.stale){halted=true;break;}
+  if(result.partial||result.stale){halted=true;break;}
   if(exhausted||items.length===pageSize)break;
  }
  const hasMore=!exhausted&&!halted;
@@ -110,12 +110,13 @@ export function assertAjesPowerCursorEpoch(options:{page:number;pageSize:number;
 export async function readPowerOrderedAjesPage<T>(options:{
  startedAt?:number;page:number;pageSize:number;after?:unknown;evidenceEpoch:string;cursorKey:string;
  read:(page:number,phase:PowerPhase)=>Promise<SourcePage<T>>;known:(item:T)=>boolean;itemKey:(item:T)=>string;
+ // Legacy count hints cannot skip a phase or extend the shared read budget.
  now?:()=>number;minimumReads?:1|2;fillRequestedPage?:boolean;knownTotal?:number;
 }) {
  assertAjesPowerCursorEpoch(options);
  const {pageSize,read}=options,now=options.now??Date.now,started=options.startedAt??now();
  const queryHash=digest([pageSize,options.cursorKey,'japan-known-before-unknown-v1']);
- let phase:PowerPhase=!options.after&&options.knownTotal===0?'u':'k',sourcePage=1,skip=0,expectedMembership:string|undefined;
+ let phase:PowerPhase='k',sourcePage=1,skip=0,expectedMembership:string|undefined;
  if(options.after){
   const match=powerCursor.exec(String(options.after))!;
   if(match[5]!==queryHash)throw new AjesCursorRefreshRequired();
@@ -126,7 +127,8 @@ export async function readPowerOrderedAjesPage<T>(options:{
  let exhausted=false,partial=false,stale=false,interrupted=false,reads=0;
  let membership:string|undefined,observedAt:string|undefined,observedTime=Infinity;
  const minimumReads=options.minimumReads===2?2:1;
- while(options.fillRequestedPage||reads<8&&(reads<minimumReads||now()-started<8000)){
+ // Both phases share the same limit, regardless of any count observation.
+ while(reads<8&&(reads<minimumReads||now()-started<8000)){
   let result:SourcePage<T>;
   try{result=await read(sourcePage,phase);}catch(error){
    const recoverable=error instanceof AjesUnavailable&&(/^(?:http_(?:429|5\d\d)|visitor_restricted|quota_exhausted|quota_busy|local_busy|request_failed|request_timeout|connect_timeout|invalid_response|empty_response)$/.test(error.reason));
@@ -162,3 +164,4 @@ export async function readPowerOrderedAjesPage<T>(options:{
  const nextCursor=hasMore?'j2.'+phase+'.'+sourcePage+'.'+skip+'.'+(options.page+1)+'.'+queryHash+'.'+options.evidenceEpoch+'.'+(skip?membership:'-'):null;
  return {items,partial,stale,interrupted,hasMore,nextCursor,scanLimited:hasMore&&items.length<pageSize,reads,...(observedAt?{observedAt}:{})};
 }
+

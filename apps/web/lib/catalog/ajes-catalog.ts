@@ -1,8 +1,8 @@
 import {assertAjesJapanMarket,assertAjesJapanTable} from './ajes-access-policy';
 import {createHash} from 'node:crypto';
 import {readAjesCensusCount,ajesRequestedCountQuery,ajesRequestedCountQueryHash,ajesSourceScopeSupportsExactCount,AJES_CENSUS_PREDICATE_VERSION,type AjesExactCountSummary} from './ajes-census';
+import {createAjesSourceCountSummary,isAjesSourceCountSummary,AJES_SOURCE_COUNT_PREDICATE_VERSION,type AjesSourceCountSummary} from './ajes-source-count';
 import {captureAjesCountPricingContext} from './ajes-count-pricing-context';
-import {getJsonStorage} from '../data';
 import {sortCatalogRows} from './market-page';
 import {parseCatalogSort} from './catalog-sort';
 import {japanPreviewParameters} from './japan-preview-parameters';
@@ -50,58 +50,49 @@ const resolvedCatalogQuery=cache(async(key:string)=>{
  const {query,makeDirectoryUnavailable}=await resolveMake(ajesCatalogQuery(params));
  return {...await resolveAjesQueryModels(query,()=>readAjesDirectory({market:params.market,make:query.make})),makeDirectoryUnavailable};
 });
-const exactCounts=new DetailReadCache<AjesExactCountSummary>({maxEntries:128,maxBytes:512*1024,ttlMs:30*60000,expiresAt:value=>Date.parse(value.observedAt)+30*60000,concurrency:2,
- shouldCache:value=>!value.stale&&value.total===0&&value.countProof.sourceTotal===0&&value.countProof.complete&&value.countProof.predicateVersion===AJES_CENSUS_PREDICATE_VERSION});
+type AjesAvailableCountSummary=AjesExactCountSummary|AjesSourceCountSummary;
+const selectionCounts=new DetailReadCache<AjesAvailableCountSummary>({maxEntries:128,maxBytes:512*1024,ttlMs:30*60000,expiresAt:value=>Date.parse(value.observedAt)+30*60000,concurrency:2,
+ shouldCache:value=>!value.stale&&(value.upperBound?isAjesSourceCountSummary(value)
+  :value.total===0&&value.countProof.sourceTotal===0&&value.countProof.complete&&value.countProof.predicateVersion===AJES_CENSUS_PREDICATE_VERSION)});
 const countDigest=(value:unknown)=>createHash('sha256').update(JSON.stringify(value)).digest('hex');
-export const readAjesCountSummary=cache(async(key='{}'):Promise<AjesExactCountSummary>=>{
+export const readAjesCountSummary=cache(async(key='{}'):Promise<AjesAvailableCountSummary>=>{
  const params=JSON.parse(key);
  assertAjesJapanMarket(params.market);
  await assertCollectionEnabled('ajes_japan_feed');
  ajesResultFilter(params);
- if(!ajesSourceScopeSupportsExactCount(ajesCatalogQuery(params)))throw new AjesUnavailable('census_source_scope_unproven');
  const resolved=await resolvedCatalogQuery(key);
- if(resolved.modelDirectoryUnavailable||resolved.makeDirectoryUnavailable)throw new AjesUnavailable('directory_unavailable');
+ const directoryComplete=!resolved.modelDirectoryUnavailable&&!resolved.makeDirectoryUnavailable;
  const q={...resolved.query};delete q.page;delete q.pageSize;delete q.sort;
+ const sourceScopeComplete=directoryComplete&&ajesSourceScopeSupportsExactCount(q);
  const snapshot=await readAjesPublicEvidenceSnapshot();
  const sourceDefinition=ajesQuery({...q,aggregate:'count'},snapshot.calculationIndex).sql;
- const localEpoch=()=>ajesPowerEvidenceEpoch({runtimeSha:process.env.AVTOCENA_RELEASE_SHA,
+ const local=ajesPowerEvidenceEpoch({runtimeSha:process.env.AVTOCENA_RELEASE_SHA,
   editorialRevision:snapshot.editorial.revision,calculationDigest:snapshot.calculationIndex?.digest??null});
- const local=localEpoch(),evidenceEpoch=countDigest([AJES_CENSUS_PREDICATE_VERSION,local,null]);
+ const evidenceEpoch=countDigest([AJES_SOURCE_COUNT_PREDICATE_VERSION,AJES_CENSUS_PREDICATE_VERSION,local]);
  const assertCurrent=async()=>{
   const current=await readAjesPublicEvidenceSnapshot();
   if(ajesPowerEvidenceEpoch({runtimeSha:process.env.AVTOCENA_RELEASE_SHA,editorialRevision:current.editorial.revision,
    calculationDigest:current.calculationIndex?.digest??null})!==local)throw new AjesCursorRefreshRequired();
   if(ajesQuery({...q,aggregate:'count'},current.calculationIndex).sql!==sourceDefinition)throw new AjesCursorRefreshRequired();
  };
- const requestedQueryHash=ajesRequestedCountQueryHash(params),cacheKey=countDigest([ajesRequestedCountQuery(params),sourceDefinition,evidenceEpoch]);
+ const binding={requestedQueryHash:ajesRequestedCountQueryHash(params),
+  sourceQueryHash:createHash('sha256').update(sourceDefinition).digest('hex'),evidenceEpoch,sourceScopeComplete,directoryComplete};
+ const cacheKey=countDigest([ajesRequestedCountQuery(params),sourceDefinition,evidenceEpoch,sourceScopeComplete,directoryComplete]);
  const ip=(await headers()).get('x-real-ip')||'';
- const result=await exactCounts.get(cacheKey,async()=>{
-  const path=`catalog/partner-cache/ajes/admitted-counts/${parseInt(cacheKey.slice(0,8),16)%128}.json`;
-  const storage=getJsonStorage();
-  const usable=(value:any):value is AjesExactCountSummary=>{
-   const proof=value?.countProof,age=Date.now()-Date.parse(value?.observedAt);
-   return value?.upperBound===false&&value?.stale===false&&value?.total===0&&age>=0&&age<30*60000
-    &&proof?.version===1&&proof.kind==='japan-admitted-census'&&proof.predicateVersion===AJES_CENSUS_PREDICATE_VERSION&&proof.complete===true
-    &&proof.requestedQueryHash===requestedQueryHash&&proof.evidenceEpoch===evidenceEpoch&&proof.sourceObservedAt===value.observedAt
-    &&proof.admittedTotal===value.total&&proof.baseAdmittedTotal+proof.correctionDelta===value.total
-    &&proof.knownTotal+proof.unknownTotal===value.total&&proof.sourceTotal===0&&proof.groupedTotal===0&&proof.sourceDistinctTotal===0
-    &&proof.sourceQueryHash===createHash('sha256').update(sourceDefinition).digest('hex')
-    &&Number.isFinite(Date.parse(proof.sourceCompletedAt))&&Date.parse(proof.sourceCompletedAt)>=Date.parse(proof.sourceObservedAt)&&Date.parse(proof.sourceCompletedAt)<=Date.now()
-    &&['groupCount','pages','baseAdmittedTotal','correctionCount','correctionDelta','knownTotal','unknownTotal'].every(k=>proof[k]===0)
-    &&['queryHash','sourceQueryHash','coverageHash'].every(k=>/^[a-f0-9]{64}$/.test(proof[k]));
-  };
-  const saved=await storage.readJson<any>(path,null).catch(()=>null);
-  if(saved?.key===cacheKey&&usable(saved.value)){await assertCurrent();return saved.value;}
+ const result=await selectionCounts.get(cacheKey,async()=>{
+  // The ordinary reader already preserves exact requested COUNT responses with
+  // their source date. It owns fresh reuse and permitted retained recovery; no
+  // schema LIST, GROUP walk or per-ID correction is needed for this scalar.
   const sourceCount=await ajesClient.read(await cappedAjesQuery({...q,aggregate:'count'}),ip);
-  if(!Number.isSafeInteger(sourceCount.total)||sourceCount.total<0||sourceCount.stale||sourceCount.partial)throw new AjesUnavailable('census_source_count_unavailable');
-  // The real adapter has no coherent source snapshot contract. Its positive
-  // count is rejected before any schema LIST, GROUP or per-ID correction read.
-  const count=await readAjesCensusCount({params:{...params,market:'japan'},query:q,fields:[],snapshot,evidenceEpoch,sourceCount,
+  let candidate:AjesSourceCountSummary;
+  try{candidate=createAjesSourceCountSummary(sourceCount,binding);}
+  catch{throw new AjesUnavailable('census_source_count_unavailable');}
+  await assertCurrent();
+  if(candidate.total!==0||candidate.stale||!sourceScopeComplete)return candidate;
+  // Only a fresh zero over a complete candidate superset proves admitted zero.
+  // Positive source totals remain separately labelled candidate evidence.
+  return readAjesCensusCount({params:{...params,market:'japan'},query:q,fields:[],snapshot,evidenceEpoch,sourceCount,
    read:async()=>{throw new AjesUnavailable('census_source_snapshot_unavailable');},rate:async()=>null,assertCurrent});
-  // Only a validated zero from one scalar source observation is reusable.
-  // Old positive aggregates cannot revive from memory or persisted slots.
-  if(count.total===0&&count.countProof.sourceTotal===0)void storage.writeJson(path,{key:cacheKey,value:count}).catch(()=>{});
-  return count;
  },ip+'\0'+cacheKey);
  await assertCurrent();
  return result;
@@ -140,28 +131,24 @@ export async function readAjesCatalogPage(params:Record<string,unknown>,measure?
  assertAjesJapanMarket(params.market);
  const resolveStarted=performance.now();
  const filter=ajesResultFilter(params);
- let evidenceSnapshot=filter.powerFilter||filter.priceFilter?await readAjesPublicEvidenceSnapshot():undefined;
- const pricingContext=filter.priceFilter?await captureAjesCountPricingContext(evidenceSnapshot!):undefined;
- const evidenceEpoch=evidenceSnapshot?ajesPowerEvidenceEpoch({runtimeSha:process.env.AVTOCENA_RELEASE_SHA,
-  editorialRevision:evidenceSnapshot.editorial.revision,calculationDigest:evidenceSnapshot.calculationIndex?.digest??null}):undefined;
- if(evidenceEpoch&&filter.powerFilter){
+ const evidenceSnapshot=await readAjesPublicEvidenceSnapshot();
+ const pricingContext=filter.priceFilter?await captureAjesCountPricingContext(evidenceSnapshot):undefined;
+ const evidenceEpoch=ajesPowerEvidenceEpoch({runtimeSha:process.env.AVTOCENA_RELEASE_SHA,
+  editorialRevision:evidenceSnapshot.editorial.revision,calculationDigest:evidenceSnapshot.calculationIndex?.digest??null});
+ if(filter.powerFilter){
   const requested=ajesCatalogQuery(params);
   assertAjesPowerCursorEpoch({page:requested.page||1,pageSize:requested.pageSize||24,after:params.after,evidenceEpoch});
  }
  const checkEvidence=async()=>{
-  if(!evidenceSnapshot)return;
   const current=await readAjesPublicEvidenceSnapshot();
-  const changed=evidenceEpoch?ajesPowerEvidenceEpoch({runtimeSha:process.env.AVTOCENA_RELEASE_SHA,editorialRevision:current.editorial.revision,
-   calculationDigest:current.calculationIndex?.digest??null})!==evidenceEpoch
-   :current.editorial.revision!==evidenceSnapshot.editorial.revision
-    ||(current.calculationIndex?.digest??null)!==(evidenceSnapshot.calculationIndex?.digest??null);
+  const changed=ajesPowerEvidenceEpoch({runtimeSha:process.env.AVTOCENA_RELEASE_SHA,editorialRevision:current.editorial.revision,
+   calculationDigest:current.calculationIndex?.digest??null})!==evidenceEpoch;
   if(changed)throw new AjesCursorRefreshRequired();
  };
  const powerIdentity=(offer:any)=>JSON.stringify([japanLocalPowerHp(offer)??null,japanSupplierPower(offer)?.hp??null,japanUnknownPower(offer)]);
  const {query,modelDirectoryUnavailable,makeDirectoryUnavailable}=await resolvedCatalogQuery(JSON.stringify(params));
  const selectionIncomplete=modelDirectoryUnavailable||makeDirectoryUnavailable;
  const sourceScopeUnproven=!ajesSourceScopeSupportsExactCount(query);
- if(!evidenceSnapshot&&!selectionIncomplete)evidenceSnapshot=await readAjesPublicEvidenceSnapshot();
  // Delivered-price sorting is explicitly local to the loaded selection. Raw
  // auction FINISH is a different price: sorting that source first can replace
  // a populated power selection with pages of expensive, over-limit cars.
@@ -175,18 +162,14 @@ export async function readAjesCatalogPage(params:Record<string,unknown>,measure?
  const startedAt=Date.now();
  const countStarted=performance.now();
  const sourceReceipts:unknown[]=[];
- // The requested total is a complete admitted counter, including continuation
- // requests. Its context-bound scalar cache is independent of sort/page/cursor.
+ // Counts are independent observations. They neither bind a continuation nor
+ // authorize extra source reads, skipped phases or an inferred LIST ending.
  // A real source refusal keeps useful cars available, without manufacturing 0.
  const readyCount=selectionIncomplete||options.includeCount===false?null:await readAjesCountSummary(JSON.stringify(params)).catch(()=>null);
  measure?.('count',performance.now()-countStarted);
- if(readyCount?.total===0&&!params.after&&(query.page||1)===1)return {items:[],page:1,pageSize:query.pageSize||24,total:0,countSummary:readyCount,
-  received:0,rejected:0,partial:false,stale:false,interrupted:false,hasMore:false,nextCursor:null,scanLimited:false,reads:0,
-  observedAt:readyCount.observedAt,generationId:readyCount.observedAt,filteredByPage:filter.active,sourceReceipts,
-  ...(filter.powerFilter?{powerFilterSummary:japanPowerFilterSummary([])}:{})};
  const read=async(sourcePage:number,phase?:'k'|'u')=>{
   await checkEvidence();
-  const received=await readAjesPublic({...sourceQuery,page:sourcePage},{measure,...(evidenceSnapshot?{evidenceSnapshot}:{})}).catch(error=>{
+  const received=await readAjesPublic({...sourceQuery,page:sourcePage},{measure,evidenceSnapshot}).catch(error=>{
    if(error?.sourceReceipt)sourceReceipts.push(error.sourceReceipt);
    throw error;
   });
@@ -228,36 +211,20 @@ export async function readAjesCatalogPage(params:Record<string,unknown>,measure?
  const cursorQuery=JSON.stringify({
   source:Object.fromEntries(Object.entries(query).filter(([key])=>key!=='page').sort(([a],[b])=>a.localeCompare(b))),
   local:Object.fromEntries(['body','bodyType','budget','budgetFrom','budgetTo','hasPrice','powerFrom','powerTo','city'].map(key=>[key,String(params[key]??'')])),
-  counter:readyCount?{coverageHash:readyCount.countProof.coverageHash,evidenceEpoch:readyCount.countProof.evidenceEpoch,total:readyCount.total}:null,
+  evidenceEpoch,
+  pricingContext:pricingContext?.digest??null,
  });
- if(readyCount&&(query.page||1)>1&&!params.after)throw new AjesCursorRefreshRequired();
  const initial=filter.powerFilter||params.after?undefined:await read(query.page||1);
- const total=readyCount;
  let first:Awaited<ReturnType<typeof read>>|undefined=initial;
  const readPage=async(sourcePage:number,phase?:'k'|'u')=>{if(initial&&sourcePage===(query.page||1))return initial;const value=await read(sourcePage,phase);first??=value;return value;};
  const page=filter.powerFilter?await readPowerOrderedAjesPage<Awaited<ReturnType<typeof read>>['items'][number]>({
-  startedAt,page:query.page||1,pageSize:query.pageSize||24,after:params.after,evidenceEpoch:evidenceEpoch!,
+  startedAt,page:query.page||1,pageSize:query.pageSize||24,after:params.after,evidenceEpoch,
   minimumReads:2,cursorKey:cursorQuery,itemKey:offer=>offer.id,known:offer=>!japanUnknownPower(offer),read:readPage,
-  fillRequestedPage:Boolean(total),knownTotal:total?.countProof.knownTotal,
  }):await readFilteredAjesPage<Awaited<ReturnType<typeof read>>['items'][number]>({startedAt,page:query.page||1,pageSize:query.pageSize||24,after:params.after,
   minimumReads:2,cursorKey:cursorQuery,itemKey:offer=>offer.id,
-  // Read the optional count only after its own request has completed. It is
-  // never a prerequisite for a visible page or its next continuation.
-  sourceTotal:total?.countProof.sourceTotal,fillRequestedPage:Boolean(total),
   read:readPage});
  const observedAt=page.observedAt??first!.observedAt;
  const completePage=!page.partial&&!page.stale&&!page.interrupted&&!page.scanLimited;
- if(total&&completePage){
-  // The counter is part of the cursor binding above, so an earlier short page
-  // from an uncounted search cannot masquerade as a full-page offset here.
-  const through=((query.page||1)-1)*(query.pageSize||24)+page.items.length;
-  if(through>total.total||!page.hasMore&&through<total.total)throw new AjesCursorRefreshRequired();
-  if(through===total.total){page.hasMore=false;page.nextCursor=null;}
- }else if(total){
-  // Useful retained rows remain incomplete. No exact ending is inferred from
-  // a stale fallback which cannot provide a trustworthy next source offset.
-  page.partial=true;page.hasMore=true;page.nextCursor=null;
- }
  const observationAge=Date.now()-Date.parse(observedAt);
  const singleObservation=!selectionIncomplete&&!sourceScopeUnproven&&!filter.powerFilter&&Boolean(evidenceSnapshot)&&(query.page||1)===1&&!params.after
   &&page.reads===1&&completePage&&!page.hasMore&&Number.isSafeInteger(first?.received)&&first!.received>=page.items.length
@@ -265,8 +232,9 @@ export async function readAjesCatalogPage(params:Record<string,unknown>,measure?
   &&page.items.every(offer=>typeof offer.id==='string'&&offer.id.length>0)&&new Set(page.items.map(offer=>offer.id)).size===page.items.length;
  // Exhaustion across multiple source responses (including the two power
  // passes) cannot prove one exact inventory. A single complete observation can.
- const exact=total&&completePage?total.total:singleObservation?page.items.length:null;
- const countSummary=total&&completePage?total:exact!==null?{total:exact,upperBound:false,stale:false,observedAt}:null;
+ const exact=singleObservation?page.items.length:readyCount&&!readyCount.upperBound&&!readyCount.stale
+  &&readyCount.total>=page.items.length?readyCount.total:null;
+ const countSummary=singleObservation?{total:page.items.length,upperBound:false,stale:false,observedAt}:readyCount;
  // Preserve the selected batch sort separately within K and U. Sorting a
  // mixed boundary page together would put cheap unknown cars before known K.
  let ordered=page.items;
@@ -274,11 +242,11 @@ export async function readAjesCatalogPage(params:Record<string,unknown>,measure?
   const sort=(rows:typeof page.items)=>sortCatalogRows(rows,query.sort!,String(params.city||""));
   ordered=filter.powerFilter?[...sort(page.items.filter(offer=>!japanUnknownPower(offer))),...sort(page.items.filter(japanUnknownPower))]:sort(page.items);
  }
- const items=evidenceSnapshot?await withCatalogEditorialSnapshot(evidenceSnapshot.editorial,async()=>ordered.map((offer:any)=>{
+ const items=await withCatalogEditorialSnapshot(evidenceSnapshot.editorial,async()=>ordered.map((offer:any)=>{
   const projected=publicOffer(offer);
   if(filter.powerFilter&&powerIdentity(projected)!==powerIdentity(offer))throw new AjesCursorRefreshRequired();
   return projected;
- })):ordered.map((offer:any)=>publicOffer(offer));
+ }));
  // A source-side filter may omit locally enriched matches. Keep its fresh
  // cursor, but do not present this SQL's end as a complete user selection.
  return {...first,...page,partial:page.partial||selectionIncomplete||sourceScopeUnproven,selectionIncomplete,page:query.page||1,observedAt,filteredByPage:filter.active,total:exact,countSummary,...(filter.powerFilter?{powerFilterSummary:japanPowerFilterSummary(items)}:{}),items,generationId:observedAt,sourceReceipts};
@@ -294,3 +262,4 @@ export async function withAjesCount<T extends {total:number;marketCounts?:Record
  if(!count||count.stale||count.upperBound)result.countIncomplete=true;
  return result;
 }
+

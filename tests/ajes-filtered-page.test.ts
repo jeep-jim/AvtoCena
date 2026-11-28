@@ -25,10 +25,14 @@ test('time budget stops further reads without claiming exhaustion',async()=>{
  const result=await readFilteredAjesPage({page:1,pageSize:24,now:()=>clock,read:async()=>{clock+=9000;return {items:['one'],received:24};}});
  assert.equal(result.reads,1);assert.equal(result.nextCursor,'2.0');assert.equal(result.hasMore,true);
 });
-test('fresh source total stops an exact source boundary; stale pages cannot use it',async()=>{
- const read=async()=>({items:['match'],received:24});
- assert.equal((await readFilteredAjesPage({page:1,pageSize:24,sourceTotal:24,read})).hasMore,false);
- assert.equal((await readFilteredAjesPage({page:1,pageSize:24,sourceTotal:24,read:async()=>({...await read(),stale:true})})).hasMore,true);
+test('separate source-count observations cannot stop or extend an actual source page',async()=>{
+ const rows=Array.from({length:24},(_,i)=>'match-'+i);
+ for(const sourceTotal of [0,1,24,48,1000]){
+  const full=await readFilteredAjesPage({page:1,pageSize:24,sourceTotal,read:async()=>({items:rows,received:24})});
+  assert.deepEqual(full.items,rows);assert.equal(full.hasMore,true);assert.equal(full.nextCursor,'2.0');
+  const ended=await readFilteredAjesPage({page:1,pageSize:24,sourceTotal,read:async()=>({items:['last'],received:1})});
+  assert.equal(ended.hasMore,false);assert.equal(ended.nextCursor,null);
+ }
 });
 test('partial fallback stays partial and never triggers a crawl',async()=>{
  const result=await readFilteredAjesPage({page:1,pageSize:24,read:async()=>({items:['saved'],received:24,partial:true,stale:true})});
@@ -129,7 +133,7 @@ test('eight empty known source pages preserve an explicit continuation and never
    page===9?powerRows(page,24).map(row=>({...row,known:true})):[];
   return {items,received:items.length,observedAt};
  };
- const first=await readPowerOrderedAjesPage({...powerOptions,page:1,read});
+ const first=await readPowerOrderedAjesPage({...powerOptions,page:1,fillRequestedPage:true,read});
  assert.equal(first.items.length,0);assert.equal(first.reads,8);assert(first.hasMore&&first.scanLimited);
  assert.match(first.nextCursor!,/^j2\.k\.9\.0\.2\./);assert(calls.every(call=>call.phase==='k'));
  const second=await readPowerOrderedAjesPage({...powerOptions,page:2,after:first.nextCursor!,read});
@@ -150,7 +154,7 @@ test('a phase boundary shares the eight-read cap and the original time budget',a
  const result=await readPowerOrderedAjesPage({...powerOptions,page:1,pageSize:24,read,now:()=>clock});
  assert.equal(result.reads,8);assert.equal(result.items.length,24);assert.deepEqual(calls.at(-1),{page:1,phase:'u'});
  clock=0;calls.length=0;
- const slow=await readPowerOrderedAjesPage({...powerOptions,page:1,now:()=>clock,read:async(page,phase)=>{
+ const slow=await readPowerOrderedAjesPage({...powerOptions,page:1,fillRequestedPage:true,now:()=>clock,read:async(page,phase)=>{
   calls.push({page,phase});clock+=9000;return {items:[{id:'only',known:false}],received:1,observedAt};
  }});
  assert.equal(slow.reads,1);assert.equal(slow.items.length,0);assert.match(slow.nextCursor!,/^j2\.u\.1\.0\.2\./);
@@ -231,20 +235,26 @@ test('changed consumed membership requests refresh instead of silently moving th
  assert.equal(calls,before+1);
 });
 
-test('a proven requested selection fills its page beyond the former elapsed/read soft stops',async()=>{
+test('requested-page filling cannot bypass the elapsed or eight-read bounds',async()=>{
  let time=0;const calls:number[]=[];
- const result=await readFilteredAjesPage({page:1,pageSize:24,fillRequestedPage:true,now:()=>time,read:async page=>{
-  calls.push(page);time+=12000;return {items:page===11?Array.from({length:24},(_,i)=>'match-'+i):[],received:24};
+ const slow=await readFilteredAjesPage({page:1,pageSize:24,minimumReads:2,fillRequestedPage:true,now:()=>time,read:async page=>{
+  calls.push(page);time+=12000;return {items:[],received:24};
  }});
- assert.equal(result.items.length,24);assert.equal(result.scanLimited,false);assert.deepEqual(calls,Array.from({length:11},(_,i)=>i+1));
+ assert.deepEqual(calls,[1,2]);assert.equal(slow.items.length,0);assert.equal(slow.scanLimited,true);assert.equal(slow.nextCursor,'3.0');
+ calls.length=0;
+ const bounded=await readFilteredAjesPage({page:1,pageSize:24,fillRequestedPage:true,now:()=>0,read:async page=>{
+  calls.push(page);return {items:page===9?Array.from({length:24},(_,i)=>'match-'+i):[],received:24};
+ }});
+ assert.deepEqual(calls,[1,2,3,4,5,6,7,8]);assert.equal(bounded.items.length,0);assert.equal(bounded.scanLimited,true);assert.equal(bounded.nextCursor,'9.0');
 });
 
-test('a proved zero known total starts unknown directly instead of traversing the whole known source phase',async()=>{
+test('a separately observed zero known total cannot skip an actual known row',async()=>{
  const phases:string[]=[];
- const result=await readPowerOrderedAjesPage({...powerOptions,page:1,knownTotal:0,fillRequestedPage:true,read:async(page,phase)=>{
-  phases.push(phase);return {items:Array.from({length:23},(_,i)=>({id:'unknown-'+i,known:false})),received:23,observedAt};
+ const rows=[{id:'known',known:true},...Array.from({length:22},(_,i)=>({id:'unknown-'+i,known:false}))];
+ const result=await readPowerOrderedAjesPage({...powerOptions,page:1,knownTotal:0,fillRequestedPage:true,read:async(_page,phase)=>{
+  phases.push(phase);return {items:rows,received:23,observedAt};
  }});
- assert.deepEqual(phases,['u']);assert.equal(result.items.length,23);assert.equal(result.hasMore,false);assert.equal(result.nextCursor,null);
+ assert.deepEqual(phases,['k','u']);assert.deepEqual(result.items,rows);assert.equal(result.hasMore,false);assert.equal(result.nextCursor,null);
 });
 
 test('complete-page filling still stops on a real partial or stale source response',async()=>{
@@ -253,3 +263,4 @@ test('complete-page filling still stops on a real partial or stale source respon
   assert.equal(calls,1);assert.deepEqual(result.items,['retained']);assert.equal(result.hasMore,false);
  }
 });
+

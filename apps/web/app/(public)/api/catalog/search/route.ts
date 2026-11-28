@@ -60,7 +60,9 @@ export async function GET(request: Request) {
       const measure=(stage:string,ms:number)=>{if(Number.isFinite(ms)&&ms>=0)phases.set(stage,(phases.get(stage)||0)+ms);};
       const params=Object.fromEntries(p);
       const summary=p.get('countOnly')==='1'?await readAjesCountSummary(JSON.stringify(params)):null;
-      const result=summary?{total:exactAjesCount(summary)??null,countSummary:summary,countIncomplete:exactAjesCount(summary)===undefined,items:[]}:await readAjesCatalogPage(params,measure);
+      // The page header requests the counter independently for this selection.
+      // Appending ready cards must not wait for or repeat that optional read.
+      const result=summary?{total:exactAjesCount(summary)??null,countSummary:summary,countIncomplete:exactAjesCount(summary)===undefined,items:[]}:await readAjesCatalogPage(params,measure,{includeCount:false});
       return NextResponse.json({ok:true,...result},{headers:{'Cache-Control':'private, max-age=15, stale-while-revalidate=30','Server-Timing':[`catalog-total;dur=${(performance.now()-started).toFixed(1)}`,...[...phases].map(([phase,ms])=>`${phase};dur=${ms.toFixed(1)}`)].join(', ')}});
     }catch(e){const failure=ajesErrorResponse(e);return NextResponse.json(failure.body,{status:failure.status,headers:{'Cache-Control':'no-store'}});}
   }
@@ -169,3 +171,4 @@ export async function GET(request: Request) {
   const pricingMs = performance.now() - started - readMs;
   return NextResponse.json({ ok: true, ...result, ...(crossMarket?{total:null,partial:true,countIncomplete:true}:{}), items, ...extras }, { headers: { "Cache-Control": crossMarket&&chinaRegcloudRuntimeConfigured()?"no-store":"public, max-age=30, s-maxage=30", "Server-Timing": `catalog-read;dur=${readMs.toFixed(1)}, catalog-pricing;dur=${pricingMs.toFixed(1)}` } });
 }
+

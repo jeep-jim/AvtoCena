@@ -22,6 +22,7 @@ test('ready cards do not wait for optional brand/model directories; exact select
     if(args.path.endsWith('/ajes-client'))return {contents:'export class AjesUnavailable extends Error {}'};
     if(args.path.endsWith('/ajes-query'))return {contents:'export class AjesInputError extends Error {};export class AjesCursorRefreshRequired extends AjesInputError {}'};
     if(args.path.endsWith('/ajes-count-display'))return {contents:readFileSync('apps/web/lib/catalog/ajes-count-display.ts','utf8'),loader:'ts'};
+    if(args.path.endsWith('/ajes-source-count'))return {contents:readFileSync('apps/web/lib/catalog/ajes-source-count.ts','utf8'),loader:'ts'};
     if(args.path.endsWith('/count-format'))return {contents:readFileSync('apps/web/lib/catalog/count-format.ts','utf8'),loader:'ts'};
     if(args.path.endsWith('/japan-source-power'))return {contents:readFileSync('apps/web/lib/catalog/japan-source-power.ts','utf8'),loader:'ts'};
     if(args.path.endsWith('/powertrain-safety'))return {contents:readFileSync('apps/web/lib/catalog/powertrain-safety.ts','utf8'),loader:'ts'};
@@ -77,3 +78,4 @@ test('ready cards do not wait for optional brand/model directories; exact select
   assert.equal(scanning.find(n=>n.type?.name==='CatalogLoadMore')?.props.initialHasMore,true);
  }finally{delete (globalThis as any).__ajesTest;}
 });
+

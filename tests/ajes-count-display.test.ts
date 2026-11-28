@@ -10,7 +10,7 @@ test('independent counts retain zero, unavailable and stale semantics',t=>{
  assert.equal(ajesCountText({...fresh,total:0}),'0');
  assert.equal(ajesCountText(null),'Количество уточняется');
  assert.equal(ajesCountText({...fresh,stale:true}),'147\u00a0867 · данные на 18 октября 2026 г.');
- assert.equal(ajesCountText({...fresh,stale:true,observedAt:'2026-10-18T18:00:00Z'}),'147\u00a0867 · данные на 19 октября 2026 г.');
+ assert.equal(ajesCountText({...fresh,stale:true,observedAt:'2026-10-17T18:00:00Z'}),'147\u00a0867 · данные на 18 октября 2026 г.');
  assert.equal(ajesCountText({...fresh,stale:true,observedAt:''}),'Количество уточняется');
  assert.equal(exactAjesCount({...fresh,stale:true}),undefined);
  assert.equal(ajesCountText({...fresh,upperBound:true}),'Количество уточняется');
@@ -21,13 +21,13 @@ test('visible Japan count never substitutes loaded cards for the whole matching 
  const observedAt='2026-11-28T00:00:00Z';
  const source={total:147867,stale:false,observedAt,upperBound:true};
  const partial=ajesVisibleCount(source,24);
- assert.deepEqual(partial,{text:'Количество уточняется',total:undefined,loadedCount:24,status:'partial'});
- assert.equal(ajesVisibleCount(source,48).text,'Количество уточняется');
+ assert.deepEqual(partial,{text:'Показано 24 · общий итог уточняется',total:undefined,loadedCount:24,status:'partial'});
+ assert.equal(ajesVisibleCount(source,48).text,'Показано 48 · общий итог уточняется');
  assert.equal(ajesVisibleCount({...source,total:0},24).text,partial.text,'the power-count sentinel is not zero inventory');
  assert.equal(ajesVisibleCount(null,24).text,partial.text,'ready cards are not a whole-query count before the aggregate resolves');
  for(const loaded of [undefined,0,-1,NaN,Infinity,2.5]){
   const count=ajesVisibleCount(null,loaded);
-  assert.equal(count.text,'Количество уточняется');assert.equal(count.total,undefined);
+  assert.equal(count.text,loaded===0?'Показано 0 · общий итог уточняется':'Количество уточняется');assert.equal(count.total,undefined);
  }
  const exact={...source,upperBound:false,total:24};
  assert.deepEqual(ajesVisibleCount(exact,24),{text:'24',total:24,loadedCount:24,status:'exact'});
@@ -45,12 +45,12 @@ test('census count proof must agree with the admitted total and cover the same s
  assert.equal(exactAjesCount(summary),73);
  for(const patch of [{complete:false},{admittedTotal:24},{groupedTotal:99},{sourceDistinctTotal:99},{sourceDistinctTotal:undefined},{knownTotal:72},{unknownTotal:-1},{version:2},{kind:'source-count'}]){
   const invalid={...summary,countProof:{...summary.countProof,...patch}};
-  assert.equal(exactAjesCount(invalid),undefined);assert.equal(ajesVisibleCount(invalid,24).text,'Количество уточняется');
+  assert.equal(exactAjesCount(invalid),undefined);assert.equal(ajesVisibleCount(invalid,24).text,'Показано 24 · общий итог уточняется');
  }
  assert.equal(latestAjesCountSummary(summary,null),summary);
  assert.equal(latestAjesCountSummary(summary,{...summary,total:0,upperBound:true}),summary);
  assert.equal(latestAjesCountSummary(summary,{...summary,observedAt:'2026-11-27T00:00:00Z'}),summary);
- const newer={...summary,observedAt:'2026-11-28T00:30:00Z'};
+ const newer={...summary,observedAt:'2026-11-28T00:10:00Z'};
  assert.equal(latestAjesCountSummary(summary,newer),newer);
 });
 
@@ -66,8 +66,8 @@ test('real Japan count badge renders exact and partial values without false inve
  const upper={total:147867,stale:false,observedAt:'2026-11-28T00:00:00Z',upperBound:true};
  const partial=render(upper,24);
  assert.match(partial,/data-japan-loaded-count="24"/);assert.match(partial,/data-japan-count-status="partial"/);
- assert.match(partial,/Количество уточняется/);assert.doesNotMatch(partial,/data-catalog-market-count=|147867|Загружено/);
- assert.match(render(null,48),/Количество уточняется/);
+ assert.match(partial,/Показано 24 · общий итог уточняется/);assert.doesNotMatch(partial,/data-catalog-market-count=|147867|Загружено/);
+ assert.match(render(null,48),/Показано 48 · общий итог уточняется/);
  const unknown=render(null);
  assert.match(unknown,/Количество уточняется/);assert.doesNotMatch(unknown,/data-japan-loaded-count=|data-catalog-market-count=|Загружено 0/);
  const exact=render({...upper,total:24,upperBound:false},24);
@@ -215,4 +215,5 @@ test('Japan saved fallback returns bounded candidates; source PW cannot qualify 
  assert.equal(findSavedAjesSearch({table:'stats',powerTo:160,fuel:'diesel'},snapshots,now),null);
  assert.equal(findSavedAjesSearch({table:'stats',powerTo:160},snapshots,now+8*86400000),null);
 });
+
 

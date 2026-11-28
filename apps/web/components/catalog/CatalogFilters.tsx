@@ -11,7 +11,8 @@ import {JAPAN_MIN_MODEL_YEAR} from "@/lib/catalog/japan-year-policy";
 import {rememberFilterScroll,restoreFilterScroll,lockFilterScrollAnchor} from "@/lib/catalog/filter-scroll";
 import {SELECTION_EVENT,OPEN_SELECTION_FILTERS} from "@/lib/dealers/selection-share";
 import {SelectedFilterChip} from "./SelectedFilterChip";
-import {CatalogDesktopSelection,useCatalogResultCount} from "./CatalogSelectionContext";
+import {CatalogDesktopSelection,useCatalogResultCount,useCatalogLoadedCount} from "./CatalogSelectionContext";
+import {ajesVisibleCount,ajesCountLabel} from '@/lib/catalog/ajes-count-display';
 import {StickyCatalogControls} from "./StickyCatalogControls";
 import {createPortal} from "react-dom";
 import {CatalogMarketFlag} from "./CatalogMarketFlag";
@@ -351,9 +352,12 @@ export function CatalogFilters({ initial, facets, resultCount, auctionResults=fa
   };
   const formKey = useMemo(() => JSON.stringify(initial), [initial]);
   const streamedCount=useCatalogResultCount(formKey);
-  const countText=streamedCount?.queryKey===formKey?streamedCount.text:typeof resultCount==="number"?resultCount.toLocaleString("ru-RU"):"Количество уточняется";
+  const loadedCount=useCatalogLoadedCount();
+  const shownCount=loadedCount?.queryKey===formKey?loadedCount.count:undefined;
+  const japanSummary=streamedCount?.queryKey===formKey?streamedCount.summary:undefined;
+  const countText=auctionResults?ajesVisibleCount(japanSummary,shownCount).text:streamedCount?.queryKey===formKey?streamedCount.text:typeof resultCount==="number"?resultCount.toLocaleString("ru-RU"):"Количество уточняется";
   const countKnown=countText!=="Количество уточняется"&&(!auctionResults||Boolean(countText));
-  const countLabel=countKnown?`Найдено ${countText.includes(" ·")?countText.replace(" ·"," машин ·"):`${countText} машин`}`:auctionResults?"Автомобили из Японии":countText;
+  const countLabel=auctionResults?ajesCountLabel(japanSummary,shownCount):countKnown?`Найдено ${countText.includes(" ·")?countText.replace(" ·"," машин ·"):`${countText} машин`}`:countText;
   const [draft, setDraft] = useState<FilterDraft>(() => draftFromInitial(initial));
   const initialSortState = useMemo(() => initialSort(initial.sort || ""), [initial.sort]);
   const [sortKey, setSortKey] = useState<SortKey>(initialSortState.key);
@@ -632,3 +636,4 @@ function CatalogCityFilter({city,onChange}:{city:string;onChange:(city:string)=>
  const [open,setOpen]=useState(false);
  return <div className="ac-catalog-city-filter min-w-0"><button type="button" className="ac-filter-control flex h-13 w-full min-w-0 items-center justify-between gap-2 rounded-[15px] px-4 text-left text-sm font-black" aria-label={`Выбрать город. Сейчас: ${city || "не выбран"}`} aria-haspopup="dialog" aria-expanded={open} onClick={()=>setOpen(true)}><span className="truncate">{city || "Выбрать город"}</span><LocationIcon className="ac-filter-location h-[18px] w-[18px] shrink-0 text-[#ff353d]"/></button>{open&&<CityPickerDialog persistSelection={false} onChange={onChange} onClose={()=>setOpen(false)}/>}</div>;
 }
+

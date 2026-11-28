@@ -53,9 +53,13 @@ test('ready Japanese cards return while the independent count is still pending',
   assert.ok(state.queries.every(q=>q.pageSize===24));
   assert.ok(state.queries.every(q=>JSON.stringify({...q,page:1})===JSON.stringify({...state.queries[0],page:1})),'refill changes only the source page, never the supplier selection');
   finishCount({total:42,stale:false,observedAt:new Date().toISOString()});
-  await assert.rejects(independentCount,/census_source_snapshot_unavailable/,'positive source weights do not prove a coherent admitted total');
+  const sourceCount=await independentCount;
+  assert.equal(sourceCount.total,42);assert.equal(sourceCount.upperBound,true);assert.equal(sourceCount.selectionScope,'source-candidates');
+  assert.equal(sourceCount.sourceScopeComplete,true);assert.equal(sourceCount.sourceCountProof.sourceTotal,42);
+  assert.equal(Object.hasOwn(sourceCount,'countProof'),false,'a scalar source result never becomes an admitted census');
   state.countResult={total:0,stale:false,observedAt:new Date().toISOString()};
-  const zero=await mod.exports.readAjesCountSummary(JSON.stringify(params));
+  assert.equal(await mod.exports.readAjesCountSummary(JSON.stringify(params)),sourceCount,'a fresh count retains its original observation');
+  const zero=await mod.exports.readAjesCountSummary(JSON.stringify({...params,yearFrom:'2021'}));
   assert.equal(zero.total,0);assert.equal(zero.upperBound,false);assert.equal(zero.countProof.sourceTotal,0);
   assert.equal(state.counts,2,'only the two explicitly requested scalar counters ran');
  }finally{finishCount({total:0,stale:false,observedAt:new Date().toISOString()});delete (globalThis as any).__countFixture;}
@@ -86,3 +90,4 @@ for(const continuation of [false,true])test(`explicitly count-free ${continuatio
   assert.equal(state.counts,0);assert.equal(state.lists,2);
  }finally{release();delete (globalThis as any).__countFixture;}
 });
+
