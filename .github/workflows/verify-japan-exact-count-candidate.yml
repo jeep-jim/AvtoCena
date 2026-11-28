@@ -138,6 +138,16 @@ jobs:
           await readJapanPhotoRetryFixture(process.env.RUNNER_TEMP + '/japan-photo-retry-browser-report.json');
           JS
           fi
+      # The isolated Chromium fixture uses esbuild against Next's optional tracer.
+      # npm ci intentionally does not install that peer; add it only under the
+      # runner's ignored node_modules, never to the pinned runtime Git tree.
+      - name: Prepare Next optional tracing peer for offline page-fill browser test
+        run: |
+          set -euo pipefail
+          mkdir -p node_modules/@opentelemetry/api
+          npm pack --silent --pack-destination "$RUNNER_TEMP" @opentelemetry/api@1.9.1 >/dev/null
+          tar -xzf "$RUNNER_TEMP/opentelemetry-api-1.9.1.tgz" -C node_modules/@opentelemetry/api --strip-components=1
+          node -e "require.resolve('@opentelemetry/api')"
       - name: Verify ordinary Japan page filling on the exact candidate before host contact
         if: steps.photo_scope.outputs.scope == 'catalog-japan-pagination24-v1' || steps.photo_scope.outputs.scope == 'catalog-japan-stability-v1'
         run: |
