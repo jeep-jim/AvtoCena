@@ -2,7 +2,7 @@
   "version": 1,
   "kind": "japan-power-price-sort-count-release-v1",
   "recordedAt": "2026-11-28T01:15:43.875Z",
-  "status": "source-published-local-verification-passed-hosted-browser-pending",
+  "status": "source-published-hosted-fixture-caller-corrected-awaiting-new-verification",
   "issue": {
     "reportedUrl": "https://avtocena.com/cars/japan?powerTo=160&sort=totalRubDesc&city=%D0%9D%D0%BE%D0%B2%D0%BE%D0%BA%D1%83%D0%B7%D0%BD%D0%B5%D1%86%D0%BA",
     "reproducedPublicly": true,
@@ -220,6 +220,60 @@
     "priorFunctionalGatesPreserved": true,
     "hostedVerify": null,
     "release": null,
-    "publicPostReleaseProof": null
+    "publicPostReleaseProof": null,
+    "hostedVerifyAttempts": [
+      {
+        "runId": 46092317220,
+        "runNumber": 68,
+        "attempt": 1,
+        "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/46092317220",
+        "controllerSha": "59548579f35b7ca4b3d40150244ba92f6e94e29b",
+        "status": "failure",
+        "completedAt": "2026-11-28T01:20:31Z",
+        "runtimeSha": "20fd18d12b3f5c7aabef860e1b53da0d505dfd64",
+        "runtimeTree": "b3257c801b2b26cc84ec8d37380a2d8ec120b431",
+        "failingStep": "Verify Japan power then price sorting and live count on the exact runtime",
+        "error": {
+          "code": "japan_price_sort_fixture_failed",
+          "message": "verifyPage is not defined"
+        },
+        "completedJourneyCases": 0,
+        "productionRequests": 0,
+        "supplierRequests": 0,
+        "browserVersion": "158.0.8127.36",
+        "reportSha256": "11aeb87ac4a08f2dac6046006a267c6dd5d03531cc978ffaa92092b0826bab21",
+        "artifacts": [
+          {
+            "id": 15241477831,
+            "name": "japan-model-controls-ready-fixture",
+            "bytes": 1621,
+            "sha256": "0334e4f84db2a680afce5997db37fa384a5a915ec5f3256548e14f82a8f74cb5",
+            "githubDigestMatched": true
+          },
+          {
+            "id": 15241113477,
+            "name": "japan-price-sort-fixture",
+            "bytes": 7260,
+            "sha256": "03771252d84d973e04bf7a50e4a030b4ee8a2a144b29e1f0ad9a9ef8ae4a091c",
+            "githubDigestMatched": true
+          },
+          {
+            "id": 15241018798,
+            "name": "japan-legacy-redirect-fixture",
+            "bytes": 709,
+            "sha256": "2372db1275bacf6b07cbb134077995d698c77e712ca477d4638af02ce140b8f3",
+            "githubDigestMatched": true
+          }
+        ],
+        "resolution": "Pass imported verifyJapanPage, verifyJapanFullPage and verifyJapanPowerPage through explicit callback aliases; require a new hosted run before activation.",
+        "correctionValidation": {
+          "referenceErrorReproduced": true,
+          "explicitCallbackBindingsChecked": true,
+          "syntaxPassed": true,
+          "unboundNameDiagnostics": 0,
+          "helperTestsPassed": 11
+        }
+      }
+    ]
   }
 }

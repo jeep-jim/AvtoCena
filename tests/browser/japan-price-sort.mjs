@@ -229,7 +229,8 @@ async function main() {
         const pages=await runJapanPriceSortBrowser({context:wrapped,report:result,
           read:async api=>{const query=Object.fromEntries(new URL(api,ORIGIN).searchParams);return {status:200,data:fixtureResult(query,state.now)};},
           capture:async()=>{},onStage:stage=>{result.stage=stage;},onPage:()=>{},
-          verifyPage,verifyFullPage,verifyPowerPage,verifyVehiclePolicy:verifyJapanVisibleVehiclePolicy});
+          verifyPage:verifyJapanPage,verifyFullPage:verifyJapanFullPage,
+          verifyPowerPage:verifyJapanPowerPage,verifyVehiclePolicy:verifyJapanVisibleVehiclePolicy});
         need(result.japanPriceSortPassed && result.japanCountDisplayPassed,'complete_journey');
         const page=currentPage,prior=[...pages[2].items,...pages[3].items];
         state.failAppend=true;
