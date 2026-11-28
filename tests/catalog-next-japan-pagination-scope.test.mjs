@@ -122,7 +122,7 @@ test('review plans retain accepted5b1 until the reviewed source-order and count 
   assert.equal(successors.length,1);
   const successor=successors[0];
   assert.equal(successor.retainedRuntime,base.runtimeSha);
-  assert.equal(successor.runtimeSha,'9b9450433e1be1a11e48e876f12faffdfadcf34a');
+  assert.equal(successor.runtimeSha,'4077283be39bb1b1a9e74e7fb3e15fc96352c79a');
   assert.equal(successor.runtimeTree,'0d54154f3628312533c357ed058eb37c5a7e8900');
   assert.equal(successor.runtimeFiles.length,44);
   assert.deepEqual([...successor.runtimeFiles].sort(),[...JAPAN_STABILITY_SOURCE_SELECTION_RECOVERY_CODE_PATHS].sort());

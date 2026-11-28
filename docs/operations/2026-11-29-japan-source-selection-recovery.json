@@ -1,10 +1,10 @@
 {
   "version": 1,
   "kind": "japan-source-selection-recovery-v1",
-  "checkedAt": "2026-11-28T18:12:19.665931+00:00",
-  "status": "prepared_controller_waiting_for_active_release44",
+  "checkedAt": "2026-11-28T18:45:24.679951+00:00",
+  "status": "prepared_for_ci_and_fail_closed_reconciliation_before_publication",
   "retainedAcceptedRuntime": "5b1e513dc9af3735e3b757c6fe7da763aa92837e",
-  "controllerBase": "9f61c9506bc3bc117f9d7635ac3f06e35263f0ff",
+  "controllerBase": "26ec8fb92ea4af0839cba50a4e115a30ba1e1665",
   "runtimeBase": "deee0fefa0c50bab3397acb5232eca4eed47bbe1",
   "failedReleases": [
     {
@@ -418,6 +418,66 @@
       },
       "sourcePriceAppendScreenshotsExist": true,
       "functionalGateVerdictsNotRecovered": true
+    },
+    {
+      "number": 44,
+      "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/46174247885",
+      "archiveSha256": "b9f6a783d264fd70c39599b0e4ec3f12ff29f593a54ffb8ec427ccf917cd009e",
+      "terminal": {
+        "version": 1,
+        "kind": "china-code-cycle-v1",
+        "market": "china",
+        "completed": false,
+        "published": false,
+        "status": "needs_reconciliation",
+        "runtimeSha": "d3226d2de549d250f50ca66663c4b832df6e6de6",
+        "retainedRuntime": "5b1e513dc9af3735e3b757c6fe7da763aa92837e",
+        "sourceRequests": 0,
+        "generationRestores": 0,
+        "priceCalculations": 0,
+        "generationWrites": 0,
+        "encyclopediaWrites": 0,
+        "otherMarketWrites": 0,
+        "deletions": 0,
+        "acceptancePolicy": "japan-functional-observed-timing-v1",
+        "speedGateRequired": false,
+        "speedPassed": null,
+        "timingObserved": false,
+        "appImageCleanupBeforeReserve": {
+          "version": 1,
+          "kind": "china-terminal-app-image-cleanup-v1",
+          "completed": true,
+          "status": "already_absent",
+          "uncertain": false,
+          "imagesRemoved": 0,
+          "runtimeSha": "cdd4e9a0465dd292b8dd17233bf34d209bdc4f17",
+          "imageId": "sha256:1e34d5d194e652954b968fd287712bc042b88b0b6165df4037db7097f0c6eb5f",
+          "witnessSha256": "22e56b063b1758ad79288fada88f077c4fcc6f96adfd22576b97ce2b5beb1f6e",
+          "diskFreeBytesBefore": 47061483520,
+          "diskFreeBytesAfter": 47061483520,
+          "measuredFreeBytesChange": 0,
+          "reason": "already_absent"
+        },
+        "retentionPreserved": true,
+        "errorCode": "china_state_storage_transport",
+        "finishedAt": "2026-11-28T18:38:02.656Z",
+        "leaseReleased": true
+      },
+      "browser": null,
+      "stageConclusion": {
+        "stageReturned": false,
+        "reservationStarted": false,
+        "activationStarted": false,
+        "basis": "exact controller call order, timingObserved false, no daily_candidate_checked or code_activate_and_verify milestone"
+      },
+      "storageFailureDetails": {
+        "preserved": false,
+        "method": null,
+        "keyRole": null,
+        "attempts": null,
+        "cause": null
+      },
+      "savedSupplierSlotsBoundToThisRelease": false
     }
   ],
   "attribution": {
@@ -443,7 +503,7 @@
     "A new authorization requirement from the supplier"
   ],
   "candidate": {
-    "runtimeSha": "9b9450433e1be1a11e48e876f12faffdfadcf34a",
+    "runtimeSha": "4077283be39bb1b1a9e74e7fb3e15fc96352c79a",
     "runtimeTree": "0d54154f3628312533c357ed058eb37c5a7e8900",
     "runtimeFiles": [
       "apps/web/components/catalog/AjesCatalog.tsx",
@@ -671,7 +731,7 @@
       "passed": 753,
       "failed": 0,
       "testFiles": 85,
-      "runtimeSha": "9b9450433e1be1a11e48e876f12faffdfadcf34a",
+      "runtimeSha": "4077283be39bb1b1a9e74e7fb3e15fc96352c79a",
       "runtimeRestored": true
     },
     "webTypecheck": {
@@ -688,7 +748,13 @@
       "failed": 0
     },
     "protectedPricingPathsUnchanged": true,
-    "frozenHttpOracleReusable": true
+    "frozenHttpOracleReusable": true,
+    "finalAncestryBindings": {
+      "passed": 16,
+      "failed": 0,
+      "treeUnchanged": true,
+      "d322IsAncestor": true
+    }
   },
   "preservedReadonlyInspection": {
     "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/46168726644",
@@ -748,24 +814,27 @@
     }
   },
   "precedingRelease": {
-    "number": 43,
-    "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/46170193249",
-    "runtimeSha": "cdd4e9a0465dd292b8dd17233bf34d209bdc4f17",
-    "status": "rolled_back",
+    "runtimeSha": "d3226d2de549d250f50ca66663c4b832df6e6de6",
     "retainedRuntime": "5b1e513dc9af3735e3b757c6fe7da763aa92837e",
-    "finishedAt": "2026-11-28T17:45:54.127Z",
-    "recovered": true,
+    "status": "needs_reconciliation",
+    "finishedAt": "2026-11-28T18:38:02.656Z",
+    "completed": false,
+    "published": false,
+    "errorCode": "china_state_storage_transport",
     "leaseReleased": true,
-    "retentionPreserved": true
+    "retentionPreserved": true,
+    "number": 44,
+    "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/46174247885"
   },
   "latestPublicHealth": {
-    "checkedAt": "2026-11-28T17:51:45.034863+00:00",
+    "checkedAt": "2026-11-28T18:29:34.142813+00:00",
     "httpStatus": 200,
     "ok": true,
     "service": "avtocena-web",
     "catalogProjectionParts": "scoped-v1",
     "releaseSha": "5b1e513dc9af3735e3b757c6fe7da763aa92837e",
-    "calculationVersion": "4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90"
+    "calculationVersion": "4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90",
+    "notAcceptanceOrReconciliationProof": true
   },
   "previousCombinedCandidateChecks": {
     "runtimeSha": "07c652aff1c707ac4f33181777e31a49c4022232",
@@ -799,7 +868,6 @@
       }
     }
   },
-  "runtimeParent": "07c652aff1c707ac4f33181777e31a49c4022232",
   "mergedAncestor": {
     "runtimeSha": "07c652aff1c707ac4f33181777e31a49c4022232",
     "parents": [
@@ -844,17 +912,52 @@
       "newSuitesPassed": 10,
       "failed": 0,
       "blockers": 0
+    },
+    "stateStorageFailureProjection": {
+      "preservesExistingTypedMetadata": true,
+      "arbitraryFieldsRejected": true,
+      "gettersNotEvaluated": true,
+      "newRequests": 0,
+      "newRetries": 0,
+      "changedTimeouts": 0,
+      "regressionPassed": 4,
+      "existingWrapperTargetedPassed": 12
+    },
+    "externalMetadataProjectionPreserved": {
+      "controllerSha": "26ec8fb92ea4af0839cba50a4e115a30ba1e1665",
+      "entryProgressScalarsPreserved": true,
+      "stageTransportProjectionIdentical": true,
+      "newExternalTestsPreserved": true
     }
   },
-  "activeRelease44": {
+  "runtimeParents": [
+    "9b9450433e1be1a11e48e876f12faffdfadcf34a",
+    "d3226d2de549d250f50ca66663c4b832df6e6de6"
+  ],
+  "release44": {
     "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/46174247885",
     "runtimeSha": "d3226d2de549d250f50ca66663c4b832df6e6de6",
     "controllerSha": "9f61c9506bc3bc117f9d7635ac3f06e35263f0ff",
     "markerSha": "f2d3207cf0fe94d94443d3e39744944c207a5b7d",
-    "observedAt": "2026-11-28T18:11:22Z",
-    "status": "in_progress",
-    "step": 5,
-    "terminalOutcome": null,
-    "overlappingPublicationStarted": false
-  }
+    "observedAt": "2026-11-28T18:45:24.679951+00:00",
+    "status": "completed",
+    "terminalOutcome": "needs_reconciliation",
+    "overlappingPublicationStarted": false,
+    "conclusion": "failure",
+    "newCandidateReserved": false,
+    "liveJapanProofAvailable": false
+  },
+  "nextPublicationPrerequisites": {
+    "runtimeSha": "4077283be39bb1b1a9e74e7fb3e15fc96352c79a",
+    "requiredCi": true,
+    "existingCodeControllerReconcileBeforeStage": true,
+    "unresolvedStateStopsBeforeNewStage": true,
+    "retainedRuntimeMustMatch": "5b1e513dc9af3735e3b757c6fe7da763aa92837e",
+    "conditionalD322ProfileApplied": false,
+    "liveJapanAcceptanceStillRequired": true
+  },
+  "controllerMergedParents": [
+    "04065c53935fd1975209718fc73ddfb469efcd55",
+    "26ec8fb92ea4af0839cba50a4e115a30ba1e1665"
+  ]
 }
