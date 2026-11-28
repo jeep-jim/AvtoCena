@@ -801,14 +801,26 @@ test('projection retains full-record preview vetoes and old compact supplier fac
  assert.equal(japanPreviewParameters(defaultFuel).powerHp,150);assert.equal(offerParameterDraft(defaultFuel,defaultDto).powerHp,'150');
 });
 
-test('power and ordinary queries have distinct raw source scope while equivalent pages retain their cache identity',()=>{
+test('applied power predicates have distinct cache scope while URI fallback preserves the same raw selection',()=>{
  for(const table of ['stats','main'] as const)for(const query of [{},{make:'TOYOTA',page:2},{yearFrom:2020,yearTo:2023},{drive:'awd'}]){
   const ordinary=ajesQuery({table,...query}),power=ajesQuery({table,...query,powerTo:160});
-  assert.notEqual(ajesSourceCacheSql(power.sql),ajesSourceCacheSql(ordinary.sql));
-  assert.match(power.sql,/\(pw\+0\)<=160/i);
+  if('drive' in query){
+   assert.equal(power.sql,ordinary.sql,'the existing drive selection leaves no room for a complete safe PW predicate');
+   assert.equal(ajesSourceCacheSql(power.sql),ajesSourceCacheSql(ordinary.sql),'identical raw membership may reuse its exact source cache');
+   assert.equal(power.sql,ajesQuery({table,...query,powerTo:100}).sql,'fallback never pretends to narrow a different power range');
+   assert.doesNotMatch(power.sql,/\bpw\+0\b/i);
+  }else{
+   assert.notEqual(ajesSourceCacheSql(power.sql),ajesSourceCacheSql(ordinary.sql));
+   assert.match(power.sql,/pw\+0 between 1 and 160/i);
+  }
   assert.equal(ajesSourceCacheSql(power.sql),ajesSourceCacheSql(ajesQuery({table,...query,powerTo:160}).sql));
   assert.ok(new URLSearchParams({sql:power.sql}).toString().length<6000);
  }
+ const local=ajesResultFilter({market:'japan',drive:'awd',powerTo:'160'});
+ assert.equal(local.matchesPower(offer(200)),false,'broad fallback still rejects known out-of-range source power locally');
+ assert.equal(local.matchesPower(offer(150)),true);
+ assert.equal(local.matchesPower(offer('')),true,'unknown PW remains included');
+ assert.equal(local.matchesPower({...offer(200),powerHp:150}),true,'a local matching override is never lost by broad fallback');
  const original=ajesSourceCacheSql(ajesQuery({}).sql);
  for(const query of [{table:'main' as const},{page:2},{pageSize:12},{make:'HONDA'},{yearFrom:2020}])assert.notEqual(ajesSourceCacheSql(ajesQuery(query).sql),original);
 });

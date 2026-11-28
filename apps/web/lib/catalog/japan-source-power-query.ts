@@ -10,19 +10,18 @@ export type JapanSourcePowerPredicate={
 };
 
 const encodedLength=(value:string)=>new URLSearchParams({sql:value}).toString().length-4;
-const normalizedModel="upper(replace(replace(replace(replace(replace(model_name,' ',''),'-',''),'.',''),'/',''),'_',''))";
 // ajesText also decodes entities and applies NFKC. Only this reproducible ASCII
 // subset is narrowed in SQL; every other spelling remains a source candidate.
-const otherModelSpelling="model_name not regexp '^[A-Za-z0-9 ._/-]*$'";
+const otherModelSpelling="model_name regexp '[^A-Za-z0-9 ._/-]'";
 
 function alternatives(values:readonly string[]):string {
  type Node={end:boolean;children:Map<string,Node>};
  const root:Node={end:false,children:new Map()};
  for(const value of values){let node=root;for(const character of value){let next=node.children.get(character);if(!next){next={end:false,children:new Map()};node.children.set(character,next);}node=next;}node.end=true;}
  const render=(node:Node):string=>{
-  const children=[...node.children].sort(([a],[b])=>a<b?-1:a>b?1:0).map(([character,next])=>character+render(next));
+  const children=[...node.children].sort(([a],[b])=>a<b?-1:a>b?1:0).map(([character,next])=>{const rest=render(next);return character+(rest?'.*'+rest:'');});
   if(!children.length)return '';
-  const expression=children.length===1?children[0]:'('+children.join('|')+')';
+  const expression=children.length===1?children[0]:children.every(value=>/^[A-Z0-9]$/.test(value))?'['+children.join('')+']':'('+children.join('|')+')';
   return node.end?'('+expression+')?':expression;
  };
  return render(root);
@@ -62,18 +61,25 @@ export function japanSourcePowerPredicate(low:number,high:number,index:Calculati
    if(family){models.add(family.toUpperCase());models.add((family+'class').toUpperCase());}
   }
  }
- const valid="(length(trim(pw))<=30 and trim(pw) regexp '^[0-9]+$' and (pw+0)>0 and (pw+0)<=9007199254740991)";
- const source=`pw is null or not ${valid} or ((pw+0)>=${low} and (pw+0)<=${high})`;
+ const valid="(trim(pw) regexp '^[0-9]{1,30}$' and pw+0>0 and pw+0<=9007199254740991)";
+ const source=`pw is null or not ${valid} or pw+0 between ${low} and ${high}`;
  // A broad namespace is intentional: the unchanged owner predicate still
  // decides Honda/nonhybrid identity and the final 150 hp match after LIST.
- const owner=`${normalizedModel} regexp '^STEPW(A)?G(O)?N'`;
+ // Every normalized owner spelling contains these characters in order. The
+ // raw-name subsequence is deliberately broader, preserving source candidates
+ // while avoiding repeated nested REPLACE expressions in the URI.
+ const ownerPattern='S.*T.*E.*P.*W.*G.*N';
  const modelTokens=[...models].sort();
  const modes:Array<number|null>=[null,4,3,2,1];
  for(const prefixLength of modes){
   const tokens=prefixLength===null?modelTokens:[...new Set(modelTokens.map(value=>value.slice(0,prefixLength)))].sort();
   const pattern=tokens.length?alternatives(tokens):'';
-  const cohorts=pattern?` or ${normalizedModel} regexp '^(${pattern})${prefixLength===null?'$':''}'`:'';
-  const sql=`(${source} or ${otherModelSpelling} or ${owner}${cohorts})`;
+  // Separator normalization can only remove characters. A raw-name subsequence
+  // therefore contains every normalized cohort; extra internal letters remain
+  // candidates for unchanged local validation. Keep literal boundaries in the
+  // unshortened form; coarsened prefixes intentionally include whole families.
+  const cohorts=pattern?`|^[ ._/-]*(${pattern})${prefixLength===null?'[ ._/-]*$':''}`:'';
+  const sql=`(${source} or ${otherModelSpelling} or upper(model_name) regexp '${ownerPattern}${cohorts}')`;
   if(encodedLength(sql)<=maxEncodedLength)return {sql,applied:true,localModelCount:models.size,cohortMode:prefixLength===null?'exact-token':'prefix',prefixLength,requiresLocalValidation:true};
  }
  // Coarsening retains every exception. If even that cannot fit the existing

@@ -23,7 +23,7 @@ const queryBindings={japanSourcePowerPredicate,JAPAN_MIN_MODEL_YEAR:2008,
  assertAjesJapanMarket:(market:unknown)=>{if(market!==undefined&&market!=='japan')throw Error('unexpected market');},
  vehicleColorAliases:(value:string)=>[value],auctionGradeLabel:(value:string)=>value,parseEngineCc:Number,
  parseCatalogSort};
-const {ajesQuery,ajesCatalogQuery,AjesInputError}=new Function(...Object.keys(queryBindings),stripped(source('ajes-query.ts'))+'\nreturn {ajesQuery,ajesCatalogQuery,AjesInputError};')(...Object.values(queryBindings));
+const {ajesQuery,ajesCatalogQuery,AjesInputError,AJES_CENSUS_FIELDS}=new Function(...Object.keys(queryBindings),stripped(source('ajes-query.ts'))+'\nreturn {ajesQuery,ajesCatalogQuery,AjesInputError,AJES_CENSUS_FIELDS};')(...Object.values(queryBindings));
 const power=new Function('isOwnerStepwgnNonHybrid','namedElectrifiedPowertrainKind',stripped(source('japan-source-power.ts'))+'\nreturn {parseJapanSourcePower,japanSupplierPower,japanUnknownPower};')(()=>false,()=>undefined);
 const filterBindings={isOwnerStepwgnNonHybrid:()=>false,...power,AjesInputError,matchesCatalogColor:()=>true,
  filterSelections:(value:string)=>value?value.split('|'):[],matchesFilterSelection:()=>true,priceCardForCity:()=>null,catalogBodyType:()=>'',hasModificationSelection:()=>false};
@@ -97,16 +97,49 @@ test('kW, drive and certified thirty-minute facts do not neutralize the discover
  assert.deepEqual(f.ids({powerTo:160,pageSize:48},calculation),['within']);
 });
 
-test('large local indexes coarsen complete cohorts within the URI budget instead of truncating exceptions',t=>{
+test('large local indexes retain every cohort within the URI budget and fall back without truncating exceptions',t=>{
  const keys=Array.from({length:400},(_,n)=>'make:local'+n.toString(36).padStart(4,'0'));
  const calculation=index(keys),predicate=japanSourcePowerPredicate(1,160,calculation,1000);
- assert.equal(predicate.applied,true);assert.equal(predicate.cohortMode,'prefix');assert.equal(predicate.localModelCount,400);
+ assert.equal(predicate.applied,true);assert.equal(predicate.cohortMode,'exact-token');assert.equal(predicate.localModelCount,400);
  assert.ok(new URLSearchParams({sql:predicate.sql!}).toString().length-4<=1000);
  const f=fixture(t,keys.map((key,n)=>({id:'row-'+n,pw:300,model:key.split(':')[1].toUpperCase()})));
  assert.equal(f.db.prepare('select count(*) as n from stats where '+predicate.sql).get()!.n,400);
  const fallback=japanSourcePowerPredicate(1,160,calculation,10);
  assert.equal(fallback.sql,null);assert.equal(fallback.applied,false);assert.equal(fallback.cohortMode,'unrestricted');
  assert.equal(japanSourcePowerPredicate(1,160,{digest:'incomplete-test-index'} as CalculationIndex).applied,false);
+});
+
+test('compact PW scalar membership equals the original strict predicate at parsing boundaries',t=>{
+ const powers=[null,'','0','-1','+150','1','99','100','160','161','2500','9007199254740991','9007199254740992',
+  '150.0','150,200','150e0','NaN','Infinity','１５０',' 150 ','\t150\n','0'.repeat(27)+'150','0'.repeat(28)+'150'];
+ const f=fixture(t,powers.map((pw,n)=>({id:'scalar-'+String(n).padStart(2,'0'),pw})));
+ const original="pw is null or not (length(trim(pw))<=30 and trim(pw) regexp '^[0-9]+$' and (pw+0)>0 and (pw+0)<=9007199254740991) or ((pw+0)>=100 and (pw+0)<=160)";
+ const expected=f.db.prepare('select id from stats where '+original+' order by id').all().map(row=>row.id);
+ assert.deepEqual(f.ids({powerFrom:100,powerTo:160,pageSize:48}),expected);
+ assert.equal(f.select({powerFrom:100,powerTo:160,aggregate:'count'})[0]['count(*)'],expected.length);
+});
+
+test('ordinary global PW with 400 diverse local hp cohorts retains all donors and fits every source query envelope',t=>{
+ const letters='ABCDEFHJKLMN',keys=Array.from({length:400},(_,n)=>'make'+n%8+':'+letters[n%letters.length].toLowerCase()+'model'+n.toString(36).padStart(4,'0'));
+ const calculation=index(keys),rows:Row[]=keys.map((key,n)=>({id:'donor-'+String(n).padStart(3,'0'),pw:300,model:key.split(':')[1].toUpperCase()}));
+ rows.push({id:'ordinary-in',pw:150,model:'QFIXTURE'},{id:'ordinary-out',pw:300,model:'QFIXTURE'},{id:'unknown',pw:'',model:'QFIXTURE'});
+ const f=fixture(t,rows),query={powerTo:160},encoded=(sql:string)=>new URLSearchParams({sql}).toString().length-4;
+ const census=ajesQuery({aggregate:'census',censusFields:[...AJES_CENSUS_FIELDS],page:1000000},calculation).sql;
+ const predicate=japanSourcePowerPredicate(1,160,calculation,6000-240-encoded(census)-encoded(' and '));
+ assert.equal(predicate.applied,true);assert.equal(predicate.cohortMode,'prefix');assert.ok(predicate.prefixLength!>=1&&predicate.prefixLength!<=4);assert.equal(predicate.localModelCount,400);
+ const list=ajesQuery(query,calculation).sql,where=(sql:string)=>sql.split(' where ')[1].split(/ group by | order by /)[0];
+ assert.ok(list.includes(' and '+predicate.sql),'the actual ordinary compiler applies its complete global candidate predicate');
+ assert.equal(f.select({...query,aggregate:'count'},calculation)[0]['count(*)'],402,'all 400 donors plus matching and unknown rows, before page LIMIT');
+ const donorCount=f.db.prepare('select count(*) as n from stats where ('+where(list)+") and id like 'donor-%'").get()!.n;
+ assert.equal(donorCount,400);assert.equal(f.select({aggregate:'count'},calculation)[0]['count(*)'],403);
+ for(const shape of [{},{sort:'totalRubDesc,year,mileage,auctionDateDesc',page:1000000,pageSize:48},
+  {aggregate:'count'},{aggregate:'count',countIdentity:true},{aggregate:'models',page:1000000},{aggregate:'makes',page:1000000},
+  {aggregate:'colors',page:1000000},{aggregate:'census',censusFields:[...AJES_CENSUS_FIELDS],page:1000000}]){
+  const sql=ajesQuery({...query,...shape},calculation).sql;assert.equal(where(sql),where(list));
+  const url=new URL('http://87.242.72.57/api/');
+  url.search=new URLSearchParams({ip:'ffff:ffff:ffff:ffff:ffff:ffff:255.255.255.255',json:'',code:'x'.repeat(128),sql}).toString();
+  assert.ok(url.href.length<6000,`${JSON.stringify(shape)}: ${url.href.length} bytes`);
+ }
 });
 
 test('PW input cannot inject SQL and distinct global ranges cannot share the same raw cache selection',()=>{

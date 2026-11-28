@@ -30,6 +30,18 @@ export type AjesResolvedMakes = {exact:string[]};
 export const AJES_CENSUS_FIELDS = ['MARKA_NAME','MODEL_NAME','YEAR','GRADE','KUZOV','ENG_V','PRIV','KPP','TIME','PW','STATUS','COLOR','BODY_TYPE','VEHICLE_CATEGORY','FUEL'] as const;
 export type AjesCensusField = typeof AJES_CENSUS_FIELDS[number];
 export const AJES_CENSUS_REQUIRED_FIELDS = AJES_CENSUS_FIELDS.slice(0,12);
+function censusSql(table:AjesTable,where:string,fields:readonly AjesCensusField[],page:number):string {
+ const columns=fields.map(field=>field.toLowerCase()),grouping=fields.map((_,index)=>index+1).join(',');
+ const projection=columns.map(field=>`binary ${field} as ${field}`).join(', ');
+ return `select ${projection}, count(*) as census_count, sum(case when id regexp '^[A-Za-z0-9_-]{1,64}$' then 1 else 0 end) as census_valid_ids, sum(case when finish regexp '^[0-9]+([.][0-9]+)?$' and finish>0 and finish<=9007199254740991 then 1 else 0 end) as census_valid_finishes from ${table} where ${where} group by ${grouping} order by ${grouping} limit ${(page-1)*500},500`;
+}
+const encodedSqlLength=(sql:string)=>new URLSearchParams({sql}).toString().length-4;
+// The full census at the maximum page has the largest generated SQL envelope.
+// Reserve it for every WHERE, independent of requested aggregate/page/sort, plus
+// 240 bytes for the reviewed endpoint, encoded IPv6 and 128-character code
+// (even the longest mixed IPv6 fixture uses 230 before the encoded SQL).
+// Existing over-budget selections stay broad; no source aliases are discarded.
+const powerWhereBudget=6000-240-encodedSqlLength(censusSql('stats','',AJES_CENSUS_FIELDS,1000000));
 export type AjesQuery = {pickup?:boolean;salePeriod?:string; table?: AjesTable; aggregate?: 'count'|'models'|'makes'|'colors'|'census'; countIdentity?:boolean; censusFields?:AjesCensusField[]; correctionId?:string; sort?: string; color?:string; fuel?:string; transmission?:string; drive?:string; auctionGrade?:string; id?: string; make?: string; resolvedMakes?:AjesResolvedMakes; model?: string; modelFamilies?:string; resolvedModels?:AjesResolvedModels; chassis?:string; frameNumber?:string; lotNumber?:string; sourcePriceTo?:number; powerFrom?:number; powerTo?:number; yearFrom?: number; yearTo?: number; mileageFrom?:number; mileageTo?: number; engineFrom?:number; engineTo?:number; page?: number; pageSize?: number};
 const keys = new Set(['pickup','salePeriod','aggregate','countIdentity','censusFields','correctionId','sort','color','fuel','transmission','drive','auctionGrade','table','id','make','resolvedMakes','model','modelFamilies','resolvedModels','chassis','frameNumber','lotNumber','sourcePriceTo','powerFrom','powerTo','yearFrom','yearTo','mileageFrom','mileageTo','engineFrom','engineTo','page','pageSize']);
 /** These fixed predicates select the same raw rows. Sharing their cache identity
@@ -141,7 +153,7 @@ export function ajesQuery(input: unknown,driveIndex:CalculationIndex|null=null) 
     // COUNT and LIST share this global candidate scope. Local/manual cohorts
     // and unknown PW remain included; final admission still uses enriched facts.
     // Reserve the same URI envelope for every aggregate/page/sort of this WHERE.
-    const budget=Math.max(0,5600-new URLSearchParams({sql:where.join(' and ')}).toString().length);
+    const budget=Math.max(0,powerWhereBudget-encodedSqlLength(where.join(' and ')+' and '));
     const predicate=japanSourcePowerPredicate(low,high,driveIndex,budget);
     if(predicate.sql)where.push(predicate.sql);
   }
@@ -155,10 +167,7 @@ export function ajesQuery(input: unknown,driveIndex:CalculationIndex|null=null) 
     // Binary grouping preserves distinctions which the JS normalizer may treat
     // differently. The validity aggregate proves that representative IDs do
     // not conceal rejected or noncanonical supplier identities.
-    const columns=censusFields.map(field=>field.toLowerCase());
-    const grouping=censusFields.map((_,index)=>index+1).join(',');
-    const projection=columns.map(field=>`binary ${field} as ${field}`).join(', ');
-    return {table,empty,kind:'census' as const,censusFields,sql:`select ${projection}, count(*) as census_count, sum(case when id regexp '^[A-Za-z0-9_-]{1,64}$' then 1 else 0 end) as census_valid_ids, sum(case when finish regexp '^[0-9]+([.][0-9]+)?$' and finish>0 and finish<=9007199254740991 then 1 else 0 end) as census_valid_finishes from ${table} where ${where.join(' and ')} group by ${grouping} order by ${grouping} limit ${(page-1)*500},500`,page,pageSize:500};
+    return {table,empty,kind:'census' as const,censusFields,sql:censusSql(table,where.join(' and '),censusFields,page),page,pageSize:500};
   }
   if(q.aggregate==='count'&&q.countIdentity)return {table,empty,kind:'count' as const,identityCount:true,sql:`select count(*) as total, count(distinct binary id) as census_distinct_ids from ${table} where ${where.join(' and ')}`,page:1,pageSize:1};
   if(q.aggregate==='count')return {table,empty,kind:'count' as const,sql:`select count(*) from ${table} where ${where.join(' and ')}`,page:1,pageSize:1};

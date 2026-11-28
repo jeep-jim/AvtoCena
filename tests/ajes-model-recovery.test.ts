@@ -391,19 +391,19 @@ test('a short fresh LIST with incomplete aliases cannot become exact even with a
 for(const [fuel,shown] of [['petrol',2],['diesel',0]] as const)test(`a short ${fuel} LIST preserves its cards without attesting an unproved source-filter scope`,async t=>{
  const {api,state}=await realPath(t,['A4 AVANT','A4'],false,{make:'AUDI'});
  const result=await api.readAjesCatalogPage({market:'japan',make:'AUDI',model:'A4',fuel},undefined,{includeCount:false});
- assert.equal(result.items.length,shown);assert.equal(result.partial,true);assert.equal(result.stale,false);
+ assert.equal(result.items.length,shown);assert.equal(result.partial,false);assert.equal(result.stale,false);assert.equal(result.sourceScopeComplete,false);
  assert.equal(result.reads,1);assert.equal(result.hasMore,false);assert.equal(result.nextCursor,null);
  assert.equal(result.total,null,'even one exhausted LIST cannot prove cars excluded before local fuel enrichment');
  assert.equal(result.countSummary,null);assert.equal(state.queries.some(q=>q.aggregate==='count'),false);
  assert.ok(state.snapshotReads>0,'source-scope uncertainty does not skip the local admission snapshot');
 });
 
-test('an unproved source-filter scope keeps its fresh cursor while reporting public incompleteness',async t=>{
+test('an unproved source-filter scope keeps its fresh cursor while separating source scope from transport failure',async t=>{
  const {api,state}=await realPath(t,Array(49).fill('A4 AVANT'),false,{make:'AUDI'});
  const params={market:'japan',make:'AUDI',model:'A4',fuel:'petrol'},pages=[];let after:undefined|string;
  for(let page=1;page<=3;page++){
   const result=await api.readAjesCatalogPage({...params,page:String(page),...(after?{after}:{})},undefined,{includeCount:false});
-  assert.equal(result.partial,true);assert.equal(result.selectionIncomplete,false);assert.equal(result.stale,false);
+  assert.equal(result.partial,false);assert.equal(result.selectionIncomplete,false);assert.equal(result.stale,false);assert.equal(result.sourceScopeComplete,false);
   assert.equal(result.total,null);assert.equal(result.countSummary,null);assert.equal(result.hasMore,page<3);
   if(page<3)assert.match(result.nextCursor,new RegExp('^j1\\.'+(page+1)+'\\.0\\.'+(page+1)+'\\.'));
   else assert.equal(result.nextCursor,null);
@@ -415,7 +415,7 @@ test('an unproved source-filter scope keeps its fresh cursor while reporting pub
  assert.ok(state.snapshotReads>0);
 });
 
-test('actual AjesCatalog treats an unproved zero as incomplete recovery instead of definitive empty',async t=>{
+test('actual AjesCatalog labels a source-scoped empty selection without an outage or a global empty claim',async t=>{
  const {api}=await realPath(t,['A4 AVANT','A4'],false,{make:'AUDI'});
  const state={api,sidebar:null as any};(globalThis as any).__scopeCatalog=state;t.after(()=>{delete (globalThis as any).__scopeCatalog;});
  const mocks:Record<string,string>={
@@ -448,8 +448,10 @@ test('actual AjesCatalog treats an unproved zero as incomplete recovery instead 
  const html=renderToStaticMarkup(await resolveServer(await mod.exports.AjesCatalog({params})));
  assert.doesNotMatch(html,/По выбранным параметрам автомобили не найдены/);
  assert.doesNotMatch(html,/Вы посмотрели все доступные предложения/);
- assert.match(state.sidebar.resultError,/Не удалось обновить автомобили/,'the actual server page selects the existing retained-card recovery boundary');
- assert.match(html,/Полный список пока недоступен/);assert.match(html,/Повторить/);
+ assert.equal(state.sidebar.resultError,undefined,'a successful source response is not a transport failure');
+ assert.match(html,/В этой подборке пока нет автомобилей/);assert.match(html,/Вы просмотрели эту подборку/);
+ assert.doesNotMatch(html,/Полный список пока недоступен|Повторить|Не удалось обновить автомобили/);
+ assert.doesNotMatch(html,/data-catalog-market-count="0"/,'a source-scoped empty page does not manufacture exact zero inventory');
  const empty=renderToStaticMarkup(await resolveServer(await mod.exports.AjesCatalog({params:{market:'japan',make:'AUDI',model:'UNSEEN MODEL'}})));
  assert.match(empty,/По выбранным параметрам автомобили не найдены/,'a genuinely empty safe scope keeps its definitive empty state');
  assert.equal(state.sidebar.resultError,undefined);
