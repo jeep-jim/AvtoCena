@@ -63,7 +63,12 @@ test('an unreadable collection switch stays fail-closed and visibly unavailable 
  assert.equal(data.disabled,false);assert.equal(data.unavailable,true);
  const markup=await html(await api.AjesRail({prepared:Promise.resolve(data)}));
  assert.match(markup,/aria-label="Япония"/);assert.match(markup,/Не удалось загрузить автомобили/);
- assert.match(markup,/Количество уточняется/);assert.equal(state.pageReads.length,0);assert.equal(state.countReads.length,0);
+ assert.match(markup,/data-status="unavailable"/);assert.match(markup,/data-japan-count-status="pending"/);
+ assert.match(markup,/data-japan-loaded-count="0"/);
+ assert.match(markup,/data-japan-count-label="true"[^>]*>Показано 0 · общий итог уточняется</);
+ assert.doesNotMatch(markup,/data-catalog-market-count/);assert.doesNotMatch(markup,/Найдено\s*(?:до\s*)?0(?:\s|<|$)/);
+ assert.doesNotMatch(markup,/data-car-id=/);
+ assert.equal(state.pageReads.length,0);assert.equal(state.countReads.length,0);
 });
 
 test('an explicitly disabled Japanese source is still hidden without supplier page or count reads',async t=>{
@@ -103,8 +108,9 @@ test('a Japanese power preview preserves supplier and unknown card facts without
  const markup=await html(await api.AjesRail({params:{powerTo:'160'}}));
  assert.match(markup,/data-japan-auction-rail="true"/);assert.match(markup,/data-status="ready"/);
  assert.doesNotMatch(markup,/Мощность по данным поставщика:|Мощность не указана:|Отбор не подтверждает право/);
- assert.match(markup,/Количество уточняется/);
- assert.doesNotMatch(markup,/data-catalog-market-count="0"/);
+ assert.match(markup,/data-japan-count-status="partial"/);assert.match(markup,/data-japan-loaded-count="2"/);
+ assert.match(markup,/data-japan-count-label="true"[^>]*>Показано 2 · общий итог уточняется</);
+ assert.doesNotMatch(markup,/data-catalog-market-count/);assert.doesNotMatch(markup,/Найдено\s*(?:до\s*)?0(?:\s|<|$)/);
  assert.equal((markup.match(/data-car-id=/g)||[]).length,2);
  assert.deepEqual(state.cardOffers,original,'the rail passes each known/unknown source fact unchanged to its card');
  assert.equal(japanSupplierPowerLabel(state.cardOffers[0]),'160 л.с. · поставщик');
@@ -113,3 +119,4 @@ test('a Japanese power preview preserves supplier and unknown card facts without
  assert.deepEqual(state.page.items,original,'rendering cannot fill missing power or rewrite the supplier fact');
  assert.equal(state.pageReads[0].q.powerTo,'160');assert.equal(state.countReads[0].powerTo,'160');
 });
+

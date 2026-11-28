@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {readFile} from 'node:fs/promises';
+import {readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
 import {stripTypeScriptTypes} from 'node:module';
 import {createAjesSourceCountSummary,isAjesSourceCountSummary,AJES_SOURCE_COUNT_FRESH_MS,AJES_SOURCE_COUNT_RETAINED_MS,AJES_SOURCE_COUNT_PREDICATE_VERSION} from '../apps/web/lib/catalog/ajes-source-count';
@@ -60,9 +60,9 @@ test('source evidence rejects invalid, partial, stale-mislabeled and context-mis
 });
 
 const hash=(value:unknown)=>createHash('sha256').update(JSON.stringify(value)).digest('hex');
-const catalogText=await readFile(new URL('../apps/web/lib/catalog/ajes-catalog.ts',import.meta.url),'utf8');
-const censusText=await readFile(new URL('../apps/web/lib/catalog/ajes-census.ts',import.meta.url),'utf8');
-const cacheText=await readFile(new URL('../apps/web/lib/catalog/detail-read-cache.ts',import.meta.url),'utf8');
+const catalogText=readFileSync(new URL('../apps/web/lib/catalog/ajes-catalog.ts',import.meta.url),'utf8');
+const censusText=readFileSync(new URL('../apps/web/lib/catalog/ajes-census.ts',import.meta.url),'utf8');
+const cacheText=readFileSync(new URL('../apps/web/lib/catalog/detail-read-cache.ts',import.meta.url),'utf8');
 const stripped=(source:string)=>stripTypeScriptTypes(source,{mode:'transform'}).replace(/\bexport\s+/g,'');
 const Cache=new Function(stripped(cacheText)+'\nreturn DetailReadCache;')();
 const upper=catalogText.slice(catalogText.indexOf('type AjesAvailableCountSummary='),catalogText.indexOf('export const readAjesCount='));
