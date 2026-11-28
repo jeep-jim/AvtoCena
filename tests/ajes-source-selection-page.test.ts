@@ -58,12 +58,35 @@ function oracle(rows:WireRow[],index:CalculationIndex|null,editorial=emptyEditor
 const price=(offer:any)=>Number(offer.operational.raw.finalPriceJpy);
 const order=(sort:'totalRub'|'totalRubDesc')=>(a:any,b:any)=>(sort==='totalRub'?price(a)-price(b):price(b)-price(a))||a.id.localeCompare(b.id);
 
+async function drainPowerPages(source:ReturnType<typeof oracle>,rows:WireRow[],query:AjesQuery,selection:AjesSourceSelection,
+ filter:ReturnType<typeof ajesResultFilter>,index:CalculationIndex){
+ const epoch=ajesPowerEvidenceEpoch({runtimeSha:'f'.repeat(40),editorialRevision:emptyEditorial.revision,calculationDigest:index.digest});
+ let after:string|undefined,finished=false;const actual:any[]=[],pages:any[]=[];
+ for(let page=1;page<=Math.ceil(rows.length/24)*2+4;page++){
+  const previous=after,before=source.calls.length;
+  const result=await readPowerOrderedAjesPage({page,pageSize:24,after,evidenceEpoch:epoch,cursorKey:JSON.stringify({query,selection}),
+   itemKey:offer=>offer.id,known:offer=>!japanUnknownPower(offer),sourceSelection:selection,
+   read:async(sourcePage,phase)=>{
+    const value=source.read({...query,page:sourcePage,pageSize:24,sourceSelection:selection,sourcePhase:phase});
+    return {...value,items:value.items.filter(offer=>filter.matches(offer)&&japanUnknownPower(offer)===(phase==='u'))};
+   }});
+  assert(source.calls.length-before<=8);assert.equal(result.stale,false);assert.equal(result.partial,false);
+  pages.push(result);actual.push(...result.items);after=result.nextCursor??undefined;
+  if(!result.hasMore){finished=true;break;}
+  assert(after&&after!==previous,'a bounded broad unknown scan keeps a progressing continuation');
+ }
+ assert(finished,'the finite K/U source must eventually exhaust without dropping unknown rows');
+ return {actual,pages};
+}
+
 for(const sort of ['totalRubDesc','totalRub'] as const)test(`source ${sort} skips a long unrelated window and fills 24→48 before the unknown lane`,async t=>{
  const manual=fact('Toyota','MANUAL',120);manual.sources.powerHp={kind:'manual',url:'https://example.com/offline-manual-fixture'};
  const index=knowledge([fact('Toyota','LOCAL',150),fact('Toyota','STRONG',180),manual]);
  const editorial=emptyEditorial;
  const rows=[
   ...Array.from({length:240},(_,i)=>raw('expensive-unknown-'+i,{PW:'',FINISH:30000000-i*1000})),
+  ...Array.from({length:240},(_,i)=>raw('expensive-zero-'+i,{PW:'0',FINISH:29000000-i*1000})),
+  ...Array.from({length:240},(_,i)=>raw('expensive-composite-'+i,{PW:'133,136',FINISH:28000000-i*1000})),
   ...Array.from({length:240},(_,i)=>raw('expensive-over-'+i,{PW:'280',FINISH:20000000-i*1000})),
   // These PW matches are rejected by the higher-priority local 180 hp fact.
   ...Array.from({length:27},(_,i)=>raw('local-over-'+i,{MODEL_NAME:'STRONG',FINISH:14000000-i*1000})),
@@ -91,7 +114,7 @@ for(const sort of ['totalRubDesc','totalRub'] as const)test(`source ${sort} skip
  for(const id of ['fullwidth-power','entity-power','space-power'])assert.equal(japanSupplierPower(all.find(row=>row.id==='ajes-stats-'+id))?.hp,150);
  let clock=0,after:string|undefined;const actual:any[]=[],pages:any[]=[];
  const epoch=ajesPowerEvidenceEpoch({runtimeSha:'f'.repeat(40),editorialRevision:editorial.revision,calculationDigest:index.digest});
- for(let page=1;page<=Math.ceil(expected.length/24)+2;page++){
+ for(let page=1;page<=Math.ceil(rows.length/24)*2+4;page++){
   const before=source.calls.length;
   const result=await readPowerOrderedAjesPage({page,pageSize:24,after,evidenceEpoch:epoch,cursorKey:JSON.stringify({sort,selection:resolved.selection}),
    itemKey:offer=>offer.id,known:offer=>!japanUnknownPower(offer),sourceSelection:resolved.selection!,minimumReads:2,now:()=>clock,
@@ -100,18 +123,85 @@ for(const sort of ['totalRubDesc','totalRub'] as const)test(`source ${sort} skip
     return {...selected,items:selected.items.filter(offer=>filter.matches(offer)&&japanUnknownPower(offer)===(phase==='u'))};
    }});
   assert(source.calls.length-before<=8,'the ordinary per-request source admission budget remains bounded');
-  assert.equal(result.partial,false);assert.equal(result.stale,false);assert.equal(result.scanLimited,false);
-  assert.equal(result.items.length,Math.min(24,expected.length-actual.length),'fill the requested page despite a slow previous source read');
+  assert.equal(result.partial,false);assert.equal(result.stale,false);
+  if(page<=2){assert.equal(result.scanLimited,false);assert.equal(result.items.length,24,'fill the known page despite a slow previous source read');}
+  // U intentionally retains the broad source. A long run of rejected known
+  // values may consume one bounded request, but cannot imply exhaustion.
+  if(result.scanLimited){assert.equal(result.hasMore,true);assert(result.nextCursor);}
   pages.push(result);actual.push(...result.items);after=result.nextCursor??undefined;if(!result.hasMore)break;
  }
  assert.equal(pages[0].items.length,24);assert.equal(pages[1].items.length,24);
+ assert.equal(pages.at(-1).hasMore,false,'the complete finite unknown lane reaches real exhaustion');
  assert.deepEqual(actual.map(row=>row.id),expected.map(row=>row.id));assert.equal(new Set(actual.map(row=>row.id)).size,actual.length);
  assert.equal(actual.filter(row=>row.id.includes('expensive-over')||row.id.includes('local-over-')).length,0);
  const firstUnknown=actual.findIndex(japanUnknownPower);assert(firstUnknown>=48);assert(actual.slice(firstUnknown).every(japanUnknownPower));
  assert.equal(actual.filter(row=>row.id==='ajes-stats-local-override').length,1);
- assert(source.calls.filter(call=>call.phase==='k').every(call=>!call.rawIds.some(id=>id.startsWith('expensive-unknown-')||id.startsWith('expensive-over-'))));
+ assert(source.calls.filter(call=>call.phase==='k').every(call=>!call.rawIds.some(id=>['expensive-unknown-','expensive-zero-','expensive-composite-','expensive-over-'].some(prefix=>id.startsWith(prefix)))));
+ for(const prefix of ['expensive-unknown-','expensive-zero-','expensive-composite-'])assert.equal(actual.filter(row=>row.id.startsWith('ajes-stats-'+prefix)).length,240);
  if(sort==='totalRubDesc')assert(pages[0].reads>=3,'slow locally rejected candidate pages are refilled before returning visible page one');
  assert(source.calls.some(call=>call.phase==='u'));
+});
+
+for(const sort of ['totalRubDesc','totalRub'] as const)test(`source ${sort} preserves normalized hp below the numeric prefix bound and all later unknown forms`,async t=>{
+ const index=knowledge([]);
+ const normalized=[['fullwidth','１５０'],['entity','&#49;50'],['mixed-width','1５０'],['circled','①⑤⓪'],
+  ['superscript','¹⁵⁰'],['math-digits','𝟙𝟝𝟘'],['unicode-space','\u00a0\u2003150\u3000'],['zero-prefix','0１５０'],
+  ['mixed-entity','1&#53;0'],['ascii-space','\t150\n'],['ascii-zero','000150']];
+ const unknown=[['positive-prefix','150PS'],['internal-space','150 180'],['exponent','1e2'],['decimal','150.0'],
+  ['composite','133,136'],['large-composite','250,150'],['large-prefix','250hp'],['unavailable','N/A'],['zero','0'],['blank','']];
+ const rows=[...Array.from({length:52},(_,i)=>raw('range-known-'+i,{FINISH:1000000-i*1000})),
+  ...normalized.map(([id,PW],i)=>raw(id,{PW,FINISH:2000000+i*1000})),
+  ...unknown.map(([id,PW],i)=>raw(id,{PW,FINISH:4000000+i*1000})),
+  raw('below',{PW:'99',FINISH:5000000}),raw('above',{PW:'161',FINISH:5001000}),
+  raw('normalized-below',{PW:'０９９',FINISH:5002000}),raw('normalized-above',{PW:'１７０',FINISH:5003000})];
+ const source=oracle(rows,index);t.after(source.close);
+ const power=buildJapanPowerCandidatePlan({powerFrom:100,powerTo:160,index,editorial:emptyEditorial});
+ const resolved=resolveJapanSourceSelection({power,sourceModels:source.sourceModels,directoryComplete:true});assert(resolved.selection);assert(resolved.complete);
+ const query:AjesQuery={table:'stats',sort,powerFrom:100,powerTo:160},filter=ajesResultFilter({market:'japan',powerFrom:100,powerTo:160});
+ const expectedKnown=rows.filter(row=>row.ID.startsWith('range-known-')||normalized.some(([id])=>id===row.ID)).map(row=>source.admit(row)!);
+ const expectedUnknown=unknown.map(([id])=>source.admit(rows.find(row=>row.ID===id)!)!);
+ for(const offer of expectedKnown)assert.equal(japanSupplierPower(offer)?.hp,150);
+ for(const offer of expectedUnknown)assert.equal(japanUnknownPower(offer),true);
+ const {actual,pages}=await drainPowerPages(source,rows,query,resolved.selection,filter,index);
+ assert.equal(pages[0].items.length,24);assert.equal(pages[1].items.length,24);
+ const expected=[...expectedKnown.sort(order(sort)),...expectedUnknown.sort(order(sort))];
+ assert.deepEqual(actual.map(row=>row.id),expected.map(row=>row.id));assert.equal(new Set(actual.map(row=>row.id)).size,actual.length);
+ const kIds=new Set(source.calls.filter(call=>call.phase==='k').flatMap(call=>call.rawIds));
+ for(const [id] of normalized)assert(kIds.has(id),'normalization must not lose a real 150 hp row before local filtering');
+ assert(!kIds.has('composite'));assert(!kIds.has('large-composite'));
+ const uIds=new Set(source.calls.filter(call=>call.phase==='u').flatMap(call=>call.rawIds));
+ for(const [id] of unknown)assert(uIds.has(id),'unknown PW remains reachable even with a positive or out-of-range numeric prefix');
+ assert(actual.slice(expectedKnown.length).every(japanUnknownPower));
+});
+
+test('coarse heavy-family SQL preserves passenger pages while exact and suffix trucks and buses are rejected',async t=>{
+ const index=knowledge([]);
+ const families=[['TOYOTA','COASTER'],['TOYOTA','DYNA'],['TOYOTA','TOYOACE'],['ISUZU','ELF'],['ISUZU','FORWARD'],
+  ['MITSUBISHI','CANTER'],['MITSUBISHI','ROSA'],['MITSUBISHI FUSO','SUPER GREAT'],['FUSO','AERO QUEEN'],
+  ['UD','QUON'],['UD TRUCKS','CONDOR'],['NISSAN DIESEL','CONDOR']];
+ const exact=families.flatMap(([MARKA_NAME,MODEL_NAME],i)=>Array.from({length:16},(_,j)=>raw(`heavy-exact-${i}-${j}`,{MARKA_NAME,MODEL_NAME,FINISH:30000000-i*100-j})));
+ const suffix=families.flatMap(([MARKA_NAME,model],i)=>[' WORK','-WORK','/WORK'].map((ending,j)=>raw(`heavy-suffix-${i}-${j}`,{MARKA_NAME,MODEL_NAME:model+ending,FINISH:20000000-i*100-j})));
+ const otherExcluded=[raw('hino-bus',{MARKA_NAME:'HINO',MODEL_NAME:'SELEGA WORK',FINISH:19000000}),
+  raw('explicit-bus',{MODEL_NAME:'GENERIC',BODY_TYPE:'bus',FINISH:19000001}),raw('explicit-coach',{MODEL_NAME:'GENERIC',BODY_TYPE:'coach',FINISH:19000002})];
+ const passengers=[raw('passenger-ranger',{MARKA_NAME:'FORD',MODEL_NAME:'RANGER',FINISH:2000000}),
+  raw('passenger-suv',{MARKA_NAME:'ISUZU',MODEL_NAME:'MU-X',FINISH:2000001}),
+  raw('passenger-minivan',{MARKA_NAME:'MITSUBISHI',MODEL_NAME:'DELICA',FINISH:2000002}),
+  raw('passenger-van',{MODEL_NAME:'HIACE',FINISH:2000003}),
+  ...Array.from({length:56},(_,i)=>raw('passenger-'+i,{FINISH:1000000-i*1000}))];
+ const rows=[...exact,...suffix,...otherExcluded,...passengers],source=oracle(rows,index);t.after(source.close);
+ for(const row of [...exact,...suffix,...otherExcluded])assert.equal(source.admit(row),null,'the unchanged local admission rejects the protected vehicle');
+ const expected=passengers.map(row=>source.admit(row));assert(expected.every(Boolean));
+ const power=buildJapanPowerCandidatePlan({powerTo:160,index,editorial:emptyEditorial});
+ const resolved=resolveJapanSourceSelection({power,sourceModels:source.sourceModels,directoryComplete:true});assert(resolved.selection);
+ const query:AjesQuery={table:'stats',sort:'totalRubDesc',powerTo:160},filter=ajesResultFilter({market:'japan',powerTo:160});
+ const {actual,pages}=await drainPowerPages(source,rows,query,resolved.selection,filter,index);
+ assert.equal(pages[0].items.length,24);assert.equal(pages[1].items.length,24);assert(pages[0].reads>=3,'local suffix rejection must refill the passenger page');
+ assert.deepEqual(actual.map(row=>row.id),expected.sort(order('totalRubDesc')).map(row=>row!.id));
+ assert.equal(new Set(actual.map(row=>row.id)).size,60);
+ const rawIds=new Set(source.calls.flatMap(call=>call.rawIds));
+ assert(exact.every(row=>!rawIds.has(row.ID)),'exact protected families are removed before LIMIT');
+ assert(suffix.every(row=>rawIds.has(row.ID)),'the finite source fixture exercises conservative suffix candidates');
+ assert(rawIds.has('explicit-bus')&&rawIds.has('explicit-coach'));
 });
 
 test('unknown body schema retains exact encyclopedia/editorial candidates and an incomplete scope',async t=>{

@@ -1,6 +1,6 @@
 import type {CalculationIndex} from '../encyclopedia/calculation-index';
 import {pickupSourceCandidateSql} from './pickup-body';
-import {japanSourceSelectionSql} from './japan-source-selection-sql';
+import {japanSourceSelectionSql,japanSourceSelectionHeavySqlExclusion} from './japan-source-selection-sql';
 import type {AjesSourceSelection} from './japan-source-selection';
 import {japanDriveSql} from './japan-drive';
 import {auctionSaleRange} from "./auction-sale-period";
@@ -100,12 +100,11 @@ export function ajesQuery(input: unknown,driveIndex:CalculationIndex|null=null) 
   }
   if (table==='stats') where.push("status='Sold'",'finish>0');
   where.push("marka_name!=''","model_name!=''");
-  // Restore the older =/LIKE grammar for plain/model/filter directories while
-  // grouping identical families to stay below the existing URI budget. This
-  // does not establish a supplier-wide REGEXP restriction. Drive and the new
-  // internal candidate selections retain the equivalent compact form; their
-  // own predicates already use REGEXP and need room within the URI budget.
-  where.push(q.drive||q.sourceSelection?heavyVehicleSqlExclusion(false,false,true):japanHeavyVehicleSqlExclusion(),motorcycleSqlExclusion());
+  // Selection candidates use a broader exact-family IN exclusion to fit the
+  // existing URI budget without adding REGEXP grammar. ajesLot still rejects
+  // heavy-family suffixes. Ordinary and explicit-drive queries keep their
+  // established predicates; the broader selection keeps a distinct cache key.
+  where.push(q.sourceSelection?japanSourceSelectionHeavySqlExclusion():q.drive?heavyVehicleSqlExclusion(false,false,true):japanHeavyVehicleSqlExclusion(),motorcycleSqlExclusion());
   where.push(japanMakeSqlExclusion(),japanVehicleFamilySqlExclusion());
   for(const [column,parts] of [['marka_name',makes]] as const){if(parts.length===1)where.push(`${column}='${parts[0]}'`);else if(parts.length)where.push(`${column} in (${parts.map(v=>`'${v}'`).join(',')})`);}
   const exactModels=models.length>1?`model_name in (${models.map(v=>`'${v}'`).join(',')})`:models.length?`model_name='${models[0]}'`:null;
