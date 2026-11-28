@@ -57,8 +57,8 @@ test('actual catalog wrapper keeps exact model cards on directory failure and ne
  const state={empty:false,lists:0,counts:0,queries:[] as any[]};(globalThis as any).__modelRecovery=state;
  const stubs:Record<string,string>={
   'server-only':'','next/headers':"export const headers=async()=>new Map([['x-real-ip','127.0.0.1']]);",
-  './ajes-runtime':"export const ajesClient={read:async()=>{globalThis.__modelRecovery.counts++;throw Error('count must not run');}};",
-  './ajes-public':`export const readAjesPublicEvidenceSnapshot=()=>{throw Error("unexpected power snapshot");};export const cappedAjesQuery=async q=>q;export const readAjesPublic=async q=>{const s=globalThis.__modelRecovery;s.lists++;s.queries.push(q);return {page:q.page||1,pageSize:24,received:s.empty?0:24,items:s.empty?[]:Array.from({length:24},(_,i)=>({id:i?'toyota-exact-'+i:'toyota-exact'})),observedAt:new Date().toISOString()};};`,
+  './ajes-runtime':"export const ajesClient={read:async()=>{globalThis.__modelRecovery.counts++;throw Error('count fixture unavailable');}};",
+  './ajes-public':`export const readAjesPublicEvidenceSnapshot=()=>({editorial:{revision:'fixture-model-recovery',entries:{}},calculationIndex:null});export const cappedAjesQuery=async q=>q;export const readAjesPublic=async q=>{const s=globalThis.__modelRecovery;s.lists++;s.queries.push(q);return {page:q.page||1,pageSize:24,received:s.empty?0:24,items:s.empty?[]:Array.from({length:24},(_,i)=>({id:i?'toyota-exact-'+i:'toyota-exact'})),observedAt:new Date().toISOString()};};`,
   './ajes-client':"export class AjesUnavailable extends Error{constructor(reason){super(reason);this.reason=reason;}};export const readAjesModelDirectory=async()=>{throw new AjesUnavailable('local_busy');};export const readAjesMakeDirectory=async()=>({makes:[]});",
   './ajes-result-filter':"export const ajesResultFilter=()=>({active:false,priceFilter:false,matches:()=>true});",
   './storage':"export const publicOffer=x=>x;",'./market-page':"export const sortCatalogRows=x=>x;",
@@ -68,7 +68,7 @@ test('actual catalog wrapper keeps exact model cards on directory failure and ne
   './japan-preview-parameters':"export const japanPreviewParameters=()=>{throw Error('not attested');};",'../encyclopedia/calculation-evidence':"export const hasEncyclopediaCalculationEvidence=()=>false;",
  };
  try{
-  const built=await build({entryPoints:['apps/web/lib/catalog/ajes-catalog.ts'],bundle:true,platform:'node',format:'cjs',write:false,external:['react'],plugins:[{name:'model-recovery-fixture',setup(b){b.onResolve({filter:/.*/},a=>a.path in stubs?{path:a.path,namespace:'stub'}:undefined);b.onLoad({filter:/.*/,namespace:'stub'},a=>({contents:stubs[a.path]}));}}]});
+  const built=await build({entryPoints:['apps/web/lib/catalog/ajes-catalog.ts'],bundle:true,platform:'node',format:'cjs',write:false,external:['react'],define:{'process.env.AVTOCENA_RELEASE_SHA':JSON.stringify('a'.repeat(40))},plugins:[{name:'model-recovery-fixture',setup(b){b.onResolve({filter:/.*/},a=>a.path in stubs?{path:a.path,namespace:'stub'}:undefined);b.onLoad({filter:/.*/,namespace:'stub'},a=>({contents:stubs[a.path]}));}}]});
   const mod={exports:{} as any};new Function('require','module','exports',built.outputFiles[0].text)((id:string)=>id==='react'?{cache:(fn:any)=>fn}:require(id),mod,mod.exports);
   const params={market:'japan',make:'TOYOTA',model:'COROLLA',city:'Новокузнецк'};
   const result=await mod.exports.readAjesCatalogPage(params);
@@ -77,8 +77,8 @@ test('actual catalog wrapper keeps exact model cards on directory failure and ne
   state.empty=true;const empty=await mod.exports.readAjesCatalogPage(params);
   assert.deepEqual(empty.items,[]);assert.equal(empty.partial,true);assert.equal(empty.selectionIncomplete,true);
   assert.equal(empty.total,null);assert.equal(empty.countSummary,null);assert.equal(empty.hasMore,false);assert.equal(empty.nextCursor,null);
-  await assert.rejects(mod.exports.readAjesCountSummary(JSON.stringify(params)),/directory_unavailable/);
-  assert.equal(state.lists,2);assert.equal(state.counts,0);
+  await assert.rejects(mod.exports.readAjesCountSummary(JSON.stringify(params)),/count fixture unavailable/,'an explicit scalar request keeps its real source failure rather than manufacturing zero');
+  assert.equal(state.lists,2);assert.equal(state.counts,1,'only the explicit counter reads the unresolved source candidate query');
  }finally{delete (globalThis as any).__modelRecovery;}
 });
 
@@ -511,7 +511,9 @@ test('raw Japanese make selections and legacy display aliases reach the same exa
    const page=await api.readAjesCatalogPage(params,undefined,{includeCount:false});
    assert.equal(page.items.length,1);assert.equal(page.partial,false);assert.equal(page.total,1);
    assert.equal((await api.readAjesResolvedPublic(params)).items.length,1);
-   await assert.rejects(api.readAjesCountSummary(JSON.stringify(params)),/census_source_snapshot_unavailable/);
+   const sourceCount=await api.readAjesCountSummary(JSON.stringify(params));
+   assert.equal(sourceCount.total,1);assert.equal(sourceCount.upperBound,true);assert.equal(sourceCount.sourceScopeComplete,true);
+   assert.equal(sourceCount.sourceCountProof.sourceTotal,1);assert.equal(Object.hasOwn(sourceCount,'countProof'),false);
    const lists=state.queries.filter(q=>!q.aggregate);assert.ok(lists.every(q=>q.make===make));
   }
  }
@@ -532,7 +534,9 @@ test('source make aliases beyond twenty retain the identical LIST, COUNT, model-
  const directory=await api.readAjesDirectory(params);
  assert.equal(directory.models.length,27);assert.equal(directory.stale,false);
  assert.deepEqual(new Set(directory.models.map((row:any)=>row.make)),new Set(audiMakeAliases));
- await assert.rejects(api.readAjesCountSummary(JSON.stringify(params)),/census_source_snapshot_unavailable/,'the source-count scope is tested without claiming a positive admitted producer');
+ const sourceCount=await api.readAjesCountSummary(JSON.stringify(params));
+ assert.equal(sourceCount.total,27);assert.equal(sourceCount.upperBound,true);assert.equal(sourceCount.sourceScopeComplete,true);
+ assert.equal(sourceCount.sourceCountProof.sourceTotal,27);assert.equal(Object.hasOwn(sourceCount,'countProof'),false,'the scalar is not an admitted census');
  const scoped=state.queries.filter(query=>query.model==='A4');
  assert.ok(scoped.some(query=>!query.aggregate)&&scoped.some(query=>query.aggregate==='count')&&scoped.some(query=>query.aggregate==='models'));
  const expected=new Set(rows.filter(row=>row.model==='A4'&&row.make!=='BMW').map(row=>row.id));
@@ -575,8 +579,10 @@ test('an unavailable or stale make directory preserves exact rows but cannot att
   assert.equal((await api.readAjesResolvedPublic(raw)).partial,true);
   const models=await api.readAjesDirectory(raw);assert.equal(models.stale,true);
   assert.deepEqual(models.models.map((row:any)=>[row.make,row.model]),[['BENZ','SOURCE MODEL']]);
-  await assert.rejects(api.readAjesCountSummary(JSON.stringify(raw)),/directory_unavailable/);
-  assert.equal(state.queries.some(q=>q.aggregate==='count'),false,'an unresolved directory must not issue or publish a misleading COUNT');
+  const rawCount=await api.readAjesCountSummary(JSON.stringify(raw));
+  assert.equal(rawCount.total,1);assert.equal(rawCount.upperBound,true);assert.equal(rawCount.sourceScopeComplete,false);
+  assert.equal(rawCount.sourceCountProof.directoryComplete,false);assert.equal(Object.hasOwn(rawCount,'countProof'),false);
+  assert.equal(state.queries.filter(q=>q.aggregate==='count').length,1,'the explicit scalar describes only the unresolved candidate query');
   const legacy={market:'japan',make:'Mercedes-Benz'};
   if(directory==='unavailable'){
    const empty=await api.readAjesCatalogPage(legacy,undefined,{includeCount:false});
@@ -586,7 +592,10 @@ test('an unavailable or stale make directory preserves exact rows but cannot att
   }else{
    const saved=await api.readAjesResolvedPublic(legacy);assert.equal(saved.items.length,1);assert.equal(saved.partial,true);
   }
-  await assert.rejects(api.readAjesCountSummary(JSON.stringify(legacy)),/directory_unavailable/);
+  const legacyCount=await api.readAjesCountSummary(JSON.stringify(legacy));
+  assert.equal(legacyCount.total,directory==='unavailable'?0:1);assert.equal(legacyCount.upperBound,true);
+  assert.equal(legacyCount.sourceScopeComplete,false);assert.equal(legacyCount.sourceCountProof.directoryComplete,false);
+  assert.equal(Object.hasOwn(legacyCount,'countProof'),false,'a candidate zero cannot attest the unresolved full selection');
  }
 });
 
@@ -609,7 +618,9 @@ test('the old Mazda/3 URL resolves through real catalog, count and cross-market 
  assert.ok(result.items.every((row:any)=>row.market==='japan'&&row.id.startsWith('ajes-stats-')));
  const direct=await api.readAjesResolvedPublic(input);
  assert.equal(direct.partial,false);assert.deepEqual(new Set(direct.items.map((row:any)=>row.model)),new Set(matched));
- await assert.rejects(api.readAjesCountSummary(JSON.stringify(input)),/census_source_snapshot_unavailable/);
+ const sourceCount=await api.readAjesCountSummary(JSON.stringify(input));
+ assert.equal(sourceCount.total,matched.length);assert.equal(sourceCount.upperBound,true);assert.equal(sourceCount.sourceScopeComplete,true);
+ assert.equal(sourceCount.sourceCountProof.sourceTotal,matched.length);assert.equal(Object.hasOwn(sourceCount,'countProof'),false);
  const recommendations=await api.loadRelatedRecommendations({id:'china-legacy',markets:['japan']});
  assert.equal(recommendations.partial,false);assert.equal(recommendations.familyModel,'3');
  assert.equal(recommendations.crossMarketGroups.length,1);assert.equal(recommendations.crossMarketGroups[0].market,'japan');
@@ -646,8 +657,10 @@ test('real legacy paths keep stale-directory cards partial and reject a false ze
    assert.equal(empty.total,null);assert.equal(empty.countSummary,null);assert.equal(empty.hasMore,false);assert.equal(empty.nextCursor,null);
    await assert.rejects(api.readAjesResolvedPublic(input),/directory_unavailable/);
   }
-  await assert.rejects(api.readAjesCountSummary(JSON.stringify(input)),/directory_unavailable/);
-  assert.equal(state.queries.some(query=>query.aggregate==='count'),false);
+  const sourceCount=await api.readAjesCountSummary(JSON.stringify(input));
+  assert.equal(sourceCount.total,names.length);assert.equal(sourceCount.upperBound,true);assert.equal(sourceCount.sourceScopeComplete,false);
+  assert.equal(sourceCount.sourceCountProof.directoryComplete,false);assert.equal(Object.hasOwn(sourceCount,'countProof'),false);
+  assert.equal(state.queries.filter(query=>query.aggregate==='count').length,1);
   const recommendations=await api.loadRelatedRecommendations({id:'china-legacy',markets:['japan']});
   assert.equal(recommendations.partial,true);
   assert.deepEqual(recommendations.crossMarketGroups.flatMap((group:any)=>group.items.map((row:any)=>row.model)),names);

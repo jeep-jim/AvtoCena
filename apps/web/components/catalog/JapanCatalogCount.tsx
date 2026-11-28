@@ -22,7 +22,7 @@ export function JapanCatalogCount({queryKey,summary,initialCount}:{queryKey:stri
  const count=ajesVisibleCount(current,shown),explanation=ajesCountExplanation(current,shown);
  return <span data-japan-count-status={count.status} data-japan-loaded-count={count.loadedCount} data-japan-source-total={count.status==='bounded'||count.status==='source'?current?.total:undefined} data-japan-count-proof={count.total!==undefined?current?.countProof?.kind:current?.sourceCountProof?.kind} data-japan-count-query-hash={count.total!==undefined?current?.countProof?.requestedQueryHash:current?.sourceCountProof?.requestedQueryHash} data-japan-count-observed-at={current?.observedAt}>
   {count.status==='stale'&&<CatalogResultCountUpdate queryKey={queryKey} summary={current} text={count.text}/>}
-  <MarketResultCount total={count.total}><span aria-live="polite"><span className="font-bold">{ajesCountLabel(current,shown)}</span>{explanation&&<span className="mt-1 block max-w-xl text-xs leading-relaxed">{explanation}</span>}</span></MarketResultCount>
+  <MarketResultCount total={count.total}><span aria-live="polite"><span data-japan-count-label className="font-bold">{ajesCountLabel(current,shown)}</span>{explanation&&<span className="mt-1 block max-w-xl text-xs leading-relaxed">{explanation}</span>}</span></MarketResultCount>
  </span>;
 }
 

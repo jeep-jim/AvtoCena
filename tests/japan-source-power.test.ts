@@ -64,9 +64,9 @@ async function catalogPowerFixture(read:(query:any,options?:any)=>unknown|Promis
   count:(params:any)=>module.exports.readAjesCountSummary(JSON.stringify(params)),close:()=>{delete (globalThis as any).__japanPowerPageFixture;}};
 }
 
-/** An immutable, completely provided local collection supplies the counter
- * boundary for pagination tests. This is not the production AJ count reader:
- * that reader rejects every positive source count without a snapshot contract. */
+/** An immutable, completely provided local collection supplies an admitted
+ * evaluator for offline assertions. The production reader exposes its source
+ * scalar separately and never upgrades that scalar to this controlled proof. */
 function installControlledCountFixture(fixture:Awaited<ReturnType<typeof catalogPowerFixture>>,sourceRows:Array<Record<string,any>>){
  const groups=new Map<string,any>();
  for(const source of sourceRows){
@@ -97,7 +97,7 @@ function installControlledCountFixture(fixture:Awaited<ReturnType<typeof catalog
  };
 }
 
-test('a controlled complete count invalidates an old short uncounted cursor and counted pages partition all73 fixture cars',async()=>{
+test('a source count preserves an existing short cursor while bounded pages partition all73 fixture cars',async()=>{
  const sourceRows=[...Array.from({length:6},(_,i)=>({...row,ID:'early-'+i,PW:'150'})),
   ...Array.from({length:200},(_,i)=>({...row,ID:'rejected-'+i,PW:'220'})),
   ...Array.from({length:44},(_,i)=>({...row,ID:'late-'+i,PW:'150'})),
@@ -110,21 +110,30 @@ test('a controlled complete count invalidates an old short uncounted cursor and 
  try{
   const uncounted=await fixture.read(params);assert.equal(uncounted.items.length,6);assert.equal(uncounted.scanLimited,true);
   installControlledCountFixture(fixture,sourceRows);
-  const priorReads=fixture.state.queries.length;
-  await assert.rejects(fixture.read({...params,page:'2',after:uncounted.nextCursor},undefined,{includeCount:true}),AjesCursorRefreshRequired);
-  assert.equal(fixture.state.queries.length,priorReads,'old short cursor is rejected before more LIST reads');
-  const ids:string[]=[];let after:string|undefined;
-  for(let page=1;page<=4;page++){
-   const result=await fixture.read({...params,page:String(page),...(after?{after}:{})},undefined,{includeCount:true});
-   assert.equal(result.total,73);assert.equal(result.countSummary.countProof.sourceTotal,273);assert.equal(result.countSummary.countProof.complete,true);
-   assert.equal(result.items.length,page===4?1:24);assert.equal(result.hasMore,page<4);assert.equal(result.scanLimited,false);
-   ids.push(...result.items.map((item:any)=>item.id));after=result.nextCursor;
+  const query={...ajesCatalogQuery(params)};delete query.page;delete query.pageSize;delete query.sort;
+  const complete=await fixture.state.controlledCount!({params,query,evidenceEpoch:'f'.repeat(64),
+   snapshot:{editorial:{revision:fixture.state.editorialRevision,entries:{}},calculationIndex:null}});
+  assert.equal(complete.total,73);assert.equal(complete.countProof.knownTotal,50);assert.equal(complete.countProof.unknownTotal,23);
+  assert.equal(complete.countProof.sourceTotal,273);assert.equal(complete.countProof.complete,true);
+  const rows=[...uncounted.items];let after=uncounted.nextCursor;
+  for(let page=2;after;page++){
+   assert.ok(page<=10,'the fixed local collection must exhaust without a source crawl');
+   const result=await fixture.read({...params,page:String(page),after},undefined,{includeCount:true});
+   assert.equal(result.total,null);assert.equal(result.countSummary.total,273);assert.equal(result.countSummary.upperBound,true);
+   assert.equal(result.countSummary.sourceCountProof.sourceTotal,273);assert.equal(Object.hasOwn(result.countSummary,'countProof'),false);
+   assert.ok(result.items.length<=24);assert.ok(result.reads<=8,'COUNT never lifts the per-request read limit');
+   if(result.hasMore&&result.items.length<24)assert.equal(result.scanLimited,true);
+   rows.push(...result.items);after=result.nextCursor;
   }
+  const ids=rows.map((item:any)=>item.id);
   assert.equal(new Set(ids).size,73);assert.equal(ids.length,73);assert.equal(after,null);
+  assert.ok(rows.slice(0,50).every(item=>!japanUnknownPower(item)));
+  assert.ok(rows.slice(50).every(japanUnknownPower));
+  assert.equal(fixture.state.counts,1,'the scalar is shared through its original freshness window');
  }finally{fixture.close();}
 });
 
-test('controlled exact totals close a full last page; contradictory or partial source pages cannot claim an exact ending',async()=>{
+test('source scalar counts do not close a full page, discard rows or invent an exact ending',async()=>{
  for(const mode of ['full','short','extra','partial'] as const){
   const count=mode==='extra'?23:24,sourceRows=Array.from({length:count},(_,i)=>({...row,ID:'last-'+i,PW:'150'}));
   const fixture=await catalogPowerFixture(query=>{
@@ -133,13 +142,14 @@ test('controlled exact totals close a full last page; contradictory or partial s
   });
   installControlledCountFixture(fixture,sourceRows);
   try{
-   const promise=fixture.read({market:'japan',powerTo:'160'},undefined,{includeCount:true});
-   if(mode==='short'||mode==='extra')await assert.rejects(promise,AjesCursorRefreshRequired);
-   else{
-    const result=await promise;
-    assert.equal(result.nextCursor,null);
-    if(mode==='full'){assert.equal(result.items.length,24);assert.equal(result.total,24);assert.equal(result.hasMore,false);}
-    else{assert.equal(result.items.length,6);assert.equal(result.partial,true);assert.equal(result.hasMore,true);assert.equal(result.total,null);assert.equal(result.countSummary,null);}
+   const result=await fixture.read({market:'japan',powerTo:'160'},undefined,{includeCount:true});
+   assert.equal(result.total,null);assert.equal(result.countSummary.total,count);assert.equal(result.countSummary.upperBound,true);
+   assert.equal(Object.hasOwn(result.countSummary,'countProof'),false);assert.ok(result.reads<=8);
+   if(mode==='short'){
+    assert.equal(result.items.length,23);assert.equal(result.hasMore,false);assert.equal(result.nextCursor,null);
+   }else{
+    assert.equal(result.items.length,mode==='partial'?6:24);assert.equal(result.hasMore,true);assert.match(result.nextCursor,/^j2\./);
+    if(mode==='partial')assert.equal(result.partial,true);
    }
   }finally{fixture.close();}
  }
@@ -161,7 +171,9 @@ test('positive saved census proofs cannot revive through the scalar cache, inclu
   fixture.state.savedCount=async()=>({key,value:summary});
   try{
    assert.equal(summary.total,power==='150'?1:0);
-   await assert.rejects(fixture.count(params),/census_source_snapshot_unavailable/);
+   const sourceCount=await fixture.count(params);
+   assert.equal(sourceCount.total,1);assert.equal(sourceCount.upperBound,true);assert.equal(sourceCount.sourceCountProof.sourceTotal,1);
+   assert.equal(Object.hasOwn(sourceCount,'countProof'),false,'a saved admitted proof cannot replace current source evidence');
    assert.equal(fixture.state.counts,1,'one scalar COUNT; no schema LIST, GROUP or correction request');
    assert.equal(fixture.state.queries.length,0);assert.equal(fixture.state.countWrites.length,0);
   }finally{fixture.close();}
@@ -181,7 +193,7 @@ test('validated ordinary wire COUNT0 keeps an exact scalar cache without DISTINC
   assert.deepEqual(queries,[ajesQuery({table:'stats',aggregate:'count'}).sql]);assert.doesNotMatch(queries[0],/distinct|binary/i);
   assert.equal(first.countProof.sourceQueryHash,createHash('sha256').update(queries[0]).digest('hex'));
   assert.equal(first.observedAt,first.countProof.sourceObservedAt);
-  assert.deepEqual(second,first);assert.equal(fixture.state.counts,1);assert.equal(fixture.state.countWrites.length,1);
+  assert.deepEqual(second,first);assert.equal(fixture.state.counts,1);assert.equal(fixture.state.countWrites.length,0,'the ordinary reader owns persistence; no separate admitted slot is written');
   assert.equal(fixture.state.queries.length,0);
  }finally{fixture.close();}
 });
@@ -196,38 +208,48 @@ test('ordinary positive, empty and stale wire COUNT responses cannot become exac
   }});
   fixture.state.rawRead=query=>client.read(query,'127.0.0.1');
   try{
-   await assert.rejects(fixture.count({market:'japan'}),mode==='positive'?/census_source_snapshot_unavailable/:mode==='empty'?/invalid_response/:/census_source_count_unavailable/);
+   if(mode==='empty')await assert.rejects(fixture.count({market:'japan'}),/invalid_response/);
+   else{
+    const sourceCount=await fixture.count({market:'japan'});
+    assert.equal(sourceCount.total,mode==='positive'?5:0);assert.equal(sourceCount.upperBound,true);
+    assert.equal(sourceCount.stale,mode==='stale');assert.equal(Object.hasOwn(sourceCount,'countProof'),false);
+    if(mode==='stale')assert.equal(sourceCount.observedAt,saved.observedAt,'refusal cannot refresh the retained source date');
+   }
    assert.deepEqual(queries,[ajesQuery({table:'stats',aggregate:'count'}).sql]);assert.doesNotMatch(queries[0],/distinct|binary/i);
    assert.equal(fixture.state.counts,1);assert.equal(fixture.state.countWrites.length,0);assert.equal(fixture.state.queries.length,0);
   }finally{fixture.close();}
  }
 });
 
-test('unproved source candidate restrictions cannot read or revive the scalar zero cache',async()=>{
+test('restricted candidate zero remains source evidence and cannot claim admitted zero',async()=>{
  for(const extra of [{color:'red'},{drive:'awd'},{fuel:'diesel'},{body:'pickup'},{transmission:'automatic'},{engineFrom:'1400'},{engineTo:'1600'}]){
   const fixture=await catalogPowerFixture(()=>{throw Error('unexpected public LIST');});let savedReads=0;
   fixture.state.savedCount=async()=>{savedReads++;return null;};
   fixture.state.rawRead=async()=>({items:[],total:0,observedAt:new Date().toISOString(),stale:false});
   try{
-   await assert.rejects(fixture.count({market:'japan',...extra}),/census_source_scope_unproven/);
-   assert.equal(savedReads,0);assert.equal(fixture.state.counts,0);assert.equal(fixture.state.countWrites.length,0);assert.equal(fixture.state.queries.length,0);
+   const sourceCount=await fixture.count({market:'japan',...extra});
+   assert.equal(sourceCount.total,0);assert.equal(sourceCount.upperBound,true);assert.equal(sourceCount.sourceScopeComplete,false);
+   assert.equal(Object.hasOwn(sourceCount,'countProof'),false);
+   assert.equal(savedReads,0);assert.equal(fixture.state.counts,1);assert.equal(fixture.state.countWrites.length,0);assert.equal(fixture.state.queries.length,0);
   }finally{fixture.close();}
  }
 });
 
-test('a positive controlled count boundary cannot seed the runtime memory or persisted scalar cache',async()=>{
+test('positive scalar caching never invokes or stores a controlled admitted proof',async()=>{
  const fixture=await catalogPowerFixture(()=>{throw Error('unexpected public LIST');});
  installControlledCountFixture(fixture,[{...row,ID:'memory-positive'}]);
- const controlled=fixture.state.controlledCount!;
+ const controlled=fixture.state.controlledCount!;let controlledCalls=0;
  fixture.state.controlledCount=async options=>{
+  controlledCalls++;
   const summary=await controlled(options);summary.countProof.predicateVersion=census.AJES_CENSUS_PREDICATE_VERSION;return summary;
  };
  try{
-  assert.equal((await fixture.count({market:'japan',powerTo:'160'})).total,1);
-  assert.equal(fixture.state.countWrites.length,0,'positive weight is never persisted');
+  const sourceCount=await fixture.count({market:'japan',powerTo:'160'});
+  assert.equal(sourceCount.total,1);assert.equal(sourceCount.upperBound,true);assert.equal(Object.hasOwn(sourceCount,'countProof'),false);
+  assert.equal(fixture.state.countWrites.length,0,'no admitted proof is persisted');assert.equal(controlledCalls,0);
   fixture.state.controlledCount=undefined;
-  await assert.rejects(fixture.count({market:'japan',powerTo:'160'}),/census_source_snapshot_unavailable/);
-  assert.equal(fixture.state.counts,2,'the positive controlled result was not retained in memory');
+  assert.equal(await fixture.count({market:'japan',powerTo:'160'}),sourceCount);
+  assert.equal(fixture.state.counts,1,'the separately labelled source scalar is cached without changing its date or precision');
  }finally{fixture.close();}
 });
 
