@@ -13,7 +13,7 @@ permissions:
   contents: read
 concurrency:
   group: verify-japan-exact-count-candidate
-  cancel-in-progress: false
+  cancel-in-progress: true
 jobs:
   verify:
     if: github.repository_id == '1289722938' && github.ref == 'refs/heads/fix/japan-exact-count-controller-20261128'
