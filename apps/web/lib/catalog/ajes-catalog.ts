@@ -160,6 +160,7 @@ export async function readAjesCatalogPage(params:Record<string,unknown>,measure?
  const powerIdentity=(offer:any)=>JSON.stringify([japanLocalPowerHp(offer)??null,japanSupplierPower(offer)?.hp??null,japanUnknownPower(offer)]);
  const {query,modelDirectoryUnavailable,makeDirectoryUnavailable}=await resolvedCatalogQuery(JSON.stringify(params));
  const selectionIncomplete=modelDirectoryUnavailable||makeDirectoryUnavailable;
+ const sourceScopeUnproven=!ajesSourceScopeSupportsExactCount(query);
  if(!evidenceSnapshot&&!selectionIncomplete)evidenceSnapshot=await readAjesPublicEvidenceSnapshot();
  // Delivered-price sorting is explicitly local to the loaded selection. Raw
  // auction FINISH is a different price: sorting that source first can replace
@@ -258,7 +259,7 @@ export async function readAjesCatalogPage(params:Record<string,unknown>,measure?
   page.partial=true;page.hasMore=true;page.nextCursor=null;
  }
  const observationAge=Date.now()-Date.parse(observedAt);
- const singleObservation=!selectionIncomplete&&ajesSourceScopeSupportsExactCount(query)&&!filter.powerFilter&&Boolean(evidenceSnapshot)&&(query.page||1)===1&&!params.after
+ const singleObservation=!selectionIncomplete&&!sourceScopeUnproven&&!filter.powerFilter&&Boolean(evidenceSnapshot)&&(query.page||1)===1&&!params.after
   &&page.reads===1&&completePage&&!page.hasMore&&Number.isSafeInteger(first?.received)&&first!.received>=page.items.length
   &&first!.received<(query.pageSize||24)&&observationAge>=0&&observationAge<30*60000
   &&page.items.every(offer=>typeof offer.id==='string'&&offer.id.length>0)&&new Set(page.items.map(offer=>offer.id)).size===page.items.length;
@@ -278,7 +279,9 @@ export async function readAjesCatalogPage(params:Record<string,unknown>,measure?
   if(filter.powerFilter&&powerIdentity(projected)!==powerIdentity(offer))throw new AjesCursorRefreshRequired();
   return projected;
  })):ordered.map((offer:any)=>publicOffer(offer));
- return {...first,...page,partial:page.partial||selectionIncomplete,selectionIncomplete,page:query.page||1,observedAt,filteredByPage:filter.active,total:exact,countSummary,...(filter.powerFilter?{powerFilterSummary:japanPowerFilterSummary(items)}:{}),items,generationId:observedAt,sourceReceipts};
+ // A source-side filter may omit locally enriched matches. Keep its fresh
+ // cursor, but do not present this SQL's end as a complete user selection.
+ return {...first,...page,partial:page.partial||selectionIncomplete||sourceScopeUnproven,selectionIncomplete,page:query.page||1,observedAt,filteredByPage:filter.active,total:exact,countSummary,...(filter.powerFilter?{powerFilterSummary:japanPowerFilterSummary(items)}:{}),items,generationId:observedAt,sourceReceipts};
 }
 /** Add once to totals built from the separate local inventory. A failure is not zero inventory. */
 export async function withAjesCount<T extends {total:number;marketCounts?:Record<string,number>;independentChina?:boolean}>(value:T,params:Record<string,unknown>={}):Promise<T & {countIncomplete?:boolean;marketCountInfo:Record<string,AjesCountSummary|null>}>{

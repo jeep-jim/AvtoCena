@@ -262,7 +262,7 @@ async function realPath(t:any,names=matched,modelDirectoryStale=false,source:{ma
  const db=database(names,source.make);t.after(()=>db.close());
  const state={queries:[] as any[],neighborQueries:[] as any[],project:publicOffer,current:{id:'china-legacy',market:'china',make:'Mazda',model:'3'},
   modelDirectoryStale,modelNames:null as Set<string>|null,listFailure:null as {page:number;error:Error}|null,
-  transformList:(result:any,_query:any)=>result,pricingContextEnabled:false,
+  transformList:(result:any,_query:any)=>result,pricingContextEnabled:false,snapshotReads:0,
   snapshot:{editorial:{revision:'fixture-model-resolution',entries:{}},calculationIndex:null},
   read:async(q:any)=>{
    state.queries.push(structuredClone(q));
@@ -288,7 +288,7 @@ async function realPath(t:any,names=matched,modelDirectoryStale=false,source:{ma
  const mocks:Record<string,string>={
   'server-only':'','next/headers':'export const headers=async()=>new Map([["x-real-ip","203.0.113.1"]]);',
   'ajes-runtime':'export const ajesClient={read:q=>globalThis.__legacyMazda.read(q)};',
-  'ajes-public':'export const readAjesPublicEvidenceSnapshot=()=>globalThis.__legacyMazda.snapshot;export const cappedAjesQuery=async q=>q;export const readAjesPublic=q=>globalThis.__legacyMazda.read(q);',
+  'ajes-public':'export const readAjesPublicEvidenceSnapshot=()=>{globalThis.__legacyMazda.snapshotReads++;return globalThis.__legacyMazda.snapshot;};export const cappedAjesQuery=async q=>q;export const readAjesPublic=q=>globalThis.__legacyMazda.read(q);',
   '../data':'export const getJsonStorage=()=>({readJson:async()=>null,writeJson:async()=>{}});',
   storage:'export const publicOffer=row=>globalThis.__legacyMazda.project(row);export const getUnavailableOffer=async()=>null;export const searchOffers=async query=>{globalThis.__legacyMazda.neighborQueries.push(query);return {items:[],total:0};};',
   'collection-controls':'export const assertCollectionEnabled=async()=>{};',
@@ -385,10 +385,68 @@ test('a short fresh LIST with incomplete aliases cannot become exact even with a
 for(const [fuel,shown] of [['petrol',2],['diesel',0]] as const)test(`a short ${fuel} LIST preserves its cards without attesting an unproved source-filter scope`,async t=>{
  const {api,state}=await realPath(t,['A4 AVANT','A4'],false,{make:'AUDI'});
  const result=await api.readAjesCatalogPage({market:'japan',make:'AUDI',model:'A4',fuel},undefined,{includeCount:false});
- assert.equal(result.items.length,shown);assert.equal(result.partial,false);assert.equal(result.stale,false);
+ assert.equal(result.items.length,shown);assert.equal(result.partial,true);assert.equal(result.stale,false);
  assert.equal(result.reads,1);assert.equal(result.hasMore,false);assert.equal(result.nextCursor,null);
  assert.equal(result.total,null,'even one exhausted LIST cannot prove cars excluded before local fuel enrichment');
  assert.equal(result.countSummary,null);assert.equal(state.queries.some(q=>q.aggregate==='count'),false);
+ assert.ok(state.snapshotReads>0,'source-scope uncertainty does not skip the local admission snapshot');
+});
+
+test('an unproved source-filter scope keeps its fresh cursor while reporting public incompleteness',async t=>{
+ const {api,state}=await realPath(t,Array(49).fill('A4 AVANT'),false,{make:'AUDI'});
+ const params={market:'japan',make:'AUDI',model:'A4',fuel:'petrol'},pages=[];let after:undefined|string;
+ for(let page=1;page<=3;page++){
+  const result=await api.readAjesCatalogPage({...params,page:String(page),...(after?{after}:{})},undefined,{includeCount:false});
+  assert.equal(result.partial,true);assert.equal(result.selectionIncomplete,false);assert.equal(result.stale,false);
+  assert.equal(result.total,null);assert.equal(result.countSummary,null);assert.equal(result.hasMore,page<3);
+  if(page<3)assert.match(result.nextCursor,new RegExp('^j1\\.'+(page+1)+'\\.0\\.'+(page+1)+'\\.'));
+  else assert.equal(result.nextCursor,null);
+  pages.push(result);after=result.nextCursor??undefined;
+ }
+ assert.deepEqual(pages.map(page=>page.items.length),[24,24,1]);
+ assert.equal(new Set(pages.flatMap(page=>page.items.map((row:any)=>row.id))).size,49);
+ assert.deepEqual(state.queries.filter(q=>!q.aggregate).map(q=>q.page),[1,2,3]);
+ assert.ok(state.snapshotReads>0);
+});
+
+test('actual AjesCatalog treats an unproved zero as incomplete recovery instead of definitive empty',async t=>{
+ const {api}=await realPath(t,['A4 AVANT','A4'],false,{make:'AUDI'});
+ const state={api,sidebar:null as any};(globalThis as any).__scopeCatalog=state;t.after(()=>{delete (globalThis as any).__scopeCatalog;});
+ const mocks:Record<string,string>={
+  '@/lib/catalog/ajes-catalog':'export class AjesFilterUnavailable extends Error{};export const readAjesCatalogPage=(...args)=>globalThis.__scopeCatalog.api.readAjesCatalogPage(...args);export const readAjesCountSummary=async()=>null;export const readAjesMakes=async()=>({makes:[]});',
+  './CatalogSidebar':'import {Children,createElement} from "react";export const CatalogSidebar=props=>{if(!props)return null;globalThis.__scopeCatalog.sidebar=props;return createElement("section",null,props.header,...Children.toArray(props.children));};',
+  '@/components/dealers/DealerBrowsingContext':'import {createElement} from "react";export const useDealerBrowsing=()=>null;export const DealerLink=({prefetch,...props})=>createElement("a",props);',
+  'next/link':'import {createElement} from "react";export default function Link({prefetch,...props}){return createElement("a",props);}',
+  './green-corner-load-more-action':'export const loadMoreGreenCorner=()=>{throw Error("unexpected other market");};',
+  './CatalogCard':'import {createElement} from "react";export const CatalogCard=({offer})=>createElement("div",{"data-offer-id":offer.id});',
+ };
+ for(const name of ['CatalogFilters','BrandLogoRail','JapanSectionTabs','CatalogMarketFlag'])mocks['./'+name]=`export const ${name}=()=>null;`;
+ mocks['@/components/layout/PublicHeader']='export const PublicHeader=()=>null;';
+ const built=await build({entryPoints:['apps/web/components/catalog/AjesCatalog.tsx'],bundle:true,platform:'node',format:'cjs',write:false,packages:'external',jsx:'automatic',tsconfig:'apps/web/tsconfig.json',plugins:[{name:'catalog-recovery-boundaries',setup(builder){
+  builder.onResolve({filter:/.*/},args=>args.path in mocks?{path:args.path,namespace:'fixture'}:undefined);
+  builder.onLoad({filter:/.*/,namespace:'fixture'},args=>({contents:mocks[args.path],resolveDir:process.cwd()}));
+ }}]});
+ const require=createRequire(import.meta.url),mod={exports:{} as any};
+ new Function('require','module','exports',built.outputFiles[0].text)(require,mod,mod.exports);
+ const React=require('react'),{renderToStaticMarkup}=require('react-dom/server');
+ // Resolve only server async boundaries; client hooks run in the real renderer.
+ const resolveServer=async(node:any):Promise<any>=>{
+  if(Array.isArray(node))return Promise.all(node.map(resolveServer));
+  if(!React.isValidElement(node))return node;
+  if(typeof node.type==='function'&&node.type.constructor.name==='AsyncFunction')return resolveServer(await node.type(node.props));
+  const props={...node.props};
+  for(const key of ['children','header','filters','fallback'])if(key in props)props[key]=await resolveServer(props[key]);
+  return React.cloneElement(node,props);
+ };
+ const params={market:'japan',make:'AUDI',model:'A4',fuel:'diesel'};
+ const html=renderToStaticMarkup(await resolveServer(await mod.exports.AjesCatalog({params})));
+ assert.doesNotMatch(html,/По выбранным параметрам автомобили не найдены/);
+ assert.doesNotMatch(html,/Вы посмотрели все доступные предложения/);
+ assert.match(state.sidebar.resultError,/Не удалось обновить автомобили/,'the actual server page selects the existing retained-card recovery boundary');
+ assert.match(html,/Полный список пока недоступен/);assert.match(html,/Повторить/);
+ const empty=renderToStaticMarkup(await resolveServer(await mod.exports.AjesCatalog({params:{market:'japan',make:'AUDI',model:'UNSEEN MODEL'}})));
+ assert.match(empty,/По выбранным параметрам автомобили не найдены/,'a genuinely empty safe scope keeps its definitive empty state');
+ assert.equal(state.sidebar.resultError,undefined);
 });
 
 test('an admitted-empty but full fresh source page continues within the same incomplete alias selection',async t=>{
