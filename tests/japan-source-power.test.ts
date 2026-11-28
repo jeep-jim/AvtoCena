@@ -808,10 +808,10 @@ test('applied power predicates have distinct cache scope while URI fallback pres
    assert.equal(power.sql,ordinary.sql,'the existing drive selection leaves no room for a complete safe PW predicate');
    assert.equal(ajesSourceCacheSql(power.sql),ajesSourceCacheSql(ordinary.sql),'identical raw membership may reuse its exact source cache');
    assert.equal(power.sql,ajesQuery({table,...query,powerTo:100}).sql,'fallback never pretends to narrow a different power range');
-   assert.doesNotMatch(power.sql,/\bpw\+0\b/i);
+   assert.doesNotMatch(power.sql,/pw\*1/i);
   }else{
    assert.notEqual(ajesSourceCacheSql(power.sql),ajesSourceCacheSql(ordinary.sql));
-   assert.match(power.sql,/pw\+0 between 1 and 160/i);
+   assert.match(power.sql,/pw\*1 between 1 and 160/i);
   }
   assert.equal(ajesSourceCacheSql(power.sql),ajesSourceCacheSql(ajesQuery({table,...query,powerTo:160}).sql));
   assert.ok(new URLSearchParams({sql:power.sql}).toString().length<6000);
