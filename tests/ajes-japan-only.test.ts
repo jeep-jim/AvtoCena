@@ -125,7 +125,7 @@ test('AJ catalog counts, facets and pages reject non-Japan before shortcuts or d
   './ajes-runtime':'export const ajesClient={read:()=>{throw Error("unexpected supplier");}};',
   './ajes-public':'const fail=()=>{throw Error("unexpected public source");};export const readAjesPublic=fail,cappedAjesQuery=fail,readAjesPublicEvidenceSnapshot=fail;',
   './ajes-query':'const fail=()=>{throw Error("unexpected query");};export const ajesCatalogQuery=fail,ajesQuery=fail;export class AjesFilterUnavailable extends Error{};export class AjesInputError extends Error{};export class AjesCursorRefreshRequired extends AjesInputError{};',
-  './ajes-census':'const fail=()=>{throw Error("unexpected census");};export const readAjesCensusCount=fail,ajesRequestedCountQuery=fail,ajesRequestedCountQueryHash=fail;export const AJES_CENSUS_PREDICATE_VERSION="forbidden-fixture";',
+  './ajes-census':'const fail=()=>{throw Error("unexpected census");};export const readAjesCensusCount=fail,ajesRequestedCountQuery=fail,ajesRequestedCountQueryHash=fail,ajesSourceScopeSupportsExactCount=fail;export const AJES_CENSUS_PREDICATE_VERSION="forbidden-fixture";',
   './ajes-count-pricing-context':'export const captureAjesCountPricingContext=()=>{throw Error("unexpected pricing context");};',
   '../data':'const fail=()=>{throw Error("unexpected private storage");};export const getJsonStorage=fail,readDataJson=fail,mutateDataJson=fail,getDataRoot=fail;',
   './ajes-client':'export const readAjesModelDirectory=()=>{throw Error("unexpected models");};export const readAjesMakeDirectory=()=>{throw Error("unexpected makes");};export class AjesUnavailable extends Error{};',

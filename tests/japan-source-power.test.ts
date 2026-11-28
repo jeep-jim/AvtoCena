@@ -38,7 +38,7 @@ async function catalogPowerFixture(read:(query:any,options?:any)=>unknown|Promis
  (globalThis as any).__japanPowerPageFixture=state;
  const stubs:Record<string,string>={
   'server-only':'','next/headers':"export const headers=async()=>new Map([['x-real-ip','127.0.0.1']]);",
-  './ajes-census':"export const {ajesCensusFields,ajesRequestedCountQuery,ajesRequestedCountQueryHash,AJES_CENSUS_PREDICATE_VERSION}=globalThis.__japanPowerPageFixture.census;export const readAjesCensusCount=options=>{const s=globalThis.__japanPowerPageFixture;return s.controlledCount?s.controlledCount(options):s.census.readAjesCensusCount(options);};",
+  './ajes-census':"export const {ajesCensusFields,ajesRequestedCountQuery,ajesRequestedCountQueryHash,ajesSourceScopeSupportsExactCount,AJES_CENSUS_PREDICATE_VERSION}=globalThis.__japanPowerPageFixture.census;export const readAjesCensusCount=options=>{const s=globalThis.__japanPowerPageFixture;return s.controlledCount?s.controlledCount(options):s.census.readAjesCensusCount(options);};",
   '../data':"export const getJsonStorage=()=>({readJson:async path=>globalThis.__japanPowerPageFixture.savedCount?.(path)??null,writeJson:async(path,value)=>{globalThis.__japanPowerPageFixture.countWrites.push({path,value});}});export const readDataJson=async()=>null;export const mutateDataJson=async()=>{throw Error('unexpected private write');};export const getDataRoot=()=>'/tmp';",
   './rates':"export const convertToRub=async amount=>globalThis.__japanPowerPageFixture.censusRate?.(amount)??null;",
   './ajes-count-pricing-context':`export const captureAjesCountPricingContext=async()=>({run:async work=>work(),price:async rows=>{const s=globalThis.__japanPowerPageFixture;s.priced.push(rows.map(row=>row.id));return s.price?s.price(rows):rows;}});`,
@@ -87,7 +87,7 @@ function installControlledCountFixture(fixture:Awaited<ReturnType<typeof catalog
    if(evaluated.admitted){admittedTotal+=group.total;if(evaluated.known)knownTotal+=group.total;else unknownTotal+=group.total;}
   }
   const digest=(value:unknown)=>createHash('sha256').update(JSON.stringify(value)).digest('hex');
-  const sourceQueryHash=createHash('sha256').update(ajesQuery({...options.query,aggregate:'count',countIdentity:true}).sql).digest('hex');
+  const sourceQueryHash=createHash('sha256').update(ajesQuery({...options.query,aggregate:'count'}).sql).digest('hex');
   return {total:admittedTotal,stale:false,upperBound:false,observedAt,countProof:{version:1,kind:'japan-admitted-census',
    predicateVersion:'controlled-japan-admission-fixture-v1',requestedQueryHash:census.ajesRequestedCountQueryHash(options.params),
    queryHash:digest([census.ajesRequestedCountQuery(options.params),options.query]),evidenceEpoch:options.evidenceEpoch,sourceQueryHash,
@@ -156,7 +156,7 @@ test('positive saved census proofs cannot revive through the scalar cache, inclu
    editorialRevision:fixture.state.editorialRevision,calculationDigest:null}),null]);
   const summary=await fixture.state.controlledCount!({params,query,evidenceEpoch,snapshot:{editorial:{revision:fixture.state.editorialRevision,entries:{}},calculationIndex:null}});
   summary.countProof.predicateVersion=census.AJES_CENSUS_PREDICATE_VERSION;
-  const key=digest([census.ajesRequestedCountQuery(params),ajesQuery({...query,aggregate:'count',countIdentity:true}).sql,evidenceEpoch]);
+  const key=digest([census.ajesRequestedCountQuery(params),ajesQuery({...query,aggregate:'count'}).sql,evidenceEpoch]);
   fixture.state.controlledCount=undefined;
   fixture.state.savedCount=async()=>({key,value:summary});
   try{
@@ -168,19 +168,51 @@ test('positive saved census proofs cannot revive through the scalar cache, inclu
  }
 });
 
-test('validated source COUNT0 keeps an exact scalar cache without any LIST or GROUP reads',async()=>{
+test('validated ordinary wire COUNT0 keeps an exact scalar cache without DISTINCT, LIST or GROUP reads',async()=>{
  const fixture=await catalogPowerFixture(()=>{throw Error('unexpected public LIST');});
- const observedAt=new Date().toISOString();
- fixture.state.rawRead=async query=>{
-  assert.equal(query.aggregate,'count');assert.equal(query.countIdentity,true);
-  return {items:[],total:0,distinctTotal:0,observedAt,stale:false};
- };
+ const queries:string[]=[];
+ const client=createAjesClient({password:()=> 'fixture',assertEnabled:async()=>{},reserve:async()=>{},fetcher:async url=>{
+  queries.push(new URL(String(url)).searchParams.get('sql')!);return new Response('[{"TAG0":"0"}]');
+ }});
+ fixture.state.rawRead=query=>client.read(query,'127.0.0.1');
  try{
   const first=await fixture.count({market:'japan'}),second=await fixture.count({market:'japan',sort:'totalRubDesc'});
-  assert.equal(first.total,0);assert.equal(first.countProof.sourceTotal,0);assert.equal(first.observedAt,observedAt);
+  assert.equal(first.total,0);assert.equal(first.countProof.sourceTotal,0);assert.equal(first.countProof.sourceDistinctTotal,0);
+  assert.deepEqual(queries,[ajesQuery({table:'stats',aggregate:'count'}).sql]);assert.doesNotMatch(queries[0],/distinct|binary/i);
+  assert.equal(first.countProof.sourceQueryHash,createHash('sha256').update(queries[0]).digest('hex'));
+  assert.equal(first.observedAt,first.countProof.sourceObservedAt);
   assert.deepEqual(second,first);assert.equal(fixture.state.counts,1);assert.equal(fixture.state.countWrites.length,1);
   assert.equal(fixture.state.queries.length,0);
  }finally{fixture.close();}
+});
+
+test('ordinary positive, empty and stale wire COUNT responses cannot become exact totals',async()=>{
+ for(const mode of ['positive','empty','stale'] as const){
+  const fixture=await catalogPowerFixture(()=>{throw Error('unexpected public LIST');}),queries:string[]=[];
+  const saved={items:[],total:0,page:1,pageSize:1,received:1,observedAt:new Date(Date.now()-31*60_000).toISOString()};
+  const client=createAjesClient({password:()=> 'fixture',assertEnabled:async()=>{},reserve:async()=>{},readQuery:async()=>mode==='stale'?saved:null,fetcher:async url=>{
+   queries.push(new URL(String(url)).searchParams.get('sql')!);
+   return new Response(mode==='positive'?'[{"TAG0":"5"}]':mode==='empty'?'[]':'bot2 fixture');
+  }});
+  fixture.state.rawRead=query=>client.read(query,'127.0.0.1');
+  try{
+   await assert.rejects(fixture.count({market:'japan'}),mode==='positive'?/census_source_snapshot_unavailable/:mode==='empty'?/invalid_response/:/census_source_count_unavailable/);
+   assert.deepEqual(queries,[ajesQuery({table:'stats',aggregate:'count'}).sql]);assert.doesNotMatch(queries[0],/distinct|binary/i);
+   assert.equal(fixture.state.counts,1);assert.equal(fixture.state.countWrites.length,0);assert.equal(fixture.state.queries.length,0);
+  }finally{fixture.close();}
+ }
+});
+
+test('unproved source candidate restrictions cannot read or revive the scalar zero cache',async()=>{
+ for(const extra of [{color:'red'},{drive:'awd'},{fuel:'diesel'},{body:'pickup'},{transmission:'automatic'},{engineFrom:'1400'},{engineTo:'1600'}]){
+  const fixture=await catalogPowerFixture(()=>{throw Error('unexpected public LIST');});let savedReads=0;
+  fixture.state.savedCount=async()=>{savedReads++;return null;};
+  fixture.state.rawRead=async()=>({items:[],total:0,observedAt:new Date().toISOString(),stale:false});
+  try{
+   await assert.rejects(fixture.count({market:'japan',...extra}),/census_source_scope_unproven/);
+   assert.equal(savedReads,0);assert.equal(fixture.state.counts,0);assert.equal(fixture.state.countWrites.length,0);assert.equal(fixture.state.queries.length,0);
+  }finally{fixture.close();}
+ }
 });
 
 test('a positive controlled count boundary cannot seed the runtime memory or persisted scalar cache',async()=>{

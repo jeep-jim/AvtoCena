@@ -36,6 +36,16 @@ export function ajesRequestedCountQuery(params:Record<string,unknown>){
 }
 export const ajesRequestedCountQueryHash=(params:Record<string,unknown>)=>hash(ajesRequestedCountQuery(params));
 
+/** These source restrictions can discard a row before its final local/manual
+ * value is known. Until their candidate predicates are proven supersets, even
+ * a source zero or one exhausted LIST cannot prove the complete UI selection.
+ * Power and price filters do not narrow source candidates and stay eligible.
+ */
+export function ajesSourceScopeSupportsExactCount(query:AjesQuery):boolean{
+ return !query.color&&!query.fuel&&!query.drive&&!query.transmission&&!query.pickup
+  &&query.engineFrom===undefined&&query.engineTo===undefined;
+}
+
 export function ajesCensusFields(schema:unknown):AjesCensusField[]{
  if(!Array.isArray(schema)||schema.some(field=>typeof field!=='string'))return fail('schema_unavailable');
  const names=new Set(schema.map(field=>field.toUpperCase()));
@@ -86,18 +96,21 @@ export async function evaluateAjesCensusGroup(group:AjesCensusGroup,options:{par
  */
 export async function readAjesCensusCount(options:{
  params:Record<string,unknown>;query:AjesQuery;fields:readonly AjesCensusField[];snapshot:AjesAdmissionSnapshot;evidenceEpoch:string;
- sourceCount:{total:number;distinctTotal:number;observedAt:string;stale?:boolean;partial?:boolean};
+ sourceCount:{total:number;distinctTotal?:number;observedAt:string;stale?:boolean;partial?:boolean};
  read:(query:AjesQuery)=>Promise<CensusPage>;rate:(amount:number)=>Promise<CurrencyRateSnapshot|null>;
  pricing?:AjesCountPricingContext;assertCurrent:()=>Promise<void>;now?:()=>number;
 }):Promise<AjesExactCountSummary>{
  const now=options.now??Date.now;
  const {sourceCount,snapshot,params}=options;
+ if(!ajesSourceScopeSupportsExactCount(options.query))return fail('source_scope_unproven');
  if(!nonnegative(sourceCount.total)||!fresh(sourceCount,now()))return fail('source_count_unavailable');
- if(sourceCount.distinctTotal!==sourceCount.total)return fail('identity_uniqueness_unproven');
+ if(sourceCount.distinctTotal!==undefined&&sourceCount.distinctTotal!==sourceCount.total)return fail('identity_uniqueness_unproven');
  if(!/^[a-f0-9]{64}$/.test(options.evidenceEpoch))return fail('context_unavailable');
  if(sourceCount.total>0)return fail('source_snapshot_unavailable');
- const sourceQuery={...options.query};delete sourceQuery.page;delete sourceQuery.pageSize;delete sourceQuery.sort;delete sourceQuery.aggregate;
- const sourceQueryHash=createHash('sha256').update(ajesQuery({...sourceQuery,aggregate:'count',countIdentity:true},snapshot.calculationIndex).sql).digest('hex');
+ // Ordinary COUNT(*)=0 also proves that the number of distinct IDs is zero.
+ // No DISTINCT/BINARY projection or positive-count uniqueness claim is needed.
+ const sourceQuery={...options.query};delete sourceQuery.page;delete sourceQuery.pageSize;delete sourceQuery.sort;delete sourceQuery.aggregate;delete sourceQuery.countIdentity;
+ const sourceQueryHash=createHash('sha256').update(ajesQuery({...sourceQuery,aggregate:'count'},snapshot.calculationIndex).sql).digest('hex');
  const requestedQueryHash=ajesRequestedCountQueryHash(params),queryHash=hash([ajesRequestedCountQuery(params),sourceQuery,options.fields]);
  const observedAt=sourceCount.observedAt;
  const current=async()=>{await options.assertCurrent();await options.pricing?.assertCurrent();};

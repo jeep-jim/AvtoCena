@@ -58,7 +58,7 @@ test('actual catalog wrapper keeps exact model cards on directory failure and ne
  const stubs:Record<string,string>={
   'server-only':'','next/headers':"export const headers=async()=>new Map([['x-real-ip','127.0.0.1']]);",
   './ajes-runtime':"export const ajesClient={read:async()=>{globalThis.__modelRecovery.counts++;throw Error('count must not run');}};",
-  './ajes-public':`export const readAjesPublicEvidenceSnapshot=()=>{throw Error("unexpected power snapshot");};export const cappedAjesQuery=async q=>q;export const readAjesPublic=async q=>{const s=globalThis.__modelRecovery;s.lists++;s.queries.push(q);return {page:q.page||1,pageSize:24,received:s.empty?0:24,items:s.empty?[]:[{id:'toyota-exact'}],observedAt:'now'};};`,
+  './ajes-public':`export const readAjesPublicEvidenceSnapshot=()=>{throw Error("unexpected power snapshot");};export const cappedAjesQuery=async q=>q;export const readAjesPublic=async q=>{const s=globalThis.__modelRecovery;s.lists++;s.queries.push(q);return {page:q.page||1,pageSize:24,received:s.empty?0:24,items:s.empty?[]:Array.from({length:24},(_,i)=>({id:i?'toyota-exact-'+i:'toyota-exact'})),observedAt:new Date().toISOString()};};`,
   './ajes-client':"export class AjesUnavailable extends Error{constructor(reason){super(reason);this.reason=reason;}};export const readAjesModelDirectory=async()=>{throw new AjesUnavailable('local_busy');};export const readAjesMakeDirectory=async()=>({makes:[]});",
   './ajes-result-filter':"export const ajesResultFilter=()=>({active:false,priceFilter:false,matches:()=>true});",
   './storage':"export const publicOffer=x=>x;",'./market-page':"export const sortCatalogRows=x=>x;",
@@ -74,7 +74,9 @@ test('actual catalog wrapper keeps exact model cards on directory failure and ne
   const result=await mod.exports.readAjesCatalogPage(params);
   assert.equal(result.items[0].id,'toyota-exact');assert.equal(result.partial,true);assert.equal(result.total,null);assert.equal(result.countSummary,null);
   assert.equal(state.queries[0].make,'TOYOTA');assert.equal(state.queries[0].model,'COROLLA');assert.equal(state.counts,0);
-  state.empty=true;await assert.rejects(mod.exports.readAjesCatalogPage(params),/directory_unavailable/);
+  state.empty=true;const empty=await mod.exports.readAjesCatalogPage(params);
+  assert.deepEqual(empty.items,[]);assert.equal(empty.partial,true);assert.equal(empty.selectionIncomplete,true);
+  assert.equal(empty.total,null);assert.equal(empty.countSummary,null);assert.equal(empty.hasMore,false);assert.equal(empty.nextCursor,null);
   await assert.rejects(mod.exports.readAjesCountSummary(JSON.stringify(params)),/directory_unavailable/);
   assert.equal(state.lists,2);assert.equal(state.counts,0);
  }finally{delete (globalThis as any).__modelRecovery;}
@@ -259,22 +261,28 @@ function database(names:string[],make='MAZDA'){
 async function realPath(t:any,names=matched,modelDirectoryStale=false,source:{make?:string;directory?:'fresh'|'stale'|'unavailable'}={}){
  const db=database(names,source.make);t.after(()=>db.close());
  const state={queries:[] as any[],neighborQueries:[] as any[],project:publicOffer,current:{id:'china-legacy',market:'china',make:'Mazda',model:'3'},
+  modelDirectoryStale,modelNames:null as Set<string>|null,listFailure:null as {page:number;error:Error}|null,
+  transformList:(result:any,_query:any)=>result,pricingContextEnabled:false,
   snapshot:{editorial:{revision:'fixture-model-resolution',entries:{}},calculationIndex:null},
   read:async(q:any)=>{
    state.queries.push(structuredClone(q));
    const query=ajesQuery(q);
    if(query.kind==='makes'&&source.directory==='unavailable')throw new AjesUnavailable('local_busy');
+   if(query.kind==='list'&&state.listFailure?.page===query.page)throw state.listFailure.error;
    // SQLite's BLOB cast preserves the counter's binary ID equality without
    // changing the real compiler's model predicates or recorded query.
    const rows=db.prepare(query.sql.replace(/distinct binary id/g,'distinct cast(id as blob)')).all(),observedAt=new Date().toISOString();
-   const common={page:query.page,pageSize:query.pageSize,received:rows.length,stale:query.kind==='models'&&modelDirectoryStale||query.kind==='makes'&&source.directory==='stale',partial:false,observedAt};
+   const common={page:query.page,pageSize:query.pageSize,received:rows.length,stale:query.kind==='models'&&state.modelDirectoryStale||query.kind==='makes'&&source.directory==='stale',partial:false,observedAt};
    if(query.kind==='makes')return {...common,items:[],makes:rows.map(row=>({make:row.marka_name,total:Number(row['count(*)'])}))};
-   if(query.kind==='models')return {...common,items:[],models:rows.map(row=>({make:row.marka_name,model:row.model_name,total:Number(row['count(*)'])}))};
+   if(query.kind==='models'){
+    const selected=state.modelNames?rows.filter(row=>state.modelNames!.has(String(row.model_name))):rows;
+    return {...common,received:selected.length,items:[],models:selected.map(row=>({make:row.marka_name,model:row.model_name,total:Number(row['count(*)'])}))};
+   }
    if(query.kind==='count')return {...common,items:[],total:Number(Object.values(rows[0])[0]),...(q.countIdentity?{distinctTotal:Number(rows[0].census_distinct_ids)}:{})};
-   return {...common,items:rows.map(row=>{
+   return state.transformList({...common,items:rows.map(row=>{
     const lot=ajesLot(Object.fromEntries(Object.entries(row).map(([key,value])=>[key.toUpperCase(),value])),'stats',false)!;assert.ok(lot);
     return ajesOffer(lot,{currency:'JPY',sourcePrice:120000,rateSource:'cbr',effectiveRate:0.5,rateDate:'2026-11-27'} as any,observedAt);
-   })};
+   })},query);
   }};
  (globalThis as any).__legacyMazda=state;t.after(()=>{delete (globalThis as any).__legacyMazda;});
  const mocks:Record<string,string>={
@@ -286,7 +294,7 @@ async function realPath(t:any,names=matched,modelDirectoryStale=false,source:{ma
   'collection-controls':'export const assertCollectionEnabled=async()=>{};',
   'market-page':'export const sortCatalogRows=x=>x;',
   'live-business-pricing':'export const applyActiveBusinessPricingBatch=async rows=>rows;',
-  'ajes-count-pricing-context':'export const captureAjesCountPricingContext=async()=>{throw Error("unexpected price-filter context");};',
+  'ajes-count-pricing-context':'export const captureAjesCountPricingContext=async()=>{if(!globalThis.__legacyMazda.pricingContextEnabled)throw Error("unexpected price-filter context");return {run:fn=>fn(),price:async rows=>rows};};',
   'japan-preview-parameters':'export const japanPreviewParameters=()=>{throw Error("not attested");};',
   'offer-page-data':'export const getOfferDetailRecord=async()=>globalThis.__legacyMazda.current;',
   'related-model-family':'export const readRelatedModelFamily=async(_make,model)=>model;',
@@ -294,7 +302,7 @@ async function realPath(t:any,names=matched,modelDirectoryStale=false,source:{ma
   presentation:'export const presentCatalogOffer=row=>({makeLabel:row.make,modelLabel:row.model,marketLabel:row.market});',
   'runtime-config':'export const PUBLIC_CATALOG_MARKETS=["china","japan"];',
  };
- const out=await build({stdin:{contents:'export * from "./apps/web/lib/catalog/ajes-catalog.ts"; export * from "./apps/web/app/api/catalog/recommendations/data.ts";',resolveDir:process.cwd()},
+ const out=await build({stdin:{contents:'export * from "./apps/web/lib/catalog/ajes-catalog.ts"; export {AjesUnavailable} from "./apps/web/lib/catalog/ajes-client.ts"; export * from "./apps/web/app/api/catalog/recommendations/data.ts";',resolveDir:process.cwd()},
   bundle:true,platform:'node',format:'cjs',write:false,packages:'external',tsconfig:'apps/web/tsconfig.json',define:{'process.env.AVTOCENA_RELEASE_SHA':JSON.stringify('a'.repeat(40))},plugins:[{name:'legacy-mazda-source',setup(b){
    b.onResolve({filter:/.*/},args=>{
     // Only the counter cache uses fixture storage; identity discovery retains
@@ -308,6 +316,134 @@ async function realPath(t:any,names=matched,modelDirectoryStale=false,source:{ma
  new Function('require','module','exports',out.outputFiles[0].text)((id:string)=>id==='react'?{cache:(fn:any)=>fn}:require(id),mod,mod.exports);
  return {api:mod.exports,state,db};
 }
+
+for(const directory of ['model','make'] as const)test(`an incomplete ${directory} directory retains fresh LIST continuation without claiming the full alias scope`,async t=>{
+ const {api,state}=await realPath(t,Array(49).fill('A4 AVANT'),directory==='model',{make:'AUDI',...(directory==='make'?{directory:'unavailable' as const}:{})});
+ const params={market:'japan',make:'AUDI',model:'A4'};
+ const first=await api.readAjesCatalogPage(params);
+ assert.equal(first.items.length,24);assert.equal(first.partial,true);
+ assert.equal(first.hasMore,true,'incomplete aliases do not invalidate this complete source page');
+ assert.equal(first.selectionIncomplete,true);
+ assert.equal(first.stale,false);assert.equal(first.total,null);assert.equal(first.countSummary,null);
+ assert.match(first.nextCursor,/^j1\.2\.0\.2\./);
+ const second=await api.readAjesCatalogPage({...params,page:'2',after:first.nextCursor});
+ assert.equal(second.items.length,24);assert.equal(second.partial,true);assert.equal(second.selectionIncomplete,true);
+ assert.equal(second.total,null);assert.equal(second.hasMore,true);assert.match(second.nextCursor,/^j1\.3\.0\.3\./);
+ const third=await api.readAjesCatalogPage({...params,page:'3',after:second.nextCursor});
+ assert.equal(third.items.length,1);assert.equal(third.partial,true);assert.equal(third.selectionIncomplete,true);
+ assert.equal(third.hasMore,false);assert.equal(third.nextCursor,null);assert.equal(third.total,null);assert.equal(third.countSummary,null);
+ const ids=[...first.items,...second.items,...third.items].map((row:any)=>row.id);
+ assert.equal(new Set(ids).size,49,'every known matching source row appears once');
+ assert.deepEqual(state.queries.filter(q=>!q.aggregate).map(q=>q.page),[1,2,3]);
+ assert.equal(state.queries.some(q=>q.aggregate==='count'),false,'an incomplete alias selection cannot produce a full count');
+});
+
+test('the actual append client and rendered controls retain the partial selection cursor',async t=>{
+ const {api}=await realPath(t,Array(49).fill('A4 AVANT'),true,{make:'AUDI'});
+ const params={market:'japan',make:'AUDI',model:'A4'},first=await api.readAjesCatalogPage(params,undefined,{includeCount:false});
+ const mocks:Record<string,string>={
+  'next/link':'import {createElement} from "react";export default function Link({prefetch,...props}){return createElement("a",props);}',
+  '@/components/dealers/DealerBrowsingContext':'export const useDealerBrowsing=()=>null;',
+  './green-corner-load-more-action':'export const loadMoreGreenCorner=()=>{throw Error("unexpected other market");};',
+  './CatalogCard':'import {createElement} from "react";export const CatalogCard=({offer})=>createElement("div",{"data-offer-id":offer.id});',
+ };
+ const built=await build({stdin:{contents:'export {CatalogLoadMore} from "./apps/web/components/catalog/CatalogLoadMore.tsx";export {loadMoreCatalog} from "./apps/web/components/catalog/catalog-load-more-action.tsx";',resolveDir:process.cwd()},
+  bundle:true,platform:'node',format:'cjs',write:false,packages:'external',jsx:'automatic',tsconfig:'apps/web/tsconfig.json',plugins:[{name:'append-client-boundaries',setup(builder){
+   builder.onResolve({filter:/.*/},args=>args.path in mocks?{path:args.path,namespace:'fixture'}:undefined);
+   builder.onLoad({filter:/.*/,namespace:'fixture'},args=>({contents:mocks[args.path],resolveDir:process.cwd()}));
+  }}]});
+ const require=createRequire(import.meta.url),mod={exports:{} as any};
+ new Function('require','module','exports',built.outputFiles[0].text)(require,mod,mod.exports);
+ const {createElement}=require('react'),{renderToStaticMarkup}=require('react-dom/server');
+ const html=renderToStaticMarkup(createElement(mod.exports.CatalogLoadMore,{query:params,initialPage:1,initialTotal:null,
+  initialCount:first.items.length,initialCards:null,initialIncomplete:first.partial,initialHasMore:first.hasMore,initialNextCursor:first.nextCursor}));
+ assert.match(html,/Показана часть автомобилей/);assert.match(html,/aria-label="Показать ещё"/);
+ assert.ok(html.includes('after='+first.nextCursor));assert.doesNotMatch(html,/Вы посмотрели все доступные предложения/);
+ let requests=0;
+ t.mock.method(globalThis,'fetch',async(input:any)=>{
+  requests++;const url=new URL(String(input),'https://fixture.invalid');
+  assert.equal(url.pathname,'/api/catalog/search');assert.equal(url.searchParams.get('after'),first.nextCursor);
+  assert.equal(url.searchParams.get('page'),'2');assert.equal(url.searchParams.get('market'),'japan');
+  const result=await api.readAjesCatalogPage(Object.fromEntries(url.searchParams));
+  return Response.json({ok:true,...result});
+ });
+ const next=await mod.exports.loadMoreCatalog(params,2,first.nextCursor);
+ assert.equal(requests,1);assert.equal(next.ids.length,24);assert.equal(next.incomplete,true);
+ assert.equal(next.hasMore,true);assert.match(next.nextCursor,/^j1\.3\.0\.3\./);assert.equal(next.total,null);assert.equal(next.countSummary,null);
+ assert.equal(new Set([...first.items.map((row:any)=>row.id),...next.ids]).size,48);
+});
+
+test('a short fresh LIST with incomplete aliases cannot become exact even with a captured pricing snapshot',async t=>{
+ const {api,state}=await realPath(t,['A4 AVANT'],true,{make:'AUDI'});state.pricingContextEnabled=true;
+ const result=await api.readAjesCatalogPage({market:'japan',make:'AUDI',model:'A4',hasPrice:'no'});
+ assert.equal(result.items.length,1);assert.equal(result.reads,1);assert.equal(result.stale,false);
+ assert.equal(result.partial,true);
+ assert.equal(result.total,null);assert.equal(result.countSummary,null);assert.equal(result.hasMore,false);assert.equal(result.nextCursor,null);
+ assert.equal(state.queries.some(q=>q.aggregate==='count'),false);
+});
+
+for(const [fuel,shown] of [['petrol',2],['diesel',0]] as const)test(`a short ${fuel} LIST preserves its cards without attesting an unproved source-filter scope`,async t=>{
+ const {api,state}=await realPath(t,['A4 AVANT','A4'],false,{make:'AUDI'});
+ const result=await api.readAjesCatalogPage({market:'japan',make:'AUDI',model:'A4',fuel},undefined,{includeCount:false});
+ assert.equal(result.items.length,shown);assert.equal(result.partial,false);assert.equal(result.stale,false);
+ assert.equal(result.reads,1);assert.equal(result.hasMore,false);assert.equal(result.nextCursor,null);
+ assert.equal(result.total,null,'even one exhausted LIST cannot prove cars excluded before local fuel enrichment');
+ assert.equal(result.countSummary,null);assert.equal(state.queries.some(q=>q.aggregate==='count'),false);
+});
+
+test('an admitted-empty but full fresh source page continues within the same incomplete alias selection',async t=>{
+ const {api,state}=await realPath(t,Array(25).fill('A4 AVANT'),true,{make:'AUDI'});
+ state.transformList=(result,query)=>query.page===1?{...result,items:[]}:result;
+ const result=await api.readAjesCatalogPage({market:'japan',make:'AUDI',model:'A4'},undefined,{includeCount:false});
+ assert.equal(result.items.length,1);assert.equal(result.selectionIncomplete,true);assert.equal(result.partial,true);
+ assert.equal(result.total,null);assert.equal(result.hasMore,false);
+ assert.deepEqual(state.queries.filter(q=>!q.aggregate).map(q=>q.page),[1,2]);
+});
+
+test('incomplete alias recovery does not advance partial or stale source fallbacks or hide a first-page refusal',async t=>{
+ const {api,state}=await realPath(t,Array(49).fill('A4 AVANT'),true,{make:'AUDI'});
+ const params={market:'japan',make:'AUDI',model:'A4'};
+ for(const flags of [{partial:true},{stale:true}]){
+  state.transformList=result=>({...result,...flags});const before=state.queries.filter(q=>!q.aggregate).length;
+  const result=await api.readAjesCatalogPage(params,undefined,{includeCount:false});
+  assert.equal(result.items.length,24);assert.equal(result.partial,true);
+  assert.equal(result.total,null);assert.equal(result.hasMore,false);assert.equal(result.nextCursor,null);
+  assert.equal(state.queries.filter(q=>!q.aggregate).length-before,1,'fallback rows cannot authorize another source page');
+ }
+ state.transformList=result=>result;state.listFailure={page:1,error:new api.AjesUnavailable('visitor_restricted')};
+ const before=state.queries.filter(q=>!q.aggregate).length;
+ await assert.rejects(api.readAjesCatalogPage(params,undefined,{includeCount:false}),/visitor_restricted/);
+ assert.equal(state.queries.filter(q=>!q.aggregate).length-before,1);
+});
+
+test('a later source refusal retains the exact failed offset under an incomplete model directory',async t=>{
+ const {api,state}=await realPath(t,Array(49).fill('A4 AVANT'),true,{make:'AUDI'});
+ state.transformList=(result,query)=>query.page===1?{...result,items:result.items.slice(0,23)}:result;
+ state.listFailure={page:2,error:new api.AjesUnavailable('request_timeout')};
+ const params={market:'japan',make:'AUDI',model:'A4'};
+ const first=await api.readAjesCatalogPage(params,undefined,{includeCount:false});
+ assert.equal(first.items.length,23);assert.equal(first.interrupted,true);assert.equal(first.partial,true);
+ assert.equal(first.selectionIncomplete,true);assert.equal(first.total,null);assert.equal(first.hasMore,true);
+ assert.match(first.nextCursor,/^j1\.2\.0\.2\./);
+ assert.deepEqual(state.queries.filter(q=>!q.aggregate).map(q=>q.page),[1,2]);
+ state.listFailure=null;
+ const next=await api.readAjesCatalogPage({...params,page:'2',after:first.nextCursor},undefined,{includeCount:false});
+ assert.equal(next.items.length,24);assert.equal(next.partial,true);assert.equal(next.total,null);
+ assert.equal(new Set([...first.items,...next.items].map((row:any)=>row.id)).size,47);
+ assert.deepEqual(state.queries.filter(q=>!q.aggregate).map(q=>q.page),[1,2,2]);
+});
+
+test('a recovered alias descriptor invalidates a continuation before another LIST read',async t=>{
+ const {api,state}=await realPath(t,[...Array(49).fill('A4 AVANT'),'A4L'],true,{make:'AUDI'});
+ state.modelNames=new Set(['A4 AVANT']);
+ const params={market:'japan',make:'AUDI',model:'A4'};
+ const first=await api.readAjesCatalogPage(params,undefined,{includeCount:false});
+ assert.equal(first.items.length,24);assert.equal(first.hasMore,true);assert.equal(first.selectionIncomplete,true);
+ const before=state.queries.filter(q=>!q.aggregate).length;
+ state.modelDirectoryStale=false;state.modelNames=null;
+ await assert.rejects(api.readAjesCatalogPage({...params,page:'2',after:first.nextCursor},undefined,{includeCount:false}),/ajes_invalid_query|japan_cursor_refresh_required/);
+ assert.equal(state.queries.filter(q=>!q.aggregate).length,before,'a changed alias scope is never interpreted as the old source offset');
+});
 
 test('raw Japanese make selections and legacy display aliases reach the same exact source rows when the directory is available',async t=>{
  for(const make of ['LANDROVER','LAND ROVER','BENZ']){
@@ -385,7 +521,9 @@ test('an unavailable or stale make directory preserves exact rows but cannot att
   assert.equal(state.queries.some(q=>q.aggregate==='count'),false,'an unresolved directory must not issue or publish a misleading COUNT');
   const legacy={market:'japan',make:'Mercedes-Benz'};
   if(directory==='unavailable'){
-   await assert.rejects(api.readAjesCatalogPage(legacy,undefined,{includeCount:false}),/directory_unavailable/);
+   const empty=await api.readAjesCatalogPage(legacy,undefined,{includeCount:false});
+   assert.deepEqual(empty.items,[]);assert.equal(empty.partial,true);assert.equal(empty.selectionIncomplete,true);
+   assert.equal(empty.total,null);assert.equal(empty.countSummary,null);assert.equal(empty.hasMore,false);assert.equal(empty.nextCursor,null);
    await assert.rejects(api.readAjesResolvedPublic(legacy),/directory_unavailable/);
   }else{
    const saved=await api.readAjesResolvedPublic(legacy);assert.equal(saved.items.length,1);assert.equal(saved.partial,true);
@@ -445,7 +583,9 @@ test('real legacy paths keep stale-directory cards partial and reject a false ze
    assert.deepEqual(result.items.map((row:any)=>row.model),names);
    const direct=await api.readAjesResolvedPublic(input);assert.equal(direct.partial,true);assert.equal(direct.items.length,1);
   }else{
-   await assert.rejects(api.readAjesCatalogPage(input,undefined,{includeCount:false}),/directory_unavailable/);
+   const empty=await api.readAjesCatalogPage(input,undefined,{includeCount:false});
+   assert.deepEqual(empty.items,[]);assert.equal(empty.partial,true);assert.equal(empty.selectionIncomplete,true);
+   assert.equal(empty.total,null);assert.equal(empty.countSummary,null);assert.equal(empty.hasMore,false);assert.equal(empty.nextCursor,null);
    await assert.rejects(api.readAjesResolvedPublic(input),/directory_unavailable/);
   }
   await assert.rejects(api.readAjesCountSummary(JSON.stringify(input)),/directory_unavailable/);

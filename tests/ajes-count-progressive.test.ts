@@ -8,7 +8,7 @@ import * as query from '../apps/web/lib/catalog/ajes-query';
 const require=createRequire(import.meta.url);
 const counterStubs:Record<string,string>={
  './ajes-query':'export const {ajesCatalogQuery,ajesQuery,AjesFilterUnavailable,AjesInputError,AjesCursorRefreshRequired}=globalThis.__countFixture.query;',
- './ajes-census':'export const {readAjesCensusCount,ajesRequestedCountQuery,ajesRequestedCountQueryHash,AJES_CENSUS_PREDICATE_VERSION}=globalThis.__countFixture.census;',
+ './ajes-census':'export const {readAjesCensusCount,ajesRequestedCountQuery,ajesRequestedCountQueryHash,ajesSourceScopeSupportsExactCount,AJES_CENSUS_PREDICATE_VERSION}=globalThis.__countFixture.census;',
  './ajes-count-pricing-context':'export const captureAjesCountPricingContext=async()=>{throw Error("unexpected price-filter context");};',
  '../data':'export const getJsonStorage=()=>({readJson:async()=>null,writeJson:async()=>{}});',
 };
@@ -18,7 +18,7 @@ test('ready Japanese cards return while the independent count is still pending',
  const state={counts:0,lists:0,queries:[] as any[],countResult:held as any,census,query};(globalThis as any).__countFixture=state;
  const stubs:Record<string,string>={
   'server-only':'', 'next/headers':"export const headers=async()=>new Map([['x-real-ip','127.0.0.1']]);",
-  './ajes-runtime':"export const ajesClient={read:async q=>{if(q.aggregate!=='count'||!q.countIdentity)throw Error('unexpected source query');const state=globalThis.__countFixture;state.counts++;return state.countResult;}};",
+  './ajes-runtime':"export const ajesClient={read:async q=>{if(q.aggregate!=='count'||q.countIdentity!==undefined)throw Error('unexpected source query');const state=globalThis.__countFixture;state.counts++;return state.countResult;}};",
   './ajes-public':`export const readAjesPublicEvidenceSnapshot=()=>({editorial:{revision:'fixture',entries:{}},calculationIndex:null});export const cappedAjesQuery=async q=>q;export const readAjesPublic=async q=>{globalThis.__countFixture.lists++;globalThis.__countFixture.queries.push(q);return {page:q.page||1,pageSize:24,received:24,items:Array.from({length:q.page===2?23:24},(_,i)=>({id:q.table+'-'+(q.page||1)+'-'+i})),observedAt:new Date().toISOString()};};`,
   './ajes-client':"export const readAjesModelDirectory=async()=>({models:[]});export const readAjesMakeDirectory=async()=>({makes:[]});export class AjesUnavailable extends Error{};",
   './ajes-result-filter':"export const ajesResultFilter=()=>({active:false,priceFilter:false,matches:()=>true});",
@@ -32,7 +32,7 @@ test('ready Japanese cards return while the independent count is still pending',
  try{
   const built=await build({entryPoints:['apps/web/lib/catalog/ajes-catalog.ts'],bundle:true,platform:'node',format:'cjs',write:false,packages:'external',define:{'process.env.AVTOCENA_RELEASE_SHA':JSON.stringify('a'.repeat(40))},plugins:[{name:'count-fixture',setup(b){b.onResolve({filter:/.*/},a=>a.path==='../data'&&!a.importer.endsWith('/catalog/ajes-catalog.ts')?undefined:a.path in stubs?{path:a.path,namespace:'stub'}:undefined);b.onLoad({filter:/.*/,namespace:'stub'},a=>({contents:stubs[a.path]}));}}]});
   const mod={exports:{} as any};new Function('require','module','exports',built.outputFiles[0].text)((id:string)=>id==='react'?{cache:(fn:any)=>fn}:require(id),mod,mod.exports);
-  const params={market:'japan',drive:'awd',city:'Новокузнецк'};
+  const params={market:'japan',yearFrom:'2020',city:'Новокузнецк'};
   const independentCount=mod.exports.readAjesCountSummary(JSON.stringify(params));void independentCount.catch(()=>{});
   for(const market of ['japan']){
    let timer:ReturnType<typeof setTimeout>;
@@ -52,13 +52,13 @@ test('ready Japanese cards return while the independent count is still pending',
   assert.deepEqual(state.queries.map(q=>q.page),[1,2,3,3,4]);
   assert.ok(state.queries.every(q=>q.pageSize===24));
   assert.ok(state.queries.every(q=>JSON.stringify({...q,page:1})===JSON.stringify({...state.queries[0],page:1})),'refill changes only the source page, never the supplier selection');
-  finishCount({total:42,distinctTotal:42,stale:false,observedAt:new Date().toISOString()});
+  finishCount({total:42,stale:false,observedAt:new Date().toISOString()});
   await assert.rejects(independentCount,/census_source_snapshot_unavailable/,'positive source weights do not prove a coherent admitted total');
-  state.countResult={total:0,distinctTotal:0,stale:false,observedAt:new Date().toISOString()};
+  state.countResult={total:0,stale:false,observedAt:new Date().toISOString()};
   const zero=await mod.exports.readAjesCountSummary(JSON.stringify(params));
   assert.equal(zero.total,0);assert.equal(zero.upperBound,false);assert.equal(zero.countProof.sourceTotal,0);
   assert.equal(state.counts,2,'only the two explicitly requested scalar counters ran');
- }finally{finishCount({total:0,distinctTotal:0,stale:false,observedAt:new Date().toISOString()});delete (globalThis as any).__countFixture;}
+ }finally{finishCount({total:0,stale:false,observedAt:new Date().toISOString()});delete (globalThis as any).__countFixture;}
 });
 
 for(const continuation of [false,true])test(`explicitly count-free ${continuation?'pagination':'overview'} Japanese lists do not compete with optional counts`,async()=>{

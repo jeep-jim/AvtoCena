@@ -1,6 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {AJES_CENSUS_FIELDS,ajesQuery,ajesLot,AjesInputError} from '../apps/web/lib/catalog/ajes-query';
+import {createHash} from 'node:crypto';
+import {spawnSync} from 'node:child_process';
+import {AJES_CENSUS_FIELDS,ajesCatalogQuery,ajesQuery,ajesLot,AjesInputError} from '../apps/web/lib/catalog/ajes-query';
 import {createAjesClient} from '../apps/web/lib/catalog/ajes-client';
 import {AJES_CENSUS_PREDICATE_VERSION,applyAjesLotAdmission,ajesCensusFields,ajesRequestedCountQueryHash,evaluateAjesCensusGroup,parseAjesCensusGroups,readAjesCensusCount,type AjesCensusGroup} from '../apps/web/lib/catalog/ajes-census';
 import {ajesResultFilter} from '../apps/web/lib/catalog/ajes-result-filter';
@@ -157,11 +159,14 @@ test('pure representatives reject noncanonical identities and incomplete schema 
 });
 
 test('fresh authoritative zero proves zero without metadata traversal; malformed or stale COUNT cannot',async()=>{
- const source=fixture([]),result=await readAjesCensusCount({...source.options,fields:[]});
+ const source=fixture([]),result=await readAjesCensusCount({...source.options,fields:[],sourceCount:{total:0,observedAt}});
  assert.equal(result.total,0);assert.equal(result.countProof.pages,0);assert.equal(source.queries.length,0);
  assert.equal(result.observedAt,observedAt);assert.equal(result.countProof.sourceObservedAt,observedAt);assert.equal(result.countProof.sourceCompletedAt,new Date(now).toISOString());
  assert.equal(result.countProof.predicateVersion,AJES_CENSUS_PREDICATE_VERSION);assert.notEqual(AJES_CENSUS_PREDICATE_VERSION,'japan-admitted-census-v1');
  assert.equal(result.countProof.requestedQueryHash,ajesRequestedCountQueryHash(params));
+ const sourceSql=ajesQuery({...source.options.query,aggregate:'count'}).sql;
+ assert.doesNotMatch(sourceSql,/distinct|binary/i);
+ assert.equal(result.countProof.sourceQueryHash,createHash('sha256').update(sourceSql).digest('hex'));
  for(const key of ['sourceTotal','sourceDistinctTotal','groupedTotal','groupCount','baseAdmittedTotal','correctionCount','correctionDelta','admittedTotal','knownTotal','unknownTotal'] as const)
   assert.equal(result.countProof[key],0,key);
  for(const count of [{total:NaN,observedAt},{total:-1,observedAt},{total:0.5,observedAt},{total:0,observedAt,stale:true},
@@ -169,6 +174,47 @@ test('fresh authoritative zero proves zero without metadata traversal; malformed
   {total:0,observedAt:new Date(now+1).toISOString()},{total:0,observedAt:new Date(now-30*60_000).toISOString()}])
   await assert.rejects(readAjesCensusCount({...source.options,sourceCount:{...count,distinctTotal:0}}),/source_count_unavailable/);
  assert.equal(source.queries.length,0);
+});
+
+test('real source predicates can count zero before admitted editorial or factory values match the requested filter',async()=>{
+ const ordinary={...base,ID:'counterexample',MARKA_NAME:'AUDI',MODEL_NAME:'A4',AUCTION_TYPE:2,GRADE:'1.5 AT'};
+ const cases=[
+  {name:'color',row:ordinary,selection:{color:'red'},specifications:{color:'red'},field:'color',expected:'red'},
+  {name:'drive',row:ordinary,selection:{drive:'awd'},specifications:{drive:'awd'},field:'drive',expected:'awd'},
+  {name:'pickup',row:ordinary,selection:{body:'pickup'},specifications:{bodyType:'pickup'},field:'bodyType',expected:'pickup'},
+  {name:'fuel',row:{...ordinary,MARKA_NAME:'VOLKSWAGEN',MODEL_NAME:'PASSAT',KUZOV:'3CDFH',ENG_V:1968,TIME:''},selection:{fuel:'diesel'},field:'fuel',expected:'diesel'},
+  // Transmission and engine currently lack final-value postchecks. Their UI
+  // criteria cannot claim completeness while the displayed value can change.
+  {name:'transmission',row:{...ordinary,KPP:'MT'},selection:{transmission:'automatic'},specifications:{transmission:'automatic'},field:'transmission',expected:'automatic'},
+  {name:'engine',row:{...ordinary,ENG_V:0},selection:{engineFrom:'1400',engineTo:'1600'},field:'engineCc',expected:1490},
+ ];
+ for(const entry of cases){
+  const snapshot=emptySnapshot(),selection={market:'japan',make:entry.row.MARKA_NAME,model:entry.row.MODEL_NAME,...entry.selection};
+  if(entry.specifications)snapshot.editorial.entries={'ajes-stats-counterexample':{id:'ajes-stats-counterexample',sourceOfferId:'counterexample',sourceId:'ajes_japan_feed',market:'japan',status:'visible',specifications:entry.specifications}};
+  if(entry.name==='engine'){
+   const models={[modelKey('AUDI','A4')]:compileModelFacts({id:'A4',make:'AUDI',model:'A4',revision:'fixture',variants:[
+    {id:'a4-v1',year:2023,trim:'1.5 AT',status:'observed',markets:['europe'],fuel:'petrol',engineCc:1490,drive:'fwd',transmission:'automatic',bodyType:'sedan'},
+   ]} as any)};
+   snapshot.calculationIndex={version:1,digest:checksum(models),createdAt:observedAt,manifestDigest:'a'.repeat(64),models};
+  }
+  const query=ajesCatalogQuery(selection),sql=ajesQuery({...query,aggregate:'count'}).sql;
+  const script="import json,sqlite3,sys,re\nx=json.load(sys.stdin);db=sqlite3.connect(':memory:');db.create_function('regexp',2,lambda p,v:0 if v is None else bool(re.search(p,str(v),re.I)));db.execute('create table stats ('+','.join(k+' '+('integer' if isinstance(v,(int,float)) else 'text') for k,v in x['row'].items())+')');db.execute('insert into stats values ('+','.join('?' for _ in x['row'])+')',list(x['row'].values()));print(db.execute(x['sql']).fetchone()[0])";
+  const executed=spawnSync('python3',['-c',script],{input:JSON.stringify({sql,row:entry.row}),encoding:'utf8'});
+  assert.equal(executed.status,0,executed.stderr);assert.equal(Number(executed.stdout),0,entry.name);
+  const admitted=await realListMembership([entry.row],selection,snapshot);
+  assert.equal(admitted.length,1,entry.name);assert.equal(admitted[0][entry.field],entry.expected,entry.name);
+  const source=fixture([],selection,snapshot);
+  await assert.rejects(readAjesCensusCount({...source.options,query,sourceCount:{total:0,observedAt}}),/census_source_scope_unproven/,entry.name);
+  assert.equal(source.queries.length,0);
+ }
+});
+
+test('plain, make/model, power-only and post-only budget selections retain a proven ordinary zero',async()=>{
+ for(const extra of [{},{make:'AUDI',model:'A4'},{powerTo:'160'},{budgetTo:'2000000'},{body:'sedan'},{hasPrice:'yes'}]){
+  const selection={market:'japan',...extra},source=fixture([],selection);
+  const result=await readAjesCensusCount({...source.options,query:ajesCatalogQuery(selection),sourceCount:{total:0,observedAt}});
+  assert.equal(result.total,0);assert.equal(result.countProof.sourceTotal,0);assert.equal(result.countProof.sourceDistinctTotal,0);assert.equal(source.queries.length,0);
+ }
 });
 
 test('verified zero still rejects a changed local context or expiry while it is checked',async()=>{
