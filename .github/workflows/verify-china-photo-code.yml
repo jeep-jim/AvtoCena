@@ -45,6 +45,7 @@ on:
       - tests/browser/japan-legacy-redirect.mjs
       - tests/browser/japan-model-controls-ready.mjs
       - scripts/catalog-next/japan-exact-count-browser.mjs
+      - scripts/catalog-next/japan-source-count-browser.mjs
       - tests/browser/japan-exact-count.mjs
       - scripts/catalog-next/japan-price-sort-browser.mjs
       - tests/browser/japan-price-sort.mjs
@@ -83,12 +84,13 @@ jobs:
           node --input-type=module <<'JS'
           import fs from 'node:fs';
           import {checkedCatalogCodeScope} from './scripts/catalog-next/photo-code-scope.mjs';
-          import {japanPriceSortRequired,japanExactCountRequired,japanSourceBoundedIncrementalRequired} from './scripts/catalog-next/japan-stability-code-scope.mjs';
+          import {japanPriceSortRequired,japanExactCountRequired,japanSourceBoundedIncrementalRequired,japanSourceCountRequired} from './scripts/catalog-next/japan-stability-code-scope.mjs';
           const plan = JSON.parse(fs.readFileSync('.github/operations/catalog-next/china-code-serving-plan.json', 'utf8'));
           fs.appendFileSync(process.env.GITHUB_OUTPUT, 'scope=' + checkedCatalogCodeScope(plan) + '\n');
           fs.appendFileSync(process.env.GITHUB_OUTPUT, 'price_sort_required=' + japanPriceSortRequired(plan) + '\n');
           fs.appendFileSync(process.env.GITHUB_OUTPUT, 'exact_count_required=' + japanExactCountRequired(plan) + '\n');
-          fs.appendFileSync(process.env.GITHUB_OUTPUT, 'model_coverage_required=' + japanSourceBoundedIncrementalRequired(plan) + '\n');
+          fs.appendFileSync(process.env.GITHUB_OUTPUT, 'source_count_required=' + japanSourceCountRequired(plan) + '\n');
+          fs.appendFileSync(process.env.GITHUB_OUTPUT, 'model_coverage_required=' + (japanSourceBoundedIncrementalRequired(plan) || japanSourceCountRequired(plan)) + '\n');
           JS
       - name: Prepare Chromium for the required runtime browser fixture
         if: steps.photo_scope.outputs.scope == 'catalog-photo-recovery-v1' || steps.photo_scope.outputs.scope == 'catalog-photo-japan-power-v1' || steps.photo_scope.outputs.scope == 'catalog-japan-completion-v1' || steps.photo_scope.outputs.scope == 'catalog-japan-completion-v2' || steps.photo_scope.outputs.scope == 'catalog-japan-usability-v1' || steps.photo_scope.outputs.scope == 'catalog-crm-china-operations-v1' || steps.photo_scope.outputs.scope == 'catalog-crm-japan-photo-retry-v1' || steps.photo_scope.outputs.scope == 'catalog-japan-pagination24-v1' || steps.photo_scope.outputs.scope == 'catalog-japan-stability-v1'
@@ -113,12 +115,15 @@ jobs:
         if: steps.photo_scope.outputs.price_sort_required == 'true' && steps.photo_scope.outputs.exact_count_required != 'true'
         env:
           CATALOG_JAPAN_MODEL_COVERAGE_REQUIRED: ${{ steps.photo_scope.outputs.model_coverage_required == 'true' && '1' || '0' }}
+          CATALOG_JAPAN_SOURCE_COUNT_REQUIRED: ${{ steps.photo_scope.outputs.source_count_required == 'true' && '1' || '0' }}
         run: |
           set -euo pipefail
           SORT_SHA=$(node -p "JSON.parse(require('fs').readFileSync('.github/operations/catalog-next/china-code-serving-plan.json')).runtimeSha")
           PHOTO_RUNTIME_ROOT="$RUNNER_TEMP/china-serving-runtime-$SORT_SHA" JAPAN_PRICE_SORT_REPORT="$RUNNER_TEMP/japan-price-sort-browser-report.json" node tests/browser/japan-price-sort.mjs
       - name: Verify exact Japan totals and complete model selection on the exact runtime
         if: steps.photo_scope.outputs.exact_count_required == 'true' || steps.photo_scope.outputs.model_coverage_required == 'true'
+        env:
+          CATALOG_JAPAN_SOURCE_COUNT_REQUIRED: ${{ steps.photo_scope.outputs.source_count_required == 'true' && '1' || '0' }}
         run: |
           set -euo pipefail
           COUNT_SHA=$(node -p "JSON.parse(require('fs').readFileSync('.github/operations/catalog-next/china-code-serving-plan.json')).runtimeSha")
@@ -132,7 +137,7 @@ jobs:
           const report=JSON.parse(fs.readFileSync(process.env.RUNNER_TEMP+'/japan-exact-count-browser-report.json','utf8'));
           const expected={runtimeSha:plan.runtimeSha,runtimeTree:plan.runtimeTree,helperSha256};
           checkedJapanExactCountBrowserFixture(report,expected);
-          if (plan.countAcceptance === 'japan-source-bounded-incremental-v1') checkedJapanModelCoverageBrowserFixture(report,expected);
+          if (['japan-source-bounded-incremental-v1','japan-source-count-v1'].includes(plan.countAcceptance)) checkedJapanModelCoverageBrowserFixture(report,expected);
           JS
       - name: Verify bounded Japan directory retries on the exact runtime before host contact
         if: steps.photo_scope.outputs.scope == 'catalog-japan-stability-v1'

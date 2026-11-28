@@ -99,7 +99,7 @@ test('exact-aware read adapter performs one existing API request and only valida
   assert(start>=0&&end>start);
   const adapter=source.slice(start,end);
   assert.equal((adapter.match(/await\s+readJson\(/g)||[]).length,1);
-  const createRead=new Function('context','requireExactCount','requireModelCoverage','readJson','verifyJapanExactCount',adapter+'\nreturn read;');
+  const createRead=new Function('context','requireExactCount','requireModelCoverage','requireSourceCount','readJson','verifyJapanExactCount',adapter+'\nreturn read;');
   const existingUrl='/api/catalog/search?market=japan&page=2',existingOptions={paginationKind:'plain',requirePowerOrder:true};
   const profiles=[
     ...[false,true].map(requireExactCount=>({requireExactCount,requireModelCoverage:false,url:existingUrl,options:existingOptions})),
@@ -107,18 +107,21 @@ test('exact-aware read adapter performs one existing API request and only valida
       url:'/api/catalog/source-models?market=japan&make=AUDI',options:{}},
     {requireExactCount:false,requireModelCoverage:true,
       url:'/api/catalog/search?'+new URLSearchParams({market:'japan',page:'1',pageSize:'24',city:'Новокузнецк',make:'AUDI',model:'A4'}),
-      options:{exactCount:true,modelCoverage:false}},
+      options:{exactCount:true,modelCoverage:false,sourceCount:true}},
+    {requireExactCount:false,requireModelCoverage:true,requireSourceCount:true,
+      url:'/api/catalog/search?'+new URLSearchParams({market:'japan',page:'1',pageSize:'24',city:'Новокузнецк',make:'Audi',model:'A4',countOnly:'1'}),
+      options:{exactCount:true,modelCoverage:false,sourceCount:false}},
   ];
-  for(const {requireExactCount,requireModelCoverage,url,options} of profiles){
+  for(const {requireExactCount,requireModelCoverage,requireSourceCount=false,url,options} of profiles){
     const calls=[],value={status:200,data:{ok:true,items:[],total:null,countSummary:null}},
       context={request:{get(){assert.fail('adapter cannot bypass readJson');}}};
-    const read=createRead(context,requireExactCount,requireModelCoverage,async(actualContext,actualUrl,actualOptions)=>{
+    const read=createRead(context,requireExactCount,requireModelCoverage,requireSourceCount,async(actualContext,actualUrl,actualOptions)=>{
       calls.push('api');assert.equal(actualContext,context);assert.equal(actualUrl,url);
-      assert.deepEqual(actualOptions,{...options,exactCount:requireExactCount,modelCoverage:requireModelCoverage});return value;
+      assert.deepEqual(actualOptions,{...options,exactCount:requireExactCount,modelCoverage:requireModelCoverage,sourceCount:requireSourceCount});return value;
     },(payload,binding)=>{calls.push('validate');assert.equal(payload,value.data);assert.deepEqual(binding,{query:url});});
     assert.equal(await read(url,options),value);
     assert.deepEqual(calls,requireExactCount?['api','validate']:['api'],
-      'incremental reads must not invoke the positive-exact validator or issue a second API call');
+      'incremental and source-count reads must not invoke the positive-exact validator or issue a second API call');
   }
 });
 
