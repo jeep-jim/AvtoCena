@@ -13,11 +13,13 @@ import {verifyJapanPage, verifyJapanFullPage, verifyJapanPowerPage, verifyJapanV
   from '../../scripts/catalog-next/japan-browser-acceptance.mjs';
 import {JAPAN_SOURCE_BOUNDED_INCREMENTAL_POLICY, JAPAN_SOURCE_COUNT_POLICY,
   japanSourceBoundedIncrementalRequired, japanSourceCountRequired, japanSourcePriceOrderRequired,
-  japanSourcePriceOrderAcceptancePassed}
+  japanSourcePriceOrderAcceptancePassed, japanSourceSelectionRequired}
   from '../../scripts/catalog-next/japan-stability-code-scope.mjs';
 import {japanExactCountQueryHash} from '../../scripts/catalog-next/japan-exact-count-browser.mjs';
 import {runJapanSourcePriceOrderBrowser, japanSourcePriceOrderRequirement, japanSourcePriceCountApi}
   from '../../scripts/catalog-next/japan-source-price-order-browser.mjs';
+
+import {runJapanCrossoverBrowser, japanCrossoverSelection, japanCrossoverAcceptancePassed} from '../../scripts/catalog-next/japan-crossover-browser.mjs';
 
 const ROOT = fileURLToPath(new URL('../../', import.meta.url));
 const ORIGIN = 'https://avtocena.com', CITY = 'Новокузнецк';
@@ -161,7 +163,7 @@ export function fixtureResult(query, now) {
     const base = index === 0 ? 950_000 : index === 1 ? 900_000 : 1_050_000 + (23 - index) * 1000;
     return {id,sourceId:'ajes_japan_feed',sourceOfferId:'sort-'+page+'-'+index,market:'japan',
       offerType:'auction',status:'sold',catalogKind:'auction_result',auctionResult:'sold',auctionPriceKind:'hammer',
-      make:'TOYOTA',model:'TEST',year:2022,mileageKm:50000,engineCc:1500,fuel:'petrol',drive:'fwd',bodyType:'hatchback',
+      make:'TOYOTA',model:'TEST',year:2022,mileageKm:50000,engineCc:1500,fuel:'petrol',drive:'fwd',bodyType:query.bodyType==='suv'?'suv':'hatchback',
       sourcePrice:500000,sourceCurrency:'JPY',priceMode:'auction_start',catalogPricingMode:'seller',sellerPriceRub:300000,
       calculationSnapshot:{currencyRate:{currency:'JPY',sourcePrice:500000,effectiveRate:0.6,rateSource:'cbr',rateDate:now.slice(0,10),sourcePriceRub:300000}},
       totalRub:null,calculationStatus:'needs_data',images:[],firstSeenAt:now,updatedAt:now,
@@ -255,7 +257,9 @@ async function main() {
       report.japanSourcePriceOrderRequired = true;
       report.scope = 'Exact runtime components; controlled source JPY order across append, independent bounded counts and unchanged RUB estimates';
     }
+    const sourceSelection = japanSourceSelectionRequired(plan);
     const resultFor = sourcePriceOrder ? sourcePriceFixtureResult : fixtureResult;
+    if(sourceSelection)report.crossoverHelperSha256=hash(await fs.readFile(path.join(ROOT,'scripts/catalog-next/japan-crossover-browser.mjs')));
     fixture = await prepare(process.env.PHOTO_RUNTIME_ROOT, plan);
     Object.assign(report,{runtimeSha:plan.runtimeSha,runtimeTree:plan.runtimeTree,componentSha256:fixture.sources,styles:fixture.styles,
       controllerHelperSha256:hash(await fs.readFile(path.join(ROOT,'scripts/catalog-next/japan-price-sort-browser.mjs')))});
@@ -296,8 +300,9 @@ async function main() {
           else{response.writeHead(204);response.end();}
           return;
         }
-        need(url.pathname==='/cars/japan' && url.searchParams.size===1 && url.searchParams.get('city')===CITY,'document_scope');
-        const initial={city:CITY,market:'japan'},result=resultFor(initial,active.now),props={initial,result,remount:active.remount,sourcePriceOrder};
+        need(url.pathname==='/cars/japan' && url.searchParams.get('city')===CITY,'document_scope');
+        if(url.searchParams.size!==1){need(sourceSelection,'document_scope');japanCrossoverSelection(url.href);}
+        const initial={...Object.fromEntries(url.searchParams),market:'japan'},result=resultFor(initial,active.now),props={initial,result,remount:active.remount,sourcePriceOrder};
         response.writeHead(200,{'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-store'});
         response.end('<!doctype html><html><head><meta charset="utf-8"><link rel="icon" href="data:,"><link rel="stylesheet" href="/fixture.css"></head><body><div id="root">'
           +fixture.renderMarkup(props)+'</div><script>window.__japanPriceSortInitial='+JSON.stringify(props).replace(/</g,'\\u003c')
@@ -374,6 +379,14 @@ async function main() {
         const afterLate=await verifyJapanPriceSortVisible(page,current.items,current,visibleOptions('totalRubDesc'));
         need(afterLate.loaded===24 && !afterLate.exact,'old_aggregate_ignored');
         need(errors.length===0 && (await page.evaluate(()=>window.__japanPriceSort.errors)).length===0 && !state.serverError,'javascript');
+        if(sourceSelection){
+          state.failAppend=false;result.japanCrossoverPower160Required=true;
+          await runJapanCrossoverBrowser({context,report:result,capture:async()=>{},
+            onStage:stage=>{result.stage=stage;},onPage:page=>{currentPage=page;},
+            verifyPage:verifyJapanPage,verifyFullPage:verifyJapanFullPage,verifyPowerPage:verifyJapanPowerPage,
+            verifyVehiclePolicy:verifyJapanVisibleVehiclePolicy,pageReadEvidence:japanPageReadEvidence,readSsrPageEvidence:readJapanSsrPageEvidence});
+          result.checkedAt=new Date().toISOString();need(japanCrossoverAcceptancePassed(result),'crossover_proof');
+        }
         report.cases.push({name:remount?'remounted_controls':'preserved_controls',passed:true,
           sequence:result.checks.priceSort.directions,powerSelectedThroughUi:true,countChecks:result.checks.countDisplay,
           ...(sourcePriceOrder?{sourcePriceOrderAcrossPages:true,rawJpyIncludingFractions:true,
@@ -381,7 +394,8 @@ async function main() {
             phaseBoundaryOnSecondPage:true,deliveredRubNotUsedForOrder:true}:{displayedCityPriceOrder:true,cityReversesBaseOrder:true}),
           failedAppendKeeps48:true,pendingKeeps48:true,
           changedQueryRestartsAt24:true,lateOldAggregateIgnored:true,pageErrors:0,requests:state.requests.length,
-          helperChecks:result.checks.priceSort});
+          helperChecks:result.checks.priceSort,
+          ...(sourceSelection?{crossoverPower160Passed:true,crossoverProof:result.checks.crossoverPower160}: {})});
       }catch(error){
         report.failure={case:remount?'remounted_controls':'preserved_controls',stage:result.stage,
           progress:result.checks.priceSortProgress};

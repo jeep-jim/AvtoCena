@@ -208,8 +208,29 @@ JAPAN_STABILITY_SOURCE_PRICE_CANDIDATE_CODE_FILES = JAPAN_STABILITY_SOURCE_PRICE
     'tests/japan-known-power-query.test.ts',
     'tests/helpers/ajes-mysql-oracle.ts',
 }
+# Separate reviewed selection successor; the original 24-file profile is unchanged.
+JAPAN_STABILITY_SOURCE_SELECTION_CODE_FILES = JAPAN_STABILITY_SOURCE_PRICE_ORDER_CODE_FILES | {
+    'apps/web/lib/catalog/ajes-client.ts',
+    'apps/web/lib/catalog/ajes-filtered-page.ts',
+    'apps/web/lib/catalog/ajes-offer.ts',
+    'apps/web/lib/catalog/ajes-query.ts',
+    'apps/web/lib/catalog/ajes-source-selection.ts',
+    'apps/web/lib/catalog/japan-body-selection.ts',
+    'apps/web/lib/catalog/japan-source-body.ts',
+    'apps/web/lib/catalog/japan-source-selection-sql.ts',
+    'apps/web/lib/catalog/japan-source-selection.ts',
+    'tests/ajes-count-progressive.test.ts',
+    'tests/ajes-japan-only.test.ts',
+    'tests/ajes-saved-source-fields.test.ts',
+    'tests/ajes-source-selection-page.test.ts',
+    'tests/ajes-source-selection.test.ts',
+    'tests/japan-body-selection.test.ts',
+    'tests/japan-source-body.test.ts',
+    'tests/japan-source-selection.test.ts',
+}
 JAPAN_STABILITY_SOURCE_PRICE_CODE_PROFILES = (
-    JAPAN_STABILITY_SOURCE_PRICE_ORDER_CODE_FILES, JAPAN_STABILITY_SOURCE_PRICE_CANDIDATE_CODE_FILES)
+    JAPAN_STABILITY_SOURCE_PRICE_ORDER_CODE_FILES, JAPAN_STABILITY_SOURCE_PRICE_CANDIDATE_CODE_FILES,
+    JAPAN_STABILITY_SOURCE_SELECTION_CODE_FILES)
 JAPAN_STABILITY_HOME_CODE_FILES = JAPAN_STABILITY_RAILS_CODE_FILES | {
     'apps/web/lib/catalog/storage.ts', 'tests/catalog-next-home-isolation.test.ts',
 }
@@ -997,6 +1018,62 @@ def japan_a4_power160_continuation_acceptance_passed(report, auction_database_la
         type(proof.get('firstPageNavigations')) is int and proof['firstPageNavigations'] == 1 and \
         proof.get('fullSelectionExhaustionClaimed') is False and proof.get('liveExhaustiveScan') is False and \
         type(proof.get('pageErrors')) is int and proof['pageErrors'] == 0
+
+
+def japan_crossover_acceptance_passed(report):
+    if not isinstance(report, dict):
+        return False
+    checks = report.get('checks')
+    proof = checks.get('crossoverPower160') if isinstance(checks, dict) else None
+    if not isinstance(proof, dict):
+        return False
+    digest = lambda value: isinstance(value, str) and re.fullmatch(r'[a-f0-9]{64}', value) is not None
+    same_int = lambda value, expected: type(value) is int and value == expected
+    try:
+        checked = datetime.datetime.fromisoformat(report['checkedAt'].replace('Z', '+00:00'))
+    except (KeyError, TypeError, ValueError, AttributeError):
+        return False
+
+    def fresh(value):
+        try:
+            observed = datetime.datetime.fromisoformat(value.replace('Z', '+00:00'))
+            return 0 <= (checked - observed).total_seconds() < 30 * 60
+        except (TypeError, ValueError, AttributeError):
+            return False
+
+    def page(value, ssr):
+        if not isinstance(value, dict):
+            return False
+        return value.get('kind') == ('rendered-ssr' if ssr else 'append-api') and same_int(value.get('shown'), 24) and \
+            value.get('sourceReceiptsFresh') is True and fresh(value.get('observedAt')) and \
+            type(value.get('sourcePages')) is int and 1 <= value['sourcePages'] <= 8 and digest(value.get('receiptsSha256')) and \
+            (same_int(value.get('page'), 1) and value.get('afterSha256') == sha(b'') and value.get('ssrBindingMatched') is True if ssr else
+             same_int(value.get('status'), 200) and value.get('stale') is False and value.get('partial') is False and
+             value.get('interrupted') is False and 'total' in value and value['total'] is None)
+
+    cursor, powers = proof.get('cursor'), proof.get('powers')
+    matched = re.fullmatch(r'j2\.[ku]\.([1-9]\d{0,6})\.(0|[1-9]\d?)\.2\.[a-f0-9]{64}\.[a-f0-9]{64}\.(-|[a-f0-9]{64})', cursor) if isinstance(cursor, str) else None
+    if not (report.get('japanCrossoverPower160Required') is True and report.get('japanCrossoverPower160Passed') is True and
+            proof.get('contract') == 'japan-crossover-power160-browser-v1' and proof.get('city') == 'Новокузнецк' and
+            proof.get('bodyType') == 'suv' and same_int(proof.get('powerTo'), 160) and
+            all(same_int(proof.get(key), value) for key, value in (('documentStatus', 200), ('loadedBefore', 24),
+                ('added', 24), ('loadedAfter', 48), ('duplicateIds', 0), ('pageErrors', 0), ('alerts', 0),
+                ('explicitApiReads', 0), ('ordinaryAppendRequests', 1))) and proof.get('liveExhaustiveScan') is False and
+            all(proof.get(key) is True for key in ('sameFilter', 'cityPreserved', 'bodyControlPreserved', 'powerControlPreserved',
+                'oldIdsPreserved', 'orderPreserved', 'followedEmittedCursor', 'allBodiesSuv', 'knownBeforeUnknown', 'powerValuesMatchApi')) and
+            all(digest(proof.get(key)) for key in ('beforeIdsSha256', 'addedIdsSha256', 'afterIdsSha256', 'powersSha256')) and
+            isinstance(cursor, str) and cursor == proof.get('continuationCursor') and
+            matched and int(matched[1]) <= 1000000 and int(matched[2]) <= 24 and ((int(matched[2]) == 0) == (matched[3] == '-')) and
+            page(proof.get('firstPage'), True) and page(proof.get('nextPage'), False) and
+            isinstance(powers, list) and len(powers) == 48 and proof['powersSha256'] == sha(json.dumps(powers, separators=(',', ':')).encode())):
+        return False
+    unknown = False
+    for value in powers:
+        if value is None:
+            unknown = True
+        elif unknown or type(value) not in (int, float) or not math.isfinite(value) or not 0 < value <= 160:
+            return False
+    return True
 
 
 def japan_source_price_order_acceptance_passed(report):
@@ -4076,6 +4153,8 @@ class Host:
                          auction_database_label=runtime_profile in JAPAN_STABILITY_SOURCE_PRICE_CODE_PROFILES), 'japan_browser_binding')
                 if runtime_profile in JAPAN_STABILITY_SOURCE_PRICE_CODE_PROFILES:
                     need(japan_source_price_order_acceptance_passed(japan), 'japan_browser_binding')
+                if runtime_profile == JAPAN_STABILITY_SOURCE_SELECTION_CODE_FILES:
+                    need(japan_crossover_acceptance_passed(japan), 'japan_browser_binding')
         for name, raw in [('BROWSER_SPEED.json', speed_raw), ('BROWSER_DETAILS.json', details_raw)]:
             new_file(self.directory / name, raw)
             need(file_sha(self.directory / name) == sha(raw), 'browser_evidence_readback')

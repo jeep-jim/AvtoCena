@@ -7,7 +7,7 @@ import {JAPAN_OBSERVED_TIMING_POLICY, JAPAN_STABILITY_CODE_SCOPE, JAPAN_STABILIT
   JAPAN_STABILITY_MODEL_CURSOR_RETAINED_RUNTIME, JAPAN_STABILITY_MODEL_CURSOR_RETAINED_IMAGE,
   JAPAN_STABILITY_SOURCE_PRICE_ORDER_RETAINED_RUNTIME, JAPAN_STABILITY_SOURCE_PRICE_ORDER_RETAINED_IMAGE,
   japanSourceCountAcceptancePassed, japanA4Power160ContinuationAcceptancePassed,
-  japanSourcePriceOrderAcceptancePassed} from './japan-stability-code-scope.mjs';
+  japanSourcePriceOrderAcceptancePassed, japanSourceSelectionAcceptancePassed} from './japan-stability-code-scope.mjs';
 
 export const CHINA_STATE_KEYS = Object.freeze(Object.fromEntries(['accepted', 'intent', 'lease']
   .map(name => [name, `catalog/market-rebuild/v1/china/${name}.json`])));
@@ -469,6 +469,8 @@ function acceptanceProof(candidate, intent, evidence) {
       if (sourcePriceOrder || receipt.retainedRuntimeSha === JAPAN_STABILITY_MODEL_CURSOR_RETAINED_RUNTIME)
         need(japanA4Power160ContinuationAcceptancePassed(speed, {auctionDatabaseLabel: sourcePriceOrder}), 'japan_a4_power160_continuation_binding');
       if (sourcePriceOrder) need(japanSourcePriceOrderAcceptancePassed(speed), 'japan_source_price_order_binding');
+      if (['japanCrossoverPower160Required', 'japanCrossoverPower160Passed'].some(key => Object.hasOwn(speed, key)))
+        need(sourcePriceOrder && japanSourceSelectionAcceptancePassed(speed), 'japan_source_selection_binding');
     }
     else if (intent.previous.value.current.runtimeSha === JAPAN_STABILITY_EXACT_COUNT_RETAINED_RUNTIME
       || ['japanExactCountRequired', 'japanExactCountPassed', 'japanModelCoveragePassed'].some(key => Object.hasOwn(speed, key)))

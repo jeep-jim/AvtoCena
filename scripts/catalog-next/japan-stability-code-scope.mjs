@@ -1,5 +1,6 @@
 import {JAPAN_PAGINATION_CODE_PATHS} from './japan-pagination-code-scope.mjs';
 import {createHash} from 'node:crypto';
+import {japanCrossoverAcceptancePassed} from './japan-crossover-proof.mjs';
 
 /** Exact Japan-only delta from accepted a5ca to the reviewed source plan.
  * The source plan separately pins the complete SHA, tree and binary diff hash.
@@ -243,8 +244,31 @@ export const JAPAN_STABILITY_SOURCE_PRICE_CANDIDATE_CODE_PATHS = Object.freeze([
   'tests/japan-known-power-query.test.ts',
   'tests/helpers/ajes-mysql-oracle.ts',
 ].sort());
+/** Separate successor for bounded source selection and the reported crossover
+ * route. Historical source-order receipts retain their exact 24-file profile. */
+export const JAPAN_STABILITY_SOURCE_SELECTION_CODE_PATHS = Object.freeze([
+  ...JAPAN_STABILITY_SOURCE_PRICE_ORDER_CODE_PATHS,
+  'apps/web/lib/catalog/ajes-client.ts',
+  'apps/web/lib/catalog/ajes-filtered-page.ts',
+  'apps/web/lib/catalog/ajes-offer.ts',
+  'apps/web/lib/catalog/ajes-query.ts',
+  'apps/web/lib/catalog/ajes-source-selection.ts',
+  'apps/web/lib/catalog/japan-body-selection.ts',
+  'apps/web/lib/catalog/japan-source-body.ts',
+  'apps/web/lib/catalog/japan-source-selection-sql.ts',
+  'apps/web/lib/catalog/japan-source-selection.ts',
+  'tests/ajes-count-progressive.test.ts',
+  'tests/ajes-japan-only.test.ts',
+  'tests/ajes-saved-source-fields.test.ts',
+  'tests/ajes-source-selection-page.test.ts',
+  'tests/ajes-source-selection.test.ts',
+  'tests/japan-body-selection.test.ts',
+  'tests/japan-source-body.test.ts',
+  'tests/japan-source-selection.test.ts',
+].sort());
 const sourcePriceOrderProfiles = Object.freeze([
-  JAPAN_STABILITY_SOURCE_PRICE_ORDER_CODE_PATHS, JAPAN_STABILITY_SOURCE_PRICE_CANDIDATE_CODE_PATHS]);
+  JAPAN_STABILITY_SOURCE_PRICE_ORDER_CODE_PATHS, JAPAN_STABILITY_SOURCE_PRICE_CANDIDATE_CODE_PATHS,
+  JAPAN_STABILITY_SOURCE_SELECTION_CODE_PATHS]);
 const reviewedProfiles = Object.freeze([JAPAN_STABILITY_CODE_PATHS, JAPAN_STABILITY_UI_CODE_PATHS,
   JAPAN_STABILITY_POWER_CODE_PATHS, JAPAN_STABILITY_RAILS_CODE_PATHS, JAPAN_STABILITY_HOME_CODE_PATHS,
   JAPAN_STABILITY_METADATA_CODE_PATHS, JAPAN_STABILITY_PRICE_SORT_CODE_PATHS, JAPAN_STABILITY_EXACT_COUNT_CODE_PATHS,
@@ -358,6 +382,16 @@ export function japanSourcePriceOrderRequired(plan) {
   if (plan?.codeScope !== JAPAN_STABILITY_CODE_SCOPE) return false;
   if (!isExactJapanStabilityScope(plan)) throw Error('japan_stability_source_price_order_scope');
   return sourcePriceOrderProfiles.includes(japanStabilityCodePaths(plan));
+}
+
+export function japanSourceSelectionRequired(plan) {
+  if (plan?.codeScope !== JAPAN_STABILITY_CODE_SCOPE) return false;
+  if (!isExactJapanStabilityScope(plan)) throw Error('japan_stability_source_selection_scope');
+  return japanStabilityCodePaths(plan) === JAPAN_STABILITY_SOURCE_SELECTION_CODE_PATHS;
+}
+
+export function japanSourceSelectionAcceptancePassed(report) {
+  return japanSourcePriceOrderAcceptancePassed(report) && japanCrossoverAcceptancePassed(report);
 }
 
 /** The marker is a code-transition contract, never a daily generation policy. */

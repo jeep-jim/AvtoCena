@@ -21,7 +21,7 @@ import {JAPAN_STABILITY_CODE_SCOPE, japanPowerOrderRequired, japanSourceNamesReq
   japanSourceBoundedIncrementalRequired, japanLiteralFamilyRequired, japanSourceBoundedAcceptancePassed,
   japanSourceCountRequired, japanSourceCountAcceptancePassed, japanCountAcceptance,
   japanA4Power160ContinuationRequired, japanA4Power160ContinuationAcceptancePassed,
-  japanSourcePriceOrderRequired, japanSourcePriceOrderAcceptancePassed,
+  japanSourcePriceOrderRequired, japanSourcePriceOrderAcceptancePassed, japanSourceSelectionRequired, japanSourceSelectionAcceptancePassed,
   JAPAN_OBSERVED_TIMING_POLICY, japanObservedTimingRequired} from './japan-stability-code-scope.mjs';
 import {checkedCrmChinaManifestProof, checkedCrmChinaEvidence, verifyCrmChinaUnauthorizedAccess} from './crm-china-status-proof.mjs';
 import {readJapanPhotoRetryFixture, checkedJapanPhotoRetryEvidence} from './japan-photo-retry-proof.mjs';
@@ -488,6 +488,7 @@ export function createChinaDailyRelease({root, servingRoot, pricingPlan, serving
                   CATALOG_JAPAN_MODEL_COVERAGE_REQUIRED: japanSourceBoundedIncrementalRequired(servingPlan) || japanSourceCountRequired(servingPlan) ? '1' : '0',
                   CATALOG_JAPAN_SOURCE_COUNT_REQUIRED: japanSourceCountRequired(servingPlan) ? '1' : '0',
                   CATALOG_JAPAN_A4_POWER160_CONTINUATION_REQUIRED: japanA4Power160ContinuationRequired(servingPlan) ? '1' : '0',
+                  CATALOG_JAPAN_CROSSOVER_POWER160_REQUIRED: japanSourceSelectionRequired(servingPlan) ? '1' : '0',
                   CATALOG_JAPAN_SOURCE_PRICE_ORDER_REQUIRED: japanSourcePriceOrderRequired(servingPlan) ? '1' : '0',
                   CATALOG_JAPAN_BRAND_DIRECTORY_REQUIRED: japanBrandDirectoryRequired(servingPlan) ? '1' : '0'}});
               let japanRaw;
@@ -536,6 +537,7 @@ export function createChinaDailyRelease({root, servingRoot, pricingPlan, serving
               if (japanA4Power160ContinuationRequired(servingPlan)) need(japanA4Power160ContinuationAcceptancePassed(japan,
                 {auctionDatabaseLabel: sourcePriceOrder}), 'japan_browser_binding');
               if (sourcePriceOrder) need(japanSourcePriceOrderAcceptancePassed(japan), 'japan_browser_binding');
+              if (japanSourceSelectionRequired(servingPlan)) need(japanSourceSelectionAcceptancePassed(japan), 'japan_browser_binding');
               if (observedJapanTiming) {
                 need(japan.timingPolicy === JAPAN_OBSERVED_TIMING_POLICY && japan.speedGateRequired === false
                   && japan.speedPassed === null && japan.timingObserved === true, 'japan_timing_binding');

@@ -11,6 +11,7 @@ import {CRM_JAPAN_PHOTO_CODE_SCOPE} from './crm-japan-photo-code-scope.mjs';
 import {JAPAN_PAGINATION_CODE_SCOPE, JAPAN_PAGINATION_CODE_PATHS} from './japan-pagination-code-scope.mjs';
 import {JAPAN_STABILITY_CODE_SCOPE, JAPAN_STABILITY_CODE_PATHS,
   JAPAN_STABILITY_SOURCE_PRICE_ORDER_CODE_PATHS, JAPAN_STABILITY_SOURCE_PRICE_CANDIDATE_CODE_PATHS,
+  JAPAN_STABILITY_SOURCE_SELECTION_CODE_PATHS, japanSourceSelectionRequired,
   japanStabilityCodePaths, japanSourcePriceOrderRequired} from './japan-stability-code-scope.mjs';
 
 const ROOT = fileURLToPath(new URL('../../', import.meta.url));
@@ -113,6 +114,11 @@ export const JAPAN_SOURCE_PRICE_CANDIDATE_TEST_FILES = Object.freeze([...new Set
   ...JAPAN_STABILITY_SOURCE_PRICE_CANDIDATE_CODE_PATHS.filter(name => /^tests\/[^/]+\.test\.ts$/.test(name)),
 ])].sort());
 
+export const JAPAN_SOURCE_SELECTION_TEST_FILES = Object.freeze([...new Set([
+  ...JAPAN_SOURCE_PRICE_ORDER_TEST_FILES,
+  ...JAPAN_STABILITY_SOURCE_SELECTION_CODE_PATHS.filter(name => /^tests\/[^/]+\.test\.ts$/.test(name)),
+])].sort());
+
 async function selectedFiles(runtimeRoot, codeScope, plan) {
   let tracked;
   try {
@@ -129,6 +135,7 @@ async function selectedFiles(runtimeRoot, codeScope, plan) {
     need(power.length > 0 && required.every(name => power.includes(name)), 'power_tests_missing');
   }
   const files = [...new Set([...PHOTO_COMMON_TEST_FILES, ...aj,
+    ...(codeScope === JAPAN_STABILITY_CODE_SCOPE && japanSourceSelectionRequired(plan) ? JAPAN_SOURCE_SELECTION_TEST_FILES : []),
     ...(codeScope === JAPAN_STABILITY_CODE_SCOPE ? japanSourcePriceOrderRequired(plan)
       ? japanStabilityCodePaths(plan) === JAPAN_STABILITY_SOURCE_PRICE_CANDIDATE_CODE_PATHS
         ? JAPAN_SOURCE_PRICE_CANDIDATE_TEST_FILES : JAPAN_SOURCE_PRICE_ORDER_TEST_FILES

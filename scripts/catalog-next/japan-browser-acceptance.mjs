@@ -7,6 +7,7 @@ import {JAPAN_STABILITY_CODE_SCOPE} from './japan-stability-code-scope.mjs';
 import {JAPAN_STABILITY_GATES, JAPAN_LEGACY_MAZDA_THREE_PAGES, japanStabilityApiAllowed, japanStabilitySearchApi, runJapanStabilityBrowser,
  checkJapanStabilityBrandControl,verifyJapanStabilityBrandRequestCount} from './japan-stability-browser.mjs';
 import {JAPAN_PRICE_SORT_GATES, japanPriceSortApiAllowed, verifyJapanPriceSortVisible} from './japan-price-sort-browser.mjs';
+import {runJapanCrossoverBrowser, japanCrossoverRequirement} from './japan-crossover-browser.mjs';
 import {japanSourcePriceOrderRequirement, japanSourcePriceApiAllowed} from './japan-source-price-order-browser.mjs';
 import {JAPAN_EXACT_COUNT_GATES, JAPAN_MODEL_COVERAGE_GATES, JAPAN_SOURCE_BOUNDED_COUNT_ACCEPTANCE,
  japanExactCountRequirement, japanModelCoverageRequirement, japanExactCountApiAllowed, japanModelCoverageApiAllowed,
@@ -896,7 +897,7 @@ async function readJson(context,url,{paginationKind,stability=false,requirePower
  return {status:response.status(),data,headers:response.headers(),durationMs:receivedAt-started,requestedAt:started,receivedAt};
 }
 
-export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,outputFile,playwrightModule,chromeBin,codeScope=SCOPE,requirePowerOrder=false,requireBrandDirectory=false,requirePriceSort=false,requireExactCount=false,requireModelCoverage=false,requireSourceCount=false,requireA4Power160Continuation=false,requireSourcePriceOrder=false,timingPolicy}){
+export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,outputFile,playwrightModule,chromeBin,codeScope=SCOPE,requirePowerOrder=false,requireBrandDirectory=false,requirePriceSort=false,requireExactCount=false,requireModelCoverage=false,requireSourceCount=false,requireA4Power160Continuation=false,requireSourcePriceOrder=false,requireCrossoverPower160=false,timingPolicy}){
  const stability=codeScope===JAPAN_STABILITY_CODE_SCOPE;
  const pagination=codeScope===JAPAN_PAGINATION_CODE_SCOPE||stability;
  const completion=[COMPLETION_SCOPE,COMPLETION_V2_SCOPE,USABILITY_SCOPE,JAPAN_PAGINATION_CODE_SCOPE,JAPAN_STABILITY_CODE_SCOPE].includes(codeScope);
@@ -924,6 +925,8 @@ export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,out
   {japanA4Power160ContinuationRequired:true,japanA4Power160ContinuationPassed:false});
  if(requireSourcePriceOrder===true)Object.assign(report,
   {japanSourcePriceOrderRequired:true,japanSourcePriceOrderPassed:false});
+ if(requireCrossoverPower160===true)Object.assign(report,
+  {japanCrossoverPower160Required:true,japanCrossoverPower160Passed:false});
  if(timingPolicy===JAPAN_OBSERVED_TIMING_POLICY)Object.assign(report,
   {timingPolicy,speedGateRequired:false,speedPassed:null,timingObserved:false});
  let browser,context,currentPage,calculationGrant=null,brandDirectory=null,stabilityBrandDirectory=null,stage='preconditions';
@@ -964,6 +967,7 @@ export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,out
    &&requirePowerOrder&&requireModelCoverage&&!requireExactCount),'power_continuation_option');
   need(typeof requireSourcePriceOrder==='boolean'&&(!requireSourcePriceOrder||requireSourceCount
    &&requireA4Power160Continuation&&requirePriceSort&&!requireExactCount),'source_price_option');
+  need(typeof requireCrossoverPower160==='boolean'&&(!requireCrossoverPower160||requireSourcePriceOrder),'crossover_option');
   japanTimingPolicy(timingPolicy);
   need(timingPolicy===undefined||stability&&requirePowerOrder&&requireBrandDirectory,'timing_policy_scope');
   need(path.isAbsolute(outputFile),'output');
@@ -1395,6 +1399,12 @@ export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,out
     recordJapanResponse(report,stage,value,releaseSha);return value;},
    verifyPage:verifyJapanPage,verifyFullPage:verifyJapanFullPage,
    verifyVehiclePolicy:verifyJapanVisibleVehiclePolicy,verifyVisible:verifyJapanPriceSortVisible});
+  if(requireCrossoverPower160)await runJapanCrossoverBrowser({context,report,capture,
+   onStage:value=>{stage=value;},onPage:value=>{currentPage=value;},
+   observeResponse:value=>recordJapanResponse(report,stage,value,releaseSha),
+   verifyPage:verifyJapanPage,verifyFullPage:verifyJapanFullPage,verifyPowerPage:verifyPower,
+   pageReadEvidence:japanPageReadEvidence,readSsrPageEvidence:readJapanSsrPageEvidence,
+   verifyVehiclePolicy:verifyJapanVisibleVehiclePolicy});
   stage='release_after';await health();
   report.passed=['japanFreshnessPassed','japanPowerApiPassed','japanUiPassed','japanVisibilityPassed','readOnlyBrowserFence',
    ...(completion?['japanPetrolPowerUiPassed','japanDetailPowerInputPassed','japanDeliveredCalculationPassed']:[]),
@@ -1404,7 +1414,8 @@ export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,out
    ...(requireExactCount?JAPAN_EXACT_COUNT_GATES:[]),...(requireModelCoverage?JAPAN_MODEL_COVERAGE_GATES:[]),
    ...(requireSourceCount?JAPAN_SOURCE_COUNT_GATES:[]),
    ...(requireA4Power160Continuation?JAPAN_A4_POWER160_CONTINUATION_GATES:[]),
-   ...(requireSourcePriceOrder?['japanSourcePriceOrderPassed']:[])].every(key=>report[key]===true);
+   ...(requireSourcePriceOrder?['japanSourcePriceOrderPassed']:[]),
+   ...(requireCrossoverPower160?['japanCrossoverPower160Passed']:[])].every(key=>report[key]===true);
  }catch(error){
   const navigationCode=japanNavigationErrorCode(error);
   report.error={stage,code:/^japan_browser_[a-z_]+$/.test(error?.message||'')?error.message:'japan_browser_check_failed',
@@ -1433,6 +1444,7 @@ if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.ur
    requireSourceCount:japanSourceCountRequirement(process.env.CATALOG_JAPAN_SOURCE_COUNT_REQUIRED),
    requireA4Power160Continuation:japanA4Power160ContinuationRequirement(process.env.CATALOG_JAPAN_A4_POWER160_CONTINUATION_REQUIRED),
    requireSourcePriceOrder:japanSourcePriceOrderRequirement(process.env.CATALOG_JAPAN_SOURCE_PRICE_ORDER_REQUIRED),
+   requireCrossoverPower160:japanCrossoverRequirement(process.env.CATALOG_JAPAN_CROSSOVER_POWER160_REQUIRED),
    timingPolicy:japanTimingPolicy(process.env.CATALOG_JAPAN_TIMING_POLICY)});
   console.log('JAPAN_BROWSER '+JSON.stringify(report));if(!report.passed)process.exitCode=1;
  }catch{console.error('japan_browser_report_failed');process.exitCode=1;}

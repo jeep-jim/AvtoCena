@@ -17,6 +17,8 @@ on:
       - scripts/catalog-next/japan-pagination-code-scope.mjs
       - scripts/catalog-next/japan-stability-code-scope.mjs
       - scripts/catalog-next/japan-stability-browser.mjs
+      - scripts/catalog-next/japan-crossover-browser.mjs
+      - scripts/catalog-next/japan-crossover-proof.mjs
       - scripts/catalog-next/japan-filter-directory-proof.mjs
       - scripts/catalog-next/japan-pagination-fixture.mjs
       - scripts/catalog-next/check-photo-runtime-tests.mjs
