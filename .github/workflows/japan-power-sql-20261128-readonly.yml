@@ -1,0 +1,45 @@
+name: Inspect exact saved Japan power SQL structure - read only
+on:
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/japan-power-sql-20261128-readonly.json']
+permissions:
+  contents: read
+concurrency:
+  group: japan-power-sql-20261128-readonly
+  cancel-in-progress: false
+jobs:
+  inspect:
+    if: github.repository_id == '1289722938' && github.ref == 'refs/heads/main' && github.run_attempt == '1'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 2
+    environment: regcloud-staging
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 2
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24.22.3'
+      - name: Verify fixed invocation and offline redaction tests without credentials
+        run: |
+          node --check scripts/catalog-next/inspect-japan-power-sql-20261128.mjs
+          node scripts/catalog-next/inspect-japan-power-sql-20261128.mjs --verify
+          node --import ./tests/helpers/offline-fetch.mjs --test tests/catalog-next-japan-power-sql-20261128.test.mjs tests/readonly-marker-invocation.test.mjs
+      - name: Read one fixed saved failure object and emit whitelist structure
+        env:
+          REGCLOUD_S3_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          REGCLOUD_S3_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+        run: |
+          set -euo pipefail
+          umask 077
+          node scripts/catalog-next/inspect-japan-power-sql-20261128.mjs --run > japan-power-sql-20261128-readonly-report.json
+      - name: Preserve only bounded sanitized structure
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: japan-power-sql-20261128-readonly
+          path: japan-power-sql-20261128-readonly-report.json
+          if-no-files-found: ignore
+          retention-days: 14
