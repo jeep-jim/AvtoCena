@@ -294,8 +294,12 @@ async function runJapanCases(page,width){
   assert.equal(await page.getByRole('button',{name:'Показать ещё',exact:true}).count(),0);
   assert.equal(await page.getByRole('link',{name:'Следующая страница',exact:true}).count(),0);
   assert.equal(await page.getByRole('link',{name:'Страница 4',exact:true}).count(),0);
-  await page.getByText('Вы посмотрели все доступные предложения',{exact:true}).waitFor();
+  // AJ fuel predicates can omit locally corrected matching cars. Exhausted
+  // provider pages cannot certify the complete user selection in that scope.
   const result=responses.at(-1);assert.equal(result.data.items.length,1);assert.equal(result.data.hasMore,false);assert.equal(result.data.nextCursor,null);
+  assert.equal(result.data.partial,true,'an unproved fuel source scope must not claim a complete selection');
+  await page.getByText('Показаны сохранённые автомобили. Полный список пока недоступен.',{exact:true}).waitFor();
+  assert.equal(await page.getByText('Вы посмотрели все доступные предложения',{exact:true}).count(),0);
   assert.equal(result.data.total,null,'a later finite page is not a fabricated global count');
   assert.deepEqual(fixture.queries.map(q=>q.page),power?[1,2,2,3,1,2,3]:[1,2,2,3,3]);
   assert.ok(fixture.queries.every(q=>q.pageSize===24));
@@ -303,6 +307,22 @@ async function runJapanCases(page,width){
   assert.ok(sourceQueries.every(q=>q===sourceQueries[0]),'continuation changes only the source page');
   report.caseCount++;
  }
+ // A source-supported selection separately proves that exhausted visitor pages
+ // end normally. This is a bounded offline fixture, never a live AJ total.
+ fixturePhase='japan_supported_scope_exhaustion';
+ fixture.changed=false;fixture.queries.length=0;responses.length=0;
+ await page.goto(origin+'/cars/japan?fixture=refill&city='+encodeURIComponent('Новокузнецк'));
+ await waitCards(24);
+ await page.getByRole('link',{name:'Страница 2',exact:true}).click();await waitCards(24);
+ await page.getByRole('button',{name:'Показать ещё',exact:true}).click();await waitCards(25);
+ const supported=responses.at(-1);
+ assert.equal(supported.data.partial,false,'a proven source scope must not inherit unproved-filter state');
+ assert.equal(supported.data.hasMore,false);assert.equal(supported.data.nextCursor,null);
+ await page.getByText('Вы посмотрели все доступные предложения',{exact:true}).waitFor();
+ assert.equal(await page.getByText('Показаны сохранённые автомобили. Полный список пока недоступен.',{exact:true}).count(),0);
+ assert.deepEqual(fixture.queries.map(query=>query.page),[1,2,2,3,3]);
+ assert.deepEqual(await cardIds(),expected.slice(24));
+
  fixturePhase='japan_failure_recovery';
  fixture.changed=false;fixture.queries.length=0;responses.length=0;
  await page.goto(origin+'/cars/japan?fixture=refill&case=failure&fuel=petrol&city='+encodeURIComponent('Новокузнецк'));
