@@ -5,6 +5,7 @@ on:
     paths:
       - 'apps/web/lib/catalog/japan-source-power-query.ts'
       - 'tests/japan-source-power-query.test.ts'
+      - 'tests/japan-source-power.test.ts'
       - '.github/workflows/japan-aj-pw-multiply-candidate.yml'
 permissions:
   contents: read
