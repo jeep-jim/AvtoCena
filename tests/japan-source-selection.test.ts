@@ -58,7 +58,8 @@ test('body cohorts use the same exact alias resolution and combine with power, n
  const body={models:[{modelKey:'audi:a4',make:'Audi',model:'A4',year:2020}],ids:['saved-1'],sourceBody:{field:'BODY_TYPE' as const,labels:['SUV','Кроссовер']},pickupCandidates:false,complete:true,unresolved:[]};
  const result=resolveJapanSourceSelection({power,body,sourceModels:[{make:'AUDI',model:'A 4'}],directoryComplete:true});
  const sql=japanSourceSelectionSql(result.selection!,'k');
- assert.deepEqual(result.selection!.body!.ids,['saved-1']);assert(sql.endsWith(' and (1=1))'),'normalized manual IDs require a broad body clause');
+ assert.deepEqual(result.selection!.body!.ids,['saved-1']);
+ assert(sql.includes("id in ('saved-1') or id regexp '[^A-Za-z0-9_-]'"),'canonical and normalized manual IDs remain source candidates');
  const withoutManual=japanSourceSelectionSql({...result.selection!,body:{...result.selection!.body!,ids:[]}},'k');
  assert(withoutManual.includes("body_type is not null and body_type!=''"));assert(withoutManual.includes(') and ('));
  assert(!sql.includes('body_type) in'),'source body aliases cannot silently narrow NFKC/whitespace variants');
@@ -69,11 +70,13 @@ test('missing body schema keeps representable known candidates explicitly incomp
  const result=resolveJapanSourceSelection({body,sourceModels:[{make:'AUDI',model:'A 4'}],directoryComplete:true});
  assert.equal(result.complete,false);assert(result.selection);assert.deepEqual(result.unresolved,['body_source_schema_unobserved']);
  const sql=japanSourceSelectionSql(result.selection);
- assert.equal(sql,'(1=1)','manual identity normalization is retained without a guessed source function');
+ assert(sql.includes("id in ('saved-1') or id regexp '[^A-Za-z0-9_-]'"));
+ assert(sql.includes("model_name like '%A 4%'"),'the model cohort remains selective alongside the manual exception');
  const modelOnly=japanSourceSelectionSql({...result.selection!,body:{...result.selection!.body!,ids:[]}});
  assert(modelOnly.includes("model_name like '%A 4%'"));assert(!modelOnly.includes('body_type'));
  const noIndex=resolveJapanSourceSelection({body:{...body,models:[],unresolved:['body_source_schema_unobserved','body_encyclopedia_unavailable']},sourceModels:[],directoryComplete:false});
- assert.equal(noIndex.complete,false);assert(noIndex.selection);assert.equal(japanSourceSelectionSql(noIndex.selection),'(1=1)');
+ assert.equal(noIndex.complete,false);assert(noIndex.selection);
+ assert.equal(japanSourceSelectionSql(noIndex.selection),"((id in ('saved-1') or id regexp '[^A-Za-z0-9_-]' or id like '%K%' or id like '%ſ%'))");
  const invalid=resolveJapanSourceSelection({body:{...body,unresolved:['body_evidence_identity_invalid']},sourceModels:[{make:'AUDI',model:'A 4'}],directoryComplete:true});
  assert.equal(invalid.selection,null);
 });
@@ -93,7 +96,9 @@ test('local-only body scope intersects annual power exceptions while manual clau
   {make:'AUDI',model:'A4',years:[2020,2021]},{make:'TOYOTA',model:'POWER ONLY',years:[2020]},
  ],ids:['manual-power'],ownerModels:[]},body:{models:[{make:'AUDI',model:'A4',years:[2021,2022]}],ids:['manual-body'],pickupCandidates:false}};
  const before=JSON.stringify(selection),manual=japanSourceSelectionSql(selection,'k');
- assert.equal(manual,'((1=1) and (1=1))');
+ assert(manual.includes("id in ('manual-body','manual-power') or id regexp '[^A-Za-z0-9_-]'"));
+ assert(manual.includes("id in ('manual-body') or id regexp '[^A-Za-z0-9_-]'"));
+ assert(!manual.includes('POWER ONLY'));assert(manual.includes("model_name like '%A4%' and year=2021"));
  const unedited={...selection,power:{...selection.power,ids:[]},body:{...selection.body,ids:[]}},sql=japanSourceSelectionSql(unedited,'k');
  assert(!sql.includes('POWER ONLY'));assert(!sql.includes('2020'));assert(sql.includes("model_name like '%A4%' and year=2021"));
  assert(sql.includes('pw>=0 and pw<=160'));
@@ -132,7 +137,8 @@ test('source power grammar preserves the normalization namespace and leaves the 
  assert.equal(japanSourceSelectionSql(selection,'u'),'(1=1)','U must preserve every malformed or absent wire value');
  const withBody={...selection,body:{models:[],ids:['body-only'],pickupCandidates:false}};
  const unknownBody=japanSourceSelectionSql(withBody,'u');
- assert.equal(unknownBody,'((1=1) and (1=1))');assert.doesNotMatch(unknownBody,/\bpw\b/);
+ assert.equal(unknownBody,"((1=1) and ((id in ('body-only') or id regexp '[^A-Za-z0-9_-]' or id like '%K%' or id like '%ſ%')))");
+ assert.doesNotMatch(unknownBody,/\bpw\b/);
 });
 
 test('exact-family source exclusion covers the complete existing make/model roster without suffix guesses',t=>{

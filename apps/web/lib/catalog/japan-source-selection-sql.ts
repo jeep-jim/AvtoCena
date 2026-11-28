@@ -73,11 +73,15 @@ function modelSql(rows:unknown,annual:boolean,mode=0):string[] {
 }
 function idsSql(value:unknown):string[]{
  if(!Array.isArray(value)||value.some(id=>!validId(id)))throw Error('ajes_invalid_query');
- // Editorial lookup follows entity/NFKC/trim normalization of the source ID.
- // Literal equality cannot preserve every raw spelling, and no new supplier
- // normalization function is assumed. Broaden only this evidence clause;
- // actual admission and the bounded pager still decide visibility/progress.
- return value.length?['(1=1)']:[];
+ // Canonical ASCII IDs are fixed points of ajesText. Any raw spelling changed
+ // by entity decoding, NFKC or trim contains a character outside this class.
+ // Preserve that normalization namespace alongside the exact edited IDs;
+ // unrelated canonical IDs must not turn the whole K/body clause into TRUE.
+ // Unicode case-folding regexes can include Kelvin sign/long s in [A-Za-z]
+ // even when equality does not. Keep those NFKC spellings explicitly as well.
+ // Actual admission still decides identity and power/body membership. Offline
+ // regex fixtures do not establish the supplier's parser/collation behavior.
+ return value.length?[`(id in (${orderedStrings(value).map(id=>`'${id}'`).join(',')}) or id regexp '[^A-Za-z0-9_-]' or id like '%K%' or id like '%ſ%')`]:[];
 }
 const union=(clauses:string[])=>clauses.includes('(1=1)')?'(1=1)':'('+clauses.join(' or ')+')';
 function compileSelection(input:AjesSourceSelection,phase:'k'|'u'|undefined,mode:number):string {
