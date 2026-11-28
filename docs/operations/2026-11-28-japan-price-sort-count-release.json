@@ -2,7 +2,7 @@
   "version": 1,
   "kind": "japan-power-price-sort-count-release-v1",
   "recordedAt": "2026-11-28T01:15:43.875Z",
-  "status": "source-published-hosted-fixture-caller-corrected-awaiting-new-verification",
+  "status": "source-published-exact-runtime-fixture-layout-corrected-awaiting-new-verification",
   "issue": {
     "reportedUrl": "https://avtocena.com/cars/japan?powerTo=160&sort=totalRubDesc&city=%D0%9D%D0%BE%D0%B2%D0%BE%D0%BA%D1%83%D0%B7%D0%BD%D0%B5%D1%86%D0%BA",
     "reproducedPublicly": true,
@@ -272,6 +272,64 @@
           "syntaxPassed": true,
           "unboundNameDiagnostics": 0,
           "helperTestsPassed": 11
+        }
+      },
+      {
+        "runId": 46092914440,
+        "runNumber": 69,
+        "attempt": 1,
+        "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/46092914440",
+        "controllerSha": "2b69ebd57a86748144d0d582176b771040c3f3ea",
+        "status": "failure",
+        "completedAt": "2026-11-28T01:28:43Z",
+        "runtimeSha": "20fd18d12b3f5c7aabef860e1b53da0d505dfd64",
+        "runtimeTree": "b3257c801b2b26cc84ec8d37380a2d8ec120b431",
+        "failingStep": "Verify Japan power then price sorting and live count on the exact runtime",
+        "error": {
+          "code": "japan_price_sort_fixture_failed",
+          "message": "locator.check: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator('form.ac-catalog-filter-panel:visible').locator('input[name=\"powerTo\"][value=\"160\"]')\n    - locator resolved to <input value=\"160\" name=\"powerTo\" type=\"checkbox\" class=\"ac-unified-checkbox ac-quick-checkbox\"/>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <button t"
+        },
+        "completedJourneyCases": 0,
+        "productionRequests": 0,
+        "supplierRequests": 0,
+        "browserVersion": "158.0.8127.36",
+        "reportSha256": "a5ce5a3ad55658eb846f3f1494d30177ed8d8b21b82f1856ba48228cb8e6cc08",
+        "artifacts": [
+          {
+            "id": 15241698234,
+            "name": "japan-legacy-redirect-fixture",
+            "bytes": 709,
+            "sha256": "7107ff69f36d73e4e3d37436cc4ea72d8022ca2599df7ac99e1d56671fc6d3e0",
+            "githubDigestMatched": true
+          },
+          {
+            "id": 15241598550,
+            "name": "japan-price-sort-fixture",
+            "bytes": 7554,
+            "sha256": "662046d29db3f63feaeabd1755945339fbe9ac904b69e22ed68a078e97d886f7",
+            "githubDigestMatched": true
+          },
+          {
+            "id": 15241289081,
+            "name": "japan-model-controls-ready-fixture",
+            "bytes": 1621,
+            "sha256": "27f56aa8802b750b81af91ffd2a60a7faacf1d0171ca4c5d0c76c81ea41feecf",
+            "githubDigestMatched": true
+          }
+        ],
+        "diagnosis": "The visible power checkbox click was intercepted by a button in the controlled fixture. The fixture did not serve the actual catalog sidebar stylesheet or CSS emitted for imported application components. Restore exact runtime styling before another real pointer journey; do not force the click.",
+        "correctionValidation": {
+          "actualCatalogSidebarUsed": true,
+          "actualLayoutStylesAndGeneratedComponentCssServed": true,
+          "runtimeSourceFilesVerified": 159,
+          "runtimeCssSourcesVerified": 13,
+          "servedCssBytes": 185558,
+          "componentBundleSha256": "537d620ea89a816cd8df55f9ca167618b1131aaf3063e8bb399d87afcdda9446",
+          "servedCssSha256": "2efe6f9df689aa1e40233d3dfb41ee5fa17f456c79089419cb9b7bfb79f10899",
+          "helperTestsPassed": 11,
+          "unboundNameDiagnostics": 0,
+          "forceClickUsed": false,
+          "browserPassedLocally": false
         }
       }
     ]

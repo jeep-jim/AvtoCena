@@ -25,11 +25,18 @@ const runtimeFiles = {
   CatalogCard: 'apps/web/components/catalog/CatalogCard.tsx',
   JapanCatalogCount: 'apps/web/components/catalog/JapanCatalogCount.tsx',
   CatalogSelectionContext: 'apps/web/components/catalog/CatalogSelectionContext.tsx',
+  CatalogSidebar: 'apps/web/components/catalog/CatalogSidebar.tsx',
 };
 const extraFiles = ['apps/web/components/catalog/CatalogSortSelect.tsx',
   'apps/web/components/catalog/catalog-load-more-action.tsx', 'apps/web/lib/catalog/ajes-count-display.ts',
   'apps/web/lib/catalog/catalog-sort.ts', 'apps/web/lib/catalog/card-city-delivery.ts',
-  'apps/web/lib/catalog/calculated-price.ts'];
+  'apps/web/lib/catalog/calculated-price.ts', 'apps/web/tailwind.config.ts'];
+// Public layout imports, in their source order. Component CSS (including CSS
+// module class names) is supplied by esbuild's separate generated CSS bundle.
+const layoutStyles = ['apps/web/app/select-controls.css', 'apps/web/app/globals.css',
+  'apps/web/app/catalog-ui.css', 'apps/web/app/public-polish.css', 'apps/web/app/public-typography.css',
+  'apps/web/app/flat-ui.css', 'apps/web/app/public-regression-fixes.css',
+  'apps/web/app/public-price-sheet-fix.css', 'apps/web/app/catalog-filter-compact.css'];
 
 const fixtureSource = `
 import React,{useEffect,useState} from 'react';
@@ -38,7 +45,8 @@ import {CatalogFilters} from 'runtime:CatalogFilters';
 import {CatalogLoadMore} from 'runtime:CatalogLoadMore';
 import {CatalogCard} from 'runtime:CatalogCard';
 import {JapanCatalogCount} from 'runtime:JapanCatalogCount';
-import {CatalogSelectionProvider,CatalogResultCountUpdate} from 'runtime:CatalogSelectionContext';
+import {CatalogSidebar} from 'runtime:CatalogSidebar';
+import {CatalogResultCountUpdate} from 'runtime:CatalogSelectionContext';
 export function PriceSortFixture({initial,result,remount=false}){
  const [current,setCurrent]=useState({initial,result}),[late,setLate]=useState(null);
  const query=current.initial,rows=current.result.items,key=JSON.stringify(query);
@@ -46,16 +54,20 @@ export function PriceSortFixture({initial,result,remount=false}){
   const fixture=window.__japanPriceSort;
   fixture.replace=(next)=>setCurrent(next);fixture.late=(next)=>setLate(next);fixture.ready=true;
  },[]);
- return <CatalogSelectionProvider>
-  {late&&<CatalogResultCountUpdate {...late}/>}
-  <aside className="ac-catalog-sidebar"><CatalogFilters key={remount?key:'preserved'} initial={query} auctionResults facets={{makes:[],models:[],bodyTypes:[],transmissions:[],fuels:['petrol'],drives:[]}}/></aside>
-  <main className="ac-ajes-catalog"><h2>Япония <JapanCatalogCount queryKey={key} summary={current.result.countSummary} initialCount={rows.length}/></h2>
+ return <main className="ac-catalog-page ac-page-copy ac-ajes-catalog min-h-screen text-[var(--ac-text)]">
+  <section className="ac-catalog-shell mx-auto w-full max-w-[1500px] px-4 py-6 md:px-8 md:py-10">
+   <CatalogSidebar resultScope="ajes:japan:false"
+    header={<h1 className="text-[30px] font-black leading-none tracking-[-0.04em] sm:text-4xl md:text-6xl">Авто из Японии под заказ</h1>}
+    filters={<CatalogFilters key={remount?key:'preserved'} initial={query} auctionResults facets={{makes:[],models:[],bodyTypes:[],transmissions:[],fuels:['petrol'],drives:[]}}/>}>
+   {late&&<CatalogResultCountUpdate {...late}/>}
+   <h2>Япония <JapanCatalogCount queryKey={key} summary={current.result.countSummary} initialCount={rows.length}/></h2>
    <CatalogLoadMore key={key} query={query} resultQueryKey={key} initialPage={current.result.page}
     initialTotal={current.result.total} initialCount={rows.length} initialHasMore={current.result.hasMore}
     initialNextCursor={current.result.nextCursor} initialPageKey={JSON.stringify([key,rows.map(row=>row.id)])}
     initialCards={rows.map(offer=><CatalogCard key={offer.id} offer={offer} compact dense/>)}/>
-  </main>
- </CatalogSelectionProvider>;
+   </CatalogSidebar>
+  </section>
+ </main>;
 }
 if(typeof window!=='undefined'){
  const fixture={calls:[],errors:[],ready:false,sequence:0,replace:()=>{},late:()=>{},async navigate(href){
@@ -71,7 +83,7 @@ if(typeof window!=='undefined'){
 }
 `;
 
-async function prepare(runtimeRoot, plan) {
+export async function prepare(runtimeRoot, plan) {
   need(path.isAbsolute(runtimeRoot || '') && runtimeRoot !== ROOT.replace(/\/$/, ''), 'runtime_root');
   const git = args => execFileSync('git', ['-C', runtimeRoot, ...args], {encoding: 'utf8', timeout: 30_000}).trim();
   need(git(['rev-parse', 'HEAD']) === plan.runtimeSha && git(['rev-parse', 'HEAD^{tree}']) === plan.runtimeTree, 'runtime_binding');
@@ -81,7 +93,7 @@ async function prepare(runtimeRoot, plan) {
     const committed = execFileSync('git', ['-C', runtimeRoot, 'show', plan.runtimeSha + ':' + file], {timeout: 30_000});
     need(raw.equals(committed), 'runtime_component_changed'); sources[file] = hash(raw);
   };
-  for (const file of [...Object.values(runtimeFiles), ...extraFiles]) await verifySource(file);
+  for (const file of [...Object.values(runtimeFiles), ...extraFiles, ...layoutStyles]) await verifySource(file);
   const temporary = await fs.mkdtemp(path.join(os.tmpdir(), 'japan-price-sort-'));
   const transport = {name: 'exact-runtime-price-sort-components', setup(builder) {
     builder.onResolve({filter: /^fixture:price-sort$/}, () => ({path: 'price-sort', namespace: 'fixture'}));
@@ -113,15 +125,23 @@ async function prepare(runtimeRoot, plan) {
     const {render} = require(path.join(temporary, 'render.cjs'));
     const renderMarkup = props => render(props).replace(/(<style[^>]*>)([\s\S]*?)(<\/style>)/g,
       (_all, open, css, close) => open + css.replace(/&gt;/g, '>').replace(/&lt;/g, '<').replace(/&quot;/g, '"').replace(/&#x27;/g, "'").replace(/&amp;/g, '&') + close);
-    const css = await postcss([tailwindcss({content: Object.keys(sources).filter(file => file.endsWith('.tsx')).map(file => path.join(runtimeRoot, file))})])
-      .process('@tailwind base;@tailwind components;@tailwind utilities;', {from: undefined});
+    const componentCssPath = Object.values(browserBuild.metafile.outputs).find(output => output.entryPoint)?.cssBundle;
+    need(componentCssPath, 'component_css_bundle');
+    const componentCss = await fs.readFile(path.resolve(runtimeRoot, componentCssPath), 'utf8');
+    const layoutCss = await Promise.all(layoutStyles.map(file => fs.readFile(path.join(runtimeRoot, file), 'utf8')));
+    const tailwindConfig = require('tailwindcss/loadConfig')(path.join(runtimeRoot, 'apps/web/tailwind.config.ts'));
+    const css = await postcss([tailwindcss({...tailwindConfig, content: [
+      ...Object.keys(sources).filter(file => file.endsWith('.tsx')).map(file => path.join(runtimeRoot, file)),
+      {raw: fixtureSource, extension: 'tsx'},
+    ]})]).process([...layoutCss, componentCss].join('\n'), {from: undefined});
     return {temporary, sources, renderMarkup, javascript: await fs.readFile(path.join(temporary, 'fixture.js')),
-      css: css.css + 'body{margin:0;background:#fff;color:#111}.ac-catalog-view{display:grid;grid-template-columns:360px minmax(0,1fr);gap:24px;padding:20px}.ac-catalog-filter-panel{display:block!important;width:330px;padding:12px}.ac-catalog-filter-panel>div.grid{display:flex;flex-direction:column;gap:10px}.ac-catalog-sidebar .ac-filter-settings{display:none!important}.ac-filter-dropdown{background:white}.ac-ajes-catalog{min-width:0}.ac-market-result-count{font-size:16px}article{border:1px solid #ddd;padding:8px}',
+      css: css.css, styles: {sourceFiles: Object.keys(sources).filter(file => file.endsWith('.css')),
+        componentBundleSha256: hash(componentCss), servedCssSha256: hash(css.css)},
     };
   } catch (error) { await fs.rm(temporary, {recursive: true, force: true}); throw error; }
 }
 
-function fixtureResult(query, now) {
+export function fixtureResult(query, now) {
   const page = Number(query.page || 1), sort = query.sort || '';
   need([1, 2, 3].includes(page) && ['', 'totalRub', 'totalRubDesc'].includes(sort) && query.market === 'japan'
     && query.city === CITY && (!query.powerTo || query.powerTo === '160'), 'data_query');
@@ -159,7 +179,7 @@ async function main() {
     need(process.argv.length === 2, 'arguments');
     const plan = JSON.parse(await fs.readFile(path.join(ROOT,'.github/operations/catalog-next/china-code-serving-plan.json'),'utf8'));
     fixture = await prepare(process.env.PHOTO_RUNTIME_ROOT, plan);
-    Object.assign(report,{runtimeSha:plan.runtimeSha,runtimeTree:plan.runtimeTree,componentSha256:fixture.sources,
+    Object.assign(report,{runtimeSha:plan.runtimeSha,runtimeTree:plan.runtimeTree,componentSha256:fixture.sources,styles:fixture.styles,
       controllerHelperSha256:hash(await fs.readFile(path.join(ROOT,'scripts/catalog-next/japan-price-sort-browser.mjs')))});
     need(path.isAbsolute(process.env.PLAYWRIGHT_MODULE || '') && path.isAbsolute(process.env.CHROME_BIN || ''), 'browser_environment');
     const pkg = JSON.parse(await fs.readFile(path.join(path.dirname(process.env.PLAYWRIGHT_MODULE),'package.json'),'utf8'));
@@ -233,6 +253,7 @@ async function main() {
           verifyPowerPage:verifyJapanPowerPage,verifyVehiclePolicy:verifyJapanVisibleVehiclePolicy});
         need(result.japanPriceSortPassed && result.japanCountDisplayPassed,'complete_journey');
         const page=currentPage,prior=[...pages[2].items,...pages[3].items];
+        result.stage='fixture_failed_append_retains_count';
         state.failAppend=true;
         const failed=page.waitForResponse(response=>new URL(response.url()).pathname==='/api/catalog/search'&&new URL(response.url()).searchParams.get('page')==='3');
         await page.locator('main.ac-ajes-catalog').getByRole('button',{name:'Показать ещё',exact:true}).click();
@@ -242,6 +263,7 @@ async function main() {
         need(retained.loaded===48,'failed_append_keeps_count');
         // Hold the next real filter response, proving cards/count persist while
         // the new draft is pending. Then a 24-row query must not inherit 48.
+        result.stage='fixture_pending_query_retains_count';
         state.holdNext=true;
         const selection=selectJapanPriceSort(page,'totalRubDesc',{}).then(()=>({ok:true}),error=>({error}));
         await page.waitForFunction(()=>window.__japanPriceSort.calls.some(href=>new URL(href,location.origin).searchParams.get('sort')==='totalRubDesc')
@@ -252,6 +274,7 @@ async function main() {
         const current=fixtureResult({market:'japan',city:CITY,powerTo:'160',sort:'totalRubDesc'},state.now);
         const reset=await verifyJapanPriceSortVisible(page,current.items,current,{sort:'totalRubDesc'});
         need(reset.loaded===24,'query_resets_loaded_count');
+        result.stage='fixture_late_old_aggregate';
         await page.evaluate(({key})=>window.__japanPriceSort.late({queryKey:key,text:'999999',total:999999}),
           {key:JSON.stringify({city:CITY,powerTo:'160',sort:'totalRub',market:'japan'})});
         await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
@@ -263,12 +286,33 @@ async function main() {
           displayedCityPriceOrder:true,cityReversesBaseOrder:true,failedAppendKeeps48:true,pendingKeeps48:true,
           changedQueryRestartsAt24:true,lateOldAggregateIgnored:true,pageErrors:0,requests:state.requests.length,
           helperChecks:result.checks.priceSort});
+      }catch(error){
+        report.failure={case:remount?'remounted_controls':'preserved_controls',stage:result.stage,
+          progress:result.checks.priceSortProgress};
+        if(currentPage&&!currentPage.isClosed())report.failure.controls=await currentPage.evaluate(()=>{
+          const describe=node=>node?{tag:node.tagName.toLowerCase(),className:String(node.className).slice(0,240),
+            name:node.getAttribute('name'),ariaLabel:node.getAttribute('aria-label')?.slice(0,160)}:null;
+          const inspect=selector=>{
+            const element=document.querySelector(selector);if(!element)return null;
+            const rect=element.getBoundingClientRect(),style=getComputedStyle(element);
+            return {element:describe(element),rect:{x:rect.x,y:rect.y,width:rect.width,height:rect.height},
+              style:{position:style.position,right:style.right,display:style.display,pointerEvents:style.pointerEvents},
+              hit:describe(document.elementFromPoint(rect.x+rect.width/2,rect.y+rect.height/2))};
+          };
+          return {power:inspect('form.ac-catalog-filter-panel input[name="powerTo"][value="160"]'),
+            help:inspect('form.ac-catalog-filter-panel .ac-power-help'),
+            sort:inspect('form.ac-catalog-filter-panel .ac-sidebar-sort button[aria-label^="Сортировка: "]')};
+        }).catch(()=>({unavailable:true}));
+        throw error;
       }finally{state.release();await context.close();}
     }
     need(report.cases.length===2&&report.cases.every(value=>value.passed)&&report.forbiddenTransportAttempts===0,'complete');
     report.passed=true;
-  }catch(error){report.error={code:/^japan_(?:price_sort_fixture|browser)[a-z_]+$/.test(error?.message||'')?error.message:'japan_price_sort_fixture_failed',
-    message:String(error?.message||'').slice(0,500),serverCode:active?.serverError};process.exitCode=1;}
+  }catch(error){
+    const message=String(error?.message||'');
+    report.error={code:/^japan_(?:price_sort_fixture|browser)[a-z_]+$/.test(message)?message:'japan_price_sort_fixture_failed',
+      message:message.length<=8000?message:message.slice(0,6000)+'\n[bounded call log omitted]\n'+message.slice(-2000),
+      messageTruncated:message.length>8000,serverCode:active?.serverError};process.exitCode=1;}
   finally{
     if(browser)await browser.close().catch(()=>{});
     if(server)await new Promise(resolve=>server.close(resolve));
