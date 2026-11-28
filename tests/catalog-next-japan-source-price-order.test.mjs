@@ -48,6 +48,36 @@ test('source order is an exact separate profile and retains all source, model an
   assert.equal(scope.JAPAN_STABILITY_SOURCE_COUNT_CODE_PATHS.length, 18);
 });
 
+test('K candidate successor is exact28 while f83 remains exact24 and all functional gates stay required', () => {
+  const oldFiles = scope.JAPAN_STABILITY_SOURCE_PRICE_ORDER_CODE_PATHS;
+  const files = scope.JAPAN_STABILITY_SOURCE_PRICE_CANDIDATE_CODE_PATHS;
+  assert.equal(oldFiles.length, 24); assert.equal(files.length, 28);
+  assert.deepEqual(files.filter(name => !oldFiles.includes(name)), [
+    'apps/web/lib/catalog/ajes-query.ts', 'apps/web/lib/catalog/japan-known-power-query.ts',
+    'tests/helpers/ajes-mysql-oracle.ts', 'tests/japan-known-power-query.test.ts',
+  ]);
+  const plan = {codeScope: scope.JAPAN_STABILITY_CODE_SCOPE,
+    retainedRuntime: scope.JAPAN_STABILITY_SOURCE_PRICE_ORDER_RETAINED_RUNTIME, runtimeFiles: [...files],
+    acceptancePolicy: scope.JAPAN_OBSERVED_TIMING_POLICY, countAcceptance: scope.JAPAN_SOURCE_COUNT_POLICY};
+  assert.equal(scope.japanStabilityCodePaths(plan), files);
+  for (const name of ['isExactJapanStabilityScope', 'japanObservedTimingRequired', 'japanPowerOrderRequired',
+    'japanBrandDirectoryRequired', 'japanPriceSortRequired', 'japanLiteralFamilyRequired', 'japanSourceCountRequired',
+    'japanA4Power160ContinuationRequired', 'japanSourcePriceOrderRequired']) assert.equal(scope[name](plan), true, name);
+  assert.equal(scope.japanExactCountRequired(plan), false);
+  assert.equal(scope.japanSourceBoundedIncrementalRequired(plan), false);
+  for (const name of files) assert.equal(scope.isExactJapanStabilityScope({...plan,
+    runtimeFiles: files.filter(value => value !== name)}), false, name);
+  for (const patch of [{runtimeFiles: [...files, files[0]]}, {runtimeFiles: [...files, 'packages/engine/index.ts']},
+    {retainedRuntime: 'f83fc7d9983fad8619984128196d5f72eaa292aa'}, {acceptancePolicy: undefined},
+    {countAcceptance: undefined}, {countAcceptance: scope.JAPAN_SOURCE_BOUNDED_INCREMENTAL_POLICY}])
+    assert.equal(scope.isExactJapanStabilityScope({...plan, ...patch}), false);
+  assert.equal(scope.japanStabilityCodePaths({...plan, runtimeFiles: [...oldFiles]}), oldFiles);
+  assert.equal(scope.japanSourcePriceOrderRequired({...plan, runtimeFiles: [...oldFiles]}), true);
+  const retainedCompatibility = scope.japanStabilityCompatibilityPaths({...plan, runtimeFiles: [...oldFiles]});
+  assert.deepEqual(scope.japanStabilityCompatibilityPaths(plan), [...new Set([...retainedCompatibility, ...files])].sort());
+  assert.ok(retainedCompatibility.includes('apps/web/lib/catalog/ajes-client.ts'));
+});
+
 test('two scalar requests and the exact emitted j2 continuation cannot expand to source scans', () => {
   assert.equal(japanSourcePriceOrderRequirement('1'), true);
   for (const value of [undefined, '0']) assert.equal(japanSourcePriceOrderRequirement(value), false);
@@ -325,13 +355,24 @@ test('Python and JS agree on new proof and retain exact historical profiles', ()
 import importlib.util,json,sys
 spec=importlib.util.spec_from_file_location('release_host','scripts/catalog-next/release-host.py')
 m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
-profile=m.JAPAN_STABILITY_SOURCE_PRICE_ORDER_CODE_FILES
-assert m.checked_japan_stability_image_files(sorted(profile),True,m.JAPAN_STABILITY_SOURCE_PRICE_ORDER_RETAINED,m.JAPAN_SOURCE_COUNT_POLICY)==profile
+profiles=m.JAPAN_STABILITY_SOURCE_PRICE_CODE_PROFILES
+assert len(profiles)==2 and [len(profile) for profile in profiles]==[24,28]
+for profile in profiles:
+ assert m.checked_japan_stability_image_files(sorted(profile),True,m.JAPAN_STABILITY_SOURCE_PRICE_ORDER_RETAINED,m.JAPAN_SOURCE_COUNT_POLICY)==profile
+ for rejected in [sorted(profile)[1:],sorted(profile)+['packages/engine/index.ts'],sorted(profile)+[sorted(profile)[0]]]:
+  try: m.checked_japan_stability_image_files(rejected,True,m.JAPAN_STABILITY_SOURCE_PRICE_ORDER_RETAINED,m.JAPAN_SOURCE_COUNT_POLICY)
+  except m.ReleaseError: pass
+  else: raise AssertionError('non-exact profile accepted')
+ for observed,retained,policy in [(False,m.JAPAN_STABILITY_SOURCE_PRICE_ORDER_RETAINED,m.JAPAN_SOURCE_COUNT_POLICY),(True,'f83fc7d9983fad8619984128196d5f72eaa292aa',m.JAPAN_SOURCE_COUNT_POLICY),(True,m.JAPAN_STABILITY_SOURCE_PRICE_ORDER_RETAINED,None)]:
+  try: m.checked_japan_stability_image_files(sorted(profile),observed,retained,policy)
+  except m.ReleaseError: pass
+  else: raise AssertionError('missing profile condition accepted')
 assert len(m.JAPAN_STABILITY_SOURCE_COUNT_CODE_FILES)==18 and len(m.JAPAN_STABILITY_MODEL_CURSOR_CODE_FILES)==5
-print(json.dumps({'files':sorted(profile),'results':[m.japan_source_price_order_acceptance_passed(row) for row in json.load(sys.stdin)]}))
+print(json.dumps({'files':[sorted(profile) for profile in profiles],'results':[m.japan_source_price_order_acceptance_passed(row) for row in json.load(sys.stdin)]}))
 `], {cwd: root, input: JSON.stringify(reports), encoding: 'utf8', maxBuffer: 2 * 1024 * 1024});
   assert.equal(result.status, 0, result.stderr);
   const parsed = JSON.parse(result.stdout);
-  assert.deepEqual(parsed.files, [...scope.JAPAN_STABILITY_SOURCE_PRICE_ORDER_CODE_PATHS].sort());
+  assert.deepEqual(parsed.files, [[...scope.JAPAN_STABILITY_SOURCE_PRICE_ORDER_CODE_PATHS].sort(),
+    [...scope.JAPAN_STABILITY_SOURCE_PRICE_CANDIDATE_CODE_PATHS].sort()]);
   assert.deepEqual(parsed.results, reports.map(scope.japanSourcePriceOrderAcceptancePassed));
 });

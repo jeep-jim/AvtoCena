@@ -1,0 +1,482 @@
+{
+  "version": 1,
+  "status": "candidate_frozen_pending_ci_and_live",
+  "timezone": "Asia/Krasnoyarsk",
+  "retainedRuntime": "5b1e513dc9af3735e3b757c6fe7da763aa92837e",
+  "candidateRuntime": "f83fc7d9983fad8619984128196d5f72eaa292aa",
+  "release40": {
+    "runId": 46156308870,
+    "controllerSha": "fb821e2cc2fb6f2ba5d35ef2b99ac1dd7b71501d",
+    "markerSha": "3124d9078b56c5eeba2c7965caf4b6b1d1f5fc78",
+    "artifactId": 15268847849,
+    "artifactSha256": "d585559efb485cdff60bd11990e12326ac88acfea1395a34290dc82106de458d",
+    "terminal": {
+      "version": 1,
+      "kind": "china-code-cycle-v1",
+      "market": "china",
+      "completed": false,
+      "published": false,
+      "status": "rolled_back",
+      "runtimeSha": "f83fc7d9983fad8619984128196d5f72eaa292aa",
+      "retainedRuntime": "5b1e513dc9af3735e3b757c6fe7da763aa92837e",
+      "sourceRequests": 0,
+      "generationRestores": 0,
+      "priceCalculations": 0,
+      "generationWrites": 0,
+      "encyclopediaWrites": 0,
+      "otherMarketWrites": 0,
+      "deletions": 0,
+      "acceptancePolicy": "japan-functional-observed-timing-v1",
+      "speedGateRequired": false,
+      "speedPassed": null,
+      "timingObserved": true,
+      "appImageCleanupBeforeReserve": {
+        "version": 1,
+        "kind": "china-terminal-app-image-cleanup-v1",
+        "completed": true,
+        "status": "already_absent",
+        "uncertain": false,
+        "imagesRemoved": 0,
+        "runtimeSha": "21d1ad901dff0e51c904dc7dee22dfd534550d18",
+        "imageId": "sha256:aec52d2509bc4a3aca744a80fc12c099c2ca32224d85f3057b862fe4160c1ee5",
+        "witnessSha256": "fdffe0cfce152d0e0bff58c869152dca6b0b6d40925e9dd1c76dcbde54215934",
+        "diskFreeBytesBefore": 47110496256,
+        "diskFreeBytesAfter": 47110496256,
+        "measuredFreeBytesChange": 0,
+        "reason": "already_absent"
+      },
+      "retentionPreserved": true,
+      "serverTiming": {
+        "version": 1,
+        "kind": "japan-server-timing-observation-v1",
+        "release": "f83fc7d9983fad8619984128196d5f72eaa292aa",
+        "nonce": "7527df719a885c3eacdff7d495072b90",
+        "timingPolicy": "japan-functional-observed-timing-v1",
+        "speedGateRequired": false,
+        "speedPassed": null,
+        "timingObserved": true,
+        "broadServerBenchmarkExecuted": false,
+        "healthSeconds": 0.0039,
+        "baselineSha256": "32fba449b77e40983803483ea7b6cb4ece09afa997c2ae08dd968c675f528c59"
+      },
+      "recovered": true,
+      "appImageCleanup": {
+        "version": 1,
+        "kind": "china-terminal-app-image-cleanup-v1",
+        "completed": true,
+        "status": "removed",
+        "uncertain": false,
+        "imagesRemoved": 1,
+        "runtimeSha": "f83fc7d9983fad8619984128196d5f72eaa292aa",
+        "imageId": "sha256:dd66bd6538740cdcc82af18fff0f54e0bee17351497ba338279a899b85271606",
+        "witnessSha256": "3ce49b2fb32426d895dbf2c9736e479d6dd6c20ed55728c54ce41e365c0a1d9f",
+        "diskFreeBytesBefore": 45913718784,
+        "diskFreeBytesAfter": 47105835008,
+        "measuredFreeBytesChange": 1192116224,
+        "reason": "exact_terminal_image"
+      },
+      "errorCode": "china_daily_release_japan_browser_failed",
+      "finishedAt": "2026-11-28T15:18:14.568Z",
+      "leaseReleased": true
+    },
+    "browserFlags": {
+      "japanFreshnessPassed": true,
+      "japanPowerApiPassed": true,
+      "japanUiPassed": true,
+      "japanVisibilityPassed": true,
+      "japanPetrolPowerUiPassed": true,
+      "japanDetailPowerInputPassed": true,
+      "japanDeliveredCalculationPassed": true,
+      "japanFullPagesPassed": true,
+      "japanPagination24Passed": true,
+      "japanCatalogWarningRemovedPassed": true,
+      "japanModelSelectionPassed": false,
+      "japanCombinedFiltersPassed": false,
+      "japanRelatedCardsPassed": false,
+      "japanVehiclePolicyPassed": false,
+      "japanPowerOrderPassed": true,
+      "japanBrandDirectoryPassed": true,
+      "japanPriceSortPassed": false,
+      "japanCountDisplayPassed": false,
+      "japanModelCoveragePassed": false,
+      "japanExactCountPassed": null,
+      "japanSourceCountPassed": false,
+      "japanA4Power160ContinuationPassed": false,
+      "japanSourcePriceOrderPassed": false,
+      "speedPassed": null
+    },
+    "browserError": {
+      "stage": "stability_source_price_desc",
+      "code": "japan_browser_check_failed",
+      "timeout": true,
+      "navigationCode": "timeout"
+    },
+    "priceSortProgress": {
+      "phase": "sort_selected",
+      "explicitApiReads": 2,
+      "countStatus": 200,
+      "counts": [
+        {
+          "selection": "plain",
+          "query": "/api/catalog/search?market=japan&page=1&pageSize=24&city=%D0%9D%D0%BE%D0%B2%D0%BE%D0%BA%D1%83%D0%B7%D0%BD%D0%B5%D1%86%D0%BA",
+          "summary": {
+            "total": 654060,
+            "stale": false,
+            "observedAt": "2026-11-28T15:00:07.569Z",
+            "upperBound": true,
+            "precision": "source-upper-bound",
+            "selectionScope": "source-candidates",
+            "sourceScopeComplete": true,
+            "sourceCountProof": {
+              "version": 1,
+              "kind": "japan-source-count",
+              "predicateVersion": "japan-source-candidates-v1",
+              "requestedQueryHash": "4132e59c0ac79c5358b3deeb4a888b3b1f6238f00cf80906335cd44f610d8a77",
+              "sourceQueryHash": "c67f816e676d6615764642df8051e222d615555cc8524f2322d7025a11fd88e0",
+              "evidenceEpoch": "eb31f552c12fa02fa4932a484b4c64adac7ed2543beda98de041e4b41f05fb7c",
+              "sourceScopeComplete": true,
+              "directoryComplete": true,
+              "sourceTotal": 654060,
+              "sourceObservedAt": "2026-11-28T15:00:07.569Z"
+            }
+          },
+          "ui": {
+            "status": "bounded",
+            "sourceTotal": 654060,
+            "requestedQueryHash": "4132e59c0ac79c5358b3deeb4a888b3b1f6238f00cf80906335cd44f610d8a77",
+            "observedAt": "2026-11-28T15:00:07.569Z",
+            "loadedCount": 24,
+            "label": "В базе аукционов: 654 060"
+          },
+          "independentCount": true,
+          "queryHashVerified": true,
+          "admittedTotal": null
+        },
+        {
+          "selection": "power160",
+          "query": "/api/catalog/search?market=japan&page=1&pageSize=24&city=%D0%9D%D0%BE%D0%B2%D0%BE%D0%BA%D1%83%D0%B7%D0%BD%D0%B5%D1%86%D0%BA&powerTo=160",
+          "summary": {
+            "total": 654060,
+            "stale": false,
+            "observedAt": "2026-11-28T15:00:07.569Z",
+            "upperBound": true,
+            "precision": "source-upper-bound",
+            "selectionScope": "source-candidates",
+            "sourceScopeComplete": true,
+            "sourceCountProof": {
+              "version": 1,
+              "kind": "japan-source-count",
+              "predicateVersion": "japan-source-candidates-v1",
+              "requestedQueryHash": "32b9b645e708fb18bfc0b65f161f1c2bfc6a8a49bd171bfa4ca63ad898f0c16d",
+              "sourceQueryHash": "c67f816e676d6615764642df8051e222d615555cc8524f2322d7025a11fd88e0",
+              "evidenceEpoch": "eb31f552c12fa02fa4932a484b4c64adac7ed2543beda98de041e4b41f05fb7c",
+              "sourceScopeComplete": true,
+              "directoryComplete": true,
+              "sourceTotal": 654060,
+              "sourceObservedAt": "2026-11-28T15:00:07.569Z"
+            }
+          },
+          "ui": {
+            "status": "bounded",
+            "sourceTotal": 654060,
+            "requestedQueryHash": "32b9b645e708fb18bfc0b65f161f1c2bfc6a8a49bd171bfa4ca63ad898f0c16d",
+            "observedAt": "2026-11-28T15:00:07.569Z",
+            "loadedCount": 24,
+            "label": "В базе аукционов: 654 060"
+          },
+          "independentCount": true,
+          "queryHashVerified": true,
+          "admittedTotal": null
+        }
+      ],
+      "readyChecks": 4,
+      "powerSelectedThroughUi": true,
+      "sortsSelectedThroughUi": [
+        "totalRubDesc"
+      ]
+    }
+  },
+  "savedFailureAttribution": {
+    "record": {
+      "version": 1,
+      "kind": "japan-stability-saved-failure-v1",
+      "records": [
+        {
+          "slot": "stats-list-1",
+          "readStatus": "ok",
+          "startedAt": "2026-11-28T15:16:57.156Z",
+          "finishedAt": "2026-11-28T15:16:57.862Z",
+          "kind": "list",
+          "outcome": "invalid_response",
+          "page": 1,
+          "pageSize": 24,
+          "httpStatus": 200,
+          "providerCode": null,
+          "sqlSha256": "43ce2060c958196cb28854704a8125ac4ae5f118130ef6deae1dde4597731003",
+          "sqlBytes": 3579,
+          "responseValidation": {
+            "version": 1,
+            "phase": "empty_confirmation",
+            "code": "count_unavailable",
+            "wireBytes": 2,
+            "decodedBytes": 2,
+            "rowCount": 0,
+            "rootKind": "array",
+            "originCode": "invalid_response"
+          }
+        },
+        {
+          "slot": "stats-list-2",
+          "readStatus": "ok",
+          "startedAt": "2026-11-28T13:19:36.795Z",
+          "finishedAt": "2026-11-28T13:19:37.314Z",
+          "kind": "list",
+          "outcome": "invalid_response",
+          "page": 2,
+          "pageSize": 24,
+          "httpStatus": 200,
+          "providerCode": null,
+          "sqlSha256": "6c74302e81fd32df18bf653d2759929783aa2d975d9c0fb734a47e7c4866366f",
+          "sqlBytes": 3581,
+          "responseValidation": {
+            "version": 1,
+            "phase": "empty_confirmation",
+            "code": "count_unavailable",
+            "wireBytes": 2,
+            "decodedBytes": 2,
+            "rowCount": 0,
+            "rootKind": "array",
+            "originCode": "invalid_response"
+          }
+        },
+        {
+          "slot": "stats-list-3",
+          "readStatus": "ok",
+          "startedAt": "2026-11-28T10:02:28.941Z",
+          "finishedAt": "2026-11-28T10:02:29.102Z",
+          "kind": "list",
+          "outcome": "visitor_restricted",
+          "page": 3,
+          "pageSize": 24,
+          "httpStatus": 200,
+          "providerCode": "bot",
+          "sqlSha256": "f593bcbc6bfb77d9c213386adac54d0f50a1d98b3cd87d7a6c345add808c44ca",
+          "sqlBytes": 3601
+        },
+        {
+          "slot": "stats-count",
+          "readStatus": "ok",
+          "startedAt": "2026-11-28T15:16:57.280Z",
+          "finishedAt": "2026-11-28T15:16:57.494Z",
+          "kind": "count",
+          "outcome": "invalid_response",
+          "page": 1,
+          "pageSize": 1,
+          "httpStatus": 200,
+          "providerCode": null,
+          "sqlSha256": "9be9362805717b91ec7ad5a992f28c4a3cd754c94bc8884a02c4dbec14af029b",
+          "sqlBytes": 3540,
+          "responseValidation": {
+            "version": 1,
+            "phase": "aggregate_shape",
+            "code": "count_row_count",
+            "wireBytes": 2,
+            "decodedBytes": 2,
+            "rowCount": 0,
+            "rootKind": "array"
+          }
+        },
+        {
+          "slot": "stats-latest",
+          "readStatus": "ok",
+          "startedAt": "2026-11-28T15:16:57.156Z",
+          "finishedAt": "2026-11-28T15:16:57.862Z",
+          "kind": "list",
+          "outcome": "invalid_response",
+          "page": 1,
+          "pageSize": 24,
+          "httpStatus": 200,
+          "providerCode": null,
+          "sqlSha256": "43ce2060c958196cb28854704a8125ac4ae5f118130ef6deae1dde4597731003",
+          "sqlBytes": 3579,
+          "responseValidation": {
+            "version": 1,
+            "phase": "empty_confirmation",
+            "code": "count_unavailable",
+            "wireBytes": 2,
+            "decodedBytes": 2,
+            "rowCount": 0,
+            "rootKind": "array",
+            "originCode": "invalid_response"
+          }
+        }
+      ],
+      "supplierRequests": 0,
+      "writes": 0,
+      "attribution": "saved_outer_request_metadata_only",
+      "historyReads": 0,
+      "capture": {
+        "version": 1,
+        "stage": "before_rollback",
+        "runtimeSha": "f83fc7d9983fad8619984128196d5f72eaa292aa",
+        "controllerSha": "3124d9078b56c5eeba2c7965caf4b6b1d1f5fc78",
+        "nonce": "7527df719a885c3eacdff7d495072b90",
+        "failedStage": "stability_source_price_desc",
+        "capturedAt": "2026-11-28T15:17:25.627Z"
+      }
+    },
+    "matchedSelection": {
+      "table": "stats",
+      "make": "HAIMA",
+      "sort": "updatedAt"
+    },
+    "listSqlSha256": "43ce2060c958196cb28854704a8125ac4ae5f118130ef6deae1dde4597731003",
+    "listSqlBytes": 3579,
+    "countSqlSha256": "9be9362805717b91ec7ad5a992f28c4a3cd754c94bc8884a02c4dbec14af029b",
+    "countSqlBytes": 3540,
+    "isAllJapanDescFailure": false
+  },
+  "savedDescAudit": {
+    "runId": 46160838753,
+    "artifactId": 15269691281,
+    "artifactSha256": "bdb24e23d475b388e336811f7cb6504e88d5a4b5cd2f9c171bd61b54929e4d00",
+    "report": {
+      "version": 1,
+      "kind": "japan-desc-saved-cache-audit-v1",
+      "runtimeSha": "f83fc7d9983fad8619984128196d5f72eaa292aa",
+      "failedRunId": "46156308870",
+      "selection": {
+        "table": "stats",
+        "sort": "totalRubDesc",
+        "powerTo": 160,
+        "pageSize": 24,
+        "pages": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ]
+      },
+      "attribution": "exact_cached_query_not_run_identity",
+      "freshnessEvaluated": false,
+      "completed": true,
+      "objectGets": 8,
+      "acceptedResponseBytes": 306689,
+      "bucketListings": 0,
+      "supplierRequests": 0,
+      "storageWrites": 0,
+      "records": [
+        {
+          "page": 1,
+          "readStatus": "matched",
+          "observedAt": "2026-11-28T15:16:19.156Z",
+          "stale": false,
+          "partial": false,
+          "received": 24,
+          "rejected": 0,
+          "rowCount": 24
+        },
+        {
+          "page": 2,
+          "readStatus": "matched",
+          "observedAt": "2026-11-28T15:16:23.246Z",
+          "stale": false,
+          "partial": false,
+          "received": 24,
+          "rejected": 0,
+          "rowCount": 24
+        },
+        {
+          "page": 3,
+          "readStatus": "missing"
+        },
+        {
+          "page": 4,
+          "readStatus": "missing"
+        },
+        {
+          "page": 5,
+          "readStatus": "missing"
+        },
+        {
+          "page": 6,
+          "readStatus": "missing"
+        },
+        {
+          "page": 7,
+          "readStatus": "missing"
+        },
+        {
+          "page": 8,
+          "readStatus": "missing"
+        }
+      ],
+      "aggregate": {
+        "matchedPages": 2,
+        "rowOccurrences": 48,
+        "supplierPw": {
+          "atMost160": 0,
+          "over160": 2,
+          "unknown": 46
+        },
+        "priceJpy": {
+          "known": 48,
+          "unknown": 0,
+          "min": 16490000,
+          "max": 32880000,
+          "withinPagePairs": 46,
+          "withinPagesDescending": true,
+          "adjacentPagePairs": 1,
+          "adjacentPagesDescending": true
+        },
+        "localPowerEvaluated": false
+      },
+      "invocation": {
+        "version": 1,
+        "event": "push",
+        "sourceSha": "09f5fd9cd06b3000acf1bf51c98035a08b107897",
+        "approvedSourceSha": "71105c2740242908c2942ec21daa82a3a9eb8c00",
+        "markerPath": ".github/market-runs/japan-desc-cache-20261128-readonly.json"
+      }
+    }
+  },
+  "limits": {
+    "sourceCountIsAdmittedTotal": false,
+    "globalDeliveredRubSortImplemented": false,
+    "missingCachePagesProveNoRead": false,
+    "rawSupplierPowerIsLocalAdmission": false
+  },
+  "nextChange": "Conservative known-power candidate selection only for source-price K phase, retaining local/manual overrides and existing bounds; live acceptance remains required.",
+  "nextCandidate": {
+    "runtimeSha": "f2918604dcbaadc710d7d03d4345dedabe121e63",
+    "runtimeTree": "1840b81f94a3436785938be513f25582ec51a4d0",
+    "runtimeDiffSha256": "8be6d3997c5624772fbb5b4c28eca304f724112df9ced56489816ec69b24b0e4",
+    "runtimeFileCount": 28,
+    "pricingToServingDiffSha256": "f476ef75785c8ccc3d31e991ec64da204326563d0b6944ca87822056f351cb6b",
+    "pricingToServingFileCount": 141,
+    "localVerification": {
+      "targetedTests": {
+        "passed": 122,
+        "failed": 0
+      },
+      "webAndEngineTypecheckPassed": true,
+      "independentNormalizedIdReviewPassed": true,
+      "protectedPricingPathsUnchanged": true,
+      "productionPublished": false
+    },
+    "behavior": {
+      "knownPhaseCandidateSupersetOnly": true,
+      "localManualExceptionsPreserved": true,
+      "normalizedEditorialIdSpellingsPreserved": true,
+      "broadUnknownPhaseUnchanged": true,
+      "ordinaryPowerQueryUnchanged": true,
+      "overallCountQueryUnchanged": true,
+      "readBudgetUnchanged": true,
+      "liveAcceptanceRequired": true
+    }
+  }
+}

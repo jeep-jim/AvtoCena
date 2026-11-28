@@ -220,8 +220,9 @@ test('scope CI retains China and Japan native assertions while both old photo pr
  assert.match(helper,/codeScope === CRM_CHINA_CODE_SCOPE \? CRM_CHINA_TEST_FILES/);
  assert.match(helper,/codeScope === CRM_JAPAN_PHOTO_CODE_SCOPE \? CRM_CHINA_TEST_FILES/);
  assert.match(helper,/codeScope === JAPAN_PAGINATION_CODE_SCOPE \? JAPAN_PAGINATION_TEST_FILES/);
- assert.match(helper,/codeScope === JAPAN_STABILITY_CODE_SCOPE \? japanSourcePriceOrderRequired\(plan\)\s+\? JAPAN_SOURCE_PRICE_ORDER_TEST_FILES : JAPAN_STABILITY_TEST_FILES/);
+ assert.match(helper,/codeScope === JAPAN_STABILITY_CODE_SCOPE \? japanSourcePriceOrderRequired\(plan\)\s+\? japanStabilityCodePaths\(plan\) === JAPAN_STABILITY_SOURCE_PRICE_CANDIDATE_CODE_PATHS\s+\? JAPAN_SOURCE_PRICE_CANDIDATE_TEST_FILES : JAPAN_SOURCE_PRICE_ORDER_TEST_FILES\s+: JAPAN_STABILITY_TEST_FILES/);
  assert.match(helper,/export const JAPAN_SOURCE_PRICE_ORDER_TEST_FILES = Object\.freeze\(\[\.\.\.new Set\(\[\s+\.\.\.JAPAN_STABILITY_TEST_FILES,\s+\.\.\.JAPAN_STABILITY_SOURCE_PRICE_ORDER_CODE_PATHS\.filter/);
+ assert.match(helper,/export const JAPAN_SOURCE_PRICE_CANDIDATE_TEST_FILES = Object\.freeze\(\[\.\.\.new Set\(\[\s+\.\.\.JAPAN_SOURCE_PRICE_ORDER_TEST_FILES,\s+\.\.\.JAPAN_STABILITY_SOURCE_PRICE_CANDIDATE_CODE_PATHS\.filter/);
  assert.match(helper,/selectedFiles\(runtimeRoot, codeScope, plan\)/);
  assert.match(helper,/'tests\/selection-city-persistence\.test\.ts'/);
  assert.match(helper,/JAPAN_RECOVERY_CODE_PATHS\.filter\(name => name\.startsWith\('tests\/'\)\)/);

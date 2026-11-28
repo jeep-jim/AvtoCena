@@ -4,11 +4,15 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import os from 'node:os';
 import {execFileSync} from 'node:child_process';
-import {checkPhotoRuntimeTests, PHOTO_COMMON_TEST_FILES, JAPAN_RECOVERY_TEST_FILES,JAPAN_COMPLETION_TEST_FILES,JAPAN_COMPLETION_V2_TEST_FILES,JAPAN_USABILITY_TEST_FILES,CRM_CHINA_TEST_FILES,JAPAN_PAGINATION_TEST_FILES} from '../scripts/catalog-next/check-photo-runtime-tests.mjs';
+import {checkPhotoRuntimeTests, PHOTO_COMMON_TEST_FILES, JAPAN_RECOVERY_TEST_FILES,JAPAN_COMPLETION_TEST_FILES,JAPAN_COMPLETION_V2_TEST_FILES,JAPAN_USABILITY_TEST_FILES,CRM_CHINA_TEST_FILES,JAPAN_PAGINATION_TEST_FILES,
+  JAPAN_SOURCE_PRICE_ORDER_TEST_FILES,JAPAN_SOURCE_PRICE_CANDIDATE_TEST_FILES} from '../scripts/catalog-next/check-photo-runtime-tests.mjs';
 import {CRM_CHINA_CODE_SCOPE, CRM_CHINA_CODE_PATHS, CRM_CHINA_RETAINED_RUNTIME} from '../scripts/catalog-next/crm-china-code-scope.mjs';
 import {CRM_JAPAN_PHOTO_CODE_SCOPE, CRM_JAPAN_PHOTO_CODE_PATHS} from '../scripts/catalog-next/crm-japan-photo-code-scope.mjs';
 import {JAPAN_PAGINATION_CODE_SCOPE,JAPAN_PAGINATION_CODE_PATHS,JAPAN_PAGINATION_RETAINED_RUNTIME} from '../scripts/catalog-next/japan-pagination-code-scope.mjs';
 import {CHINA_RUNTIME_TEST_FILES} from '../scripts/catalog-next/check-runtime-tests.mjs';
+import {JAPAN_STABILITY_CODE_SCOPE,JAPAN_STABILITY_SOURCE_PRICE_ORDER_CODE_PATHS,JAPAN_STABILITY_SOURCE_PRICE_CANDIDATE_CODE_PATHS,
+  JAPAN_STABILITY_SOURCE_PRICE_ORDER_RETAINED_RUNTIME,JAPAN_SOURCE_COUNT_POLICY,JAPAN_OBSERVED_TIMING_POLICY}
+  from '../scripts/catalog-next/japan-stability-code-scope.mjs';
 import {CHINA_PHOTO_CODE_PATHS, CHINA_PHOTO_JAPAN_CODE_PATHS, JAPAN_RECOVERY_CODE_PATHS,
   JAPAN_RECOVERY_RETAINED_RUNTIME,JAPAN_COMPLETION_CODE_PATHS,JAPAN_COMPLETION_RETAINED_RUNTIME,JAPAN_COMPLETION_V2_CODE_PATHS,JAPAN_USABILITY_CODE_PATHS,JAPAN_USABILITY_RETAINED_RUNTIME} from '../scripts/catalog-next/photo-code-scope.mjs';
 
@@ -63,6 +67,36 @@ test('photo-only runs the complete common and fixed union while the reviewed pat
   assert.equal(await fs.readFile(f.filename, 'utf8'), 'export const fixtureValue = 1;\n');
   assert.equal(f.git(['diff', '--name-only', 'HEAD', '--']), '');
   assert.equal(await fs.readFile(path.join(f.runtimeRoot, 'tests/ajes-unreviewed.test.ts'), 'utf8'), 'must never execute\n');
+});
+
+for (const profile of ['historical24', 'candidate28', 'candidate28_missing'])
+test('source-price native test selection retains historical suite and requires candidate regression: ' + profile, async t => {
+  const f = await fixture(t), candidate = profile !== 'historical24';
+  const required = candidate ? JAPAN_SOURCE_PRICE_CANDIDATE_TEST_FILES : JAPAN_SOURCE_PRICE_ORDER_TEST_FILES;
+  for (const filename of required) {
+    await fs.mkdir(path.dirname(path.join(f.runtimeRoot, filename)), {recursive: true});
+    try { await fs.writeFile(path.join(f.runtimeRoot, filename), 'export const fixtureValue = 1;\n', {flag: 'wx'}); }
+    catch (error) { if (error.code !== 'EEXIST') throw error; }
+  }
+  f.git(['add', '.']); f.commit(); f.refreshPlan();
+  Object.assign(f.plan, {codeScope: JAPAN_STABILITY_CODE_SCOPE,
+    retainedRuntime: JAPAN_STABILITY_SOURCE_PRICE_ORDER_RETAINED_RUNTIME,
+    acceptancePolicy: JAPAN_OBSERVED_TIMING_POLICY, countAcceptance: JAPAN_SOURCE_COUNT_POLICY,
+    runtimeFiles: [...(candidate ? JAPAN_STABILITY_SOURCE_PRICE_CANDIDATE_CODE_PATHS : JAPAN_STABILITY_SOURCE_PRICE_ORDER_CODE_PATHS)]});
+  if (profile === 'candidate28_missing') {
+    f.git(['rm', 'tests/japan-known-power-query.test.ts']); f.commit(); f.refreshPlan();
+  }
+  let calls = 0;
+  const operation = () => checkPhotoRuntimeTests({...f, patchPath: path.join(f.directory, 'must-not-open'), runTests: async ({files}) => {
+    calls++;
+    assert.deepEqual(files, [...new Set([...required, ...aj])].sort());
+    assert.equal(files.includes('tests/japan-known-power-query.test.ts'), candidate);
+    for (const retained of JAPAN_SOURCE_PRICE_ORDER_TEST_FILES) assert.ok(files.includes(retained));
+    return 0;
+  }});
+  if (profile === 'candidate28_missing') await assert.rejects(operation(), /china_photo_runtime_tests_test_missing/);
+  else assert.equal((await operation()).compatibilityPatchApplied, false);
+  assert.equal(calls, profile === 'candidate28_missing' ? 0 : 1);
 });
 
 for (const [scope, paths] of [[CRM_CHINA_CODE_SCOPE, CRM_CHINA_CODE_PATHS], [CRM_JAPAN_PHOTO_CODE_SCOPE, CRM_JAPAN_PHOTO_CODE_PATHS]])

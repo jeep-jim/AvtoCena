@@ -233,10 +233,22 @@ export const JAPAN_STABILITY_SOURCE_PRICE_ORDER_CODE_PATHS = Object.freeze([
   'tests/japan-rail-visibility.test.ts',
   'tests/japan-source-power.test.ts',
 ]);
+/** The K-only source candidate query is an exact successor of the failed f83
+ * attempt. Preserve that 24-file receipt profile; both retain accepted 5b1 and
+ * require the same complete source-order, count, model and continuation proof. */
+export const JAPAN_STABILITY_SOURCE_PRICE_CANDIDATE_CODE_PATHS = Object.freeze([
+  ...JAPAN_STABILITY_SOURCE_PRICE_ORDER_CODE_PATHS,
+  'apps/web/lib/catalog/ajes-query.ts',
+  'apps/web/lib/catalog/japan-known-power-query.ts',
+  'tests/japan-known-power-query.test.ts',
+  'tests/helpers/ajes-mysql-oracle.ts',
+].sort());
+const sourcePriceOrderProfiles = Object.freeze([
+  JAPAN_STABILITY_SOURCE_PRICE_ORDER_CODE_PATHS, JAPAN_STABILITY_SOURCE_PRICE_CANDIDATE_CODE_PATHS]);
 const reviewedProfiles = Object.freeze([JAPAN_STABILITY_CODE_PATHS, JAPAN_STABILITY_UI_CODE_PATHS,
   JAPAN_STABILITY_POWER_CODE_PATHS, JAPAN_STABILITY_RAILS_CODE_PATHS, JAPAN_STABILITY_HOME_CODE_PATHS,
   JAPAN_STABILITY_METADATA_CODE_PATHS, JAPAN_STABILITY_PRICE_SORT_CODE_PATHS, JAPAN_STABILITY_EXACT_COUNT_CODE_PATHS,
-  JAPAN_STABILITY_SOURCE_COUNT_CODE_PATHS, JAPAN_STABILITY_MODEL_CURSOR_CODE_PATHS, JAPAN_STABILITY_SOURCE_PRICE_ORDER_CODE_PATHS]);
+  JAPAN_STABILITY_SOURCE_COUNT_CODE_PATHS, JAPAN_STABILITY_MODEL_CURSOR_CODE_PATHS, ...sourcePriceOrderProfiles]);
 
 export function japanStabilityCodePaths(plan) {
   const files = plan?.runtimeFiles;
@@ -249,7 +261,7 @@ export function isExactJapanStabilityScope(plan) {
   return JAPAN_STABILITY_CODE_PATHS.length > 0
     && JAPAN_PAGINATION_CODE_PATHS.every(name => JAPAN_STABILITY_CODE_PATHS.includes(name))
     && plan?.codeScope === JAPAN_STABILITY_CODE_SCOPE
-    && plan.retainedRuntime === (paths === JAPAN_STABILITY_SOURCE_PRICE_ORDER_CODE_PATHS
+    && plan.retainedRuntime === (sourcePriceOrderProfiles.includes(paths)
       ? JAPAN_STABILITY_SOURCE_PRICE_ORDER_RETAINED_RUNTIME : paths === JAPAN_STABILITY_MODEL_CURSOR_CODE_PATHS
       ? JAPAN_STABILITY_MODEL_CURSOR_RETAINED_RUNTIME : paths === JAPAN_STABILITY_SOURCE_COUNT_CODE_PATHS
       ? JAPAN_STABILITY_SOURCE_COUNT_RETAINED_RUNTIME : paths === JAPAN_STABILITY_EXACT_COUNT_CODE_PATHS
@@ -258,10 +270,10 @@ export function isExactJapanStabilityScope(plan) {
     && paths !== null
     && ([JAPAN_STABILITY_HOME_CODE_PATHS, JAPAN_STABILITY_METADATA_CODE_PATHS, JAPAN_STABILITY_PRICE_SORT_CODE_PATHS,
       JAPAN_STABILITY_EXACT_COUNT_CODE_PATHS, JAPAN_STABILITY_SOURCE_COUNT_CODE_PATHS, JAPAN_STABILITY_MODEL_CURSOR_CODE_PATHS,
-      JAPAN_STABILITY_SOURCE_PRICE_ORDER_CODE_PATHS].includes(paths)
+      ...sourcePriceOrderProfiles].includes(paths)
       ? plan.acceptancePolicy === JAPAN_OBSERVED_TIMING_POLICY
       : plan.acceptancePolicy === undefined)
-    && ([JAPAN_STABILITY_SOURCE_COUNT_CODE_PATHS, JAPAN_STABILITY_MODEL_CURSOR_CODE_PATHS, JAPAN_STABILITY_SOURCE_PRICE_ORDER_CODE_PATHS].includes(paths) ? plan.countAcceptance === JAPAN_SOURCE_COUNT_POLICY
+    && ([JAPAN_STABILITY_SOURCE_COUNT_CODE_PATHS, JAPAN_STABILITY_MODEL_CURSOR_CODE_PATHS, ...sourcePriceOrderProfiles].includes(paths) ? plan.countAcceptance === JAPAN_SOURCE_COUNT_POLICY
       : plan.countAcceptance === undefined || (paths === JAPAN_STABILITY_EXACT_COUNT_CODE_PATHS
         && plan.countAcceptance === JAPAN_SOURCE_BOUNDED_INCREMENTAL_POLICY));
 }
@@ -272,7 +284,7 @@ export function japanObservedTimingRequired(plan) {
   return [JAPAN_STABILITY_HOME_CODE_PATHS, JAPAN_STABILITY_METADATA_CODE_PATHS,
     JAPAN_STABILITY_PRICE_SORT_CODE_PATHS, JAPAN_STABILITY_EXACT_COUNT_CODE_PATHS,
     JAPAN_STABILITY_SOURCE_COUNT_CODE_PATHS, JAPAN_STABILITY_MODEL_CURSOR_CODE_PATHS,
-    JAPAN_STABILITY_SOURCE_PRICE_ORDER_CODE_PATHS].includes(japanStabilityCodePaths(plan));
+    ...sourcePriceOrderProfiles].includes(japanStabilityCodePaths(plan));
 }
 
 export function japanPowerOrderRequired(plan) {
@@ -282,7 +294,7 @@ export function japanPowerOrderRequired(plan) {
     JAPAN_STABILITY_HOME_CODE_PATHS, JAPAN_STABILITY_METADATA_CODE_PATHS,
     JAPAN_STABILITY_PRICE_SORT_CODE_PATHS, JAPAN_STABILITY_EXACT_COUNT_CODE_PATHS,
     JAPAN_STABILITY_SOURCE_COUNT_CODE_PATHS, JAPAN_STABILITY_MODEL_CURSOR_CODE_PATHS,
-    JAPAN_STABILITY_SOURCE_PRICE_ORDER_CODE_PATHS].includes(japanStabilityCodePaths(plan));
+    ...sourcePriceOrderProfiles].includes(japanStabilityCodePaths(plan));
 }
 
 export function japanBrandDirectoryRequired(plan) {
@@ -291,7 +303,7 @@ export function japanBrandDirectoryRequired(plan) {
   return [JAPAN_STABILITY_RAILS_CODE_PATHS, JAPAN_STABILITY_HOME_CODE_PATHS,
     JAPAN_STABILITY_METADATA_CODE_PATHS, JAPAN_STABILITY_PRICE_SORT_CODE_PATHS, JAPAN_STABILITY_EXACT_COUNT_CODE_PATHS,
     JAPAN_STABILITY_SOURCE_COUNT_CODE_PATHS, JAPAN_STABILITY_MODEL_CURSOR_CODE_PATHS,
-    JAPAN_STABILITY_SOURCE_PRICE_ORDER_CODE_PATHS].includes(japanStabilityCodePaths(plan));
+    ...sourcePriceOrderProfiles].includes(japanStabilityCodePaths(plan));
 }
 
 export function japanPriceSortRequired(plan) {
@@ -299,7 +311,7 @@ export function japanPriceSortRequired(plan) {
   if (!isExactJapanStabilityScope(plan)) throw Error('japan_stability_price_sort_scope');
   return [JAPAN_STABILITY_PRICE_SORT_CODE_PATHS, JAPAN_STABILITY_EXACT_COUNT_CODE_PATHS,
     JAPAN_STABILITY_SOURCE_COUNT_CODE_PATHS, JAPAN_STABILITY_MODEL_CURSOR_CODE_PATHS,
-    JAPAN_STABILITY_SOURCE_PRICE_ORDER_CODE_PATHS].includes(japanStabilityCodePaths(plan));
+    ...sourcePriceOrderProfiles].includes(japanStabilityCodePaths(plan));
 }
 
 export function japanExactCountRequired(plan) {
@@ -322,7 +334,7 @@ export function japanLiteralFamilyRequired(plan) {
   if (plan?.codeScope !== JAPAN_STABILITY_CODE_SCOPE) return false;
   if (!isExactJapanStabilityScope(plan)) throw Error('japan_stability_literal_family_scope');
   return [JAPAN_STABILITY_EXACT_COUNT_CODE_PATHS, JAPAN_STABILITY_SOURCE_COUNT_CODE_PATHS,
-    JAPAN_STABILITY_MODEL_CURSOR_CODE_PATHS, JAPAN_STABILITY_SOURCE_PRICE_ORDER_CODE_PATHS].includes(japanStabilityCodePaths(plan));
+    JAPAN_STABILITY_MODEL_CURSOR_CODE_PATHS, ...sourcePriceOrderProfiles].includes(japanStabilityCodePaths(plan));
 }
 
 export function japanSourceBoundedAcceptancePassed(report) {
@@ -333,19 +345,19 @@ export function japanSourceCountRequired(plan) {
   if (plan?.codeScope !== JAPAN_STABILITY_CODE_SCOPE) return false;
   if (!isExactJapanStabilityScope(plan)) throw Error('japan_stability_source_count_scope');
   return [JAPAN_STABILITY_SOURCE_COUNT_CODE_PATHS, JAPAN_STABILITY_MODEL_CURSOR_CODE_PATHS,
-    JAPAN_STABILITY_SOURCE_PRICE_ORDER_CODE_PATHS].includes(japanStabilityCodePaths(plan));
+    ...sourcePriceOrderProfiles].includes(japanStabilityCodePaths(plan));
 }
 
 export function japanA4Power160ContinuationRequired(plan) {
   if (plan?.codeScope !== JAPAN_STABILITY_CODE_SCOPE) return false;
   if (!isExactJapanStabilityScope(plan)) throw Error('japan_stability_a4_power160_continuation_scope');
-  return [JAPAN_STABILITY_MODEL_CURSOR_CODE_PATHS, JAPAN_STABILITY_SOURCE_PRICE_ORDER_CODE_PATHS].includes(japanStabilityCodePaths(plan));
+  return [JAPAN_STABILITY_MODEL_CURSOR_CODE_PATHS, ...sourcePriceOrderProfiles].includes(japanStabilityCodePaths(plan));
 }
 
 export function japanSourcePriceOrderRequired(plan) {
   if (plan?.codeScope !== JAPAN_STABILITY_CODE_SCOPE) return false;
   if (!isExactJapanStabilityScope(plan)) throw Error('japan_stability_source_price_order_scope');
-  return japanStabilityCodePaths(plan) === JAPAN_STABILITY_SOURCE_PRICE_ORDER_CODE_PATHS;
+  return sourcePriceOrderProfiles.includes(japanStabilityCodePaths(plan));
 }
 
 /** The marker is a code-transition contract, never a daily generation policy. */
@@ -569,7 +581,7 @@ export function japanSourcePriceOrderAcceptancePassed(report) {
 export function japanStabilityCompatibilityPaths(plan) {
   if (!isExactJapanStabilityScope(plan)) throw Error('japan_stability_compatibility_scope');
   const paths = japanStabilityCodePaths(plan);
-  if (paths === JAPAN_STABILITY_SOURCE_PRICE_ORDER_CODE_PATHS)
+  if (sourcePriceOrderProfiles.includes(paths))
     return [...new Set([...JAPAN_STABILITY_METADATA_CODE_PATHS, ...JAPAN_STABILITY_PRICE_SORT_CODE_PATHS,
       ...JAPAN_STABILITY_EXACT_COUNT_CODE_PATHS, ...JAPAN_STABILITY_SOURCE_COUNT_CODE_PATHS,
       ...JAPAN_STABILITY_MODEL_CURSOR_CODE_PATHS, ...paths])].sort();

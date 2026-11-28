@@ -202,6 +202,14 @@ JAPAN_STABILITY_SOURCE_PRICE_ORDER_CODE_FILES = {
     'tests/japan-rail-visibility.test.ts',
     'tests/japan-source-power.test.ts',
 }
+JAPAN_STABILITY_SOURCE_PRICE_CANDIDATE_CODE_FILES = JAPAN_STABILITY_SOURCE_PRICE_ORDER_CODE_FILES | {
+    'apps/web/lib/catalog/ajes-query.ts',
+    'apps/web/lib/catalog/japan-known-power-query.ts',
+    'tests/japan-known-power-query.test.ts',
+    'tests/helpers/ajes-mysql-oracle.ts',
+}
+JAPAN_STABILITY_SOURCE_PRICE_CODE_PROFILES = (
+    JAPAN_STABILITY_SOURCE_PRICE_ORDER_CODE_FILES, JAPAN_STABILITY_SOURCE_PRICE_CANDIDATE_CODE_FILES)
 JAPAN_STABILITY_HOME_CODE_FILES = JAPAN_STABILITY_RAILS_CODE_FILES | {
     'apps/web/lib/catalog/storage.ts', 'tests/catalog-next-home-isolation.test.ts',
 }
@@ -775,10 +783,10 @@ def checked_japan_stability_image_files(files, observed, retained_runtime=JAPAN_
                 JAPAN_STABILITY_RAILS_CODE_FILES, JAPAN_STABILITY_HOME_CODE_FILES, JAPAN_STABILITY_METADATA_CODE_FILES,
                 JAPAN_STABILITY_PRICE_SORT_CODE_FILES, JAPAN_STABILITY_EXACT_COUNT_CODE_FILES,
                 JAPAN_STABILITY_SOURCE_COUNT_CODE_FILES, JAPAN_STABILITY_MODEL_CURSOR_CODE_FILES,
-                JAPAN_STABILITY_SOURCE_PRICE_ORDER_CODE_FILES)
+                *JAPAN_STABILITY_SOURCE_PRICE_CODE_PROFILES)
     selected = next((profile for profile in profiles if profile and set(files) == profile), None)
     need(selected is not None, 'code_image_receipt')
-    need(retained_runtime == (JAPAN_STABILITY_SOURCE_PRICE_ORDER_RETAINED if selected == JAPAN_STABILITY_SOURCE_PRICE_ORDER_CODE_FILES
+    need(retained_runtime == (JAPAN_STABILITY_SOURCE_PRICE_ORDER_RETAINED if selected in JAPAN_STABILITY_SOURCE_PRICE_CODE_PROFILES
                              else JAPAN_STABILITY_MODEL_CURSOR_RETAINED if selected == JAPAN_STABILITY_MODEL_CURSOR_CODE_FILES
                              else JAPAN_STABILITY_SOURCE_COUNT_RETAINED if selected == JAPAN_STABILITY_SOURCE_COUNT_CODE_FILES
                              else JAPAN_STABILITY_EXACT_COUNT_RETAINED if selected == JAPAN_STABILITY_EXACT_COUNT_CODE_FILES
@@ -788,9 +796,9 @@ def checked_japan_stability_image_files(files, observed, retained_runtime=JAPAN_
          (JAPAN_STABILITY_HOME_CODE_FILES, JAPAN_STABILITY_METADATA_CODE_FILES,
           JAPAN_STABILITY_PRICE_SORT_CODE_FILES, JAPAN_STABILITY_EXACT_COUNT_CODE_FILES,
           JAPAN_STABILITY_SOURCE_COUNT_CODE_FILES, JAPAN_STABILITY_MODEL_CURSOR_CODE_FILES,
-          JAPAN_STABILITY_SOURCE_PRICE_ORDER_CODE_FILES)), 'timing_policy_image_scope')
+          *JAPAN_STABILITY_SOURCE_PRICE_CODE_PROFILES)), 'timing_policy_image_scope')
     need((count_acceptance == JAPAN_SOURCE_COUNT_POLICY if selected in (JAPAN_STABILITY_SOURCE_COUNT_CODE_FILES,
-          JAPAN_STABILITY_MODEL_CURSOR_CODE_FILES, JAPAN_STABILITY_SOURCE_PRICE_ORDER_CODE_FILES)
+          JAPAN_STABILITY_MODEL_CURSOR_CODE_FILES, *JAPAN_STABILITY_SOURCE_PRICE_CODE_PROFILES)
           else count_acceptance is None or (selected == JAPAN_STABILITY_EXACT_COUNT_CODE_FILES
           and count_acceptance == JAPAN_SOURCE_BOUNDED_INCREMENTAL_POLICY)), 'count_acceptance_image_scope')
     return selected
@@ -4041,16 +4049,16 @@ class Host:
                                        JAPAN_STABILITY_HOME_CODE_FILES, JAPAN_STABILITY_METADATA_CODE_FILES,
                                        JAPAN_STABILITY_PRICE_SORT_CODE_FILES, JAPAN_STABILITY_EXACT_COUNT_CODE_FILES,
                                        JAPAN_STABILITY_SOURCE_COUNT_CODE_FILES, JAPAN_STABILITY_MODEL_CURSOR_CODE_FILES,
-                                       JAPAN_STABILITY_SOURCE_PRICE_ORDER_CODE_FILES):
+                                       *JAPAN_STABILITY_SOURCE_PRICE_CODE_PROFILES):
                     need(japan.get('japanPowerOrderPassed') is True, 'japan_browser_binding')
                 if runtime_profile in (JAPAN_STABILITY_RAILS_CODE_FILES, JAPAN_STABILITY_HOME_CODE_FILES,
                                        JAPAN_STABILITY_METADATA_CODE_FILES, JAPAN_STABILITY_PRICE_SORT_CODE_FILES, JAPAN_STABILITY_EXACT_COUNT_CODE_FILES,
                                        JAPAN_STABILITY_SOURCE_COUNT_CODE_FILES, JAPAN_STABILITY_MODEL_CURSOR_CODE_FILES,
-                                       JAPAN_STABILITY_SOURCE_PRICE_ORDER_CODE_FILES):
+                                       *JAPAN_STABILITY_SOURCE_PRICE_CODE_PROFILES):
                     need(japan.get('japanBrandDirectoryPassed') is True, 'japan_browser_binding')
                 if runtime_profile in (JAPAN_STABILITY_PRICE_SORT_CODE_FILES, JAPAN_STABILITY_EXACT_COUNT_CODE_FILES,
                                        JAPAN_STABILITY_SOURCE_COUNT_CODE_FILES, JAPAN_STABILITY_MODEL_CURSOR_CODE_FILES,
-                                       JAPAN_STABILITY_SOURCE_PRICE_ORDER_CODE_FILES):
+                                       *JAPAN_STABILITY_SOURCE_PRICE_CODE_PROFILES):
                     need(all(japan.get(key) is True for key in ('japanPriceSortRequired', 'japanPriceSortPassed', 'japanCountDisplayPassed')),
                          'japan_browser_binding')
                 if runtime_profile == JAPAN_STABILITY_EXACT_COUNT_CODE_FILES:
@@ -4060,13 +4068,13 @@ class Host:
                         need(all(japan.get(key) is True for key in ('japanExactCountRequired', 'japanExactCountPassed', 'japanModelCoveragePassed')),
                              'japan_browser_binding')
                 if runtime_profile in (JAPAN_STABILITY_SOURCE_COUNT_CODE_FILES, JAPAN_STABILITY_MODEL_CURSOR_CODE_FILES,
-                                       JAPAN_STABILITY_SOURCE_PRICE_ORDER_CODE_FILES):
+                                       *JAPAN_STABILITY_SOURCE_PRICE_CODE_PROFILES):
                     need(japan_source_count_acceptance_passed(japan,
-                         auction_database_label=runtime_profile == JAPAN_STABILITY_SOURCE_PRICE_ORDER_CODE_FILES), 'japan_browser_binding')
-                if runtime_profile in (JAPAN_STABILITY_MODEL_CURSOR_CODE_FILES, JAPAN_STABILITY_SOURCE_PRICE_ORDER_CODE_FILES):
+                         auction_database_label=runtime_profile in JAPAN_STABILITY_SOURCE_PRICE_CODE_PROFILES), 'japan_browser_binding')
+                if runtime_profile in (JAPAN_STABILITY_MODEL_CURSOR_CODE_FILES, *JAPAN_STABILITY_SOURCE_PRICE_CODE_PROFILES):
                     need(japan_a4_power160_continuation_acceptance_passed(japan,
-                         auction_database_label=runtime_profile == JAPAN_STABILITY_SOURCE_PRICE_ORDER_CODE_FILES), 'japan_browser_binding')
-                if runtime_profile == JAPAN_STABILITY_SOURCE_PRICE_ORDER_CODE_FILES:
+                         auction_database_label=runtime_profile in JAPAN_STABILITY_SOURCE_PRICE_CODE_PROFILES), 'japan_browser_binding')
+                if runtime_profile in JAPAN_STABILITY_SOURCE_PRICE_CODE_PROFILES:
                     need(japan_source_price_order_acceptance_passed(japan), 'japan_browser_binding')
         for name, raw in [('BROWSER_SPEED.json', speed_raw), ('BROWSER_DETAILS.json', details_raw)]:
             new_file(self.directory / name, raw)

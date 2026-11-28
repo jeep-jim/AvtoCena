@@ -10,7 +10,8 @@ import {CRM_CHINA_CODE_SCOPE, CRM_CHINA_CODE_PATHS} from './crm-china-code-scope
 import {CRM_JAPAN_PHOTO_CODE_SCOPE} from './crm-japan-photo-code-scope.mjs';
 import {JAPAN_PAGINATION_CODE_SCOPE, JAPAN_PAGINATION_CODE_PATHS} from './japan-pagination-code-scope.mjs';
 import {JAPAN_STABILITY_CODE_SCOPE, JAPAN_STABILITY_CODE_PATHS,
-  JAPAN_STABILITY_SOURCE_PRICE_ORDER_CODE_PATHS, japanSourcePriceOrderRequired} from './japan-stability-code-scope.mjs';
+  JAPAN_STABILITY_SOURCE_PRICE_ORDER_CODE_PATHS, JAPAN_STABILITY_SOURCE_PRICE_CANDIDATE_CODE_PATHS,
+  japanStabilityCodePaths, japanSourcePriceOrderRequired} from './japan-stability-code-scope.mjs';
 
 const ROOT = fileURLToPath(new URL('../../', import.meta.url));
 const PHOTO_SCOPE = 'catalog-photo-recovery-v1', COMBINED_SCOPE = 'catalog-photo-japan-power-v1';
@@ -107,6 +108,10 @@ export const JAPAN_SOURCE_PRICE_ORDER_TEST_FILES = Object.freeze([...new Set([
   ...JAPAN_STABILITY_TEST_FILES,
   ...JAPAN_STABILITY_SOURCE_PRICE_ORDER_CODE_PATHS.filter(name => /^tests\/[^/]+\.test\.ts$/.test(name)),
 ])].sort());
+export const JAPAN_SOURCE_PRICE_CANDIDATE_TEST_FILES = Object.freeze([...new Set([
+  ...JAPAN_SOURCE_PRICE_ORDER_TEST_FILES,
+  ...JAPAN_STABILITY_SOURCE_PRICE_CANDIDATE_CODE_PATHS.filter(name => /^tests\/[^/]+\.test\.ts$/.test(name)),
+])].sort());
 
 async function selectedFiles(runtimeRoot, codeScope, plan) {
   let tracked;
@@ -125,7 +130,9 @@ async function selectedFiles(runtimeRoot, codeScope, plan) {
   }
   const files = [...new Set([...PHOTO_COMMON_TEST_FILES, ...aj,
     ...(codeScope === JAPAN_STABILITY_CODE_SCOPE ? japanSourcePriceOrderRequired(plan)
-      ? JAPAN_SOURCE_PRICE_ORDER_TEST_FILES : JAPAN_STABILITY_TEST_FILES
+      ? japanStabilityCodePaths(plan) === JAPAN_STABILITY_SOURCE_PRICE_CANDIDATE_CODE_PATHS
+        ? JAPAN_SOURCE_PRICE_CANDIDATE_TEST_FILES : JAPAN_SOURCE_PRICE_ORDER_TEST_FILES
+      : JAPAN_STABILITY_TEST_FILES
       : codeScope === JAPAN_PAGINATION_CODE_SCOPE ? JAPAN_PAGINATION_TEST_FILES
       : codeScope === CRM_JAPAN_PHOTO_CODE_SCOPE ? CRM_CHINA_TEST_FILES
       : codeScope === CRM_CHINA_CODE_SCOPE ? CRM_CHINA_TEST_FILES
