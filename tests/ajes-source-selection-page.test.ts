@@ -50,7 +50,7 @@ function oracle(rows:WireRow[],index:CalculationIndex|null,editorial=emptyEditor
  return {calls,admit,close:()=>db.close(),sourceModels:[...new Map(rows.map(row=>[JSON.stringify([row.MARKA_NAME,row.MODEL_NAME]),{make:String(row.MARKA_NAME),model:String(row.MODEL_NAME),total:1}])).values()],
   read(query:AjesQuery){
    const sql=ajesQuery(query,index).sql;
-   const sqlite=sql.replace(/\bpw\s*(>=|<=)\s*(\d+)/g,'cast(pw as real)$1$2');
+   const sqlite=sql.replace(/\bpw\s*(>=|<=|>|<)\s*(\d+)/g,'cast(pw as real)$1$2');
    const selected=db.prepare(sqlite).all();calls.push({page:query.page||1,phase:query.sourcePhase,rawIds:selected.map(row=>String(row.ID)),sql});
    return {items:selected.map(admit).filter((value):value is NonNullable<ReturnType<typeof admit>>=>Boolean(value)),received:selected.length,observedAt,stale:false,partial:false};
   }};

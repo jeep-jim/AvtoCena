@@ -7,7 +7,7 @@ import {ajesText} from './ajes-query';
  * matchers decide which rows actually belong in the visible selection. */
 export type JapanSourceModelCohort={modelKey:string;make:string;model:string;year:number};
 export type JapanPowerCandidatePlan={
- powerFrom:number;powerTo:number;models:JapanSourceModelCohort[];ids:string[];
+ powerFrom?:number;powerTo?:number;models:JapanSourceModelCohort[];ids:string[];
  ownerStepwgn:boolean;complete:boolean;unresolved:string[];
 };
 export type JapanBodyCandidateScope={
@@ -19,22 +19,26 @@ export type JapanSourceModel={make:string;model:string};
 type ResolvedModel=JapanSourceModel&{years:number[]};
 export type AjesSourceSelection={
  version:1;
- power?:{from:number;to:number;models:ResolvedModel[];ids:string[];ownerModels:JapanSourceModel[]};
+ power?:{from?:number;to?:number;models:ResolvedModel[];ids:string[];ownerModels:JapanSourceModel[]};
  body?:{models:ResolvedModel[];ids:string[];sourceBody?:{field:'BODY_TYPE';labels:string[]};pickupCandidates:boolean};
 };
 const record=(value:unknown):value is Record<string,unknown>=>Boolean(value)&&typeof value==='object'&&!Array.isArray(value);
 const validId=(value:unknown):value is string=>typeof value==='string'&&/^[A-Za-z0-9_-]{1,64}$/.test(value);
 const sourceName=(value:unknown):value is string=>typeof value==='string'&&/^[\p{L}\p{N} .+()&/_-]{1,80}$/u.test(value)&&value.trim()===value;
 const positive=(value:unknown)=>Number.isFinite(Number(value))&&Number(value)>0;
-const powerRange=(from:unknown,to:unknown)=>Number.isSafeInteger(from)&&Number.isSafeInteger(to)&&Number(from)>=1&&Number(to)<=2500&&Number(from)<=Number(to);
+const powerRange=(from:unknown,to:unknown)=>[from,to].some(value=>value!==undefined)
+ &&[from,to].every(value=>value===undefined||Number.isSafeInteger(value)&&Number(value)>=1&&Number(value)<=2500)
+ &&(from===undefined||to===undefined||Number(from)<=Number(to));
 const unique=<T>(items:T[],key:(value:T)=>string)=>[...new Map(items.map(item=>[key(item),item])).values()];
 const orderedStrings=(items:string[])=>[...new Set(items)].sort();
 
 export function buildJapanPowerCandidatePlan(options:{powerFrom?:number;powerTo?:number;index:CalculationIndex|null;editorial:CatalogEditorialIndex}):JapanPowerCandidatePlan {
- const powerFrom=options.powerFrom??1,powerTo=options.powerTo??2500;
+ const {powerFrom,powerTo}=options;
  if(!powerRange(powerFrom,powerTo))throw Error('ajes_invalid_query');
  const models:JapanSourceModelCohort[]=[],ids:string[]=[],unresolved:string[]=[];
- const matches=(value:unknown)=>positive(value)&&Number(value)>=powerFrom&&Number(value)<=powerTo;
+ // UI bounds limit explicit inputs, not otherwise valid source/local values.
+ // Missing bounds must remain absent, as in the actual local power matcher.
+ const matches=(value:unknown)=>positive(value)&&(powerFrom===undefined||Number(value)>=powerFrom)&&(powerTo===undefined||Number(value)<=powerTo);
  if(options.index){
   if(!record(options.index.models))unresolved.push('power_index_invalid');
   else for(const [key,facts] of Object.entries(options.index.models)){
@@ -55,19 +59,20 @@ export function buildJapanPowerCandidatePlan(options:{powerFrom?:number;powerTo?
  }
  if(!record(options.editorial?.entries))unresolved.push('power_editorial_invalid');
  else for(const [id,entry] of Object.entries(options.editorial.entries)){
-  // Current editorial UI has no hp field. Keep an identity-bound hp override
-  // if a compatible saved entry already contains one; never widen by title.
-  const specifications=entry?.specifications as Record<string,unknown>|undefined;
-  if(entry?.market!=='japan'||entry.sourceId!=='ajes_japan_feed'||entry.status!=='visible'||!matches(specifications?.powerHp))continue;
-  if(entry.id!==id||!validId(entry.sourceOfferId)||id!==`ajes-stats-${entry.sourceOfferId}`){unresolved.push('power_editorial_identity_invalid');continue;}
+  // Legacy specifications can change make/model/fuel and activate owner or
+  // annual evidence without a direct powerHp edit. Actual admission matches
+  // the dictionary key and source identity, not the entry's redundant id.
+  if(entry?.market!=='japan'||entry.sourceId!=='ajes_japan_feed'||entry.status!=='visible')continue;
+  if(!validId(entry.sourceOfferId)||id!==`ajes-stats-${entry.sourceOfferId}`){unresolved.push('power_editorial_identity_invalid');continue;}
   ids.push(entry.sourceOfferId);
  }
  return {powerFrom,powerTo,models:unique(models,row=>JSON.stringify([row.modelKey,row.year])).sort((a,b)=>a.modelKey.localeCompare(b.modelKey)||a.year-b.year),
-  ids:orderedStrings(ids),ownerStepwgn:powerFrom<=150&&powerTo>=150,complete:unresolved.length===0,unresolved:orderedStrings(unresolved)};
+  ids:orderedStrings(ids),ownerStepwgn:matches(150),complete:unresolved.length===0,unresolved:orderedStrings(unresolved)};
 }
 
 /** Resolve canonical evidence against the complete names directory for this
- * source query. These are actual wire spellings, not generated aliases. */
+ * source query. The directory parser trims source names; the SQL compiler must
+ * therefore retain raw spellings affected by trim/normalization as candidates. */
 export function resolveJapanSourceSelection(options:{power?:JapanPowerCandidatePlan;body?:JapanBodyCandidateScope;sourceModels:JapanSourceModel[];directoryComplete:boolean}){
  // An unobserved body branch leaves useful, explicitly incomplete evidence
  // candidates. Alias/identity errors cannot safely produce a restricted query.

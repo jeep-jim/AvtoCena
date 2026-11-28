@@ -58,9 +58,11 @@ export function buildJapanBodyCandidatePlan(options:JapanBodyCandidateOptions):J
  const ids=new Set<string>();
  for(const [id,entry] of Object.entries(options.editorial.entries)){
   const match=sourceId.exec(id);
-  if(!match||entry.id!==id||entry.market!=='japan'||entry.sourceId!=='ajes_japan_feed'||entry.sourceOfferId!==match[1]||entry.status!=='visible')continue;
-  const body=japanSourceBody(entry.specifications?.bodyType);
-  if(body&&selected.includes(body))ids.add(match[1]);
+  if(!match||entry.market!=='japan'||entry.sourceId!=='ajes_japan_feed'||entry.sourceOfferId!==match[1]||entry.status!=='visible')continue;
+  // Legacy specifications can also alter the model identity used for body
+  // inference. Keep every applicable visible edit; the local body matcher is
+  // authoritative. matchingEditorial ignores the redundant entry.id field.
+  ids.add(match[1]);
  }
  const sourceBody=options.observedSourceFields?.some(field=>field.toUpperCase()==='BODY_TYPE')
   ?{field:'BODY_TYPE' as const,labels:japanSourceBodyLabels(selected)}:undefined;

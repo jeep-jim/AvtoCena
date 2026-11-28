@@ -1,13 +1,28 @@
 import type {AjesSourceSelection} from './japan-source-selection';
 import {pickupSourceCandidateSql} from './pickup-body';
+import {heavyVehicleFamilies} from './heavy-vehicle-families';
 
 const record=(value:unknown):value is Record<string,unknown>=>Boolean(value)&&typeof value==='object'&&!Array.isArray(value);
 const validId=(value:unknown):value is string=>typeof value==='string'&&/^[A-Za-z0-9_-]{1,64}$/.test(value);
 const sourceName=(value:unknown):value is string=>typeof value==='string'&&/^[\p{L}\p{N} .+()&/_-]{1,80}$/u.test(value)&&value.trim()===value;
-const powerRange=(from:unknown,to:unknown)=>Number.isSafeInteger(from)&&Number.isSafeInteger(to)&&Number(from)>=1&&Number(to)<=2500&&Number(from)<=Number(to);
+const powerRange=(from:unknown,to:unknown)=>[from,to].some(value=>value!==undefined)
+ &&[from,to].every(value=>value===undefined||Number.isSafeInteger(value)&&Number(value)>=1&&Number(value)<=2500)
+ &&(from===undefined||to===undefined||Number(from)<=Number(to));
 const orderedStrings=(items:string[])=>[...new Set(items)].sort();
 const encodedLength=(value:string)=>new URLSearchParams({sql:value}).toString().length;
 
+/** Internal candidate selection only. Exact heavy family names are inexpensive
+ * to exclude with the established IN grammar. Suffixed family names remain
+ * candidates and are rejected by the unchanged full ajesLot/admission policy.
+ * This weaker raw scope must never share the full heavy predicate's cache key. */
+export function japanSourceHeavyCandidateSql():string {
+ const groups=new Map<string,{makes:string[];models:readonly string[]}>();
+ for(const group of heavyVehicleFamilies){
+  const key=group.models.join('|'),saved=groups.get(key)||{makes:[],models:group.models};
+  saved.makes.push(group.make);groups.set(key,saved);
+ }
+ return [...groups.values()].map(group=>`not (marka_name in (${group.makes.map(make=>`'${make}'`).join(',')}) and model_name in (${group.models.map(model=>`'${model}'`).join(',')}))`).join(' and ');
+}
 
 const exactKeys=(value:Record<string,unknown>,keys:string[])=>Object.keys(value).every(key=>keys.includes(key));
 const literal=(value:unknown)=>{if(!sourceName(value))throw Error('ajes_invalid_query');return `'${value}'`;};
@@ -50,10 +65,22 @@ function modelSql(rows:unknown,annual:boolean):string[] {
 }
 function idsSql(value:unknown):string[]{
  if(!Array.isArray(value)||value.some(id=>!validId(id)))throw Error('ajes_invalid_query');
- const ids=orderedStrings(value);return ids.length?[ids.length===1?`id='${ids[0]}'`:`id in (${ids.map(id=>`'${id}'`).join(',')})`]:[];
+ const ids=orderedStrings(value);
+ // Admission decodes entities, applies NFKC and trims IDs before editorial
+ // lookup. Canonical IDs stay selective; transformed spellings need local
+ // identity matching after they have survived source pagination.
+ return ids.length?[ids.length===1?`id='${ids[0]}'`:`id in (${ids.map(id=>`'${id}'`).join(',')})`,"id regexp '[^A-Za-z0-9_-]'"]:[];
 }
 const union=(clauses:string[])=>'('+clauses.join(' or ')+')';
-// Numeric literals force numeric comparison of varchar PW without + or *.
+// The model directory trims its strings, while a LIST still contains raw wire
+// names. Keep the affected namespace when a local model branch exists. This
+// does not turn an unrelated, canonical make/model into a local power donor.
+const transformedModel="(marka_name like ' %' or marka_name like '% ' or marka_name regexp '[^ -~]' or model_name like ' %' or model_name like '% ' or model_name regexp '[^ -~]')";
+// Numeric literals compare varchar PW without + or *. K is deliberately a
+// superset: numeric prefixes can enter it, and actual admission still decides
+// whether the row has known power. MySQL documents this comparison behavior:
+// https://dev.mysql.com/doc/refman/8.4/en/type-conversion.html
+// This is not an assertion about the supplier's database version or parser.
 // Preserve the tiny encoded/unicode PW candidate namespace; ajesText can turn
 // these spellings into a valid hp number. It is never a model-wide exception.
 const wireInteger="pw regexp '^[[:space:]]*[0-9]{1,30}[[:space:]]*$'";
@@ -79,13 +106,16 @@ export function japanSourceSelectionSql(input:AjesSourceSelection,phase?:'k'|'u'
    bodyIds=input.body.ids;
   }
   const local=[...modelSql(powerModels,true),...idsSql([...power.ids,...bodyIds]),...modelSql(power.ownerModels,false)];
-  clauses.push(phase==='k'?union([`(${wireInteger} and pw>=${power.from} and pw<=${power.to})`,encodedPower,...local])
+  if(powerModels.length||power.ownerModels.length)local.push(transformedModel);
+  const wireBounds=['pw>0',...(power.from===undefined?[]:[`pw>=${power.from}`]),...(power.to===undefined?[]:[`pw<=${power.to}`])];
+  clauses.push(phase==='k'?union([`(${wireBounds.join(' and ')})`,encodedPower,...local])
    :`(pw is null or not (${wireInteger} and pw>=1 and pw<=9007199254740991))`);
  }else if(phase!==undefined)throw Error('ajes_invalid_query');
  if(input.body){
   const body=input.body;
   if(!record(body)||!exactKeys(body,['models','ids','sourceBody','pickupCandidates'])||typeof body.pickupCandidates!=='boolean')throw Error('ajes_invalid_query');
   const bodyClauses=[...modelSql(body.models,true),...idsSql(body.ids)];
+  if(body.models.length)bodyClauses.push(transformedModel);
   if(body.sourceBody){
    const source=body.sourceBody;
    if(!record(source)||!exactKeys(source,['field','labels'])||source.field!=='BODY_TYPE'||!Array.isArray(source.labels)||!source.labels.length)throw Error('ajes_invalid_query');

@@ -48,7 +48,7 @@ test('source body support is explicit and does not claim an unknown schema as co
  assert.equal(unavailable.complete,false);assert.deepEqual(unavailable.unresolved,['body_encyclopedia_unavailable']);
 });
 
-test('only visible identity-bound Japanese editorial body corrections enter the candidate IDs',()=>{
+test('all visible identity-bound Japanese editorial entries survive candidate selection',()=>{
  const entry={id:'ajes-stats-manual',market:'japan',sourceId:'ajes_japan_feed',sourceOfferId:'manual',status:'visible',specifications:{bodyType:'suv'}};
  const entries:any={};
  for(const [suffix,patch] of Object.entries({manual:{},hidden:{status:'hidden'},otherMarket:{market:'china'},foreignSource:{sourceId:'other'},identityMismatch:{sourceOfferId:'different'},sedan:{specifications:{bodyType:'sedan'}}})){
@@ -56,7 +56,7 @@ test('only visible identity-bound Japanese editorial body corrections enter the 
  }
  entries['ajes-stats-wrong-id']={...entry,sourceOfferId:'wrong-id'};
  const plan=buildJapanBodyCandidatePlan({selection:'suv',index:index([]),editorial:{revision:'1',entries},observedSourceFields:['BODY_TYPE']});
- assert.deepEqual(plan.ids,['manual']);
+ assert.deepEqual(plan.ids,['manual','sedan','wrong-id']);
 });
 
 test('missing proof remains incomplete and older verified facts retain their exact index key',()=>{

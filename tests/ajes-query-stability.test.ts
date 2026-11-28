@@ -6,6 +6,7 @@ import {ajesQuery,ajesSourceCacheSql,AJES_CENSUS_FIELDS,type AjesQuery} from '..
 import {createAjesClient} from '../apps/web/lib/catalog/ajes-client';
 import {heavyVehicleFamilies,heavyVehicleSqlExclusion} from '../apps/web/lib/catalog/heavy-vehicle-families';
 import {japanHeavyVehicleSqlExclusion,japanVehicleFamilySqlExclusion,japanVehicleFamilyCacheSqlExclusion} from '../apps/web/lib/catalog/japan-vehicle-policy';
+import {japanSourceHeavyCandidateSql} from '../apps/web/lib/catalog/japan-source-selection-sql';
 import {ajesQueryCacheLocation,readPreviousJapanPolicyRows} from '../apps/web/lib/catalog/ajes-query-cache';
 
 test('non-drive searches restore grouped =/LIKE grammar within the existing URI budget for every source query kind',()=>{
@@ -77,6 +78,28 @@ test('explicit drive keeps its prior compact heavy form and URI guard, while Jap
   assert.ok(sql.includes(japanVehicleFamilySqlExclusion()));
   assert.ok(!sql.includes(japanVehicleFamilyCacheSqlExclusion()));
   assert.ok(new URLSearchParams({sql}).toString().length<6000);
+ }
+});
+
+test('internal heavy candidates retain a distinct cache scope and identical LIST/COUNT predicates',()=>{
+ const heavy=japanSourceHeavyCandidateSql();
+ assert.doesNotMatch(heavy,/\bregexp\b|\blike\b/i);
+ assert(heavy.includes("model_name in ('COASTER','DYNA','TOYOACE')"));
+ const power={version:1 as const,power:{to:160,models:[],ids:[],ownerModels:[]}};
+ const body={version:1 as const,body:{models:[{make:'TOYOTA',model:'LOCAL',years:[2023]}],ids:['manual-body'],pickupCandidates:false}};
+ const cases:AjesQuery[]=[{sourceSelection:power,sourcePhase:'k',powerTo:160},{sourceSelection:power,sourcePhase:'u',powerTo:160},{sourceSelection:body}];
+ const where=(sql:string)=>sql.split(' where ')[1].split(' order by ')[0];
+ for(const scope of cases){
+  const list=ajesQuery({...scope,sort:'totalRubDesc'}).sql,count=ajesQuery({...scope,aggregate:'count'}).sql;
+  assert(list.includes(heavy));assert(count.includes(heavy));assert.equal(where(list),where(count));
+  assert(!list.includes(heavyVehicleSqlExclusion(false,false,true)));
+  const canonical=ajesSourceCacheSql(list),narrow=list.replace(heavy,heavyVehicleSqlExclusion(false,false,true));
+  assert(canonical.includes(heavy),'weaker candidates keep their own raw membership in the cache key');
+  assert.notEqual(canonical,ajesSourceCacheSql(narrow),'old narrow pages cannot satisfy the new wider source selection');
+  assert.equal(ajesSourceCacheSql(canonical),canonical);
+  const drive=ajesQuery({...scope,drive:'fwd'}).sql;
+  assert(drive.includes(heavyVehicleSqlExclusion(false,false,true)),'the explicit-drive heavy branch remains unchanged');
+  assert(!drive.includes(heavy));
  }
 });
 

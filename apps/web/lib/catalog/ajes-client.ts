@@ -1,4 +1,4 @@
-import {ajesFailureSlot,sanitizeAjesResponseValidation,type AjesRequestDiagnostic,type AjesResponseValidation} from './ajes-request-diagnostic';
+import {ajesFailureSlot,inspectAjesHttpFailureResponse,sanitizeAjesResponseValidation,type AjesRequestDiagnostic,type AjesResponseValidation} from './ajes-request-diagnostic';
 import {startAjesReadTrace,finishAjesReadReceipt,ajesPublicFailureReason,type AjesReadTrace} from './ajes-read-receipt';
 import type {CalculationIndex} from '../encyclopedia/calculation-index';
 import {createHash} from 'node:crypto';
@@ -294,6 +294,7 @@ export function createAjesClient(deps:Dependencies) {
         // Power is a local selection over the same requested raw page. It uses
         // the ordinary source deadline, not a shorter deadline that discards
         // otherwise valid responses and unnecessarily falls back to old rows.
+        const deadlineAt=Date.now()+20000;
         const timer=setTimeout(()=>controller.abort(),20000);
         try {
           const cooldown=cooling(quotaKey)||cooling('visitor:'+clientIp)||cooling(visitorKey);
@@ -303,7 +304,12 @@ export function createAjesClient(deps:Dependencies) {
           if(trace){trace.stage='supplier';trace.supplierAttempted=true;}
           const response=await (deps.fetcher??fetch)(url,{signal:controller.signal,redirect:'error',cache:'no-store'});
           httpStatus=response.status;
-          if(!response.ok)throw new AjesUnavailable(response.status===414?'query_too_large':`http_${response.status}`);
+          if(!response.ok){
+            // Diagnose this already failed response only. Inspection cannot
+            // replace its HTTP failure or change receipt/recovery semantics.
+            try{responseValidation=sanitizeAjesResponseValidation(await inspectAjesHttpFailureResponse(response,controller.signal,deadlineAt));}catch{}
+            throw new AjesUnavailable(response.status===414?'query_too_large':`http_${response.status}`);
+          }
           if(Number(response.headers.get('content-length'))>2*1024*1024)throw new AjesUnavailable('response_too_large');
           const reader=response.body?.getReader();
           if(!reader)throw new AjesUnavailable('empty_response');

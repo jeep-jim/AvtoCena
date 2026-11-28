@@ -29,9 +29,10 @@ test('complete wire directory keeps every canonical spelling without manufacturi
  const known=japanSourceSelectionSql(resolved.selection!,'k'),unknown=japanSourceSelectionSql(resolved.selection!,'u');
  for(const name of ['A4','A 4','A-4','Ａ４','STEP WGN'])assert(known.includes(`'${name}'`));
  assert(known.includes('year=2020'));assert(!known.includes('year=2021'));assert(!known.includes("marka_name='TOYOTA'"));
- assert(known.includes('pw>=1 and pw<=160'));assert(!known.includes('pw is null'));assert(!known.includes('pw+'));assert(!known.includes('pw*'));
+ assert(known.includes('pw>0 and pw<=160'));assert(!known.includes('pw>=1'));assert(!known.includes('[[:space:]]'));
+ assert(!known.includes('pw is null'));assert(!known.includes('pw+'));assert(!known.includes('pw*'));
  assert(known.includes("pw regexp '[^ -~]'"));assert(known.includes("pw like '%&%'"));
- assert(unknown.includes('pw is null'));assert(!unknown.includes('model_name'));
+ assert(unknown.includes('pw is null'));assert(unknown.includes('[[:space:]]'));assert(!unknown.includes('model_name'));
 });
 test('a stale or missing directory cannot establish complete local override coverage',()=>{
  const power=buildJapanPowerCandidatePlan({powerTo:160,index,editorial});
