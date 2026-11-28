@@ -14,7 +14,8 @@ import {runJapanPriceSortBrowser, selectJapanPriceSort, verifyJapanPriceSortVisi
 import {verifyJapanPage, verifyJapanFullPage, verifyJapanPowerPage, verifyJapanVisibleVehiclePolicy}
   from '../../scripts/catalog-next/japan-browser-acceptance.mjs';
 
-import {runJapanExactCountBrowser, japanExactCountQueryHash, verifyJapanFiniteSelection}
+import {runJapanExactCountBrowser, runJapanModelCoverageBrowser, japanExactCountQueryHash,
+  verifyJapanFiniteSelection, JAPAN_SOURCE_BOUNDED_COUNT_ACCEPTANCE}
   from '../../scripts/catalog-next/japan-exact-count-browser.mjs';
 
 const ROOT = fileURLToPath(new URL('../../', import.meta.url));
@@ -272,7 +273,9 @@ export function createExactCountFixtureHandler({fixture,getActive}) {
           if(Number(query.page)>1){const prior=fixtureResult({...query,page:String(Number(query.page)-1)},active.now);need(query.after===prior.nextCursor,'emitted_cursor');}
           if(active.failAppend&&Number(query.page)===3){send(503,{'Content-Type':'application/json'},'{"ok":false}');return;}
           if(active.holdNext&&query.sort==='totalRubDesc'&&Number(query.page)===1){active.held=true;await active.releaseWait;}
-          send(200,{'Content-Type':'application/json','Cache-Control':'no-store'},JSON.stringify(fixtureResult(query,active.now)));return;
+          const result=fixtureResult(query,active.now);
+          if(active.modelCoverage){result.total=null;result.countSummary=null;}
+          send(200,{'Content-Type':'application/json','Cache-Control':'no-store'},JSON.stringify(result));return;
         }
         if(url.pathname==='/api/catalog/brand-counts'){
           stage='brand_payload';
@@ -298,7 +301,7 @@ export function createExactCountFixtureHandler({fixture,getActive}) {
           &&(url.searchParams.size===1||active.recoverCount&&url.searchParams.size===2&&url.searchParams.get('powerTo')==='160'),'document_scope');
         const initial={city:CITY,market:'japan',...(active.recoverCount?{powerTo:'160'}:{})};
         const result=fixtureResult(initial,active.now);
-        if(active.recoverCount){result.total=null;result.countSummary=null;}
+        if(active.recoverCount||active.modelCoverage){result.total=null;result.countSummary=null;}
         const props={initial,result,remount:active.remount};
         stage='document_render';
         const body='<!doctype html><html><head><meta charset="utf-8"><link rel="icon" href="data:,"><link rel="stylesheet" href="/fixture.css"></head><body><div id="root">'
@@ -371,8 +374,10 @@ async function main() {
         }};
         const callbacks={context:wrapped,report:result,read:async api=>{
           const url=new URL(api,ORIGIN);
-          return {status:200,data:url.pathname==='/api/catalog/source-models'?fixtureDirectory(state.now)
-            :fixtureResult(Object.fromEntries(url.searchParams),state.now)};
+          const data=url.pathname==='/api/catalog/source-models'?fixtureDirectory(state.now)
+            :fixtureResult(Object.fromEntries(url.searchParams),state.now);
+          if(state.modelCoverage&&url.pathname==='/api/catalog/search'){data.total=null;data.countSummary=null;}
+          return {status:200,data};
         },capture:async()=>{},onStage:stage=>{result.stage=stage;},onPage:()=>{},
           verifyPage:verifyJapanPage,verifyFullPage:verifyJapanFullPage,verifyPowerPage:verifyJapanPowerPage,
           verifyVehiclePolicy:verifyJapanVisibleVehiclePolicy};
@@ -428,6 +433,26 @@ async function main() {
         const oldBudgetKey=await currentPage.evaluate(()=>JSON.stringify(window.__japanExactCount.current.initial));
         await currentPage.close();
 
+        // Exercise the independent release branch with no positive aggregate
+        // supplied to SSR, the real controls, or the explicit API verifier.
+        state.modelCoverage=true;result.stage='fixture_incremental_models';
+        const modelReport={checks:{},screenshots:[]};let positiveExactCountsSupplied=0;
+        const modelPages=await runJapanModelCoverageBrowser({...callbacks,report:modelReport,
+          read:async api=>{const value=await callbacks.read(api);
+            if(Array.isArray(value.data.items)&&value.data.total!==null)positiveExactCountsSupplied++;
+            return value;},verifyVisible:verifyJapanPriceSortVisible});
+        const countsIncomplete=modelPages.length===2&&modelPages.every(value=>value.total===null&&value.countSummary===null);
+        need(modelReport.countAcceptance===JAPAN_SOURCE_BOUNDED_COUNT_ACCEPTANCE
+          &&modelReport.japanModelCoveragePassed===true&&modelReport.japanExactCountPassed===null
+          &&positiveExactCountsSupplied===0&&countsIncomplete,'incremental_model_journey');
+        need((await currentPage.evaluate(()=>window.__japanExactCount.errors)).length===0,'incremental_model_hydration');
+        const incrementalModelCoverage={passed:true,countAcceptance:modelReport.countAcceptance,
+          japanModelCoverageRequired:modelReport.japanModelCoverageRequired,
+          japanModelCoveragePassed:modelReport.japanModelCoveragePassed,
+          japanExactCountRequired:modelReport.japanExactCountRequired,japanExactCountPassed:modelReport.japanExactCountPassed,
+          positiveExactCountsSupplied,countsIncomplete,modelCoverage:modelReport.checks.modelCoverage};
+        await currentPage.close();state.modelCoverage=false;
+
         // A successful append must repair an initially unknown aggregate in
         // both heading and footer, using the real context and append action.
         result.stage='fixture_append_count_recovery';state.recoverCount=true;
@@ -481,7 +506,7 @@ async function main() {
           failedAppendKeepsTotal:true,pendingKeepsTotal:true,queryLoadedCountResets:true,lateOldAggregateIgnored:true,
           appendRestoresExactCount:true,lateOtherQueryDoesNotEraseCount:true,
           expiredCountDated:true,expiredCountNotCurrent:true,expiredAppendKeepsCards:true,
-          finite:finiteProof,budgetFinite,modelCoverage:result.checks.modelCoverage,exactCount:result.checks.exactCount,
+          finite:finiteProof,budgetFinite,modelCoverage:result.checks.modelCoverage,incrementalModelCoverage,exactCount:result.checks.exactCount,
           priceSort:result.checks.priceSort,pageErrors:0,requests:state.requests.length});
       }catch(error){
         report.failure={case:remount?'remounted_controls':'preserved_controls',stage:result.stage,
@@ -510,4 +535,5 @@ async function main() {
 }
 
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url))await main();
+
 

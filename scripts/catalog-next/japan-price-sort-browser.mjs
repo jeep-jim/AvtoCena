@@ -1,5 +1,5 @@
 import {createHash} from 'node:crypto';
-import {verifyJapanExactCount, verifyJapanExactCountStable} from './japan-exact-count-browser.mjs';
+import {verifyJapanExactCount, verifyJapanExactCountStable, JAPAN_SOURCE_BOUNDED_COUNT_ACCEPTANCE} from './japan-exact-count-browser.mjs';
 
 const ORIGIN = 'https://avtocena.com';
 const CITY = 'Новокузнецк';
@@ -111,8 +111,9 @@ export function verifyJapanPriceSortRows(payload, sort, {visiblePrices} = {}) {
     priceBasis: visiblePrices ? 'displayed_selected_city' : 'supplied_fixture_prices'};
 }
 
-export function verifyJapanPriceSortCount({status, loadedCount, exactCount, text}, {loaded, total = null, hasMore = true, requireExactCount = false} = {}) {
+export function verifyJapanPriceSortCount({status, loadedCount, exactCount, text}, {loaded, total = null, hasMore = true, requireExactCount = false, countAcceptance} = {}) {
   need(typeof requireExactCount === 'boolean', 'exact_count_option');
+  need(countAcceptance === undefined || countAcceptance === JAPAN_SOURCE_BOUNDED_COUNT_ACCEPTANCE && !requireExactCount, 'count_acceptance');
   need(Number.isSafeInteger(loaded) && (requireExactCount ? loaded >= 0 : loaded > 0) && Number(loadedCount) === loaded
     && typeof text === 'string' && text.trim().length > 0, 'count_visible');
   const normalized = text.replace(/[\u00a0\u202f]/g, ' ').replace(/\s+/g, ' ').trim();
@@ -123,7 +124,9 @@ export function verifyJapanPriceSortCount({status, loadedCount, exactCount, text
       && (!requireExactCount || !/Загружено/i.test(normalized) && normalized.replace(/\s/g, '') === String(total)), 'false_exact_count');
   } else {
     need(['partial', 'stale', 'pending'].includes(status) && (exactCount === null || exactCount === undefined)
-      && normalized.includes('Загружено ' + loaded.toLocaleString('ru-RU').replace(/\u00a0/g, ' '))
+      && (countAcceptance === JAPAN_SOURCE_BOUNDED_COUNT_ACCEPTANCE
+        ? total === null && normalized === 'Количество уточняется'
+        : normalized.includes('Загружено ' + loaded.toLocaleString('ru-RU').replace(/\u00a0/g, ' ')))
       && /количество уточняется/i.test(normalized), 'count_visible');
   }
   return {loaded, status, exact: status === 'exact', visible: true, supplierCountNotPresentedAsExact: true};
@@ -178,7 +181,7 @@ export async function selectJapanPriceSort(view, sort, progress = {}) {
   progress.sortsSelectedThroughUi ??= []; progress.sortsSelectedThroughUi.push(sort); progress.phase = 'sort_selected';
 }
 
-export async function verifyJapanPriceSortVisible(view, items, countInput, {sort, priceItems = items, requireExactCount = false, query} = {}) {
+export async function verifyJapanPriceSortVisible(view, items, countInput, {sort, priceItems = items, requireExactCount = false, countAcceptance, query} = {}) {
   need(Array.isArray(items) && (items.length > 0 || requireExactCount && countInput?.total === 0), 'ui_rows');
   const exactProof = requireExactCount ? verifyJapanExactCount(countInput, {query, loadedCount: items.length}) : undefined;
   const catalog = view.locator('main.ac-ajes-catalog'), cards = catalog.locator(CARD);
@@ -214,7 +217,7 @@ export async function verifyJapanPriceSortVisible(view, items, countInput, {sort
     loadedCount: await badge.getAttribute('data-japan-loaded-count'),
     exactCount: await badge.getAttribute('data-catalog-market-count')
       ?? (await exact.count() === 1 ? await exact.getAttribute('data-catalog-market-count') : null),
-    text: await badge.innerText()}, {loaded: items.length, ...countInput, requireExactCount});
+    text: await badge.innerText()}, {loaded: items.length, ...countInput, requireExactCount, countAcceptance});
   if (requireExactCount) need(await badge.getAttribute('data-japan-count-proof') === 'japan-admitted-census'
     && await badge.getAttribute('data-japan-count-query-hash') === exactProof.requestedQueryHash, 'visible_count_binding');
   const footer = catalog.getByText(new RegExp('^Показано\\s+' + items.length + '(?:\\s|$)'));
@@ -242,8 +245,9 @@ export async function verifyJapanPriceSortVisible(view, items, countInput, {sort
 /** One desktop journey, three first-page reads and one emitted continuation.
  * It cannot crawl an arbitrary supplier/page or turn elapsed time into a veto. */
 export async function runJapanPriceSortBrowser({context, report, read, capture, onStage, onPage,
-  verifyPage, verifyFullPage, verifyPowerPage, verifyVehiclePolicy, requireExactCount = false}) {
+  verifyPage, verifyFullPage, verifyPowerPage, verifyVehiclePolicy, requireExactCount = false, countAcceptance}) {
   need(typeof requireExactCount === 'boolean', 'exact_count_option');
+  need(countAcceptance === undefined || countAcceptance === JAPAN_SOURCE_BOUNDED_COUNT_ACCEPTANCE && !requireExactCount, 'count_acceptance');
   const progress = report.checks.priceSortProgress = {phase: 'page_navigation', readyChecks: 0};
   const pages = [], checks = [];
   onStage('stability_price_sort_power');
@@ -259,7 +263,7 @@ export async function runJapanPriceSortBrowser({context, report, read, capture, 
   verifyPowerPage(value.data, 1, {requireExactCount, query: japanPriceSortApi()});
   pages.push(value.data);
   const initialCount = await verifyJapanPriceSortVisible(view, value.data.items, value.data,
-    {requireExactCount, query: japanPriceSortApi()});
+    {requireExactCount, countAcceptance, query: japanPriceSortApi()});
   checks.push({phase: 'power', ...observation,
     count: initialCount});
   for (const sort of ['totalRubDesc', 'totalRub']) {
@@ -269,7 +273,7 @@ export async function runJapanPriceSortBrowser({context, report, read, capture, 
     observation = verifyPage(value.data, value.status); verifyFullPage(value.data);
     verifyPowerPage(value.data, 1, {requireExactCount, query: japanPriceSortApi(sort)});
     const count = await verifyJapanPriceSortVisible(view, value.data.items, value.data,
-      {sort, requireExactCount, query: japanPriceSortApi(sort)});
+      {sort, requireExactCount, countAcceptance, query: japanPriceSortApi(sort)});
     if (requireExactCount) verifyJapanExactCountStable(initialCount.exactProof, count.exactProof);
     const {priceOrder: order} = count; pages.push(value.data);
     checks.push({...observation, ...order, count});
@@ -309,7 +313,7 @@ export async function runJapanPriceSortBrowser({context, report, read, capture, 
   need(japanPriceSortSelectionUrl(view.url(), {sort: 'totalRub'}), 'append_url');
   const count = await verifyJapanPriceSortVisible(view, combined,
     requireExactCount ? value.data : {total: null, hasMore: value.data.hasMore},
-    {sort: 'totalRub', priceItems: value.data.items, requireExactCount, query: api});
+    {sort: 'totalRub', priceItems: value.data.items, requireExactCount, countAcceptance, query: api});
   if (requireExactCount) verifyJapanExactCountStable(initialCount.exactProof, count.exactProof);
   const {priceOrder: order} = count;
   pages.push(value.data);

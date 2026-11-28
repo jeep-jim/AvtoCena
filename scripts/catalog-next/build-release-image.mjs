@@ -10,7 +10,8 @@ import {verifyServingCompatibility} from './serving-compatibility.mjs';
 import {CRM_CHINA_CODE_SCOPE, CRM_CHINA_PROTECTED_EXCEPTIONS, isExactCrmChinaScope} from './crm-china-code-scope.mjs';
 import {CRM_JAPAN_PHOTO_CODE_SCOPE, isExactCrmJapanPhotoScope} from './crm-japan-photo-code-scope.mjs';
 import {JAPAN_PAGINATION_CODE_SCOPE, isExactJapanPaginationScope} from './japan-pagination-code-scope.mjs';
-import {JAPAN_STABILITY_CODE_SCOPE, isExactJapanStabilityScope, japanObservedTimingRequired} from './japan-stability-code-scope.mjs';
+import {JAPAN_STABILITY_CODE_SCOPE, isExactJapanStabilityScope, japanObservedTimingRequired,
+  japanSourceBoundedIncrementalRequired} from './japan-stability-code-scope.mjs';
 
 const root = fileURLToPath(new URL('../../', import.meta.url));
 const need = (condition, code) => assert(condition, 'china_image_' + code);
@@ -82,6 +83,7 @@ export async function verifyChinaImageRuntime({runtimeRoot, plan, execute = exec
   need(plan.codeScope !== JAPAN_STABILITY_CODE_SCOPE || isExactJapanStabilityScope(plan), 'stability_scope');
   need(plan.acceptancePolicy === undefined || (plan.codeScope === JAPAN_STABILITY_CODE_SCOPE
     && japanObservedTimingRequired(plan)), 'acceptance_policy');
+  need(plan.countAcceptance === undefined || japanSourceBoundedIncrementalRequired(plan), 'count_acceptance');
   const sourceRoot = await fs.realpath(runtimeRoot);
   const git = args => execute('/usr/bin/git', ['--no-optional-locks', ...args],
     {cwd: sourceRoot, maximum: 32 * 1024 ** 2});
@@ -104,6 +106,7 @@ export async function verifyChinaImageRuntime({runtimeRoot, plan, execute = exec
     retainedRuntime: plan.retainedRuntime, runtimeDiffSha256: plan.runtimeDiffSha256,
     runtimeFiles: changed, protectedPathsUnchanged: true,
     ...(plan.acceptancePolicy === undefined ? {} : {acceptancePolicy: plan.acceptancePolicy}),
+    ...(plan.countAcceptance === undefined ? {} : {countAcceptance: plan.countAcceptance}),
     ...(crm ? {protectedPathExceptions: [...CRM_CHINA_PROTECTED_EXCEPTIONS]} : {})};
 }
 

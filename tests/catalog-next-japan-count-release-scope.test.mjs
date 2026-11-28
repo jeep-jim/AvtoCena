@@ -63,9 +63,14 @@ test('mandatory workflows bind exact fixture reports to candidate bytes',()=>{
     const text=readFileSync('.github/workflows/'+file,'utf8');
     assert.match(text,/exact_count_required=' \+ japanExactCountRequired\(plan\)/);
     assert.match(text,/price_sort_required == 'true' && steps\.photo_scope\.outputs\.exact_count_required != 'true'/);
-    assert.match(text,/if: steps\.photo_scope\.outputs\.exact_count_required == 'true'/);
+    assert.match(text,/model_coverage_required=' \+ japanSourceBoundedIncrementalRequired\(plan\)/);
+    assert.match(text,/if: steps\.photo_scope\.outputs\.exact_count_required == 'true' \|\| steps\.photo_scope\.outputs\.model_coverage_required == 'true'/);
+    assert.match(text,/requireLiteralFamily: japanLiteralFamilyRequired\(plan\)/);
+    assert.match(text,/node --import tsx \"\$GITHUB_WORKSPACE\/tests\/browser\/ajes-pagination\.mjs\"/);
+    assert.match(text,/@opentelemetry\/api@1\.9\.1/);
     assert.match(text,/node tests\/browser\/japan-exact-count\.mjs/);
     assert.match(text,/checkedJapanExactCountBrowserFixture\(/);
+    assert.match(text,/checkedJapanModelCoverageBrowserFixture\(report,expected\)/);
     assert.match(text,/runtimeSha:plan\.runtimeSha,runtimeTree:plan\.runtimeTree,helperSha256/);
   }
 });
@@ -73,7 +78,7 @@ test('mandatory workflows bind exact fixture reports to candidate bytes',()=>{
 test('isolated review workflow requires the new profile and cannot build or activate the app',()=>{
   const text=readFileSync('.github/workflows/verify-japan-exact-count-candidate.yml','utf8');
   assert.match(text,/branches: \[fix\/japan-exact-count-controller-20261128\]/);
-  assert.match(text,/japanExactCountRequired\(plan\) !== true\) throw Error\('japan_exact_candidate_scope_required'\)/);
+  assert.match(text,/japanExactCountRequired\(plan\) !== true && japanSourceBoundedIncrementalRequired\(plan\) !== true\) throw Error\('japan_exact_candidate_scope_required'\)/);
   assert.match(text,/permissions:\n  contents: read/);
   assert.doesNotMatch(text,/\$\{\{\s*secrets\.|environment: regcloud|code-entry\.mjs --(?:build|run)\b/);
 });

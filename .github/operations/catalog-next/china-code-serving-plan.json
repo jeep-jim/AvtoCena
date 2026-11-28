@@ -199,5 +199,6 @@
     "tests/related-offer-selection.test.ts"
   ],
   "codeScope": "catalog-japan-stability-v1",
-  "acceptancePolicy": "japan-functional-observed-timing-v1"
+  "acceptancePolicy": "japan-functional-observed-timing-v1",
+  "countAcceptance": "japan-source-bounded-incremental-v1"
 }

@@ -11,7 +11,8 @@ import {JAPAN_PAGINATION_CODE_SCOPE, JAPAN_PAGINATION_RETAINED_RUNTIME,
 import {checkedCatalogCodeScope} from '../scripts/catalog-next/photo-code-scope.mjs';
 import {JAPAN_STABILITY_CODE_SCOPE, JAPAN_STABILITY_PRICE_SORT_RETAINED_RUNTIME,
   JAPAN_STABILITY_EXACT_COUNT_RETAINED_RUNTIME,
-  isExactJapanStabilityScope, japanPriceSortRequired, japanExactCountRequired} from '../scripts/catalog-next/japan-stability-code-scope.mjs';
+  isExactJapanStabilityScope, japanPriceSortRequired, japanExactCountRequired,
+  japanSourceBoundedIncrementalRequired, japanLiteralFamilyRequired} from '../scripts/catalog-next/japan-stability-code-scope.mjs';
 
 const plan = () => ({codeScope:JAPAN_PAGINATION_CODE_SCOPE,
   retainedRuntime:JAPAN_PAGINATION_RETAINED_RUNTIME, runtimeFiles:[...JAPAN_PAGINATION_CODE_PATHS]});
@@ -88,7 +89,7 @@ test('pagination image verification keeps every CRM path protected and grants no
     execute:()=>assert.fail('wrong predecessor must fail before git')}),/china_image_pagination_scope/);
 });
 
-test('review plans keep accepted20fd selectable until the exact-count successor is accepted',async()=>{
+test('review plans keep accepted20fd selectable until the explicit source-model successor is accepted',async()=>{
   const plans=await readChinaDailyPlans(),base=plans.servingPlan;
   assert.equal(base.runtimeSha,JAPAN_STABILITY_EXACT_COUNT_RETAINED_RUNTIME);
   assert.equal(base.retainedRuntime,JAPAN_STABILITY_PRICE_SORT_RETAINED_RUNTIME);
@@ -106,7 +107,10 @@ test('review plans keep accepted20fd selectable until the exact-count successor 
   assert.equal(successor.retainedRuntime,base.runtimeSha);
   assert.equal(isExactJapanStabilityScope(successor),true);
   assert.equal(japanPriceSortRequired(successor),true);
-  assert.equal(japanExactCountRequired(successor),true);
+  assert.equal(japanExactCountRequired(successor),false);
+  assert.equal(japanSourceBoundedIncrementalRequired(successor),true);
+  assert.equal(japanLiteralFamilyRequired(successor),true);
+  assert.equal(japanExactCountRequired({...successor,countAcceptance:undefined}),true);
   assert.equal(selectChinaDailyServingPlan(plans,successor.runtimeSha),successor);
   assert.deepEqual(successor.source,base.source);assert.deepEqual(successor.encyclopedia,base.encyclopedia);
   assert.equal(successor.pricingRuntimeSha,base.pricingRuntimeSha);

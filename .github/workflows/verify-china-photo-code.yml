@@ -83,11 +83,12 @@ jobs:
           node --input-type=module <<'JS'
           import fs from 'node:fs';
           import {checkedCatalogCodeScope} from './scripts/catalog-next/photo-code-scope.mjs';
-          import {japanPriceSortRequired,japanExactCountRequired} from './scripts/catalog-next/japan-stability-code-scope.mjs';
+          import {japanPriceSortRequired,japanExactCountRequired,japanSourceBoundedIncrementalRequired} from './scripts/catalog-next/japan-stability-code-scope.mjs';
           const plan = JSON.parse(fs.readFileSync('.github/operations/catalog-next/china-code-serving-plan.json', 'utf8'));
           fs.appendFileSync(process.env.GITHUB_OUTPUT, 'scope=' + checkedCatalogCodeScope(plan) + '\n');
           fs.appendFileSync(process.env.GITHUB_OUTPUT, 'price_sort_required=' + japanPriceSortRequired(plan) + '\n');
           fs.appendFileSync(process.env.GITHUB_OUTPUT, 'exact_count_required=' + japanExactCountRequired(plan) + '\n');
+          fs.appendFileSync(process.env.GITHUB_OUTPUT, 'model_coverage_required=' + japanSourceBoundedIncrementalRequired(plan) + '\n');
           JS
       - name: Prepare Chromium for the required runtime browser fixture
         if: steps.photo_scope.outputs.scope == 'catalog-photo-recovery-v1' || steps.photo_scope.outputs.scope == 'catalog-photo-japan-power-v1' || steps.photo_scope.outputs.scope == 'catalog-japan-completion-v1' || steps.photo_scope.outputs.scope == 'catalog-japan-completion-v2' || steps.photo_scope.outputs.scope == 'catalog-japan-usability-v1' || steps.photo_scope.outputs.scope == 'catalog-crm-china-operations-v1' || steps.photo_scope.outputs.scope == 'catalog-crm-japan-photo-retry-v1' || steps.photo_scope.outputs.scope == 'catalog-japan-pagination24-v1' || steps.photo_scope.outputs.scope == 'catalog-japan-stability-v1'
@@ -110,12 +111,14 @@ jobs:
           PHOTO_RUNTIME_ROOT="$RUNNER_TEMP/china-serving-runtime-$MODEL_SHA" JAPAN_MODEL_CONTROLS_READY_REPORT="$RUNNER_TEMP/japan-model-controls-ready-browser-report.json" node tests/browser/japan-model-controls-ready.mjs
       - name: Verify Japan power then price sorting and live count on the exact runtime
         if: steps.photo_scope.outputs.price_sort_required == 'true' && steps.photo_scope.outputs.exact_count_required != 'true'
+        env:
+          CATALOG_JAPAN_MODEL_COVERAGE_REQUIRED: ${{ steps.photo_scope.outputs.model_coverage_required == 'true' && '1' || '0' }}
         run: |
           set -euo pipefail
           SORT_SHA=$(node -p "JSON.parse(require('fs').readFileSync('.github/operations/catalog-next/china-code-serving-plan.json')).runtimeSha")
           PHOTO_RUNTIME_ROOT="$RUNNER_TEMP/china-serving-runtime-$SORT_SHA" JAPAN_PRICE_SORT_REPORT="$RUNNER_TEMP/japan-price-sort-browser-report.json" node tests/browser/japan-price-sort.mjs
       - name: Verify exact Japan totals and complete model selection on the exact runtime
-        if: steps.photo_scope.outputs.exact_count_required == 'true'
+        if: steps.photo_scope.outputs.exact_count_required == 'true' || steps.photo_scope.outputs.model_coverage_required == 'true'
         run: |
           set -euo pipefail
           COUNT_SHA=$(node -p "JSON.parse(require('fs').readFileSync('.github/operations/catalog-next/china-code-serving-plan.json')).runtimeSha")
@@ -123,11 +126,13 @@ jobs:
           node --input-type=module <<'JS'
           import fs from 'node:fs';
           import {createHash} from 'node:crypto';
-          import {checkedJapanExactCountBrowserFixture} from './scripts/catalog-next/japan-exact-count-browser.mjs';
+          import {checkedJapanExactCountBrowserFixture,checkedJapanModelCoverageBrowserFixture} from './scripts/catalog-next/japan-exact-count-browser.mjs';
           const plan=JSON.parse(fs.readFileSync('.github/operations/catalog-next/china-code-serving-plan.json','utf8'));
           const helperSha256=createHash('sha256').update(fs.readFileSync('scripts/catalog-next/japan-exact-count-browser.mjs')).digest('hex');
-          checkedJapanExactCountBrowserFixture(JSON.parse(fs.readFileSync(process.env.RUNNER_TEMP+'/japan-exact-count-browser-report.json','utf8')),
-            {runtimeSha:plan.runtimeSha,runtimeTree:plan.runtimeTree,helperSha256});
+          const report=JSON.parse(fs.readFileSync(process.env.RUNNER_TEMP+'/japan-exact-count-browser-report.json','utf8'));
+          const expected={runtimeSha:plan.runtimeSha,runtimeTree:plan.runtimeTree,helperSha256};
+          checkedJapanExactCountBrowserFixture(report,expected);
+          if (plan.countAcceptance === 'japan-source-bounded-incremental-v1') checkedJapanModelCoverageBrowserFixture(report,expected);
           JS
       - name: Verify bounded Japan directory retries on the exact runtime before host contact
         if: steps.photo_scope.outputs.scope == 'catalog-japan-stability-v1'
@@ -177,13 +182,23 @@ jobs:
           await readJapanPhotoRetryFixture(process.env.RUNNER_TEMP + '/japan-photo-retry-browser-report.json');
           JS
           fi
+      # The isolated Chromium fixture uses esbuild against Next's optional tracer.
+      # npm ci intentionally does not install that peer; add it only under the
+      # runner's ignored node_modules, never to the pinned runtime Git tree.
+      - name: Prepare Next optional tracing peer for offline page-fill browser test
+        run: |
+          set -euo pipefail
+          mkdir -p node_modules/@opentelemetry/api
+          npm pack --silent --pack-destination "$RUNNER_TEMP" @opentelemetry/api@1.9.1 >/dev/null
+          tar -xzf "$RUNNER_TEMP/opentelemetry-api-1.9.1.tgz" -C node_modules/@opentelemetry/api --strip-components=1
+          node -e "require.resolve('@opentelemetry/api')"
       - name: Verify ordinary Japan page filling on the exact candidate before host contact
         if: steps.photo_scope.outputs.scope == 'catalog-japan-pagination24-v1' || steps.photo_scope.outputs.scope == 'catalog-japan-stability-v1'
         run: |
           set -euo pipefail
           PAGINATION_SHA=$(node -p "JSON.parse(require('fs').readFileSync('.github/operations/catalog-next/china-code-serving-plan.json')).runtimeSha")
           cd "$RUNNER_TEMP/china-serving-runtime-$PAGINATION_SHA"
-          JAPAN_PAGINATION24_REPORT="$RUNNER_TEMP/japan-pagination24-browser-report.json" node --import tsx tests/browser/ajes-pagination.mjs
+          JAPAN_PAGINATION24_REPORT="$RUNNER_TEMP/japan-pagination24-browser-report.json" node --import tsx "$GITHUB_WORKSPACE/tests/browser/ajes-pagination.mjs"
           cd "$GITHUB_WORKSPACE"
           node --input-type=module <<'JS'
           import fs from 'node:fs/promises';
@@ -205,10 +220,11 @@ jobs:
           node --input-type=module <<'JS'
           import fs from 'node:fs/promises';
           import {readJapanFilterDirectoryFixture} from './scripts/catalog-next/japan-filter-directory-proof.mjs';
-          import {japanSourceNamesRequired, japanBrandDirectoryRequired} from './scripts/catalog-next/japan-stability-code-scope.mjs';
+          import {japanSourceNamesRequired, japanBrandDirectoryRequired, japanLiteralFamilyRequired} from './scripts/catalog-next/japan-stability-code-scope.mjs';
           const plan = JSON.parse(await fs.readFile('.github/operations/catalog-next/china-code-serving-plan.json', 'utf8'));
           await readJapanFilterDirectoryFixture(process.env.RUNNER_TEMP + '/japan-filter-directory-browser-report.json',
-            {requireSourceNames: japanSourceNamesRequired(plan), requireVisibleFallback: japanBrandDirectoryRequired(plan)});
+            {requireSourceNames: japanSourceNamesRequired(plan), requireVisibleFallback: japanBrandDirectoryRequired(plan),
+              requireLiteralFamily: japanLiteralFamilyRequired(plan)});
           JS
       - name: Preserve Japan legacy redirect browser evidence
         if: always() && steps.photo_scope.outputs.scope == 'catalog-japan-stability-v1'

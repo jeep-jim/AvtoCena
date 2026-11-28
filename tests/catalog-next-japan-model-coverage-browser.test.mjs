@@ -1,0 +1,153 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs/promises';
+import os from 'node:os';
+import path from 'node:path';
+import {JAPAN_SOURCE_BOUNDED_COUNT_ACCEPTANCE as policy, japanModelCoverageRequirement,
+  japanModelCoverageApi, japanModelCoverageApiAllowed, japanExactCountApi, verifyJapanModelCount,
+  checkedJapanModelCoverageBrowserFixture} from '../scripts/catalog-next/japan-exact-count-browser.mjs';
+import {JAPAN_OBSERVED_TIMING_POLICY, verifyJapanPage, verifyJapanFullPage, verifyJapanPowerPage,
+  verifyJapanSourceScopePage, runJapanBrowserAcceptance} from '../scripts/catalog-next/japan-browser-acceptance.mjs';
+import {verifyJapanPriceSortCount} from '../scripts/catalog-next/japan-price-sort-browser.mjs';
+import {JAPAN_STABILITY_CODE_SCOPE} from '../scripts/catalog-next/japan-stability-code-scope.mjs';
+
+const now=Date.parse('2026-11-28T12:00:00Z'),observedAt=new Date(now-5000).toISOString();
+const city='Новокузнецк';
+const petrol='/api/catalog/search?'+new URLSearchParams({market:'japan',page:'1',pageSize:'24',city,powerTo:'160',fuel:'petrol'});
+const cursor='j2.k.2.0.2.'+'a'.repeat(64)+'.'+'b'.repeat(64)+'.-';
+const row=id=>({id:'ajes-stats-'+id,market:'japan',make:'AUDI',model:'A4 AVANT',fuel:'petrol',powerHp:150});
+const page=()=>({ok:true,page:1,pageSize:24,items:Array.from({length:24},(_,i)=>row(String(i))),
+  received:24,observedAt,stale:false,partial:false,selectionIncomplete:false,interrupted:false,scanLimited:false,
+  total:null,countSummary:null,hasMore:true,nextCursor:cursor,reads:1,
+  powerFilterSummary:{shown:24,localPower:24,supplierPower:0,unknownPower:0}});
+const receipt=()=>({version:1,requestId:'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa',queryHash:'c'.repeat(64),
+  table:'stats',kind:'list',page:1,pageSize:24,startedAt:observedAt,finishedAt:observedAt,
+  stage:'access',supplierAttempted:false,outcome:'fresh',observedAt});
+const scoped=()=>({...page(),partial:true,sourceReceipts:[receipt()]});
+
+test('model acceptance parses only explicit 0/1 environment values and admits only three bounded Audi reads',()=>{
+  assert.equal(japanModelCoverageRequirement(undefined),false);
+  assert.equal(japanModelCoverageRequirement('0'),false);
+  assert.equal(japanModelCoverageRequirement('1'),true);
+  for(const value of [true,false,0,1,'','true','yes',null])assert.throws(()=>japanModelCoverageRequirement(value));
+  for(const make of ['AUDI','Audi'])for(const kind of ['make','model','models'])
+    assert.equal(japanModelCoverageApiAllowed(japanModelCoverageApi(kind,{make})),true);
+  for(const kind of ['plain','combined','budget'])assert.equal(japanModelCoverageApiAllowed(
+    japanExactCountApi(kind,kind==='budget'?{budgetTo:'1303000'}:{})),false);
+  const api=japanModelCoverageApi('model');
+  for(const value of [undefined,null,'https://avtocena.com'+api,api+'&page=1',api+'&private=1',
+    api.replace('page=1','page=2'),api.replace('model=A4','model=A4+AVANT'),
+    api.replace('market=japan','market=china'),api.replace('make=AUDI','make=TOYOTA'),
+    japanModelCoverageApi('models')+'&model=A4'])assert.equal(japanModelCoverageApiAllowed(value),false);
+  for(const options of [{page:2},{make:'TOYOTA'},null,[]])assert.throws(()=>japanModelCoverageApi('model',options));
+});
+
+test('bounded model selection allows an honest unknown total and rejects zero, fabricated totals, and census claims',()=>{
+  assert.deepEqual(verifyJapanModelCount(page()),{exact:false,countHonest:true});
+  const exhausted={...page(),items:[row('one')],received:1,hasMore:false,total:1,
+    countSummary:{total:1,upperBound:false,stale:false,observedAt}};
+  assert.deepEqual(verifyJapanModelCount(exhausted),{exact:true,countHonest:true});
+  for(const bad of [
+    {...page(),total:0}, {...page(),total:700,countSummary:{total:700,upperBound:false}},
+    {...page(),countSummary:{total:24,upperBound:false}}, {...exhausted,total:2},
+    {...exhausted,countSummary:{...exhausted.countSummary,stale:true}},
+    {...exhausted,countSummary:{...exhausted.countSummary,countProof:{complete:true}}},
+    {...exhausted,reads:2},{...exhausted,received:24},
+    {...exhausted,countSummary:{...exhausted.countSummary,observedAt:new Date(now).toISOString()}},
+  ])assert.throws(()=>verifyJapanModelCount(bad));
+});
+
+test('separate loaded metadata permits the new uncertainty label only under the explicit incremental profile',()=>{
+  const badge={status:'partial',loadedCount:'24',exactCount:null,text:'Количество уточняется'};
+  const options={loaded:24,total:null,hasMore:true,countAcceptance:policy};
+  assert.equal(verifyJapanPriceSortCount(badge,options).supplierCountNotPresentedAsExact,true);
+  assert.throws(()=>verifyJapanPriceSortCount(badge,{loaded:24,total:null,hasMore:true}));
+  assert.equal(verifyJapanPriceSortCount({...badge,text:'Загружено 24 · количество уточняется'},
+    {loaded:24,total:null,hasMore:true}).visible,true);
+  for(const [value,config] of [
+    [{...badge,loadedCount:'23'},options],[{...badge,exactCount:'24'},options],
+    [badge,{...options,total:123}],[{...badge,text:'24'},options],
+    [{...badge,status:'exact',exactCount:'999',text:'999'},{...options,total:999}],
+    [badge,{...options,countAcceptance:'other'}],[badge,{...options,requireExactCount:true}],
+  ])assert.throws(()=>verifyJapanPriceSortCount(value,config));
+});
+
+test('exhausted power pages remain honestly uncounted only in the incremental profile',()=>{
+  const value={...page(),hasMore:false,nextCursor:null};
+  assert.throws(()=>verifyJapanPowerPage(value));
+  assert.equal(verifyJapanPowerPage(value,1,{countAcceptance:policy}).countHonest,true);
+  assert.throws(()=>verifyJapanPowerPage({...value,total:24,countSummary:{total:24,upperBound:false}},1,{countAcceptance:policy}));
+  assert.throws(()=>verifyJapanPowerPage({...value,items:[{...row('bad'),powerHp:200}]},1,{countAcceptance:policy}));
+});
+
+test('fresh petrol source pages retain partial selection status with complete finite receipts, including cache hits',()=>{
+  const value=scoped(),options={query:petrol,countAcceptance:policy,now};
+  const proof=verifyJapanSourceScopePage(value,options);
+  assert.deepEqual(proof,{partial:true,selectionComplete:false,limitation:'source_scope_unproven',
+    freshSourcePages:1,sourcePagesComplete:true,fullSelectionExhaustionClaimed:false});
+  assert.equal(value.sourceReceipts[0].supplierAttempted,false,'cache hit freshness uses original source date');
+  const accepted=verifyJapanPage(value,200,now,options);
+  assert.equal(accepted.partial,true);assert.equal(accepted.selectionComplete,false);
+  assert.equal(accepted.total,null);assert.equal(verifyJapanFullPage(value,options).fullSelectionExhaustionClaimed,false);
+  assert.throws(()=>verifyJapanPage(value,200,now));
+  assert.throws(()=>verifyJapanFullPage(value));
+  const second={...value,page:2,hasMore:false,nextCursor:null,items:[row('last')]};
+  const query=petrol.replace('page=1','page=2')+'&after='+encodeURIComponent(cursor);
+  assert.equal(verifyJapanSourceScopePage(second,{...options,query}).selectionComplete,false);
+});
+
+test('source-selection limitation cannot conceal failures, missing receipts, wrong queries or incomplete visible pages',()=>{
+  const options={query:petrol,countAcceptance:policy,now};
+  const mutations=[
+    p=>{p.selectionIncomplete=true;},p=>{p.stale=true;},p=>{p.interrupted=true;},p=>{p.scanLimited=true;},
+    p=>{p.total=0;},p=>{p.countSummary={total:0,upperBound:false};},p=>{p.reads=2;},p=>{p.reads=9;},
+    p=>{p.sourceReceipts=[];},p=>{p.sourceReceipts[0].outcome='partial';},p=>{p.sourceReceipts[0].outcome='stale';},
+    p=>{p.sourceReceipts[0].reason='http_503';},p=>{p.sourceReceipts[0].observedAt=new Date(now-31*60000).toISOString();},
+    p=>{p.observedAt=new Date(now-4000).toISOString();},p=>{p.sourceReceipts[0].kind='models';},
+    p=>{p.sourceReceipts[0].table='main';},p=>{p.sourceReceipts[0].pageSize=48;},
+    p=>{p.items=p.items.slice(0,23);},p=>{p.nextCursor=null;},p=>{p.hasMore=false;},
+    p=>{p.sourceReceipts.push(p.sourceReceipts[0]);p.reads=2;},
+  ];
+  for(const mutate of mutations){const value=scoped();mutate(value);assert.throws(()=>verifyJapanSourceScopePage(value,options));}
+  for(const query of [undefined,petrol.replace('fuel=petrol','fuel=diesel'),petrol.replace('market=japan','market=china'),
+    petrol.replace('powerTo=160','powerTo=170'),petrol+'&make=AUDI',petrol+'&fuel=petrol',
+    petrol.replace('page=1','page=2'),'https://other.test'+petrol])
+    assert.throws(()=>verifyJapanSourceScopePage(scoped(),{...options,query}));
+  assert.throws(()=>verifyJapanSourceScopePage(scoped(),{...options,countAcceptance:undefined}));
+});
+
+test('missing required preceding gates or conflicting exact mode cannot start incremental acceptance',async t=>{
+  const directory=await fs.mkdtemp(path.join(os.tmpdir(),'japan-model-options-'));
+  t.after(()=>fs.rm(directory,{recursive:true,force:true}));
+  const base={codeScope:JAPAN_STABILITY_CODE_SCOPE,requireModelCoverage:true,requirePowerOrder:true,
+    requireBrandDirectory:true,requirePriceSort:true,requireExactCount:false,timingPolicy:JAPAN_OBSERVED_TIMING_POLICY};
+  const changes=[{requireModelCoverage:'1'},{requirePowerOrder:false},{requireBrandDirectory:false},
+    {requirePriceSort:false},{requireExactCount:true},{timingPolicy:undefined},{codeScope:'catalog-japan-recovery-v1'}];
+  for(const [index,change] of changes.entries()){
+    const report=await runJapanBrowserAcceptance({...base,...change,outputFile:path.join(directory,index+'.json')});
+    assert.equal(report.passed,false);assert.equal(report.error.stage,'preconditions');
+    assert.equal(report.explicitJapanApiRequests,0);assert.notEqual(report.japanModelCoveragePassed,true);
+  }
+});
+
+const fixture=()=>({passed:true,productionRequests:0,supplierRequests:0,forbiddenTransportAttempts:0,
+  cases:['preserved_controls','remounted_controls'].map(name=>({name,incrementalModelCoverage:{passed:true,
+    countAcceptance:policy,japanModelCoverageRequired:true,japanModelCoveragePassed:true,
+    japanExactCountRequired:false,japanExactCountPassed:null,positiveExactCountsSupplied:0,countsIncomplete:true,
+    modelCoverage:{sourcePairs:94,accessiblePairs:94,allSourceModelsAccessible:true,noForeignModels:true,
+      sourceMatchesUi:true,pairsSha256:'d'.repeat(64),typedBase:'A4',typedFamilyNotNarrowed:true,
+      modelExpansions:1,sourceFamilyModels:30,directory:{status:200,stale:false,sourcePairs:94,pairsSha256:'d'.repeat(64),browserMatchesApi:true},
+      selection:{shown:24,observedSourceNamesOnly:true},fullPage:true,countHonest:true,explicitApiReads:3,
+      liveExhaustiveScan:false,pageErrors:0,checks:['make','model'].map(kind=>({kind,count:{exact:false,countHonest:true},
+        total:null,countStatus:'partial',uiMatchesApi:true,rowOrderMatchesApi:true}))}}}))});
+
+test('offline model-only fixture proof requires both full UI lifecycle cases and no supplied positive total',()=>{
+  assert.equal(checkedJapanModelCoverageBrowserFixture(fixture()).exactCountAccepted,false);
+  for(const mutate of [
+    p=>{p.positiveExactCountsSupplied=1;},p=>{p.japanExactCountPassed=true;},p=>{p.countsIncomplete=false;},
+    p=>{p.modelCoverage.sourceMatchesUi=false;},p=>{p.modelCoverage.accessiblePairs=60;},
+    p=>{p.modelCoverage.modelExpansions=0;},p=>{p.modelCoverage.directory.stale=true;},
+    p=>{p.modelCoverage.checks[0].count.exact=true;},p=>{p.modelCoverage.checks[1].total=94;},
+  ]){const report=fixture();mutate(report.cases[0].incrementalModelCoverage);assert.throws(()=>checkedJapanModelCoverageBrowserFixture(report));}
+  assert.throws(()=>checkedJapanModelCoverageBrowserFixture({...fixture(),cases:fixture().cases.slice(0,1)}));
+});

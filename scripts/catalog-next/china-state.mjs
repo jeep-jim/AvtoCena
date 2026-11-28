@@ -1,7 +1,8 @@
 import {createHash} from 'node:crypto';
 import {signRawGcS3Request} from '../lib/catalog-raw-gc-s3.mjs';
 import {privateOwnerAcl, nonGrantingPolicy} from './private-storage.mjs';
-import {JAPAN_OBSERVED_TIMING_POLICY, JAPAN_STABILITY_CODE_SCOPE, JAPAN_STABILITY_EXACT_COUNT_RETAINED_RUNTIME} from './japan-stability-code-scope.mjs';
+import {JAPAN_OBSERVED_TIMING_POLICY, JAPAN_STABILITY_CODE_SCOPE, JAPAN_STABILITY_EXACT_COUNT_RETAINED_RUNTIME,
+  JAPAN_SOURCE_BOUNDED_INCREMENTAL_POLICY, japanSourceBoundedAcceptancePassed} from './japan-stability-code-scope.mjs';
 
 export const CHINA_STATE_KEYS = Object.freeze(Object.fromEntries(['accepted', 'intent', 'lease']
   .map(name => [name, `catalog/market-rebuild/v1/china/${name}.json`])));
@@ -58,8 +59,12 @@ function hostProof(value, reference) {
   const japanPolicy = receipt.acceptancePolicy === JAPAN_OBSERVED_TIMING_POLICY;
   if (Object.hasOwn(receipt, 'acceptancePolicy')) need(japanPolicy && receipt.transition === 'code-update'
     && receipt.codeScope === JAPAN_STABILITY_CODE_SCOPE, 'timing_policy_scope');
+  if (Object.hasOwn(receipt, 'countAcceptance')) need(receipt.countAcceptance === JAPAN_SOURCE_BOUNDED_INCREMENTAL_POLICY
+    && japanPolicy && receipt.transition === 'code-update' && receipt.codeScope === JAPAN_STABILITY_CODE_SCOPE
+    && receipt.retainedRuntimeSha === JAPAN_STABILITY_EXACT_COUNT_RETAINED_RUNTIME, 'count_acceptance_scope');
   need(browser?.release === receipt.release && browser.nonce === receipt.nonce && browser.passed === true
     && browser.functionalPassed === true && (japanPolicy ? observedTiming(browser) : browser.speedPassed === true)
+    && browser.countAcceptance === receipt.countAcceptance
     && ['reportSha256', 'speedReportSha256', 'detailsReportSha256'].every(key => HASH.test(browser[key] ?? '')), 'browser_binding');
   if (Object.hasOwn(receipt, 'transition')) {
     need(receipt.transition === 'code-update' && etag(receipt.previousAcceptedETag)
@@ -410,6 +415,8 @@ function acceptanceProof(candidate, intent, evidence) {
     codeTransitionProof(receipt, candidate, intent.previous.value.current, intent.previous.etag, intent.previous.sha256);
   else need(receipt.transition === undefined, 'unexpected_code_update_proof');
   const speed = parse(evidence.browserSpeedBytes, 'speed_report'), details = parse(evidence.browserDetailsBytes, 'details_report');
+  need(speed.countAcceptance === receipt.countAcceptance && details.countAcceptance === receipt.countAcceptance,
+    'count_acceptance_binding');
   need(hash(evidence.browserSpeedBytes) === receipt.browser.speedReportSha256
     && hash(evidence.browserDetailsBytes) === receipt.browser.detailsReportSha256
     && hash(Buffer.concat([evidence.browserSpeedBytes, evidence.browserDetailsBytes])) === receipt.browser.reportSha256, 'report_hashes');
@@ -437,10 +444,12 @@ function acceptanceProof(candidate, intent, evidence) {
       && speed.productionMutations === 0 && speed.directSupplierApiRequests === 0
       && Number.isSafeInteger(speed.japanPreviewCalculationRequests)
       && speed.japanPreviewCalculationRequests >= 1 && speed.japanPreviewCalculationRequests <= 2, 'japan_functional_binding');
-    if (['japanPriceSortRequired', 'japanPriceSortPassed', 'japanCountDisplayPassed'].some(key => Object.hasOwn(speed, key)))
+    const sourceBounded = receipt.countAcceptance === JAPAN_SOURCE_BOUNDED_INCREMENTAL_POLICY;
+    if (sourceBounded || ['japanPriceSortRequired', 'japanPriceSortPassed', 'japanCountDisplayPassed'].some(key => Object.hasOwn(speed, key)))
       need(speed.japanPriceSortRequired === true && speed.japanPriceSortPassed === true
         && speed.japanCountDisplayPassed === true, 'japan_price_sort_binding');
-    if (intent.previous.value.current.runtimeSha === JAPAN_STABILITY_EXACT_COUNT_RETAINED_RUNTIME
+    if (sourceBounded) need(japanSourceBoundedAcceptancePassed(speed), 'japan_source_bounded_binding');
+    else if (intent.previous.value.current.runtimeSha === JAPAN_STABILITY_EXACT_COUNT_RETAINED_RUNTIME
       || ['japanExactCountRequired', 'japanExactCountPassed', 'japanModelCoveragePassed'].some(key => Object.hasOwn(speed, key)))
       need(speed.japanExactCountRequired === true && speed.japanExactCountPassed === true
         && speed.japanModelCoveragePassed === true, 'japan_exact_count_binding');

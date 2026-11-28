@@ -13,11 +13,14 @@ import {runJapanPriceSortBrowser, selectJapanPriceSort, verifyJapanPriceSortVisi
   from '../../scripts/catalog-next/japan-price-sort-browser.mjs';
 import {verifyJapanPage, verifyJapanFullPage, verifyJapanPowerPage, verifyJapanVisibleVehiclePolicy}
   from '../../scripts/catalog-next/japan-browser-acceptance.mjs';
+import {JAPAN_SOURCE_BOUNDED_INCREMENTAL_POLICY, japanSourceBoundedIncrementalRequired}
+  from '../../scripts/catalog-next/japan-stability-code-scope.mjs';
 
 const ROOT = fileURLToPath(new URL('../../', import.meta.url));
 const ORIGIN = 'https://avtocena.com', CITY = 'Новокузнецк';
 const need = (value, code) => { if (!value) throw Error('japan_price_sort_fixture_' + code); };
 const hash = value => createHash('sha256').update(value).digest('hex');
+const LOCAL_BRAND_LOGO_PNG = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR4nGNoaGj4DwAFhAKAjM1mJgAAAABJRU5ErkJggg==', 'base64');
 const require = createRequire(import.meta.url);
 const runtimeFiles = {
   CatalogFilters: 'apps/web/components/catalog/CatalogFilters.tsx',
@@ -178,6 +181,11 @@ async function main() {
   try {
     need(process.argv.length === 2, 'arguments');
     const plan = JSON.parse(await fs.readFile(path.join(ROOT,'.github/operations/catalog-next/china-code-serving-plan.json'),'utf8'));
+    const sourceBounded = process.env.CATALOG_JAPAN_MODEL_COVERAGE_REQUIRED === '1';
+    need([undefined, '0', '1'].includes(process.env.CATALOG_JAPAN_MODEL_COVERAGE_REQUIRED)
+      && sourceBounded === japanSourceBoundedIncrementalRequired(plan), 'count_acceptance_plan');
+    const countAcceptance = sourceBounded ? JAPAN_SOURCE_BOUNDED_INCREMENTAL_POLICY : undefined;
+    if (sourceBounded) report.countAcceptance = countAcceptance;
     fixture = await prepare(process.env.PHOTO_RUNTIME_ROOT, plan);
     Object.assign(report,{runtimeSha:plan.runtimeSha,runtimeTree:plan.runtimeTree,componentSha256:fixture.sources,styles:fixture.styles,
       controllerHelperSha256:hash(await fs.readFile(path.join(ROOT,'scripts/catalog-next/japan-price-sort-browser.mjs')))});
@@ -209,7 +217,14 @@ async function main() {
         if(url.pathname==='/api/catalog/rates'){
           response.writeHead(200,{'Content-Type':'application/json'});response.end('{"rates":[]}');return;
         }
-        if(url.pathname.startsWith('/brand-logos/')){response.writeHead(204);response.end();return;}
+        if(url.pathname.startsWith('/brand-logos/')){
+          // The incremental candidate's actual logo fallback must not be
+          // activated by an invalid empty fixture image. Keep the same local
+          // image path; no proxy or external transport is admitted.
+          if(sourceBounded){response.writeHead(200,{'Content-Type':'image/png'});response.end(LOCAL_BRAND_LOGO_PNG);}
+          else{response.writeHead(204);response.end();}
+          return;
+        }
         need(url.pathname==='/cars/japan' && url.searchParams.size===1 && url.searchParams.get('city')===CITY,'document_scope');
         const initial={city:CITY,market:'japan'},result=fixtureResult(initial,active.now),props={initial,result,remount:active.remount};
         response.writeHead(200,{'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-store'});
@@ -246,7 +261,7 @@ async function main() {
           const realClose=currentPage.close.bind(currentPage);currentPage.fixtureClose=realClose;
           return new Proxy(currentPage,{get(target,key){if(key==='close')return async()=>{};const value=Reflect.get(target,key,target);return typeof value==='function'?value.bind(target):value;}});
         }};
-        const pages=await runJapanPriceSortBrowser({context:wrapped,report:result,
+        const pages=await runJapanPriceSortBrowser({context:wrapped,report:result,countAcceptance,
           read:async api=>{const query=Object.fromEntries(new URL(api,ORIGIN).searchParams);return {status:200,data:fixtureResult(query,state.now)};},
           capture:async()=>{},onStage:stage=>{result.stage=stage;},onPage:()=>{},
           verifyPage:verifyJapanPage,verifyFullPage:verifyJapanFullPage,
@@ -259,7 +274,7 @@ async function main() {
         await page.locator('main.ac-ajes-catalog').getByRole('button',{name:'Показать ещё',exact:true}).click();
         need((await failed).status()===503,'failed_append_transport');
         await page.locator('main.ac-ajes-catalog [role="alert"]').waitFor({state:'visible',timeout:5000});
-        const retained=await verifyJapanPriceSortVisible(page,prior,{total:null,hasMore:true});
+        const retained=await verifyJapanPriceSortVisible(page,prior,{total:null,hasMore:true},{countAcceptance});
         need(retained.loaded===48,'failed_append_keeps_count');
         // Hold the next real filter response, proving cards/count persist while
         // the new draft is pending. Then a 24-row query must not inherit 48.
@@ -272,13 +287,13 @@ async function main() {
           &&await page.locator('main.ac-ajes-catalog article').count()===48,'pending_preserves_cards_count');
         state.release();const selected=await selection;if(selected.error)throw selected.error;
         const current=fixtureResult({market:'japan',city:CITY,powerTo:'160',sort:'totalRubDesc'},state.now);
-        const reset=await verifyJapanPriceSortVisible(page,current.items,current,{sort:'totalRubDesc'});
+        const reset=await verifyJapanPriceSortVisible(page,current.items,current,{sort:'totalRubDesc',countAcceptance});
         need(reset.loaded===24,'query_resets_loaded_count');
         result.stage='fixture_late_old_aggregate';
         await page.evaluate(({key})=>window.__japanPriceSort.late({queryKey:key,text:'999999',total:999999}),
           {key:JSON.stringify({city:CITY,powerTo:'160',sort:'totalRub',market:'japan'})});
         await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
-        const afterLate=await verifyJapanPriceSortVisible(page,current.items,current,{sort:'totalRubDesc'});
+        const afterLate=await verifyJapanPriceSortVisible(page,current.items,current,{sort:'totalRubDesc',countAcceptance});
         need(afterLate.loaded===24 && !afterLate.exact,'old_aggregate_ignored');
         need(errors.length===0 && (await page.evaluate(()=>window.__japanPriceSort.errors)).length===0 && !state.serverError,'javascript');
         report.cases.push({name:remount?'remounted_controls':'preserved_controls',passed:true,
@@ -324,3 +339,4 @@ async function main() {
 }
 
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url))await main();
+

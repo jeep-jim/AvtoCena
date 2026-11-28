@@ -12,9 +12,16 @@ const sourceName = value => typeof value === 'string' && value.trim() === value 
 const normalized = value => String(value).normalize('NFKC').toUpperCase().replace(/\s+/g, ' ').trim();
 const pairKey = row => JSON.stringify([row.make, row.model]);
 export const JAPAN_EXACT_COUNT_GATES = Object.freeze(['japanExactCountPassed', 'japanModelCoveragePassed']);
+export const JAPAN_MODEL_COVERAGE_GATES = Object.freeze(['japanModelCoveragePassed']);
+export const JAPAN_SOURCE_BOUNDED_COUNT_ACCEPTANCE = 'japan-source-bounded-incremental-v1';
 
 export function japanExactCountRequirement(value) {
   need(value === undefined || value === '0' || value === '1', 'option');
+  return value === '1';
+}
+
+export function japanModelCoverageRequirement(value) {
+  need(value === undefined || value === '0' || value === '1', 'model_coverage_option');
   return value === '1';
 }
 
@@ -144,6 +151,36 @@ export function japanExactCountApiAllowed(value) {
       ...(query.has('budgetTo') ? {budgetTo: query.get('budgetTo')} : {}),
       ...(query.has('after') ? {after: query.get('after')} : {})});
   } catch { return false; }
+}
+
+/** Model acceptance adds only these three first-page reads. Power, budget,
+ * arbitrary models and source continuations keep their separate contracts. */
+export function japanModelCoverageApi(kind, options = {}) {
+  need(['make', 'model', 'models'].includes(kind) && options && typeof options === 'object'
+    && !Array.isArray(options) && Object.keys(options).every(key => key === 'make'), 'model_api_query');
+  return japanExactCountApi(kind, options);
+}
+
+export function japanModelCoverageApiAllowed(value) {
+  return typeof value === 'string' && ['AUDI', 'Audi'].some(make => ['make', 'model', 'models']
+    .some(kind => value === japanModelCoverageApi(kind, {make})));
+}
+
+/** A bounded search may be incomplete even when all its visible cards are
+ * fresh. A nonempty page cannot inherit a supplier total or a made-up zero. */
+export function verifyJapanModelCount(payload) {
+  need(Array.isArray(payload?.items) && payload.items.length > 0 && payload.page === 1
+    && payload.pageSize === 24 && typeof payload.hasMore === 'boolean', 'model_count_page');
+  if (payload.total === null) {
+    need(payload.countSummary == null || payload.countSummary.upperBound === true, 'model_count_false_exact');
+    return {exact: false, countHonest: true};
+  }
+  const summary = payload.countSummary;
+  need(natural(payload.total) && payload.total === payload.items.length && payload.hasMore === false
+    && payload.reads === 1 && natural(payload.received) && payload.received >= payload.items.length && payload.received < 24
+    && summary?.total === payload.total && summary.upperBound === false && summary.stale === false
+    && summary.observedAt === payload.observedAt && summary.countProof === undefined, 'model_count_false_exact');
+  return {exact: true, countHonest: true};
 }
 
 /** Only the next link emitted for the current Audi/A4 selection is admitted.
@@ -344,6 +381,131 @@ export async function collectJapanModelOptions(view, directory, progress = {}) {
   const rows = await options.evaluateAll(nodes => nodes.map(node =>
     ({make: node.getAttribute('data-model-make'), model: node.getAttribute('data-model-value')})));
   return {rows, proof: verifyJapanModelCoverage(directory, rows)};
+}
+
+/** A normal Audi/A4 visitor journey proves source-name coverage and the
+ * selected family's visible first page. It needs no positive census and never
+ * follows supplier listings to manufacture a full-selection count. */
+export async function runJapanModelCoverageBrowser({context, report, read, capture, onStage, onPage,
+  verifyPage, verifyFullPage, verifyVehiclePolicy, verifyVisible}) {
+  need(report.japanExactCountRequired !== true && report.japanExactCountPassed !== true, 'model_profile');
+  Object.assign(report, {countAcceptance: JAPAN_SOURCE_BOUNDED_COUNT_ACCEPTANCE,
+    japanModelCoverageRequired: true, japanModelCoveragePassed: false,
+    japanExactCountRequired: false, japanExactCountPassed: null});
+  const progress = report.checks.modelCoverageProgress = {phase: 'navigate', readyChecks: 0, modelExpansions: 0};
+  const pages = [], checks = []; let explicitApiReads = 0;
+  const boundedRead = async api => {
+    need(japanModelCoverageApiAllowed(api) && explicitApiReads < 3, 'model_api_scope');
+    explicitApiReads++; return read(api);
+  };
+  onStage('model_coverage_audi_make');
+  const view = await context.newPage(); onPage(view); let errors = 0;
+  view.on('pageerror', () => { errors++; });
+  await view.setViewportSize({width: 1440, height: 1000});
+  const response = await view.goto(ORIGIN + '/cars/japan?' + new URLSearchParams({city: CITY}),
+    {waitUntil: 'domcontentloaded', timeout: 90_000});
+  need(response?.status() === 200, 'model_page_http');
+  const inspect = async (kind, make) => {
+    const api = japanModelCoverageApi(kind, {make}), result = await boundedRead(api);
+    const page = verifyPage(result.data, result.status), full = verifyFullPage(result.data);
+    const count = verifyJapanModelCount(result.data);
+    const visible = await verifyVisible(view, result.data.items, result.data,
+      {requireExactCount: false, countAcceptance: JAPAN_SOURCE_BOUNDED_COUNT_ACCEPTANCE, query: api});
+    need(visible.uiMatchesApi === true && visible.rowOrderMatchesApi === true
+      && visible.supplierCountNotPresentedAsExact === true && full.fullOrExhausted === true, 'model_visible');
+    checks.push({kind, ...page, count, countStatus: visible.status, fullOrExhausted: true,
+      uiMatchesApi: true, rowOrderMatchesApi: true});
+    pages.push(result.data); return result.data;
+  };
+  let form = await readyControls(view, progress);
+  progress.phase = 'audi_brand';
+  await form.locator('button[aria-label="Выбрать марки автомобилей"]').click();
+  const brand = view.locator('button[data-facet-value="AUDI" i]:visible');
+  await brand.waitFor({state: 'visible', timeout: 60_000});
+  need(await brand.count() === 1, 'audi_make_unique');
+  const make = await brand.getAttribute('data-facet-value');
+  need(['AUDI', 'Audi'].includes(make), 'audi_make'); await brand.click();
+  await view.waitForURL(url => selectedUrl(url.href, make), {timeout: 60_000});
+  form = await readyControls(view, progress);
+  const trigger = form.locator('button[aria-label="Выбрать марки автомобилей"]');
+  if (await trigger.getAttribute('aria-expanded') === 'true') await trigger.click();
+  const makePage = await inspect('make', make);
+  need(makePage.items.every(row => normalized(row.make) === 'AUDI'), 'model_make_membership');
+
+  progress.phase = 'model_directory'; onStage('model_coverage_audi_models');
+  const api = japanModelCoverageApi('models', {make}), result = await boundedRead(api);
+  const directory = checkedJapanAudiDirectory(result.data, result.status);
+  const input = form.locator('input[aria-label="Модель автомобиля"]:visible');
+  const downloaded = view.waitForResponse(value => value.url() === ORIGIN + api
+    && value.request().method() === 'GET', {timeout: 60_000});
+  downloaded.catch(() => {}); await input.click(); await input.fill('');
+  const modelResponse = await downloaded;
+  const browserDirectory = checkedJapanAudiDirectory(await modelResponse.json(), modelResponse.status());
+  need(JSON.stringify(directory) === JSON.stringify(browserDirectory), 'directory_changed');
+  const coverage = await collectJapanModelOptions(view, directory, progress);
+  need(directory.length <= 60 || progress.modelExpansions > 0, 'model_expansion');
+  await capture(view, 'japan-source-models-audi-desktop');
+
+  progress.phase = 'typed_a4'; onStage('model_coverage_audi_a4');
+  await input.fill('A4');
+  await form.getByRole('button', {name: 'Применить', exact: true}).click();
+  await view.waitForURL(url => selectedUrl(url.href, make, 'A4'), {timeout: 60_000});
+  form = await readyControls(view, progress);
+  need(await form.locator('input[type="hidden"][name="model"]').inputValue() === 'A4', 'typed_a4_narrowed');
+  const openModel = form.locator('input[aria-label="Модель автомобиля"]');
+  if (await openModel.getAttribute('aria-expanded') === 'true')
+    await form.getByRole('button', {name: 'Закрыть список моделей', exact: true}).click();
+  const model = await inspect('model', make), selection = verifyJapanAudiRows(model, directory);
+  verifyVehiclePolicy(pages); need(errors === 0 && explicitApiReads === 3, 'model_complete');
+  report.checks.modelCoverage = {...coverage.proof, make, sourceMatchesUi: true,
+    typedBase: 'A4', typedFamilyNotNarrowed: true, modelExpansions: progress.modelExpansions,
+    sourceFamilyModels: directory.filter(row => japanAudiA4Family(row.model)).length,
+    directory: {status: result.status, stale: false, sourcePairs: directory.length,
+      pairsSha256: coverage.proof.pairsSha256, browserMatchesApi: true},
+    selection, countHonest: true, fullPage: true, checks,
+    explicitApiReads, liveExhaustiveScan: false, pageErrors: errors};
+  progress.phase = 'complete'; await capture(view, 'japan-source-models-audi-a4-desktop');
+  report.japanModelCoveragePassed = true;
+  await view.close(); onPage(null); return pages;
+}
+
+/** The source-bounded branch must be exercised with the actual runtime UI and
+ * absent positive totals in both component-lifecycle modes. Its proof is
+ * separate from the strict v1 count fixture above. */
+export function checkedJapanModelCoverageBrowserFixture(report, expected) {
+  if (expected !== undefined) checkedJapanExactCountBrowserFixture(report, expected);
+  need(report?.passed === true && report.productionRequests === 0 && report.supplierRequests === 0
+    && report.forbiddenTransportAttempts === 0 && Array.isArray(report.cases) && report.cases.length === 2,
+  'model_fixture');
+  need(JSON.stringify(report.cases.map(row => row.name).sort())
+    === JSON.stringify(['preserved_controls', 'remounted_controls'].sort()), 'model_fixture_cases');
+  for (const row of report.cases) {
+    const proof = row.incrementalModelCoverage, models = proof?.modelCoverage;
+    need(proof?.passed === true && proof.countAcceptance === JAPAN_SOURCE_BOUNDED_COUNT_ACCEPTANCE
+      && proof.japanExactCountRequired === false && proof.japanExactCountPassed === null
+      && proof.japanModelCoverageRequired === true && proof.japanModelCoveragePassed === true
+      && proof.positiveExactCountsSupplied === 0 && proof.countsIncomplete === true, 'model_fixture_profile');
+    need(models?.sourcePairs > 60 && models.sourcePairs === models.accessiblePairs
+      && models.allSourceModelsAccessible === true && models.noForeignModels === true
+      && models.sourceMatchesUi === true && digest(models.pairsSha256)
+      && models.typedBase === 'A4' && models.typedFamilyNotNarrowed === true
+      && Number.isSafeInteger(models.modelExpansions) && models.modelExpansions > 0
+      && models.modelExpansions <= Math.ceil(models.sourcePairs / 60) - 1
+      && Number.isSafeInteger(models.sourceFamilyModels) && models.sourceFamilyModels > 0
+      && models.sourceFamilyModels <= models.sourcePairs
+      && models.directory?.status === 200 && models.directory.stale === false
+      && models.directory.sourcePairs === models.sourcePairs && models.directory.pairsSha256 === models.pairsSha256
+      && models.directory.browserMatchesApi === true
+      && models.selection?.shown === 24 && models.selection.observedSourceNamesOnly === true
+      && models.fullPage === true && models.countHonest === true && models.explicitApiReads === 3
+      && models.liveExhaustiveScan === false && models.pageErrors === 0
+      && Array.isArray(models.checks) && models.checks.length === 2
+      && models.checks.every(check => check.count?.exact === false && check.count.countHonest === true
+        && check.total === null && check.countStatus === 'partial'
+        && check.uiMatchesApi === true && check.rowOrderMatchesApi === true), 'model_fixture_proof');
+  }
+  return {passed: true, cases: report.cases.length, countAcceptance: JAPAN_SOURCE_BOUNDED_COUNT_ACCEPTANCE,
+    positiveExactCountsSupplied: 0, exactCountAccepted: false, productionRequests: 0, supplierRequests: 0};
 }
 
 /** One normal Audi/A4 selection and a price bound from its visible cards,

@@ -18,6 +18,7 @@ import {CRM_CHINA_CODE_SCOPE, CRM_CHINA_PROTECTED_EXCEPTIONS} from './crm-china-
 import {CRM_JAPAN_PHOTO_CODE_SCOPE} from './crm-japan-photo-code-scope.mjs';
 import {JAPAN_PAGINATION_CODE_SCOPE} from './japan-pagination-code-scope.mjs';
 import {JAPAN_STABILITY_CODE_SCOPE, japanPowerOrderRequired, japanSourceNamesRequired, japanBrandDirectoryRequired, japanPriceSortRequired, japanExactCountRequired,
+  japanSourceBoundedIncrementalRequired, japanLiteralFamilyRequired, japanSourceBoundedAcceptancePassed, JAPAN_SOURCE_BOUNDED_INCREMENTAL_POLICY,
   JAPAN_OBSERVED_TIMING_POLICY, japanObservedTimingRequired} from './japan-stability-code-scope.mjs';
 import {checkedCrmChinaManifestProof, checkedCrmChinaEvidence, verifyCrmChinaUnauthorizedAccess} from './crm-china-status-proof.mjs';
 import {readJapanPhotoRetryFixture, checkedJapanPhotoRetryEvidence} from './japan-photo-retry-proof.mjs';
@@ -195,7 +196,8 @@ export function createChinaDailyRelease({root, servingRoot, pricingPlan, serving
       if (paginationCodeUpdate) await readJapanPaginationFixture(path.join(temporary, 'japan-pagination24-browser-report.json'),
         {requirePowerOrder: japanPowerOrderRequired(servingPlan)});
       if (stabilityCodeUpdate) await readJapanFilterDirectoryFixture(path.join(temporary, 'japan-filter-directory-browser-report.json'),
-        {requireSourceNames: japanSourceNamesRequired(servingPlan), requireVisibleFallback: japanBrandDirectoryRequired(servingPlan)});
+        {requireSourceNames: japanSourceNamesRequired(servingPlan), requireVisibleFallback: japanBrandDirectoryRequired(servingPlan),
+          requireLiteralFamily: japanLiteralFamilyRequired(servingPlan)});
       const photoRetryFixture = photoRetryCodeUpdate
         ? await readJapanPhotoRetryFixture(path.join(temporary, 'japan-photo-retry-browser-report.json')) : null;
       const oraclePath = path.join(directory, 'acceptance.json');
@@ -234,6 +236,7 @@ export function createChinaDailyRelease({root, servingRoot, pricingPlan, serving
           && imageReceipt.retainedRuntime === prior.current.runtimeSha && imageReceipt.runtimeDiffSha256 === servingPlan.runtimeDiffSha256
           && imageReceipt.pricingRuntimeSha === candidate.pricingRuntimeSha && imageReceipt.imageId === candidate.imageId
           && imageReceipt.acceptancePolicy === servingPlan.acceptancePolicy
+          && imageReceipt.countAcceptance === servingPlan.countAcceptance
           && imageReceipt.sha256 === image.sha256 && imageReceipt.bytes === image.bytes
           && Number.isSafeInteger(imageReceipt.imageUnpackedBytes) && imageReceipt.imageUnpackedBytes > 0
           && imageReceipt.archiveRoundTripVerified === true && imageReceipt.privateDataIncluded === false
@@ -309,6 +312,7 @@ export function createChinaDailyRelease({root, servingRoot, pricingPlan, serving
         ...(codeUpdate ? {codeSourcePlanSha256: codePreflight.previousPlanSha256,
           codeSourceOracleSha256: codePreflight.previousOracleSha256,
           codeScope: servingPlan.codeScope ?? 'catalog-photo-recovery-v1', codeImageStorageProof,
+          ...(japanSourceBoundedIncrementalRequired(servingPlan) ? {countAcceptance: JAPAN_SOURCE_BOUNDED_INCREMENTAL_POLICY} : {}),
           ...(observedJapanTiming ? {acceptancePolicy: JAPAN_OBSERVED_TIMING_POLICY} : {})} : {})};
       await guard(); session ??= await use.openSession({root, directory, privateKey});
       const initialized = await session.call('init', {plan});
@@ -478,6 +482,7 @@ export function createChinaDailyRelease({root, servingRoot, pricingPlan, serving
                   CATALOG_JAPAN_POWER_ORDER_REQUIRED: japanPowerOrderRequired(servingPlan) ? '1' : '0',
                   CATALOG_JAPAN_PRICE_SORT_REQUIRED: japanPriceSortRequired(servingPlan) ? '1' : '0',
                   CATALOG_JAPAN_EXACT_COUNT_REQUIRED: japanExactCountRequired(servingPlan) ? '1' : '0',
+                  CATALOG_JAPAN_MODEL_COVERAGE_REQUIRED: japanSourceBoundedIncrementalRequired(servingPlan) ? '1' : '0',
                   CATALOG_JAPAN_BRAND_DIRECTORY_REQUIRED: japanBrandDirectoryRequired(servingPlan) ? '1' : '0'}});
               let japanRaw;
               try { japanRaw = await fs.readFile(japanOutput); }
@@ -485,6 +490,7 @@ export function createChinaDailyRelease({root, servingRoot, pricingPlan, serving
               need(japanRaw.length <= 128 * 1024, 'japan_browser_binding');
               const japan = JSON.parse(japanRaw), checkedAt = Date.parse(japan.checkedAt);
               need(japan.version === 1 && japan.kind === 'catalog-japan-browser-v1' && japan.codeScope === plan.codeScope
+                && japan.countAcceptance === servingPlan.countAcceptance
                 && japan.release === candidate.runtimeSha && japan.nonce === nonce
                 && japan.generationManifestSha256 === candidate.generationManifestSha256
                 && japan.oracleSha256 === hash(await fs.readFile(oraclePath))
@@ -517,6 +523,7 @@ export function createChinaDailyRelease({root, servingRoot, pricingPlan, serving
                 && japan.japanCountDisplayPassed === true, 'japan_browser_binding');
               if (japanExactCountRequired(servingPlan)) need(japan.japanExactCountRequired === true && japan.japanExactCountPassed === true
                 && japan.japanModelCoveragePassed === true, 'japan_browser_binding');
+              if (japanSourceBoundedIncrementalRequired(servingPlan)) need(japanSourceBoundedAcceptancePassed(japan), 'japan_browser_binding');
               if (observedJapanTiming) {
                 need(japan.timingPolicy === JAPAN_OBSERVED_TIMING_POLICY && japan.speedGateRequired === false
                   && japan.speedPassed === null && japan.timingObserved === true, 'japan_timing_binding');
@@ -526,6 +533,7 @@ export function createChinaDailyRelease({root, servingRoot, pricingPlan, serving
               // additionally verifies Japan's ordinary 24-row continuation.
               detailsRaw = Buffer.from(JSON.stringify({...JSON.parse(detailsRaw), japanReportBase64: japanRaw.toString('base64'),
                 japanReportSha256: hash(japanRaw),
+                ...(japanSourceBoundedIncrementalRequired(servingPlan) ? {countAcceptance: JAPAN_SOURCE_BOUNDED_INCREMENTAL_POLICY} : {}),
                 ...(observedJapanTiming ? {passed: true, timingObserved: true, precedingSpeedReportSha256: hash(speedRaw)} : {})}) + '\n');
               need(detailsRaw.length <= 256 * 1024, 'browser_details_size');
               await fs.writeFile(detailsPath, detailsRaw, {mode: 0o600});
@@ -552,6 +560,7 @@ export function createChinaDailyRelease({root, servingRoot, pricingPlan, serving
           need(saved?.saved === true && saved.speedReportSha256 === hash(speedRaw) && saved.detailsReportSha256 === hash(detailsRaw), 'browser_persistence');
           const outcome = await session.call('accept', {verdict: {release: candidate.runtimeSha, nonce, passed: true,
             functionalPassed: true, speedPassed: observedJapanTiming ? null : true,
+            ...(japanSourceBoundedIncrementalRequired(servingPlan) ? {countAcceptance: JAPAN_SOURCE_BOUNDED_INCREMENTAL_POLICY} : {}),
             ...(observedJapanTiming ? {timingPolicy: JAPAN_OBSERVED_TIMING_POLICY, speedGateRequired: false, timingObserved: true} : {}),
             reportSha256: hash(Buffer.concat([speedRaw, detailsRaw])),
             speedReportSha256: hash(speedRaw), detailsReportSha256: hash(detailsRaw)}});
@@ -721,3 +730,4 @@ export function createChinaDailyRelease({root, servingRoot, pricingPlan, serving
   return Object.freeze({stageRelease: args => stage('generation-update', args),
     stageCodeRelease: args => stage('code-update', args), recoverRelease, retireHost, retireTerminalAppImage});
 }
+

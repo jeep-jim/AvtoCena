@@ -140,6 +140,7 @@ JAPAN_STABILITY_RAILS_CODE_FILES = JAPAN_STABILITY_POWER_CODE_FILES | {
     'tests/japan-rail-visibility.test.ts',
 }
 JAPAN_OBSERVED_TIMING_POLICY = 'japan-functional-observed-timing-v1'
+JAPAN_SOURCE_BOUNDED_INCREMENTAL_POLICY = 'japan-source-bounded-incremental-v1'
 JAPAN_STABILITY_HOME_CODE_FILES = JAPAN_STABILITY_RAILS_CODE_FILES | {
     'apps/web/lib/catalog/storage.ts', 'tests/catalog-next-home-isolation.test.ts',
 }
@@ -705,7 +706,7 @@ def japan_observed_timing(plan):
 
 
 
-def checked_japan_stability_image_files(files, observed, retained_runtime=JAPAN_STABILITY_RETAINED):
+def checked_japan_stability_image_files(files, observed, retained_runtime=JAPAN_STABILITY_RETAINED, count_acceptance=None):
     """Both image admission phases use the same exact historical profiles."""
     need(isinstance(files, list) and all(isinstance(name, str) for name in files)
          and len(files) == len(set(files)), 'code_image_receipt')
@@ -720,7 +721,38 @@ def checked_japan_stability_image_files(files, observed, retained_runtime=JAPAN_
     need(type(observed) is bool and observed == (selected in
          (JAPAN_STABILITY_HOME_CODE_FILES, JAPAN_STABILITY_METADATA_CODE_FILES,
           JAPAN_STABILITY_PRICE_SORT_CODE_FILES, JAPAN_STABILITY_EXACT_COUNT_CODE_FILES)), 'timing_policy_image_scope')
+    need(count_acceptance is None or (selected == JAPAN_STABILITY_EXACT_COUNT_CODE_FILES
+         and count_acceptance == JAPAN_SOURCE_BOUNDED_INCREMENTAL_POLICY), 'count_acceptance_image_scope')
     return selected
+
+
+def japan_source_bounded_acceptance_passed(report):
+    if not isinstance(report, dict):
+        return False
+    checks = report.get('checks')
+    proof = checks.get('modelCoverage') if isinstance(checks, dict) else None
+    return report.get('countAcceptance') == JAPAN_SOURCE_BOUNDED_INCREMENTAL_POLICY and \
+        report.get('japanModelCoverageRequired') is True and report.get('japanModelCoveragePassed') is True and \
+        report.get('japanExactCountRequired') is False and 'japanExactCountPassed' in report and \
+        report['japanExactCountPassed'] is None and isinstance(proof, dict) and \
+        type(proof.get('sourcePairs')) is int and 0 < proof['sourcePairs'] <= 9007199254740991 and \
+        type(proof.get('accessiblePairs')) is int and proof['accessiblePairs'] == proof['sourcePairs'] and \
+        all(proof.get(key) is True for key in ('allSourceModelsAccessible', 'noForeignModels', 'sourceMatchesUi',
+            'typedFamilyNotNarrowed', 'countHonest', 'fullPage')) and \
+        proof.get('make') in ('AUDI', 'Audi') and proof.get('typedBase') == 'A4' and \
+        isinstance(proof.get('pairsSha256'), str) and re.fullmatch(r'[a-f0-9]{64}', proof['pairsSha256']) is not None and \
+        type(proof.get('modelExpansions')) is int and proof['modelExpansions'] >= 0 and \
+        (proof['modelExpansions'] > 0) == (proof['sourcePairs'] > 60) and \
+        proof['modelExpansions'] <= (proof['sourcePairs'] + 59) // 60 - 1 and \
+        type(proof.get('sourceFamilyModels')) is int and 0 < proof['sourceFamilyModels'] <= proof['sourcePairs'] and \
+        isinstance(proof.get('directory'), dict) and proof['directory'].get('status') == 200 and \
+        proof['directory'].get('stale') is False and type(proof['directory'].get('sourcePairs')) is int and \
+        proof['directory']['sourcePairs'] == proof['sourcePairs'] and \
+        proof['directory'].get('pairsSha256') == proof['pairsSha256'] and \
+        isinstance(proof.get('selection'), dict) and type(proof['selection'].get('shown')) is int and \
+        1 <= proof['selection']['shown'] <= 24 and proof['selection'].get('observedSourceNamesOnly') is True and \
+        type(proof.get('explicitApiReads')) is int and proof['explicitApiReads'] == 3 and \
+        proof.get('liveExhaustiveScan') is False and type(proof.get('pageErrors')) is int and proof['pageErrors'] == 0
 
 
 def observed_timing_fields(value):
@@ -820,6 +852,9 @@ def validate_plan(plan):
     need(plan.get('mode') in (None, 'generation-update', 'code-update'), 'plan_mode')
     if 'acceptancePolicy' in plan:
         need(japan_observed_timing(plan), 'timing_policy_scope')
+    if 'countAcceptance' in plan:
+        need(japan_observed_timing(plan) and plan.get('retainedRuntime') == JAPAN_STABILITY_EXACT_COUNT_RETAINED
+             and plan['countAcceptance'] == JAPAN_SOURCE_BOUNDED_INCREMENTAL_POLICY, 'count_acceptance_scope')
     need(plan.get('version') == 1 and plan.get('market') == 'china' and
          (accepted_update(plan) or plan.get('retainedRuntime') == RETAINED) and
          plan.get('servingCalculationVersion') == CALCULATION, 'plan_scope')
@@ -2972,7 +3007,7 @@ class Host:
         required_code_files = CODE_SCOPE_FILES[scope]
         if scope == JAPAN_STABILITY_CODE_SCOPE:
             required_code_files = checked_japan_stability_image_files(image.get('runtimeFiles'), japan_observed_timing(self.plan),
-                                                                      self.plan.get('retainedRuntime'))
+                                                                      self.plan.get('retainedRuntime'), self.plan.get('countAcceptance'))
         need(image.get('version') == 1 and image.get('kind') == 'china-runtime-image-v1' and image.get('market') == 'china' and
              all(image.get(key) == self.plan[key] for key in ('runtimeSha', 'pricingRuntimeSha', 'runtimeTree',
                                                             'runtimeDiffSha256', 'retainedRuntime', 'imageId')) and
@@ -2986,6 +3021,8 @@ class Host:
              set(image['runtimeFiles']) == required_code_files and
              type(image.get('imageUnpackedBytes')) is int and image['imageUnpackedBytes'] > 0, 'code_image_receipt')
         need(image.get('acceptancePolicy') == self.plan.get('acceptancePolicy'), 'timing_policy_image_binding')
+        need(image.get('countAcceptance') == self.plan.get('countAcceptance')
+             and ('countAcceptance' in image) == ('countAcceptance' in self.plan), 'count_acceptance_image_binding')
         if scope in (CRM_CHINA_CODE_SCOPE, CRM_JAPAN_PHOTO_CODE_SCOPE):
             need(image.get('protectedPathExceptions') == CRM_CHINA_PROTECTED_EXCEPTIONS, 'code_crm_image_scope')
         if scope in (JAPAN_PAGINATION_CODE_SCOPE, JAPAN_STABILITY_CODE_SCOPE):
@@ -3391,6 +3428,8 @@ class Host:
         need(self.verdict_deadline is not None and time.monotonic() <= self.verdict_deadline, 'browser_deadline')
         self.verify_candidate()
         need(verdict.get('release') == self.plan['runtimeSha'] and verdict.get('nonce') == self.plan['nonce'] and
+             verdict.get('countAcceptance') == self.plan.get('countAcceptance') and
+             ('countAcceptance' in verdict) == ('countAcceptance' in self.plan) and
              verdict.get('passed') is True and verdict.get('functionalPassed') is True and
              (observed_timing_fields(verdict) if japan_observed_timing(self.plan) else verdict.get('speedPassed') is True) and
              all(re.fullmatch(r'[a-f0-9]{64}', verdict.get(key, '')) for key in
@@ -3421,6 +3460,8 @@ class Host:
                          retainedRuntimeSha=retained_runtime(self.plan), retainedImageId=self.retained['Image'])
         if japan_observed_timing(self.plan):
             proof.update(acceptancePolicy=JAPAN_OBSERVED_TIMING_POLICY, codeScope=JAPAN_STABILITY_CODE_SCOPE)
+        if self.plan.get('countAcceptance') == JAPAN_SOURCE_BOUNDED_INCREMENTAL_POLICY:
+            proof.update(countAcceptance=JAPAN_SOURCE_BOUNDED_INCREMENTAL_POLICY)
         encoded = json_bytes(proof)
         # The durable receipt is the commit point, including when SSH closes
         # immediately after the atomic rename. No partial terminal receipt is
@@ -3460,6 +3501,8 @@ class Host:
                         and speed.get('nonce') == self.plan['nonce']) if observed else \
             (speed.get('browserPassed') is True and speed.get('speedGuard', {}).get('passed') is True)
         need(speed.get('release') == self.plan['runtimeSha'] and speed.get('passed') is True and timing_bound and
+             all(value.get('countAcceptance') == self.plan.get('countAcceptance') and
+                 ('countAcceptance' in value) == ('countAcceptance' in self.plan) for value in (speed, details)) and
              details.get('kind') == ('japan-code-browser-details-v1' if observed else 'china-browser-details-v1') and
              details.get('passed') is True and
              details.get('release') == self.plan['runtimeSha'] and details.get('nonce') == self.plan['nonce'] and
@@ -3614,8 +3657,11 @@ class Host:
                 image_raw = (self.directory / 'image-receipt.json').read_bytes()
                 need(len(image_raw) == image_descriptor['bytes'] and sha(image_raw) == image_descriptor['sha256'],
                      'code_image_receipt_hash')
-                runtime_files = json.loads(image_raw).get('runtimeFiles')
-                runtime_profile = checked_japan_stability_image_files(runtime_files, observed, self.plan.get('retainedRuntime'))
+                image = json.loads(image_raw)
+                need(image.get('countAcceptance') == self.plan.get('countAcceptance')
+                     and ('countAcceptance' in image) == ('countAcceptance' in self.plan), 'count_acceptance_image_binding')
+                runtime_profile = checked_japan_stability_image_files(image.get('runtimeFiles'), observed,
+                    self.plan.get('retainedRuntime'), self.plan.get('countAcceptance'))
                 if runtime_profile in (JAPAN_STABILITY_POWER_CODE_FILES, JAPAN_STABILITY_RAILS_CODE_FILES,
                                        JAPAN_STABILITY_HOME_CODE_FILES, JAPAN_STABILITY_METADATA_CODE_FILES,
                                        JAPAN_STABILITY_PRICE_SORT_CODE_FILES, JAPAN_STABILITY_EXACT_COUNT_CODE_FILES):
@@ -3627,8 +3673,11 @@ class Host:
                     need(all(japan.get(key) is True for key in ('japanPriceSortRequired', 'japanPriceSortPassed', 'japanCountDisplayPassed')),
                          'japan_browser_binding')
                 if runtime_profile == JAPAN_STABILITY_EXACT_COUNT_CODE_FILES:
-                    need(all(japan.get(key) is True for key in ('japanExactCountRequired', 'japanExactCountPassed', 'japanModelCoveragePassed')),
-                         'japan_browser_binding')
+                    if self.plan.get('countAcceptance') == JAPAN_SOURCE_BOUNDED_INCREMENTAL_POLICY:
+                        need(japan_source_bounded_acceptance_passed(japan), 'japan_browser_binding')
+                    else:
+                        need(all(japan.get(key) is True for key in ('japanExactCountRequired', 'japanExactCountPassed', 'japanModelCoveragePassed')),
+                             'japan_browser_binding')
         for name, raw in [('BROWSER_SPEED.json', speed_raw), ('BROWSER_DETAILS.json', details_raw)]:
             new_file(self.directory / name, raw)
             need(file_sha(self.directory / name) == sha(raw), 'browser_evidence_readback')
@@ -3992,3 +4041,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+

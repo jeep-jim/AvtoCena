@@ -6,6 +6,7 @@ import {JAPAN_PAGINATION_CODE_PATHS} from './japan-pagination-code-scope.mjs';
  * authorized through this scope.
  */
 export const JAPAN_STABILITY_CODE_SCOPE = 'catalog-japan-stability-v1';
+export const JAPAN_SOURCE_BOUNDED_INCREMENTAL_POLICY = 'japan-source-bounded-incremental-v1';
 export const JAPAN_STABILITY_RETAINED_RUNTIME = 'a5ca426eec2663eb17c2df69fe2bfed46e2b8740';
 export const JAPAN_STABILITY_CODE_PATHS = Object.freeze([
   'apps/web/app/api/catalog/brand-counts/route.ts',
@@ -186,7 +187,9 @@ export function isExactJapanStabilityScope(plan) {
     && paths !== null
     && ([JAPAN_STABILITY_HOME_CODE_PATHS, JAPAN_STABILITY_METADATA_CODE_PATHS, JAPAN_STABILITY_PRICE_SORT_CODE_PATHS, JAPAN_STABILITY_EXACT_COUNT_CODE_PATHS].includes(paths)
       ? plan.acceptancePolicy === JAPAN_OBSERVED_TIMING_POLICY
-      : plan.acceptancePolicy === undefined);
+      : plan.acceptancePolicy === undefined)
+    && (plan.countAcceptance === undefined || (paths === JAPAN_STABILITY_EXACT_COUNT_CODE_PATHS
+      && plan.countAcceptance === JAPAN_SOURCE_BOUNDED_INCREMENTAL_POLICY));
 }
 
 export function japanObservedTimingRequired(plan) {
@@ -220,7 +223,46 @@ export function japanPriceSortRequired(plan) {
 export function japanExactCountRequired(plan) {
   if (plan?.codeScope !== JAPAN_STABILITY_CODE_SCOPE) return false;
   if (!isExactJapanStabilityScope(plan)) throw Error('japan_stability_exact_count_scope');
+  return japanStabilityCodePaths(plan) === JAPAN_STABILITY_EXACT_COUNT_CODE_PATHS
+    && plan.countAcceptance === undefined;
+}
+
+/** This separately named profile accepts the reviewed source/model corrections
+ * with live directory coverage. It does not assert a positive admitted census;
+ * a plan without the marker retains the original strict exact-count contract. */
+export function japanSourceBoundedIncrementalRequired(plan) {
+  if (plan?.codeScope !== JAPAN_STABILITY_CODE_SCOPE) return false;
+  if (!isExactJapanStabilityScope(plan)) throw Error('japan_stability_count_acceptance_scope');
+  return plan.countAcceptance === JAPAN_SOURCE_BOUNDED_INCREMENTAL_POLICY;
+}
+
+export function japanLiteralFamilyRequired(plan) {
+  if (plan?.codeScope !== JAPAN_STABILITY_CODE_SCOPE) return false;
+  if (!isExactJapanStabilityScope(plan)) throw Error('japan_stability_literal_family_scope');
   return japanStabilityCodePaths(plan) === JAPAN_STABILITY_EXACT_COUNT_CODE_PATHS;
+}
+
+export function japanSourceBoundedAcceptancePassed(report) {
+  const proof = report?.checks?.modelCoverage;
+  return report?.countAcceptance === JAPAN_SOURCE_BOUNDED_INCREMENTAL_POLICY
+    && report.japanModelCoverageRequired === true && report.japanModelCoveragePassed === true
+    && report.japanExactCountRequired === false && report.japanExactCountPassed === null
+    && Number.isSafeInteger(proof?.sourcePairs) && proof.sourcePairs > 0
+    && proof.accessiblePairs === proof.sourcePairs
+    && ['allSourceModelsAccessible', 'noForeignModels', 'sourceMatchesUi', 'typedFamilyNotNarrowed', 'countHonest', 'fullPage']
+      .every(key => proof[key] === true)
+    && ['AUDI', 'Audi'].includes(proof.make) && proof.typedBase === 'A4'
+    && /^[a-f0-9]{64}$/.test(proof.pairsSha256 ?? '')
+    && Number.isSafeInteger(proof.modelExpansions) && proof.modelExpansions >= 0
+    && (proof.modelExpansions > 0) === (proof.sourcePairs > 60)
+    && proof.modelExpansions <= Math.ceil(proof.sourcePairs / 60) - 1
+    && Number.isSafeInteger(proof.sourceFamilyModels) && proof.sourceFamilyModels > 0
+    && proof.sourceFamilyModels <= proof.sourcePairs
+    && proof.directory?.status === 200 && proof.directory.stale === false
+    && proof.directory.sourcePairs === proof.sourcePairs && proof.directory.pairsSha256 === proof.pairsSha256
+    && Number.isSafeInteger(proof.selection?.shown) && proof.selection.shown >= 1 && proof.selection.shown <= 24
+    && proof.selection.observedSourceNamesOnly === true
+    && proof.explicitApiReads === 3 && proof.liveExhaustiveScan === false && proof.pageErrors === 0;
 }
 
 /** Compatibility with the fixed pricing ancestor includes accepted B9 bytes,
@@ -239,3 +281,4 @@ export function japanSourceNamesRequired(plan) {
   if (!isExactJapanStabilityScope(plan)) throw Error('japan_stability_source_names_scope');
   return japanStabilityCodePaths(plan) !== JAPAN_STABILITY_CODE_PATHS;
 }
+
