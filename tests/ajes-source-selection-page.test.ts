@@ -204,6 +204,55 @@ test('coarse heavy-family SQL preserves passenger pages while exact and suffix t
  assert(rawIds.has('explicit-bus')&&rawIds.has('explicit-coach'));
 });
 
+test('an old SUV fact cannot disable the modern power/body scope before ordinary 24→48 pages',async t=>{
+ const old={...fact('Toyota','SUV COHORT',150),year:1999};
+ const modern={...fact('Toyota','SUV COHORT',150),year:2020};
+ const index=knowledge([old,modern]);
+ const id=(prefix:string,i:number)=>prefix+String(i).padStart(3,'0');
+ const nonSuv=Array.from({length:240},(_,i)=>raw(id('sedan-',i),{
+  YEAR:2020,MODEL_NAME:'SEDAN ONLY',BODY_TYPE:'sedan',PW:'150',AUCTION_DATE:'2026-11-28',FINISH:30000000-i}));
+ // A matching source model/year is only a candidate: its conflicting engine
+ // volume cannot certify the body or hp of this different modification.
+ const unmatched=Array.from({length:8},(_,i)=>raw(id('unmatched-',i),{
+  YEAR:2020,MODEL_NAME:'SUV COHORT',ENG_V:1000,PW:'150',AUCTION_DATE:'2026-11-27',FINISH:20000000-i}));
+ const known=Array.from({length:60},(_,i)=>raw(id('suv-known-',i),{
+  YEAR:2020,MODEL_NAME:'SUV COHORT',PW:'280',AUCTION_DATE:'2026-11-25',FINISH:1000000-i}));
+ // These newer rows have an explicit source body but no matching local hp
+ // donor. They must remain reachable in U after every known modern SUV.
+ const unknown=Array.from({length:12},(_,i)=>raw(id('suv-unknown-',i),{
+  YEAR:2020,MODEL_NAME:'SUV COHORT',BODY_TYPE:'suv',ENG_V:1000,PW:'',AUCTION_DATE:'2026-11-26',FINISH:2000000-i}));
+ const rows=[...nonSuv,...unmatched,...known,...unknown,raw('old-suv',{YEAR:1999,MODEL_NAME:'SUV COHORT'})];
+ const source=oracle(rows,index);t.after(source.close);
+ const power=buildJapanPowerCandidatePlan({powerTo:160,index,editorial:emptyEditorial});
+ const body=buildJapanBodyCandidatePlan({selection:'suv',index,editorial:emptyEditorial,observedSourceFields:[]});
+ const resolved=resolveJapanSourceSelection({power,body,sourceModels:source.sourceModels,directoryComplete:true});
+ assert(resolved.selection,'an inadmissible old annual fact must not turn the whole combined selection into broad fallback');
+ assert.equal(resolved.complete,false,'unobserved source body coverage remains explicitly incomplete');
+ assert.deepEqual(resolved.unresolved,['body_source_schema_unobserved']);
+ assert.deepEqual(resolved.selection.body?.models,[{make:'TOYOTA',model:'SUV COHORT',years:[2020]}]);
+ const filter=ajesResultFilter({market:'japan',bodyType:'suv',powerTo:160});
+ for(const row of [...nonSuv,...unmatched]){
+  const admitted=source.admit(row);assert(admitted);assert.equal(filter.matches(admitted),false);
+ }
+ assert.equal(source.admit(rows.at(-1)!),null);
+ for(const row of known){const admitted=source.admit(row)!;assert.equal(admitted.bodyType,'suv');assert.equal(japanLocalPowerHp(admitted),150);}
+ for(const row of unknown){const admitted=source.admit(row)!;assert.equal(admitted.bodyType,'suv');assert(japanUnknownPower(admitted));}
+ const query:AjesQuery={table:'stats',powerTo:160};
+ const {actual,pages}=await drainPowerPages(source,rows,query,resolved.selection,filter,index);
+ for(const page of pages.slice(0,2)){assert.equal(page.items.length,24);assert.equal(page.scanLimited,false);}
+ assert.deepEqual(pages[0].items.map((offer:any)=>offer.id),known.slice(0,24).map(row=>'ajes-stats-'+row.ID));
+ assert.deepEqual(pages[1].items.map((offer:any)=>offer.id),known.slice(24,48).map(row=>'ajes-stats-'+row.ID));
+ assert.deepEqual(actual.map(offer=>offer.id),[...known,...unknown].map(row=>'ajes-stats-'+row.ID));
+ assert.equal(new Set(actual.map(offer=>offer.id)).size,72);
+ assert(actual.slice(0,known.length).every(offer=>!japanUnknownPower(offer)));
+ assert(actual.slice(known.length).every(japanUnknownPower));
+ const sourceIds=new Set(source.calls.flatMap(call=>call.rawIds));
+ assert(nonSuv.every(row=>!sourceIds.has(row.ID)),'the long unrelated 150 hp prefix is removed before LIMIT');
+ assert(unmatched.every(row=>sourceIds.has(row.ID)),'the fixture exercises final local body admission, not just source cohort membership');
+ assert(source.calls.some(call=>call.phase==='u'));
+ assert(source.calls.every(call=>call.sql.includes('order by auction_date desc, id asc')));
+});
+
 test('unknown body schema retains exact encyclopedia/editorial candidates and an incomplete scope',async t=>{
  const index=knowledge([fact('Toyota','LOCAL',150)]);
  const editorial={revision:'body-e1',entries:{'ajes-stats-manual-body':{id:'ajes-stats-manual-body',market:'japan',sourceId:'ajes_japan_feed',sourceOfferId:'manual-body',status:'visible',specifications:{bodyType:'suv'}}}} as unknown as CatalogEditorialIndex;
