@@ -41,7 +41,7 @@ test('source selection resolves every permitted directory page before narrowing 
  assert.deepEqual(state.calls.map(q=>q.page),[1,2]);assert.equal(state.savedReads,0);
  assert.ok(state.calls.every(q=>q.powerTo===undefined&&q.sort===undefined));
  const sql=ajesQuery({...result.query,sourcePhase:'k'}).sql;
- assert.match(sql,/model_name='T E S T'/);assert.match(sql,/pw<=160/);assert.match(sql,/order by finish desc/);
+ assert.match(sql,/marka_name like '%TOYOTA%' and model_name like '%T E S T%' and year=2021/);assert.match(sql,/pw<=160/);assert.match(sql,/order by finish desc/);
  assert.equal(query.powerTo,160);assert.equal('sourceSelection' in query,false,'cached source query is never mutated');
  const again=await read(query,{powerTo:'160'},snapshot);
  assert.deepEqual(again.query,result.query);assert.equal(state.calls.length,2,'complete fresh names are reused without LIST reads');
@@ -54,7 +54,7 @@ test('a body selection without observed source schema retains verified candidate
  assert.equal(result.selectionIncomplete,false);assert.equal(result.sourceScopeComplete,false);
  assert.ok(result.query.sourceSelection.body);assert.equal(state.savedReads,1);
  const sql=ajesQuery({...result.query,sourcePhase:'k'}).sql;
- assert.match(sql,/model_name='T E S T'/);assert.doesNotMatch(sql,/body_type/);
+ assert.match(sql,/marka_name like '%TOYOTA%' and model_name like '%T E S T%' and year=2021/);assert.doesNotMatch(sql,/body_type/);
 });
 
 test('an already observed body field opens the nonempty source body branch without a schema fetch',async t=>{

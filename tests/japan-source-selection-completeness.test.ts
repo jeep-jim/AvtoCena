@@ -86,7 +86,9 @@ test('a legacy editorial identity change retains owner power without a direct ho
  assert.equal(ajesResultFilter({market:'japan',powerTo:160}).matches(offer),true);
  const query=source.powerQuery({powerTo:160});
  assert.deepEqual(source.known(query).map(offer=>offer!.id),['ajes-stats-owner-from-editorial']);
- assert(!source.select(query).some(value=>value.ID===unrelated.ID),'a manual exception must not admit every canonical high-PW row');
+ assert(source.select(query).some(value=>value.ID===unrelated.ID),'the manual ID fallback deliberately retains a broad raw candidate scope');
+ const unrelatedOffer=source.admit(unrelated);assert(unrelatedOffer);
+ assert.equal(ajesResultFilter({market:'japan',powerTo:160}).matches(unrelatedOffer),false,'the broad candidate scope cannot make an unrelated high-PW row visible');
 });
 
 test('normalized supplier IDs retain the actual visible editorial power lookup',t=>{
@@ -153,14 +155,14 @@ for(const withPower of [false,true])test(`normalized manual body IDs survive ${w
  }
 });
 
-test('conservative exceptions keep unrelated canonical over-limit rows out of K and every unknown row in U',t=>{
+test('manual fallback broadens raw K while actual filtering rejects over-limit rows and preserves every unknown row in U',t=>{
  const values=['',null,'0','000','N/A','150,200','160.0','０','9007199254740992'];
  const unknown=values.map((PW,i)=>raw('unknown-'+i,{PW}));
  const over=raw('ordinary-over-limit'),known=raw('ordinary-in-range',{PW:'150'});
  const editorial=editorialFor('different-manual-id',{powerHp:150,powerDataConfidence:'verified'});
  const source=oracle([...unknown,over,known],null,editorial);t.after(source.close);
  const query=source.powerQuery({powerTo:160}),filter=ajesResultFilter({market:'japan',powerTo:160});
- assert(!source.select(query).some(row=>row.ID===over.ID));
+ assert(source.select(query).some(row=>row.ID===over.ID),'a visible manual ID makes the candidate power clause broad');
  assert.deepEqual(source.known(query).map(offer=>offer!.id),['ajes-stats-ordinary-in-range']);
  const u=source.select({...query,sourcePhase:'u'}),selected=new Set(u.map(row=>row.ID));
  for(const row of unknown){
@@ -170,6 +172,58 @@ test('conservative exceptions keep unrelated canonical over-limit rows out of K 
  }
  const admittedUnknown=u.map(source.admit).filter(offer=>offer&&filter.matches(offer)&&japanUnknownPower(offer));
  assert.deepEqual(admittedUnknown.map(offer=>offer!.id).sort(),unknown.map(row=>'ajes-stats-'+row.ID).sort());
+});
+
+test('a broad manual power clause keeps outer filters and an honest bounded K continuation before eventually returning all known rows',async t=>{
+ const manualId='manual-after-prefix';
+ const editorial=editorialFor(manualId,{powerHp:150,powerDataConfidence:'verified'},'legacy-editorial-value-id');
+ const prefix=Array.from({length:240},(_,i)=>raw('manual-fallback-over-'+i,{FINISH:30000000-i*1000}));
+ const ordinary=[raw(' '+manualId+' ',{FINISH:1000000}),
+  ...Array.from({length:47},(_,i)=>raw('manual-fallback-visible-'+String(i).padStart(2,'0'),{PW:'150',FINISH:999000-i*1000}))];
+ const excluded=[raw('outside-make',{MARKA_NAME:'HONDA',PW:'150',FINISH:60000000}),
+  raw('outside-year',{YEAR:2022,PW:'150',FINISH:50000000}),
+  raw('excluded-exact-heavy',{MODEL_NAME:'DYNA',PW:'150',FINISH:40000000})];
+ const source=oracle([...excluded,...prefix,...ordinary],null,editorial);t.after(source.close);
+ const query={...source.powerQuery({powerTo:160}),make:'TOYOTA',yearFrom:2023,yearTo:2023,sort:'totalRubDesc'} as AjesQuery;
+ const filter=ajesResultFilter({market:'japan',powerTo:160});
+ const expected=ordinary.map(source.admit);
+ assert(expected.every(offer=>offer&&filter.matches(offer)&&!japanUnknownPower(offer)));
+ assert.equal(japanLocalPowerHp(expected[0]!),150,'the normalized raw ID must use the actual manual lookup');
+ assert(prefix.every(row=>{const offer=source.admit(row);return offer&&!filter.matches(offer);}));
+ let clock=0,after:string|undefined,finished=false;
+ const calls:Array<{page:number;phase:string;rawIds:string[];known:number}>=[];
+ const actual:NonNullable<ReturnType<typeof source.admit>>[]=[];
+ const epoch=ajesPowerEvidenceEpoch({runtimeSha:'b'.repeat(40),editorialRevision:editorial.revision,calculationDigest:null});
+ for(let page=1;page<=Math.ceil((prefix.length+ordinary.length)/24)*2+4;page++){
+  const before=calls.length,previous=after;
+  const result=await readPowerOrderedAjesPage({page,pageSize:24,after,evidenceEpoch:epoch,cursorKey:JSON.stringify(query),
+   sourceSelection:query.sourceSelection,minimumReads:2,now:()=>clock,
+   itemKey:offer=>offer.id,known:offer=>!japanUnknownPower(offer),
+   read:async(sourcePage,phase)=>{
+    clock+=9000;
+    const rows=source.select({...query,page:sourcePage,pageSize:24,sourcePhase:phase});
+    const items=rows.map(source.admit).filter((offer):offer is NonNullable<typeof offer>=>Boolean(offer)&&filter.matches(offer));
+    calls.push({page:sourcePage,phase,rawIds:rows.map(row=>String(row.ID)),known:items.filter(offer=>!japanUnknownPower(offer)).length});
+    return {items,received:rows.length,observedAt,stale:false,partial:false};
+   }});
+  assert(calls.length-before<=8,'a manual fallback never expands the per-request source read budget');
+  assert.equal(result.partial,false);assert.equal(result.stale,false);assert.equal(Object.hasOwn(result,'total'),false);
+  if(page===1){
+   assert.equal(result.items.length,0);assert.equal(result.reads,8);assert.equal(result.scanLimited,true);assert.equal(result.hasMore,true);
+   assert.match(result.nextCursor!,/^j2\.k\.9\.0\.2\./,'eight rejected source pages leave an honest K position');
+   assert(calls.every(call=>call.phase==='k'&&call.rawIds.length===24&&call.known===0));
+  }
+  actual.push(...result.items);after=result.nextCursor??undefined;
+  if(!result.hasMore){finished=true;break;}
+  assert(after&&after!==previous,'a bounded incomplete request must return a progressing continuation');
+ }
+ assert(finished,'the finite K/U source eventually reaches actual exhaustion');
+ assert.deepEqual(actual.map(offer=>offer.id),expected.map(offer=>offer!.id));
+ assert.equal(actual.length,48);assert.equal(new Set(actual.map(offer=>offer.id)).size,48);
+ assert.equal(actual.filter(offer=>offer.id==='ajes-stats-'+manualId).length,1);
+ const rawIds=new Set(calls.flatMap(call=>call.rawIds));
+ for(const row of excluded)assert(!rawIds.has(row.ID),'the broad power clause must preserve outer make/year and heavy exclusions: '+row.ID);
+ assert(calls.some(call=>call.phase==='u'),'exhaustion must inspect the broad unknown phase');
 });
 
 test('candidate heavy-family SQL preserves prior eligible rows while local admission rejects suffix variants',t=>{

@@ -147,7 +147,13 @@ export function ajesQuery(input: unknown,driveIndex:CalculationIndex|null=null) 
   // phase predicate; ordinary catalogue totals and directories stay independent.
   if(q.sourceSelection!==undefined){
     if(table!=='stats'||q.aggregate!==undefined&&q.aggregate!=='count')throw new AjesInputError();
-    try{where.push(japanSourceSelectionSql(q.sourceSelection,q.sourcePhase));}
+    // A single fixed reserve keeps LIST, every continuation and its COUNT on
+    // identical candidates. It covers the longest permitted projection/order
+    // and page1,000,000 at48 rows, without changing ordinary query validation.
+    const reserve=`select count(*) as total, count(distinct binary id) as census_distinct_ids from ${table} where ${where.join(' and ')} and `
+      +' order by auction_date desc, mileage desc, finish desc, year desc, id asc limit 47999952,48';
+    const budget=Math.max(0,6000-new URLSearchParams({sql:reserve}).toString().length);
+    try{where.push(japanSourceSelectionSql(q.sourceSelection,q.sourcePhase,budget));}
     catch{throw new AjesInputError();}
   }else if(q.sourcePhase!==undefined)throw new AjesInputError();
   if(q.aggregate!==undefined&&!['count','models','makes','colors','census'].includes(q.aggregate))throw new AjesInputError();
