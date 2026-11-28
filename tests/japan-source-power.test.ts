@@ -430,7 +430,7 @@ test('a local value rejected by the actual public projection stays unknown after
  }finally{fixture.close();}
 });
 
-test('explicit auction-price sort preserves the complete source order across known and unknown power',async()=>{
+test('explicit auction-price sort preserves source order within known then unknown power',async()=>{
  const priced=(hp:unknown,id:string,totalRub:number,finish:number)=>{const base=offer(hp,id);return {...base,catalogPricingMode:undefined,totalRub,sourcePrice:finish,
   operational:{...base.operational,raw:{...base.operational!.raw,finalPriceJpy:finish}}};};
  const rows=[priced('','unknown-cheap',100000,700000),priced(150,'known-expensive',900000,300000),priced('','unknown-less-cheap',200000,100000),priced(120,'known-cheaper',500000,500000)];
@@ -438,12 +438,12 @@ test('explicit auction-price sort preserves the complete source order across kno
   const source=sourceOrderedFixture(rows),fixture=await catalogPowerFixture(source.read);
   try{
    const result=await fixture.read({market:'japan',powerTo:'160',sort});
-   const expected=sort==='totalRub'?['unknown-less-cheap','known-expensive','known-cheaper','unknown-cheap']:['unknown-cheap','known-cheaper','known-expensive','unknown-less-cheap'];
+   const expected=sort==='totalRub'?['known-expensive','known-cheaper','unknown-less-cheap','unknown-cheap']:['known-cheaper','known-expensive','unknown-cheap','unknown-less-cheap'];
    assert.deepEqual(result.items.map((item:any)=>item.id),expected.map(id=>'ajes-stats-'+id));
-   assert.deepEqual(result.items.map(japanUnknownPower),[true,false,false,true]);
-   assert.deepEqual(result.items.map((item:any)=>item.japanAuctionPriceJpy),sort==='totalRub'?[100000,300000,500000,700000]:[700000,500000,300000,100000]);
+   assert.deepEqual(result.items.map(japanUnknownPower),[false,false,true,true]);
+   assert.deepEqual(result.items.map((item:any)=>item.japanAuctionPriceJpy),sort==='totalRub'?[300000,500000,100000,700000]:[500000,300000,700000,100000]);
    assert.ok(result.items.every((item:any)=>item.japanCatalogPriceOrder==='auction'));
-   assert.deepEqual(fixture.state.queries.map(query=>query.page),[1]);assert.equal(result.hasMore,false);
+   assert.deepEqual(fixture.state.queries.map(query=>query.page),[1,1]);assert.equal(result.hasMore,false);
    assert.ok(fixture.state.queries.every(query=>query.sort===sort),'the selected source order reaches SQL unchanged');
   }finally{fixture.close();source.close();}
  }
@@ -459,7 +459,8 @@ test('auction-price order retains selected-city delivered estimates without rank
   const source=sourceOrderedFixture(rows),fixture=await catalogPowerFixture(source.read);
   try{
    const result=await fixture.read({market:'japan',powerTo:'160',sort,city:'Новокузнецк'});
-   const expected=sort==='totalRub'?rows:[...rows].reverse();
+   const sourceOrder=sort==='totalRub'?rows:[...rows].reverse();
+   const expected=[...sourceOrder.filter(item=>!japanUnknownPower(item)),...sourceOrder.filter(japanUnknownPower)];
    assert.deepEqual(result.items.map((item:any)=>item.id),expected.map(item=>item.id));
    assert.deepEqual(result.items.map((item:any)=>priceCardForCity(item,'Новокузнецк').offer.totalRub),expected.map(item=>priceCardForCity(item,'Новокузнецк').offer.totalRub));
    assert.equal(result.hasMore,false);assert.equal(result.total,null,'source ordering does not turn the scalar into an admitted power count');
@@ -484,16 +485,21 @@ test('power source ordering preserves every selected priority and does not broad
  }finally{fixture.close();}
 });
 
-for(const sort of ['totalRub','totalRubDesc'])test(`global power WHERE and ${sort} preserve one auction-price order through ordinary append`,async()=>{
- // These rejected cheap/expensive rows are removed by the actual source WHERE
- // before LIMIT. Delivered estimates intentionally have the opposite order.
- const known=Array.from({length:48},(_,i)=>{const base=offer(150,`price-eligible-${i}`);return {...base,catalogPricingMode:undefined,
+for(const sort of ['totalRub','totalRubDesc'])test(`local power and ${sort} preserve known then unknown auction order through 24 to 48 and the phase boundary`,async()=>{
+ // The actual broad source SQL includes rejected and unknown rows. Local
+ // manual evidence can admit contrary PW; delivered estimates intentionally
+ // differ from the auction order and cannot reorder an individual page.
+ const known=Array.from({length:50},(_,i)=>{const base=offer(i===0?300:150,`price-eligible-${i}`);return {...base,catalogPricingMode:undefined,
+  ...(i===0?{powerHp:150,powerDataSource:'manual',powerDataConfidence:'verified'}:{}),
   sourcePrice:1000000+i,totalRub:900000+(47-i)*1000,auctionDate:`2026-11-${String(28-Math.floor(i/24)).padStart(2,'0')}T12:00:00Z`,
   operational:{...base.operational,raw:{...base.operational!.raw,finalPriceJpy:1000000+i}},
   calculationSnapshot:{deliveryPricingBasis:{subtotalRub:900000+(47-i)*1000,deliveryRub:10000,percents:[]}}};});
- const excluded=[100000,4000000].flatMap(price=>Array.from({length:192},(_,i)=>{const base=offer(300,`price-excluded-${price}-${i}`);return {...base,
+ const unknown=Array.from({length:23},(_,i)=>{const base=offer('',`price-unknown-${i}`),price=800000+i*20000;return {...base,
+  catalogPricingMode:undefined,sourcePrice:price,totalRub:500000+(22-i)*20000,operational:{...base.operational,raw:{...base.operational!.raw,finalPriceJpy:price}}};});
+ const excluded=[100000,4000000].flatMap(price=>Array.from({length:8},(_,i)=>{const base=offer(i===0?150:300,`price-excluded-${price}-${i}`);return {...base,
+  ...(i===0?{powerHp:300,powerDataSource:'manual',powerDataConfidence:'verified'}:{}),
   catalogPricingMode:undefined,sourcePrice:price+i,totalRub:3000000+i*1000,operational:{...base.operational,raw:{...base.operational!.raw,finalPriceJpy:price+i}}};}));
- const source=sourceOrderedFixture([...known,...excluded]),fixture=await catalogPowerFixture(source.read);
+ const source=sourceOrderedFixture([...known,...unknown,...excluded]),fixture=await catalogPowerFixture(source.read);
  try{
   const params={market:'japan',powerTo:'160',city:'Новокузнецк'};
   const original=await fixture.read(params);
@@ -502,15 +508,29 @@ for(const sort of ['totalRub','totalRubDesc'])test(`global power WHERE and ${sor
   assert.equal(first.items.length,24,'a price-only sort preserves a populated power selection');
   const ordered=sort==='totalRub'?known:[...known].reverse();
   assert.deepEqual(first.items.map((item:any)=>item.id),ordered.slice(0,24).map(item=>item.id));
-  assert.match(first.nextCursor,/^j1\./,'an explicit global source price order uses a single continuation phase');
+  assert.match(first.nextCursor,/^j2\.k\./,'auction price retains the known-before-unknown continuation');
   assert.equal(first.hasMore,true);assert.equal(first.scanLimited,false);assert.equal(first.total,null);
-  assert.equal(first.powerFilterSummary.supplierPower,24);assert.equal(first.powerFilterSummary.unknownPower,0);
+  assert.equal(first.powerFilterSummary.supplierPower+first.powerFilterSummary.localPower,24);assert.equal(first.powerFilterSummary.unknownPower,0);
   const second=await fixture.read({...params,sort,page:'2',after:first.nextCursor});
   assert.equal(second.items.length,24);
   assert.deepEqual(second.items.map((item:any)=>item.id),ordered.slice(24,48).map(item=>item.id));
-  assert.deepEqual([...first.items,...second.items].map((item:any)=>item.japanAuctionPriceJpy),ordered.map(item=>item.sourcePrice));
+  assert.deepEqual([...first.items,...second.items].map((item:any)=>item.japanAuctionPriceJpy),ordered.slice(0,48).map(item=>item.sourcePrice));
   assert.equal(new Set([...first.items,...second.items].map(item=>item.id)).size,48,'continuation neither loses nor repeats eligible rows');
-  assert.deepEqual(fixture.state.queries.map(query=>query.page),[1,1,2],'price sorting adds no rejected-prefix crawl');
+  const all=[...first.items,...second.items];let after=second.nextCursor,nextPage=3;
+  while(after){
+   const before=fixture.state.queries.length;
+   const page=await fixture.read({...params,sort,page:String(nextPage++),after});
+   assert.ok(fixture.state.queries.length-before<=8,'both power phases share the existing per-request source bound');
+   all.push(...page.items);after=page.nextCursor;
+  }
+  const orderedUnknown=sort==='totalRub'?unknown:[...unknown].reverse();
+  const expected=[...ordered,...orderedUnknown];
+  assert.equal(all.length,73);assert.equal(new Set(all.map(item=>item.id)).size,73);
+  assert.deepEqual(all.map(item=>item.id),expected.map(item=>item.id));
+  assert.ok(all.slice(0,50).every(item=>!japanUnknownPower(item)));assert.ok(all.slice(50).every(japanUnknownPower));
+  assert.deepEqual(all.map(item=>item.japanAuctionPriceJpy),expected.map(item=>item.sourcePrice));
+  assert.deepEqual(all.map(item=>priceCardForCity(item,'Новокузнецк').offer.totalRub),expected.map(item=>priceCardForCity(item,'Новокузнецк').offer.totalRub));
+  assert.ok(fixture.state.queries.slice(1).some(query=>query.sort===sort));
   const reads=fixture.state.queries.length;
   await assert.rejects(fixture.read({...params,sort:sort==='totalRub'?'totalRubDesc':'totalRub',page:'2',after:first.nextCursor}),AjesCursorRefreshRequired);
   await assert.rejects(fixture.read({...params,sort,city:'Москва',page:'2',after:first.nextCursor}),AjesCursorRefreshRequired);
@@ -801,18 +821,13 @@ test('projection retains full-record preview vetoes and old compact supplier fac
  assert.equal(japanPreviewParameters(defaultFuel).powerHp,150);assert.equal(offerParameterDraft(defaultFuel,defaultDto).powerHp,'150');
 });
 
-test('applied power predicates have distinct cache scope while URI fallback preserves the same raw selection',()=>{
+test('local power ranges preserve the proven source selection and exact raw cache identity',()=>{
  for(const table of ['stats','main'] as const)for(const query of [{},{make:'TOYOTA',page:2},{yearFrom:2020,yearTo:2023},{drive:'awd'}]){
   const ordinary=ajesQuery({table,...query}),power=ajesQuery({table,...query,powerTo:160});
-  if('drive' in query){
-   assert.equal(power.sql,ordinary.sql,'the existing drive selection leaves no room for a complete safe PW predicate');
-   assert.equal(ajesSourceCacheSql(power.sql),ajesSourceCacheSql(ordinary.sql),'identical raw membership may reuse its exact source cache');
-   assert.equal(power.sql,ajesQuery({table,...query,powerTo:100}).sql,'fallback never pretends to narrow a different power range');
-   assert.doesNotMatch(power.sql,/pw\*1/i);
-  }else{
-   assert.notEqual(ajesSourceCacheSql(power.sql),ajesSourceCacheSql(ordinary.sql));
-   assert.match(power.sql,/pw\*1 between 1 and 160/i);
-  }
+  assert.equal(power.sql,ordinary.sql,'source selection keeps contrary PW for local/manual overrides');
+  assert.equal(ajesSourceCacheSql(power.sql),ajesSourceCacheSql(ordinary.sql),'identical raw membership may reuse its exact source cache');
+  assert.equal(power.sql,ajesQuery({table,...query,powerTo:100}).sql,'different local ranges share the complete raw candidates');
+  assert.doesNotMatch(power.sql,/\bpw\b/i);
   assert.equal(ajesSourceCacheSql(power.sql),ajesSourceCacheSql(ajesQuery({table,...query,powerTo:160}).sql));
   assert.ok(new URLSearchParams({sql:power.sql}).toString().length<6000);
  }
@@ -825,7 +840,7 @@ test('applied power predicates have distinct cache scope while URI fallback pres
  for(const query of [{table:'main' as const},{page:2},{pageSize:12},{make:'HONDA'},{yearFrom:2020}])assert.notEqual(ajesSourceCacheSql(ajesQuery(query).sql),original);
 });
 
-test('different power ranges read their own source selection and repeat only the matching fresh page',async()=>{
+test('different local power ranges reuse one fresh source page without another supplier request',async()=>{
  let reads=0;
  const client=createAjesClient({password:()=> 'fixture-secret',assertEnabled:async()=>{},reserve:async()=>{},fetcher:async()=>{reads++;return new Response(JSON.stringify([row,{...row,ID:'unknown',PW:''}]));}});
  const ordinary=await client.read({table:'stats'},'127.0.0.1');
@@ -834,22 +849,23 @@ test('different power ranges read their own source selection and repeat only the
  const {sourceReceipt:ordinaryReceipt,...ordinaryPage}=ordinary;
  const {sourceReceipt:filteredReceipt,...filteredPage}=filtered;
  const {sourceReceipt:otherReceipt,...otherPage}=otherPower;
- assert.equal(reads,3);assert.deepEqual(filteredPage.items,ordinaryPage.items);assert.deepEqual(otherPage.items,ordinaryPage.items);
+ assert.equal(reads,1);assert.deepEqual(filteredPage.items,ordinaryPage.items);assert.deepEqual(otherPage.items,ordinaryPage.items);
  assert.ok(ordinaryReceipt&&filteredReceipt&&otherReceipt);
  assert.equal(new Set([ordinaryReceipt.requestId,filteredReceipt.requestId,otherReceipt.requestId]).size,3);
  assert.equal(ordinaryReceipt.supplierAttempted,true);
- assert.equal(new Set([ordinaryReceipt.queryHash,filteredReceipt.queryHash,otherReceipt.queryHash]).size,3);
- for(const receipt of [filteredReceipt,otherReceipt])assert.equal(receipt.supplierAttempted,true);
+ assert.equal(new Set([ordinaryReceipt.queryHash,filteredReceipt.queryHash,otherReceipt.queryHash]).size,1);
+ for(const receipt of [filteredReceipt,otherReceipt])assert.equal(receipt.supplierAttempted,false);
  const repeat=await client.read({table:'stats',powerTo:160},'127.0.0.1');
- assert.equal(reads,3);assert.equal(repeat.sourceReceipt.supplierAttempted,false);
+ assert.equal(reads,1);assert.equal(repeat.sourceReceipt.supplierAttempted,false);
  assert.equal(repeat.sourceReceipt.queryHash,filteredReceipt.queryHash);assert.equal(repeat.observedAt,filtered.observedAt);
  assert.equal(filtered.items[0].sourcePower,'150');assert.equal(filtered.items[1].sourcePower,'');
 });
 
-test('power query reuses only its persisted selection, never ordinary, another-page or stale results as fresh',async()=>{
+test('power query reuses the same persisted raw selection but never another-page or stale results as fresh',async()=>{
  const ordinarySql=ajesSourceCacheSql(ajesQuery({}).sql),powerSql=ajesSourceCacheSql(ajesQuery({powerTo:160}).sql);
  const saved={schemaVersion:2,stale:false,partial:false,items:[ajesLot(row,'stats',false)],page:1,pageSize:24,received:1,observedAt:new Date().toISOString()};
- for(const [savedSql,patch,expected] of [[powerSql,{},0],[ordinarySql,{},1],[powerSql,{page:2},1],[powerSql,{observedAt:new Date(Date.now()-31*60000).toISOString()},1]] as const){
+ assert.equal(powerSql,ordinarySql);
+ for(const [savedSql,patch,expected] of [[powerSql,{},0],[ordinarySql,{},0],[powerSql,{page:2},1],[powerSql,{observedAt:new Date(Date.now()-31*60000).toISOString()},1]] as const){
   let reads=0;
   const client=createAjesClient({password:()=> 'fixture-secret',assertEnabled:async()=>{},reserve:async()=>{},readQuery:async sql=>sql===savedSql?{...saved,...patch}:null,fetcher:async()=>{reads++;return new Response(JSON.stringify([row]));}});
   const result=await client.read({powerTo:160},'127.0.0.1');
@@ -931,9 +947,11 @@ test('actual grid and list cards cannot hide unknown PW behind an obsolete compa
  try{
   for(const view of ['grid','list']){
    const html=fixture.render(unknown,view);
+   assert.match(html,/<article[^>]*data-japan-power-phase="unknown"/);
    assert.match(html,/data-japan-power-unknown="true"/);assert.match(html,/Мощность не указана/);
    assert.doesNotMatch(html,/79 \/ 98|79 л\.с\.|98 л\.с\./);
    const supplied=fixture.render(publicOffer(offer(150)),view);
+   assert.match(supplied,/<article[^>]*data-japan-power-phase="known"/);
    assert.match(supplied,/data-japan-supplier-power="true"/);assert.match(supplied,/150 л\.с\. · поставщик/);
   }
  }finally{fixture.close();}

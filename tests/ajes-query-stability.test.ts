@@ -3,7 +3,6 @@ import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {DatabaseSync} from 'node:sqlite';
 import {ajesQuery,ajesSourceCacheSql,AJES_CENSUS_FIELDS,type AjesQuery} from '../apps/web/lib/catalog/ajes-query';
-import {japanSourcePowerPredicate} from '../apps/web/lib/catalog/japan-source-power-query';
 import {createAjesClient} from '../apps/web/lib/catalog/ajes-client';
 import {heavyVehicleFamilies,heavyVehicleSqlExclusion} from '../apps/web/lib/catalog/heavy-vehicle-families';
 import {japanHeavyVehicleSqlExclusion,japanVehicleFamilySqlExclusion,japanVehicleFamilyCacheSqlExclusion} from '../apps/web/lib/catalog/japan-vehicle-policy';
@@ -16,12 +15,8 @@ test('non-drive searches restore grouped =/LIKE grammar within the existing URI 
   assert.ok(sql.includes(japanHeavyVehicleSqlExclusion()));
   const {powerTo,...plainFilters}=filters as AjesQuery;
   const plain=ajesQuery({table,aggregate,...plainFilters}).sql;
-  assert.doesNotMatch(plain,/\bregexp\b/i,'the historical non-power grammar stays unchanged');
-  if(powerTo!==undefined){
-   const predicate=japanSourcePowerPredicate(1,powerTo).sql!;
-   assert.ok(sql.includes(' and '+predicate),'only the complete reviewed PW predicate adds REGEXP');
-   assert.equal(sql.replace(' and '+predicate,''),plain,'no unrelated source predicate changes');
-  }else assert.equal(sql,plain);
+  assert.doesNotMatch(sql,/\bregexp\b/i,'power selection retains the proven non-drive source grammar');
+  assert.equal(sql,plain,'local power filtering reuses the same complete source candidates');
   const url=new URL('http://87.242.72.57/api/');
   url.search=new URLSearchParams({ip:'2001:db8:1234:5678:1234:5678:1234:5678',json:'',code:'x'.repeat(128),sql}).toString();
   assert.ok(url.toString().length<6000);
@@ -41,9 +36,7 @@ test('wire compatibility keeps the reviewed canonical hashes and the old failed 
  const cases:Array<[AjesQuery,string]>=[
   [{},'5bfd43524f9b1eb82c7537f4d56c4ee0820122836cae0f738ef01a55a6da5b43'],
   [{make:'MAZDA',model:'3'},'f20c6051e319f3c34d051ddfab8b5e62abfd74e4cecd98c648f0f4934ff61f5d'],
-  // Historical powerTo did not narrow SQL. Keep that exact no-power source
-  // hash, while the current global PW selection has its own cache identity.
-  [{fuel:'petrol',transmission:'automatic',auctionGrade:'5'},'7efed027be93488c9cad55478cfc5d6a16d065a455d1daa7fb87225a42f7fc28'],
+  [{fuel:'petrol',transmission:'automatic',auctionGrade:'5',powerTo:160},'7efed027be93488c9cad55478cfc5d6a16d065a455d1daa7fb87225a42f7fc28'],
   [{aggregate:'count'},'6f565b876a4bc405acc93b16e68fe803cde022014080fbd9fc1efe61eb9dbeed'],
   [{aggregate:'makes'},'24d314a1297d2b4868f9fb3769112b883ac4f55f79392afa5cf9c58f623547f3'],
   [{aggregate:'models',make:'MAZDA'},'787a56c6e9cd4abc05741028b56d07ca286f4e157c7ea5eb1f3fea3ef3b411a1'],
@@ -60,7 +53,7 @@ test('wire compatibility keeps the reviewed canonical hashes and the old failed 
   .replace(japanVehicleFamilySqlExclusion(),japanVehicleFamilyCacheSqlExclusion());
  assert.equal(hash(previousPlain),'f2295e1764a0e8049475c136f267b7ed76e7aed28c7db686a1fc5c7b2d99fd73');
  const combined={fuel:'petrol',transmission:'automatic',auctionGrade:'5'};
- assert.notEqual(ajesSourceCacheSql(ajesQuery({...combined,powerTo:160}).sql),ajesSourceCacheSql(ajesQuery(combined).sql));
+ assert.equal(ajesSourceCacheSql(ajesQuery({...combined,powerTo:160}).sql),ajesSourceCacheSql(ajesQuery(combined).sql));
 });
 
 test('grouped Japan heavy-family LIKE selects the same rows as the existing expanded predicate without a REGEXP extension',()=>{
@@ -95,7 +88,7 @@ test('every displayed auction grade can be queried without relaxing SQL input va
  for(const field of ['make','model','modelFamilies'] as const)assert.throws(()=>ajesQuery({[field]:'*'}),/ajes_invalid_query/);
 });
 
-test('combined grade, gearbox, fuel and global PW selection is identical for list, count and model directory',()=>{
+test('combined source selection stays identical for list, count and directory while power remains local',()=>{
  const db=new DatabaseSync(':memory:');
  db.function('regexp',(pattern:any,value:any)=>value==null?0:Number(new RegExp(String(pattern),'i').test(String(value))));
  db.exec('create table stats(id text,year integer,auction_type integer,status text,finish integer,marka_name text,model_name text,rate text,kpp text,time text,auction_date text,pw text)');
@@ -103,9 +96,9 @@ test('combined grade, gearbox, fuel and global PW selection is identical for lis
  const rows=[['fit','TOYOTA','AQUA','5','AT','P','150'],['wrong-grade','TOYOTA','PRIUS','4','AT','P','150'],['wrong-box','TOYOTA','VITZ','5','CVT','P','150'],['wrong-fuel','MAZDA','DEMIO','5','AT','D','150'],['truck','MAZDA','TITAN','5','AT','P','150'],['unknown-fuel','HONDA','FIT','5','AT','',null],['wrong-power','TOYOTA','AQUA','5','AT','P','200']];
  for(const [id,make,model,grade,kpp,fuel,pw] of rows)insert.run(id,2021,2,'Sold',100000,make,model,grade,kpp,fuel,'2026-11-26',pw);
  const selection={auctionGrade:'5',transmission:'automatic',fuel:'petrol',powerTo:160};
- assert.deepEqual(db.prepare(ajesQuery(selection).sql).all().map(row=>row.id),['fit','unknown-fuel']);
- assert.equal(Object.values(db.prepare(ajesQuery({...selection,aggregate:'count'}).sql).get()!)[0],2);
- assert.equal(Object.values(db.prepare(ajesQuery({...selection,powerTo:undefined,aggregate:'count'}).sql).get()!)[0],3,'PW changes the global scalar before pagination');
+ assert.deepEqual(db.prepare(ajesQuery(selection).sql).all().map(row=>row.id),['fit','unknown-fuel','wrong-power']);
+ assert.equal(Object.values(db.prepare(ajesQuery({...selection,aggregate:'count'}).sql).get()!)[0],3);
+ assert.equal(Object.values(db.prepare(ajesQuery({...selection,powerTo:undefined,aggregate:'count'}).sql).get()!)[0],3,'the source scalar does not claim local power admission');
  assert.deepEqual(db.prepare(ajesQuery({...selection,page:2,pageSize:1}).sql).all().map(row=>row.id),['unknown-fuel']);
  assert.deepEqual(db.prepare(ajesQuery({...selection,aggregate:'models'}).sql).all().map(row=>[row.marka_name,row.model_name]),[['HONDA','FIT'],['TOYOTA','AQUA']]);
  db.close();
@@ -164,8 +157,8 @@ test('27 Audi and22 Mazda exact aliases preserve the URI budget for LIST and sca
   assert.ok(counterUrl(sql)<6000,`${make}/${names.length}/basic census: ${counterUrl(sql)} bytes`);
   const scope={table:'stats' as const,make,resolvedModels:{exact:names,families:[]},yearFrom:2015,yearTo:2024,powerTo:160};
   const where=(value:string)=>value.split(' where ')[1].split(/ group by | order by /)[0];
-  for(const aggregate of [undefined,'count','models'] as const)assert.equal(where(ajesQuery({...scope,aggregate}).sql),where(sql),'fallback scope is identical for every aggregate');
-  assert.equal(sql,ajesQuery({...scope,powerTo:undefined,aggregate:'census',censusFields:[...AJES_CENSUS_FIELDS]}).sql,'the complete long alias selection is retained when the PW predicate cannot fit');
+  for(const aggregate of [undefined,'count','models'] as const)assert.equal(where(ajesQuery({...scope,aggregate}).sql),where(sql),'source scope is identical for every aggregate');
+  assert.equal(sql,ajesQuery({...scope,powerTo:undefined,aggregate:'census',censusFields:[...AJES_CENSUS_FIELDS]}).sql,'power filtering retains the complete long alias selection');
   for(const name of names)assert.ok(sql.includes(`'${name}'`),'census never discards an alias to meet its budget');
   assert.match(sql,/group by 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15 order by 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15/);
   // This experimental aggregate is blocked in production. Its full technical

@@ -63,7 +63,7 @@ for(const power of [false,true])test(`count availability, value and observation 
  assert.deepEqual(state.reads,[1,1,2,2,2]);
 });
 
-for(const sort of ['totalRub','totalRubDesc'])test(`auction ${sort} retains one source order across pages and unknown power`,async()=>{
+for(const sort of ['totalRub','totalRubDesc'])test(`auction ${sort} retains source order within known then unknown across the page boundary`,async()=>{
  const {state,readPage}=fixture();
  const source=Array.from({length:53},(_,i):Row=>({id:`ajes-stats-auction-${i}`,known:i%3!==0,
   totalRub:500000+((i*37)%53)*10000,operational:{raw:{finalPriceJpy:100000+i*1000}}}));
@@ -73,20 +73,35 @@ for(const sort of ['totalRub','totalRubDesc'])test(`auction ${sort} retains one 
  const first=await readPage(params,undefined,{includeCount:false});
  const second=await readPage({...params,page:'2',after:first.nextCursor},undefined,{includeCount:false});
  const all=[...first.items,...second.items];
- assert.deepEqual(all.map(row=>row.id),source.slice(0,48).map(row=>row.id),'no independent re-sort of either page');
+ const ordered=[...source.filter(row=>row.known),...source.filter(row=>!row.known)];
+ assert.equal(first.items.length,24);assert.equal(second.items.length,24);
+ assert.deepEqual(all.map(row=>row.id),ordered.slice(0,48).map(row=>row.id),'no independent re-sort of either page or power phase');
  assert.equal(new Set(all.map(row=>row.id)).size,48);
- assert.deepEqual(state.sourceSorts,[sort,sort],'source order is retained with the power filter');
- assert.deepEqual(all.map(row=>row.totalRub),source.slice(0,48).map(row=>row.totalRub),'city calculations are preserved, not replaced by auction prices');
- assert.deepEqual(all.map(row=>row.japanAuctionPriceJpy),source.slice(0,48).map(row=>row.operational!.raw.finalPriceJpy));
+ assert.ok(state.sourceSorts.every(value=>value===sort),'source order is retained in both power phases');
+ assert.deepEqual(all.map(row=>row.totalRub),ordered.slice(0,48).map(row=>row.totalRub),'city calculations are preserved, not replaced by auction prices');
+ assert.deepEqual(all.map(row=>row.japanAuctionPriceJpy),ordered.slice(0,48).map(row=>row.operational!.raw.finalPriceJpy));
  assert.ok(all.every(row=>row.japanCatalogPriceOrder==='auction'));
- assert.ok(first.items.some(row=>!row.known),'explicit price ordering does not postpone unknown power to a different price sequence');
- assert.match(first.nextCursor,/^j1\./);
- assert.deepEqual(state.reads,[1,2],'only the two requested source pages are read');
+ assert.ok(first.items.every(row=>row.known));
+ assert.ok(second.items.slice(0,11).every(row=>row.known));assert.ok(second.items.slice(11).every(row=>!row.known));
+ assert.match(first.nextCursor,/^j2\.k\./);assert.match(second.nextCursor,/^j2\.u\./);
+ assert.deepEqual(state.reads,[1,2,2,3,1,2],'the phase changes only after source exhaustion and retains the partial-page membership');
+ const third=await readPage({...params,page:'3',after:second.nextCursor},undefined,{includeCount:false});
+ assert.equal(third.items.length,5);assert.equal(third.nextCursor,null);assert.equal(third.hasMore,false);
+ assert.deepEqual([...all,...third.items].map(row=>row.id),ordered.map(row=>row.id));
+ assert.equal(new Set([...all,...third.items].map(row=>row.id)).size,53);
 });
 
-test('an already issued two-phase price cursor requests a fresh first page before new source reads',async()=>{
+test('an already issued single-phase price cursor requests a fresh first page before source reads',async()=>{
  const {state,readPage}=fixture();
- const epoch=ajesPowerEvidenceEpoch({runtimeSha:'a'.repeat(40),editorialRevision:'editorial-1',calculationDigest:null});
+ const previous=await readFilteredAjesPage<Row>({page:1,pageSize:24,cursorKey:'previous single-phase price selection',itemKey:row=>row.id,read:state.source});
+ assert.match(previous.nextCursor!,/^j1\./);
+ await assert.rejects(readPage({market:'japan',powerTo:'160',sort:'totalRubDesc',page:'2',after:previous.nextCursor}),AjesCursorRefreshRequired);
+ assert.deepEqual(state.reads,[]);assert.equal(state.countReads,0);
+});
+
+test('an older runtime two-phase price cursor refreshes before source reads',async()=>{
+ const {state,readPage}=fixture();
+ const epoch=ajesPowerEvidenceEpoch({runtimeSha:'b'.repeat(40),editorialRevision:'editorial-1',calculationDigest:null});
  const previous=await readPowerOrderedAjesPage<Row>({page:1,pageSize:24,evidenceEpoch:epoch,cursorKey:'previous power and price selection',
   itemKey:row=>row.id,known:row=>row.known,read:state.source});
  assert.match(previous.nextCursor!,/^j2\./);

@@ -110,16 +110,16 @@ test('real Japan count badge renders exact and partial values without false inve
  assert.match(expired,/data-japan-count-status="stale"/);assert.match(expired,/73 · данные на 28 ноября 2026 г./);
  assert.doesNotMatch(expired,/data-catalog-market-count=|data-japan-count-status="exact"/);
 });
-test('power selection narrows the global source candidates before every aggregate and list',()=>{
+test('power selection retains the same source COUNT and LIST without claiming local admission',()=>{
  for(const market of ['japan'] as const)for(const aggregate of [undefined,'count','models'] as const){
   const q=ajesCatalogQuery({market,powerFrom:'100',powerTo:'160',pageSize:'48'});
   const sql=ajesQuery({...q,aggregate}).sql;
-  assert.match(sql,/trim\(pw\) regexp '\^\[0-9\]\{1,30\}\$'/i);
-  assert.match(sql,/pw\+0 between 100 and 160/i);
-  assert.match(sql,/pw is null or not /i,'unknown source power stays included');
+  const {powerFrom,powerTo,...plain}=q;
+  assert.equal(sql,ajesQuery({...plain,aggregate}).sql,'local/manual facts can override the supplier PW');
+  assert.doesNotMatch(sql,/\bpw\b/i,'the accepted source grammar includes unknown and contrary PW for local checking');
  }
  for(const p of [{powerTo:'-1'},{powerFrom:'200',powerTo:'100'},{powerTo:'Infinity'}])assert.throws(()=>ajesQuery(ajesCatalogQuery({market:'japan',...p})));
- assert.match(ajesQuery(ajesCatalogQuery({market:'japan',powerTo:'160'})).sql,/pw\+0 between 1 and 160/i);
+ assert.equal(ajesQuery(ajesCatalogQuery({market:'japan',powerTo:'160'})).sql,ajesQuery(ajesCatalogQuery({market:'japan'})).sql);
  assert.match(ajesQuery(ajesCatalogQuery({market:'japan',sort:'mileage',page:'2',pageSize:'48'})).sql,/order by mileage asc, id asc limit 48,48/);
 });
 

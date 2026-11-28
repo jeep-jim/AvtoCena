@@ -134,11 +134,10 @@ export async function readAjesCatalogPage(params:Record<string,unknown>,measure?
  // delivered estimate is still calculated for each card and is a different
  // amount; never reorder individual pages by that estimate afterwards.
  const sourcePriceOrder=Boolean(parseCatalogSort(String(params.sort||''))?.some(term=>term.startsWith('totalRub')));
- // Already open pages may still carry the previous two-phase price cursor.
- // It has no position in this source-price sequence; offer the existing first
- // page refresh instead of treating a previously valid cursor as bad input.
- if(sourcePriceOrder&&typeof params.after==='string'&&params.after.startsWith('j2.'))throw new AjesCursorRefreshRequired();
- const powerOrdered=filter.powerFilter&&!sourcePriceOrder;
+ // The source order applies within each power group across every page. Keep
+ // known matches before unknown power even when auction-price sorting is set;
+ // the existing cursor binds this query and its local evidence epoch.
+ const powerOrdered=filter.powerFilter;
  const evidenceSnapshot=await readAjesPublicEvidenceSnapshot();
  const pricingContext=filter.priceFilter?await captureAjesCountPricingContext(evidenceSnapshot):undefined;
  const evidenceEpoch=ajesPowerEvidenceEpoch({runtimeSha:process.env.AVTOCENA_RELEASE_SHA,
@@ -237,7 +236,7 @@ export async function readAjesCatalogPage(params:Record<string,unknown>,measure?
  const countSummary=singleObservation?{total:page.items.length,upperBound:false,stale:false,observedAt}:readyCount;
  // A chosen source order belongs to the complete query, including subsequent
  // pages. Appending never moves earlier cars or starts a new price range.
- // Explicit auction-price ordering also takes precedence over K/U grouping.
+ // With a power filter, that same source order is retained within K then U.
  const items=await withCatalogEditorialSnapshot(evidenceSnapshot.editorial,async()=>page.items.map((offer:any)=>{
   const projected=publicOffer(offer);
   if(filter.powerFilter&&powerIdentity(projected)!==powerIdentity(offer))throw new AjesCursorRefreshRequired();
