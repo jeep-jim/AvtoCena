@@ -494,6 +494,9 @@ export function createChinaDailyRelease({root, servingRoot, pricingPlan, serving
               let japanRaw;
               try { japanRaw = await fs.readFile(japanOutput); }
               catch (error) { need(japanExit === 0, 'japan_browser_failed'); throw error; }
+              await onProgress({phase: 'code_japan_report_observed', market: 'china', applicationBuilds: 0,
+                bytes: japanRaw.length, exitCode: Number.isSafeInteger(japanExit) ? japanExit : null,
+                sha256: hash(japanRaw)});
               need(japanRaw.length <= 128 * 1024, 'japan_browser_binding');
               const japan = JSON.parse(japanRaw), checkedAt = Date.parse(japan.checkedAt);
               need(japan.version === 1 && japan.kind === 'catalog-japan-browser-v1' && japan.codeScope === plan.codeScope

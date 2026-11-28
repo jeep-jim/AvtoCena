@@ -4,9 +4,11 @@ import {createHash} from 'node:crypto';
 import {readFileSync} from 'node:fs';
 import {spawnSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
+import {runInNewContext} from 'node:vm';
 import * as scope from '../scripts/catalog-next/japan-stability-code-scope.mjs';
 import {japanCrossoverRequirement, japanCrossoverSelection, verifyJapanCrossoverRows, verifyJapanCrossoverAppend,
-  japanCrossoverAcceptancePassed, JAPAN_CROSSOVER_PAGE} from '../scripts/catalog-next/japan-crossover-browser.mjs';
+  japanCrossoverAcceptancePassed, readJapanCrossoverFirstPage, JAPAN_CROSSOVER_PAGE} from '../scripts/catalog-next/japan-crossover-browser.mjs';
+import {readJapanSsrPageEvidence} from '../scripts/catalog-next/japan-browser-acceptance.mjs';
 import {sourcePriceOrderReport} from './helpers/japan-source-price-order-report-fixture.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
@@ -102,6 +104,101 @@ test('observed 24-to-48 rows must preserve body, power, identity, order and unkn
   assert.throws(() => verifyJapanCrossoverAppend({before: rows.slice(0, 24), items: wrong, after: rows}));
   const swapped = structuredClone(rows); [swapped[0], swapped[1]] = [swapped[1], swapped[0]];
   assert.throws(() => verifyJapanCrossoverAppend({before: rows.slice(0, 24), items, after: swapped}));
+});
+
+function crossoverReadinessFixture({shown = 0, malformed = false} = {}) {
+  const observedAt = new Date().toISOString(), calls = {dom: 0, receipts: 0, rows: 0, values: 0};
+  const timeout = Object.assign(Error('controlled crossover readiness timeout'), {name: 'TimeoutError'});
+  const receipts = Array.from({length: 8}, (_, index) => ({version: 1,
+    requestId: '12345678-1234-4234-8234-' + String(index + 1).padStart(12, '0'),
+    queryHash: hash('crossover-source'), table: 'stats', kind: 'list', page: index + 1, pageSize: 24,
+    startedAt: observedAt, finishedAt: observedAt, stage: 'storage', supplierAttempted: false,
+    outcome: 'fresh', observedAt}));
+  const annotation = JSON.stringify({version: 1, page: 1, afterSha256: hash(''), receipts, omitted: 0,
+    ...(malformed ? {private: 'PRIVATE_RECEIPT_DATA'} : {})});
+  const cards = rows.slice(0, shown).map(row => ({
+    textContent: '150 л.с.',
+    getAttribute: name => name === 'data-catalog-body-type' ? 'suv' : name === 'data-japan-power-phase' ? 'known' : null,
+    querySelector: () => null,
+    querySelectorAll: selector => selector === 'a[href]' ? [{getAttribute: () => '/cars/offer/' + row.id}] : [],
+  }));
+  const count = {getAttribute: name => name === 'data-japan-loaded-count' ? String(shown) : 'partial'};
+  const more = {getAttribute: () => appendHref.replace(encodeURIComponent(cursor),
+    encodeURIComponent(cursor.replace('.2.0.2.', '.9.0.2.')))};
+  const form = {querySelector: selector => selector.includes('name="sort"') ? null
+    : selector.includes('name="bodyType"') ? {value: 'suv'} : {checked: true}};
+  const root = {getAttribute: () => annotation,
+    querySelector: selector => selector.startsWith('[data-japan-loaded-count') ? count : null,
+    querySelectorAll: selector => selector === 'article.ac-catalog-card,article.ac-catalog-list-row' ? cards
+      : selector === 'a.ac-catalog-more[role="button"]' ? [more]
+      : selector === 'p[role="status"]' && !shown ? [{textContent: 'Показана часть автомобилей. Полный список пока недоступен.'}] : [],
+  };
+  const document = {querySelectorAll: selector => selector === 'main.ac-ajes-catalog' ? [root] : [],
+    querySelector: selector => selector === 'main.ac-ajes-catalog' ? root : form};
+  const evaluate = (fn, input) => structuredClone(runInNewContext('(' + fn.toString() + ')(input)',
+    {document, location: {origin: 'https://avtocena.com'}, URL, input}));
+  const view = {
+    evaluate: async (fn, input) => { calls.dom++; return evaluate(fn, input); },
+    waitForFunction: async (fn, input, options) => {
+      const kind = input.attribute ? 'receipts' : 'rows'; calls[kind]++;
+      assert.equal(options.timeout, kind === 'receipts' ? 5000 : 60000);
+      const value = evaluate(fn, input); if (!value) throw timeout;
+      return {jsonValue: async () => value, dispose: async () => {}};
+    },
+    locator: selector => { assert.equal(selector, 'main.ac-ajes-catalog'); return {
+      locator: selector => { assert.equal(selector, 'article.ac-catalog-card,article.ac-catalog-list-row'); return {
+        evaluateAll: async fn => { calls.values++; return evaluate(fn, cards); },
+      }; },
+    }; },
+    goto: async () => assert.fail('readiness diagnostics cannot navigate'),
+    request: {get: async () => assert.fail('readiness diagnostics cannot make API requests')},
+  };
+  return {view, calls, receipts, timeout};
+}
+
+test('crossover retains empty scan-limited DOM and eight SSR receipts before and after the unchanged row timeout', async () => {
+  const fixture = crossoverReadinessFixture(), progress = {phase: 'navigate'};
+  await assert.rejects(readJapanCrossoverFirstPage(fixture.view, {progress, readSsrPageEvidence: readJapanSsrPageEvidence}),
+    error => error === fixture.timeout);
+  assert.equal(progress.firstPageReadiness.failure.timeout, true);
+  for (const observation of [progress.firstPageReadiness.beforeWait, progress.firstPageReadiness.failure.observation]) {
+    assert.equal(observation.dom.shown, 0); assert.equal(observation.dom.loadedCount, 0);
+    assert.equal(observation.dom.power160Checked, true); assert.equal(observation.dom.incompleteNotice, true);
+    assert.equal(observation.dom.continuation.sourcePage, 9);
+    assert.equal(observation.dom.continuation.withinPageSkip, 0);
+    assert.deepEqual(observation.sourceReadEvidence.receipts, fixture.receipts);
+    assert.equal(observation.sourceReadEvidence.bindingMatched, true);
+  }
+  assert.deepEqual(fixture.calls, {dom: 2, receipts: 2, rows: 1, values: 0});
+  assert.equal(progress.phase, 'navigate'); assert.equal(progress.firstPage, undefined);
+});
+
+test('crossover readiness still requires all 24 actual SUV rows and never promotes diagnostics to a proof', async () => {
+  const fixture = crossoverReadinessFixture({shown: 24}), progress = {phase: 'navigate'};
+  assert.deepEqual(await readJapanCrossoverFirstPage(fixture.view,
+    {progress, readSsrPageEvidence: readJapanSsrPageEvidence}), rows.slice(0, 24));
+  assert.equal(progress.firstPageReadiness.failure, undefined);
+  assert.deepEqual(fixture.calls, {dom: 1, receipts: 1, rows: 1, values: 1});
+  assert.equal(progress.phase, 'navigate'); assert.equal(progress.firstPage, undefined);
+});
+
+test('crossover preserves the row error when observations fail and omits malformed private receipt data', async () => {
+  const fixture = crossoverReadinessFixture({malformed: true}), progress = {};
+  await assert.rejects(readJapanCrossoverFirstPage(fixture.view, {progress, readSsrPageEvidence: readJapanSsrPageEvidence}),
+    error => error === fixture.timeout);
+  for (const observation of [progress.firstPageReadiness.beforeWait, progress.firstPageReadiness.failure.observation]) {
+    assert.equal(observation.sourceReadEvidence.status, 'omitted');
+    assert.deepEqual(observation.sourceReadEvidence.receipts, []);
+  }
+  const broken = crossoverReadinessFixture(), failure = {};
+  broken.view.evaluate = async () => { throw Error('PRIVATE_DOM_ERROR'); };
+  await assert.rejects(readJapanCrossoverFirstPage(broken.view, {progress: failure,
+    readSsrPageEvidence: async () => { throw Error('PRIVATE_RECEIPT_ERROR'); }}), error => error === broken.timeout);
+  for (const observation of [failure.firstPageReadiness.beforeWait, failure.firstPageReadiness.failure.observation]) {
+    assert.deepEqual(observation.dom, {status: 'unavailable'});
+    assert.deepEqual(observation.sourceReadEvidence, {status: 'unavailable'});
+  }
+  assert.doesNotMatch(JSON.stringify([progress, failure]), /PRIVATE_/);
 });
 
 test('complete source selection requires crossover plus all prior source-price proofs', () => {

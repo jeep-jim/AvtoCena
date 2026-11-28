@@ -1,6 +1,6 @@
 import {createHash} from 'node:crypto';
 import {checkedJapanSourceCountCursor} from './japan-source-count-browser.mjs';
-import {verifyJapanSourcePriceFreshReceipts} from './japan-source-price-order-browser.mjs';
+import {verifyJapanSourcePriceFreshReceipts, observeJapanSourcePriceReadiness} from './japan-source-price-order-browser.mjs';
 import {JAPAN_CROSSOVER_POWER_CONTRACT, japanCrossoverAcceptancePassed} from './japan-crossover-proof.mjs';
 
 export {japanCrossoverAcceptancePassed} from './japan-crossover-proof.mjs';
@@ -87,6 +87,19 @@ async function visibleRows(view, count) {
   return verifyJapanCrossoverRows(rows.map(({id, bodyType, powerHp}) => ({id, bodyType, powerHp})));
 }
 
+/** Reuse the bounded DOM/SSR observer before readiness can time out. These
+ * observations read the existing page only and cannot satisfy the row gate. */
+export async function readJapanCrossoverFirstPage(view, {progress, readSsrPageEvidence}) {
+  const diagnostic = progress.firstPageReadiness = {
+    beforeWait: await observeJapanSourcePriceReadiness(view, readSsrPageEvidence)};
+  try { return await visibleRows(view, 24); }
+  catch (error) {
+    diagnostic.failure = {timeout: error?.name === 'TimeoutError',
+      observation: await observeJapanSourcePriceReadiness(view, readSsrPageEvidence)};
+    throw error;
+  }
+}
+
 /** The screenshot route is opened once; its emitted page-two request is
  * observed from one normal click. No independent LIST or supplier request. */
 export async function runJapanCrossoverBrowser({context, report, capture, onStage, onPage,
@@ -100,7 +113,7 @@ export async function runJapanCrossoverBrowser({context, report, capture, onStag
   await view.setViewportSize({width: 1440, height: 1000});
   const document = await view.goto(ORIGIN + JAPAN_CROSSOVER_PAGE, {waitUntil: 'domcontentloaded', timeout: 90_000});
   need(document?.status() === 200, 'document'); japanCrossoverSelection(view.url());
-  const before = await visibleRows(view, 24);
+  const before = await readJapanCrossoverFirstPage(view, {progress, readSsrPageEvidence});
   const firstPage = verifyJapanSourcePriceFreshReceipts(await readSsrPageEvidence(view, {page: 1, after: ''}), {ssr: true});
   const catalog = view.locator('main.ac-ajes-catalog'), more = catalog.locator('a.ac-catalog-more[role="button"]');
   need(await more.count() === 1, 'append_control');

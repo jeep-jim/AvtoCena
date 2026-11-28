@@ -32,7 +32,7 @@ async function fixture(t, {scope = JAPAN_STABILITY_CODE_SCOPE, mode = 'failed', 
   inspect, defaultCapture = false, environment = {SSH_PRIVATE_KEY: 'SYNTHETIC_SSH'}} = {}) {
   const directory = await fs.mkdtemp(path.join(os.tmpdir(), 'japan-active-failure-'));
   t.after(() => fs.rm(directory, {recursive: true, force: true}));
-  const root = path.join(directory, 'controller'), events = [], snapshots = [], captures = [];
+  const root = path.join(directory, 'controller'), events = [], snapshots = [], captures = [], progress = [], browserWrites = [];
   const output = path.join(root, 'catalog-next-japan-source-failure-report.json');
   const manifest = Buffer.from(JSON.stringify({kind: 'china-local-generation-v1', market: 'china',
     generationId: 'gen_china_100_1', runtimeSha: pricingRuntimeSha, prepared: true, rows: 283188,
@@ -122,7 +122,7 @@ async function fixture(t, {scope = JAPAN_STABILITY_CODE_SCOPE, mode = 'failed', 
   let hostPlan, stagedDirectory;
   const release = createChinaDailyRelease({root, servingRoot: directory, servingPlan,
     pricingPlan: {version: 1, market: 'china', runtimeSha: pricingRuntimeSha}, controllerSha,
-    runnerTemp: directory, environment, capabilities: {
+    runnerTemp: directory, environment, onProgress: value => { progress.push(value); }, capabilities: {
       verifyBaselines() {}, async verifyCompatibility() { return {runtimeSha, pricingRuntimeSha, protectedPricingPathsUnchanged: true}; },
       async verifyCodeCompatibility() { return {retainedRuntime, frozenHttpOracleReusable: true}; },
       generationStorage() { assert.fail('app-only release cannot restore a source generation'); },
@@ -209,7 +209,10 @@ async function fixture(t, {scope = JAPAN_STABILITY_CODE_SCOPE, mode = 'failed', 
           if (mode === 'wrong_stage') report.error.stage = 'PRIVATE/unsafe-stage';
           if (mode === 'no_stage') delete report.error;
           if (mode === 'not_false') report.passed = 0;
-          await fs.writeFile(args.env.OUTPUT, mode === 'malformed' ? '{' : JSON.stringify(report));
+          if (mode === 'oversized') report.private = 'PRIVATE_REPORT_DATA'.repeat(8192);
+          const raw = mode === 'malformed' ? '{' : JSON.stringify(report);
+          browserWrites.push({bytes: Buffer.byteLength(raw), sha256: hash(raw)});
+          await fs.writeFile(args.env.OUTPUT, raw);
           return exit;
         }
         return 0;
@@ -239,7 +242,7 @@ async function fixture(t, {scope = JAPAN_STABILITY_CODE_SCOPE, mode = 'failed', 
     assert.ok(events.indexOf('close_stage') < events.indexOf('recover'));
     return failure;
   }
-  return {root, directory, output, events, snapshots, captures, run, servingPlan};
+  return {root, directory, output, events, snapshots, captures, progress, browserWrites, run, servingPlan};
 }
 
 test('default snapshot reads workflow-bound saved slots before real close, rollback and image cleanup', async t => {
@@ -317,6 +320,19 @@ test('valid bound failed report is captured even when the browser incorrectly ex
   await f.run('china_daily_release_japan_browser_binding');
   assert.equal(f.captures.length, 1);
   assert.equal((await verifySavedActiveStabilityReport({root: f.root, environment: {GITHUB_SHA: controllerSha}})).verified, true);
+});
+
+for (const [mode, expected] of [['oversized', 'china_daily_release_japan_browser_binding'],
+  ['wrong_nonce', 'china_daily_release_japan_browser_binding'], ['malformed', 'china_code_failed']])
+test('unbound browser bytes expose only size, digest and exit status before rejection: ' + mode, async t => {
+  const f = await fixture(t, {mode, exit: 1}); await f.run(expected);
+  const observed = f.progress.filter(value => value.phase === 'code_japan_report_observed');
+  assert.deepEqual(observed, [{phase: 'code_japan_report_observed', market: 'china', applicationBuilds: 0,
+    ...f.browserWrites[0], exitCode: 1}]);
+  assert.equal(f.captures.length, 0);
+  assert.equal(await fs.stat(path.join(f.root, 'catalog-next-japan-browser-report.json')).then(() => true, () => false), false);
+  assert.doesNotMatch(JSON.stringify(observed), /PRIVATE_|nonce|runtime|error|stage|path|root|release/);
+  if (mode === 'oversized') assert.ok(observed[0].bytes > 128 * 1024);
 });
 
 test('nonstability Japan failure keeps the existing release path without reading saved slots', async t => {

@@ -122,8 +122,8 @@ test('review plans retain accepted5b1 until the reviewed source-order and count 
   assert.equal(successors.length,1);
   const successor=successors[0];
   assert.equal(successor.retainedRuntime,base.runtimeSha);
-  assert.equal(successor.runtimeSha,'cdd4e9a0465dd292b8dd17233bf34d209bdc4f17');
-  assert.equal(successor.runtimeTree,'37518cb90026ee1f330b14a8a2fc7e44950b5e4e');
+  assert.equal(successor.runtimeSha,'d3226d2de549d250f50ca66663c4b832df6e6de6');
+  assert.equal(successor.runtimeTree,'8bb8060c82e9a7e21441c41c1ae8b972ea5676ec');
   assert.equal(successor.runtimeFiles.length,41);
   assert.deepEqual([...successor.runtimeFiles].sort(),[...JAPAN_STABILITY_SOURCE_SELECTION_CODE_PATHS].sort());
   assert.equal(successor.codeScope,JAPAN_STABILITY_CODE_SCOPE);
@@ -137,8 +137,8 @@ test('review plans retain accepted5b1 until the reviewed source-order and count 
   assert.equal(japanSourcePriceOrderRequired(successor),true);
   assert.equal(japanSourceSelectionRequired(successor),true);
   assert.equal(japanLiteralFamilyRequired(successor),true);
-  assert.equal(successor.runtimeDiffSha256,'2bf0edd86886e670390bc1dffa13854771e278f6eecd3e28637309eea4a48f48');
-  assert.equal(successor.pricingToServingDiffSha256,'c57496dfd93454aef0652dfe8c9d6bf8d843a5e82ca03f425ebe42a82b60060e');
+  assert.equal(successor.runtimeDiffSha256,'19183610fa2b21f06057f52e8e20b1f8f4a4a8b8e1741d4d645dd13fa2a81e98');
+  assert.equal(successor.pricingToServingDiffSha256,'672e9f5184ecfd6c6b7700b0c64bb460511f459860df66b0312355036821a4a3');
   assert.equal(successor.pricingToServingFiles.length,150);
   for(const countAcceptance of [undefined,JAPAN_SOURCE_BOUNDED_INCREMENTAL_POLICY]){
     const invalid={...successor,countAcceptance};

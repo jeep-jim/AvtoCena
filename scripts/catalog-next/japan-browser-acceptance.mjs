@@ -3,7 +3,9 @@ import path from 'node:path';
 import {createHash} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
 import {JAPAN_PAGINATION_CODE_SCOPE} from './japan-pagination-code-scope.mjs';
-import {JAPAN_STABILITY_CODE_SCOPE} from './japan-stability-code-scope.mjs';
+import {JAPAN_STABILITY_CODE_SCOPE, japanSourcePriceOrderAcceptancePassed,
+ japanA4Power160ContinuationAcceptancePassed, japanSourceCountAcceptancePassed,
+ japanSourceSelectionAcceptancePassed} from './japan-stability-code-scope.mjs';
 import {JAPAN_STABILITY_GATES, JAPAN_LEGACY_MAZDA_THREE_PAGES, japanStabilityApiAllowed, japanStabilitySearchApi, runJapanStabilityBrowser,
  checkJapanStabilityBrandControl,verifyJapanStabilityBrandRequestCount} from './japan-stability-browser.mjs';
 import {JAPAN_PRICE_SORT_GATES, japanPriceSortApiAllowed, verifyJapanPriceSortVisible} from './japan-price-sort-browser.mjs';
@@ -52,6 +54,35 @@ export function japanPriceSortRequirement(value){
 export function japanTimingPolicy(value){
  need(value===undefined||value===JAPAN_OBSERVED_TIMING_POLICY,'timing_policy');
  return value;
+}
+
+/** Compact whitespace first. Only if that still exceeds the existing bound,
+ * replace optional completed diagnostics with a reference to their independently
+ * checked final proof. Active failures, response receipts, final proofs and
+ * acceptance flags are never shortened. The original in-memory report stays
+ * intact; controller and host independently retain their 128/256 KiB limits. */
+export function serializeJapanBrowserReport(report){
+ let value=report,raw=JSON.stringify(value)+'\n';
+ const label={auctionDatabaseLabel:report.japanSourcePriceOrderRequired===true};
+ const failedStage=report.passed===false&&typeof report.error?.stage==='string'?report.error.stage:null;
+ const completed=[
+  ['priceSortProgress','priceSort','stability_source_price_',()=>japanSourcePriceOrderAcceptancePassed(report)],
+  ['a4Power160ContinuationProgress','a4Power160Continuation','source_count_a4_power160_',()=>japanA4Power160ContinuationAcceptancePassed(report,label)],
+  ['sourceCountProgress','sourceCount','source_count_',()=>japanSourceCountAcceptancePassed(report,label)],
+  ['crossoverPower160Progress','crossoverPower160','stability_crossover_power160',()=>japanSourceSelectionAcceptancePassed(report)],
+ ];
+ for(const [progress,proof,stage,passed] of completed){
+  if(Buffer.byteLength(raw)<=128*1024)break;
+  // Capture/close can fail after the logical proof sets phase='complete'.
+  // That journey still owns the active failure diagnostics.
+  if(failedStage?.startsWith(stage))continue;
+  if(report.checks?.[progress]?.phase!=='complete'||!passed())continue;
+  if(value===report)value={...report,checks:{...report.checks}};
+  value.checks[progress]={phase:'complete',compacted:true,finalProof:proof,
+   finalProofSha256:sha(JSON.stringify(report.checks[proof]))};
+  raw=JSON.stringify(value)+'\n';
+ }
+ return raw;
 }
 
 /** Timing observations describe completed or attempted functional journeys.
@@ -1425,7 +1456,7 @@ export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,out
   if(context)await context.close().catch(()=>{});if(browser)await browser.close().catch(()=>{});
   if(requireSourceCount)report.checkedAt=new Date().toISOString();
   collectJapanObservedTimings(report);
-  await fs.writeFile(outputFile,JSON.stringify(report,null,2)+'\n',{flag:'wx',mode:0o600});
+  await fs.writeFile(outputFile,serializeJapanBrowserReport(report),{flag:'wx',mode:0o600});
  }
  return report;
 }
