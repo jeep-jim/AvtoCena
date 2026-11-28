@@ -187,9 +187,7 @@ JAPAN_STABILITY_SOURCE_PRICE_ORDER_CODE_FILES = {
     'apps/web/components/home/HomeJapanFilteredRail.tsx',
     'apps/web/lib/catalog/ajes-catalog.ts',
     'apps/web/lib/catalog/ajes-count-display.ts',
-    'apps/web/lib/catalog/ajes-query.ts',
     'apps/web/lib/catalog/catalog-sort.ts',
-    'apps/web/lib/catalog/japan-source-power-query.ts',
     'tests/ajes-catalog-count-continuation.test.ts',
     'tests/ajes-catalog-progressive.test.ts',
     'tests/ajes-count-display.test.ts',
@@ -202,7 +200,6 @@ JAPAN_STABILITY_SOURCE_PRICE_ORDER_CODE_FILES = {
     'tests/japan-auction-sort-label.test.ts',
     'tests/japan-count-lifecycle.test.ts',
     'tests/japan-rail-visibility.test.ts',
-    'tests/japan-source-power-query.test.ts',
     'tests/japan-source-power.test.ts',
 }
 JAPAN_STABILITY_HOME_CODE_FILES = JAPAN_STABILITY_RAILS_CODE_FILES | {
@@ -995,10 +992,11 @@ def japan_a4_power160_continuation_acceptance_passed(report, auction_database_la
 
 
 def japan_source_price_order_acceptance_passed(report):
-    """Bind both ordinary 24-to-48 walks to their raw source-price order.
+    """Bind both ordinary 24-to-48 walks to source-price order in power lanes.
 
-    This is not a delivered-price census. The sealed whole report binds price
-    arrays and their producer hashes without reserializing fractional numbers.
+    Known power precedes unknown power across the append. This is not a
+    delivered-price census. The sealed whole report binds price arrays and
+    their producer hashes without reserializing fractional numbers.
     """
     if not isinstance(report, dict) or not isinstance(report.get('checks'), dict):
         return False
@@ -1076,33 +1074,44 @@ def japan_source_price_order_acceptance_passed(report):
     if not (report.get('countAcceptance') == JAPAN_SOURCE_COUNT_POLICY and
             all(report.get(key) is True for key in ('japanSourcePriceOrderRequired', 'japanSourcePriceOrderPassed',
                 'japanPriceSortRequired', 'japanPriceSortPassed', 'japanCountDisplayPassed')) and
-            proof.get('contract') == 'japan-source-price-order-browser-v1' and proof.get('selectedThroughUi') is True and
+            proof.get('contract') == 'japan-source-price-order-browser-v2' and proof.get('selectedThroughUi') is True and
             proof.get('city') == 'Новокузнецк' and equal_integer(proof.get('powerTo'), 160) and
-            proof.get('priceBasis') == 'source_FINISH_JPY' and proof.get('priceOrderScope') == 'source_order_across_append' and
+            proof.get('priceBasis') == 'source_FINISH_JPY' and
+            proof.get('priceOrderScope') == 'source_order_within_power_lanes_across_append' and
             proof.get('sourcePriceOrderAcrossPages') is True and proof.get('globalDeliveredPriceOrderClaimed') is False and
             proof.get('powerLanesReordered') is False and equal_integer(proof.get('explicitApiReads'), 2) and
             equal_integer(proof.get('ordinaryAppendRequests'), 2) and proof.get('liveExhaustiveScan') is False and
-            equal_integer(proof.get('pageErrors'), 0) and proof.get('countSourceQueryChangesWithPower') is True and
+            equal_integer(proof.get('pageErrors'), 0) and proof.get('countRequestedQueryChangesWithPower') is True and
+            proof.get('countSourceQueryPreservedWithPower') is True and
             isinstance(counts, list) and len(counts) == 2 and count_passed(counts[0], False) and count_passed(counts[1], True) and
-            counts[0]['summary']['sourceCountProof']['sourceQueryHash'] != counts[1]['summary']['sourceCountProof']['sourceQueryHash'] and
+            counts[0]['summary']['sourceCountProof']['sourceQueryHash'] == counts[1]['summary']['sourceCountProof']['sourceQueryHash'] and
+            counts[0]['summary']['sourceCountProof']['requestedQueryHash'] != counts[1]['summary']['sourceCountProof']['requestedQueryHash'] and
             proof.get('directions') == ['totalRubDesc', 'totalRub'] and isinstance(checks, list) and len(checks) == 2):
         return False
     summary = counts[1]['summary']
     for index, check in enumerate(checks):
         if not isinstance(check, dict):
             return False
-        cursor, prices = check.get('cursor'), check.get('sourcePrices')
+        cursor, prices, lanes = check.get('cursor'), check.get('sourcePrices'), check.get('powerLanes')
         if not (check.get('sort') == proof['directions'][index] and equal_integer(check.get('status'), 200) and
                 all(equal_integer(check.get(key), expected) for key, expected in
                     (('loadedBefore', 24), ('added', 24), ('loadedAfter', 48), ('shown', 48), ('duplicateIds', 0))) and
                 all(check.get(key) is True for key in ('oldIdsPreserved', 'orderPreserved', 'sourcePricesMatchApi',
-                    'sourcePriceOrder', 'sameFilter', 'followedEmittedCursor')) and
-                isinstance(cursor, str) and cursor.startswith('j1.') and source_count_cursor(cursor) and
+                    'sourcePriceOrder', 'sourcePriceOrderWithinPowerLanes', 'knownBeforeUnknown',
+                    'sameFilter', 'followedEmittedCursor')) and
+                isinstance(cursor, str) and cursor.startswith('j2.') and source_count_cursor(cursor) and
                 check.get('continuationCursor') == cursor and page_passed(check.get('firstPage'), True) and page_passed(check.get('nextPage'), False) and
-                all(hash64(check.get(key)) for key in ('beforeIdsSha256', 'addedIdsSha256', 'afterIdsSha256', 'idsSha256', 'sourcePricesSha256')) and
+                all(hash64(check.get(key)) for key in ('beforeIdsSha256', 'addedIdsSha256', 'afterIdsSha256',
+                    'idsSha256', 'sourcePricesSha256', 'powerLanesSha256')) and
                 check['idsSha256'] == check['afterIdsSha256'] and isinstance(prices, list) and len(prices) == 48 and
+                isinstance(lanes, list) and len(lanes) == len(prices) and
+                check['powerLanesSha256'] == digest(json.dumps(lanes, separators=(',', ':'))) and
+                all(lane in ('known', 'unknown') for lane in lanes) and
+                all(lanes[position - 1] != 'unknown' or lanes[position] == 'unknown'
+                    for position in range(1, len(lanes))) and
                 all(positive(price) for price in prices) and
-                all(prices[position - 1] >= prices[position] if index == 0 else prices[position - 1] <= prices[position]
+                all(lanes[position - 1] != lanes[position] or
+                    (prices[position - 1] >= prices[position] if index == 0 else prices[position - 1] <= prices[position])
                     for position in range(1, len(prices))) and
                 ui_passed(check.get('initialCount'), summary, 24) and ui_passed(check.get('finalCount'), summary, 48)):
             return False

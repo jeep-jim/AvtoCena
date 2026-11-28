@@ -10,7 +10,7 @@ const need = (value, code) => { if (!value) throw Error('japan_browser_source_pr
 const hash = value => createHash('sha256').update(value).digest('hex');
 const positive = value => typeof value === 'number' && Number.isFinite(value) && value > 0;
 const normalized = value => value.replace(/[\u00a0\u202f]/g, ' ').replace(/\s+/g, ' ').trim();
-export const JAPAN_SOURCE_PRICE_ORDER_CONTRACT = 'japan-source-price-order-browser-v1';
+export const JAPAN_SOURCE_PRICE_ORDER_CONTRACT = 'japan-source-price-order-browser-v2';
 
 export function japanSourcePriceOrderRequirement(value) {
   need(value === undefined || value === '0' || value === '1', 'option');
@@ -45,22 +45,32 @@ export function japanSourcePriceContinuation(value, {sort, expectedCursor} = {})
     && (!query.has('marketPage') || query.get('marketPage') === '1')
     && (!query.has('view') || ['grid', 'list'].includes(query.get('view'))), 'continuation');
   const cursor = query.get('after');
-  need(checkedJapanSourceCountCursor(cursor).version === 'j1'
+  need(checkedJapanSourceCountCursor(cursor).version === 'j2'
     && (expectedCursor === undefined || cursor === expectedCursor), 'emitted_cursor');
   return cursor;
 }
 
-/** FINISH may be fractional. Compare its raw positive value, not the rounded
- * label and not the independently displayed delivered RUB estimate. Power
- * certainty does not partition an explicitly price-ordered source walk. */
+/** FINISH may be fractional. Compare its raw positive value within each power
+ * phase, including the append boundary. All known rows precede unknown rows;
+ * crossing that one phase boundary may restart the source-price sequence. */
 export function verifyJapanSourcePriceRows(rows, sort) {
   need(['totalRub', 'totalRubDesc'].includes(sort) && Array.isArray(rows) && rows.length > 0 && rows.length <= 48
-    && rows.every(row => /^ajes-stats-[A-Za-z0-9_-]{1,64}$/.test(row?.id || '') && positive(row.priceJpy))
+    && rows.every(row => /^ajes-stats-[A-Za-z0-9_-]{1,64}$/.test(row?.id || '') && positive(row.priceJpy)
+      && ['known', 'unknown'].includes(row.powerLane))
     && new Set(rows.map(row => row.id)).size === rows.length, 'rows');
-  for (let index = 1; index < rows.length; index++)
-    need(sort === 'totalRub' ? rows[index - 1].priceJpy <= rows[index].priceJpy
-      : rows[index - 1].priceJpy >= rows[index].priceJpy, 'global_order');
-  return {shown: rows.length, sourcePrices: rows.map(row => row.priceJpy),
+  let unknownStarted = false;
+  for (let index = 0; index < rows.length; index++) {
+    const row = rows[index];
+    if (row.powerLane === 'unknown') unknownStarted = true;
+    else need(!unknownStarted, 'power_order');
+    if (index && rows[index - 1].powerLane === row.powerLane)
+      need(sort === 'totalRub' ? rows[index - 1].priceJpy <= row.priceJpy
+        : rows[index - 1].priceJpy >= row.priceJpy, 'lane_price_order');
+  }
+  const powerLanes = rows.map(row => row.powerLane);
+  return {shown: rows.length, sourcePrices: rows.map(row => row.priceJpy), powerLanes,
+    powerLanesSha256: hash(JSON.stringify(powerLanes)), knownBeforeUnknown: true,
+    sourcePriceOrderWithinPowerLanes: true,
     idsSha256: hash(JSON.stringify(rows.map(row => row.id))),
     sourcePricesSha256: hash(JSON.stringify(rows.map(row => row.priceJpy))), sourcePriceOrder: true};
 }
@@ -73,7 +83,11 @@ export function verifyJapanSourcePriceDomRows(rows) {
       && positive(Number(row.priceAttribute)) && typeof row.priceText === 'string'
       && normalized(row.priceText) === normalized('Аукцион: '
         + Number(row.priceAttribute).toLocaleString('ru-RU', {maximumFractionDigits: 2}) + ' ¥'), 'dom_price');
-    return {id: row.id, priceJpy: Number(row.priceAttribute)};
+    need(['known', 'unknown'].includes(row.powerPhase) && [0, 1].includes(row.supplierMarkers)
+      && (row.powerPhase === 'known' ? row.unknownMarkers === 0
+        : row.unknownMarkers === 1 && row.unknownVisible === true
+          && normalized(row.unknownText) === 'Мощность не указана' && row.supplierMarkers === 0), 'dom_power');
+    return {id: row.id, priceJpy: Number(row.priceAttribute), powerLane: row.powerPhase};
   });
 }
 
@@ -83,7 +97,12 @@ export function verifyJapanSourcePriceAppend({before, items, after, sort}) {
   const added = items.map(row => {
     need(row?.market === 'japan' && row.japanCatalogPriceOrder === 'auction'
       && positive(row.japanAuctionPriceJpy), 'source_price');
-    return {id: row.id, priceJpy: row.japanAuctionPriceJpy};
+    const supplier = row.japanSupplierPower;
+    const known = positive(row.powerHp) || supplier?.offerId === row.id && supplier.unit === 'hp'
+      && supplier.source === 'ajes_pw' && Number.isSafeInteger(supplier.hp) && supplier.hp > 0;
+    need(row.japanPowerUnknown === true ? !known : known, 'source_power');
+    return {id: row.id, priceJpy: row.japanAuctionPriceJpy,
+      powerLane: row.japanPowerUnknown === true ? 'unknown' : 'known'};
   });
   const expected = [...before, ...added];
   need(JSON.stringify(after) === JSON.stringify(expected), 'append_identity_order');
@@ -126,18 +145,22 @@ export async function readJapanSourcePriceDomRows(view, expectedCount, sort) {
       const match = /\/cars\/offer\/([^/?#]+)/.exec(link.getAttribute('href') || ''); return match ? [match[1]] : [];
     }))];
     const prices = [...node.querySelectorAll('[data-japan-auction-price-jpy]')];
+    const unknown = [...node.querySelectorAll('[data-japan-power-unknown="true"]')];
     return {id: ids.length === 1 ? ids[0] : null, priceNodes: prices.length,
       priceAttribute: prices[0]?.getAttribute('data-japan-auction-price-jpy') ?? null,
-      priceText: prices[0]?.textContent ?? null};
+      priceText: prices[0]?.textContent ?? null, powerPhase: node.getAttribute('data-japan-power-phase'),
+      unknownMarkers: unknown.length, unknownVisible: unknown.length === 1 && unknown[0].getClientRects().length > 0,
+      unknownText: unknown.length === 1 ? unknown[0].textContent || '' : '',
+      supplierMarkers: node.querySelectorAll('[data-japan-supplier-power="true"]').length};
   }));
   const result = verifyJapanSourcePriceDomRows(rows);
   need(result.length === expectedCount, 'dom_count');
   return result;
 }
 
-/** Restore the supplier's globally ordered walk in the same bounded visitor
- * journey. Both directions include their actual page-two response; a page-
- * local sort with a cheaper/dearer restart at the boundary must fail. */
+/** Verify the source order in the same bounded visitor journey, preserving
+ * known-before-unknown phases. Both directions include their actual page-two
+ * response; a price restart inside a phase at the page boundary must fail. */
 export async function runJapanSourcePriceOrderBrowser({context, report, read, capture, onStage, onPage,
   verifyPage, verifyFullPage, verifyPowerPage, verifyVehiclePolicy, pageReadEvidence, readSsrPageEvidence,
   observeResponse = () => {}}) {
@@ -171,20 +194,23 @@ export async function runJapanSourcePriceOrderBrowser({context, report, read, ca
   await selectJapanPowerBeforePriceSort(view, progress);
   const powerCount = await count(true);
   need(counts[0].summary.sourceCountProof.requestedQueryHash !== powerCount.summary.sourceCountProof.requestedQueryHash
-    && counts[0].summary.sourceCountProof.sourceQueryHash !== powerCount.summary.sourceCountProof.sourceQueryHash,
+    && counts[0].summary.sourceCountProof.sourceQueryHash === powerCount.summary.sourceCountProof.sourceQueryHash,
   'power_count_query');
   for (const sort of ['totalRubDesc', 'totalRub']) {
     onStage(sort === 'totalRubDesc' ? 'stability_source_price_desc' : 'stability_source_price_asc');
+    const previousHref = await view.locator('main.ac-ajes-catalog a.ac-catalog-more[role="button"]').getAttribute('href');
+    const previousCursor = previousHref ? new URL(previousHref, ORIGIN).searchParams.get('after') : null;
     await selectJapanPriceSort(view, sort, progress, {sourcePriceOrder: true});
-    // The URL/control may update before the new document. The emitted j1 page2
-    // cursor distinguishes the new 24-row first page from old j2/48-row state.
-    await view.waitForFunction(() => {
+    // The URL/control can update before the result. Wait for the new sort's
+    // emitted phase cursor and its own 24-row first page, not the old cards.
+    await view.waitForFunction(({sort, previousCursor}) => {
       const root = document.querySelector('main.ac-ajes-catalog');
       const href = root?.querySelector('a.ac-catalog-more[role="button"]')?.getAttribute('href');
-      try { return new URL(href, location.origin).searchParams.get('after')?.startsWith('j1.')
+      try { const query = new URL(href, location.origin).searchParams;
+        return query.get('sort') === sort && query.get('after')?.startsWith('j2.') && query.get('after') !== previousCursor
         && root.querySelectorAll('article.ac-catalog-card,article.ac-catalog-list-row').length === 24; }
       catch { return false; }
-    }, undefined, {timeout: 60_000});
+    }, {sort, previousCursor}, {timeout: 60_000});
     const before = await readJapanSourcePriceDomRows(view, 24, sort);
     verifyJapanSourcePriceRows(before, sort);
     const firstPage = verifyJapanSourcePriceFreshReceipts(await readSsrPageEvidence(view, {page: 1, after: ''}), {ssr: true});
@@ -213,7 +239,9 @@ export async function runJapanSourcePriceOrderBrowser({context, report, read, ca
     const nextPage = verifyJapanSourcePriceFreshReceipts(pageReadEvidence(next), {reads: next.reads, observedAt: next.observedAt});
     if (next.hasMore) {
       const following = checkedJapanSourceCountCursor(next.nextCursor, 3);
-      need(following.version === 'j1' && following.queryHash === cursorProof.queryHash, 'next_cursor');
+      need(following.version === 'j2' && following.queryHash === cursorProof.queryHash
+        && following.evidenceEpoch === cursorProof.evidenceEpoch
+        && (!cursor.startsWith('j2.u.') || next.nextCursor.startsWith('j2.u.')), 'next_cursor');
     } else need(next.nextCursor === null, 'next_cursor');
     const after = await readJapanSourcePriceDomRows(view, 48, sort);
     const append = verifyJapanSourcePriceAppend({before, items: next.items, after, sort});
@@ -228,9 +256,10 @@ export async function runJapanSourcePriceOrderBrowser({context, report, read, ca
   }
   need(errors === 0 && progress.explicitApiReads === 2 && checks.length === 2, 'complete');
   report.checks.priceSort = {contract: JAPAN_SOURCE_PRICE_ORDER_CONTRACT, selectedThroughUi: true, city: CITY, powerTo: 160,
-    directions: ['totalRubDesc', 'totalRub'], priceBasis: 'source_FINISH_JPY', priceOrderScope: 'source_order_across_append',
+    directions: ['totalRubDesc', 'totalRub'], priceBasis: 'source_FINISH_JPY', priceOrderScope: 'source_order_within_power_lanes_across_append',
     sourcePriceOrderAcrossPages: true, globalDeliveredPriceOrderClaimed: false, powerLanesReordered: false,
-    counts, countSourceQueryChangesWithPower: true, explicitApiReads: 2, ordinaryAppendRequests: 2,
+    counts, countRequestedQueryChangesWithPower: true, countSourceQueryPreservedWithPower: true,
+    explicitApiReads: 2, ordinaryAppendRequests: 2,
     liveExhaustiveScan: false, pageErrors: errors, checks};
   report.checks.countDisplay = {loadedCounts: [24, 24, 24, 48, 24, 48],
     visibleAfterEverySelection: true, appendUpdatesLoadedCount: true, supplierCountNotPresentedAsExact: true,

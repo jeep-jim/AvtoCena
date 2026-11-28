@@ -180,30 +180,31 @@ export function fixtureResult(query, now) {
     powerFilterSummary:{shown:24,localPower:0,supplierPower:24,unknownPower:0}};
 }
 
-/** The controlled successor transport has one source-price sequence across
- * pages. Its RUB estimates deliberately disagree and unknown power interleaves,
- * so the old page-local/lane sort cannot accidentally satisfy the new proof. */
+/** The controlled transport has 30 known and 42 unknown rows. Each phase walks
+ * the same source-price order across pages; its boundary occurs on page two
+ * and resets prices. RUB estimates deliberately disagree with that order. */
 export function sourcePriceFixtureResult(query, now) {
   const base = fixtureResult(query, now), power = query.powerTo === '160';
   if (query.countOnly === '1') {
-    const total = power ? 800 : 1000;
+    const total = 1000;
     return {ok: true, total: null, items: [], countIncomplete: true,
       countSummary: {total, stale: false, observedAt: now, upperBound: true, precision: 'source-upper-bound',
-        selectionScope: 'source-candidates', sourceScopeComplete: true,
+        selectionScope: 'source-candidates', sourceScopeComplete: !power,
         sourceCountProof: {version: 1, kind: 'japan-source-count', predicateVersion: 'japan-source-candidates-v1',
-          requestedQueryHash: japanExactCountQueryHash(query), sourceQueryHash: hash('controlled source PW:' + power),
+          requestedQueryHash: japanExactCountQueryHash(query), sourceQueryHash: hash('controlled source without PW'),
           evidenceEpoch: hash('controlled source price epoch'), sourceTotal: total, sourceObservedAt: now,
-          sourceScopeComplete: true, directoryComplete: true}}};
+          sourceScopeComplete: !power, directoryComplete: true}}};
   }
   const page = Number(query.page || 1), sort = query.sort || '';
   let items = base.items;
   if (sort) items = Array.from({length: 24}, (_, index) => {
-    const rank = sort === 'totalRubDesc' ? 72 - ((page - 1) * 24 + index) : (page - 1) * 24 + index + 1;
+    const position = (page - 1) * 24 + index, unknown = position >= 30;
+    const rank = sort === 'totalRubDesc' ? unknown ? 102 - position : 30 - position : position + 1;
     const id = 'ajes-stats-sort-' + (Math.floor((rank - 1) / 24) + 1) + '-' + ((rank - 1) % 24);
-    const price = rank * 10000 + 0.25, row = {...base.items[index], id,
+    const price = (unknown ? (rank - 30) * 5000 : rank * 20000) + 0.25, row = {...base.items[index], id,
       japanAuctionPriceJpy: price, japanCatalogPriceOrder: 'auction',
       operational: {...base.items[index].operational, raw: {finalPriceJpy: price}}};
-    if (rank % 5 === 0) { delete row.japanSupplierPower; row.japanPowerUnknown = true; }
+    if (unknown) { delete row.japanSupplierPower; row.japanPowerUnknown = true; }
     else row.japanSupplierPower = {...row.japanSupplierPower, offerId: id};
     return row;
   });
@@ -211,8 +212,13 @@ export function sourcePriceFixtureResult(query, now) {
   const receipt = {version: 1, requestId: '00000000-0000-4000-8000-' + String(page).padStart(12, '0'),
     queryHash, table: 'stats', kind: 'list', page, pageSize: 24, startedAt: now, finishedAt: now,
     stage: 'storage', supplierAttempted: false, outcome: 'fresh', observedAt: now};
+  const unknownShown = Math.max(0, page * 24 - 30), nextUnknown = page * 24 >= 30;
+  const skip = nextUnknown ? unknownShown % 24 : 0;
+  const nextCursor = 'j2.' + (nextUnknown ? 'u' : 'k') + '.' + (nextUnknown ? Math.floor(unknownShown / 24) + 1 : page + 1)
+    + '.' + skip + '.' + (page + 1) + '.' + queryHash + '.' + hash('controlled source price epoch')
+    + '.' + (skip ? hash('controlled unknown membership:' + sort) : '-');
   return {...base, items, reads: 1, sourceReceipts: [receipt],
-    nextCursor: sort ? 'j1.' + (page + 1) + '.0.' + (page + 1) + '.' + queryHash + '.-' : base.nextCursor,
+    nextCursor: sort ? nextCursor : base.nextCursor,
     powerFilterSummary: {shown: 24, localPower: 0,
       supplierPower: items.filter(row => row.japanSupplierPower).length,
       unknownPower: items.filter(row => row.japanPowerUnknown).length},
@@ -371,7 +377,8 @@ async function main() {
         report.cases.push({name:remount?'remounted_controls':'preserved_controls',passed:true,
           sequence:result.checks.priceSort.directions,powerSelectedThroughUi:true,countChecks:result.checks.countDisplay,
           ...(sourcePriceOrder?{sourcePriceOrderAcrossPages:true,rawJpyIncludingFractions:true,
-            unknownPowerInterleaves:true,deliveredRubNotUsedForOrder:true}:{displayedCityPriceOrder:true,cityReversesBaseOrder:true}),
+            knownBeforeUnknown:true,sourcePriceOrderWithinPowerLanes:true,
+            phaseBoundaryOnSecondPage:true,deliveredRubNotUsedForOrder:true}:{displayedCityPriceOrder:true,cityReversesBaseOrder:true}),
           failedAppendKeeps48:true,pendingKeeps48:true,
           changedQueryRestartsAt24:true,lateOldAggregateIgnored:true,pageErrors:0,requests:state.requests.length,
           helperChecks:result.checks.priceSort});

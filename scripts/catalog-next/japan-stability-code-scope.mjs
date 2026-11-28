@@ -218,9 +218,7 @@ export const JAPAN_STABILITY_SOURCE_PRICE_ORDER_CODE_PATHS = Object.freeze([
   'apps/web/components/home/HomeJapanFilteredRail.tsx',
   'apps/web/lib/catalog/ajes-catalog.ts',
   'apps/web/lib/catalog/ajes-count-display.ts',
-  'apps/web/lib/catalog/ajes-query.ts',
   'apps/web/lib/catalog/catalog-sort.ts',
-  'apps/web/lib/catalog/japan-source-power-query.ts',
   'tests/ajes-catalog-count-continuation.test.ts',
   'tests/ajes-catalog-progressive.test.ts',
   'tests/ajes-count-display.test.ts',
@@ -233,7 +231,6 @@ export const JAPAN_STABILITY_SOURCE_PRICE_ORDER_CODE_PATHS = Object.freeze([
   'tests/japan-auction-sort-label.test.ts',
   'tests/japan-count-lifecycle.test.ts',
   'tests/japan-rail-visibility.test.ts',
-  'tests/japan-source-power-query.test.ts',
   'tests/japan-source-power.test.ts',
 ]);
 const reviewedProfiles = Object.freeze([JAPAN_STABILITY_CODE_PATHS, JAPAN_STABILITY_UI_CODE_PATHS,
@@ -495,8 +492,9 @@ export function japanA4Power160ContinuationAcceptancePassed(report, options) {
     && proof.fullSelectionExhaustionClaimed === false && proof.liveExhaustiveScan === false && proof.pageErrors === 0;
 }
 
-/** The successor proves the raw supplier price order over the actual combined
- * 48 rows, in both directions. It never rebrands delivered RUB as that order. */
+/** The successor proves the raw supplier price order within each power lane
+ * over the actual combined 48 rows. Known power always precedes unknown power;
+ * source JPY order is never presented as delivered RUB order. */
 export function japanSourcePriceOrderAcceptancePassed(report) {
   const proof = report?.checks?.priceSort, checkedAt = Date.parse(report?.checkedAt);
   const hash64 = value => typeof value === 'string' && /^[a-f0-9]{64}$/.test(value);
@@ -533,26 +531,34 @@ export function japanSourcePriceOrderAcceptancePassed(report) {
   if (!Number.isFinite(checkedAt) || report?.countAcceptance !== JAPAN_SOURCE_COUNT_POLICY
     || report.japanSourcePriceOrderRequired !== true || report.japanSourcePriceOrderPassed !== true
     || report.japanPriceSortRequired !== true || report.japanPriceSortPassed !== true || report.japanCountDisplayPassed !== true
-    || proof?.contract !== 'japan-source-price-order-browser-v1' || proof.selectedThroughUi !== true
+    || proof?.contract !== 'japan-source-price-order-browser-v2' || proof.selectedThroughUi !== true
     || proof.city !== 'Новокузнецк' || proof.powerTo !== 160 || proof.priceBasis !== 'source_FINISH_JPY'
-    || proof.priceOrderScope !== 'source_order_across_append' || proof.sourcePriceOrderAcrossPages !== true
+    || proof.priceOrderScope !== 'source_order_within_power_lanes_across_append' || proof.sourcePriceOrderAcrossPages !== true
     || proof.globalDeliveredPriceOrderClaimed !== false || proof.powerLanesReordered !== false
     || proof.explicitApiReads !== 2 || proof.ordinaryAppendRequests !== 2 || proof.liveExhaustiveScan !== false || proof.pageErrors !== 0
-    || proof.countSourceQueryChangesWithPower !== true
+    || proof.countRequestedQueryChangesWithPower !== true || proof.countSourceQueryPreservedWithPower !== true
     || !Array.isArray(proof.counts) || proof.counts.length !== 2 || !countPassed(proof.counts[0], false) || !countPassed(proof.counts[1], true)
-    || proof.counts[0].summary.sourceCountProof.sourceQueryHash === proof.counts[1].summary.sourceCountProof.sourceQueryHash
+    || proof.counts[0].summary.sourceCountProof.sourceQueryHash !== proof.counts[1].summary.sourceCountProof.sourceQueryHash
+    || proof.counts[0].summary.sourceCountProof.requestedQueryHash === proof.counts[1].summary.sourceCountProof.requestedQueryHash
     || JSON.stringify(proof.directions) !== JSON.stringify(['totalRubDesc', 'totalRub'])
     || !Array.isArray(proof.checks) || proof.checks.length !== 2) return false;
   const summary = proof.counts[1].summary;
   return proof.checks.every((check, index) => check?.sort === proof.directions[index] && check.status === 200
     && check.loadedBefore === 24 && check.added === 24 && check.loadedAfter === 48 && check.shown === 48 && check.duplicateIds === 0
-    && ['oldIdsPreserved', 'orderPreserved', 'sourcePricesMatchApi', 'sourcePriceOrder', 'sameFilter', 'followedEmittedCursor']
+    && ['oldIdsPreserved', 'orderPreserved', 'sourcePricesMatchApi', 'sourcePriceOrder',
+      'sourcePriceOrderWithinPowerLanes', 'knownBeforeUnknown', 'sameFilter', 'followedEmittedCursor']
       .every(key => check[key] === true)
-    && typeof check.cursor === 'string' && check.cursor.startsWith('j1.') && sourceCountCursor(check.cursor)
+    && typeof check.cursor === 'string' && check.cursor.startsWith('j2.') && sourceCountCursor(check.cursor)
     && check.continuationCursor === check.cursor && pagePassed(check.firstPage, true) && pagePassed(check.nextPage, false)
-    && ['beforeIdsSha256', 'addedIdsSha256', 'afterIdsSha256', 'idsSha256', 'sourcePricesSha256'].every(key => hash64(check[key]))
+    && ['beforeIdsSha256', 'addedIdsSha256', 'afterIdsSha256', 'idsSha256', 'sourcePricesSha256', 'powerLanesSha256']
+      .every(key => hash64(check[key]))
     && check.idsSha256 === check.afterIdsSha256 && Array.isArray(check.sourcePrices) && check.sourcePrices.length === 48
+    && Array.isArray(check.powerLanes) && check.powerLanes.length === check.sourcePrices.length
+    && check.powerLanesSha256 === hash(JSON.stringify(check.powerLanes))
+    && check.powerLanes.every((lane, position) => ['known', 'unknown'].includes(lane)
+      && (position === 0 || check.powerLanes[position - 1] !== 'unknown' || lane === 'unknown'))
     && check.sourcePrices.every((price, position) => positive(price) && (position === 0
+      || check.powerLanes[position - 1] !== check.powerLanes[position]
       || (index === 0 ? check.sourcePrices[position - 1] >= price : check.sourcePrices[position - 1] <= price)))
     && uiPassed(check.initialCount, summary, 24) && uiPassed(check.finalCount, summary, 48))
     && proof.checks[0].cursor !== proof.checks[1].cursor;
