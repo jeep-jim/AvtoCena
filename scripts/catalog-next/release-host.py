@@ -161,6 +161,7 @@ JAPAN_STABILITY_SOURCE_COUNT_CODE_FILES = {
     'tests/ajes-model-recovery.test.ts',
     'tests/ajes-source-count-display.test.ts',
     'tests/ajes-source-count.test.ts',
+    'tests/japan-rail-visibility.test.ts',
     'tests/japan-source-power.test.ts',
 }
 JAPAN_STABILITY_HOME_CODE_FILES = JAPAN_STABILITY_RAILS_CODE_FILES | {

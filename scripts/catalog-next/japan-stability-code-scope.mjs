@@ -188,6 +188,7 @@ export const JAPAN_STABILITY_SOURCE_COUNT_CODE_PATHS = Object.freeze([
   'tests/ajes-model-recovery.test.ts',
   'tests/ajes-source-count-display.test.ts',
   'tests/ajes-source-count.test.ts',
+  'tests/japan-rail-visibility.test.ts',
   'tests/japan-source-power.test.ts',
 ]);
 const reviewedProfiles = Object.freeze([JAPAN_STABILITY_CODE_PATHS, JAPAN_STABILITY_UI_CODE_PATHS,
