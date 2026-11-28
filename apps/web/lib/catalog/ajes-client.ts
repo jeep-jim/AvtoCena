@@ -353,7 +353,10 @@ export function createAjesClient(deps:Dependencies) {
           if(query.kind==='count'||query.kind==='models'||query.kind==='makes'||query.kind==='colors'){
             const totalOf=(r:any)=>{const match=Object.entries(r).find(([key])=>['total','count(*)','count',query.kind==='count'?'tag0':(query.kind==='makes'||query.kind==='colors')?'tag1':'tag2'].includes(key.toLowerCase().replace(/\s/g,'')));const value=match?.[1];if(!/^\d+$/.test(String(value))||!Number.isSafeInteger(Number(value)))throw invalidResponse('aggregate_shape','total_invalid');return Number(value);};
             if(query.kind==='count'&&rows.length!==1)throw invalidResponse('aggregate_shape','count_row_count');
-            const models=query.kind==='models'?rows.map(r=>({make:String(r.MARKA_NAME??r.marka_name??'').trim(),model:String(r.MODEL_NAME??r.model_name??'').trim(),total:totalOf(r)})).filter(r=>r.make&&r.model):undefined;
+            const models=query.kind==='models'?rows.map(r=>({make:String(r.MARKA_NAME??r.marka_name??'').trim(),model:String(r.MODEL_NAME??r.model_name??'').trim(),total:totalOf(r)})):undefined;
+            // Dropping a nameless aggregate row would hide incomplete metadata
+            // behind a successful cached page. Reject before any persistence.
+            if(models?.some(model=>!model.make||!model.model))throw new AjesUnavailable('invalid_response');
             const makes=query.kind==='makes'?rows.map(r=>({make:String(r.MARKA_NAME??r.marka_name??'').trim(),total:totalOf(r)})):undefined;
             if(makes?.some(m=>!m.make))throw invalidResponse('aggregate_shape','make_name_missing');
             const colors=query.kind==='colors'?rows.map(r=>({color:String(r.COLOR??r.color??'').trim(),total:totalOf(r)})).filter(r=>r.color):undefined;
@@ -579,19 +582,29 @@ function quotaNumber(value:string|null){return value!==null&&/^\d+$/.test(value)
 /** Supplier responses are capped at 500 rows. Never treat a full page as a complete directory. */
 export async function readAjesModelDirectory(client:ReturnType<typeof createAjesClient>,input:Record<string,unknown>,ip:string){
  const models:Array<{make:string;model:string;total:number}>=[];
- let observedAt='',stale=false;
+ let observedAt='',observedTime=Infinity,stale=false;
  const identities=new Set<string>();
- for(let page=1;page<=10;page++){
+ // Names for this visitor's query are metadata. Continue within the client's
+ // existing page grammar until a short response proves directory exhaustion.
+ for(let page=1;;page++){
   const result=await client.read({...input,aggregate:'models',page},ip);
-  observedAt=observedAt||result.observedAt;stale=stale||Boolean(result.stale);
-  for(const model of result.models||[]){
+  const pageModels=result?.models,at=Date.parse(result?.observedAt||'');
+  if(!Array.isArray(pageModels)||result.page!==page||result.pageSize!==500
+    ||!Number.isSafeInteger(result.received)||result.received<0||result.received>500
+    ||pageModels.length!==result.received||!Number.isFinite(at))throw new AjesUnavailable('invalid_response');
+  if(at<observedTime){observedTime=at;observedAt=result.observedAt;}
+  stale=stale||Boolean(result.stale||result.partial);
+  for(const model of pageModels){
+   if(!model||typeof model.make!=='string'||!model.make.trim()||typeof model.model!=='string'||!model.model.trim()
+     ||!Number.isSafeInteger(model.total)||model.total<0)throw new AjesUnavailable('invalid_response');
    const key=JSON.stringify([model.make,model.model]);
    if(identities.has(key))throw new AjesUnavailable('directory_page_repeated');
    identities.add(key);models.push(model);
   }
-  if(result.received<500)return {models,observedAt,stale};
+  // A retained page is useful metadata, but a refused refresh must not cause
+  // another source request or turn an unfinished directory into a fresh one.
+  if(stale||result.received<500)return {models,observedAt,stale};
  }
- throw new AjesUnavailable('directory_too_large');
 }
 
 /** A brand directory is independent of the visible list and model pagination. */

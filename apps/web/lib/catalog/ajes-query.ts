@@ -21,13 +21,16 @@ export class AjesCursorRefreshRequired extends AjesInputError {}
  * Names retain the same SQL validation; transport-size failures remain explicit.
  */
 export type AjesResolvedModels = {exact:string[];families:string[]};
+/** Observed source aliases of a bounded user make selection; URL parsing
+ * never accepts this descriptor and every name retains normal SQL validation. */
+export type AjesResolvedMakes = {exact:string[]};
 /** Counter dimensions only. Identity, images, auction dates and lot numbers
  * never enter a census projection. Optional columns need an observed schema. */
 export const AJES_CENSUS_FIELDS = ['MARKA_NAME','MODEL_NAME','YEAR','GRADE','KUZOV','ENG_V','PRIV','KPP','TIME','PW','STATUS','COLOR','BODY_TYPE','VEHICLE_CATEGORY','FUEL'] as const;
 export type AjesCensusField = typeof AJES_CENSUS_FIELDS[number];
 export const AJES_CENSUS_REQUIRED_FIELDS = AJES_CENSUS_FIELDS.slice(0,12);
-export type AjesQuery = {pickup?:boolean;salePeriod?:string; table?: AjesTable; aggregate?: 'count'|'models'|'makes'|'colors'|'census'; countIdentity?:boolean; censusFields?:AjesCensusField[]; correctionId?:string; sort?: string; color?:string; fuel?:string; transmission?:string; drive?:string; auctionGrade?:string; id?: string; make?: string; model?: string; modelFamilies?:string; resolvedModels?:AjesResolvedModels; chassis?:string; frameNumber?:string; lotNumber?:string; sourcePriceTo?:number; powerFrom?:number; powerTo?:number; yearFrom?: number; yearTo?: number; mileageFrom?:number; mileageTo?: number; engineFrom?:number; engineTo?:number; page?: number; pageSize?: number};
-const keys = new Set(['pickup','salePeriod','aggregate','countIdentity','censusFields','correctionId','sort','color','fuel','transmission','drive','auctionGrade','table','id','make','model','modelFamilies','resolvedModels','chassis','frameNumber','lotNumber','sourcePriceTo','powerFrom','powerTo','yearFrom','yearTo','mileageFrom','mileageTo','engineFrom','engineTo','page','pageSize']);
+export type AjesQuery = {pickup?:boolean;salePeriod?:string; table?: AjesTable; aggregate?: 'count'|'models'|'makes'|'colors'|'census'; countIdentity?:boolean; censusFields?:AjesCensusField[]; correctionId?:string; sort?: string; color?:string; fuel?:string; transmission?:string; drive?:string; auctionGrade?:string; id?: string; make?: string; resolvedMakes?:AjesResolvedMakes; model?: string; modelFamilies?:string; resolvedModels?:AjesResolvedModels; chassis?:string; frameNumber?:string; lotNumber?:string; sourcePriceTo?:number; powerFrom?:number; powerTo?:number; yearFrom?: number; yearTo?: number; mileageFrom?:number; mileageTo?: number; engineFrom?:number; engineTo?:number; page?: number; pageSize?: number};
+const keys = new Set(['pickup','salePeriod','aggregate','countIdentity','censusFields','correctionId','sort','color','fuel','transmission','drive','auctionGrade','table','id','make','resolvedMakes','model','modelFamilies','resolvedModels','chassis','frameNumber','lotNumber','sourcePriceTo','powerFrom','powerTo','yearFrom','yearTo','mileageFrom','mileageTo','engineFrom','engineTo','page','pageSize']);
 /** These fixed predicates select the same raw rows. Sharing their cache identity
  * lets local power changes reuse an already requested page without another AJ read.
  * Keep the actual compact SQL on the wire for the existing URI-size boundary.
@@ -58,7 +61,14 @@ export function ajesQuery(input: unknown,driveIndex:CalculationIndex|null=null) 
     return {table, kind:'detail' as const, sql:`select * from ${table} where id='${q.id}'`, id:q.id, page:1, pageSize:1};
   }
   const values=(value:unknown,separator:string)=>{if(value===undefined)return [];if(typeof value!=='string')throw new AjesInputError();const parts=value.split(separator).map(v=>name(v)!);if(parts.length>20||parts.some(v=>!v))throw new AjesInputError();return [...new Set(parts)];};
-  const makes=values(q.make,',');let models=values(q.model,'|'),families=values(q.modelFamilies,'|');
+  let makes=values(q.make,','),models=values(q.model,'|'),families=values(q.modelFamilies,'|');
+  if(q.resolvedMakes!==undefined){
+    const resolved=q.resolvedMakes;
+    if(!resolved||typeof resolved!=='object'||Array.isArray(resolved)||Object.keys(resolved).some(key=>key!=='exact')
+      ||!Array.isArray(resolved.exact)||!resolved.exact.length)throw new AjesInputError();
+    makes=[...new Set(resolved.exact.map(value=>name(value)!))];
+    if(makes.some(value=>!value))throw new AjesInputError();
+  }
   if(q.resolvedModels!==undefined){
     const resolved=q.resolvedModels;
     if(!resolved||typeof resolved!=='object'||Array.isArray(resolved)||Object.keys(resolved).some(key=>key!=='exact'&&key!=='families')

@@ -4,7 +4,7 @@ import {gzipSync} from 'node:zlib';
 import {ajesQuery,ajesLot,ajesImageUrl,ajesSourceCacheSql} from '../apps/web/lib/catalog/ajes-query';
 import {ajesOffer} from '../apps/web/lib/catalog/ajes-offer';
 import {ajesPowerEstimateHp} from '../apps/web/lib/catalog/ajes-power-estimate';
-import {createAjesClient,readAjesModelDirectory} from '../apps/web/lib/catalog/ajes-client';
+import {AjesUnavailable,createAjesClient,readAjesModelDirectory} from '../apps/web/lib/catalog/ajes-client';
 import {reserveAjesRequest} from '../apps/web/lib/catalog/ajes-quota';
 import {StorageConflictError,type JsonStorage} from '../apps/web/lib/data';
 import {defaultCollectionControls,collectionEnabled} from '../apps/web/lib/catalog/collection-controls-schema';
@@ -68,6 +68,94 @@ test('model directory reads beyond the supplier 500-row cap and detects repeated
  assert.equal(result.models.length,501);assert.equal(queries.length,2);assert.ok(queries[1].endsWith('limit 500,500'));
  const broken=createAjesClient({password:()=> 'secret',assertEnabled:async()=>{},reserve:async()=>{},fetcher:async()=>new Response(JSON.stringify(first))});
  await assert.rejects(()=>readAjesModelDirectory(broken,{},'127.0.0.1'),/directory_page_repeated/);
+});
+
+const directoryRows=(offset:number,length:number)=>Array.from({length},(_,i)=>({MARKA_NAME:'TOYOTA',MODEL_NAME:'MODEL '+String(offset+i).padStart(5,'0'),TAG2:'1'}));
+test('model directory completes 5000 and 5001 names using the same visitor query and real offset grammar',async()=>{
+ for(const total of [5000,5001]){
+  const offsets:number[]=[],scopes:string[]=[];let reserved=0;
+  const client=createAjesClient({password:()=> 'private-fixture',assertEnabled:async()=>{},reserve:async(table,kind)=>{
+   assert.equal(table,'stats');assert.equal(kind,'models');reserved++;
+  },fetcher:async url=>{
+   const parsed=new URL(String(url)),sql=parsed.searchParams.get('sql')!;
+   assert.equal(parsed.searchParams.get('ip'),'203.0.113.11');
+   const match=sql.match(/ limit (\d+),500$/);assert.ok(match);
+   const offset=Number(match[1]);offsets.push(offset);scopes.push(sql.slice(0,match.index));
+   return new Response(JSON.stringify(directoryRows(offset,Math.min(500,Math.max(0,total-offset)))));
+  }});
+  const result=await readAjesModelDirectory(client,{make:'TOYOTA',yearFrom:2020,yearTo:2024},'203.0.113.11');
+  assert.equal(result.models.length,total);assert.equal(new Set(result.models.map(row=>row.model)).size,total);
+  assert.equal(result.models.at(-1)?.model,'MODEL '+String(total-1).padStart(5,'0'));
+  assert.deepEqual(offsets,Array.from({length:11},(_,i)=>i*500));assert.equal(reserved,11);
+  assert.equal(new Set(scopes).size,1);assert.match(scopes[0],/marka_name='TOYOTA'/);assert.match(scopes[0],/year>=2020 and year<=2024/);
+  assert.equal(result.stale,false);assert.ok(Number.isFinite(Date.parse(result.observedAt)));
+ }
+});
+
+test('model directory rejects repeated pages after the former tenth-page limit',async()=>{
+ let calls=0;
+ const client=createAjesClient({password:()=> 'private-fixture',assertEnabled:async()=>{},reserve:async()=>{},fetcher:async url=>{
+  const offset=Number(new URL(String(url)).searchParams.get('sql')!.match(/ limit (\d+),500$/)![1]);calls++;
+  return new Response(JSON.stringify(directoryRows(offset===5000?0:offset,500)));
+ }});
+ await assert.rejects(()=>readAjesModelDirectory(client,{},'203.0.113.11'),/directory_page_repeated/);assert.equal(calls,11);
+});
+
+test('model directory rejects a full response with a missing name instead of silently skipping it',async()=>{
+ let calls=0;
+ const rows=directoryRows(0,500);rows[499].MODEL_NAME='';
+ const client=createAjesClient({password:()=> 'private-fixture',assertEnabled:async()=>{},reserve:async()=>{},fetcher:async()=>{
+  calls++;return new Response(JSON.stringify(calls===1?rows:directoryRows(500,1)));
+ }});
+ await assert.rejects(()=>readAjesModelDirectory(client,{},'203.0.113.11'),/invalid_response/);assert.equal(calls,1);
+});
+
+test('model directory never caches a malformed name as success and repairs after the ordinary failure cooldown',async()=>{
+ for(const missing of ['MARKA_NAME','MODEL_NAME'] as const){
+  let now=Date.now(),calls=0;const saved:unknown[]=[],clock=mock.method(Date,'now',()=>now);
+  try{
+   const invalid=directoryRows(0,1);invalid[0][missing]='';
+   const client=createAjesClient({password:()=> 'private-fixture',assertEnabled:async()=>{},reserve:async()=>{},saveQuery:async(_sql,value)=>{saved.push(value);},fetcher:async()=>{
+    calls++;return new Response(JSON.stringify(calls===1?invalid:directoryRows(0,1)));
+   }});
+   await assert.rejects(()=>client.read({aggregate:'models'},'203.0.113.11'),/invalid_response/);
+   await new Promise(resolve=>setImmediate(resolve));assert.equal(saved.length,0);
+   await assert.rejects(()=>client.read({aggregate:'models'},'203.0.113.11'),/invalid_response/);assert.equal(calls,1);
+   now+=30_001;
+   const result=await readAjesModelDirectory(client,{},'203.0.113.11');
+   assert.equal(result.models.length,1);assert.equal(result.models[0].model,'MODEL 00000');assert.equal(result.stale,false);assert.equal(calls,2);
+   await new Promise(resolve=>setImmediate(resolve));assert.equal(saved.length,1);
+   await readAjesModelDirectory(client,{},'203.0.113.11');assert.equal(calls,2,'only the repaired successful response is cached');
+  }finally{clock.mock.restore();}
+ }
+});
+
+test('model directory stops immediately at provider refusal or quota exhaustion',async()=>{
+ for(const failure of ['visitor_restricted','quota_exhausted']){
+  let reserved=0,calls=0;
+  const client=createAjesClient({password:()=> 'private-fixture',assertEnabled:async()=>{},reserve:async()=>{
+   if(++reserved===2&&failure==='quota_exhausted')throw new AjesUnavailable(failure);
+  },fetcher:async url=>{
+   assert.equal(new URL(String(url)).searchParams.get('ip'),'203.0.113.11');calls++;
+   return new Response(calls===1?JSON.stringify(directoryRows(0,500)):'bot2 fixture');
+  }});
+  await assert.rejects(()=>readAjesModelDirectory(client,{},'203.0.113.11'),new RegExp(failure));
+  assert.equal(reserved,2);assert.equal(calls,failure==='quota_exhausted'?1:2);
+ }
+});
+
+test('model directory retains the oldest observation and stops after saved stale metadata',async()=>{
+ for(const stale of [false,true]){
+  const observedAt=new Date(Date.now()-(stale?60:20)*60_000).toISOString(),length=stale?500:1;
+  const saved={items:[],models:directoryRows(500,length).map(row=>({make:row.MARKA_NAME,model:row.MODEL_NAME,total:1})),page:2,pageSize:500,received:length,observedAt};
+  let calls=0;const storagePages:number[]=[];
+  const client=createAjesClient({password:()=> 'private-fixture',assertEnabled:async()=>{},reserve:async()=>{},readQuery:async sql=>{
+   const offset=Number(sql.match(/ limit (\d+),500$/)![1]);storagePages.push(offset);return offset===500?saved:null;
+  },fetcher:async()=>{calls++;return new Response(calls===1?JSON.stringify(directoryRows(0,500)):'bot2 fixture');}});
+  const result=await readAjesModelDirectory(client,{},'203.0.113.11');
+  assert.equal(result.models.length,500+length);assert.equal(result.observedAt,observedAt);assert.equal(result.stale,stale);
+  assert.equal(calls,stale?2:1);assert.ok(storagePages.every(offset=>offset===0||offset===500),'a stale page cannot trigger another directory page');
+ }
 });
 
 test('confirmed heavy families are excluded without fabricating a listing mass',()=>{

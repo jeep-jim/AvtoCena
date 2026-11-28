@@ -12,6 +12,8 @@ import {publicOffer} from '../apps/web/lib/catalog/storage';
 import {EncyclopediaIdentityResolver} from '../apps/web/lib/catalog/encyclopedia-identity';
 import {readEncyclopediaIdentityResolver} from '../apps/web/lib/catalog/encyclopedia-identity-data';
 import {canonicalCatalogBrand} from '../apps/web/lib/catalog/brands';
+import {resolveAjesMakeNames} from '../apps/web/lib/catalog/ajes-make-resolution';
+import {findSavedAjesSearch} from '../apps/web/lib/catalog/ajes-saved-search';
 
 function rejectSupplierQueue(t:any,message:string){
  const original=DetailReadCache.prototype.get;
@@ -319,6 +321,55 @@ test('raw Japanese make selections and legacy display aliases reach the same exa
    const lists=state.queries.filter(q=>!q.aggregate);assert.ok(lists.every(q=>q.make===make));
   }
  }
+});
+
+const audiMakeAliases=['',' ','-'].flatMap(a=>['',' ','-'].flatMap(b=>['',' ','-'].map(c=>`A${a}U${b}D${c}I`)));
+test('source make aliases beyond twenty retain the identical LIST, COUNT, model-directory and saved scope',async t=>{
+ const {api,state,db}=await realPath(t,[]);
+ const insert=db.prepare('insert into stats values(?,?,?,?,?,?,?,?,?,?,?,?)');
+ const rows=[...audiMakeAliases.map((make,index)=>({id:'make-'+index,make,model:'A4'})),
+  {id:'foreign-make',make:'BMW',model:'A4'},{id:'foreign-model',make:'AUDI',model:'A5'}];
+ for(const row of rows)insert.run(row.id,2021,2,'Sold',120000,row.make,row.model,'5','AT','P','2026-11-27','https://7.tru.ru/imgs/fixtureABC&h=50');
+ const params={market:'japan',make:'Audi',model:'A4',pageSize:'48'};
+ const page=await api.readAjesCatalogPage(params,undefined,{includeCount:false});
+ assert.equal(page.items.length,27,'all observed aliases of one selected make remain in the real catalog query');
+ assert.equal(page.partial,false);assert.equal(page.total,27);assert.equal(page.hasMore,false);
+ assert.deepEqual(new Set(page.items.map((row:any)=>row.make)),new Set(audiMakeAliases),'public rows retain their actual source spellings');
+ const directory=await api.readAjesDirectory(params);
+ assert.equal(directory.models.length,27);assert.equal(directory.stale,false);
+ assert.deepEqual(new Set(directory.models.map((row:any)=>row.make)),new Set(audiMakeAliases));
+ await assert.rejects(api.readAjesCountSummary(JSON.stringify(params)),/census_source_snapshot_unavailable/,'the source-count scope is tested without claiming a positive admitted producer');
+ const scoped=state.queries.filter(query=>query.model==='A4');
+ assert.ok(scoped.some(query=>!query.aggregate)&&scoped.some(query=>query.aggregate==='count')&&scoped.some(query=>query.aggregate==='models'));
+ const expected=new Set(rows.filter(row=>row.model==='A4'&&row.make!=='BMW').map(row=>row.id));
+ for(const query of scoped){
+  assert.equal(query.make,'Audi','the user selection remains separate from the internal source spellings');
+  assert.deepEqual(new Set(query.resolvedMakes?.exact),new Set(audiMakeAliases));
+  const sql=ajesQuery(query).sql,where=sql.split(' where ')[1].split(/ group by | order by /)[0];
+  assert.deepEqual(new Set(db.prepare('select id from stats where '+where).all().map(row=>row.id)),expected);
+  const url=new URL('http://192.0.2.123/api/');
+  url.search=new URLSearchParams({ip:'2001:db8:1234:5678:1234:5678:1234:5678',json:'',code:'x'.repeat(128),sql}).toString();
+  assert.ok(Buffer.byteLength(url.href)<6000,'all aliases fit the existing transport compatibility budget without truncation');
+ }
+ const query=scoped.find(query=>!query.aggregate),observedAt=new Date().toISOString();
+ const snapshots=Object.fromEntries(rows.map(row=>[row.id,{observedAt,items:[{...row,table:'stats',year:2021,status:'Sold',finalPriceJpy:120000,auctionDate:'2026-11-27'}]}]));
+ const saved=findSavedAjesSearch(query,snapshots)!;
+ assert.deepEqual(new Set(saved.items.map((row:any)=>row.id)),expected);assert.equal(saved.partial,true);assert.equal(saved.stale,true);
+ assert.deepEqual(new Set(resolveAjesMakeNames('Audi',rows).split(',')),new Set(audiMakeAliases));
+ assert.deepEqual(params,{market:'japan',make:'Audi',model:'A4',pageSize:'48'});
+ await assert.rejects(api.readAjesDirectory({...params,make:Array(21).fill('AUDI').join(',')}),/ajes_invalid_query/,
+  'source alias expansion cannot collapse an invalid public selection past its existing bound');
+});
+
+test('source make aliases remain private and cannot bypass public choice or SQL validation',()=>{
+ const publicQuery=ajesCatalogQuery({market:'japan',make:'AUDI',resolvedMakes:{exact:['BMW']}});
+ assert.equal(publicQuery.make,'AUDI');assert.equal((publicQuery as any).resolvedMakes,undefined);
+ for(const resolvedMakes of [{exact:["AUDI' OR 1=1"]},{exact:['AUDI%']},{exact:[]},{exact:['AUDI'],sql:'anything'},null])
+  assert.throws(()=>ajesQuery({make:'Audi',resolvedMakes} as any),/ajes_invalid_query/);
+ assert.throws(()=>ajesQuery({make:audiMakeAliases.slice(0,21).join(',')}),/ajes_invalid_query/);
+ assert.throws(()=>ajesQuery({make:audiMakeAliases.slice(0,21).join(','),resolvedMakes:{exact:['AUDI']}} as any),/ajes_invalid_query/);
+ const sql=ajesQuery({make:'Audi',resolvedMakes:{exact:audiMakeAliases}} as any).sql;
+ assert.match(sql,/marka_name in \(/);assert.doesNotMatch(sql,/marka_name='BMW'/);
 });
 
 test('an unavailable or stale make directory preserves exact rows but cannot attest a zero or complete alias selection',async t=>{

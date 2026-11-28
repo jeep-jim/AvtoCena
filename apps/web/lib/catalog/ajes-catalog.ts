@@ -7,7 +7,7 @@ import {sortCatalogRows} from './market-page';
 import {parseCatalogSort} from './catalog-sort';
 import {japanPreviewParameters} from './japan-preview-parameters';
 import {readFilteredAjesPage,readPowerOrderedAjesPage,ajesPowerEvidenceEpoch,assertAjesPowerCursorEpoch} from './ajes-filtered-page';
-import {resolveAjesMakeNames} from './ajes-make-resolution';
+import {resolveAjesMakeSelection} from './ajes-make-resolution';
 import 'server-only';
 import {resolveAjesQueryModels} from './ajes-model-resolution';
 import {ajesResultFilter} from './ajes-result-filter';
@@ -37,7 +37,7 @@ async function resolveMake(query:ReturnType<typeof ajesCatalogQuery>){
  if(!query.make)return {query,makeDirectoryUnavailable:false};
  try{
   const directory=await sourceMakes(query.table);
-  return {query:{...query,make:resolveAjesMakeNames(query.make,directory.makes)},makeDirectoryUnavailable:Boolean(directory.stale)};
+  return {query:{...query,...resolveAjesMakeSelection(query.make,directory.makes)},makeDirectoryUnavailable:Boolean(directory.stale)};
  }catch{
   // An exact source selection can still return useful saved/live rows. A legacy
   // display alias cannot establish zero inventory when its directory is missing.
