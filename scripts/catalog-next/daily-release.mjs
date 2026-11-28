@@ -20,6 +20,7 @@ import {JAPAN_PAGINATION_CODE_SCOPE} from './japan-pagination-code-scope.mjs';
 import {JAPAN_STABILITY_CODE_SCOPE, japanPowerOrderRequired, japanSourceNamesRequired, japanBrandDirectoryRequired, japanPriceSortRequired, japanExactCountRequired,
   japanSourceBoundedIncrementalRequired, japanLiteralFamilyRequired, japanSourceBoundedAcceptancePassed,
   japanSourceCountRequired, japanSourceCountAcceptancePassed, japanCountAcceptance,
+  japanA4Power160ContinuationRequired, japanA4Power160ContinuationAcceptancePassed,
   JAPAN_OBSERVED_TIMING_POLICY, japanObservedTimingRequired} from './japan-stability-code-scope.mjs';
 import {checkedCrmChinaManifestProof, checkedCrmChinaEvidence, verifyCrmChinaUnauthorizedAccess} from './crm-china-status-proof.mjs';
 import {readJapanPhotoRetryFixture, checkedJapanPhotoRetryEvidence} from './japan-photo-retry-proof.mjs';
@@ -485,6 +486,7 @@ export function createChinaDailyRelease({root, servingRoot, pricingPlan, serving
                   CATALOG_JAPAN_EXACT_COUNT_REQUIRED: japanExactCountRequired(servingPlan) ? '1' : '0',
                   CATALOG_JAPAN_MODEL_COVERAGE_REQUIRED: japanSourceBoundedIncrementalRequired(servingPlan) || japanSourceCountRequired(servingPlan) ? '1' : '0',
                   CATALOG_JAPAN_SOURCE_COUNT_REQUIRED: japanSourceCountRequired(servingPlan) ? '1' : '0',
+                  CATALOG_JAPAN_A4_POWER160_CONTINUATION_REQUIRED: japanA4Power160ContinuationRequired(servingPlan) ? '1' : '0',
                   CATALOG_JAPAN_BRAND_DIRECTORY_REQUIRED: japanBrandDirectoryRequired(servingPlan) ? '1' : '0'}});
               let japanRaw;
               try { japanRaw = await fs.readFile(japanOutput); }
@@ -527,6 +529,7 @@ export function createChinaDailyRelease({root, servingRoot, pricingPlan, serving
                 && japan.japanModelCoveragePassed === true, 'japan_browser_binding');
               if (japanSourceBoundedIncrementalRequired(servingPlan)) need(japanSourceBoundedAcceptancePassed(japan), 'japan_browser_binding');
               if (japanSourceCountRequired(servingPlan)) need(japanSourceCountAcceptancePassed(japan), 'japan_browser_binding');
+              if (japanA4Power160ContinuationRequired(servingPlan)) need(japanA4Power160ContinuationAcceptancePassed(japan), 'japan_browser_binding');
               if (observedJapanTiming) {
                 need(japan.timingPolicy === JAPAN_OBSERVED_TIMING_POLICY && japan.speedGateRequired === false
                   && japan.speedPassed === null && japan.timingObserved === true, 'japan_timing_binding');

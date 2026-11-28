@@ -191,10 +191,20 @@ export const JAPAN_STABILITY_SOURCE_COUNT_CODE_PATHS = Object.freeze([
   'tests/japan-rail-visibility.test.ts',
   'tests/japan-source-power.test.ts',
 ]);
+/** Keep the accepted source-count profile above intact. This smaller successor
+ * stabilizes literal model membership and requires its own filtered journey. */
+export const JAPAN_STABILITY_MODEL_CURSOR_RETAINED_RUNTIME = '66537bb7470645acf995ab8a792a4fadb98ad1e4';
+export const JAPAN_STABILITY_MODEL_CURSOR_RETAINED_IMAGE = 'sha256:1086ca08d15c553e436796ab9d79df6538a62d4e8f163e81c76f64d22241a9b7';
+export const JAPAN_STABILITY_MODEL_CURSOR_CODE_PATHS = Object.freeze([
+  'apps/web/lib/catalog/ajes-model-resolution.ts',
+  'tests/ajes-model-cursor-continuity.test.ts',
+  'tests/ajes-model-recovery.test.ts',
+  'tests/japan-model-directory-metadata.test.ts',
+]);
 const reviewedProfiles = Object.freeze([JAPAN_STABILITY_CODE_PATHS, JAPAN_STABILITY_UI_CODE_PATHS,
   JAPAN_STABILITY_POWER_CODE_PATHS, JAPAN_STABILITY_RAILS_CODE_PATHS, JAPAN_STABILITY_HOME_CODE_PATHS,
   JAPAN_STABILITY_METADATA_CODE_PATHS, JAPAN_STABILITY_PRICE_SORT_CODE_PATHS, JAPAN_STABILITY_EXACT_COUNT_CODE_PATHS,
-  JAPAN_STABILITY_SOURCE_COUNT_CODE_PATHS]);
+  JAPAN_STABILITY_SOURCE_COUNT_CODE_PATHS, JAPAN_STABILITY_MODEL_CURSOR_CODE_PATHS]);
 
 export function japanStabilityCodePaths(plan) {
   const files = plan?.runtimeFiles;
@@ -207,16 +217,17 @@ export function isExactJapanStabilityScope(plan) {
   return JAPAN_STABILITY_CODE_PATHS.length > 0
     && JAPAN_PAGINATION_CODE_PATHS.every(name => JAPAN_STABILITY_CODE_PATHS.includes(name))
     && plan?.codeScope === JAPAN_STABILITY_CODE_SCOPE
-    && plan.retainedRuntime === (paths === JAPAN_STABILITY_SOURCE_COUNT_CODE_PATHS
+    && plan.retainedRuntime === (paths === JAPAN_STABILITY_MODEL_CURSOR_CODE_PATHS
+      ? JAPAN_STABILITY_MODEL_CURSOR_RETAINED_RUNTIME : paths === JAPAN_STABILITY_SOURCE_COUNT_CODE_PATHS
       ? JAPAN_STABILITY_SOURCE_COUNT_RETAINED_RUNTIME : paths === JAPAN_STABILITY_EXACT_COUNT_CODE_PATHS
       ? JAPAN_STABILITY_EXACT_COUNT_RETAINED_RUNTIME : paths === JAPAN_STABILITY_PRICE_SORT_CODE_PATHS
         ? JAPAN_STABILITY_PRICE_SORT_RETAINED_RUNTIME : JAPAN_STABILITY_RETAINED_RUNTIME)
     && paths !== null
     && ([JAPAN_STABILITY_HOME_CODE_PATHS, JAPAN_STABILITY_METADATA_CODE_PATHS, JAPAN_STABILITY_PRICE_SORT_CODE_PATHS,
-      JAPAN_STABILITY_EXACT_COUNT_CODE_PATHS, JAPAN_STABILITY_SOURCE_COUNT_CODE_PATHS].includes(paths)
+      JAPAN_STABILITY_EXACT_COUNT_CODE_PATHS, JAPAN_STABILITY_SOURCE_COUNT_CODE_PATHS, JAPAN_STABILITY_MODEL_CURSOR_CODE_PATHS].includes(paths)
       ? plan.acceptancePolicy === JAPAN_OBSERVED_TIMING_POLICY
       : plan.acceptancePolicy === undefined)
-    && (paths === JAPAN_STABILITY_SOURCE_COUNT_CODE_PATHS ? plan.countAcceptance === JAPAN_SOURCE_COUNT_POLICY
+    && ([JAPAN_STABILITY_SOURCE_COUNT_CODE_PATHS, JAPAN_STABILITY_MODEL_CURSOR_CODE_PATHS].includes(paths) ? plan.countAcceptance === JAPAN_SOURCE_COUNT_POLICY
       : plan.countAcceptance === undefined || (paths === JAPAN_STABILITY_EXACT_COUNT_CODE_PATHS
         && plan.countAcceptance === JAPAN_SOURCE_BOUNDED_INCREMENTAL_POLICY));
 }
@@ -226,7 +237,7 @@ export function japanObservedTimingRequired(plan) {
   if (!isExactJapanStabilityScope(plan)) throw Error('japan_stability_observed_timing_scope');
   return [JAPAN_STABILITY_HOME_CODE_PATHS, JAPAN_STABILITY_METADATA_CODE_PATHS,
     JAPAN_STABILITY_PRICE_SORT_CODE_PATHS, JAPAN_STABILITY_EXACT_COUNT_CODE_PATHS,
-    JAPAN_STABILITY_SOURCE_COUNT_CODE_PATHS].includes(japanStabilityCodePaths(plan));
+    JAPAN_STABILITY_SOURCE_COUNT_CODE_PATHS, JAPAN_STABILITY_MODEL_CURSOR_CODE_PATHS].includes(japanStabilityCodePaths(plan));
 }
 
 export function japanPowerOrderRequired(plan) {
@@ -235,7 +246,7 @@ export function japanPowerOrderRequired(plan) {
   return [JAPAN_STABILITY_POWER_CODE_PATHS, JAPAN_STABILITY_RAILS_CODE_PATHS,
     JAPAN_STABILITY_HOME_CODE_PATHS, JAPAN_STABILITY_METADATA_CODE_PATHS,
     JAPAN_STABILITY_PRICE_SORT_CODE_PATHS, JAPAN_STABILITY_EXACT_COUNT_CODE_PATHS,
-    JAPAN_STABILITY_SOURCE_COUNT_CODE_PATHS].includes(japanStabilityCodePaths(plan));
+    JAPAN_STABILITY_SOURCE_COUNT_CODE_PATHS, JAPAN_STABILITY_MODEL_CURSOR_CODE_PATHS].includes(japanStabilityCodePaths(plan));
 }
 
 export function japanBrandDirectoryRequired(plan) {
@@ -243,14 +254,14 @@ export function japanBrandDirectoryRequired(plan) {
   if (!isExactJapanStabilityScope(plan)) throw Error('japan_stability_brand_directory_scope');
   return [JAPAN_STABILITY_RAILS_CODE_PATHS, JAPAN_STABILITY_HOME_CODE_PATHS,
     JAPAN_STABILITY_METADATA_CODE_PATHS, JAPAN_STABILITY_PRICE_SORT_CODE_PATHS, JAPAN_STABILITY_EXACT_COUNT_CODE_PATHS,
-    JAPAN_STABILITY_SOURCE_COUNT_CODE_PATHS].includes(japanStabilityCodePaths(plan));
+    JAPAN_STABILITY_SOURCE_COUNT_CODE_PATHS, JAPAN_STABILITY_MODEL_CURSOR_CODE_PATHS].includes(japanStabilityCodePaths(plan));
 }
 
 export function japanPriceSortRequired(plan) {
   if (plan?.codeScope !== JAPAN_STABILITY_CODE_SCOPE) return false;
   if (!isExactJapanStabilityScope(plan)) throw Error('japan_stability_price_sort_scope');
   return [JAPAN_STABILITY_PRICE_SORT_CODE_PATHS, JAPAN_STABILITY_EXACT_COUNT_CODE_PATHS,
-    JAPAN_STABILITY_SOURCE_COUNT_CODE_PATHS].includes(japanStabilityCodePaths(plan));
+    JAPAN_STABILITY_SOURCE_COUNT_CODE_PATHS, JAPAN_STABILITY_MODEL_CURSOR_CODE_PATHS].includes(japanStabilityCodePaths(plan));
 }
 
 export function japanExactCountRequired(plan) {
@@ -272,7 +283,8 @@ export function japanSourceBoundedIncrementalRequired(plan) {
 export function japanLiteralFamilyRequired(plan) {
   if (plan?.codeScope !== JAPAN_STABILITY_CODE_SCOPE) return false;
   if (!isExactJapanStabilityScope(plan)) throw Error('japan_stability_literal_family_scope');
-  return [JAPAN_STABILITY_EXACT_COUNT_CODE_PATHS, JAPAN_STABILITY_SOURCE_COUNT_CODE_PATHS].includes(japanStabilityCodePaths(plan));
+  return [JAPAN_STABILITY_EXACT_COUNT_CODE_PATHS, JAPAN_STABILITY_SOURCE_COUNT_CODE_PATHS,
+    JAPAN_STABILITY_MODEL_CURSOR_CODE_PATHS].includes(japanStabilityCodePaths(plan));
 }
 
 export function japanSourceBoundedAcceptancePassed(report) {
@@ -282,7 +294,13 @@ export function japanSourceBoundedAcceptancePassed(report) {
 export function japanSourceCountRequired(plan) {
   if (plan?.codeScope !== JAPAN_STABILITY_CODE_SCOPE) return false;
   if (!isExactJapanStabilityScope(plan)) throw Error('japan_stability_source_count_scope');
-  return japanStabilityCodePaths(plan) === JAPAN_STABILITY_SOURCE_COUNT_CODE_PATHS;
+  return [JAPAN_STABILITY_SOURCE_COUNT_CODE_PATHS, JAPAN_STABILITY_MODEL_CURSOR_CODE_PATHS].includes(japanStabilityCodePaths(plan));
+}
+
+export function japanA4Power160ContinuationRequired(plan) {
+  if (plan?.codeScope !== JAPAN_STABILITY_CODE_SCOPE) return false;
+  if (!isExactJapanStabilityScope(plan)) throw Error('japan_stability_a4_power160_continuation_scope');
+  return japanStabilityCodePaths(plan) === JAPAN_STABILITY_MODEL_CURSOR_CODE_PATHS;
 }
 
 /** The marker is a code-transition contract, never a daily generation policy. */
@@ -373,11 +391,70 @@ export function japanSourceCountAcceptancePassed(report) {
     && proof.liveExhaustiveScan === false && proof.pageErrors === 0;
 }
 
+/** A filtered continuation is separate from an exhaustive selection proof.
+ * The bounded reader may honestly report partial pages while both ordinary
+ * appends must return fresh, useful rows under the selected public filters. */
+export function japanA4Power160ContinuationAcceptancePassed(report) {
+  if (!japanSourceCountAcceptancePassed(report)) return false;
+  const proof = report?.checks?.a4Power160Continuation;
+  const checkedAt = Date.parse(report?.checkedAt);
+  const hash64 = value => typeof value === 'string' && /^[a-f0-9]{64}$/.test(value);
+  const positivePageSize = value => Number.isSafeInteger(value) && value >= 1 && value <= 24;
+  const pagePassed = (page, shown) => {
+    const observedAt = Date.parse(page?.observedAt);
+    return page?.status === 200 && page.shown === shown && positivePageSize(shown)
+      && Number.isFinite(checkedAt) && Number.isFinite(observedAt) && observedAt <= checkedAt
+      && checkedAt - observedAt < 30 * 60_000
+      && page.stale === false && page.interrupted === false
+      && ['partial', 'scanLimited', 'selectionIncomplete', 'hasMore'].every(key => typeof page[key] === 'boolean')
+      && (!page.scanLimited || page.hasMore && page.shown < 24)
+      && Number.isSafeInteger(page.sourcePages) && page.sourcePages >= 1 && page.sourcePages <= 8
+      && hash64(page.receiptsSha256) && page.sourceReceiptsFresh === true
+      && page.total === null && page.selectionCompletenessClaimed === false;
+  };
+  const renderedPagePassed = (page, shown, index) => {
+    const observedAt = Date.parse(page?.observedAt);
+    return page?.kind === 'rendered-ssr' && (page.status === 200 || index === 0 && page.status === null)
+      && page.shown === shown && positivePageSize(shown) && page.page === 1
+      && page.afterSha256 === 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'
+      && page.ssrBindingMatched === true
+      && Number.isFinite(checkedAt) && Number.isFinite(observedAt) && observedAt <= checkedAt
+      && checkedAt - observedAt < 30 * 60_000 && page.stale === false
+      && ['partial', 'scanLimited', 'selectionIncomplete', 'interrupted'].every(key => page[key] === null)
+      && Number.isSafeInteger(page.sourcePages) && page.sourcePages >= 1 && page.sourcePages <= 8
+      && hash64(page.receiptsSha256) && page.sourceReceiptsFresh === true
+      && page.total === null && page.hasMore === true && page.selectionCompletenessClaimed === false;
+  };
+  const names = ['after_power_toggle', 'after_first_page_navigation'];
+  return report.japanA4Power160ContinuationRequired === true && report.japanA4Power160ContinuationPassed === true
+    && proof?.contract === 'japan-a4-power160-continuation-browser-v1'
+    && proof.selection?.market === 'japan' && proof.selection.make === 'Audi' && proof.selection.model === 'A4'
+    && proof.selection.city === 'Новокузнецк' && proof.selection.powerTo === 160 && proof.toggledThroughUi === true
+    && proof.firstPageNavigation?.status === 200 && proof.firstPageNavigation.sameFilter === true
+    && proof.firstPageNavigation.powerChecked === true && proof.firstPageNavigation.cityPreserved === true
+    && Array.isArray(proof.attempts) && proof.attempts.length === names.length
+    && proof.attempts.every((attempt, index) => attempt?.name === names[index]
+      && attempt.status === 200 && attempt.sameFilter === true
+      && typeof attempt.cursor === 'string' && attempt.cursor.startsWith('j2.') && sourceCountCursor(attempt.cursor)
+      && attempt.continuationCursor === attempt.cursor
+      && positivePageSize(attempt.loadedBefore) && positivePageSize(attempt.added)
+      && attempt.loadedAfter === attempt.loadedBefore + attempt.added && attempt.duplicateIds === 0
+      && ['oldIdsPreserved', 'orderPreserved', 'knownBeforeUnknown'].every(key => attempt[key] === true)
+      && renderedPagePassed(attempt.firstPage, attempt.loadedBefore, index)
+      && pagePassed(attempt.nextPage, attempt.added)
+      && ['beforeIdsSha256', 'addedIdsSha256', 'afterIdsSha256'].every(key => hash64(attempt[key])))
+    && proof.explicitApiReads === 0 && proof.ordinaryAppendRequests === 2 && proof.firstPageNavigations === 1
+    && proof.fullSelectionExhaustionClaimed === false && proof.liveExhaustiveScan === false && proof.pageErrors === 0;
+}
+
 /** Compatibility with the fixed pricing ancestor includes accepted B9 bytes,
- * while the new image's own runtime diff is only its reviewed eleven-file delta. */
+ * while each new image's own runtime diff is only its reviewed delta. */
 export function japanStabilityCompatibilityPaths(plan) {
   if (!isExactJapanStabilityScope(plan)) throw Error('japan_stability_compatibility_scope');
   const paths = japanStabilityCodePaths(plan);
+  if (paths === JAPAN_STABILITY_MODEL_CURSOR_CODE_PATHS)
+    return [...new Set([...JAPAN_STABILITY_METADATA_CODE_PATHS, ...JAPAN_STABILITY_PRICE_SORT_CODE_PATHS,
+      ...JAPAN_STABILITY_EXACT_COUNT_CODE_PATHS, ...JAPAN_STABILITY_SOURCE_COUNT_CODE_PATHS, ...paths])].sort();
   if (paths === JAPAN_STABILITY_EXACT_COUNT_CODE_PATHS || paths === JAPAN_STABILITY_SOURCE_COUNT_CODE_PATHS)
     return [...new Set([...JAPAN_STABILITY_METADATA_CODE_PATHS, ...JAPAN_STABILITY_PRICE_SORT_CODE_PATHS,
       ...JAPAN_STABILITY_EXACT_COUNT_CODE_PATHS, ...paths])].sort();

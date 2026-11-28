@@ -164,6 +164,14 @@ JAPAN_STABILITY_SOURCE_COUNT_CODE_FILES = {
     'tests/japan-rail-visibility.test.ts',
     'tests/japan-source-power.test.ts',
 }
+JAPAN_STABILITY_MODEL_CURSOR_RETAINED = '66537bb7470645acf995ab8a792a4fadb98ad1e4'
+JAPAN_STABILITY_MODEL_CURSOR_RETAINED_IMAGE = 'sha256:1086ca08d15c553e436796ab9d79df6538a62d4e8f163e81c76f64d22241a9b7'
+JAPAN_STABILITY_MODEL_CURSOR_CODE_FILES = {
+    'apps/web/lib/catalog/ajes-model-resolution.ts',
+    'tests/ajes-model-cursor-continuity.test.ts',
+    'tests/ajes-model-recovery.test.ts',
+    'tests/japan-model-directory-metadata.test.ts',
+}
 JAPAN_STABILITY_HOME_CODE_FILES = JAPAN_STABILITY_RAILS_CODE_FILES | {
     'apps/web/lib/catalog/storage.ts', 'tests/catalog-next-home-isolation.test.ts',
 }
@@ -736,18 +744,19 @@ def checked_japan_stability_image_files(files, observed, retained_runtime=JAPAN_
     profiles = (JAPAN_STABILITY_CODE_FILES, JAPAN_STABILITY_UI_CODE_FILES, JAPAN_STABILITY_POWER_CODE_FILES,
                 JAPAN_STABILITY_RAILS_CODE_FILES, JAPAN_STABILITY_HOME_CODE_FILES, JAPAN_STABILITY_METADATA_CODE_FILES,
                 JAPAN_STABILITY_PRICE_SORT_CODE_FILES, JAPAN_STABILITY_EXACT_COUNT_CODE_FILES,
-                JAPAN_STABILITY_SOURCE_COUNT_CODE_FILES)
+                JAPAN_STABILITY_SOURCE_COUNT_CODE_FILES, JAPAN_STABILITY_MODEL_CURSOR_CODE_FILES)
     selected = next((profile for profile in profiles if profile and set(files) == profile), None)
     need(selected is not None, 'code_image_receipt')
-    need(retained_runtime == (JAPAN_STABILITY_SOURCE_COUNT_RETAINED if selected == JAPAN_STABILITY_SOURCE_COUNT_CODE_FILES
+    need(retained_runtime == (JAPAN_STABILITY_MODEL_CURSOR_RETAINED if selected == JAPAN_STABILITY_MODEL_CURSOR_CODE_FILES
+                             else JAPAN_STABILITY_SOURCE_COUNT_RETAINED if selected == JAPAN_STABILITY_SOURCE_COUNT_CODE_FILES
                              else JAPAN_STABILITY_EXACT_COUNT_RETAINED if selected == JAPAN_STABILITY_EXACT_COUNT_CODE_FILES
                              else JAPAN_STABILITY_PRICE_SORT_RETAINED if selected == JAPAN_STABILITY_PRICE_SORT_CODE_FILES
                              else JAPAN_STABILITY_RETAINED), 'code_stability_predecessor')
     need(type(observed) is bool and observed == (selected in
          (JAPAN_STABILITY_HOME_CODE_FILES, JAPAN_STABILITY_METADATA_CODE_FILES,
           JAPAN_STABILITY_PRICE_SORT_CODE_FILES, JAPAN_STABILITY_EXACT_COUNT_CODE_FILES,
-          JAPAN_STABILITY_SOURCE_COUNT_CODE_FILES)), 'timing_policy_image_scope')
-    need((count_acceptance == JAPAN_SOURCE_COUNT_POLICY if selected == JAPAN_STABILITY_SOURCE_COUNT_CODE_FILES
+          JAPAN_STABILITY_SOURCE_COUNT_CODE_FILES, JAPAN_STABILITY_MODEL_CURSOR_CODE_FILES)), 'timing_policy_image_scope')
+    need((count_acceptance == JAPAN_SOURCE_COUNT_POLICY if selected in (JAPAN_STABILITY_SOURCE_COUNT_CODE_FILES, JAPAN_STABILITY_MODEL_CURSOR_CODE_FILES)
           else count_acceptance is None or (selected == JAPAN_STABILITY_EXACT_COUNT_CODE_FILES
           and count_acceptance == JAPAN_SOURCE_BOUNDED_INCREMENTAL_POLICY)), 'count_acceptance_image_scope')
     return selected
@@ -863,6 +872,91 @@ def japan_source_count_acceptance_passed(report):
         proof.get('liveExhaustiveScan') is False and type(proof.get('pageErrors')) is int and proof['pageErrors'] == 0
 
 
+def japan_a4_power160_continuation_acceptance_passed(report):
+    if not japan_source_count_acceptance_passed(report):
+        return False
+    proof = report.get('checks', {}).get('a4Power160Continuation')
+    if not isinstance(proof, dict):
+        return False
+    selection, navigation, attempts = proof.get('selection'), proof.get('firstPageNavigation'), proof.get('attempts')
+    if not isinstance(selection, dict) or not isinstance(navigation, dict) or not isinstance(attempts, list):
+        return False
+    hash64 = lambda value: isinstance(value, str) and re.fullmatch(r'[a-f0-9]{64}', value) is not None
+    page_size = lambda value: type(value) is int and 1 <= value <= 24
+    try:
+        checked_at = datetime.datetime.fromisoformat(report['checkedAt'].replace('Z', '+00:00'))
+    except (KeyError, TypeError, ValueError, AttributeError):
+        return False
+
+    def page_passed(page, shown):
+        if not isinstance(page, dict):
+            return False
+        try:
+            observed_at = datetime.datetime.fromisoformat(page['observedAt'].replace('Z', '+00:00'))
+            age = (checked_at - observed_at).total_seconds()
+        except (KeyError, TypeError, ValueError, AttributeError):
+            return False
+        # Data timestamps are observed evidence; browser duration is not a gate.
+        return type(page.get('status')) is int and page['status'] == 200 and \
+            page_size(shown) and type(page.get('shown')) is int and page['shown'] == shown and 0 <= age < 30 * 60 and \
+            page.get('stale') is False and page.get('interrupted') is False and \
+            all(type(page.get(key)) is bool for key in ('partial', 'scanLimited', 'selectionIncomplete', 'hasMore')) and \
+            (not page['scanLimited'] or page['hasMore'] and page['shown'] < 24) and \
+            type(page.get('sourcePages')) is int and 1 <= page['sourcePages'] <= 8 and \
+            hash64(page.get('receiptsSha256')) and page.get('sourceReceiptsFresh') is True and \
+            'total' in page and page['total'] is None and page.get('selectionCompletenessClaimed') is False
+
+    def rendered_page_passed(page, shown, index):
+        if not isinstance(page, dict):
+            return False
+        try:
+            observed_at = datetime.datetime.fromisoformat(page['observedAt'].replace('Z', '+00:00'))
+            age = (checked_at - observed_at).total_seconds()
+        except (KeyError, TypeError, ValueError, AttributeError):
+            return False
+        return page.get('kind') == 'rendered-ssr' and 'status' in page and \
+            (type(page['status']) is int and page['status'] == 200 or index == 0 and page['status'] is None) and \
+            page_size(shown) and type(page.get('shown')) is int and page['shown'] == shown and \
+            type(page.get('page')) is int and page['page'] == 1 and \
+            page.get('afterSha256') == 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855' and \
+            page.get('ssrBindingMatched') is True and 0 <= age < 30 * 60 and page.get('stale') is False and \
+            all(key in page and page[key] is None for key in ('partial', 'scanLimited', 'selectionIncomplete', 'interrupted')) and \
+            type(page.get('sourcePages')) is int and 1 <= page['sourcePages'] <= 8 and \
+            hash64(page.get('receiptsSha256')) and page.get('sourceReceiptsFresh') is True and \
+            'total' in page and page['total'] is None and page.get('hasMore') is True and \
+            page.get('selectionCompletenessClaimed') is False
+
+    names = ('after_power_toggle', 'after_first_page_navigation')
+    if len(attempts) != len(names):
+        return False
+    for index, (attempt, name) in enumerate(zip(attempts, names)):
+        if not isinstance(attempt, dict):
+            return False
+        cursor = attempt.get('cursor')
+        if not (attempt.get('name') == name and type(attempt.get('status')) is int and attempt['status'] == 200 and
+                attempt.get('sameFilter') is True and isinstance(cursor, str) and cursor.startswith('j2.') and
+                source_count_cursor(cursor) and attempt.get('continuationCursor') == cursor and
+                page_size(attempt.get('loadedBefore')) and page_size(attempt.get('added')) and
+                type(attempt.get('loadedAfter')) is int and attempt['loadedAfter'] == attempt['loadedBefore'] + attempt['added'] and
+                type(attempt.get('duplicateIds')) is int and attempt['duplicateIds'] == 0 and
+                all(attempt.get(key) is True for key in ('oldIdsPreserved', 'orderPreserved', 'knownBeforeUnknown')) and
+                rendered_page_passed(attempt.get('firstPage'), attempt['loadedBefore'], index) and
+                page_passed(attempt.get('nextPage'), attempt['added']) and
+                all(hash64(attempt.get(key)) for key in ('beforeIdsSha256', 'addedIdsSha256', 'afterIdsSha256'))):
+            return False
+    return report.get('japanA4Power160ContinuationRequired') is True and report.get('japanA4Power160ContinuationPassed') is True and \
+        proof.get('contract') == 'japan-a4-power160-continuation-browser-v1' and \
+        selection.get('market') == 'japan' and selection.get('make') == 'Audi' and selection.get('model') == 'A4' and \
+        selection.get('city') == 'Новокузнецк' and type(selection.get('powerTo')) is int and selection['powerTo'] == 160 and \
+        proof.get('toggledThroughUi') is True and type(navigation.get('status')) is int and navigation['status'] == 200 and \
+        all(navigation.get(key) is True for key in ('sameFilter', 'powerChecked', 'cityPreserved')) and \
+        type(proof.get('explicitApiReads')) is int and proof['explicitApiReads'] == 0 and \
+        type(proof.get('ordinaryAppendRequests')) is int and proof['ordinaryAppendRequests'] == 2 and \
+        type(proof.get('firstPageNavigations')) is int and proof['firstPageNavigations'] == 1 and \
+        proof.get('fullSelectionExhaustionClaimed') is False and proof.get('liveExhaustiveScan') is False and \
+        type(proof.get('pageErrors')) is int and proof['pageErrors'] == 0
+
+
 def observed_timing_fields(value):
     return value.get('timingPolicy') == JAPAN_OBSERVED_TIMING_POLICY and \
         value.get('speedGateRequired') is False and 'speedPassed' in value and \
@@ -964,7 +1058,7 @@ def validate_plan(plan):
         need(japan_observed_timing(plan) and
              ((plan.get('retainedRuntime') == JAPAN_STABILITY_EXACT_COUNT_RETAINED and
                plan['countAcceptance'] == JAPAN_SOURCE_BOUNDED_INCREMENTAL_POLICY) or
-              (plan.get('retainedRuntime') == JAPAN_STABILITY_SOURCE_COUNT_RETAINED and
+              (plan.get('retainedRuntime') in (JAPAN_STABILITY_SOURCE_COUNT_RETAINED, JAPAN_STABILITY_MODEL_CURSOR_RETAINED) and
                plan['countAcceptance'] == JAPAN_SOURCE_COUNT_POLICY)), 'count_acceptance_scope')
     need(plan.get('version') == 1 and plan.get('market') == 'china' and
          (accepted_update(plan) or plan.get('retainedRuntime') == RETAINED) and
@@ -993,8 +1087,10 @@ def validate_plan(plan):
     if accepted_update(plan):
         reference, _, _ = accepted_predecessor(plan)
         if plan.get('countAcceptance') == JAPAN_SOURCE_COUNT_POLICY:
-            need(reference.get('runtimeSha') == JAPAN_STABILITY_SOURCE_COUNT_RETAINED and
-                 reference.get('imageId') == JAPAN_STABILITY_SOURCE_COUNT_RETAINED_IMAGE, 'source_count_retained_image')
+            need((reference.get('runtimeSha'), reference.get('imageId')) in (
+                 (JAPAN_STABILITY_SOURCE_COUNT_RETAINED, JAPAN_STABILITY_SOURCE_COUNT_RETAINED_IMAGE),
+                 (JAPAN_STABILITY_MODEL_CURSOR_RETAINED, JAPAN_STABILITY_MODEL_CURSOR_RETAINED_IMAGE)),
+                 'source_count_retained_image')
         if code_update(plan):
             scope = code_scope(plan)
             need(scope not in (JAPAN_COMPLETION_CODE_SCOPE, JAPAN_COMPLETION_V2_CODE_SCOPE)
@@ -1009,7 +1105,8 @@ def validate_plan(plan):
                  'code_pagination_predecessor')
             need(scope != JAPAN_STABILITY_CODE_SCOPE or
                  (plan.get('retainedRuntime') in (JAPAN_STABILITY_RETAINED, JAPAN_STABILITY_PRICE_SORT_RETAINED,
-                                               JAPAN_STABILITY_EXACT_COUNT_RETAINED, JAPAN_STABILITY_SOURCE_COUNT_RETAINED) and
+                                               JAPAN_STABILITY_EXACT_COUNT_RETAINED, JAPAN_STABILITY_SOURCE_COUNT_RETAINED,
+                                               JAPAN_STABILITY_MODEL_CURSOR_RETAINED) and
                   bool(JAPAN_STABILITY_CODE_FILES) and JAPAN_PAGINATION_CODE_FILES <= JAPAN_STABILITY_CODE_FILES),
                  'code_stability_predecessor')
             need(all(isinstance(plan.get(key), str) and re.fullmatch(r'[a-f0-9]{64}', plan[key])
@@ -3780,14 +3877,14 @@ class Host:
                 if runtime_profile in (JAPAN_STABILITY_POWER_CODE_FILES, JAPAN_STABILITY_RAILS_CODE_FILES,
                                        JAPAN_STABILITY_HOME_CODE_FILES, JAPAN_STABILITY_METADATA_CODE_FILES,
                                        JAPAN_STABILITY_PRICE_SORT_CODE_FILES, JAPAN_STABILITY_EXACT_COUNT_CODE_FILES,
-                                       JAPAN_STABILITY_SOURCE_COUNT_CODE_FILES):
+                                       JAPAN_STABILITY_SOURCE_COUNT_CODE_FILES, JAPAN_STABILITY_MODEL_CURSOR_CODE_FILES):
                     need(japan.get('japanPowerOrderPassed') is True, 'japan_browser_binding')
                 if runtime_profile in (JAPAN_STABILITY_RAILS_CODE_FILES, JAPAN_STABILITY_HOME_CODE_FILES,
                                        JAPAN_STABILITY_METADATA_CODE_FILES, JAPAN_STABILITY_PRICE_SORT_CODE_FILES, JAPAN_STABILITY_EXACT_COUNT_CODE_FILES,
-                                       JAPAN_STABILITY_SOURCE_COUNT_CODE_FILES):
+                                       JAPAN_STABILITY_SOURCE_COUNT_CODE_FILES, JAPAN_STABILITY_MODEL_CURSOR_CODE_FILES):
                     need(japan.get('japanBrandDirectoryPassed') is True, 'japan_browser_binding')
                 if runtime_profile in (JAPAN_STABILITY_PRICE_SORT_CODE_FILES, JAPAN_STABILITY_EXACT_COUNT_CODE_FILES,
-                                       JAPAN_STABILITY_SOURCE_COUNT_CODE_FILES):
+                                       JAPAN_STABILITY_SOURCE_COUNT_CODE_FILES, JAPAN_STABILITY_MODEL_CURSOR_CODE_FILES):
                     need(all(japan.get(key) is True for key in ('japanPriceSortRequired', 'japanPriceSortPassed', 'japanCountDisplayPassed')),
                          'japan_browser_binding')
                 if runtime_profile == JAPAN_STABILITY_EXACT_COUNT_CODE_FILES:
@@ -3796,8 +3893,10 @@ class Host:
                     else:
                         need(all(japan.get(key) is True for key in ('japanExactCountRequired', 'japanExactCountPassed', 'japanModelCoveragePassed')),
                              'japan_browser_binding')
-                if runtime_profile == JAPAN_STABILITY_SOURCE_COUNT_CODE_FILES:
+                if runtime_profile in (JAPAN_STABILITY_SOURCE_COUNT_CODE_FILES, JAPAN_STABILITY_MODEL_CURSOR_CODE_FILES):
                     need(japan_source_count_acceptance_passed(japan), 'japan_browser_binding')
+                if runtime_profile == JAPAN_STABILITY_MODEL_CURSOR_CODE_FILES:
+                    need(japan_a4_power160_continuation_acceptance_passed(japan), 'japan_browser_binding')
         for name, raw in [('BROWSER_SPEED.json', speed_raw), ('BROWSER_DETAILS.json', details_raw)]:
             new_file(self.directory / name, raw)
             need(file_sha(self.directory / name) == sha(raw), 'browser_evidence_readback')

@@ -16,9 +16,11 @@ import {JAPAN_PAGINATION_CODE_SCOPE, JAPAN_PAGINATION_CODE_PATHS, JAPAN_PAGINATI
 import {JAPAN_STABILITY_CODE_SCOPE, JAPAN_STABILITY_CODE_PATHS, JAPAN_STABILITY_UI_CODE_PATHS, JAPAN_STABILITY_POWER_CODE_PATHS, JAPAN_STABILITY_RAILS_CODE_PATHS, JAPAN_STABILITY_RETAINED_RUNTIME,
   JAPAN_STABILITY_HOME_CODE_PATHS, JAPAN_OBSERVED_TIMING_POLICY, JAPAN_STABILITY_PRICE_SORT_CODE_PATHS, JAPAN_STABILITY_PRICE_SORT_RETAINED_RUNTIME, JAPAN_STABILITY_EXACT_COUNT_CODE_PATHS, JAPAN_STABILITY_EXACT_COUNT_RETAINED_RUNTIME,
   JAPAN_SOURCE_BOUNDED_INCREMENTAL_POLICY, JAPAN_SOURCE_COUNT_POLICY, JAPAN_STABILITY_SOURCE_COUNT_CODE_PATHS,
-  JAPAN_STABILITY_SOURCE_COUNT_RETAINED_RUNTIME, JAPAN_STABILITY_SOURCE_COUNT_RETAINED_IMAGE} from '../scripts/catalog-next/japan-stability-code-scope.mjs';
+  JAPAN_STABILITY_SOURCE_COUNT_RETAINED_RUNTIME, JAPAN_STABILITY_SOURCE_COUNT_RETAINED_IMAGE,
+  JAPAN_STABILITY_MODEL_CURSOR_CODE_PATHS, JAPAN_STABILITY_MODEL_CURSOR_RETAINED_RUNTIME,
+  JAPAN_STABILITY_MODEL_CURSOR_RETAINED_IMAGE} from '../scripts/catalog-next/japan-stability-code-scope.mjs';
 import {JAPAN_STABILITY_GATES} from '../scripts/catalog-next/japan-stability-browser.mjs';
-import {sourceCountReport} from './helpers/japan-source-count-report-fixture.mjs';
+import {sourceCountReport, a4Power160ContinuationReport} from './helpers/japan-source-count-report-fixture.mjs';
 
 const hash = raw => createHash('sha256').update(raw).digest('hex');
 const ordered = value => Array.isArray(value) ? value.map(ordered) : value && typeof value === 'object'
@@ -80,7 +82,8 @@ test('authenticated photo preflight preserves every frozen expected value and ch
   assert.throws(() => checkedChinaCodePreflight(f.preflight, {...f.current, sourceCursor: 101}, nextSha));
 });
 
-async function fixture(t, {combined = false, japan = false,completion=false, crm=false, crmPhoto=false, pagination=false, stability=false, ui=false, powerOrder=false, brandDirectory=false, observedTiming=false, priceSort=false, exactCount=false, incremental=false, sourceCount=false} = {}) {
+async function fixture(t, {combined = false, japan = false,completion=false, crm=false, crmPhoto=false, pagination=false, stability=false, ui=false, powerOrder=false, brandDirectory=false, observedTiming=false, priceSort=false, exactCount=false, incremental=false, sourceCount=false, modelCursor=false} = {}) {
+  sourceCount = sourceCount || modelCursor;
   assert(Number(exactCount) + Number(incremental) + Number(sourceCount) <= 1, 'count acceptance profiles are distinct');
   const exactProfile = exactCount || incremental;
   const countAcceptance = sourceCount ? JAPAN_SOURCE_COUNT_POLICY : incremental ? JAPAN_SOURCE_BOUNDED_INCREMENTAL_POLICY : undefined;
@@ -93,8 +96,31 @@ async function fixture(t, {combined = false, japan = false,completion=false, crm
   crmPhoto=crmPhoto||pagination;completion=completion||pagination;
   crm=crm||crmPhoto;
   japan=Boolean(japan||completion);
-  const usability=completion===usabilityScope,retainedRuntime=sourceCount?JAPAN_STABILITY_SOURCE_COUNT_RETAINED_RUNTIME:exactProfile?JAPAN_STABILITY_EXACT_COUNT_RETAINED_RUNTIME:priceSort?JAPAN_STABILITY_PRICE_SORT_RETAINED_RUNTIME:stability?JAPAN_STABILITY_RETAINED_RUNTIME:pagination?JAPAN_PAGINATION_RETAINED_RUNTIME:crm?CRM_CHINA_RETAINED_RUNTIME:usability?JAPAN_USABILITY_RETAINED_RUNTIME:oldSha;
-  const f = sample(retainedRuntime, sourceCount ? JAPAN_STABILITY_SOURCE_COUNT_RETAINED_IMAGE : undefined), directory = await fs.mkdtemp(path.join(os.tmpdir(), 'china-photo-stage-'));
+  const usability=completion===usabilityScope,retainedRuntime=modelCursor?JAPAN_STABILITY_MODEL_CURSOR_RETAINED_RUNTIME:sourceCount?JAPAN_STABILITY_SOURCE_COUNT_RETAINED_RUNTIME:exactProfile?JAPAN_STABILITY_EXACT_COUNT_RETAINED_RUNTIME:priceSort?JAPAN_STABILITY_PRICE_SORT_RETAINED_RUNTIME:stability?JAPAN_STABILITY_RETAINED_RUNTIME:pagination?JAPAN_PAGINATION_RETAINED_RUNTIME:crm?CRM_CHINA_RETAINED_RUNTIME:usability?JAPAN_USABILITY_RETAINED_RUNTIME:oldSha;
+  const f = sample(retainedRuntime, modelCursor ? JAPAN_STABILITY_MODEL_CURSOR_RETAINED_IMAGE : sourceCount ? JAPAN_STABILITY_SOURCE_COUNT_RETAINED_IMAGE : undefined), directory = await fs.mkdtemp(path.join(os.tmpdir(), 'china-photo-stage-'));
+  if (modelCursor) {
+    // The retained release37 receipt predates the new continuation gate.
+    const receipt = JSON.parse(Buffer.from(f.current.proof.hostReceiptBase64, 'base64'));
+    Object.assign(receipt, {transition: 'code-update', codeScope: JAPAN_STABILITY_CODE_SCOPE,
+      acceptancePolicy: JAPAN_OBSERVED_TIMING_POLICY, countAcceptance: JAPAN_SOURCE_COUNT_POLICY,
+      previousAcceptedETag: '"accepted-release36"', previousAcceptedStateSha256: hash('accepted release36'),
+      retainedRuntimeSha: JAPAN_STABILITY_SOURCE_COUNT_RETAINED_RUNTIME,
+      retainedImageId: JAPAN_STABILITY_SOURCE_COUNT_RETAINED_IMAGE});
+    Object.assign(receipt.browser, {countAcceptance: JAPAN_SOURCE_COUNT_POLICY, timingPolicy: JAPAN_OBSERVED_TIMING_POLICY,
+      speedGateRequired: false, speedPassed: null, timingObserved: true});
+    const raw = Buffer.from(JSON.stringify(receipt));
+    f.current.proof = {kind: 'china-accepted-proof-v1', hostReceiptBase64: raw.toString('base64'), hostReceiptSha256: hash(raw)};
+    const rollback = sample(JAPAN_STABILITY_SOURCE_COUNT_RETAINED_RUNTIME, JAPAN_STABILITY_SOURCE_COUNT_RETAINED_IMAGE).current;
+    rollback.owner = copy(f.current.owner);
+    const rollbackReceipt = JSON.parse(Buffer.from(rollback.proof.hostReceiptBase64, 'base64'));
+    rollbackReceipt.nonce = rollbackReceipt.browser.nonce = 'c'.repeat(32);
+    const rollbackRaw = Buffer.from(JSON.stringify(rollbackReceipt));
+    rollback.proof = {kind: 'china-accepted-proof-v1', hostReceiptBase64: rollbackRaw.toString('base64'), hostReceiptSha256: hash(rollbackRaw)};
+    f.previous.value.rollback = rollback;
+    Object.assign(f.previous.value.commit, {previousETag: receipt.previousAcceptedETag,
+      previousStateSha256: receipt.previousAcceptedStateSha256});
+    f.previous.sha256 = digest(f.previous.value);
+  }
   t.after(() => fs.rm(directory, {recursive: true, force: true}));
   const root = path.join(directory, 'controller');
   for (const name of ['scripts/regcloud-release-retention.py', 'scripts/regcloud-performance-gate.py', 'docs/operations/2026-11-11-accepted-speed-baseline.json',
@@ -127,7 +153,7 @@ async function fixture(t, {combined = false, japan = false,completion=false, crm
     ...(stability?{runtimeFiles:[...(brandDirectory?JAPAN_STABILITY_RAILS_CODE_PATHS:powerOrder?JAPAN_STABILITY_POWER_CODE_PATHS:ui?JAPAN_STABILITY_UI_CODE_PATHS:JAPAN_STABILITY_CODE_PATHS)],codeScope:JAPAN_STABILITY_CODE_SCOPE}:pagination?{runtimeFiles:[...JAPAN_PAGINATION_CODE_PATHS],codeScope:JAPAN_PAGINATION_CODE_SCOPE}:crm?{runtimeFiles:[...(crmPhoto?CRM_JAPAN_PHOTO_CODE_PATHS:CRM_CHINA_CODE_PATHS)], codeScope:crmPhoto?CRM_JAPAN_PHOTO_CODE_SCOPE:CRM_CHINA_CODE_SCOPE}:
       japan ? {codeScope: completion?(typeof completion==='string'?completion:'catalog-japan-completion-v1'):'catalog-japan-recovery-v1'} : combined ? {codeScope: 'catalog-photo-japan-power-v1'} : {})};
   const pricingPlan = {version: 1, market: 'china', runtimeSha: pricingSha};
-  if (observedTiming) Object.assign(servingPlan, {runtimeFiles: [...(sourceCount?JAPAN_STABILITY_SOURCE_COUNT_CODE_PATHS:exactProfile?JAPAN_STABILITY_EXACT_COUNT_CODE_PATHS:priceSort?JAPAN_STABILITY_PRICE_SORT_CODE_PATHS:JAPAN_STABILITY_HOME_CODE_PATHS)], acceptancePolicy: JAPAN_OBSERVED_TIMING_POLICY});
+  if (observedTiming) Object.assign(servingPlan, {runtimeFiles: [...(modelCursor?JAPAN_STABILITY_MODEL_CURSOR_CODE_PATHS:sourceCount?JAPAN_STABILITY_SOURCE_COUNT_CODE_PATHS:exactProfile?JAPAN_STABILITY_EXACT_COUNT_CODE_PATHS:priceSort?JAPAN_STABILITY_PRICE_SORT_CODE_PATHS:JAPAN_STABILITY_HOME_CODE_PATHS)], acceptancePolicy: JAPAN_OBSERVED_TIMING_POLICY});
   if (countAcceptance !== undefined) servingPlan.countAcceptance = countAcceptance;
   const imageReceipt = {version: 1,
     kind: 'china-runtime-image-v1', runtimeSha: nextSha, runtimeTree: servingPlan.runtimeTree,
@@ -278,6 +304,7 @@ async function fixture(t, {combined = false, japan = false,completion=false, crm
           assert.equal(args.env.CATALOG_JAPAN_EXACT_COUNT_REQUIRED,exactCount?'1':'0');
           assert.equal(args.env.CATALOG_JAPAN_MODEL_COVERAGE_REQUIRED,incremental||sourceCount?'1':'0');
           assert.equal(args.env.CATALOG_JAPAN_SOURCE_COUNT_REQUIRED,sourceCount?'1':'0');
+          assert.equal(args.env.CATALOG_JAPAN_A4_POWER160_CONTINUATION_REQUIRED,modelCursor?'1':'0');
           assert.equal(args.env.CATALOG_JAPAN_TIMING_POLICY, observedTiming ? JAPAN_OBSERVED_TIMING_POLICY : undefined);
           assert.equal(Object.hasOwn(args.env, 'CATALOG_JAPAN_TIMING_POLICY'), observedTiming,
             'older profiles omit the optional timing policy rather than sending an invalid empty value');
@@ -311,7 +338,7 @@ async function fixture(t, {combined = false, japan = false,completion=false, crm
                 pairsSha256:hash('source pairs'),directory:{status:200,stale:false,sourcePairs:94,pairsSha256:hash('source pairs'),browserMatchesApi:true},
                 selection:{shown:24,observedSourceNamesOnly:true},countHonest:true,fullPage:true,explicitApiReads:3,
                 liveExhaustiveScan:false,pageErrors:0}}}:{}),
-            ...(sourceCount ? sourceCountReport(new Date().toISOString()) : {}),
+            ...(modelCursor ? a4Power160ContinuationReport(new Date().toISOString()) : sourceCount ? sourceCountReport(new Date().toISOString()) : {}),
             ...(stability?Object.fromEntries(JAPAN_STABILITY_GATES.map(key=>[key,true])):{})};
           if (flags.failedReport) Object.assign(report, {passed: false, japanVisibilityPassed: false,
             error: {stage: 'catalog_visibility', code: 'japan_browser_overview_http', timeout: false}});
@@ -1253,6 +1280,68 @@ test('source-count accepted state independently rejects swapped retained images 
     [({speed}) => { speed.checks.sourceCount.pagination.freshSourcePages = false; }, /japan_source_count_binding/],
     [({speed}) => { speed.checks.modelCoverage.accessiblePairs--; }, /japan_source_count_binding/],
     [({speed}) => { delete speed.japanPriceSortRequired; }, /japan_price_sort_binding/],
+  ]) {
+    await assert.rejects(state.commit({lease, intent: input.intent, reservation: input.reservation,
+      evidence: resealedJapanEvidence(outcome.evidence, change)}), expected);
+    assert.deepEqual({accepted: await storage.read('accepted'), intent: await storage.read('intent')}, before);
+  }
+  const committed = await state.commit({lease, intent: input.intent, reservation: input.reservation, evidence: outcome.evidence});
+  assert.deepEqual(committed.accepted.value.rollback, f.current);
+});
+
+test('model-cursor successor retains the historical release37 receipt and commits both filtered continuations', async t => {
+  const f = await fixture(t, {modelCursor: true}), storage = memoryStorage(f.previous);
+  const oldReceipt = JSON.parse(Buffer.from(f.current.proof.hostReceiptBase64, 'base64'));
+  assert.equal(oldReceipt.countAcceptance, JAPAN_SOURCE_COUNT_POLICY);
+  assert.equal(Object.hasOwn(oldReceipt.browser, 'japanA4Power160ContinuationPassed'), false);
+  const report = await runChinaCodeCycle({plan: {...f.servingPlan, minimumYear: 2014}, imageId: f.candidate.imageId,
+    invocation: {version: 1, sourceSha: '9'.repeat(40)}, owner: {runId: '200', attempt: '1', revision: '9'.repeat(40)},
+    nonce: 'b'.repeat(32), storage, now: () => acceptedAt, scheduleHeartbeat: () => () => {},
+    stageCodeRelease: f.release.stageCodeRelease, recoverRelease: async () => assert.fail('no unresolved publication')});
+  assert.equal(report.status, 'accepted'); assert.equal(report.published, true);
+  assert.equal(report.speedGateRequired, false); assert.equal(report.speedPassed, null);
+  const accepted = (await storage.read('accepted')).value;
+  assert.deepEqual(accepted.rollback, f.current);
+  assert.equal(accepted.rollback.runtimeSha, JAPAN_STABILITY_MODEL_CURSOR_RETAINED_RUNTIME);
+  assert.equal(accepted.rollback.imageId, JAPAN_STABILITY_MODEL_CURSOR_RETAINED_IMAGE);
+  for (const key of ['generationId', 'generationManifestSha256', 'receiptSha256', 'sourceDescriptorSha256',
+    'sourceCursor', 'sourceObservedAt', 'pricingRuntimeSha']) assert.equal(accepted.current[key], f.current[key], key);
+  const browser = JSON.parse(await fs.readFile(path.join(f.directory, 'controller/catalog-next-japan-browser-report.json')));
+  assert.equal(browser.japanA4Power160ContinuationRequired, true);
+  assert.equal(browser.japanA4Power160ContinuationPassed, true);
+  assert.equal(browser.japanSourceCountPassed, true); assert.equal(browser.japanExactCountPassed, null);
+  const proof = browser.checks.a4Power160Continuation;
+  assert.equal(proof.attempts.length, 2);
+  assert(proof.attempts.every(row => row.status === 200 && row.firstPage.kind === 'rendered-ssr'
+    && row.firstPage.scanLimited === null && row.nextPage.scanLimited));
+  assert.equal(proof.fullSelectionExhaustionClaimed, false, 'bounded useful pages do not claim exhaustive selection');
+});
+
+for (const [name, change] of [
+  ['missing new proof', value => { delete value.checks.a4Power160Continuation; }],
+  ['failed second append', value => { value.checks.a4Power160Continuation.attempts[1].status = 409; }],
+  ['unfiltered selection', value => { delete value.checks.a4Power160Continuation.selection.powerTo; }],
+  ['stale source page', value => { value.checks.a4Power160Continuation.attempts[0].nextPage.stale = true; }],
+  ['false source-count claim', value => { value.checks.sourceCount.admittedTotal = 1234; }],
+]) test('model-cursor stage rejects ' + name + ' before host acceptance', async t => {
+  const f = await fixture(t, {modelCursor: true}), {stage, input} = await reservedStage(f);
+  t.after(() => stage.close()); f.flags.changeReport = change;
+  await assert.rejects(stage.activate(input), /china_daily_release_japan_browser_binding/);
+  assert(!f.calls.includes('accept') && !f.calls.includes('browser_evidence'));
+});
+
+test('model-cursor CAS independently rejects missing, resealed or mismatched filtered continuation evidence', async t => {
+  const f = await fixture(t, {modelCursor: true}), {stage, input, state, storage, lease} = await reservedStage(f);
+  t.after(() => stage.close());
+  const outcome = await stage.activate(input), before = {accepted: await storage.read('accepted'), intent: await storage.read('intent')};
+  for (const [change, expected] of [
+    [({receipt}) => { receipt.retainedImageId = JAPAN_STABILITY_SOURCE_COUNT_RETAINED_IMAGE; }, /count_acceptance_scope/],
+    [({speed}) => { delete speed.japanA4Power160ContinuationRequired; }, /japan_a4_power160_continuation_binding/],
+    [({speed}) => { delete speed.checks.a4Power160Continuation; }, /japan_a4_power160_continuation_binding/],
+    [({speed}) => { speed.checks.a4Power160Continuation.attempts[1].continuationCursor = 'changed'; }, /japan_a4_power160_continuation_binding/],
+    [({speed}) => { speed.checks.a4Power160Continuation.attempts[0].oldIdsPreserved = false; }, /japan_a4_power160_continuation_binding/],
+    [({speed}) => { speed.checks.a4Power160Continuation.attempts[0].nextPage.sourcePages = 9; }, /japan_a4_power160_continuation_binding/],
+    [({speed}) => { speed.checks.sourceCount.summary.upperBound = false; }, /japan_source_count_binding/],
   ]) {
     await assert.rejects(state.commit({lease, intent: input.intent, reservation: input.reservation,
       evidence: resealedJapanEvidence(outcome.evidence, change)}), expected);

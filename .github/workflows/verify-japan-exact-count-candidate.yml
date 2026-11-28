@@ -43,13 +43,14 @@ jobs:
           node --input-type=module <<'JS'
           import fs from 'node:fs';
           import {checkedCatalogCodeScope} from './scripts/catalog-next/photo-code-scope.mjs';
-          import {japanPriceSortRequired,japanExactCountRequired,japanSourceBoundedIncrementalRequired,japanSourceCountRequired} from './scripts/catalog-next/japan-stability-code-scope.mjs';
+          import {japanPriceSortRequired,japanExactCountRequired,japanSourceBoundedIncrementalRequired,japanSourceCountRequired,japanA4Power160ContinuationRequired} from './scripts/catalog-next/japan-stability-code-scope.mjs';
           const plan = JSON.parse(fs.readFileSync('.github/operations/catalog-next/china-code-serving-plan.json', 'utf8'));
           if (japanExactCountRequired(plan) !== true && japanSourceBoundedIncrementalRequired(plan) !== true && japanSourceCountRequired(plan) !== true) throw Error('japan_exact_candidate_scope_required');
           fs.appendFileSync(process.env.GITHUB_OUTPUT, 'scope=' + checkedCatalogCodeScope(plan) + '\n');
           fs.appendFileSync(process.env.GITHUB_OUTPUT, 'price_sort_required=' + japanPriceSortRequired(plan) + '\n');
           fs.appendFileSync(process.env.GITHUB_OUTPUT, 'exact_count_required=' + japanExactCountRequired(plan) + '\n');
           fs.appendFileSync(process.env.GITHUB_OUTPUT, 'source_count_required=' + japanSourceCountRequired(plan) + '\n');
+          fs.appendFileSync(process.env.GITHUB_OUTPUT, 'a4_power160_continuation_required=' + japanA4Power160ContinuationRequired(plan) + '\n');
           fs.appendFileSync(process.env.GITHUB_OUTPUT, 'model_coverage_required=' + (japanSourceBoundedIncrementalRequired(plan) || japanSourceCountRequired(plan)) + '\n');
           JS
       - name: Prepare Chromium for the required runtime browser fixture
@@ -84,6 +85,7 @@ jobs:
         if: steps.photo_scope.outputs.exact_count_required == 'true' || steps.photo_scope.outputs.model_coverage_required == 'true'
         env:
           CATALOG_JAPAN_SOURCE_COUNT_REQUIRED: ${{ steps.photo_scope.outputs.source_count_required == 'true' && '1' || '0' }}
+          CATALOG_JAPAN_A4_POWER160_CONTINUATION_REQUIRED: ${{ steps.photo_scope.outputs.a4_power160_continuation_required == 'true' && '1' || '0' }}
         run: |
           set -euo pipefail
           COUNT_SHA=$(node -p "JSON.parse(require('fs').readFileSync('.github/operations/catalog-next/china-code-serving-plan.json')).runtimeSha")
@@ -92,12 +94,16 @@ jobs:
           import fs from 'node:fs';
           import {createHash} from 'node:crypto';
           import {checkedJapanExactCountBrowserFixture,checkedJapanModelCoverageBrowserFixture} from './scripts/catalog-next/japan-exact-count-browser.mjs';
+          import {checkedJapanA4Power160ContinuationBrowserFixture} from './scripts/catalog-next/japan-source-count-browser.mjs';
+          import {japanA4Power160ContinuationRequired} from './scripts/catalog-next/japan-stability-code-scope.mjs';
           const plan=JSON.parse(fs.readFileSync('.github/operations/catalog-next/china-code-serving-plan.json','utf8'));
           const helperSha256=createHash('sha256').update(fs.readFileSync('scripts/catalog-next/japan-exact-count-browser.mjs')).digest('hex');
           const report=JSON.parse(fs.readFileSync(process.env.RUNNER_TEMP+'/japan-exact-count-browser-report.json','utf8'));
           const expected={runtimeSha:plan.runtimeSha,runtimeTree:plan.runtimeTree,helperSha256};
           checkedJapanExactCountBrowserFixture(report,expected);
           if (['japan-source-bounded-incremental-v1','japan-source-count-v1'].includes(plan.countAcceptance)) checkedJapanModelCoverageBrowserFixture(report,expected);
+          if (japanA4Power160ContinuationRequired(plan)) checkedJapanA4Power160ContinuationBrowserFixture(report,
+            {...expected,helperSha256:createHash('sha256').update(fs.readFileSync('scripts/catalog-next/japan-source-count-browser.mjs')).digest('hex')});
           JS
       - name: Verify bounded Japan directory retries on the exact runtime before host contact
         if: steps.photo_scope.outputs.scope == 'catalog-japan-stability-v1'

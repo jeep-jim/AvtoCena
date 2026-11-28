@@ -2,7 +2,7 @@ import fs from 'node:fs/promises';
 import http from 'node:http';
 import os from 'node:os';
 import path from 'node:path';
-import {createHash} from 'node:crypto';
+import {createHash, randomUUID} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
 import {createRequire} from 'node:module';
 import {fileURLToPath} from 'node:url';
@@ -11,14 +11,17 @@ import postcss from 'postcss';
 import tailwindcss from 'tailwindcss';
 import {runJapanPriceSortBrowser, selectJapanPriceSort, verifyJapanPriceSortVisible, japanPriceSortApi}
   from '../../scripts/catalog-next/japan-price-sort-browser.mjs';
-import {verifyJapanPage, verifyJapanFullPage, verifyJapanPowerPage, verifyJapanVisibleVehiclePolicy}
+import {verifyJapanPage, verifyJapanFullPage, verifyJapanPowerPage, verifyJapanVisibleVehiclePolicy,
+  japanPageReadEvidence, readJapanSsrPageEvidence}
   from '../../scripts/catalog-next/japan-browser-acceptance.mjs';
 
 import {runJapanExactCountBrowser, runJapanModelCoverageBrowser, japanExactCountQueryHash,
   verifyJapanFiniteSelection, JAPAN_SOURCE_BOUNDED_COUNT_ACCEPTANCE}
   from '../../scripts/catalog-next/japan-exact-count-browser.mjs';
-import {JAPAN_SOURCE_COUNT_ACCEPTANCE, japanSourceCountRequirement, runJapanSourceCountBrowser}
+import {JAPAN_SOURCE_COUNT_ACCEPTANCE, japanSourceCountRequirement, runJapanSourceCountBrowser,
+  japanA4Power160ContinuationRequirement, runJapanA4Power160ContinuationBrowser}
   from '../../scripts/catalog-next/japan-source-count-browser.mjs';
+import {japanA4Power160ContinuationRequired} from '../../scripts/catalog-next/japan-stability-code-scope.mjs';
 
 const ROOT = fileURLToPath(new URL('../../', import.meta.url));
 const ORIGIN = 'https://avtocena.com', CITY = 'Новокузнецк';
@@ -67,7 +70,7 @@ export function ExactCountFixture({initial,result,remount=false}){
   fixture.replace=(next)=>{fixture.current=next;setCurrent(next);};fixture.current=current;fixture.late=(next)=>setLate(next);fixture.ready=true;
   if(window.__japanExactCountInitial.sourceCount)void fixture.loadCount(current.initial);
  },[]);
- return <main className="ac-catalog-page ac-page-copy ac-ajes-catalog min-h-screen text-[var(--ac-text)]">
+ return <main data-japan-source-receipts={current.result.fixtureSsrReadEvidence} className="ac-catalog-page ac-page-copy ac-ajes-catalog min-h-screen text-[var(--ac-text)]">
   <section className="ac-catalog-shell mx-auto w-full max-w-[1500px] px-4 py-6 md:px-8 md:py-10">
    <CatalogSidebar resultScope="ajes:japan:false"
     header={<h1 className="text-[30px] font-black leading-none tracking-[-0.04em] sm:text-4xl md:text-6xl">Авто из Японии под заказ</h1>}
@@ -77,6 +80,7 @@ export function ExactCountFixture({initial,result,remount=false}){
    <h2>Япония <JapanCatalogCount queryKey={key} summary={current.result.countSummary} initialCount={rows.length}/></h2>
    <CatalogLoadMore key={key} query={query} resultQueryKey={key} initialPage={current.result.page}
     initialTotal={current.result.total} initialCount={rows.length} initialHasMore={current.result.hasMore}
+    initialIncomplete={Boolean(current.result.partial||current.result.stale||current.result.interrupted||current.result.scanLimited)}
     initialNextCursor={current.result.nextCursor} initialPageKey={JSON.stringify([key,rows.map(row=>row.id)])}
     initialCards={rows.map(offer=><CatalogCard key={offer.id} offer={offer} compact dense/>)}/>
    </CatalogSidebar>
@@ -93,7 +97,8 @@ if(typeof window!=='undefined'){
   const sequence=++fixture.sequence;fixture.calls.push(href);history.pushState(null,'',href);
   const url=new URL(href,location.origin);
   const query={...Object.fromEntries(url.searchParams),...catalogRouteParams(url.pathname),market:'japan'};
-  const response=await fetch('/api/catalog/search?'+new URLSearchParams({...query,page:'1',pageSize:'24'}));
+  const response=await fetch('/api/catalog/search?'+new URLSearchParams({...query,page:'1',pageSize:'24'}),
+   {headers:{'X-Controlled-Catalog-Navigation':'1'}});
   const result=await response.json();
   if(sequence===fixture.sequence&&response.ok){fixture.replace({initial:query,result});
    if(window.__japanExactCountInitial.sourceCount)void fixture.loadCount(query);}
@@ -121,7 +126,7 @@ if(typeof window!=='undefined'){
 }
 `;
 
-export async function prepare(runtimeRoot, plan) {
+export async function prepare(runtimeRoot, plan, {powerContinuation = false} = {}) {
   need(path.isAbsolute(runtimeRoot || '') && runtimeRoot !== ROOT.replace(/\/$/, ''), 'runtime_root');
   const git = args => execFileSync('git', ['-C', runtimeRoot, ...args], {encoding: 'utf8', timeout: 30_000}).trim();
   need(git(['rev-parse', 'HEAD']) === plan.runtimeSha && git(['rev-parse', 'HEAD^{tree}']) === plan.runtimeTree, 'runtime_binding');
@@ -160,6 +165,30 @@ export async function prepare(runtimeRoot, plan) {
     // not just a hand-picked list of entry components.
     for (const file of Object.keys(browserBuild.metafile.inputs).filter(file => file.startsWith('apps/') || file.startsWith('packages/')))
       if (!(file in sources)) await verifySource(file);
+    let powerCore;
+    if (powerContinuation) {
+      // Compile the selected runtime resolver and lower reader themselves.
+      // Only the optional external directory/identity transport is replaced.
+      // Source model matching, source spelling and cursor validation stay real.
+      const corePlugin = {name: 'controlled-model-directory-transport', setup(builder) {
+        builder.onResolve({filter: /^(?:\.\/ajes-client|fixture:ajes-client)$/}, () => ({path: 'client', namespace: 'controlled-core'}));
+        builder.onResolve({filter: /^\.\/encyclopedia-identity-data$/}, () => ({path: 'identity', namespace: 'controlled-core'}));
+        builder.onLoad({filter: /.*/, namespace: 'controlled-core'}, args => ({loader: 'js', contents: args.path === 'client'
+          ? "export class AjesUnavailable extends Error{constructor(reason){super(reason);this.reason=reason}}"
+          : "export async function readEncyclopediaIdentityResolver(){throw Error('fixture_identity_transport_forbidden')}"}));
+      }};
+      const coreBuild = await build({absWorkingDir: runtimeRoot, bundle: true, platform: 'node', format: 'cjs',
+        logLevel: 'silent', metafile: true, tsconfig: path.join(runtimeRoot, 'apps/web/tsconfig.json'), plugins: [corePlugin],
+        stdin: {resolveDir: runtimeRoot, contents:
+          "export {resolveAjesQueryModels} from './apps/web/lib/catalog/ajes-model-resolution.ts';"
+          + "export {readPowerOrderedAjesPage} from './apps/web/lib/catalog/ajes-filtered-page.ts';"
+          + "export {ajesSsrReadEvidence} from './apps/web/lib/catalog/ajes-ssr-read-evidence.ts';"
+          + "export {AjesCursorRefreshRequired} from './apps/web/lib/catalog/ajes-query.ts';"
+          + "export {AjesUnavailable} from 'fixture:ajes-client';"}, outfile: path.join(temporary, 'power-core.cjs')});
+      for (const file of Object.keys(coreBuild.metafile.inputs).filter(file => file.startsWith('apps/') || file.startsWith('packages/')))
+        if (!(file in sources)) await verifySource(file);
+      powerCore = require(path.join(temporary, 'power-core.cjs'));
+    }
     const {render} = require(path.join(temporary, 'render.cjs'));
     const renderMarkup = props => render(props).replace(/(<style[^>]*>)([\s\S]*?)(<\/style>)/g,
       (_all, open, css, close) => open + css.replace(/&gt;/g, '>').replace(/&lt;/g, '<').replace(/&quot;/g, '"').replace(/&#x27;/g, "'").replace(/&amp;/g, '&') + close);
@@ -172,7 +201,7 @@ export async function prepare(runtimeRoot, plan) {
       ...Object.keys(sources).filter(file => file.endsWith('.tsx')).map(file => path.join(runtimeRoot, file)),
       {raw: fixtureSource, extension: 'tsx'},
     ]})]).process([...layoutCss, componentCss].join('\n'), {from: undefined});
-    return {temporary, sources, renderMarkup, javascript: await fs.readFile(path.join(temporary, 'fixture.js')),
+    return {temporary, sources, renderMarkup, powerCore, javascript: await fs.readFile(path.join(temporary, 'fixture.js')),
       css: css.css, styles: {sourceFiles: Object.keys(sources).filter(file => file.endsWith('.css')),
         componentBundleSha256: hash(componentCss), servedCssSha256: hash(css.css)},
     };
@@ -289,6 +318,79 @@ export function sourceCountFixtureResult(query, now) {
   return {ok: true, total: null, countIncomplete: true, items: [], countSummary: summary};
 }
 
+/** Finite, local source rows exercise the exact runtime's directory resolver
+ * and power cursor reader. A directory containing only the literal base used
+ * to change its source predicate when it became stale or unavailable. Actual
+ * nonliteral aliases deliberately belong to a different native guard case. */
+export async function powerContinuationFixtureResult(core, query, now, directoryState, {boundedInitial = false} = {}) {
+  need(['fresh', 'stale', 'missing'].includes(directoryState) && query.market === 'japan'
+    && query.make === 'Audi' && query.model === 'A4' && query.powerTo === '160' && query.city === CITY,
+  'power_continuation_selection');
+  const pageNumber = Number(query.page || '1');
+  need([1, 2].includes(pageNumber), 'power_continuation_page');
+  const resolved = await core.resolveAjesQueryModels({table: 'stats', make: 'AUDI', model: 'A4', page: pageNumber, pageSize: 24}, async () => {
+    if (directoryState === 'missing') throw new core.AjesUnavailable('request_timeout');
+    return {models: [{model: 'A4'}], stale: directoryState === 'stale'};
+  });
+  const epoch = hash('controlled-power-model-continuity-epoch');
+  const source = Object.fromEntries(Object.entries(resolved.query).filter(([key]) => key !== 'page').sort(([a], [b]) => a.localeCompare(b)));
+  const cursorKey = JSON.stringify({source, local: {city: CITY, powerTo: '160'}, evidenceEpoch: epoch});
+  // Six matching rows per raw page. A slow initial SSR consumes two ordinary
+  // pages (12 visible); a warm first-page API could consume four (24). The
+  // emitted SSR cursor must append its own next24, preserving12 ->36 exactly.
+  const rows = fixtureRows(now).map((row, index) => ({...row, model: ['A4', 'A4 AVANT', 'A4 ALLROAD'][index % 3],
+    japanPowerUnknown: false, japanSupplierPower: {offerId: row.id, hp: index % 4 === 0 ? 150 : 210, unit: 'hp', source: 'ajes_pw'}}));
+  const receipts = [];
+  const page = await core.readPowerOrderedAjesPage({page: pageNumber, pageSize: 24, after: query.after,
+    evidenceEpoch: epoch, cursorKey, minimumReads: 2, now: () => boundedInitial && pageNumber === 1 ? 9000 : 0, startedAt: 0,
+    known: row => !row.japanPowerUnknown, itemKey: row => row.id, read: async (sourcePage, phase) => {
+      const raw = rows.slice((sourcePage - 1) * 24, sourcePage * 24);
+      receipts.push({version: 1, requestId: randomUUID(), queryHash: hash(JSON.stringify([source, sourcePage, phase])),
+        table: 'stats', kind: 'list', page: sourcePage, pageSize: 24, startedAt: now, finishedAt: now,
+        stage: 'storage', supplierAttempted: false, outcome: 'fresh', observedAt: now});
+      return {items: raw.filter(row => row.japanPowerUnknown || row.japanSupplierPower.hp <= 160), received: raw.length,
+        observedAt: now, stale: false, partial: false};
+    }});
+  const payload = {ok: true, ...page, page: pageNumber, pageSize: 24, received: page.items.length,
+    partial: page.partial || resolved.modelDirectoryUnavailable, selectionIncomplete: resolved.modelDirectoryUnavailable,
+    generationId: now, total: null, countSummary: null, sourceReceipts: receipts,
+    powerFilterSummary: {shown: page.items.length, localPower: 0,
+      supplierPower: page.items.filter(row => !row.japanPowerUnknown).length,
+      unknownPower: page.items.filter(row => row.japanPowerUnknown).length}};
+  payload.fixtureSsrReadEvidence = core.ajesSsrReadEvidence(pageNumber, query.after, receipts);
+  return {payload, resolvedQuerySha256: hash(JSON.stringify(source)), evidenceEpoch: epoch};
+}
+
+export async function readExactCountFixtureResult(fixture, active, query, {advance = false, rendered = false} = {}) {
+  const power = active.a4Power160Continuation && query.powerTo === '160' && query.make === 'Audi' && query.model === 'A4';
+  if (!power) return (active.sourceCount ? sourceCountFixtureResult : active.modelCoverage ? modelCoverageFixtureResult : fixtureResult)(query, active.now);
+  const transition = active.powerTransitions[active.powerTransitionIndex] || {from: 'fresh', to: 'fresh'};
+  const continuation = Number(query.page || '1') === 2, state = continuation ? transition.to : transition.from;
+  if (query.countOnly === '1') {
+    if (state !== 'fresh') return {ok: true, total: null, countIncomplete: true, items: [], countSummary: null};
+    const counted = sourceCountFixtureResult(query, active.now), sourceTotal = fixtureRows(active.now).length;
+    counted.countSummary.total = sourceTotal; counted.countSummary.sourceCountProof.sourceTotal = sourceTotal;
+    return counted;
+  }
+  const result = await powerContinuationFixtureResult(fixture.powerCore, query, active.now, state, {boundedInitial: rendered});
+  if (!continuation && rendered) active.powerFirstPageEvidence = result;
+  else if (advance) {
+    const first = active.powerFirstPageEvidence;
+    need(first && query.after === first.payload.nextCursor, 'power_continuation_emitted_cursor');
+    active.controlledPowerTransitions.push({from: transition.from, to: transition.to, status: 200,
+      renderedBefore: first.payload.items.length, added: result.payload.items.length,
+      loadedAfter: first.payload.items.length + result.payload.items.length,
+      cursor: query.after, addedIdsSha256: hash(JSON.stringify(result.payload.items.map(row => row.id))),
+      cursorStable: first.resolvedQuerySha256 === result.resolvedQuerySha256,
+      evidenceEpochStable: first.evidenceEpoch === result.evidenceEpoch, runtimeResolver: true, runtimePowerReader: true,
+      sourceReadsFresh: [...first.payload.sourceReceipts, ...result.payload.sourceReceipts].every(receipt => receipt.outcome === 'fresh'),
+      firstSelectionIncomplete: first.payload.selectionIncomplete, nextSelectionIncomplete: result.payload.selectionIncomplete,
+      selectionCompletenessClaimed: false});
+    active.powerTransitionIndex++;
+  }
+  return result.payload;
+}
+
 /** Record only bounded public call-site fields. Every denied attempt still
  * increments the guard, even after the diagnostic sample is full. */
 export function recordForbiddenFixtureRequest(report,{caseName,stage,method,url,resourceType}) {
@@ -321,11 +423,12 @@ export function createExactCountFixtureHandler({fixture,getActive}) {
         if(url.pathname==='/api/catalog/search'){
           stage='search_payload';
           const query=Object.fromEntries(url.searchParams);active.requests.push({...query});
-          if(Number(query.page)>1){const prior=fixtureResult({...query,page:String(Number(query.page)-1)},active.now);need(query.after===prior.nextCursor,'emitted_cursor');}
+          const powerContinuation=active.a4Power160Continuation&&query.powerTo==='160'&&query.make==='Audi'&&query.model==='A4';
+          if(Number(query.page)>1&&!powerContinuation){const prior=fixtureResult({...query,page:String(Number(query.page)-1)},active.now);need(query.after===prior.nextCursor,'emitted_cursor');}
           if(active.failAppend&&Number(query.page)===3){send(503,{'Content-Type':'application/json'},'{"ok":false}');return;}
           if(active.holdNext&&query.sort==='totalRubDesc'&&Number(query.page)===1){active.held=true;await active.releaseWait;}
-          const result=active.sourceCount?sourceCountFixtureResult(query,active.now)
-            :active.modelCoverage?modelCoverageFixtureResult(query,active.now):fixtureResult(query,active.now);
+          const result=await readExactCountFixtureResult(fixture,active,query,{advance:true,
+            rendered:request.headers?.['x-controlled-catalog-navigation']==='1'});
           send(200,{'Content-Type':'application/json','Cache-Control':'no-store'},JSON.stringify(result));return;
         }
         if(url.pathname==='/api/catalog/brand-counts'){
@@ -348,12 +451,13 @@ export function createExactCountFixtureHandler({fixture,getActive}) {
         }
         if(url.pathname.startsWith('/brand-logos/')){send(200,{'Content-Type':'image/png'},LOCAL_BRAND_LOGO_PNG);return;}
         stage='document_scope';
-        const sourceBookmark=active.sourceCount&&url.pathname==='/cars/japan/Audi/A4'&&url.searchParams.size===1;
+        const powerBookmark=active.a4Power160Continuation&&url.pathname==='/cars/japan/Audi/A4'
+          &&url.searchParams.size===2&&url.searchParams.get('powerTo')==='160';
+        const sourceBookmark=active.sourceCount&&url.pathname==='/cars/japan/Audi/A4'&&(url.searchParams.size===1||powerBookmark);
         need((url.pathname==='/cars/japan'||sourceBookmark)&&url.searchParams.get('city')===CITY
-          &&(url.searchParams.size===1||active.recoverCount&&url.searchParams.size===2&&url.searchParams.get('powerTo')==='160'),'document_scope');
-        const initial={city:CITY,market:'japan',...(active.recoverCount?{powerTo:'160'}:{}),...(sourceBookmark?{make:'Audi',model:'A4'}:{})};
-        const result=active.sourceCount?sourceCountFixtureResult(initial,active.now)
-          :active.modelCoverage?modelCoverageFixtureResult(initial,active.now):fixtureResult(initial,active.now);
+          &&(url.searchParams.size===1||powerBookmark||active.recoverCount&&url.searchParams.size===2&&url.searchParams.get('powerTo')==='160'),'document_scope');
+        const initial={city:CITY,market:'japan',...(active.recoverCount||powerBookmark?{powerTo:'160'}:{}),...(sourceBookmark?{make:'Audi',model:'A4'}:{})};
+        const result=await readExactCountFixtureResult(fixture,active,initial,{rendered:true});
         if(active.recoverCount){result.total=null;result.countSummary=null;}
         const props={initial,result,remount:active.remount,modelCoverage:active.modelCoverage===true,sourceCount:active.sourceCount===true};
         stage='document_render';
@@ -390,7 +494,10 @@ async function main() {
     const plan=JSON.parse(await fs.readFile(path.join(ROOT,'.github/operations/catalog-next/china-code-serving-plan.json'),'utf8'));
     const requireSourceCount=japanSourceCountRequirement(process.env.CATALOG_JAPAN_SOURCE_COUNT_REQUIRED);
     need(requireSourceCount===(plan.countAcceptance===JAPAN_SOURCE_COUNT_ACCEPTANCE),'source_count_profile');
-    fixture=await prepare(process.env.PHOTO_RUNTIME_ROOT,plan);
+    const requirePowerContinuation=japanA4Power160ContinuationRequirement(process.env.CATALOG_JAPAN_A4_POWER160_CONTINUATION_REQUIRED);
+    need(requirePowerContinuation===japanA4Power160ContinuationRequired(plan)
+      &&(!requirePowerContinuation||requireSourceCount),'power_continuation_profile');
+    fixture=await prepare(process.env.PHOTO_RUNTIME_ROOT,plan,{powerContinuation:requirePowerContinuation});
     const helperFiles=['scripts/catalog-next/japan-exact-count-browser.mjs','scripts/catalog-next/japan-price-sort-browser.mjs',
       'scripts/catalog-next/japan-source-count-browser.mjs',
       'scripts/catalog-next/japan-browser-acceptance.mjs'];
@@ -431,10 +538,11 @@ async function main() {
         const callbacks={context:wrapped,report:result,read:async api=>{
           const url=new URL(api,ORIGIN);
           const data=url.pathname==='/api/catalog/source-models'?fixtureDirectory(state.now)
-            :(state.sourceCount?sourceCountFixtureResult:state.modelCoverage?modelCoverageFixtureResult:fixtureResult)(Object.fromEntries(url.searchParams),state.now);
+            :await readExactCountFixtureResult(fixture,state,Object.fromEntries(url.searchParams));
           return {status:200,data};
         },capture:async()=>{},onStage:stage=>{result.stage=stage;},onPage:()=>{},
           verifyPage:verifyJapanPage,verifyFullPage:verifyJapanFullPage,verifyPowerPage:verifyJapanPowerPage,
+          pageReadEvidence:japanPageReadEvidence,readSsrPageEvidence:readJapanSsrPageEvidence,
           verifyVehiclePolicy:verifyJapanVisibleVehiclePolicy};
         const pages=await runJapanPriceSortBrowser({...callbacks,requireExactCount:true});
         need(result.japanPriceSortPassed&&result.japanCountDisplayPassed,'price_journey');
@@ -517,19 +625,54 @@ async function main() {
           positiveExactCountsSupplied,countsIncomplete,directoryWait,modelCoverage:modelReport.checks.modelCoverage};
         await currentPage.close();state.modelCoverage=false;
 
-        let sourceCountAcceptance;
+        let sourceCountAcceptance,a4Power160ContinuationAcceptance;
         if(requireSourceCount){
           result.stage='fixture_source_count';state.sourceCount=true;
+          if(requirePowerContinuation)Object.assign(state,{a4Power160Continuation:true,powerTransitionIndex:0,
+            powerTransitions:[{from:'fresh',to:'stale'},{from:'missing',to:'fresh'}],controlledPowerTransitions:[]});
           const sourceReport={countAcceptance:JAPAN_SOURCE_COUNT_ACCEPTANCE,japanSourceCountRequired:true,
             japanSourceCountPassed:false,japanModelCoverageRequired:true,japanModelCoveragePassed:false,
-            japanExactCountRequired:false,japanExactCountPassed:null,checks:{},screenshots:[]};
+            japanExactCountRequired:false,japanExactCountPassed:null,checks:{},screenshots:[],
+            ...(requirePowerContinuation?{japanA4Power160ContinuationRequired:true,japanA4Power160ContinuationPassed:false}:{})};
+          result.sourceCountReport=sourceReport;
           const sourcePages=await runJapanSourceCountBrowser({...callbacks,report:sourceReport,verifyVisible:verifyJapanPriceSortVisible});
           need(sourceReport.japanSourceCountPassed===true&&sourceReport.japanModelCoveragePassed===true
             &&sourcePages.every(value=>value.total===null&&value.countSummary===null)
             &&sourceReport.checks.sourceCount.pagination.loadedAfter===48,'source_count_journey');
           sourceCountAcceptance={passed:true,countAcceptance:sourceReport.countAcceptance,
             sourceCount:sourceReport.checks.sourceCount,modelCoverage:sourceReport.checks.modelCoverage};
-          await currentPage.close();state.sourceCount=false;
+          if(requirePowerContinuation){
+            need(sourceReport.japanA4Power160ContinuationPassed===true&&state.controlledPowerTransitions.length===2,
+              'power_continuation_journey');
+            const observedTransitions=[];
+            const collectTransitions=(proof,transitions)=>{
+              need(proof.attempts.length===transitions.length,'power_continuation_transition_count');
+              proof.attempts.forEach((attempt,index)=>{
+                const transition=transitions[index];
+                need(transition.cursor===attempt.cursor&&transition.addedIdsSha256===attempt.addedIdsSha256
+                  &&transition.added===attempt.added&&transition.firstSelectionIncomplete===(transition.from!=='fresh')
+                  &&transition.nextSelectionIncomplete===(transition.to!=='fresh')&&attempt.loadedBefore===12
+                  &&attempt.added===24&&attempt.loadedAfter===36,'power_continuation_transition_binding');
+                observedTransitions.push({...transition,oldIdsPreserved:attempt.oldIdsPreserved,duplicateIds:attempt.duplicateIds});
+              });
+            };
+            collectTransitions(sourceReport.checks.a4Power160Continuation,state.controlledPowerTransitions);
+            // The inverse metadata transitions are a second controlled pass,
+            // separate from the two bounded steps of the live gate.
+            Object.assign(state,{powerTransitionIndex:0,powerTransitions:[{from:'stale',to:'fresh'},{from:'fresh',to:'missing'}],controlledPowerTransitions:[]});
+            const reset=await currentPage.goto(ORIGIN+'/cars/japan/Audi/A4?'+new URLSearchParams({city:CITY}),{waitUntil:'domcontentloaded'});
+            need(reset.status()===200,'power_continuation_controlled_reset');
+            const inverseReport={...sourceReport,japanA4Power160ContinuationPassed:false,checks:{...sourceReport.checks}};
+            result.sourceCountReport=inverseReport;
+            await runJapanA4Power160ContinuationBrowser({...callbacks,view:currentPage,report:inverseReport,
+              verifyVisible:verifyJapanPriceSortVisible,pageErrors:()=>errors.length});
+            collectTransitions(inverseReport.checks.a4Power160Continuation,state.controlledPowerTransitions);
+            a4Power160ContinuationAcceptance={passed:true,checkedAt:new Date().toISOString(),
+              japanA4Power160ContinuationRequired:true,japanA4Power160ContinuationPassed:true,
+              controlledBackendContract:'runtime-resolver-and-power-reader-v1',
+              proof:sourceReport.checks.a4Power160Continuation,controlledTransitions:observedTransitions};
+          }
+          await currentPage.close();state.sourceCount=false;state.a4Power160Continuation=false;
         }
 
         // A successful append must repair an initially unknown aggregate in
@@ -587,11 +730,12 @@ async function main() {
           failedAppendKeepsTotal:true,pendingKeepsTotal:true,queryLoadedCountResets:true,lateOldAggregateIgnored:true,
           appendRestoresExactCount:true,lateOtherQueryDoesNotEraseCount:true,
           expiredCountDated:true,expiredCountNotCurrent:true,expiredAppendKeepsCards:true,
-          finite:finiteProof,budgetFinite,modelCoverage:result.checks.modelCoverage,incrementalModelCoverage,sourceCountAcceptance,exactCount:result.checks.exactCount,
+          finite:finiteProof,budgetFinite,modelCoverage:result.checks.modelCoverage,incrementalModelCoverage,sourceCountAcceptance,a4Power160ContinuationAcceptance,exactCount:result.checks.exactCount,
           priceSort:result.checks.priceSort,pageErrors:0,requests:state.requests.length});
       }catch(error){
         report.failure={case:remount?'remounted_controls':'preserved_controls',stage:result.stage,
-          progress:result.checks.exactCountProgress||result.checks.priceSortProgress};
+          progress:result.sourceCountReport?.checks.a4Power160ContinuationProgress
+            ||result.sourceCountReport?.checks.sourceCountProgress||result.checks.exactCountProgress||result.checks.priceSortProgress};
         if(currentPage&&!currentPage.isClosed())report.failure.visible=await currentPage.evaluate(()=>({
           cards:document.querySelectorAll('main.ac-ajes-catalog article').length,
           counts:[...document.querySelectorAll('[data-japan-count-status]')].map(node=>({status:node.getAttribute('data-japan-count-status'),loaded:node.getAttribute('data-japan-loaded-count'),text:node.textContent?.slice(0,160)})),

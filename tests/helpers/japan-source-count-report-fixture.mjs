@@ -38,3 +38,33 @@ export function sourceCountReport(checkedAt = '2026-11-28T12:00:00.000Z', source
     },
   };
 }
+
+/** Synthetic evidence for the separately reviewed model-cursor successor. */
+export function a4Power160ContinuationReport(checkedAt = '2026-11-28T12:00:00.000Z') {
+  const report = sourceCountReport(checkedAt);
+  const observedAt = new Date(Date.parse(checkedAt) - 30_000).toISOString();
+  const cursor = 'j2.k.2.0.2.' + '4'.repeat(64) + '.' + '5'.repeat(64) + '.-';
+  const page = shown => ({status: 200, shown, observedAt, stale: false, interrupted: false,
+    partial: true, scanLimited: true, selectionIncomplete: true, sourcePages: 8,
+    receiptsSha256: '6'.repeat(64), sourceReceiptsFresh: true, total: null, hasMore: true,
+    selectionCompletenessClaimed: false});
+  const renderedPage = (shown, index) => ({...page(shown), kind: 'rendered-ssr', status: index === 0 ? null : 200,
+    page: 1, afterSha256: 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855', ssrBindingMatched: true,
+    partial: null, scanLimited: null, selectionIncomplete: null, interrupted: null});
+  return {...report, japanA4Power160ContinuationRequired: true, japanA4Power160ContinuationPassed: true,
+    checks: {...report.checks, a4Power160Continuation: {
+      contract: 'japan-a4-power160-continuation-browser-v1',
+      selection: {market: 'japan', make: 'Audi', model: 'A4', city: 'Новокузнецк', powerTo: 160},
+      toggledThroughUi: true,
+      firstPageNavigation: {status: 200, sameFilter: true, powerChecked: true, cityPreserved: true},
+      attempts: [['after_power_toggle', 12, 6], ['after_first_page_navigation', 3, 4]].map(([name, loadedBefore, added], index) => ({
+        name, status: 200, sameFilter: true, cursor, continuationCursor: cursor, loadedBefore, added,
+        loadedAfter: loadedBefore + added, duplicateIds: 0, oldIdsPreserved: true, orderPreserved: true,
+        knownBeforeUnknown: true, firstPage: renderedPage(loadedBefore, index), nextPage: page(added),
+        beforeIdsSha256: '7'.repeat(64), addedIdsSha256: '8'.repeat(64), afterIdsSha256: '9'.repeat(64),
+      })),
+      explicitApiReads: 0, ordinaryAppendRequests: 2, firstPageNavigations: 1,
+      fullSelectionExhaustionClaimed: false, liveExhaustiveScan: false, pageErrors: 0,
+    }},
+  };
+}

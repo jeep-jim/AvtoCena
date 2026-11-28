@@ -4,7 +4,8 @@ import {privateOwnerAcl, nonGrantingPolicy} from './private-storage.mjs';
 import {JAPAN_OBSERVED_TIMING_POLICY, JAPAN_STABILITY_CODE_SCOPE, JAPAN_STABILITY_EXACT_COUNT_RETAINED_RUNTIME,
   JAPAN_SOURCE_BOUNDED_INCREMENTAL_POLICY, japanSourceBoundedAcceptancePassed, JAPAN_SOURCE_COUNT_POLICY,
   JAPAN_STABILITY_SOURCE_COUNT_RETAINED_RUNTIME, JAPAN_STABILITY_SOURCE_COUNT_RETAINED_IMAGE,
-  japanSourceCountAcceptancePassed} from './japan-stability-code-scope.mjs';
+  JAPAN_STABILITY_MODEL_CURSOR_RETAINED_RUNTIME, JAPAN_STABILITY_MODEL_CURSOR_RETAINED_IMAGE,
+  japanSourceCountAcceptancePassed, japanA4Power160ContinuationAcceptancePassed} from './japan-stability-code-scope.mjs';
 
 export const CHINA_STATE_KEYS = Object.freeze(Object.fromEntries(['accepted', 'intent', 'lease']
   .map(name => [name, `catalog/market-rebuild/v1/china/${name}.json`])));
@@ -66,8 +67,10 @@ function hostProof(value, reference) {
     && (receipt.countAcceptance === JAPAN_SOURCE_BOUNDED_INCREMENTAL_POLICY
       && receipt.retainedRuntimeSha === JAPAN_STABILITY_EXACT_COUNT_RETAINED_RUNTIME
       || receipt.countAcceptance === JAPAN_SOURCE_COUNT_POLICY
-        && receipt.retainedRuntimeSha === JAPAN_STABILITY_SOURCE_COUNT_RETAINED_RUNTIME
-        && receipt.retainedImageId === JAPAN_STABILITY_SOURCE_COUNT_RETAINED_IMAGE), 'count_acceptance_scope');
+        && (receipt.retainedRuntimeSha === JAPAN_STABILITY_SOURCE_COUNT_RETAINED_RUNTIME
+          && receipt.retainedImageId === JAPAN_STABILITY_SOURCE_COUNT_RETAINED_IMAGE
+          || receipt.retainedRuntimeSha === JAPAN_STABILITY_MODEL_CURSOR_RETAINED_RUNTIME
+            && receipt.retainedImageId === JAPAN_STABILITY_MODEL_CURSOR_RETAINED_IMAGE)), 'count_acceptance_scope');
   need(browser?.release === receipt.release && browser.nonce === receipt.nonce && browser.passed === true
     && browser.functionalPassed === true && (japanPolicy ? observedTiming(browser) : browser.speedPassed === true)
     && browser.countAcceptance === receipt.countAcceptance
@@ -456,7 +459,11 @@ function acceptanceProof(candidate, intent, evidence) {
       need(speed.japanPriceSortRequired === true && speed.japanPriceSortPassed === true
         && speed.japanCountDisplayPassed === true, 'japan_price_sort_binding');
     if (sourceBounded) need(japanSourceBoundedAcceptancePassed(speed), 'japan_source_bounded_binding');
-    else if (sourceCount) need(japanSourceCountAcceptancePassed(speed), 'japan_source_count_binding');
+    else if (sourceCount) {
+      need(japanSourceCountAcceptancePassed(speed), 'japan_source_count_binding');
+      if (receipt.retainedRuntimeSha === JAPAN_STABILITY_MODEL_CURSOR_RETAINED_RUNTIME)
+        need(japanA4Power160ContinuationAcceptancePassed(speed), 'japan_a4_power160_continuation_binding');
+    }
     else if (intent.previous.value.current.runtimeSha === JAPAN_STABILITY_EXACT_COUNT_RETAINED_RUNTIME
       || ['japanExactCountRequired', 'japanExactCountPassed', 'japanModelCoveragePassed'].some(key => Object.hasOwn(speed, key)))
       need(speed.japanExactCountRequired === true && speed.japanExactCountPassed === true
