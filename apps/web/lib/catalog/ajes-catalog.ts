@@ -53,7 +53,7 @@ const resolvedCatalogQuery=cache(async(key:string)=>{
 type AjesAvailableCountSummary=AjesExactCountSummary|AjesSourceCountSummary;
 const selectionCounts=new DetailReadCache<AjesAvailableCountSummary>({maxEntries:128,maxBytes:512*1024,ttlMs:30*60000,expiresAt:value=>Date.parse(value.observedAt)+30*60000,concurrency:2,
  shouldCache:value=>!value.stale&&(value.upperBound?isAjesSourceCountSummary(value)
-  :value.total===0&&value.countProof.sourceTotal===0&&value.countProof.complete&&value.countProof.predicateVersion===AJES_CENSUS_PREDICATE_VERSION)});
+  :'countProof' in value&&value.total===0&&value.countProof.sourceTotal===0&&value.countProof.complete&&value.countProof.predicateVersion===AJES_CENSUS_PREDICATE_VERSION)});
 const countDigest=(value:unknown)=>createHash('sha256').update(JSON.stringify(value)).digest('hex');
 export const readAjesCountSummary=cache(async(key='{}'):Promise<AjesAvailableCountSummary>=>{
  const params=JSON.parse(key);
