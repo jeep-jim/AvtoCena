@@ -55,10 +55,9 @@ export function japanTypedModelSelection(query:string,items:ModelSuggestion[],mu
   return [...new Set((multiple?query.split(','):[query]).map(value=>{
     const literal=items.find(item=>item.model===value.trim());if(literal)return literal.model;
     const name=japanModelText(value,items,make);
-    const exact=typedModelSelection(name,items,false,false);
-    if(exact!==name)return exact;
     // A4 remains the requested family even if this page currently shows only
-    // A4 AVANT. Loading/failed metadata cannot promote that sample to the query.
+    // A4 AVANT or a normalized-equal Ａ４/A 4 spelling. Those suggestions must
+    // not change the literal family used by incomplete-directory fallback.
     if(items.some(item=>matchesCatalogModel(item.model,name,item.make)))return name;
     return typedModelSelection(name,items,false,complete);
   }).filter(Boolean))].join(multiple?'|':'');
@@ -414,8 +413,9 @@ export function VehicleModelSearch({
     });
   };
 
+  const typedSelection = () => japaneseAuctions?japanTypedModelSelection(query,items,multiple,make,supplierLoading===0&&!supplierError&&supplierResult.key===supplierKey&&supplierResult.complete):typedModelSelection(query, items, multiple, contextual);
   const applyTypedModel = () => {
-    const typed=japaneseAuctions?japanTypedModelSelection(query,items,multiple,make,supplierLoading===0&&!supplierError&&supplierResult.key===supplierKey&&supplierResult.complete):typedModelSelection(query, items, multiple, contextual);
+    const typed=typedSelection();
     const next=mobile&&multiple?[...new Set([...selectedModels,...typed.split("|").filter(Boolean)])].join("|"):typed;
     if(!make){const inferred=japaneseAuctions?japanTypedModelMake(next,items,query):typedModelMake(next,items);if(inferred)onMakeChange?.(inferred);}
     onValueChange?.(next);
@@ -483,7 +483,12 @@ export function VehicleModelSearch({
         if (event.key !== "Enter") return;
         event.preventDefault();
         if (multiple) { applyTypedModel(); return; }
-        if (exact) choose(exact, true);
+        if(japaneseAuctions){
+          // Enter applies free text through the same family parser as Apply.
+          // Clicking an explicit source option still uses its literal spelling.
+          const model=typedSelection();
+          choose({make:make||japanTypedModelMake(model,items,query),model},true);
+        }else if (exact) choose(exact, true);
         else { setOpen(false); input.current?.blur(); submitRef.current?.({make, model:japaneseAuctions?query.trim():clean(query)}); }
       }}
       className={inputClassName}

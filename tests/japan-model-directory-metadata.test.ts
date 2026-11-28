@@ -5,6 +5,10 @@ import {createRequire} from 'node:module';
 import {readFileSync} from 'node:fs';
 import {createElement} from 'react';
 import {renderToStaticMarkup} from 'react-dom/server';
+import {DatabaseSync} from 'node:sqlite';
+import {resolveAjesModelSelection} from '../apps/web/lib/catalog/ajes-model-resolution';
+import {ajesQuery} from '../apps/web/lib/catalog/ajes-query';
+import {canonicalCatalogHref} from '../apps/web/lib/catalog/catalog-routes';
 const require=createRequire(import.meta.url);
 
 async function route(){
@@ -140,6 +144,61 @@ test('the actual Japanese model input preserves a typed family while its directo
    if(scenario.expectedMake)assert.equal(selectedMake,scenario.expectedMake);
   }
  }finally{delete (globalThis as any).__japanTypedModelHooks;}
+});
+
+async function typedJapanPicker(t:any){
+ const hooks={slots:[] as any[],cursor:0};(globalThis as any).__japanTypedModelHooks=hooks;
+ const previousWindow=Object.getOwnPropertyDescriptor(globalThis,'window');
+ Object.defineProperty(globalThis,'window',{configurable:true,value:{requestAnimationFrame:(callback:()=>void)=>{callback();return 1;}}});
+ t.after(()=>{delete (globalThis as any).__japanTypedModelHooks;if(previousWindow)Object.defineProperty(globalThis,'window',previousWindow);else delete (globalThis as any).window;});
+ const api=await component('apps/web/components/catalog/VehicleModelSearch.tsx',{
+  react:"export const useMemo=fn=>fn();export const useEffect=()=>{};export const useLayoutEffect=()=>{};export const useRef=value=>({current:value});export const useState=initial=>{const s=globalThis.__japanTypedModelHooks,i=s.cursor++;if(!(i in s.slots))s.slots[i]=typeof initial==='function'?initial():initial;return [s.slots[i],value=>{s.slots[i]=typeof value==='function'?value(s.slots[i]):value;}];};",
+ });
+ const nodes=(node:any):any[]=>!node||typeof node!=='object'?[]:Array.isArray(node)?node.flatMap(nodes):[node,...nodes(node.props?.children)];
+ return {api,mount(names:string[],multiple=true){
+  hooks.slots=[];const state={selected:'',make:'',submitted:null as null|{make:string;model:string}};
+  const sourceItems=names.map(model=>({make:'AUDI',model,aliases:[]}));
+  const props={multiple,value:'',make:'AUDI',contextQuery:'market=japan',sourceItems,
+   onValueChange:(value:string)=>{state.selected=value;},onMakeChange:(value:string)=>{state.make=value;},onSubmit:(selection:{make:string;model:string})=>{state.submitted=selection;}};
+  const render=()=>{hooks.cursor=0;return api.VehicleModelSearch(props);};
+  const input=()=>nodes(render()).find(node=>node.type==='input'&&node.props['aria-label']==='Модель автомобиля');
+  return {state,sourceItems,input,type(value:string){input().props.onChange({target:{value}});},
+   apply(){const button=nodes(render()).find(node=>node.type==='button'&&node.props.children==='Применить');assert.ok(button);button.props.onClick();},
+   choose(model:string){const button=nodes(render()).find(node=>node.type==='button'&&node.props['data-model-value']===model);assert.ok(button);button.props.onClick();}};
+ }};
+}
+
+test('typed Japan ASCII A4 survives Apply with a full-width exact source option and preserves its stale family SQL',async t=>{
+ const picker=await typedJapanPicker(t);
+ const family=['Ａ４','A4L','A4-ALLROAD',...Array.from({length:80},(_,index)=>'A4 AVANT '+index)];
+ const names=[...family,...Array.from({length:11},(_,index)=>'A40 '+index)];
+ assert.equal(names.length,94);assert.equal(names.includes('A4'),false);
+ const control=picker.mount(names);control.type('A4');control.apply();
+ assert.equal(control.state.selected,'A4','normalized suggestion equality cannot rewrite the user family');
+ assert.equal(canonicalCatalogHref('/cars?market=japan&make=AUDI&model='+encodeURIComponent(control.state.selected)+'&city=Test'),'/cars/japan/AUDI/A4?city=Test');
+ for(const complete of [false,true])assert.equal(picker.api.japanTypedModelSelection('A4',control.sourceItems,true,'AUDI',complete),'A4');
+ // Fresh complete directory matching is NFKC-equivalent. The bug matters to
+ // request identity and literal fallback when only a saved spelling is known.
+ assert.deepEqual(resolveAjesModelSelection('A4',control.sourceItems,'AUDI'),resolveAjesModelSelection('Ａ４',control.sourceItems,'AUDI'));
+ const db=new DatabaseSync(':memory:');t.after(()=>db.close());
+ db.exec('create table stats(id text,year integer,auction_type integer,status text,finish integer,marka_name text,model_name text,auction_date text)');
+ const insert=db.prepare('insert into stats values(?,?,?,?,?,?,?,?)');
+ ['A4','A4 AVANT NEW','Ａ４','A40'].forEach((model,index)=>insert.run('typed-'+index,2021,2,'Sold',100000,'AUDI',model,'2026-11-28'));
+ const selection=resolveAjesModelSelection(control.state.selected,[{model:'Ａ４'}],'AUDI',true);
+ assert.deepEqual(new Set(db.prepare(ajesQuery({make:'AUDI',...selection}).sql).all().map(row=>row.model_name)),new Set(['A4','A4 AVANT NEW','Ａ４']));
+});
+
+test('typed Japan ASCII A4 on single Enter cannot choose a normalized spaced source spelling',async t=>{
+ const picker=await typedJapanPicker(t),control=picker.mount(['Ａ４','A 4','A4 AVANT','A40'],false);
+ control.type('A4');control.input().props.onKeyDown({key:'Enter',preventDefault(){}});
+ assert.deepEqual(control.state.submitted,{make:'AUDI',model:'A4'});
+ assert.equal(control.state.selected,'A4');
+});
+
+test('explicit Japanese full-width source options and literal typed selections retain their original spelling',async t=>{
+ const picker=await typedJapanPicker(t),control=picker.mount(['Ａ４','A4 AVANT']);
+ control.type('A4');control.choose('Ａ４');assert.equal(control.state.selected,'Ａ４');
+ const typed=picker.mount(['Ａ４','A4 AVANT']);typed.type('Ａ４');typed.apply();assert.equal(typed.state.selected,'Ａ４');
 });
 
 test('the actual catalog dispatch preserves Japanese source params before AJ, leaving China and Green display aliases unchanged',async()=>{
