@@ -5,7 +5,8 @@ import {useDealerBrowsing} from "@/components/dealers/DealerBrowsingContext";
 import {dealerBrowsingHref} from "@/lib/dealers/browsing-context";
 
 import { useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "react";
-import {CatalogLoadedCountUpdate,useCatalogResultCount} from './CatalogSelectionContext';
+import {CatalogLoadedCountUpdate,CatalogResultCountUpdate,useCatalogResultCount} from './CatalogSelectionContext';
+import {ajesCountText,ajesPaginationCountText,exactAjesCount,latestAjesCountSummary,type AjesCountSummary} from '@/lib/catalog/ajes-count-display';
 import {CatalogPagination} from "./CatalogPagination";
 
 import { loadMoreGreenCorner } from "./green-corner-load-more-action";
@@ -24,12 +25,13 @@ export function CatalogLoadMore({query, initialPage, initialTotal, initialCount,
   initialNextCursor?:string|null; initialHasMore?:boolean; greenQuery?: Record<string,string|undefined>; query: CatalogSearchParams; initialPage: number; initialTotal: number|null; initialCount: number; initialCards: ReactNode;
 }) {
   const dealer=useDealerBrowsing();
-  const streamedCount=useCatalogResultCount();
+  const streamedCount=useCatalogResultCount(resultQueryKey);
   const green = greenQuery !== undefined;
   const basePath = green ? "/cars/green" : "/cars";
   const key = JSON.stringify([dealer?.id,basePath, greenQuery, Object.entries(query).sort(([a],[b])=>a.localeCompare(b)), initialPage, initialPageKey]);
   const [batches, setBatches] = useState<Batch[]>([{incomplete:initialIncomplete,page: initialPage, cards: initialCards, count: initialCount, hasMore:initialHasMore, cursor:query.after, nextCursor:initialNextCursor}]);
   const [total, setTotal] = useState(initialTotal);
+  const [countSummary,setCountSummary]=useState<AjesCountSummary|null>(null);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const [refreshRequired,setRefreshRequired]=useState(false);
@@ -57,7 +59,7 @@ export function CatalogLoadMore({query, initialPage, initialTotal, initialCount,
     // the same query. The Japanese caller binds this key to its actual rows.
     if(initialPageKey!==undefined){
       setBatches([{incomplete:initialIncomplete,page:initialPage,cards:initialCards,count:initialCount,hasMore:initialHasMore,cursor:query.after,nextCursor:initialNextCursor}]);
-      setTotal(initialTotal);prepared.current=null;setError("");
+      setTotal(initialTotal);setCountSummary(null);prepared.current=null;setError("");
     }
     return () => {mounted.current = false;};
   }, [key, initialTotal]);
@@ -89,7 +91,9 @@ export function CatalogLoadMore({query, initialPage, initialTotal, initialCount,
   fallbackQuery.set("page", String(page + 1));
   // The header's delayed aggregate belongs to this exact query, never a previous filter.
   const sharedTotal=resultQueryKey&&streamedCount?.queryKey===resultQueryKey?streamedCount.total:undefined;
-  const knownTotal=total??(typeof sharedTotal==='number'&&Number.isSafeInteger(sharedTotal)&&sharedTotal>=0?sharedTotal:null);
+  const candidateTotal=query.market==='japan'&&streamedCount?.summary?exactAjesCount(streamedCount.summary)??null:total??(typeof sharedTotal==='number'&&Number.isSafeInteger(sharedTotal)&&sharedTotal>=0?sharedTotal:null);
+  const knownTotal=query.market==='japan'&&candidateTotal!==null&&candidateTotal<count?null:candidateTotal;
+  const countLabel=query.market==='japan'&&streamedCount?.summary?ajesPaginationCountText(streamedCount.summary):resultCountLabel;
   const pageCount = cursorPaging ? page+(nextCursor&&batches.at(-1)!.hasMore!==false?1:0) : knownTotal===null ? page+((batches.at(-1)!.hasMore??(batches.at(-1)!.count===24))?1:0) : Math.ceil(knownTotal / 24);
   const windowStart = Math.max(1, Math.min(page - 2, pageCount - 4));
   const numberedPages = [...new Set(cursorPaging?[1,...batches.map(batch=>batch.page).filter(n=>Math.abs(n-page)<=2),...(nextCursor?[page+1]:[])]:[1, ...Array.from({length:5},(_,i)=>windowStart+i), pageCount])].filter(n => n >= 1 && n <= pageCount).sort((a,b)=>a-b);
@@ -132,6 +136,7 @@ export function CatalogLoadMore({query, initialPage, initialTotal, initialCount,
       if(retry&&"incomplete" in result&&result.incomplete&&!result.ids.length)throw Error("incomplete_empty_retry");
       setBatches(current => [...(retry?current.slice(0,-1):current), {incomplete:"incomplete" in result&&Boolean(result.incomplete),cursor:retry?last.cursor:nextCursor??undefined, nextCursor:"nextCursor" in result && typeof result.nextCursor === "string" ? result.nextCursor : "nextCursor" in result && result.nextCursor === null ? null : undefined, page: result.page, cards: result.cards, count: result.ids.length, hasMore:"hasMore" in result && typeof result.hasMore === "boolean" ? result.hasMore : undefined}]);
       setTotal(result.total);
+      if(query.market==='japan'&&'countSummary' in result)setCountSummary(current=>latestAjesCountSummary(current,result.countSummary as AjesCountSummary|null|undefined));
     } catch (error) {
       if (mounted.current && activeKey.current===key) {
         if(query.market==='japan'&&error instanceof JapanCatalogRefreshRequired){
@@ -143,10 +148,11 @@ export function CatalogLoadMore({query, initialPage, initialTotal, initialCount,
   }
   return <div ref={list}>
     {query.market==='japan'&&resultQueryKey&&<CatalogLoadedCountUpdate queryKey={resultQueryKey} count={count}/>}
+    {query.market==='japan'&&resultQueryKey&&countSummary&&<CatalogResultCountUpdate queryKey={resultQueryKey} summary={countSummary} text={ajesCountText(countSummary)} total={exactAjesCount(countSummary)}/>}
     {batches.map(batch => <div key={batch.page} data-catalog-batch={batch.page} className="mb-2.5 grid min-w-0 grid-cols-2 gap-2.5 sm:mb-3 sm:gap-3 md:grid-cols-3 xl:grid-cols-4">{batch.cards}</div>)}
     <div className="mx-auto mt-7 flex w-full flex-col items-center gap-3">
       <p role="status" aria-live="polite" className="text-xs font-bold text-[var(--ac-muted)]">Показано {count.toLocaleString("ru-RU")} {knownTotal!==null?`из ${knownTotal.toLocaleString("ru-RU")}`:""}</p>
-      {knownTotal===null&&resultCountLabel&&<p className="text-xs font-bold text-[var(--ac-muted)]">{resultCountLabel}</p>}
+      {knownTotal===null&&countLabel&&<p className="text-xs font-bold text-[var(--ac-muted)]">{countLabel}</p>}
       {query.market==='japan'&&incomplete&&more&&<p role="status" className="max-w-md text-center text-sm text-[var(--ac-muted)]">Показана часть автомобилей. Полный список пока недоступен.</p>}
       {!refreshRequired&&pageCount > 1 ? <CatalogPagination page={page} pageCount={pageCount} links={numberedPages.map(number=>({page:number,href:pageHref(number)}))} previousHref={page>1&&(!cursorPaging||page===2||batches.some(batch=>batch.page===page-1))?pageHref(page-1):undefined} nextHref={page<pageCount?pageHref(page+1):undefined}/> : null}
       {refreshRequired?null:more ? <a href={pageHref(page+1)} data-no-route-loader="true" role="button" aria-disabled={busy} aria-busy={busy} aria-label={busy ? "Загружаем варианты" : "Показать ещё"} onClick={event => {if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return; event.preventDefault(); void load();}} onKeyDown={event => {if (event.key === " ") {event.preventDefault(); void load();}}} className={`ac-catalog-more ${green ? "ac-green-button" : ""} min-h-12 w-full md:w-[calc((100%_-_24px)/3*2_+_12px)] xl:w-[calc((100%_-_12px)/2)] rounded-2xl bg-red-500 px-8 py-3 text-center text-sm font-black text-white transition hover:bg-red-600 ${busy ? "cursor-wait" : ""}`} style={{color:"#fff"}}>{busy ? <><span className="ac-catalog-more__candy" aria-hidden="true"/><span className="ac-catalog-more__label">Загружаем варианты</span></> : "Показать ещё"}</a> : incomplete ? <div className="max-w-md text-center text-sm text-[var(--ac-muted)]"><p role="status">Показаны сохранённые автомобили. Полный список пока недоступен.</p><button type="button" data-no-route-loader="true" disabled={busy} aria-busy={busy} onClick={()=>void load(true)} className="ac-catalog-more relative mt-3 rounded-2xl bg-red-500 px-8 py-3 font-black text-white">{busy?<><span className="ac-catalog-more__candy" aria-hidden="true"/><span className="ac-catalog-more__label">Обновляем список</span></>:"Повторить"}</button></div> : <p className="text-sm text-[var(--ac-muted)]">{"Вы посмотрели все доступные предложения"}</p>}

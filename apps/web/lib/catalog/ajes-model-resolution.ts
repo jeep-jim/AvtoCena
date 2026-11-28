@@ -1,37 +1,48 @@
 import {AjesUnavailable} from './ajes-client';
 import {matchesCatalogModel} from './model-filter';
-import {modelSearchName} from './model-search-name';
 import {canonicalCatalogBrand} from './brands';
 import type {EncyclopediaIdentityResolver} from './encyclopedia-identity';
+import type {AjesResolvedModels} from './ajes-query';
 /** Resolve a displayed family only against names actually present in the source directory.
  * Base names include their versions even when the source also has an exact base row. */
 export function resolveAjesModelNames(selected:string,models:Array<{model:string}>,make?:unknown):string {
  const names=[...new Set(models.map(x=>x.model.trim()).filter(Boolean))];
- const key=(s:string)=>modelSearchName(make,s).normalize('NFKC').trim().toUpperCase().replace(/\s+/g,' ');
  const resolved=selected.split('|').flatMap(value=>{
-  const target=key(value),exact=names.find(n=>key(n)===target);
   const family=names.filter(n=>matchesCatalogModel(n,value,make));
   return family.length?family:[value];
  });
- const unique=[...new Set(resolved)];
- // Keep the existing bounded SQL selection contract.
- return unique.length<=20?unique.join('|'):selected;
+ return [...new Set(resolved)].join('|');
 }
 
-/** Large source families use a bounded prefix condition instead of dropping their members. */
-export function resolveAjesModelSelection(selected:string,models:Array<{model:string}>,make?:unknown):{model?:string;modelFamilies?:string}{
- const expanded=resolveAjesModelNames(selected,models,make);
- if(expanded!==selected)return {model:expanded};
- const names=[...new Set(models.map(x=>x.model.trim()).filter(Boolean))];
- const key=(s:string)=>modelSearchName(make,s).normalize('NFKC').trim().toUpperCase().replace(/\s+/g,' ');
- const exact:string[]=[],families:string[]=[];
- for(const value of selected.split('|')){
-  const target=key(value),match=names.find(n=>key(n)===target);
-  if(match)exact.push(match);
-  if(names.some(n=>key(n).startsWith(target+' ')))families.push(target);
-  else if(!match)exact.push(value);
+type ModelSelection={model?:string;modelFamilies?:string;resolvedModels?:AjesResolvedModels};
+function modelSelection(exact:string[],families:string[]):ModelSelection {
+ exact=[...new Set(exact)];families=[...new Set(families)];
+ if(exact.length>20||families.length>20)return {resolvedModels:{exact,families}};
+ return {...(exact.length?{model:exact.join('|')}:{}),...(families.length?{modelFamilies:families.join('|')}:{})};
+}
+/** Compact only literal source prefixes; normalized discovery names are not
+ * SQL spellings. Keep every uncovered alias exact instead of silently dropping
+ * hyphens, attached badges, doubled spaces or full-width source letters.
+ */
+export function resolveAjesModelSelection(selected:string,models:Array<{model:string}>,make?:unknown,incomplete=false):ModelSelection {
+ const values=selected.split('|').filter(Boolean),names=resolveAjesModelNames(selected,models,make).split('|').filter(Boolean);
+ if(names.length<=20&&!incomplete)return modelSelection(names,[]);
+ const prefixes=new Set<string>();
+ for(const value of values)for(const name of names){
+  if(!matchesCatalogModel(name,value,make))continue;
+  for(let index=name.indexOf(' ');index>0;index=name.indexOf(' ',index+1)){
+   const prefix=name.slice(0,index);
+   if(!prefix.endsWith(' ')&&matchesCatalogModel(prefix,value,make)){prefixes.add(prefix);break;}
+  }
  }
- return {...(exact.length?{model:[...new Set(exact)].join('|')}:{}),...(families.length?{modelFamilies:[...new Set(families)].join('|')}:{})};
+ const covered=(name:string,prefix:string)=>sourceQueryName(name).startsWith(sourceQueryName(prefix)+' ');
+ const candidates=[...prefixes].filter(prefix=>incomplete||names.filter(name=>covered(name,prefix)).length>1);
+ // A stale or unavailable directory is not allowed to turn typed A4 into just
+ // its one saved A4 AVANT spelling. Retain the literal request and family too.
+ if(incomplete)candidates.push(...values);
+ const families=[...new Set(candidates)].filter((prefix,_index,all)=>!all.some(other=>other!==prefix&&covered(prefix,other)));
+ const exact=[...new Set([...names,...(incomplete?values:[])])].filter(name=>!families.some(prefix=>covered(name,prefix)));
+ return modelSelection(exact,families);
 }
 
 type IdentityReader=()=>Promise<EncyclopediaIdentityResolver|null>;
@@ -45,7 +56,7 @@ const readModelIdentity:IdentityReader=async()=>{
  * it only for Japan discovery, then keep names that actually exist in AJ.
  * This never changes a listing's model or extends the technical identity map.
  */
-async function legacyMazdaSelection(selected:string,models:Array<{model:string}>,make:string,readIdentity:IdentityReader,directoryStale=false):Promise<{selected:string;unavailable:boolean;requiredNames?:string[]}>{
+async function legacyMazdaSelection(selected:string,models:Array<{model:string}>,make:string,readIdentity:IdentityReader,directoryStale=false):Promise<{selected:string;unavailable:boolean}>{
  const legacy=(value:string)=>value.normalize('NFKC').trim()==='3';
  if(canonicalCatalogBrand(make)!=='Mazda'||!selected.split('|').some(legacy))
   return {selected,unavailable:false};
@@ -59,46 +70,37 @@ async function legacyMazdaSelection(selected:string,models:Array<{model:string}>
   const spellings=(canonical.sourceNames||[]).flatMap(alias=>typeof alias!=='string'&&alias.safe===true
    &&key(alias.value).replace(/ /g,'')===canonical.canonicalName
    &&resolver.resolveModel(brand.brand.id,alias.value)?.model.id===canonical.id?[alias.value]:[]);
-  const prefix=(name:string,target:string)=>sourceQueryName(name)===sourceQueryName(target)||sourceQueryName(name).startsWith(sourceQueryName(target)+' ');
-  const requiredNames=new Set<string>();
   const targets=selected.split('|').flatMap(value=>{
    if(!legacy(value))return [value];
    const candidates=[...new Set([value,canonical.canonicalName,...spellings])];
-   const families=candidates.filter(target=>models.some(row=>prefix(row.model,target)));
-   const matches=models.filter(row=>candidates.some(target=>matchesCatalogModel(row.model,target,make)));
-   for(const row of matches)requiredNames.add(row.model);
-   // Retain spaced source roots for the >20-name prefix path and preserve any
-   // attached source badge as an exact name, without widening those prefixes.
-   const exact=matches.filter(row=>!families.some(target=>prefix(row.model,target))).map(row=>row.model);
-   return families.length||exact.length?[...families,...exact]:[value];
+   const families=candidates.filter(target=>models.some(row=>matchesCatalogModel(row.model,target,make)));
+   // The shared compiler derives literal SQL prefixes from these observed
+   // matches, including source spacing/full-width spelling. A canonical alias
+   // itself is never emitted as a replacement source or technical identity.
+   return families.length?families:[value];
   });
-  return {selected:[...new Set(targets)].join('|'),unavailable:directoryStale,requiredNames:[...requiredNames]};
+  return {selected:[...new Set(targets)].join('|'),unavailable:directoryStale};
  }catch{return {selected,unavailable:true};}
 }
 
 /** A names directory is optional for an exact typed list request. Never hide
  * programming errors or source-switch failures, and never infer a zero count. */
-export async function resolveAjesQueryModels<T extends {table?:string;model?:string;make?:string;modelFamilies?:string}>(query:T,read:()=>Promise<{models:Array<{model:string}>;stale?:boolean}>,readIdentity:IdentityReader=readModelIdentity){
+export async function resolveAjesQueryModels<T extends {table?:string;model?:string;make?:string;modelFamilies?:string;resolvedModels?:AjesResolvedModels}>(query:T,read:()=>Promise<{models:Array<{model:string}>;stale?:boolean}>,readIdentity:IdentityReader=readModelIdentity){
  if(!query.model)return {query,modelDirectoryUnavailable:false};
  if(!query.make)return {query:{...query,modelFamilies:query.model},modelDirectoryUnavailable:false};
  try{
   const directory=await read();
   const legacy=await legacyMazdaSelection(query.model,directory.models,query.make,readIdentity,directory.stale===true);
-  const selection=resolveAjesModelSelection(legacy.selected,directory.models,query.make);
-  const exact=selection.model?.split('|')||[],families=selection.modelFamilies?.split('|')||[];
-  // Discovery normalization is broader than literal SQL. Keep every observed
-  // legacy family spelling exact unless the emitted =/LIKE truly covers it.
-  const uncovered=(legacy.requiredNames||[]).filter(model=>!exact.some(value=>sourceQueryName(value)===sourceQueryName(model))
-   &&!families.some(value=>sourceQueryName(model).startsWith(sourceQueryName(value)+' ')));
-  if(uncovered.length)selection.model=[...new Set([...exact,...uncovered])].join('|');
-  if(legacy.requiredNames&&[selection.model,selection.modelFamilies].some(value=>value&&value.split('|').length>20))
-   return {query,modelDirectoryUnavailable:true};
-  const next={...query};delete next.model;Object.assign(next,selection);
-  return {query:next,modelDirectoryUnavailable:legacy.unavailable};
+  const incomplete=Boolean(directory.stale||legacy.unavailable);
+  const selection=resolveAjesModelSelection(legacy.selected,directory.models,query.make,incomplete);
+  const next={...query};delete next.model;delete next.modelFamilies;delete next.resolvedModels;Object.assign(next,selection);
+  return {query:next,modelDirectoryUnavailable:incomplete};
  }catch(error){
   const recoverable=error instanceof AjesUnavailable&&(/^(?:http_(?:429|5\d\d)|local_busy|visitor_restricted|request_timeout|connect_timeout|request_failed|quota_exhausted|quota_busy|invalid_response|empty_response|response_too_large|query_too_large|directory_too_large|directory_page_repeated)$/.test(error.reason))
    ||error instanceof Error&&/^detail_cache_queue_(?:timeout|full)$/.test(error.message);
   if(!recoverable)throw error;
-  return {query,modelDirectoryUnavailable:true};
+  const next={...query};delete next.model;delete next.modelFamilies;delete next.resolvedModels;
+  Object.assign(next,resolveAjesModelSelection(query.model,[],query.make,true));
+  return {query:next,modelDirectoryUnavailable:true};
  }
 }

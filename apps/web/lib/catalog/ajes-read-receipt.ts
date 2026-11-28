@@ -6,7 +6,7 @@ export function ajesPublicFailureReason(value:unknown):string {
  return typeof value==='string'&&(reasons.has(value)||/^http_[45]\d\d$/.test(value))?value:'operation_failed';
 }
 type Stage='query'|'access'|'storage'|'supplier'|'empty_verification'|'cooldown'|'queue';
-type Kind='list'|'detail'|'count'|'models'|'makes'|'colors';
+type Kind='list'|'detail'|'count'|'models'|'makes'|'colors'|'census';
 type Query={queryHash:string;table:'stats'|'main';kind:Kind;page:number;pageSize:number};
 export type AjesReadTrace={requestId:string;startedAt:string;stage:Stage;supplierAttempted:boolean;reason?:string;query?:Query};
 export type AjesReadReceipt=Query&{
@@ -31,7 +31,7 @@ const isoDate=(value:unknown)=>typeof value==='string'&&/^\d{4}-\d{2}-\d{2}T\d{2
 export function publicAjesReadReceipt(value:unknown):AjesReadReceipt|undefined {
  const r=value as AjesReadReceipt|undefined;
  if(!r||r.version!==1||!/^[a-f0-9-]{36}$/.test(r.requestId)||!/^[a-f0-9]{64}$/.test(r.queryHash)
-  ||!['stats','main'].includes(r.table)||!['list','detail','count','models','makes','colors'].includes(r.kind)
+  ||!['stats','main'].includes(r.table)||!['list','detail','count','models','makes','colors','census'].includes(r.kind)
   ||!Number.isSafeInteger(r.page)||r.page<1||r.page>1000000||!Number.isSafeInteger(r.pageSize)||r.pageSize<1||r.pageSize>500
   ||!isoDate(r.startedAt)||!isoDate(r.finishedAt)||!['query','access','storage','supplier','empty_verification','cooldown','queue'].includes(r.stage)
   ||typeof r.supplierAttempted!=='boolean'||!['fresh','stale','partial','unavailable'].includes(r.outcome))return undefined;

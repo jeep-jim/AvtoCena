@@ -80,7 +80,7 @@ for(const name of ['PublicHeader','CatalogCard','CatalogFilters','BrandLogoRail'
 // Exercise the real card admission and power labels at the JSON boundary.
 // Only ancillary controls and browser contexts are inert during static render.
 const cardStubs={
- CatalogSelectionContext:'export const useCatalogView=()=>"grid";export const useCatalogLoadedCount=()=>null;',
+ CatalogSelectionContext:'export const useCatalogView=()=>"grid";export const useCatalogLoadedCount=()=>null;export const useCatalogResultCount=()=>null;export const CatalogResultCountUpdate=()=>null;',
  DealerBrowsingContext:'export const useDealerBrowsing=()=>null;',
  useSavedCalculationPreview:'export const useSavedCalculationPreview=()=>undefined;',
  FavoriteToggle:'export const FavoriteToggle=()=>null;',

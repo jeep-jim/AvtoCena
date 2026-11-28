@@ -114,6 +114,34 @@ test('Japanese model options retain literal make/model spellings and typed infer
  assert.equal(japanTypedModelMake('B-CLASS|COROLLA 2WD',options),'');
 });
 
+test('the actual Japanese model input preserves a typed family while its directory is incomplete and accepts an explicit make prefix',async()=>{
+ const hooks={slots:[] as any[],cursor:0};(globalThis as any).__japanTypedModelHooks=hooks;
+ try{
+  const {VehicleModelSearch}=await component('apps/web/components/catalog/VehicleModelSearch.tsx',{
+   react:"export const useMemo=fn=>fn();export const useEffect=()=>{};export const useLayoutEffect=()=>{};export const useRef=value=>({current:value});export const useState=initial=>{const s=globalThis.__japanTypedModelHooks,i=s.cursor++;if(!(i in s.slots))s.slots[i]=typeof initial==='function'?initial():initial;return [s.slots[i],value=>{s.slots[i]=typeof value==='function'?value(s.slots[i]):value;}];};",
+  });
+  const nodes=(node:any):any[]=>!node||typeof node!=='object'?[]:Array.isArray(node)?node.flatMap(nodes):[node,...nodes(node.props?.children)];
+  const input=(tree:any)=>nodes(tree).find(node=>node.type==='input'&&node.props['aria-label']==='Модель автомобиля');
+  for(const scenario of [
+   {make:'AUDI',names:['A4 AVANT'],typed:'A4',expected:'A4'},
+   {make:'AUDI',names:['A4','A4 AVANT','A4 ALLROAD QUATTRO'],typed:'Audi A4',expected:'A4'},
+   {make:'',names:['A4','A4 AVANT'],typed:'Audi A4',expected:'A4',expectedMake:'AUDI'},
+   {make:'AUDI',names:['A4','A4 AVANT','A40'],typed:'A4',expected:'A4'},
+   {make:'LANDROVER',names:['RANGE  ROVER'],typed:'RANGE  ROVER',expected:'RANGE  ROVER'},
+  ]){
+   hooks.slots=[];let selected='',selectedMake='';
+   const props={multiple:true,value:'',make:scenario.make,contextQuery:'market=japan',
+    sourceItems:scenario.names.map(model=>({make:scenario.make||'AUDI',model,aliases:[]})),
+    onValueChange:(value:string)=>{selected=value;},onMakeChange:(value:string)=>{selectedMake=value;}};
+   const render=()=>{hooks.cursor=0;return VehicleModelSearch(props);};
+   input(render()).props.onChange({target:{value:scenario.typed}});
+   input(render()).props.onKeyDown({key:'Enter',preventDefault(){}});
+   assert.equal(selected,scenario.expected,JSON.stringify(scenario));
+   if(scenario.expectedMake)assert.equal(selectedMake,scenario.expectedMake);
+  }
+ }finally{delete (globalThis as any).__japanTypedModelHooks;}
+});
+
 test('the actual catalog dispatch preserves Japanese source params before AJ, leaving China and Green display aliases unchanged',async()=>{
  const file='apps/web/components/catalog/CatalogContent.tsx',text=readFileSync(file,'utf8');
  const real=new Set(['react','@/lib/catalog/brands','@/lib/catalog/filter-selections','@/lib/catalog/catalog-sort','@/lib/catalog/engine-input','@/lib/catalog/runtime-config']);
@@ -210,6 +238,7 @@ test('Japan overview and filtered homepage rails omit the long power summary whi
   './JapanRailFrame':frame,'@/components/catalog/JapanRailFrame':frame,
   './CatalogLoading':loading,'@/components/catalog/CatalogLoading':loading,
   './MarketResultCount':marketCount,'@/components/catalog/MarketResultCount':marketCount,
+  './JapanCatalogCount':"export const JapanCatalogCount=()=>null;",'@/components/catalog/JapanCatalogCount':"export const JapanCatalogCount=()=>null;",
  };
  try{
   const {AjesRail}=await component('apps/web/components/catalog/AjesRail.tsx',shared);

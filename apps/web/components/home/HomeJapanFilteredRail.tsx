@@ -4,9 +4,9 @@ import {DealerLink as Link} from '@/components/dealers/DealerBrowsingContext';
 import {CatalogCard} from '@/components/catalog/CatalogCard';
 import {CatalogSectionLoading} from '@/components/catalog/CatalogLoading';
 import {JapanRailFrame,japanRailHref,japanSavedPreviewText,type JapanRailParams} from '@/components/catalog/JapanRailFrame';
-import {MarketResultCount} from '@/components/catalog/MarketResultCount';
+import {JapanCatalogCount} from '@/components/catalog/JapanCatalogCount';
 import {MARKET_RAIL_CLASS} from '@/components/catalog/market-rail-layout';
-import {ajesCountText,exactAjesCount,type AjesCountSummary} from '@/lib/catalog/ajes-count-display';
+import {exactAjesCount,type AjesCountSummary} from '@/lib/catalog/ajes-count-display';
 
 type Preview={disabled:boolean;items:any[];count:AjesCountSummary|null;stale:boolean;partial:boolean;hasMore:boolean;observedAt?:string};
 
@@ -42,7 +42,7 @@ export function HomeJapanFilteredRail({params}:{params:JapanRailParams}) {
  const pending=status==='loading'||(!current&&status!=='error');
  const href=japanRailHref(params);
  if(current&&loaded.disabled)return null;
- return <JapanRailFrame params={params} busy={pending} status={pending?'loading':status==='error'?'unavailable':loaded?.items.length?'ready':'empty'} count={<MarketResultCount total={exactAjesCount(count)}>{ajesCountText(count)}</MarketResultCount>}>
+ return <JapanRailFrame params={params} busy={pending} status={pending?'loading':status==='error'?'unavailable':loaded?.items.length?'ready':'empty'} count={<JapanCatalogCount queryKey={queryKey} summary={count} initialCount={current?loaded.items.length:undefined}/>}>
   {pending?<CatalogSectionLoading active/>:null}
   {loaded&&!current?<p role="status" className="mb-3 text-sm text-[var(--ac-muted)]">Пока показана предыдущая подборка. Новые условия ещё не применены.</p>:null}
   {status==='error'?<p role="status" className="mb-3 rounded-xl border border-[var(--ac-border)] p-4 text-sm">Не удалось обновить автомобили. <button type="button" className="underline" onClick={()=>setAttempt(value=>value+1)}>Повторить</button> · <Link href={href} className="underline">Открыть каталог</Link></p>:null}

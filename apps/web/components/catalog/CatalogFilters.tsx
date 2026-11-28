@@ -350,8 +350,8 @@ export function CatalogFilters({ initial, facets, resultCount, auctionResults=fa
     keyboardRangeCommit.current = false;
   };
   const formKey = useMemo(() => JSON.stringify(initial), [initial]);
-  const streamedCount=useCatalogResultCount();
-  const countText=typeof resultCount==="number"?resultCount.toLocaleString("ru-RU"):streamedCount?.queryKey===formKey?streamedCount.text:"Количество уточняется";
+  const streamedCount=useCatalogResultCount(formKey);
+  const countText=streamedCount?.queryKey===formKey?streamedCount.text:typeof resultCount==="number"?resultCount.toLocaleString("ru-RU"):"Количество уточняется";
   const countKnown=countText!=="Количество уточняется"&&(!auctionResults||Boolean(countText));
   const countLabel=countKnown?`Найдено ${countText.includes(" ·")?countText.replace(" ·"," машин ·"):`${countText} машин`}`:auctionResults?"Автомобили из Японии":countText;
   const [draft, setDraft] = useState<FilterDraft>(() => draftFromInitial(initial));

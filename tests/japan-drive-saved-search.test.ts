@@ -30,6 +30,15 @@ test('saved model family selection and verified annual index use the same drivet
  assert.deepEqual(findSavedAjesSearch(q,snapshots,now,index)!.items.map(l=>l.id),['01']);
  assert.equal(findSavedAjesSearch(q,snapshots,now),null);
 });
+test('saved recovery retains every server-resolved Audi alias beyond twenty choices with the live model predicate',()=>{
+ const exact=['A4',...Array.from({length:26},(_,index)=>`A4${String.fromCharCode(65+index)}`)];
+ const models=[...exact,'A  4 AVANT','A  4 ALLROAD','A40','A4Z2','OTHER A4'];
+ const snapshots=Object.fromEntries(models.map((model,index)=>[String(index),snapshot(String(index).padStart(2,'0'),{make:'AUDI',model})]));
+ const result=findSavedAjesSearch({make:'Audi',resolvedModels:{exact,families:['A  4']},pageSize:48},snapshots,now)!;
+ assert.deepEqual(result.items.map(l=>l.model),models.slice(0,29));
+ assert.equal(result.partial,true);assert.equal(result.stale,true);assert.equal('total' in result,false);
+ assert.throws(()=>findSavedAjesSearch({make:'Audi',model:'A40',resolvedModels:{exact,families:[]}},snapshots,now),/ajes_invalid_query/);
+});
 test('client returns labelled saved drive matches after refusal without retries or clearing cooldown',async()=>{
  let requests=0;
  const snapshots={one:snapshot('01')};

@@ -230,3 +230,26 @@ test('changed consumed membership requests refresh instead of silently moving th
  await assert.rejects(readPowerOrderedAjesPage({...powerOptions,page:2,after:first.nextCursor!,read}),AjesCursorRefreshRequired);
  assert.equal(calls,before+1);
 });
+
+test('a proven requested selection fills its page beyond the former elapsed/read soft stops',async()=>{
+ let time=0;const calls:number[]=[];
+ const result=await readFilteredAjesPage({page:1,pageSize:24,fillRequestedPage:true,now:()=>time,read:async page=>{
+  calls.push(page);time+=12000;return {items:page===11?Array.from({length:24},(_,i)=>'match-'+i):[],received:24};
+ }});
+ assert.equal(result.items.length,24);assert.equal(result.scanLimited,false);assert.deepEqual(calls,Array.from({length:11},(_,i)=>i+1));
+});
+
+test('a proved zero known total starts unknown directly instead of traversing the whole known source phase',async()=>{
+ const phases:string[]=[];
+ const result=await readPowerOrderedAjesPage({...powerOptions,page:1,knownTotal:0,fillRequestedPage:true,read:async(page,phase)=>{
+  phases.push(phase);return {items:Array.from({length:23},(_,i)=>({id:'unknown-'+i,known:false})),received:23,observedAt};
+ }});
+ assert.deepEqual(phases,['u']);assert.equal(result.items.length,23);assert.equal(result.hasMore,false);assert.equal(result.nextCursor,null);
+});
+
+test('complete-page filling still stops on a real partial or stale source response',async()=>{
+ for(const flags of [{partial:true},{stale:true}]){
+  let calls=0;const result=await readFilteredAjesPage({page:1,pageSize:24,fillRequestedPage:true,read:async()=>{calls++;return {items:['retained'],received:24,...flags};}});
+  assert.equal(calls,1);assert.deepEqual(result.items,['retained']);assert.equal(result.hasMore,false);
+ }
+});

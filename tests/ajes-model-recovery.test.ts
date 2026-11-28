@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {createAjesClient,AjesUnavailable,readAjesModelDirectory} from '../apps/web/lib/catalog/ajes-client';
 import {DetailReadCache} from '../apps/web/lib/catalog/detail-read-cache';
 import {resolveAjesQueryModels} from '../apps/web/lib/catalog/ajes-model-resolution';
-import {ajesLot,ajesQuery,ajesSourceCacheSql} from '../apps/web/lib/catalog/ajes-query';
+import {ajesCatalogQuery,ajesLot,ajesQuery,ajesSourceCacheSql} from '../apps/web/lib/catalog/ajes-query';
 import {DatabaseSync} from 'node:sqlite';
 import {createRequire} from 'node:module';
 import {build} from 'esbuild';
@@ -42,7 +42,7 @@ test('directory failure permits an exact list query but marks unresolved familie
  const recoverable=['visitor_restricted','local_busy','request_failed','request_timeout','connect_timeout','quota_busy','quota_exhausted','invalid_response','empty_response','response_too_large','query_too_large','http_429','http_500','http_503','directory_too_large','directory_page_repeated'];
  for(const error of [...recoverable.map(reason=>new AjesUnavailable(reason)),Error('detail_cache_queue_timeout'),Error('detail_cache_queue_full')]){
   const result=await resolveAjesQueryModels(input,async()=>{throw error;});
-  assert.deepEqual(result,{query:input,modelDirectoryUnavailable:true});assert.equal(input.model,'COROLLA');
+  assert.deepEqual(result,{query:{...input,modelFamilies:'COROLLA'},modelDirectoryUnavailable:true});assert.equal(input.model,'COROLLA');
  }
  const result=await resolveAjesQueryModels(input,async()=>({models:[{model:'COROLLA'},{model:'COROLLA CROSS'},{model:'CAMRY'}]}));
  assert.equal(result.query.model,'COROLLA|COROLLA CROSS');assert.equal(result.modelDirectoryUnavailable,false);
@@ -57,11 +57,11 @@ test('actual catalog wrapper keeps exact model cards on directory failure and ne
   'server-only':'','next/headers':"export const headers=async()=>new Map([['x-real-ip','127.0.0.1']]);",
   './ajes-runtime':"export const ajesClient={read:async()=>{globalThis.__modelRecovery.counts++;throw Error('count must not run');}};",
   './ajes-public':`export const readAjesPublicEvidenceSnapshot=()=>{throw Error("unexpected power snapshot");};export const cappedAjesQuery=async q=>q;export const readAjesPublic=async q=>{const s=globalThis.__modelRecovery;s.lists++;s.queries.push(q);return {page:q.page||1,pageSize:24,received:s.empty?0:24,items:s.empty?[]:[{id:'toyota-exact'}],observedAt:'now'};};`,
-  './ajes-query':"export const ajesCatalogQuery=p=>({table:'stats',make:p.make,model:p.model,page:1,pageSize:24});export class AjesFilterUnavailable extends Error{};export class AjesInputError extends Error{};export class AjesCursorRefreshRequired extends AjesInputError{};",
   './ajes-client':"export class AjesUnavailable extends Error{constructor(reason){super(reason);this.reason=reason;}};export const readAjesModelDirectory=async()=>{throw new AjesUnavailable('local_busy');};export const readAjesMakeDirectory=async()=>({makes:[]});",
   './ajes-result-filter':"export const ajesResultFilter=()=>({active:false,priceFilter:false,matches:()=>true});",
   './storage':"export const publicOffer=x=>x;",'./market-page':"export const sortCatalogRows=x=>x;",
   './live-business-pricing':"export const applyActiveBusinessPricingBatch=async x=>x;",
+  './ajes-count-pricing-context':"export const captureAjesCountPricingContext=async()=>{throw Error('unexpected price-filter context');};",
   './collection-controls':"export const assertCollectionEnabled=async()=>{};",
   './japan-preview-parameters':"export const japanPreviewParameters=()=>{throw Error('not attested');};",'../encyclopedia/calculation-evidence':"export const hasEncyclopediaCalculationEvidence=()=>false;",
  };
@@ -99,8 +99,8 @@ test('legacy Mazda/3 selects the complete real MAZDA3 family while excluding CX-
  assert.deepEqual(legacy,before,'discovery does not rewrite the caller or any listing');
  assert.deepEqual(models,[...matched,...excluded]);
  const sql=ajesQuery(result.query as any).sql;
- assert.match(sql,/model_name='MAZDA3'/);assert.match(sql,/model_name='MAZDA3 FASTBACK'/);
- assert.doesNotMatch(sql,/model_name='(?:CX-3|MPV|AXELA|MAZDA30)'/);
+ assert.ok(sql.includes(`model_name in (${matched.map(name=>`'${name}'`).join(',')})`));
+ assert.doesNotMatch(sql,/model_name (?:=|in \()[^)]*'(?:CX-3|MPV|AXELA|MAZDA30)'/);
 });
 
 test('legacy resolution preserves source spelling and an existing exact base plus all its variants',async()=>{
@@ -145,11 +145,53 @@ test('empty or unrelated source directories never invent a MAZDA3 option or subs
 test('a stale legacy directory preserves known model names without claiming the family complete or empty',async()=>{
  for(const names of [['MAZDA3 FASTBACK'],[]]){
   const result=await resolveAjesQueryModels(legacy,async()=>({...(await directory(names)()),stale:true}));
-  assert.equal(result.query.model,names[0]||'3');assert.equal(result.modelDirectoryUnavailable,true);
+  assert.equal(result.modelDirectoryUnavailable,true);
+  const db=database([...names,...excluded]);
+  try{assert.deepEqual(db.prepare(ajesQuery(result.query as any).sql).all().map(row=>row.model_name),names);}finally{db.close();}
  }
  const other={...legacy,make:'TOYOTA',model:'COROLLA'};
  const result=await resolveAjesQueryModels(other,async()=>({models:[{model:'COROLLA'}],stale:true}),forbidIdentity);
- assert.deepEqual(result,{query:other,modelDirectoryUnavailable:false},'this correction is limited to the new legacy alias path');
+ assert.equal(result.modelDirectoryUnavailable,true,'saved model metadata cannot attest completeness for any Japanese make');
+});
+
+test('Audi A4 keeps every observed body and spelling across the bounded family SQL path',async()=>{
+ const names=['A4',...Array.from({length:21},(_,i)=>'A4 AVANT VERSION '+i),
+  'A4-AVANT','A4L','A 4 ALLROAD','Ａ４ CABRIOLET'];
+ const excluded=['A40','A40 AVANT','RS4','OTHER A4'];
+ const input={table:'stats',make:'AUDI',model:'A4',page:1,pageSize:48};
+ const result=await resolveAjesQueryModels(input,directory([...names,...excluded]),forbidIdentity);
+ assert.equal(result.modelDirectoryUnavailable,false);
+ const db=database([...names,...excluded],'AUDI');
+ try{
+  const query=ajesQuery(result.query as any),rows=db.prepare(query.sql).all();
+  assert.deepEqual(new Set(rows.map(row=>row.model_name)),new Set(names));
+  const count=db.prepare(ajesQuery({...result.query,aggregate:'count'} as any).sql).get()!;
+  assert.equal(Number(count['count(*)']),names.length,'list and count use the same complete source model predicate');
+ }finally{db.close();}
+ assert.equal(input.model,'A4');
+});
+
+test('large observed source spellings compact literal prefixes without dropping more than twenty aliases',async()=>{
+ const names=['A4',...['A  4','A4-AVANT','Ａ４','A4L'].flatMap(prefix=>Array.from({length:21},(_,i)=>prefix+' VERSION '+i))];
+ const excluded=['A40','A4L2','RS4','OTHER A4'];
+ const result=await resolveAjesQueryModels({table:'stats',make:'AUDI',model:'A4',page:1,pageSize:48},directory([...names,...excluded]),forbidIdentity);
+ assert.equal(result.modelDirectoryUnavailable,false);
+ const db=database([...names,...excluded],'AUDI');
+ try{
+  const rows=[1,2].flatMap(page=>db.prepare(ajesQuery({...result.query,page} as any).sql).all());
+  assert.deepEqual(new Set(rows.map(row=>row.model_name)),new Set(names));
+ }finally{db.close();}
+});
+
+test('stale Audi model metadata retains known spellings and the typed base family without claiming a complete match',async()=>{
+ const result=await resolveAjesQueryModels({table:'stats',make:'AUDI',model:'A4',page:1,pageSize:48},
+  async()=>({models:[{model:'A4 AVANT'}],stale:true}),forbidIdentity);
+ assert.equal(result.modelDirectoryUnavailable,true);
+ const db=database(['A4','A4 AVANT','A4 ALLROAD QUATTRO','A40'],'AUDI');
+ try{
+  const rows=db.prepare(ajesQuery(result.query as any).sql).all();
+  assert.deepEqual(new Set(rows.map(row=>row.model_name)),new Set(['A4','A4 AVANT','A4 ALLROAD QUATTRO']));
+ }finally{db.close();}
 });
 
 test('missing, unsafe or ambiguous canonical evidence preserves exact source fallback as incomplete',async()=>{
@@ -162,26 +204,45 @@ test('missing, unsafe or ambiguous canonical evidence preserves exact source fal
   {id:'mazda/unreviewed',brandId:'mazda',canonicalName:'Other',aliases:[{value:'MAZDA 3',safe:true}]}]});
  for(const read of [async()=>null,async()=>{throw Error('local metadata unavailable');},async()=>unsafe,async()=>ambiguous,async()=>spellingConflict]){
   const result=await resolveAjesQueryModels(legacy,directory(['3','MAZDA3 FASTBACK']),read);
-  assert.deepEqual(result,{query:legacy,modelDirectoryUnavailable:true});
+  assert.deepEqual(result,{query:{...legacy,modelFamilies:'3'},modelDirectoryUnavailable:true});
  }
  const failure=await resolveAjesQueryModels(legacy,async()=>{throw new AjesUnavailable('request_timeout');},forbidIdentity);
- assert.deepEqual(failure,{query:legacy,modelDirectoryUnavailable:true});
+ assert.deepEqual(failure,{query:{...legacy,modelFamilies:'3'},modelDirectoryUnavailable:true});
 });
 
-test('legacy aliases cannot overflow the bounded SQL selection for an otherwise valid twenty-model pipe',async()=>{
+test('twenty user choices can resolve to more than twenty actual source aliases without losing any',async()=>{
  const other=Array.from({length:19},(_,i)=>'OTHER '+i),query={...legacy,model:['3',...other].join('|')};
- const result=await resolveAjesQueryModels(query,directory(['3','MAZDA3','MAZDA 3',...other]));
- assert.deepEqual(result,{query,modelDirectoryUnavailable:true});
- assert.doesNotThrow(()=>ajesQuery(result.query as any));
+ const names=['3','MAZDA3','MAZDA 3',...other],result=await resolveAjesQueryModels(query,directory(names));
+ assert.equal(result.modelDirectoryUnavailable,false);assert.ok(result.query.resolvedModels);
+ const db=database([...names,'CX-3','MAZDA30']);
+ try{assert.deepEqual(new Set(db.prepare(ajesQuery(result.query as any).sql).all().map(row=>row.model_name)),new Set(names));}finally{db.close();}
 });
 
-test('too many literal source spellings cannot masquerade as a complete normalized prefix',async()=>{
+test('large legacy families use the actual source spelling rather than a normalized SQL prefix',async()=>{
  for(const spelling of ['MAZDA  3','ＭＡＺＤＡ３']){
   const names=Array.from({length:21},(_,i)=>spelling+' VERSION '+i);
   const result=await resolveAjesQueryModels(legacy,directory(names));
-  assert.deepEqual(result,{query:legacy,modelDirectoryUnavailable:true});
-  assert.doesNotThrow(()=>ajesQuery(result.query as any));
+  assert.equal(result.modelDirectoryUnavailable,false);assert.equal(result.query.modelFamilies,spelling);
+  const db=database([...names,...excluded]);
+  try{assert.deepEqual(new Set(db.prepare(ajesQuery(result.query as any).sql).all().map(row=>row.model_name)),new Set(names));}finally{db.close();}
  }
+});
+
+test('server-resolved one-word aliases exceed the UI choice count safely and cannot enter through public params',async()=>{
+ const names=['A4',...Array.from({length:26},(_,i)=>'A4'+String.fromCharCode(65+i))];
+ const result=await resolveAjesQueryModels({table:'stats',make:'AUDI',model:'A4',page:1,pageSize:48},directory([...names,'A40','A4Z2']),forbidIdentity);
+ assert.equal(result.modelDirectoryUnavailable,false);assert.deepEqual(result.query.resolvedModels?.exact,names);
+ const db=database([...names,'A40','A4Z2'],'AUDI');
+ try{
+  assert.deepEqual(new Set(db.prepare(ajesQuery(result.query as any).sql).all().map(row=>row.model_name)),new Set(names));
+  assert.equal(Number(db.prepare(ajesQuery({...result.query,aggregate:'count'} as any).sql).get()!['count(*)']),names.length);
+ }finally{db.close();}
+ assert.throws(()=>ajesQuery({model:names.join('|')}),/ajes_invalid_query/,'the public choice validator remains bounded');
+ const publicQuery=ajesCatalogQuery({market:'japan',make:'AUDI',model:'A4',resolvedModels:{exact:['A40'],families:[]}});
+ assert.equal(publicQuery.model,'A4');assert.equal(publicQuery.resolvedModels,undefined,'a URL cannot supply internal source aliases');
+ for(const resolvedModels of [{exact:["A4' OR 1=1"],families:[]},{exact:[],families:['A4%']},{exact:[],families:[]},{exact:['A4'],families:[],sql:'anything'},null])
+  assert.throws(()=>ajesQuery({resolvedModels} as any),/ajes_invalid_query/);
+ assert.throws(()=>ajesQuery({model:'A4',resolvedModels:{exact:['A40'],families:[]}}),/ajes_invalid_query/);
 });
 
 function database(names:string[],make='MAZDA'){
@@ -196,15 +257,18 @@ function database(names:string[],make='MAZDA'){
 async function realPath(t:any,names=matched,modelDirectoryStale=false,source:{make?:string;directory?:'fresh'|'stale'|'unavailable'}={}){
  const db=database(names,source.make);t.after(()=>db.close());
  const state={queries:[] as any[],neighborQueries:[] as any[],project:publicOffer,current:{id:'china-legacy',market:'china',make:'Mazda',model:'3'},
+  snapshot:{editorial:{revision:'fixture-model-resolution',entries:{}},calculationIndex:null},
   read:async(q:any)=>{
    state.queries.push(structuredClone(q));
    const query=ajesQuery(q);
    if(query.kind==='makes'&&source.directory==='unavailable')throw new AjesUnavailable('local_busy');
-   const rows=db.prepare(query.sql).all(),observedAt=new Date().toISOString();
+   // SQLite's BLOB cast preserves the counter's binary ID equality without
+   // changing the real compiler's model predicates or recorded query.
+   const rows=db.prepare(query.sql.replace(/distinct binary id/g,'distinct cast(id as blob)')).all(),observedAt=new Date().toISOString();
    const common={page:query.page,pageSize:query.pageSize,received:rows.length,stale:query.kind==='models'&&modelDirectoryStale||query.kind==='makes'&&source.directory==='stale',partial:false,observedAt};
    if(query.kind==='makes')return {...common,items:[],makes:rows.map(row=>({make:row.marka_name,total:Number(row['count(*)'])}))};
    if(query.kind==='models')return {...common,items:[],models:rows.map(row=>({make:row.marka_name,model:row.model_name,total:Number(row['count(*)'])}))};
-   if(query.kind==='count')return {...common,items:[],total:Number(Object.values(rows[0])[0])};
+   if(query.kind==='count')return {...common,items:[],total:Number(Object.values(rows[0])[0]),...(q.countIdentity?{distinctTotal:Number(rows[0].census_distinct_ids)}:{})};
    return {...common,items:rows.map(row=>{
     const lot=ajesLot(Object.fromEntries(Object.entries(row).map(([key,value])=>[key.toUpperCase(),value])),'stats',false)!;assert.ok(lot);
     return ajesOffer(lot,{currency:'JPY',sourcePrice:120000,rateSource:'cbr',effectiveRate:0.5,rateDate:'2026-11-27'} as any,observedAt);
@@ -214,13 +278,14 @@ async function realPath(t:any,names=matched,modelDirectoryStale=false,source:{ma
  const mocks:Record<string,string>={
   'server-only':'','next/headers':'export const headers=async()=>new Map([["x-real-ip","203.0.113.1"]]);',
   'ajes-runtime':'export const ajesClient={read:q=>globalThis.__legacyMazda.read(q)};',
-  'ajes-public':'export const readAjesPublicEvidenceSnapshot=()=>{throw Error("unexpected power snapshot");};export const cappedAjesQuery=async q=>q;export const readAjesPublic=q=>globalThis.__legacyMazda.read(q);',
+  'ajes-public':'export const readAjesPublicEvidenceSnapshot=()=>globalThis.__legacyMazda.snapshot;export const cappedAjesQuery=async q=>q;export const readAjesPublic=q=>globalThis.__legacyMazda.read(q);',
+  '../data':'export const getJsonStorage=()=>({readJson:async()=>null,writeJson:async()=>{}});',
   storage:'export const publicOffer=row=>globalThis.__legacyMazda.project(row);export const getUnavailableOffer=async()=>null;export const searchOffers=async query=>{globalThis.__legacyMazda.neighborQueries.push(query);return {items:[],total:0};};',
   'collection-controls':'export const assertCollectionEnabled=async()=>{};',
   'market-page':'export const sortCatalogRows=x=>x;',
   'live-business-pricing':'export const applyActiveBusinessPricingBatch=async rows=>rows;',
+  'ajes-count-pricing-context':'export const captureAjesCountPricingContext=async()=>{throw Error("unexpected price-filter context");};',
   'japan-preview-parameters':'export const japanPreviewParameters=()=>{throw Error("not attested");};',
-  'calculation-evidence':'export const hasEncyclopediaCalculationEvidence=()=>false;',
   'offer-page-data':'export const getOfferDetailRecord=async()=>globalThis.__legacyMazda.current;',
   'related-model-family':'export const readRelatedModelFamily=async(_make,model)=>model;',
   'green-corner':'export const readGreenCorner=async()=>({items:[]});export const publicGreenOffer=x=>x;',
@@ -228,8 +293,13 @@ async function realPath(t:any,names=matched,modelDirectoryStale=false,source:{ma
   'runtime-config':'export const PUBLIC_CATALOG_MARKETS=["china","japan"];',
  };
  const out=await build({stdin:{contents:'export * from "./apps/web/lib/catalog/ajes-catalog.ts"; export * from "./apps/web/app/api/catalog/recommendations/data.ts";',resolveDir:process.cwd()},
-  bundle:true,platform:'node',format:'cjs',write:false,packages:'external',tsconfig:'apps/web/tsconfig.json',plugins:[{name:'legacy-mazda-source',setup(b){
-   b.onResolve({filter:/.*/},args=>{const name=args.path in mocks?args.path:args.path.split('/').at(-1)!;return name in mocks?{path:name,namespace:'fixture'}:undefined;});
+  bundle:true,platform:'node',format:'cjs',write:false,packages:'external',tsconfig:'apps/web/tsconfig.json',define:{'process.env.AVTOCENA_RELEASE_SHA':JSON.stringify('a'.repeat(40))},plugins:[{name:'legacy-mazda-source',setup(b){
+   b.onResolve({filter:/.*/},args=>{
+    // Only the counter cache uses fixture storage; identity discovery retains
+    // its real local data-root reader and the checked-in alias evidence.
+    if(args.path==='../data'&&!args.importer.endsWith('/catalog/ajes-catalog.ts'))return;
+    const name=args.path in mocks?args.path:args.path.split('/').at(-1)!;return name in mocks?{path:name,namespace:'fixture'}:undefined;
+   });
    b.onLoad({filter:/.*/,namespace:'fixture'},args=>({contents:mocks[args.path],resolveDir:process.cwd()}));
   }}]});
  const require=createRequire(import.meta.url),mod={exports:{} as any};
@@ -245,7 +315,7 @@ test('raw Japanese make selections and legacy display aliases reach the same exa
    const page=await api.readAjesCatalogPage(params,undefined,{includeCount:false});
    assert.equal(page.items.length,1);assert.equal(page.partial,false);assert.equal(page.total,1);
    assert.equal((await api.readAjesResolvedPublic(params)).items.length,1);
-   assert.equal((await api.readAjesCountSummary(JSON.stringify(params))).total,1);
+   await assert.rejects(api.readAjesCountSummary(JSON.stringify(params)),/census_source_snapshot_unavailable/);
    const lists=state.queries.filter(q=>!q.aggregate);assert.ok(lists.every(q=>q.make===make));
   }
  }
@@ -292,7 +362,7 @@ test('the old Mazda/3 URL resolves through real catalog, count and cross-market 
  assert.ok(result.items.every((row:any)=>row.market==='japan'&&row.id.startsWith('ajes-stats-')));
  const direct=await api.readAjesResolvedPublic(input);
  assert.equal(direct.partial,false);assert.deepEqual(new Set(direct.items.map((row:any)=>row.model)),new Set(matched));
- const count=await api.readAjesCountSummary(JSON.stringify(input));assert.equal(count.total,matched.length);
+ await assert.rejects(api.readAjesCountSummary(JSON.stringify(input)),/census_source_snapshot_unavailable/);
  const recommendations=await api.loadRelatedRecommendations({id:'china-legacy',markets:['japan']});
  assert.equal(recommendations.partial,false);assert.equal(recommendations.familyModel,'3');
  assert.equal(recommendations.crossMarketGroups.length,1);assert.equal(recommendations.crossMarketGroups[0].market,'japan');

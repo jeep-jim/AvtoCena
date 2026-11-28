@@ -1,9 +1,10 @@
 import test,{mock} from 'node:test';
 import assert from 'node:assert/strict';
+import {createHash} from 'node:crypto';
 import {parseJapanSourcePower,japanSupplierPower,japanSupplierPreviewPower,japanSupplierPowerLabel,japanUnknownPower,japanPowerFilterSummary,japanPowerFilterNotice} from '../apps/web/lib/catalog/japan-source-power';
 import {ajesResultFilter} from '../apps/web/lib/catalog/ajes-result-filter';
 import {ajesPowerEstimateHp} from '../apps/web/lib/catalog/ajes-power-estimate';
-import {ajesCatalogQuery,ajesLot,ajesQuery,ajesSourceCacheSql,AjesInputError,AjesCursorRefreshRequired} from '../apps/web/lib/catalog/ajes-query';
+import {ajesCatalogQuery,ajesLot,ajesQuery,ajesSourceCacheSql,AJES_CENSUS_FIELDS,AjesInputError,AjesCursorRefreshRequired} from '../apps/web/lib/catalog/ajes-query';
 import {ajesOffer} from '../apps/web/lib/catalog/ajes-offer';
 import {createAjesClient,AjesUnavailable} from '../apps/web/lib/catalog/ajes-client';
 import {publicOffer} from '../apps/web/lib/catalog/storage';
@@ -20,6 +21,7 @@ import {build} from 'esbuild';
 import {createRequire} from 'node:module';
 import {createElement} from 'react';
 import {renderToStaticMarkup} from 'react-dom/server';
+import * as census from '../apps/web/lib/catalog/ajes-census';
 
 const row={ID:'power-fixture',MARKA_NAME:'TOYOTA',MODEL_NAME:'TEST',YEAR:2023,AUCTION_TYPE:2,STATUS:'Sold',FINISH:935000,TIME:'P',PW:'150',ENG_V:1490,IMAGES:''};
 const rate={currency:'JPY',sourcePrice:935000,effectiveRate:0.6,cbrRate:60,nominal:100,rateDate:'2026-11-26',rateSource:'cbr'} as any;
@@ -30,15 +32,20 @@ function offer(power:unknown,id='power-fixture',fuel='P'){
 const sourcePage=(query:any,items:any[],received=items.length,flags:Record<string,unknown>={})=>({items,page:query.page||1,pageSize:query.pageSize||24,received,partial:false,stale:false,observedAt:'2026-11-26T06:02:33.366Z',...flags});
 async function catalogPowerFixture(read:(query:any,options?:any)=>unknown|Promise<unknown>){
  const state={queries:[] as any[],counts:0,priced:[] as string[][],snapshots:[] as any[],editorialRevision:'fixture-1',calculationDigest:null as string|null,runtimeSha:'1'.repeat(40),
-  evidenceReader:undefined as undefined|(()=>Promise<any>),price:undefined as undefined|((rows:any[])=>Promise<any[]>),Unavailable:AjesUnavailable,Input:AjesInputError,Refresh:AjesCursorRefreshRequired,
-  query:ajesCatalogQuery,filter:ajesResultFilter,project:publicOffer,sort:sortCatalogRows,read:async(query:any,options:any)=>{state.queries.push(query);state.snapshots.push(options?.evidenceSnapshot);return read(query,options);}};
+  evidenceReader:undefined as undefined|(()=>Promise<any>),price:undefined as undefined|((rows:any[])=>Promise<any[]>),rawRead:undefined as undefined|((query:any)=>Promise<any>),censusRate:undefined as undefined|((amount:number)=>any),
+  controlledCount:undefined as undefined|((options:any)=>Promise<any>),savedCount:undefined as undefined|((path:string)=>Promise<any>),countWrites:[] as any[],Unavailable:AjesUnavailable,Input:AjesInputError,Refresh:AjesCursorRefreshRequired,
+  census,compileQuery:ajesQuery,query:ajesCatalogQuery,filter:ajesResultFilter,project:publicOffer,sort:sortCatalogRows,read:async(query:any,options:any)=>{state.queries.push(query);state.snapshots.push(options?.evidenceSnapshot);return read(query,options);}};
  (globalThis as any).__japanPowerPageFixture=state;
  const stubs:Record<string,string>={
   'server-only':'','next/headers':"export const headers=async()=>new Map([['x-real-ip','127.0.0.1']]);",
-  './ajes-runtime':"export const ajesClient={read:async()=>{globalThis.__japanPowerPageFixture.counts++;throw Error('unexpected source aggregate');}};",
+  './ajes-census':"export const {ajesCensusFields,ajesRequestedCountQuery,ajesRequestedCountQueryHash,AJES_CENSUS_PREDICATE_VERSION}=globalThis.__japanPowerPageFixture.census;export const readAjesCensusCount=options=>{const s=globalThis.__japanPowerPageFixture;return s.controlledCount?s.controlledCount(options):s.census.readAjesCensusCount(options);};",
+  '../data':"export const getJsonStorage=()=>({readJson:async path=>globalThis.__japanPowerPageFixture.savedCount?.(path)??null,writeJson:async(path,value)=>{globalThis.__japanPowerPageFixture.countWrites.push({path,value});}});export const readDataJson=async()=>null;export const mutateDataJson=async()=>{throw Error('unexpected private write');};export const getDataRoot=()=>'/tmp';",
+  './rates':"export const convertToRub=async amount=>globalThis.__japanPowerPageFixture.censusRate?.(amount)??null;",
+  './ajes-count-pricing-context':`export const captureAjesCountPricingContext=async()=>({run:async work=>work(),price:async rows=>{const s=globalThis.__japanPowerPageFixture;s.priced.push(rows.map(row=>row.id));return s.price?s.price(rows):rows;}});`,
+  './ajes-runtime':"export const ajesClient={read:async query=>{const s=globalThis.__japanPowerPageFixture;s.counts++;if(s.rawRead)return s.rawRead(query);throw Error('unexpected source aggregate');}};",
   './ajes-public':`export const cappedAjesQuery=async q=>q;export const readAjesPublic=(q,o)=>globalThis.__japanPowerPageFixture.read(q,o);
    export const readAjesPublicEvidenceSnapshot=async()=>{const s=globalThis.__japanPowerPageFixture;return s.evidenceReader?s.evidenceReader():Object.freeze({editorial:{revision:s.editorialRevision,entries:{}},calculationIndex:s.calculationDigest?{digest:s.calculationDigest}:null});};`,
-  './ajes-query':'export const ajesCatalogQuery=p=>globalThis.__japanPowerPageFixture.query(p);export class AjesFilterUnavailable extends Error{};export const AjesInputError=globalThis.__japanPowerPageFixture.Input;export const AjesCursorRefreshRequired=globalThis.__japanPowerPageFixture.Refresh;',
+  './ajes-query':'export const ajesQuery=(...args)=>globalThis.__japanPowerPageFixture.compileQuery(...args);export const ajesCatalogQuery=p=>globalThis.__japanPowerPageFixture.query(p);export class AjesFilterUnavailable extends Error{};export const AjesInputError=globalThis.__japanPowerPageFixture.Input;export const AjesCursorRefreshRequired=globalThis.__japanPowerPageFixture.Refresh;',
   './ajes-client':'export const readAjesModelDirectory=async()=>({models:[]});export const readAjesMakeDirectory=async()=>({makes:[]});export const AjesUnavailable=globalThis.__japanPowerPageFixture.Unavailable;',
   './ajes-result-filter':'export const ajesResultFilter=p=>globalThis.__japanPowerPageFixture.filter(p);',
   './storage':'export const publicOffer=x=>globalThis.__japanPowerPageFixture.project(x);','./market-page':'export const sortCatalogRows=(...args)=>globalThis.__japanPowerPageFixture.sort(...args);',
@@ -53,8 +60,172 @@ async function catalogPowerFixture(read:(query:any,options?:any)=>unknown|Promis
  }}]});
  const module={exports:{} as any},require=createRequire(import.meta.url);
  new Function('require','module','exports',bundle.outputFiles[0].text)((id:string)=>id==='react'?{cache:(fn:any)=>fn}:require(id),module,module.exports);
- return {state,read:module.exports.readAjesCatalogPage,close:()=>{delete (globalThis as any).__japanPowerPageFixture;}};
+ return {state,read:(params:any,measure?:any,options?:any)=>module.exports.readAjesCatalogPage(params,measure,{includeCount:false,...options}),
+  count:(params:any)=>module.exports.readAjesCountSummary(JSON.stringify(params)),close:()=>{delete (globalThis as any).__japanPowerPageFixture;}};
 }
+
+/** An immutable, completely provided local collection supplies the counter
+ * boundary for pagination tests. This is not the production AJ count reader:
+ * that reader rejects every positive source count without a snapshot contract. */
+function installControlledCountFixture(fixture:Awaited<ReturnType<typeof catalogPowerFixture>>,sourceRows:Array<Record<string,any>>){
+ const groups=new Map<string,any>();
+ for(const source of sourceRows){
+  const values=Object.fromEntries(AJES_CENSUS_FIELDS.map(field=>[field,source[field]??''])),key=JSON.stringify(values);
+  const group=groups.get(key)??{values,total:0,validIds:0,validFinishes:0};group.total++;group.validIds++;group.validFinishes++;groups.set(key,group);
+ }
+ const observedAt=new Date().toISOString();
+ fixture.state.censusRate=amount=>({...rate,sourcePrice:amount,sourcePriceRub:amount*rate.effectiveRate,rateDate:observedAt.slice(0,10)});
+ fixture.state.rawRead=async query=>{
+  if(query.aggregate==='count')return {items:[],total:sourceRows.length,distinctTotal:new Set(sourceRows.map(row=>row.ID)).size,observedAt,stale:false};
+  throw Error('unexpected schema LIST/GROUP request in a controlled count fixture');
+ };
+ fixture.state.controlledCount=async options=>{
+  let admittedTotal=0,knownTotal=0,unknownTotal=0;
+  for(const group of groups.values()){
+   const evaluated=await census.evaluateAjesCensusGroup(group,{params:options.params,snapshot:options.snapshot,observedAt,
+    rate:async amount=>fixture.state.censusRate!(amount)});
+   if(evaluated.admitted){admittedTotal+=group.total;if(evaluated.known)knownTotal+=group.total;else unknownTotal+=group.total;}
+  }
+  const digest=(value:unknown)=>createHash('sha256').update(JSON.stringify(value)).digest('hex');
+  const sourceQueryHash=createHash('sha256').update(ajesQuery({...options.query,aggregate:'count',countIdentity:true}).sql).digest('hex');
+  return {total:admittedTotal,stale:false,upperBound:false,observedAt,countProof:{version:1,kind:'japan-admitted-census',
+   predicateVersion:'controlled-japan-admission-fixture-v1',requestedQueryHash:census.ajesRequestedCountQueryHash(options.params),
+   queryHash:digest([census.ajesRequestedCountQuery(options.params),options.query]),evidenceEpoch:options.evidenceEpoch,sourceQueryHash,
+   coverageHash:digest(sourceRows),complete:true,sourceObservedAt:observedAt,sourceCompletedAt:observedAt,
+   sourceTotal:sourceRows.length,sourceDistinctTotal:new Set(sourceRows.map(row=>row.ID)).size,groupedTotal:sourceRows.length,
+   groupCount:groups.size,pages:1,baseAdmittedTotal:admittedTotal,correctionCount:0,correctionDelta:0,admittedTotal,knownTotal,unknownTotal}};
+ };
+}
+
+test('a controlled complete count invalidates an old short uncounted cursor and counted pages partition all73 fixture cars',async()=>{
+ const sourceRows=[...Array.from({length:6},(_,i)=>({...row,ID:'early-'+i,PW:'150'})),
+  ...Array.from({length:200},(_,i)=>({...row,ID:'rejected-'+i,PW:'220'})),
+  ...Array.from({length:44},(_,i)=>({...row,ID:'late-'+i,PW:'150'})),
+  ...Array.from({length:23},(_,i)=>({...row,ID:'unknown-'+i,PW:''}))];
+ const fixture=await catalogPowerFixture(query=>{
+  const selected=sourceRows.slice(((query.page||1)-1)*24,(query.page||1)*24);
+  return sourcePage(query,selected.map(row=>offer(row.PW,row.ID)),selected.length,{observedAt:new Date().toISOString()});
+ });
+ const params={market:'japan',powerTo:'160',city:'Новокузнецк'};
+ try{
+  const uncounted=await fixture.read(params);assert.equal(uncounted.items.length,6);assert.equal(uncounted.scanLimited,true);
+  installControlledCountFixture(fixture,sourceRows);
+  const priorReads=fixture.state.queries.length;
+  await assert.rejects(fixture.read({...params,page:'2',after:uncounted.nextCursor},undefined,{includeCount:true}),AjesCursorRefreshRequired);
+  assert.equal(fixture.state.queries.length,priorReads,'old short cursor is rejected before more LIST reads');
+  const ids:string[]=[];let after:string|undefined;
+  for(let page=1;page<=4;page++){
+   const result=await fixture.read({...params,page:String(page),...(after?{after}:{})},undefined,{includeCount:true});
+   assert.equal(result.total,73);assert.equal(result.countSummary.countProof.sourceTotal,273);assert.equal(result.countSummary.countProof.complete,true);
+   assert.equal(result.items.length,page===4?1:24);assert.equal(result.hasMore,page<4);assert.equal(result.scanLimited,false);
+   ids.push(...result.items.map((item:any)=>item.id));after=result.nextCursor;
+  }
+  assert.equal(new Set(ids).size,73);assert.equal(ids.length,73);assert.equal(after,null);
+ }finally{fixture.close();}
+});
+
+test('controlled exact totals close a full last page; contradictory or partial source pages cannot claim an exact ending',async()=>{
+ for(const mode of ['full','short','extra','partial'] as const){
+  const count=mode==='extra'?23:24,sourceRows=Array.from({length:count},(_,i)=>({...row,ID:'last-'+i,PW:'150'}));
+  const fixture=await catalogPowerFixture(query=>{
+   const shown=mode==='short'?23:mode==='partial'?6:24;
+   return sourcePage(query,Array.from({length:shown},(_,i)=>offer('150','last-'+i)),mode==='partial'?24:shown,{observedAt:new Date().toISOString(),...(mode==='partial'?{partial:true}:{})});
+  });
+  installControlledCountFixture(fixture,sourceRows);
+  try{
+   const promise=fixture.read({market:'japan',powerTo:'160'},undefined,{includeCount:true});
+   if(mode==='short'||mode==='extra')await assert.rejects(promise,AjesCursorRefreshRequired);
+   else{
+    const result=await promise;
+    assert.equal(result.nextCursor,null);
+    if(mode==='full'){assert.equal(result.items.length,24);assert.equal(result.total,24);assert.equal(result.hasMore,false);}
+    else{assert.equal(result.items.length,6);assert.equal(result.partial,true);assert.equal(result.hasMore,true);assert.equal(result.total,null);assert.equal(result.countSummary,null);}
+   }
+  }finally{fixture.close();}
+ }
+});
+
+test('positive saved census proofs cannot revive through the scalar cache, including a false zero with positive source weight',async()=>{
+ for(const power of ['150','220']){
+  const fixture=await catalogPowerFixture(()=>{throw Error('unexpected public LIST');});
+  const params={market:'japan',powerTo:'160'},sourceRows=[{...row,ID:'saved-positive',PW:power}];
+  installControlledCountFixture(fixture,sourceRows);
+  const query={...ajesCatalogQuery(params)};delete query.page;delete query.pageSize;delete query.sort;
+  const digest=(value:unknown)=>createHash('sha256').update(JSON.stringify(value)).digest('hex');
+  const evidenceEpoch=digest([census.AJES_CENSUS_PREDICATE_VERSION,ajesPowerEvidenceEpoch({runtimeSha:fixture.state.runtimeSha,
+   editorialRevision:fixture.state.editorialRevision,calculationDigest:null}),null]);
+  const summary=await fixture.state.controlledCount!({params,query,evidenceEpoch,snapshot:{editorial:{revision:fixture.state.editorialRevision,entries:{}},calculationIndex:null}});
+  summary.countProof.predicateVersion=census.AJES_CENSUS_PREDICATE_VERSION;
+  const key=digest([census.ajesRequestedCountQuery(params),ajesQuery({...query,aggregate:'count',countIdentity:true}).sql,evidenceEpoch]);
+  fixture.state.controlledCount=undefined;
+  fixture.state.savedCount=async()=>({key,value:summary});
+  try{
+   assert.equal(summary.total,power==='150'?1:0);
+   await assert.rejects(fixture.count(params),/census_source_snapshot_unavailable/);
+   assert.equal(fixture.state.counts,1,'one scalar COUNT; no schema LIST, GROUP or correction request');
+   assert.equal(fixture.state.queries.length,0);assert.equal(fixture.state.countWrites.length,0);
+  }finally{fixture.close();}
+ }
+});
+
+test('validated source COUNT0 keeps an exact scalar cache without any LIST or GROUP reads',async()=>{
+ const fixture=await catalogPowerFixture(()=>{throw Error('unexpected public LIST');});
+ const observedAt=new Date().toISOString();
+ fixture.state.rawRead=async query=>{
+  assert.equal(query.aggregate,'count');assert.equal(query.countIdentity,true);
+  return {items:[],total:0,distinctTotal:0,observedAt,stale:false};
+ };
+ try{
+  const first=await fixture.count({market:'japan'}),second=await fixture.count({market:'japan',sort:'totalRubDesc'});
+  assert.equal(first.total,0);assert.equal(first.countProof.sourceTotal,0);assert.equal(first.observedAt,observedAt);
+  assert.deepEqual(second,first);assert.equal(fixture.state.counts,1);assert.equal(fixture.state.countWrites.length,1);
+  assert.equal(fixture.state.queries.length,0);
+ }finally{fixture.close();}
+});
+
+test('a positive controlled count boundary cannot seed the runtime memory or persisted scalar cache',async()=>{
+ const fixture=await catalogPowerFixture(()=>{throw Error('unexpected public LIST');});
+ installControlledCountFixture(fixture,[{...row,ID:'memory-positive'}]);
+ const controlled=fixture.state.controlledCount!;
+ fixture.state.controlledCount=async options=>{
+  const summary=await controlled(options);summary.countProof.predicateVersion=census.AJES_CENSUS_PREDICATE_VERSION;return summary;
+ };
+ try{
+  assert.equal((await fixture.count({market:'japan',powerTo:'160'})).total,1);
+  assert.equal(fixture.state.countWrites.length,0,'positive weight is never persisted');
+  fixture.state.controlledCount=undefined;
+  await assert.rejects(fixture.count({market:'japan',powerTo:'160'}),/census_source_snapshot_unavailable/);
+  assert.equal(fixture.state.counts,2,'the positive controlled result was not retained in memory');
+ }finally{fixture.close();}
+});
+
+test('one fresh exhausted source LIST proves its complete admitted count even when COUNT is unavailable',async()=>{
+ const fixture=await catalogPowerFixture(query=>sourcePage(query,[offer(150,'single-one'),offer(150,'single-two')],3,{observedAt:new Date().toISOString()}));
+ fixture.state.rawRead=async()=>{throw new AjesUnavailable('visitor_restricted');};
+ try{
+  const result=await fixture.read({market:'japan'},undefined,{includeCount:true});
+  assert.equal(result.total,2);assert.equal(result.countSummary.upperBound,false);assert.equal(result.reads,1);
+  assert.equal(result.hasMore,false);assert.equal(result.received,3);assert.equal(result.items.length,2);
+  assert.ok(fixture.state.snapshots[0],'admission and public projection use one captured local snapshot');
+ }finally{fixture.close();}
+});
+
+test('exhausted multiple LIST responses, duplicate IDs and invalid observation dates cannot manufacture exact totals',async()=>{
+ for(const mode of ['two-responses','duplicate','stale','partial','missing-date','future-date'] as const){
+  const fixture=await catalogPowerFixture(query=>{
+   const observedAt=mode==='missing-date'?'invalid':new Date(Date.now()+(mode==='future-date'?60_000:0)).toISOString();
+   const ids=query.page===2?['two-end']:mode==='duplicate'?['duplicate','duplicate']:['one','two'];
+   return sourcePage(query,ids.map(id=>offer(150,id)),mode==='two-responses'&&query.page===1?24:ids.length,
+    {observedAt,...(mode==='stale'?{stale:true}:{}),...(mode==='partial'?{partial:true}:{})});
+  });
+  try{
+   const result=await fixture.read({market:'japan'});
+   assert.equal(result.total,null,mode);assert.equal(result.countSummary,null,mode);
+   assert.equal(result.items.length,mode==='two-responses'?3:2);
+   assert.equal(result.reads,mode==='two-responses'?2:1);
+  }finally{fixture.close();}
+ }
+});
 
 /** Real editorial reader and DetailReadCache; only private storage and the
  * immutable calculation-index bytes are replaced by in-memory fixtures. */
@@ -64,7 +235,7 @@ async function cachedPowerEvidenceFixture(){
  const stubs:Record<string,string>={
   'server-only':'','next/headers':'export const headers=async()=>new Map();',
   './ajes-runtime':'export const ajesClient={read:async()=>{throw Error("unexpected source read");}};',
-  '../data':'export const readDataJson=async path=>{if(path!=="catalog-editorial/current.json")throw Error("unexpected private path");const s=globalThis.__japanPowerEvidenceFixture;s.reads++;return structuredClone(s.stored);};export const mutateDataJson=()=>{throw Error("unexpected private write");};',
+  '../data':'export const getJsonStorage=()=>{throw Error("unexpected storage read");};export const readDataJson=async path=>{if(path!=="catalog-editorial/current.json")throw Error("unexpected private path");const s=globalThis.__japanPowerEvidenceFixture;s.reads++;return structuredClone(s.stored);};export const mutateDataJson=()=>{throw Error("unexpected private write");};',
   '../encyclopedia/calculation-index':'export const readCalculationIndex=()=>globalThis.__japanPowerEvidenceFixture.index;export const applyEncyclopediaCalculation=x=>x;',
  };
  const bundle=await build({stdin:{contents:`
@@ -222,7 +393,7 @@ test('power price sorting uses the selected city inside each known/unknown parti
     ['known-base-cheaper','known-city-cheaper','unknown-base-cheaper','unknown-city-cheaper'];
    assert.deepEqual(result.items.map((item:any)=>item.id),expected.map(id=>'ajes-stats-'+id));
    assert.deepEqual(result.items.map(japanUnknownPower),[false,false,true,true]);
-   assert.equal(result.hasMore,false);assert.equal(result.total,4);
+   assert.equal(result.hasMore,false);assert.equal(result.total,null,'two K/U observations are not one exact source snapshot');
   }finally{fixture.close();}
  }
 });
@@ -349,12 +520,12 @@ test('an all-over-limit search stops at eight requested source pages and never c
  }finally{fixture.close();}
 });
 
-test('only a fresh exhausted first power page establishes an exact filtered count',async()=>{
+test('exhausting both power passes does not establish one exact source count across two observations',async()=>{
  const fixture=await catalogPowerFixture(query=>sourcePage(query,[150,200,''].map((pw,i)=>offer(pw,`last-${i}`)),3));
  try{
   const result=await fixture.read({market:'japan',powerTo:'160'});
-  assert.equal(result.hasMore,false);assert.equal(result.items.length,2);assert.equal(result.total,2);
-  assert.deepEqual(result.countSummary,{total:2,upperBound:false,stale:false,observedAt:result.observedAt});
+  assert.equal(result.hasMore,false);assert.equal(result.items.length,2);assert.equal(result.total,null);
+  assert.equal(result.countSummary,null);
   assert.deepEqual(result.powerFilterSummary,{shown:2,localPower:0,supplierPower:1,unknownPower:1});
   assert.equal(result.nextCursor,null);assert.equal(fixture.state.queries.length,2);
  }finally{fixture.close();}

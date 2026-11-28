@@ -11,11 +11,11 @@ import type {CalculationIndex} from '../encyclopedia/calculation-index';
 export function findSavedAjesSearch(input:AjesQuery,snapshots:Record<string,any>,now=Date.now(),driveIndex:CalculationIndex|null=null){
  const query=ajesQuery(input,driveIndex);
  if(query.kind!=='list'||query.table!=='stats'||query.page!==1)return null;
- const supported=new Set(['table','page','pageSize','chassis','frameNumber','lotNumber','make','model','modelFamilies','drive','sort','yearFrom','yearTo','powerFrom','powerTo']);
+ const supported=new Set(['table','page','pageSize','chassis','frameNumber','lotNumber','make','model','modelFamilies','resolvedModels','drive','sort','yearFrom','yearTo','powerFrom','powerTo']);
  if(Object.keys(input).some(k=>!supported.has(k)&&input[k as keyof AjesQuery]!==undefined)||input.sort&&input.sort!=='updatedAt')return null;
  const normalized=(v:unknown)=>String(v??'').trim().toUpperCase();
- const makes=input.make?.split(',').map(normalized),models=input.model?.split('|').map(normalized);
- const families=input.modelFamilies?.split('|').map(normalized),drives=input.drive?.split('|');
+ const makes=input.make?.split(',').map(normalized),models=(input.resolvedModels?.exact||input.model?.split('|'))?.map(normalized);
+ const families=(input.resolvedModels?.families||input.modelFamilies?.split('|'))?.map(normalized),drives=input.drive?.split('|');
  const matches=Object.values(snapshots).filter(saved=>{
   const age=now-Date.parse(saved?.observedAt||''),lot=saved?.items?.[0];
   return age>=0&&age<7*86400000&&lot?.table==='stats'&&/^[A-Za-z0-9_-]{1,64}$/.test(lot.id||'')&&lot.make&&lot.model&&lot.year>=JAPAN_MIN_MODEL_YEAR&&lot.year<=new Date(now).getUTCFullYear()+1

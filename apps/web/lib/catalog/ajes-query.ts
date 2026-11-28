@@ -16,8 +16,18 @@ export type AjesTable = 'stats' | 'main';
 export class AjesInputError extends Error { constructor() { super('ajes_invalid_query'); } }
 /** A prior power-order cursor cannot be safely continued under new evidence. */
 export class AjesCursorRefreshRequired extends AjesInputError {}
-export type AjesQuery = {pickup?:boolean;salePeriod?:string; table?: AjesTable; aggregate?: 'count'|'models'|'makes'|'colors'; sort?: string; color?:string; fuel?:string; transmission?:string; drive?:string; auctionGrade?:string; id?: string; make?: string; model?: string; modelFamilies?:string; chassis?:string; frameNumber?:string; lotNumber?:string; sourcePriceTo?:number; powerFrom?:number; powerTo?:number; yearFrom?: number; yearTo?: number; mileageFrom?:number; mileageTo?: number; engineFrom?:number; engineTo?:number; page?: number; pageSize?: number};
-const keys = new Set(['pickup','salePeriod','aggregate','sort','color','fuel','transmission','drive','auctionGrade','table','id','make','model','modelFamilies','chassis','frameNumber','lotNumber','sourcePriceTo','powerFrom','powerTo','yearFrom','yearTo','mileageFrom','mileageTo','engineFrom','engineTo','page','pageSize']);
+/** Server-resolved source names, never accepted by ajesCatalogQuery from a URL.
+ * A twenty-choice UI guard must not truncate a larger observed source family.
+ * Names retain the same SQL validation; transport-size failures remain explicit.
+ */
+export type AjesResolvedModels = {exact:string[];families:string[]};
+/** Counter dimensions only. Identity, images, auction dates and lot numbers
+ * never enter a census projection. Optional columns need an observed schema. */
+export const AJES_CENSUS_FIELDS = ['MARKA_NAME','MODEL_NAME','YEAR','GRADE','KUZOV','ENG_V','PRIV','KPP','TIME','PW','STATUS','COLOR','BODY_TYPE','VEHICLE_CATEGORY','FUEL'] as const;
+export type AjesCensusField = typeof AJES_CENSUS_FIELDS[number];
+export const AJES_CENSUS_REQUIRED_FIELDS = AJES_CENSUS_FIELDS.slice(0,12);
+export type AjesQuery = {pickup?:boolean;salePeriod?:string; table?: AjesTable; aggregate?: 'count'|'models'|'makes'|'colors'|'census'; countIdentity?:boolean; censusFields?:AjesCensusField[]; correctionId?:string; sort?: string; color?:string; fuel?:string; transmission?:string; drive?:string; auctionGrade?:string; id?: string; make?: string; model?: string; modelFamilies?:string; resolvedModels?:AjesResolvedModels; chassis?:string; frameNumber?:string; lotNumber?:string; sourcePriceTo?:number; powerFrom?:number; powerTo?:number; yearFrom?: number; yearTo?: number; mileageFrom?:number; mileageTo?: number; engineFrom?:number; engineTo?:number; page?: number; pageSize?: number};
+const keys = new Set(['pickup','salePeriod','aggregate','countIdentity','censusFields','correctionId','sort','color','fuel','transmission','drive','auctionGrade','table','id','make','model','modelFamilies','resolvedModels','chassis','frameNumber','lotNumber','sourcePriceTo','powerFrom','powerTo','yearFrom','yearTo','mileageFrom','mileageTo','engineFrom','engineTo','page','pageSize']);
 /** These fixed predicates select the same raw rows. Sharing their cache identity
  * lets local power changes reuse an already requested page without another AJ read.
  * Keep the actual compact SQL on the wire for the existing URI-size boundary.
@@ -48,7 +58,15 @@ export function ajesQuery(input: unknown,driveIndex:CalculationIndex|null=null) 
     return {table, kind:'detail' as const, sql:`select * from ${table} where id='${q.id}'`, id:q.id, page:1, pageSize:1};
   }
   const values=(value:unknown,separator:string)=>{if(value===undefined)return [];if(typeof value!=='string')throw new AjesInputError();const parts=value.split(separator).map(v=>name(v)!);if(parts.length>20||parts.some(v=>!v))throw new AjesInputError();return [...new Set(parts)];};
-  const makes=values(q.make,','),models=values(q.model,'|'),families=values(q.modelFamilies,'|');
+  const makes=values(q.make,',');let models=values(q.model,'|'),families=values(q.modelFamilies,'|');
+  if(q.resolvedModels!==undefined){
+    const resolved=q.resolvedModels;
+    if(!resolved||typeof resolved!=='object'||Array.isArray(resolved)||Object.keys(resolved).some(key=>key!=='exact'&&key!=='families')
+      ||!Array.isArray(resolved.exact)||!Array.isArray(resolved.families)||!resolved.exact.length&&!resolved.families.length
+      ||q.model!==undefined||q.modelFamilies!==undefined)throw new AjesInputError();
+    models=[...new Set(resolved.exact.map(value=>name(value)!))];families=[...new Set(resolved.families.map(value=>name(value)!))];
+    if([...models,...families].some(value=>!value))throw new AjesInputError();
+  }
   const requestedYearFrom=integer(q.yearFrom,1900,1900,2100), yearTo=integer(q.yearTo,2100,1900,2100);
   if (requestedYearFrom>yearTo) throw new AjesInputError();
   // A shared catalog range may begin before this market's admission floor.
@@ -57,6 +75,10 @@ export function ajesQuery(input: unknown,driveIndex:CalculationIndex|null=null) 
   const page=integer(q.page,1,1,1000000), pageSize=integer(q.pageSize,24,1,48);
   const empty=yearFrom>Math.min(yearTo,new Date().getUTCFullYear()+1);
   const where=[`year>=${yearFrom}`,`year<=${Math.min(yearTo,new Date().getUTCFullYear()+1)}`];
+  if(q.correctionId!==undefined){
+    if(q.aggregate!=='census'||typeof q.correctionId!=='string'||!/^[A-Za-z0-9_-]{1,64}$/.test(q.correctionId))throw new AjesInputError();
+    where.push(`id='${q.correctionId}'`);
+  }
   where.push('auction_type!=1');
   if(q.sourcePriceTo!==undefined)throw new AjesInputError();
   if(q.salePeriod){
@@ -70,11 +92,12 @@ export function ajesQuery(input: unknown,driveIndex:CalculationIndex|null=null) 
   // grouping identical families to stay below the existing URI budget. This
   // does not establish a supplier-wide REGEXP restriction. Explicit drive keeps
   // its existing compact form: its unchanged drive clause also uses REGEXP and
-  // expanding both predicates would exceed the existing 6000-byte guard.
+  // expanding both predicates would exceed the 6000-byte URI compatibility budget.
   where.push(q.drive?heavyVehicleSqlExclusion(false,false,true):japanHeavyVehicleSqlExclusion(),motorcycleSqlExclusion());
   where.push(japanMakeSqlExclusion(),japanVehicleFamilySqlExclusion());
   for(const [column,parts] of [['marka_name',makes]] as const){if(parts.length===1)where.push(`${column}='${parts[0]}'`);else if(parts.length)where.push(`${column} in (${parts.map(v=>`'${v}'`).join(',')})`);}
-  const modelClauses=[...models.map(v=>`model_name='${v}'`),...families.map(v=>`model_name like '${v} %'`)];
+  const exactModels=models.length>1?`model_name in (${models.map(v=>`'${v}'`).join(',')})`:models.length?`model_name='${models[0]}'`:null;
+  const modelClauses=[...(exactModels?[exactModels]:[]),...families.map(v=>`model_name like '${v} %'`)];
   if(modelClauses.length)where.push('('+modelClauses.join(' or ')+')');
   if(q.color){const colors=[...new Set(values(q.color,'|').flatMap(value=>vehicleColorAliases(value).map(alias=>name(alias)!)))];where.push(`color in (${colors.map(value=>`'${value}'`).join(',')})`);}
   const coded=(value:string|undefined,column:string,map:Record<string,string[]>)=>{if(!value)return;const selected=value.split('|');if(selected.length>20||selected.some(v=>!map[v]))throw new AjesInputError();const codes=[...new Set(selected.flatMap(v=>map[v]))];where.push(`${column} in (${codes.map(v=>`'${v}'`).join(',')})`);};
@@ -109,7 +132,22 @@ export function ajesQuery(input: unknown,driveIndex:CalculationIndex|null=null) 
     // apply power and explicit unknown inclusion after local enrichment.
     // The bounded post-filter below prevents an unbounded scan of supplier pages.
   }
-  if(q.aggregate!==undefined&&!['count','models','makes','colors'].includes(q.aggregate))throw new AjesInputError();
+  if(q.aggregate!==undefined&&!['count','models','makes','colors','census'].includes(q.aggregate))throw new AjesInputError();
+  if(q.censusFields!==undefined&&q.aggregate!=='census')throw new AjesInputError();
+  if(q.countIdentity!==undefined&&(q.countIdentity!==true||q.aggregate!=='count'))throw new AjesInputError();
+  if(q.aggregate==='census'){
+    if(table!=='stats'||!Array.isArray(q.censusFields)||!q.censusFields.length||q.censusFields.some(field=>!AJES_CENSUS_FIELDS.includes(field))
+      ||new Set(q.censusFields).size!==q.censusFields.length||AJES_CENSUS_REQUIRED_FIELDS.some(field=>!q.censusFields!.includes(field)))throw new AjesInputError();
+    const censusFields=AJES_CENSUS_FIELDS.filter(field=>q.censusFields!.includes(field));
+    // Binary grouping preserves distinctions which the JS normalizer may treat
+    // differently. The validity aggregate proves that representative IDs do
+    // not conceal rejected or noncanonical supplier identities.
+    const columns=censusFields.map(field=>field.toLowerCase());
+    const grouping=censusFields.map((_,index)=>index+1).join(',');
+    const projection=columns.map(field=>`binary ${field} as ${field}`).join(', ');
+    return {table,empty,kind:'census' as const,censusFields,sql:`select ${projection}, count(*) as census_count, sum(case when id regexp '^[A-Za-z0-9_-]{1,64}$' then 1 else 0 end) as census_valid_ids, sum(case when finish regexp '^[0-9]+([.][0-9]+)?$' and finish>0 and finish<=9007199254740991 then 1 else 0 end) as census_valid_finishes from ${table} where ${where.join(' and ')} group by ${grouping} order by ${grouping} limit ${(page-1)*500},500`,page,pageSize:500};
+  }
+  if(q.aggregate==='count'&&q.countIdentity)return {table,empty,kind:'count' as const,identityCount:true,sql:`select count(*) as total, count(distinct binary id) as census_distinct_ids from ${table} where ${where.join(' and ')}`,page:1,pageSize:1};
   if(q.aggregate==='count')return {table,empty,kind:'count' as const,sql:`select count(*) from ${table} where ${where.join(' and ')}`,page:1,pageSize:1};
   if(q.aggregate==='colors')return {table,empty,kind:'colors' as const,sql:`select color, count(*) from ${table} where ${where.join(' and ')} group by color order by color limit ${(page-1)*500},500`,page,pageSize:500};
   if(q.aggregate==='makes')return {table,empty,kind:'makes' as const,sql:`select marka_name, count(*) from ${table} where ${where.join(' and ')} group by marka_name order by marka_name limit ${(page-1)*500},500`,page,pageSize:500};

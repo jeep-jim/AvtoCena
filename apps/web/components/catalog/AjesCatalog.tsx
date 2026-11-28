@@ -18,14 +18,14 @@ import {readAjesCatalogPage,readAjesCountSummary,readAjesMakes,AjesFilterUnavail
 import {AjesInputError,AjesCursorRefreshRequired} from '@/lib/catalog/ajes-query';
 import {AjesUnavailable} from '@/lib/catalog/ajes-client';
 import {ajesSsrReadEvidence} from '@/lib/catalog/ajes-ssr-read-evidence';
-import {ajesCountText,ajesVisibleCount,ajesPaginationCountText} from '@/lib/catalog/ajes-count-display';
+import {ajesCountText,ajesVisibleCount,ajesPaginationCountText,latestAjesCountSummary,type AjesCountSummary} from '@/lib/catalog/ajes-count-display';
 type Params=Record<string,string|string[]|undefined>;
 export async function AjesCatalog({params,embedded=false,dealer}:{params:Params;embedded?:boolean;dealer?:DealerBrowsingContext|null}){
  const initial=Object.fromEntries(Object.entries(params).map(([k,v])=>[k,Array.isArray(v)?v[0]||'':v||'']));assertAjesJapanMarket(initial.market);const market='japan';const label='Япония';initial.market=market;if(!initial.make&&initial.brand)initial.make=initial.brand;
  let result:Awaited<ReturnType<typeof readAjesCatalogPage>>|undefined,error='',failedReceipt:unknown,refreshRequired=false;
- // The independent streamed count below starts after the visible page. Two
- // concurrent category visits must not fill both supplier slots with counts.
- try{result=await readAjesCatalogPage(initial,undefined,{includeCount:false});}catch(e){if(e instanceof AjesUnavailable)failedReceipt=Object.getOwnPropertyDescriptor(e,'sourceReceipt')?.value;refreshRequired=e instanceof AjesCursorRefreshRequired;error=refreshRequired?'Данные подбора обновились. Откройте первую страницу — выбранные фильтры сохранены.':e instanceof AjesFilterUnavailable?'Это условие поиска пока не поддерживается для выбранного рынка. Снимите его; уточнить параметры и рассчитать доставку можно в карточке.':e instanceof AjesInputError?'Проверьте условия и диапазоны поиска.':e instanceof AjesUnavailable&&e.reason==='visitor_restricted'?'Источник отклонил подключение. Сохранённых результатов этого поиска пока нет. Попробуйте позже.':'Не удалось обновить автомобили. Попробуйте позже.';}
+ // The full query count travels with the page; a count outage still leaves
+ // usable cards and the independent labelled recovery path below.
+ try{result=await readAjesCatalogPage(initial);}catch(e){if(e instanceof AjesUnavailable)failedReceipt=Object.getOwnPropertyDescriptor(e,'sourceReceipt')?.value;refreshRequired=e instanceof AjesCursorRefreshRequired;error=refreshRequired?'Данные подбора обновились. Откройте первую страницу — выбранные фильтры сохранены.':e instanceof AjesFilterUnavailable?'Это условие поиска пока не поддерживается для выбранного рынка. Снимите его; уточнить параметры и рассчитать доставку можно в карточке.':e instanceof AjesInputError?'Проверьте условия и диапазоны поиска.':e instanceof AjesUnavailable&&e.reason==='visitor_restricted'?'Источник отклонил подключение. Сохранённых результатов этого поиска пока нет. Попробуйте позже.':'Не удалось обновить автомобили. Попробуйте позже.';}
  // A failed/partial empty read is not a successful replacement of the previous
  // visible query. Keep its cards through the existing labelled recovery path.
  // A fresh scan-limited page alone still has a valid explicit continuation.
@@ -62,7 +62,7 @@ export async function AjesCatalog({params,embedded=false,dealer}:{params:Params;
   <AjesBrandRail initial={initial} fallbackBrands={makes} resultCount={displayTotal??undefined}/>
  </Suspense>
  <div className="mb-4 mt-8 flex flex-wrap items-center justify-between gap-3 md:mt-9">
- <h2 className="flex flex-wrap items-center gap-2 text-[26px] font-black tracking-[-0.04em] md:text-4xl"><CatalogMarketFlag market={market} className="h-5 w-7 md:h-6 md:w-9"/><span>{label}</span><Suspense fallback={<JapanCatalogCount queryKey={JSON.stringify(initial)} summary={sourceTotal} initialCount={loadedCount}/>}>{sourceTotal?<><CatalogResultCountUpdate queryKey={JSON.stringify(initial)} text={displayTotal!==undefined?ajesCountText(sourceTotal):''} total={displayTotal}/><JapanCatalogCount queryKey={JSON.stringify(initial)} summary={sourceTotal} initialCount={loadedCount}/></>:<AjesIndependentCount initial={initial} initialCount={loadedCount}/>}</Suspense></h2>
+ <h2 className="flex flex-wrap items-center gap-2 text-[26px] font-black tracking-[-0.04em] md:text-4xl"><CatalogMarketFlag market={market} className="h-5 w-7 md:h-6 md:w-9"/><span>{label}</span><Suspense fallback={<JapanCatalogCount queryKey={JSON.stringify(initial)} summary={sourceTotal} initialCount={loadedCount}/>}>{displayTotal!==undefined?<><CatalogResultCountUpdate queryKey={JSON.stringify(initial)} text={ajesCountText(sourceTotal)} total={displayTotal} summary={sourceTotal}/><JapanCatalogCount queryKey={JSON.stringify(initial)} summary={sourceTotal} initialCount={loadedCount}/></>:<AjesIndependentCount initial={initial} initialCount={loadedCount} previous={sourceTotal}/>}</Suspense></h2>
  {market==='japan'&&<JapanSectionTabs active="auction" params={initial}/>}
  </div>
  {!result&&error&&(refreshRequired||initial.after||Number(initial.page)>1)&&<Link href={restartHref} className="mb-3 inline-block text-sm font-bold underline">Открыть первую страницу</Link>}
@@ -91,8 +91,8 @@ async function AjesBrandRail({initial,fallbackBrands,resultCount}:{initial:Recor
  return <BrandLogoRail initial={initial} brands={brands.filter(make=>!initial.make||initial.make.split(',').some(value=>value.toLowerCase()===make.toLowerCase()))} resultCount={resultCount} sourceDirectoryState={complete?'ready':'unavailable'}/>;
 }
 
-async function AjesIndependentCount({initial,initialCount}:{initial:Record<string,string>;initialCount?:number}){
- const summary=await readAjesCountSummary(JSON.stringify(initial)).catch(()=>null);
+async function AjesIndependentCount({initial,initialCount,previous}:{initial:Record<string,string>;initialCount?:number;previous?:AjesCountSummary|null}){
+ const summary=latestAjesCountSummary(previous,await readAjesCountSummary(JSON.stringify(initial)).catch(()=>null));
  const total=ajesVisibleCount(summary,initialCount).total;
- return <><CatalogResultCountUpdate queryKey={JSON.stringify(initial)} text={total!==undefined?ajesCountText(summary):''} total={total}/><JapanCatalogCount queryKey={JSON.stringify(initial)} summary={summary} initialCount={initialCount}/></>;
+ return <><CatalogResultCountUpdate queryKey={JSON.stringify(initial)} text={ajesCountText(summary)} total={total} summary={summary}/><JapanCatalogCount queryKey={JSON.stringify(initial)} summary={summary} initialCount={initialCount}/></>;
 }

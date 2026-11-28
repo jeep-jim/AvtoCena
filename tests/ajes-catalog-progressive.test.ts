@@ -4,7 +4,8 @@ import assert from 'node:assert/strict';
 import {build} from 'esbuild';
 import {createRequire} from 'node:module';
 const require=createRequire(import.meta.url);
-test('ready cards do not wait for optional brand/model directories; exact selected controls survive',async()=>{
+test('ready cards do not wait for optional brand/model directories; exact selected controls survive',async t=>{
+ t.mock.method(Date,'now',()=>Date.parse('2026-11-28T00:15:00Z'));
  let calls=0;const never=new Promise(()=>{});
  let readyCount:any={total:1,stale:false,upperBound:false,observedAt:'2026-11-28T00:00:00Z'},countResult:any=never,readOptions:any,countKey='';
  let items:any[]=[{id:'car1',make:'Toyota',model:'COROLLA'}],pageFlags:Record<string,boolean>={};
@@ -35,7 +36,7 @@ test('ready cards do not wait for optional brand/model directories; exact select
   let timer:ReturnType<typeof setTimeout>;
   const root:any=await Promise.race([mod.exports.AjesCatalog({params:{market:'japan',make:'Toyota',city:'Новокузнецк'}}),new Promise((_,reject)=>{timer=setTimeout(()=>reject(Error('ready cards blocked by directory')),300);})]).finally(()=>clearTimeout(timer!));
   assert.equal(calls,0,'metadata must begin in a separate streamed boundary, not ahead of list');
-  assert.deepEqual(readOptions,{includeCount:false});
+  assert.equal(readOptions,undefined,'the page reader includes the full matching count by default');
   const walk=(node:any):any[]=>!node||typeof node!=='object'?[]:[node,...Object.values(node.props||{}).flatMap(v=>Array.isArray(v)?v.flatMap(walk):walk(v))];
   const nodes=walk(root),filters=nodes.find(n=>n.props?.auctionResults);
   assert.ok(nodes.some(n=>n.props?.queryKey===JSON.stringify(filters.props.initial)&&n.props?.text==='1'),'ready aggregate is shared under the exact filter query');

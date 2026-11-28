@@ -1,28 +1,30 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {ajesCountText,exactAjesCount,ajesVisibleCount} from '../apps/web/lib/catalog/ajes-count-display';
+import {ajesCountText,exactAjesCount,ajesVisibleCount,latestAjesCountSummary} from '../apps/web/lib/catalog/ajes-count-display';
 import {ajesCatalogQuery,ajesQuery} from '../apps/web/lib/catalog/ajes-query';
 
-test('independent counts retain zero, unavailable and stale semantics',()=>{
+test('independent counts retain zero, unavailable and stale semantics',t=>{
+ t.mock.method(Date,'now',()=>Date.parse('2026-10-18T11:15:00Z'));
  const fresh={total:147867,stale:false,observedAt:'2026-10-18T11:00:00Z',upperBound:false};
  assert.equal(ajesCountText(fresh),'147\u00a0867');assert.equal(exactAjesCount(fresh),147867);
  assert.equal(ajesCountText({...fresh,total:0}),'0');
  assert.equal(ajesCountText(null),'Количество уточняется');
  assert.equal(ajesCountText({...fresh,stale:true}),'147\u00a0867 · данные на 18 октября 2026 г.');
  assert.equal(ajesCountText({...fresh,stale:true,observedAt:'2026-10-18T18:00:00Z'}),'147\u00a0867 · данные на 19 октября 2026 г.');
- assert.equal(ajesCountText({...fresh,stale:true,observedAt:''}),'147\u00a0867 · сохранённый подсчёт');
+ assert.equal(ajesCountText({...fresh,stale:true,observedAt:''}),'Количество уточняется');
  assert.equal(exactAjesCount({...fresh,stale:true}),undefined);
  assert.equal(ajesCountText({...fresh,upperBound:true}),'Количество уточняется');
  assert.equal(exactAjesCount({...fresh,upperBound:true}),undefined);
 });
-test('visible Japan count uses loaded membership while an admitted total is unknown',()=>{
+test('visible Japan count never substitutes loaded cards for the whole matching inventory',t=>{
+ t.mock.method(Date,'now',()=>Date.parse('2026-11-28T00:15:00Z'));
  const observedAt='2026-11-28T00:00:00Z';
  const source={total:147867,stale:false,observedAt,upperBound:true};
  const partial=ajesVisibleCount(source,24);
- assert.deepEqual(partial,{text:'Загружено 24 · количество уточняется',total:undefined,loadedCount:24,status:'partial'});
- assert.equal(ajesVisibleCount(source,48).text,'Загружено 48 · количество уточняется');
+ assert.deepEqual(partial,{text:'Количество уточняется',total:undefined,loadedCount:24,status:'partial'});
+ assert.equal(ajesVisibleCount(source,48).text,'Количество уточняется');
  assert.equal(ajesVisibleCount({...source,total:0},24).text,partial.text,'the power-count sentinel is not zero inventory');
- assert.equal(ajesVisibleCount(null,24).text,partial.text,'ready cards have a count even before optional aggregate resolves');
+ assert.equal(ajesVisibleCount(null,24).text,partial.text,'ready cards are not a whole-query count before the aggregate resolves');
  for(const loaded of [undefined,0,-1,NaN,Infinity,2.5]){
   const count=ajesVisibleCount(null,loaded);
   assert.equal(count.text,'Количество уточняется');assert.equal(count.total,undefined);
@@ -33,9 +35,27 @@ test('visible Japan count uses loaded membership while an admitted total is unkn
  assert.equal(ajesVisibleCount({...exact,total:0},24).total,undefined,'a late contradictory aggregate cannot erase visible cars');
  assert.equal(ajesVisibleCount({...exact,stale:true},24).total,undefined);
  assert.equal(ajesVisibleCount({...exact,stale:true},24).status,'stale');
+ assert.equal(ajesVisibleCount({...exact,stale:true},48).text,'24 · данные на 28 ноября 2026 г.','old exact counts stay visibly historical even when the current loaded membership has changed');
+ for(const loaded of [24,48,72,73])assert.deepEqual(ajesVisibleCount({...exact,total:73},loaded),{text:'73',total:73,loadedCount:loaded,status:'exact'});
 });
 
-test('real Japan count badge renders exact and partial values without false inventory metadata',async()=>{
+test('census count proof must agree with the admitted total and cover the same source rows',t=>{
+ t.mock.method(Date,'now',()=>Date.parse('2026-11-28T00:15:00Z'));
+ const summary={total:73,stale:false,upperBound:false,observedAt:'2026-11-28T00:00:00Z',countProof:{version:1,kind:'japan-admitted-census',complete:true,admittedTotal:73,sourceTotal:100,sourceDistinctTotal:100,groupedTotal:100,knownTotal:51,unknownTotal:22}} as any;
+ assert.equal(exactAjesCount(summary),73);
+ for(const patch of [{complete:false},{admittedTotal:24},{groupedTotal:99},{sourceDistinctTotal:99},{sourceDistinctTotal:undefined},{knownTotal:72},{unknownTotal:-1},{version:2},{kind:'source-count'}]){
+  const invalid={...summary,countProof:{...summary.countProof,...patch}};
+  assert.equal(exactAjesCount(invalid),undefined);assert.equal(ajesVisibleCount(invalid,24).text,'Количество уточняется');
+ }
+ assert.equal(latestAjesCountSummary(summary,null),summary);
+ assert.equal(latestAjesCountSummary(summary,{...summary,total:0,upperBound:true}),summary);
+ assert.equal(latestAjesCountSummary(summary,{...summary,observedAt:'2026-11-27T00:00:00Z'}),summary);
+ const newer={...summary,observedAt:'2026-11-28T00:30:00Z'};
+ assert.equal(latestAjesCountSummary(summary,newer),newer);
+});
+
+test('real Japan count badge renders exact and partial values without false inventory metadata',async t=>{
+ let now=Date.parse('2026-11-28T00:15:00Z');t.mock.method(Date,'now',()=>now);
  const {build}=await import('esbuild');
  const {createRequire}=await import('node:module');
  const require=createRequire(import.meta.url);
@@ -46,14 +66,31 @@ test('real Japan count badge renders exact and partial values without false inve
  const upper={total:147867,stale:false,observedAt:'2026-11-28T00:00:00Z',upperBound:true};
  const partial=render(upper,24);
  assert.match(partial,/data-japan-loaded-count="24"/);assert.match(partial,/data-japan-count-status="partial"/);
- assert.match(partial,/Загружено 24 · количество уточняется/);assert.doesNotMatch(partial,/data-catalog-market-count=|147867/);
- assert.match(render(null,48),/Загружено 48 · количество уточняется/);
+ assert.match(partial,/Количество уточняется/);assert.doesNotMatch(partial,/data-catalog-market-count=|147867|Загружено/);
+ assert.match(render(null,48),/Количество уточняется/);
  const unknown=render(null);
  assert.match(unknown,/Количество уточняется/);assert.doesNotMatch(unknown,/data-japan-loaded-count=|data-catalog-market-count=|Загружено 0/);
  const exact=render({...upper,total:24,upperBound:false},24);
  assert.match(exact,/data-japan-count-status="exact"/);assert.match(exact,/data-catalog-market-count="24"/);
  const stale=render({...upper,total:24,upperBound:false,stale:true},24);
  assert.match(stale,/data-japan-count-status="stale"/);assert.doesNotMatch(stale,/data-catalog-market-count=/);
+ assert.match(stale,/24 · данные на 28 ноября 2026 г./);assert.match(stale,/data-japan-count-observed-at="2026-11-28T00:00:00Z"/);
+ const proof={version:1,kind:'japan-admitted-census',complete:true,admittedTotal:73,sourceTotal:73,sourceDistinctTotal:73,groupedTotal:73,knownTotal:51,unknownTotal:22,requestedQueryHash:'a'.repeat(64)};
+ for(const loaded of [24,48,72,73]){
+  const full=render({...upper,total:73,upperBound:false,countProof:proof},loaded);
+  assert.match(full,/data-catalog-market-count="73"/);assert.match(full,new RegExp(`data-japan-loaded-count="${loaded}"`));
+  assert.match(full,/data-japan-count-proof="japan-admitted-census"/);assert.match(full,new RegExp(`data-japan-count-query-hash="${'a'.repeat(64)}"`));
+ }
+ now=Date.parse('2026-11-28T00:30:01Z');
+ const agedSummary={...upper,total:73,upperBound:false,countProof:proof} as any;
+ const retained=latestAjesCountSummary(agedSummary,null);
+ assert.equal(retained?.stale,true,'an append/count refusal cannot extend the original observation deadline');
+ assert.equal(retained?.observedAt,agedSummary.observedAt);assert.equal(retained?.total,73);
+ assert.equal(exactAjesCount(retained),undefined);
+ assert.deepEqual(ajesVisibleCount(retained,48),{text:'73 · данные на 28 ноября 2026 г.',total:undefined,loadedCount:48,status:'stale'});
+ const expired=render(retained,48);
+ assert.match(expired,/data-japan-count-status="stale"/);assert.match(expired,/73 · данные на 28 ноября 2026 г./);
+ assert.doesNotMatch(expired,/data-catalog-market-count=|data-japan-count-status="exact"/);
 });
 test('power selection never becomes a supplier horsepower SQL predicate',()=>{
  for(const market of ['japan'] as const)for(const aggregate of [undefined,'count','models'] as const){

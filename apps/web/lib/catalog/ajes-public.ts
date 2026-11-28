@@ -1,17 +1,13 @@
-import {applyJapanOwnerSpecifications} from './japan-owner-specifications';
-import {enrichJapanDrive} from './japan-drive';
-import {applyJapanFactoryFuel} from '../encyclopedia/japan-fuel-reference';
-import {applyEncyclopediaCalculation,readCalculationIndex,type CalculationIndex} from '../encyclopedia/calculation-index';
+import {readCalculationIndex,type CalculationIndex} from '../encyclopedia/calculation-index';
 import 'server-only';
 import {assertAjesJapanTable} from './ajes-access-policy';
 import {headers} from 'next/headers';
 import {ajesClient} from './ajes-runtime';
 import {AjesUnavailable} from './ajes-client';
-import {ajesOffer} from './ajes-offer';
 import {convertToRub} from './rates';
 import type {ajesLot,AjesQuery} from './ajes-query';
-import {applyCatalogEditorial,editorialHidden,readCatalogEditorial,type CatalogEditorialIndex} from './editorial';
-import {catalogInventoryAgeDecision,catalogVehicleExcluded} from './inventory-admission';
+import {readCatalogEditorial,type CatalogEditorialIndex} from './editorial';
+import {applyAjesLotAdmission} from './ajes-admission';
 export async function cappedAjesQuery(query:AjesQuery):Promise<AjesQuery>{
  assertAjesJapanTable(query.table);
  return query;
@@ -43,16 +39,12 @@ export async function readAjesPublic(query:AjesQuery,options:{editorial?:boolean
   const enrichStart=performance.now();
   const rate=await convertToRub(lot.finalPriceJpy||lot.sourcePrice,lot.currency as 'JPY'|'KRW'|'CNY');
   if(!rate)throw Error('ajes_currency_unavailable');
-  let offer=ajesOffer(lot,rate,result.observedAt);
-  // Exact local release facts also cover auction records. No supplier/detail
-  // request or legacy approximate matching is needed for this lookup.
-  offer=applyJapanFactoryFuel(applyEncyclopediaCalculation(enrichJapanDrive(offer,calculationIndex),calculationIndex));
+  const offer=applyAjesLotAdmission(lot,rate,result.observedAt,{editorial:index,calculationIndex},options.editorial!==false);
   options.measure?.('enrichment-sum',performance.now()-enrichStart);
-  if(options.editorial!==false&&editorialHidden(offer,index))return null;
-  return applyJapanOwnerSpecifications(options.editorial===false?offer:applyCatalogEditorial(offer,index));
+  return offer;
  }));
- const {sourceEvidence: _privateEvidence,sourceEvidenceById: _privateListEvidence,emptyPageEvidence: _privateEmptyEvidence,...publicResult}=result;
- return {...publicResult,items:items.filter(offer=>offer&&catalogInventoryAgeDecision(offer).eligible&&!catalogVehicleExcluded(offer))};
+ const {sourceEvidence: _privateEvidence,sourceEvidenceById: _privateListEvidence,emptyPageEvidence: _privateEmptyEvidence,sourceFields:_privateSchema,...publicResult}=result;
+ return {...publicResult,items:items.filter((offer):offer is NonNullable<typeof offer>=>Boolean(offer))};
 }
 export async function getAjesOffer(id:string,options:{editorial?:boolean}={}){
  const match=id.match(/^ajes-stats-([A-Za-z0-9_-]{1,64})$/);

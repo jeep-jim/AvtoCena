@@ -1,6 +1,7 @@
 import {CatalogPageRequestError,CATALOG_PAGE_REQUEST_TIMEOUT_MS} from "./page-request-error";
 import { CatalogCard } from "./CatalogCard";
 import type { CatalogSearchParams } from "@/lib/catalog/types";
+import type {AjesCountSummary} from '@/lib/catalog/ajes-count-display';
 
 export class JapanCatalogRefreshRequired extends Error {
   constructor(){super('japan_cursor_refresh_required');}
@@ -29,5 +30,5 @@ export async function loadMoreCatalog(query: CatalogSearchParams, page: number, 
   }
   if (result.page !== page || !Array.isArray(result.items) || !(Number.isSafeInteger(result.total)||result.total===null)) throw new CatalogPageRequestError("invalid");
   if(query.market==='china'&&query.preparedCut&&(result.generationId!==query.preparedCut||result.items.some((row:any)=>row?.market!=='china'||row.preparedChinaSelection?.generationId!==query.preparedCut)))throw new CatalogPageRequestError('unavailable');
-  return {incomplete:Boolean(result.partial||result.stale||result.interrupted||result.scanLimited),cards: result.items.map((offer: any) => <CatalogCard key={offer.id} offer={offer} compact dense />), ids: result.items.map((offer: any) => offer.id), total: result.total, page, generationId: result.generationId, nextCursor: typeof result.nextCursor === "string" ? result.nextCursor : result.nextCursor === null ? null : undefined, hasMore: typeof result.hasMore === "boolean" ? result.hasMore : undefined};
+  return {incomplete:Boolean(result.partial||result.stale||result.interrupted||result.scanLimited),cards: result.items.map((offer: any) => <CatalogCard key={offer.id} offer={offer} compact dense />), ids: result.items.map((offer: any) => offer.id), total: result.total, countSummary:query.market==='japan'?(result.countSummary??null) as AjesCountSummary|null:undefined, page, generationId: result.generationId, nextCursor: typeof result.nextCursor === "string" ? result.nextCursor : result.nextCursor === null ? null : undefined, hasMore: typeof result.hasMore === "boolean" ? result.hasMore : undefined};
 }

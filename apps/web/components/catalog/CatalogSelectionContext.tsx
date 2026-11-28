@@ -1,8 +1,9 @@
 'use client';
 import {CatalogViewIcon} from './CatalogViewIcon';
-import {createContext,useContext,useState,useEffect,useRef,type ReactNode} from 'react';
+import {createContext,useContext,useState,useEffect,useRef,useCallback,type ReactNode} from 'react';
 import {createPortal} from 'react-dom';
-type ResultCount={queryKey:string;text:string;total?:number};
+import {ajesCountText,exactAjesCount,latestAjesCountSummary,type AjesCountSummary} from '@/lib/catalog/ajes-count-display';
+type ResultCount={queryKey:string;text:string;total?:number;summary?:AjesCountSummary|null};
 type SelectionContext={target:HTMLDivElement|null;setTarget:(target:HTMLDivElement|null)=>void;view:"grid"|"list";setView:(view:"grid"|"list")=>void};
 const Context=createContext<SelectionContext|null>(null);
 export function CatalogSelectionProvider({children,dealerLayout=false}:{children:ReactNode;dealerLayout?:boolean}){
@@ -65,22 +66,30 @@ export function CatalogDesktopSelection({children}:{children:ReactNode}){
 export function useCatalogView(){return useContext(Context)?.view || "grid";}
 
 // Keep count updates separate from view/selection consumers (including cards).
-const ResultCountContext=createContext<{value:ResultCount|null;set:(count:ResultCount)=>void}|null>(null);
+const ResultCountContext=createContext<{value:ResultCount|null;byQuery:ReadonlyMap<string,ResultCount>;set:(count:ResultCount)=>void}|null>(null);
 type LoadedCount={queryKey:string;count:number};
 const LoadedCountContext=createContext<{value:LoadedCount|null;set:(count:LoadedCount)=>void}|null>(null);
 function ResultCountProvider({children}:{children:ReactNode}){
- const [value,set]=useState<ResultCount|null>(null);
+ const [counts,setCounts]=useState<{value:ResultCount|null;byQuery:Map<string,ResultCount>}>({value:null,byQuery:new Map()});
+ const set=useCallback((incoming:ResultCount)=>setCounts(current=>{
+  const previous=current.byQuery.get(incoming.queryKey);
+  const summary=latestAjesCountSummary(previous?.summary,incoming.summary);
+  const value=summary?{...incoming,summary,text:ajesCountText(summary),total:exactAjesCount(summary)}:incoming;
+  const byQuery=new Map(current.byQuery);byQuery.delete(value.queryKey);byQuery.set(value.queryKey,value);
+  while(byQuery.size>6)byQuery.delete(byQuery.keys().next().value!);
+  return {value,byQuery};
+ }),[]);
  const [loaded,setLoaded]=useState<LoadedCount|null>(null);
- return <ResultCountContext.Provider value={{value,set}}><LoadedCountContext.Provider value={{value:loaded,set:setLoaded}}>{children}</LoadedCountContext.Provider></ResultCountContext.Provider>;
+ return <ResultCountContext.Provider value={{...counts,set}}><LoadedCountContext.Provider value={{value:loaded,set:setLoaded}}>{children}</LoadedCountContext.Provider></ResultCountContext.Provider>;
 }
 // Share the already streamed server aggregate with the open filter sheet.
 // Query identity prevents retained/older results from becoming the current count.
-export function CatalogResultCountUpdate({queryKey,text,total}:ResultCount){
+export function CatalogResultCountUpdate({queryKey,text,total,summary}:ResultCount){
  const set=useContext(ResultCountContext)?.set;
- useEffect(()=>{set?.({queryKey,text,total});},[set,queryKey,text,total]);
+ useEffect(()=>{set?.({queryKey,text,total,summary});},[set,queryKey,text,total,summary]);
  return null;
 }
-export function useCatalogResultCount(){return useContext(ResultCountContext)?.value;}
+export function useCatalogResultCount(queryKey?:string){const context=useContext(ResultCountContext);return queryKey?context?.byQuery.get(queryKey):context?.value;}
 /** Appended cards are a loaded count, never an independently proven total. */
 export function CatalogLoadedCountUpdate({queryKey,count}:LoadedCount){
  const set=useContext(LoadedCountContext)?.set;

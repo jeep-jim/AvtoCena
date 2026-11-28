@@ -96,7 +96,7 @@ export function createAjesClient(deps:Dependencies) {
   // observation deadline. No new shared TTL, source admission or feed crawl.
   const preparedReads=new DetailReadCache<any>({maxEntries:300,maxBytes:8*1024*1024,ttlMs:30*60*1000,expiresAt:sourceExpiry,concurrency:2,maxQueued:32,queueTimeoutMs:5000,shouldCache:value=>{
     const age=Date.now()-Date.parse(value?.observedAt||'');
-    const supported=value?.schemaVersion===2||Array.isArray(value?.makes)||Array.isArray(value?.models)||Array.isArray(value?.colors)||Number.isSafeInteger(value?.total);
+    const supported=value?.schemaVersion===2||Array.isArray(value?.makes)||Array.isArray(value?.models)||Array.isArray(value?.colors)||Array.isArray(value?.groups)||Number.isSafeInteger(value?.total);
     return supported&&!value.stale&&!value.partial&&age>=0&&age<sourceTtlMs&&(!needsEmptyProof(value)||verifiedEmptyPage(value))
       &&(!emptyDirectoryKind(value)||verifiedEmptyDirectory(value));
   }});
@@ -153,12 +153,12 @@ export function createAjesClient(deps:Dependencies) {
       if(!password)throw new AjesUnavailable('not_configured');
       // A valid year interval outside admission policy is known empty, not a failure.
       // Retain visitor and owner-switch checks even when no supplier request is needed.
-      if(query.kind!=='detail'&&query.empty)return {schemaVersion:2,items:[],total:0,colors:query.kind==='colors'?[]:undefined,models:query.kind==='models'?[]:undefined,makes:query.kind==='makes'?[]:undefined,page:query.page,pageSize:query.pageSize,received:0,rejected:0,stale:false,observedAt:new Date().toISOString()};
+      if(query.kind!=='detail'&&query.empty)return {schemaVersion:2,items:[],total:0,...(query.kind==='count'&&'identityCount' in query?{distinctTotal:0}:{}),groups:query.kind==='census'?[]:undefined,colors:query.kind==='colors'?[]:undefined,models:query.kind==='models'?[]:undefined,makes:query.kind==='makes'?[]:undefined,page:query.page,pageSize:query.pageSize,received:0,rejected:0,stale:false,observedAt:new Date().toISOString()};
       const visitorKey=clientIp+"\0"+cacheSql;
-      const quotaKey='quota:'+query.table+((query.kind==='count'||query.kind==='makes')?':count':'');
+      const quotaKey='quota:'+query.table+((query.kind==='count'||query.kind==='makes'||query.kind==='census')?':count':'');
       const isUsable=(saved:any)=>{const age=Date.now()-Date.parse(saved?.observedAt||'');return age>=0&&age<7*24*60*60*1000&&Array.isArray(saved?.items)&&saved.items.length<=query.pageSize
           &&saved.page===query.page&&saved.pageSize===query.pageSize
-          &&(query.kind==='count'?Number.isSafeInteger(saved.total)&&saved.total>=0:query.kind==='colors'?Array.isArray(saved.colors):query.kind==='makes'?Array.isArray(saved.makes):query.kind==='models'?Array.isArray(saved.models):saved.items.every((lot:any)=>lot?.table===query.table&&typeof lot.id==='string'))
+          &&(query.kind==='count'?Number.isSafeInteger(saved.total)&&saved.total>=0:query.kind==='census'?Array.isArray(saved.groups)&&saved.groups.length===saved.received&&saved.groups.length<=500:query.kind==='colors'?Array.isArray(saved.colors):query.kind==='makes'?Array.isArray(saved.makes):query.kind==='models'?Array.isArray(saved.models):saved.items.every((lot:any)=>lot?.table===query.table&&typeof lot.id==='string'))
           &&(query.kind!=='detail'||(saved.items.length===1&&saved.items[0].id===query.id))
           &&!unprovedDirectory(saved,false);};
       const newerDirectory=(value:any)=>firstDirectory?[cache.peekFresh(cacheSql),preparedReads.peekFresh(cacheSql)]
@@ -240,7 +240,7 @@ export function createAjesClient(deps:Dependencies) {
       }
       const freshPrepared=(value:any)=>{
         const age=Date.now()-Date.parse(value?.observedAt||'');
-        const schema=['count','models','makes','colors'].includes(query.kind)||value?.schemaVersion===2;
+        const schema=['count','models','makes','colors','census'].includes(query.kind)||value?.schemaVersion===2;
         return isUsable(value)&&schema&&!value.stale&&!value.partial&&age<sourceTtlMs&&!beforeBarrier(value)&&!unprovedDirectory(value)&&!olderDirectory(value)
           &&(query.kind!=='list'||!needsEmptyProof(value)||verifiedEmptyPage(value,cacheSql,countSql));
       };
@@ -326,7 +326,7 @@ export function createAjesClient(deps:Dependencies) {
           }catch(error){if(error instanceof AjesUnavailable)throw error;throw invalidResponse('decode',decodeCode);}
           responseFacts.rootKind=rows===null?'null':Array.isArray(rows)?'array':typeof rows as AjesResponseValidation['rootKind'];
           if(Array.isArray(rows))responseFacts.rowCount=rows.length;
-          if(query.kind==='count'||query.kind==='models'||query.kind==='makes'||query.kind==='colors'){
+          if(query.kind==='count'||query.kind==='models'||query.kind==='makes'||query.kind==='colors'||query.kind==='census'){
             const first=Array.isArray(rows)?rows[0]:rows;
             const aggregateEvidence={observedAt:new Date().toISOString(),array:Array.isArray(rows),length:Array.isArray(rows)?rows.length:null,fields:first&&typeof first==='object'?Object.keys(first).slice(0,30):[],numeric:first&&typeof first==='object'?Object.fromEntries(Object.entries(first).filter(([k,v])=>/^(?:total|count(?:\(\*\))?|tag[012])$/i.test(k)&&/^\d+$/.test(String(v)))):{}};
             if(deps.saveAggregateEvidence)persist(()=>deps.saveAggregateEvidence!(query.kind,aggregateEvidence));
@@ -341,6 +341,15 @@ export function createAjesClient(deps:Dependencies) {
           }
           if(rows.some(r=>!r||typeof r!=='object'||Array.isArray(r)))throw invalidResponse('page_shape','row_not_object');
           if(query.kind==='detail'&&rows.some(r=>r.ID!==query.id))throw new AjesUnavailable('identity_mismatch');
+          if(query.kind==='census'){
+            const {parseAjesCensusGroups}=await import('./ajes-census-protocol');
+            let groups;try{groups=parseAjesCensusGroups(rows,query.censusFields);}catch{throw invalidResponse('aggregate_shape','total_invalid');}
+            const result={items:[],groups,page:query.page,pageSize:query.pageSize,received:rows.length,rejected:0,stale:false,observedAt:new Date().toISOString()};
+            // Empty aggregate pages are not a zero proof. The caller must verify
+            // all group weights against the independently obtained raw COUNT.
+            if(deps.saveQuery)persist(()=>deps.saveQuery!(cacheSql,result));
+            return result;
+          }
           if(query.kind==='count'||query.kind==='models'||query.kind==='makes'||query.kind==='colors'){
             const totalOf=(r:any)=>{const match=Object.entries(r).find(([key])=>['total','count(*)','count',query.kind==='count'?'tag0':(query.kind==='makes'||query.kind==='colors')?'tag1':'tag2'].includes(key.toLowerCase().replace(/\s/g,'')));const value=match?.[1];if(!/^\d+$/.test(String(value))||!Number.isSafeInteger(Number(value)))throw invalidResponse('aggregate_shape','total_invalid');return Number(value);};
             if(query.kind==='count'&&rows.length!==1)throw invalidResponse('aggregate_shape','count_row_count');
@@ -348,7 +357,13 @@ export function createAjesClient(deps:Dependencies) {
             const makes=query.kind==='makes'?rows.map(r=>({make:String(r.MARKA_NAME??r.marka_name??'').trim(),total:totalOf(r)})):undefined;
             if(makes?.some(m=>!m.make))throw invalidResponse('aggregate_shape','make_name_missing');
             const colors=query.kind==='colors'?rows.map(r=>({color:String(r.COLOR??r.color??'').trim(),total:totalOf(r)})).filter(r=>r.color):undefined;
-            const result={items:[],models,makes,colors,total:query.kind==='count'?totalOf(rows[0]):undefined,page:query.page,pageSize:query.pageSize,received:rows.length,rejected:0,stale:false,observedAt:new Date().toISOString()};
+            let distinctTotal:number|undefined;
+            if(query.kind==='count'&&'identityCount' in query){
+              const value=Object.entries(rows[0]).find(([key])=>['census_distinct_ids','tag1'].includes(key.toLowerCase()))?.[1];
+              if(!/^\d+$/.test(String(value))||!Number.isSafeInteger(Number(value))||Number(value)>totalOf(rows[0]))throw invalidResponse('aggregate_shape','total_invalid');
+              distinctTotal=Number(value);
+            }
+            const result={items:[],models,makes,colors,total:query.kind==='count'?totalOf(rows[0]):undefined,...(distinctTotal!==undefined?{distinctTotal}:{}),page:query.page,pageSize:query.pageSize,received:rows.length,rejected:0,stale:false,observedAt:new Date().toISOString()};
             if(firstDirectory&&rows.length===0){
               // Release supplier admission before the independent COUNT. An
               // unconfirmed [] must neither erase useful names nor poison a
@@ -399,7 +414,8 @@ export function createAjesClient(deps:Dependencies) {
             return result;
           }
           const items=rows.map(r=>ajesLot(r,query.table,query.kind==='detail')).filter(Boolean);
-          const result={schemaVersion:2,stale:false,items,page:query.page,pageSize:query.pageSize,received:rows.length,rejected:rows.length-items.length,observedAt:new Date().toISOString(),
+          const sourceFields=[...new Set(rows.flatMap(row=>Object.keys(row).filter(key=>/^[A-Za-z_][A-Za-z0-9_]{0,63}$/.test(key)).map(key=>key.toUpperCase())))].sort();
+          const result={schemaVersion:2,stale:false,items,sourceFields,page:query.page,pageSize:query.pageSize,received:rows.length,rejected:rows.length-items.length,observedAt:new Date().toISOString(),
             quota:{counter:quotaNumber(response.headers.get('api-counter')),limit:quotaNumber(response.headers.get('api-limit')),remaining:quotaNumber(response.headers.get('api-rest'))}};
           if(query.kind==='list'&&rows.length===0){
             // An empty wire array is not proof of inventory exhaustion. Do not
@@ -487,7 +503,7 @@ export function createAjesClient(deps:Dependencies) {
               if(fallbackAge>=0&&fallbackAge<7*86400000&&fallback?.items?.length===1&&fallback.items[0].id===query.id&&fallback.items[0].table===query.table){await deps.assertEnabled(query.table);return {...fallback,partial:true,stale:true};}
             }
             if(query.kind==='list'){const fallback=await listFallback(saved);if(fallback)return fallback;}
-            if(query.kind!=='list'&&usable&&(saved.items.length>0||query.kind==='count'||query.kind==='models'||query.kind==='makes'||query.kind==='colors')){await deps.assertEnabled(query.table);return {...saved,stale:true};}
+            if(query.kind!=='list'&&usable&&(saved.items.length>0||query.kind==='count'||query.kind==='models'||query.kind==='makes'||query.kind==='colors'||query.kind==='census')){await deps.assertEnabled(query.table);return {...saved,stale:true};}
             throw failure;
           });
         }finally{clearTimeout(timer);}

@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {DatabaseSync} from 'node:sqlite';
-import {ajesQuery,ajesSourceCacheSql,type AjesQuery} from '../apps/web/lib/catalog/ajes-query';
+import {ajesQuery,ajesSourceCacheSql,AJES_CENSUS_FIELDS,type AjesQuery} from '../apps/web/lib/catalog/ajes-query';
 import {createAjesClient} from '../apps/web/lib/catalog/ajes-client';
 import {heavyVehicleFamilies,heavyVehicleSqlExclusion} from '../apps/web/lib/catalog/heavy-vehicle-families';
 import {japanHeavyVehicleSqlExclusion,japanVehicleFamilySqlExclusion,japanVehicleFamilyCacheSqlExclusion} from '../apps/web/lib/catalog/japan-vehicle-policy';
@@ -123,4 +123,52 @@ test('the compatible wire query reuses fresh exact canonical cache without a sup
  const result=await client.read(input,'203.0.113.1');
  assert.equal(result.observedAt,saved.observedAt);assert.equal(result.stale,false);assert.deepEqual(result.items,saved.items);
  assert.equal(result.sourceReceipt.supplierAttempted,false);assert.equal(attempts,0);assert.equal(reads,1);
+});
+
+const expandedAliases=[
+ {make:'AUDI',names:['A4',...Array.from({length:26},(_,i)=>'A4'+String.fromCharCode(65+i))]},
+ {make:'MAZDA',names:['3','MAZDA3','MAZDA 3',...Array.from({length:19},(_,i)=>'OTHER '+i)]},
+];
+const counterUrl=(sql:string)=>{
+ const url=new URL('http://192.0.2.123/api/');
+ url.search=new URLSearchParams({ip:'2001:db8:1234:5678:1234:5678:1234:5678',json:'',code:'x'.repeat(128),sql}).toString();
+ return Buffer.byteLength(url.href);
+};
+test('27 Audi and22 Mazda exact aliases preserve the URI budget for LIST and scalar counts with combined filters',()=>{
+ for(const {make,names} of expandedAliases){
+  const selection={table:'stats' as const,make,resolvedModels:{exact:names,families:[]},
+   yearFrom:2015,yearTo:2024,fuel:'petrol',transmission:'automatic',auctionGrade:'5',powerTo:160};
+  for(const aggregate of [undefined,'count'] as const)for(const countIdentity of aggregate?[undefined,true]:[undefined]){
+   const sql=ajesQuery({...selection,aggregate,...(countIdentity?{countIdentity:true}: {})}).sql;
+   assert.ok(counterUrl(sql)<6000,`${make}/${names.length}/${aggregate||'list'}: ${counterUrl(sql)} bytes`);
+   for(const name of names)assert.ok(sql.includes(`'${name}'`),'no resolved source alias is discarded');
+  }
+  const sql=ajesQuery({table:'stats',make,resolvedModels:{exact:names,families:[]},yearFrom:2015,yearTo:2024,powerTo:160,
+   aggregate:'census',censusFields:[...AJES_CENSUS_FIELDS]}).sql;
+  assert.ok(counterUrl(sql)<6000,`${make}/${names.length}/basic census: ${counterUrl(sql)} bytes`);
+  assert.match(sql,/group by 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15 order by 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15/);
+  // This experimental aggregate is blocked in production. Its full technical
+  // projection plus every filter still exceeds the compatibility budget with
+  // this long credential/IP wrapper; no aliases are dropped to conceal that.
+  const unsupported=ajesQuery({...selection,aggregate:'census',censusFields:[...AJES_CENSUS_FIELDS]}).sql;
+  assert.ok(counterUrl(unsupported)>6000,`${make}/${names.length}/combined census remains unsupported`);
+ }
+});
+
+test('compact exact-model IN and unchanged family LIKE have the same SQL result as every expanded equality',()=>{
+ const db=new DatabaseSync(':memory:');
+ try{
+  db.exec('create table stats(id integer,model_name text collate nocase)');
+  const add=db.prepare('insert into stats values(?,?)');let id=0;
+  for(const name of [...new Set(expandedAliases.flatMap(row=>row.names)), 'A4 AVANT','A4 AVANTX','A40','A4Z2','OTHER 190','MAZDA30','A4-AVANT','Ａ４','a4a','',null])add.run(id++,name);
+  for(const {names} of expandedAliases)for(const families of [[],['A4']]){
+   const sql=ajesQuery({resolvedModels:{exact:names,families}}).sql;
+   const compact=sql.match(/\(model_name in \([^)]*\)(?: or model_name like '[^']*')*\)/)?.[0];
+   assert.ok(compact,'one complete model selection clause');
+   const expanded='('+[...names.map(name=>`model_name='${name}'`),...families.map(name=>`model_name like '${name} %'`)].join(' or ')+')';
+   const selected=(where:string)=>db.prepare('select id from stats where '+where+' order by id').all();
+   assert.deepEqual(selected(compact),selected(expanded));assert.ok(selected(compact).length>=names.length);
+  }
+  assert.match(ajesQuery({model:'A4'}).sql,/\(model_name='A4'\)/,'a singleton keeps its old SQL/cache identity');
+ }finally{db.close();}
 });

@@ -30,3 +30,13 @@ test('cold page can finish after 30 seconds; timeout remains bounded; errors nev
   await assert.rejects(load({market:'korea'},6),(e:any)=>e.kind==='invalid');
  }finally{globalThis.fetch=fetchOriginal;AbortSignal.timeout=timeoutOriginal;t.mock.timers.reset();}
 });
+test('Japan append carries the independent whole-query count and proof alongside its 24 cards',async()=>{
+ const load=await action(),original=globalThis.fetch;
+ const countSummary={total:73,stale:false,upperBound:false,observedAt:'2026-11-28T00:00:00Z',countProof:{kind:'japan-admitted-census',complete:true,requestedQueryHash:'a'.repeat(64),admittedTotal:73}};
+ const items=Array.from({length:24},(_,index)=>({id:`ajes-stats-${index+25}`}));
+ globalThis.fetch=(async()=>Response.json({page:2,total:73,items,countSummary,hasMore:true,nextCursor:'fixture-cursor'})) as typeof fetch;
+ try{
+  const result=await load({market:'japan',make:'AUDI',model:'A4',powerTo:'160'},2,'fixture-before');
+  assert.equal(result.ids.length,24);assert.equal(result.total,73);assert.deepEqual(result.countSummary,countSummary);
+ }finally{globalThis.fetch=original;}
+});

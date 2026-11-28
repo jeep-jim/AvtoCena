@@ -41,7 +41,7 @@ try{
  browser=await chromium.launch({executablePath:process.env.CHROME_BIN||(fs.existsSync('/usr/bin/chromium')?'/usr/bin/chromium':undefined),args:['--no-sandbox']});
  for(const width of [390,1440]){
   const context=await browser.newContext({viewport:{width,height:1000},locale:'ru-RU',serviceWorkers:'block'}),page=await context.newPage();
-  const requests=[],errors=[];let modelFailure=false,brandFailure=false,brandInvalid=false,brandStale=false,brandEmpty=false;
+  const requests=[],errors=[];let modelFailure=false,modelStale=false,modelPartial='',brandFailure=false,brandInvalid=false,brandStale=false,brandEmpty=false;
   page.on('pageerror',error=>errors.push(error.message));
   await page.route('**/*',async route=>{
    const url=new URL(route.request().url());
@@ -49,14 +49,14 @@ try{
    if(!url.pathname.startsWith('/api/')&&!url.pathname.includes('model-directory.')){await route.continue();return;}
    requests.push(url.pathname+url.search);
    if(url.pathname==='/api/catalog/brand-counts'){
-    await route.fulfill(brandFailure?{status:503,json:{error:'japan_counts_unavailable'}}:{json:brandInvalid?{generationId:'invalid'}:{generationId:'fixture',counts:brandEmpty===true?{}:brandEmpty==='zero'?{TOYOTA:0}:{MAZDA:12,TOYOTA:24,LANDROVER:1,BENZ:1,'MERCEDES BENZ':1},modelCounts:{},stale:brandStale}});return;
+    await route.fulfill(brandFailure?{status:503,json:{error:'japan_counts_unavailable'}}:{json:brandInvalid?{generationId:'invalid'}:{generationId:'fixture',counts:brandEmpty===true?{}:brandEmpty==='zero'?{TOYOTA:0}:{MAZDA:12,TOYOTA:24,LANDROVER:1,BENZ:1,'MERCEDES BENZ':1,AUDI:3},modelCounts:{},stale:brandStale}});return;
    }
    if(url.pathname==='/api/catalog/source-models'){
     assert.equal(url.searchParams.get('market'),'japan');
     const make=url.searchParams.get('make');
-    const raw=[['MAZDA','MAZDA3 FASTBACK',[],12],['TOYOTA','COROLLA 2WD',[],24],['LANDROVER','RANGE  ROVER',[],1],['BENZ','B-CLASS',[],1],['MERCEDES BENZ','B-CLASS',[],1]];
-    const models=make?raw.filter(row=>make.split(',').includes(row[0])):raw;
-    await route.fulfill(modelFailure?{status:503,json:{error:'directory_unavailable'}}:{json:{version:1,brands:[],models}});return;
+    const raw=[['MAZDA','MAZDA3 FASTBACK',[],12],['TOYOTA','COROLLA 2WD',[],24],['LANDROVER','RANGE  ROVER',[],1],['BENZ','B-CLASS',[],1],['MERCEDES BENZ','B-CLASS',[],1],...['A4','A4 AVANT','A4 ALLROAD'].map(model=>['AUDI',model,[],1])];
+    const models=raw.filter(row=>(!make||make.split(',').includes(row[0]))&&(!modelPartial||row[0]!=='AUDI'||row[1]===modelPartial));
+    await route.fulfill(modelFailure?{status:503,json:{error:'directory_unavailable'}}:{json:{version:1,brands:[],models,stale:modelStale}});return;
    }
    // These tempting general/stock names must never be queried for auctions.
    await route.fulfill({json:{version:1,brands:[],models:[['Mazda','3',[],1],['Mazda','Stock only model',[],1]]}});
@@ -163,6 +163,33 @@ try{
   assert.equal(await page.getByLabel('Выбрано').textContent(),'BENZ,MERCEDES BENZ / B-CLASS');
   assert.equal(requests.some(url=>url.includes('scope=inventory')||url.includes('model-directory.')||url.includes('stock=green')),false);
   assert.deepEqual(errors,[]);report.cases.push({width,name:'typed-source-make-aliases',passed:true});
+  // A stale one-variant directory is usable evidence, never a reason to narrow
+  // the user's A4 family to its first A4 AVANT suggestion. Subsequent retries
+  // retain that evidence until a complete source directory can replace it.
+  modelStale=true;modelPartial='A4 AVANT';
+  await page.goto(origin+'/?market=japan&facets=empty');
+  await page.getByRole('button',{name:'Выбрать марки автомобилей'}).click();await page.locator('[data-facet-value="AUDI"]').click();
+  const familyInput=await openModels(page);await familyInput.fill('A4');
+  await page.locator('[data-model-value="A4 AVANT"]').waitFor();
+  const retryModels=page.getByRole('button',{name:'Не удалось загрузить все модели. Повторить'});
+  await retryModels.waitFor();await familyInput.press('Enter');
+  assert.equal(await page.getByLabel('Выбрано').textContent(),'AUDI / A4');
+  modelFailure=true;await (await openModels(page)).fill('');await retryModels.waitFor();
+  await page.locator('[data-model-value="A4 AVANT"]').waitFor();
+  assert.equal(await page.getByText('Модель не найдена. Попробуйте часть названия',{exact:true}).count(),0);
+  modelFailure=false;modelPartial='A4 ALLROAD';
+  const staleResponse=page.waitForResponse(response=>response.url().includes('/api/catalog/source-models'));
+  await retryModels.click();await (await staleResponse).finished();
+  await page.locator('[data-model-value="A4 ALLROAD"]').waitFor();await page.locator('[data-model-value="A4 AVANT"]').waitFor();
+  await retryModels.waitFor();
+  modelStale=false;modelPartial='';
+  const completeResponse=page.waitForResponse(response=>response.url().includes('/api/catalog/source-models'));
+  await retryModels.click();await (await completeResponse).finished();
+  await page.locator('[data-model-value="A4"]').waitFor();await retryModels.waitFor({state:'hidden'});
+  await familyInput.fill('Audi A4');await familyInput.press('Enter');
+  assert.equal(await page.getByLabel('Выбрано').textContent(),'AUDI / A4');
+  assert.deepEqual(errors,[]);
+  report.cases.push({width,name:'audi-family-stale-failed-retry-and-explicit-make',passed:true});
   await context.close();
  }
  report.passed=true;

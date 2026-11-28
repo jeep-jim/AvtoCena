@@ -20,7 +20,9 @@ const overallCount=ajesSourceCacheSql(ajesQuery({aggregate:'count'}).sql),overal
 export function ajesQueryCacheLocation(sql:string){
  const hash=createHash('sha256').update(sql).digest('hex'),slot=parseInt(hash.slice(0,8),16)%128;
  const legacy=`${root}/${slot}.json`;
- const key=sql.startsWith('select count(*) from')
+ const key=sql.includes(' as census_count, ')
+  ?`${root}/counts/census-${slot}.json`
+  :sql.startsWith('select count(*) from')||sql.startsWith('select count(*) as total, count(distinct binary id)')
   ?`${root}/counts/${sql===overallCount?'overall':slot}.json`
   :sql.startsWith('select marka_name,')?`${root}/directories/${sql===overallMakes?'makes-overall':(sql.includes('model_name, count(*)')?'models':'makes')+'-'+slot}.json`:legacy;
  return {hash,key,legacy};
