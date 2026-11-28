@@ -1,0 +1,951 @@
+{
+  "version": 1,
+  "kind": "japan-source-models-publication-v1",
+  "date": "2026-11-28",
+  "timezone": "Asia/Krasnoyarsk",
+  "runtime": {
+    "sha": "7f7a316905cd8109352431ed4722108b3449c3ec",
+    "tree": "5854b591c0ee78e3aaa960f96b9a66b9c5b4175c",
+    "retainedRuntime": "20fd18d12b3f5c7aabef860e1b53da0d505dfd64",
+    "files": 46,
+    "diffSha256": "a6bd28e6ec1f2462cc5292311e97c2ff15ea8facdf66029ce12adb4deccb8ba9"
+  },
+  "controller": {
+    "sha": "b43a4e620af41059c96d608615785a5cce70b461",
+    "markerSha": "d80478a824a80ea90494641e9f08dbfe1ea45125",
+    "markerParentSha": "b43a4e620af41059c96d608615785a5cce70b461"
+  },
+  "acceptancePolicy": "japan-functional-observed-timing-v1",
+  "countAcceptance": "japan-source-bounded-incremental-v1",
+  "acceptanceMeaning": {
+    "positiveCompleteCensusClaimed": false,
+    "fullLocallyEnrichedFilterSelectionClaimed": false,
+    "globalDeliveredPriceOrderClaimed": false,
+    "strictExactCountContractPreservedWithoutIncrementalPolicy": true
+  },
+  "offline": {
+    "runId": 46121684770,
+    "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/46121684770",
+    "headSha": "b43a4e620af41059c96d608615785a5cce70b461",
+    "status": "completed",
+    "conclusion": "success",
+    "browserFixtureAccepted": true,
+    "note": "Exact b43 controller completed every required hosted gate; bound persisted fixture checked in both lifecycle modes.",
+    "controllerTests": {
+      "passed": 1799,
+      "failed": 0,
+      "skipped": 0
+    },
+    "runtimeTests": {
+      "passed": 627,
+      "failed": 0,
+      "skipped": 0
+    },
+    "reportSha256": "31c5e1af49499cc1444ac58b4c7892d0d5ceefd9a03da20d8de7758dd44afe6b",
+    "modelCoverageCases": [
+      {
+        "name": "preserved_controls",
+        "passed": true,
+        "sourcePairs": 94,
+        "accessiblePairs": 94,
+        "optionPairs": 95,
+        "cardBackedExtraPairs": 1,
+        "modelExpansions": 1,
+        "typedFamilyNotNarrowed": true,
+        "directoryWait": {
+          "delayedResponses": 1,
+          "completedDelays": 1,
+          "cardFallbackOptionsBeforeDirectory": 24
+        },
+        "positiveExactCountsSupplied": 0,
+        "japanExactCountPassed": null
+      },
+      {
+        "name": "remounted_controls",
+        "passed": true,
+        "sourcePairs": 94,
+        "accessiblePairs": 94,
+        "optionPairs": 95,
+        "cardBackedExtraPairs": 1,
+        "modelExpansions": 1,
+        "typedFamilyNotNarrowed": true,
+        "directoryWait": {
+          "delayedResponses": 1,
+          "completedDelays": 1,
+          "cardFallbackOptionsBeforeDirectory": 24
+        },
+        "positiveExactCountsSupplied": 0,
+        "japanExactCountPassed": null
+      }
+    ],
+    "productionRequests": 0,
+    "supplierRequests": 0,
+    "forbiddenTransportAttempts": 0
+  },
+  "production": {
+    "runId": 46122149467,
+    "number": 36,
+    "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/46122149467",
+    "acceptanceVerification": "accepted-completed-published",
+    "terminal": {
+      "version": 1,
+      "kind": "china-code-cycle-v1",
+      "market": "china",
+      "completed": true,
+      "published": true,
+      "status": "accepted",
+      "runtimeSha": "7f7a316905cd8109352431ed4722108b3449c3ec",
+      "retainedRuntime": "20fd18d12b3f5c7aabef860e1b53da0d505dfd64",
+      "sourceRequests": 0,
+      "generationRestores": 0,
+      "priceCalculations": 0,
+      "generationWrites": 0,
+      "encyclopediaWrites": 0,
+      "otherMarketWrites": 0,
+      "deletions": 0,
+      "acceptancePolicy": "japan-functional-observed-timing-v1",
+      "speedGateRequired": false,
+      "speedPassed": null,
+      "timingObserved": true,
+      "appImageCleanupBeforeReserve": {
+        "version": 1,
+        "kind": "china-terminal-app-image-cleanup-v1",
+        "completed": true,
+        "status": "already_absent",
+        "uncertain": false,
+        "imagesRemoved": 0,
+        "runtimeSha": "7f7a316905cd8109352431ed4722108b3449c3ec",
+        "imageId": "sha256:d1181d4ddbd3f909ed360f016a7007a527651870b73f03fff734bcedfa9fd5f3",
+        "witnessSha256": "8e8b2c41458e9e62273d87699a39dd4d71b47c67fc331278b66ead0152ed748f",
+        "diskFreeBytesBefore": 47647723520,
+        "diskFreeBytesAfter": 47647723520,
+        "measuredFreeBytesChange": 0,
+        "reason": "already_absent"
+      },
+      "retentionPreserved": true,
+      "serverTiming": {
+        "version": 1,
+        "kind": "japan-server-timing-observation-v1",
+        "release": "7f7a316905cd8109352431ed4722108b3449c3ec",
+        "nonce": "37064ef1ec014d55c912d3cf4c957752",
+        "timingPolicy": "japan-functional-observed-timing-v1",
+        "speedGateRequired": false,
+        "speedPassed": null,
+        "timingObserved": true,
+        "broadServerBenchmarkExecuted": false,
+        "healthSeconds": 0.0035,
+        "baselineSha256": "32fba449b77e40983803483ea7b6cb4ece09afa997c2ae08dd968c675f528c59"
+      },
+      "hostCleanup": {
+        "completed": true,
+        "retiredContainers": 1
+      },
+      "appImageCleanup": {
+        "version": 1,
+        "kind": "china-terminal-app-image-cleanup-v1",
+        "completed": true,
+        "status": "removed",
+        "uncertain": false,
+        "imagesRemoved": 1,
+        "runtimeSha": "b9e9122b75f4e588088d0241476b18df7f047d96",
+        "imageId": "sha256:7b97f99ee72af7b50944c98a94a670bcb347b9779794d78b34fdc92279460216",
+        "witnessSha256": "6402307a069c9e5aac4e2d18663ad91051e40b5688b9f6ba37f3cc9e5ff89b72",
+        "diskFreeBytesBefore": 46206816256,
+        "diskFreeBytesAfter": 47398584320,
+        "measuredFreeBytesChange": 1191768064,
+        "reason": "exact_terminal_image"
+      },
+      "finishedAt": "2026-11-28T07:57:26.551Z",
+      "acceptedGenerationId": "gen_china_46077223993_1",
+      "acceptedRuntimeSha": "7f7a316905cd8109352431ed4722108b3449c3ec",
+      "imageId": "sha256:59b6be6c59c0895b42cf6766fcba0150d862d3dfc7e09ce2e51f6e17ea7177c0",
+      "sourceObservedAt": "2026-11-27T23:34:00.128Z",
+      "sourceCursor": 13382542,
+      "generationManifestSha256": "bdc53a25146a9a181c84c3b7fde2d3576ede0147b9e4cc70a4ad0788e1e022b7",
+      "leaseReleased": true
+    },
+    "terminalReportSha256": "0bc4573a5aba556b74d9751db03e03ef02a03bf3af80feb281d48d75d3e26c4d",
+    "japanReportSha256": "008c0176cfb37afd315a807b89b1fd87ecb02fdc7107d9e9e60f462202f81b1f",
+    "japanPassed": true,
+    "japanModelCoverage": {
+      "coverageContract": "directory-and-visible-cards-v1",
+      "sourcePairs": 35,
+      "accessiblePairs": 35,
+      "optionPairs": 41,
+      "cardBackedExtraPairs": 6,
+      "visibleCardPairs": 9,
+      "allSourceModelsAccessible": true,
+      "noForeignModels": true,
+      "sourceMatchesUi": true,
+      "allOptionsSourceBacked": true,
+      "uiEqualsDirectory": false,
+      "pairsSha256": "20fbec1216d94ebcb39f00bac3a946219bafce7165bd1de9f4a44cc1c1f73c0b",
+      "optionPairsSha256": "81857e02e7b610e8c23aaf74898c94f4b56ff64efe96c4bbd0f66dfb6be39a6c",
+      "cardBackedExtraPairsSha256": "c75514516c6005e22f5904356623358dda6d573f35e13b4e23c25432ed312c3c",
+      "visibleCardPairsSha256": "a9976d0c71a33dc2cec94707c0445ef3c55b9676f001caaa6aa55335da8b5547",
+      "cardProvenanceSha256": "2899a8e2568b9b583d381eaa53ba6548260ba5b0eeb0d467024b1407f9620524",
+      "make": "AUDI",
+      "typedBase": "A4",
+      "typedFamilyNotNarrowed": true,
+      "modelExpansions": 0,
+      "sourceFamilyModels": 1,
+      "directory": {
+        "status": 200,
+        "stale": false,
+        "sourcePairs": 35,
+        "pairsSha256": "20fbec1216d94ebcb39f00bac3a946219bafce7165bd1de9f4a44cc1c1f73c0b",
+        "browserMatchesApi": true
+      },
+      "selection": {
+        "make": "AUDI",
+        "model": "A4",
+        "shown": 24,
+        "observedSourceNamesOnly": true
+      },
+      "countHonest": true,
+      "fullPage": true,
+      "checks": [
+        {
+          "kind": "make",
+          "status": 200,
+          "shown": 24,
+          "received": 24,
+          "observedAt": "2026-11-28T07:55:30.909Z",
+          "ageSeconds": 60.976,
+          "stale": false,
+          "partial": false,
+          "total": null,
+          "hasMore": true,
+          "count": {
+            "exact": false,
+            "countHonest": true
+          },
+          "countStatus": "partial",
+          "fullOrExhausted": true,
+          "uiMatchesApi": true,
+          "rowOrderMatchesApi": true
+        },
+        {
+          "kind": "model",
+          "status": 200,
+          "shown": 24,
+          "received": 24,
+          "observedAt": "2026-11-28T07:56:34.739Z",
+          "ageSeconds": 2.026,
+          "stale": false,
+          "partial": false,
+          "total": null,
+          "hasMore": true,
+          "count": {
+            "exact": false,
+            "countHonest": true
+          },
+          "countStatus": "partial",
+          "fullOrExhausted": true,
+          "uiMatchesApi": true,
+          "rowOrderMatchesApi": true
+        }
+      ],
+      "explicitApiReads": 3,
+      "liveExhaustiveScan": false,
+      "pageErrors": 0
+    },
+    "japanExactCountRequired": false,
+    "japanExactCountPassed": null,
+    "auditFile": "audit-verification.json",
+    "bindingAudit": {
+      "verified": true,
+      "runId": 46122149467,
+      "controllerMarker": "d80478a824a80ea90494641e9f08dbfe1ea45125",
+      "status": "accepted",
+      "completed": true,
+      "published": true,
+      "finishedAt": "2026-11-28T07:57:26.551Z",
+      "runtimeSha": "7f7a316905cd8109352431ed4722108b3449c3ec",
+      "runtimeTree": "5854b591c0ee78e3aaa960f96b9a66b9c5b4175c",
+      "runtimeDiffSha256": "a6bd28e6ec1f2462cc5292311e97c2ff15ea8facdf66029ce12adb4deccb8ba9",
+      "runtimeFileCount": 46,
+      "imageId": "sha256:59b6be6c59c0895b42cf6766fcba0150d862d3dfc7e09ce2e51f6e17ea7177c0",
+      "nonce": "37064ef1ec014d55c912d3cf4c957752",
+      "retainedRuntime": "20fd18d12b3f5c7aabef860e1b53da0d505dfd64",
+      "retentionPreserved": true,
+      "leaseReleased": true,
+      "acceptedGenerationId": "gen_china_46077223993_1",
+      "generationManifestSha256": "bdc53a25146a9a181c84c3b7fde2d3576ede0147b9e4cc70a4ad0788e1e022b7",
+      "sourceObservedAt": "2026-11-27T23:34:00.128Z",
+      "sourceCursor": 13382542,
+      "pricingRuntimeSha": "64c6338e0db23c8999096bceefbf113c0136fe15",
+      "pricingRuntimeTree": "d2fc1f171316bfb0dc76f09e90409d4d7336f6b3",
+      "calculationVersion": "4654386ca34f04041effe31f38259d0fae9c396ecda35c364e3a18dd125a4b90",
+      "sameChinaGenerationAsRelease34": true,
+      "samePricingAsRelease34And35": true,
+      "same46FileRuntimeAsRelease35": true,
+      "countAcceptance": "japan-source-bounded-incremental-v1",
+      "japanExactCountRequired": false,
+      "japanExactCountPassed": null,
+      "modelCoverage": {
+        "coverageContract": "directory-and-visible-cards-v1",
+        "sourcePairs": 35,
+        "accessiblePairs": 35,
+        "optionPairs": 41,
+        "cardBackedExtraPairs": 6,
+        "visibleCardPairs": 9,
+        "allSourceModelsAccessible": true,
+        "noForeignModels": true,
+        "sourceMatchesUi": true,
+        "allOptionsSourceBacked": true,
+        "uiEqualsDirectory": false,
+        "pairsSha256": "20fbec1216d94ebcb39f00bac3a946219bafce7165bd1de9f4a44cc1c1f73c0b",
+        "optionPairsSha256": "81857e02e7b610e8c23aaf74898c94f4b56ff64efe96c4bbd0f66dfb6be39a6c",
+        "cardBackedExtraPairsSha256": "c75514516c6005e22f5904356623358dda6d573f35e13b4e23c25432ed312c3c",
+        "visibleCardPairsSha256": "a9976d0c71a33dc2cec94707c0445ef3c55b9676f001caaa6aa55335da8b5547",
+        "cardProvenanceSha256": "2899a8e2568b9b583d381eaa53ba6548260ba5b0eeb0d467024b1407f9620524",
+        "make": "AUDI",
+        "typedBase": "A4",
+        "typedFamilyNotNarrowed": true,
+        "modelExpansions": 0,
+        "sourceFamilyModels": 1,
+        "directory": {
+          "status": 200,
+          "stale": false,
+          "sourcePairs": 35,
+          "pairsSha256": "20fbec1216d94ebcb39f00bac3a946219bafce7165bd1de9f4a44cc1c1f73c0b",
+          "browserMatchesApi": true
+        },
+        "selection": {
+          "make": "AUDI",
+          "model": "A4",
+          "shown": 24,
+          "observedSourceNamesOnly": true
+        },
+        "countHonest": true,
+        "fullPage": true,
+        "checks": [
+          {
+            "kind": "make",
+            "status": 200,
+            "shown": 24,
+            "received": 24,
+            "observedAt": "2026-11-28T07:55:30.909Z",
+            "ageSeconds": 60.976,
+            "stale": false,
+            "partial": false,
+            "total": null,
+            "hasMore": true,
+            "count": {
+              "exact": false,
+              "countHonest": true
+            },
+            "countStatus": "partial",
+            "fullOrExhausted": true,
+            "uiMatchesApi": true,
+            "rowOrderMatchesApi": true
+          },
+          {
+            "kind": "model",
+            "status": 200,
+            "shown": 24,
+            "received": 24,
+            "observedAt": "2026-11-28T07:56:34.739Z",
+            "ageSeconds": 2.026,
+            "stale": false,
+            "partial": false,
+            "total": null,
+            "hasMore": true,
+            "count": {
+              "exact": false,
+              "countHonest": true
+            },
+            "countStatus": "partial",
+            "fullOrExhausted": true,
+            "uiMatchesApi": true,
+            "rowOrderMatchesApi": true
+          }
+        ],
+        "explicitApiReads": 3,
+        "liveExhaustiveScan": false,
+        "pageErrors": 0
+      },
+      "writeCounters": {
+        "sourceRequests": 0,
+        "generationRestores": 0,
+        "priceCalculations": 0,
+        "generationWrites": 0,
+        "encyclopediaWrites": 0,
+        "otherMarketWrites": 0,
+        "deletions": 0
+      }
+    },
+    "acceptedAtLocal": "2026-11-28T14:57:26.551000+07:00"
+  },
+  "verificationRepairs": [
+    {
+      "runId": 46118480173,
+      "status": "failure",
+      "passed": 1789,
+      "failed": 2,
+      "causes": [
+        "Extracted read-adapter test omitted new lexical model-coverage option",
+        "Workflow assertion still named runtime copy of controller pagination fixture"
+      ]
+    },
+    {
+      "regression": "Generation refresh must not inherit the code-update-only acceptance marker",
+      "before": "New behavioral test rejected mismatched host verdict and rolled back",
+      "after": "Daily suite9/9 passed; generation refresh preserves installed image and does not run Japan code acceptance"
+    },
+    {
+      "release": 35,
+      "runId": 46119206117,
+      "status": "rolled_back",
+      "repairCandidateSha": "b43a4e620af41059c96d608615785a5cce70b461",
+      "reason": "The incremental verifier required equality with the directory alone, while the runtime picker unions exact directory pairs with models from already visible auction cards. The prior controlled fixture supplied an empty models facet and did not exercise this union.",
+      "scopeOfDiagnosis": "The failure report records the model-coverage guard and no expansion, but omits the raw pair sets. The precise missing or additional production pair cannot be reconstructed from that report.",
+      "sourceEvidence": [
+        "https://github.com/jeep-jim/AvtoCena/blob/7f7a316905cd8109352431ed4722108b3449c3ec/apps/web/components/catalog/AjesCatalog.tsx",
+        "https://github.com/jeep-jim/AvtoCena/blob/7f7a316905cd8109352431ed4722108b3449c3ec/apps/web/components/catalog/VehicleModelSearch.tsx",
+        "https://github.com/jeep-jim/AvtoCena/compare/9e5750c9de703697746453b26856c4cf87134e32...b43a4e620af41059c96d608615785a5cce70b461"
+      ],
+      "changes": [
+        "Keep every exact directory pair mandatory; allow an extra UI pair only when the same literal make/model occurs on an already verified fresh visible make-page card.",
+        "Separate directory coverage from total UI options and record exact card provenance hashes. No case normalization substitutes for a missing source pair.",
+        "Wait for the selected make and mandatory pairs in the DOM, with expansions bounded by the directory plus the at-most-24 verified cards; a response event or fallback option count alone is insufficient.",
+        "Record bounded counts, hashes and at most twelve validated public missing/unbacked pairs before a coverage failure.",
+        "Use actual visible-row facets in the controlled runtime fixture, add one card-backed Audi pair absent from the AUDI directory, and delay delivery of the observed directory response to the real loader.",
+        "Require the same new coverage evidence in JavaScript and host receipt validation; preserve the strict exact-count path and existing freshness, row, card and full-page checks."
+      ],
+      "noAdditionalProductionOrSupplierRequestsRequiredByRepair": true,
+      "runtimeChanged": false,
+      "published": false
+    }
+  ],
+  "limitations": [
+    "Полный положительный AJ census ещё не реализован; контролируемые положительные totals в offline fixture не доказывают точное общее количество реального источника.",
+    "Точный общий подсчёт по доставленной цене и глобальная delivered-price сортировка между всеми страницами источника ещё не реализованы; порядок загруженной страницы не подтверждает глобальный порядок.",
+    "Неполнота полного пользовательского фильтра сохраняется явно, даже при свежих полных прочитанных LIST-страницах. Полнота локально уточняемых фильтров не заявляется.",
+    "Исправленный controller проверяется offline. Новая live-приёмка AUDI/A4 ещё не проведена; успех предыдущих шагов выпуска35 не доказывает свежесть отдельной A4-выборки после ремонта verifier.",
+    "Выпуск35 отклонён и возвращён на retained runtime20fd18d12b3f5c7aabef860e1b53da0d505dfd64; кандидат7f7a не объявляется принятым или опубликованным.",
+    "Массовый обход, dump/mirror и подмена IP не добавлялись."
+  ],
+  "updatedAt": "2026-11-28T08:07:16.431055+00:00",
+  "publicationStatus": "accepted_with_confirmed_A4_page2_source_refusal",
+  "repairCandidate": {
+    "sha": "b43a4e620af41059c96d608615785a5cce70b461",
+    "parentSha": "9e5750c9de703697746453b26856c4cf87134e32",
+    "url": "https://github.com/jeep-jim/AvtoCena/commit/b43a4e620af41059c96d608615785a5cce70b461",
+    "status": "accepted_published",
+    "runtimeSha": "7f7a316905cd8109352431ed4722108b3449c3ec",
+    "runtimeChanged": false,
+    "changedControllerPaths": [
+      "scripts/catalog-next/japan-exact-count-browser.mjs",
+      "scripts/catalog-next/japan-stability-code-scope.mjs",
+      "scripts/catalog-next/release-host.py",
+      "tests/browser/japan-exact-count.mjs",
+      "tests/catalog-next-code-release.test.mjs",
+      "tests/catalog-next-japan-incremental-acceptance.test.mjs",
+      "tests/catalog-next-japan-model-coverage-browser.test.mjs"
+    ],
+    "coverageContract": "directory-and-visible-cards-v1",
+    "coverageMeaning": {
+      "sourcePairs": "Exact fresh directory make/model pairs.",
+      "accessiblePairs": "Exact directory pairs covered by the UI; must equal sourcePairs.",
+      "optionPairs": "All observed UI options; equals sourcePairs plus cardBackedExtraPairs.",
+      "cardBackedExtraPairs": "UI pairs absent from the directory and exactly present on already verified visible make-page cards; bounded by at most 24 cards.",
+      "uiEqualsDirectory": "True only when cardBackedExtraPairs is zero.",
+      "cardProvenanceSha256": "Hash of sorted visible-card id/make/model triples.",
+      "directoryBrowserEqualityRequired": true,
+      "positiveExactTotalRequired": false,
+      "liveExhaustiveScan": false
+    },
+    "localVerification": {
+      "status": "success",
+      "scope": "Focused controller, host release, incremental acceptance, SSR evidence and daily release regressions.",
+      "command": "node --test tests/catalog-next-japan-model-coverage-browser.test.mjs tests/catalog-next-japan-incremental-acceptance.test.mjs tests/catalog-next-code-release.test.mjs tests/catalog-next-japan-ssr-evidence.test.mjs tests/catalog-next-daily-release.test.mjs",
+      "passed": 356,
+      "failed": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "logName": "release35-fix-local-tests.log",
+      "logBytes": 38598,
+      "logSha256": "e643d5250d825acdda74730087bede6480a4ec351e860d5301bed0c2bf8ed6be"
+    },
+    "offline": {
+      "runId": 46121684770,
+      "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/46121684770",
+      "headSha": "b43a4e620af41059c96d608615785a5cce70b461",
+      "status": "completed",
+      "conclusion": "success",
+      "browserFixtureAccepted": true,
+      "note": "Exact b43 controller completed every required hosted gate; bound persisted fixture checked in both lifecycle modes.",
+      "controllerTests": {
+        "passed": 1799,
+        "failed": 0,
+        "skipped": 0
+      },
+      "runtimeTests": {
+        "passed": 627,
+        "failed": 0,
+        "skipped": 0
+      },
+      "reportSha256": "31c5e1af49499cc1444ac58b4c7892d0d5ceefd9a03da20d8de7758dd44afe6b",
+      "modelCoverageCases": [
+        {
+          "name": "preserved_controls",
+          "passed": true,
+          "sourcePairs": 94,
+          "accessiblePairs": 94,
+          "optionPairs": 95,
+          "cardBackedExtraPairs": 1,
+          "modelExpansions": 1,
+          "typedFamilyNotNarrowed": true,
+          "directoryWait": {
+            "delayedResponses": 1,
+            "completedDelays": 1,
+            "cardFallbackOptionsBeforeDirectory": 24
+          },
+          "positiveExactCountsSupplied": 0,
+          "japanExactCountPassed": null
+        },
+        {
+          "name": "remounted_controls",
+          "passed": true,
+          "sourcePairs": 94,
+          "accessiblePairs": 94,
+          "optionPairs": 95,
+          "cardBackedExtraPairs": 1,
+          "modelExpansions": 1,
+          "typedFamilyNotNarrowed": true,
+          "directoryWait": {
+            "delayedResponses": 1,
+            "completedDelays": 1,
+            "cardFallbackOptionsBeforeDirectory": 24
+          },
+          "positiveExactCountsSupplied": 0,
+          "japanExactCountPassed": null
+        }
+      ],
+      "productionRequests": 0,
+      "supplierRequests": 0,
+      "forbiddenTransportAttempts": 0
+    },
+    "preparedPublicationMarker": {
+      "sha": "d80478a824a80ea90494641e9f08dbfe1ea45125",
+      "parentSha": "b43a4e620af41059c96d608615785a5cce70b461",
+      "tree": "bc2a9d49a37103639e5c233a49220ba0ecd55a3d",
+      "status": "pushed",
+      "published": true,
+      "pushed": true
+    },
+    "productionAcceptance": "accepted",
+    "published": true,
+    "productionRun": {
+      "runId": 46122149467,
+      "number": 36,
+      "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/46122149467",
+      "headSha": "d80478a824a80ea90494641e9f08dbfe1ea45125",
+      "status": "completed",
+      "conclusion": "success"
+    }
+  },
+  "priorPublicationAttempts": [
+    {
+      "controller": {
+        "approvedSourceSha": "4ac6032624cf14887fe07be236d451932f4b461b",
+        "markerSha": "9e5750c9de703697746453b26856c4cf87134e32",
+        "markerOnlyPush": true,
+        "appliesToRelease": 35
+      },
+      "offline": {
+        "runId": 46118788310,
+        "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/46118788310",
+        "status": "success",
+        "controllerTests": {
+          "passed": 1793,
+          "failed": 0,
+          "skipped": 0
+        },
+        "nativeTests": {
+          "passed": 627,
+          "failed": 0,
+          "skipped": 0
+        },
+        "fixturesUseControlledResponses": true,
+        "productionRequests": 0,
+        "supplierRequests": 0,
+        "forbiddenTransportAttempts": 0,
+        "modelCoverage": [
+          {
+            "lifecycle": "preserved_controls",
+            "passed": true,
+            "countAcceptance": "japan-source-bounded-incremental-v1",
+            "japanModelCoverageRequired": true,
+            "japanModelCoveragePassed": true,
+            "japanExactCountRequired": false,
+            "japanExactCountPassed": null,
+            "positiveExactCountsSupplied": 0,
+            "countsIncomplete": true,
+            "modelCoverage": {
+              "sourcePairs": 94,
+              "accessiblePairs": 94,
+              "allSourceModelsAccessible": true,
+              "noForeignModels": true,
+              "pairsSha256": "913456457022300dd10631792902400eb4fc8f787d1a7d37faf599d7291c2338",
+              "make": "AUDI",
+              "sourceMatchesUi": true,
+              "typedBase": "A4",
+              "typedFamilyNotNarrowed": true,
+              "modelExpansions": 1,
+              "sourceFamilyModels": 30,
+              "directory": {
+                "status": 200,
+                "stale": false,
+                "sourcePairs": 94,
+                "pairsSha256": "913456457022300dd10631792902400eb4fc8f787d1a7d37faf599d7291c2338",
+                "browserMatchesApi": true
+              },
+              "selection": {
+                "make": "AUDI",
+                "model": "A4",
+                "shown": 24,
+                "observedSourceNamesOnly": true
+              },
+              "countHonest": true,
+              "fullPage": true,
+              "checks": [
+                {
+                  "kind": "make",
+                  "status": 200,
+                  "shown": 24,
+                  "received": 24,
+                  "observedAt": "2026-11-28T06:58:14.491Z",
+                  "ageSeconds": 5.327,
+                  "stale": false,
+                  "partial": false,
+                  "total": null,
+                  "hasMore": true,
+                  "count": {
+                    "exact": false,
+                    "countHonest": true
+                  },
+                  "countStatus": "partial",
+                  "fullOrExhausted": true,
+                  "uiMatchesApi": true,
+                  "rowOrderMatchesApi": true
+                },
+                {
+                  "kind": "model",
+                  "status": 200,
+                  "shown": 24,
+                  "received": 24,
+                  "observedAt": "2026-11-28T06:58:14.491Z",
+                  "ageSeconds": 5.791,
+                  "stale": false,
+                  "partial": false,
+                  "total": null,
+                  "hasMore": true,
+                  "count": {
+                    "exact": false,
+                    "countHonest": true
+                  },
+                  "countStatus": "partial",
+                  "fullOrExhausted": true,
+                  "uiMatchesApi": true,
+                  "rowOrderMatchesApi": true
+                }
+              ],
+              "explicitApiReads": 3,
+              "liveExhaustiveScan": false,
+              "pageErrors": 0
+            }
+          },
+          {
+            "lifecycle": "remounted_controls",
+            "passed": true,
+            "countAcceptance": "japan-source-bounded-incremental-v1",
+            "japanModelCoverageRequired": true,
+            "japanModelCoveragePassed": true,
+            "japanExactCountRequired": false,
+            "japanExactCountPassed": null,
+            "positiveExactCountsSupplied": 0,
+            "countsIncomplete": true,
+            "modelCoverage": {
+              "sourcePairs": 94,
+              "accessiblePairs": 94,
+              "allSourceModelsAccessible": true,
+              "noForeignModels": true,
+              "pairsSha256": "913456457022300dd10631792902400eb4fc8f787d1a7d37faf599d7291c2338",
+              "make": "AUDI",
+              "sourceMatchesUi": true,
+              "typedBase": "A4",
+              "typedFamilyNotNarrowed": true,
+              "modelExpansions": 1,
+              "sourceFamilyModels": 30,
+              "directory": {
+                "status": 200,
+                "stale": false,
+                "sourcePairs": 94,
+                "pairsSha256": "913456457022300dd10631792902400eb4fc8f787d1a7d37faf599d7291c2338",
+                "browserMatchesApi": true
+              },
+              "selection": {
+                "make": "AUDI",
+                "model": "A4",
+                "shown": 24,
+                "observedSourceNamesOnly": true
+              },
+              "countHonest": true,
+              "fullPage": true,
+              "checks": [
+                {
+                  "kind": "make",
+                  "status": 200,
+                  "shown": 24,
+                  "received": 24,
+                  "observedAt": "2026-11-28T06:58:20.951Z",
+                  "ageSeconds": 5.196,
+                  "stale": false,
+                  "partial": false,
+                  "total": null,
+                  "hasMore": true,
+                  "count": {
+                    "exact": false,
+                    "countHonest": true
+                  },
+                  "countStatus": "partial",
+                  "fullOrExhausted": true,
+                  "uiMatchesApi": true,
+                  "rowOrderMatchesApi": true
+                },
+                {
+                  "kind": "model",
+                  "status": 200,
+                  "shown": 24,
+                  "received": 24,
+                  "observedAt": "2026-11-28T06:58:20.951Z",
+                  "ageSeconds": 5.694,
+                  "stale": false,
+                  "partial": false,
+                  "total": null,
+                  "hasMore": true,
+                  "count": {
+                    "exact": false,
+                    "countHonest": true
+                  },
+                  "countStatus": "partial",
+                  "fullOrExhausted": true,
+                  "uiMatchesApi": true,
+                  "rowOrderMatchesApi": true
+                }
+              ],
+              "explicitApiReads": 3,
+              "liveExhaustiveScan": false,
+              "pageErrors": 0
+            }
+          }
+        ],
+        "priceFixturePassed": true,
+        "priceFixtureCases": [
+          "preserved_controls",
+          "remounted_controls"
+        ],
+        "appliesToRelease": 35,
+        "controllerSourceSha": "4ac6032624cf14887fe07be236d451932f4b461b",
+        "beforeVisibleCardUnionRepair": true
+      },
+      "production": {
+        "runId": 46119206117,
+        "number": 35,
+        "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/46119206117",
+        "acceptanceVerification": "failed-and-rolled-back",
+        "terminal": {
+          "status": "rolled_back",
+          "completed": false,
+          "published": false,
+          "recovered": true,
+          "errorCode": "china_daily_release_japan_browser_failed",
+          "leaseReleased": true,
+          "sourceRequests": 0,
+          "generationWrites": 0,
+          "priceCalculations": 0,
+          "encyclopediaWrites": 0,
+          "otherMarketWrites": 0
+        },
+        "japanFailure": {
+          "stage": "model_coverage_audi_models",
+          "code": "japan_browser_exact_count_model_coverage",
+          "timeout": false,
+          "reportArtifact": "catalog-next-japan-browser-report.json",
+          "reportSha256": "ae5e894bb65406c04c81e5baa7bf97a7c6e24bfb73dd0946259426dd84829e71",
+          "precedingPassedGates": [
+            "japanFreshnessPassed",
+            "japanPowerApiPassed",
+            "japanUiPassed",
+            "japanVisibilityPassed",
+            "japanPetrolPowerUiPassed",
+            "japanDetailPowerInputPassed",
+            "japanDeliveredCalculationPassed",
+            "japanFullPagesPassed",
+            "japanPagination24Passed",
+            "japanCatalogWarningRemovedPassed",
+            "japanModelSelectionPassed",
+            "japanCombinedFiltersPassed",
+            "japanRelatedCardsPassed",
+            "japanVehiclePolicyPassed",
+            "japanPowerOrderPassed",
+            "japanBrandDirectoryPassed",
+            "japanPriceSortPassed",
+            "japanCountDisplayPassed"
+          ],
+          "modelCoveragePassed": false,
+          "exactCountRequired": false,
+          "exactCountPassed": null,
+          "progress": {
+            "phase": "model_directory",
+            "readyChecks": 2,
+            "modelExpansions": 0
+          },
+          "rawDirectoryAndUiPairsPreserved": false,
+          "specificMismatchedPairsKnown": false
+        },
+        "independentBrowserObservation": {
+          "duringCandidateActivation": true,
+          "model": "A4",
+          "cardsShown": 24,
+          "footer": "Показаны сохранённые автомобили. Полный список пока недоступен.",
+          "retryChangedResult": false,
+          "activeRuntimeNotInferredFromUi": true
+        }
+      }
+    }
+  ],
+  "independentBrowserVerification": {
+    "recordedAt": "2026-11-28T08:03:01.078860+00:00",
+    "url": "https://avtocena.com/cars/japan/Audi/A4?city=%D0%9D%D0%BE%D0%B2%D0%BE%D0%BA%D1%83%D0%B7%D0%BD%D0%B5%D1%86%D0%BA",
+    "normalReloadAfterAcceptedRelease": true,
+    "model": "A4",
+    "cardsBeforeAppend": 24,
+    "savedCardsErrorAfterReload": false,
+    "nextNavigationVisible": true,
+    "appendAttempts": 2,
+    "appendAttemptsMeaning": "One ordinary Show more action, followed by one low-risk retry. No further browser retries.",
+    "cardsAfterAppend": 24,
+    "appendError": "Не удалось загрузить следующую подборку. Нажмите «Показать ещё», чтобы повторить — уже загруженные автомобили сохранены.",
+    "browsingIssueId": "93a759e6-7c5a-4281-a334-30191f827e68",
+    "documentHttpStatus": 200,
+    "reportedFailedHttpRequests": [],
+    "appendHttpStatusKnown": false,
+    "nextCursor": "j1.2.0.2.803a5c3187ec81a6898f994363411a7e40e441c51fe0cdde7df1fd1723293a9c.-",
+    "totalExact": false,
+    "siteBotDenialObserved": false,
+    "cause": "source_refusal_for_exact_AUDI_A4_page2_query",
+    "diagnosticMarkerSha": "7048b62a7f109566f1469fc793e993be0ab5e7fa",
+    "sourceQueryAttribution": {
+      "version": 1,
+      "runtimeSha": "7f7a316905cd8109352431ed4722108b3449c3ec",
+      "productionRequests": 0,
+      "supplierRequests": 0,
+      "sourceQuery": {
+        "table": "stats",
+        "page": 2,
+        "pageSize": 24,
+        "make": "AUDI",
+        "model": "A4"
+      },
+      "city": "Новокузнецк",
+      "cursorHash": "803a5c3187ec81a6898f994363411a7e40e441c51fe0cdde7df1fd1723293a9c",
+      "page1": {
+        "sqlSha256": "1467b6f3f0eebc6cf29216e9c45ba0c079c9a9d247cfcbcef7e76807d5302763",
+        "sqlBytes": 3600
+      },
+      "page2": {
+        "sqlSha256": "ba692d24be42d91d232d607b267c2f51aed74a5ca35457ce5e29cc0ec2a7fee0",
+        "sqlBytes": 3601
+      },
+      "cursorMatchesObservedLink": true,
+      "page1MatchesAcceptedA4Receipt": true,
+      "page2MatchesSavedRefusal": true
+    },
+    "providerRefusalObservedInSavedMetadata": true,
+    "browserRequestIdAvailableInSourceMetadata": false,
+    "repeatFailureAttribution": "Not separately established; no cooldown assumption without a matching receipt.",
+    "sourceDiagnostic": {
+      "runId": 46123949907,
+      "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/46123949907",
+      "status": "completed",
+      "conclusion": "success",
+      "controllerTestsPassed": 33,
+      "controllerTestsFailed": 0,
+      "controllerTestsSkipped": 0,
+      "reportSha256": "7b15478acf7547d4994252de772121f3c30c8ebef1f51ed15773e59cd475be89",
+      "report": {
+        "version": 1,
+        "kind": "japan-page-two-saved-failure-v1",
+        "records": [
+          {
+            "slot": "stats-list-2",
+            "readStatus": "ok",
+            "startedAt": "2026-11-28T07:59:01.214Z",
+            "finishedAt": "2026-11-28T07:59:01.424Z",
+            "kind": "list",
+            "outcome": "visitor_restricted",
+            "page": 2,
+            "pageSize": 24,
+            "httpStatus": 200,
+            "providerCode": "bot",
+            "sqlSha256": "ba692d24be42d91d232d607b267c2f51aed74a5ca35457ce5e29cc0ec2a7fee0",
+            "sqlBytes": 3601
+          }
+        ],
+        "supplierRequests": 0,
+        "writes": 0,
+        "attribution": "saved_outer_request_metadata_only",
+        "historyReads": 0,
+        "controllerSha": "7048b62a7f109566f1469fc793e993be0ab5e7fa",
+        "approvedControllerSha": "d80478a824a80ea90494641e9f08dbfe1ea45125",
+        "runId": "46123949907",
+        "attempt": "1",
+        "checkedAt": "2026-11-28T08:03:08.998Z"
+      },
+      "attributionMeaning": "The outer metadata alone does not bind a browser request. Independent reconstruction matches the observed cursor, accepted A4 page-one source SQL and saved page-two source SQL; this binds the exact source query, without claiming a unique browser request ID."
+    },
+    "offlineAppendReplay": {
+      "runtimeSha": "7f7a316905cd8109352431ed4722108b3449c3ec",
+      "controlled": true,
+      "productionRequests": 0,
+      "supplierRequests": 0,
+      "stableDirectory": {
+        "page1": 24,
+        "page2": 24,
+        "distinctIds": 48,
+        "firstCursor": "j1.2.0.2.030b0951bfb675eb6f9dae51045878a796d613e940c1a7f1c29eee8d877bacb8.-",
+        "appendUrl": "/api/catalog/search?market=japan&make=Audi&model=A4&city=%D0%9D%D0%BE%D0%B2%D0%BE%D0%BA%D1%83%D0%B7%D0%BD%D0%B5%D1%86%D0%BA&after=j1.2.0.2.030b0951bfb675eb6f9dae51045878a796d613e940c1a7f1c29eee8d877bacb8.-&marketPage=1&page=2",
+        "cursorKeyEqual": true,
+        "sourcePages": [
+          1,
+          2
+        ]
+      },
+      "reorderedEquivalentDirectory": {
+        "simulationOnly": true,
+        "error": {
+          "name": "AjesInputError",
+          "message": "ajes_invalid_query",
+          "sourceReadsAdded": 0
+        },
+        "explanation": "Changing only the order of equivalent resolved model names changes the cursor key and causes invalid_japan_query before reading the source."
+      }
+    }
+  },
+  "completion": {
+    "publicationCompleted": true,
+    "allOriginalIssuesClosed": false,
+    "modelPublicationAccepted": true,
+    "originalA4FirstPageVerified": true,
+    "originalA4AppendPassed": false,
+    "fullPositiveCensusImplemented": false,
+    "globalDeliveredPriceOrderImplemented": false,
+    "localFilterCompletenessImplemented": false,
+    "runtimeChangedAfterAcceptedRelease": false,
+    "noSourceBypassAttempted": true
+  }
+}
