@@ -10,6 +10,8 @@ import {resolveAjesQueryModels} from '../apps/web/lib/catalog/ajes-model-resolut
 import {resolveAjesMakeSelection} from '../apps/web/lib/catalog/ajes-make-resolution';
 import {readFilteredAjesPage,readPowerOrderedAjesPage,ajesPowerEvidenceEpoch,assertAjesPowerCursorEpoch} from '../apps/web/lib/catalog/ajes-filtered-page';
 import {ajesResultFilter} from '../apps/web/lib/catalog/ajes-result-filter';
+import {parseCatalogSort} from '../apps/web/lib/catalog/catalog-sort';
+import {JAPAN_KNOWN_POWER_QUERY_VERSION,japanKnownPowerSelection} from '../apps/web/lib/catalog/japan-known-power-query';
 import {japanLocalPowerHp,japanSupplierPower,japanUnknownPower,japanPowerFilterSummary} from '../apps/web/lib/catalog/japan-source-power';
 import {createAjesSourceCountSummary} from '../apps/web/lib/catalog/ajes-source-count';
 
@@ -21,9 +23,12 @@ assert(start>=0&&end>start);
 const pageBody=stripTypeScriptTypes(sourceText.slice(start,end).replace(/^export /,''),{mode:'transform'});
 const cursorStart=sourceText.indexOf(' const cursorQuery=',start),cursorEnd=sourceText.indexOf('\n const initial=',cursorStart);
 assert(cursorStart>start&&cursorEnd>cursorStart);
-const cursorKey=new Function('query','params','evidenceEpoch','pricingContext',sourceText.slice(cursorStart,cursorEnd)+'\nreturn cursorQuery;');
+const evaluateCursorKey=new Function('query','params','evidenceEpoch','pricingContext','sourcePriceOrder','filter','JAPAN_KNOWN_POWER_QUERY_VERSION',sourceText.slice(cursorStart,cursorEnd)+'\nreturn cursorQuery;');
+const cursorKey=(query:unknown,input:Record<string,unknown>,epoch:string,pricingContext?:{digest:string},knownPowerVersion=JAPAN_KNOWN_POWER_QUERY_VERSION)=>evaluateCursorKey(
+ query,input,epoch,pricingContext,Boolean(parseCatalogSort(String(input.sort||''))?.some(term=>term.startsWith('totalRub'))),ajesResultFilter(input),knownPowerVersion,
+);
 const digest=(value:unknown)=>createHash('sha256').update(JSON.stringify(value)).digest('hex');
-const powerHash=(query:unknown,input:unknown,epoch:string)=>digest([24,cursorKey(query,input,epoch),'japan-known-before-unknown-v1']);
+const powerHash=(query:unknown,input:Record<string,unknown>,epoch:string)=>digest([24,cursorKey(query,input,epoch),'japan-known-before-unknown-v1']);
 const forbidIdentity=async()=>{throw Error('Audi must not require a legacy identity lookup');};
 
 async function resolve(input:Record<string,any>,state:DirectoryState,names:string[]){
@@ -61,6 +66,21 @@ test('case-only directory spellings and lowercased typed literals use the same S
  assert.equal(new Set(outputs.map(([,hash])=>hash)).size,1);
 });
 
+test('the production cursor binds the known-power predicate version only for price-sorted power queries',()=>{
+ const epoch='e'.repeat(64),nextVersion=JAPAN_KNOWN_POWER_QUERY_VERSION+'-next';
+ for(const input of [params,{...params,powerTo:'160'},{...params,sort:'totalRubDesc'}]){
+  const query=ajesCatalogQuery(input),key=cursorKey(query,input,epoch);
+  assert.equal(JSON.parse(key).knownPowerQueryVersion,undefined);
+  assert.equal(cursorKey(query,input,epoch,undefined,nextVersion),key);
+ }
+ for(const sort of ['totalRub','totalRubDesc','year,totalRubDesc']){
+  const input={...params,sort,powerTo:'160'},query=ajesCatalogQuery(input),key=cursorKey(query,input,epoch);
+  assert.equal(JSON.parse(key).knownPowerQueryVersion,JAPAN_KNOWN_POWER_QUERY_VERSION);
+  assert.notEqual(cursorKey(query,input,epoch,undefined,nextVersion),key);
+  assert.notEqual(cursorKey(query,input,epoch,{digest:'p'.repeat(64)}),key);
+ }
+});
+
 function fixture(t:any,size=96){
  const db=new DatabaseSync(':memory:');t.after(()=>db.close());
  db.function('regexp',(pattern:any,value:any)=>value==null?0:Number(new RegExp(String(pattern),'i').test(String(value))));
@@ -86,10 +106,10 @@ function fixture(t:any,size=96){
   process:{env:{AVTOCENA_RELEASE_SHA:'a'.repeat(40)}},assertAjesJapanMarket:(market:unknown)=>assert.equal(market,'japan'),
   ajesResultFilter,readAjesPublicEvidenceSnapshot:async()=>snapshot(),
   captureAjesCountPricingContext:async()=>{throw Error('no price filter in this fixture');},
-  ajesPowerEvidenceEpoch,assertAjesPowerCursorEpoch,ajesCatalogQuery,AjesCursorRefreshRequired,
+  ajesPowerEvidenceEpoch,assertAjesPowerCursorEpoch,ajesCatalogQuery,AjesCursorRefreshRequired,JAPAN_KNOWN_POWER_QUERY_VERSION,japanKnownPowerSelection,
   japanLocalPowerHp,japanSupplierPower,japanUnknownPower,japanPowerFilterSummary,
   resolvedCatalogQuery:async(key:string)=>resolveQuery(JSON.parse(key)),ajesSourceScopeSupportsExactCount:()=>true,
-  parseCatalogSort:(sort?:string)=>sort?sort.split(','):[],
+  parseCatalogSort,
   readAjesCountSummary:async(key:string)=>{
    state.countReads++;const resolved=await resolveQuery(JSON.parse(key));
    const sql=ajesQuery({...resolved.query,aggregate:'count'} as any).sql,total=Number(db.prepare(sql).get()!['count(*)']);
