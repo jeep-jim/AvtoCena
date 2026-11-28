@@ -292,7 +292,12 @@ test('Japan recovery and its exact successor build fresh source and preserve sep
   'catalog-next-photo-japan-browser-report.json','artifacts/catalog-photo-japan-live/**'])
   assert.ok(upload.includes(filename),'preserved independent scope artifact: '+filename);
  const adapter=fs.readFileSync(path.join(root,'scripts/catalog-next/daily-release.mjs'),'utf8');
- const japan=adapter.indexOf("if (codeUpdate && ['catalog-japan-recovery-v1', 'catalog-japan-completion-v1', 'catalog-japan-completion-v2', 'catalog-japan-usability-v1', JAPAN_PAGINATION_CODE_SCOPE, JAPAN_STABILITY_CODE_SCOPE].includes(plan.codeScope))");
+ const scopeDeclaration=adapter.match(/const JAPAN_BROWSER_CODE_SCOPES = new Set\(\[([\s\S]*?)\]\);/);
+ assert.ok(scopeDeclaration,'Japan browser branch retains its explicit scope set');
+ for(const scope of ["'catalog-japan-recovery-v1'","'catalog-japan-completion-v1'","'catalog-japan-completion-v2'",
+  "'catalog-japan-usability-v1'",'JAPAN_PAGINATION_CODE_SCOPE','JAPAN_STABILITY_CODE_SCOPE'])
+  assert.ok(scopeDeclaration[1].includes(scope),'retained Japan browser scope: '+scope);
+ const japan=adapter.indexOf("if (codeUpdate && JAPAN_BROWSER_CODE_SCOPES.has(plan.codeScope))");
  const gate=adapter.indexOf('scripts/catalog-next/japan-browser-acceptance.mjs',japan);
  const evidence=adapter.indexOf("session.call('browser_evidence'",gate);
  const accept=adapter.indexOf("session.call('accept'",evidence);
@@ -302,7 +307,7 @@ test('Japan recovery and its exact successor build fresh source and preserve sep
  assert.match(branch,/japan\.release === candidate\.runtimeSha && japan\.nonce === nonce/);
  assert.match(branch,/japan\.generationManifestSha256 === candidate\.generationManifestSha256/);
  assert.match(branch,/japan\.oracleSha256 === hash\(await fs\.readFile\(oraclePath\)\)/);
- assert.match(branch,/checkedAt >= japanStartedAt && checkedAt <= Date\.now\(\)/);
+ assert.match(branch,/checkedAt >= japanStartedAt && checkedAt <= \(bindingFinishedAt = Date\.now\(\)\)/);
  assert.match(branch,/catalog-next-japan-browser-report\.json'\), japanRaw, \{flag: 'wx', mode: 0o600\}/);
  assert.match(branch,/japanReportBase64: japanRaw\.toString\('base64'\)/);
  assert.match(branch,/japanReportSha256: hash\(japanRaw\)/);

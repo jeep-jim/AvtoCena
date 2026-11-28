@@ -356,7 +356,7 @@ import importlib.util,json,sys
 spec=importlib.util.spec_from_file_location('release_host','scripts/catalog-next/release-host.py')
 m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
 profiles=m.JAPAN_STABILITY_SOURCE_PRICE_CODE_PROFILES
-assert len(profiles)==3 and [len(profile) for profile in profiles]==[24,28,41]
+assert len(profiles)==4 and [len(profile) for profile in profiles]==[24,28,41,44]
 for profile in profiles:
  assert m.checked_japan_stability_image_files(sorted(profile),True,m.JAPAN_STABILITY_SOURCE_PRICE_ORDER_RETAINED,m.JAPAN_SOURCE_COUNT_POLICY)==profile
  for rejected in [sorted(profile)[1:],sorted(profile)+['packages/engine/index.ts'],sorted(profile)+[sorted(profile)[0]]]:
@@ -374,6 +374,7 @@ print(json.dumps({'files':[sorted(profile) for profile in profiles],'results':[m
   const parsed = JSON.parse(result.stdout);
   assert.deepEqual(parsed.files, [[...scope.JAPAN_STABILITY_SOURCE_PRICE_ORDER_CODE_PATHS].sort(),
     [...scope.JAPAN_STABILITY_SOURCE_PRICE_CANDIDATE_CODE_PATHS].sort(),
-    [...scope.JAPAN_STABILITY_SOURCE_SELECTION_CODE_PATHS].sort()]);
+    [...scope.JAPAN_STABILITY_SOURCE_SELECTION_CODE_PATHS].sort(),
+    [...scope.JAPAN_STABILITY_SOURCE_SELECTION_RECOVERY_CODE_PATHS].sort()]);
   assert.deepEqual(parsed.results, reports.map(scope.japanSourcePriceOrderAcceptancePassed));
 });

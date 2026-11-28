@@ -15,7 +15,7 @@ import {JAPAN_STABILITY_CODE_SCOPE, JAPAN_STABILITY_EXACT_COUNT_RETAINED_RUNTIME
   JAPAN_STABILITY_SOURCE_COUNT_CODE_PATHS, JAPAN_STABILITY_MODEL_CURSOR_RETAINED_RUNTIME,
   JAPAN_STABILITY_MODEL_CURSOR_CODE_PATHS, JAPAN_STABILITY_SOURCE_PRICE_ORDER_RETAINED_RUNTIME,
   JAPAN_STABILITY_SOURCE_PRICE_ORDER_CODE_PATHS, JAPAN_STABILITY_SOURCE_PRICE_CANDIDATE_CODE_PATHS,
-  JAPAN_STABILITY_SOURCE_SELECTION_CODE_PATHS, japanSourceSelectionRequired, japanSourcePriceOrderRequired,
+  JAPAN_STABILITY_SOURCE_SELECTION_RECOVERY_CODE_PATHS, japanSourceSelectionRequired, japanSourcePriceOrderRequired,
   isExactJapanStabilityScope, japanPriceSortRequired, japanExactCountRequired,
   japanSourceBoundedIncrementalRequired, japanSourceCountRequired,
   japanLiteralFamilyRequired, japanA4Power160ContinuationRequired} from '../scripts/catalog-next/japan-stability-code-scope.mjs';
@@ -122,10 +122,10 @@ test('review plans retain accepted5b1 until the reviewed source-order and count 
   assert.equal(successors.length,1);
   const successor=successors[0];
   assert.equal(successor.retainedRuntime,base.runtimeSha);
-  assert.equal(successor.runtimeSha,'d3226d2de549d250f50ca66663c4b832df6e6de6');
-  assert.equal(successor.runtimeTree,'8bb8060c82e9a7e21441c41c1ae8b972ea5676ec');
-  assert.equal(successor.runtimeFiles.length,41);
-  assert.deepEqual([...successor.runtimeFiles].sort(),[...JAPAN_STABILITY_SOURCE_SELECTION_CODE_PATHS].sort());
+  assert.equal(successor.runtimeSha,'9b9450433e1be1a11e48e876f12faffdfadcf34a');
+  assert.equal(successor.runtimeTree,'0d54154f3628312533c357ed058eb37c5a7e8900');
+  assert.equal(successor.runtimeFiles.length,44);
+  assert.deepEqual([...successor.runtimeFiles].sort(),[...JAPAN_STABILITY_SOURCE_SELECTION_RECOVERY_CODE_PATHS].sort());
   assert.equal(successor.codeScope,JAPAN_STABILITY_CODE_SCOPE);
   assert.equal(isExactJapanStabilityScope(successor),true);
   assert.equal(successor.countAcceptance,JAPAN_SOURCE_COUNT_POLICY);
@@ -137,9 +137,9 @@ test('review plans retain accepted5b1 until the reviewed source-order and count 
   assert.equal(japanSourcePriceOrderRequired(successor),true);
   assert.equal(japanSourceSelectionRequired(successor),true);
   assert.equal(japanLiteralFamilyRequired(successor),true);
-  assert.equal(successor.runtimeDiffSha256,'19183610fa2b21f06057f52e8e20b1f8f4a4a8b8e1741d4d645dd13fa2a81e98');
-  assert.equal(successor.pricingToServingDiffSha256,'672e9f5184ecfd6c6b7700b0c64bb460511f459860df66b0312355036821a4a3');
-  assert.equal(successor.pricingToServingFiles.length,150);
+  assert.equal(successor.runtimeDiffSha256,'d7d7512ea2ad051a1fa0f10b2633ffbb2a2f15b69844c33219dab8bd1509437b');
+  assert.equal(successor.pricingToServingDiffSha256,'afa14e5ea39be9e060b465a3119e46cb8ed14fbee32a1ce3adeb0085af87992a');
+  assert.equal(successor.pricingToServingFiles.length,152);
   for(const countAcceptance of [undefined,JAPAN_SOURCE_BOUNDED_INCREMENTAL_POLICY]){
     const invalid={...successor,countAcceptance};
     assert.equal(isExactJapanStabilityScope(invalid),false);

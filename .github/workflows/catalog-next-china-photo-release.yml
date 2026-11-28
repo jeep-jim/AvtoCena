@@ -257,6 +257,7 @@ jobs:
             catalog-next-photo-japan-browser-report.json
             artifacts/catalog-photo-japan-live/**
             catalog-next-japan-browser-report.json
+            catalog-next-japan-browser-binding-failure.json
             catalog-next-japan-source-failure-report.json
             artifacts/catalog-japan-live/**
             ${{ runner.temp }}/china-release-build/image-receipt.json

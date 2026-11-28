@@ -13,6 +13,7 @@ export const CHINA_STATE_KEYS = Object.freeze(Object.fromEntries(['accepted', 'i
   .map(name => [name, `catalog/market-rebuild/v1/china/${name}.json`])));
 const HASH = /^[a-f0-9]{64}$/, REVISION = /^[a-f0-9]{40}$/, NONCE = /^[a-f0-9]{32}$/;
 const LIMIT = 256 * 1024;
+const JAPAN_BROWSER_DETAILS_LIMIT = 512 * 1024;
 const fail = code => { throw Error('china_state_' + code); };
 const need = (condition, code) => { if (!condition) fail(code); };
 const object = value => value !== null && typeof value === 'object' && !Array.isArray(value);
@@ -35,8 +36,8 @@ function immutable(value) {
   if (value && typeof value === 'object') { Object.values(value).forEach(immutable); Object.freeze(value); }
   return value;
 }
-function parse(bytes, code) {
-  need(Buffer.isBuffer(bytes) && bytes.length > 0 && bytes.length <= LIMIT, code);
+function parse(bytes, code, limit = LIMIT) {
+  need(Buffer.isBuffer(bytes) && bytes.length > 0 && bytes.length <= limit, code);
   try { return JSON.parse(bytes.toString('utf8')); } catch { fail(code); }
 }
 function owner(value) {
@@ -427,7 +428,10 @@ function acceptanceProof(candidate, intent, evidence) {
   if (intent.transition === 'code-update')
     codeTransitionProof(receipt, candidate, intent.previous.value.current, intent.previous.etag, intent.previous.sha256);
   else need(receipt.transition === undefined, 'unexpected_code_update_proof');
-  const speed = parse(evidence.browserSpeedBytes, 'speed_report'), details = parse(evidence.browserDetailsBytes, 'details_report');
+  const detailsLimit = receipt.transition === 'code-update' && receipt.codeScope === JAPAN_STABILITY_CODE_SCOPE
+    && receipt.acceptancePolicy === JAPAN_OBSERVED_TIMING_POLICY
+    ? JAPAN_BROWSER_DETAILS_LIMIT : LIMIT;
+  const speed = parse(evidence.browserSpeedBytes, 'speed_report'), details = parse(evidence.browserDetailsBytes, 'details_report', detailsLimit);
   need(speed.countAcceptance === receipt.countAcceptance && details.countAcceptance === receipt.countAcceptance,
     'count_acceptance_binding');
   need(hash(evidence.browserSpeedBytes) === receipt.browser.speedReportSha256

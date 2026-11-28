@@ -12,8 +12,11 @@ const pageTwoKeys=[['stats-list-2','integrations/ajes/catalog-failure-pages/stat
 const stabilityKeys=[...pageThreeKeys,...releaseKeys];
 const activeStabilityKeys=[releaseKeys[0],...pageTwoKeys,...pageThreeKeys,...releaseKeys.slice(1)];
 const validationCodes={decode:['gzip_invalid','json_invalid'],page_shape:['root_not_array','row_limit_exceeded','row_not_object'],
- aggregate_shape:['total_invalid','count_row_count','make_name_missing'],empty_confirmation:['count_unavailable','count_unverified']};
-const validationKeys=new Set(['version','phase','code','wireBytes','decodedBytes','rootKind','rowCount','originCode','listWindow']);
+ aggregate_shape:['total_invalid','count_row_count','make_name_missing'],empty_confirmation:['count_unavailable','count_unverified'],
+ http_status:['non_success_status']};
+const validationKeys=new Set(['version','phase','code','wireBytes','decodedBytes','rootKind','rowCount','originCode','listWindow','httpBody']);
+const httpBodyFlags=['sqlSyntax','unknownColumn','unsupportedQuery','accessRefusal','credentialError','shortBotOrBan'];
+const httpBodyKeys=new Set(['inspectedBytes','truncated','stop','gzip',...httpBodyFlags]);
 const listWindowKeys=new Set(['windowSize','identityRowCount','uniqueIdCount','fingerprints']);
 const fingerprintKeys=new Set(['orderedIdsSha256','firstWindowSha256','nextWindowSha256']);
 const failureReasons=new Set(['client_ip_missing','visitor_restricted','not_configured','request_failed','request_timeout','connect_timeout',
@@ -47,12 +50,33 @@ function sanitizeSavedListWindow(value,validation){
  }
  return result;
 }
+function sanitizeSavedHttpBody(value){
+ const raw=plainOwnData(value,httpBodyKeys);
+ if(!raw||[...httpBodyKeys].some(key=>!Object.hasOwn(raw,key))
+  ||!Number.isSafeInteger(raw.inspectedBytes)||raw.inspectedBytes<0||raw.inspectedBytes>4096
+  ||typeof raw.truncated!=='boolean'||typeof raw.gzip!=='boolean'
+  ||!['complete','byte_limit','read_limit','time_limit','deadline','read_error','no_body'].includes(raw.stop)
+  ||httpBodyFlags.some(key=>typeof raw[key]!=='boolean'))return undefined;
+ if(raw.truncated!==!['complete','no_body'].includes(raw.stop)
+  ||raw.stop==='byte_limit'&&raw.inspectedBytes!==4096
+  ||raw.gzip&&(raw.inspectedBytes<2||httpBodyFlags.some(key=>raw[key]))
+  ||raw.inspectedBytes===0&&(raw.gzip||httpBodyFlags.some(key=>raw[key]))
+  ||raw.stop==='no_body'&&raw.inspectedBytes!==0
+  ||raw.shortBotOrBan&&(!raw.accessRefusal||raw.stop!=='complete'||raw.inspectedBytes>256))return undefined;
+ return Object.fromEntries([...httpBodyKeys].map(key=>[key,raw[key]]));
+}
 export function sanitizeSavedResponseValidation(value){
  const raw=plainOwnData(value,validationKeys);
  if(!raw)return undefined;
  if(raw.version!==1||typeof raw.phase!=='string'||typeof raw.code!=='string'
   ||!Object.hasOwn(validationCodes,raw.phase)||!validationCodes[raw.phase].includes(raw.code))return undefined;
  const result={version:1,phase:raw.phase,code:raw.code};
+ if(raw.phase==='http_status'){
+  if(Object.keys(raw).some(key=>!['version','phase','code','httpBody'].includes(key)))return undefined;
+  const httpBody=sanitizeSavedHttpBody(raw.httpBody);
+  return httpBody?{...result,httpBody}:undefined;
+ }
+ if(Object.hasOwn(raw,'httpBody'))return undefined;
  for(const key of ['wireBytes','decodedBytes','rowCount'])if(Object.hasOwn(raw,key)){
   if(!Number.isSafeInteger(raw[key])||raw[key]<0||raw[key]>2097152)return undefined;
   result[key]=raw[key];
@@ -77,6 +101,8 @@ export function sanitizeSavedResponseValidation(value){
 function savedResponseValidationForRecord(value,record){
  const result=sanitizeSavedResponseValidation(value);
  if(result?.listWindow&&(record?.kind!=='list'||record?.pageSize!==result.listWindow.windowSize))return undefined;
+ if(result?.phase==='http_status'&&(!Number.isSafeInteger(record?.httpStatus)||record.httpStatus<300||record.httpStatus>599
+  ||record.outcome!==(record.httpStatus===414?'query_too_large':`http_${record.httpStatus}`)))return undefined;
  return result;
 }
 export const inspectSavedFailure=options=>inspectFixedSavedFailure(releaseKeys,options);

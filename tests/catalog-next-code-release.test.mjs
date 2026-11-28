@@ -201,6 +201,7 @@ async function fixture(t, {combined = false, japan = false,completion=false, crm
           measuredFreeBytesChange: 75, reason: 'exact_terminal_image'};
       }
       if (method === 'code_preflight') { assert.deepEqual(args.previousAccepted, f.previous); return f.preflight; }
+      if (method === 'recover') return flags.recoveryOutcome;
       if (method === 'init') {
         hostPlan = args.plan;
         assert.equal(hostPlan.mode, 'code-update'); assert.equal(hostPlan.files.length, 12);
@@ -343,7 +344,7 @@ async function fixture(t, {combined = false, japan = false,completion=false, crm
           if (flags.failedReport) Object.assign(report, {passed: false, japanVisibilityPassed: false,
             error: {stage: 'catalog_visibility', code: 'japan_browser_overview_http', timeout: false}});
           if (flags.changeReport) flags.changeReport(report);
-          if (!flags.missingReport) await fs.writeFile(args.env.OUTPUT, JSON.stringify(report));
+          if (!flags.missingReport) await fs.writeFile(args.env.OUTPUT, flags.rawReport ?? JSON.stringify(report));
           if (flags.failedReport) return 1;
         } else {
           assert.equal(name, 'photo-japan-browser-acceptance.mjs');
@@ -779,6 +780,82 @@ for (const failure of ['gateExit', 'missingReport', 'oversizedReport', 'chinaBro
     if (failure === 'chinaBrowserFailure') assert.equal(f.calls.includes('japan-browser-acceptance.mjs'), false);
     await stage.close(); assert.equal(f.calls.at(-1), 'close');
   });
+
+for (const [scenario, reason] of [['oversize', 'size'], ['malformed', 'json'], ['nonce', 'header'], ['future', 'header']])
+  test('Japan early binding ' + scenario + ' preserves finite diagnostics and the original rejection', async t => {
+    const f = await fixture(t, {observedTiming: true});
+    if (scenario === 'oversize') f.flags.changeReport = report => { report.privateBody = 'PRIVATE_BODY_' + 'x'.repeat(256 * 1024); };
+    if (scenario === 'malformed') f.flags.rawReport = '{PRIVATE_BODY_';
+    if (scenario === 'nonce') f.flags.changeReport = report => { report.nonce = 'PRIVATE_NONCE'; report.privateBody = 'PRIVATE_BODY_'; };
+    if (scenario === 'future') f.flags.changeReport = report => { report.checkedAt = '2999-01-01T00:00:00.000Z'; };
+    const {stage, input} = await reservedStage(f);
+    await assert.rejects(stage.activate(input), scenario === 'malformed'
+      ? error => error instanceof SyntaxError : /china_daily_release_japan_browser_binding/);
+    assert.equal(f.calls.includes('browser_evidence'), false); assert.equal(f.calls.includes('accept'), false);
+    await stage.close();
+    const filename = path.join(f.directory, 'controller/catalog-next-japan-browser-binding-failure.json');
+    const raw = await fs.readFile(filename), diagnostic = JSON.parse(raw);
+    assert.equal(diagnostic.kind, 'japan-browser-binding-failure-v1'); assert.equal(diagnostic.reason, reason);
+    assert.equal(diagnostic.reportLimitBytes, 256 * 1024); assert.equal(diagnostic.childExitCode, 0);
+    assert.equal(raw.includes('PRIVATE_'), false); assert(raw.length < 4096);
+    assert.equal((await fs.stat(filename)).mode & 0o777, 0o600);
+    if (scenario === 'oversize') {
+      assert(diagnostic.reportBytes > diagnostic.reportLimitBytes); assert.equal(diagnostic.reportSha256, null);
+      assert(Object.values(diagnostic.headerMatches).every(value => value === null));
+    }
+    if (scenario === 'malformed') assert.equal(diagnostic.json, 'invalid');
+    if (scenario === 'nonce') { assert.equal(diagnostic.headerMatches.nonce, false); assert.equal(diagnostic.headerMatches.release, true); }
+    if (scenario === 'future') assert.equal(diagnostic.headerMatches.checkedAtNotFuture, false);
+    await assert.rejects(fs.access(path.join(f.directory, 'controller/catalog-next-japan-browser-report.json')), {code: 'ENOENT'});
+  });
+
+test('a diagnostic write failure neither overwrites an existing artifact nor replaces the binding rejection', async t => {
+  const f = await fixture(t, {japan: true});
+  const filename = path.join(f.directory, 'controller/catalog-next-japan-browser-binding-failure.json');
+  await fs.writeFile(filename, 'previous diagnostic', {flag: 'wx'});
+  f.flags.changeReport = report => { report.nonce = 'PRIVATE_NONCE'; };
+  const {stage, input} = await reservedStage(f);
+  await assert.rejects(stage.activate(input), /china_daily_release_japan_browser_binding/);
+  assert.equal(f.calls.includes('browser_evidence'), false); assert.equal(f.calls.includes('accept'), false);
+  await stage.close(); assert.equal(await fs.readFile(filename, 'utf8'), 'previous diagnostic');
+});
+
+test('a full-sized Japan report survives its nested envelope, accepted state and recovery with unchanged hashes', async t => {
+  const f = await fixture(t, {observedTiming: true}), storage = memoryStorage(f.previous);
+  f.flags.changeReport = report => {
+    report.transportBoundaryPadding = '';
+    report.transportBoundaryPadding = 'x'.repeat(256 * 1024 - Buffer.byteLength(JSON.stringify(report)));
+  };
+  let evidence;
+  const result = await runChinaCodeCycle({plan: {...f.servingPlan, minimumYear: 2014}, imageId: f.candidate.imageId,
+    invocation: {version: 1, sourceSha: '9'.repeat(40)}, owner: {runId: '200', attempt: '1', revision: '9'.repeat(40)},
+    nonce: 'b'.repeat(32), storage, now: () => acceptedAt, scheduleHeartbeat: () => () => {},
+    stageCodeRelease: async input => {
+      const stage = await f.release.stageCodeRelease(input), activate = stage.activate;
+      stage.activate = async params => { const value = await activate(params); evidence = value.evidence; return value; };
+      return stage;
+    }, recoverRelease: async () => assert.fail('no unresolved publication')});
+  assert.equal(result.status, 'accepted');
+  assert.equal(evidence.browserSpeedBytes.length, 256 * 1024);
+  assert(evidence.browserDetailsBytes.length > 256 * 1024 && evidence.browserDetailsBytes.length < 512 * 1024);
+  const details = JSON.parse(evidence.browserDetailsBytes), receipt = JSON.parse(Buffer.from(evidence.hostReceiptBase64, 'base64'));
+  assert.equal(details.japanReportBase64, evidence.browserSpeedBytes.toString('base64'));
+  assert.equal(details.japanReportSha256, hash(evidence.browserSpeedBytes));
+  assert.equal(receipt.browser.reportSha256, hash(Buffer.concat([evidence.browserSpeedBytes, evidence.browserDetailsBytes])));
+  const accepted = await storage.read('accepted'), intent = await storage.read('intent');
+  assert.equal(accepted.value.current.runtimeSha, nextSha); assert.equal(intent.value.status, 'committed');
+  f.flags.recoveryOutcome = {status: 'accepted', hostReceiptBase64: evidence.hostReceiptBase64,
+    hostReceiptSha256: evidence.hostReceiptSha256, browserSpeedBase64: evidence.browserSpeedBytes.toString('base64'),
+    browserDetailsBase64: evidence.browserDetailsBytes.toString('base64')};
+  const recovered = await f.release.recoverRelease({intent, assertAuthority: async () => {}});
+  const {kind, ...expectedEvidence} = evidence;
+  assert.equal(kind, 'china-accepted-proof-v1'); assert.deepEqual(recovered.evidence, expectedEvidence);
+  f.flags.recoveryOutcome.browserDetailsBase64 = Buffer.alloc(512 * 1024 + 1, 32).toString('base64');
+  await assert.rejects(f.release.recoverRelease({intent, assertAuthority: async () => {}}), /receipt_(?:size|encoding)/);
+  f.flags.recoveryOutcome.browserDetailsBase64 = evidence.browserDetailsBytes.toString('base64');
+  f.flags.recoveryOutcome.hostReceiptBase64 = Buffer.from(JSON.stringify({...receipt, codeScope: 'catalog-photo-recovery-v1'})).toString('base64');
+  await assert.rejects(f.release.recoverRelease({intent, assertAuthority: async () => {}}), /receipt_(?:size|encoding)/);
+});
 
 test('Japan recovery cannot switch when the existing China functional gate fails', async t => {
   const f = await fixture(t, {japan: true}); f.flags.functionalFailure = true;

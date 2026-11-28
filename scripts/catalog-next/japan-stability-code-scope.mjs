@@ -266,9 +266,17 @@ export const JAPAN_STABILITY_SOURCE_SELECTION_CODE_PATHS = Object.freeze([
   'tests/japan-source-body.test.ts',
   'tests/japan-source-selection.test.ts',
 ].sort());
+/** Preserve the original selection receipt. This successor repairs candidate
+ * completeness and records bounded non-success HTTP response marker facts. */
+export const JAPAN_STABILITY_SOURCE_SELECTION_RECOVERY_CODE_PATHS = Object.freeze([
+  ...JAPAN_STABILITY_SOURCE_SELECTION_CODE_PATHS,
+  'apps/web/lib/catalog/ajes-request-diagnostic.ts',
+  'tests/ajes-http-failure-diagnostic.test.ts',
+  'tests/japan-source-selection-completeness.test.ts',
+].sort());
 const sourcePriceOrderProfiles = Object.freeze([
   JAPAN_STABILITY_SOURCE_PRICE_ORDER_CODE_PATHS, JAPAN_STABILITY_SOURCE_PRICE_CANDIDATE_CODE_PATHS,
-  JAPAN_STABILITY_SOURCE_SELECTION_CODE_PATHS]);
+  JAPAN_STABILITY_SOURCE_SELECTION_CODE_PATHS, JAPAN_STABILITY_SOURCE_SELECTION_RECOVERY_CODE_PATHS]);
 const reviewedProfiles = Object.freeze([JAPAN_STABILITY_CODE_PATHS, JAPAN_STABILITY_UI_CODE_PATHS,
   JAPAN_STABILITY_POWER_CODE_PATHS, JAPAN_STABILITY_RAILS_CODE_PATHS, JAPAN_STABILITY_HOME_CODE_PATHS,
   JAPAN_STABILITY_METADATA_CODE_PATHS, JAPAN_STABILITY_PRICE_SORT_CODE_PATHS, JAPAN_STABILITY_EXACT_COUNT_CODE_PATHS,
@@ -387,7 +395,8 @@ export function japanSourcePriceOrderRequired(plan) {
 export function japanSourceSelectionRequired(plan) {
   if (plan?.codeScope !== JAPAN_STABILITY_CODE_SCOPE) return false;
   if (!isExactJapanStabilityScope(plan)) throw Error('japan_stability_source_selection_scope');
-  return japanStabilityCodePaths(plan) === JAPAN_STABILITY_SOURCE_SELECTION_CODE_PATHS;
+  return [JAPAN_STABILITY_SOURCE_SELECTION_CODE_PATHS, JAPAN_STABILITY_SOURCE_SELECTION_RECOVERY_CODE_PATHS]
+    .includes(japanStabilityCodePaths(plan));
 }
 
 export function japanSourceSelectionAcceptancePassed(report) {

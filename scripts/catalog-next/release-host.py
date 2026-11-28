@@ -228,9 +228,14 @@ JAPAN_STABILITY_SOURCE_SELECTION_CODE_FILES = JAPAN_STABILITY_SOURCE_PRICE_ORDER
     'tests/japan-source-body.test.ts',
     'tests/japan-source-selection.test.ts',
 }
+JAPAN_STABILITY_SOURCE_SELECTION_RECOVERY_CODE_FILES = JAPAN_STABILITY_SOURCE_SELECTION_CODE_FILES | {
+    'apps/web/lib/catalog/ajes-request-diagnostic.ts',
+    'tests/ajes-http-failure-diagnostic.test.ts',
+    'tests/japan-source-selection-completeness.test.ts',
+}
 JAPAN_STABILITY_SOURCE_PRICE_CODE_PROFILES = (
     JAPAN_STABILITY_SOURCE_PRICE_ORDER_CODE_FILES, JAPAN_STABILITY_SOURCE_PRICE_CANDIDATE_CODE_FILES,
-    JAPAN_STABILITY_SOURCE_SELECTION_CODE_FILES)
+    JAPAN_STABILITY_SOURCE_SELECTION_CODE_FILES, JAPAN_STABILITY_SOURCE_SELECTION_RECOVERY_CODE_FILES)
 JAPAN_STABILITY_HOME_CODE_FILES = JAPAN_STABILITY_RAILS_CODE_FILES | {
     'apps/web/lib/catalog/storage.ts', 'tests/catalog-next-home-isolation.test.ts',
 }
@@ -1397,14 +1402,28 @@ def checked_code_image_storage_proof(plan, image_receipt=None):
     return proof
 
 
-def decode_report(value):
-    need(isinstance(value, str) and len(value) <= 350000, 'browser_evidence_size')
+BROWSER_REPORT_BYTES = 256 * 1024
+JAPAN_BROWSER_REPORT_BYTES = 256 * 1024
+JAPAN_BROWSER_DETAILS_BYTES = 512 * 1024
+PROTOCOL_INPUT_BYTES = 1024 * 1024
+BROWSER_EVIDENCE_INPUT_BYTES = 2 * 1024 * 1024
+
+
+def browser_report_limit(plan, name):
+    # The details envelope contains the complete Japan report as Base64. Apply
+    # its larger finite bound consistently when ingesting or rereading proof.
+    return JAPAN_BROWSER_DETAILS_BYTES if name == 'BROWSER_DETAILS.json' and \
+        japan_observed_timing(plan) else BROWSER_REPORT_BYTES
+
+
+def decode_report(value, maximum=BROWSER_REPORT_BYTES):
+    need(isinstance(value, str) and len(value) <= 4 * ((maximum + 2) // 3), 'browser_evidence_size')
     try:
         raw = base64.b64decode(value, validate=True)
         decoded = json.loads(raw)
     except (ValueError, TypeError):
         raise ReleaseError('china_host_browser_evidence_encoding') from None
-    need(0 < len(raw) <= 256 * 1024 and isinstance(decoded, dict) and base64.b64encode(raw).decode() == value,
+    need(0 < len(raw) <= maximum and isinstance(decoded, dict) and base64.b64encode(raw).decode() == value,
          'browser_evidence_encoding')
     return raw, decoded
 
@@ -1757,7 +1776,7 @@ def read_outcome(params, *, verify_current=True):
              receipt.get('generationManifestSha256') == plan['generationManifestSha256'], 'recovery_receipt')
         reports = []
         for name, field in [('BROWSER_SPEED.json', 'speedReportSha256'), ('BROWSER_DETAILS.json', 'detailsReportSha256')]:
-            regular(directory / name, 256 * 1024)
+            regular(directory / name, browser_report_limit(plan, name))
             report = (directory / name).read_bytes()
             need(sha(report) == receipt['browser'].get(field), 'recovery_browser')
             reports.append(report)
@@ -3896,7 +3915,7 @@ class Host:
                  ('reportSha256', 'speedReportSha256', 'detailsReportSha256')), 'browser_verdict')
         reports = []
         for name, field in [('BROWSER_SPEED.json', 'speedReportSha256'), ('BROWSER_DETAILS.json', 'detailsReportSha256')]:
-            regular(self.directory / name, 256 * 1024)
+            regular(self.directory / name, browser_report_limit(self.plan, name))
             raw = (self.directory / name).read_bytes()
             need(sha(raw) == verdict[field], 'browser_evidence_hash')
             reports.append(raw)
@@ -3955,7 +3974,7 @@ class Host:
              time.monotonic() <= self.verdict_deadline, 'browser_evidence_phase')
         self.verify_candidate()
         speed_raw, speed = decode_report(params.get('speedBase64'))
-        details_raw, details = decode_report(params.get('detailsBase64'))
+        details_raw, details = decode_report(params.get('detailsBase64'), browser_report_limit(self.plan, 'BROWSER_DETAILS.json'))
         observed = japan_observed_timing(self.plan)
         timing_bound = (observed_timing_fields(speed) and speed.get('kind') == 'catalog-japan-browser-v1'
                         and speed.get('nonce') == self.plan['nonce']) if observed else \
@@ -4084,7 +4103,8 @@ class Host:
                  re.fullmatch(r'[a-f0-9]{64}', details['japanReportSha256']), 'japan_browser_binding')
             japan_raw, japan = decode_report(details['japanReportBase64'])
             oracle_sha = next(row['sha256'] for row in self.plan['files'] if row['name'] == 'acceptance.json')
-            need(len(japan_raw) <= 128 * 1024 and sha(japan_raw) == details['japanReportSha256'] and
+            need(len(japan_raw) <= (JAPAN_BROWSER_REPORT_BYTES if observed else 128 * 1024) and
+                 sha(japan_raw) == details['japanReportSha256'] and
                  type(japan.get('version')) is int and japan['version'] == 1 and japan.get('kind') == 'catalog-japan-browser-v1' and
                  japan.get('codeScope') == code_scope(self.plan) and
                  japan.get('release') == self.plan['runtimeSha'] and japan.get('nonce') == self.plan['nonce'] and
@@ -4153,7 +4173,7 @@ class Host:
                          auction_database_label=runtime_profile in JAPAN_STABILITY_SOURCE_PRICE_CODE_PROFILES), 'japan_browser_binding')
                 if runtime_profile in JAPAN_STABILITY_SOURCE_PRICE_CODE_PROFILES:
                     need(japan_source_price_order_acceptance_passed(japan), 'japan_browser_binding')
-                if runtime_profile == JAPAN_STABILITY_SOURCE_SELECTION_CODE_FILES:
+                if runtime_profile in (JAPAN_STABILITY_SOURCE_SELECTION_CODE_FILES, JAPAN_STABILITY_SOURCE_SELECTION_RECOVERY_CODE_FILES):
                     need(japan_crossover_acceptance_passed(japan), 'japan_browser_binding')
         for name, raw in [('BROWSER_SPEED.json', speed_raw), ('BROWSER_DETAILS.json', details_raw)]:
             new_file(self.directory / name, raw)
@@ -4366,12 +4386,13 @@ def main():
                 need(remaining > 0, 'browser_deadline')
                 signal.setitimer(signal.ITIMER_REAL, remaining)
             try:
-                raw = sys.stdin.buffer.readline(1024 * 1024 + 1)
+                raw = sys.stdin.buffer.readline(BROWSER_EVIDENCE_INPUT_BYTES + 1)
             finally:
                 signal.setitimer(signal.ITIMER_REAL, 0)
-            need(raw and len(raw) <= 1024 * 1024, 'protocol_input')
+            need(raw and len(raw) <= BROWSER_EVIDENCE_INPUT_BYTES, 'protocol_input')
             call = json.loads(raw)
             identity, method = call['id'], call['method']
+            need(method == 'browser_evidence' or len(raw) <= PROTOCOL_INPUT_BYTES, 'protocol_input')
             need(type(identity) is int and identity > 0, 'protocol_id')
             need(not diagnosed or method in {'diagnose', 'close'}, 'diagnosis_read_only')
             need(image_cleanup is None or method in {'retire_terminal_app_image', 'close'}, 'app_image_protocol_scope')

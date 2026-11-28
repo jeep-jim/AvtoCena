@@ -6,7 +6,7 @@ import path from 'node:path';
 import {createHash} from 'node:crypto';
 import {spawnSync} from 'node:child_process';
 import {pathToFileURL} from 'node:url';
-import {inspectSavedActiveStabilityFailure,inspectSavedFailure,verifySavedActiveStabilityReport}
+import {inspectSavedActiveStabilityFailure,inspectSavedFailure,verifySavedActiveStabilityReport,sanitizeSavedResponseValidation}
  from '../scripts/catalog-next/japan-usability-saved-failure-20261126.mjs';
 
 const env={REGCLOUD_S3_ACCESS_KEY_ID:'UNITTEST',REGCLOUD_S3_SECRET_ACCESS_KEY:'PRIVATE_SECRET'};
@@ -23,6 +23,10 @@ const source={kind:'list',page:1,pageSize:24,startedAt:'2026-11-27T08:00:00.000Z
  finishedAt:'2026-11-27T08:00:01.000Z',httpStatus:200,outcome:'invalid_response',providerCode:null,
  sql:'SELECT PRIVATE_QUERY',clientIp:'203.0.113.17',endpoint:'https://private.example/feed',body:'PRIVATE_BODY'};
 const validation={version:1,phase:'page_shape',code:'row_limit_exceeded',rootKind:'array',rowCount:25,wireBytes:2048};
+function httpValidation(patch={}){
+ return {version:1,phase:'http_status',code:'non_success_status',httpBody:{inspectedBytes:96,truncated:false,stop:'complete',gzip:false,
+  sqlSyntax:true,unknownColumn:true,unsupportedQuery:false,accessRefusal:false,credentialError:false,shortBotOrBan:false,...patch}};
+}
 function windowValidation({offset=0,rowCount=50,windowSize=24}={}){
  const ids=Array.from({length:rowCount},(_,index)=>'PRIVATE_TEST_ID_'+(offset+index));
  const hash=value=>createHash('sha256').update(JSON.stringify(value)).digest('hex');
@@ -83,6 +87,53 @@ test('active deadline stops remaining slots while legacy collection retains its 
  assert.equal(calls,2);assert.deepEqual(report.records.map(row=>row.readStatus),['missing','deadline','deadline','deadline','deadline']);
  await inspectSavedFailure({env,fetcher:async()=>{throw Error('must not fetch after deadline');}});
  assert.deepEqual(deadlines,[5000,20000]);
+});
+
+test('a saved HTTP failure exposes only bounded marker facts, with no body, identity or new source request',async t=>{
+ const f=await fixture(t),proof=httpValidation();let calls=0;
+ const collected=await inspectSavedActiveStabilityFailure({env,fetcher:async()=>{
+  calls++;return new Response(JSON.stringify({...source,httpStatus:500,outcome:'http_500',responseValidation:proof}));
+ }});
+ assert.equal(calls,5);assert.equal(collected.supplierRequests,0);assert.equal(collected.writes,0);
+ assert(collected.records.every(record=>record.httpStatus===500&&record.outcome==='http_500'));
+ for(const record of collected.records)assert.deepEqual(record.responseValidation,proof);
+ for(const forbidden of ['PRIVATE_BODY','PRIVATE_QUERY','PRIVATE_SECRET','203.0.113.17','private.example'])
+  assert.equal(JSON.stringify(collected).includes(forbidden),false);
+ await f.write({...collected,capture:partialReport().capture});assert.equal((await f.verify()).verified,true);
+ const changed=partialReport();Object.assign(changed.records[0],{httpStatus:414,outcome:'query_too_large',responseValidation:proof});
+ await f.write(changed);assert.equal((await f.verify()).verified,true);
+});
+
+test('HTTP body facts reject private fields, missing flags, accessors, impossible bounds and unsupported phases',()=>{
+ const changes=[
+  x=>{x.httpBody.body='PRIVATE_BODY';},x=>{x.httpBody.sql='PRIVATE_QUERY';},
+  x=>{delete x.httpBody.credentialError;},x=>{x.httpBody.sqlSyntax='yes';},
+  x=>{x.httpBody.inspectedBytes=4097;},x=>{x.httpBody.inspectedBytes=-1;},x=>{x.httpBody.inspectedBytes=0.5;},
+  x=>{x.httpBody.stop='PRIVATE_RESPONSE';},x=>{x.httpBody.truncated=true;},
+  x=>{x.httpBody.stop='no_body';},x=>{x.httpBody.inspectedBytes=0;},
+  x=>{x.httpBody.stop='byte_limit';x.httpBody.truncated=true;},x=>{x.httpBody.gzip=true;},
+  x=>{x.httpBody.shortBotOrBan=true;x.httpBody.inspectedBytes=257;},
+  x=>{x.httpBody.shortBotOrBan=true;x.httpBody.accessRefusal=false;},
+  x=>{x.httpBody.shortBotOrBan=true;x.httpBody.stop='time_limit';x.httpBody.truncated=true;},
+  x=>{x.rowCount=0;x.rootKind='array';},x=>{x.phase='decode';x.code='json_invalid';},
+  x=>{Object.defineProperty(x.httpBody,'body',{get(){throw Error('must not invoke');},enumerable:true});},
+  x=>{x.httpBody=Object.assign(Object.create({body:'PRIVATE_BODY'}),x.httpBody);},
+ ];
+ for(const change of changes){const value=httpValidation();change(value);assert.equal(sanitizeSavedResponseValidation(value),undefined);}
+ const empty=httpValidation({inspectedBytes:0,stop:'no_body',sqlSyntax:false,unknownColumn:false});
+ assert.deepEqual(sanitizeSavedResponseValidation(empty),empty);
+ const gzip=httpValidation({gzip:true,sqlSyntax:false,unknownColumn:false});
+ assert.deepEqual(sanitizeSavedResponseValidation(gzip),gzip);
+ const limited=httpValidation({stop:'byte_limit',inspectedBytes:4096,truncated:true});
+ assert.deepEqual(sanitizeSavedResponseValidation(limited),limited);
+});
+
+test('HTTP marker facts remain bound to the original unsuccessful HTTP status and failure reason',async t=>{
+ const f=await fixture(t);
+ for(const [httpStatus,outcome] of [[200,'http_500'],[500,'request_timeout'],[414,'http_414'],[500,'visitor_restricted'],[null,'http_500']]){
+  const report=partialReport();Object.assign(report.records[0],{httpStatus,outcome,responseValidation:httpValidation()});
+  await f.write(report);await assert.rejects(f.verify);
+ }
 });
 
 test('active capture preserves both the shared 128 KiB budget and the 64 KiB per-body limit',async()=>{

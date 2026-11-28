@@ -224,7 +224,28 @@ test('controller, live producer, host seal and exact-runtime fixture all retain 
   assert.match(read('scripts/catalog-next/daily-release.mjs'), /CATALOG_JAPAN_CROSSOVER_POWER160_REQUIRED: japanSourceSelectionRequired\(servingPlan\)/);
   assert.match(read('scripts/catalog-next/daily-release.mjs'), /if \(japanSourceSelectionRequired\(servingPlan\)\) need\(japanSourceSelectionAcceptancePassed/);
   assert.match(read('scripts/catalog-next/japan-browser-acceptance.mjs'), /if\(requireCrossoverPower160\)await runJapanCrossoverBrowser/);
-  assert.match(read('scripts/catalog-next/release-host.py'), /if runtime_profile == JAPAN_STABILITY_SOURCE_SELECTION_CODE_FILES:\n\s+need\(japan_crossover_acceptance_passed/);
+  assert.match(read('scripts/catalog-next/release-host.py'), /if runtime_profile in \(JAPAN_STABILITY_SOURCE_SELECTION_CODE_FILES, JAPAN_STABILITY_SOURCE_SELECTION_RECOVERY_CODE_FILES\):\n\s+need\(japan_crossover_acceptance_passed/);
   assert.match(read('tests/browser/japan-price-sort.mjs'), /await runJapanCrossoverBrowser/);
   assert.match(read('tests/browser/japan-price-sort.mjs'), /need\(japanCrossoverAcceptancePassed\(result\),'crossover_proof'\)/);
+});
+
+test('selection recovery preserves the exact historical profile and every live gate in both verifiers', () => {
+  const files = scope.JAPAN_STABILITY_SOURCE_SELECTION_RECOVERY_CODE_PATHS;
+  const plan = {codeScope: scope.JAPAN_STABILITY_CODE_SCOPE, runtimeFiles: [...files],
+    retainedRuntime: scope.JAPAN_STABILITY_SOURCE_PRICE_ORDER_RETAINED_RUNTIME,
+    acceptancePolicy: scope.JAPAN_OBSERVED_TIMING_POLICY, countAcceptance: scope.JAPAN_SOURCE_COUNT_POLICY};
+  assert.equal(files.length, 44);
+  assert.equal(scope.JAPAN_STABILITY_SOURCE_SELECTION_CODE_PATHS.length, 41);
+  for (const name of ['isExactJapanStabilityScope', 'japanObservedTimingRequired', 'japanPowerOrderRequired',
+    'japanBrandDirectoryRequired', 'japanPriceSortRequired', 'japanLiteralFamilyRequired', 'japanSourceCountRequired',
+    'japanA4Power160ContinuationRequired', 'japanSourcePriceOrderRequired', 'japanSourceSelectionRequired'])
+    assert.equal(scope[name](plan), true, name);
+  assert.equal(scope.japanExactCountRequired(plan), false);
+  assert(files.every(file => scope.japanStabilityCompatibilityPaths(plan).includes(file)));
+  for (const changed of [files.slice(1), [...files, files[0]], [...files, 'apps/web/lib/catalog/china-local-reader.ts']])
+    assert.equal(scope.isExactJapanStabilityScope({...plan, runtimeFiles: changed}), false);
+  const source = `import importlib.util,json,sys\nfrom pathlib import Path\np=Path(sys.argv[1])/'scripts/catalog-next/release-host.py'\ns=importlib.util.spec_from_file_location('host',p)\nm=importlib.util.module_from_spec(s);s.loader.exec_module(m)\nv=json.load(sys.stdin)\nprint(json.dumps(sorted(m.checked_japan_stability_image_files(v,True,m.JAPAN_STABILITY_SOURCE_PRICE_ORDER_RETAINED,m.JAPAN_SOURCE_COUNT_POLICY))))`;
+  const child = spawnSync('python3', ['-c', source, root], {encoding: 'utf8', input: JSON.stringify(files)});
+  assert.equal(child.status, 0, child.stderr);
+  assert.deepEqual(JSON.parse(child.stdout), [...files].sort());
 });

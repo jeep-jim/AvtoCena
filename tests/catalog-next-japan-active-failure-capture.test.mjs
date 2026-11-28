@@ -209,7 +209,7 @@ async function fixture(t, {scope = JAPAN_STABILITY_CODE_SCOPE, mode = 'failed', 
           if (mode === 'wrong_stage') report.error.stage = 'PRIVATE/unsafe-stage';
           if (mode === 'no_stage') delete report.error;
           if (mode === 'not_false') report.passed = 0;
-          if (mode === 'oversized') report.private = 'PRIVATE_REPORT_DATA'.repeat(8192);
+          if (mode === 'oversized') report.private = 'PRIVATE_REPORT_DATA'.repeat(16384);
           const raw = mode === 'malformed' ? '{' : JSON.stringify(report);
           browserWrites.push({bytes: Buffer.byteLength(raw), sha256: hash(raw)});
           await fs.writeFile(args.env.OUTPUT, raw);
@@ -332,7 +332,7 @@ test('unbound browser bytes expose only size, digest and exit status before reje
   assert.equal(f.captures.length, 0);
   assert.equal(await fs.stat(path.join(f.root, 'catalog-next-japan-browser-report.json')).then(() => true, () => false), false);
   assert.doesNotMatch(JSON.stringify(observed), /PRIVATE_|nonce|runtime|error|stage|path|root|release/);
-  if (mode === 'oversized') assert.ok(observed[0].bytes > 128 * 1024);
+  if (mode === 'oversized') assert.ok(observed[0].bytes > 256 * 1024);
 });
 
 test('nonstability Japan failure keeps the existing release path without reading saved slots', async t => {

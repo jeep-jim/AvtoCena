@@ -138,21 +138,15 @@ test('a complete progress marker cannot replace a missing or failed final proof'
   }
 });
 
-for (const crossoverFailure of [false, true]) test('compact full profile preserves every proof and fits unchanged bounds: ' +
+for (const crossoverFailure of [false, true]) test('compact full profile preserves every field within observed-Japan bounds: ' +
   (crossoverFailure ? 'crossover timeout' : 'passed selection'), () => {
   const report = fullProfile({crossoverFailure}), original = structuredClone(report);
   const prettyBytes = Buffer.byteLength(JSON.stringify(report, null, 2) + '\n');
   const raw = Buffer.from(serializeJapanBrowserReport(report)), saved = JSON.parse(raw);
-  assert.ok(prettyBytes > 128 * 1024, 'the complete indented fixture reproduces the binding-size failure');
-  assert.ok(raw.length <= 128 * 1024, 'all final proofs and active failure diagnostics must fit the existing host bound');
-  const expected = structuredClone(original);
-  for (const [key, value] of Object.entries(saved.checks)) if (value?.compacted === true) {
-    assert.equal(original.checks[key].phase, 'complete');
-    assert.deepEqual(value, {phase: 'complete', compacted: true, finalProof: value.finalProof,
-      finalProofSha256: hash(JSON.stringify(original.checks[value.finalProof]))});
-    expected.checks[key] = value;
-  }
-  assert.deepEqual(saved, expected); assert.deepEqual(report, original);
+  assert.ok(prettyBytes > 128 * 1024, 'the complete indented fixture exceeds the historical report limit');
+  assert.ok(raw.length > 128 * 1024, 'the complete compact fixture also requires the observed-Japan capacity');
+  assert.ok(raw.length <= 256 * 1024, 'all proofs, progress copies and active failure diagnostics fit the finite report bound');
+  assert.deepEqual(saved, original); assert.deepEqual(report, original);
   assert.equal(japanSourceCountAcceptancePassed(saved, {auctionDatabaseLabel: true}), true);
   assert.equal(japanA4Power160ContinuationAcceptancePassed(saved, {auctionDatabaseLabel: true}), true);
   assert.equal(japanSourceSelectionAcceptancePassed(saved), !crossoverFailure);
@@ -161,7 +155,8 @@ for (const crossoverFailure of [false, true]) test('compact full profile preserv
     // both complete 32 KiB slots rather than checking Japan in isolation.
     crmReportBase64: Buffer.alloc(32 * 1024).toString('base64'),
     japanPhotoRetryReportBase64: Buffer.alloc(32 * 1024).toString('base64')}));
-  assert.ok(envelope.length <= 256 * 1024, 'the existing combined envelope bound stays unchanged');
+  assert.ok(envelope.length > 256 * 1024, 'the complete nested proof requires the matching observed-Japan envelope capacity');
+  assert.ok(envelope.length <= 512 * 1024, 'the full nested proof fits the finite observed-Japan envelope bound');
   if (crossoverFailure) {
     assert.equal(saved.passed, false); assert.equal(saved.japanCrossoverPower160Passed, false);
     assert.equal(saved.error.stage, 'stability_crossover_power160');

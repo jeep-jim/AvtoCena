@@ -35,10 +35,54 @@ const HASH = /^[a-f0-9]{64}$/;
 // An operating-space policy floor, not an estimate of Docker overhead. Image
 // content-store and unpacked-snapshot bytes are reserved separately below.
 const CODE_DISK_OPERATING_RESERVE = 2 * 1024 ** 3;
+const JAPAN_BROWSER_REPORT_LIMIT = 256 * 1024;
+const JAPAN_BROWSER_DETAILS_LIMIT = 512 * 1024;
+const JAPAN_BROWSER_CODE_SCOPES = new Set(['catalog-japan-recovery-v1', 'catalog-japan-completion-v1',
+  'catalog-japan-completion-v2', 'catalog-japan-usability-v1', JAPAN_PAGINATION_CODE_SCOPE, JAPAN_STABILITY_CODE_SCOPE]);
 const names = Object.freeze(['GENERATION.json', 'details.sqlite', 'query.sqlite', 'FILTER_SEMANTICS.json',
   'FX_RECEIPT.json', 'RECONCILIATION.json', 'DISPOSITIONS.ndjson']);
 const need = (value, code) => { if (!value) throw Error('china_daily_release_' + code); };
 const hash = bytes => createHash('sha256').update(bytes).digest('hex');
+
+/** Only finite metadata may survive an unbound report. No observed header,
+ * error, URL, response body or arbitrary child output is copied here. */
+export function japanBrowserBindingFailureDiagnostic(raw, {expected, childExitCode, startedAt, finishedAt, observedTiming = false}) {
+  const limit = observedTiming === true ? JAPAN_BROWSER_REPORT_LIMIT : 128 * 1024;
+  const fields = ['version', 'kind', 'codeScope', 'countAcceptance', 'release', 'nonce',
+    'generationManifestSha256', 'oracleSha256', 'checkedAtValid', 'checkedAtAfterStart', 'checkedAtNotFuture'];
+  const headerMatches = Object.fromEntries(fields.map(key => [key, null]));
+  const time = value => Number.isSafeInteger(value) && value >= 0 && value <= 8640000000000000 ? value : null;
+  let reason = 'size', json = 'not_checked';
+  if (Buffer.isBuffer(raw) && raw.length <= limit) {
+    let report;
+    try { report = JSON.parse(raw); json = 'parsed'; }
+    catch { json = 'invalid'; reason = 'json'; }
+    if (json === 'parsed') {
+      reason = 'header';
+      let checkedAt = NaN;
+      try { checkedAt = Date.parse(report?.checkedAt); } catch {}
+      Object.assign(headerMatches, {
+        version: report?.version === 1, kind: report?.kind === 'catalog-japan-browser-v1',
+        codeScope: report?.codeScope === expected.codeScope,
+        countAcceptance: report?.countAcceptance === expected.countAcceptance,
+        release: report?.release === expected.release, nonce: report?.nonce === expected.nonce,
+        generationManifestSha256: report?.generationManifestSha256 === expected.generationManifestSha256,
+        oracleSha256: report?.oracleSha256 === expected.oracleSha256,
+        checkedAtValid: Number.isFinite(checkedAt),
+        checkedAtAfterStart: Number.isFinite(checkedAt) && checkedAt >= startedAt,
+        checkedAtNotFuture: Number.isFinite(checkedAt) && checkedAt <= finishedAt,
+      });
+    }
+  }
+  return {version: 1, kind: 'japan-browser-binding-failure-v1', reason,
+    reportBytes: Buffer.isBuffer(raw) ? raw.length : null, reportLimitBytes: limit,
+    reportSha256: Buffer.isBuffer(raw) && raw.length <= limit ? hash(raw) : null,
+    json, headerMatches,
+    childExitCode: Number.isSafeInteger(childExitCode) && Math.abs(childExitCode) <= 2147483647 ? childExitCode : null,
+    startedAtMs: time(startedAt), finishedAtMs: time(finishedAt),
+    elapsedMs: time(startedAt) !== null && time(finishedAt) !== null && finishedAt >= startedAt ? finishedAt - startedAt : null};
+}
+
 const ordered = value => Array.isArray(value) ? value.map(ordered) : value && typeof value === 'object'
   ? Object.fromEntries(Object.keys(value).sort().map(key => [key, ordered(value[key])])) : value;
 const equal = (a, b) => JSON.stringify(ordered(a)) === JSON.stringify(ordered(b));
@@ -78,10 +122,10 @@ async function health(runtimeSha) {
   need(response.ok, 'health_status'); const value = await response.json();
   need(value.ok === true && value.releaseSha === runtimeSha && value.calculationVersion === CALCULATION, 'health_identity');
 }
-function decode(value) {
-  need(typeof value === 'string' && value.length <= 350000, 'receipt_size');
+function decode(value, limit = 256 * 1024) {
+  need(typeof value === 'string' && value.length <= (limit === 256 * 1024 ? 350000 : 4 * Math.ceil(limit / 3)), 'receipt_size');
   const bytes = Buffer.from(value, 'base64');
-  need(bytes.length > 0 && bytes.length <= 256 * 1024 && bytes.toString('base64') === value, 'receipt_encoding');
+  need(bytes.length > 0 && bytes.length <= limit && bytes.toString('base64') === value, 'receipt_encoding');
   return bytes;
 }
 
@@ -472,7 +516,7 @@ export function createChinaDailyRelease({root, servingRoot, pricingPlan, serving
             need(detailsRaw.length <= 256 * 1024, 'browser_details_size');
             await fs.writeFile(detailsPath, detailsRaw, {mode: 0o600});
           }
-          if (codeUpdate && ['catalog-japan-recovery-v1', 'catalog-japan-completion-v1', 'catalog-japan-completion-v2', 'catalog-japan-usability-v1', JAPAN_PAGINATION_CODE_SCOPE, JAPAN_STABILITY_CODE_SCOPE].includes(plan.codeScope)) {
+          if (codeUpdate && JAPAN_BROWSER_CODE_SCOPES.has(plan.codeScope)) {
             await activeGuard(); await progress('code_japan_browser');
             const japanOutput = path.join(browserDirectory, 'japan-browser-report.json'), japanStartedAt = Date.now();
             let failedJapanStage;
@@ -494,17 +538,34 @@ export function createChinaDailyRelease({root, servingRoot, pricingPlan, serving
               let japanRaw;
               try { japanRaw = await fs.readFile(japanOutput); }
               catch (error) { need(japanExit === 0, 'japan_browser_failed'); throw error; }
-              await onProgress({phase: 'code_japan_report_observed', market: 'china', applicationBuilds: 0,
-                bytes: japanRaw.length, exitCode: Number.isSafeInteger(japanExit) ? japanExit : null,
-                sha256: hash(japanRaw)});
-              need(japanRaw.length <= 128 * 1024, 'japan_browser_binding');
-              const japan = JSON.parse(japanRaw), checkedAt = Date.parse(japan.checkedAt);
-              need(japan.version === 1 && japan.kind === 'catalog-japan-browser-v1' && japan.codeScope === plan.codeScope
-                && japan.countAcceptance === servingPlan.countAcceptance
-                && japan.release === candidate.runtimeSha && japan.nonce === nonce
-                && japan.generationManifestSha256 === candidate.generationManifestSha256
-                && japan.oracleSha256 === hash(await fs.readFile(oraclePath))
-                && Number.isFinite(checkedAt) && checkedAt >= japanStartedAt && checkedAt <= Date.now(), 'japan_browser_binding');
+              try {
+                await onProgress({phase: 'code_japan_report_observed', market: 'china', applicationBuilds: 0,
+                  bytes: japanRaw.length, exitCode: Number.isSafeInteger(japanExit) ? japanExit : null,
+                  sha256: hash(japanRaw)});
+              } catch { /* An optional observation cannot replace the gate failure. */ }
+              let japan, bindingFinishedAt;
+              try {
+                need(japanRaw.length <= (observedJapanTiming ? JAPAN_BROWSER_REPORT_LIMIT : 128 * 1024), 'japan_browser_binding');
+                japan = JSON.parse(japanRaw);
+                const checkedAt = Date.parse(japan.checkedAt);
+                need(japan.version === 1 && japan.kind === 'catalog-japan-browser-v1' && japan.codeScope === plan.codeScope
+                  && japan.countAcceptance === servingPlan.countAcceptance
+                  && japan.release === candidate.runtimeSha && japan.nonce === nonce
+                  && japan.generationManifestSha256 === candidate.generationManifestSha256
+                  && japan.oracleSha256 === hash(await fs.readFile(oraclePath))
+                  && Number.isFinite(checkedAt) && checkedAt >= japanStartedAt && checkedAt <= (bindingFinishedAt = Date.now()), 'japan_browser_binding');
+              } catch (error) {
+                try {
+                  const diagnostic = japanBrowserBindingFailureDiagnostic(japanRaw, {
+                    expected: {codeScope: plan.codeScope, countAcceptance: servingPlan.countAcceptance,
+                      release: candidate.runtimeSha, nonce, generationManifestSha256: candidate.generationManifestSha256,
+                      oracleSha256: hash(await fs.readFile(oraclePath))}, childExitCode: japanExit,
+                    startedAt: japanStartedAt, finishedAt: bindingFinishedAt ?? Date.now(), observedTiming: observedJapanTiming});
+                  await fs.writeFile(path.join(root, 'catalog-next-japan-browser-binding-failure.json'),
+                    JSON.stringify(diagnostic) + '\n', {flag: 'wx', mode: 0o600});
+                } catch { /* Keep the exact original rejection if diagnostics cannot be saved. */ }
+                throw error;
+              }
               // Keep the exact bound report after staging cleanup, including a
               // failed gate's diagnostic report. Copying it never grants acceptance.
               await fs.writeFile(path.join(root, 'catalog-next-japan-browser-report.json'), japanRaw, {flag: 'wx', mode: 0o600});
@@ -552,7 +613,7 @@ export function createChinaDailyRelease({root, servingRoot, pricingPlan, serving
                 japanReportSha256: hash(japanRaw),
                 ...(japanCountAcceptance(servingPlan) === undefined ? {} : {countAcceptance: japanCountAcceptance(servingPlan)}),
                 ...(observedJapanTiming ? {passed: true, timingObserved: true, precedingSpeedReportSha256: hash(speedRaw)} : {})}) + '\n');
-              need(detailsRaw.length <= 256 * 1024, 'browser_details_size');
+              need(detailsRaw.length <= (observedJapanTiming ? JAPAN_BROWSER_DETAILS_LIMIT : 256 * 1024), 'browser_details_size');
               await fs.writeFile(detailsPath, detailsRaw, {mode: 0o600});
             } catch (error) {
               if (stabilityCodeUpdate && failedJapanStage !== undefined) {
@@ -636,9 +697,15 @@ export function createChinaDailyRelease({root, servingRoot, pricingPlan, serving
       const outcome = await session.call('recover', {runtimeSha: intent.value.candidate.runtimeSha, nonce: intent.value.nonce});
       await session.close(); session = null; await assertAuthority();
       if (outcome?.status === 'pending') return null;
-      if (outcome?.status === 'accepted') return {kind: 'accepted', evidence: {
-        hostReceiptBase64: outcome.hostReceiptBase64, hostReceiptSha256: outcome.hostReceiptSha256,
-        browserSpeedBytes: decode(outcome.browserSpeedBase64), browserDetailsBytes: decode(outcome.browserDetailsBase64)}};
+      if (outcome?.status === 'accepted') {
+        const receipt = JSON.parse(decode(outcome.hostReceiptBase64));
+        const detailsLimit = receipt.transition === 'code-update' && receipt.codeScope === JAPAN_STABILITY_CODE_SCOPE
+          && receipt.acceptancePolicy === JAPAN_OBSERVED_TIMING_POLICY
+          ? JAPAN_BROWSER_DETAILS_LIMIT : 256 * 1024;
+        return {kind: 'accepted', evidence: {
+          hostReceiptBase64: outcome.hostReceiptBase64, hostReceiptSha256: outcome.hostReceiptSha256,
+          browserSpeedBytes: decode(outcome.browserSpeedBase64), browserDetailsBytes: decode(outcome.browserDetailsBase64, detailsLimit)}};
+      }
       need(outcome?.status === 'rolled_back', 'recovery_status');
       decode(outcome.hostRollbackBase64);
       return {kind: 'rolled_back', evidence: {hostRollbackBase64: outcome.hostRollbackBase64, hostRollbackSha256: outcome.hostRollbackSha256}};
