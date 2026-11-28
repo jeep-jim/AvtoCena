@@ -167,6 +167,16 @@ test('exact marker-only invocation is required; foreign workflow/repository/ref/
 test('one run retires A then B after native SSH consumes the environment credential; another run cannot reuse it',async t=>{
   assert.equal(Object.hasOwn(process.env,'SSH_PRIVATE_KEY'),false,'offline test must not receive a real credential');
   const runnerTemp=await fs.mkdtemp(path.join(os.tmpdir(),'reg-retirement-credential-'));
+  // This completed B9 maintenance operation keeps its historical reviewed
+  // plan even when the current release advances the daily serving plan.
+  const historicalRoot=await fs.mkdtemp(path.join(os.tmpdir(),'reg-retirement-b9-plan-'));
+  t.after(()=>fs.rm(historicalRoot,{recursive:true,force:true}));
+  const planDirectory=path.join(historicalRoot,'.github/operations/catalog-next');
+  await fs.mkdir(planDirectory,{recursive:true});
+  await Promise.all([
+    fs.copyFile(path.join(ROOT,'tests/fixtures/catalog-next/b9-serving-plan.json'),path.join(planDirectory,'china-serving-plan.json')),
+    fs.copyFile(path.join(ROOT,'.github/operations/catalog-next/china-plan.json'),path.join(planDirectory,'china-plan.json')),
+  ]);
   t.after(async()=>{delete process.env.SSH_PRIVATE_KEY;await fs.rm(runnerTemp,{recursive:true,force:true});});
   const f=await fixture({includeA:true}),calls=[],keyHashes=[];let factories=0,authorityChecks=0,stateReads=0;
   const initialKey='synthetic-offline-ssh-first',nextKey='synthetic-offline-ssh-next';
@@ -192,14 +202,14 @@ test('one run retires A then B after native SSH consumes the environment credent
   }
   const createRelease=options=>{
     factories++;
-    return createChinaDailyRelease({...options,capabilities:{openSession:args=>openChinaSshSession({...args,spawnImpl})}});
+    return createChinaDailyRelease({...options,root:ROOT,capabilities:{openSession:args=>openChinaSshSession({...args,spawnImpl})}});
   };
   const makeHandler=()=>createRetireOnly({createRelease});
   const handler=makeHandler();assert.equal(factories,0,'adapter creation must stay lazy');
   const saved=JSON.parse([...f.q.tasks.values()][0].data);
   const tasks=[{previousAccepted:f.beforeCode.intent.value.previous,acceptedPublication:f.beforeCode},
     {previousAccepted:saved.previousAccepted,acceptedPublication:saved.acceptedPublication}];
-  const invoke=(retire,task)=>retire({root:ROOT,runnerTemp,environment:process.env,
+  const invoke=(retire,task)=>retire({root:historicalRoot,runnerTemp,environment:process.env,
     invocation:{sourceSha:'a'.repeat(40)},current:f.expected.accepted.value.current,
     args:{...task,readState:async()=>{stateReads++;return copy(f.expected);},assertAuthority:async()=>{authorityChecks++;}}});
   process.env.SSH_PRIVATE_KEY=initialKey;

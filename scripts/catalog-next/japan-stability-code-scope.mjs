@@ -114,9 +114,58 @@ export const JAPAN_STABILITY_PRICE_SORT_CODE_PATHS = Object.freeze([
   'tests/browser/ajes-pagination.mjs',
   'tests/japan-source-power.test.ts',
 ]);
+/** Exact admitted counts and complete model selections are a separate
+ * successor. The accepted loaded-count release remains the rollback image. */
+export const JAPAN_STABILITY_EXACT_COUNT_RETAINED_RUNTIME = '20fd18d12b3f5c7aabef860e1b53da0d505dfd64';
+export const JAPAN_STABILITY_EXACT_COUNT_CODE_PATHS = Object.freeze([
+  'apps/web/components/catalog/AjesCatalog.tsx',
+  'apps/web/components/catalog/AjesRail.tsx',
+  'apps/web/components/catalog/CatalogFilters.tsx',
+  'apps/web/components/catalog/CatalogLoadMore.tsx',
+  'apps/web/components/catalog/CatalogSelectionContext.tsx',
+  'apps/web/components/catalog/JapanCatalogCount.tsx',
+  'apps/web/components/catalog/VehicleModelSearch.tsx',
+  'apps/web/components/catalog/catalog-load-more-action.tsx',
+  'apps/web/components/home/HomeJapanFilteredRail.tsx',
+  'apps/web/lib/catalog/ajes-admission.ts',
+  'apps/web/lib/catalog/ajes-catalog.ts',
+  'apps/web/lib/catalog/ajes-census-protocol.ts',
+  'apps/web/lib/catalog/ajes-census.ts',
+  'apps/web/lib/catalog/ajes-client.ts',
+  'apps/web/lib/catalog/ajes-count-display.ts',
+  'apps/web/lib/catalog/ajes-count-pricing-context.ts',
+  'apps/web/lib/catalog/ajes-filtered-page.ts',
+  'apps/web/lib/catalog/ajes-model-resolution.ts',
+  'apps/web/lib/catalog/ajes-public.ts',
+  'apps/web/lib/catalog/ajes-query-cache.ts',
+  'apps/web/lib/catalog/ajes-query.ts',
+  'apps/web/lib/catalog/ajes-read-receipt.ts',
+  'apps/web/lib/catalog/ajes-request-diagnostic.ts',
+  'apps/web/lib/catalog/ajes-saved-search.ts',
+  'tests/ajes-catalog-progressive.test.ts',
+  'tests/ajes-census.test.ts',
+  'tests/ajes-count-display.test.ts',
+  'tests/ajes-count-pricing-context.test.ts',
+  'tests/ajes-count-progressive.test.ts',
+  'tests/ajes-filtered-page.test.ts',
+  'tests/ajes-japan-only.test.ts',
+  'tests/ajes-model-recovery.test.ts',
+  'tests/ajes-query-stability.test.ts',
+  'tests/ajes-rail-late-count.test.ts',
+  'tests/ajes-ssr-read-evidence.test.ts',
+  'tests/browser/ajes-pagination.mjs',
+  'tests/browser/japan-filter-directory.mjs',
+  'tests/catalog-japan-filter-rail.test.ts',
+  'tests/catalog-page-request.test.ts',
+  'tests/home-japan-preview.test.ts',
+  'tests/japan-drive-saved-search.test.ts',
+  'tests/japan-model-directory-metadata.test.ts',
+  'tests/japan-rail-visibility.test.ts',
+  'tests/japan-source-power.test.ts',
+]);
 const reviewedProfiles = Object.freeze([JAPAN_STABILITY_CODE_PATHS, JAPAN_STABILITY_UI_CODE_PATHS,
   JAPAN_STABILITY_POWER_CODE_PATHS, JAPAN_STABILITY_RAILS_CODE_PATHS, JAPAN_STABILITY_HOME_CODE_PATHS,
-  JAPAN_STABILITY_METADATA_CODE_PATHS, JAPAN_STABILITY_PRICE_SORT_CODE_PATHS]);
+  JAPAN_STABILITY_METADATA_CODE_PATHS, JAPAN_STABILITY_PRICE_SORT_CODE_PATHS, JAPAN_STABILITY_EXACT_COUNT_CODE_PATHS]);
 
 export function japanStabilityCodePaths(plan) {
   const files = plan?.runtimeFiles;
@@ -129,10 +178,11 @@ export function isExactJapanStabilityScope(plan) {
   return JAPAN_STABILITY_CODE_PATHS.length > 0
     && JAPAN_PAGINATION_CODE_PATHS.every(name => JAPAN_STABILITY_CODE_PATHS.includes(name))
     && plan?.codeScope === JAPAN_STABILITY_CODE_SCOPE
-    && plan.retainedRuntime === (paths === JAPAN_STABILITY_PRICE_SORT_CODE_PATHS
-      ? JAPAN_STABILITY_PRICE_SORT_RETAINED_RUNTIME : JAPAN_STABILITY_RETAINED_RUNTIME)
+    && plan.retainedRuntime === (paths === JAPAN_STABILITY_EXACT_COUNT_CODE_PATHS
+      ? JAPAN_STABILITY_EXACT_COUNT_RETAINED_RUNTIME : paths === JAPAN_STABILITY_PRICE_SORT_CODE_PATHS
+        ? JAPAN_STABILITY_PRICE_SORT_RETAINED_RUNTIME : JAPAN_STABILITY_RETAINED_RUNTIME)
     && paths !== null
-    && ([JAPAN_STABILITY_HOME_CODE_PATHS, JAPAN_STABILITY_METADATA_CODE_PATHS, JAPAN_STABILITY_PRICE_SORT_CODE_PATHS].includes(paths)
+    && ([JAPAN_STABILITY_HOME_CODE_PATHS, JAPAN_STABILITY_METADATA_CODE_PATHS, JAPAN_STABILITY_PRICE_SORT_CODE_PATHS, JAPAN_STABILITY_EXACT_COUNT_CODE_PATHS].includes(paths)
       ? plan.acceptancePolicy === JAPAN_OBSERVED_TIMING_POLICY
       : plan.acceptancePolicy === undefined);
 }
@@ -141,7 +191,7 @@ export function japanObservedTimingRequired(plan) {
   if (plan?.codeScope !== JAPAN_STABILITY_CODE_SCOPE) return false;
   if (!isExactJapanStabilityScope(plan)) throw Error('japan_stability_observed_timing_scope');
   return [JAPAN_STABILITY_HOME_CODE_PATHS, JAPAN_STABILITY_METADATA_CODE_PATHS,
-    JAPAN_STABILITY_PRICE_SORT_CODE_PATHS].includes(japanStabilityCodePaths(plan));
+    JAPAN_STABILITY_PRICE_SORT_CODE_PATHS, JAPAN_STABILITY_EXACT_COUNT_CODE_PATHS].includes(japanStabilityCodePaths(plan));
 }
 
 export function japanPowerOrderRequired(plan) {
@@ -149,20 +199,26 @@ export function japanPowerOrderRequired(plan) {
   if (!isExactJapanStabilityScope(plan)) throw Error('japan_stability_power_order_scope');
   return [JAPAN_STABILITY_POWER_CODE_PATHS, JAPAN_STABILITY_RAILS_CODE_PATHS,
     JAPAN_STABILITY_HOME_CODE_PATHS, JAPAN_STABILITY_METADATA_CODE_PATHS,
-    JAPAN_STABILITY_PRICE_SORT_CODE_PATHS].includes(japanStabilityCodePaths(plan));
+    JAPAN_STABILITY_PRICE_SORT_CODE_PATHS, JAPAN_STABILITY_EXACT_COUNT_CODE_PATHS].includes(japanStabilityCodePaths(plan));
 }
 
 export function japanBrandDirectoryRequired(plan) {
   if (plan?.codeScope !== JAPAN_STABILITY_CODE_SCOPE) return false;
   if (!isExactJapanStabilityScope(plan)) throw Error('japan_stability_brand_directory_scope');
   return [JAPAN_STABILITY_RAILS_CODE_PATHS, JAPAN_STABILITY_HOME_CODE_PATHS,
-    JAPAN_STABILITY_METADATA_CODE_PATHS, JAPAN_STABILITY_PRICE_SORT_CODE_PATHS].includes(japanStabilityCodePaths(plan));
+    JAPAN_STABILITY_METADATA_CODE_PATHS, JAPAN_STABILITY_PRICE_SORT_CODE_PATHS, JAPAN_STABILITY_EXACT_COUNT_CODE_PATHS].includes(japanStabilityCodePaths(plan));
 }
 
 export function japanPriceSortRequired(plan) {
   if (plan?.codeScope !== JAPAN_STABILITY_CODE_SCOPE) return false;
   if (!isExactJapanStabilityScope(plan)) throw Error('japan_stability_price_sort_scope');
-  return japanStabilityCodePaths(plan) === JAPAN_STABILITY_PRICE_SORT_CODE_PATHS;
+  return [JAPAN_STABILITY_PRICE_SORT_CODE_PATHS, JAPAN_STABILITY_EXACT_COUNT_CODE_PATHS].includes(japanStabilityCodePaths(plan));
+}
+
+export function japanExactCountRequired(plan) {
+  if (plan?.codeScope !== JAPAN_STABILITY_CODE_SCOPE) return false;
+  if (!isExactJapanStabilityScope(plan)) throw Error('japan_stability_exact_count_scope');
+  return japanStabilityCodePaths(plan) === JAPAN_STABILITY_EXACT_COUNT_CODE_PATHS;
 }
 
 /** Compatibility with the fixed pricing ancestor includes accepted B9 bytes,
@@ -170,6 +226,8 @@ export function japanPriceSortRequired(plan) {
 export function japanStabilityCompatibilityPaths(plan) {
   if (!isExactJapanStabilityScope(plan)) throw Error('japan_stability_compatibility_scope');
   const paths = japanStabilityCodePaths(plan);
+  if (paths === JAPAN_STABILITY_EXACT_COUNT_CODE_PATHS)
+    return [...new Set([...JAPAN_STABILITY_METADATA_CODE_PATHS, ...JAPAN_STABILITY_PRICE_SORT_CODE_PATHS, ...paths])].sort();
   return paths === JAPAN_STABILITY_PRICE_SORT_CODE_PATHS
     ? [...new Set([...JAPAN_STABILITY_METADATA_CODE_PATHS, ...paths])].sort() : paths;
 }

@@ -579,10 +579,10 @@ export async function selectJapanStabilityModelThroughUi({view, directory, progr
 /** Ordinary, bounded public journeys supplement the unchanged Japan freshness,
  * power, pagination, price and neighbor-preservation acceptance. */
 export async function runJapanStabilityBrowser({context, report, generationId, read, capture, onStage, onPage,
-  verifyPage, verifyFullPage, verifyPowerPage, verifyVehiclePolicy, navigateLegacyMazdaThree, requirePriceSort = false}) {
+  verifyPage, verifyFullPage, verifyPowerPage, verifyVehiclePolicy, navigateLegacyMazdaThree, requirePriceSort = false, requireExactCount = false}) {
   need(typeof requirePriceSort === 'boolean', 'price_sort_option');
   const pages = [];
-  if (requirePriceSort) pages.push(...await runJapanPriceSortBrowser({context, report, read, capture, onStage, onPage,
+  if (requirePriceSort) pages.push(...await runJapanPriceSortBrowser({context, report, read, capture, onStage, onPage, requireExactCount,
     verifyPage, verifyFullPage, verifyPowerPage, verifyVehiclePolicy}));
   onStage('stability_source_models');
   const directoryResponse = await read(JAPAN_STABILITY_MODELS_API);

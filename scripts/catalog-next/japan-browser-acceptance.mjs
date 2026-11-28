@@ -6,7 +6,10 @@ import {JAPAN_PAGINATION_CODE_SCOPE} from './japan-pagination-code-scope.mjs';
 import {JAPAN_STABILITY_CODE_SCOPE} from './japan-stability-code-scope.mjs';
 import {JAPAN_STABILITY_GATES, JAPAN_LEGACY_MAZDA_THREE_PAGES, japanStabilityApiAllowed, runJapanStabilityBrowser,
  checkJapanStabilityBrandControl,verifyJapanStabilityBrandRequestCount} from './japan-stability-browser.mjs';
-import {JAPAN_PRICE_SORT_GATES, japanPriceSortApiAllowed} from './japan-price-sort-browser.mjs';
+import {JAPAN_PRICE_SORT_GATES, japanPriceSortApiAllowed, verifyJapanPriceSortVisible} from './japan-price-sort-browser.mjs';
+import {JAPAN_EXACT_COUNT_GATES, japanExactCountRequirement, japanExactCountApiAllowed,
+ verifyJapanExactCount, verifyJapanExactCountStable, runJapanExactCountBrowser} from './japan-exact-count-browser.mjs';
+export {japanExactCountRequirement} from './japan-exact-count-browser.mjs';
 
 const ROOT=fileURLToPath(new URL('../../',import.meta.url));
 const ORIGIN='https://avtocena.com';
@@ -415,8 +418,9 @@ export function verifyJapanWarmPage(first,second){
  return {sameObservation:true,sameRows:true};
 }
 
-export function verifyJapanPowerPage(payload,pageNumber=1){
+export function verifyJapanPowerPage(payload,pageNumber=1,{requireExactCount=false,query}={}){
  need(Number.isSafeInteger(pageNumber)&&pageNumber>=1,'power_page_number');
+ need(typeof requireExactCount==='boolean','exact_count_option');
  let localPower=0,supplierPower=0,unknownPower=0;
  for(const row of payload.items){
   if(positive(row.powerHp)){
@@ -430,7 +434,8 @@ export function verifyJapanPowerPage(payload,pageNumber=1){
  const expected={shown:payload.items.length,localPower,supplierPower,unknownPower};
  need(payload.powerFilterSummary&&Object.entries(expected).every(([key,value])=>payload.powerFilterSummary[key]===value),'power_summary');
  // A supplier count is an upper bound until the local predicate is exhausted.
- if(payload.hasMore||pageNumber>1)need(payload.total===null&&(!payload.countSummary||payload.countSummary.upperBound===true),'false_exact_count');
+ if(requireExactCount)verifyJapanExactCount(payload,{query});
+ else if(payload.hasMore||pageNumber>1)need(payload.total===null&&(!payload.countSummary||payload.countSummary.upperBound===true),'false_exact_count');
  else need(payload.total===payload.items.length&&payload.countSummary?.total===payload.items.length&&payload.countSummary?.upperBound===false,'exhausted_count');
  return {...expected,unknownRetainedAndLabelled:true,countHonest:true};
 }
@@ -543,12 +548,16 @@ export function japanPaginationPageApi(value,{kind,expectedCursor,requirePowerOr
  if(power)query.set('powerTo','160');if(petrol)query.set('fuel','petrol');
  query.set('after',after);return '/api/catalog/search?'+query;
 }
-export function verifyJapanPaginationPair(first,next,{observedUrl,kind,firstStatus,nextStatus,now=Date.now(),requirePowerOrder=false}={}){
+export function verifyJapanPaginationPair(first,next,{observedUrl,kind,firstStatus,nextStatus,now=Date.now(),requirePowerOrder=false,requireExactCount=false}={}){
  need(typeof requirePowerOrder==='boolean','power_order_option');
+ need(typeof requireExactCount==='boolean','exact_count_option');
  const firstObservation=verifyJapanPage(first,firstStatus,now),nextObservation=verifyJapanPage(next,nextStatus,now);
  need(first.page===1&&next.page===2&&first.pageSize===24&&next.pageSize===24&&first.hasMore===true
   &&typeof next.hasMore==='boolean','pagination_page');
- need(first.total===null&&next.total===null,'pagination_count');
+ const countQuery={market:'japan',city:CITY,...(kind!=='plain'?{powerTo:'160'}:{}),...(kind==='petrol_power'?{fuel:'petrol'}:{})};
+ const exactCount=requireExactCount?verifyJapanExactCountStable(
+  verifyJapanExactCount(first,{query:countQuery,now}),verifyJapanExactCount(next,{query:countQuery,now})):undefined;
+ if(!requireExactCount)need(first.total===null&&next.total===null,'pagination_count');
  const firstPage=verifyJapanFullPage(first),secondPage=verifyJapanFullPage(next);
  japanPaginationPageApi(observedUrl,{kind,expectedCursor:first.nextCursor,requirePowerOrder});
  const orderedPower=requirePowerOrder&&kind!=='plain';
@@ -558,7 +567,10 @@ export function verifyJapanPaginationPair(first,next,{observedUrl,kind,firstStat
  else need(next.nextCursor===null,'pagination_exhausted_cursor');
  const firstIds=new Set(first.items.map(row=>row.id));
  need(next.items.every(row=>!firstIds.has(row.id)),'pagination_duplicate');
- if(kind!=='plain'){verifyJapanPowerPage(first);verifyJapanPowerPage(next,2);}
+ if(kind!=='plain'){
+  verifyJapanPowerPage(first,1,{requireExactCount,query:countQuery});
+  verifyJapanPowerPage(next,2,{requireExactCount,query:countQuery});
+ }
  if(kind==='petrol_power')need([...first.items,...next.items].every(row=>row.fuel==='petrol'),'pagination_fuel');
  let powerOrder;
  if(orderedPower){
@@ -581,7 +593,8 @@ export function verifyJapanPaginationPair(first,next,{observedUrl,kind,firstStat
   powerOrder={...order,cursorVersion:'j2'};
  }
  return {first:{...firstObservation,...firstPage},next:{...nextObservation,...secondPage},
-  cursorSha256:cursor.cursorSha256,followedEmittedCursor:true,distinctRows:true,visiblePages:2,...(powerOrder?{powerOrder}:{})};
+  cursorSha256:cursor.cursorSha256,followedEmittedCursor:true,distinctRows:true,visiblePages:2,
+  ...(powerOrder?{powerOrder}:{}),...(exactCount?{exactCount}:{})};
 }
 
 export function japanVerificationRequestScope(url,method,resourceType){
@@ -805,25 +818,26 @@ export async function installReadFence(context,report,{getCalculationGrant,isLeg
  }};
 }
 
-async function readJson(context,url,{paginationKind,stability=false,requirePowerOrder=false,priceSort=false}={}){
+async function readJson(context,url,{paginationKind,stability=false,requirePowerOrder=false,priceSort=false,exactCount=false}={}){
  let continuation=false;
  const priceSortApi=priceSort&&japanPriceSortApiAllowed(url);
+ const exactCountApi=exactCount&&japanExactCountApiAllowed(url);
  if(url.startsWith('/api/catalog/search?')){
   const query=new URL(url,ORIGIN).searchParams;
-  if(query.has('after')&&!priceSortApi){
+  if(query.has('after')&&!priceSortApi&&!exactCountApi){
    const pageUrl=new URL('/cars/japan',ORIGIN);pageUrl.search=query.toString();
    continuation=(paginationKind?japanPaginationPageApi(pageUrl.href,{kind:paginationKind,requirePowerOrder}):japanPetrolPowerPageApi(pageUrl.href))===url;
   }
  }
  need(url==='/api/health'||url===PLAIN||url===POWER||url===PETROL_POWER||url===PETROL_POWER_NEXT||url===BRAND_DIRECTORY||continuation
-  ||stability&&japanStabilityApiAllowed(url)||priceSortApi,'api_scope');
+  ||stability&&japanStabilityApiAllowed(url)||priceSortApi||exactCountApi,'api_scope');
  const started=Date.now();
  const response=await context.request.get(ORIGIN+url,{timeout:45_000,maxRedirects:0,headers:{'Cache-Control':'no-cache'}});
  const data=await response.json().catch(()=>null),receivedAt=Date.now();
  return {status:response.status(),data,headers:response.headers(),durationMs:receivedAt-started,requestedAt:started,receivedAt};
 }
 
-export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,outputFile,playwrightModule,chromeBin,codeScope=SCOPE,requirePowerOrder=false,requireBrandDirectory=false,requirePriceSort=false,timingPolicy}){
+export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,outputFile,playwrightModule,chromeBin,codeScope=SCOPE,requirePowerOrder=false,requireBrandDirectory=false,requirePriceSort=false,requireExactCount=false,timingPolicy}){
  const stability=codeScope===JAPAN_STABILITY_CODE_SCOPE;
  const pagination=codeScope===JAPAN_PAGINATION_CODE_SCOPE||stability;
  const completion=[COMPLETION_SCOPE,COMPLETION_V2_SCOPE,USABILITY_SCOPE,JAPAN_PAGINATION_CODE_SCOPE,JAPAN_STABILITY_CODE_SCOPE].includes(codeScope);
@@ -841,10 +855,19 @@ export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,out
  if(requireBrandDirectory===true)Object.assign(report,{japanBrandDirectoryPassed:false,japanBrandDirectoryUiRequests:0});
  if(requirePriceSort===true)Object.assign(report,{japanPriceSortRequired:true,
   ...Object.fromEntries(JAPAN_PRICE_SORT_GATES.map(key=>[key,false]))});
+ if(requireExactCount===true)Object.assign(report,{japanExactCountRequired:true,
+  ...Object.fromEntries(JAPAN_EXACT_COUNT_GATES.map(key=>[key,false]))});
  if(timingPolicy===JAPAN_OBSERVED_TIMING_POLICY)Object.assign(report,
   {timingPolicy,speedGateRequired:false,speedPassed:null,timingObserved:false});
  let browser,context,currentPage,calculationGrant=null,brandDirectory=null,stabilityBrandDirectory=null,stage='preconditions';
  const usabilityPages=[],quietChecks=[];
+ const read=async(url,options={})=>{
+  const value=await readJson(context,url,{...options,exactCount:requireExactCount});
+  if(requireExactCount&&url.startsWith('/api/catalog/search?')&&value.status===200&&value.data?.ok===true)
+   verifyJapanExactCount(value.data,{query:url});
+  return value;
+ };
+ const verifyPower=(payload,page=1,options={})=>verifyJapanPowerPage(payload,page,{...options,requireExactCount});
  const capture=async(page,name)=>{
   const relative=path.join('artifacts/catalog-japan-live',nonce,name+'.png');
   const file=path.join(ROOT,relative);await fs.mkdir(path.dirname(file),{recursive:true});
@@ -852,7 +875,7 @@ export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,out
   report.screenshots.push({path:relative,sha256:sha(raw)});
  };
  const health=async()=>{
-  const value=await readJson(context,'/api/health');
+  const value=await read('/api/health');
   const observation={stage:report.checks.health?.length?'after':'before',...japanResponseTransport(value),
    status:value.status,ok:typeof value.data?.ok==='boolean'?value.data.ok:null,
    releaseSha:typeof value.data?.releaseSha==='string'&&/^[a-f0-9]{40}$/.test(value.data.releaseSha)?value.data.releaseSha:null,
@@ -866,6 +889,7 @@ export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,out
   need(typeof requirePowerOrder==='boolean'&&(!requirePowerOrder||stability),'power_order_option');
   need(typeof requireBrandDirectory==='boolean'&&(!requireBrandDirectory||stability),'brand_directory_option');
   need(typeof requirePriceSort==='boolean'&&(!requirePriceSort||stability&&requirePowerOrder&&requireBrandDirectory),'price_sort_option');
+  need(typeof requireExactCount==='boolean'&&(!requireExactCount||stability&&requirePowerOrder&&requireBrandDirectory&&requirePriceSort),'exact_count_option');
   japanTimingPolicy(timingPolicy);
   need(timingPolicy===undefined||stability&&requirePowerOrder&&requireBrandDirectory,'timing_policy_scope');
   need(path.isAbsolute(outputFile),'output');
@@ -900,9 +924,9 @@ export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,out
    if(stability)(report.checks.ssrPageReadEvidence??=[]).push({stage,kind,
     ...await readJapanSsrPageEvidence(view,{page:2,after:new URL(observedUrl).searchParams.get('after')||''})});
    report.explicitJapanApiRequests++;
-   const result=await readJson(context,api,{paginationKind:kind,requirePowerOrder});
+   const result=await read(api,{paginationKind:kind,requirePowerOrder});
    recordJapanResponse(report,stage,result,releaseSha);
-   const proof=verifyJapanPaginationPair(first,result.data,{observedUrl,kind,firstStatus:200,nextStatus:result.status,requirePowerOrder});
+   const proof=verifyJapanPaginationPair(first,result.data,{observedUrl,kind,firstStatus:200,nextStatus:result.status,requirePowerOrder,requireExactCount});
    await cards.nth(result.data.items.length-1).waitFor({state:'attached',timeout:60_000});
    need(await cards.count()===result.data.items.length,'pagination_ui_next_count');
    for(const row of result.data.items){const card=cards.filter({has:view.locator('a[href*="'+row.id+'"]')});
@@ -914,7 +938,7 @@ export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,out
   const plain=[];report.checks.freshness={observations:[]};report.checks.responses=[];
   for(let index=0;index<2;index++){
    stage=index?'plain_warm':'plain_first';report.explicitJapanApiRequests++;
-   const response=await readJson(context,PLAIN);
+   const response=await read(PLAIN);
    recordJapanResponse(report,stage,response,releaseSha);
    const observation=verifyJapanPage(response.data,response.status);
    report.checks.freshness.observations.push({...observation,durationMs:response.durationMs,
@@ -925,16 +949,16 @@ export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,out
   if(usability){
    usabilityPages.push(plain[0]);
    stage='brand_directory_api';report.explicitJapanApiRequests++;
-   const directory=await readJson(context,BRAND_DIRECTORY);
+   const directory=await read(BRAND_DIRECTORY);
    recordJapanResponse(report,stage,directory,releaseSha);
    brandDirectory=verifyJapanBrandDirectory(directory.data,directory.status);
    report.checks.brandDirectory={makes:brandDirectory.makes.length,complete:true,observedAt:brandDirectory.observedAt,
     durationMs:directory.durationMs};
   }
   stage='power_api';report.explicitJapanApiRequests++;
-  const power=await readJson(context,POWER);
+  const power=await read(POWER);
   recordJapanResponse(report,stage,power,releaseSha);
-  report.checks.power={...verifyJapanPage(power.data,power.status),...verifyJapanPowerPage(power.data),durationMs:power.durationMs};
+  report.checks.power={...verifyJapanPage(power.data,power.status),...verifyPower(power.data,1,{query:POWER}),durationMs:power.durationMs};
   report.japanPowerApiPassed=true;
   if(pagination){
    verifyJapanFullPage(plain[0]);verifyJapanFullPage(power.data);
@@ -1114,9 +1138,9 @@ export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,out
     await dialog.getByRole('button',{name:'Показать автомобили',exact:true}).click();
    }
    report.explicitJapanApiRequests++;
-   let filtered=await readJson(context,PETROL_POWER);
+   let filtered=await read(PETROL_POWER);
    recordJapanResponse(report,stage,filtered,releaseSha);
-   const aggregate={...verifyJapanPage(filtered.data,filtered.status),...verifyJapanPowerPage(filtered.data)};
+   const aggregate={...verifyJapanPage(filtered.data,filtered.status),...verifyPower(filtered.data,1,{query:PETROL_POWER})};
    const petrolFirst=filtered.data;
    if(usability)usabilityPages.push(petrolFirst);
    need(filtered.data.items.every(row=>row.fuel==='petrol'),'petrol_api_fuel');
@@ -1163,9 +1187,9 @@ export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,out
     :usability?japanPetrolPowerPageApi(nextUrl.href):PETROL_POWER_NEXT;
    if(stability)(report.checks.ssrPageReadEvidence??=[]).push({stage,kind:'petrol_power',
     ...await readJapanSsrPageEvidence(view,{page:2,after:nextUrl.searchParams.get('after')||''})});
-   report.explicitJapanApiRequests++;filtered=await readJson(context,pageTwoApi,pagination?{paginationKind:'petrol_power',requirePowerOrder}:{});
+   report.explicitJapanApiRequests++;filtered=await read(pageTwoApi,pagination?{paginationKind:'petrol_power',requirePowerOrder}:{});
    recordJapanResponse(report,stage,filtered,releaseSha);
-   const nextAggregate={...verifyJapanPage(filtered.data,filtered.status),...verifyJapanPowerPage(filtered.data,2)};
+   const nextAggregate={...verifyJapanPage(filtered.data,filtered.status),...verifyPower(filtered.data,2,{query:pageTwoApi})};
    need(filtered.data.items.every(row=>row.fuel==='petrol'&&!firstIds.has(row.id)),'petrol_page_two_rows');
    for(const row of filtered.data.items){
     const card=visibleCards.filter({has:view.locator('a[href*="'+row.id+'"]')});
@@ -1177,7 +1201,7 @@ export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,out
    if(pagination){
     await checkPaginationWarning(catalog);
     report.checks.pagination24.petrolPower={...verifyJapanPaginationPair(petrolFirst,filtered.data,
-     {observedUrl:nextUrl.href,kind:'petrol_power',firstStatus:200,nextStatus:filtered.status,requirePowerOrder}),
+     {observedUrl:nextUrl.href,kind:'petrol_power',firstStatus:200,nextStatus:filtered.status,requirePowerOrder,requireExactCount}),
      navigatedThroughLink:true,uiMatchesApi:true,cityPreserved:true,warningRemoved:true};
     need(['plain','power','petrolPower'].every(key=>report.checks.pagination24[key]?.followedEmittedCursor===true
      &&report.checks.pagination24[key]?.uiMatchesApi===true),'pagination_evidence');
@@ -1264,19 +1288,26 @@ export async function runJapanBrowserAcceptance({oraclePath,releaseSha,nonce,out
   }
   if(stability){
    verifyJapanVisibleVehiclePolicy([plain[0],power.data]);
-   await runJapanStabilityBrowser({context,report,generationId:binding.generationId,capture,requirePriceSort,
+   await runJapanStabilityBrowser({context,report,generationId:binding.generationId,capture,requirePriceSort,requireExactCount,
     onStage:value=>{stage=value;},onPage:value=>{currentPage=value;},
-    read:async url=>{report.explicitJapanApiRequests++;const value=await readJson(context,url,{stability:true,priceSort:requirePriceSort});
+    read:async url=>{report.explicitJapanApiRequests++;const value=await read(url,{stability:true,priceSort:requirePriceSort});
      recordJapanResponse(report,stage,value,releaseSha);return value;},
-    verifyPage:verifyJapanPage,verifyFullPage:verifyJapanFullPage,verifyPowerPage:verifyJapanPowerPage,
+    verifyPage:verifyJapanPage,verifyFullPage:verifyJapanFullPage,verifyPowerPage:verifyPower,
     verifyVehiclePolicy:verifyJapanVisibleVehiclePolicy,navigateLegacyMazdaThree:fence.navigateLegacyMazdaThree});
   }
+  if(requireExactCount)await runJapanExactCountBrowser({context,report,capture,
+   onStage:value=>{stage=value;},onPage:value=>{currentPage=value;},
+   read:async url=>{report.explicitJapanApiRequests++;const value=await read(url,{stability:true,priceSort:requirePriceSort});
+    recordJapanResponse(report,stage,value,releaseSha);return value;},
+   verifyPage:verifyJapanPage,verifyFullPage:verifyJapanFullPage,verifyPowerPage:verifyPower,
+   verifyVehiclePolicy:verifyJapanVisibleVehiclePolicy,verifyVisible:verifyJapanPriceSortVisible});
   stage='release_after';await health();
   report.passed=['japanFreshnessPassed','japanPowerApiPassed','japanUiPassed','japanVisibilityPassed','readOnlyBrowserFence',
    ...(completion?['japanPetrolPowerUiPassed','japanDetailPowerInputPassed','japanDeliveredCalculationPassed']:[]),
    ...(usability?USABILITY_GATES:[]),...(pagination?['japanFullPagesPassed','japanPagination24Passed','japanCatalogWarningRemovedPassed']:[]),
    ...(stability?JAPAN_STABILITY_GATES:[]),...(requirePowerOrder?['japanPowerOrderPassed']:[]),
-   ...(requireBrandDirectory?['japanBrandDirectoryPassed']:[]),...(requirePriceSort?JAPAN_PRICE_SORT_GATES:[])].every(key=>report[key]===true);
+   ...(requireBrandDirectory?['japanBrandDirectoryPassed']:[]),...(requirePriceSort?JAPAN_PRICE_SORT_GATES:[]),
+   ...(requireExactCount?JAPAN_EXACT_COUNT_GATES:[])].every(key=>report[key]===true);
  }catch(error){
   const navigationCode=japanNavigationErrorCode(error);
   report.error={stage,code:/^japan_browser_[a-z_]+$/.test(error?.message||'')?error.message:'japan_browser_check_failed',
@@ -1299,6 +1330,7 @@ if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.ur
    requirePowerOrder:japanPowerOrderRequirement(process.env.CATALOG_JAPAN_POWER_ORDER_REQUIRED),
    requireBrandDirectory:japanBrandDirectoryRequirement(process.env.CATALOG_JAPAN_BRAND_DIRECTORY_REQUIRED),
    requirePriceSort:japanPriceSortRequirement(process.env.CATALOG_JAPAN_PRICE_SORT_REQUIRED),
+   requireExactCount:japanExactCountRequirement(process.env.CATALOG_JAPAN_EXACT_COUNT_REQUIRED),
    timingPolicy:japanTimingPolicy(process.env.CATALOG_JAPAN_TIMING_POLICY)});
   console.log('JAPAN_BROWSER '+JSON.stringify(report));if(!report.passed)process.exitCode=1;
  }catch{console.error('japan_browser_report_failed');process.exitCode=1;}

@@ -1,0 +1,240 @@
+{
+  "version": 1,
+  "kind": "japan-exact-count-models-candidate-v1",
+  "status": "review_candidate_not_activated_source_contract_unresolved",
+  "date": "2026-11-28",
+  "timezone": "Asia/Krasnoyarsk",
+  "request": {
+    "exactGlobalCounts": true,
+    "completeModelsAndFilters": true,
+    "priceBudgetExact": true,
+    "timingAcceptanceThreshold": false
+  },
+  "retainedRuntime": "20fd18d12b3f5c7aabef860e1b53da0d505dfd64",
+  "sourceAudit": {
+    "runId": "46101006257",
+    "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/46101006257",
+    "controllerSha": "8de8515900c87633237f2eca816fe81945f286d9",
+    "conclusion": "success",
+    "artifactSha256": "b711ce9c978072e05ae8fd4defb0a0bba891b5ad9dd2e9b188eaef5a934f1341",
+    "bindingLimitation": "Fixed saved slots do not prove the precise user query.",
+    "report": {
+      "version": 1,
+      "kind": "japan-usability-saved-failure-v1",
+      "records": [
+        {
+          "slot": "stats-list-1",
+          "readStatus": "ok",
+          "startedAt": "2026-11-28T03:00:15.442Z",
+          "finishedAt": "2026-11-28T03:00:16.425Z",
+          "kind": "list",
+          "outcome": "visitor_restricted",
+          "page": 1,
+          "pageSize": 24,
+          "httpStatus": 200,
+          "providerCode": "bot",
+          "sqlSha256": "ba097561bf0658bcc4dba76838f5643888f272f392c1d5add3fcb843bd01e034",
+          "sqlBytes": 3569
+        },
+        {
+          "slot": "stats-count",
+          "readStatus": "ok",
+          "startedAt": "2026-11-28T02:58:07.977Z",
+          "finishedAt": "2026-11-28T02:58:08.110Z",
+          "kind": "count",
+          "outcome": "invalid_response",
+          "page": 1,
+          "pageSize": 1,
+          "httpStatus": 200,
+          "providerCode": null,
+          "sqlSha256": "5ec493251f475a11bfe2497cc345a4727af03017ca6b3216ecfe8198a02dd453",
+          "sqlBytes": 3541,
+          "responseValidation": {
+            "version": 1,
+            "phase": "aggregate_shape",
+            "code": "count_row_count",
+            "wireBytes": 2,
+            "decodedBytes": 2,
+            "rowCount": 0,
+            "rootKind": "array"
+          }
+        },
+        {
+          "slot": "stats-latest",
+          "readStatus": "ok",
+          "startedAt": "2026-11-28T03:00:17.409Z",
+          "finishedAt": "2026-11-28T03:00:17.577Z",
+          "kind": "models",
+          "outcome": "visitor_restricted",
+          "page": 1,
+          "pageSize": 500,
+          "httpStatus": 200,
+          "providerCode": "bot",
+          "sqlSha256": "516d0ab379d236b15c00d4ea08961d13d3bd884fe119379298f1922251412c89",
+          "sqlBytes": 3641
+        }
+      ],
+      "supplierRequests": 0,
+      "writes": 0
+    }
+  },
+  "ordinaryBrowserObservation": {
+    "url": "https://avtocena.com/cars/japan/Audi/A4?city=%D0%9D%D0%BE%D0%B2%D0%BE%D0%BA%D1%83%D0%B7%D0%BD%D0%B5%D1%86%D0%BA",
+    "cards": 24,
+    "appendButtons": 0,
+    "countStatus": "partial",
+    "countText": "Загружено 24 · количество уточняется",
+    "footer": "Показано 24 Показаны сохранённые автомобили. Полный список пока недоступен.",
+    "httpStatus": 200,
+    "siteIssueId": "66ceeb82-2145-4e07-9ef0-5504503f8121"
+  },
+  "openRequirements": [
+    "Provide/verify the complete current supplier stats schema, numeric FINISH domain and supported aggregate grammar through an authorized source.",
+    "Use a documented coherent source observation for positive exact counts, with global identity uniqueness and finite local override corrections from that same observation.",
+    "Implement exact delivered-price/budget/hasPrice counting within the provider request/cache policy; no listing-level full walk or mirrored inventory.",
+    "Run the real browser fixture and complete code verification for the frozen review candidate SHA; controlled UI totals are not live source acceptance.",
+    "Pass actual Japan source/filter/count/model acceptance before activation."
+  ],
+  "activation": {
+    "attempted": false,
+    "published": false,
+    "reason": "Complete positive source count and delivered-price count are not accepted."
+  },
+  "storage": {
+    "supplierDump": false,
+    "inventoryMirror": false,
+    "otherMarketWrites": false
+  },
+  "verifiedBlockers": {
+    "mixedSourcePages": {
+      "beforeAdmitted": 1,
+      "afterAdmitted": 500,
+      "sourceRows": 501,
+      "oldIncorrectResult": 0,
+      "cause": "Fresh aggregate pages are not a provider snapshot even when weights and total distinct IDs agree."
+    },
+    "mixedIdentityCorrections": {
+      "sourceRows": 3,
+      "admittedInBothStates": 1,
+      "oldIncorrectResult": 0,
+      "cause": "Independent corrections for two hidden IDs can subtract the same aggregate membership twice across source states."
+    },
+    "sourceContract": "No complete saved stats schema, documented source snapshot/revision or equivalent coherent aggregate has been verified.",
+    "priceCounter": "Exact positive delivered-price/budget/hasPrice count is not implemented. MIN/MAX alone cannot establish the number inside a price interval."
+  },
+  "implementation": {
+    "models": [
+      "Typed A4 preserves its family, including when only A4 AVANT is suggested.",
+      "All observed source aliases are retained beyond the twenty user-choice limit.",
+      "Finite exact aliases compile to equivalent IN predicates; stale retries retain known source options."
+    ],
+    "countDisplay": "A confirmed total remains independent of the number of loaded cards; its original thirty-minute freshness deadline and stale observation date are preserved.",
+    "sourceCount": "Positive census refuses before GROUP/correction reads and cannot revive from memory or saved scalar slots. Validated rawCOUNT0 remains exact.",
+    "singleResponseCount": "A fresh complete first LIST with fewer than one raw page, unique admitted IDs and one local evidence snapshot can prove its complete admitted total; power two-pass and multiple source observations cannot.",
+    "positiveGlobalCountImplemented": false,
+    "positiveDeliveredPriceCountImplemented": false,
+    "progressiveAvailability": "SSR cards remain available independently of the COUNT request; a received full single-LIST summary and later streamed count still reach the header."
+  },
+  "localVerification": {
+    "backendNative": {
+      "passed": 108,
+      "failed": 0
+    },
+    "censusNative": {
+      "passed": 13,
+      "failed": 0
+    },
+    "censusAndCountDisplay": {
+      "passed": 29,
+      "failed": 0
+    },
+    "typescript": {
+      "exitCode": 0
+    },
+    "gitDiffCheck": {
+      "passed": true
+    },
+    "browserRun": false,
+    "liveSourceAccepted": false,
+    "modelAndAdjacent": {
+      "passed": 39,
+      "failed": 0
+    },
+    "nativeFixtureRepairs": {
+      "backend": 14,
+      "uiAndSsr": 36,
+      "failed": 0
+    }
+  },
+  "queryBudget": {
+    "wrapper": "Reserved fake host, IPv6 and fake code of 128 characters; no credentials were read.",
+    "combinedFilters": "years2015-2024,power160,petrol,automatic,grade5",
+    "listBytes": {
+      "audi27": 5236,
+      "mazda22": 5268
+    },
+    "ordinaryCountBytes": {
+      "audi27": 5197,
+      "mazda22": 5229
+    },
+    "identityCountBytes": {
+      "audi27": 5262,
+      "mazda22": 5294
+    },
+    "compatibilityBytes": 6000,
+    "minimumSupportedMarginBytes": 706,
+    "experimentalCombinedCensusBytes": {
+      "audi27": 6074,
+      "mazda22": 6106
+    },
+    "experimentalCombinedCensusSupported": false
+  },
+  "candidate": {
+    "runtimeSha": "ece8a56c9a54bd80001ae0799823dcc18dfdf152",
+    "runtimeTree": "08085fb26be722f0df4b3077b478981d6fc6a7ad",
+    "parent": "20fd18d12b3f5c7aabef860e1b53da0d505dfd64",
+    "runtimeFiles": 44,
+    "runtimeDiffSha256": "5c6bdf0c6185c067a03efcc50ba59fdfac0f218106e9afe2ae8abb910b73bbd6",
+    "pricingCompatibilityFiles": 126,
+    "branch": "fix/japan-exact-count-models-20261128",
+    "sourceUrl": "https://github.com/jeep-jim/AvtoCena/commit/ece8a56c9a54bd80001ae0799823dcc18dfdf152"
+  },
+  "fullVerificationFirstPass": {
+    "controller": {
+      "tests": 1760,
+      "passed": 1758,
+      "failed": 2
+    },
+    "native": {
+      "tests": 600,
+      "passed": 586,
+      "failed": 14
+    },
+    "status": "Corrected: test isolation, historical B9 fixture, actual React rendering and one-request SSR adapter checks; final full gates passed."
+  },
+  "fullVerificationFinal": {
+    "runtimeSha": "ece8a56c9a54bd80001ae0799823dcc18dfdf152",
+    "runtimeTree": "08085fb26be722f0df4b3077b478981d6fc6a7ad",
+    "controller": {
+      "tests": 1761,
+      "passed": 1761,
+      "failed": 0,
+      "skipped": 0,
+      "exitCode": 0,
+      "logSha256": "8f67f64bd6521ceec2aae23e429208e6a4a4946363ef987a527b7c5f857adaa8"
+    },
+    "native": {
+      "tests": 600,
+      "passed": 600,
+      "failed": 0,
+      "skipped": 0,
+      "exitCode": 0,
+      "logSha256": "e49c02fecb12166b93dbb3ce199e08225ac1f98d4766ab9319699651f7c0399c"
+    },
+    "sourceProofSha256": "d7bff8ac92f0e3c06112200b9975710431b9fbb82150e23d5820b78845020b59",
+    "protectedSourceVerified": true,
+    "browserRun": false,
+    "liveSourceAccepted": false,
+    "backendCensusAccepted": false
+  }
+}

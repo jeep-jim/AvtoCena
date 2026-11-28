@@ -1,7 +1,7 @@
 import {createHash} from 'node:crypto';
 import {signRawGcS3Request} from '../lib/catalog-raw-gc-s3.mjs';
 import {privateOwnerAcl, nonGrantingPolicy} from './private-storage.mjs';
-import {JAPAN_OBSERVED_TIMING_POLICY, JAPAN_STABILITY_CODE_SCOPE} from './japan-stability-code-scope.mjs';
+import {JAPAN_OBSERVED_TIMING_POLICY, JAPAN_STABILITY_CODE_SCOPE, JAPAN_STABILITY_EXACT_COUNT_RETAINED_RUNTIME} from './japan-stability-code-scope.mjs';
 
 export const CHINA_STATE_KEYS = Object.freeze(Object.fromEntries(['accepted', 'intent', 'lease']
   .map(name => [name, `catalog/market-rebuild/v1/china/${name}.json`])));
@@ -440,6 +440,10 @@ function acceptanceProof(candidate, intent, evidence) {
     if (['japanPriceSortRequired', 'japanPriceSortPassed', 'japanCountDisplayPassed'].some(key => Object.hasOwn(speed, key)))
       need(speed.japanPriceSortRequired === true && speed.japanPriceSortPassed === true
         && speed.japanCountDisplayPassed === true, 'japan_price_sort_binding');
+    if (intent.previous.value.current.runtimeSha === JAPAN_STABILITY_EXACT_COUNT_RETAINED_RUNTIME
+      || ['japanExactCountRequired', 'japanExactCountPassed', 'japanModelCoveragePassed'].some(key => Object.hasOwn(speed, key)))
+      need(speed.japanExactCountRequired === true && speed.japanExactCountPassed === true
+        && speed.japanModelCoveragePassed === true, 'japan_exact_count_binding');
   }
   return {proof, receipt};
 }

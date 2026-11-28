@@ -46,10 +46,11 @@ jobs:
           node --input-type=module <<'JS'
           import fs from 'node:fs';
           import {checkedCatalogCodeScope} from './scripts/catalog-next/photo-code-scope.mjs';
-          import {japanPriceSortRequired} from './scripts/catalog-next/japan-stability-code-scope.mjs';
+          import {japanPriceSortRequired,japanExactCountRequired} from './scripts/catalog-next/japan-stability-code-scope.mjs';
           const plan = JSON.parse(fs.readFileSync('.github/operations/catalog-next/china-code-serving-plan.json', 'utf8'));
           fs.appendFileSync(process.env.GITHUB_OUTPUT, 'scope=' + checkedCatalogCodeScope(plan) + '\n');
           fs.appendFileSync(process.env.GITHUB_OUTPUT, 'price_sort_required=' + japanPriceSortRequired(plan) + '\n');
+          fs.appendFileSync(process.env.GITHUB_OUTPUT, 'exact_count_required=' + japanExactCountRequired(plan) + '\n');
           JS
       - name: Prepare real mobile and desktop browser acceptance
         run: |
@@ -70,11 +71,26 @@ jobs:
           MODEL_SHA=$(node -p "JSON.parse(require('fs').readFileSync('.github/operations/catalog-next/china-code-serving-plan.json')).runtimeSha")
           PHOTO_RUNTIME_ROOT="$RUNNER_TEMP/china-serving-runtime-$MODEL_SHA" JAPAN_MODEL_CONTROLS_READY_REPORT="$RUNNER_TEMP/japan-model-controls-ready-browser-report.json" node tests/browser/japan-model-controls-ready.mjs
       - name: Verify Japan power then price sorting and live count on the exact runtime
-        if: steps.photo_scope.outputs.price_sort_required == 'true'
+        if: steps.photo_scope.outputs.price_sort_required == 'true' && steps.photo_scope.outputs.exact_count_required != 'true'
         run: |
           set -euo pipefail
           SORT_SHA=$(node -p "JSON.parse(require('fs').readFileSync('.github/operations/catalog-next/china-code-serving-plan.json')).runtimeSha")
           PHOTO_RUNTIME_ROOT="$RUNNER_TEMP/china-serving-runtime-$SORT_SHA" JAPAN_PRICE_SORT_REPORT="$RUNNER_TEMP/japan-price-sort-browser-report.json" node tests/browser/japan-price-sort.mjs
+      - name: Verify exact Japan totals and complete model selection on the exact runtime
+        if: steps.photo_scope.outputs.exact_count_required == 'true'
+        run: |
+          set -euo pipefail
+          COUNT_SHA=$(node -p "JSON.parse(require('fs').readFileSync('.github/operations/catalog-next/china-code-serving-plan.json')).runtimeSha")
+          PHOTO_RUNTIME_ROOT="$RUNNER_TEMP/china-serving-runtime-$COUNT_SHA" JAPAN_EXACT_COUNT_REPORT="$RUNNER_TEMP/japan-exact-count-browser-report.json" node tests/browser/japan-exact-count.mjs
+          node --input-type=module <<'JS'
+          import fs from 'node:fs';
+          import {createHash} from 'node:crypto';
+          import {checkedJapanExactCountBrowserFixture} from './scripts/catalog-next/japan-exact-count-browser.mjs';
+          const plan=JSON.parse(fs.readFileSync('.github/operations/catalog-next/china-code-serving-plan.json','utf8'));
+          const helperSha256=createHash('sha256').update(fs.readFileSync('scripts/catalog-next/japan-exact-count-browser.mjs')).digest('hex');
+          checkedJapanExactCountBrowserFixture(JSON.parse(fs.readFileSync(process.env.RUNNER_TEMP+'/japan-exact-count-browser-report.json','utf8')),
+            {runtimeSha:plan.runtimeSha,runtimeTree:plan.runtimeTree,helperSha256});
+          JS
       - name: Verify bounded Japan directory retries on the exact runtime before host contact
         if: steps.photo_scope.outputs.scope == 'catalog-japan-stability-v1'
         run: |
@@ -203,6 +219,7 @@ jobs:
             ${{ runner.temp }}/japan-legacy-redirect-browser-report.json
             ${{ runner.temp }}/japan-model-controls-ready-browser-report.json
             ${{ runner.temp }}/japan-price-sort-browser-report.json
+            ${{ runner.temp }}/japan-exact-count-browser-report.json
             ${{ runner.temp }}/japan-brand-directory-retry-browser-report.json
             ${{ runner.temp }}/japan-brand-directory-retry-browser-report-failure.png
             ${{ runner.temp }}/japan-catalog-city-report.json

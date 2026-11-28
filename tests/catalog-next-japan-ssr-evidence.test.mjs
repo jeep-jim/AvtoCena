@@ -81,10 +81,33 @@ test('both continuation paths observe SSR before their existing API read without
   const standard=source.slice(source.indexOf('const checkPaginationUi=async'),source.indexOf('const plain=[]'));
   const petrol=source.slice(source.indexOf("stage='completion_petrol_power_page_two'"),source.indexOf('const nextAggregate='));
   for(const block of [standard,petrol]){
-    assert(block.indexOf('waitForURL')<block.indexOf('readJapanSsrPageEvidence'));
-    assert(block.indexOf('readJapanSsrPageEvidence')<block.indexOf('await readJson'));
-    assert.equal((block.match(/await readJson/g)||[]).length,1);
+    const navigated=block.indexOf('waitForURL'),observed=block.indexOf('readJapanSsrPageEvidence');
+    const apiRead=block.search(/await\s+read\(/);
+    assert(navigated>=0&&observed>navigated);
+    assert(apiRead>observed);
+    assert.equal((block.match(/await\s+read\(/g)||[]).length,1);
+    assert.equal((block.match(/await\s+readJson\(/g)||[]).length,0,'continuation uses the exact-aware single-read adapter');
     assert.equal((block.match(/explicitJapanApiRequests\+\+/g)||[]).length,1);
     assert(block.includes('if(stability)'));
+  }
+});
+
+test('exact-aware read adapter performs one existing API request and only validates its returned payload',async()=>{
+  const source=await fs.readFile(new URL('../scripts/catalog-next/japan-browser-acceptance.mjs',import.meta.url),'utf8');
+  const start=source.indexOf('const read=async(url,options={})=>{');
+  const end=source.indexOf('const verifyPower=',start);
+  assert(start>=0&&end>start);
+  const adapter=source.slice(start,end);
+  assert.equal((adapter.match(/await\s+readJson\(/g)||[]).length,1);
+  const createRead=new Function('context','requireExactCount','readJson','verifyJapanExactCount',adapter+'\nreturn read;');
+  const url='/api/catalog/search?market=japan&page=2',options={paginationKind:'plain',requirePowerOrder:true};
+  for(const requireExactCount of [false,true]){
+    const calls=[],value={status:200,data:{ok:true,items:[]}},context={request:{get(){assert.fail('adapter cannot bypass readJson');}}};
+    const read=createRead(context,requireExactCount,async(actualContext,actualUrl,actualOptions)=>{
+      calls.push('api');assert.equal(actualContext,context);assert.equal(actualUrl,url);
+      assert.deepEqual(actualOptions,{...options,exactCount:requireExactCount});return value;
+    },(payload,binding)=>{calls.push('validate');assert.equal(payload,value.data);assert.deepEqual(binding,{query:url});});
+    assert.equal(await read(url,options),value);
+    assert.deepEqual(calls,requireExactCount?['api','validate']:['api']);
   }
 });

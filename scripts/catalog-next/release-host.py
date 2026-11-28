@@ -160,6 +160,53 @@ JAPAN_STABILITY_PRICE_SORT_CODE_FILES = {
     'tests/browser/ajes-pagination.mjs',
     'tests/japan-source-power.test.ts',
 }
+JAPAN_STABILITY_EXACT_COUNT_RETAINED = '20fd18d12b3f5c7aabef860e1b53da0d505dfd64'
+JAPAN_STABILITY_EXACT_COUNT_CODE_FILES = {
+    'apps/web/components/catalog/AjesCatalog.tsx',
+    'apps/web/components/catalog/AjesRail.tsx',
+    'apps/web/components/catalog/CatalogFilters.tsx',
+    'apps/web/components/catalog/CatalogLoadMore.tsx',
+    'apps/web/components/catalog/CatalogSelectionContext.tsx',
+    'apps/web/components/catalog/JapanCatalogCount.tsx',
+    'apps/web/components/catalog/VehicleModelSearch.tsx',
+    'apps/web/components/catalog/catalog-load-more-action.tsx',
+    'apps/web/components/home/HomeJapanFilteredRail.tsx',
+    'apps/web/lib/catalog/ajes-admission.ts',
+    'apps/web/lib/catalog/ajes-catalog.ts',
+    'apps/web/lib/catalog/ajes-census-protocol.ts',
+    'apps/web/lib/catalog/ajes-census.ts',
+    'apps/web/lib/catalog/ajes-client.ts',
+    'apps/web/lib/catalog/ajes-count-display.ts',
+    'apps/web/lib/catalog/ajes-count-pricing-context.ts',
+    'apps/web/lib/catalog/ajes-filtered-page.ts',
+    'apps/web/lib/catalog/ajes-model-resolution.ts',
+    'apps/web/lib/catalog/ajes-public.ts',
+    'apps/web/lib/catalog/ajes-query-cache.ts',
+    'apps/web/lib/catalog/ajes-query.ts',
+    'apps/web/lib/catalog/ajes-read-receipt.ts',
+    'apps/web/lib/catalog/ajes-request-diagnostic.ts',
+    'apps/web/lib/catalog/ajes-saved-search.ts',
+    'tests/ajes-catalog-progressive.test.ts',
+    'tests/ajes-census.test.ts',
+    'tests/ajes-count-display.test.ts',
+    'tests/ajes-count-pricing-context.test.ts',
+    'tests/ajes-count-progressive.test.ts',
+    'tests/ajes-filtered-page.test.ts',
+    'tests/ajes-japan-only.test.ts',
+    'tests/ajes-model-recovery.test.ts',
+    'tests/ajes-query-stability.test.ts',
+    'tests/ajes-rail-late-count.test.ts',
+    'tests/ajes-ssr-read-evidence.test.ts',
+    'tests/browser/ajes-pagination.mjs',
+    'tests/browser/japan-filter-directory.mjs',
+    'tests/catalog-japan-filter-rail.test.ts',
+    'tests/catalog-page-request.test.ts',
+    'tests/home-japan-preview.test.ts',
+    'tests/japan-drive-saved-search.test.ts',
+    'tests/japan-model-directory-metadata.test.ts',
+    'tests/japan-rail-visibility.test.ts',
+    'tests/japan-source-power.test.ts',
+}
 JAPAN_PAGINATION_CODE_FILES = {
     "apps/web/components/catalog/AjesCatalog.tsx",
     "apps/web/components/catalog/CatalogLoadMore.tsx",
@@ -662,14 +709,15 @@ def checked_japan_stability_image_files(files, observed, retained_runtime=JAPAN_
          and len(files) == len(set(files)), 'code_image_receipt')
     profiles = (JAPAN_STABILITY_CODE_FILES, JAPAN_STABILITY_UI_CODE_FILES, JAPAN_STABILITY_POWER_CODE_FILES,
                 JAPAN_STABILITY_RAILS_CODE_FILES, JAPAN_STABILITY_HOME_CODE_FILES, JAPAN_STABILITY_METADATA_CODE_FILES,
-                JAPAN_STABILITY_PRICE_SORT_CODE_FILES)
+                JAPAN_STABILITY_PRICE_SORT_CODE_FILES, JAPAN_STABILITY_EXACT_COUNT_CODE_FILES)
     selected = next((profile for profile in profiles if set(files) == profile), None)
     need(selected is not None, 'code_image_receipt')
-    need(retained_runtime == (JAPAN_STABILITY_PRICE_SORT_RETAINED if selected == JAPAN_STABILITY_PRICE_SORT_CODE_FILES
+    need(retained_runtime == (JAPAN_STABILITY_EXACT_COUNT_RETAINED if selected == JAPAN_STABILITY_EXACT_COUNT_CODE_FILES
+                             else JAPAN_STABILITY_PRICE_SORT_RETAINED if selected == JAPAN_STABILITY_PRICE_SORT_CODE_FILES
                              else JAPAN_STABILITY_RETAINED), 'code_stability_predecessor')
     need(type(observed) is bool and observed == (selected in
          (JAPAN_STABILITY_HOME_CODE_FILES, JAPAN_STABILITY_METADATA_CODE_FILES,
-          JAPAN_STABILITY_PRICE_SORT_CODE_FILES)), 'timing_policy_image_scope')
+          JAPAN_STABILITY_PRICE_SORT_CODE_FILES, JAPAN_STABILITY_EXACT_COUNT_CODE_FILES)), 'timing_policy_image_scope')
     return selected
 
 
@@ -809,7 +857,7 @@ def validate_plan(plan):
             need(scope != JAPAN_PAGINATION_CODE_SCOPE or plan.get('retainedRuntime') == JAPAN_PAGINATION_RETAINED,
                  'code_pagination_predecessor')
             need(scope != JAPAN_STABILITY_CODE_SCOPE or
-                 (plan.get('retainedRuntime') in (JAPAN_STABILITY_RETAINED, JAPAN_STABILITY_PRICE_SORT_RETAINED) and
+                 (plan.get('retainedRuntime') in (JAPAN_STABILITY_RETAINED, JAPAN_STABILITY_PRICE_SORT_RETAINED, JAPAN_STABILITY_EXACT_COUNT_RETAINED) and
                   bool(JAPAN_STABILITY_CODE_FILES) and JAPAN_PAGINATION_CODE_FILES <= JAPAN_STABILITY_CODE_FILES),
                  'code_stability_predecessor')
             need(all(isinstance(plan.get(key), str) and re.fullmatch(r'[a-f0-9]{64}', plan[key])
@@ -3568,13 +3616,16 @@ class Host:
                 runtime_profile = checked_japan_stability_image_files(runtime_files, observed, self.plan.get('retainedRuntime'))
                 if runtime_profile in (JAPAN_STABILITY_POWER_CODE_FILES, JAPAN_STABILITY_RAILS_CODE_FILES,
                                        JAPAN_STABILITY_HOME_CODE_FILES, JAPAN_STABILITY_METADATA_CODE_FILES,
-                                       JAPAN_STABILITY_PRICE_SORT_CODE_FILES):
+                                       JAPAN_STABILITY_PRICE_SORT_CODE_FILES, JAPAN_STABILITY_EXACT_COUNT_CODE_FILES):
                     need(japan.get('japanPowerOrderPassed') is True, 'japan_browser_binding')
                 if runtime_profile in (JAPAN_STABILITY_RAILS_CODE_FILES, JAPAN_STABILITY_HOME_CODE_FILES,
-                                       JAPAN_STABILITY_METADATA_CODE_FILES, JAPAN_STABILITY_PRICE_SORT_CODE_FILES):
+                                       JAPAN_STABILITY_METADATA_CODE_FILES, JAPAN_STABILITY_PRICE_SORT_CODE_FILES, JAPAN_STABILITY_EXACT_COUNT_CODE_FILES):
                     need(japan.get('japanBrandDirectoryPassed') is True, 'japan_browser_binding')
-                if runtime_profile == JAPAN_STABILITY_PRICE_SORT_CODE_FILES:
+                if runtime_profile in (JAPAN_STABILITY_PRICE_SORT_CODE_FILES, JAPAN_STABILITY_EXACT_COUNT_CODE_FILES):
                     need(all(japan.get(key) is True for key in ('japanPriceSortRequired', 'japanPriceSortPassed', 'japanCountDisplayPassed')),
+                         'japan_browser_binding')
+                if runtime_profile == JAPAN_STABILITY_EXACT_COUNT_CODE_FILES:
+                    need(all(japan.get(key) is True for key in ('japanExactCountRequired', 'japanExactCountPassed', 'japanModelCoveragePassed')),
                          'japan_browser_binding')
         for name, raw in [('BROWSER_SPEED.json', speed_raw), ('BROWSER_DETAILS.json', details_raw)]:
             new_file(self.directory / name, raw)
